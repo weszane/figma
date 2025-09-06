@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useDispatch } from "../vendor/514228";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { ub } from "../figma_app/598926";
 import { c } from "../4452/815584";
 export function $$l0({
@@ -9,9 +9,9 @@ export function $$l0({
   let t = useDispatch();
   return jsx(c, {
     initialName: e.description ?? "",
-    title: _$$t("resource_rename_modal.edit_description"),
+    title: getI18nString("resource_rename_modal.edit_description"),
     placeholder: "",
-    submitText: _$$t("resource_rename_modal.save"),
+    submitText: getI18nString("resource_rename_modal.save"),
     onRename: r => t(ub({
       folderId: e.id,
       description: r.trim()

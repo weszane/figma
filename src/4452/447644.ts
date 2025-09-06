@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "../vendor/514228";
 import { debounce } from "../905/915765";
 import { lQ } from "../905/934246";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { md, fp } from "../figma_app/27355";
+import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import c from "classnames";
 import { ResourceStatus } from "../905/957591";
 import { R as _$$R } from "../905/165069";
@@ -20,7 +20,7 @@ import { y2 } from "../figma_app/563413";
 import { G as _$$G } from "../905/750789";
 import { i as _$$i } from "../905/186077";
 import { s as _$$s2 } from "../cssbuilder/589278";
-import { tx as _$$tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
 import { F as _$$F } from "../905/302958";
 import { zX } from "../905/576487";
@@ -95,9 +95,9 @@ let ee = Ju(function (e) {
   let l = useSelector(e => e.teamBilling);
   let o = e.plan.key.type === _$$OL.TEAM ? l.summary.currency : i.data?.currency;
   let d = () => n(Ce());
-  t = !o || e.isELA ? _$$tx("admin_dashboard.seat_requests.approve_all_modal.body.no_cost", {
+  t = !o || e.isELA ? renderI18nText("admin_dashboard.seat_requests.approve_all_modal.body.no_cost", {
     numRequests: e.requestsToApprove.length
-  }) : _$$tx("admin_dashboard.seat_requests.bulk_approve_modal.body");
+  }) : renderI18nText("admin_dashboard.seat_requests.bulk_approve_modal.body");
   let c = _$$u2();
   return jsx(fu, {
     name: e0.BULK_APPROVE_CONFIRMATION_MODAL,
@@ -111,7 +111,7 @@ let ee = Ju(function (e) {
       children: jsxs(vo, {
         children: [jsx(Y9, {
           children: jsx(hE, {
-            children: _$$tx("admin_dashboard.seat_requests.approve_all_modal.title")
+            children: renderI18nText("admin_dashboard.seat_requests.approve_all_modal.title")
           })
         }), jsx(nB, {
           children: t
@@ -124,7 +124,7 @@ let ee = Ju(function (e) {
                 trackingDescriptor: _$$c.CANCEL
               },
               trackingOptions: c,
-              children: _$$tx("admin_dashboard.seat_requests.approve_all_modal.cancel")
+              children: renderI18nText("admin_dashboard.seat_requests.approve_all_modal.cancel")
             }), jsx($z, {
               variant: "primary",
               onClick: () => {
@@ -135,7 +135,7 @@ let ee = Ju(function (e) {
                 trackingDescriptor: _$$c.APPROVE
               },
               trackingOptions: c,
-              children: _$$tx("admin_dashboard.seat_requests.approve_all_modal.approve_number_of_requests", {
+              children: renderI18nText("admin_dashboard.seat_requests.approve_all_modal.approve_number_of_requests", {
                 numRequests: e.requestsToApprove.length
               })
             })]
@@ -147,7 +147,7 @@ let ee = Ju(function (e) {
 }, "BulkApproveConfirmationModal");
 function eR(e) {
   let t = _$$r("seen_admin_seat_approval_settings_onboarding");
-  let a = md(t);
+  let a = useAtomWithSubscription(t);
   let {
     show,
     isShowing,
@@ -163,18 +163,18 @@ function eR(e) {
   });
   return jsx(rq, {
     clickOutsideToHide: !0,
-    description: _$$tx("admin_dashboard.seat_requests.seat_approval_settings_onboarding_overlay.description"),
+    description: renderI18nText("admin_dashboard.seat_requests.seat_approval_settings_onboarding_overlay.description"),
     emphasized: !0,
     isShowing,
     onClose: complete,
     primaryCta: {
-      label: _$$tx("general.got_it"),
+      label: renderI18nText("general.got_it"),
       onClick: complete,
       type: "button",
       ctaTrackingDescriptor: _$$c.GOT_IT
     },
     targetKey: qf,
-    title: _$$tx("admin_dashboard.seat_requests.seat_approval_settings_onboarding_overlay.title"),
+    title: renderI18nText("admin_dashboard.seat_requests.seat_approval_settings_onboarding_overlay.title"),
     trackingContextName: "",
     userFlagOnShow: "seen_admin_seat_approval_settings_onboarding"
   });
@@ -186,8 +186,8 @@ function eM({
   isELA: n,
   isProrationBillingEnabled: r
 }) {
-  let i = md(aN);
-  let l = md(V4);
+  let i = useAtomWithSubscription(aN);
+  let l = useAtomWithSubscription(V4);
   let {
     calculateCostForSeatTypeIncrease
   } = _$$n(t, e);
@@ -202,7 +202,7 @@ function eM({
       size: "sm"
     })
   }) : jsx(Me, {
-    "aria-label": _$$t("admin_dashboard.requests.approve"),
+    "aria-label": getI18nString("admin_dashboard.requests.approve"),
     onClick: t => {
       t.stopPropagation();
       a({
@@ -229,7 +229,7 @@ function eL({
 }) {
   let a = _$$u2();
   return jsx(Me, {
-    "aria-label": _$$t("admin_dashboard.requests.details.title"),
+    "aria-label": getI18nString("admin_dashboard.requests.details.title"),
     onClick: a => {
       a.stopPropagation();
       t(e.id);
@@ -289,7 +289,7 @@ export function $$e$0({
   let [eC, ek] = useState("");
   let [eq, eO] = useState(null);
   let [eP, eD] = useState(i5.NEWEST_FIRST);
-  let [e$, eW] = fp(aN);
+  let [e$, eW] = useAtomValueAndSetter(aN);
   let ez = useRef(0);
   let [eH, eQ] = useState(0);
   let eY = useSelector(({
@@ -303,8 +303,8 @@ export function $$e$0({
     dispatchProcessingError,
     dispatchGenericError
   } = _$$s3();
-  let [e4, e5] = fp(_$$Y2);
-  let [e2, e8] = fp(V4);
+  let [e4, e5] = useAtomValueAndSetter(_$$Y2);
+  let [e2, e8] = useAtomValueAndSetter(V4);
   let [e3, e6] = useState(new Set());
   let [e7, e9] = useState(new Set());
   let [te, tt] = useState(null);
@@ -533,7 +533,7 @@ export function $$e$0({
     e && (tV.find(t => t.id === e) ? setHighlightedItemId(e) : dispatchRequestAlreadyHandled(), EM("viewRequestId"));
   }, tM, e => !e);
   let tY = useMemo(() => debounce(ek, 300), [ek]);
-  let tK = e => e === r1.GUESTS ? _$$t("admin_dashboard.requests.guests") : e === r1.MEMBERS ? _$$t("admin_dashboard.requests.members") : _$$t("admin_dashboard.requests.all_users");
+  let tK = e => e === r1.GUESTS ? getI18nString("admin_dashboard.requests.guests") : e === r1.MEMBERS ? getI18nString("admin_dashboard.requests.members") : getI18nString("admin_dashboard.requests.all_users");
   let tX = ti === V7.ALL_ORG_REQUESTS && tm.length > 0;
   let tJ = ti === V7.ALL_MANAGED_REQUESTS && (tg.length > 0 && t || !t && tg.length > 1);
   let tZ = (tR || tk) && (tX || tJ);
@@ -593,7 +593,7 @@ export function $$e$0({
     eQ(ez.current);
     eW(a ? "approving_all" : e ? "approving" : "declining");
     a && tL && eS(_$$F.enqueue({
-      message: _$$t("admin_dashboard.requests.selected_count_approving", {
+      message: getI18nString("admin_dashboard.requests.selected_count_approving", {
         numSelected: tL
       }),
       type: eG,
@@ -733,7 +733,7 @@ export function $$e$0({
     }
   });
   let t2 = useCallback(e => {
-    let t = e.name || e.email || _$$t("admin_dashboard.requests.no_name");
+    let t = e.name || e.email || getI18nString("admin_dashboard.requests.no_name");
     return jsx(az, {
       entity: {
         id: e.userId,
@@ -743,7 +743,7 @@ export function $$e$0({
       },
       badge: e.orgPermission === FUserRoleType.GUEST ? {
         color: zE.DEFAULT,
-        text: _$$t("admin_dashboard.requests.badge.guest")
+        text: getI18nString("admin_dashboard.requests.badge.guest")
       } : void 0,
       size: 24,
       defaultText: Lv,
@@ -769,7 +769,7 @@ export function $$e$0({
   let t3 = useCallback(e => jsx("div", {
     className: e.hasBeenNudged ? cp : void 0,
     "data-tooltip-type": e.hasBeenNudged ? Ib.TEXT : void 0,
-    "data-tooltip": _$$t("admin_dashboard.requests.sent_you_a_reminder", {
+    "data-tooltip": getI18nString("admin_dashboard.requests.sent_you_a_reminder", {
       requesterName: e.name ?? e.email ?? ""
     }),
     children: jsx(h1, {
@@ -779,22 +779,22 @@ export function $$e$0({
   }), []);
   let t6 = e => e.updatedAt.getTime();
   let t7 = useMemo(() => [{
-    name: _$$t("admin_dashboard.requests.columns.name"),
+    name: getI18nString("admin_dashboard.requests.columns.name"),
     className: Mc,
     cellComponent: t2
   }, {
-    name: _$$t("admin_dashboard.requests.columns.seat_type"),
+    name: getI18nString("admin_dashboard.requests.columns.seat_type"),
     className: _$$eF,
     cellComponent: t8
   }, {
-    name: _$$t("admin_dashboard.requests.columns.requested"),
+    name: getI18nString("admin_dashboard.requests.columns.requested"),
     className: jR,
     cellComponent: t3,
     sorting_key: BC.REQUESTED,
     getSortValue: t6,
     sortNumerically: !0
   }, {
-    name: _$$t("admin_dashboard.requests.columns.note"),
+    name: getI18nString("admin_dashboard.requests.columns.note"),
     className: P_,
     cellComponent: e => jsx(_$$G, {
       text: e.message ?? "",
@@ -805,7 +805,7 @@ export function $$e$0({
   let t9 = e => {
     let a = e ? V7.ALL_MANAGED_REQUESTS : V7.ALL_ORG_REQUESTS;
     let n = e ? xo : OW;
-    let r = e ? _$$tx("admin_dashboard.managed_org_requests.title") : _$$tx("admin_dashboard.all_org_requests.title", {
+    let r = e ? renderI18nText("admin_dashboard.managed_org_requests.title") : renderI18nText("admin_dashboard.all_org_requests.title", {
       orgName: "loaded" === tE.status ? tE.data?.org?.name : "org"
     });
     return jsxs("div", {
@@ -875,7 +875,7 @@ export function $$e$0({
       },
       trackingOptions: eE,
       children: jsx(Zu, {
-        text: _$$t("admin_dashboard.requests.approve_all"),
+        text: getI18nString("admin_dashboard.requests.approve_all"),
         showSpinner: "approving_all" === e$
       })
     })]
@@ -904,14 +904,14 @@ export function $$e$0({
         onChange: e => tY(Bk(e)),
         query: eC,
         clearSearch: () => ek(""),
-        placeholder: _$$t("admin_dashboard.requests.search_requests.placeholder"),
+        placeholder: getI18nString("admin_dashboard.requests.search_requests.placeholder"),
         maxInputLength: MI
       }), jsx(_$$M, {}), (tR || tk) && jsx(eB, {
         type: L8,
         dataTestId: "user-type-filter",
         isDefaultFilter: null === tc,
-        defaultFilterLabel: _$$tx("admin_dashboard.requests.filter.user_type_default"),
-        filterLabel: _$$tx("admin_dashboard.requests.filter.user_type", {
+        defaultFilterLabel: renderI18nText("admin_dashboard.requests.filter.user_type_default"),
+        filterLabel: renderI18nText("admin_dashboard.requests.filter.user_type", {
           selectedUserTypeFilter: jsx("span", {
             className: _$$s2.fontBold.$,
             children: tK(tc)
@@ -921,7 +921,7 @@ export function $$e$0({
           children: [jsx(MM, {
             checked: null === tc,
             onClick: () => tu(null),
-            children: _$$t("admin_dashboard.requests.all_users")
+            children: getI18nString("admin_dashboard.requests.all_users")
           }), jsx(wv, {}), Object.values(r1).map(e => jsx(MM, {
             checked: tc === e,
             onClick: () => tu(e),
@@ -932,8 +932,8 @@ export function $$e$0({
         type: "UPGRADE_REQUESTS_SEAT_TYPE_DROPDOWN",
         dataTestId: "seat-type-filter",
         isDefaultFilter: null === eq,
-        defaultFilterLabel: _$$tx("admin_dashboard.requests.filter.seat_type_default"),
-        filterLabel: _$$tx("admin_dashboard.requests.filter.seat_type", {
+        defaultFilterLabel: renderI18nText("admin_dashboard.requests.filter.seat_type_default"),
+        filterLabel: renderI18nText("admin_dashboard.requests.filter.seat_type", {
           selectedSeatTypeFilter: jsx("span", {
             className: _$$s2.fontBold.$,
             children: _$$tI(eq ?? Gu.VIEW)
@@ -943,7 +943,7 @@ export function $$e$0({
           children: [jsx(MM, {
             checked: null === eq,
             onClick: () => eO(null),
-            children: _$$t("admin_dashboard.requests.filter.seats_all_option")
+            children: getI18nString("admin_dashboard.requests.filter.seats_all_option")
           }), jsx(wv, {}), N_.sort(AG).map(e => jsx(MM, {
             checked: eq === e,
             onClick: () => eO(e),
@@ -954,22 +954,22 @@ export function $$e$0({
         type: OL,
         dataTestId: "billing-group-filter",
         isDefaultFilter: to === ti,
-        defaultFilterLabel: _$$tx("admin_dashboard.requests.filter.billing_group_default"),
-        filterLabel: _$$tx("admin_dashboard.requests.filter.billing_group", {
+        defaultFilterLabel: renderI18nText("admin_dashboard.requests.filter.billing_group_default"),
+        filterLabel: renderI18nText("admin_dashboard.requests.filter.billing_group", {
           selectedBillingGroupFilter: jsx("span", {
             className: _$$s2.fontBold.$,
-            children: to === V7.ALL_ORG_REQUESTS || to === V7.ALL_MANAGED_REQUESTS ? _$$t("admin_dashboard.requests.from_all") : to === V7.ALL_UNASSIGNED_REQUESTS ? _$$t("admin_dashboard.requests.from_unassigned") : tm.find(e => e.id === to).name
+            children: to === V7.ALL_ORG_REQUESTS || to === V7.ALL_MANAGED_REQUESTS ? getI18nString("admin_dashboard.requests.from_all") : to === V7.ALL_UNASSIGNED_REQUESTS ? getI18nString("admin_dashboard.requests.from_unassigned") : tm.find(e => e.id === to).name
           })
         }),
         renderFilterOptions: () => {
           let e = ti === V7.ALL_ORG_REQUESTS ? tm : tg;
           let t = [{
             key: ti,
-            label: _$$t("admin_dashboard.requests.from_all")
+            label: getI18nString("admin_dashboard.requests.from_all")
           }];
           tk || t.push({
             key: V7.ALL_UNASSIGNED_REQUESTS,
-            label: _$$t("admin_dashboard.requests.from_unassigned")
+            label: getI18nString("admin_dashboard.requests.from_unassigned")
           });
           return jsxs(Fragment, {
             children: [t.map(e => jsx(MM, {
@@ -980,7 +980,7 @@ export function $$e$0({
               disabled: !0,
               checked: !1,
               onClick: lQ,
-              children: _$$tx(ti === V7.ALL_ORG_REQUESTS ? "admin_dashboard.requests.billing_groups" : "admin_dashboard.requests.your_billing_groups")
+              children: renderI18nText(ti === V7.ALL_ORG_REQUESTS ? "admin_dashboard.requests.billing_groups" : "admin_dashboard.requests.your_billing_groups")
             }), e.map(e => jsx(MM, {
               checked: to === e.id,
               onClick: () => td(e.id),
@@ -1002,7 +1002,7 @@ export function $$e$0({
     },
     trackingOptions: eE,
     children: [jsx(_$$K, {
-      title: _$$t("admin_dashboard.requests.seat_title"),
+      title: getI18nString("admin_dashboard.requests.seat_title"),
       rightActions: !tR || tm.length < 1 ? ae : void 0
     }), jsx("div", {
       className: u()(M2, _$$s2.$$if(!tR || 0 === tm.length, _$$s2.pt4, _$$s2.pt12).$),
@@ -1032,7 +1032,7 @@ export function $$e$0({
               },
               trackingOptions: eE,
               children: jsx(Zu, {
-                text: _$$t("admin_dashboard.requests.decline"),
+                text: getI18nString("admin_dashboard.requests.decline"),
                 showSpinner: "declining" === e$
               })
             }), jsx(_$$V, {
@@ -1059,7 +1059,7 @@ export function $$e$0({
               },
               trackingOptions: eE,
               children: Zm({
-                text: _$$t("admin_dashboard.requests.multi_select.review"),
+                text: getI18nString("admin_dashboard.requests.multi_select.review"),
                 showSpinner: "approving" === e$
               })
             })]
@@ -1071,19 +1071,19 @@ export function $$e$0({
         emptyContent: (c = 0 === eC.length && null === eq && to === ti && null === tc ? jsxs(Fragment, {
           children: [jsx("div", {
             className: _$$s2.fontSemiBold.lh16.cursorDefault.colorTextSecondary.$,
-            children: _$$tx(tC && tk ? "admin_dashboard.requests.empty.configurable_upgrade_requests" : "admin_dashboard.requests.no_requests_to_approve")
+            children: renderI18nText(tC && tk ? "admin_dashboard.requests.empty.configurable_upgrade_requests" : "admin_dashboard.requests.no_requests_to_approve")
           }), jsx("div", {
             style: sx.add({
               maxWidth: "500px"
             }).lh16.cursorDefault.alignCenter.colorTextSecondary.$,
-            children: tC ? tC === Sm.MEMBERS ? _$$tx("admin_dashboard.configured_upgrade_request_empty_state.members") : _$$tx("admin_dashboard.configured_upgrade_request_empty_state.all_users") : _$$tx("admin_dashboard.requests.when_a_seat_request_needs_to_be_reviewed")
+            children: tC ? tC === Sm.MEMBERS ? renderI18nText("admin_dashboard.configured_upgrade_request_empty_state.members") : renderI18nText("admin_dashboard.configured_upgrade_request_empty_state.all_users") : renderI18nText("admin_dashboard.requests.when_a_seat_request_needs_to_be_reviewed")
           })]
         }) : eC.length > 0 && null === eq && to === ti && null === tc ? jsx("div", {
           className: _$$s2.lh16.cursorDefault.colorText.$,
-          children: _$$tx("admin_dashboard.requests.empty.no_search_results")
+          children: renderI18nText("admin_dashboard.requests.empty.no_search_results")
         }) : jsx("div", {
           className: _$$s2.lh16.cursorDefault.colorText.$,
-          children: _$$tx("admin_dashboard.requests.empty.no_filter_results", {
+          children: renderI18nText("admin_dashboard.requests.empty.no_filter_results", {
             resetFiltersLink: jsx(CY, {
               trusted: !0,
               onClick: () => {
@@ -1092,7 +1092,7 @@ export function $$e$0({
                 ek("");
                 tu(null);
               },
-              children: _$$tx("admin_dashboard.requests.empty.reset_filters")
+              children: renderI18nText("admin_dashboard.requests.empty.reset_filters")
             })
           })
         }), jsx(_$$Y, {
@@ -1120,11 +1120,11 @@ export function $$e$0({
         isLoading: tM,
         itemTypeContext: {
           itemType: k_,
-          getSelectedCountString: e => tG ? "" : "approving" === e$ ? _$$t("admin_dashboard.requests.selected_count_approving", {
+          getSelectedCountString: e => tG ? "" : "approving" === e$ ? getI18nString("admin_dashboard.requests.selected_count_approving", {
             numSelected: eH
-          }) : "declining" === e$ ? _$$t("admin_dashboard.requests.selected_count_denying", {
+          }) : "declining" === e$ ? getI18nString("admin_dashboard.requests.selected_count_denying", {
             numSelected: eH
-          }) : _$$t("admin_dashboard.requests.selected_count_request", {
+          }) : getI18nString("admin_dashboard.requests.selected_count_request", {
             numSelected: e
           })
         },

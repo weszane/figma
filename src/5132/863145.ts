@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { getFeatureFlags } from "../905/601108";
-import { Iz, eU, md } from "../figma_app/27355";
+import { createRemovableAtomFamily, atom, useAtomWithSubscription } from "../figma_app/27355";
 import { resourceUtils } from "../905/989992";
 import { Xf } from "../figma_app/153916";
 import { A } from "../905/920142";
@@ -10,9 +10,9 @@ import { CT } from "../figma_app/297957";
 import { n as _$$n } from "../1577/959155";
 import { FBillingModelType } from "../figma_app/191312";
 import { WF4 } from "../figma_app/43951";
-let m = Iz(({
+let m = createRemovableAtomFamily(({
   orgId: e
-}) => eU(l => e ? l(WF4.Query({
+}) => atom(l => e ? l(WF4.Query({
   orgId: e
 })).transform(({
   org: e
@@ -48,7 +48,7 @@ export function $$f0(e) {
   }(l);
   let f = !!getFeatureFlags().order_form_billing_terms_banner;
   let g = _$$n();
-  let v = md(useMemo(() => m({
+  let v = useAtomWithSubscription(useMemo(() => m({
     orgId: l
   }), [l]));
   let b = oA(v.data);

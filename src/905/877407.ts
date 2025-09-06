@@ -4,12 +4,12 @@ import { r as _$$r } from "../905/249071";
 import { M as _$$M } from "../905/512402";
 import { AD } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { BT } from "../905/618447";
 import { Bm, Z5, GJ, ZR } from "../905/430950";
 export let $$p1 = 8;
 export function $$m9(e, t, i, r, a) {
-  let o = zl.get(BT);
+  let o = atomStoreManager.get(BT);
   if (g($$h4(o, r) || new _$$M(0, 0), e, t) && 0 !== o.length) return {
     mouse: "ADD_CHILD_AFTER_FINAL_ROW_HOVERED",
     canvasPos: e
@@ -31,7 +31,7 @@ export function $$m9(e, t, i, r, a) {
     mouse: "INACTIVE"
   };
   if (!f && !i) return function (e, t, i) {
-    let r = zl.get(BT);
+    let r = atomStoreManager.get(BT);
     if (!r.length) return {
       mouse: "INACTIVE"
     };

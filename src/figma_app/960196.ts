@@ -5,9 +5,9 @@ import { K } from "../905/443068";
 import { e as _$$e } from "../905/149844";
 import { Z_n, rXF, CWU } from "../figma_app/763686";
 import { l7 } from "../905/189185";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { Pt } from "../figma_app/806412";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { wv } from "../figma_app/328825";
 import { h as _$$h } from "../905/78925";
 import { B } from "../905/330741";
@@ -46,7 +46,7 @@ function P({
   let {
     VariableAndComponentPropCreateModalRoot
   } = useContext(_$$l) ?? {};
-  let v = _$$R(e => Nw(e) ?? y7(e));
+  let v = selectWithShallowEqual(e => Nw(e) ?? y7(e));
   let A = useMemo(() => Kq(!!VariableAndComponentPropCreateModalRoot, !!v, d), [VariableAndComponentPropCreateModalRoot, v, d]);
   function N() {
     b?.();
@@ -63,7 +63,7 @@ function P({
     selectedItem: t,
     setControlRightButtons: function () {
       if (void 0 === r || "fields" !== _ && "prop-assignment" !== _) return;
-      let e = A ? _$$t("variables.binding_ui.create_variable_property_button_tooltip") : _$$t("variables.binding_ui.create_variable_button_tooltip");
+      let e = A ? getI18nString("variables.binding_ui.create_variable_property_button_tooltip") : getI18nString("variables.binding_ui.create_variable_button_tooltip");
       return jsx(K, {
         "aria-label": e,
         recordingKey: Pt(m, "createVariable"),
@@ -106,7 +106,7 @@ export function $$D4({
   let x = {
     tabs: [{
       name: "library",
-      displayText: tx("variables.binding_ui.variable_library_tab_name"),
+      displayText: renderI18nText("variables.binding_ui.variable_library_tab_name"),
       content: jsx(P, {
         boundVariable,
         disabledVariableIds: new Set(),
@@ -183,7 +183,7 @@ function M({
   let D = {
     tabs: [{
       name: "library",
-      displayText: tx("variables.binding_ui.variable_library_tab_name"),
+      displayText: renderI18nText("variables.binding_ui.variable_library_tab_name"),
       content: jsx(P, {
         boundVariable,
         disabledVariableIds: new Set(),
@@ -203,7 +203,7 @@ function M({
   };
   e.length > 0 && (D.tabs.push({
     name: "dakota",
-    displayText: tx("variables.binding_ui.variable_dakota_tab_name"),
+    displayText: renderI18nText("variables.binding_ui.variable_dakota_tab_name"),
     content: jsx(_$$h, {
       onClose: f,
       cmsFieldTypes: u
@@ -278,7 +278,7 @@ function j({
   let v = {
     tabs: [{
       name: "library",
-      displayText: tx("variables.binding_ui.variable_library_tab_name"),
+      displayText: renderI18nText("variables.binding_ui.variable_library_tab_name"),
       content: jsx(P, {
         disabledVariableIds: new Set([e]),
         boundVariable: b,
@@ -322,7 +322,7 @@ export function $$B1({
   let g = {
     tabs: [{
       name: "library",
-      displayText: tx("variables.binding_ui.variable_library_tab_name"),
+      displayText: renderI18nText("variables.binding_ui.variable_library_tab_name"),
       content: jsx(P, {
         boundVariable: c,
         disabledVariableIds: new Set(),
@@ -382,7 +382,7 @@ export function $$V3({
   let _ = {
     tabs: [{
       name: "library",
-      displayText: tx("variables.binding_ui.variable_library_tab_name"),
+      displayText: renderI18nText("variables.binding_ui.variable_library_tab_name"),
       content: jsx(P, {
         disabledVariableIds: new Set(),
         boundVariable: null,

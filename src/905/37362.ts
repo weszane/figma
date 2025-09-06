@@ -1,4 +1,4 @@
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 var $$r6 = (e => (e.CURRENT_USER_READ = "current_user:read", e.FILES_READ_DEPRECATING = "files:read", e.FILE_CONTENT_READ = "file_content:read", e.FILE_CODE_CONNECT_WRITE = "file_code_connect:write", e.FILE_COMMENTS_READ = "file_comments:read", e.FILE_COMMENTS_WRITE = "file_comments:write", e.FILE_DEV_RESOURCES_READ = "file_dev_resources:read", e.FILE_DEV_RESOURCES_WRITE = "file_dev_resources:write", e.FILE_METADATA_READ = "file_metadata:read", e.FILE_VARIABLES_READ = "file_variables:read", e.FILE_VARIABLES_WRITE = "file_variables:write", e.FILE_VERSIONS_READ = "file_versions:read", e.LIBRARY_ANALYTICS = "library_analytics:read", e.LIBRARY_ASSETS_READ = "library_assets:read", e.LIBRARY_CONTENT_READ = "library_content:read", e.PROJECTS_READ = "projects:read", e.TEAM_LIBRARY_CONTENT_READ = "team_library_content:read", e.WEBHOOKS_READ = "webhooks:read", e.WEBHOOKS_WRITE = "webhooks:write", e))($$r6 || {});
 var $$a1 = (e => (e.CURRENT_USER = "CURRENT_USER", e.CODE_CONNECT = "CODE_CONNECT", e.COMMENTS = "COMMENTS", e.DEV_RESOURCES = "DEV_RESOURCES", e.FILE_CONTENT = "FILE_CONTENT", e.FILE_METADATA = "FILE_METADATA", e.FILE_VERSIONS = "FILE_VERSIONS", e.LIBRARY_ANALYTICS = "LIBRARY_ANALYTICS", e.LIBRARY_ASSETS = "LIBRARY_ASSETS", e.LIBRARY_CONTENT = "LIBRARY_CONTENT", e.PROJECTS = "PROJECTS", e.TEAM_LIBRARY_CONTENT = "TEAM_LIBRARY_CONTENT", e.VARIABLES = "VARIABLES", e.WEBHOOKS = "WEBHOOKS", e))($$a1 || {});
 var $$s4 = (e => (e.NO_ACCESS = "NO_ACCESS", e.READ = "READ", e.WRITE = "WRITE", e.READ_WRITE = "READ_WRITE", e))($$s4 || {});
@@ -6,86 +6,86 @@ export function $$o5(e) {
   switch (e) {
     case "CODE_CONNECT":
       return {
-        name: t("tokens.settings.dev_token_modal.scope.code_connect_name"),
-        description: t("tokens.settings.dev_token_modal.scope.code_connect_description"),
+        name: getI18nString("tokens.settings.dev_token_modal.scope.code_connect_name"),
+        description: getI18nString("tokens.settings.dev_token_modal.scope.code_connect_description"),
         levels: ["NO_ACCESS", "WRITE"]
       };
     case "COMMENTS":
       return {
-        name: t("tokens.settings.dev_token_modal.scope.comments_name"),
-        description: t("tokens.settings.dev_token_modal.scope.comments_description_v2"),
+        name: getI18nString("tokens.settings.dev_token_modal.scope.comments_name"),
+        description: getI18nString("tokens.settings.dev_token_modal.scope.comments_description_v2"),
         levels: ["NO_ACCESS", "READ", "WRITE", "READ_WRITE"]
       };
     case "CURRENT_USER":
       return {
-        name: t("tokens.settings.dev_token_modal.scope.current_user_name"),
-        description: t("tokens.settings.dev_token_modal.scope.current_user_description"),
+        name: getI18nString("tokens.settings.dev_token_modal.scope.current_user_name"),
+        description: getI18nString("tokens.settings.dev_token_modal.scope.current_user_description"),
         levels: ["NO_ACCESS", "READ"]
       };
     case "DEV_RESOURCES":
       return {
-        name: t("tokens.settings.dev_token_modal.scope.dev_resources_name"),
-        description: t("tokens.settings.dev_token_modal.scope.dev_resources_description"),
+        name: getI18nString("tokens.settings.dev_token_modal.scope.dev_resources_name"),
+        description: getI18nString("tokens.settings.dev_token_modal.scope.dev_resources_description"),
         levels: ["NO_ACCESS", "READ", "WRITE"]
       };
     case "FILE_CONTENT":
       return {
-        name: t("tokens.settings.dev_token_modal.scope.file_content_name"),
-        description: t("tokens.settings.dev_token_modal.scope.file_content_description_v2"),
+        name: getI18nString("tokens.settings.dev_token_modal.scope.file_content_name"),
+        description: getI18nString("tokens.settings.dev_token_modal.scope.file_content_description_v2"),
         levels: ["NO_ACCESS", "READ"]
       };
     case "FILE_METADATA":
       return {
-        name: t("tokens.settings.dev_token_modal.scope.file_metadata_name"),
-        description: t("tokens.settings.dev_token_modal.scope.file_metadata_description"),
+        name: getI18nString("tokens.settings.dev_token_modal.scope.file_metadata_name"),
+        description: getI18nString("tokens.settings.dev_token_modal.scope.file_metadata_description"),
         levels: ["NO_ACCESS", "READ"]
       };
     case "FILE_VERSIONS":
       return {
-        name: t("tokens.settings.dev_token_modal.scope.file_versions_name"),
-        description: t("tokens.settings.dev_token_modal.scope.file_versions_description"),
+        name: getI18nString("tokens.settings.dev_token_modal.scope.file_versions_name"),
+        description: getI18nString("tokens.settings.dev_token_modal.scope.file_versions_description"),
         levels: ["NO_ACCESS", "READ"]
       };
     case "LIBRARY_ANALYTICS":
       return {
-        name: t("tokens.settings.dev_token_modal.scope.library_analytics_name"),
-        description: t("tokens.settings.dev_token_modal.scope.library_analytics_description"),
+        name: getI18nString("tokens.settings.dev_token_modal.scope.library_analytics_name"),
+        description: getI18nString("tokens.settings.dev_token_modal.scope.library_analytics_description"),
         levels: ["NO_ACCESS", "READ"]
       };
     case "LIBRARY_ASSETS":
       return {
-        name: t("tokens.settings.dev_token_modal.scope.library_assets_name"),
-        description: t("tokens.settings.dev_token_modal.scope.library_assets_description"),
+        name: getI18nString("tokens.settings.dev_token_modal.scope.library_assets_name"),
+        description: getI18nString("tokens.settings.dev_token_modal.scope.library_assets_description"),
         levels: ["NO_ACCESS", "READ"]
       };
     case "LIBRARY_CONTENT":
       return {
-        name: t("tokens.settings.dev_token_modal.scope.library_content_name"),
-        description: t("tokens.settings.dev_token_modal.scope.library_content_description"),
+        name: getI18nString("tokens.settings.dev_token_modal.scope.library_content_name"),
+        description: getI18nString("tokens.settings.dev_token_modal.scope.library_content_description"),
         levels: ["NO_ACCESS", "READ"]
       };
     case "PROJECTS":
       return {
-        name: t("tokens.settings.dev_token_modal.scope.projects_name"),
-        description: t("tokens.settings.dev_token_modal.scope.projects_description"),
+        name: getI18nString("tokens.settings.dev_token_modal.scope.projects_name"),
+        description: getI18nString("tokens.settings.dev_token_modal.scope.projects_description"),
         levels: ["NO_ACCESS", "READ"]
       };
     case "TEAM_LIBRARY_CONTENT":
       return {
-        name: t("tokens.settings.dev_token_modal.scope.team_library_content_name"),
-        description: t("tokens.settings.dev_token_modal.scope.team_library_content_description"),
+        name: getI18nString("tokens.settings.dev_token_modal.scope.team_library_content_name"),
+        description: getI18nString("tokens.settings.dev_token_modal.scope.team_library_content_description"),
         levels: ["NO_ACCESS", "READ"]
       };
     case "VARIABLES":
       return {
-        name: t("tokens.settings.dev_token_modal.scope.variables_name"),
-        description: t("tokens.settings.dev_token_modal.scope.variables_description"),
+        name: getI18nString("tokens.settings.dev_token_modal.scope.variables_name"),
+        description: getI18nString("tokens.settings.dev_token_modal.scope.variables_description"),
         levels: ["NO_ACCESS", "READ", "READ_WRITE"]
       };
     case "WEBHOOKS":
       return {
-        name: t("tokens.settings.dev_token_modal.scope.webhooks_name"),
-        description: t("tokens.settings.dev_token_modal.scope.webhooks_description_v2"),
+        name: getI18nString("tokens.settings.dev_token_modal.scope.webhooks_name"),
+        description: getI18nString("tokens.settings.dev_token_modal.scope.webhooks_description_v2"),
         levels: ["NO_ACCESS", "READ", "WRITE", "READ_WRITE"]
       };
   }
@@ -93,13 +93,13 @@ export function $$o5(e) {
 export function $$l0(e) {
   switch (e) {
     case "NO_ACCESS":
-      return t("tokens.settings.dev_token_modal.scope.no_access");
+      return getI18nString("tokens.settings.dev_token_modal.scope.no_access");
     case "READ":
-      return t("tokens.settings.dev_token_modal.scope.read_only");
+      return getI18nString("tokens.settings.dev_token_modal.scope.read_only");
     case "WRITE":
-      return t("tokens.settings.dev_token_modal.scope.write_only");
+      return getI18nString("tokens.settings.dev_token_modal.scope.write_only");
     case "READ_WRITE":
-      return t("tokens.settings.dev_token_modal.scope.read_write");
+      return getI18nString("tokens.settings.dev_token_modal.scope.read_write");
     default:
       return "";
   }

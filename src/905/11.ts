@@ -1,142 +1,329 @@
-import { ServiceCategories as _$$e } from '../905/165054';
-import { s as _$$s } from '../905/256712';
-import { L } from '../905/270963';
-import { n as _$$n } from '../905/347702';
-import { b } from '../905/690073';
-import { Br } from '../3973/348894';
-import { getInitialOptions } from '../figma_app/169182';
-import { Bq } from '../figma_app/493477';
-import { NUh } from '../figma_app/763686';
-import { S8 } from '../vendor/231181';
-import { Cp as _$$Cp, o as _$$o, gV, J0, J5, NA, wd, Wt } from '../vendor/288996';
-import { v4 } from '../vendor/325489';
-let $$g20 = [/a\[b\]\.target\.className\.indexOf is not a function/, /\(event\.target\.className \|\| ""\)\.indexOf is not a function/, /XHR for ".*" failed with status/, /Endpoint requires authenticated user/];
-let $$f18 = [/\bintercomcdn\.com\b/, /\bkaspersky-labs\.com\b/, /\bchrome-extension:\/\//, /\bmoz-extension:\/\//, /\bsafari-extension:\/\//];
-let $$_8 = new b('sentry');
-export function $$A2(e) {
-  _$$Cp(e);
+import { datadogRum } from '@datadog/browser-rum'
+import { captureException, captureMessage, captureSession, normalize, setContext, setTag, setTags, setUser, startSession, withScope } from '@sentry/core'
+import { ServiceCategories as _$$e } from '../905/165054'
+import { getSentryConfig } from '../905/256712'
+import { EventEmitter } from '../905/690073'
+import { normalizeUrl } from '../3973/348894'
+import { getInitialOptions } from '../figma_app/169182'
+import { flattenObject } from '../figma_app/493477'
+// import { NUh } from '../figma_app/763686'
+
+/**
+ * Error patterns for filtering known issues (yO)
+ */
+const errorPatterns = [
+  /a\[b\]\.target\.className\.indexOf is not a function/,
+  /\(event\.target\.className \|\| ""\)\.indexOf is not a function/,
+  /XHR for ".*" failed with status/,
+  /Endpoint requires authenticated user/
+]
+
+/**
+ * Patterns for filtering external URLs (xg)
+ */
+const externalUrlPatterns = [
+  /\bintercomcdn\.com\b/,
+  /\bkaspersky-labs\.com\b/,
+  /\bchrome-extension:\/\//,
+  /\bmoz-extension:\/\//,
+  /\bsafari-extension:\/\//
+]
+
+/**
+ * Sentry event emitter (Zx)
+ */
+const sentryEventEmitter = new EventEmitter('sentry')
+
+/**
+ * Capture an exception with Sentry (Cp)
+ * @param error - The error to capture
+ */
+export function captureError(error: unknown) {
+  // $$A2
+  captureException(error)
 }
-export function $$y19(e) {
-  for (let t of e.exception?.values || []) {
-    for (let e of t.stacktrace?.frames || []) e.filename && (e.filename = Br(e.filename));
-  }
-  e.request?.url && (e.request.url = Br(e.request.url));
-  typeof e.tags?.url == 'string' && (e.tags.url = Br(e.tags.url));
-}
-export function $$b10(e) {
-  let {
-    category,
-    data
-  } = e;
-  if (category === 'xhr' || category === 'fetch') {
-    let e = data?.url;
-    if (e && (e.match(/segment.io/) || e.startsWith('/api/figment-proxy') || e.startsWith(`${location.origin}/api/figment-proxy`))) return null;
-    data && e && e.startsWith('data:') && (data.url = `${e.substring(0, 36)}... (truncated from ${e.length} characters)`);
-  }
-  e.category === 'navigation' && (data?.from && (data.from = Br(data.from)), data?.to && (data.to = Br(data.to)));
-  $$_8.trigger('breadcrumb', e);
-  return e;
-}
-export var $$v3 = (e => (e.Critical = 'critical', e.Major = 'major', e.Minor = 'minor', e.Trivial = 'trivial', e))($$v3 || {});
-let I = _$$s();
-export function $$E11(e, t) {
-  I.enabled && (NA(e, t), L?.setGlobalContextProperty(e, t));
-}
-export function $$x1(e) {
-  I.enabled && (Wt(e), L && L.setGlobalContext({
-    ...e,
-    ...L.getGlobalContext()
-  }));
-}
-export function $$S7(e, t) {
-  I.enabled && _$$o(e, t);
-}
-export function $$w17(e) {
-  $$E11('file.key', e.key);
-  e.fileRepoId === null ? $$E11('branching', 'not enabled') : ($$E11('branching_repo', e.fileRepoId), e.sourceFileKey === null ? $$E11('branching', 'main branch') : $$E11('branching', 'user branch'));
-}
-export function $$C5(e) {
-  e && gV({
-    id: e
-  });
-}
-export function $$T12(e) {
-  e && NA('org.id', e);
-}
-export function $$k14(e) {
-  e && NA('server_release', e);
-}
-export function $$R6(e, {
-  depth: t = 3,
-  maxProperties: i = 1 / 0,
-  exclude: n = []
-} = {}) {
-  let a = ['name', 'message', 'stack', 'line', 'column', 'fileName', 'lineNumber', 'columnNumber', 'toJSON'];
-  let s = {};
-  for (let t of Object.keys(e)) (!a.includes(t) || !n.includes(t)) && (s[t] = e[t]);
-  return Bq(S8(s, t, i));
-}
-let N = new Set();
-export function $$P9() {
-  N.clear();
-}
-export let $$O0 = _$$n((e, t, i, n) => {
-  let r;
-  if (!(t.reportedToSentry || t.cause?.reportedToSentry) && !I.ignoreErrors) {
-    if (n) {
-      let e = function (e) {
-        let t = e.stack?.split('\n').slice(1, 3).join('|') || '';
-        return `${e.name}:${e.message}:${t}`;
-      }(t);
-      if (N.has(e)) return;
-      N.add(e);
+
+/**
+ * Normalize Sentry event URLs (xn)
+ * @param event - Sentry event object
+ */
+export function normalizeSentryEvent(event: any) {
+  // $$y19
+  for (const exception of event.exception?.values || []) {
+    for (const frame of exception.stacktrace?.frames || []) {
+      if (frame.filename) frame.filename = normalizeUrl(frame.filename)
     }
-    t.reportedToSentry = !0;
-    I.slogToConsole && console.error(t, i);
-    I.enabled && (v4(n => {
-      if (e !== _$$e.UNOWNED && n.setTag('area', e), t.sentryTags) {
-        for (let e in t.sentryTags) n.setTag(e, t.sentryTags[e]);
-      }
-      r = _$$Cp(t, i);
-    }), L && L.addError(t, {
-      captureContext: i,
-      ...(e !== _$$e.UNOWNED && {
-        area: e
-      }),
-      ...t.sentryTags
-    }));
-    return r;
   }
-}, 'reportErrorToSentry');
-export function $$D13(e) {
-  I.slogToConsole && console.error(e);
-  I.enabled && wd(e);
+  if (event.request?.url) event.request.url = normalizeUrl(event.request.url)
+  if (typeof event.tags?.url === 'string') event.tags.url = normalizeUrl(event.tags.url)
 }
-export function $$L16(e, t) {
-  t == null && $$O0(e, new Error(`value is ${void 0 === t ? 'undefined' : 'null'}`));
+
+/**
+ * Process and emit breadcrumbs (it)
+ * @param breadcrumb - Breadcrumb object
+ * @returns The processed breadcrumb or null
+ */
+export function processBreadcrumb(breadcrumb: any) {
+  // $$b10
+  const { category, data } = breadcrumb
+  if (category === 'xhr' || category === 'fetch') {
+    const url = data?.url
+    if (
+      url &&
+      (url.match(/segment.io/) ||
+        url.startsWith('/api/figment-proxy') ||
+        url.startsWith(`${location.origin}/api/figment-proxy`))
+    ) {
+      return null
+    }
+    if (data && url && url.startsWith('data:')) {
+      data.url = `${url.substring(0, 36)}... (truncated from ${url.length} characters)`
+    }
+  }
+  if (breadcrumb.category === 'navigation') {
+    if (data?.from) data.from = normalizeUrl(data.from)
+    if (data?.to) data.to = normalizeUrl(data.to)
+  }
+  sentryEventEmitter.trigger('breadcrumb', breadcrumb)
+  return breadcrumb
 }
-export function $$F15() {
-  let e = getInitialOptions().release_manifest_git_commit;
-  I.enabled && e && (J0(), J5(), window.drainErrors && window.drainErrors());
+
+/**
+ * Severity levels (DZ)
+ */
+export enum SeverityLevel {
+  Critical = 'critical',
+  Major = 'major',
+  Minor = 'minor',
+  Trivial = 'trivial'
 }
-export const $D = $$O0;
-export const Bc = $$x1;
-export const Cp = $$A2;
-export const DZ = $$v3;
-export const NU = NUh;
-export const Tm = $$C5;
-export const V5 = $$R6;
-export const XM = $$S7;
-export const Zx = $$_8;
-export const du = $$P9;
-export const it = $$b10;
-export const kF = $$E11;
-export const mR = $$T12;
-export const us = $$D13;
-export const uy = $$k14;
-export const wp = $$F15;
-export const xO = $$L16;
-export const xZ = $$w17;
-export const xg = $$f18;
-export const xn = $$y19;
-export const yO = $$g20;
+
+const sentryConfig = getSentryConfig()
+
+/**
+ * Set a tag in Sentry and Datadog (kF)
+ * @param key - Tag key
+ * @param value - Tag value
+ */
+export function setTagGlobal(key: string, value: any) {
+  // $$E11
+  if (sentryConfig.enabled) {
+    setTag(key, value)
+    datadogRum?.setGlobalContextProperty(key, value)
+  }
+}
+
+/**
+ * Set multiple tags in Sentry and Datadog (Bc)
+ * @param tags - Tags object
+ */
+export function setTagsGlobal(tags: Record<string, any>) {
+  // $$x1
+  if (sentryConfig.enabled) {
+    setTags(tags)
+    datadogRum &&
+      datadogRum.setGlobalContext({
+        ...tags,
+        ...datadogRum.getGlobalContext(),
+      })
+  }
+}
+
+/**
+ * Set context in Sentry (XM)
+ * @param key - Context key
+ * @param value - Context value
+ */
+export function setContextGlobal(key: string, value: any) {
+  // $$S7
+  if (sentryConfig.enabled) setContext(key, value)
+}
+
+/**
+ * Set branching tags for file (xZ)
+ * @param file - File object
+ */
+export function setBranchingTags(file: { key: string; fileRepoId: string | null; sourceFileKey: string | null }) {
+  // $$w17
+  setTagGlobal('file.key', file.key)
+  if (file.fileRepoId === null) {
+    setTagGlobal('branching', 'not enabled')
+  } else {
+    setTagGlobal('branching_repo', file.fileRepoId)
+    setTagGlobal('branching', file.sourceFileKey === null ? 'main branch' : 'user branch')
+  }
+}
+
+/**
+ * Set user in Sentry (Tm)
+ * @param userId - User ID
+ */
+export function setSentryUser(userId: string) {
+  // $$C5
+  if (userId) setUser({ id: userId })
+}
+
+/**
+ * Set organization ID tag in Sentry (mR)
+ * @param orgId - Organization ID
+ */
+export function setOrgIdTag(orgId: string) {
+  // $$T12
+  if (orgId) setTag('org.id', orgId)
+}
+
+/**
+ * Set server release tag in Sentry (uy)
+ * @param release - Release string
+ */
+export function setServerReleaseTag(release: string) {
+  // $$k14
+  if (release) setTag('server_release', release)
+}
+
+/**
+ * Normalize and flatten error object (V5)
+ * @param error - Error object
+ * @param options - Normalization options
+ * @returns Flattened error object
+ */
+export function normalizeErrorObject(
+  error: Record<string, any>,
+  {
+    depth = 3,
+    maxProperties = Infinity,
+    exclude = [],
+  }: { depth?: number; maxProperties?: number; exclude?: string[] } = {}
+) {
+  // $$R6
+  const excludeProps = [
+    'name',
+    'message',
+    'stack',
+    'line',
+    'column',
+    'fileName',
+    'lineNumber',
+    'columnNumber',
+    'toJSON',
+  ]
+  const result: Record<string, any> = {}
+  for (const key of Object.keys(error)) {
+    if (!excludeProps.includes(key) || !exclude.includes(key)) {
+      result[key] = error[key]
+    }
+  }
+  return flattenObject(normalize(result, depth, maxProperties))
+}
+
+const reportedSet = new Set<string>()
+
+/**
+ * Clear reported errors set (du)
+ */
+export function clearReportedErrors() {
+  // $$P9
+  reportedSet.clear()
+}
+
+/**
+ * Report error to Sentry and Datadog (D$)
+ * @param area - Service area
+ * @param error - Error object
+ * @param context - Context object
+ * @param dedupe - Whether to deduplicate
+ * @returns Sentry event ID or undefined
+ */
+export function reportError(
+  area: string,
+  error: any,
+  context?: any,
+  dedupe?: boolean
+) {
+  // $$O0
+  let eventId
+  if (!(error.reportedToSentry || error.cause?.reportedToSentry) && !sentryConfig.ignoreErrors) {
+    if (dedupe) {
+      const dedupeKey = (() => {
+        const stack = error.stack?.split('\n').slice(1, 3).join('|') || ''
+        return `${error.name}:${error.message}:${stack}`
+      })()
+      if (reportedSet.has(dedupeKey)) return
+      reportedSet.add(dedupeKey)
+    }
+    error.reportedToSentry = true
+    if (sentryConfig.slogToConsole) console.error(error, context)
+    if (sentryConfig.enabled) {
+      withScope(scope => {
+        if (area !== _$$e.UNOWNED) scope.setTag('area', area)
+        if (error.sentryTags) {
+          for (const tag in error.sentryTags) scope.setTag(tag, error.sentryTags[tag])
+        }
+        eventId = captureException(error, context)
+      })
+      datadogRum &&
+        datadogRum.addError(error, {
+          captureContext: context,
+          ...(area !== _$$e.UNOWNED && { area }),
+          ...error.sentryTags,
+        })
+    }
+    return eventId
+  }
+}
+
+/**
+ * Capture message in Sentry (us)
+ * @param message - Message string
+ */
+export function captureSentryMessage(message: string) {
+  // $$D13
+  if (sentryConfig.slogToConsole) console.error(message)
+  if (sentryConfig.enabled) captureMessage(message)
+}
+
+/**
+ * Report undefined/null value error (xO)
+ * @param area - Service area
+ * @param value - Value to check
+ */
+export function reportValueError(area: string, value: any) {
+  // $$L16
+  if (value == null) reportError(area, new Error(`value is ${void 0 === value ? 'undefined' : 'null'}`))
+}
+
+/**
+ * Start Sentry session and drain errors (wp)
+ */
+export function startSentrySession() {
+  // $$F15
+  const commit = getInitialOptions().release_manifest_git_commit
+  if (sentryConfig.enabled && commit) {
+    startSession()
+    captureSession()
+    window.drainErrors && window.drainErrors()
+  }
+}
+
+// Export statements with original names preserved
+export const $D = reportError
+export const Bc = setTagsGlobal
+export const Cp = captureError
+export const DZ = SeverityLevel
+// export const NU = NUh
+export const Tm = setSentryUser
+export const V5 = normalizeErrorObject
+export const XM = setContextGlobal
+export const Zx = sentryEventEmitter
+export const du = clearReportedErrors
+export const it = processBreadcrumb
+export const kF = setTagGlobal
+export const mR = setOrgIdTag
+export const us = captureSentryMessage
+export const uy = setServerReleaseTag
+export const wp = startSentrySession
+export const xO = reportValueError
+export const xZ = setBranchingTags
+export const xg = externalUrlPatterns
+export const xn = normalizeSentryEvent
+export const yO = errorPatterns

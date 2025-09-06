@@ -1,8 +1,8 @@
 import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { y3 } from "../figma_app/876459";
+import { hasDesktopAPI } from "../figma_app/876459";
 import { Ay } from "../905/612521";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useEffect } from "react";
 import { useDispatch } from "../vendor/514228";
@@ -15,10 +15,10 @@ import { r as _$$r } from "../905/857502";
 import { V as _$$V } from "../1577/311426";
 import { J as _$$J } from "../905/341359";
 import { eJ } from "../vendor/352483";
-import { fp } from "../figma_app/27355";
+import { useAtomValueAndSetter } from "../figma_app/27355";
 import { IT } from "../figma_app/566371";
 import { o as _$$o } from "../905/160095";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Jm, BY } from "../figma_app/387599";
 import { y$ } from "../figma_app/835219";
 import { lW, tv, DV } from "../figma_app/471982";
@@ -46,7 +46,7 @@ import { lx } from "../figma_app/558929";
 import { jd } from "../figma_app/106207";
 import { FFileType, FOrganizationLevelType } from "../figma_app/191312";
 import { Ar, lT } from "../figma_app/300692";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { vt as _$$vt } from "../905/862883";
 import { noop } from "../5430/262192";
 import { H as _$$H } from "../5430/992445";
@@ -85,9 +85,9 @@ function z({
       },
       htmlAttributes: {
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("file_browser.copy_link")
+        "data-tooltip": getI18nString("file_browser.copy_link")
       },
-      "aria-label": _$$t("file_browser.copy_link"),
+      "aria-label": getI18nString("file_browser.copy_link"),
       children: jsx(_$$r, {})
     }), jsxs(mc, {
       ...getContainerProps({
@@ -97,7 +97,7 @@ function z({
         ...getArrowProps(),
         fill: "var(--color-bg-brand)"
       }), jsx("div", {
-        children: _$$t("file_permissions_modal.link_copied")
+        children: getI18nString("file_permissions_modal.link_copied")
       })]
     })]
   });
@@ -113,7 +113,7 @@ function Q({
     href: t,
     newTab: !0,
     onClick: () => {
-      t ? e(AS()) : $D(_$$e.COMMUNITY, Error("newTabButton: route is empty"), {
+      t ? e(AS()) : reportError(_$$e.COMMUNITY, Error("newTabButton: route is empty"), {
         extra: {
           sharedRouteParams: n
         }
@@ -121,10 +121,10 @@ function Q({
     },
     htmlAttributes: {
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": _$$t("file_browser.open_in_new_tab")
+      "data-tooltip": getI18nString("file_browser.open_in_new_tab")
     },
     className: "lightbox_rdp--link--x0gtt lightbox_rdp--iconButton--kEwkm lightbox_rdp--baseIconButton--rtsxU",
-    "aria-label": _$$t("file_browser.open_in_new_tab"),
+    "aria-label": getI18nString("file_browser.open_in_new_tab"),
     trackingProperties: {
       ...Kj(s, r),
       trackingDescriptor: _$$c.OPEN_IN_NEW_TAB
@@ -139,8 +139,8 @@ let Z = Ju(function (e) {
   let t;
   let r;
   let s = useDispatch();
-  let i = y3();
-  let [a, u] = fp(_$$Q);
+  let i = hasDesktopAPI();
+  let [a, u] = useAtomValueAndSetter(_$$Q);
   let m = useRef(!1);
   let x = Om();
   let f = _$$tv() ?? void 0;
@@ -279,7 +279,7 @@ export function $$ea2(e, t) {
     }
   }(e, t);
   if (!r) {
-    $D(_$$e.COMMUNITY, Error("ResourceHubResourceRoute is empty"), {
+    reportError(_$$e.COMMUNITY, Error("ResourceHubResourceRoute is empty"), {
       extra: {
         resourceId: e.id,
         resourceType: Vm(e),
@@ -291,7 +291,7 @@ export function $$ea2(e, t) {
   Ay.redirect(r.href, "_blank");
 }
 export function $$el1(e, t, r) {
-  let s = y3();
+  let s = hasDesktopAPI();
   let i = r.openInNewTab && !s;
   let o = !r.openInNewTab && r.shouldUpdateUrl;
   if (i) {
@@ -348,7 +348,7 @@ export function $$ed0(e, t, r, n) {
       !function (e, t, r, s) {
         let n = $9(t);
         if (!n) {
-          $D(_$$e.COMMUNITY, Error("Plugin resource has no plugin"), {
+          reportError(_$$e.COMMUNITY, Error("Plugin resource has no plugin"), {
             extra: {
               resourceId: t.id
             }
@@ -356,7 +356,7 @@ export function $$ed0(e, t, r, n) {
           return;
         }
         if (!(s?.key.type === FOrganizationLevelType.ORG ? s.key.parentId : null)) {
-          $D(_$$e.COMMUNITY, Error("Internal extensions can only be used in an org"), {
+          reportError(_$$e.COMMUNITY, Error("Internal extensions can only be used in an org"), {
             extra: {
               resourceId: t.id
             }
@@ -365,7 +365,7 @@ export function $$ed0(e, t, r, n) {
         }
         let o = Ar(n) || lT;
         let l = _$$H(r, s, o);
-        let c = !!(o.playground_file_version_id || l === nT.DevHandoff);
+        let c = !!(o.playground_file_version_id || l === FEditorType.DevHandoff);
         _$$to(t.id, c ? "playground" : "new_file", l);
         e(lx({
           extension: n,
@@ -413,7 +413,7 @@ function eu(e) {
   } else {
     let t = r ? void 0 : e.id;
     let s = r ? e.id : void 0;
-    $D(_$$e.COMMUNITY, Error("Slide template has no library key"), {
+    reportError(_$$e.COMMUNITY, Error("Slide template has no library key"), {
       extra: {
         resourceId: t,
         templateId: s
@@ -450,7 +450,7 @@ function em(e, t) {
   } else {
     let e = n ? void 0 : t.id;
     let r = n ? t.id : void 0;
-    $D(_$$e.COMMUNITY, Error("FigJam template has no file key or name"), {
+    reportError(_$$e.COMMUNITY, Error("FigJam template has no file key or name"), {
       extra: {
         resourceId: e,
         templateId: r
@@ -476,7 +476,7 @@ function e_(e) {
   } else {
     let t = r ? void 0 : e.id;
     let s = r ? e.id : void 0;
-    $D(_$$e.COMMUNITY, Error("Cooper template has no library key"), {
+    reportError(_$$e.COMMUNITY, Error("Cooper template has no library key"), {
       extra: {
         resourceId: t,
         templateId: s
@@ -513,7 +513,7 @@ function ep(e, t) {
   } else {
     let e = n ? void 0 : t.id;
     let r = n ? t.id : void 0;
-    $D(_$$e.COMMUNITY, Error("Figmake template has no file key or name"), {
+    reportError(_$$e.COMMUNITY, Error("Figmake template has no file key or name"), {
       extra: {
         resourceId: e,
         templateId: r

@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { sx } from "../905/941192";
 import { Ph, Us } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { c as _$$c } from "../905/370443";
 import { Ju } from "../905/712921";
 import { $V, NW } from "../figma_app/831101";
@@ -24,26 +24,26 @@ import { f as _$$f } from "../c5e2cae0/279252";
 function _(e) {
   let t = e.shippingAddress && !$V(e.shippingAddress);
   return jsxs(_$$x, {
-    title: _$$t("checkout.cart_plan_details.subtitle"),
+    title: getI18nString("checkout.cart_plan_details.subtitle"),
     dataTestId: "cart-plan-details",
     children: [jsx(u, {
-      header: e.tier === Ju.ORG ? _$$t("checkout.cart_plan_details.organization_name") : _$$t("checkout.cart_plan_details.team_name"),
+      header: e.tier === Ju.ORG ? getI18nString("checkout.cart_plan_details.organization_name") : getI18nString("checkout.cart_plan_details.team_name"),
       value: e.displayName,
       dataTestId: "cart-plan-details-plan-name"
     }), e.legalName && jsx(u, {
-      header: _$$t("checkout.cart_plan_details.legal_name"),
+      header: getI18nString("checkout.cart_plan_details.legal_name"),
       value: e.legalName,
       dataTestId: "cart-plan-details-legal-name"
     }), jsx(u, {
-      header: _$$t("checkout.cart_plan_details.invoice_email"),
+      header: getI18nString("checkout.cart_plan_details.invoice_email"),
       value: e.userEmail,
       dataTestId: "cart-plan-details-invoice-email"
     }), e.billingAddress && jsx(u, {
-      header: _$$t("checkout.cart_plan_details.billing_address"),
+      header: getI18nString("checkout.cart_plan_details.billing_address"),
       value: p(e.billingAddress),
       dataTestId: "cart-plan-details-billing-address"
     }), t && jsx(u, {
-      header: _$$t("checkout.cart_plan_details.shipping_address"),
+      header: getI18nString("checkout.cart_plan_details.shipping_address"),
       value: p(e.shippingAddress),
       dataTestId: "cart-plan-details-shipping-address"
     }), jsx(Ph, {
@@ -54,7 +54,7 @@ function _(e) {
       },
       "data-testid": "cart-plan-details-edit-details",
       trusted: !0,
-      children: tx("checkout.cart_plan_details.edit_details")
+      children: renderI18nText("checkout.cart_plan_details.edit_details")
     })]
   });
 }
@@ -84,7 +84,7 @@ let E = jsx(Us, {
   target: "_blank",
   trusted: !0,
   href: "/pricing",
-  children: tx("checkout.monthly_price")
+  children: renderI18nText("checkout.monthly_price")
 });
 function A({
   title: e,
@@ -147,7 +147,7 @@ function A({
         trackingDescriptor: _$$c.COMPLETE_PURCHASE,
         ...y
       },
-      children: u ? k : tx("checkout.complete_purchase")
+      children: u ? k : renderI18nText("checkout.complete_purchase")
     })]
   });
 }
@@ -172,16 +172,16 @@ function k({
       className: _$$s.py8.px16.colorBgSecondary.bRadius5.flex.flexColumn.gap4.$,
       children: [jsx("p", {
         className: _$$s.textBodyMediumStrong.$,
-        children: tx("checkout.how_do_new_seat_additions_and_upgrades_work")
+        children: renderI18nText("checkout.how_do_new_seat_additions_and_upgrades_work")
       }), jsx("p", {
         children: function (e, t) {
           switch (e) {
             case Ju.ORG:
-              return tx("checkout.cart_review_upgrade_info_org");
+              return renderI18nText("checkout.cart_review_upgrade_info_org");
             case Ju.PRO:
-              return t ? tx("checkout.cart_review_upgrade_info_pro_annual", {
+              return t ? renderI18nText("checkout.cart_review_upgrade_info_pro_annual", {
                 monthlyPriceLink: E
-              }) : tx("checkout.cart_review_upgrade_info_pro_monthly");
+              }) : renderI18nText("checkout.cart_review_upgrade_info_pro_monthly");
             default:
               throwError(e);
           }
@@ -194,7 +194,7 @@ function k({
         target: "_blank",
         href: a,
         trusted: !0,
-        children: tx("checkout.learn_more")
+        children: renderI18nText("checkout.learn_more")
       })]
     })
   });
@@ -214,30 +214,30 @@ function P() {
         className: _$$s.px8.$,
         children: [jsx("p", {
           className: _$$s.pt4.fontMedium.$,
-          children: tx("org_self_serve.review_step.next_quarterly_true_up_on_date", {
+          children: renderI18nText("org_self_serve.review_step.next_quarterly_true_up_on_date", {
             trueUpDate: new Date(d)
           })
         }), jsx("p", {
           className: _$$s.pt4.$,
-          children: tx("org_self_serve.review_step.what_is_a_true_up")
+          children: renderI18nText("org_self_serve.review_step.what_is_a_true_up")
         }), jsxs("ul", {
           style: sx.ml16.mt4.add({
             listStyle: "disc"
           }).$,
           children: [jsx("li", {
-            children: tx("org_self_serve.review_step.true_up_description.seat_rename")
+            children: renderI18nText("org_self_serve.review_step.true_up_description.seat_rename")
           }), jsx("li", {
-            children: tx("checkout.org_self_serve.true_up_description2_seat_rename")
+            children: renderI18nText("checkout.org_self_serve.true_up_description2_seat_rename")
           }), jsx("li", {
-            children: tx("checkout.org_self_serve.true_up_description3_seat_rename")
+            children: renderI18nText("checkout.org_self_serve.true_up_description3_seat_rename")
           }), jsx("li", {
-            children: tx("checkout.org_self_serve.true_up_description4_seat_rename")
+            children: renderI18nText("checkout.org_self_serve.true_up_description4_seat_rename")
           })]
         }), jsx(Ph, {
           className: _$$s.pt8.fontMedium.inline.$,
           onClick: () => t(!0),
           trusted: !0,
-          children: tx("org_self_serve.review_step.learn_more_about_true_ups")
+          children: renderI18nText("org_self_serve.review_step.learn_more_about_true_ups")
         })]
       })]
     })]

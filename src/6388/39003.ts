@@ -4,7 +4,7 @@ import { P } from "../905/175083";
 import { Ez5, nQ7 } from "../figma_app/763686";
 import { X } from "../905/350405";
 import { a as _$$a } from "../figma_app/234156";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { ut } from "../figma_app/84367";
 import { uy } from "../figma_app/835688";
 import { Bk } from "../figma_app/357367";
@@ -28,7 +28,7 @@ export function $$h0({
   }, {
     mode: "design",
     icon: jsx(P, {}),
-    label: f ? _$$t("fullscreen.toolbar.toolbelt_mode_segmented_control.design") : _$$t("slides.inserts_menu.design_mode_upsell"),
+    label: f ? getI18nString("fullscreen.toolbar.toolbelt_mode_segmented_control.design") : getI18nString("slides.inserts_menu.design_mode_upsell"),
     tooltipShortcut: f ? t?.(nQ7.DESIGN, g) : void 0,
     disabled: !f
   }], [l, h, p, t, g, f]);

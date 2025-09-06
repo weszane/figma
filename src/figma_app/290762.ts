@@ -1,614 +1,703 @@
-var $$n33;
-var $$i20;
-var a;
-var s;
-var $$o24;
-var $$l22;
-var $$d18;
-var $$c31;
-var $$u35;
-var $$p3;
-var $$_5;
-var h;
-var $$m11;
-var $$g32;
-var $$f34;
-let $$E27;
-let $$y26;
-let $$b25;
-let T;
-let $$I1;
-let S;
-let $$v29;
-let $$A16;
-let $$x21;
-let $$N13;
-let C;
-let w;
-let O;
-let R;
-let L;
-let P;
-let $$D;
-let k;
-let M;
-let F;
-let j;
-let U;
-let B;
-let G;
-function V(e, t, r) {
-  t in e ? Object.defineProperty(e, t, {
-    value: r,
-    enumerable: !0,
-    configurable: !0,
-    writable: !0
-  }) : e[t] = r;
-  return e;
-}
-class H {
+export let bindings: any
+export let CorePerfInfo: any
+export let perfTimerFrameManagerBindings: any
+export let featureFlagsCppApi: any
+export let fullscreenOptimizationExposureLoggingBinding: any
+export let observableValue_Map_Int_AutoLayoutShortcutHint__Internal: any
+export let weakHandleHelpers: any
+export let webAsyncCallback: any
+export let performanceEventCounters: any
+export let deprecatedXHRBindings: any
+export let writableObservableValue_Bool_Internal: any
+export let observableValue_Array_Bool_Internal: any
+export let observableValue_Bool_Internal: any
+export let observableValue_Float_Internal: any
+export let writableObservableValue_Double_Internal: any
+export let writableObservableValue_Int_Internal: any
+export let writableObservableValue_String_Internal: any
+export let observableValue_Json_Internal: any
+export let observableValue_Int_Internal: any
+export let writableObservableValue_Optional_String_Internal: any
+export let writableObservableValue_Float_Internal: any
+export let writableObservableValue_Array_String_Internal: any
+export let observableValue_Double_Internal: any
+export let observableValue_Map_String_Int_Internal: any
+
+
+class ObservableValue_Map_Int_AutoLayoutShortcutHint_ {
   constructor(e) {
-    V(this, "handle", void 0);
-    this.handle = e;
+    
+    this.handle = e
   }
 }
-export class $$z15 extends H {
+
+class MutableObservableValue_Map_Int_AutoLayoutShortcutHint_ extends ObservableValue_Map_Int_AutoLayoutShortcutHint_ {
   getCopy() {
-    return S.getCopy(this.handle);
+    return observableValue_Map_Int_AutoLayoutShortcutHint__Internal.getCopy(this.handle)
   }
+
   subscribeFromJs(e) {
-    return S.subscribeFromJs(this.handle, e);
+    return observableValue_Map_Int_AutoLayoutShortcutHint__Internal.subscribeFromJs(this.handle, e)
   }
+
   unsubscribeFromJs(e) {
-    S.unsubscribeFromJs(this.handle, e);
+    observableValue_Map_Int_AutoLayoutShortcutHint__Internal.unsubscribeFromJs(this.handle, e)
   }
+
   constructor(e) {
-    super(e);
-    V(this, "handle", void 0);
-    this.handle = e;
+    super(e)
+    
+    this.handle = e
   }
 }
-class W {
+
+export { MutableObservableValue_Map_Int_AutoLayoutShortcutHint_ as $$z15 }
+
+class WritableObservableValue_Bool {
   constructor(e) {
-    V(this, "handle", void 0);
-    this.handle = e;
+    
+    this.handle = e
   }
 }
-export class $$K36 extends W {
+
+class MutableWritableObservableValue_Bool extends WritableObservableValue_Bool {
   getCopy() {
-    return C.getCopy(this.handle);
+    return writableObservableValue_Bool_Internal.getCopy(this.handle)
   }
+
   set(e) {
-    C.set(this.handle, e);
+    writableObservableValue_Bool_Internal.set(this.handle, e)
   }
+
   subscribeFromJs(e) {
-    return C.subscribeFromJs(this.handle, e);
+    return writableObservableValue_Bool_Internal.subscribeFromJs(this.handle, e)
   }
+
   unsubscribeFromJs(e) {
-    C.unsubscribeFromJs(this.handle, e);
+    writableObservableValue_Bool_Internal.unsubscribeFromJs(this.handle, e)
   }
+
   constructor(e) {
-    super(e);
-    V(this, "handle", void 0);
-    this.handle = e;
+    super(e)
+    
+    this.handle = e
   }
 }
-class Y {
+
+export { MutableWritableObservableValue_Bool as $$K36 }
+
+class ObservableValue_Array_Bool {
   constructor(e) {
-    V(this, "handle", void 0);
-    this.handle = e;
+    
+    this.handle = e
   }
 }
-export class $$$0 extends Y {
+
+class MutableObservableValue_Array_Bool extends ObservableValue_Array_Bool {
   getCopy() {
-    return w.getCopy(this.handle);
+    return observableValue_Array_Bool_Internal.getCopy(this.handle)
   }
+
   subscribeFromJs(e) {
-    return w.subscribeFromJs(this.handle, e);
+    return observableValue_Array_Bool_Internal.subscribeFromJs(this.handle, e)
   }
+
   unsubscribeFromJs(e) {
-    w.unsubscribeFromJs(this.handle, e);
+    observableValue_Array_Bool_Internal.unsubscribeFromJs(this.handle, e)
   }
+
   constructor(e) {
-    super(e);
-    V(this, "handle", void 0);
-    this.handle = e;
+    super(e)
+    
+    this.handle = e
   }
 }
-class X {
+
+export { MutableObservableValue_Array_Bool as $$$0 }
+
+class ObservableValue_Bool {
   constructor(e) {
-    V(this, "handle", void 0);
-    this.handle = e;
+    
+    this.handle = e
   }
 }
-export class $$q6 extends X {
+
+class MutableObservableValue_Bool extends ObservableValue_Bool {
   getCopy() {
-    return O.getCopy(this.handle);
+    return observableValue_Bool_Internal.getCopy(this.handle)
   }
+
   subscribeFromJs(e) {
-    return O.subscribeFromJs(this.handle, e);
+    return observableValue_Bool_Internal.subscribeFromJs(this.handle, e)
   }
+
   unsubscribeFromJs(e) {
-    O.unsubscribeFromJs(this.handle, e);
+    observableValue_Bool_Internal.unsubscribeFromJs(this.handle, e)
   }
+
   constructor(e) {
-    super(e);
-    V(this, "handle", void 0);
-    this.handle = e;
+    super(e)
+    
+    this.handle = e
   }
 }
-class J {
+
+export { MutableObservableValue_Bool as $$q6 }
+
+class ObservableValue_Float {
   constructor(e) {
-    V(this, "handle", void 0);
-    this.handle = e;
+    
+    this.handle = e
   }
 }
-export class $$Z4 extends J {
+
+class MutableObservableValue_Float extends ObservableValue_Float {
   getCopy() {
-    return R.getCopy(this.handle);
+    return observableValue_Float_Internal.getCopy(this.handle)
   }
+
   subscribeFromJs(e) {
-    return R.subscribeFromJs(this.handle, e);
+    return observableValue_Float_Internal.subscribeFromJs(this.handle, e)
   }
+
   unsubscribeFromJs(e) {
-    R.unsubscribeFromJs(this.handle, e);
+    observableValue_Float_Internal.unsubscribeFromJs(this.handle, e)
   }
+
   constructor(e) {
-    super(e);
-    V(this, "handle", void 0);
-    this.handle = e;
+    super(e)
+    
+    this.handle = e
   }
 }
-class Q {
+
+export { MutableObservableValue_Float as $$Z4 }
+
+class WritableObservableValue_Double {
   constructor(e) {
-    V(this, "handle", void 0);
-    this.handle = e;
+    
+    this.handle = e
   }
 }
-export class $$ee2 extends Q {
+
+class MutableWritableObservableValue_Double extends WritableObservableValue_Double {
   getCopy() {
-    return L.getCopy(this.handle);
+    return writableObservableValue_Double_Internal.getCopy(this.handle)
   }
+
   set(e) {
-    L.set(this.handle, e);
+    writableObservableValue_Double_Internal.set(this.handle, e)
   }
+
   subscribeFromJs(e) {
-    return L.subscribeFromJs(this.handle, e);
+    return writableObservableValue_Double_Internal.subscribeFromJs(this.handle, e)
   }
+
   unsubscribeFromJs(e) {
-    L.unsubscribeFromJs(this.handle, e);
+    writableObservableValue_Double_Internal.unsubscribeFromJs(this.handle, e)
   }
+
   constructor(e) {
-    super(e);
-    V(this, "handle", void 0);
-    this.handle = e;
+    super(e)
+    
+    this.handle = e
   }
 }
-class et {
+
+export { MutableWritableObservableValue_Double as $$ee2 }
+
+class WritableObservableValue_Int {
   constructor(e) {
-    V(this, "handle", void 0);
-    this.handle = e;
+    
+    this.handle = e
   }
 }
-export class $$er12 extends et {
+
+class MutableWritableObservableValue_Int extends WritableObservableValue_Int {
   getCopy() {
-    return P.getCopy(this.handle);
+    return writableObservableValue_Int_Internal.getCopy(this.handle)
   }
+
   set(e) {
-    P.set(this.handle, e);
+    writableObservableValue_Int_Internal.set(this.handle, e)
   }
+
   subscribeFromJs(e) {
-    return P.subscribeFromJs(this.handle, e);
+    return writableObservableValue_Int_Internal.subscribeFromJs(this.handle, e)
   }
+
   unsubscribeFromJs(e) {
-    P.unsubscribeFromJs(this.handle, e);
+    writableObservableValue_Int_Internal.unsubscribeFromJs(this.handle, e)
   }
+
   constructor(e) {
-    super(e);
-    V(this, "handle", void 0);
-    this.handle = e;
+    super(e)
+    
+    this.handle = e
   }
 }
-class en {
+
+export { MutableWritableObservableValue_Int as $$er12 }
+
+class WritableObservableValue_String {
   constructor(e) {
-    V(this, "handle", void 0);
-    this.handle = e;
+    
+    this.handle = e
   }
 }
-export class $$ei9 extends en {
+
+class MutableWritableObservableValue_String extends WritableObservableValue_String {
   getCopy() {
-    return $$D.getCopy(this.handle);
+    return writableObservableValue_String_Internal.getCopy(this.handle)
   }
+
   set(e) {
-    $$D.set(this.handle, e);
+    writableObservableValue_String_Internal.set(this.handle, e)
   }
+
   subscribeFromJs(e) {
-    return $$D.subscribeFromJs(this.handle, e);
+    return writableObservableValue_String_Internal.subscribeFromJs(this.handle, e)
   }
+
   unsubscribeFromJs(e) {
-    $$D.unsubscribeFromJs(this.handle, e);
+    writableObservableValue_String_Internal.unsubscribeFromJs(this.handle, e)
   }
+
   constructor(e) {
-    super(e);
-    V(this, "handle", void 0);
-    this.handle = e;
+    super(e)
+    
+    this.handle = e
   }
 }
-class ea {
+
+export { MutableWritableObservableValue_String as $$ei9 }
+
+class ObservableValue_Json {
   constructor(e) {
-    V(this, "handle", void 0);
-    this.handle = e;
+    
+    this.handle = e
   }
 }
-export class $$es14 extends ea {
+
+class MutableObservableValue_Json extends ObservableValue_Json {
   getCopy() {
-    return k.getCopy(this.handle);
+    return observableValue_Json_Internal.getCopy(this.handle)
   }
+
   subscribeFromJs(e) {
-    return k.subscribeFromJs(this.handle, e);
+    return observableValue_Json_Internal.subscribeFromJs(this.handle, e)
   }
+
   unsubscribeFromJs(e) {
-    k.unsubscribeFromJs(this.handle, e);
+    observableValue_Json_Internal.unsubscribeFromJs(this.handle, e)
   }
+
   constructor(e) {
-    super(e);
-    V(this, "handle", void 0);
-    this.handle = e;
+    super(e)
+    
+    this.handle = e
   }
 }
-class eo {
+
+export { MutableObservableValue_Json as $$es14 }
+
+class ObservableValue_Int {
   constructor(e) {
-    V(this, "handle", void 0);
-    this.handle = e;
+    
+    this.handle = e
   }
 }
-export class $$el30 extends eo {
+
+class MutableObservableValue_Int extends ObservableValue_Int {
   getCopy() {
-    return M.getCopy(this.handle);
+    return observableValue_Int_Internal.getCopy(this.handle)
   }
+
   subscribeFromJs(e) {
-    return M.subscribeFromJs(this.handle, e);
+    return observableValue_Int_Internal.subscribeFromJs(this.handle, e)
   }
+
   unsubscribeFromJs(e) {
-    M.unsubscribeFromJs(this.handle, e);
+    observableValue_Int_Internal.unsubscribeFromJs(this.handle, e)
   }
+
   constructor(e) {
-    super(e);
-    V(this, "handle", void 0);
-    this.handle = e;
+    super(e)
+    
+    this.handle = e
   }
 }
-class ed {
+
+export { MutableObservableValue_Int as $$el30 }
+
+class WritableObservableValue_Optional_String {
   constructor(e) {
-    V(this, "handle", void 0);
-    this.handle = e;
+    
+    this.handle = e
   }
 }
-export class $$ec28 extends ed {
+
+class MutableWritableObservableValue_Optional_String extends WritableObservableValue_Optional_String {
   getCopy() {
-    return F.getCopy(this.handle);
+    return writableObservableValue_Optional_String_Internal.getCopy(this.handle)
   }
+
   set(e) {
-    F.set(this.handle, e);
+    writableObservableValue_Optional_String_Internal.set(this.handle, e)
   }
+
   subscribeFromJs(e) {
-    return F.subscribeFromJs(this.handle, e);
+    return writableObservableValue_Optional_String_Internal.subscribeFromJs(this.handle, e)
   }
+
   unsubscribeFromJs(e) {
-    F.unsubscribeFromJs(this.handle, e);
+    writableObservableValue_Optional_String_Internal.unsubscribeFromJs(this.handle, e)
   }
+
   constructor(e) {
-    super(e);
-    V(this, "handle", void 0);
-    this.handle = e;
+    super(e)
+    
+    this.handle = e
   }
 }
-class eu {
+
+export { MutableWritableObservableValue_Optional_String as $$ec28 }
+
+class WritableObservableValue_Float {
   constructor(e) {
-    V(this, "handle", void 0);
-    this.handle = e;
+    
+    this.handle = e
   }
 }
-export class $$ep19 extends eu {
+
+class MutableWritableObservableValue_Float extends WritableObservableValue_Float {
   getCopy() {
-    return j.getCopy(this.handle);
+    return writableObservableValue_Float_Internal.getCopy(this.handle)
   }
+
   set(e) {
-    j.set(this.handle, e);
+    writableObservableValue_Float_Internal.set(this.handle, e)
   }
+
   subscribeFromJs(e) {
-    return j.subscribeFromJs(this.handle, e);
+    return writableObservableValue_Float_Internal.subscribeFromJs(this.handle, e)
   }
+
   unsubscribeFromJs(e) {
-    j.unsubscribeFromJs(this.handle, e);
+    writableObservableValue_Float_Internal.unsubscribeFromJs(this.handle, e)
   }
+
   constructor(e) {
-    super(e);
-    V(this, "handle", void 0);
-    this.handle = e;
+    super(e)
+    
+    this.handle = e
   }
 }
-class e_ {
+
+export { MutableWritableObservableValue_Float as $$ep19 }
+
+class WritableObservableValue_Array_String {
   constructor(e) {
-    V(this, "handle", void 0);
-    this.handle = e;
+    
+    this.handle = e
   }
 }
-export class $$eh10 extends e_ {
+
+class MutableWritableObservableValue_Array_String extends WritableObservableValue_Array_String {
   getCopy() {
-    return U.getCopy(this.handle);
+    return writableObservableValue_Array_String_Internal.getCopy(this.handle)
   }
+
   set(e) {
-    U.set(this.handle, e);
+    writableObservableValue_Array_String_Internal.set(this.handle, e)
   }
+
   subscribeFromJs(e) {
-    return U.subscribeFromJs(this.handle, e);
+    return writableObservableValue_Array_String_Internal.subscribeFromJs(this.handle, e)
   }
+
   unsubscribeFromJs(e) {
-    U.unsubscribeFromJs(this.handle, e);
+    writableObservableValue_Array_String_Internal.unsubscribeFromJs(this.handle, e)
   }
+
   constructor(e) {
-    super(e);
-    V(this, "handle", void 0);
-    this.handle = e;
+    super(e)
+    
+    this.handle = e
   }
 }
-class em {
+
+export { MutableWritableObservableValue_Array_String as $$eh10 }
+
+class ObservableValue_Double {
   constructor(e) {
-    V(this, "handle", void 0);
-    this.handle = e;
+    
+    this.handle = e
   }
 }
-export class $$eg17 extends em {
+
+class MutableObservableValue_Double extends ObservableValue_Double {
   getCopy() {
-    return B.getCopy(this.handle);
+    return observableValue_Double_Internal.getCopy(this.handle)
   }
+
   subscribeFromJs(e) {
-    return B.subscribeFromJs(this.handle, e);
+    return observableValue_Double_Internal.subscribeFromJs(this.handle, e)
   }
+
   unsubscribeFromJs(e) {
-    B.unsubscribeFromJs(this.handle, e);
+    observableValue_Double_Internal.unsubscribeFromJs(this.handle, e)
   }
+
   constructor(e) {
-    super(e);
-    V(this, "handle", void 0);
-    this.handle = e;
+    super(e)
+    
+    this.handle = e
   }
 }
-class ef {
+
+export { MutableObservableValue_Double as $$eg17 }
+
+class ObservableValue_Map_String_Int {
   constructor(e) {
-    V(this, "handle", void 0);
-    this.handle = e;
+    
+    this.handle = e
   }
 }
-export class $$eE8 extends ef {
+
+class MutableObservableValue_Map_String_Int extends ObservableValue_Map_String_Int {
   getCopy() {
-    return G.getCopy(this.handle);
+    return observableValue_Map_String_Int_Internal.getCopy(this.handle)
   }
+
   subscribeFromJs(e) {
-    return G.subscribeFromJs(this.handle, e);
+    return observableValue_Map_String_Int_Internal.subscribeFromJs(this.handle, e)
   }
+
   unsubscribeFromJs(e) {
-    G.unsubscribeFromJs(this.handle, e);
+    observableValue_Map_String_Int_Internal.unsubscribeFromJs(this.handle, e)
   }
+
   constructor(e) {
-    super(e);
-    V(this, "handle", void 0);
-    this.handle = e;
+    super(e)
+    
+    this.handle = e
   }
 }
+
+export { MutableObservableValue_Map_String_Int as $$eE8 }
 export function $$ey23(e) {
-  $$E27 = e.Bindings;
-  $$y26 = e.CorePerfInfo;
-  globalThis.CorePerfInfo = $$y26;
-  $$b25 = e.PerfTimerFrameManagerBindings;
-  T = e.FeatureFlagsCppApi;
-  $$I1 = e.FullscreenOptimizationExposureLoggingBinding;
-  S = e.ObservableValue_Map_Int_AutoLayoutShortcutHint__Internal;
-  globalThis.ObservableValue_Map_Int_AutoLayoutShortcutHint_ = H;
-  globalThis.MutableObservableValue_Map_Int_AutoLayoutShortcutHint_ = $$z15;
-  $$v29 = e.WeakHandleHelpers;
-  $$A16 = e.WebAsyncCallback;
-  $$x21 = e.PerformanceEventCounters;
-  $$N13 = e.DeprecatedXHRBindings;
-  C = e.WritableObservableValue_Bool_Internal;
-  globalThis.WritableObservableValue_Bool = W;
-  globalThis.MutableWritableObservableValue_Bool = $$K36;
-  w = e.ObservableValue_Array_Bool_Internal;
-  globalThis.ObservableValue_Array_Bool = Y;
-  globalThis.MutableObservableValue_Array_Bool = $$$0;
-  O = e.ObservableValue_Bool_Internal;
-  globalThis.ObservableValue_Bool = X;
-  globalThis.MutableObservableValue_Bool = $$q6;
-  R = e.ObservableValue_Float_Internal;
-  globalThis.ObservableValue_Float = J;
-  globalThis.MutableObservableValue_Float = $$Z4;
-  L = e.WritableObservableValue_Double_Internal;
-  globalThis.WritableObservableValue_Double = Q;
-  globalThis.MutableWritableObservableValue_Double = $$ee2;
-  P = e.WritableObservableValue_Int_Internal;
-  globalThis.WritableObservableValue_Int = et;
-  globalThis.MutableWritableObservableValue_Int = $$er12;
-  $$D = e.WritableObservableValue_String_Internal;
-  globalThis.WritableObservableValue_String = en;
-  globalThis.MutableWritableObservableValue_String = $$ei9;
-  k = e.ObservableValue_Json_Internal;
-  globalThis.ObservableValue_Json = ea;
-  globalThis.MutableObservableValue_Json = $$es14;
-  M = e.ObservableValue_Int_Internal;
-  globalThis.ObservableValue_Int = eo;
-  globalThis.MutableObservableValue_Int = $$el30;
-  F = e.WritableObservableValue_Optional_String_Internal;
-  globalThis.WritableObservableValue_Optional_String = ed;
-  globalThis.MutableWritableObservableValue_Optional_String = $$ec28;
-  j = e.WritableObservableValue_Float_Internal;
-  globalThis.WritableObservableValue_Float = eu;
-  globalThis.MutableWritableObservableValue_Float = $$ep19;
-  U = e.WritableObservableValue_Array_String_Internal;
-  globalThis.WritableObservableValue_Array_String = e_;
-  globalThis.MutableWritableObservableValue_Array_String = $$eh10;
-  B = e.ObservableValue_Double_Internal;
-  globalThis.ObservableValue_Double = em;
-  globalThis.MutableObservableValue_Double = $$eg17;
-  G = e.ObservableValue_Map_String_Int_Internal;
-  globalThis.ObservableValue_Map_String_Int = ef;
-  globalThis.MutableObservableValue_Map_String_Int = $$eE8;
+  bindings = e.Bindings
+  CorePerfInfo = e.CorePerfInfo
+  globalThis.CorePerfInfo = CorePerfInfo
+  perfTimerFrameManagerBindings = e.PerfTimerFrameManagerBindings
+  featureFlagsCppApi = e.FeatureFlagsCppApi
+  fullscreenOptimizationExposureLoggingBinding = e.FullscreenOptimizationExposureLoggingBinding
+  observableValue_Map_Int_AutoLayoutShortcutHint__Internal = e.ObservableValue_Map_Int_AutoLayoutShortcutHint__Internal
+  globalThis.ObservableValue_Map_Int_AutoLayoutShortcutHint_ = ObservableValue_Map_Int_AutoLayoutShortcutHint_
+  globalThis.MutableObservableValue_Map_Int_AutoLayoutShortcutHint_ = MutableObservableValue_Map_Int_AutoLayoutShortcutHint_
+  weakHandleHelpers = e.WeakHandleHelpers
+  webAsyncCallback = e.WebAsyncCallback
+  performanceEventCounters = e.PerformanceEventCounters
+  deprecatedXHRBindings = e.DeprecatedXHRBindings
+  writableObservableValue_Bool_Internal = e.WritableObservableValue_Bool_Internal
+  globalThis.WritableObservableValue_Bool = WritableObservableValue_Bool
+  globalThis.MutableWritableObservableValue_Bool = MutableWritableObservableValue_Bool
+  observableValue_Array_Bool_Internal = e.ObservableValue_Array_Bool_Internal
+  globalThis.ObservableValue_Array_Bool = ObservableValue_Array_Bool
+  globalThis.MutableObservableValue_Array_Bool = MutableObservableValue_Array_Bool
+  observableValue_Bool_Internal = e.ObservableValue_Bool_Internal
+  globalThis.ObservableValue_Bool = ObservableValue_Bool
+  globalThis.MutableObservableValue_Bool = MutableObservableValue_Bool
+  observableValue_Float_Internal = e.ObservableValue_Float_Internal
+  globalThis.ObservableValue_Float = ObservableValue_Float
+  globalThis.MutableObservableValue_Float = MutableObservableValue_Float
+  writableObservableValue_Double_Internal = e.WritableObservableValue_Double_Internal
+  globalThis.WritableObservableValue_Double = WritableObservableValue_Double
+  globalThis.MutableWritableObservableValue_Double = MutableWritableObservableValue_Double
+  writableObservableValue_Int_Internal = e.WritableObservableValue_Int_Internal
+  globalThis.WritableObservableValue_Int = WritableObservableValue_Int
+  globalThis.MutableWritableObservableValue_Int = MutableWritableObservableValue_Int
+  writableObservableValue_String_Internal = e.WritableObservableValue_String_Internal
+  globalThis.WritableObservableValue_String = WritableObservableValue_String
+  globalThis.MutableWritableObservableValue_String = MutableWritableObservableValue_String
+  observableValue_Json_Internal = e.ObservableValue_Json_Internal
+  globalThis.ObservableValue_Json = ObservableValue_Json
+  globalThis.MutableObservableValue_Json = MutableObservableValue_Json
+  observableValue_Int_Internal = e.ObservableValue_Int_Internal
+  globalThis.ObservableValue_Int = ObservableValue_Int
+  globalThis.MutableObservableValue_Int = MutableObservableValue_Int
+  writableObservableValue_Optional_String_Internal = e.WritableObservableValue_Optional_String_Internal
+  globalThis.WritableObservableValue_Optional_String = WritableObservableValue_Optional_String
+  globalThis.MutableWritableObservableValue_Optional_String = MutableWritableObservableValue_Optional_String
+  writableObservableValue_Float_Internal = e.WritableObservableValue_Float_Internal
+  globalThis.WritableObservableValue_Float = WritableObservableValue_Float
+  globalThis.MutableWritableObservableValue_Float = MutableWritableObservableValue_Float
+  writableObservableValue_Array_String_Internal = e.WritableObservableValue_Array_String_Internal
+  globalThis.WritableObservableValue_Array_String = WritableObservableValue_Array_String
+  globalThis.MutableWritableObservableValue_Array_String = MutableWritableObservableValue_Array_String
+  observableValue_Double_Internal = e.ObservableValue_Double_Internal
+  globalThis.ObservableValue_Double = ObservableValue_Double
+  globalThis.MutableObservableValue_Double = MutableObservableValue_Double
+  observableValue_Map_String_Int_Internal = e.ObservableValue_Map_String_Int_Internal
+  globalThis.ObservableValue_Map_String_Int = ObservableValue_Map_String_Int
+  globalThis.MutableObservableValue_Map_String_Int = MutableObservableValue_Map_String_Int
 }
 export function $$eb7() {
   return {
-    bindings: $$E27,
-    corePerfInfo: $$y26,
-    perfTimerFrameManagerBindings: $$b25,
-    featureFlagsCppApi: T,
-    fullscreenOptimizationExposureLoggingBinding: $$I1,
-    weakHandleHelpers: $$v29,
-    webAsyncCallback: $$A16,
-    performanceEventCounters: $$x21,
-    deprecatedXHRBindings: $$N13,
-    observableValue_Map_Int_AutoLayoutShortcutHint__Internal: S,
-    writableObservableValue_Bool_Internal: C,
-    observableValue_Array_Bool_Internal: w,
-    observableValue_Bool_Internal: O,
-    observableValue_Float_Internal: R,
-    writableObservableValue_Double_Internal: L,
-    writableObservableValue_Int_Internal: P,
-    writableObservableValue_String_Internal: $$D,
-    observableValue_Json_Internal: k,
-    observableValue_Int_Internal: M,
-    writableObservableValue_Optional_String_Internal: F,
-    writableObservableValue_Float_Internal: j,
-    writableObservableValue_Array_String_Internal: U,
-    observableValue_Double_Internal: B,
-    observableValue_Map_String_Int_Internal: G
-  };
+    bindings,
+    corePerfInfo: CorePerfInfo,
+    perfTimerFrameManagerBindings,
+    featureFlagsCppApi,
+    fullscreenOptimizationExposureLoggingBinding,
+    weakHandleHelpers,
+    webAsyncCallback,
+    performanceEventCounters,
+    deprecatedXHRBindings,
+    observableValue_Map_Int_AutoLayoutShortcutHint__Internal,
+    writableObservableValue_Bool_Internal,
+    observableValue_Array_Bool_Internal,
+    observableValue_Bool_Internal,
+    observableValue_Float_Internal,
+    writableObservableValue_Double_Internal,
+    writableObservableValue_Int_Internal,
+    writableObservableValue_String_Internal,
+    observableValue_Json_Internal,
+    observableValue_Int_Internal,
+    writableObservableValue_Optional_String_Internal,
+    writableObservableValue_Float_Internal,
+    writableObservableValue_Array_String_Internal,
+    observableValue_Double_Internal,
+    observableValue_Map_String_Int_Internal,
+  }
 }
-!function (e) {
-  e[e.LEGACY = 0] = "LEGACY";
-  e[e.DEFAULT = 1] = "DEFAULT";
-  e[e.MERGE_MODAL = 2] = "MERGE_MODAL";
-  e[e.RECOVERY = 3] = "RECOVERY";
-  e[e.MAXIMUM = 4] = "MAXIMUM";
-}($$n33 || ($$n33 = {}));
-(function (e) {
-  e[e.IMAGE = 0] = "IMAGE";
-  e[e.RENDERER = 1] = "RENDERER";
-  e[e.JS = 2] = "JS";
-})($$i20 || ($$i20 = {}));
-(function (e) {
-  e[e.BUFFER = 0] = "BUFFER";
-})(a || (a = {}));
-(function (e) {
-  e[e.TEXTURE = 0] = "TEXTURE";
-  e[e.VERTEX_BUFFER = 1] = "VERTEX_BUFFER";
-  e[e.INDEX_BUFFER = 2] = "INDEX_BUFFER";
-  e[e.RENDERBUFFER = 3] = "RENDERBUFFER";
-  e[e.UNIFORM_BUFFER = 4] = "UNIFORM_BUFFER";
-})(s || (s = {}));
-(function (e) {
-  e[e.COMPRESSED = 0] = "COMPRESSED";
-  e[e.BUFFER = 1] = "BUFFER";
-  e[e.BITMAP = 2] = "BITMAP";
-})($$o24 || ($$o24 = {}));
-(function (e) {
-  e[e.BACKBUFFER = 0] = "BACKBUFFER";
-  e[e.EYEDROPPER_BACKBUFFER_COPY = 1] = "EYEDROPPER_BACKBUFFER_COPY";
-  e[e.EXPORT = 2] = "EXPORT";
-  e[e.GLYPH_DATA = 3] = "GLYPH_DATA";
-  e[e.GRADIENT = 4] = "GRADIENT";
-  e[e.IMAGE = 5] = "IMAGE";
-  e[e.OVERLAY_IMAGE = 6] = "OVERLAY_IMAGE";
-  e[e.OVERLAY_NINE_GRID = 7] = "OVERLAY_NINE_GRID";
-  e[e.OVERLAY_TEXT = 8] = "OVERLAY_TEXT";
-  e[e.OVERLAY_TILE = 9] = "OVERLAY_TILE";
-  e[e.SINGLE_PIXEL_TEXTURE = 10] = "SINGLE_PIXEL_TEXTURE";
-  e[e.SWAP_CHAIN = 11] = "SWAP_CHAIN";
-  e[e.TEST = 12] = "TEST";
-  e[e.TILE_ATLAS = 13] = "TILE_ATLAS";
-  e[e.TILE_STACK = 14] = "TILE_STACK";
-  e[e.STENCIL = 15] = "STENCIL";
-  e[e.CHROME_HACK = 16] = "CHROME_HACK";
-})($$l22 || ($$l22 = {}));
-(function (e) {
-  e[e.FULLSCREEN = 0] = "FULLSCREEN";
-  e[e.NON_FULLSCREEN = 1] = "NON_FULLSCREEN";
-})($$d18 || ($$d18 = {}));
-(function (e) {
-  e[e.IGNORE_AUTOLAYOUT = 0] = "IGNORE_AUTOLAYOUT";
-  e[e.FORCE_INSERTION = 1] = "FORCE_INSERTION";
-  e[e.PREVENT_NESTING = 2] = "PREVENT_NESTING";
-})($$c31 || ($$c31 = {}));
-(function (e) {
-  e[e.None = 0] = "None";
-  e[e.WebGL1 = 1] = "WebGL1";
-  e[e.WebGL2 = 2] = "WebGL2";
-  e[e.WebGPU = 3] = "WebGPU";
-})($$u35 || ($$u35 = {}));
-(function (e) {
-  e[e.LOW = 0] = "LOW";
-  e[e.HIGH = 1] = "HIGH";
-})($$p3 || ($$p3 = {}));
-(function (e) {
-  e[e.GL_VERTEX_BUFFER_FAILURE = 0] = "GL_VERTEX_BUFFER_FAILURE";
-  e[e.GL_TEXTURE_FAILURE = 1] = "GL_TEXTURE_FAILURE";
-  e[e.GL_RENDERBUFFER_FAILURE = 2] = "GL_RENDERBUFFER_FAILURE";
-  e[e.GL_UNIFORM_BUFFER_FAILURE = 3] = "GL_UNIFORM_BUFFER_FAILURE";
-  e[e.GL_INDEX_BUFFER_FAILURE = 4] = "GL_INDEX_BUFFER_FAILURE";
-  e[e.WASM_FAILURE = 100] = "WASM_FAILURE";
-})($$_5 || ($$_5 = {}));
-(function (e) {
-  e[e.GENERIC = 0] = "GENERIC";
-})(h || (h = {}));
-(function (e) {
-  e[e.DEFAULT = 0] = "DEFAULT";
-  e[e.ALWAYS = 1] = "ALWAYS";
-  e[e.NEVER = 2] = "NEVER";
-})($$m11 || ($$m11 = {}));
-(function (e) {
-  e[e.AFTER_INITIAL_JOIN_END = 0] = "AFTER_INITIAL_JOIN_END";
-  e[e.AFTER_FIRST_RENDER = 1] = "AFTER_FIRST_RENDER";
-  e[e.DOCUMENT_STARTED_SAVING = 2] = "DOCUMENT_STARTED_SAVING";
-  e[e.DOCUMENT_FINISHED_SAVING = 3] = "DOCUMENT_FINISHED_SAVING";
-})($$g32 || ($$g32 = {}));
-(function (e) {
-  e[e.NONE = 0] = "NONE";
-  e[e.FAST = 1] = "FAST";
-  e[e.DEFAULT = 6] = "DEFAULT";
-  e[e.BEST = 9] = "BEST";
-})($$f34 || ($$f34 = {}));
-export const AH = $$$0;
-export const Ai = $$I1;
-export const D = $$ee2;
-export const D2 = $$p3;
-export const Ej = $$Z4;
-export const HT = $$_5;
-export const IQ = $$q6;
-export const KO = $$eb7;
-export const KT = $$eE8;
-export const LQ = $$ei9;
-export const Lp = $$eh10;
-export const NU = $$m11;
-export const P0 = $$er12;
-export const Qt = $$N13;
-export const S_ = $$es14;
-export const U0 = $$z15;
-export const Un = $$A16;
-export const Vt = $$eg17;
-export const Xp = $$d18;
-export const YL = $$ep19;
-export const YO = $$i20;
-export const Yy = $$x21;
-export const aD = $$l22;
-export const cc = $$ey23;
-export const fL = $$o24;
-export const fZ = $$b25;
-export const hM = $$y26;
-export const jW = $$E27;
-export const md = $$ec28;
-export const mo = $$v29;
-export const nK = $$el30;
-export const oe = $$c31;
-export const r = $$g32;
-export const rC = $$n33;
-export const uP = $$f34;
-export const w$ = $$u35;
-export const yB = $$K36;
+export const AH = MutableObservableValue_Array_Bool
+export const Ai = fullscreenOptimizationExposureLoggingBinding
+export const D = MutableWritableObservableValue_Double
+export const D2 = $$p3
+export const Ej = MutableObservableValue_Float
+export const HT = $$_5
+export const IQ = MutableObservableValue_Bool
+export const KO = $$eb7
+export const KT = MutableObservableValue_Map_String_Int
+export const LQ = MutableWritableObservableValue_String
+export const Lp = MutableWritableObservableValue_Array_String
+export const NU = $$m11
+export const P0 = MutableWritableObservableValue_Int
+export const Qt = deprecatedXHRBindings
+export const S_ = MutableObservableValue_Json
+export const U0 = MutableObservableValue_Map_Int_AutoLayoutShortcutHint_
+export const Un = webAsyncCallback
+export const Vt = MutableObservableValue_Double
+export const Xp = $$d18
+export const YL = MutableWritableObservableValue_Float
+export const YO = $$i20
+export const Yy = performanceEventCounters
+export const aD = $$l22
+export const cc = $$ey23
+export const fL = $$o24
+export const fZ = perfTimerFrameManagerBindings
+export const hM = CorePerfInfo
+export const jW = bindings
+export const md = MutableWritableObservableValue_Optional_String
+export const mo = weakHandleHelpers
+export const nK = MutableObservableValue_Int
+export const oe = $$c31
+export const r = $$g32
+export const rC = $$n33
+export const uP = $$f34
+export const w$ = $$u35
+export const yB = MutableWritableObservableValue_Bool
+export enum $$n33 {
+  LEGACY = 0,
+  DEFAULT = 1,
+  MERGE_MODAL = 2,
+  RECOVERY = 3,
+  MAXIMUM = 4,
+}
+export enum $$i20 {
+  IMAGE = 0,
+  RENDERER = 1,
+  JS = 2,
+}
+export enum a {
+  BUFFER = 0,
+}
+export enum s {
+  TEXTURE = 0,
+  VERTEX_BUFFER = 1,
+  INDEX_BUFFER = 2,
+  RENDERBUFFER = 3,
+  UNIFORM_BUFFER = 4,
+}
+export enum $$o24 {
+  COMPRESSED = 0,
+  BUFFER = 1,
+  BITMAP = 2,
+}
+export enum $$l22 {
+  BACKBUFFER = 0,
+  EYEDROPPER_BACKBUFFER_COPY = 1,
+  EXPORT = 2,
+  GLYPH_DATA = 3,
+  GRADIENT = 4,
+  IMAGE = 5,
+  OVERLAY_IMAGE = 6,
+  OVERLAY_NINE_GRID = 7,
+  OVERLAY_TEXT = 8,
+  OVERLAY_TILE = 9,
+  SINGLE_PIXEL_TEXTURE = 10,
+  SWAP_CHAIN = 11,
+  TEST = 12,
+  TILE_ATLAS = 13,
+  TILE_STACK = 14,
+  STENCIL = 15,
+  CHROME_HACK = 16,
+}
+export enum $$d18 {
+  FULLSCREEN = 0,
+  NON_FULLSCREEN = 1,
+}
+export enum $$c31 {
+  IGNORE_AUTOLAYOUT = 0,
+  FORCE_INSERTION = 1,
+  PREVENT_NESTING = 2,
+}
+export enum $$u35 {
+  None = 0,
+  WebGL1 = 1,
+  WebGL2 = 2,
+  WebGPU = 3,
+}
+export enum $$p3 {
+  LOW = 0,
+  HIGH = 1,
+}
+export enum $$_5 {
+  GL_VERTEX_BUFFER_FAILURE = 0,
+  GL_TEXTURE_FAILURE = 1,
+  GL_RENDERBUFFER_FAILURE = 2,
+  GL_UNIFORM_BUFFER_FAILURE = 3,
+  GL_INDEX_BUFFER_FAILURE = 4,
+  WASM_FAILURE = 100,
+}
+export enum h {
+  GENERIC = 0,
+}
+export enum $$m11 {
+  DEFAULT = 0,
+  ALWAYS = 1,
+  NEVER = 2,
+}
+export enum $$g32 {
+  AFTER_INITIAL_JOIN_END = 0,
+  AFTER_FIRST_RENDER = 1,
+  DOCUMENT_STARTED_SAVING = 2,
+  DOCUMENT_FINISHED_SAVING = 3,
+}
+export enum $$f34 {
+  NONE = 0,
+  FAST = 1,
+  DEFAULT = 6,
+  BEST = 9,
+}

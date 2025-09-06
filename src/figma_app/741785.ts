@@ -12,7 +12,7 @@ import { Pt } from "../figma_app/806412";
 import { D8 } from "../905/511649";
 import { Point } from "../905/736624";
 import { dP } from "../figma_app/119475";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { q } from "../905/113809";
 import { q as _$$q } from "../905/417424";
 import { A as _$$A } from "../905/713173";
@@ -165,7 +165,7 @@ function H({
     EQ(g.current, e, r, l ? "conditional" : "set_variable");
     a();
   }), [l, a, r]);
-  let R = useCallback(() => l ? _$$t("proto.expression_builder_entry.placeholder") : _$$t("proto.expression_builder.placeholder"), [l]);
+  let R = useCallback(() => l ? getI18nString("proto.expression_builder_entry.placeholder") : getI18nString("proto.expression_builder.placeholder"), [l]);
   return jsxs("div", {
     className: Zh,
     children: [jsx(Ao, {
@@ -251,7 +251,7 @@ export function $$z2({
     [g6]: A,
     [_i]: !0
   });
-  let P = A ? _$$t("proto.expression_builder_entry.placeholder_ui3_lhs") : x ? _$$t("proto.expression_builder_entry.placeholder_ui3_rhs") : _$$t("proto.expression_builder_entry.placeholder");
+  let P = A ? getI18nString("proto.expression_builder_entry.placeholder_ui3_lhs") : x ? getI18nString("proto.expression_builder_entry.placeholder_ui3_rhs") : getI18nString("proto.expression_builder_entry.placeholder");
   return jsx(D8, {
     onClick: r,
     recordingKey: Pt(a, "openExpressionBuilder"),
@@ -306,7 +306,7 @@ export function $$z2({
         }, t);
       }), R && jsx("span", {
         className: a7,
-        children: g ? _$$t("fullscreen.mixed") : _ ? P : _$$t("proto.expression_builder.placeholder")
+        children: g ? getI18nString("fullscreen.mixed") : _ ? P : getI18nString("proto.expression_builder.placeholder")
       })]
     })
   });
@@ -318,7 +318,7 @@ function W({
   disableHover: i
 }) {
   let a = _$$u(e);
-  let s = a ? B9(a.name) : _$$t("proto.expression_builder_entry.missing");
+  let s = a ? B9(a.name) : getI18nString("proto.expression_builder_entry.missing");
   let o = G6(a?.variableSetId);
   let l = o && t ? o.modes.find(e => e.id === t) : null;
   let d = l?.name;
@@ -340,7 +340,7 @@ function K({
   let a = aA(e, t);
   let s = a && r ? Xx(a.varValue.resolvedType) : null;
   return jsx(wG, {
-    text: a ? a.name : _$$t("proto.expression_builder_entry.missing"),
+    text: a ? a.name : getI18nString("proto.expression_builder_entry.missing"),
     colorTheme: J2.COMPONENT,
     thumbnailValue: s,
     isDeleted: !1,

@@ -7,15 +7,15 @@ import { useSelector, useDispatch, connect, useStore } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { RYP, H4l, ywP, NUh, Ez5, oeV, uQ6, glU, Z_n, rXF, OmW, NLJ, CWU, rrT, NVY, _4o, Z6A, iCO, Qej, NfO, _0v, bQY, FAf, w3z, SES, VDs, aTn, XpX, nQ7, h3O, kul, Oin, W8Y, Pt4 } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { md, eU as _$$eU, Xr, zl, fp } from "../figma_app/27355";
-import { R as _$$R } from "../905/103090";
+import { useAtomWithSubscription, atom, Xr, atomStoreManager, useAtomValueAndSetter } from "../figma_app/27355";
+import { selectWithShallowEqual } from "../905/103090";
 import { H4 } from "../905/992467";
 import { Rs } from "../figma_app/288654";
 import { oA as _$$oA } from "../905/723791";
 import { Z1 } from "../figma_app/253220";
-import { Ay, KR, rr as _$$rr } from "../figma_app/778880";
+import { BrowserInfo, isFigmaMobileApp, isMobileUA } from "../figma_app/778880";
 import { tH as _$$tH, H4 as _$$H } from "../905/751457";
-import { t as _$$t, tx as _$$tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { fk } from "../figma_app/618433";
 import { e as _$$e } from "../905/383776";
@@ -25,7 +25,7 @@ import { r as _$$r } from "../figma_app/968727";
 import { au as _$$au, $c, H1, D6 } from "../figma_app/124493";
 import { Dm, K9, wi, ku, t4 as _$$t2, Rb, W_, LO, SA, bx, d2, Z7, DT, i as _$$i, Sl, WJ, AM, XX, si as _$$si, U3, kX, OI, J7, V6, Zn, s9 as _$$s2, jQ, Vx, Vl, C9 } from "../figma_app/8833";
 import { Y5 } from "../figma_app/455680";
-import { ED, xi, x1 } from "../905/714362";
+import { logDebug, logWarning, logError } from "../905/714362";
 import { ap as _$$ap } from "../figma_app/149304";
 import { EC } from "../figma_app/291892";
 import { D as _$$D } from "../905/629114";
@@ -44,7 +44,7 @@ import { WP } from "../905/198599";
 import { I as _$$I } from "../figma_app/827540";
 import { Jc, Sn } from "../905/946805";
 import { Lk, dd, Bu, Rt } from "../figma_app/604494";
-import { nT as _$$nT, oD as _$$oD, wN } from "../figma_app/53721";
+import { FEditorType, mapEditorTypeToFileType, mapFileTypeToEditorType } from "../figma_app/53721";
 import { Yh, c1, TY, jv } from "../figma_app/357047";
 import { X as _$$X } from "../1250/995935";
 import { Y as _$$Y } from "../1250/745256";
@@ -83,7 +83,7 @@ import { W as _$$W2 } from "../905/909715";
 import { E as _$$E } from "../905/632989";
 import { Pw, $n } from "../905/521428";
 import { S as _$$S2 } from "../905/274480";
-import { sx as _$$sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Av, Pg } from "../905/149328";
 import { Point } from "../905/736624";
 import { P as _$$P } from "../905/347284";
@@ -131,7 +131,7 @@ import { J as _$$J2 } from "../905/129695";
 import { V as _$$V } from "../905/106549";
 import { useLocalStorageSync } from "../905/657224";
 import { U as _$$U } from "../905/707331";
-import { eD as _$$eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { Dk } from "../figma_app/623293";
 import { fo, o6 as _$$o, cZ, C0, Z7 as _$$Z, Pt, aH as _$$aH, of as _$$of, AF, v_, rf as _$$rf } from "../figma_app/806412";
 import { zX, Rw } from "../905/576487";
@@ -152,7 +152,7 @@ import { ZX } from "../9410/747144";
 import { Q as _$$Q, e as _$$e2 } from "../figma_app/320600";
 import { op as _$$op, $1, cW, Be, NU, qr, ZT, Tg, BE, x as _$$x, QZ, V2 } from "../figma_app/844435";
 import { ServiceCategories as _$$e3 } from "../905/165054";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { v as _$$v } from "../905/266815";
 import { _I, U4, tn as _$$tn, xo } from "../figma_app/473493";
 import { U as _$$U2, am as _$$am } from "../figma_app/901889";
@@ -321,7 +321,7 @@ import { mH, a8 as _$$a3 } from "../figma_app/467440";
 import { XC } from "../figma_app/631279";
 import { CR } from "../figma_app/234505";
 import { O as _$$O4, S as _$$S5 } from "../figma_app/568977";
-import { sn as _$$sn } from "../905/542194";
+import { globalPerfTimer } from "../905/542194";
 import { yZ } from "../905/407352";
 import { DP } from "../905/640017";
 import { v9 } from "../figma_app/623300";
@@ -331,7 +331,7 @@ import { g as _$$g4 } from "../905/880308";
 import { ry as _$$ry } from "../9410/534867";
 import { c2 } from "../905/382883";
 import { F as _$$F3 } from "../905/680873";
-import { PN } from "../figma_app/257275";
+import { isInteractionOrEvalMode } from "../figma_app/897289";
 import { VU } from "../905/625959";
 import { jr, W0 } from "../figma_app/896988";
 import { R as _$$R4 } from "../figma_app/612938";
@@ -381,7 +381,7 @@ class O {
   static getCanvasColorSpace(e = {}) {
     let t = dX("fullscreen");
     let i = t?.getContext(_$$ap() ? "webgl2" : "webgl")?.drawingBufferColorSpace;
-    if ("srgb" === i) ;else if ("display-p3" === i) return e.returnString ? RYP[RYP.DISPLAY_P3] : RYP.DISPLAY_P3;
+    if ("srgb" === i); else if ("display-p3" === i) return e.returnString ? RYP[RYP.DISPLAY_P3] : RYP.DISPLAY_P3;
     return e.returnString ? RYP[RYP.SRGB] : RYP.SRGB;
   }
   static setCanvasColorSpace(e) {
@@ -397,7 +397,7 @@ class O {
     async function e(e) {
       for (let t of ["image/png", "image/jpeg", "image/heic"]) try {
         return await EC.decodeAsync(e, t, 0, 0, !0);
-      } catch (e) {}
+      } catch (e) { }
       return null;
     }
     let t = _$$D();
@@ -418,7 +418,7 @@ class O {
               colorProfile: RYP[l.colorProfile],
               bytes: s
             };
-            ED("ColorManagementDebug", "images", e, {
+            logDebug("ColorManagementDebug", "images", e, {
               logToConsole: NUh.ALWAYS
             });
           }
@@ -440,7 +440,7 @@ class O {
               colorProfile: RYP[l.colorProfile],
               bytes: s
             };
-            ED("ColorManagementDebug", "images", e, {
+            logDebug("ColorManagementDebug", "images", e, {
               logToConsole: NUh.ALWAYS
             });
           }
@@ -459,7 +459,7 @@ function J() {
   let {
     Sprig
   } = useSprigWithSampling();
-  let t = md(Lk);
+  let t = useAtomWithSubscription(Lk);
   let i = _$$I();
   let {
     loaded,
@@ -469,9 +469,9 @@ function J() {
     let [e, t] = useState(!1);
     let {
       currentSearch
-    } = md(WP);
-    let r = md(hO.currentSearchAtom);
-    let a = md(dd);
+    } = useAtomWithSubscription(WP);
+    let r = useAtomWithSubscription(hO.currentSearchAtom);
+    let a = useAtomWithSubscription(dd);
     useEffect(() => {
       let e = currentSearch?.result.status === "loaded";
       let n = r?.result.status === "loaded";
@@ -540,23 +540,23 @@ let en = _$$A2.createLazyComponent(() => Promise.all([]).then(_require2).then(e 
 var el = eo;
 function eu() {
   let e = Array.from(ut(Ez5?.uiState().autoLayoutShortcutHints, new Map()).values());
-  let t = md(Bu);
+  let t = useAtomWithSubscription(Bu);
   let i = _$$y2.isApple();
   let n = e => {
     switch (e) {
       case oeV.IGNORE_AUTOLAYOUT:
         return {
-          displayName: _$$t("fullscreen.auto_layout_hints.ignore_auto_layout"),
+          displayName: getI18nString("fullscreen.auto_layout_hints.ignore_auto_layout"),
           shortcutText: i ? "\u2303 Ctrl" : "S"
         };
       case oeV.PREVENT_NESTING:
         return {
-          displayName: _$$t("fullscreen.auto_layout_hints.prevent_nesting"),
-          shortcutText: _$$t("fullscreen.auto_layout_hints.space_key")
+          displayName: getI18nString("fullscreen.auto_layout_hints.prevent_nesting"),
+          shortcutText: getI18nString("fullscreen.auto_layout_hints.space_key")
         };
       case oeV.FORCE_INSERTION:
         return {
-          displayName: _$$t("fullscreen.auto_layout_hints.force_insertion"),
+          displayName: getI18nString("fullscreen.auto_layout_hints.force_insertion"),
           shortcutText: i ? "\u2318" : "Ctrl"
         };
     }
@@ -601,7 +601,7 @@ let eh = {
   repositionViewportOnCommentSelection: !1,
   orphanedBy: "deleted_pages"
 };
-let ew = _$$eU(new Map());
+let ew = atom(new Map());
 let eS = parsePxNumber(LdP);
 function ej({
   children: e
@@ -676,13 +676,13 @@ function ej({
   let g = useCallback(e => {
     let t = u(e);
     let i = s.get(t);
-    return void 0 !== i && t !== AD ? _$$t("comments.asset_number", {
+    return void 0 !== i && t !== AD ? getI18nString("comments.asset_number", {
       orderNum: i + 1
     }) : e.pageName;
   }, [u, s]);
   let x = useMemo(() => !!t, [t]);
   let y = useCallback(e => {
-    if (!t) return () => {};
+    if (!t) return () => { };
     let i = u(e);
     return i !== AD ? () => {
       f(i);
@@ -840,7 +840,7 @@ function eM({
       commentPositionPaddingAdjustment: f,
       linkGenerationParams: eD,
       isCommentingDisabledAtPosition: g,
-      commentDisabledPositionBellMessage: _$$t("dev_handoff.workflows.focus_view.comments")
+      commentDisabledPositionBellMessage: getI18nString("dev_handoff.workflows.focus_view.comments")
     };
     i && (e.filterBy = "non_dev_mode_focus");
     return e;
@@ -887,7 +887,7 @@ function eK({
     };
   }, [t]);
   let u = useCallback(() => {
-    _$$W("left", () => {});
+    _$$W("left", () => { });
   }, []);
   let p = useMemo(() => ({
     showNotificationSettings: !0,
@@ -914,7 +914,7 @@ function ez({
 }) {
   let t = useSelector(e => e.selectedView.editorType);
   let i = useMemo(() => {
-    if (window.FigmaMobile) return t === _$$nT.Whiteboard ? function ({
+    if (window.FigmaMobile) return t === FEditorType.Whiteboard ? function ({
       children: e
     }) {
       return jsx(_$$a.Provider, {
@@ -930,15 +930,15 @@ function ez({
       });
     };
     switch (t) {
-      case _$$nT.Design:
+      case FEditorType.Design:
         return eO;
-      case _$$nT.Whiteboard:
+      case FEditorType.Whiteboard:
         return eK;
-      case _$$nT.Slides:
+      case FEditorType.Slides:
         return Yz;
-      case _$$nT.DevHandoff:
+      case FEditorType.DevHandoff:
         return eM;
-      case _$$nT.Cooper:
+      case FEditorType.Cooper:
         return ej;
       default:
         return function ({
@@ -1085,7 +1085,7 @@ function tS() {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$t("fullscreen.properties_panel.export")
+          children: getI18nString("fullscreen.properties_panel.export")
         })
       }), jsx(_$$nB, {
         padding: 0,
@@ -1093,7 +1093,7 @@ function tS() {
       })]
     })
   }) : jsx(Ao, {
-    title: _$$t("fullscreen.properties_panel.export"),
+    title: getI18nString("fullscreen.properties_panel.export"),
     headerSize: "small",
     initialPosition: h,
     onClose: p,
@@ -1170,7 +1170,7 @@ function tI({
     className: "export_picker--row--lVRtp",
     children: [jsx(_$$h, {
       htmlFor: E,
-      children: _$$t("fullscreen.export.select_for_export")
+      children: getI18nString("fullscreen.export.select_for_export")
     }), jsx(_$$W2, {
       id: E,
       checked: isChecked,
@@ -1187,7 +1187,7 @@ function tI({
         "data-tooltip-type": Ib.TEXT,
         "data-tooltip": i
       },
-      "aria-label": _$$t("fullscreen.export.view_selection_on_canvas"),
+      "aria-label": getI18nString("fullscreen.export.view_selection_on_canvas"),
       "aria-describedby": S,
       children: !!p && jsx("img", {
         src: p,
@@ -1251,7 +1251,7 @@ class tk extends PureComponent {
       this.props.exports.items.forEach(t => {
         e.includes(t.nodeID) && (t.isBeingRenamed = !0);
       });
-      zl.set(zF, Tr(uQ6.EXPORT_PICKER));
+      atomStoreManager.set(zF, Tr(uQ6.EXPORT_PICKER));
       B3(JT.AUTO_RENAME_LAYERS);
       await Ag(JT.AUTO_RENAME_LAYERS, _$$Ay, {
         source: uQ6.EXPORT_PICKER,
@@ -1289,7 +1289,7 @@ class tk extends PureComponent {
       _$$nP(t);
     };
     this.onExport = e => {
-      if (this.props.isCopyExportRestricted || (_$$sx("Export Picker Exported"), this.state.downloadStarted || this.state.exportingStarted || this.isExporting() || 0 === e.length)) return;
+      if (this.props.isCopyExportRestricted || (trackEventAnalytics("Export Picker Exported"), this.state.downloadStarted || this.state.exportingStarted || this.isExporting() || 0 === e.length)) return;
       let t = [this.props.currentPage];
       xY.includeOutsideContents(e.map(e => e.exportSetting)) || (t = e.map(e => e.nodeID));
       this.setState({
@@ -1364,9 +1364,9 @@ class tk extends PureComponent {
         variant: "secondary",
         onClick: a,
         disabled: s,
-        children: this.state.renamingLayersRunning ? _$$tx("fullscreen.export.cancel") : jsxs("div", {
+        children: this.state.renamingLayersRunning ? renderI18nText("fullscreen.export.cancel") : jsxs("div", {
           className: _$$s3.flex.flexRow.justifyCenter.gap8.$,
-          children: [_$$tx("fullscreen.context_menu.auto_rename_layers"), jsx(_$$y4, {
+          children: [renderI18nText("fullscreen.context_menu.auto_rename_layers"), jsx(_$$y4, {
             helpUrlVariant: JT.AUTO_RENAME_LAYERS
           })]
         })
@@ -1387,21 +1387,21 @@ class tk extends PureComponent {
       className: tv,
       children: [jsx("label", {
         className: tE,
-        children: _$$tx("fullscreen.export.preparing_exporting_progress_of_exporting_total", {
+        children: renderI18nText("fullscreen.export.preparing_exporting_progress_of_exporting_total", {
           exportingProgress: this.state.exportingProgress,
           exportingTotal: this.state.exportingTotal
         })
       }), jsx($n, {
         variant: "secondary",
         onClick: this.onCancel,
-        children: _$$tx("fullscreen.export.cancel")
+        children: renderI18nText("fullscreen.export.cancel")
       })]
     });
     if (this.state.exportingStarted || !this.props.saveAsState.startTime && this.state.downloadStarted) return jsx("div", {
       className: tv,
       children: jsx("label", {
         className: tE,
-        children: _$$tx("fullscreen.export.exporting")
+        children: renderI18nText("fullscreen.export.exporting")
       })
     });
     if (this.state.downloadStarted) {
@@ -1409,7 +1409,7 @@ class tk extends PureComponent {
         className: tv,
         children: jsx("label", {
           className: tE,
-          children: _$$tx("fullscreen.export.downloading")
+          children: renderI18nText("fullscreen.export.downloading")
         })
       });
       {
@@ -1418,14 +1418,14 @@ class tk extends PureComponent {
           className: tv,
           children: [jsx("label", {
             className: tE,
-            children: _$$tx("fullscreen.export.downloading_progress", {
+            children: renderI18nText("fullscreen.export.downloading_progress", {
               downloadingProgress: e,
               downloadingTotal: this.props.saveAsState.totalImagesToDownload
             })
           }), jsx($n, {
             variant: "secondary",
             onClick: this.onCancel,
-            children: _$$tx("fullscreen.export.cancel")
+            children: renderI18nText("fullscreen.export.cancel")
           })]
         });
       }
@@ -1442,7 +1442,7 @@ class tk extends PureComponent {
           mixed: !n && t > 0,
           onChange: () => this.setAllChecked(!n),
           label: jsx(_$$J, {
-            children: _$$tx("fullscreen.export.num_selected_of_total_selected", {
+            children: renderI18nText("fullscreen.export.num_selected_of_total_selected", {
               numSelected: t,
               total: i
             })
@@ -1454,7 +1454,7 @@ class tk extends PureComponent {
             disabled: !t,
             onClick: () => this.onExport(this.getItemsToExport()),
             autoFocus: !0,
-            children: _$$tx("fullscreen.export.export")
+            children: renderI18nText("fullscreen.export.export")
           })
         })]
       });
@@ -1471,7 +1471,7 @@ class tk extends PureComponent {
           className: "export_picker--scrollContainer--F9sI6",
           children: [!e && jsx("div", {
             className: "export_picker--emptyModal--x2aqt",
-            children: _$$tx("fullscreen.export.no_selected_layers_with_export")
+            children: renderI18nText("fullscreen.export.no_selected_layers_with_export")
           }), jsx(ZH, {
             children: ({
               documentExportColorProfile: i
@@ -1575,18 +1575,18 @@ function tW({
     shouldUseEyedropperStyleCreationFlow: !0
   }) : null;
 }
-let t5 = _$$eU(!1);
+let t5 = atom(!1);
 class ir extends Component {
   static getDerivedStateFromError(e) {
     return {};
   }
   componentDidCatch(e, t) {
-    if (isErrorCausedByWindowClose(e)) xi("FloatingWindowErrorBoundary", "Ignoring IPC error", {
+    if (isErrorCausedByWindowClose(e)) logWarning("FloatingWindowErrorBoundary", "Ignoring IPC error", {
       error: e,
       errorInfo: t
     }, {
       reportAsSentryError: !1
-    });else throw e;
+    }); else throw e;
   }
   render() {
     return this.props.children;
@@ -1601,7 +1601,7 @@ function ia({
   onChangePosition: s,
   hidden: o
 }) {
-  if (!_$$eD || !_$$eD.isFloatingWindowAvailable()) throw Error("DesktopFloatingWindow: rendered with unsupported desktop app version");
+  if (!desktopAPIInstance || !desktopAPIInstance.isFloatingWindowAvailable()) throw Error("DesktopFloatingWindow: rendered with unsupported desktop app version");
   let [l, d] = useState(null);
   let c = useRef(l);
   let u = useRef(t);
@@ -1625,7 +1625,7 @@ function ia({
     null != m.current && (e += `,${m.current}`);
     let t = window.open("about:blank", "_blank", e);
     if (null == t) {
-      x1("DesktopFloatingWindow", "Unable to open floating window");
+      logError("DesktopFloatingWindow", "Unable to open floating window");
       return null;
     }
     t.document.body.style.overflow = "hidden";
@@ -1852,7 +1852,7 @@ function ib({
   let c = function () {
     let e = useSelector(e => e.eyedropper);
     let t = useSelector(e => e.library.local.styles);
-    let i = md(Cg);
+    let i = useAtomWithSubscription(Cg);
     let r = useSelector(e => e.library.used__LIVEGRAPH.styles);
     if (!e) return null;
     let n = e.assetId;
@@ -1911,10 +1911,10 @@ function ib({
   }();
   let h = E3();
   let m = Ep();
-  let g = md(wg);
-  let y = md(t5);
+  let g = useAtomWithSubscription(wg);
+  let y = useAtomWithSubscription(t5);
   let b = function () {
-    let e = md(_$$U);
+    let e = useAtomWithSubscription(_$$U);
     let [t, i] = useState(!0);
     useEffect(() => {
       let e = () => {
@@ -1990,8 +1990,8 @@ function ib({
   });
   let R = H0(b?.color ?? e.color) ?? UE;
   let D = H0(e.resolvedVariableColor) ?? UE;
-  let M = h === _$$nT.Whiteboard;
-  let P = h === _$$nT.DevHandoff;
+  let M = h === FEditorType.Whiteboard;
+  let P = h === FEditorType.DevHandoff;
   let F = c?.style ? c.style : void 0;
   let B = c?.variable ? c.variable : void 0;
   let U = !M && !P;
@@ -2020,14 +2020,14 @@ function ib({
   }), s = "eyedropper-v2-variable", V = [{
     key: "modifier-1",
     label: "shift"
-  }]) : U && C ? (e.dropperData.creationFlow === _4o.STYLES ? (z = _$$t("eyedropper.create_style"), i = jsx(_$$J2, {}), s = "eyedropper-v2-style-creation") : e.dropperData.creationFlow === _4o.VARIABLES && (z = _$$t("eyedropper.create_variable"), i = jsx(_$$J2, {}), s = "eyedropper-v2-variable-creation"), V = [{
+  }]) : U && C ? (e.dropperData.creationFlow === _4o.STYLES ? (z = getI18nString("eyedropper.create_style"), i = jsx(_$$J2, {}), s = "eyedropper-v2-style-creation") : e.dropperData.creationFlow === _4o.VARIABLES && (z = getI18nString("eyedropper.create_variable"), i = jsx(_$$J2, {}), s = "eyedropper-v2-variable-creation"), V = [{
     key: "modifier-1",
     label: "shift"
   }, {
     key: "modifier-2",
-    label: Ay.mac ? "\u2318" : "ctrl",
-    isMetaKey: Ay.mac
-  }]) : (z = K ? _$$t("eyedropper.click_to_copy") : _$$t("eyedropper.click_to_sample"), i = jsx(_$$V, {}));
+    label: BrowserInfo.mac ? "\u2318" : "ctrl",
+    isMetaKey: BrowserInfo.mac
+  }]) : (z = K ? getI18nString("eyedropper.click_to_copy") : getI18nString("eyedropper.click_to_sample"), i = jsx(_$$V, {}));
   let W = useCallback(() => {
     if (!j.current) return null;
     t(R, e);
@@ -2040,7 +2040,7 @@ function ib({
     "" === t && (t = A === NVY.HEX ? "hex" : _$$F2.format(A), i = H);
     Dk(i);
     u(_$$F.enqueue({
-      message: _$$t("visual_bell.copied_color_to_clipboard_figma_design", {
+      message: getI18nString("visual_bell.copied_color_to_clipboard_figma_design", {
         colorType: t
       }),
       count: i,
@@ -2080,13 +2080,13 @@ function ib({
     let {
       event
     } = e;
-    let i = Ay.mac ? event.metaKey : event.ctrlKey;
+    let i = BrowserInfo.mac ? event.metaKey : event.ctrlKey;
     "Tab" === event.key && (O(), e.accept());
     event.shiftKey && (F || B || !i || v(!0), (G && i || F || B) && (T(!0), e.accept()));
     "Enter" === event.key && j.current && (J("apply-eyedropper-with-keyboard", E), e.accept());
   }, [J, G, O, E, v, F, B]));
   let Q = useCallback(e => {
-    let t = Ay.mac ? e.metaKey : e.ctrlKey;
+    let t = BrowserInfo.mac ? e.metaKey : e.ctrlKey;
     (e.shiftKey || "Shift" !== e.key) && (!G || t || "Meta" !== e.key) || T(!1);
   }, [G]);
   let $ = useCallback(() => {
@@ -2106,7 +2106,7 @@ function ib({
     window.removeEventListener("mousedown", ee);
     window.removeEventListener("mousemove", et);
   }));
-  let ei = getFeatureFlags().desktop_floating_eyedropper && _$$eD?.isFloatingWindowAvailable();
+  let ei = getFeatureFlags().desktop_floating_eyedropper && desktopAPIInstance?.isFloatingWindowAvailable();
   let er = parsePxNumber(M ? tXK : k22);
   let en = (() => {
     let t;
@@ -2248,7 +2248,7 @@ function iw({
     appModel,
     sceneGraph,
     sceneGraphSelection
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     appModel: e.mirror.appModel,
     sceneGraph: e.mirror.sceneGraph,
     sceneGraphSelection: e.mirror.sceneGraphSelection
@@ -2308,7 +2308,7 @@ function iS({
     appModel,
     sceneGraph,
     sceneGraphSelection
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     appModel: e.mirror.appModel,
     sceneGraph: e.mirror.sceneGraph,
     sceneGraphSelection: e.mirror.sceneGraphSelection
@@ -2357,7 +2357,7 @@ function ij({
     appModel,
     sceneGraph,
     sceneGraphSelection
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     appModel: e.mirror.appModel,
     sceneGraph: e.mirror.sceneGraph,
     sceneGraphSelection: e.mirror.sceneGraphSelection
@@ -2437,22 +2437,22 @@ function iO(e) {
           let r = URL.createObjectURL(i);
           let n = document.createElement("a");
           n.href = r;
-          n.download = _$$t("comments.attachment_default_name", {
+          n.download = getI18nString("comments.attachment_default_name", {
             fileExtension: i.type.split("/")[1]
           });
           n.click();
           URL.revokeObjectURL(r);
-          _$$sx("Comment Attachment Download Success", iA(e.attachment));
+          trackEventAnalytics("Comment Attachment Download Success", iA(e.attachment));
           t(_$$F.enqueue({
-            message: _$$t("comments.download_attachment_success"),
+            message: getI18nString("comments.download_attachment_success"),
             type: "attachment-download"
           }));
         });
       } catch (i) {
-        _$$sx("Comment Attachment Download Failure", iA(e.attachment));
-        $D(_$$e3.FEEDBACK, i);
+        trackEventAnalytics("Comment Attachment Download Failure", iA(e.attachment));
+        reportError(_$$e3.FEEDBACK, i);
         t(_$$F.enqueue({
-          message: _$$t("comments.download_attachment_error"),
+          message: getI18nString("comments.download_attachment_error"),
           type: "attachment-download",
           error: !0
         }));
@@ -2462,7 +2462,7 @@ function iO(e) {
     name: "copy-attachment",
     callback: async () => {
       t(_$$F.enqueue({
-        message: _$$t("comments.copying_attachment"),
+        message: getI18nString("comments.copying_attachment"),
         type: "copy-attachment",
         icon: zX.SPINNER
       }));
@@ -2472,18 +2472,18 @@ function iO(e) {
             [i.type]: i
           });
           await navigator.clipboard.write([r]).then(() => {
-            _$$sx("Comment Attachment Copy Success", iA(e.attachment));
+            trackEventAnalytics("Comment Attachment Copy Success", iA(e.attachment));
             t(_$$F.enqueue({
-              message: _$$t("comments.copy_attachment_success"),
+              message: getI18nString("comments.copy_attachment_success"),
               type: "copy-attachment"
             }));
           });
         });
       } catch (i) {
-        _$$sx("Comment Attachment Copy Failure", iA(e.attachment));
-        $D(_$$e3.FEEDBACK, i);
+        trackEventAnalytics("Comment Attachment Copy Failure", iA(e.attachment));
+        reportError(_$$e3.FEEDBACK, i);
         t(_$$F.enqueue({
-          message: _$$t("comments.copy_attachment_error"),
+          message: getI18nString("comments.copy_attachment_error"),
           type: "copy-attachment",
           error: !0
         }));
@@ -2549,19 +2549,19 @@ function iG({
 function iK() {
   return jsx(iG, {
     entryPoint: "design_section_status",
-    children: _$$tx("dev_handoff.paywall.ready_for_dev.upsell")
+    children: renderI18nText("dev_handoff.paywall.ready_for_dev.upsell")
   });
 }
 function iH() {
   return jsx(iG, {
     entryPoint: "design_copy_as_code",
-    children: _$$tx("dev_handoff.paywall.codegen.upsell")
+    children: renderI18nText("dev_handoff.paywall.codegen.upsell")
   });
 }
 function iz() {
   return jsx(iG, {
     entryPoint: "design_annotations",
-    children: _$$tx("dev_handoff.paywall.annotations.upsell")
+    children: renderI18nText("dev_handoff.paywall.annotations.upsell")
   });
 }
 function iV({
@@ -2591,12 +2591,12 @@ function iV({
         style: {
           "--color-icon": "var(--color-text-menu-secondary)"
         }
-      }), _$$tx("dev_handoff.paywall.annotations.double_click_hint")]
+      }), renderI18nText("dev_handoff.paywall.annotations.double_click_hint")]
     }),
     optionHeight: 32
   }] : p ? [{
     header: !0,
-    name: _$$t("dev_handoff.annotation.number_annotations", {
+    name: getI18nString("dev_handoff.annotation.number_annotations", {
       count: t
     })
   }, {
@@ -2607,7 +2607,7 @@ function iV({
     flags: ["design"]
   }] : [{
     header: !0,
-    name: _$$t("dev_handoff.annotation.number_annotations", {
+    name: getI18nString("dev_handoff.annotation.number_annotations", {
       count: t
     })
   }];
@@ -2694,7 +2694,7 @@ function iq(e) {
   }));
   u.push({
     action: "toggle-show-comments",
-    displayText: _$$t("fullscreen.context_menu.hide_comments")
+    displayText: getI18nString("fullscreen.context_menu.hide_comments")
   });
   let p = u.filter(e => e).map(e => e);
   let h = {
@@ -2725,9 +2725,9 @@ async function rt({
     return null;
   }
   i(_$$n2.set({
-    message: _$$t("whiteboard.figjam_export.exporting"),
+    message: getI18nString("whiteboard.figjam_export.exporting"),
     showLoadingSpinner: !0,
-    callback: () => {}
+    callback: () => { }
   }));
   let r = await w6({
     paint: e,
@@ -2748,7 +2748,7 @@ let ri = e => {
   document.body.removeChild(t);
 };
 let rr = e => {
-  $D(_$$e3.FIGJAM, Error(`Error exporting video: ${e}`));
+  reportError(_$$e3.FIGJAM, Error(`Error exporting video: ${e}`));
 };
 function ry(e) {
   return new URL(e).hostname.split(".").slice(-2).join(".");
@@ -2764,7 +2764,7 @@ function r$(e, t) {
   };
 }
 function r0(e) {
-  return !zl.get(Tm) && e;
+  return !atomStoreManager.get(Tm) && e;
 }
 function r8() {
   let e = Em();
@@ -2794,7 +2794,7 @@ let ne = {
     let o = r.fileVersion;
     let l = n.getCurrentPage()?.guid;
     if (!s || !o || !l || !a) {
-      x1("designToSites", "Unable to fetch required data to create a new Sites file", {
+      logError("designToSites", "Unable to fetch required data to create a new Sites file", {
         fileKey: s,
         fileVersion: o,
         pageGuid: l,
@@ -2803,13 +2803,13 @@ let ne = {
         reportAsSentryError: !0
       });
       _$$F.enqueue({
-        message: _$$t("selection_context_menu.error_creating_sites_file"),
+        message: getI18nString("selection_context_menu.error_creating_sites_file"),
         type: "design-to-sites-error",
         error: !0
       });
       return;
     }
-    let c = zl.set(me, {
+    let c = atomStoreManager.set(me, {
       fileKey: s,
       fileVersion: o,
       pageGuid: l,
@@ -2842,20 +2842,20 @@ class ni extends PureComponent {
     }] : [];
     let a = window.FigmaMobile;
     let s = nh(this.props.appModel.showComments, this.props.selectedView, this.props.viewportInfo, this.props.clientX, this.props.clientY, this.props.dispatch, a?.requestToAddDraftCommentPin);
-    let d = this.props.selectedView.editorType === _$$nT.Whiteboard;
-    let c = this.props.selectedView.editorType === _$$nT.Slides;
-    let u = this.props.selectedView.editorType === _$$nT.Sites;
-    let p = this.props.selectedView.editorType === _$$nT.Figmake;
-    let h = this.props.selectedView.editorType === _$$nT.Cooper;
+    let d = this.props.selectedView.editorType === FEditorType.Whiteboard;
+    let c = this.props.selectedView.editorType === FEditorType.Slides;
+    let u = this.props.selectedView.editorType === FEditorType.Sites;
+    let p = this.props.selectedView.editorType === FEditorType.Figmake;
+    let h = this.props.selectedView.editorType === FEditorType.Cooper;
     let m = $A(this.props.selectedView);
-    let g = Ay.windows ? "Ctrl+" : "\u2318";
+    let g = BrowserInfo.windows ? "Ctrl+" : "\u2318";
     let x = {
       action: "paste-here",
       flags: ["edit"],
-      displayText: d ? _$$t("fullscreen_actions.paste") : void 0,
+      displayText: d ? getI18nString("fullscreen_actions.paste") : void 0,
       shortcutText: d ? `${g}V` : void 0
     };
-    let y = !Ay.safari || a?.readClipboardData ? [x, d ? {
+    let y = !BrowserInfo.safari || a?.readClipboardData ? [x, d ? {
       separator: !0
     } : null] : [];
     let b = {
@@ -2901,12 +2901,12 @@ class ni extends PureComponent {
       action: "toggle-ui"
     }, {
       action: "toggle-show-comments",
-      displayText: _$$t("fullscreen.context_menu.show_hide_comments")
+      displayText: getI18nString("fullscreen.context_menu.show_hide_comments")
     }, ...(d || p ? [] : [{
       separator: !0
     }, b]), w || p ? null : {
       action: "toggle-menu",
-      displayText: gn() ? _$$t("fullscreen_actions.toggle-actions-menu") : _$$t("fullscreen_actions.toggle-menu")
+      displayText: gn() ? getI18nString("fullscreen_actions.toggle-actions-menu") : getI18nString("fullscreen_actions.toggle-menu")
     }, !this.props.userCanViewPlugins || u && !getFeatureFlags().sites_plugin_api || h && !getFeatureFlags().buzz_plugins || p ? null : qz({
       ...this.props,
       isReadOnly: this.props.appModel.isReadOnly
@@ -2930,7 +2930,7 @@ class ni extends PureComponent {
     return jsx("div", {
       className: `${Dm}`,
       children: jsx(_$$Q, {
-        allowCodegenOptions: this.props.selectedView.editorType === _$$nT.Design,
+        allowCodegenOptions: this.props.selectedView.editorType === FEditorType.Design,
         appModel: this.props.appModel,
         "aria-labelledby": this.props.ariaLabelledBy,
         dispatch: this.props.dispatch,
@@ -3041,7 +3041,7 @@ let ns = class e extends PureComponent {
           },
           action: "select-node",
           source: "canvas_context_menu",
-          displayText: _$$t("fullscreen_actions.select-node", {
+          displayText: getI18nString("fullscreen_actions.select-node", {
             name: e.name ?? ""
           }),
           onMouseEnter: () => this.objectsListMouseEnter(t),
@@ -3067,7 +3067,7 @@ let ns = class e extends PureComponent {
           name: i.name
         },
         action: "page-move-to",
-        displayText: _$$t("fullscreen_actions.page-move-to", {
+        displayText: getI18nString("fullscreen_actions.page-move-to", {
           name: i.name ?? ""
         })
       }));
@@ -3110,7 +3110,7 @@ let ns = class e extends PureComponent {
       recordingKey: t,
       dispatch: this.props.dispatch,
       depth: 0,
-      onSelectItem: () => {}
+      onSelectItem: () => { }
     };
   }
   getHyperlinkUnderCursor() {
@@ -3143,7 +3143,7 @@ let ns = class e extends PureComponent {
     return {
       name: e ? "clear-favicon" : "set-favicon",
       args: {
-        label: e ? _$$t("fullscreen_actions.clear_favicon") : _$$t("fullscreen_actions.set_as_favicon")
+        label: e ? getI18nString("fullscreen_actions.clear_favicon") : getI18nString("fullscreen_actions.set_as_favicon")
       },
       flags: ["edit", "!slides", "sites"],
       featureFlags: ["sites"],
@@ -3162,9 +3162,9 @@ let ns = class e extends PureComponent {
     return {
       name: getFeatureFlags().dse_library_pg_thumbnails ? Y5.getFileThumbnailMenuItemName() : Y5.getThumbnailMenuItemName(),
       args: getFeatureFlags().dse_library_pg_thumbnails ? {
-        label: e ? _$$t("fullscreen_actions.restore_default_file_thumbnail") : _$$t("fullscreen_actions.set_as_file_thumbnail")
+        label: e ? getI18nString("fullscreen_actions.restore_default_file_thumbnail") : getI18nString("fullscreen_actions.set_as_file_thumbnail")
       } : {
-        label: e ? _$$t("fullscreen_actions.restore_default_thumbnail") : _$$t("fullscreen_actions.set_as_thumbnail")
+        label: e ? getI18nString("fullscreen_actions.restore_default_thumbnail") : getI18nString("fullscreen_actions.set_as_thumbnail")
       },
       flags: ["edit", "!slides"],
       callback: () => {
@@ -3192,41 +3192,41 @@ let ns = class e extends PureComponent {
     return this.props.widgetSelectionInfo?.pluginID === _$$k3.EMBED_WIDGET && this.props.embedData && (this.props.embedData.url || this.props.embedData.srcUrl) || this.props.widgetSelectionInfo?.pluginID === _$$k3.LINK_PREVIEW_WIDGET && this.props.linkPreviewData && this.props.linkPreviewData.url;
   }
   isFigjam() {
-    return "fullscreen" === this.props.selectedView.view && this.props.selectedView.editorType === _$$nT.Whiteboard;
+    return "fullscreen" === this.props.selectedView.view && this.props.selectedView.editorType === FEditorType.Whiteboard;
   }
   getCopyLinkMenu() {
     let e = this.selectedEmbedOrLinkPreviewHasValidUrl() ? "FigJam" : "";
     return {
       name: "copy-link",
       args: {
-        label: _$$t("fullscreen.context_menu.copy_link", {
+        label: getI18nString("fullscreen.context_menu.copy_link", {
           editorSpecifierString: e
         })
       },
       displayText: this.isFigjam() && this.state.nodeTypeForCopyLinkText ? function (e) {
         switch (e) {
           case Z6A.STICKY:
-            return _$$t("fullscreen_actions.copy-link-to-sticky");
+            return getI18nString("fullscreen_actions.copy-link-to-sticky");
           case Z6A.CONNECTOR:
-            return _$$t("fullscreen_actions.copy-link-to-connector");
+            return getI18nString("fullscreen_actions.copy-link-to-connector");
           case Z6A.WIDGET:
-            return _$$t("fullscreen_actions.copy-link-to-widget");
+            return getI18nString("fullscreen_actions.copy-link-to-widget");
           case Z6A.STAMP:
-            return _$$t("fullscreen_actions.copy-link-to-stamp");
+            return getI18nString("fullscreen_actions.copy-link-to-stamp");
           case Z6A.SECTION:
-            return _$$t("fullscreen_actions.copy-link-to-section");
+            return getI18nString("fullscreen_actions.copy-link-to-section");
           case Z6A.TEXT:
-            return _$$t("fullscreen_actions.copy-link-to-text");
+            return getI18nString("fullscreen_actions.copy-link-to-text");
           case Z6A.TABLE:
-            return _$$t("fullscreen_actions.copy-link-to-table");
+            return getI18nString("fullscreen_actions.copy-link-to-table");
           case Z6A.WASHI_TAPE:
-            return _$$t("fullscreen_actions.copy-link-to-washi-tape");
+            return getI18nString("fullscreen_actions.copy-link-to-washi-tape");
           case Z6A.SHAPE_WITH_TEXT:
-            return _$$t("fullscreen_actions.copy-link-to-shape");
+            return getI18nString("fullscreen_actions.copy-link-to-shape");
           case Z6A.INSTANCE:
-            return _$$t("fullscreen_actions.copy-link-to-instance");
+            return getI18nString("fullscreen_actions.copy-link-to-instance");
           default:
-            return _$$t("fullscreen_actions.copy-link-to-this");
+            return getI18nString("fullscreen_actions.copy-link-to-this");
         }
       }(this.state.nodeTypeForCopyLinkText) : void 0,
       callback: () => {
@@ -3253,13 +3253,13 @@ let ns = class e extends PureComponent {
           let t = getSingletonSceneGraph().get(this.getSelectionGuid());
           e = t ? t.name : this.props.openFile.name;
         }
-        s && zl.set(ui, c ?? null);
+        s && atomStoreManager.set(ui, c ?? null);
         let p = (() => {
           if (s) return {
             visualBellTypeOverride: xp,
             visualBellMessageComponentKeyOverride: Rw.DESIGN_LINTER_COPY_SELECTION,
             visualBellButton: {
-              text: _$$t("fullscreen_actions.quick_actions.detect-violations"),
+              text: getI18nString("fullscreen_actions.quick_actions.detect-violations"),
               action: () => {
                 _$$u({
                   source: Qej.COPY_SELECTION_TOAST
@@ -3267,41 +3267,41 @@ let ns = class e extends PureComponent {
               }
             },
             visualBellExtras: {
-              onDismiss: () => {}
+              onDismiss: () => { }
             }
           };
           if (this.isFigjam() && this.state.nodeTypeForCopyLinkText) return {
             visualBellMessageOverride: function (e) {
               switch (e) {
                 case Z6A.STICKY:
-                  return _$$t("visual_bell.copy_link_to_sticky");
+                  return getI18nString("visual_bell.copy_link_to_sticky");
                 case Z6A.CONNECTOR:
-                  return _$$t("visual_bell.copy_link_to_connector");
+                  return getI18nString("visual_bell.copy_link_to_connector");
                 case Z6A.WIDGET:
-                  return _$$t("visual_bell.copy_link_to_widget");
+                  return getI18nString("visual_bell.copy_link_to_widget");
                 case Z6A.STAMP:
-                  return _$$t("visual_bell.copy_link_to_stamp");
+                  return getI18nString("visual_bell.copy_link_to_stamp");
                 case Z6A.SECTION:
-                  return _$$t("visual_bell.copy_link_to_section");
+                  return getI18nString("visual_bell.copy_link_to_section");
                 case Z6A.TEXT:
-                  return _$$t("visual_bell.copy_link_to_text");
+                  return getI18nString("visual_bell.copy_link_to_text");
                 case Z6A.TABLE:
-                  return _$$t("visual_bell.copy_link_to_table");
+                  return getI18nString("visual_bell.copy_link_to_table");
                 case Z6A.WASHI_TAPE:
-                  return _$$t("visual_bell.copy_link_to_washi_tape");
+                  return getI18nString("visual_bell.copy_link_to_washi_tape");
                 case Z6A.SHAPE_WITH_TEXT:
-                  return _$$t("visual_bell.copy_link_to_shape");
+                  return getI18nString("visual_bell.copy_link_to_shape");
                 case Z6A.INSTANCE:
-                  return _$$t("visual_bell.copy_link_to_instance");
+                  return getI18nString("visual_bell.copy_link_to_instance");
                 default:
-                  return _$$t("visual_bell.copy_link");
+                  return getI18nString("visual_bell.copy_link");
               }
             }(this.state.nodeTypeForCopyLinkText)
           };
           if (n && c) {
             let e = getSingletonSceneGraph().get(c);
             if (e) return {
-              visualBellMessageOverride: _$$t("copy_to_clipboard.slides.link_to_slide_copied_to_clipboard", {
+              visualBellMessageOverride: getI18nString("copy_to_clipboard.slides.link_to_slide_copied_to_clipboard", {
                 name: e.name
               })
             };
@@ -3336,33 +3336,33 @@ let ns = class e extends PureComponent {
       if (e.startsWith("mailto:")) {
         let t = e.substring(7);
         if (t) return {
-          displayText: _$$t("fullscreen_actions.copy-email", {
+          displayText: getI18nString("fullscreen_actions.copy-email", {
             email: t
           }),
           linkToCopy: t,
-          visualBellText: _$$t("visual_bell.copy_email", {
+          visualBellText: getI18nString("visual_bell.copy_email", {
             email: t
           })
         };
       } else if (e.startsWith("tel:")) {
         let t = e.substring(4);
         if (t) return {
-          displayText: _$$t("fullscreen_actions.copy-phone", {
+          displayText: getI18nString("fullscreen_actions.copy-phone", {
             number: t
           }),
           linkToCopy: t,
-          visualBellText: _$$t("visual_bell.copy_phone", {
+          visualBellText: getI18nString("visual_bell.copy_phone", {
             number: t
           })
         };
       } else {
         let t = ry(e);
         if (t) return {
-          displayText: _$$t("fullscreen_actions.copy-hyperlink", {
+          displayText: getI18nString("fullscreen_actions.copy-hyperlink", {
             hyperlink: t
           }),
           linkToCopy: e,
-          visualBellText: _$$t("visual_bell.copy_hyperlink", {
+          visualBellText: getI18nString("visual_bell.copy_hyperlink", {
             hyperlink: t
           })
         };
@@ -3398,7 +3398,7 @@ let ns = class e extends PureComponent {
     return {
       name: "labeled-menu-item",
       args: {
-        label: _$$t("fullscreen_actions.copy-hyperlink", {
+        label: getI18nString("fullscreen_actions.copy-hyperlink", {
           hyperlink: t
         })
       },
@@ -3409,7 +3409,7 @@ let ns = class e extends PureComponent {
           Rm(yc.COPY_LINK, i);
           e(_$$F.enqueue({
             type: "copy-preview",
-            message: _$$t("visual_bell.copy_hyperlink", {
+            message: getI18nString("visual_bell.copy_hyperlink", {
               hyperlink: ry(i)
             }),
             error: !1
@@ -3438,7 +3438,7 @@ let ns = class e extends PureComponent {
       action: "export-selected-video",
       flags: ["view_restricted", "whiteboard"],
       platforms: ["!ipad"],
-      displayText: _$$t("fullscreen.context_menu.export_selected_video"),
+      displayText: getI18nString("fullscreen.context_menu.export_selected_video"),
       callback: (i, r, n) => {
         rt({
           paint: e,
@@ -3465,7 +3465,7 @@ let ns = class e extends PureComponent {
     } : null;
   }
   getFigJamRemovePluginActionsMenu() {
-    if (this.props.selectedView.editorType === _$$nT.Design) return null;
+    if (this.props.selectedView.editorType === FEditorType.Design) return null;
     let t = e => this.props.dispatch(_$$af({
       id: e,
       resourceType: bD.PLUGIN
@@ -3589,7 +3589,7 @@ let ns = class e extends PureComponent {
   getCopyPasteMenu() {
     let e;
     let t = window.FigmaMobile;
-    let i = !Ay.safari || !!t?.readClipboardData;
+    let i = !BrowserInfo.safari || !!t?.readClipboardData;
     let n = !this.props.isObjectsPanelMenu && !this.props.isSingleSlideViewCarousel && !this.props.isBuzzCarousel && i;
     let a = this.props.isTextEditModeMenu;
     let s = P5();
@@ -3628,31 +3628,31 @@ let ns = class e extends PureComponent {
       action: "paste-properties",
       flags: ["edit"]
     }];
-    let h = Ay.windows ? "Ctrl+" : "\u2318";
+    let h = BrowserInfo.windows ? "Ctrl+" : "\u2318";
     switch (this.props.selectedView.editorType) {
-      case _$$nT.Design:
-      case _$$nT.Illustration:
-      case _$$nT.Figmake:
-      case _$$nT.Sites:
-      case _$$nT.Slides:
-      case _$$nT.Cooper:
+      case FEditorType.Design:
+      case FEditorType.Illustration:
+      case FEditorType.Figmake:
+      case FEditorType.Sites:
+      case FEditorType.Slides:
+      case FEditorType.Cooper:
         e = [navigator.clipboard && navigator.clipboard.write ? {
           action: "copy",
           shortcutText: `${h}C`
         } : null, n ? {
           action: "paste-here",
           flags: ["edit"],
-          displayText: _$$t("fullscreen_actions.paste-here"),
+          displayText: getI18nString("fullscreen_actions.paste-here"),
           shortcutText: a ? `${h}V` : void 0
         } : this.props.isSingleSlideViewCarousel ? {
           action: "paste",
           flags: ["edit"],
-          displayText: _$$t("fullscreen_actions.paste"),
+          displayText: getI18nString("fullscreen_actions.paste"),
           shortcutText: `${h}V`
         } : null, i ? {
           action: "paste-to-replace",
           flags: ["edit"],
-          displayText: a ? _$$t("fullscreen_actions.paste-and-match-style") : void 0,
+          displayText: a ? getI18nString("fullscreen_actions.paste-and-match-style") : void 0,
           shortcutText: a ? `${h}\u21E7V` : void 0
         } : null, {
           action: "copy-paste-menu",
@@ -3665,7 +3665,7 @@ let ns = class e extends PureComponent {
         }, {
           action: "duplicate-in-place",
           flags: ["edit", "slides", "cooper"],
-          displayText: _$$t("fullscreen_actions.duplicate-in-place"),
+          displayText: getI18nString("fullscreen_actions.duplicate-in-place"),
           shortcutText: `${h}D`
         }, c ? _$$V2 : null, u ? {
           action: "send-selection-to-buzz-from-design",
@@ -3684,7 +3684,7 @@ let ns = class e extends PureComponent {
           flags: ["!slides", "!cooper"]
         } : null];
         break;
-      case _$$nT.DevHandoff:
+      case FEditorType.DevHandoff:
         e = [navigator.clipboard && navigator.clipboard.write ? {
           action: "copy",
           shortcutText: `${h}C`
@@ -3705,12 +3705,12 @@ let ns = class e extends PureComponent {
         } : null, n ? {
           action: "paste",
           flags: ["edit"],
-          displayText: _$$t("fullscreen_actions.paste"),
+          displayText: getI18nString("fullscreen_actions.paste"),
           shortcutText: `${h}V`
         } : null, i ? {
           action: "paste-to-replace",
           flags: ["edit"],
-          displayText: _$$t("fullscreen_actions.paste-to-replace")
+          displayText: getI18nString("fullscreen_actions.paste-to-replace")
         } : null];
     }
     return e;
@@ -3721,7 +3721,7 @@ let ns = class e extends PureComponent {
     }, {
       action: "export-selection-or-current-page",
       flags: ["view_restricted", "whiteboard"],
-      displayText: _$$t("fullscreen.context_menu.export_selection")
+      displayText: getI18nString("fullscreen.context_menu.export_selection")
     }, this.getExportVideo()];
   }
   rulerGuideMenu(e, t) {
@@ -3734,7 +3734,7 @@ let ns = class e extends PureComponent {
       separator: !0
     }, {
       action: i,
-      displayText: _$$t("fullscreen.ruler_guide_context_menu.hide_rulers"),
+      displayText: getI18nString("fullscreen.ruler_guide_context_menu.hide_rulers"),
       shortcutText: c1(this.props.appModel.keyboardShortcuts, i)
     }, ...this.getRulerUnitSubmenu()];
     let n = [{
@@ -3863,12 +3863,12 @@ let ns = class e extends PureComponent {
       relatedStateMenu
     } = this.state;
     let n = this.props.appModel;
-    let a = this.props.selectedView.editorType === _$$nT.Design;
-    let s = this.props.selectedView.editorType === _$$nT.Slides;
+    let a = this.props.selectedView.editorType === FEditorType.Design;
+    let s = this.props.selectedView.editorType === FEditorType.Slides;
     let d = Vj(this.props.selectedView);
-    let c = this.props.selectedView.editorType === _$$nT.Figmake;
-    let u = this.props.selectedView.editorType === _$$nT.Cooper;
-    let p = this.props.selectedView.editorType === _$$nT.Illustration;
+    let c = this.props.selectedView.editorType === FEditorType.Figmake;
+    let u = this.props.selectedView.editorType === FEditorType.Cooper;
+    let p = this.props.selectedView.editorType === FEditorType.Illustration;
     let h = (a || d || c || p) && Yh(this.props.appModel, "select-node-menu") && !this.props.isObjectsPanelMenu && objectItems.length > 1;
     let m = this.props.isObjectsPanelMenu;
     let f = m && this.props.hasAIPermission && Ii();
@@ -3961,15 +3961,15 @@ let ns = class e extends PureComponent {
     }, {
       action: "ungroup-selection",
       flags: ["edit"],
-      displayText: _$$t("fullscreen.context_menu.ungroup")
+      displayText: getI18nString("fullscreen.context_menu.ungroup")
     }, m ? {
       action: "rename-selection",
       flags: ["edit"],
-      displayText: _$$t("fullscreen.context_menu.rename")
+      displayText: getI18nString("fullscreen.context_menu.rename")
     } : null, f ? {
       name: "auto-rename-layers",
       flags: ["edit"],
-      displayText: _$$t("fullscreen.context_menu.auto_rename_layers"),
+      displayText: getI18nString("fullscreen.context_menu.auto_rename_layers"),
       rightIcon: jsx(_$$y4, {
         variant: _$$x3.ON_MENU,
         helpUrlVariant: JT.AUTO_RENAME_LAYERS
@@ -3998,15 +3998,15 @@ let ns = class e extends PureComponent {
     } : null, {
       action: "flatten-selection",
       flags: ["edit"],
-      displayText: _$$t("fullscreen.context_menu.flatten")
+      displayText: getI18nString("fullscreen.context_menu.flatten")
     }, {
       action: "break-vector-network-into-paths",
       flags: ["edit"],
-      displayText: getFeatureFlags().ce_il_var_width_strings ? _$$t("fullscreen_actions.split_vector") : _$$t("fullscreen_actions.break-vector-network-into-paths")
+      displayText: getFeatureFlags().ce_il_var_width_strings ? getI18nString("fullscreen_actions.split_vector") : getI18nString("fullscreen_actions.break-vector-network-into-paths")
     }, p ? {
       action: "add-transform-modifier-to-selection",
       flags: ["edit"],
-      displayText: _$$t("fullscreen.context_menu.wrap_with_transform")
+      displayText: getI18nString("fullscreen.context_menu.wrap_with_transform")
     } : null, {
       action: "outline-stroke",
       flags: ["edit"],
@@ -4021,7 +4021,7 @@ let ns = class e extends PureComponent {
     }, p ? {
       action: "create-brush-menu",
       flags: ["edit"],
-      displayText: _$$t("fullscreen_actions.create-brush-menu"),
+      displayText: getI18nString("fullscreen_actions.create-brush-menu"),
       children: [{
         action: "create-stretch-brush"
       }, {
@@ -4031,7 +4031,7 @@ let ns = class e extends PureComponent {
     } : null, {
       action: "set-as-primary-breakpoint",
       flags: ["edit"],
-      displayText: _$$t("fullscreen_actions.set-as-primary-breakpoint")
+      displayText: getI18nString("fullscreen_actions.set-as-primary-breakpoint")
     }, this.props.canSetAsFavicon && !this.props.appModel.isReadOnly ? this.getFaviconMenu(this.getSelectionGuid() === this.props.sceneGraph.getCurrentPage()?.responsiveSetSettings?.faviconID) : null, this.props.canSetAsFileThumbnail && !this.props.appModel.isReadOnly ? this.getFileThumbnailMenu(this.getSelectionGuid() === this.props.openFile?.thumbnailGuid) : null, getFeatureFlags().dse_library_pg_thumbnails && this.props.canSetAsPageThumbnail && !this.props.appModel.isReadOnly ? this.getPageThumbnailMenu() : null, {
       separator: !0
     }, {
@@ -4057,7 +4057,7 @@ let ns = class e extends PureComponent {
       action: "create-make-from-design",
       flags: ["edit", "design"],
       featureFlags: ["bake_canvas"],
-      displayText: _$$t("fullscreen_actions.create-make-prototype")
+      displayText: getI18nString("fullscreen_actions.create-make-prototype")
     }, {
       action: "edit-code",
       flags: ["edit", "sites"],
@@ -4109,11 +4109,11 @@ let ns = class e extends PureComponent {
     }, {
       action: "toggle-shown-for-selected-nodes",
       flags: ["edit"],
-      displayText: _$$t("fullscreen.context_menu.show_hide")
+      displayText: getI18nString("fullscreen.context_menu.show_hide")
     }, {
       action: "toggle-locked-for-selected-nodes",
       flags: ["edit"],
-      displayText: _$$t("fullscreen.context_menu.lock_unlock")
+      displayText: getI18nString("fullscreen.context_menu.lock_unlock")
     }, {
       action: "unlock-all",
       flags: ["edit", "whiteboard"]
@@ -4131,7 +4131,7 @@ let ns = class e extends PureComponent {
       action: "remove-annotations",
       flags: ["dev_handoff", "design"]
     }, {
-      displayText: _$$t("dev_handoff.layers.add_annotation"),
+      displayText: getI18nString("dev_handoff.layers.add_annotation"),
       flags: ["design"],
       action: "add-annotation"
     }, {
@@ -4204,7 +4204,7 @@ function nl(e) {
   let m = h.orgPlugins;
   let f = _$$h2("plugin");
   let g = J2(UK().spellCheckPreference);
-  let _ = _$$R(e => {
+  let _ = selectWithShallowEqual(e => {
     let t = Object.keys(e.mirror.sceneGraphSelection);
     let i = 1 === t.length ? getSingletonSceneGraph().get(t[0]) : null;
     let r = null != i && ("FRAME" === i.type && !i.resizeToFit || "SYMBOL" === i.type || "SECTION" === i.type || "RESPONSIVE_SET" === i.type || "WEBPAGE" === i.type);
@@ -4244,7 +4244,7 @@ function nl(e) {
       accessibilityLabelType: e.mirror.selectionProperties.accessibilityLabelType,
       attributionContextKey: e.sharingAttributionContextKey,
       editorType: a,
-      isDevHandoff: a === _$$nT.DevHandoff,
+      isDevHandoff: a === FEditorType.DevHandoff,
       isLimitedDevMode: $A(e.selectedView) && !_$$tn(e)
     };
   });
@@ -4298,7 +4298,7 @@ function nc(e) {
   let m = h.orgPlugins;
   let f = _$$h2("plugin");
   let g = J2(UK().spellCheckPreference);
-  let _ = _$$R(e => {
+  let _ = selectWithShallowEqual(e => {
     let t = Object.keys(e.mirror.sceneGraphSelection);
     let i = 1 === t.length ? getSingletonSceneGraph().get(t[0]) : null;
     let r = null != i && ("FRAME" === i.type && !i.resizeToFit || "SYMBOL" === i.type || "SECTION" === i.type);
@@ -4337,7 +4337,7 @@ function nc(e) {
       accessibilityLabelType: e.mirror.selectionProperties.accessibilityLabelType,
       attributionContextKey: e.sharingAttributionContextKey,
       editorType: n,
-      isDevHandoff: n === _$$nT.DevHandoff,
+      isDevHandoff: n === FEditorType.DevHandoff,
       isLimitedDevMode: $A(e.selectedView) && !_$$tn(e)
     };
   });
@@ -4389,7 +4389,7 @@ function nu({
   }, t);
   let p = _$$s4();
   let h = useDispatch();
-  let m = Ay.windows ? "Ctrl+" : "\u2318";
+  let m = BrowserInfo.windows ? "Ctrl+" : "\u2318";
   let g = [e ? {
     name: "expand-element",
     callback: e
@@ -4414,7 +4414,7 @@ function nu({
   }, c ? {
     name: "copy-link",
     args: {
-      label: _$$t("fullscreen.context_menu.copy_link", {
+      label: getI18nString("fullscreen.context_menu.copy_link", {
         editorSpecifierString: ""
       })
     },
@@ -4469,7 +4469,7 @@ function np({
   let i = useSelector(e => e.mirror.appModel);
   let n = useSelector(e => e.mirror.sceneGraph);
   let s = useDispatch();
-  let o = Ay.windows ? "Ctrl+" : "\u2318";
+  let o = BrowserInfo.windows ? "Ctrl+" : "\u2318";
   let l = [];
   navigator.clipboard && navigator.clipboard.write && l.push({
     name: "copy",
@@ -4504,7 +4504,7 @@ function np({
   });
 }
 function nh(e, t, i, r, n, a, s) {
-  return e && i && t.commentsEnabled && Ay.isIpadNative ? [{
+  return e && i && t.commentsEnabled && BrowserInfo.isIpadNative ? [{
     name: "add-comment",
     callback: () => {
       !function (e, t, i, r, n) {
@@ -4518,7 +4518,7 @@ function nh(e, t, i, r, n, a, s) {
           y: a.y,
           width: 36.8,
           height: 36.8
-        });else {
+        }); else {
           let t = $$(e, a);
           r(vV({
             anchorPosition: t
@@ -4558,9 +4558,9 @@ function nm(e, t) {
         },
         callback() {
           let e = pi({
-            editorType: _$$oD(t)
+            editorType: mapEditorTypeToFileType(t)
           });
-          _$$sx("Spell Check Suggestion Clicked", {
+          trackEventAnalytics("Spell Check Suggestion Clicked", {
             productType: e
           });
         }
@@ -4579,7 +4579,7 @@ function nm(e, t) {
     }] : [{
       header: !0,
       flags: nf,
-      name: _$$t("spell_check.no_suggestions_found")
+      name: getI18nString("spell_check.no_suggestions_found")
     }];
   }(e, t), {
     separator: !0
@@ -4595,14 +4595,14 @@ function nm(e, t) {
           let e = await Xw();
           await e.addWords([i]);
           Y5.triggerAction("redo-spell-checking");
-        } else x1("spell_check_add_word_error", "spell check add word failed http request", {
+        } else logError("spell_check_add_word_error", "spell check add word failed http request", {
           responseStatus: e.status,
           responseData: e.data
         }, {
           reportAsSentryError: !0
         });
       } catch (e) {
-        e.message.includes("The word provided already exists in your dictionary") || (_$$k2.error(e), x1("spell_check_add_word_error", "spell check add word error", {
+        e.message.includes("The word provided already exists in your dictionary") || (_$$k2.error(e), logError("spell_check_add_word_error", "spell check add word error", {
           err: e
         }, {
           reportAsSentryError: !0
@@ -4638,12 +4638,12 @@ function ny({
         isFigJam: !1,
         attributionContext: null
       }),
-      successText: _$$t("permissions.copy_link_button.visual_bell.copy_summary_link")
+      successText: getI18nString("permissions.copy_link_button.visual_bell.copy_summary_link")
     }));
   }, [s, l]);
   let c = [{
     name: "page-copy-link",
-    displayText: _$$t("dev_handoff.status.copy_summary_link"),
+    displayText: getI18nString("dev_handoff.status.copy_summary_link"),
     callback: d
   }];
   return jsx("div", {
@@ -4776,16 +4776,16 @@ function nk({
   }, [i]);
   KV(Qej.RFD_INITIAL_NUDGE, !0);
   let p = useMemo(() => [{
-    name: _$$t("dev_handoff.linter.menu_title_header"),
+    name: getI18nString("dev_handoff.linter.menu_title_header"),
     header: !0,
     displayTextClassName: _$$Ay3.props(nN.title, nN.header).className
   }, {
-    name: _$$t("dev_handoff.linter.menu_title_subheader"),
+    name: getI18nString("dev_handoff.linter.menu_title_subheader"),
     header: !0,
     displayTextClassName: _$$Ay3.props(nN.title, nN.subheader).className
   }, {
     render: () => jsx(nj, {
-      name: _$$t("fullscreen_actions.quick_actions.detect-violations"),
+      name: getI18nString("fullscreen_actions.quick_actions.detect-violations"),
       variant: "primary",
       recordingKey: "linterDetectViolations",
       onClick: u
@@ -4796,7 +4796,7 @@ function nk({
     disabled: !!c
   }, {
     render: () => jsx(nj, {
-      name: _$$t("dev_handoff.linter.menu_skip_button"),
+      name: getI18nString("dev_handoff.linter.menu_skip_button"),
       variant: "secondary",
       recordingKey: "skipLinting",
       onClick: () => i(_$$oB())
@@ -4869,11 +4869,11 @@ function nM() {
     lean: o ? "left" : "right"
   });
 }
-let nz = _$$eU("");
+let nz = atom("");
 function nV({
   onResult: e
 }) {
-  let [t, i] = fp(nz);
+  let [t, i] = useAtomValueAndSetter(nz);
   let [s, o] = useState(!1);
   let l = useRef(null);
   let c = useCallback(e => {
@@ -4918,7 +4918,7 @@ function nV({
           e.stopPropagation();
           "Enter" !== e.key || e.shiftKey || s || p();
         },
-        placeholder: _$$t("dev_handoff.status.menu_note_placeholder"),
+        placeholder: getI18nString("dev_handoff.status.menu_note_placeholder"),
         type: "textarea",
         value: t
       }), jsx(Ih, {
@@ -4926,7 +4926,7 @@ function nV({
         variant: "primary",
         onClick: p,
         recordingKey: "markReady",
-        children: _$$tx("dev_handoff.status.menu_note_button")
+        children: renderI18nText("dev_handoff.status.menu_note_button")
       })]
     })
   });
@@ -4958,7 +4958,7 @@ function nY({
   let N = qZ();
   let A = _$$U2();
   let O = E3();
-  let [, L] = fp(wz);
+  let [, L] = useAtomValueAndSetter(wz);
   let R = dh();
   let D = A0(uQ6.READY_FOR_DEV);
   let M = xo();
@@ -4966,9 +4966,9 @@ function nY({
   let F = w3z.canEditNodeStatus();
   let B = m0();
   let U = T && P && !E;
-  let G = _$$R(e => "fullscreen" === e.selectedView.view ? {
+  let G = selectWithShallowEqual(e => "fullscreen" === e.selectedView.view ? {
     ...e.selectedView,
-    editorType: _$$nT.DevHandoff,
+    editorType: FEditorType.DevHandoff,
     focusViewBackNavigation: {
       toEditorType: e.selectedView.editorType,
       toOverview: !1
@@ -5066,7 +5066,7 @@ function nY({
           nodeId: "devModeFocusId" in G ? G.devModeFocusId : ""
         });
         C("handoff");
-        L(O === _$$nT.DevHandoff ? "dev_mode_canvas" : "design_canvas");
+        L(O === FEditorType.DevHandoff ? "dev_mode_canvas" : "design_canvas");
         s(_$$sf(G));
       },
       flags: ["design", "dev_handoff"]
@@ -5083,7 +5083,7 @@ function nY({
     }, ...(U ? v : [])];
     return g ? x ? [{
       name: "completed-status-remark-as-ready",
-      displayText: f ? _$$t("dev_handoff.status.menu_title_design_changed_since_completed") : _$$t("dev_handoff.status.menu_title_design_changed_since_ready"),
+      displayText: f ? getI18nString("dev_handoff.status.menu_title_design_changed_since_completed") : getI18nString("dev_handoff.status.menu_title_design_changed_since_ready"),
       displayTextClassName: nW,
       children: P,
       showDotDotDotButton: !0
@@ -5102,7 +5102,7 @@ function nY({
       disabled: !!M
     }] : P : [{
       header: !0,
-      name: _$$t("dev_handoff.status.menu_title_start_handoff_title"),
+      name: getI18nString("dev_handoff.status.menu_title_start_handoff_title"),
       displayTextClassName: nW
     }, {
       render: () => jsx(nV, {
@@ -5145,7 +5145,7 @@ function nY({
 }
 function nq(e) {
   let t = useDispatch();
-  let i = _$$R(e => ({
+  let i = selectWithShallowEqual(e => ({
     appModel: e.mirror.appModel,
     sceneGraph: e.mirror.sceneGraph,
     sceneGraphSelection: e.mirror.sceneGraphSelection
@@ -5176,22 +5176,22 @@ class nX extends PureComponent {
     return [{
       action: "sites-copy-link",
       flags: ["edit"],
-      displayText: _$$t("sites.fullscreen_actions.copy-external-url"),
+      displayText: getI18nString("sites.fullscreen_actions.copy-external-url"),
       disabled: !this.props.openFileHasPublishedSiteMount
     }, {
       action: "copy-link",
       flags: ["edit"],
-      displayText: _$$t("sites.fullscreen_actions.copy-link")
+      displayText: getI18nString("sites.fullscreen_actions.copy-link")
     }, {
       separator: !0
     }, {
       action: "rename-selection",
       flags: ["edit"],
-      displayText: _$$t("fullscreen.context_menu.rename")
+      displayText: getI18nString("fullscreen.context_menu.rename")
     }, {
       action: "duplicate",
       flags: ["edit"],
-      displayText: _$$t("sites.fullscreen_actions.duplicate-webpage")
+      displayText: getI18nString("sites.fullscreen_actions.duplicate-webpage")
     }, {
       action: "copy",
       flags: ["edit"]
@@ -5199,7 +5199,7 @@ class nX extends PureComponent {
       action: "delete-selection",
       flags: ["edit"],
       disabled: i,
-      displayText: _$$t("sites.fullscreen_actions.delete-selection")
+      displayText: getI18nString("sites.fullscreen_actions.delete-selection")
     }, {
       separator: !0
     }, {
@@ -5250,7 +5250,7 @@ function nZ({
   let {
     sceneGraph,
     sceneGraphSelection
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     sceneGraph: e.mirror.sceneGraph,
     sceneGraphSelection: e.mirror.sceneGraphSelection
   }));
@@ -5258,13 +5258,13 @@ function nZ({
   let f = [];
   f.push({
     name: "rename-selection",
-    displayText: _$$t("fullscreen.context_menu.rename"),
+    displayText: getI18nString("fullscreen.context_menu.rename"),
     callback: o,
     shortcutText: " "
   });
   n && f.push({
     name: "select-on-canvas",
-    displayText: _$$t("sites.code_layer.context_menu.select_on_canvas"),
+    displayText: getI18nString("sites.code_layer.context_menu.select_on_canvas"),
     callback: d
   });
   f.push({
@@ -5308,7 +5308,7 @@ function n1({
     appModel,
     sceneGraph,
     sceneGraphSelection
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     appModel: e.mirror.appModel,
     sceneGraph: e.mirror.sceneGraph,
     sceneGraphSelection: e.mirror.sceneGraphSelection
@@ -5378,11 +5378,11 @@ let aa = Ju(function ({
       confirmationTitle: jsxs("div", {
         children: [jsx("p", {
           className: el()(_$$s3.fontSemiBold.font15.$, "section_preset_picker--alertHeader--oa08R"),
-          children: _$$tx("whiteboard.section_preset_picker.confirmation_modal.header")
-        }), _$$tx("whiteboard.section_preset_picker.confirmation_modal.description")]
+          children: renderI18nText("whiteboard.section_preset_picker.confirmation_modal.header")
+        }), renderI18nText("whiteboard.section_preset_picker.confirmation_modal.description")]
       }),
-      confirmText: _$$t("whiteboard.section_preset_picker.confirmation_modal.confirm_text"),
-      cancelText: _$$t("whiteboard.section_preset_picker.confirmation_modal.cancel_text"),
+      confirmText: getI18nString("whiteboard.section_preset_picker.confirmation_modal.confirm_text"),
+      cancelText: getI18nString("whiteboard.section_preset_picker.confirmation_modal.cancel_text"),
       onConfirm: n,
       onCancel: a
     })
@@ -5474,7 +5474,7 @@ function ah({
       },
       children: n && jsx("img", {
         src: n,
-        alt: _$$t("whiteboard.section_preset_picker.shelf.thumbnail")
+        alt: getI18nString("whiteboard.section_preset_picker.shelf.thumbnail")
       })
     }), jsxs("div", {
       className: "section_preset_picker--textContainer--dyEMF text--fontNeg11--StdFq text--_fontBase--QdLsd text--_negText--j9g-L",
@@ -5505,7 +5505,7 @@ function ab({
   let u;
   let p = useDispatch();
   let h = _$$tS();
-  let m = md(_$$g3);
+  let m = useAtomWithSubscription(_$$g3);
   let f = "hasData" === m.state ? m.data : [];
   let g = 0 !== f.length;
   let [x, y] = useState(i);
@@ -5516,10 +5516,10 @@ function ab({
   let S = Xr(Yq);
   let j = Xr(pn);
   let I = Xr(bj);
-  let k = md(_$$oh);
-  let N = md(pF);
+  let k = useAtomWithSubscription(_$$oh);
+  let N = useAtomWithSubscription(pF);
   let A = _$$q();
-  let O = md(pg);
+  let O = useAtomWithSubscription(pg);
   let L = function (e, t) {
     let i = _X({
       subscribeToUpdates_expensive: !0
@@ -5708,7 +5708,7 @@ function ab({
     c = {
       displayText: "Edit section name",
       render: () => jsx(as, {
-        name: _$$t("whiteboard.section_preset_picker.shelf.title"),
+        name: getI18nString("whiteboard.section_preset_picker.shelf.title"),
         leadingIcon: _$$A11
       }),
       preventDismissOnSelected: !0
@@ -5722,7 +5722,7 @@ function ab({
       }),
       preventDismissOnSelected: !0,
       callback: () => {
-        _$$sx("section_preset_picker_category_clicked", {
+        trackEventAnalytics("section_preset_picker_category_clicked", {
           fileKey: h,
           sectionId: e,
           selectedCategory: t.id,
@@ -5893,7 +5893,7 @@ function aC(e) {
       ariaLabelledBy: e.ariaLabelledBy
     });
   }
-  if (l === LO) return jsx(nM, {});else if (l === SA) {
+  if (l === LO) return jsx(nM, {}); else if (l === SA) {
     let {
       clientX,
       clientY,
@@ -6241,7 +6241,7 @@ function aQ({
     autoFocus: !0,
     autocompleteResultsClassName: _$$s3.maxW300.$,
     autocomplete: p,
-    placeholder: _$$t("fullscreen_actions.search_menus_commands_and_plugins"),
+    placeholder: getI18nString("fullscreen_actions.search_menus_commands_and_plugins"),
     onChange: t => {
       h(t);
       e(t);
@@ -6291,23 +6291,23 @@ let si = class e extends PureComponent {
       pressed: 0,
       animationDelays: this.calculateAnimationDelays(this.props)
     };
-    this.prettifyKeyLabel = e => e.replace(/\u23B5/, _$$t("whiteboard.keyboard_shortcuts.key_label.space")).replace(/\u21E5/, `\u21E5 ${_$$t("whiteboard.keyboard_shortcuts.key_label.tab")}`).replace(/\u21DE/, `\u21DE ${_$$t("whiteboard.keyboard_shortcuts.key_label.pg_up")}`).replace(/\u21DF/, `\u21DF ${_$$t("whiteboard.keyboard_shortcuts.key_label.pg_dn")}`).replace(/\u2196/, `\u2196 ${_$$t("whiteboard.keyboard_shortcuts.key_label.home")}`).replace(/\u2198/, `\u2198 ${_$$t("whiteboard.keyboard_shortcuts.key_label.end")}`).replace(/\u238B/, `\u238B ${_$$t("whiteboard.keyboard_shortcuts.key_label.esc")}`).replace(/\u21A9/, `\u21A9 ${_$$t("whiteboard.keyboard_shortcuts.key_label.enter")}`);
+    this.prettifyKeyLabel = e => e.replace(/\u23B5/, getI18nString("whiteboard.keyboard_shortcuts.key_label.space")).replace(/\u21E5/, `\u21E5 ${getI18nString("whiteboard.keyboard_shortcuts.key_label.tab")}`).replace(/\u21DE/, `\u21DE ${getI18nString("whiteboard.keyboard_shortcuts.key_label.pg_up")}`).replace(/\u21DF/, `\u21DF ${getI18nString("whiteboard.keyboard_shortcuts.key_label.pg_dn")}`).replace(/\u2196/, `\u2196 ${getI18nString("whiteboard.keyboard_shortcuts.key_label.home")}`).replace(/\u2198/, `\u2198 ${getI18nString("whiteboard.keyboard_shortcuts.key_label.end")}`).replace(/\u238B/, `\u238B ${getI18nString("whiteboard.keyboard_shortcuts.key_label.esc")}`).replace(/\u21A9/, `\u21A9 ${getI18nString("whiteboard.keyboard_shortcuts.key_label.enter")}`);
     this.getTooltipText = e => {
       switch (e) {
         case "\u2318":
-          return _$$t("whiteboard.keyboard_shortcuts.tooltip.command");
+          return getI18nString("whiteboard.keyboard_shortcuts.tooltip.command");
         case "\u21E7":
-          return _$$t("whiteboard.keyboard_shortcuts.tooltip.shift");
+          return getI18nString("whiteboard.keyboard_shortcuts.tooltip.shift");
         case "\u2325":
-          return _$$t("whiteboard.keyboard_shortcuts.tooltip.option_alt");
+          return getI18nString("whiteboard.keyboard_shortcuts.tooltip.option_alt");
         case "\u2303":
-          return _$$t("whiteboard.keyboard_shortcuts.tooltip.control");
+          return getI18nString("whiteboard.keyboard_shortcuts.tooltip.control");
         case "\u232B":
-          return _$$t("whiteboard.keyboard_shortcuts.tooltip.backspace");
+          return getI18nString("whiteboard.keyboard_shortcuts.tooltip.backspace");
         case "\u2190":
-          return _$$t("whiteboard.keyboard_shortcuts.key_label.left");
+          return getI18nString("whiteboard.keyboard_shortcuts.key_label.left");
         case "\u2192":
-          return _$$t("whiteboard.keyboard_shortcuts.key_label.right");
+          return getI18nString("whiteboard.keyboard_shortcuts.key_label.right");
         default:
           return null;
       }
@@ -6342,7 +6342,7 @@ let si = class e extends PureComponent {
           t.push(n);
           t.push(jsx("div", {
             className: "keyboard_shortcut_panel--and---b-w4",
-            children: _$$tx("whiteboard.keyboard_shortcuts.and")
+            children: renderI18nText("whiteboard.keyboard_shortcuts.and")
           }, `${e[0]}-${e[1]}`));
           t.push(a);
           i += 2;
@@ -6445,7 +6445,7 @@ let si = class e extends PureComponent {
     i = this.props.allTabsCompletedAnimation ? "keyboard_shortcut_panel--shortcutRowCompletedAllTabs--J5zY3 keyboard_shortcut_panel--shortcutRowUsed--COYQU keyboard_shortcut_panel--shortcutRow--6AogW" : 4 === this.state.pressed ? "keyboard_shortcut_panel--shortcutRowCompletedTab--F1jL4 keyboard_shortcut_panel--shortcutRowUsed--COYQU keyboard_shortcut_panel--shortcutRow--6AogW" : 2 === this.state.pressed ? "keyboard_shortcut_panel--shortcutRowPressedFirstTime--DZrX7 keyboard_shortcut_panel--shortcutRow--6AogW" : 3 === this.state.pressed ? "keyboard_shortcut_panel--shortcutRowHeld--XwsHX keyboard_shortcut_panel--shortcutRowUsed--COYQU keyboard_shortcut_panel--shortcutRow--6AogW" : 1 === this.state.pressed ? "keyboard_shortcut_panel--shortcutRowPressed--eQ-Vp keyboard_shortcut_panel--shortcutRow--6AogW" : n ? a4 : "keyboard_shortcut_panel--shortcutRow--6AogW";
     return a && jsxs("tr", {
       className: i,
-      children: [this.props.icon && (this.props.editorType === _$$nT.Design || this.props.editorType === _$$nT.Illustration || this.props.editorType === _$$nT.DevHandoff) && jsx("td", {
+      children: [this.props.icon && (this.props.editorType === FEditorType.Design || this.props.editorType === FEditorType.Illustration || this.props.editorType === FEditorType.DevHandoff) && jsx("td", {
         className: "keyboard_shortcut_panel--shortcutIconCanvas---wufa",
         children: jsx(_$$B, {
           svg: this.props.icon,
@@ -6469,47 +6469,47 @@ si.specialKeys = ["Backspace", "Delete", "Down", "End", "Enter", "Home", "Left",
 si.getLocalizedSpecialKey = e => {
   switch (e) {
     case "Backspace":
-      return _$$t("whiteboard.keyboard_shortcuts.key_label.backspace");
+      return getI18nString("whiteboard.keyboard_shortcuts.key_label.backspace");
     case "Delete":
-      return _$$t("whiteboard.keyboard_shortcuts.key_label.delete");
+      return getI18nString("whiteboard.keyboard_shortcuts.key_label.delete");
     case "Down":
-      return _$$t("whiteboard.keyboard_shortcuts.key_label.down");
+      return getI18nString("whiteboard.keyboard_shortcuts.key_label.down");
     case "End":
-      return _$$t("whiteboard.keyboard_shortcuts.key_label.end");
+      return getI18nString("whiteboard.keyboard_shortcuts.key_label.end");
     case "Enter":
-      return _$$t("whiteboard.keyboard_shortcuts.key_label.enter");
+      return getI18nString("whiteboard.keyboard_shortcuts.key_label.enter");
     case "Home":
-      return _$$t("whiteboard.keyboard_shortcuts.key_label.home");
+      return getI18nString("whiteboard.keyboard_shortcuts.key_label.home");
     case "Left":
-      return _$$t("whiteboard.keyboard_shortcuts.key_label.left");
+      return getI18nString("whiteboard.keyboard_shortcuts.key_label.left");
     case "Page Down":
-      return _$$t("whiteboard.keyboard_shortcuts.key_label.page_down");
+      return getI18nString("whiteboard.keyboard_shortcuts.key_label.page_down");
     case "Page Up":
-      return _$$t("whiteboard.keyboard_shortcuts.key_label.page_up");
+      return getI18nString("whiteboard.keyboard_shortcuts.key_label.page_up");
     case "Right":
-      return _$$t("whiteboard.keyboard_shortcuts.key_label.right");
+      return getI18nString("whiteboard.keyboard_shortcuts.key_label.right");
     case "Tab":
-      return _$$t("whiteboard.keyboard_shortcuts.key_label.tab");
+      return getI18nString("whiteboard.keyboard_shortcuts.key_label.tab");
     case "Up":
-      return _$$t("whiteboard.keyboard_shortcuts.key_label.up");
+      return getI18nString("whiteboard.keyboard_shortcuts.key_label.up");
     case "F6":
-      return _$$t("whiteboard.keyboard_shortcuts.key_label.f6");
+      return getI18nString("whiteboard.keyboard_shortcuts.key_label.f6");
   }
 };
 si.splitStringIntoKeys = e => {
   let t = [];
   let i = _$$y2.isApple();
   for (; e.length > 0;) if (e.startsWith("Ctrl+")) {
-    t.push(_$$t("whiteboard.keyboard_shortcuts.key_label.ctrl"));
+    t.push(getI18nString("whiteboard.keyboard_shortcuts.key_label.ctrl"));
     e = e.slice(5);
   } else if (e.startsWith("Shift+")) {
-    t.push(_$$t("whiteboard.keyboard_shortcuts.key_label.shift"));
+    t.push(getI18nString("whiteboard.keyboard_shortcuts.key_label.shift"));
     e = e.slice(6);
   } else if (e.startsWith("Alt+")) {
-    t.push(_$$t("whiteboard.keyboard_shortcuts.key_label.alt"));
+    t.push(getI18nString("whiteboard.keyboard_shortcuts.key_label.alt"));
     e = e.slice(4);
   } else if (e.startsWith("Win+")) {
-    t.push(_$$t("whiteboard.keyboard_shortcuts.key_label.win"));
+    t.push(getI18nString("whiteboard.keyboard_shortcuts.key_label.win"));
     e = e.slice(4);
   } else if (i && e.startsWith("Page Up")) {
     t.push(a7);
@@ -6538,14 +6538,14 @@ si.keybindingsForShortcut = (e, t, i) => {
   if (!i) return null;
   let r = function (e, t) {
     let i = _$$y2.isApple();
-    let r = i ? "\u2325" : Ay.chromeos ? _$$t("whiteboard.keyboard_shortcuts.key_label.search") : _$$t("whiteboard.keyboard_shortcuts.key_label.alt");
-    let n = i ? "\u2318" : _$$t("whiteboard.keyboard_shortcuts.key_label.ctrl");
-    let a = i ? "\u21A9" : _$$t("whiteboard.keyboard_shortcuts.key_label.enter");
-    let s = i ? "\u238B" : _$$t("whiteboard.keyboard_shortcuts.key_label.esc");
-    let o = i ? "\u21E7" : _$$t("whiteboard.keyboard_shortcuts.key_label.shift");
-    let l = _$$t("whiteboard.keyboard_shortcuts.key_label.drag");
-    let d = _$$t("whiteboard.keyboard_shortcuts.key_label.click");
-    let c = _$$t("whiteboard.keyboard_shortcuts.key_label.dbl_click");
+    let r = i ? "\u2325" : BrowserInfo.chromeos ? getI18nString("whiteboard.keyboard_shortcuts.key_label.search") : getI18nString("whiteboard.keyboard_shortcuts.key_label.alt");
+    let n = i ? "\u2318" : getI18nString("whiteboard.keyboard_shortcuts.key_label.ctrl");
+    let a = i ? "\u21A9" : getI18nString("whiteboard.keyboard_shortcuts.key_label.enter");
+    let s = i ? "\u238B" : getI18nString("whiteboard.keyboard_shortcuts.key_label.esc");
+    let o = i ? "\u21E7" : getI18nString("whiteboard.keyboard_shortcuts.key_label.shift");
+    let l = getI18nString("whiteboard.keyboard_shortcuts.key_label.drag");
+    let d = getI18nString("whiteboard.keyboard_shortcuts.key_label.click");
+    let c = getI18nString("whiteboard.keyboard_shortcuts.key_label.dbl_click");
     let u = Object.entries({
       "align-left-right": st(["align-left", "align-right"], e),
       "align-top-bottom": st(["align-top", "align-bottom"], e),
@@ -6606,7 +6606,7 @@ function sn() {
     let r = function (e) {
       let t = v7();
       let i = [];
-      if (e.metaKey && i.push("Meta"), e.altKey && i.push("Alt"), e.shiftKey && i.push("Shift"), e.ctrlKey && i.push("Control"), "MetaRight" === e.code || "MetaLeft" === e.code || "ShiftRight" === e.code || "ShiftLeft" === e.code || "ControlRight" === e.code || "ControlLeft" === e.code || "AltRight" === e.code || "AltLeft" === e.code) ;else if (t === aTn.UNKNOWN) {
+      if (e.metaKey && i.push("Meta"), e.altKey && i.push("Alt"), e.shiftKey && i.push("Shift"), e.ctrlKey && i.push("Control"), "MetaRight" === e.code || "MetaLeft" === e.code || "ShiftRight" === e.code || "ShiftLeft" === e.code || "ControlRight" === e.code || "ControlLeft" === e.code || "AltRight" === e.code || "AltLeft" === e.code); else if (t === aTn.UNKNOWN) {
         let t = glU.stringKeyFromWebEventKeycode(e.keyCode);
         i.push(t);
       } else {
@@ -6643,7 +6643,7 @@ function sn() {
         children: [jsx(_$$E3, {
           color: "menu",
           fontSize: 14,
-          children: _$$tx("keyboard_settings.custom_keyboard_shortcuts")
+          children: renderI18nText("keyboard_settings.custom_keyboard_shortcuts")
         }), jsx($n, {
           variant: "primary",
           iconPrefix: jsx(_$$x4, {}),
@@ -6651,7 +6651,7 @@ function sn() {
             step: "ADDING_WAITING_FOR_ACTION_INPUT"
           }),
           children: jsx(_$$E3, {
-            children: _$$tx("keyboard_settings.custom_keyboard_shortcuts.add")
+            children: renderI18nText("keyboard_settings.custom_keyboard_shortcuts.add")
           })
         }), jsx(_$$M, {}), jsx(Ex, {
           className: _$$s3.mt4.$,
@@ -6674,7 +6674,7 @@ function sn() {
         children: [jsx(sr, {
           customName: "FULLSCREEN" === t ? void 0 : e,
           shortcutKey: e,
-          editorType: wN(i),
+          editorType: mapFileTypeToEditorType(i),
           keyPosition: 0,
           useNumbersForOpacity: s,
           usedKeyboardShortcuts: l,
@@ -6683,10 +6683,10 @@ function sn() {
           className: "keyboard_shortcut_panel_custom_tab--deleteButton--xf9nN",
           children: jsx(_$$K, {
             onClick: () => C4("FULLSCREEN" === t ? XpX.FULLSCREEN : XpX.NON_FULLSCREEN, e),
-            "aria-label": _$$t("whiteboard.keyboard_shortcuts.delete.shortcut"),
+            "aria-label": getI18nString("whiteboard.keyboard_shortcuts.delete.shortcut"),
             htmlAttributes: {
               "data-tooltip-type": Ib.TEXT,
-              "data-tooltip": _$$t("whiteboard.keyboard_shortcuts.delete.shortcut")
+              "data-tooltip": getI18nString("whiteboard.keyboard_shortcuts.delete.shortcut")
             },
             children: jsx(_$$O3, {})
           })
@@ -6719,7 +6719,7 @@ function sn() {
                 onKeyDown: p
               },
               children: jsx(_$$E3, {
-                children: _$$tx("keyboard_settings.custom_keyboard_shortcuts.press_key")
+                children: renderI18nText("keyboard_settings.custom_keyboard_shortcuts.press_key")
               })
             })
           })
@@ -6733,44 +6733,44 @@ function sn() {
 function sd(e) {
   return {
     [_$$J5.ESSENTIAL]: {
-      displayNameText: _$$t("whiteboard.keyboard_shortcuts.tab.essential"),
+      displayNameText: getI18nString("whiteboard.keyboard_shortcuts.tab.essential"),
       includeInEditorType: [a9.DESIGN, a9.ILLUSTRATION, a9.SLIDES],
       columns: [[{
         shortcuts: [{
           shortcutKey: "toggle-ui",
-          usage: _$$tx("fullscreen.keyboard_shortcuts_panel.toggle_ui_description"),
+          usage: renderI18nText("fullscreen.keyboard_shortcuts_panel.toggle_ui_description"),
           includeInEditorType: [a9.DESIGN, a9.ILLUSTRATION]
         }, {
           shortcutKey: "create-slide",
-          usage: _$$tx("slides.keyboard_shortcuts.create-slide-description"),
+          usage: renderI18nText("slides.keyboard_shortcuts.create-slide-description"),
           includeInEditorType: a9.SLIDES
         }]
       }], [{
         shortcuts: [e ? {
           shortcutKey: "component-insert",
           displayName: "component-insert-display-name-ui3",
-          usage: _$$tx("fullscreen.keyboard_shortcuts_panel.component_insert_description"),
+          usage: renderI18nText("fullscreen.keyboard_shortcuts_panel.component_insert_description"),
           includeInEditorType: [a9.DESIGN, a9.ILLUSTRATION]
         } : {
           shortcutKey: "toggle-dropper",
-          usage: _$$tx("fullscreen.keyboard_shortcuts_panel.toggle_dropper_description"),
+          usage: renderI18nText("fullscreen.keyboard_shortcuts_panel.toggle_dropper_description"),
           includeInEditorType: [a9.DESIGN, a9.ILLUSTRATION]
         }, {
           shortcutKey: "toggle-grid-focus-view",
-          usage: _$$tx("slides.keyboard_shortcuts.toggle-slide-view-description"),
+          usage: renderI18nText("slides.keyboard_shortcuts.toggle-slide-view-description"),
           includeInEditorType: a9.SLIDES
         }]
       }], [{
         shortcuts: [{
           shortcutKey: "toggle-menu",
           displayName: gn() ? "toggle-actions-menu" : "toggle-menu",
-          usage: _$$tx("fullscreen.keyboard_shortcuts_panel.toggle_menu_description"),
+          usage: renderI18nText("fullscreen.keyboard_shortcuts_panel.toggle_menu_description"),
           includeInEditorType: [a9.DESIGN, a9.ILLUSTRATION, a9.SLIDES]
         }]
       }]]
     },
     [_$$J5.TOOLS]: {
-      displayNameText: _$$t("whiteboard.keyboard_shortcuts.tab.tools"),
+      displayNameText: getI18nString("whiteboard.keyboard_shortcuts.tab.tools"),
       columns: [[{
         shortcuts: [{
           shortcutKey: "set-tool-default",
@@ -6947,7 +6947,7 @@ function sd(e) {
       }]]
     },
     [_$$J5.VIEW]: {
-      displayNameText: _$$t("whiteboard.keyboard_shortcuts.tab.view"),
+      displayNameText: getI18nString("whiteboard.keyboard_shortcuts.tab.view"),
       columns: [[{
         shortcuts: [{
           shortcutKey: "toggle-grid-focus-view",
@@ -7057,7 +7057,7 @@ function sd(e) {
       }]]
     },
     [_$$J5.ZOOM]: {
-      displayNameText: _$$t("whiteboard.keyboard_shortcuts.tab.zoom"),
+      displayNameText: getI18nString("whiteboard.keyboard_shortcuts.tab.zoom"),
       includeInEditorType: [a9.DESIGN, a9.ILLUSTRATION, a9.SITES, a9.DEV_MODE],
       columns: [[{
         shortcuts: [{
@@ -7092,7 +7092,7 @@ function sd(e) {
       }]]
     },
     [_$$J5.TEXT]: {
-      displayNameText: _$$t("whiteboard.keyboard_shortcuts.tab.text"),
+      displayNameText: getI18nString("whiteboard.keyboard_shortcuts.tab.text"),
       hideInEditorType: a9.DEV_MODE,
       columns: [[{
         shortcuts: [{
@@ -7172,7 +7172,7 @@ function sd(e) {
       }]]
     },
     [_$$J5.SHAPE]: {
-      displayNameText: _$$t("whiteboard.keyboard_shortcuts.tab.shape"),
+      displayNameText: getI18nString("whiteboard.keyboard_shortcuts.tab.shape"),
       includeInEditorType: [a9.DESIGN, a9.ILLUSTRATION, a9.SITES],
       columns: [[{
         shortcuts: [{
@@ -7219,7 +7219,7 @@ function sd(e) {
       }]]
     },
     [_$$J5.SELECT]: {
-      displayNameText: _$$t("whiteboard.keyboard_shortcuts.tab.selection"),
+      displayNameText: getI18nString("whiteboard.keyboard_shortcuts.tab.selection"),
       includeInEditorType: [a9.DESIGN, a9.ILLUSTRATION, a9.SITES, a9.SLIDES],
       columns: [[{
         shortcuts: [{
@@ -7263,7 +7263,7 @@ function sd(e) {
       }]]
     },
     [_$$J5.CURSOR]: {
-      displayNameText: _$$t("whiteboard.keyboard_shortcuts.tab.cursor"),
+      displayNameText: getI18nString("whiteboard.keyboard_shortcuts.tab.cursor"),
       includeInEditorType: [a9.DESIGN, a9.ILLUSTRATION],
       columns: [[{
         caption: "while-pointing",
@@ -7298,7 +7298,7 @@ function sd(e) {
       }]]
     },
     [_$$J5.COPY]: {
-      displayNameText: _$$t("whiteboard.keyboard_shortcuts.tab.copy"),
+      displayNameText: getI18nString("whiteboard.keyboard_shortcuts.tab.copy"),
       includeInEditorType: a9.DEV_MODE,
       columns: [[], [{
         shortcuts: [{
@@ -7311,7 +7311,7 @@ function sd(e) {
       }], []]
     },
     [_$$J5.EDIT]: {
-      displayNameText: _$$t("whiteboard.keyboard_shortcuts.tab.edit"),
+      displayNameText: getI18nString("whiteboard.keyboard_shortcuts.tab.edit"),
       hideInEditorType: a9.DEV_MODE,
       columns: [[{
         shortcuts: [{
@@ -7395,7 +7395,7 @@ function sd(e) {
       }]]
     },
     [_$$J5.TRANSFORM]: {
-      displayNameText: _$$t("whiteboard.keyboard_shortcuts.tab.transform"),
+      displayNameText: getI18nString("whiteboard.keyboard_shortcuts.tab.transform"),
       includeInEditorType: [a9.DESIGN, a9.ILLUSTRATION],
       columns: [[{
         shortcuts: [{
@@ -7425,7 +7425,7 @@ function sd(e) {
       }]]
     },
     [_$$J5.ARRANGE]: {
-      displayNameText: _$$t("whiteboard.keyboard_shortcuts.tab.arrange"),
+      displayNameText: getI18nString("whiteboard.keyboard_shortcuts.tab.arrange"),
       includeInEditorType: [a9.DESIGN, a9.ILLUSTRATION, a9.SITES, a9.SLIDES, a9.COOPER],
       columns: [[{
         shortcuts: [{
@@ -7472,7 +7472,7 @@ function sd(e) {
       }]]
     },
     [_$$J5.COMPONENTS]: {
-      displayNameText: _$$t("whiteboard.keyboard_shortcuts.tab.components"),
+      displayNameText: getI18nString("whiteboard.keyboard_shortcuts.tab.components"),
       includeInEditorType: [a9.DESIGN, a9.ILLUSTRATION],
       columns: [[{
         shortcuts: [{
@@ -7498,7 +7498,7 @@ function sd(e) {
       }]]
     },
     [_$$J5.ACCESSIBILITY]: {
-      displayNameText: _$$t("whiteboard.keyboard_shortcuts.tab.accessibility"),
+      displayNameText: getI18nString("whiteboard.keyboard_shortcuts.tab.accessibility"),
       includeInEditorType: a9.FIGJAM,
       columns: [[{
         shortcuts: [{
@@ -7519,7 +7519,7 @@ function sd(e) {
       }]]
     },
     [_$$J5.ADVANCED]: {
-      displayNameText: _$$t("whiteboard.keyboard_shortcuts.tab.advanced"),
+      displayNameText: getI18nString("whiteboard.keyboard_shortcuts.tab.advanced"),
       includeInEditorType: a9.FIGJAM,
       columns: [[{
         caption: "while-editing-shape-or-sticky",
@@ -7560,7 +7560,7 @@ function sc(e, t, i) {
     void 0 !== t && (Array.isArray(t) ? r &&= t.includes(e) : r &&= t === e);
     return r;
   };
-  return e === _$$nT.Design ? r(a9.DESIGN) : e === _$$nT.DevHandoff ? r(a9.DEV_MODE) : e === _$$nT.Whiteboard ? r(a9.FIGJAM) : e === _$$nT.Slides ? r(a9.SLIDES) : e === _$$nT.Sites ? r(a9.SITES) : e === _$$nT.Figmake ? r(a9.FIGMAKE) : e === _$$nT.Cooper ? r(a9.COOPER) : e === _$$nT.Illustration && r(a9.ILLUSTRATION);
+  return e === FEditorType.Design ? r(a9.DESIGN) : e === FEditorType.DevHandoff ? r(a9.DEV_MODE) : e === FEditorType.Whiteboard ? r(a9.FIGJAM) : e === FEditorType.Slides ? r(a9.SLIDES) : e === FEditorType.Sites ? r(a9.SITES) : e === FEditorType.Figmake ? r(a9.FIGMAKE) : e === FEditorType.Cooper ? r(a9.COOPER) : e === FEditorType.Illustration && r(a9.ILLUSTRATION);
 }
 function su(e) {
   return !e || e.every(e => getFeatureFlags()[e]);
@@ -7630,7 +7630,7 @@ function sE({
 function sT({
   createKey: e
 }) {
-  return Ay.mac ? jsxs("div", {
+  return BrowserInfo.mac ? jsxs("div", {
     className: s_,
     children: [e("Fn"), e("ControlLeft"), e("AltLeft"), e("MetaLeft"), e("Space", 500), e("MetaRight"), e("AltRight")]
   }) : jsxs("div", {
@@ -7727,8 +7727,8 @@ function sO({
   });
 }
 let sL = async () => {
-  if (!_$$eD) return null;
-  let e = await _$$eD.getKeyboardLayout();
+  if (!desktopAPIInstance) return null;
+  let e = await desktopAPIInstance.getKeyboardLayout();
   return e ? pB(e) : null;
 };
 function sR({
@@ -7756,18 +7756,18 @@ function sR({
   let c = useMemo(() => s ? jsxs(Fragment, {
     children: [jsx(YJ, {
       groupLabel: jsx(WL, {
-        children: _$$t("keyboard_settings.detected")
+        children: getI18nString("keyboard_settings.detected")
       }),
       children: jsx(c$, {
         value: aTn[s],
         children: As(s)
       }, s)
-    }, _$$t("keyboard_settings.detected")), jsx(YJ, {
+    }, getI18nString("keyboard_settings.detected")), jsx(YJ, {
       groupLabel: jsx(WL, {
-        children: _$$t("keyboard_settings.other_layouts")
+        children: getI18nString("keyboard_settings.other_layouts")
       }),
       children: d.filter(e => e.key !== s.toString())
-    }, _$$t("keyboard_settings.other_layouts"))]
+    }, getI18nString("keyboard_settings.other_layouts"))]
   }) : d, [d, s]);
   let u = useId();
   let p = e => e ? aTn[e] : aTn.UNKNOWN;
@@ -7778,7 +7778,7 @@ function sR({
       children: [jsx(_$$J, {
         className: "keyboard_shortcut_panel_layout_tab--selectorLabelText--3jkuk",
         htmlFor: u,
-        children: _$$t("keyboard_settings.keyboard_layout_panel_selector")
+        children: getI18nString("keyboard_settings.keyboard_layout_panel_selector")
       }), jsx("div", {
         className: "keyboard_shortcut_panel_layout_tab--selectorDropdownContainer--0rd1S",
         children: jsx(_$$o3, {
@@ -7799,7 +7799,7 @@ function sR({
             recordingKey: "keyboardLayoutSelector",
             children: [jsx(l9, {
               label: jsx(_$$h, {
-                children: _$$t("keyboard_settings.keyboard_layout_panel_selector")
+                children: getI18nString("keyboard_settings.keyboard_layout_panel_selector")
               }),
               width: "fill"
             }), jsx(mc, {
@@ -7815,7 +7815,7 @@ function sD({
   layout: e,
   setPreviewedLayout: t
 }) {
-  let i = _$$t("keyboard_settings.figma_keyboard_shortcuts_won_t_automatically_change_if_you_change_your_system_keyboard_layout");
+  let i = getI18nString("keyboard_settings.figma_keyboard_shortcuts_won_t_automatically_change_if_you_change_your_system_keyboard_layout");
   return jsxs("div", {
     className: "keyboard_shortcut_panel_layout_tab--leftColumnWrapper--8Jn1P",
     children: [jsx("div", {
@@ -7838,7 +7838,7 @@ function sD({
         newTab: !0,
         trusted: !0,
         href: "https://help.figma.com/hc/articles/5665442977431",
-        children: _$$tx("keyboard_settings.request_a_new_layout_or_learn_more")
+        children: renderI18nText("keyboard_settings.request_a_new_layout_or_learn_more")
       })
     })]
   });
@@ -7890,7 +7890,7 @@ class sG extends PureComponent {
   }
 }
 function sK(e) {
-  return e === _$$nT.Design || e === _$$nT.Illustration || e === _$$nT.Slides ? "essential" : e === _$$nT.DevHandoff ? "view" : "tools";
+  return e === FEditorType.Design || e === FEditorType.Illustration || e === FEditorType.Slides ? "essential" : e === FEditorType.DevHandoff ? "view" : "tools";
 }
 function sH({
   usedKeyboardShortcuts: e,
@@ -7908,13 +7908,13 @@ function sH({
   let m = function (e, t, i) {
     let r = sd(t);
     let n = [];
-    let a = i === _$$nT.Design || i === _$$nT.Illustration ? a1 : "";
+    let a = i === FEditorType.Design || i === FEditorType.Illustration ? a1 : "";
     for (let e in r) sc(i, r[e].includeInEditorType, r[e].hideInEditorType) && su(r[e].featureFlags) && n.push({
       displayNameText: r[e].displayNameText,
       id: e,
       className: el()(a0, a)
     });
-    if (i === _$$nT.Design || i === _$$nT.Illustration) {
+    if (i === FEditorType.Design || i === FEditorType.Illustration) {
       let e = {
         id: "spacer",
         className: el()(a0, a)
@@ -7922,12 +7922,12 @@ function sH({
       n.push(e);
     }
     n.push({
-      displayNameText: _$$t("whiteboard.keyboard_shortcuts.tab.layout"),
+      displayNameText: getI18nString("whiteboard.keyboard_shortcuts.tab.layout"),
       id: "layout",
       className: el()(a0, a)
     });
     e && n.push({
-      displayNameText: _$$t("keyboard_settings.custom_tab"),
+      displayNameText: getI18nString("keyboard_settings.custom_tab"),
       id: "custom",
       className: el()(a0, a)
     });
@@ -7969,7 +7969,7 @@ function sH({
       let a = sh(n, c, b);
       if (p) {
         let s = sp(b, p, t, i, c);
-        if (a && !sh(s, c, b)) D(n);else {
+        if (a && !sh(s, c, b)) D(n); else {
           let a = Object.values(_$$J5).includes(r) ? function (e, t, i, r, n, a) {
             for (let s of t[e].columns) for (let e of s) for (let t of e.shortcuts) if (sr.keybindingsForShortcut(t.shortcutKey, i, r)) {
               let e = sr.shortcutUsedCount(t.shortcutKey, n);
@@ -7992,7 +7992,7 @@ function sH({
       w(a);
     }
   }, [c, u, e, p, b, t, i, y.activeTab]);
-  let M = c === _$$nT.Design || c === _$$nT.Illustration ? a1 : "";
+  let M = c === FEditorType.Design || c === FEditorType.Illustration ? a1 : "";
   let P = "keyboard_shortcut_panel--nav--rmt2R";
   for (let e = 0; e < m.length; e++) {
     let t = m[e];
@@ -8039,7 +8039,7 @@ function sH({
           }));
           Y5.triggerAction("toggle-keyboard-shortcuts");
         },
-        "aria-label": _$$t("general.close"),
+        "aria-label": getI18nString("general.close"),
         "data-fullscreen-intercept": !0,
         children: jsx(_$$B, {
           svg: _$$A16
@@ -8103,7 +8103,7 @@ function sV({
   let l = "essential" === activeTab ? jsxs(Fragment, {
     children: [jsx("div", {
       className: "keyboard_shortcut_panel--caption--a6WBZ",
-      children: _$$tx("whiteboard.keyboard_shortcuts.essential_keyboard_shortcuts")
+      children: renderI18nText("whiteboard.keyboard_shortcuts.essential_keyboard_shortcuts")
     }), jsx(sW, {
       wrapperClassName: "keyboard_shortcut_panel--contentsSpacedOut--Jp-4I keyboard_shortcut_panel--contents--8ae0D",
       ...i
@@ -8168,9 +8168,9 @@ function sY({
   }, `shortcut-${t}-${e}`) : null;
 }
 function sJ() {
-  let e = useSelector(e => "fullscreen" === e.selectedView.view ? e.selectedView.editorType : _$$nT.Design);
+  let e = useSelector(e => "fullscreen" === e.selectedView.view ? e.selectedView.editorType : FEditorType.Design);
   let t = ut(Ez5?.interopToolMode(), nQ7.SELF);
-  return e === _$$nT.Slides && t === nQ7.DESIGN || e === _$$nT.Cooper && t === nQ7.DESIGN ? _$$nT.Design : e;
+  return e === FEditorType.Slides && t === nQ7.DESIGN || e === FEditorType.Cooper && t === nQ7.DESIGN ? FEditorType.Design : e;
 }
 function sq(e) {
   let t = je();
@@ -8178,14 +8178,14 @@ function sq(e) {
   let n = useSelector(e => e.usedKeyboardShortcuts);
   let s = useSelector(e => e.keyboardShortcutPanel.tab);
   let o = useSelector(e => e.mirror.appModel.keyboardShortcuts);
-  let l = useSelector(e => "fullscreen" === e.selectedView.view ? e.selectedView.editorType : _$$nT.Design);
+  let l = useSelector(e => "fullscreen" === e.selectedView.view ? e.selectedView.editorType : FEditorType.Design);
   let d = _$$Zj();
   return jsx(sH, {
     recordingKey: e.recordingKey,
     usedKeyboardShortcuts: n,
     initActiveTab: s,
     appModelKeyboardShortcuts: o,
-    hasSubscribedLibraries: i && l !== _$$nT.Slides && l !== _$$nT.Cooper,
+    hasSubscribedLibraries: i && l !== FEditorType.Slides && l !== FEditorType.Cooper,
     useNumbersForOpacity: d
   });
 }
@@ -8193,7 +8193,7 @@ sG.displayName = "Category";
 sH.displayName = "KeyboardShortcutPanel";
 function s$() {
   let e = Xr(mH);
-  let t = XC(md(_$$a3));
+  let t = XC(useAtomWithSubscription(_$$a3));
   return getFeatureFlags().cursor_bot && t ? jsx("div", {
     className: CR,
     "data-testid": "cursor-bot-fullscreen-event-blocker",
@@ -8224,7 +8224,7 @@ function s6({
     left: `${x}px`
   });
   let u = !1;
-  getFeatureFlags().css_backed_loading_spinner ? u = !0 : !getFeatureFlags().disable_page_switch_spinner || KR() || _$$rr || (t = !1);
+  getFeatureFlags().css_backed_loading_spinner ? u = !0 : !getFeatureFlags().disable_page_switch_spinner || isFigmaMobileApp() || isMobileUA || (t = !1);
   return jsxs("div", {
     className: "loading_overlay--pageSyncing--9AqbU",
     children: [jsx("div", {
@@ -8274,7 +8274,7 @@ function s7() {
         delay: 3e3,
         type: "long-page-change",
         timeoutOverride: 1 / 0
-      })));else {
+      }))); else {
         let e = m ? Date.now() - m : 0;
         e < 3e3 || e > 9e3 ? (h(_$$F.dequeue({
           matchType: "long-page-change"
@@ -8310,11 +8310,11 @@ function s8({
     theme: a
   });
   return (useEffect(() => {
-    !isLoading && _$$sn.get("page_loading_overlay") && requestAnimationFrame(() => {
-      let t = _$$sn.tryStop("page_loading_overlay");
+    !isLoading && globalPerfTimer.get("page_loading_overlay") && requestAnimationFrame(() => {
+      let t = globalPerfTimer.tryStop("page_loading_overlay");
       t && e && e(t);
     });
-  }, [isLoading, e]), isLoading) ? (_$$sn.get("page_loading_overlay") || _$$sn.start("page_loading_overlay"), jsx(s6, {
+  }, [isLoading, e]), isLoading) ? (globalPerfTimer.get("page_loading_overlay") || globalPerfTimer.start("page_loading_overlay"), jsx(s6, {
     background,
     showSpinner: !isLoadingMissingFonts
   })) : null;
@@ -8377,8 +8377,8 @@ class ow extends _$$o {
         }
       };
       let i = vN(e, xH.CONTROL);
-      let r = Ay.mac ? vN(e, xH.META) : i;
-      let n = Ay.mac && i;
+      let r = BrowserInfo.mac ? vN(e, xH.META) : i;
+      let n = BrowserInfo.mac && i;
       switch (e.keyCode) {
         case Uz.ENTER:
           {
@@ -8443,7 +8443,7 @@ class ow extends _$$o {
       this.updateQueryAndResults(t);
     });
     this.onSelectItem = (e, t) => {
-      if (e.disabled) this.cancelDelayedClose();else {
+      if (e.disabled) this.cancelDelayedClose(); else {
         let i = !1;
         if (e.itemParameterArgs) {
           if (e.runPluginArgs && !this.state.searchQuery) {
@@ -8460,7 +8460,7 @@ class ow extends _$$o {
         }
         if (e.callback && !i && (e.callback(Dz(e), e.args, this.props.dispatch), i = !0), e.action && (VU.get(e.action, "quick-actions", e.args)(t), i = !0), i && this.addToRecentlyUsedCommands(e, e.runPluginArgs), this.logActionSelectedEvent(e), "toggle-publish" === e.action && YQ({
           id: "insert-component-onboarding-event"
-        }), oT(e) && !PN()) {
+        }), oT(e) && !isInteractionOrEvalMode()) {
           this.cancelDelayedClose();
           this.delayedCloseTimerID = setTimeout(() => {
             this.props.dispatch(_$$oB());
@@ -8605,7 +8605,7 @@ class ow extends _$$o {
     if (this.state.searchQuery) {
       if (0 === this.state.searchResults.length) return jsx("div", {
         className: Tk,
-        children: _$$tx("fullscreen_actions.no_matches")
+        children: renderI18nText("fullscreen_actions.no_matches")
       });
     } else if (0 === this.state.searchResults.length) return null;
     return jsx(_$$h4, {
@@ -8679,8 +8679,8 @@ function oj(e) {
   } = fJ();
   let o = useSelector(_$$l4);
   let l = Ev();
-  let c = md(dd);
-  let u = md(Rt);
+  let c = useAtomWithSubscription(dd);
+  let u = useAtomWithSubscription(Rt);
   let p = _$$F3(u);
   let h = wo();
   return jsx(oS, {
@@ -8769,7 +8769,7 @@ class ok extends _$$o {
         className: V4,
         children: [t, s && jsx("div", {
           className: Vu,
-          children: _$$tx("fullscreen_actions.development")
+          children: renderI18nText("fullscreen_actions.development")
         })]
       }), n && !o && jsx("div", {
         className: LE,
@@ -8780,10 +8780,10 @@ class ok extends _$$o {
         className: LE,
         children: [jsx("div", {
           className: Hq,
-          children: _$$tx("fullscreen_actions.tab")
+          children: renderI18nText("fullscreen_actions.tab")
         }), a && jsx("div", {
           className: w8,
-          children: _$$tx("fullscreen_actions.to_edit")
+          children: renderI18nText("fullscreen_actions.to_edit")
         }), jsx(_$$B, {
           svg: _$$A17
         })]
@@ -8907,7 +8907,7 @@ function oU({
         onClick: m,
         disabled: !styleRef,
         variant: "primary",
-        children: _$$tx("design_systems.create_style.create_style")
+        children: renderI18nText("design_systems.create_style.create_style")
       })
     })]
   }) : null;
@@ -8933,7 +8933,7 @@ function oV({
       mode: "dark",
       children: jsxs(_$$bL2, {
         children: [jsx(_$$k4, {}), jsx(QB, {
-          children: _$$tx("reconnecting_modal.loading")
+          children: renderI18nText("reconnecting_modal.loading")
         })]
       })
     })
@@ -8947,7 +8947,7 @@ function oW() {
       mode: "dark",
       children: jsxs(_$$bL2, {
         children: [jsx(_$$k4, {}), jsx(QB, {
-          children: _$$tx("waiting_for_sync_modal.saving")
+          children: renderI18nText("waiting_for_sync_modal.saving")
         })]
       })
     })
@@ -9023,7 +9023,7 @@ function o1(e) {
   }, [l]);
   let p = useCallback(t => _$$l.user("set-hyperlink", () => !!glU && glU.setHyperlink(o0(t), e.hyperlinkLocation.nodeID, e.hyperlinkLocation.rangeStart, e.hyperlinkLocation.rangeEnd, null)), [e.hyperlinkLocation.nodeID, e.hyperlinkLocation.rangeEnd, e.hyperlinkLocation.rangeStart]);
   useEffect(() => () => {
-    c.current && (p(u.current), _$$sx("Hyperlink Editor Updated Link On Dismiss"));
+    c.current && (p(u.current), trackEventAnalytics("Hyperlink Editor Updated Link On Dismiss"));
   }, [p]);
   let h = AF(e.recordingKey, "change", e => {
     d(e.target.value.trim());
@@ -9033,14 +9033,14 @@ function o1(e) {
     if ("Escape" === i.key) {
       i.preventDefault();
       c.current = !1;
-      _$$sx("Hyperlink Editor Cancelled On Escape");
+      trackEventAnalytics("Hyperlink Editor Cancelled On Escape");
       glU.hideHyperlinkEditor();
     } else if ("Enter" === i.key) {
       if (i.preventDefault(), c.current = !1, p(l)) {
         if ("" === l) {
-          _$$sx("Hyperlink Editor Deleted Link");
+          trackEventAnalytics("Hyperlink Editor Deleted Link");
           t(_$$F.enqueue({
-            message: _$$t("hyperlink.link_deleted")
+            message: getI18nString("hyperlink.link_deleted")
           }));
         } else {
           let t = {};
@@ -9051,13 +9051,13 @@ function o1(e) {
               domain: i,
               editorType: r
             };
-          } catch (e) {}
-          _$$sx("Hyperlink Editor Updated Link On Enter", t);
+          } catch (e) { }
+          trackEventAnalytics("Hyperlink Editor Updated Link On Enter", t);
         }
       } else {
-        _$$sx("Hyperlink Editor Invalid Link");
+        trackEventAnalytics("Hyperlink Editor Invalid Link");
         t(_$$F.enqueue({
-          message: _$$t("hyperlink.invalid_link_plain")
+          message: getI18nString("hyperlink.invalid_link_plain")
         }));
       }
       glU.hideHyperlinkEditor();
@@ -9067,7 +9067,7 @@ function o1(e) {
     c.current = !1;
     e.hyperlinkLocation && _$$l.user("clear-hyperlink", () => glU.setHyperlink("", e.hyperlinkLocation.nodeID, e.hyperlinkLocation.rangeStart, e.hyperlinkLocation.rangeEnd, null));
     t(_$$F.enqueue({
-      message: _$$t("hyperlink.link_deleted")
+      message: getI18nString("hyperlink.link_deleted")
     }));
     glU.hideHyperlinkEditor();
     i.stopPropagation();
@@ -9077,7 +9077,7 @@ function o1(e) {
   let b = Y5.getViewportInfo();
   let C = Math.round(Math.min(Math.max(g, 100), b.width - 100) + b.x);
   let v = Math.round(y + b.y);
-  return e.editorType === _$$nT.Sites || e.editorType === _$$nT.Figmake ? jsx(o$, {
+  return e.editorType === FEditorType.Sites || e.editorType === FEditorType.Figmake ? jsx(o$, {
     recordingKey: "hyperlinkEditor",
     setUrl: d,
     onClickTrash: f,
@@ -9248,15 +9248,15 @@ let li = {
       children: jsxs(vo, {
         children: [jsxs(Y9, {
           children: [jsx(_$$r2, {
-            children: _$$tx("design_systems.create_style.title")
+            children: renderI18nText("design_systems.create_style.title")
           }), jsxs(_$$t7.TabStrip, {
             manager: b,
             children: [jsx(_$$t7.Tab, {
               ...x.createStyle,
-              children: _$$tx("design_systems.create_style.style")
+              children: renderI18nText("design_systems.create_style.style")
             }), jsx(_$$t7.Tab, {
               ...x.createVariable,
-              children: _$$tx("variables.create_modal.title")
+              children: renderI18nText("variables.create_modal.title")
             })]
           })]
         }), jsxs(_$$nB, {
@@ -9288,7 +9288,7 @@ let li = {
 export function $$lr0({
   children: e
 }) {
-  let t = _$$R(o9);
+  let t = selectWithShallowEqual(o9);
   let i = useDispatch();
   let m = TA();
   let T = t.openFile ? t.openFile.key : null;
@@ -9316,7 +9316,7 @@ export function $$lr0({
   let B = _$$e();
   let G = ZO();
   let K = Oc();
-  let [H] = fp(vE);
+  let [H] = useAtomValueAndSetter(vE);
   let z = Xr(t5);
   let V = !t.showUi && TY(t.dropdownShown);
   let W = t.dropdownShown?.type === jv;
@@ -9339,7 +9339,7 @@ export function $$lr0({
   return jsxs(Fragment, {
     children: [getFeatureFlags().ee_color_management_debug ? jsx(L, {}) : null, T && jsx(le, {
       fileKey: T
-    }), !(Ay.isIpad || Ay.isIpadNative || Ay.isMobileBrowser || Ay.isMeetDevice) && jsx(lt, {}), jsx("div", {
+    }), !(BrowserInfo.isIpad || BrowserInfo.isIpadNative || BrowserInfo.isMobileBrowser || BrowserInfo.isMeetDevice) && jsx(lt, {}), jsx("div", {
       className: MY,
       "data-forward-events-to-fullscreen": !0,
       children: jsx(_$$l2.Provider, {
@@ -9371,7 +9371,7 @@ export function $$lr0({
             editorType: t.selectedView.editorType,
             recordingKey: "hyperlinkEditor"
           }), jsx(_$$y, {}), t.progressBarState.mode !== Oin.OFF && jsx(z2, {
-            editorType: _$$oD(t.selectedView.editorType),
+            editorType: mapEditorTypeToFileType(t.selectedView.editorType),
             progressBarMode: t.progressBarState.mode,
             progressBarType: t.progressBarState.type,
             left: 0
@@ -9379,7 +9379,7 @@ export function $$lr0({
             clientType: "fullscreen"
           }), jsx(Nd, {}), jsx(jx, {
             showStartModal: N
-          }), t.dropdownShown && !Q && !Ay.isMeetDevice && jsx(_$$tH, {
+          }), t.dropdownShown && !Q && !BrowserInfo.isMeetDevice && jsx(_$$tH, {
             boundaryKey: "FullscreenContextMenu",
             onError: () => {
               i(_$$F.enqueue({
@@ -9391,7 +9391,7 @@ export function $$lr0({
             children: jsx(aC, {
               dropdownShown: t.dropdownShown,
               selectedView: t.selectedView,
-              ariaLabelledBy: _$$t("fullscreen.fullscreen_view.context_menu.aria_label")
+              ariaLabelledBy: getI18nString("fullscreen.fullscreen_view.context_menu.aria_label")
             })
           }), t.pickerShown?.id === C9 && jsx(tS, {}), t.pickerShown?.id === _$$O4 && jsx(_$$S5, {
             recordingKey: "nudgeAmountPicker"

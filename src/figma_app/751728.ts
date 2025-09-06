@@ -1,11 +1,11 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { throwTypeError } from "../figma_app/465776";
 import { r as _$$r } from "../905/571838";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import o from "../vendor/524488";
 import { z3 } from "../figma_app/119475";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { hO } from "../figma_app/545293";
 import { T5 } from "../figma_app/465071";
 import { kK } from "../figma_app/144974";
@@ -41,8 +41,8 @@ export function $$w0({
   lastSearchResultRef: P,
   hubFileFragmentInsertionCallback: D
 }) {
-  let k = md(C ? hO.currentCommunitySearchAtom : hO.currentSearchAtom);
-  let M = md(hO.sortByAtom);
+  let k = useAtomWithSubscription(C ? hO.currentCommunitySearchAtom : hO.currentSearchAtom);
+  let M = useAtomWithSubscription(hO.sortByAtom);
   let F = _$$s2(k);
   let j = T5("FragmentsGrid").unwrapOr(null);
   let U = j?.name;
@@ -82,10 +82,10 @@ export function $$w0({
   });
   if (!k || "disabled" === k.result.status) {
     if (!r) return null;
-    let a = C ? _$$t("assets_in_actions.fragments_section.empty_state.header_community") : G ? _$$t("assets_in_actions.fragments_section.empty_state.header_generic") : _$$t("assets_in_actions.fragments_section.empty_state.header", {
+    let a = C ? getI18nString("assets_in_actions.fragments_section.empty_state.header_community") : G ? getI18nString("assets_in_actions.fragments_section.empty_state.header_generic") : getI18nString("assets_in_actions.fragments_section.empty_state.header", {
       orgText: U
     });
-    let s = C ? _$$t("assets_in_actions.fragments_section.empty_state.text_community") : _$$t("assets_in_actions.fragments_section.empty_state.text");
+    let s = C ? getI18nString("assets_in_actions.fragments_section.empty_state.text_community") : getI18nString("assets_in_actions.fragments_section.empty_state.text");
     let l = C ? "community-fragments-grid-initial-state" : "fragments-grid-initial-state";
     let p = C ? "community-fragment-initial-state-with-data" : "fragments-grid-fragments-initial-state-with-data";
     return r.recents?.length ? jsxs("div", {
@@ -139,8 +139,8 @@ export function $$w0({
           variant: "danger",
           children: jsx(_$$r, {})
         }), jsx(_$$N.Text, {
-          title: _$$t("assets_in_actions.fragments_section.error.title"),
-          subtitle: _$$t("assets_in_actions.fragments_section.error.description")
+          title: getI18nString("assets_in_actions.fragments_section.error.title"),
+          subtitle: getI18nString("assets_in_actions.fragments_section.error.description")
         })]
       })
     })]
@@ -157,7 +157,7 @@ export function $$w0({
         fillHeight: d,
         children: jsx("span", {
           className: _$$s.textBodyMedium.colorTextSecondary.$,
-          children: tx("assets_in_actions.fragments_section.no_results.title", {
+          children: renderI18nText("assets_in_actions.fragments_section.no_results.title", {
             query: l()(e, {
               length: 24
             })

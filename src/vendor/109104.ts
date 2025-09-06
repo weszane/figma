@@ -1,43 +1,43 @@
-import { T as _$$T } from "../vendor/381201";
-import { _C, qm, lc, P$, mH } from "../vendor/678925";
-import { vF, Ow, Z9, pq } from "../vendor/150583";
-import { $X, eJ, GR, gO, M6 } from "../vendor/352483";
-import { Xr, gt, xv } from "../vendor/108286";
-import { KU, rm, v4, o5 } from "../vendor/325489";
-import { sp, GS, u4, Ce, HF, pO, my } from "../vendor/998256";
-import { RV, qQ, yF, gd, vk } from "../vendor/156870";
-import { m7, vm } from "../vendor/519647";
-import { Cp, r as _$$r, J0, J5 } from "../vendor/288996";
-import { T as _$$T2 } from "../vendor/570893";
-import { O as _$$O } from "../vendor/240444";
-import { j as _$$j } from "../vendor/520392";
-import { AD, SB } from "../vendor/728046";
-import { Cj, n2, h4, W3, bm } from "../vendor/314111";
-import { qO } from "../vendor/882763";
-import { lF } from "../vendor/26278";
-import { lu, zf } from "../vendor/975854";
-import { U as _$$U } from "../vendor/16909";
-import { NF, sO, Qg, Qd, T2, BD, W6, bJ, xH, Kg, tH } from "../vendor/314131";
-import { XW, T2 as _$$T3, xg } from "../vendor/873843";
-import { mG } from "../vendor/650703";
-import { M as _$$M } from "../vendor/821359";
-import { cd } from "../vendor/231181";
-import { Z as _$$Z } from "../vendor/39153";
-import { Hd, xE, $N } from "../vendor/641395";
-import { _ as _$$_ } from "../vendor/577508";
+import { U as _$$U } from '../vendor/16909';
+import { lF } from '../vendor/26278';
+import { addBreadcrumb } from '../vendor/39153';
+import { gt, Xr, xv } from '../vendor/108286';
+import { Ow, pq, vF, Z9 } from '../vendor/150583';
+import { gd, qQ, RV, vk, yF } from '../vendor/156870';
+import { normalizeToSize } from '../vendor/231181';
+import { O as _$$O } from '../vendor/240444';
+import { captureEvent, captureException, captureSession, startSession } from '../vendor/288996';
+import { bm, Cj, h4, n2, W3 } from '../vendor/314111';
+import { BD, bJ, Kg, NF, Qd, Qg, sO, T2, tH, W6, xH } from '../vendor/314131';
+import { getClient, getCurrentScope, getIsolationScope, withScope } from '../vendor/325489';
+import { $X, eJ, gO, GR, M6 } from '../vendor/352483';
+import { T as _$$T } from '../vendor/381201';
+import { m7, vm } from '../vendor/519647';
+import { j as _$$j } from '../vendor/520392';
+import { T as _$$T2 } from '../vendor/570893';
+import { _ as _$$_ } from '../vendor/577508';
+import { $N, Hd, xE } from '../vendor/641395';
+import { mG } from '../vendor/650703';
+import { defineIntegration, afterSetupIntegrations, getIntegrationsToSetup, setupIntegrations, setupIntegration } from '../vendor/678925';
+import { AD, SB } from '../vendor/728046';
+import { M as _$$M } from '../vendor/821359';
+import { T2 as _$$T3, xg, XW } from '../vendor/873843';
+import { qO } from '../vendor/882763';
+import { lu, zf } from '../vendor/975854';
+import { Ce, GS, HF, my, pO, sp, u4 } from '../vendor/998256';
 let t;
 let f;
 let r;
 let a;
 let o;
-let h = [/^Script error\.?$/, /^Javascript error: Script error\.? on line 0$/, /^ResizeObserver loop completed with undelivered notifications.$/, /^Cannot redefine property: googletag$/, "undefined is not an object (evaluating 'a.L')", 'can\'t redefine non-configurable property "solana"', "vv().getRestrictions is not a function. (In 'vv().getRestrictions(1,a)', 'vv().getRestrictions' is undefined)", "Can't find variable: _AutofillCallbackHandler"];
-let p = _C((e = {}) => ({
-  name: "InboundFilters",
+let h = [/^Script error\.?$/, /^Javascript error: Script error\.? on line 0$/, /^ResizeObserver loop completed with undelivered notifications.$/, /^Cannot redefine property: googletag$/, 'undefined is not an object (evaluating \'a.L\')', 'can\'t redefine non-configurable property "solana"', 'vv().getRestrictions is not a function. (In \'vv().getRestrictions(1,a)\', \'vv().getRestrictions\' is undefined)', 'Can\'t find variable: _AutofillCallbackHandler'];
+let p = defineIntegration((e = {}) => ({
+  name: 'InboundFilters',
   processEvent: (n, i, t) => !function (e, n) {
-    var i;
+    let i;
     return n.ignoreInternal && function (e) {
       try {
-        return "SentryError" === e.exception.values[0].type;
+        return e.exception.values[0].type === 'SentryError';
       } catch (e) {}
       return !1;
     }(e) ? (_$$T && vF.warn(`Event dropped due to being internal Sentry Error.
@@ -51,8 +51,8 @@ Event: ${$X(e)}`), !0) : (i = n.ignoreErrors, !e.type && i && i.length && functi
       n && n.value && (i.push(n.value), n.type && i.push(`${n.type}: ${n.value}`));
       return i;
     }(e).some(e => Xr(e, i))) ? (_$$T && vF.warn(`Event dropped due to being matched by \`ignoreErrors\` option.
-Event: ${$X(e)}`), !0) : e.type || !e.exception || !e.exception.values || 0 === e.exception.values.length || e.message || e.exception.values.some(e => e.stacktrace || e.type && "Error" !== e.type || e.value) ? !function (e, n) {
-      if ("transaction" !== e.type || !n || !n.length) return !1;
+Event: ${$X(e)}`), !0) : e.type || !e.exception || !e.exception.values || e.exception.values.length === 0 || e.message || e.exception.values.some(e => e.stacktrace || e.type && e.type !== 'Error' || e.value) ? !function (e, n) {
+      if (e.type !== 'transaction' || !n || !n.length) return !1;
       let i = e.transaction;
       return !!i && Xr(i, n);
     }(e, n.ignoreTransactions) ? !function (e, n) {
@@ -89,7 +89,7 @@ function g(e) {
     return n ? function (e = []) {
       for (let n = e.length - 1; n >= 0; n--) {
         let i = e[n];
-        if (i && "<anonymous>" !== i.filename && "[native code]" !== i.filename) return i.filename || null;
+        if (i && i.filename !== '<anonymous>' && i.filename !== '[native code]') return i.filename || null;
       }
       return null;
     }(n) : null;
@@ -99,14 +99,14 @@ function g(e) {
   }
 }
 let b = new WeakMap();
-let y = _C(() => ({
-  name: "FunctionToString",
+let y = defineIntegration(() => ({
+  name: 'FunctionToString',
   setupOnce() {
     t = Function.prototype.toString;
     try {
       Function.prototype.toString = function (...e) {
         let n = sp(this);
-        let i = b.has(KU()) && void 0 !== n ? n : this;
+        let i = b.has(getClient()) && void 0 !== n ? n : this;
         return t.apply(i, e);
       };
     } catch (e) {}
@@ -115,14 +115,14 @@ let y = _C(() => ({
     b.set(e, !0);
   }
 }));
-let w = _C(() => {
+let w = defineIntegration(() => {
   let e;
   return {
-    name: "Dedupe",
+    name: 'Dedupe',
     processEvent(n) {
       if (n.type) return n;
       try {
-        var i;
+        let i;
         if ((i = e) && (function (e, n) {
           let i = e.message;
           let t = n.message;
@@ -132,7 +132,7 @@ let w = _C(() => {
           let t = E(e);
           return !!(i && t && i.type === t.type && i.value === t.value && S(e, n) && k(e, n));
         }(n, i))) {
-          _$$T && vF.warn("Event dropped due to being a duplicate of previously captured event.");
+          _$$T && vF.warn('Event dropped due to being a duplicate of previously captured event.');
           return null;
         }
       } catch (e) {}
@@ -158,7 +158,7 @@ function S(e, n) {
   if (!i && !t) return !0;
   if (i && !t || !i && t) return !1;
   try {
-    return !(i.join("") !== t.join(""));
+    return !(i.join('') !== t.join(''));
   } catch (e) {
     return !1;
   }
@@ -184,18 +184,22 @@ function O(e, n) {
 }
 function A(e, n) {
   let i = e && P[e];
-  if (i) for (let t of i) try {
-    t(n);
-  } catch (n) {
-    _$$T2 && vF.error(`Error while triggering instrumentation handler.
+  if (i) {
+    for (let t of i) {
+      try {
+        t(n);
+      } catch (n) {
+        _$$T2 && vF.error(`Error while triggering instrumentation handler.
 Type: ${e}
 Name: ${qQ(t)}
 Error:`, n);
+      }
+    }
   }
 }
 let R = _$$O;
 function I(e) {
-  let n = "history";
+  let n = 'history';
   N(n, e);
   O(n, z);
 }
@@ -203,9 +207,11 @@ function z() {
   if (!function () {
     let e = R.chrome;
     let n = e && e.app && e.app.runtime;
-    let i = "history" in R && !!R.history.pushState && !!R.history.replaceState;
+    let i = 'history' in R && !!R.history.pushState && !!R.history.replaceState;
     return !n && i;
-  }()) return;
+  }()) {
+    return;
+  }
   let e = _$$j.onpopstate;
   function n(e) {
     return function (...n) {
@@ -214,7 +220,7 @@ function z() {
         let e = f;
         let n = String(i);
         f = n;
-        A("history", {
+        A('history', {
           from: e,
           to: n
         });
@@ -225,17 +231,19 @@ function z() {
   _$$j.onpopstate = function (...n) {
     let i = _$$j.location.href;
     let t = f;
-    if (f = i, A("history", {
+    if (f = i, A('history', {
       from: t,
       to: i
-    }), e) try {
-      return e.apply(this, n);
-    } catch (e) {}
+    }), e) {
+      try {
+        return e.apply(this, n);
+      } catch (e) {}
+    }
   };
-  GS(_$$j.history, "pushState", n);
-  GS(_$$j.history, "replaceState", n);
+  GS(_$$j.history, 'pushState', n);
+  GS(_$$j.history, 'replaceState', n);
 }
-let V = "Not capturing exception because it's already been captured.";
+let V = 'Not capturing exception because it\'s already been captured.';
 class K {
   constructor(e) {
     this._options = e;
@@ -244,15 +252,15 @@ class K {
     this._outcomes = {};
     this._hooks = {};
     this._eventProcessors = [];
-    if (e.dsn ? this._dsn = AD(e.dsn) : _$$T && vF.warn("No DSN provided, client will not send events."), this._dsn) {
+    if (e.dsn ? this._dsn = AD(e.dsn) : _$$T && vF.warn('No DSN provided, client will not send events.'), this._dsn) {
       let n = function (e, n, i) {
         return n || `${function (e) {
-          let n = e.protocol ? `${e.protocol}:` : "";
-          let i = e.port ? `:${e.port}` : "";
-          return `${n}//${e.host}${i}${e.path ? `/${e.path}` : ""}/api/`;
+          let n = e.protocol ? `${e.protocol}:` : '';
+          let i = e.port ? `:${e.port}` : '';
+          return `${n}//${e.host}${i}${e.path ? `/${e.path}` : ''}/api/`;
         }(e)}${e.projectId}/envelope/?${u4({
           sentry_key: e.publicKey,
-          sentry_version: "7",
+          sentry_version: '7',
           ...(i && {
             sentry_client: `${i.name}/${i.version}`
           })
@@ -304,7 +312,7 @@ class K {
     return f.event_id;
   }
   captureSession(e) {
-    "string" != typeof e.release ? _$$T && vF.warn("Discarded session because of missing or non-string release") : (this.sendSession(e), qO(e, {
+    typeof e.release != 'string' ? _$$T && vF.warn('Discarded session because of missing or non-string release') : (this.sendSession(e), qO(e, {
       init: !1
     }));
   }
@@ -322,10 +330,10 @@ class K {
   }
   flush(e) {
     let n = this._transport;
-    return n ? (this.emit("flush"), this._isClientDoneProcessing(e).then(i => n.flush(e).then(e => i && e))) : XW(!0);
+    return n ? (this.emit('flush'), this._isClientDoneProcessing(e).then(i => n.flush(e).then(e => i && e))) : XW(!0);
   }
   close(e) {
-    return this.flush(e).then(e => (this.getOptions().enabled = !1, this.emit("close"), e));
+    return this.flush(e).then(e => (this.getOptions().enabled = !1, this.emit('close'), e));
   }
   getEventProcessors() {
     return this._eventProcessors;
@@ -336,22 +344,22 @@ class K {
   init() {
     (this._isEnabled() || this._options.integrations.some(({
       name: e
-    }) => e.startsWith("Spotlight"))) && this._setupIntegrations();
+    }) => e.startsWith('Spotlight'))) && this._setupIntegrations();
   }
   getIntegrationByName(e) {
     return this._integrations[e];
   }
   addIntegration(e) {
     let n = this._integrations[e.name];
-    qm(this, e, this._integrations);
-    n || lc(this, [e]);
+    setupIntegration(this, e, this._integrations);
+    n || afterSetupIntegrations(this, [e]);
   }
   sendEvent(e, n = {}) {
-    this.emit("beforeSendEvent", e, n);
+    this.emit('beforeSendEvent', e, n);
     let i = function (e, n, i, t) {
-      var f;
+      let f;
       let r = Cj(i);
-      let a = e.type && "replay_event" !== e.type ? e.type : "event";
+      let a = e.type && e.type !== 'replay_event' ? e.type : 'event';
       (f = i && i.sdk) && (e.sdk = e.sdk || {}, e.sdk.name = e.sdk.name || f.name, e.sdk.version = e.sdk.version || f.version, e.sdk.integrations = [...(e.sdk.integrations || []), ...(f.integrations || [])], e.sdk.packages = [...(e.sdk.packages || []), ...(f.packages || [])]);
       let o = n2(e, r, t, n);
       delete e.sdkProcessingMetadata;
@@ -362,7 +370,7 @@ class K {
     }(e, this._dsn, this._options._metadata, this._options.tunnel);
     for (let e of n.attachments || []) i = W3(i, bm(e));
     let t = this.sendEnvelope(i);
-    t && t.then(n => this.emit("afterSendEvent", e, n), null);
+    t && t.then(n => this.emit('afterSendEvent', e, n), null);
   }
   sendSession(e) {
     let n = function (e, n, i, t) {
@@ -376,10 +384,10 @@ class K {
           dsn: SB(n)
         })
       };
-      let a = "aggregates" in e ? [{
-        type: "sessions"
+      let a = 'aggregates' in e ? [{
+        type: 'sessions'
       }, e] : [{
-        type: "session"
+        type: 'session'
       }, e.toJSON()];
       return h4(r, [a]);
     }(e, this._dsn, this._options._metadata, this._options.tunnel);
@@ -387,9 +395,9 @@ class K {
   }
   recordDroppedEvent(e, n, i) {
     if (this._options.sendClientReports) {
-      let t = "number" == typeof i ? i : 1;
+      let t = typeof i == 'number' ? i : 1;
       let f = `${e}:${n}`;
-      _$$T && vF.log(`Recording outcome: "${f}"${t > 1 ? ` (${t} times)` : ""}`);
+      _$$T && vF.log(`Recording outcome: "${f}"${t > 1 ? ` (${t} times)` : ''}`);
       this._outcomes[f] = (this._outcomes[f] || 0) + t;
     }
   }
@@ -406,30 +414,32 @@ class K {
     i && i.forEach(e => e(...n));
   }
   sendEnvelope(e) {
-    return (this.emit("beforeEnvelope", e), this._isEnabled() && this._transport) ? this._transport.send(e).then(null, e => (_$$T && vF.error("Error while sending envelope:", e), e)) : (_$$T && vF.error("Transport disabled"), XW({}));
+    return (this.emit('beforeEnvelope', e), this._isEnabled() && this._transport) ? this._transport.send(e).then(null, e => (_$$T && vF.error('Error while sending envelope:', e), e)) : (_$$T && vF.error('Transport disabled'), XW({}));
   }
   _setupIntegrations() {
     let {
       integrations
     } = this._options;
-    this._integrations = P$(this, integrations);
-    lc(this, integrations);
+    this._integrations = setupIntegrations(this, integrations);
+    afterSetupIntegrations(this, integrations);
   }
   _updateSessionFromEvent(e, n) {
     let i = !1;
     let t = !1;
     let f = n.exception && n.exception.values;
-    if (f) for (let e of (t = !0, f)) {
-      let n = e.mechanism;
-      if (n && !1 === n.handled) {
-        i = !0;
-        break;
+    if (f) {
+      for (let e of (t = !0, f)) {
+        let n = e.mechanism;
+        if (n && !1 === n.handled) {
+          i = !0;
+          break;
+        }
       }
     }
-    let r = "ok" === e.status;
-    (r && 0 === e.errors || r && i) && (qO(e, {
+    let r = e.status === 'ok';
+    (r && e.errors === 0 || r && i) && (qO(e, {
       ...(i && {
-        status: "crashed"
+        status: 'crashed'
       }),
       errors: e.errors || Number(t || i)
     }), this.captureSession(e));
@@ -438,21 +448,21 @@ class K {
     return new _$$T3(n => {
       let i = 0;
       let t = setInterval(() => {
-        0 == this._numProcessing ? (clearInterval(t), n(!0)) : (i += 1, e && i >= e && (clearInterval(t), n(!1)));
+        this._numProcessing == 0 ? (clearInterval(t), n(!0)) : (i += 1, e && i >= e && (clearInterval(t), n(!1)));
       }, 1);
     });
   }
   _isEnabled() {
     return !1 !== this.getOptions().enabled && void 0 !== this._transport;
   }
-  _prepareEvent(e, n, i, t = rm()) {
+  _prepareEvent(e, n, i, t = getIsolationScope()) {
     let f = this.getOptions();
     let r = Object.keys(this._integrations);
     !n.integrations && r.length > 0 && (n.integrations = r);
-    this.emit("preprocessEvent", e, n);
+    this.emit('preprocessEvent', e, n);
     e.type || t.setLastEventId(e.event_id || n.event_id);
     return mG(f, e, n, i, this, t).then(e => {
-      if (null === e) return e;
+      if (e === null) return e;
       let n = {
         ...t.getPropagationContext(),
         ...(i ? i.getPropagationContext() : void 0)
@@ -483,7 +493,7 @@ class K {
   }
   _captureEvent(e, n = {}, i) {
     return this._processEvent(e, n, i).then(e => e.event_id, e => {
-      _$$T && ("log" === e.logLevel ? vF.log(e.message) : vF.warn(e));
+      _$$T && (e.logLevel === 'log' ? vF.log(e.message) : vF.warn(e));
     });
   }
   _processEvent(e, n, i) {
@@ -493,37 +503,39 @@ class K {
     } = t;
     let r = Q(e);
     let a = X(e);
-    let o = e.type || "error";
+    let o = e.type || 'error';
     let l = `before send for type \`${o}\``;
     let s = void 0 === sampleRate ? void 0 : function (e) {
-      if ("boolean" == typeof e) return Number(e);
-      let n = "string" == typeof e ? parseFloat(e) : e;
-      if ("number" != typeof n || isNaN(n) || n < 0 || n > 1) {
+      if (typeof e == 'boolean') return Number(e);
+      let n = typeof e == 'string' ? parseFloat(e) : e;
+      if (typeof n != 'number' || isNaN(n) || n < 0 || n > 1) {
         _$$T && vF.warn(`[Tracing] Given sample rate is invalid. Sample rate must be a boolean or a number between 0 and 1. Got ${JSON.stringify(e)} of type ${JSON.stringify(typeof e)}.`);
         return;
       }
       return n;
     }(sampleRate);
-    if (a && "number" == typeof s && Math.random() > s) {
-      this.recordDroppedEvent("sample_rate", "error", e);
-      return xg(new _$$U(`Discarding event because it's not included in the random sample (sampling rate = ${sampleRate})`, "log"));
+    if (a && typeof s == 'number' && Math.random() > s) {
+      this.recordDroppedEvent('sample_rate', 'error', e);
+      return xg(new _$$U(`Discarding event because it's not included in the random sample (sampling rate = ${sampleRate})`, 'log'));
     }
-    let c = "replay_event" === o ? "replay" : o;
+    let c = o === 'replay_event' ? 'replay' : o;
     let h = (e.sdkProcessingMetadata || {}).capturedSpanIsolationScope;
     return this._prepareEvent(e, n, i, h).then(i => {
-      if (null === i) {
-        this.recordDroppedEvent("event_processor", c, e);
-        return new _$$U("An event processor returned `null`, will not send event.", "log");
+      if (i === null) {
+        this.recordDroppedEvent('event_processor', c, e);
+        return new _$$U('An event processor returned `null`, will not send event.', 'log');
       }
       return n.data && !0 === n.data.__sentry__ ? i : function (e, n) {
         let i = `${n} must return \`null\` or a valid event.`;
-        if (Qg(e)) return e.then(e => {
-          if (!Qd(e) && null !== e) throw new _$$U(i);
-          return e;
-        }, e => {
-          throw new _$$U(`${n} rejected with ${e}`);
-        });
-        if (!Qd(e) && null !== e) throw new _$$U(i);
+        if (Qg(e)) {
+          return e.then(e => {
+            if (!Qd(e) && e !== null) throw new _$$U(i);
+            return e;
+          }, e => {
+            throw new _$$U(`${n} rejected with ${e}`);
+          });
+        }
+        if (!Qd(e) && e !== null) throw new _$$U(i);
         return e;
       }(function (e, n, i, t) {
         let {
@@ -537,7 +549,7 @@ class K {
             let n = [];
             for (let t of i.spans) {
               let i = beforeSendSpan(t);
-              i ? n.push(i) : e.recordDroppedEvent("before_send", "span");
+              i ? n.push(i) : e.recordDroppedEvent('before_send', 'span');
             }
             i.spans = n;
           }
@@ -555,22 +567,22 @@ class K {
         return i;
       }(this, t, i, n), l);
     }).then(t => {
-      if (null === t) {
-        if (this.recordDroppedEvent("before_send", c, e), r) {
+      if (t === null) {
+        if (this.recordDroppedEvent('before_send', c, e), r) {
           let n = 1 + (e.spans || []).length;
-          this.recordDroppedEvent("before_send", "span", n);
+          this.recordDroppedEvent('before_send', 'span', n);
         }
-        throw new _$$U(`${l} returned \`null\`, will not send event.`, "log");
+        throw new _$$U(`${l} returned \`null\`, will not send event.`, 'log');
       }
       let f = i && i.getSession();
       if (!r && f && this._updateSessionFromEvent(f, t), r) {
         let e = (t.sdkProcessingMetadata && t.sdkProcessingMetadata.spanCountBeforeProcessing || 0) - (t.spans ? t.spans.length : 0);
-        e > 0 && this.recordDroppedEvent("before_send", "span", e);
+        e > 0 && this.recordDroppedEvent('before_send', 'span', e);
       }
       let a = t.transaction_info;
       r && a && t.transaction !== e.transaction && (t.transaction_info = {
         ...a,
-        source: "custom"
+        source: 'custom'
       });
       this.sendEvent(t, n);
       return t;
@@ -594,7 +606,7 @@ Reason: ${e}`);
     let e = this._outcomes;
     this._outcomes = {};
     return Object.entries(e).map(([e, n]) => {
-      let [i, t] = e.split(":");
+      let [i, t] = e.split(':');
       return {
         reason: i,
         category: t,
@@ -603,20 +615,20 @@ Reason: ${e}`);
     });
   }
   _flushOutcomes() {
-    _$$T && vF.log("Flushing outcomes...");
+    _$$T && vF.log('Flushing outcomes...');
     let e = this._clearOutcomes();
-    if (0 === e.length) {
-      _$$T && vF.log("No outcomes to send");
+    if (e.length === 0) {
+      _$$T && vF.log('No outcomes to send');
       return;
     }
     if (!this._dsn) {
-      _$$T && vF.log("No dsn provided, will not send outcomes");
+      _$$T && vF.log('No dsn provided, will not send outcomes');
       return;
     }
-    _$$T && vF.log("Sending outcomes:", e);
+    _$$T && vF.log('Sending outcomes:', e);
     let n = function (e, n, i) {
       let t = [{
-        type: "client_report"
+        type: 'client_report'
       }, {
         timestamp: lu(),
         discarded_events: e
@@ -632,25 +644,25 @@ function X(e) {
   return void 0 === e.type;
 }
 function Q(e) {
-  return "transaction" === e.type;
+  return e.type === 'transaction';
 }
-let Z = "undefined" == typeof __SENTRY_DEBUG__ || __SENTRY_DEBUG__;
+let Z = typeof __SENTRY_DEBUG__ == 'undefined' || __SENTRY_DEBUG__;
 function ee(e, n) {
   let i = ei(e, n);
   let t = {
     type: function (e) {
       let n = e && e.name;
-      return !n && ef(e) ? e.message && Array.isArray(e.message) && 2 == e.message.length ? e.message[0] : "WebAssembly.Exception" : n;
+      return !n && ef(e) ? e.message && Array.isArray(e.message) && e.message.length == 2 ? e.message[0] : 'WebAssembly.Exception' : n;
     }(n),
     value: function (e) {
       let n = e && e.message;
-      return n ? n.error && "string" == typeof n.error.message ? n.error.message : ef(e) && Array.isArray(e.message) && 2 == e.message.length ? e.message[1] : n : "No error message";
+      return n ? n.error && typeof n.error.message == 'string' ? n.error.message : ef(e) && Array.isArray(e.message) && e.message.length == 2 ? e.message[1] : n : 'No error message';
     }(n)
   };
   i.length && (t.stacktrace = {
     frames: i
   });
-  void 0 === t.type && "" === t.value && (t.value = "Unrecoverable error caught");
+  void 0 === t.type && t.value === '' && (t.value = 'Unrecoverable error caught');
   return t;
 }
 function en(e, n) {
@@ -661,9 +673,9 @@ function en(e, n) {
   };
 }
 function ei(e, n) {
-  let i = n.stacktrace || n.stack || "";
+  let i = n.stacktrace || n.stack || '';
   let t = n && et.test(n.message) ? 1 : 0;
-  let f = "number" == typeof n.framesToPop ? n.framesToPop : 0;
+  let f = typeof n.framesToPop == 'number' ? n.framesToPop : 0;
   try {
     return e(i, t, f);
   } catch (e) {}
@@ -671,51 +683,57 @@ function ei(e, n) {
 }
 let et = /Minified React error #\d+;/i;
 function ef(e) {
-  return "undefined" != typeof WebAssembly && void 0 !== WebAssembly.Exception && e instanceof WebAssembly.Exception;
+  return typeof WebAssembly != 'undefined' && void 0 !== WebAssembly.Exception && e instanceof WebAssembly.Exception;
 }
 function er(e, n, i, t, f) {
   let r;
   if (T2(n) && n.error) return en(e, n.error);
   if (BD(n) || W6(n)) {
-    if ("stack" in n) r = en(e, n);else {
-      let f = n.name || (BD(n) ? "DOMError" : "DOMException");
+    if ('stack' in n) {
+      r = en(e, n);
+    } else {
+      let f = n.name || (BD(n) ? 'DOMError' : 'DOMException');
       let a = n.message ? `${f}: ${n.message}` : f;
       r = ea(e, a, i, t);
       gO(r, a);
     }
-    "code" in n && (r.tags = {
+    'code' in n && (r.tags = {
       ...r.tags,
-      "DOMException.code": `${n.code}`
+      'DOMException.code': `${n.code}`
     });
     return r;
   }
   return bJ(n) ? en(e, n) : (Qd(n) || xH(n) ? r = function (e, n, i, t) {
-    let f = KU();
+    let f = getClient();
     let r = f && f.getOptions().normalizeDepth;
     let a = function (e) {
-      for (let n in e) if (Object.prototype.hasOwnProperty.call(e, n)) {
-        let i = e[n];
-        if (i instanceof Error) return i;
+      for (let n in e) {
+        if (Object.prototype.hasOwnProperty.call(e, n)) {
+          let i = e[n];
+          if (i instanceof Error) return i;
+        }
       }
     }(n);
     let o = {
-      __serialized__: cd(n, r)
+      __serialized__: normalizeToSize(n, r)
     };
-    if (a) return {
-      exception: {
-        values: [ee(e, a)]
-      },
-      extra: o
-    };
+    if (a) {
+      return {
+        exception: {
+          values: [ee(e, a)]
+        },
+        extra: o
+      };
+    }
     let u = {
       exception: {
         values: [{
-          type: xH(n) ? n.constructor.name : t ? "UnhandledRejection" : "Error",
+          type: xH(n) ? n.constructor.name : t ? 'UnhandledRejection' : 'Error',
           value: function (e, {
             isUnhandledRejection: n
           }) {
             let i = HF(e);
-            let t = n ? "promise rejection" : "exception";
+            let t = n ? 'promise rejection' : 'exception';
             if (T2(e)) return `Event \`ErrorEvent\` captured as ${t} with message \`${e.message}\``;
             if (xH(e)) {
               let n = function (e) {
@@ -775,11 +793,11 @@ function ea(e, n, i, t) {
 let eo = _$$O;
 let eu = 0;
 function el(e, n = {}, i) {
-  if ("function" != typeof e) return e;
+  if (typeof e != 'function') return e;
   try {
     let n = e.__sentry_wrapped__;
     if (n) {
-      if ("function" == typeof n) return n;
+      if (typeof n == 'function') return n;
       return e;
     }
     if (sp(e)) return e;
@@ -796,12 +814,12 @@ function el(e, n = {}, i) {
       setTimeout(() => {
         eu--;
       });
-      v4(t => {
+      withScope(t => {
         t.addEventProcessor(e => (n.mechanism && (gO(e, void 0, void 0), M6(e, n.mechanism)), e.extra = {
           ...e.extra,
           arguments: i
         }, e));
-        Cp(e);
+        captureException(e);
       });
       return e;
     }
@@ -810,9 +828,9 @@ function el(e, n = {}, i) {
     for (let n in e) Object.prototype.hasOwnProperty.call(e, n) && (t[n] = e[n]);
   } catch (e) {}
   pO(t, e);
-  my(e, "__sentry_wrapped__", t);
+  my(e, '__sentry_wrapped__', t);
   try {
-    Object.getOwnPropertyDescriptor(t, "name").configurable && Object.defineProperty(t, "name", {
+    Object.getOwnPropertyDescriptor(t, 'name').configurable && Object.defineProperty(t, 'name', {
       get: () => e.name
     });
   } catch (e) {}
@@ -824,7 +842,7 @@ class ed extends K {
       parentSpanIsAlwaysRootSpan: !0,
       ...e
     };
-    !function (e, n, i = [n], t = "npm") {
+    !function (e, n, i = [n], t = 'npm') {
       let f = e._metadata || {};
       f.sdk || (f.sdk = {
         name: `sentry.javascript.${n}`,
@@ -835,23 +853,23 @@ class ed extends K {
         version: _$$M
       });
       e._metadata = f;
-    }(n, "browser", ["browser"], eo.SENTRY_SDK_SOURCE || "npm");
+    }(n, 'browser', ['browser'], eo.SENTRY_SDK_SOURCE || 'npm');
     super(n);
-    n.sendClientReports && eo.document && eo.document.addEventListener("visibilitychange", () => {
-      "hidden" === eo.document.visibilityState && this._flushOutcomes();
+    n.sendClientReports && eo.document && eo.document.addEventListener('visibilitychange', () => {
+      eo.document.visibilityState === 'hidden' && this._flushOutcomes();
     });
   }
   eventFromException(e, n) {
     return function (e, n, i, t) {
       let f = er(e, n, i && i.syntheticException || void 0, t);
       M6(f);
-      f.level = "error";
+      f.level = 'error';
       i && i.event_id && (f.event_id = i.event_id);
       return XW(f);
     }(this._options.stackParser, e, n, this._options.attachStacktrace);
   }
-  eventFromMessage(e, n = "info", i) {
-    return function (e, n, i = "info", t, f) {
+  eventFromMessage(e, n = 'info', i) {
+    return function (e, n, i = 'info', t, f) {
       let r = ea(e, n, t && t.syntheticException || void 0, f);
       r.level = i;
       t && t.event_id && (r.event_id = t.event_id);
@@ -860,7 +878,7 @@ class ed extends K {
   }
   captureUserFeedback(e) {
     if (!this._isEnabled()) {
-      Z && vF.warn("SDK not enabled, will not capture user feedback.");
+      Z && vF.warn('SDK not enabled, will not capture user feedback.');
       return;
     }
     let n = function (e, {
@@ -882,7 +900,7 @@ class ed extends K {
         })
       };
       let r = [{
-        type: "user_report"
+        type: 'user_report'
       }, e];
       return h4(f, [r]);
     }(e, {
@@ -893,41 +911,45 @@ class ed extends K {
     this.sendEnvelope(n);
   }
   _prepareEvent(e, n, i) {
-    e.platform = e.platform || "javascript";
+    e.platform = e.platform || 'javascript';
     return super._prepareEvent(e, n, i);
   }
 }
 function es() {
   if (!_$$j.document) return;
-  let e = A.bind(null, "dom");
+  let e = A.bind(null, 'dom');
   let n = ec(e, !0);
-  _$$j.document.addEventListener("click", n, !1);
-  _$$j.document.addEventListener("keypress", n, !1);
-  ["EventTarget", "Node"].forEach(n => {
+  _$$j.document.addEventListener('click', n, !1);
+  _$$j.document.addEventListener('keypress', n, !1);
+  ['EventTarget', 'Node'].forEach(n => {
     let i = _$$j[n] && _$$j[n].prototype;
-    i && i.hasOwnProperty && i.hasOwnProperty("addEventListener") && (GS(i, "addEventListener", function (n) {
+    i && i.hasOwnProperty && i.hasOwnProperty('addEventListener') && (GS(i, 'addEventListener', n => {
       return function (i, t, f) {
-        if ("click" === i || "keypress" == i) try {
-          let t = this.__sentry_instrumentation_handlers__ = this.__sentry_instrumentation_handlers__ || {};
-          let r = t[i] = t[i] || {
-            refCount: 0
-          };
-          if (!r.handler) {
-            let t = ec(e);
-            r.handler = t;
-            n.call(this, i, t, f);
-          }
-          r.refCount++;
-        } catch (e) {}
+        if (i === 'click' || i == 'keypress') {
+          try {
+            let t = this.__sentry_instrumentation_handlers__ = this.__sentry_instrumentation_handlers__ || {};
+            let r = t[i] = t[i] || {
+              refCount: 0
+            };
+            if (!r.handler) {
+              let t = ec(e);
+              r.handler = t;
+              n.call(this, i, t, f);
+            }
+            r.refCount++;
+          } catch (e) {}
+        }
         return n.call(this, i, t, f);
       };
-    }), GS(i, "removeEventListener", function (e) {
+    }), GS(i, 'removeEventListener', e => {
       return function (n, i, t) {
-        if ("click" === n || "keypress" == n) try {
-          let i = this.__sentry_instrumentation_handlers__ || {};
-          let f = i[n];
-          f && (f.refCount--, f.refCount <= 0 && (e.call(this, n, f.handler, t), f.handler = void 0, delete i[n]), 0 === Object.keys(i).length && delete this.__sentry_instrumentation_handlers__);
-        } catch (e) {}
+        if (n === 'click' || n == 'keypress') {
+          try {
+            let i = this.__sentry_instrumentation_handlers__ || {};
+            let f = i[n];
+            f && (f.refCount--, f.refCount <= 0 && (e.call(this, n, f.handler, t), f.handler = void 0, delete i[n]), Object.keys(i).length === 0 && delete this.__sentry_instrumentation_handlers__);
+          } catch (e) {}
+        }
         return e.call(this, n, i, t);
       };
     }));
@@ -943,10 +965,10 @@ function ec(e, n = !1) {
         return null;
       }
     }(i);
-    if ("keypress" === i.type && (!t || !t.tagName || "INPUT" !== t.tagName && "TEXTAREA" !== t.tagName && !t.isContentEditable)) return;
-    my(i, "_sentryCaptured", !0);
-    t && !t._sentryId && my(t, "_sentryId", eJ());
-    let f = "keypress" === i.type ? "input" : i.type;
+    if (i.type === 'keypress' && (!t || !t.tagName || t.tagName !== 'INPUT' && t.tagName !== 'TEXTAREA' && !t.isContentEditable)) return;
+    my(i, '_sentryCaptured', !0);
+    t && !t._sentryId && my(t, '_sentryId', eJ());
+    let f = i.type === 'keypress' ? 'input' : i.type;
     !function (e) {
       if (e.type !== a) return !1;
       try {
@@ -965,7 +987,7 @@ function ec(e, n = !1) {
     }, 1e3);
   };
 }
-let eh = "__sentry_xhr_v3__";
+let eh = '__sentry_xhr_v3__';
 function ep() {
   if (!_$$j.XMLHttpRequest) return;
   let e = XMLHttpRequest.prototype;
@@ -985,23 +1007,23 @@ function ep() {
         url: r,
         request_headers: {}
       };
-      "POST" === f && r.match(/sentry_key/) && (n.__sentry_own_request__ = !0);
+      f === 'POST' && r.match(/sentry_key/) && (n.__sentry_own_request__ = !0);
       let a = () => {
         let e = n[eh];
-        if (e && 4 === n.readyState) {
+        if (e && n.readyState === 4) {
           try {
             e.status_code = n.status;
           } catch (e) {}
-          A("xhr", {
+          A('xhr', {
             endTimestamp: 1e3 * zf(),
             startTimestamp: t,
             xhr: n
           });
         }
       };
-      "onreadystatechange" in n && "function" == typeof n.onreadystatechange ? n.onreadystatechange = new Proxy(n.onreadystatechange, {
+      'onreadystatechange' in n && typeof n.onreadystatechange == 'function' ? n.onreadystatechange = new Proxy(n.onreadystatechange, {
         apply: (e, n, i) => (a(), e.apply(n, i))
-      }) : n.addEventListener("readystatechange", a);
+      }) : n.addEventListener('readystatechange', a);
       n.setRequestHeader = new Proxy(n.setRequestHeader, {
         apply(e, n, i) {
           let [t, f] = i;
@@ -1016,7 +1038,7 @@ function ep() {
   e.send = new Proxy(e.send, {
     apply(e, n, i) {
       let t = n[eh];
-      t && (void 0 !== i[0] && (t.body = i[0]), A("xhr", {
+      t && (void 0 !== i[0] && (t.body = i[0]), A('xhr', {
         startTimestamp: 1e3 * zf(),
         xhr: n
       }));
@@ -1025,11 +1047,11 @@ function ep() {
   });
 }
 function eg() {
-  "console" in _$$O && Ow.forEach(function (e) {
-    e in _$$O.console && GS(_$$O.console, e, function (n) {
+  'console' in _$$O && Ow.forEach(e => {
+    e in _$$O.console && GS(_$$O.console, e, n => {
       Z9[e] = n;
       return function (...n) {
-        A("console", {
+        A('console', {
           args: n,
           level: e
         });
@@ -1040,21 +1062,21 @@ function eg() {
   });
 }
 function em(e, n) {
-  return !!e && "object" == typeof e && !!e[n];
+  return !!e && typeof e == 'object' && !!e[n];
 }
 function e_(e) {
-  return "string" == typeof e ? e : e ? em(e, "url") ? e.url : e.toString ? e.toString() : "" : "";
+  return typeof e == 'string' ? e : e ? em(e, 'url') ? e.url : e.toString ? e.toString() : '' : '';
 }
-let ev = ["fatal", "error", "warning", "log", "info", "debug"];
+let ev = ['fatal', 'error', 'warning', 'log', 'info', 'debug'];
 function ew(e) {
-  if (void 0 !== e) return e >= 400 && e < 500 ? "warning" : e >= 500 ? "error" : void 0;
+  if (void 0 !== e) return e >= 400 && e < 500 ? 'warning' : e >= 500 ? 'error' : void 0;
 }
 function ek(e) {
   if (!e) return {};
   let n = e.match(/^(([^:/?#]+):)?(\/\/([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?$/);
   if (!n) return {};
-  let i = n[6] || "";
-  let t = n[8] || "";
+  let i = n[6] || '';
+  let t = n[8] || '';
   return {
     host: n[4],
     path: n[5],
@@ -1064,7 +1086,7 @@ function ek(e) {
     relative: n[5] + i + t
   };
 }
-let eS = _C((e = {}) => {
+let eS = defineIntegration((e = {}) => {
   let n = {
     console: !0,
     dom: !0,
@@ -1075,43 +1097,43 @@ let eS = _C((e = {}) => {
     ...e
   };
   return {
-    name: "Breadcrumbs",
+    name: 'Breadcrumbs',
     setup(e) {
-      var i;
+      let i;
       n.console && function (e) {
-        let n = "console";
+        let n = 'console';
         N(n, e);
         O(n, eg);
-      }(function (n) {
-        var i;
-        if (KU() !== e) return;
+      }(n => {
+        let i;
+        if (getClient() !== e) return;
         let t = {
-          category: "console",
+          category: 'console',
           data: {
             arguments: n.args,
-            logger: "console"
+            logger: 'console'
           },
-          level: "warn" === (i = n.level) ? "warning" : ev.includes(i) ? i : "log",
-          message: gt(n.args, " ")
+          level: (i = n.level) === 'warn' ? 'warning' : ev.includes(i) ? i : 'log',
+          message: gt(n.args, ' ')
         };
-        if ("assert" === n.level) {
+        if (n.level === 'assert') {
           if (!1 !== n.args[0]) return;
-          t.message = `Assertion failed: ${gt(n.args.slice(1), " ") || "console.assert"}`;
+          t.message = `Assertion failed: ${gt(n.args.slice(1), ' ') || 'console.assert'}`;
           t.data.$$arguments = n.args.slice(1);
         }
-        _$$Z(t, {
+        addBreadcrumb(t, {
           input: n.args,
           level: n.level
         });
       });
-      n.dom && (N("dom", (i = n.dom, function (n) {
+      n.dom && (N('dom', (i = n.dom, function (n) {
         let t;
         let f;
-        if (KU() !== e) return;
-        let r = "object" == typeof i ? i.serializeAttribute : void 0;
-        let a = "object" == typeof i && "number" == typeof i.maxStringLength ? i.maxStringLength : void 0;
+        if (getClient() !== e) return;
+        let r = typeof i == 'object' ? i.serializeAttribute : void 0;
+        let a = typeof i == 'object' && typeof i.maxStringLength == 'number' ? i.maxStringLength : void 0;
         a && a > 1024 && (Z && vF.warn(`\`dom.maxStringLength\` cannot exceed 1024, but a value of ${a} was configured. Sentry will use 1024 instead.`), a = 1024);
-        "string" == typeof r && (r = [r]);
+        typeof r == 'string' && (r = [r]);
         try {
           let e = n.event;
           let i = e && e.target ? e.target : e;
@@ -1121,24 +1143,24 @@ let eS = _C((e = {}) => {
           });
           f = xE(i);
         } catch (e) {
-          t = "<unknown>";
+          t = '<unknown>';
         }
-        if (0 === t.length) return;
+        if (t.length === 0) return;
         let o = {
           category: `ui.${n.name}`,
           message: t
         };
         f && (o.data = {
-          "ui.component_name": f
+          'ui.component_name': f
         });
-        _$$Z(o, {
+        addBreadcrumb(o, {
           event: n.event,
           name: n.name,
           global: n.global
         });
-      })), O("dom", es));
-      n.xhr && (N("xhr", function (n) {
-        if (KU() !== e) return;
+      })), O('dom', es));
+      n.xhr && (N('xhr', n => {
+        if (getClient() !== e) return;
         let {
           startTimestamp,
           endTimestamp
@@ -1158,42 +1180,44 @@ let eS = _C((e = {}) => {
           endTimestamp
         };
         let d = ew(status_code);
-        _$$Z({
-          category: "xhr",
+        addBreadcrumb({
+          category: 'xhr',
           data: {
             method,
             url,
             status_code
           },
-          type: "http",
+          type: 'http',
           level: d
         }, l);
-      }), O("xhr", ep));
+      }), O('xhr', ep));
       n.fetch && function (e, n) {
-        let i = "fetch";
+        let i = 'fetch';
         N(i, e);
         O(i, () => function (e, n = !1) {
-          (!n || m7()) && GS(_$$O, "fetch", function (n) {
+          (!n || m7()) && GS(_$$O, 'fetch', n => {
             return function (...i) {
               let {
                 method,
                 url
               } = function (e) {
-                if (0 === e.length) return {
-                  method: "GET",
-                  url: ""
-                };
-                if (2 === e.length) {
+                if (e.length === 0) {
+                  return {
+                    method: 'GET',
+                    url: ''
+                  };
+                }
+                if (e.length === 2) {
                   let [n, i] = e;
                   return {
                     url: e_(n),
-                    method: em(i, "method") ? String(i.method).toUpperCase() : "GET"
+                    method: em(i, 'method') ? String(i.method).toUpperCase() : 'GET'
                   };
                 }
                 let n = e[0];
                 return {
                   url: e_(n),
-                  method: em(n, "method") ? String(n.method).toUpperCase() : "GET"
+                  method: em(n, 'method') ? String(n.method).toUpperCase() : 'GET'
                 };
               }(i);
               let r = {
@@ -1204,33 +1228,33 @@ let eS = _C((e = {}) => {
                 },
                 startTimestamp: 1e3 * zf()
               };
-              e || A("fetch", {
+              e || A('fetch', {
                 ...r
               });
-              let a = Error().stack;
-              return n.apply(_$$O, i).then(async n => (e ? e(n) : A("fetch", {
+              let a = new Error().stack;
+              return n.apply(_$$O, i).then(async n => (e ? e(n) : A('fetch', {
                 ...r,
                 endTimestamp: 1e3 * zf(),
                 response: n
               }), n), e => {
-                A("fetch", {
+                A('fetch', {
                   ...r,
                   endTimestamp: 1e3 * zf(),
                   error: e
                 });
-                bJ(e) && void 0 === e.stack && (e.stack = a, my(e, "framesToPop", 1));
+                bJ(e) && void 0 === e.stack && (e.stack = a, my(e, 'framesToPop', 1));
                 return e;
               });
             };
           });
         }(void 0, void 0));
-      }(function (n) {
-        if (KU() !== e) return;
+      }(n => {
+        if (getClient() !== e) return;
         let {
           startTimestamp,
           endTimestamp
         } = n;
-        if (!(!endTimestamp || n.fetchData.url.match(/sentry_key/) && "POST" === n.fetchData.method)) {
+        if (!(!endTimestamp || n.fetchData.url.match(/sentry_key/) && n.fetchData.method === 'POST')) {
           if (n.error) {
             let e = n.fetchData;
             let f = {
@@ -1239,11 +1263,11 @@ let eS = _C((e = {}) => {
               startTimestamp,
               endTimestamp
             };
-            _$$Z({
-              category: "fetch",
+            addBreadcrumb({
+              category: 'fetch',
               data: e,
-              level: "error",
-              type: "http"
+              level: 'error',
+              type: 'http'
             }, f);
           } else {
             let e = n.response;
@@ -1258,17 +1282,17 @@ let eS = _C((e = {}) => {
               endTimestamp
             };
             let a = ew(f.status_code);
-            _$$Z({
-              category: "fetch",
+            addBreadcrumb({
+              category: 'fetch',
               data: f,
-              type: "http",
+              type: 'http',
               level: a
             }, r);
           }
         }
       });
-      n.history && I(function (n) {
-        if (KU() !== e) return;
+      n.history && I(n => {
+        if (getClient() !== e) return;
         let i = n.from;
         let t = n.to;
         let f = ek(eo.location.href);
@@ -1277,17 +1301,17 @@ let eS = _C((e = {}) => {
         r && r.path || (r = f);
         f.protocol === a.protocol && f.host === a.host && (t = a.relative);
         f.protocol === r.protocol && f.host === r.host && (i = r.relative);
-        _$$Z({
-          category: "navigation",
+        addBreadcrumb({
+          category: 'navigation',
           data: {
             from: i,
             to: t
           }
         });
       });
-      n.sentry && e.on("beforeSendEvent", function (n) {
-        KU() === e && _$$Z({
-          category: `sentry.${"transaction" === n.type ? "transaction" : "event"}`,
+      n.sentry && e.on('beforeSendEvent', n => {
+        getClient() === e && addBreadcrumb({
+          category: `sentry.${n.type === 'transaction' ? 'transaction' : 'event'}`,
           event_id: n.event_id,
           level: n.level,
           message: $X(n)
@@ -1298,8 +1322,8 @@ let eS = _C((e = {}) => {
     }
   };
 });
-let eE = ["EventTarget", "Window", "Node", "ApplicationCache", "AudioTrackList", "BroadcastChannel", "ChannelMergerNode", "CryptoOperation", "EventSource", "FileReader", "HTMLUnknownElement", "IDBDatabase", "IDBRequest", "IDBTransaction", "KeyOperation", "MediaController", "MessagePort", "ModalWindow", "Notification", "SVGElementInstance", "Screen", "SharedWorker", "TextTrack", "TextTrackCue", "TextTrackList", "WebSocket", "WebSocketWorker", "Worker", "XMLHttpRequest", "XMLHttpRequestEventTarget", "XMLHttpRequestUpload"];
-let ex = _C((e = {}) => {
+let eE = ['EventTarget', 'Window', 'Node', 'ApplicationCache', 'AudioTrackList', 'BroadcastChannel', 'ChannelMergerNode', 'CryptoOperation', 'EventSource', 'FileReader', 'HTMLUnknownElement', 'IDBDatabase', 'IDBRequest', 'IDBTransaction', 'KeyOperation', 'MediaController', 'MessagePort', 'ModalWindow', 'Notification', 'SVGElementInstance', 'Screen', 'SharedWorker', 'TextTrack', 'TextTrackCue', 'TextTrackList', 'WebSocket', 'WebSocketWorker', 'Worker', 'XMLHttpRequest', 'XMLHttpRequestEventTarget', 'XMLHttpRequestUpload'];
+let ex = defineIntegration((e = {}) => {
   let n = {
     XMLHttpRequest: !0,
     eventTarget: !0,
@@ -1309,12 +1333,12 @@ let ex = _C((e = {}) => {
     ...e
   };
   return {
-    name: "BrowserApiErrors",
+    name: 'BrowserApiErrors',
     setupOnce() {
-      n.setTimeout && GS(eo, "setTimeout", eC);
-      n.setInterval && GS(eo, "setInterval", eC);
-      n.requestAnimationFrame && GS(eo, "requestAnimationFrame", eT);
-      n.XMLHttpRequest && "XMLHttpRequest" in eo && GS(XMLHttpRequest.prototype, "send", eP);
+      n.setTimeout && GS(eo, 'setTimeout', eC);
+      n.setInterval && GS(eo, 'setInterval', eC);
+      n.requestAnimationFrame && GS(eo, 'requestAnimationFrame', eT);
+      n.XMLHttpRequest && 'XMLHttpRequest' in eo && GS(XMLHttpRequest.prototype, 'send', eP);
       let e = n.eventTarget;
       e && (Array.isArray(e) ? e : eE).forEach(eL);
     }
@@ -1329,7 +1353,7 @@ function eC(e) {
           function: qQ(e)
         },
         handled: !1,
-        type: "instrument"
+        type: 'instrument'
       }
     });
     return e.apply(this, n);
@@ -1340,11 +1364,11 @@ function eT(e) {
     return e.apply(this, [el(n, {
       mechanism: {
         data: {
-          function: "requestAnimationFrame",
+          function: 'requestAnimationFrame',
           handler: qQ(e)
         },
         handled: !1,
-        type: "instrument"
+        type: 'instrument'
       }
     })]);
   };
@@ -1352,8 +1376,8 @@ function eT(e) {
 function eP(e) {
   return function (...n) {
     let i = this;
-    ["onload", "onerror", "onprogress", "onreadystatechange"].forEach(e => {
-      e in i && "function" == typeof i[e] && GS(i, e, function (n) {
+    ['onload', 'onerror', 'onprogress', 'onreadystatechange'].forEach(e => {
+      e in i && typeof i[e] == 'function' && GS(i, e, n => {
         let i = {
           mechanism: {
             data: {
@@ -1361,7 +1385,7 @@ function eP(e) {
               handler: qQ(n)
             },
             handled: !1,
-            type: "instrument"
+            type: 'instrument'
           }
         };
         let t = sp(n);
@@ -1374,34 +1398,34 @@ function eP(e) {
 }
 function eL(e) {
   let n = eo[e] && eo[e].prototype;
-  n && n.hasOwnProperty && n.hasOwnProperty("addEventListener") && (GS(n, "addEventListener", function (n) {
+  n && n.hasOwnProperty && n.hasOwnProperty('addEventListener') && (GS(n, 'addEventListener', n => {
     return function (i, t, f) {
       try {
-        "function" == typeof t.handleEvent && (t.handleEvent = el(t.handleEvent, {
+        typeof t.handleEvent == 'function' && (t.handleEvent = el(t.handleEvent, {
           mechanism: {
             data: {
-              function: "handleEvent",
+              function: 'handleEvent',
               handler: qQ(t),
               target: e
             },
             handled: !1,
-            type: "instrument"
+            type: 'instrument'
           }
         }));
       } catch (e) {}
       return n.apply(this, [i, el(t, {
         mechanism: {
           data: {
-            function: "addEventListener",
+            function: 'addEventListener',
             handler: qQ(t),
             target: e
           },
           handled: !1,
-          type: "instrument"
+          type: 'instrument'
         }
       }), f]);
     };
-  }), GS(n, "removeEventListener", function (e) {
+  }), GS(n, 'removeEventListener', e => {
     return function (n, i, t) {
       try {
         let f = i && i.__sentry_wrapped__;
@@ -1415,7 +1439,7 @@ let eN = null;
 function eO() {
   eN = _$$O.onerror;
   _$$O.onerror = function (e, n, i, t, f) {
-    A("error", {
+    A('error', {
       column: t,
       error: f,
       line: i,
@@ -1430,25 +1454,25 @@ let eA = null;
 function eM() {
   eA = _$$O.onunhandledrejection;
   _$$O.onunhandledrejection = function (e) {
-    A("unhandledrejection", e);
+    A('unhandledrejection', e);
     return !eA || !!eA.__SENTRY_LOADER__ || eA.apply(this, arguments);
   };
   _$$O.onunhandledrejection.__SENTRY_INSTRUMENTED__ = !0;
 }
-let eR = _C((e = {}) => {
+let eR = defineIntegration((e = {}) => {
   let n = {
     onerror: !0,
     onunhandledrejection: !0,
     ...e
   };
   return {
-    name: "GlobalHandlers",
+    name: 'GlobalHandlers',
     setupOnce() {
       Error.stackTraceLimit = 50;
     },
     setup(e) {
       n.onerror && (function (e) {
-        let n = "error";
+        let n = 'error';
         N(n, e);
         O(n, eO);
       }(n => {
@@ -1456,7 +1480,7 @@ let eR = _C((e = {}) => {
           stackParser,
           attachStacktrace
         } = eI();
-        if (KU() !== e || eu > 0) return;
+        if (getClient() !== e || eu > 0) return;
         let {
           msg,
           url,
@@ -1473,7 +1497,7 @@ let eR = _C((e = {}) => {
           let l = isNaN(parseInt(t, 10)) ? void 0 : t;
           let d = isNaN(parseInt(i, 10)) ? void 0 : i;
           let s = Kg(n) && n.length > 0 ? n : $N();
-          0 === u.length && u.push({
+          u.length === 0 && u.push({
             colno: l,
             filename: s,
             function: yF,
@@ -1482,17 +1506,17 @@ let eR = _C((e = {}) => {
           });
           return e;
         }(er(stackParser, error || msg, void 0, attachStacktrace, !1), url, line, column);
-        l.level = "error";
-        _$$r(l, {
+        l.level = 'error';
+        captureEvent(l, {
           originalException: error,
           mechanism: {
             handled: !1,
-            type: "onerror"
+            type: 'onerror'
           }
         });
-      }), ej("onerror"));
+      }), ej('onerror'));
       n.onunhandledrejection && (function (e) {
-        let n = "unhandledrejection";
+        let n = 'unhandledrejection';
         N(n, e);
         O(n, eM);
       }(n => {
@@ -1500,32 +1524,32 @@ let eR = _C((e = {}) => {
           stackParser,
           attachStacktrace
         } = eI();
-        if (KU() !== e || eu > 0) return;
+        if (getClient() !== e || eu > 0) return;
         let f = function (e) {
           if (sO(e)) return e;
           try {
-            if ("reason" in e) return e.reason;
-            if ("detail" in e && "reason" in e.detail) return e.detail.reason;
+            if ('reason' in e) return e.reason;
+            if ('detail' in e && 'reason' in e.detail) return e.detail.reason;
           } catch (e) {}
           return e;
         }(n);
         let r = sO(f) ? {
           exception: {
             values: [{
-              type: "UnhandledRejection",
+              type: 'UnhandledRejection',
               value: `Non-Error promise rejection captured with value: ${String(f)}`
             }]
           }
         } : er(stackParser, f, void 0, attachStacktrace, !0);
-        r.level = "error";
-        _$$r(r, {
+        r.level = 'error';
+        captureEvent(r, {
           originalException: f,
           mechanism: {
             handled: !1,
-            type: "onunhandledrejection"
+            type: 'onunhandledrejection'
           }
         });
-      }), ej("onunhandledrejection"));
+      }), ej('onunhandledrejection'));
     }
   };
 });
@@ -1533,14 +1557,14 @@ function ej(e) {
   Z && vF.log(`Global Handler attached: ${e}`);
 }
 function eI() {
-  let e = KU();
+  let e = getClient();
   return e && e.getOptions() || {
     stackParser: () => [],
     attachStacktrace: !1
   };
 }
-let ez = _C(() => ({
-  name: "HttpContext",
+let ez = defineIntegration(() => ({
+  name: 'HttpContext',
   preprocessEvent(e) {
     if (!eo.navigator && !eo.location && !eo.document) return;
     let n = e.request && e.request.url || eo.location && eo.location.href;
@@ -1556,7 +1580,7 @@ let ez = _C(() => ({
         Referer: referrer
       }),
       ...(userAgent && {
-        "User-Agent": userAgent
+        'User-Agent': userAgent
       })
     };
     let r = {
@@ -1571,12 +1595,12 @@ let ez = _C(() => ({
 }));
 function eB(e, n) {
   e.mechanism = e.mechanism || {
-    type: "generic",
+    type: 'generic',
     handled: !0
   };
   e.mechanism = {
     ...e.mechanism,
-    ...("AggregateError" === e.type && {
+    ...(e.type === 'AggregateError' && {
       is_exception_group: !0
     }),
     exception_id: n
@@ -1584,22 +1608,22 @@ function eB(e, n) {
 }
 function eH(e, n, i, t) {
   e.mechanism = e.mechanism || {
-    type: "generic",
+    type: 'generic',
     handled: !0
   };
   e.mechanism = {
     ...e.mechanism,
-    type: "chained",
+    type: 'chained',
     source: n,
     exception_id: i,
     parent_id: t
   };
 }
-let eD = _C((e = {}) => {
+let eD = defineIntegration((e = {}) => {
   let n = e.limit || 5;
-  let i = e.key || "cause";
+  let i = e.key || 'cause';
   return {
-    name: "LinkedErrors",
+    name: 'LinkedErrors',
     preprocessEvent(e, t, f) {
       let r = f.getOptions();
       !function (e, n, i = 250, t, f, r, a) {
@@ -1633,16 +1657,16 @@ let eD = _C((e = {}) => {
 function eU(e, n, i, t) {
   let f = {
     filename: e,
-    function: "<anonymous>" === n ? yF : n,
+    function: n === '<anonymous>' ? yF : n,
     in_app: !0
   };
   void 0 !== i && (f.lineno = i);
   void 0 !== t && (f.colno = t);
   return f;
 }
-let eF = /^\s*at (\S+?)(?::(\d+))(?::(\d+))\s*$/i;
+let eF = /^\s*at (\S+?):(\d+):(\d+)\s*$/i;
 let e$ = /^\s*at (?:(.+?\)(?: \[.+\])?|.*?) ?\((?:address at )?)?(?:async )?((?:<anonymous>|[-a-z]+:|.*bundle|\/)?.*?)(?::(\d+))?(?::(\d+))?\)?\s*$/i;
-let eq = /\((\S*)(?::(\d+))(?::(\d+))\)/;
+let eq = /\((\S*):(\d+):(\d+)\)/;
 let eG = [30, e => {
   let n = eF.exec(e);
   if (n) {
@@ -1651,7 +1675,7 @@ let eG = [30, e => {
   }
   let i = e$.exec(e);
   if (i) {
-    if (i[2] && 0 === i[2].indexOf("eval")) {
+    if (i[2] && i[2].indexOf('eval') === 0) {
       let e = eq.exec(i[2]);
       e && (i[2] = e[1], i[3] = e[2], i[4] = e[3]);
     }
@@ -1659,14 +1683,14 @@ let eG = [30, e => {
     return eU(n, e, i[3] ? +i[3] : void 0, i[4] ? +i[4] : void 0);
   }
 }];
-let eW = /^\s*(.*?)(?:\((.*?)\))?(?:^|@)?((?:[-a-z]+)?:\/.*?|\[native code\]|[^@]*(?:bundle|\d+\.js)|\/[\w\-. /=]+)(?::(\d+))?(?::(\d+))?\s*$/i;
+let eW = /^\s*(.*?)(?:\((.*?)\))?(?:^|@)?([-a-z]*:\/.*?|\[native code\]|[^@]*(?:bundle|\d\.js)|\/[\w\-. /=]+)(?::(\d+))?(?::(\d+))?\s*$/i;
 let eV = /(\S+) line (\d+)(?: > eval line \d+)* > eval/i;
 let eK = [50, e => {
   let n = eW.exec(e);
   if (n) {
-    if (n[3] && n[3].indexOf(" > eval") > -1) {
+    if (n[3] && n[3].includes(' > eval')) {
       let e = eV.exec(n[3]);
-      e && (n[1] = n[1] || "eval", n[3] = e[1], n[4] = e[2], n[5] = "");
+      e && (n[1] = n[1] || 'eval', n[3] = e[1], n[4] = e[2], n[5] = '');
     }
     let e = n[3];
     let i = n[1] || yF;
@@ -1676,19 +1700,19 @@ let eK = [50, e => {
 }];
 let eX = gd(eG, eK);
 let eQ = (e, n) => {
-  let i = -1 !== e.indexOf("safari-extension");
-  let t = -1 !== e.indexOf("safari-web-extension");
-  return i || t ? [-1 !== e.indexOf("@") ? e.split("@")[0] : yF, i ? `safari-extension:${n}` : `safari-web-extension:${n}`] : [e, n];
+  let i = e.includes('safari-extension');
+  let t = e.includes('safari-web-extension');
+  return i || t ? [e.includes('@') ? e.split('@')[0] : yF, i ? `safari-extension:${n}` : `safari-web-extension:${n}`] : [e, n];
 };
 export function $$eZ0(e = {}) {
   let n = function (e = {}) {
     let n = {
       defaultIntegrations: [p(), y(), ex(), eS(), eR(), eD(), w(), ez()],
-      release: "string" == typeof __SENTRY_RELEASE__ ? __SENTRY_RELEASE__ : eo.SENTRY_RELEASE && eo.SENTRY_RELEASE.id ? eo.SENTRY_RELEASE.id : void 0,
+      release: typeof __SENTRY_RELEASE__ == 'string' ? __SENTRY_RELEASE__ : eo.SENTRY_RELEASE && eo.SENTRY_RELEASE.id ? eo.SENTRY_RELEASE.id : void 0,
       autoSessionTracking: !0,
       sendClientReports: !0
     };
-    null == e.defaultIntegrations && delete e.defaultIntegrations;
+    e.defaultIntegrations == null && delete e.defaultIntegrations;
     return {
       ...n,
       ...e
@@ -1697,51 +1721,51 @@ export function $$eZ0(e = {}) {
   if (!n.skipBrowserExtensionCheck && function () {
     let e = void 0 !== eo.window && eo;
     if (!e) return !1;
-    let n = e.chrome ? "chrome" : "browser";
+    let n = e.chrome ? 'chrome' : 'browser';
     let i = e[n];
     let t = i && i.runtime && i.runtime.id;
-    let f = eo.location && eo.location.href || "";
-    let r = !!t && eo === eo.top && ["chrome-extension:", "moz-extension:", "ms-browser-extension:", "safari-web-extension:"].some(e => f.startsWith(`${e}//`));
+    let f = eo.location && eo.location.href || '';
+    let r = !!t && eo === eo.top && ['chrome-extension:', 'moz-extension:', 'ms-browser-extension:', 'safari-web-extension:'].some(e => f.startsWith(`${e}//`));
     let a = void 0 !== e.nw;
     return !!t && !r && !a;
   }()) {
     pq(() => {
-      console.error("[Sentry] You cannot run Sentry this way in a browser extension, check: https://docs.sentry.io/platforms/javascript/best-practices/browser-extensions/");
+      console.error('[Sentry] You cannot run Sentry this way in a browser extension, check: https://docs.sentry.io/platforms/javascript/best-practices/browser-extensions/');
     });
     return;
   }
-  Z && !vm() && vF.warn("No Fetch API detected. The Sentry SDK requires a Fetch API compatible environment to send events. Please add a Fetch API polyfill.");
+  Z && !vm() && vF.warn('No Fetch API detected. The Sentry SDK requires a Fetch API compatible environment to send events. Please add a Fetch API polyfill.');
   let i = function (e, n) {
     !0 === n.debug && (_$$T ? vF.enable() : pq(() => {
-      console.warn("[Sentry] Cannot initialize SDK with `debug` option using a non-debug bundle.");
+      console.warn('[Sentry] Cannot initialize SDK with `debug` option using a non-debug bundle.');
     }));
-    o5().update(n.initialScope);
+    getCurrentScope().update(n.initialScope);
     let i = new e(n);
-    o5().setClient(i);
+    getCurrentScope().setClient(i);
     i.init();
     return i;
   }(ed, {
     ...n,
     stackParser: vk(n.stackParser || eX),
-    integrations: mH(n),
+    integrations: getIntegrationsToSetup(n),
     transport: n.transport || _$$_
   });
   n.autoSessionTracking && function () {
     if (void 0 === eo.document) {
-      Z && vF.warn("Session tracking in non-browser environment with @sentry/browser is not supported.");
+      Z && vF.warn('Session tracking in non-browser environment with @sentry/browser is not supported.');
       return;
     }
-    J0({
+    startSession({
       ignoreDuration: !0
     });
-    J5();
+    captureSession();
     I(({
       from: e,
       to: n
     }) => {
-      void 0 !== e && e !== n && (J0({
+      void 0 !== e && e !== n && (startSession({
         ignoreDuration: !0
-      }), J5());
+      }), captureSession());
     });
   }();
   return i;

@@ -7,11 +7,11 @@ import { Z_n, MoD } from "../figma_app/763686";
 import { hasStyleType } from "../905/311324";
 import { sH, dI } from "../905/537777";
 import { getFeatureFlags } from "../905/601108";
-import { i$ } from "../905/236856";
+import { runWithTimeout } from "../905/236856";
 import { NC } from "../905/17179";
-import { sx } from "../905/449184";
-import { $D } from "../905/11";
-import { x1 } from "../905/714362";
+import { trackEventAnalytics } from "../905/449184";
+import { reportError } from "../905/11";
+import { logError } from "../905/714362";
 import { nF } from "../905/350402";
 import { I0 } from "../905/879323";
 import { Eo, oU, UE, u0, r8, aV, qv } from "../figma_app/80990";
@@ -31,7 +31,7 @@ export function $$x6(e, t, i, n, r) {
       s = s.values[e];
       continue;
     }
-    e && "MIXED" !== e && sx("Fallback to default variable thumbnail", {
+    e && "MIXED" !== e && trackEventAnalytics("Fallback to default variable thumbnail", {
       variableId: i,
       variableType: n,
       mode: e
@@ -74,13 +74,13 @@ function C(e, t) {
   if (Kb(i) && (!t || t.content_hash !== e.content_hash || !n)) try {
     n = oU(e.style_type, e.node_id);
   } catch (t) {
-    x1("thumbnails", "error generating local style css thumbnail", {
+    logError("thumbnails", "error generating local style css thumbnail", {
       name: e.name,
       type: e.style_type,
       libraryKey: e.library_key,
       key: e.key
     });
-    $D(_$$e.DESIGN_SYSTEMS_EDITOR, t);
+    reportError(_$$e.DESIGN_SYSTEMS_EDITOR, t);
   }
   if (n && (lP(e.style_type) || UE(n))) return {
     contentHash: e.content_hash,
@@ -91,18 +91,18 @@ function C(e, t) {
   };
   if (!t || t.content_hash !== e.content_hash || !t.url || t.url === u0 || t.url === r8) {
     let t = O.acquire(e.node_id, e.content_hash);
-    return t ? ("FILL" !== e.style_type ? Promise.resolve() : i$(Jr().loadAllImagesUnder([e.node_id], MoD.NON_ANIMATED_ONLY, "style-thumbnail"), () => {
-      x1("thumbnails", "image manager failed to load", {
+    return t ? ("FILL" !== e.style_type ? Promise.resolve() : runWithTimeout(Jr().loadAllImagesUnder([e.node_id], MoD.NON_ANIMATED_ONLY, "style-thumbnail"), () => {
+      logError("thumbnails", "image manager failed to load", {
         name: e.name,
         key: e.key,
         libraryKey: e.library_key
       });
-    }, 1e4)).then(() => scheduler.postTask(() => aV(e.node_id, e.style_type), t).catch(t => ("AbortError" !== t.name && (x1("thumbnails", "error generating local style url thumbnail", {
+    }, 1e4)).then(() => scheduler.postTask(() => aV(e.node_id, e.style_type), t).catch(t => ("AbortError" !== t.name && (logError("thumbnails", "error generating local style url thumbnail", {
       name: e.name,
       type: e.style_type,
       libraryKey: e.library_key,
       key: e.key
-    }), $D(_$$e.DESIGN_SYSTEMS_EDITOR, t)), r8)).then(t => ({
+    }), reportError(_$$e.DESIGN_SYSTEMS_EDITOR, t)), r8)).then(t => ({
       contentHash: e.content_hash,
       nodeId: e.node_id,
       styleThumbnail: n,

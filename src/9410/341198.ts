@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useCallback } from "react";
 import { E } from "../905/632989";
 import { B } from "../905/714743";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { tS } from "../figma_app/516028";
 import { jN } from "../905/612685";
 import { Qn } from "../figma_app/415217";
@@ -41,14 +41,14 @@ function C({
     children: [jsxs("button", {
       className: "vscode_extension_page_picker--pagePickerButton--xunuS",
       onClick: () => d(!l),
-      "data-tooltip": _$$t("dev_handoff.pages_list"),
+      "data-tooltip": getI18nString("dev_handoff.pages_list"),
       "data-tooltip-type": Ib.TEXT,
       children: [a ? jsxs(Fragment, {
         children: [jsx(O, {
           className: "vscode_extension_page_picker--readyIcon--MjlB1"
         }), jsx("span", {
           className: _,
-          children: _$$t("dev_handoff.workflows.overview.title")
+          children: getI18nString("dev_handoff.workflows.overview.title")
         })]
       }) : jsxs(Fragment, {
         children: [jsx(_$$v, {
@@ -91,11 +91,11 @@ export function $$E0({
       className: "vscode_extension_header--children--sHtI3",
       children: [jsx(E, {
         onClick: u,
-        "aria-label": _$$t("dev_handoff.overview_mode.open_in_figma"),
+        "aria-label": getI18nString("dev_handoff.overview_mode.open_in_figma"),
         className: "vscode_extension_header--focusVisible--NjfH0",
         children: jsxs("div", {
           className: "vscode_extension_header--openFigmaText--e2tMf",
-          children: [_$$t("dev_handoff.overview_mode.open_in_figma"), jsx(B, {
+          children: [getI18nString("dev_handoff.overview_mode.open_in_figma"), jsx(B, {
             svg: _$$A2,
             className: "vscode_extension_header--openFigmaSVG--02Jd3"
           })]

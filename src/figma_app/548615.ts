@@ -1,13 +1,13 @@
 import { useMemo, useRef, useEffect } from "react";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { g } from "../905/880308";
 import { l2 } from "../figma_app/584405";
 import { OW, sc, A9, OX, A5 } from "../figma_app/407414";
 import { NM, $C } from "../figma_app/99772";
 import { QU } from "../figma_app/257614";
 export function $$c3() {
-  let e = md(NM);
-  let t = md($C);
+  let e = useAtomWithSubscription(NM);
+  let t = useAtomWithSubscription($C);
   let {
     isReady,
     numSuccessfulFixes
@@ -34,11 +34,11 @@ export function $$c3() {
   }, [e, isReady, numSuccessfulFixes]);
 }
 export function $$u4() {
-  return 0 === md(QU).violationCount;
+  return 0 === useAtomWithSubscription(QU).violationCount;
 }
 export function $$p5() {
   let e = $$u4();
-  let t = md(NM);
+  let t = useAtomWithSubscription(NM);
   let r = useRef(null);
   useEffect(() => {
     if (!e && t) {

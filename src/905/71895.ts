@@ -12,7 +12,7 @@ import { Rs } from "../figma_app/288654";
 import { zd, Bb, B7 } from "../905/651696";
 import { R as _$$R } from "../905/441305";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { to } from "../905/156213";
 import { N$, qk } from "../905/355291";
 import { rH, nm, uN } from "../905/264101";
@@ -41,10 +41,10 @@ function R({
   return jsxs(vo, {
     children: [jsx(Y9, {
       children: jsx(hE, {
-        children: tx("auth.two-factor-setup.sms_two_factor_authentication_is_enabled")
+        children: renderI18nText("auth.two-factor-setup.sms_two_factor_authentication_is_enabled")
       })
     }), jsx(nB, {
-      children: tx("auth.two-factor-setup.phone-number-setup-enabled-info", {
+      children: renderI18nText("auth.two-factor-setup.phone-number-setup-enabled-info", {
         phoneNumber: t.phone_number
       })
     }), jsx(wi, {
@@ -57,20 +57,20 @@ function R({
           },
           disabled: d,
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": d ? _$$t("auth.two-factor-setup.disable-two-factor-blocked") : "",
-          children: tx("auth.two-factor-setup.unregister_sms_number")
+          "data-tooltip": d ? getI18nString("auth.two-factor-setup.disable-two-factor-blocked") : "",
+          children: renderI18nText("auth.two-factor-setup.unregister_sms_number")
         }), jsxs("div", {
           className: G6,
           children: [jsx($n, {
             variant: "secondary",
             onClick: r,
-            children: tx("auth.two-factor-setup.close")
+            children: renderI18nText("auth.two-factor-setup.close")
           }), jsx($n, {
             onClick: () => {
               r();
               i(N$());
             },
-            children: tx("auth.two-factor-setup.recovery_codes")
+            children: renderI18nText("auth.two-factor-setup.recovery_codes")
           })]
         })]
       })
@@ -96,17 +96,17 @@ function N({
     },
     children: [jsx(Y9, {
       children: jsx(hE, {
-        children: tx("auth.two-factor-setup.sms_two_factor_authentication")
+        children: renderI18nText("auth.two-factor-setup.sms_two_factor_authentication")
       })
     }), jsxs(nB, {
-      children: [tx("auth.two-factor-setup.sms-sent-message", {
+      children: [renderI18nText("auth.two-factor-setup.sms-sent-message", {
         phoneNumber: e.temp_phone
       }), jsx("input", {
         type: "text",
         name: "code",
         ref: p,
         className: _Z,
-        placeholder: _$$t("auth.two-factor.authentication-code")
+        placeholder: getI18nString("auth.two-factor.authentication-code")
       }), r.currentError && jsx("div", {
         className: z3,
         children: r.currentError || ""
@@ -114,19 +114,19 @@ function N({
     }), jsx(wi, {
       children: jsxs("div", {
         className: Hx,
-        children: [t ? _$$t("auth.two-factor-setup.code_resent") : jsx($n, {
+        children: [t ? getI18nString("auth.two-factor-setup.code_resent") : jsx($n, {
           variant: "link",
           onClick: i,
-          children: tx("auth.two-factor-setup.resend_code")
+          children: renderI18nText("auth.two-factor-setup.resend_code")
         }), jsxs("div", {
           className: G6,
           children: [jsx($n, {
             variant: "secondary",
             onClick: u,
-            children: tx("auth.two-factor-setup.cancel")
+            children: renderI18nText("auth.two-factor-setup.cancel")
           }), jsx($n, {
             type: "submit",
-            children: tx("auth.two-factor-setup.verify")
+            children: renderI18nText("auth.two-factor-setup.verify")
           })]
         })]
       })
@@ -145,21 +145,21 @@ function P({
     onSubmit: e,
     children: [jsx(Y9, {
       children: jsx(hE, {
-        children: tx("auth.two-factor-setup.sms_two_factor_authentication")
+        children: renderI18nText("auth.two-factor-setup.sms_two_factor_authentication")
       })
     }), jsxs(nB, {
-      children: [tx("auth.two-factor-setup.enter-phone-number"), jsx("input", {
+      children: [renderI18nText("auth.two-factor-setup.enter-phone-number"), jsx("input", {
         type: "text",
         name: "phone",
         ref: i,
         className: _Z,
-        placeholder: _$$t("auth.two-factor-setup.phone-number-placeholder")
+        placeholder: getI18nString("auth.two-factor-setup.phone-number-placeholder")
       }), r.currentError && jsx("div", {
         className: z3,
         children: r.currentError
       }), jsx("div", {
         className: _$$s.mt12.colorTextTertiary.$,
-        children: tx("auth.two-factor-setup.phone-number-opt-in")
+        children: renderI18nText("auth.two-factor-setup.phone-number-opt-in")
       })]
     }), jsx(wi, {
       children: jsxs("div", {
@@ -173,17 +173,17 @@ function P({
               showModalsBeneath: !0
             }));
           },
-          children: tx("auth.two-factor-setup.use_an_authenticator_app_instead")
+          children: renderI18nText("auth.two-factor-setup.use_an_authenticator_app_instead")
         }), jsxs("div", {
           className: G6,
           children: [jsx($n, {
             variant: "secondary",
             onClick: u,
-            children: tx("auth.two-factor-setup.close")
+            children: renderI18nText("auth.two-factor-setup.close")
           }), jsx($n, {
             disabled: r.loading,
             type: "submit",
-            children: tx("auth.two-factor-setup.verify")
+            children: renderI18nText("auth.two-factor-setup.verify")
           })]
         })]
       })
@@ -220,7 +220,7 @@ function O({
     destructive: !0,
     open: i,
     onClose: s,
-    children: e.two_factor_app_enabled ? tx("auth.two-factor-setup.remove-number-with-app-two-factor-on") : jsx(B7, {})
+    children: e.two_factor_app_enabled ? renderI18nText("auth.two-factor-setup.remove-number-with-app-two-factor-on") : jsx(B7, {})
   }) : jsx(bL, {
     width: "lg",
     manager: t,
@@ -237,7 +237,7 @@ function O({
     }) : jsx(_$$_, {
       twoFactorAuth: m,
       fplModal: !0,
-      title: tx("auth.two-factor-setup.sms_two_factor_authentication")
+      title: renderI18nText("auth.two-factor-setup.sms_two_factor_authentication")
     })
   });
 }

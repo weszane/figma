@@ -1,11 +1,11 @@
 import { f as _$$f } from "../905/412913";
 import { useState, useEffect, useMemo } from "react";
-import { eU, Iz } from "../figma_app/27355";
+import { atom, createRemovableAtomFamily } from "../figma_app/27355";
 import { A as _$$A } from "../vendor/850789";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { YQ } from "../905/502364";
 import { yV } from "../figma_app/516028";
-import { bt } from "../905/270322";
+import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { eD } from "../figma_app/646357";
 import { M4 } from "../905/713695";
 import { h as _$$h } from "../figma_app/198885";
@@ -21,7 +21,7 @@ function y(e, t, i) {
   for (let t of e) {
     let e = A(t);
     if (!(e in i)) {
-      sx("library_modal_search_inconsistency");
+      trackEventAnalytics("library_modal_search_inconsistency");
       continue;
     }
     e in r && !(t.score > r[e]) || (r[e] = t.score);
@@ -87,7 +87,7 @@ export function $$v2() {
         orgId: i || void 0,
         teamId: n || void 0
       });
-      sx("library-preferences-modal-search-time", {
+      trackEventAnalytics("library-preferences-modal-search-time", {
         useSSS: !0,
         elapsedTime: Date.now() - r
       });
@@ -125,7 +125,7 @@ export function $$v2() {
         orgId: i || void 0,
         teamId: n || void 0
       });
-      sx("library-preferences-modal-search-time", {
+      trackEventAnalytics("library-preferences-modal-search-time", {
         useSSS: !0,
         elapsedTime: Date.now() - r
       });
@@ -145,16 +145,16 @@ export function $$v2() {
     })
   });
 })(n || (n = {}));
-let I = bt(eD);
-let E = bt(_$$h);
-let x = bt(e => e.modalShown);
-let S = eU(e => {
+let I = createReduxSubscriptionAtomWithState(eD);
+let E = createReduxSubscriptionAtomWithState(_$$h);
+let x = createReduxSubscriptionAtomWithState(e => e.modalShown);
+let S = atom(e => {
   let t = e(E);
   let i = e(x);
   return "team" === t.view && i?.type === cX ? t.teamId : null;
 });
-let w = bt(vx);
-let $$C1 = Iz(e => eU(t => {
+let w = createReduxSubscriptionAtomWithState(vx);
+let $$C1 = createRemovableAtomFamily(e => atom(t => {
   let i = t(I);
   let r = t(S);
   let a = t(yV);
@@ -167,7 +167,7 @@ let $$C1 = Iz(e => eU(t => {
     editorType: s
   }));
 }));
-let $$T0 = Iz(e => eU(t => {
+let $$T0 = createRemovableAtomFamily(e => atom(t => {
   let i = t(I);
   let r = t(S);
   let a = t(yV);

@@ -2,10 +2,10 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { _YF, glU, kul, dPJ, lyf } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { parseAndNormalizeQuery } from "../905/634134";
-import { $D } from "../905/11";
-import { t as _$$t } from "../905/303541";
+import { reportError } from "../905/11";
+import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { _l } from "../figma_app/976345";
 import { b as _$$b } from "../905/898378";
@@ -27,7 +27,7 @@ import { oJ } from "../905/346794";
 import { Lp } from "../905/309846";
 import { QO, VO } from "../figma_app/646357";
 import { xN } from "../905/672897";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { e6 } from "../figma_app/707808";
 import { $ as _$$$3 } from "../905/834575";
 import { l as _$$l } from "../905/26554";
@@ -57,14 +57,14 @@ let $$H = nF((e, t, {
     let V = E.mode || E.m || "auto";
     let H = f.selectedView;
     let W = "inspect" === V || "dev" === V;
-    H.editorType === nT.Design && W ? Y5.requestEditorType(_YF.DEV_HANDOFF) : H.editorType !== nT.DevHandoff || W || "auto" === V || Y5.requestEditorType(_YF.DESIGN);
+    H.editorType === FEditorType.Design && W ? Y5.requestEditorType(_YF.DEV_HANDOFF) : H.editorType !== FEditorType.DevHandoff || W || "auto" === V || Y5.requestEditorType(_YF.DESIGN);
     E["version-id"] && (e.dispatch(Nb({
       id: E["version-id"]
     })), e.dispatch(_b()));
     let K = !1;
     let Y = _$$b(f);
     if ("1" === E.vars) {
-      zl.set(_$$$, Nh.DirectUrl);
+      atomStoreManager.set(_$$$, Nh.DirectUrl);
       e.dispatch(sf({
         ...H,
         showDevModeVariablesTable: !0,
@@ -94,7 +94,7 @@ let $$H = nF((e, t, {
         }));
       }
     }
-    "1" !== E.vars && zl.set(_$$$, null);
+    "1" !== E.vars && atomStoreManager.set(_$$$, null);
     f.user && E["try-plugin-id"] && l7.user("try-plugin-desktop", () => {
       e.dispatch(_$$$2({
         tryPluginId: E["try-plugin-id"],
@@ -113,7 +113,7 @@ let $$H = nF((e, t, {
       let a = "SYMBOL" === t.type;
       let s = t.parentNode;
       if (n) glU.selectStyleByGuid(i);else if (a && s && "CANVAS" === s.type && !s.visible) QO.then(async () => {
-        let t = zl.get(qp);
+        let t = atomStoreManager.get(qp);
         let n = VO(i, f.library.movedLibraryItems.local, f.library.publishedByLibraryKey.components, t) || void 0;
         let r = await Dz(e);
         r?.canEdit ? e.dispatch(to({
@@ -123,9 +123,9 @@ let $$H = nF((e, t, {
             movedToFile: n
           }
         })) : e.dispatch(_$$F.enqueue({
-          message: n ? _$$t("visual_bell.main_component_moved", {
+          message: n ? getI18nString("visual_bell.main_component_moved", {
             movedToFile: n
-          }) : _$$t("visual_bell.main_component_deleted")
+          }) : getI18nString("visual_bell.main_component_deleted")
         }));
       });else {
         if (K) return;
@@ -214,7 +214,7 @@ let $$H = nF((e, t, {
           });
         }
       } catch (e) {
-        $D(_$$e.DESKTOP, e);
+        reportError(_$$e.DESKTOP, e);
       }
     })();
   }

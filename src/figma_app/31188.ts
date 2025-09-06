@@ -1,7 +1,7 @@
 import { PWo, Ocq, P5M } from "../figma_app/763686";
-import { eU, FZ } from "../figma_app/27355";
+import { atom, setupCustomAtom } from "../figma_app/27355";
 import s from "../vendor/149674";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { Y5 } from "../figma_app/455680";
 import { Wh } from "../figma_app/615482";
 import { r, I } from "../905/475511";
@@ -68,8 +68,8 @@ let $$E0 = {
 };
 function y(e, t) {
   let r = f[e][t];
-  let n = Wh(() => eU({}));
-  let s = FZ(n, (e, t) => {
+  let n = Wh(() => atom({}));
+  let s = setupCustomAtom(n, (e, t) => {
     if ("changed" in t) {
       let r = t.changed;
       return {
@@ -136,7 +136,7 @@ class T {
     if (t === Ocq.SUBSCRIBED) {
       let n = f[e]?.[Ocq.SUBSCRIBED];
       if (!n) {
-        x1("design-systems", `No parser found for ${e} and ${t}`);
+        logError("design-systems", `No parser found for ${e} and ${t}`);
         return;
       }
       b[e]?.[Ocq.SUBSCRIBED]?.({
@@ -145,13 +145,13 @@ class T {
     } else if (t === Ocq.LOCAL) {
       let n = f[e]?.[Ocq.LOCAL];
       if (!n) {
-        x1("design-systems", `No parser found for ${e} and ${t}`);
+        logError("design-systems", `No parser found for ${e} and ${t}`);
         return;
       }
       b[e]?.[Ocq.LOCAL]?.({
         changed: r.map(n).filter(e => null !== e)
       });
-    } else x1("design-systems", `Invalid subscription status for AssetMirror: ${t}`);
+    } else logError("design-systems", `Invalid subscription status for AssetMirror: ${t}`);
   }
   syncRemovedAssets(e, t, r) {
     b[e]?.[t]?.({

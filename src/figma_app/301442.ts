@@ -1,6 +1,6 @@
 import { useMemo, useEffect } from "react";
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { oA } from "../905/663269";
 import { k as _$$k } from "../905/651849";
 import { isProdCluster } from "../figma_app/169182";
@@ -10,7 +10,7 @@ import { Z } from "../905/939602";
 import { yV, q5 } from "../figma_app/516028";
 import { nkF } from "../figma_app/43951";
 export async function $$h1() {
-  let e = zl.get(yV);
+  let e = atomStoreManager.get(yV);
   if (!e) return;
   let t = await subscribeAndAwaitData(nkF, {
     fileKey: e.sourceFileKey ?? e.key

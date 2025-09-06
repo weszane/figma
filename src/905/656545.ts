@@ -1,9 +1,9 @@
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { oA } from "../905/663269";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { QO } from "../905/888985";
-import { jk } from "../905/609396";
+import { PerfTimer } from "../905/609396";
 import { w0 } from "../figma_app/594947";
 import { N } from "../905/972754";
 import { nF } from "../905/350402";
@@ -33,7 +33,7 @@ let E = D(async e => {
     group: M()
   });
   let i = await QO(t, (e, i) => {
-    let n = zl.get(t);
+    let n = atomStoreManager.get(t);
     "loaded" === n.status ? e(n) : "errors" === n.status && i("Error loading presetLibraryAtom");
   });
   let n = i?.data?.libraryPresetSubscriptionsV2?.find(t => oA(t.libraryKey) === e);
@@ -53,14 +53,14 @@ async function S(e, t, i, r) {
   });
 }
 async function w(e, t, i, n, r) {
-  let a = new jk("APPLE_EULA_TIMER", {
+  let a = new PerfTimer("APPLE_EULA_TIMER", {
     key: N().toString()
   });
   a.start();
   let o = await E(t);
   let d = o && !n.apple_eula_accepted;
   let u = await S(o, t, n, r);
-  az.trackDefinedEvent("preset_libraries.apple_eula_check_performed", {
+  analyticsEventManager.trackDefinedEvent("preset_libraries.apple_eula_check_performed", {
     duration: a.stop(),
     source: i
   });

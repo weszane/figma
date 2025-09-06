@@ -5,7 +5,7 @@ import { Ym } from "../figma_app/806075";
 import { sf } from "../905/929976";
 import { F } from "../905/989956";
 import { ds } from "../figma_app/314264";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { e6 } from "../figma_app/707808";
 export function $$p3(e, t, r) {
   if ("fullscreen" !== t.view) return;
@@ -13,7 +13,7 @@ export function $$p3(e, t, r) {
   n.selectedView?.showOverview && "overview_search_clicked" === r && ds("Dev Mode Overview Pages Search Clicked", n.openFile?.key, n, {
     pageId: t.nodeId
   });
-  "editorType" in t && t.editorType === nT.Design && Ym(n, nT.Design, r);
+  "editorType" in t && t.editorType === FEditorType.Design && Ym(n, FEditorType.Design, r);
   e(sf({
     ...t,
     showOverview: !1,

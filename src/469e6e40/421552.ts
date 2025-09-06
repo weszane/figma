@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "../vendor/514228";
 import { sortByPropertyWithOptions, sortBySelectors } from "../figma_app/656233";
 import { k as _$$k } from "../905/443820";
 import { getFeatureFlags } from "../905/601108";
-import { eU as _$$eU, md, Xr } from "../figma_app/27355";
+import { atom, useAtomWithSubscription, Xr } from "../figma_app/27355";
 import { getResourceDataOrFallback } from "../905/419236";
 import { Rs } from "../figma_app/288654";
 import { tT } from "../905/723791";
@@ -13,7 +13,7 @@ import { y2 } from "../figma_app/563413";
 import { V as _$$V } from "../figma_app/385855";
 import { F as _$$F, y as _$$y } from "../905/171275";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
 import { F as _$$F2 } from "../905/302958";
 import { Y as _$$Y, M as _$$M } from "../905/830372";
@@ -123,7 +123,7 @@ function X(e) {
       children: jsxs(_$$Y, {
         horizontalAlignItems: "space-between",
         children: [jsx(_$$E, {
-          children: tx("resources_tab.libraries.filters")
+          children: renderI18nText("resources_tab.libraries.filters")
         }), enabledFilterIds.size > 0 && jsx(_$$Y, {
           backgroundColor: "selected",
           cornerRadius: 2,
@@ -134,7 +134,7 @@ function X(e) {
           children: jsx(_$$E, {
             color: "brand",
             fontWeight: "semi-bold",
-            children: tx("resources_tab.libraries.filters_applied", {
+            children: renderI18nText("resources_tab.libraries.filters_applied", {
               numActiveFilters: enabledFilterIds.size
             })
           })
@@ -171,7 +171,7 @@ function X(e) {
           },
           children: [jsx(_$$E, {
             fontWeight: "semi-bold",
-            children: tx("resources_tab.libraries.filters")
+            children: renderI18nText("resources_tab.libraries.filters")
           }), jsxs("div", {
             className: "x78zum5 x6s0dn4",
             children: [enabledFilterIds.size > 0 && jsx($z, {
@@ -182,11 +182,11 @@ function X(e) {
               },
               children: jsx(_$$E, {
                 color: "brand",
-                children: tx("resources_tab.libraries.clear_all")
+                children: renderI18nText("resources_tab.libraries.clear_all")
               })
             }), jsx(_$$K2, {
               onClick: () => c(!d),
-              "aria-label": _$$t("general.close"),
+              "aria-label": getI18nString("general.close"),
               children: jsx(_$$A, {})
             })]
           })]
@@ -208,7 +208,7 @@ function X(e) {
                 id: l,
                 children: jsx(_$$E, {
                   fontWeight: "semi-bold",
-                  children: _$$t("resources_tab.libraries.shared_in")
+                  children: getI18nString("resources_tab.libraries.shared_in")
                 })
               }), jsx("fieldset", {
                 "aria-labelledby": l,
@@ -217,7 +217,7 @@ function X(e) {
                   label: jsx(_$$J, {
                     children: jsx(_$$E, {
                       fontWeight: "semi-bold",
-                      children: _$$t("resources_tab.libraries.connected_projects")
+                      children: getI18nString("resources_tab.libraries.connected_projects")
                     })
                   }),
                   onChange: e => p($$tp0, e)
@@ -236,7 +236,7 @@ function X(e) {
                 id: o,
                 children: jsx(_$$E, {
                   fontWeight: "semi-bold",
-                  children: tx("resources_tab.libraries.added_by_default")
+                  children: renderI18nText("resources_tab.libraries.added_by_default")
                 })
               }), jsx("fieldset", {
                 "aria-labelledby": o,
@@ -257,7 +257,7 @@ function X(e) {
     })]
   });
 }
-let ev = _$$eU(void 0);
+let ev = atom(void 0);
 function ej({
   label: e,
   children: t
@@ -282,14 +282,14 @@ let ey = function ({
   let o = "file" === e.type ? e.owner ?? l : void 0;
   let c = "community" === e.type ? e.profile : void 0;
   let _ = e.approvedLibraries ?? [];
-  let u = md(ev);
+  let u = useAtomWithSubscription(ev);
   let m = No().unwrapOr(null);
   let p = m?.tier === FPlanNameType.ENTERPRISE;
   let v = H3(m);
   let f = p && !!u && _.some(e => e.resourceType === _$$Y3.Workspace && e.resourceId === u);
   let y = p && v && _.some(e => e.resourceType === _$$Y3.Org && e.resourceId === v);
   let k = t.workspaces?.find(e => e.id === u)?.name;
-  let E = md(qq);
+  let E = useAtomWithSubscription(qq);
   let C = useMemo(() => "community" === e.type && E.has(_$$l2(e.hubFileId)), [e, E]);
   return jsxs(_$$Y, {
     direction: "vertical",
@@ -304,7 +304,7 @@ let ey = function ({
         noBorder: !0
       })
     }), jsx(ej, {
-      label: _$$t("resources_tab.libraries.library_name"),
+      label: getI18nString("resources_tab.libraries.library_name"),
       children: jsxs("span", {
         className: _$$s.maxWFull.overflowBreakWord.alignTop.$,
         "data-testid": "library-info-library-name",
@@ -324,12 +324,12 @@ let ey = function ({
         })]
       })
     }), r && jsx(ej, {
-      label: _$$t("resources_tab.libraries.last_published"),
+      label: getI18nString("resources_tab.libraries.last_published"),
       children: jsx(h1, {
         date: r
       })
     }), jsx(ej, {
-      label: _$$t("resources_tab.libraries.library_owner"),
+      label: getI18nString("resources_tab.libraries.library_owner"),
       children: jsxs("div", {
         className: _$$s.pt2.wFull.$,
         children: [o && jsx(az, {
@@ -350,7 +350,7 @@ let ey = function ({
           },
           includeUserEmailAddress: !!c.supportContact
         }), !o && !c && jsx(_$$E, {
-          children: tx("resources_tab.libraries.file_has_no_owner")
+          children: renderI18nText("resources_tab.libraries.file_has_no_owner")
         })]
       })
     }), "file" === e.type && jsx("a", {
@@ -365,7 +365,7 @@ let ey = function ({
       children: jsxs(_$$Y, {
         spacing: 4,
         children: [jsx(_$$E, {
-          children: tx("resources_tab.libraries.open_library_file")
+          children: renderI18nText("resources_tab.libraries.open_library_file")
         }), jsx(_$$B, {
           svg: _$$A2,
           className: _$$s.colorIconBrand.$
@@ -502,7 +502,7 @@ function eY({
         height: "hug-contents",
         width: "fill-parent",
         spacing: 0,
-        children: tx("resources_tab.approved_libraries.set_as_approved")
+        children: renderI18nText("resources_tab.approved_libraries.set_as_approved")
       })
     }), jsx("div", {
       ...g,
@@ -517,12 +517,12 @@ function eY({
             onfulfilled: () => {
               d(!1);
               a(_$$F2.enqueue({
-                message: _$$t("resources_tab.approved_libraries_toggle.unmark_as_approved_success", h)
+                message: getI18nString("resources_tab.approved_libraries_toggle.unmark_as_approved_success", h)
               }));
             },
             onrejected: () => {
               d(!1);
-              let e = _$$t("resources_tab.approved_libraries_toggle.unmark_as_approved_error", h);
+              let e = getI18nString("resources_tab.approved_libraries_toggle.unmark_as_approved_error", h);
               a(_$$s2.error(e));
               console.error(e);
             }
@@ -535,12 +535,12 @@ function eY({
             onfulfilled: () => {
               d(!1);
               a(_$$F2.enqueue({
-                message: _$$t("resources_tab.approved_libraries_toggle.mark_as_approved_success", h)
+                message: getI18nString("resources_tab.approved_libraries_toggle.mark_as_approved_success", h)
               }));
             },
             onrejected: () => {
               d(!1);
-              let e = _$$t("resources_tab.approved_libraries_toggle.mark_as_approved_error", h);
+              let e = getI18nString("resources_tab.approved_libraries_toggle.mark_as_approved_error", h);
               a(_$$s2.error(e));
               console.error(e);
             }
@@ -602,7 +602,7 @@ function eX({
         height: "hug-contents",
         width: "fill-parent",
         spacing: 0,
-        children: tx("resources_tab.approved_libraries.set_as_approved")
+        children: renderI18nText("resources_tab.approved_libraries.set_as_approved")
       })
     }), jsx("div", {
       ...C,
@@ -617,12 +617,12 @@ function eX({
             onfulfilled: () => {
               p(!1);
               r(_$$F2.enqueue({
-                message: _$$t("resources_tab.approved_libraries_toggle.unmark_as_approved_success", S)
+                message: getI18nString("resources_tab.approved_libraries_toggle.unmark_as_approved_success", S)
               }));
             },
             onrejected: () => {
               p(!1);
-              let e = _$$t("resources_tab.approved_libraries_toggle.unmark_as_approved_error", S);
+              let e = getI18nString("resources_tab.approved_libraries_toggle.unmark_as_approved_error", S);
               r(_$$s2.error(e));
               console.error(e);
             }
@@ -635,12 +635,12 @@ function eX({
             onfulfilled: () => {
               p(!1);
               r(_$$F2.enqueue({
-                message: _$$t("resources_tab.approved_libraries_toggle.mark_as_approved_success", S)
+                message: getI18nString("resources_tab.approved_libraries_toggle.mark_as_approved_success", S)
               }));
             },
             onrejected: () => {
               p(!1);
-              let e = _$$t("resources_tab.approved_libraries_toggle.mark_as_approved_error", S);
+              let e = getI18nString("resources_tab.approved_libraries_toggle.mark_as_approved_error", S);
               r(_$$s2.error(e));
               console.error(e);
             }
@@ -672,29 +672,29 @@ let e3 = e => {
 let e8 = e => {
   switch (e) {
     case "DESIGN_FILES":
-      return _$$t("resources_tab.libraries.subscription.design_files");
+      return getI18nString("resources_tab.libraries.subscription.design_files");
     case "OFF":
-      return _$$t("resources_tab.libraries.subscription.off");
+      return getI18nString("resources_tab.libraries.subscription.off");
   }
 };
 let e6 = e => {
   switch (e) {
     case "DESIGN_FILES":
-      return _$$t("resources_tab.libraries.subscription.design_files");
+      return getI18nString("resources_tab.libraries.subscription.design_files");
     case "FIGJAM_FILES":
-      return _$$t("resources_tab.libraries.subscription.figjam_files");
+      return getI18nString("resources_tab.libraries.subscription.figjam_files");
     case "SLIDES_FILES":
-      return _$$t("resources_tab.libraries.subscription.slides_files");
+      return getI18nString("resources_tab.libraries.subscription.slides_files");
     case "BUZZ_FILES":
-      return _$$t("resources_tab.libraries.subscription.buzz_files");
+      return getI18nString("resources_tab.libraries.subscription.buzz_files");
   }
 };
 let e7 = e => {
-  if (!e) return _$$t("resources_tab.libraries.subscription.off");
+  if (!e) return getI18nString("resources_tab.libraries.subscription.off");
   let t = e.slidesSubscribed.status === tT.Loaded && !!e.slidesSubscribed.data;
   let a = getFeatureFlags().buzz_library_subscriptions;
   let n = e.buzzSubscribed.status === tT.Loaded && !!e.buzzSubscribed.data;
-  return e.isSubscribed && e.figJamSubscribed && t && (!a || n) ? _$$t("resources_tab.libraries.subscription.all_files") : e.isSubscribed || e.figJamSubscribed || t || a && n ? !e.isSubscribed || e.figJamSubscribed || t || a && n ? e.isSubscribed || !e.figJamSubscribed || t || a && n ? e.isSubscribed || e.figJamSubscribed || !t || a && n ? e.isSubscribed || e.figJamSubscribed || t || !a || !n ? _$$t("resources_tab.libraries.subscription.custom") : _$$t("resources_tab.libraries.subscription.buzz_files") : _$$t("resources_tab.libraries.subscription.slides_files") : _$$t("resources_tab.libraries.subscription.figjam_files") : _$$t("resources_tab.libraries.subscription.design_files") : _$$t("resources_tab.libraries.subscription.off");
+  return e.isSubscribed && e.figJamSubscribed && t && (!a || n) ? getI18nString("resources_tab.libraries.subscription.all_files") : e.isSubscribed || e.figJamSubscribed || t || a && n ? !e.isSubscribed || e.figJamSubscribed || t || a && n ? e.isSubscribed || !e.figJamSubscribed || t || a && n ? e.isSubscribed || e.figJamSubscribed || !t || a && n ? e.isSubscribed || e.figJamSubscribed || t || !a || !n ? getI18nString("resources_tab.libraries.subscription.custom") : getI18nString("resources_tab.libraries.subscription.buzz_files") : getI18nString("resources_tab.libraries.subscription.slides_files") : getI18nString("resources_tab.libraries.subscription.figjam_files") : getI18nString("resources_tab.libraries.subscription.design_files") : getI18nString("resources_tab.libraries.subscription.off");
 };
 function e9({
   libraryData: e,
@@ -830,7 +830,7 @@ function e9({
       fontWeight: "medium",
       truncate: "line-clamp",
       lineClamp: 2,
-      children: tx("resources_tab.libraries.manage_library_for", {
+      children: renderI18nText("resources_tab.libraries.manage_library_for", {
         orgOrWorkspaceName: o.name
       })
     }), O && U && "file" === e.type && jsxs(Fragment, {
@@ -878,7 +878,7 @@ function e9({
             spacing: 0,
             children: [jsx("div", {
               className: _$$s.inlineFlex.pre.maxWFull.$,
-              children: tx("resources_tab.libraries.use_orgs_setting", {
+              children: renderI18nText("resources_tab.libraries.use_orgs_setting", {
                 orgName: jsx(_$$E, {
                   truncate: !0,
                   children: t.name
@@ -886,7 +886,7 @@ function e9({
               })
             }), jsx(_$$E, {
               color: "secondary",
-              children: tx("resources_tab.libraries.current", {
+              children: renderI18nText("resources_tab.libraries.current", {
                 setting: l ? e7(t.librarySubscription) : e8(e3(t.librarySubscription))
               })
             })]
@@ -989,7 +989,7 @@ function e9({
         fontWeight: "medium",
         truncate: "line-clamp",
         lineClamp: 2,
-        children: tx("resources_tab.libraries.default_modes")
+        children: renderI18nText("resources_tab.libraries.default_modes")
       }), f ? p?.map(t => t.modes && t.modes.length > 1 && a && jsxs(_$$Y, {
         width: "fill-parent",
         height: "hug-contents",
@@ -1023,7 +1023,7 @@ function te({
       fontWeight: "medium",
       truncate: "line-clamp",
       lineClamp: 2,
-      children: tx("resources_tab.libraries.visibility_settings")
+      children: renderI18nText("resources_tab.libraries.visibility_settings")
     })]
   });
 }
@@ -1067,7 +1067,7 @@ function tn({
         minSize: 4
       }), t && jsx(_$$E, {
         color: "success",
-        children: tx("resources_tab.libraries.on")
+        children: renderI18nText("resources_tab.libraries.on")
       }), jsx(In, {
         icon: "chevron-right-32"
       })]
@@ -1108,7 +1108,7 @@ let tr = function ({
         className: _$$s.wHalf.hFull.$,
         children: [l && jsxs(Fragment, {
           children: [jsx(ta, {
-            content: _$$t("resources_tab.libraries.organization")
+            content: getI18nString("resources_tab.libraries.organization")
           }), jsx(tn, {
             text: t.name,
             subscribed: ts(o),
@@ -1130,7 +1130,7 @@ let tr = function ({
           direction: "vertical",
           spacing: 0,
           children: [jsx(ta, {
-            content: _$$t("resources_tab.libraries.workspaces")
+            content: getI18nString("resources_tab.libraries.workspaces")
           }), _.map(e => e.name && jsx(tn, {
             text: e.name,
             selected: !!a && a === e.id,
@@ -1179,7 +1179,7 @@ let td = Ju(function ({
   useEffect(() => {
     "errors" !== u.status && ("loaded" !== u.status || m && p) || (t(_$$F2.enqueue({
       error: !0,
-      message: _$$t("resources_tab.libraries.couldnt_load_library_information")
+      message: getI18nString("resources_tab.libraries.couldnt_load_library_information")
     })), g());
   }, [g, t, m, p, u.status, o]);
   let h = l.windowInnerWidth <= parsePxInt(tgj);
@@ -1198,7 +1198,7 @@ let td = Ju(function ({
     name: "Library Management Modal",
     properties: E,
     children: jsxs(OJ, {
-      title: m && h ? m.name : _$$t("resources_tab.libraries.manage_this_library"),
+      title: m && h ? m.name : getI18nString("resources_tab.libraries.manage_this_library"),
       maxWidth: 648,
       onClose: g,
       customButton: jsxs(CY, {
@@ -1211,12 +1211,12 @@ let td = Ju(function ({
           svg: _$$A3
         }), jsx(_$$E, {
           color: "brand",
-          children: tx("general.learn_more")
+          children: renderI18nText("general.learn_more")
         })]
       }),
       children: [v && k && !y.data && jsx(_$$_, {
         color: _$$S3.WARNING,
-        text: tx("resources_tab.libraries.changing_permissions_warning_v2", {
+        text: renderI18nText("resources_tab.libraries.changing_permissions_warning_v2", {
           orgName: p?.name
         }),
         dataTestId: "library-management-modal-permissions-warning"
@@ -1355,14 +1355,14 @@ export function $$tx1(e) {
   let H = useDispatch();
   let [Y, J] = useState(new Set(workspaceId ? [workspaceId] : []));
   let [K, Q] = useState("");
-  let Z = md(TG);
+  let Z = useAtomWithSubscription(TG);
   let ee = NJ(org.id);
   let et = Rs(IhX, {
     orgId: org.id
   });
   let ea = sZ();
   let en = Oe(ea);
-  let es = md(S0);
+  let es = useAtomWithSubscription(S0);
   let ei = Rs(EE2, {
     workspaceId
   }, {
@@ -1377,7 +1377,7 @@ export function $$tx1(e) {
   useEffect(() => {
     ("errors" === et.status || "errors" === ee.status || "loaded" === et.status && null === et.data.org) && H(_$$F2.enqueue({
       error: !0,
-      message: _$$t("resources_tab.libraries.couldnt_load_library_information")
+      message: getI18nString("resources_tab.libraries.couldnt_load_library_information")
     }));
   }, [et.status, et.data?.org, ee.status, H]);
   let el = et.data?.org?.librarySubscriptions;
@@ -1430,7 +1430,7 @@ export function $$tx1(e) {
     sortByPropertyWithOptions(e, "name");
     return [{
       id: tm,
-      name: _$$t("resources_tab.libraries.none")
+      name: getI18nString("resources_tab.libraries.none")
     }, {
       id: "ORG",
       name: org.name
@@ -1500,13 +1500,13 @@ export function $$tx1(e) {
     let t = e ? ed[e] : void 0;
     if (!t || 0 === t.length) return jsx(_$$E, {
       color: "secondary",
-      children: tx("resources_tab.libraries.no_subscriptions")
+      children: renderI18nText("resources_tab.libraries.no_subscriptions")
     });
     let a = t.slice(0, 2).map(e => e.name).join(", ");
     return t.length > 2 ? jsx(_$$E, {
       truncate: "line-clamp",
       lineClamp: 2,
-      children: tx("resources_tab.libraries.two_or_more_workspaces", {
+      children: renderI18nText("resources_tab.libraries.two_or_more_workspaces", {
         workspaceNames: a,
         extraWorkspaceNum: t.length - 2
       })
@@ -1549,7 +1549,7 @@ export function $$tx1(e) {
           clearSearch: () => {
             Q("");
           },
-          placeholder: _$$t("resources_tab.libraries.search.label_with_ellipsis")
+          placeholder: getI18nString("resources_tab.libraries.search.label_with_ellipsis")
         })
       }), jsx(Hj, {
         header: !0,
@@ -1569,7 +1569,7 @@ export function $$tx1(e) {
               children: jsx(_$$E, {
                 fontWeight: "semi-bold",
                 color: "default",
-                children: tx("resources_tab.libraries.name")
+                children: renderI18nText("resources_tab.libraries.name")
               })
             })
           }), jsx(A3, {
@@ -1585,7 +1585,7 @@ export function $$tx1(e) {
               children: jsx(_$$E, {
                 color: "default",
                 fontWeight: "semi-bold",
-                children: tx("resources_tab.libraries.added_by_default")
+                children: renderI18nText("resources_tab.libraries.added_by_default")
               })
             })
           }), jsx(A3, {
@@ -1602,7 +1602,7 @@ export function $$tx1(e) {
               children: jsx(_$$E, {
                 color: "default",
                 fontWeight: "semi-bold",
-                children: tx("resources_tab.libraries.components")
+                children: renderI18nText("resources_tab.libraries.components")
               })
             })
           }), jsx(A3, {
@@ -1619,7 +1619,7 @@ export function $$tx1(e) {
               children: jsx(_$$E, {
                 color: "default",
                 fontWeight: "semi-bold",
-                children: tx("resources_tab.libraries.styles")
+                children: renderI18nText("resources_tab.libraries.styles")
               })
             })
           }), jsxs(A3, {
@@ -1632,11 +1632,11 @@ export function $$tx1(e) {
       })]
     }), ("loading" === et.status || "loading" === ee.status) && jsx(FO, {}), "loaded" === et.status && "loaded" === ee.status && !sortedItems.length && jsx(_$$p, {
       children: K ? jsx(_$$E, {
-        children: tx("resources_tab.libraries.search.no_results")
+        children: renderI18nText("resources_tab.libraries.search.no_results")
       }) : Y.size > 0 ? jsx(_$$E, {
-        children: tx("resources_tab.libraries.filter.no_results")
+        children: renderI18nText("resources_tab.libraries.filter.no_results")
       }) : jsx(_$$E, {
-        children: tx("resources_tab.libraries.no_libraries_text")
+        children: renderI18nText("resources_tab.libraries.no_libraries_text")
       })
     }), "loaded" === et.status && "loaded" === ee.status && jsxs(Fragment, {
       children: [sortedItems.map(e => {
@@ -1679,7 +1679,7 @@ export function $$tx1(e) {
           horizontalAlignItems: "center",
           children: jsx(_$$E, {
             color: "brand",
-            children: tx("resources_tab.libraries.show_all_libraries_button")
+            children: renderI18nText("resources_tab.libraries.show_all_libraries_button")
           })
         })
       })]

@@ -2,14 +2,14 @@ import { useState, useCallback, useEffect } from "react";
 import { xj, ok } from "../figma_app/851625";
 import { J } from "../905/931050";
 import { Xm, gB, e1 } from "../905/723791";
-import { t as _$$t } from "../905/303541";
-import { O } from "../905/247093";
+import { getI18nString } from "../905/303541";
+import { UNASSIGNED } from "../905/247093";
 import { Eh } from "../figma_app/617654";
 import { FTeamAssignmentMethodType } from "../figma_app/191312";
 export function $$u1(e) {
   let t = {};
   e.forEach(e => {
-    let r = e.workspace_id ?? O;
+    let r = e.workspace_id ?? UNASSIGNED;
     t[r] = (t[r] ?? 0) + 1;
   });
   return t;
@@ -57,15 +57,15 @@ export function $$m0(e, t) {
     r = function (e, t) {
       switch (e) {
         case FTeamAssignmentMethodType.SELF_SELECTED:
-          return _$$t("members_table.workspace_update_description.self_selected");
+          return getI18nString("members_table.workspace_update_description.self_selected");
         case FTeamAssignmentMethodType.MOVED_BY_ADMIN:
-          return t ? _$$t("members_table.workspace_update_description.moved_by_admin", {
+          return t ? getI18nString("members_table.workspace_update_description.moved_by_admin", {
             adminName: t
-          }) : _$$t("members_table.workspace_update_description.moved_by_admin_generic");
+          }) : getI18nString("members_table.workspace_update_description.moved_by_admin_generic");
         case FTeamAssignmentMethodType.AUTO_ASSIGNED:
-          return _$$t("members_table.workspace_update_description.auto_assigned");
+          return getI18nString("members_table.workspace_update_description.auto_assigned");
         case FTeamAssignmentMethodType.SCIM_GROUP:
-          return _$$t("members_table.workspace_update_description.scim_group", {
+          return getI18nString("members_table.workspace_update_description.scim_group", {
             groupName: t
           });
         default:

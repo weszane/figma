@@ -1,6 +1,6 @@
 import { sortByPropertyWithOptions } from "../figma_app/656233";
 import { getFeatureFlags } from "../905/601108";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { NX, k9 } from "../figma_app/777207";
 import { gO, dS, Nz } from "../figma_app/915774";
 import { Fl, dx } from "../figma_app/646357";
@@ -239,7 +239,7 @@ export function $$b0({
       items: [],
       subtrees: [],
       key: "localComponents",
-      name: allItems.length > 0 ? _$$t("design_systems.assets_panel.created_in_this_file") : "",
+      name: allItems.length > 0 ? getI18nString("design_systems.assets_panel.created_in_this_file") : "",
       type: "FILE",
       sectionNameForTracking: 0 === n ? "Local components" : "Local templates",
       isFilePublished: l,
@@ -250,7 +250,7 @@ export function $$b0({
         items: [],
         subtrees: [],
         key: "privateToThisFile",
-        name: _$$t("design_systems.assets_panel.hidden"),
+        name: getI18nString("design_systems.assets_panel.hidden"),
         type: "PAGE",
         sectionNameForTracking: 0 === n ? "Local private components" : "Local private templates",
         isFilePublished: l,
@@ -269,7 +269,7 @@ export function $$b0({
       items: [],
       subtrees: [],
       key: `defaultLibrary:${t}`,
-      name: _$$t("design_systems.assets_panel.created_by_figma"),
+      name: getI18nString("design_systems.assets_panel.created_by_figma"),
       type: "FILE",
       isFilePublished: !0,
       sectionNameForTracking: "Default libraries",

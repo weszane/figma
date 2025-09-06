@@ -1,10 +1,10 @@
-import { eU, zl, md } from "../figma_app/27355";
-let r = eU(0);
+import { atom, atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
+let r = atom(0);
 export function $$a1() {
-  zl.set(r, e => e + 1);
+  atomStoreManager.set(r, e => e + 1);
 }
 export function $$s0() {
-  return md(r);
+  return useAtomWithSubscription(r);
 }
 export const R = $$s0;
 export const c = $$a1;

@@ -16,7 +16,7 @@ import { getFeatureFlags } from "../905/601108";
 import { h as _$$h } from "../905/207101";
 import { Pt } from "../figma_app/806412";
 import { k as _$$k3 } from "../905/582200";
-import { t as _$$t2 } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { LU, kG } from "../figma_app/327588";
 import { Pc, gI, dS } from "../figma_app/396464";
@@ -60,7 +60,7 @@ export let $$M0 = Ju(function (e) {
   }, [h, m, g, y]);
   let Q = N.length;
   let J = jsx(Hk, {
-    ariaLabel: _$$t2("cooper.toolbar.export_modal.file_type"),
+    ariaLabel: getI18nString("cooper.toolbar.export_modal.file_type"),
     imageType: q,
     setImageType: e => {
       $(e);
@@ -70,7 +70,7 @@ export let $$M0 = Ju(function (e) {
     dispatch: p
   });
   let ee = jsx(fu, {
-    ariaLabel: _$$t2("cooper.toolbar.export_modal.size"),
+    ariaLabel: getI18nString("cooper.toolbar.export_modal.size"),
     imageType: q,
     constraint: Z,
     setConstraint: X,
@@ -106,7 +106,7 @@ export let $$M0 = Ju(function (e) {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$t2("cooper.toolbar.export_modal.export_title")
+          children: getI18nString("cooper.toolbar.export_modal.export_title")
         })
       }), jsx(nB, {
         padding: 0,
@@ -138,13 +138,13 @@ export let $$M0 = Ju(function (e) {
                   } catch (e) {
                     t = !1;
                     p(_$$F.enqueue({
-                      message: _$$t2("cooper.toolbar.export_modal.visual_bell.failed_to_export")
+                      message: getI18nString("cooper.toolbar.export_modal.visual_bell.failed_to_export")
                     }));
                   } finally {
                     i(!1);
                   }
                   t && (p(AS()), p(_$$F.enqueue({
-                    message: _$$t2("cooper.toolbar.export_modal.visual_bell.exported_assets", {
+                    message: getI18nString("cooper.toolbar.export_modal.visual_bell.exported_assets", {
                       assetCount: Q
                     })
                   })));
@@ -163,10 +163,10 @@ export let $$M0 = Ju(function (e) {
             disabled: 0 === g.length && 0 === y.length || t,
             children: t ? jsxs("div", {
               className: "x78zum5 x1q0g3np x6s0dn4 x1n0bwc9",
-              children: [jsx(_$$k, {}), _$$t2("buzz.toolbar.export_modal.export_button_text_exporting", {
+              children: [jsx(_$$k, {}), getI18nString("buzz.toolbar.export_modal.export_button_text_exporting", {
                 assetCount: Q
               })]
-            }) : _$$t2("buzz.toolbar.export_modal.export_button_text", {
+            }) : getI18nString("buzz.toolbar.export_modal.export_button_text", {
               assetCount: Q
             })
           })
@@ -196,7 +196,7 @@ function j({
         className: "xhtvcic x98rzlu x78zum5 xdt5ytf xl56j7k x6s0dn4 xrm205 x4i7bpe x1g2khh7 x1algulf x1v8gsql x1fshhuq",
         children: [void 0 === m ? jsx("div", {
           className: "x1vd4hg5 xk7hi9x x1g82q5y x2b8uid xxymvpz x1n0bwc9",
-          children: _$$t2("cooper.toolbar.export_modal.no_assets_selected")
+          children: getI18nString("cooper.toolbar.export_modal.no_assets_selected")
         }) : jsx(Fragment, {
           children: jsx(ZH, {
             children: ({
@@ -219,7 +219,7 @@ function j({
             children: [jsx(_$$E, {
               onClick: () => p(c - 1),
               disabled: f,
-              "aria-label": _$$t2("cooper.toolbar.export_modal.previous_asset"),
+              "aria-label": getI18nString("cooper.toolbar.export_modal.previous_asset"),
               className: "x1v8gsql",
               children: jsx(_$$t, {
                 style: {
@@ -227,14 +227,14 @@ function j({
                 }
               })
             }), jsx("div", {
-              children: _$$t2("cooper.toolbar.export_modal.frame_number", {
+              children: getI18nString("cooper.toolbar.export_modal.frame_number", {
                 current: 0 === o.length ? 0 : c + 1,
                 total: o.length
               })
             }), jsx(_$$E, {
               onClick: () => p(c + 1),
               disabled: _,
-              "aria-label": _$$t2("cooper.toolbar.export_modal.next_asset"),
+              "aria-label": getI18nString("cooper.toolbar.export_modal.next_asset"),
               className: "x1v8gsql",
               children: jsx(_$$a, {
                 style: {
@@ -271,36 +271,36 @@ function U({
     children: [jsx("span", {
       id: d,
       className: "xkezfkh",
-      children: _$$t2("cooper.toolbar.export_modal.select_assets")
+      children: getI18nString("cooper.toolbar.export_modal.select_assets")
     }), jsx(B, {
       ariaLabelledBy: d
     }), jsx("span", {
       className: "xkezfkh",
-      children: _$$t2("cooper.toolbar.export_modal.file_type")
+      children: getI18nString("cooper.toolbar.export_modal.file_type")
     }), e, "PDF" !== s && "PDF Print" !== s && jsxs(Fragment, {
       children: [jsx("span", {
         className: "xkezfkh",
-        children: _$$t2("cooper.toolbar.export_modal.size")
+        children: getI18nString("cooper.toolbar.export_modal.size")
       }), t]
     }), "PNG" !== s && "PDF Print" !== s && jsxs(Fragment, {
       children: [jsx("label", {
         htmlFor: F4,
         className: "xkezfkh",
-        children: _$$t2("cooper.toolbar.export_modal.quality")
+        children: getI18nString("cooper.toolbar.export_modal.quality")
       }), i]
     }), jsx("label", {
       htmlFor: vl,
       className: "xkezfkh",
-      children: _$$t2("cooper.toolbar.export_modal.color_profile")
+      children: getI18nString("cooper.toolbar.export_modal.color_profile")
     }), jsx("span", {
       className: "x1ef8nbk",
       children: a
     }), "PDF Print" === s && jsx("span", {
       className: "x1n0bwc9 x1ah0xmj",
-      children: _$$t2("cooper.toolbar.export_modal.color_profile_warning")
+      children: getI18nString("cooper.toolbar.export_modal.color_profile_warning")
     }), getFeatureFlags().buzz_print_export && "PDF Print" === s && jsx(_$$S, {
       label: jsx(J, {
-        children: _$$t2("cooper.toolbar.export_modal.show_print_marks")
+        children: getI18nString("cooper.toolbar.export_modal.show_print_marks")
       }),
       checked: o,
       onChange: l

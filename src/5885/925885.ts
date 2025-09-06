@@ -1,13 +1,13 @@
 import { ServiceCategories as _$$e } from "../905/165054";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Ay } from "../905/612521";
 import { getPaymentFlowData } from "../figma_app/169182";
 import { _H } from "../figma_app/598111";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { cn } from "../figma_app/141320";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
 import { H as _$$H } from "../5885/54359";
 import { VB } from "../figma_app/361035";
@@ -19,7 +19,7 @@ import { _J } from "../figma_app/314264";
 import { P8 } from "../figma_app/475472";
 import { fD, Rq, ne } from "../figma_app/345997";
 import { R_ } from "../5885/399780";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { tY, tn } from "../figma_app/831101";
 import { SC, Sc } from "../figma_app/707808";
 import { C as _$$C } from "../5885/53111";
@@ -51,12 +51,12 @@ let $$N0 = nF((e, t) => {
     team_id: teamId
   }).then(() => {
     onSuccess();
-    e.dispatch(_$$s.flash(_$$t("flash.redeem_promo.success", {
+    e.dispatch(_$$s.flash(getI18nString("flash.redeem_promo.success", {
       teamName
     })));
   }).catch(t => {
     onError();
-    e.dispatch(_$$s.error(_$$t("flash.redeem_promo.failure")));
+    e.dispatch(_$$s.error(getI18nString("flash.redeem_promo.failure")));
   });
 });
 let $$k1 = nF((e, t) => {
@@ -80,7 +80,7 @@ let $$k1 = nF((e, t) => {
       view: "team",
       teamId
     }));
-    e.dispatch(_$$s.flash(_$$t("payments.pro_trial.start_pro_trial_success")));
+    e.dispatch(_$$s.flash(getI18nString("payments.pro_trial.start_pro_trial_success")));
     R_.trackInitiationSubmit(surveyResult, !0);
   }).catch(t => {
     n ? e.dispatch(_l({
@@ -95,7 +95,7 @@ let $$k1 = nF((e, t) => {
     })) : e.dispatch(sf({
       view: "recentsAndSharing"
     }));
-    e.dispatch(_$$s.error(_$$t("payments.pro_trial.start_pro_trial_error")));
+    e.dispatch(_$$s.error(getI18nString("payments.pro_trial.start_pro_trial_error")));
     R_.trackInitiationSubmit(surveyResult, !1);
   });
 });
@@ -121,7 +121,7 @@ let $$D3 = nF((e, {
   });
   let B = ne(F.payment.billingPeriod);
   if (!B) {
-    e.dispatch(_$$s.error(_$$t("payments.invalid_billing_interval_error")));
+    e.dispatch(_$$s.error(getI18nString("payments.invalid_billing_interval_error")));
     return;
   }
   let G = null;
@@ -133,8 +133,8 @@ let $$D3 = nF((e, {
       q = VB(t) ?? null;
       G = F.payment.cartSelections?.countBySeatType ?? null;
     } else {
-      e.dispatch(_$$s.error(_$$t("payments.errors.error_processing_upgrade_request")));
-      $D(_$$e.MONETIZATION_UPGRADES, Error("Unable to retrieve valid selectedUserSeatTypes while submitting Pro upgrade request"), {
+      e.dispatch(_$$s.error(getI18nString("payments.errors.error_processing_upgrade_request")));
+      reportError(_$$e.MONETIZATION_UPGRADES, Error("Unable to retrieve valid selectedUserSeatTypes while submitting Pro upgrade request"), {
         extra: {
           teamId: h,
           userIds: i,
@@ -175,12 +175,12 @@ let $$D3 = nF((e, {
       team_name: t,
       invite_emails: i,
       promo_code: e.code
-    }; else if (a && R) L = {
+    };else if (a && R) L = {
       ...V,
       team_name: t,
       invite_emails: i,
       student_team: !0
-    }; else {
+    };else {
       let e = getPaymentFlowData();
       L = {
         ...V,
@@ -283,7 +283,7 @@ let $$D3 = nF((e, {
         e.dispatch(sf({
           ...r,
           teamToMoveFileToOnNavigate: a.id,
-          editorType: nT.Design
+          editorType: FEditorType.Design
         }));
       } else o();
     } else if (e.dispatch(Be({
@@ -301,10 +301,10 @@ let $$D3 = nF((e, {
       e.dispatch(sf({
         ...r,
         teamToMoveFileToOnNavigate: a.id,
-        editorType: nT.Design
+        editorType: FEditorType.Design
       }));
     } else o();
-    sx("Pro Team Purchased (GTM)");
+    trackEventAnalytics("Pro Team Purchased (GTM)");
     D && D();
   }).catch(t => {
     let i = (t, i = {}) => {
@@ -334,8 +334,8 @@ let $$D3 = nF((e, {
     null !== h ? _J("Pro Checkout Error", h, F, {
       error_message: o,
       request_params: JSON.stringify(L)
-    }) : sx("Pro Checkout Error");
-    $D(_$$e.BILLING_EXPERIENCE, Error(`[Billing] Pro checkout API failed: ${o}`), {
+    }) : trackEventAnalytics("Pro Checkout Error");
+    reportError(_$$e.BILLING_EXPERIENCE, Error(`[Billing] Pro checkout API failed: ${o}`), {
       extra: {
         countByBillableProduct: G,
         selectedUserSeatTypes: q,
@@ -362,4 +362,4 @@ let $$D3 = nF((e, {
 export const S_ = $$N0;
 export const cw = $$k1;
 export const g_ = $$R2;
-export const gk = $$D3; 
+export const gk = $$D3;

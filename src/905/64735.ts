@@ -4,7 +4,7 @@ import { _ } from "../figma_app/496441";
 import { E } from "../905/632989";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Y } from "../905/830372";
 import { E as _$$E } from "../905/984674";
 import { A as _$$A } from "../svg/545021";
@@ -64,7 +64,7 @@ export function $$h0({
             })
           })]
         }), _ && jsx(K, {
-          "aria-label": _$$t("general.close"),
+          "aria-label": getI18nString("general.close"),
           onClick: _,
           children: jsx(B, {
             svg: _$$A
@@ -105,7 +105,7 @@ export function $$h0({
             action: h
           })]
         }), _ && jsx(K, {
-          "aria-label": _$$t("general.close"),
+          "aria-label": getI18nString("general.close"),
           onClick: _,
           children: jsx(B, {
             svg: _$$A

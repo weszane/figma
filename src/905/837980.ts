@@ -5,7 +5,7 @@ import { Pw } from "../905/521428";
 import { Pt } from "../figma_app/806412";
 import { GG } from "../905/511649";
 import { Point } from "../905/736624";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { bV } from "../figma_app/808294";
 import { Ce } from "../905/156213";
 import { Uv } from "../905/54385";
@@ -374,20 +374,20 @@ export let $$E0 = Ju(function (e) {
   }
   let A = "LOGGED_OUT" === e.type;
   let y = "TRIAL_ENDED" === e.type;
-  let I = y ? tx("community.buyer.your_trial_has_ended") : tx("community.buyer.unlock_this_feature");
-  let E = A ? tx("community.buyer.log_in_to_get_everything", {
+  let I = y ? renderI18nText("community.buyer.your_trial_has_ended") : renderI18nText("community.buyer.unlock_this_feature");
+  let E = A ? renderI18nText("community.buyer.log_in_to_get_everything", {
     pluginName: e.plugin.name
-  }) : y ? tx("community.buyer.you_can_keep_using_plugin", {
+  }) : y ? renderI18nText("community.buyer.you_can_keep_using_plugin", {
     pluginName: e.plugin.name
-  }) : tx("community.buyer.purchase_this_feature_today", {
+  }) : renderI18nText("community.buyer.purchase_this_feature_today", {
     pluginName: e.plugin.name
   });
   let x = e.monetizedResourceMetadata ? jsxs("div", {
-    children: [Uv(e.monetizedResourceMetadata) ? tx("community.buyer.subscribe") : tx("community.buyer.buy"), jsx("span", {
+    children: [Uv(e.monetizedResourceMetadata) ? renderI18nText("community.buyer.subscribe") : renderI18nText("community.buyer.buy"), jsx("span", {
       className: "freemium_api_pre_checkout_modal--buttonPriceString--UHoHb",
       children: bV(e.monetizedResourceMetadata)
     })]
-  }) : tx("community.buyer.buy_now");
+  }) : renderI18nText("community.buyer.buy_now");
   let S = "redirect_icon_url" in e.plugin ? e.plugin.redirect_icon_url : void 0;
   let w = new Point((window.innerWidth - 450) / 2, (window.innerHeight - 442) / 2);
   return jsx(Xj, {
@@ -422,7 +422,7 @@ export let $$E0 = Ju(function (e) {
         recordingKey: Pt("freemiumApiPreCheckoutModal", "cancel"),
         onClick: f,
         className: "freemium_api_pre_checkout_modal--link--SCOub text--fontPos13--xW8hS text--_fontBase--QdLsd",
-        children: tx("community.buyer.maybe_later")
+        children: renderI18nText("community.buyer.maybe_later")
       })]
     })
   });

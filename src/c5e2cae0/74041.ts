@@ -2,7 +2,7 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { Kz, vd, Us } from "../figma_app/637027";
 import { L } from "../905/408237";
 import { B } from "../905/714743";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { c as _$$c } from "../905/370443";
 import { Fb, b0, F0, Pr, Zy, eA, x } from "../figma_app/81441";
 import { A } from "../c5e2cae0/100203";
@@ -18,24 +18,24 @@ export function $$_1({
 }) {
   let p = {
     starter: {
-      title: tx("all_carts.create_team.create_a_new_team"),
-      subtitle: tx("all_carts.create_team.after_creating_a_team"),
-      placeholder: _$$t("pro_cart.create_team.enter_a_name_for_your_working_group"),
-      next: tx("all_carts.create_team.create_team"),
+      title: renderI18nText("all_carts.create_team.create_a_new_team"),
+      subtitle: renderI18nText("all_carts.create_team.after_creating_a_team"),
+      placeholder: getI18nString("pro_cart.create_team.enter_a_name_for_your_working_group"),
+      next: renderI18nText("all_carts.create_team.create_team"),
       trackingDescriptor: _$$c.SEND_INVITES
     },
     pro: {
-      title: tx("pro_cart.create_team.create_a_professional_team"),
-      subtitle: tx("pro_cart.create_team.itll_have_unlimited_files_and_collaborative_features"),
-      placeholder: _$$t("pro_cart.create_team.enter_a_name_for_your_working_group"),
-      next: u ? tx("pro_cart.sidebar.next_review") : tx("pro_cart.create_team.next_set_editors.seat_rename"),
+      title: renderI18nText("pro_cart.create_team.create_a_professional_team"),
+      subtitle: renderI18nText("pro_cart.create_team.itll_have_unlimited_files_and_collaborative_features"),
+      placeholder: getI18nString("pro_cart.create_team.enter_a_name_for_your_working_group"),
+      next: u ? renderI18nText("pro_cart.sidebar.next_review") : renderI18nText("pro_cart.create_team.next_set_editors.seat_rename"),
       trackingDescriptor: u ? _$$c.REVIEW : _$$c.SET_EDITORS
     },
     org: {
-      title: tx("org_self_serve.create_team_step.create_an_org_team"),
-      subtitle: tx("org_self_serve.create_team_step.itll_have_unlimited_files_and_advanced_security"),
-      placeholder: _$$t("org_self_serve.create_team_step.enter_a_name_for_your_team"),
-      next: tx("org_self_serve.create_team_step.next_select_team"),
+      title: renderI18nText("org_self_serve.create_team_step.create_an_org_team"),
+      subtitle: renderI18nText("org_self_serve.create_team_step.itll_have_unlimited_files_and_advanced_security"),
+      placeholder: getI18nString("org_self_serve.create_team_step.enter_a_name_for_your_team"),
+      next: renderI18nText("org_self_serve.create_team_step.next_select_team"),
       trackingDescriptor: _$$c.SELECT_TEAM
     }
   }[e];
@@ -74,7 +74,7 @@ export function $$_1({
       trackingProperties: {
         trackingDescriptor: _$$c.UPGRADE_EXISTING_TEAM
       },
-      children: tx("pro_cart.create_team.upgrade_an_existing_team_instead")
+      children: renderI18nText("pro_cart.create_team.upgrade_an_existing_team_instead")
     })]
   });
 }

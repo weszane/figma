@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useContext } from "react";
 import { d as _$$d } from "../905/976845";
 import { u as _$$u } from "../905/911813";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import l from "classnames";
 import { D } from "../905/12032";
 import { Ib } from "../905/129884";
@@ -20,7 +20,7 @@ export function $$g0({
   let f = useContext(_$$p);
   let _ = e ?? f?.isShowingBindingUI;
   let A = t ?? f?.showBindingUI;
-  let y = md(D);
+  let y = useAtomWithSubscription(D);
   return jsx("span", {
     className: d()({
       [c6]: "OnboardNewTextContentRowLocation" !== y && !g,

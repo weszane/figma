@@ -4,12 +4,12 @@ import { useDispatch } from "../vendor/514228";
 import { languageCodes } from "../905/816253";
 import { N as _$$N } from "../905/438674";
 import { getFeatureFlags } from "../905/601108";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { getInitialOptions, buildUploadUrl } from "../figma_app/169182";
 import { I7 } from "../figma_app/594947";
 import { oW } from "../905/675859";
 import { rX, vz, Q5, sJ } from "../9864/183809";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { to } from "../905/156213";
 import { b as _$$b } from "../905/985254";
 import { c as _$$c } from "../905/370443";
@@ -46,22 +46,22 @@ let N = e => {
 function O(e) {
   let t = useDispatch();
   let n = DP();
-  let r = e.isSpainVariant ? tx("es_es_announcement.spain.description") : tx("es_es_announcement.nonspain.description");
+  let r = e.isSpainVariant ? renderI18nText("es_es_announcement.spain.description") : renderI18nText("es_es_announcement.nonspain.description");
   return jsx(_l, {
     isShowing: e.isShowing,
     trackingContextName: "es_es_launch_announcement_spain",
     onClose: e.onClose,
-    title: tx("es_es_announcement.title"),
+    title: renderI18nText("es_es_announcement.title"),
     description: jsxs(Fragment, {
       children: [r, jsx("br", {}), jsx(_$$N, {
         href: "https://www.figma.com/figma-ahora-en-espanol/",
         trusted: !0,
         newTab: !0,
-        children: tx("es_es_launch_announcement.learn_more")
+        children: renderI18nText("es_es_launch_announcement.learn_more")
       })]
     }),
     primaryCta: {
-      label: tx("es_es_announcement.cta_button"),
+      label: renderI18nText("es_es_announcement.cta_button"),
       type: "button",
       onClick: () => {
         t(to({
@@ -77,15 +77,15 @@ function O(e) {
       width: 332,
       height: 404,
       src: buildUploadUrl("dark" === n ? "d5144836652ddb3ef93938b550364428430fbdf2" : "2c6b6c235309104ec7fe7c99d6d85cc3c8a91e8e"),
-      alt: _$$t("es_es_launch_announcement.image_alt_text")
+      alt: getI18nString("es_es_launch_announcement.image_alt_text")
     })
   });
 }
 let R = r1("has_tried_es_es");
 export function $$M0() {
   let e = useDispatch();
-  let t = md(R);
-  let n = md(mp);
+  let t = useAtomWithSubscription(R);
+  let n = useAtomWithSubscription(mp);
   let s = "loaded" === n.status;
   let {
     getConfig

@@ -1,11 +1,11 @@
 import { useCallback } from "react";
 import { Ez5 } from "../figma_app/763686";
-import { eU, E3, zl as _$$zl } from "../figma_app/27355";
+import { atom, createLocalStorageAtom, atomStoreManager } from "../figma_app/27355";
 import { rt } from "../figma_app/615482";
 import { SG, vv, hR, hW } from "../905/508457";
 import { J2 } from "../figma_app/84367";
 let $$d8 = "code-window-back-to-design";
-let $$c17 = eU(null);
+let $$c17 = atom(null);
 let $$u25 = SG(() => Ez5.codeSelection().selectedCodeNodeIds);
 let $$p12 = SG(() => Ez5.codeSelection().fullscreenCodeNodeIds);
 let $$_23 = SG(() => Ez5.codeSelection().selectedCodeNodeSize);
@@ -17,23 +17,23 @@ let $$E21 = SG(() => Ez5.codeSelection().fullscreenCodeNodeClipContents);
 let $$y0 = SG(() => Ez5.codeSelection().selectedCodeNodeName);
 let $$b10 = SG(() => Ez5.codeSelection().selectedCanvasNodeIds);
 let $$T14 = vv(() => Ez5?.codeSelection()?.showMainComponent, !1);
-let $$I24 = E3("previouslySelectedInstance", null);
+let $$I24 = createLocalStorageAtom("previouslySelectedInstance", null);
 let $$S1 = vv(() => Ez5?.codeSelection()?.selectedCodeFileNodeId, null);
 let $$v5 = vv(() => Ez5?.codeSelection()?.fullscreenCodeFileNodeId, null);
 vv(() => Ez5?.codeSelection()?.selectedPromptFrames, []);
 let $$A18 = vv(() => Ez5?.codeSelection()?.selectedCodeBehavior, null);
 let $$x4 = vv(() => Ez5?.codeSelection()?.fullscreenCodeBehavior, null);
-let $$N19 = E3("codeWindowPanelConfiguration", "chat");
-let $$C29 = E3("codeFullViewPanelConfiguration", "chat");
+let $$N19 = createLocalStorageAtom("codeWindowPanelConfiguration", "chat");
+let $$C29 = createLocalStorageAtom("codeFullViewPanelConfiguration", "chat");
 hR([], {
   changeFileBehavior: hW.RESET_VALUE_ON_FILE_CHANGE
 });
-let $$w13 = E3("scaleLinearly", !0);
+let $$w13 = createLocalStorageAtom("scaleLinearly", !0);
 let $$O2 = !1;
 let $$R28 = rt(null);
 export function $$L16(e) {
   return useCallback(() => {
-    e && e.backingSourceCodeNodeId && (_$$zl.get($$u25).includes(e.guid) ? $$D7() : $$P15(e));
+    e && e.backingSourceCodeNodeId && (atomStoreManager.get($$u25).includes(e.guid) ? $$D7() : $$P15(e));
   }, [e]);
 }
 export function $$P15(e) {

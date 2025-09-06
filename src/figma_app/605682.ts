@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useState } from "react";
 import { h } from "../905/207101";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { Z } from "../905/104740";
 import { VF, uY } from "../figma_app/989514";
 import { zU, en } from "../figma_app/202626";
@@ -33,9 +33,9 @@ export function $$p0(e) {
     pointsTo: "designPanel",
     shouldCenterArrow: EL.FALLBACK,
     targetKey: $$u1,
-    title: tx("tooltips_plus_onboarding.design_panel.title"),
+    title: renderI18nText("tooltips_plus_onboarding.design_panel.title"),
     trackingContextName: "Tooltips+ Design Panel Step",
-    children: tx("tooltips_plus_onboarding.design_panel.description")
+    children: renderI18nText("tooltips_plus_onboarding.design_panel.description")
   }) : null;
 }
 export const K = $$p0;

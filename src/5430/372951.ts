@@ -4,7 +4,7 @@ import { x as _$$x } from "../7222/491815";
 import { C as _$$C } from "../5430/935440";
 import { e as _$$e2 } from "../905/693478";
 import l from "classnames";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { oW } from "../905/675859";
 import { c as _$$c } from "../905/320067";
 import { t as _$$t } from "../905/331623";
@@ -37,13 +37,13 @@ export function $$I1({
       loading: "lazy",
       className: "resource_tile--thumbnailImage--RJCYv"
     }
-  }) : $D(_$$e.COMMUNITY, Error("ResourceTileImage: resource has no thumbnail_url")) : n === vt.COOPER_TEMPLATE_FILE ? e.thumbnail_url ? r = jsx(Q, {
+  }) : reportError(_$$e.COMMUNITY, Error("ResourceTileImage: resource has no thumbnail_url")) : n === vt.COOPER_TEMPLATE_FILE ? e.thumbnail_url ? r = jsx(Q, {
     src: e.thumbnail_url,
     loading: "lazy",
     alt: e.name,
     draggable: !1,
     crossOrigin: "use-credentials"
-  }) : $D(_$$e.COMMUNITY, Error("ResourceTileImage: resource has no thumbnail_url")) : [vt.PLUGIN, vt.WIDGET].includes(n) && (e.icon_url ? r = jsxs("div", {
+  }) : reportError(_$$e.COMMUNITY, Error("ResourceTileImage: resource has no thumbnail_url")) : [vt.PLUGIN, vt.WIDGET].includes(n) && (e.icon_url ? r = jsxs("div", {
     className: "resource_tile--iconWrapper--K9Ds6",
     children: [jsx(oW, {
       className: c()({
@@ -57,7 +57,7 @@ export function $$I1({
       className: "resource_tile--pluginTaglineOrDescription--kfqm7 text--fontPos11--2LvXf text--_fontBase--QdLsd",
       children: G8(e)
     })]
-  }) : $D(_$$e.COMMUNITY, Error("ResourceTileImage: resource has no icon_url")));
+  }) : reportError(_$$e.COMMUNITY, Error("ResourceTileImage: resource has no icon_url")));
   return jsx("div", {
     className: "resource_tile--aspectRatioContainer--61bXu",
     children: jsxs("div", {
@@ -117,7 +117,7 @@ export function $$E0({
     className: "resource_tile--resourceTile--SiKPd",
     "data-testid": "community-resource-tile",
     children: [jsx(_$$a, {
-      callback: (e) => {
+      callback: e => {
         e[0] && t(e[0]);
       }
     }), jsxs(A6, {

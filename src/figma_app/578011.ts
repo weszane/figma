@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { getFeatureFlags } from "../905/601108";
-import { az } from "../905/449184";
-import { J6 } from "../905/602906";
-import { $ } from "../905/361972";
-import { x1 } from "../905/714362";
+import { analyticsEventManager } from "../905/449184";
+import { observabilityClient } from "../905/602906";
+import { LogLevelStr } from "../905/361972";
+import { logError } from "../905/714362";
 export let $$n1;
 let c = ["dependency_event_bus_variable_versioning"];
 class u {
@@ -87,7 +87,7 @@ class _ {
     let t = performance.now();
     Array.from(e.values()).forEach(e => {
       if (!m) {
-        x1("user_action_timing", "UserActionLongFrameTracker is not initialized, skipping long frame metrics for user action timing");
+        logError("user_action_timing", "UserActionLongFrameTracker is not initialized, skipping long frame metrics for user action timing");
         return;
       }
       let r = m?.getFrameMetrics(e);
@@ -98,7 +98,7 @@ class _ {
           absoluteFlushTimeMs: r,
           ...n
         }) {
-          az.trackDefinedMetric("user_action_timing.action", {
+          analyticsEventManager.trackDefinedMetric("user_action_timing.action", {
             editScopeName: e.name,
             flushTimeMs: r - e.wallTime.start,
             wallTimeMs: e.wallTime.end - e.wallTime.start,
@@ -116,8 +116,8 @@ class _ {
           let i = {};
           let d = getFeatureFlags();
           d.ds_user_action_timing_log_ffs && 864e5 > performance.now() && (i = Object.fromEntries(c.map(e => [e, d[e] ?? !1])));
-          J6.logVital(`user_action_timing.action.${e.name}`, {
-            level: $.INFO,
+          observabilityClient.logVital(`user_action_timing.action.${e.name}`, {
+            level: LogLevelStr.INFO,
             startTime: performance.timeOrigin + e.wallTime.start,
             duration: e.wallTime.end - e.wallTime.start,
             description: e.userActionTimingScopes.map(e => `${e.scopeName}: ${e.duration}ms (${e.count})`).join(", "),

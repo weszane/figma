@@ -1,5 +1,5 @@
 import { j0r } from "../figma_app/763686";
-import { eU, Iz } from "../figma_app/27355";
+import { atom, createRemovableAtomFamily } from "../figma_app/27355";
 import a from "../vendor/128080";
 import { v4, qp, mn, jq } from "../figma_app/761118";
 import { g as _$$g } from "../905/880308";
@@ -12,16 +12,16 @@ import { b } from "../905/857767";
 import { dC, Yc } from "../905/820169";
 import { uk } from "../figma_app/216057";
 var s = a;
-let f = Wh(() => eU(null));
-let $$E3 = Wh(() => eU(e => e(f), (e, t, r) => {
+let f = Wh(() => atom(null));
+let $$E3 = Wh(() => atom(e => e(f), (e, t, r) => {
   t(f, r);
 }));
-let $$y6 = Wh(() => eU(null));
-let $$b4 = Wh(() => eU(null));
-let $$T1 = eU(null);
-let $$I2 = eU(!1);
-let $$S7 = eU(null);
-let $$v5 = Iz(e => eU(t => {
+let $$y6 = Wh(() => atom(null));
+let $$b4 = Wh(() => atom(null));
+let $$T1 = atom(null);
+let $$I2 = atom(!1);
+let $$S7 = atom(null);
+let $$v5 = createRemovableAtomFamily(e => atom(t => {
   let {
     libraryVariables
   } = t(v4);
@@ -105,7 +105,7 @@ let $$v5 = Iz(e => eU(t => {
     libraryVariables
   };
 }), (e, t) => s()(e.type, t.type) && s()(e.scopes, t.scopes));
-let $$A0 = eU(e => {
+let $$A0 = atom(e => {
   let {
     subscribedStylesByFileKey,
     localStyles

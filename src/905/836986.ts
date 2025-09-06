@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { PK, sD, Kw, gr, _H, eJ, Tq, YB } from "../figma_app/243058";
-import { md, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, Xr } from "../figma_app/27355";
 import s from "classnames";
 import { Dk } from "../figma_app/623293";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -14,8 +14,8 @@ let g = "badge_display--canUnderline--aufN5";
 export function $$f8({
   id: e
 }) {
-  let t = md(Cc);
-  let i = md(lX);
+  let t = useAtomWithSubscription(Cc);
+  let i = useAtomWithSubscription(lX);
   let r = t.getObject(e) ?? i?.getObject(e) ?? null;
   return jsx(P, {
     target: r,
@@ -228,4 +228,4 @@ export const aj = $$f8;
 export const Iu = $$A9;
 export const h8 = $$v10;
 export const F6 = $$y11;
-export const le = $$b12; 
+export const le = $$b12;

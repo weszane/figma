@@ -1,517 +1,887 @@
-let n;
-export class $$r4 {
-  constructor(e) {
-    this.elapsedTime = 0;
-    this.totalElapsedTime = 0;
-    this.startTime = 0;
-    this.callDepth = 0;
-    this.topLevelCallCount = 0;
-    this.totalCallCount = 0;
-    this.performanceNow = e || (() => performance.now());
+/**
+ * Timer utility classes and performance analytics.
+ * Original class names: $$r4, a, s, $$o5, d, u, p, m, $$h3, g, $$f0, _, $$b1
+ */
+
+let periodicCleanupInterval: ReturnType<typeof setInterval> | undefined
+
+/**
+ * Timer class for measuring elapsed time.
+ * Original: $$r4
+ */
+export class Timer {
+  elapsedTime = 0
+  totalElapsedTime = 0
+  startTime = 0
+  callDepth = 0
+  topLevelCallCount = 0
+  totalCallCount = 0
+  performanceNow: () => number
+
+  constructor(performanceNow?: () => number) {
+    this.performanceNow = performanceNow || (() => performance.now())
   }
-  start() {
-    0 === this.callDepth && (this.startTime = this.performanceNow(), this.topLevelCallCount++);
-    this.callDepth++;
-    this.totalCallCount++;
-  }
-  stop() {
-    if (0 === this.callDepth) {
-      console.debug("Called stop on an already-stopped timer");
-      return;
+
+  /**
+   * Start the timer.
+   */
+  start(): void {
+    if (this.callDepth === 0) {
+      this.startTime = this.performanceNow()
+      this.topLevelCallCount++
     }
-    if (this.callDepth--, 0 === this.callDepth) {
-      let e = this.performanceNow() - this.startTime;
-      this.elapsedTime += e;
-      this.totalElapsedTime += e;
+    this.callDepth++
+    this.totalCallCount++
+  }
+
+  /**
+   * Stop the timer.
+   */
+  stop(): void {
+    if (this.callDepth === 0) {
+      // eslint-disable-next-line no-console
+      console.debug('Called stop on an already-stopped timer')
+      return
+    }
+    this.callDepth--
+    if (this.callDepth === 0) {
+      const elapsed = this.performanceNow() - this.startTime
+      this.elapsedTime += elapsed
+      this.totalElapsedTime += elapsed
     }
   }
-  time(e) {
-    this.start();
-    let t = e();
-    this.stop();
-    return t;
+
+  /**
+   * Time a function execution.
+   * @param fn Function to time.
+   */
+  time<T>(fn: () => T): T {
+    this.start()
+    const result = fn()
+    this.stop()
+    return result
   }
-  static time(e) {
-    let t = new $$r4();
-    t.time(e);
-    return t.getElapsedTime();
+
+  /**
+   * Static method to time a function.
+   * @param fn Function to time.
+   */
+  static time<T>(fn: () => T): number {
+    const timer = new Timer()
+    timer.time(fn)
+    return timer.getElapsedTime()
   }
-  getElapsedTime() {
-    return 0 === this.callDepth ? this.elapsedTime : this.elapsedTime + this.performanceNow() - this.startTime;
+
+  /**
+   * Get elapsed time.
+   */
+  getElapsedTime(): number {
+    return this.callDepth === 0
+      ? this.elapsedTime
+      : this.elapsedTime + this.performanceNow() - this.startTime
   }
-  getTotalElapsedTime() {
-    return 0 === this.callDepth ? this.totalElapsedTime : this.totalElapsedTime + this.performanceNow() - this.startTime;
+
+  /**
+   * Get total elapsed time.
+   */
+  getTotalElapsedTime(): number {
+    return this.callDepth === 0
+      ? this.totalElapsedTime
+      : this.totalElapsedTime + this.performanceNow() - this.startTime
   }
-  getTopLevelCallCount() {
-    return this.topLevelCallCount;
+
+  /**
+   * Get top-level call count.
+   */
+  getTopLevelCallCount(): number {
+    return this.topLevelCallCount
   }
-  getTotalCallCount() {
-    return this.totalCallCount;
+
+  /**
+   * Get total call count.
+   */
+  getTotalCallCount(): number {
+    return this.totalCallCount
   }
-  reset() {
+
+  /**
+   * Reset the timer.
+   */
+  reset(): void {
     if (this.callDepth > 0) {
-      console.error("Cannot reset a running timer");
-      return;
+      console.error('Cannot reset a running timer')
+      return
     }
-    this.startTime = 0;
-    this.elapsedTime = 0;
-    this.topLevelCallCount = 0;
+    this.startTime = 0
+    this.elapsedTime = 0
+    this.topLevelCallCount = 0
   }
 }
-class a {
-  constructor() {
-    this.timerStack = [];
-    this.startListeners = new Set();
-    this.stopListeners = new Set();
+
+/**
+ * Timer group for managing multiple timers.
+ * Original: a
+ */
+class TimerGroup {
+  timerStack: { name: string, timer: Timer }[] = []
+  startListeners: Set<(name: string, depth: number) => void> = new Set()
+  stopListeners: Set<(name: string, elapsed: number) => void> = new Set()
+
+  start(name: string): void {
+    const timer = new Timer()
+    this.timerStack.push({ name, timer })
+    this.startListeners.forEach(listener => listener(name, 0))
+    timer.start()
   }
-  start(e) {
-    let t = new $$r4();
-    this.timerStack.push({
-      name: e,
-      timer: t
-    });
-    this.startListeners.forEach(t => t(e, 0));
-    t.start();
-  }
-  stop(e) {
-    let t = this.timerStack.pop();
-    if (!t) {
-      console.error(`Expected last started timer to be ${e}, but got an empty timer stack`);
-      return;
+
+  stop(name: string): void {
+    const entry = this.timerStack.pop()
+    if (!entry) {
+      console.error(`Expected last started timer to be ${name}, but got an empty timer stack`)
+      return
     }
-    if (t.name !== e) {
-      console.error(`Expected last started timer to be ${e}, but got ${t.name}`);
-      return;
+    if (entry.name !== name) {
+      console.error(`Expected last started timer to be ${name}, but got ${entry.name}`)
+      return
     }
-    t.timer.stop();
-    this.stopListeners.forEach(i => i(e, t.timer.getElapsedTime()));
+    entry.timer.stop()
+    this.stopListeners.forEach(listener => listener(name, entry.timer.getElapsedTime()))
   }
-  time(e, t) {
-    this.start(e);
-    let i = t();
-    this.stop(e);
-    return i;
+
+  time<T>(name: string, fn: () => T): T {
+    this.start(name)
+    const result = fn()
+    this.stop(name)
+    return result
   }
-  addStartListener(e) {
-    this.startListeners.add(e);
+
+  addStartListener(listener: (name: string, depth: number) => void): void {
+    this.startListeners.add(listener)
   }
-  removeStartListener(e) {
-    this.startListeners.$$delete(e);
+
+  removeStartListener(listener: (name: string, depth: number) => void): void {
+    this.startListeners.delete(listener)
   }
-  addStopListener(e) {
-    this.stopListeners.add(e);
+
+  addStopListener(listener: (name: string, elapsed: number) => void): void {
+    this.stopListeners.add(listener)
   }
-  removeStopListener(e) {
-    this.stopListeners.$$delete(e);
+
+  removeStopListener(listener: (name: string, elapsed: number) => void): void {
+    this.stopListeners.delete(listener)
   }
 }
-class s {
-  constructor(e) {
-    this.name = e;
-    this.hitCount = 0;
-    this.totalElapsedTime = 0;
-    this.maxElapsedTime = 0;
-    this.elapsedTimes = [];
-    this.children = [];
+
+/**
+ * Timer node for hierarchical timer reporting.
+ * Original: s
+ */
+class TimerNode {
+  name: string
+  hitCount = 0
+  totalElapsedTime = 0
+  maxElapsedTime = 0
+  elapsedTimes: number[] = []
+  children: TimerNode[] = []
+
+  constructor(name: string) {
+    this.name = name
   }
-  reset() {
-    this.hitCount = 0;
-    this.totalElapsedTime = 0;
-    this.maxElapsedTime = 0;
-    this.elapsedTimes = [];
-    this.children.forEach(e => e.reset());
+
+  reset(): void {
+    this.hitCount = 0
+    this.totalElapsedTime = 0
+    this.maxElapsedTime = 0
+    this.elapsedTimes = []
+    this.children.forEach(child => child.reset())
   }
 }
-export class $$o5 {
-  constructor(e) {
-    this.options = e;
-    this.timerGroup = new a();
-    this.rootNodes = [];
-    this.nodeStack = [];
-    this.warnOpenCount = 0;
-    this.onStart = e => {
-      let t = null;
-      let i = this.rootNodes;
-      for (let n of (this.nodeStack.length > 0 && (i = this.nodeStack[this.nodeStack.length - 1].children), i)) if (n.name === e) {
-        t = n;
-        break;
-      }
-      t || (t = new s(e), i.push(t));
-      this.nodeStack.push(t);
-    };
-    this.onStop = (e, t) => {
-      let i = this.nodeStack.pop();
-      if (!i) {
-        console.error("Got onStop with an empty result stack");
-        return;
-      }
-      for (i.hitCount++, i.totalElapsedTime += t, i.maxElapsedTime = Math.max(i.maxElapsedTime, t); i.elapsedTimes.length >= this.options.bufferSize;) i.elapsedTimes.shift();
-      i.elapsedTimes.push(t);
-    };
-    this.timerGroup.addStartListener(this.onStart);
-    this.timerGroup.addStopListener(this.onStop);
+
+/**
+ * Hierarchical timer group for reporting.
+ * Original: $$o5
+ */
+export class HierarchicalTimerGroup {
+  options: { bufferSize: number }
+  timerGroup: TimerGroup
+  rootNodes: TimerNode[] = []
+  nodeStack: TimerNode[] = []
+  warnOpenCount = 0
+
+  constructor(options: { bufferSize: number }) {
+    this.options = options
+    this.timerGroup = new TimerGroup()
+
+    this.timerGroup.addStartListener(this.onStart)
+    this.timerGroup.addStopListener(this.onStop)
   }
-  start(e) {
-    this.timerGroup.start(e);
+
+  /**
+   * Start a named timer.
+   */
+  start(name: string): void {
+    this.timerGroup.start(name)
   }
-  stop(e) {
-    this.timerGroup.stop(e);
+
+  /**
+   * Stop a named timer.
+   */
+  stop(name: string): void {
+    this.timerGroup.stop(name)
   }
-  time(e, t) {
-    this.start(e);
-    let i = t();
-    this.stop(e);
-    return i;
+
+  /**
+   * Time a function execution.
+   */
+  time<T>(name: string, fn: () => T): T {
+    this.start(name)
+    const result = fn()
+    this.stop(name)
+    return result
   }
-  areTimersOpen() {
-    return this.nodeStack.length > 0;
+
+  /**
+   * Check if any timers are open.
+   */
+  areTimersOpen(): boolean {
+    return this.nodeStack.length > 0
   }
-  report() {
+
+  /**
+   * Get timer report.
+   */
+  report(): TimerNode[] {
     if (this.nodeStack.length > 0) {
-      var e;
-      0 == ((e = ++this.warnOpenCount) & e - 1) && console.warn("Asking for a report while some timers remain open", JSON.stringify(this.nodeStack.map(e => e.name)));
+      this.warnOpenCount++
+      if ((this.warnOpenCount & (this.warnOpenCount - 1)) === 0) {
+        console.warn(
+          'Asking for a report while some timers remain open',
+          JSON.stringify(this.nodeStack.map(node => node.name)),
+        )
+      }
     }
-    return this.rootNodes;
+    return this.rootNodes
   }
-  reset() {
-    this.rootNodes.forEach(e => e.reset());
+
+  /**
+   * Reset all timers.
+   */
+  reset(): void {
+    this.rootNodes.forEach(node => node.reset())
   }
-  addStartListener(e) {
-    this.timerGroup.addStartListener(e);
+
+  /**
+   * Add start listener.
+   */
+  addStartListener(listener: (name: string, depth: number) => void): void {
+    this.timerGroup.addStartListener(listener)
   }
-  removeStartListener(e) {
-    this.timerGroup.removeStartListener(e);
+
+  /**
+   * Remove start listener.
+   */
+  removeStartListener(listener: (name: string, depth: number) => void): void {
+    this.timerGroup.removeStartListener(listener)
   }
-  addStopListener(e) {
-    this.timerGroup.addStopListener(e);
+
+  /**
+   * Add stop listener.
+   */
+  addStopListener(listener: (name: string, elapsed: number) => void): void {
+    this.timerGroup.addStopListener(listener)
   }
-  removeStopListener(e) {
-    this.timerGroup.removeStopListener(e);
+
+  /**
+   * Remove stop listener.
+   */
+  removeStopListener(listener: (name: string, elapsed: number) => void): void {
+    this.timerGroup.removeStopListener(listener)
   }
-  getBufferSize() {
-    return this.options.bufferSize;
+
+  /**
+   * Get buffer size.
+   */
+  getBufferSize(): number {
+    return this.options.bufferSize
+  }
+
+  /**
+   * Start event handler.
+   * Original: onStart
+   */
+  private onStart = (name: string) => {
+    let node: TimerNode | null = null
+    let nodes = this.rootNodes
+    if (this.nodeStack.length > 0) {
+      nodes = this.nodeStack[this.nodeStack.length - 1].children
+    }
+    for (const n of nodes) {
+      if (n.name === name) {
+        node = n
+        break
+      }
+    }
+    if (!node) {
+      node = new TimerNode(name)
+      nodes.push(node)
+    }
+    this.nodeStack.push(node)
+  }
+
+  /**
+   * Stop event handler.
+   * Original: onStop
+   */
+  private onStop = (name: string, elapsed: number) => {
+    const node = this.nodeStack.pop()
+    if (!node) {
+      console.error('Got onStop with an empty result stack')
+      return
+    }
+    node.hitCount++
+    node.totalElapsedTime += elapsed
+    node.maxElapsedTime = Math.max(node.maxElapsedTime, elapsed)
+    while (node.elapsedTimes.length >= this.options.bufferSize) node.elapsedTimes.shift()
+    node.elapsedTimes.push(elapsed)
   }
 }
-let l = "undefined" != typeof performance && "mark" in performance && "measure" in performance && "clearMarks" in performance;
-let d = class e extends $$r4 {
-  constructor(e, t, i) {
-    super();
-    this._isUnreliable = !1;
-    this.name = e;
-    this.attributes = t;
-    this.group = i;
-    this.ref = new WeakRef(this);
-    p.add(this);
+
+// Performance API support check
+const isPerfApiAvailable
+  = typeof performance !== 'undefined'
+    && 'mark' in performance
+    && 'measure' in performance
+    && 'clearMarks' in performance
+
+/**
+ * PerfTimer class for advanced performance measurement.
+ * Original: d
+ */
+class PerfTimer extends Timer {
+  static operationSeq = 0
+  _isUnreliable = false
+  name: string
+  attributes: Record<string, any>
+  group?: PerfTimerManager
+  ref: WeakRef<PerfTimer>
+  mark?: PerformanceMark
+  id?: number
+
+  constructor(name: string, attributes: Record<string, any>, group?: PerfTimerManager) {
+    super()
+    this.name = name
+    this.attributes = attributes
+    this.group = group
+    this.ref = new WeakRef(this)
+    PerfTimerRegistry.add(this)
   }
-  start() {
-    this.callDepth = 0;
-    this.reset();
-    super.start();
-    $$h3.isPerfReportEnabled && (this.mark = performance.mark(this.performanceMarkStartName, {
-      detail: this.attributes
-    }));
+
+  start(): void {
+    this.callDepth = 0
+    this.reset()
+    super.start()
+    if (PerfTimerManager.isPerfReportEnabled && isPerfApiAvailable) {
+      this.mark = performance.mark(this.performanceMarkStartName, {
+        detail: this.attributes,
+      })
+    }
   }
-  pause() {
-    super.stop();
+
+  pause(): void {
+    super.stop()
   }
-  resume() {
-    super.start();
+
+  resume(): void {
+    super.start()
   }
-  get isUnreliable() {
-    return this._isUnreliable || document.hidden;
+
+  get isUnreliable(): boolean {
+    return this._isUnreliable || document.hidden
   }
-  set isUnreliable(e) {
-    this._isUnreliable = e;
+
+  set isUnreliable(value: boolean) {
+    this._isUnreliable = value
   }
-  get isRunning() {
-    return this.callDepth > 0;
+
+  get isRunning(): boolean {
+    return this.callDepth > 0
   }
-  setTime(e) {
-    this.elapsedTime = e;
+
+  setTime(ms: number): void {
+    this.elapsedTime = ms
   }
-  stop() {
-    if (super.stop(), $$h3.isPerfReportEnabled && this.mark) {
+
+  stop(): number {
+    super.stop()
+    if (PerfTimerManager.isPerfReportEnabled && this.mark) {
       performance.mark(this.performanceMarkEndName, {
-        detail: this.attributes
-      });
+        detail: this.attributes,
+      })
       try {
-        performance.measure(this.performanceMeasureName, this.performanceMarkStartName, this.performanceMarkEndName);
-        performance.clearMarks(this.performanceMarkStartName);
-        performance.clearMarks(this.performanceMarkEndName);
-      } catch {}
-      this.mark = void 0;
+        performance.measure(
+          this.performanceMeasureName,
+          this.performanceMarkStartName,
+          this.performanceMarkEndName,
+        )
+        performance.clearMarks(this.performanceMarkStartName)
+        performance.clearMarks(this.performanceMarkEndName)
+      }
+      catch {}
+      this.mark = undefined
     }
-    this.group && (this.group.onStop(this), this.group = void 0);
-    return this.getElapsedTime();
+    if (this.group) {
+      this.group.onStop(this)
+      this.group = undefined
+    }
+    return this.getElapsedTime()
   }
-  setAttribute(e, t) {
-    this.attributes[e] = t;
+
+  setAttribute(key: string, value: any): void {
+    this.attributes[key] = value
   }
-  getAttributes() {
-    return this.attributes;
+
+  getAttributes(): Record<string, any> {
+    return this.attributes
   }
-  stableId() {
-    let t = this.attributes.key;
-    void 0 === t && (void 0 === this.id && (this.id = e.operationSeq++), t = this.id.toString());
-    return t;
+
+  stableId(): string {
+    let key = this.attributes.key
+    if (key === undefined) {
+      if (this.id === undefined) {
+        this.id = PerfTimer.operationSeq++
+      }
+      key = this.id.toString()
+    }
+    return key
   }
-  get performanceMeasureName() {
-    let e = this.stableId();
-    return `${this.name}::${e}`;
+
+  get performanceMeasureName(): string {
+    return `${this.name}::${this.stableId()}`
   }
-  get performanceMarkStartName() {
-    return `${this.performanceMeasureName}::start`;
+
+  get performanceMarkStartName(): string {
+    return `${this.performanceMeasureName}::start`
   }
-  get performanceMarkEndName() {
-    return `${this.performanceMeasureName}::end`;
-  }
-};
-d.operationSeq = 0;
-let $$c2 = d;
-let u = class e {
-  static registryCallback(t) {
-    e.operations.$$delete(t);
-  }
-  static add(t) {
-    e.operations.add(t.ref);
-    e.registry.register(t, t.ref, t.ref);
-  }
-  static forEach(t) {
-    e.operations.forEach(i => {
-      let n = i.deref();
-      n ? t(n) : (e.operations.$$delete(i), e.registry.unregister(i));
-    });
-  }
-};
-u.operations = new Set();
-u.registry = new FinalizationRegistry(u.registryCallback);
-class p {
-  static add(e) {
-    u.add(e);
+
+  get performanceMarkEndName(): string {
+    return `${this.performanceMeasureName}::end`
   }
 }
-p.onVisibiltyChange = () => {
-  "hidden" === document.visibilityState && u.forEach(e => {
-    e.isRunning && (e.isUnreliable = !0);
-  });
-};
-let m = class e {
-  constructor() {
-    this._keepResults = !1;
-    this.operations = new Map();
+
+/**
+ * Registry for PerfTimer instances.
+ * Original: u
+ */
+// Polyfill or type declaration for WeakRef if not available
+declare class WeakRef<T> {
+  constructor(value: T)
+  deref(): T | undefined
+}
+
+// Polyfill or type declaration for FinalizationRegistry if not available
+declare class FinalizationRegistry<T> {
+  constructor(cleanup: (heldValue: T) => void)
+  register(target: object, heldValue: T, unregisterToken?: object): void
+  unregister(unregisterToken: object): void
+}
+
+class PerfTimerRegistry {
+  static operations: Set<WeakRef<PerfTimer>> = new Set()
+  static registry = new FinalizationRegistry(PerfTimerRegistry.registryCallback)
+
+  static registryCallback(ref: WeakRef<PerfTimer>) {
+    PerfTimerRegistry.operations.delete(ref)
   }
+
+  static add(timer: PerfTimer) {
+    PerfTimerRegistry.operations.add(timer.ref)
+    PerfTimerRegistry.registry.register(timer, timer.ref, timer.ref)
+  }
+
+  static forEach(fn: (timer: PerfTimer) => void) {
+    PerfTimerRegistry.operations.forEach((ref) => {
+      const timer = ref.deref()
+      if (timer) {
+        fn(timer)
+      }
+      else {
+        PerfTimerRegistry.operations.delete(ref)
+        PerfTimerRegistry.registry.unregister(ref)
+      }
+    })
+  }
+}
+
+/**
+ * PerfTimer visibility change handler.
+ * Original: p
+ */
+class PerfTimerVisibilityHandler {
+  static add(timer: PerfTimer) {
+    PerfTimerRegistry.add(timer)
+  }
+
+  static onVisibilityChange = () => {
+    if (document.visibilityState === 'hidden') {
+      PerfTimerRegistry.forEach((timer) => {
+        if (timer.isRunning)
+          timer.isUnreliable = true
+      })
+    }
+  }
+}
+
+/**
+ * PerfTimerManager for managing PerfTimer instances.
+ * Original: m
+ */
+export class PerfTimerManager {
+  static isPerfReportEnabled = !isPerfApiAvailable && false
+  static globalInstance: PerfTimerManager
+  _keepResults = false
+  operations: Map<string, Map<string | undefined, PerfTimer>> = new Map()
+
   static installCallbacks() {
-    e.installVisibilityChangeCallback();
-    e.installPeriodicCleanupCallback();
+    PerfTimerManager.installVisibilityChangeCallback()
+    PerfTimerManager.installPeriodicCleanupCallback()
   }
-  static global() {
-    return g;
+
+  static global(): PerfTimerManager {
+    return PerfTimerManager.globalInstance
   }
+
   static removePeriodicCleanupCallback() {
-    void 0 !== n && (clearInterval(n), n = void 0);
+    if (periodicCleanupInterval !== undefined) {
+      clearInterval(periodicCleanupInterval)
+      periodicCleanupInterval = undefined
+    }
   }
+
   static installVisibilityChangeCallback() {
-    document.addEventListener("visibilitychange", () => {
-      p.onVisibiltyChange();
-      "visible" === document.visibilityState && this.installPeriodicCleanupCallback();
-    });
+    document.addEventListener('visibilitychange', () => {
+      PerfTimerVisibilityHandler.onVisibilityChange()
+      if (document.visibilityState === 'visible') {
+        this.installPeriodicCleanupCallback()
+      }
+    })
   }
-  static installPeriodicCleanupCallback(e = 6e4, t = 36e5) {
-    this.removePeriodicCleanupCallback();
-    n = setInterval(() => {
-      g.cleanup(t);
-    }, e);
+
+  static installPeriodicCleanupCallback(intervalMs = 60000, maxMs = 3600000) {
+    this.removePeriodicCleanupCallback()
+    periodicCleanupInterval = setInterval(() => {
+      PerfTimerManager.globalInstance.cleanup(maxMs)
+    }, intervalMs)
   }
-  keepResults(e) {
-    this._keepResults = void 0 === e || e;
+
+  keepResults(keep?: boolean) {
+    this._keepResults = keep === undefined ? true : keep
   }
+
   resetAllTimersBeforeTest() {
-    this.operations = new Map();
+    this.operations = new Map()
   }
-  start(e, t) {
-    let i = this.getOrCreate(e, t);
-    i.start();
-    return i;
+
+  start(name: string, attributes?: Record<string, any>): PerfTimer {
+    const timer = this.getOrCreate(name, attributes)
+    timer.start()
+    return timer
   }
-  getOrCreate(e, t) {
-    let i = this.operations.get(e);
-    i || (i = new Map(), this.operations.set(e, i));
-    let n = t ? t.key : void 0;
-    let r = i.get(n);
-    if (r) return r;
-    {
-      let r = new $$c2(e, t || {}, this);
-      i.set(n, r);
-      return r;
+
+  getOrCreate(name: string, attributes?: Record<string, any>): PerfTimer {
+    let attrMap = this.operations.get(name)
+    if (!attrMap) {
+      attrMap = new Map()
+      this.operations.set(name, attrMap)
+    }
+    const key = attributes ? attributes.key : undefined
+    let timer = attrMap.get(key)
+    if (timer)
+      return timer
+    timer = new PerfTimer(name, attributes || {}, this)
+    attrMap.set(key, timer)
+    return timer
+  }
+
+  get(name: string, key?: string): PerfTimer | undefined {
+    return this.operations.get(name)?.get(key)
+  }
+
+  getAll(name: string): Map<string | undefined, PerfTimer> | undefined {
+    return this.operations.get(name)
+  }
+
+  delete(name?: string, key?: string): boolean {
+    if (name) {
+      return this.operations.get(name)?.delete(key) || false
+    }
+    else {
+      this.operations.clear()
+      return true
     }
   }
-  get(e, t) {
-    return this.operations.get(e)?.get(t);
+
+  pause(name: string, key?: string): boolean {
+    const timer = this.operations.get(name)?.get(key)
+    if (timer) {
+      timer.pause()
+      return true
+    }
+    this.maybeThrowError(name, key)
+    return false
   }
-  getAll(e) {
-    return this.operations.get(e);
+
+  resume(name: string, key?: string): boolean {
+    const timer = this.operations.get(name)?.get(key)
+    if (timer) {
+      timer.resume()
+      return true
+    }
+    this.maybeThrowError(name, key)
+    return false
   }
-  delete(e, t) {
-    return e ? this.operations.get(e)?.delete(t) || !1 : (this.operations.clear(), !0);
+
+  trySetAttribute(name: string, key: string | undefined, attr: string, value: any) {
+    const timer = this.operations.get(name)?.get(key)
+    if (timer)
+      timer.setAttribute(attr, value)
   }
-  pause(e, t) {
-    let i = this.operations.get(e)?.get(t);
-    return i ? (i.pause(), !0) : (this.maybeThrowError(e, t), !1);
+
+  tryGetAttribute(name: string, key?: string): Record<string, any> {
+    const timer = this.operations.get(name)?.get(key)
+    return timer ? timer.getAttributes() : {}
   }
-  resume(e, t) {
-    let i = this.operations.get(e)?.get(t);
-    return i ? (i.resume(), !0) : (this.maybeThrowError(e, t), !1);
+
+  reset(name: string, key?: string): boolean {
+    const timer = this.operations.get(name)?.get(key)
+    if (timer) {
+      timer.reset()
+      return true
+    }
+    return false
   }
-  trySetAttribute(e, t, i, n) {
-    let r = this.operations.get(e)?.get(t);
-    r && r.setAttribute(i, n);
+
+  tryStop(name: string, key?: string): number {
+    const timer = this.operations.get(name)?.get(key)
+    return timer ? timer.stop() : 0
   }
-  tryGetAttribute(e, t) {
-    let i = this.operations.get(e)?.get(t);
-    return i ? i.getAttributes() : {};
+
+  maybeThrowError(_name: string, _key?: string) {
+    // No-op for compatibility
   }
-  reset(e, t) {
-    let i = this.operations.get(e)?.get(t);
-    return !!i && (i.reset(), !0);
+
+  stop(name: string, key?: string): number {
+    const timer = this.operations.get(name)?.get(key)
+    if (timer) {
+      return timer.stop()
+    }
+    this.maybeThrowError(name, key)
+    return 0
   }
-  tryStop(e, t) {
-    let i = this.operations.get(e)?.get(t);
-    return i ? i.stop() : 0;
-  }
-  maybeThrowError(e, t) {}
-  stop(e, t) {
-    let i = this.operations.get(e)?.get(t);
-    return i ? i.stop() : (this.maybeThrowError(e, t), 0);
-  }
-  onStop(e) {
-    this._keepResults || this.$$delete(e.name, e.attributes.key);
-  }
-  report() {
-    return this.operations;
-  }
-  cleanup(e = 36e5) {
-    for (let [t, i] of this.operations.entries()) {
-      for (let t of i.values()) t.getElapsedTime() >= e && t.stop();
-      0 === i.size && this.operations.$$delete(t);
+
+  onStop(timer: PerfTimer) {
+    if (!this._keepResults) {
+      this.delete(timer.name, timer.attributes.key)
     }
   }
-};
-m.isPerfReportEnabled = !l && !1;
-let $$h3 = m;
-let g = new $$h3();
-export class $$f0 {
+
+  report(): Map<string, Map<string | undefined, PerfTimer>> {
+    return this.operations
+  }
+
+  cleanup(maxMs = 3600000) {
+    for (const [name, attrMap] of this.operations.entries()) {
+      for (const timer of attrMap.values()) {
+        if (timer.getElapsedTime() >= maxMs)
+          timer.stop()
+      }
+      if (attrMap.size === 0)
+        this.operations.delete(name)
+    }
+  }
+}
+
+PerfTimerManager.globalInstance = new PerfTimerManager()
+
+/**
+ * Distribution analytics for timing.
+ * Original: $$f0
+ */
+export class DistributionAnalytics {
+  private _distributions: Map<string, Distribution> = new Map()
+
+  create(name: string, bins: number[]): void {
+    this._distributions.set(name, new Distribution(name, bins))
+  }
+
+  add(name: string, value: number): void {
+    this._distributions.get(name)?.add(value)
+  }
+
+  remove(name: string): void {
+    this._distributions.delete(name)
+  }
+
+  reset(name: string): void {
+    this._distributions.get(name)?.resetMetrics()
+  }
+
+  analyticsProperties(name: string): any {
+    return this._distributions.get(name)?.analyticsProperties()
+  }
+}
+
+/**
+ * Distribution class for bucketed analytics.
+ * Original: _
+ */
+class Distribution {
+  maxMs = -1
+  totalMs = 0
+  count = 0
+  meanDistanceSq = 0
+  private _analytics_distribution_name: string
+  _buckets: number[]
+  _bins: number[]
+
+  constructor(name: string, bins: number[]) {
+    this._analytics_distribution_name = name
+    this._bins = bins
+    this._buckets = Array.from<number>({ length: bins.length }).fill(0)
+  }
+
+  add(ms: number): void {
+    for (let i = 0; i < this._bins.length; i++) {
+      if (ms <= this._bins[i]) {
+        this._buckets[i]++
+        break
+      }
+    }
+    const prevMean = this.count > 0 ? this.totalMs / this.count : 0
+    this.maxMs = Math.max(this.maxMs, ms)
+    this.totalMs += ms
+    this.count++
+    const newMean = this.totalMs / this.count
+    this.meanDistanceSq += (ms - prevMean) * (ms - newMean)
+  }
+
+  getMode(): { min: number, max: number } | null {
+    if (this.count === 0)
+      return null
+    let maxBucket = 0
+    let maxIndex = -1
+    for (let i = 0; i < this._bins.length; i++) {
+      if (this._buckets[i] > maxBucket) {
+        maxBucket = this._buckets[i]
+        maxIndex = i
+      }
+    }
+    if (maxIndex < 0)
+      return null
+    return {
+      min: maxIndex === 0 ? 0 : this._bins[maxIndex - 1],
+      max: this._bins[maxIndex],
+    }
+  }
+
+  toLogParams(): number[] {
+    return [...this._buckets]
+  }
+
+  schema(): string[] {
+    const schema: string[] = []
+    for (let i = 0; i < this._bins.length; i++) {
+      const min = i === 0 ? 0 : this._bins[i - 1]
+      const max = this._bins[i] === Number.MAX_SAFE_INTEGER ? 'or_higher' : this._bins[i]
+      schema.push(`count_${min}_to_${max}_ms`)
+    }
+    return schema
+  }
+
+  toPOJO(): Record<string, any> {
+    const obj: Record<string, any> = {}
+    for (let i = 0; i < this._bins.length; i++) {
+      obj[this._bins[i]] = this._buckets[i]
+    }
+    obj._avg = this.totalMs / this.count
+    obj._max = this.maxMs
+    obj._stdd = this.count > 1 ? Math.sqrt(this.meanDistanceSq / (this.count - 1)) : 0
+    obj._count = this.count
+    obj._total = this.totalMs
+    return obj
+  }
+
+  resetMetrics(): void {
+    this._buckets = Array.from<number>({ length: this._bins.length }).fill(0)
+    this.maxMs = 0
+    this.count = 0
+    this.totalMs = 0
+    this.meanDistanceSq = 0
+  }
+
+  analyticsProperties(): any {
+    return {
+      schema: this.schema(),
+      [this._analytics_distribution_name]: this.toLogParams(),
+    }
+  }
+}
+
+const FPS_BINS = [
+  1,
+  9,
+  17,
+  19,
+  20,
+  23,
+  25,
+  29,
+  32,
+  48,
+  64,
+  80,
+  96,
+  112,
+  224,
+  448,
+  896,
+  1792,
+  3584,
+  Number.MAX_SAFE_INTEGER,
+]
+
+/**
+ * Helper for rounding.
+ * Original: y
+ */
+function roundTo(e: number, decimals: number): number {
+  const factor = 10 ** decimals
+  return Math.floor(e * factor) / factor
+}
+
+/**
+ * FPS analytics distribution.
+ * Original: $$b1
+ */
+export class FPSDistribution extends Distribution {
   constructor() {
-    this._distributions = new Map();
+    super('fps', FPS_BINS)
   }
-  create(e, t) {
-    this._distributions.set(e, new _(e, t));
+
+  toLogParams(): number[] {
+    const params = [this.count, roundTo(this.totalMs / this.count, 2), roundTo(this.maxMs, 2)]
+    for (let i = 0; i < this._bins.length; i++) params.push(this._buckets[i])
+    return params
   }
-  add(e, t) {
-    this._distributions.get(e)?.add(t);
-  }
-  remove(e) {
-    this._distributions.$$delete(e);
-  }
-  reset(e) {
-    this._distributions.get(e)?.resetMetrics();
-  }
-  analyticsProperties(e) {
-    return this._distributions.get(e)?.analyticsProperties();
+
+  schema(): string[] {
+    return ['frame_count', 'mean_frame_ms', 'max_frame_ms', ...super.schema()]
   }
 }
-class _ {
-  constructor(e, t) {
-    this.maxMs = -1;
-    this.totalMs = 0;
-    this.count = 0;
-    this.meanDistanceSq = 0;
-    this._analytics_distribution_name = e;
-    this._buckets = [];
-    this._bins = t;
-    for (let e = 0; e < this._bins.length; e++) this._buckets.push(0);
-  }
-  add(e) {
-    for (let t = 0; t < this._bins.length; t++) if (e <= this._bins[t]) {
-      this._buckets[t] += 1;
-      break;
-    }
-    let t = this.count > 0 ? this.totalMs / this.count : 0;
-    this.maxMs = Math.max(this.maxMs, e);
-    this.totalMs += e;
-    this.count++;
-    let i = this.totalMs / this.count;
-    this.meanDistanceSq += (e - t) * (e - i);
-  }
-  getMode() {
-    if (0 === this.count) return null;
-    let e = 0;
-    let t = -1;
-    for (let i = 0; i < this._bins.length; i++) this._buckets[i] > e && (e = this._buckets[i], t = i);
-    return t < 0 ? null : {
-      min: 0 === t ? 0 : this._bins[t - 1],
-      max: this._bins[t]
-    };
-  }
-  toLogParams() {
-    let e = [];
-    for (let t = 0; t < this._bins.length; t++) e.push(this._buckets[t]);
-    return e;
-  }
-  schema() {
-    let e = [];
-    for (let t = 0; t < this._bins.length; t++) {
-      let i = 0 === t ? 0 : this._bins[t - 1];
-      let n = this._bins[t] === Number.MAX_SAFE_INTEGER ? "or_higher" : this._bins[t];
-      e.push(`count_${i}_to_${n}_ms`);
-    }
-    return e;
-  }
-  toPOJO() {
-    let e = {};
-    for (let t = 0; t < this._bins.length; t++) e[this._bins[t]] = this._buckets[t];
-    e._avg = this.totalMs / this.count;
-    e._max = this.maxMs;
-    e._stdd = this.count > 1 ? Math.sqrt(this.meanDistanceSq / (this.count - 1)) : 0;
-    e._count = this.count;
-    e._total = this.totalMs;
-    return e;
-  }
-  resetMetrics() {
-    this._buckets = Array(this._bins.length).fill(0);
-    this.maxMs = 0;
-    this.count = 0;
-    this.totalMs = 0;
-    this.meanDistanceSq = 0;
-  }
-  analyticsProperties() {
-    let e = {
-      schema: this.schema()
-    };
-    e[this._analytics_distribution_name] = this.toLogParams();
-    return e;
-  }
-}
-let A = [1, 9, 17, 19, 20, 23, 25, 29, 32, 48, 64, 80, 96, 112, 224, 448, 896, 1792, 3584, Number.MAX_SAFE_INTEGER];
-function y(e, t) {
-  let i = Math.pow(10, t);
-  return (e * i | 0) / i;
-}
-export class $$b1 extends _ {
-  constructor() {
-    super("fps", A);
-  }
-  toLogParams() {
-    let e = [this.count, y(this.totalMs / this.count, 2), y(this.maxMs, 2)];
-    for (let t = 0; t < this._bins.length; t++) e.push(this._buckets[t]);
-    return e;
-  }
-  schema() {
-    return ["frame_count", "mean_frame_ms", "max_frame_ms"].concat(...super.schema());
-  }
-}
-export const Sp = $$f0;
-export const UP = $$b1;
-export const jk = $$c2;
-export const y7 = $$h3;
-export const M4 = $$r4;
-export const t1 = $$o5;
+
+// Export refactored names
+export const Sp = DistributionAnalytics
+export const UP = FPSDistribution
+export const jk = PerfTimer
+export const y7 = PerfTimerManager
+export const M4 = Timer
+export const t1 = HierarchicalTimerGroup

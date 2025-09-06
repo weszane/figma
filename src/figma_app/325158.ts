@@ -12,10 +12,10 @@ import { rrT, glU, m1T } from "../figma_app/763686";
 import { s as _$$s } from "../905/583953";
 import { getFeatureFlags } from "../905/601108";
 import { generateRecordingKey } from "../figma_app/878298";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { wv as _$$wv, c$ } from "../figma_app/236327";
 import { B } from "../905/714743";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { Y5 } from "../figma_app/455680";
 import { hS, gl } from "../905/216495";
@@ -89,13 +89,13 @@ function U({
   };
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(V, {
     variant: "button",
-    tooltip: _$$t("whiteboard.inline_menu.replace_image"),
-    ariaLabel: _$$t("whiteboard.inline_menu.replace_image"),
+    tooltip: getI18nString("whiteboard.inline_menu.replace_image"),
+    ariaLabel: getI18nString("whiteboard.inline_menu.replace_image"),
     onClick: r,
     recordingKey: "toolbarReplaceImage",
     children: jsx(_$$T, {})
   }) : jsx(K0, {
-    tooltip: _$$t("whiteboard.inline_menu.replace_image"),
+    tooltip: getI18nString("whiteboard.inline_menu.replace_image"),
     svg: _$$A7,
     onClick: r,
     recordingKey: "toolbarReplaceImage"
@@ -123,8 +123,8 @@ export function $$B2() {
       paintIndex
     }), jsx(V, {
       variant: "button",
-      tooltip: _$$t("whiteboard.inline_menu.crop_image"),
-      ariaLabel: _$$t("whiteboard.inline_menu.crop_image"),
+      tooltip: getI18nString("whiteboard.inline_menu.crop_image"),
+      ariaLabel: getI18nString("whiteboard.inline_menu.crop_image"),
       onClick: o,
       recordingKey: "toolbarCrop",
       children: jsx(c, {})
@@ -134,7 +134,7 @@ export function $$B2() {
       paint,
       paintIndex
     }), jsx(K0, {
-      tooltip: _$$t("whiteboard.inline_menu.crop_image"),
+      tooltip: getI18nString("whiteboard.inline_menu.crop_image"),
       svg: _$$A4,
       onClick: o,
       recordingKey: "toolbarCrop"
@@ -145,7 +145,7 @@ export function $$G12() {
   let [e, t] = lJ("imageHasNoStroke");
   return () => {
     t(!e);
-    sx("figjam_image_border_change", {
+    trackEventAnalytics("figjam_image_border_change", {
       border: hS(e) ? e : "__mixed__"
     });
   };
@@ -155,15 +155,15 @@ export function $$V1() {
   let t = $$G12();
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(V, {
     variant: "toggle",
-    tooltip: _$$t("whiteboard.inline_menu.image_border"),
-    ariaLabel: _$$t("whiteboard.inline_menu.image_border"),
+    tooltip: getI18nString("whiteboard.inline_menu.image_border"),
+    ariaLabel: getI18nString("whiteboard.inline_menu.image_border"),
     checked: !e,
     offIcon: jsx(u, {}),
     onIcon: jsx(u, {}),
     onChange: t,
     recordingKey: "toolbarImageBorder"
   }) : jsx(K0, {
-    tooltip: _$$t("whiteboard.inline_menu.image_border"),
+    tooltip: getI18nString("whiteboard.inline_menu.image_border"),
     svg: _$$A6,
     active: e ? "NONE" : "LOUD",
     onClick: t,
@@ -175,15 +175,15 @@ export function $$H3(e = {}) {
   let r = kl("accessibleLabel");
   return t ? getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(V, {
     variant: "button",
-    tooltip: r ? _$$t("whiteboard.inline_menu.edit_image_description") : _$$t("whiteboard.inline_menu.add_image_description"),
+    tooltip: r ? getI18nString("whiteboard.inline_menu.edit_image_description") : getI18nString("whiteboard.inline_menu.add_image_description"),
     onClick: () => {
       t(!0);
     },
     recordingKey: "addImageDescription",
     dataTestId: "alt-text-button",
-    children: tx("whiteboard.inline_menu.alt_text")
+    children: renderI18nText("whiteboard.inline_menu.alt_text")
   }) : jsx($n, {
-    tooltip: r ? _$$t("whiteboard.inline_menu.edit_image_description") : _$$t("whiteboard.inline_menu.add_image_description"),
+    tooltip: r ? getI18nString("whiteboard.inline_menu.edit_image_description") : getI18nString("whiteboard.inline_menu.add_image_description"),
     onClick: () => {
       t(!0);
     },
@@ -199,7 +199,7 @@ export function $$H3(e = {}) {
     active: r ? "LOUD" : "NONE",
     children: jsx("span", {
       className: "image_controls--label--VF4Hv text--fontNeg12--2PWcg text--_fontBase--QdLsd text--_negText--j9g-L",
-      children: tx("whiteboard.inline_menu.alt_text")
+      children: renderI18nText("whiteboard.inline_menu.alt_text")
     })
   }) : jsx(Fragment, {});
 }
@@ -242,7 +242,7 @@ function Y({
     Y5.triggerActionInUserEditScope("rotate-image-90-clockwise");
     c(_$$F.enqueue({
       type: "image-rotated-feedback",
-      message: _$$t("whiteboard.inline_menu.image_rotated_feedback"),
+      message: getI18nString("whiteboard.inline_menu.image_rotated_feedback"),
       role: "status",
       timeoutOverride: 500
     }));
@@ -264,7 +264,7 @@ function Y({
     children: [jsx("div", {
       className: "x2pejg6 xchqr0g",
       children: jsx(_$$A, {
-        "aria-label": _$$t("whiteboard.inline_menu.scale_image"),
+        "aria-label": getI18nString("whiteboard.inline_menu.scale_image"),
         value: u,
         min: r,
         max: l,
@@ -274,15 +274,15 @@ function Y({
       })
     }), jsx(V, {
       variant: "button",
-      tooltip: _$$t("whiteboard.inline_menu.rotate_image"),
-      ariaLabel: _$$t("whiteboard.inline_menu.rotate_image"),
+      tooltip: getI18nString("whiteboard.inline_menu.rotate_image"),
+      ariaLabel: getI18nString("whiteboard.inline_menu.rotate_image"),
       onClick: h,
       recordingKey: "toolbarRotate",
       children: jsx(_$$R, {})
     }), jsx(ee, {}), jsx(_$$wv2, {}), jsx(V, {
       variant: "button",
-      tooltip: _$$t("whiteboard.inline_menu.finish_image_editing"),
-      ariaLabel: _$$t("whiteboard.inline_menu.finish_image_editing"),
+      tooltip: getI18nString("whiteboard.inline_menu.finish_image_editing"),
+      ariaLabel: getI18nString("whiteboard.inline_menu.finish_image_editing"),
       onClick: g,
       recordingKey: "toolbarStopCropping",
       children: jsx(_$$g, {})
@@ -292,7 +292,7 @@ function Y({
     children: [jsx("div", {
       className: "x2pejg6 xchqr0g",
       children: jsx(_$$A, {
-        "aria-label": _$$t("whiteboard.inline_menu.scale_image"),
+        "aria-label": getI18nString("whiteboard.inline_menu.scale_image"),
         value: u,
         min: r,
         max: l,
@@ -302,12 +302,12 @@ function Y({
       })
     }), jsx(K0, {
       svg: _$$A3,
-      tooltip: _$$t("whiteboard.inline_menu.rotate_image"),
+      tooltip: getI18nString("whiteboard.inline_menu.rotate_image"),
       onClick: h,
       recordingKey: "toolbarRotate"
     }), jsx(ee, {}), jsx(_$$wv2, {}), jsx(K0, {
       svg: _$$A2,
-      tooltip: _$$t("whiteboard.inline_menu.finish_image_editing"),
+      tooltip: getI18nString("whiteboard.inline_menu.finish_image_editing"),
       recordingKey: "toolbarStopCropping",
       onClick: g
     })]
@@ -331,19 +331,19 @@ export function $$X4(e) {
 export function $$q5(e) {
   switch (e) {
     case "Original":
-      return _$$t("whiteboard.crop_presets.original");
+      return getI18nString("whiteboard.crop_presets.original");
     case "Custom":
-      return _$$t("whiteboard.crop_presets.custom");
+      return getI18nString("whiteboard.crop_presets.custom");
     case "Square":
-      return _$$t("whiteboard.crop_presets.square");
+      return getI18nString("whiteboard.crop_presets.square");
     case "Circle":
-      return _$$t("whiteboard.crop_presets.circle");
+      return getI18nString("whiteboard.crop_presets.circle");
     case "Landscape":
-      return _$$t("whiteboard.crop_presets.landscape");
+      return getI18nString("whiteboard.crop_presets.landscape");
     case "Portrait":
-      return _$$t("whiteboard.crop_presets.portrait");
+      return getI18nString("whiteboard.crop_presets.portrait");
     case "Wide":
-      return _$$t("whiteboard.crop_presets.wide");
+      return getI18nString("whiteboard.crop_presets.wide");
   }
 }
 export function $$J9() {
@@ -403,15 +403,15 @@ function ee() {
     manager,
     children: [jsx(V, {
       variant: "menu",
-      tooltip: _$$t("whiteboard.inline_menu.aspect_ratio"),
-      ariaLabel: _$$t("whiteboard.inline_menu.aspect_ratio"),
+      tooltip: getI18nString("whiteboard.inline_menu.aspect_ratio"),
+      ariaLabel: getI18nString("whiteboard.inline_menu.aspect_ratio"),
       getTriggerProps,
       recordingKey: "cropPresetsControl",
       children: jsx(h, {})
     }), jsx(mc, {
       children: jsx(z6, {
         title: jsx(r1, {
-          children: _$$t("whiteboard.inline_menu.aspect_ratio")
+          children: getI18nString("whiteboard.inline_menu.aspect_ratio")
         }),
         onChange: r,
         value: e,
@@ -438,7 +438,7 @@ function ee() {
       ref: t,
       active: r
     }) => jsx(K0, {
-      tooltip: _$$t("whiteboard.inline_menu.aspect_ratio"),
+      tooltip: getI18nString("whiteboard.inline_menu.aspect_ratio"),
       active: r ? "NORMAL" : "NONE",
       svg: _$$A5,
       onPointerDown: e,

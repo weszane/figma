@@ -2,7 +2,7 @@ import { J0O } from "../figma_app/763686";
 import { Mz } from "../vendor/925040";
 import { P8 } from "../905/270781";
 import { DV } from "../figma_app/930338";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { oV, hS } from "../905/216495";
 import { g as _$$g } from "../905/578436";
 import { Sh, dK, AF } from "../figma_app/889655";
@@ -112,23 +112,23 @@ let A = () => P8([C1, dK, (e, t) => t], (e, t, r) => {
 });
 let $$x8 = Mz([(e, t) => t, (e, t, r) => r, f, AF], (e, t, r, i) => {
   if (e === J0O.BOOL && t) {
-    let e = i?.name ? _$$t("design_systems.component_properties.boolean_property_default_name", {
+    let e = i?.name ? getI18nString("design_systems.component_properties.boolean_property_default_name", {
       selectedNodeName: i.name
-    }) : _$$t("design_systems.component_properties.boolean_property_default_name_fallback", {
+    }) : getI18nString("design_systems.component_properties.boolean_property_default_name_fallback", {
       numSelected: i ? 1 : 2
     });
     return _$$g(e, r);
   }
   if (e === J0O.NUMBER && t) {
-    let e = _$$t("design_systems.component_properties.number_property_default_name");
+    let e = getI18nString("design_systems.component_properties.number_property_default_name");
     return _$$g(e, r);
   }
   if (e === J0O.SLOT) {
-    let e = _$$t("design_systems.component_properties.slot_property_default_name");
+    let e = getI18nString("design_systems.component_properties.slot_property_default_name");
     return _$$g(e, r);
   }
   {
-    let t = e === J0O.INSTANCE_SWAP ? _$$t("design_systems.component_properties.instance_swap_property_default_name") : xb(e);
+    let t = e === J0O.INSTANCE_SWAP ? getI18nString("design_systems.component_properties.instance_swap_property_default_name") : xb(e);
     return _$$g(t, r);
   }
 });

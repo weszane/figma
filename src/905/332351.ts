@@ -2,12 +2,12 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { Osy } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { GP } from "../figma_app/15927";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { uA, dp, Pt } from "../figma_app/806412";
 import { s_ } from "../905/17223";
 import { ks, nR, $$ } from "../figma_app/637027";
 import { B } from "../905/714743";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Ce } from "../905/156213";
 import { oU, ah } from "../figma_app/80990";
 import { qK } from "../905/102752";
@@ -61,12 +61,12 @@ class v extends uA {
         }
         l7.user("create-style-from-selection-paints", () => {
           void 0 == n.styleName.length ? (l = Osy.createStylesFromPaintDatas(i, Array.of(n.styleName.value)), t = 1) : (l = Osy.createStylesFromPaintDatas(i, Array.from(n.styleName).map(e => e.value)), t = n.styleName.length);
-          l && sx("Style Created from Selection Paint", {
+          l && trackEventAnalytics("Style Created from Selection Paint", {
             styleCount: t
           });
         });
       } else l7.user("apply-style-to-selection-paints", () => {
-        (l = Osy.applyStyleToPaintDatas(i, d.styleGuid)) && sx("Apply Style to Selection Paint ", {
+        (l = Osy.applyStyleToPaintDatas(i, d.styleGuid)) && trackEventAnalytics("Apply Style to Selection Paint ", {
           count: this.props.paintDataNodesInPaint.length
         });
       });
@@ -104,9 +104,9 @@ class v extends uA {
     }
   }
   render() {
-    let e = "create" === this.props.type.kind ? this.multiplePaintDatas ? _$$t("design_systems.create_style.create_new_color_styles") : _$$t("design_systems.create_style.create_new_color_style") : this.multiplePaintDatas ? _$$t("design_systems.create_style.color_conflict") : "";
-    let t = "create" === this.props.type.kind ? this.multiplePaintDatas ? _$$t("design_systems.create_style.create_styles") : _$$t("design_systems.create_style.create_style") : _$$t("design_systems.create_style.use_style");
-    let i = "create" === this.props.type.kind ? _$$t("design_systems.create_style.error_creating_style") : _$$t("design_systems.create_style.error_applying_style");
+    let e = "create" === this.props.type.kind ? this.multiplePaintDatas ? getI18nString("design_systems.create_style.create_new_color_styles") : getI18nString("design_systems.create_style.create_new_color_style") : this.multiplePaintDatas ? getI18nString("design_systems.create_style.color_conflict") : "";
+    let t = "create" === this.props.type.kind ? this.multiplePaintDatas ? getI18nString("design_systems.create_style.create_styles") : getI18nString("design_systems.create_style.create_style") : getI18nString("design_systems.create_style.use_style");
+    let i = "create" === this.props.type.kind ? getI18nString("design_systems.create_style.error_creating_style") : getI18nString("design_systems.create_style.error_applying_style");
     return jsxs(d_, {
       title: e,
       size: "small",
@@ -133,7 +133,7 @@ class v extends uA {
             className: "style_modal--textInput--35ro2",
             name: "styleName",
             ref: 0 === t ? this.inputRef : null,
-            placeholder: _$$t("design_systems.create_style.untitled_with_count", {
+            placeholder: getI18nString("design_systems.create_style.untitled_with_count", {
               index: t + 1
             })
           })]
@@ -142,7 +142,7 @@ class v extends uA {
           children: i
         }), this.multiplePaintDatas && "apply" === this.props.type.kind && jsx("div", {
           className: "style_modal--applyMultipleStylesMessage--3yNZn",
-          children: tx("design_systems.create_style.conflict", {
+          children: renderI18nText("design_systems.create_style.conflict", {
             conflictNodesCount: this.props.conflictNodesCount
           })
         }), jsxs("div", {
@@ -155,12 +155,12 @@ class v extends uA {
             children: [jsx(B, {
               className: "style_modal--targetIcon--x4NAU",
               svg: _$$A
-            }), tx("design_systems.create_style.show_me")]
+            }), renderI18nText("design_systems.create_style.show_me")]
           }), jsx(nR, {
             type: "button",
             className: Lu,
             onClick: this.onCancel,
-            children: tx("design_systems.create_style.cancel")
+            children: renderI18nText("design_systems.create_style.cancel")
           }), jsx($$, {
             type: "submit",
             className: pL,

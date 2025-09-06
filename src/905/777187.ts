@@ -1,9 +1,9 @@
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 var $$r0 = (e => (e[e.NONE = 0] = "NONE", e[e.SYNTAX_EMPTY = 1] = "SYNTAX_EMPTY", e[e.SYNTAX_UNRECOGNIZED = 2] = "SYNTAX_UNRECOGNIZED", e[e.SYNTAX_MISMATCHED_PARENS = 3] = "SYNTAX_MISMATCHED_PARENS", e[e.EVAL_UNEXPECTED_TYPE = 4] = "EVAL_UNEXPECTED_TYPE", e[e.EVAL_EXPECTED_MORE_ARGUMENTS = 5] = "EVAL_EXPECTED_MORE_ARGUMENTS", e[e.EVAL_IMAGINARY = 6] = "EVAL_IMAGINARY", e[e.EVAL_UNKNOWN = 7] = "EVAL_UNKNOWN", e[e.EVAL_NO_CURRENT_VALUE = 8] = "EVAL_NO_CURRENT_VALUE", e[e.EVAL_INFINITE = 9] = "EVAL_INFINITE", e[e.EVAL_NAN = 10] = "EVAL_NAN", e))($$r0 || {});
 export function $$a1(e, t) {
   let i = [];
   let r = function (e, t) {
-    let i = _$$t("fullscreen.mixed");
+    let i = getI18nString("fullscreen.mixed");
     let r = (e = e.replace(i, "mixed").toLowerCase()).split(/(mixed|px|[+*()^\/%x\-]|(?:\d+[.,]?\d*|[.,]?\d+)(?:[e][+\-]?\d+)?|(?:\s+))/g);
     let a = r.length;
     if (0 === a) return {

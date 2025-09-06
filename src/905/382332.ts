@@ -9,7 +9,7 @@ import u from "../vendor/241899";
 import { v_, aH, Pt } from "../figma_app/806412";
 import { Point } from "../905/736624";
 import { oW } from "../905/675859";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { Yl, j4, W3 } from "../905/232641";
 import { DP } from "../905/640017";
 import { E7, gl, hS } from "../905/216495";
@@ -37,7 +37,7 @@ import { b as _$$b, bL as _$$bL, mc, q7 } from "../figma_app/860955";
 import { d as _$$d } from "../905/976845";
 import { A as _$$A2 } from "../905/215698";
 import { l as _$$l } from "../905/479687";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { Ib } from "../905/129884";
 import { ks } from "../figma_app/626177";
 import { mc as _$$mc, RW, wH, pe, vs, pi, nO, Tg, Dq, iT, xT, n$, g5, gW, _J, i$, S3, ri, zH, Gy, FH } from "../figma_app/412796";
@@ -60,20 +60,20 @@ function R() {
   });
   let a = {
     type: "button",
-    label: tx("draw.onboarding.dismiss_button"),
+    label: renderI18nText("draw.onboarding.dismiss_button"),
     onClick: complete,
     ctaTrackingDescriptor: _$$c.GOT_IT
   };
   let s = {
     type: "link",
-    label: tx("draw.onboarding.first_time.learn_more"),
+    label: renderI18nText("draw.onboarding.first_time.learn_more"),
     href: "https://help.figma.com/hc/articles/31440438150935",
     ctaTrackingDescriptor: _$$c.LEARN_MORE
   };
   return jsx(rq, {
     arrowPadding: 8,
     arrowPosition: F_.LEFT_TITLE,
-    description: tx("draw.onboarding.scatter_brushes.description"),
+    description: renderI18nText("draw.onboarding.scatter_brushes.description"),
     disableHighlight: !0,
     isShowing,
     onClose: complete,
@@ -81,7 +81,7 @@ function R() {
     primaryCta: a,
     secondaryCta: s,
     targetKey: yl,
-    title: tx("draw.onboarding.scatter_brushes.title"),
+    title: renderI18nText("draw.onboarding.scatter_brushes.title"),
     trackingContextName: "draw_onboarding",
     userFlagOnShow: "seen_draw_scatter_brush_onboarding"
   });
@@ -138,9 +138,9 @@ function Z(e) {
   return jsxs(_$$bL, {
     manager,
     children: [jsx(_$$d, {
-      "aria-label": _$$t("fullscreen.properties_panel.edit_brush"),
+      "aria-label": getI18nString("fullscreen.properties_panel.edit_brush"),
       htmlAttributes: {
-        "data-tooltip": _$$t("fullscreen.properties_panel.edit_brush"),
+        "data-tooltip": getI18nString("fullscreen.properties_panel.edit_brush"),
         "data-tooltip-type": Ib.TEXT
       },
       ...getTriggerProps(),
@@ -149,12 +149,12 @@ function Z(e) {
       children: [jsx(q7, {
         onClick: e.onStartRenamingBrush,
         children: jsx(Fragment, {
-          children: _$$t("fullscreen.properties_panel.rename_brush")
+          children: getI18nString("fullscreen.properties_panel.rename_brush")
         })
       }), jsx(q7, {
         onClick: e.onDeleteBrush,
         children: jsx(Fragment, {
-          children: _$$t("fullscreen.properties_panel.delete_brush")
+          children: getI18nString("fullscreen.properties_panel.delete_brush")
         })
       })]
     })]
@@ -167,7 +167,7 @@ function X(e) {
     selected
   } = e;
   let s = KH();
-  let o = md(vE);
+  let o = useAtomWithSubscription(vE);
   let l = _$$W(brush.guid);
   return jsxs("div", {
     className: c()(RW, {
@@ -310,7 +310,7 @@ function ee(e) {
       }),
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$t("fullscreen.properties_panel.brushes")
+          children: getI18nString("fullscreen.properties_panel.brushes")
         })
       }), jsx(nB, {
         scrolling: "none",
@@ -327,12 +327,12 @@ function ee(e) {
               className: c()(i$, S3, {
                 [ri]: z > 0
               }),
-              children: _$$t("fullscreen.properties_panel.brushes.stretch")
+              children: getI18nString("fullscreen.properties_panel.brushes.stretch")
             }), stretchBrushes.map(R), getFeatureFlags().ce_il_scatter && jsx("div", {
               className: c()(i$, {
                 [ri]: z > Q * stretchBrushes.length + J
               }),
-              children: _$$t("fullscreen.properties_panel.brushes.scatter")
+              children: getI18nString("fullscreen.properties_panel.brushes.scatter")
             }), scatterBrushes.map(R)]
           })
         })
@@ -418,14 +418,14 @@ let ei = forwardRef((e, t) => {
           [Gy]: e.isDropdownOpen
         }),
         recordingKey: e.recordingKey,
-        "aria-label": _$$t("fullscreen.properties_panel.brush"),
-        "data-tooltip": _$$t("fullscreen.properties_panel.brush"),
+        "aria-label": getI18nString("fullscreen.properties_panel.brush"),
+        "data-tooltip": getI18nString("fullscreen.properties_panel.brush"),
         "data-tooltip-type": "text",
         "data-onboarding-key": e.onboardingKey,
         children: [jsx("div", {
           className: nO,
           children: e.isMixed ? jsx("div", {
-            children: tx("common.mixed")
+            children: renderI18nText("common.mixed")
           }) : o && jsx(oW, {
             style: {
               width: "100%"

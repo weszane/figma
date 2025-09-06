@@ -1,7 +1,7 @@
-import { eU } from "../figma_app/27355";
+import { atom } from "../figma_app/27355";
 import { Point } from "../905/736624";
 import { bA, Yw } from "../905/968269";
-export let $$s0 = eU({
+export let $$s0 = atom({
   displayed: !1,
   width: bA,
   height: Yw,

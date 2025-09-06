@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { sortByWithOptions, sortByPropertyWithOptions } from "../figma_app/656233";
-import { R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { R8, Qx, Jl, O9 } from "../figma_app/80990";
 import { Nz } from "../figma_app/915774";
 import { X0, th } from "../figma_app/646357";
@@ -108,7 +108,7 @@ export function $$b6({
   let {
     library,
     openFile
-  } = R(e => ({
+  } = selectWithShallowEqual(e => ({
     library: e.library,
     openFile: e.openFile
   }));

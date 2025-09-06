@@ -35,7 +35,7 @@ import { k as _$$k2 } from "../figma_app/962894";
 import { J as _$$J } from "../905/614223";
 import { lyf, NLJ, m1T, nQ7, Ez5 } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { zl, md } from "../figma_app/27355";
+import { atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
 import J from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
 import { o as _$$o2 } from "../9410/935965";
@@ -54,7 +54,7 @@ import { Q6, kF } from "../figma_app/48566";
 import { AE, $v, Q as _$$Q2, lW, uh } from "../figma_app/370763";
 import { rM } from "../figma_app/241541";
 import { s as _$$s2 } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { n6 } from "../905/234821";
 import { Dm } from "../figma_app/8833";
 import { d as _$$d } from "../9410/847929";
@@ -127,7 +127,7 @@ function e0({
   let d = q5();
   let c = VA(d?.project);
   let u = s === lyf.HISTORY;
-  let h = zl.get(_$$o2);
+  let h = atomStoreManager.get(_$$o2);
   let {
     getProvisionalAccessBanner
   } = wH();
@@ -159,7 +159,7 @@ function e0({
       }), !h && !u && jsx(_$$u, {
         modeIdentifier: "slides",
         modeIcon: jsx(_$$l, {}),
-        modeLabel: _$$t("fullscreen.toolbar.toolbelt_mode_segmented_control.slides"),
+        modeLabel: getI18nString("fullscreen.toolbar.toolbelt_mode_segmented_control.slides"),
         onToggleMode: S,
         getTooltipShortcut: e => e === nQ7.SELF ? I("enter-slides-mode") : I("enter-slides-design-mode")
       })]
@@ -185,7 +185,7 @@ function e1(e) {
   return !HW() && e === lyf.LAYOUT;
 }
 export function $$e51(e) {
-  return e1(md(_$$Q2)) ? `${e}-${eU}` : e;
+  return e1(useAtomWithSubscription(_$$Q2)) ? `${e}-${eU}` : e;
 }
 function e6(e) {
   let {
@@ -217,31 +217,31 @@ function e4(e) {
   let {
     activeToolId
   } = rM(lW);
-  let s = md(Bu);
+  let s = useAtomWithSubscription(Bu);
   let x = uh();
   let M = AE();
   return jsxs(kF, {
     editorTheme: "design",
     children: [jsx(_$$I, {
       overlayId: "Slides-SelectTools",
-      tooltipText: _$$t("fullscreen.flyout.move_tools"),
+      tooltipText: getI18nString("fullscreen.flyout.move_tools"),
       items: [{
         toolId: NLJ.SELECT,
-        text: _$$t("fullscreen_actions.set-tool-default"),
+        text: getI18nString("fullscreen_actions.set-tool-default"),
         shortcutText: x(NLJ.SELECT),
         icon: jsx(_$$H, {}),
         smallIcon: jsx(_$$y, {}),
         recordingKey: "toolDefault"
       }, {
         toolId: NLJ.HAND,
-        text: _$$t("fullscreen_actions.set-tool-hand"),
+        text: getI18nString("fullscreen_actions.set-tool-hand"),
         shortcutText: x(NLJ.HAND),
         icon: jsx(t, {}),
         smallIcon: jsx(_$$O, {}),
         recordingKey: "toolHand"
       }, {
         toolId: NLJ.SCALE,
-        text: _$$t("fullscreen_actions.set-tool-scale"),
+        text: getI18nString("fullscreen_actions.set-tool-scale"),
         shortcutText: x(NLJ.SCALE),
         icon: jsx(_$$a, {}),
         smallIcon: jsx(_$$l2, {}),
@@ -251,57 +251,57 @@ function e4(e) {
       onActivateTool: activateTool
     }), jsx(_$$N2, {
       toolId: NLJ.FRAME,
-      tooltipText: _$$t("fullscreen_actions.set-tool-frame"),
+      tooltipText: getI18nString("fullscreen_actions.set-tool-frame"),
       tooltipShortcut: x(NLJ.FRAME),
       icon: jsx(_$$v, {}),
       onActivateTool: activateTool,
       activeToolId
     }), jsx(_$$I, {
       overlayId: "Slides-ShapeTools",
-      tooltipText: _$$t("fullscreen.flyout.shape_tools"),
+      tooltipText: getI18nString("fullscreen.flyout.shape_tools"),
       items: [{
         toolId: NLJ.SHAPE_RECTANGLE,
-        text: _$$t("fullscreen_actions.set-tool-rectangle"),
+        text: getI18nString("fullscreen_actions.set-tool-rectangle"),
         shortcutText: x(NLJ.SHAPE_RECTANGLE),
         icon: jsx(_$$n, {}),
         smallIcon: jsx(_$$y2, {}),
         recordingKey: "toolShapeRectangle"
       }, {
         toolId: NLJ.SHAPE_LINE,
-        text: _$$t("fullscreen_actions.set-tool-line"),
+        text: getI18nString("fullscreen_actions.set-tool-line"),
         shortcutText: x(NLJ.SHAPE_LINE),
         icon: jsx(_$$W, {}),
         smallIcon: jsx(_$$h, {}),
         recordingKey: "toolShapeLine"
       }, {
         toolId: NLJ.SHAPE_ARROW,
-        text: _$$t("fullscreen_actions.set-tool-arrow"),
+        text: getI18nString("fullscreen_actions.set-tool-arrow"),
         shortcutText: x(NLJ.SHAPE_ARROW),
         icon: jsx(_$$F, {}),
         smallIcon: jsx(_$$E, {}),
         recordingKey: "toolShapeArrow"
       }, {
         toolId: NLJ.SHAPE_ELLIPSE,
-        text: _$$t("fullscreen_actions.set-tool-ellipse"),
+        text: getI18nString("fullscreen_actions.set-tool-ellipse"),
         shortcutText: x(NLJ.SHAPE_ELLIPSE),
         icon: jsx(_$$m, {}),
         smallIcon: jsx(_$$B, {}),
         recordingKey: "toolShapeEllipse"
       }, {
         toolId: NLJ.SHAPE_REGULAR_POLYGON,
-        text: _$$t("fullscreen_actions.set-tool-regular-polygon"),
+        text: getI18nString("fullscreen_actions.set-tool-regular-polygon"),
         icon: jsx(_$$o, {}),
         smallIcon: jsx(_$$h2, {}),
         recordingKey: "toolShapePolygon"
       }, {
         toolId: NLJ.SHAPE_STAR,
-        text: _$$t("fullscreen_actions.set-tool-star"),
+        text: getI18nString("fullscreen_actions.set-tool-star"),
         icon: jsx(_$$e, {}),
         smallIcon: jsx(_$$Z, {}),
         recordingKey: "toolShapeStar"
       }, {
         toolId: NLJ.IMAGE_OR_VIDEO,
-        text: _$$t("fullscreen_actions.place_image_or_video"),
+        text: getI18nString("fullscreen_actions.place_image_or_video"),
         icon: jsx(_$$T, {}),
         smallIcon: jsx(_$$s, {}),
         shortcutText: x(NLJ.IMAGE_OR_VIDEO),
@@ -311,17 +311,17 @@ function e4(e) {
       onActivateTool: activateTool
     }), jsx(_$$I, {
       overlayId: "Slides-PenTools",
-      tooltipText: _$$t("fullscreen.flyout.drawing_tools"),
+      tooltipText: getI18nString("fullscreen.flyout.drawing_tools"),
       items: [{
         toolId: NLJ.VECTOR_PEN,
-        text: _$$t("fullscreen_actions.set-tool-pen"),
+        text: getI18nString("fullscreen_actions.set-tool-pen"),
         shortcutText: x(NLJ.VECTOR_PEN),
         icon: jsx(_$$N, {}),
         smallIcon: jsx(_$$k, {}),
         recordingKey: "toolPen"
       }, {
         toolId: NLJ.VECTOR_PENCIL,
-        text: _$$t("fullscreen_actions.set-tool-pencil"),
+        text: getI18nString("fullscreen_actions.set-tool-pencil"),
         shortcutText: x(NLJ.VECTOR_PENCIL),
         icon: jsx(_$$L, {}),
         smallIcon: jsx(_$$A, {}),
@@ -334,7 +334,7 @@ function e4(e) {
       icon: jsx(_$$B2, {}),
       onActivateTool: activateTool,
       activeToolId,
-      tooltipText: _$$t("fullscreen_actions.set-tool-type"),
+      tooltipText: getI18nString("fullscreen_actions.set-tool-type"),
       tooltipShortcut: x(NLJ.TYPE),
       onboardingKey: "tool-type-onboarding"
     }), jsx(_$$N2, {
@@ -342,14 +342,14 @@ function e4(e) {
       icon: l > 0 ? jsx(_$$X, {}) : jsx(_$$f, {}),
       onActivateTool: activeToolId === NLJ.COMMENTS ? () => activateTool(NLJ.SELECT) : activateTool,
       activeToolId,
-      tooltipText: _$$t("fullscreen_actions.comment"),
+      tooltipText: getI18nString("fullscreen_actions.comment"),
       tooltipShortcut: x(NLJ.COMMENTS)
     }), jsx(_$$N2, {
       toolId: eW,
       icon: jsx(_$$_, {}),
       onActivateTool: () => $v("toggle-menu"),
       activeToolId: s ? eW : activeToolId,
-      tooltipText: _$$t("qa.extensions.tooltip_actions"),
+      tooltipText: getI18nString("qa.extensions.tooltip_actions"),
       tooltipShortcut: M("toggle-menu"),
       onboardingKey: Ij
     }), jsx("div", {
@@ -365,18 +365,18 @@ function e3(e) {
     showDisabledTools
   } = e;
   let r = n6();
-  let i = zl.get(_$$o2);
+  let i = atomStoreManager.get(_$$o2);
   let a = topLevelMode === lyf.HISTORY;
   let {
     activeToolId
   } = rM(lW);
-  let c = md(FT) > -1;
-  let u = md(bs) > -1;
+  let c = useAtomWithSubscription(FT) > -1;
+  let u = useAtomWithSubscription(bs) > -1;
   let [x, b] = useState(!1);
   let j = useRef(null);
   let y = useRef(null);
   let _ = useRef(null);
-  let E = md(Bu);
+  let E = useAtomWithSubscription(Bu);
   let S = uh();
   let I = AE();
   let C = useCallback(() => {
@@ -393,7 +393,7 @@ function e3(e) {
     icon: jsx(_$$B2, {}),
     onActivateTool: activateTool,
     activeToolId,
-    tooltipText: _$$t("fullscreen_actions.set-tool-type"),
+    tooltipText: getI18nString("fullscreen_actions.set-tool-type"),
     tooltipShortcut: S(NLJ.TYPE),
     recordingKey: "text-tool",
     disabled: e
@@ -403,7 +403,7 @@ function e3(e) {
     icon: jsx(_$$T, {}),
     onActivateTool: activateTool,
     activeToolId,
-    tooltipText: _$$t("fullscreen_actions.place_image_or_video"),
+    tooltipText: getI18nString("fullscreen_actions.place_image_or_video"),
     tooltipShortcut: S(NLJ.IMAGE_OR_VIDEO),
     recordingKey: "media-tool",
     disabled: e
@@ -413,7 +413,7 @@ function e3(e) {
     icon: jsx(_$$A2, {}),
     onActivateTool: () => e7(y, bs),
     activeToolId: u || e.areAnyShapesActive ? eX : activeToolId,
-    tooltipText: _$$t("slides.inserts_menu.shapes"),
+    tooltipText: getI18nString("slides.inserts_menu.shapes"),
     recordingKey: "slides-shape-tool",
     disabled: t
   });
@@ -422,7 +422,7 @@ function e3(e) {
     icon: jsx(_$$k2, {}),
     onActivateTool: () => e7(j, FT),
     activeToolId: c ? eQ : activeToolId,
-    tooltipText: _$$t("slides.inserts_menu.interaction"),
+    tooltipText: getI18nString("slides.inserts_menu.interaction"),
     recordingKey: "flapp-tool",
     disabled: e
   });
@@ -431,7 +431,7 @@ function e3(e) {
     icon: jsx(_$$_, {}),
     onActivateTool: () => $v("toggle-menu"),
     activeToolId: E ? eW : activeToolId,
-    tooltipText: _$$t("qa.extensions.tooltip_actions"),
+    tooltipText: getI18nString("qa.extensions.tooltip_actions"),
     tooltipShortcut: I("toggle-menu"),
     disabled: e
   });
@@ -447,37 +447,37 @@ function e3(e) {
         icon: jsx(_$$H, {}),
         onActivateTool: activateTool,
         activeToolId,
-        tooltipText: _$$t("fullscreen_actions.set-tool-default"),
+        tooltipText: getI18nString("fullscreen_actions.set-tool-default"),
         tooltipShortcut: S(NLJ.SELECT)
       }), jsx(_$$N2, {
         toolId: NLJ.HAND,
         icon: jsx(t, {}),
         onActivateTool: activateTool,
         activeToolId,
-        tooltipText: _$$t("fullscreen_actions.set-tool-hand"),
+        tooltipText: getI18nString("fullscreen_actions.set-tool-hand"),
         tooltipShortcut: S(NLJ.HAND)
       })]
     }), !i && !a && jsxs(Fragment, {
       children: [jsx(_$$I, {
         overlayId: "Slides-SelectTools",
-        tooltipText: _$$t("fullscreen.flyout.move_tools"),
+        tooltipText: getI18nString("fullscreen.flyout.move_tools"),
         items: [{
           toolId: NLJ.SELECT,
-          text: _$$t("fullscreen_actions.set-tool-default"),
+          text: getI18nString("fullscreen_actions.set-tool-default"),
           shortcutText: S(NLJ.SELECT),
           icon: jsx(_$$H, {}),
           smallIcon: jsx(_$$y, {}),
           recordingKey: "move-tool"
         }, {
           toolId: NLJ.HAND,
-          text: _$$t("fullscreen_actions.set-tool-hand"),
+          text: getI18nString("fullscreen_actions.set-tool-hand"),
           shortcutText: S(NLJ.HAND),
           icon: jsx(t, {}),
           smallIcon: jsx(_$$O, {}),
           recordingKey: "hand-tool"
         }, {
           toolId: NLJ.SCALE,
-          text: _$$t("fullscreen_actions.set-tool-scale"),
+          text: getI18nString("fullscreen_actions.set-tool-scale"),
           shortcutText: S(NLJ.SCALE),
           icon: jsx(_$$a, {}),
           smallIcon: jsx(_$$l2, {}),
@@ -521,7 +521,7 @@ function e3(e) {
       }) : jsx(_$$f, {}),
       onActivateTool: activeToolId === NLJ.COMMENTS ? () => activateTool(NLJ.SELECT) : activateTool,
       activeToolId,
-      tooltipText: _$$t("fullscreen_actions.comment"),
+      tooltipText: getI18nString("fullscreen_actions.comment"),
       tooltipShortcut: S(NLJ.COMMENTS),
       recordingKey: "comments-tool"
     }), !i && !a && K(), i || a ? null : jsx("div", {
@@ -531,8 +531,8 @@ function e3(e) {
   });
 }
 export function $$e20() {
-  let e = md(FT) > -1;
-  let t = md(bs) > -1;
+  let e = useAtomWithSubscription(FT) > -1;
+  let t = useAtomWithSubscription(bs) > -1;
   let l = uh();
   let {
     activeToolId,
@@ -544,18 +544,18 @@ export function $$e20() {
   let f = useMemo(() => function (e) {
     let t = [{
       toolId: NLJ.SHAPE_WHITEBOARD_SQUARE,
-      text: _$$t("fullscreen_actions.set-tool-rectangle"),
+      text: getI18nString("fullscreen_actions.set-tool-rectangle"),
       shortcutText: e(NLJ.SHAPE_WHITEBOARD_SQUARE),
       icon: jsx(_$$n, {})
     }, {
       toolId: NLJ.SHAPE_WHITEBOARD_ELLIPSE,
       shortcutText: e(NLJ.SHAPE_WHITEBOARD_ELLIPSE),
-      text: _$$t("fullscreen_actions.set-tool-shape-whiteboard-ellipse"),
+      text: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-ellipse"),
       icon: jsx(_$$m, {})
     }, {
       toolId: NLJ.SHAPE_WHITEBOARD_DIAMOND,
       shortcutText: e(NLJ.SHAPE_WHITEBOARD_DIAMOND),
-      text: _$$t("fullscreen_actions.set-tool-shape-whiteboard-diamond"),
+      text: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-diamond"),
       icon: jsx(_$$B3, {
         className: eO,
         svg: _$$A6
@@ -563,17 +563,17 @@ export function $$e20() {
     }, {
       toolId: NLJ.SHAPE_WHITEBOARD_TRIANGLE_UP,
       shortcutText: e(NLJ.SHAPE_WHITEBOARD_TRIANGLE_UP),
-      text: _$$t("fullscreen_actions.set-tool-shape-slides-triangle-up"),
+      text: getI18nString("fullscreen_actions.set-tool-shape-slides-triangle-up"),
       icon: jsx(_$$o, {})
     }, {
       toolId: NLJ.SHAPE_WHITEBOARD_STAR,
       shortcutText: e(NLJ.SHAPE_WHITEBOARD_STAR),
-      text: _$$t("fullscreen_actions.set-tool-shape-whiteboard-star"),
+      text: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-star"),
       icon: jsx(_$$e, {})
     }, {
       toolId: NLJ.SHAPE_WHITEBOARD_PLUS,
       shortcutText: e(NLJ.SHAPE_WHITEBOARD_PLUS),
-      text: _$$t("fullscreen_actions.set-tool-shape-whiteboard-plus"),
+      text: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-plus"),
       icon: jsx(_$$B3, {
         className: eO,
         svg: _$$A7
@@ -581,7 +581,7 @@ export function $$e20() {
     }, {
       toolId: NLJ.SHAPE_WHITEBOARD_ARROW_LEFT,
       shortcutText: e(NLJ.SHAPE_WHITEBOARD_ARROW_LEFT),
-      text: _$$t("fullscreen_actions.set-tool-shape-whiteboard-arrow-left"),
+      text: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-arrow-left"),
       icon: jsx(_$$B3, {
         className: eO,
         svg: _$$A4
@@ -589,7 +589,7 @@ export function $$e20() {
     }, {
       toolId: NLJ.SHAPE_WHITEBOARD_ARROW_RIGHT,
       shortcutText: e(NLJ.SHAPE_WHITEBOARD_ARROW_RIGHT),
-      text: _$$t("fullscreen_actions.set-tool-shape-whiteboard-arrow-right"),
+      text: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-arrow-right"),
       icon: jsx(_$$B3, {
         className: eO,
         svg: _$$A5
@@ -597,7 +597,7 @@ export function $$e20() {
     }, {
       toolId: NLJ.SHAPE_WHITEBOARD_SPEECH_BUBBLE,
       shortcutText: e(NLJ.SHAPE_WHITEBOARD_SPEECH_BUBBLE),
-      text: _$$t("fullscreen_actions.set-tool-shape-slides-blurb"),
+      text: getI18nString("fullscreen_actions.set-tool-shape-slides-blurb"),
       icon: jsx(_$$B3, {
         className: K()(eO, eH),
         svg: _$$A8
@@ -605,18 +605,18 @@ export function $$e20() {
     }, {
       toolId: NLJ.SHAPE_LINE,
       shortcutText: e(NLJ.SHAPE_LINE),
-      text: _$$t("fullscreen_actions.set-tool-line"),
+      text: getI18nString("fullscreen_actions.set-tool-line"),
       icon: jsx(_$$W, {})
     }, {
       toolId: NLJ.SHAPE_ARROW,
       shortcutText: e(NLJ.SHAPE_ARROW),
-      text: _$$t("fullscreen_actions.set-tool-arrow"),
+      text: getI18nString("fullscreen_actions.set-tool-arrow"),
       icon: jsx(_$$F, {})
     }];
     getFeatureFlags().piper_connectors && t.push({
       toolId: NLJ.CONNECTOR_ELBOWED,
       shortcutText: e(NLJ.CONNECTOR_ELBOWED),
-      text: _$$t("fullscreen_actions.set-tool-connector-elbowed"),
+      text: getI18nString("fullscreen_actions.set-tool-connector-elbowed"),
       icon: jsx(_$$B3, {
         className: K()(eO, eH),
         svg: _$$A9
@@ -630,7 +630,7 @@ export function $$e20() {
       editorTheme: g ? "design" : "piper",
       children: jsx(_$$m2, {
         role: "region",
-        "aria-label": _$$t("fullscreen_actions.toolbar_label"),
+        "aria-label": getI18nString("fullscreen_actions.toolbar_label"),
         children: jsx(e0, {
           getShortcutTextForTool: l,
           activeToolId,
@@ -655,7 +655,7 @@ function e8() {
     children: jsx(_$$y3, {
       onClick: () => $v("browse-all-resources-modal"),
       isActive: e,
-      tooltipText: _$$t("slides.inserts_menu.assets"),
+      tooltipText: getI18nString("slides.inserts_menu.assets"),
       tooltipShortcut: t("browse-all-resources-modal"),
       recordingKey: "assets-tool"
     })
@@ -664,8 +664,8 @@ function e8() {
 function e7(e, t) {
   let l = e.current?.getBoundingClientRect();
   let o = l ? l.left + l.width / 2 : 0;
-  let n = zl.get(t) > -1;
-  zl.set(t, n ? -1 : o);
+  let n = atomStoreManager.get(t) > -1;
+  atomStoreManager.set(t, n ? -1 : o);
   Y5.triggerAction("set-tool-default", {
     source: "menu"
   });

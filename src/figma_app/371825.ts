@@ -1,4 +1,4 @@
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 export let $$i0 = [{
   name: "w-purple-grid",
   image: "e8f28ec5039355c942bce9dd61f44dcd638451f9"
@@ -27,33 +27,33 @@ export let $$i0 = [{
 export function $$a1(e) {
   switch (e.name) {
     case "w-party":
-      return t("whiteboard.washi_tapes.party");
+      return getI18nString("whiteboard.washi_tapes.party");
     case "w-star":
-      return t("whiteboard.washi_tapes.star");
+      return getI18nString("whiteboard.washi_tapes.star");
     case "w-grid":
-      return t("whiteboard.washi_tapes.grid");
+      return getI18nString("whiteboard.washi_tapes.grid");
     case "w-flower":
-      return t("whiteboard.washi_tapes.flower");
+      return getI18nString("whiteboard.washi_tapes.flower");
     case "w-desert":
-      return t("whiteboard.washi_tapes.desert");
+      return getI18nString("whiteboard.washi_tapes.desert");
     case "w-frog":
-      return t("whiteboard.washi_tapes.frog");
+      return getI18nString("whiteboard.washi_tapes.frog");
     case "w-fruit":
-      return t("whiteboard.washi_tapes.fruit");
+      return getI18nString("whiteboard.washi_tapes.fruit");
     case "w-sushi":
-      return t("whiteboard.washi_tapes.sushi");
+      return getI18nString("whiteboard.washi_tapes.sushi");
     case "w-tree":
-      return t("whiteboard.washi_tapes.tree");
+      return getI18nString("whiteboard.washi_tapes.tree");
     case "w-pride":
-      return t("whiteboard.washi_tapes.pride");
+      return getI18nString("whiteboard.washi_tapes.pride");
     case "w-purple-grid":
-      return t("whiteboard.washi_tapes.purple_grid");
+      return getI18nString("whiteboard.washi_tapes.purple_grid");
     case "w-checkerboard":
-      return t("whiteboard.washi_tapes.checkerboard");
+      return getI18nString("whiteboard.washi_tapes.checkerboard");
     case "w-stripe":
-      return t("whiteboard.washi_tapes.stripe");
+      return getI18nString("whiteboard.washi_tapes.stripe");
     default:
-      return t("whiteboard.washi_tapes.custom");
+      return getI18nString("whiteboard.washi_tapes.custom");
   }
 }
 export const B = $$i0;

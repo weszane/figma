@@ -1,4 +1,4 @@
-import { eU } from "../figma_app/27355";
+import { atom } from "../figma_app/27355";
 import { rt } from "../figma_app/615482";
 import { YQ, lS } from "../figma_app/257779";
 let s = rt({
@@ -6,7 +6,7 @@ let s = rt({
   analyticsData: YQ,
   isSeen: !0
 });
-let $$o0 = eU(e => e(s), (e, t, r) => {
+let $$o0 = atom(e => e(s), (e, t, r) => {
   let n = e(s);
   let i = r.suggestions.slice(0, lS);
   let o = n.suggestions.length !== i.length || n.suggestions.some((e, t) => e.id !== i[t]?.id);
@@ -18,7 +18,7 @@ let $$o0 = eU(e => e(s), (e, t, r) => {
     isSeen: l
   });
 });
-let $$l1 = eU(e => e(s).isSeen, (e, t) => {
+let $$l1 = atom(e => e(s).isSeen, (e, t) => {
   let r = e(s);
   t(s, {
     ...r,

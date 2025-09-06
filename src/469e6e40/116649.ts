@@ -17,8 +17,8 @@ import { g as _$$g2 } from "../905/817247";
 import { MX, EQ } from "../figma_app/684446";
 import { px, S2, j_ } from "../figma_app/465071";
 import { ck } from "../905/952832";
-import { D as _$$D } from "../905/384551";
-import { GN, RM } from "../905/441038";
+import { FRequestsStr } from "../905/384551";
+import { UserRole, GroupType } from "../905/441038";
 import { J7 } from "../figma_app/650409";
 import { o0 } from "../905/844131";
 import { ER } from "../figma_app/102449";
@@ -83,14 +83,14 @@ export function $$D0({
       orgAdminSettingsViewTab: J7.DASHBOARD
     })) : !D && A && R ? t(sf(o0)) : P || (groupsUserIsAdminOf.length > 0 ? t(sf({
       view: "licenseGroup",
-      subView: GN.ADMIN,
+      subView: UserRole.ADMIN,
       licenseGroupId: groupsUserIsAdminOf[0].id,
-      selectedTab: _$$g2(RM.MEMBERS)
+      selectedTab: _$$g2(GroupType.MEMBERS)
     })) : t(sf(o0)));
   });
   let $ = _$$s.wFull.flex.justifyBetween.px16.py24.$;
   if (!a || !D || T) return null;
-  let B = U ? R ? e === _$$D.ALL_REQUESTS ? jsx(_$$l, {
+  let B = U ? R ? e === FRequestsStr.ALL_REQUESTS ? jsx(_$$l, {
     plan: R,
     isOrgAdmin: T
   }) : jsx(_$$i, {

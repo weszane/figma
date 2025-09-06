@@ -1,6 +1,6 @@
 import n, { getSingletonSceneGraph } from "../905/700578";
 import { debugState } from "../905/407919";
-import a, { t as _$$t } from "../905/303541";
+import a, { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { S as _$$S } from "../figma_app/78808";
 import { buildUploadUrl } from "../figma_app/169182";
@@ -628,18 +628,18 @@ export function $$w0({
             padding: {
               top: 20
             }
-          }, A(e, _$$t("whiteboard.ai_summary.copy_button_text"), _$$t("whiteboard.ai_summary.copy_button_tooltip"), () => {
+          }, A(e, getI18nString("whiteboard.ai_summary.copy_button_text"), getI18nString("whiteboard.ai_summary.copy_button_tooltip"), () => {
             Vn(mr.TEXT_COPIED, {
               summary_node_id: y
             });
             p.length > 0 && Ay(y, p, m);
             NY.copySummaryDataToClipboard(t, b);
             debugState.dispatch(F.enqueue({
-              message: _$$t("whiteboard.ai_summary.copy_text_to_clipboard"),
+              message: getI18nString("whiteboard.ai_summary.copy_text_to_clipboard"),
               error: !1,
               type: "copy-summary-text-to-clipboard"
             }));
-          }, d), A(e, _$$t("whiteboard.ai_summary.copy_link_button_text"), _$$t("whiteboard.ai_summary.copy_link_button_tooltip"), () => {
+          }, d), A(e, getI18nString("whiteboard.ai_summary.copy_link_button_text"), getI18nString("whiteboard.ai_summary.copy_link_button_tooltip"), () => {
             Vn(mr.LINK_COPED, {
               summary_node_id: y
             });
@@ -654,7 +654,7 @@ export function $$w0({
               fileKey: e.key,
               url: t,
               source: _$$d.AI_SUMMARY_COPY_LINK_BUTTON,
-              visualBellMessageOverride: _$$t("whiteboard.ai_summary.copied_link_to_clipboard")
+              visualBellMessageOverride: getI18nString("whiteboard.ai_summary.copied_link_to_clipboard")
             }));
           }, c));
         }(e, t));

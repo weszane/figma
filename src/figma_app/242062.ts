@@ -5,10 +5,10 @@ import { G as _$$G } from "../905/289770";
 import { h3O, z7E, JA, Ez5, NLJ, m1T, glU } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import c from "classnames";
-import { sn, Vq } from "../905/542194";
+import { globalPerfTimer, distributionAnalytics } from "../905/542194";
 import { GL, e3 as _$$e, En, YN } from "../figma_app/191804";
 import { j as _$$j } from "../figma_app/469468";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { tH, H4 } from "../905/751457";
 import { lg } from "../figma_app/976749";
 import { x as _$$x } from "../figma_app/943271";
@@ -24,10 +24,10 @@ import { viewportNavigatorContext } from "../figma_app/298911";
 import { p as _$$p } from "../figma_app/372802";
 import { buildUploadUrl, buildStaticUrl } from "../figma_app/169182";
 import { o as _$$o } from "../905/755806";
-import { eU as _$$eU, md, fp } from "../figma_app/27355";
+import { atom, useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { xx } from "../figma_app/815945";
 import { n as _$$n } from "../vendor/547481";
-import { eD as _$$eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { w as _$$w, L as _$$L } from "../905/842040";
 import { debugState } from "../905/407919";
 import { H as _$$H } from "../figma_app/147959";
@@ -39,8 +39,8 @@ import { P as _$$P } from "../vendor/348225";
 import { N as _$$N } from "../vendor/930821";
 import { EO, aG } from "../figma_app/178273";
 import { K as _$$K } from "../figma_app/824081";
-import { t as _$$t } from "../905/303541";
-import { Gq } from "../figma_app/363242";
+import { getI18nString } from "../905/303541";
+import { getI18nState } from "../figma_app/363242";
 import { Ho, mu } from "../figma_app/308685";
 import { n3, Tc } from "../905/797478";
 import { oP } from "../figma_app/580087";
@@ -49,7 +49,7 @@ import { Rt, iU, VW, S8, z8, bu, iY, Lo, vD, hD, Dy, or, p as _$$p3, u0, Bj, DE,
 import { S as _$$S } from "../figma_app/403368";
 import { debug } from "../figma_app/465776";
 import { x as _$$x2 } from "../905/437800";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { mZ, AS } from "../figma_app/991227";
 import { JR, p4, De } from "../905/496627";
 import { ft } from "../figma_app/753501";
@@ -170,7 +170,7 @@ let X = class e {
   }
 };
 X.CURSOR_COLLISION_RADIUS = 80;
-let q = _$$eU(!1);
+let q = atom(!1);
 class J extends _$$w {
   constructor(e) {
     super();
@@ -502,8 +502,8 @@ function e_({
 function eh({
   viewportInfo: e
 }) {
-  let t = md(EO);
-  let r = md(aG);
+  let t = useAtomWithSubscription(EO);
+  let r = useAtomWithSubscription(aG);
   return jsx(_$$N, {
     children: r && t.map(t => jsx(e_, {
       viewportInfo: e,
@@ -840,8 +840,8 @@ function eG(e) {
   }, [x]);
   let C = GL(color);
   let w = C === _$$e ? "chat_input--lightPlaceholder--YGSmc" : "chat_input--darkPlaceholder--BH5Qn";
-  let O = _$$t("whiteboard.cursor_chat.say_something");
-  switch (Gq()?.getPrimaryLocale(!1)) {
+  let O = getI18nString("whiteboard.cursor_chat.say_something");
+  switch (getI18nState()?.getPrimaryLocale(!1)) {
     case "ja":
       t = 18;
       break;
@@ -1436,8 +1436,8 @@ let $$tu0 = memo(function ({
   let H = useRef(null);
   useEffect(() => {
     if (H.current && H.current.innerText === B) {
-      let e = sn.tryStop(`view_cursor_chat_message_${b}_${B}`);
-      e && Vq.add("view_cursor_chat_message", e);
+      let e = globalPerfTimer.tryStop(`view_cursor_chat_message_${b}_${B}`);
+      e && distributionAnalytics.add("view_cursor_chat_message", e);
     }
   }, [B, H, b]);
   let z = getFeatureFlags().cursor_bot && f && r === z7E.DEFAULT;
@@ -1557,7 +1557,7 @@ let tp = memo(function ({
   });
 });
 function t_() {
-  let e = _$$R(({
+  let e = selectWithShallowEqual(({
     multiplayer: {
       allUsers: e
     }
@@ -1580,7 +1580,7 @@ function t_() {
     let [e] = useState(ei);
     !function (e) {
       let t = am();
-      let [r, n] = fp(q);
+      let [r, n] = useAtomValueAndSetter(q);
       let i = ed();
       let o = function () {
         let e = useSelector(e => {
@@ -1713,7 +1713,7 @@ function t_() {
           e.forEach((e, r) => {
             if (!eo(n.cursorEntitySystem.getEntities(), e.sessionId) && e.mouse) {
               let i = es(e.mouse.canvasSpacePosition, n.cursorKinematics, e.sessionId, t, c);
-              _$$eD && setTimeout(() => {
+              desktopAPIInstance && setTimeout(() => {
                 _$$H.trigger(JA.GENERIC);
               }, 400);
               n.cursorEntitySystem.addEntity(new et({
@@ -1778,7 +1778,7 @@ function t_() {
         n(!0);
         return;
       }
-      if (!Ay.isIpad && !Ay.isMeetDevice) {
+      if (!BrowserInfo.isIpad && !BrowserInfo.isMeetDevice) {
         document.addEventListener("mousemove", e);
         return () => document.removeEventListener("mousemove", e);
       }

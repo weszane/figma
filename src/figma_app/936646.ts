@@ -4,7 +4,7 @@ import { useDispatch } from "../vendor/514228";
 import { assertNotNullish } from "../figma_app/95419";
 import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
-import { fp } from "../figma_app/27355";
+import { useAtomValueAndSetter } from "../figma_app/27355";
 import { cm } from "../figma_app/815945";
 import u from "../vendor/983401";
 import _ from "../vendor/239910";
@@ -66,7 +66,7 @@ export function $$M4({
   maxSubscriptionsBeforeCleanup: t = 20
 }) {
   let r = tS();
-  fp(jz);
+  useAtomValueAndSetter(jz);
   let [s, o] = useState({});
   let c = useCallback((e, t) => {
     o(r => ({

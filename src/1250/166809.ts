@@ -8,9 +8,9 @@ import d from "../vendor/116389";
 import { isGovCluster, getInitialOptions } from "../figma_app/169182";
 import { Rs } from "../figma_app/288654";
 import { O as _$$O } from "../905/539306";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { n as _$$n } from "../figma_app/3731";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { _l } from "../figma_app/976345";
 import { A } from "../1250/724587";
 import { b as _$$b } from "../905/985254";
@@ -61,7 +61,7 @@ export function $$A1({
         e.forEach(e => {
           n ? e.plan_type === _$$O2.ORG && e.plan_id === t.external_restricted_org_id ? a.push(e) : r.push(e) : e.is_guest ? r.push(e) : a.push(e);
         });
-        n && 0 === a.length && $D(_$$e.WORKFLOW, Error(`Enterprise plan not found in Plan Switcher for user ${t.id}`), {
+        n && 0 === a.length && reportError(_$$e.WORKFLOW, Error(`Enterprise plan not found in Plan Switcher for user ${t.id}`), {
           extra: {
             ...e
           }
@@ -89,11 +89,11 @@ export function $$A1({
       })).sort((e, t) => e.displayText.localeCompare(t.displayText));
       return c()([l.length > 0 && {
         key: "full",
-        title: t ? _$$t("navbar.navbar.full_team_member_access") : void 0,
+        title: t ? getI18nString("navbar.navbar.full_team_member_access") : void 0,
         items: l
       }, d.length > 0 && {
         key: "limited",
-        title: R || !t ? _$$t("navbar.navbar.view_only_plans_disabled_by_admins") : _$$t("navbar.navbar.limited_team_member_access"),
+        title: R || !t ? getI18nString("navbar.navbar.view_only_plans_disabled_by_admins") : getI18nString("navbar.navbar.limited_team_member_access"),
         items: d
       }]);
     }, [n, R, e, a, w, I, N, b?.planParentId]),

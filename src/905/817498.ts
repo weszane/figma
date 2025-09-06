@@ -1,6 +1,6 @@
 import { glU, CeL, pWM } from "../figma_app/763686";
 import { H0, vu } from "../905/967662";
-import { UP } from "../905/609396";
+import { FPSDistribution } from "../905/609396";
 let $$s = [1e3, 2e3];
 export class $$o0 {
   constructor() {
@@ -12,10 +12,10 @@ export class $$o0 {
       allFramesAvgSharpness: []
     };
     this._collectBenchmarkOnlyMetrics = !1;
-    this._editFrameDistribution = new UP();
-    this._editFrameDistributionWhileNotPanningOrZooming = new UP();
-    this._remoteFrameDistribution = new UP();
-    this._remoteFrameDistributionWhileNotPanningOrZooming = new UP();
+    this._editFrameDistribution = new FPSDistribution();
+    this._editFrameDistributionWhileNotPanningOrZooming = new FPSDistribution();
+    this._remoteFrameDistribution = new FPSDistribution();
+    this._remoteFrameDistributionWhileNotPanningOrZooming = new FPSDistribution();
     this._staleTimeAccumulators = [];
     this._panEventTracker = new H0();
     this._zoomEventTracker = new vu();
@@ -118,10 +118,10 @@ export class $$o0 {
       allFramesMinSharpness: [],
       allFramesAvgSharpness: []
     };
-    this._editFrameDistribution = new UP();
-    this._editFrameDistributionWhileNotPanningOrZooming = new UP();
-    this._remoteFrameDistribution = new UP();
-    this._remoteFrameDistributionWhileNotPanningOrZooming = new UP();
+    this._editFrameDistribution = new FPSDistribution();
+    this._editFrameDistributionWhileNotPanningOrZooming = new FPSDistribution();
+    this._remoteFrameDistribution = new FPSDistribution();
+    this._remoteFrameDistributionWhileNotPanningOrZooming = new FPSDistribution();
     this._lastFrameTime = 0;
     this._staleTimeAccumulators = $$s.map(e => ({
       thresholdMs: e,

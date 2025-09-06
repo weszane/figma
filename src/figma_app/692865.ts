@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef, useCallback, useEffect } from "react";
 import { debounce } from "../905/915765";
 import { a as _$$a } from "../905/925868";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { NJ } from "../figma_app/419216";
 import { q3 } from "../figma_app/450829";
 import { pO, Hj } from "../figma_app/336229";
@@ -30,7 +30,7 @@ function T({
     window.removeEventListener("scroll", r, !1);
     window.removeEventListener("scroll", d, !1);
   }), [r, d]);
-  let u = useCallback((e) => {
+  let u = useCallback(e => {
     let r = t.current;
     r && (e.isIntersecting ? r.style.visibility = "visible" : r.style.visibility = "hidden");
   }, [t]);
@@ -45,11 +45,11 @@ function T({
       onIntersectionChange: u
     }), jsx("div", {
       className: Hj,
-      children: tx("community.onboarding.see_more_of_what_you_love")
-    }), tx("community.onboarding.whether_you_want_to_focus_on_creators_you_follow_discover_new_files_and_plugins_or_find_out_what_s_trending_you_can_customize_your_feed_here")]
+      children: renderI18nText("community.onboarding.see_more_of_what_you_love")
+    }), renderI18nText("community.onboarding.whether_you_want_to_focus_on_creators_you_follow_discover_new_files_and_plugins_or_find_out_what_s_trending_you_can_customize_your_feed_here")]
   });
 }
-(e) => jsx(T, {
+e => jsx(T, {
   ...e
 });
 q3.SELF_CONTAINED;

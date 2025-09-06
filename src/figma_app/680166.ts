@@ -10,10 +10,10 @@ import { oA } from "../905/663269";
 import p from "../vendor/626715";
 import { Ay } from "../905/612521";
 import { Rs, p as _$$p } from "../figma_app/288654";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { Ts } from "../905/194276";
 import { qB } from "../905/862321";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { to, ES } from "../905/156213";
 import { tc, i$, PE } from "../905/15667";
@@ -260,7 +260,7 @@ export function $$B5(e) {
         curfContext: h
       });
       if (null === a) {
-        $D(_$$e.MONETIZATION_EXPANSION, Error("Error fetching plan in handleUpgrade"), {
+        reportError(_$$e.MONETIZATION_EXPANSION, Error("Error fetching plan in handleUpgrade"), {
           extra: {
             licenseType: t,
             fileKey: l,
@@ -465,36 +465,36 @@ export function $$B5(e) {
         text: function (e, t) {
           if (t) switch (e) {
             case FProductAccessType.DEV_MODE:
-              return _$$t("fullscreen.toolbar_banner.provisional_access.curf.dev_mode");
+              return getI18nString("fullscreen.toolbar_banner.provisional_access.curf.dev_mode");
             case FProductAccessType.DESIGN:
-              return _$$t("fullscreen.toolbar_banner.provisional_access.curf.design");
+              return getI18nString("fullscreen.toolbar_banner.provisional_access.curf.design");
             case FProductAccessType.SLIDES:
-              return _$$t("fullscreen.toolbar_banner.provisional_access.curf.slides");
+              return getI18nString("fullscreen.toolbar_banner.provisional_access.curf.slides");
             case FProductAccessType.WHITEBOARD:
-              return _$$t("fullscreen.toolbar_banner.provisional_access.curf.figjam");
+              return getI18nString("fullscreen.toolbar_banner.provisional_access.curf.figjam");
             case FProductAccessType.SITES:
-              return _$$t("fullscreen.toolbar_banner.provisional_access.curf.sites");
+              return getI18nString("fullscreen.toolbar_banner.provisional_access.curf.sites");
             case FProductAccessType.FIGMAKE:
-              return _$$t("fullscreen.toolbar_banner.provisional_access.curf.figmake");
+              return getI18nString("fullscreen.toolbar_banner.provisional_access.curf.figmake");
             case FProductAccessType.COOPER:
-              return _$$t("fullscreen.toolbar_banner.provisional_access.curf.design");
+              return getI18nString("fullscreen.toolbar_banner.provisional_access.curf.design");
             default:
               return throwTypeError(e);
           } else switch (e) {
             case FProductAccessType.DEV_MODE:
-              return _$$t("fullscreen.toolbar_banner.provisional_access.dev_mode");
+              return getI18nString("fullscreen.toolbar_banner.provisional_access.dev_mode");
             case FProductAccessType.DESIGN:
-              return _$$t("fullscreen.toolbar_banner.provisional_access.design");
+              return getI18nString("fullscreen.toolbar_banner.provisional_access.design");
             case FProductAccessType.SLIDES:
-              return _$$t("fullscreen.toolbar_banner.provisional_access.slides");
+              return getI18nString("fullscreen.toolbar_banner.provisional_access.slides");
             case FProductAccessType.WHITEBOARD:
-              return _$$t("fullscreen.toolbar_banner.provisional_access.figjam");
+              return getI18nString("fullscreen.toolbar_banner.provisional_access.figjam");
             case FProductAccessType.SITES:
-              return _$$t("fullscreen.toolbar_banner.provisional_access.sites");
+              return getI18nString("fullscreen.toolbar_banner.provisional_access.sites");
             case FProductAccessType.FIGMAKE:
-              return _$$t("fullscreen.toolbar_banner.provisional_access.figmake");
+              return getI18nString("fullscreen.toolbar_banner.provisional_access.figmake");
             case FProductAccessType.COOPER:
-              return _$$t("fullscreen.toolbar_banner.provisional_access.design");
+              return getI18nString("fullscreen.toolbar_banner.provisional_access.design");
             default:
               return throwTypeError(e);
           }
@@ -589,7 +589,7 @@ export function $$z2({
     entryPoint: c
   });
   if (!m) {
-    $D(_$$e.MONETIZATION_EXPANSION, Error(`Invalid ${n === _$$J.ADMIN_AUTO_PATHWAY ? "admin self" : "auto"} upgrade: missing billable product key`), {
+    reportError(_$$e.MONETIZATION_EXPANSION, Error(`Invalid ${n === _$$J.ADMIN_AUTO_PATHWAY ? "admin self" : "auto"} upgrade: missing billable product key`), {
       extra: {
         licenseType: e,
         fileKey: u,
@@ -606,7 +606,7 @@ export function $$z2({
   let y = i?.key.type;
   let S = i?.key.parentId;
   if (null === i || !y || !S) {
-    $D(_$$e.MONETIZATION_EXPANSION, Error("Error fetching plan in handleUpgradeAutoPathway"), {
+    reportError(_$$e.MONETIZATION_EXPANSION, Error("Error fetching plan in handleUpgradeAutoPathway"), {
       extra: {
         licenseType: e,
         fileKey: u,
@@ -747,7 +747,7 @@ export function $$Y3({
     entryPoint: r
   });
   if (!c) {
-    $D(_$$e.MONETIZATION_EXPANSION, Error("Invalid upgrade request: missing billable product key"), {
+    reportError(_$$e.MONETIZATION_EXPANSION, Error("Invalid upgrade request: missing billable product key"), {
       extra: {
         licenseType: e,
         fileKey: a,
@@ -825,7 +825,7 @@ export function $$Y3({
     }));
   } : () => t(_$$F.enqueue({
     message: "Encountered an error"
-  })) : ($D(_$$e.MONETIZATION_EXPANSION, Error("Error fetching plan in handleUpgradeManualPathway"), {
+  })) : (reportError(_$$e.MONETIZATION_EXPANSION, Error("Error fetching plan in handleUpgradeManualPathway"), {
     extra: {
       licenseType: e,
       fileKey: a,
@@ -897,7 +897,7 @@ export function $$J4(e) {
         showModalsBeneath: !0
       }));
     }, [t, r, plan, planUser, e, getIsEligibleForProvisionalAccess]),
-    curfCtaLabel: _$$t("fullscreen.toolbar_banner.provisional_access.curf.cta")
+    curfCtaLabel: getI18nString("fullscreen.toolbar_banner.provisional_access.curf.cta")
   };
 }
 let Z = [FProductAccessType.DESIGN, FProductAccessType.WHITEBOARD, FProductAccessType.SLIDES, FProductAccessType.DEV_MODE, FProductAccessType.SITES, FProductAccessType.FIGMAKE];

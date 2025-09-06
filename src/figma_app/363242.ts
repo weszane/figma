@@ -1,44 +1,96 @@
-import { $D } from '../905/11';
-import { v } from '../905/121083';
-import { ServiceCategories as _$$e } from '../905/165054';
-import { D } from '../905/347702';
-import { sx } from '../905/449184';
-import { tr, W } from '../905/508408';
-import { getFeatureFlags } from '../905/601108';
-import { x1 } from '../905/714362';
-import { anotherSubset, languageCodes, specialLanguages, defaultLanguage } from '../905/816253';
-import { F } from '../905/844311';
-import { isDevEnvironment } from '../figma_app/169182';
-import { Bs, Jq, Sv, Zs } from '../figma_app/195123';
-import { Lg } from '../figma_app/257275';
-import { throwTypeError } from '../figma_app/465776';
-import { O4 } from '../vendor/338581';
-let n;
-class y {
-  constructor(e = [defaultLanguage], t = anotherSubset.concat(), r, n, a) {
-    this.reportedFallbackTexts = new Set();
-    this.initialized = !0;
-    this.locales = this.setLocales(e);
-    this.partiallySupportedLocales = t;
-    this.dictionaries = this.setDictionaries(r, n, a);
-    this.reportedTranslationIssues = this.setReportedTranslationIssues();
+import { reportError } from '../905/11'
+import { LocalizationHandler } from '../905/121083'
+import { ServiceCategories as _$$e } from '../905/165054'
+import { trackEventAnalytics } from '../905/449184'
+import { TranslationErrors, W } from '../905/508408'
+import { getFeatureFlags } from '../905/601108'
+import { logError } from '../905/714362'
+import { anotherSubset, defaultLanguage, languageCodes, specialLanguages } from '../905/816253'
+import { F } from '../905/844311'
+import { isDevEnvironment } from '../figma_app/169182'
+import { encodeZeroWidth, replaceWordCharacters, transformWithAccents, wrapArray } from '../figma_app/195123'
+import { throwTypeError } from '../figma_app/465776'
+
+/**
+ * I18nState class manages localization, dictionaries, and translation issues.
+ * Original class name: y
+ */
+class I18nState {
+  /** Tracks reported fallback texts to avoid duplicate reporting */
+  reportedFallbackTexts: Set<string>
+  /** Indicates if the state is initialized */
+  initialized: boolean
+  /** List of active locales */
+  locales: string[]
+  /** List of partially supported locales */
+  partiallySupportedLocales: string[]
+  /** Dictionary objects for each locale */
+  dictionaries: Record<string, LocalizationHandler>
+  /** Tracks reported translation issues by locale and error type */
+  reportedTranslationIssues: Record<string, Record<string, Set<string>>>
+  /** Memoization for ids and missing translations */
+  memo: { ids: Record<string, unknown>, missing: string[] }
+  /** Current pseudo locale, if any */
+  private _pseudoLocale?: string
+
+  /**
+   * Constructs the I18nState.
+   * @param locales - Array of locale codes.
+   * @param partiallySupportedLocales - Array of partially supported locale codes.
+   * @param dict - Main dictionary data.
+   * @param fallbackDict - Fallback dictionary data.
+   * @param extraDict - Extra dictionary data.
+   */
+  constructor(
+    locales: string[] = [defaultLanguage],
+    partiallySupportedLocales: string[] = anotherSubset.concat(),
+    dict?: any,
+    fallbackDict?: any,
+    extraDict?: any,
+  ) {
+    this.reportedFallbackTexts = new Set()
+    this.initialized = true
+    this.locales = this.setLocales(locales)
+    this.partiallySupportedLocales = partiallySupportedLocales
+    this.dictionaries = this.setDictionaries(dict, fallbackDict, extraDict)
+    this.reportedTranslationIssues = this.setReportedTranslationIssues()
     this.memo = {
       ids: {},
-      missing: []
-    };
+      missing: [],
+    }
   }
-  get pseudoLocale() {
-    !this._pseudoLocale && specialLanguages.includes(this.locales[0]) && (this._pseudoLocale = this.locales[0]);
-    this._pseudoLocale && !specialLanguages.includes(this.locales[0]) && (this._pseudoLocale = void 0);
-    return this._pseudoLocale;
+
+  /**
+   * Returns the current pseudo locale if active.
+   * Original getter: pseudoLocale
+   */
+  get pseudoLocale(): string | undefined {
+    if (!this._pseudoLocale && specialLanguages.includes(this.locales[0])) {
+      this._pseudoLocale = this.locales[0]
+    }
+    if (this._pseudoLocale && !specialLanguages.includes(this.locales[0])) {
+      this._pseudoLocale = undefined
+    }
+    return this._pseudoLocale
   }
-  setLocales(e) {
-    let t = [!getFeatureFlags().i18n_auth_it_it && 'it-it'].filter(Boolean);
-    return this.locales = e.filter(e => !t.includes(e));
+
+  /**
+   * Filters out unsupported locales and sets the active locales.
+   * Original method: setLocales
+   */
+  setLocales(locales: string[]): string[] {
+    const excluded = [!getFeatureFlags().i18n_auth_it_it && 'it-it'].filter(Boolean)
+    this.locales = locales.filter(l => !excluded.includes(l))
+    return this.locales
   }
-  setDictionaries(e, t, r, n = this.locales) {
-    return this.dictionaries = n.reduce((n, i) => {
-      switch (i) {
+
+  /**
+   * Initializes dictionaries for each locale.
+   * Original method: setDictionaries
+   */
+  setDictionaries(dict?: any, fallbackDict?: any, extraDict?: any, locales: string[] = this.locales): Record<string, LocalizationHandler> {
+    this.dictionaries = locales.reduce((acc, locale) => {
+      switch (locale) {
         case 'ja':
         case 'es-es':
         case 'ko-kr':
@@ -47,204 +99,368 @@ class y {
         case 'de':
         case 'fr':
         case 'du-ds':
-          e && (n[i] = new v(i, e, t || {}));
-          break;
+          if (dict)
+            acc[locale] = new LocalizationHandler(locale, dict, fallbackDict || {})
+          break
         case 'du-ps':
         case 'nl-nl':
         case 'pl-pl':
         case 'it-it':
-          n[i] = new v(i, F(i), {});
-          break;
+          acc[locale] = new LocalizationHandler(locale, F(locale), {})
+          break
         case 'en':
         case 'aal':
         case 'aaa':
-          r ? n[i] = new v(i, r, t || {}) : n[i] = new v(i, W, t || {});
-          break;
+          acc[locale] = new LocalizationHandler(locale, extraDict ?? W, fallbackDict || {})
+          break
         default:
-          throwTypeError(i);
+          throwTypeError(locale)
       }
-      return n;
-    }, {});
+      return acc
+    }, {} as Record<string, LocalizationHandler>)
+    return this.dictionaries
   }
-  setReportedTranslationIssues() {
-    return this.reportedTranslationIssues = this.locales.reduce((e, t) => {
-      let r = Object.values(tr).reduce((e, t) => (e[t] = new Set(), e), {});
-      e[t] = r;
-      return e;
-    }, {});
+
+  /**
+   * Initializes the reported translation issues structure.
+   * Original method: setReportedTranslationIssues
+   */
+  setReportedTranslationIssues(): Record<string, Record<string, Set<string>>> {
+    this.reportedTranslationIssues = this.locales.reduce((acc, locale) => {
+      const errors = Object.values(TranslationErrors).reduce((errAcc, errType) => {
+        errAcc[errType] = new Set()
+        return errAcc
+      }, {} as Record<string, Set<string>>)
+      acc[locale] = errors
+      return acc
+    }, {} as Record<string, Record<string, Set<string>>>)
+    return this.reportedTranslationIssues
   }
-  getDictionaries() {
-    return this.dictionaries;
+
+  /**
+   * Returns all dictionaries.
+   * Original method: getDictionaries
+   */
+  getDictionaries(): Record<string, LocalizationHandler> {
+    return this.dictionaries
   }
-  getDictionary(e) {
-    return this.dictionaries[e];
+
+  /**
+   * Returns the dictionary for a specific locale.
+   * Original method: getDictionary
+   */
+  getDictionary(locale: string): LocalizationHandler | undefined {
+    return this.dictionaries[locale]
   }
-  reportMissingI18nDynamicId(e) {
-    if (!this.reportedFallbackTexts.has(e)) {
+
+  /**
+   * Reports a missing i18n dynamic id.
+   * Original method: reportMissingI18nDynamicId
+   */
+  reportMissingI18nDynamicId(id: string): void {
+    if (!this.reportedFallbackTexts.has(id)) {
       if (isDevEnvironment()) {
-        console.warn(`[i18n] Translation not available for text: "${e}" on non-production environments`);
-      } else {
-        let t = `[Missing i18n dynamic id]: Cannot translate text: "${e}"`;
-        $D(_$$e.GROWTH_PLATFORM, new Error(t));
+        console.warn(`[i18n] Translation not available for text: "${id}" on non-production environments`)
       }
-      this.reportedFallbackTexts.add(e);
+      else {
+        const msg = `[Missing i18n dynamic id]: Cannot translate text: "${id}"`
+        reportError(_$$e.GROWTH_PLATFORM, new Error(msg))
+      }
+      this.reportedFallbackTexts.add(id)
     }
   }
-  getTranslatedDynamicContent(e, t) {
-    let r;
+
+  /**
+   * Gets the translated dynamic content for a given id and fallback text.
+   * Original method: getTranslatedDynamicContent
+   */
+  getTranslatedDynamicContent(id: string, fallback: string): string {
+    let result: string | undefined
     if (!this.initialized) {
-      x1('i18n', 'text helper for dynamic db string used before I18nState initialization completed', {
-        id: e
-      }, {
-        reportAsSentryError: !0
-      });
-      return '';
+      logError('i18n', 'text helper for dynamic db string used before I18nState initialization completed', { id }, { reportAsSentryError: true })
+      return ''
     }
-    if (t === '') return t;
-    if (!e) {
-      this.reportMissingI18nDynamicId(t);
-      return this.getPseudoLocalizedDynamicString(t);
+    if (fallback === '')
+      return fallback
+    if (!id) {
+      this.reportMissingI18nDynamicId(fallback)
+      return this.getPseudoLocalizedDynamicString(fallback)
     }
-    for (let t = 0; t < this.locales.length; t++) {
-      let n = this.locales[t];
-      let a = this.getDictionary(this.locales[t]);
-      if (!a) {
-        this.handleTranslationIssue(n, this.locales[0], e, tr.DICT_NOT_LOADED);
-        continue;
+    for (const locale of this.locales) {
+      const dict = this.getDictionary(locale)
+      if (!dict) {
+        this.handleTranslationIssue(locale, this.locales[0], id, TranslationErrors.DICT_NOT_LOADED)
+        continue
       }
       try {
-        r = a.getDynamicString(e);
-      } catch (t) {
-        this.handleTranslationIssue(n, this.locales[0], e, tr.BAD, t, 'dbDictionaryUrl');
-        continue;
+        result = dict.getDynamicString(id)
       }
-      isDevEnvironment() || r != null || n === defaultLanguage || this.handleTranslationIssue(n, this.locales[0], e, tr.MISSING, void 0, 'dbDictionaryUrl');
+      catch (err: any) {
+        this.handleTranslationIssue(locale, this.locales[0], id, TranslationErrors.BAD, err, 'dbDictionaryUrl')
+        continue
+      }
+      if (!isDevEnvironment() && result == null && locale !== defaultLanguage) {
+        this.handleTranslationIssue(locale, this.locales[0], id, TranslationErrors.MISSING, undefined, 'dbDictionaryUrl')
+      }
     }
-    return this.getPseudoLocalizedDynamicString(r ?? t);
+    return this.getPseudoLocalizedDynamicString(result ?? fallback)
   }
-  handleTranslationIssue(e, t, r, n, i, a = 'dictionaryUrl') {
-    let s = n === tr.MISSING && this.partiallySupportedLocales.includes(e);
-    s && getFeatureFlags().i18n_disable_partial_str_logging || s && !r.startsWith('auth.') || this.reportedTranslationIssues[e][n].has(r) || n === tr.DICT_NOT_LOADED && this.reportedTranslationIssues[e][n].size > 0 || (this.reportedTranslationIssues[e][n].add(r), $$T3(e, t, r, n, i, a));
+
+  /**
+   * Handles translation issues and logs/report as needed.
+   * Original method: handleTranslationIssue
+   */
+  handleTranslationIssue(
+    locale: string,
+    primaryLocale: string,
+    id: string,
+    errorType: string,
+    error?: Error,
+    dictUrl: string = 'dictionaryUrl',
+  ): void {
+    const isPartial = errorType === TranslationErrors.MISSING && this.partiallySupportedLocales.includes(locale)
+    if (
+      (isPartial && getFeatureFlags().i18n_disable_partial_str_logging)
+      || (isPartial && !id.startsWith('auth.'))
+      || this.reportedTranslationIssues[locale][errorType].has(id)
+      || (errorType === TranslationErrors.DICT_NOT_LOADED && this.reportedTranslationIssues[locale][errorType].size > 0)
+    ) {
+      return
+    }
+    this.reportedTranslationIssues[locale][errorType].add(id)
+    reportTranslationIssue(locale, primaryLocale, id, errorType, error, dictUrl)
   }
-  getPseudoLocalizedDynamicString(e) {
-    return this.pseudoLocale === languageCodes.AAA ? Zs(e) : this.pseudoLocale === languageCodes.AAL ? Sv(e) : e;
+
+  /**
+   * Returns pseudo-localized string if pseudo locale is active.
+   * Original method: getPseudoLocalizedDynamicString
+   */
+  getPseudoLocalizedDynamicString(str: string): string {
+    if (this.pseudoLocale === languageCodes.AAA)
+      return replaceWordCharacters(str)
+    if (this.pseudoLocale === languageCodes.AAL)
+      return transformWithAccents(str)
+    return str
   }
-  getContent(e, t) {
-    let r;
+
+  /**
+   * Gets compiled content for a given id and values.
+   * Original method: getContent
+   */
+  getContent(id: string, values?: any): any[] {
+    let result: any[] | undefined
     if (!this.initialized) {
-      x1('i18n', 'text helper used before I18nState initialization completed', {
-        id: e
-      }, {
-        reportAsSentryError: !0
-      });
-      return [];
+      logError('i18n', 'text helper used before I18nState initialization completed', { id }, { reportAsSentryError: true })
+      return []
     }
-    for (let n = 0; n < this.locales.length; n++) {
-      let i = this.locales[n];
-      let a = this.getDictionary(this.locales[n]);
-      if (!a) {
-        this.handleTranslationIssue(i, this.locales[0], e, tr.DICT_NOT_LOADED);
-        continue;
+    for (const locale of this.locales) {
+      const dict = this.getDictionary(locale)
+      if (!dict) {
+        this.handleTranslationIssue(locale, this.locales[0], id, TranslationErrors.DICT_NOT_LOADED)
+        continue
       }
       try {
-        r = a?.getCompiled(e, t);
-      } catch (t) {
-        t.code === O4.MISSING_VALUE ? this.handleTranslationIssue(i, this.locales[0], e, tr.MISSING_ARGS, t) : this.handleTranslationIssue(i, this.locales[0], e, tr.BAD, t);
-        continue;
+        result = dict?.getCompiled(id, values)
       }
-      if (r) break;
-      this.handleTranslationIssue(i, this.locales[0], e, tr.MISSING);
+      catch (err: any) {
+        if (err.code === 'MISSING_VALUE') {
+          this.handleTranslationIssue(locale, this.locales[0], id, TranslationErrors.MISSING_ARGS, err)
+        }
+        else {
+          this.handleTranslationIssue(locale, this.locales[0], id, TranslationErrors.BAD, err)
+        }
+        continue
+      }
+      if (result)
+        break
+      this.handleTranslationIssue(locale, this.locales[0], id, TranslationErrors.MISSING)
     }
-    r || (r = []);
-    return this.runGlobalTransforms(r, e);
+    result ||= []
+    return this.runGlobalTransforms(result, id)
   }
-  getPrimaryLocale(e) {
-    return (e ? this.locales[0] : this.locales.filter(e => !specialLanguages.includes(e))[0]) || defaultLanguage;
+
+  /**
+   * Returns the primary locale, optionally including special languages.
+   * Original method: getPrimaryLocale
+   */
+  getPrimaryLocale(includeSpecial: boolean): string {
+    return (
+      includeSpecial
+        ? this.locales[0]
+        : this.locales.find(l => !specialLanguages.includes(l))
+    ) || defaultLanguage
   }
-  runGlobalTransforms(e, t) {
+
+  /**
+   * Applies global transforms to the content array.
+   * Original method: runGlobalTransforms
+   */
+  runGlobalTransforms(content: any[], id: string): any[] {
     if (this.pseudoLocale === languageCodes.AAA) {
-      let t = e => e.map(e => typeof e == 'string' ? Zs(e) : Array.isArray(e) ? t(e) : e);
-      e = t(e);
+      const transform = (arr: any[]): any[] =>
+        arr.map(item =>
+          typeof item === 'string'
+            ? replaceWordCharacters(item)
+            : Array.isArray(item)
+              ? transform(item)
+              : item,
+        )
+      content = transform(content)
     }
     if (this.pseudoLocale === languageCodes.AAL) {
-      let t = e => e.map(e => typeof e == 'string' ? Sv(e) : Array.isArray(e) ? t(e) : e);
-      e = Jq(t(e));
+      const transform = (arr: any[]): any[] =>
+        arr.map(item =>
+          typeof item === 'string'
+            ? transformWithAccents(item)
+            : Array.isArray(item)
+              ? transform(item)
+              : item,
+        )
+      content = wrapArray(transform(content))
     }
-    getFeatureFlags().l10n_string_inspector && (e = [...e, Bs(t)]);
-    return e;
+    if (getFeatureFlags().l10n_string_inspector) {
+      content = [...content, encodeZeroWidth(id)]
+    }
+    return content
   }
 }
-let b = () => !(isDevEnvironment() || Lg());
-let $$T3 = D((e, t, r, n, i, l = 'dictionaryUrl') => {
-  let c = document.getElementById(l)?.getAttribute('href');
-  let p = `${n} for id: ${r}`;
-  if (n !== tr.MISSING_ARGS && (p += ` in locale: ${e}`), i && (p += `. Error: ${i.message}`), e === t && c && (p += `. Dictionary URL: ${c}`), b()) {
-    switch (n) {
-      case tr.BAD:
-        if (getFeatureFlags().i18n_disable_bad_str_logging || getFeatureFlags().i18n_sample_string_sentry_errors && Math.random() > 0.01) return;
-        $D(_$$e.GROWTH_PLATFORM, new Error(p));
-        return;
-      case tr.MISSING:
-        if (getFeatureFlags().i18n_disable_missing_str_logging) return;
-        getFeatureFlags().i18n_sample_string_sentry_errors && Math.random() <= 0.01 && $D(_$$e.GROWTH_PLATFORM, new Error(p));
-        getFeatureFlags().i18n_sample_string_datadog && Math.random() <= 0.01 && sx('Missing i18n String', {
-          i18nId: r,
-          message: i?.message,
-          locale: e,
-          dictURL: c
-        }, {
-          forwardToDatadog: !0
-        });
-        return;
-      case tr.DICT_NOT_LOADED:
-        if (getFeatureFlags().i18n_disable_dict_logging || getFeatureFlags().i18n_sample_dict_unloaded && Math.random() > 0.01) return;
-        sx('i18n Dict Not loaded at string evaluation', {
-          i18nId: r,
-          message: i?.message,
-          locale: e,
-          dictURL: c
-        }, {
-          forwardToDatadog: !0
-        });
-        return;
-      case tr.MISSING_ARGS:
-      case tr.UNKNOWN:
-        if (getFeatureFlags().i18n_disable_miss_args_logging || getFeatureFlags().i18n_sample_string_sentry_errors && Math.random() > 0.01) return;
-        $D(_$$e.GROWTH_PLATFORM, new Error(p));
-        return;
+
+/** Singleton instance for I18nState (original variable: n) */
+let i18nStateInstance: I18nState | undefined
+
+/**
+ * Returns the I18nState instance, initializing if needed.
+ * Original function: $$I2
+ */
+export function getI18nState(reportErrorFlag = true): I18nState {
+  if (!i18nStateInstance) {
+    logError('i18n', 'I18nState object referenced before initialization completed', {}, { reportAsSentryError: reportErrorFlag })
+    initializeI18nState()
+  }
+  if (i18nStateInstance)
+    i18nStateInstance.initialized = false
+  return i18nStateInstance!
+}
+
+/**
+ * Checks if the primary locale is English.
+ * Original function: $$S1
+ */
+export function isPrimaryLocaleEnglish(): boolean {
+  const state = getI18nState()
+  return !!state && state.getPrimaryLocale(true) === languageCodes.EN
+}
+
+/**
+ * Initializes the I18nState singleton.
+ * Original function: $$v0
+ */
+export function initializeI18nState(
+  locales: string[] = [defaultLanguage],
+  partiallySupportedLocales: string[] = anotherSubset.concat(),
+  dict?: any,
+  fallbackDict?: any,
+  extraDict?: any,
+): void {
+  if (i18nStateInstance) {
+    i18nStateInstance.setLocales(locales)
+    i18nStateInstance.setDictionaries(dict, fallbackDict, extraDict)
+    i18nStateInstance.setReportedTranslationIssues()
+    i18nStateInstance.initialized = true
+    i18nStateInstance.partiallySupportedLocales = partiallySupportedLocales
+  }
+  else {
+    i18nStateInstance = new I18nState(locales, partiallySupportedLocales, dict, fallbackDict, extraDict)
+  }
+}
+
+/**
+ * Determines if the environment is production.
+ * Original function: b
+ */
+const isProductionEnv = (): boolean => !isDevEnvironment()
+
+/**
+ * Reports translation issues to error tracking or analytics.
+ * Original function: $$T3
+ */
+export function reportTranslationIssue(
+  locale: string,
+  primaryLocale: string,
+  id: string,
+  errorType: string,
+  error?: Error,
+  dictUrl: string = 'dictionaryUrl',
+): void {
+  const dictHref = document.getElementById(dictUrl)?.getAttribute('href')
+  let message = `${errorType} for id: ${id}`
+  if (errorType !== TranslationErrors.MISSING_ARGS)
+    message += ` in locale: ${locale}`
+  if (error)
+    message += `. Error: ${error.message}`
+  if (locale === primaryLocale && dictHref)
+    message += `. Dictionary URL: ${dictHref}`
+
+  if (isProductionEnv()) {
+    switch (errorType) {
+      case TranslationErrors.BAD:
+        if (getFeatureFlags().i18n_disable_bad_str_logging || (getFeatureFlags().i18n_sample_string_sentry_errors && Math.random() > 0.01))
+          return
+        reportError(_$$e.GROWTH_PLATFORM, new Error(message))
+        return
+      case TranslationErrors.MISSING:
+        if (getFeatureFlags().i18n_disable_missing_str_logging)
+          return
+        if (getFeatureFlags().i18n_sample_string_sentry_errors && Math.random() <= 0.01)
+          reportError(_$$e.GROWTH_PLATFORM, new Error(message))
+        if (getFeatureFlags().i18n_sample_string_datadog && Math.random() <= 0.01) {
+          trackEventAnalytics('Missing i18n String', {
+            i18nId: id,
+            message: error?.message,
+            locale,
+            dictURL: dictHref,
+          }, { forwardToDatadog: true })
+        }
+        return
+      case TranslationErrors.DICT_NOT_LOADED:
+        if (getFeatureFlags().i18n_disable_dict_logging || (getFeatureFlags().i18n_sample_dict_unloaded && Math.random() > 0.01))
+          return
+        trackEventAnalytics('i18n Dict Not loaded at string evaluation', {
+          i18nId: id,
+          message: error?.message,
+          locale,
+          dictURL: dictHref,
+        }, { forwardToDatadog: true })
+        return
+      case TranslationErrors.MISSING_ARGS:
+      case TranslationErrors.UNKNOWN:
+        if (getFeatureFlags().i18n_disable_miss_args_logging || (getFeatureFlags().i18n_sample_string_sentry_errors && Math.random() > 0.01))
+          return
+        reportError(_$$e.GROWTH_PLATFORM, new Error(message))
+        return
       default:
-        throwTypeError(n);
-    }
-  } else if (!b()) {
-    switch (n) {
-      case tr.BAD:
-      case tr.MISSING_ARGS:
-      case tr.UNKNOWN:
-        console.warn(`Critical I18n Error: ${p}`);
-        return;
-      case tr.DICT_NOT_LOADED:
-      case tr.MISSING:
-        console.warn(`I18n Warning: ${p}`);
-        return;
-      default:
-        throwTypeError(n);
+        throwTypeError(errorType)
     }
   }
-});
-export function $$I2(e = !0) {
-  n || (x1('i18n', 'I18nState object referenced before initialization completed', {}, {
-    reportAsSentryError: e
-  }), $$v0(), n.initialized = !1);
-  return n;
+  else {
+    switch (errorType) {
+      case TranslationErrors.BAD:
+      case TranslationErrors.MISSING_ARGS:
+      case TranslationErrors.UNKNOWN:
+        console.warn(`Critical I18n Error: ${message}`)
+        return
+      case TranslationErrors.DICT_NOT_LOADED:
+      case TranslationErrors.MISSING:
+        console.warn(`I18n Warning: ${message}`)
+        return
+      default:
+        throwTypeError(errorType)
+    }
+  }
 }
-export function $$S1() {
-  let e = $$I2();
-  return !!e && e.getPrimaryLocale(!0) === languageCodes.EN;
-}
-export function $$v0(e = [defaultLanguage], t = anotherSubset.concat(), r, a, s) {
-  n ? (n.setLocales(e), n.setDictionaries(r, a, s), n.setReportedTranslationIssues(), n.initialized = !0, n.partiallySupportedLocales = t) : n = new y(e, t, r, a, s);
-}
-export const Cq = $$v0;
-export const EZ = $$S1;
-export const Gq = $$I2;
-export const tu = $$T3;
+
+// Exported names refactored for clarity and traceability
+export const Cq = initializeI18nState
+export const EZ = isPrimaryLocaleEnglish
+export const Gq = getI18nState
+export const tu = reportTranslationIssue

@@ -2,10 +2,10 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { Component, createRef } from "react";
 import { debounce } from "../905/915765";
 import { vs, u9, En, AS } from "../figma_app/661371";
-import { rr } from "../figma_app/778880";
+import { isMobileUA } from "../figma_app/778880";
 import { kt } from "../figma_app/858013";
 import { s as _$$s2 } from "../905/573154";
-import { t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { sf } from "../905/929976";
 import { fu } from "../figma_app/831799";
 import { g3 } from "../figma_app/707808";
@@ -141,9 +141,9 @@ class S extends Component {
       this.setState({
         didFetchFail: !0
       });
-      this.props.dispatch(_$$s2.error(t("community.error.an_error_has_occurred_please_refresh_the_page_and_try_again")));
+      this.props.dispatch(_$$s2.error(getI18nString("community.error.an_error_has_occurred_please_refresh_the_page_and_try_again")));
     };
-    this.onTabClick = (e) => {
+    this.onTabClick = e => {
       this.props.dispatch(sf({
         ...this.props.currentSelectedView,
         profileTab: e
@@ -156,8 +156,8 @@ class S extends Component {
       delete e.profileTab;
       this.props.dispatch(sf(e));
     };
-    this.getFollowsListHeightStyle = (e) => {
-      let t = rr ? window.innerHeight : window.innerHeight - 128 - 48;
+    this.getFollowsListHeightStyle = e => {
+      let t = isMobileUA ? window.innerHeight : window.innerHeight - 128 - 48;
       return {
         height: Math.min(Math.max(80 * Math.min(e === g3.FOLLOWERS ? this.props.profile.follower_count : this.props.profile.following_count, vs), 328), t)
       };
@@ -174,10 +174,10 @@ class S extends Component {
             "aria-hidden": !0,
             style: void 0,
             className: `xcrlgei x1d1dmfs x1agbcgv x1gxh9p xg01cxk ${v}`,
-            children: tx("community.follow.followers")
+            children: renderI18nText("community.follow.followers")
           }), jsx("span", {
             className: "xcrlgei x1d1dmfs x1agbcgv x1gxh9p",
-            children: tx("community.follow.followers")
+            children: renderI18nText("community.follow.followers")
           })]
         }), this.props.profile.primary_user_id && jsxs(x, {
           onClick: () => this.onTabClick(g3.FOLLOWING),
@@ -187,10 +187,10 @@ class S extends Component {
             "aria-hidden": !0,
             style: void 0,
             className: `xcrlgei x1d1dmfs x1agbcgv x1gxh9p xg01cxk ${v}`,
-            children: tx("community.follow.following")
+            children: renderI18nText("community.follow.following")
           }), jsx("span", {
             className: "xcrlgei x1d1dmfs x1agbcgv x1gxh9p",
-            children: tx("community.follow.following")
+            children: renderI18nText("community.follow.following")
           })]
         })]
       });
@@ -229,13 +229,13 @@ class S extends Component {
         className: I,
         children: [jsx(y, {}), jsx("div", {
           className: E,
-          children: tx("community.follow.no_followers_yet")
+          children: renderI18nText("community.follow.no_followers_yet")
         })]
       }) : jsxs("div", {
         className: I,
         children: [jsx(A, {}), jsx("div", {
           className: E,
-          children: tx("community.follow.not_following_anyone_yet")
+          children: renderI18nText("community.follow.not_following_anyone_yet")
         })]
       });
     };

@@ -19,16 +19,16 @@ import { Pt4, Krs, glU } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { fn, sH } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
-import { md } from "../figma_app/27355";
-import { sx } from "../905/449184";
-import { R as _$$R } from "../905/103090";
+import { useAtomWithSubscription } from "../figma_app/27355";
+import { trackEventAnalytics } from "../905/449184";
+import { selectWithShallowEqual } from "../905/103090";
 import { Uz } from "../905/63728";
 import { Pt } from "../figma_app/806412";
 import { Point } from "../905/736624";
 import { ms, c$ } from "../figma_app/236327";
 import { M3, dP } from "../figma_app/119475";
 import { Lp } from "../figma_app/563413";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { f as _$$f } from "../905/412913";
 import { oB, j7 } from "../905/929976";
 import { Uv, XE, u1, bS } from "../figma_app/91703";
@@ -194,7 +194,7 @@ let eD = memo(function ({
           }), X && jsx(K0, {
             className: zm,
             recordingKey: Pt(t, "clearTextStyleOverridesButton"),
-            "data-tooltip": _$$t("design_systems.styles.clear_overrides_over_text_style"),
+            "data-tooltip": getI18nString("design_systems.styles.clear_overrides_over_text_style"),
             "data-tooltip-type": Ib.TEXT,
             svg: _$$A3,
             onClick: B
@@ -203,10 +203,10 @@ let eD = memo(function ({
           className: "x6s0dn4 x78zum5 x3psx0u x5yr21d xl56j7k xugbqxq xctkrei x10l6tqk x3m8u43 x13vifvy x17dzmu4 x7r3dqx",
           children: jsx(_$$d, {
             recordingKey: Pt(t, "editStyleButton"),
-            "data-tooltip": _$$t("design_systems.styles.edit_style"),
+            "data-tooltip": getI18nString("design_systems.styles.edit_style"),
             "data-tooltip-type": Ib.TEXT,
             onClick: j,
-            "aria-label": _$$t("design_systems.styles.edit_style"),
+            "aria-label": getI18nString("design_systems.styles.edit_style"),
             "aria-expanded": L,
             children: jsx(_$$g, {})
           })
@@ -234,7 +234,7 @@ let eD = memo(function ({
       }), X && jsx(K0, {
         className: zm,
         recordingKey: Pt(t, "clearTextStyleOverridesButton"),
-        "data-tooltip": _$$t("design_systems.styles.clear_overrides_over_text_style"),
+        "data-tooltip": getI18nString("design_systems.styles.clear_overrides_over_text_style"),
         "data-tooltip-type": Ib.TEXT,
         svg: _$$A3,
         onClick: B,
@@ -242,7 +242,7 @@ let eD = memo(function ({
       }), g && jsx(YW, {
         className: em()(q, Z),
         recordingKey: Pt(t, "editStyleButton"),
-        "data-tooltip": _$$t("design_systems.styles.edit_style"),
+        "data-tooltip": getI18nString("design_systems.styles.edit_style"),
         "data-tooltip-type": Ib.TEXT,
         svg: _$$A2,
         selected: L,
@@ -493,7 +493,7 @@ export function $$eF1({
     }), jsx(eU, {
       recordingKey: t,
       isEmpty: Z || er,
-      displayText: er ? _$$t("design_systems.styles.no_styles_match") : _$$t("design_systems.styles.no_specified_style", {
+      displayText: er ? getI18nString("design_systems.styles.no_styles_match") : getI18nString("design_systems.styles.no_specified_style", {
         kind: QT(u).toLowerCase()
       }),
       onBrowseLibrariesButtonClick: R || k ? void 0 : el,
@@ -542,8 +542,8 @@ function eU({
           recordingKey: Pt(e, "browseLibraries"),
           variant: "secondary",
           iconPrefix: jsx(_$$l, {}),
-          "aria-label": _$$t("design_systems.styles.buttons.browse"),
-          children: tx("design_systems.styles.buttons.browse")
+          "aria-label": getI18nString("design_systems.styles.buttons.browse"),
+          children: renderI18nText("design_systems.styles.buttons.browse")
         })
       })]
     })
@@ -639,7 +639,7 @@ function eG({
     modalShown,
     stylePickerShown,
     stylePreviewShown
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     dropdownShown: e.dropdownShown,
     modalShown: e.modalShown,
     stylePickerShown: e.stylePickerShown,
@@ -673,7 +673,7 @@ function eG({
             rowLeft: t.x
           }));
           r();
-          sx("Style Inspected", {
+          trackEventAnalytics("Style Inspected", {
             styleType: e.style_type,
             from: n
           });
@@ -689,7 +689,7 @@ function eG({
         }));
       },
       deleteStyle(e) {
-        Oo(e, X) && (l7.user("delete-style", () => glU.deleteNode(e.node_id)), Y5.triggerAction("commit"), sx("Style Deleted", {
+        Oo(e, X) && (l7.user("delete-style", () => glU.deleteNode(e.node_id)), Y5.triggerAction("commit"), trackEventAnalytics("Style Deleted", {
           styleType: e.style_type,
           from: "stylePickerContextMenu"
         }));
@@ -717,7 +717,7 @@ function eG({
     }));
   }, [Y, t, stylePickerShown]);
   let eb = sO();
-  let eT = md(TN).length > 0;
+  let eT = useAtomWithSubscription(TN).length > 0;
   return jsx(dP, {
     recordingKey: e,
     onKeyDown: et,
@@ -747,36 +747,36 @@ function eG({
                 "aria-expanded": em,
                 htmlAttributes: {
                   "data-tooltip-type": Ib.TEXT,
-                  "data-tooltip": _$$t("design_systems.styles.tooltips.library")
+                  "data-tooltip": getI18nString("design_systems.styles.tooltips.library")
                 },
                 children: jsx(_$$l, {}),
-                "aria-label": _$$t("design_systems.styles.tooltips.library")
+                "aria-label": getI18nString("design_systems.styles.tooltips.library")
               }), ("FILL" === r || "STROKE" === r) && N && jsx(_$$K, {
-                "aria-label": S ? _$$t("design_systems.styles.tooltips.show_as_grid") : _$$t("design_systems.styles.tooltips.show_as_list"),
+                "aria-label": S ? getI18nString("design_systems.styles.tooltips.show_as_grid") : getI18nString("design_systems.styles.tooltips.show_as_list"),
                 recordingKey: Pt(e, "toggleStylePickerListLayout"),
                 onClick: N,
                 disabled: l,
                 htmlAttributes: {
-                  "data-tooltip": S ? _$$t("design_systems.styles.tooltips.show_as_grid") : _$$t("design_systems.styles.tooltips.show_as_list"),
+                  "data-tooltip": S ? getI18nString("design_systems.styles.tooltips.show_as_grid") : getI18nString("design_systems.styles.tooltips.show_as_list"),
                   "data-tooltip-type": Ib.TEXT
                 },
                 children: S ? jsx(_$$E, {}) : jsx(_$$Z, {})
               }), !O && jsx("span", {
                 className: "style_picker--createStyleButton--UcGo9",
                 children: jsx(_$$K, {
-                  "aria-label": _$$t("design_systems.styles.tooltips.create"),
+                  "aria-label": getI18nString("design_systems.styles.tooltips.create"),
                   recordingKey: Pt(e, "addStyleButton"),
                   disabled: !L || eb && !eT,
                   onClick: () => L?.(eh?.left ?? Z.x, eh?.top ?? Z.y),
                   htmlAttributes: {
                     onMouseDown: dG,
-                    "data-tooltip": _$$t("design_systems.styles.tooltips.create"),
+                    "data-tooltip": getI18nString("design_systems.styles.tooltips.create"),
                     "data-tooltip-type": Ib.TEXT
                   },
                   children: jsx(_$$e, {})
                 })
               }), jsx(_$$K, {
-                "aria-label": _$$t("common.close"),
+                "aria-label": getI18nString("common.close"),
                 onClick: () => ef?.(),
                 children: jsx(_$$L, {})
               })]
@@ -818,7 +818,7 @@ export function $$eV2({
       ...t,
       id: u,
       autoFocus: !0,
-      placeholder: _$$t("design_systems.publishing_modal.search_placeholder"),
+      placeholder: getI18nString("design_systems.publishing_modal.search_placeholder"),
       size: "lg",
       variant: "borderless"
     })
@@ -858,17 +858,17 @@ function eW({
   let p = [];
   o && (p.push(jsx(ez, {
     onClick: () => showStyleDetails(e, t, "stylePickerContextMenu"),
-    children: tx("design_systems.styles.edit_style")
+    children: renderI18nText("design_systems.styles.edit_style")
   })), p.push(jsx(ez, {
     onClick: () => deleteStyle(e),
-    children: tx("design_systems.styles.delete_styles", {
+    children: renderI18nText("design_systems.styles.delete_styles", {
       numStyles: 1
     })
   })));
   !o && c && u && p.push(jsx(ez, {
     href: u,
     target: "_blank",
-    children: tx("design_systems.styles.go_to_style_definition")
+    children: renderI18nText("design_systems.styles.go_to_style_definition")
   }));
   return p.length > 0 ? jsxs(eH, {
     className: "style_picker--contextMenu--3hOCZ",

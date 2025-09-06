@@ -1,13 +1,13 @@
-import { eU, FZ } from "../figma_app/27355";
+import { atom, setupCustomAtom } from "../figma_app/27355";
 import { Uv, bT, Uw } from "../3973/473379";
 export function $$i4(e) {
   return e.status === Uv.ERRORED && e.cause === bT.TIMEOUT;
 }
-let n = eU({
+let n = atom({
   status: Uv.NOT_STARTED,
   initCompletedPromise: void 0
 });
-let $$o0 = FZ(n, function (e, t) {
+let $$o0 = setupCustomAtom(n, function (e, t) {
   switch (t?.type) {
     case Uw.RESET:
       return {
@@ -59,10 +59,10 @@ let $$o0 = FZ(n, function (e, t) {
   }
   return e;
 });
-let $$_2 = eU(e => e($$o0));
-let $$l5 = eU(e => e($$o0).initCompletedPromise);
-let $$u3 = eU(0);
-let $$c1 = eU(!1);
+let $$_2 = atom(e => e($$o0));
+let $$l5 = atom(e => e($$o0).initCompletedPromise);
+let $$u3 = atom(0);
+let $$c1 = atom(!1);
 export const MQ = $$o0;
 export const UY = $$c1;
 export const ZJ = $$_2;

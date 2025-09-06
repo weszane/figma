@@ -1,17 +1,17 @@
-import { jsx } from "react/jsx-runtime";
-import { createContext, forwardRef, useRef, useCallback, useMemo, useState, useContext, useEffect } from "react";
-import { popLast, findPrevious, findNext, findNearest } from "../figma_app/656233";
-import { throwTypeError } from "../figma_app/465776";
-import { lQ } from "../905/934246";
-import { isNullish, assertNotNullish } from "../figma_app/95419";
-import { zN } from "../905/19536";
-import { k as _$$k } from "../905/651849";
-import { vN, xH } from "../905/63728";
-import { Ay } from "../figma_app/778880";
-import { D8 } from "../905/511649";
+import { createContext, forwardRef, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import { jsx } from 'react/jsx-runtime';
+import { zN } from '../905/19536';
+import { vN, xH } from '../905/63728';
+import { D8 } from '../905/511649';
+import { k as _$$k } from '../905/651849';
+import { lQ } from '../905/934246';
+import { assertNotNullish, isNullish } from '../figma_app/95419';
+import { throwTypeError } from '../figma_app/465776';
+import { findNearest, findNext, findPrevious, popLast } from '../figma_app/656233';
+import { BrowserInfo } from '../figma_app/778880';
 let h = {
   preventScroll: !1,
-  block: "nearest"
+  block: 'nearest'
 };
 let m = {
   supportHorizontalNavigation: !0,
@@ -50,12 +50,12 @@ class g {
       try {
         r = P(e, path, !0);
       } catch (e) {
-        _$$k.warn("Failed to add item to KeyboardNavigationProvider tree: ", t);
+        _$$k.warn('Failed to add item to KeyboardNavigationProvider tree: ', t);
         return;
       }
       let a = column ?? 0;
       let s = r.items[a]?.element;
-      s && s !== t.element && _$$k.warn("Overwriting item in KeyboardNavigationProvider tree. Existing item: ", r.items[a], " New item: ", t);
+      s && s !== t.element && _$$k.warn('Overwriting item in KeyboardNavigationProvider tree. Existing item: ', r.items[a], ' New item: ', t);
       r.items[a] = t;
     })(e, this);
     t && this.id && t.set(this.id, this);
@@ -71,15 +71,15 @@ class g {
       try {
         r = (n = P(e, path)).items[column || 0] ?? null;
       } catch (e) {
-        _$$k.warn("Item not found in KeyboardNavigationProvider tree: ", t);
+        _$$k.warn('Item not found in KeyboardNavigationProvider tree: ', t);
         return;
       }
       if (!r) {
-        _$$k.warn("Item not found in KeyboardNavigationProvider tree: ", t);
+        _$$k.warn('Item not found in KeyboardNavigationProvider tree: ', t);
         return;
       }
       if (r.element !== t.element) {
-        _$$k.warn("Item found in KeyboardNavigationProvider tree, but it does not match the expected item: ", r, t);
+        _$$k.warn('Item found in KeyboardNavigationProvider tree, but it does not match the expected item: ', r, t);
         return;
       }
       if (n.items[column || 0] = void 0, n.items.every(isNullish)) {
@@ -113,33 +113,33 @@ class g {
     this.setIsFauxFocused(!1, this);
   }
   simulateClick() {
-    this.fauxClick ? this.fauxClick() : this.element.dispatchEvent(new MouseEvent("click", {
+    this.fauxClick ? this.fauxClick() : this.element.dispatchEvent(new MouseEvent('click', {
       view: window,
       bubbles: !0,
       cancelable: !0
     }));
   }
   getItemAbove() {
-    return this.tree && R(this.tree, this, "up");
+    return this.tree && R(this.tree, this, 'up');
   }
   getItemBelow() {
     if (!this.tree) return null;
-    let e = R(this.tree, this, "down") || null;
+    let e = R(this.tree, this, 'down') || null;
     for (; e && e.navigationOptions.skipOnDownNavigation;) e = e.getItemBelow();
     return e;
   }
   getItemToTheLeft() {
-    return this.tree && O(this.tree, this, "left");
+    return this.tree && O(this.tree, this, 'left');
   }
   getItemToTheRight() {
     if (!this.tree) return null;
-    let e = O(this.tree, this, "right") || null;
+    let e = O(this.tree, this, 'right') || null;
     for (; e && e.navigationOptions.skipOnRightNavigation;) e = e.getItemToTheRight();
     return e;
   }
 }
 let f = createContext(null);
-let $$E4 = forwardRef(function ({
+let $$E4 = forwardRef(({
   onKeyDown: e,
   allowVim: t = !1,
   disabled: r,
@@ -153,9 +153,9 @@ let $$E4 = forwardRef(function ({
   useDisplayContents: h,
   stopPropagationOnEventHandle: m = !1,
   ...g
-}, E) {
+}, E) => {
   let y = useRef({
-    type: "parent",
+    type: 'parent',
     children: []
   });
   let b = useRef(new Map());
@@ -205,7 +205,9 @@ let $$E4 = forwardRef(function ({
         P(r);
         let e = D(y.current, n, a);
         e ? e?.focus() : n.getItemBelow()?.focus();
-      } else w.current && w.current.fauxFocus();
+      } else {
+        w.current && w.current.fauxFocus();
+      }
     } else if ($$A7(o, t, u)) {
       if (i && i.navigationOptions.supportHorizontalNavigation && !p) {
         P(r);
@@ -226,7 +228,9 @@ let $$E4 = forwardRef(function ({
         let e = D(y.current, n, d);
         e ? e?.focus() : n.getItemToTheRight()?.focus();
       }
-    } else "Enter" === o ? i && !p && (P(r), i.navigationOptions.simulateClickOnEnter && i.simulateClick()) : "Escape" === o && (n || i) && (P(r), n && n.blur(), i && i.fauxBlur());
+    } else {
+      o === 'Enter' ? i && !p && (P(r), i.navigationOptions.simulateClickOnEnter && i.simulateClick()) : o === 'Escape' && (n || i) && (P(r), n && n.blur(), i && i.fauxBlur());
+    }
     e?.(r);
   }, [c, t, e, p, s, a, l, d, P]);
   let F = useMemo(() => ({
@@ -250,7 +254,7 @@ let $$E4 = forwardRef(function ({
     value: F,
     children: jsx(D8, {
       style: h ? {
-        display: "contents"
+        display: 'contents'
       } : void 0,
       onKeyDown: r ? e : M,
       forwardedRef: E,
@@ -275,9 +279,9 @@ export function $$y0({
   let m = zN(e);
   let E = zN(n);
   let y = zN(h);
-  if (0 === m.length) throw Error("Path must be non-empty");
-  if (m.some(e => e < 0)) throw Error("All path indices must be non-negative");
-  if (null != t && t < 0) throw Error("Column must be non-negative");
+  if (m.length === 0) throw new Error('Path must be non-empty');
+  if (m.some(e => e < 0)) throw new Error('All path indices must be non-negative');
+  if (t != null && t < 0) throw new Error('Column must be non-negative');
   let [b, T] = useState(void 0);
   let [I, S] = useState(!1);
   let [v, A] = useState(!1);
@@ -291,17 +295,17 @@ export function $$y0({
     onFauxBlurItem,
     setDefaultFauxFocusedItem,
     useKeyNavFauxFocusSync
-  } = assertNotNullish(useContext(f), "Must use `useKeyboardNavigationItem` inside `<KeyboardNavigationProvider>");
+  } = assertNotNullish(useContext(f), 'Must use `useKeyboardNavigationItem` inside `<KeyboardNavigationProvider>');
   useEffect(() => {
     if (b && !_) {
       let e = () => S(!0);
       let t = () => S(!1);
-      b.addEventListener("focus", e);
-      b.addEventListener("blur", t);
+      b.addEventListener('focus', e);
+      b.addEventListener('blur', t);
       b === document.activeElement && e();
       return () => {
-        b.removeEventListener("focus", e);
-        b.removeEventListener("blur", t);
+        b.removeEventListener('focus', e);
+        b.removeEventListener('blur', t);
         b === document.activeElement && t();
       };
     }
@@ -311,7 +315,7 @@ export function $$y0({
   }, [c, onFauxBlurItem]);
   let M = useCallback(e => {
     A(t => (t || (o?.(), onFauxFocusItem(e, () => {
-      null !== x.current && clearTimeout(x.current);
+      x.current !== null && clearTimeout(x.current);
       x.current = setTimeout(() => {
         k(e);
       }, 0);
@@ -321,9 +325,9 @@ export function $$y0({
     e ? M(t) : k(t);
   }, [M, k]);
   useEffect(() => () => {
-    null !== x.current && clearTimeout(x.current);
+    x.current !== null && clearTimeout(x.current);
   }, []);
-  let j = useMemo(() => null == b || _ ? null : new g({
+  let j = useMemo(() => b == null || _ ? null : new g({
     id: r,
     path: m,
     column: t,
@@ -376,20 +380,20 @@ export function $$y0({
 export function $$b6() {
   let {
     lookupMap
-  } = assertNotNullish(useContext(f), "Must use `useKeyboardNavigationLookupMap` inside `<KeyboardNavigationProvider>");
+  } = assertNotNullish(useContext(f), 'Must use `useKeyboardNavigationLookupMap` inside `<KeyboardNavigationProvider>');
   return useCallback(t => lookupMap.get(t), [lookupMap]);
 }
-export function $$T8(e = "real") {
+export function $$T8(e = 'real') {
   let {
     blurItem,
     fauxBlurItem
-  } = assertNotNullish(useContext(f), "Must use `useBlurFocusedItem` inside `<KeyboardNavigationProvider>");
+  } = assertNotNullish(useContext(f), 'Must use `useBlurFocusedItem` inside `<KeyboardNavigationProvider>');
   return useCallback(() => {
     switch (e) {
-      case "real":
+      case 'real':
         blurItem();
         break;
-      case "faux":
+      case 'faux':
         fauxBlurItem();
         break;
       default:
@@ -402,13 +406,15 @@ export function $$I2({
 } = {}) {
   let {
     tree
-  } = assertNotNullish(useContext(f), "Must use `useFocusFirstItem` inside `<KeyboardNavigationProvider>");
+  } = assertNotNullish(useContext(f), 'Must use `useFocusFirstItem` inside `<KeyboardNavigationProvider>');
   return useCallback(() => {
     let r = function e(t) {
-      if ("leaf" === t.type) return t.items.find(e => null != e) ?? null;
-      for (let r of t.children) if (r) {
-        let t = e(r);
-        if (t) return t;
+      if (t.type === 'leaf') return t.items.find(e => e != null) ?? null;
+      for (let r of t.children) {
+        if (r) {
+          let t = e(r);
+          if (t) return t;
+        }
       }
       return null;
     }(tree);
@@ -420,41 +426,41 @@ export function $$I2({
 export function $$S3(e, t) {
   let r = k(e);
   let n = vN(e, xH.CONTROL);
-  let i = Ay.mac && n;
-  return "ArrowUp" === r || "KeyK" === r && t && N() || i && "KeyP" === r;
+  let i = BrowserInfo.mac && n;
+  return r === 'ArrowUp' || r === 'KeyK' && t && N() || i && r === 'KeyP';
 }
 export function $$v1(e, t) {
   let r = k(e);
   let n = vN(e, xH.CONTROL);
-  let i = Ay.mac && n;
-  return "ArrowDown" === r || "KeyJ" === r && t && N() || i && "KeyN" === r;
+  let i = BrowserInfo.mac && n;
+  return r === 'ArrowDown' || r === 'KeyJ' && t && N() || i && r === 'KeyN';
 }
 export function $$A7(e, t, r = !1) {
-  return "ArrowLeft" === e && C(r) || "KeyH" === e && t && N();
+  return e === 'ArrowLeft' && C(r) || e === 'KeyH' && t && N();
 }
 export function $$x5(e, t, r = !1) {
-  return "ArrowRight" === e && C(r) || "KeyL" === e && t && N();
+  return e === 'ArrowRight' && C(r) || e === 'KeyL' && t && N();
 }
 function N() {
   return !w(document.activeElement);
 }
 function C(e) {
   let t = document.activeElement;
-  return !w(t) || !!e || (t instanceof HTMLDivElement ? "" === t.textContent : "" === t.value);
+  return !w(t) || !!e || (t instanceof HTMLDivElement ? t.textContent === '' : t.value === '');
 }
 function w(e) {
-  return !!e && (e instanceof HTMLInputElement || e instanceof HTMLTextAreaElement) || e instanceof HTMLDivElement && "true" === e.contentEditable;
+  return !!e && (e instanceof HTMLInputElement || e instanceof HTMLTextAreaElement) || e instanceof HTMLDivElement && e.contentEditable === 'true';
 }
 function O(e, {
   path: t,
   column: r
 }, n) {
-  if (null == r) return;
+  if (r == null) return;
   let i = P(e, t);
-  return ("left" === n ? findPrevious : findNext)(i.items, r) || R(e, {
+  return (n === 'left' ? findPrevious : findNext)(i.items, r) || R(e, {
     path: t,
-    column: "left" === n ? 1 / 0 : -1
-  }, "left" === n ? "up" : "down");
+    column: n === 'left' ? 1 / 0 : -1
+  }, n === 'left' ? 'up' : 'down');
 }
 function R(e, {
   path: t,
@@ -464,18 +470,18 @@ function R(e, {
     let s = t.slice(0, i);
     let o = t[i];
     let l = L(e, s);
-    let d = ("up" === n ? findPrevious : findNext)(l.children, o);
+    let d = (n === 'up' ? findPrevious : findNext)(l.children, o);
     if (d) {
-      let e = ("up" === n ? function e(t) {
-        if ("leaf" === t.type) return t;
+      let e = (n === 'up' ? function e(t) {
+        if (t.type === 'leaf') return t;
         let r = findPrevious(t.children, t.children.length);
         if (r) return e(r);
-        throw Error("Expected a node but got nothing");
+        throw new Error('Expected a node but got nothing');
       } : function e(t) {
-        if ("leaf" === t.type) return t;
+        if (t.type === 'leaf') return t;
         let r = findNext(t.children, -1);
         if (r) return e(r);
-        throw Error("Expected a node but got nothing");
+        throw new Error('Expected a node but got nothing');
       })(d);
       return findNearest(e.items, r || 0);
     }
@@ -485,16 +491,18 @@ function L(e, t, r = !1) {
   for (let n of t) {
     let t = e.children[n];
     if (t) {
-      if ("leaf" === t.type) throw Error("Expected a parent but got a leaf");
+      if (t.type === 'leaf') throw new Error('Expected a parent but got a leaf');
       e = t;
     } else if (r) {
       let t = {
-        type: "parent",
+        type: 'parent',
         children: []
       };
       e.children[n] = t;
       e = t;
-    } else throw Error("Expected a parent but got nothing");
+    } else {
+      throw new Error('Expected a parent but got nothing');
+    }
   }
   return e;
 }
@@ -503,23 +511,23 @@ function P(e, t, r = !1) {
   let s = L(e, n, r);
   let o = s.children[i];
   if (o) {
-    if ("parent" !== o.type) return o;
-    throw Error("Expected a parent but got a leaf");
+    if (o.type !== 'parent') return o;
+    throw new Error('Expected a parent but got a leaf');
   }
   if (r) {
     let e = {
-      type: "leaf",
+      type: 'leaf',
       items: []
     };
     s.children[i] = e;
     return e;
   }
-  throw Error("Expected a leaf but got nothing");
+  throw new Error('Expected a leaf but got nothing');
 }
 function D(e, t, r) {
   try {
-    var n;
-    var i;
+    let n;
+    let i;
     let a = r?.(t);
     return a && (n = a.path, i = a.column, P(e, n).items[i ?? 0]);
   } catch (e) {}

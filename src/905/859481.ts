@@ -2,10 +2,10 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { d as _$$d } from "../905/976845";
 import { A as _$$A } from "../905/891805";
 import { getFeatureFlags } from "../905/601108";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Pt } from "../figma_app/806412";
 import { E as _$$E } from "../905/277716";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Y5 } from "../figma_app/455680";
 import { hS, gl, BI } from "../905/216495";
 import { Gt } from "../905/275640";
@@ -47,11 +47,11 @@ function j(e) {
   let d = jsx("span", {
     className: vc,
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": _$$P(_$$t("fullscreen.properties_panel.fill.start_point")),
+    "data-tooltip": _$$P(getI18nString("fullscreen.properties_panel.fill.start_point")),
     children: jsxs(SO, {
-      ariaLabel: _$$t("fullscreen.properties_panel.fill.start_point"),
+      ariaLabel: getI18nString("fullscreen.properties_panel.fill.start_point"),
       blurOnChange: !0,
-      "data-tooltip": _$$t("fullscreen.properties_panel.fill.start_point"),
+      "data-tooltip": getI18nString("fullscreen.properties_panel.fill.start_point"),
       "data-tooltip-type": Ib.TEXT,
       dispatch: t,
       dropdownOverride: s(e.leftEndCap),
@@ -103,10 +103,10 @@ function j(e) {
         glU && (glU.swapStrokeEndCaps(), glU.commit());
       });
     },
-    "aria-label": _$$t("fullscreen.properties_panel.fill.swap_start_and_end_points"),
+    "aria-label": getI18nString("fullscreen.properties_panel.fill.swap_start_and_end_points"),
     htmlAttributes: {
       onMouseDown: dG,
-      "data-tooltip": _$$t("fullscreen.properties_panel.fill.swap_start_and_end_points"),
+      "data-tooltip": getI18nString("fullscreen.properties_panel.fill.swap_start_and_end_points"),
       "data-tooltip-type": Ib.TEXT
     },
     children: jsx(_$$F, {})
@@ -119,9 +119,9 @@ function j(e) {
   let _ = jsx("span", {
     className: Is,
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": _$$P(_$$t("fullscreen.properties_panel.fill.end_point")),
+    "data-tooltip": _$$P(getI18nString("fullscreen.properties_panel.fill.end_point")),
     children: jsxs(SO, {
-      ariaLabel: _$$t("fullscreen.properties_panel.fill.end_point"),
+      ariaLabel: getI18nString("fullscreen.properties_panel.fill.end_point"),
       blurOnChange: !0,
       dispatch: t,
       dropdownAlignment: "right",
@@ -168,9 +168,9 @@ function j(e) {
     })
   });
   return e.isUI3 ? jsx(fn, {
-    leftLabel: tx("fullscreen.properties_panel.section_stroke.label_startPoint"),
+    leftLabel: renderI18nText("fullscreen.properties_panel.section_stroke.label_startPoint"),
     leftInput: d,
-    rightLabel: tx("fullscreen.properties_panel.section_stroke.label_endPoint"),
+    rightLabel: renderI18nText("fullscreen.properties_panel.section_stroke.label_endPoint"),
     rightInput: _,
     icon: m
   }) : jsxs(Fragment, {
@@ -194,10 +194,10 @@ function V(e) {
   return jsx(dL, {
     "data-testid": "stroke-controls-row",
     ref: e.forwardedRef,
-    leftLabel: tx("properties.label.position"),
+    leftLabel: renderI18nText("properties.label.position"),
     leftInput: jsx(au, {
       onChange: (...t) => {
-        getFeatureFlags().ce_properties_panel_tracking && sx("editor-paints-panel-stroke-change", {
+        getFeatureFlags().ce_properties_panel_tracking && trackEventAnalytics("editor-paints-panel-stroke-change", {
           key: "align"
         });
         e.onBordersAlignmentChange(...t);
@@ -209,12 +209,12 @@ function V(e) {
       recordingKey: Pt(e, "align"),
       disabled: !r
     }),
-    rightLabel: tx("fullscreen.properties_panel.section_stroke.label_weight"),
+    rightLabel: renderI18nText("fullscreen.properties_panel.section_stroke.label_weight"),
     rightInput: jsx(v9, {
       borderOption: e.individualBorderOption,
       strokeWeight: e.borderSharedWeight,
       onChange: (...t) => {
-        getFeatureFlags().ce_properties_panel_tracking && sx("editor-paints-panel-stroke-change", {
+        getFeatureFlags().ce_properties_panel_tracking && trackEventAnalytics("editor-paints-panel-stroke-change", {
           key: "weight"
         });
         e.onNonPaintsChange(...t);
@@ -256,10 +256,10 @@ function G({
       onClick: l,
       disabled: e,
       recordingKey: i,
-      "aria-label": _$$t("fullscreen.properties_panel.fill.advanced_stroke_settings"),
+      "aria-label": getI18nString("fullscreen.properties_panel.fill.advanced_stroke_settings"),
       htmlAttributes: {
         onMouseDown: o,
-        "data-tooltip": _$$t("fullscreen.properties_panel.fill.advanced_stroke_settings"),
+        "data-tooltip": getI18nString("fullscreen.properties_panel.fill.advanced_stroke_settings"),
         "data-tooltip-type": Ib.TEXT
       },
       children: jsx(_$$A, {})

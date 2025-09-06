@@ -5,9 +5,9 @@ import { debug } from "../figma_app/465776";
 import { RR } from "../figma_app/338442";
 import { Ez5, NLJ, QOV, glU, ibQ, yFm, mrc } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { parsePxInt } from "../figma_app/783094";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { c1, qP, Pt } from "../figma_app/806412";
 import { Ku, sT } from "../figma_app/740163";
 import { m as _$$m } from "../905/571439";
@@ -35,7 +35,7 @@ import { K as _$$K } from "../905/443068";
 import { A as _$$A } from "../905/251970";
 import { nc } from "../905/189185";
 import { ZC } from "../figma_app/39751";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Y5 } from "../figma_app/455680";
 import { h as _$$h } from "../905/943864";
 import { p8 } from "../figma_app/722362";
@@ -45,7 +45,7 @@ import { r as _$$r } from "../figma_app/711157";
 import { fn, sY } from "../figma_app/811257";
 import { V as _$$V } from "../905/823363";
 import { $Y, sI, sH, Yq, Ps, be } from "../figma_app/183248";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { g as _$$g } from "../905/151072";
 import { Ib } from "../905/129884";
 import { $j } from "../figma_app/178475";
@@ -65,7 +65,7 @@ var a;
 var s;
 var o;
 function er(e, t) {
-  return xN(e, 0) ? (x1("clampScaleValue", "scale is 0", {
+  return xN(e, 0) ? (logError("clampScaleValue", "scale is 0", {
     originalValue: e,
     newValue: t
   }), $Y) : qE(t / e, sI, sH);
@@ -106,7 +106,7 @@ function ec(e) {
   let f = gl(m) ? ed : {};
   return jsx($j, {
     className: _$$z,
-    "data-tooltip": "width" === property ? _$$t("fullscreen.properties_panel.transform_panel.width") : _$$t("fullscreen.properties_panel.transform_panel.height"),
+    "data-tooltip": "width" === property ? getI18nString("fullscreen.properties_panel.transform_panel.width") : getI18nString("fullscreen.properties_panel.transform_panel.height"),
     "data-tooltip-type": Ib.TEXT,
     dataTestId: `scale_panel.${property}`,
     disabled,
@@ -133,7 +133,7 @@ function ec(e) {
     ...f,
     children: jsx("span", {
       className: `${QK} svg`,
-      children: "width" === property ? tx("fullscreen.properties_panel.transform_panel.w") : tx("fullscreen.properties_panel.transform_panel.h")
+      children: "width" === property ? renderI18nText("fullscreen.properties_panel.transform_panel.w") : renderI18nText("fullscreen.properties_panel.transform_panel.h")
     })
   });
 }
@@ -175,9 +175,9 @@ function e_(e) {
     ...e
   });
   return jsx(fn, {
-    leftLabel: _$$t("fullscreen.properties_panel.transform_panel.width"),
+    leftLabel: getI18nString("fullscreen.properties_panel.transform_panel.width"),
     leftInput: t,
-    rightLabel: _$$t("fullscreen.properties_panel.transform_panel.height"),
+    rightLabel: getI18nString("fullscreen.properties_panel.transform_panel.height"),
     rightInput: r,
     icon: null
   });
@@ -369,7 +369,7 @@ function ey(e) {
           selectionCount: Object.keys(t).length
         });
       },
-      "aria-label": _$$t("fullscreen.scale_panel.close"),
+      "aria-label": getI18nString("fullscreen.scale_panel.close"),
       children: jsx(_$$A, {})
     })
   });
@@ -441,11 +441,11 @@ function ey(e) {
     "data-testid": `scale_panel.state.${L ? "hidden" : P ? "disabled" : "enabled"}`,
     className: $1,
     children: [jsx(_$$r, {
-      titleTx: tx("fullscreen.scale_panel.scale"),
+      titleTx: renderI18nText("fullscreen.scale_panel.scale"),
       icon: ev
     }), eN, jsx(sY, {
-      leftLabel: _$$t("fullscreen.scale_panel.scale"),
-      rightLabel: _$$t("fullscreen.scale_panel.anchor_point"),
+      leftLabel: getI18nString("fullscreen.scale_panel.scale"),
+      rightLabel: getI18nString("fullscreen.scale_panel.anchor_point"),
       topLeftInput: eA,
       bottomLeftInput: null,
       rightInput: ex,
@@ -539,7 +539,7 @@ let eI = memo(function ({
       onClick: () => {
         eT();
       },
-      "aria-label": _$$t("fullscreen.scale_panel.close"),
+      "aria-label": getI18nString("fullscreen.scale_panel.close"),
       children: jsx(_$$A, {})
     })
   });
@@ -575,11 +575,11 @@ let eI = memo(function ({
     "data-testid": `scale_panel.state.${r ? "disabled" : "enabled"}`,
     className: $1,
     children: [jsx(_$$r, {
-      titleTx: tx("fullscreen.scale_panel.scale"),
+      titleTx: renderI18nText("fullscreen.scale_panel.scale"),
       icon: b
     }), S, jsx(sY, {
-      leftLabel: _$$t("fullscreen.scale_panel.scale"),
-      rightLabel: _$$t("fullscreen.scale_panel.anchor_point"),
+      leftLabel: getI18nString("fullscreen.scale_panel.scale"),
+      rightLabel: getI18nString("fullscreen.scale_panel.anchor_point"),
       topLeftInput: v,
       bottomLeftInput: null,
       rightInput: I,
@@ -867,11 +867,11 @@ export let $$eD3 = s.ConnectedGridsPanel;
     } = sT();
     let ey = WH(inheritTextStyleKey ?? null, styleIdForText ?? null, "TEXT");
     let eb = _$$L();
-    let eT = _$$R(e => t(e, Sh(e), RR.TEXT));
+    let eT = selectWithShallowEqual(e => t(e, Sh(e), RR.TEXT));
     let eI = SG(["TEXT_DATA"]).data ?? [];
     let eS = R1().variableConsumptionMap;
     let eA = JG();
-    let ex = md($i) === JJ.TEXT_PANEL;
+    let ex = useAtomWithSubscription($i) === JJ.TEXT_PANEL;
     return fontFamily && fontStyle ? jsx(_$$J, {
       areFontStylesUniformOrOnlyMixedDueToTextStyleOverrides,
       bigNudgeAmount,

@@ -10,7 +10,7 @@ import { tH } from "../905/751457";
 import { Us, vd } from "../figma_app/637027";
 import { P as _$$P } from "../905/347284";
 import { B as _$$B } from "../905/714743";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { sx } from "../figma_app/307841";
 import { sf } from "../905/929976";
 import { Ce } from "../905/156213";
@@ -60,7 +60,7 @@ function V(e) {
           href: "https://www.figma.com/pricing/#cid-57mfNh6t0Xo7z8Q95Ww9ZV",
           target: "_blank",
           trusted: !0,
-          children: tx("org_upgrade.single_team.see_all_features")
+          children: renderI18nText("org_upgrade.single_team.see_all_features")
         })
       }), e.plan === FPlanNameType.ORG && jsx(vd, {
         onClick: e.onUpgrade,
@@ -69,7 +69,7 @@ function V(e) {
           trackingDescriptor: _$$c.UPGRADE_TO_ORGANIZATION,
           upsellSource: e.upsellSource
         },
-        children: tx("org_upgrade.single_team.upgrade_to_an_organization")
+        children: renderI18nText("org_upgrade.single_team.upgrade_to_an_organization")
       })]
     })
   });
@@ -91,7 +91,7 @@ export function $$$1(e) {
       className: y3,
       children: [jsxs("p", {
         className: Q$,
-        children: [tx("plan_details.figma"), jsx("div", {
+        children: [renderI18nText("plan_details.figma"), jsx("div", {
           className: gt,
           children: jsx(G, {})
         })]
@@ -104,7 +104,7 @@ export function $$$1(e) {
     }), e.prices[ud.DEV_MODE] && jsxs("div", {
       className: y3,
       children: [jsx("p", {
-        children: tx("plan_details.dev_mode_only")
+        children: renderI18nText("plan_details.dev_mode_only")
       }), jsx("div", {
         children: jsx("p", {
           className: G8,
@@ -114,7 +114,7 @@ export function $$$1(e) {
     }), jsxs("div", {
       className: y3,
       children: [jsx("p", {
-        children: tx("plan_details.fig_jam")
+        children: renderI18nText("plan_details.fig_jam")
       }), jsx("div", {
         children: jsx("p", {
           className: G8,
@@ -181,7 +181,7 @@ function U(e) {
           className: Dz,
           children: jsx("div", {
             className: hx,
-            children: tx("org_upgrade.single_team.get_more_out_of_figma_as_you_grow")
+            children: renderI18nText("org_upgrade.single_team.get_more_out_of_figma_as_you_grow")
           })
         }), jsx(Jn, {
           className: _$$b,
@@ -192,14 +192,14 @@ function U(e) {
         className: d()(yH, Mm),
         children: [jsx($$$1, {
           dataTestId: "pro-prices",
-          name: _$$t("org_upgrade.single_team.professional_plan"),
-          subtitle: _$$t("org_upgrade.single_team.price_when_billed_annually"),
+          name: getI18nString("org_upgrade.single_team.professional_plan"),
+          subtitle: getI18nString("org_upgrade.single_team.price_when_billed_annually"),
           prices: u.dict(e => `${L.formatMoney(P[e].amount)}`),
           padding: "16px 31px 16px 36px"
         }), jsx($$$1, {
           dataTestId: "org-prices",
-          name: _$$t("org_upgrade.single_team.organization_plan"),
-          subtitle: _$$t("org_upgrade.single_team.annual_billing_only"),
+          name: getI18nString("org_upgrade.single_team.organization_plan"),
+          subtitle: getI18nString("org_upgrade.single_team.annual_billing_only"),
           prices: Oq.dict(e => `${L.formatMoney(M[e]?.amount ?? 0)}`),
           padding: "16px 32px 16px 33px"
         })]
@@ -210,29 +210,29 @@ function U(e) {
         children: [jsx(V, {
           plan: FPlanNameType.PRO,
           features: [{
-            text: _$$t("org_upgrade.single_team.unlimited_design_files_and_projects_in_one_team")
+            text: getI18nString("org_upgrade.single_team.unlimited_design_files_and_projects_in_one_team")
           }, {
-            text: _$$t("org_upgrade.single_team.design_library_within_one_team")
+            text: getI18nString("org_upgrade.single_team.design_library_within_one_team")
           }, {
-            text: _$$t("org_upgrade.single_team.audio_conversations_in_files")
+            text: getI18nString("org_upgrade.single_team.audio_conversations_in_files")
           }]
         }), jsx(V, {
           plan: FPlanNameType.ORG,
           features: [{
-            text: _$$t("org_upgrade.single_team.everything_in_professional_plus"),
+            text: getI18nString("org_upgrade.single_team.everything_in_professional_plus"),
             isArrow: !0
           }, {
-            text: _$$t("org_upgrade.single_team.unlimited_teams_and_unlimited_projects")
+            text: getI18nString("org_upgrade.single_team.unlimited_teams_and_unlimited_projects")
           }, {
-            text: _$$t("org_upgrade.single_team.cross_team_design_libraries_and_fonts")
+            text: getI18nString("org_upgrade.single_team.cross_team_design_libraries_and_fonts")
           }, {
-            text: _$$t("org_upgrade.single_team.control_file_sharing_inside_and_outside_of_your_organization")
+            text: getI18nString("org_upgrade.single_team.control_file_sharing_inside_and_outside_of_your_organization")
           }, {
-            text: _$$t("org_upgrade.single_team.single_sign_on_sso_integration")
+            text: getI18nString("org_upgrade.single_team.single_sign_on_sso_integration")
           }, {
-            text: _$$t("org_upgrade.single_team.private_plugins_and_plugin_management")
+            text: getI18nString("org_upgrade.single_team.private_plugins_and_plugin_management")
           }, {
-            text: _$$t("org_upgrade.single_team.full_content_ownership")
+            text: getI18nString("org_upgrade.single_team.full_content_ownership")
           }],
           onUpgrade: () => {
             B();
@@ -256,7 +256,7 @@ export let $$z0 = kp(function (e) {
     fallback: jsx(K, {}),
     children: jsx(Suspense, {
       fallback: jsx(_$$N, {
-        hiddenTitle: tx("org_upgrade.single_team.get_more_out_of_figma_as_you_grow"),
+        hiddenTitle: renderI18nText("org_upgrade.single_team.get_more_out_of_figma_as_you_grow"),
         estimatedWidth: 586,
         estimatedHeight: 586
       }),

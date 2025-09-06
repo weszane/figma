@@ -14,9 +14,9 @@ import { R } from "../905/82603";
 import { RR } from "../figma_app/338442";
 import { J0O, Z_n, uXg, glU, rXF, j0r } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { iR } from "../figma_app/476572";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Oo } from "../905/709171";
 import { gl, oV, hS } from "../905/216495";
 import { nD } from "../905/92359";
@@ -56,7 +56,7 @@ export function $$R34(e, t = !1) {
   return jsx(r, {});
 }
 export function $$L8(e, t, r, n) {
-  e && sx("ds_component_props_def_create_modal_open", {
+  e && trackEventAnalytics("ds_component_props_def_create_modal_open", {
     product_component_guid: e.guid,
     product_component_is_state_group: e.isStateGroup,
     is_bottoms_up_creation: t,
@@ -67,19 +67,19 @@ export function $$L8(e, t, r, n) {
 export function $$P33(e) {
   switch (e) {
     case J0O.BOOL:
-      return _$$t("design_systems.component_properties.boolean");
+      return getI18nString("design_systems.component_properties.boolean");
     case J0O.TEXT:
-      return _$$t("design_systems.component_properties.text");
+      return getI18nString("design_systems.component_properties.text");
     case J0O.INSTANCE_SWAP:
-      return _$$t("design_systems.component_properties.instance_swap");
+      return getI18nString("design_systems.component_properties.instance_swap");
     case J0O.VARIANT:
-      return _$$t("design_systems.component_properties.variant");
+      return getI18nString("design_systems.component_properties.variant");
     case J0O.NUMBER:
-      return _$$t("design_systems.component_properties.number");
+      return getI18nString("design_systems.component_properties.number");
     case J0O.IMAGE:
-      return _$$t("design_systems.component_properties.image");
+      return getI18nString("design_systems.component_properties.image");
     case J0O.SLOT:
-      return _$$t("design_systems.component_properties.slot");
+      return getI18nString("design_systems.component_properties.slot");
   }
 }
 export function $$D19(e, t) {
@@ -131,7 +131,7 @@ export function $$M9(e) {
     case J0O.INSTANCE_SWAP:
       return null;
     case J0O.VARIANT:
-      return _$$t("design_systems.states_panel.default_property_value");
+      return getI18nString("design_systems.states_panel.default_property_value");
     case J0O.NUMBER:
       return "0";
     case J0O.IMAGE:
@@ -151,7 +151,7 @@ export function $$F0(e, t) {
   }
 }
 export let $$j12 = {
-  format: e => e ? _$$t("design_systems.component_properties.boolean_true") : _$$t("design_systems.component_properties.boolean_false"),
+  format: e => e ? getI18nString("design_systems.component_properties.boolean_true") : getI18nString("design_systems.component_properties.boolean_false"),
   isEqual: (e, t) => e === t
 };
 export function $$U32(e, t) {
@@ -163,11 +163,11 @@ export function $$B22(e, t) {
   switch (e) {
     case uXg.CONFLICTING_NAMES_ERROR:
     case uXg.CONFLICTING_NAMES_WITH_VARIANT_ERROR:
-      return _$$t("design_systems.component_properties.error_conflicting_name");
+      return getI18nString("design_systems.component_properties.error_conflicting_name");
     case uXg.UNUSED_DEF_ERROR:
-      return _$$t("design_systems.component_properties.error_unused_property");
+      return getI18nString("design_systems.component_properties.error_unused_property");
     default:
-      return t ? _$$t("design_systems.component_properties.has_unpublished_preferred_values") : "";
+      return t ? getI18nString("design_systems.component_properties.has_unpublished_preferred_values") : "";
   }
 }
 export function $$G30(e, t) {

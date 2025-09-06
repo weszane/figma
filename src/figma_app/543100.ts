@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { useSelector } from "../vendor/514228";
 import { throwTypeError, debug } from "../figma_app/465776";
-import { eU, md, Iz } from "../figma_app/27355";
+import { atom, useAtomWithSubscription, createRemovableAtomFamily } from "../figma_app/27355";
 import { resourceUtils } from "../905/989992";
 import { oA } from "../905/723791";
 import { LH, oj, mr, CE, yR } from "../905/760074";
@@ -53,7 +53,7 @@ export function $$S11(e) {
   let t = LH(e.repo, e.branches, e.selectedBranchKey);
   return t ? t : (e.repo.default_file_key ? LH(e.repo, e.branches, e.repo.default_file_key) : null) || e.branches[0];
 }
-export let $$v2 = eU(null);
+export let $$v2 = atom(null);
 export function $$A9(e) {
   let t = useSelector(e => e.tileSelect);
   return useMemo(() => e.filter(e => {
@@ -409,7 +409,7 @@ export class $$x1 {
     }
   }
   static useIsRenaming(e) {
-    let t = md($$v2);
+    let t = useAtomWithSubscription($$v2);
     return $$x1.isRenaming(e, t);
   }
   static isRenaming(e, t) {
@@ -561,7 +561,7 @@ export function $$N4(e) {
   let t = $$x1.getFileKeyForAutosaveChanges(e);
   return I4(t || "");
 }
-let $$C7 = Iz(e => eU(t => "FILE" === e.type || "PINNED_FILE" === e.type ? t(sMs.Query({
+let $$C7 = createRemovableAtomFamily(e => atom(t => "FILE" === e.type || "PINNED_FILE" === e.type ? t(sMs.Query({
   key: e.file.key
 })).transform(e => !!e.file?.hasPermission) : "REPO" === e.type ? t(cfd.Query({
   repoId: e.repo.id

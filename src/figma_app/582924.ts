@@ -1,7 +1,7 @@
 import { kul, h3O, DPQ, NUh } from "../figma_app/763686";
-import { zl } from "../figma_app/27355";
-import { Lo } from "../905/714362";
-import { nl } from "../figma_app/257275";
+import { atomStoreManager } from "../figma_app/27355";
+import { logInfo } from "../905/714362";
+import { isInteractionPathCheck } from "../figma_app/897289";
 import { Y5 } from "../figma_app/455680";
 import { nc } from "../figma_app/474636";
 import { n as _$$n } from "../905/347702";
@@ -48,9 +48,9 @@ export function $$g0() {
   }));
 }
 export function $$f2(e) {
-  u || (u = function() {
+  u || (u = function () {
     try {
-      let e = new Blob(["(" + function() {
+      let e = new Blob(["(" + function () {
         onmessage = e => setTimeout(() => self.postMessage(""), e.data);
       } + ")()"], {
         type: "text/javascript"
@@ -71,7 +71,7 @@ export function $$f2(e) {
   }());
   p = e;
   _ || function e() {
-    p && (_ = !0, u(function() {
+    p && (_ = !0, u(function () {
       _ = !1;
       p && h3O.flush();
       e();
@@ -83,7 +83,7 @@ export function $$E9(e) {
   let r = $$v5(t);
   h3O.startLoadingAllPages(t, e);
   r.then(() => {
-    zl.set(nc, !1);
+    atomStoreManager.set(nc, !1);
   });
   return r;
 }
@@ -118,7 +118,7 @@ export function $$x11() {
   I.clear();
 }
 export function $$N4(e, t, r = DPQ.CONTAINING_PAGE) {
-  nl();
+  isInteractionPathCheck();
   let i = $$S1();
   let a = $$v5(i);
   let o = r === DPQ.PLUGIN;
@@ -127,7 +127,7 @@ export function $$N4(e, t, r = DPQ.CONTAINING_PAGE) {
 }
 export function $$C10(e, t, r = DPQ.CONTAINING_PAGE) {
   if (0 === e.length) return Promise.resolve();
-  nl();
+  isInteractionPathCheck();
   let i = $$S1();
   let a = $$v5(i);
   let o = r === DPQ.PLUGIN;
@@ -142,7 +142,7 @@ export function $$O12(e) {
     let r = $$S1();
     return new Promise(async (t, i) => {
       e.$$delete("0:0");
-      Lo("Autosave", `Requesting dependencies for ${e.size} nodes while loading incrementally`, void 0, {
+      logInfo("Autosave", `Requesting dependencies for ${e.size} nodes while loading incrementally`, void 0, {
         logToConsole: NUh.ALWAYS
       });
       await oJ(kul.JOINED);
@@ -165,4 +165,4 @@ export const W5 = $$E9;
 export const WA = $$C10;
 export const Xk = $$x11;
 export const Xl = $$O12;
-export const mQ = $$w13; 
+export const mQ = $$w13;

@@ -1,6 +1,6 @@
 import { debug } from "../figma_app/465776";
 import { glU } from "../figma_app/763686";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Oo } from "../905/709171";
 import { ke, In, kH } from "../905/309735";
 import { PW } from "../figma_app/633080";
@@ -118,7 +118,7 @@ export function $$T15(e) {
   return e.type === PW.STYLE ? ke(e.name).length : e.level;
 }
 export function $$I2(e, t) {
-  Oo(e, t) && (glU.deleteNode(e.node_id), sx("Style Deleted", {
+  Oo(e, t) && (glU.deleteNode(e.node_id), trackEventAnalytics("Style Deleted", {
     styleType: e.style_type,
     from: "styleListContextMenu"
   }));

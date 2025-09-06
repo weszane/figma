@@ -1,9 +1,9 @@
 import { jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
-import { md, Rq, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, Rq, Xr } from "../figma_app/27355";
 import { h as _$$h } from "../905/207101";
 import { buildUploadUrl } from "../figma_app/169182";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { c as _$$c } from "../905/370443";
 import { e as _$$e } from "../905/621515";
 import { Sb } from "../figma_app/101956";
@@ -24,9 +24,9 @@ let w = r1(v);
 let S = r1(E);
 let j = r1("figjam_editor_onboarded");
 export function $$I3() {
-  let e = md(S);
-  let t = md(qe);
-  let i = md(rM);
+  let e = useAtomWithSubscription(S);
+  let t = useAtomWithSubscription(qe);
+  let i = useAtomWithSubscription(rM);
   let s = _$$e({
     overlay: QLv,
     priority: N.HIGH_PRIORITY_MODAL
@@ -45,18 +45,18 @@ export function $$I3() {
     targetKey: $$b1,
     onClose: s.complete,
     trackingContextName: e0.AI_TOPBAR_TOOLTIP,
-    title: tx("whiteboard.ai_onboarding.ai_templates_toolbar.title"),
-    description: tx("whiteboard.ai_onboarding.ai_templates_toolbar.description"),
+    title: renderI18nText("whiteboard.ai_onboarding.ai_templates_toolbar.title"),
+    description: renderI18nText("whiteboard.ai_onboarding.ai_templates_toolbar.description"),
     emphasized: !0
   });
 }
 export function $$k2({
   targetKey: e
 }) {
-  let t = md(Rq(Sb));
-  let i = md(T);
-  let n = md(w);
-  let p = md(j);
+  let t = useAtomWithSubscription(Rq(Sb));
+  let i = useAtomWithSubscription(T);
+  let n = useAtomWithSubscription(w);
+  let p = useAtomWithSubscription(j);
   let b = Xr(RC);
   let C = _$$e({
     overlay: xiH,
@@ -76,7 +76,7 @@ export function $$k2({
   });
   return jsx(rq, {
     arrowPosition: F_.LEFT_TITLE,
-    description: tx("whiteboard.ai_onboarding.new_file_modal.footer"),
+    description: renderI18nText("whiteboard.ai_onboarding.new_file_modal.footer"),
     isShowing: C.isShowing,
     media: jsx(_$$y, {
       src: buildUploadUrl("b306123ab827a626d46db70bcc5a74e9e76feacf"),
@@ -86,13 +86,13 @@ export function $$k2({
     onClose: E,
     onTargetLost: E,
     primaryCta: {
-      label: tx("rcs.got_it"),
+      label: renderI18nText("rcs.got_it"),
       type: "button",
       onClick: E,
       ctaTrackingDescriptor: _$$c.GOT_IT
     },
     targetKey: e,
-    title: tx("whiteboard.ai_onboarding.new_file_modal.title"),
+    title: renderI18nText("whiteboard.ai_onboarding.new_file_modal.title"),
     trackingContextName: e0.AI_MODAL_ONBOARDING_TOOLTIP,
     userFlagOnShow: v
   });

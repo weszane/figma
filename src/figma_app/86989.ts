@@ -2,13 +2,13 @@ import { useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
 import { getStorage } from "../905/657224";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { k as _$$k } from "../905/651849";
 import { debugState } from "../905/407919";
 import { Ay } from "../905/612521";
 import { Ts } from "../905/194276";
 import { s as _$$s } from "../905/573154";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { I as _$$I } from "../figma_app/4253";
 import { Dl } from "../figma_app/471982";
 import { QQ, V4, UO, WJ } from "../figma_app/808294";
@@ -84,7 +84,7 @@ export let $$D12 = _$$n((e, t, r, n, i, s) => {
           e(to({
             type: _$$x,
             data: {
-              headerText: _$$t("fullscreen.toolbar.log_in_to_do_more_with_figjam")
+              headerText: getI18nString("fullscreen.toolbar.log_in_to_do_more_with_figjam")
             }
           }));
         });
@@ -112,7 +112,7 @@ export function $$k10(e) {
     if (!e) return;
     let n = QQ(s);
     let i = m3(e);
-    if (sx("cmty_resource_usage_action", {
+    if (trackEventAnalytics("cmty_resource_usage_action", {
       resourceType: Dl(e),
       resourceId: e.id,
       profileId: r?.id,
@@ -127,7 +127,7 @@ export function $$k10(e) {
       usersCanPurchase,
       publishers
     } = V4(l, e);
-    if (sx("Checkout Flow Entered", {
+    if (trackEventAnalytics("Checkout Flow Entered", {
       resourceType: Dl(e),
       resourceId: e.id,
       numLoggedInAssociatedUsersThatCanPurchase: usersCanPurchase.length,
@@ -140,7 +140,7 @@ export function $$k10(e) {
       type: _$$I2,
       data: {
         onUserSelect: r => {
-          sx("Pre Purchase User Selector Modal - User Selected", {
+          trackEventAnalytics("Pre Purchase User Selector Modal - User Selected", {
             resourceType: Dl(e),
             resourceId: e.id,
             userIdForPurchase: r.id
@@ -168,7 +168,7 @@ export function $$F5(e) {
   let t = useDispatch();
   let r = _$$I(e);
   return useCallback(() => {
-    e && QQ(r) && (t(_$$s.flash(_$$t("community.buyer.redirecting_to_stripe"))), t(_$$v({})));
+    e && QQ(r) && (t(_$$s.flash(getI18nString("community.buyer.redirecting_to_stripe"))), t(_$$v({})));
   }, [e, r, t]);
 }
 export function $$j16(e, t) {

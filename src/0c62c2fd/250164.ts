@@ -5,7 +5,7 @@ import n from "classnames";
 import { Rs } from "../figma_app/288654";
 import { vd } from "../figma_app/637027";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Ce } from "../905/156213";
 import { FDomainVerificationStatusType } from "../figma_app/191312";
 import { Wt6, xS7 } from "../figma_app/43951";
@@ -64,7 +64,7 @@ export let $$b0 = memo(function (e) {
   };
   return jsxs(OJ, {
     onClose: L,
-    title: _$$t("change_vat_gst_id.input_id"),
+    title: getI18nString("change_vat_gst_id.input_id"),
     minWidth: 344,
     maxWidth: 344,
     fixedTop: !0,
@@ -81,20 +81,20 @@ export let $$b0 = memo(function (e) {
       children: jsx(_$$_, {
         color: _$$S.INFORMATION,
         rounded: !1,
-        text: _$$t("change_vat_gst_id.tax_id_verification_succeeded")
+        text: getI18nString("change_vat_gst_id.tax_id_verification_succeeded")
       })
     }), j === FDomainVerificationStatusType.UNVERIFIED && jsx("div", {
       "data-testid": "change-vat-gst-id-warning",
       children: jsx(_$$_, {
         color: _$$S.WARNING,
         rounded: !1,
-        text: _$$t("change_vat_gst_id.tax_id_verification_failed")
+        text: getI18nString("change_vat_gst_id.tax_id_verification_failed")
       })
     }), jsxs("div", {
       className: Dy,
       children: [jsx("p", {
         className: "change_vat_gst_id_modal--description--6gdSL",
-        children: tx("change_vat_gst_id.description")
+        children: renderI18nText("change_vat_gst_id.description")
       }), jsxs("form", {
         onSubmit: e => {
           e.preventDefault();
@@ -121,7 +121,7 @@ export let $$b0 = memo(function (e) {
             className: pL,
             type: "submit",
             disabled: !F,
-            children: tx("change_vat_gst_id.save_id")
+            children: renderI18nText("change_vat_gst_id.save_id")
           })
         })]
       })]

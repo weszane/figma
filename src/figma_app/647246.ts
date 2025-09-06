@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useEffect } from "react";
-import { eU, fp, md, zl } from "../figma_app/27355";
+import { atom, useAtomValueAndSetter, useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import { qd } from "../figma_app/39751";
 import { OC } from "../figma_app/386952";
 import { rt } from "../figma_app/615482";
@@ -18,7 +18,7 @@ let $$y4 = rt(!1);
 let b = rt(!1);
 let T = rt(!1);
 let I = rt("Blocks");
-let $$S6 = eU(e => {
+let $$S6 = atom(e => {
   let t = e(I);
   let r = e(OC);
   return Vj(r) ? t : "Libraries";
@@ -75,13 +75,13 @@ export function $$A10() {
     setIsSearching,
     setIsViewingRecents
   } = function () {
-    let [e, t] = fp(E);
-    let [r, a] = fp($$y4);
-    let [s, o] = fp(b);
+    let [e, t] = useAtomValueAndSetter(E);
+    let [r, a] = useAtomValueAndSetter($$y4);
+    let [s, o] = useAtomValueAndSetter(b);
     let {
       setLastNavAction
     } = ZX();
-    let d = md($$S6);
+    let d = useAtomWithSubscription($$S6);
     let {
       libraryKey: _libraryKey,
       pageId: _pageId,
@@ -133,9 +133,9 @@ export function $$A10() {
     lastActionWasBackSwipe
   } = ZX();
   let O = _$$q();
-  let R = md(lj);
-  let [L, P] = fp(T);
-  let D = md($$S6);
+  let R = useAtomWithSubscription(lj);
+  let [L, P] = useAtomValueAndSetter(T);
+  let D = useAtomWithSubscription($$S6);
   let k = useMemo(() => !!libraryKey && R.includes(libraryKey), [libraryKey, R]);
   let M = useCallback(({
     newNavigationState: n,
@@ -376,10 +376,10 @@ export function $$N11(e) {
 }
 let C = rt(void 0);
 export function $$w7(e) {
-  zl.set(C, e);
+  atomStoreManager.set(C, e);
 }
 export function $$O8() {
-  let [e, t] = fp(C);
+  let [e, t] = useAtomValueAndSetter(C);
   let {
     getLibrary
   } = _$$G();

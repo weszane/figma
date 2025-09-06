@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useDispatch } from "../vendor/514228";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { j7 } from "../905/929976";
 import { to } from "../905/156213";
 import { DT } from "../figma_app/8833";
@@ -49,7 +49,7 @@ export function $$h0(e) {
       className: Kn,
       children: jsx(M, {
         thumbnailUrl: e.thumbnailUrl,
-        altText: e.altText || _$$t("comments.attachment_thumbnail_alt_text_default"),
+        altText: e.altText || getI18nString("comments.attachment_thumbnail_alt_text_default"),
         overlayText: attachments.length > 3 && 2 === t ? `+${attachments.length - 3}` : void 0,
         onClick: h,
         onRightClick: t => f(t, e),

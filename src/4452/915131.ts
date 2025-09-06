@@ -7,14 +7,14 @@ import { bL, l9, mc, c$ } from "../905/493196";
 import { h as _$$h } from "../905/270045";
 import { Ay } from "../905/865071";
 import { getFeatureFlags } from "../905/601108";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { xf } from "../figma_app/416935";
 import { Rs } from "../figma_app/288654";
 import { ks, tM, vd } from "../figma_app/637027";
 import { qc } from "../figma_app/858013";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { cL } from "../905/748726";
 import { um } from "../905/14223";
 import { Lo, to } from "../905/156213";
@@ -30,7 +30,7 @@ import { D6, j_, X$ } from "../figma_app/465071";
 import { Wj } from "../905/913057";
 import { e6 } from "../905/557142";
 import { Fb, qg } from "../figma_app/630077";
-import { O as _$$O } from "../905/247093";
+import { UNASSIGNED } from "../905/247093";
 import { Z as _$$Z } from "../figma_app/761870";
 import { Ju, ZU } from "../905/102752";
 import { e as _$$e } from "../905/393279";
@@ -58,7 +58,7 @@ function Q(e) {
   let m = t => {
     let s = e.currentOrgId ? i[e.currentOrgId] : null;
     let r = getFeatureFlags().team_creation_restricted_guests_err_ui && s?.invite_whitelist_guest_invite_setting != null;
-    return yI(t, a.usersByEmail[t] || t, s, n, d.email, r ? _$$t("team_creation.restricted_against_adding_external_users") : null);
+    return yI(t, a.usersByEmail[t] || t, s, n, d.email, r ? getI18nString("team_creation.restricted_against_adding_external_users") : null);
   };
   let _ = [e6.ADMIN, e6.EDITOR, e6.VIEWER];
   return e.inviteLevel && e.onInviteLevelChange ? jsx(_$$e, {
@@ -77,7 +77,7 @@ function Q(e) {
     joinLinkShown: !1,
     onInviteLevelChange: e.onInviteLevelChange,
     options: _,
-    placeholderText: _$$t("team_creation.add_a_name_or_email"),
+    placeholderText: getI18nString("team_creation.add_a_name_or_email"),
     searchResultToken: c,
     shouldAutoFocus: !0,
     validateToken: m,
@@ -110,7 +110,7 @@ export let $$K0 = Ju(function (e) {
   let k = useSelector(e => e.orgDomains);
   let [P, D] = useState(!0);
   useEffect(() => {
-    sx("team_creation_started", {
+    trackEventAnalytics("team_creation_started", {
       user_id: R?.id ?? "",
       org_id: a
     });
@@ -134,7 +134,7 @@ export let $$K0 = Ju(function (e) {
   let Z = useMemo(() => {
     if ("loaded" === V.status) {
       let e = V.data.currentUser.baseOrgUser?.workspaceUsers?.filter(e => e.isMainWorkspace);
-      return e && e.length > 0 ? e[0].workspaceId : _$$O;
+      return e && e.length > 0 ? e[0].workspaceId : UNASSIGNED;
     }
     return null;
   }, [V]);
@@ -176,9 +176,9 @@ export let $$K0 = Ju(function (e) {
   let [eT, eA] = useState("");
   let [ew, eN] = useState("");
   let eR = X$("TeamCreationModal").transform(e => e.tier === FPlanNameType.ENTERPRISE).unwrapOr(!1) && J.length > 0;
-  (X || Z === _$$O) && J.length > 0 && (J = J.concat({
-    id: _$$O,
-    name: _$$t("team_creation.unassigned_workspace"),
+  (X || Z === UNASSIGNED) && J.length > 0 && (J = J.concat({
+    id: UNASSIGNED,
+    name: getI18nString("team_creation.unassigned_workspace"),
     canCreateTeam: !0,
     orgAccess: FAccessLevelType.PUBLIC,
     imgUrl: null
@@ -187,19 +187,19 @@ export let $$K0 = Ju(function (e) {
   let ek = getFeatureFlags().fpl_textarea_migration ? jsx(_$$T, {
     onChange: eN,
     value: ew,
-    placeholder: _$$t("team_creation.optional"),
+    placeholder: getI18nString("team_creation.optional"),
     id: eC
   }) : jsx(ks, {
     className: "team_creation_modal--descriptionInput--cLVf4",
     type: "textarea",
     onChange: e => eN(e.target.value),
     value: ew,
-    placeholder: _$$t("team_creation.optional"),
+    placeholder: getI18nString("team_creation.optional"),
     id: eC
   });
   let eq = e => jsx("div", {
     className: "team_creation_modal--workspaceIcon--s7G4E",
-    children: e && e.id !== _$$O ? jsx(z6, {
+    children: e && e.id !== UNASSIGNED ? jsx(z6, {
       entity: e,
       size: 16
     }) : jsx(_$$B, {
@@ -207,11 +207,11 @@ export let $$K0 = Ju(function (e) {
     })
   });
   let eM = jsxs(bL, {
-    value: em ?? _$$O,
-    onChange: e => e_(e ?? _$$O),
+    value: em ?? UNASSIGNED,
+    onChange: e => e_(e ?? UNASSIGNED),
     children: [jsx(l9, {
       label: jsx(_$$h, {
-        children: _$$t("team_creation.workspace")
+        children: getI18nString("team_creation.workspace")
       }),
       size: "lg",
       width: "fill",
@@ -247,7 +247,7 @@ export let $$K0 = Ju(function (e) {
       maxLength: qg,
       minLength: 1,
       onChange: e => eA(e.target.value),
-      placeholder: _$$t("team_creation.writer_s_guild_placeholder"),
+      placeholder: getI18nString("team_creation.writer_s_guild_placeholder"),
       required: !0,
       value: eT
     })
@@ -280,9 +280,9 @@ export let $$K0 = Ju(function (e) {
   return jsx(fu, {
     name: "Team Creation",
     children: jsx(OJ, {
-      title: 1 === er ? _$$t("team_creation.add_people_to_team_name", {
+      title: 1 === er ? getI18nString("team_creation.add_people_to_team_name", {
         teamName: eT
-      }) : _$$t("team_creation.org_modal_title_sc"),
+      }) : getI18nString("team_creation.org_modal_title_sc"),
       onClose: eD,
       maxWidth: 480,
       children: jsxs("div", {
@@ -291,19 +291,19 @@ export let $$K0 = Ju(function (e) {
           children: [jsx(Ay, {
             className: W,
             htmlFor: eO,
-            children: _$$t("team_creation.name")
+            children: getI18nString("team_creation.name")
           }), eL, jsx(Ay, {
             className: W,
             htmlFor: eC,
-            children: _$$t("team_creation.team_description")
+            children: getI18nString("team_creation.team_description")
           }), ek, eR && jsxs(Fragment, {
             children: [jsx("div", {
               className: W,
-              children: _$$t("team_creation.workspace")
+              children: getI18nString("team_creation.workspace")
             }), eM]
           }), jsx("div", {
             className: W,
-            children: _$$t("team_creation.who_has_access")
+            children: getI18nString("team_creation.who_has_access")
           }), jsx(_$$j, {}), jsx(YU, {
             resourceType: FResourceCategoryType.TEAM,
             value: eE,
@@ -316,7 +316,7 @@ export let $$K0 = Ju(function (e) {
             className: W,
             children: jsxs("fieldset", {
               children: [jsx("legend", {
-                children: eE === _9.INVITE_ONLY ? _$$t("team_creation.visibility") : _$$t("team_creation.what_they_can_do")
+                children: eE === _9.INVITE_ONLY ? getI18nString("team_creation.visibility") : getI18nString("team_creation.what_they_can_do")
               }), eE === _9.INVITE_ONLY ? jsx(Kd, {
                 selectedDiscoverability: ej,
                 setSelectedDiscoverability: eI
@@ -326,7 +326,7 @@ export let $$K0 = Ju(function (e) {
                   setSelectedPermissionsLevel: ey
                 }), jsx("div", {
                   className: "team_creation_modal--subtitle--j8wZc text--fontPos11--2LvXf text--_fontBase--QdLsd",
-                  children: eb === J4.VIEW ? _$$t("team_creation.can_view_and_comment") : _$$t("team_creation.can_create_and_edit_files")
+                  children: eb === J4.VIEW ? getI18nString("team_creation.can_view_and_comment") : getI18nString("team_creation.can_create_and_edit_files")
                 })]
               })]
             })
@@ -349,7 +349,7 @@ export let $$K0 = Ju(function (e) {
           className: "team_creation_modal--bottomRow--IWTyZ",
           children: [jsx("div", {
             className: "team_creation_modal--footer--EAx7f team_creation_modal--subtitle--j8wZc text--fontPos11--2LvXf text--_fontBase--QdLsd",
-            children: tx("team_creation.step_number_of_max_steps", {
+            children: renderI18nText("team_creation.step_number_of_max_steps", {
               currentStep: er + 1,
               maxSteps: 2
             })
@@ -357,7 +357,7 @@ export let $$K0 = Ju(function (e) {
             className: "team_creation_modal--buttons--jSrKt",
             children: [jsx(tM, {
               onClick: eD,
-              children: tx("project_creation.cancel")
+              children: renderI18nText("project_creation.cancel")
             }), jsx(vd, {
               onClick: function () {
                 if (0 === er) ei(1);else {
@@ -381,7 +381,7 @@ export let $$K0 = Ju(function (e) {
                 }
               },
               disabled: 0 === er && 0 === eT.trim().length || 1 === er && ev,
-              children: 0 === er ? tx("general.continue") : tx("team_creation.create_team")
+              children: 0 === er ? renderI18nText("general.continue") : renderI18nText("team_creation.create_team")
             })]
           })]
         })]

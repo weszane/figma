@@ -8,7 +8,7 @@ import { O as _$$O } from "../905/969533";
 import { NLJ, Oin } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import p from "classnames";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { Pt } from "../figma_app/806412";
 import { A as _$$A } from "../905/482208";
 import { T as _$$T } from "../905/868547";
@@ -53,7 +53,7 @@ let L = memo(function ({
   recordingKey: r
 }) {
   let i = e.children.filter(e => !Zk(e) || !e.featureFlags || e.featureFlags.every(e => getFeatureFlags()[e]));
-  let s = _$$R(e => i.filter(t => Zk(t) && Yh(e.mirror.appModel, t.action)));
+  let s = selectWithShallowEqual(e => i.filter(t => Zk(t) && Yh(e.mirror.appModel, t.action)));
   let o = useSelector(e => s.length > 0 && P(s[0], e));
   if (0 === s.length) return null;
   if (e.flyoutHideOptionsIfSingleEnabledAction && 1 === s.length) {
@@ -225,7 +225,7 @@ export function $$U3() {
   return useCallback(i => !(!i || l && !i.nonEditorsAllowed || i.onlyShowInReadOnly && !(o && n !== Oin.HIDE_UI) || i.hideInExtension && z4.getIsExtension()) && (!!r || !i.newFileDisabled) && (!!d || !!i.loggedOutAllowed) && (!i.editModes || -1 !== i.editModes.indexOf(e)) && (!i.showForTools || -1 !== i.showForTools.indexOf(t)), [l, o, n, r, d, e, t]);
 }
 export function $$B2() {
-  return _$$R(e => {
+  return selectWithShallowEqual(e => {
     let t = {};
     for (let r in e.mirror.appModel) vg(r) && (t[r] = e.mirror.appModel[r]);
     return t;
@@ -233,7 +233,7 @@ export function $$B2() {
 }
 export function $$G0() {
   let e = $$B2();
-  let t = _$$R(e => e.mirror.selectionProperties.resettableInstanceOverrides?.selectionOverrides);
+  let t = selectWithShallowEqual(e => e.mirror.selectionProperties.resettableInstanceOverrides?.selectionOverrides);
   let r = q5();
   return useCallback(n => Yh(e, n.action) && (!n.featureFlags || n.featureFlags.every(e => getFeatureFlags()[e])) && (!n.isAvailable || n.isAvailable(e, t, r)), [e, t, r]);
 }

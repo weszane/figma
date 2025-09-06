@@ -9,13 +9,13 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { cZ } from "../figma_app/272902";
 import m from "classnames";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Uz } from "../905/63728";
 import { V as _$$V } from "../905/418494";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { o6, cZ as _$$cZ, C0, aH, Ht, Pt } from "../figma_app/806412";
 import { D8 } from "../905/511649";
-import { nl } from "../figma_app/257275";
+import { isInteractionPathCheck } from "../figma_app/897289";
 import { bG } from "../905/149328";
 import { g as _$$g } from "../905/880308";
 import { R as _$$R } from "../905/307199";
@@ -23,7 +23,7 @@ import { gw, wv } from "../figma_app/236327";
 import { B as _$$B } from "../905/714743";
 import { t as _$$t } from "../905/331623";
 import { o as _$$o } from "../905/96108";
-import { t as _$$t2 } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { j7, oB } from "../905/929976";
 import { dG } from "../figma_app/753501";
 import { Y5 } from "../figma_app/455680";
@@ -47,7 +47,7 @@ let {
 let Y = gw;
 let q = wv;
 function $() {
-  return _$$t2("design_systems.instance_panel.mixed");
+  return getI18nString("design_systems.instance_panel.mixed");
 }
 function Z(e) {
   return jsx("div", {
@@ -236,7 +236,7 @@ class et extends o6 {
         this.hideDropdown();
         return;
       }
-      nl() ? this.setState({
+      isInteractionPathCheck() ? this.setState({
         allowSelection: !0
       }) : (this.setState({
         allowSelection: !1
@@ -289,7 +289,7 @@ class et extends o6 {
       let d = null != this.props.minTop ? this.props.minTop : this.getDropdownMarginTop();
       let c = this.getDropdownMarginBottom();
       let u = window.innerHeight - c;
-      if (this.props.neverConstrain || Ay.windows) {
+      if (this.props.neverConstrain || BrowserInfo.windows) {
         let e = 0;
         if (l() > u) {
           let t = l() - u;
@@ -396,7 +396,7 @@ class et extends o6 {
       }
       let r = performance.now();
       this.props.onChange(e, n ? zk.YES_WITHOUT_TRACKING_AS_EDIT : zk.NO);
-      getFeatureFlags().ee_canvas_previews_logging && sx("on_canvas_preview", {
+      getFeatureFlags().ee_canvas_previews_logging && trackEventAnalytics("on_canvas_preview", {
         timeMs: performance.now() - r,
         directlySelectedNodesCount: i,
         property: this.props.id
@@ -536,7 +536,7 @@ class et extends o6 {
       let o = this.state.dropdownScrollTop + this.state.dropdownHeight + a;
       let l = this.childPositionByIndex[t];
       let d = l + (e.props.height || 24);
-      if (!nl() && (d < s || l > o)) {
+      if (!isInteractionPathCheck() && (d < s || l > o)) {
         this.keyRecycler.freeKeyForId(e.key);
         return null;
       }

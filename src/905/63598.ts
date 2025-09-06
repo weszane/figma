@@ -1,4 +1,4 @@
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { zX } from "../905/576487";
 import { nF } from "../905/350402";
@@ -8,7 +8,7 @@ let d = "library-update";
 function c(e) {
   e(F.enqueue({
     type: l,
-    message: _$$t("design_systems.update_actions.updating_assets"),
+    message: getI18nString("design_systems.update_actions.updating_assets"),
     icon: zX.PROGRESS,
     progressKey: d
   }));
@@ -47,7 +47,7 @@ let $$h1 = nF(e => {
   }));
   e.dispatch(F.enqueue({
     type: l,
-    message: _$$t("design_systems.update_actions.update_success"),
+    message: getI18nString("design_systems.update_actions.update_success"),
     icon: zX.CHECK
   }));
 });
@@ -60,7 +60,7 @@ let $$g0 = nF(e => {
   }));
   e.dispatch(F.enqueue({
     type: l,
-    message: _$$t("design_systems.update_actions.update_failure"),
+    message: getI18nString("design_systems.update_actions.update_failure"),
     icon: zX.EXCLAMATION
   }));
 });

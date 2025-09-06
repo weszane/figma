@@ -1,5 +1,5 @@
 import { NLJ, Ez5 } from "../figma_app/763686";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 export function $$a3(e) {
   return e === NLJ.VECTOR_PENCIL || e === NLJ.ERASER || e === NLJ.HIGHLIGHTER || e === NLJ.WASHI_TAPE;
 }
@@ -7,7 +7,7 @@ export function $$s0(e) {
   return !!$$a3(e) && (e === NLJ.VECTOR_PENCIL || e === NLJ.HIGHLIGHTER);
 }
 export function $$o2() {
-  return !Ay.isMeetDevice;
+  return !BrowserInfo.isMeetDevice;
 }
 export function $$l1(e) {
   let t = Ez5?.uiState().showUI3Colors.getCopy();

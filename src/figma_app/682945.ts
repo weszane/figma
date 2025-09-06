@@ -1,10 +1,10 @@
 import { isNotNullish } from "../figma_app/95419";
-import { Dy } from "../figma_app/493477";
+import { flattenObjectToTarget } from "../figma_app/493477";
 import { i6g, CeL, AiE, yuz, fZb, Ez5, pWM } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
-import { sx } from "../905/449184";
-import { rH } from "../905/542194";
+import { atomStoreManager } from "../figma_app/27355";
+import { trackEventAnalytics } from "../905/449184";
+import { reactTimerGroup } from "../905/542194";
 import { jY, AH } from "../figma_app/725044";
 import { zF, xV, q5, l$, vu, H0 as _$$H, as, nc, Pn, eO, I7, t8, bF, vw, Ti, W, Fy } from "../905/967662";
 import { getInitialOptions } from "../figma_app/169182";
@@ -63,7 +63,7 @@ export function $$K4(e, t) {
   N = performance.now();
   x++;
   let r = getInitialOptions().editing_file;
-  1 === x && r && sx("Cold Boot Document Load", {
+  1 === x && r && trackEventAnalytics("Cold Boot Document Load", {
     fileKey: A,
     fileVersion: i6g && i6g.currentFileVersion() || 0,
     loadedTime: N,
@@ -171,11 +171,11 @@ function ey(e) {
   };
   for (let e = 0; e < recentInteractions.length; e++) c[`recentInteractions.${e}`] = JSON.stringify(recentInteractions[e]);
   q(e.gpuDeviceInfo, c);
-  Dy(e.nodeTypeHistogram, c, "nodeTypeHistogram");
+  flattenObjectToTarget(e.nodeTypeHistogram, c, "nodeTypeHistogram");
   return c;
 }
 function eb(e) {
-  sx("Slow Editor Interaction", e);
+  trackEventAnalytics("Slow Editor Interaction", e);
   w = performance.now();
   O = e.duration;
 }
@@ -183,7 +183,7 @@ function eT(...e) {}
 export function $$eI18() {
   if (!Y5?.isReady()) return;
   let e = {};
-  let t = rH.report();
+  let t = reactTimerGroup.report();
   let r = 0;
   for (let n of t) {
     !function t(r, n = "") {
@@ -240,7 +240,7 @@ export function $$eI18() {
         ...ey(t)
       };
       if (eE.forEach(e => n["modifier." + e] = null), "MOUSE" === r.type) for (let e of (n.collapsed = r.collapsed, eE)) n["modifier." + e] = -1 !== r.modifiers.indexOf(e);
-      Dy(s, n, "timer");
+      flattenObjectToTarget(s, n, "timer");
       return n;
     });
     for (let r in e) {
@@ -256,7 +256,7 @@ export function $$eI18() {
           duration: n,
           ...ey(t)
         };
-        Dy(s, e, "timer");
+        flattenObjectToTarget(s, e, "timer");
         eE.forEach(t => e["modifier." + t] = null);
         o.push(e);
       }
@@ -318,7 +318,7 @@ export function $$ev14() {
       t && (yuz && (e[_$$N.gpuMetricsPreviousFrameKey] = yuz.getFullscreenPreviousFrameGpuMetricsJSON().toString()), fZb && (e[_$$N.cpuTimerTreePreviousFrameKey] = fZb.getPreviousFrameCpuTimerTreeJSON().toString()));
       let r = Ez5 && Ez5.activeRunningAnimations() || [];
       e[_$$N.activeAnimationsKey] = r;
-      let n = zl.get(_$$f);
+      let n = atomStoreManager.get(_$$f);
       n > 0 && (e[_$$N.numberOfDevAnnotationsVisibleKey] = n);
     }, e => {
       AiE && AiE.clearSlowFrameTrackerFields();

@@ -36,7 +36,7 @@ import { w_ as _$$w_ } from '../897/602108';
 import { R as _$$R1 } from '../897/631032';
 import { dR as _$$dR2 } from '../897/641331';
 import { BP } from '../897/934363';
-import { $D, kF as _$$kF } from '../905/11';
+import { reportError, setSentryTag } from '../905/11';
 import { F as _$$F4 } from '../905/224';
 import { t as _$$t9 } from '../905/1946';
 import { a as _$$a6 } from '../905/5627';
@@ -136,7 +136,7 @@ import { J as _$$J11 } from '../905/294113';
 import { a as _$$a8, G as _$$G5 } from '../905/298663';
 import { $ as _$$$ } from '../905/302575';
 import { F as _$$F } from '../905/302958';
-import { t as _$$t, tx as _$$tx } from '../905/303541';
+import { getI18nString, renderI18nText } from '../905/303541';
 import { R as _$$R10 } from '../905/309415';
 import { t as _$$t2 } from '../905/316903';
 import { v as _$$v8 } from '../905/318279';
@@ -172,7 +172,7 @@ import { W as _$$W3 } from '../905/442612';
 import { K as _$$K2 } from '../905/443068';
 import { k as _$$k7 } from '../905/443820';
 import { J as _$$J0 } from '../905/445197';
-import { az as _$$az, sx as _$$sx } from '../905/449184';
+import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
 import { hK as _$$hK } from '../905/450589';
 import { E as _$$E8 } from '../905/453826';
 import { z as _$$z13 } from '../905/454433';
@@ -221,7 +221,7 @@ import { getFeatureFlags } from '../905/601108';
 import { Ay as _$$Ay4 } from '../905/612521';
 import { jN as _$$jN } from '../905/612685';
 import { J as _$$J } from '../905/614223';
-import { Z as _$$Z6 } from '../905/616700';
+import { compareVersions } from '../905/616700';
 import { e as _$$e5 } from '../905/621515';
 import { R as _$$R0 } from '../905/621802';
 import { E as _$$E5 } from '../905/632989';
@@ -242,7 +242,7 @@ import { s as _$$s6 } from '../905/702260';
 import { L as _$$L2 } from '../905/704296';
 import { G as _$$G6 } from '../905/707993';
 import { M4 } from '../905/713695';
-import { x1 as _$$x } from '../905/714362';
+import { logError } from '../905/714362';
 import { pn as _$$pn } from '../905/714538';
 import { B as _$$B4 } from '../905/714743';
 import { i as _$$i7 } from '../905/718764';
@@ -481,7 +481,7 @@ import { dC as _$$dC, iO as _$$iO, lf as _$$lf, lT as _$$lT, Mj as _$$Mj, ou as 
 import { hv as _$$hv, YZ as _$$YZ, BW, WD, z_ } from '../figma_app/11610';
 import { EI } from '../figma_app/21029';
 import { a1 as _$$a } from '../figma_app/23780';
-import { eU as _$$eU, fp as _$$fp, md as _$$md, mg as _$$mg, Iz, Ut, Xr, zl } from '../figma_app/27355';
+import { atom, useAtomValueAndSetter, useAtomWithSubscription, mg as _$$mg, createRemovableAtomFamily, Ut, Xr, atomStoreManager } from '../figma_app/27355';
 import { MGP } from '../figma_app/27776';
 import { Mk } from '../figma_app/31188';
 import { bi as _$$bi, cT as _$$cT, g_ as _$$g_, TU as _$$TU, vr as _$$vr, GQ } from '../figma_app/32128';
@@ -497,7 +497,7 @@ import { z as _$$z } from '../figma_app/47967';
 import { kF as _$$kF2 } from '../figma_app/48566';
 import { rH as _$$rH } from '../figma_app/49598';
 import { R as _$$R7 } from '../figma_app/53049';
-import { nT as _$$nT, wN as _$$wN } from '../figma_app/53721';
+import { FEditorType, mapFileTypeToEditorType } from '../figma_app/53721';
 import { $y, Cs as _$$Cs, cV as _$$cV } from '../figma_app/59509';
 import { cF as _$$cF2, Az } from '../figma_app/61758';
 import { $g, _X as _$$_X, QZ } from '../figma_app/62612';
@@ -565,7 +565,7 @@ import { MM as _$$MM, UP as _$$UP } from '../figma_app/246831';
 import { Bf } from '../figma_app/249941';
 import { Si as _$$Si, uQ as _$$uQ, PE } from '../figma_app/251115';
 import { Pu, Py } from '../figma_app/251814';
-import { nl as _$$nl2, PN } from '../figma_app/257275';
+import { isInteractionPathCheck, PN } from '../figma_app/897289';
 import { aq as _$$aq } from '../figma_app/257798';
 import { a as _$$a2 } from '../figma_app/258808';
 import { e as _$$e0 } from '../figma_app/259678';
@@ -737,7 +737,7 @@ import { C as _$$C } from '../figma_app/765025';
 import { e6 as _$$e1, hu as _$$hu, kI as _$$kI, TZ as _$$TZ, Ez } from '../figma_app/766708';
 import { K2 } from '../figma_app/777551';
 import { YW as _$$YW } from '../figma_app/778125';
-import { C8 as _$$C5 } from '../figma_app/778880';
+import { getIsAndroidOrIphoneNotFigmaMobile } from '../figma_app/778880';
 import { wV as _$$wV } from '../figma_app/779965';
 import { parsePxInt, parsePxNumber } from '../figma_app/783094';
 import { prototypeInteractionModalWidth, sitesFullscreenPreviewZ } from '../figma_app/786175';
@@ -1207,7 +1207,7 @@ function ei(e, t) {
             };
           }
         } catch (e) {
-          $D(_$$e2.CMS, new Error('could not parse CMS link field value'), {
+          reportError(_$$e2.CMS, new Error('could not parse CMS link field value'), {
             extra: e
           });
         }
@@ -1229,7 +1229,7 @@ function ei(e, t) {
               };
             }
           } catch (e) {
-            $D(_$$e2.CMS, new Error('could not parse CMS image field value'), {
+            reportError(_$$e2.CMS, new Error('could not parse CMS image field value'), {
               extra: e
             });
           }
@@ -1258,7 +1258,7 @@ function ei(e, t) {
               offset: -i.getTimezoneOffset() / 60
             });
           } catch (e) {
-            $D(_$$e2.CMS, new Error('could not parse CMS date field value'), {
+            reportError(_$$e2.CMS, new Error('could not parse CMS date field value'), {
               extra: e
             });
           }
@@ -1457,8 +1457,8 @@ function tz() {
   let x = topLevelMode === lyf.LAYOUT;
   let m = topLevelMode === lyf.HISTORY;
   let h = _$$z(editModeType);
-  let f = _$$md(_$$wg);
-  let _ = _$$md(Bu);
+  let f = useAtomWithSubscription(_$$wg);
+  let _ = useAtomWithSubscription(Bu);
   let b = useRef(null);
   _$$C_(b, p);
   let y = AE();
@@ -1475,7 +1475,7 @@ function tz() {
   }
   let C = [{
     toolId: NLJ.SECTION,
-    text: _$$t('fullscreen_actions.set-tool-section'),
+    text: getI18nString('fullscreen_actions.set-tool-section'),
     shortcutText: v(NLJ.SECTION),
     icon: jsx(_$$P, {}),
     smallIcon: jsx(_$$c3, {}),
@@ -1483,7 +1483,7 @@ function tz() {
   }];
   C.push({
     toolId: NLJ.SITES_RESPONSIVE_SET,
-    text: _$$t('fullscreen_actions.set-tool-sites-responsive-set'),
+    text: getI18nString('fullscreen_actions.set-tool-sites-responsive-set'),
     shortcutText: v(NLJ.SITES_RESPONSIVE_SET),
     icon: jsx(_$$k3, {}),
     smallIcon: jsx(eD, {}),
@@ -1491,13 +1491,13 @@ function tz() {
   });
   getFeatureFlags().sts_responsive_node_sets && (C.push({
     toolId: NLJ.SITES_WEBPAGE,
-    text: `${_$$t('fullscreen_actions.set-tool-sites-webpage')} (RNS)`,
+    text: `${getI18nString('fullscreen_actions.set-tool-sites-webpage')} (RNS)`,
     icon: jsx(_$$k3, {}),
     smallIcon: jsx(eD, {}),
     recordingKey: 'toolWebpage'
   }), C.push({
     toolId: NLJ.SITES_RESPONSIVE_NODE_SET,
-    text: _$$t('fullscreen_actions.set-tool-sites-responsive-node-set'),
+    text: getI18nString('fullscreen_actions.set-tool-sites-responsive-node-set'),
     shortcutText: v(NLJ.SITES_RESPONSIVE_NODE_SET),
     icon: jsx(_$$k3, {}),
     smallIcon: jsx(eD, {}),
@@ -1505,7 +1505,7 @@ function tz() {
   }));
   C.push({
     toolId: NLJ.FRAME,
-    text: _$$t('fullscreen_actions.set-tool-frame'),
+    text: getI18nString('fullscreen_actions.set-tool-frame'),
     shortcutText: v(NLJ.FRAME),
     icon: jsx(_$$v2, {}),
     smallIcon: jsx(_$$q, {}),
@@ -1519,45 +1519,45 @@ function tz() {
     onboardingKey: 'frame',
     overlayId: 'FrameTools',
     recordingKey: Pt(tD, 'regionFlyout'),
-    tooltipText: _$$t('fullscreen.flyout.region_tools')
+    tooltipText: getI18nString('fullscreen.flyout.region_tools')
   });
   let I = [{
     toolId: NLJ.SHAPE_RECTANGLE,
-    text: _$$t('fullscreen_actions.set-tool-rectangle'),
+    text: getI18nString('fullscreen_actions.set-tool-rectangle'),
     shortcutText: v(NLJ.SHAPE_RECTANGLE),
     icon: jsx(_$$n2, {}),
     smallIcon: jsx(_$$y, {}),
     recordingKey: 'toolShapeRectangle'
   }, {
     toolId: NLJ.SHAPE_LINE,
-    text: _$$t('fullscreen_actions.set-tool-line'),
+    text: getI18nString('fullscreen_actions.set-tool-line'),
     shortcutText: v(NLJ.SHAPE_LINE),
     icon: jsx(_$$W2, {}),
     smallIcon: jsx(_$$h, {}),
     recordingKey: 'toolShapeLine'
   }, {
     toolId: NLJ.SHAPE_ARROW,
-    text: _$$t('fullscreen_actions.set-tool-arrow'),
+    text: getI18nString('fullscreen_actions.set-tool-arrow'),
     shortcutText: v(NLJ.SHAPE_ARROW),
     icon: jsx(_$$F2, {}),
     smallIcon: jsx(_$$E2, {}),
     recordingKey: 'toolShapeArrow'
   }, {
     toolId: NLJ.SHAPE_ELLIPSE,
-    text: _$$t('fullscreen_actions.set-tool-ellipse'),
+    text: getI18nString('fullscreen_actions.set-tool-ellipse'),
     shortcutText: v(NLJ.SHAPE_ELLIPSE),
     icon: jsx(_$$m, {}),
     smallIcon: jsx(_$$B, {}),
     recordingKey: 'toolShapeEllipse'
   }, {
     toolId: NLJ.SHAPE_REGULAR_POLYGON,
-    text: _$$t('fullscreen_actions.set-tool-regular-polygon'),
+    text: getI18nString('fullscreen_actions.set-tool-regular-polygon'),
     icon: jsx(_$$o, {}),
     smallIcon: jsx(_$$h2, {}),
     recordingKey: 'toolShapePolygon'
   }, {
     toolId: NLJ.SHAPE_STAR,
-    text: _$$t('fullscreen_actions.set-tool-star'),
+    text: getI18nString('fullscreen_actions.set-tool-star'),
     icon: jsx(_$$e3, {}),
     smallIcon: jsx(_$$Z, {}),
     recordingKey: 'toolShapeStar'
@@ -1569,7 +1569,7 @@ function tz() {
     onActivateTool: activateTool,
     overlayId: 'ShapeAndMediaTools',
     recordingKey: Pt(tD, 'shapeFlyout'),
-    tooltipText: _$$t('fullscreen.flyout.shape_tools')
+    tooltipText: getI18nString('fullscreen.flyout.shape_tools')
   });
   let N = getFeatureFlags().sts_code_authoring || getFeatureFlags().sts_code_authoring_by_plan;
   let R = jsx(_$$I, {
@@ -1577,14 +1577,14 @@ function tz() {
     initialToolId: N ? NLJ.CODE_COMPONENT : NLJ.SITES_EMBED,
     items: [{
       toolId: NLJ.SITES_EMBED,
-      text: _$$t('fullscreen_actions.set-tool-sites-embed'),
+      text: getI18nString('fullscreen_actions.set-tool-sites-embed'),
       icon: jsx(eQ, {}),
       smallIcon: jsx(e0, {}),
       shortcutText: v(NLJ.SITES_EMBED),
       recordingKey: 'toolSitesEmbed'
     }, {
       toolId: NLJ.CODE_COMPONENT,
-      text: N ? _$$t('fullscreen_actions.set-tool-code-component') : _$$t('fullscreen_actions.create-code-layer-from-design-disabled'),
+      text: N ? getI18nString('fullscreen_actions.set-tool-code-component') : getI18nString('fullscreen_actions.create-code-layer-from-design-disabled'),
       icon: jsx(_$$C, {}),
       smallIcon: jsx(_$$t2, {}),
       shortcutText: N ? v(NLJ.CODE_COMPONENT) : void 0,
@@ -1596,22 +1596,22 @@ function tz() {
     onboardingKey: _$$N4,
     overlayId: 'CodeTools',
     recordingKey: Pt(tD, 'codeFlyout'),
-    tooltipText: _$$t('fullscreen.flyout.code_tools')
+    tooltipText: getI18nString('fullscreen.flyout.code_tools')
   });
   let A = jsx(_$$I, {
     overlayId: 'PenTools',
     recordingKey: Pt(tD, 'penFlyout'),
-    tooltipText: _$$t('fullscreen.flyout.drawing_tools'),
+    tooltipText: getI18nString('fullscreen.flyout.drawing_tools'),
     items: [{
       toolId: NLJ.VECTOR_PEN,
-      text: _$$t('fullscreen_actions.set-tool-pen'),
+      text: getI18nString('fullscreen_actions.set-tool-pen'),
       shortcutText: v(NLJ.VECTOR_PEN),
       icon: jsx(_$$N2, {}),
       smallIcon: jsx(_$$k4, {}),
       recordingKey: 'toolPen'
     }, {
       toolId: NLJ.VECTOR_PENCIL,
-      text: _$$t('fullscreen_actions.set-tool-pencil'),
+      text: getI18nString('fullscreen_actions.set-tool-pencil'),
       shortcutText: v(NLJ.VECTOR_PENCIL),
       icon: jsx(_$$L, {}),
       smallIcon: jsx(_$$A3, {}),
@@ -1631,24 +1631,24 @@ function tz() {
             children: [x && jsx(_$$I, {
               overlayId: 'SelectTools',
               recordingKey: Pt(tD, 'moveFlyout'),
-              tooltipText: _$$t('fullscreen.flyout.move_tools'),
+              tooltipText: getI18nString('fullscreen.flyout.move_tools'),
               items: [{
                 toolId: NLJ.SELECT,
-                text: _$$t('fullscreen_actions.set-tool-default'),
+                text: getI18nString('fullscreen_actions.set-tool-default'),
                 shortcutText: v(NLJ.SELECT),
                 icon: jsx(_$$H, {}),
                 smallIcon: jsx(_$$y2, {}),
                 recordingKey: 'toolDefault'
               }, {
                 toolId: NLJ.HAND,
-                text: _$$t('fullscreen_actions.set-tool-hand'),
+                text: getI18nString('fullscreen_actions.set-tool-hand'),
                 shortcutText: v(NLJ.HAND),
                 icon: jsx(_$$t3, {}),
                 smallIcon: jsx(_$$O, {}),
                 recordingKey: 'toolHand'
               }, {
                 toolId: NLJ.SCALE,
-                text: _$$t('fullscreen_actions.set-tool-scale'),
+                text: getI18nString('fullscreen_actions.set-tool-scale'),
                 shortcutText: v(NLJ.SCALE),
                 icon: jsx(_$$a2, {}),
                 smallIcon: jsx(_$$l3, {}),
@@ -1662,14 +1662,14 @@ function tz() {
                 icon: jsx(_$$H, {}),
                 onActivateTool: activateTool,
                 activeToolId,
-                tooltipText: _$$t('fullscreen_actions.set-tool-default'),
+                tooltipText: getI18nString('fullscreen_actions.set-tool-default'),
                 tooltipShortcut: v(NLJ.SELECT)
               }), jsx(_$$N3, {
                 toolId: NLJ.HAND,
                 icon: jsx(_$$t3, {}),
                 onActivateTool: activateTool,
                 activeToolId,
-                tooltipText: _$$t('fullscreen_actions.set-tool-hand'),
+                tooltipText: getI18nString('fullscreen_actions.set-tool-hand'),
                 tooltipShortcut: v(NLJ.HAND)
               })]
             }), x && T, x && R, x && E, x && A, x && jsx(_$$N3, {
@@ -1677,7 +1677,7 @@ function tz() {
               icon: jsx(_$$T2, {}),
               onActivateTool: activateTool,
               activeToolId,
-              tooltipText: getFeatureFlags().sts_video ? _$$t('fullscreen_actions.place_image_or_video') : _$$t('fullscreen_actions.place_image'),
+              tooltipText: getFeatureFlags().sts_video ? getI18nString('fullscreen_actions.place_image_or_video') : getI18nString('fullscreen_actions.place_image'),
               tooltipShortcut: v(NLJ.IMAGE_OR_VIDEO),
               recordingKey: Pt(tD, 'image-tool')
             }), x && jsx(_$$N3, {
@@ -1686,7 +1686,7 @@ function tz() {
               onActivateTool: activateTool,
               activeToolId,
               recordingKey: Pt(tD, 'toolType'),
-              tooltipText: _$$t('fullscreen_actions.set-tool-type'),
+              tooltipText: getI18nString('fullscreen_actions.set-tool-type'),
               tooltipShortcut: v(NLJ.TYPE),
               onboardingKey: 'tool-type-onboarding'
             }), !m && jsx(_$$N3, {
@@ -1695,14 +1695,14 @@ function tz() {
               onActivateTool: activeToolId === NLJ.COMMENTS ? () => activateTool(NLJ.SELECT) : activateTool,
               activeToolId,
               recordingKey: Pt(tD, 'toolComment'),
-              tooltipText: _$$t('fullscreen_actions.comment'),
+              tooltipText: getI18nString('fullscreen_actions.comment'),
               tooltipShortcut: v(NLJ.COMMENTS)
             }), x && jsx(_$$N3, {
               toolId: _$$y3,
               icon: jsx(_$$_2, {}),
               onActivateTool: () => $v('toggle-menu'),
               activeToolId: _ ? _$$y3 : activeToolId,
-              tooltipText: _$$t('qa.extensions.tooltip_actions'),
+              tooltipText: getI18nString('qa.extensions.tooltip_actions'),
               tooltipShortcut: y('toggle-menu'),
               onboardingKey: Ij
             }), h && !f && S && jsx(_$$F3, {})]
@@ -1725,7 +1725,7 @@ function tB(e) {
   let s = _$$aV();
   let r = q5();
   let d = VA(r?.project);
-  let c = _$$md(_$$wg);
+  let c = useAtomWithSubscription(_$$wg);
   let u = useMemo(() => n?.showBanner && !s && !d && c, [n?.showBanner, s, d, c]);
   return jsxs(Fragment, {
     children: [activeSecondaryToolbeltId === 'ImageOrVideoTool' && jsx(_$$O2, {
@@ -1804,7 +1804,7 @@ function iv({
     children: [jsx('div', {
       className: 'x16rqkct x1v8gsql xe8ttls',
       children: jsx(_$$C, {})
-    }), e ? _$$t('living_designs.chat.empty_state.from_scratch') : _$$t('living_designs.chat.empty_state.from_design'), e && jsx('div', {
+    }), e ? getI18nString('living_designs.chat.empty_state.from_scratch') : getI18nString('living_designs.chat.empty_state.from_design'), e && jsx('div', {
       className: 'xh8yej3 x78zum5 x1q0g3np x1a02dak x167g77z xl56j7k',
       children: ['Stat counter', 'Gradient background', 'Digital clock', 'Small game'].map((e, a) => jsx(_$$t4, {
         label: e,
@@ -1820,7 +1820,7 @@ function ij({
   isResizingPanel: i,
   showCodeStreaming: n
 }) {
-  let [a, s] = _$$fp(_$$mC(e?.guid ?? ''));
+  let [a, s] = useAtomValueAndSetter(_$$mC(e?.guid ?? ''));
   let d = getFeatureFlags().living_designs_image_attachments;
   let c = _$$iZ();
   let u = _$$tS();
@@ -1889,7 +1889,7 @@ let iA = {
   }
 };
 function iL() {
-  let e = _$$md(_$$wh);
+  let e = useAtomWithSubscription(_$$wh);
   let t = Fk((e, t) => t.flatMap(t => e.get(t)?.guid ?? []), e);
   let i = useMemo(() => {
     if (!getFeatureFlags().sts_code_authoring && !getFeatureFlags().sts_code_authoring_by_plan) return new Map();
@@ -1960,24 +1960,24 @@ function iO({
       value: t,
       onChange: i,
       legend: jsx(_$$q2, {
-        children: _$$t('sites.panel.code_window_display_picker.hidden_legend')
+        children: getI18nString('sites.panel.code_window_display_picker.hidden_legend')
       }),
       recordingKey: Pt('codeWindow', 'panelConfiguration'),
       children: [jsx(_$$A6, {
         selectedValue: t,
         value: 'chat',
         IconComponent: tQ,
-        text: _$$t('sites.panel.code_window_display_picker.chat')
+        text: getI18nString('sites.panel.code_window_display_picker.chat')
       }), jsx(_$$A6, {
         selectedValue: t,
         value: 'split',
         IconComponent: t0,
-        text: _$$t('sites.panel.code_window_display_picker.split')
+        text: getI18nString('sites.panel.code_window_display_picker.split')
       }), jsx(_$$A6, {
         selectedValue: t,
         value: 'code',
         IconComponent: _$$X3,
-        text: _$$t('sites.panel.code_window_display_picker.code')
+        text: getI18nString('sites.panel.code_window_display_picker.code')
       })]
     })
   }) : null;
@@ -1994,8 +1994,8 @@ function iF({
   let [u, p] = useState(!1);
   let x = _$$f5(e);
   let m = x?.guid;
-  let g = _$$md(_$$zl);
-  let f = _$$md(_$$hi);
+  let g = useAtomWithSubscription(_$$zl);
+  let f = useAtomWithSubscription(_$$hi);
   let _ = s ? g : f;
   let b = Mg();
   let y = qe(e, b);
@@ -2020,11 +2020,11 @@ function iF({
   let w = useCallback((e, t, i, n) => {
     x && triggerSelfHeal(x, i, n);
   }, [triggerSelfHeal, x]);
-  let S = _$$md(Jl);
+  let S = useAtomWithSubscription(Jl);
   let C = getSingletonSceneGraph().get(S);
-  let T = _$$md(_$$T_);
+  let T = useAtomWithSubscription(_$$T_);
   let I = getSingletonSceneGraph().get(T);
-  let E = (_$$md(_$$s3) === Nfd.CODE ? I : C) ?? x;
+  let E = (useAtomWithSubscription(_$$s3) === Nfd.CODE ? I : C) ?? x;
   let N = useMemo(() => {
     let e = x?.codeFilePath || void 0;
     return jsx(_$$S, {
@@ -2098,9 +2098,9 @@ let iM = ({
   node: e
 }) => {
   let t = [];
-  let i = _$$md(_$$hi);
-  let [, n] = _$$fp(_$$zl);
-  let [, l] = _$$fp(_$$s3);
+  let i = useAtomWithSubscription(_$$hi);
+  let [, n] = useAtomValueAndSetter(_$$zl);
+  let [, l] = useAtomValueAndSetter(_$$s3);
   let {
     readOnlyUser
   } = _$$Sn();
@@ -2121,15 +2121,15 @@ let iM = ({
     });
   }, []);
   let g = {
-    displayText: _$$t('sites.panel.code_window_open_in_code_view'),
+    displayText: getI18nString('sites.panel.code_window_open_in_code_view'),
     callback: x
   };
   let f = {
-    displayText: _$$t('fullscreen_actions.restore-design-in-place-from-code'),
+    displayText: getI18nString('fullscreen_actions.restore-design-in-place-from-code'),
     callback: m
   };
   let _ = {
-    displayText: _$$t('fullscreen_actions.copy-out-design-from-code'),
+    displayText: getI18nString('fullscreen_actions.copy-out-design-from-code'),
     callback: h
   };
   !readOnlyUser && (t.push(g), p && (t.push(f), t.push(_)));
@@ -2142,7 +2142,7 @@ function iD({
   let {
     Sprig
   } = useSprigWithSampling();
-  let n = _$$md(_$$f4);
+  let n = useAtomWithSubscription(_$$f4);
   let d = useDispatch();
   useEffect(() => {
     e && z6l?.convertToMultiFileCodeLayer(e.guid);
@@ -2158,7 +2158,7 @@ function iD({
     }] = _$$A4(_$$l4(), 300, {
       equalityFn: _$$c6
     });
-    let [n, l] = _$$fp(_$$yq);
+    let [n, l] = useAtomValueAndSetter(_$$yq);
     if (n) {
       let l = qE(n.x, 0, t - n.width);
       let a = qE(n.y, 0, i - n.height);
@@ -2217,9 +2217,9 @@ function iD({
   let f = _$$cu();
   let _ = f[0] ? g.get(f[0]) : null;
   let b = _$$wE(_);
-  let y = _$$md(ZY);
+  let y = useAtomWithSubscription(ZY);
   let v = Mq();
-  let [j, k] = _$$fp(_$$hi);
+  let [j, k] = useAtomValueAndSetter(_$$hi);
   let w = iP(b && !y ? 'preview' : v ? j : 'code', void 0 !== e.codeFilePath && !!getFeatureFlags().multi_file_code_layers);
   let S = useCallback(() => {
     k(e => e === 'code' || e === 'split' ? e : 'split');
@@ -2228,7 +2228,7 @@ function iD({
   let C = useRef(null);
   let T = useRef(null);
   let I = BK('OPEN_IN_CODE_VIEW_DROPDOWN');
-  let E = _$$md(DW);
+  let E = useAtomWithSubscription(DW);
   let N = Xr(YD);
   _$$h3(() => {
     N(!1);
@@ -2271,7 +2271,7 @@ function iD({
             className: 'x1mh6rdz',
             children: jsx(_$$d2, {
               'ref': T,
-              'aria-label': _$$t('sites.panel.code_window_more_options'),
+              'aria-label': getI18nString('sites.panel.code_window_more_options'),
               'aria-expanded': I.showing,
               'onClick': () => {
                 I.toggle();
@@ -2523,10 +2523,10 @@ let n_ = {
 function nb({
   children: e
 }) {
-  let [t] = _$$fp(_$$gn);
-  let [i, n] = _$$fp(_$$u3);
-  let [s, r] = _$$fp(_$$dD);
-  let [d, c] = _$$fp(_$$sH);
+  let [t] = useAtomValueAndSetter(_$$gn);
+  let [i, n] = useAtomValueAndSetter(_$$u3);
+  let [s, r] = useAtomValueAndSetter(_$$dD);
+  let [d, c] = useAtomValueAndSetter(_$$sH);
   let [u, p] = useState(void 0);
   let [x, m] = useState(0);
   let h = useRef(null);
@@ -2731,7 +2731,7 @@ let nM = {
   }
 };
 function nD() {
-  let e = _$$C5();
+  let e = getIsAndroidOrIphoneNotFigmaMobile();
   let t = getFeatureFlags().make_mobile_blocking_banner;
   let {
     show,
@@ -2763,10 +2763,10 @@ function nz() {
             children: [jsx(_$$oW, {
               className: 'x46vnbo x11daxxc x12oqio5',
               src: buildUploadUrl('c5b8c66d1796d0246ed3ef72acd4fd12075444af'),
-              alt: _$$t('figmake.toolbar.upload_alt')
+              alt: getI18nString('figmake.toolbar.upload_alt')
             }), jsx('p', {
               ..._$$xk(nM.mobilePopupPromptBody),
-              children: _$$tx('figmake.mobile_blocking_banner.example_prompt')
+              children: renderI18nText('figmake.mobile_blocking_banner.example_prompt')
             }), jsxs('div', {
               className: 'x78zum5 x1q0g3np x6s0dn4 xpvyfi4 x1qughib xh8yej3 x7hzu26',
               children: [jsxs('div', {
@@ -2778,7 +2778,7 @@ function nz() {
                 className: 'x78zum5 x1q0g3np x6s0dn4 x13a6bvl x98rzlu',
                 children: [jsx('div', {
                   ..._$$xk(nM.mobilePopupPromptModel),
-                  children: _$$tx('figmake.mobile_blocking_banner.model_version')
+                  children: renderI18nText('figmake.mobile_blocking_banner.model_version')
                 }), jsx(_$$d4, {
                   className: 'xorixrz x1hhpjz6 x1awj2ng x9a15t0 x1qx5ct2 xw4jnvo x1i3ajwb',
                   style: {
@@ -2795,10 +2795,10 @@ function nz() {
               className: 'x78zum5 xdt5ytf xl56j7k x1dc814f x1nfngrj x1mqxbix',
               children: [jsx('h2', {
                 ..._$$xk(nM.mobilePopupCardTitle),
-                children: _$$tx('figmake.mobile_blocking_banner.header')
+                children: renderI18nText('figmake.mobile_blocking_banner.header')
               }), jsx('p', {
                 ..._$$xk(nM.mobilePopupCardBody),
-                children: _$$tx('figmake.mobile_blocking_banner.body')
+                children: renderI18nText('figmake.mobile_blocking_banner.body')
               }), jsx('div', {
                 ..._$$xk(nM.mobilePopupCardButton),
                 children: jsx(_$$pW, {
@@ -2808,7 +2808,7 @@ function nz() {
                   },
                   width: 'fill',
                   href: '/files/recents',
-                  children: _$$tx('figmake.mobile_blocking_banner.back_button')
+                  children: renderI18nText('figmake.mobile_blocking_banner.back_button')
                 })
               })]
             })]
@@ -2842,9 +2842,9 @@ function nq() {
     };
   }();
   return jsx(_$$K2, {
-    'aria-label': _$$t('left_rail.back_to_canvas'),
+    'aria-label': getI18nString('left_rail.back_to_canvas'),
     'htmlAttributes': {
-      'data-tooltip': _$$t('left_rail.back_to_canvas'),
+      'data-tooltip': getI18nString('left_rail.back_to_canvas'),
       'data-tooltip-type': Ib.TEXT
     },
     'onClick': e,
@@ -3062,8 +3062,8 @@ function lG({
     recordingKey: s
   });
 }
-let lZ = Wh(() => _$$eU(null));
-let lQ = Wh(() => _$$eU(!1));
+let lZ = Wh(() => atom(null));
+let lQ = Wh(() => atom(!1));
 let l0 = 'styles-module--selectWebpagesButton--jz-y6';
 var l1 = (e => (e.SECONDARY = 'secondary', e.DANGER = 'danger', e.WARNING = 'warning', e))(l1 || {});
 function l5({
@@ -3092,7 +3092,7 @@ function an({
   return jsx(_$$F5, {
     'className': _$$s4.inlineBlock.px4.bRadius5.textBodyMedium.$$if(e, _$$s4.colorBgSelected.colorTextBrand, _$$s4.colorBgSecondary.colorText).$,
     'data-testid': t,
-    'children': e ? _$$tx('sites.metadata.controls.publish_status.published') : _$$tx('sites.metadata.controls.publish_status.not_published')
+    'children': e ? renderI18nText('sites.metadata.controls.publish_status.published') : renderI18nText('sites.metadata.controls.publish_status.not_published')
   });
 }
 function al({
@@ -3107,7 +3107,7 @@ function al({
     className: _$$s4.maxH400.$,
     children: [jsx('div', {
       className: _$$s4.h32.flex.itemsCenter.colorTextSecondary.$,
-      children: _$$t('sites.toolbar.publish_modal.ready_to_publish')
+      children: getI18nString('sites.toolbar.publish_modal.ready_to_publish')
     }), s && jsx(as, {
       guid: s,
       isHomepage: !0,
@@ -3123,7 +3123,7 @@ function al({
       isPagePublished: n?.includes(t) ?? !1
     }, t)), t.some(e => !i.has(e)) && jsx('div', {
       className: _$$s4.h32.flex.itemsCenter.colorTextSecondary.$,
-      children: _$$t('sites.toolbar.publish_modal.hide_from_publish')
+      children: getI18nString('sites.toolbar.publish_modal.hide_from_publish')
     }), t.filter(e => !i.has(e)).map(t => jsx(as, {
       guid: t,
       isSelected: !1,
@@ -3155,7 +3155,7 @@ function as({
 }) {
   let d = Fk(t => t.get(e)?.name, e);
   let c = Fk(t => t.get(e)?.responsiveSetSettings?.title ?? '', e);
-  let p = _$$md(_$$up).inProgress;
+  let p = useAtomWithSubscription(_$$up).inProgress;
   let x = `checkbox-${useId()}`;
   let m = `label-${useId()}`;
   return d ? jsxs('div', {
@@ -3194,12 +3194,12 @@ function as({
     }), !t && s && r && jsx(_$$b7, {
       'className': _$$s4.mlAuto.colorIconWarningPressed.$,
       'data-tooltip-type': Ib.TEXT,
-      'data-tooltip': _$$t('sites.toolbar.publish_modal.page_will_unpublish_at_next_update'),
+      'data-tooltip': getI18nString('sites.toolbar.publish_modal.page_will_unpublish_at_next_update'),
       'data-tooltip-show-above': !0,
       'data-tooltip-max-width': 300,
       'data-testid': 'page-unpublish-warning'
     })]
-  }, e) : (_$$x('sites_publish_modal', 'node_not_found', {
+  }, e) : (logError('sites_publish_modal', 'node_not_found', {
     guid: e
   }), null);
 }
@@ -3235,13 +3235,13 @@ function ax({
   }
   if (i.status === _$$H3.ERRORS) {
     return jsx('div', {
-      children: _$$t('sites.toolbar.publish_modal.error_loading_publish_history')
+      children: getI18nString('sites.toolbar.publish_modal.error_loading_publish_history')
     });
   }
   let n = _$$oA(i.data?.siteMount);
   let a = n?.publishEvents ?? [];
   return a.length === 0 ? jsx('div', {
-    children: _$$t('sites.toolbar.publish_modal.no_publish_history')
+    children: getI18nString('sites.toolbar.publish_modal.no_publish_history')
   }) : jsx('div', {
     children: a.map(e => jsx(am, {
       publishEvent: e,
@@ -3259,15 +3259,15 @@ function am({
 }) {
   let r;
   let o = Oc();
-  let d = o ? _$$t('figmake.publish_modal.publish_history_dropdown.published_app') : _$$t('sites.toolbar.publish_modal.publish_history_dropdown.published_site');
-  let c = o ? _$$t('figmake.toolbar.publish_modal.publish_history_dropdown.unpublished_app') : _$$t('sites.toolbar.publish_modal.publish_history_dropdown.unpublished_site');
+  let d = o ? getI18nString('figmake.publish_modal.publish_history_dropdown.published_app') : getI18nString('sites.toolbar.publish_modal.publish_history_dropdown.published_site');
+  let c = o ? getI18nString('figmake.toolbar.publish_modal.publish_history_dropdown.unpublished_app') : getI18nString('sites.toolbar.publish_modal.publish_history_dropdown.unpublished_site');
   let p = () => {
     if (e.action !== 'unpublish' && e.siteBundle?.fileVersion?.label) return e.siteBundle.fileVersion.label;
     switch (e.action) {
       case 'publish_new_bundle':
-        return i ? d : _$$t('sites.toolbar.publish_modal.publish_history_dropdown.published_changes');
+        return i ? d : getI18nString('sites.toolbar.publish_modal.publish_history_dropdown.published_changes');
       case 'publish_preexisting_bundle':
-        return _$$t('sites.toolbar.publish_modal.publish_history_dropdown.republished_previous_version');
+        return getI18nString('sites.toolbar.publish_modal.publish_history_dropdown.republished_previous_version');
       case 'unpublish':
         return c;
       default:
@@ -3293,7 +3293,7 @@ function am({
     return null;
   }
   let v = () => {
-    _$$sx('sites_publish_history_republish_clicked', {
+    trackEventAnalytics('sites_publish_history_republish_clicked', {
       fileKey: _,
       siteBundleId: e.siteBundle?.id,
       productType: o ? 'figmake' : 'sites'
@@ -3321,14 +3321,14 @@ function am({
     },
     children: jsx('span', {
       'data-testid': 'name-this-version-button',
-      'children': _$$t('sites.toolbar.publish_modal.publish_history_dropdown.name_this_version')
+      'children': getI18nString('sites.toolbar.publish_modal.publish_history_dropdown.name_this_version')
     })
   }, 0));
   e.action !== 'unpublish' && !t && e.siteBundle?.id && j.push(jsx(_$$c$4, {
     onClick: () => v(),
     children: jsx('span', {
       'data-testid': 'republish-button',
-      'children': _$$t('sites.toolbar.publish_modal.publish_history_dropdown.republish')
+      'children': getI18nString('sites.toolbar.publish_modal.publish_history_dropdown.republish')
     })
   }, 1));
   let k = j.length > 0;
@@ -3357,13 +3357,13 @@ function am({
               children: p()
             }), '\xB7', jsx('div', {
               className: 'x1j6dyjg x1n0bwc9',
-              children: t ? _$$t('sites.toolbar.publish_modal.publish_history_dropdown.latest') : _$$t('sites.toolbar.publish_modal.publish_history_dropdown.published_date', {
+              children: t ? getI18nString('sites.toolbar.publish_modal.publish_history_dropdown.latest') : getI18nString('sites.toolbar.publish_modal.publish_history_dropdown.published_date', {
                 publishedDate: e.createdAt
               })
             })]
           }), jsx('div', {
             className: 'x1j6dyjg x1n0bwc9',
-            children: e.action !== 'unpublish' && e.siteBundle?.fileVersion?.description ? e.siteBundle.fileVersion.description : t ? _$$t('sites.toolbar.publish_modal.publish_history_dropdown.from_date', {
+            children: e.action !== 'unpublish' && e.siteBundle?.fileVersion?.description ? e.siteBundle.fileVersion.description : t ? getI18nString('sites.toolbar.publish_modal.publish_history_dropdown.from_date', {
               publishedDate: e.createdAt
             }) : null
           }), jsxs('div', {
@@ -3387,9 +3387,9 @@ function am({
         }), k && jsx(_$$E5, {
           'ref': h,
           'className': 'x1717udv xvy4d1p xxk0z11 x1epfdc xwbv1nw',
-          'aria-label': _$$t('sites.toolbar.publish_modal.version_operations', {
+          'aria-label': getI18nString('sites.toolbar.publish_modal.version_operations', {
             publishedDate: e.createdAt,
-            user: e.actor?.handle ?? _$$t('sites.toolbar.publish_modal.unknown_user')
+            user: e.actor?.handle ?? getI18nString('sites.toolbar.publish_modal.unknown_user')
           }),
           'onClick': e => {
             x(_$$j2({
@@ -3475,13 +3475,13 @@ function a_(e) {
     selectedResponsiveSetGuids,
     onViewErrors
   } = e;
-  let n = _$$md(_$$o4);
+  let n = useAtomWithSubscription(_$$o4);
   let a = Array.from(selectedResponsiveSetGuids).reduce((e, t) => e + (n[t]?.length ?? 0), 0);
   return jsx('div', {
     'data-testid': 'site-review-issues-row',
     'className': _$$s4.py4.$,
     'children': jsx(af, {
-      label: _$$t('sites.toolbar.publish_modal.issues_label'),
+      label: getI18nString('sites.toolbar.publish_modal.issues_label'),
       content: a > 0 ? jsx('div', {
         className: _$$s4.flex.justifyBetween.itemsCenter.overflowHidden.$,
         children: jsx(_$$E5, {
@@ -3489,16 +3489,16 @@ function a_(e) {
           onClick: onViewErrors,
           children: jsx(_$$E6, {
             variant: 'warningFilled',
-            children: _$$tx('sites.toolbar.publish_modal.num_issues_to_review', {
+            children: renderI18nText('sites.toolbar.publish_modal.num_issues_to_review', {
               numIssues: a
             })
           })
         })
       }) : jsx('span', {
-        children: _$$tx('sites.lint.no-issues')
+        children: renderI18nText('sites.lint.no-issues')
       }),
       action: a > 0 ? jsx(_$$E5, {
-        'aria-label': _$$t('sites.toolbar.publish_modal.review_issues_aria'),
+        'aria-label': getI18nString('sites.toolbar.publish_modal.review_issues_aria'),
         'className': v()(_$$s4.wFull.flex.justifyBetween.bRadius5.$, l0),
         'onClick': onViewErrors,
         'children': jsx(_$$a4, {
@@ -3514,14 +3514,14 @@ function ab() {
   return jsx('div', {
     className: _$$s4.py4.$,
     children: jsx(af, {
-      label: _$$t('sites.toolbar.publish_modal.issues_label'),
+      label: getI18nString('sites.toolbar.publish_modal.issues_label'),
       content: jsxs('div', {
         className: 'x78zum5 x1q0g3np',
         children: [jsx(_$$k7, {
           size: 'sm'
         }), jsx('span', {
           className: 'x1iog12x x1n0bwc9',
-          children: _$$tx('sites.lint.looking-for-issues')
+          children: renderI18nText('sites.lint.looking-for-issues')
         })]
       })
     })
@@ -3540,10 +3540,10 @@ function aj(e) {
   let {
     selectedResponsiveSetGuids
   } = e;
-  let i = _$$md(_$$o4);
+  let i = useAtomWithSubscription(_$$o4);
   return Array.from(selectedResponsiveSetGuids).reduce((e, t) => e + (i[t]?.length ?? 0), 0) === 0 ? jsx(_$$tE, {
-    title: _$$t('sites.toolbar.publish_modal.no_issues.title'),
-    description: _$$t('sites.toolbar.publish_modal.no_issues.description')
+    title: getI18nString('sites.toolbar.publish_modal.no_issues.title'),
+    description: getI18nString('sites.toolbar.publish_modal.no_issues.description')
   }) : jsx(F8, {
     lintingResults: i,
     onlyShowResponsiveSetGuids: Array.from(selectedResponsiveSetGuids),
@@ -3578,53 +3578,53 @@ function aE({
   }) : null;
 }
 function aN() {
-  return _$$tx('sites.toolbar.publish_modal.publish_in_progress_description');
+  return renderI18nText('sites.toolbar.publish_modal.publish_in_progress_description');
 }
 function aR() {
   let e = _$$a5();
-  let t = _$$md(lZ);
+  let t = useAtomWithSubscription(lZ);
   let i = Oc();
   let n = No();
   let a = _$$iW(n).unwrapOr(!0);
-  return i && t && getFeatureFlags().cmty_make_publishing ? a ? _$$tx('sites.toolbar.publish_modal.community_publish_disclaimer', {
+  return i && t && getFeatureFlags().cmty_make_publishing ? a ? renderI18nText('sites.toolbar.publish_modal.community_publish_disclaimer', {
     creator_agreement: jsx(_$$CY, {
       href: aT,
       target: '_blank',
       trusted: !0,
-      children: _$$tx('sites.toolbar.publish_modal.creator_agreement')
+      children: renderI18nText('sites.toolbar.publish_modal.creator_agreement')
     })
-  }) : _$$tx('sites.toolbar.publish_modal.community_publish_disclaimer_with_web', {
+  }) : renderI18nText('sites.toolbar.publish_modal.community_publish_disclaimer_with_web', {
     creator_agreement: jsx(_$$CY, {
       href: aT,
       target: '_blank',
       trusted: !0,
-      children: _$$tx('sites.toolbar.publish_modal.creator_agreement')
+      children: renderI18nText('sites.toolbar.publish_modal.creator_agreement')
     }),
     beta_terms: jsx(_$$CY, {
       href: aI,
       target: '_blank',
       trusted: !0,
-      children: _$$tx('sites.toolbar.publish_modal.beta_terms')
+      children: renderI18nText('sites.toolbar.publish_modal.beta_terms')
     })
-  }) : e ? _$$tx('sites.toolbar.publish_modal.acceptable_publication_policy_agreement', {
+  }) : e ? renderI18nText('sites.toolbar.publish_modal.acceptable_publication_policy_agreement', {
     acceptable_publication_policy: jsx(_$$CY, {
       href: aC,
       target: '_blank',
       trusted: !0,
-      children: _$$tx('sites.toolbar.publish_modal.acceptable_publication_policy')
+      children: renderI18nText('sites.toolbar.publish_modal.acceptable_publication_policy')
     })
-  }) : _$$tx('sites.toolbar.publish_modal.terms_agreement', {
+  }) : renderI18nText('sites.toolbar.publish_modal.terms_agreement', {
     figmas_beta_terms: jsx(_$$CY, {
       href: aI,
       target: '_blank',
       trusted: !0,
-      children: _$$tx('sites.toolbar.publish_modal.beta_terms')
+      children: renderI18nText('sites.toolbar.publish_modal.beta_terms')
     }),
     acceptable_publication_policy: jsx(_$$CY, {
       href: aC,
       target: '_blank',
       trusted: !0,
-      children: _$$tx('sites.toolbar.publish_modal.acceptable_publication_policy')
+      children: renderI18nText('sites.toolbar.publish_modal.acceptable_publication_policy')
     })
   });
 }
@@ -3637,7 +3637,7 @@ function aA() {
       }
     }), jsx('div', {
       ..._$$Ay.props(aL.publishingSubtext),
-      children: _$$tx('sites.toolbar.publish_modal.make_fonts_warning')
+      children: renderI18nText('sites.toolbar.publish_modal.make_fonts_warning')
     })]
   }) : null;
 }
@@ -3673,7 +3673,7 @@ function aD({
         '--color-icon': 'var(--color-icon-secondary)'
       },
       'data-tooltip-type': Ib.TEXT,
-      'data-tooltip': _$$t('sites.toolbar.publish_modal.publish_your_site_to_get_your_figma_site_subdomain', {
+      'data-tooltip': getI18nString('sites.toolbar.publish_modal.publish_your_site_to_get_your_figma_site_subdomain', {
         domain: _$$nC()
       }),
       'data-tooltip-show-immediately': !0,
@@ -3687,18 +3687,18 @@ function aD({
         ignoreLineBreaks: !1
       }));
     },
-    'aria-label': _$$t('sites.toolbar.publish_modal.copy_label_to_clipboard', {
-      label: _$$t('sites.toolbar.publish_modal.domain_header')
+    'aria-label': getI18nString('sites.toolbar.publish_modal.copy_label_to_clipboard', {
+      label: getI18nString('sites.toolbar.publish_modal.domain_header')
     }),
     'htmlAttributes': {
-      'data-tooltip': _$$t('sites.toolbar.publish_modal.copy_to_clipboard'),
+      'data-tooltip': getI18nString('sites.toolbar.publish_modal.copy_to_clipboard'),
       'data-tooltip-type': Ib.TEXT,
       'data-tooltip-show-immediately': 'true'
     },
     'children': jsx(_$$a6, {})
   }) : void 0;
   return jsx(af, {
-    label: i ? _$$t('figmake.toolbar.publish_modal.url_header') : _$$t('sites.toolbar.publish_modal.site_url'),
+    label: i ? getI18nString('figmake.toolbar.publish_modal.url_header') : getI18nString('sites.toolbar.publish_modal.site_url'),
     content: a,
     action: r
   });
@@ -3714,7 +3714,7 @@ function az({
         style: {
           minWidth: '24px'
         }
-      }), _$$tx('sites.toolbar.publish_modal.publish_disabled_incident')]
+      }), renderI18nText('sites.toolbar.publish_modal.publish_disabled_incident')]
     })
   });
 }
@@ -3748,7 +3748,7 @@ function aX({
               children: n
             }), jsx('span', {
               className: 'show_love_modal--creatorName--Gklrz',
-              children: _$$tx('community.figma_make.show_love.attribution_row', {
+              children: renderI18nText('community.figma_make.show_love.attribution_row', {
                 author: i
               })
             })]
@@ -3794,7 +3794,7 @@ function aV() {
         })
       }), jsx('div', {
         className: 'show_love_modal--headerText--fVEG9',
-        children: _$$t('community.figma_make.show_love.header')
+        children: getI18nString('community.figma_make.show_love.header')
       })]
     }), i.map(e => jsx(aX, {
       hubFileId: e.hubFileId
@@ -3853,7 +3853,7 @@ function a3({
         className: 'xh8yej3 x5yr21d x193iq5w xeuugli xl1xv1r x1lliihq x2lah0s',
         src: n,
         loading: 'lazy',
-        alt: _$$t('community.publishing.thumbnail_image'),
+        alt: getI18nString('community.publishing.thumbnail_image'),
         draggable: !1
       })
     }), jsxs('div', {
@@ -3863,7 +3863,7 @@ function a3({
         children: t
       }), i && jsx('div', {
         ..._$$xk(a4.author),
-        children: _$$t('community.publishing.by_author', {
+        children: getI18nString('community.publishing.by_author', {
           authorName: i
         })
       })]
@@ -3904,7 +3904,7 @@ function a8({
     className: 'x1v8gsql x19y5rnk xi4r6k5 x18d9i69 xkh2ocl x78zum5 xdt5ytf x7hzu26',
     children: [jsx('div', {
       ..._$$xk(a4.collectionLabel),
-      children: _$$t('sites.toolbar.publish_modal.make_collection_label')
+      children: getI18nString('sites.toolbar.publish_modal.make_collection_label')
     }), jsxs('div', {
       className: 'xrvj5dj x1p9eum2 x1nfngrj xzp6m1v xb3r6kr',
       children: [jsx(a3, {
@@ -3954,14 +3954,14 @@ function a9({
     let n = Oc();
     let l = q5();
     let r = getFeatureFlags().cmty_make_publishing ?? !1;
-    let d = _$$md(lZ) ?? !1;
+    let d = useAtomWithSubscription(lZ) ?? !1;
     let c = function () {
-      let [e] = _$$fp(lZ);
+      let [e] = useAtomValueAndSetter(lZ);
       let t = _$$S3();
       let i = YY(t);
       return !!Oc() && !!getFeatureFlags().cmty_make_publishing && (i.status !== 'loaded' || i.data && !e);
     }();
-    let u = _$$md(_$$td) ?? !1;
+    let u = useAtomWithSubscription(_$$td) ?? !1;
     let p = n && d && r && u;
     let {
       canPublishAsHubFile,
@@ -3987,8 +3987,8 @@ function a9({
     fileKey: e,
     setCommunityPublishingState: n
   });
-  let [r, d] = _$$fp(lZ);
-  let [c, u] = _$$fp(lQ);
+  let [r, d] = useAtomValueAndSetter(lZ);
+  let [c, u] = useAtomValueAndSetter(lQ);
   let p = getFeatureFlags().cmty_make_publishing_default_off_for_pro ? t : i;
   return (useEffect(() => {
     c || (d(p), u(!0));
@@ -4000,7 +4000,7 @@ function a9({
   });
 }
 function se() {
-  let [e, t] = _$$fp(lZ);
+  let [e, t] = useAtomValueAndSetter(lZ);
   let i = useId();
   let n = _$$S3();
   let s = YY(n).unwrapOr(!1);
@@ -4015,19 +4015,19 @@ function se() {
       className: 'x78zum5 x1q0g3np x1qughib x6s0dn4 x98rzlu x1nfngrj xkh2ocl',
       children: [jsx('div', {
         ..._$$xk(si.strongLabel),
-        children: _$$t('sites.toolbar.publish_modal.allow_others_to_remix_on_community')
+        children: getI18nString('sites.toolbar.publish_modal.allow_others_to_remix_on_community')
       }), jsx(_$$v7, {
         id: i,
         checked: e ?? !1
       })]
     }), !(s && !e) && jsx('div', {
       ..._$$xk(si.subtitle),
-      children: _$$t('sites.toolbar.publish_modal.feature_on_community_subtitle')
+      children: getI18nString('sites.toolbar.publish_modal.feature_on_community_subtitle')
     })]
   });
 }
 function st() {
-  let [e] = _$$fp(lZ);
+  let [e] = useAtomValueAndSetter(lZ);
   let t = _$$ol();
   let i = _$$h7.useTrackingContext({
     trigger: _$$b6.FIGMAKE_PUBLISH_SITE
@@ -4036,7 +4036,7 @@ function st() {
   let a = YY(n);
   let s = _$$y6(t?.id || '', _$$b6.FIGMAKE_PUBLISH_SITE);
   return e || !a.data ? null : jsx('div', {
-    children: _$$tx('sites.toolbar.publish_modal.allow_others_to_remix_on_community.description', {
+    children: renderI18nText('sites.toolbar.publish_modal.allow_others_to_remix_on_community.description', {
       upgradePlanLink: jsx(Us, {
         className: _$$s4.noWrap.cursorDefault.$,
         onClick: s,
@@ -4045,7 +4045,7 @@ function st() {
           ...i
         },
         trusted: !0,
-        children: _$$tx('sites.toolbar.publish_modal.allow_others_to_remix_on_community.upgrade_plan_link')
+        children: renderI18nText('sites.toolbar.publish_modal.allow_others_to_remix_on_community.upgrade_plan_link')
       })
     })
   });
@@ -4098,7 +4098,7 @@ let sr = Ju(({
       createNewVersionOnSubmit: !0
     })
   }) : jsx(_$$r3, {
-    title: _$$t('community.publishing.publish_your_file_to_community')
+    title: getI18nString('community.publishing.publish_your_file_to_community')
   });
 });
 function so({
@@ -4109,7 +4109,7 @@ function so({
     icon: jsx(_$$b7, {}),
     inLine: !0,
     children: jsx('p', {
-      children: _$$t('sites.toolbar.publish_modal.pages_will_unpublish_with_the_next_update', {
+      children: getI18nString('sites.toolbar.publish_modal.pages_will_unpublish_with_the_next_update', {
         numPages: e
       })
     })
@@ -4119,7 +4119,7 @@ var sd = (e => (e.Main = 'main', e.PageSelection = 'page-selection', e.ReviewIss
 function sc({
   isFigmake: e
 }) {
-  let t = e ? _$$t('figmake.publish_modal.site_title_label') : _$$t('sites.metadata.controls.title_site.label');
+  let t = e ? getI18nString('figmake.publish_modal.site_title_label') : getI18nString('sites.metadata.controls.title_site.label');
   return jsx('div', {
     'data-testid': 'site-title-row',
     'className': _$$s4.py4.$,
@@ -4189,7 +4189,7 @@ function sp({
             'data-testid': 'site-status-row',
             'className': _$$s4.py4.$,
             'children': jsx(af, {
-              label: _$$t('sites.toolbar.publish_modal.status_header'),
+              label: getI18nString('sites.toolbar.publish_modal.status_header'),
               content: jsx('div', {
                 className: _$$s4.flex.itemsCenter.h24.$,
                 children: jsx(an, {
@@ -4202,19 +4202,19 @@ function sp({
             'data-testid': 'site-pages-row',
             'className': _$$s4.py4.$,
             'children': jsx(af, {
-              label: _$$t('sites.toolbar.publish_modal.pages_label'),
+              label: getI18nString('sites.toolbar.publish_modal.pages_label'),
               content: jsx('div', {
                 className: _$$s4.flex.justifyBetween.itemsCenter.overflowHidden.$,
                 children: jsx(_$$E5, {
                   className: v()(_$$s4.wFull.flex.justifyBetween.py4.bRadius5.$),
                   onClick: () => C('page-selection'),
-                  children: _$$tx('sites.toolbar.publish_modal.num_pages', {
+                  children: renderI18nText('sites.toolbar.publish_modal.num_pages', {
                     numPages: p.size
                   })
                 })
               }),
               action: jsx(_$$E5, {
-                'aria-label': _$$t('sites.toolbar.publish_modal.select_pages_to_publish'),
+                'aria-label': getI18nString('sites.toolbar.publish_modal.select_pages_to_publish'),
                 'className': v()(_$$s4.wFull.flex.justifyBetween.bRadius5.$, l0),
                 'onClick': () => C('page-selection'),
                 'children': jsx(_$$a4, {
@@ -4228,7 +4228,7 @@ function sp({
             selectedResponsiveSetGuids: p,
             onViewErrors: () => {
               C('review-issues');
-              _$$sx('sites_open_lint_modal', {
+              trackEventAnalytics('sites_open_lint_modal', {
                 source: 'publish_modal'
               });
             }
@@ -4236,7 +4236,7 @@ function sp({
             'data-testid': 'site-last-published-row',
             'className': _$$s4.py4.$,
             'children': jsx(af, {
-              label: _$$t('sites.toolbar.publish_modal.last_published_header'),
+              label: getI18nString('sites.toolbar.publish_modal.last_published_header'),
               content: jsxs('div', {
                 className: _$$s4.flex.itemsCenter.$,
                 children: [jsx(_$$h5, {
@@ -4262,11 +4262,11 @@ function sp({
                 })]
               }),
               action: getFeatureFlags().sts_revert_publish && y ? jsx(_$$E5, {
-                'aria-label': _$$t('sites.toolbar.publish_modal.publish_history'),
+                'aria-label': getI18nString('sites.toolbar.publish_modal.publish_history'),
                 'className': v()(_$$s4.wFull.flex.justifyBetween.bRadius5.$, l0),
                 'onClick': () => {
                   C('publish-history');
-                  _$$sx('sites_publish_history_opened', {
+                  trackEventAnalytics('sites_publish_history_opened', {
                     productType: A ? 'figmake' : 'sites'
                   });
                 },
@@ -4321,7 +4321,7 @@ function sp({
     return e ? !getFeatureFlags().bake_pub : !!t && !getFeatureFlags().sts_pub_enabled;
   }();
   let B = getFeatureFlags().cmty_make_publishing;
-  let $ = _$$md(lZ) ?? !1;
+  let $ = useAtomWithSubscription(lZ) ?? !1;
   let U = A && B && $;
   let [{
     isCommunityPublishingToggledOffForStarter: K,
@@ -4340,7 +4340,7 @@ function sp({
     let t = getSingletonSceneGraph();
     let n = t.getCurrentPage();
     n && su(e, t, n);
-    U ? (await doSetup()) && (_$$sx(_$$mv, {
+    U ? (await doSetup()) && (trackEventAnalytics(_$$mv, {
       fileKey: e,
       userId: N?.id,
       orgId: R?.id,
@@ -4379,7 +4379,7 @@ function sp({
                 style: {
                   minWidth: '16px'
                 }
-              }), d ? _$$tx('sites.toolbar.publish_modal.last_update_failed') : _$$tx('sites.toolbar.publish_modal.last_publish_failed')]
+              }), d ? renderI18nText('sites.toolbar.publish_modal.last_update_failed') : renderI18nText('sites.toolbar.publish_modal.last_publish_failed')]
             })
           }), getFeatureFlags().sts_ppp && f && D.length > 0 && jsx(so, {
             numUnpublishingPages: D.length
@@ -4417,7 +4417,7 @@ function sp({
                 })) : (n(), t());
               },
               'data-testid': 'sitesModalPublishButton',
-              'children': _$$tx('sites.toolbar.publish_modal.connect_a_domain')
+              'children': renderI18nText('sites.toolbar.publish_modal.connect_a_domain')
             }), jsx(IK, {
               'variant': 'primary',
               'onClick': J,
@@ -4427,8 +4427,8 @@ function sp({
                 className: v()(_$$s4.flex.itemsCenter.gap4.justifyCenter.$, 'styles-module--loadingSpinnerWrapper--mnPxw'),
                 children: [jsx(_$$k7, {
                   size: 'sm'
-                }), _$$tx('sites.toolbar.publish_modal.publishing_label')]
-              }) : Z ? _$$tx('sites.toolbar.publish_modal.update') : _$$tx('sites.toolbar.publish_modal.publish')
+                }), renderI18nText('sites.toolbar.publish_modal.publishing_label')]
+              }) : Z ? renderI18nText('sites.toolbar.publish_modal.update') : renderI18nText('sites.toolbar.publish_modal.publish')
             })]
           })]
         })
@@ -4441,7 +4441,7 @@ function sx() {
     className: 'xilkfi8',
     children: jsx(_$$E6, {
       variant: 'inactiveOutline',
-      children: _$$t('general.beta')
+      children: getI18nString('general.beta')
     })
   });
 }
@@ -4451,7 +4451,7 @@ function sm({
 }) {
   let i = Oc();
   let n = _$$a5();
-  let a = i ? _$$tx('figmake.publish_modal.modal_title') : _$$tx('sites.toolbar.publish_modal.publish_site');
+  let a = i ? renderI18nText('figmake.publish_modal.modal_title') : renderI18nText('sites.toolbar.publish_modal.publish_site');
   let s = i && !n ? jsx(sx, {}) : null;
   switch (e) {
     case 'main':
@@ -4463,13 +4463,13 @@ function sm({
         className: _$$s4.flex.itemsCenter.gap4.textBodyMediumStrong.$,
         children: [jsx(_$$E5, {
           'onClick': () => t('main'),
-          'aria-label': _$$t('general.back'),
+          'aria-label': getI18nString('general.back'),
           'children': jsx(_$$t6, {})
         }), jsxs('span', {
           className: _$$s4.colorTextSecondary.$,
           children: [a, ' /']
         }), jsx('span', {
-          children: _$$tx('sites.toolbar.publish_modal.pages_label')
+          children: renderI18nText('sites.toolbar.publish_modal.pages_label')
         })]
       });
     case 'review-issues':
@@ -4477,13 +4477,13 @@ function sm({
         className: _$$s4.flex.itemsCenter.gap4.textBodyMediumStrong.$,
         children: [jsx(_$$E5, {
           'onClick': () => t('main'),
-          'aria-label': _$$t('general.back'),
+          'aria-label': getI18nString('general.back'),
           'children': jsx(_$$t6, {})
         }), jsxs('span', {
           className: _$$s4.colorTextSecondary.$,
           children: [a, ' /']
         }), jsx('span', {
-          children: _$$tx('sites.toolbar.publish_modal.review_issues_label')
+          children: renderI18nText('sites.toolbar.publish_modal.review_issues_label')
         })]
       });
     case 'publish-history':
@@ -4491,13 +4491,13 @@ function sm({
         className: _$$s4.flex.itemsCenter.gap4.textBodyMediumStrong.$,
         children: [jsx(_$$E5, {
           'onClick': () => t('main'),
-          'aria-label': _$$t('general.back'),
+          'aria-label': getI18nString('general.back'),
           'children': jsx(_$$t6, {})
         }), jsxs('span', {
           className: _$$s4.colorTextSecondary.$,
           children: [a, ' /']
         }), jsx('span', {
-          children: _$$tx('sites.toolbar.publish_modal.publish_history_label')
+          children: renderI18nText('sites.toolbar.publish_modal.publish_history_label')
         })]
       });
     default:
@@ -4523,7 +4523,7 @@ let sh = Ju(e => {
       updateGuidSelectionState
     } = _$$q5(publishStatus);
     let c = _$$_t(fileKey);
-    let u = _$$md(_$$up).inProgress;
+    let u = useAtomWithSubscription(_$$up).inProgress;
     if (publishStatus.isLoading || !selectedResponsiveSetGuids) return null;
     let {
       isPublishing,
@@ -4676,7 +4676,7 @@ function sv(e) {
         handlePublish: t ? _$$lQ : handleUpgradeCallback(),
         isPublishingDisabled: t,
         publishButtonTooltipHtmlAttributes: {
-          'data-tooltip': e ? _$$t('fullscreen.toolbar.we_ve_sent_your_request_to_your_team_s_admins_we_ll_let_you_know_when_they_respond') : null,
+          'data-tooltip': e ? getI18nString('fullscreen.toolbar.we_ve_sent_your_request_to_your_team_s_admins_we_ll_let_you_know_when_they_respond') : null,
           'data-tooltip-type': Ib.TEXT,
           'data-tooltip-max-width': 200,
           'data-tooltip-show-below': !0
@@ -4687,7 +4687,7 @@ function sv(e) {
     return {
       isPublishingDisabled: !0,
       publishButtonTooltipHtmlAttributes: {
-        'data-tooltip': upgradeDisabledReason === 'disabled-for-org' ? _$$t('sites.toolbar.org_disabled_publishing') : upgradeDisabledReason === 'student-team' ? _$$t('sites.toolbar.publish_modal.publish_disabled_rollout') : upgradeDisabledReason === 'disabled-for-user' ? _$$t('sites.toolbar.publishing_is_disabled_for_your_account_please_contact_support') : void 0,
+        'data-tooltip': upgradeDisabledReason === 'disabled-for-org' ? getI18nString('sites.toolbar.org_disabled_publishing') : upgradeDisabledReason === 'student-team' ? getI18nString('sites.toolbar.publish_modal.publish_disabled_rollout') : upgradeDisabledReason === 'disabled-for-user' ? getI18nString('sites.toolbar.publishing_is_disabled_for_your_account_please_contact_support') : void 0,
         'data-tooltip-type': Ib.TEXT,
         'data-tooltip-show-immediately': 'true'
       }
@@ -4719,8 +4719,8 @@ function sj({
 }) {
   let n = e.key;
   let a = t ? _$$c9 : Ih;
-  let s = _$$tx('sites.toolbar.publish');
-  let r = _$$tx('figmake.header.publish');
+  let s = renderI18nText('sites.toolbar.publish');
+  let r = renderI18nText('figmake.header.publish');
   _$$$D({
     fileKey: n
   });
@@ -4744,7 +4744,7 @@ function sj({
 function sT({
   asLargeVariant: e
 } = {}) {
-  let [t, i] = _$$fp(_$$gn);
+  let [t, i] = useAtomValueAndSetter(_$$gn);
   let n = $q();
   if (useEffect(() => () => {
     n();
@@ -4758,9 +4758,9 @@ function sT({
     'checked': t,
     'onIcon': r,
     'offIcon': r,
-    'aria-label': _$$t('figmake.mobile_preview'),
+    'aria-label': getI18nString('figmake.mobile_preview'),
     'htmlAttributes': {
-      'data-tooltip': _$$t('figmake.mobile_preview'),
+      'data-tooltip': getI18nString('figmake.mobile_preview'),
       'data-tooltip-type': Ib.TEXT
     },
     'onChange': () => i(!t)
@@ -4784,12 +4784,12 @@ function sA({
     fileKey: e.key
   });
   let d = useCallback(() => {
-    _$$az.trackDefinedEvent('ai_for_production.figmake_open_preview_in_new_tab_clicked', {
+    analyticsEventManager.trackDefinedEvent('ai_for_production.figmake_open_preview_in_new_tab_clicked', {
       fileKey: n ?? ''
     });
     openFigmakeFullscreenInNewTab();
   }, [openFigmakeFullscreenInNewTab, n]);
-  let c = _$$md(_$$az2);
+  let c = useAtomWithSubscription(_$$az2);
   useEffect(() => {
     let e = () => {
       manager.setOpen(!0);
@@ -4800,7 +4800,7 @@ function sA({
   return jsxs(_$$bL3, {
     manager,
     children: [jsx(_$$c9, {
-      'children': _$$tx('figmake.header.publish'),
+      'children': renderI18nText('figmake.header.publish'),
       'variant': 'secondary',
       'data-testid': 'make-publish-button',
       'htmlAttributes': {
@@ -4817,7 +4817,7 @@ function sA({
         },
         children: [jsx(Q$, {
           children: jsx(_$$K3, {})
-        }), _$$t('sites.toolbar.make_publish_menu.preview_in_new_tab')]
+        }), getI18nString('sites.toolbar.make_publish_menu.preview_in_new_tab')]
       }), jsxs(q7, {
         disabled: r.isPublishingDisabled,
         onClick: r.handlePublish ?? _$$lQ,
@@ -4826,7 +4826,7 @@ function sA({
         },
         children: [jsx(Q$, {
           children: jsx(_$$J8, {})
-        }), _$$t('sites.toolbar.make_publish_menu.publish_to_web')]
+        }), getI18nString('sites.toolbar.make_publish_menu.publish_to_web')]
       })]
     })]
   });
@@ -4848,7 +4848,7 @@ function sX() {
       'data-test-id': 'email-btn'
     },
     onClick: e,
-    children: _$$tx('footer_banner.sign_up_with_email')
+    children: renderI18nText('footer_banner.sign_up_with_email')
   });
 }
 function sV() {
@@ -4879,7 +4879,7 @@ function sV() {
           });
         });
       },
-      children: _$$t('footer_banner.continue_with_google')
+      children: getI18nString('footer_banner.continue_with_google')
     }), jsx(_$$P3, {
       origin: DT.LOGGED_OUT_FILE,
       overrideUseFedCMPrompt: !1
@@ -4899,7 +4899,7 @@ function sW() {
   return jsx(_$$WW, {
     variant: 'primary',
     onClick: e,
-    children: _$$t('fullscreen.toolbar.multiplayer.share')
+    children: getI18nString('fullscreen.toolbar.multiplayer.share')
   });
 }
 function sY() {
@@ -4923,17 +4923,17 @@ function sJ({
     htmlAttributes: {
       'data-onboarding-key': _$$S$
     },
-    children: _$$t('figmake.make_a_copy')
+    children: getI18nString('figmake.make_a_copy')
   }) : jsx(Fragment, {});
 }
 let sZ = _$$ex('figmake_open_fullscreen_preview_new_tab', () => {
   return jsxs('div', {
     className: 'x78zum5 xdt5ytf xl56j7k x6s0dn4',
     children: [jsx('div', {
-      children: _$$t('figmake.open_new_tab_preview')
+      children: getI18nString('figmake.open_new_tab_preview')
     }), jsx('div', {
       className: 'xkrz9af x1470adl',
-      children: _$$t('figmake.open_new_tab_preview_footer')
+      children: getI18nString('figmake.open_new_tab_preview_footer')
     })]
   });
 });
@@ -4943,14 +4943,14 @@ function sQ() {
   } = Ve();
   let t = _$$tS();
   let i = useCallback(() => {
-    _$$az.trackDefinedEvent('ai_for_production.figmake_open_preview_in_new_tab_clicked', {
+    analyticsEventManager.trackDefinedEvent('ai_for_production.figmake_open_preview_in_new_tab_clicked', {
       fileKey: t ?? ''
     });
     openFigmakeFullscreenInNewTab();
   }, [openFigmakeFullscreenInNewTab, t]);
   return jsx(_$$J6, {
     'onClick': i,
-    'aria-label': _$$t('figmake.open_new_tab_preview'),
+    'aria-label': getI18nString('figmake.open_new_tab_preview'),
     'data-testid': 'open-fullscreen-preview-button',
     'htmlAttributes': {
       'data-tooltip': sZ,
@@ -4967,7 +4967,7 @@ function s0() {
     Y5.triggerActionEnumInUserEditScope(rcl.COPY_MAKE_FOR_DESIGN);
   }, []);
   if (!getFeatureFlags().bake_canvas) return null;
-  let i = _$$t('figmake.copy-make-for-design');
+  let i = getI18nString('figmake.copy-make-for-design');
   return jsx(_$$J6, {
     'onClick': t,
     'aria-label': i,
@@ -5000,7 +5000,7 @@ function s5({
   let d = _$$u4();
   let c = I4(n);
   let p = useDispatch();
-  let [x, m] = _$$fp($C);
+  let [x, m] = useAtomValueAndSetter($C);
   let h = _$$_H2();
   let {
     getUpgradeEligibility
@@ -5018,7 +5018,7 @@ function s5({
     children: [jsxs('div', {
       className: 'x78zum5 x6s0dn4 x98rzlu x1iyjqo2 x1r8uery x1nhvcw1 x1jnr06f',
       children: [i && jsx(_$$K2, {
-        'aria-label': _$$t('figmake.fullscreen_preview_back_to_files_tooltip'),
+        'aria-label': getI18nString('figmake.fullscreen_preview_back_to_files_tooltip'),
         'onClick': () => {
           p(_$$sf({
             view: 'recentsAndSharing'
@@ -5033,15 +5033,15 @@ function s5({
           'onClick': () => {
             c();
           },
-          'aria-label': _$$t('figmake.refresh'),
+          'aria-label': getI18nString('figmake.refresh'),
           'htmlAttributes': {
-            'data-tooltip': _$$t('figmake.refresh'),
+            'data-tooltip': getI18nString('figmake.refresh'),
             'data-tooltip-type': Ib.TEXT
           },
           'children': jsx(_$$T4, {})
         }), jsx(_$$r4, {
-          openText: _$$t('sites.code_component.drawer.open_console_only'),
-          hideText: _$$t('sites.code_component.drawer.hide_console_only'),
+          openText: getI18nString('sites.code_component.drawer.open_console_only'),
+          hideText: getI18nString('sites.code_component.drawer.hide_console_only'),
           asLargeVariant: !0,
           children: jsx(n1, {})
         }), jsx(sT, {
@@ -5050,9 +5050,9 @@ function s5({
           'onClick': () => {
             m(!x);
           },
-          'aria-label': x ? _$$t('figmake.scope.hide_scope_view') : _$$t('figmake.scope.show_scope_view'),
+          'aria-label': x ? getI18nString('figmake.scope.hide_scope_view') : getI18nString('figmake.scope.show_scope_view'),
           'htmlAttributes': {
-            'data-tooltip': x ? _$$t('figmake.scope.hide_scope_view') : _$$t('figmake.scope.show_scope_view'),
+            'data-tooltip': x ? getI18nString('figmake.scope.hide_scope_view') : getI18nString('figmake.scope.show_scope_view'),
             'data-tooltip-type': Ib.TEXT
           },
           'children': jsx(n5, {
@@ -5070,7 +5070,7 @@ function s5({
           'size': 'lg',
           'value': e,
           'legend': jsx(_$$q2, {
-            children: _$$t('figmake.panel.display_picker.hidden_legend')
+            children: getI18nString('figmake.panel.display_picker.hidden_legend')
           }),
           'onChange': e => {
             t(e);
@@ -5084,12 +5084,12 @@ function s5({
             selectedValue: e,
             value: Ic.PREVIEW,
             IconComponent: _$$T5,
-            text: _$$t('figmake.preview.label')
+            text: getI18nString('figmake.preview.label')
           }), jsx(_$$A6, {
             selectedValue: e,
             value: Ic.CODE,
             IconComponent: _$$i3,
-            text: _$$t('figmake.code.label')
+            text: getI18nString('figmake.code.label')
           })]
         })
       })]
@@ -5110,13 +5110,13 @@ function s2() {
       manager,
       children: [jsx(_$$K2, {
         ...getTriggerProps(),
-        'aria-label': _$$t('fullscreen.filename_view.edit_file_menu'),
+        'aria-label': getI18nString('fullscreen.filename_view.edit_file_menu'),
         'data-tooltip': void 0,
         'children': jsx(_$$r2, {})
       }), jsx(_$$mc, {
         children: jsx(q7, {
           onClick: exitFigmakeFullscreenView,
-          children: _$$t('figmake.open_in_editor_2')
+          children: getI18nString('figmake.open_in_editor_2')
         })
       })]
     })]
@@ -5131,7 +5131,7 @@ function s4() {
       children: jsx(s8, {})
     }) : null, getFeatureFlags().switch_canvas_mode ? jsx(_$$K2, {
       'onClick': t,
-      'aria-label': _$$t('sites.panel.exit_make_mode'),
+      'aria-label': getI18nString('sites.panel.exit_make_mode'),
       'children': jsx(_$$A7, {})
     }) : null]
   });
@@ -5215,7 +5215,7 @@ function s9() {
   return getFeatureFlags().bake_m2d ? getFeatureFlags().bake_m2d_local ? jsxs(_$$bL3, {
     manager,
     children: [jsx(_$$J6, {
-      'aria-label': _$$t('sites.panel.copy_make_as_design'),
+      'aria-label': getI18nString('sites.panel.copy_make_as_design'),
       'disabled': isProcessing || s || !isEnabled,
       ...getTriggerProps(),
       'children': jsx(_$$a3, {})
@@ -5225,25 +5225,25 @@ function s9() {
           mode: _$$y7.API,
           target: 'clipboard'
         }),
-        children: _$$t('sites.panel.copy_make_as_design_api')
+        children: getI18nString('sites.panel.copy_make_as_design_api')
       }), jsx(q7, {
         onClick: () => handleHtmlToDesign({
           mode: _$$y7.RESPONSIVE,
           target: 'clipboard'
         }),
-        children: _$$t('sites.panel.copy_make_as_design_responsive')
+        children: getI18nString('sites.panel.copy_make_as_design_responsive')
       }), jsx(q7, {
         onClick: () => handleHtmlToDesign({
           mode: _$$y7.ABSOLUTE,
           target: 'clipboard'
         }),
-        children: _$$t('sites.panel.copy_make_as_design_absolute')
+        children: getI18nString('sites.panel.copy_make_as_design_absolute')
       }), jsx(q7, {
         onClick: () => handleHtmlToDesign({
           mode: _$$y7.MIXED,
           target: 'clipboard'
         }),
-        children: _$$t('sites.panel.copy_make_as_design_mixed')
+        children: getI18nString('sites.panel.copy_make_as_design_mixed')
       })]
     })]
   }) : jsx(_$$J6, {
@@ -5251,7 +5251,7 @@ function s9() {
       mode: _$$y7.API,
       target: 'clipboard'
     }),
-    'aria-label': _$$t('sites.panel.copy_make_as_design'),
+    'aria-label': getI18nString('sites.panel.copy_make_as_design'),
     'disabled': isProcessing || s || !isEnabled,
     'children': jsx(_$$a3, {})
   }) : null;
@@ -5338,20 +5338,20 @@ function ru() {
   return jsx(Gt, {
     children: jsx(_$$p7, {
       inactive: !0,
-      header: _$$t('figmake.settings.auth_expired.title'),
+      header: getI18nString('figmake.settings.auth_expired.title'),
       badge: jsx(_$$E6, {
         variant: 'dangerOutline',
-        children: _$$t('figmake.settings.auth_expired.badge')
+        children: getI18nString('figmake.settings.auth_expired.badge')
       }),
       actions: jsxs(Fragment, {
         children: [jsx($n, {
           variant: 'primary',
           onClick: i,
-          children: _$$t('figmake.settings.auth_expired.button')
+          children: getI18nString('figmake.settings.auth_expired.button')
         }), jsx(_$$K2, {
-          'aria-label': _$$t('figmake.settings.auth_expired.delete_label'),
+          'aria-label': getI18nString('figmake.settings.auth_expired.delete_label'),
           'htmlAttributes': {
-            'data-tooltip': _$$t('figmake.settings.auth_expired.delete_label'),
+            'data-tooltip': getI18nString('figmake.settings.auth_expired.delete_label'),
             'data-tooltip-type': 'text'
           },
           'onClick': () => {
@@ -5373,10 +5373,10 @@ function rx() {
         className: 'x78zum5 xdt5ytf x1cy8zhl',
         children: [jsx('p', {
           ..._$$Ay.props(_$$g.textBodyLargeStrong),
-          children: _$$t('figmake.settings.connect_existing_project.status.title')
+          children: getI18nString('figmake.settings.connect_existing_project.status.title')
         }), jsx('p', {
           ..._$$Ay.props(rm.textBodyMediumSecondary),
-          children: _$$t('figmake.settings.connect_existing_project.status.subtitle')
+          children: getI18nString('figmake.settings.connect_existing_project.status.subtitle')
         })]
       }), jsx(_$$K4, {
         source: 'settings'
@@ -5406,10 +5406,10 @@ function rj() {
         if (!a) return;
         let e = a.name;
         i({
-          projectName: _$$t('figmake.settings.connected_project.multiplayer.project', {
+          projectName: getI18nString('figmake.settings.connected_project.multiplayer.project', {
             name: e
           }),
-          orgName: _$$t('figmake.settings.connected_project.multiplayer.org', {
+          orgName: getI18nString('figmake.settings.connected_project.multiplayer.org', {
             name: e
           }),
           ownerAvatar: a,
@@ -5470,7 +5470,7 @@ function rw() {
       inactive: !0,
       badge: jsx(_$$E6, {
         variant: 'dangerOutline',
-        children: _$$t('figmake.settings.connected_project.generic_error.badge')
+        children: getI18nString('figmake.settings.connected_project.generic_error.badge')
       }),
       actions: jsx(Fragment, {
         children: connectedProject && jsx($n, {
@@ -5478,7 +5478,7 @@ function rw() {
           onClick: () => {
             FJ(_$$kR(connectedProject.id));
           },
-          children: _$$t('figmake.settings.connected_project.generic_error.button')
+          children: getI18nString('figmake.settings.connected_project.generic_error.button')
         })
       })
     })
@@ -5491,15 +5491,15 @@ function rS() {
   return jsx(Gt, {
     children: jsx(rR, {
       inactive: !0,
-      header: _$$t('figmake.settings.connected_project.removed.header'),
+      header: getI18nString('figmake.settings.connected_project.removed.header'),
       badge: jsx(_$$E6, {
         variant: 'dangerOutline',
-        children: _$$t('figmake.settings.connected_project.removed.badge')
+        children: getI18nString('figmake.settings.connected_project.removed.badge')
       }),
       actions: jsx($n, {
         variant: 'primary',
         onClick: e,
-        children: _$$t('figmake.settings.connected_project.removed.button')
+        children: getI18nString('figmake.settings.connected_project.removed.button')
       })
     })
   });
@@ -5514,10 +5514,10 @@ function rC() {
       badge: jsxs(Fragment, {
         children: [jsx(_$$E6, {
           variant: 'inactiveFilled',
-          children: _$$t('figmake.settings.connected_project.paused.badge')
+          children: getI18nString('figmake.settings.connected_project.paused.badge')
         }), jsx('span', {
           'data-tooltip-type': 'text',
-          'data-tooltip': _$$t('figmake.settings.connected_project.paused.tooltip'),
+          'data-tooltip': getI18nString('figmake.settings.connected_project.paused.tooltip'),
           'data-tooltip-show-below': !0,
           'data-tooltip-show-immediately': !0,
           'children': jsx(_$$B3, {
@@ -5533,7 +5533,7 @@ function rC() {
           onClick: () => {
             connectedProject?.id && FJ(_$$kR(connectedProject.id));
           },
-          children: _$$t('figmake.settings.connected_project.paused.button')
+          children: getI18nString('figmake.settings.connected_project.paused.button')
         }), connectedProject && jsx(rN, {
           connectedProject
         })]
@@ -5549,7 +5549,7 @@ function rT() {
     children: jsx(rR, {
       badge: jsx(_$$E6, {
         variant: 'successOutline',
-        children: _$$t('figmake.settings.connected_project.badge')
+        children: getI18nString('figmake.settings.connected_project.badge')
       }),
       actions: jsxs(Fragment, {
         children: [jsx(rE, {}), connectedProject && jsx(rN, {
@@ -5567,14 +5567,14 @@ function rI() {
     children: jsx(_$$p7, {
       badge: jsx(_$$E6, {
         variant: 'successOutline',
-        children: _$$t('figmake.settings.connected_project.badge')
+        children: getI18nString('figmake.settings.connected_project.badge')
       }),
       actions: jsx($n, {
         variant: 'destructiveSecondary',
         onClick: i,
-        children: _$$t('figmake.settings.connected_project.disconnect_button')
+        children: getI18nString('figmake.settings.connected_project.disconnect_button')
       }),
-      header: _$$t('figmake.settings.connected_project.multiplayer.project', {
+      header: getI18nString('figmake.settings.connected_project.multiplayer.project', {
         name: t
       }),
       orgAlt: jsxs('div', {
@@ -5583,7 +5583,7 @@ function rI() {
           size: Pf.SMALL
         }), jsx('p', {
           ..._$$Ay.props(rA.textBodyMediumSecondary),
-          children: _$$t('figmake.settings.connected_project.multiplayer.org', {
+          children: getI18nString('figmake.settings.connected_project.multiplayer.org', {
             name: t
           })
         })]
@@ -5592,7 +5592,7 @@ function rI() {
   });
 }
 function rE() {
-  let e = _$$md(_$$p8);
+  let e = useAtomWithSubscription(_$$p8);
   let t = _$$A8();
   switch (e) {
     case _$$Ut.INIT:
@@ -5601,12 +5601,12 @@ function rE() {
         onClick: () => t({
           showVisualBells: !0
         }),
-        children: _$$t('figmake.settings.connected_project.deploy_button')
+        children: getI18nString('figmake.settings.connected_project.deploy_button')
       });
     case _$$Ut.DEPLOYING:
       return jsx(_$$lV2, {
         variant: 'secondary',
-        children: _$$t('figmake.settings.connected_project.deploying_button')
+        children: getI18nString('figmake.settings.connected_project.deploying_button')
       });
   }
 }
@@ -5618,40 +5618,40 @@ function rN({
   let n = BK('CONNECTED_PROJECT_MORE_MENU');
   let r = rj();
   let o = useMemo(() => [{
-    displayText: _$$t('figmake.settings.connected_project.dropdown.disconnect'),
+    displayText: getI18nString('figmake.settings.connected_project.dropdown.disconnect'),
     callback: r,
     disabled: t
   }, {
     displayText: '',
     separator: !0
   }, {
-    displayText: _$$t('figmake.settings.connected_project.dropdown.manage_project'),
+    displayText: getI18nString('figmake.settings.connected_project.dropdown.manage_project'),
     callback: () => {
       FJ(_$$kR(e.id));
     }
   }, {
-    displayText: _$$t('figmake.settings.connected_project.dropdown.manage_organization'),
+    displayText: getI18nString('figmake.settings.connected_project.dropdown.manage_organization'),
     callback: () => {
       FJ(_$$n4(e.organization_id));
     }
   }, {
-    displayText: _$$t('figmake.settings.connected_project.dropdown.manage_secrets'),
+    displayText: getI18nString('figmake.settings.connected_project.dropdown.manage_secrets'),
     callback: () => {
       FJ(_$$C7(e.id));
     }
   }], [r, e, t]);
   let d = useRef(null);
   let c = d.current?.getBoundingClientRect();
-  c || (n.showing && $D(_$$e2.AI_PRODUCTIVITY, new Error('FigMake connected project view: dropdownBoundingRect is null')), c = new DOMRect(0, 0, 0, 0));
+  c || (n.showing && reportError(_$$e2.AI_PRODUCTIVITY, new Error('FigMake connected project view: dropdownBoundingRect is null')), c = new DOMRect(0, 0, 0, 0));
   return jsxs(Fragment, {
     children: [jsx(_$$d2, {
       'aria-expanded': n.showing,
       'ref': d,
-      'aria-label': _$$t('figmake.settings.connected_project.dropdown.label'),
+      'aria-label': getI18nString('figmake.settings.connected_project.dropdown.label'),
       'onClick': () => n.toggle(),
       'htmlAttributes': {
         'data-tooltip-type': Ib.TEXT,
-        'data-tooltip': _$$t('figmake.settings.connected_project.dropdown.label')
+        'data-tooltip': getI18nString('figmake.settings.connected_project.dropdown.label')
       },
       'children': jsx(_$$J5, {})
     }), n.showing && jsx(noop, {
@@ -5702,15 +5702,15 @@ function rP() {
           className: 'x78zum5 xdt5ytf xl56j7k x6s0dn4 x2b8uid xfp4ol3',
           children: [jsx('p', {
             ..._$$Ay.props(rO.textBodyLargeStrong),
-            children: _$$t('figmake.settings.create_project.title')
+            children: getI18nString('figmake.settings.create_project.title')
           }), jsx('p', {
             ..._$$Ay.props(rO.textBodyMediumSecondary),
-            children: _$$t('figmake.settings.create_project.subtitle')
+            children: getI18nString('figmake.settings.create_project.subtitle')
           })]
         }), jsx($n, {
           variant: 'primary',
           onClick: e,
-          children: _$$t('figmake.settings.create_project.button')
+          children: getI18nString('figmake.settings.create_project.button')
         })]
       })]
     })
@@ -5809,7 +5809,7 @@ function rF() {
   });
 }
 function rM() {
-  let e = _$$md(Kj);
+  let e = useAtomWithSubscription(Kj);
   if (!e) return null;
   switch (e.state) {
     case 'connecting':
@@ -5818,7 +5818,7 @@ function rM() {
           project
         } = e;
         return jsx(rD, {
-          badgeText: _$$t('figmake.settings.connecting_to_project.badge'),
+          badgeText: getI18nString('figmake.settings.connecting_to_project.badge'),
           header: project.name,
           showMoreMenu: !0,
           project
@@ -5830,7 +5830,7 @@ function rM() {
           project
         } = e;
         return jsx(rD, {
-          badgeText: _$$t('figmake.settings.disconnecting_from_project.badge'),
+          badgeText: getI18nString('figmake.settings.disconnecting_from_project.badge'),
           header: project.name,
           showMoreMenu: !0,
           project
@@ -5844,7 +5844,7 @@ function rM() {
           ownerAvatar
         } = e;
         return jsx(rD, {
-          badgeText: _$$t('figmake.settings.disconnecting_from_project.badge'),
+          badgeText: getI18nString('figmake.settings.disconnecting_from_project.badge'),
           header: projectName,
           orgAlt: jsxs('div', {
             className: 'x78zum5 x6s0dn4 x1jnr06f',
@@ -5894,8 +5894,8 @@ let rz = {
   }
 };
 function r$() {
-  let [e, t] = _$$fp(AA);
-  let i = _$$md(Kj);
+  let [e, t] = useAtomValueAndSetter(AA);
+  let i = useAtomWithSubscription(Kj);
   let {
     authenticated,
     authenticationExpired,
@@ -5993,13 +5993,13 @@ function rH() {
       className: 'x78zum5 xdt5ytf xl56j7k x6s0dn4 x2b8uid xvfrdwh',
       children: [jsx('p', {
         ..._$$Ay.props(rX.textBodyLargeStrong),
-        children: _$$t('figmake.settings.auth.title')
+        children: getI18nString('figmake.settings.auth.title')
       }), jsxs('p', {
         ..._$$Ay.props(rX.textBodyLargeSecondary),
-        children: [_$$t('figmake.settings.auth.subtitle'), ' ', jsx('a', {
+        children: [getI18nString('figmake.settings.auth.subtitle'), ' ', jsx('a', {
           target: '_blank',
           href: _$$kS,
-          children: _$$t('figmake.settings.auth.link')
+          children: getI18nString('figmake.settings.auth.link')
         })]
       })]
     }), jsx(_$$WW, {
@@ -6007,11 +6007,11 @@ function rH() {
       onClick: n,
       disabled: t,
       htmlAttributes: {
-        'data-tooltip': t ? _$$t('figmake.settings.auth.disabled_tooltip') : void 0,
+        'data-tooltip': t ? getI18nString('figmake.settings.auth.disabled_tooltip') : void 0,
         'data-tooltip-type': Ib.TEXT,
         'data-tooltip-show-immediately': 'true'
       },
-      children: _$$t('figmake.settings.auth.button')
+      children: getI18nString('figmake.settings.auth.button')
     })]
   });
 }
@@ -6056,7 +6056,7 @@ let rQ = Ju(({
     }
     t > 0 && r(_$$F.enqueue({
       type: 'font_deleted',
-      message: _$$t('shared_fonts.unsuccessful_deletes', {
+      message: getI18nString('shared_fonts.unsuccessful_deletes', {
         numUnsuccessfulDeletes: t,
         totalDeletes: e.length
       }),
@@ -6080,12 +6080,12 @@ let rQ = Ju(({
       },
       children: [jsx(Y9, {
         children: jsx(_$$hE, {
-          children: _$$tx('sites.metadata.fonts.remove_font_from_this_site')
+          children: renderI18nText('sites.metadata.fonts.remove_font_from_this_site')
         })
       }), jsx(_$$nB, {
         children: jsx('div', {
           ..._$$xk(r0.bodyText),
-          children: _$$tx('sites.metadata.fonts.text_set_in_font_name_will_revert_to_a_default_sans_serif_font_when_this_site_is_published_you_ll_need_to_upload_the_file_again_to_use_it_later', {
+          children: renderI18nText('sites.metadata.fonts.text_set_in_font_name_will_revert_to_a_default_sans_serif_font_when_this_site_is_published_you_ll_need_to_upload_the_file_again_to_use_it_later', {
             fontName: t
           })
         })
@@ -6096,12 +6096,12 @@ let rQ = Ju(({
             onClick: n,
             disabled: o,
             ref: c,
-            children: _$$tx('general.cancel')
+            children: renderI18nText('general.cancel')
           }), jsx($n, {
             type: 'submit',
             variant: 'destructive',
             disabled: o,
-            children: o ? _$$tx('sites.metadata.fonts.removing') : _$$tx('general.remove')
+            children: o ? renderI18nText('sites.metadata.fonts.removing') : renderI18nText('general.remove')
           })]
         })
       })]
@@ -6127,7 +6127,7 @@ function r1({
       variant: 'secondary',
       disabled: n || t,
       onClick: t => i(t, e),
-      children: t ? _$$tx('sites.metadata.fonts.uploading') : _$$tx('sites.metadata.fonts.upload')
+      children: t ? renderI18nText('sites.metadata.fonts.uploading') : renderI18nText('sites.metadata.fonts.upload')
     })
   });
 }
@@ -6137,7 +6137,7 @@ function r5({
 }) {
   let i = useDispatch();
   return jsx(_$$K2, {
-    'aria-label': _$$t('sites.metadata.fonts.delete_font'),
+    'aria-label': getI18nString('sites.metadata.fonts.delete_font'),
     'onClick': () => i(_$$to({
       type: rQ,
       data: {
@@ -6161,7 +6161,7 @@ function r2({
       children: t
     }), n && jsx('div', {
       ..._$$xk(r8.summary),
-      children: _$$tx('sites.metadata.fonts.styles_count', {
+      children: renderI18nText('sites.metadata.fonts.styles_count', {
         numStyles: e.length,
         styles: Yx(e)
       })
@@ -6496,13 +6496,13 @@ function og(e, t, i, n) {
   }
   return null;
 }
-let of = _$$eU({
+let of = atom({
   data: null,
   isLoading: !1,
   isStale: !1,
   error: null
 });
-let o_ = _$$eU(e => e(of), (e, t) => {
+let o_ = atom(e => e(of), (e, t) => {
   let i = e(of);
   if (i.data && !i.isStale || i.isLoading) return i;
   t(of, {
@@ -6567,7 +6567,7 @@ function ob() {
   let {
     data
   } = function () {
-    let e = _$$md(o_);
+    let e = useAtomWithSubscription(o_);
     let t = Xr(o_);
     useEffect(() => {
       e.data || e.isLoading || e.error || t();
@@ -6608,8 +6608,8 @@ function ob() {
         resetFileInput: l
       };
     }();
-    let [c, x] = _$$fp(_$$j4);
-    let [m, h] = _$$fp(_$$s3);
+    let [c, x] = useAtomValueAndSetter(_$$j4);
+    let [m, h] = useAtomValueAndSetter(_$$s3);
     let g = useCallback((e, t) => {
       e.stopPropagation();
       d.setUploadTarget(t);
@@ -6620,14 +6620,14 @@ function ob() {
     }, [d, c, x, h, m]);
     let _ = useCallback((e, t, i) => {
       let n = {
-        [om.UPLOADS_PARTIALLY_FAILED]: _$$t('sites.metadata.fonts.some_files_were_not_uploaded_successfully_check_files_and_try_again'),
-        [om.STYLE_DOES_NOT_MATCH]: _$$t('sites.metadata.fonts.file_doesn_t_match_font_style_in_use_check_file_and_try_again', {
+        [om.UPLOADS_PARTIALLY_FAILED]: getI18nString('sites.metadata.fonts.some_files_were_not_uploaded_successfully_check_files_and_try_again'),
+        [om.STYLE_DOES_NOT_MATCH]: getI18nString('sites.metadata.fonts.file_doesn_t_match_font_style_in_use_check_file_and_try_again', {
           numFiles: t
         }),
-        [om.FONT_DOES_NOT_MATCH]: _$$t('sites.metadata.fonts.file_doesn_t_match_font', {
+        [om.FONT_DOES_NOT_MATCH]: getI18nString('sites.metadata.fonts.file_doesn_t_match_font', {
           numFiles: t
         }),
-        [om.FILE_SIZE_TOO_LARGE]: _$$t('sites.metadata.fonts.file_size_is_over_limit_of_25_mb_and_couldn_t_be_uploaded')
+        [om.FILE_SIZE_TOO_LARGE]: getI18nString('sites.metadata.fonts.file_size_is_over_limit_of_25_mb_and_couldn_t_be_uploaded')
       };
       let a = e !== om.FILE_SIZE_TOO_LARGE;
       n[e] ? l(_$$F.enqueue({
@@ -6635,11 +6635,11 @@ function ob() {
         icon: zX.WARNING_EXCLAMATION_WITH_TRIANGLE,
         ...(a && {
           button: {
-            text: _$$t('sites.metadata.fonts.upload'),
+            text: getI18nString('sites.metadata.fonts.upload'),
             action: () => f(i)
           }
         })
-      })) : l(_$$s5.error(_$$t('general.an_error_occurred_while_performing_that_action')));
+      })) : l(_$$s5.error(getI18nString('general.an_error_occurred_while_performing_that_action')));
     }, [f, l]);
     let b = useCallback(async i => {
       let a = i.target.files;
@@ -6647,7 +6647,7 @@ function ob() {
         uploadTarget
       } = d;
       if (!a || a.length === 0 || !uploadTarget) {
-        l(_$$s5.error(_$$t('general.an_error_occurred_while_performing_that_action')));
+        l(_$$s5.error(getI18nString('general.an_error_occurred_while_performing_that_action')));
         return;
       }
       let r = Array.from(a).filter(e => {
@@ -6658,7 +6658,7 @@ function ob() {
       n(e => new Set(e).add(uploadTarget));
       l(_$$F.enqueue({
         type: 'web-font-uploading',
-        message: _$$t('sites.metadata.fonts.uploading_font_file', {
+        message: getI18nString('sites.metadata.fonts.uploading_font_file', {
           numFiles: r.length
         }),
         icon: zX.SPINNER,
@@ -6675,7 +6675,7 @@ function ob() {
       });
       o.success ? l(_$$F.enqueue({
         type: 'web-font-uploaded',
-        message: _$$t('sites.metadata.fonts.success_the_uploaded_font_is_ready_to_publish', {
+        message: getI18nString('sites.metadata.fonts.success_the_uploaded_font_is_ready_to_publish', {
           numFiles: r.length
         }),
         icon: zX.CHECK
@@ -6830,11 +6830,11 @@ function ob() {
       className: 'x1yjdb4r x1mxnbhz x1bamp8i xb3r6kr',
       children: [jsx(oc, {
         type: od.NOT_UPLOADED,
-        title: _$$tx('sites.metadata.fonts.upload_web_fonts'),
-        subtitle: _$$tx('sites.metadata.fonts.to_ensure_these_fonts_display_correctly_on_your_published_site_upload_their_woff_w_o_f_f_2_files', {
+        title: renderI18nText('sites.metadata.fonts.upload_web_fonts'),
+        subtitle: renderI18nText('sites.metadata.fonts.to_ensure_these_fonts_display_correctly_on_your_published_site_upload_their_woff_w_o_f_f_2_files', {
           learnMoreLink: jsx(_$$N6, {
             href: '#',
-            children: _$$tx('sites.metadata.domain.learn_more')
+            children: renderI18nText('sites.metadata.domain.learn_more')
           })
         })
       }), Object.entries(notUploadedFonts).map(([e, t], i, n) => jsxs(_$$Fragment, {
@@ -6857,8 +6857,8 @@ function ob() {
       ..._$$xk(oy.section, g && oy.uploadedSection),
       children: [jsx(oc, {
         type: od.UPLOADED,
-        title: _$$tx('sites.metadata.fonts.uploaded_for_publishing'),
-        subtitle: _$$tx('sites.metadata.fonts.these_are_custom_fonts_for_this_site_other_fonts_available_for_publishing_like_google_fonts_won_t_appear_here')
+        title: renderI18nText('sites.metadata.fonts.uploaded_for_publishing'),
+        subtitle: renderI18nText('sites.metadata.fonts.these_are_custom_fonts_for_this_site_other_fonts_available_for_publishing_like_google_fonts_won_t_appear_here')
       }), Object.entries(uploadedFonts).map(([e, t], i, n) => jsxs(_$$Fragment, {
         children: [jsx(on, {
           family: e,
@@ -6886,7 +6886,7 @@ function ob() {
     })]
   });
 }
-_$$eU(null, (e, t) => {
+atom(null, (e, t) => {
   let i = e(of);
   t(of, {
     ...i,
@@ -6894,7 +6894,7 @@ _$$eU(null, (e, t) => {
   });
   i.isLoading || t(o_);
 });
-_$$eU(null, (e, t) => {
+atom(null, (e, t) => {
   t(of, {
     data: null,
     isLoading: !1,
@@ -7015,17 +7015,17 @@ function oE() {
   return jsxs(Fragment, {
     children: [jsx(oL, {
       pageId: _$$p6.WEBSITE,
-      pageName: _$$t('sites.metadata.left_panel.site.label'),
+      pageName: getI18nString('sites.metadata.left_panel.site.label'),
       node: currentPage,
       setWebpage
     }), i && jsx(oL, {
       pageId: _$$p6.DOMAINS,
-      pageName: _$$t('sites.metadata.left_panel.site.domains'),
+      pageName: getI18nString('sites.metadata.left_panel.site.domains'),
       node: currentPage,
       setWebpage
     }), n && jsx(oL, {
       pageId: _$$p6.FONTS,
-      pageName: _$$t('sites.metadata.left_panel.site.fonts'),
+      pageName: getI18nString('sites.metadata.left_panel.site.fonts'),
       node: currentPage,
       setWebpage
     })]
@@ -7108,10 +7108,10 @@ function oL({
   setWebpage: i,
   node: n
 }) {
-  let a = _$$md(_$$j4);
+  let a = useAtomWithSubscription(_$$j4);
   let s = n?.type === 'RESPONSIVE_SET' || n?.type === 'WEBPAGE';
   let r = n?.name === '/';
-  let d = r ? _$$t('sites.panel.home') : n?.name;
+  let d = r ? getI18nString('sites.panel.home') : n?.name;
   let p = a !== null ? e === a : e === 'website';
   let x = _$$b2();
   let m = Oc();
@@ -7208,10 +7208,10 @@ let oG = Ju(e => {
     children: jsxs(_$$vo, {
       children: [jsx(Y9, {
         children: jsx(_$$hE, {
-          children: _$$tx('sites.metadata.domains.change_url_confirmation_modal.title')
+          children: renderI18nText('sites.metadata.domains.change_url_confirmation_modal.title')
         })
       }), jsx(_$$nB, {
-        children: _$$tx('sites.metadata.domains.change_url_confirmation_modal.body')
+        children: renderI18nText('sites.metadata.domains.change_url_confirmation_modal.body')
       }), jsx(_$$wi, {
         children: jsxs(_$$jk, {
           children: [jsx($n, {
@@ -7219,11 +7219,11 @@ let oG = Ju(e => {
             onClick: () => t.props.close({
               source: 'button'
             }),
-            children: _$$tx('sites.metadata.domains.cancel')
+            children: renderI18nText('sites.metadata.domains.cancel')
           }), jsx($n, {
             variant: 'primary',
             onClick: e.onSubmit,
-            children: _$$tx('sites.metadata.domains.change_url')
+            children: renderI18nText('sites.metadata.domains.change_url')
           })]
         })
       })]
@@ -7447,13 +7447,13 @@ function oY({
       return;
     }
     /^[a-z0-9-]+$/.test(e) ? /^[a-z0-9]/.test(e) && /[a-z0-9]$/.test(e) ? e.length > 63 ? h({
-      message: _$$t('sites.metadata.domains.sub_domain_restrictions_length'),
+      message: getI18nString('sites.metadata.domains.sub_domain_restrictions_length'),
       type: 'error'
     }) : h(null) : h({
-      message: _$$t('sites.metadata.domains.sub_domain_restrictions_start_end'),
+      message: getI18nString('sites.metadata.domains.sub_domain_restrictions_start_end'),
       type: 'error'
     }) : h({
-      message: _$$t('sites.metadata.domains.sub_domain_restrictions'),
+      message: getI18nString('sites.metadata.domains.sub_domain_restrictions'),
       type: 'error'
     });
   }, 600);
@@ -7490,13 +7490,13 @@ function oY({
                 matchType: _$$V.PublishingSuccess
               }));
               n(_$$F.enqueue({
-                message: _$$t('sites.metadata.domains.domain_updated'),
+                message: getI18nString('sites.metadata.domains.domain_updated'),
                 timeoutOverride: 5e3,
                 icon: zX.CHECK
               }));
             }).catch(() => {
               n(_$$F.enqueue({
-                message: _$$t('sites.metadata.domains.domain_updated_error'),
+                message: getI18nString('sites.metadata.domains.domain_updated_error'),
                 error: !0,
                 icon: zX.WARNING_EXCLAMATION_WITH_TRIANGLE
               }));
@@ -7536,20 +7536,20 @@ function oY({
             onKeyDown: e => {
               e.key === 'Enter' ? v || j() : e.key !== 'Escape' || g || t();
             },
-            placeholder: _$$t('sites.metadata.domains.subdomain_input_placeholder')
+            placeholder: getI18nString('sites.metadata.domains.subdomain_input_placeholder')
           }), jsx('span', {
             ..._$$xk(oW.domain),
             children: o
           })]
         })
       }), jsx(_$$K2, {
-        'aria-label': _$$t('sites.metadata.domains.generate_new_subdomain'),
+        'aria-label': getI18nString('sites.metadata.domains.generate_new_subdomain'),
         'onClick': () => {
           h(null);
           x(oV());
         },
         'htmlAttributes': {
-          'data-tooltip': _$$t('sites.metadata.domains.generate_new_subdomain'),
+          'data-tooltip': getI18nString('sites.metadata.domains.generate_new_subdomain'),
           'data-tooltip-type': 'text'
         },
         'children': jsx(_$$x2, {})
@@ -7561,7 +7561,7 @@ function oY({
         children: m.message
       }) : jsx('span', {
         ..._$$xk(oW.description),
-        children: _$$tx('sites.metadata.domains.sub_domain_restrictions')
+        children: renderI18nText('sites.metadata.domains.sub_domain_restrictions')
       })
     }), jsx('div', {
       className: 'x78zum5 x1q0g3np x6s0dn4 xxk0z11 xztvwtv x1nfngrj',
@@ -7570,12 +7570,12 @@ function oY({
           variant: 'secondary',
           onClick: t,
           type: 'button',
-          children: _$$tx('sites.metadata.domains.cancel')
+          children: renderI18nText('sites.metadata.domains.cancel')
         }), jsx($n, {
           variant: 'primary',
           disabled: v,
           onClick: j,
-          children: _$$tx('sites.metadata.domains.save')
+          children: renderI18nText('sites.metadata.domains.save')
         })]
       })
     })]
@@ -7637,12 +7637,12 @@ function oZ({
       className: 'x78zum5 xdt5ytf xg2d0mh xod5an3',
       children: [jsx('div', {
         ..._$$xk(_$$g.textBodyLargeStrong),
-        children: _$$tx('sites.metadata.domains.base_domain')
+        children: renderI18nText('sites.metadata.domains.base_domain')
       }), jsx('div', {
         ..._$$xk(oJ.description),
         children: e ? jsx(Fragment, {
-          children: i ? _$$tx('figmake.metadata.domains.your_make_is_always_available_at_this_domain') : _$$tx('sites.metadata.domains.your_site_is_always_available_at_this_domain')
-        }) : _$$tx('sites.metadata.domains.unpublished_site_description')
+          children: i ? renderI18nText('figmake.metadata.domains.your_make_is_always_available_at_this_domain') : renderI18nText('sites.metadata.domains.your_site_is_always_available_at_this_domain')
+        }) : renderI18nText('sites.metadata.domains.unpublished_site_description')
       })]
     }), jsx(oQ, {
       domainInfo: e
@@ -7701,16 +7701,16 @@ function oQ({
       'data-testid': 'baseDomainExampleInfo',
       'children': [jsx('div', {
         className: 'xwrg52n xuxw1ft x1rea2x4 x1n0bwc9',
-        children: _$$tx('sites.metadata.domains.site_url')
+        children: renderI18nText('sites.metadata.domains.site_url')
       }), jsx('div', {
         ..._$$xk(oJ.secondaryText),
-        children: _$$tx('sites.metadata.domains.example_figma_site')
+        children: renderI18nText('sites.metadata.domains.example_figma_site')
       })]
     }), jsxs('div', {
       ..._$$xk(oJ.publishStatusRow, oJ.row),
       children: [jsx('div', {
         className: 'xwrg52n xuxw1ft x1rea2x4 x1n0bwc9',
-        children: d ? _$$tx('figmake.metadata.domains.make_status') : _$$tx('sites.metadata.domains.site_status')
+        children: d ? renderI18nText('figmake.metadata.domains.make_status') : renderI18nText('sites.metadata.domains.site_status')
       }), jsx(an, {
         isPublished: !isNotPublished,
         dataTestId: 'sitesPublishStatusBadge'
@@ -7719,7 +7719,7 @@ function oQ({
       ..._$$xk(oJ.publishStatusRow, oJ.row),
       children: [jsx('div', {
         className: 'xwrg52n xuxw1ft x1rea2x4 x1n0bwc9',
-        children: _$$tx('sites.toolbar.publish_modal.last_published_header')
+        children: renderI18nText('sites.toolbar.publish_modal.last_published_header')
       }), jsxs('div', {
         children: [jsx(_$$h5, {
           date: lastPublishedAt,
@@ -7744,7 +7744,7 @@ function oQ({
           s(!0);
         },
         'disabled': r,
-        'children': _$$tx('sites.metadata.domains.edit_domain')
+        'children': renderI18nText('sites.metadata.domains.edit_domain')
       })
     })]
   });
@@ -7755,21 +7755,21 @@ function o2({
   let t;
   return (_$$dH(e, 'domain_already_activated') ? t = {
     variant: 'warn',
-    title: _$$t('sites.metadata.domains.this_domain_is_already_connected_to_another_site')
+    title: getI18nString('sites.metadata.domains.this_domain_is_already_connected_to_another_site')
   } : _$$hr(e) ? t = {
     variant: 'warn',
-    title: _$$t('sites.metadata.domain.dns_records_not_verified'),
-    message: _$$tx('sites.metadata.domain.check_your_dns_host_to_ensure_the_following_records_have_been_added_with_learn_more_link', {
+    title: getI18nString('sites.metadata.domain.dns_records_not_verified'),
+    message: renderI18nText('sites.metadata.domain.check_your_dns_host_to_ensure_the_following_records_have_been_added_with_learn_more_link', {
       learnMoreLink: jsx(_$$N6, {
         href: 'https://help.figma.com/hc/articles/31414274019863',
         newTab: !0,
-        children: _$$tx('sites.metadata.domain.learn_more')
+        children: renderI18nText('sites.metadata.domain.learn_more')
       })
     })
   } : V7(e) && (t = {
     variant: 'default',
-    title: _$$t('sites.metadata.domain.awaiting_ssl_cert'),
-    message: _$$tx('sites.metadata.domain.awaiting_ssl_cert_message')
+    title: getI18nString('sites.metadata.domain.awaiting_ssl_cert'),
+    message: renderI18nText('sites.metadata.domain.awaiting_ssl_cert_message')
   }), t) ? jsx('div', {
     className: 'x1fzhlzt',
     children: jsx($y, {
@@ -7823,14 +7823,14 @@ function dt({
         className: 'x98rzlu',
         children: [jsx('div', {
           ..._$$xk(_$$g.textBodyMediumStrong),
-          children: _$$t('sites.metadata.domains.add_subdomain_redirect')
+          children: getI18nString('sites.metadata.domains.add_subdomain_redirect')
         }), jsx('div', {
           ..._$$xk(o9.redirectDescription),
-          children: _$$t('sites.metadata.domains.subdomain_redirect_description')
+          children: getI18nString('sites.metadata.domains.subdomain_redirect_description')
         })]
       }), jsx(_$$d5, {
         label: jsx(_$$h6, {
-          children: _$$t('sites.metadata.domains.add_subdomain_redirect')
+          children: getI18nString('sites.metadata.domains.add_subdomain_redirect')
         }),
         checked: n,
         onChange: e => {
@@ -7847,13 +7847,13 @@ function dt({
         },
         children: [jsx(_$$l7, {
           label: jsx(_$$h6, {
-            children: _$$t('sites.metadata.domains.redirect_direction')
+            children: getI18nString('sites.metadata.domains.redirect_direction')
           }),
           size: 'lg'
         }), jsx(_$$mc2, {
           children: g.map(e => jsx(_$$c$5, {
             value: e.direction,
-            children: _$$t('sites.metadata.domains.redirect_option_label', {
+            children: getI18nString('sites.metadata.domains.redirect_option_label', {
               from: e.from,
               to: e.to
             })
@@ -7887,7 +7887,7 @@ function dn({
   useEffect(() => {
     p && v && x(!1);
   }, [p, v]);
-  let j = useCallback(e => FB(e) ? ZN(e) || g ? null : _$$t('sites.metadata.domains.domain_must_include_a_subdomain_ex_www') : _$$t('sites.metadata.domains.enter_a_valid_domain_name'), [g]);
+  let j = useCallback(e => FB(e) ? ZN(e) || g ? null : getI18nString('sites.metadata.domains.domain_must_include_a_subdomain_ex_www') : getI18nString('sites.metadata.domains.enter_a_valid_domain_name'), [g]);
   let k = useCallback(async e => {
     x(!0);
     try {
@@ -7898,7 +7898,7 @@ function dn({
       });
       r(i.data.meta);
     } catch (e) {
-      e instanceof XHRError && (e.data.message === 'Invalid domain' ? c(_$$t('sites.metadata.domains.invalid_domain')) : n(_$$s5.error(e.data.message, 4e3)));
+      e instanceof XHRError && (e.data.message === 'Invalid domain' ? c(getI18nString('sites.metadata.domains.invalid_domain')) : n(_$$s5.error(e.data.message, 4e3)));
       x(!1);
     }
   }, [t, g, f, b, r, n]);
@@ -7978,7 +7978,7 @@ function dn({
           trackingProperties: {
             trackingDescriptor: _$$c8.CANCEL
           },
-          children: _$$tx('sites.metadata.domains.cancel')
+          children: renderI18nText('sites.metadata.domains.cancel')
         })
       }), jsx($z, {
         type: 'submit',
@@ -7986,7 +7986,7 @@ function dn({
         trackingProperties: {
           trackingDescriptor: _$$c8.SAVE
         },
-        children: p ? jsx(_$$k7, {}) : _$$tx('sites.metadata.domains.save')
+        children: p ? jsx(_$$k7, {}) : renderI18nText('sites.metadata.domains.save')
       })]
     })]
   });
@@ -8040,7 +8040,7 @@ function dl({
         'data-testid': 'loading-spinner'
       }) : jsx('div', {
         className: 'x8rdmch xctkrei x1gskr33 x1ihwiht',
-        children: _$$tx('sites.metadata.domains.connect_a_domain')
+        children: renderI18nText('sites.metadata.domains.connect_a_domain')
       })
     })
   });
@@ -8058,9 +8058,9 @@ let ds = Ju(e => {
   let o = r?.customDomain?.verifiedAt != null;
   let d = _$$gY(dr);
   let c = Oc();
-  let x = c ? _$$tx('figmake.metadata.domain.confirm_connected_domain_removal') : _$$tx('sites.metadata.domain.confirm_connected_domain_removal');
-  let m = c ? _$$tx('figmake.metadata.domain.remove_connected_domain_confirmation') : _$$tx('sites.metadata.domain.you_are_about_to_remove_your_site_s_connected_domain_url_existing_external_links_to_your_site_may_break');
-  let h = c ? _$$tx('figmake.metadata.domain.confirm_connected_domain_removal_button') : _$$tx('general.confirm');
+  let x = c ? renderI18nText('figmake.metadata.domain.confirm_connected_domain_removal') : renderI18nText('sites.metadata.domain.confirm_connected_domain_removal');
+  let m = c ? renderI18nText('figmake.metadata.domain.remove_connected_domain_confirmation') : renderI18nText('sites.metadata.domain.you_are_about_to_remove_your_site_s_connected_domain_url_existing_external_links_to_your_site_may_break');
+  let h = c ? renderI18nText('figmake.metadata.domain.confirm_connected_domain_removal_button') : renderI18nText('general.confirm');
   return jsx(_$$bL4, {
     manager: i,
     width: 'md',
@@ -8076,7 +8076,7 @@ let ds = Ju(e => {
           children: [jsx($n, {
             variant: 'secondary',
             onClick: () => n(AS()),
-            children: _$$tx('general.cancel')
+            children: renderI18nText('general.cancel')
           }), jsx($n, {
             onClick: () => {
               let e = d({
@@ -8091,10 +8091,10 @@ let ds = Ju(e => {
               e.then(e => {
                 e.status === 200 && n(_$$F.enqueue({
                   type: 'custom_domain_removed',
-                  message: _$$t('sites.metadata.domain.domain_removed')
+                  message: getI18nString('sites.metadata.domain.domain_removed')
                 }));
               }).catch(e => {
-                e instanceof XHRError ? n(_$$s5.error(e.data.message)) : n(_$$s5.error(_$$t('general.an_error_occurred_while_performing_that_action')));
+                e instanceof XHRError ? n(_$$s5.error(e.data.message)) : n(_$$s5.error(getI18nString('general.an_error_occurred_while_performing_that_action')));
               }).$$finally(() => {
                 n(AS());
               });
@@ -8143,7 +8143,7 @@ function dc({
         eventListeners: r ? ['onMouseDown'] : [],
         children: [jsx(_$$d2, {
           'aria-expanded': r,
-          'aria-label': _$$t('sites.metadata.domain.more_options'),
+          'aria-label': getI18nString('sites.metadata.domain.more_options'),
           'onClick': o,
           'children': jsx(_$$J5, {})
         }), r && jsx(du, {
@@ -8193,7 +8193,7 @@ function dp({
         }
       }));
     },
-    children: _$$t('sites.metadata.domain.remove_connected_domain')
+    children: getI18nString('sites.metadata.domain.remove_connected_domain')
   });
 }
 function dx({
@@ -8209,10 +8209,10 @@ function dx({
       });
       n(t.data.meta);
     } catch (e) {
-      e instanceof XHRError ? i(_$$s5.error(e.data.message)) : i(_$$s5.error(_$$t('general.an_error_occurred_while_performing_that_action')));
+      e instanceof XHRError ? i(_$$s5.error(e.data.message)) : i(_$$s5.error(getI18nString('general.an_error_occurred_while_performing_that_action')));
     }
   }, [e, n, i]);
-  let d = qg(t).subdomain ? _$$t('sites.metadata.domain.add_redirect_from_apex_domain') : _$$t('sites.metadata.domain.add_redirect_from_www_subdomain');
+  let d = qg(t).subdomain ? getI18nString('sites.metadata.domain.add_redirect_from_apex_domain') : getI18nString('sites.metadata.domain.add_redirect_from_www_subdomain');
   return jsx(_$$c$4, {
     onClick: r,
     children: d
@@ -8227,7 +8227,7 @@ function dm({
     fileKey: e
   }));
   let a = _$$oA3(n.data?.siteMount);
-  let [r, d] = _$$fp(AP);
+  let [r, d] = useAtomValueAndSetter(AP);
   let c = async () => {
     try {
       let i = _$$z8.removeCustomDomainRedirect({
@@ -8243,12 +8243,12 @@ function dm({
       let l = qg(t).subdomain ? 'CNAME' : 'A';
       r.some(e => e.type === l) && d(e => e.filter(e => e.type !== l));
     } catch (e) {
-      i(_$$s5.error(_$$t('general.an_error_occurred_while_performing_that_action')));
+      i(_$$s5.error(getI18nString('general.an_error_occurred_while_performing_that_action')));
     }
   };
   return jsx(_$$c$4, {
     onClick: c,
-    children: _$$t('sites.metadata.domain.remove_redirect')
+    children: getI18nString('sites.metadata.domain.remove_redirect')
   });
 }
 let dg = {
@@ -8282,7 +8282,7 @@ function df({
     ..._$$xk(dg.row),
     children: [jsx('div', {
       className: 'xwrg52n xuxw1ft x1rea2x4 x1n0bwc9',
-      children: _$$tx('sites.metadata.domain.redirect')
+      children: renderI18nText('sites.metadata.domain.redirect')
     }), jsxs('div', {
       className: 'x78zum5 x1q0g3np x6s0dn4 x1jnr06f',
       children: [domain, ' ', jsx('span', {
@@ -8291,7 +8291,7 @@ function df({
       }), ' ', e, i != null && verifiedAt == null && jsx(_$$R4, {
         'className': 'x1gviqkx xdxz5ap xw8er2b',
         'data-tooltip-type': 'text',
-        'data-tooltip': _$$t('sites.metadata.domain.redirect_pending'),
+        'data-tooltip': getI18nString('sites.metadata.domain.redirect_pending'),
         'data-tooltip-show-above': !0
       })]
     })]
@@ -8305,7 +8305,7 @@ function db() {
 function dy({
   type: e
 }) {
-  let t = e === 'conflicting_record' ? _$$t('sites.metadata.domain.conflicting_record_found') : _$$t('sites.metadata.domain.no_record_found');
+  let t = e === 'conflicting_record' ? getI18nString('sites.metadata.domain.conflicting_record_found') : getI18nString('sites.metadata.domain.no_record_found');
   return jsx(_$$R4, {
     'className': 'x1gviqkx xdxz5ap xw8er2b',
     'data-tooltip': t,
@@ -8434,13 +8434,13 @@ function dk({
       children: jsxs('tr', {
         children: [jsx('th', {
           ..._$$xk(dj.cellBase, dj.tableHeader, dj.recordTypeColumn),
-          children: _$$tx('sites.metadata.domains.dns_record_type')
+          children: renderI18nText('sites.metadata.domains.dns_record_type')
         }), jsx('th', {
           ..._$$xk(dj.cellBase, dj.tableHeader),
-          children: _$$tx('sites.metadata.domains.dns_record_host')
+          children: renderI18nText('sites.metadata.domains.dns_record_host')
         }), jsx('th', {
           ..._$$xk(dj.cellBase, dj.tableHeader),
-          children: _$$tx('sites.metadata.domains.dns_record_value')
+          children: renderI18nText('sites.metadata.domains.dns_record_value')
         })]
       })
     }), jsx('tbody', {
@@ -8502,7 +8502,7 @@ function dS({
           fileKey: t
         });
       } catch (e) {
-        n(_$$s5.error(_$$t('sites.metadata.domain.domain_verification_failed')));
+        n(_$$s5.error(getI18nString('sites.metadata.domain.domain_verification_failed')));
       } finally {
         o(!1);
       }
@@ -8521,7 +8521,7 @@ function dS({
       className: _$$s4.flex.flexRow.gap8.h16.$,
       children: [jsx('div', {
         className: 'xwrg52n xuxw1ft x1rea2x4 x1n0bwc9',
-        children: _$$tx('sites.metadata.domains.domain_status')
+        children: renderI18nText('sites.metadata.domains.domain_status')
       }), jsxs('div', {
         className: 'x78zum5 x1q0g3np x1jnr06f',
         children: [jsx(dC, {
@@ -8533,8 +8533,8 @@ function dS({
       })]
     }), !x && jsx(_$$K2, {
       'onClick': h,
-      'aria-label': _$$t('sites.metadata.domain.refresh'),
-      'data-tooltip': _$$t('sites.metadata.domain.refresh'),
+      'aria-label': getI18nString('sites.metadata.domain.refresh'),
+      'data-tooltip': getI18nString('sites.metadata.domain.refresh'),
       'data-tooltip-type': Ib.TEXT,
       'data-tooltip-show-above': !0,
       'disabled': g,
@@ -8548,8 +8548,8 @@ function dC({
   let t = !!e.verifiedAt;
   let i = V7(e.activationStatus);
   let n = 'defaultFilled';
-  let a = _$$t('sites.metadata.domains.pending');
-  t ? (n = 'successOutline', a = _$$t('sites.metadata.domains.connected')) : i && (n = 'warningOutline', a = _$$t('sites.metadata.domains.awaiting_certificates'));
+  let a = getI18nString('sites.metadata.domains.pending');
+  t ? (n = 'successOutline', a = getI18nString('sites.metadata.domains.connected')) : i && (n = 'warningOutline', a = getI18nString('sites.metadata.domains.awaiting_certificates'));
   return jsx(_$$E6, {
     variant: n,
     children: a
@@ -8590,14 +8590,14 @@ function dI({
     name: 'Sites Domain Settings',
     children: [jsx('h2', {
       ..._$$xk(dT.header),
-      children: _$$tx('sites.metadata.domains.connected_domains')
+      children: renderI18nText('sites.metadata.domains.connected_domains')
     }), jsx('div', {
       ..._$$xk(dT.text),
-      children: _$$tx(e === null ? 'sites.metadata.domain.publish_site_to_connect_a_domain_with_learn_more_link' : 'sites.metadata.domain.connect_a_domain_with_learn_more_link', {
+      children: renderI18nText(e === null ? 'sites.metadata.domain.publish_site_to_connect_a_domain_with_learn_more_link' : 'sites.metadata.domain.connect_a_domain_with_learn_more_link', {
         learnMoreLink: jsx(_$$N6, {
           href: 'https://help.figma.com/hc/articles/31414274019863',
           newTab: !0,
-          children: _$$tx('sites.metadata.domain.learn_more')
+          children: renderI18nText('sites.metadata.domain.learn_more')
         })
       })
     }), n && jsx(dE, {
@@ -8666,18 +8666,18 @@ function dN({
       activationStatus: combinedActivationStatus
     }), n && jsx('div', {
       ..._$$xk(dT.secondaryText),
-      children: _$$tx('sites.metadata.domain.add_the_following_records_to_the_dns_host_for_your_domain')
+      children: renderI18nText('sites.metadata.domain.add_the_following_records_to_the_dns_host_for_your_domain')
     }), jsx(dk, {
       fileKey: e,
       domainInfo: t
     }), Object.keys(combinedActivationStatus).length === 0 && jsx($y, {
       variant: 'default',
       children: jsx(_$$Q5, {
-        children: _$$tx('sites.metadata.domain.it_can_take_up_to_24_hours_for_dns_settings_to_propagate_with_learn_more_link', {
+        children: renderI18nText('sites.metadata.domain.it_can_take_up_to_24_hours_for_dns_settings_to_propagate_with_learn_more_link', {
           learnMoreLink: jsx(_$$N6, {
             href: 'https://help.figma.com/hc/articles/31414274019863',
             newTab: !0,
-            children: _$$tx('sites.metadata.domain.learn_more')
+            children: renderI18nText('sites.metadata.domain.learn_more')
           })
         })
       })
@@ -8784,15 +8784,15 @@ var dM = (e => (e.REQUIRED = 'REQUIRED', e.WHITESPACE = 'WHITESPACE', e.TOO_SHOR
 function dD(e) {
   switch (e) {
     case 'REQUIRED':
-      return _$$t('sites.settings.password_protection.password_required');
+      return getI18nString('sites.settings.password_protection.password_required');
     case 'WHITESPACE':
-      return _$$t('sites.settings.password_protection.password_whitespace');
+      return getI18nString('sites.settings.password_protection.password_whitespace');
     case 'TOO_SHORT':
-      return _$$t('sites.settings.password_protection.password_too_short');
+      return getI18nString('sites.settings.password_protection.password_too_short');
     case 'API_SET_FAILED':
-      return _$$t('sites.settings.password_protection.set_password_error');
+      return getI18nString('sites.settings.password_protection.set_password_error');
     case 'API_UNSET_FAILED':
-      return _$$t('sites.settings.password_protection.unset_password_error');
+      return getI18nString('sites.settings.password_protection.unset_password_error');
     default:
       throwTypeError(e);
   }
@@ -8831,7 +8831,7 @@ function dz({
     h(o);
   }, [o]);
   let S = useCallback(async e => {
-    if (k(null), f(e), _$$sx('site_password_protection_toggle', {
+    if (k(null), f(e), trackEventAnalytics('site_password_protection_toggle', {
       editor_type: r,
       fileKey: t,
       enabled: e,
@@ -8852,7 +8852,7 @@ function dz({
           }));
           d(_$$F.enqueue({
             type: 'site-password-unset-success',
-            message: _$$t('sites.settings.password_protection.unset_password_success')
+            message: getI18nString('sites.settings.password_protection.unset_password_success')
           }));
         } else {
           throw new Error('Livegraph client unavailable');
@@ -8912,7 +8912,7 @@ function dz({
         }));
         d(_$$F.enqueue({
           type: 'site-password-set-success',
-          message: _$$t('sites.settings.password_protection.set_password_success'),
+          message: getI18nString('sites.settings.password_protection.set_password_success'),
           icon: zX.CHECK
         }));
       } else {
@@ -8946,7 +8946,7 @@ function dz({
   let A = useCallback(() => {
     d(_$$lW2({
       stringToCopy: y,
-      successText: _$$t('sites.settings.password_protection.password_copied')
+      successText: getI18nString('sites.settings.password_protection.password_copied')
     }));
   }, [d, y]);
   useEffect(() => {
@@ -8963,11 +8963,11 @@ function dz({
           htmlFor: 'password-protection',
           children: jsx('strong', {
             ..._$$xk(dB.labelText),
-            children: _$$t('sites.settings.password_protection.require_password')
+            children: getI18nString('sites.settings.password_protection.require_password')
           })
         }), jsx('span', {
           ..._$$xk(dB.descriptionText),
-          children: x ? _$$t('figmake.settings.password_protection.description') : _$$t('sites.settings.password_protection.description')
+          children: x ? getI18nString('figmake.settings.password_protection.description') : getI18nString('sites.settings.password_protection.description')
         })]
       }), jsx(_$$v7, {
         id: 'password-protection',
@@ -8986,14 +8986,14 @@ function dz({
             htmlFor: 'password-input',
             children: jsx('span', {
               ..._$$xk(dB.labelText),
-              children: _$$t('sites.settings.password_protection.password_label')
+              children: getI18nString('sites.settings.password_protection.password_label')
             })
           }), jsx($n, {
             'variant': 'ghost',
             'iconPrefix': jsx(_$$x2, {}),
             'onClick': R,
-            'aria-label': _$$t('sites.settings.password_protection.generate_password'),
-            'children': _$$t('sites.settings.password_protection.generate')
+            'aria-label': getI18nString('sites.settings.password_protection.generate_password'),
+            'children': getI18nString('sites.settings.password_protection.generate')
           })]
         }), g ? jsxs(Fragment, {
           children: [jsxs('div', {
@@ -9002,7 +9002,7 @@ function dz({
               'id': 'password-input',
               'ref': w,
               'type': 'text',
-              'placeholder': _$$t('sites.settings.password_protection.set_password_placeholder'),
+              'placeholder': getI18nString('sites.settings.password_protection.set_password_placeholder'),
               'onChange': C,
               'aria-invalid': L,
               ..._$$xk(dB.passwordInput, L && dB.passwordInputError, c && dB.passwordInputDisabled),
@@ -9012,7 +9012,7 @@ function dz({
             }), jsx('span', {
               className: 'x10l6tqk xibut22 x78zum5 x6s0dn4',
               children: y.length > 0 && jsx(_$$K2, {
-                'aria-label': _$$t('sites.settings.password_protection.copy_password'),
+                'aria-label': getI18nString('sites.settings.password_protection.copy_password'),
                 'onClick': A,
                 'children': jsx(_$$a6, {})
               })
@@ -9022,7 +9022,7 @@ function dz({
             children: jsx($y, {
               variant: 'warn',
               children: jsx(_$$Q5, {
-                children: _$$t('sites.settings.password_protection.store_password_warning')
+                children: getI18nString('sites.settings.password_protection.store_password_warning')
               })
             })
           }), L && jsx('div', {
@@ -9033,7 +9033,7 @@ function dz({
         }) : jsxs(Fragment, {
           children: [jsx(_$$ks, {
             type: 'password',
-            placeholder: _$$t('sites.settings.password_protection.set_password_placeholder'),
+            placeholder: getI18nString('sites.settings.password_protection.set_password_placeholder'),
             disabled: !0,
             className: 'x153ncpu xt7dq6l xh8yej3 xge78cn',
             value: '**************',
@@ -9050,15 +9050,15 @@ function dz({
           children: [jsx(_$$WW, {
             variant: 'secondary',
             onClick: E,
-            children: _$$t('sites.settings.password_protection.cancel')
+            children: getI18nString('sites.settings.password_protection.cancel')
           }), jsx(_$$WW, {
             type: 'submit',
-            children: _$$t('sites.settings.password_protection.save')
+            children: getI18nString('sites.settings.password_protection.save')
           })]
         }) : jsx(_$$WW, {
           variant: 'secondary',
           onClick: N,
-          children: _$$t('sites.settings.password_protection.edit')
+          children: getI18nString('sites.settings.password_protection.edit')
         })
       })]
     })]
@@ -9356,7 +9356,7 @@ function d8({
           src: s ?? _$$A10(),
           className: 'x1td3qas x10w6t97 xkib98w xz74otr x1bamp8i'
         }),
-        placeholder: b ? _$$t('sites.metadata.image_selector.nothing_to_select') : _$$t('sites.metadata.image_selector.placeholder')
+        placeholder: b ? getI18nString('sites.metadata.image_selector.nothing_to_select') : getI18nString('sites.metadata.image_selector.placeholder')
       }), p && jsx('p', {
         ..._$$Ay.props(d3.description),
         children: p
@@ -9374,7 +9374,7 @@ function d8({
                 children: jsx(_$$T2, {})
               }), jsx('div', {
                 className: 'x1iyjqo2 xb3r6kr xlyipyv xfawy5m xw5ewwj',
-                children: _$$t('sites.metadata.image_selector.upload_image')
+                children: getI18nString('sites.metadata.image_selector.upload_image')
               })]
             })
           }, 'new'), n?.length ? jsx(_$$wv2, {}) : null]
@@ -9400,7 +9400,7 @@ function d8({
               ...{
                 className: 'xkrz9af'
               },
-              children: _$$t('sites.metadata.image_selector.dropdown_dimensions', {
+              children: getI18nString('sites.metadata.image_selector.dropdown_dimensions', {
                 width: Math.trunc(e.size.x),
                 height: Math.trunc(e.size.y)
               })
@@ -9494,7 +9494,7 @@ let ct = Ju(({
   if (!i) return null;
   let n = i.key;
   let a = async () => {
-    _$$sx('sites_unpublish_started', {
+    trackEventAnalytics('sites_unpublish_started', {
       fileKey: n,
       productType: 'sites'
     });
@@ -9529,17 +9529,17 @@ function ci({
   let a = _$$_t(e);
   let s = _$$JT();
   let r = Oc();
-  let o = r ? _$$tx('figmake.unpublish_modal.header') : _$$tx('sites.toolbar.publish_modal.unpublish_site');
+  let o = r ? renderI18nText('figmake.unpublish_modal.header') : renderI18nText('sites.toolbar.publish_modal.unpublish_site');
   let d = a && a.hasCustomDomain && a.verifiedAt ? a.customDomain : a?.domain;
   let c = jsx('span', {
     className: _$$s4.overflowHidden.ellipsis.colorTextBrand.$,
     children: d ?? ''
   });
-  let p = s ? _$$tx('figmake.unpublish_modal.unpublish_from_web_and_cmty_confirmation', {
+  let p = s ? renderI18nText('figmake.unpublish_modal.unpublish_from_web_and_cmty_confirmation', {
     domain: c
-  }) : r ? _$$tx('figmake.unpublish_modal.unpublish_confirmation', {
+  }) : r ? renderI18nText('figmake.unpublish_modal.unpublish_confirmation', {
     domain: c
-  }) : _$$tx('sites.toolbar.publish_modal.unpublish_confirmation', {
+  }) : renderI18nText('sites.toolbar.publish_modal.unpublish_confirmation', {
     domain: c
   });
   return jsx(_$$bL2, {
@@ -9561,12 +9561,12 @@ function ci({
           children: [jsx($n, {
             variant: 'secondary',
             onClick: t,
-            children: _$$tx('general.cancel')
+            children: renderI18nText('general.cancel')
           }), jsx($n, {
             variant: 'destructive',
             onClick: i,
             disabled: !1,
-            children: _$$tx('sites.toolbar.publish_modal.unpublish')
+            children: renderI18nText('sites.toolbar.publish_modal.unpublish')
           })]
         })
       })]
@@ -9583,7 +9583,7 @@ function cl({
 }) {
   let n = Pt(e, 'title');
   let s = Oc();
-  let r = useMemo(() => s ? _$$t('figmake.metadata.controls.site_title.label') : i ? _$$t('sites.metadata.controls.title_site.label') : _$$t('sites.metadata.controls.title_page.label'), [i, s]);
+  let r = useMemo(() => s ? getI18nString('figmake.metadata.controls.site_title.label') : i ? getI18nString('sites.metadata.controls.title_site.label') : getI18nString('sites.metadata.controls.title_page.label'), [i, s]);
   return jsx(dK, {
     label: r,
     control: i ? jsx(lX, {
@@ -9594,7 +9594,7 @@ function cl({
       size: 'lg',
       recordingKey: n
     }),
-    description: i ? void 0 : _$$t('sites.metadata.controls.title_page.infotext')
+    description: i ? void 0 : getI18nString('sites.metadata.controls.title_page.infotext')
   });
 }
 function ca({
@@ -9606,7 +9606,7 @@ function ca({
   let [s, o] = useState(n.description);
   let d = OG(i ? 'description' : 'page_description');
   let c = Oc();
-  let p = useMemo(() => c ? _$$t('figmake.metadata.controls.description_site.label') : i ? _$$t('sites.metadata.controls.description_site.label') : _$$t('sites.metadata.controls.description_page.label'), [c, i]);
+  let p = useMemo(() => c ? getI18nString('figmake.metadata.controls.description_site.label') : i ? getI18nString('sites.metadata.controls.description_site.label') : getI18nString('sites.metadata.controls.description_page.label'), [c, i]);
   return jsx(dK, {
     label: p,
     control: jsx(_$$v8, {
@@ -9623,12 +9623,12 @@ function ca({
       },
       onKeyDown: cn,
       value: s ?? n.description,
-      placeholder: i ? _$$t('sites.metadata.controls.description_site.placeholder') : _$$t('sites.metadata.controls.description_page.placeholder'),
+      placeholder: i ? getI18nString('sites.metadata.controls.description_site.placeholder') : getI18nString('sites.metadata.controls.description_page.placeholder'),
       recordingKey: Pt(e, 'description'),
       minHeight: 104,
       maxHeight: 156
     }),
-    description: i ? void 0 : _$$t('sites.metadata.controls.description_page.infotext')
+    description: i ? void 0 : getI18nString('sites.metadata.controls.description_page.infotext')
   });
 }
 let cs = /^[a-z]{2,3}(-[a-z]{4})?(-[a-z]{2}|\d{3})?$/i;
@@ -9642,7 +9642,7 @@ function cr({
   let d = OG(i ? 'language' : 'page_language');
   let c = !!(n.lang && !cs.test(n.lang));
   return jsx(dK, {
-    label: _$$t('sites.metadata.controls.language.label'),
+    label: getI18nString('sites.metadata.controls.language.label'),
     control: jsx(_$$ks, {
       'aria-invalid': c,
       'className': _$$s4.wFull.$,
@@ -9659,10 +9659,10 @@ function cr({
       },
       'onKeyDown': cn,
       'value': s ?? n.lang,
-      'placeholder': _$$t('sites.metadata.controls.language.placeholder'),
+      'placeholder': getI18nString('sites.metadata.controls.language.placeholder'),
       'recordingKey': Pt(e, 'lang')
     }),
-    description: c ? _$$t('sites.metadata.controls.language.infotext_invalid') : _$$t('sites.metadata.controls.language.infotext'),
+    description: c ? getI18nString('sites.metadata.controls.language.infotext_invalid') : getI18nString('sites.metadata.controls.language.infotext'),
     isInvalid: c
   });
 }
@@ -9720,7 +9720,7 @@ function co({
   }, []);
   return i && getFeatureFlags().bake_wipe_chat_history && t && codeLibraryInstance ? jsxs(Fragment, {
     children: [jsx(dK, {
-      label: _$$t('figmake.chat_management.wipe_chat_settings.title'),
+      label: getI18nString('figmake.chat_management.wipe_chat_settings.title'),
       control: jsxs('div', {
         style: {
           display: 'flex',
@@ -9728,7 +9728,7 @@ function co({
           gap: '12px',
           color: 'var(--color-text-secondary)'
         },
-        children: [_$$t('figmake.chat_management.wipe_chat_settings.description'), jsx('div', {
+        children: [getI18nString('figmake.chat_management.wipe_chat_settings.description'), jsx('div', {
           style: {
             maxWidth: '196px'
           },
@@ -9736,7 +9736,7 @@ function co({
             variant: 'destructiveSecondary',
             onClick: p,
             recordingKey: Pt(e, 'wipe_chat_history_button'),
-            children: _$$t('figmake.chat_management.wipe_chat_settings.label')
+            children: getI18nString('figmake.chat_management.wipe_chat_settings.label')
           })
         })]
       })
@@ -9744,11 +9744,11 @@ function co({
       open: o,
       onClose: m,
       onConfirm: x,
-      title: _$$t('figmake.chat_management.wipe_chat_settings.confirmation.title'),
-      confirmText: _$$t('figmake.chat_management.wipe_chat_settings.confirmation.button_text'),
+      title: getI18nString('figmake.chat_management.wipe_chat_settings.confirmation.title'),
+      confirmText: getI18nString('figmake.chat_management.wipe_chat_settings.confirmation.button_text'),
       destructive: !0,
       recordingKey: Pt(e, 'confirm_delete_chat_modal'),
-      children: _$$t('figmake.chat_management.wipe_chat_settings.confirmation.message')
+      children: getI18nString('figmake.chat_management.wipe_chat_settings.confirmation.message')
     })]
   }) : null;
 }
@@ -9763,7 +9763,7 @@ function cc({
   let d = OG(i ? 'google_analytics_id' : 'page_google_analytics_id');
   let c = !!(n.googleAnalyticsID && !cd.test(n.googleAnalyticsID));
   return jsx(dK, {
-    label: _$$t('sites.metadata.controls.google_analytics_id.label'),
+    label: getI18nString('sites.metadata.controls.google_analytics_id.label'),
     control: jsx(_$$ks, {
       'aria-invalid': c,
       'className': _$$s4.wFull.$,
@@ -9781,10 +9781,10 @@ function cc({
       },
       'onKeyDown': cn,
       'value': s ?? n.googleAnalyticsID,
-      'placeholder': _$$t('sites.metadata.controls.google_analytics_id.placeholder'),
+      'placeholder': getI18nString('sites.metadata.controls.google_analytics_id.placeholder'),
       'recordingKey': Pt(e, 'google_analytics_id')
     }),
-    description: c ? _$$t('sites.metadata.controls.google_analytics_id.infotext_invalid') : void 0,
+    description: c ? getI18nString('sites.metadata.controls.google_analytics_id.infotext_invalid') : void 0,
     isInvalid: c
   });
 }
@@ -9801,7 +9801,7 @@ function cu({
   let x = Oc();
   let m = [t];
   x && (m = [t, ...(n ?? [])]);
-  let h = useMemo(() => x ? _$$t('figmake.metadata.controls.no_indexing_site.label') : i ? _$$t('sites.metadata.controls.no_indexing_site.label') : _$$t('sites.metadata.controls.no_indexing_page.label'), [i, x]);
+  let h = useMemo(() => x ? getI18nString('figmake.metadata.controls.no_indexing_site.label') : i ? getI18nString('sites.metadata.controls.no_indexing_site.label') : getI18nString('sites.metadata.controls.no_indexing_page.label'), [i, x]);
   return jsx('div', {
     className: _$$s4.flex.flexColumn.px16.minH24.justifyCenter.pt4.pb8.$,
     children: jsx(_$$S6, {
@@ -9809,7 +9809,7 @@ function cu({
       label: jsxs(_$$J7, {
         className: 'x78zum5',
         children: [h, o && jsx('span', {
-          'data-tooltip': _$$t('sites.metadata.controls.no_indexing_page.disabled_hover_tooltip'),
+          'data-tooltip': getI18nString('sites.metadata.controls.no_indexing_page.disabled_hover_tooltip'),
           'data-tooltip-type': Ib.TEXT,
           'className': 'x1h67ju5',
           'children': jsx(_$$B3, {})
@@ -9841,7 +9841,7 @@ function cp({
     children: jsx(_$$S6, {
       label: jsx(_$$J7, {
         className: 'x78zum5',
-        children: _$$t('sites.metadata.controls.bypass_link_site.label')
+        children: getI18nString('sites.metadata.controls.bypass_link_site.label')
       }),
       onChange: e => {
         s(e);
@@ -9854,7 +9854,7 @@ function cp({
       },
       checked: !!n,
       recordingKey: Pt(e, 'add_bypass_link'),
-      children: _$$t('sites.metadata.controls.bypass_link_site.description')
+      children: getI18nString('sites.metadata.controls.bypass_link_site.description')
     })
   });
 }
@@ -9870,7 +9870,7 @@ function cx({
     children: jsx(_$$S6, {
       label: jsx(_$$J7, {
         className: 'x78zum5',
-        children: _$$t('sites.metadata.controls.reduced_motion.label')
+        children: getI18nString('sites.metadata.controls.reduced_motion.label')
       }),
       onChange: e => {
         let i = !e;
@@ -9884,7 +9884,7 @@ function cx({
       },
       checked: !n,
       recordingKey: Pt(e, 'ignore_reduced_motion'),
-      children: _$$t('sites.metadata.controls.reduced_motion.description')
+      children: getI18nString('sites.metadata.controls.reduced_motion.description')
     })
   });
 }
@@ -9949,16 +9949,16 @@ function cm({
         });
       },
       base64String: p,
-      description: _$$t('sites.metadata.controls.favicon.infotext', {
+      description: getI18nString('sites.metadata.controls.favicon.infotext', {
         width: 48,
         height: 48
       }),
       imageCandidates: d,
-      label: _$$t('sites.metadata.controls.favicon.label'),
+      label: getI18nString('sites.metadata.controls.favicon.label'),
       nodeId: s.faviconID,
       recordingKey: Pt(n, 'favicon'),
       removeImage: () => c(''),
-      removeString: _$$t('sites.metadata.image_selector.remove_selection'),
+      removeString: getI18nString('sites.metadata.image_selector.remove_selection'),
       selectImage: c
     })
   });
@@ -10023,16 +10023,16 @@ function ch({
         });
       },
       base64String: p,
-      description: _$$t('sites.metadata.controls.social_image.infotext', {
+      description: getI18nString('sites.metadata.controls.social_image.infotext', {
         width: 1200,
         height: 630
       }),
       imageCandidates: d,
-      label: _$$t('sites.metadata.controls.social_image.label'),
+      label: getI18nString('sites.metadata.controls.social_image.label'),
       nodeId: s.socialImageID,
       recordingKey: Pt(n, 'social_image'),
       removeImage: () => c(''),
-      removeString: _$$t('sites.metadata.image_selector.remove_selection'),
+      removeString: getI18nString('sites.metadata.image_selector.remove_selection'),
       selectImage: c
     })
   });
@@ -10065,9 +10065,9 @@ function cf({
   };
   return jsxs(Fragment, {
     children: [jsx(dK, {
-      label: _$$t('sites.metadata.controls.custom_code.start_head.label'),
+      label: getI18nString('sites.metadata.controls.custom_code.start_head.label'),
       control: jsx(dZ, {
-        placeholder: _$$t('sites.metadata.controls.custom_code.placeholder'),
+        placeholder: getI18nString('sites.metadata.controls.custom_code.placeholder'),
         code: i,
         onChange: e => {
           n(e);
@@ -10078,9 +10078,9 @@ function cf({
         }
       })
     }), jsx(dK, {
-      label: _$$t('sites.metadata.controls.custom_code.end_head.label'),
+      label: getI18nString('sites.metadata.controls.custom_code.end_head.label'),
       control: jsx(dZ, {
-        placeholder: _$$t('sites.metadata.controls.custom_code.placeholder'),
+        placeholder: getI18nString('sites.metadata.controls.custom_code.placeholder'),
         code: s,
         onChange: e => {
           o(e);
@@ -10091,9 +10091,9 @@ function cf({
         }
       })
     }), jsx(dK, {
-      label: _$$t('sites.metadata.controls.custom_code.start_body.label'),
+      label: getI18nString('sites.metadata.controls.custom_code.start_body.label'),
       control: jsx(dZ, {
-        placeholder: _$$t('sites.metadata.controls.custom_code.placeholder'),
+        placeholder: getI18nString('sites.metadata.controls.custom_code.placeholder'),
         code: d,
         onChange: e => {
           c(e);
@@ -10104,9 +10104,9 @@ function cf({
         }
       })
     }), jsx(dK, {
-      label: _$$t('sites.metadata.controls.custom_code.end_body.label'),
+      label: getI18nString('sites.metadata.controls.custom_code.end_body.label'),
       control: jsx(dZ, {
-        placeholder: _$$t('sites.metadata.controls.custom_code.placeholder'),
+        placeholder: getI18nString('sites.metadata.controls.custom_code.placeholder'),
         code: p,
         onChange: e => {
           x(e);
@@ -10163,7 +10163,7 @@ function cb({
         })),
         variant: 'destructiveSecondary',
         recordingKey: Pt(e, 'unpublishButton'),
-        children: r ? _$$tx('figmake.metadata.controls.publish_status.unpublish_site') : _$$tx('sites.metadata.controls.publish_status.unpublish_site')
+        children: r ? renderI18nText('figmake.metadata.controls.publish_status.unpublish_site') : renderI18nText('sites.metadata.controls.publish_status.unpublish_site')
       }) : jsx(sj, {
         file: t
       })
@@ -10176,7 +10176,7 @@ function cy({
   let t = q5();
   return t ? jsx(dK, {
     useLabel: !1,
-    label: _$$t('sites.metadata.controls.publish_status.label'),
+    label: getI18nString('sites.metadata.controls.publish_status.label'),
     control: jsx(cb, {
       openFile: t,
       recordingKey: e
@@ -10220,7 +10220,7 @@ function cj({
   let r = Oc();
   let o = jsxs(Fragment, {
     children: [jsx(d$, {
-      children: _$$t('sites.metadata.heading.general')
+      children: getI18nString('sites.metadata.heading.general')
     }), jsx(cy, {
       recordingKey: e
     }), jsx(cl, {
@@ -10251,7 +10251,7 @@ function cj({
   let d = getFeatureFlags().sts_a11y_reduced_motion || getFeatureFlags().sts_a11y_bypass_link_setting;
   let p = jsxs(Fragment, {
     children: [jsx(d$, {
-      children: _$$t('sites.metadata.heading.accessibility')
+      children: getI18nString('sites.metadata.heading.accessibility')
     }), getFeatureFlags().sts_a11y_reduced_motion && jsx(cx, {
       isSiteLevelSetting: !0,
       page: t,
@@ -10264,7 +10264,7 @@ function cj({
   });
   let x = jsxs(Fragment, {
     children: [jsx(d$, {
-      children: _$$t('sites.metadata.heading.images')
+      children: getI18nString('sites.metadata.heading.images')
     }), jsx(cm, {
       isSiteLevelSetting: !0,
       page: t,
@@ -10281,7 +10281,7 @@ function cj({
   let h = m?.key;
   let g = h ? jsxs(Fragment, {
     children: [jsx(d$, {
-      children: r ? _$$t('figmake.settings.password_protection.title') : _$$t('sites.metadata.heading.site_access')
+      children: r ? getI18nString('figmake.settings.password_protection.title') : getI18nString('sites.metadata.heading.site_access')
     }), jsx(dz, {
       recordingKey: e,
       fileKey: h
@@ -10289,7 +10289,7 @@ function cj({
   }) : null;
   let f = jsxs(Fragment, {
     children: [jsx(d$, {
-      children: _$$t('sites.metadata.heading.custom_code')
+      children: getI18nString('sites.metadata.heading.custom_code')
     }), jsx(cf, {
       isSiteLevelSetting: !0,
       page: t,
@@ -10322,7 +10322,7 @@ function ck({
   let a = noop();
   let s = jsxs(Fragment, {
     children: [jsx(d$, {
-      children: _$$t('sites.metadata.heading.general')
+      children: getI18nString('sites.metadata.heading.general')
     }), jsx(cl, {
       page: t,
       recordingKey: e
@@ -10340,7 +10340,7 @@ function ck({
   });
   let r = jsxs(Fragment, {
     children: [jsx(d$, {
-      children: _$$t('sites.metadata.heading.images')
+      children: getI18nString('sites.metadata.heading.images')
     }), jsx(ch, {
       page: t,
       recordingKey: e,
@@ -10417,7 +10417,7 @@ function cS({
   recordingKey: e,
   closeModal: t
 }) {
-  let i = _$$md(_$$j4);
+  let i = useAtomWithSubscription(_$$j4);
   let n = _$$dh();
   let a = _$$tS();
   let s = _$$_t(a ?? '');
@@ -10437,7 +10437,7 @@ function cS({
 function cC() {
   return jsxs(nH, {
     children: [jsx(nH.Header, {
-      title: _$$t('sites.side_rail.settings'),
+      title: getI18nString('sites.side_rail.settings'),
       dataTestId: 'site-settings-view-header',
       children: jsx(_$$v4, {})
     }), jsx(_$$P2, {
@@ -10456,7 +10456,7 @@ function cC() {
 function cT() {
   return jsxs(nH, {
     children: [jsx(nH.Header, {
-      title: _$$t('figmake.side_rail.settings'),
+      title: getI18nString('figmake.side_rail.settings'),
       children: jsx(s4, {})
     }), jsx(_$$P2, {
       className: 'xh8yej3',
@@ -10476,7 +10476,7 @@ function cI() {
       className: 'x78zum5 xdt5ytf',
       children: [jsx('span', {
         ..._$$Ay.props(cN.navSectionTitle),
-        children: _$$t('sites.settings.site_heading')
+        children: getI18nString('sites.settings.site_heading')
       }), jsx('nav', {
         className: 'x78zum5 xdt5ytf x1jl38hy x5jayri xsgzr2y x1n5zjp5',
         children: jsx(oE, {})
@@ -10485,7 +10485,7 @@ function cI() {
       className: 'x78zum5 xdt5ytf',
       children: [jsx('span', {
         ..._$$Ay.props(cN.navSectionTitle),
-        children: _$$t('sites.panel.link_panel.webpages_header')
+        children: getI18nString('sites.panel.link_panel.webpages_header')
       }), jsx('nav', {
         className: 'x78zum5 xdt5ytf x1jl38hy x5jayri',
         children: jsx(oN, {})
@@ -10500,7 +10500,7 @@ function cE() {
       className: 'x78zum5 xdt5ytf',
       children: [jsx('span', {
         ..._$$Ay.props(cN.navSectionTitle),
-        children: _$$t('sites.settings.site_heading')
+        children: getI18nString('sites.settings.site_heading')
       }), jsx('nav', {
         ..._$$Ay.props(cN.nav, e ? cN.withBottomBorder : {}),
         children: jsx(oE, {})
@@ -10509,7 +10509,7 @@ function cE() {
       className: 'x78zum5 xdt5ytf',
       children: [jsx('span', {
         ..._$$Ay.props(cN.navSectionTitle),
-        children: _$$t('sites.settings.integrations_heading')
+        children: getI18nString('sites.settings.integrations_heading')
       }), jsx('nav', {
         className: 'x78zum5 xdt5ytf x1jl38hy x5jayri',
         children: jsx(oR, {})
@@ -10607,7 +10607,7 @@ async function cO(e, t, i) {
           if (e && t) {
             if (i[`${e}@${t}`] = `'${e}'`, n[e]) {
               let i = n[e].slice(1);
-              n[e] = `^${_$$Z6(i, t) === 1 ? t : i}`;
+              n[e] = `^${compareVersions(i, t) === 1 ? t : i}`;
             } else {
               n[e] = `^${t}`;
             }
@@ -10773,7 +10773,7 @@ function c5() {
       onClick: () => {
         let t = o.current;
         if (!t || n) return;
-        _$$az.trackDefinedEvent('ds_import.library_import_button_clicked', {
+        analyticsEventManager.trackDefinedEvent('ds_import.library_import_button_clicked', {
           selected_library_key: libraryImport?.library.library_key,
           file_key: e || ''
         });
@@ -10795,7 +10795,7 @@ function c5() {
       children: libraryImport ? jsx('div', {
         className: 'x1ncir08 xlup9mm xb3r6kr xlyipyv xuxw1ft',
         children: libraryImport.library.library_name
-      }) : _$$t('figmake.empty_state.select_a_library')
+      }) : getI18nString('figmake.empty_state.select_a_library')
     })
   });
 }
@@ -10817,13 +10817,13 @@ let c3 = forwardRef((e, t) => jsx(cJ, {
   type: 'button',
   ref: t,
   ..._$$d6(e),
-  children: _$$t('figmake.empty_state.attach_a_design')
+  children: getI18nString('figmake.empty_state.attach_a_design')
 }));
 function c8({
   chatMessagesNodeGuid: e,
   requestClose: t
 }) {
-  let [i, n] = _$$fp(_$$mC(e));
+  let [i, n] = useAtomValueAndSetter(_$$mC(e));
   let [s, r] = useState(!1);
   let d = useRef(null);
   let {
@@ -10885,11 +10885,11 @@ function c8({
           onChange: e => n(e.target.value),
           onKeyDown: e => {
             e.key !== 'Enter' || e.shiftKey || e.nativeEvent.isComposing || _(e);
-            h.current || (h.current = !0, _$$az.trackDefinedEvent('figmake.empty_state_chat_input_used', {
+            h.current || (h.current = !0, analyticsEventManager.trackDefinedEvent('figmake.empty_state_chat_input_used', {
               fileKey: g?.key ?? ''
             }));
           },
-          placeholder: _$$t('figmake.empty_state.chat_placeholder'),
+          placeholder: getI18nString('figmake.empty_state.chat_placeholder'),
           ref: d
         })]
       }), jsx('div', {
@@ -11014,7 +11014,7 @@ function c7({
         children: t
       }), jsx('span', {
         ..._$$xk(c9.cardSubtitle),
-        children: _$$t('figmake.empty_state.by_figma')
+        children: getI18nString('figmake.empty_state.by_figma')
       })]
     })]
   });
@@ -11063,10 +11063,10 @@ let un = {
   shopping_app: 'This shopping app comes with built-in item sorting, a cart flow, and a basic checkout experience\u2014so you have a solid starting point.\n\nStart chatting to customize: you can adjust the layout, swap out components, or add entirely new features.'
 };
 let ul = e => ({
-  glass_material_editor: _$$t('figmake.empty_state.template.glass_material_editor'),
-  synth_maker: _$$t('figmake.empty_state.template.synth_maker'),
-  image_dithering_tool: _$$t('figmake.empty_state.template.image_dithering_tool'),
-  shopping_app: _$$t('figmake.empty_state.template.shopping_app')
+  glass_material_editor: getI18nString('figmake.empty_state.template.glass_material_editor'),
+  synth_maker: getI18nString('figmake.empty_state.template.synth_maker'),
+  image_dithering_tool: getI18nString('figmake.empty_state.template.image_dithering_tool'),
+  shopping_app: getI18nString('figmake.empty_state.template.shopping_app')
 })[e];
 let ua = (e, t) => {
   let i = t ? ui[e] : ut[e];
@@ -11109,13 +11109,13 @@ function ur({
       try {
         await UP(buildUploadUrl(`${ue[n]}.zip`), un[n], i.key, t);
         p(!0);
-        i.name === _$$t('fullscreen.fullscreen_view_selector.untitled') && c(Nw({
+        i.name === getI18nString('fullscreen.fullscreen_view_selector.untitled') && c(Nw({
           file: {
             key: i.key
           },
           name: ul(n)
         }));
-        _$$az.trackDefinedEvent('figmake.empty_state_template_inserted', {
+        analyticsEventManager.trackDefinedEvent('figmake.empty_state_template_inserted', {
           fileKey: i.key,
           templateName: n
         });
@@ -11123,7 +11123,7 @@ function ur({
           id: 'ai_for_production.chat_response_received'
         });
       } catch (e) {
-        $D(_$$e2.ACTIVATION, e, {
+        reportError(_$$e2.ACTIVATION, e, {
           extra: {
             template: n
           }
@@ -11152,7 +11152,7 @@ function ur({
       className: 'xdai5fg xh8yej3 x78zum5 xdt5ytf x6s0dn4 x1vjfegm xv2w18j x1xjkx7e',
       children: [jsx('h1', {
         ..._$$xk(uc.title),
-        children: _$$t('figmake.empty_state.prompt_title')
+        children: getI18nString('figmake.empty_state.prompt_title')
       }), jsx(c8, {
         chatMessagesNodeGuid: t?.guid ?? '',
         requestClose: e
@@ -11160,19 +11160,19 @@ function ur({
         className: 'xx4vt8u xrvj5dj x5xkp29 x1rz4g7b x17rkj2b xl56j7k x1excjyp',
         children: [jsx(c7, {
           image: ua('glass_material_editor', h),
-          title: _$$t('figmake.empty_state.template.glass_material_editor'),
+          title: getI18nString('figmake.empty_state.template.glass_material_editor'),
           onClick: () => m('glass_material_editor')
         }), jsx(c7, {
           image: ua('synth_maker', h),
-          title: _$$t('figmake.empty_state.template.synth_maker'),
+          title: getI18nString('figmake.empty_state.template.synth_maker'),
           onClick: () => m('synth_maker')
         }), jsx(c7, {
           image: ua('image_dithering_tool', h),
-          title: _$$t('figmake.empty_state.template.image_dithering_tool'),
+          title: getI18nString('figmake.empty_state.template.image_dithering_tool'),
           onClick: () => m('image_dithering_tool')
         }), jsx(c7, {
           image: ua('shopping_app', h),
-          title: _$$t('figmake.empty_state.template.shopping_app'),
+          title: getI18nString('figmake.empty_state.template.shopping_app'),
           onClick: () => m('shopping_app')
         })]
       })]
@@ -11210,7 +11210,7 @@ function ud() {
       className: 'xdai5fg xh8yej3 x78zum5 xdt5ytf x6s0dn4 x1vjfegm xv2w18j x1xjkx7e',
       children: [jsx('h1', {
         ..._$$xk(uc.title),
-        children: _$$t('figmake.empty_state.prompt_title')
+        children: getI18nString('figmake.empty_state.prompt_title')
       }), jsxs('div', {
         className: 'x11i3ho8 xhjk10j x78zum5 xdt5ytf x1qughib x1qrh7qg x9h44rk x1bamp8i x1yjdb4r x9f619',
         children: [jsx('div', {
@@ -11309,13 +11309,13 @@ function u_({
           next ? next() : t();
         },
         primaryCta: p ? {
-          label: _$$tx('general.done'),
+          label: renderI18nText('general.done'),
           type: 'button',
           onClick: t,
           variantOverride: 'white',
           ctaTrackingDescriptor: _$$c8.DONE
         } : {
-          label: _$$tx('general.next'),
+          label: renderI18nText('general.next'),
           type: 'button',
           onClick: next,
           variantOverride: 'white',
@@ -11362,8 +11362,8 @@ function uy() {
   }) {
     return [{
       stepId: 'welcome_to_figma_make',
-      title: _$$tx('figmake.onboarding.title.welcome_to_figma_make'),
-      description: _$$tx('figmake.onboarding.description.this_is_a_fully_interactive_app'),
+      title: renderI18nText('figmake.onboarding.title.welcome_to_figma_make'),
+      description: renderI18nText('figmake.onboarding.description.this_is_a_fully_interactive_app'),
       trackingContextName: ` ${ub} > Welcome to Figma Make`,
       targetKey: Xe,
       disableHighlight: !0,
@@ -11373,15 +11373,15 @@ function uy() {
       pointerOffsetOverride: 10
     }, e ? {
       stepId: 'make_a_copy',
-      title: _$$tx('figmake.onboarding.title.make_a_copy'),
-      description: _$$tx('figmake.onboarding.description.want_to_build_on_this_idea'),
+      title: renderI18nText('figmake.onboarding.title.make_a_copy'),
+      description: renderI18nText('figmake.onboarding.description.want_to_build_on_this_idea'),
       trackingContextName: ` ${ub} > Make a copy`,
       targetKey: _$$S$,
       arrowPosition: F_.TOP
     } : void 0, {
       stepId: 'share_and_invite',
-      title: _$$tx('figmake.onboarding.title.share_and_invite'),
-      description: _$$tx('figmake.onboarding.description.you_can_share_a_link_or_invite_others_via_email'),
+      title: renderI18nText('figmake.onboarding.title.share_and_invite'),
+      description: renderI18nText('figmake.onboarding.description.you_can_share_a_link_or_invite_others_via_email'),
       trackingContextName: ` ${ub} > Share and invite`,
       targetKey: _$$v9,
       arrowPosition: F_.TOP
@@ -11401,7 +11401,7 @@ function uy() {
 let uk = memo(({
   handleClosePanel: e
 }) => {
-  let t = _$$md($C);
+  let t = useAtomWithSubscription($C);
   return getFeatureFlags().internal_only_debug_tools && t ? jsx(uw, {
     handleClosePanel: e
   }) : null;
@@ -11411,11 +11411,11 @@ let uw = _$$A12.createLazyComponent(() => Promise.all([]).then(_require2).then(e
   loading: () => null,
   error: () => null
 });
-let uC = Wh(() => _$$eU(!1));
+let uC = Wh(() => atom(!1));
 function uT() {
   let e = Xr(uC);
   return !function () {
-    let [e] = _$$fp(uC);
+    let [e] = useAtomValueAndSetter(uC);
     let {
       figmakeInFullscreen
     } = Ve();
@@ -11428,12 +11428,12 @@ function uT() {
         e(!0);
       },
       children: [jsx(_$$Q5, {
-        title: _$$t('figmake.fullscreen_preview.unsafe_content_warning'),
+        title: getI18nString('figmake.fullscreen_preview.unsafe_content_warning'),
         children: jsx(Fragment, {})
       }), jsx(_$$N7, {
         href: 'https://help.figma.com/hc/articles/31304412302231',
         newTab: !0,
-        children: _$$t('figmake.fullscreen_preview.unsafe_content_warning_learn_more')
+        children: getI18nString('figmake.fullscreen_preview.unsafe_content_warning_learn_more')
       })]
     })
   });
@@ -11447,7 +11447,7 @@ function uN({
     figmakeInFullscreen
   } = Ve();
   let n = !!_$$_H2();
-  let s = _$$md(_$$o2(e));
+  let s = useAtomWithSubscription(_$$o2(e));
   let {
     componentPreviewState
   } = _$$k5();
@@ -11473,23 +11473,23 @@ function uN({
   }) {
     let i = e ? {
       stepId: 'make_a_copy',
-      title: _$$tx('figmake.onboarding.title.make_a_copy'),
-      description: _$$tx('figmake.onboarding.description.want_to_build_on_this_idea'),
+      title: renderI18nText('figmake.onboarding.title.make_a_copy'),
+      description: renderI18nText('figmake.onboarding.description.want_to_build_on_this_idea'),
       trackingContextName: ` ${uE} > Make a copy`,
       targetKey: _$$S$,
       arrowPosition: F_.TOP
     } : {
       stepId: 'make_a_copy',
-      title: _$$tx('figmake.onboarding.title.make_a_copy'),
-      description: _$$tx('figmake.onboarding.description.want_to_build_on_this_idea_file_menu'),
+      title: renderI18nText('figmake.onboarding.title.make_a_copy'),
+      description: renderI18nText('figmake.onboarding.description.want_to_build_on_this_idea_file_menu'),
       trackingContextName: ` ${uE} > Make a copy file menu`,
       targetKey: O0,
       arrowPosition: F_.TOP
     };
     return [{
       stepId: 'welcome_to_figma_make',
-      title: _$$tx('figmake.onboarding.title.welcome_to_figma_make'),
-      description: _$$tx('figmake.onboarding.description.this_is_a_fully_interactive_app'),
+      title: renderI18nText('figmake.onboarding.title.welcome_to_figma_make'),
+      description: renderI18nText('figmake.onboarding.description.this_is_a_fully_interactive_app'),
       trackingContextName: ` ${uE} > Welcome to Figma Make`,
       targetKey: $i,
       disableHighlight: !0,
@@ -11498,15 +11498,15 @@ function uN({
       shouldCenterArrow: EL.BEST_EFFORT
     }, t ? i : void 0, {
       stepId: 'play_around',
-      title: _$$tx('figmake.onboarding.title.play_around'),
-      description: _$$tx('figmake.onboarding.description.switch_to_full_screen'),
+      title: renderI18nText('figmake.onboarding.title.play_around'),
+      description: renderI18nText('figmake.onboarding.description.switch_to_full_screen'),
       trackingContextName: ` ${uE} > Play around`,
       targetKey: NR,
       arrowPosition: F_.TOP
     }, {
       stepId: 'share_and_invite',
-      title: _$$tx('figmake.onboarding.title.share_and_invite'),
-      description: _$$tx('figmake.onboarding.description.you_can_share_a_link_or_invite_others_via_email'),
+      title: renderI18nText('figmake.onboarding.title.share_and_invite'),
+      description: renderI18nText('figmake.onboarding.description.you_can_share_a_link_or_invite_others_via_email'),
       trackingContextName: ` ${uE} > Share and invite`,
       targetKey: _$$v9
     }].filter(e => e);
@@ -11526,16 +11526,16 @@ function uN({
 let uA = 'Figmake New File Onboarding V2';
 let uL = [{
   stepId: 'got_an_idea',
-  title: _$$tx('figmake.onboarding_v2.got_an_idea.title'),
-  description: _$$tx('figmake.onboarding_v2.got_an_idea.description'),
+  title: renderI18nText('figmake.onboarding_v2.got_an_idea.title'),
+  description: renderI18nText('figmake.onboarding_v2.got_an_idea.description'),
   trackingContextName: ` ${uA} > Got an idea`,
   targetKey: _$$HB,
   disableHighlight: !0,
   arrowPosition: F_.BOTTOM
 }, {
   stepId: 'not_sure_what_to_make',
-  title: _$$tx('figmake.onboarding_v2.not_sure_what_to_make.title'),
-  description: _$$tx('figmake.onboarding_v2.not_sure_what_to_make.description'),
+  title: renderI18nText('figmake.onboarding_v2.not_sure_what_to_make.title'),
+  description: renderI18nText('figmake.onboarding_v2.not_sure_what_to_make.description'),
   trackingContextName: ` ${uA} > Not sure what to make`,
   targetKey: OU,
   disableHighlight: !0,
@@ -11543,27 +11543,27 @@ let uL = [{
 }];
 let uP = [{
   stepId: 'point_and_edit',
-  title: _$$tx('figmake.onboarding_v2.point_and_edit.title'),
-  description: _$$tx('figmake.onboarding_v2.point_and_edit.description'),
+  title: renderI18nText('figmake.onboarding_v2.point_and_edit.title'),
+  description: renderI18nText('figmake.onboarding_v2.point_and_edit.description'),
   trackingContextName: ` ${uA} > Point and edit`,
   targetKey: _$$kx,
   arrowPosition: F_.TOP
 }, {
   stepId: 'guide_with_visuals',
-  title: _$$tx('figmake.onboarding_v2.guide_with_visuals.title'),
-  description: _$$tx('figmake.onboarding_v2.guide_with_visuals.description'),
+  title: renderI18nText('figmake.onboarding_v2.guide_with_visuals.title'),
+  description: renderI18nText('figmake.onboarding_v2.guide_with_visuals.description'),
   trackingContextName: ` ${uA} > Guide with visuals`,
   targetKey: _$$wj
 }, {
   stepId: 'reference_your_own_styles',
-  title: _$$tx('figmake.onboarding_v2.reference_your_own_styles.title'),
-  description: _$$tx('figmake.onboarding_v2.reference_your_own_styles.description'),
+  title: renderI18nText('figmake.onboarding_v2.reference_your_own_styles.title'),
+  description: renderI18nText('figmake.onboarding_v2.reference_your_own_styles.description'),
   trackingContextName: ` ${uA} > Reference your own styles`,
   targetKey: _$$t$
 }, {
   stepId: 'put_it_on_the_web',
-  title: _$$tx('figmake.onboarding_v2.put_it_on_the_web.title'),
-  description: _$$tx('figmake.onboarding_v2.put_it_on_the_web.description'),
+  title: renderI18nText('figmake.onboarding_v2.put_it_on_the_web.title'),
+  description: renderI18nText('figmake.onboarding_v2.put_it_on_the_web.description'),
   trackingContextName: ` ${uA} > Put it on the web`,
   targetKey: _$$eq
 }];
@@ -11596,7 +11596,7 @@ function uF({
 }) {
   let t = getFeatureFlags().bake_publish_flow;
   let [i, n] = useState(!1);
-  let s = _$$md(_$$o2(e));
+  let s = useAtomWithSubscription(_$$o2(e));
   let {
     componentPreviewState
   } = _$$k5();
@@ -11662,7 +11662,7 @@ function uM() {
   }, []), isShowing) ? jsx(_$$fu, {
     name: uA,
     children: jsx(_$$rq, {
-      description: _$$tx('figmake.onboarding_v2.give_it_a_try.description'),
+      description: renderI18nText('figmake.onboarding_v2.give_it_a_try.description'),
       disableHighlight: !0,
       emphasized: !0,
       isShowing,
@@ -11671,14 +11671,14 @@ function uM() {
         complete();
       },
       primaryCta: {
-        label: _$$tx('general.done'),
+        label: renderI18nText('general.done'),
         type: 'button',
         onClick: complete,
         variantOverride: 'white',
         ctaTrackingDescriptor: _$$c8.DONE
       },
       targetKey: _$$HB,
-      title: _$$tx('figmake.onboarding_v2.give_it_a_try.title'),
+      title: renderI18nText('figmake.onboarding_v2.give_it_a_try.title'),
       trackingContextName: 'Try it out'
     })
   }) : null;
@@ -11692,7 +11692,7 @@ function uD({
   } = Ve();
   let n = _$$ry();
   let a = _$$f0('seen_figmake_new_file_onboarding');
-  let s = _$$md(FX);
+  let s = useAtomWithSubscription(FX);
   return figmakeInFullscreen || n || !t || a ? null : jsxs(Fragment, {
     children: [!s && jsx(uO, {}), jsx(uF, {
       chatMessagesNodeGuid: e
@@ -11702,8 +11702,8 @@ function uD({
 let uB = 'Send to Make From Design Onboarding Overlay';
 let u$ = {
   stepId: 'bring_frame_to_life',
-  title: _$$tx('figmake.onboarding_v2.bring_frame_to_life.title'),
-  description: _$$tx('figmake.onboarding_v2.bring_frame_to_life.description_v2'),
+  title: renderI18nText('figmake.onboarding_v2.bring_frame_to_life.title'),
+  description: renderI18nText('figmake.onboarding_v2.bring_frame_to_life.description_v2'),
   trackingContextName: ` ${uB} > Bring frame to life`,
   targetKey: _$$HB,
   disableHighlight: !0,
@@ -11712,7 +11712,7 @@ let u$ = {
 function uU() {
   let e = _$$ry();
   let t = _$$f0('seen_figmake_send_to_make_onboarding');
-  let i = _$$md(_$$aQ);
+  let i = useAtomWithSubscription(_$$aQ);
   let {
     isShowing,
     complete,
@@ -11799,13 +11799,13 @@ function uX() {
   let x = useRef(d);
   x.current ||= d;
   let m = x.current;
-  let [h, g] = _$$fp(_$$jx);
-  let [f, _] = _$$fp($C);
+  let [h, g] = useAtomValueAndSetter(_$$jx);
+  let [f, _] = useAtomValueAndSetter($C);
   let {
     onBuild,
     onError
   } = function (e, t) {
-    let i = _$$md(Nm(e?.guid || ''));
+    let i = useAtomWithSubscription(Nm(e?.guid || ''));
     let n = _$$E4(e);
     let l = _$$tS();
     let s = function (e) {
@@ -11822,7 +11822,7 @@ function uX() {
       onBuild: useCallback(() => {
         if (i !== 'assistant' || void 0 === d || !l || !s || !e?.guid) return;
         let n = ni(l, e, s);
-        _$$az.trackDefinedEvent('ai_for_production.llm_generation_built', {
+        analyticsEventManager.trackDefinedEvent('ai_for_production.llm_generation_built', {
           generationIndex: d,
           featureType: t,
           fileKey: l,
@@ -11832,7 +11832,7 @@ function uX() {
       onError: useCallback((n, a) => {
         if (i !== 'assistant' || void 0 === d || !l || !s || !e?.guid) return;
         let r = ni(l, e, s);
-        _$$az.trackDefinedEvent('ai_for_production.llm_generation_error', {
+        analyticsEventManager.trackDefinedEvent('ai_for_production.llm_generation_error', {
           phase: a,
           generationIndex: d,
           featureType: t,
@@ -11868,11 +11868,11 @@ function uX() {
     g(Ic.CODE);
   }, [g]);
   _$$sl(k);
-  let w = _$$md(_$$TJ);
+  let w = useAtomWithSubscription(_$$TJ);
   let S = entryPointCodeInstance ? w[entryPointCodeInstance.guid] ?? entryPointCodeInstance.guid : null;
   let C = _$$vD(S);
   let T = q5();
-  let I = _$$md(_$$o2(codeLibraryInstance?.guid || ''));
+  let I = useAtomWithSubscription(_$$o2(codeLibraryInstance?.guid || ''));
   let E = _$$d7(T?.key ?? null, _$$lV.FIGMAKE);
   if (!T || !entryPointCodeInstance) return jsx(uG, {});
   let N = figmakeInFullscreen ? Ic.PREVIEW : h;
@@ -11992,7 +11992,7 @@ function uW({
     codeLibraryInstance
   } = _$$oA2();
   let [n, s] = useState(!0);
-  let r = _$$md(_$$mC(codeLibraryInstance?.guid ?? ''));
+  let r = useAtomWithSubscription(_$$mC(codeLibraryInstance?.guid ?? ''));
   let d = Pd(t?.key ?? '', codeLibraryInstance?.guid ?? '', e.id);
   let {
     feedbackState,
@@ -12017,7 +12017,7 @@ function uW({
       }), jsx(_$$T3, {
         role: 'alert',
         className: 'x1g2dr8m xiqqdae xkezfkh x1giz659 x14kxzw3',
-        children: _$$t('figmake.feedback_modal.title')
+        children: getI18nString('figmake.feedback_modal.title')
       })]
     }), jsxs('div', {
       className: 'x78zum5 x1q0g3np x6s0dn4 x167g77z',
@@ -12037,14 +12037,14 @@ function uW({
           hideInitialText: !0,
           externalFeedbackState: feedbackState,
           setExternalFeedbackState: setFeedbackState,
-          thumbsUpLabel: _$$t('figmake.chat.thumbs_up'),
-          thumbsDownLabel: _$$t('figmake.chat.thumbs_down')
+          thumbsUpLabel: getI18nString('figmake.chat.thumbs_up'),
+          thumbsDownLabel: getI18nString('figmake.chat.thumbs_down')
         })
       }), jsx('div', {
         className: 'xtc4nxu x1ydjwli',
         children: jsx(_$$K2, {
           'onClick': () => s(!1),
-          'aria-label': _$$t('general.close'),
+          'aria-label': getI18nString('general.close'),
           'children': jsx(_$$A7, {})
         })
       })]
@@ -12221,7 +12221,7 @@ function u2(e) {
   debug(!!l, 'existingDefaultResponsiveSet not found.');
   l.removeSelfAndChildren();
 }
-let u3 = _$$eU(!1);
+let u3 = atom(!1);
 function pr({
   codeLibraryNode: e,
   isResizingPanel: t,
@@ -12229,19 +12229,19 @@ function pr({
 }) {
   let n = _$$iZ();
   let r = _$$tS();
-  let d = _$$md(EB);
+  let d = useAtomWithSubscription(EB);
   zA();
   _$$m5();
   (function (e) {
     let t = useDispatch();
     let i = q5();
     let n = i?.key;
-    let [l] = _$$fp(_$$n6);
+    let [l] = useAtomValueAndSetter(_$$n6);
     let r = e.chatMessagesNode || null;
     let d = _$$H2(r);
     let c = d && d.length === 0;
     useEffect(() => {
-      let e = _$$t('fullscreen.fullscreen_view_selector.untitled');
+      let e = getI18nString('fullscreen.fullscreen_view_selector.untitled');
       i && n && l && i.name === e && c && t(Nw({
         file: {
           key: n
@@ -12281,13 +12281,13 @@ function pr({
           featureType: _$$lV.FIGMAKE,
           isResizingPanel: t,
           onChatInputFocus: () => {
-            d && _$$az.trackDefinedEvent('figmake.input_focus_after_empty_state_template_inserted', {
+            d && analyticsEventManager.trackDefinedEvent('figmake.input_focus_after_empty_state_template_inserted', {
               fileKey: r ?? ''
             });
           },
           sendMessage: (t, i) => {
             let l = t.plainText;
-            l || (l = t.hidden ? '' : zl.get(_$$mC(c)));
+            l || (l = t.hidden ? '' : atomStoreManager.get(_$$mC(c)));
             let a = {
               ...t,
               plainText: l
@@ -12337,7 +12337,7 @@ function po({
 function pp() {
   let e = _$$aV();
   let t = useSelector(e => e.mirror.appModel.showUi);
-  let i = _$$md(FX);
+  let i = useAtomWithSubscription(FX);
   return !e && t ? jsx(_$$_7, {
     isCollapsed: !1,
     children: jsxs('div', {
@@ -12374,10 +12374,10 @@ let px = memo(() => {
     })
   });
 });
-Wh(() => _$$eU(0));
+Wh(() => atom(0));
 var pf = (e => (e[e.EDIT = 0] = 'EDIT', e[e.CONNECT = 1] = 'CONNECT', e))(pf || {});
-let p_ = Wh(() => _$$eU(0));
-let pb = Wh(() => _$$eU(!1));
+let p_ = Wh(() => atom(0));
+let pb = Wh(() => atom(!1));
 let pv = new _$$b({
   name: 'dakota',
   dependencies: [],
@@ -12409,11 +12409,11 @@ let pw = Ju(e => {
   let i = (() => {
     switch (e.type) {
       case 'item':
-        return _$$t('dakota.table_view.deletion_modal.delete_item_title');
+        return getI18nString('dakota.table_view.deletion_modal.delete_item_title');
       case 'items':
-        return _$$t('dakota.table_view.deletion_modal.delete_items_title');
+        return getI18nString('dakota.table_view.deletion_modal.delete_items_title');
       case 'collection':
-        return _$$t('dakota.table_view.deletion_modal.delete_collection_title');
+        return getI18nString('dakota.table_view.deletion_modal.delete_collection_title');
       default:
         throwTypeError(e.type);
     }
@@ -12421,11 +12421,11 @@ let pw = Ju(e => {
   let n = (() => {
     switch (e.type) {
       case 'item':
-        return _$$t('dakota.table_view.deletion_modal.delete_item_body');
+        return getI18nString('dakota.table_view.deletion_modal.delete_item_body');
       case 'items':
-        return _$$t('dakota.table_view.deletion_modal.delete_items_body');
+        return getI18nString('dakota.table_view.deletion_modal.delete_items_body');
       case 'collection':
-        return _$$t('dakota.table_view.deletion_modal.delete_collection_body');
+        return getI18nString('dakota.table_view.deletion_modal.delete_collection_body');
       default:
         throwTypeError(e.type);
     }
@@ -12445,14 +12445,14 @@ let pw = Ju(e => {
           children: [jsx($n, {
             variant: 'secondary',
             onClick: e.onClose,
-            children: _$$t('dakota.table_view.deletion_modal.cancel')
+            children: getI18nString('dakota.table_view.deletion_modal.cancel')
           }), jsx($n, {
             variant: 'destructive',
             onClick: () => {
               e.deleteRecordOrRecords();
               e.onClose();
             },
-            children: _$$t('dakota.table_view.deletion_modal.delete')
+            children: getI18nString('dakota.table_view.deletion_modal.delete')
           })]
         })
       })]
@@ -12460,15 +12460,15 @@ let pw = Ju(e => {
   });
 });
 var pS = (e => (e.ITEM = 'item', e.ITEMS = 'items', e.COLLECTION = 'collection', e))(pS || {});
-let pC = Iz(() => _$$eU(new Set()));
-let pT = Iz(() => _$$eU({}));
-let pI = Iz(() => _$$eU({}));
-let pE = Iz(() => _$$eU(void 0));
+let pC = createRemovableAtomFamily(() => atom(new Set()));
+let pT = createRemovableAtomFamily(() => atom({}));
+let pI = createRemovableAtomFamily(() => atom({}));
+let pE = createRemovableAtomFamily(() => atom(void 0));
 function pL(e, t, i) {
-  let n = _$$md(_$$iO);
+  let n = useAtomWithSubscription(_$$iO);
   let l = i ?? n;
-  let s = _$$md(_$$ou);
-  let [r, d] = _$$fp(_$$Mj(l + (t || '')));
+  let s = useAtomWithSubscription(_$$ou);
+  let [r, d] = useAtomValueAndSetter(_$$Mj(l + (t || '')));
   let [c, u] = useState('');
   let p = l && s.has(l);
   let x = useRef();
@@ -12638,7 +12638,7 @@ function xa({
         };
         n.dispatchCommand(xl, s);
       } catch (e) {
-        $D(_$$e2.CMS, new Error('Error uploading Rich Text field\'s image embed to CMS'), {
+        reportError(_$$e2.CMS, new Error('Error uploading Rich Text field\'s image embed to CMS'), {
           extra: e
         });
       }
@@ -12678,48 +12678,48 @@ function xa({
         children: [jsx(_$$l7, {
           width: 'fill',
           label: jsx(_$$h6, {
-            children: _$$t('dakota.rich_text_editor.toolbar.text_style.select_label')
+            children: getI18nString('dakota.rich_text_editor.toolbar.text_style.select_label')
           })
         }), jsxs(_$$mc2, {
           ref: r,
           children: [jsx(_$$c$5, {
             value: 'h1',
-            children: _$$t('dakota.properties_panel.cms_rich_text_styles.label_heading', {
+            children: getI18nString('dakota.properties_panel.cms_rich_text_styles.label_heading', {
               number: 1
             })
           }), jsx(_$$c$5, {
             value: 'h2',
-            children: _$$t('dakota.properties_panel.cms_rich_text_styles.label_heading', {
+            children: getI18nString('dakota.properties_panel.cms_rich_text_styles.label_heading', {
               number: 2
             })
           }), jsx(_$$c$5, {
             value: 'h3',
-            children: _$$t('dakota.properties_panel.cms_rich_text_styles.label_heading', {
+            children: getI18nString('dakota.properties_panel.cms_rich_text_styles.label_heading', {
               number: 3
             })
           }), jsx(_$$c$5, {
             value: 'h4',
-            children: _$$t('dakota.properties_panel.cms_rich_text_styles.label_heading', {
+            children: getI18nString('dakota.properties_panel.cms_rich_text_styles.label_heading', {
               number: 4
             })
           }), jsx(_$$c$5, {
             value: 'h5',
-            children: _$$t('dakota.properties_panel.cms_rich_text_styles.label_heading', {
+            children: getI18nString('dakota.properties_panel.cms_rich_text_styles.label_heading', {
               number: 5
             })
           }), jsx(_$$c$5, {
             value: 'h6',
-            children: _$$t('dakota.properties_panel.cms_rich_text_styles.label_heading', {
+            children: getI18nString('dakota.properties_panel.cms_rich_text_styles.label_heading', {
               number: 6
             })
           }), jsx(_$$c$5, {
             value: 'paragraph',
-            children: _$$t('dakota.properties_panel.cms_rich_text_styles.label_paragraph')
+            children: getI18nString('dakota.properties_panel.cms_rich_text_styles.label_paragraph')
           })]
         })]
       })
     }), jsx(_$$f9, {
-      'aria-label': _$$t('dakota.rich_text_editor.toolbar.bold'),
+      'aria-label': getI18nString('dakota.rich_text_editor.toolbar.bold'),
       'onIcon': jsx(noop, {}),
       'offIcon': jsx(noop, {}),
       'checked': o,
@@ -12728,7 +12728,7 @@ function xa({
         n.dispatchCommand(_$$mB, 'bold');
       }
     }), jsx(_$$f9, {
-      'aria-label': _$$t('dakota.rich_text_editor.toolbar.italic'),
+      'aria-label': getI18nString('dakota.rich_text_editor.toolbar.italic'),
       'onIcon': jsx(_$$s6, {}),
       'offIcon': jsx(_$$s6, {}),
       'checked': c,
@@ -12737,7 +12737,7 @@ function xa({
         n.dispatchCommand(_$$mB, 'italic');
       }
     }), jsx(_$$f9, {
-      'aria-label': _$$t('dakota.rich_text_editor.toolbar.underline'),
+      'aria-label': getI18nString('dakota.rich_text_editor.toolbar.underline'),
       'onIcon': jsx(_$$W6, {}),
       'offIcon': jsx(_$$W6, {}),
       'checked': x,
@@ -12746,7 +12746,7 @@ function xa({
         n.dispatchCommand(_$$mB, 'underline');
       }
     }), jsx(_$$f9, {
-      'aria-label': _$$t('dakota.rich_text_editor.toolbar.strikethrough'),
+      'aria-label': getI18nString('dakota.rich_text_editor.toolbar.strikethrough'),
       'onIcon': jsx(_$$N8, {}),
       'offIcon': jsx(_$$N8, {}),
       'checked': h,
@@ -12755,25 +12755,25 @@ function xa({
         n.dispatchCommand(_$$mB, 'strikethrough');
       }
     }), jsx(xn, {}), jsx(_$$K2, {
-      'aria-label': _$$t('dakota.rich_text_editor.toolbar.alignLeft'),
+      'aria-label': getI18nString('dakota.rich_text_editor.toolbar.alignLeft'),
       'onClick': () => {
         n.dispatchCommand(_$$fU, 'left');
       },
       'children': jsx(_$$h9, {})
     }), jsx(_$$K2, {
-      'aria-label': _$$t('dakota.rich_text_editor.toolbar.alignCenter'),
+      'aria-label': getI18nString('dakota.rich_text_editor.toolbar.alignCenter'),
       'onClick': () => {
         n.dispatchCommand(_$$fU, 'center');
       },
       'children': jsx(_$$N9, {})
     }), jsx(_$$K2, {
-      'aria-label': _$$t('dakota.rich_text_editor.toolbar.alignRight'),
+      'aria-label': getI18nString('dakota.rich_text_editor.toolbar.alignRight'),
       'onClick': () => {
         n.dispatchCommand(_$$fU, 'right');
       },
       'children': jsx(_$$K5, {})
     }), jsx(_$$K2, {
-      'aria-label': _$$t('dakota.rich_text_editor.toolbar.alignJustify'),
+      'aria-label': getI18nString('dakota.rich_text_editor.toolbar.alignJustify'),
       'onClick': () => {
         n.dispatchCommand(_$$fU, 'justify');
       },
@@ -12788,7 +12788,7 @@ function xa({
           display: 'none'
         }
       }), jsx(_$$K2, {
-        'aria-label': _$$t('dakota.rich_text_editor.toolbar.insertImage'),
+        'aria-label': getI18nString('dakota.rich_text_editor.toolbar.insertImage'),
         'onClick': () => b.current?.click(),
         'children': jsx(_$$s7, {})
       })]
@@ -12900,7 +12900,7 @@ function xx(e) {
   let i = useMemo(() => _$$D5({
     namespace: 'dakota-table-viewer',
     onError(e) {
-      $D(_$$e2.CMS, e);
+      reportError(_$$e2.CMS, e);
     },
     nodes: pz
   }), []);
@@ -12955,7 +12955,7 @@ function xh({
           });
         }
       } catch (e) {
-        $D(_$$e2.CMS, new Error('could not parse CMS image field value'));
+        reportError(_$$e2.CMS, new Error('could not parse CMS image field value'));
       }
     }
     e ? t() : i(null);
@@ -12981,7 +12981,7 @@ function xg(e) {
     if (!e) return '';
     let i = '';
     let n = new Date(e);
-    isNaN(n.getTime()) ? $D(_$$e2.CMS, new Error('Invalid date value.')) : i = function (e, t) {
+    isNaN(n.getTime()) ? reportError(_$$e2.CMS, new Error('Invalid date value.')) : i = function (e, t) {
       let i = (() => {
         switch (t) {
           case _$$ap.PLAIN_DATE_TIME:
@@ -13086,15 +13086,15 @@ function xv(e) {
   });
 }
 function xj(e) {
-  _$$md(UU);
-  let t = _$$md(pE(e.collectionId));
+  useAtomWithSubscription(UU);
+  let t = useAtomWithSubscription(pE(e.collectionId));
   let i = e.numRows ?? 0;
   let n = e.api.getSelectedRows();
   let a = !t && n.length > 0 && n.length !== i;
   let s = !t && n.length > 0 && n.length === i;
   return jsx(_$$S6, {
     label: jsx(_$$h6, {
-      children: _$$t('dakota.table_view.select_all')
+      children: getI18nString('dakota.table_view.select_all')
     }),
     checked: s,
     mixed: a,
@@ -13130,7 +13130,7 @@ function xk(e) {
         children: jsx(_$$B5, {})
       }), jsx(_$$S6, {
         label: jsx(_$$h6, {
-          children: _$$t('dakota.table_view.select_row')
+          children: getI18nString('dakota.table_view.select_row')
         }),
         checked: i,
         onChange: t => {
@@ -13158,7 +13158,7 @@ async function xw(e, t, i) {
   let a = () => {
     i(_$$F.enqueue({
       type: 'copied_to_clipboard',
-      message: _$$t('fullscreen_actions.copied_to_clipboard')
+      message: getI18nString('fullscreen_actions.copied_to_clipboard')
     }));
   };
   try {
@@ -13217,8 +13217,8 @@ let xT = pv.createLazyComponent(() => Promise.all([]).then(_require3).then(e => 
 let xI = memo(({
   children: e
 }) => {
-  let t = _$$md(_$$rx);
-  let i = _$$md(UU);
+  let t = useAtomWithSubscription(_$$rx);
+  let i = useAtomWithSubscription(UU);
   return jsx('div', {
     style: {
       width: `calc(100% - ${i.size === 1 ? t : 0}px`
@@ -13291,8 +13291,8 @@ let xE = memo(({
       }, [r, d, l])
     };
   }(e);
-  let [u, p] = _$$fp(UU);
-  let [x, m] = _$$fp(pE(t));
+  let [u, p] = useAtomValueAndSetter(UU);
+  let [x, m] = useAtomValueAndSetter(pE(t));
   let h = useDispatch();
   let g = useMemo(() => ({
     editable: !1,
@@ -13657,14 +13657,14 @@ function xN() {
   return jsx(Fragment, {});
 }
 function xR() {
-  let e = _$$md(_$$iO);
+  let e = useAtomWithSubscription(_$$iO);
   let {
     collection,
     status
   } = _$$G6({
     collectionStableId: e
   });
-  let n = _$$md(_$$lT);
+  let n = useAtomWithSubscription(_$$lT);
   return !e || n ? null : collection == null ? (status === 'loaded' && _$$sD('Collection for table not found', {
     selectedCollectionId: e
   }), null) : jsx(Suspense, {
@@ -13987,7 +13987,7 @@ function x7({
                 n.setFocusedDate(Ec('UTC'));
               },
               variant: 'secondary',
-              children: _$$t('dakota.date_picker.today')
+              children: getI18nString('dakota.date_picker.today')
             })
           }), jsxs('div', {
             className: 'x78zum5 x2lah0s x8x9d4c',
@@ -13995,7 +13995,7 @@ function x7({
               className: 'x2lah0s',
               children: jsx(_$$K2, {
                 'size': 'md',
-                'aria-label': _$$t('dakota.date_picker.navigate_previous_month'),
+                'aria-label': getI18nString('dakota.date_picker.navigate_previous_month'),
                 'onClick': n.focusPreviousPage,
                 'children': jsx(_$$t6, {})
               })
@@ -14003,7 +14003,7 @@ function x7({
               className: 'x2lah0s',
               children: jsx(_$$K2, {
                 'size': 'md',
-                'aria-label': _$$t('dakota.date_picker.navigate_next_month'),
+                'aria-label': getI18nString('dakota.date_picker.navigate_next_month'),
                 'onClick': n.focusNextPage,
                 'children': jsx(_$$a4, {})
               })
@@ -14059,7 +14059,7 @@ function me(e) {
     onClick: () => r(),
     children: s ? jsx('span', {
       className: 'x1n0bwc9',
-      children: _$$t('dakota.date_picker.placeholder')
+      children: getI18nString('dakota.date_picker.placeholder')
     }) : t.segments.map(e => jsx(x9, {
       segment: e,
       state: t
@@ -14102,14 +14102,14 @@ function mt({
     calendarProps
   } = _$$Q8({
     'granularity': r,
-    'aria-label': e.name || _$$t('dakota.date_picker.date_name')
+    'aria-label': e.name || getI18nString('dakota.date_picker.date_name')
   }, d, c);
   return jsxs('div', {
     className: 'x78zum5 xdt5ytf xg2d0mh',
     children: [jsx('span', {
       ...labelProps,
       className: 'x10l6tqk x1i1rx1s xjm9jq1 x1717udv xkdpibf xb3r6kr xzpqnlu xuxw1ft x1wty727',
-      children: e.name || _$$t('dakota.date_picker.date_name')
+      children: e.name || getI18nString('dakota.date_picker.date_name')
     }), jsxs('button', {
       ...groupProps,
       ref: c,
@@ -14124,7 +14124,7 @@ function mt({
         })
       }), jsx(_$$K2, {
         'size': 'md',
-        'aria-label': _$$t('dakota.date_picker.open_calendar'),
+        'aria-label': getI18nString('dakota.date_picker.open_calendar'),
         'onClick': () => d.setOpen(!d.isOpen),
         'children': jsx(_$$r2, {
           className: 'xvy4d1p xxk0z11 x1heor9g'
@@ -14321,10 +14321,10 @@ function mu({
         children: [jsx(_$$kt, {
           size: 'medium',
           className: 'x1i3ajwb'
-        }), t === 1 && _$$tx('dakota.side_panel.uploading')]
+        }), t === 1 && renderI18nText('dakota.side_panel.uploading')]
       }), t === 2 && !e && jsxs('div', {
         ..._$$xk(md.emptyState, g && md.emptyStateHovered),
-        children: [jsx(_$$T2, {}), _$$tx('dakota.side_panel.add_image')]
+        children: [jsx(_$$T2, {}), renderI18nText('dakota.side_panel.add_image')]
       }), m && t === 2 && e && r && jsx(_$$E5, {
         onClick: e => {
           s();
@@ -14365,11 +14365,11 @@ function mp({
     children: jsxs(_$$vo, {
       children: [jsxs(Y9, {
         children: [jsx(_$$hE, {
-          children: _$$t('dakota.image_detail_modal.image')
+          children: getI18nString('dakota.image_detail_modal.image')
         }), jsx(_$$jk, {
           children: jsx(_$$K2, {
             'onClick': e.deleteImage,
-            'aria-label': _$$t('dakota.image_detail_modal.delete_image_tooltip'),
+            'aria-label': getI18nString('dakota.image_detail_modal.delete_image_tooltip'),
             'children': jsx(_$$z7, {})
           })
         })]
@@ -14385,7 +14385,7 @@ function mp({
             })
           }), jsx(x$, {
             id: s,
-            label: _$$t('dakota.image_detail_modal.filename'),
+            label: getI18nString('dakota.image_detail_modal.filename'),
             children: jsx(_$$p5, {
               id: s,
               type: 'text',
@@ -14397,7 +14397,7 @@ function mp({
             })
           }), jsx(x$, {
             id: s,
-            label: _$$t('dakota.image_detail_modal.alt_text'),
+            label: getI18nString('dakota.image_detail_modal.alt_text'),
             children: jsx(_$$p5, {
               id: s,
               type: 'text',
@@ -14425,7 +14425,7 @@ function mx({
       try {
         return _$$Cg.parse(JSON.parse(i));
       } catch (e) {
-        $D(_$$e2.CMS, new Error('could not parse CMS image field value'), {
+        reportError(_$$e2.CMS, new Error('could not parse CMS image field value'), {
           extra: e
         });
       }
@@ -14466,7 +14466,7 @@ function mx({
         url: objectUrlSrc
       });
     } catch (e) {
-      $D(_$$e2.CMS, new Error('Error uploading image to CMS'), {
+      reportError(_$$e2.CMS, new Error('Error uploading image to CMS'), {
         extra: e
       });
     } finally {
@@ -14544,7 +14544,7 @@ function mx({
           iconPrefix: jsx(_$$A15, {}),
           recordingKey: Pt(r, 'uploadButton'),
           variant: 'primary',
-          children: _$$tx('dakota.image_detail_modal.replace_image')
+          children: renderI18nText('dakota.image_detail_modal.replace_image')
         })
       },
       initialAltText: o?.altText,
@@ -14589,9 +14589,9 @@ function mf({
 }) {
   let c = e.id;
   let p = Mo(t);
-  let [x, m] = _$$fp(pT(c));
+  let [x, m] = useAtomValueAndSetter(pT(c));
   let h = Xr(pC(c));
-  let [g, f] = _$$fp(pI(c));
+  let [g, f] = useAtomValueAndSetter(pI(c));
   let _ = useRef('');
   let b = async (t, n, l) => {
     _.current = l;
@@ -14610,7 +14610,7 @@ function mf({
       if (l !== _.current) return;
       let a = [];
       t.data?.meta.valid ? h(e => pk(e, n)) : (a = (t.data?.meta.failure_info?.i18n_keys ?? []).map(e => {
-        if (e === 'cms_errors.fields.slug_unique') return _$$t('cms_errors.fields.slug_unique');
+        if (e === 'cms_errors.fields.slug_unique') return getI18nString('cms_errors.fields.slug_unique');
       }).filter(e => void 0 !== e), a.length === 0 && (a = t.data?.meta.failure_info?.errors ?? []));
       f(e => ({
         ...e,
@@ -14620,7 +14620,7 @@ function mf({
       if (l !== _.current) return;
       f(e => ({
         ...e,
-        [n]: [_$$t('cms_errors.fields.validation_failed')]
+        [n]: [getI18nString('cms_errors.fields.validation_failed')]
       }));
     }
   };
@@ -14710,15 +14710,15 @@ function mv({
   let s;
   let r = e.id;
   let d = function (e) {
-    let t = _$$md(pE(e));
-    let i = _$$md(UU);
+    let t = useAtomWithSubscription(pE(e));
+    let i = useAtomWithSubscription(UU);
     return t != null && !(i.size > 1) && i.has(t);
   }(r);
-  let [c, u] = _$$fp(pE(r));
+  let [c, u] = useAtomValueAndSetter(pE(r));
   d ? c == null ? (_$$sD('pendingCmsItemId is null'), s = mm(_$$g5())) : s = mm(c) : s = i.item;
   let p = _$$uE(r);
-  let [x, m] = _$$fp(pT(s?.id));
-  let h = _$$md(pC(s?.id));
+  let [x, m] = useAtomValueAndSetter(pT(s?.id));
+  let h = useAtomWithSubscription(pC(s?.id));
   let g = Xr(UU);
   let f = p.find(e => e.fieldType === _$$_j.SLUG);
   let _ = _$$gg(r);
@@ -14872,7 +14872,7 @@ function mj({
   focusedFieldSchemaId: i
 }) {
   let n;
-  n = _$$md(_$$s3) === Nfd.DAKOTA ? 'connect_mode' : 'properties_panel';
+  n = useAtomWithSubscription(_$$s3) === Nfd.DAKOTA ? 'connect_mode' : 'properties_panel';
   return jsx(_$$fu, {
     name: 'CMS View',
     properties: {
@@ -14926,8 +14926,8 @@ function mw({
 }
 let mC = parsePxNumber('300px');
 function mT() {
-  let [e, t] = _$$fp(UU);
-  let i = _$$md(_$$iO);
+  let [e, t] = useAtomValueAndSetter(UU);
+  let i = useAtomWithSubscription(_$$iO);
   let n = Vp(i || '');
   BM(n.data);
   let a = n.data.findIndex(t => e.has(t.id));
@@ -14941,14 +14941,14 @@ function mT() {
     className: 'dakota_table_item_panel--header--6kPjQ',
     children: [jsxs(_$$e10, {
       'variant': 'secondary',
-      'aria-label': _$$t('dakota.table_view.aria_label.navigate_items'),
+      'aria-label': getI18nString('dakota.table_view.aria_label.navigate_items'),
       'children': [jsx(_$$K2, {
         'disabled': a === 0,
         'onClick': () => {
           r('previous');
         },
         'variant': 'secondary',
-        'aria-label': _$$t('dakota.table_view.aria_label.previous_item'),
+        'aria-label': getI18nString('dakota.table_view.aria_label.previous_item'),
         'children': jsx(_$$l0, {})
       }), jsx(_$$K2, {
         'disabled': s,
@@ -14956,14 +14956,14 @@ function mT() {
           r('next');
         },
         'variant': 'secondary',
-        'aria-label': _$$t('dakota.table_view.aria_label.next_item'),
+        'aria-label': getI18nString('dakota.table_view.aria_label.next_item'),
         'children': jsx(_$$k9, {})
       })]
     }), jsx(_$$K2, {
       'onClick': () => {
         t(new Set());
       },
-      'aria-label': _$$t('dakota.table_view.aria_label.close_editor'),
+      'aria-label': getI18nString('dakota.table_view.aria_label.close_editor'),
       'children': jsx(_$$A7, {})
     })]
   });
@@ -14971,11 +14971,11 @@ function mT() {
 function mI({
   parentContainerWidth: e
 }) {
-  let [t, i] = _$$fp(_$$rx);
-  let n = _$$md(_$$iO);
-  let a = _$$md(UU);
-  let s = _$$md(_$$dC);
-  let r = _$$md(pE(n ?? ''));
+  let [t, i] = useAtomValueAndSetter(_$$rx);
+  let n = useAtomWithSubscription(_$$iO);
+  let a = useAtomWithSubscription(UU);
+  let s = useAtomWithSubscription(_$$dC);
+  let r = useAtomWithSubscription(pE(n ?? ''));
   let d = _$$G6({
     collectionStableId: n
   });
@@ -15257,7 +15257,7 @@ function mH({
       className: mK,
       children: jsx(_$$I3, {})
     }),
-    displayText: _$$t('dakota.collection_field_editor.create_dropdown.plain_text'),
+    displayText: getI18nString('dakota.collection_field_editor.create_dropdown.plain_text'),
     callback: () => {
       e(_$$_j.PLAIN_TEXT);
     }
@@ -15266,7 +15266,7 @@ function mH({
       className: mK,
       children: jsx(_$$G8, {})
     }),
-    displayText: _$$t('dakota.collection_field_editor.create_dropdown.rich_text'),
+    displayText: getI18nString('dakota.collection_field_editor.create_dropdown.rich_text'),
     callback: () => {
       e(_$$_j.RICH_TEXT);
     }
@@ -15275,7 +15275,7 @@ function mH({
       className: mK,
       children: jsx(_$$N0, {})
     }),
-    displayText: _$$t('dakota.collection_field_editor.create_dropdown.link'),
+    displayText: getI18nString('dakota.collection_field_editor.create_dropdown.link'),
     callback: () => {
       e(_$$_j.LINK);
     }
@@ -15284,7 +15284,7 @@ function mH({
       className: mK,
       children: jsx(_$$_9, {})
     }),
-    displayText: _$$t('dakota.collection_field_editor.create_dropdown.image'),
+    displayText: getI18nString('dakota.collection_field_editor.create_dropdown.image'),
     callback: () => {
       e(_$$_j.IMAGE);
     }
@@ -15293,7 +15293,7 @@ function mH({
       className: mK,
       children: jsx(_$$p0, {})
     }),
-    displayText: _$$t('dakota.collection_field_editor.create_dropdown.date_time'),
+    displayText: getI18nString('dakota.collection_field_editor.create_dropdown.date_time'),
     callback: () => {
       e(_$$_j.DATE);
     }
@@ -15306,14 +15306,14 @@ function mH({
         'variant': 'secondary',
         'onClick': toggleDropdown,
         'recordingKey': 'newDakotaCollection',
-        'aria-label': _$$t('dakota.collection_field_editor.add_field'),
+        'aria-label': getI18nString('dakota.collection_field_editor.add_field'),
         'htmlAttributes': {
-          'data-tooltip': _$$t('dakota.collection_field_editor.add_field'),
+          'data-tooltip': getI18nString('dakota.collection_field_editor.add_field'),
           'data-tooltip-type': Ib.TEXT,
           'data-tooltip-show-above': !0
         },
         'iconPrefix': jsx(_$$x5, {}),
-        'children': _$$tx('dakota.collection_field_editor.add_field')
+        'children': renderI18nText('dakota.collection_field_editor.add_field')
       }), isDropdownShown && jsx(Dropdown, {
         items: s,
         minWidth: 160,
@@ -15347,7 +15347,7 @@ function mX({
   return jsx(Ad, {
     label: jsx('span', {
       className: _$$s4.textBodyMedium.selectNone.colorTextSecondary.$,
-      children: _$$tx('dakota.collection_field_editor.property.name')
+      children: renderI18nText('dakota.collection_field_editor.property.name')
     }),
     alwaysShowLabel: !0,
     input: jsx(_$$jT, {
@@ -15380,7 +15380,7 @@ function mV({
   return jsx(Ad, {
     label: jsx('span', {
       className: _$$s4.textBodyMedium.selectNone.colorTextSecondary.$,
-      children: _$$tx('dakota.collection_field_editor.property.include_time')
+      children: renderI18nText('dakota.collection_field_editor.property.include_time')
     }),
     alwaysShowLabel: !0,
     input: jsx(_$$d5, {
@@ -15392,7 +15392,7 @@ function mV({
         });
       },
       label: jsx(_$$h6, {
-        children: _$$tx('dakota.collection_field_editor.property.include_time')
+        children: renderI18nText('dakota.collection_field_editor.property.include_time')
       })
     })
   });
@@ -15416,7 +15416,7 @@ function mG({
       className: 'dakota_field_editor--slugInfoPadding--SBNCU',
       children: jsx('span', {
         className: 'dakota_field_editor--slugInfoLabel--eXoHv',
-        children: _$$tx('dakota.collection_field_editor.slug_detail_panel.default_value_created_from_title', {
+        children: renderI18nText('dakota.collection_field_editor.slug_detail_panel.default_value_created_from_title', {
           title_field_name: _$$rU.Title
         })
       })
@@ -15438,7 +15438,7 @@ let mW = Ju(({
       e === 'button' && b(_$$Ce());
     }
   });
-  let [c, p] = _$$fp(_$$lT);
+  let [c, p] = useAtomValueAndSetter(_$$lT);
   let [x, m] = useState(!1);
   let h = useRef(null);
   let g = useRef(null);
@@ -15458,7 +15458,7 @@ let mW = Ju(({
     canSubmit,
     updateFieldProperties
   } = $h(f);
-  let [O, F] = _$$fp(_$$lf);
+  let [O, F] = useAtomValueAndSetter(_$$lf);
   useEffect(() => {
     O === null && collectionFields.length > 0 && F(collectionFields[0]?.id ?? null);
   }, [O, collectionFields, F]);
@@ -15502,7 +15502,7 @@ let mW = Ju(({
           fileKey: n,
           message: e
         });
-        b(_$$s5.error(_$$t('dakota.collection_field_editor.create_collection.error'), 5e3));
+        b(_$$s5.error(getI18nString('dakota.collection_field_editor.create_collection.error'), 5e3));
       }
       e != null && y(e.id);
     } else {
@@ -15573,12 +15573,12 @@ let mW = Ju(({
               disabled: c,
               variant: 'secondary',
               onClick: t,
-              children: i ? _$$tx('dakota.collection_field_editor.cancel') : _$$tx('dakota.collection_field_editor.back')
+              children: i ? renderI18nText('dakota.collection_field_editor.cancel') : renderI18nText('dakota.collection_field_editor.back')
             }), jsx($n, {
               disabled: !canSubmit || c,
               variant: 'primary',
               onClick: z,
-              children: i ? _$$tx('dakota.collection_field_editor.done') : _$$tx('dakota.collection_field_editor.create_collection')
+              children: i ? renderI18nText('dakota.collection_field_editor.done') : renderI18nText('dakota.collection_field_editor.create_collection')
             })]
           })]
         })]
@@ -15615,12 +15615,12 @@ let mY = Ju(e => {
         },
         children: [jsx(Y9, {
           children: jsx(_$$hE, {
-            children: _$$tx('dakota.new_collection_modal.new_collection')
+            children: renderI18nText('dakota.new_collection_modal.new_collection')
           })
         }), jsx(_$$nB, {
           children: jsxs(_$$J7, {
             htmlFor: 'collectionName',
-            children: [_$$tx('dakota.new_collection_modal.name'), jsx('br', {}), jsx(_$$jT, {
+            children: [renderI18nText('dakota.new_collection_modal.name'), jsx('br', {}), jsx(_$$jT, {
               value: r,
               onChange: e => o(e.target.value || ''),
               ref: n,
@@ -15632,7 +15632,7 @@ let mY = Ju(e => {
             children: jsx($n, {
               disabled: !r || !r.trim(),
               type: 'submit',
-              children: _$$tx('dakota.new_collection_modal.next')
+              children: renderI18nText('dakota.new_collection_modal.next')
             })
           })
         })]
@@ -15659,17 +15659,17 @@ function m0(e, t) {
 function m1(e) {
   switch (e) {
     case _$$_j.SLUG:
-      return _$$tx('dakota.import_csv_modal.field_type.slug');
+      return renderI18nText('dakota.import_csv_modal.field_type.slug');
     case _$$_j.TITLE:
-      return _$$tx('dakota.import_csv_modal.field_type.title');
+      return renderI18nText('dakota.import_csv_modal.field_type.title');
     case _$$_j.RICH_TEXT:
-      return _$$tx('dakota.import_csv_modal.field_type.rich_text');
+      return renderI18nText('dakota.import_csv_modal.field_type.rich_text');
     case _$$_j.PLAIN_TEXT:
-      return _$$tx('dakota.import_csv_modal.field_type.plain_text');
+      return renderI18nText('dakota.import_csv_modal.field_type.plain_text');
     case _$$_j.IMAGE:
-      return _$$tx('dakota.import_csv_modal.field_type.image');
+      return renderI18nText('dakota.import_csv_modal.field_type.image');
     case _$$_j.LINK:
-      return _$$tx('dakota.import_csv_modal.field_type.link');
+      return renderI18nText('dakota.import_csv_modal.field_type.link');
     default:
       throw new Error('Unexpected fieldType');
   }
@@ -15832,7 +15832,7 @@ function ht({
       ..._$$xk(_$$A16.flex, _$$A16.flexColumn, _$$A16.gap4),
       children: [jsx(_$$J7, {
         htmlFor: 'collectionName',
-        children: _$$tx('dakota.new_collection_modal.name')
+        children: renderI18nText('dakota.new_collection_modal.name')
       }), jsx(_$$jT, {
         name: 'collectionName',
         placeholder: 'Collection name',
@@ -15843,22 +15843,22 @@ function ht({
       ..._$$xk(_$$A16.flex, _$$A16.flexColumn, _$$A16.gap8),
       children: [jsx(_$$J7, {
         htmlFor: 'collectionFields',
-        children: _$$tx('dakota.import_csv_modal.labels.fields')
+        children: renderI18nText('dakota.import_csv_modal.labels.fields')
       }), jsxs('div', {
         className: 'xrvj5dj xc26acl x6s0dn4 xl56j7k x18573h1 xkh65bq',
         children: [jsx('span', {
           children: jsx(_$$S6, {
             checked: !0,
             label: jsx(_$$h6, {
-              children: _$$tx('dakota.import_csv_modal.labels.included')
+              children: renderI18nText('dakota.import_csv_modal.labels.included')
             })
           })
         }), jsx('span', {
           ..._$$xk(_$$A16.textBodyMedium, _$$A16.colorTextSecondary),
-          children: _$$tx('dakota.import_csv_modal.labels.type')
+          children: renderI18nText('dakota.import_csv_modal.labels.type')
         }), jsx('span', {
           ..._$$xk(_$$A16.textBodyMedium, _$$A16.colorTextSecondary),
-          children: _$$tx('dakota.import_csv_modal.labels.name')
+          children: renderI18nText('dakota.import_csv_modal.labels.name')
         }), Object.entries(t).sort(m0).map(([e, t]) => jsx(hi, {
           meta: t,
           onUpdateMeta: t => n(e, t)
@@ -15874,7 +15874,7 @@ function hi({
   return jsxs(Fragment, {
     children: [jsx(_$$S6, {
       label: jsx(_$$h6, {
-        children: _$$t('dakota.import_csv_modal.labels.included')
+        children: getI18nString('dakota.import_csv_modal.labels.included')
       }),
       checked: e.included,
       disabled: e.required,
@@ -15911,7 +15911,7 @@ function hn({
     children: [jsx(_$$l7, {
       disabled: t,
       label: jsx(_$$h6, {
-        children: _$$tx('dakota.import_csv_modal.labels.type')
+        children: renderI18nText('dakota.import_csv_modal.labels.type')
       }),
       width: 'fill'
     }), jsxs(_$$mc2, {
@@ -15979,9 +15979,9 @@ function hr({
           });
         },
         error: () => {
-          t(_$$t('dakota.import_csv_modal.failed_to_import'));
+          t(getI18nString('dakota.import_csv_modal.failed_to_import'));
         }
-      }) : (console.error('Unsupported file type:', i.type), t(_$$t('dakota.import_csv_modal.unsupported_file_type', {
+      }) : (console.error('Unsupported file type:', i.type), t(getI18nString('dakota.import_csv_modal.unsupported_file_type', {
         fileType: i.type
       })));
     }, [e, t]);
@@ -16010,7 +16010,7 @@ function hr({
         e(!0);
         let a = l.target?.files;
         let s = a?.[0];
-        s ? i(s) : t(_$$t('dakota.import_csv_modal.no_valid_file'));
+        s ? i(s) : t(getI18nString('dakota.import_csv_modal.no_valid_file'));
         n.remove();
       };
       document.body.appendChild(n);
@@ -16025,7 +16025,7 @@ function hr({
     disabled: i,
     variant: 'primary',
     onClick: c,
-    children: i ? jsx(_$$k7, {}) : _$$tx('dakota.import_csv_modal.select_file_button')
+    children: i ? jsx(_$$k7, {}) : renderI18nText('dakota.import_csv_modal.select_file_button')
   });
 }
 function ho({
@@ -16038,10 +16038,10 @@ function ho({
     children: jsxs('div', {
       children: [jsx('h1', {
         ..._$$xk(_$$A16.textBodyMediumStrong, _$$A16.colorText),
-        children: _$$tx('dakota.import_csv_modal.import_panel.title')
+        children: renderI18nText('dakota.import_csv_modal.import_panel.title')
       }), jsx('p', {
         ..._$$xk(_$$A16.textBodyMedium, _$$A16.colorTextSecondary, _$$A16.mt4),
-        children: _$$tx('dakota.import_csv_modal.import_panel.description')
+        children: renderI18nText('dakota.import_csv_modal.import_panel.description')
       }), jsxs('div', {
         className: 'xbsl7fq xmkeg23 x7z60cl x19y5rnk x1v8gsql x1dipnxa xehsoiq x1buy44e x78zum5 xdt5ytf x1i71x30 x6s0dn4 xl56j7k x2b8uid',
         children: [i ? jsxs(Fragment, {
@@ -16061,7 +16061,7 @@ function ho({
         }) : jsxs(Fragment, {
           children: [jsx(_$$A15, {}), jsx('p', {
             ..._$$xk(_$$A16.textBodyMedium, _$$A16.colorTextSecondary),
-            children: _$$tx('dakota.import_csv_modal.import_panel.instructions')
+            children: renderI18nText('dakota.import_csv_modal.import_panel.instructions')
           })]
         }), jsx(hr, {
           onImportFailure: t,
@@ -16073,51 +16073,51 @@ function ho({
             }) {
               if (i >= 2097152) {
                 return {
-                  title: _$$tx('dakota.import_csv_modal.validations.file_too_large.title'),
-                  description: _$$tx('dakota.import_csv_modal.validations.file_too_large.description')
+                  title: renderI18nText('dakota.import_csv_modal.validations.file_too_large.title'),
+                  description: renderI18nText('dakota.import_csv_modal.validations.file_too_large.description')
                 };
               }
               let n = e.map(e => e.trim().toLowerCase());
               if (!n.includes('title')) {
                 return {
-                  title: _$$tx('dakota.import_csv_modal.validations.missing_title_header.title'),
-                  description: _$$tx('dakota.import_csv_modal.validations.missing_title_header.description')
+                  title: renderI18nText('dakota.import_csv_modal.validations.missing_title_header.title'),
+                  description: renderI18nText('dakota.import_csv_modal.validations.missing_title_header.description')
                 };
               }
               if (!n.includes('slug')) {
                 return {
-                  title: _$$tx('dakota.import_csv_modal.validations.missing_slug_header.title'),
-                  description: _$$tx('dakota.import_csv_modal.validations.missing_slug_header.description')
+                  title: renderI18nText('dakota.import_csv_modal.validations.missing_slug_header.title'),
+                  description: renderI18nText('dakota.import_csv_modal.validations.missing_slug_header.description')
                 };
               }
               if (n.includes('')) {
                 return {
-                  title: _$$tx('dakota.import_csv_modal.validations.empty_headers.title'),
-                  description: _$$tx('dakota.import_csv_modal.validations.empty_headers.description')
+                  title: renderI18nText('dakota.import_csv_modal.validations.empty_headers.title'),
+                  description: renderI18nText('dakota.import_csv_modal.validations.empty_headers.description')
                 };
               }
               if ([...new Set(n)].length !== n.length) {
                 return {
-                  title: _$$tx('dakota.import_csv_modal.validations.duplicate_headers.title'),
-                  description: _$$tx('dakota.import_csv_modal.validations.duplicate_headers.description')
+                  title: renderI18nText('dakota.import_csv_modal.validations.duplicate_headers.title'),
+                  description: renderI18nText('dakota.import_csv_modal.validations.duplicate_headers.description')
                 };
               }
               if (t.length === 0) {
                 return {
-                  title: _$$tx('dakota.import_csv_modal.validations.missing_row_values.title'),
-                  description: _$$tx('dakota.import_csv_modal.validations.missing_row_values.description')
+                  title: renderI18nText('dakota.import_csv_modal.validations.missing_row_values.title'),
+                  description: renderI18nText('dakota.import_csv_modal.validations.missing_row_values.description')
                 };
               }
               if (t[0].length !== e.length) {
                 return {
-                  title: _$$tx('dakota.import_csv_modal.validations.missing_headers.title'),
-                  description: _$$tx('dakota.import_csv_modal.validations.missing_headers.description')
+                  title: renderI18nText('dakota.import_csv_modal.validations.missing_headers.title'),
+                  description: renderI18nText('dakota.import_csv_modal.validations.missing_headers.description')
                 };
               }
               let l = n.indexOf('slug');
               return t.some(e => (e[l] || '').trim() === '') ? {
-                title: _$$tx('dakota.import_csv_modal.validations.missing_slug_value.title'),
-                description: _$$tx('dakota.import_csv_modal.validations.missing_slug_value.description')
+                title: renderI18nText('dakota.import_csv_modal.validations.missing_slug_value.title'),
+                description: renderI18nText('dakota.import_csv_modal.validations.missing_slug_value.description')
               } : null;
             }(t);
             i ? n(i) : (n(null), e(t));
@@ -16148,7 +16148,7 @@ let hd = Ju(e => {
       children: jsxs(_$$vo, {
         children: [jsx(Y9, {
           children: jsx(_$$hE, {
-            children: _$$tx('dakota.import_csv_modal.title')
+            children: renderI18nText('dakota.import_csv_modal.title')
           })
         }), jsx(_$$nB, {
           padding: 0,
@@ -16160,11 +16160,11 @@ let hd = Ju(e => {
                 ..._$$xk(_$$A16.flex, _$$A16.flexColumn, _$$A16.p8, _$$A16.gap4),
                 children: [jsx(hc, {
                   step: 1,
-                  label: _$$tx('dakota.import_csv_modal.steps.add_file'),
+                  label: renderI18nText('dakota.import_csv_modal.steps.add_file'),
                   isSelected: n === null
                 }, 'add_file'), jsx(hc, {
                   step: 2,
-                  label: _$$tx('dakota.import_csv_modal.steps.set_up_fields'),
+                  label: renderI18nText('dakota.import_csv_modal.steps.set_up_fields'),
                   isSelected: n !== null
                 }, 'set_up_fields')]
               })
@@ -16233,7 +16233,7 @@ let hd = Ju(e => {
             children: [jsx($n, {
               variant: 'secondary',
               onClick: e.onClose,
-              children: _$$tx('dakota.import_csv_modal.buttons.cancel')
+              children: renderI18nText('dakota.import_csv_modal.buttons.cancel')
             }), jsx($n, {
               variant: 'primary',
               disabled: !n,
@@ -16267,7 +16267,7 @@ let hd = Ju(e => {
                 });
                 e.onClose();
               },
-              children: _$$tx('dakota.import_csv_modal.buttons.import')
+              children: renderI18nText('dakota.import_csv_modal.buttons.import')
             })]
           })
         })]
@@ -16410,7 +16410,7 @@ function hp() {
   let i = Xr(_$$iO);
   let n = _$$hC();
   let l = t => {
-    $D(_$$e2.CMS, new Error('Failed to import CSV'), {
+    reportError(_$$e2.CMS, new Error('Failed to import CSV'), {
       extra: {
         error: t.message
       }
@@ -16650,14 +16650,14 @@ function hf() {
       className: 'x78zum5 x6s0dn4 xl56j7k x1mh6rdz x19y5rnk x1v8gsql',
       children: jsx(mN, {})
     }), jsx('div', {
-      children: _$$tx('dakota.ai.generate_collection')
+      children: renderI18nText('dakota.ai.generate_collection')
     }), jsx('div', {
       className: 'x10l6tqk x3m8u43 x13vifvy',
       children: jsx(_$$K2, {
         'onClick': () => {
           e(!1);
         },
-        'aria-label': _$$t('dakota.ai.close'),
+        'aria-label': getI18nString('dakota.ai.close'),
         'children': jsx(_$$A7, {})
       })
     })]
@@ -16688,7 +16688,7 @@ function hb() {
   let e = useDispatch();
   let [t, i] = useState('');
   let [n, r] = useState(!1);
-  let d = _$$t('dakota.ai.prompt_placeholder');
+  let d = getI18nString('dakota.ai.prompt_placeholder');
   let [c, x] = useState(d);
   let m = _$$tS();
   let h = Xr(pb);
@@ -16707,17 +16707,17 @@ function hb() {
     file_key: m,
     product_type: j
   };
-  let S = k ? _$$tx('dakota.ai.beta_badge') : _$$t('qa.ai');
+  let S = k ? renderI18nText('dakota.ai.beta_badge') : getI18nString('qa.ai');
   return jsxs('form', {
     onSubmit: async i => {
       if (i.preventDefault(), !_) return;
-      _$$sx(_$$j9, w, {
+      trackEventAnalytics(_$$j9, w, {
         mlEvent: !0
       });
       r(!0);
       e(_$$F.enqueue({
         type: 'cms_ai_collection_creation',
-        message: _$$t('dakota.ai.visual_bell.working'),
+        message: getI18nString('dakota.ai.visual_bell.working'),
         icon: zX.SPINNER
       }));
       let n = new hm(m);
@@ -16736,12 +16736,12 @@ function hb() {
       n.finish();
       r(!1);
       h(!1);
-      _$$sx(G5, w, {
+      trackEventAnalytics(G5, w, {
         mlEvent: !0
       });
       e(_$$F.enqueue({
         type: 'cms_ai_collection_creation',
-        message: _$$t('dakota.ai.visual_bell.done'),
+        message: getI18nString('dakota.ai.visual_bell.done'),
         icon: zX.CHECK_WITH_CIRCLE
       }));
     },
@@ -16760,28 +16760,28 @@ function hb() {
     }), jsxs('div', {
       ..._$$Ay.props(hv.footer, _ && hv.hidden),
       children: [jsx(h_, {
-        suggestion: _$$t('dakota.ai.suggestion.blog_suggestion'),
+        suggestion: getI18nString('dakota.ai.suggestion.blog_suggestion'),
         setPlaceholder: x,
         resetPlaceholder: b,
         setValue: i,
-        prompt: _$$t('dakota.ai.suggestion.blog_prompt')
+        prompt: getI18nString('dakota.ai.suggestion.blog_prompt')
       }), jsx(h_, {
-        suggestion: _$$t('dakota.ai.suggestion.job_posting_suggestion'),
+        suggestion: getI18nString('dakota.ai.suggestion.job_posting_suggestion'),
         setPlaceholder: x,
         resetPlaceholder: b,
         setValue: i,
-        prompt: _$$t('dakota.ai.suggestion.job_posting_prompt')
+        prompt: getI18nString('dakota.ai.suggestion.job_posting_prompt')
       }), jsx(h_, {
-        suggestion: _$$t('dakota.ai.suggestion.product_listing_suggestion'),
+        suggestion: getI18nString('dakota.ai.suggestion.product_listing_suggestion'),
         setPlaceholder: x,
         resetPlaceholder: b,
         setValue: i,
-        prompt: _$$t('dakota.ai.suggestion.product_listing_prompt')
+        prompt: getI18nString('dakota.ai.suggestion.product_listing_prompt')
       })]
     }), jsx('div', {
       ..._$$Ay.props(hv.submitButton, y && hv.submitButtonEnabled, !y && hv.submitButtonDisabled),
       children: jsx(_$$K2, {
-        'aria-label': _$$t('dakota.ai.generate_collection'),
+        'aria-label': getI18nString('dakota.ai.generate_collection'),
         'disabled': !y,
         'type': 'submit',
         'children': jsx(_$$W5, {
@@ -16862,7 +16862,7 @@ function hw() {
       children: jsx(mE, {})
     }), jsx('div', {
       className: 'dakota_view_empty_state--dakotaEmptyStateText--FYj3A',
-      children: n ? _$$tx('sites.side_rail.cms_no_collections_ai_enabled') : _$$tx('sites.side_rail.cms_no_collections_ai_disabled')
+      children: n ? renderI18nText('sites.side_rail.cms_no_collections_ai_enabled') : renderI18nText('sites.side_rail.cms_no_collections_ai_disabled')
     }), jsxs('div', {
       className: 'dakota_view_empty_state--dakotaEmptyStateButtonContainer--InjD9',
       children: [jsx('div', {
@@ -16873,7 +16873,7 @@ function hw() {
             t.stopPropagation();
             e();
           },
-          children: _$$tx('sites.side_rail.add_collection')
+          children: renderI18nText('sites.side_rail.add_collection')
         })
       }), n && jsx('div', {
         className: hj,
@@ -16885,7 +16885,7 @@ function hw() {
           },
           children: jsxs('span', {
             className: hk,
-            children: [jsx(mN, {}), _$$tx('sites.side_rail.generate_collection')]
+            children: [jsx(mN, {}), renderI18nText('sites.side_rail.generate_collection')]
           })
         })
       }), getFeatureFlags().dakota_import_csv && jsx('div', {
@@ -16898,7 +16898,7 @@ function hw() {
           },
           children: jsxs('span', {
             className: hk,
-            children: [jsx(_$$R8, {}), _$$tx('sites.side_rail.import_from_csv')]
+            children: [jsx(_$$R8, {}), renderI18nText('sites.side_rail.import_from_csv')]
           })
         })
       })]
@@ -16906,7 +16906,7 @@ function hw() {
   });
 }
 function hS() {
-  let e = _$$md(pb);
+  let e = useAtomWithSubscription(pb);
   let t = PE();
   return jsx('div', {
     className: 'dakota_view_empty_state--dakotaEmptyStateContainer---1nRn',
@@ -16932,17 +16932,17 @@ function hN(e) {
           className: 'x78zum5 xdt5ytf x6s0dn4 xl56j7k x1gskr33 x3t71xm x13dej2s xdmjnt8 x2b8uid',
           children: [jsx('div', {
             className: 'x6xwguf xz16r55 x1ah0xmj',
-            children: _$$t('dakota.alpha_cta.cms_is_still_under_wraps')
+            children: getI18nString('dakota.alpha_cta.cms_is_still_under_wraps')
           }), jsx('div', {
             className: 'xz16r55',
-            children: _$$t('dakota.alpha_cta.be_careful_when_others_can_see_your_screen_and_only_share_feedback_below')
+            children: getI18nString('dakota.alpha_cta.be_careful_when_others_can_see_your_screen_and_only_share_feedback_below')
           })]
         }), jsx('div', {
           className: 'x4ipri6 x1ef8nbk xh8yej3 x5yr21d'
         }), jsx($n, {
           variant: 'primary',
           onClick: hE,
-          children: _$$t('dakota.alpha_cta.share_feedback')
+          children: getI18nString('dakota.alpha_cta.share_feedback')
         })]
       })
     })
@@ -16955,7 +16955,7 @@ function hR() {
     ref: e,
     children: [jsx(Ex, {
       className: 'x1yf7rl7 x1htgra6',
-      text: _$$t('dakota.alpha_cta.alpha'),
+      text: getI18nString('dakota.alpha_cta.alpha'),
       color: zE.DEFAULT,
       size: _$$vj.SMALL,
       onClick: () => i(e => !e)
@@ -16975,7 +16975,7 @@ function hL({
   isCollectionListLoading: e
 }) {
   let t = _$$tS();
-  let i = _$$md(_$$iO);
+  let i = useAtomWithSubscription(_$$iO);
   let {
     collection
   } = _$$G6({
@@ -16986,8 +16986,8 @@ function hL({
     fileKey: t,
     recordingKey: 'cmsTableHeaderWithCollection'
   }) : jsx(hP, {
-    title: e ? '' : _$$t('dakota.table_view.header.default_title')
-  }) : ($D(_$$e2.CMS, new Error('fileKey not found in DakotaTableViewHeader')), null);
+    title: e ? '' : getI18nString('dakota.table_view.header.default_title')
+  }) : (reportError(_$$e2.CMS, new Error('fileKey not found in DakotaTableViewHeader')), null);
 }
 function hP({
   title: e
@@ -17025,7 +17025,7 @@ function hO({
             p(e);
             c(new Set([e]));
           },
-          children: _$$tx('dakota.table_view.header.new_item')
+          children: renderI18nText('dakota.table_view.header.new_item')
         }), jsx($n, {
           recordingKey: Pt(i, 'editFieldsButton'),
           iconPrefix: jsx(_$$I4, {}),
@@ -17038,7 +17038,7 @@ function hO({
               }
             }));
           },
-          children: _$$tx('dakota.table_view.header.edit_fields')
+          children: renderI18nText('dakota.table_view.header.edit_fields')
         }), jsx(_$$v4, {})]
       })
     })
@@ -17046,15 +17046,15 @@ function hO({
 }
 function hF() {
   let e;
-  let t = _$$md(p_);
-  let i = _$$md(pb);
-  let n = _$$md(_$$iO);
+  let t = useAtomWithSubscription(p_);
+  let i = useAtomWithSubscription(pb);
+  let n = useAtomWithSubscription(_$$iO);
   let s = _$$tS();
   let {
     status,
     data
   } = _$$c$(s);
-  let u = _$$md(UU);
+  let u = useAtomWithSubscription(UU);
   let p = useRef(null);
   let x = _$$wY(p)?.width;
   let m = _$$b2();
@@ -17111,12 +17111,12 @@ function h0(e) {
   let {
     windowInnerHeight
   } = _$$l4();
-  let [_, y] = _$$fp(_$$Yu);
-  let [v, j] = _$$fp(_$$o7);
+  let [_, y] = useAtomValueAndSetter(_$$Yu);
+  let [v, j] = useAtomValueAndSetter(_$$o7);
   let {
     topLevelObjectRowHeight
   } = useContext(_$$y0);
-  let [S, C] = _$$fp(_$$Zr);
+  let [S, C] = useAtomValueAndSetter(_$$Zr);
   let {
     layerCount,
     componentCount,
@@ -17125,8 +17125,8 @@ function h0(e) {
     buildCodeLayerRows,
     buildCodeInteractionsRows
   } = function () {
-    let e = _$$md(Mk[PW.CODE_FILE].local);
-    let t = _$$md(Mk[PW.CODE_COMPONENT].local);
+    let e = useAtomWithSubscription(Mk[PW.CODE_FILE].local);
+    let t = useAtomWithSubscription(Mk[PW.CODE_COMPONENT].local);
     let i = _$$wA2((e, t) => Object.values(t).filter(t => {
       let i = e.get(t.localGuid);
       return !!i && !i.isSoftDeleted;
@@ -17215,7 +17215,7 @@ function h0(e) {
           isSelected: y === e.file.guid,
           ignoreAncestorSelection: !0,
           hasWarning: a,
-          warningMessage: a ? _$$t('sites.code_components.code_file_name_warning') : void 0
+          warningMessage: a ? getI18nString('sites.code_components.code_file_name_warning') : void 0
         });
         t.topByGuid[e.node.guid] = l;
         t.heightByGuid[e.node.guid] = _topLevelObjectRowHeight;
@@ -17345,7 +17345,7 @@ function h0(e) {
         onToggle: () => {
           m || j(!v);
         },
-        title: _$$tx('sites.panel.pages_panel.code_layers')
+        title: renderI18nText('sites.panel.pages_panel.code_layers')
       }), v && jsx(_$$X6, {
         currentPage: c,
         customRowBuilder: buildCodeLayerRows,
@@ -17417,10 +17417,10 @@ function h5(e) {
   return jsx(h1, {
     isOpen,
     onToggle,
-    title: _$$tx('sites.panel.pages_panel.code_components'),
+    title: renderI18nText('sites.panel.pages_panel.code_components'),
     fileInEditableState,
     addButtonProps: {
-      label: _$$t('sites.panel.pages_panel.add_new_code_component'),
+      label: getI18nString('sites.panel.pages_panel.add_new_code_component'),
       onClick: e => {
         e.preventDefault();
         e.stopPropagation();
@@ -17454,10 +17454,10 @@ function h2({
   return jsx(h1, {
     isOpen: e,
     onToggle: t,
-    title: _$$tx('sites.panel.pages_panel.code_interactions'),
+    title: renderI18nText('sites.panel.pages_panel.code_interactions'),
     fileInEditableState: i,
     addButtonProps: {
-      label: _$$t('sites.panel.pages_panel.add_new_code_interaction'),
+      label: getI18nString('sites.panel.pages_panel.add_new_code_interaction'),
       onClick: e => {
         e.preventDefault();
         e.stopPropagation();
@@ -17556,52 +17556,52 @@ function h8() {
       className: 'x78zum5 x1r05qx8',
       children: [jsx(h3, {
         videoSrc: buildUploadUrl('101e51ab608cec2f92e68b4e92682cea84fd94bd'),
-        cardLabel: _$$t('left_rail.code_view_empty_state.gradient_shader'),
+        cardLabel: getI18nString('left_rail.code_view_empty_state.gradient_shader'),
         onClick: () => {
           glU && (glU.createGradientShaderStarterComponent(), e('chat'));
         }
       }), jsx(h3, {
         videoSrc: buildUploadUrl('a8c2a634bcd399c9cc56f4b776e47ab36f4a14af'),
-        cardLabel: _$$t('left_rail.code_view_empty_state.card_carousel'),
+        cardLabel: getI18nString('left_rail.code_view_empty_state.card_carousel'),
         onClick: () => {
           glU && (glU.createCardCarouselStarterComponent(), e('chat'));
         }
       }), jsx(h3, {
         videoSrc: buildUploadUrl('2aa4ed6f3a933cb59934c296f5ffdf852baed204'),
-        cardLabel: _$$t('left_rail.code_view_empty_state.animated_text'),
+        cardLabel: getI18nString('left_rail.code_view_empty_state.animated_text'),
         onClick: () => {
           glU && (glU.createAnimatedTextStarterComponent(), e('chat'));
         }
       })]
     }), jsx('div', {
       className: 'x1n0bwc9 x2b8uid',
-      children: _$$t('left_rail.code_view_empty_state.start_with_example_or_make_anything')
+      children: getI18nString('left_rail.code_view_empty_state.start_with_example_or_make_anything')
     }), jsx($n, {
       variant: 'primary',
       onClick: t => {
         i(t);
         e('code');
       },
-      children: _$$t('left_rail.code_view_empty_state.start_from_scratch')
+      children: getI18nString('left_rail.code_view_empty_state.start_from_scratch')
     })]
   });
 }
 function h6() {
   return jsx(nH.Header, {
-    title: _$$t('left_rail.code'),
+    title: getI18nString('left_rail.code'),
     dataTestId: 'code-view-empty-state-header',
     children: jsx(_$$v4, {})
   });
 }
 function h7() {
-  let [e, t] = _$$fp(_$$zl);
+  let [e, t] = useAtomValueAndSetter(_$$zl);
   let i = useCallback(() => {
     t(e => e === 'code' || e === 'split' ? e : 'split');
   }, [t]);
   _$$sl(i);
   let n = Mq() || getFeatureFlags().make_ai_allowlist_for_atlassian;
   return jsxs(nH.Header, {
-    title: _$$t('left_rail.code'),
+    title: getI18nString('left_rail.code'),
     children: [jsx('div', {
       className: 'x10l6tqk x1nrll8i xuuh30',
       children: jsx(iO, {
@@ -17615,9 +17615,9 @@ function h7() {
 function h9() {
   let e = _$$b2();
   let t = Xr(_$$s3);
-  let i = !!Object.values(_$$md(Mk[PW.CODE_FILE].local)).filter(h4).length;
+  let i = !!Object.values(useAtomWithSubscription(Mk[PW.CODE_FILE].local)).filter(h4).length;
   let n = function () {
-    let e = _$$md(Y3);
+    let e = useAtomWithSubscription(Y3);
     let t = Fk((e, t) => t.flatMap(t => e.get(t)?.guid ?? []), e);
     return useMemo(() => {
       let e = getSingletonSceneGraph();
@@ -17627,7 +17627,7 @@ function h9() {
       }));
     }, [t]).values().next().value;
   }();
-  let [s, d] = _$$fp(_$$b4);
+  let [s, d] = useAtomValueAndSetter(_$$b4);
   let x = _$$C2();
   XW();
   useEffect(() => {
@@ -17642,13 +17642,13 @@ function h9() {
   useEffect(() => {
     s && (s === n?.guid || s === n?.exportedFromCodeFile?.guid) ? debugState.dispatch(_$$F.enqueue({
       type: US,
-      message: _$$t('sites.panel.code_view_opened_in_make_view'),
+      message: getI18nString('sites.panel.code_view_opened_in_make_view'),
       icon: zX.UNDO,
       onDismiss: () => {
         d(null);
       },
       button: {
-        text: _$$t('sites.panel.code_view_back_to_design'),
+        text: getI18nString('sites.panel.code_view_back_to_design'),
         action: () => {
           t(Nfd.FILE);
         }
@@ -17659,7 +17659,7 @@ function h9() {
     }));
   }, [s, n?.guid, n?.exportedFromCodeFile?.guid, t, d]);
   let m = function (e) {
-    let [t] = _$$fp(_$$zl);
+    let [t] = useAtomValueAndSetter(_$$zl);
     return iP(_$$uQ() ? t : 'code', e?.codeFilePath !== void 0 && !!getFeatureFlags().multi_file_code_layers);
   }(n);
   let g = _$$g_ + _$$_4;
@@ -17685,23 +17685,23 @@ function h9() {
     })
   }) : null;
 }
-let ge = _$$eU(!1);
-let gt = Iz(e => Wh(() => _$$eU(!1)));
+let ge = atom(!1);
+let gt = createRemovableAtomFamily(e => Wh(() => atom(!1)));
 function gl() {
-  let [e, t] = _$$fp(p_);
+  let [e, t] = useAtomValueAndSetter(p_);
   !function () {
-    let e = _$$md(p_);
+    let e = useAtomWithSubscription(p_);
     useEffect(() => {
-      let t = zl.get(_$$iO);
+      let t = atomStoreManager.get(_$$iO);
       switch (e) {
         case pf.CONNECT:
           $au?.enterCmsBindingEditMode();
           Egt?.clearSelection();
-          t && (zl.set(gt(t), !0), zl.set(_$$iO, null), Ez5.cmsState().reset());
+          t && (atomStoreManager.set(gt(t), !0), atomStoreManager.set(_$$iO, null), Ez5.cmsState().reset());
           break;
         case pf.EDIT:
           $au?.exitCmsBindingEditMode();
-          Ez5.cmsState().bindingCollectionId.getCopy() && (Ez5.cmsState().bindingCollectionId.set(''), zl.set(_$$iO, Ez5.cmsState().bindingCollectionId.getCopy()));
+          Ez5.cmsState().bindingCollectionId.getCopy() && (Ez5.cmsState().bindingCollectionId.set(''), atomStoreManager.set(_$$iO, Ez5.cmsState().bindingCollectionId.getCopy()));
           break;
         default:
           noop(e);
@@ -17719,7 +17719,7 @@ function gl() {
     children: jsxs(_$$bL, {
       value: e === pf.CONNECT ? 'connect' : 'edit',
       legend: jsx(_$$q2, {
-        children: _$$tx('dakota.table_view.mode_toggle_switch.alt_text')
+        children: renderI18nText('dakota.table_view.mode_toggle_switch.alt_text')
       }),
       onChange: e => {
         switch (e) {
@@ -17735,10 +17735,10 @@ function gl() {
       },
       children: [jsx(RT, {
         value: 'edit',
-        label: _$$t('dakota.table_view.mode_toggle_switch.edit')
+        label: getI18nString('dakota.table_view.mode_toggle_switch.edit')
       }, 'edit'), jsx(RT, {
         value: 'connect',
-        label: _$$t('dakota.table_view.mode_toggle_switch.connect')
+        label: getI18nString('dakota.table_view.mode_toggle_switch.connect')
       }, 'connect')]
     })
   });
@@ -17757,20 +17757,20 @@ function ga() {
     isDropdownShown
   } = _$$B6('cms_create_collection_dropdown');
   let h = [{
-    displayText: _$$t('dakota.collections_creation_context_menu.manual'),
+    displayText: getI18nString('dakota.collections_creation_context_menu.manual'),
     callback: () => {
       t(!1);
       i();
     }
   }];
   getFeatureFlags().dakota_content_gen && a && h.push({
-    displayText: _$$t('dakota.collections_creation_context_menu.ai'),
+    displayText: getI18nString('dakota.collections_creation_context_menu.ai'),
     callback: () => {
       t(!0);
     }
   });
   getFeatureFlags().dakota_import_export && h.push({
-    displayText: _$$t('dakota.collections_creation_context_menu.import_internal'),
+    displayText: getI18nString('dakota.collections_creation_context_menu.import_internal'),
     callback: () => {
       WS().then(t => {
         if (!t) {
@@ -17784,14 +17784,14 @@ function ga() {
     }
   });
   getFeatureFlags().dakota_import_csv && h.push({
-    displayText: _$$t('dakota.import_csv_modal.title'),
+    displayText: getI18nString('dakota.import_csv_modal.title'),
     callback: () => r()
   });
   let g = h.length > 1;
-  let f = _$$md(ge);
-  let _ = _$$md(_$$lT);
+  let f = useAtomWithSubscription(ge);
+  let _ = useAtomWithSubscription(_$$lT);
   let b = _$$tS();
-  b || $D(_$$e2.CMS, new Error('fileKey not found in DakotaCollectionsPanel'));
+  b || reportError(_$$e2.CMS, new Error('fileKey not found in DakotaCollectionsPanel'));
   let y = _$$c$(b);
   let k = e => {
     e.stopPropagation();
@@ -17812,19 +17812,19 @@ function ga() {
         },
         role: 'button',
         tabIndex: 0,
-        children: _$$tx('sites.panel.pages_panel.cms_collections')
+        children: renderI18nText('sites.panel.pages_panel.cms_collections')
       }), jsx('div', {
         ref: dropdownTargetRef,
         children: w ? jsxs(Fragment, {
           children: [jsx(_$$K2, {
             'recordingKey': 'newDakotaCollection',
-            'aria-label': _$$t('sites.panel.pages_panel.add_new_dakota_collection'),
+            'aria-label': getI18nString('sites.panel.pages_panel.add_new_dakota_collection'),
             'onClick': e => {
               e.stopPropagation();
               g ? toggleDropdown() : k(e);
             },
             'htmlAttributes': {
-              'data-tooltip': _$$t('sites.panel.pages_panel.add_new_dakota_collection'),
+              'data-tooltip': getI18nString('sites.panel.pages_panel.add_new_dakota_collection'),
               'data-tooltip-type': Ib.TEXT,
               'data-tooltip-show-above': !0
             },
@@ -17897,14 +17897,14 @@ function go({
   let d = e.id;
   let c = useDispatch();
   let u = pL(n, 'leftPanel', d);
-  let [p, m] = _$$fp(gt(d));
+  let [p, m] = useAtomValueAndSetter(gt(d));
   let h = _$$e();
   let f = Ez5.cmsState();
   let b = J2(f.bindingCollectionId);
   let {
     id
   } = J2(f.bindingFieldSchema);
-  let [v, w] = _$$fp(_$$iO);
+  let [v, w] = useAtomValueAndSetter(_$$iO);
   let S = Xr(_$$ou);
   let C = BK(V6);
   let [T, I] = useState(!1);
@@ -17996,8 +17996,8 @@ function go({
 function gd() {
   let e = _$$tS();
   let t = _$$c$(e).data;
-  let [i, n] = _$$fp(_$$iO);
-  let s = _$$md(_$$ou);
+  let [i, n] = useAtomValueAndSetter(_$$iO);
+  let s = useAtomWithSubscription(_$$ou);
   useEffect(() => {
     !i && t && t.length && n(t[0]?.id ?? null);
   }, [t, i, n]);
@@ -18026,7 +18026,7 @@ function gu(e) {
   let {
     width
   } = e;
-  let i = _$$md(p_);
+  let i = useAtomWithSubscription(p_);
   let n = Xr(ge);
   return (useEffect(() => () => {
     $au?.exitCmsBindingEditMode();
@@ -18047,7 +18047,7 @@ function gu(e) {
     })]
   }) : null;
 }
-let gp = Wh(() => _$$eU(null));
+let gp = Wh(() => atom(null));
 let gN = ({
   guid: e,
   prevNodeGuid: t,
@@ -18401,7 +18401,7 @@ function gL(e) {
   let S = getSingletonSceneGraph();
   let C = S.get(j);
   let T = !f;
-  let [I, E] = _$$fp(_$$h10);
+  let [I, E] = useAtomValueAndSetter(_$$h10);
   let {
     windowInnerHeight
   } = _$$l4();
@@ -18409,7 +18409,7 @@ function gL(e) {
     scrollContainerInnerRef: y,
     windowInnerHeight
   });
-  let [L, P] = _$$fp(B_);
+  let [L, P] = useAtomValueAndSetter(B_);
   let O = function () {
     let e = _$$Z7();
     let t = useDispatch();
@@ -18580,8 +18580,8 @@ function gL(e) {
           T || E(!I);
         },
         recordingKey: 'webpagesListHeader',
-        title: _$$t('sites.panel.pages_panel.webpages'),
-        tooltipText: _$$t('sites.panel.pages_panel.add_new_webpage')
+        title: getI18nString('sites.panel.pages_panel.webpages'),
+        tooltipText: getI18nString('sites.panel.pages_panel.add_new_webpage')
       }), I && jsx(_$$wV, {
         className: '',
         size: ei,
@@ -18634,14 +18634,14 @@ function gO() {
   let d = function () {
     let e = _$$dh();
     let t = A$();
-    let [i, n] = _$$fp(gp);
+    let [i, n] = useAtomValueAndSetter(gp);
     let l = e === t;
     let s = getFeatureFlags().show_internal_only_canvas;
     return (useEffect(() => {
       (!l || s) && n(e);
     }, [e, l, s, n]), l && !s) ? i || '0:1' : e;
   }();
-  let c = _$$md(_$$h10);
+  let c = useAtomWithSubscription(_$$h10);
   let {
     isLayersOpen,
     toggleLayersAction
@@ -18736,7 +18736,7 @@ function gO() {
     })
   });
   let C = jsx(cI, {});
-  let T = _$$md(_$$s3);
+  let T = useAtomWithSubscription(_$$s3);
   let I = _$$q8();
   let E = (() => {
     if (I) return j;
@@ -18853,8 +18853,8 @@ function gU({
           'style': {
             '--color-icon': _$$Tj2.iconBrand
           },
-          'aria-label': _$$t('sites.metadata.domain.password_protected'),
-          'data-tooltip': _$$t('sites.metadata.domain.password_protected'),
+          'aria-label': getI18nString('sites.metadata.domain.password_protected'),
+          'data-tooltip': getI18nString('sites.metadata.domain.password_protected'),
           'data-tooltip-show-immediately': !0,
           'data-tooltip-hide-immediately': !0,
           'data-tooltip-type': Ib.TEXT
@@ -18875,8 +18875,8 @@ function gK() {
   let e = Xr(_$$s3);
   let t = Xr(_$$j4);
   return jsx(_$$K2, {
-    'aria-label': _$$t('sites.metadata.domain.warning_icon_indicating_that_the_custom_domain_has_not_been_verified'),
-    'data-tooltip': _$$t('sites.metadata.domains.unverified_custom_domain'),
+    'aria-label': getI18nString('sites.metadata.domain.warning_icon_indicating_that_the_custom_domain_has_not_been_verified'),
+    'data-tooltip': getI18nString('sites.metadata.domains.unverified_custom_domain'),
     'data-tooltip-type': Ib.TEXT,
     'data-tooltip-show-above': !0,
     'onClick': () => {
@@ -18945,8 +18945,8 @@ function g7() {
     let {
       Sprig
     } = useSprigWithSampling();
-    let t = _$$md(Nl);
-    let i = _$$md(_$$f4);
+    let t = useAtomWithSubscription(Nl);
+    let i = useAtomWithSubscription(_$$f4);
     let {
       search: {
         toggle
@@ -18959,7 +18959,7 @@ function g7() {
       closeOverlay
     } = _$$h13();
     let x = hasOverlay && !overlayClosing;
-    let [h, g] = _$$fp(_$$s3);
+    let [h, g] = useAtomValueAndSetter(_$$s3);
     let f = useDispatch();
     let _ = useCallback(t => {
       getFeatureFlags().sts_sprig_targeted_feedback && i && h === Nfd.CODE && t === Nfd.FILE && Sprig('track', 'sites_code_layer_edit');
@@ -18976,10 +18976,10 @@ function g7() {
       active: h === Nfd.FILE && !x,
       hide: !1,
       key: _$$R9(Nfd.FILE),
-      label: _$$t('sites.side_rail.file'),
+      label: getI18nString('sites.side_rail.file'),
       icon: _$$g3,
       onClick: () => {
-        _$$az.trackDefinedEvent('sites.left_rail_tab_selected', {
+        analyticsEventManager.trackDefinedEvent('sites.left_rail_tab_selected', {
           name: 'file'
         });
         _(Nfd.FILE);
@@ -18988,10 +18988,10 @@ function g7() {
     }, {
       active: t === $e.INSERT && x,
       key: 'insert',
-      label: _$$t('sites.side_rail.insert'),
+      label: getI18nString('sites.side_rail.insert'),
       icon: _$$s1,
       onClick: () => {
-        t !== $e.INSERT && _$$az.trackDefinedEvent('sites.left_rail_tab_selected', {
+        t !== $e.INSERT && analyticsEventManager.trackDefinedEvent('sites.left_rail_tab_selected', {
           name: 'insert'
         });
         _toggle();
@@ -19001,10 +19001,10 @@ function g7() {
     }, {
       active: t === $e.FIND && x,
       key: 'search',
-      label: _$$t('sites.side_rail.search'),
+      label: getI18nString('sites.side_rail.search'),
       icon: _$$h12,
       onClick: () => {
-        t !== $e.FIND && _$$az.trackDefinedEvent('sites.left_rail_tab_selected', {
+        t !== $e.FIND && analyticsEventManager.trackDefinedEvent('sites.left_rail_tab_selected', {
           name: 'find'
         });
         toggle();
@@ -19016,35 +19016,35 @@ function g7() {
       disabled: !y,
       hide: !b,
       key: _$$R9(Nfd.CODE),
-      label: _$$t('sites.side_rail.code'),
+      label: getI18nString('sites.side_rail.code'),
       icon: _$$t2,
       onClick: () => _(Nfd.CODE),
       shortcut: y ? 'set-sites-view-code' : void 0,
       customTooltip: y ? void 0 : {
         'data-tooltip-type': Ib.TEXT,
-        'data-tooltip': _$$t('sites.coming_soon_tooltip.make.title'),
-        'data-tooltip-subtext': _$$t('sites.coming_soon_tooltip.make.description')
+        'data-tooltip': getI18nString('sites.coming_soon_tooltip.make.title'),
+        'data-tooltip-subtext': getI18nString('sites.coming_soon_tooltip.make.description')
       }
     }, {
       active: h === Nfd.DAKOTA,
       disabled: !v,
       key: _$$R9(Nfd.DAKOTA),
-      label: _$$t('sites.side_rail.cms'),
+      label: getI18nString('sites.side_rail.cms'),
       icon: _$$i5,
       onClick: () => _(Nfd.DAKOTA),
       shortcut: v ? 'set-sites-view-cms' : void 0,
       customTooltip: v ? void 0 : {
         'data-tooltip-type': Ib.TEXT,
-        'data-tooltip': _$$t('sites.coming_soon_tooltip.cms.title'),
-        'data-tooltip-subtext': _$$t('sites.coming_soon_tooltip.cms.description')
+        'data-tooltip': getI18nString('sites.coming_soon_tooltip.cms.title'),
+        'data-tooltip-subtext': getI18nString('sites.coming_soon_tooltip.cms.description')
       }
     }, {
       active: h === Nfd.SETTINGS,
       key: _$$R9(Nfd.SETTINGS),
-      label: _$$t('sites.side_rail.settings'),
+      label: getI18nString('sites.side_rail.settings'),
       icon: _$$I4,
       onClick: () => {
-        _$$az.trackDefinedEvent('sites.left_rail_tab_selected', {
+        analyticsEventManager.trackDefinedEvent('sites.left_rail_tab_selected', {
           name: 'settings'
         });
         _(Nfd.SETTINGS);
@@ -19055,10 +19055,10 @@ function g7() {
     let C = function () {
       let e = useDispatch();
       let t = _$$p2('isReadOnly');
-      let i = _$$md(_$$oD);
+      let i = useAtomWithSubscription(_$$oD);
       let n = _$$D2();
       let l = _$$am();
-      let a = i ? _$$t('sites.panel.hide_unsupported_properties') : _$$t('sites.panel.see_unsupported_properties');
+      let a = i ? getI18nString('sites.panel.hide_unsupported_properties') : getI18nString('sites.panel.see_unsupported_properties');
       return {
         expanded: !!i,
         icon: gQ,
@@ -19085,7 +19085,7 @@ function g7() {
       fullViews: k
     };
   }();
-  let [n, d] = _$$fp(_$$s3);
+  let [n, d] = useAtomValueAndSetter(_$$s3);
   let c = canvasViews.map(e => jsx(g6, {
     iconProps: e
   }, e.key));
@@ -19125,15 +19125,15 @@ function g7() {
   });
 }
 let g9 = memo(() => {
-  let e = _$$md(_$$s3);
-  let t = _$$md(Nl);
-  let i = _$$md(_$$bP);
+  let e = useAtomWithSubscription(_$$s3);
+  let t = useAtomWithSubscription(Nl);
+  let i = useAtomWithSubscription(_$$bP);
   let n = useDispatch();
   useEffect(() => {
     let i = _$$R9(e);
     t && (i = t);
-    _$$kF('sites-area', i);
-    return () => _$$kF('sites-area', void 0);
+    setSentryTag('sites-area', i);
+    return () => setSentryTag('sites-area', void 0);
   }, [e, t]);
   let {
     isLeftPanelCollapsed
@@ -19194,7 +19194,7 @@ let g9 = memo(() => {
     team: _$$e2.SITES_EDITOR,
     onError: () => {
       n(_$$F.enqueue({
-        message: _$$t('sites.left_panel.visual_bell.left_panel_error_boundary_message'),
+        message: getI18nString('sites.left_panel.visual_bell.left_panel_error_boundary_message'),
         type: 'react-error'
       }));
     },
@@ -19258,12 +19258,12 @@ let fe = {
 function fa() {
   let {
     duplicatedBreakpointId
-  } = _$$md(_$$O8) ?? {};
+  } = useAtomWithSubscription(_$$O8) ?? {};
   return duplicatedBreakpointId ? jsx(fs, {}) : null;
 }
 function fs() {
   let e = _$$am();
-  let [t, i] = _$$fp(_$$O8);
+  let [t, i] = useAtomValueAndSetter(_$$O8);
   let {
     duplicatedBreakpointId,
     parentId
@@ -19287,7 +19287,7 @@ function fs() {
     children: jsxs(_$$vo, {
       children: [jsx(Y9, {
         children: jsx(_$$hE, {
-          children: _$$t('sites.add_breakpoint_modal.title')
+          children: getI18nString('sites.add_breakpoint_modal.title')
         })
       }), jsx(_$$nB, {
         padding: 0,
@@ -19323,7 +19323,7 @@ function fs() {
             children: [jsx(_$$Ay7, {
               className: 'x1n0bwc9',
               htmlFor: 'breakpoint-name',
-              children: _$$t('sites.add_breakpoint_modal.name')
+              children: getI18nString('sites.add_breakpoint_modal.name')
             }), jsx(_$$p5, {
               'id': 'breakpoint-name',
               'value': d,
@@ -19333,7 +19333,7 @@ function fs() {
             }), jsx(_$$Ay7, {
               className: 'x1n0bwc9',
               htmlFor: 'breakpoint-width',
-              children: _$$t('sites.add_breakpoint_modal.width')
+              children: getI18nString('sites.add_breakpoint_modal.width')
             }), jsx(_$$p5, {
               'id': 'breakpoint-width',
               'value': p,
@@ -19345,7 +19345,7 @@ function fs() {
             children: jsx($n, {
               disabled: !m,
               type: 'submit',
-              children: _$$tx('sites.add_breakpoint_modal.button')
+              children: renderI18nText('sites.add_breakpoint_modal.button')
             })
           })]
         })
@@ -19388,11 +19388,11 @@ function fb() {
 }
 function fy() {
   let e = _$$r7(Vc);
-  let t = _$$md(e);
+  let t = useAtomWithSubscription(e);
   let i = X$('OnboardSitesTOSInner');
   let n = useDispatch();
   let a = _$$eY();
-  let r = _$$md(LZ);
+  let r = useAtomWithSubscription(LZ);
   let d = Xr(P4);
   let c = fR();
   let p = PR(a);
@@ -19421,31 +19421,31 @@ function fy() {
   };
   return r ? null : jsx(_$$_l, {
     closeButtonColor: 'light',
-    description: _$$tx('sites.onboarding.welcome.description'),
-    disclaimerFooter: _$$tx('sites.onboarding.welcome.terms_of_service', {
+    description: renderI18nText('sites.onboarding.welcome.description'),
+    disclaimerFooter: renderI18nText('sites.onboarding.welcome.terms_of_service', {
       beta_terms: jsx(_$$N6, {
         newTab: !0,
         href: '/product-specific-terms/',
         trusted: !0,
-        children: _$$tx('sites.onboarding.welcome.beta_terms')
+        children: renderI18nText('sites.onboarding.welcome.beta_terms')
       }),
       acceptable_publication_policy: jsx(_$$N6, {
         newTab: !0,
         href: '/legal/acceptable-publication-policy/',
         trusted: !0,
-        children: _$$tx('sites.onboarding.welcome.acceptable_publication_policy')
+        children: renderI18nText('sites.onboarding.welcome.acceptable_publication_policy')
       }),
       ai_subprocessors: jsx(_$$N6, {
         newTab: !0,
         href: '/sub-processors/',
         trusted: !0,
-        children: _$$tx('sites.onboarding.welcome.ai_subprocessors')
+        children: renderI18nText('sites.onboarding.welcome.ai_subprocessors')
       })
     }),
     isShowing,
     media: jsx(_$$oW, {
       src: buildUploadUrl('5cce6a0fbea25e98e646f188d32b8441a0aa0679'),
-      alt: _$$t('sites.onboarding.welcome.alt'),
+      alt: getI18nString('sites.onboarding.welcome.alt'),
       width: 332
     }),
     onClose: g,
@@ -19454,7 +19454,7 @@ function fy() {
       type: 'button',
       label: jsx(_$$E1, {
         fontSize: 11,
-        children: _$$tx('sites.onboarding.welcome.accept')
+        children: renderI18nText('sites.onboarding.welcome.accept')
       }),
       onClick: () => {
         n(_$$b10({
@@ -19471,7 +19471,7 @@ function fy() {
       type: 'button',
       label: jsx(_$$E1, {
         fontSize: 11,
-        children: _$$tx('sites.onboarding.welcome.decline')
+        children: renderI18nText('sites.onboarding.welcome.decline')
       }),
       onClick: () => {
         g('close_button_clicked');
@@ -19479,11 +19479,11 @@ function fy() {
       ctaTrackingDescriptor: _$$c8.DECLINE
     },
     title: jsxs('div', {
-      children: [_$$tx('sites.onboarding.welcome.title'), _$$z0() === 'BETA' ? jsx(Ex, {
+      children: [renderI18nText('sites.onboarding.welcome.title'), _$$z0() === 'BETA' ? jsx(Ex, {
         className: 'xxymvpz xet2fuk',
         color: zE.BRAND,
         subtle: !0,
-        text: _$$tx('file_browser.creation_buttons.beta')
+        text: renderI18nText('file_browser.creation_buttons.beta')
       }) : null]
     }),
     trackingContextName: 'Sites Onboarding > Terms of Service'
@@ -19492,9 +19492,9 @@ function fy() {
 function fv() {
   let e = useDispatch();
   let t = _$$r7(_$$at);
-  let i = _$$md(t);
+  let i = useAtomWithSubscription(t);
   let n = _$$r7(_$$uy);
-  let r = _$$md(n);
+  let r = useAtomWithSubscription(n);
   let d = fR();
   let {
     show,
@@ -19550,12 +19550,12 @@ function fv() {
 function fj() {
   let e = useDispatch();
   let t = _$$r7(_$$at);
-  let i = _$$md(t);
+  let i = useAtomWithSubscription(t);
   let n = _$$r7(_$$uy);
-  let d = _$$md(n);
+  let d = useAtomWithSubscription(n);
   let c = _$$r7(R0);
-  let u = _$$md(c);
-  let p = _$$md(P4);
+  let u = useAtomWithSubscription(c);
+  let p = useAtomWithSubscription(P4);
   let x = fR();
   let {
     show,
@@ -19621,25 +19621,25 @@ function fw({
   totalSteps: i,
   nextStepType: n
 }) {
-  let l = _$$tx('sites.onboarding.callout.next');
-  n && t !== i || (l = _$$tx('sites.onboarding.callout.finish'));
+  let l = renderI18nText('sites.onboarding.callout.next');
+  n && t !== i || (l = renderI18nText('sites.onboarding.callout.finish'));
   let a = null;
   switch (n) {
     case 'blocks':
-      a = _$$tx('sites.onboarding.blocks.next');
+      a = renderI18nText('sites.onboarding.blocks.next');
       break;
     case 'code':
-      a = _$$tx('sites.onboarding.code.next');
+      a = renderI18nText('sites.onboarding.code.next');
       break;
     case 'preview':
-      a = _$$tx('sites.onboarding.preview.next');
+      a = renderI18nText('sites.onboarding.preview.next');
       break;
     case 'publish':
-      a = _$$tx('sites.onboarding.publish.next');
+      a = renderI18nText('sites.onboarding.publish.next');
   }
-  i - t == 1 ? l = _$$tx('sites.onboarding.callout.last_colon', {
+  i - t == 1 ? l = renderI18nText('sites.onboarding.callout.last_colon', {
     last_step: a
-  }) : n && (l = _$$tx('sites.onboarding.callout.next_colon', {
+  }) : n && (l = renderI18nText('sites.onboarding.callout.next_colon', {
     next_step: a
   }));
   return {
@@ -19652,7 +19652,7 @@ function fw({
 function fS(e) {
   return {
     type: 'link',
-    label: _$$tx('sites.onboarding.callout.learn_more'),
+    label: renderI18nText('sites.onboarding.callout.learn_more'),
     href: e,
     ctaTrackingDescriptor: _$$c8.LEARN_MORE
   };
@@ -19676,7 +19676,7 @@ function fC({
   }
   return jsx(_$$rq, {
     arrowPosition: F_.LEFT_TITLE,
-    description: _$$tx('sites.onboarding.webpages.description'),
+    description: renderI18nText('sites.onboarding.webpages.description'),
     disableHighlight: !0,
     isCanvasNode: !0,
     isShowing: i,
@@ -19697,7 +19697,7 @@ function fC({
       totalNumSteps: s
     },
     targetKey: c.current?.guid || '',
-    title: _$$tx('sites.onboarding.webpages.title'),
+    title: renderI18nText('sites.onboarding.webpages.title'),
     trackingContextName: 'Sites Onboarding > Webpages'
   });
 }
@@ -19713,7 +19713,7 @@ function fT({
   let o = _$$b2();
   return jsx(_$$rq, {
     arrowPosition: F_.RIGHT_TITLE,
-    description: _$$tx('sites.onboarding.blocks.description'),
+    description: renderI18nText('sites.onboarding.blocks.description'),
     isShowing: i,
     media: jsx(_$$w3, {
       src: buildUploadUrl(s ? '5a06b9550cb947e69c316efaaf1e22f5754cf19b' : '5373a71c8b5908a6b35030e235cfce84981f9120'),
@@ -19732,7 +19732,7 @@ function fT({
       totalNumSteps: a
     },
     targetKey: o || !s ? _$$we : Qr,
-    title: _$$tx('sites.onboarding.blocks.title'),
+    title: renderI18nText('sites.onboarding.blocks.title'),
     trackingContextName: 'Sites Onboarding > Blocks'
   });
 }
@@ -19752,17 +19752,17 @@ function fI({
   });
   return jsx(_$$rq, {
     arrowPosition: F_.BOTTOM,
-    description: _$$tx('sites.onboarding.code.description'),
+    description: renderI18nText('sites.onboarding.code.description'),
     isShowing: i,
     media: jsx(_$$y1, {
       src: buildUploadUrl('6a84e5415e73728b6be860ca115c407b07691df8'),
-      alt: _$$t('sites.onboarding.code.alt'),
+      alt: getI18nString('sites.onboarding.code.alt'),
       aspectRatio: f_
     }),
     onClose: t,
     primaryCta: a === 1 ? {
       type: 'button',
-      label: _$$tx('sites.onboarding.code.try_it_out'),
+      label: renderI18nText('sites.onboarding.code.try_it_out'),
       onClick: e,
       ctaTrackingDescriptor: r ? _$$c8.NEXT : _$$c8.FINISH
     } : fw({
@@ -19777,7 +19777,7 @@ function fI({
       totalNumSteps: a
     } : void 0,
     targetKey: _$$N4,
-    title: _$$tx('sites.onboarding.code.title'),
+    title: renderI18nText('sites.onboarding.code.title'),
     trackingContextName: 'Sites Onboarding > Code'
   });
 }
@@ -19791,11 +19791,11 @@ function fE({
 }) {
   return jsx(_$$rq, {
     arrowPosition: F_.TOP,
-    description: _$$tx('sites.onboarding.preview.description'),
+    description: renderI18nText('sites.onboarding.preview.description'),
     isShowing: i,
     media: jsx(_$$y1, {
       src: buildUploadUrl('f4556dd29bb49bbe6798cd4bef11e12a37ac4778'),
-      alt: _$$t('sites.onboarding.preview.alt'),
+      alt: getI18nString('sites.onboarding.preview.alt'),
       aspectRatio: f_
     }),
     onClose: t,
@@ -19810,7 +19810,7 @@ function fE({
       totalNumSteps: a
     },
     targetKey: Iv,
-    title: _$$tx('sites.onboarding.preview.title'),
+    title: renderI18nText('sites.onboarding.preview.title'),
     trackingContextName: 'Sites Onboarding > Preview'
   });
 }
@@ -19824,11 +19824,11 @@ function fN({
 }) {
   return jsx(_$$rq, {
     arrowPosition: F_.RIGHT_TITLE,
-    description: _$$tx('sites.onboarding.publish.description'),
+    description: renderI18nText('sites.onboarding.publish.description'),
     isShowing: i,
     media: jsx(_$$y1, {
       src: buildUploadUrl('bcd0b976a7fbe595b90b688425f8ca52eafd672a'),
-      alt: _$$t('sites.onboarding.publish.alt'),
+      alt: getI18nString('sites.onboarding.publish.alt'),
       aspectRatio: f_
     }),
     onClose: t,
@@ -19844,22 +19844,22 @@ function fN({
       totalNumSteps: a
     },
     targetKey: ZH,
-    title: _$$tx('sites.onboarding.publish.title'),
+    title: renderI18nText('sites.onboarding.publish.title'),
     trackingContextName: 'Sites Onboarding > Publish'
   });
 }
 function fR() {
-  let e = _$$md(_$$Q) === lyf.LAYOUT;
+  let e = useAtomWithSubscription(_$$Q) === lyf.LAYOUT;
   return ((getFeatureFlags().sts_code_authoring || getFeatureFlags().sts_code_authoring_by_plan) && e) ?? !1;
 }
 function fD({
   recordingKey: e
 }) {
-  let t = _$$md(_$$_b);
+  let t = useAtomWithSubscription(_$$_b);
   assert(!!t, 'sitePreviewState should not be null');
-  let i = _$$md(t.history.currentAtom);
+  let i = useAtomWithSubscription(t.history.currentAtom);
   return jsx(_$$K2, {
-    'aria-label': _$$t('sites.modal.back'),
+    'aria-label': getI18nString('sites.modal.back'),
     'onClick': () => {
       t.history.back();
     },
@@ -19871,11 +19871,11 @@ function fD({
 function fz({
   recordingKey: e
 }) {
-  let t = _$$md(_$$_b);
+  let t = useAtomWithSubscription(_$$_b);
   assert(!!t, 'sitePreviewState should not be null');
-  let i = _$$md(t.history.currentAtom);
+  let i = useAtomWithSubscription(t.history.currentAtom);
   return jsx(_$$K2, {
-    'aria-label': _$$t('sites.modal.forward'),
+    'aria-label': getI18nString('sites.modal.forward'),
     'onClick': () => {
       t.history.forward();
     },
@@ -19887,10 +19887,10 @@ function fz({
 function fB({
   recordingKey: e
 }) {
-  let t = _$$md(_$$_b);
+  let t = useAtomWithSubscription(_$$_b);
   assert(!!t, 'sitePreviewState should not be null');
   return jsx(_$$K2, {
-    'aria-label': _$$t('sites.modal.reload'),
+    'aria-label': getI18nString('sites.modal.reload'),
     'onClick': () => {
       t.history.refresh();
     },
@@ -19903,7 +19903,7 @@ function fU() {
   let e = _$$am();
   return _$$A1(t => {
     e('sites_resize_preview', {
-      mode: zl.get(_$$_b)?.mode,
+      mode: atomStoreManager.get(_$$_b)?.mode,
       resizeSource: t
     });
   }, 2e3);
@@ -19920,7 +19920,7 @@ function fK(e) {
       a.size.x <= _$$b0 ? (t = !0, e = 'mobile') : a.size.x <= zQ ? (i = !0, e = 'tablet') : (n = !0, e = 'desktop');
       l.push({
         name: a.name + a.guid,
-        label: a.name.toLowerCase() === e ? _$$t(`sites.modal.${e}`) : a.name,
+        label: a.name.toLowerCase() === e ? getI18nString(`sites.modal.${e}`) : a.name,
         width: a.size.x,
         height: a.size.y,
         type: e
@@ -19928,21 +19928,21 @@ function fK(e) {
     }
     t || l.push({
       name: 'Mobile',
-      label: _$$t('sites.modal.mobile'),
+      label: getI18nString('sites.modal.mobile'),
       width: MS,
       height: 0,
       type: 'mobile'
     });
     i || l.push({
       name: 'Tablet',
-      label: _$$t('sites.modal.tablet'),
+      label: getI18nString('sites.modal.tablet'),
       width: IL,
       height: 0,
       type: 'tablet'
     });
     n || l.push({
       name: 'Desktop',
-      label: _$$t('sites.modal.desktop'),
+      label: getI18nString('sites.modal.desktop'),
       width: _$$yF,
       height: 0,
       type: 'desktop'
@@ -20010,11 +20010,11 @@ function fq(e) {
     lean: 'left'
   });
   let f = jsx(_$$K2, {
-    'aria-label': _$$t('inline_preview.overflow_menu'),
+    'aria-label': getI18nString('inline_preview.overflow_menu'),
     'ref': n,
     'htmlAttributes': {
       'data-tooltip-type': Ib.TEXT,
-      'data-tooltip': _$$t('inline_preview.overflow_menu')
+      'data-tooltip': getI18nString('inline_preview.overflow_menu')
     },
     'onClick': e => {
       e.stopPropagation();
@@ -20029,7 +20029,7 @@ function fq(e) {
         onChange: x,
         value: i,
         legend: jsx(_$$q2, {
-          children: _$$t('sites.preview.layouts')
+          children: getI18nString('sites.preview.layouts')
         }),
         children: (o || []).map(e => jsx(_$$c$2, {
           'value': e.name,
@@ -20066,7 +20066,7 @@ function fW(e) {
       children: [jsx($j, {
         'bigNudgeAmount': 10,
         'className': fX,
-        'data-tooltip': _$$t('fullscreen.properties_panel.transform_panel.width'),
+        'data-tooltip': getI18nString('fullscreen.properties_panel.transform_panel.width'),
         'data-tooltip-type': Ib.TEXT,
         'disabled': void 0 === e.width,
         'dispatch': t,
@@ -20080,12 +20080,12 @@ function fW(e) {
         'value': e.width,
         'children': jsx('span', {
           className: `${fG} svg`,
-          children: _$$tx('fullscreen.properties_panel.transform_panel.w')
+          children: renderI18nText('fullscreen.properties_panel.transform_panel.w')
         })
       }), jsx($j, {
         'bigNudgeAmount': 10,
         'className': fX,
-        'data-tooltip': _$$t('fullscreen.properties_panel.transform_panel.height'),
+        'data-tooltip': getI18nString('fullscreen.properties_panel.transform_panel.height'),
         'data-tooltip-type': Ib.TEXT,
         'dispatch': t,
         'inputClassName': fV,
@@ -20098,12 +20098,12 @@ function fW(e) {
         'value': e.height,
         'children': jsx('span', {
           className: `${fG} svg`,
-          children: _$$tx('fullscreen.properties_panel.transform_panel.h')
+          children: renderI18nText('fullscreen.properties_panel.transform_panel.h')
         })
       }), jsx($j, {
         'bigNudgeAmount': 1,
         'className': fX,
-        'data-tooltip': _$$t('sites.preview.scale'),
+        'data-tooltip': getI18nString('sites.preview.scale'),
         'data-tooltip-type': Ib.TEXT,
         'dispatch': t,
         'inputClassName': fV,
@@ -20113,7 +20113,7 @@ function fW(e) {
         'value': e.scale,
         'children': jsx('span', {
           className: `${fG} svg`,
-          children: _$$tx('fullscreen.scrubbable.percent')
+          children: renderI18nText('fullscreen.scrubbable.percent')
         })
       })]
     })]
@@ -20133,7 +20133,7 @@ function fY() {
   };
 }
 function fJ(e) {
-  let t = _$$md(e.currentAtom);
+  let t = useAtomWithSubscription(e.currentAtom);
   return useMemo(() => {
     let e = getSingletonSceneGraph().getCurrentPage();
     let i = _$$sO(t.url);
@@ -20144,7 +20144,7 @@ function fJ(e) {
     return null;
   }, [t]);
 }
-let f0 = e => e === '/' ? _$$t('sites.panel.home') : e;
+let f0 = e => e === '/' ? getI18nString('sites.panel.home') : e;
 function f1({
   modalHistory: e
 }) {
@@ -20158,7 +20158,7 @@ function f1({
   }, [i]);
   let r = t;
   getFeatureFlags().dakota_preview && (r = _$$hE2(t, n));
-  let d = _$$md(e.currentAtom);
+  let d = useAtomWithSubscription(e.currentAtom);
   let c = d.url;
   let p = f0(c);
   return jsxs(_$$bL6, {
@@ -20172,7 +20172,7 @@ function f1({
       className: 'xjp7ctv xuvv7d7',
       children: jsx(_$$l7, {
         label: jsx(_$$h6, {
-          children: _$$t('sites.panel.selectPage')
+          children: getI18nString('sites.panel.selectPage')
         }),
         size: 'md',
         iconLead: jsx(f5, {
@@ -20212,13 +20212,13 @@ function f8({
   recordingKey: e,
   toggleDebugTools: t
 }) {
-  let i = _$$md(_$$_b);
+  let i = useAtomWithSubscription(_$$_b);
   assert(!!i, 'sitePreviewState should not be null');
   let n = getFeatureFlags().sts_runtime_debug_tools;
   return jsxs('div', {
     className: 'sites_full_page_preview--rightControlGroup--x3yAk sites_full_page_preview--controlGroup--vHfcT',
     children: [n && jsx(_$$K2, {
-      'aria-label': _$$t('sites.modal.open-debug-tools'),
+      'aria-label': getI18nString('sites.modal.open-debug-tools'),
       'onClick': t,
       'recordingKey': Pt(e, 'open-debug-tools'),
       'children': jsx(_$$J10, {})
@@ -20229,7 +20229,7 @@ function f8({
     }), jsx(fz, {
       recordingKey: e
     }), jsx(_$$K2, {
-      'aria-label': _$$t('sites.modal.restart'),
+      'aria-label': getI18nString('sites.modal.restart'),
       'onClick': () => {
         i.history.restart();
       },
@@ -20247,13 +20247,13 @@ function f6({
   return jsxs('div', {
     className: 'sites_full_page_preview--leftControlGroup--tfTiF sites_full_page_preview--controlGroup--vHfcT',
     children: [jsx(_$$K2, {
-      'aria-label': _$$t('sites.modal.close'),
+      'aria-label': getI18nString('sites.modal.close'),
       'onClick': e,
       'recordingKey': Pt(i, 'close'),
       'children': jsx(_$$C6, {})
     }), jsx('div', {
       className: 'sites_full_page_preview--headerTitle---5-ip',
-      children: n !== null ? n.name : _$$t('fullscreen.filename_view.title_placeholder')
+      children: n !== null ? n.name : getI18nString('fullscreen.filename_view.title_placeholder')
     }), jsx('div', {
       className: 'sites_full_page_preview--pageSelectDropdownContainer--T56hQ',
       children: jsx(f1, {
@@ -20300,8 +20300,8 @@ function f9() {
   let {
     Sprig
   } = useSprigWithSampling();
-  let t = _$$md(_$$_b);
-  return _$$md(IX) !== 'fullscreen' ? null : jsx(_e, {
+  let t = useAtomWithSubscription(_$$_b);
+  return useAtomWithSubscription(IX) !== 'fullscreen' ? null : jsx(_e, {
     modalHistory: t?.history,
     initialSize: t?.initialSize,
     testFlags: t?.testFlags,
@@ -20317,7 +20317,7 @@ function _e({
   testFlags: n
 }) {
   let s = useRef(null);
-  let d = _$$md(Og);
+  let d = useAtomWithSubscription(Og);
   let c = t?.x;
   let {
     requestedWidth,
@@ -20327,7 +20327,7 @@ function _e({
     scale,
     setScale
   } = fY();
-  let f = _$$md(HA);
+  let f = useAtomWithSubscription(HA);
   let [_, b] = useState(window.innerWidth);
   let [y, v] = useState(window.innerHeight);
   let [j, k] = useState(void 0);
@@ -21154,7 +21154,7 @@ async function _P(e) {
   return Array.from(new Uint8Array(await crypto.subtle.digest('SHA-1', t))).map(e => e.toString(16).padStart(2, '0')).join('');
 }
 function _z(e) {
-  return _$$md(_$$_b) ? jsx(_B, {
+  return useAtomWithSubscription(_$$_b) ? jsx(_B, {
     ...e
   }) : null;
 }
@@ -21167,7 +21167,7 @@ function _B({
   scale: d,
   setScale: c
 }) {
-  let p = _$$md(_$$_b);
+  let p = useAtomWithSubscription(_$$_b);
   assert(!!p, 'sitePreviewState should not be null');
   let x = fJ(p.history);
   let m = useDispatch();
@@ -21212,7 +21212,7 @@ function _B({
     let e = [];
     h.layoutsInOverflow && (e.push({
       disabled: !0,
-      displayText: _$$t('sites.modal.layouts'),
+      displayText: getI18nString('sites.modal.layouts'),
       alwaysShowCheckMarkOffset: !0
     }), v.forEach(t => {
       e.push({
@@ -21233,10 +21233,10 @@ function _B({
     }));
     h.showOverflow && (e.push({
       disabled: !0,
-      displayText: _$$t('sites.modal.scaling-options'),
+      displayText: getI18nString('sites.modal.scaling-options'),
       alwaysShowCheckMarkOffset: !0
     }), e.push({
-      displayText: _$$t('sites.modal.actual-size'),
+      displayText: getI18nString('sites.modal.actual-size'),
       icon: jsx(_$$O0, {}),
       alwaysShowCheckMarkOffset: !0,
       recordingKey: 'toggle-actual-size',
@@ -21245,7 +21245,7 @@ function _B({
         c(100);
       }
     }), e.push({
-      displayText: _$$t('sites.modal.fit-to-screen'),
+      displayText: getI18nString('sites.modal.fit-to-screen'),
       icon: jsx(_$$H9, {}),
       alwaysShowCheckMarkOffset: !0,
       recordingKey: 'toggle-fit-to-screen',
@@ -21290,10 +21290,10 @@ function _B({
         }), h.showOverflow && jsx('div', {
           ref: _,
           children: jsx(_$$K2, {
-            'aria-label': _$$t('inline_preview.overflow_menu'),
+            'aria-label': getI18nString('inline_preview.overflow_menu'),
             'htmlAttributes': {
               'data-tooltip-type': Ib.TEXT,
-              'data-tooltip': _$$t('inline_preview.overflow_menu')
+              'data-tooltip': getI18nString('inline_preview.overflow_menu')
             },
             'actionOnPointerDown': !0,
             'onClick': e => {
@@ -21324,10 +21324,10 @@ function _B({
 function _$({
   recordingKey: e
 }) {
-  let [t, i] = _$$fp(_$$_b);
+  let [t, i] = useAtomValueAndSetter(_$$_b);
   assert(!!t, 'sitePreviewState should not be null');
   return jsx(_$$K2, {
-    'aria-label': _$$t('sites.modal.open-full-preview'),
+    'aria-label': getI18nString('sites.modal.open-full-preview'),
     'onClick': () => {
       i({
         ...t,
@@ -21349,8 +21349,8 @@ getFeatureFlags().internal_only_debug_tools && (window.SitesFillOptimizer = {
 });
 let _U = 'websitePreviewModal';
 function _K() {
-  let e = _$$md(_$$_b);
-  return _$$md(IX) !== 'modal' ? null : jsx(_X, {
+  let e = useAtomWithSubscription(_$$_b);
+  return useAtomWithSubscription(IX) !== 'modal' ? null : jsx(_X, {
     modalHistory: e?.history,
     initialSize: e?.initialSize
   });
@@ -21421,9 +21421,9 @@ function _X({
       setPosition: p
     };
   }(t, _H);
-  let [_, b] = _$$fp(_$$_b);
+  let [_, b] = useAtomValueAndSetter(_$$_b);
   let y = Xr(q9);
-  let [v, j] = _$$fp(Og);
+  let [v, j] = useAtomValueAndSetter(Og);
   let k = () => {
     _$$uP(Sprig);
   };
@@ -21566,9 +21566,9 @@ function _V({
   }), [i, n, s]);
   let p = useMemo(() => ({
     pointerEvents: c ? 'none' : void 0,
-    ...(_$$nl2() ? {} : u)
+    ...(isInteractionPathCheck() ? {} : u)
   }), [c, u]);
-  let x = _$$md(_$$_b);
+  let x = useAtomWithSubscription(_$$_b);
   return jsx(_$$gs2, {
     style: p,
     previewHistory: e,
@@ -21581,16 +21581,16 @@ var _8 = (e => (e.EVENT = 'event', e.LANDING_PAGE = 'landing-page', e.PERSONAL =
 let _6 = [{
   type: _$$k1.TEXT,
   id: 'explore',
-  text: _$$t('sites.onboarding.templates.explore')
+  text: getI18nString('sites.onboarding.templates.explore')
 }, {
   type: _$$k1.DIVIDER,
   key: _$$g5()
 }, {
   type: _$$k1.SECTION_HEADER,
-  text: _$$t('sites.onboarding.templates.templates')
+  text: getI18nString('sites.onboarding.templates.templates')
 }];
 function _7() {
-  let [e, t] = _$$fp(_$$LS);
+  let [e, t] = useAtomValueAndSetter(_$$LS);
   let i = be();
   return jsx(_$$j1, {
     items: i,
@@ -21620,15 +21620,15 @@ let be = () => {
     text: function (e, t) {
       switch (e) {
         case 'event':
-          return _$$t('sites.onboarding.templates.category.event');
+          return getI18nString('sites.onboarding.templates.category.event');
         case 'landing-page':
-          return _$$t('sites.onboarding.templates.category.landing-page');
+          return getI18nString('sites.onboarding.templates.category.landing-page');
         case 'personal':
-          return _$$t('sites.onboarding.templates.category.personal');
+          return getI18nString('sites.onboarding.templates.category.personal');
         case 'portfolio':
-          return _$$t('sites.onboarding.templates.category.portfolio');
+          return getI18nString('sites.onboarding.templates.category.portfolio');
         case 'business':
-          return _$$t('sites.onboarding.templates.category.business');
+          return getI18nString('sites.onboarding.templates.category.business');
         default:
           return t;
       }
@@ -21656,7 +21656,7 @@ function bt() {
       })
     }), jsx('div', {
       className: 'sites_blank_site_tile--blankSiteTileText--vcFwe',
-      children: _$$t('sites.onboarding.template_picker.blank_website')
+      children: getI18nString('sites.onboarding.template_picker.blank_website')
     })]
   });
 }
@@ -21777,7 +21777,7 @@ function bu({
           insertTemplate: _$$lQ,
           isInsertingTemplate: !1,
           shouldUseOpaqueBackground: !0,
-          children: _$$tx('slides.templates.view_template')
+          children: renderI18nText('slides.templates.view_template')
         })
       }), thumbnail_url != null && jsx(bd, {
         thumbnailUrl: thumbnail_url,
@@ -21810,7 +21810,7 @@ function bm({
   templates: e
 }) {
   let t = !e?.length;
-  let i = _$$md(_$$LS);
+  let i = useAtomWithSubscription(_$$LS);
   return t ? jsxs('div', {
     className: bx,
     children: [i.id === 'explore' && jsx(bt, {}), Array.from({
@@ -21834,9 +21834,9 @@ function bh() {
 }
 function bg() {
   let e = useRef(null);
-  let t = _$$md(_$$iG2);
-  let [i, n] = _$$fp(_$$cF);
-  let s = _$$md(_$$LS);
+  let t = useAtomWithSubscription(_$$iG2);
+  let [i, n] = useAtomValueAndSetter(_$$cF);
+  let s = useAtomWithSubscription(_$$LS);
   let r = `${s.category}-${s.tags?.join('-')}`;
   let [{
     data: d,
@@ -21897,10 +21897,10 @@ function bf() {
       className: 'site_templates_view--titleTextContainer--3vZ0O',
       children: jsx('div', {
         className: 'site_templates_view--templateTitleText--DXgwN text--fontPos13--xW8hS text--_fontBase--QdLsd ellipsis--ellipsis--Tjyfa',
-        children: _$$t('sites.onboarding.template_picker.title')
+        children: getI18nString('sites.onboarding.template_picker.title')
       })
     }), jsx(_$$K2, {
-      'aria-label': _$$t('common.close'),
+      'aria-label': getI18nString('common.close'),
       'onClick': () => {
         t('sites_template_picker_dismissed');
         n(FP({
@@ -21927,7 +21927,7 @@ let bk = M4.Query({
     })).data.meta;
     if (!t.resource) {
       let e = new Error('Resource or Private Plugin must be present');
-      $D(_$$e2.COMMUNITY, e);
+      reportError(_$$e2.COMMUNITY, e);
       return e;
     }
     return t.resource;
@@ -21952,7 +21952,7 @@ function bw({
     className: _$$s4.flex.flexColumn.hFull.$,
     children: [jsx(bS, {
       title: i.name,
-      publisherName: _$$t('community.view_bar.figma')
+      publisherName: getI18nString('community.view_bar.figma')
     }), jsx(_$$P2, {
       className: _$$s4.px8.hFull.$,
       scrollContainerRef: t,
@@ -21991,7 +21991,7 @@ function bS({
     children: [jsxs('div', {
       className: 'sites_template_view--titleTextContainer--YjnHM',
       children: [jsx(_$$K2, {
-        'aria-label': _$$t('slides.templates.back'),
+        'aria-label': getI18nString('slides.templates.back'),
         'onClick': p,
         'children': jsx(_$$C6, {
           'data-not-draggable': !0,
@@ -22002,19 +22002,19 @@ function bS({
         children: [jsx(_$$E5, {
           onClick: p,
           className: 'sites_template_view--templateTitleTextButton--zsfiM',
-          children: _$$tx('slides.templates.templates_modal.templates_title')
+          children: renderI18nText('slides.templates.templates_modal.templates_title')
         }), jsx('span', {
           className: 'sites_template_view--headerSeparator--quqAY',
           children: ' / '
         }), e]
       }), jsx('div', {
         className: 'sites_template_view--publisherTitleText--GQaw1 text--fontPos11--2LvXf text--_fontBase--QdLsd ellipsis--ellipsis--Tjyfa',
-        children: _$$tx('slides.templates.templates_modal.published_by', {
+        children: renderI18nText('slides.templates.templates_modal.published_by', {
           publisherName: t
         })
       })]
     }), jsx(_$$K2, {
-      'aria-label': _$$t('common.close'),
+      'aria-label': getI18nString('common.close'),
       'onClick': () => {
         n('sites_template_picker_dismissed');
         c(FP({
@@ -22054,7 +22054,7 @@ function bC({
       alt: t,
       draggable: !1,
       onError: () => {
-        _$$x('community', 'Failed to load thumbail image on Sites template picker', {
+        logError('community', 'Failed to load thumbail image on Sites template picker', {
           thumbnailUrl: n,
           resourceId: i
         });
@@ -22097,7 +22097,7 @@ function bI({
       variant: 'secondary',
       children: jsxs('div', {
         className: 'sites_template_view--templateSecondaryButton--XTUPL',
-        children: [jsx(_$$V5, {}), _$$tx('sites.onboarding.templates.preview_in_browser')]
+        children: [jsx(_$$V5, {}), renderI18nText('sites.onboarding.templates.preview_in_browser')]
       })
     }), jsx($n, {
       onClick: () => {
@@ -22106,7 +22106,7 @@ function bI({
         r(e.id, t);
       },
       variant: 'primary',
-      children: i ? jsx(_$$k7, {}) : _$$tx('sites.onboarding.templates.use_this_template')
+      children: i ? jsx(_$$k7, {}) : renderI18nText('sites.onboarding.templates.use_this_template')
     })]
   });
 }
@@ -22196,7 +22196,7 @@ let bE = ({
   };
 };
 function bN() {
-  let [e, t] = _$$fp(_$$ZH);
+  let [e, t] = useAtomValueAndSetter(_$$ZH);
   _$$a10({
     atom: _$$iG2
   });
@@ -22243,16 +22243,16 @@ function bA({
 function bL() {
   let e = _$$p2('isReadOnly');
   let t = EI();
-  let i = _$$md(_$$D6);
+  let i = useAtomWithSubscription(_$$D6);
   let n = _$$r7(_$$at);
-  let a = _$$md(n);
+  let a = useAtomWithSubscription(n);
   let s = a.status === 'loaded' && !0 === a.data;
-  let r = _$$md(_$$me);
+  let r = useAtomWithSubscription(_$$me);
   let d = q5();
   let c = d?.key;
   let u = _$$eY();
-  let p = _$$md(u3);
-  let [x, m] = _$$fp(P4);
+  let p = useAtomWithSubscription(u3);
+  let [x, m] = useAtomValueAndSetter(P4);
   if (!t || !x || i || !s || r || p) return null;
   let h = PR(u);
   return e || h ? (m(!1), null) : jsx(_$$fu, {
@@ -22288,7 +22288,7 @@ function bO() {
   });
 }
 function bF() {
-  let e = _$$md(_$$_b);
+  let e = useAtomWithSubscription(_$$_b);
   return jsxs('div', {
     id: 'sites-preview-wrapper',
     style: {
@@ -22342,7 +22342,7 @@ function bQ({
   return jsx(DE, {
     input: d,
     icon: null,
-    label: _$$t('fullscreeen.type_panel.resizing')
+    label: getI18nString('fullscreeen.type_panel.resizing')
   });
 }
 function b0() {
@@ -22367,33 +22367,33 @@ function b1() {
       children: [jsx(_$$fI, {
         children: jsx(_$$Q0, {
           extended: !0,
-          children: _$$tx('inspect_panel.properties.layout')
+          children: renderI18nText('inspect_panel.properties.layout')
         })
       }), jsx(b0, {})]
     })
   }) : null;
 }
 let yt = {
-  [gRN.HEADING1]: _$$tx('dakota.properties_panel.cms_rich_text_styles.label_heading', {
+  [gRN.HEADING1]: renderI18nText('dakota.properties_panel.cms_rich_text_styles.label_heading', {
     number: 1
   }),
-  [gRN.HEADING2]: _$$tx('dakota.properties_panel.cms_rich_text_styles.label_heading', {
+  [gRN.HEADING2]: renderI18nText('dakota.properties_panel.cms_rich_text_styles.label_heading', {
     number: 2
   }),
-  [gRN.HEADING3]: _$$tx('dakota.properties_panel.cms_rich_text_styles.label_heading', {
+  [gRN.HEADING3]: renderI18nText('dakota.properties_panel.cms_rich_text_styles.label_heading', {
     number: 3
   }),
-  [gRN.HEADING4]: _$$tx('dakota.properties_panel.cms_rich_text_styles.label_heading', {
+  [gRN.HEADING4]: renderI18nText('dakota.properties_panel.cms_rich_text_styles.label_heading', {
     number: 4
   }),
-  [gRN.HEADING5]: _$$tx('dakota.properties_panel.cms_rich_text_styles.label_heading', {
+  [gRN.HEADING5]: renderI18nText('dakota.properties_panel.cms_rich_text_styles.label_heading', {
     number: 5
   }),
-  [gRN.HEADING6]: _$$tx('dakota.properties_panel.cms_rich_text_styles.label_heading', {
+  [gRN.HEADING6]: renderI18nText('dakota.properties_panel.cms_rich_text_styles.label_heading', {
     number: 6
   }),
-  [gRN.PARAGRAPH]: _$$tx('dakota.properties_panel.cms_rich_text_styles.label_paragraph'),
-  [gRN.LINK]: _$$tx('dakota.properties_panel.cms_rich_text_styles.label_link')
+  [gRN.PARAGRAPH]: renderI18nText('dakota.properties_panel.cms_rich_text_styles.label_paragraph'),
+  [gRN.LINK]: renderI18nText('dakota.properties_panel.cms_rich_text_styles.label_link')
 };
 function yi({
   inheritTextStyleKey: e,
@@ -22427,10 +22427,10 @@ function yn({
   return jsxs(_$$E5, {
     'onClick': e,
     'className': 'x1imki4n xh8yej3 x78zum5 xxk0z11 xctkrei x19y5rnk x1bhetga x8srhbo',
-    'aria-label': _$$t('dakota.properties_panel.cms_rich_text_styles.select_style_label'),
+    'aria-label': getI18nString('dakota.properties_panel.cms_rich_text_styles.select_style_label'),
     'children': [jsx(_$$W9, {}), jsx('div', {
       className: 'cms_rich_text_style_panel--buttonText--4T5sj ellipsis--ellipsis--Tjyfa',
-      children: _$$tx('dakota.properties_panel.cms_rich_text_styles.select_style_label')
+      children: renderI18nText('dakota.properties_panel.cms_rich_text_styles.select_style_label')
     })]
   });
 }
@@ -22557,7 +22557,7 @@ function ys() {
       children: [jsx(_$$fI, {
         children: jsx(_$$Q0, {
           extended: !0,
-          children: _$$tx('dakota.properties_panel.cms_rich_text_styles.title')
+          children: renderI18nText('dakota.properties_panel.cms_rich_text_styles.title')
         })
       }), jsx(ya, {
         cmsRichTextStyleMap: i,
@@ -22604,14 +22604,14 @@ function y_({
 function yb(e) {
   return jsxs(_$$bL6, {
     recordingKey: Pt(e.recordingKey, 'collectionDropdown'),
-    value: e.currentCollection?.name ?? _$$t('dakota.properties_panel.collection_panel.collection_dropdown_nullstate'),
+    value: e.currentCollection?.name ?? getI18nString('dakota.properties_panel.collection_panel.collection_dropdown_nullstate'),
     onChange: t => {
       e.setCollectionAction(e.collectionList.find(e => e.name === t)?.id ?? null);
     },
     children: [jsx(_$$l7, {
       width: 'fill',
       label: jsx(_$$h6, {
-        children: _$$t('dakota.properties_panel.collection_panel.page_collection_label')
+        children: getI18nString('dakota.properties_panel.collection_panel.page_collection_label')
       })
     }), jsx(_$$mc2, {
       children: e.collectionList.map(e => jsx(_$$c$5, {
@@ -22636,15 +22636,15 @@ function yy(e) {
   let n = jsx(_$$K2, {
     'recordingKey': Pt(e.recordingKey, 'removeCollectionButton'),
     'onClick': () => t(null),
-    'aria-label': _$$t('dakota.collection_selector.disconnect_submenu_title'),
+    'aria-label': getI18nString('dakota.collection_selector.disconnect_submenu_title'),
     'htmlAttributes': {
-      'data-tooltip': _$$t('dakota.collection_selector.disconnect_submenu_title'),
+      'data-tooltip': getI18nString('dakota.collection_selector.disconnect_submenu_title'),
       'data-tooltip-type': 'text'
     },
     'children': jsx(_$$f11, {})
   });
   return jsx(y_, {
-    label: _$$t('dakota.properties_panel.collection_panel.page_collection_label'),
+    label: getI18nString('dakota.properties_panel.collection_panel.page_collection_label'),
     input: i,
     action: e.currentCollection ? n : null,
     showActionOnHover: !0
@@ -22654,21 +22654,21 @@ function yv({
   currentCollection: e,
   recordingKey: t
 }) {
-  let [, i] = _$$fp(_$$s3);
-  let [, n] = _$$fp(_$$iO);
+  let [, i] = useAtomValueAndSetter(_$$s3);
+  let [, n] = useAtomValueAndSetter(_$$iO);
   let a = jsx('div', {
     className: yu,
     children: jsx(_$$E5, {
       'recordingKey': Pt(t, 'goToCollectionButton'),
       'className': yx,
-      'aria-label': _$$t('dakota.properties_panel.collection_panel.go_to_collection_label'),
+      'aria-label': getI18nString('dakota.properties_panel.collection_panel.go_to_collection_label'),
       'htmlAttributes': {
-        'data-tooltip': _$$t('dakota.properties_panel.collection_panel.go_to_collection_label'),
+        'data-tooltip': getI18nString('dakota.properties_panel.collection_panel.go_to_collection_label'),
         'data-tooltip-type': Ib.TEXT
       },
       'onClick': () => {
         if (i(Nfd.DAKOTA), e?.id == null) {
-          $D(_$$e2.CMS, new Error('CMS Collection ID is null in the properties panel'), {
+          reportError(_$$e2.CMS, new Error('CMS Collection ID is null in the properties panel'), {
             extra: {
               currentCollection: e
             }
@@ -22694,7 +22694,7 @@ function yv({
     })
   });
   return jsx(y_, {
-    label: _$$t('dakota.properties_panel.collection_panel.repeater_collection_label'),
+    label: getI18nString('dakota.properties_panel.collection_panel.repeater_collection_label'),
     input: a,
     action: null
   });
@@ -22724,7 +22724,7 @@ function yj({
     children: [jsx(_$$l7, {
       width: 'fill',
       label: jsx(_$$h6, {
-        children: _$$t('dakota.properties_panel.collection_panel.item_switcher_label')
+        children: getI18nString('dakota.properties_panel.collection_panel.item_switcher_label')
       }),
       disabled: a.length === 0
     }), jsx(_$$mc2, {
@@ -22732,7 +22732,7 @@ function yj({
     })]
   });
   return jsx(y_, {
-    label: _$$t('dakota.properties_panel.collection_panel.item_switcher_label'),
+    label: getI18nString('dakota.properties_panel.collection_panel.item_switcher_label'),
     input: o,
     action: null
   });
@@ -22748,9 +22748,9 @@ function yk({
     children: jsx(_$$E5, {
       'recordingKey': Pt(e, 'goToMainComponentRowButton'),
       'className': yx,
-      'aria-label': _$$t('dakota.properties_panel.collection_panel.go_to_component_label'),
+      'aria-label': getI18nString('dakota.properties_panel.collection_panel.go_to_component_label'),
       'htmlAttributes': {
-        'data-tooltip': _$$t('dakota.properties_panel.collection_panel.go_to_component_label'),
+        'data-tooltip': getI18nString('dakota.properties_panel.collection_panel.go_to_component_label'),
         'data-tooltip-type': Ib.TEXT
       },
       'onClick': () => Y5.triggerActionEnum(rcl.GO_TO_REPEATER_COMPONENT),
@@ -22771,7 +22771,7 @@ function yk({
     })
   });
   return jsx(y_, {
-    label: _$$t('dakota.properties_panel.collection_panel.list_component_label'),
+    label: getI18nString('dakota.properties_panel.collection_panel.list_component_label'),
     input: n,
     action: null
   });
@@ -22787,7 +22787,7 @@ function yw({
   let a = Fk(e => e.getDirectlySelectedNodes()[0]?.getDakotaSelector()?.limit);
   let s = [jsx(_$$c$5, {
     value: '0',
-    children: _$$t('dakota.properties_panel.collection_panel.repeater_limit_dropdown_no_limit')
+    children: getI18nString('dakota.properties_panel.collection_panel.repeater_limit_dropdown_no_limit')
   }, 0)];
   if (status === 'loaded') {
     for (let e = 1; e <= data.length; e++) {
@@ -22813,16 +22813,16 @@ function yw({
     children: [jsx(_$$l7, {
       width: 'fill',
       label: jsx(_$$h6, {
-        children: _$$t('dakota.properties_panel.collection_panel.limit_label')
+        children: getI18nString('dakota.properties_panel.collection_panel.limit_label')
       }),
       disabled: status !== 'loaded',
-      placeholder: _$$t('dakota.properties_panel.collection_panel.repeater_limit_dropdown_no_limit')
+      placeholder: getI18nString('dakota.properties_panel.collection_panel.repeater_limit_dropdown_no_limit')
     }), jsx(_$$mc2, {
       children: s
     })]
   }, (e ?? '') + (a ?? 0) + data.length);
   return jsx(y_, {
-    label: _$$t('dakota.properties_panel.collection_panel.limit_label'),
+    label: getI18nString('dakota.properties_panel.collection_panel.limit_label'),
     input: r,
     action: null
   });
@@ -22895,7 +22895,7 @@ function yq({
       }]
     }], _$$zk.YES, 'visibility');
   }, [i, r]);
-  let d = r ? _$$t('fullscreen.properties_panel.tooltip_hide') : _$$t('fullscreen.properties_panel.tooltip_show');
+  let d = r ? getI18nString('fullscreen.properties_panel.tooltip_hide') : getI18nString('fullscreen.properties_panel.tooltip_show');
   return jsx('div', {
     className: _$$RK,
     children: jsx(_$$f9, {
@@ -23122,11 +23122,11 @@ let yZ = memo(({
   }(e, t);
   let f = i === _$$D7.Enabled;
   let _ = useDispatch();
-  let b = _$$P5(_$$t('fullscreen.properties_panel.transform_panel.corner_radius'));
+  let b = _$$P5(getI18nString('fullscreen.properties_panel.transform_panel.corner_radius'));
   return jsxs(_$$Zk, {
     'data-testid': 'appearance-panel-web-direct-manipulation',
     'children': [jsx(_$$Wv, {
-      titleTx: _$$tx('fullscreen.appearance_panel.appearance'),
+      titleTx: renderI18nText('fullscreen.appearance_panel.appearance'),
       children: jsx(yq, {
         recordingKey: n.recordingKey,
         directManipulationEditor: e,
@@ -23166,8 +23166,8 @@ let yZ = memo(({
         rectangleCornerToolIndependentActive: isIndependentCornerExpanded,
         setRectangleCornerToolIndependentActive: setIsIndependentCornerExpanded
       }),
-      leftLabel: _$$tx('fullscreen.properties_panel.section_appearance.label_opacity'),
-      rightLabel: _$$tx('fullscreen.properties_panel.transform_panel.corner_radius')
+      leftLabel: renderI18nText('fullscreen.properties_panel.section_appearance.label_opacity'),
+      rightLabel: renderI18nText('fullscreen.properties_panel.transform_panel.corner_radius')
     }), isIndependentCornerExpanded && jsx(yW, {
       onValueChange,
       ...g,
@@ -23208,10 +23208,10 @@ function ve({
           chevron: _$$t9
         },
         children: jsx(_$$vD2, {
-          'ariaLabel': _$$t('fullscreen.type_panel.font_size'),
+          'ariaLabel': getI18nString('fullscreen.type_panel.font_size'),
           bigNudgeAmount,
           'className': Ej,
-          'data-tooltip': _$$t('fullscreen.type_panel.font_size'),
+          'data-tooltip': getI18nString('fullscreen.type_panel.font_size'),
           'data-tooltip-type': Ib.TEXT,
           'disabled': n,
           'dispatch': d,
@@ -23325,7 +23325,7 @@ function vs({
   }, [t]);
   return jsx(_$$fn2, {
     ref: n,
-    leftLabel: _$$tx('properties.label.alignment'),
+    leftLabel: renderI18nText('properties.label.alignment'),
     leftInput: jsx(_$$E11, {
       name: 'text_align_horizontal',
       children: jsx(vo, {
@@ -23357,7 +23357,7 @@ function vo({
 }) {
   return jsxs(_$$bL, {
     legend: jsx(_$$q2, {
-      children: _$$t('fullscreen.type_panel.align_horizontal')
+      children: getI18nString('fullscreen.type_panel.align_horizontal')
     }),
     value: t,
     onChange: n,
@@ -23365,15 +23365,15 @@ function vo({
     recordingKey: e,
     children: [jsx(_$$c$2, {
       'value': 'LEFT',
-      'aria-label': _$$t('fullscreen.type_panel.align_left'),
+      'aria-label': getI18nString('fullscreen.type_panel.align_left'),
       'icon': jsx(_$$h9, {})
     }), jsx(_$$c$2, {
       'value': 'CENTER',
-      'aria-label': _$$t('fullscreen.type_panel.align_center'),
+      'aria-label': getI18nString('fullscreen.type_panel.align_center'),
       'icon': jsx(_$$N9, {})
     }), jsx(_$$c$2, {
       'value': 'RIGHT',
-      'aria-label': _$$t('fullscreen.type_panel.align_right'),
+      'aria-label': getI18nString('fullscreen.type_panel.align_right'),
       'icon': jsx(_$$K5, {})
     })]
   });
@@ -23390,19 +23390,19 @@ function vd({
     readonly: i,
     recordingKey: e,
     legend: jsx(_$$q2, {
-      children: _$$t('fullscreen.type_panel.align_vertical')
+      children: getI18nString('fullscreen.type_panel.align_vertical')
     }),
     children: [jsx(_$$c$2, {
       'value': 'TOP',
-      'aria-label': _$$t('fullscreen.type_panel.align_top'),
+      'aria-label': getI18nString('fullscreen.type_panel.align_top'),
       'icon': jsx(_$$b11, {})
     }), jsx(_$$c$2, {
       'value': 'CENTER',
-      'aria-label': _$$t('fullscreen.type_panel.align_middle'),
+      'aria-label': getI18nString('fullscreen.type_panel.align_middle'),
       'icon': jsx(_$$X8, {})
     }), jsx(_$$c$2, {
       'value': 'BOTTOM',
-      'aria-label': _$$t('fullscreen.type_panel.align_bottom'),
+      'aria-label': getI18nString('fullscreen.type_panel.align_bottom'),
       'icon': jsx(_$$z12, {})
     })]
   });
@@ -23458,7 +23458,7 @@ let vc = memo(({
   return jsxs(_$$Zk, {
     'data-testid': 'text-panel-web-direct-manipulation',
     'children': [jsx(_$$iE, {
-      titleTx: _$$tx('fullscreen.type_panel.typography')
+      titleTx: renderI18nText('fullscreen.type_panel.typography')
     }), jsx(_$$ay, {
       disabled: !g,
       editingStyleGuid: void 0,
@@ -23500,13 +23500,13 @@ let vu = memo(e => {
   let r = useCallback(e => {
     if (i.current) return;
     i.current = !0;
-    let t = e === 'on_selection' ? _$$t('figmake.toolbar.error.inconsistency') : _$$t('figmake.toolbar.error.save');
+    let t = e === 'on_selection' ? getI18nString('figmake.toolbar.error.inconsistency') : getI18nString('figmake.toolbar.error.save');
     n(_$$F.enqueue({
       message: t,
       error: !0,
       button: {
         action: () => {},
-        text: _$$t('figmake.refresh')
+        text: getI18nString('figmake.refresh')
       }
     }));
   }, [n]);
@@ -23748,13 +23748,13 @@ function v3({
   let d = useMemo(() => [{
     roles: vO
   }, {
-    category: _$$t('sites.panel.accessibility.role.regions'),
+    category: getI18nString('sites.panel.accessibility.role.regions'),
     roles: vF
   }, {
-    category: _$$t('sites.panel.accessibility.role.document'),
+    category: getI18nString('sites.panel.accessibility.role.document'),
     roles: vM
   }, {
-    category: _$$t('sites.panel.accessibility.role.interactive'),
+    category: getI18nString('sites.panel.accessibility.role.interactive'),
     roles: vD
   }], []);
   let c = useMemo(() => d.map(e => e.roles).flat(), [d]);
@@ -23798,7 +23798,7 @@ function v3({
       id: 'accessibility-annotation-role-select',
       onChange: t,
       onDropdownHidden: i,
-      placeholder: _$$t('sites.panel.accessibility.role.no_role_selected'),
+      placeholder: getI18nString('sites.panel.accessibility.role.no_role_selected'),
       property: e,
       recordingKey: n,
       children: x
@@ -24000,7 +24000,7 @@ function jr(e) {
   return jsxs(Fragment, {
     children: [jsxs(_$$Zk, {
       children: [jsx(_$$n11, {
-        titleTx: _$$tx('sites.panel.accessibility_header'),
+        titleTx: renderI18nText('sites.panel.accessibility_header'),
         onClick: H ? void 0 : toggleDropdown,
         icon: q
       }), jsx(jx, {
@@ -24062,7 +24062,7 @@ function jr(e) {
             children: jsx(_$$L4, {
               className: v4,
               name: 'sites_accessible_label',
-              placeholder: _$$gl(i) ? _$$t('common.mixed') : void 0,
+              placeholder: _$$gl(i) ? getI18nString('common.mixed') : void 0,
               value: _$$gl(i) ? '' : i,
               type: 'textarea',
               onChange: e => {
@@ -24108,13 +24108,13 @@ function jo({
   recordingKey: n
 }) {
   return jsx(_$$K2, {
-    'aria-label': _$$t('sites.panel.add_tooltip'),
+    'aria-label': getI18nString('sites.panel.add_tooltip'),
     'ref': e,
     'onClick': t,
     'disabled': i,
     'recordingKey': Pt(n, 'plus_button'),
     'htmlAttributes': {
-      'data-tooltip': _$$t('sites.panel.add_tooltip'),
+      'data-tooltip': getI18nString('sites.panel.add_tooltip'),
       'data-tooltip-type': Ib.TEXT
     },
     'children': jsx(_$$e9, {})
@@ -24125,11 +24125,11 @@ function jd({
   recordingKey: t
 }) {
   return jsx(_$$K2, {
-    'aria-label': _$$t('sites.panel.remove_tooltip'),
+    'aria-label': getI18nString('sites.panel.remove_tooltip'),
     'onClick': e,
     'recordingKey': Pt(t, 'minus_button'),
     'htmlAttributes': {
-      'data-tooltip': _$$t('sites.panel.remove_tooltip'),
+      'data-tooltip': getI18nString('sites.panel.remove_tooltip'),
       'data-tooltip-type': Ib.TEXT
     },
     'children': jsx(_$$O1, {})
@@ -24140,11 +24140,11 @@ function jc({
   recordingKey: t
 }) {
   return jsx(_$$K2, {
-    'aria-label': _$$t('sites.panel.reset_tooltip'),
+    'aria-label': getI18nString('sites.panel.reset_tooltip'),
     'onClick': e,
     'recordingKey': Pt(t, 'reset_button'),
     'htmlAttributes': {
-      'data-tooltip': _$$t('sites.panel.reset_tooltip'),
+      'data-tooltip': getI18nString('sites.panel.reset_tooltip'),
       'data-tooltip-type': Ib.TEXT
     },
     'children': jsx(_$$f11, {})
@@ -24155,11 +24155,11 @@ function ju({
   recordingKey: t
 }) {
   return jsx(_$$K2, {
-    'aria-label': _$$t('sites.panel.edit_cms_accessibility_label_tooltip'),
+    'aria-label': getI18nString('sites.panel.edit_cms_accessibility_label_tooltip'),
     'onClick': e,
     'recordingKey': Pt(t, 'edit_accessible_label_button'),
     'htmlAttributes': {
-      'data-tooltip': _$$t('sites.panel.edit_cms_accessibility_label_tooltip'),
+      'data-tooltip': getI18nString('sites.panel.edit_cms_accessibility_label_tooltip'),
       'data-tooltip-type': Ib.TEXT
     },
     'children': jsx(vR, {})
@@ -24168,11 +24168,11 @@ function ju({
 function jp(e) {
   switch (e) {
     case BJw.ARIA:
-      return getFeatureFlags().sts_a11y_aria_attributes ? 'aria-label' : _$$t('sites.panel.accessibility_aria_label_label');
+      return getFeatureFlags().sts_a11y_aria_attributes ? 'aria-label' : getI18nString('sites.panel.accessibility_aria_label_label');
     case BJw.ALT_TEXT:
-      return _$$t('sites.panel.accessibility_alt_text_label');
+      return getI18nString('sites.panel.accessibility_alt_text_label');
     case BJw.TITLE:
-      return getFeatureFlags().sts_a11y_aria_attributes ? 'title' : _$$t('sites.panel.accessibility_title_label');
+      return getFeatureFlags().sts_a11y_aria_attributes ? 'title' : getI18nString('sites.panel.accessibility_title_label');
     default:
       return '';
   }
@@ -24207,7 +24207,7 @@ function jx({
         'aria-hidden': 'true',
         'className': v5,
         'data-non-interactive': !0,
-        'children': _$$tx('sites.panel.accessibility_tag_label')
+        'children': renderI18nText('sites.panel.accessibility_tag_label')
       }), jsx('div', {
         className: v2,
         children: jsx(v9, {
@@ -24239,9 +24239,9 @@ function jm({
       className: v1,
       children: [jsxs('div', {
         className: v5,
-        children: [_$$t('sites.panel.accessibility.decorative'), jsx(_$$b7, {
+        children: [getI18nString('sites.panel.accessibility.decorative'), jsx(_$$b7, {
           'data-tooltip-type': Ib.TEXT,
-          'data-tooltip': _$$t('sites.panel.accessibility.decorative_tooltip'),
+          'data-tooltip': getI18nString('sites.panel.accessibility.decorative_tooltip'),
           'data-tooltip-show-above': !0,
           'data-tooltip-show-immediately': !0
         })]
@@ -24250,7 +24250,7 @@ function jm({
         children: jsx(_$$d5, {
           onChange: e => i(e),
           label: jsx(_$$h6, {
-            children: _$$t('sites.panel.accessibility.decorative')
+            children: getI18nString('sites.panel.accessibility.decorative')
           }),
           checked: !!t,
           recordingKey: Pt(e, 'isDecorativeImageToggle')
@@ -24421,32 +24421,32 @@ function jv({
   if (c) {
     return x ? jsx(IK, {
       'onClick': m,
-      'aria-label': _$$t('design_systems.playground.open_component_in_library'),
+      'aria-label': getI18nString('design_systems.playground.open_component_in_library'),
       'htmlAttributes': {
-        'data-tooltip': _$$t('design_systems.playground.open_component_in_library'),
+        'data-tooltip': getI18nString('design_systems.playground.open_component_in_library'),
         'data-tooltip-type': Ib.TEXT
       },
       'variant': 'secondary',
-      'children': _$$t('design_systems.playground.open_component_in_library')
+      'children': getI18nString('design_systems.playground.open_component_in_library')
     }) : null;
   }
   let h = getFeatureFlags().sts_code_authoring || getFeatureFlags().sts_code_authoring_by_plan;
   return jsx(IK, {
     'onClick': o,
-    'aria-label': n ? _$$t('fullscreen_actions.edit-main-component') : _$$t('fullscreen_actions.edit-code'),
+    'aria-label': n ? getI18nString('fullscreen_actions.edit-main-component') : getI18nString('fullscreen_actions.edit-code'),
     'recordingKey': 'openCodeWindow',
     'variant': 'secondary',
     'disabled': !h,
     ...(!h && {
       'data-tooltip-type': Ib.TEXT,
-      'data-tooltip': _$$t('sites.coming_soon_tooltip.make.title'),
-      'data-tooltip-subtext': _$$t('sites.coming_soon_tooltip.make.description')
+      'data-tooltip': getI18nString('sites.coming_soon_tooltip.make.title'),
+      'data-tooltip-subtext': getI18nString('sites.coming_soon_tooltip.make.description')
     }),
-    'children': n ? _$$t('fullscreen_actions.edit-main-component') : _$$t('fullscreen_actions.edit-code')
+    'children': n ? getI18nString('fullscreen_actions.edit-main-component') : getI18nString('fullscreen_actions.edit-code')
   });
 }
 let jj = memo(e => {
-  let t = _$$md(Xq);
+  let t = useAtomWithSubscription(Xq);
   let i = t.length > 0 && t[0] ? getSingletonSceneGraph().get(t[0]) : null;
   let n = i?.backingCodeComponent;
   let a = i?.backingCodeComponent?.exportedFromCodeFile?.guid;
@@ -24461,10 +24461,10 @@ let jj = memo(e => {
         className: 'x78zum5 xdt5ytf x1gskr33 xctkrei x47lyk1',
         children: [jsx('div', {
           className: 'x1qxcl5b x1ihwiht',
-          children: _$$tx('sites.panel.code_instance_panel.missing_code.title')
+          children: renderI18nText('sites.panel.code_instance_panel.missing_code.title')
         }), jsx('div', {
           className: 'x1n0bwc9 x1qxcl5b xdmjnt8',
-          children: _$$tx('sites.panel.code_instance_panel.missing_code.description')
+          children: renderI18nText('sites.panel.code_instance_panel.missing_code.description')
         }), r && jsx('div', {
           children: jsx($n, {
             variant: 'secondary',
@@ -24474,7 +24474,7 @@ let jj = memo(e => {
                 i?.restoreCodeInstanceWithSoftDeletedBackingNodes();
               });
             },
-            children: _$$tx('sites.panel.code_instance_panel.missing_code.restore_button')
+            children: renderI18nText('sites.panel.code_instance_panel.missing_code.restore_button')
           })
         })]
       })]
@@ -24550,17 +24550,17 @@ function jT(e) {
 function jL(e) {
   switch (e) {
     case _$$Of.SHOW_UI:
-      return _$$t('sites.panel.html_widget.youtube.show_ui');
+      return getI18nString('sites.panel.html_widget.youtube.show_ui');
     case _$$Of.AUTOPLAY:
-      return _$$t('sites.panel.html_widget.youtube.autoplay');
+      return getI18nString('sites.panel.html_widget.youtube.autoplay');
     case _$$Of.ALLOW_FULLSCREEN:
-      return _$$t('sites.panel.html_widget.youtube.allow_fullscreen');
+      return getI18nString('sites.panel.html_widget.youtube.allow_fullscreen');
     case _$$Of.MAPS_ZOOM_LEVEL:
-      return _$$t('sites.panel.html_widget.google_map.zoom');
+      return getI18nString('sites.panel.html_widget.google_map.zoom');
     case _$$Of.MAPS_LOCATION:
-      return _$$t('sites.panel.html_widget.google_map.location');
+      return getI18nString('sites.panel.html_widget.google_map.location');
     case _$$Of.ALLOW_COOKIES:
-      return _$$t('sites.panel.html_widget.youtube.allow_cookies');
+      return getI18nString('sites.panel.html_widget.youtube.allow_cookies');
   }
 }
 let jP = [ON, _$$om, _$$m8];
@@ -24598,7 +24598,7 @@ function jF({
     value: i,
     onChange: e => t(e.currentTarget.value),
     placeholder: function (e) {
-      if (e === _$$Of.MAPS_LOCATION) return _$$t('sites.panel.html_widget.google_map.location_hint');
+      if (e === _$$Of.MAPS_LOCATION) return getI18nString('sites.panel.html_widget.google_map.location_hint');
     }(e.parameterName),
     recordingKey: n
   });
@@ -24620,7 +24620,7 @@ function jM({
       className: 'x3nfvp2 xg2d0mh',
       children: [jL(e.parameterName), e.parameterName === 'allowcookies' ? jsx(_$$B3, {
         'data-tooltip-type': Ib.TEXT,
-        'data-tooltip': _$$t('sites.panel.html_widget.youtube.allow_cookies_info')
+        'data-tooltip': getI18nString('sites.panel.html_widget.youtube.allow_cookies_info')
       }) : null]
     }),
     recordingKey: n
@@ -24871,7 +24871,7 @@ function jW(e) {
       if (t.body.children.length === 0 && t.head.children.length === 0) {
         return {
           isValid: !1,
-          errorMessage: _$$t('sites.panel.generic_embed.invalid_html_input_error')
+          errorMessage: getI18nString('sites.panel.generic_embed.invalid_html_input_error')
         };
       }
     } else {
@@ -24879,7 +24879,7 @@ function jW(e) {
       if (!e.startsWith('<iframe') || !i) {
         return {
           isValid: !1,
-          errorMessage: _$$t('sites.panel.generic_embed.only_iframes')
+          errorMessage: getI18nString('sites.panel.generic_embed.only_iframes')
         };
       }
     }
@@ -24890,7 +24890,7 @@ function jW(e) {
     let t = e.length > 0 ? KJ(e)?.url : '';
     return _$$gl(e) || void 0 === t ? {
       isValid: !1,
-      errorMessage: _$$t('sites.panel.generic_embed.invalid_url_input_error')
+      errorMessage: getI18nString('sites.panel.generic_embed.invalid_url_input_error')
     } : {
       isValid: !0
     };
@@ -24900,7 +24900,7 @@ function jW(e) {
     className: 'x1gskr33',
     children: jsx(jK, {
       submitOnEnter: !0,
-      placeholder: getFeatureFlags().sites_generic_html_embeds ? _$$t('sites.panel.html_widget.generic.html_input_placeholder') : _$$t('sites.panel.html_widget.generic.html_placeholder'),
+      placeholder: getFeatureFlags().sites_generic_html_embeds ? getI18nString('sites.panel.html_widget.generic.html_input_placeholder') : getI18nString('sites.panel.html_widget.generic.html_placeholder'),
       value: p,
       onChange: e => x(e.currentTarget.value),
       submit: h,
@@ -24912,7 +24912,7 @@ function jW(e) {
     className: 'x1gskr33',
     children: jsx(jK, {
       submitOnEnter: !0,
-      placeholder: _$$t('sites.panel.html_widget.generic.url_placeholder'),
+      placeholder: getI18nString('sites.panel.html_widget.generic.url_placeholder'),
       value: d,
       onChange: e => c(e.currentTarget.value),
       submit: m,
@@ -24930,10 +24930,10 @@ function jW(e) {
         onChange: i,
         options: [{
           value: _$$w6.URL,
-          label: _$$t('sites.panel.html_widget.generic.url_label')
+          label: getI18nString('sites.panel.html_widget.generic.url_label')
         }, {
           value: _$$w6.HTML,
-          label: _$$t('sites.panel.html_widget.generic.html_label')
+          label: getI18nString('sites.panel.html_widget.generic.html_label')
         }],
         recordingKey: Pt(e.recordingKey, 'genericEmbedTypeControl')
       })
@@ -24955,9 +24955,9 @@ function jW(e) {
         titleTx: function (e) {
           switch (e) {
             case _$$ol2.YOUTUBE:
-              return _$$tx('sites.panel.html_widget.youtube_settings.title');
+              return renderI18nText('sites.panel.html_widget.youtube_settings.title');
             case _$$ol2.GOOGLE_MAPS:
-              return _$$tx('sites.panel.html_widget.location_settings.title');
+              return renderI18nText('sites.panel.html_widget.location_settings.title');
             default:
               return null;
           }
@@ -25029,18 +25029,18 @@ function jY() {
     children: [jsx(_$$fI, {
       children: jsx('span', {
         className: _$$s4.gridColumnStart2.gridColumnEnd19.$,
-        children: _$$tx('sites.panel.html_widget.google_map.location')
+        children: renderI18nText('sites.panel.html_widget.google_map.location')
       })
     }), jsx(_$$fI, {
       children: jsx(jT, {
         value: e,
         onSet: t,
-        placeholder: _$$t('sites.panel.html_widget.google_map.location')
+        placeholder: getI18nString('sites.panel.html_widget.google_map.location')
       })
     }), jsx(_$$fI, {
       children: jsx('span', {
         className: _$$s4.gridColumnStart2.gridColumnEnd19.$,
-        children: _$$tx('sites.panel.html_widget.google_map.zoom')
+        children: renderI18nText('sites.panel.html_widget.google_map.zoom')
       })
     }), jsx(_$$fI, {
       children: jsx(jT, {
@@ -25052,7 +25052,7 @@ function jY() {
           return i;
         },
         onSet: n,
-        placeholder: _$$t('sites.panel.html_widget.google_map.zoom')
+        placeholder: getI18nString('sites.panel.html_widget.google_map.zoom')
       })
     })]
   });
@@ -25066,7 +25066,7 @@ function jQ() {
     children: [jsx(_$$fI, {
       children: jsx('span', {
         className: _$$s4.gridColumnStart2.gridColumnEnd19.$,
-        children: _$$tx('sites.panel.html_widget.mailchimp.form_url')
+        children: renderI18nText('sites.panel.html_widget.mailchimp.form_url')
       })
     }), jsx(_$$fI, {
       children: jsx(jT, {
@@ -25077,32 +25077,32 @@ function jQ() {
           t.innerHTML = jZ().sanitize(e);
           return t.textContent || '';
         }(e)),
-        placeholder: _$$t('sites.panel.html_widget.mailchimp.form_url')
+        placeholder: getI18nString('sites.panel.html_widget.mailchimp.form_url')
       })
     }), jsx('div', {
       className: _$$s4.gridColumnStart2.gridColumnEnd19.font11.colorTextSecondary.pt8.pb8.pl18.pr36.$,
-      children: _$$tx('sites.panel.html_widget.mailchimp.form_url_tip')
+      children: renderI18nText('sites.panel.html_widget.mailchimp.form_url_tip')
     }), jsx(_$$fI, {
       children: jsx('span', {
         className: _$$s4.gridColumnStart2.gridColumnEnd19.$,
-        children: _$$tx('sites.panel.html_widget.mailchimp.input_placeholder')
+        children: renderI18nText('sites.panel.html_widget.mailchimp.input_placeholder')
       })
     }), jsx(_$$fI, {
       children: jsx(jT, {
         value: i,
         onSet: n,
-        placeholder: _$$t('sites.panel.html_widget.mailchimp.input_placeholder')
+        placeholder: getI18nString('sites.panel.html_widget.mailchimp.input_placeholder')
       })
     }), jsx(_$$fI, {
       children: jsx('span', {
         className: _$$s4.gridColumnStart2.gridColumnEnd19.$,
-        children: _$$tx('sites.panel.html_widget.mailchimp.submit_button_label')
+        children: renderI18nText('sites.panel.html_widget.mailchimp.submit_button_label')
       })
     }), jsx(_$$fI, {
       children: jsx(jT, {
         value: a,
         onSet: s,
-        placeholder: _$$t('sites.panel.html_widget.mailchimp.submit_button_label')
+        placeholder: getI18nString('sites.panel.html_widget.mailchimp.submit_button_label')
       })
     })]
   });
@@ -25140,7 +25140,7 @@ function j1() {
     children: [jsx(_$$fI, {
       children: jsx('span', {
         className: _$$s4.gridColumnStart2.gridColumnEnd19.$,
-        children: _$$tx('sites.panel.html_widget.youtube.video_link')
+        children: renderI18nText('sites.panel.html_widget.youtube.video_link')
       })
     }), jsx(_$$fI, {
       children: jsx(jT, {
@@ -25158,32 +25158,32 @@ function j3() {
   let t = useId();
   return getFeatureFlags().sites ? jsxs(_$$Zk, {
     children: [jsx(_$$r8, {
-      titleTx: _$$tx('sites.panel.responsiveness')
+      titleTx: renderI18nText('sites.panel.responsiveness')
     }), jsx(DE, {
       labelId: t,
-      label: _$$tx('sites.panel.responsiveness.scaling_mode'),
+      label: renderI18nText('sites.panel.responsiveness.scaling_mode'),
       input: jsx(j8, {
         ariaLabelledBy: t
       }),
       icon: null
     }), e === 'SCALE' && jsxs(Fragment, {
       children: [jsx(j6, {
-        label: _$$tx('sites.panel.responsiveness.scaling_max_layout_width'),
+        label: renderI18nText('sites.panel.responsiveness.scaling_max_layout_width'),
         input: jsx(j9, {
           property: 'responsiveSetScalingMaxLayoutWidth'
         })
       }), jsx(j6, {
-        label: _$$tx('sites.panel.responsiveness.scaling_min_layout_width'),
+        label: renderI18nText('sites.panel.responsiveness.scaling_min_layout_width'),
         input: jsx(j9, {
           property: 'responsiveSetScalingMinLayoutWidth'
         })
       }), jsx(j6, {
-        label: _$$tx('sites.panel.responsiveness.scaling_max_font_size'),
+        label: renderI18nText('sites.panel.responsiveness.scaling_max_font_size'),
         input: jsx(j7, {
           property: 'responsiveSetScalingMaxFontSize'
         })
       }), jsx(j6, {
-        label: _$$tx('sites.panel.responsiveness.scaling_min_font_size'),
+        label: renderI18nText('sites.panel.responsiveness.scaling_min_font_size'),
         input: jsx(j7, {
           property: 'responsiveSetScalingMinFontSize'
         })
@@ -25281,9 +25281,9 @@ let ke = {
   format: e => {
     switch (e) {
       case 'REFLOW':
-        return _$$t('sites.panel.responsiveness.scaling_mode.reflow');
+        return getI18nString('sites.panel.responsiveness.scaling_mode.reflow');
       case 'SCALE':
-        return _$$t('sites.panel.responsiveness.scaling_mode.scale');
+        return getI18nString('sites.panel.responsiveness.scaling_mode.scale');
       default:
         throwTypeError(e);
     }
@@ -25358,12 +25358,12 @@ function kc(e) {
     children: jsxs(_$$Zk, {
       ...c,
       children: [jsx(_$$Wv, {
-        titleTx: _$$tx('sites.panel.position_panel.position'),
+        titleTx: renderI18nText('sites.panel.position_panel.position'),
         faded: !1,
         children: jsx('div', {
           className: 'sites_position_panel--positionSelect--jJf4p',
           children: jsxs(ko, {
-            ariaLabel: _$$t('sites.panel.position_panel.position'),
+            ariaLabel: getI18nString('sites.panel.position_panel.position'),
             borderless: !0,
             dispatch: t,
             dropdownAlignment: 'right',
@@ -25435,7 +25435,7 @@ function ku({
   publishedPlugins: b
 }) {
   let y = useDispatch();
-  let v = _$$md(_$$b12);
+  let v = useAtomWithSubscription(_$$b12);
   let j = q5();
   let k = _$$hD();
   let w = zp();
@@ -25662,7 +25662,7 @@ function ku({
       children: () => jsx(_$$Q11, {
         allSavedPlugins: f.plugins,
         dispatch: y,
-        editorType: j?.editorType ? _$$wN(j.editorType) : null,
+        editorType: j?.editorType ? mapFileTypeToEditorType(j.editorType) : null,
         localPlugins: _,
         numSelected: numSelected ?? 0,
         openFileKey: j?.key || null,
@@ -25835,7 +25835,7 @@ function k2({
       'className': 'styles-module--buttonScrollTransformPanel--R2ONQ styles-module--secondary--Ayip9',
       'onClick': n,
       'recordingKey': a ?? void 0,
-      'aria-label': _$$t('sites.panel.interactions_panel.details_tooltip'),
+      'aria-label': getI18nString('sites.panel.interactions_panel.details_tooltip'),
       'htmlAttributes': {
         'data-tooltip': tooltipText ?? void 0,
         'data-tooltip-type': Ib.TEXT,
@@ -25946,9 +25946,9 @@ function k7({
     'className': 'styles-module--chevronButton--h6gDU',
     'onClick': e,
     'recordingKey': t,
-    'aria-label': _$$t('sites.panel.interactions_panel.details_tooltip'),
+    'aria-label': getI18nString('sites.panel.interactions_panel.details_tooltip'),
     'htmlAttributes': {
-      'data-tooltip': _$$t('sites.panel.interactions_panel.details_tooltip'),
+      'data-tooltip': getI18nString('sites.panel.interactions_panel.details_tooltip'),
       'data-tooltip-type': Ib.TEXT,
       'data-tooltip-show-above': !0,
       'data-tooltip-show-below': !1
@@ -25965,9 +25965,9 @@ function wl({
   let a = useDispatch();
   return jsx(Fragment, {
     children: _$$hS2(e) && e != null && t != null && jsx(k5, {
-      label: _$$tx('sites.panel.interactions_panel.transition_delay'),
+      label: renderI18nText('sites.panel.interactions_panel.transition_delay'),
       input: jsx(W4, {
-        'data-tooltip': _$$t('sites.panel.interactions_panel.transition_delay'),
+        'data-tooltip': getI18nString('sites.panel.interactions_panel.transition_delay'),
         'data-tooltip-type': Ib.TEXT,
         'dispatch': a,
         'min': 0,
@@ -25998,7 +25998,7 @@ function wa({
   };
   return jsx(Fragment, {
     children: _$$hS2(c) && _$$hS2(t) && (!p || c === 'CUSTOM_SPRING') && jsx(k5, {
-      label: _$$tx('sites.panel.interactions_panel.transition_duration'),
+      label: renderI18nText('sites.panel.interactions_panel.transition_duration'),
       input: p ? jsx(_$$y11.Consumer, {
         children: ([e]) => jsx(W4, {
           'dispatch': d,
@@ -26007,7 +26007,7 @@ function wa({
           'wheelMultiplier': o / 10,
           'scrubMultiplier': ws,
           'data-tooltip-type': Ib.TEXT,
-          'data-tooltip': _$$t('proto.animation_panel.easing_duration_tooltip'),
+          'data-tooltip': getI18nString('proto.animation_panel.easing_duration_tooltip'),
           'tooltipForScreenReadersOnly': !0,
           'recordingKey': Pt(a, 'springDurationInput')
         })
@@ -26018,7 +26018,7 @@ function wa({
         'wheelMultiplier': o / 10,
         'scrubMultiplier': ws,
         'data-tooltip-type': Ib.TEXT,
-        'data-tooltip': _$$t('proto.animation_panel.easing_duration_tooltip'),
+        'data-tooltip': getI18nString('proto.animation_panel.easing_duration_tooltip'),
         'tooltipForScreenReadersOnly': !0,
         'recordingKey': Pt(a, 'durationInput')
       })
@@ -26133,7 +26133,7 @@ function wu({
     children: jsxs(_$$O10, {
       easingFunction: _$$hS2(a) ? a : null,
       children: [jsx(k5, {
-        label: _$$tx('sites.panel.interactions_panel.transition'),
+        label: renderI18nText('sites.panel.interactions_panel.transition'),
         input: _
       }), h, m, f && jsx(_$$R1, {
         easingType: g,
@@ -26230,17 +26230,17 @@ function w_({
     value: n,
     onChange: s,
     legend: jsx(_$$q2, {
-      children: _$$t('sites.panel.interactions_panel.replay_label')
+      children: getI18nString('sites.panel.interactions_panel.replay_label')
     }),
     recordingKey: i,
     children: [jsx(_$$c$2, {
       'icon': jsx(_$$O1, {}),
       'value': 'OFF',
-      'aria-label': _$$t('sites.panel.interactions_panel.replay_off_label')
+      'aria-label': getI18nString('sites.panel.interactions_panel.replay_off_label')
     }), jsx(_$$c$2, {
       'icon': jsx(_$$r9, {}),
       'value': 'ON',
-      'aria-label': _$$t('sites.panel.interactions_panel.replay_on_label')
+      'aria-label': getI18nString('sites.panel.interactions_panel.replay_on_label')
     })]
   });
 }
@@ -26262,7 +26262,7 @@ function wy({
   let g = e => e.stopPropagation();
   return jsxs(k8, {
     children: [jsx(k5, {
-      label: _$$tx('sites.panel.interactions_panel.opacity'),
+      label: renderI18nText('sites.panel.interactions_panel.opacity'),
       input: jsx(_$$Pd, {
         inputClassName: kV,
         value: i,
@@ -26276,10 +26276,10 @@ function wy({
         })
       })
     }), jsx(k5, {
-      label: _$$tx('sites.panel.interactions_panel.scale'),
+      label: renderI18nText('sites.panel.interactions_panel.scale'),
       input: jsx(_$$j0, {
         'bigNudgeAmount': 0.1,
-        'data-tooltip': _$$t('sites.panel.interactions_panel.scale'),
+        'data-tooltip': getI18nString('sites.panel.interactions_panel.scale'),
         'data-tooltip-type': Ib.TEXT,
         'dispatch': m,
         'formatter': wv,
@@ -26297,7 +26297,7 @@ function wy({
         })
       })
     }), jsx(k3, {
-      label: _$$tx('sites.panel.interactions_panel.offset'),
+      label: renderI18nText('sites.panel.interactions_panel.offset'),
       leftInput: jsx(_$$gq, {
         'inputClassName': kV,
         'value': a,
@@ -26305,12 +26305,12 @@ function wy({
         'dispatch': m,
         'onMouseDown': g,
         'data-tooltip-type': Ib.TEXT,
-        'data-tooltip': _$$t('sites.panel.interactions_panel.offset_x'),
+        'data-tooltip': getI18nString('sites.panel.interactions_panel.offset_x'),
         'recordingKey': Pt(x, 'offsetX'),
         ...h,
         'children': jsx('span', {
           className: kY,
-          children: _$$tx('fullscreen.properties_panel.transform_panel.x')
+          children: renderI18nText('fullscreen.properties_panel.transform_panel.x')
         })
       }),
       rightInput: jsx(_$$gq, {
@@ -26320,16 +26320,16 @@ function wy({
         'dispatch': m,
         'onMouseDown': g,
         'data-tooltip-type': Ib.TEXT,
-        'data-tooltip': _$$t('sites.panel.interactions_panel.offset_y'),
+        'data-tooltip': getI18nString('sites.panel.interactions_panel.offset_y'),
         'recordingKey': Pt(x, 'offsetY'),
         ...h,
         'children': jsx('span', {
           className: kY,
-          children: _$$tx('fullscreen.properties_panel.transform_panel.y')
+          children: renderI18nText('fullscreen.properties_panel.transform_panel.y')
         })
       })
     }), jsx(k5, {
-      label: _$$tx('fullscreen.properties_panel.transform_panel.rotation'),
+      label: renderI18nText('fullscreen.properties_panel.transform_panel.rotation'),
       input: jsx(Zp, {
         'inputClassName': kV,
         'value': c,
@@ -26337,7 +26337,7 @@ function wy({
         'dispatch': m,
         'onMouseDown': g,
         'data-tooltip-type': Ib.TEXT,
-        'data-tooltip': _$$t('fullscreen.properties_panel.transform_panel.rotation'),
+        'data-tooltip': getI18nString('fullscreen.properties_panel.transform_panel.rotation'),
         'recordingKey': Pt(x, 'rotation'),
         ...h,
         'children': jsx(_$$a18, {
@@ -26392,7 +26392,7 @@ function wj({
     },
     recordingKey: Pt(c, 'easingType')
   });
-  let y = _$$tx('sites.panel.interactions_panel.transition');
+  let y = renderI18nText('sites.panel.interactions_panel.transition');
   return jsx(k8, {
     children: jsxs(_$$O10, {
       easingFunction: _$$hS2(a) ? a : null,
@@ -26425,7 +26425,7 @@ function wk({
     children: [jsxs(k8, {
       children: [jsx(k5, {
         labelId: m,
-        label: _$$tx('sites.panel.interactions_panel.trigger'),
+        label: renderI18nText('sites.panel.interactions_panel.trigger'),
         input: jsxs(wC, {
           ariaLabelledBy: m,
           id: 'animation-trigger-select',
@@ -26449,7 +26449,7 @@ function wk({
         })
       }), r === 'OTHER_LAYER_IN_VIEW' && jsx(k5, {
         labelId: h,
-        label: _$$tx('sites.panel.interactions_panel.layer_label'),
+        label: renderI18nText('sites.panel.interactions_panel.layer_label'),
         input: jsx(wm, {
           ariaLabelledBy: h,
           value: d,
@@ -26470,7 +26470,7 @@ function wk({
       })
     }), _$$hS2(r) && r !== 'PAGE_LOAD' ? jsx(k8, {
       children: jsx(k5, {
-        label: _$$tx('sites.panel.interactions_panel.replay_label'),
+        label: renderI18nText('sites.panel.interactions_panel.replay_label'),
         input: jsx(w_, {
           value: p,
           onChange: x,
@@ -26491,10 +26491,10 @@ function ww({
   let c = null;
   switch (e) {
     case 'enter':
-      c = _$$tx('sites.panel.interactions_panel.enter_preset');
+      c = renderI18nText('sites.panel.interactions_panel.enter_preset');
       break;
     case 'exit':
-      c = _$$tx('sites.panel.interactions_panel.exit_preset');
+      c = renderI18nText('sites.panel.interactions_panel.exit_preset');
   }
   let p = useCallback(() => {
     t(c, jsx(wS, {
@@ -26570,7 +26570,7 @@ function wS({
   k6(o, wF(e));
   let S = n ? wu : wj;
   let C = useCallback(() => {
-    n || n || i(_$$tx('sites.panel.interactions_panel.transition'), jsx(wS, {
+    n || n || i(renderI18nText('sites.panel.interactions_panel.transition'), jsx(wS, {
       stateName: e,
       recordingKey: t,
       pushDetailsComponent: _$$lQ,
@@ -26799,23 +26799,23 @@ let wJ = {
   format(e) {
     switch (e) {
       case 'FADE_IN':
-        return _$$t('sites.panel.interactions_panel.fade_in');
+        return getI18nString('sites.panel.interactions_panel.fade_in');
       case 'SCALE_IN':
-        return _$$t('sites.panel.interactions_panel.scale_in');
+        return getI18nString('sites.panel.interactions_panel.scale_in');
       case 'SCALE_IN_BOTTOM':
-        return _$$t('sites.panel.interactions_panel.scale_in_bottom');
+        return getI18nString('sites.panel.interactions_panel.scale_in_bottom');
       case 'SLIDE_IN_TOP':
-        return _$$t('sites.panel.interactions_panel.slide_in_top');
+        return getI18nString('sites.panel.interactions_panel.slide_in_top');
       case 'SLIDE_IN_BOTTOM':
-        return _$$t('sites.panel.interactions_panel.slide_in_bottom');
+        return getI18nString('sites.panel.interactions_panel.slide_in_bottom');
       case 'SLIDE_IN_LEFT':
-        return _$$t('sites.panel.interactions_panel.slide_in_left');
+        return getI18nString('sites.panel.interactions_panel.slide_in_left');
       case 'SLIDE_IN_RIGHT':
-        return _$$t('sites.panel.interactions_panel.slide_in_right');
+        return getI18nString('sites.panel.interactions_panel.slide_in_right');
       case 'NONE':
-        return _$$t('sites.panel.interactions_panel.none');
+        return getI18nString('sites.panel.interactions_panel.none');
       case 'CUSTOM':
-        return _$$t('sites.panel.interactions_panel.custom');
+        return getI18nString('sites.panel.interactions_panel.custom');
     }
   }
 };
@@ -26823,23 +26823,23 @@ let wZ = {
   format(e) {
     switch (e) {
       case 'FADE_IN':
-        return _$$t('sites.panel.interactions_panel.fade_out');
+        return getI18nString('sites.panel.interactions_panel.fade_out');
       case 'SCALE_IN':
-        return _$$t('sites.panel.interactions_panel.scale_out');
+        return getI18nString('sites.panel.interactions_panel.scale_out');
       case 'SCALE_IN_BOTTOM':
-        return _$$t('sites.panel.interactions_panel.scale_out_bottom');
+        return getI18nString('sites.panel.interactions_panel.scale_out_bottom');
       case 'SLIDE_IN_TOP':
-        return _$$t('sites.panel.interactions_panel.slide_out_top');
+        return getI18nString('sites.panel.interactions_panel.slide_out_top');
       case 'SLIDE_IN_BOTTOM':
-        return _$$t('sites.panel.interactions_panel.slide_out_bottom');
+        return getI18nString('sites.panel.interactions_panel.slide_out_bottom');
       case 'SLIDE_IN_LEFT':
-        return _$$t('sites.panel.interactions_panel.slide_out_left');
+        return getI18nString('sites.panel.interactions_panel.slide_out_left');
       case 'SLIDE_IN_RIGHT':
-        return _$$t('sites.panel.interactions_panel.slide_out_right');
+        return getI18nString('sites.panel.interactions_panel.slide_out_right');
       case 'NONE':
-        return _$$t('sites.panel.interactions_panel.none');
+        return getI18nString('sites.panel.interactions_panel.none');
       case 'CUSTOM':
-        return _$$t('sites.panel.interactions_panel.custom');
+        return getI18nString('sites.panel.interactions_panel.custom');
     }
   }
 };
@@ -27061,116 +27061,116 @@ function Sr({
 }) {
   switch (e) {
     case Xc.Appear:
-      return _$$tx('sites.panel.interactions_panel.appear_behavior');
+      return renderI18nText('sites.panel.interactions_panel.appear_behavior');
     case Xc.Hover:
-      return _$$tx('sites.panel.interactions_panel.hover_behavior');
+      return renderI18nText('sites.panel.interactions_panel.hover_behavior');
     case Xc.Focus:
-      return _$$tx('sites.panel.interactions_panel.focus_behavior');
+      return renderI18nText('sites.panel.interactions_panel.focus_behavior');
     case Xc.Press:
-      return _$$tx('sites.panel.interactions_panel.press_behavior');
+      return renderI18nText('sites.panel.interactions_panel.press_behavior');
     case Xc.ScrollParallax:
-      return _$$tx('sites.panel.interactions_panel.scroll_parallax_behavior');
+      return renderI18nText('sites.panel.interactions_panel.scroll_parallax_behavior');
     case Xc.ScrollTransform:
-      return _$$tx('sites.panel.interactions_panel.scroll_transform_behavior');
+      return renderI18nText('sites.panel.interactions_panel.scroll_transform_behavior');
     case Xc.Cursor:
-      return _$$tx('sites.panel.interactions_panel.cursor_behavior');
+      return renderI18nText('sites.panel.interactions_panel.cursor_behavior');
     case Xc.Marquee:
-      return _$$tx('sites.panel.interactions_panel.marquee_behavior');
+      return renderI18nText('sites.panel.interactions_panel.marquee_behavior');
     case Xc.Code:
       return t ? jsx(Fragment, {
         children: t
-      }) : _$$tx('sites.panel.interactions_panel.code_behavior');
+      }) : renderI18nText('sites.panel.interactions_panel.code_behavior');
     default:
-      if (_$$gl(e)) return _$$tx('fullscreen.properties_panel.presets');
+      if (_$$gl(e)) return renderI18nText('fullscreen.properties_panel.presets');
       return throwTypeError(e);
   }
 }
 let Sm = !1;
 function Sh(e, t) {
   void 0 === n && (n = {
-    'sites.code_behaviors.mouse_parallax.name': _$$t('sites.code_behaviors.mouse_parallax.name'),
-    'sites.code_behaviors.mouse_parallax.offset': _$$t('sites.code_behaviors.mouse_parallax.offset'),
-    'sites.code_behaviors.mouse_parallax.smoothing': _$$t('sites.code_behaviors.mouse_parallax.smoothing'),
-    'sites.code_behaviors.mouse_parallax.inverse': _$$t('sites.code_behaviors.mouse_parallax.inverse'),
-    'sites.code_behaviors.typewriter.text_cursor': _$$t('sites.code_behaviors.typewriter.text_cursor'),
-    'sites.code_behaviors.typewriter.name': _$$t('sites.code_behaviors.typewriter.name'),
-    'sites.code_behaviors.typewriter.speed': _$$t('sites.code_behaviors.typewriter.speed'),
-    'sites.code_behaviors.typewriter.speed.quick': _$$t('sites.code_behaviors.typewriter.speed.quick'),
-    'sites.code_behaviors.typewriter.speed.moderate': _$$t('sites.code_behaviors.typewriter.speed.moderate'),
-    'sites.code_behaviors.typewriter.speed.slow': _$$t('sites.code_behaviors.typewriter.speed.slow'),
-    'sites.code_behaviors.typewriter.loop': _$$t('sites.code_behaviors.typewriter.loop'),
-    'sites.code_behaviors.draggable.name': _$$t('sites.code_behaviors.draggable.name'),
-    'sites.code_behaviors.draggable.bounds': _$$t('sites.code_behaviors.draggable.bounds'),
-    'sites.code_behaviors.draggable.bounds.anywhere': _$$t('sites.code_behaviors.draggable.bounds.anywhere'),
-    'sites.code_behaviors.draggable.bounds.parent': _$$t('sites.code_behaviors.draggable.bounds.parent'),
-    'sites.code_behaviors.draggable.cursor': _$$t('sites.code_behaviors.draggable.cursor'),
-    'sites.code_behaviors.draggable.cursor.auto': _$$t('sites.code_behaviors.draggable.cursor.auto'),
-    'sites.code_behaviors.draggable.cursor.move': _$$t('sites.code_behaviors.draggable.cursor.move'),
-    'sites.code_behaviors.draggable.cursor.grab': _$$t('sites.code_behaviors.draggable.cursor.grab'),
-    'sites.code_behaviors.draggable.momentum': _$$t('sites.code_behaviors.draggable.momentum'),
-    'sites.code_behaviors.lightbox.name': _$$t('sites.code_behaviors.lightbox.name'),
-    'sites.code_behaviors.lightbox.background': _$$t('sites.code_behaviors.lightbox.background'),
-    'sites.code_behaviors.lightbox.background.none': _$$t('sites.code_behaviors.lightbox.background.none'),
-    'sites.code_behaviors.lightbox.background.dark': _$$t('sites.code_behaviors.lightbox.background.dark'),
-    'sites.code_behaviors.lightbox.background.light': _$$t('sites.code_behaviors.lightbox.background.light'),
-    'sites.code_behaviors.lightbox.background.blur': _$$t('sites.code_behaviors.lightbox.background.blur'),
-    'sites.code_behaviors.lightbox.close': _$$t('sites.code_behaviors.lightbox.close'),
-    'sites.code_behaviors.lightbox.close.any_click': _$$t('sites.code_behaviors.lightbox.close.any_click'),
-    'sites.code_behaviors.lightbox.close.click_outside': _$$t('sites.code_behaviors.lightbox.close.click_outside'),
-    'sites.code_behaviors.lightbox.close_icon': _$$t('sites.code_behaviors.lightbox.close_icon'),
-    'sites.code_behaviors.lightbox.image': _$$t('sites.code_behaviors.lightbox.image'),
-    'sites.code_behaviors.lightbox.transition': _$$t('sites.code_behaviors.lightbox.transition'),
-    'sites.code_behaviors.lightbox.transition.instant': _$$t('sites.code_behaviors.lightbox.transition.instant'),
-    'sites.code_behaviors.lightbox.transition.dissolve': _$$t('sites.code_behaviors.lightbox.transition.dissolve'),
-    'sites.code_behaviors.lightbox.transition.move_in': _$$t('sites.code_behaviors.lightbox.transition.move_in'),
-    'sites.code_behaviors.text_cycle.name': _$$t('sites.code_behaviors.text_cycle.name'),
-    'sites.code_behaviors.text_cycle.trigger': _$$t('sites.code_behaviors.text_cycle.trigger'),
-    'sites.code_behaviors.text_cycle.trigger.on_view': _$$t('sites.code_behaviors.text_cycle.trigger.on_view'),
-    'sites.code_behaviors.text_cycle.trigger.on_click': _$$t('sites.code_behaviors.text_cycle.trigger.on_click'),
-    'sites.code_behaviors.text_cycle.randomize': _$$t('sites.code_behaviors.text_cycle.randomize'),
-    'sites.code_behaviors.text_cycle.text': _$$t('sites.code_behaviors.text_cycle.text'),
-    'sites.code_behaviors.text_scramble.name': _$$t('sites.code_behaviors.text_scramble.name'),
-    'sites.code_behaviors.text_scramble.reveal': _$$t('sites.code_behaviors.text_scramble.reveal'),
-    'sites.code_behaviors.text_scramble.reveal.by_char': _$$t('sites.code_behaviors.text_scramble.reveal.by_char'),
-    'sites.code_behaviors.text_scramble.reveal.by_word': _$$t('sites.code_behaviors.text_scramble.reveal.by_word'),
-    'sites.code_behaviors.text_scramble.speed': _$$t('sites.code_behaviors.text_scramble.speed'),
-    'sites.code_behaviors.text_scramble.speed.quick': _$$t('sites.code_behaviors.text_scramble.speed.quick'),
-    'sites.code_behaviors.text_scramble.speed.moderate': _$$t('sites.code_behaviors.text_scramble.speed.moderate'),
-    'sites.code_behaviors.text_scramble.speed.slow': _$$t('sites.code_behaviors.text_scramble.speed.slow'),
-    'sites.code_behaviors.text_scramble.symbols': _$$t('sites.code_behaviors.text_scramble.symbols'),
-    'sites.code_behaviors.text_scramble.loop': _$$t('sites.code_behaviors.text_scramble.loop'),
-    'sites.code_behaviors.spin.name': _$$t('sites.code_behaviors.spin.name'),
-    'sites.code_behaviors.spin.trigger': _$$t('sites.code_behaviors.spin.trigger'),
-    'sites.code_behaviors.spin.trigger.on_view': _$$t('sites.code_behaviors.spin.trigger.on_view'),
-    'sites.code_behaviors.spin.trigger.on_click': _$$t('sites.code_behaviors.spin.trigger.on_click'),
-    'sites.code_behaviors.spin.trigger.while_hovering': _$$t('sites.code_behaviors.spin.trigger.while_hovering'),
-    'sites.code_behaviors.spin.trigger.while_scrolling': _$$t('sites.code_behaviors.spin.trigger.while_scrolling'),
-    'sites.code_behaviors.spin.direction': _$$t('sites.code_behaviors.spin.direction'),
-    'sites.code_behaviors.spin.direction.clockwise': _$$t('sites.code_behaviors.spin.direction.clockwise'),
-    'sites.code_behaviors.spin.direction.counterclockwise': _$$t('sites.code_behaviors.spin.direction.counterclockwise'),
-    'sites.code_behaviors.spin.speed': _$$t('sites.code_behaviors.spin.speed'),
-    'sites.code_behaviors.spin.speed.very_quick': _$$t('sites.code_behaviors.spin.speed.very_quick'),
-    'sites.code_behaviors.spin.speed.quick': _$$t('sites.code_behaviors.spin.speed.quick'),
-    'sites.code_behaviors.spin.speed.moderate': _$$t('sites.code_behaviors.spin.speed.moderate'),
-    'sites.code_behaviors.spin.speed.slow': _$$t('sites.code_behaviors.spin.speed.slow'),
-    'sites.code_behaviors.spin.speed.very_slow': _$$t('sites.code_behaviors.spin.speed.very_slow')
+    'sites.code_behaviors.mouse_parallax.name': getI18nString('sites.code_behaviors.mouse_parallax.name'),
+    'sites.code_behaviors.mouse_parallax.offset': getI18nString('sites.code_behaviors.mouse_parallax.offset'),
+    'sites.code_behaviors.mouse_parallax.smoothing': getI18nString('sites.code_behaviors.mouse_parallax.smoothing'),
+    'sites.code_behaviors.mouse_parallax.inverse': getI18nString('sites.code_behaviors.mouse_parallax.inverse'),
+    'sites.code_behaviors.typewriter.text_cursor': getI18nString('sites.code_behaviors.typewriter.text_cursor'),
+    'sites.code_behaviors.typewriter.name': getI18nString('sites.code_behaviors.typewriter.name'),
+    'sites.code_behaviors.typewriter.speed': getI18nString('sites.code_behaviors.typewriter.speed'),
+    'sites.code_behaviors.typewriter.speed.quick': getI18nString('sites.code_behaviors.typewriter.speed.quick'),
+    'sites.code_behaviors.typewriter.speed.moderate': getI18nString('sites.code_behaviors.typewriter.speed.moderate'),
+    'sites.code_behaviors.typewriter.speed.slow': getI18nString('sites.code_behaviors.typewriter.speed.slow'),
+    'sites.code_behaviors.typewriter.loop': getI18nString('sites.code_behaviors.typewriter.loop'),
+    'sites.code_behaviors.draggable.name': getI18nString('sites.code_behaviors.draggable.name'),
+    'sites.code_behaviors.draggable.bounds': getI18nString('sites.code_behaviors.draggable.bounds'),
+    'sites.code_behaviors.draggable.bounds.anywhere': getI18nString('sites.code_behaviors.draggable.bounds.anywhere'),
+    'sites.code_behaviors.draggable.bounds.parent': getI18nString('sites.code_behaviors.draggable.bounds.parent'),
+    'sites.code_behaviors.draggable.cursor': getI18nString('sites.code_behaviors.draggable.cursor'),
+    'sites.code_behaviors.draggable.cursor.auto': getI18nString('sites.code_behaviors.draggable.cursor.auto'),
+    'sites.code_behaviors.draggable.cursor.move': getI18nString('sites.code_behaviors.draggable.cursor.move'),
+    'sites.code_behaviors.draggable.cursor.grab': getI18nString('sites.code_behaviors.draggable.cursor.grab'),
+    'sites.code_behaviors.draggable.momentum': getI18nString('sites.code_behaviors.draggable.momentum'),
+    'sites.code_behaviors.lightbox.name': getI18nString('sites.code_behaviors.lightbox.name'),
+    'sites.code_behaviors.lightbox.background': getI18nString('sites.code_behaviors.lightbox.background'),
+    'sites.code_behaviors.lightbox.background.none': getI18nString('sites.code_behaviors.lightbox.background.none'),
+    'sites.code_behaviors.lightbox.background.dark': getI18nString('sites.code_behaviors.lightbox.background.dark'),
+    'sites.code_behaviors.lightbox.background.light': getI18nString('sites.code_behaviors.lightbox.background.light'),
+    'sites.code_behaviors.lightbox.background.blur': getI18nString('sites.code_behaviors.lightbox.background.blur'),
+    'sites.code_behaviors.lightbox.close': getI18nString('sites.code_behaviors.lightbox.close'),
+    'sites.code_behaviors.lightbox.close.any_click': getI18nString('sites.code_behaviors.lightbox.close.any_click'),
+    'sites.code_behaviors.lightbox.close.click_outside': getI18nString('sites.code_behaviors.lightbox.close.click_outside'),
+    'sites.code_behaviors.lightbox.close_icon': getI18nString('sites.code_behaviors.lightbox.close_icon'),
+    'sites.code_behaviors.lightbox.image': getI18nString('sites.code_behaviors.lightbox.image'),
+    'sites.code_behaviors.lightbox.transition': getI18nString('sites.code_behaviors.lightbox.transition'),
+    'sites.code_behaviors.lightbox.transition.instant': getI18nString('sites.code_behaviors.lightbox.transition.instant'),
+    'sites.code_behaviors.lightbox.transition.dissolve': getI18nString('sites.code_behaviors.lightbox.transition.dissolve'),
+    'sites.code_behaviors.lightbox.transition.move_in': getI18nString('sites.code_behaviors.lightbox.transition.move_in'),
+    'sites.code_behaviors.text_cycle.name': getI18nString('sites.code_behaviors.text_cycle.name'),
+    'sites.code_behaviors.text_cycle.trigger': getI18nString('sites.code_behaviors.text_cycle.trigger'),
+    'sites.code_behaviors.text_cycle.trigger.on_view': getI18nString('sites.code_behaviors.text_cycle.trigger.on_view'),
+    'sites.code_behaviors.text_cycle.trigger.on_click': getI18nString('sites.code_behaviors.text_cycle.trigger.on_click'),
+    'sites.code_behaviors.text_cycle.randomize': getI18nString('sites.code_behaviors.text_cycle.randomize'),
+    'sites.code_behaviors.text_cycle.text': getI18nString('sites.code_behaviors.text_cycle.text'),
+    'sites.code_behaviors.text_scramble.name': getI18nString('sites.code_behaviors.text_scramble.name'),
+    'sites.code_behaviors.text_scramble.reveal': getI18nString('sites.code_behaviors.text_scramble.reveal'),
+    'sites.code_behaviors.text_scramble.reveal.by_char': getI18nString('sites.code_behaviors.text_scramble.reveal.by_char'),
+    'sites.code_behaviors.text_scramble.reveal.by_word': getI18nString('sites.code_behaviors.text_scramble.reveal.by_word'),
+    'sites.code_behaviors.text_scramble.speed': getI18nString('sites.code_behaviors.text_scramble.speed'),
+    'sites.code_behaviors.text_scramble.speed.quick': getI18nString('sites.code_behaviors.text_scramble.speed.quick'),
+    'sites.code_behaviors.text_scramble.speed.moderate': getI18nString('sites.code_behaviors.text_scramble.speed.moderate'),
+    'sites.code_behaviors.text_scramble.speed.slow': getI18nString('sites.code_behaviors.text_scramble.speed.slow'),
+    'sites.code_behaviors.text_scramble.symbols': getI18nString('sites.code_behaviors.text_scramble.symbols'),
+    'sites.code_behaviors.text_scramble.loop': getI18nString('sites.code_behaviors.text_scramble.loop'),
+    'sites.code_behaviors.spin.name': getI18nString('sites.code_behaviors.spin.name'),
+    'sites.code_behaviors.spin.trigger': getI18nString('sites.code_behaviors.spin.trigger'),
+    'sites.code_behaviors.spin.trigger.on_view': getI18nString('sites.code_behaviors.spin.trigger.on_view'),
+    'sites.code_behaviors.spin.trigger.on_click': getI18nString('sites.code_behaviors.spin.trigger.on_click'),
+    'sites.code_behaviors.spin.trigger.while_hovering': getI18nString('sites.code_behaviors.spin.trigger.while_hovering'),
+    'sites.code_behaviors.spin.trigger.while_scrolling': getI18nString('sites.code_behaviors.spin.trigger.while_scrolling'),
+    'sites.code_behaviors.spin.direction': getI18nString('sites.code_behaviors.spin.direction'),
+    'sites.code_behaviors.spin.direction.clockwise': getI18nString('sites.code_behaviors.spin.direction.clockwise'),
+    'sites.code_behaviors.spin.direction.counterclockwise': getI18nString('sites.code_behaviors.spin.direction.counterclockwise'),
+    'sites.code_behaviors.spin.speed': getI18nString('sites.code_behaviors.spin.speed'),
+    'sites.code_behaviors.spin.speed.very_quick': getI18nString('sites.code_behaviors.spin.speed.very_quick'),
+    'sites.code_behaviors.spin.speed.quick': getI18nString('sites.code_behaviors.spin.speed.quick'),
+    'sites.code_behaviors.spin.speed.moderate': getI18nString('sites.code_behaviors.spin.speed.moderate'),
+    'sites.code_behaviors.spin.speed.slow': getI18nString('sites.code_behaviors.spin.speed.slow'),
+    'sites.code_behaviors.spin.speed.very_slow': getI18nString('sites.code_behaviors.spin.speed.very_slow')
   });
   let i = n;
   if (!i[e]) {
     let i = e.includes('sites.code_behaviors');
-    i && !Sm && ($D(_$$e2.PROTOTYPING, new Error(`Localized code behavior string not found: ${e}`)), Sm = !0);
+    i && !Sm && (reportError(_$$e2.PROTOTYPING, new Error(`Localized code behavior string not found: ${e}`)), Sm = !0);
     return i ? t ?? e : e;
   }
   return i[e];
 }
-let Sg = Iz(e => _$$mg(_$$eU(t => {
+let Sg = createRemovableAtomFamily(e => _$$mg(atom(t => {
   let i = t(Mk[PW.CODE_COMPONENT].local);
   let n = t(Mk[PW.CODE_COMPONENT].subscribed);
   let l = _$$_H.fromString(e);
   return l ? i[l] || n[l] : void 0;
 }), e => e));
 function Sf(e) {
-  let t = _$$md(Sg(e));
+  let t = useAtomWithSubscription(Sg(e));
   return Sh(t?.codeBehaviorData?.name ?? t?.name ?? '', t?.name);
 }
 let S_ = new Set(['GROUP', 'FRAME', 'VECTOR', 'STAR', 'LINE', 'ELLIPSE', 'RECTANGLE', 'REGULAR_POLYGON', 'ROUNDED_RECTANGLE', 'TEXT', 'INSTANCE']);
@@ -27236,34 +27236,34 @@ function Sv(e) {
         base64String: y,
         disableUpload: !0,
         imageCandidates: k,
-        label: _$$t('sites.metadata.image_selector.placeholder'),
+        label: getI18nString('sites.metadata.image_selector.placeholder'),
         labelHidden: !0,
         nodeId: _$$hS2(r) && _$$fn(_$$sH2(r)) ? r.toString() : '',
         recordingKey: 'sites.panel.cursor',
         removeImage: () => j(_$$AD),
-        removeString: _$$t('sites.panel.interactions_panel.remove_cursor'),
+        removeString: getI18nString('sites.panel.interactions_panel.remove_cursor'),
         selectImage: j
       })
     }), jsx(k5, {
-      label: _$$tx('sites.panel.interactions_panel.hotspot'),
+      label: renderI18nText('sites.panel.interactions_panel.hotspot'),
       input: jsxs(_$$bL6, {
         value: g,
         onChange: _,
         children: [jsx(_$$l7, {
           width: 'fill',
           label: jsx(_$$h6, {
-            children: _$$tx('sites.panel.interactions_panel.hotspot')
+            children: renderI18nText('sites.panel.interactions_panel.hotspot')
           })
         }), jsxs(_$$mc2, {
           children: [jsx(_$$c$5, {
             value: 'top-left',
-            children: _$$tx('sites.panel.interactions_panel.hotspot_top_left')
+            children: renderI18nText('sites.panel.interactions_panel.hotspot_top_left')
           }), jsx(_$$c$5, {
             value: 'center',
-            children: _$$tx('sites.panel.interactions_panel.hotspot_center')
+            children: renderI18nText('sites.panel.interactions_panel.hotspot_center')
           }), jsx(_$$wv, {}), jsx(_$$c$5, {
             value: 'manual',
-            children: _$$tx('sites.panel.interactions_panel.hotspot_manual')
+            children: renderI18nText('sites.panel.interactions_panel.hotspot_manual')
           })]
         })]
       })
@@ -27275,10 +27275,10 @@ function Sv(e) {
         'bigNudgeAmount': n,
         'dispatch': t,
         'data-tooltip-type': Ib.TEXT,
-        'data-tooltip': _$$t('sites.panel.interactions_panel.x_coordinate'),
+        'data-tooltip': getI18nString('sites.panel.interactions_panel.x_coordinate'),
         'children': jsx('span', {
           className: kJ,
-          children: _$$tx('sites.panel.interactions_panel.x')
+          children: renderI18nText('sites.panel.interactions_panel.x')
         })
       }),
       rightInput: jsx(_$$gq, {
@@ -27288,10 +27288,10 @@ function Sv(e) {
         'bigNudgeAmount': n,
         'dispatch': t,
         'data-tooltip-type': Ib.TEXT,
-        'data-tooltip': _$$t('sites.panel.interactions_panel.y_coordinate'),
+        'data-tooltip': getI18nString('sites.panel.interactions_panel.y_coordinate'),
         'children': jsx('span', {
           className: kJ,
-          children: _$$tx('sites.panel.interactions_panel.y')
+          children: renderI18nText('sites.panel.interactions_panel.y')
         })
       }),
       label: null
@@ -27356,19 +27356,19 @@ function SN(e) {
   let h = EU();
   let g = RU();
   let f = [{
-    label: _$$t('sites.marquee.very_slow'),
+    label: getI18nString('sites.marquee.very_slow'),
     value: 25
   }, {
-    label: _$$t('sites.marquee.slow'),
+    label: getI18nString('sites.marquee.slow'),
     value: 50
   }, {
-    label: _$$t('sites.marquee.moderate'),
+    label: getI18nString('sites.marquee.moderate'),
     value: 100
   }, {
-    label: _$$t('sites.marquee.fast'),
+    label: getI18nString('sites.marquee.fast'),
     value: 200
   }, {
-    label: _$$t('sites.marquee.very_fast'),
+    label: getI18nString('sites.marquee.very_fast'),
     value: 300
   }];
   let _ = jsx(_$$Q13, {
@@ -27382,10 +27382,10 @@ function SN(e) {
   return jsxs(Fragment, {
     children: [_, jsxs(k8, {
       children: [jsx(k5, {
-        label: _$$tx('sites.panel.interactions_panel.marquee_direction'),
+        label: renderI18nText('sites.panel.interactions_panel.marquee_direction'),
         input: jsxs(_$$bL, {
           legend: jsx(_$$q2, {
-            children: _$$t('sites.panel.interactions_panel.marquee_direction')
+            children: getI18nString('sites.panel.interactions_panel.marquee_direction')
           }),
           value: o,
           onChange: e => {
@@ -27395,23 +27395,23 @@ function SN(e) {
           recordingKey: 'marqueeDirection',
           children: [jsx(_$$c$2, {
             'value': 'LEFT',
-            'aria-label': _$$t('sites.panel.interactions_panel.marquee_direction_left'),
+            'aria-label': getI18nString('sites.panel.interactions_panel.marquee_direction_left'),
             'icon': jsx(_$$v10, {})
           }), jsx(_$$c$2, {
             'value': 'RIGHT',
-            'aria-label': _$$t('sites.panel.interactions_panel.marquee_direction_right'),
+            'aria-label': getI18nString('sites.panel.interactions_panel.marquee_direction_right'),
             'icon': jsx(_$$o1, {})
           })]
         })
       }), jsx(k5, {
-        label: _$$tx('sites.panel.interactions_panel.marquee_speed'),
+        label: renderI18nText('sites.panel.interactions_panel.marquee_speed'),
         input: jsx(_$$ow, {
           value: {
             inputComponent: SE
           },
           children: jsx(_$$vD2, {
             'bigNudgeAmount': g,
-            'data-tooltip': _$$t('sites.panel.interactions_panel.marquee_speed_tooltip'),
+            'data-tooltip': getI18nString('sites.panel.interactions_panel.marquee_speed_tooltip'),
             'data-tooltip-type': Ib.TEXT,
             'dispatch': t,
             'dropdownShown': i,
@@ -27448,10 +27448,10 @@ function SN(e) {
           })
         })
       }), jsx(k5, {
-        label: _$$tx('sites.panel.interactions_panel.marquee_infinite'),
+        label: renderI18nText('sites.panel.interactions_panel.marquee_infinite'),
         input: jsxs(_$$bL, {
           legend: jsx(_$$q2, {
-            children: _$$t('sites.panel.interactions_panel.marquee_direction')
+            children: getI18nString('sites.panel.interactions_panel.marquee_direction')
           }),
           value: !_$$gl(c) && c ? 'TRUE' : 'FALSE',
           onChange: e => {
@@ -27461,11 +27461,11 @@ function SN(e) {
           recordingKey: 'loopInfinitely',
           children: [jsx(_$$c$2, {
             'value': 'FALSE',
-            'aria-label': _$$t('sites.panel.interactions_panel.marquee_infinite_disabled'),
+            'aria-label': getI18nString('sites.panel.interactions_panel.marquee_infinite_disabled'),
             'icon': jsx(_$$O1, {})
           }), jsx(_$$c$2, {
             'value': 'TRUE',
-            'aria-label': _$$t('sites.panel.interactions_panel.marquee_infinite_enabled'),
+            'aria-label': getI18nString('sites.panel.interactions_panel.marquee_infinite_enabled'),
             'icon': jsx(_$$r9, {})
           })]
         })
@@ -27812,7 +27812,7 @@ function SH({
     'className': k$,
     'role': 'button',
     'tabIndex': 0,
-    'aria-label': _$$t('sites.panel.interactions_panel.restart_preview'),
+    'aria-label': getI18nString('sites.panel.interactions_panel.restart_preview'),
     'onClick': restart,
     'onPointerEnter': () => {
       i(!1);
@@ -27883,7 +27883,7 @@ function Sq({
           children: [t && jsxs('div', {
             id: 'marquee-behavior-preview-text',
             className: 'styles-module--previewElementMarqueeText--iy-J8',
-            children: [_$$t('sites.panel.interactions_panel.marquee_behavior'), '\xA0']
+            children: [getI18nString('sites.panel.interactions_panel.marquee_behavior'), '\xA0']
           }), n && jsx('div', {
             id: 'marquee-behavior-preview-genericized-rectangle',
             className: 'styles-module--previewElementMarquee--Kl8tY'
@@ -27998,7 +27998,7 @@ function SV({
             height: `${r.y}px`
           },
           src: n ?? '',
-          alt: _$$t('sites.panel.interactions_panel.cursor_image')
+          alt: getI18nString('sites.panel.interactions_panel.cursor_image')
         }), jsxs('svg', {
           style: {
             position: 'absolute',
@@ -28071,7 +28071,7 @@ function SY({
 }) {
   let s = n ? wu : wj;
   let r = useCallback(() => {
-    n || n || i(_$$tx('sites.panel.interactions_panel.transition'), jsx(SY, {
+    n || n || i(renderI18nText('sites.panel.interactions_panel.transition'), jsx(SY, {
       behaviorType: e,
       recordingKey: t,
       pushDetailsComponent: _$$lQ,
@@ -28233,7 +28233,7 @@ let S2 = ({
   rotation: l
 }) => {
   let a = [];
-  return _$$gl(e) || _$$gl(t) ? '' : (e > _$$$Y ? a.push(_$$t('sites.panel.interactions_panel.grow')) : e < _$$$Y && a.push(_$$t('sites.panel.interactions_panel.shrink')), t !== _$$q10 && a.push(_$$t('sites.panel.interactions_panel.fade')), (i !== Q5 || n !== Q5) && a.push(_$$t('sites.panel.interactions_panel.shift')), l !== _$$rb && a.push(_$$t('sites.panel.interactions_panel.rotate')), a.length > 0 ? a.join(', ') : '');
+  return _$$gl(e) || _$$gl(t) ? '' : (e > _$$$Y ? a.push(getI18nString('sites.panel.interactions_panel.grow')) : e < _$$$Y && a.push(getI18nString('sites.panel.interactions_panel.shrink')), t !== _$$q10 && a.push(getI18nString('sites.panel.interactions_panel.fade')), (i !== Q5 || n !== Q5) && a.push(getI18nString('sites.panel.interactions_panel.shift')), l !== _$$rb && a.push(getI18nString('sites.panel.interactions_panel.rotate')), a.length > 0 ? a.join(', ') : '');
 };
 let S4 = kR({
   behaviorType: Xc.Hover,
@@ -28499,10 +28499,10 @@ function CU(e) {
   let [i, n] = CG();
   return jsxs(k8, {
     children: [jsx(k5, {
-      label: _$$tx('sites.panel.interactions_panel.speed'),
+      label: renderI18nText('sites.panel.interactions_panel.speed'),
       input: jsx(_$$w4, {
         'bigNudgeAmount': CV,
-        'data-tooltip': _$$t('sites.panel.interactions_panel.speed'),
+        'data-tooltip': getI18nString('sites.panel.interactions_panel.speed'),
         'data-tooltip-type': Ib.TEXT,
         'decimals': Cq,
         'dispatch': t,
@@ -28516,7 +28516,7 @@ function CU(e) {
       })
     }), _$$hS2(i) && jsx(k1, {
       input: jsx(_$$A21, {
-        'aria-label': _$$t('sites.panel.interactions_panel.speed'),
+        'aria-label': getI18nString('sites.panel.interactions_panel.speed'),
         'value': i,
         'min': CK,
         'max': CH,
@@ -28558,7 +28558,7 @@ function CW({
     children: [jsxs(k8, {
       children: [jsx(k5, {
         labelId: h,
-        label: _$$tx('sites.panel.interactions_panel.trigger'),
+        label: renderI18nText('sites.panel.interactions_panel.trigger'),
         input: jsxs(C0, {
           ariaLabelledBy: h,
           id: 'animation-trigger-select',
@@ -28582,7 +28582,7 @@ function CW({
         })
       }), r === 'OTHER_LAYER_IN_VIEW' && jsx(k5, {
         labelId: m,
-        label: _$$tx('sites.panel.interactions_panel.layer_label'),
+        label: renderI18nText('sites.panel.interactions_panel.layer_label'),
         input: jsx(wm, {
           ariaLabelledBy: m,
           value: d,
@@ -28603,7 +28603,7 @@ function CW({
       })
     }), _$$hS2(r) && r !== 'PAGE_HEIGHT' ? jsx(k8, {
       children: jsx(k5, {
-        label: _$$tx('sites.panel.interactions_panel.replay_label'),
+        label: renderI18nText('sites.panel.interactions_panel.replay_label'),
         input: jsx(w_, {
           value: p,
           onChange: x,
@@ -28626,10 +28626,10 @@ function CY({
   let s = null;
   switch (e) {
     case 'from':
-      s = _$$tx('sites.panel.interactions_panel.from');
+      s = renderI18nText('sites.panel.interactions_panel.from');
       break;
     case 'to':
-      s = _$$tx('sites.panel.interactions_panel.to');
+      s = renderI18nText('sites.panel.interactions_panel.to');
   }
   let r = useCallback(() => {
     t(s, jsx(CQ, {
@@ -28651,11 +28651,11 @@ let CJ = e => {
   let [l] = C9(e);
   let [a] = Te(e);
   let s = [];
-  t !== _$$$Y && s.push(_$$t('sites.panel.interactions_panel.scale'));
-  i !== _$$q10 && s.push(_$$t('sites.panel.interactions_panel.opacity'));
-  (n !== Q5 || l !== Q5) && s.push(_$$t('sites.panel.interactions_panel.offset'));
-  a !== _$$rb && s.push(_$$t('fullscreen.properties_panel.transform_panel.rotation'));
-  return s.length > 0 ? s.join(', ') : _$$t('sites.panel.interactions_panel.default');
+  t !== _$$$Y && s.push(getI18nString('sites.panel.interactions_panel.scale'));
+  i !== _$$q10 && s.push(getI18nString('sites.panel.interactions_panel.opacity'));
+  (n !== Q5 || l !== Q5) && s.push(getI18nString('sites.panel.interactions_panel.offset'));
+  a !== _$$rb && s.push(getI18nString('fullscreen.properties_panel.transform_panel.rotation'));
+  return s.length > 0 ? s.join(', ') : getI18nString('sites.panel.interactions_panel.default');
 };
 function CZ({
   recordingKey: e,
@@ -28667,7 +28667,7 @@ function CZ({
   let [d, c] = Tn();
   let p = i ? wu : wj;
   let x = useCallback(() => {
-    i || i || t(_$$tx('sites.panel.interactions_panel.transition'), jsx(CZ, {
+    i || i || t(renderI18nText('sites.panel.interactions_panel.transition'), jsx(CZ, {
       recordingKey: e,
       pushDetailsComponent: _$$lQ,
       showExtendedTransitionPropertiesView: !0
@@ -28866,12 +28866,12 @@ function To({
   recordingKey: t
 }) {
   return jsx(_$$K2, {
-    'aria-label': _$$t('sites.panel.interactions_panel.back_tooltip'),
+    'aria-label': getI18nString('sites.panel.interactions_panel.back_tooltip'),
     'onClick': e,
     'recordingKey': t,
     'htmlAttributes': {
       'data-tooltip-type': Ib.TEXT,
-      'data-tooltip': _$$t('sites.panel.interactions_panel.back_tooltip')
+      'data-tooltip': getI18nString('sites.panel.interactions_panel.back_tooltip')
     },
     'children': jsx(_$$C6, {})
   });
@@ -29066,7 +29066,7 @@ function Tc({
             duration: 0,
             ease: 'easeOut'
           },
-          'aria-label': _$$t('sites.panel.interactions_panel.back_tooltip'),
+          'aria-label': getI18nString('sites.panel.interactions_panel.back_tooltip'),
           'onClick': c,
           'className': m ? 'styles-module--behaviorSettingsPickerDetailsBase--hHwua styles-module--behaviorSettingsPickerBase--9zoYy' : 'styles-module--behaviorSettingsPickerBase--9zoYy',
           'children': o.length >= 2 ? jsx('span', {
@@ -29178,7 +29178,7 @@ function Tc({
           recordingKey: n
         }), _$$gl(e) && jsx(k8, {
           children: jsx(k0, {
-            label: _$$tx('fullscreen.mixed')
+            label: renderI18nText('fullscreen.mixed')
           })
         }), !_$$gl(e) && f && jsx(SK, {
           behaviorType: e
@@ -29205,7 +29205,7 @@ function Tx({
   let y = useSelector(Th);
   let [v, j] = useState(!1);
   let [k, w] = useState(!1);
-  let [S, C] = _$$fp(noop);
+  let [S, C] = useAtomValueAndSetter(noop);
   let [T, I] = useState(!1);
   let E = _$$v_(g, 'keydown', e => {
     if (e.key !== 'Shift') return _$$aH;
@@ -29284,7 +29284,7 @@ function Tx({
         leftIcon: jsx(_$$YW, {
           'selected': f,
           'data-tooltip-type': Ib.TEXT,
-          'data-tooltip': _$$t('sites.panel.interactions_panel.interaction_settings'),
+          'data-tooltip': getI18nString('sites.panel.interactions_panel.interaction_settings'),
           'recordingKey': Pt(g, 'icon'),
           'className': v && !k ? `${zY} ${kQ}` : kQ,
           'children': jsx(Ss, {
@@ -29345,7 +29345,7 @@ function Tx({
                 let n = getSingletonSceneGraph();
                 let l = Object.keys(t);
                 let a = Array.from(new Set(Object.values(HL(n, l)).filter(e => e !== null)));
-                _$$sx('sites_remove_interaction', {
+                trackEventAnalytics('sites_remove_interaction', {
                   behaviorType: e,
                   nodeIds: l,
                   responsiveSetIds: a,
@@ -29365,12 +29365,12 @@ function Tm({
   recordingKey: t
 }) {
   return jsx(_$$K2, {
-    'aria-label': _$$t('sites.panel.interactions_panel.remove_tooltip'),
+    'aria-label': getI18nString('sites.panel.interactions_panel.remove_tooltip'),
     'onClick': e,
     'recordingKey': t,
     'htmlAttributes': {
       'data-tooltip-type': Ib.TEXT,
-      'data-tooltip': _$$t('sites.panel.interactions_panel.remove_tooltip')
+      'data-tooltip': getI18nString('sites.panel.interactions_panel.remove_tooltip')
     },
     'children': jsx(_$$O1, {})
   });
@@ -29382,7 +29382,7 @@ let Tg = function (e) {
   return () => {
     let [t, i] = _$$lJ2(Xc.Code);
     let n = Array.isArray(t) ? function (e) {
-      let t = e.filter(e => !!e || (kP || ($D(_$$e2.MAKE, new Error('Expected code behavior on selected node but none found')), kP = !0), !1));
+      let t = e.filter(e => !!e || (kP || (reportError(_$$e2.MAKE, new Error('Expected code behavior on selected node but none found')), kP = !0), !1));
       return t.length !== 0 ? t : void 0;
     }(t) : t;
     let l = useCallback((t, l) => {
@@ -29458,10 +29458,10 @@ let Tb = memo(({
     icon
   } = function (e) {
     return {
-      codeComponent: _$$md(Sg(e)),
+      codeComponent: useAtomWithSubscription(Sg(e)),
       name: Sf(e),
       icon: function (e) {
-        let t = _$$md(Sg(e));
+        let t = useAtomWithSubscription(Sg(e));
         return t?.codeBehaviorData?.icon;
       }(e)
     };
@@ -29565,11 +29565,11 @@ function TA(e) {
     let c = [];
     if (_$$gl(e) || _$$gl(t) || _$$gl(a) || _$$gl(s)) return '';
     let p = s - t;
-    p > 0 ? c.push(_$$t('sites.panel.interactions_panel.fade_in')) : p < 0 && c.push(_$$t('sites.panel.interactions_panel.fade_out'));
+    p > 0 ? c.push(getI18nString('sites.panel.interactions_panel.fade_in')) : p < 0 && c.push(getI18nString('sites.panel.interactions_panel.fade_out'));
     let x = a - e;
-    x < 0 ? c.push(_$$t('sites.panel.interactions_panel.shrink')) : x > 0 && c.push(_$$t('sites.panel.interactions_panel.grow'));
-    (i !== r || n !== o) && c.push(_$$t('sites.panel.interactions_panel.shift'));
-    l !== d && c.push(_$$t('sites.panel.interactions_panel.spin'));
+    x < 0 ? c.push(getI18nString('sites.panel.interactions_panel.shrink')) : x > 0 && c.push(getI18nString('sites.panel.interactions_panel.grow'));
+    (i !== r || n !== o) && c.push(getI18nString('sites.panel.interactions_panel.shift'));
+    l !== d && c.push(getI18nString('sites.panel.interactions_panel.spin'));
     return c.length > 0 ? c.join(', ') : '';
   }();
   let D = Tq();
@@ -29605,13 +29605,13 @@ function TA(e) {
   let [K, H] = wI();
   let q = TP();
   let X = useSelector(_$$Cy);
-  let [V, G] = _$$fp(noop);
+  let [V, G] = useAtomValueAndSetter(noop);
   let W = HS();
   let {
     selectedInteractions,
     selectedNoodleIds
   } = _$$Ay9(W, !0);
-  let [Z, Q] = _$$fp(_$$u9);
+  let [Z, Q] = useAtomValueAndSetter(_$$u9);
   let ee = KH();
   let et = q5();
   let ei = _$$h16(TN);
@@ -29700,7 +29700,7 @@ function TA(e) {
     let n = getSingletonSceneGraph();
     let l = Object.keys(t);
     let a = Array.from(new Set(Object.values(HL(n, l)).filter(e => e !== null)));
-    _$$sx('sites_add_interaction', {
+    trackEventAnalytics('sites_add_interaction', {
       behaviorType: e,
       nodeIds: l,
       responsiveSetIds: a,
@@ -29842,7 +29842,7 @@ function TA(e) {
       }));
     }();
     let p = function () {
-      let e = _$$md(Mk[PW.CODE_COMPONENT].local);
+      let e = useAtomWithSubscription(Mk[PW.CODE_COMPONENT].local);
       return getFeatureFlags().prototype_code_presets_creation ? Object.entries(e).filter(([e, t]) => t.isCodeBehavior).map(([e, t]) => ({
         type: Tj.LOCAL,
         id: e,
@@ -29864,7 +29864,7 @@ function TA(e) {
         behaviorType: Xc.Hover,
         disabled: e(Xc.Hover)
       }),
-      displayText: _$$t('sites.panel.interactions_panel.hover_behavior'),
+      displayText: getI18nString('sites.panel.interactions_panel.hover_behavior'),
       disabled: e(Xc.Hover),
       isChecked: !1,
       callback: () => t(Xc.Hover),
@@ -29876,7 +29876,7 @@ function TA(e) {
         behaviorType: Xc.Press,
         disabled: e(Xc.Press)
       }),
-      displayText: _$$t('sites.panel.interactions_panel.press_behavior'),
+      displayText: getI18nString('sites.panel.interactions_panel.press_behavior'),
       hidden: !1,
       disabled: e(Xc.Press),
       isChecked: !1,
@@ -29889,7 +29889,7 @@ function TA(e) {
         behaviorType: Xc.Focus,
         disabled: e(Xc.Focus)
       }),
-      displayText: _$$t('sites.panel.interactions_panel.focus_behavior'),
+      displayText: getI18nString('sites.panel.interactions_panel.focus_behavior'),
       hidden: !0,
       disabled: e(Xc.Focus),
       isChecked: !1,
@@ -29902,7 +29902,7 @@ function TA(e) {
         behaviorType: Xc.Appear,
         disabled: e(Xc.Appear)
       }),
-      displayText: _$$t('sites.panel.interactions_panel.appear_behavior'),
+      displayText: getI18nString('sites.panel.interactions_panel.appear_behavior'),
       disabled: e(Xc.Appear),
       isChecked: !1,
       callback: () => t(Xc.Appear),
@@ -29914,7 +29914,7 @@ function TA(e) {
         behaviorType: Xc.ScrollParallax,
         disabled: f || e(Xc.ScrollParallax)
       }),
-      displayText: _$$t('sites.panel.interactions_panel.scroll_parallax_behavior'),
+      displayText: getI18nString('sites.panel.interactions_panel.scroll_parallax_behavior'),
       disabled: f || e(Xc.ScrollParallax),
       isChecked: !1,
       callback: () => t(Xc.ScrollParallax),
@@ -29926,7 +29926,7 @@ function TA(e) {
         behaviorType: Xc.ScrollTransform,
         disabled: e(Xc.ScrollTransform)
       }),
-      displayText: _$$t('sites.panel.interactions_panel.scroll_transform_behavior'),
+      displayText: getI18nString('sites.panel.interactions_panel.scroll_transform_behavior'),
       disabled: e(Xc.ScrollTransform),
       isChecked: !1,
       callback: () => t(Xc.ScrollTransform),
@@ -29938,7 +29938,7 @@ function TA(e) {
         behaviorType: Xc.Cursor,
         disabled: e(Xc.Cursor)
       }),
-      displayText: _$$t('sites.panel.interactions_panel.cursor_behavior'),
+      displayText: getI18nString('sites.panel.interactions_panel.cursor_behavior'),
       disabled: e(Xc.Cursor),
       isChecked: !1,
       callback: () => t(Xc.Cursor),
@@ -29950,7 +29950,7 @@ function TA(e) {
         behaviorType: Xc.Marquee,
         disabled: e(Xc.Marquee)
       }),
-      displayText: _$$t('sites.panel.interactions_panel.marquee_behavior'),
+      displayText: getI18nString('sites.panel.interactions_panel.marquee_behavior'),
       hidden: !s,
       disabled: e(Xc.Marquee),
       isChecked: !1,
@@ -30018,13 +30018,13 @@ function TA(e) {
         children: jsx(_$$A22, {})
       }),
       recordingKey: 'code_presets_submenu_item',
-      displayText: _$$t('sites.code_behaviors.submenu_item.name'),
+      displayText: getI18nString('sites.code_behaviors.submenu_item.name'),
       className: BP
     });
     getFeatureFlags().prototype_code_presets_creation && (_.push(_$$w7), _.push({
       icon: jsx(_$$t1, {}),
       recordingKey: 'code_presets_add_custom_interaction',
-      displayText: _$$t('sites.code_behaviors.add_custom_interaction'),
+      displayText: getI18nString('sites.code_behaviors.add_custom_interaction'),
       callback: () => {
         _$$l.user('create-new-code-interaction', () => {
           let e = glU?.createNewCodeInteraction('interactions_panel');
@@ -30180,14 +30180,14 @@ function TA(e) {
   let eL = $5(el, 'loading', !0) || C && eA === 'loading';
   let eP = eL ? jsxs(qd.Provider, {
     value: 'loading',
-    children: [TL(_$$tx('sites.panel.interaction_category.loading')), jsx(_$$y10, {
+    children: [TL(renderI18nText('sites.panel.interaction_category.loading')), jsx(_$$y10, {
       filterInteractionCategory: _$$J12.NORMAL
     }, 0), eA === 'loading' && ek]
   }) : null;
   let eO = $5(el, 'video', !0);
   let eF = eO ? jsxs(qd.Provider, {
     value: 'video',
-    children: [TL(_$$tx('sites.panel.interaction_category.video')), jsx(_$$y10, {
+    children: [TL(renderI18nText('sites.panel.interaction_category.video')), jsx(_$$y10, {
       filterInteractionCategory: _$$J12.NORMAL
     }, 1)]
   }) : null;
@@ -30234,7 +30234,7 @@ function TA(e) {
       });
     }
     return e;
-  }, [ee, ec]), _$$md(useMemo(() => _$$eU(e => {
+  }, [ee, ec]), useAtomWithSubscription(useMemo(() => atom(e => {
     let t = e(Mk[PW.CODE_COMPONENT].local);
     let i = e(Mk[PW.CODE_COMPONENT].subscribed);
     return {
@@ -30251,7 +30251,7 @@ function TA(e) {
   }), [e.recordingKey, em, eb, ef, ep]);
   let ez = C && eA === 'scrolling' || L || P || eM.scrolling.size > 0;
   let eB = ez ? jsxs(Fragment, {
-    children: [TL(_$$tx('sites.panel.interaction_category.scrolling')), eA === 'scrolling' && ek, ew, eS, jsx(Tf, {
+    children: [TL(renderI18nText('sites.panel.interaction_category.scrolling')), eA === 'scrolling' && ek, ew, eS, jsx(Tf, {
       codeBehaviorsMap: eM.scrolling,
       ...eD
     })]
@@ -30259,7 +30259,7 @@ function TA(e) {
   let e$ = $5(el, 'mouse', !0) || T || E || I || N || eM.mouse.size > 0;
   let eU = e$ ? jsxs(qd.Provider, {
     value: 'mouse',
-    children: [TL(_$$tx('sites.panel.interaction_category.mouse')), eI, eE, eN, eC, jsx(Tf, {
+    children: [TL(renderI18nText('sites.panel.interaction_category.mouse')), eI, eE, eN, eC, jsx(Tf, {
       codeBehaviorsMap: eM.mouse,
       ...eD
     }), jsx(_$$y10, {
@@ -30268,14 +30268,14 @@ function TA(e) {
   }) : null;
   let eK = eM.motion.size > 0 || A;
   let eH = eK ? jsxs(Fragment, {
-    children: [TL(_$$tx('sites.panel.interaction_category.motion')), jsx(Tf, {
+    children: [TL(renderI18nText('sites.panel.interaction_category.motion')), jsx(Tf, {
       codeBehaviorsMap: eM.motion,
       ...eD
     }), eT]
   }) : null;
   let eq = eM.uncategorized.size > 0;
   let eX = eq ? jsxs(Fragment, {
-    children: [TL(_$$tx('sites.panel.interaction_category.code')), jsx(Tf, {
+    children: [TL(renderI18nText('sites.panel.interaction_category.code')), jsx(Tf, {
       codeBehaviorsMap: eM.uncategorized,
       ...eD
     })]
@@ -30283,7 +30283,7 @@ function TA(e) {
   let eV = $5(el, 'keyboard', !0);
   let eG = eV ? jsxs(qd.Provider, {
     value: 'keyboard',
-    children: [TL(_$$tx('sites.panel.interaction_category.key_gamepad')), jsx(_$$y10, {
+    children: [TL(renderI18nText('sites.panel.interaction_category.key_gamepad')), jsx(_$$y10, {
       filterInteractionCategory: _$$J12.NORMAL
     }, 3)]
   }) : null;
@@ -30298,7 +30298,7 @@ function TA(e) {
         children: [jsx(_$$I5, {
           isEmpty: eW,
           faded: eW,
-          titleTx: _$$tx('sites.panel.interactions_panel.interactions'),
+          titleTx: renderI18nText('sites.panel.interactions_panel.interactions'),
           onClick: () => {
             toggleDropdown();
             _$$x6();
@@ -30532,13 +30532,13 @@ let TK = kL({
   get: e => {
     switch (e?.trigger) {
       case 'PAGE_LOAD':
-        return _$$tx('sites.panel.interactions_panel.page_load');
+        return renderI18nText('sites.panel.interactions_panel.page_load');
       case 'THIS_LAYER_IN_VIEW':
-        return _$$tx('sites.panel.interactions_panel.this_layer_in_view');
+        return renderI18nText('sites.panel.interactions_panel.this_layer_in_view');
       case 'OTHER_LAYER_IN_VIEW':
-        return _$$tx('sites.panel.interactions_panel.other_layer_in_view');
+        return renderI18nText('sites.panel.interactions_panel.other_layer_in_view');
       case 'SCROLL_DIRECTION':
-        return _$$tx('sites.panel.interactions_panel.scroll_direction');
+        return renderI18nText('sites.panel.interactions_panel.scroll_direction');
       default:
         return null;
     }
@@ -30554,25 +30554,25 @@ let Tq = kL({
     let t = '';
     switch (e?.direction) {
       case 'LEFT':
-        t = _$$t('sites.panel.interactions_panel.marquee_direction_left');
+        t = getI18nString('sites.panel.interactions_panel.marquee_direction_left');
         break;
       case 'RIGHT':
-        t = _$$t('sites.panel.interactions_panel.marquee_direction_right');
+        t = getI18nString('sites.panel.interactions_panel.marquee_direction_right');
         break;
       case 'DOWN':
-        t = _$$t('sites.panel.interactions_panel.marquee_direction_down');
+        t = getI18nString('sites.panel.interactions_panel.marquee_direction_down');
         break;
       case 'UP':
-        t = _$$t('sites.panel.interactions_panel.marquee_direction_up');
+        t = getI18nString('sites.panel.interactions_panel.marquee_direction_up');
     }
-    e?.shouldLoopInfinitely && (t += `, ${_$$t('sites.panel.interactions_panel.marquee_infinite')}`);
+    e?.shouldLoopInfinitely && (t += `, ${getI18nString('sites.panel.interactions_panel.marquee_infinite')}`);
     return t;
   }
 });
 let TX = kL({
   behaviorType: Xc.Cursor,
   get: e => {
-    let t = _$$t('sites.panel.interactions_panel.none');
+    let t = getI18nString('sites.panel.interactions_panel.none');
     if (!e || !e.cursorGuid) return t;
     let i = getSingletonSceneGraph().get(_$$dI(e.cursorGuid));
     return i ? i.name : t;
@@ -30602,10 +30602,10 @@ function TG() {
       children: jsx(TV, {})
     }), jsx('div', {
       className: 'sites_prototype_panel_empty_state--emptyStateTitle--ARylG',
-      children: _$$tx('sites.panel.empty_state_title')
+      children: renderI18nText('sites.panel.empty_state_title')
     }), jsx('div', {
       className: 'sites_prototype_panel_empty_state--emptyStateSubtitle--QR9FD',
-      children: _$$tx('sites.panel.empty_state_subtitle_one')
+      children: renderI18nText('sites.panel.empty_state_subtitle_one')
     })]
   });
 }
@@ -30636,14 +30636,14 @@ function TY({
                 source: 'properties_panel'
               });
             },
-            'aria-label': _$$t('sites.panel.add_interactivity_with_code'),
+            'aria-label': getI18nString('sites.panel.add_interactivity_with_code'),
             'disabled': !m,
             'tooltipAttributes': m ? void 0 : {
               'data-tooltip-type': Ib.TEXT,
-              'data-tooltip': _$$t('sites.coming_soon_tooltip.make.title'),
-              'data-tooltip-subtext': _$$t('sites.coming_soon_tooltip.make.description')
+              'data-tooltip': getI18nString('sites.coming_soon_tooltip.make.title'),
+              'data-tooltip-subtext': getI18nString('sites.coming_soon_tooltip.make.description')
             },
-            'children': _$$tx('sites.panel.add_interactivity_with_code')
+            'children': renderI18nText('sites.panel.add_interactivity_with_code')
           })
         })
       })
@@ -30816,7 +30816,7 @@ let T2 = memo(({
   let f = q5();
   let _ = f ? f.key : '';
   let y = _$$p2('showUi');
-  let v = _$$md(_$$s3);
+  let v = useAtomWithSubscription(_$$s3);
   let j = v === Nfd.DAKOTA;
   let k = _$$U();
   let S = useDispatch();
@@ -30836,16 +30836,16 @@ let T2 = memo(({
     let e = performance.now();
     let t = EI();
     let i = q5();
-    let n = _$$md(_$$me);
+    let n = useAtomWithSubscription(_$$me);
     let l = Xr($K);
     let a = _$$eY();
     let d = useDispatch();
-    let [c, x] = _$$fp(u3);
+    let [c, x] = useAtomValueAndSetter(u3);
     !c && n && x(!0);
     _$$R6(() => {
       try {
         debugState.dispatch(_$$F.enqueue({
-          message: _$$t('sites.metadata.copying_frames'),
+          message: getI18nString('sites.metadata.copying_frames'),
           type: 'design-to-sites-load',
           icon: zX.SPINNER,
           timeoutOverride: 3e5
@@ -30862,7 +30862,7 @@ let T2 = memo(({
             l(Ut);
             let t = a.getDirectlySelectedNodes()[0]?.guid;
             debug(!!t, 'newlyCopiedNodeId is undefined. This should never happen');
-            _$$i(t, _$$t('sites.modal.desktop'));
+            _$$i(t, getI18nString('sites.modal.desktop'));
             Y5.triggerActionEnum(rcl.CREATE_RESPONSIVE_SET);
             let i = a.getDirectlySelectedNodes()[0]?.guid;
             debug(!!i, 'newResponsiveSetId is undefined. This should never happen');
@@ -30873,13 +30873,13 @@ let T2 = memo(({
               matchType: 'design-to-sites-load'
             }));
             debugState.dispatch(_$$F.enqueue({
-              message: _$$t('sites.metadata.done'),
+              message: getI18nString('sites.metadata.done'),
               type: 'design-to-sites-complete',
               icon: zX.CHECK,
               timeoutOverride: 3e3
             }));
             let s = performance.now() - e;
-            _$$az.trackDefinedEvent('sites.finish_copy_to_sites', {
+            analyticsEventManager.trackDefinedEvent('sites.finish_copy_to_sites', {
               sourceFileKey: n.fileKey,
               sourceFileVersion: n.fileVersion,
               sourcePageGuid: n.pageGuid,
@@ -30889,14 +30889,14 @@ let T2 = memo(({
           });
         });
       } catch (e) {
-        _$$x('design_to_sites', `Error copying nodes into sites on load: ${e instanceof Error ? e.message : ''}`, {
+        logError('design_to_sites', `Error copying nodes into sites on load: ${e instanceof Error ? e.message : ''}`, {
           reportAsSentryError: !0
         });
         debugState.dispatch(_$$F.dequeue({
           matchType: 'design-to-sites-load'
         }));
         debugState.dispatch(_$$F.enqueue({
-          message: _$$t('sites.metadata.couldnt_copy_frames'),
+          message: getI18nString('sites.metadata.couldnt_copy_frames'),
           type: 'design-to-sites-complete',
           icon: zX.WARNING_EXCLAMATION_WITH_TRIANGLE,
           timeoutOverride: 3e3,
@@ -30939,7 +30939,7 @@ let T2 = memo(({
   }, [v]);
   useEffect(() => {
     A && O && _$$a8(O) ? S(_$$F.enqueue({
-      message: _$$t('left_rail.user_away_from_canvas_notification', {
+      message: getI18nString('left_rail.user_away_from_canvas_notification', {
         userHandle: A.name
       }),
       type: $$T11,
@@ -30950,13 +30950,13 @@ let T2 = memo(({
   }, [S, A, O]);
   useEffect(() => {
     T && I && E && E.userID === I.id && (N(), S(_$$F.enqueue({
-      message: _$$t('left_rail.spotlight_session_ended_only_available'),
+      message: getI18nString('left_rail.spotlight_session_ended_only_available'),
       type: $$T02
     })));
   }, [I, S, T, E, N]);
   useEffect(() => {
     h3O && F && M && T && (_$$j$(F.sessionID), S(_$$F.enqueue({
-      message: _$$t('left_rail.ask_to_spotlight_ended_only_available'),
+      message: getI18nString('left_rail.ask_to_spotlight_ended_only_available'),
       type: $$T50
     })));
   }, [F, M, S, T]);
@@ -30997,7 +30997,7 @@ let T2 = memo(({
           children: z
         }), e && jsx(X5, {})]
       }), jsx(_$$A2, {
-        editorType: _$$nT.Sites,
+        editorType: FEditorType.Sites,
         openFile: f
       }), jsx(_$$l2, {})]
     }), D && jsx(tO, {}), k && jsx(ea, {})]

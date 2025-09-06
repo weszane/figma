@@ -1,4 +1,4 @@
-import { R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { getInitialOptions } from "../figma_app/169182";
 import { eY } from "../figma_app/722362";
 import { Fk } from "../figma_app/167249";
@@ -9,7 +9,7 @@ export function $$l1() {
   let {
     lastViewedStamp,
     lastEditedStamp
-  } = R(e => ({
+  } = selectWithShallowEqual(e => ({
     fileKey: e.openFile?.key,
     lastViewedStamp: e.versionHistory.lastViewed,
     lastEditedStamp: e.versionHistory.lastEdited

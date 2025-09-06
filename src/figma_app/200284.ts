@@ -12,15 +12,15 @@ import { T as _$$T } from "../905/2124";
 import { CUU, glU } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
-import { eU, fp } from "../figma_app/27355";
+import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import E from "classnames";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { Pt } from "../figma_app/806412";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { Fe } from "../905/284552";
 import { Y as _$$Y } from "../905/506207";
 import { YQ } from "../905/502364";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { fu } from "../figma_app/831799";
 import { LN } from "../figma_app/975811";
 import { D as _$$D } from "../figma_app/451499";
@@ -65,7 +65,7 @@ var y = E;
 let e_ = "image-scale-mode-select";
 let eh = l6;
 let em = _$$c$;
-let $$eg4 = eU(!1);
+let $$eg4 = atom(!1);
 let ef = qo;
 let eE = (e, t) => e.every((e, r) => e === t[r]);
 export function $$ey2(e) {
@@ -78,7 +78,7 @@ export async function $$eb0(e) {
   return CUU.requestGIFData(r);
 }
 export function $$eT3(e) {
-  let [, t] = fp($$eg4);
+  let [, t] = useAtomValueAndSetter($$eg4);
   useEffect(() => (t(!0), () => t(!1)), [t]);
   let r = GM();
   let s = Os();
@@ -124,7 +124,7 @@ class eI extends Component {
       this.setState({
         forceThumbnailUpdate: r
       });
-      r && az.trackDefinedEvent("ai_productivity.fills_panel_image_adjust_slider_updated", {
+      r && analyticsEventManager.trackDefinedEvent("ai_productivity.fills_panel_image_adjust_slider_updated", {
         sliderName: e,
         sliderValue: t?.toString()
       });
@@ -206,7 +206,7 @@ class eI extends Component {
         this.waitingForGIF && this.setState({
           animatedImage: _$$J(e)
         });
-      }).catch(e => $D(_$$e.FIGJAM, e));
+      }).catch(e => reportError(_$$e.FIGJAM, e));
     };
     this.loadVideoJs = async () => {
       if (!this.state.videoJsLib) {
@@ -433,10 +433,10 @@ class eI extends Component {
       }),
       children: jsx(_$$K, {
         onClick: this.onRotateClockwiseClick,
-        "aria-label": _$$t("fullscreen.properties_panel.rotate_90"),
+        "aria-label": getI18nString("fullscreen.properties_panel.rotate_90"),
         recordingKey: Pt(this.props, "rotateClockwise"),
         htmlAttributes: {
-          "data-tooltip": _$$t("fullscreen.properties_panel.rotate_90"),
+          "data-tooltip": getI18nString("fullscreen.properties_panel.rotate_90"),
           "data-tooltip-type": Ib.TEXT
         },
         children: jsx(_$$R, {})
@@ -492,7 +492,7 @@ class eI extends Component {
                   onBlur: this.onImageButtonBlur
                 },
                 variant: "primary",
-                children: tx("fullscreen.properties_panel.image_settings.upload_new")
+                children: renderI18nText("fullscreen.properties_panel.image_settings.upload_new")
               })
             }), !e && jsx(_$$v, {
               uploadImagePaint: this.uploadImagePaint,
@@ -502,10 +502,10 @@ class eI extends Component {
           })]
         })
       }), this.renderMediaControls(t), this.isAnimatedImage() && jsx(_$$u, {
-        title: _$$t("fullscreen.properties_panel.gifs_in_figma_prototypes"),
+        title: getI18nString("fullscreen.properties_panel.gifs_in_figma_prototypes"),
         icon_DEPRECATED: _$$A4,
         userFlag: "dismissed_gifs_cover_frame_hint",
-        hintText: _$$t("fullscreen.properties_panel.choose_which_frame_displayed")
+        hintText: getI18nString("fullscreen.properties_panel.choose_which_frame_displayed")
       }), jsx(_$$p, {
         paint: this.props.paint,
         onChange: this.props.onChange,
@@ -542,7 +542,7 @@ function ev(e) {
       children: [jsx(l9, {
         width: "fill",
         label: jsx(_$$h, {
-          children: _$$t("fullscreen.properties_panel.image_scale_mode")
+          children: getI18nString("fullscreen.properties_panel.image_scale_mode")
         })
       }), jsx(mc, {
         children: i
@@ -568,7 +568,7 @@ class eA extends PureComponent {
       recordingKey: Pt(this.props, e)
     }, t));
     return jsx(eh, {
-      ariaLabel: _$$t("fullscreen.properties_panel.image_scale_mode"),
+      ariaLabel: getI18nString("fullscreen.properties_panel.image_scale_mode"),
       className: y()({
         [Nd]: !this.props.insetImageSettings,
         [ak]: this.props.insetImageSettings
@@ -620,19 +620,19 @@ export function $$eN5({
       children: function (e) {
         switch (e) {
           case "exposure":
-            return _$$t("fullscreen.properties_panel.exposure");
+            return getI18nString("fullscreen.properties_panel.exposure");
           case "contrast":
-            return _$$t("fullscreen.properties_panel.contrast");
+            return getI18nString("fullscreen.properties_panel.contrast");
           case "vibrance":
-            return _$$t("fullscreen.properties_panel.saturation");
+            return getI18nString("fullscreen.properties_panel.saturation");
           case "temperature":
-            return _$$t("fullscreen.properties_panel.temperature");
+            return getI18nString("fullscreen.properties_panel.temperature");
           case "tint":
-            return _$$t("fullscreen.properties_panel.tint");
+            return getI18nString("fullscreen.properties_panel.tint");
           case "highlights":
-            return _$$t("fullscreen.properties_panel.highlights");
+            return getI18nString("fullscreen.properties_panel.highlights");
           case "shadows":
-            return _$$t("fullscreen.properties_panel.shadows");
+            return getI18nString("fullscreen.properties_panel.shadows");
         }
       }(r)
     }), jsx("div", {
@@ -690,7 +690,7 @@ function eC({
       variant: "secondary",
       children: jsxs("div", {
         className: "x78zum5 x6s0dn4 xl56j7k",
-        children: [jsx(_$$T, {}), tx("fullscreen_actions.edit_image")]
+        children: [jsx(_$$T, {}), renderI18nText("fullscreen_actions.edit_image")]
       })
     })
   }) : null;

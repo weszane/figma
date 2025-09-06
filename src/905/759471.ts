@@ -6,15 +6,15 @@ import { K as _$$K } from "../905/443068";
 import { O as _$$O } from "../905/487602";
 import { V4z, _0v, rrT } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { xx } from "../figma_app/815945";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { debugState } from "../905/407919";
-import { m as _$$m } from "../905/717445";
+import { getFilteredFeatureFlags } from "../905/717445";
 import { Q as _$$Q } from "../figma_app/67145";
 import { Pt } from "../figma_app/806412";
 import { k as _$$k2 } from "../905/582200";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { XE, u1 } from "../figma_app/91703";
 import { ey as _$$ey } from "../figma_app/451499";
 import { Dc } from "../figma_app/314264";
@@ -94,18 +94,18 @@ function X(e) {
     children: [jsx(l9, {
       width: "fill",
       label: jsx(_$$h, {
-        children: _$$t("properties_panel.transform_modifiers.repeat.units_label")
+        children: getI18nString("properties_panel.transform_modifiers.repeat.units_label")
       }),
       disabled: e.disabled
     }), jsxs(mc, {
       children: [jsx(_$$c$, {
         value: "RELATIVE",
-        children: _$$t("properties_panel.transform_modifiers.repeat.units_relative", {
+        children: getI18nString("properties_panel.transform_modifiers.repeat.units_relative", {
           numUnits: e.value
         })
       }), jsx(_$$c$, {
         value: "PIXELS",
-        children: _$$t("properties_panel.transform_modifiers.repeat.units_pixels")
+        children: getI18nString("properties_panel.transform_modifiers.repeat.units_pixels")
       })]
     })]
   });
@@ -118,7 +118,7 @@ function Q(e) {
       children: jsx(_$$q2, {
         autoFocus: !0,
         bigStep: 1,
-        dataTooltip: _$$t("properties_panel.transform_modifiers.repeat.count"),
+        dataTooltip: getI18nString("properties_panel.transform_modifiers.repeat.count"),
         disabled: e.disabled,
         fullWidth: !0,
         icon: jsx(_$$O3, {}),
@@ -185,29 +185,29 @@ function ee(e) {
         eventListeners: ["onMouseDown"],
         children: jsxs(_$$bL, {
           legend: jsx(_$$q, {
-            children: _$$t("properties_panel.transform_modifiers.repeat.type")
+            children: getI18nString("properties_panel.transform_modifiers.repeat.type")
           }),
           value: e.transformModifier.repeatType,
           onChange: e => t(e, zk.YES),
           readonly: e.disabled,
           children: [jsx(RT, {
-            label: _$$t("fullscreen.properties_panel.radial"),
+            label: getI18nString("fullscreen.properties_panel.radial"),
             value: "RADIAL"
           }), jsx(RT, {
-            label: _$$t("fullscreen.properties_panel.linear"),
+            label: getI18nString("fullscreen.properties_panel.linear"),
             value: "LINEAR"
           })]
         })
       })
     }), "LINEAR" === e.transformModifier.repeatType && jsx(cS, {
-      label: _$$t("properties_panel.transform_modifiers.repeat.direction"),
+      label: getI18nString("properties_panel.transform_modifiers.repeat.direction"),
       input: jsx(_$$o, {
         eventListeners: ["onMouseDown"],
         children: jsx("span", {
           className: Z,
           children: jsxs(_$$bL, {
             legend: jsx(_$$q, {
-              children: _$$t("properties_panel.transform_modifiers.repeat.direction")
+              children: getI18nString("properties_panel.transform_modifiers.repeat.direction")
             }),
             value: e.transformModifier.axis,
             onChange: e => i(e, zk.YES),
@@ -215,18 +215,18 @@ function ee(e) {
             children: [jsx(_$$c$2, {
               icon: jsx(K, {}),
               value: "X",
-              "aria-label": _$$t("fullscreen.type_panel.align_horizontal")
+              "aria-label": getI18nString("fullscreen.type_panel.align_horizontal")
             }), jsx(_$$c$2, {
               icon: jsx(Y, {}),
               value: "Y",
-              "aria-label": _$$t("fullscreen.type_panel.align_vertical")
+              "aria-label": getI18nString("fullscreen.type_panel.align_vertical")
             })]
           })
         })
       })
     }), jsx(Q, {
       ...e,
-      label: _$$t("properties_panel.transform_modifiers.repeat.count"),
+      label: getI18nString("properties_panel.transform_modifiers.repeat.count"),
       onValueChange: (t, i) => {
         if (t === e.transformModifier.count) return;
         let n = {
@@ -238,7 +238,7 @@ function ee(e) {
       value: e.transformModifier.count || 1
     }), jsx(J, {
       ...e,
-      label: _$$t("properties_panel.transform_modifiers.repeat.spacing"),
+      label: getI18nString("properties_panel.transform_modifiers.repeat.spacing"),
       onValueChange: (t, i) => {
         if (t === (e.transformModifier.offset?.x ?? 0)) return;
         let n = {
@@ -275,14 +275,14 @@ function ei(e) {
     inputClassName: "ui3_transform_modifiers_settings_picker--input--S-N-R",
     onValueChange: e.onValueChange,
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": "x" === e.axis ? _$$t("properties_panel.transform_modifiers.x") : _$$t("properties_panel.transform_modifiers.y"),
+    "data-tooltip": "x" === e.axis ? getI18nString("properties_panel.transform_modifiers.x") : getI18nString("properties_panel.transform_modifiers.y"),
     tooltipForScreenReadersOnly: !0,
     autoFocus: e.autoFocus,
     dispatch: e.dispatch,
     recordingKey: Pt(e, `skewAngle${e.axis.toUpperCase()}`)
   });
   return jsx(cS, {
-    label: "x" === e.axis ? _$$t("properties_panel.transform_modifiers.x") : _$$t("properties_panel.transform_modifiers.y"),
+    label: "x" === e.axis ? getI18nString("properties_panel.transform_modifiers.x") : getI18nString("properties_panel.transform_modifiers.y"),
     input: t
   });
 }
@@ -325,7 +325,7 @@ function er(e) {
       case "SKEW":
         return null;
       case "REPEAT":
-        return _$$t("properties_panel.transform_modifiers.repeat");
+        return getI18nString("properties_panel.transform_modifiers.repeat");
     }
   }(e.transformModifier.type);
   let i = new Point(e.initialX, e.initialY);
@@ -396,13 +396,13 @@ let ex = "transform_modifiers_panel--chevron--GL--O";
 let ew = e => {
   switch (e.type) {
     case "REPEAT":
-      return _$$t("fullscreen.properties_panel.transform_modifiers.repeat");
+      return getI18nString("fullscreen.properties_panel.transform_modifiers.repeat");
     case "SYMMETRY":
-      return _$$t("fullscreen.properties_panel.transform_modifiers.symmetry");
+      return getI18nString("fullscreen.properties_panel.transform_modifiers.symmetry");
     case "SKEW":
-      return _$$t("fullscreen.properties_panel.transform_modifiers.skew");
+      return getI18nString("fullscreen.properties_panel.transform_modifiers.skew");
     default:
-      return _$$t("fullscreen.properties_panel.section_transform_modifiers.tooltip_add_transform_modifier");
+      return getI18nString("fullscreen.properties_panel.section_transform_modifiers.tooltip_add_transform_modifier");
   }
 };
 let eC = new Lk({
@@ -416,23 +416,23 @@ let eT = e => {
   if (void 0 === e) return "";
   switch (e) {
     case "X":
-      return _$$t("fullscreen.type_panel.align_horizontal");
+      return getI18nString("fullscreen.type_panel.align_horizontal");
     case "Y":
-      return _$$t("fullscreen.type_panel.align_vertical");
+      return getI18nString("fullscreen.type_panel.align_vertical");
     default:
       return "";
   }
 };
 let ek = e => {
   let t = [];
-  if ("REPEAT" === e.type ? "LINEAR" === e.repeatType ? t.push(eT(e.axis)) : "RADIAL" === e.repeatType && t.push(_$$t("fullscreen.properties_panel.radial")) : t.push(_$$t("fullscreen.properties_panel.section_transform_modifiers.tooltip_add_transform_modifier")), null != e.offset && null != e.unitType) switch (e.unitType) {
+  if ("REPEAT" === e.type ? "LINEAR" === e.repeatType ? t.push(eT(e.axis)) : "RADIAL" === e.repeatType && t.push(getI18nString("fullscreen.properties_panel.radial")) : t.push(getI18nString("fullscreen.properties_panel.section_transform_modifiers.tooltip_add_transform_modifier")), null != e.offset && null != e.unitType) switch (e.unitType) {
     case "PIXELS":
-      t.push(`${_$$t("properties_panel.transform_modifiers.repeat.units_pixels_lowercase", {
+      t.push(`${getI18nString("properties_panel.transform_modifiers.repeat.units_pixels_lowercase", {
         numPx: eC.format(e.offset.x)
       })}`);
       break;
     case "RELATIVE":
-      t.push(`${_$$t("properties_panel.transform_modifiers.repeat.units_relative_lowercase", {
+      t.push(`${getI18nString("properties_panel.transform_modifiers.repeat.units_relative_lowercase", {
         numUnits: eC.parse(eC.format(e.offset.x))
       })}`);
   }
@@ -455,7 +455,7 @@ let eR = forwardRef((e, t) => {
     })
   });
 });
-let eN = ["REPEAT", ...(_$$m().ce_il_slant ? ["SKEW"] : [])];
+let eN = ["REPEAT", ...(getFilteredFeatureFlags().ce_il_slant ? ["SKEW"] : [])];
 let eP = {
   REPEAT: 2,
   SYMMETRY: 1,
@@ -524,11 +524,11 @@ function eL(e) {
   let T = Dc(S.editorType);
   let k = _W(propertyList, []);
   let R = useCallback(() => {
-    zl.set(eO, k.length);
+    atomStoreManager.set(eO, k.length);
     Y5.triggerActionInUserEditScope("add-transform-modifier-to-selection", {
       source: "panel"
     });
-    az.trackDefinedEvent("illustration.web_transform_add_to_layer", {
+    analyticsEventManager.trackDefinedEvent("illustration.web_transform_add_to_layer", {
       transformType: "REPEAT"
     });
     a2("transformModifiers");
@@ -541,7 +541,7 @@ function eL(e) {
     }) : onChange(i);
     dispatch(XE());
     Y5.deselectProperty();
-    az.trackDefinedEvent("illustration.web_transform_delete_from_layer", {
+    analyticsEventManager.trackDefinedEvent("illustration.web_transform_delete_from_layer", {
       transformType: t,
       productType: T
     });
@@ -565,7 +565,7 @@ function eL(e) {
     onChange: u,
     onMouseDown: (...t) => {
       h(...t);
-      az.trackDefinedEvent("illustration.web_transform_toggle_flyout_open", {
+      analyticsEventManager.trackDefinedEvent("illustration.web_transform_toggle_flyout_open", {
         transformType: e.type,
         productType: T
       });
@@ -594,7 +594,7 @@ function eL(e) {
         dispatch,
         onChange,
         openFile,
-        overrideAddPropertyTooltip: isUI3 ? _$$t("fullscreen.properties_panel.section_transform_modifiers.tooltip_add_transform_modifier") : void 0,
+        overrideAddPropertyTooltip: isUI3 ? getI18nString("fullscreen.properties_panel.section_transform_modifiers.tooltip_add_transform_modifier") : void 0,
         pickerShown,
         propertyList,
         recordingKey,
@@ -604,7 +604,7 @@ function eL(e) {
         stylePickerShown: {
           isShown: !1
         },
-        title: _$$t("fullscreen.properties_panel.transform_modifiers.transform_modifiers")
+        title: getI18nString("fullscreen.properties_panel.transform_modifiers.transform_modifiers")
       })
     })
   });
@@ -652,7 +652,7 @@ function eB(e) {
   let ei = useCallback((e, t) => {
     e.visible = !0;
     onChange(e, t);
-    az.trackDefinedEvent("illustration.web_transform_toggle_visible_implicit", {
+    analyticsEventManager.trackDefinedEvent("illustration.web_transform_toggle_visible_implicit", {
       transformType: transformModifier.type,
       productType
     });
@@ -694,14 +694,14 @@ function eB(e) {
       ...transformModifier,
       type: e
     }, t);
-    az.trackDefinedEvent("illustration.web_transform_type_change", {
+    analyticsEventManager.trackDefinedEvent("illustration.web_transform_type_change", {
       oldType: i,
       transformType: e,
       productType: Dc(debugState.getState().selectedView.editorType)
     });
   }, [onChange, transformModifier]);
   let ed = useCallback(e => {
-    az.trackDefinedEvent("illustration.web_transform_toggle_visibility", {
+    analyticsEventManager.trackDefinedEvent("illustration.web_transform_toggle_visibility", {
       transformType: transformModifier.type,
       isVisible: e,
       productType: Dc(debugState.getState().selectedView.editorType)
@@ -759,7 +759,7 @@ function eB(e) {
       onClick: ec,
       recordingKey: Pt(q, "toggleSettings"),
       "aria-expanded": !!Z,
-      "aria-label": _$$t("properties_panel.transform_modifiers.transform_modifier_settings"),
+      "aria-label": getI18nString("properties_panel.transform_modifiers.transform_modifier_settings"),
       children: jsx("span", {
         className: transformModifier.visible ? "" : eb,
         children: eA(transformModifier)
@@ -777,10 +777,10 @@ function eB(e) {
       children: jsx(_$$K, {
         recordingKey: Pt(q, "removeButton"),
         onClick: onRemoveTransformModifier,
-        "aria-label": _$$t("fullscreen.properties_panel.tooltip_remove"),
+        "aria-label": getI18nString("fullscreen.properties_panel.tooltip_remove"),
         htmlAttributes: {
           onMouseDown: et,
-          "data-tooltip": _$$t("fullscreen.properties_panel.tooltip_remove"),
+          "data-tooltip": getI18nString("fullscreen.properties_panel.tooltip_remove"),
           "data-tooltip-type": Ib.TEXT
         },
         children: jsx(_$$O, {})
@@ -789,7 +789,7 @@ function eB(e) {
     let h = m ? [d, m] : [d];
     let f = jsxs(Fragment, {
       children: [jsx(eF, {
-        ariaLabel: _$$t("fullscreen.properties_panel.transform_modifiers.transform_modifiers"),
+        ariaLabel: getI18nString("fullscreen.properties_panel.transform_modifiers.transform_modifiers"),
         chevronClassName: ex,
         className: ev,
         dispatch,
@@ -887,10 +887,10 @@ function eB(e) {
         recordingKey: Pt(q, "toggleSettings"),
         selected: !!Z,
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("properties_panel.transform_modifiers.transform_modifier_settings")
+        "data-tooltip": getI18nString("properties_panel.transform_modifiers.transform_modifier_settings")
       }), jsxs(Fragment, {
         children: [jsx(eF, {
-          ariaLabel: _$$t("fullscreen.properties_panel.transform_modifiers.transform_modifiers"),
+          ariaLabel: getI18nString("fullscreen.properties_panel.transform_modifiers.transform_modifiers"),
           chevronClassName: ex,
           className: ev,
           dispatch,
@@ -913,7 +913,7 @@ function eB(e) {
         }), jsx(_$$K, {
           recordingKey: Pt(q, "removeButton"),
           onClick: onRemoveTransformModifier,
-          "aria-label": _$$t("properties_panel.transform_modifiers.remove_transform_modifier"),
+          "aria-label": getI18nString("properties_panel.transform_modifiers.remove_transform_modifier"),
           htmlAttributes: {
             onMouseDown: et
           },

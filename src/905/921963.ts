@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { Xr } from "../figma_app/27355";
 import { getInitialOptions } from "../figma_app/169182";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { t as _$$t2 } from "../905/378566";
 import { h as _$$h } from "../905/142086";
 import { to } from "../905/156213";
@@ -61,10 +61,10 @@ export function $$N0(e) {
   let G = e.readOnlyOverrideWarningMessage;
   let z = e.isStarterTier || e.role.level === e6.VIEWER || e.resource.type !== FResourceCategoryType.FILE ? null : e.user.id === e.role.user_id && U ? {
     tooltipId: _$$a,
-    text: _$$t("folder_permissions_modal.restricted_warning.admin_needs_to_update_your_seat")
+    text: getI18nString("folder_permissions_modal.restricted_warning.admin_needs_to_update_your_seat")
   } : e.role.user_id && U ? {
     tooltipId: _$$_2,
-    text: _$$t("folder_permissions_modal.restricted_warning.admin_needs_to_update_this_seat")
+    text: getI18nString("folder_permissions_modal.restricted_warning.admin_needs_to_update_this_seat")
   } : null;
   z && (G = null);
   let H = !!(e.repo && e.resource.type === FResourceCategoryType.FILE && Xm(e.resource.file));
@@ -166,14 +166,14 @@ export function $$N0(e) {
         role,
         user
       } = e;
-      if (user && role.user_id === user.id) return tx("role_row.you", {
+      if (user && role.user_id === user.id) return renderI18nText("role_row.you", {
         name: jsx("b", {
           className: _$$to,
           children: user.name
         }),
         you: jsx("span", {
           className: vQ,
-          children: tx("role_row.you_label_lowercase")
+          children: renderI18nText("role_row.you_label_lowercase")
         })
       });
       let r = role.user.email || "";

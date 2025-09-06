@@ -6,7 +6,7 @@ import { k as _$$k } from "../905/443820";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { parsePxInt } from "../figma_app/783094";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Tn, fv } from "../figma_app/933328";
 import { M4, IT } from "../905/713695";
 import { MH, cM, tK } from "../figma_app/803787";
@@ -214,7 +214,7 @@ let $$B0 = Ju(function (e) {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _?.name ?? t("fullscreen.fullscreen_view_selector.untitled")
+          children: _?.name ?? getI18nString("fullscreen.fullscreen_view_selector.untitled")
         })
       }), jsx(nB, {
         padding: 0,

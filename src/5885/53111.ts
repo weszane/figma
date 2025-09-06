@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useSelector, useDispatch } from "../vendor/514228";
-import { t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { E } from "../905/984674";
 import { Ce } from "../905/156213";
 import { bE } from "../figma_app/375098";
@@ -17,11 +17,11 @@ function y() {
   return jsxs("div", {
     className: _$$s.mt16.$,
     children: [jsx(X, {
-      bulletLabel: t("pro_onboarding.unlimited_files_for_all_your_ideas")
+      bulletLabel: getI18nString("pro_onboarding.unlimited_files_for_all_your_ideas")
     }), jsx(X, {
-      bulletLabel: t("pro_onboarding.unlimited_projects_to_organize_your_files")
+      bulletLabel: getI18nString("pro_onboarding.unlimited_projects_to_organize_your_files")
     }), jsx(X, {
-      bulletLabel: t("pro_onboarding.dev_mode_for_simpler_inspection_and_handoff")
+      bulletLabel: getI18nString("pro_onboarding.dev_mode_for_simpler_inspection_and_handoff")
     })]
   });
 }
@@ -31,7 +31,7 @@ function T({
   return jsx(E, {
     fontSize: 24,
     fontWeight: "bold",
-    children: tx("pro_onboarding.welcome_to_professional", {
+    children: renderI18nText("pro_onboarding.welcome_to_professional", {
       userName: e.name.split(" ")[0]
     })
   });
@@ -63,7 +63,7 @@ export let $$b0 = Ju(function ({
     m(Ce());
   };
   let f = jsxs(Fragment, {
-    children: [tx("pro_onboarding.you_successfully_upgraded_team_name_to_a_professional_plan", {
+    children: [renderI18nText("pro_onboarding.you_successfully_upgraded_team_name_to_a_professional_plan", {
       teamName: jsx(E, {
         fontWeight: "bold",
         children: i.name
@@ -80,7 +80,7 @@ export let $$b0 = Ju(function ({
       type: "button",
       label: jsx(E, {
         fontSize: 13,
-        children: tx("pro_onboarding.get_started")
+        children: renderI18nText("pro_onboarding.get_started")
       }),
       ctaTrackingDescriptor: _$$c.GET_STARTED,
       onClick: g

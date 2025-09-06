@@ -4,7 +4,7 @@ import { Rs } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { Us, M7 } from "../figma_app/637027";
 import { B } from "../905/714743";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { Lo } from "../905/156213";
 import { WX } from "../figma_app/482142";
 import { E9 } from "../figma_app/297957";
@@ -58,33 +58,33 @@ export let $$w0 = Ju(function (e) {
         })
       }), jsx("h3", {
         className: "locked_team_usage_modal--headerText--5KMOz",
-        children: tx("payments_modal.to_meet_the_limits_for_your_starter_plan")
+        children: renderI18nText("payments_modal.to_meet_the_limits_for_your_starter_plan")
       }), jsxs("ul", {
         children: [O && jsx("li", {
-          children: tx("payments_modal.move_figma_files_to_drafts", {
+          children: renderI18nText("payments_modal.move_figma_files_to_drafts", {
             numFigmaFiles: k - WW
           })
         }), S && jsx("li", {
-          children: tx("payments_modal.move_figma_files_to_drafts", {
+          children: renderI18nText("payments_modal.move_figma_files_to_drafts", {
             numFigmaFiles: E - WW
           })
         }), N && jsx("li", {
-          children: tx("payments_modal.move_figjam_files_to_drafts", {
+          children: renderI18nText("payments_modal.move_figjam_files_to_drafts", {
             numFigJamFiles: C - WW
           })
         }), jsx(function () {
           return !I?.projects || I.projects <= Wf ? null : jsx("li", {
-            children: tx("payments_modal.remove_projects", {
+            children: renderI18nText("payments_modal.remove_projects", {
               numProjects: I.projects - Wf
             })
           });
         }, {}), R.length > 0 && jsx("li", {
-          children: tx("payments_modal.remove_view_only_permissions_from_all_projects")
+          children: renderI18nText("payments_modal.remove_view_only_permissions_from_all_projects")
         }), M.length > 0 && jsx("li", {
-          children: tx("payments_modal.remove_invite_only_permissions_from_all_projects")
+          children: renderI18nText("payments_modal.remove_invite_only_permissions_from_all_projects")
         })]
       }), jsx("p", {
-        children: tx("payments_modal.if_you_would_rather_keep_the_current_limits", {
+        children: renderI18nText("payments_modal.if_you_would_rather_keep_the_current_limits", {
           upgradeToProfessional: jsx(Us, {
             onClick: e => {
               e.preventDefault();
@@ -98,7 +98,7 @@ export let $$w0 = Ju(function (e) {
               trackingDescriptor: _$$c.UPGRADE_TO_PROFESSIONAL
             },
             trusted: !0,
-            children: tx("payments_modal.upgrade_to_professional")
+            children: renderI18nText("payments_modal.upgrade_to_professional")
           })
         })
       }), jsx("div", {
@@ -108,7 +108,7 @@ export let $$w0 = Ju(function (e) {
           trackingProperties: {
             teamId
           },
-          children: tx("payments_modal.okay")
+          children: renderI18nText("payments_modal.okay")
         })
       })]
     })

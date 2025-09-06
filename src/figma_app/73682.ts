@@ -1,6 +1,6 @@
-import { um, zl, eU } from "../figma_app/27355";
+import { um, atomStoreManager, atom } from "../figma_app/27355";
 import { FJ } from "../905/508367";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { zX } from "../905/576487";
 import { Wh } from "../figma_app/615482";
@@ -24,14 +24,14 @@ let u = um({
         let r = function (e, t, r) {
           if ("" === t) {
             e(F.enqueue({
-              message: _$$t("slides.presenter_view.unknown_error"),
+              message: getI18nString("slides.presenter_view.unknown_error"),
               error: !0
             }));
             return;
           }
           if (!r) {
             e(F.enqueue({
-              message: _$$t("slides.presenter_view.network_error"),
+              message: getI18nString("slides.presenter_view.network_error"),
               error: !0
             }));
             return;
@@ -43,9 +43,9 @@ let u = um({
           let p = FJ(t, d, `height=${c},width=${16 * c / 9},left=0,top=0,popup=yes`);
           if (null === p) {
             let i = {
-              text: _$$t("slides.presenter_view.open_popup"),
+              text: getI18nString("slides.presenter_view.open_popup"),
               action: () => {
-                zl.set(u, {
+                atomStoreManager.set(u, {
                   type: 0,
                   dispatch: e,
                   url: t,
@@ -54,16 +54,16 @@ let u = um({
               }
             };
             e(F.enqueue({
-              message: _$$t("slides.presenter_view.pop_up_error"),
+              message: getI18nString("slides.presenter_view.pop_up_error"),
               error: !0,
               button: i
             }));
-            zl.set(u, {
+            atomStoreManager.set(u, {
               type: 2
             });
           } else e(F.enqueue({
             icon: zX.NOTES_ON_RECTANGLE,
-            message: _$$t("slides.presenter_view.visual_bells.opened_audience_view_in_separate_window")
+            message: getI18nString("slides.presenter_view.visual_bells.opened_audience_view_in_separate_window")
           }));
           return p;
         }(t.dispatch, t.url, t.isOnline);
@@ -95,8 +95,8 @@ let u = um({
       };
   }
 });
-let p = Wh(() => eU(new Set()));
-Wh(() => eU(e => e(p), (e, t, r) => {
+let p = Wh(() => atom(new Set()));
+Wh(() => atom(e => e(p), (e, t, r) => {
   let n = e(p);
   r && t(p, new Set([...n, r]));
 }));

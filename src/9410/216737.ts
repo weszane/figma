@@ -1,5 +1,5 @@
 import { glU } from "../figma_app/763686";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { c as _$$c } from "../905/370443";
 import { f } from "../905/940356";
 export function $$o0({
@@ -15,10 +15,10 @@ export function $$o0({
     t.onClickNext?.();
     glU.triggerActionInUserEditScope("set-tool-default", null);
   };
-  let p = t.isFollowUp ? _$$t("cursor_bot.got_it") : _$$t("tooltips_plus_onboarding.next");
+  let p = t.isFollowUp ? getI18nString("cursor_bot.got_it") : getI18nString("tooltips_plus_onboarding.next");
   let h = t.isFollowUp ? _$$c.GOT_IT : _$$c.NEXT;
   c ? (i = {
-    ctaText: e ? _$$t("cursor_bot.show_me_again") : _$$t("cursor_bot.show_me"),
+    ctaText: e ? getI18nString("cursor_bot.show_me_again") : getI18nString("cursor_bot.show_me"),
     ctaTrackingDescriptor: e ? _$$c.SHOW_ME_AGAIN : _$$c.SHOW_ME
   }, o = {
     ctaText: p,
@@ -27,7 +27,7 @@ export function $$o0({
     ctaText: p,
     ctaTrackingDescriptor: h
   }, o = {
-    ctaText: e ? _$$t("cursor_bot.show_me_again") : _$$t("cursor_bot.show_me"),
+    ctaText: e ? getI18nString("cursor_bot.show_me_again") : getI18nString("cursor_bot.show_me"),
     ctaTrackingDescriptor: e ? _$$c.SHOW_ME_AGAIN : _$$c.SHOW_ME
   }, l = u, d = t.onClickShowMe);
   return {

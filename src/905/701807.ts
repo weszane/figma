@@ -1,9 +1,9 @@
 import { Oin } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { NC } from "../905/17179";
-import { eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { s as _$$s } from "../905/573154";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
 import { $ } from "../905/489647";
 import { sf } from "../905/929976";
@@ -21,9 +21,9 @@ import { h as _$$h } from "../905/438683";
 import { nF } from "../905/350402";
 let $$x1 = NC("FULLSCREEN_DOCUMENT_LOADED");
 let $$S0 = nF(e => {
-  if (eD) {
+  if (desktopAPIInstance) {
     let t = e.getState().selectedView;
-    !eD.isFileBrowserTab() && ("fullscreen" !== t.view || t.fileKey) && eD.setLoading(!1);
+    !desktopAPIInstance.isFileBrowserTab() && ("fullscreen" !== t.view || t.fileKey) && desktopAPIInstance.setLoading(!1);
   }
   let t = e.getState();
   let i = t.selectedView;
@@ -41,7 +41,7 @@ let $$S0 = nF(e => {
     }));
   }).catch(t => {
     e.dispatch(_b());
-    let i = "missing_authentication" === t.data.reason ? _$$t("collaboration.feedback.version_history_authentication_error") : _$$t("collaboration.feedback.version_history_error");
+    let i = "missing_authentication" === t.data.reason ? getI18nString("collaboration.feedback.version_history_authentication_error") : getI18nString("collaboration.feedback.version_history_error");
     e.dispatch(_$$s.error(J(t, i)));
     e.dispatch(Y6({
       mode: Oin.OFF
@@ -117,4 +117,4 @@ let $$S0 = nF(e => {
   e.dispatch($$x1());
 });
 export const X = $$S0;
-export const o = $$x1; 
+export const o = $$x1;

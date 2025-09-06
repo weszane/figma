@@ -1,5 +1,5 @@
 import { Ez5, nQ7 } from "../figma_app/763686";
-import { md, fp } from "../figma_app/27355";
+import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { l as _$$l } from "../905/745972";
 import { _ as _$$_ } from "../figma_app/658134";
 import { S } from "../figma_app/109947";
@@ -13,11 +13,11 @@ export function $$$$h0() {
     windowInnerWidth
   } = _$$l();
   let t = _$$C()?.bottomRightToolsNode;
-  let i = md(S);
+  let i = useAtomWithSubscription(S);
   let h = dP();
   let m = ut(Ez5?.interopToolMode(), nQ7.SELF);
   let f = jw();
-  let [g] = fp(Lk);
+  let [g] = useAtomValueAndSetter(Lk);
   let _ = g === _$$x.ASSETS && f && m === nQ7.SELF;
   let x = m === nQ7.DESIGN;
   let y = qw();

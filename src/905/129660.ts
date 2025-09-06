@@ -1,5 +1,5 @@
 import { xx } from "../figma_app/815945";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { hS, oV, E7 } from "../905/216495";
 var s = (e => (e[e.OLD = 0] = "OLD", e[e.FEB19 = 1] = "FEB19", e))(s || {});
 class o {
@@ -66,8 +66,8 @@ export function $$m3(e) {
   let {
     lineHeight
   } = e;
-  if (!hS(lineHeight)) return t("fullscreen.mixed");
-  if ($$h1(lineHeight)) return t("fullscreen.auto");
+  if (!hS(lineHeight)) return getI18nString("fullscreen.mixed");
+  if ($$h1(lineHeight)) return getI18nString("fullscreen.auto");
   switch (lineHeight.units) {
     case "PERCENT":
       let i = $$d0(e);

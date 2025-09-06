@@ -1,8 +1,8 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { xf } from "../figma_app/416935";
-import { $D } from "../905/11";
-import { t as _$$t } from "../905/303541";
+import { reportError } from "../905/11";
+import { getI18nString } from "../905/303541";
 import { FMemberRoleType } from "../figma_app/191312";
 import { A8 } from "../figma_app/465071";
 import { d as _$$d } from "../905/44199";
@@ -18,7 +18,7 @@ export function $$h5(e, t, i) {
 export function $$g6(e, t, i, n, r, s = null) {
   let l;
   let d = "";
-  xf(e) ? i && eE(n, e) ? s ? (l = _$$d.ERROR, d = s) : l = _$$d.WARN : r && r === e ? (l = _$$d.ERROR, d = _$$t("team_view.team_permissions_modal.youre_not_able_to_send_an_invite_to_yourself")) : l = _$$d.OK : l = _$$d.ERROR;
+  xf(e) ? i && eE(n, e) ? s ? (l = _$$d.ERROR, d = s) : l = _$$d.WARN : r && r === e ? (l = _$$d.ERROR, d = getI18nString("team_view.team_permissions_modal.youre_not_able_to_send_an_invite_to_yourself")) : l = _$$d.OK : l = _$$d.ERROR;
   return {
     state: l,
     content: t,
@@ -67,7 +67,7 @@ export function $$y0(e) {
   let t = e.team;
   return t ? t.roles?.map(e => {
     let t = e.user ? Um(e.user) : null;
-    e.pending || t || ($D(_$$e.FRONTEND_PLATFORM, Error("Non-pending role has no user"), {
+    e.pending || t || (reportError(_$$e.FRONTEND_PLATFORM, Error("Non-pending role has no user"), {
       extra: {
         role: e
       }
@@ -96,7 +96,7 @@ export function $$b3(e) {
   };
   let o = t.roles.map(e => {
     let t = e.user ? Um(e.user) : null;
-    e.pending || t || ($D(_$$e.FRONTEND_PLATFORM, Error("Non-pending role has no user"), {
+    e.pending || t || (reportError(_$$e.FRONTEND_PLATFORM, Error("Non-pending role has no user"), {
       extra: {
         role: e
       }

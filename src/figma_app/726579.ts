@@ -1,8 +1,8 @@
-import { eU, zl } from "../figma_app/27355";
+import { atom, atomStoreManager } from "../figma_app/27355";
 import { F } from "../905/422355";
 import { X } from "../905/457745";
 import { r as _$$r } from "../905/656735";
-let o = eU({});
+let o = atom({});
 let l = e => {
   let t = JSON.stringify({
     library_keys: [...e.library_keys].sort(),
@@ -16,7 +16,7 @@ export async function $$d0(e) {
   if (0 === e.library_keys.length) return new Map();
   let t = l(e);
   let r = Date.now();
-  let i = zl.get(o);
+  let i = atomStoreManager.get(o);
   let d = i[t];
   if (d && r - d.timestamp < 432e5) return d.data;
   try {
@@ -26,7 +26,7 @@ export async function $$d0(e) {
     for (let [e, {
       keys: t
     }] of Object.entries(d.entity_keys_per_library)) c.set(e, t);
-    zl.set(o, {
+    atomStoreManager.set(o, {
       ...i,
       [t]: {
         data: c,

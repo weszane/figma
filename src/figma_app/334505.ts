@@ -4,7 +4,7 @@ import { m1T } from "../figma_app/763686";
 import { l as _$$l } from "../905/716947";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { fp } from "../figma_app/27355";
+import { useAtomValueAndSetter } from "../figma_app/27355";
 import { k9 } from "../905/19536";
 import { Mz } from "../vendor/925040";
 import { ZC } from "../figma_app/39751";
@@ -149,7 +149,7 @@ export function $$U7() {
     let r = e.get(t);
     return !!r && !!r.isInstance;
   }), e) && !!e.length;
-  let [s, l] = fp(Lk);
+  let [s, l] = useAtomValueAndSetter(Lk);
   let c = useSelector(e => e.mirror.sceneGraphSelection);
   let u = ZC(c);
   let m = e => e.some(e => {

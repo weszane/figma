@@ -2,9 +2,9 @@ import { useLayoutEffect, useEffect } from "react";
 import { DP } from "../905/158740";
 import { Ez5 } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { v } from "../905/883621";
-import { V } from "../905/709735";
-import { kF } from "../905/11";
+import { updateEnvironmentInfo } from "../905/883621";
+import { uiVariantName } from "../905/709735";
+import { setSentryTag } from "../905/11";
 import { g } from "../figma_app/115586";
 export function $$u2() {
   let {
@@ -12,12 +12,12 @@ export function $$u2() {
   } = DP();
   useLayoutEffect(() => {
     updateMode({
-      version: V
+      version: uiVariantName
     });
-    v({
-      uiVersion: V
+    updateEnvironmentInfo({
+      uiVersion: uiVariantName
     });
-    kF("uiVersion", V);
+    setSentryTag("uiVersion", uiVariantName);
   }, [updateMode]);
 }
 export function $$p0() {

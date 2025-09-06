@@ -1,5 +1,5 @@
 import { c2 } from "../905/382883";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { p as _$$p } from "../905/167135";
 import { n as _$$n } from "../905/347702";
 import { pT } from "../905/544659";
@@ -29,7 +29,7 @@ export async function $$d0(e, t, i) {
     hasLoaded: e
   }) => !e) || Object.values(a.images).some(({
     hasLoaded: e
-  }) => !e)) && (await m(a, s, t, i)), o = d, d = e(), !c2(o?.syncedState, d.syncedState)); c++) 19 === c && x1("resources", "Loading reconciliation resources reached max iterations");
+  }) => !e)) && (await m(a, s, t, i)), o = d, d = e(), !c2(o?.syncedState, d.syncedState)); c++) 19 === c && logError("resources", "Loading reconciliation resources reached max iterations");
   return {
     imgInfoMap: s,
     vRoot: d

@@ -16,7 +16,7 @@ import { bG } from "../905/149328";
 import { Point } from "../905/736624";
 import { s as _$$s } from "../cssbuilder/589278";
 import { n as _$$n } from "../905/734251";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { e as _$$e } from "../905/716094";
 import { F as _$$F } from "../905/989956";
 import { lg } from "../figma_app/976749";
@@ -476,7 +476,7 @@ function eo({
   numVariants: t
 }) {
   if (t <= 1) return null;
-  let r = _$$t("design_systems.assets_panel.variant_count", {
+  let r = getI18nString("design_systems.assets_panel.variant_count", {
     numVariants: t
   });
   return jsxs(Fragment, {

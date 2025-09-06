@@ -1,13 +1,13 @@
 import { useSelector } from "../vendor/514228";
-import { md } from "../figma_app/27355";
-import { sx } from "../905/449184";
+import { useAtomWithSubscription } from "../figma_app/27355";
+import { trackEventAnalytics } from "../905/449184";
 import { OM, wf } from "../905/124270";
 import { li } from "../905/182534";
 import { dd } from "../figma_app/604494";
 export function $$d0() {
-  let e = md(OM);
-  let t = md(dd);
-  let i = md(wf);
+  let e = useAtomWithSubscription(OM);
+  let t = useAtomWithSubscription(dd);
+  let i = useAtomWithSubscription(wf);
   let d = useSelector(e => e.search.sessionId);
   let c = useSelector(e => e.search.queryId);
   let u = useSelector(e => e.search.parameters.query);
@@ -30,7 +30,7 @@ export function $$d0() {
       queryId: c,
       query: u
     };
-    sx("facet_applied", o);
+    trackEventAnalytics("facet_applied", o);
   };
 }
 export const n = $$d0;

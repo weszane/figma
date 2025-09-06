@@ -4,17 +4,17 @@ import { useDispatch } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { J as _$$J } from "../905/614223";
 import { getFeatureFlags } from "../905/601108";
-import { eU, fp, md } from "../figma_app/27355";
+import { atom, useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import c from "classnames";
-import { sx, az } from "../905/449184";
+import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { h as _$$h } from "../905/207101";
 import { Rs } from "../figma_app/288654";
-import { $D, DZ } from "../905/11";
+import { reportError, SeverityLevel } from "../905/11";
 import { tH } from "../905/751457";
 import { ks, nR, vd } from "../figma_app/637027";
 import { Wi } from "../figma_app/162641";
 import { kt } from "../figma_app/858013";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { u as _$$u } from "../905/16237";
 import { Lo } from "../905/156213";
@@ -34,7 +34,7 @@ import { kdQ } from "../figma_app/43951";
 import { wH } from "../figma_app/680166";
 import { UQ } from "../figma_app/864723";
 import { tS, q5 } from "../figma_app/516028";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { Sm } from "../figma_app/482728";
 import { e0 } from "../905/696396";
 import { w as _$$w } from "../905/281010";
@@ -66,57 +66,57 @@ var u = c;
 function L(e, t, i, n) {
   switch (i) {
     case tc.CODE_CHAT_LIMIT:
-      if (getFeatureFlags().ai_ga && t === ud.EXPERT) return _$$t("request_upgrade.header.figmake.more_prompts");
+      if (getFeatureFlags().ai_ga && t === ud.EXPERT) return getI18nString("request_upgrade.header.figmake.more_prompts");
       break;
     case tc.SHARE_DRAFTS:
     case tc.IN_EDITOR_RESTRICTED_DRAFT:
     case tc.RESTRICTED_DRAFT_SHARED_EMAIL:
-      return _$$t("request_upgrade.header.license_type.share_drafts", {
+      return getI18nString("request_upgrade.header.license_type.share_drafts", {
         licenseType: VG(e)
       });
     case PE.FileMoveUpsell:
-      return _$$t("request_upgrade.header.license_type.move_drafts", {
+      return getI18nString("request_upgrade.header.license_type.move_drafts", {
         licenseType: VG(e)
       });
     case Q7.RUN_PLUGIN:
-      return _$$t("request_upgrade.header.license_type.run_plugins", {
+      return getI18nString("request_upgrade.header.license_type.run_plugins", {
         licenseType: VG(e)
       });
     case Q7.RUN_WIDGET:
-      return _$$t("request_upgrade.header.license_type.run_widgets", {
+      return getI18nString("request_upgrade.header.license_type.run_widgets", {
         licenseType: VG(e)
       });
     case Q7.MANAGE_EXTENSIONS:
-      return _$$t("request_upgrade.header.license_type.manage_extensions", {
+      return getI18nString("request_upgrade.header.license_type.manage_extensions", {
         licenseType: VG(e)
       });
     case tc.USER_SETTINGS:
     case tc.DOWNGRADE_EMAIL:
     case tc.LIFECYCLE_REUPGRADE_EMAIL:
       if (void 0 === t) {
-        $D(_$$e.MONETIZATION_EXPANSION, Error("Undefined seatTypeKey passed in for User Settings entrypoint"));
+        reportError(_$$e.MONETIZATION_EXPANSION, Error("Undefined seatTypeKey passed in for User Settings entrypoint"));
         break;
       }
       switch (t) {
         case ud.COLLABORATOR:
-          return _$$t("request_upgrade_modal.header.collab");
+          return getI18nString("request_upgrade_modal.header.collab");
         case ud.DEVELOPER:
-          return _$$t("request_upgrade_modal.header.dev");
+          return getI18nString("request_upgrade_modal.header.dev");
         case ud.EXPERT:
-          return _$$t("request_upgrade_modal.header.full");
+          return getI18nString("request_upgrade_modal.header.full");
         case ud.CONTENT:
-          return _$$t("request_upgrade_modal.header.content");
+          return getI18nString("request_upgrade_modal.header.content");
         default:
           throwTypeError(t);
       }
     case tc.PUBLISH_SITES:
-      if (e === FProductAccessType.FIGMAKE) return _$$t("request_upgrade.header.figmake.publish");
-      if (e === FProductAccessType.SITES) return _$$t("request_upgrade.header.sites.publish");
+      if (e === FProductAccessType.FIGMAKE) return getI18nString("request_upgrade.header.figmake.publish");
+      if (e === FProductAccessType.SITES) return getI18nString("request_upgrade.header.sites.publish");
       break;
     case tc.SITE_SETTINGS:
-      if (e === FProductAccessType.FIGMAKE) return _$$t("request_upgrade.header.figmake.publish");
+      if (e === FProductAccessType.FIGMAKE) return getI18nString("request_upgrade.header.figmake.publish");
   }
-  return n && (e === FProductAccessType.DESIGN || e === FProductAccessType.DEV_MODE) ? _$$t("1_click_expansion.request_sent_add_details_to") : A7(e);
+  return n && (e === FProductAccessType.DESIGN || e === FProductAccessType.DEV_MODE) ? getI18nString("1_click_expansion.request_sent_add_details_to") : A7(e);
 }
 let el = new class {
   constructor() {
@@ -134,13 +134,13 @@ let el = new class {
 let eu = "request_upgrade_modal--contentContainer--Hqp0B";
 function eh(e) {
   let t = {
-    [FProductAccessType.DESIGN]: _$$t("request_upgrade.title_figma"),
-    [FProductAccessType.WHITEBOARD]: _$$t("request_upgrade.title_figjam"),
-    [FProductAccessType.DEV_MODE]: _$$t("request_upgrade.title_request_access_to_dev"),
-    [FProductAccessType.SLIDES]: _$$t("request_upgrade.title_request_access_to_slides"),
-    [FProductAccessType.SITES]: _$$t("request_upgrade.title_request_access_to_sites"),
-    [FProductAccessType.FIGMAKE]: _$$t("request_upgrade.title_request_access_to_figmake"),
-    [FProductAccessType.COOPER]: _$$t("request_upgrade.title_figma")
+    [FProductAccessType.DESIGN]: getI18nString("request_upgrade.title_figma"),
+    [FProductAccessType.WHITEBOARD]: getI18nString("request_upgrade.title_figjam"),
+    [FProductAccessType.DEV_MODE]: getI18nString("request_upgrade.title_request_access_to_dev"),
+    [FProductAccessType.SLIDES]: getI18nString("request_upgrade.title_request_access_to_slides"),
+    [FProductAccessType.SITES]: getI18nString("request_upgrade.title_request_access_to_sites"),
+    [FProductAccessType.FIGMAKE]: getI18nString("request_upgrade.title_request_access_to_figmake"),
+    [FProductAccessType.COOPER]: getI18nString("request_upgrade.title_figma")
   };
   let {
     orgName,
@@ -186,7 +186,7 @@ function eh(e) {
           e.actionOnProvisionalAccessGranted?.();
         });
       },
-      children: tx("request_upgrade.provisional_access.curf.try_it_now")
+      children: renderI18nText("request_upgrade.provisional_access.curf.try_it_now")
     })]
   });
   return jsxs(OJ, {
@@ -232,13 +232,13 @@ function eh(e) {
       })]
     }), jsxs("div", {
       className: eu,
-      children: [_ ? tx("org_upgrade.action_text.dev_mode", {
-        requestUpgradeInstructions: _$$t("org_upgrade.action_text.configurable_request_upgrade_instructions")
-      }) : _$$t("org_upgrade.action_text.configurable_request_upgrade_instructions"), jsx("div", {
+      children: [_ ? renderI18nText("org_upgrade.action_text.dev_mode", {
+        requestUpgradeInstructions: getI18nString("org_upgrade.action_text.configurable_request_upgrade_instructions")
+      }) : getI18nString("org_upgrade.action_text.configurable_request_upgrade_instructions"), jsx("div", {
         className: _$$s.mt16.mb8.$,
         children: jsx(_$$E, {
           fontWeight: "semi-bold",
-          children: tx("configured_upgrade_request_modal.from_the_admins", {
+          children: renderI18nText("configured_upgrade_request_modal.from_the_admins", {
             orgName
           })
         })
@@ -249,7 +249,7 @@ function eh(e) {
             target: "_blank",
             attributes: {
               onClick: e => {
-                sx("Configurable Upgrade Request Modal external link clicked", {
+                trackEventAnalytics("Configurable Upgrade Request Modal external link clicked", {
                   orgId,
                   permission,
                   configuredUpgradeRequestSetting: setting,
@@ -269,14 +269,14 @@ function eh(e) {
           variant: "secondary",
           onClick: T,
           children: jsx(_$$E, {
-            children: tx("general.got_it")
+            children: renderI18nText("general.got_it")
           })
         })
       })]
     })]
   });
 }
-let eA = eU("");
+let eA = atom("");
 function ey({
   message: e,
   onMessageChange: t,
@@ -286,14 +286,14 @@ function ey({
   return jsxs(Fragment, {
     children: [jsx("div", {
       className: u()("request_upgrade_modal--stepTitle--HEFYi", "request_upgrade_modal--optionalSecondaryText--pv0lf"),
-      children: r !== tc.ASK_TO_EDIT_ONE_CLICK && tx("request_upgrade.instruction_text_header_optional", {
+      children: r !== tc.ASK_TO_EDIT_ONE_CLICK && renderI18nText("request_upgrade.instruction_text_header_optional", {
         boldedInstructions: jsx("span", {
           className: "request_upgrade_modal--importantInstructions--6ke2E",
-          children: tx("request_upgrade.instructions")
+          children: renderI18nText("request_upgrade.instructions")
         })
       })
     }), jsx(ks, {
-      placeholder: r === tc.USER_SETTINGS ? _$$t("request_upgrade.placeholder.seat") : Jo(i, r),
+      placeholder: r === tc.USER_SETTINGS ? getI18nString("request_upgrade.placeholder.seat") : Jo(i, r),
       type: "textarea",
       value: e,
       onChange: t,
@@ -314,12 +314,12 @@ export function $$eb0(e) {
   let q = _6();
   let $ = e.licenseType === FProductAccessType.DEV_MODE || e.entryPoint.startsWith("dev_mode");
   let Z = $ ? FProductAccessType.DEV_MODE : e.licenseType;
-  let X = q.editorType === nT.DevHandoff;
+  let X = q.editorType === FEditorType.DevHandoff;
   let [Q, J] = useState(0);
-  let [ee, et] = fp(eA);
+  let [ee, et] = useAtomValueAndSetter(eA);
   let ei = !!e.getIsEligibleForProvisionalAccess && e.getIsEligibleForProvisionalAccess(Z);
   let en = function (e) {
-    let t = md(UQ);
+    let t = useAtomWithSubscription(UQ);
     let i = q5();
     return !t && !!i && i.editorType === FFileType.DESIGN && (e === i$.BlockingModal || e === i$.Upsell);
   }(e.entryPoint);
@@ -342,7 +342,7 @@ export function $$eb0(e) {
     onSuccess,
     trackingProperties
   } = function (e) {
-    let [t, i] = fp(_$$t2);
+    let [t, i] = useAtomValueAndSetter(_$$t2);
     let n = _$$W();
     let a = useCallback(() => {
       i(_$$c2.DEFAULT);
@@ -418,7 +418,7 @@ export function $$eb0(e) {
     }
   });
   let ew = useCallback(i => {
-    i && az.trackDefinedEvent("activation.request_upgrade_modal_one_click_timeout_triggered", {});
+    i && analyticsEventManager.trackDefinedEvent("activation.request_upgrade_modal_one_click_timeout_triggered", {});
     clearTimeout(Q);
     ex?.();
     t(Lo());
@@ -429,7 +429,7 @@ export function $$eb0(e) {
   }, [ew]);
   let eC = useCallback(e => ew(), [ew]);
   let eT = () => {
-    "hidden" === document.visibilityState && az.trackDefinedEvent("activation.request_upgrade_modal_tab_hidden", {});
+    "hidden" === document.visibilityState && analyticsEventManager.trackDefinedEvent("activation.request_upgrade_modal_tab_hidden", {});
   };
   useEffect(() => {
     if (er) {
@@ -508,10 +508,10 @@ export function $$eb0(e) {
     sentryTags: {
       area: _$$e.MONETIZATION_EXPANSION
     },
-    severity: DZ.Critical,
+    severity: SeverityLevel.Critical,
     onError: () => {
       t(_$$F.enqueue({
-        message: _$$t("request_upgrade.modal.error"),
+        message: getI18nString("request_upgrade.modal.error"),
         error: !0
       }));
     },
@@ -563,7 +563,7 @@ export function $$eb0(e) {
               className: `${v0} request_upgrade_modal--lgModalButtonRow--TwgPl`,
               children: [!er && jsx(nR, {
                 onClick: ek,
-                children: tx("request_upgrade.cancel_button")
+                children: renderI18nText("request_upgrade.cancel_button")
               }), jsx(vd, {
                 autoFocus: !0,
                 className: "request_upgrade_modal--confirmButton--IP-Y6",
@@ -584,7 +584,7 @@ export function $$eb0(e) {
                   ...eM,
                   trackingDescriptor: _$$c.UPGRADE
                 },
-                children: er ? tx("request_upgrade.continue_button") : hasPendingRequest(Z) ? tx("request_upgrade.send_request_button_already_requested") : tx("request_upgrade.send_request_button")
+                children: er ? renderI18nText("request_upgrade.continue_button") : hasPendingRequest(Z) ? renderI18nText("request_upgrade.send_request_button_already_requested") : renderI18nText("request_upgrade.send_request_button")
               })]
             })]
           })]

@@ -1,15 +1,15 @@
 import { jsx } from "react/jsx-runtime";
 import { PureComponent } from "react";
 import { connect } from "../vendor/514228";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { eE } from "../figma_app/336853";
 class l extends PureComponent {
   render() {
     let e = this.props.org && this.props.email && eE(this.props.orgDomains, this.props.email);
-    let t = this.props.pending ? this.props.displayString + " " + _$$t("role_row.invite_sent") : this.props.displayString;
+    let t = this.props.pending ? this.props.displayString + " " + getI18nString("role_row.invite_sent") : this.props.displayString;
     return e ? jsx("div", {
       className: this.props.className,
-      children: tx("org_guest_identifier.guest", {
+      children: renderI18nText("org_guest_identifier.guest", {
         userName: jsx("b", {
           className: this.props.guestNameClassName,
           children: t

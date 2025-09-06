@@ -5,7 +5,7 @@ import { lQ } from "../905/934246";
 import { isNullish } from "../figma_app/95419";
 import { glU } from "../figma_app/763686";
 import { nc } from "../905/189185";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { wA } from "../figma_app/167249";
 import { ZU, Wg } from "../figma_app/986347";
 import { Xo } from "../figma_app/687767";
@@ -17,7 +17,7 @@ export function $$g1() {
   let r = E(t);
   let n = useCallback(e => ({
     displayText: e.name,
-    sideText: r[e.node_id] ? _$$t("slides.properties_panel.text.style_description_font_size", {
+    sideText: r[e.node_id] ? getI18nString("slides.properties_panel.text.style_description_font_size", {
       fontSize: z0(r[e.node_id])
     }) : void 0,
     callback: nc.user("replace-text-style", () => {
@@ -26,9 +26,9 @@ export function $$g1() {
     recordingKey: e.name
   }), [r]);
   return useMemo(() => ({
-    displayText: _$$t("slides.properties_panel.text_style.replace_style"),
+    displayText: getI18nString("slides.properties_panel.text_style.replace_style"),
     children: [{
-      displayText: _$$t("slides.properties_panel.text_styles.styles"),
+      displayText: getI18nString("slides.properties_panel.text_styles.styles"),
       header: !0
     }, ...t.map(n)],
     recordingKey: "replaceStyle"
@@ -60,7 +60,7 @@ export function $$f0() {
       type: ZU.CUSTOM_ACTION,
       customActionType: Wg.DROPDOWN_GROUP_HEADER,
       onClick: lQ,
-      getTitle: () => _$$t("slides.properties_panel.text_styles.styles"),
+      getTitle: () => getI18nString("slides.properties_panel.text_styles.styles"),
       preventHoisting: !0,
       recordingKey: "stylesHeader"
     });
@@ -71,7 +71,7 @@ export function $$f0() {
     if (g) return {
       type: ZU.ACTION_SUBMENU,
       recordingKey: "replaceStyle",
-      getTitle: () => _$$t("slides.properties_panel.text_style.replace_style"),
+      getTitle: () => getI18nString("slides.properties_panel.text_style.replace_style"),
       items: u,
       preventHoisting: !0
     };

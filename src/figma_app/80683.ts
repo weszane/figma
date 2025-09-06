@@ -6,7 +6,7 @@ import { h as _$$h } from "../905/207101";
 import { subscribeAndAwaitData } from "../905/553831";
 import { Rs } from "../figma_app/288654";
 import { IT, mI } from "../figma_app/566371";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { k } from "../figma_app/618031";
 import { Gu } from "../905/513035";
 import { Ye, N_ } from "../905/332483";
@@ -76,7 +76,7 @@ export function $$T3(e, t, r) {
   try {
     return n.transform(b);
   } catch (r) {
-    $D(_$$e.SCALE, r, {
+    reportError(_$$e.SCALE, r, {
       extra: {
         planType: t,
         planParentId: e

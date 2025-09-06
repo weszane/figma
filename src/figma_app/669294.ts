@@ -1,11 +1,11 @@
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { ds } from "../figma_app/314264";
 import { h1, wm, LQ } from "../905/77316";
 export function $$o1(e, t) {
-  let r = zl.get(h1);
-  let i = zl.get(wm);
-  return d(e, r, zl.get(LQ)?.index ?? null, t, i);
+  let r = atomStoreManager.get(h1);
+  let i = atomStoreManager.get(wm);
+  return d(e, r, atomStoreManager.get(LQ)?.index ?? null, t, i);
 }
 export function $$l0(e, t, r, n) {
   let s = debugState.getState();

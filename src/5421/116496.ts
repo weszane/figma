@@ -1,7 +1,7 @@
 import { throwTypeError } from "../figma_app/465776";
 import { l7 } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { dZ } from "../figma_app/741237";
 import { a as _$$a } from "../5421/59825";
 import { $v } from "../figma_app/259678";
@@ -18,7 +18,7 @@ export class $$u0 {
     let o = dZ(t);
     let i = await this.editor.getCachedOrFetchCodeSnippets(!o);
     if (null === i) {
-      x1("direct_manipulation", "No snippets found for addClassToInspectedElements", {}, {
+      logError("direct_manipulation", "No snippets found for addClassToInspectedElements", {}, {
         reportAsSentryError: !0
       });
       this.displayErrorVisualBell(o ? "on_save" : "on_selection");
@@ -46,7 +46,7 @@ export class $$u0 {
         case "dynamic":
         case "dynamic-identifier":
         case "unknown":
-          x1("direct_manipulation", "Unsupported jsx for addClassToInspectedElement", {
+          logError("direct_manipulation", "Unsupported jsx for addClassToInspectedElement", {
             type: e.type
           }, {
             reportAsSentryError: !0
@@ -116,7 +116,7 @@ export class $$u0 {
             case "dynamic":
             case "dynamic-identifier":
             case "unknown":
-              x1("direct_manipulation", "Unsupported jsx for commitToCode", {
+              logError("direct_manipulation", "Unsupported jsx for commitToCode", {
                 type: t.type
               }, {
                 reportAsSentryError: !0
@@ -134,7 +134,7 @@ export class $$u0 {
         let n = await this.editor.getCachedOrFetchCodeSnippets(!1);
         let o = n?.find(e => e.sourceCodeJSXCallId == e.sourceCodeJSXCallId);
         if (!o) {
-          x1("direct_manipulation", "Could not refresh snippet for commitToCode retry", {}, {
+          logError("direct_manipulation", "Could not refresh snippet for commitToCode retry", {}, {
             reportAsSentryError: !0
           });
           this.displayErrorVisualBell("on_save");
@@ -146,7 +146,7 @@ export class $$u0 {
           snippet: o
         });
       } else {
-        x1("direct_manipulation", "Unsuccessful code edit", {}, {
+        logError("direct_manipulation", "Unsuccessful code edit", {}, {
           reportAsSentryError: !0
         });
         this.displayErrorVisualBell("on_save");
@@ -158,7 +158,7 @@ export class $$u0 {
   async resetClassNamesForPropertiesAndCommitToCode(e) {
     let t = await this.editor.getCachedOrFetchCodeSnippets(!1);
     if (null === t) {
-      x1("direct_manipulation", "No snippet found for resetClassNames", {}, {
+      logError("direct_manipulation", "No snippet found for resetClassNames", {}, {
         reportAsSentryError: !0
       });
       this.displayErrorVisualBell("on_save");
@@ -177,7 +177,7 @@ export class $$u0 {
         case "dynamic":
         case "dynamic-identifier":
         case "unknown":
-          x1("direct_manipulation", "Unsupported jsx for resetClassNames", {
+          logError("direct_manipulation", "Unsupported jsx for resetClassNames", {
             type: i.type
           }, {
             reportAsSentryError: !0

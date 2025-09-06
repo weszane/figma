@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { E } from "../905/53857";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { B } from "../905/714743";
 import { A } from "../6828/55207";
 import { m_ } from "../figma_app/209680";
@@ -14,7 +14,7 @@ function l() {
   });
 }
 function m(e) {
-  let t = tx("community.badge.creator_fund");
+  let t = renderI18nText("community.badge.creator_fund");
   return e.disableIcon ? jsx(E, {
     variant: "defaultOutline",
     children: t
@@ -49,9 +49,9 @@ export function $$g0(e) {
     onClick: e => {
       e.stopPropagation();
     },
-    children: [tx("community.detail_view.creator_fund_tooltip"), jsx("span", {
+    children: [renderI18nText("community.detail_view.creator_fund_tooltip"), jsx("span", {
       className: kz,
-      children: tx("community.learn_more")
+      children: renderI18nText("community.learn_more")
     })]
   });
   return jsx(m_, {

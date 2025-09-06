@@ -9,7 +9,7 @@ import { E } from "../905/632989";
 import { e as _$$e } from "../905/149844";
 import { k } from "../905/888808";
 import { xk } from "@stylexjs/stylex";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { n as _$$n } from "../0c62c2fd/596856";
 import { k as _$$k } from "../0c62c2fd/421640";
 let f = forwardRef(function (e, t) {
@@ -22,7 +22,7 @@ let f = forwardRef(function (e, t) {
       "aria-hidden": !0
     }), jsxs("div", {
       className: "x78zum5 x1v2ro7d x6s0dn4",
-      children: [_$$t("file_browser.tool_bar.create"), jsx(k, {
+      children: [getI18nString("file_browser.tool_bar.create"), jsx(k, {
         "aria-hidden": !0
       })]
     })]

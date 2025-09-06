@@ -1,5 +1,5 @@
 import { W } from "../figma_app/304955";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { nM, NJ } from "../figma_app/570630";
 export function $$a0(e, t, n) {
   let a = {
@@ -13,7 +13,7 @@ export function $$a0(e, t, n) {
       label: ""
     });
   }), n) {
-    let e = zl.get(nM);
+    let e = atomStoreManager.get(nM);
     let t = W(e, NJ, n[0].fullFilePath);
     a.attachments.push({
       type: "inspectedElement",

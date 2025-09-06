@@ -8,7 +8,7 @@ import { buildUploadUrl } from "../figma_app/169182";
 import { oW } from "../905/675859";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { C as _$$C, wR } from "../905/346715";
 import { Ce, to } from "../905/156213";
 import { fu } from "../figma_app/831799";
@@ -65,7 +65,7 @@ function G({
   let h = "loaded" !== c.status;
   let g = u?.length === 0 ? jsx("div", {
     className: _$$s.h300.flex.justifyCenter.itemsCenter.colorTextSecondary.$,
-    children: tx("file_browser.file_move.no_projects_in_this_team")
+    children: renderI18nText("file_browser.file_move.no_projects_in_this_team")
   }) : u?.map(e => jsx("div", {
     className: _$$s.my6.wFull.$,
     children: jsx(_$$o, {
@@ -113,7 +113,7 @@ function G({
               i(null);
               l(null);
             },
-            children: tx("resource_connection.all_teams")
+            children: renderI18nText("resource_connection.all_teams")
           }), !!o && jsxs(Fragment, {
             children: [jsx(_$$E2, {
               children: "/"
@@ -252,14 +252,14 @@ let z = Ju(function (e) {
         autoFocus: !0,
         onChange: $,
         onMouseDown: e => e.stopPropagation(),
-        placeholder: _$$t("file_browser.file_move.search_placeholder"),
+        placeholder: getI18nString("file_browser.file_move.search_placeholder"),
         value: _ ?? "",
         spellCheck: "false"
       }), !!_ && jsx("div", {
         className: mt,
         children: jsx(_$$K, {
           onClick: Z,
-          "aria-label": _$$t("search.search_bar.clear"),
+          "aria-label": getI18nString("search.search_bar.clear"),
           children: jsx(In, {
             icon: "x-16",
             fill: "secondary"
@@ -272,7 +272,7 @@ let z = Ju(function (e) {
     children: jsxs("div", {
       children: [!B?.length && jsxs("div", {
         className: Al,
-        children: [tx("file_browser.file_move.no_project_or_team_results_matching_query"), jsx("br", {}), jsx("span", {
+        children: [renderI18nText("file_browser.file_move.no_project_or_team_results_matching_query"), jsx("br", {}), jsx("span", {
           className: _$$s.fontBold.ml2.$,
           children: _ || ""
         })]
@@ -316,7 +316,7 @@ let z = Ju(function (e) {
       children: jsxs(vo, {
         children: [jsx(Y9, {
           children: jsx(hE, {
-            children: tx("resource_connection.select_a_project_to_connect_an_external_team_to")
+            children: renderI18nText("resource_connection.select_a_project_to_connect_an_external_team_to")
           })
         }), jsxs(nB, {
           padding: 0,
@@ -338,12 +338,12 @@ let z = Ju(function (e) {
             children: [jsx($n, {
               variant: "secondary",
               onClick: i,
-              children: tx("modal.cancel")
+              children: renderI18nText("modal.cancel")
             }), jsx($n, {
               variant: "primary",
               onClick: et,
               disabled: !c,
-              children: tx("resource_connection.next")
+              children: renderI18nText("resource_connection.next")
             })]
           })
         })]
@@ -364,7 +364,7 @@ export let $$W0 = Ju(function (e) {
       children: jsxs(vo, {
         children: [jsx(Y9, {
           children: jsx(hE, {
-            children: tx("resource_connection.connect_an_external_team")
+            children: renderI18nText("resource_connection.connect_an_external_team")
           })
         }), jsxs(nB, {
           padding: 0,
@@ -373,7 +373,7 @@ export let $$W0 = Ju(function (e) {
             children: jsx(_$$_, {
               dataTestId: "resource-connect-warning-banner",
               color: _$$S.WARNING,
-              text: tx("resource_connection.request_modal.asset_transfer_request_will_be_revoked")
+              text: renderI18nText("resource_connection.request_modal.asset_transfer_request_will_be_revoked")
             })
           }), jsx(oW, {
             className: CE,
@@ -381,10 +381,10 @@ export let $$W0 = Ju(function (e) {
             alt: "Connected projects logo"
           }), jsx("div", {
             className: _$$oA,
-            children: tx("resource_connection.connect_an_external_team.intro_description", {
+            children: renderI18nText("resource_connection.connect_an_external_team.intro_description", {
               connectedProject: jsx("span", {
                 className: Cr,
-                children: tx("resource_connection.connected_project_link")
+                children: renderI18nText("resource_connection.connected_project_link")
               })
             })
           })]
@@ -397,14 +397,14 @@ export let $$W0 = Ju(function (e) {
                 className: C2,
                 href: "https://help.figma.com/hc/articles/30124855491863-Guide-to-connected-projects#h_01JMJDKJFD68CH88F663KG08AJ",
                 target: "_blank",
-                children: t || tx("resource_connection.request_modal.learn_more")
+                children: t || renderI18nText("resource_connection.request_modal.learn_more")
               })
             }), jsxs("div", {
               className: FJ,
               children: [jsx($n, {
                 variant: "secondary",
                 onClick: e.onClose,
-                children: tx("resource_connection.request_modal.cancel")
+                children: renderI18nText("resource_connection.request_modal.cancel")
               }), jsx($n, {
                 variant: "primary",
                 onClick: () => {
@@ -418,7 +418,7 @@ export let $$W0 = Ju(function (e) {
                     type: z
                   }));
                 },
-                children: tx("resource_connection.connect")
+                children: renderI18nText("resource_connection.connect")
               })]
             })]
           })

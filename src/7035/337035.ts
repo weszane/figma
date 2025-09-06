@@ -2,12 +2,12 @@ import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useRef } from "react";
 import { useDispatch } from "../vendor/514228";
 import { J as _$$J } from "../905/614223";
-import { sx } from "../905/449184";
-import { Ay } from "../figma_app/778880";
-import { tx, t as _$$t } from "../905/303541";
+import { trackEventAnalytics } from "../905/449184";
+import { BrowserInfo } from "../figma_app/778880";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { getFeatureFlags } from "../905/601108";
 import { xQ, aL, m3, zF, PM } from "../figma_app/45218";
-import { wN, nT } from "../figma_app/53721";
+import { mapFileTypeToEditorType, FEditorType } from "../figma_app/53721";
 import { gz, GJ, X7, dC, l0, vf, Wc, d6 } from "../5430/455879";
 import { I as _$$I } from "../5132/515990";
 import { Jm } from "../figma_app/387599";
@@ -48,7 +48,7 @@ export function $$S0({
   let M = kc();
   let J = xQ(e);
   let Q = Ar(e) || lT;
-  let X = _$$o(H.unwrapOr(null), S, Q, t ? wN(t) : void 0);
+  let X = _$$o(H.unwrapOr(null), S, Q, t ? mapFileTypeToEditorType(t) : void 0);
   let $ = Rt(e);
   let Y = !!M?.org_id;
   let Z = j && (J ? O : B);
@@ -68,20 +68,20 @@ export function $$S0({
   return U && Y && !en && k && Z && !$ ? jsx(v, {
     resource: e,
     orgEntity: k,
-    useShortenedLabel: Ay.mobile
+    useShortenedLabel: BrowserInfo.mobile
   }) : jsx(Fragment, {
     children: jsxs(_$$J, {
       brand: function (e) {
         switch (e) {
-          case nT.Whiteboard:
+          case FEditorType.Whiteboard:
             return "whiteboard";
-          case nT.DevHandoff:
+          case FEditorType.DevHandoff:
             return "dev-handoff";
-          case nT.Slides:
+          case FEditorType.Slides:
             return "piper";
-          case nT.Cooper:
+          case FEditorType.Cooper:
             return getFeatureFlags().buzz_plugins_publishing ? "cooper" : "design";
-          case nT.Design:
+          case FEditorType.Design:
           default:
             return "design";
         }
@@ -98,7 +98,7 @@ export function $$S0({
             }));
             return;
           }
-          if (Ay.mobile) {
+          if (BrowserInfo.mobile) {
             F(to({
               type: _$$x,
               data: {
@@ -107,7 +107,7 @@ export function $$S0({
             }));
             return;
           }
-          sx("try_it_out_editor_picker_menu_opened", {
+          trackEventAnalytics("try_it_out_editor_picker_menu_opened", {
             pluginId: e.id,
             isWidget: xQ(e),
             searchSessionId: et
@@ -122,7 +122,7 @@ export function $$S0({
             children: [jsx(hJ, {
               children: X_(J ? vt.WIDGET : vt.PLUGIN, zF(e) || PM(e))
             }), jsx(XY, {
-              children: tx("community.using.open_in_no_ellipses")
+              children: renderI18nText("community.using.open_in_no_ellipses")
             })]
           })
         })
@@ -139,9 +139,9 @@ function v(e) {
   let o = U6();
   let r = xQ(e.resource);
   let u = r ? !!o[e.resource.id] : !!l[e.resource.id];
-  u ? (t = tx("community.plugins.remove"), n = _$$t("community.plugins.remove_for_org_tooltip", {
+  u ? (t = renderI18nText("community.plugins.remove"), n = getI18nString("community.plugins.remove_for_org_tooltip", {
     orgName: e.orgEntity.name
-  })) : (t = tx("community.plugins.approve"), n = _$$t("community.plugins.approve_for_org_tooltip", {
+  })) : (t = renderI18nText("community.plugins.approve"), n = getI18nString("community.plugins.approve_for_org_tooltip", {
     orgName: e.orgEntity.name
   }));
   return jsx("button", {

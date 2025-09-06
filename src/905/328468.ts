@@ -2,7 +2,7 @@ import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useRef, useCallback, useEffect } from "react";
 import { useSelector } from "../vendor/514228";
 import { c2 } from "../905/382883";
-import { md, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, Xr } from "../figma_app/27355";
 import { L8, rG } from "../905/124270";
 import { gl, FR, oM } from "../905/171315";
 import { k } from "../905/252342";
@@ -10,8 +10,8 @@ import { v as _$$v } from "../905/281500";
 import { r as _$$r } from "../905/264954";
 import { jD, uR } from "../figma_app/162807";
 export function $$h0() {
-  let e = md(L8);
-  let t = md(rG);
+  let e = useAtomWithSubscription(L8);
+  let t = useAtomWithSubscription(rG);
   return jsx(Fragment, {
     children: e.map((e, i) => jsx(g, {
       facet: e,
@@ -27,7 +27,7 @@ function g({
 }) {
   let s = useRef(null);
   let h = useSelector(e => e.modalShown?.type === _$$r);
-  let g = md(L8);
+  let g = useAtomWithSubscription(L8);
   let f = Xr(rG);
   let _ = _$$v(e);
   let A = gl(e.type);

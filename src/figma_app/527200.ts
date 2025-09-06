@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { h as _$$h } from "../905/207101";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { c as _$$c } from "../905/370443";
 import { e as _$$e } from "../905/621515";
 import { r1 } from "../figma_app/545877";
@@ -13,7 +13,7 @@ import { QzE } from "../figma_app/6204";
 let m = r1("seen_connected_projects_admin_settings_content_tab_overlay");
 let $$g1 = "org_admin_connected_projects_tab_onboarding_key";
 export function $$f0() {
-  let e = md(m);
+  let e = useAtomWithSubscription(m);
   let {
     show,
     isShowing,
@@ -30,13 +30,13 @@ export function $$f0() {
   return jsx(rq, {
     arrowPosition: F_.TOP,
     description: jsx("p", {
-      children: tx("resource_connection.onboarding.connect_an_external_team_to_a_project_to_share_designs_and_resources")
+      children: renderI18nText("resource_connection.onboarding.connect_an_external_team_to_a_project_to_share_designs_and_resources")
     }),
     emphasized: !0,
     isShowing,
     onClose: complete,
     primaryCta: {
-      label: tx("file_browser.modal.got_it"),
+      label: renderI18nText("file_browser.modal.got_it"),
       type: "button",
       onClick: () => {
         complete();
@@ -44,13 +44,13 @@ export function $$f0() {
       ctaTrackingDescriptor: _$$c.DONE
     },
     secondaryCta: {
-      label: tx("general.learn_more"),
+      label: renderI18nText("general.learn_more"),
       type: "link",
       href: "https://help.figma.com/hc/articles/30124855491863-Guide-to-connected-projects",
       ctaTrackingDescriptor: _$$c.LEARN_MORE
     },
     targetKey: $$g1,
-    title: tx("project_creation.introducing_connected_projects"),
+    title: renderI18nText("project_creation.introducing_connected_projects"),
     trackingContextName: "Connected Projects Admin Settings Content Tab Onboarding",
     width: 350,
     zIndex: R.MODAL

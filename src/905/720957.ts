@@ -4,12 +4,12 @@ import { useDispatch } from "../vendor/514228";
 import { K as _$$K } from "../905/443068";
 import { h as _$$h } from "../905/994594";
 import { A as _$$A } from "../905/251970";
-import { fp, md, Xr } from "../figma_app/27355";
+import { useAtomValueAndSetter, useAtomWithSubscription, Xr } from "../figma_app/27355";
 import c from "../vendor/197638";
 import { h as _$$h2 } from "../905/207101";
 import { M3 } from "../figma_app/119475";
 import { L as _$$L } from "../905/408237";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { hO } from "../figma_app/545293";
 import { sf } from "../905/929976";
 import { Lo } from "../905/156213";
@@ -35,21 +35,21 @@ export function $$P0({
   let [c, P] = useState(!1);
   let O = useRef(null);
   let D = useRef(null);
-  let [L, F] = fp(Q8);
-  let M = md(BA);
-  let j = md(sC);
-  let U = md(oT);
-  let B = md(L8);
-  let [V, G] = fp(rG);
-  let [z, H] = fp(z5);
+  let [L, F] = useAtomValueAndSetter(Q8);
+  let M = useAtomWithSubscription(BA);
+  let j = useAtomWithSubscription(sC);
+  let U = useAtomWithSubscription(oT);
+  let B = useAtomWithSubscription(L8);
+  let [V, G] = useAtomValueAndSetter(rG);
+  let [z, H] = useAtomValueAndSetter(z5);
   let W = Xr(q4);
-  let K = md(hO.isFragmentSearchAtom);
+  let K = useAtomWithSubscription(hO.isFragmentSearchAtom);
   let Y = _$$y(K ? "fragment_search_modal" : "file_browser", j, !0);
   let q = _$$v(V);
   let $ = _$$A2();
   !function () {
     let e = Xr(Vp);
-    let t = md(H9);
+    let t = useAtomWithSubscription(H9);
     let i = t?.facetType;
     let n = t?.valueToQuery ?? null;
     let a = _$$F(n, i);
@@ -168,7 +168,7 @@ export function $$P0({
         onCompositionStart: () => P(!0),
         onKeyDown: ei,
         onMouseDown: e => e.stopPropagation(),
-        placeholder: eo ? _$$t("search.search_bar.placeholder") : void 0,
+        placeholder: eo ? getI18nString("search.search_bar.placeholder") : void 0,
         spellCheck: "false",
         value: L
       })]
@@ -176,11 +176,11 @@ export function $$P0({
       className: "faceted_search_bar--leftFadeContainer--r39DL faceted_search_bar--_fadeContainer--DiQLS",
       "data-testid": "facetedSearchClear",
       children: jsx(_$$K, {
-        "aria-label": _$$t("search.search_bar.clear"),
+        "aria-label": getI18nString("search.search_bar.clear"),
         onClick: en,
         htmlAttributes: {
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": _$$t("search.search_bar.clear")
+          "data-tooltip": getI18nString("search.search_bar.clear")
         },
         children: jsx(_$$A, {})
       })

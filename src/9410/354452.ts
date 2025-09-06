@@ -4,7 +4,7 @@ import { Pt4, OmW, glU, Osy } from "../figma_app/763686";
 import { nc, l7 } from "../905/189185";
 import { AD } from "../905/871411";
 import { GP } from "../figma_app/15927";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Y5 } from "../figma_app/455680";
 export function $$$$u0({
   inheritStyleKeyField: e,
@@ -23,7 +23,7 @@ export function $$$$u0({
       } = h;
       let i = Pt4.getSoftDeletedStyleNodeId(key, version);
       Y5.restoreSoftDeletedNode(i);
-      sx("Style Created", {
+      trackEventAnalytics("Style Created", {
         styleType: u.styleType,
         styleKey: h.key,
         styleVersion: h.version

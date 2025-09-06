@@ -2,14 +2,14 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { _em, glU, Oin, lyf, m1T, w3z, Nfd, Ez5, Egt } from "../figma_app/763686";
 import { Xy } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
-import { eU, zl } from "../figma_app/27355";
+import { atom, atomStoreManager } from "../figma_app/27355";
 import { q as _$$q } from "../905/196201";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { A as _$$A } from "../905/920142";
 import { debugState } from "../905/407919";
 import { En, mL } from "../figma_app/661371";
-import { $D } from "../905/11";
-import { x1 } from "../905/714362";
+import { reportError } from "../905/11";
+import { logError } from "../905/714362";
 import { g as _$$g } from "../905/880308";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
@@ -22,7 +22,7 @@ import { Y6 } from "../figma_app/91703";
 import { SR, EB, ne, BC, p0, Fm, ke as _$$ke, TO } from "../905/784363";
 import { C2 } from "../905/760074";
 import { tJ } from "../figma_app/741237";
-import { nT, CO } from "../figma_app/53721";
+import { FEditorType, mapEditorTypeToStringWithError } from "../figma_app/53721";
 import { NK } from "../figma_app/111825";
 import { lE } from "../905/218608";
 import { S as _$$S } from "../figma_app/787550";
@@ -37,7 +37,7 @@ import { M4 } from "../905/713695";
 import { U2 } from "../figma_app/193867";
 let $$B5 = "current_version";
 let $$G2 = new _$$q(40);
-let $$V14 = eU("");
+let $$V14 = atom("");
 let $$H12 = M4.Query({
   fetch: async e => {
     let t = e.fileKey;
@@ -49,7 +49,7 @@ let $$H12 = M4.Query({
       versionIds: e.versionIds?.join(",")
     });
     let i = performance.now() - r;
-    sx("version_diffing_performance_metrics", {
+    trackEventAnalytics("version_diffing_performance_metrics", {
       name: "Lego versions fetched",
       durationMs: i
     });
@@ -111,7 +111,7 @@ let $ = async e => {
     responseType: "arraybuffer"
   });
   let n = new Date().getTime();
-  sx("versioning_performance_metrics", {
+  trackEventAnalytics("versioning_performance_metrics", {
     name: "download_diff",
     durationMs: n - t
   }, {
@@ -130,7 +130,7 @@ async function q(e, t, r) {
   let s = new Date().getTime();
   let [o] = await Promise.all([$(n.signed_url), W5(_em.DEBUG_TOOL)]);
   let l = new Date().getTime();
-  return (sx("versioning_performance_metrics", {
+  return (trackEventAnalytics("versioning_performance_metrics", {
     name: "download_diff_and_load_pages",
     durationMs: l - s,
     isEditor: a
@@ -151,7 +151,7 @@ export async function $$Z13(e, t) {
   let a = await q(n.id, t);
   let s = Date.now() - r;
   if (a) {
-    x1("version diffing", "error checking for visible changes", {
+    logError("version diffing", "error checking for visible changes", {
       error: a
     });
     return Error("Error checking for visible changes");
@@ -178,7 +178,7 @@ let $$Q11 = nF(async (e, t) => {
     o();
   };
   let d = a.user;
-  if (!getFeatureFlags().version_diffing || !getFeatureFlags().xr_debounce_threshold || !d || "fullscreen" !== a.selectedView.view || a.selectedView.editorType === nT.Whiteboard || a.mirror.appModel.topLevelMode === lyf.HISTORY || a.mirror.appModel.activeCanvasEditModeType === m1T.COMPARE_CHANGES) return l();
+  if (!getFeatureFlags().version_diffing || !getFeatureFlags().xr_debounce_threshold || !d || "fullscreen" !== a.selectedView.view || a.selectedView.editorType === FEditorType.Whiteboard || a.mirror.appModel.topLevelMode === lyf.HISTORY || a.mirror.appModel.activeCanvasEditModeType === m1T.COMPARE_CHANGES) return l();
   let {
     openFileKey
   } = t;
@@ -217,7 +217,7 @@ let $$Q11 = nF(async (e, t) => {
 let $$ee4 = nF(async (e, t) => {
   let r = e.getState();
   let n = r.user;
-  if (!getFeatureFlags().version_diffing || !n || "fullscreen" !== r.selectedView.view || r.selectedView.editorType === nT.Whiteboard || r.mirror.appModel.topLevelMode === lyf.HISTORY || r.mirror.appModel.activeCanvasEditModeType === m1T.COMPARE_CHANGES) return;
+  if (!getFeatureFlags().version_diffing || !n || "fullscreen" !== r.selectedView.view || r.selectedView.editorType === FEditorType.Whiteboard || r.mirror.appModel.topLevelMode === lyf.HISTORY || r.mirror.appModel.activeCanvasEditModeType === m1T.COMPARE_CHANGES) return;
   let {
     openFileKey
   } = t;
@@ -252,7 +252,7 @@ let $$ee4 = nF(async (e, t) => {
         latestVersion: r.id,
         latestCreatedAt: r.created_at
       };
-      sx("Version Diffing Changed Since Last View", {
+      trackEventAnalytics("Version Diffing Changed Since Last View", {
         ...n,
         durationMs: Date.now() - p
       }, {
@@ -300,10 +300,10 @@ function en(e, t, r, n, s, l) {
         let s = t.getState().selectedView.editorType;
         if ((a = t.getState().mirror.appModel.topLevelMode) === lyf.HISTORY || a === lyf.DEV_HANDOFF) {
           let a;
-          if (_) glU.applyFileToCurrentScene(e); else if (zl.set($$V14, ""), !glU.loadFigFileForPreview(e)) return c("Error loading this version into memory.");
+          if (_) glU.applyFileToCurrentScene(e);else if (atomStoreManager.set($$V14, ""), !glU.loadFigFileForPreview(e)) return c("Error loading this version into memory.");
           _$$C.markVersionHistoryLoadEnd();
           let l = t.getState().selectedView.fileKey;
-          a = s === nT.Whiteboard ? "figjam" : s === nT.Design || s === nT.Slides ? CO(s) : "unknown";
+          a = s === FEditorType.Whiteboard ? "figjam" : s === FEditorType.Design || s === FEditorType.Slides ? mapEditorTypeToStringWithError(s) : "unknown";
           let u = t.getState().selectedView.devModeFocusId ? "focus_view" : "version_history";
           _$$C.report(l, a, u);
           g && (p ? t.getState().mirror.appModel.pagesList.forEach(e => r.add(e.nodeId)) : r.add(h), t.dispatch(EB({
@@ -337,7 +337,7 @@ let ei = nF(async (e, t) => {
     return;
   }
   if (0 === n) {
-    sx("Version Diffing Notification Skipped", {
+    trackEventAnalytics("Version Diffing Notification Skipped", {
       ...t.trackingProps,
       pagesWithChanges: 0,
       durationMs: r
@@ -346,7 +346,7 @@ let ei = nF(async (e, t) => {
     });
     return;
   }
-  sx("Version Diffing Notification Shown", {
+  trackEventAnalytics("Version Diffing Notification Shown", {
     ...t.trackingProps,
     pagesWithChanges: n,
     durationMs: r
@@ -358,14 +358,14 @@ let ei = nF(async (e, t) => {
       type: _$$_.SEE_WHATS_CHANGED,
       message: "See what's changed since the last time you viewed this file",
       acceptCallback: () => {
-        sx("Version Diffing Notification Opened", trackingProps);
+        trackEventAnalytics("Version Diffing Notification Opened", trackingProps);
         e.dispatch($$eo6());
         e.dispatch($$ep16({
           fromVersionId: lastSeenVersionId
         }));
       },
       dismissCallback: () => {
-        sx("Version Diffing Notification Dismissed", trackingProps);
+        trackEventAnalytics("Version Diffing Notification Dismissed", trackingProps);
       }
     }
   }));
@@ -394,9 +394,9 @@ let $$eo6 = nF((e, t) => {
   Y5.triggerAction("enter-history-mode");
   Y5.triggerAction("deselect-all");
   e.dispatch(es());
-  Vj(e.getState().selectedView) && zl.set(s0, Nfd.FILE);
+  Vj(e.getState().selectedView) && atomStoreManager.set(s0, Nfd.FILE);
   Ez5?.uiState().showPropertiesPanel.set(!0);
-  sx("Toggle Version History", {
+  trackEventAnalytics("Toggle Version History", {
     source: t?.source || null
   });
 });
@@ -427,7 +427,7 @@ let $$ed9 = nF(e => {
 });
 let $$ec3 = nF(async (e, t) => {
   if (t.id === $$B5) {
-    zl.set($$V14, "");
+    atomStoreManager.set($$V14, "");
     glU.loadFigFileForPreview(new Uint8Array());
     let r = e.getState();
     e.dispatch(sf({
@@ -456,7 +456,7 @@ let $$ec3 = nF(async (e, t) => {
   await en(a, e, new Set(), s, t.nodeId, l).catch(t => {
     if (d) {
       let e = `[${l}] Failed load version for preview in focus view: ${t}`;
-      $D(_$$e.DEVELOPER_TOOLS, Error(`[LOAD_VERSION_FOR_PREVIEW] ${e}`));
+      reportError(_$$e.DEVELOPER_TOOLS, Error(`[LOAD_VERSION_FOR_PREVIEW] ${e}`));
     }
     e.dispatch(_$$s.error(t));
   });
@@ -470,7 +470,7 @@ let $$eu19 = nF((e, t) => {
     version: t.version
   }))).catch(t => {
     let r = `[${s}] Failed load fig file for preview: ${t}`;
-    $D(_$$e.SCENEGRAPH_AND_SYNC, Error(`[VERSION_HISTORY_INCREMENTAL_LOAD] ${r}`));
+    reportError(_$$e.SCENEGRAPH_AND_SYNC, Error(`[VERSION_HISTORY_INCREMENTAL_LOAD] ${r}`));
     e.dispatch(_$$s.error(t));
   });
 });
@@ -492,7 +492,7 @@ let $$ep16 = nF(async (e, t) => {
   let l = new Date().getTime();
   let c = e.getState().selectedView.editorType;
   let u = lE[lE.COMPARE_CHANGES];
-  if (sx("versioning_performance_metrics", {
+  if (trackEventAnalytics("versioning_performance_metrics", {
     name: "load_diff",
     durationMs: l - a,
     fromCheckpointKey: n.checkpoint_key,
@@ -522,7 +522,7 @@ let $$ep16 = nF(async (e, t) => {
     compareVersionId: r,
     compareLatest: void 0
   }));
-  sx("Version History Compare Start", {
+  trackEventAnalytics("Version History Compare Start", {
     fromVersionId: r
   });
   e.dispatch(TO(t));
@@ -546,4 +546,4 @@ export const un = $$et15;
 export const vF = $$ep16;
 export const vw = $$X17;
 export const w_ = $$K18;
-export const yH = $$eu19; 
+export const yH = $$eu19;

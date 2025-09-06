@@ -1,16 +1,16 @@
 import { Jj } from "../905/382883";
-import { eU } from "../figma_app/27355";
+import { atom } from "../figma_app/27355";
 import { qM, S2, sd, hp } from "../905/171315";
 import { Q8, BA } from "../905/61477";
 import { nv } from "../905/182534";
 import { WY, dC, qy } from "../figma_app/162807";
 import { L8, zD, _4, J, P_, q$ } from "../905/124270";
 var $$c4 = (e => (e.TYPE = "TYPE", e.TYPE_AND_VALUES = "TYPE_AND_VALUES", e))($$c4 || {});
-let u = eU([]);
-let $$p3 = eU(e => e(u), (e, t, i) => {
+let u = atom([]);
+let $$p3 = atom(e => e(u), (e, t, i) => {
   t(u, i);
 });
-let $$m0 = eU(e => {
+let $$m0 = atom(e => {
   let t = e(L8);
   let i = e(zD);
   let n = e(Q8);
@@ -36,7 +36,7 @@ let $$m0 = eU(e => {
   }
   return null;
 });
-let h = eU(e => {
+let h = atom(e => {
   let t = e($$m0);
   if (!t || null == t.valueToQuery) return null;
   let i = t.valueToQuery;
@@ -113,11 +113,11 @@ let h = eU(e => {
   }
   return null;
 });
-let $$g1 = eU(e => {
+let $$g1 = atom(e => {
   let t = e($$m0);
   return e(h) || t;
 });
-let $$f5 = eU(null);
+let $$f5 = atom(null);
 export function $$_2(e, t) {
   let i = new Set(t);
   sd(WY.RESOURCE, e) && i.$$delete(WY.RESOURCE);

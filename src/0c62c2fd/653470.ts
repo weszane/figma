@@ -11,7 +11,7 @@ import { J } from "../905/270045";
 import { h62 } from "../figma_app/763686";
 import { s as _$$s } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { c as _$$c2 } from "../905/370443";
 export function $$x0({
   fileImportDescription: e,
@@ -34,7 +34,7 @@ export function $$x0({
           case h62.JAMBOARD:
             return "Jamboard";
           case h62.UNKNOWN:
-            return _$$t("file_browser.file_import_view.select_pdf_source_input_unknown_value");
+            return getI18nString("file_browser.file_import_view.select_pdf_source_input_unknown_value");
           default:
             throwTypeError(e);
         }
@@ -60,7 +60,7 @@ export function $$x0({
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$t("file_browser.file_import_view.select_pdf_source_header")
+          children: getI18nString("file_browser.file_import_view.select_pdf_source_header")
         })
       }), jsx(nB, {
         children: jsxs("div", {
@@ -71,7 +71,7 @@ export function $$x0({
             className: _$$s.mb8.$,
             children: jsx(_$$b, {
               legend: jsx(q, {
-                children: tx("file_browser.file_import_view.select_pdf_source_input_legend")
+                children: renderI18nText("file_browser.file_import_view.select_pdf_source_input_legend")
               }),
               value: x,
               onChange: y,
@@ -81,7 +81,7 @@ export function $$x0({
                   className: _$$s.textBodyMedium.$,
                   children: e.label
                 }),
-                children: e.key === h62.UNKNOWN && tx("file_browser.file_import_view.select_pdf_source_input_unknown_disclaimer")
+                children: e.key === h62.UNKNOWN && renderI18nText("file_browser.file_import_view.select_pdf_source_input_unknown_disclaimer")
               }, e.key))
             })
           })]
@@ -95,12 +95,12 @@ export function $$x0({
               trackingDescriptor: _$$c2.FILE_IMPORT_X_BUTTON,
               text: "dismiss"
             },
-            children: tx("modal.cancel")
+            children: renderI18nText("modal.cancel")
           }), jsx($z, {
             variant: "primary",
             disabled: !x,
             onClick: w,
-            children: tx("modal.confirm")
+            children: renderI18nText("modal.confirm")
           })]
         })
       })]

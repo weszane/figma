@@ -1,10 +1,10 @@
 import { mapFilter } from "../figma_app/656233";
 import { assert, throwTypeError } from "../figma_app/465776";
 import { Det, egF, H$z, Dje, sYL, kz3 } from "../figma_app/763686";
-import { zl } from "../figma_app/27355";
-import { sx } from "../905/449184";
+import { atomStoreManager } from "../figma_app/27355";
+import { trackEventAnalytics } from "../905/449184";
 import { w } from "../905/5147";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { g as _$$g } from "../905/880308";
 import { cb } from "../905/760074";
 import { nX } from "../905/617744";
@@ -40,7 +40,7 @@ class f extends Error {
     };
   }
   function i(e) {
-    let t = zl.get(nX);
+    let t = atomStoreManager.get(nX);
     let i = {
       loadType: ap.GRANULAR,
       functionName: e.functionName,
@@ -53,7 +53,7 @@ class f extends Error {
       branchModalTrackingId: e.branchModalTrackingId,
       direction: t
     };
-    sx("Branch Modal Load Time", i);
+    trackEventAnalytics("Branch Modal Load Time", i);
   }
   function n(e, i) {
     assert(e.type === Det.GENERIC);
@@ -284,7 +284,7 @@ class f extends Error {
       functionName: "getConflicts",
       ...e
     });
-    r.buggedConflictingGUIDs.length > 0 && (x1("Branching", "bugged conflicting guids", {
+    r.buggedConflictingGUIDs.length > 0 && (logError("Branching", "bugged conflicting guids", {
       branchKey: e.branchKey,
       truncatedGuids: r.buggedConflictingGUIDs.slice(0, 5)
     }), cb(Error("bugged conflicting guids")));

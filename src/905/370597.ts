@@ -8,14 +8,14 @@ import { s as _$$s } from "../905/551945";
 import { Egt } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { md, fp, zl, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, useAtomValueAndSetter, atomStoreManager, Xr } from "../figma_app/27355";
 import { SV } from "../figma_app/272902";
 import { generateRecordingKey, useHandleChangeEvent } from "../figma_app/878298";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { parsePxNumber } from "../figma_app/783094";
-import { nl } from "../figma_app/257275";
+import { isInteractionPathCheck } from "../figma_app/897289";
 import { s as _$$s2 } from "../cssbuilder/589278";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { CZ } from "../905/294085";
 import { hO, G4, Hl } from "../figma_app/545293";
 import { tS, ze } from "../figma_app/516028";
@@ -105,13 +105,13 @@ export function $$ec2({
 }) {
   let {
     currentSearch
-  } = md(WP);
-  let i = md(hO.currentSearchAtom);
-  let l = md(hO.currentCommunitySearchAtom);
+  } = useAtomWithSubscription(WP);
+  let i = useAtomWithSubscription(hO.currentSearchAtom);
+  let l = useAtomWithSubscription(hO.currentCommunitySearchAtom);
   let d = i?.searchId;
   let c = currentSearch?.queryId;
   let u = l?.searchId;
-  let [p, h] = fp(B1);
+  let [p, h] = useAtomValueAndSetter(B1);
   let g = useRef(null);
   let A = useRef(null);
   let v = useRef(null);
@@ -122,10 +122,10 @@ export function $$ec2({
     clientLifecycleId: void 0
   });
   _$$C();
-  let N = md(hO.fragmentSearchEntryPointAtom);
+  let N = useAtomWithSubscription(hO.fragmentSearchEntryPointAtom);
   useEffect(() => () => {
     _$$R();
-    zl.set(WP, {
+    atomStoreManager.set(WP, {
       currentSearch: null
     });
     h({
@@ -149,8 +149,8 @@ export function $$ec2({
     defaultActive: e || xA.FRAGMENTS
   });
   let K = useCallback(e => {
-    e === xA.COMPONENTS && sx("Visual search components tab clicked", {
-      session_id: zl.get(dd),
+    e === xA.COMPONENTS && trackEventAnalytics("Visual search components tab clicked", {
+      session_id: atomStoreManager.get(dd),
       query_id: currentSearch?.queryId
     });
     W.setActiveTab(z[e].id);
@@ -164,15 +164,15 @@ export function $$ec2({
     children: [jsx(oz, {
       tabId: xA.FRAGMENTS,
       onAction: () => K(xA.FRAGMENTS),
-      children: tx("assets_in_actions.detail_view.fragments_tab.designs_title")
+      children: renderI18nText("assets_in_actions.detail_view.fragments_tab.designs_title")
     }), Ko() && jsx(oz, {
       tabId: xA.COMPONENTS,
       onAction: () => K(xA.COMPONENTS),
-      children: tx("assets_in_actions.detail_view.components_tab.title")
+      children: renderI18nText("assets_in_actions.detail_view.components_tab.title")
     }), G && jsx(oz, {
       tabId: xA.COMMUNITY,
       onAction: () => K(xA.COMMUNITY),
-      children: tx("assets_in_actions.detail_view.community_tab.title")
+      children: renderI18nText("assets_in_actions.detail_view.community_tab.title")
     })]
   });
   let Q = (() => {
@@ -201,7 +201,7 @@ export function $$ec2({
     if (e === xA.COMPONENTS) return c;
   }, [c]);
   let eu = useCallback((e, t, n, r, a, s, o) => {
-    sx("Search Feedback", {
+    trackEventAnalytics("Search Feedback", {
       feedbackType: e,
       feedback: t,
       activeTab: n === xA.COMPONENTS ? "assets" : n.toString(),
@@ -228,7 +228,7 @@ export function $$ec2({
     dataTestId: "visualSearchView",
     gatherFeedback: !0,
     height: 480,
-    rateOutputStrOverride: _$$t("qa.rate_output_helpful"),
+    rateOutputStrOverride: getI18nString("qa.rate_output_helpful"),
     recordingKey: "visualSearchView",
     sentimentFeedbackCallback: ef,
     width: parsePxNumber(_$$X),
@@ -351,7 +351,7 @@ export let $$eu0 = forwardRef(({
     }), $$e_4(G4.ACTIONS_VISUAL_SEARCH_PROMPT, t));
   }, [i, e]);
   let l = useCallback(() => {
-    if (nl()) {
+    if (isInteractionPathCheck()) {
       o(new File([Uint8Array.from(atob("iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAYAAACddGYaAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAATSURBVHgBY7wpKfmfAQqYGJAAADAAAg7iNdOVAAAAAElFTkSuQmCC"), e => e.charCodeAt(0))], "image0.jpg", {
         type: "image/jpeg"
       }));
@@ -382,25 +382,25 @@ export function $$ep1({
       ref: t
     }), jsx(_$$A, {
       action: JT.FIND_INSPIRATION,
-      actionLabel: tx("fragment_search.visual_search_button"),
+      actionLabel: renderI18nText("fragment_search.visual_search_button"),
       actionIcon: jsx(_$$T, {}),
       onPerform: () => $$ef5(G4.ACTIONS_VISUAL_SEARCH_PROMPT),
       aiTrackingContext: e,
       instructionAction: {
         type: "custom",
-        label: tx("fragment_search.visual_search_image_upload_button"),
+        label: renderI18nText("fragment_search.visual_search_image_upload_button"),
         iconPrefix: jsx(_$$s, {}),
         onPerform: () => {
           t.current?.click();
         }
       },
       shouldAutoFocus: !0,
-      children: tx("fragment_search.visual_search_instructions")
+      children: renderI18nText("fragment_search.visual_search_instructions")
     })]
   });
 }
 function em() {
-  let e = md(hO.currentSearchAtom);
+  let e = useAtomWithSubscription(hO.currentSearchAtom);
   let t = _$$s3(e);
   let i = Xr(hO.currentSearchAtom);
   let a = useRef(null);
@@ -420,7 +420,7 @@ function em() {
         recordingKey: generateRecordingKey(s, "backButton")
       }), jsx("span", {
         className: _$$s2.textBodyLarge.colorText.$,
-        children: tx("fragment_search.visual_search_results_title")
+        children: renderI18nText("fragment_search.visual_search_results_title")
       }), t && jsx(Y, {
         pill: t,
         onDismiss: l,
@@ -460,20 +460,20 @@ export function $$eg3(e) {
   return `${i}-${t}-${n}`;
 }
 export function $$ef5(e) {
-  let t = zl.get(ze);
+  let t = atomStoreManager.get(ze);
   let i = getSingletonSceneGraph().getCurrentPage()?.directlySelectedNodes;
   if (!(!t || i?.length !== 1 || i[0]?.isSlide) && (C7() && Hl({
     type: "input-selection",
     node: i[0],
     name: i[0].name,
     file_key: t
-  }, e, zl.get(CZ), zl.get(hO.sortByAtom), void 0, !1, _$$k2), P5() && Hl({
+  }, e, atomStoreManager.get(CZ), atomStoreManager.get(hO.sortByAtom), void 0, !1, _$$k2), P5() && Hl({
     type: "input-selection",
     node: i[0],
     name: i[0].name,
     file_key: t
   }, e, void 0, "percent_match", void 0, !0, _$$k2), Ko())) {
-    let e = zl.get(B1);
+    let e = atomStoreManager.get(B1);
     ES({
       type: "input-selection",
       node: i[0],
@@ -483,17 +483,17 @@ export function $$ef5(e) {
   }
 }
 export function $$e_4(e, t) {
-  let i = zl.get(ze);
+  let i = atomStoreManager.get(ze);
   if (i && (C7() && Hl({
     type: "input-image",
     imageFile: t,
     file_key: i
-  }, e, zl.get(CZ), zl.get(hO.sortByAtom), void 0, !1, _$$k2), P5() && Hl({
+  }, e, atomStoreManager.get(CZ), atomStoreManager.get(hO.sortByAtom), void 0, !1, _$$k2), P5() && Hl({
     type: "input-image",
     imageFile: t,
     file_key: i
   }, e, void 0, "percent_match", void 0, !0, _$$k2), Ko())) {
-    let e = zl.get(B1);
+    let e = atomStoreManager.get(B1);
     ES({
       type: "input-image",
       imageFile: t,

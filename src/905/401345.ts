@@ -1,8 +1,8 @@
 import { getFeatureFlags } from "../905/601108";
-import { eU } from "../figma_app/27355";
+import { atom } from "../figma_app/27355";
 import { h0 } from "../905/845253";
 import { M9q } from "../figma_app/43951";
-export let $$o0 = eU(e => {
+export let $$o0 = atom(e => {
   let t = getFeatureFlags().mfa_for_guests;
   let i = e(h0);
   if (!t || !i) return !1;

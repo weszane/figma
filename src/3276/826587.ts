@@ -4,9 +4,9 @@ import { useDispatch } from "../vendor/514228";
 import { CV, KJ } from "../figma_app/916560";
 import { Cg } from "../905/195479";
 import { buildUploadUrl } from "../figma_app/169182";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { CY, ks, nR } from "../figma_app/637027";
-import { t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { WJ } from "../figma_app/671547";
 import { Kx } from "../figma_app/546509";
 import { Ib } from "../905/129884";
@@ -14,38 +14,38 @@ import { Eu, Gf, yV, se, Vy, Ms, iO, wK, IO, GW, Xg, Rq, ts, Y$, _q, Kk, _Q, Dp 
 let _ = () => {
   let e = [{
     key: "figma",
-    name: t("whiteboard.embeds.insert_embed_modal.figma"),
+    name: getI18nString("whiteboard.embeds.insert_embed_modal.figma"),
     url: "https://figma.com/",
     srcColor: buildUploadUrl("7ea1b6f90b29ea190de9f069109ba70cdb731c3e")
   }, {
     key: "youtube",
-    name: t("whiteboard.embeds.insert_embed_modal.youtube"),
+    name: getI18nString("whiteboard.embeds.insert_embed_modal.youtube"),
     url: "https://youtube.com/",
     srcColor: buildUploadUrl("27da640990b84fd2d3133d90c7af66d8cf212a41")
   }, {
     key: "vimeo",
-    name: t("whiteboard.embeds.insert_embed_modal.vimeo"),
+    name: getI18nString("whiteboard.embeds.insert_embed_modal.vimeo"),
     url: "https://vimeo.com/",
     srcColor: buildUploadUrl("7ef2e69ffc73f6e90f9fa5e90d485e623c69ed10")
   }, {
     key: "loom",
-    name: t("whiteboard.embeds.insert_embed_modal.loom"),
+    name: getI18nString("whiteboard.embeds.insert_embed_modal.loom"),
     url: "https://loom.com/",
     srcColor: buildUploadUrl("097eb54967f52a9ad067434278365eba38bca3c3")
   }, {
     key: "spotify",
-    name: t("whiteboard.embeds.insert_embed_modal.spotify"),
+    name: getI18nString("whiteboard.embeds.insert_embed_modal.spotify"),
     url: "https://spotify.com/",
     srcColor: buildUploadUrl("1c81468ec0a9eccd0c0cdd21b9d4f6a6477dcc8a")
   }, {
     key: "codepen",
-    name: t("whiteboard.embeds.insert_embed_modal.codepen"),
+    name: getI18nString("whiteboard.embeds.insert_embed_modal.codepen"),
     url: "https://codepen.io/",
     srcColor: buildUploadUrl("76ecbaf33bb0485666ef32e5afaf73b4add66fd7")
   }];
   e.push({
     key: "asana",
-    name: t("whiteboard.embeds.insert_embed_modal.asana"),
+    name: getI18nString("whiteboard.embeds.insert_embed_modal.asana"),
     url: "https://asana.com/",
     srcColor: buildUploadUrl("67c0efb6b111e5fd5b3153057bbddb000ec04fca")
   });
@@ -83,13 +83,13 @@ export function $$g0(e) {
       children: e.title
     }), jsx("div", {
       className: yV,
-      children: tx("whiteboard.embeds.insert_embed_modal.add_media_from_across_the_web", {
+      children: renderI18nText("whiteboard.embeds.insert_embed_modal.add_media_from_across_the_web", {
         learnMoreLink: jsx(CY, {
           className: se,
           href: "https://help.figma.com/hc/articles/4414079911575",
           target: "_blank",
           trusted: !0,
-          children: tx("whiteboard.embeds.insert_embed_modal.learn_more")
+          children: renderI18nText("whiteboard.embeds.insert_embed_modal.learn_more")
         })
       })
     }), jsx("form", {
@@ -104,7 +104,7 @@ export function $$g0(e) {
             ref: y,
             onChange: C,
             className: wK,
-            placeholder: t("whiteboard.embeds.insert_embed_modal.paste_a_public_link"),
+            placeholder: getI18nString("whiteboard.embeds.insert_embed_modal.paste_a_public_link"),
             autoFocus: !j?.shouldOptimizeForIpadApp,
             autoCapitalize: "none"
           }), jsx("span", {
@@ -112,7 +112,7 @@ export function $$g0(e) {
           }), _ && jsx("div", {
             className: Xg,
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": t("whiteboard.embeds.insert_embed_modal.invalid_link_error_message"),
+            "data-tooltip": getI18nString("whiteboard.embeds.insert_embed_modal.invalid_link_error_message"),
             "data-tooltip-show-above": !0,
             "data-tooltip-show-immediately": !0,
             children: jsx("svg", {
@@ -132,10 +132,10 @@ export function $$g0(e) {
           type: "submit",
           disabled: w,
           className: Rq,
-          children: tx("whiteboard.embeds.insert_embed_modal.add")
+          children: renderI18nText("whiteboard.embeds.insert_embed_modal.add")
         })]
       })
-    }), !Ay.isIpadNative && jsx(v, {})]
+    }), !BrowserInfo.isIpadNative && jsx(v, {})]
   });
 }
 function v() {
@@ -143,7 +143,7 @@ function v() {
     className: ts,
     children: [jsx("div", {
       className: Y$,
-      children: tx("whiteboard.embeds.insert_embed_modal.try_linking_to_sites_like")
+      children: renderI18nText("whiteboard.embeds.insert_embed_modal.try_linking_to_sites_like")
     }), jsx("div", {
       className: _q,
       children: _().map(e => jsx("div", {

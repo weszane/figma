@@ -15,11 +15,11 @@ import { ruz } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { xk } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
-import { E3, fp, zl } from "../figma_app/27355";
+import { createLocalStorageAtom, useAtomValueAndSetter, atomStoreManager } from "../figma_app/27355";
 import { Uz } from "../905/63728";
 import { H9, Vs } from "../figma_app/930338";
 import { oW } from "../905/675859";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { BT } from "../905/618447";
 import { to } from "../figma_app/828186";
 import { zD } from "../figma_app/109758";
@@ -51,10 +51,10 @@ import { is as _$$is, eQ, cb, ui, Xo, vj, pN } from "../905/561689";
 import { xJ, qq } from "../figma_app/514229";
 import { O as _$$O, n as _$$n } from "../905/353086";
 import { V as _$$V, z as _$$z2 } from "../905/919335";
-let er = E3("generate_image_prompt_history", []);
-let en = E3("edit_image_prompt_history", []);
-let ei = E3("generate_image_model_type", void 0);
-let ea = E3("edit_image_model_type", void 0);
+let er = createLocalStorageAtom("generate_image_prompt_history", []);
+let en = createLocalStorageAtom("edit_image_prompt_history", []);
+let ei = createLocalStorageAtom("generate_image_model_type", void 0);
+let ea = createLocalStorageAtom("edit_image_model_type", void 0);
 var es = (e => (e.SUCCESS = "SUCCESS", e.MODEL_DOES_NOT_SUPPORT_REFERENCES = "MODEL_DOES_NOT_SUPPORT_REFERENCES", e.MAX_REFERENCES_EXCEEDED = "MAX_REFERENCES_EXCEEDED", e))(es || {});
 function eo(e) {
   return Array.from({
@@ -131,15 +131,15 @@ export function $$ec2({
       })
     }), jsxs(mc, {
       children: [jsx(hE, {
-        children: _$$t("image_ai.edit_image.attach_reference_image")
+        children: getI18nString("image_ai.edit_image.attach_reference_image")
       }), jsx(q7, {
         onClick: () => e.current?.click(),
         disabled: t,
-        children: _$$t("image_ai.edit_image.upload_image")
+        children: getI18nString("image_ai.edit_image.upload_image")
       }), jsx(q7, {
         onClick: lQ,
         disabled: t,
-        children: _$$t("image_ai.edit_image.select_from_canvas")
+        children: getI18nString("image_ai.edit_image.select_from_canvas")
       })]
     })]
   });
@@ -149,7 +149,7 @@ export function $$ec2({
       type: "file",
       accept: "image/*",
       multiple: s,
-      "aria-label": _$$t("image_ai.edit_image.upload_image"),
+      "aria-label": getI18nString("image_ai.edit_image.upload_image"),
       style: {
         display: "none"
       },
@@ -268,13 +268,13 @@ function em({
   let d = e && [xw.GPT_4O_IMAGE, TU.OPENAI_GPT_IMAGE_1, TU.GOOGLE_GEMINI_2_0_FLASH_PREVIEW_IMAGE_GENERATION].includes(e) ? r.length >= y1 ? "MAX_REFERENCES_EXCEEDED" : "SUCCESS" : "MODEL_DOES_NOT_SUPPORT_REFERENCES";
   switch (d) {
     case "MODEL_DOES_NOT_SUPPORT_REFERENCES":
-      t = _$$t("image_ai.edit_image.model_does_not_support_reference_images");
+      t = getI18nString("image_ai.edit_image.model_does_not_support_reference_images");
       break;
     case "MAX_REFERENCES_EXCEEDED":
-      t = _$$t("image_ai.edit_image.max_reference_images_added");
+      t = getI18nString("image_ai.edit_image.max_reference_images_added");
       break;
     case "SUCCESS":
-      t = _$$t("image_ai.edit_image.attach_reference_image");
+      t = getI18nString("image_ai.edit_image.attach_reference_image");
   }
   let c = "MODEL_DOES_NOT_SUPPORT_REFERENCES" === d && r.length > 0;
   return {
@@ -302,7 +302,7 @@ function eg({
   let d = sZ();
   let c = to();
   let u = useMemo(() => _$$O(JT.GENERATE_IMAGE, d), [d]);
-  let [p, _] = fp(ei);
+  let [p, _] = useAtomValueAndSetter(ei);
   let h = u[0]?.value;
   let m = p ?? h;
   useEffect(() => {
@@ -328,7 +328,7 @@ function eg({
     addPromptToHistory
   } = _$$a2(er, e => e);
   let [Y] = useState(_$$V(4));
-  let J = zl.get(BT);
+  let J = atomStoreManager.get(BT);
   let [en, ea] = useState(eQ());
   let es = useMemo(() => ({
     modelType: m
@@ -463,7 +463,7 @@ function eg({
       return jsx(_$$A2, {
         action: JT.GENERATE_IMAGE,
         aiTrackingContext,
-        ariaLabel: _$$t("cooper.inline_menu.make_an_image"),
+        ariaLabel: getI18nString("cooper.inline_menu.make_an_image"),
         disableSubmit: enableReferenceImage && isSubmitDisabled,
         extraFooter: jsxs(_$$B, {
           gap: 8,
@@ -488,7 +488,7 @@ function eg({
         onRun: eT,
         prompt: G,
         promptHistory,
-        submitLabel: tx("ai.make_it"),
+        submitLabel: renderI18nText("ai.make_it"),
         suggestion: Y[0]?.prompt,
         suggestionPills: Y.slice(1),
         useClose: c
@@ -498,7 +498,7 @@ function eg({
         content: ev,
         onCancel: close,
         aiTrackingContext,
-        children: ef || tx("image_ai.make_image.processing")
+        children: ef || renderI18nText("image_ai.make_image.processing")
       });
     case qy.DONE:
       let eN = {
@@ -536,7 +536,7 @@ function ef({
   let c = sZ();
   let u = to();
   let p = useMemo(() => _$$O(JT.EDIT_IMAGE, c), [c]);
-  let [_, m] = fp(ea);
+  let [_, m] = useAtomValueAndSetter(ea);
   let f = p[0]?.value;
   let E = _ ?? f;
   useEffect(() => {
@@ -680,7 +680,7 @@ function ef({
     B3(JT.EDIT_IMAGE);
   }, [stop]);
   let ew = _$$s2(JT.EDIT_IMAGE);
-  let eO = useCallback(() => (ruz?.getNodeImagePairsForEdit().length ?? 0) > 1 ? tx("image_ai.background_remove.only_one_image") : tx("image_ai.background_remove.instruction"), []);
+  let eO = useCallback(() => (ruz?.getNodeImagePairsForEdit().length ?? 0) > 1 ? renderI18nText("image_ai.background_remove.only_one_image") : renderI18nText("image_ai.background_remove.instruction"), []);
   let eR = useMemo(() => {
     if (state !== qy.INITIAL) return ed ? {
       state: "SUCCESS",
@@ -728,7 +728,7 @@ function ef({
       if (ew.state !== _$$w.SELECTION_OK) return jsx(_$$A, {
         action: JT.EDIT_IMAGE,
         actionIcon: jsx(_$$T, {}),
-        actionLabel: tx("fullscreen_actions.edit_image"),
+        actionLabel: renderI18nText("fullscreen_actions.edit_image"),
         onPerform: () => {
           ew.confirmInitialSelection();
         },
@@ -738,13 +738,13 @@ function ef({
           url: LC
         },
         getCustomDisabledTextFromSelectedNodes: eO,
-        children: tx("image_ai.background_remove.instruction")
+        children: renderI18nText("image_ai.background_remove.instruction")
       });
       if (a) return eP;
       return jsx(_$$A2, {
         action: JT.EDIT_IMAGE,
         aiTrackingContext,
-        ariaLabel: _$$t("fullscreen_actions.edit_image"),
+        ariaLabel: getI18nString("fullscreen_actions.edit_image"),
         disableSubmit: enableReferenceImage && isSubmitDisabled,
         extraFooter: jsxs(_$$B, {
           gap: 8,
@@ -769,7 +769,7 @@ function ef({
         onRun: ex,
         prompt: H,
         promptHistory,
-        submitLabel: tx("fullscreen_actions.edit_image"),
+        submitLabel: renderI18nText("fullscreen_actions.edit_image"),
         suggestion: ei[0]?.prompt,
         suggestionPills: ei.slice(1),
         useClose: u
@@ -779,7 +779,7 @@ function ef({
         content: d.length > 1 ? eL : null,
         onCancel: close,
         aiTrackingContext,
-        children: eS || tx("image_ai.edit_image.processing")
+        children: eS || renderI18nText("image_ai.edit_image.processing")
       });
     case qy.DONE:
       return eP;
@@ -818,7 +818,7 @@ function eb({
     fillWidth: !0,
     children: jsx(_$$bL, {
       legend: jsx(_$$q, {
-        children: tx("image_ai.grid_legend")
+        children: renderI18nText("image_ai.grid_legend")
       }),
       value: s,
       onChange: e => i(e),
@@ -836,7 +836,7 @@ function eb({
             onSelect: i,
             onAccept: a,
             animationDelay: 0,
-            alt: _$$t("image_ai.edit_image.original_image")
+            alt: getI18nString("image_ai.edit_image.original_image")
           }, "original"), jsx("div", {
             className: "xyi5qop x78zum5 x6s0dn4",
             children: jsx(_$$a, {})
@@ -851,7 +851,7 @@ function eb({
             onSelect: i,
             onAccept: a,
             animationDelay: 300 * t,
-            alt: _$$t("image_ai.edit_image.edited_image", {
+            alt: getI18nString("image_ai.edit_image.edited_image", {
               index: t + 1
             })
           }, o);
@@ -929,7 +929,7 @@ function eT({
           className: "x10l6tqk xh8yej3 x5yr21d xl1xv1r x5u7ob3 x1lvsgvq xiy17q3 x11e7y0g"
         }), jsx("div", {
           className: "xwjheq5 x10l6tqk xh8yej3 x5yr21d xz16r55 x78zum5 x6s0dn4 xl56j7k x149b52m x70tecm x1j61x8r x1ys4hos x181hs4k x1nbva22 x1ger3g xg01cxk x1vq37if x1o7uuvo",
-          children: tx("ai_image_tools.blocked")
+          children: renderI18nText("ai_image_tools.blocked")
         })]
       });
   }

@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useSelector } from "../vendor/514228";
 import { luZ } from "../figma_app/763686";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { gl } from "../905/216495";
 import { tS } from "../figma_app/516028";
 import { AF } from "../figma_app/889655";
@@ -19,7 +19,7 @@ function u() {
 export function $$p5() {
   let e = u();
   return useCallback((t, i) => {
-    az.trackDefinedEvent("slides.modify_object_animation.type", {
+    analyticsEventManager.trackDefinedEvent("slides.modify_object_animation.type", {
       ...e,
       oldValue: t,
       newValue: i
@@ -29,7 +29,7 @@ export function $$p5() {
 export function $$h6() {
   let e = u();
   return useCallback((t, i) => {
-    az.trackDefinedEvent("slides.modify_object_animation.duration", {
+    analyticsEventManager.trackDefinedEvent("slides.modify_object_animation.duration", {
       ...e,
       oldValue: t,
       newValue: i
@@ -40,7 +40,7 @@ export function $$m0() {
   let e = u();
   return useCallback((t, i) => {
     let r = e => void 0 === e ? void 0 : gl(e) ? "MIXED" : e === luZ.TRIGGER ? "TRIGGER" : "AFTER_PREVIOUS";
-    az.trackDefinedEvent("slides.modify_object_animation.start_condition", {
+    analyticsEventManager.trackDefinedEvent("slides.modify_object_animation.start_condition", {
       ...e,
       oldValue: r(t),
       newValue: r(i)
@@ -50,7 +50,7 @@ export function $$m0() {
 export function $$f4() {
   let e = u();
   return useCallback((t, i) => {
-    az.trackDefinedEvent("slides.modify_object_animation.phase", {
+    analyticsEventManager.trackDefinedEvent("slides.modify_object_animation.phase", {
       ...e,
       oldValue: t,
       newValue: i
@@ -60,19 +60,19 @@ export function $$f4() {
 export function $$g3() {
   let e = u();
   return useCallback(() => {
-    az.trackDefinedEvent("slides.reorder_object_animation", e);
+    analyticsEventManager.trackDefinedEvent("slides.reorder_object_animation", e);
   }, [e]);
 }
 export function $$_1() {
   let e = u();
   return useCallback(() => {
-    az.trackDefinedEvent("slides.delete_object_animation", e);
+    analyticsEventManager.trackDefinedEvent("slides.delete_object_animation", e);
   }, [e]);
 }
 export function $$x2() {
   let e = u();
   return useCallback(t => {
-    az.trackDefinedEvent("slides.preview_object_animation", {
+    analyticsEventManager.trackDefinedEvent("slides.preview_object_animation", {
       ...e,
       numAnimations: t
     });

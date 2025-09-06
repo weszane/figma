@@ -6,7 +6,7 @@ import { NVY } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import d from "classnames";
 import { Pt } from "../figma_app/806412";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { l6, c$ as _$$c$ } from "../905/794875";
 import { NC, DW, O4, Hi, jS } from "../905/698732";
 var c = d;
@@ -35,7 +35,7 @@ function f({
 }) {
   let f = useId();
   return jsxs(l6, {
-    ariaLabel: _$$t("fullscreen.properties_panel.color_picker.color_format.aria_label"),
+    ariaLabel: getI18nString("fullscreen.properties_panel.color_picker.color_format.aria_label"),
     className: c()(NC, {
       [DW]: d
     }, g),
@@ -87,7 +87,7 @@ function E({
         label: jsx(_$$h, {
           children: $$m0.format(e)
         }),
-        "aria-label": _$$t("fullscreen.properties_panel.color_picker.color_format.aria_label")
+        "aria-label": getI18nString("fullscreen.properties_panel.color_picker.color_format.aria_label")
       }), jsx(mc, {
         children: l
       })]

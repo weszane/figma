@@ -1,5 +1,5 @@
 import { XHR } from "../905/910117";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 export let $$n0;
 class s {
   constructor(e) {
@@ -20,7 +20,7 @@ class s {
   maybeSubscribeToCommentNotifications(e) {
     let t = this.store.getState();
     let r = t.openFile?.key;
-    if (!r || "fullscreen" === t.selectedView.view && t.selectedView.editorType === nT.DevHandoff) return;
+    if (!r || "fullscreen" === t.selectedView.view && t.selectedView.editorType === FEditorType.DevHandoff) return;
     let n = this.commentNotificationLogTimePerFile[r];
     let s = Date.now();
     if (null != n && s - n < this.COMMENT_NOTIFICATION_LOG_INTERVAL_MS) return;

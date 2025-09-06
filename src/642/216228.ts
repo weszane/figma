@@ -2,13 +2,13 @@ import { KH } from "../905/81982";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, forwardRef, useCallback, useMemo, useContext, useRef, useState, memo, useLayoutEffect, createContext } from "react";
 import i from "classnames";
-import { az, sx as _$$sx } from "../905/449184";
+import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { wY } from "../figma_app/708845";
 import { h as _$$h } from "../905/207101";
 import { tH as _$$tH } from "../905/751457";
 import { b as _$$b } from "../figma_app/556971";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx as _$$tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { RJ } from "../figma_app/630951";
 import { q5, MY, tS as _$$tS, tB as _$$tB, _G } from "../figma_app/516028";
 import { He, je } from "../figma_app/155728";
@@ -54,14 +54,14 @@ import { MA, ye, $H } from "../figma_app/134428";
 import { G as _$$G, K as _$$K } from "../figma_app/923271";
 import { hK, xU, cG, X3 } from "../figma_app/211706";
 import { Te } from "../vendor/813803";
-import { md, eU as _$$eU, fp, Iz, zl as _$$zl, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, atom, useAtomValueAndSetter, createRemovableAtomFamily, atomStoreManager, Xr } from "../figma_app/27355";
 import { V as _$$V3 } from "../figma_app/473391";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { E as _$$E2 } from "../905/172252";
 import { e as _$$e2 } from "../905/916195";
 import { ZC, qd } from "../figma_app/39751";
 import { rf as _$$rf, Pt } from "../figma_app/806412";
-import { PN } from "../figma_app/257275";
+import { isInteractionOrEvalMode } from "../figma_app/897289";
 import { N as _$$N2 } from "../figma_app/765684";
 import { NG, _C } from "../figma_app/709893";
 import { Y as _$$Y } from "../905/830372";
@@ -148,7 +148,7 @@ import { ut } from "../figma_app/84367";
 import { a as _$$a, P as _$$P3 } from "../figma_app/235371";
 import { Ou, GG as _$$GG, qd as _$$qd, PV, YQ, b4, lS as _$$lS } from "../figma_app/257779";
 import { isDevEnvironment, getInitialOptions, buildUploadUrl } from "../figma_app/169182";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { g as _$$g } from "../905/880308";
 import { g5 } from "../figma_app/178752";
 import { $A as _$$$A } from "../905/862883";
@@ -173,7 +173,7 @@ import { Um } from "../905/848862";
 import { we } from "../figma_app/987";
 import { n1 as _$$n4 } from "../figma_app/657017";
 import { w5 } from "../figma_app/345997";
-import { P as _$$P4 } from "../905/338617";
+import { selectTeams } from "../905/338617";
 import { K as _$$K5 } from "../905/547934";
 import { N as _$$N4 } from "../905/281143";
 import { t as _$$t5 } from "../figma_app/162756";
@@ -192,7 +192,7 @@ import { sD as _$$sD } from "../905/937198";
 import { t as _$$t6 } from "../figma_app/501766";
 import { l as _$$l3 } from "../905/745972";
 import { DP } from "../905/640017";
-import { jk } from "../905/609396";
+import { PerfTimer } from "../905/609396";
 import { k as _$$k3 } from "../905/44647";
 import { Gh } from "../figma_app/397267";
 import iw from "../vendor/239910";
@@ -223,7 +223,7 @@ import { v as _$$v } from "../905/213481";
 import { h as _$$h6 } from "../905/994594";
 import { f as _$$f2 } from "../905/54715";
 import { Uz } from "../905/63728";
-import { Ay as _$$Ay3 } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { E1 } from "../figma_app/757606";
 import { o as _$$o2 } from "../905/821217";
 import { d as _$$d } from "../905/976845";
@@ -282,18 +282,18 @@ function M() {
   return jsx(_$$rq, {
     arrowPadding: fg,
     arrowPosition: F_.LEFT_TITLE,
-    description: _$$tx("rcs.visual_assets.explore_within_assets_tab"),
+    description: renderI18nText("rcs.visual_assets.explore_within_assets_tab"),
     disableHighlight: !0,
     isShowing,
     onClose: complete,
     primaryCta: {
-      label: _$$tx("onboarding_pointers.got_it"),
+      label: renderI18nText("onboarding_pointers.got_it"),
       type: "button",
       onClick: complete,
       ctaTrackingDescriptor: _$$c.GOT_IT
     },
     targetKey: Bs,
-    title: _$$tx("rcs.visual_assets.elevate_your_designs"),
+    title: renderI18nText("rcs.visual_assets.elevate_your_designs"),
     trackingContextName: "Visual Asset Packs Tooltip",
     userFlagOnShow: bo
   });
@@ -485,7 +485,7 @@ function e3({
     isFlyoutOpen
   } = JA();
   let N = _$$tS();
-  let I = md(TG);
+  let I = useAtomWithSubscription(TG);
   let {
     currentView
   } = wV();
@@ -548,7 +548,7 @@ function e3({
   let et = _$$F(e, _$$K2.ASSETS_PANEL, p, u);
   let es = function (e, t) {
     let s = useSelector(dK);
-    let r = e.isLocal && PN() ? _$$eT(e.node_id, s).join("-") : e.node_id;
+    let r = e.isLocal && isInteractionOrEvalMode() ? _$$eT(e.node_id, s).join("-") : e.node_id;
     return _$$rf(`componentThumb.${r}`, "contextmenu", e => {
       t(e);
     });
@@ -586,7 +586,7 @@ function e3({
     }), getFeatureFlags().dse_fpl_wave_2 && jsx(_$$E2, {
       id: "asset-panel-tile-hint",
       "aria-hidden": !0,
-      children: _$$t("design_systems.assets_panel.asset_tile_sr_hint")
+      children: getI18nString("design_systems.assets_panel.asset_tile_sr_hint")
     })]
   });
 }
@@ -609,7 +609,7 @@ function e2({
   let x = _$$I(Cn.AssetsPanel);
   let y = useSelector(dK);
   let _ = useSelector(F9);
-  let b = md(_$$T2);
+  let b = useAtomWithSubscription(_$$T2);
   let C = x.searchOption?.type === _$$I2.ALL;
   let j = fV(e.library_key);
   let v = fd(e.library_key);
@@ -633,7 +633,7 @@ function e2({
   useEffect(() => {
     P && !L && f(jD());
   }, [P, f, L]);
-  let R = e.isLocal && PN() ? _$$eT(e.node_id, y).join("-") : e.node_id;
+  let R = e.isLocal && isInteractionOrEvalMode() ? _$$eT(e.node_id, y).join("-") : e.node_id;
   let O = "Local components" === o || "Local private components" === o || e.isLocal;
   let D = "grid" === p;
   let F = !u && D;
@@ -808,7 +808,7 @@ let ti = parsePxNumber(FX);
 let tl = parsePxNumber($c);
 let ta = parsePxNumber(d5);
 let to = parsePxNumber(ZI);
-let td = _$$eU(!1);
+let td = atom(!1);
 function tc(e, t, s = {}) {
   if ("list" === t) return to;
   let r = e;
@@ -951,7 +951,7 @@ function tp({
       return s ? s.keys ?? [s.key] : [];
     }, [e])
   });
-  let [u, p] = fp(td);
+  let [u, p] = useAtomValueAndSetter(td);
   useEffect(() => {
     if (!u) return;
     let t = e.findIndex(e => "preset_libraries_header" === e.key);
@@ -1090,7 +1090,7 @@ function tv(e, t, {
         isPreset: s
       });
       o.length > 0 && (u = {
-        name: _$$t("design_systems.assets_panel.examples"),
+        name: getI18nString("design_systems.assets_panel.examples"),
         items: sortedItems,
         subtrees: sortedSubtrees,
         key: _$$nE,
@@ -1106,7 +1106,7 @@ function tv(e, t, {
         isPreset: s
       });
       d = {
-        name: _$$t("design_systems.assets_panel.components"),
+        name: getI18nString("design_systems.assets_panel.components"),
         items: sortedItems,
         subtrees: sortedSubtrees,
         key: c_,
@@ -1124,7 +1124,7 @@ function tv(e, t, {
         isPreset: s
       });
       p = {
-        name: _$$t("design_systems.assets_panel.templates"),
+        name: getI18nString("design_systems.assets_panel.templates"),
         items: sortedItems,
         subtrees: sortedSubtrees,
         key: JS,
@@ -1218,7 +1218,7 @@ function tS(e, t, s, r) {
     let e = _$$u2();
     if (e.length > 0) {
       let t = {
-        name: _$$t("design_systems.assets_panel.site_blocks.embeds"),
+        name: getI18nString("design_systems.assets_panel.site_blocks.embeds"),
         id: "embeds",
         embeds: e,
         previewAsset: void 0,
@@ -1256,7 +1256,7 @@ function tT(e) {
   let t = e ? tw(e) : [];
   return t.length > 0 ? t[0] : void 0;
 }
-let tE = Iz(() => _$$rt(0));
+let tE = createRemovableAtomFamily(() => _$$rt(0));
 function tM({
   libraryKey: e,
   pageId: t,
@@ -1266,9 +1266,9 @@ function tM({
     lastNavAction
   } = ZX();
   let i = lastNavAction === _$$r3.Back || lastNavAction === _$$r3.Mount || lastNavAction === _$$r3.ToggleView && !s;
-  let [l, a] = fp(tE("libraries"));
-  let [o, d] = fp(tE(`pages-${e}`));
-  let [c, u] = fp(tE(`assets-${e}-${t}-${(s ?? []).join("-")}`));
+  let [l, a] = useAtomValueAndSetter(tE("libraries"));
+  let [o, d] = useAtomValueAndSetter(tE(`pages-${e}`));
+  let [c, u] = useAtomValueAndSetter(tE(`assets-${e}-${t}-${(s ?? []).join("-")}`));
   return {
     librariesScrollTop: i ? l : 0,
     pagesScrollTop: i ? o : 0,
@@ -1685,7 +1685,7 @@ function t3({
       searchSessionId,
       ...o
     } = c;
-    az.trackDefinedEvent("asset_search.result_inserted", {
+    analyticsEventManager.trackDefinedEvent("asset_search.result_inserted", {
       ...o,
       aiResultsEnabled: l,
       assetType: type,
@@ -1696,7 +1696,7 @@ function t3({
       entryPoint: mZ,
       componentSuggestionSessionId: p
     });
-    az.trackDefinedEvent("assets_panel.site_kit_inserted", {
+    analyticsEventManager.trackDefinedEvent("assets_panel.site_kit_inserted", {
       assetName: _$$NR(kH(e.name)),
       type: "responsive set",
       group: u(e),
@@ -1714,7 +1714,7 @@ function t3({
     });
   }, [c, l, p, e, u, h, d]);
   let f = useCallback(() => {
-    az.trackDefinedEvent("assets_panel.keyboard_insert", {
+    analyticsEventManager.trackDefinedEvent("assets_panel.keyboard_insert", {
       ...c,
       aiResultsEnabled: l,
       assetsPanelVersion: 3,
@@ -1805,13 +1805,13 @@ function sc({
     let l = _m();
     let o = CK();
     return useCallback(s => {
-      az.trackDefinedEvent("asset_search.result_inserted", {
+      analyticsEventManager.trackDefinedEvent("asset_search.result_inserted", {
         ...i,
         entryPoint: mZ,
         componentSuggestionSessionId: o
       });
       let r = !!i.searchSessionId;
-      az.trackDefinedEvent("assets_panel.site_kit_inserted", {
+      analyticsEventManager.trackDefinedEvent("assets_panel.site_kit_inserted", {
         assetName: e.name,
         type: "embed",
         group: "Embeds",
@@ -1826,7 +1826,7 @@ function sc({
         queryId: i.queryId,
         action: s
       });
-      "keyboard" === s && az.trackDefinedEvent("assets_panel.keyboard_insert", i);
+      "keyboard" === s && analyticsEventManager.trackDefinedEvent("assets_panel.keyboard_insert", i);
     }, [i, e.name, l, t, o]);
   }(e, t, i);
   m = {
@@ -1938,7 +1938,7 @@ let su = _$$P2("recently-used-site-embeds", "name", _$$z.object({
   })
 });
 function sp(e, t, s) {
-  _$$zl.set(su, e);
+  atomStoreManager.set(su, e);
   _$$l2.user("insert-embed", () => {
     glU.insertEmbed(e.initial_url, {
       x: t.x,
@@ -2183,7 +2183,7 @@ function sk({
   index: t,
   width: s
 }) {
-  let i = md(_$$h2);
+  let i = useAtomWithSubscription(_$$h2);
   let a = useMemo(() => e.flat().filter(e => !!e), [e]);
   let o = useMemo(() => {
     let e = sw(-Math.min(t, a.length - 1));
@@ -2299,7 +2299,7 @@ function sP({
       } = tU(a, l, _$$rp.NORMAL, !0);
       t.push({
         element: jsx(X3, {
-          title: _$$t("design_systems.assets_panel.templates")
+          title: getI18nString("design_systems.assets_panel.templates")
         }),
         key: "templates:header",
         height: sI
@@ -2322,7 +2322,7 @@ function sP({
     if (e.components) {
       e.templates && t.push({
         element: jsx(X3, {
-          title: _$$t("design_systems.assets_panel.components")
+          title: getI18nString("design_systems.assets_panel.components")
         }),
         key: "components:header",
         height: sI
@@ -2587,24 +2587,24 @@ let s3 = memo(({
   let m = isLocalLibrary ? jsx(s1, {
     onClick: onPublish,
     recordingKey: Pt(sQ, "publishLibrary"),
-    children: _$$tx("design_systems.assets_panel.publish_library")
+    children: renderI18nText("design_systems.assets_panel.publish_library")
   }) : null;
   let g = [m, hideUnsubscribe || isLocalLibrary ? null : jsx(s1, {
     onClick: onUnsubscribe,
     recordingKey: Pt(sQ, "unsubscribe"),
-    children: _$$tx("design_systems.assets_panel.remove_library_from_file")
+    children: renderI18nText("design_systems.assets_panel.remove_library_from_file")
   }), isLocalLibrary || !libraryHref ? null : jsx(s1, {
     href: libraryHref,
     target: "_blank",
     recordingKey: Pt(sQ, "goToLibrary"),
     onClick: onGoToLibrary,
-    children: _$$tx("design_systems.assets_panel.go_to_library")
+    children: renderI18nText("design_systems.assets_panel.go_to_library")
   }), !isLocalLibrary && s ? jsx(s1, {
     href: s,
     target: "_blank",
     recordingKey: Pt(sQ, "sendFeedback"),
     onClick: onSendFeedback,
-    children: _$$tx("design_systems.assets_panel.send_feedback_to_creator")
+    children: renderI18nText("design_systems.assets_panel.send_feedback_to_creator")
   }) : null].filter(isNotNullish);
   if (!position || !g.length) return null;
   let f = jsxs(s0, {
@@ -2642,13 +2642,13 @@ let s7 = memo(({
   let d = isLocalLibrary ? jsx(s8, {
     recordingKey: Pt(s5, "goToLibrary"),
     onClick: onClickLocalPage,
-    children: _$$tx("design_systems.assets_panel.go_to_page")
+    children: renderI18nText("design_systems.assets_panel.go_to_page")
   }) : libraryPageHref ? jsx(s8, {
     href: libraryPageHref,
     target: "_blank",
     recordingKey: Pt(s5, "goToLibrary"),
     onClick: onClickSubscribedPage,
-    children: _$$tx("design_systems.assets_panel.go_to_page")
+    children: renderI18nText("design_systems.assets_panel.go_to_page")
   }) : null;
   if (!d) return null;
   let c = jsx(s6, {
@@ -2726,7 +2726,7 @@ async function rv({
   if (!t) return {
     suggestions: []
   };
-  let s = _$$zl.get(rj);
+  let s = atomStoreManager.get(rj);
   let r = s.get(e);
   if (!r) {
     let t = debugState.getState();
@@ -2738,7 +2738,7 @@ async function rv({
     }));
     let i = new Map(s);
     i.set(e, r);
-    _$$zl.set(rj, i);
+    atomStoreManager.set(rj, i);
   }
   return await new Promise(e => {
     setTimeout(() => {
@@ -2758,7 +2758,7 @@ let rM = "asset_panel_recents--resultsWrapper--k79Vy";
 let rA = "asset_panel_recents--resultsWrapperList--peuzW";
 let rL = S5.Libraries;
 let rR = parsePxNumber(_$$$A2);
-let rO = _$$eU(0);
+let rO = atom(0);
 let rD = {
   statusIndicator: {
     width: "xw4jnvo",
@@ -2818,8 +2818,8 @@ function rF({
   useEffect(() => {
     e.length > 0 && t.queryId && (gb(t, _$$GG.RESULTS_SHOWN, _$$qd.ASSET_PANEL), a());
   }, [e, t, a]);
-  let p = _$$tx("auto_suggest.asset_panel.no_libraries");
-  let m = _$$tx("auto_suggest.suggestion_shelf_no_suggestions");
+  let p = renderI18nText("auto_suggest.asset_panel.no_libraries");
+  let m = renderI18nText("auto_suggest.suggestion_shelf_no_suggestions");
   let g = jsx("div", {
     className: "xh8yej3 x1iyjqo2 x1r8uery x1l90r2v",
     children: jsx("div", {
@@ -2862,7 +2862,7 @@ function rB() {
         let [{
           suggestions: s,
           analyticsData: r
-        }, i] = fp(_$$P3);
+        }, i] = useAtomValueAndSetter(_$$P3);
         let {
           isLoaded
         } = _$$y();
@@ -2944,7 +2944,7 @@ function rB() {
                 }) => {
                   signal.aborted || r(e);
                 }).catch(e => {
-                  if (x1("auto_suggest", "Error fetching suggestions", {
+                  if (logError("auto_suggest", "Error fetching suggestions", {
                     error: e
                   }), "AbortError" === e.name) return;
                 }).$$finally(() => {
@@ -3062,7 +3062,7 @@ function rB() {
     currentView
   } = wV();
   let S = currentView === S5.Libraries ? 0 : 1;
-  let k = md(_$$a);
+  let k = useAtomWithSubscription(_$$a);
   i || (!isInitialized || C && isLoading || C && "loading" === l.status ? e = jsx(_$$k2, {
     size: "md"
   }) : C || (e = jsx("div", {
@@ -3079,7 +3079,7 @@ function rB() {
           className: "x1iyjqo2",
           children: [jsx(_$$g2, {
             isExpanded: C
-          }), _$$tx("auto_suggest.asset_panel.title")]
+          }), renderI18nText("auto_suggest.asset_panel.title")]
         }), jsx("div", {
           className: "x78zum5 x6s0dn4",
           children: e
@@ -3112,12 +3112,12 @@ function rK() {
 function rG() {
   let e = rK();
   return (function () {
-    let e = md(W9);
+    let e = useAtomWithSubscription(W9);
     let t = ZC(e);
     let {
       suggestions,
       analyticsData
-    } = md(_$$P3);
+    } = useAtomWithSubscription(_$$P3);
     let {
       currentView
     } = wV();
@@ -3147,10 +3147,10 @@ function r4() {
   let r = useSelector(_$$e_);
   let i = useSelector(MH);
   let l = useSelector(dM);
-  let a = useSelector(_$$P4);
+  let a = useSelector(selectTeams);
   let o = _$$n4();
   let d = Fl();
-  let c = md(_$$lj);
+  let c = useAtomWithSubscription(_$$lj);
   let u = useMemo(() => s?.teamId ? a[s.teamId] : null, [s?.teamId, a]);
   let p = useMemo(() => !!u && w5(u), [u]);
   let m = useMemo(() => Sg(i, l), [i, l]);
@@ -3176,7 +3176,7 @@ function r4() {
   }, [C]);
   let v = fi();
   let S = Bv();
-  let k = md(TG);
+  let k = useAtomWithSubscription(TG);
   return useMemo(() => function ({
     localComponentsInfo: e,
     localTemplatesInfo: t,
@@ -3283,7 +3283,7 @@ function r4() {
         isPreset: f
       });
       let y = {
-        name: _$$t("design_systems.assets_panel.created_in_this_file"),
+        name: getI18nString("design_systems.assets_panel.created_in_this_file"),
         libraryKey: l,
         pages: x,
         numComponents: m.length,
@@ -3303,7 +3303,7 @@ function r4() {
             isPreset: f
           });
           e = {
-            name: _$$t("design_systems.assets_panel.components"),
+            name: getI18nString("design_systems.assets_panel.components"),
             items: sortedItems,
             subtrees: sortedSubtrees,
             key: c_,
@@ -3320,7 +3320,7 @@ function r4() {
             isPreset: f
           });
           t = {
-            name: _$$t("design_systems.assets_panel.templates"),
+            name: getI18nString("design_systems.assets_panel.templates"),
             items: sortedItems,
             subtrees: sortedSubtrees,
             key: JS,
@@ -3335,7 +3335,7 @@ function r4() {
           isPreset: f
         });
         let n = {
-          name: _$$t("design_systems.assets_panel.assets"),
+          name: getI18nString("design_systems.assets_panel.assets"),
           items: sortedItems,
           subtrees: sortedSubtrees,
           key: Mk,
@@ -3343,7 +3343,7 @@ function r4() {
           previewAsset: void 0
         };
         let i = {
-          name: _$$t("design_systems.assets_panel.hidden"),
+          name: getI18nString("design_systems.assets_panel.hidden"),
           id: o8,
           previewAsset: privateItems[0] ?? _privateItems[0],
           components: e,
@@ -3608,7 +3608,7 @@ function nr({
     }, [libraries, siteLibraries.status, r]);
     return i && !l;
   }();
-  let b = useMemo(() => libraryKey ? libraryKey === t ? _$$t("design_systems.assets_panel.created_in_this_file") : allLibrariesByLibraryKey.get(libraryKey)?.name : void 0, [libraryKey, t, allLibrariesByLibraryKey]);
+  let b = useMemo(() => libraryKey ? libraryKey === t ? getI18nString("design_systems.assets_panel.created_in_this_file") : allLibrariesByLibraryKey.get(libraryKey)?.name : void 0, [libraryKey, t, allLibrariesByLibraryKey]);
   let C = _$$sN();
   let j = currentView === S5.Libraries;
   let v = currentView === S5.Pages;
@@ -3639,25 +3639,25 @@ function nr({
     style: {
       marginLeft: 3
     },
-    children: _$$tx("design_systems.libraries_modal.connected_project_libraries")
+    children: renderI18nText("design_systems.libraries_modal.connected_project_libraries")
   }) : jsx("div", {
     className: r7,
     style: {
       marginLeft: 3
     },
-    children: _$$tx("design_systems.assets_panel.dropdown_type_all_libraries")
+    children: renderI18nText("design_systems.assets_panel.dropdown_type_all_libraries")
   }) : S ? jsx("div", {
     className: r8,
     style: {
       marginLeft: 3
     },
-    children: _$$tx("design_systems.assets_panel.dropdown_type_recents")
+    children: renderI18nText("design_systems.assets_panel.dropdown_type_recents")
   }) : k ? jsx("div", {
     className: r8,
     style: {
       marginLeft: 3
     },
-    children: visualAssetsType === G3.IconSets ? _$$tx("design_systems.assets_panel.icon_sets") : _$$tx("design_systems.assets_panel.illustrations")
+    children: visualAssetsType === G3.IconSets ? renderI18nText("design_systems.assets_panel.icon_sets") : renderI18nText("design_systems.assets_panel.illustrations")
   }) : jsx("div", {
     className: _$$s.flex.overflowHidden.$,
     children: jsx("button", {
@@ -3775,7 +3775,7 @@ function nd() {
   let c = 0 === presets.length;
   let u = 0 === librariesForConnectedProject.length;
   let p = cJ();
-  let [h] = fp(aK);
+  let [h] = useAtomValueAndSetter(aK);
   return useMemo(() => p ? "Blocks" !== h && o && d && c && u : o && d && c && u && "disabled" === siteLibraries.status, [o, d, c, u, siteLibraries, p, h]);
 }
 function nc({
@@ -3821,7 +3821,7 @@ function nc({
     children: currentView !== S5.Search && jsxs("div", {
       className: "asset_panel_header--breadcrumbWrapper--NC2Ps asset_panel_header--horizontalFlex--k99PA",
       children: [_ && jsx(_$$K4, {
-        "aria-label": _$$t("design_systems.assets_panel.back"),
+        "aria-label": getI18nString("design_systems.assets_panel.back"),
         onClick: f,
         ref: setBackButtonKeyboardItem,
         recordingKey: "assetsPanelBack",
@@ -3836,7 +3836,7 @@ function n_() {
   let {
     closeOverlay
   } = _$$h5();
-  let [t, s] = fp(_$$s2);
+  let [t, s] = useAtomValueAndSetter(_$$s2);
   let i = useCallback(() => {
     s(Nfd.DAKOTA);
     closeOverlay();
@@ -3849,13 +3849,13 @@ function n_() {
         className: "x1aue78i"
       }), jsx("div", {
         ...Ay.props(_$$A3.textBodyMediumStrong, _$$A3.colorText),
-        children: _$$tx("dakota.site_blocks.create_cms_collection")
+        children: renderI18nText("dakota.site_blocks.create_cms_collection")
       }), jsx("div", {
         ...Ay.props(_$$A3.textBodyMedium, _$$A3.colorTextSecondary),
-        children: _$$tx("dakota.site_blocks.dynamically_connect_and_update")
+        children: renderI18nText("dakota.site_blocks.dynamically_connect_and_update")
       }), jsx(IK, {
         onClick: i,
-        children: _$$tx("dakota.site_blocks.create_collection_button")
+        children: renderI18nText("dakota.site_blocks.create_collection_button")
       })]
     })
   });
@@ -4214,7 +4214,7 @@ let nO = {
     "--width": (e => "number" == typeof e ? e + "px" : null != e ? e : void 0)(e + 2 * $A + 8)
   }]
 };
-let nD = _$$eU(null);
+let nD = atom(null);
 let nB = {
   width: "unset"
 };
@@ -4296,7 +4296,7 @@ function nV({
     navigateToLibrary
   } = wV();
   let y = q5();
-  let b = md(nD);
+  let b = useAtomWithSubscription(nD);
   let C = _$$H(e.libraryKey);
   let [j] = MA();
   let v = (GM()() ? $H.LIST : j) === $H.LIST;
@@ -4370,7 +4370,7 @@ function nV({
     });
     let p = u.data?.link;
     let h = useCallback(() => {
-      az.trackDefinedEvent("assets_panel.go_to_library", {
+      analyticsEventManager.trackDefinedEvent("assets_panel.go_to_library", {
         libraryKey: e.libraryKey,
         fileKey: s?.key,
         fileTeamId: s?.teamId ?? void 0,
@@ -4379,7 +4379,7 @@ function nV({
       });
     }, [e.libraryKey, s]);
     let m = useCallback(() => {
-      az.trackDefinedEvent("assets_panel.send_feedback_to_creator", {
+      analyticsEventManager.trackDefinedEvent("assets_panel.send_feedback_to_creator", {
         libraryKey: e.libraryKey,
         fileKey: s?.key,
         fileTeamId: s?.teamId ?? void 0,
@@ -4389,7 +4389,7 @@ function nV({
       });
     }, [e.libraryKey, s, c]);
     let f = useCallback(() => {
-      az.trackDefinedEvent("assets_panel.open_library_context_menu", {
+      analyticsEventManager.trackDefinedEvent("assets_panel.open_library_context_menu", {
         libraryKey: e.libraryKey,
         fileKey: s?.key,
         fileTeamId: s?.teamId ?? void 0,
@@ -4421,7 +4421,7 @@ function nV({
     let s = "dark" === DP() ? "dark" : "light";
     return useMemo(() => {
       if (!t) return;
-      let r = nK.find(t => t.name === e.toLowerCase() || e === _$$t("design_systems.assets_panel.site_embeds") && "embeds" === t.name);
+      let r = nK.find(t => t.name === e.toLowerCase() || e === getI18nString("design_systems.assets_panel.site_embeds") && "embeds" === t.name);
       if (r) return {
         url: r.url,
         backgroundToken: `var(${r.background[s]})`,
@@ -4510,9 +4510,9 @@ function nz({
   isList: t,
   showAuthor: s
 }) {
-  let i = md(Rs);
+  let i = useAtomWithSubscription(Rs);
   let l = e.type !== yW.SITE;
-  let a = useMemo(() => e.type === yW.SITE ? "" : e.numComponents > 0 ? _$$t("design_systems.assets_panel.num_components", {
+  let a = useMemo(() => e.type === yW.SITE ? "" : e.numComponents > 0 ? getI18nString("design_systems.assets_panel.num_components", {
     numComponents: e.numComponents
   }) : "", [e]);
   let o = i?.[e.libraryKey]?.author_name || e.authorName;
@@ -4538,7 +4538,7 @@ function nz({
         })]
       }), l && jsx("div", {
         className: "asset_panel_library--libraryStats--JL9eF ellipsis--ellipsis--Tjyfa",
-        children: s ? _$$tx("community.by_publisher", {
+        children: s ? renderI18nText("community.by_publisher", {
           publisher: o
         }) : a
       })]
@@ -5525,7 +5525,7 @@ function nX({
   type: e
 }) {
   let t = e === G3.IconSets ? jsx(nW, {}) : jsx(n$, {});
-  let s = e === G3.IconSets ? _$$t("design_systems.assets_panel.icon_sets") : _$$t("design_systems.assets_panel.illustrations");
+  let s = e === G3.IconSets ? getI18nString("design_systems.assets_panel.icon_sets") : getI18nString("design_systems.assets_panel.illustrations");
   return jsxs("div", {
     className: "asset_panel_visual_asset_packs--assetPack--cBQV4",
     children: [t, jsx("h3", {
@@ -5588,7 +5588,7 @@ function n9({
     librariesForConnectedProject
   } = _$$g3();
   let o = nd();
-  let d = md(aK) === _$$t2.Blocks;
+  let d = useAtomWithSubscription(aK) === _$$t2.Blocks;
   return o ? jsx("div", {
     style: {
       width: e
@@ -5624,7 +5624,7 @@ function ie({
     currentView
   } = wV();
   let [p] = MA();
-  let m = md(rO);
+  let m = useAtomWithSubscription(rO);
   let g = rK();
   let f = c ? $H.LIST : p;
   let {
@@ -5683,7 +5683,7 @@ function ie({
       height: n2
     }), n.push({
       element: jsx(X3, {
-        title: _$$t("design_systems.libraries_modal.connected_project_libraries")
+        title: getI18nString("design_systems.libraries_modal.connected_project_libraries")
       }),
       key: "connected_project_header",
       height: n4
@@ -5713,7 +5713,7 @@ function ie({
       height: n2
     }), n.push({
       element: jsx(X3, {
-        title: _$$t("design_systems.assets_panel.ui_kits")
+        title: getI18nString("design_systems.assets_panel.ui_kits")
       }),
       key: "preset_libraries_header",
       height: n4
@@ -5743,7 +5743,7 @@ function ie({
       height: n2
     }), n.push({
       element: jsx(X3, {
-        title: _$$t("design_systems.assets_panel.assets_from_community"),
+        title: getI18nString("design_systems.assets_panel.assets_from_community"),
         onboardingKey: Bs
       }),
       key: "visual_assets_header",
@@ -5794,7 +5794,7 @@ function it() {
       variant: "secondary",
       onClick: onToggleLibraryModal,
       recordingKey: "assetsLibrary.addMoreLibraries",
-      children: _$$tx("design_systems.assets_panel.add_more_libraries")
+      children: renderI18nText("design_systems.assets_panel.add_more_libraries")
     })
   });
 }
@@ -5813,7 +5813,7 @@ function is() {
     children: jsx($n, {
       variant: "secondary",
       recordingKey: "assetsLibrary.browseMoreAssets",
-      children: _$$tx("design_systems.assets_panel.browse_more_assets")
+      children: renderI18nText("design_systems.assets_panel.browse_more_assets")
     })
   });
 }
@@ -5835,7 +5835,7 @@ function ir({
   });
   let {
     libraryKeys
-  } = md(AS);
+  } = useAtomWithSubscription(AS);
   let u = libraryKeys.length + 1;
   let {
     flyout,
@@ -5844,7 +5844,7 @@ function ir({
     let s = useRef(new Map());
     let i = useRef(null);
     let l = useRef(null);
-    let [a, o] = fp(nD);
+    let [a, o] = useAtomValueAndSetter(nD);
     let d = a?.key;
     let [c, u] = useState(!1);
     let {
@@ -6089,7 +6089,7 @@ function ii({
     }, [o]);
     let c = useCallback(() => getSingletonSceneGraph().setCurrentPageAsync(t ?? ""), [t]);
     let u = useCallback(() => {
-      az.trackDefinedEvent("assets_panel.go_to_page", {
+      analyticsEventManager.trackDefinedEvent("assets_panel.go_to_page", {
         libraryKey: e ?? "",
         pageId: t,
         fileKey: s?.key,
@@ -6103,7 +6103,7 @@ function ii({
       u();
     }, [c, u]);
     let h = useCallback(() => {
-      az.trackDefinedEvent("assets_panel.open_page_context_menu", {
+      analyticsEventManager.trackDefinedEvent("assets_panel.open_page_context_menu", {
         libraryKey: e ?? "",
         pageId: t,
         fileKey: s?.key,
@@ -6148,12 +6148,12 @@ function ii({
   });
 }
 let ia = "performance.ds_eco.asset_panel_pages_view_loading";
-let io = new jk(ia, {});
+let io = new PerfTimer(ia, {});
 function id({
   didFinishLoading: e
 }) {
   let t = io.stop();
-  _$$sx(ia, {
+  trackEventAnalytics(ia, {
     elapsedMs: t,
     isNewAssetPanelFetch: !0,
     didFinishLoading: e
@@ -6413,7 +6413,7 @@ function iE() {
   let t = useMemo(() => e ? [...e.values()].flat() : [], [e]);
   let s = useMemo(() => _$$u2(), []);
   let r = _$$o(PW.RESPONSIVE_SET);
-  let i = md(su);
+  let i = useAtomWithSubscription(su);
   let l = TA();
   let a = useMemo(() => {
     if (!l) return [];
@@ -6454,7 +6454,7 @@ function iM() {
   return jsxs(xU, {
     children: [m && jsxs(Fragment, {
       children: [jsx(X3, {
-        title: _$$t("design_systems.assets_panel.site_blocks")
+        title: getI18nString("design_systems.assets_panel.site_blocks")
       }), jsx("div", {
         className: l ? rA : rM,
         children: t.map((e, t) => "embed" === e.type ? jsx(sc, {
@@ -6464,7 +6464,7 @@ function iM() {
           keyboardPosition: pg([_$$tM.SITE_KIT], t, numColumns),
           thumbHeight: props.thumbHeight,
           thumbWidth: props.thumbWidth,
-          libraryName: _$$t("design_systems.assets_panel.site_blocks.embeds")
+          libraryName: getI18nString("design_systems.assets_panel.site_blocks.embeds")
         }, e.name) : jsx(t1, {
           asset: e,
           sectionNameForTracking: "Recently used site kit assets",
@@ -6479,7 +6479,7 @@ function iM() {
       className: "asset_panel_recents--buffer--URYGQ"
     }), p && jsxs(Fragment, {
       children: [m && jsx(X3, {
-        title: _$$t("design_systems.assets_panel.dropdown_type_all_libraries")
+        title: getI18nString("design_systems.assets_panel.dropdown_type_all_libraries")
       }), jsx("div", {
         className: l ? rA : rM,
         children: productComponents.map((e, t) => jsx(e3, {
@@ -6555,7 +6555,7 @@ function iW() {
       try {
         e = (await iz.search(query)).map(e => e.item);
       } catch (e) {
-        x1(_$$e3.DESIGN_SYSTEMS_ECOSYSTEM, "error in site kit search", {
+        logError(_$$e3.DESIGN_SYSTEMS_ECOSYSTEM, "error in site kit search", {
           message: e.message
         }, {
           reportAsSentryError: !0
@@ -6620,10 +6620,10 @@ let iZ = ({
     u || t.push({
       element: jsxs("div", {
         className: i ? "asset_panel_search_results--visualAssetsShowMoreText--sxfrf asset_panel_search_results--visualAssetsShowMore--MJbt7" : "asset_panel_search_results--showMoreText--mEcU5 asset_panel_search_results--showMore--yo9-j",
-        children: [o && _$$tx("design_systems.assets_panel.showing_results_from_all_libraries"), !o && jsx("button", {
+        children: [o && renderI18nText("design_systems.assets_panel.showing_results_from_all_libraries"), !o && jsx("button", {
           className: "asset_panel_search_results--showMoreLink--3-Ww3 asset_panel_search_results--showMore--yo9-j blue_link--blueLink--9rlnd",
           onClick: d,
-          children: _$$tx("design_systems.assets_panel.more_results_in_all_libraries", {
+          children: renderI18nText("design_systems.assets_panel.more_results_in_all_libraries", {
             results: e.length
           })
         })]
@@ -6674,7 +6674,7 @@ function iQ({
     let e = [];
     c && (e.push({
       element: jsx(X3, {
-        title: _$$t("design_systems.assets_panel.site_blocks"),
+        title: getI18nString("design_systems.assets_panel.site_blocks"),
         numResults: s.length,
         toggleExpanded: () => C(e => !e),
         isExpanded: !b,
@@ -6685,7 +6685,7 @@ function iQ({
     }), b || e.push(...k));
     d && (c && e.push({
       element: jsx(X3, {
-        title: _$$t("design_systems.assets_panel.dropdown_type_all_libraries"),
+        title: getI18nString("design_systems.assets_panel.dropdown_type_all_libraries"),
         numResults: a.length,
         toggleExpanded: () => v(e => !e),
         isExpanded: !j,
@@ -6760,10 +6760,10 @@ function i1() {
       getLibraryNameFromKey: y
     }) : jsx("div", {
       className: i$,
-      children: _ ? _$$tx("design_systems.assets_panel.no_results_for_query_in_library", {
+      children: _ ? renderI18nText("design_systems.assets_panel.no_results_for_query_in_library", {
         searchQuery: query,
         libraryName: _
-      }) : _$$tx("design_systems.assets_panel.no_results_for_query", {
+      }) : renderI18nText("design_systems.assets_panel.no_results_for_query", {
         searchQuery: query
       })
     })
@@ -6831,7 +6831,7 @@ function i3() {
       anchorScroll: !0
     }) : jsx("div", {
       className: i$,
-      children: _$$tx("design_systems.assets_panel.no_results_for_query_in_library", {
+      children: renderI18nText("design_systems.assets_panel.no_results_for_query_in_library", {
         searchQuery: query,
         libraryName: o
       })
@@ -6884,7 +6884,7 @@ let i4 = ({
     });
     let l = _ && null != x && yD(_.key) || null;
     let d = !(null != l && D2(y, l));
-    az.trackDefinedEvent("assets_panel.search_long_loading", {
+    analyticsEventManager.trackDefinedEvent("assets_panel.search_long_loading", {
       ...t,
       ...s,
       fileKey: b,
@@ -6931,8 +6931,8 @@ function i5(e) {
     visualAssetsType
   } = wV();
   let s = !!GM()();
-  let r = md(QN);
-  let i = md(_$$r2);
+  let r = useAtomWithSubscription(QN);
+  let i = useAtomWithSubscription(_$$r2);
   let l = s && !!visualAssetsType;
   return useMemo(() => l ? e.filter(e => e.hub_file_id && (visualAssetsType === G3.IconSets ? r.includes(e.library_key) : i.includes(e.library_key))) : e, [l, e, visualAssetsType, r, i]);
 }
@@ -6978,7 +6978,7 @@ function i7({
   let {
     width
   } = e8();
-  let i = md(Rs);
+  let i = useAtomWithSubscription(Rs);
   let {
     getLibrary
   } = _$$G();
@@ -7084,7 +7084,7 @@ function le({
   library: e,
   setHovered: t
 }) {
-  let s = md(Rs);
+  let s = useAtomWithSubscription(Rs);
   let n = s?.[e.libraryKey]?.author_name || e.authorName;
   return jsx("div", {
     className: "asset_panel_visual_asset_library--libraryFooter--WtYtC",
@@ -7110,7 +7110,7 @@ function le({
         })]
       }), n && jsx("div", {
         className: "asset_panel_visual_asset_library--libraryStats--NtW2u ellipsis--ellipsis--Tjyfa",
-        children: _$$tx("community.by_publisher", {
+        children: renderI18nText("community.by_publisher", {
           publisher: n
         })
       })]
@@ -7129,8 +7129,8 @@ function ls({
   let a = "list" === i;
   let o = _$$lY();
   let d = o.length > 0;
-  let c = md(QN);
-  let u = md(_$$r2);
+  let c = useAtomWithSubscription(QN);
+  let u = useAtomWithSubscription(_$$r2);
   let {
     cardWidth,
     previewHeight
@@ -7202,14 +7202,14 @@ function li({
   } = e;
   !function (e, t, s, r) {
     let i = q5();
-    let [l, o] = fp(GT);
+    let [l, o] = useAtomValueAndSetter(GT);
     let d = t.length + s.length + r.length;
     e.numComponents + e.numTemplates > 0 && (d += 1);
     useEffect(() => {
       if (!l) {
         o(!0);
         let e = _o.stop();
-        e && _$$sx(YS, {
+        e && trackEventAnalytics(YS, {
           elapsedMs: e,
           fileKey: i?.key,
           teamId: i?.teamId,
@@ -7318,7 +7318,7 @@ function lb({
   let N = useRef(void 0);
   let I = Nv(!0);
   useEffect(() => {
-    c && (query && N.current !== libraryKey && (az.trackDefinedEvent("asset_search.misc_feature_usage", {
+    c && (query && N.current !== libraryKey && (analyticsEventManager.trackDefinedEvent("asset_search.misc_feature_usage", {
       aiResultsEnabled: I,
       entryPoint: "asset-panel",
       featureSlug: "library-filter-usage"
@@ -7335,14 +7335,14 @@ function lb({
   let A = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
   useEffect(() => {
     let e = e => {
-      (_$$Ay3.chromeos ? e.altKey && e.shiftKey && e.keyCode === Uz.KEY_2 : e.altKey && e.keyCode === Uz.KEY_2) && A !== m1T.TEXT && (focusSearchBar(), e.preventDefault());
+      (BrowserInfo.chromeos ? e.altKey && e.shiftKey && e.keyCode === Uz.KEY_2 : e.altKey && e.keyCode === Uz.KEY_2) && A !== m1T.TEXT && (focusSearchBar(), e.preventDefault());
     };
     document.addEventListener("keydown", e);
     return () => {
       document.removeEventListener("keydown", e);
     };
   }, [A, focusSearchBar]);
-  let P = useMemo(() => e ? _$$t("design_systems.assets_panel.search_library") : m ? _$$t("design_systems.assets_panel.search_all_sites_inserts") : visualAssetsType ? visualAssetsType === G3.IconSets ? _$$t("design_systems.assets_panel.search_all_icon_sets") : _$$t("design_systems.assets_panel.search_all_illustrations") : _$$t("design_systems.assets_panel.search_all_libraries"), [e, visualAssetsType, m]);
+  let P = useMemo(() => e ? getI18nString("design_systems.assets_panel.search_library") : m ? getI18nString("design_systems.assets_panel.search_all_sites_inserts") : visualAssetsType ? visualAssetsType === G3.IconSets ? getI18nString("design_systems.assets_panel.search_all_icon_sets") : getI18nString("design_systems.assets_panel.search_all_illustrations") : getI18nString("design_systems.assets_panel.search_all_libraries"), [e, visualAssetsType, m]);
   return jsxs("div", {
     className: "asset_panel_search--container--u0qoH asset_panel_search--horizontalFlex---CG1k",
     children: [jsx("div", {
@@ -7386,7 +7386,7 @@ function lC({
     path: [ON.HEADER, my.LIBRARY_SEARCH_CHIP]
   });
   return e ? jsx(_$$v, {
-    "aria-label": _$$t("design_systems.assets_panel.search_chip_label"),
+    "aria-label": getI18nString("design_systems.assets_panel.search_chip_label"),
     hasCloseButton: !0,
     onClose: l,
     recordingKey: "asset-panel-search-chip",
@@ -7421,7 +7421,7 @@ function lj({
     "data-testid": "asset-panel-visual-assets-search-chip",
     children: [jsx("span", {
       className: "asset_panel_search--libraryChipText--3TsfE ellipsis--ellipsis--Tjyfa",
-      children: e === G3.IconSets ? _$$tx("design_systems.assets_panel.icon_sets") : _$$tx("design_systems.assets_panel.illustrations")
+      children: e === G3.IconSets ? renderI18nText("design_systems.assets_panel.icon_sets") : renderI18nText("design_systems.assets_panel.illustrations")
     }), jsx(_$$E, {
       className: "asset_panel_search--libraryChipRemove--kJiJn",
       onClick: l,
@@ -7455,7 +7455,7 @@ function lL({
           left: t.current?.getBoundingClientRect().left
         }
       }
-    })), az.trackDefinedEvent("assets_panel.asset_type_dropdown_opened", {
+    })), analyticsEventManager.trackDefinedEvent("assets_panel.asset_type_dropdown_opened", {
       fileKey: i ?? void 0,
       assetsPanelVersion: 3
     }));
@@ -7470,7 +7470,7 @@ function lL({
         onClick: c,
         "aria-expanded": o,
         ref: _$$Ay4(t, setKeyboardNavigationElement),
-        "aria-label": _$$t("design_systems.assets_panel.settings_label"),
+        "aria-label": getI18nString("design_systems.assets_panel.settings_label"),
         "aria-haspopup": "listbox",
         htmlAttributes: {
           "data-testid": "asset-panel-settings-button"
@@ -7561,7 +7561,7 @@ function lR({
     }, [focusSearchBar, navigateToRecents, h]);
     let y = useCallback(() => e.current?.focus(), [e]);
     let _ = useCallback(e => {
-      az.trackDefinedEvent("assets_panel.view_mode_changed", {
+      analyticsEventManager.trackDefinedEvent("assets_panel.view_mode_changed", {
         viewMode: e,
         fileKey: t?.key,
         fileTeamId: t?.teamId ?? void 0,
@@ -7575,7 +7575,7 @@ function lR({
       onKeyDown: () => y
     });
     let C = useCallback(e => {
-      az.trackDefinedEvent("assets_panel.folder_toggle", {
+      analyticsEventManager.trackDefinedEvent("assets_panel.folder_toggle", {
         showFolders: e,
         fileKey: t?.key,
         fileTeamId: t?.teamId ?? void 0,
@@ -7597,12 +7597,12 @@ function lR({
   let F = useMemo(() => {
     let e = [];
     e.push(lO({
-      text: _$$t("design_systems.assets_panel.dropdown_type_all_libraries"),
+      text: getI18nString("design_systems.assets_panel.dropdown_type_all_libraries"),
       checked: currentView === S5.Libraries || currentView === S5.Search && !libraryKey,
       onClick: goToAll
     }));
     w && e.push(lO({
-      text: _$$t("design_systems.assets_panel.dropdown_type_recents"),
+      text: getI18nString("design_systems.assets_panel.dropdown_type_recents"),
       checked: currentView === S5.Recents && productComponents.length > 0,
       onClick: goToRecents
     }));
@@ -7633,7 +7633,7 @@ function lR({
     })));
     librariesForConnectedProject.length > 0 && (e.push(jsx(wv, {})), e.push(jsx("div", {
       className: l()(_$$s.textBodyMedium.$, "asset_panel_settings--optionSubtitle--9d2Ib"),
-      children: _$$t("design_systems.libraries_modal.connected_project_libraries")
+      children: getI18nString("design_systems.libraries_modal.connected_project_libraries")
     })), e.push(...librariesForConnectedProject.map(({
       name: e,
       libraryKey: t
@@ -7645,18 +7645,18 @@ function lR({
     }))));
     e.push(jsx(wv, {}));
     k || (e.push(lO({
-      text: _$$t("design_systems.assets_panel.view_toggle_grid"),
+      text: getI18nString("design_systems.assets_panel.view_toggle_grid"),
       checked: S === $H.GRID,
       onClick: changeAssetsView($H.GRID),
       icon: jsx(_$$t7, {})
     })), e.push(lO({
-      text: _$$t("design_systems.assets_panel.view_toggle_list"),
+      text: getI18nString("design_systems.assets_panel.view_toggle_list"),
       checked: S === $H.LIST,
       onClick: changeAssetsView($H.LIST),
       icon: jsx(_$$Z2, {})
     })));
     t && e.push(lO({
-      text: _$$t("design_systems.assets_panel.view_toggle_show_folders"),
+      text: getI18nString("design_systems.assets_panel.view_toggle_show_folders"),
       checked: m,
       onClick: toggleShowFolders(!m),
       icon: jsx(_$$e4, {})
@@ -7800,7 +7800,7 @@ function lQ({
       document.removeEventListener("mousedown", t);
     };
   }, [e]);
-  let y = useMemo(() => o || _$$tx("design_systems.assets_panel.visual_search.select_layer"), [o]);
+  let y = useMemo(() => o || renderI18nText("design_systems.assets_panel.visual_search.select_layer"), [o]);
   let _ = useMemo(() => a ? jsx("div", {
     className: "xl010v5",
     children: jsx(Bf, {
@@ -7845,7 +7845,7 @@ function lQ({
               variant: "secondary",
               onClick: u,
               children: [jsx(_$$E4, {
-                children: _$$tx("design_systems.assets_panel.visual_search.search")
+                children: renderI18nText("design_systems.assets_panel.visual_search.search")
               }), jsx($n.Shortcut, {
                 children: "\u2318\u23CE"
               })]
@@ -7886,7 +7886,7 @@ function lQ({
               children: jsxs("div", {
                 className: "x78zum5 xdt5ytf x6s0dn4 xl56j7k x1jnr06f",
                 children: [jsx(_$$A6, {}), jsx(_$$E4, {
-                  children: _$$tx("design_systems.assets_panel.visual_search.drag_or_upload")
+                  children: renderI18nText("design_systems.assets_panel.visual_search.drag_or_upload")
                 })]
               })
             })
@@ -7911,10 +7911,10 @@ function l0() {
       ref: setKeyboardNavigationElement,
       onClick: () => {
         t(!e);
-        az.trackDefinedEvent("fragment_search.assets_panel_visual_search_button_clicked", {});
+        analyticsEventManager.trackDefinedEvent("fragment_search.assets_panel_visual_search_button_clicked", {});
       },
       "aria-expanded": e,
-      "aria-label": _$$t("design_systems.assets_panel.visual_search.label"),
+      "aria-label": getI18nString("design_systems.assets_panel.visual_search.label"),
       children: jsx(_$$T4, {})
     }), e && jsx(lQ, {
       onDismiss: () => t(!1)
@@ -7926,9 +7926,9 @@ let l1 = new class {
     this.format = e => {
       switch (e) {
         case _$$t2.Blocks:
-          return _$$t("design_systems.assets_panel.blocks");
+          return getI18nString("design_systems.assets_panel.blocks");
         case _$$t2.Libraries:
-          return _$$t("design_systems.assets_panel.dropdown_libraries");
+          return getI18nString("design_systems.assets_panel.dropdown_libraries");
       }
     };
   }
@@ -7946,14 +7946,14 @@ function l3() {
   let a = useMemo(() => getPage(libraryKey, pageId), [getPage, libraryKey, pageId]);
   let o = useMemo(() => getLibrary(libraryKey), [getLibrary, libraryKey]);
   let d = rK();
-  let [c, u] = fp(aK);
+  let [c, u] = useAtomValueAndSetter(aK);
   let p = _$$cJ() && currentView !== S5.Search && currentView !== S5.Recents ? [_$$t2.Blocks, _$$t2.Libraries] : void 0;
   return jsxs("div", {
     className: "x78zum5 xdt5ytf xw6ie8e",
     children: [jsx(l4, {
       library: o
     }), !!p && jsx(l5, {
-      legend: _$$tx("design_systems.assets_panel.assets"),
+      legend: renderI18nText("design_systems.assets_panel.assets"),
       value: c,
       onChange: e => {
         hB(() => u(e));
@@ -7974,7 +7974,7 @@ function l2({
     currentView
   } = wV();
   let s = _$$cJ();
-  let [n] = fp(aK);
+  let [n] = useAtomValueAndSetter(aK);
   let i = nd();
   let l = s && currentView === S5.Libraries && n === _$$t2.Libraries;
   return s ? n === _$$t2.Blocks && currentView !== S5.Recents ? null : n === _$$t2.Libraries && i ? null : jsxs("div", {
@@ -8026,7 +8026,7 @@ function l4({
     }), l && jsx("div", {
       className: "x1ms6mhf x1k3v4rp",
       children: jsx(_$$K4, {
-        "aria-label": _$$t("design_systems.assets_panel.close_inserts"),
+        "aria-label": getI18nString("design_systems.assets_panel.close_inserts"),
         onClick: closeOverlay,
         children: jsx(_$$L, {})
       })
@@ -8145,7 +8145,7 @@ function an({
     let r = jO();
     let i = _$$f("has_dismissed_component_sidebar_library_upsell_banner");
     let l = useSelector(e => e.isFreeUser);
-    let a = useSelector(_$$P4);
+    let a = useSelector(selectTeams);
     let o = s?.teamId ? a[s.teamId] : null;
     let d = _$$Rs(kQI, {
       id: s?.teamId ?? ""
@@ -8163,7 +8163,7 @@ function an({
   let [u] = MA();
   let p = q5();
   _$$h(() => {
-    _$$sx("Component Sidebar Viewed", {
+    trackEventAnalytics("Component Sidebar Viewed", {
       viewMode: u,
       assetsPanelVersion: 3,
       fileKey: p?.key,
@@ -8264,7 +8264,7 @@ function al({
     } = ZX();
     let g = l7(navigateToTop);
     let f = _$$g3().allLibrariesByLibraryKey;
-    let [x, y] = fp(dL);
+    let [x, y] = useAtomValueAndSetter(dL);
     useEffect(() => {
       x && f.size > 0 && (hB(() => navigateToLibrary(x)), y(null));
     }, [navigateToLibrary, f.size, x, y]);
@@ -8313,7 +8313,7 @@ function al({
 function aa() {
   return jsx("div", {
     className: _$$s.colorTextSecondary.my8.mx16.$,
-    children: _$$tx("design_systems.assets_panel.error")
+    children: renderI18nText("design_systems.assets_panel.error")
   });
 }
 export function $$ao0({

@@ -5,7 +5,7 @@ import { getFeatureFlags } from "../905/601108";
 import o from "classnames";
 import d from "../vendor/879378";
 import { H } from "../figma_app/147959";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { H as _$$H } from "react-dom";
 import { R7 } from "../905/508367";
 import { B } from "../905/877503";
@@ -481,7 +481,7 @@ let O = new class {
     this.pointerDownTimeout && (clearTimeout(this.pointerDownTimeout), this.pointerDownTimeout = null);
   }
 }({
-  disablePointerLock: Ay.safari
+  disablePointerLock: BrowserInfo.safari
 });
 let D = {
   left: "-15.5px"

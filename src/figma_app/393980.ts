@@ -7,14 +7,14 @@ import { l7 } from "../905/189185";
 import { dI } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import _ from "classnames";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { parsePxInt } from "../figma_app/783094";
 import { Uz } from "../905/63728";
 import { Pt, of, v_, aH } from "../figma_app/806412";
 import { P as _$$P } from "../905/347284";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { Y } from "../905/830372";
 import { ay } from "../905/879323";
 import { DP } from "../905/640017";
@@ -179,7 +179,7 @@ function X({
     l7.user("rename-style", () => glU.renameNode(dI(w), J_(n)));
     Y5.triggerAction("commit");
     F();
-    sx("Style Renamed", {
+    trackEventAnalytics("Style Renamed", {
       styleType: e.styleType
     });
   });
@@ -208,7 +208,7 @@ function X({
       let e = getSingletonSceneGraph().get(dI(w));
       e && (e.description = S);
     });
-    sx("Style Description Changed", {
+    trackEventAnalytics("Style Description Changed", {
       styleType: L,
       length: S.length,
       guid: dI(w)
@@ -227,7 +227,7 @@ function X({
       children: [jsx(JU, {
         htmlFor: "style-name-input",
         disabled: _,
-        children: tx("design_systems.create_style.name")
+        children: renderI18nText("design_systems.create_style.name")
       }), _ ? jsx("div", {
         className: Pj,
         "data-tooltip": t,
@@ -265,7 +265,7 @@ function X({
         htmlFor: "style-description-input",
         disabled: _,
         className: ow,
-        children: _$$t("design_systems.create_style.description")
+        children: getI18nString("design_systems.create_style.description")
       }), _ ? jsx("div", {
         className: Pj,
         "data-tooltip": u,
@@ -281,7 +281,7 @@ function X({
         onChange: e => {
           v(e.target.value);
         },
-        placeholder: _$$t("design_systems.create_style.placeholder_description"),
+        placeholder: getI18nString("design_systems.create_style.placeholder_description"),
         recordingKey: Pt(p, "styleDescription"),
         spellCheck: !1,
         submit: G,
@@ -313,15 +313,15 @@ export function $$q2({
 export function $$J1(e) {
   switch (e) {
     case "FILL":
-      return _$$t("design_systems.create_style.placeholder_name_color");
+      return getI18nString("design_systems.create_style.placeholder_name_color");
     case "TEXT":
-      return _$$t("design_systems.create_style.placeholder_name_text");
+      return getI18nString("design_systems.create_style.placeholder_name_text");
     case "EFFECT":
-      return _$$t("design_systems.create_style.placeholder_name_effect");
+      return getI18nString("design_systems.create_style.placeholder_name_effect");
     case "GRID":
-      return _$$t("design_systems.create_style.placeholder_name_guide");
+      return getI18nString("design_systems.create_style.placeholder_name_guide");
     default:
-      return _$$t("design_systems.create_style.placeholder_name_create_new_style_generic");
+      return getI18nString("design_systems.create_style.placeholder_name_create_new_style_generic");
   }
 }
 function Z({
@@ -333,8 +333,8 @@ function Z({
   let o = sO();
   let l = useDispatch();
   let d = Um();
-  let c = md(TN);
-  let u = md(Dq)[e] || "";
+  let c = useAtomWithSubscription(TN);
+  let u = useAtomWithSubscription(Dq)[e] || "";
   let _ = useId();
   return (useEffect(() => {
     !c.includes(e) && c.length > 0 && t(c[0]);
@@ -350,7 +350,7 @@ function Z({
     children: [jsx(JU, {
       id: _,
       disabled: r,
-      children: tx("slides.properties_panel.theme.panel_title")
+      children: renderI18nText("slides.properties_panel.theme.panel_title")
     }), r ? jsx(Y, {
       padding: {
         vertical: parsePxInt(dGl)

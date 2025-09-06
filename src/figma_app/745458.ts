@@ -2,19 +2,19 @@ import { PK } from "../figma_app/243058";
 import { Xf, sg, ey, yG } from "../905/859698";
 import { glU } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { eU, Iz, mg, p6 } from "../figma_app/27355";
+import { atom, createRemovableAtomFamily, mg, p6 } from "../figma_app/27355";
 import l from "../vendor/983401";
 import { Mz } from "../vendor/925040";
 import { conditionalFeatureFlag } from "../figma_app/169182";
 import { P8 } from "../905/270781";
-import { xi } from "../905/714362";
+import { logWarning } from "../905/714362";
 import { f as _$$f } from "../905/412913";
 import { d1 } from "../905/766303";
 import { dp } from "../905/760074";
 import { z } from "../905/915227";
 import { E7 } from "../905/216495";
 import { U as _$$U } from "../905/722080";
-import { bt } from "../905/270322";
+import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { aD, X7 } from "../figma_app/646357";
 import { i as _$$i } from "../905/315328";
 import { PW } from "../figma_app/633080";
@@ -92,18 +92,18 @@ function j(e, t, r) {
     let i = r(t);
     let a = i?.version?.toLowerCase();
     let o = n?.version?.toLowerCase();
-    if (void 0 === a && xi("library_updates_selectors", "Unexpectedly missing published version from asset", {
+    if (void 0 === a && logWarning("library_updates_selectors", "Unexpectedly missing published version from asset", {
       publishedAsset: t
     }, {
       reportAsSentryError: !0
-    }), void 0 === o && xi("library_updates_selectors", "Unexpectedly missing current version from asset", {
+    }), void 0 === o && logWarning("library_updates_selectors", "Unexpectedly missing current version from asset", {
       publishedAsset: t
     }, {
       reportAsSentryError: !0
     }), getFeatureFlags().ds_user_facing_version_publishing) {
       let e = i?.userFacingVersion?.toLowerCase();
       let r = n?.userFacingVersion?.toLowerCase();
-      r !== e && a === e && xi("library_updates_selectors", "Published UFV is different than published version while also matching the subscribed version", {
+      r !== e && a === e && logWarning("library_updates_selectors", "Published UFV is different than published version while also matching the subscribed version", {
         publishedVersionValue: a,
         currentVersionValue: o,
         publishedUserFacingVersionValue: e,
@@ -308,10 +308,10 @@ let K = P8([a3, gJ, d1, M, D, F, k, e => e.mirror.appModel.currentPage], (e, t, 
     variableSetUpdatesForCurrentPage: m
   };
 });
-let Y = bt($$z10);
-let $ = bt(G);
-let X = bt(K);
-let q = eU(e => {
+let Y = createReduxSubscriptionAtomWithState($$z10);
+let $ = createReduxSubscriptionAtomWithState(G);
+let X = createReduxSubscriptionAtomWithState(K);
+let q = atom(e => {
   let t = [];
   let r = new Set();
   for (let n of Object.values(e(en))) for (let e of n) if (e.type === PW.CODE_COMPONENT) {
@@ -321,25 +321,25 @@ let q = eU(e => {
   }
   return t;
 });
-let J = eU(e => {
+let J = atom(e => {
   let t = e(z);
   return e(en)[t] ?? [];
 });
-let $$Z7 = Iz(e => eU(t => {
+let $$Z7 = createRemovableAtomFamily(e => atom(t => {
   let {
     componentUpdatesForAllPages,
     componentUpdatesForCurrentPage
   } = t(Y);
   return e === aD.ALL ? componentUpdatesForAllPages : componentUpdatesForCurrentPage;
 }));
-let $$Q0 = Iz(e => eU(t => {
+let $$Q0 = createRemovableAtomFamily(e => atom(t => {
   let {
     stateGroupUpdatesForAllPages,
     stateGroupUpdatesForCurrentPage
   } = t(Y);
   return e === aD.ALL ? stateGroupUpdatesForAllPages : stateGroupUpdatesForCurrentPage;
 }));
-let $$ee15 = Iz(e => eU(t => {
+let $$ee15 = createRemovableAtomFamily(e => atom(t => {
   let {
     styleUpdatesForAllPages,
     styleUpdatesForCurrentPage
@@ -347,14 +347,14 @@ let $$ee15 = Iz(e => eU(t => {
   return e === aD.ALL ? styleUpdatesForAllPages : styleUpdatesForCurrentPage;
 }));
 let $$et11 = mg($, e => e.styleUpdatesForAllPages);
-let $$er12 = Iz(e => eU(t => {
+let $$er12 = createRemovableAtomFamily(e => atom(t => {
   let {
     variableSetUpdatesForAllPages,
     variableSetUpdatesForCurrentPage
   } = t(X);
   return e === aD.ALL ? variableSetUpdatesForAllPages : variableSetUpdatesForCurrentPage;
 }));
-let en = eU(e => {
+let en = atom(e => {
   let t = {};
   for (let r of Object.values(_$$i)) for (let [n, i] of Object.entries(e(r))) {
     t[n] = t[n] || [];
@@ -362,7 +362,7 @@ let en = eU(e => {
   }
   return t;
 });
-let $$ei13 = Iz(e => eU(t => {
+let $$ei13 = createRemovableAtomFamily(e => atom(t => {
   switch (e) {
     case aD.ALL:
       return t(q);
@@ -370,7 +370,7 @@ let $$ei13 = Iz(e => eU(t => {
       return t(J);
   }
 }));
-let $$ea4 = eU(e => {
+let $$ea4 = atom(e => {
   let {
     componentUpdatesForAllPages,
     stateGroupUpdatesForAllPages,
@@ -393,7 +393,7 @@ let $$ea4 = eU(e => {
     includesMoveComponentUpdatesOnAnyPage: includesMoveUpdatesOnAnyPage
   };
 });
-let $$es3 = eU(e => {
+let $$es3 = atom(e => {
   let {
     componentUpdatesForCurrentPage,
     stateGroupUpdatesForCurrentPage,
@@ -416,7 +416,7 @@ let $$es3 = eU(e => {
     includesMoveComponentUpdatesOnCurrentPage: includesMoveUpdatesOnCurrentPage
   };
 });
-let $$eo8 = Iz(e => eU(t => {
+let $$eo8 = createRemovableAtomFamily(e => atom(t => {
   let {
     componentUpdatesForAllPages,
     stateGroupUpdatesForAllPages,
@@ -485,7 +485,7 @@ let $$ec1 = mg(el, ({
 let $$eu2 = mg($$ed6, ({
   hasUpdates: e
 }) => e);
-let $$ep17 = Iz(e => eU(t => t(e === aD.ALL ? el : $$ed6).hasUpdates));
+let $$ep17 = createRemovableAtomFamily(e => atom(t => t(e === aD.ALL ? el : $$ed6).hasUpdates));
 let $$e_9 = mg(el, ({
   updateCount: e
 }) => e);
@@ -505,7 +505,7 @@ let $$eh18 = p6([$$ea4], ({
   variableSetKeys: X7(n),
   libraryAssetKeys: X7(i)
 }));
-let $$em5 = bt(e => e.library.libraryUpdatesBannerDismissed);
+let $$em5 = createReduxSubscriptionAtomWithState(e => e.library.libraryUpdatesBannerDismissed);
 export function $$eg16(e, t) {
   let r = dK(e);
   let i = E7(t);
@@ -522,7 +522,7 @@ export function $$eg16(e, t) {
     isLocalStyle: s.isLocalStyle
   } : null;
 }
-export let $$ef19 = eU(!1);
+export let $$ef19 = atom(!1);
 export const Bw = $$Q0;
 export const I7 = $$ec1;
 export const Lc = $$eu2;

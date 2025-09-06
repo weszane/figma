@@ -1,7 +1,7 @@
 import { sYL, lyf, kul } from "../figma_app/763686";
-import { az, sx } from "../905/449184";
+import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { subscribeAndAwaitData } from "../905/553831";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { zX } from "../905/576487";
 import { nF } from "../905/350402";
@@ -14,7 +14,7 @@ import { oJ } from "../905/346794";
 import f, { Stx, dDF } from "../figma_app/43951";
 import { wY } from "../905/753206";
 import A, { m as _$$m } from "../905/294113";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { Wo, Kn } from "../905/535806";
 import { e0 } from "../905/696396";
 import { S as _$$S } from "../figma_app/787550";
@@ -25,7 +25,7 @@ import { K as _$$K } from "../905/807535";
 import { b as _$$b, c as _$$c } from "../905/308099";
 import { s as _$$s } from "../905/932270";
 import { J as _$$J } from "../905/270045";
-import { fp } from "../figma_app/27355";
+import { useAtomValueAndSetter } from "../figma_app/27355";
 import N from "../vendor/73823";
 import O from "../vendor/946678";
 import { h as _$$h } from "../905/207101";
@@ -54,11 +54,11 @@ import { Dd } from "../905/519092";
 var P = N;
 var D = O;
 let Y = {
-  [Wo.MAIN]: () => tx("collaboration.branching_force.merge_from_source_merge_conflict_radio_option_main"),
-  [Wo.BRANCH]: () => tx("collaboration.branching_force.merge_from_source_merge_conflict_radio_option_branch")
+  [Wo.MAIN]: () => renderI18nText("collaboration.branching_force.merge_from_source_merge_conflict_radio_option_main"),
+  [Wo.BRANCH]: () => renderI18nText("collaboration.branching_force.merge_from_source_merge_conflict_radio_option_branch")
 };
 function q(e) {
-  return tx("collaboration.branching_force.merge_from_source_merge_conflict_radio_label", {
+  return renderI18nText("collaboration.branching_force.merge_from_source_merge_conflict_radio_label", {
     option: jsx("span", {
       className: "branch_force_merge_modal--conflictChoiceBold---XcmF",
       children: Y[e.value]()
@@ -72,7 +72,7 @@ let $ = Ju(function (e) {
   } = e;
   let r = useDispatch();
   let [a, l] = useState(Wo.MAIN);
-  let [d, c] = fp(nX);
+  let [d, c] = useAtomValueAndSetter(nX);
   let u = d ?? e.direction;
   _$$h(() => (c(e.direction), () => c(null)));
   let p = useSelector(e => e.fileVersion);
@@ -135,7 +135,7 @@ let $ = Ju(function (e) {
     }));
   };
   G && (cb(G), console.error(G), r(_$$F.enqueue({
-    message: _$$t("collaboration.branching.error_generic"),
+    message: getI18nString("collaboration.branching.error_generic"),
     error: !0
   })), r(ov({
     hideModal: !0,
@@ -163,9 +163,9 @@ let $ = Ju(function (e) {
   if (u === Kn.TO_SOURCE) {
     let e = N.isMergeRequired ?? !1;
     return jsxs(yX, {
-      confirmationTitle: tx("collaboration.branching_force.merge_to_source_title"),
+      confirmationTitle: renderI18nText("collaboration.branching_force.merge_to_source_title"),
       destructive: !0,
-      confirmText: tx("collaboration.branching_force.merge_to_source_confirm"),
+      confirmText: renderI18nText("collaboration.branching_force.merge_to_source_confirm"),
       onConfirm: () => {
         _checkpointDiff && r(S2({
           mergeParams: {
@@ -175,24 +175,24 @@ let $ = Ju(function (e) {
             branchModalTrackingId: g
           },
           checkpointDiff: _checkpointDiff,
-          pendingMessage: _$$t("collaboration.branching.merge_pending"),
-          successMessage: _$$t("collaboration.branching.merge_success"),
+          pendingMessage: getI18nString("collaboration.branching.merge_pending"),
+          successMessage: getI18nString("collaboration.branching.merge_success"),
           user: h
         }));
       },
       onCancel: Q,
       onHide: Q,
       disableConfirm: e,
-      children: [tx("collaboration.branching_force.merge_to_source_description"), e && jsx("div", {
+      children: [renderI18nText("collaboration.branching_force.merge_to_source_description"), e && jsx("div", {
         className: "branch_force_merge_modal--blockedMergeText--PYABM",
-        children: tx("collaboration.branching_force.merge_to_source_blocked_description")
+        children: renderI18nText("collaboration.branching_force.merge_to_source_blocked_description")
       })]
     });
   }
   return u === Kn.FROM_SOURCE ? jsxs(yX, {
-    confirmationTitle: tx("collaboration.branching_force.merge_from_source_title"),
+    confirmationTitle: renderI18nText("collaboration.branching_force.merge_from_source_title"),
     destructive: !0,
-    confirmText: tx("collaboration.branching_force.merge_from_source_confirm"),
+    confirmText: renderI18nText("collaboration.branching_force.merge_from_source_confirm"),
     onConfirm: () => {
       if (null === N || !checkpointDiff) return;
       let e = N.conflictGroups;
@@ -212,8 +212,8 @@ let $ = Ju(function (e) {
           direction: u
         },
         checkpointDiff,
-        pendingMessage: _$$t("collaboration.branching.update_pending"),
-        successMessage: _$$t("collaboration.branching.update_success"),
+        pendingMessage: getI18nString("collaboration.branching.update_pending"),
+        successMessage: getI18nString("collaboration.branching.update_success"),
         conflictResolutionDetails: {
           mainPickGroups: l.length,
           branchPickGroups: o.length,
@@ -227,14 +227,14 @@ let $ = Ju(function (e) {
     onHide: Q,
     children: [jsx("div", {
       className: "branch_force_merge_modal--conflictChoiceRadioGroupHeader--Zhm5w",
-      children: tx("collaboration.branching_force.merge_from_source_description")
+      children: renderI18nText("collaboration.branching_force.merge_from_source_description")
     }), jsxs(_$$b, {
       value: a,
       onChange: e => l(_$$K(Wo, e) ?? Wo.MAIN),
       legend: jsx(_$$s, {
         children: jsx("span", {
           className: "branch_force_merge_modal--conflictChoiceRadioLegend--onrEN",
-          children: tx("collaboration.branching_force.merge_from_source_merge_conflict_label")
+          children: renderI18nText("collaboration.branching_force.merge_from_source_merge_conflict_label")
         })
       }),
       children: [jsx(_$$c, {
@@ -322,7 +322,7 @@ let el = Ju(function ({
   });
   let _ = jsx(jP, {
     dispatch: lQ,
-    displayText: tx("collaboration.feedback.incremental_update_modal.latest_version"),
+    displayText: renderI18nText("collaboration.feedback.incremental_update_modal.latest_version"),
     editorType: null,
     first: !0,
     isActive: "latest" === l,
@@ -337,7 +337,7 @@ let el = Ju(function ({
     view: "file_default"
   });
   return jsx(Dd, {
-    title: _$$t("collaboration.feedback.incremental_update_modal.title"),
+    title: getI18nString("collaboration.feedback.incremental_update_modal.title"),
     maxWidth: 528,
     minWidth: 528,
     fixedCenter: !0,
@@ -351,7 +351,7 @@ let el = Ju(function ({
     },
     focus: !0,
     disabled: null === l,
-    confirmText: _$$t("collaboration.feedback.incremental_update_modal.confirm"),
+    confirmText: getI18nString("collaboration.feedback.incremental_update_modal.confirm"),
     children: jsx(_$$x, {
       isLoading: c,
       children: () => jsxs("ol", {
@@ -407,7 +407,7 @@ let $$eu2 = nF(async (e, t) => {
     openFile
   } = i;
   if (!openFile) {
-    az.trackDefinedEvent("scenegraph_and_sync.branching.merge_modal_blocked", {
+    analyticsEventManager.trackDefinedEvent("scenegraph_and_sync.branching.merge_modal_blocked", {
       reason: "no open file"
     });
     return;
@@ -415,9 +415,9 @@ let $$eu2 = nF(async (e, t) => {
   let d = i.openFileMerge;
   if (null != d) {
     e.dispatch(_$$F.enqueue({
-      message: _$$t("collaboration.branching.waiting_for_previous_merge")
+      message: getI18nString("collaboration.branching.waiting_for_previous_merge")
     }));
-    az.trackDefinedEvent("scenegraph_and_sync.branching.merge_modal_blocked", {
+    analyticsEventManager.trackDefinedEvent("scenegraph_and_sync.branching.merge_modal_blocked", {
       reason: "file merge in progress",
       fileMergeId: d.fileMergeId
     });
@@ -440,7 +440,7 @@ let $$eu2 = nF(async (e, t) => {
   }
   if (p.length > 0) {
     e.dispatch(_$$F.enqueue({
-      message: _$$t("collaboration.branching.saving_file"),
+      message: getI18nString("collaboration.branching.saving_file"),
       type: "file-merge-save",
       icon: zX.SPINNER
     }));
@@ -454,10 +454,10 @@ let $$eu2 = nF(async (e, t) => {
         matchType: "file-merge-save"
       }));
       e.dispatch(_$$F.enqueue({
-        message: _$$t("collaboration.branching.error_saving_file"),
+        message: getI18nString("collaboration.branching.error_saving_file"),
         error: !0
       }));
-      az.trackDefinedEvent("scenegraph_and_sync.branching.merge_modal_blocked", {
+      analyticsEventManager.trackDefinedEvent("scenegraph_and_sync.branching.merge_modal_blocked", {
         reason: "error saving file"
       });
       return;
@@ -490,7 +490,7 @@ let $$ep3 = nF((e, {
     force: n,
     sourceCheckpointKey: a,
     unreadCommentCount: s
-  })), t === Kn.FROM_SOURCE && sx("Branch Update From Main Clicked", {
+  })), t === Kn.FROM_SOURCE && trackEventAnalytics("Branch Update From Main Clicked", {
     trackingContext: i,
     fileKey: l.key,
     fileRepoId: l.file_repo_id,
@@ -525,9 +525,9 @@ let $$eh4 = nF((e, {
   e.dispatch(sf({
     view: "fullscreen",
     fileKey: n.key,
-    editorType: nT.Design
+    editorType: FEditorType.Design
   }));
-  sx("Open File Click", {
+  trackEventAnalytics("Open File Click", {
     trackingContext: t,
     fileKey: n.key,
     fileRepoId: n.fileRepoId
@@ -540,7 +540,7 @@ let $$eg6 = nF((e, {
   let n = d1(i);
   n && (e.dispatch(to({
     type: jS
-  })), sx("View Branches Clicked", {
+  })), trackEventAnalytics("View Branches Clicked", {
     trackingContext: t,
     fileKey: n.key,
     fileRepoId: n.file_repo_id

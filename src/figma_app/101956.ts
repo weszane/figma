@@ -1,7 +1,7 @@
-import { eU } from "../figma_app/27355";
+import { atom } from "../figma_app/27355";
 import { T } from "../905/868547";
 import { yV } from "../figma_app/516028";
-import { bt } from "../905/270322";
+import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { w5 } from "../figma_app/345997";
 import { ng } from "../figma_app/205827";
 import { M_ } from "../905/32091";
@@ -24,10 +24,10 @@ let $$g5 = J9([Hh], ([e], t) => {
   let n = t(_s) ? null : e;
   return !!r && !!n && !r.teamId && !r.parentOrgId && r.folderId === n;
 });
-let f = bt(({
+let f = createReduxSubscriptionAtomWithState(({
   progressBarState: e
 }) => T(e?.mode));
-let $$E4 = eU(e => new Promise(t => {
+let $$E4 = atom(e => new Promise(t => {
   e(f) || t(!1);
 }));
 let $$y7 = r1("figjam_editor_onboarded");
@@ -50,7 +50,7 @@ let $$T0 = J9([KI, b], ([e, t], r) => {
     team: s
   });
 });
-let $$I2 = eU(e => {
+let $$I2 = atom(e => {
   let t = e(yV);
   if (!t) return !1;
   let {
@@ -62,11 +62,11 @@ let $$I2 = eU(e => {
     grace_period_end: team.gracePeriodEnd?.toISOString() ?? null
   });
 });
-let $$S6 = eU(e => {
+let $$S6 = atom(e => {
   let t = e(yV);
   return t?.canEdit ?? !1;
 });
-let $$v1 = eU(e => {
+let $$v1 = atom(e => {
   let t = e(yV);
   return !!t && t.canView && !t.canEdit;
 });

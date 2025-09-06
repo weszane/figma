@@ -1,5 +1,5 @@
 import { Yx } from "../figma_app/930338";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { cV } from "../figma_app/740025";
 export function $$s2(e, t, r) {
   if (0 === e.length) return "";
@@ -7,7 +7,7 @@ export function $$s2(e, t, r) {
   let a = e.slice(0, t - 1);
   let s = e.slice(t - 1);
   0 === s.length && (s = [a[a.length - 1]], a = a.slice(0, a.length - 1));
-  let o = 1 === s.length ? r(s[0]) : _$$t("community.resource.by_x_others", {
+  let o = 1 === s.length ? r(s[0]) : getI18nString("community.resource.by_x_others", {
     numPublishers: s.length
   });
   let l = a.map(r);

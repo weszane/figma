@@ -1,12 +1,12 @@
 import { l as _$$l } from "../905/716947";
-import { eU, Iz } from "../figma_app/27355";
+import { atom, createRemovableAtomFamily } from "../figma_app/27355";
 import { Xm, gB, e1 } from "../905/723791";
 import { P as _$$P } from "../905/412913";
 import { Mk } from "../figma_app/31188";
 import { _S, ze } from "../figma_app/516028";
 import { O as _$$O } from "../905/566074";
 import { c2 } from "../905/382883";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { FComponentType } from "../figma_app/191312";
 import { IUX, Bu2 } from "../figma_app/43951";
 import { PW as _$$PW } from "../905/497152";
@@ -37,7 +37,7 @@ let y = {
   [_$$PW.CODE_COMPONENT]: v(_$$PW.CODE_COMPONENT)
 };
 function b(e) {
-  return eU(t => {
+  return atom(t => {
     let i = t(_S);
     return i ? t(_({
       libraryKey: i,
@@ -46,7 +46,7 @@ function b(e) {
   });
 }
 function v(e) {
-  return eU(t => {
+  return atom(t => {
     let i = t(RG);
     return i ? t(_({
       libraryKey: i,
@@ -54,11 +54,11 @@ function v(e) {
     })) : Xm();
   });
 }
-let I = Iz(({
+let I = createRemovableAtomFamily(({
   libraryKey: e,
   assetType: t,
   livegraphAssetToLibraryAsset: i
-}) => eU(n => {
+}) => atom(n => {
   if (!n(_S)) return Xm();
   let r = function (e) {
     switch (function (e) {
@@ -95,7 +95,7 @@ let I = Iz(({
     }
   }(t);
   if (!r) {
-    x1("design-systems", "unsupported asset type for library asset query", {
+    logError("design-systems", "unsupported asset type for library asset query", {
       assetType: t
     }, {
       reportAsSentryError: !0
@@ -112,7 +112,7 @@ let I = Iz(({
   let o = s.data.libraryKeyToFile?.file;
   let d = s.data.libraryKeyToFile?.hubFile ?? o;
   if (!d) {
-    x1("design-systems", "unexpected null file data", {
+    logError("design-systems", "unexpected null file data", {
       libraryKey: e
     });
     return gB({});
@@ -134,7 +134,7 @@ let R = {
   [_$$PW.CODE_COMPONENT]: N(Mk[_$$PW.CODE_COMPONENT].local, y[_$$PW.CODE_COMPONENT])
 };
 function N(e, t, i = O, n = null) {
-  return eU(s => {
+  return atom(s => {
     let o = s(t);
     if ("loaded" !== o.status) return o;
     let l = S()(Object.values(o.data).filter(isNotNullish), "sourceAssetId");
@@ -147,7 +147,7 @@ function N(e, t, i = O, n = null) {
       c.has(t) || p.add([t, e.key]);
     }
     for (let e of Object.values(d)) {
-      let t = s(n?.(e.assetId) ?? eU(null));
+      let t = s(n?.(e.assetId) ?? atom(null));
       let a = e.assetId;
       let o = l[a] ?? null;
       let d = i(e, o);
@@ -172,7 +172,7 @@ function O(e, t, i = P) {
   return e && e.isPublishable && !e.isSoftDeleted ? t ? i(e, t) ? E8.CHANGED : E8.CURRENT : E8.NEW : t ? E8.DELETED : E8.NOT_STAGED;
 }
 let D = [_$$PW2.RESPONSIVE_SET, _$$PW2.CODE_COMPONENT];
-let $$L0 = eU(e => {
+let $$L0 = atom(e => {
   let t = {};
   let {
     libraryAssetAtoms,

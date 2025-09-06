@@ -12,14 +12,14 @@ import { VD3, e0R, rXF } from "../figma_app/763686";
 import { sH } from "../905/805904";
 import { getFeatureFlags } from "../905/601108";
 import f from "classnames";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { parsePxNumber } from "../figma_app/783094";
 import { qP, Pt } from "../figma_app/806412";
 import { E as _$$E } from "../905/277716";
 import { Point } from "../905/736624";
 import { B as _$$B } from "../905/714743";
-import { t as _$$t, tx } from "../905/303541";
-import { Gq } from "../figma_app/363242";
+import { getI18nString, renderI18nText } from "../905/303541";
+import { getI18nState } from "../figma_app/363242";
 import { XE } from "../figma_app/91703";
 import { Oe } from "../figma_app/933328";
 import { F as _$$F } from "../figma_app/8833";
@@ -59,11 +59,11 @@ export class $$ea0 {
     this.format = e => {
       switch (e) {
         case "GRID":
-          return _$$t("fullscreen.grid_panel.grid");
+          return getI18nString("fullscreen.grid_panel.grid");
         case "X":
-          return _$$t("fullscreen.grid_panel.columns_formatter");
+          return getI18nString("fullscreen.grid_panel.columns_formatter");
         case "Y":
-          return _$$t("fullscreen.grid_panel.rows_formatter");
+          return getI18nString("fullscreen.grid_panel.rows_formatter");
         default:
           return "";
       }
@@ -151,20 +151,20 @@ export function $$el2({
         });
         return jsxs(Fragment, {
           children: [jsx(cS, {
-            label: tx("fullscreen.grids_panel.grid_settings.size"),
+            label: renderI18nText("fullscreen.grids_panel.grid_settings.size"),
             input: jsx(ep, {
               className: "grid_settings--gridSectionSize--CfYrk grid_settings--_centered--oVZG8",
               ...L
             })
           }), jsx(cS, {
-            label: tx("fullscreen.grids_panel.grid_settings.color"),
+            label: renderI18nText("fullscreen.grids_panel.grid_settings.color"),
             ref: C,
             input: e
           })]
         });
       })() : (() => {
-        let e = "X" === t.axis ? _$$t("fullscreen.grids_panel.grid_settings.width") : _$$t("fullscreen.grids_panel.grid_settings.height");
-        let i = "STRETCH" === t.type ? _$$t("fullscreen.grids_panel.grid_settings.margin") : _$$t("fullscreen.grids_panel.grid_settings.offset");
+        let e = "X" === t.axis ? getI18nString("fullscreen.grids_panel.grid_settings.width") : getI18nString("fullscreen.grids_panel.grid_settings.height");
+        let i = "STRETCH" === t.type ? getI18nString("fullscreen.grids_panel.grid_settings.margin") : getI18nString("fullscreen.grids_panel.grid_settings.offset");
         let r = jsx(ec, {
           className: _()("grid_settings--stripesNumSections--aqOpv grid_settings--_centered--oVZG8", "grid_settings--stripesNumSectionsVariables--dXxFu"),
           ...D
@@ -187,14 +187,14 @@ export function $$el2({
         });
         return jsxs(Fragment, {
           children: [jsx(cS, {
-            label: tx("fullscreen.grids_panel.grid_settings.count"),
+            label: renderI18nText("fullscreen.grids_panel.grid_settings.count"),
             input: r
           }), jsx(cS, {
-            label: tx("fullscreen.grids_panel.grid_settings.color"),
+            label: renderI18nText("fullscreen.grids_panel.grid_settings.color"),
             ref: C,
             input: a
           }), jsx(cS, {
-            label: tx("fullscreen.grids_panel.grid_settings.type"),
+            label: renderI18nText("fullscreen.grids_panel.grid_settings.type"),
             input: jsx(eh, {
               className: "grid_settings--stripesType--D-Ywl grid_settings--_centered--oVZG8",
               ...D
@@ -212,7 +212,7 @@ export function $$el2({
               ...L
             })
           }), jsx(cS, {
-            label: tx("fullscreen.grids_panel.grid_settings.gutter"),
+            label: renderI18nText("fullscreen.grids_panel.grid_settings.gutter"),
             input: jsx(em, {
               className: "grid_settings--stripesGutterSize--EhBXh grid_settings--_centered--oVZG8",
               ...L
@@ -262,7 +262,7 @@ export function $$el2({
 }
 export class $$ed3 extends X9 {
   format(e) {
-    return e === _$$F ? _$$t("fullscreen.grids_panel.grid_settings.auto") : super.format(e);
+    return e === _$$F ? getI18nString("fullscreen.grids_panel.grid_settings.auto") : super.format(e);
   }
   parse(e, t) {
     return "Auto" === e ? _$$F : super.parse(e, t);
@@ -288,7 +288,7 @@ let ec = memo(function ({
     children: jsxs(eu, {
       autoFocus: !0,
       className: e,
-      "data-tooltip": _$$t("fullscreen.grids_panel.grid_settings.count"),
+      "data-tooltip": getI18nString("fullscreen.grids_panel.grid_settings.count"),
       "data-tooltip-type": Ib.TEXT,
       dispatch: s,
       dropdownShown: d,
@@ -340,7 +340,7 @@ function eu({
         svg: $$default
       }),
       value: -1,
-      children: _$$t("fullscreen.properties_panel.apply_variable_ellipses")
+      children: getI18nString("fullscreen.properties_panel.apply_variable_ellipses")
     }, "Apply Variable")]
   });
 }
@@ -371,13 +371,13 @@ let ep = memo(function ({
     }),
     autoFocus: !0,
     bigNudgeAmount: s,
-    "data-tooltip": _$$t("fullscreen.grids_panel.grid_settings.width"),
+    "data-tooltip": getI18nString("fullscreen.grids_panel.grid_settings.width"),
     "data-tooltip-type": Ib.TEXT,
     disabled: d,
     dispatch: l,
     min: 0,
     onValueChange: c,
-    placeholder: d ? _$$t("fullscreen.grids_panel.grid_settings.auto") : void 0,
+    placeholder: d ? getI18nString("fullscreen.grids_panel.grid_settings.auto") : void 0,
     recordingKey: Pt(r, "sectionSize"),
     smallNudgeAmount: o,
     tooltipForScreenReadersOnly: !0,
@@ -415,7 +415,7 @@ let em = memo(function ({
       children: jsx(Ht, {
         bigNudgeAmount: s,
         className: J,
-        "data-tooltip": _$$t("fullscreen.grids_panel.grid_settings.gutter"),
+        "data-tooltip": getI18nString("fullscreen.grids_panel.grid_settings.gutter"),
         "data-tooltip-type": Ib.TEXT,
         dispatch: l,
         isTokenizable: !0,
@@ -444,18 +444,18 @@ let eh = memo(function ({
 }) {
   let o = useDispatch();
   let l = Um();
-  let d = Gq()?.getPrimaryLocale(!0);
+  let d = getI18nState()?.getPrimaryLocale(!0);
   let c = {
     format: t => {
       switch (t) {
         case "MIN":
-          return "X" === e.axis ? _$$t("fullscreen.grids_panel.grid_settings.left") : _$$t("fullscreen.grids_panel.grid_settings.top");
+          return "X" === e.axis ? getI18nString("fullscreen.grids_panel.grid_settings.left") : getI18nString("fullscreen.grids_panel.grid_settings.top");
         case "MAX":
-          return "X" === e.axis ? _$$t("fullscreen.grids_panel.grid_settings.right") : _$$t("fullscreen.grids_panel.grid_settings.bottom");
+          return "X" === e.axis ? getI18nString("fullscreen.grids_panel.grid_settings.right") : getI18nString("fullscreen.grids_panel.grid_settings.bottom");
         case "CENTER":
-          return _$$t("fullscreen.grids_panel.grid_settings.center");
+          return getI18nString("fullscreen.grids_panel.grid_settings.center");
         case "STRETCH":
-          return _$$t("fullscreen.grids_panel.grid_settings.stretch");
+          return getI18nString("fullscreen.grids_panel.grid_settings.stretch");
       }
     }
   };
@@ -474,7 +474,7 @@ let eh = memo(function ({
       recordingKey: Pt(r, "type"),
       children: [jsx(l9, {
         label: jsx(_$$h, {
-          children: _$$t("fullscreen.grid_panel.layout_guide_type")
+          children: getI18nString("fullscreen.grid_panel.layout_guide_type")
         }),
         width: "fill"
       }), jsxs(mc, {
@@ -496,7 +496,7 @@ let eh = memo(function ({
   }) : jsx(_$$E, {
     name: "grid_settings_layout_type_select",
     children: jsxs(en, {
-      ariaLabel: _$$t("fullscreen.grid_panel.layout_guide_type"),
+      ariaLabel: getI18nString("fullscreen.grid_panel.layout_guide_type"),
       className: t,
       dispatch: o,
       dropdownClassName: h,
@@ -548,7 +548,7 @@ let eg = memo(function ({
       noBorderOnHover: !0
     }),
     bigNudgeAmount: s,
-    "data-tooltip": _$$t("fullscreen.grids_panel.grid_settings.offset"),
+    "data-tooltip": getI18nString("fullscreen.grids_panel.grid_settings.offset"),
     "data-tooltip-type": Ib.TEXT,
     disabled: d,
     dispatch: l,
@@ -624,7 +624,7 @@ export function $$ey1(e) {
   let o = tS();
   let l = Fk(e => e.getDirectlySelectedNodes().map(e => e.guid));
   let d = useCallback(e => {
-    sx("editor-layout-guide-changed", {
+    trackEventAnalytics("editor-layout-guide-changed", {
       fileKey: o,
       nodeIds: l.slice(0, 50),
       prevLayoutType: "GRID" === layoutGrid.pattern ? "grid" : "X" === layoutGrid.axis ? "columns" : "rows",
@@ -647,7 +647,7 @@ export function $$ey1(e) {
     recordingKey: Pt(e, "pattern"),
     children: [jsx(l9, {
       label: jsx(_$$h, {
-        children: _$$t("fullscreen.grid_panel.layout_guide_type")
+        children: getI18nString("fullscreen.grid_panel.layout_guide_type")
       }),
       width: "fill",
       children: e.dropdownOverride ?? void 0
@@ -664,7 +664,7 @@ export function $$ey1(e) {
       })]
     })]
   }) : jsxs(es, {
-    ariaLabel: _$$t("fullscreen.grid_panel.layout_guide_type"),
+    ariaLabel: getI18nString("fullscreen.grid_panel.layout_guide_type"),
     className: ee,
     dispatch: t,
     dropdownClassName: "grid_settings--gridTypeDropdown--eR8Rz",

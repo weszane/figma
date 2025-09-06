@@ -1,11 +1,11 @@
 import { Ez5, m1T, TsU, KgA, Egt, Z_n, rXF, rcl } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
-import { R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { isNullish } from "../figma_app/95419";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { zX } from "../905/576487";
 import { gL } from "../figma_app/618433";
@@ -30,7 +30,7 @@ function f() {
   return e;
 }
 export function $$y1() {
-  return R(e => e.mirror.appModel.activeCanvasEditModeType === m1T.CMS_BINDING_CONSTRAINED);
+  return selectWithShallowEqual(e => e.mirror.appModel.activeCanvasEditModeType === m1T.CMS_BINDING_CONSTRAINED);
 }
 export function $$b0() {
   let e = Ez5?.cmsState();
@@ -241,7 +241,7 @@ export function $$b0() {
             } = e;
             t(F.enqueue({
               type: g,
-              message: _$$t("cms_specs.pick_a_webpage_to_connect", {
+              message: getI18nString("cms_specs.pick_a_webpage_to_connect", {
                 collection_name: collectionName ?? ""
               }),
               timeoutOverride: 1 / 0,
@@ -258,7 +258,7 @@ export function $$b0() {
             } = e;
             t(F.enqueue({
               type: g,
-              message: _$$t("cms_specs.click_to_connect_this_page", {
+              message: getI18nString("cms_specs.click_to_connect_this_page", {
                 collection_name: collectionName ?? ""
               }),
               timeoutOverride: 1 / 0,
@@ -275,7 +275,7 @@ export function $$b0() {
             } = e;
             t(F.enqueue({
               type: g,
-              message: _$$t("cms_specs.click_to_connect_this_frame", {
+              message: getI18nString("cms_specs.click_to_connect_this_frame", {
                 collection_name: collectionName ?? ""
               }),
               timeoutOverride: 1 / 0,
@@ -289,7 +289,7 @@ export function $$b0() {
           }) => {
             t(F.enqueue({
               type: g,
-              message: _$$t("cms_specs.connected_new_cms_page_created"),
+              message: getI18nString("cms_specs.connected_new_cms_page_created"),
               icon: zX.GREEN_CHECK
             }));
             let n = setTimeout(() => {
@@ -304,7 +304,7 @@ export function $$b0() {
           }) => {
             t(F.enqueue({
               type: g,
-              message: _$$t("cms_specs.connected_new_cms_list_created"),
+              message: getI18nString("cms_specs.connected_new_cms_list_created"),
               icon: zX.GREEN_CHECK
             }));
             let n = setTimeout(() => {
@@ -322,7 +322,7 @@ export function $$b0() {
             } = e;
             t(F.enqueue({
               type: g,
-              message: _$$t("cms_specs.pick_a_layer_to_connect", {
+              message: getI18nString("cms_specs.pick_a_layer_to_connect", {
                 field_name: fieldSchemaName ?? ""
               }),
               timeoutOverride: 1 / 0,
@@ -339,7 +339,7 @@ export function $$b0() {
             } = e;
             t(F.enqueue({
               type: g,
-              message: _$$t("cms_specs.click_to_connect_this_layer", {
+              message: getI18nString("cms_specs.click_to_connect_this_layer", {
                 field_name: fieldSchemaName ?? ""
               }),
               timeoutOverride: 1 / 0,
@@ -351,7 +351,7 @@ export function $$b0() {
           onEnter: () => {
             t(F.enqueue({
               type: g,
-              message: _$$t("cms_specs.rich_text_in_instances_not_supported"),
+              message: getI18nString("cms_specs.rich_text_in_instances_not_supported"),
               timeoutOverride: 1 / 0,
               icon: zX.PICK
             }));
@@ -363,7 +363,7 @@ export function $$b0() {
           }) => {
             t(F.enqueue({
               type: g,
-              message: _$$t("cms_specs.connected"),
+              message: getI18nString("cms_specs.connected"),
               icon: zX.GREEN_CHECK
             }));
             let n = setTimeout(() => {

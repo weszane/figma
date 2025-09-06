@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useLayoutEffect, useState, useCallback, useEffect } from "react";
 import { H } from "react-dom";
 import { shallowEqual, useStore, Provider } from "../vendor/514228";
-import { An } from "../figma_app/27355";
+import { AtomProvider } from "../figma_app/27355";
 import { getInitialOptions } from "../figma_app/169182";
 import { oD } from "../905/436043";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -16,7 +16,7 @@ import { lQ } from "../905/934246";
 import { xk } from "@stylexjs/stylex";
 import { Te } from "../vendor/813803";
 import { useHandleKeyboardEvent } from "../figma_app/878298";
-import { Ay as _$$Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { Yh, TN, Kr } from "../905/334566";
 import { H as _$$H } from "../905/734998";
 import { tD, ZY } from "../905/682977";
@@ -302,7 +302,7 @@ function N(e) {
     return a = O(a);
   };
   let U = t => i => {
-    if (i.stopPropagation(), (2 === i.detail || _$$Ay.mobile || _$$Ay.tablet) && handleOpenItem) handleOpenItem(e.items[t], i, t);else {
+    if (i.stopPropagation(), (2 === i.detail || BrowserInfo.mobile || BrowserInfo.tablet) && handleOpenItem) handleOpenItem(e.items[t], i, t);else {
       let n = j(t, i);
       if (n.size && !n.has(t)) {
         let i = t + 1;
@@ -473,7 +473,7 @@ export function $$O0(e) {
     m.currentTarget.appendChild(g);
     H(g).render(jsx(oD, {
       userId: getInitialOptions().user_data?.id || null,
-      children: jsx(An, {
+      children: jsx(AtomProvider, {
         children: jsx(Provider, {
           store: h,
           children: jsx($$A, {

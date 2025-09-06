@@ -1,9 +1,9 @@
 import { jsx } from "react/jsx-runtime";
 import { memo } from "react";
 import { glU } from "../figma_app/763686";
-import { R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { ms, c$ } from "../figma_app/236327";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { b } from "../905/217163";
 import { H } from "../905/184637";
 let u = ms;
@@ -14,7 +14,7 @@ let $$h0 = memo(function () {
     dropdownShown,
     defaultLibraryKeys,
     openFileKey
-  } = R(e => ({
+  } = selectWithShallowEqual(e => ({
     dropdownShown: e.dropdownShown,
     defaultLibraryKeys: e.library.defaultPublished.libraryKeys,
     openFileKey: e.openFile?.key || null
@@ -33,12 +33,12 @@ let $$h0 = memo(function () {
     children: o ? jsx(p, {
       recordingKey: `goToLocalComponent.${i.node_id}`,
       onClick: () => glU.goToSymbolOrStateGroupById(i.node_id, !1),
-      children: tx("design_systems.instance_swap_picker.go_to_main_component")
+      children: renderI18nText("design_systems.instance_swap_picker.go_to_main_component")
     }) : jsx(p, {
       recordingKey: `goToSubscribedComponent.${i.node_id}`,
       href: m?.link,
       target: "_blank",
-      children: tx("design_systems.instance_swap_picker.go_to_main_component")
+      children: renderI18nText("design_systems.instance_swap_picker.go_to_main_component")
     })
   }) : null;
 });

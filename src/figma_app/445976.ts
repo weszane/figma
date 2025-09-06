@@ -7,8 +7,8 @@ import { CWU } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { gZ, oy } from "../figma_app/964367";
-import { $D } from "../905/11";
-import { xi } from "../905/714362";
+import { reportError } from "../905/11";
+import { logWarning } from "../905/714362";
 import { VN, vh, i2 } from "../905/296461";
 import { gZ as _$$gZ, Py, RI } from "../figma_app/50224";
 import { C, n6 } from "../figma_app/193952";
@@ -79,7 +79,7 @@ async function T(e, t) {
         jsxComponentDef: i
       };
     } catch (t) {
-      $D(_$$e.AI_GENERATION, t, {
+      reportError(_$$e.AI_GENERATION, t, {
         extra: {
           nodeId: e.guid
         }
@@ -232,7 +232,7 @@ export async function $$C2(e, t) {
       });
     }
   } catch (r) {
-    xi("getNodeJSXFromExample", "unhandled error", {
+    logWarning("getNodeJSXFromExample", "unhandled error", {
       error: r,
       kitName: e,
       exampleNodeId: t

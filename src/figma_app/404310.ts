@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { useSelector } from "../vendor/514228";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { tf } from "../figma_app/831799";
 import { d as _$$d } from "../905/86829";
 export function $$d0({
@@ -43,13 +43,13 @@ export function $$d0({
         let e = jsx("div", {
           className: "show_more--showMoreContainer--5car2",
           children: o ? jsx(c, {
-            label: _$$t("inspect_panel.property.remaining_more", {
+            label: getI18nString("inspect_panel.property.remaining_more", {
               remaining: y
             }),
             onClick: E,
             trackingProperties: o
           }) : jsx(_$$d, {
-            label: _$$t("inspect_panel.property.remaining_more", {
+            label: getI18nString("inspect_panel.property.remaining_more", {
               remaining: y
             }),
             onClick: E

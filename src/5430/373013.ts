@@ -1,8 +1,8 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { xk } from "@stylexjs/stylex";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { N as _$$N } from "../figma_app/469468";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Jm } from "../figma_app/387599";
 import { C as _$$C } from "../905/237873";
 import { gM } from "../5430/823351";
@@ -25,7 +25,7 @@ function g({
   isSearch: r
 }) {
   return jsx(A5, {
-    name: _$$t("community.landing_page.dropdown_filter__creators"),
+    name: getI18nString("community.landing_page.dropdown_filter__creators"),
     onUpdate: ([t]) => {
       e(t);
     },
@@ -43,7 +43,7 @@ function L({
   size: n
 }) {
   return jsx(A5, {
-    name: _$$t("community.curated_page.sort"),
+    name: getI18nString("community.curated_page.sort"),
     onUpdate: ([t]) => e(t),
     initialValues: [t],
     options: [AV(r, i)],
@@ -76,7 +76,7 @@ export function $$I0({
       className: R6,
       children: [[gM.CATEGORY, gM.PLUGINS, gM.RESOURCE_LANDING_PAGE, gM.PROFILE].includes(x) && jsx("div", {
         ...xk("md" === w ? N.flex_itemsCenter_font13_fontMedium : N.flex_itemsCenter_font11_fontMedium),
-        children: tx("categories.filter_by")
+        children: renderI18nText("categories.filter_by")
       }), jsx(Ay, {
         mediaQuery: `(min-width: ${glm})`,
         children: resourceType !== _$$L.SearchResourceTypes.PROFILES && jsx(F, {
@@ -93,7 +93,7 @@ export function $$I0({
               value: s
             });
             t(r);
-            sx("editor_type_filter_changed", {
+            trackEventAnalytics("editor_type_filter_changed", {
               editor_type: e,
               from: editorType,
               search_session_id: A
@@ -118,7 +118,7 @@ export function $$I0({
             value: s
           });
           t(r);
-          sx("resource_type_filter_changed", {
+          trackEventAnalytics("resource_type_filter_changed", {
             resource_type: e,
             from: resourceType,
             search_session_id: A
@@ -138,7 +138,7 @@ export function $$I0({
             value: _$$e.Shared.POPULAR
           });
           t(r);
-          sx("price_filter_changed", {
+          trackEventAnalytics("price_filter_changed", {
             price: e,
             from: price,
             search_session_id: A
@@ -154,7 +154,7 @@ export function $$I0({
               key: "creators",
               value: e
             }]);
-            sx("creators_filter_changed", {
+            trackEventAnalytics("creators_filter_changed", {
               creators: e,
               from: creators,
               search_session_id: A
@@ -170,7 +170,7 @@ export function $$I0({
           key: "sortBy",
           value: e
         }]);
-        sx("ranking_type_filter_changed", {
+        trackEventAnalytics("ranking_type_filter_changed", {
           ranking_type: e,
           search_session_id: A
         });

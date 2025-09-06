@@ -1,9 +1,9 @@
 import { jsx } from "react/jsx-runtime";
 import { memo, useCallback } from "react";
 import { f } from "../905/167712";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { y } from "../1156/673497";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 let a = memo(function (e) {
   return jsx("svg", {
     width: "24",
@@ -25,7 +25,7 @@ export function $$d0({
   showTooltipAbove: u,
   codeInstanceGuid: x
 }) {
-  let m = md(t.directManipulationEditor.directManipulationEnabledAtom);
+  let m = useAtomWithSubscription(t.directManipulationEditor.directManipulationEnabledAtom);
   let h = useCallback(() => {
     t.setDirectManipulationEnabled({
       enabled: !m,
@@ -35,7 +35,7 @@ export function $$d0({
   let g = n ? y : f;
   let p = jsx(a, {});
   return jsx(g, {
-    "aria-label": _$$t("figmake.chat.click_to_inspect.label"),
+    "aria-label": getI18nString("figmake.chat.click_to_inspect.label"),
     checked: m,
     disabled: e,
     htmlAttributes: {

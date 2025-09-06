@@ -1,4 +1,4 @@
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { DM } from "../figma_app/300692";
 import { ZQ } from "../figma_app/155287";
@@ -29,7 +29,7 @@ export function $$d0({
     } : void 0
   };
   d.unshift(u);
-  zl.set(Z8, d);
+  atomStoreManager.set(Z8, d);
   I.updateRecentlyUsedActions(u);
 }
 export const s = $$d0;

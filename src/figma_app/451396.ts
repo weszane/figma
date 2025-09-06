@@ -3,20 +3,20 @@ import { processInstancesAndGenerateCode } from "../905/100887";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { glU } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { eU, md } from "../figma_app/27355";
-import { $D } from "../905/11";
+import { atom, useAtomWithSubscription } from "../figma_app/27355";
+import { reportError } from "../905/11";
 import { eY, T3 } from "../figma_app/722362";
 import { tS, _G } from "../figma_app/516028";
 import { Vr } from "../figma_app/151869";
 import { ph, Bn, Gl, Ji, kN } from "../figma_app/97042";
 import { yT, Nv } from "../figma_app/478201";
 import m from "../905/661768";
-let $$g1 = eU(!1);
+let $$g1 = atom(!1);
 function f(e, t, r) {
   let n;
   let i = r.get(t.symbolId);
   if (!i) {
-    $D(_$$e.DEVELOPER_TOOLS, Error("Cant find backing component of parent node " + t.symbolId));
+    reportError(_$$e.DEVELOPER_TOOLS, Error("Cant find backing component of parent node " + t.symbolId));
     return;
   }
   let s = r.developerFriendlyIdFromGuid(e.guid);
@@ -35,7 +35,7 @@ export function $$E0(e, t, r) {
   let f = glU.getPlaygroundNodeData();
   r && (a = (d = _).get(f?.playgroundGUID ?? ""));
   let E = !!getFeatureFlags().dt_code_connect_inline_instances;
-  let y = md($$g1);
+  let y = useAtomWithSubscription($$g1);
   let I = tS();
   let S = _G();
   let v = useMemo(() => b({

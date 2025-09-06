@@ -1,8 +1,8 @@
 import { useMemo } from "react";
 import { useDispatch } from "../vendor/514228";
 import { tKW } from "../figma_app/763686";
-import { fp } from "../figma_app/27355";
-import { t as _$$t } from "../905/303541";
+import { useAtomValueAndSetter } from "../figma_app/27355";
+import { getI18nString } from "../905/303541";
 import { v4, AC, Pt } from "../figma_app/655139";
 import { zq } from "../905/515076";
 import { sQ } from "../905/191741";
@@ -30,7 +30,7 @@ export function $$f0(e) {
       if (!h) return e;
       let t = m?.unit || tKW.PIXEL;
       e.push(...zq.map(e => {
-        let n = e === tKW.PIXEL ? _$$t("dev_handoff.alternative_units.pixel_unit") : c;
+        let n = e === tKW.PIXEL ? getI18nString("dev_handoff.alternative_units.pixel_unit") : c;
         return {
           name: e.toString(),
           displayText: n,
@@ -41,7 +41,7 @@ export function $$f0(e) {
           recordingKey: e === tKW.PIXEL ? "pixel" : "scaled"
         };
       }), {
-        displayText: _$$t("dev_handoff.alternative_units.unit_settings_menu_option"),
+        displayText: getI18nString("dev_handoff.alternative_units.unit_settings_menu_option"),
         callback: () => f(to({
           type: j6
         })),
@@ -56,13 +56,13 @@ export function $$f0(e) {
     updateDefaultCodegenSettings,
     isSetToDefault
   } = Q();
-  let [S, v] = fp(_$$v);
+  let [S, v] = useAtomValueAndSetter(_$$v);
   let A = AC(b);
   let x = Pt(A).format(b);
   return useMemo(() => {
     let e = [];
     E.length > 0 && (r || f || e.push({
-      displayText: _$$t("dev_handoff.language_dropdown.preferences_header_unit", {
+      displayText: getI18nString("dev_handoff.language_dropdown.preferences_header_unit", {
         languageOrPlugin: x
       }),
       header: !0
@@ -77,22 +77,22 @@ export function $$f0(e) {
       displayText: ""
     });
     r ? e.push({
-      displayText: _$$t("dev_handoff.code.settings.set_as_default"),
+      displayText: getI18nString("dev_handoff.code.settings.set_as_default"),
       callback: () => {
         updateDefaultCodegenSettings();
       },
       isChecked: isSetToDefault
     }) : b?.type === "first-party" && (e.push({
-      displayText: _$$t("dev_handoff.variables.panel_display"),
+      displayText: getI18nString("dev_handoff.variables.panel_display"),
       header: !0
     }), e.push({
-      displayText: _$$t("dev_handoff.variables.panel_display_code_syntax"),
+      displayText: getI18nString("dev_handoff.variables.panel_display_code_syntax"),
       isChecked: S,
       callback: () => {
         v(!0);
       }
     }), e.push({
-      displayText: _$$t("dev_handoff.variables.panel_display_figma_name"),
+      displayText: getI18nString("dev_handoff.variables.panel_display_figma_name"),
       isChecked: !S,
       callback: () => {
         v(!1);

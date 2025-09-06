@@ -1,14 +1,14 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useRef, useEffect } from "react";
-import { Xr, md } from "../figma_app/27355";
+import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import s from "classnames";
 import { GZ } from "../905/508367";
 import { wY, cU } from "../figma_app/708845";
 import { getInitialOptions } from "../figma_app/169182";
-import { Ay as _$$Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { Yo } from "../figma_app/637027";
 import { B } from "../905/714743";
-import { t as _$$t, tx, dS } from "../905/303541";
+import { getI18nString, renderI18nText, getLocalizedPath } from "../905/303541";
 import { c as _$$c } from "../905/370443";
 import { j6, fu } from "../figma_app/831799";
 import { Ws } from "../figma_app/314264";
@@ -63,26 +63,26 @@ function I(e) {
     className: o()(kL, e.variant === _$$a.COMMUNITY && [gC, Vt], e.variant === _$$a.FILE_VIEWER && ut, e.variant === _$$a.PROTOTYPE && Id, e.variant === _$$a.AUTH && [gC, Yp]),
     role: "region",
     ref: l,
-    "aria-label": _$$t("cookies.consent_manager"),
+    "aria-label": getI18nString("cookies.consent_manager"),
     "data-testid": "cookie-banner",
     children: [jsxs("div", {
       className: rf,
-      children: [tx("cookies.explicit_consent_body"), " ", jsx(Yo, {
+      children: [renderI18nText("cookies.explicit_consent_body"), " ", jsx(Yo, {
         href: $$A0(),
         target: "_blank",
         rel: "noreferrer",
-        children: tx("cookies.cookies_settings")
+        children: renderI18nText("cookies.cookies_settings")
       })]
     }), jsxs("div", {
       className: o1,
       children: [jsx(e.SecondaryButton, {
         onClick: I,
         "data-testid": "cookie-opt-out-button",
-        children: tx("cookies.do_not_allow_cookies")
+        children: renderI18nText("cookies.do_not_allow_cookies")
       }), jsx(e.PrimaryButton, {
         onClick: S,
         "data-testid": "cookie-opt-in-button",
-        children: tx("cookies.allow_all_cookies")
+        children: renderI18nText("cookies.allow_all_cookies")
       })]
     }), jsx("div", {
       className: X8,
@@ -102,14 +102,14 @@ function I(e) {
   }) || null;
 }
 export function $$S1(e) {
-  let t = md(Dr);
+  let t = useAtomWithSubscription(Dr);
   let r = !1;
-  return (t === S6.UNLOADED && (r = !0), t !== S6.YES || e.persistentMessage || (r = !0), V() && (r = !0), getInitialOptions().user_data?.id && (r = !0), (getInitialOptions().is_embed || GZ()) && (r = !0), _$$Ay.isMeetDevice && (r = !0), useEffect(() => {
-    !r && _$$Ay.isIpadNative && L3({
+  return (t === S6.UNLOADED && (r = !0), t !== S6.YES || e.persistentMessage || (r = !0), V() && (r = !0), getInitialOptions().user_data?.id && (r = !0), (getInitialOptions().is_embed || GZ()) && (r = !0), BrowserInfo.isMeetDevice && (r = !0), useEffect(() => {
+    !r && BrowserInfo.isIpadNative && L3({
       consentRegion: "explicit",
       cookiesEnabled: !1
     });
-  }, [r]), r || _$$Ay.isIpadNative) ? null : jsx(fu, {
+  }, [r]), r || BrowserInfo.isIpadNative) ? null : jsx(fu, {
     name: "Cookie Banner",
     properties: {
       consentRegion: "explicit"
@@ -121,10 +121,10 @@ export function $$S1(e) {
   });
 }
 export function $$v2() {
-  return _$$t("cookies.manage_cookies_opt_out");
+  return getI18nString("cookies.manage_cookies_opt_out");
 }
 export function $$A0() {
-  return dS("/consent-preferences/");
+  return getLocalizedPath("/consent-preferences/");
 }
 export const Sz = $$A0;
 export const ZQ = $$S1;

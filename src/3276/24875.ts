@@ -1,11 +1,11 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState } from "react";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { oA } from "../905/663269";
 import { Rs } from "../figma_app/288654";
 import { s as _$$s } from "../cssbuilder/589278";
 import { e6, lR } from "../figma_app/617427";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { nl, Pf } from "../905/590952";
 import { tc } from "../905/15667";
 import { Xt } from "../figma_app/297957";
@@ -77,7 +77,7 @@ export function $$N0({
   } = wH({
     entryPoint: tc.IN_EDITOR_RESTRICTED_DRAFT
   });
-  let p = md(yF);
+  let p = useAtomWithSubscription(yF);
   if (p && E.includes(p) || !n || "loaded" !== l.status) return null;
   let h = oA(l.data.viewerRestrictedDraftAccessLog);
   if (!h || a || !e.parentOrgId && !e.teamId || !l.data.file?.isDraftFile) return null;
@@ -117,10 +117,10 @@ function S({
     C.dismissViewerRestrictedDraftShared(n.key);
     _(!0);
   };
-  let x = tx("viewer_restricted_tooltip.teammates_cant_access_this_file");
-  let b = t ? tx("viewer_restricted_tooltip.to_collaborate_in_this_draft", {
+  let x = renderI18nText("viewer_restricted_tooltip.teammates_cant_access_this_file");
+  let b = t ? renderI18nText("viewer_restricted_tooltip.to_collaborate_in_this_draft", {
     fileOpenerName: t
-  }) : tx("viewer_restricted_tooltip.to_collaborate_in_this_draft_no_name");
+  }) : renderI18nText("viewer_restricted_tooltip.to_collaborate_in_this_draft_no_name");
   return jsx(fu, {
     name: "VR Draft Share Notification Tooltip",
     children: jsx(Cf, {
@@ -146,7 +146,7 @@ function S({
             children: [jsx(e6, {
               className: "shared_vr_draft_tooltip--ignoreButton---wVA0",
               onClick: v,
-              children: tx("viewer_restricted_tooltip.ignore")
+              children: renderI18nText("viewer_restricted_tooltip.ignore")
             }), jsx(lR, {
               variant: "primary",
               type: "submit",
@@ -155,7 +155,7 @@ function S({
                 r(e);
                 v();
               },
-              children: tx("viewer_restricted_tooltip.get_upgraded_seat")
+              children: renderI18nText("viewer_restricted_tooltip.get_upgraded_seat")
             })]
           })]
         })]

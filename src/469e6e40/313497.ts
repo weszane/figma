@@ -17,7 +17,7 @@ import { k as _$$k2 } from "../905/651849";
 import { A as _$$A } from "../905/920142";
 import { rb, $z, c as _$$c } from "../figma_app/617427";
 import { Ph, o as _$$o } from "../905/160095";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { J as _$$J } from "../905/231762";
 import { F as _$$F } from "../905/302958";
 import { zX } from "../905/576487";
@@ -355,31 +355,31 @@ function B(e) {
   let a = [{
     id: "teams",
     icon: jsx(_$$w, {}),
-    label: _$$t("org_admin_settings.schedule_cancellation_modal.if_you_cancel.your_teams")
+    label: getI18nString("org_admin_settings.schedule_cancellation_modal.if_you_cancel.your_teams")
   }, {
     id: "projects",
     icon: jsx(J, {}),
-    label: _$$t("org_admin_settings.schedule_cancellation_modal.if_you_cancel.your_projects")
+    label: getI18nString("org_admin_settings.schedule_cancellation_modal.if_you_cancel.your_projects")
   }, {
     id: "published_content",
     icon: jsx(_$$a, {}),
-    label: _$$t("org_admin_settings.schedule_cancellation_modal.if_you_cancel.published_content")
+    label: getI18nString("org_admin_settings.schedule_cancellation_modal.if_you_cancel.published_content")
   }];
   let n = useCallback(() => e.setStep("if_you_cancel_more"), [e.setStep]);
   let s = useCallback(() => e.setStep("confirm_cancel"), [e.setStep]);
-  let i = _$$t("general.learn_more");
+  let i = getI18nString("general.learn_more");
   return jsx(bL, {
     manager: t,
     width: "lg",
     children: jsxs(vo, {
       children: [jsx(r1, {
-        children: _$$t("org_admin_settings.schedule_cancellation_modal.cancel_organization_plan.title")
+        children: getI18nString("org_admin_settings.schedule_cancellation_modal.cancel_organization_plan.title")
       }), jsx(nB, {
         children: jsxs("div", {
           className: "x1apfuft x78zum5 xdt5ytf",
           children: [jsx("p", {
             ...Ay.props($.pseudoTitle),
-            children: _$$t("org_admin_settings.schedule_cancellation_modal.if_you_cancel.no_longer_able_to_manage", {
+            children: getI18nString("org_admin_settings.schedule_cancellation_modal.if_you_cancel.no_longer_able_to_manage", {
               scheduledCancellationDate: e.scheduledCancellationDate
             })
           }), jsx("ul", {
@@ -394,13 +394,13 @@ function B(e) {
             }, e))
           }), jsx("p", {
             ...Ay.props($.wontBeAbleToUse),
-            children: _$$t("org_admin_settings.schedule_cancellation_modal.if_you_cancel.wont_be_able_to_use")
+            children: getI18nString("org_admin_settings.schedule_cancellation_modal.if_you_cancel.wont_be_able_to_use")
           }), jsxs("div", {
             ...Ay.props($.wontBeAbleToUseItem),
             children: [jsx(_$$L, {}), jsxs("div", {
               className: "x78zum5 xdt5ytf xl56j7k x1k6glv7",
               children: [jsx("span", {
-                children: _$$t("org_admin_settings.schedule_cancellation_modal.if_you_cancel.wont_be_able_to_use_features")
+                children: getI18nString("org_admin_settings.schedule_cancellation_modal.if_you_cancel.wont_be_able_to_use_features")
               }), jsx("span", {
                 children: jsxs(rb, {
                   onClick: n,
@@ -415,7 +415,7 @@ function B(e) {
           }), jsxs("div", {
             ...Ay.props($.contactSupportBanner),
             children: [jsx(_$$B, {}), jsx("span", {
-              children: tx("org_admin_settings.schedule_cancellation_modal.if_you_cancel.try_another_plan", {
+              children: renderI18nText("org_admin_settings.schedule_cancellation_modal.if_you_cancel.try_another_plan", {
                 contactingSupport: jsx(Ph, {
                   href: "https://help.figma.com/hc/requests/new?ticket_form_id=9707134248215",
                   trusted: !0,
@@ -423,7 +423,7 @@ function B(e) {
                   trackingProperties: {
                     trackingDescriptor: _$$c2.CONTACT_SUPPORT
                   },
-                  children: _$$t("org_admin_settings.schedule_cancellation_modal.if_you_cancel.contacting_support")
+                  children: getI18nString("org_admin_settings.schedule_cancellation_modal.if_you_cancel.contacting_support")
                 })
               })
             })]
@@ -437,14 +437,14 @@ function B(e) {
             trackingProperties: {
               trackingDescriptor: _$$c2.KEEP_PLAN
             },
-            children: _$$t("org_admin_settings.schedule_cancellation_modal.keep_plan")
+            children: getI18nString("org_admin_settings.schedule_cancellation_modal.keep_plan")
           }), jsx(_$$c, {
             variant: "secondary",
             onClick: s,
             trackingProperties: {
               trackingDescriptor: _$$c2.CONTINUE
             },
-            children: _$$t("general.continue")
+            children: getI18nString("general.continue")
           })]
         })
       })]
@@ -456,25 +456,25 @@ function G(e) {
   let a = [{
     id: "design_systems",
     graphic: jsx(_$$L, {}),
-    label: _$$t("org_admin_settings.schedule_cancellation_modal.if_you_cancel_more.design_systems"),
+    label: getI18nString("org_admin_settings.schedule_cancellation_modal.if_you_cancel_more.design_systems"),
     href: "https://help.figma.com/hc/articles/360040529593-Share-libraries-in-an-organization",
     trackingDescriptor: _$$c2.DESIGN_SYSTEMS
   }, {
     id: "branching",
     graphic: jsx(O, {}),
-    label: _$$t("org_admin_settings.schedule_cancellation_modal.if_you_cancel_more.branching"),
+    label: getI18nString("org_admin_settings.schedule_cancellation_modal.if_you_cancel_more.branching"),
     href: "https://help.figma.com/hc/articles/360063144053-Guide-to-branching",
     trackingDescriptor: _$$c2.BRANCHING
   }, {
     id: "unlimited_teams",
     graphic: jsx(L, {}),
-    label: _$$t("org_admin_settings.schedule_cancellation_modal.if_you_cancel_more.unlimited_teams"),
+    label: getI18nString("org_admin_settings.schedule_cancellation_modal.if_you_cancel_more.unlimited_teams"),
     href: "https://help.figma.com/hc/articles/360053463173-Manage-teams-in-an-organization",
     trackingDescriptor: _$$c2.UNLIMITED_TEAMS
   }, {
     id: "security",
     graphic: jsx(_$$I, {}),
-    label: _$$t("org_admin_settings.schedule_cancellation_modal.if_you_cancel_more.security"),
+    label: getI18nString("org_admin_settings.schedule_cancellation_modal.if_you_cancel_more.security"),
     href: "https://help.figma.com/hc/articles/360040056294-Privacy-and-security-in-organizations",
     trackingDescriptor: _$$c2.SECURITY
   }];
@@ -484,13 +484,13 @@ function G(e) {
     width: "lg",
     children: jsxs(vo, {
       children: [jsx(r1, {
-        children: _$$t("org_admin_settings.schedule_cancellation_modal.cancel_organization_plan.title")
+        children: getI18nString("org_admin_settings.schedule_cancellation_modal.cancel_organization_plan.title")
       }), jsx(nB, {
         children: jsxs("div", {
           className: "x1apfuft x78zum5 xdt5ytf",
           children: [jsx("p", {
             ...Ay.props($.pseudoTitle),
-            children: _$$t("org_admin_settings.schedule_cancellation_modal.if_you_cancel_more.will_lose_access")
+            children: getI18nString("org_admin_settings.schedule_cancellation_modal.if_you_cancel_more.will_lose_access")
           }), jsx("ul", {
             ...Ay.props($.ifYouCancelMoreList),
             children: a.map(({
@@ -524,14 +524,14 @@ function G(e) {
             trackingProperties: {
               trackingDescriptor: _$$c2.KEEP_PLAN
             },
-            children: _$$t("org_admin_settings.schedule_cancellation_modal.keep_plan")
+            children: getI18nString("org_admin_settings.schedule_cancellation_modal.keep_plan")
           }), jsx(_$$c, {
             variant: "secondary",
             onClick: n,
             trackingProperties: {
               trackingDescriptor: _$$c2.CONTINUE
             },
-            children: _$$t("general.continue")
+            children: getI18nString("general.continue")
           })]
         })
       })]
@@ -555,7 +555,7 @@ function z(e) {
         });
       } catch (e) {
         s(_$$F.enqueue({
-          message: _$$J(e, _$$t("org_admin_settings.schedule_cancellation_modal.generic_error")),
+          message: _$$J(e, getI18nString("org_admin_settings.schedule_cancellation_modal.generic_error")),
           error: !0
         }));
         a(!1);
@@ -567,7 +567,7 @@ function z(e) {
         _$$k2.error(e);
       }
       s(_$$F.enqueue({
-        message: _$$t("org_admin_settings.schedule_cancellation_modal.success", {
+        message: getI18nString("org_admin_settings.schedule_cancellation_modal.success", {
           orgName: e.orgName,
           scheduledCancellationDate: e.scheduledCancellationDate
         }),
@@ -585,15 +585,15 @@ function z(e) {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$t("org_admin_settings.schedule_cancellation_modal.cancel_organization_plan.title")
+          children: getI18nString("org_admin_settings.schedule_cancellation_modal.cancel_organization_plan.title")
         })
       }), jsxs(nB, {
         children: [jsx("p", {
-          children: _$$t("org_admin_settings.schedule_cancellation_modal.cancel_organization_plan.body", {
+          children: getI18nString("org_admin_settings.schedule_cancellation_modal.cancel_organization_plan.body", {
             scheduledCancellationDate: e.scheduledCancellationDate
           })
         }), jsx("br", {}), jsx("p", {
-          children: tx("org_admin_settings.schedule_cancellation_modal.cancel_organization_plan.body2", {
+          children: renderI18nText("org_admin_settings.schedule_cancellation_modal.cancel_organization_plan.body2", {
             contactSupport: jsx(Ph, {
               href: "https://help.figma.com/hc/requests/new?ticket_form_id=9707134248215",
               trusted: !0,
@@ -601,7 +601,7 @@ function z(e) {
               trackingProperties: {
                 trackingDescriptor: _$$c2.CONTACT_SUPPORT
               },
-              children: _$$t("org_admin_settings.schedule_cancellation_modal.cancel_organization_plan.contact_support")
+              children: getI18nString("org_admin_settings.schedule_cancellation_modal.cancel_organization_plan.contact_support")
             })
           })
         })]
@@ -613,7 +613,7 @@ function z(e) {
             trackingProperties: {
               trackingDescriptor: _$$c2.GO_BACK
             },
-            children: _$$t("org_admin_settings.schedule_cancellation_modal.cancel_organization_plan.go_back")
+            children: getI18nString("org_admin_settings.schedule_cancellation_modal.cancel_organization_plan.go_back")
           }), jsx($z, {
             variant: "destructive",
             onClick: i,
@@ -621,7 +621,7 @@ function z(e) {
               trackingDescriptor: _$$c2.CANCEL_PLAN
             },
             disabled: t,
-            children: _$$t("org_admin_settings.schedule_cancellation_modal.cancel_organization_plan.cancel_plan")
+            children: getI18nString("org_admin_settings.schedule_cancellation_modal.cancel_organization_plan.cancel_plan")
           })]
         })
       })]
@@ -677,7 +677,7 @@ function W(e) {
         });
       } catch (e) {
         a(_$$F.enqueue({
-          message: _$$J(e, _$$t("org_admin_settings.unschedule_cancellation_modal.generic_error")),
+          message: _$$J(e, getI18nString("org_admin_settings.unschedule_cancellation_modal.generic_error")),
           error: !0
         }));
         s(!1);
@@ -689,7 +689,7 @@ function W(e) {
         _$$k2.error(e);
       }
       a(_$$F.enqueue({
-        message: _$$t("org_admin_settings.unschedule_cancellation_modal.success"),
+        message: getI18nString("org_admin_settings.unschedule_cancellation_modal.success"),
         icon: zX.CHECK_WITH_CIRCLE
       }));
       onClose();
@@ -709,10 +709,10 @@ function W(e) {
       children: jsxs(vo, {
         children: [jsx(Y9, {
           children: jsx(hE, {
-            children: _$$t("org_admin_settings.unschedule_cancellation_modal.title")
+            children: getI18nString("org_admin_settings.unschedule_cancellation_modal.title")
           })
         }), jsx(nB, {
-          children: _$$t("org_admin_settings.unschedule_cancellation_modal.body", {
+          children: getI18nString("org_admin_settings.unschedule_cancellation_modal.body", {
             scheduledCancellationDate: r
           })
         }), jsx(wi, {
@@ -723,7 +723,7 @@ function W(e) {
               trackingProperties: {
                 trackingDescriptor: _$$c2.GO_BACK
               },
-              children: _$$t("modal.cancel")
+              children: getI18nString("modal.cancel")
             }), jsx($z, {
               variant: "primary",
               onClick: c,
@@ -731,7 +731,7 @@ function W(e) {
                 trackingDescriptor: _$$c2.REACTIVATE_PLAN
               },
               disabled: n,
-              children: _$$t("org_admin_settings.unschedule_cancellation_modal.reactivate_plan")
+              children: getI18nString("org_admin_settings.unschedule_cancellation_modal.reactivate_plan")
             })]
           })
         })]

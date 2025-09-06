@@ -1,4 +1,4 @@
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { to } from "../905/156213";
 import { uo } from "../figma_app/990058";
@@ -58,7 +58,7 @@ export function $$u3(e, t, a, i, l, o) {
     params: d,
     successCallback: () => {
       i(F.enqueue({
-        message: _$$t("confirm_workspace_change.success_message", {
+        message: getI18nString("confirm_workspace_change.success_message", {
           numUsers: e.length
         }),
         type: "workspace-changed"
@@ -76,7 +76,7 @@ export function $$m2(e, t, a) {
     },
     successCallback: () => {
       t(F.enqueue({
-        message: _$$t("members_table.change_member_permission.success"),
+        message: getI18nString("members_table.change_member_permission.success"),
         type: "member-permission-changed"
       }));
       (e.permission === FUserRoleType.ADMIN || e.permission === FUserRoleType.MEMBER) && a();

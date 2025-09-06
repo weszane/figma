@@ -1,10 +1,10 @@
 import _require from "../469e6e40/127004";
 import { getFeatureFlags } from "../905/601108";
 import { NC } from "../905/17179";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { RG, p8 } from "../905/165290";
 import { XHR } from "../905/910117";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { zX } from "../905/576487";
 import { A as _$$A } from "../905/662580";
@@ -23,9 +23,9 @@ let v = NC("START_UPLOAD_FONTS");
 let I = nF((e, t) => {
   for (let i in e.dispatch(_$$F.enqueue({
     type: "shared-fonts",
-    message: _$$t("shared_fonts.importing_font_files"),
+    message: getI18nString("shared_fonts.importing_font_files"),
     icon: zX.SPINNER
-  })), t.overwrite ? sx("shared_fonts_overwrite_collision") : sx("shared_fonts_upload", {
+  })), t.overwrite ? trackEventAnalytics("shared_fonts_overwrite_collision") : trackEventAnalytics("shared_fonts_upload", {
     count: Object.values(t.fonts).length
   }), e.dispatch(v(t)), t.fonts) {
     let n = t.fonts[i];
@@ -39,7 +39,7 @@ let I = nF((e, t) => {
       params: a,
       headers: {
         ...XHR.requiredHeaders,
-        "content-type": function(e) {
+        "content-type": function (e) {
           let t = e.name.toLowerCase();
           let i = e.type.toLowerCase();
           return t.endsWith(".otf") ? "font/opentype" : t.endsWith(".ttf") ? "font/ttf" : "font/opentype" === i || "font/ttf" === i ? i : (console.warn(`Encountered unexpected MIME type ${e.type} with file name ${e.name}`), "");
@@ -80,7 +80,7 @@ let I = nF((e, t) => {
       e.dispatch(F({
         font: l
       }));
-      sx("shared_fonts_upload_success");
+      trackEventAnalytics("shared_fonts_upload_success");
       e.dispatch(x({
         resourceId: t.resourceId,
         font: l,
@@ -97,22 +97,22 @@ let I = nF((e, t) => {
           uploaded: e.collision.uploaded,
           overwritten_fonts: e.collision.overwritten_fonts
         } : void 0;
-      } catch (e) { }
-      (function(e, t) {
+      } catch (e) {}
+      (function (e, t) {
         switch (e) {
           case 403:
-            sx("shared_fonts_upload_invalid_permissions");
+            trackEventAnalytics("shared_fonts_upload_invalid_permissions");
             break;
           case 409:
-            sx("shared_fonts_upload_collision", {
+            trackEventAnalytics("shared_fonts_upload_collision", {
               canOverwrite: t
             });
             break;
           case 422:
-            sx("shared_fonts_upload_invalid_font");
+            trackEventAnalytics("shared_fonts_upload_invalid_font");
             break;
           default:
-            sx("shared_fonts_upload_failure", {
+            trackEventAnalytics("shared_fonts_upload_failure", {
               status: e
             });
         }
@@ -139,7 +139,7 @@ function E(e, t) {
   if (Object.keys(uploadsRemaining).length > 0) {
     t(_$$F.enqueue({
       type: "shared-fonts",
-      message: _$$t("shared_fonts.uploads_remaining", {
+      message: getI18nString("shared_fonts.uploads_remaining", {
         totalFileCount: uploadsLaunched,
         processedFileCount: successfulUploads.length + unsuccessfulUploads.length
       }),
@@ -150,7 +150,7 @@ function E(e, t) {
   if (0 === unsuccessfulUploads.length && 0 === collisions.length && 0 === warnings.length && t(_$$o()), 0 === unsuccessfulUploads.length) {
     t(_$$F.enqueue({
       type: "shared-fonts",
-      message: _$$t("shared_fonts.import_complete_with_no_errors"),
+      message: getI18nString("shared_fonts.import_complete_with_no_errors"),
       icon: zX.CHECK
     }));
     return;
@@ -158,20 +158,20 @@ function E(e, t) {
   let y = e.modalShown;
   y && (y.type === EJ || y.type === _$$C) ? t(_$$F.enqueue({
     type: "shared-fonts",
-    message: _$$t("shared_fonts.import_complete_with_errors", {
+    message: getI18nString("shared_fonts.import_complete_with_errors", {
       unsuccessfulUploadCount: unsuccessfulUploads.length
     }),
     icon: zX.EXCLAMATION,
     error: !0
   })) : t(_$$F.enqueue({
     type: "shared-fonts",
-    message: _$$t("shared_fonts.import_complete_with_errors", {
+    message: getI18nString("shared_fonts.import_complete_with_errors", {
       unsuccessfulUploadCount: unsuccessfulUploads.length
     }),
     icon: zX.EXCLAMATION,
     error: !0,
     button: {
-      text: _$$t("shared_fonts.review_font_upload_errors"),
+      text: getI18nString("shared_fonts.review_font_upload_errors"),
       action: () => {
         t(to({
           type: n ??= Ju(_$$A.createLazyComponent(() => Promise.all([]).then(_require).then(e => e.FontUploadReviewErrorsModal), Ij("FontUploadReviewErrorsModal")))
@@ -195,7 +195,7 @@ let N = nF(e => {
   let {
     fontsToDelete
   } = e.getState().sharedFonts;
-  sx("shared_fonts_delete_font", {
+  trackEventAnalytics("shared_fonts_delete_font", {
     count: Object.keys(fontsToDelete).length
   });
   XHR.del("/api/fonts", {
@@ -227,7 +227,7 @@ let N = nF(e => {
     let a = unsuccessfulDeletes.length + successfulDeletes.length;
     r > 0 ? e.dispatch(_$$F.enqueue({
       type: "font_deleted",
-      message: _$$t("shared_fonts.unsuccessful_deletes", {
+      message: getI18nString("shared_fonts.unsuccessful_deletes", {
         numUnsuccessfulDeletes: r,
         totalDeletes: a
       }),
@@ -235,7 +235,7 @@ let N = nF(e => {
       error: !0
     })) : e.dispatch(_$$F.enqueue({
       type: "font_deleted",
-      message: _$$t("shared_fonts.successful_deletes", {
+      message: getI18nString("shared_fonts.successful_deletes", {
         totalDeletes: a
       }),
       icon: zX.CHECK
@@ -268,4 +268,4 @@ let $$j1 = {
   del: M
 };
 export const i = $$b0;
-export const X = $$j1; 
+export const X = $$j1;

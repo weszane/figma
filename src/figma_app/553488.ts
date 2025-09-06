@@ -2,7 +2,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { Ez5, Egt, Zdr } from "../figma_app/763686";
 import { l7, nc } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { Point } from "../905/736624";
 import { f as _$$f } from "../905/412913";
 import { k8 } from "../figma_app/49598";
@@ -45,7 +45,7 @@ export function $$S0({
 }) {
   return (d, u, p) => {
     if (1 !== d.length) {
-      x1(_$$e.SLIDES, "Expected to insert a single slide", {
+      logError(_$$e.SLIDES, "Expected to insert a single slide", {
         insertedItems: d,
         viewType: t,
         isClick: p
@@ -86,7 +86,7 @@ export function $$v6({
   subscribeToLibrary: s
 }) {
   if (1 !== t.length) {
-    x1(_$$e.SLIDES, "Expected to insert a single slide", {
+    logError(_$$e.SLIDES, "Expected to insert a single slide", {
       insertedItems: t,
       viewType: r
     });

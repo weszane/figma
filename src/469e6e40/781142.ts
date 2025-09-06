@@ -5,7 +5,7 @@ import r from "../vendor/523035";
 import { Ay } from "../905/612521";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { V } from "../905/355181";
 import { aO, vn } from "../figma_app/109538";
 import { k } from "../figma_app/618031";
@@ -111,24 +111,24 @@ function N(e) {
     roundedCorner: "billing" === e.entryPoint,
     customClassName: tQ,
     children: jsx(EC, {
-      title: e.onTrial ? tx("org_admin_settings.banners.renewal.header.trial", {
+      title: e.onTrial ? renderI18nText("org_admin_settings.banners.renewal.header.trial", {
         date: e.nextRenewalDate
-      }) : e.shouldAutoRenew ? a ? tx("org_admin_settings.banners.renewal.header", {
+      }) : e.shouldAutoRenew ? a ? renderI18nText("org_admin_settings.banners.renewal.header", {
         date: e.nextRenewalDate,
         seatCount: e.currentSeatCount
-      }) : tx("org_admin_settings.banners.renewal.header.legacy", {
+      }) : renderI18nText("org_admin_settings.banners.renewal.header.legacy", {
         date: e.nextRenewalDate,
         seatCount: e.currentSeatCount
-      }) : a ? tx("org_admin_settings.banners.renewal.header.non_auto", {
+      }) : a ? renderI18nText("org_admin_settings.banners.renewal.header.non_auto", {
         date: e.nextRenewalDate
-      }) : tx("org_admin_settings.banners.renewal.header.non_auto.legacy", {
+      }) : renderI18nText("org_admin_settings.banners.renewal.header.non_auto.legacy", {
         date: e.nextRenewalDate
       }),
-      secondaryText: e.onTrial ? tx("org_admin_settings.banners.renewal.body.trial", {
+      secondaryText: e.onTrial ? renderI18nText("org_admin_settings.banners.renewal.body.trial", {
         seatCount: e.currentSeatCount
-      }) : e.shouldAutoRenew ? a ? tx("org_admin_settings.banners.renewal.body", {
+      }) : e.shouldAutoRenew ? a ? renderI18nText("org_admin_settings.banners.renewal.body", {
         date: e.nextRenewalDate
-      }) : tx("org_admin_settings.banners.renewal.body.legacy") : tx("org_admin_settings.banners.renewal.body.non_auto"),
+      }) : renderI18nText("org_admin_settings.banners.renewal.body.legacy") : renderI18nText("org_admin_settings.banners.renewal.body.non_auto"),
       icon: jsx(B, {
         svg: A,
         className: _$$s.p8.$
@@ -143,7 +143,7 @@ function N(e) {
           children: jsx("span", {
             className: _$$s.fontMedium.$,
             "data-testid": "admin-renewal-banner-learn-more",
-            children: tx("general.learn_more")
+            children: renderI18nText("general.learn_more")
           })
         }), j2({
           shouldAutoRenew: e.shouldAutoRenew,
@@ -156,7 +156,7 @@ function N(e) {
           children: jsx("span", {
             className: _$$s.fontMedium.$,
             "data-testid": "admin-renewal-banner-cta",
-            children: tx("org_admin_settings.banners.renewal.cta")
+            children: renderI18nText("org_admin_settings.banners.renewal.cta")
           })
         })]
       })

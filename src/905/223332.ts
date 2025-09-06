@@ -1,4 +1,4 @@
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { T } from "../figma_app/300692";
 export let $$a0 = new class {
   constructor() {
@@ -57,7 +57,7 @@ export let $$a0 = new class {
       totalReconciliationMs: this._totalReconciliationMs,
       editorType: T()
     };
-    sx("Widget Interaction Performance", t, {
+    trackEventAnalytics("Widget Interaction Performance", t, {
       forwardToDatadog: !0
     });
     this.clearState();

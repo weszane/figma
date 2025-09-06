@@ -5,11 +5,11 @@ import { hS, bL } from "../905/437088";
 import { glU, Ez5, h3O } from "../figma_app/763686";
 import { AD } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
-import { Xr, md } from "../figma_app/27355";
+import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import u from "classnames";
 import { Cy } from "../figma_app/916560";
 import { Wx } from "../figma_app/708845";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Ho } from "../figma_app/308685";
 import { EE, lB } from "../figma_app/731583";
 import { _X, Yb } from "../figma_app/62612";
@@ -33,15 +33,15 @@ function I() {
   }, [e]);
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(V, {
     variant: "button",
-    tooltip: _$$t("whiteboard.embeds.inline_menu.minimize"),
-    ariaLabel: _$$t("whiteboard.embeds.inline_menu.minimize"),
+    tooltip: getI18nString("whiteboard.embeds.inline_menu.minimize"),
+    ariaLabel: getI18nString("whiteboard.embeds.inline_menu.minimize"),
     onClick: t,
     recordingKey: "embedMinimizeControl",
     children: jsx(_$$p, {})
   }) : jsx(K0, {
     svg: _$$A,
     active: "NONE",
-    tooltip: _$$t("whiteboard.embeds.inline_menu.minimize"),
+    tooltip: getI18nString("whiteboard.embeds.inline_menu.minimize"),
     onClick: t,
     recordingKey: "embedMinimizeControl"
   });
@@ -93,7 +93,7 @@ let $$O1 = memo(function () {
   }, [u, i]);
   return c ? jsx("div", {
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": "video" === d || "autoplayable_video" === d ? _$$t("whiteboard.embeds.tooltip_help_text.video") : "audio" === d || "autoplayable_audio" === d ? _$$t("whiteboard.embeds.tooltip_help_text.audio") : "file" === d || "figma" === d ? _$$t("whiteboard.embeds.tooltip_help_text.file") : _$$t("whiteboard.embeds.tooltip_help_text.generic"),
+    "data-tooltip": "video" === d || "autoplayable_video" === d ? getI18nString("whiteboard.embeds.tooltip_help_text.video") : "audio" === d || "autoplayable_audio" === d ? getI18nString("whiteboard.embeds.tooltip_help_text.audio") : "file" === d || "figma" === d ? getI18nString("whiteboard.embeds.tooltip_help_text.file") : getI18nString("whiteboard.embeds.tooltip_help_text.generic"),
     "data-tooltip-show-above": !0,
     "data-tooltip-max-width": 160,
     "data-tooltip-timeout-delay": 50,
@@ -105,7 +105,7 @@ let $$L0 = memo(function () {
   let e = J2(Ez5.embedUiState().activeEmbedData);
   let t = useSelector(e => e.mirror.appModel.currentPage ? e.mirror.appModel.currentPage : void 0);
   let i = useSelector(N);
-  let n = md(_$$n);
+  let n = useAtomWithSubscription(_$$n);
   let s = !!e && i?.guid === e.embedNodeId;
   return e && e.embedNodeId && e.embedThumbnailNodeId && e.srcUrl && e.containingCanvasId && e.containingCanvasId === t ? getFeatureFlags().figjam_embeds_allowlist && !Cy(e.srcUrl) ? (console.error("Could not play embed; domain not on allow-list:", e.srcUrl), null) : jsx(R, {
     isEmbedMaximized: n,
@@ -259,7 +259,7 @@ let M = forwardRef(function (e, t) {
         i(Ho());
       },
       src: srcUrl,
-      title: _$$t("whiteboard.embeds.embed_overlay_iframe_title")
+      title: getI18nString("whiteboard.embeds.embed_overlay_iframe_title")
     }, srcUrl)]
   });
 });

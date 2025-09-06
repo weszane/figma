@@ -1,10 +1,10 @@
 import { jsx } from "react/jsx-runtime";
 import { t } from "../5132/435788";
 import { getSingletonSceneGraph } from "../905/700578";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
-import { x1 } from "../905/714362";
-import { t as _$$t } from "../905/303541";
+import { logError } from "../905/714362";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { zE } from "../905/738636";
 import { $ } from "../905/922405";
@@ -49,7 +49,7 @@ function E(e, t, i) {
     entryPoint,
     userId
   } = i;
-  t === C.SOMETHING_WENT_WRONG && x1("sendToMakeFromDesign", "Unable to fetch required data to create a new Make file", {
+  t === C.SOMETHING_WENT_WRONG && logError("sendToMakeFromDesign", "Unable to fetch required data to create a new Make file", {
     fileKey,
     fileVersion,
     pageGuid,
@@ -68,7 +68,7 @@ function E(e, t, i) {
     exceedsMakePasteThreshold: !1
   });
   e(F.enqueue({
-    message: t === C.EXCEEDS_MAKE_PASTE_THRESHOLD ? _$$t("figmake.send_to_make_from_design.error.exceeds-make-paste-threshold") : _$$t("figmake.send_to_make_from_design.error.something-went-wrong"),
+    message: t === C.EXCEEDS_MAKE_PASTE_THRESHOLD ? getI18nString("figmake.send_to_make_from_design.error.exceeds-make-paste-threshold") : getI18nString("figmake.send_to_make_from_design.error.something-went-wrong"),
     type: "send-to-make-from-design-error",
     error: !0
   }));
@@ -160,7 +160,7 @@ let S = (e, t) => ({
         newFileFrom: t,
         dispatch: i
       }) {
-        let r = zl.set(DM, {
+        let r = atomStoreManager.set(DM, {
           fileKey: e.fileKey,
           fileVersion: e.fileVersion,
           pageGuid: e.pageGuid,

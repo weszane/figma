@@ -1,13 +1,13 @@
-import { useMemo } from "react";
-import { eU } from "../figma_app/27355";
-import { p as _$$p, Rs } from "../figma_app/288654";
-import { oA } from "../905/723791";
-import { t as _$$t } from "../905/303541";
-import { wR } from "../figma_app/765689";
-import { FProductAccessType, FOrganizationLevelType } from "../figma_app/191312";
-import { NI1, ly7 } from "../figma_app/43951";
-import { q, J } from "../905/202542";
-import { wH, Cy } from "../figma_app/680166";
+import { atom } from 'jotai';
+import { useMemo } from 'react';
+import { J, q } from '../905/202542';
+import { getI18nString } from '../905/303541';
+import { oA } from '../905/723791';
+import { ly7, NI1 } from '../figma_app/43951';
+import { FOrganizationLevelType, FProductAccessType } from '../figma_app/191312';
+import { p as _$$p, Rs } from '../figma_app/288654';
+import { Cy, wH } from '../figma_app/680166';
+import { wR } from '../figma_app/765689';
 let _ = {
   [FProductAccessType.DESIGN]: 1,
   [FProductAccessType.SITES]: 2,
@@ -17,8 +17,8 @@ let _ = {
   [FProductAccessType.DEV_MODE]: 6,
   [FProductAccessType.COOPER]: 7
 };
-export var $$h1 = (e => (e.UPGRADE_NOT_NEEDED = "UPGRADE_NOT_NEEDED_STATE", e.PROVISIONAL_ACCESS = "PROVISIONAL_STATE", e.CAN_AUTO_UPGRADE = "CAN_AUTO_UPGRADE_STATE", e.REQUESTED = "REQUESTED_STATE", e.REQUEST = "REQUEST_STATE", e.CANNOT_UPGRADE_DISABLE = "CANNOT_UPGRADE_DISABLE", e.ADMIN_SELF_UPGRADE = "ADMIN_SELF_UPGRADE_STATE", e))($$h1 || {});
-export let $$m7 = eU([]);
+export var $$h1 = (e => (e.UPGRADE_NOT_NEEDED = 'UPGRADE_NOT_NEEDED_STATE', e.PROVISIONAL_ACCESS = 'PROVISIONAL_STATE', e.CAN_AUTO_UPGRADE = 'CAN_AUTO_UPGRADE_STATE', e.REQUESTED = 'REQUESTED_STATE', e.REQUEST = 'REQUEST_STATE', e.CANNOT_UPGRADE_DISABLE = 'CANNOT_UPGRADE_DISABLE', e.ADMIN_SELF_UPGRADE = 'ADMIN_SELF_UPGRADE_STATE', e))($$h1 || {});
+export let $$m7 = atom([]);
 export function $$g2(e, t, r) {
   let {
     destinationPlan,
@@ -34,19 +34,19 @@ export function $$f8(e, t, r) {
     upgradeRequested
   } = e;
   if (!r && void 0 !== r && destinationPlan && destinationPlan.type === FOrganizationLevelType.ORG && requiresManualUpgrade) {
-    if (upgradeRequested) return _$$t("upgrades.request_sent");
-    if (!t) return _$$t("upgrades.request");
+    if (upgradeRequested) return getI18nString('upgrades.request_sent');
+    if (!t) return getI18nString('upgrades.request');
   }
 }
 export function $$E4(e) {
-  let t = e.filter(e => null != e).map(e => ({
+  let t = e.filter(e => e != null).map(e => ({
     projectId: e
   }));
   let r = _$$p(NI1, t);
   return useMemo(() => r.reduce((e, t) => (t.args.projectId && e.set(t.args.projectId, t?.result?.data?.project?.path ?? null), e), new Map()), [r]);
 }
 export function $$y0(e, t) {
-  let r = e?.parentId || "";
+  let r = e?.parentId || '';
   let n = e?.type === FOrganizationLevelType.ORG;
   let i = Rs(ly7, {
     org_id: r,
@@ -69,7 +69,7 @@ export function $$b6(e) {
     cannotUpgradeDisableAction,
     isAdminSelfUpgrade
   } = e ?? {};
-  return requiresUpgrade && isAdminSelfUpgrade ? "ADMIN_SELF_UPGRADE_STATE" : hasProvisionalAccess ? "PROVISIONAL_STATE" : licenseType && requiresUpgrade && destinationPlan && destinationPlan.key.parentId ? canAutoUpgrade ? "CAN_AUTO_UPGRADE_STATE" : upgradeRequested ? "REQUESTED_STATE" : cannotUpgradeDisableAction ? "CANNOT_UPGRADE_DISABLE" : "REQUEST_STATE" : "UPGRADE_NOT_NEEDED_STATE";
+  return requiresUpgrade && isAdminSelfUpgrade ? 'ADMIN_SELF_UPGRADE_STATE' : hasProvisionalAccess ? 'PROVISIONAL_STATE' : licenseType && requiresUpgrade && destinationPlan && destinationPlan.key.parentId ? canAutoUpgrade ? 'CAN_AUTO_UPGRADE_STATE' : upgradeRequested ? 'REQUESTED_STATE' : cannotUpgradeDisableAction ? 'CANNOT_UPGRADE_DISABLE' : 'REQUEST_STATE' : 'UPGRADE_NOT_NEEDED_STATE';
 }
 export function $$T5({
   files: e,
@@ -91,7 +91,7 @@ export function $$T5({
     folderId: r,
     isDraftsMove: !0
   });
-  let h = $$E4([...new Set([...e, ...t].map(e => e.folder_id).filter(e => null !== e))]);
+  let h = $$E4([...new Set([...e, ...t].map(e => e.folder_id).filter(e => e !== null))]);
   return $$I3({
     files: e,
     repos: t,
@@ -124,27 +124,29 @@ export function $$I3({
   getIsEligibleForProvisionalAccess: f
 }) {
   let E = function (e, t, r) {
-    let n = e => "" === r.get(String(e.folder_id));
+    let n = e => r.get(String(e.folder_id)) === '';
     let i = e.filter(n).map(e => wR(e.editor_type));
     t.filter(n).length > 0 && i.push(FProductAccessType.DESIGN);
-    return i.reduce((e, t) => null === e || _[t] < _[e] ? t : e, null);
+    return i.reduce((e, t) => e === null || _[t] < _[e] ? t : e, null);
   }(e, t, n);
-  if (null === E || r || g) return {
-    requiresUpgrade: !1,
-    canAutoUpgrade: !1,
-    requiresManualUpgrade: !1,
-    upgradeRequested: !1,
-    cannotUpgradeDisableAction: !1,
-    hasProvisionalAccess: !1,
-    licenseType: null,
-    destinationPlan: null,
-    destinationPlanUser: null,
-    shouldShowCurf: !1,
-    shouldShowScim: !1,
-    getIsEligibleForProvisionalAccess: null,
-    loading: g,
-    isAdminSelfUpgrade: !1
-  };
+  if (E === null || r || g) {
+    return {
+      requiresUpgrade: !1,
+      canAutoUpgrade: !1,
+      requiresManualUpgrade: !1,
+      upgradeRequested: !1,
+      cannotUpgradeDisableAction: !1,
+      hasProvisionalAccess: !1,
+      licenseType: null,
+      destinationPlan: null,
+      destinationPlanUser: null,
+      shouldShowCurf: !1,
+      shouldShowScim: !1,
+      getIsEligibleForProvisionalAccess: null,
+      loading: g,
+      isAdminSelfUpgrade: !1
+    };
+  }
   let y = a(E);
   let {
     plan,

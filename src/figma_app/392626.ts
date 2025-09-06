@@ -16,7 +16,7 @@ import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { qc } from "../figma_app/858013";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { Lo } from "../905/156213";
 import { fu } from "../figma_app/831799";
@@ -90,28 +90,28 @@ function B(e) {
     className: C2,
     href: "https://help.figma.com/hc/articles/10250387712407",
     target: "_blank",
-    children: e || tx("asset_transfers.request_modal.learn_more")
+    children: e || renderI18nText("asset_transfers.request_modal.learn_more")
   });
-  let ef = e.shouldTransferCopy ? tx("asset_transfers.request_modal.you_can_transfer_a_copy_of_this_project_and_its_content_to_another_plan") : tx("asset_transfers.request_modal.you_can_transfer_this_project_and_its_content_to_another_team");
-  let eE = tx("asset_transfers.request_modal.only_those_on_the_receiving_team_will_have_access", {
+  let ef = e.shouldTransferCopy ? renderI18nText("asset_transfers.request_modal.you_can_transfer_a_copy_of_this_project_and_its_content_to_another_plan") : renderI18nText("asset_transfers.request_modal.you_can_transfer_this_project_and_its_content_to_another_team");
+  let eE = renderI18nText("asset_transfers.request_modal.only_those_on_the_receiving_team_will_have_access", {
     learnMore: eg()
   });
-  let ey = ep ? e.shouldTransferCopy ? tx("asset_transfers.request_modal.you_ll_need_the_email_address_of_a_contact_person_on_that_team_as_well_as_a_link_to_the_team", {
+  let ey = ep ? e.shouldTransferCopy ? renderI18nText("asset_transfers.request_modal.you_ll_need_the_email_address_of_a_contact_person_on_that_team_as_well_as_a_link_to_the_team", {
     learnMore: eg()
-  }) : tx("asset_transfers.request_modal.you_ll_need_the_email_address_of_a_contact_person_on_that_other_team", {
+  }) : renderI18nText("asset_transfers.request_modal.you_ll_need_the_email_address_of_a_contact_person_on_that_other_team", {
     strongPlan: jsx("span", {
       className: Cr,
-      children: isGovCluster() ? tx("asset_transfers.request_modal.figma_gov") : tx("asset_transfers.request_modal.pro_enterprise_or_organization_plan")
+      children: isGovCluster() ? renderI18nText("asset_transfers.request_modal.figma_gov") : renderI18nText("asset_transfers.request_modal.pro_enterprise_or_organization_plan")
     }),
     learnMore: eg()
-  }) : tx("asset_transfers.request_modal.you_ll_need_the_email_address_of_a_contact_person", {
+  }) : renderI18nText("asset_transfers.request_modal.you_ll_need_the_email_address_of_a_contact_person", {
     strongPlan: jsx("span", {
       className: Cr,
-      children: tx("asset_transfers.request_modal.enterprise_or_organization_plan")
+      children: renderI18nText("asset_transfers.request_modal.enterprise_or_organization_plan")
     }),
     learnMore: eg()
   });
-  let eb = ep ? tx("asset_transfers.destination_type.team") : tx("asset_transfers.destination_type.organization");
+  let eb = ep ? renderI18nText("asset_transfers.destination_type.team") : renderI18nText("asset_transfers.destination_type.organization");
   let eT = () => {
     n(Lo());
   };
@@ -167,19 +167,19 @@ function B(e) {
   let eS = () => {
     switch (en) {
       case "url_format":
-        return tx("asset_transfers.request_modal.errors.this_link_isn_t_valid");
+        return renderI18nText("asset_transfers.request_modal.errors.this_link_isn_t_valid");
       case "same_org":
-        return ep ? tx("asset_transfers.request_modal.errors.you_don_t_need_a_transfer_to_move_projects_within_your_own_organization") : tx("asset_transfers.request_modal.errors.you_don_t_need_a_transfer_to_move_teams_within_your_own_organization");
+        return ep ? renderI18nText("asset_transfers.request_modal.errors.you_don_t_need_a_transfer_to_move_projects_within_your_own_organization") : renderI18nText("asset_transfers.request_modal.errors.you_don_t_need_a_transfer_to_move_teams_within_your_own_organization");
       case "email_format":
-        return tx("asset_transfers.request_modal.errors.please_use_a_valid_email_format");
+        return renderI18nText("asset_transfers.request_modal.errors.please_use_a_valid_email_format");
       case "email_match":
-        return tx("asset_transfers.request_modal.errors.this_email_isn_t_associated_with_the_destination_linked_above", {
+        return renderI18nText("asset_transfers.request_modal.errors.this_email_isn_t_associated_with_the_destination_linked_above", {
           destinationType: eb
         });
       case "same_team":
-        return tx("asset_transfers.request_modal.errors.you_don_t_need_a_transfer_to_move_projects_within_your_own_team");
+        return renderI18nText("asset_transfers.request_modal.errors.you_don_t_need_a_transfer_to_move_projects_within_your_own_team");
       case "non_org_dest_team":
-        return tx("asset_transfers.request_modal.errors.this_links_to_a_team_that_isn't_able_to_receive_transfers");
+        return renderI18nText("asset_transfers.request_modal.errors.this_links_to_a_team_that_isn't_able_to_receive_transfers");
     }
   };
   let ev = ea ? jsx($n, {
@@ -188,13 +188,13 @@ function B(e) {
   }) : e.shouldTransferCopy ? jsx($n, {
     disabled: 2 === G && (!(Y && H) || !eo) || ea,
     onClick: eI,
-    children: 1 === G ? tx("asset_transfers.request_modal.next") : tx("asset_transfers.request_modal.send")
+    children: 1 === G ? renderI18nText("asset_transfers.request_modal.next") : renderI18nText("asset_transfers.request_modal.send")
   }) : jsx($n, {
     disabled: 2 === G && (!(Y && H) || !eo) || ea,
     onClick: eI,
-    children: 1 === G ? tx("asset_transfers.request_modal.next") : tx("asset_transfers.request_modal.request_transfer")
+    children: 1 === G ? renderI18nText("asset_transfers.request_modal.next") : renderI18nText("asset_transfers.request_modal.request_transfer")
   });
-  let eA = e.shouldTransferCopy ? tx("asset_transfers.request_modal.transfer_a_copy") : tx("asset_transfers.request_modal.start_this_transfer");
+  let eA = e.shouldTransferCopy ? renderI18nText("asset_transfers.request_modal.transfer_a_copy") : renderI18nText("asset_transfers.request_modal.start_this_transfer");
   return jsx(fu, {
     name: ep ? "Project Transfer Request Modal" : "Team Transfer Request Modal",
     properties: {
@@ -213,12 +213,12 @@ function B(e) {
         }), jsxs(nB, {
           children: [(() => {
             if (ep && "loading" === eu.status || !ep && "loading" === ec.status) return null;
-            let t = e.shouldTransferCopy ? "" : ep ? _$$t("asset_transfers.request_modal.once_a_transfer_is_accepted_by_an_external_team_it_can_t_be_undone") : _$$t("asset_transfers.request_modal.once_a_transfer_is_accepted_by_an_external_organization_it_can_t_be_undone");
+            let t = e.shouldTransferCopy ? "" : ep ? getI18nString("asset_transfers.request_modal.once_a_transfer_is_accepted_by_an_external_team_it_can_t_be_undone") : getI18nString("asset_transfers.request_modal.once_a_transfer_is_accepted_by_an_external_organization_it_can_t_be_undone");
             if (oz() || aI()) {
               if (ep) {
                 let e = oA(eu.data)?.publishedSiteCount;
-                e && e > 0 && (t += _$$t("asset_transfers.request_modal.sites_unpublished_on_project_transfer"));
-              } else oA(ec.data?.team)?.hasPublishedSite && (t += _$$t("asset_transfers.request_modal.sites_unpublished_on_team_transfer"));
+                e && e > 0 && (t += getI18nString("asset_transfers.request_modal.sites_unpublished_on_project_transfer"));
+              } else oA(ec.data?.team)?.hasPublishedSite && (t += getI18nString("asset_transfers.request_modal.sites_unpublished_on_team_transfer"));
             }
             return "" === t ? null : jsx(_$$_, {
               dataTestId: "asset-transfer-warning-banner",
@@ -231,10 +231,10 @@ function B(e) {
             className: _$$s.flex.flexColumn.$,
             children: [jsx("p", {
               className: _$$s.pt16.$,
-              children: ep ? ef : tx("asset_transfers.request_modal.you_can_transfer_this_team_and_its_content_to_another_organization")
+              children: ep ? ef : renderI18nText("asset_transfers.request_modal.you_can_transfer_this_team_and_its_content_to_another_organization")
             }), jsx("p", {
               className: _$$s.pt16.fontSemiBold.$,
-              children: tx("asset_transfers.request_modal.next_steps")
+              children: renderI18nText("asset_transfers.request_modal.next_steps")
             }), jsxs("ul", {
               className: p_,
               children: [jsx("li", {
@@ -242,30 +242,30 @@ function B(e) {
                 children: ey
               }), !e.shouldTransferCopy && jsx("li", {
                 className: Aw,
-                children: ep ? tx("asset_transfers.request_modal.ask_them_for_a_link_to_their_team", {
+                children: ep ? renderI18nText("asset_transfers.request_modal.ask_them_for_a_link_to_their_team", {
                   learnMore: eg()
-                }) : tx("asset_transfers.request_modal.ask_your_contact_person_for_a_link_to_their_figma_organization_so_the_team_transfers_to_the_right_place", {
+                }) : renderI18nText("asset_transfers.request_modal.ask_your_contact_person_for_a_link_to_their_figma_organization_so_the_team_transfers_to_the_right_place", {
                   learnMore: eg()
                 })
               }), e.shouldTransferCopy && jsx("li", {
                 className: Aw,
-                children: tx("asset_transfers.request_modal.when_you_send_your_request_the_contact_person_and_their_admins_will_be_notified")
+                children: renderI18nText("asset_transfers.request_modal.when_you_send_your_request_the_contact_person_and_their_admins_will_be_notified")
               }), e.shouldTransferCopy && jsx("li", {
                 className: Aw,
-                children: tx("asset_transfers.request_modal.once_an_admin_accepts_a_copy_of_the_project_will_be_transferred")
+                children: renderI18nText("asset_transfers.request_modal.once_an_admin_accepts_a_copy_of_the_project_will_be_transferred")
               }), B ? jsx("li", {
                 className: Aw,
-                children: ep ? e.shouldTransferCopy ? eE : tx("asset_transfers.request_modal.once_an_admin_accepts_the_project_will_be_transferred") : tx("asset_transfers.request_modal.once_an_admin_accepts_the_team_will_be_transferred")
+                children: ep ? e.shouldTransferCopy ? eE : renderI18nText("asset_transfers.request_modal.once_an_admin_accepts_the_project_will_be_transferred") : renderI18nText("asset_transfers.request_modal.once_an_admin_accepts_the_team_will_be_transferred")
               }) : jsx("li", {
                 className: Aw,
-                children: ep ? e.shouldTransferCopy ? eE : tx("asset_transfers.request_modal.once_an_admin_accepts_the_project_will_be_transferred_some_of_your_team_may_still_have_access_to_the_project", {
+                children: ep ? e.shouldTransferCopy ? eE : renderI18nText("asset_transfers.request_modal.once_an_admin_accepts_the_project_will_be_transferred_some_of_your_team_may_still_have_access_to_the_project", {
                   learnMore: eg()
-                }) : tx("asset_transfers.request_modal.once_an_admin_accepts_the_team_will_be_transferred_some_of_your_members_may_still_have_access_to_the_team", {
+                }) : renderI18nText("asset_transfers.request_modal.once_an_admin_accepts_the_team_will_be_transferred_some_of_your_members_may_still_have_access_to_the_team", {
                   learnMore: eg()
                 })
               }), B && jsx("li", {
                 className: Aw,
-                children: ep ? tx("asset_transfers.request_modal.ask_the_other_organization_to_invite_back_members_due_to_external_collaboration_controls_for_project_v2") : tx("asset_transfers.request_modal.ask_the_other_organization_to_invite_back_members_due_to_external_collaboration_controls_for_team")
+                children: ep ? renderI18nText("asset_transfers.request_modal.ask_the_other_organization_to_invite_back_members_due_to_external_collaboration_controls_for_project_v2") : renderI18nText("asset_transfers.request_modal.ask_the_other_organization_to_invite_back_members_due_to_external_collaboration_controls_for_team")
               })]
             })]
           }) : jsxs("div", {
@@ -273,12 +273,12 @@ function B(e) {
               className: cx,
               children: [jsx("p", {
                 className: _$$s.pt16.fontSemiBold.$,
-                children: tx("asset_transfers.request_modal.add_a_link")
+                children: renderI18nText("asset_transfers.request_modal.add_a_link")
               }), jsx("p", {
                 className: _$$s.pt12.$,
-                children: tx("asset_transfers.request_modal.add_link_here_description", {
+                children: renderI18nText("asset_transfers.request_modal.add_link_here_description", {
                   destinationType: eb,
-                  learnMore: eg(tx("asset_transfers.request_modal.learn_how_to_find_the_link"))
+                  learnMore: eg(renderI18nText("asset_transfers.request_modal.learn_how_to_find_the_link"))
                 })
               }), jsx(ks, {
                 onChange: e => $(e.currentTarget.value),
@@ -325,7 +325,7 @@ function B(e) {
                 },
                 className: "url_format" === en || "same_org" === en || "same_team" === en || "non_org_dest_team" === en ? Xu : QL,
                 value: Y,
-                placeholder: _$$t("asset_transfers.request_modal.web_link")
+                placeholder: getI18nString("asset_transfers.request_modal.web_link")
               }), ("url_format" === en || "same_org" === en || "same_team" === en || "non_org_dest_team" === en) && jsx("span", {
                 className: _$$T,
                 children: eS()
@@ -338,9 +338,9 @@ function B(e) {
                     svg: _$$A
                   }), jsx("div", {
                     className: Qu,
-                    children: ep ? "" === et ? tx("asset_transfers.request_modal.team_verified") : tx("asset_transfers.request_modal.data_meta_verified", {
+                    children: ep ? "" === et ? renderI18nText("asset_transfers.request_modal.team_verified") : renderI18nText("asset_transfers.request_modal.data_meta_verified", {
                       assetName: et
-                    }) : tx("asset_transfers.request_modal.data_meta_verified", {
+                    }) : renderI18nText("asset_transfers.request_modal.data_meta_verified", {
                       assetName: J
                     })
                   })]
@@ -351,12 +351,12 @@ function B(e) {
               style: {
                 fontWeight: 600
               },
-              children: tx("asset_transfers.request_modal.who_to_notify")
+              children: renderI18nText("asset_transfers.request_modal.who_to_notify")
             }), jsx(ks, {
               onChange: e => z(e.currentTarget.value),
               className: "email_format" === en || "email_match" === en ? Xu : QL,
               value: H,
-              placeholder: _$$t("asset_transfers.request_modal.email_address")
+              placeholder: getI18nString("asset_transfers.request_modal.email_address")
             }), ("email_format" === en || "email_match" === en) && jsxs("span", {
               className: _$$s.colorTextDanger.$,
               children: [" ", eS(), " "]
@@ -365,14 +365,14 @@ function B(e) {
               className: iU,
               value: W,
               type: "textarea",
-              placeholder: _$$t("asset_transfers.request_modal.add_a_message_if_you_d_like")
+              placeholder: getI18nString("asset_transfers.request_modal.add_a_message_if_you_d_like")
             })]
           })]
         }), jsx(wi, {
           children: jsxs("div", {
             className: _$$s.flex.justifyBetween.itemsCenter.wFull.pl2.$,
             children: [jsxs("span", {
-              children: [tx("asset_transfers.request_modal.step_1_of_2", {
+              children: [renderI18nText("asset_transfers.request_modal.step_1_of_2", {
                 stepNumber: G
               }), " "]
             }), jsxs("div", {
@@ -382,7 +382,7 @@ function B(e) {
                 onClick: 1 === G ? eT : () => {
                   V(1);
                 },
-                children: 1 === G ? tx("asset_transfers.request_modal.cancel") : tx("asset_transfers.request_modal.back")
+                children: 1 === G ? renderI18nText("asset_transfers.request_modal.cancel") : renderI18nText("asset_transfers.request_modal.back")
               }), ev]
             })]
           })

@@ -1,7 +1,6 @@
-import type { Atom, WritableAtom } from 'jotai'
+import type { WritableAtom } from 'jotai'
 import { atom } from 'jotai'
 import { isEqual } from 'lodash-es'
-
 
 /**
  * Creates a Jotai atom with a custom setter that uses an equality function to avoid unnecessary updates.

@@ -1,4 +1,4 @@
-import { WE } from '../905/607410';
+import { logErrorAndReturn } from '../905/607410';
 import { createDeferredPromise } from '../905/874553';
 export function $$a0(e, t) {
   let i = {};
@@ -16,7 +16,7 @@ export function $$a0(e, t) {
     } = i[a];
     switch (deferred.status) {
       case 'pending':
-        WE(deferred.promise);
+        logErrorAndReturn(deferred.promise);
         return new Error('unreachable');
       case 'rejected':
         throw deferred.error;

@@ -1,4 +1,4 @@
-export function $$n0() {
+export function isAppShellEnabled() {
   return !!document.querySelector('meta[name="is_app_shell"]');
 }
-export const O = $$n0;
+export const O = isAppShellEnabled;

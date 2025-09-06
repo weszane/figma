@@ -5,12 +5,12 @@ import { t as _$$t } from "../905/150656";
 import { S } from "../905/711470";
 import { i as _$$i } from "../905/708784";
 import { L } from "../905/704296";
-import { md, fp } from "../figma_app/27355";
+import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { G } from "../figma_app/318030";
 import u from "classnames";
 import { n as _$$n } from "../vendor/547481";
 import { P as _$$P } from "../905/347284";
-import { t as _$$t2, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { OE } from "../figma_app/164212";
 import { an } from "../figma_app/626952";
 import { Ve } from "../figma_app/812915";
@@ -23,7 +23,7 @@ let E = "devtools_code_console--tabPanelScrollContainer--BVJaw";
 function j() {
   let [e] = jT();
   let [t] = PM();
-  let n = md(Cb);
+  let n = useAtomWithSubscription(Cb);
   let r = useMemo(() => (e ?? []).concat(t.map(e => {
     let t = parseInt(e.timestamp);
     return {
@@ -63,21 +63,21 @@ function N({
       value: e,
       onChange: e => t(e.target.value),
       ref: n,
-      placeholder: _$$t2("sites.code_component.console.filter")
+      placeholder: getI18nString("sites.code_component.console.filter")
     })]
   });
 }
 function T() {
   let [e, t] = jT();
-  let [n, i] = fp(Cb);
+  let [n, i] = useAtomValueAndSetter(Cb);
   return jsxs(Fragment, {
     children: [jsx(N, {
       value: n,
       onChange: i
     }), jsx("div", {}), jsx(K, {
-      "aria-label": _$$t2("sites.code_component.console.clear"),
+      "aria-label": getI18nString("sites.code_component.console.clear"),
       htmlAttributes: {
-        "data-tooltip": _$$t2("sites.code_component.console.clear"),
+        "data-tooltip": getI18nString("sites.code_component.console.clear"),
         "data-tooltip-type": "text"
       },
       onClick: () => {
@@ -93,8 +93,8 @@ export function $$S0({
   windowRef: t,
   showPropertiesTab: n = !0
 }) {
-  let [l, s] = fp(Vo);
-  let [u, h] = fp(rO);
+  let [l, s] = useAtomValueAndSetter(Vo);
+  let [u, h] = useAtomValueAndSetter(rO);
   let [m, b] = useState(void 0);
   useEffect(() => {
     let e = () => {
@@ -114,8 +114,8 @@ export function $$S0({
   let {
     figmakeInFullscreen
   } = Ve();
-  let w = n ? _$$t2("sites.code_component.drawer.hide") : _$$t2("sites.code_component.drawer.hide_console_only");
-  let [k, P] = fp(YD);
+  let w = n ? getI18nString("sites.code_component.drawer.hide") : getI18nString("sites.code_component.drawer.hide_console_only");
+  let [k, P] = useAtomValueAndSetter(YD);
   let O = e ? "instance" === e.type ? e.allCodeInstanceNodeIds : [e.codeInstanceNode.guid] : [];
   let {
     assignmentValuesByDefId
@@ -138,10 +138,10 @@ export function $$S0({
             manager: S,
             children: [jsx(_$$t.Tab, {
               ...C.properties,
-              children: tx("sites.code_component.properties")
+              children: renderI18nText("sites.code_component.properties")
             }), jsx(_$$t.Tab, {
               ...C.console,
-              children: tx("sites.code_component.console")
+              children: renderI18nText("sites.code_component.console")
             })]
           })
         }), jsxs("div", {

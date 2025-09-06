@@ -1,12 +1,12 @@
 import { useSelector } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { ce } from "../figma_app/347146";
-import { eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { Ay, s0 } from "../905/612521";
 import { getInitialOptions } from "../figma_app/169182";
-import { Ay as _$$Ay2 } from "../figma_app/778880";
-import { t as _$$t } from "../905/303541";
+import { BrowserInfo } from "../figma_app/778880";
+import { getI18nString } from "../905/303541";
 import { UN, V3 } from "../figma_app/976345";
 import { wr } from "../figma_app/387599";
 import { OE } from "../figma_app/930386";
@@ -19,7 +19,7 @@ import { NR } from "../905/977218";
 import { XE } from "../figma_app/976749";
 import { Xm } from "../905/760074";
 import { Y5 } from "../figma_app/455680";
-import { nT, wN } from "../figma_app/53721";
+import { FEditorType, mapFileTypeToEditorType } from "../figma_app/53721";
 import { O as _$$O } from "../905/833838";
 import { P as _$$P } from "../905/200237";
 import { f as _$$f } from "../figma_app/252485";
@@ -38,7 +38,7 @@ function L(e, t, i = "") {
     return;
   }
   if (e !== (n ? n + document.title : document.title)) {
-    if ("safari" !== _$$Ay2.browserType) {
+    if ("safari" !== BrowserInfo.browserType) {
       let t;
       let i = AE(e);
       t = document.getElementById("custom-emoji-favicon");
@@ -46,21 +46,21 @@ function L(e, t, i = "") {
       i && (e = Nn(e, i));
     }
     document.title = e;
-    eD && t && eD.setTitle(t, i);
+    desktopAPIInstance && t && desktopAPIInstance.setTitle(t, i);
   }
 }
 export function $$F6(e, t = null, i = "") {
   let n = function (e) {
     switch (e) {
-      case nT.Whiteboard:
+      case FEditorType.Whiteboard:
         return " \u2013 FigJam";
-      case nT.Slides:
+      case FEditorType.Slides:
         return " \u2013 Figma Slides";
-      case nT.Sites:
+      case FEditorType.Sites:
         return " \u2013 Figma Sites";
-      case nT.Cooper:
+      case FEditorType.Cooper:
         return " \u2013 Figma Buzz";
-      case nT.Figmake:
+      case FEditorType.Figmake:
         return " \u2013 Figma Make";
       default:
         return " \u2013 Figma";
@@ -75,7 +75,7 @@ export function $$M2(e, t) {
     return;
   }
   if ("fullscreen" === t.view && t.tryPluginName) {
-    e.openFile ? L(e.openFile.name, i) : L(_$$t("community.try.plugin_name_with_community", {
+    e.openFile ? L(e.openFile.name, i) : L(getI18nString("community.try.plugin_name_with_community", {
       pluginName: t.tryPluginName
     }), i);
     return;
@@ -83,7 +83,7 @@ export function $$M2(e, t) {
   if ("prototype" === t.view) {
     let n;
     let r = "";
-    if (_$$f(t.file.editor_type)) n = r = `${t.isPresenterView ? _$$t("slides.general.presenter") : _$$t("slides.general.slide_deck")} \xb7 ${i} - ${_$$t("slides.general.slides")}`;else {
+    if (_$$f(t.file.editor_type)) n = r = `${t.isPresenterView ? getI18nString("slides.general.presenter") : getI18nString("slides.general.slide_deck")} \xb7 ${i} - ${getI18nString("slides.general.slides")}`;else {
       let t = function (e) {
         let t = e.prototype;
         for (let e of t.pages) if (e.nodeId === t.currentPageId) return e.name;
@@ -170,11 +170,11 @@ export function $$U4(e, t, i, n) {
   e(sf({
     view: "fullscreen",
     fileKey: t.key,
-    editorType: t.editorType ? wN(t.editorType) : nT.Design
+    editorType: t.editorType ? mapFileTypeToEditorType(t.editorType) : FEditorType.Design
   }));
 }
 export function $$B8(e, t, i, n) {
-  sx("Open File in New Tab Click", {
+  trackEventAnalytics("Open File in New Tab Click", {
     fileKey: t,
     uiSelectedView: JSON.stringify(i)
   });
@@ -184,7 +184,7 @@ export function $$B8(e, t, i, n) {
   Ay.redirect(e, "_blank");
 }
 export function $$V0(e, t, i, n) {
-  sx("Open Prototype in New Tab Click", {
+  trackEventAnalytics("Open Prototype in New Tab Click", {
     fileKey: t,
     pageId: i,
     uiSelectedView: JSON.stringify(n)

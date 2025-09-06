@@ -3,7 +3,7 @@ import { useSelector } from "../vendor/514228";
 import { j } from "../905/253683";
 import { N as _$$N } from "../905/430294";
 import { getFeatureFlags } from "../905/601108";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Y5 } from "../figma_app/455680";
 import { Ib } from "../905/129884";
 import { V } from "../figma_app/144634";
@@ -20,8 +20,8 @@ export function $$x0() {
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsxs(Fragment, {
     children: [jsx(V, {
       variant: "toggle",
-      tooltip: _$$t("fullscreen_actions.toggle-bold"),
-      ariaLabel: _$$t("fullscreen_actions.toggle-bold"),
+      tooltip: getI18nString("fullscreen_actions.toggle-bold"),
+      ariaLabel: getI18nString("fullscreen_actions.toggle-bold"),
       checked: e,
       offIcon: jsx(j, {}),
       onIcon: jsx(j, {}),
@@ -30,8 +30,8 @@ export function $$x0() {
       tooltipShortcutActionKey: "toggle-bold"
     }), jsx(V, {
       variant: "toggle",
-      tooltip: _$$t("fullscreen_actions.text-toggle-strikethrough"),
-      ariaLabel: _$$t("fullscreen_actions.text-toggle-strikethrough"),
+      tooltip: getI18nString("fullscreen_actions.text-toggle-strikethrough"),
+      ariaLabel: getI18nString("fullscreen_actions.text-toggle-strikethrough"),
       checked: t,
       offIcon: jsx(_$$N, {}),
       onIcon: jsx(_$$N, {}),

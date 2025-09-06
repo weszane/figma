@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "../vendor/514228";
-import { R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { to } from "../905/156213";
 import { b as _$$b } from "../905/985254";
 import { cW, Be, $1 } from "../figma_app/844435";
@@ -13,7 +13,7 @@ export function $$$$p1(e, t, a) {
   let {
     appModel,
     selectedView
-  } = R(e => ({
+  } = selectWithShallowEqual(e => ({
     appModel: e.mirror.appModel,
     selectedView: e.selectedView
   }));

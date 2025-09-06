@@ -4,7 +4,7 @@ import a from "classnames";
 import { $M } from "../figma_app/930338";
 import { B } from "../905/714743";
 import { useSelector } from "../vendor/514228";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { bV, QQ } from "../figma_app/808294";
 import { cs } from "../figma_app/740025";
 import { PM, m3, zF } from "../figma_app/45218";
@@ -46,19 +46,19 @@ function _({
 function A() {
   return jsx("span", {
     className: "monetization_labels--purchasedLabel--RGbrF text--fontPos11--2LvXf text--_fontBase--QdLsd",
-    children: tx("community.buyer.purchased")
+    children: renderI18nText("community.buyer.purchased")
   });
 }
 function y() {
   return jsx("span", {
     className: f,
-    children: tx("community.resource_tiles.paid")
+    children: renderI18nText("community.resource_tiles.paid")
   });
 }
 function b() {
   return jsx("span", {
     className: f,
-    children: tx("community.resource_tiles.free")
+    children: renderI18nText("community.resource_tiles.free")
   });
 }
 function v({

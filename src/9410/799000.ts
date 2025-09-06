@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { x } from "../905/587214";
 import { Me } from "../figma_app/617427";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { rE } from "../figma_app/186343";
 import { Ib } from "../905/129884";
 export function $$d1({
@@ -32,7 +32,7 @@ export function $$c0({
   return jsx($$d1, {
     onClick: () => t(null),
     recordingKey: e,
-    tooltipText: _$$t("fullscreen.pages_panel.add_new_page")
+    tooltipText: getI18nString("fullscreen.pages_panel.add_new_page")
   });
 }
 export const e = $$c0;

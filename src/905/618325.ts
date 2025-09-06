@@ -1,12 +1,12 @@
 import { getSingletonSceneGraph } from "../905/700578";
-import { xi } from "../905/714362";
+import { logWarning } from "../905/714362";
 export class $$a0 {
   constructor() {
     this.jsxPositionToCharacterOffset = new Map();
   }
   translateBundledSourceCodeToCurrentCodeFileOffsets(e, t, i) {
     if (i.codeBuildId !== t) {
-      xi("direct_manipulation", "Code build ID mismatch", {
+      logWarning("direct_manipulation", "Code build ID mismatch", {
         bundledSourceCodeCodeBuildId: i.codeBuildId,
         codeBuildId: t
       });

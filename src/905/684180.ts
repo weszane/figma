@@ -7,12 +7,12 @@ import { v as _$$v } from "../905/442517";
 import { N as _$$N } from "../905/438674";
 import { B } from "../905/950875";
 import { CeL, Ez5 } from "../figma_app/763686";
-import { md } from "../figma_app/27355";
-import { sx } from "../905/449184";
+import { useAtomWithSubscription } from "../figma_app/27355";
+import { trackEventAnalytics } from "../905/449184";
 import { Pt } from "../figma_app/806412";
 import { Point } from "../905/736624";
 import { P as _$$P } from "../905/347284";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { sx as _$$sx } from "../905/941192";
 import { Ce } from "../905/156213";
 import { no } from "../figma_app/701001";
@@ -25,7 +25,7 @@ import { Ao } from "../905/748636";
 function C(e) {
   let t = useDispatch();
   let i = GQ();
-  let s = md(Tm);
+  let s = useAtomWithSubscription(Tm);
   let [o, l] = useState(() => Zz());
   let d = Fk(() => CeL?.getFileNodeCount() ?? 0);
   let c = no();
@@ -40,7 +40,7 @@ function C(e) {
       x: "left",
       y: "top"
     },
-    title: _$$t("manage_memory_modal.manage_memory_modal_title"),
+    title: getI18nString("manage_memory_modal.manage_memory_modal_title"),
     initialWidth: 320,
     minTopMargin: 40,
     recordingKey: Pt("ManageMemoryModal", "modal"),
@@ -62,7 +62,7 @@ function C(e) {
         pageContentMemoryUsagePercent: A,
         totalLayers: d,
         onToggle: () => {
-          sx("in_file_memory_usage_toggle", {
+          trackEventAnalytics("in_file_memory_usage_toggle", {
             new_status: !c,
             memory_used_percent: s
           });
@@ -110,18 +110,18 @@ function R(e) {
   return jsxs("div", {
     className: "manage_memory--memoryStatisticsContainer--Gi61h",
     children: [jsxs("div", {
-      children: [tx("manage_memory_modal.total_memory_used"), jsx("div", {
+      children: [renderI18nText("manage_memory_modal.total_memory_used"), jsx("div", {
         children: `${e.totalMemoryUsagePercent.toFixed(1)}%`
       })]
     }), jsxs("div", {
-      children: [tx("manage_memory_modal.total_layers"), jsx("div", {
+      children: [renderI18nText("manage_memory_modal.total_layers"), jsx("div", {
         children: e.totalLayers.toLocaleString()
       })]
     }), jsxs("div", {
       children: [jsxs("div", {
         children: [jsx("div", {
           className: "manage_memory--memoryStatisticsPageContentIndicator--NXP0V manage_memory--memoryStatisticsIndicator--qMFyF"
-        }), tx("manage_memory_modal.page_content")]
+        }), renderI18nText("manage_memory_modal.page_content")]
       }), jsx("div", {
         children: `${e.pageContentMemoryUsagePercent.toFixed(1)}%`
       })]
@@ -129,7 +129,7 @@ function R(e) {
       children: [jsxs("div", {
         children: [jsx("div", {
           className: "manage_memory--memoryStatisticsImportedComponentIndicator--yGDXP manage_memory--memoryStatisticsIndicator--qMFyF"
-        }), tx("manage_memory_modal.imported_components")]
+        }), renderI18nText("manage_memory_modal.imported_components")]
       }), jsx("div", {
         children: `${e.importedMemoryUsagePercent.toFixed(1)}%`
       })]
@@ -137,12 +137,12 @@ function R(e) {
       htmlFor: t,
       children: [jsxs("div", {
         className: "manage_memory--toggleMemoryStatsText--zpxbz",
-        children: [tx("manage_memory_modal.show_memory_in_layers_panel"), jsx(K, {
-          "aria-label": _$$t("manage_memory_modal.show_memory_in_layers_panel_warning"),
+        children: [renderI18nText("manage_memory_modal.show_memory_in_layers_panel"), jsx(K, {
+          "aria-label": getI18nString("manage_memory_modal.show_memory_in_layers_panel_warning"),
           htmlAttributes: {
             "data-tooltip-type": Ib.TEXT,
             "data-tooltip-show-immediately": !0,
-            "data-tooltip": _$$t("manage_memory_modal.show_memory_in_layers_panel_warning")
+            "data-tooltip": getI18nString("manage_memory_modal.show_memory_in_layers_panel_warning")
           },
           children: jsx(B, {})
         })]
@@ -161,30 +161,30 @@ function N() {
       children: [jsx("p", {
         children: jsx("b", {
           style: _$$sx.fontSemiBold.$,
-          children: tx("memory_warning_modal.memory_reduction_tips_modal_title")
+          children: renderI18nText("memory_warning_modal.memory_reduction_tips_modal_title")
         })
       }), jsx("br", {}), jsxs("ol", {
         className: "manage_memory--bulletedListManageMemory--pyJyb",
         children: [jsxs("li", {
           children: [jsx("b", {
             style: _$$sx.fontMedium.$,
-            children: tx("memory_warning_modal.memory_reduction_tips_break_files_header")
-          }), tx("memory_warning_modal.memory_reduction_tips_break_files")]
+            children: renderI18nText("memory_warning_modal.memory_reduction_tips_break_files_header")
+          }), renderI18nText("memory_warning_modal.memory_reduction_tips_break_files")]
         }), jsx("br", {}), jsxs("li", {
           children: [jsx("b", {
             style: _$$sx.fontMedium.$,
-            children: tx("memory_warning_modal.memory_reduction_tips_clean_layers_header")
-          }), tx("memory_warning_modal.memory_reduction_tips_clean_layers")]
+            children: renderI18nText("memory_warning_modal.memory_reduction_tips_clean_layers_header")
+          }), renderI18nText("memory_warning_modal.memory_reduction_tips_clean_layers")]
         }), jsx("br", {}), jsxs("li", {
           children: [jsx("b", {
             style: _$$sx.fontMedium.$,
-            children: tx("memory_warning_modal.memory_reduction_tips_flatten_shapes_header")
-          }), tx("memory_warning_modal.memory_reduction_tips_flatten_shapes")]
+            children: renderI18nText("memory_warning_modal.memory_reduction_tips_flatten_shapes_header")
+          }), renderI18nText("memory_warning_modal.memory_reduction_tips_flatten_shapes")]
         }), jsx("br", {}), jsxs("li", {
           children: [jsx("b", {
             style: _$$sx.fontMedium.$,
-            children: tx("memory_warning_modal.memory_reduction_tips_trim_components_header")
-          }), tx("memory_warning_modal.memory_reduction_tips_trim_components")]
+            children: renderI18nText("memory_warning_modal.memory_reduction_tips_trim_components_header")
+          }), renderI18nText("memory_warning_modal.memory_reduction_tips_trim_components")]
         })]
       }), jsx("br", {}), jsx("p", {
         children: jsx(O, {})
@@ -196,11 +196,11 @@ function P() {
   return jsx(_$$N, {
     newTab: !0,
     href: "https://help.figma.com/hc/articles/360040528173",
-    children: tx("memory_warning_modal.help_center")
+    children: renderI18nText("memory_warning_modal.help_center")
   });
 }
 function O() {
-  return tx("memory_warning_modal.help_center_resource_and_link", {
+  return renderI18nText("memory_warning_modal.help_center_resource_and_link", {
     helpCenterLink: jsx(P, {})
   });
 }

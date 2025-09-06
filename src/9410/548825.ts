@@ -5,14 +5,14 @@ import { v } from "../figma_app/163822";
 import { getSingletonSceneGraph } from "../905/700578";
 import { Wn, mK, NB } from "../vendor/693164";
 import { DF } from "../vendor/463802";
-import { zl, Xr } from "../figma_app/27355";
+import { atomStoreManager, Xr } from "../figma_app/27355";
 import { SK } from "../vendor/408361";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { JT } from "../figma_app/632248";
 import { wj, qy } from "../figma_app/862289";
 import { hD } from "../figma_app/164260";
 export function $$g6(e, t = "history-push") {
-  let i = zl.get(hD);
+  let i = atomStoreManager.get(hD);
   i && i.update(() => {
     Wn(e, [mK, NB]);
   }, {
@@ -24,13 +24,13 @@ export function $$_8(e, t) {
   if (i) try {
     i.slideSpeakerNotes = t;
   } catch (e) {
-    x1(_$$e.SLIDES, "Failed to set slide speaker notes", {
+    logError(_$$e.SLIDES, "Failed to set slide speaker notes", {
       error: e
     });
   }
 }
 export function $$x5() {
-  let e = zl.get(hD);
+  let e = atomStoreManager.get(hD);
   e && e.dispatchCommand(SK, void 0);
 }
 export function $$y4() {

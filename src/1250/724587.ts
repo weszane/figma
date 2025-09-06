@@ -2,7 +2,7 @@ import { ex } from "../905/524523";
 import { jsx, Fragment } from "react/jsx-runtime";
 import { Ex, zE, _Y } from "../figma_app/919079";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { DQ, Pw, _X } from "../figma_app/121751";
 import { u8, A5, MF } from "../figma_app/391338";
@@ -13,7 +13,7 @@ import { getPermissionsStateMemoized, hasEditorRoleAccessOnTeam } from "../figma
 import { useState, useRef } from "react";
 import { getFeatureFlags } from "../905/601108";
 import { resourceUtils } from "../905/989992";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Rs } from "../figma_app/288654";
 import { V } from "../905/223767";
 import { dm } from "../figma_app/976345";
@@ -41,7 +41,7 @@ function p(e) {
     label: A5.PlanSwitcherOrgBadges.isEnterprise,
     enableFullRead: DQ(Pw.GROUP_7)
   });
-  let g = n ? _$$t("navbar.navbar.guest") : p ? _$$t("navbar.navbar.enterprise") : _$$t("navbar.navbar.org");
+  let g = n ? getI18nString("navbar.navbar.guest") : p ? getI18nString("navbar.navbar.enterprise") : getI18nString("navbar.navbar.org");
   return jsx(Ex, {
     className: _$$s.ml4.mr0.$,
     color: zE.TOOLBAR,
@@ -53,14 +53,14 @@ let O = ex("pro_trial", function (e) {
     style: {
       fontWeight: 600
     },
-    children: tx("team_list.pro_trial_time_left_days", {
+    children: renderI18nText("team_list.pro_trial_time_left_days", {
       daysLeft: e.daysLeft
     })
   });
   return jsx("div", {
     className: _$$s.flex.itemsCenter.justifyCenter.$,
     children: jsx("p", {
-      children: tx("team_list.pro_trial_time_left", {
+      children: renderI18nText("team_list.pro_trial_time_left", {
         daysLeftText: t
       })
     })
@@ -119,7 +119,7 @@ function R(e) {
   if (_.student_team) {
     if (e.isInDropdown) return jsx(Ex, {
       color: zE.TOOLBAR,
-      text: _$$t("navbar.navbar.edu"),
+      text: getI18nString("navbar.navbar.edu"),
       className: _$$s.ml4.mr0.noWrap.flex.$
     });
   } else if (oc(_.id, u)) {
@@ -127,12 +127,12 @@ function R(e) {
     let t = ng.canSeeProTrialExpiryUx(P);
     let s = (e, t = !1) => jsx(Ex, {
       color: e,
-      text: _$$t("navbar.navbar.trial_expired"),
+      text: getI18nString("navbar.navbar.trial_expired"),
       className: `${_$$s.ml4.mr0.noWrap.$} ${!t && "plan_switcher_team_badges--warningBadgeHover--v60SF"}`
     });
     let l = e => jsx(Ex, {
       color: e,
-      text: _$$t("navbar.navbar.locked"),
+      text: getI18nString("navbar.navbar.locked"),
       className: _$$s.ml4.mr0.noWrap.$
     });
     return e.isInDropdown ? t ? s(zE.WARNING, !0) : l(zE.WARNING) : t ? jsx(fu, {
@@ -147,7 +147,7 @@ function R(e) {
   } else if (P && ng.canSeeProTrialUx(P)) {
     let t = (e, t, n = !1) => jsx(Ex, {
       color: e,
-      text: _$$t("navbar.navbar.pro_trial"),
+      text: getI18nString("navbar.navbar.pro_trial"),
       className: `${t} ${!n && "plan_switcher_team_badges--proTrialBadgeHover--tuLFJ"}`
     });
     return e.isInDropdown ? t(zE.TOOLBAR, _$$s.ml4.mr0.noWrap.$, !0) : jsx(fu, {
@@ -175,12 +175,12 @@ function R(e) {
     });
   } else if (p && e.isInDropdown) return jsx(Ex, {
     color: zE.TOOLBAR,
-    text: _$$t("navbar.navbar.pro"),
+    text: getI18nString("navbar.navbar.pro"),
     className: _$$s.ml4.mr0.noWrap.flex.$
   });else if (!p) {
     let s = (e, t, n = !1) => jsx(Ex, {
       color: e,
-      text: _$$t("navbar.navbar.free"),
+      text: getI18nString("navbar.navbar.free"),
       className: `${t} ${!n && "plan_switcher_team_badges--freeBadgeHover--BSSXU"}`
     });
     if (e.isInDropdown) return s(zE.TOOLBAR, _$$s.ml4.mr0.noWrap.flex.$, !0);
@@ -194,7 +194,7 @@ function R(e) {
           a.stopPropagation();
           t(dm(_.id));
           W(_$$b.STARTER_TEAM_BADGE);
-          sx("Starter Team Badge Clicked", {
+          trackEventAnalytics("Starter Team Badge Clicked", {
             userId: n.id,
             teamId: _.id,
             ...e
@@ -202,7 +202,7 @@ function R(e) {
         },
         onMouseEnter: () => {
           B || (G.current = setTimeout(() => {
-            sx("Starter Team Badge Viewed", {
+            trackEventAnalytics("Starter Team Badge Viewed", {
               userId: n.id,
               teamId: _.id,
               ...e
@@ -229,7 +229,7 @@ export function $$M0({
 }) {
   if (l) return jsx(Ex, {
     color: zE.BRAND,
-    text: _$$t("file_browser.drafts_to_move.new"),
+    text: getI18nString("file_browser.drafts_to_move.new"),
     className: _$$s.ml4.mr0.noWrap.flex.$
   });
   if (e.orgId) {

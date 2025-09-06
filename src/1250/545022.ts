@@ -3,12 +3,12 @@ import { useEffect } from "react";
 import { useDispatch } from "../vendor/514228";
 import { languageCodes } from "../905/816253";
 import { getFeatureFlags } from "../905/601108";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { getInitialOptions, buildUploadUrl } from "../figma_app/169182";
 import { I7 } from "../figma_app/594947";
 import { oW } from "../905/675859";
 import { QS, Tq } from "../9864/183809";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { to } from "../905/156213";
 import { b as _$$b } from "../905/985254";
 import { c as _$$c } from "../905/370443";
@@ -37,10 +37,10 @@ function I(e) {
     isShowing: e.isShowing,
     trackingContextName: "ko_kr_launch_announcement",
     onClose: e.onClose,
-    title: tx("ko_kr_announcement.title"),
-    description: tx("ko_kr_announcement.description"),
+    title: renderI18nText("ko_kr_announcement.title"),
+    description: renderI18nText("ko_kr_announcement.description"),
     primaryCta: {
-      label: tx("ko_kr_announcement.cta_button"),
+      label: renderI18nText("ko_kr_announcement.cta_button"),
       type: "button",
       onClick: () => {
         t(to({
@@ -56,15 +56,15 @@ function I(e) {
       width: 332,
       height: 404,
       src: buildUploadUrl("dark" === n ? "18dcbb2ade042dcce59156457f26cf74bff4c14a" : "705f5bf3c6cdb84a903c3a2fcd7e70de3294fc96"),
-      alt: _$$t("ko_kr_launch_announcement.image_alt_text")
+      alt: getI18nString("ko_kr_launch_announcement.image_alt_text")
     })
   });
 }
 let $$A = r1("has_tried_ko_kr");
 export function $$S0() {
   let e = useDispatch();
-  let t = md($$A);
-  let n = md(mp);
+  let t = useAtomWithSubscription($$A);
+  let n = useAtomWithSubscription(mp);
   let _ = "loaded" === t.status && "loaded" === n.status;
   let {
     getConfig

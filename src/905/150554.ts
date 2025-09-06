@@ -2,7 +2,7 @@ import { Ed } from "../figma_app/562352";
 import { glU } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import s from "../vendor/116389";
-import { x1, Lo } from "../905/714362";
+import { logError, logInfo } from "../905/714362";
 import { Av } from "../figma_app/646357";
 import { g as _$$g } from "../905/880308";
 import { XHR } from "../905/910117";
@@ -129,12 +129,12 @@ async function $$A({
     }
     u = u.filter((e, t, i) => i.findIndex(t => Av(t) === Av(e)) === t);
   } catch (e) {
-    e instanceof _$$u || x1("auto_suggest", "Error getting suggestions", {
+    e instanceof _$$u || logError("auto_suggest", "Error getting suggestions", {
       error: e
     });
   }
   a?.logTimer(MX.SOURCE_FRAGMENT, H2.TOTAL, 0);
-  Lo("auto_suggest", "Auto Suggest Results", {
+  logInfo("auto_suggest", "Auto Suggest Results", {
     suggestions: u || "no_results",
     debugInfo: a?.debugInfo,
     sessionId: r6(),
@@ -211,7 +211,7 @@ async function y({
       throw Error("No component usage information or session provided");
     } catch (t) {
       if (t instanceof _$$u) throw t;
-      x1("auto_suggest", "Error loading fragment", {
+      logError("auto_suggest", "Error loading fragment", {
         error: t,
         fragment: e
       });

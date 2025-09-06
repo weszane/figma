@@ -3,7 +3,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { Kh } from "../905/403166";
 import { Xm } from "../905/723791";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { qZS } from "../figma_app/43951";
 let $$c3 = "You are trying to use comments functionality but didn't wire a provider for comments";
 let u = createContext(void 0);
@@ -13,7 +13,7 @@ export function $$m2() {
   let [t, i] = useState(null);
   getFeatureFlags().usecommentscontext_warn_no_provider && null === t && void 0 === e && i(Error("useCommentsContext called outside of a LoadedCommentsContextProvider"));
   useEffect(() => {
-    t && $D(_$$e.WAYFINDING, t);
+    t && reportError(_$$e.WAYFINDING, t);
   }, [t]);
   return e;
 }

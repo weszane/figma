@@ -3,7 +3,7 @@ import { useRef, useCallback, useId, memo, useState, useEffect } from "react";
 import { useDispatch } from "../vendor/514228";
 import { d as _$$d } from "../905/49800";
 import { J } from "../905/270045";
-import { R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { Pt } from "../figma_app/806412";
 import { r } from "../905/12476";
 import { hS } from "../905/216495";
@@ -137,7 +137,7 @@ export let $$I2 = memo(function (e) {
   let {
     dropdownShown,
     sceneGraphSelection
-  } = R(e => ({
+  } = selectWithShallowEqual(e => ({
     dropdownShown: e.dropdownShown,
     sceneGraphSelection: e.mirror.sceneGraphSelection
   }));

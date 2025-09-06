@@ -1,8 +1,8 @@
 import { memo } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { buildUploadUrl } from "../figma_app/169182";
-import { $D } from "../905/11";
-import { t } from "../905/303541";
+import { reportError } from "../905/11";
+import { getI18nString } from "../905/303541";
 import { FPlanNameType, FProductAccessType } from "../figma_app/191312";
 import { getFeatureFlags } from "../905/601108";
 import { ud } from "../905/513035";
@@ -20,13 +20,13 @@ import { o as _$$o } from "../905/486078";
 import { D as _$$D } from "../905/711533";
 import { jsx } from "react/jsx-runtime";
 let c = {
-  productNameShort: () => t("general.figma_buzz"),
-  productName: () => t("general.figma_buzz"),
+  productNameShort: () => getI18nString("general.figma_buzz"),
+  productName: () => getI18nString("general.figma_buzz"),
   minimumBundle: getFeatureFlags().billing_enable_content_seat ? ud.CONTENT : null
 };
 let m = {
-  productNameShort: () => t("general.figma_design_short"),
-  productName: () => t("general.figma_design"),
+  productNameShort: () => getI18nString("general.figma_design_short"),
+  productName: () => getI18nString("general.figma_design"),
   minimumBundle: ud.EXPERT,
   seatDescriptionConfig: {
     shouldShow: () => !0,
@@ -42,12 +42,12 @@ let h = {
   },
   editorTheme: "design",
   translations: {
-    defaultRequestModalTitle: () => t("request_upgrade.header.design")
+    defaultRequestModalTitle: () => getI18nString("request_upgrade.header.design")
   }
 };
 let _ = {
-  productNameShort: () => t("general.dev_mode"),
-  productName: () => t("general.dev_mode"),
+  productNameShort: () => getI18nString("general.dev_mode"),
+  productName: () => getI18nString("general.dev_mode"),
   minimumBundle: ud.DEVELOPER,
   seatDescriptionConfig: {
     shouldShow: () => !0,
@@ -63,13 +63,13 @@ let A = {
   },
   editorTheme: "dev-handoff",
   translations: {
-    defaultRequestModalTitle: () => t("request_upgrade.header.dev_mode")
+    defaultRequestModalTitle: () => getI18nString("request_upgrade.header.dev_mode")
   }
 };
 let v = {
-  productNameShort: () => t("general.figma_rev"),
-  productName: () => t("general.figma_rev"),
-  productNameBeta: getFeatureFlags().ai_ga ? void 0 : () => t("general.figma_make_beta"),
+  productNameShort: () => getI18nString("general.figma_rev"),
+  productName: () => getI18nString("general.figma_rev"),
+  productNameBeta: getFeatureFlags().ai_ga ? void 0 : () => getI18nString("general.figma_make_beta"),
   minimumBundle: ud.EXPERT,
   seatDescriptionConfig: {
     shouldShow: e => function (e) {
@@ -87,13 +87,13 @@ let I = {
   },
   editorTheme: "bake-filebrowser",
   translations: {
-    defaultRequestModalTitle: () => t("request_upgrade.header.figmake")
+    defaultRequestModalTitle: () => getI18nString("request_upgrade.header.figmake")
   }
 };
 let w = {
-  productNameShort: () => t("general.sites"),
-  productName: () => t("general.figma_sites"),
-  productNameBeta: () => t("general.figma_sites_beta"),
+  productNameShort: () => getI18nString("general.sites"),
+  productName: () => getI18nString("general.figma_sites"),
+  productNameBeta: () => getI18nString("general.figma_sites_beta"),
   minimumBundle: ud.EXPERT,
   seatDescriptionConfig: {
     shouldShow: e => V(e),
@@ -109,12 +109,12 @@ let C = {
   },
   editorTheme: "seascape",
   translations: {
-    defaultRequestModalTitle: () => t("request_upgrade.header.sites")
+    defaultRequestModalTitle: () => getI18nString("request_upgrade.header.sites")
   }
 };
 let R = {
-  productNameShort: () => t("general.figma_slides_short"),
-  productName: () => t("general.figma_slides"),
+  productNameShort: () => getI18nString("general.figma_slides_short"),
+  productName: () => getI18nString("general.figma_slides"),
   minimumBundle: ud.COLLABORATOR,
   seatDescriptionConfig: {
     shouldShow: () => !0,
@@ -130,7 +130,7 @@ let N = {
   },
   editorTheme: "piper",
   translations: {
-    defaultRequestModalTitle: () => t("request_upgrade.header.slides")
+    defaultRequestModalTitle: () => getI18nString("request_upgrade.header.slides")
   }
 };
 let D = memo(function (e) {
@@ -147,8 +147,8 @@ let D = memo(function (e) {
   });
 });
 let L = {
-  productNameShort: () => t("general.figjam"),
-  productName: () => t("general.figjam"),
+  productNameShort: () => getI18nString("general.figjam"),
+  productName: () => getI18nString("general.figjam"),
   minimumBundle: ud.COLLABORATOR,
   seatDescriptionConfig: {
     shouldShow: () => !0,
@@ -164,7 +164,7 @@ let F = {
   },
   editorTheme: "whiteboard",
   translations: {
-    defaultRequestModalTitle: () => t("request_upgrade.header.figjam")
+    defaultRequestModalTitle: () => getI18nString("request_upgrade.header.figjam")
   }
 };
 let M = {
@@ -186,7 +186,7 @@ let j = {
   [FProductAccessType.COOPER]: null
 };
 function U(e) {
-  return M[e] || ($D(_$$e.MONETIZATION_EXPANSION, Error(`Error getting LicenseTypeConfig for license type '${e}'`), {
+  return M[e] || (reportError(_$$e.MONETIZATION_EXPANSION, Error(`Error getting LicenseTypeConfig for license type '${e}'`), {
     extra: {
       licenseType: e
     }
@@ -194,7 +194,7 @@ function U(e) {
 }
 function B(e, t) {
   let i = j[e];
-  return void 0 === i ? ($D(_$$e.MONETIZATION_EXPANSION, Error(`Error getting LicenseTypeUpgradeConfig for license type '${e}'`), {
+  return void 0 === i ? (reportError(_$$e.MONETIZATION_EXPANSION, Error(`Error getting LicenseTypeUpgradeConfig for license type '${e}'`), {
     extra: {
       licenseType: e
     }
@@ -228,7 +228,7 @@ export function $$q7(e, t = "16") {
   return i.seatDescriptionConfig ? i.seatDescriptionConfig[`icon${t}`] : null;
 }
 export function $$$0(e) {
-  return B(e, !1)?.translations.defaultRequestModalTitle() || t("request_upgrade.header.license_type", {
+  return B(e, !1)?.translations.defaultRequestModalTitle() || getI18nString("request_upgrade.header.license_type", {
     licenseType: $$G5(e)
   });
 }

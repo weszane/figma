@@ -1,11 +1,11 @@
 import { useMemo } from "react";
-import { eU, md } from "../figma_app/27355";
-let $$a3 = eU([]);
-let $$s1 = eU([]);
-let $$o4 = eU([]);
-let $$l2 = eU(void 0);
+import { atom, useAtomWithSubscription } from "../figma_app/27355";
+let $$a3 = atom([]);
+let $$s1 = atom([]);
+let $$o4 = atom([]);
+let $$l2 = atom(void 0);
 export function $$d0(e) {
-  let t = md($$a3);
+  let t = useAtomWithSubscription($$a3);
   return useMemo(() => !!e && t.includes(e), [e, t]);
 }
 export const H = $$d0;

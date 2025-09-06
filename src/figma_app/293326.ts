@@ -1,11 +1,11 @@
 import { parsePxInt } from "../figma_app/783094";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { t as _$$t2 } from "../905/192333";
 import { BuT, yUQ, XaD, fWT, nnJ, tui, i_6 } from "../figma_app/27776";
 export function $$o0(e) {
-  let t = [_$$t("whiteboard.inserts.search_placeholder_1"), _$$t("whiteboard.inserts.search_placeholder_2"), _$$t("whiteboard.inserts.search_placeholder_3"), _$$t("whiteboard.inserts.search_placeholder_4"), _$$t("whiteboard.inserts.search_placeholder_5"), _$$t("whiteboard.inserts.search_placeholder_6"), _$$t("whiteboard.inserts.search_placeholder_7"), _$$t("whiteboard.inserts.search_placeholder_8")];
-  "en" === e && (t = t.concat([_$$t("whiteboard.inserts.search_placeholder_9"), _$$t("whiteboard.inserts.search_placeholder_10"), _$$t("whiteboard.inserts.search_placeholder_11"), _$$t("whiteboard.inserts.search_placeholder_12")]));
-  return t[Math.floor(Math.random() * t.length)] ?? _$$t("whiteboard.inserts.search_placeholder_1");
+  let t = [getI18nString("whiteboard.inserts.search_placeholder_1"), getI18nString("whiteboard.inserts.search_placeholder_2"), getI18nString("whiteboard.inserts.search_placeholder_3"), getI18nString("whiteboard.inserts.search_placeholder_4"), getI18nString("whiteboard.inserts.search_placeholder_5"), getI18nString("whiteboard.inserts.search_placeholder_6"), getI18nString("whiteboard.inserts.search_placeholder_7"), getI18nString("whiteboard.inserts.search_placeholder_8")];
+  "en" === e && (t = t.concat([getI18nString("whiteboard.inserts.search_placeholder_9"), getI18nString("whiteboard.inserts.search_placeholder_10"), getI18nString("whiteboard.inserts.search_placeholder_11"), getI18nString("whiteboard.inserts.search_placeholder_12")]));
+  return t[Math.floor(Math.random() * t.length)] ?? getI18nString("whiteboard.inserts.search_placeholder_1");
 }
 let $$l3 = parsePxInt(BuT);
 let $$d5 = parsePxInt(yUQ);

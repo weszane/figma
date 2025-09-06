@@ -1,15 +1,15 @@
-import { b as _$$b } from "../905/690073";
+import { EventEmitter } from "../905/690073";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { h3O, rau } from "../figma_app/763686";
-import { zl } from "../figma_app/27355";
-import { NP, az, sx } from "../905/449184";
-import { Q4, rH, sn, Vq } from "../905/542194";
+import { atomStoreManager } from "../figma_app/27355";
+import { trackFullScreenAnalytics, analyticsEventManager, trackEventAnalytics } from "../905/449184";
+import { timerEventNames, reactTimerGroup, globalPerfTimer, distributionAnalytics } from "../905/542194";
 import { I as _$$I } from "../905/117966";
 import { isDevEnvironment } from "../figma_app/169182";
 import { ai, kJ, f1, $G, S as _$$S, s$, Ad } from "../figma_app/553184";
 import { aD, S3 } from "../905/485103";
-import { $D } from "../905/11";
-import { gb, fj } from "../905/714362";
+import { reportError } from "../905/11";
+import { setModeEventHandler, logCustom } from "../905/714362";
 import { JA, Cd, sl, Zp, kq, Cr, wl, P2, w4, E7 } from "../figma_app/682945";
 import { N } from "../905/945673";
 import { xK, Qw } from "../905/125218";
@@ -40,24 +40,24 @@ let v = new class {
 }();
 export let $$w0 = new class {
   constructor() {
-    this.events = new _$$b("fullscreen");
-    gb(this.trackFromFullscreen.bind(this));
+    this.events = new EventEmitter("fullscreen");
+    setModeEventHandler(this.trackFromFullscreen.bind(this));
   }
   trackFromFullscreen(e, t, i, n, r, a) {
-    NP(e, _$$r(t), {
+    trackFullScreenAnalytics(e, _$$r(t), {
       forwardToDatadog: i,
       batchRequest: r ?? void 0,
       addToRUM: a ?? void 0
     });
   }
   trackDefinedEventFromFullscreen(e, t) {
-    az.trackDefinedFullscreenEvent(e, _$$r(t));
+    analyticsEventManager.trackDefinedFullscreenEvent(e, _$$r(t));
   }
   resetDefinedAnalyticsForDocument() {
-    az.resetDefinedAnalyticsForDocument();
+    analyticsEventManager.resetDefinedAnalyticsForDocument();
   }
   slogFromFullscreen(e, t, i, n, r, a, s) {
-    return fj(e, t, i, n, r, a, s);
+    return logCustom(e, t, i, n, r, a, s);
   }
   reportContextLost() {
     ai();
@@ -144,7 +144,7 @@ export let $$w0 = new class {
   }
   reportDirtyAfterLoad(e) {
     let t = isDevEnvironment();
-    sx("dirty_after_load", {
+    trackEventAnalytics("dirty_after_load", {
       registersDump: h3O?.pendingRegistersDump(t).substring(0, 1e4),
       sessionID: e
     });
@@ -176,7 +176,7 @@ export let $$w0 = new class {
     v.reportMultiplayerRoundTripTime(e);
   }
   reportBranchingLoadTime(e, t, i, n, r, a) {
-    let l = zl.get(nX);
+    let l = atomStoreManager.get(nX);
     let d = {
       branchFileKey: n,
       sourceFileKey: i,
@@ -191,7 +191,7 @@ export let $$w0 = new class {
       diffType: r,
       ...d
     });
-    sx("Branch Modal Load Time", d);
+    trackEventAnalytics("Branch Modal Load Time", d);
   }
   reportQuantizedColorEqualsUse(e, t, i, n, r, a, s, l) {
     let c = {
@@ -209,59 +209,59 @@ export let $$w0 = new class {
         a: l
       })
     };
-    sx("quantized_color_equal_use", c);
+    trackEventAnalytics("quantized_color_equal_use", c);
   }
   tryReportError(e) {
-    $D(_$$e.SCENEGRAPH_AND_SYNC, Error(e));
+    reportError(_$$e.SCENEGRAPH_AND_SYNC, Error(e));
   }
   startPerfTimer(e) {
-    Q4.has(e) && rH.start(e);
+    timerEventNames.has(e) && reactTimerGroup.start(e);
     Qw.has(e) && xK.startFs(e);
   }
   stopPerfTimer(e) {
-    Q4.has(e) && rH.stop(e);
+    timerEventNames.has(e) && reactTimerGroup.stop(e);
     Qw.has(e) && xK.stopFs(e);
   }
   startOpsTimer(e, t) {
-    sn.start(e, {
+    globalPerfTimer.start(e, {
       key: t
     });
   }
   stopOpsTimer(e, t) {
-    return sn.stop(e, t);
+    return globalPerfTimer.stop(e, t);
   }
   createDistribution(e, t) {
-    Vq.create(e, t);
+    distributionAnalytics.create(e, t);
   }
   addToDistribution(e, t) {
-    Vq.add(e, t);
+    distributionAnalytics.add(e, t);
   }
   resetDistribution(e) {
-    Vq.reset(e);
+    distributionAnalytics.reset(e);
   }
   getDistributionAnalyticsProperties(e) {
-    return Vq.analyticsProperties(e);
+    return distributionAnalytics.analyticsProperties(e);
   }
   removeDistribution(e) {
-    Vq.remove(e);
+    distributionAnalytics.remove(e);
   }
   tryStopOpsTimer(e, t) {
-    return sn.tryStop(e, t);
+    return globalPerfTimer.tryStop(e, t);
   }
   pauseOpsTimer(e, t) {
-    return sn.pause(e, t);
+    return globalPerfTimer.pause(e, t);
   }
   resumeOpsTimer(e, t) {
-    return sn.resume(e, t);
+    return globalPerfTimer.resume(e, t);
   }
   trySetAttributeOpsTimer(e, t, i, n) {
-    return sn.trySetAttribute(e, t, i, n);
+    return globalPerfTimer.trySetAttribute(e, t, i, n);
   }
   tryGetAttributesOpsTimer(e, t) {
-    return sn.tryGetAttribute(e, t);
+    return globalPerfTimer.tryGetAttribute(e, t);
   }
   getOpsTimer(e, t) {
-    return sn.report().get(e)?.get(t) || null;
+    return globalPerfTimer.report().get(e)?.get(t) || null;
   }
   logNumericMetric(e, t) {
     for (let i of Ad) if (e.startsWith(i)) {

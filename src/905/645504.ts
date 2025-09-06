@@ -1,6 +1,6 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { h as _$$h } from "../905/207101";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { $X, fF } from "../figma_app/425283";
 import { l4, l_ } from "../figma_app/982327";
 import { c as _$$c } from "../905/370443";
@@ -43,20 +43,20 @@ export function $$g0({
   return jsx(Fragment, {
     children: f && jsx(rq, {
       clickOutsideToHide: !0,
-      description: tx("admin_settings.billing.onboarding.tooltip.overview_secondary_tab.description"),
+      description: renderI18nText("admin_settings.billing.onboarding.tooltip.overview_secondary_tab.description"),
       emphasized: !0,
       isShowing,
       onClose: complete,
       onTargetLost: complete,
       primaryCta: {
-        label: tx("general.got_it"),
+        label: renderI18nText("general.got_it"),
         type: "button",
         onClick: complete,
         ctaTrackingDescriptor: _$$c.GOT_IT
       },
       shouldCenterArrow: EL.BEST_EFFORT,
       targetKey: f.targetKey,
-      title: tx("admin_settings.billing.onboarding.tooltip.overview_secondary_tab.title"),
+      title: renderI18nText("admin_settings.billing.onboarding.tooltip.overview_secondary_tab.title"),
       trackingContextName: f.trackingContextName
     })
   });

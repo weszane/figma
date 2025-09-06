@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useDispatch } from "../vendor/514228";
 import { c1 } from "../figma_app/806412";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { gl, oV } from "../905/216495";
 import { Ib } from "../905/129884";
 import { $j } from "../figma_app/178475";
@@ -38,7 +38,7 @@ function f({
   let S = c1(A);
   return jsx($j, {
     className: z,
-    "data-tooltip": "width" === u ? _$$t("fullscreen.properties_panel.transform_panel.width") : _$$t("fullscreen.properties_panel.transform_panel.height"),
+    "data-tooltip": "width" === u ? getI18nString("fullscreen.properties_panel.transform_panel.width") : getI18nString("fullscreen.properties_panel.transform_panel.height"),
     "data-tooltip-type": Ib.TEXT,
     dataTestId: `scale_panel.${u}`,
     disabled: e,
@@ -66,7 +66,7 @@ function f({
     ...x,
     children: jsx("span", {
       className: `${QK} svg`,
-      children: "width" === u ? tx("fullscreen.properties_panel.transform_panel.w") : tx("fullscreen.properties_panel.transform_panel.h")
+      children: "width" === u ? renderI18nText("fullscreen.properties_panel.transform_panel.w") : renderI18nText("fullscreen.properties_panel.transform_panel.h")
     })
   });
 }
@@ -106,11 +106,11 @@ function A(e) {
 }
 export function $$y0(e) {
   return jsx(fn, {
-    leftLabel: _$$t("fullscreen.properties_panel.transform_panel.width"),
+    leftLabel: getI18nString("fullscreen.properties_panel.transform_panel.width"),
     leftInput: jsx(_, {
       ...e
     }),
-    rightLabel: _$$t("fullscreen.properties_panel.transform_panel.height"),
+    rightLabel: getI18nString("fullscreen.properties_panel.transform_panel.height"),
     rightInput: jsx(A, {
       ...e
     }),

@@ -1,16 +1,16 @@
 import { throwTypeError } from "../figma_app/465776";
 import { xH, Uz } from "../905/63728";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 function s(e) {
   switch (e) {
     case xH.CONTROL:
-      return Ay.mac ? "\u2303" : "Ctrl";
+      return BrowserInfo.mac ? "\u2303" : "Ctrl";
     case xH.ALT:
-      return Ay.mac ? "\u2325" : "Alt";
+      return BrowserInfo.mac ? "\u2325" : "Alt";
     case xH.SHIFT:
       return "\u21E7";
     case xH.META:
-      return Ay.mac ? "\u2318" : "Ctrl";
+      return BrowserInfo.mac ? "\u2318" : "Ctrl";
     default:
       throwTypeError(e);
   }

@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { t_, md } from "../figma_app/27355";
+import { t_, useAtomWithSubscription } from "../figma_app/27355";
 import { Y5 } from "../figma_app/455680";
 let s = t_(() => Y5.isReady() || Y5.onReady());
 export function $$o0() {
-  md(s);
+  useAtomWithSubscription(s);
 }
 export function $$l1() {
   let [e, t] = useState(!1);

@@ -1,9 +1,9 @@
 import { useCallback } from "react";
 import { useDispatch, useSelector, useStore } from "../vendor/514228";
 import { _gJ, Oin, FAf } from "../figma_app/763686";
-import { fp, md } from "../figma_app/27355";
-import { sn } from "../905/542194";
-import { m as _$$m } from "../905/717445";
+import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
+import { globalPerfTimer } from "../905/542194";
+import { getFilteredFeatureFlags } from "../905/717445";
 import { Rs } from "../figma_app/288654";
 import { _I, U4 } from "../figma_app/473493";
 import { Ym } from "../figma_app/806075";
@@ -23,7 +23,7 @@ import { iZ } from "../905/372672";
 import { dDF } from "../figma_app/43951";
 import { my, uF, M5 } from "../figma_app/300692";
 import { Nb, V_, Eg } from "../figma_app/841351";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { lF } from "../figma_app/915202";
 import { FW } from "../figma_app/155287";
 import { cq } from "../905/794154";
@@ -32,22 +32,22 @@ import { R as _$$R } from "../905/300969";
 import { c as _$$c2 } from "../905/580030";
 export function $$k0(e, t) {
   let r = useDispatch();
-  let [k, M] = fp(_$$R);
-  let [F, j] = fp(_$$c2);
+  let [k, M] = useAtomValueAndSetter(_$$R);
+  let [F, j] = useAtomValueAndSetter(_$$c2);
   let U = tS() ?? "";
   let B = Rs(dDF, {
     key: U
   })?.data?.file?.hasPermission;
   let G = _I();
   let V = U4();
-  let H = md(_$$d)?.data;
-  let [z, W] = fp(_$$t);
+  let H = useAtomWithSubscription(_$$d)?.data;
+  let [z, W] = useAtomValueAndSetter(_$$t);
   let K = useSelector(e => e.selectedView);
   let Y = useSelector(e => e.mirror.appModel.prototypeCanvasUiVisible);
   let $ = !iZ();
   let X = E3();
-  let q = X === nT.DevHandoff;
-  let J = X === nT.Illustration;
+  let q = X === FEditorType.DevHandoff;
+  let J = X === FEditorType.Illustration;
   let Z = q ? "handoff" : J ? "illustration" : "design";
   let Q = useStore();
   let ee = _$$W();
@@ -59,8 +59,8 @@ export function $$k0(e, t) {
     if (close(), "handoff" === n) {
       let n;
       if (!V) return !1;
-      sn.start("switch_to_inspect_mode.left_panel_tti");
-      sn.start("switch_to_inspect_mode.right_panel_tti");
+      globalPerfTimer.start("switch_to_inspect_mode.left_panel_tti");
+      globalPerfTimer.start("switch_to_inspect_mode.right_panel_tti");
       let i = Q.getState();
       if (i.universalInsertModal.showing && (ax(_gJ.PLUGIN), i.universalInsertModal.fdPreviewResource)) {
         let e = my(i.universalInsertModal.fdPreviewResource.id, i.publishedPlugins);
@@ -73,7 +73,7 @@ export function $$k0(e, t) {
       r(sf({
         ...K,
         view: "fullscreen",
-        editorType: nT.DevHandoff
+        editorType: FEditorType.DevHandoff
       }));
       "fullscreen" === K.view && K.compareVersionId && (r(Y6({
         mode: Oin.KEEP_UI,
@@ -85,25 +85,25 @@ export function $$k0(e, t) {
       n && r(IN({
         fdPreviewResource: n
       }));
-      Ym(i, nT.DevHandoff, e, t, ee);
+      Ym(i, FEditorType.DevHandoff, e, t, ee);
       return !0;
     }
     if ("illustration" === n) {
-      if (!_$$m().ce_il_root) return !1;
-      sn.start("switch_to_illustration_mode.right_panel_tti");
-      sn.start("switch_to_illustration_mode.toolbelt_animation");
+      if (!getFilteredFeatureFlags().ce_il_root) return !1;
+      globalPerfTimer.start("switch_to_illustration_mode.right_panel_tti");
+      globalPerfTimer.start("switch_to_illustration_mode.toolbelt_animation");
       let n = Q.getState();
       r(sf({
         ...K,
         view: "fullscreen",
-        editorType: nT.Illustration
+        editorType: FEditorType.Illustration
       }));
       r(_$$r);
-      Ym(n, nT.Illustration, e, t, ee);
+      Ym(n, FEditorType.Illustration, e, t, ee);
       return !0;
     }
     {
-      sn.start("switch_to_design_mode.toolbelt_animation");
+      globalPerfTimer.start("switch_to_design_mode.toolbelt_animation");
       let n = Q.getState();
       if (tw()?.getCopy() === _gJ.PLUGIN && n.universalInsertModal.fdPreviewResource) {
         let e = my(n.universalInsertModal.fdPreviewResource.id, n.publishedPlugins);
@@ -117,7 +117,7 @@ export function $$k0(e, t) {
       r(sf({
         ...K,
         view: "fullscreen",
-        editorType: nT.Design,
+        editorType: FEditorType.Design,
         devModeFocusId: void 0,
         showDevModeVariablesTable: void 0
       }));
@@ -125,7 +125,7 @@ export function $$k0(e, t) {
       G || (H || r(_$$b({
         dev_mode_should_see_paywall_reminder: !0
       })), B || NT(FAf.INSPECT), W(_$$c.DEFAULT));
-      Ym(Q.getState(), nT.Design, e, t, ee);
+      Ym(Q.getState(), FEditorType.Design, e, t, ee);
       return !0;
     }
   }, [M, j, $, Z, V, Q, r, K, Y, e, t, ee, G, H, B, W, close]);

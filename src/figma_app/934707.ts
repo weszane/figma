@@ -1,8 +1,8 @@
 import { NLJ } from "../figma_app/763686";
 import { NC } from "../905/17179";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { XHR } from "../905/910117";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { _ as _$$_ } from "../905/170564";
 import { Q } from "../905/463586";
 import { F } from "../905/302958";
@@ -23,7 +23,7 @@ let g = e => {
   });
 };
 let f = (e, t, r, n) => {
-  az.trackDefinedMetric("notification.catfile_confirmation_toast_shown", {
+  analyticsEventManager.trackDefinedMetric("notification.catfile_confirmation_toast_shown", {
     user_id: e,
     file_key: t,
     experiment_name: r,
@@ -35,11 +35,11 @@ let $$E0 = nF((e, t) => {
   let n = d1(r);
   if (n && t.fileKey === n.key && r?.user?.id === t.userId) {
     let r = {
-      text: _$$t("comments.manage"),
+      text: getI18nString("comments.manage"),
       action: () => g(e)
     };
     f(t.userId, t.fileKey, t.experimentName, "manage");
-    let n = "all" === t.preference ? _$$t("comments.you_will_be_notified_about_file_comments") : _$$t("comments.you_will_be_notified_about_replies_and_at_mentions");
+    let n = "all" === t.preference ? getI18nString("comments.you_will_be_notified_about_file_comments") : getI18nString("comments.you_will_be_notified_about_replies_and_at_mentions");
     e.dispatch(F.enqueue({
       message: n,
       type: "comments-opted-in",
@@ -64,7 +64,7 @@ let $$b3 = nF((e, t) => {
   if (n && t.fileKey === n.key && r?.user?.id === t.userId) {
     let r = y(t.fileKey, t.experimentName);
     let n = {
-      text: _$$t("comments.turn_on"),
+      text: getI18nString("comments.turn_on"),
       action: () => {
         r(!0);
       }
@@ -72,7 +72,7 @@ let $$b3 = nF((e, t) => {
     f(t.userId, t.fileKey, t.experimentName, t.toastType);
     setTimeout(() => {
       e.dispatch(F.enqueue({
-        message: _$$t("comments.get_notified_about_all_comments_prompt"),
+        message: getI18nString("comments.get_notified_about_all_comments_prompt"),
         type: "get_notified_about_all_comments_prompt",
         button: n,
         onDismiss: () => r(!1),
@@ -91,7 +91,7 @@ let $$T2 = nF((e, t) => {
       e.dispatch(Q.enqueue({
         notification: {
           type: _$$_.SUBSCRIBED_TO_COMMENT_NOTIFICATIONS,
-          message: _$$t("comments.get_notified_about_all_comments_prompt"),
+          message: getI18nString("comments.get_notified_about_all_comments_prompt"),
           acceptCallback: () => r(!0),
           dismissCallback: () => r(!1)
         }
@@ -104,10 +104,10 @@ let $$I4 = nF((e, t) => {
   let n = d1(r);
   if (n && t.fileKey === n.key && r?.user?.id === t.userId) {
     let t = {
-      text: _$$t("comments.manage"),
+      text: getI18nString("comments.manage"),
       action: () => g(e)
     };
-    let r = _$$t("dev_mode.you_will_be_notified_about_status_changes");
+    let r = getI18nString("dev_mode.you_will_be_notified_about_status_changes");
     e.dispatch(F.enqueue({
       message: r,
       type: "dev-mode-opted-in",

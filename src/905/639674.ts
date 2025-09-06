@@ -4,7 +4,7 @@ import { useDispatch } from "../vendor/514228";
 import { $n } from "../905/521428";
 import { getFeatureFlags } from "../905/601108";
 import { e2 } from "../figma_app/637027";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { F } from "../905/302958";
 import { _l } from "../905/105972";
 export function $$p0(e) {
@@ -37,14 +37,14 @@ export function $$p0(e) {
             message: "Performance profiling is only available in Chromium browsers."
           })));
         },
-        children: tx("bug_reporter.profiler.start")
+        children: renderI18nText("bug_reporter.profiler.start")
       }), jsx($n, {
         variant: "secondary",
         disabled: !p,
         onClick: h,
-        children: tx("bug_reporter.profiler.stop")
+        children: renderI18nText("bug_reporter.profiler.stop")
       })]
-    }), p && tx("bug_reporter.profiler.collecting_profile")]
+    }), p && renderI18nText("bug_reporter.profiler.collecting_profile")]
   });
 }
 export const J = $$p0;

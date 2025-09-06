@@ -10,11 +10,11 @@ import { hC } from "../figma_app/901889";
 import { Rs } from "../figma_app/288654";
 import { tT } from "../905/723791";
 import { r as _$$r } from "../905/520829";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { kt } from "../figma_app/858013";
 import { lv } from "../figma_app/204891";
 import { V } from "../figma_app/385855";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { q5 } from "../figma_app/516028";
 import { SPC } from "../figma_app/43951";
 import { S as _$$S } from "../figma_app/787550";
@@ -65,7 +65,7 @@ export function $$w0({
             noBorder: !0
           })
         }), jsx(_$$E, {
-          "aria-label": _$$t("pages_panel.summary_preview.update_preview"),
+          "aria-label": getI18nString("pages_panel.summary_preview.update_preview"),
           className: u()("page_summary_preview--refreshButton--XAvPe", {
             "page_summary_preview--alwaysShowRefreshButton--M3IDC": !l
           }),
@@ -79,7 +79,7 @@ export function $$w0({
             }));
           },
           htmlAttributes: {
-            "data-tooltip": _$$t("pages_panel.summary_preview.update_preview"),
+            "data-tooltip": getI18nString("pages_panel.summary_preview.update_preview"),
             "data-tooltip-type": "text",
             "data-testid": "RefreshPreviewButton"
           },
@@ -115,7 +115,7 @@ export function $$j1(e) {
       let t = JSON.parse(e.file.pagesSignedThumbnailData.data);
       return S.parse(t);
     } catch (i) {
-      $D(_$$e.FIGJAM, Error(`PageSummaryPreview: Failed to parse page thumbnail data. Error: ${i.message}.`), {
+      reportError(_$$e.FIGJAM, Error(`PageSummaryPreview: Failed to parse page thumbnail data. Error: ${i.message}.`), {
         tags: {
           fileKey: t?.key
         },

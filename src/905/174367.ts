@@ -11,7 +11,7 @@ import { L } from "../905/857916";
 import { Y } from "../905/506207";
 import { s as _$$s } from "../cssbuilder/589278";
 import { c as _$$c } from "../figma_app/617427";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { fu } from "../figma_app/831799";
 import { B2, al, b6 } from "../figma_app/681697";
@@ -44,7 +44,7 @@ function E({
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$t("file_browser.file_import_view.import")
+          children: getI18nString("file_browser.file_import_view.import")
         })
       }), jsx(nB, {
         children: jsxs("div", {
@@ -55,7 +55,7 @@ function E({
               variant: "default",
               icon: jsx(L, {}),
               children: jsx(Q, {
-                children: _$$t("resource_connection.when_you_import_files_anyone_in_the_connected_project_can_access_them")
+                children: getI18nString("resource_connection.when_you_import_files_anyone_in_the_connected_project_can_access_them")
               })
             })
           }), jsxs("div", {
@@ -70,20 +70,20 @@ function E({
               className: _$$s.flex.flexColumn.itemsCenter.alignCenter.gap4.lh24.$,
               children: [jsx("span", {
                 className: _$$s.textBodyLargeStrong.$,
-                children: tx("file_browser.file_import_view.import_header_with_pptx")
+                children: renderI18nText("file_browser.file_import_view.import_header_with_pptx")
               }), jsx("span", {
                 className: _$$s.textBodyLarge.colorTextSecondary.$,
                 style: sx.add({
                   width: "calc(100% * 2/3)"
                 }).$,
-                children: tx("file_browser.file_import_view.import_description_with_pptx")
+                children: renderI18nText("file_browser.file_import_view.import_description_with_pptx")
               })]
             }), jsx("div", {
               className: _$$s.flex.flexRow.justifyCenter.gap8.$,
               children: jsx(_$$c, {
                 variant: "primary",
                 onClick: i,
-                children: tx("file_browser.file_import_view.import_from_computer")
+                children: renderI18nText("file_browser.file_import_view.import_from_computer")
               })
             })]
           })]

@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
-import { eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { b } from "../905/985254";
 import { f } from "../905/940356";
 function l(e) {
@@ -35,8 +35,8 @@ function c(e, t, r) {
   Object.keys(d).length > 0 && e(b(d));
 }
 export function $$u1(e) {
-  if (!eD) return;
-  let t = eD?.getLegacyColorSpacePreference();
+  if (!desktopAPIInstance) return;
+  let t = desktopAPIInstance?.getLegacyColorSpacePreference();
   c(e.dispatch, {
     isDefault: !!d(e, l("default")),
     isUnmanaged: !!d(e, l("unmanaged")),

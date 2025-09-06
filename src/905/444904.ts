@@ -2,14 +2,14 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "../vendor/514228";
 import { Pw } from "../905/521428";
 import { N as _$$N } from "../905/438674";
-import { az, sx } from "../905/449184";
+import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { Ay } from "../905/612521";
 import { h as _$$h } from "../905/207101";
 import { Rs } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { u as _$$u } from "../905/684425";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { to } from "../905/156213";
 import { TA } from "../905/372672";
 import { M9q, NSA } from "../figma_app/43951";
@@ -48,7 +48,7 @@ export function $$I0({
     });
   }
   return (_$$h(() => {
-    az.trackDefinedEvent("mfa.modal_shown", {
+    analyticsEventManager.trackDefinedEvent("mfa.modal_shown", {
       orgId: t.id,
       userId: E ?? void 0,
       fileKey: I
@@ -57,8 +57,8 @@ export function $$I0({
     className: _$$s.zIndex0.$,
     children: jsx(_$$u, {
       headerImage: jsx(P, {}),
-      headerText: N ? _$$t("mfa_required_modal.regained_access_to_file.title") : _$$t("mfa_required_modal.mfa_enabled.title"),
-      secondaryText: e ? _$$t("mfa_required_modal.mfa_enabled.subtile_for_file_browser") : _$$t("mfa_required_modal.mfa_enabled.subtile"),
+      headerText: N ? getI18nString("mfa_required_modal.regained_access_to_file.title") : getI18nString("mfa_required_modal.mfa_enabled.title"),
+      secondaryText: e ? getI18nString("mfa_required_modal.mfa_enabled.subtile_for_file_browser") : getI18nString("mfa_required_modal.mfa_enabled.subtile"),
       unblockFileBrowserSidebar: e,
       children: jsx(Pw, {
         variant: "primary",
@@ -66,17 +66,17 @@ export function $$I0({
         onClick: () => {
           Ay.reload("User set up MFA. Reloading to reflect changes.");
         },
-        children: tx("mfa_required_modal.mfa_enabled.reload")
+        children: renderI18nText("mfa_required_modal.mfa_enabled.reload")
       })
     })
   }) : jsx("div", {
     className: _$$s.zIndex0.$,
     children: jsxs(_$$u, {
       headerImage: jsx(P, {}),
-      headerText: _$$t("mfa_required_modal.title", {
+      headerText: getI18nString("mfa_required_modal.title", {
         orgName: t.name
       }),
-      secondaryText: _$$t("mfa_required_modal.subtitle", {
+      secondaryText: getI18nString("mfa_required_modal.subtitle", {
         orgName: t.name
       }),
       unblockFileBrowserSidebar: e,
@@ -84,21 +84,21 @@ export function $$I0({
         variant: "primary",
         type: "submit",
         onClick: () => {
-          sx("Two-factor setup started");
+          trackEventAnalytics("Two-factor setup started");
           E ? x(to({
             type: _$$t2
           })) : x(to({
             type: J
           }));
         },
-        children: tx("mfa_required_modal.cta")
+        children: renderI18nText("mfa_required_modal.cta")
       }), jsx("div", {
         className: _$$s.pt20.font13.justifyCenter.fontNormal.$,
         children: jsx(_$$N, {
           newTab: !0,
           href: "https://help.figma.com/hc/articles/360039817634-Enable-two-factor-authentication-2FA",
           trusted: !0,
-          children: tx("general.learn_more")
+          children: renderI18nText("general.learn_more")
         })
       }), i]
     })

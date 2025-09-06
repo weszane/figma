@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, useState, useRef, useMemo } from "react";
 import { getFeatureFlags } from "../905/601108";
-import { fp } from "../figma_app/27355";
+import { useAtomValueAndSetter } from "../figma_app/27355";
 import s from "classnames";
 import { tH } from "../905/751457";
 import { s4, Dm } from "../figma_app/8833";
@@ -23,7 +23,7 @@ export function $$p0({
 function g({
   entryPoint: e
 }) {
-  let [t, n] = fp(eE);
+  let [t, n] = useAtomValueAndSetter(eE);
   useEffect(() => {
     n(!!wh());
   }, []);
@@ -33,7 +33,7 @@ function g({
   }) : null;
 }
 function f() {
-  let [e, t] = fp(a4);
+  let [e, t] = useAtomValueAndSetter(a4);
   let [n, i] = useState([]);
   let s = useRef(null);
   let l = s.current && s.current.value.length > 0;

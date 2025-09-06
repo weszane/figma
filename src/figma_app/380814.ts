@@ -18,9 +18,9 @@ import y from "../vendor/239910";
 import { parsePxNumber } from "../figma_app/783094";
 import { h as _$$h } from "../905/207101";
 import { Pt, of } from "../figma_app/806412";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { L as _$$L } from "../905/408237";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Y } from "../905/830372";
 import { Oe } from "../figma_app/933328";
 import { BQ, yp, rW } from "../figma_app/852050";
@@ -77,14 +77,14 @@ export function $$W7({
       varValue: i
     }) {
       if (!CWU.isValidVariableName(n, r)) {
-        x1("variables", "Attempted to submit variable name that is invalid", {
+        logError("variables", "Attempted to submit variable name that is invalid", {
           varName: n,
           _varSetID: r
         });
         return;
       }
       l7.user("create-variable", () => {
-        let t = r ?? CWU.createVariableSet(_$$t("variables.variable_collection"), G6k.AUTOMATIC_FIRST_COLLECTION);
+        let t = r ?? CWU.createVariableSet(getI18nString("variables.variable_collection"), G6k.AUTOMATIC_FIRST_COLLECTION);
         let a = CWU.createVariable(n, t, i, HS4.VARIABLE_PICKER);
         let o = CWU.getLocalVariableInfo(a);
         assertNotNullish(o, `variable with id ${a} not found`);
@@ -111,7 +111,7 @@ function K({
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: tx("variables.create_modal.title")
+          children: renderI18nText("variables.create_modal.title")
         })
       }), jsx(nB, {
         padding: 0,
@@ -222,10 +222,10 @@ export function $$J0({
         disabled: !d,
         recordingKey: Pt(r, "createButton"),
         htmlAttributes: {
-          "data-tooltip": _$$t("variables.create_modal.invalid_variable_name"),
+          "data-tooltip": getI18nString("variables.create_modal.invalid_variable_name"),
           "data-tooltip-type": d ? void 0 : Ib.TEXT
         },
-        children: tx("variables.create_modal.create_button")
+        children: renderI18nText("variables.create_modal.create_button")
       })
     })]
   });
@@ -265,7 +265,7 @@ export function $$Z1({
   let v = $$q5(s.varValue, r, b);
   return jsxs(Fragment, {
     children: [o.length > 0 && !!p && jsx($$$3, {
-      label: tx("variables.create_modal.collection_label"),
+      label: renderI18nText("variables.create_modal.collection_label"),
       labelFor: "variable-create-modal-variable-set-select",
       labelId: l,
       input: jsx("div", {
@@ -281,7 +281,7 @@ export function $$Z1({
         })
       })
     }), jsx($$$3, {
-      label: tx("variables.create_modal.name_label"),
+      label: renderI18nText("variables.create_modal.name_label"),
       input: jsx(_$$L, {
         className: _Z,
         name: "variableName",
@@ -296,7 +296,7 @@ export function $$Z1({
         autoFocus: !0
       })
     }), jsx($$$3, {
-      label: tx("variables.create_modal.value_label"),
+      label: renderI18nText("variables.create_modal.value_label"),
       input: jsx("div", {
         className: hF,
         children: jsxs(Cr, {
@@ -311,12 +311,12 @@ export function $$Z1({
             recordingKey: Pt(e, "variableValueInput")
           }), T && jsx(_$$K, {
             type: "button",
-            "aria-label": _$$t("variables.authoring_modal.table.detach_alias"),
+            "aria-label": getI18nString("variables.authoring_modal.table.detach_alias"),
             onClick: () => b(T),
             recordingKey: Pt(e, "detachVariableButton"),
             htmlAttributes: {
               "data-tooltip-type": Ib.TEXT,
-              "data-tooltip": _$$t("variables.authoring_modal.table.detach_alias")
+              "data-tooltip": getI18nString("variables.authoring_modal.table.detach_alias")
             },
             children: jsx(_$$U, {})
           })]

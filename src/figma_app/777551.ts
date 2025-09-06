@@ -1,7 +1,7 @@
 import { throwTypeError, returnSecond } from "../figma_app/465776";
 import i from "../vendor/197638";
-import { sx } from "../905/449184";
-import { tx } from "../905/303541";
+import { trackEventAnalytics } from "../905/449184";
+import { renderI18nText } from "../905/303541";
 import { k } from "../905/22009";
 import { L } from "../905/178090";
 import { vt, U$, Dm, GT } from "../figma_app/306946";
@@ -22,21 +22,21 @@ export function $$y6(e, t) {
   switch (e) {
     case vt.WIDGET:
     case vt.PLUGIN:
-      if (t) return tx("community.using.try_in");
-      return tx("community.using.open_in");
+      if (t) return renderI18nText("community.using.try_in");
+      return renderI18nText("community.using.open_in");
     case vt.FIGJAM_TEMPLATE:
-      return tx("community.duplicate.open_in_figjam");
+      return renderI18nText("community.duplicate.open_in_figjam");
     case vt.SLIDE_TEMPLATE:
     case vt.SITE_TEMPLATE:
     case vt.COOPER_TEMPLATE_FILE:
     case vt.COOPER_TEMPLATE_ASSET:
-      return tx("community.duplicate.use_template");
+      return renderI18nText("community.duplicate.use_template");
     case vt.FIGMAKE_TEMPLATE:
-      return tx("community.duplicate.remix");
+      return renderI18nText("community.duplicate.remix");
     case vt.UI_KIT:
     case vt.DESIGN_TEMPLATE:
     case vt.PROTOTYPE:
-      return tx("community.duplicate.open_in_figma");
+      return renderI18nText("community.duplicate.open_in_figma");
     default:
       throwTypeError(e);
   }
@@ -61,48 +61,48 @@ export function $$I12(e) {
 export function $$S8(e) {
   if (XW(e)) switch (e.resource_type) {
     case vt.FIGJAM_TEMPLATE:
-      return tx("community.detail_view.figjam_board");
+      return renderI18nText("community.detail_view.figjam_board");
     case vt.UI_KIT:
     case vt.DESIGN_TEMPLATE:
-      return tx("community.detail_view.design_file");
+      return renderI18nText("community.detail_view.design_file");
     case vt.PROTOTYPE:
-      return tx("community.detail_view.prototype");
+      return renderI18nText("community.detail_view.prototype");
     case vt.SLIDE_TEMPLATE:
-      return tx("community.detail_view.slide_template");
+      return renderI18nText("community.detail_view.slide_template");
     case vt.WIDGET:
-      return tx("community.detail_view.widget");
+      return renderI18nText("community.detail_view.widget");
     case vt.PLUGIN:
-      return tx("community.detail_view.plugin");
+      return renderI18nText("community.detail_view.plugin");
     case vt.SITE_TEMPLATE:
-      return tx("community.detail_view.site_template");
+      return renderI18nText("community.detail_view.site_template");
     case vt.COOPER_TEMPLATE_FILE:
     case vt.COOPER_TEMPLATE_ASSET:
-      return tx("community.detail_view.buzz_template");
+      return renderI18nText("community.detail_view.buzz_template");
     case vt.FIGMAKE_TEMPLATE:
-      return tx("community.detail_view.figmake_template");
+      return renderI18nText("community.detail_view.figmake_template");
     default:
       return returnSecond(e.resource_type, "");
   } else {
     if (U(e)) switch (e.viewer_mode) {
       case FTemplateCategoryType.WHITEBOARD:
-        return tx("community.detail_view.figjam_board");
+        return renderI18nText("community.detail_view.figjam_board");
       case FTemplateCategoryType.CANVAS:
       case FTemplateCategoryType.LIBRARY:
-        return tx("community.detail_view.design_file");
+        return renderI18nText("community.detail_view.design_file");
       case FTemplateCategoryType.PROTOTYPE:
-        return tx("community.detail_view.prototype");
+        return renderI18nText("community.detail_view.prototype");
       case FTemplateCategoryType.SLIDE_TEMPLATE:
-        return tx("community.detail_view.slide_template");
+        return renderI18nText("community.detail_view.slide_template");
       case FTemplateCategoryType.SITE_TEMPLATE:
-        return tx("community.detail_view.site_template");
+        return renderI18nText("community.detail_view.site_template");
       case FTemplateCategoryType.COOPER_TEMPLATE_FILE:
-        return tx("community.detail_view.buzz_template");
+        return renderI18nText("community.detail_view.buzz_template");
       case FTemplateCategoryType.FIGMAKE_TEMPLATE:
-        return tx("community.detail_view.figmake_template");
+        return renderI18nText("community.detail_view.figmake_template");
       default:
         return returnSecond(e.viewer_mode, "");
     }
-    return I0(e) ? tx("community.detail_view.plugin") : xQ(e) ? tx("community.detail_view.widget") : tx("community.detail_view.design_file");
+    return I0(e) ? renderI18nText("community.detail_view.plugin") : xQ(e) ? renderI18nText("community.detail_view.widget") : renderI18nText("community.detail_view.design_file");
   }
 }
 export function $$v0(e) {
@@ -148,7 +148,7 @@ export function $$P9(...e) {
     trackingEventName,
     trackingProperties
   } = $$L13(...e);
-  sx(trackingEventName, trackingProperties);
+  trackEventAnalytics(trackingEventName, trackingProperties);
 }
 export function $$D15(e, t) {
   if (t === k.Editors.PROTOTYPE) return [vt.PROTOTYPE];

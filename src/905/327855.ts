@@ -3,24 +3,24 @@ import { glU, jXp, Oin, SIf, FAf, CWU, xae, btW, X3B } from "../figma_app/763686
 import { l7 } from "../905/189185";
 import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
-import { sx } from "../905/449184";
-import { eD } from "../figma_app/876459";
+import { atomStoreManager } from "../figma_app/27355";
+import { trackEventAnalytics } from "../905/449184";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { Mx } from "../905/165290";
 import { Gl } from "../905/612521";
 import { w5 } from "../figma_app/749805";
 import { isLocalDevOnCluster } from "../figma_app/169182";
-import { fm } from "../905/236856";
+import { delay } from "../905/236856";
 import { XHRError, XHR } from "../905/910117";
 import { serializeQuery } from "../905/634134";
-import { kF } from "../905/11";
-import { x1, Lo, xi } from "../905/714362";
+import { setSentryTag } from "../905/11";
+import { logError, logInfo, logWarning } from "../905/714362";
 import { SH } from "../figma_app/141320";
 import { g as _$$g } from "../905/880308";
 import { yp } from "../905/138461";
 import { DI } from "../figma_app/687776";
 import { s as _$$s } from "../905/573154";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { b as _$$b } from "../905/620668";
 import { Lm, mF } from "../figma_app/755939";
 import { Ym } from "../figma_app/806075";
@@ -44,13 +44,13 @@ import { ds as _$$ds } from "../905/87821";
 import { NT } from "../figma_app/741237";
 import { M4 } from "../905/713695";
 import { w2, i_ } from "../905/187165";
-import { nT, xq, oD, Nw, fP, wN } from "../figma_app/53721";
+import { FEditorType, mapEditorTypeToYF, mapEditorTypeToFileType, isWhiteboardOrDesignOrIllustration, doesEditorTypeMatchFileType, mapFileTypeToEditorType } from "../figma_app/53721";
 import { m as _$$m } from "../905/84999";
 import { j as _$$j } from "../905/694231";
 import { l5 } from "../figma_app/728657";
 import { dL } from "../figma_app/825489";
 import { ag, u6, p9, Jt, yf } from "../905/509613";
-import { V6 } from "../905/298923";
+import { setLastUsedEditorType } from "../905/298923";
 import { lA } from "../figma_app/325537";
 import { W as _$$W } from "../905/442612";
 import { i as _$$i } from "../figma_app/43065";
@@ -81,7 +81,7 @@ function y(e) {
 }
 class b {
   constructor(e) {
-    this._resolveCancelPromise = () => { };
+    this._resolveCancelPromise = () => {};
     this._cancelPromise = new Promise(e => {
       this._resolveCancelPromise = e;
     });
@@ -95,7 +95,7 @@ class b {
   }
   async startRequest(e) {
     let t = 0;
-    for (; ;) {
+    for (;;) {
       let i = A;
       try {
         return await Promise.race([e(), this._cancelPromise]);
@@ -104,17 +104,17 @@ class b {
           if (e.status >= 400 && e.status < 500) throw e;
         } else throw e;
       }
-      let n = await Promise.race([this._cancelPromise, fm(Math.min(500 * Math.pow(2, t), 6e4)), i]);
+      let n = await Promise.race([this._cancelPromise, delay(Math.min(500 * Math.pow(2, t), 6e4)), i]);
       if (n && y(n)) return n;
       t++;
     }
   }
 }
 export function $$eb11(e, t) {
-  return navigator.onLine ? e.message ? e.message : t : _$$t("user_facing_error.offline");
+  return navigator.onLine ? e.message ? e.message : t : getI18nString("user_facing_error.offline");
 }
 export function $$ev9(e) {
-  return $$eb11(e, _$$t("user_facing_error.new_document"));
+  return $$eb11(e, getI18nString("user_facing_error.new_document"));
 }
 export function $$eI10(e, t, i) {
   let n = JSON.stringify(Gl() || {});
@@ -125,7 +125,7 @@ export function $$eI10(e, t, i) {
     source: r,
     authenticatedUserIds: t.authedUsers.orderedIds.filter(e => e !== t.user?.id)
   });
-  "fullscreen" === t.selectedView.view && (t.selectedView.editorType === nT.Design || t.selectedView.editorType === nT.DevHandoff || t.selectedView.editorType === nT.Illustration) && Ym(t, t.selectedView.editorType, i ? "stored" : "init");
+  "fullscreen" === t.selectedView.view && (t.selectedView.editorType === FEditorType.Design || t.selectedView.editorType === FEditorType.DevHandoff || t.selectedView.editorType === FEditorType.Illustration) && Ym(t, t.selectedView.editorType, i ? "stored" : "init");
 }
 export async function $$eE1(e, t, i) {
   let n = await XHR.post("/api/files/create", t, {
@@ -171,8 +171,8 @@ export function $$eS6({
   isNewFile: r,
   state: a
 }) {
-  let s = eD && eD.getConcurrentLoadingTabsCount() || 0;
-  let o = eD && 0 === s || !document.hidden;
+  let s = desktopAPIInstance && desktopAPIInstance.getConcurrentLoadingTabsCount() || 0;
+  let o = desktopAPIInstance && 0 === s || !document.hidden;
   let {
     fileOpenIndex,
     isColdBoot
@@ -200,8 +200,8 @@ export async function $$ew5(e, t, i, n) {
   if (!o) return;
   {
     let e = await M4.fetchFile(t);
-    kF("file.key", e.key);
-    null === e.file_repo_id ? kF("branching", "not enabled") : (kF("branching_repo", e.file_repo_id), null === e.source_file_key ? kF("branching", "main branch") : kF("branching", "user branch"));
+    setSentryTag("file.key", e.key);
+    null === e.file_repo_id ? setSentryTag("branching", "not enabled") : (setSentryTag("branching_repo", e.file_repo_id), null === e.source_file_key ? setSentryTag("branching", "main branch") : setSentryTag("branching", "user branch"));
     $$eS6({
       fileKey: t,
       folderId: e.folder_id,
@@ -221,7 +221,7 @@ export async function $$ew5(e, t, i, n) {
     forceViewOnly: z4.getIsExtension()
   }));
   await Y5.loadAndStartFullscreenIfNecessary();
-  glU.setEditorType(xq(i));
+  glU.setEditorType(mapEditorTypeToYF(i));
   glU.setEditorTheme(r.theme.visibleTheme || "");
   let c = (await (n ? (async () => {
     let e = new b(() => _$$m.getFileMetadata({
@@ -237,8 +237,8 @@ export async function $$ew5(e, t, i, n) {
   $$eI10({
     key: t
   }, r);
-  _$$b(oD(i));
-  V6(i);
+  _$$b(mapEditorTypeToFileType(i));
+  setLastUsedEditorType(i);
   let m = {
     sharedFontsList: Mx(c.shared_fonts),
     localizedToUnlocalized: [],
@@ -274,11 +274,11 @@ export async function $$ew5(e, t, i, n) {
     team: h,
     userInitiated: !1
   }));
-  zl.set(ag, c.jubilee_tentative_plan_eligibility);
-  zl.set(u6, c.jubilee_tentative_user_eligibility);
-  zl.set(p9, c.jubilee_b);
-  zl.set(Jt, c.jubilee_eligibility_s);
-  zl.set(yf, new Set());
+  atomStoreManager.set(ag, c.jubilee_tentative_plan_eligibility);
+  atomStoreManager.set(u6, c.jubilee_tentative_user_eligibility);
+  atomStoreManager.set(p9, c.jubilee_b);
+  atomStoreManager.set(Jt, c.jubilee_eligibility_s);
+  atomStoreManager.set(yf, new Set());
   let f = await M4.fetchFile(t);
   let _ = e.getState();
   let A = _.folders[f.folder_id || ""];
@@ -310,12 +310,12 @@ export async function $$ew5(e, t, i, n) {
     hasEduGracePeriod: S.isInValidGracePeriod,
     isFavorited: !!T?.is_favorited
   });
-  Nw(i) && !fP(i, N.editorType) && (x1("new file", "editor type mismatch", {
+  isWhiteboardOrDesignOrIllustration(i) && !doesEditorTypeMatchFileType(i, N.editorType) && (logError("new file", "editor type mismatch", {
     requested: i,
     file: N.editorType
-  }), i = wN(N.editorType));
-  (i === nT.Sites || i === nT.Figmake) && glU.addNewFileDefaultResponsiveSet();
-  i === nT.Figmake && glU?.setEnabledFigmake(!0);
+  }), i = mapFileTypeToEditorType(N.editorType));
+  (i === FEditorType.Sites || i === FEditorType.Figmake) && glU.addNewFileDefaultResponsiveSet();
+  i === FEditorType.Figmake && glU?.setEnabledFigmake(!0);
   e.dispatch(OB({
     file: N,
     fullscreenEditorType: i
@@ -326,8 +326,8 @@ export async function $$ew5(e, t, i, n) {
     teamId: f.team_id
   }));
   let O = !!(c.is_team_template && LQ(r));
-  eD?.setIsLibrary(!!c.last_published_at);
-  eD?.setIsTeamTemplate(!!O);
+  desktopAPIInstance?.setIsLibrary(!!c.last_published_at);
+  desktopAPIInstance?.setIsTeamTemplate(!!O);
 }
 export async function $$eC4(e, t, i) {
   e.dispatch(Y6({
@@ -341,7 +341,7 @@ export async function $$eC4(e, t, i) {
   Y5.updateAppModel({
     themePreference: n
   });
-  glU.openEmptyFile(xq(t));
+  glU.openEmptyFile(mapEditorTypeToYF(t));
 }
 export function $$eT2(e) {
   let t = {};
@@ -364,28 +364,28 @@ export function $$eT2(e) {
 }
 async function ek(e, t, i, r, p) {
   let m;
-  if (zl.set(q7, !0), await $$eC4(e, wN(t.editorType), r), t.newFileDataLocalStorageKey && zl.set($K, t.newFileDataLocalStorageKey), "cooper" === t.editorType && Lm && mF) {
-    let e = zl.get(bW);
-    t.cooperTemplateLibraryKey ? zl.set(Lm, {
+  if (atomStoreManager.set(q7, !0), await $$eC4(e, mapFileTypeToEditorType(t.editorType), r), t.newFileDataLocalStorageKey && atomStoreManager.set($K, t.newFileDataLocalStorageKey), "cooper" === t.editorType && Lm && mF) {
+    let e = atomStoreManager.get(bW);
+    t.cooperTemplateLibraryKey ? atomStoreManager.set(Lm, {
       type: mF.TEMPLATES,
       libraryKey: t.cooperTemplateLibraryKey,
       parentView: {
         type: mF.ALL
       }
-    }) : e && zl.set(Lm, {
+    }) : e && atomStoreManager.set(Lm, {
       type: mF.ORG
     });
   }
   if ("slides" === t.editorType) {
     if (t.slidesAiNewFileData) {
-      let e = zl.get(s5);
-      zl.set(bY, {
+      let e = atomStoreManager.get(s5);
+      atomStoreManager.set(bY, {
         type: Vf.TEMPLATE_PICKER,
         figjamEntryPointData: e,
         source: t.slidesAiNewFileData.source
       });
     }
-    t.slideTemplateLibraryKey && zl.set(bY, {
+    t.slideTemplateLibraryKey && atomStoreManager.set(bY, {
       type: Vf.TEMPLATE,
       libraryKey: t.slideTemplateLibraryKey,
       parentView: {
@@ -393,8 +393,8 @@ async function ek(e, t, i, r, p) {
       }
     });
   }
-  zl.set(q7, !1);
-  p ? (await p.onConnectNewFile(t), await p.session()?.restoreAutosaveIfNeeded()) : Lo("new file", "failed to get autosave");
+  atomStoreManager.set(q7, !1);
+  p ? (await p.onConnectNewFile(t), await p.session()?.restoreAutosaveIfNeeded()) : logInfo("new file", "failed to get autosave");
   (t.nodeId || t.viewport) && glU.restorePageAndViewportFromURL(t.nodeId ?? null, t.viewport ?? null);
   let g = t;
   let f = () => (p?.fileCreationManager?.newFileInfo && (g = p?.fileCreationManager?.newFileInfo), g);
@@ -431,7 +431,7 @@ async function ek(e, t, i, r, p) {
     n.offlineFileCreated(e, o, t);
     m = s;
   } else {
-    Lo("new file", "Offline file creation not supported", {
+    logInfo("new file", "Offline file creation not supported", {
       editorType: t.editorType,
       autosaveState: p?.managerState
     });
@@ -441,7 +441,7 @@ async function ek(e, t, i, r, p) {
     })).data;
   }
   let v = m.meta.fig_file;
-  eD?.setUrl({
+  desktopAPIInstance?.setUrl({
     url: v.url,
     fileKey: v.key,
     oldLocalFileKey: p?.fileKey
@@ -457,7 +457,7 @@ async function ek(e, t, i, r, p) {
     userInitiated: !0
   })), v.name = g.fileName);
   let x = ex(e.dispatch, m, t.trackingInfo, e.getState());
-  if ("whiteboard" === t.editorType && (t.figjamAiNewFileData ? (zl.set(bJ), zl.set(Ac, t.figjamAiNewFileData.prompt), zl.set(D2, {
+  if ("whiteboard" === t.editorType && (t.figjamAiNewFileData ? (atomStoreManager.set(bJ), atomStoreManager.set(Ac, t.figjamAiNewFileData.prompt), atomStoreManager.set(D2, {
     fileKey: x,
     prompt: t.figjamAiNewFileData.prompt,
     useCaseCategory: t.figjamAiNewFileData.useCaseCategory,
@@ -466,7 +466,7 @@ async function ek(e, t, i, r, p) {
     entrypoint: t.figjamAiNewFileData.entrypoint,
     fromGenerateModalV2: !0,
     pageNodeId: "0:1"
-  })) : t.figjamMakeSomethingUseCase && zl.set(l5, t.figjamMakeSomethingUseCase)), "figmake" === t.editorType && t.figmakeInitialMessage && !getFeatureFlags().killswitch_make_initial_message && zl.set(lA, t.figmakeInitialMessage), "design" === t.editorType && t.initialLibKey) {
+  })) : t.figjamMakeSomethingUseCase && atomStoreManager.set(l5, t.figjamMakeSomethingUseCase)), "figmake" === t.editorType && t.figmakeInitialMessage && !getFeatureFlags().killswitch_make_initial_message && atomStoreManager.set(lA, t.figmakeInitialMessage), "design" === t.editorType && t.initialLibKey) {
     let i = _$$l(t.initialLibKey);
     e.dispatch(am({
       libraryFileSubscription: {
@@ -477,7 +477,7 @@ async function ek(e, t, i, r, p) {
       userInitiated: !0,
       fileSubscribedLibraryKeys: new Set()
     }));
-    sx("Library File Enabled", {
+    trackEventAnalytics("Library File Enabled", {
       fileKey: x,
       fileTeamId: g.team_id,
       fileOrgId: g.org_id,
@@ -490,12 +490,12 @@ async function ek(e, t, i, r, p) {
       tab: xae.ASSETS,
       persist: !0
     }));
-    zl.set(dL, i);
+    atomStoreManager.set(dL, i);
   }
-  Lo("new file", "Received file key for new file", {
+  logInfo("new file", "Received file key for new file", {
     fileKey: x
   });
-  await $$ew5(e, x, wN(t.editorType), A);
+  await $$ew5(e, x, mapFileTypeToEditorType(t.editorType), A);
   await p?.assignFileKeyForLocalFile(v.key);
   t.callback && t.callback(x);
   return {
@@ -503,8 +503,8 @@ async function ek(e, t, i, r, p) {
   };
 }
 (e => {
-  e.fileCreationStarted = function(e) {
-    sx("File Creation Start", {
+  e.fileCreationStarted = function (e) {
+    trackEventAnalytics("File Creation Start", {
       editorType: e.editorType,
       from: e.trackingInfo?.from,
       triggerElement: e.trackingInfo?.triggerElement,
@@ -512,18 +512,18 @@ async function ek(e, t, i, r, p) {
       offline: !navigator.onLine,
       webLocksAvailable: yp
     });
-    Lo("new file", "Creating a new file", {
+    logInfo("new file", "Creating a new file", {
       editorType: e.editorType,
       from: e.trackingInfo?.from,
       selectedView: e.trackingInfo?.selectedView?.view
     });
   };
-  e.offlineFileCreated = function(e, t, i) {
+  e.offlineFileCreated = function (e, t, i) {
     e > eR && (async () => {
       let n = ZG()?.session();
       let r = n ? await n.getNodeChangeCount().catch(() => 0) : 0;
       let a = GT();
-      sx("Offline File Creation", {
+      trackEventAnalytics("Offline File Creation", {
         editorType: i.editorType,
         requestDuration: t,
         requestAttempts: e,
@@ -532,16 +532,16 @@ async function ek(e, t, i, r, p) {
       }, {
         forwardToDatadog: !0
       });
-    })().catch(() => {}) ;
+    })().catch(() => {});
   };
-  e.fileCreationFailed = function(e, t, i, n, r) {
+  e.fileCreationFailed = function (e, t, i, n, r) {
     let a = t instanceof XHRError ? t.status : void 0;
-    x1("new file", "failed to create new file", {
+    logError("new file", "failed to create new file", {
       msg: e,
       status: a,
       hasPersistedUserChanges: i
     });
-    sx("File Creation Failure", {
+    trackEventAnalytics("File Creation Failure", {
       editorType: r.editorType,
       msg: e,
       status: a,
@@ -559,7 +559,7 @@ let eR = 2;
 export function $$eN8(e, t, i) {
   let a;
   if (aZ()) {
-    xi("new file", "File creation already in progress");
+    logWarning("new file", "File creation already in progress");
     return;
   }
   let s = E7();
@@ -568,12 +568,12 @@ export function $$eN8(e, t, i) {
   if (o) {
     let e = t.localFileKey ?? createLocalFileKey(_$$g);
     a = mu(e, o.id);
-  } else Lo("Autosave", "Not creating manager for logged out user");
+  } else logInfo("Autosave", "Not creating manager for logged out user");
   ek(e, t, s, i, a).catch(e => ({
     status: "error",
     error: e
   })).then(async i => {
-    if ("canceled" === i.status) await yn(); else if ("error" === i.status) {
+    if ("canceled" === i.status) await yn();else if ("error" === i.status) {
       let {
         error
       } = i;
@@ -581,7 +581,7 @@ export function $$eN8(e, t, i) {
       let d = !!(await a?.session()?.hasPersistedUserChanges());
       let c = d ? "show_banner" : "exit_editor";
       if (n.fileCreationFailed(l, error, d, c, t), "show_banner" === c) {
-        Lo("new file", "Leaving editor open because file has unsynced persisted changes.");
+        logInfo("new file", "Leaving editor open because file has unsynced persisted changes.");
         e.dispatch(_$$s.error(l));
         e.dispatch(JM());
       } else {
@@ -606,7 +606,7 @@ export function $$eN8(e, t, i) {
             team: i
           }
         }));
-        eD && (eD.showFileBrowser(l), eD.close({
+        desktopAPIInstance && (desktopAPIInstance.showFileBrowser(l), desktopAPIInstance.close({
           suppressReopening: !0,
           shouldForceClose: !0
         }));
@@ -615,14 +615,14 @@ export function $$eN8(e, t, i) {
     }
   }).$$finally(() => {
     UT();
-    Lo("new file", "finished creating new file");
+    logInfo("new file", "finished creating new file");
   });
   let l = e.getState().selectedView;
   e.dispatch(sf({
     view: "fullscreen",
     fileKey: void 0,
     framePresetName: t.framePresetName,
-    editorType: wN(t.editorType),
+    editorType: mapFileTypeToEditorType(t.editorType),
     canNavigateDesktopNewTab: t.allowOnDesktop,
     nodeId: t.nodeId,
     localFileName: t.fileName,
@@ -630,7 +630,7 @@ export function $$eN8(e, t, i) {
   }));
 }
 export function $$eP0(e, t) {
-  if (!eD) return;
+  if (!desktopAPIInstance) return;
   t.localFileKey || (t.localFileKey = createLocalFileKey(_$$g));
   let i = {
     ...$$eT2(t)
@@ -655,7 +655,7 @@ export function $$eP0(e, t) {
     callback: void 0
   };
   let d = "desktopNewTab" === e.getState().selectedView.view;
-  eD.createFile({
+  desktopAPIInstance.createFile({
     url: s.href,
     newFileInfo: l,
     editorType: t.editorType,
@@ -678,7 +678,7 @@ export function $$eO7(e) {
   }
 }
 export function $$eD3(e) {
-  return e === nT.DevHandoff ? "dev_mode" : void 0;
+  return e === FEditorType.DevHandoff ? "dev_mode" : void 0;
 }
 export const J5 = $$eP0;
 export const Sp = $$eE1;
@@ -691,4 +691,4 @@ export const rJ = $$eO7;
 export const $N = $$eN8;
 export const OX = $$ev9;
 export const BL = $$eI10;
-export const an = $$eb11; 
+export const an = $$eb11;

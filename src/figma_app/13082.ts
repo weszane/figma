@@ -3,7 +3,7 @@ import { useState } from "react";
 import { a as _$$a } from "../905/29104";
 import { N_ } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { Ib } from "../905/129884";
 import { JT, pY, rr, zw, LC, gj, Xy, KL, TJ, GI, IA, iP, d7, UW } from "../figma_app/632248";
 import { E } from "../905/719609";
@@ -12,10 +12,10 @@ export function $$p1({
   helpUrlVariant: t
 }) {
   let [r, p] = useState(!1);
-  let _ = _$$a() ? tx("qa.ai_beta") : _$$t("qa.ai");
+  let _ = _$$a() ? renderI18nText("qa.ai_beta") : getI18nString("qa.ai");
   return jsx(N_, {
     className: _$$s.hAuto.flexShrink0.$,
-    "data-tooltip": _$$t("qa.learn_more"),
+    "data-tooltip": getI18nString("qa.learn_more"),
     "data-tooltip-show-above": !0,
     "data-tooltip-type": Ib.TEXT,
     href: function (e) {

@@ -5,7 +5,7 @@ import { g as _$$g } from "../1250/701065";
 import { Ay } from "../905/612521";
 import { Ex, zE } from "../figma_app/919079";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { F } from "../905/302958";
 import { E } from "../905/984674";
 import { Oe } from "../905/34809";
@@ -33,9 +33,9 @@ export function $$w1(e) {
     } = useSelector(e => e.userFlags);
     let l = useCallback(() => {
       e(F.enqueue({
-        message: _$$t("file_browser.drafts_to_move.long_running_draft_migration"),
+        message: getI18nString("file_browser.drafts_to_move.long_running_draft_migration"),
         button: {
-          text: _$$t("file_browser.drafts_to_move.long_running_draft_migration_learn_more"),
+          text: getI18nString("file_browser.drafts_to_move.long_running_draft_migration_learn_more"),
           action: () => {
             Ay.unsafeRedirect("https://figma.com/blog/updates-to-how-drafts-work", "_blank");
           }
@@ -53,7 +53,7 @@ export function $$w1(e) {
         matchType: "long-running-draft-migration"
       }));
       e(F.enqueue({
-        message: _$$t("file_browser.drafts_to_move.long_running_draft_migration_completed")
+        message: getI18nString("file_browser.drafts_to_move.long_running_draft_migration_completed")
       }));
       e(_$$b({
         draft_migration_completed_toast_shown: !0
@@ -95,7 +95,7 @@ export function $$w1(e) {
     icon: jsx(_$$g, {}),
     text: jsx(E, {
       truncate: !0,
-      children: tx("sidebar.drafts_to_move")
+      children: renderI18nText("sidebar.drafts_to_move")
     }),
     badge: j,
     wrapInListItem: !1

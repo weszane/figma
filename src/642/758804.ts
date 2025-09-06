@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from "react";
 import { useSelector } from "../vendor/514228";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { zq, We } from "../figma_app/782261";
 import { q5 } from "../figma_app/516028";
 import { D2 } from "../905/18797";
@@ -73,7 +73,7 @@ function m(e) {
         numComponents,
         numComponentsWithLimit
       } = e();
-      sx("Assets Panel Initial Load", {
+      trackEventAnalytics("Assets Panel Initial Load", {
         numLibraries,
         numComponents,
         numComponentsWithLimit,

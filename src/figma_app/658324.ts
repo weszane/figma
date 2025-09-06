@@ -1,17 +1,17 @@
 import { useMemo } from "react";
-import { eU, zl, md } from "../figma_app/27355";
+import { atom, atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
 import a from "../vendor/239910";
 import { k } from "../905/651849";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { qH } from "../figma_app/934005";
 import { M4, IT } from "../905/713695";
 import { i as _$$i } from "../905/787489";
 import { V } from "../905/223084";
 var s = a;
-let _ = eU({});
+let _ = atom({});
 function h(e) {
   let t = s()(e, e => e.id);
-  zl.set(_, e => ({
+  atomStoreManager.set(_, e => ({
     ...e,
     ...t
   }));
@@ -24,7 +24,7 @@ let m = M4.Query({
   }
 });
 function g(e, t) {
-  let r = md(_);
+  let r = useAtomWithSubscription(_);
   return useMemo(() => e.transform(e => {
     let n = e.map(e => r[e.id] ?? e);
     t && (n = n.filter(e => e.state === t));
@@ -39,7 +39,7 @@ export function $$f1({
     planType: e,
     planId: t
   }), r);
-  _$$i(n, _$$t("plan_invoices.generic_load_error"));
+  _$$i(n, getI18nString("plan_invoices.generic_load_error"));
   return g(n);
 }
 let E = M4.Query({
@@ -92,7 +92,7 @@ let T = M4.Query({
 });
 export function $$I0(e, t = {}) {
   let [r] = IT(T(e), t);
-  _$$i(r, _$$t("plan_invoices.generic_load_error"));
+  _$$i(r, getI18nString("plan_invoices.generic_load_error"));
   return g(r, qH.OPEN);
 }
 export const Ti = $$I0;

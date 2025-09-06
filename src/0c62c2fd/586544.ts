@@ -6,7 +6,7 @@ import { xx } from "../figma_app/815945";
 import { resourceUtils } from "../905/989992";
 import { Rs } from "../figma_app/288654";
 import { P } from "../905/347284";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Ce } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { TA } from "../figma_app/217457";
@@ -129,7 +129,7 @@ export function $$N0(e) {
       fileCount: O
     },
     children: jsxs(OJ, {
-      title: _$$t("team_view.member_edit_access_modal.title", {
+      title: getI18nString("team_view.member_edit_access_modal.title", {
         memberName: N.name ?? ""
       }),
       maxWidth: 432,
@@ -144,13 +144,13 @@ export function $$N0(e) {
           className: v,
           children: jsx("div", {
             className: w,
-            children: tx("team_view.member_edit_access_modal.projects_title_v2")
+            children: renderI18nText("team_view.member_edit_access_modal.projects_title_v2")
           })
         }), jsx("div", {
           className: v,
           children: jsx("div", {
             className: w,
-            children: tx("team_view.member_edit_access_modal.files_title_v2")
+            children: renderI18nText("team_view.member_edit_access_modal.files_title_v2")
           })
         })]
       }), jsx(P, {
@@ -178,7 +178,7 @@ export function $$N0(e) {
     })
   });
 }
-let C = e => "file" === e ? tx("team_view.member_edit_access_modal.none_files") : tx("team_view.member_edit_access_modal.none_projects");
+let C = e => "file" === e ? renderI18nText("team_view.member_edit_access_modal.none_files") : renderI18nText("team_view.member_edit_access_modal.none_projects");
 function S(e) {
   let t;
   let {
@@ -187,10 +187,10 @@ function S(e) {
   } = e;
   if (hasTeamEditPermissions) return "project" === resourceType ? jsx("div", {
     className: j,
-    children: tx("team_view.member_edit_access_modal.all_projects")
+    children: renderI18nText("team_view.member_edit_access_modal.all_projects")
   }) : jsx("div", {
     className: j,
-    children: tx("team_view.member_edit_access_modal.all_files")
+    children: renderI18nText("team_view.member_edit_access_modal.all_files")
   });
   let i = e.resources;
   if (0 === i.privateResourceCount && 0 === i.editableResources.length) return jsx("div", {
@@ -199,13 +199,13 @@ function S(e) {
   });
   if (i.privateResourceCount > 0) {
     let e = jsx("span", {});
-    0 === i.editableResources.length && "project" === resourceType ? e = tx("team_view.member_edit_access_modal.invite_only_projects", {
+    0 === i.editableResources.length && "project" === resourceType ? e = renderI18nText("team_view.member_edit_access_modal.invite_only_projects", {
       numProjects: i.privateResourceCount
-    }) : 0 === i.editableResources.length && "file" === resourceType ? e = tx("team_view.member_edit_access_modal.invite_only_files", {
+    }) : 0 === i.editableResources.length && "file" === resourceType ? e = renderI18nText("team_view.member_edit_access_modal.invite_only_files", {
       numFiles: i.privateResourceCount
-    }) : i.editableResources.length > 0 && "project" === resourceType ? e = tx("team_view.member_edit_access_modal.invite_only_projects_list_end", {
+    }) : i.editableResources.length > 0 && "project" === resourceType ? e = renderI18nText("team_view.member_edit_access_modal.invite_only_projects_list_end", {
       numProjects: i.privateResourceCount
-    }) : i.editableResources.length > 0 && "file" === resourceType && (e = tx("team_view.member_edit_access_modal.invite_only_files_list_end", {
+    }) : i.editableResources.length > 0 && "file" === resourceType && (e = renderI18nText("team_view.member_edit_access_modal.invite_only_files_list_end", {
       numFiles: i.privateResourceCount
     }));
     t = jsx("div", {

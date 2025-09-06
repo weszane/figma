@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef } from "react";
 import { Pt } from "../figma_app/806412";
 import { Vq, c$, wv } from "../figma_app/236327";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 function l(e, t) {
   !function (e, t) {
     let i = Object.getOwnPropertyDescriptor(e, "value")?.set;
@@ -44,11 +44,11 @@ export function $$c1({
     children: [jsx(c$, {
       onClick: u,
       recordingKey: Pt(p, "detachVariable"),
-      children: _$$t("variables.binding_ui.detach_variable_tooltip")
+      children: getI18nString("variables.binding_ui.detach_variable_tooltip")
     }), jsx(c$, {
       onClick: c,
       recordingKey: Pt(p, "applyVariable"),
-      children: _$$t("fullscreen.properties_panel.apply_variable_ellipses")
+      children: getI18nString("fullscreen.properties_panel.apply_variable_ellipses")
     })]
   }) : jsxs(Vq, {
     ref: f,
@@ -63,11 +63,11 @@ export function $$c1({
         e?.current && (g(t), l(e.current, ""));
       },
       recordingKey: Pt(p, "cut"),
-      children: _$$t("fullscreen_actions.cut")
+      children: getI18nString("fullscreen_actions.cut")
     }), jsx(c$, {
       onClick: g,
       recordingKey: Pt(p, "copy"),
-      children: _$$t("fullscreen_actions.copy")
+      children: getI18nString("fullscreen_actions.copy")
     }), jsx(c$, {
       onClick: () => {
         navigator.clipboard.readText().then(t => {
@@ -76,15 +76,15 @@ export function $$c1({
         });
       },
       recordingKey: Pt(p, "paste"),
-      children: _$$t("fullscreen_actions.paste")
+      children: getI18nString("fullscreen_actions.paste")
     }), jsx(c$, {
       onClick: h,
       recordingKey: Pt(p, "selectAll"),
-      children: _$$t("fullscreen_actions.select-all")
+      children: getI18nString("fullscreen_actions.select-all")
     }), jsx(wv, {}), jsx(c$, {
       onClick: c,
       recordingKey: Pt(p, "applyVariable"),
-      children: _$$t("fullscreen.properties_panel.apply_variable_ellipses")
+      children: getI18nString("fullscreen.properties_panel.apply_variable_ellipses")
     })]
   });
 }

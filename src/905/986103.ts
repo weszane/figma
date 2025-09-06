@@ -3,12 +3,12 @@ import { useMemo, useState, useEffect, useRef } from "react";
 import { throwError } from "../figma_app/465776";
 import { A as _$$A } from "../905/920142";
 import { Zr } from "../figma_app/930338";
-import { t as _$$t } from "../905/303541";
-import { Gq } from "../figma_app/363242";
+import { getI18nString } from "../905/303541";
+import { getI18nState } from "../figma_app/363242";
 function c(e, t) {
   return "ja" === e ? "narrow" : t;
 }
-export function $$u1(e, t = "long", i = Gq().getPrimaryLocale(!1)) {
+export function $$u1(e, t = "long", i = getI18nState().getPrimaryLocale(!1)) {
   t = c(i, t);
   let n = useMemo(() => new Intl.RelativeTimeFormat(i, {
     style: t
@@ -26,7 +26,7 @@ export function $$u1(e, t = "long", i = Gq().getPrimaryLocale(!1)) {
   }, a);
   return o || "";
 }
-export function $$p2(e, t = "long", i = Gq().getPrimaryLocale(!1)) {
+export function $$p2(e, t = "long", i = getI18nState().getPrimaryLocale(!1)) {
   t = c(i, t);
   return f(new Intl.RelativeTimeFormat(i, {
     style: t
@@ -134,9 +134,9 @@ function f(e, t = new Date()) {
   let o = r < 0;
   for (let t of g) if (a >= t.min) {
     if (t.max && a >= t.max) continue;
-    if (a < h(45, "second")) return _$$t("general.time.just_now_past");
+    if (a < h(45, "second")) return getI18nString("general.time.just_now_past");
     let i = e.format((o ? -1 : 1) * (t.factor ? Math.round(a / t.factor) : 1), t.unit);
-    Gq()?.pseudoLocale && (i = Gq().getPseudoLocalizedDynamicString(i));
+    getI18nState()?.pseudoLocale && (i = getI18nState().getPseudoLocalizedDynamicString(i));
     return i;
   }
   return "Invalid Date";

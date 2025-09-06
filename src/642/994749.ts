@@ -10,7 +10,7 @@ import { J } from "../905/614223";
 import { Ay } from "@stylexjs/stylex";
 import { oW } from "../905/675859";
 import { Qp, JR } from "../figma_app/162641";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { DP } from "../905/640017";
 import { ic } from "../figma_app/688398";
 import { tS } from "../figma_app/516028";
@@ -78,14 +78,14 @@ export function $$C1(e) {
           opacity: s ? 1 : .5
         },
         src: S,
-        alt: _$$t("layer_icon.thumbnail.alt_text")
+        alt: getI18nString("layer_icon.thumbnail.alt_text")
       }) : jsx(Qp, {
         className: "x5yr21d xh8yej3 x4ouu4z",
         animationType: JR.LIGHT_SHIMMER
       });
   }
   return jsx(E, {
-    "aria-label": _$$t("layer_icon.button.pan_to_node"),
+    "aria-label": getI18nString("layer_icon.button.pan_to_node"),
     htmlAttributes: {
       onDoubleClick: t => {
         e.navigateAndPanTo && (t.currentTarget?.blur(), e.navigateAndPanTo(e.guid));

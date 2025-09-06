@@ -9,9 +9,9 @@ import { g as _$$g } from "../905/687265";
 import { xk } from "@stylexjs/stylex";
 import { h as _$$h } from "../905/207101";
 import { buildUploadUrl, isDevEnvironment } from "../figma_app/169182";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { oW } from "../905/675859";
-import { tx, t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { tI } from "../figma_app/599327";
 import { ES } from "../905/156213";
@@ -45,10 +45,10 @@ function N(e) {
     className: "x4ygwfs x78zum5 xdt5ytf x1nfngrj",
     children: [jsx("span", {
       ...xk(_$$g.textBodyMedium),
-      children: tx("seat_selection_in_nux.note_prompt")
+      children: renderI18nText("seat_selection_in_nux.note_prompt")
     }), jsx("textarea", {
       ...xk(R.noteInput, _$$g.textBodyMedium),
-      placeholder: t("seat_selection_in_nux.note_placeholder", {
+      placeholder: getI18nString("seat_selection_in_nux.note_placeholder", {
         seat_type: tI(e.seatType)
       }),
       value: note,
@@ -66,24 +66,24 @@ let P = {
 let O = (e, t) => {
   if (e) switch (t) {
     case ud.COLLABORATOR:
-      return tx("seat_selection_in_nux.collab_seat_auto_approved");
+      return renderI18nText("seat_selection_in_nux.collab_seat_auto_approved");
     case ud.DEVELOPER:
-      return tx("seat_selection_in_nux.dev_seat_auto_approved");
+      return renderI18nText("seat_selection_in_nux.dev_seat_auto_approved");
     case ud.EXPERT:
-      return tx("seat_selection_in_nux.full_seat_auto_approved");
+      return renderI18nText("seat_selection_in_nux.full_seat_auto_approved");
     case ud.CONTENT:
-      return tx("seat_selection_in_nux.content_seat_auto_approved");
+      return renderI18nText("seat_selection_in_nux.content_seat_auto_approved");
     default:
       throwTypeError(t);
   } else switch (t) {
     case ud.COLLABORATOR:
-      return tx("seat_selection_in_nux.collab_seat_manual_request");
+      return renderI18nText("seat_selection_in_nux.collab_seat_manual_request");
     case ud.DEVELOPER:
-      return tx("seat_selection_in_nux.dev_seat_manual_request");
+      return renderI18nText("seat_selection_in_nux.dev_seat_manual_request");
     case ud.EXPERT:
-      return tx("seat_selection_in_nux.full_seat_manual_request");
+      return renderI18nText("seat_selection_in_nux.full_seat_manual_request");
     case ud.CONTENT:
-      return tx("seat_selection_in_nux.content_seat_manual_request");
+      return renderI18nText("seat_selection_in_nux.content_seat_manual_request");
     default:
       throwTypeError(t);
   }
@@ -122,7 +122,7 @@ let $$L0 = Ju(function (e) {
   _$$h(() => {
     e.autoApproved || e.requestId || function (e) {
       if (isDevEnvironment()) throw e;
-      $D(_$$e.ACTIVATION, e);
+      reportError(_$$e.ACTIVATION, e);
       c(ES($$L0));
       c(F.enqueue({
         message: "Something went wrong.",
@@ -155,7 +155,7 @@ let $$L0 = Ju(function (e) {
     children: jsx(fu, {
       name: "Post NUX Seat Request Confirmation Modal Outer",
       children: jsx(xx, {
-        title: tx("seat_selection_in_nux.welcome_to_figma"),
+        title: renderI18nText("seat_selection_in_nux.welcome_to_figma"),
         media: jsx("div", {
           className: "x78zum5 x2lah0s x13a6bvl x6s0dn4 x1jgvi1y xg80ozm x1bifzbx",
           children: jsx(oW, {
@@ -166,7 +166,7 @@ let $$L0 = Ju(function (e) {
         }),
         primaryCta: {
           type: "button",
-          label: tx("seat_selection_in_nux.continue"),
+          label: renderI18nText("seat_selection_in_nux.continue"),
           onClick: w,
           ctaTrackingDescriptor: _$$c.CONTINUE
         },

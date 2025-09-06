@@ -6,7 +6,7 @@ import { B } from "../905/714743";
 import { G } from "../905/750789";
 import { i as _$$i } from "../905/186077";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Ib } from "../905/129884";
 import { Y } from "../905/315917";
 import { J, Z } from "../905/420117";
@@ -97,7 +97,7 @@ export let $$v2 = forwardRef(({
 export function $$I0() {
   return jsx("div", {
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": t("variables.variable_was_deleted"),
+    "data-tooltip": getI18nString("variables.variable_was_deleted"),
     children: jsx(B, {
       className: Bx,
       svg: _$$A

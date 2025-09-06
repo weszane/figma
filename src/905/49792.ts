@@ -1,14 +1,14 @@
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
-import { az } from "../905/449184";
+import { atomStoreManager } from "../figma_app/27355";
+import { analyticsEventManager } from "../905/449184";
 import { debugState } from "../905/407919";
-import { x1, Lo } from "../905/714362";
+import { logError, logInfo } from "../905/714362";
 import { u8 } from "../figma_app/976749";
 import { Y5 } from "../figma_app/455680";
 import { ze } from "../figma_app/516028";
 import { $p } from "../figma_app/155728";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { PW } from "../figma_app/633080";
 import { $A } from "../905/862883";
 import { z } from "../905/150554";
@@ -27,10 +27,10 @@ async function v({
   contextComponentUsage: I
 }) {
   if (getFeatureFlags().anticipation_suggestions_shadow) try {
-    let r = zl.get(ze) ?? void 0;
-    let l = zl.get(u8);
-    if (!r || l !== nT.Design) return;
-    let E = zl.get($p);
+    let r = atomStoreManager.get(ze) ?? void 0;
+    let l = atomStoreManager.get(u8);
+    if (!r || l !== FEditorType.Design) return;
+    let E = atomStoreManager.get($p);
     if (!E) return;
     let x = new Set(E.map(e => e.libraryKey));
     let S = t.componentKey ?? t.stateGroupKey;
@@ -64,7 +64,7 @@ async function v({
       libraryKey: e.library_key,
       suggestionSource: e.suggestionSource
     })));
-    az.trackDefinedEvent("auto_suggest.suggestion_shadow_read", {
+    analyticsEventManager.trackDefinedEvent("auto_suggest.suggestion_shadow_read", {
       fileKey: r,
       version: OD(),
       thumbnailGenerationDuration: y.thumbnailGenerationDuration,
@@ -86,7 +86,7 @@ async function v({
       insertedAssetLibraryKey: w
     });
   } catch (e) {
-    x1("auto_suggest", "shadow: error logging shadow read suggestions", {
+    logError("auto_suggest", "shadow: error logging shadow read suggestions", {
       error: e
     });
   }
@@ -101,7 +101,7 @@ export function $$I2(e, t, i, a) {
     let u = c ? r.get(c) : void 0;
     if (!s || "INSTANCE" !== s.type || !o || !d || !u) return;
     if (c !== e.predictedTLFGuid || !e.thumbnail) {
-      Lo("auto_suggest", "shadow: incorrect tlf prediction", {
+      logInfo("auto_suggest", "shadow: incorrect tlf prediction", {
         topLevelNodeGuid: c,
         preInsertionDataDominantFrameGuid: e.predictedTLFGuid,
         preInsertionDataThumbnail: e.thumbnail
@@ -123,7 +123,7 @@ export function $$I2(e, t, i, a) {
       contextComponentUsage: e.contextComponentUsage
     });
   } catch (e) {
-    x1("auto_suggest", "shadow: error logging shadow read suggestions", {
+    logError("auto_suggest", "shadow: error logging shadow read suggestions", {
       error: e
     });
   }
@@ -154,7 +154,7 @@ export function $$E0() {
       contextComponentUsage: d
     };
   } catch (e) {
-    x1("auto_suggest", "shadow: error getting data for shadow read suggestions", {
+    logError("auto_suggest", "shadow: error getting data for shadow read suggestions", {
       error: e
     });
     return null;
@@ -194,7 +194,7 @@ export function $$x1(e, t) {
       contextComponentUsage: p
     });
   } catch (e) {
-    x1("auto_suggest", "shadow: error logging shadow read suggestions on paste", {
+    logError("auto_suggest", "shadow: error logging shadow read suggestions on paste", {
       error: e
     });
   }

@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { mKm } from "../figma_app/763686";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { xj, Cs, Dq, Qz, gP, W7, tr } from "../figma_app/655717";
 import { oc } from "../figma_app/451499";
 import { m0 } from "../figma_app/976749";
@@ -39,7 +39,7 @@ function v({
   let i = kl("width" === e ? "stackHorizontalSize" : "stackVerticalSize");
   let o = I();
   return jsx(p7, {
-    name: "width" === e ? _$$t("inspect_panel.properties.width") : _$$t("inspect_panel.properties.height"),
+    name: "width" === e ? getI18nString("inspect_panel.properties.width") : getI18nString("inspect_panel.properties.height"),
     copyName: e,
     selectionPropertyKey: e,
     variableField: "width" === e ? "WIDTH" : "HEIGHT",
@@ -49,9 +49,9 @@ function v({
       }) + "px";
       if (!r || gl(t)) return n;
       let i = {
-        [mKm.FILL_CONTAINER]: _$$t("inspect_panel.properties.fill"),
-        [mKm.HUG_CONTENT]: _$$t("inspect_panel.properties.hug"),
-        [mKm.FIXED]: _$$t("inspect_panel.properties.fixed")
+        [mKm.FILL_CONTAINER]: getI18nString("inspect_panel.properties.fill"),
+        [mKm.HUG_CONTENT]: getI18nString("inspect_panel.properties.hug"),
+        [mKm.FIXED]: getI18nString("inspect_panel.properties.fixed")
       }[t || mKm.FIXED];
       return `${i} (${n})`;
     }(r, i, o),
@@ -71,12 +71,12 @@ function A() {
       expandedCopyName1: "border-right-width",
       expandedCopyName2: "border-bottom-width",
       expandedCopyName3: "border-left-width",
-      expandedName0: _$$t("inspect_panel.properties.border.top"),
-      expandedName1: _$$t("inspect_panel.properties.border.right"),
-      expandedName2: _$$t("inspect_panel.properties.border.bottom"),
-      expandedName3: _$$t("inspect_panel.properties.border.left"),
+      expandedName0: getI18nString("inspect_panel.properties.border.top"),
+      expandedName1: getI18nString("inspect_panel.properties.border.right"),
+      expandedName2: getI18nString("inspect_panel.properties.border.bottom"),
+      expandedName3: getI18nString("inspect_panel.properties.border.left"),
       shorthandCopyName: "border-width",
-      shorthandName: _$$t("inspect_panel.properties.border"),
+      shorthandName: getI18nString("inspect_panel.properties.border"),
       value0: e,
       value1: t,
       value2: r,
@@ -88,19 +88,19 @@ function A() {
     }), (!!e || !!t || !!r || !!i) && jsxs(Fragment, {
       children: [!!a && hS(a) && a.length > 0 && jsxs(Fragment, {
         children: [jsx(_p, {
-          name: _$$t("inspect_panel.strokes.border_style"),
-          value: _$$t("fullscreen.properties_panel.stroke_settings.simple_dash"),
+          name: getI18nString("inspect_panel.strokes.border_style"),
+          value: getI18nString("fullscreen.properties_panel.stroke_settings.simple_dash"),
           copyName: "border-style",
           copyValue: "dashed",
           subPropertyRow: !0
         }), jsx(_p, {
-          name: _$$t("inspect_panel.strokes.border_dash_pattern"),
+          name: getI18nString("inspect_panel.strokes.border_dash_pattern"),
           value: a.join(", "),
           copyName: "dashes",
           subPropertyRow: !0
         })]
       }), l && jsx(Xm, {
-        name: _$$t("inspect_panel.strokes.alignment"),
+        name: getI18nString("inspect_panel.strokes.alignment"),
         selectionPropertyKey: "strokeAlign",
         valueFormatter: b,
         copyValue: null,
@@ -121,12 +121,12 @@ function x() {
     expandedCopyName1: "border-top-right-radius",
     expandedCopyName2: "border-bottom-right-radius",
     expandedCopyName3: "border-bottom-left-radius",
-    expandedName0: _$$t("inspect_panel.properties.radius.top_left"),
-    expandedName1: _$$t("inspect_panel.properties.radius.top_right"),
-    expandedName2: _$$t("inspect_panel.properties.radius.bottom_right"),
-    expandedName3: _$$t("inspect_panel.properties.radius.bottom_left"),
+    expandedName0: getI18nString("inspect_panel.properties.radius.top_left"),
+    expandedName1: getI18nString("inspect_panel.properties.radius.top_right"),
+    expandedName2: getI18nString("inspect_panel.properties.radius.bottom_right"),
+    expandedName3: getI18nString("inspect_panel.properties.radius.bottom_left"),
     shorthandCopyName: "border-radius",
-    shorthandName: _$$t("inspect_panel.properties.radius"),
+    shorthandName: getI18nString("inspect_panel.properties.radius"),
     value0: topLeft,
     value1: topRight,
     value2: bottomRight,
@@ -147,12 +147,12 @@ function N() {
     expandedCopyName1: "padding-right",
     expandedCopyName2: "padding-bottom",
     expandedCopyName3: "padding-left",
-    expandedName0: _$$t("inspect_panel.properties.padding.top"),
-    expandedName1: _$$t("inspect_panel.properties.padding.right"),
-    expandedName2: _$$t("inspect_panel.properties.padding.bottom"),
-    expandedName3: _$$t("inspect_panel.properties.padding.left"),
+    expandedName0: getI18nString("inspect_panel.properties.padding.top"),
+    expandedName1: getI18nString("inspect_panel.properties.padding.right"),
+    expandedName2: getI18nString("inspect_panel.properties.padding.bottom"),
+    expandedName3: getI18nString("inspect_panel.properties.padding.left"),
     shorthandCopyName: "padding",
-    shorthandName: _$$t("inspect_panel.properties.padding"),
+    shorthandName: getI18nString("inspect_panel.properties.padding"),
     value0: e,
     value1: t,
     value2: r,
@@ -171,7 +171,7 @@ function C() {
     return n && hS(n) && n > 0 ? n : void 0;
   }, [t, e]);
   return t ? jsx(p7, {
-    name: _$$t("inspect_panel.properties.gap"),
+    name: getI18nString("inspect_panel.properties.gap"),
     selectionPropertyKey: "stackSpacing",
     variableField: "STACK_SPACING",
     valueFormatter: r,
@@ -197,11 +197,11 @@ function O() {
   }, e);
   return isAutoLayoutChild || !isLayoutChild ? null : jsxs(Fragment, {
     children: [jsx(YE, {
-      name: _$$t("inspect_panel.properties.top"),
+      name: getI18nString("inspect_panel.properties.top"),
       copyName: "top",
       selectionPropertyKey: "y"
     }), jsx(YE, {
-      name: _$$t("inspect_panel.properties.left"),
+      name: getI18nString("inspect_panel.properties.left"),
       copyName: "left",
       selectionPropertyKey: "x"
     })]
@@ -210,24 +210,24 @@ function O() {
 function R() {
   return "GRID" !== Gt("stackMode") ? null : jsxs(Fragment, {
     children: [jsx(QG, {
-      label: _$$t("inspect_panel.properties.flow.grid")
+      label: getI18nString("inspect_panel.properties.flow.grid")
     }), jsx(_$, {
-      name: _$$t("inspect_panel.properties.grid.rows"),
+      name: getI18nString("inspect_panel.properties.grid.rows"),
       copyName: "rows",
       selectionPropertyKey: "gridRowCount",
       subPropertyRow: !0
     }), jsx(_$, {
-      name: _$$t("inspect_panel.properties.grid.columns"),
+      name: getI18nString("inspect_panel.properties.grid.columns"),
       copyName: "columns",
       selectionPropertyKey: "gridColumnCount",
       subPropertyRow: !0
     }), jsx(YE, {
-      name: _$$t("inspect_panel.properties.grid.row_gap"),
+      name: getI18nString("inspect_panel.properties.grid.row_gap"),
       copyName: "row-gap",
       selectionPropertyKey: "gridRowGap",
       subPropertyRow: !0
     }), jsx(YE, {
-      name: _$$t("inspect_panel.properties.grid.column_gap"),
+      name: getI18nString("inspect_panel.properties.grid.column_gap"),
       copyName: "column-gap",
       selectionPropertyKey: "gridColumnGap",
       subPropertyRow: !0
@@ -243,26 +243,26 @@ function P() {
     return r?.parentNode?.stackMode === "GRID";
   }, t) ? jsxs(Fragment, {
     children: ["GRID" !== e && jsx(QG, {
-      label: _$$t("inspect_panel.properties.flow.grid")
+      label: getI18nString("inspect_panel.properties.flow.grid")
     }), jsx(_$, {
-      name: _$$t("inspect_panel.properties.grid.row_start"),
+      name: getI18nString("inspect_panel.properties.grid.row_start"),
       selectionPropertyKey: "gridRowAnchorIndex",
       valueFormatter: L,
       copyName: "row-start",
       subPropertyRow: !0
     }), jsx(_$, {
-      name: _$$t("inspect_panel.properties.grid.column_start"),
+      name: getI18nString("inspect_panel.properties.grid.column_start"),
       selectionPropertyKey: "gridColumnAnchorIndex",
       valueFormatter: L,
       copyName: "column-start",
       subPropertyRow: !0
     }), jsx(_$, {
-      name: _$$t("inspect_panel.properties.grid.horizontal_span"),
+      name: getI18nString("inspect_panel.properties.grid.horizontal_span"),
       selectionPropertyKey: "gridColumnSpan",
       copyName: "column-span",
       subPropertyRow: !0
     }), jsx(_$, {
-      name: _$$t("inspect_panel.properties.grid.vertical_span"),
+      name: getI18nString("inspect_panel.properties.grid.vertical_span"),
       selectionPropertyKey: "gridRowSpan",
       copyName: "row-span",
       subPropertyRow: !0
@@ -274,7 +274,7 @@ function D() {
   let t = kl("stackPrimaryAlignItems");
   let r = e && rO(t);
   return jsx(_p, {
-    name: _$$t("inspect_panel.properties.justify"),
+    name: getI18nString("inspect_panel.properties.justify"),
     value: r ? "space-between" : void 0,
     copyName: "justify-content"
   });
@@ -297,7 +297,7 @@ export function $$M0({
     hasCopyAllContent
   } = We();
   return 1 !== kl("numSelected") ? null : jsx(VZ, {
-    title: _$$t("inspect_panel.properties.layout"),
+    title: getI18nString("inspect_panel.properties.layout"),
     copyAllValue: copyAll,
     disableCopyAll: !hasCopyAllContent,
     recordingKey: "properties",
@@ -309,7 +309,7 @@ export function $$M0({
         setCopyValue
       },
       children: [jsx(Xm, {
-        name: _$$t("inspect_panel.properties.flow"),
+        name: getI18nString("inspect_panel.properties.flow"),
         selectionPropertyKey: "stackMode",
         valueFormatter: T,
         copyValue: null,
@@ -319,31 +319,31 @@ export function $$M0({
       }), jsx(v, {
         property: "height"
       }), jsx(p7, {
-        name: _$$t("properties.label.min_width"),
+        name: getI18nString("properties.label.min_width"),
         copyName: "min-width",
         selectionPropertyKey: "minWidth",
         variableField: "MIN_WIDTH"
       }), jsx(p7, {
-        name: _$$t("properties.label.max_width"),
+        name: getI18nString("properties.label.max_width"),
         copyName: "max-width",
         selectionPropertyKey: "maxWidth",
         variableField: "MAX_WIDTH"
       }), jsx(p7, {
-        name: _$$t("properties.label.min_height"),
+        name: getI18nString("properties.label.min_height"),
         copyName: "min-height",
         selectionPropertyKey: "minHeight",
         variableField: "MIN_HEIGHT"
       }), jsx(p7, {
-        name: _$$t("properties.label.max_height"),
+        name: getI18nString("properties.label.max_height"),
         copyName: "max-height",
         selectionPropertyKey: "maxHeight",
         variableField: "MAX_HEIGHT"
       }), jsx(O, {}), jsx(x, {}), jsx(A, {}), jsx(D, {}), jsx(w, {}), jsx(R, {}), jsx(P, {}), jsx(HF, {
-        name: _$$t("inspect_panel.properties.rotation"),
+        name: getI18nString("inspect_panel.properties.rotation"),
         copyName: "angle",
         selectionPropertyKey: "angle"
       }), jsx(r4, {
-        name: _$$t("inspect_panel.properties.opacity"),
+        name: getI18nString("inspect_panel.properties.opacity"),
         copyName: "opacity",
         selectionPropertyKey: "opacity",
         variableField: "OPACITY"

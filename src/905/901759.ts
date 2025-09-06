@@ -2,13 +2,13 @@ import _require from "../0c62c2fd/653470";
 import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { NUh, h62, glU, MEW } from "../figma_app/763686";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import d from "../vendor/197638";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
-import { M4 } from "../905/609396";
-import { $D } from "../905/11";
-import { t as _$$t } from "../905/303541";
+import { Timer } from "../905/609396";
+import { reportError } from "../905/11";
+import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { zX } from "../905/576487";
 import { A as _$$A } from "../905/658244";
@@ -18,7 +18,7 @@ import { D as _$$D2 } from "../905/758526";
 import { P as _$$P } from "../905/813637";
 import { eg as _$$eg, a4 } from "../figma_app/576669";
 import { Et, aD } from "../905/125019";
-import { x1, Lo } from "../905/714362";
+import { logError, logInfo } from "../905/714362";
 import { EC } from "../figma_app/291892";
 let n;
 let $$r1;
@@ -35,11 +35,11 @@ async function k(e) {
 async function R(e, t, i) {
   let n = await T(e);
   if (e.type !== C) {
-    x1("pdf", "PDF image type was: '" + e.type + "', expected " + C);
+    logError("pdf", "PDF image type was: '" + e.type + "', expected " + C);
     return null;
   }
   let r = (await EC.decodeAsync(n, e.type, t, i, !1)).rgba;
-  return r ? EC.encodeInPlace(t, i, r, !1, 1, !1) : (x1("pdf", "Decoded PDF image returned no rgba data."), null);
+  return r ? EC.encodeInPlace(t, i, r, !1, 1, !1) : (logError("pdf", "Decoded PDF image returned no rgba data."), null);
 }
 async function N(e) {
   let t = e.href.baseVal;
@@ -1839,7 +1839,7 @@ async function Q(e, t, i) {
       isErrorOfInterest: t,
       callOnFailure: () => {
         e.current.setStrokeColorN = X;
-        Lo("pdf", `Unsupported stroke, using: ${X}`, void 0, {
+        logInfo("pdf", `Unsupported stroke, using: ${X}`, void 0, {
           logToConsole: NUh.ALWAYS
         });
       }
@@ -1848,7 +1848,7 @@ async function Q(e, t, i) {
       isErrorOfInterest: t,
       callOnFailure: () => {
         e.current.setFillColorN = X;
-        Lo("pdf", `Unsupported fill, using: ${X}`, void 0, {
+        logInfo("pdf", `Unsupported fill, using: ${X}`, void 0, {
           logToConsole: NUh.ALWAYS
         });
       }
@@ -1856,7 +1856,7 @@ async function Q(e, t, i) {
       functionName: e.paintInlineImageXObject.name,
       isErrorOfInterest: e => "invalid format" === e.message,
       callOnFailure: () => {
-        Lo("pdf", "Unsupported image", void 0, {
+        logInfo("pdf", "Unsupported image", void 0, {
           logToConsole: NUh.ALWAYS
         });
       }
@@ -1864,7 +1864,7 @@ async function Q(e, t, i) {
       functionName: e.addFontStyle.name,
       isErrorOfInterest: e => e.message.startsWith("addFontStyle: No font data available"),
       callOnFailure: () => {
-        Lo("pdf", "Unsupported font", void 0, {
+        logInfo("pdf", "Unsupported font", void 0, {
           logToConsole: NUh.ALWAYS
         });
       }
@@ -2589,14 +2589,14 @@ class eI {
     this.getPdfSourcePromise = null;
   }
   shouldBlockPdfImports() {
-    return zl.get(_$$D2);
+    return atomStoreManager.get(_$$D2);
   }
   getPdfSource(e) {
     this.getPdfSourcePromise || (this.getPdfSourcePromise = new Promise(t => {
       debugState.dispatch(to({
         type: n ??= Ju(_$$A.createLazyComponent(() => Promise.all([]).then(_require).then(e => e.PdfConfirmationModal), Ij("PdfConfirmationModal"))),
         data: {
-          fileImportDescription: _$$t("file_browser.file_import_view.select_pdf_source_description_within_figjam", {
+          fileImportDescription: getI18nString("file_browser.file_import_view.select_pdf_source_description_within_figjam", {
             pdfCount: e
           }),
           onConfirm: e => {
@@ -2631,7 +2631,7 @@ class eI {
     let r;
     debugState.dispatch(_$$F.enqueue({
       type: eh,
-      message: _$$t("visual_bell.import_pdf"),
+      message: getI18nString("visual_bell.import_pdf"),
       icon: zX.IMAGE_BACKED_SPINNER
     }));
     let l = await this.convertPdf({
@@ -2653,20 +2653,20 @@ class eI {
         this.populatePdfImagesWithImageBytes(images);
       } catch (e) {
         i = !0;
-        $D(_$$e.FIGJAM, e);
+        reportError(_$$e.FIGJAM, e);
       }
       (hadImageExtractError || i) && debugState.dispatch(_$$F.enqueue({
         type: eg,
-        message: _$$t("fullscreen.file_import.import_pdf_images_not_imported")
+        message: getI18nString("fullscreen.file_import.import_pdf_images_not_imported")
       }));
       return d;
     }
     switch (d) {
       case MEW.ERROR_TEXT_SIZE:
-        r = _$$t("fullscreen.file_import.file_contains_text_either_too_big_or_too_small");
+        r = getI18nString("fullscreen.file_import.file_contains_text_either_too_big_or_too_small");
         break;
       case MEW.TIMEOUT:
-        r = _$$t("fullscreen.file_import.file_timed_out");
+        r = getI18nString("fullscreen.file_import.file_timed_out");
         break;
       case MEW.ERROR_OTHER:
         r = _$$P(t);
@@ -2687,7 +2687,7 @@ class eI {
       cursorX,
       cursorY
     } = e;
-    let a = new M4();
+    let a = new Timer();
     a.start();
     try {
       let {
@@ -2720,7 +2720,7 @@ class eI {
           }));
         }(images, imagesToImport) : [];
         let p = a.getElapsedTime();
-        sx("PDF Import Elapsed Time", {
+        trackEventAnalytics("PDF Import Elapsed Time", {
           elapsedTimeMs: p
         }, {
           forwardToDatadog: !0
@@ -2735,13 +2735,13 @@ class eI {
       let e = `PDF Import Error: ${t.message}`;
       try {
         t.message = e;
-        $D(_$$e.FIGJAM, t);
+        reportError(_$$e.FIGJAM, t);
       } catch {
-        $D(_$$e.FIGJAM, Error(e));
+        reportError(_$$e.FIGJAM, Error(e));
       }
     }
     let l = Error("PDF Import Error: unknown issue inside convertPDFToScene");
-    $D(_$$e.FIGJAM, l);
+    reportError(_$$e.FIGJAM, l);
     return {
       status: MEW.ERROR_OTHER
     };

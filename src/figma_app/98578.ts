@@ -1,8 +1,8 @@
 import { useRef, useCallback, useEffect } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { $ } from "../905/922405";
 import { v5 } from "../figma_app/314264";
 import { l as _$$l } from "../905/202425";
@@ -97,7 +97,7 @@ export function $$T3({
 }) {
   $$I1({
     action: e,
-    searchQuery: zl.get(Q8),
+    searchQuery: atomStoreManager.get(Q8),
     numSearchResults: t,
     rankingAlgorithm: n,
     searchPosition: r,
@@ -124,14 +124,14 @@ export function $$I1(e) {
     let t = _$$l(e);
     let r = e.openFile?.key ?? "";
     let n = v5(e.selectedView, null);
-    let l = zl.get(dd) ?? "";
-    l || $D(_$$e.EXTENSIBILITY, Error(`No quick actions session ID found when logging ${OW}`));
-    let _ = zl.get(Rt);
+    let l = atomStoreManager.get(dd) ?? "";
+    l || reportError(_$$e.EXTENSIBILITY, Error(`No quick actions session ID found when logging ${OW}`));
+    let _ = atomStoreManager.get(Rt);
     return {
       currentSelection: t,
       fileKey: r,
       productType: n,
-      source: zl.get(rE)?.source ?? "",
+      source: atomStoreManager.get(rE)?.source ?? "",
       quickActionsSessionId: l,
       quickActionsQueryId: _,
       role: WZ(),

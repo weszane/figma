@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { useSelector } from "../vendor/514228";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { Rs } from "../figma_app/288654";
 import { VA } from "../figma_app/528509";
 import { t as _$$t } from "../figma_app/579169";
@@ -19,7 +19,7 @@ export function $$u1() {
 export function $$p0() {
   let e = useSelector(e => e.currentUserOrgId);
   let t = useSelector(vu);
-  let n = md(_$$t).data ?? !0;
+  let n = useAtomWithSubscription(_$$t).data ?? !0;
   let u = Rs(L1I, {
     fileKey: t?.key ?? "",
     teamId: t?.team_id ?? null,

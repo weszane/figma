@@ -7,7 +7,7 @@ import { L } from "../905/782297";
 import { t as _$$t } from "../905/958417";
 import { E } from "../905/267344";
 import { J } from "../905/525097";
-import { t as _$$t2 } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { G9 } from "../figma_app/975811";
 import { l6, c$ } from "../905/794875";
 import { hj } from "../905/859070";
@@ -18,21 +18,21 @@ export class $$A3 {
     this.format = e => {
       switch (e) {
         case "NONE":
-          return _$$t2("fullscreen.properties_panel.stroke_settings.none");
+          return getI18nString("fullscreen.properties_panel.stroke_settings.none");
         case "ARROW_LINES":
-          return _$$t2("fullscreen.properties_panel.stroke_settings.line_arrow");
+          return getI18nString("fullscreen.properties_panel.stroke_settings.line_arrow");
         case "ARROW_EQUILATERAL":
-          return _$$t2("fullscreen.properties_panel.stroke_settings.triangle_arrow");
+          return getI18nString("fullscreen.properties_panel.stroke_settings.triangle_arrow");
         case "TRIANGLE_FILLED":
-          return _$$t2("fullscreen.properties_panel.stroke_settings.reversed_triangle");
+          return getI18nString("fullscreen.properties_panel.stroke_settings.reversed_triangle");
         case "CIRCLE_FILLED":
-          return _$$t2("fullscreen.properties_panel.stroke_settings.circle_arrow");
+          return getI18nString("fullscreen.properties_panel.stroke_settings.circle_arrow");
         case "DIAMOND_FILLED":
-          return _$$t2("fullscreen.properties_panel.stroke_settings.diamond_arrow");
+          return getI18nString("fullscreen.properties_panel.stroke_settings.diamond_arrow");
         case "ROUND":
-          return _$$t2("fullscreen.properties_panel.stroke_settings.round");
+          return getI18nString("fullscreen.properties_panel.stroke_settings.round");
         case "SQUARE":
-          return _$$t2("fullscreen.properties_panel.stroke_settings.square");
+          return getI18nString("fullscreen.properties_panel.stroke_settings.square");
         case "HIGHLIGHT":
         case "WASHI_TAPE_1":
         case "WASHI_TAPE_2":
@@ -50,21 +50,21 @@ export class $$y0 {
     this.format = e => {
       switch (e) {
         case "NONE":
-          return _$$t2("fullscreen.properties_panel.stroke_settings.none");
+          return getI18nString("fullscreen.properties_panel.stroke_settings.none");
         case "ROUND":
-          return _$$t2("fullscreen.properties_panel.stroke_settings.round");
+          return getI18nString("fullscreen.properties_panel.stroke_settings.round");
         case "SQUARE":
-          return _$$t2("fullscreen.properties_panel.stroke_settings.square");
+          return getI18nString("fullscreen.properties_panel.stroke_settings.square");
         case "ARROW_LINES":
-          return _$$t2("fullscreen.properties_panel.section_stroke.dropdown_startEndPoint.value_line");
+          return getI18nString("fullscreen.properties_panel.section_stroke.dropdown_startEndPoint.value_line");
         case "ARROW_EQUILATERAL":
-          return _$$t2("fullscreen.properties_panel.section_stroke.dropdown_startEndPoint.value_triangle");
+          return getI18nString("fullscreen.properties_panel.section_stroke.dropdown_startEndPoint.value_triangle");
         case "TRIANGLE_FILLED":
-          return _$$t2("fullscreen.properties_panel.section_stroke.dropdown_startEndPoint.value_reversed");
+          return getI18nString("fullscreen.properties_panel.section_stroke.dropdown_startEndPoint.value_reversed");
         case "CIRCLE_FILLED":
-          return _$$t2("fullscreen.properties_panel.section_stroke.dropdown_startEndPoint.value_circle");
+          return getI18nString("fullscreen.properties_panel.section_stroke.dropdown_startEndPoint.value_circle");
         case "DIAMOND_FILLED":
-          return _$$t2("fullscreen.properties_panel.section_stroke.dropdown_startEndPoint.value_diamond");
+          return getI18nString("fullscreen.properties_panel.section_stroke.dropdown_startEndPoint.value_diamond");
         case "HIGHLIGHT":
         case "WASHI_TAPE_1":
         case "WASHI_TAPE_2":

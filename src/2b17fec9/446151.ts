@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useCallback, useState, useEffect, useContext, useRef } from "react";
 import { glU, cxo, V5h, VTL, rcl, NLJ, xbm } from "../figma_app/763686";
 import { l7 } from "../905/189185";
-import { md, fp } from "../figma_app/27355";
+import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import l from "classnames";
 import { ez, SK, U9, wp } from "../905/125333";
 import { F as _$$F } from "../905/989956";
@@ -21,7 +21,7 @@ import { $y } from "../figma_app/544744";
 import { W as _$$W } from "../905/866915";
 import { createPortal } from "../vendor/944059";
 import { B as _$$B } from "../905/714743";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { sD, W2 } from "../2b17fec9/873436";
 import { A as _$$A } from "../svg/741686";
 import { A as _$$A2 } from "../svg/776856";
@@ -80,7 +80,7 @@ function k({
       width: e.width
     },
     children: [jsx(M, {}), jsx(R, {
-      text: _$$t("whiteboard.ad_onboarding.onboarding_entry_pill_content"),
+      text: getI18nString("whiteboard.ad_onboarding.onboarding_entry_pill_content"),
       isShowing: r
     })]
   }), document.getElementById("fullscreen-root")) : null;
@@ -139,10 +139,10 @@ let ec = memo(function ({
   let t = OD();
   let i = AT();
   let s = R0();
-  let l = md(ez);
-  let [d, p] = fp(SK);
-  let h = md(U9);
-  let m = md(oh);
+  let l = useAtomWithSubscription(ez);
+  let [d, p] = useAtomValueAndSetter(SK);
+  let h = useAtomWithSubscription(U9);
+  let m = useAtomWithSubscription(oh);
   let f = "open" === m.state && "shape" === m.tool;
   let _ = useCallback(e => {
     let t = Jc.get(e);
@@ -174,12 +174,12 @@ let ec = memo(function ({
     isShapeMenuColorPickerOpen: e
   }) {
     let t = function (e) {
-      let t = md(_$$B2);
+      let t = useAtomWithSubscription(_$$B2);
       let i = Yt();
       let n = s3() && t === cxo.SHAPE_TOOL;
       return null !== i || n || e;
     }(e);
-    let [i, n] = fp(_$$B2);
+    let [i, n] = useAtomValueAndSetter(_$$B2);
     let s = cxo.SHAPE_TOOL;
     useEffect(() => {
       t && i !== s ? n(s) : t || i !== s || n(_$$y);
@@ -198,7 +198,7 @@ let ec = memo(function ({
       shouldVerticallyCenter: !0,
       children: [jsx(K0, {
         svg: _$$A5,
-        tooltip: _$$t("whiteboard.shapes_sidebar.bent_connector"),
+        tooltip: getI18nString("whiteboard.shapes_sidebar.bent_connector"),
         onClick: () => g("ELBOWED"),
         active: t ? "LOUD" : "NONE",
         isNewSubmenu: !0,
@@ -208,7 +208,7 @@ let ec = memo(function ({
         recordingKey: Pt(e, "ELBOWED")
       }, "ELBOWED"), getFeatureFlags().ad_curved_connectors && jsx(K0, {
         svg: _$$A4,
-        tooltip: _$$t("whiteboard.shapes_sidebar.curved_connector"),
+        tooltip: getI18nString("whiteboard.shapes_sidebar.curved_connector"),
         onClick: () => g("CURVED"),
         active: s ? "LOUD" : "NONE",
         isNewSubmenu: !0,
@@ -219,7 +219,7 @@ let ec = memo(function ({
         recordingKey: Pt(e, "CURVED")
       }, "CURVED"), jsx(K0, {
         svg: _$$A6,
-        tooltip: _$$t("whiteboard.delightful_toolbar.connector"),
+        tooltip: getI18nString("whiteboard.delightful_toolbar.connector"),
         onClick: () => g("STRAIGHT"),
         active: i ? "LOUD" : "NONE",
         isNewSubmenu: !0,
@@ -229,7 +229,7 @@ let ec = memo(function ({
         },
         recordingKey: Pt(e, "STRAIGHT")
       }, "STRAIGHT"), jsx(ZE, {
-        ariaLabel: _$$t("whiteboard.inline_menu.color_list_box"),
+        ariaLabel: getI18nString("whiteboard.inline_menu.color_list_box"),
         buttonBackground: "light",
         buttonCaretType: "up",
         buttonClassName: "dlt_shape_submenu--shapeColorSelectorButton--YekZF",
@@ -300,7 +300,7 @@ let ec = memo(function ({
         },
         children: jsx("span", {
           className: _$$s2.colorText.textBodyMedium.$,
-          children: _$$t("whiteboard.shapes.more_shapes")
+          children: getI18nString("whiteboard.shapes.more_shapes")
         })
       })
     })]
@@ -553,11 +553,11 @@ let eS = memo(function ({
   let m = h === Yt();
   let _ = _$$C();
   let x = AE();
-  let j = md(ez);
+  let j = useAtomWithSubscription(ez);
   let C = _$$F.format(j);
-  let T = md(U9);
+  let T = useAtomWithSubscription(U9);
   let E = Qd().get(h);
-  let [S, w] = fp(oh);
+  let [S, w] = useAtomValueAndSetter(oh);
   let I = "open" === S.state && "shape" === S.tool;
   let L = LR();
   let N = useCallback(() => {
@@ -739,10 +739,10 @@ function eN({
   let p = Uo();
   let h = _$$C();
   let m = AE();
-  let x = md(SK).connectorToolLineStyle;
-  let j = md(wp);
+  let x = useAtomWithSubscription(SK).connectorToolLineStyle;
+  let j = useAtomWithSubscription(wp);
   let C = _$$F.format(j);
-  let [T, E] = fp(oh);
+  let [T, E] = useAtomValueAndSetter(oh);
   let S = "open" === T.state && "shape" === T.tool;
   let w = LR();
   let I = useCallback(() => {
@@ -810,8 +810,8 @@ function eN({
 export function $$eA1({
   optimizeForCompactSize: e
 }) {
-  let [t, i] = fp(SK);
-  let [s, l] = fp(_$$B2);
+  let [t, i] = useAtomValueAndSetter(SK);
+  let [s, l] = useAtomValueAndSetter(_$$B2);
   let {
     shapeWithTextType
   } = t;
@@ -822,12 +822,12 @@ export function $$eA1({
   let g = bu();
   let v = sT();
   let E = s3() && s === cxo.SHAPE_TOOL;
-  let S = md(oh);
+  let S = useAtomWithSubscription(oh);
   let w = "open" === S.state && "shape" === S.tool || E;
   let I = function ({
     startingShapeTool: e
   }) {
-    let [t, i] = fp(oh);
+    let [t, i] = useAtomValueAndSetter(oh);
     let n = "open" === t.state && "shape" === t.tool;
     return useCallback(() => {
       if (n) {
@@ -853,8 +853,8 @@ export function $$eA1({
   }({
     startingShapeTool: Jc.get("SQUARE")
   });
-  let L = md(Fy);
-  let N = md(eb);
+  let L = useAtomWithSubscription(Fy);
+  let N = useAtomWithSubscription(eb);
   let {
     show,
     isShowing,

@@ -1,10 +1,10 @@
 import { Wh } from "../figma_app/615482";
 import { useCallback } from "react";
-import { eU, fp } from "../figma_app/27355";
-let l = Wh(() => eU(null));
+import { atom, useAtomValueAndSetter } from "../figma_app/27355";
+let l = Wh(() => atom(null));
 export var $$s1 = (e => (e.CORNERS = "corners", e.AI_ACTION_OVERFLOW = "ai_action_overflow", e.MORE_ACTION_OVERFLOW = "more_action_overflow", e.EFFECTS = "effects", e.FILL = "fill", e.STROKE = "stroke", e.FONT_FAMILY = "font_family", e.FONT_SPACING = "font_spacing", e.IMAGE_CROP = "image_crop", e.LAYOUT_ALIGNMENT = "layout_alignment", e.TEMPLATE_TYPE = "template_type", e.TEXT_ALIGNMENT = "text_alignment", e.VOLUME_CONTROL = "volume_control", e))($$s1 || {});
 export function $$o0(e) {
-  let [t, n] = fp(l);
+  let [t, n] = useAtomValueAndSetter(l);
   return {
     isPopoverOpen: t === e,
     togglePopover: useCallback(() => {

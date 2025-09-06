@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { Pt } from "../figma_app/806412";
 import { s as _$$s } from "../cssbuilder/589278";
 import { sx } from "../905/941192";
@@ -16,8 +16,8 @@ export function $$$$p0({
   sentimentFeedbackCallback: o,
   additionalFeedbackCallback: l
 }) {
-  let d = md(TT);
-  let u = md(Bw);
+  let d = useAtomWithSubscription(TT);
+  let u = useAtomWithSubscription(Bw);
   let p = d ? u[d] ?? null : null;
   return p ? jsx(m, {
     actionLabel: p.label,

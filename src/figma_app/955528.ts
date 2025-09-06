@@ -8,15 +8,15 @@ import { cus, QOV } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import h from "../vendor/128080";
 import { $ } from "../905/455748";
 import { ZC } from "../figma_app/39751";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { useSprigWithSampling } from "../905/99656";
-import { Lg } from "../figma_app/257275";
+import { getFalseValue } from "../figma_app/897289";
 import { BE } from "../figma_app/991591";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { zX } from "../905/576487";
 import { Tv } from "../figma_app/311375";
@@ -64,15 +64,15 @@ export function $$X6(e, t) {
     source,
     toggle
   } = t;
-  let i = zl.get(_$$h);
-  let a = zl.get(_$$A2);
+  let i = atomStoreManager.get(_$$h);
+  let a = atomStoreManager.get(_$$A2);
   let s = a?.current || i?.current;
   if (!s) return;
-  if (zl.set(zF, source), zl.get($$Y4)) {
+  if (atomStoreManager.set(zF, source), atomStoreManager.get($$Y4)) {
     toggle && $$q1(e);
     return;
   }
-  let o = Lg() ? {
+  let o = getFalseValue() ? {
     x: 0,
     y: 0
   } : cn(s, qo);
@@ -190,7 +190,7 @@ export function $$Z14(e) {
       let i = e.getRangeFontSize(r, r + 1);
       let a = e.getRangeLineHeight(r, r + 1);
       let s = e.inheritedTextStyle;
-      ("mixed" === i || "mixed" === a) && $D(_$$e.AI_PRODUCTIVITY, Error("Unexpected mixed font size or line height while saving initial font size and line height"));
+      ("mixed" === i || "mixed" === a) && reportError(_$$e.AI_PRODUCTIVITY, Error("Unexpected mixed font size or line height while saving initial font size and line height"));
       n.set(e.guid, {
         nodeId: e.guid,
         nodeText: t.nodeText,
@@ -284,43 +284,43 @@ export function $$Q9(e) {
   useEffect(() => {
     if (o) {
       if (r === qy.RUNNING) l(_$$F.enqueue({
-        message: _$$t("slides.properties_panel.rewrite_text.action_rewriting"),
+        message: getI18nString("slides.properties_panel.rewrite_text.action_rewriting"),
         icon: zX.SPINNER,
         type: K,
         timeoutOverride: 1 / 0,
         button: {
-          text: _$$t("slides.properties_panel.rewrite_text.action_stop"),
+          text: getI18nString("slides.properties_panel.rewrite_text.action_stop"),
           action: () => cT(JT.SLIDES_REWRITE_TEXT)
         }
       }));else if (r === qy.CANCELLED) l(_$$F.dequeue({
         matchType: K
       }));else if (r === qy.DONE) l(_$$F.enqueue({
         icon: zX.CHECK,
-        message: _$$t("slides.properties_panel.rewrite_text.action_done"),
+        message: getI18nString("slides.properties_panel.rewrite_text.action_done"),
         type: K,
         timeoutOverride: 8e3,
         button: {
-          text: _$$t("slides.properties_panel.rewrite_text.action_rewrite_again"),
+          text: getI18nString("slides.properties_panel.rewrite_text.action_rewrite_again"),
           action: () => e()
         },
         onDismiss: () => {}
       }));else if (r === qy.ERROR) {
         let r = t.error;
         let n = function (e) {
-          if (e instanceof n4) return _$$t("slides.properties_panel.rewrite_text.error.no_text_characters_found");
-          if (!(e instanceof G1 || e instanceof CortexErrorV2)) return _$$t("slides.properties_panel.rewrite_text.error.default");
+          if (e instanceof n4) return getI18nString("slides.properties_panel.rewrite_text.error.no_text_characters_found");
+          if (!(e instanceof G1 || e instanceof CortexErrorV2)) return getI18nString("slides.properties_panel.rewrite_text.error.default");
           let t = {
-            offline: _$$t("slides.properties_panel.rewrite_text.error.connection"),
-            meter_exceeded: _$$t("slides.properties_panel.rewrite_text.error.rate_limit"),
-            rate_limit_exceeded: _$$t("slides.properties_panel.rewrite_text.error.rate_limit"),
-            content_length_limit_exceeded: _$$t("slides.properties_panel.rewrite_text.error.token_limit"),
-            text_tool_no_text: _$$t("slides.properties_panel.rewrite_text.error.empty_text"),
-            unsafe_or_harmful_content: _$$t("slides.properties_panel.rewrite_text.error.inappropriate_input"),
-            service_issue: _$$t("slides.properties_panel.rewrite_text.error.openai_down"),
-            ai_opt_out_error: _$$t("slides.properties_panel.rewrite_text.error.opt_out"),
-            unauthorized: _$$t("slides.properties_panel.rewrite_text.error.default"),
-            generic: _$$t("slides.properties_panel.rewrite_text.error.default"),
-            not_implemented: _$$t("ai.error.not_implemented")
+            offline: getI18nString("slides.properties_panel.rewrite_text.error.connection"),
+            meter_exceeded: getI18nString("slides.properties_panel.rewrite_text.error.rate_limit"),
+            rate_limit_exceeded: getI18nString("slides.properties_panel.rewrite_text.error.rate_limit"),
+            content_length_limit_exceeded: getI18nString("slides.properties_panel.rewrite_text.error.token_limit"),
+            text_tool_no_text: getI18nString("slides.properties_panel.rewrite_text.error.empty_text"),
+            unsafe_or_harmful_content: getI18nString("slides.properties_panel.rewrite_text.error.inappropriate_input"),
+            service_issue: getI18nString("slides.properties_panel.rewrite_text.error.openai_down"),
+            ai_opt_out_error: getI18nString("slides.properties_panel.rewrite_text.error.opt_out"),
+            unauthorized: getI18nString("slides.properties_panel.rewrite_text.error.default"),
+            generic: getI18nString("slides.properties_panel.rewrite_text.error.default"),
+            not_implemented: getI18nString("ai.error.not_implemented")
           };
           let r = "generic";
           if (e instanceof CortexErrorV2) ClientContentLengthLimitExceededError.isInstance(e) || ProviderContentLengthLimitExceededError.isInstance(e) ? r = "content_length_limit_exceeded" : MeterExceededError.isInstance(e) ? r = "meter_exceeded" : ProviderRateLimitExceededError.isInstance(e) || ProviderOverloadedError.isInstance(e) || CortexRateLimitExceededError.isInstance(e) ? r = "rate_limit_exceeded" : ClientNoTextSelectedError.isInstance(e) ? r = "text_tool_no_text" : ProviderServiceIssueError.isInstance(e) || ProviderServiceBusyError.isInstance(e) ? r = "service_issue" : OfflineError.isInstance(e) ? r = "offline" : UnsafeOrHarmfulPromptError.isInstance(e) || ProviderUnsafeOrHarmfulContentError.isInstance(e) ? r = "unsafe_or_harmful_content" : UnauthorizedError.isInstance(e) ? r = "unauthorized" : NotImplementedError.isInstance(e) ? r = "not_implemented" : e?.statusCode === 404 ? r = "service_issue" : e?.statusCode === 429 || e?.statusCode === 529 ? r = "rate_limit_exceeded" : e?.statusCode === 403 && (r = "ai_opt_out_error");else if (e instanceof G1) switch (e.type) {
@@ -347,7 +347,7 @@ export function $$Q9(e) {
                   r = "ai_opt_out_error";
               }
           }
-          return t[r] || _$$t("slides.properties_panel.rewrite_text.error.default");
+          return t[r] || getI18nString("slides.properties_panel.rewrite_text.error.default");
         }(r);
         let i = function (e) {
           switch (e.type) {
@@ -365,7 +365,7 @@ export function $$Q9(e) {
           message: n,
           type: K,
           button: i ? {
-            text: _$$t("slides.properties_panel.rewrite_text.action_rewrite_again"),
+            text: getI18nString("slides.properties_panel.rewrite_text.action_rewrite_again"),
             action: () => e()
           } : void 0,
           onDismiss: () => {}

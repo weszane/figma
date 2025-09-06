@@ -1,14 +1,14 @@
 import { createElement } from "react";
 import { Z } from "../905/606826";
 import { a as _$$a } from "../905/192547";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Qh } from "../905/469533";
 import { C_ } from "../905/345933";
 export function $$d0(e) {
   return {
-    light: t("fullscreen_actions.theme.light"),
-    dark: t("fullscreen_actions.theme.dark"),
-    system: t("fullscreen_actions.theme.system_theme")
+    light: getI18nString("fullscreen_actions.theme.light"),
+    dark: getI18nString("fullscreen_actions.theme.dark"),
+    system: getI18nString("fullscreen_actions.theme.system_theme")
   }[e];
 }
 export function $$c1(e, t) {

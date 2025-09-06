@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { eU, Xr } from "../figma_app/27355";
-export let $$a1 = eU(null);
+import { atom, Xr } from "../figma_app/27355";
+export let $$a1 = atom(null);
 export function $$s0(e) {
   let t = Xr($$a1);
   return useEffect(() => (e?.current && t(e), () => {

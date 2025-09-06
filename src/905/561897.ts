@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
-import { eU, Iz, md } from "../figma_app/27355";
+import { atom, createRemovableAtomFamily, useAtomWithSubscription } from "../figma_app/27355";
 import { oA } from "../905/663269";
 import { gB } from "../905/723791";
 import { JB } from "../figma_app/657017";
@@ -12,7 +12,7 @@ import { FPlanNameType } from "../figma_app/191312";
 import { fy7, AXx, X9s, sBU, f19, Lew } from "../figma_app/43951";
 import { zl } from "../905/276025";
 import { Me, jv } from "../figma_app/598018";
-let _ = eU(e => {
+let _ = atom(e => {
   let t = e(DQ);
   let i = M();
   let n = e(zl(!0)).data?.tier !== FPlanNameType.STARTER;
@@ -25,7 +25,7 @@ let _ = eU(e => {
   });
   return data && data.libraryPresetSubscriptionsV2 ? t || n ? [] : data?.libraryPresetSubscriptionsV2?.filter(e => "loaded" !== e.default_subscribed.status || e.default_subscribed.data) : void 0;
 });
-let $$A0 = eU(e => {
+let $$A0 = atom(e => {
   let t = e(DQ);
   let i = t ? e(AXx.Query({
     orgId: t
@@ -41,7 +41,7 @@ let $$A0 = eU(e => {
   });
   return gB(a);
 });
-let $$y4 = Iz(e => eU(t => {
+let $$y4 = createRemovableAtomFamily(e => atom(t => {
   let i = t(h0);
   let n = !!e && !!i;
   let r = t(JB);
@@ -58,7 +58,7 @@ let $$y4 = Iz(e => eU(t => {
   });
   return gB(o);
 }));
-let $$b1 = Iz(e => eU(t => {
+let $$b1 = createRemovableAtomFamily(e => atom(t => {
   let i;
   if (getFeatureFlags().dse_library_subscriptions_for_team) {
     if (!e) return gB({});
@@ -78,7 +78,7 @@ let $$b1 = Iz(e => eU(t => {
   });
   return gB(n);
 }));
-let v = eU(e => {
+let v = atom(e => {
   let t = e(f19.Query({}));
   let i = e(JB);
   let n = e(DQ);
@@ -94,7 +94,7 @@ let v = eU(e => {
   });
   return gB(o);
 });
-let $$I3 = eU(e => {
+let $$I3 = atom(e => {
   let t = e(v);
   if ("loaded" !== t.status) return t;
   let i = t.data;
@@ -112,7 +112,7 @@ let $$I3 = eU(e => {
   };
   return gB(n);
 });
-let $$E6 = eU(e => {
+let $$E6 = atom(e => {
   let t = e(Lew.Query({}));
   let i = e(JB);
   if ("loaded" !== t.status) return t;
@@ -124,7 +124,7 @@ let $$E6 = eU(e => {
   return gB(r);
 });
 export function $$x2() {
-  let e = md(_);
+  let e = useAtomWithSubscription(_);
   return useMemo(() => {
     if (!e) return;
     let t = {};

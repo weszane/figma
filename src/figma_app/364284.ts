@@ -1,4 +1,4 @@
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { u } from "../905/228274";
 import { V } from "../905/449599";
 import { g, w } from "../905/256045";
@@ -13,16 +13,16 @@ let $$d2 = {
 let c = {
   [k.EMBED_WIDGET]: {
     propertyMenuItemNameToI18nId: {
-      [w.OPEN]: () => t("whiteboard.embeds.inline_menu.open_link"),
-      [w.CONVERT_TO_TEXT]: () => t("whiteboard.embeds.inline_menu.change_back_to_text")
+      [w.OPEN]: () => getI18nString("whiteboard.embeds.inline_menu.open_link"),
+      [w.CONVERT_TO_TEXT]: () => getI18nString("whiteboard.embeds.inline_menu.change_back_to_text")
     }
   },
   [k.LINK_PREVIEW_WIDGET]: {
     propertyMenuItemNameToI18nId: {
-      [HP.OPEN]: () => t("whiteboard.embeds.inline_menu.open_link"),
-      [HP.VERTICAL]: () => t("whiteboard.embeds.inline_menu.display_vertical"),
-      [HP.HORIZONTAL]: () => t("whiteboard.embeds.inline_menu.display_horizontal"),
-      [HP.CONVERT_TO_TEXT]: () => t("whiteboard.embeds.inline_menu.change_back_to_text")
+      [HP.OPEN]: () => getI18nString("whiteboard.embeds.inline_menu.open_link"),
+      [HP.VERTICAL]: () => getI18nString("whiteboard.embeds.inline_menu.display_vertical"),
+      [HP.HORIZONTAL]: () => getI18nString("whiteboard.embeds.inline_menu.display_horizontal"),
+      [HP.CONVERT_TO_TEXT]: () => getI18nString("whiteboard.embeds.inline_menu.change_back_to_text")
     }
   },
   [k.AI_SUMMARY_WIDGET]: {

@@ -15,15 +15,15 @@ import { VD3, e0R, glU } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { AD } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import v from "classnames";
-import { sx } from "../905/449184";
-import { R as _$$R } from "../905/103090";
+import { trackEventAnalytics } from "../905/449184";
+import { selectWithShallowEqual } from "../905/103090";
 import { o6, Pt } from "../figma_app/806412";
 import { E as _$$E2 } from "../905/277716";
 import { Point } from "../905/736624";
 import { c$ } from "../figma_app/236327";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { oB, j7 } from "../905/929976";
 import { Uv, XE, bS } from "../figma_app/91703";
 import { AV, Qn } from "../figma_app/933328";
@@ -112,7 +112,7 @@ class eA extends o6 {
           modal: !0
         }));
         this.props.dispatch(XE());
-        sx("Style Picker Opened", {
+        trackEventAnalytics("Style Picker Opened", {
           styleType: this.props.styleType,
           viewMode: this.props.stylePickerListLayout ? "LIST" : "GRID",
           nonInteraction: 0
@@ -127,7 +127,7 @@ class eA extends o6 {
           glU.selectStyle(n3.INVALID, IA.INVALID);
         });
       });
-      sx("Style Detached", {
+      trackEventAnalytics("Style Detached", {
         styleType: this.props.styleType
       });
     };
@@ -217,10 +217,10 @@ class eA extends o6 {
         children: jsx(_$$K, {
           actionOnPointerDown: !0,
           recordingKey: Pt(this.props, "detachButton"),
-          "aria-label": _$$t("design_systems.styles.detach_style"),
+          "aria-label": getI18nString("design_systems.styles.detach_style"),
           onClick: this.detachStyle,
           htmlAttributes: {
-            "data-tooltip": _$$t("design_systems.styles.detach_style"),
+            "data-tooltip": getI18nString("design_systems.styles.detach_style"),
             "data-tooltip-type": Ib.TEXT
           },
           children: jsx(_$$U, {})
@@ -230,10 +230,10 @@ class eA extends o6 {
         children: jsx(_$$K, {
           recordingKey: Pt(this.props, "removeAllButton"),
           onClick: this.props.removeAllProperties,
-          "aria-label": _$$t("fullscreen.properties_panel.remove"),
+          "aria-label": getI18nString("fullscreen.properties_panel.remove"),
           htmlAttributes: {
             onMouseDown: this.stopPropagation,
-            "data-tooltip": _$$t("fullscreen.properties_panel.remove"),
+            "data-tooltip": getI18nString("fullscreen.properties_panel.remove"),
             "data-tooltip-type": Ib.TEXT
           },
           children: jsx(_$$O, {})
@@ -249,7 +249,7 @@ class eA extends o6 {
     let a = r.length > 0 && r.every(e => this.props.versionedStyleInfo && glU.isDirectStyleConsumer(this.props.versionedStyleInfo.GUID, this.props.inheritStyleKeyField, e));
     let s = [{
       value: "update-selected-style",
-      displayText: _$$t("design_systems.styles.update_selected_style"),
+      displayText: getI18nString("design_systems.styles.update_selected_style"),
       callback: () => {
         i && this.props.versionedStyleInfo && this.props.dispatch(Qn({
           styleUpdateInfo: i,
@@ -259,7 +259,7 @@ class eA extends o6 {
       }
     }, {
       value: "review-style-update",
-      displayText: _$$t("design_systems.styles.review_updates"),
+      displayText: getI18nString("design_systems.styles.review_updates"),
       callback: () => this.toggleReviewUpdatesModal(t, this.props.versionedStyleInfo ? this.props.versionedStyleInfo.GUID : void 0)
     }];
     return t && this.props.versionedStyleInfo && a ? jsxs("div", {
@@ -271,7 +271,7 @@ class eA extends o6 {
         onClick: this.toggleDropdown,
         onMouseDown: this.stopPropagation,
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("design_systems.styles.update_available"),
+        "data-tooltip": getI18nString("design_systems.styles.update_available"),
         recordingKey: Pt(this.props, ""),
         children: jsx(_$$o, {})
       }), this.props.dropdownShown?.type === this.STYLE_UPDATE_DROPDOWN_ID && (this.selectUpdateOptionRef.current ? jsx(Cf, {
@@ -321,7 +321,7 @@ class eA extends o6 {
       children: [(1 === t || 0 === t && this.props.hasMixedProperties) && jsx(fI, {
         children: jsx(nV, {
           className: FL,
-          children: tx("fullscreen.properties_panel.click_plus_to_replace_mixed_content")
+          children: renderI18nText("fullscreen.properties_panel.click_plus_to_replace_mixed_content")
         })
       }, "label"), this.state.hasEverHovered && jsx(MM, {
         inheritStyleKey: this.props.inheritStyleKey,
@@ -342,7 +342,7 @@ class eA extends o6 {
         styleType: this.props.styleType
       }), 2 === t && this.props.children]
     });
-    let A = this.props.isUI3 ? a.includes(this.props.styleType) ? _$$t("fullscreen.properties_panel.tooltip_applyStylesAndVariables") : _$$t("fullscreen.properties_panel.tooltip_applyStyles") : a.includes(this.props.styleType) ? _$$t("design_systems.styles_and_variables") : _$$t("design_systems.styles.style");
+    let A = this.props.isUI3 ? a.includes(this.props.styleType) ? getI18nString("fullscreen.properties_panel.tooltip_applyStylesAndVariables") : getI18nString("fullscreen.properties_panel.tooltip_applyStyles") : a.includes(this.props.styleType) ? getI18nString("design_systems.styles_and_variables") : getI18nString("design_systems.styles.style");
     let b = jsxs("span", {
       className: I()({
         [MC]: !this.props.mainStyle,
@@ -388,10 +388,10 @@ class eA extends o6 {
               children: jsx(_$$K, {
                 recordingKey: Pt(this.props, "addButton"),
                 onClick: i,
-                "aria-label": this.props.overrideAddPropertyTooltip ?? _$$t("fullscreen.properties_panel.add"),
+                "aria-label": this.props.overrideAddPropertyTooltip ?? getI18nString("fullscreen.properties_panel.add"),
                 htmlAttributes: {
                   onMouseDown: this.stopPropagation,
-                  "data-tooltip": this.props.overrideAddPropertyTooltip ?? _$$t("fullscreen.properties_panel.add"),
+                  "data-tooltip": this.props.overrideAddPropertyTooltip ?? getI18nString("fullscreen.properties_panel.add"),
                   "data-tooltip-type": Ib.TEXT
                 },
                 children: jsx(_$$e, {})
@@ -504,7 +504,7 @@ export let $$ey0 = memo(e => {
   let t = q5();
   let i = _G();
   let r = {
-    ..._$$R(t => ({
+    ...selectWithShallowEqual(t => ({
       dropdownShown: t.dropdownShown,
       library: t.library,
       modalShown: t.modalShown,
@@ -517,7 +517,7 @@ export let $$ey0 = memo(e => {
       directlySubscribedStyles: _Q(t),
       versionedStyleInfo: nm(t, e.inheritStyleID)
     })),
-    styleUpdates: md(j_)
+    styleUpdates: useAtomWithSubscription(j_)
   };
   let s = useDispatch();
   let o = E7(_$$b("guid"));

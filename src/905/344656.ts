@@ -1,11 +1,11 @@
 import { h3O, kul } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { NC } from "../905/17179";
-import { eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { debugState } from "../905/407919";
 import { getInitialOptions } from "../figma_app/169182";
 import { Hh } from "../figma_app/553184";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { wZ } from "../figma_app/701982";
 import { ds } from "../figma_app/314264";
@@ -14,9 +14,9 @@ import { nF } from "../905/350402";
 import { to } from "../905/156213";
 let $$_1 = NC("SET_SAVE_STATUS");
 let $$A0 = nF((e, t) => {
-  if (eD && !eD.isFileBrowserTab()) {
+  if (desktopAPIInstance && !desktopAPIInstance.isFileBrowserTab()) {
     let e = !t.hasUnsavedChanges;
-    eD.setSaved(e);
+    desktopAPIInstance.setSaved(e);
   }
   e.dispatch(b(t));
   e.dispatch($$_1(t));
@@ -41,9 +41,9 @@ let b = nF((e, t) => {
     getInitialOptions().e2e_traffic && e.dispatch(F.clearAll());
     getFeatureFlags().remove_unsaved_changes_bell || e.dispatch(F.enqueue({
       type: "unsaved_changes",
-      message: _$$t("save_status.unsaved_changes"),
+      message: getI18nString("save_status.unsaved_changes"),
       button: {
-        text: _$$t("save_status.learn_more"),
+        text: getI18nString("save_status.learn_more"),
         action: () => {
           e.dispatch(to({
             type: wZ,
@@ -62,7 +62,7 @@ let b = nF((e, t) => {
   }, getInitialOptions().e2e_traffic ? 10 : void 0) : i.saveStatus && i.saveStatus.hasUnsavedChanges && !t.hasUnsavedChanges && (e.dispatch(F.dequeue({
     matchType: "unsaved_changes"
   })), G.clear() && navigator.onLine && e.dispatch(F.enqueue({
-    message: _$$t("save_status.changes_saved")
+    message: getI18nString("save_status.changes_saved")
   }))));
 });
 export const E = $$A0;

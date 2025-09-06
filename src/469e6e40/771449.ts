@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { Xf } from "../figma_app/153916";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { Y } from "../905/830372";
 import { E as _$$E } from "../905/984674";
 import { KX } from "../469e6e40/623537";
@@ -17,7 +17,7 @@ import { VP, mn, D2 } from "../905/18797";
 import { getPermissionsStateMemoized } from "../figma_app/642025";
 import { px, j_ } from "../figma_app/465071";
 import { vS } from "../figma_app/846003";
-import { RM } from "../905/441038";
+import { GroupType } from "../905/441038";
 import { J0, oU } from "../figma_app/967319";
 import { o0 } from "../905/844131";
 import { nF, lF } from "../469e6e40/68843";
@@ -74,7 +74,7 @@ export function $$C0(e) {
     V && A(sf(o0));
   }, [A, V]), "loaded" !== M.status) return null;
   let W = null;
-  if (selectedTab === RM.MEMBERS) {
+  if (selectedTab === GroupType.MEMBERS) {
     let e = {
       ...J0,
       ...I.orgAdminMembersTabFilters,
@@ -95,10 +95,10 @@ export function $$C0(e) {
         children: [jsx(_$$E, {
           color: "secondary",
           fontWeight: "semi-bold",
-          children: tx("license_group_admin.members.no_members_yet")
+          children: renderI18nText("license_group_admin.members.no_members_yet")
         }), jsx(_$$E, {
           color: "secondary",
-          children: tx("license_group_admin.members.no_members_yet.subtitle")
+          children: renderI18nText("license_group_admin.members.no_members_yet.subtitle")
         })]
       }),
       dropdownShown: C,

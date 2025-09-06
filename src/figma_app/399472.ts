@@ -1,6 +1,6 @@
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
 import { Sb } from "../905/359847";
 import { nF } from "../905/350402";
@@ -20,7 +20,7 @@ let $$f7 = nF((e, t) => {
     r && e.dispatch(r);
   }).catch(t => {
     let r = J(t);
-    e.dispatch(_$$s.error(_$$t("community.actions.an_error_occurred_accepting_invite_please_refresh_and_try_again")));
+    e.dispatch(_$$s.error(getI18nString("community.actions.an_error_occurred_accepting_invite_please_refresh_and_try_again")));
     return Error(`Error updating resource ${r}`);
   });
 });
@@ -64,7 +64,7 @@ let $$E5 = nF((e, t) => {
     });
   }).catch(t => {
     let r = J(t);
-    e.dispatch(_$$s.error(_$$t("community.actions.an_error_occurred_accepting_invite_please_refresh_and_try_again")));
+    e.dispatch(_$$s.error(getI18nString("community.actions.an_error_occurred_accepting_invite_please_refresh_and_try_again")));
     return Error(`Error updating resource ${r}`);
   });
 });
@@ -76,7 +76,7 @@ let $$y4 = nF((e, t) => {
     r && e.dispatch(r);
   }).catch(t => {
     let r = J(t);
-    e.dispatch(_$$s.error(_$$t("community.actions.an_error_occurred_while_removing_publisher_please_refresh_and_try_again")));
+    e.dispatch(_$$s.error(getI18nString("community.actions.an_error_occurred_while_removing_publisher_please_refresh_and_try_again")));
     return Error(`Error updating resource ${r}`);
   });
 });
@@ -112,7 +112,7 @@ let $$b0 = nF((e, t) => {
     });
   }).catch(t => {
     let r = J(t);
-    e.dispatch(_$$s.error(_$$t("community.actions.an_error_occurred_while_removing_publisher_please_refresh_and_try_again")));
+    e.dispatch(_$$s.error(getI18nString("community.actions.an_error_occurred_while_removing_publisher_please_refresh_and_try_again")));
     return Error(`Error updating resource ${r}`);
   });
 });
@@ -145,4 +145,4 @@ export const aq = $$I3;
 export const bb = $$y4;
 export const dx = $$E5;
 export const gI = $$v6;
-export const z8 = $$f7; 
+export const z8 = $$f7;

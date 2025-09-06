@@ -2,10 +2,10 @@ import { Wh } from "../figma_app/615482";
 import { lV } from "../figma_app/617606";
 import { debug } from "../figma_app/465776";
 import { o3, Or, ww } from "../figma_app/230278";
-import { eU, zl } from "../figma_app/27355";
+import { atom, atomStoreManager } from "../figma_app/27355";
 let s = [...["accordion.tsx", "alert-dialog.tsx", "alert.tsx", "aspect-ratio.tsx", "avatar.tsx", "badge.tsx", "breadcrumb.tsx", "button.tsx", "calendar.tsx", "card.tsx", "carousel.tsx", "chart.tsx", "checkbox.tsx", "collapsible.tsx", "command.tsx", "context-menu.tsx", "dialog.tsx", "drawer.tsx", "dropdown-menu.tsx", "form.tsx", "hover-card.tsx", "input-otp.tsx", "input.tsx", "label.tsx", "menubar.tsx", "navigation-menu.tsx", "pagination.tsx", "popover.tsx", "progress.tsx", "radio-group.tsx", "resizable.tsx", "scroll-area.tsx", "select.tsx", "separator.tsx", "sheet.tsx", "sidebar.tsx", "skeleton.tsx", "slider.tsx", "sonner.tsx", "switch.tsx", "table.tsx", "tabs.tsx", "textarea.tsx", "toggle-group.tsx", "toggle.tsx", "tooltip.tsx", "use-mobile.ts", "utils.ts"].map(e => `/components/ui/${e}`), ...["ImageWithFallback.tsx"].map(e => `/components/figma/${e}`), "/styles/globals.css", "/guidelines/Guidelines.md", "/Attributions.md", "/" + o3, "/" + Or, "/" + ww, "/App.tsx"];
 debug(s.every(e => e.startsWith("/")), "MAKE_SYSTEM_FILES must be absolute paths");
-export let $$l9 = Wh(() => eU(new Set()));
+export let $$l9 = Wh(() => atom(new Set()));
 export function $$d10(e) {
   let t = e.split("/");
   let r = "";
@@ -14,7 +14,7 @@ export function $$d10(e) {
     r = `${r}/${e}`;
     n.add(r);
   }
-  zl.set($$l9, e => new Set([...e, ...n]));
+  atomStoreManager.set($$l9, e => new Set([...e, ...n]));
 }
 export function $$c5(e, t, r) {
   let n = function (e, t) {

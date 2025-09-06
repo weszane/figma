@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useRef, useMemo, useState, useEffect } from "react";
 import { getFeatureFlags } from "../905/601108";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { k as _$$k2 } from "../905/22009";
 import { iB } from "../figma_app/188671";
 import { IT } from "../905/713695";
@@ -33,7 +33,7 @@ function m({
       value: e,
       spellCheck: !1,
       autoFocus: !0,
-      placeholder: _$$t("community.publishing.tell_us_more")
+      placeholder: getI18nString("community.publishing.tell_us_more")
     })
   });
 }
@@ -216,7 +216,7 @@ export function $$k2({
   let R = getFeatureFlags().cmty_categories_other_input && k && b && C(b) && e !== t;
   return jsxs(Fragment, {
     children: [jsx(_$$A2, {
-      label: _$$t("community.publishing.category"),
+      label: getI18nString("community.publishing.category"),
       required: p,
       error: h && !k ? h : void 0,
       disabled: g,
@@ -224,19 +224,19 @@ export function $$k2({
         categories: A,
         value: v,
         onChange: T,
-        placeholder: _$$t("community.publishing.select_a_category"),
+        placeholder: getI18nString("community.publishing.select_a_category"),
         dropdownType: $$S0,
         disabled: g
       })
     }), k && jsxs(_$$A2, {
-      label: _$$t("community.publishing.subcategory"),
+      label: getI18nString("community.publishing.subcategory"),
       required: p,
-      error: h && k ? _$$t("community.publishing.category_sub_cant_be_empty") : void 0,
+      error: h && k ? getI18nString("community.publishing.category_sub_cant_be_empty") : void 0,
       children: [jsx(I, {
         categories: y[v],
         value: e,
         onChange: i,
-        placeholder: _$$t("community.publishing.select_a_subcategory"),
+        placeholder: getI18nString("community.publishing.select_a_subcategory"),
         dropdownType: $$w1,
         disabled: g
       }), R && jsx(m, {

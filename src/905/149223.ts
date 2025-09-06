@@ -6,9 +6,9 @@ import { l7 } from "../905/189185";
 import { sH } from "../905/805904";
 import { getFeatureFlags } from "../905/601108";
 import { wm } from "../905/19536";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { debugState } from "../905/407919";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { o6, dp } from "../figma_app/806412";
 import { g as _$$g } from "../905/880308";
 import { Point } from "../905/736624";
@@ -82,13 +82,13 @@ class M extends o6 {
       let r = Dc(debugState.getState().selectedView.editorType);
       let a = "PATTERN" !== paint.type && "PATTERN" === e;
       let l = "PATTERN" === paint.type && "PATTERN" !== e;
-      (a || l) && az.trackDefinedEvent("illustration.web_pattern_paint_change", {
+      (a || l) && analyticsEventManager.trackDefinedEvent("illustration.web_pattern_paint_change", {
         changedToPattern: a,
         productType: r
       });
       let d = "NOISE" !== paint.type && "NOISE" === e;
       let c = "NOISE" === paint.type && "NOISE" !== e;
-      (d || c) && az.trackDefinedEvent("illustration.web_noise_paint_change", {
+      (d || c) && analyticsEventManager.trackDefinedEvent("illustration.web_noise_paint_change", {
         changedToNoise: d,
         productType: r
       });
@@ -254,7 +254,7 @@ export function $$j1({
     editModeType,
     library,
     currentSelectedGradientStop
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     currentTool: e.mirror.appModel.currentTool,
     editModeType: e.mirror.appModel.activeCanvasEditModeType,
     library: e.library,

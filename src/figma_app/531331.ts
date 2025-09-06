@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
 import { Rs } from "../figma_app/288654";
 import { d6 } from "../figma_app/687776";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { c$ } from "../figma_app/618433";
 import { oB } from "../905/929976";
 import { YW } from "../figma_app/78808";
@@ -21,7 +21,7 @@ import { getPermissionsStateMemoized } from "../figma_app/642025";
 import { F9 } from "../figma_app/803787";
 import { b as _$$b } from "../905/165519";
 import { vL, Bi } from "../905/652992";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { O as _$$O } from "../905/833838";
 import { ZN } from "../figma_app/630077";
 import { h as _$$h } from "../figma_app/270558";
@@ -72,9 +72,9 @@ export function $$k1() {
   let G = N.data?.file?.project;
   let V = G && e?.editorType && d6(G, e.editorType);
   let H = e?.project && V;
-  let z = F.editorType !== nT.Whiteboard;
+  let z = F.editorType !== FEditorType.Whiteboard;
   let W = !!(e && z && Kz(e));
-  let K = H ? W ? _$$t("fullscreen.filename_view.duplicate-as-new") : _$$t("fullscreen.filename_view.duplicate") : _$$t("fullscreen.filename_view.duplicate-to-drafts");
+  let K = H ? W ? getI18nString("fullscreen.filename_view.duplicate-as-new") : getI18nString("fullscreen.filename_view.duplicate") : getI18nString("fullscreen.filename_view.duplicate-to-drafts");
   let Y = e?.currentPlanUser?.draftsFolderId;
   let $ = Rs(oGE, {
     projectId: Y || ""

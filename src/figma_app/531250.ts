@@ -7,7 +7,7 @@ import { a as _$$a } from "../905/558168";
 import { rXF } from "../figma_app/763686";
 import { Pt } from "../figma_app/806412";
 import { E as _$$E } from "../905/277716";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { hS } from "../905/216495";
 import { kl, lJ } from "../905/275640";
 import { u as _$$u, SG } from "../figma_app/852050";
@@ -105,7 +105,7 @@ export function $$R1(e) {
   let u = useDispatch();
   let [_, m] = lJ("cornerRadius");
   let E = e.disabled ? 0 : void 0;
-  let T = P(_$$t("fullscreen.properties_panel.transform_panel.corner_radius"));
+  let T = P(getI18nString("fullscreen.properties_panel.transform_panel.corner_radius"));
   return jsx($j, {
     bigNudgeAmount,
     "data-tooltip": T,

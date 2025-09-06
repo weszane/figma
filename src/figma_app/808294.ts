@@ -1,5 +1,5 @@
 import { j } from "../905/918929";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { D } from "../figma_app/690075";
 import { vr } from "../figma_app/514043";
 import { I0, xQ, m3, zF, U, PM } from "../figma_app/45218";
@@ -33,7 +33,7 @@ export function $$f11(e) {
 export function $$E21(e, t) {
   if (!e || !t) return "";
   let r = 1200 * e * (1 - t / 100);
-  return _$$t("community.buyer.price_per_year", {
+  return getI18nString("community.buyer.price_per_year", {
     priceString: $$I16(r, r % 100 != 0)
   });
 }
@@ -45,17 +45,17 @@ export function $$y14(e, t = !1) {
   if (!is_subscription) return $$I16(price, !1);
   if (t) {
     let t = e.annual_price || 0;
-    return _$$t("community.buyer.price_per_year", {
+    return getI18nString("community.buyer.price_per_year", {
       priceString: $$I16(t, t % 100 != 0)
     });
   }
-  return _$$t("community.buyer.price_per_month", {
+  return getI18nString("community.buyer.price_per_month", {
     priceString: $$I16(price, price % 100 != 0)
   });
 }
 export function $$b10(e) {
   let t = $$y14(e);
-  let r = Uv(e) ? _$$t("community.buyer.subscribe") : _$$t("community.buyer.buy");
+  let r = Uv(e) ? getI18nString("community.buyer.subscribe") : getI18nString("community.buyer.buy");
   return `${r} ${t}`;
 }
 export function $$T9(e) {
@@ -64,9 +64,9 @@ export function $$T9(e) {
     is_subscription
   } = e;
   let n = $$I16(price, price % 100 != 0);
-  return is_subscription ? _$$t("community.buyer.price_per_month_subscription", {
+  return is_subscription ? getI18nString("community.buyer.price_per_month_subscription", {
     priceString: n
-  }) : _$$t("community.buyer.price_one_time_payment", {
+  }) : getI18nString("community.buyer.price_one_time_payment", {
     priceString: n
   });
 }
@@ -78,15 +78,15 @@ export function $$I16(e, t = !1) {
 export function $$S18(e) {
   switch (e) {
     case bG.DOESNT_MEET_NEEDS:
-      return _$$t("community.buyer.refund_reason.doesnt_meet_needs");
+      return getI18nString("community.buyer.refund_reason.doesnt_meet_needs");
     case bG.TECHNICAL_ISSUES:
-      return _$$t("community.buyer.refund_reason.technical_issues");
+      return getI18nString("community.buyer.refund_reason.technical_issues");
     case bG.TOO_EXPENSIVE:
-      return _$$t("community.buyer.refund_reason.too_expensive");
+      return getI18nString("community.buyer.refund_reason.too_expensive");
     case bG.FOUND_ALTERNATIVE:
-      return _$$t("community.buyer.refund_reason.found_alternative");
+      return getI18nString("community.buyer.refund_reason.found_alternative");
     case bG.OTHER:
-      return _$$t("community.buyer.refund_reason.other");
+      return getI18nString("community.buyer.refund_reason.other");
   }
 }
 function v(e) {

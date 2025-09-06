@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from "../vendor/514228";
 import { E as _$$E } from "../905/632989";
 import { glU } from "../figma_app/763686";
 import l from "classnames";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Pt } from "../figma_app/806412";
 import { B as _$$B } from "../905/714743";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { sx as _$$sx } from "../905/941192";
 import { RK } from "../figma_app/815170";
 import { Dm, Uu } from "../figma_app/8833";
@@ -51,7 +51,7 @@ function M(e) {
   let f = t => {
     e.immediatelyDismissHyperlinkPopup && e.immediatelyDismissHyperlinkPopup();
     e.showHyperlinkEditor();
-    sx("Show Hyperlink Editor", {
+    trackEventAnalytics("Show Hyperlink Editor", {
       source: "HyperlinkPopup"
     });
     t.stopPropagation();
@@ -120,7 +120,7 @@ function M(e) {
     case _$$F.FRAME:
       let H = data.text;
       r = _$$A5;
-      H && e.editorType === FFileType.SITES && (r = _$$A9, "/" === H && (H = _$$t("sites.panel.home"), r = _$$A7));
+      H && e.editorType === FFileType.SITES && (r = _$$A9, "/" === H && (H = getI18nString("sites.panel.home"), r = _$$A7));
       t = jsxs(Fragment, {
         children: [jsx("div", {
           className: Qq,
@@ -138,7 +138,7 @@ function M(e) {
       r = _$$A6;
       t = jsx("div", {
         className: Qq,
-        children: tx("hyperlink.invalid_link", {
+        children: renderI18nText("hyperlink.invalid_link", {
           link: data.urlString
         })
       });
@@ -172,15 +172,15 @@ function M(e) {
       case _$$F.GENERIC:
       case _$$F.FIGMA_FILE:
       case _$$F.FIGMA_PROTOTYPE:
-        return _$$t("hyperlink.prefix.open");
+        return getI18nString("hyperlink.prefix.open");
       case _$$F.FIGMA_VERSION:
-        return _$$t("hyperlink.prefix.open_past_version");
+        return getI18nString("hyperlink.prefix.open_past_version");
       case _$$F.PAGE:
       case _$$F.FRAME:
-        return _$$t("hyperlink.prefix.go_to");
+        return getI18nString("hyperlink.prefix.go_to");
       case _$$F.MAILTO:
       case _$$F.TEL:
-        return _$$t("hyperlink.prefix.email");
+        return getI18nString("hyperlink.prefix.email");
       case _$$F.INVALID:
       case _$$F.MISSING:
       case _$$F.NOT_LOADED:
@@ -190,9 +190,9 @@ function M(e) {
   let Y = (() => {
     switch (e.data.type) {
       case _$$F.MAILTO:
-        return _$$t("hyperlink.send_mail");
+        return getI18nString("hyperlink.send_mail");
       case _$$F.TEL:
-        return _$$t("hyperlink.call_telephone");
+        return getI18nString("hyperlink.call_telephone");
       default:
         return null;
     }
@@ -239,7 +239,7 @@ function M(e) {
         svg: _$$A6
       }), jsx("div", {
         className: d()(ln, i1),
-        children: tx("hyperlink.edit")
+        children: renderI18nText("hyperlink.edit")
       })]
     }), r]
   });
@@ -259,7 +259,7 @@ function M(e) {
             children: [X(!0, $), z && jsxs(Fragment, {
               children: [jsx("div", {
                 className: yF
-              }), J(!1, tx("hyperlink.edit"))]
+              }), J(!1, renderI18nText("hyperlink.edit"))]
             }), W && jsxs(Fragment, {
               children: [jsx("div", {
                 className: yF
@@ -270,7 +270,7 @@ function M(e) {
                 htmlAttributes: {
                   "data-testid": "hyperlink.preview"
                 },
-                children: tx("hyperlink.create_preview")
+                children: renderI18nText("hyperlink.create_preview")
               })]
             })]
           });
@@ -283,7 +283,7 @@ function M(e) {
             }), z && jsxs(Fragment, {
               children: [jsx("div", {
                 className: yF
-              }), J(!1, tx("hyperlink.edit"))]
+              }), J(!1, renderI18nText("hyperlink.edit"))]
             })]
           });
       }

@@ -1,9 +1,9 @@
 import { jsx } from "react/jsx-runtime";
 import { connect } from "../vendor/514228";
 import { IK } from "../905/521428";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { o6, cZ } from "../figma_app/806412";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { to } from "../905/156213";
 import { Kz } from "../905/760074";
 import { fA, qN, $c, Iy, p9 } from "../figma_app/803787";
@@ -44,7 +44,7 @@ class f extends o6 {
     if (this.props.library.publishProgress.state !== Qx.NONE) return jsx(IK, {
       variant: "secondary",
       disabled: !0,
-      children: this.props.library.publishProgress.publishType === M$.UNPUBLISH ? tx("design_systems.libraries_modal.unpublishing") : tx("design_systems.libraries_modal.publishing")
+      children: this.props.library.publishProgress.publishType === M$.UNPUBLISH ? renderI18nText("design_systems.libraries_modal.unpublishing") : renderI18nText("design_systems.libraries_modal.publishing")
     });
     let e = this.props.currentFileIsPublished;
     let t = this.props.currentFileHasLocalAssets;
@@ -60,7 +60,7 @@ class f extends o6 {
           onMouseDown: this.stopPropagation
         },
         ref: this.props.buttonRef,
-        children: tx("design_systems.libraries_modal.publish")
+        children: renderI18nText("design_systems.libraries_modal.publish")
       })
     }) : this.props.publishedState : t ? jsx(bj, {
       elementRef: this.props.buttonRef,
@@ -73,7 +73,7 @@ class f extends o6 {
           onMouseDown: this.stopPropagation
         },
         ref: this.props.buttonRef,
-        children: tx("design_systems.libraries_modal.publish")
+        children: renderI18nText("design_systems.libraries_modal.publish")
       })
     }) : this.props.emptyState;
   }
@@ -92,10 +92,10 @@ export let $$_0 = connect(e => ({
     path: [m3.TabBodySection.Footer],
     column: 2
   });
-  let r = md(qN);
-  let a = md($c);
-  let o = md(Iy(void 0));
-  let l = md(p9);
+  let r = useAtomWithSubscription(qN);
+  let a = useAtomWithSubscription($c);
+  let o = useAtomWithSubscription(Iy(void 0));
+  let l = useAtomWithSubscription(p9);
   return jsx(f, {
     buttonRef: ref,
     kbArgs,

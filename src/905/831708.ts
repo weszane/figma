@@ -2,10 +2,10 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useMemo, useEffect, useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
 import { c2 } from "../905/382883";
-import { md, fp } from "../figma_app/27355";
+import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { B } from "../905/714743";
 import { n as _$$n } from "../figma_app/3731";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { nl, Pf } from "../905/590952";
 import { q$, P_, J, jM, wf, a3 } from "../905/124270";
 import { og, Bu, nX, hp, GX, wG, dd } from "../905/171315";
@@ -33,7 +33,7 @@ export function $$R0({
   let [s, l] = useState("");
   let d = _$$F(s, WY.SPACE);
   let u = useDispatch();
-  let g = md(q$);
+  let g = useAtomWithSubscription(q$);
   let E = useMemo(() => {
     let {
       cappedFolders,
@@ -64,12 +64,12 @@ export function $$R0({
       [qy.ORG]: cappedOrgs
     };
   }, [g, d.data]);
-  let C = md(P_);
-  let T = md(J);
-  let k = md(jM);
-  let R = md(R9);
-  let P = md(wf);
-  let [O, D] = fp(a3);
+  let C = useAtomWithSubscription(P_);
+  let T = useAtomWithSubscription(J);
+  let k = useAtomWithSubscription(jM);
+  let R = useAtomWithSubscription(R9);
+  let P = useAtomWithSubscription(wf);
+  let [O, D] = useAtomValueAndSetter(a3);
   let L = _$$P();
   useEffect(() => {
     "loaded" === d.status && s.length > 0 && O !== P && (D(P), L(s, WY.SPACE, uR.DROPDOWN));
@@ -99,11 +99,11 @@ export function $$R0({
     restrictOrgId,
     restrictTeamId
   } = _$$A();
-  let z = restrictOrgId ? _$$t("search.facets.filter_spaces_org") : restrictTeamId ? _$$t("search.facets.filter_spaces_team") : _$$t("search.facets.projects_teams_orgs");
+  let z = restrictOrgId ? getI18nString("search.facets.filter_spaces_org") : restrictTeamId ? getI18nString("search.facets.filter_spaces_team") : getI18nString("search.facets.projects_teams_orgs");
   return jsxs(Fragment, {
     children: [B ? jsx("div", {
       className: Ze,
-      children: tx("search.facets.filter_limit_reached")
+      children: renderI18nText("search.facets.filter_limit_reached")
     }) : jsx(HY, {
       baseId: `${e}-search-bar`,
       basePath: [...t, 0],
@@ -112,14 +112,14 @@ export function $$R0({
       setQuery: l
     }), GX(s) ? jsx("div", {
       className: p$,
-      children: tx("search.error.max_query_length_exceeded")
+      children: renderI18nText("search.error.max_query_length_exceeded")
     }) : jsxs(Fragment, {
       children: ["loading" === d.status && jsx(_$$e, {
         numRows: 5,
         showSideElement: !0
       }), "errors" === d.status && jsx("div", {
         className: p$,
-        children: tx("search.empty_state.no_results_matching", {
+        children: renderI18nText("search.empty_state.no_results_matching", {
           searchQuery: s
         })
       }), "loaded" === d.status && jsx(N, {
@@ -148,9 +148,9 @@ function N({
   let h = TA();
   return wG(o) && wG(e) ? jsx("div", {
     className: p$,
-    children: s ? tx("search.empty_state.no_results_matching", {
+    children: s ? renderI18nText("search.empty_state.no_results_matching", {
       searchQuery: s
-    }) : tx("search.empty_state.no_results_no_query")
+    }) : renderI18nText("search.empty_state.no_results_no_query")
   }) : jsxs(Fragment, {
     children: [jsx(P, {
       appliedSpaces: e[qy.FOLDER],
@@ -161,7 +161,7 @@ function N({
         svg: _$$A3
       }),
       filterLimitReached: p,
-      heading: _$$t("search.preview_section.projects_capitalized"),
+      heading: getI18nString("search.preview_section.projects_capitalized"),
       onClickCallback: r,
       query: s,
       results: o.folders,
@@ -179,7 +179,7 @@ function N({
         svg: _$$A2
       }),
       filterLimitReached: p,
-      heading: _$$t("search.preview_section.teams_capitalized"),
+      heading: getI18nString("search.preview_section.teams_capitalized"),
       onClickCallback: r,
       query: s,
       results: o.teams,
@@ -197,7 +197,7 @@ function N({
         svg: _$$A4
       }),
       filterLimitReached: p,
-      heading: _$$t("search.preview_section.orgs_capitalized"),
+      heading: getI18nString("search.preview_section.orgs_capitalized"),
       onClickCallback: r,
       query: s,
       results: o.orgs,

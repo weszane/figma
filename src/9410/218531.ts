@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { K } from "../905/443068";
 import { h } from "../905/994594";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Ib } from "../905/129884";
 import { H1, VK } from "../9410/499229";
 export function $$c0({
@@ -18,7 +18,7 @@ export function $$c0({
     ref: i,
     onClick: c,
     recordingKey: "canvas_search.search_icon_button",
-    "aria-label": _$$t("fullscreen_actions.find"),
+    "aria-label": getI18nString("fullscreen_actions.find"),
     htmlAttributes: {
       id: "canvas-search-icon-button",
       "data-onboarding-key": "canvas-search",

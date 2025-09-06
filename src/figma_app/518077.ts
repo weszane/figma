@@ -6,7 +6,7 @@ import { gB } from "../905/723791";
 import { FUserRoleType } from "../figma_app/191312";
 import { B5G, TKM, aON, s5h, Pn8 } from "../figma_app/43951";
 import { $q } from "../figma_app/482728";
-import { O } from "../905/247093";
+import { UNASSIGNED } from "../905/247093";
 export function $$p2(e) {
   let t = Rs(B5G, {
     orgId: e
@@ -38,7 +38,7 @@ export function $$m3(e, t) {
   }, {
     enabled: !!e && !!t
   });
-  return null === t ? gB(O) : r.transform(e => e.workspace);
+  return null === t ? gB(UNASSIGNED) : r.transform(e => e.workspace);
 }
 export function $$g4(e) {
   return (e?.workspaces?.length || 0) > 0 && !!e?.bigmaEnabledAt;

@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useLayoutEffect } from "react";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import o from "classnames";
 import { N as _$$N } from "../vendor/930821";
 import { P } from "../vendor/348225";
@@ -83,9 +83,9 @@ let q = {
   slides: "slides_file"
 };
 export function $$O1(e) {
-  let t = md(bk);
-  let [a] = md(ZE);
-  let i = md(aV);
+  let t = useAtomWithSubscription(bk);
+  let [a] = useAtomWithSubscription(ZE);
+  let i = useAtomWithSubscription(aV);
   let o = e.staticBackgroundType ? q[e.staticBackgroundType] : a;
   let l = o && N[o]?.Component;
   let d = !!t && [pu.WHAT_DO_YOU_DO, pu.WHAT_DO_YOU_DO_V2, pu.WHERE_OR_HOW_DO_YOU_WORK, pu.WHAT_TYPE_OR_LEVEL_OF_SCHOOL].includes(t);
@@ -159,7 +159,7 @@ export function $$I3(e) {
     children,
     ...a
   } = e;
-  let o = md(_D);
+  let o = useAtomWithSubscription(_D);
   let [r, u] = useState(!1);
   return (useLayoutEffect(() => {
     o && (u(!0), setTimeout(() => u(!1), 1e3));

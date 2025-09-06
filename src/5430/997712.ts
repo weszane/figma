@@ -3,7 +3,7 @@ import { Component } from "react";
 import { connect } from "../vendor/514228";
 import { N_ } from "../figma_app/637027";
 import { B } from "../905/714743";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { to } from "../905/156213";
 import { S3 } from "../905/708054";
 import { cI, zc, q3, bv, nf } from "../5430/708619";
@@ -16,13 +16,13 @@ class _ extends Component {
         strongText: "",
         ctaPreText: ""
       };
-      let t = _$$t("community.banner.a_space_for_figma_users_to_share_things_they_create");
-      let r = _$$t("community.banner.community_is_a_space_for_figma_users_to_share_things_they_create");
+      let t = getI18nString("community.banner.a_space_for_figma_users_to_share_things_they_create");
+      let r = getI18nString("community.banner.community_is_a_space_for_figma_users_to_share_things_they_create");
       e = {
-        strongText: _$$t("community.banner.this_is_the_figma_community"),
+        strongText: getI18nString("community.banner.this_is_the_figma_community"),
         ctaPreText: t
       };
-      this.props.profile ? (this.props.user?.community_profile_handle ? this.props.profile.id === this.props.user?.community_profile_id ? e.strongText = _$$t("community.banner.this_is_your_figma_community_profile") : (e.strongText = "", e.ctaPreText = "") : e.strongText = _$$t("community.banner.this_is_a_figma_community_profile"), e.ctaPreText = r) : this.props.selectedView && "communityHub" === this.props.selectedView.view && ("hubFile" === this.props.selectedView.subView ? (e.strongText = _$$t("community.banner.this_is_a_figma_community_file"), e.ctaPreText = r) : "plugin" === this.props.selectedView.subView ? (e.strongText = _$$t("community.banner.this_is_a_figma_community_plugin"), e.ctaPreText = r) : "widget" === this.props.selectedView.subView && (e.strongText = _$$t("community.banner.this_is_a_figma_community_widget"), e.ctaPreText = r));
+      this.props.profile ? (this.props.user?.community_profile_handle ? this.props.profile.id === this.props.user?.community_profile_id ? e.strongText = getI18nString("community.banner.this_is_your_figma_community_profile") : (e.strongText = "", e.ctaPreText = "") : e.strongText = getI18nString("community.banner.this_is_a_figma_community_profile"), e.ctaPreText = r) : this.props.selectedView && "communityHub" === this.props.selectedView.view && ("hubFile" === this.props.selectedView.subView ? (e.strongText = getI18nString("community.banner.this_is_a_figma_community_file"), e.ctaPreText = r) : "plugin" === this.props.selectedView.subView ? (e.strongText = getI18nString("community.banner.this_is_a_figma_community_plugin"), e.ctaPreText = r) : "widget" === this.props.selectedView.subView && (e.strongText = getI18nString("community.banner.this_is_a_figma_community_widget"), e.ctaPreText = r));
       this.props.user ? this.props.user.community_profile_handle ? this.props.selectedView && "communityHub" === this.props.selectedView.view && this.props.selectedView?.subView === "plugin" && (e.showPluginDocsCta = !0) : e.showProfileCta = !0 : e.showAccountCta = !0;
       return e;
     };
@@ -62,12 +62,12 @@ class _ extends Component {
           }), jsxs("span", {
             children: [ctaPreText, " "]
           }), showProfileCta && jsx(Fragment, {
-            children: tx("community.banner.to_follow_creators_and_like_resources", {
+            children: renderI18nText("community.banner.to_follow_creators_and_like_resources", {
               link: jsxs(N_, {
                 onClick: this.onProfileCreateClick,
                 className: nf,
                 trusted: !0,
-                children: [_$$t("community.banner.create_your_own_profile"), "\xa0\u2192", " "]
+                children: [getI18nString("community.banner.create_your_own_profile"), "\xa0\u2192", " "]
               })
             })
           }), showAccountCta && jsxs(N_, {
@@ -75,15 +75,15 @@ class _ extends Component {
             target: "_blank",
             className: nf,
             trusted: !0,
-            children: [_$$t("community.banner.get_started_with_a_free_account"), "\xa0\u2192", " "]
+            children: [getI18nString("community.banner.get_started_with_a_free_account"), "\xa0\u2192", " "]
           }), showPluginDocsCta && jsx(Fragment, {
-            children: tx("community.banner.to_create_your_own_plugin", {
+            children: renderI18nText("community.banner.to_create_your_own_plugin", {
               link: jsxs(N_, {
                 href: "https://www.figma.com/plugin-docs",
                 target: "_blank",
                 className: nf,
                 trusted: !0,
-                children: [_$$t("community.banner.visit_the_docs"), "\xa0\u2192", " "]
+                children: [getI18nString("community.banner.visit_the_docs"), "\xa0\u2192", " "]
               })
             })
           })]

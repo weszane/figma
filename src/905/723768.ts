@@ -1,4 +1,4 @@
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { FPlanNameType } from "../figma_app/191312";
 export let $$a1 = {
   [FPlanNameType.STARTER]: 0,
@@ -11,9 +11,9 @@ export function $$s0(e) {
   return {
     [FPlanNameType.STARTER]: null,
     [FPlanNameType.STUDENT]: null,
-    [FPlanNameType.PRO]: t("resource_connection.admin_ui.professional"),
-    [FPlanNameType.ORG]: t("resource_connection.admin_ui.organization"),
-    [FPlanNameType.ENTERPRISE]: t("resource_connection.admin_ui.enterprise")
+    [FPlanNameType.PRO]: getI18nString("resource_connection.admin_ui.professional"),
+    [FPlanNameType.ORG]: getI18nString("resource_connection.admin_ui.organization"),
+    [FPlanNameType.ENTERPRISE]: getI18nString("resource_connection.admin_ui.enterprise")
   }[e];
 }
 export const A = $$s0;

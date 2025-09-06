@@ -11,13 +11,13 @@ import { V as _$$V } from "../905/802779";
 import { K as _$$K } from "../905/799615";
 import p from "classnames";
 import { H as _$$H } from "../figma_app/47866";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { OG, w6 } from "../1250/340571";
 import { k1 } from "../1250/428971";
 import { Ib } from "../905/129884";
 import { IT } from "../figma_app/566371";
 import { rt } from "../1250/282084";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { O as _$$O } from "../1250/664647";
 import { A as _$$A } from "../1250/29260";
 import { B } from "../905/506188";
@@ -66,16 +66,16 @@ let A = forwardRef(({
     ref: n,
     children: [jsx("div", {
       className: "component_browser_input_github_dropdown--header--uCNzg",
-      children: _$$t("dev_handoff.component_browser.github_repo_dropdown.header", {
+      children: getI18nString("dev_handoff.component_browser.github_repo_dropdown.header", {
         libraryName: s
       })
     }), jsx("div", {
       className: "component_browser_input_github_dropdown--description--GKHUI",
-      children: _$$t("dev_handoff.component_browser.github_repo_dropdown.description")
+      children: getI18nString("dev_handoff.component_browser.github_repo_dropdown.description")
     }), jsx($n, {
       variant: "primary",
       onClick: d,
-      children: _$$t("dev_handoff.component_browser.github_repo_dropdown.button")
+      children: getI18nString("dev_handoff.component_browser.github_repo_dropdown.button")
     }), i && jsx(_$$A, {
       libraryKey: e,
       onClose: c,
@@ -149,7 +149,7 @@ function U({
         })]
       }, s);
     }), e.length === t && !i && jsx(K, {
-      "aria-label": _$$t("dev_handoff.component_browser.clear_input"),
+      "aria-label": getI18nString("dev_handoff.component_browser.clear_input"),
       onClick: l,
       children: jsx(_$$f, {})
     })]
@@ -211,7 +211,7 @@ let G = forwardRef(({
           }
         }
       }), v && d.length < t && !x && jsx(K, {
-        "aria-label": _$$t("dev_handoff.component_browser.clear_input"),
+        "aria-label": getI18nString("dev_handoff.component_browser.clear_input"),
         onClick: () => s(),
         children: jsx(_$$f, {})
       })]
@@ -293,7 +293,7 @@ export function $$q2({
       onClick: e,
       disabled: n,
       variant: "primary",
-      children: r ?? _$$t("dev_handoff.component_browser.connect")
+      children: r ?? getI18nString("dev_handoff.component_browser.connect")
     })
   });
 }
@@ -395,13 +395,13 @@ export function $$V1({
     let {
       shortcut
     } = useMemo(() => selectedFile ? selectedFile && !selectedComponent && inputValue && 0 === inputValue.length ? {
-      shortcut: _$$t("dev_handoff.component_browser.confirm_connection_shortcut")
+      shortcut: getI18nString("dev_handoff.component_browser.confirm_connection_shortcut")
     } : !selectedComponent && inputValue && inputValue.length > 0 ? {
-      shortcut: _$$t("dev_handoff.component_browser.connect_component_shortcut")
+      shortcut: getI18nString("dev_handoff.component_browser.connect_component_shortcut")
     } : {
-      shortcut: _$$t("dev_handoff.component_browser.confirm_connection_shortcut")
+      shortcut: getI18nString("dev_handoff.component_browser.confirm_connection_shortcut")
     } : {
-      shortcut: _$$t("dev_handoff.component_browser.connect_file_shortcut")
+      shortcut: getI18nString("dev_handoff.component_browser.connect_file_shortcut")
     }, [selectedFile, selectedComponent, inputValue]);
     let d = useMemo(() => selectedFile || inputValue && inputValue.length > 0 || selectedComponent && selectedFile, [selectedFile, inputValue, selectedComponent]);
     return {
@@ -499,7 +499,7 @@ export function $$V1({
           aiCodebaseSuggestionsCount: n,
           lexicalSearchResultsCount: a
         };
-        sx("component_browser.code_component_input_typeahead_displayed", {
+        trackEventAnalytics("component_browser.code_component_input_typeahead_displayed", {
           location: u,
           entrypoint: m,
           sessionId: e.sessionId,
@@ -532,9 +532,9 @@ export function $$V1({
   let ea = useCallback(e => {
     switch (e) {
       case 0:
-        return _$$t("dev_handoff.component_browser.paste_code_link");
+        return getI18nString("dev_handoff.component_browser.paste_code_link");
       case 1:
-        return _$$t("dev_handoff.component_browser.component_name");
+        return getI18nString("dev_handoff.component_browser.component_name");
     }
   }, []);
   let er = useCallback(() => {

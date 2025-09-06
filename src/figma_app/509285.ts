@@ -1,7 +1,7 @@
 import { useSelector } from "../vendor/514228";
 import { AD } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
-import { R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { vx } from "../figma_app/175258";
 import { hS } from "../905/216495";
 import { $$ } from "../figma_app/62612";
@@ -59,7 +59,7 @@ export function $$b4() {
   let {
     inheritTextStyleKey,
     styleIdForText
-  } = R(e => ({
+  } = selectWithShallowEqual(e => ({
     inheritTextStyleKey: e.mirror.selectionProperties.inheritTextStyleKey || null,
     styleIdForText: e.mirror.selectionProperties.styleIdForText || null
   }));

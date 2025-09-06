@@ -67,7 +67,7 @@ export function debug(_arg1: unknown, _arg2: unknown, ..._rest: unknown[]): void
  * @returns The second argument.
  * (Original: $$c2)
  */
-export function returnSecond<T>(_arg1: unknown, arg2: T, _arg3: unknown): T {
+export function returnSecond<T>(_arg1: unknown, arg2: T, _arg3?: unknown): T {
   return arg2
 }
 

@@ -5,7 +5,7 @@ import { glU } from "../figma_app/763686";
 import { debugState } from "../905/407919";
 import { F } from "../905/680873";
 import { d as _$$d } from "../905/86829";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { _I } from "../figma_app/473493";
 import { ds } from "../figma_app/314264";
 import { dh } from "../figma_app/186343";
@@ -75,13 +75,13 @@ export function $$j0() {
     return o && l.length !== e.length ? t ? {
       pagesToDisplay: e,
       showAllButton: jsx(_$$d, {
-        label: _$$t("dev_handoff.pages.hide_other"),
+        label: getI18nString("dev_handoff.pages.hide_other"),
         onClick: () => i(!1)
       })
     } : {
       pagesToDisplay: l,
       showAllButton: jsx(_$$d, {
-        label: _$$t("dev_handoff.pages.show_all"),
+        label: getI18nString("dev_handoff.pages.show_all"),
         onClick: () => i(!0)
       })
     } : {

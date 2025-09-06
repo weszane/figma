@@ -13,7 +13,7 @@ import { RW } from "../figma_app/637027";
 import { Wi, JR } from "../figma_app/162641";
 import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
 import v, { Y } from "../905/830372";
 import { fu } from "../figma_app/831799";
@@ -211,11 +211,11 @@ function P(e) {
         label: jsx(_$$h, {
           children: function () {
             let t = "name" in e && e.name ? e.name : void 0;
-            return t ? a ? _$$t("multi_select_list.checkbox_aria_label_deselect", {
+            return t ? a ? getI18nString("multi_select_list.checkbox_aria_label_deselect", {
               name: t
-            }) : _$$t("multi_select_list.checkbox_aria_label_select", {
+            }) : getI18nString("multi_select_list.checkbox_aria_label_select", {
               name: t
-            }) : a ? _$$t("multi_select_list.checkbox_aria_label_without_name_deselect") : _$$t("multi_select_list.checkbox_aria_label_without_name_select");
+            }) : a ? getI18nString("multi_select_list.checkbox_aria_label_without_name_deselect") : getI18nString("multi_select_list.checkbox_aria_label_without_name_select");
           }()
         }),
         checked: a,
@@ -297,7 +297,7 @@ function P(e) {
     let a = eI().length > 0 && !selectAllDisabled;
     let s = jsx(_$$S, {
       label: jsx(_$$h, {
-        children: i ? _$$t("multi_select_list.deselect_all") : _$$t("multi_select_list.select_all")
+        children: i ? getI18nString("multi_select_list.deselect_all") : getI18nString("multi_select_list.select_all")
       }),
       checked: i,
       mixed: i && !t,
@@ -669,11 +669,11 @@ class j extends Component {
               label: jsx(_$$h, {
                 children: function () {
                   let t = "name" in e && e.name ? e.name : void 0;
-                  return t ? r ? _$$t("multi_select_list.checkbox_aria_label_deselect", {
+                  return t ? r ? getI18nString("multi_select_list.checkbox_aria_label_deselect", {
                     name: t
-                  }) : _$$t("multi_select_list.checkbox_aria_label_select", {
+                  }) : getI18nString("multi_select_list.checkbox_aria_label_select", {
                     name: t
-                  }) : r ? _$$t("multi_select_list.checkbox_aria_label_without_name_deselect") : _$$t("multi_select_list.checkbox_aria_label_without_name_select");
+                  }) : r ? getI18nString("multi_select_list.checkbox_aria_label_without_name_deselect") : getI18nString("multi_select_list.checkbox_aria_label_without_name_select");
                 }()
               }),
               checked: r,
@@ -766,7 +766,7 @@ class j extends Component {
     let a = this.selectableItemKeys().length > 0 && !this.props.selectAllDisabled;
     let s = jsx(_$$S, {
       label: jsx(_$$h, {
-        children: i ? _$$t("multi_select_list.deselect_all") : _$$t("multi_select_list.select_all")
+        children: i ? getI18nString("multi_select_list.deselect_all") : getI18nString("multi_select_list.select_all")
       }),
       checked: i,
       mixed: i && !t,

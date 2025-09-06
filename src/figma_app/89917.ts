@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useSelector } from "../vendor/514228";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { E as _$$E } from "../905/984674";
 import { L3 } from "../figma_app/806075";
@@ -8,7 +8,7 @@ import { E3 } from "../figma_app/976749";
 import { E as _$$E2 } from "../905/453826";
 import { e as _$$e } from "../905/621515";
 import { q5 } from "../figma_app/516028";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { N as _$$N } from "../figma_app/268271";
 import { rq } from "../905/425180";
 import { RM } from "../figma_app/322845";
@@ -25,15 +25,15 @@ function x() {
   let e = useSelector(e => e.selectedView);
   let t = jsx(_$$E, {
     fontWeight: "bold",
-    children: tx("rcs.playground_file.ready_to_try")
+    children: renderI18nText("rcs.playground_file.ready_to_try")
   });
   return jsx("p", {
     style: sx.add({
       animation: "none"
     }).$,
-    children: e.isWidget ? tx("rcs.playground_file.ready_to_try.widget", {
+    children: e.isWidget ? renderI18nText("rcs.playground_file.ready_to_try.widget", {
       readyToTry: t
-    }) : tx("rcs.playground_file.ready_to_try.plugin", {
+    }) : renderI18nText("rcs.playground_file.ready_to_try.plugin", {
       readyToTry: t
     })
   });
@@ -43,28 +43,28 @@ function N() {
     style: sx.add({
       animation: "none"
     }).$,
-    children: tx("rcs.playground_file.switch_devmode_to_design_description")
+    children: renderI18nText("rcs.playground_file.switch_devmode_to_design_description")
   });
 }
-let C = tx("rcs.playground_file.switch_devmode_to_design_title");
+let C = renderI18nText("rcs.playground_file.switch_devmode_to_design_title");
 function w(e) {
   let t;
   let r;
   let i;
   let a;
   switch (e.fullscreenEditorType) {
-    case nT.DevHandoff:
+    case FEditorType.DevHandoff:
       t = "Open Playground File Onboarding Nudge (DevMode)";
       r = oR;
       i = N;
       a = C;
       break;
-    case nT.Whiteboard:
+    case FEditorType.Whiteboard:
       t = "Open Playground File Onboarding Nudge (FigJam)";
       r = v;
       i = x;
       break;
-    case nT.Design:
+    case FEditorType.Design:
     default:
       t = "Open Playground File Onboarding Nudge (Figma)";
       r = S;

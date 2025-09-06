@@ -3,9 +3,9 @@ import { useMemo } from "react";
 import { useSelector } from "../vendor/514228";
 import { isNotNullish } from "../figma_app/95419";
 import { j0r } from "../figma_app/763686";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { b as _$$b } from "../figma_app/517135";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { v4 } from "../figma_app/655139";
 import { Q } from "../905/217916";
 import { m0 } from "../figma_app/976749";
@@ -36,7 +36,7 @@ export function $$$$N1() {
   let w = kl("inheritFillStyleKeyForStroke");
   let L = w && hS(w) ? Gp(w, x ? [x] : [], N) : void 0;
   let P = useSelector(e => e.mirror.selectionProperties.borderSharedWeight || e.mirror.selectionProperties.strokeWeight) || 1;
-  let D = _$$R(e => ({
+  let D = selectWithShallowEqual(e => ({
     borderTopWeight: e.mirror.selectionProperties.borderTopWeight,
     borderRightWeight: e.mirror.selectionProperties.borderRightWeight,
     borderBottomWeight: e.mirror.selectionProperties.borderBottomWeight,
@@ -76,28 +76,28 @@ let C = e => {
 let w = e => {
   switch (e) {
     case "border":
-      return _$$t("inspect_panel.strokes.all_sides");
+      return getI18nString("inspect_panel.strokes.all_sides");
     case "border-top":
-      return _$$t("inspect_panel.strokes.top_side");
+      return getI18nString("inspect_panel.strokes.top_side");
     case "border-bottom":
-      return _$$t("inspect_panel.strokes.bottom_side");
+      return getI18nString("inspect_panel.strokes.bottom_side");
     case "border-left":
-      return _$$t("inspect_panel.strokes.left_side");
+      return getI18nString("inspect_panel.strokes.left_side");
     case "border-right":
-      return _$$t("inspect_panel.strokes.right_side");
+      return getI18nString("inspect_panel.strokes.right_side");
     default:
       return;
   }
 };
-let O = (e, t) => gl(e) ? t.some(e => gl(e)) ? _$$t("fullscreen.mixed") : t.map(e => nd(e, "px")).join(", ") : `${nd(e, "px")}`;
+let O = (e, t) => gl(e) ? t.some(e => gl(e)) ? getI18nString("fullscreen.mixed") : t.map(e => nd(e, "px")).join(", ") : `${nd(e, "px")}`;
 let R = e => {
   switch (e) {
     case "OUTSIDE":
-      return _$$t("inspect_panel.strokes.outer_border");
+      return getI18nString("inspect_panel.strokes.outer_border");
     case "INSIDE":
-      return _$$t("inspect_panel.strokes.inner_border");
+      return getI18nString("inspect_panel.strokes.inner_border");
     case "CENTER":
-      return _$$t("inspect_panel.strokes.center_border");
+      return getI18nString("inspect_panel.strokes.center_border");
     default:
       return;
   }
@@ -144,7 +144,7 @@ export function $$P0({
   let o = $$$$N1();
   let l = T4.useCopyAllStrokes(o);
   return 1 !== s || o.length < 1 ? null : jsx(VZ, {
-    title: i ? _$$t("inspect_panel.strokes.colors.title") : _$$t("inspect_panel.strokes.title"),
+    title: i ? getI18nString("inspect_panel.strokes.colors.title") : getI18nString("inspect_panel.strokes.title"),
     recordingKey: "borders",
     additionalHeaders: i ? void 0 : jsx(Af, {}),
     copyAllValue: i ? void 0 : l,

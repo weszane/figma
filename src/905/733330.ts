@@ -1,5 +1,5 @@
 import { parseQuery, serializeQuery } from "../905/634134";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { b } from "../905/165519";
 import { X1 } from "../figma_app/736948";
 import { tn } from "../figma_app/831101";
@@ -53,7 +53,7 @@ export class $$d0 {
     return "orgSelfServe" === e.view != ("orgSelfServe" === t.view) || "orgSelfServe" === e.view && "orgSelfServe" === t.view && e.step !== t.step;
   }
   selectedViewName(e) {
-    return "orgSelfServe" !== e.view ? null : t("org_view.view_selector.upgrade_to_organization");
+    return "orgSelfServe" !== e.view ? null : getI18nString("org_view.view_selector.upgrade_to_organization");
   }
   selectedViewHasMissingResources(e, t) {
     return !1;

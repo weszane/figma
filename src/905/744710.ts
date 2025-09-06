@@ -7,7 +7,7 @@ import { K as _$$K } from "../905/443068";
 import { bL, Rq } from "../905/38914";
 import p, { getFeatureFlags } from "../905/601108";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t2, tx as _$$tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { iZ as _$$iZ, pS, TA } from "../905/372672";
 import { po } from "../figma_app/45218";
 import { Ju, ZU, qK } from "../905/102752";
@@ -28,7 +28,7 @@ import { M as _$$M } from "../905/130634";
 import { FDomainVerificationStatusType, FOrganizationLevelType, FMemberRoleType, FPlanNameType } from "../figma_app/191312";
 import { C as _$$C2 } from "../905/283236";
 import { x as _$$x } from "../905/233240";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { F as _$$F } from "../905/302958";
 import { yX, d_ } from "../figma_app/918700";
 import { X as _$$X } from "../905/33014";
@@ -52,7 +52,7 @@ import { G3 } from "../905/272080";
 import { fN } from "../905/54385";
 import { p as _$$p } from "../905/428660";
 import { A as _$$A4 } from "../5724/663128";
-import { sx, az } from "../905/449184";
+import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { s as _$$s2, Q as _$$Q } from "../905/573154";
 import { tx as _$$tx2 } from "../figma_app/395505";
 import { v as _$$v } from "../905/581647";
@@ -67,7 +67,7 @@ import { S as _$$S2 } from "../905/274480";
 import { J as _$$J, h as _$$h2 } from "../905/270045";
 import { J as _$$J2 } from "../905/341359";
 import { Ay as _$$Ay } from "@stylexjs/stylex";
-import { eD as _$$eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { mI, gY } from "../figma_app/566371";
 import { Ph } from "../905/160095";
 import { b as _$$b } from "../905/985254";
@@ -93,7 +93,7 @@ import { X as _$$X2 } from "../905/857208";
 import { V as _$$V } from "../905/849455";
 import { oA } from "../905/663269";
 import { zN } from "../figma_app/416935";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { Rs, p as _$$p2 } from "../figma_app/288654";
 import { h1 } from "../905/986103";
 import { G as _$$G } from "../905/750789";
@@ -113,13 +113,13 @@ import { t as _$$t3 } from "../905/751495";
 import { J as _$$J4 } from "../905/211135";
 import { m as _$$m } from "../905/636019";
 import { L as _$$L } from "../905/704296";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { A as _$$A6 } from "../905/920142";
 import { XHRError, XHR } from "../905/910117";
 import { Y as _$$Y } from "../905/830372";
 import { E as _$$E2 } from "../905/984674";
 import { lW } from "../figma_app/11182";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { k as _$$k3 } from "../905/93362";
 import { nF as _$$nF } from "../905/350402";
 import { yJ } from "../figma_app/24841";
@@ -171,7 +171,7 @@ import { Hl, hM } from "../905/840929";
 import { q as _$$q } from "../905/932270";
 import { _ as _$$_2, S as _$$S4 } from "../figma_app/490799";
 import { xQ } from "../905/535224";
-import { Ay as _$$Ay4 } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { Ef, Fs } from "../figma_app/976345";
 import { Ex, zE } from "../figma_app/919079";
 import { W as _$$W } from "../905/236903";
@@ -235,7 +235,7 @@ let z = Ju(function (e) {
   let c = s.country;
   return jsx(yX, {
     size: "fitContent",
-    title: _$$t2("community.community_account_settings.change_address"),
+    title: getI18nString("community.community_account_settings.change_address"),
     onConfirm: () => {
       let n = {
         shipping_address: s,
@@ -250,7 +250,7 @@ let z = Ju(function (e) {
         let n = i.meta.vat_gst_id;
         d(!1);
         t(_$$F.enqueue({
-          message: _$$t2("community.community_account_settings.address_details_success"),
+          message: getI18nString("community.community_account_settings.address_details_success"),
           error: !1
         }));
         e.setVatGstId(n);
@@ -258,17 +258,17 @@ let z = Ju(function (e) {
         t(Lo());
       }).catch(e => {
         d(!1);
-        x1("Error updating user billing details", e, n, {
+        logError("Error updating user billing details", e, n, {
           reportAsSentryError: !0
         });
         t(_$$F.enqueue({
           type: "update-billing-details-error",
-          message: e.message || _$$t2("community.community_account_settings.address_details_error"),
+          message: e.message || getI18nString("community.community_account_settings.address_details_error"),
           error: !0
         }));
       });
     },
-    confirmText: _$$t2("general.save"),
+    confirmText: getI18nString("general.save"),
     hideOnConfirm: !1,
     isLoading: l,
     hideConfirmationTitle: !0,
@@ -322,7 +322,7 @@ function H(e) {
               }
             }));
           },
-          children: _$$tx("community.community_account_settings.change_address")
+          children: renderI18nText("community.community_account_settings.change_address")
         })
       })]
     })]
@@ -441,10 +441,10 @@ function e_(e) {
       className: "profile_connections--email--UbNlG",
       children: e.email
     }), !e.isPrimary && !e.can_sell_on_community && jsx(_$$K, {
-      "aria-label": _$$t2("general.remove"),
+      "aria-label": getI18nString("general.remove"),
       htmlAttributes: {
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t2("general.remove")
+        "data-tooltip": getI18nString("general.remove")
       },
       onClick: () => {
         e.onRemoveUser(e.email, e.userId);
@@ -514,14 +514,14 @@ function ey(e) {
   let a = t && t[0] && t[0].email ? t[0].email : e.user.email;
   let s = !1;
   for (let e of t) e.is_primary_user && e.email && (a = e.email, s = !!e.can_sell_on_community);
-  let o = s ? _$$tx("community.profile_connections.primary_email_info__disable_switching_for_primary_monetized_creator") : _$$tx("community.profile_connections.primary_email_info");
+  let o = s ? renderI18nText("community.profile_connections.primary_email_info__disable_switching_for_primary_monetized_creator") : renderI18nText("community.profile_connections.primary_email_info");
   return jsxs("div", {
     children: [jsx("h3", {
       className: Z,
-      children: _$$tx("community.profile_connections.profile_connections_title")
+      children: renderI18nText("community.profile_connections.profile_connections_title")
     }), jsx("div", {
       className: ee,
-      children: _$$tx("community.profile_connections.info")
+      children: renderI18nText("community.profile_connections.info")
     }), jsx("div", {
       className: "profile_connections--table--szyWE",
       children: t.map(e => jsx(e_, {
@@ -540,12 +540,12 @@ function ey(e) {
             type: _$$g
           }));
         },
-        children: _$$tx("community.profile_connections.add_profile_connection_cta")
+        children: renderI18nText("community.profile_connections.add_profile_connection_cta")
       })
     }), t.length > 1 && jsxs(Fragment, {
       children: [jsx("h3", {
         className: Z,
-        children: _$$tx("community.profile_connections.primary_email")
+        children: renderI18nText("community.profile_connections.primary_email")
       }), jsx("div", {
         className: ee,
         children: o
@@ -671,38 +671,38 @@ let ek = e => {
 let eR = (e, t, i, n) => {
   switch (t.subscription_canceled_at ? G3.CANCELED : e) {
     case G3.SUCCEEDED:
-      return t.subscription_expires_at ? _$$t2("community.purchase_home.renews", {
+      return t.subscription_expires_at ? getI18nString("community.purchase_home.renews", {
         date: t.subscription_expires_at
-      }) : _$$t2("community.purchase_home.purchased", {
+      }) : getI18nString("community.purchase_home.purchased", {
         date: i
       });
     case G3.CANCELED:
-      if (t.subscription_canceled_at) return t.has_subscription_ended ? _$$t2("community.purchase_home.cancelled_and_inactive", {
+      if (t.subscription_canceled_at) return t.has_subscription_ended ? getI18nString("community.purchase_home.cancelled_and_inactive", {
         date: t.subscription_canceled_at
-      }) : _$$t2("community.purchase_home.cancelled_but_active", {
+      }) : getI18nString("community.purchase_home.cancelled_but_active", {
         date: t.subscription_canceled_at
       });
-      if (t.subscription_expires_at) return t.has_subscription_ended ? _$$t2("community.purchase_home.cancelled_and_inactive", {
+      if (t.subscription_expires_at) return t.has_subscription_ended ? getI18nString("community.purchase_home.cancelled_and_inactive", {
         date: t.subscription_expires_at
-      }) : _$$t2("community.purchase_home.cancelled_but_active", {
+      }) : getI18nString("community.purchase_home.cancelled_but_active", {
         date: t.subscription_expires_at
       });
       return "";
     case G3.REFUNDED:
     case G3.DISPUTED:
-      return _$$t2("community.purchase_home.refunded", {
+      return getI18nString("community.purchase_home.refunded", {
         date: n
       });
     case G3.TRIALING:
-      if (t.trial_expires_at) return t.has_trial_expired ? _$$t2("community.purchase_home.free_trial_ended", {
+      if (t.trial_expires_at) return t.has_trial_expired ? getI18nString("community.purchase_home.free_trial_ended", {
         date: t.trial_expires_at
-      }) : _$$t2("community.purchase_home.free_trial_ends", {
+      }) : getI18nString("community.purchase_home.free_trial_ends", {
         date: t.trial_expires_at
       });
       return "";
     case G3.SUBSCRIPTION_PAYMENT_FAILED:
     case G3.INVOICE_FINALIZATION_FAILED:
-      return _$$t2("community.purchase_home.update_payment_details");
+      return getI18nString("community.purchase_home.update_payment_details");
     default:
       return "";
   }
@@ -725,7 +725,7 @@ let eN = function (e) {
   return jsx(eC, {
     resourceId: purchase.resource_id,
     title: function (e, t) {
-      let i = _$$t2("community.purchase_home.resource_title", {
+      let i = getI18nString("community.purchase_home.resource_title", {
         resource_name: e,
         resource_publisher: t
       });
@@ -734,7 +734,7 @@ let eN = function (e) {
       let r = e.length - t.length;
       if (r > 0) {
         let i = Math.min(n, r) + 3;
-        if (e = e.slice(0, e.length - i), n <= r) return _$$t2("community.purchase_home.resource_title", {
+        if (e = e.slice(0, e.length - i), n <= r) return getI18nString("community.purchase_home.resource_title", {
           resource_name: `${e}\u2026`,
           resource_publisher: t
         });
@@ -742,7 +742,7 @@ let eN = function (e) {
       } else if (r < 0) {
         let i = -1 * r;
         let a = Math.min(n, i) + 3;
-        if (t = t.slice(0, t.length - a), n <= i) return _$$t2("community.purchase_home.resource_title", {
+        if (t = t.slice(0, t.length - a), n <= i) return getI18nString("community.purchase_home.resource_title", {
           resource_name: e,
           resource_publisher: `${t}\u2026`
         });
@@ -751,7 +751,7 @@ let eN = function (e) {
       let a = Math.ceil(n / 2) + 3;
       t = t.slice(0, t.length - a);
       e = e.slice(0, e.length - a);
-      return _$$t2("community.purchase_home.resource_title", {
+      return getI18nString("community.purchase_home.resource_title", {
         resource_name: `${e}\u2026`,
         resource_publisher: `${t}\u2026`
       });
@@ -800,7 +800,7 @@ function eG(e) {
   let u = useCallback(() => {
     o(!1);
   }, []);
-  let p = useCallback(i => (sx("consumer_get_support", {
+  let p = useCallback(i => (trackEventAnalytics("consumer_get_support", {
     user_id: e.user.id,
     resource_id: purchase.resource_id,
     resource_type: purchase.community_resource_type
@@ -835,7 +835,7 @@ function eG(e) {
       name: i
     }, "cta_clicked");
     o(!1);
-    n(_$$s2.flash(_$$t2("community.buyer.redirecting_to_stripe")));
+    n(_$$s2.flash(getI18nString("community.buyer.redirecting_to_stripe")));
     n(_$$v({}));
   };
   let f = "subscription" === c;
@@ -864,16 +864,16 @@ function eG(e) {
           children: [!!purchase.is_blocked && jsxs(Fragment, {
             children: [jsx(c$, {
               disabled: !0,
-              children: _$$tx("community.purchase_home.this_resource_is_no_longer_available")
+              children: renderI18nText("community.purchase_home.this_resource_is_no_longer_available")
             }), jsx(wv, {})]
           }), jsx(c$, {
             onClick: e => {
               g(_);
             },
-            children: f ? _$$tx("community.purchase_home.manage_subscription") : _$$tx("community.purchase_home.see_order_details")
+            children: f ? renderI18nText("community.purchase_home.manage_subscription") : renderI18nText("community.purchase_home.see_order_details")
           }), !!(support_contact && !purchase.is_blocked) && jsx(c$, {
             onClick: i => {
-              sx("consumer_contact_creator", {
+              trackEventAnalytics("consumer_contact_creator", {
                 user_id: e.user.id,
                 resource_id: purchase.resource_id,
                 resource_type: purchase.community_resource_type
@@ -881,13 +881,13 @@ function eG(e) {
             },
             href: `mailto:${support_contact}`,
             target: "_blank",
-            children: _$$tx("community.purchase_home.contact_creator")
+            children: renderI18nText("community.purchase_home.contact_creator")
           }), "otp_refundable" === c && purchase.status === G3.SUCCEEDED ? jsx(c$, {
             onClick: m,
-            children: _$$tx("community.purchase_home.request_refund")
+            children: renderI18nText("community.purchase_home.request_refund")
           }) : jsx(c$, {
             onClick: p,
-            children: _$$tx("community.purchase_home.get_support")
+            children: renderI18nText("community.purchase_home.get_support")
           })]
         })
       })
@@ -924,7 +924,7 @@ function eW(e) {
       }) => jsxs(Fragment, {
         children: [jsx("div", {
           className: "purchase_home_and_history--purchaseHomeTitle--dPr0M text--fontPos13--xW8hS text--_fontBase--QdLsd",
-          children: _$$tx("community.purchase_home.community_purchases")
+          children: renderI18nText("community.purchase_home.community_purchases")
         }), !!activePurchases.length && jsxs("div", {
           className: "purchase_home_and_history--activePurchasesContainer--iaWWg",
           children: [jsx(eH, {
@@ -937,12 +937,12 @@ function eW(e) {
                 purchasePageType: po.ACTIVE
               }
             }),
-            children: _$$tx("community.purchase_home.show_more")
+            children: renderI18nText("community.purchase_home.show_more")
           })]
         }), !!inactivePurchases.length && jsxs(Fragment, {
           children: [jsx("div", {
             className: "purchase_home_and_history--purchaseHomeInactiveTitle--vE7CE text--fontPos11--2LvXf text--_fontBase--QdLsd",
-            children: _$$tx("community.purchase_home.inactive")
+            children: renderI18nText("community.purchase_home.inactive")
           }), jsx(eH, {
             purchases: inactivePurchases
           }), shouldSeeMoreInactivePurchases && jsx("button", {
@@ -953,18 +953,18 @@ function eW(e) {
                 purchasePageType: po.INACTIVE
               }
             }),
-            children: _$$tx("community.purchase_home.show_more")
+            children: renderI18nText("community.purchase_home.show_more")
           })]
         }), jsx("div", {
           className: "purchase_home_and_history--termsContainer--UGXj-",
-          children: _$$tx("community.purchase_home.by_purchasing_resources_you_agree", {
+          children: renderI18nText("community.purchase_home.by_purchasing_resources_you_agree", {
             paidResourceLicense: jsx(_$$N, {
               href: "https://figma.com/community-paid-resource-license",
-              children: _$$tx("community.detail_view.paid_resource_license")
+              children: renderI18nText("community.detail_view.paid_resource_license")
             }),
             termsOfService: jsx(_$$N, {
               href: "https://www.figma.com/tos/",
-              children: _$$tx("community.purchase_home.community_terms_of_service")
+              children: renderI18nText("community.purchase_home.community_terms_of_service")
             })
           })
         })]
@@ -1012,11 +1012,11 @@ function eZ(e) {
         children: jsx(kt, {})
       }), n && fetchNextPage && jsx("span", {
         className: e$,
-        children: _$$tx("community.purchase_home.server_could_not_load_resources", {
+        children: renderI18nText("community.purchase_home.server_could_not_load_resources", {
           reload: jsx("button", {
             onClick: l,
             className: "purchase_page--reloadButton--4-rsP blue_link--blueLink--9rlnd",
-            children: _$$tx("community.purchase_home.reload")
+            children: renderI18nText("community.purchase_home.reload")
           })
         })
       })]
@@ -1050,13 +1050,13 @@ function eQ(e) {
         children: jsx(W, {})
       }), jsx("h3", {
         className: Z,
-        children: _$$tx("community.community_account_settings.create_your_public_profile_title")
+        children: renderI18nText("community.community_account_settings.create_your_public_profile_title")
       }), jsx("div", {
         className: "community_view--joinText--az3QB",
-        children: _$$tx("community.community_account_settings.join_text")
+        children: renderI18nText("community.community_account_settings.join_text")
       }), jsx($n, {
         onClick: () => eX(t, e.user),
-        children: _$$tx("community.community_account_settings.claim_your_handle")
+        children: renderI18nText("community.community_account_settings.claim_your_handle")
       })]
     }), n && jsx("div", {
       className: Q,
@@ -1176,13 +1176,13 @@ function eJ(e) {
         className: Q,
         children: [jsx("h3", {
           className: Z,
-          children: _$$tx("community.community_account_settings.display_name")
+          children: renderI18nText("community.community_account_settings.display_name")
         }), jsx("div", {
           className: ee,
           children: e.profile?.name
         }), jsx("h3", {
           className: Z,
-          children: _$$tx("community.community_account_settings.unique_handle")
+          children: renderI18nText("community.community_account_settings.unique_handle")
         }), jsx("div", {
           className: ee,
           children: "@" + L
@@ -1190,13 +1190,13 @@ function eJ(e) {
           children: jsx($n, {
             variant: "link",
             onClick: () => eX(O, e.user),
-            children: _$$tx("community.community_account_settings.change_handle")
+            children: renderI18nText("community.community_account_settings.change_handle")
           })
         }), jsx("div", {
           className: J,
           children: jsxs("div", {
             className: "community_view--lightText--g-hBB",
-            children: [_$$tx("community.community_account_settings.public_profile"), " ", jsx($n.Link, {
+            children: [renderI18nText("community.community_account_settings.public_profile"), " ", jsx($n.Link, {
               onClick: () => {
                 O(sf({
                   view: "communityHub",
@@ -1239,7 +1239,7 @@ function eJ(e) {
         className: X,
         children: [jsx("h3", {
           className: Z,
-          children: _$$tx("community.community_account_settings.profile")
+          children: renderI18nText("community.community_account_settings.profile")
         }), jsx($n, {
           variant: "destructiveLink",
           onClick: () => {
@@ -1253,7 +1253,7 @@ function eJ(e) {
               }
             }));
           },
-          children: _$$tx("community.community_account_settings.delete_public_profile")
+          children: renderI18nText("community.community_account_settings.delete_public_profile")
         })]
       })]
     })
@@ -1294,7 +1294,7 @@ let tf = M4.Query({
         enabled: !!(await tm.getFeedIndicatorPreference(e)).data.meta
       };
     } catch (e) {
-      t.dispatch(_$$s2.error(_$$t2("notification_settings_modal.error_loading_settings")));
+      t.dispatch(_$$s2.error(getI18nString("notification_settings_modal.error_loading_settings")));
       return e;
     }
   }
@@ -1316,7 +1316,7 @@ let t_ = M4.Mutation(({
     value: t
   });
   r.catch(() => {
-    n.dispatch(_$$s2.error(_$$t2("notification_settings_modal.error_changing_setting")));
+    n.dispatch(_$$s2.error(getI18nString("notification_settings_modal.error_changing_setting")));
   });
   return r;
 });
@@ -1337,12 +1337,12 @@ function tA() {
   return "loaded" !== i.status ? null : jsxs("div", {
     children: [jsx("h3", {
       className: th,
-      children: _$$tx("fig_feed.feed")
+      children: renderI18nText("fig_feed.feed")
     }), jsx(_$$S2, {
       checked: i.data.enabled,
       onChange: s,
       label: jsx(_$$J, {
-        children: _$$t2("fig_feed.indicator_for_new_feed_posts")
+        children: getI18nString("fig_feed.indicator_for_new_feed_posts")
       })
     }, "sendMeNotifications_indicatorForNewFeedPosts")]
   });
@@ -1426,7 +1426,7 @@ let tS = M4.Query({
         sendMeNotifications: s
       };
     } catch (e) {
-      t.dispatch(_$$s2.error(_$$t2("notification_settings_modal.error_loading_settings")));
+      t.dispatch(_$$s2.error(getI18nString("notification_settings_modal.error_loading_settings")));
       return e;
     }
   }
@@ -1452,7 +1452,7 @@ let tw = M4.Mutation(({
     policySetting: n
   });
   s.catch(() => {
-    a.dispatch(_$$s2.error(_$$t2("notification_settings_modal.error_changing_setting")));
+    a.dispatch(_$$s2.error(getI18nString("notification_settings_modal.error_changing_setting")));
   });
   return s;
 });
@@ -1477,7 +1477,7 @@ let tC = M4.Mutation(({
     policySetting: n ? "all" : "none"
   });
   s.catch(() => {
-    a.dispatch(_$$s2.error(_$$t2("notification_settings_modal.error_changing_setting")));
+    a.dispatch(_$$s2.error(getI18nString("notification_settings_modal.error_changing_setting")));
   });
   return s;
 });
@@ -1500,7 +1500,7 @@ let tT = M4.Mutation(({
     channelSetting: i
   });
   a.catch(() => {
-    r.dispatch(_$$s2.error(_$$t2("notification_settings_modal.error_changing_setting")));
+    r.dispatch(_$$s2.error(getI18nString("notification_settings_modal.error_changing_setting")));
   });
   return a;
 });
@@ -1622,11 +1622,11 @@ function tN() {
   return jsxs("div", {
     children: [jsx("h3", {
       className: th,
-      children: _$$tx("notification_settings_modal.product_tips_and_news")
+      children: renderI18nText("notification_settings_modal.product_tips_and_news")
     }), jsx(_$$S2, {
       checked: t,
       label: jsx(_$$J, {
-        children: _$$tx("notification_settings_modal.send_me_occasional_emails_with_updates_and_promotions")
+        children: renderI18nText("notification_settings_modal.send_me_occasional_emails_with_updates_and_promotions")
       }),
       onChange: i
     })]
@@ -1649,7 +1649,7 @@ function tO() {
   return !e && s.isPushNotificationsSupported && "prompt" === s.permissionStatus.state ? jsxs("div", {
     children: [jsx("h3", {
       className: "xif65rj",
-      children: _$$t2("notification_settings_modal.browser_notifications")
+      children: getI18nString("notification_settings_modal.browser_notifications")
     }), jsx("div", {
       className: "x1y1aw1k",
       children: jsx(_$$J2, {
@@ -1658,16 +1658,16 @@ function tO() {
           onClick: async () => {
             t((await _$$d.requestPushNotifications(_$$iX.SETTINGS)) === Ke);
           },
-          children: _$$t2("notification_settings_modal.browser_notifications.enable")
+          children: getI18nString("notification_settings_modal.browser_notifications.enable")
         })
       })
     })]
   }) : jsx(tk, {
     channelType: "browser_push",
     policyTypesCsv: "FileCommentMentionsAndReplies,InvitesAndRequestsActions",
-    headerText: _$$t2("notification_settings_modal.browser_notifications"),
+    headerText: getI18nString("notification_settings_modal.browser_notifications"),
     infoText: void 0,
-    sendMeNotificationsText: _$$t2("notification_settings_modal.send_me_browser_push_notifications")
+    sendMeNotificationsText: getI18nString("notification_settings_modal.send_me_browser_push_notifications")
   });
 }
 function tD() {
@@ -1676,7 +1676,7 @@ function tD() {
   let i = _$$w();
   let n = dq();
   let s = null != Au(n);
-  let o = !!_$$eD;
+  let o = !!desktopAPIInstance;
   let l = useMemo(() => {
     let e = ["FileComments", "InvitesAndRequests", "CommunityComments", "CommunityWeeklySummary"];
     i && e.push("TeamFeed");
@@ -1701,23 +1701,23 @@ function tD() {
           children: [_$$d.isBrowserNotificationSupported() && jsx(tO, {}), o && jsx(tk, {
             channelType: "desktop_push",
             policyTypesCsv: "FileComments",
-            headerText: _$$t2("notification_settings_modal.desktop_notifications"),
+            headerText: getI18nString("notification_settings_modal.desktop_notifications"),
             infoText: void 0,
-            sendMeNotificationsText: _$$t2("notification_settings_modal.send_me_desktop_push_notifications")
+            sendMeNotificationsText: getI18nString("notification_settings_modal.send_me_desktop_push_notifications")
           }), jsx(tk, {
             channelType: "email",
             policyTypesCsv: l,
-            headerText: _$$t2("notification_settings_modal.email_notifications"),
-            infoText: _$$t2("notification_settings_modal.you_ll_still_get_emails_from_Figma_about_your_account"),
-            sendMeNotificationsText: _$$t2("notification_settings_modal.send_me_notifications_by_email")
+            headerText: getI18nString("notification_settings_modal.email_notifications"),
+            infoText: getI18nString("notification_settings_modal.you_ll_still_get_emails_from_Figma_about_your_account"),
+            sendMeNotificationsText: getI18nString("notification_settings_modal.send_me_notifications_by_email")
           }), i && jsx(ty, {}), jsx(tN, {}), jsx("div", {
             className: "notifications_settings_modal--emailDisclaimer--EJ14Q",
-            children: _$$tx("notification_settings_modal.unsubscribe_from_figma_emails_disclaimer", {
+            children: renderI18nText("notification_settings_modal.unsubscribe_from_figma_emails_disclaimer", {
               privacy_policy: jsx(Ph, {
                 href: "https://figma.com/privacy",
                 newTab: !0,
                 trusted: !0,
-                children: _$$tx("notification_settings_modal.privacy_policy")
+                children: renderI18nText("notification_settings_modal.privacy_policy")
               })
             })
           })]
@@ -1746,7 +1746,7 @@ let tJ = Ju(function (e) {
       },
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$tx("settings.account_setting.change_password_modal_header")
+          children: renderI18nText("settings.account_setting.change_password_modal_header")
         })
       }), jsxs(_$$nB, {
         children: [jsx("input", {
@@ -1755,18 +1755,18 @@ let tJ = Ju(function (e) {
           autoComplete: "current-password",
           className: _Z,
           ref: n,
-          placeholder: _$$t2("settings.account_setting.change_password_current_password_placeholder")
+          placeholder: getI18nString("settings.account_setting.change_password_current_password_placeholder")
         }), jsx("input", {
           name: "passwordNew",
           type: "password",
           autoComplete: "new-password",
           className: _Z,
-          placeholder: _$$t2("settings.account_setting.change_password_new_password_placeholder")
+          placeholder: getI18nString("settings.account_setting.change_password_new_password_placeholder")
         }), jsx("input", {
           name: "passwordRetype",
           type: "password",
           className: _Z,
-          placeholder: _$$t2("settings.account_setting.change_password_confirm_password_placeholder")
+          placeholder: getI18nString("settings.account_setting.change_password_confirm_password_placeholder")
         })]
       }), jsxs(wi, {
         children: [jsx($n, {
@@ -1774,11 +1774,11 @@ let tJ = Ju(function (e) {
             t(BD());
           },
           variant: "link",
-          children: _$$tx("settings.account_setting.forgot_password")
+          children: renderI18nText("settings.account_setting.forgot_password")
         }), jsx(jk, {
           children: jsx($n, {
             type: "submit",
-            children: _$$tx("settings.account_setting.submit_button")
+            children: renderI18nText("settings.account_setting.submit_button")
           })
         })]
       })]
@@ -1802,7 +1802,7 @@ let t4 = Ju(function (e) {
     open: e.open,
     width: "lg",
     height: "fixed",
-    children: t.phone_number ? _$$tx("auth.two-factor-setup.remove-app-with-sms-two-factor-on") : jsx(B7, {})
+    children: t.phone_number ? renderI18nText("auth.two-factor-setup.remove-app-with-sms-two-factor-on") : jsx(B7, {})
   }) : jsx(bL, {
     manager: a,
     width: "lg",
@@ -1810,7 +1810,7 @@ let t4 = Ju(function (e) {
     children: jsx(_$$_, {
       fplModal: !0,
       twoFactorAuth: i,
-      title: _$$tx("auth.two-factor-setup.disable_two_factor_auth")
+      title: renderI18nText("auth.two-factor-setup.disable_two_factor_auth")
     })
   }) : null;
 }, "DisableTwoFactorModal");
@@ -1846,7 +1846,7 @@ let ip = _$$nF(async (e, t) => {
     }));
   } catch (i) {
     let t = "Could not add personal access token";
-    i instanceof XHRError && i.status >= 400 && i.status < 500 ? $D(_$$e2.EXTENSIBILITY, i) : t = `Could not add personal access token: ${i.message}`;
+    i instanceof XHRError && i.status >= 400 && i.status < 500 ? reportError(_$$e2.EXTENSIBILITY, i) : t = `Could not add personal access token: ${i.message}`;
     e.dispatch(_$$F.enqueue({
       message: t,
       error: !0
@@ -1883,7 +1883,7 @@ function ib({
           i(e, t);
         },
         getPermissionName: e => E0(e),
-        label: _$$t2("tokens.settings.dev_token_modal.permission_selector_label", {
+        label: getI18nString("tokens.settings.dev_token_modal.permission_selector_label", {
           resource: n.name
         })
       })
@@ -1914,12 +1914,12 @@ let iv = Ju(function (e) {
     org
   } = e;
   let _ = useDispatch();
-  let A = e => _$$t2("tokens.settings.dev_token_modal.expiration_option", {
+  let A = e => getI18nString("tokens.settings.dev_token_modal.expiration_option", {
     numDays: e
   });
-  let y = useMemo(() => n > 0 ? _$$tx("tokens.settings.dev_token_modal.expiration_description", {
+  let y = useMemo(() => n > 0 ? renderI18nText("tokens.settings.dev_token_modal.expiration_description", {
     expiry: _$$A6().add(n, "day").toDate()
-  }) : _$$tx("tokens.settings.dev_token_modal.expiration_description_never"), [n]);
+  }) : renderI18nText("tokens.settings.dev_token_modal.expiration_description_never"), [n]);
   let I = (e, t) => {
     u({
       ...d,
@@ -1932,7 +1932,7 @@ let iv = Ju(function (e) {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$t2("tokens.settings.generate_new_token")
+          children: getI18nString("tokens.settings.generate_new_token")
         })
       }), jsx(_$$nB, {
         children: jsxs(_$$Y, {
@@ -1940,10 +1940,10 @@ let iv = Ju(function (e) {
           spacing: 16,
           padding: 16,
           children: [jsx(_$$E2, {
-            children: _$$tx("tokens.settings.dev_token_modal.description")
+            children: renderI18nText("tokens.settings.dev_token_modal.description")
           }), jsx(ks, {
             className: _$$s.wFull.$,
-            placeholder: _$$t2("tokens.settings.dev_token_modal.name_placeholder"),
+            placeholder: getI18nString("tokens.settings.dev_token_modal.name_placeholder"),
             value: t,
             onChange: e => {
               i(e.target.value);
@@ -1955,7 +1955,7 @@ let iv = Ju(function (e) {
             spacing: 8,
             children: [jsx(_$$E2, {
               fontSize: 13,
-              children: _$$tx("tokens.settings.dev_token_modal.expiration_header")
+              children: renderI18nText("tokens.settings.dev_token_modal.expiration_header")
             }), jsxs(_$$bL, {
               value: String(n),
               onChange: e => {
@@ -1963,7 +1963,7 @@ let iv = Ju(function (e) {
               },
               children: [jsx(l9, {
                 label: jsx(_$$h2, {
-                  children: _$$tx("tokens.settings.dev_token_modal.expiration_header")
+                  children: renderI18nText("tokens.settings.dev_token_modal.expiration_header")
                 }),
                 description: y
               }), jsxs(mc, {
@@ -1972,7 +1972,7 @@ let iv = Ju(function (e) {
                   children: A(e)
                 }, e)), !getFeatureFlags().rest_api_require_expiration_on_pat_creation && jsx(_$$c$, {
                   value: "0",
-                  children: _$$tx("tokens.settings.dev_token_modal.no_expiration_option")
+                  children: renderI18nText("tokens.settings.dev_token_modal.no_expiration_option")
                 }, "0")]
               })]
             })]
@@ -1980,7 +1980,7 @@ let iv = Ju(function (e) {
             direction: "vertical",
             children: [jsx(_$$E2, {
               fontSize: 13,
-              children: _$$tx("tokens.settings.dev_token_modal.scopes_header")
+              children: renderI18nText("tokens.settings.dev_token_modal.scopes_header")
             }), jsxs(_$$Y, {
               direction: "vertical",
               spacing: 16,
@@ -2049,7 +2049,7 @@ let iv = Ju(function (e) {
           children: [jsx($n, {
             onClick: () => _(Lo()),
             variant: "secondary",
-            children: _$$tx("tokens.settings.dev_token_modal.cancel")
+            children: renderI18nText("tokens.settings.dev_token_modal.cancel")
           }), jsx($n, {
             type: "submit",
             disabled: !(t && Object.values(d).some(e => e !== _$$eK.NO_ACCESS)),
@@ -2064,7 +2064,7 @@ let iv = Ju(function (e) {
               }));
               _(Lo());
             },
-            children: _$$tx("tokens.settings.dev_token_modal.cta")
+            children: renderI18nText("tokens.settings.dev_token_modal.cta")
           })]
         })
       })]
@@ -2103,28 +2103,28 @@ function iw(e) {
     return `${i}: ${n}`;
   }).join("\n");
   if (token.expires_at && _$$A6.utc(token.expires_at).isBefore(_$$A6.utc())) return null;
-  let p = token.expires_at ? _$$tx("tokens.settings.expires", {
+  let p = token.expires_at ? renderI18nText("tokens.settings.expires", {
     relativeTimeString: jsx(h1, {
       date: token.expires_at
     })
   }) : "revoked" === nonExpPatRevocationStage ? jsxs(Fragment, {
-    children: [_$$tx("tokens.settings.token_was_revoked", {
+    children: [renderI18nText("tokens.settings.token_was_revoked", {
       revocationDate: ix
     }), " ", jsx(_$$N, {
       newTab: !0,
       href: iS,
-      children: _$$tx("tokens.settings.learn_more")
+      children: renderI18nText("tokens.settings.learn_more")
     })]
   }) : "grace_period" === nonExpPatRevocationStage ? jsxs(Fragment, {
-    children: [_$$tx("tokens.settings.token_will_be_revoked", {
+    children: [renderI18nText("tokens.settings.token_will_be_revoked", {
       revocationDate: ix
     }), " ", jsx(_$$N, {
       newTab: !0,
       href: iS,
-      children: _$$tx("tokens.settings.learn_more")
+      children: renderI18nText("tokens.settings.learn_more")
     })]
-  }) : _$$tx("tokens.settings.never_expires");
-  let g = token.expires_at || "revoked" !== nonExpPatRevocationStage ? _$$tx("tokens.settings.revoke_access") : _$$tx("tokens.settings.remove_revoked");
+  }) : renderI18nText("tokens.settings.never_expires");
+  let g = token.expires_at || "revoked" !== nonExpPatRevocationStage ? renderI18nText("tokens.settings.revoke_access") : renderI18nText("tokens.settings.remove_revoked");
   return jsxs(_$$Y, {
     horizontalAlignItems: "space-between",
     padding: {
@@ -2156,9 +2156,9 @@ function iw(e) {
       spacing: 4,
       horizontalAlignItems: "end",
       children: [jsx("div", {
-        children: token.last_used ? _$$tx("tokens.settings.last_used", {
+        children: token.last_used ? renderI18nText("tokens.settings.last_used", {
           relativeTimeString: _$$A6(token.last_used).from(Date.now())
-        }) : _$$tx("tokens.settings.never_used")
+        }) : renderI18nText("tokens.settings.never_used")
       }), jsx("button", {
         onClick: d,
         style: _$$sx.$$if(null !== o, _$$sx.colorTextDisabled, _$$sx.colorTextDanger).cursorPointer.mr0.p0.add({
@@ -2202,12 +2202,12 @@ function iC(e) {
               stringToCopy: t.token || ""
             }));
           },
-          children: _$$tx("tokens.settings.copy_token")
-        }), " ", _$$tx("tokens.settings.new_token_reminder")]
+          children: renderI18nText("tokens.settings.copy_token")
+        }), " ", renderI18nText("tokens.settings.new_token_reminder")]
       })]
     }), jsx("button", {
       className: _$$s.h16.px2.bgTransparent.cursorPointer.$,
-      "aria-label": _$$t2("general.close"),
+      "aria-label": getI18nString("general.close"),
       onClick: () => {
         e.onClose(t.id);
       },
@@ -2218,7 +2218,7 @@ function iC(e) {
 function iT(e) {
   let t = e.user.dev_tokens || [];
   t && t.sort((e, t) => Number(t.id) - Number(e.id));
-  let i = md(_$$Z2);
+  let i = useAtomWithSubscription(_$$Z2);
   let n = useDispatch();
   let a = e => {
     n(iu({
@@ -2232,10 +2232,10 @@ function iT(e) {
     className: Q,
     children: [jsx("div", {
       className: Z,
-      children: _$$tx("tokens.settings.developer_tokens_title")
+      children: renderI18nText("tokens.settings.developer_tokens_title")
     }), jsx("div", {
       className: iI,
-      children: _$$tx("tokens.settings.developer_tokens_description")
+      children: renderI18nText("tokens.settings.developer_tokens_description")
     }), jsx($n, {
       variant: "link",
       onClick: () => {
@@ -2246,7 +2246,7 @@ function iT(e) {
           }
         }));
       },
-      children: _$$tx("tokens.settings.generate_new_token")
+      children: renderI18nText("tokens.settings.generate_new_token")
     }), t.map((t, i) => 0 === i && t.token ? jsx(iC, {
       token: t,
       onClose: a
@@ -2266,13 +2266,13 @@ function ik(e) {
     className: e.last ? X : Q,
     children: [jsx("div", {
       className: Z,
-      children: _$$tx("tokens.settings.connected_apps_title")
+      children: renderI18nText("tokens.settings.connected_apps_title")
     }), jsx("div", {
       className: iI,
-      children: _$$tx("tokens.settings.connected_apps_description")
+      children: renderI18nText("tokens.settings.connected_apps_description")
     }), 0 === t.length && jsx("div", {
       className: iE,
-      children: _$$tx("tokens.settings.no_connected_apps")
+      children: renderI18nText("tokens.settings.no_connected_apps")
     }), t.map(t => jsx(iR, {
       userId: e.user.id,
       token: t
@@ -2322,7 +2322,7 @@ function iR({
       className: "tokens--devTokenMeta--k7uCC",
       children: [jsx("div", {
         className: "tokens--devTokenLastUsed--hKrY3",
-        children: _$$tx("tokens.settings.connected_time_ago", {
+        children: renderI18nText("tokens.settings.connected_time_ago", {
           timeAgo: jsx(h1, {
             date: t.granted_at
           })
@@ -2330,7 +2330,7 @@ function iR({
       }), jsx($n, {
         variant: i ? "destructiveLink" : "link",
         onClick: () => o(t),
-        children: _$$tx("tokens.settings.revoke_access")
+        children: renderI18nText("tokens.settings.revoke_access")
       })]
     })]
   });
@@ -2360,14 +2360,14 @@ function iF({
     n(!0);
     _$$H.deleteSession(e).then(() => {
       s(_$$F.enqueue({
-        message: _$$t2("sessions.bell.success"),
+        message: getI18nString("sessions.bell.success"),
         timeoutOverride: 5e3
       }));
       t(e);
     }).catch(() => {
       n(!1);
       s(_$$F.enqueue({
-        message: _$$t2("sessions.bell.fail"),
+        message: getI18nString("sessions.bell.fail"),
         timeoutOverride: 5e3,
         error: !0
       }));
@@ -2393,9 +2393,9 @@ function iF({
             children: jsx(_$$G, {
               text: l
             })
-          }) : _$$tx("sessions.null.location"), jsxs("span", {
+          }) : renderI18nText("sessions.null.location"), jsxs("span", {
             className: iP,
-            children: [e.type, " \xb7 ", e.last_ip ?? _$$tx("sessions.null.ip")]
+            children: [e.type, " \xb7 ", e.last_ip ?? renderI18nText("sessions.null.ip")]
           })]
         })]
       })
@@ -2417,7 +2417,7 @@ function iF({
         capitalize: !0
       }) : "-", jsx("br", {}), jsxs("div", {
         className: iP,
-        children: [_$$tx("sessions.row.created"), " ", jsx(h1, {
+        children: [renderI18nText("sessions.row.created"), " ", jsx(h1, {
           date: e.created_at
         })]
       })]
@@ -2425,12 +2425,12 @@ function iF({
       className: iN,
       children: e.is_current ? jsx("div", {
         className: "security_view--disabled--9KmOm",
-        children: _$$tx("sessions.session.current_session")
+        children: renderI18nText("sessions.session.current_session")
       }) : jsx(_$$E, {
         className: "security_view--sessionRevokeEnabled--Tm88T",
         style: _$$sx.$$if(i, _$$sx.colorTextDisabled, _$$sx.colorTextDanger).$,
         onClick: () => o(e.id),
-        children: _$$tx("sessions.session.revoke_session")
+        children: renderI18nText("sessions.session.revoke_session")
       })
     })]
   });
@@ -2458,34 +2458,34 @@ function iM({
     children: [!l && jsxs(Fragment, {
       children: [jsx("div", {
         className: Z,
-        children: _$$tx("settings.account_settings.password_section_header")
+        children: renderI18nText("settings.account_settings.password_section_header")
       }), jsx($n, {
         variant: "link",
         onClick: () => t(_$$to({
           type: tJ,
           showModalsBeneath: !0
         })),
-        children: _$$tx("settings.account_settings.change_password_link")
+        children: renderI18nText("settings.account_settings.change_password_link")
       })]
     }), !o && jsx("div", {
       className: J,
       children: jsx($n, {
         variant: "link",
         onClick: () => {
-          sx("Two-factor setup started");
+          trackEventAnalytics("Two-factor setup started");
           u();
         },
-        children: _$$tx("auth.two-factor-setup.enable_two_factor_authentication")
+        children: renderI18nText("auth.two-factor-setup.enable_two_factor_authentication")
       })
     }), o && jsxs(Fragment, {
       children: [jsx("div", {
         className: Z,
-        children: _$$tx("auth.two-factor-setup.two_factor_authentication_is_enabled")
+        children: renderI18nText("auth.two-factor-setup.two_factor_authentication_is_enabled")
       }), a && jsxs("div", {
         className: J,
         children: [jsx("span", {
           className: et,
-          children: _$$tx("auth.two-factor-setup.authenticator_apps_are_enabled")
+          children: renderI18nText("auth.two-factor-setup.authenticator_apps_are_enabled")
         }), jsx($n, {
           variant: "link",
           onClick: () => t(_$$to({
@@ -2494,34 +2494,34 @@ function iM({
           })),
           disabled: d,
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": d ? _$$t2("auth.two-factor-setup.disable-two-factor-blocked") : "",
-          children: _$$tx("auth.two-factor-setup.disable-authenticator-app")
+          "data-tooltip": d ? getI18nString("auth.two-factor-setup.disable-two-factor-blocked") : "",
+          children: renderI18nText("auth.two-factor-setup.disable-authenticator-app")
         })]
       }), s && jsxs("div", {
         className: J,
         children: [jsx("span", {
           className: et,
-          children: _$$tx("auth.two-factor-setup.connected_cell_phone_number_tfa_phone_number", {
+          children: renderI18nText("auth.two-factor-setup.connected_cell_phone_number_tfa_phone_number", {
             phoneNumber: s
           })
         }), jsx($n, {
           variant: "link",
           onClick: c,
-          children: _$$tx("auth.two-factor-setup.configure-sms")
+          children: renderI18nText("auth.two-factor-setup.configure-sms")
         })]
       }), !a && jsx("div", {
         className: J,
         children: jsx($n, {
           variant: "link",
           onClick: u,
-          children: _$$tx("auth.two-factor-setup.connect_authenticator_app")
+          children: renderI18nText("auth.two-factor-setup.connect_authenticator_app")
         })
       }), !s && jsx("div", {
         className: J,
         children: jsx($n, {
           variant: "link",
           onClick: c,
-          children: _$$tx("auth.two-factor-setup.connect_cell_phone_number")
+          children: renderI18nText("auth.two-factor-setup.connect_cell_phone_number")
         })
       }), jsx("div", {
         className: J,
@@ -2531,7 +2531,7 @@ function iM({
             type: _$$J4,
             showModalsBeneath: !0
           })),
-          children: _$$tx("auth.two-factor-setup.show_recovery_codes")
+          children: renderI18nText("auth.two-factor-setup.show_recovery_codes")
         })
       })]
     })]
@@ -2557,34 +2557,34 @@ function ij({
   };
   return null == e ? jsx("div", {
     className: iD,
-    children: _$$tx("sessions.error.logged_out")
+    children: renderI18nText("sessions.error.logged_out")
   }) : n ? jsx("div", {
     className: iD,
     children: jsx(kt, {})
   }) : o ? jsx("div", {
     className: iD,
-    children: _$$tx("sessions.error.no_sessions")
+    children: renderI18nText("sessions.error.no_sessions")
   }) : jsxs("div", {
     children: [jsx("div", {
       className: Z,
-      children: _$$tx("sessions.header.title")
+      children: renderI18nText("sessions.header.title")
     }), jsx("div", {
       className: "security_view--description--U-GX5 text--fontPos12--YsUAh text--_fontBase--QdLsd",
-      children: _$$tx("sessions.header.description")
+      children: renderI18nText("sessions.header.description")
     }), jsxs("div", {
       className: "security_view--headers--4Ucwg text--fontPos12--YsUAh text--_fontBase--QdLsd",
       children: [jsx("div", {
         className: iN,
-        children: _$$tx("sessions.column.location_ip")
+        children: renderI18nText("sessions.column.location_ip")
       }), jsx("div", {
         className: iN,
-        children: _$$tx("sessions.column.os_browser")
+        children: renderI18nText("sessions.column.os_browser")
       }), jsx("div", {
         className: iN,
-        children: _$$tx("sessions.column.accessed_created")
+        children: renderI18nText("sessions.column.accessed_created")
       }), jsx("div", {
         className: iN,
-        children: _$$tx("sessions.column.manage")
+        children: renderI18nText("sessions.column.manage")
       })]
     }), jsxs("div", {
       className: "security_view--sessionsList--vBsBG",
@@ -2626,14 +2626,14 @@ function iH({
     n(!0);
     _$$H.deleteSession(e).then(() => {
       s(_$$F.enqueue({
-        message: _$$t2("sessions.bell.success"),
+        message: getI18nString("sessions.bell.success"),
         timeoutOverride: 5e3
       }));
       t(e);
     }).catch(() => {
       n(!1);
       s(_$$F.enqueue({
-        message: _$$t2("sessions.bell.fail"),
+        message: getI18nString("sessions.bell.fail"),
         timeoutOverride: 5e3,
         error: !0
       }));
@@ -2659,9 +2659,9 @@ function iH({
             children: jsx(_$$G, {
               text: l
             })
-          }) : _$$tx("sessions.null.location"), jsxs("span", {
+          }) : renderI18nText("sessions.null.location"), jsxs("span", {
             className: iB,
-            children: [e.type, " \xb7 ", e.last_ip ?? _$$tx("sessions.null.ip")]
+            children: [e.type, " \xb7 ", e.last_ip ?? renderI18nText("sessions.null.ip")]
           })]
         })]
       })
@@ -2683,7 +2683,7 @@ function iH({
         capitalize: !0
       }) : "-", jsx("br", {}), jsxs("div", {
         className: iB,
-        children: [_$$tx("sessions.row.created"), " ", jsx(h1, {
+        children: [renderI18nText("sessions.row.created"), " ", jsx(h1, {
           date: e.created_at
         })]
       })]
@@ -2691,12 +2691,12 @@ function iH({
       className: iU,
       children: e.is_current ? jsx("div", {
         className: "sessions_view--disabled--Zo0XR",
-        children: _$$tx("sessions.session.current_session")
+        children: renderI18nText("sessions.session.current_session")
       }) : jsx(_$$E, {
         className: "sessions_view--sessionRevokeEnabled--d-6RK",
         style: _$$sx.$$if(i, _$$sx.colorTextDisabled, _$$sx.colorTextDanger).$,
         onClick: () => o(e.id),
-        children: _$$tx("sessions.session.revoke_session")
+        children: renderI18nText("sessions.session.revoke_session")
       })
     })]
   });
@@ -2708,7 +2708,7 @@ let nt = _$$nF((e, t) => {
   n.then(() => {
     let i = e.getState();
     i.modalShown && i.modalShown.type === ni.type && e.dispatch(Lo());
-    e.dispatch(_$$s2.flash(_$$t2("api_user.verify-email-message", {
+    e.dispatch(_$$s2.flash(getI18nString("api_user.verify-email-message", {
       email: t.email
     })));
   }).catch(e => {
@@ -2716,7 +2716,7 @@ let nt = _$$nF((e, t) => {
   });
   e.dispatch(_$$Q({
     promise: n,
-    fallbackError: _$$t2("api_user.error.an_error_occurred_while_updating_your_information")
+    fallbackError: getI18nString("api_user.error.an_error_occurred_while_updating_your_information")
   }));
   return n;
 });
@@ -2747,19 +2747,19 @@ function nn({
         className: _$$s.mb4.$
       }), jsx("div", {
         className: _$$s.flex.itemsCenter.fontMedium.$,
-        children: _$$tx("settings.account_setting.change_email_mfa_required_warning.title", {
+        children: renderI18nText("settings.account_setting.change_email_mfa_required_warning.title", {
           orgName: n
         })
       }), jsx("div", {
         className: _$$s.colorTextSecondary.mt4.$,
-        children: _$$tx("settings.account_setting.change_email_mfa_required_warning.description", {
+        children: renderI18nText("settings.account_setting.change_email_mfa_required_warning.description", {
           orgName: n
         })
       })]
     })
   }) : e?.org_domain ? jsx("p", {
     className: "change_email--emailDomainChangeWarning--m8yvo",
-    children: _$$tx("settings.account_setting.change_email_context_org_warning", {
+    children: renderI18nText("settings.account_setting.change_email_context_org_warning", {
       orgDomain: e.org_domain.domain
     })
   }) : null;
@@ -2782,8 +2782,8 @@ function nr({
   return jsxs(_$$R2, {
     open: e,
     onClose: t,
-    title: _$$t2("settings.account_settings.change_email_modal_title"),
-    confirmText: _$$t2("settings.account_setting.submit_button"),
+    title: getI18nString("settings.account_settings.change_email_modal_title"),
+    confirmText: getI18nString("settings.account_setting.submit_button"),
     onConfirm: e => {
       e.preventDefault();
       i({
@@ -2794,11 +2794,11 @@ function nr({
     footerText: jsx($n, {
       variant: "link",
       onClick: n,
-      children: _$$tx("settings.account_setting.forgot_password")
+      children: renderI18nText("settings.account_setting.forgot_password")
     }),
     width: "lg",
     children: [jsx("p", {
-      children: _$$tx("settings.account_setting.change_email_context")
+      children: renderI18nText("settings.account_setting.change_email_context")
     }), jsx(nn, {
       userEmailFeatures: c
     }), jsx(ks, {
@@ -2806,14 +2806,14 @@ function nr({
       type: "text",
       className: _Z,
       ref: p,
-      placeholder: _$$t2("settings.account_setting.change_email_input_placeholder"),
+      placeholder: getI18nString("settings.account_setting.change_email_input_placeholder"),
       value: s,
       onChange: e => o(e.target.value)
     }), jsx(ks, {
       name: "password",
       type: "password",
       className: _Z,
-      placeholder: _$$t2("settings.account_setting.change_email_confirm_password_placeholder"),
+      placeholder: getI18nString("settings.account_setting.change_email_confirm_password_placeholder"),
       value: l,
       onChange: e => d(e.target.value)
     })]
@@ -3341,8 +3341,8 @@ let n1 = Ju(function (e) {
   let f = _$$X3();
   let _ = _$$z4.object({
     name: _$$z4.string({
-      required_error: _$$t2("settings.account_settings.change_name_required")
-    }).nonempty(_$$t2("settings.account_settings.change_name_required"))
+      required_error: getI18nString("settings.account_settings.change_name_required")
+    }).nonempty(getI18nString("settings.account_settings.change_name_required"))
   });
   let {
     manager
@@ -3372,13 +3372,13 @@ let n1 = Ju(function (e) {
       children: jsxs(vo, {
         children: [jsx(Y9, {
           children: jsx(hE, {
-            children: _$$tx("settings.account_settings.change_name_modal_title")
+            children: renderI18nText("settings.account_settings.change_name_modal_title")
           })
         }), jsx(_$$nB, {
           children: jsx(n$.Row, {
             name: "name",
             label: jsx(n$.Label, {
-              children: _$$tx("settings.account_settings.change_name_modal_input_placeholder")
+              children: renderI18nText("settings.account_settings.change_name_modal_input_placeholder")
             }),
             children: jsx(nJ, {
               ref: f,
@@ -3396,7 +3396,7 @@ let n1 = Ju(function (e) {
               htmlAttributes: {
                 "data-testId": "change-name-save"
               },
-              children: _$$tx("general.save")
+              children: renderI18nText("general.save")
             })
           })
         })]
@@ -3419,7 +3419,7 @@ let n1 = Ju(function (e) {
       },
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$tx("settings.account_settings.change_name_modal_title")
+          children: renderI18nText("settings.account_settings.change_name_modal_title")
         })
       }), jsx(_$$nB, {
         children: jsx(ks, {
@@ -3427,7 +3427,7 @@ let n1 = Ju(function (e) {
           name: "name",
           type: "text",
           className: _Z,
-          placeholder: _$$t2("settings.account_settings.change_name_modal_input_placeholder"),
+          placeholder: getI18nString("settings.account_settings.change_name_modal_input_placeholder"),
           value: d,
           onChange: e => {
             let t = e.currentTarget.value;
@@ -3444,14 +3444,14 @@ let n1 = Ju(function (e) {
             className: pL,
             disabled: m,
             dataTestId: "change-name-save",
-            children: _$$tx("general.save")
+            children: renderI18nText("general.save")
           })
         })
       })]
     })
   });
 }, "CHANGE_NAME_MODAL", ZU.YES);
-let n6 = () => _$$t2("settings.delete_user_account.delete_my_account");
+let n6 = () => getI18nString("settings.delete_user_account.delete_my_account");
 let n7 = "DELETE_USER_ACCOUNT_MODAL";
 qK(n7, e => jsx(n8, {
   ...e
@@ -3484,16 +3484,16 @@ class n8 extends PureComponent {
   render() {
     return this.props.user ? this.props.user.google_sso_only || !this.props.user.email || this.props.user.email_validated_at ? this.props.user.delete_user_loading ? jsx(d_, {
       size: "small",
-      title: _$$t2("settings.delete_user_account.delete_account"),
+      title: getI18nString("settings.delete_user_account.delete_account"),
       className: yl,
       disableClickOutsideToHide: !0,
       ...this.props,
       children: jsx("p", {
-        children: _$$tx("settings.delete_user_account.account_deletion_is_in_progress")
+        children: renderI18nText("settings.delete_user_account.account_deletion_is_in_progress")
       })
     }) : jsxs(d_, {
       size: "small",
-      title: _$$t2("settings.delete_user_account.delete_account"),
+      title: getI18nString("settings.delete_user_account.delete_account"),
       className: yl,
       popStack: !0,
       ...this.props,
@@ -3503,22 +3503,22 @@ class n8 extends PureComponent {
         children: [jsxs("p", {
           children: [jsx("span", {
             className: Vq,
-            children: _$$tx("settings.delete_user_account.are_you_sure_you_want_to_delete_your_figma_account")
-          }), " ", _$$tx("settings.delete_user_account.deleting_your_this_props_user_email_account_will_delete_all_your_associated_data", {
+            children: renderI18nText("settings.delete_user_account.are_you_sure_you_want_to_delete_your_figma_account")
+          }), " ", renderI18nText("settings.delete_user_account.deleting_your_this_props_user_email_account_will_delete_all_your_associated_data", {
             email: this.props.user.email
           }), jsx("br", {})]
         }), jsx("br", {}), this.props.user.stripe_account_status && this.props.user.stripe_account_status !== P5.NONE && jsxs(Fragment, {
           children: [jsx("p", {
-            children: _$$tx("settings.any_resources_you_have_marked_for_sale", {
+            children: renderI18nText("settings.any_resources_you_have_marked_for_sale", {
               creatorAgreement: Hl
             })
           }), jsx("br", {})]
         }), jsx("p", {
-          children: _$$tx("settings.delete_user_account.for_more_information_about_how_we_treat_your_data", {
+          children: renderI18nText("settings.delete_user_account.for_more_information_about_how_we_treat_your_data", {
             privacyPolicyLink: hM
           })
         }), jsx("br", {}), jsx("p", {
-          children: _$$tx("settings.delete_user_account.to_confirm_please_type_strong_delete_my_account_strong_below", {
+          children: renderI18nText("settings.delete_user_account.to_confirm_please_type_strong_delete_my_account_strong_below", {
             confirmationText: jsx("strong", {
               children: n6()
             })
@@ -3541,12 +3541,12 @@ class n8 extends PureComponent {
             children: [jsx(_$$nR, {
               className: pL,
               onClick: this.cancel,
-              children: _$$tx("modal.cancel")
+              children: renderI18nText("modal.cancel")
             }), jsx(qZ, {
               type: "submit",
               className: pL,
               disabled: n6() !== this.state.confirmUserDeleteInput,
-              children: _$$tx("settings.delete_user_account.delete_account")
+              children: renderI18nText("settings.delete_user_account.delete_account")
             })]
           })]
         })]
@@ -3554,10 +3554,10 @@ class n8 extends PureComponent {
         ...this.props
       })]
     }) : jsx(yX, {
-      confirmationTitle: _$$t2("settings.delete_user_account.a_verified_email_is_required"),
-      content: _$$t2("settings.delete_user_account.you_must_verify_your_email_address_before_you_can_attempt_this_operation"),
+      confirmationTitle: getI18nString("settings.delete_user_account.a_verified_email_is_required"),
+      content: getI18nString("settings.delete_user_account.you_must_verify_your_email_address_before_you_can_attempt_this_operation"),
       onConfirm: this.resendVerification,
-      confirmText: _$$t2("settings.delete_user_account.resend_verification_email"),
+      confirmText: getI18nString("settings.delete_user_account.resend_verification_email"),
       tintedModalBackground: !0,
       popStack: !0,
       ...this.props
@@ -3583,7 +3583,7 @@ let rt = Ju(function (e) {
           }
           if (!i) return;
           let r = "true" === n;
-          az.trackDefinedEvent("user.file_view_history_preference_changed", {
+          analyticsEventManager.trackDefinedEvent("user.file_view_history_preference_changed", {
             disableFileViewHistory: r
           });
           _$$k3.setFileViewHistoryPreference({
@@ -3594,13 +3594,13 @@ let rt = Ju(function (e) {
         },
         children: [jsx(Y9, {
           children: jsx(hE, {
-            children: _$$tx("settings.account_settings.file_view_history_modal.title")
+            children: renderI18nText("settings.account_settings.file_view_history_modal.title")
           })
         }), jsxs(_$$nB, {
           children: [jsxs(_$$b2, {
             autofocus: !0,
             legend: jsx(_$$q, {
-              children: _$$tx("settings.account_settings.file_view_history_modal.title")
+              children: renderI18nText("settings.account_settings.file_view_history_modal.title")
             }),
             value: n,
             onChange: e => {
@@ -3608,22 +3608,22 @@ let rt = Ju(function (e) {
             },
             children: [jsx(_$$c, {
               label: jsx(_$$J, {
-                children: _$$tx("settings.account_settings.file_view_history_modal.enabled_label")
+                children: renderI18nText("settings.account_settings.file_view_history_modal.enabled_label")
               }),
               value: (!1).toString(),
-              children: _$$tx("settings.account_settings.file_view_history_modal.turn_on_description")
+              children: renderI18nText("settings.account_settings.file_view_history_modal.turn_on_description")
             }, (!1).toString()), jsx(_$$c, {
               label: jsx(_$$J, {
-                children: _$$tx("settings.account_settings.file_view_history_modal.disabled_label")
+                children: renderI18nText("settings.account_settings.file_view_history_modal.disabled_label")
               }),
               value: (!0).toString(),
-              children: _$$tx("settings.account_settings.file_view_history_modal.turn_off_description")
+              children: renderI18nText("settings.account_settings.file_view_history_modal.turn_off_description")
             }, (!0).toString())]
           }), jsx("div", {
             className: _$$s.mt8.$,
             children: d && jsx(_$$_2, {
               color: "true" === n ? _$$S4.ERROR : _$$S4.INFORMATION,
-              text: "true" === n ? _$$tx("settings.account_settings.file_view_history_modal.turn_off.change_only_applies_moving_forward") : _$$tx("settings.account_settings.file_view_history_modal.turn_on.change_only_applies_moving_forward")
+              text: "true" === n ? renderI18nText("settings.account_settings.file_view_history_modal.turn_off.change_only_applies_moving_forward") : renderI18nText("settings.account_settings.file_view_history_modal.turn_on.change_only_applies_moving_forward")
             })
           })]
         }), jsx(wi, {
@@ -3631,10 +3631,10 @@ let rt = Ju(function (e) {
             children: [jsx($n, {
               variant: "secondary",
               onClick: e.onClose,
-              children: _$$tx("settings.account_settings.file_view_history_modal.cancel")
+              children: renderI18nText("settings.account_settings.file_view_history_modal.cancel")
             }), jsx($n, {
               type: "submit",
-              children: _$$tx("settings.account_settings.file_view_history_modal.save")
+              children: renderI18nText("settings.account_settings.file_view_history_modal.save")
             })]
           })
         })]
@@ -3657,28 +3657,28 @@ function rs({
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$tx("fullscreen.font_settings.what_s_going_on")
+          children: renderI18nText("fullscreen.font_settings.what_s_going_on")
         })
       }), jsxs(_$$nB, {
         children: [jsx("div", {
           className: jE,
-          children: _$$tx("fullscreen.font_settings.local_font_explainer")
+          children: renderI18nText("fullscreen.font_settings.local_font_explainer")
         }), jsx("div", {
           className: jE,
-          children: _$$tx("fullscreen.font_settings.local_font_process_explainer")
+          children: renderI18nText("fullscreen.font_settings.local_font_process_explainer")
         }), jsx("div", {
           className: jE,
-          children: _$$tx("fullscreen.font_settings.local_font_process_explainer_part_2")
+          children: renderI18nText("fullscreen.font_settings.local_font_process_explainer_part_2")
         }), jsx("div", {
           className: jE,
-          children: _$$tx("fullscreen.font_settings.if_you_ever_change_your_mind_you_can_easily_uninstall_the_process")
+          children: renderI18nText("fullscreen.font_settings.if_you_ever_change_your_mind_you_can_easily_uninstall_the_process")
         })]
       }), jsx(wi, {
         children: jsx(jk, {
           children: jsx($n, {
             variant: "primary",
             onClick: t,
-            children: _$$tx("fullscreen.font_settings.got_it")
+            children: renderI18nText("fullscreen.font_settings.got_it")
           })
         })
       })]
@@ -3708,7 +3708,7 @@ function ro() {
     return () => {
       e = !0;
     };
-  }, []), _$$eD) return null;
+  }, []), desktopAPIInstance) return null;
   let n = () => {
     e(_$$to({
       type: ra,
@@ -3716,55 +3716,55 @@ function ro() {
     }));
   };
   let s = () => e(Ef({
-    isMac: _$$Ay4.mac
+    isMac: BrowserInfo.mac
   }));
   let o = () => e(Fs());
   return jsxs("div", {
     className: Q,
     children: [jsx("h3", {
       className: Z,
-      children: _$$tx("settings.account_settings.fonts")
+      children: renderI18nText("settings.account_settings.fonts")
     }), (() => {
       if ("init" === t) return jsx(Fragment, {});
       if ("error" !== t) return jsxs("div", {
         children: [jsx("div", {
           style: _$$sx.my12.$,
-          children: _$$tx("settings.account_settings.local_fonts_are_enabled_you_have_local_font_count_fonts_available_in_figma", {
+          children: renderI18nText("settings.account_settings.local_fonts_are_enabled_you_have_local_font_count_fonts_available_in_figma", {
             localFontCount: t
           })
         }), jsx("div", {
-          children: _$$tx("settings.account_settings.to_disable_local_fonts_follow_the_uninstall_steps_in_the", {
+          children: renderI18nText("settings.account_settings.to_disable_local_fonts_follow_the_uninstall_steps_in_the", {
             helpCenterLink: jsx(_$$N, {
               href: "https://help.figma.com/hc/articles/360039956894-Access-local-fonts-on-your-computer#Uninstall_the_font_service",
               onClick: o,
               newTab: !0,
-              children: _$$tx("settings.account_settings.help_article")
+              children: renderI18nText("settings.account_settings.help_article")
             })
           })
         })]
       });
-      if (!_$$Ay4.mac && !_$$Ay4.windows || _$$Ay4.mobile) return jsx("div", {
+      if (!BrowserInfo.mac && !BrowserInfo.windows || BrowserInfo.mobile) return jsx("div", {
         children: jsx("div", {
           style: _$$sx.my24.$,
-          children: _$$tx("settings.account_settings.local_fonts_are_currently_not_supported_for_this_operating_system")
+          children: renderI18nText("settings.account_settings.local_fonts_are_currently_not_supported_for_this_operating_system")
         })
       });
       {
-        let e = _$$Ay4.mac ? "https://desktop.figma.com/agent/mac/InstallFigmaAgent.dmg" : "https://desktop.figma.com/agent/win/InstallFigmaAgent.exe";
+        let e = BrowserInfo.mac ? "https://desktop.figma.com/agent/mac/InstallFigmaAgent.dmg" : "https://desktop.figma.com/agent/win/InstallFigmaAgent.exe";
         return jsxs("div", {
           children: [jsx("div", {
             style: _$$sx.my12.$,
-            children: _$$tx("settings.account_settings.install_font_service_for_local", {
+            children: renderI18nText("settings.account_settings.install_font_service_for_local", {
               learnMoreLink: jsx($n.Link, {
                 onClick: n,
-                children: _$$tx("general.learn_more")
+                children: renderI18nText("general.learn_more")
               })
             })
           }), jsx(_$$N.Button, {
             href: e,
             onClick: s,
             newTab: !0,
-            children: _$$tx("settings.account_settings.download_installer")
+            children: renderI18nText("settings.account_settings.download_installer")
           })]
         });
       }
@@ -3777,8 +3777,8 @@ function rm() {
   return jsxs(Fragment, {
     children: [jsxs("div", {
       className: "account_settings_modal--sectionSubheader--L0LKE text--fontPos13--xW8hS text--_fontBase--QdLsd",
-      children: [_$$tx("settings.account_settings.closed_captions"), jsx(Ex, {
-        text: _$$t2("general.beta"),
+      children: [renderI18nText("settings.account_settings.closed_captions"), jsx(Ex, {
+        text: getI18nString("general.beta"),
         className: "account_settings_modal--betaTag--rm8Tl",
         color: zE.DESIGN
       })]
@@ -3799,13 +3799,13 @@ function rg() {
       checked: t,
       onChange: t => {
         HJ(e, t);
-        sx("voice_captions_toggle", {
+        trackEventAnalytics("voice_captions_toggle", {
           value: t,
           source: "user_settings"
         });
       },
       label: jsx(_$$J, {
-        children: _$$tx("settings.account_settings.enable_closed_captioning_when_using_audio")
+        children: renderI18nText("settings.account_settings.enable_closed_captioning_when_using_audio")
       })
     })
   });
@@ -3815,7 +3815,7 @@ function rf() {
   let t = useSelector(e => e.voice.captionsInstallProgress);
   let i = useDispatch();
   return (useEffect(() => {
-    e && _$$nN(t) && (HJ(i, !1), sx("voice_caption_download_error", {
+    e && _$$nN(t) && (HJ(i, !1), trackEventAnalytics("voice_caption_download_error", {
       error_code: t,
       source: "user_settings"
     }), i(_$$to({
@@ -3829,21 +3829,21 @@ function rf() {
     className: X,
     children: [jsx(kt, {
       className: "account_settings_modal--captionsLoadingSpinner--2cUFM"
-    }), _$$tx("settings.account_settings.downloading_speech_files_progress", {
+    }), renderI18nText("settings.account_settings.downloading_speech_files_progress", {
       installProgress: t
     })]
   }) : null;
 }
 function r_() {
-  return _$$eD ? null : jsx("div", {
+  return desktopAPIInstance ? null : jsx("div", {
     className: "account_settings_modal--newFeaturesBlockRow--ZVrSJ account_settings_modal--newFeaturesRow--buhmC",
-    children: _$$tx("settings.account_settings.learn_more_about_captioning", {
+    children: renderI18nText("settings.account_settings.learn_more_about_captioning", {
       learnMoreLink: jsx(Ph, {
         trusted: !0,
         newTab: !0,
         href: AM.ACCESSIBILITY,
         trackingEventName: "Learn more about captioning",
-        children: _$$tx("settings.account_settings.here")
+        children: renderI18nText("settings.account_settings.here")
       })
     })
   });
@@ -3853,7 +3853,7 @@ function rA() {
     className: Q,
     children: [jsx("h3", {
       className: Z,
-      children: _$$tx("settings.account_settings.new_features")
+      children: renderI18nText("settings.account_settings.new_features")
     }), jsx(rm, {})]
   });
 }
@@ -3862,10 +3862,10 @@ let rN = "LEAVE_ORG_CONFIRMATION_MODAL";
 function rP(e) {
   let t = useDispatch();
   return jsx(yX, {
-    confirmationTitle: _$$t2("org_settings.leave_org.confirm_modal_title", {
+    confirmationTitle: getI18nString("org_settings.leave_org.confirm_modal_title", {
       orgName: e.orgName
     }),
-    confirmText: _$$t2("org_settings.leave_org.confirm_modal_button", {
+    confirmText: getI18nString("org_settings.leave_org.confirm_modal_button", {
       orgName: e.orgName
     }),
     onConfirm: () => {
@@ -3879,10 +3879,10 @@ function rP(e) {
     popStack: !0,
     children: jsx("div", {
       className: "leave_org_confirm--modalText--h1iGD",
-      children: _$$tx("org_settings.leave_org.confirm_modal_message", {
+      children: renderI18nText("org_settings.leave_org.confirm_modal_message", {
         guest: jsx("span", {
           className: rR,
-          children: _$$tx("org_settings.leave_org.guest")
+          children: renderI18nText("org_settings.leave_org.guest")
         }),
         orgName: jsx("span", {
           className: rR,
@@ -3909,7 +3909,7 @@ function rO(e) {
     children: [jsx("h3", {
       children: jsx(_$$E2, {
         fontSize: 14,
-        children: _$$t2("user_settings.plan_sections.your_spaces")
+        children: getI18nString("user_settings.plan_sections.your_spaces")
       })
     }), s.slice(0, o ? s.length : 3).map(e => {
       let {
@@ -3944,12 +3944,12 @@ function rO(e) {
       children: jsx(_$$E2, {
         fontWeight: "medium",
         fontSize: 11,
-        children: _$$tx("user_settings.plan_sections.what_products_are_used", {
+        children: renderI18nText("user_settings.plan_sections.what_products_are_used", {
           learn: jsx(_$$N, {
             newTab: !0,
             trusted: !0,
             href: "https://www.figma.com/pricing/",
-            children: _$$t2("user_settings.plan_sections.learn")
+            children: getI18nString("user_settings.plan_sections.learn")
           })
         })
       })
@@ -3962,7 +3962,7 @@ function rO(e) {
         className: "x78zum5 x6s0dn4 x1jnr06f",
         children: [jsx(_$$A8, {
           "aria-hidden": !0
-        }), _$$t2("user_settings.plan_sections.see_all")]
+        }), getI18nString("user_settings.plan_sections.see_all")]
       })
     })]
   });
@@ -4044,17 +4044,17 @@ function rD(e) {
             children: function (e) {
               switch (e) {
                 case FMemberRoleType.GUEST:
-                  return _$$t2("general.guest");
+                  return getI18nString("general.guest");
                 case FMemberRoleType.MEMBER:
-                  return _$$t2("general.member");
+                  return getI18nString("general.member");
                 case FMemberRoleType.ADMIN:
-                  return _$$t2("general.admin");
+                  return getI18nString("general.admin");
               }
             }(planUser.permission)
           }), m ? jsxs(Fragment, {
             children: [" ", jsx("div", {
               "data-tooltip-type": Ib.TEXT,
-              "data-tooltip": _$$t2("settings.account_settings.use_a_verified_work_email_address_to_become_a_full_member"),
+              "data-tooltip": getI18nString("settings.account_settings.use_a_verified_work_email_address_to_become_a_full_member"),
               "data-tooltip-timeout-delay": 50,
               children: jsx(_$$B2, {
                 className: "xmauxvm x1ypdohk"
@@ -4063,7 +4063,7 @@ function rD(e) {
               onClick: () => {
                 p(parentId, plan.name);
               },
-              children: _$$t2("settings.account_settings.leave")
+              children: getI18nString("settings.account_settings.leave")
             })]
           }) : null]
         })]
@@ -4096,7 +4096,7 @@ function rD(e) {
                 children: rL(pendingAccountTypeRequest).pendingAccountTypeRequestCopy
               }), jsx("div", {
                 "data-tooltip-type": Ib.TEXT,
-                "data-tooltip": hasProvisionalAccess ? rL(pendingAccountTypeRequest).provisionalAccessCopy : _$$t2("user_settings.plan_sections.request_sent_info"),
+                "data-tooltip": hasProvisionalAccess ? rL(pendingAccountTypeRequest).provisionalAccessCopy : getI18nString("user_settings.plan_sections.request_sent_info"),
                 "data-tooltip-timeout-delay": 50,
                 children: jsx(_$$B2, {
                   className: "xmauxvm x1ypdohk"
@@ -4113,7 +4113,7 @@ function rD(e) {
             color: "secondary",
             fontSize: 11,
             truncate: !0,
-            children: _$$t2("user_settings.plan_sections.upgrade_to")
+            children: getI18nString("user_settings.plan_sections.upgrade_to")
           }), l.map((e, i) => jsxs(Fragment, {
             children: [jsx($n.Link, {
               onClick: () => {
@@ -4123,7 +4123,7 @@ function rD(e) {
                   entryPoint: _$$tc.USER_SETTINGS,
                   afterUpgradeCallback: () => {
                     t(_$$F.enqueue({
-                      message: _$$t2("user_settings.plan_sections.auto_pathway_success_toast")
+                      message: getI18nString("user_settings.plan_sections.auto_pathway_success_toast")
                     }));
                   }
                 })({});
@@ -4146,28 +4146,28 @@ function rL(e) {
   switch (e) {
     case ud.EXPERT:
       return {
-        currentSeatCopy: _$$t2("user_settings.plan_sections.full_seat"),
-        seatUpgradeOptionCopy: _$$t2("general.bundle.expert"),
-        pendingAccountTypeRequestCopy: _$$t2("user_settings.plan_sections.pending_account_type_request_for_full_seat"),
-        provisionalAccessCopy: _$$t2("user_settings.plan_sections.provisional_access_text_for_full_seat")
+        currentSeatCopy: getI18nString("user_settings.plan_sections.full_seat"),
+        seatUpgradeOptionCopy: getI18nString("general.bundle.expert"),
+        pendingAccountTypeRequestCopy: getI18nString("user_settings.plan_sections.pending_account_type_request_for_full_seat"),
+        provisionalAccessCopy: getI18nString("user_settings.plan_sections.provisional_access_text_for_full_seat")
       };
     case ud.DEVELOPER:
       return {
-        currentSeatCopy: _$$t2("user_settings.plan_sections.dev_seat"),
-        seatUpgradeOptionCopy: _$$t2("general.bundle.developer"),
-        pendingAccountTypeRequestCopy: _$$t2("user_settings.plan_sections.pending_account_type_request_for_dev_seat"),
-        provisionalAccessCopy: _$$t2("user_settings.plan_sections.provisional_access_text_for_dev_seat")
+        currentSeatCopy: getI18nString("user_settings.plan_sections.dev_seat"),
+        seatUpgradeOptionCopy: getI18nString("general.bundle.developer"),
+        pendingAccountTypeRequestCopy: getI18nString("user_settings.plan_sections.pending_account_type_request_for_dev_seat"),
+        provisionalAccessCopy: getI18nString("user_settings.plan_sections.provisional_access_text_for_dev_seat")
       };
     case ud.COLLABORATOR:
       return {
-        currentSeatCopy: _$$t2("user_settings.plan_sections.collaborator_seat"),
-        seatUpgradeOptionCopy: _$$t2("general.bundle.collaborator"),
-        pendingAccountTypeRequestCopy: _$$t2("user_settings.plan_sections.pending_account_type_request_for_collab_seat"),
-        provisionalAccessCopy: _$$t2("user_settings.plan_sections.provisional_access_text_for_collab_seat")
+        currentSeatCopy: getI18nString("user_settings.plan_sections.collaborator_seat"),
+        seatUpgradeOptionCopy: getI18nString("general.bundle.collaborator"),
+        pendingAccountTypeRequestCopy: getI18nString("user_settings.plan_sections.pending_account_type_request_for_collab_seat"),
+        provisionalAccessCopy: getI18nString("user_settings.plan_sections.provisional_access_text_for_collab_seat")
       };
     default:
       return {
-        currentSeatCopy: _$$t2("user_settings.plan_sections.view_seat"),
+        currentSeatCopy: getI18nString("user_settings.plan_sections.view_seat"),
         seatUpgradeOptionCopy: null,
         pendingAccountTypeRequestCopy: null
       };
@@ -4181,7 +4181,7 @@ function rF({
   let {
     enhancedContrast
   } = _$$G2();
-  let a = _$$R(e => ({
+  let a = selectWithShallowEqual(e => ({
     orgById: e.orgById,
     teams: e.teams,
     orgDomains: e.orgDomains,
@@ -4223,9 +4223,9 @@ function rF({
   let w = e.google_sso_only || e.saml_sso_only;
   let C = getFeatureFlags().user_settings_tab;
   let k = e.google_sso_only ? jsx("div", {
-    children: _$$tx("settings.account_settings.managed_by_google")
+    children: renderI18nText("settings.account_settings.managed_by_google")
   }) : e.saml_sso_only ? jsx("div", {
-    children: _$$tx("settings.account_settings.managed_by_your_organization_email")
+    children: renderI18nText("settings.account_settings.managed_by_your_organization_email")
   }) : null;
   return jsxs("div", {
     children: [jsx("div", {
@@ -4233,7 +4233,7 @@ function rF({
       children: jsxs("div", {
         children: [jsx("h3", {
           className: Z,
-          children: _$$tx("settings.account_settings.name_section_header")
+          children: renderI18nText("settings.account_settings.name_section_header")
         }), jsx("div", {
           className: ee,
           "data-testid": "settings-user-name",
@@ -4248,11 +4248,11 @@ function rF({
             htmlAttributes: {
               "data-testid": "settings-change-name-link"
             },
-            children: _$$tx("settings.account_settings.change_name_link")
+            children: renderI18nText("settings.account_settings.change_name_link")
           })
         }), jsx("h3", {
           className: Z,
-          children: _$$tx("settings.account_settings.email_section_header")
+          children: renderI18nText("settings.account_settings.email_section_header")
         }), jsx("div", {
           className: ee,
           children: e.email
@@ -4263,11 +4263,11 @@ function rF({
               type: ni,
               showModalsBeneath: !0
             })),
-            children: _$$tx("settings.account_settings.change_email_link")
+            children: renderI18nText("settings.account_settings.change_email_link")
           })
         }), k, jsx("h3", {
           className: Z,
-          children: _$$tx("settings.account_settings.job_title_section_header")
+          children: renderI18nText("settings.account_settings.job_title_section_header")
         }), e?.profile?.job_title ? jsxs(Fragment, {
           children: [jsx("div", {
             className: ee,
@@ -4276,86 +4276,86 @@ function rF({
             children: jsx($n, {
               variant: "link",
               onClick: A,
-              children: _$$tx("settings.account_settings.change_job_title_link")
+              children: renderI18nText("settings.account_settings.change_job_title_link")
             })
           })]
         }) : jsxs(Fragment, {
           children: [jsxs("div", {
             className: "x78zum5 x1q0g3np x1jnr06f x6s0dn4 xod5an3",
-            children: [jsx(_$$z2, {}), _$$tx("settings.account_settings.job_title_missing")]
+            children: [jsx(_$$z2, {}), renderI18nText("settings.account_settings.job_title_missing")]
           }), jsx($n, {
             variant: "link",
             onClick: A,
             htmlAttributes: {
               "data-testid": "settings-add-job-title-link"
             },
-            children: _$$tx("settings.account_settings.add_job_title")
+            children: renderI18nText("settings.account_settings.add_job_title")
           })]
         }), !C && jsxs(Fragment, {
           children: [!w && jsxs(Fragment, {
             children: [jsx("h3", {
               className: Z,
-              children: _$$tx("settings.account_settings.password_section_header")
+              children: renderI18nText("settings.account_settings.password_section_header")
             }), jsx($n, {
               variant: "link",
               onClick: () => t(_$$to({
                 type: tJ,
                 showModalsBeneath: !0
               })),
-              children: _$$tx("settings.account_settings.change_password_link")
+              children: renderI18nText("settings.account_settings.change_password_link")
             })]
           }), !S && jsx("div", {
             className: J,
             children: jsx($n, {
               variant: "link",
               onClick: () => {
-                sx("Two-factor setup started");
+                trackEventAnalytics("Two-factor setup started");
                 "gov" === window.INITIAL_OPTIONS.cluster_name ? I() : y();
               },
-              children: _$$tx("auth.two-factor-setup.enable_two_factor_authentication")
+              children: renderI18nText("auth.two-factor-setup.enable_two_factor_authentication")
             })
           }), S && jsxs(Fragment, {
             children: [jsx("h3", {
               className: Z,
-              children: _$$tx("auth.two-factor-setup.two_factor_authentication_is_enabled")
+              children: renderI18nText("auth.two-factor-setup.two_factor_authentication_is_enabled")
             }), E && jsxs("div", {
               className: J,
               children: [jsx("span", {
                 className: et,
-                children: _$$tx("auth.two-factor-setup.authenticator_apps_are_enabled")
+                children: renderI18nText("auth.two-factor-setup.authenticator_apps_are_enabled")
               }), jsx($n, {
                 variant: "link",
                 onClick: () => t(_$$to({
                   type: t4,
                   showModalsBeneath: !0
                 })),
-                children: _$$tx("auth.two-factor-setup.disable-authenticator-app")
+                children: renderI18nText("auth.two-factor-setup.disable-authenticator-app")
               })]
             }), x && jsxs("div", {
               className: J,
               children: [jsx("span", {
                 className: et,
-                children: _$$tx("auth.two-factor-setup.connected_cell_phone_number_tfa_phone_number", {
+                children: renderI18nText("auth.two-factor-setup.connected_cell_phone_number_tfa_phone_number", {
                   phoneNumber: x
                 })
               }), jsx($n, {
                 variant: "link",
                 onClick: y,
-                children: _$$tx("auth.two-factor-setup.configure-sms")
+                children: renderI18nText("auth.two-factor-setup.configure-sms")
               })]
             }), !E && jsx("div", {
               className: J,
               children: jsx($n, {
                 variant: "link",
                 onClick: I,
-                children: _$$tx("auth.two-factor-setup.connect_authenticator_app")
+                children: renderI18nText("auth.two-factor-setup.connect_authenticator_app")
               })
             }), !x && jsx("div", {
               className: J,
               children: jsx($n, {
                 variant: "link",
                 onClick: y,
-                children: _$$tx("auth.two-factor-setup.connect_cell_phone_number")
+                children: renderI18nText("auth.two-factor-setup.connect_cell_phone_number")
               })
             }), jsx("div", {
               className: J,
@@ -4365,7 +4365,7 @@ function rF({
                   type: _$$J4,
                   showModalsBeneath: !0
                 })),
-                children: _$$tx("auth.two-factor-setup.show_recovery_codes")
+                children: renderI18nText("auth.two-factor-setup.show_recovery_codes")
               })
             })]
           })]
@@ -4380,10 +4380,10 @@ function rF({
             },
             children: [jsx("p", {
               className: "account_settings_modal--universalUpgradeSectionHeader--OI2aL text--fontPos14--OL9Hp text--_fontBase--QdLsd",
-              children: _$$tx("settings.account_settings.upgrade_figma_plan_header")
+              children: renderI18nText("settings.account_settings.upgrade_figma_plan_header")
             }), jsx("p", {
               className: ee,
-              children: _$$tx("settings.account_settings.upgrade_figma_plan_reason")
+              children: renderI18nText("settings.account_settings.upgrade_figma_plan_reason")
             }), jsx("div", {
               className: _$$s.mt16.$,
               children: jsx($z, {
@@ -4398,7 +4398,7 @@ function rF({
                 trackingProperties: {
                   trackingDescriptor: _$$c2.UPGRADE
                 },
-                children: _$$tx("settings.account_settings.view_plans")
+                children: renderI18nText("settings.account_settings.view_plans")
               })
             })]
           });
@@ -4413,7 +4413,7 @@ function rF({
       className: Q,
       children: [jsx("h3", {
         className: Z,
-        children: _$$tx("settings.account_settings.language")
+        children: renderI18nText("settings.account_settings.language")
       }), jsx("div", {
         className: ee,
         children: jsx(_$$rP, {})
@@ -4436,14 +4436,14 @@ function rF({
           htmlAttributes: {
             "data-testid": "settings-change-languages-link"
           },
-          children: _$$tx("settings.account_settings.change_languages")
+          children: renderI18nText("settings.account_settings.change_languages")
         })
       })]
     }), jsxs("div", {
       className: Q,
       children: [jsx("h3", {
         className: Z,
-        children: _$$tx("settings.account_settings.theme_section_header")
+        children: renderI18nText("settings.account_settings.theme_section_header")
       }), jsx("div", {
         "data-fpl-ui3-override": !0,
         className: "account_settings_modal--dropdownContainer--z3cU9",
@@ -4470,7 +4470,7 @@ function rF({
         className: "account_settings_modal--toggleContainer--fstwW",
         children: jsx(_$$d2, {
           label: jsx(_$$J, {
-            children: _$$t2("settings.account_settings.enhanced_contrast.label")
+            children: getI18nString("settings.account_settings.enhanced_contrast.label")
           }),
           checked: enhancedContrast,
           onChange: (e, {
@@ -4484,16 +4484,16 @@ function rF({
               userInitiated: !0
             }));
           },
-          children: _$$t2("settings.account_settings.enhanced_contrast.description")
+          children: getI18nString("settings.account_settings.enhanced_contrast.description")
         })
       })]
     }), jsx(rA, {}), jsx(ro, {}), jsxs("div", {
       className: Q,
       children: [jsx("h3", {
         className: Z,
-        children: _$$tx("settings.account_settings.library_section_header")
+        children: renderI18nText("settings.account_settings.library_section_header")
       }), jsx("div", {
-        children: _$$tx("settings.account_settings.enable_libraries_for_drafts", {
+        children: renderI18nText("settings.account_settings.enable_libraries_for_drafts", {
           enableLibrariesLink: jsx($n.Link, {
             onClick: () => {
               t(_$$to({
@@ -4503,7 +4503,7 @@ function rF({
                 }
               }));
             },
-            children: _$$tx("settings.account_settings.enable_libraries_for_drafts_clickable")
+            children: renderI18nText("settings.account_settings.enable_libraries_for_drafts_clickable")
           })
         })
       })]
@@ -4511,22 +4511,22 @@ function rF({
       className: Q,
       children: [jsx("h3", {
         className: Z,
-        children: _$$tx("settings.account_settings.file_view_history")
+        children: renderI18nText("settings.account_settings.file_view_history")
       }), jsx("div", {
         className: _$$s.mb12.$,
-        children: o ? _$$tx("settings.account_settings.file_view_history_disabled_description", {
+        children: o ? renderI18nText("settings.account_settings.file_view_history_disabled_description", {
           off: jsx("span", {
             className: _$$s.fontSemiBold.$,
-            children: _$$tx("settings.account_settings.file_view_history.off")
+            children: renderI18nText("settings.account_settings.file_view_history.off")
           }),
           learnMore: jsx(_$$N, {
             href: "https://help.figma.com/hc/articles/29638316371479",
-            children: _$$tx("general.learn_more")
+            children: renderI18nText("general.learn_more")
           })
-        }) : _$$tx("settings.account_settings.file_view_history_enabled_description", {
+        }) : renderI18nText("settings.account_settings.file_view_history_enabled_description", {
           learnMore: jsx(_$$N, {
             href: "https://help.figma.com/hc/articles/29638316371479",
-            children: _$$tx("general.learn_more")
+            children: renderI18nText("general.learn_more")
           })
         })
       }), jsx("div", {
@@ -4544,7 +4544,7 @@ function rF({
               }
             }));
           },
-          children: _$$tx("settings.account_settings.file_view_history.change_preference")
+          children: renderI18nText("settings.account_settings.file_view_history.change_preference")
         })
       })]
     }), !C && jsx(iT, {
@@ -4556,7 +4556,7 @@ function rF({
       className: X,
       children: [jsx("h3", {
         className: Z,
-        children: _$$tx("settings.account_settings.account_section_header")
+        children: renderI18nText("settings.account_settings.account_section_header")
       }), jsx("div", {
         children: jsx($n, {
           variant: "destructiveLink",
@@ -4564,7 +4564,7 @@ function rF({
             type: n7,
             showModalsBeneath: !0
           })),
-          children: _$$tx("settings.account_settings.delete_account")
+          children: renderI18nText("settings.account_settings.delete_account")
         })
       })]
     })]
@@ -4614,13 +4614,13 @@ let rj = {
     };
     return null == e ? jsx("div", {
       className: iG,
-      children: _$$tx("sessions.error.logged_out")
+      children: renderI18nText("sessions.error.logged_out")
     }) : n ? jsx("div", {
       className: iG,
       children: jsx(kt, {})
     }) : o ? jsx("div", {
       className: iG,
-      children: _$$tx("sessions.error.no_sessions")
+      children: renderI18nText("sessions.error.no_sessions")
     }) : jsx(_$$P, {
       className: ei,
       children: jsxs("div", {
@@ -4628,25 +4628,25 @@ let rj = {
         children: [jsxs("div", {
           children: [jsx("div", {
             className: "sessions_view--title--M6tTN text--fontPos15--IR8IB text--_fontBase--QdLsd",
-            children: _$$tx("sessions.header.title")
+            children: renderI18nText("sessions.header.title")
           }), jsx("div", {
             className: "sessions_view--description--APmXn text--fontPos12--YsUAh text--_fontBase--QdLsd",
-            children: _$$tx("sessions.header.description")
+            children: renderI18nText("sessions.header.description")
           })]
         }), jsxs("div", {
           className: "sessions_view--headers--e1FCJ text--fontPos12--YsUAh text--_fontBase--QdLsd",
           children: [jsx("div", {
             className: iU,
-            children: _$$tx("sessions.column.location_ip")
+            children: renderI18nText("sessions.column.location_ip")
           }), jsx("div", {
             className: iU,
-            children: _$$tx("sessions.column.os_browser")
+            children: renderI18nText("sessions.column.os_browser")
           }), jsx("div", {
             className: iU,
-            children: _$$tx("sessions.column.accessed_created")
+            children: renderI18nText("sessions.column.accessed_created")
           }), jsx("div", {
             className: iU,
-            children: _$$tx("sessions.column.manage")
+            children: renderI18nText("sessions.column.manage")
           })]
         }), jsxs("div", {
           className: "sessions_view--sessionsList--b9-uU",
@@ -4666,7 +4666,7 @@ let rj = {
   },
   SECURITY: function () {
     let e = _$$iZ();
-    let t = _$$R(e => ({
+    let t = selectWithShallowEqual(e => ({
       orgById: e.orgById,
       teams: e.teams,
       orgDomains: e.orgDomains,
@@ -4706,11 +4706,11 @@ let rj = {
   }
 };
 let rU = {
-  ACCOUNT: () => _$$t2("settings.account_setting.account"),
-  COMMUNITY: () => _$$t2("settings.account_setting.community"),
-  NOTIFICATIONS: () => _$$t2("settings.account_setting.notifications"),
-  SESSIONS: () => _$$t2("settings.account_setting.sessions"),
-  SECURITY: () => _$$t2("settings.account_setting.security")
+  ACCOUNT: () => getI18nString("settings.account_setting.account"),
+  COMMUNITY: () => getI18nString("settings.account_setting.community"),
+  NOTIFICATIONS: () => getI18nString("settings.account_setting.notifications"),
+  SESSIONS: () => getI18nString("settings.account_setting.sessions"),
+  SECURITY: () => getI18nString("settings.account_setting.security")
 };
 let $$rB0 = Ju(function (e) {
   let t = hS(e);
@@ -4748,18 +4748,18 @@ let $$rB0 = Ju(function (e) {
         children: [jsx("span", {
           className: _$$s.mr2.$,
           children: jsx(_$$K, {
-            "aria-label": _$$t2("general.back"),
+            "aria-label": getI18nString("general.back"),
             onClick: v,
             children: jsx(u, {})
           })
         }), function (e) {
-          if (e.activeSubView === A.PURCHASES) return e.properties.purchasePageType === po.ACTIVE ? _$$t2("settings.account_setting.purchases") : _$$t2("settings.account_setting.inactive");
+          if (e.activeSubView === A.PURCHASES) return e.properties.purchasePageType === po.ACTIVE ? getI18nString("settings.account_setting.purchases") : getI18nString("settings.account_setting.inactive");
         }(g)]
       })
     })
   }) : jsxs(Y9, {
     children: [jsx(r1, {
-      children: _$$t2("general.settings")
+      children: getI18nString("general.settings")
     }), jsx(_$$t.TabStrip, {
       manager: x,
       children: Object.values($$rM1).map(e => createElement(_$$t.Tab, {

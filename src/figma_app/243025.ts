@@ -8,7 +8,7 @@ import { vo, Y9, hE, jk, nB } from "../figma_app/272243";
 import { S as _$$S } from "../905/274480";
 import { J } from "../905/270045";
 import { A as _$$A } from "../vendor/21595";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { v4 } from "../figma_app/655139";
 import { p as _$$p, Ap, LK, NU, uz, A0 } from "../905/359509";
 import { V0, ls } from "../figma_app/755395";
@@ -28,7 +28,7 @@ let x = new class {
     return "1/3" === e ? 3 : "1/2" === e ? 2 : "2" === e || "3" === e ? 1 / Number.parseInt(e) : 1;
   }
   format(e = 1) {
-    return "0.3" === e.toFixed(1) ? "3" : "0.5" === e.toFixed(1) ? "2" : 2 === e || 3 === e ? `1/${e}` : _$$t("dev_handoff.alternative_units.no_scale");
+    return "0.3" === e.toFixed(1) ? "3" : "0.5" === e.toFixed(1) ? "2" : 2 === e || 3 === e ? `1/${e}` : getI18nString("dev_handoff.alternative_units.no_scale");
   }
 }();
 export function $$N1({
@@ -42,7 +42,7 @@ export function $$N1({
   let l = useDispatch();
   let d = Um();
   return jsx(l6, {
-    ariaLabel: _$$t("dev_handoff.alternative_units.scale_factor.select_label"),
+    ariaLabel: getI18nString("dev_handoff.alternative_units.scale_factor.select_label"),
     autoFocus: o,
     className: i,
     dispatch: l,
@@ -68,14 +68,14 @@ export function $$C0({
   switch (e.id) {
     case _$$p:
     case Ap:
-      return tx("dev_handoff.alternative_units.description_scale_factor_ios");
+      return renderI18nText("dev_handoff.alternative_units.description_scale_factor_ios");
     case LK:
     case NU:
-      return tx("dev_handoff.alternative_units.description_scale_factor_android");
+      return renderI18nText("dev_handoff.alternative_units.description_scale_factor_android");
     case uz:
-      return tx("dev_handoff.alternative_units.description_scale_factor_web");
+      return renderI18nText("dev_handoff.alternative_units.description_scale_factor_web");
   }
-  return tx("dev_handoff.alternative_units.description_scale_factor_third_party", {
+  return renderI18nText("dev_handoff.alternative_units.description_scale_factor_third_party", {
     unitName: t
   });
 }
@@ -113,7 +113,7 @@ export let $$w2 = Ju(function (e) {
     children: jsxs(vo, {
       children: [jsxs(Y9, {
         children: [jsx(hE, {
-          children: _$$t("dev_handoff.alternative_units.unit_settings_modal_title")
+          children: getI18nString("dev_handoff.alternative_units.unit_settings_modal_title")
         }), jsx(jk, {
           children: jsx("div", {
             className: DT,
@@ -152,10 +152,10 @@ export let $$w2 = Ju(function (e) {
         }), w && jsx(_$$S, {
           checked: y.customSettings?.onlyText === "true",
           label: jsx(J, {
-            children: tx("dev_handoff.alternative_units.only_apply_rem_on_text", {
+            children: renderI18nText("dev_handoff.alternative_units.only_apply_rem_on_text", {
               rem: jsx("span", {
                 className: D0,
-                children: tx("dev_handoff.alternative_units.rem_unit")
+                children: renderI18nText("dev_handoff.alternative_units.rem_unit")
               })
             })
           }),

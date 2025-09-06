@@ -9,14 +9,14 @@ import { O as _$$O } from "../905/487602";
 import { H } from "../905/404982";
 import { z } from "../905/653569";
 import { s as _$$s } from "../905/583953";
-import { eU, md, fp } from "../figma_app/27355";
+import { atom, useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import m from "classnames";
 import { wY, cU } from "../figma_app/708845";
 import { h as _$$h } from "../905/207101";
 import { Uz } from "../905/63728";
 import { Point } from "../905/736624";
 import { B } from "../905/714743";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Q1 } from "../905/619652";
 import { Z } from "../905/823863";
 import { A as _$$A } from "../2854/952200";
@@ -26,7 +26,7 @@ let A = "zoom_pan--zoomSelectorContainer--GvvA8";
 let x = "zoom_pan--zoomSelectorButtonContainer--jVp1Q";
 let w = e => assertNotNullish(useContext(O), `Cannot use ${e} component outside of a ZoomPanContext!`);
 let O = createContext(null);
-let $$R5 = eU(void 0);
+let $$R5 = atom(void 0);
 function L(e, t) {
   let r = Number.MAX_VALUE;
   for (let n of e) {
@@ -84,7 +84,7 @@ export function $$k3(e) {
       position: e
     }));
   }, []);
-  let T = md($$R5);
+  let T = useAtomWithSubscription($$R5);
   let [I, S] = useState(!1);
   let [A, x] = useState(null);
   let [N, C] = useState(new Set());
@@ -606,7 +606,7 @@ export function $$B4(e) {
     setPosition,
     zoomPercentageOptions
   } = w("ZoomSelectorToolbar");
-  let p = fp($$R5)[1];
+  let p = useAtomValueAndSetter($$R5)[1];
   useEffect(() => {
     if (!e.keyboardShortcutsEnabled) return;
     let t = e => {
@@ -648,13 +648,13 @@ export function $$B4(e) {
   let b = (e, t, r, i, a) => a ? jsx("div", {
     className: x,
     children: jsx(K, {
-      "aria-label": "ZOOM_IN" === t ? _$$t("collaboration.branching.zoom_in") : _$$t("collaboration.branching.zoom_out"),
+      "aria-label": "ZOOM_IN" === t ? getI18nString("collaboration.branching.zoom_in") : getI18nString("collaboration.branching.zoom_out"),
       disabled: i,
       onClick: r,
       children: "ZOOM_IN" === t ? jsx(_$$e, {}) : jsx(_$$O, {})
     })
   }) : jsx("button", {
-    "aria-label": "ZOOM_IN" === t ? _$$t("collaboration.branching.zoom_in") : _$$t("collaboration.branching.zoom_out"),
+    "aria-label": "ZOOM_IN" === t ? getI18nString("collaboration.branching.zoom_in") : getI18nString("collaboration.branching.zoom_out"),
     className: i ? "zoom_pan--zoomSelectorButtonDisabled--MWZWz" : "zoom_pan--zoomSelectorButtonEnabled--ILrv-",
     onClick: r,
     children: jsx(B, {
@@ -676,7 +676,7 @@ export function $$B4(e) {
           setIsFitZoom(!isFitZoom);
         },
         className: "zoom_pan--zoomSelectorValue--sKFmC",
-        children: isFitZoom ? _$$t("collaboration.branching.fit") : `${Math.round(zoomPercentage)}%`
+        children: isFitZoom ? getI18nString("collaboration.branching.fit") : `${Math.round(zoomPercentage)}%`
       }), b(_$$A2, "ZOOM_IN", f, m, !0)]
     })
   });
@@ -707,7 +707,7 @@ export function $$G0() {
           setIsFitZoom(!0);
         },
         disabled: d,
-        "aria-label": d ? _$$t("collaboration.branching.zoom_to_fit_disabled") : _$$t("collaboration.branching.zoom_to_fit"),
+        "aria-label": d ? getI18nString("collaboration.branching.zoom_to_fit_disabled") : getI18nString("collaboration.branching.zoom_to_fit"),
         children: jsx(H, {})
       })
     }), jsx("div", {
@@ -721,9 +721,9 @@ export function $$G0() {
           setIsFitZoom(!1);
         },
         disabled: c,
-        "aria-label": c ? _$$t("collaboration.branching.zoom_to_default_disabled", {
+        "aria-label": c ? getI18nString("collaboration.branching.zoom_to_default_disabled", {
           defaultPercentage: 100
-        }) : _$$t("collaboration.branching.zoom_to_default", {
+        }) : getI18nString("collaboration.branching.zoom_to_default", {
           defaultPercentage: 100
         }),
         children: jsx(z, {})

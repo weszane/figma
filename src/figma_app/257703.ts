@@ -1,8 +1,8 @@
 import { jsx } from "react/jsx-runtime";
 import { memo, useMemo, Children } from "react";
-import { Gq } from "../figma_app/363242";
+import { getI18nState } from "../figma_app/363242";
 export let $$s0 = memo(function (e) {
-  let t = e.locale || Gq().getPrimaryLocale(!1);
+  let t = e.locale || getI18nState().getPrimaryLocale(!1);
   let r = useMemo(() => new Intl.ListFormat(t, {
     style: e.formatStyle || "long",
     type: e.formatType || "conjunction"

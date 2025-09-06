@@ -2,8 +2,8 @@ import { jsx } from "react/jsx-runtime";
 import { useCallback, useState } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import { T as _$$T } from "../905/2124";
-import { md, fp, E3 } from "../figma_app/27355";
-import { tx, t as _$$t } from "../905/303541";
+import { useAtomWithSubscription, useAtomValueAndSetter, createLocalStorageAtom } from "../figma_app/27355";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { to } from "../figma_app/828186";
 import { ow } from "../figma_app/976749";
 import { Ay } from "../figma_app/432652";
@@ -30,8 +30,8 @@ import { qM, qU } from "../figma_app/913518";
 import { Hd, bu, Vz, Jd } from "../figma_app/878113";
 function L() {
   let e = useDispatch();
-  let t = md(Tm);
-  let [r, a] = fp(qM);
+  let t = useAtomWithSubscription(Tm);
+  let [r, a] = useAtomValueAndSetter(qM);
   let s = qU();
   let d = useCallback(() => {
     t || mD(e, {
@@ -46,26 +46,26 @@ function L() {
     variant: "secondary",
     onClick: d,
     recordingKey: "adjust-tone-button",
-    children: tx("ai_text_tools.rewrite.tone.label")
+    children: renderI18nText("ai_text_tools.rewrite.tone.label")
   });
 }
 let D = "rewrite-view";
-let k = E3("rewrite_this_prompt_history", []);
+let k = createLocalStorageAtom("rewrite_this_prompt_history", []);
 export function $$M0() {
   let e = [{
-    content: _$$t("ai_text_tools.rewrite.placeholder.marketing")
+    content: getI18nString("ai_text_tools.rewrite.placeholder.marketing")
   }, {
-    content: _$$t("ai_text_tools.rewrite.placeholder.shorter")
+    content: getI18nString("ai_text_tools.rewrite.placeholder.shorter")
   }, {
-    content: _$$t("ai_text_tools.rewrite.placeholder.bullet_points")
+    content: getI18nString("ai_text_tools.rewrite.placeholder.bullet_points")
   }, {
-    content: _$$t("ai_text_tools.rewrite.placeholder.email_boss")
+    content: getI18nString("ai_text_tools.rewrite.placeholder.email_boss")
   }, {
-    content: _$$t("ai_text_tools.rewrite.placeholder.sing_songy")
+    content: getI18nString("ai_text_tools.rewrite.placeholder.sing_songy")
   }, {
-    content: _$$t("ai_text_tools.rewrite.placeholder.softer_tone")
+    content: getI18nString("ai_text_tools.rewrite.placeholder.softer_tone")
   }, {
-    content: _$$t("ai_text_tools.rewrite.placeholder.pop_song"),
+    content: getI18nString("ai_text_tools.rewrite.placeholder.pop_song"),
     weight: .001
   }];
   let t = U(e);
@@ -151,7 +151,7 @@ export function $$M0() {
           close();
         },
         aiTrackingContext,
-        children: tx("ai.rewriting")
+        children: renderI18nText("ai.rewriting")
       });
     case qy.INITIAL:
       switch (er.state) {
@@ -159,7 +159,7 @@ export function $$M0() {
         case _$$w.SELECTION_LOST:
           return jsx(_$$A, {
             action: JT.REWRITE_TEXT,
-            actionLabel: tx("fullscreen_actions.quick_actions.rewrite-this"),
+            actionLabel: renderI18nText("fullscreen_actions.quick_actions.rewrite-this"),
             actionIcon: jsx(_$$T, {}),
             onPerform: er.confirmInitialSelection,
             aiTrackingContext,
@@ -170,7 +170,7 @@ export function $$M0() {
               type: "learn_more",
               url: pY
             },
-            children: tx("ai_text_tools.selection_instruction")
+            children: renderI18nText("ai_text_tools.selection_instruction")
           });
         case _$$w.SELECTION_OK:
           return jsx(_$$A2, {
@@ -190,17 +190,17 @@ export function $$M0() {
             prompt: r,
             promptHistory,
             recordingKey: "rewriteText.prompt",
-            submitLabel: tx("ai.rewrite"),
+            submitLabel: renderI18nText("ai.rewrite"),
             suggestion: t,
             suggestionPills: [{
-              label: _$$t("ai_text_tools.rewrite.shorter.label"),
-              prompt: _$$t("ai_text_tools.rewrite.shorter.prompt")
+              label: getI18nString("ai_text_tools.rewrite.shorter.label"),
+              prompt: getI18nString("ai_text_tools.rewrite.shorter.prompt")
             }, {
-              label: _$$t("ai_text_tools.rewrite.casual.label"),
-              prompt: _$$t("ai_text_tools.rewrite.casual.prompt")
+              label: getI18nString("ai_text_tools.rewrite.casual.label"),
+              prompt: getI18nString("ai_text_tools.rewrite.casual.prompt")
             }, {
-              label: _$$t("ai_text_tools.rewrite.replace.label"),
-              prompt: _$$t("ai_text_tools.rewrite.replace.prompt")
+              label: getI18nString("ai_text_tools.rewrite.replace.label"),
+              prompt: getI18nString("ai_text_tools.rewrite.replace.prompt")
             }],
             useClose: w
           });
@@ -221,10 +221,10 @@ export function $$M0() {
           });
         }
       }];
-      (error instanceof Vz || sZ(error) === B.CONTENT_LENGTH_LIMIT) && (ea = tx("ai.error.content_length_limit"), el = []);
-      error instanceof Jd && (ea = tx("ai_text_tools.missing_fonts"), el = []);
+      (error instanceof Vz || sZ(error) === B.CONTENT_LENGTH_LIMIT) && (ea = renderI18nText("ai.error.content_length_limit"), el = []);
+      error instanceof Jd && (ea = renderI18nText("ai_text_tools.missing_fonts"), el = []);
       sZ(error) === B.UNSAFE_OR_HARMFUL_CONTENT && (el = []);
-      en > 0 && ei > 0 && ei < en && (eo = tx("ai_text_tools.rewrite.couldnt_count", {
+      en > 0 && ei > 0 && ei < en && (eo = renderI18nText("ai_text_tools.rewrite.couldnt_count", {
         failed: ei,
         total: en
       }));

@@ -7,18 +7,18 @@ import { uQ6, Egt } from "../figma_app/763686";
 import { MT } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { useHandleMouseEvent } from "../figma_app/878298";
 import m from "classnames";
-import { sn } from "../905/542194";
+import { globalPerfTimer } from "../905/542194";
 import { parsePxNumber } from "../figma_app/783094";
-import { m as _$$m } from "../905/717445";
+import { getFilteredFeatureFlags } from "../905/717445";
 import { Uz } from "../905/63728";
 import { Pt, rf as _$$rf, AF, v_, aH, iQ } from "../figma_app/806412";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
 import { eC as _$$eC, Fj } from "../figma_app/76123";
 import { Br, A0, sq } from "../figma_app/454974";
@@ -77,7 +77,7 @@ function W({
     className: Io,
     "data-testid": "variable-mode-pill",
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": _$$t("variables.mode_pill.tooltip", {
+    "data-tooltip": getI18nString("variables.mode_pill.tooltip", {
       listOfModes: Yx(e)
     }),
     children: jsx("div", {
@@ -187,7 +187,7 @@ let eh = memo(function (e) {
     className: hz,
     children: jsx(_$$f, {
       ref: a,
-      "aria-label": _$$t("fullscreen.object_row.toggle_lock"),
+      "aria-label": getI18nString("fullscreen.object_row.toggle_lock"),
       checked: locked || isAncestorLocked,
       onIcon: u,
       offIcon: p,
@@ -218,7 +218,7 @@ function ex({
     "data-tooltip-show-above": !0,
     "data-tooltip-timeout-delay": 50,
     "data-tooltip": _$$S,
-    "data-tooltip-ai-beta-text": _$$t("fullscreen.context_menu.auto_rename_layers"),
+    "data-tooltip-ai-beta-text": getI18nString("fullscreen.context_menu.auto_rename_layers"),
     "data-tooltip-ai-beta-action": JT.AUTO_RENAME_LAYERS
   }), []);
   return jsx(_$$E, {
@@ -318,7 +318,7 @@ let eS = memo(function (e) {
     className: yk,
     children: jsx(_$$f, {
       ref: a,
-      "aria-label": _$$t("fullscreen.object_row.toggle_visibility"),
+      "aria-label": getI18nString("fullscreen.object_row.toggle_visibility"),
       checked: visible,
       onIcon: u,
       offIcon: p,
@@ -332,7 +332,7 @@ export function $$eI2(e) {
   let t = cJ();
   let s = sO();
   let r = (e.abbreviatedStateName || e.name).replace(/\n/, " ");
-  if (t && e.isWebpage && e.isDefaultResponsiveSet ? r = _$$t("sites.panel.home") : s && "SLIDE" === e.nodeType && (r = _$$t("slides.layers_panel.slide_number", {
+  if (t && e.isWebpage && e.isDefaultResponsiveSet ? r = getI18nString("sites.panel.home") : s && "SLIDE" === e.nodeType && (r = getI18nString("slides.layers_panel.slide_number", {
     orderNum: e.name
   })), e.shouldShowGuids) {
     let t = Egt.getOverridePathForNode(e.guid);
@@ -347,7 +347,7 @@ function eE({
     className: _$$s.flex.$,
     children: e && jsx("span", {
       className: _$$s.colorTextBrand.pr8.$,
-      children: _$$t("sites.panel.primary")
+      children: getI18nString("sites.panel.primary")
     })
   });
 }
@@ -355,7 +355,7 @@ function eM(e) {
   let [t, s] = useState(null);
   let [i, l] = useState(!1);
   let a = cJ();
-  let o = md(r8(e.guid));
+  let o = useAtomWithSubscription(r8(e.guid));
   let {
     showVisualLayerIcons
   } = useContext(y0);
@@ -401,7 +401,7 @@ function eM(e) {
     e.stopRenaming(!0, h.current?.value, c);
   });
   let k = !e.isFixedOnHScroll;
-  let w = showVisualLayerIcons && _$$m().ce_il_root;
+  let w = showVisualLayerIcons && getFilteredFeatureFlags().ce_il_root;
   return jsxs(Fragment, {
     children: [w ? jsx(_$$N, {
       guid: e.guid,
@@ -421,7 +421,7 @@ function eM(e) {
       scrollLeft: e.scrollLeft,
       useUI3Icon: e.useUI3Icons
     }), (e.isThumbnail || e.isFavicon || e.isSocialImage) && jsx(_$$B, {
-      "data-tooltip": e.isFavicon ? _$$t("fullscreen.object_row.favicon") : e.isSocialImage ? _$$t("fullscreen.object_row.social_image") : _$$t("fullscreen.object_row.file_thumbnail"),
+      "data-tooltip": e.isFavicon ? getI18nString("fullscreen.object_row.favicon") : e.isSocialImage ? getI18nString("fullscreen.object_row.social_image") : getI18nString("fullscreen.object_row.file_thumbnail"),
       "data-tooltip-show-above": !0,
       "data-tooltip-type": Ib.TEXT,
       className: V3,
@@ -469,7 +469,7 @@ function eM(e) {
 }
 let eA = memo(function (e) {
   var t;
-  sn.start("object-row-inner-render-timer");
+  globalPerfTimer.start("object-row-inner-render-timer");
   let {
     topLevelObjectRowHeight,
     nestedObjectRowHeight,
@@ -487,9 +487,9 @@ let eA = memo(function (e) {
   let V = useCallback(e => {
     A(e);
   }, []);
-  let U = md(_$$eC);
+  let U = useAtomWithSubscription(_$$eC);
   t = e.guid;
-  let W = md(Fj).has(t);
+  let W = useAtomWithSubscription(Fj).has(t);
   let [$, Y] = useState(!1);
   let [X, q] = useState(!1);
   let J = Fk((e, t) => e.get(t)?.name ?? "", e.guid);
@@ -573,7 +573,7 @@ let eA = memo(function (e) {
   let eE = useCallback(t => {
     null != onDragLeaveCallback && onDragLeaveCallback(e.guid, t);
   }, [onDragLeaveCallback, e.guid]);
-  let eA = useCallback(() => null != e.nodeMemoryUsage && null != e.rootMemoryUsage ? pr(e.nodeMemoryUsage, e.rootMemoryUsage, !0) : ($D(_$$e.SCENEGRAPH_AND_SYNC, Error("node memory usage or root memory usage is null")), ""), [e.nodeMemoryUsage, e.rootMemoryUsage]);
+  let eA = useCallback(() => null != e.nodeMemoryUsage && null != e.rootMemoryUsage ? pr(e.nodeMemoryUsage, e.rootMemoryUsage, !0) : (reportError(_$$e.SCENEGRAPH_AND_SYNC, Error("node memory usage or root memory usage is null")), ""), [e.nodeMemoryUsage, e.rootMemoryUsage]);
   let eP = !e.visible || e.isAncestorHidden && e.panelType !== g$.CodeComponent;
   let eL = e.locked || e.isAncestorLocked;
   let eR = (e.level + 3) * parsePxNumber(indentWidthWithMargin);
@@ -584,7 +584,7 @@ let eA = memo(function (e) {
   let eK = getSingletonSceneGraph().get(e.guid);
   let eG = eB && eF && X && eK && sq(eK);
   let eH = "REACT_FIBER" !== e.nodeType && "SLIDE" !== e.nodeType;
-  let eV = md(r8(e.guid))?.state === "pending";
+  let eV = useAtomWithSubscription(r8(e.guid))?.state === "pending";
   let eU = J2(UK().showSemanticTagsOnLayerRows);
   let ez = !X && getFeatureFlags().sts_a11y_layers_semantic_tags && eU;
   let eW = eF ? topLevelObjectRowHeight : nestedObjectRowHeight;
@@ -664,8 +664,8 @@ let eA = memo(function (e) {
   }, [e1, I, M, e.guid, registerWidth, observeWithResizeObserver, unobserveWithResizeObserver]);
   useEffect(() => {
     let e = "object-row-inner-render-timer";
-    let t = sn.get(e);
-    t && t.isRunning && !t.isUnreliable && sn.tryStop(e);
+    let t = globalPerfTimer.get(e);
+    t && t.isRunning && !t.isUnreliable && globalPerfTimer.tryStop(e);
   });
   let e4 = jsxs(Fragment, {
     children: [eG && jsx(ex, {

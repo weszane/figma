@@ -1,11 +1,11 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { h as _$$h } from "../905/207101";
 import { Jn } from "../905/17223";
 import { Kz, vd } from "../figma_app/637027";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { kR } from "../c5e2cae0/894125";
 import { Dw } from "../figma_app/976345";
 import { sf } from "../905/929976";
@@ -30,7 +30,7 @@ import { bE as _$$bE } from "../figma_app/240735";
 import { e5 } from "../figma_app/297957";
 import { _J } from "../figma_app/314264";
 import { TA } from "../905/372672";
-import { P as _$$P } from "../905/338617";
+import { selectTeams } from "../905/338617";
 import { G } from "../figma_app/66216";
 import { KV, $g, Eh, DI, u1, GK, b as _$$b } from "../c5e2cae0/62130";
 import { I as _$$I2 } from "../905/641938";
@@ -75,7 +75,7 @@ let L = nF((e, {
 function V(e) {
   let t = useDispatch();
   let a = TA();
-  let l = useSelector(_$$P);
+  let l = useSelector(selectTeams);
   let n = useSelector(e => e.roles.byTeamId);
   let [d, m] = useState(!1);
   let [_, u] = useState(!1);
@@ -106,10 +106,10 @@ function V(e) {
     "data-testid": "createTeamToUpgradeView",
     children: [jsx("p", {
       className: KV,
-      children: tx("universal_upgrade_sequence.subtitle")
+      children: renderI18nText("universal_upgrade_sequence.subtitle")
     }), _ && jsxs(Fragment, {
       children: [jsx(_$$I, {
-        message: _$$t("universal_upgrade_sequence.error"),
+        message: getI18nString("universal_upgrade_sequence.error"),
         marginTop: 16
       }), jsx(Kz, {
         multiple: 1
@@ -122,7 +122,7 @@ function V(e) {
         className: Eh,
         children: jsx(_$$L, {
           dataTestId: "createTeamInput",
-          placeholder: _$$t("universal_upgrade_sequence.team_name.placeholder"),
+          placeholder: getI18nString("universal_upgrade_sequence.team_name.placeholder"),
           value: h || "",
           onChange: e => {
             g(e.target.value);
@@ -137,7 +137,7 @@ function V(e) {
         onClick: y,
         children: d ? jsx(kt, {
           className: u1
-        }) : tx("universal_upgrade_sequence.next")
+        }) : renderI18nText("universal_upgrade_sequence.next")
       })]
     })]
   }) : null;
@@ -178,7 +178,7 @@ export function $$z0(e) {
   };
   let P = () => {
     0 === PS(C).length ? (N(Dw({
-      openInNewTab: !eD
+      openInNewTab: !desktopAPIInstance
     })), a("createTeam")) : a("selectTeam");
   };
   return (_$$h(() => {
@@ -193,12 +193,12 @@ export function $$z0(e) {
         children: [jsx("h1", {
           "data-testid": "modalTitle",
           className: GK,
-          children: tx("universal_upgrade_sequence.title")
+          children: renderI18nText("universal_upgrade_sequence.title")
         }), jsx(Jn, {
           dataTestId: "closeButton",
           className: _$$b,
           onClick: A,
-          innerText: _$$t("universal_upgrade_sequence.close_modal")
+          innerText: getI18nString("universal_upgrade_sequence.close_modal")
         }), jsx(Kz, {
           multiple: 2
         }), jsx(_$$I3, {

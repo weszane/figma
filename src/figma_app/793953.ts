@@ -1,11 +1,11 @@
 import { P2e, hMR, aDE, fLc, h3O } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
-import { sx } from "../905/449184";
-import { eD } from "../figma_app/876459";
+import { atomStoreManager } from "../figma_app/27355";
+import { trackEventAnalytics } from "../905/449184";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { debugState } from "../905/407919";
-import { Ay } from "../figma_app/778880";
-import { PN } from "../figma_app/257275";
+import { BrowserInfo } from "../figma_app/778880";
+import { isInteractionOrEvalMode } from "../figma_app/897289";
 import { ds } from "../figma_app/314264";
 import { aW, le } from "../figma_app/527873";
 import { LD } from "../figma_app/582924";
@@ -77,15 +77,15 @@ function b() {
   };
 }
 async function T() {
-  if (eD) {
-    let e = await eD.getCPUUsage();
+  if (desktopAPIInstance) {
+    let e = await desktopAPIInstance.getCPUUsage();
     if (e) return e.percent;
   }
   return null;
 }
 async function I(e, t, r, i, o) {
   let p = "Fullscreen Periodic Metrics" === e;
-  if (!(!hMR || "ok" !== zl.get(_$$h) || PN())) {
+  if (!(!hMR || "ok" !== atomStoreManager.get(_$$h) || isInteractionOrEvalMode())) {
     if (p) {
       let a = $$y1();
       r && (a.cpu_usage = await T());
@@ -96,7 +96,7 @@ async function I(e, t, r, i, o) {
         file_key: i,
         is_hidden: document.hidden,
         product_type: o,
-        is64BitBrowser: Ay.is64BitBrowser,
+        is64BitBrowser: BrowserInfo.is64BitBrowser,
         multiplayer_state: h3O && LD(h3O.getSessionState()),
         ...a,
         ...s,
@@ -109,11 +109,11 @@ async function I(e, t, r, i, o) {
       r && (n.cpu_usage = await T());
       let a = dd();
       let o = PH();
-      sx(e, {
+      trackEventAnalytics(e, {
         reporting_interval: t,
         file_key: i,
         is_hidden: document.hidden,
-        is64BitBrowser: Ay.is64BitBrowser,
+        is64BitBrowser: BrowserInfo.is64BitBrowser,
         ...n,
         ...a,
         ...o

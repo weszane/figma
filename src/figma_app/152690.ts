@@ -8,13 +8,13 @@ import { l7 } from "../905/189185";
 import { aI } from "../905/871411";
 import { sH, dI } from "../905/805904";
 import { getFeatureFlags } from "../905/601108";
-import { md, zl } from "../figma_app/27355";
+import { useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import { k9, wm } from "../905/19536";
 import m from "../vendor/239910";
 import f from "../vendor/523035";
 import { debugState } from "../905/407919";
-import { R as _$$R } from "../905/103090";
-import { t as _$$t } from "../905/303541";
+import { selectWithShallowEqual } from "../905/103090";
+import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { v4, xv } from "../figma_app/655139";
 import { uQ } from "../figma_app/311375";
@@ -64,7 +64,7 @@ function ee(e) {
   return t.isMixed ? oV : t;
 }
 export function $$et7() {
-  let e = _$$R(e => {
+  let e = selectWithShallowEqual(e => {
     let t = e.mirror.selectionProperties.variableConsumptionInfo;
     return E7(t)?.variableConsumptionMap || {};
   });
@@ -252,11 +252,11 @@ export function $$ec17(e = 0) {
       sort_position: f && f.sortPosition ? f.sortPosition : ""
     });
     Object.values(u).some(e => e.modeOptions.some(e => c2(e.modeId, n) && !e.isCompatible)) && n !== $$Y8 && n !== $$$10 && i && (_ ? t(_$$F.enqueue({
-      message: _$$t("variables.visual_bell.variables_incompatible_modes_needs_updates", {
+      message: getI18nString("variables.visual_bell.variables_incompatible_modes_needs_updates", {
         modeName: i
       }),
       button: {
-        text: _$$t("variables.modes.option.review_updates"),
+        text: getI18nString("variables.modes.option.review_updates"),
         action: () => {
           t(to({
             type: _$$T,
@@ -268,7 +268,7 @@ export function $$ec17(e = 0) {
         }
       }
     })) : t(_$$F.enqueue({
-      message: _$$t("variables.visual_bell.variables_incompatible_modes_no_updates", {
+      message: getI18nString("variables.visual_bell.variables_incompatible_modes_no_updates", {
         modeName: i
       })
     })));
@@ -318,7 +318,7 @@ export function $$ef23(e, t) {
 }
 export function $$eE13() {
   let e = eR();
-  let t = md(I7);
+  let t = useAtomWithSubscription(I7);
   let r = useSelector(e => $u(e));
   return r && e ? 1 : !r && t ? 1 : 0;
 }
@@ -493,7 +493,7 @@ export function $$ex29(e, t, r, n, i) {
       variable: null,
       variableData: r
     };
-    let n = zl.get(Ev(r.variableId));
+    let n = atomStoreManager.get(Ev(r.variableId));
     if (n) return {
       variable: n,
       variableData: r
@@ -562,7 +562,7 @@ function eR() {
       styleUpdatesForCurrentPage,
       variableSetUpdatesForCurrentPage,
       libraryAssetUpdatesForCurrentPage
-    } = md(P1);
+    } = useAtomWithSubscription(P1);
     let a = kl("directlySubscribedAssetKeys");
     let s = [];
     let o = [];

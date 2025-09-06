@@ -7,7 +7,7 @@ import { Ay } from "../905/612521";
 import { h as _$$h } from "../905/207101";
 import { ZC } from "../figma_app/39751";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Ce, Lo } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { R as _$$R } from "../905/782411";
@@ -17,7 +17,7 @@ import { FMemberRoleType, FOrganizationLevelType } from "../figma_app/191312";
 import { X$, H3, D6, A8 } from "../figma_app/465071";
 import { IE } from "../figma_app/193867";
 import { p as _$$p } from "../905/763242";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { cX, EJ, Wv } from "../figma_app/633080";
 import { Ju, ZU } from "../905/102752";
 import { s as _$$s2 } from "../905/715327";
@@ -72,7 +72,7 @@ let P = memo(function ({
     children: o && t ? jsx(j, {
       teamId: t,
       resourceConnection: o
-    }) : u ? jsx(M, {}) : "fullscreen" === c.view && c.editorType !== nT.Whiteboard ? jsx(_$$b, {
+    }) : u ? jsx(M, {}) : "fullscreen" === c.view && c.editorType !== FEditorType.Whiteboard ? jsx(_$$b, {
       entrypoint: i,
       initialTab: e,
       initialUpdatesModalScope: r,
@@ -178,9 +178,9 @@ function j({
         onClick: () => {
           r(Lo());
         },
-        "aria-label": _$$t("resource_connection.aria_label.button"),
+        "aria-label": getI18nString("resource_connection.aria_label.button"),
         children: jsx(_$$C, {})
-      }), tx("design_systems.libraries_modal.allow_external_teams_to_use_libraries", {
+      }), renderI18nText("design_systems.libraries_modal.allow_external_teams_to_use_libraries", {
         projectName: t.projectName
       })]
     }),

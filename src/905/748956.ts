@@ -1,15 +1,15 @@
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 var r = (e => (e[e.NONE = 0] = "NONE", e[e.DECREASED = 1] = "DECREASED", e[e.INCREASED = 2] = "INCREASED", e))(r || {});
 var a = (e => (e[e.NONE = 0] = "NONE", e[e.UP = 1] = "UP", e[e.DOWN = 2] = "DOWN", e[e.RIGHT = 4] = "RIGHT", e[e.LEFT = 8] = "LEFT", e[e.UP_RIGHT = 5] = "UP_RIGHT", e[e.UP_LEFT = 9] = "UP_LEFT", e[e.DOWN_RIGHT = 6] = "DOWN_RIGHT", e[e.DOWN_LEFT = 10] = "DOWN_LEFT", e))(a || {});
 var s = (e => (e[e.NONE = 0] = "NONE", e[e.HORIZONTAL = 1] = "HORIZONTAL", e[e.VERTICAL = 2] = "VERTICAL", e[e.BOTH = 3] = "BOTH", e))(s || {});
 function o(e) {
   switch (e) {
     case 1:
-      return _$$t("fullscreen.accessibility.node_resize_decrease");
+      return getI18nString("fullscreen.accessibility.node_resize_decrease");
     case 2:
-      return _$$t("fullscreen.accessibility.node_resize_increase");
+      return getI18nString("fullscreen.accessibility.node_resize_increase");
     default:
-      return _$$t("fullscreen.accessibility.node_resize_none");
+      return getI18nString("fullscreen.accessibility.node_resize_none");
   }
 }
 export function $$l0(e, t) {
@@ -23,12 +23,12 @@ export function $$l0(e, t) {
     case 0:
       return;
     case 1:
-      i = _$$t("fullscreen.accessibility.node_resize_horizontal");
+      i = getI18nString("fullscreen.accessibility.node_resize_horizontal");
       r = o(l);
       a = Math.abs(e.x);
       break;
     case 2:
-      i = _$$t("fullscreen.accessibility.node_resize_vertical");
+      i = getI18nString("fullscreen.accessibility.node_resize_vertical");
       r = o(d);
       a = Math.abs(e.y);
       break;
@@ -37,19 +37,19 @@ export function $$l0(e, t) {
       let u = o(l);
       let p = Math.abs(e.y);
       let m = o(d);
-      return _$$t("fullscreen.accessibility.node_resize_bidirectional", {
+      return getI18nString("fullscreen.accessibility.node_resize_bidirectional", {
         nodeType: t,
         resizedComparisonX: u,
-        nodeResizeXDelta: _$$t("fullscreen.accessibility.node_unit", {
+        nodeResizeXDelta: getI18nString("fullscreen.accessibility.node_unit", {
           numUnits: c
         }),
         resizedComparisonY: m,
-        nodeResizeYDelta: _$$t("fullscreen.accessibility.node_unit", {
+        nodeResizeYDelta: getI18nString("fullscreen.accessibility.node_unit", {
           numUnits: p
         })
       });
   }
-  return _$$t("fullscreen.accessibility.node_resize_unidirectional", {
+  return getI18nString("fullscreen.accessibility.node_resize_unidirectional", {
     nodeType: t,
     nodeSizeDelta: a,
     resizeComparison: r,
@@ -64,39 +64,39 @@ export function $$d2(e, t) {
     case 0:
       return;
     case 1:
-      i = _$$t("fullscreen.accessibility.node_movement_up");
+      i = getI18nString("fullscreen.accessibility.node_movement_up");
       r = Math.abs(e.y);
       break;
     case 2:
-      i = _$$t("fullscreen.accessibility.node_movement_down");
+      i = getI18nString("fullscreen.accessibility.node_movement_down");
       r = Math.abs(e.y);
       break;
     case 4:
-      i = _$$t("fullscreen.accessibility.node_movement_right");
+      i = getI18nString("fullscreen.accessibility.node_movement_right");
       r = Math.abs(e.x);
       break;
     case 8:
-      i = _$$t("fullscreen.accessibility.node_movement_left");
+      i = getI18nString("fullscreen.accessibility.node_movement_left");
       r = Math.abs(e.x);
       break;
     default:
-      let s = (4 & a) == 4 ? _$$t("fullscreen.accessibility.node_movement_right") : _$$t("fullscreen.accessibility.node_movement_left");
+      let s = (4 & a) == 4 ? getI18nString("fullscreen.accessibility.node_movement_right") : getI18nString("fullscreen.accessibility.node_movement_left");
       let o = Math.abs(e.x);
-      let l = (1 & a) == 1 ? _$$t("fullscreen.accessibility.node_movement_up") : _$$t("fullscreen.accessibility.node_movement_down");
+      let l = (1 & a) == 1 ? getI18nString("fullscreen.accessibility.node_movement_up") : getI18nString("fullscreen.accessibility.node_movement_down");
       let d = Math.abs(e.y);
-      return _$$t("fullscreen.accessibility.node_movement_bidirectional", {
+      return getI18nString("fullscreen.accessibility.node_movement_bidirectional", {
         nodeType: t,
-        nodePositionXDelta: _$$t("fullscreen.accessibility.node_unit", {
+        nodePositionXDelta: getI18nString("fullscreen.accessibility.node_unit", {
           numUnits: o
         }),
         nodeDirectionX: s,
-        nodePositionYDelta: _$$t("fullscreen.accessibility.node_unit", {
+        nodePositionYDelta: getI18nString("fullscreen.accessibility.node_unit", {
           numUnits: d
         }),
         nodeDirectionY: l
       });
   }
-  return _$$t("fullscreen.accessibility.node_movement_unidirectional", {
+  return getI18nString("fullscreen.accessibility.node_movement_unidirectional", {
     nodeType: t,
     nodePositionDelta: r,
     nodeDirection: i

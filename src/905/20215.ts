@@ -1,33 +1,81 @@
-import { atom } from "jotai";
-export function $$r0(e, t = 500, i = !1) {
-  let a = atom(void 0);
-  let s = atom(e);
-  let o = atom(!1);
-  let l = atom(e, (n, r, d) => {
-    clearTimeout(n(a));
-    let c = n(s);
-    let u = "function" == typeof d ? d(c) : d;
-    let p = () => {
-      r(l, u);
-      r(o, !1);
-    };
-    if (r(s, u), r(o, !0), !i && u === e) {
-      p();
-      return;
-    }
-    r(a, setTimeout(() => {
-      p();
-    }, t));
-  });
-  let d = atom(null, (e, t, i) => {
-    clearTimeout(e(a));
-    t(o, !1);
-  });
+import { atom } from 'jotai'
+
+/**
+ * Creates a set of atoms for debouncing a value.
+ * @param initialValue - The initial value to debounce.
+ * @param delay - The debounce delay in milliseconds.
+ * @param skipImmediate - If true, skips debounce when value matches initialValue.
+ * @returns Object containing atoms for current value, debounced value, timeout control, and debouncing state.
+ */
+export function setupDebounceAtoms<T>(initialValue: T, delay = 500, skipImmediate = false) {
+  // Atom to store the timeout ID
+  const timeoutAtom = atom<number | undefined>(undefined)
+
+  // Atom to store the current value
+  const valueAtom = atom<T>(initialValue)
+
+  // Atom to indicate if debouncing is active
+  const isDebouncingAtom = atom<boolean>(false)
+
+  /**
+   * Atom to handle debounced value updates.
+   * Original: l
+   */
+  const debouncedValueAtom = atom(
+    initialValue,
+    (get, set, update) => {
+      clearTimeout(get(timeoutAtom))
+      const prevValue = get(valueAtom)
+      const nextValue = typeof update === 'function' ? update(prevValue) : update
+
+      // Helper to finalize debounce
+      const finalizeDebounce = () => {
+        set(debouncedValueAtom, nextValue)
+        set(isDebouncingAtom, false)
+      }
+
+      set(valueAtom, nextValue)
+      set(isDebouncingAtom, true)
+
+      if (!skipImmediate && nextValue === initialValue) {
+        finalizeDebounce()
+        return
+      }
+
+      set(
+        timeoutAtom,
+        setTimeout(() => {
+          finalizeDebounce()
+        }, delay) as unknown as number,
+      )
+    },
+  )
+
+  /**
+   * Atom to clear the debounce timeout.
+   * Original: d
+   */
+  const clearTimeoutAtom = atom(
+    null,
+    (get, set) => {
+      clearTimeout(get(timeoutAtom))
+      set(isDebouncingAtom, false)
+    },
+  )
+
+  /**
+   * Atom to get the current value.
+   * Original: currentValueAtom
+   */
+  const currentValueAtom = atom<T>(get => get(valueAtom))
+
   return {
-    currentValueAtom: atom(e => e(s)),
-    isDebouncingAtom: o,
-    clearTimeoutAtom: d,
-    debouncedValueAtom: l
-  };
+    currentValueAtom,
+    isDebouncingAtom,
+    clearTimeoutAtom,
+    debouncedValueAtom,
+  }
 }
-export const Z = $$r0;
+
+// Refactored export name
+export const Z = setupDebounceAtoms

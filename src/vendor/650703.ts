@@ -1,5 +1,5 @@
 import { U } from "../vendor/885230";
-import { m6 } from "../vendor/325489";
+import { getGlobalScope } from "../vendor/325489";
 import { T as _$$T } from "../vendor/381201";
 import { Qg } from "../vendor/314131";
 import { vF } from "../vendor/150583";
@@ -7,7 +7,7 @@ import { T2 } from "../vendor/873843";
 import { H } from "../vendor/341099";
 import { O } from "../vendor/240444";
 import { eJ, M6 } from "../vendor/352483";
-import { S8 } from "../vendor/231181";
+import { normalize } from "../vendor/231181";
 import { xv } from "../vendor/108286";
 import { lu } from "../vendor/975854";
 import { k1 } from "../vendor/26278";
@@ -118,7 +118,7 @@ export function $$k1(e, n, i, b, w, k) {
   }(b, i.captureContext);
   i.mechanism && M6(x, i.mechanism);
   let P = w ? w.getEventProcessors() : [];
-  let L = m6().getScopeData();
+  let L = getGlobalScope().getScopeData();
   k && v(L, k.getScopeData());
   T && v(L, T.getScopeData());
   let N = [...(i.attachments || []), ...L.attachments];
@@ -226,25 +226,25 @@ export function $$k1(e, n, i, b, w, k) {
         breadcrumbs: e.breadcrumbs.map(e => ({
           ...e,
           ...(e.data && {
-            data: S8(e.data, n, i)
+            data: normalize(e.data, n, i)
           })
         }))
       }),
       ...(e.user && {
-        user: S8(e.user, n, i)
+        user: normalize(e.user, n, i)
       }),
       ...(e.contexts && {
-        contexts: S8(e.contexts, n, i)
+        contexts: normalize(e.contexts, n, i)
       }),
       ...(e.extra && {
-        extra: S8(e.extra, n, i)
+        extra: normalize(e.extra, n, i)
       })
     };
-    e.contexts && e.contexts.trace && t.contexts && (t.contexts.trace = e.contexts.trace, e.contexts.trace.data && (t.contexts.trace.data = S8(e.contexts.trace.data, n, i)));
+    e.contexts && e.contexts.trace && t.contexts && (t.contexts.trace = e.contexts.trace, e.contexts.trace.data && (t.contexts.trace.data = normalize(e.contexts.trace.data, n, i)));
     e.spans && (t.spans = e.spans.map(e => ({
       ...e,
       ...(e.data && {
-        data: S8(e.data, n, i)
+        data: normalize(e.data, n, i)
       })
     })));
     return t;

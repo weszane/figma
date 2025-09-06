@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { md, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, Xr } from "../figma_app/27355";
 import { hO } from "../figma_app/545293";
 import { l4 } from "../905/124270";
 import { L } from "../905/713563";
@@ -17,12 +17,12 @@ export function $$g0({
   path: r
 }) {
   let g = useDispatch();
-  let f = md(Q8);
-  let E = md(sC);
+  let f = useAtomWithSubscription(Q8);
+  let E = useAtomWithSubscription(sC);
   let y = useSelector(e => "search" === e.selectedView.view);
   let b = Xr(l4(e));
   let T = Xr(R9);
-  let I = md(hO.isFragmentSearchAtom);
+  let I = useAtomWithSubscription(hO.isFragmentSearchAtom);
   let S = L(I ? "fragment_search_modal" : "file_browser", E, !0);
   let v = useCallback((e, t, r) => {
     e.preventDefault();

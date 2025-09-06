@@ -4,7 +4,7 @@ import { debounce } from "../905/915765";
 import { assertNotNullish } from "../figma_app/95419";
 import { E } from "../905/172252";
 import l from "../vendor/524488";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { QZ } from "../figma_app/844435";
 import { o3, nt } from "../905/226610";
 import { Jc } from "../905/946805";
@@ -77,23 +77,23 @@ export function $$f1({
         switch (e) {
           case Jc.ALL:
             return {
-              status: _$$t("qa.accessibility_status.all_tab.no_results", {
+              status: getI18nString("qa.accessibility_status.all_tab.no_results", {
                 query: t
               }),
               type: "error"
             };
           case Jc.ASSETS:
             return {
-              status: _$$t("qa.accessibility_status.assets_tab.no_results", {
+              status: getI18nString("qa.accessibility_status.assets_tab.no_results", {
                 query: t
               }),
               type: "error"
             };
           case Jc.EXTENSIONS:
             return {
-              status: l ? _$$t("qa.accessibility_status.extensions_tab.include_widgets.no_results", {
+              status: l ? getI18nString("qa.accessibility_status.extensions_tab.include_widgets.no_results", {
                 query: t
-              }) : _$$t("qa.accessibility_status.extensions_tab.no_results", {
+              }) : getI18nString("qa.accessibility_status.extensions_tab.no_results", {
                 query: t
               }),
               type: "error"
@@ -106,7 +106,7 @@ export function $$f1({
       };
     }
     return {
-      status: _$$t("qa.accessibility_status.has_results", {
+      status: getI18nString("qa.accessibility_status.has_results", {
         numResults: a
       }),
       type: "results"
@@ -125,7 +125,7 @@ export function $$E2({
   return state?.type !== "results" ? null : jsxs(E, {
     children: [jsx("span", {
       id: e,
-      children: _$$t("qa.input.description")
+      children: getI18nString("qa.input.description")
     }), state.status && jsx("h2", {
       children: state.status
     })]

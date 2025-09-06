@@ -1,9 +1,9 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useSelector } from "../vendor/514228";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Pt } from "../figma_app/806412";
 import { k } from "../905/582200";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { Y5 } from "../figma_app/455680";
 import { ue } from "../figma_app/139805";
 import { Q } from "../905/346809";
@@ -16,7 +16,7 @@ export function $$m1(e) {
     children: jsxs(Zk, {
       children: [jsx(fI, {
         children: jsx(Q, {
-          children: tx("design_systems.states_panel.components")
+          children: renderI18nText("design_systems.states_panel.components")
         })
       }), jsx($$g0, {
         ...e
@@ -28,7 +28,7 @@ export function $$g0(e) {
   let t = useSelector(e => _7(e));
   let r = ue();
   let o = e => {
-    sx("Creating Variant Component", {
+    trackEventAnalytics("Creating Variant Component", {
       type: "Merge",
       numVariants: e
     });
@@ -37,7 +37,7 @@ export function $$g0(e) {
   return jsx(z, {
     recordingKey: Pt(e, "mergeButton"),
     onClick: () => o(t),
-    children: tx("design_systems.states_panel.combine_as_variants")
+    children: renderI18nText("design_systems.states_panel.combine_as_variants")
   }, "merge-button");
 }
 export const K = $$g0;

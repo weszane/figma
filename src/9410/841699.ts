@@ -2,12 +2,12 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { O as _$$O } from "../905/501876";
-import { md, fp } from "../figma_app/27355";
+import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import l from "classnames";
 import { lt } from "../905/511649";
 import { Ex, vj, zE } from "../figma_app/919079";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { U4, xo } from "../figma_app/473493";
 import { d as _$$d, cR, hv } from "../figma_app/715641";
 import { h as _$$h } from "../905/207101";
@@ -33,9 +33,9 @@ function w({
 }) {
   let t = l7();
   let i = useDispatch();
-  let n = md(_$$d);
-  let s = md(cR);
-  let l = md(hv)?.data;
+  let n = useAtomWithSubscription(_$$d);
+  let s = useAtomWithSubscription(cR);
+  let l = useAtomWithSubscription(hv)?.data;
   let {
     show,
     isShowing,
@@ -49,27 +49,27 @@ function w({
     !t && !l && (n || s) && show();
   });
   let p = {
-    label: tx("dev_handoff.workflows.overview.onboarding.primary_cta"),
+    label: renderI18nText("dev_handoff.workflows.overview.onboarding.primary_cta"),
     type: "button",
     onClick: complete,
     ctaTrackingDescriptor: _$$c.GOT_IT
   };
   let m = {
-    label: tx("dev_handoff.workflows.overview.onboarding.secondary_cta"),
+    label: renderI18nText("dev_handoff.workflows.overview.onboarding.secondary_cta"),
     type: "link",
     href: "https://help.figma.com/hc/articles/23918228264855",
     ctaTrackingDescriptor: _$$c.LEARN_MORE
   };
   return jsx(rq, {
     arrowPosition: F_.LEFT_TITLE,
-    description: n ? tx("dev_handoff.workflows.overview.onboarding.first_rfd.description") : e ? tx("dev_handoff.workflows.overview.onboarding.has_rfd.dev_mode.description") : tx("dev_handoff.workflows.overview.onboarding.has_rfd.design.description"),
+    description: n ? renderI18nText("dev_handoff.workflows.overview.onboarding.first_rfd.description") : e ? renderI18nText("dev_handoff.workflows.overview.onboarding.has_rfd.dev_mode.description") : renderI18nText("dev_handoff.workflows.overview.onboarding.has_rfd.design.description"),
     disableHighlight: !0,
     isShowing,
     onClose: complete,
     primaryCta: p,
     secondaryCta: m,
     targetKey: o5,
-    title: n ? tx("dev_handoff.workflows.overview.onboarding.first_rfd.title") : tx("dev_handoff.workflows.overview.onboarding.has_rfd.title"),
+    title: n ? renderI18nText("dev_handoff.workflows.overview.onboarding.first_rfd.title") : renderI18nText("dev_handoff.workflows.overview.onboarding.has_rfd.title"),
     trackingContextName: "Dev Mode Overview Onboarding"
   });
 }
@@ -97,10 +97,10 @@ export function $$M1({
   let p = useSelector(e => i ? void 0 : Np(e, u));
   let g = l7();
   let x = ZI();
-  let y = md(hv)?.data;
-  let [b, v] = fp(cR);
+  let y = useAtomWithSubscription(hv)?.data;
+  let [b, v] = useAtomValueAndSetter(cR);
   let E = xo();
-  let T = md(_$$d);
+  let T = useAtomWithSubscription(_$$d);
   let M = ow();
   let P = _$$n();
   let F = Xd();
@@ -130,7 +130,7 @@ export function $$M1({
       onContextMenu: B,
       href: p,
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": i ? _$$t("dev_handoff.paywall.org_not_member_hint") : void 0,
+      "data-tooltip": i ? getI18nString("dev_handoff.paywall.org_not_member_hint") : void 0,
       "data-tooltip-text-left": !0,
       recordingKey: "dev_handoff.workflows.overview_entry",
       children: jsxs("div", {
@@ -139,7 +139,7 @@ export function $$M1({
           className: "overview_entry--leftSide--0zNy- text--fontPos11--2LvXf text--_fontBase--QdLsd",
           children: [jsx(_$$O, {
             className: "overview_entry--readyIcon--QwDeG"
-          }), tx("dev_handoff.workflows.overview.title")]
+          }), renderI18nText("dev_handoff.workflows.overview.title")]
         }), jsx("div", {
           "data-onboarding-key": o5,
           children: jsx($$D0, {

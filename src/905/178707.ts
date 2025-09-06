@@ -11,7 +11,7 @@ import { E as _$$E2, BZ, OZ } from "../905/194276";
 import { qB, RE } from "../905/862321";
 import { sT } from "../905/694658";
 import { L } from "../905/408237";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { c as _$$c } from "../905/370443";
 import { j6 } from "../figma_app/831799";
 import { Ws } from "../figma_app/314264";
@@ -131,7 +131,7 @@ export function $$w0(e) {
       newDomain: t
     });
   };
-  let T = e.placeholder ?? _$$t("auth.email-input-placeholder");
+  let T = e.placeholder ?? getI18nString("auth.email-input-placeholder");
   return jsxs(Fragment, {
     children: [jsx($$S2, {
       "aria-describedby": e.ariaDescribedBy,
@@ -156,7 +156,7 @@ export function $$w0(e) {
     }), t && jsx("div", {
       "data-testid": "domain-suggestion",
       className: "form_inputs--domainSuggestion--sBuUE",
-      children: tx("auth.email-domain-suggestion-prompt", {
+      children: renderI18nText("auth.email-domain-suggestion-prompt", {
         domainSuggestion: jsx(_$$E, {
           className: "form_inputs--link--KfGcM",
           onClick: () => C(),
@@ -170,7 +170,7 @@ export function $$C3(e) {
   let [t, i] = useState("");
   let s = useDispatch();
   let o = useSelector(e => e.auth.invalidInput);
-  let l = e.placeholder ?? _$$t("auth.password-input-placeholder");
+  let l = e.placeholder ?? getI18nString("auth.password-input-placeholder");
   let d = e.isSignUp ? "new-password" : "current-password";
   return jsx($$S2, {
     "aria-describedby": e.ariaDescribedBy,

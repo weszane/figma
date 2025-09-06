@@ -2,11 +2,11 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useRef, useEffect, useCallback, forwardRef, useState } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import { E as _$$E } from "../905/632989";
-import { fp } from "../figma_app/27355";
-import { sx } from "../905/449184";
+import { useAtomValueAndSetter } from "../figma_app/27355";
+import { trackEventAnalytics } from "../905/449184";
 import { wY } from "../figma_app/708845";
-import { Lg } from "../figma_app/257275";
-import { tx, t as _$$t } from "../905/303541";
+import { getFalseValue } from "../figma_app/897289";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { In } from "../905/672640";
 import { Jm } from "../figma_app/387599";
 import { a as _$$a } from "../5430/14230";
@@ -91,7 +91,7 @@ function A({
   previewInBrowserUrl: n
 }) {
   let o = useRef(null);
-  let [l, c] = fp(_$$Q2);
+  let [l, c] = useAtomValueAndSetter(_$$Q2);
   useEffect(() => {
     let e = o.current;
     if (e) {
@@ -109,11 +109,11 @@ function A({
     target: "_blank",
     children: jsxs("div", {
       className: R,
-      children: [jsx(_$$V, {}), tx("community.embed.preview_title")]
+      children: [jsx(_$$V, {}), renderI18nText("community.embed.preview_title")]
     })
   }) : r ? jsxs("div", {
     className: R,
-    children: [jsx(K, {}), tx("community.embed.preview_title")]
+    children: [jsx(K, {}), renderI18nText("community.embed.preview_title")]
   }) : jsx("div", {
     className: "hero--heroImageFullScreenIcon--Mn7mU",
     children: jsx(In, {
@@ -140,7 +140,7 @@ function P({
   children: e,
   is16to9AspectRatio: t
 }) {
-  let [r, i] = fp(_$$Q2);
+  let [r, i] = useAtomValueAndSetter(_$$Q2);
   let n = e => {
     e.stopPropagation();
     i(!1);
@@ -179,7 +179,7 @@ function M({
   let p = useRef(null);
   let h = useMemo(() => 0 === t, [t]);
   let x = useMemo(() => t === r - 1, [t, r]);
-  let [f, y] = fp(_$$Q2);
+  let [f, y] = useAtomValueAndSetter(_$$Q2);
   let g = useCallback(() => {
     p.current?.focus({
       preventScroll: !0
@@ -260,7 +260,7 @@ function M({
           children: [jsx(In, {
             icon: "return-32",
             fill: h ? "menu-disabled" : "menu"
-          }), tx("community.resource_page.media_carousel.restart")]
+          }), renderI18nText("community.resource_page.media_carousel.restart")]
         }), jsx("button", {
           className: "hero--lightboxControlsButton--Ve597",
           disabled: h,
@@ -398,7 +398,7 @@ export function $$U0({
         let o = r.right - (n ? 0 : e);
         return s.right > o ? s.right - o : 0;
       })();
-      Lg() || 0 === i || e.scrollBy({
+      getFalseValue() || 0 === i || e.scrollBy({
         left: i,
         behavior: "smooth"
       });
@@ -413,7 +413,7 @@ export function $$U0({
   let X = useCallback(() => {
     E(0);
   }, []);
-  let [J, K] = fp(_$$Q2);
+  let [J, K] = useAtomValueAndSetter(_$$Q2);
   useEffect(() => {
     let e = v.current;
     if (!J && e) {
@@ -509,7 +509,7 @@ export function $$U0({
               autoPlay: !0,
               muted: !0,
               onEnded: () => {
-                sx("rdp_video_ended", {
+                trackEventAnalytics("rdp_video_ended", {
                   community_resource_id: e.id,
                   resouce_type: Vm(t),
                   searchSessionId: ee
@@ -583,7 +583,7 @@ export function $$U0({
             selectedIndex: L,
             onClick: () => {
               E(i);
-              sx("CTA Clicked", {
+              trackEventAnalytics("CTA Clicked", {
                 name: "Resource Carousel Thumbnail Clicked",
                 community_resource_id: e.id,
                 index: i,
@@ -599,7 +599,7 @@ export function $$U0({
         children: [jsx("div", {
           className: sp
         }), jsx(_$$E, {
-          "aria-label": _$$t("community.detail_view.previous_item"),
+          "aria-label": getI18nString("community.detail_view.previous_item"),
           className: T9,
           htmlAttributes: {
             tabIndex: -1
@@ -613,7 +613,7 @@ export function $$U0({
         children: [jsx("div", {
           className: jp
         }), jsx(_$$E, {
-          "aria-label": _$$t("community.detail_view.next_item"),
+          "aria-label": getI18nString("community.detail_view.next_item"),
           className: aT,
           htmlAttributes: {
             tabIndex: -1

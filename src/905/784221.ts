@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { Rs } from "../figma_app/288654";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { F } from "../905/302958";
 import { X } from "../905/859195";
 import { yJ } from "../figma_app/78808";
@@ -43,7 +43,7 @@ function E({
       children: e
     }),
     confirmText: i,
-    cancelText: _$$t("general.cancel"),
+    cancelText: getI18nString("general.cancel"),
     destructive: a,
     onConfirm: l,
     trackedConfirmationProperties: r,
@@ -83,7 +83,7 @@ let x = Ju(function ({
       await XHR.del(`/api/templates/file/${C.fileKey}`);
     } catch (t) {
       e(F.enqueue({
-        message: _$$t("templates.unpublishing.bell.failure"),
+        message: getI18nString("templates.unpublishing.bell.failure"),
         type: "template-unpublish-error",
         error: !0
       }));
@@ -91,7 +91,7 @@ let x = Ju(function ({
     }
     e(Ce());
     e(F.enqueue({
-      message: _$$t("templates.unpublishing.bell.success"),
+      message: getI18nString("templates.unpublishing.bell.success"),
       type: "template-unpublish-success"
     }));
     e(yJ({
@@ -108,11 +108,11 @@ let x = Ju(function ({
       teamId: y
     },
     children: jsx(E, {
-      title: tx("templates.confirmation.unpublish.title"),
-      content: tx("templates.confirmation.unpublish.description_v2", {
+      title: renderI18nText("templates.confirmation.unpublish.title"),
+      content: renderI18nText("templates.confirmation.unpublish.description_v2", {
         templateName: C.name
       }),
-      confirmText: tx("templates.detail.unpublish_button"),
+      confirmText: renderI18nText("templates.detail.unpublish_button"),
       destructive: !0,
       onConfirm: S && unpublishTemplate ? () => unpublishTemplate(t) : w && _unpublishTemplate ? () => _unpublishTemplate(t) : T,
       trackedConfirmationProperties: {

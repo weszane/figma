@@ -2,10 +2,10 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { createContext, useContext, useState } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import { $n } from "../905/521428";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { h as _$$h } from "../905/207101";
 import { getInitialOptions } from "../figma_app/169182";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { fu } from "../figma_app/831799";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { X$ } from "../figma_app/465071";
@@ -106,7 +106,7 @@ javascript:(function()%7Bfunction%20callback()%7BCodeConnect%3F.default%3F.init(
       htmlAttributes: {
         draggable: !n,
         onDragStart: () => {
-          sx("Codebase Suggestions Setup Steps Bookmarklet Dragged");
+          trackEventAnalytics("Codebase Suggestions Setup Steps Bookmarklet Dragged");
         }
       },
       onClick: wo,
@@ -121,7 +121,7 @@ javascript:(function()%7Bfunction%20callback()%7BCodeConnect%3F.default%3F.init(
         }), jsx(_$$T, {
           className: E
         }), jsx("p", {
-          children: _$$t("dev_handoff.codebase_suggestions.code_connect_bookmarklet_label")
+          children: getI18nString("dev_handoff.codebase_suggestions.code_connect_bookmarklet_label")
         })]
       })
     })
@@ -135,7 +135,7 @@ function M({
   let {
     onAction
   } = x();
-  let i = _$$t("dev_handoff.codebase_suggestions.onboarding_copy_to_clipboard");
+  let i = getI18nString("dev_handoff.codebase_suggestions.onboarding_copy_to_clipboard");
   return jsxs("div", {
     className: "codebase_suggestions_onboarding_step--code--G71B9",
     children: [jsx(CH, {
@@ -194,7 +194,7 @@ function U({
       case "generate-token":
         {
           let e = await p();
-          sx("Codebase Suggestions Setup Steps Token Generated", {
+          trackEventAnalytics("Codebase Suggestions Setup Steps Token Generated", {
             type: "generate-token"
           });
           e && (t({
@@ -204,7 +204,7 @@ function U({
           break;
         }
       case "use-existing-token":
-        sx("Codebase Suggestions Setup Steps Token Generated", {
+        trackEventAnalytics("Codebase Suggestions Setup Steps Token Generated", {
           type: "use-existing-token"
         });
         t({
@@ -218,7 +218,7 @@ function U({
   };
   return l ? jsxs("div", {
     className: "codebase_suggestions_onboarding_step--loading--bMSPa",
-    children: [jsx(_$$k, {}), _$$t("dev_handoff.codebase_suggestions.onboarding_step_2_generating_token")]
+    children: [jsx(_$$k, {}), getI18nString("dev_handoff.codebase_suggestions.onboarding_step_2_generating_token")]
   }) : jsxs("div", {
     children: [jsxs("div", {
       className: "codebase_suggestions_onboarding_step--buttons--VXcCO",
@@ -227,19 +227,19 @@ function U({
         onClick: () => g("generate-token"),
         disabled: _,
         iconPrefix: e?.type === "generate-token" ? jsx(_$$g, {}) : void 0,
-        "data-tooltip": _$$t("dev_handoff.codebase_suggestions.onboarding_step_2_generate_token_tooltip"),
+        "data-tooltip": getI18nString("dev_handoff.codebase_suggestions.onboarding_step_2_generate_token_tooltip"),
         "data-tooltip-type": "text",
-        children: _$$t("dev_handoff.codebase_suggestions.onboarding_step_2_generate_token")
+        children: getI18nString("dev_handoff.codebase_suggestions.onboarding_step_2_generate_token")
       }), n && jsx($n, {
         variant: "link",
         onClick: () => g("use-existing-token"),
         disabled: _,
         iconPrefix: e?.type === "use-existing-token" ? jsx(_$$g, {}) : void 0,
-        children: _$$t("dev_handoff.codebase_suggestions.onboarding_step_2_existing_token")
+        children: getI18nString("dev_handoff.codebase_suggestions.onboarding_step_2_existing_token")
       })]
     }), e?.type === "generate-token" && jsx("div", {
       className: "codebase_suggestions_onboarding_step--expiration--3eZb0",
-      children: _$$t("dev_handoff.codebase_suggestions.onboarding_step_2_generated_token_expiration", {
+      children: getI18nString("dev_handoff.codebase_suggestions.onboarding_step_2_generated_token_expiration", {
         expiration: Math.floor(90)
       })
     })]
@@ -249,7 +249,7 @@ function z() {
   return jsx(Cs, {
     variant: "warn",
     children: jsx(Q, {
-      children: _$$t("dev_handoff.codebase_suggestions.keep_your_api_token_secure_by_storing_it_in_a_secret_manager_never_hard_code_it_into_your_source_code")
+      children: getI18nString("dev_handoff.codebase_suggestions.keep_your_api_token_secure_by_storing_it_in_a_secret_manager_never_hard_code_it_into_your_source_code")
     })
   });
 }
@@ -261,7 +261,7 @@ function $({
     children: jsx($n, {
       onClick: e,
       variant: "primary",
-      children: _$$t("dev_handoff.component_browser_onboarding.continue_button")
+      children: getI18nString("dev_handoff.component_browser_onboarding.continue_button")
     })
   });
 }
@@ -329,7 +329,7 @@ export function $$q0({
     };
   }(n);
   _$$h(() => {
-    sx("Codebase Suggestions Setup Steps Opened", {
+    trackEventAnalytics("Codebase Suggestions Setup Steps Opened", {
       initialInstallMethod: e
     });
   });
@@ -351,15 +351,15 @@ React.render(<App>,..)` : "";
 </script>` : "";
   let T = [{
     id: "npm-install",
-    title: _$$t("dev_handoff.codebase_suggestions.onboarding_step_1_title"),
-    description: _$$t("dev_handoff.codebase_suggestions.onboarding_step_1_description"),
+    title: getI18nString("dev_handoff.codebase_suggestions.onboarding_step_1_title"),
+    description: getI18nString("dev_handoff.codebase_suggestions.onboarding_step_1_description"),
     component: () => jsx(M, {
       code: "npm install --save @figma/cc-alpha"
     })
   }, {
     id: "generate-token",
-    title: _$$t("dev_handoff.codebase_suggestions.onboarding_step_2_title"),
-    description: _$$t("dev_handoff.codebase_suggestions.onboarding_step_2_description"),
+    title: getI18nString("dev_handoff.codebase_suggestions.onboarding_step_2_title"),
+    description: getI18nString("dev_handoff.codebase_suggestions.onboarding_step_2_description"),
     component: () => jsx(U, {
       chosenToken: n,
       onTokenGenerated: o,
@@ -367,21 +367,21 @@ React.render(<App>,..)` : "";
     })
   }, {
     id: "insert-before-render",
-    title: _$$t("dev_handoff.codebase_suggestions.initalize_during_app_startup"),
-    description: _$$t("dev_handoff.codebase_suggestions.initialize_the_package_just_before_the_moment_where_your_app_starts_rendering_react"),
+    title: getI18nString("dev_handoff.codebase_suggestions.initalize_during_app_startup"),
+    description: getI18nString("dev_handoff.codebase_suggestions.initialize_the_package_just_before_the_moment_where_your_app_starts_rendering_react"),
     component: () => jsx(M, {
       code: y
     }),
     dependsOn: ["generate-token"]
   }, {
     id: "test-connection",
-    title: _$$t("dev_handoff.codebase_suggestions.onboarding_step_4_title"),
-    description: _$$t("dev_handoff.codebase_suggestions.onboarding_step_4_description"),
+    title: getI18nString("dev_handoff.codebase_suggestions.onboarding_step_4_title"),
+    description: getI18nString("dev_handoff.codebase_suggestions.onboarding_step_4_description"),
     dependsOn: ["generate-token"]
   }, {
     id: "commit-to-codebase",
-    title: _$$t("dev_handoff.codebase_suggestions.onboarding_step_5_title"),
-    description: _$$t("dev_handoff.codebase_suggestions.onboarding_step_5_description"),
+    title: getI18nString("dev_handoff.codebase_suggestions.onboarding_step_5_title"),
+    description: getI18nString("dev_handoff.codebase_suggestions.onboarding_step_5_description"),
     component: () => jsxs(Fragment, {
       children: [jsx(z, {}), jsx($, {
         onContinue: t
@@ -391,8 +391,8 @@ React.render(<App>,..)` : "";
   }];
   let j = [{
     id: "generate-token",
-    title: _$$t("dev_handoff.codebase_suggestions.onboarding_step_2_title"),
-    description: _$$t("dev_handoff.codebase_suggestions.onboarding_step_2_description"),
+    title: getI18nString("dev_handoff.codebase_suggestions.onboarding_step_2_title"),
+    description: getI18nString("dev_handoff.codebase_suggestions.onboarding_step_2_description"),
     component: () => jsx(U, {
       chosenToken: n,
       onTokenGenerated: o,
@@ -400,21 +400,21 @@ React.render(<App>,..)` : "";
     })
   }, {
     id: "insert-into-header",
-    title: _$$t("dev_handoff.codebase_suggestions.insert_snippet_into_your_app_s_header"),
-    description: _$$t("dev_handoff.codebase_suggestions.insert_this_snippet_near_the_bottom_of_your_applications_head_tag"),
+    title: getI18nString("dev_handoff.codebase_suggestions.insert_snippet_into_your_app_s_header"),
+    description: getI18nString("dev_handoff.codebase_suggestions.insert_this_snippet_near_the_bottom_of_your_applications_head_tag"),
     component: () => jsx(M, {
       code: w
     }),
     dependsOn: ["generate-token"]
   }, {
     id: "test-connection",
-    title: _$$t("dev_handoff.codebase_suggestions.onboarding_step_4_title"),
-    description: _$$t("dev_handoff.codebase_suggestions.onboarding_step_4_description"),
+    title: getI18nString("dev_handoff.codebase_suggestions.onboarding_step_4_title"),
+    description: getI18nString("dev_handoff.codebase_suggestions.onboarding_step_4_description"),
     dependsOn: ["generate-token"]
   }, {
     id: "commit-to-codebase",
-    title: _$$t("dev_handoff.codebase_suggestions.onboarding_step_5_title"),
-    description: _$$t("dev_handoff.codebase_suggestions.onboarding_step_5_description"),
+    title: getI18nString("dev_handoff.codebase_suggestions.onboarding_step_5_title"),
+    description: getI18nString("dev_handoff.codebase_suggestions.onboarding_step_5_description"),
     component: () => jsxs(Fragment, {
       children: [jsx(z, {}), jsx($, {
         onContinue: t
@@ -424,24 +424,24 @@ React.render(<App>,..)` : "";
   }];
   let k = [{
     id: "generate-token",
-    title: _$$t("dev_handoff.codebase_suggestions.onboarding_step_2_title"),
-    description: _$$t("dev_handoff.codebase_suggestions.onboarding_step_2_description"),
+    title: getI18nString("dev_handoff.codebase_suggestions.onboarding_step_2_title"),
+    description: getI18nString("dev_handoff.codebase_suggestions.onboarding_step_2_description"),
     component: () => jsx(U, {
       chosenToken: n,
       onTokenGenerated: o
     })
   }, {
     id: "drag-bookmarklet",
-    title: _$$t("dev_handoff.codebase_suggestions.drag_the_bookmarklet_to_your_bookmarks_bar"),
-    description: _$$t("dev_handoff.codebase_suggestions.a_bookmarklet_is_like_a_magic_bookmark_that_when_clicked_runs_some_code_on_the_page_you_are_already_on"),
+    title: getI18nString("dev_handoff.codebase_suggestions.drag_the_bookmarklet_to_your_bookmarks_bar"),
+    description: getI18nString("dev_handoff.codebase_suggestions.a_bookmarklet_is_like_a_magic_bookmark_that_when_clicked_runs_some_code_on_the_page_you_are_already_on"),
     component: () => jsx(C, {
       scriptInitOptions: x
     }),
     dependsOn: ["generate-token"]
   }, {
     id: "open-app-and-press-bookmarklet",
-    title: _$$t("dev_handoff.codebase_suggestions.navigate_to_your_app_and_click_the_bookmarklet"),
-    description: _$$t("dev_handoff.codebase_suggestions.open_your_app_in_the_browser_and_navigate_to_a_page_containing_components_you_would_like_to_ingest_click_the_bookmarklet_and_follow_the_prompts"),
+    title: getI18nString("dev_handoff.codebase_suggestions.navigate_to_your_app_and_click_the_bookmarklet"),
+    description: getI18nString("dev_handoff.codebase_suggestions.open_your_app_in_the_browser_and_navigate_to_a_page_containing_components_you_would_like_to_ingest_click_the_bookmarklet_and_follow_the_prompts"),
     component: () => jsx($, {
       onContinue: t
     }),

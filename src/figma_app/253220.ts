@@ -1,6 +1,6 @@
 import { getFeatureFlags } from "../905/601108";
 import { localStorageRef } from "../905/657224";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { uE } from "../figma_app/314264";
 import { Y5 } from "../figma_app/455680";
 import { UK } from "../figma_app/740163";
@@ -62,7 +62,7 @@ export function $$S0() {
   }, {
     action: "toggle-scroll-wheel-zoom",
     platforms: ["!ipad"],
-    hideForQuickCommand: Ay.isIpad,
+    hideForQuickCommand: BrowserInfo.isIpad,
     "data-onboarding-key": oi.ZOOM,
     callback: () => {
       g({
@@ -77,7 +77,7 @@ export function $$S0() {
   }, {
     action: "toggle-right-click-pan",
     platforms: ["!ipad"],
-    hideForQuickCommand: Ay.isIpad,
+    hideForQuickCommand: BrowserInfo.isIpad,
     "data-onboarding-key": oi.PAN,
     callback: () => {
       g({

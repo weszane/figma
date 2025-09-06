@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { N_ } from "../figma_app/637027";
-import { tx, t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { fu } from "../figma_app/831799";
 import { FPlanRestrictionType } from "../figma_app/191312";
 import { j4 } from "../905/814802";
@@ -13,7 +13,7 @@ export function $$c0(e) {
   } = e;
   let {
     id
-  } = t;
+  } = getI18nString;
   if (![FPlanRestrictionType.FULL, FPlanRestrictionType.RESTRICTED].includes(paidStatus)) return jsx(Fragment, {});
   let m = members.length;
   let _ = members.filter(e => e.id).map(e => e.id).join();
@@ -30,27 +30,27 @@ export function $$c0(e) {
       teamId: id
     },
     children: jsxs(Dd, {
-      title: p ? h ? f ? tx("team_view.downgrade_figjam_access_from_viewer_to_viewer_restricted") : tx("team_view.downgrade_design_access_from_viewer_to_viewer_restricted") : f ? tx("team_view.remove_figjam_edit_status.seat_rename") : tx("team_view.remove_design_edit_status.seat_rename") : f ? tx("team_view.grant_figjam_edit_status.seat_rename") : tx("team_view.grant_design_edit_status.seat_rename"),
-      confirmText: p ? h ? t("team_view.change") : t("team_view.remove.seat_rename") : t("team_view.grant.seat_rename"),
+      title: p ? h ? f ? renderI18nText("team_view.downgrade_figjam_access_from_viewer_to_viewer_restricted") : renderI18nText("team_view.downgrade_design_access_from_viewer_to_viewer_restricted") : f ? renderI18nText("team_view.remove_figjam_edit_status.seat_rename") : renderI18nText("team_view.remove_design_edit_status.seat_rename") : f ? renderI18nText("team_view.grant_figjam_edit_status.seat_rename") : renderI18nText("team_view.grant_design_edit_status.seat_rename"),
+      confirmText: p ? h ? getI18nString("team_view.change") : getI18nString("team_view.remove.seat_rename") : getI18nString("team_view.grant.seat_rename"),
       onConfirm: e.onConfirm,
-      children: [paidStatus === FPlanRestrictionType.RESTRICTED && (h ? f ? tx("team_view.downgrade_figjam_from_viewer_to_viewer_restricted_description.seat_rename", {
+      children: [paidStatus === FPlanRestrictionType.RESTRICTED && (h ? f ? renderI18nText("team_view.downgrade_figjam_from_viewer_to_viewer_restricted_description.seat_rename", {
         memberNameOrEmail: x,
         numMembers: m
-      }) : tx("team_view.downgrade_design_from_viewer_to_viewer_restricted_description.seat_rename", {
+      }) : renderI18nText("team_view.downgrade_design_from_viewer_to_viewer_restricted_description.seat_rename", {
         memberNameOrEmail: x,
         numMembers: m
-      }) : f ? tx("team_view.downgrade_figjam_description.seat_rename", {
+      }) : f ? renderI18nText("team_view.downgrade_figjam_description.seat_rename", {
         memberNameOrEmail: x,
         numMembers: m
-      }) : tx("team_view.downgrade_design_description.seat_rename", {
+      }) : renderI18nText("team_view.downgrade_design_description.seat_rename", {
         memberNameOrEmail: x,
         numMembers: m
       })), paidStatus === FPlanRestrictionType.FULL && jsxs(Fragment, {
         children: [(() => {
-          if (!p) return f ? tx("team_view.change_to_editor_figjam_description.seat_rename", {
+          if (!p) return f ? renderI18nText("team_view.change_to_editor_figjam_description.seat_rename", {
             numMembers: m,
             memberNameOrEmail: x
-          }) : tx("team_view.change_to_editor_design_description.seat_rename", {
+          }) : renderI18nText("team_view.change_to_editor_design_description.seat_rename", {
             numMembers: m,
             memberNameOrEmail: x
           });
@@ -61,7 +61,7 @@ export function $$c0(e) {
             className: "confirm_team_user_paid_status_update_modal--link--cb35L",
             href: "https://help.figma.com/hc/articles/360039960434#Account_Types",
             trusted: !0,
-            children: tx("team_view.learn_more.seat_rename")
+            children: renderI18nText("team_view.learn_more.seat_rename")
           })
         })]
       })]

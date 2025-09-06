@@ -10,10 +10,10 @@ import { O as _$$O } from "../905/487602";
 import { glU, X3B } from "../figma_app/763686";
 import { l7, nc } from "../905/189185";
 import $$m from "classnames";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { Uz } from "../905/63728";
 import { rf, Pt, AF, iQ, v_ } from "../figma_app/806412";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { lW } from "../figma_app/11182";
 import { Y5 } from "../figma_app/455680";
 import { E7, _W } from "../905/216495";
@@ -78,7 +78,7 @@ let B = function ({
     window.removeEventListener("focus", u);
   }), [u]);
   return jsx(Ao, {
-    title: _$$t("proto.starting_point_modal.description"),
+    title: getI18nString("proto.starting_point_modal.description"),
     initialPosition: new Point(o.x - parsePxInt(M0y), o.y),
     headerSize: "small",
     truncateTitleText: !0,
@@ -92,7 +92,7 @@ let B = function ({
         children: jsx(X, {
           fallback: null,
           errorFallback: null,
-          placeholder: _$$t("proto.starting_point_modal.enter_a_description_for_your_starting_point"),
+          placeholder: getI18nString("proto.starting_point_modal.enter_a_description_for_your_starting_point"),
           defaultValue: a,
           onInputChange: t => {
             l(t);
@@ -101,7 +101,7 @@ let B = function ({
           mountBehavior: "focusAndSelectAll",
           toolbarOptions: "minimal",
           toolbarProps: {
-            "aria-label": _$$t("proto.starting_point_modal.description")
+            "aria-label": getI18nString("proto.starting_point_modal.description")
           }
         })
       })
@@ -110,7 +110,7 @@ let B = function ({
 };
 export function $$F1(t) {
   let [e, o] = lJ("prototypeStartingPoint");
-  let m = !!_$$R(L);
+  let m = !!selectWithShallowEqual(L);
   let [h, R] = useState(!1);
   let [S, C] = useState(E7(e)?.name || "");
   let [D, K] = useState(!1);
@@ -178,9 +178,9 @@ export function $$F1(t) {
     },
     htmlAttributes: {
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": _$$t("proto.starting_points.edit_description")
+      "data-tooltip": getI18nString("proto.starting_points.edit_description")
     },
-    "aria-label": _$$t("proto.starting_points.edit_description"),
+    "aria-label": getI18nString("proto.starting_points.edit_description"),
     recordingKey: Pt(t, "startingPointPanelIcon"),
     children: jsx(p, {})
   });
@@ -195,7 +195,7 @@ export function $$F1(t) {
       className: "prototype_starting_point_panel--flowStartingPointRow--Ajjk1 collapsible_property_panel--panelTitleRowOuter--i5K0R",
       children: [jsx(_$$Q, {
         extended: !0,
-        children: tx("proto.starting_points.flow_starting_point_title")
+        children: renderI18nText("proto.starting_points.flow_starting_point_title")
       }), jsx("span", {
         className: "prototype_starting_point_panel--fadeOutOnUnhover--6-o5B",
         children: !te && jsx(_$$K, {
@@ -217,9 +217,9 @@ export function $$F1(t) {
           }(Q),
           htmlAttributes: {
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t("proto.flows_panel.copy_link")
+            "data-tooltip": getI18nString("proto.flows_panel.copy_link")
           },
-          "aria-label": _$$t("proto.flows_panel.copy_link"),
+          "aria-label": getI18nString("proto.flows_panel.copy_link"),
           children: jsx(_$$r, {})
         })
       }), jsx("span", {
@@ -228,16 +228,16 @@ export function $$F1(t) {
           onClick: W,
           htmlAttributes: {
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t("proto.starting_points.delete_starting_point_tooltip")
+            "data-tooltip": getI18nString("proto.starting_points.delete_starting_point_tooltip")
           },
-          "aria-label": _$$t("proto.starting_points.delete_starting_point_tooltip"),
+          "aria-label": getI18nString("proto.starting_points.delete_starting_point_tooltip"),
           children: jsx(_$$O, {})
         })
       })]
     }), te ? jsx(fI, {
       children: jsx(nV, {
         className: "prototype_starting_point_panel--mixedNoteLabel--gzISu draggable_list--label--Gcpsi",
-        children: tx("proto.starting_points.click_to_remove_mixed_content")
+        children: renderI18nText("proto.starting_points.click_to_remove_mixed_content")
       })
     }) : jsxs(Fragment, {
       children: [tr, M && jsx(B, {
@@ -257,7 +257,7 @@ export function $$F1(t) {
           className: "prototype_starting_point_panel--panelTitleText--F75N0 draggable_list--panelTitleText--SwKez",
           onClick: tt,
           recordingKey: Pt(t, "panelTitle"),
-          children: tx("proto.starting_points.flow_starting_point_title")
+          children: renderI18nText("proto.starting_points.flow_starting_point_title")
         })
       }), jsx("span", {
         className: "prototype_starting_point_panel--addButton--M-0Xy draggable_list--addButton--D0q--",
@@ -268,9 +268,9 @@ export function $$F1(t) {
             onClick: tt,
             htmlAttributes: {
               "data-tooltip-type": Ib.TEXT,
-              "data-tooltip": _$$t("proto.starting_points.add_starting_point_tooltip")
+              "data-tooltip": getI18nString("proto.starting_points.add_starting_point_tooltip")
             },
-            "aria-label": _$$t("proto.starting_points.add_starting_point_tooltip"),
+            "aria-label": getI18nString("proto.starting_points.add_starting_point_tooltip"),
             recordingKey: Pt(t, "plusButton"),
             children: jsx(_$$e, {})
           })

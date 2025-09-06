@@ -1,7 +1,7 @@
 import { c as _$$c, r as _$$r } from "../905/676456";
 import { NC } from "../905/17179";
 import { XHR } from "../905/910117";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
 import { F } from "../905/302958";
 import { nF, MM } from "../905/350402";
@@ -69,7 +69,7 @@ let $$y7 = nF(async (e, t) => {
     let r = J(t);
     r && (e.dispatch(F.enqueue({
       error: !0,
-      message: _$$t("community.comments.failed_to_create_comment", {
+      message: getI18nString("community.comments.failed_to_create_comment", {
         errorMessage: r
       })
     })), parentId ? e.dispatch($$f3({
@@ -105,7 +105,7 @@ let $$b2 = MM("GENERIC_COMMENT_EDIT", async (e, t, {
   }).catch(t => {
     e.dispatch(_$$r(r));
     e.dispatch(F.enqueue({
-      message: _$$t("community.comments.failed_to_edit_comment"),
+      message: getI18nString("community.comments.failed_to_edit_comment"),
       error: !0
     }));
   });
@@ -130,14 +130,14 @@ let $$T4 = nF((e, t, {
       comments: [u]
     }));
     e.dispatch(F.enqueue({
-      message: _$$t("community.comments.comment_deleted")
+      message: getI18nString("community.comments.comment_deleted")
     }));
     onFinish?.(!1);
   }).catch(t => {
     let r = J(t);
     r && (e.dispatch(F.enqueue({
       error: !0,
-      message: _$$t("community.comments.failed_to_delete_comment", {
+      message: getI18nString("community.comments.failed_to_delete_comment", {
         errorMessage: r
       })
     })), onFinish?.(!0));
@@ -165,14 +165,14 @@ let $$I6 = nF((e, t) => {
       resourceType: type
     }));
     e.dispatch(F.enqueue({
-      message: _$$t("community.comments.comment_reported_and_hidden"),
+      message: getI18nString("community.comments.comment_reported_and_hidden"),
       type: "COMMENT_REPORTED"
     }));
     onFinish?.(!1);
   }).catch(t => {
     let r = J(t);
     r && (e.dispatch(F.enqueue({
-      message: _$$t("community.comments.failed_to_report_comment", {
+      message: getI18nString("community.comments.failed_to_report_comment", {
         errorMessage: r
       }),
       type: "COMMENT_REPORT_ERROR"
@@ -190,4 +190,4 @@ export const eT = $$y7;
 export const kE = $$p8;
 export const mH = $$g9;
 export const tG = $$u10;
-export const zs = $$E11; 
+export const zs = $$E11;

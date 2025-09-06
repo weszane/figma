@@ -10,11 +10,11 @@ import { xk } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { oA } from "../905/663269";
 import p from "../vendor/116389";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { g as _$$g } from "../1556/359896";
 import { n as _$$n } from "../figma_app/3731";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { E as _$$E2 } from "../905/984674";
 import { A as _$$A } from "../1250/724587";
 import { b as _$$b2 } from "../905/985254";
@@ -39,7 +39,7 @@ export let $$$$U0 = "PLAN_SWITCHER_ONBOARDING_KEY";
 export function $$G1() {
   let e = useDispatch();
   let t = useSelector(e => getPermissionsStateMemoized(e));
-  let n = _$$R(e => vp(e.user, e.currentUserOrgId, e.currentTeamId));
+  let n = selectWithShallowEqual(e => vp(e.user, e.currentUserOrgId, e.currentTeamId));
   let o = useSelector(e => e.user);
   let s = useSelector(e => e.plans);
   let l = S2();
@@ -163,7 +163,7 @@ function W({
         onClick: () => onCreateTeam(),
         children: [jsx(Q$, {
           children: jsx(_$$x, {})
-        }), _$$t("navbar.navbar.create_new")]
+        }), getI18nString("navbar.navbar.create_new")]
       }) : null]
     }), L && jsx(_$$a, {
       entryPoint: "plan_nav",
@@ -235,7 +235,7 @@ function z({
         className: L,
         callback: () => v(e.planId)
       })), _$$w]), onCreateTeam && {
-        displayText: _$$t("navbar.navbar.create_new"),
+        displayText: getI18nString("navbar.navbar.create_new"),
         icon: jsx(_$$x, {
           className: "plan_switcher--icon--fiTgb"
         }),

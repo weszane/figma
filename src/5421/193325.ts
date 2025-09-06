@@ -5,11 +5,11 @@ import { useDispatch, useSelector } from "../vendor/514228";
 import { Ez5, X3B, rXF, baT, iCO, CWU } from "../figma_app/763686";
 import { dI, AD, sH, Hr } from "../905/871411";
 import s from "classnames";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { d as _$$d } from "../figma_app/429226";
 import { Pt } from "../figma_app/806412";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx as _$$tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { Cr, cP, js, Z6, Od } from "../figma_app/451499";
 import { Em, cJ } from "../figma_app/976749";
 import { Y5 } from "../figma_app/455680";
@@ -52,7 +52,7 @@ import { A as _$$A3 } from "../6041/969560";
 import { $$default } from "../svg/764361";
 import { Ql, X4, H_ } from "../figma_app/387100";
 import eg from "../vendor/223926";
-import { nl } from "../figma_app/257275";
+import { isInteractionPathCheck } from "../figma_app/897289";
 import { to as _$$to } from "../figma_app/828186";
 import { Uc } from "../figma_app/741237";
 import { tS, _G } from "../figma_app/516028";
@@ -125,7 +125,7 @@ function K({
     destinationOverlayBackgroundType,
     destinationOverlayPositionType,
     destinationOverlayBackgroundInteraction
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     destinationOverlayBackgroundColor: e.mirror.selectionProperties.actionIndexPathToOverlaySettings?.[y]?.destinationOverlayBackgroundColor,
     destinationOverlayBackgroundType: e.mirror.selectionProperties.actionIndexPathToOverlaySettings?.[y]?.destinationOverlayBackgroundType,
     destinationOverlayPositionType: e.mirror.selectionProperties.actionIndexPathToOverlaySettings?.[y]?.destinationOverlayPositionType,
@@ -244,7 +244,7 @@ function K({
     }), !("ON_HOVER" === e || "ON_PRESS" === e) && jsx(F, {
       children: jsx(_$$S, {
         label: jsx(_$$J2, {
-          children: _$$tx("proto.close_when_clicking_outside")
+          children: renderI18nText("proto.close_when_clicking_outside")
         }),
         recordingKey: Pt(t, "closeOnClickOutside"),
         onChange: K,
@@ -253,7 +253,7 @@ function K({
     }), jsx(F, {
       children: jsx(_$$S, {
         label: jsx(_$$J2, {
-          children: _$$tx("proto.overlay_panel.background")
+          children: renderI18nText("proto.overlay_panel.background")
         }),
         recordingKey: Pt(t, "addBackgroundBehindOverlay"),
         onChange: H,
@@ -261,7 +261,7 @@ function K({
       })
     }), ee && jsx(_$$A, {
       ref: D,
-      label: _$$t("proto.overlay_panel.background"),
+      label: getI18nString("proto.overlay_panel.background"),
       input: et
     }), d && jsx(_$$h, {
       disabledVariableIds: new Set(),
@@ -322,7 +322,7 @@ function Z({
     recordingKey: Pt(n, "overlayPositionDropdown")
   });
   return jsx(_$$A, {
-    label: _$$t("proto.overlay_panel.position"),
+    label: getI18nString("proto.overlay_panel.position"),
     labelId: s,
     input: d
   });
@@ -368,7 +368,7 @@ function ep({
   let I = jsxs(Fragment, {
     children: [y ? jsx("span", {
       className: "prototype_conditional_controls--conditionIconUI3--zcwx0",
-      children: _$$tx("proto.else")
+      children: renderI18nText("proto.else")
     }) : jsx(_$$B, {
       className: el,
       svg: _$$A2
@@ -576,7 +576,7 @@ function eh({
             conditionalActions: e
           });
         },
-        children: _$$t("fullscreen.properties_panel.click_to_replace_mixed_content")
+        children: getI18nString("fullscreen.properties_panel.click_to_replace_mixed_content")
       })
     }), hS(i.conditionalActions) && jsxs(Fragment, {
       children: [jsx(ep, {
@@ -651,7 +651,7 @@ function em({
   return jsxs(Fragment, {
     children: [jsx(_$$A, {
       input: null,
-      label: _$$t("proto.condition")
+      label: getI18nString("proto.condition")
     }), jsx(Ad, {
       appendedClassName: "prototype_conditional_controls--conditionalActionRightPadding--xpK6Z",
       label: null,
@@ -681,7 +681,7 @@ class eb {
       let t = this.nodeFormatter.format(e);
       if (this.scene && e !== AD && null != e) {
         let n = this.scene.get(e);
-        if (n?.isResponsiveSet) return "/" === t ? _$$t("sites.panel.home") : t;
+        if (n?.isResponsiveSet) return "/" === t ? getI18nString("sites.panel.home") : t;
       }
       return t;
     };
@@ -739,7 +739,7 @@ function ew(e) {
       dropdownShown: e.dropdownShown,
       dropdownWidth: DxS,
       formatter: new eb(t, e.scene),
-      hideDropdownWhenContainerMoves: !nl(),
+      hideDropdownWhenContainerMoves: !isInteractionPathCheck(),
       id: m,
       inputClassName: "prototype_destination_dropdown--input--rzglN",
       onChange: e.onChange,
@@ -897,7 +897,7 @@ function eX({
   let M = null;
   if (gl(t)) M = null;else if (C?.resolvedType === rXF.COLOR) M = gl(e) ? jsx("div", {
     className: "prototype_set_variable_controls--targetVariableDataMixedContainer--H6uGu",
-    children: _$$t("fullscreen.mixed")
+    children: getI18nString("fullscreen.mixed")
   }) : jsx(Fragment, {
     children: jsx(gJ, {
       variableValue: e ?? C,
@@ -933,7 +933,7 @@ function eX({
     "prototype_set_variable_controls--targetVariableDropdownUI3--Pz71q": !0,
     [eq]: !(y || O)
   });
-  let B = useSelector(ZM) ? _$$t("proto.select_variable_unified") : _$$t("proto.select_variable.short");
+  let B = useSelector(ZM) ? getI18nString("proto.select_variable_unified") : getI18nString("proto.select_variable.short");
   let H = jsx(D8, {
     recordingKey: Pt(c.recordingKey, "selectTargetVariable"),
     onClick: E,
@@ -946,7 +946,7 @@ function eX({
             className: eY,
             children: gl(t) ? jsx("div", {
               className: d()(_$$s.pt2.$, _$$s.pb2.$),
-              children: _$$t("fullscreen.mixed")
+              children: getI18nString("fullscreen.mixed")
             }) : y ? jsx(wG, {
               text: y,
               thumbnailValue: C,
@@ -967,7 +967,7 @@ function eX({
   });
   let U = jsx(_$$A, {
     input: H,
-    label: _$$t("proto.target")
+    label: getI18nString("proto.target")
   });
   let F = d()({
     "prototype_set_variable_controls--setVariableToContainerUI3--pGbDe": !0,
@@ -979,7 +979,7 @@ function eX({
     children: M
   });
   let $ = null !== M ? jsx(_$$A, {
-    label: _$$t("proto.variable.value"),
+    label: getI18nString("proto.variable.value"),
     input: K
   }) : null;
   return jsxs("div", {
@@ -1030,15 +1030,15 @@ function e9() {
         e.preventDefault();
       }
     },
-    children: _$$tx("proto.state_management.info_tooltip_learn_more")
+    children: renderI18nText("proto.state_management.info_tooltip_learn_more")
   });
   let t = jsx("span", {
     children: jsx("strong", {
-      children: _$$tx("proto.animation_panel.preserve_scroll_position")
+      children: renderI18nText("proto.animation_panel.preserve_scroll_position")
     })
   });
   return jsx(Fragment, {
-    children: _$$tx("proto.state_management.info_tooltip", {
+    children: renderI18nText("proto.state_management.info_tooltip", {
       PreserveScrollPositionBold: t,
       LearnMoreLink: e
     })
@@ -1094,7 +1094,7 @@ function te({
     mixed: gl(e.preserveScroll),
     recordingKey: Pt(n, "preserve-scroll-check"),
     label: jsx(_$$J2, {
-      children: _$$tx("proto.animation_panel.preserve_scroll_position")
+      children: renderI18nText("proto.animation_panel.preserve_scroll_position")
     })
   });
   let N = jsx(TN, {
@@ -1124,7 +1124,7 @@ function te({
     mixed: gl(e.resetScrollPosition),
     recordingKey: Pt(n, "reset-scroll-position-check"),
     label: jsx(_$$J2, {
-      children: _$$tx("proto.animation_panel.reset_scroll_position")
+      children: renderI18nText("proto.animation_panel.reset_scroll_position")
     })
   });
   let S = getFeatureFlags().fpl_toggle_tip ? jsxs("div", {
@@ -1177,7 +1177,7 @@ function te({
     mixed: gl(e.resetInteractiveComponents),
     recordingKey: Pt(n, "reset-component-state-check"),
     label: jsx(_$$J2, {
-      children: _$$tx("proto.animation_panel.reset_component_state")
+      children: renderI18nText("proto.animation_panel.reset_component_state")
     })
   });
   let k = jsx(TN, {
@@ -1206,7 +1206,7 @@ function te({
     mixed: gl(e.resetVideoPosition),
     recordingKey: Pt(n, "reset-video-position-check"),
     label: jsx(_$$J2, {
-      children: LH(c) ? _$$tx("proto.state_management.reset_video_state") : _$$tx("proto.animation_panel.reset_video_state")
+      children: LH(c) ? renderI18nText("proto.state_management.reset_video_state") : renderI18nText("proto.animation_panel.reset_video_state")
     })
   });
   let O = jsx(TN, {
@@ -1221,7 +1221,7 @@ function te({
         vertical: 12
       },
       children: jsx(nV, {
-        children: _$$tx("proto.state_management.mixed_state_update")
+        children: renderI18nText("proto.state_management.mixed_state_update")
       })
     })]
   });
@@ -1233,7 +1233,7 @@ function te({
         children: jsx(JU, {
           recordingKey: Pt(n, "expand-caret"),
           actionOnPointerDown: !0,
-          children: _$$tx("proto.state")
+          children: renderI18nText("proto.state")
         }, "expand-caret")
       }), jsx(UC, {
         children: L
@@ -1246,7 +1246,7 @@ let tn = l6;
 let to = AD;
 class ti extends cP {
   format(e) {
-    return e === to || null === e ? _$$t("proto.target_video_node_name_formatter.this_video") : super.format(e);
+    return e === to || null === e ? getI18nString("proto.target_video_node_name_formatter.this_video") : super.format(e);
   }
 }
 function tr(e) {
@@ -1299,7 +1299,7 @@ function tr(e) {
   });
   return jsx(_$$A, {
     input: I,
-    label: _$$t("proto.video_dropdown.label"),
+    label: getI18nString("proto.video_dropdown.label"),
     labelId: v
   });
 }
@@ -1312,15 +1312,15 @@ function tl({
   let r = jsx(ks, {
     className: "prototype_open_url_action_options--urlInputUI3--H-JfT",
     dataTestId: "url-input",
-    placeholder: _$$t("proto.interaction.example_com"),
-    value: gl(e.connectionURL) ? _$$t("fullscreen.mixed") : _W(e.connectionURL, ""),
+    placeholder: getI18nString("proto.interaction.example_com"),
+    value: gl(e.connectionURL) ? getI18nString("fullscreen.mixed") : _W(e.connectionURL, ""),
     onChange: n,
     recordingKey: Pt(t, "urlTextInput"),
     autoFocus: !1
   });
   let a = jsx(_$$S, {
     label: jsx(_$$J2, {
-      children: _$$tx("proto.action_open_url_in_new_tab")
+      children: renderI18nText("proto.action_open_url_in_new_tab")
     }),
     onChange: i,
     recordingKey: Pt(t, "open-url-in-new-tab-check"),
@@ -1328,7 +1328,7 @@ function tl({
   });
   return jsxs(Fragment, {
     children: [jsx(_$$A, {
-      label: _$$t("proto.open_url.text_input_label"),
+      label: getI18nString("proto.open_url.text_input_label"),
       input: r
     }), jsx(TN, {
       children: a
@@ -1376,7 +1376,7 @@ function tc({
   if (!i || "SCROLL_TO" !== t) return null;
   let x = jsx(gq, {
     bigNudgeAmount,
-    "data-tooltip": _$$t("proto.trigger.y_offset"),
+    "data-tooltip": getI18nString("proto.trigger.y_offset"),
     "data-tooltip-type": Ib.TEXT,
     dispatch: c,
     inputClassName: oM,
@@ -1389,12 +1389,12 @@ function tc({
     wheelMultiplier: smallNudgeAmount,
     children: jsx("span", {
       className: QK,
-      children: _$$tx("proto.scroll_options.scroll_offset.y")
+      children: renderI18nText("proto.scroll_options.scroll_offset.y")
     })
   });
   let g = jsx(gq, {
     bigNudgeAmount,
-    "data-tooltip": _$$t("proto.trigger.x_offset"),
+    "data-tooltip": getI18nString("proto.trigger.x_offset"),
     "data-tooltip-type": Ib.TEXT,
     dispatch: c,
     inputClassName: oM,
@@ -1407,13 +1407,13 @@ function tc({
     wheelMultiplier: smallNudgeAmount,
     children: jsx("span", {
       className: QK,
-      children: _$$tx("proto.scroll_options.scroll_offset.x")
+      children: renderI18nText("proto.scroll_options.scroll_offset.x")
     })
   });
   return jsx(Cm, {
     label: jsx(_$$F, {
-      tooltip: _$$t("proto.scroll_options.offset"),
-      children: _$$t("proto.scroll_options.offset")
+      tooltip: getI18nString("proto.scroll_options.offset"),
+      children: getI18nString("proto.scroll_options.offset")
     }),
     leftInput: g,
     rightInput: x
@@ -1538,7 +1538,7 @@ function tf({
   });
   let O = jsx(qd, {
     className: "prototype_video_action_options--timestampContainer---DdaI",
-    "data-tooltip": _$$t("proto.trigger.timestamp_to_set_to"),
+    "data-tooltip": getI18nString("proto.trigger.timestamp_to_set_to"),
     "data-tooltip-type": Ib.TEXT,
     dataTestId: "mediaSkipToTime-input",
     dispatch: _,
@@ -1553,7 +1553,7 @@ function tf({
     wheelMultiplier: v / 1e3,
     children: jsx(_$$Y2, {})
   });
-  let D = "SKIP_BACKWARD" === d ? _$$t("proto.trigger.duration_to_jump_backward") : _$$t("proto.trigger.duration_to_jump_forward");
+  let D = "SKIP_BACKWARD" === d ? getI18nString("proto.trigger.duration_to_jump_backward") : getI18nString("proto.trigger.duration_to_jump_forward");
   let R = jsx(dE, {
     className: "prototype_video_action_options--timeAmountContainer--5kpHn",
     "data-tooltip": D,
@@ -1580,24 +1580,24 @@ function tf({
   });
   return c ? g ? jsx(_$$A, {
     input: T,
-    label: _$$t("proto.video_options.behavior"),
+    label: getI18nString("proto.video_options.behavior"),
     labelId: N
   }) : y ? jsx(_$$A, {
     input: A,
-    label: _$$t("proto.video_options.behavior"),
+    label: getI18nString("proto.video_options.behavior"),
     labelId: S
   }) : h ? jsxs(Fragment, {
     children: [jsx(_$$A, {
       input: P,
-      label: _$$t("proto.video_options.direction"),
+      label: getI18nString("proto.video_options.direction"),
       labelId: k
     }), jsx(_$$A, {
       input: R,
-      label: _$$t("proto.video_options.offset")
+      label: getI18nString("proto.video_options.offset")
     })]
   }) : p ? jsx(_$$A, {
     input: O,
-    label: _$$t("proto.video_options.timestamp")
+    label: getI18nString("proto.video_options.timestamp")
   }) : jsxs(fI, {
     children: [g && T, y && A, h && P, h && R, p && O]
   }) : null;
@@ -1636,7 +1636,7 @@ export function $$tv0({
   let A = Um();
   let {
     scene
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     scene: e.mirror.sceneGraph
   }));
   let k = cJ();
@@ -1858,7 +1858,7 @@ export function $$tI1({
   let g = Um();
   let {
     scene
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     scene: e.mirror.sceneGraph
   }));
   let I = "INTERNAL_NODE" === E7(e.connectionType);
@@ -1922,7 +1922,7 @@ export function $$tI1({
   return jsxs(Fragment, {
     children: [jsx(_$$A, {
       labelId: w,
-      label: A ? _$$t("proto.overlay") : _$$t("proto.destination"),
+      label: A ? getI18nString("proto.overlay") : getI18nString("proto.destination"),
       input: D
     }), R, N && M]
   });

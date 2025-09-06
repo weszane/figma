@@ -1,162 +1,377 @@
-import { getFeatureFlags } from "../905/601108";
-import { mac, linux, windows, chromeos, android, ios, chrome, firefox, msedge, safari, msie, webkit, blink, tablet, mobile, name, version, osname, osversion, compareVersions, isUnsupportedBrowser } from "../vendor/634570";
-import { U1, MP } from "../figma_app/469876";
-import { n as _$$n } from "../905/347702";
-let $$o8 = /iPad/.test(navigator.userAgent) || /Mac/.test(navigator.userAgent) && !/iPhone/.test(navigator.userAgent) && navigator.maxTouchPoints && navigator.maxTouchPoints > 2 || !1;
-let $$l26 = _$$n(() => $$o8);
-export function $$d15() {
-  return mac;
+import {
+  android,
+  blink,
+  chrome,
+  chromeos,
+  compareVersions,
+  firefox,
+  ios,
+  isUnsupportedBrowser,
+  linux,
+  mac,
+  mobile,
+  msedge,
+  msie,
+  name,
+  osname,
+  osversion,
+  safari,
+  tablet,
+  version,
+  webkit,
+  windows,
+} from 'bowser'
+import { getFeatureFlags } from '../905/601108'
+import { isGoogleMeetHardwareIntegration, isZoomIntegration } from '../figma_app/469876'
+
+/**
+ * Checks if the device is an iPad (including iPadOS on Mac).
+ * Original: $$o8
+ */
+export const isIpadDevice = /iPad/.test(navigator.userAgent)
+  || (/Mac/.test(navigator.userAgent)
+    && !/iPhone/.test(navigator.userAgent)
+    && navigator.maxTouchPoints > 2)
+  || false
+
+/**
+ * Returns true if the OS is macOS.
+ * Original: $$d15
+ */
+export function getIsMac(): boolean {
+  return mac
 }
-export function $$c18() {
-  return linux;
+
+/**
+ * Returns true if the OS is Linux.
+ * Original: $$c18
+ */
+export function getIsLinux(): boolean {
+  return linux
 }
-export function $$u24() {
-  return windows;
+
+/**
+ * Returns true if the OS is Windows.
+ * Original: $$u24
+ */
+export function getIsWindows(): boolean {
+  return windows
 }
-export function $$p11() {
-  return chromeos;
+
+/**
+ * Returns true if the OS is ChromeOS.
+ * Original: $$p11
+ */
+export function getIsChromeOS(): boolean {
+  return chromeos
 }
-export let $$_23 = /Mobi/.test(navigator.userAgent);
-export function $$h22() {
-  return $$_23;
+
+/**
+ * Checks if the device is mobile based on user agent.
+ * Original: $$_23
+ */
+const isMobileUA: boolean = /Mobi/.test(navigator.userAgent)
+
+/**
+ * Returns true if the device is mobile.
+ * Original: $$h22
+ */
+export function getIsMobile(): boolean {
+  return isMobileUA
 }
-export function $$m12() {
-  return /FigmaMirror-Android/.test(navigator.userAgent);
+
+/**
+ * Checks if the device is FigmaMirror-Android.
+ * Original: $$m12
+ */
+export function isFigmaMirrorAndroid(): boolean {
+  return /FigmaMirror-Android/.test(navigator.userAgent)
 }
-export let $$g19 = /Android/.test(navigator.userAgent);
-export function $$f6() {
-  return !!window.FigmaMobile;
+
+/**
+ * Checks if the device is Android.
+ * Original: $$g19
+ */
+const isAndroidUA: boolean = /Android/.test(navigator.userAgent)
+
+/**
+ * Returns true if running inside FigmaMobile.
+ * Original: $$f6
+ */
+export function isInFigmaMobile(): boolean {
+  return !!window.FigmaMobile
 }
-let $$E14 = /iPhone|iPad|iPod/.test(navigator.userAgent);
-let y = /iPhone|iPod/.test(navigator.userAgent);
-export function $$b17() {
-  return $$E14;
+
+/**
+ * Checks if the device is iOS (iPhone, iPad, iPod).
+ * Original: $$E14
+ */
+const isIOSUA: boolean = /iPhone|iPad|iPod/.test(navigator.userAgent)
+
+/**
+ * Checks if the device is iPhone or iPod.
+ * Original: y
+ */
+const isIphoneOrIpodUA: boolean = /iPhone|iPod/.test(navigator.userAgent)
+
+/**
+ * Returns true if the device is iOS.
+ * Original: $$b17
+ */
+export function getIsIOS(): boolean {
+  return isIOSUA
 }
-let $$T2 = $$g19 || $$E14;
-let $$I25 = $$T2 && !$$O5();
-let $$S21 = ($$g19 || y) && !$$O5();
-$$g19 && $$O5();
-y && $$O5();
-$$E14 && $$O5();
-export let $$v9 = $$_23 || $$g19 || $$o8 || $$O5() || $$w4();
-export function $$A3() {
-  return $$v9 && !$$f6();
+
+/**
+ * Checks if the device is Android or iOS.
+ * Original: $$T2
+ */
+const isMobilePlatform: boolean = isAndroidUA || isIOSUA
+
+/**
+ * Checks if the device is mobile platform and not FigmaMobile.
+ * Original: $$I25
+ */
+const isMobilePlatformNotFigmaMobile: boolean = isMobilePlatform && !isFigmaMobileApp()
+
+/**
+ * Checks if the device is Android or iPhone/iPod and not FigmaMobile.
+ * Original: $$S21
+ */
+const isAndroidOrIphoneNotFigmaMobile: boolean
+  = (isAndroidUA || isIphoneOrIpodUA) && !isFigmaMobileApp()
+
+/**
+ * Returns true if running inside FigmaMobile.
+ * Original: $$O5
+ */
+export function isFigmaMobileApp(): boolean {
+  return /FigmaMobile/.test(navigator.userAgent)
 }
-export function $$x7() {
-  return $$v9;
+
+/**
+ * Returns true if running inside FigmaMirror-Android.
+ * Original: $$R20
+ */
+export function isFigmaMirrorAndroidApp(): boolean {
+  return /FigmaMobile-Android/.test(navigator.userAgent)
 }
-export function $$N1() {
-  return $$S21;
+
+/**
+ * Returns true if running inside FigmaMobile-iOS.
+ * Original: $$L16
+ */
+export function isFigmaMobileIOSApp(): boolean {
+  return /FigmaMobile-iOS/.test(navigator.userAgent)
 }
-export function $$C10() {
-  return !!window.FigmaMobile && !window.FigmaMobile.handleTripleTaps;
+
+/**
+ * Returns true if running inside FigmaMobile and handleTripleTaps is not present.
+ * Original: $$C10
+ */
+export function isFigmaMobileWithoutTripleTaps(): boolean {
+  return !!window.FigmaMobile && !window.FigmaMobile.handleTripleTaps
 }
-export function $$w4() {
-  return $$m12() || $$C10();
+
+/**
+ * Returns true if FigmaMirror-Android or FigmaMobile without triple taps.
+ * Original: $$w4
+ */
+export function isMirrorOrMobileNoTripleTaps(): boolean {
+  return isFigmaMirrorAndroid() || isFigmaMobileWithoutTripleTaps()
 }
-export function $$O5() {
-  return /FigmaMobile/.test(navigator.userAgent);
+
+/**
+ * Returns true if the device is mobile, Android, iPad, FigmaMobile, or FigmaMirror-Android.
+ * Original: $$v9
+ */
+const isAnyMobile: boolean
+  = isMobileUA || isAndroidUA || isIpadDevice() || isFigmaMobileApp() || isMirrorOrMobileNoTripleTaps()
+
+/**
+ * Returns true if the device is mobile and not in FigmaMobile.
+ * Original: $$A3
+ */
+export function isMobileNotFigmaMobile(): boolean {
+  return isAnyMobile && !isInFigmaMobile()
 }
-export function $$R20() {
-  return /FigmaMobile-Android/.test(navigator.userAgent);
+
+/**
+ * Returns true if the device is any mobile.
+ * Original: $$x7
+ */
+export function getIsAnyMobile(): boolean {
+  return isAnyMobile
 }
-export function $$L16() {
-  return /FigmaMobile-iOS/.test(navigator.userAgent);
+
+/**
+ * Returns true if the device is Android or iPhone/iPod and not FigmaMobile.
+ * Original: $$N1
+ */
+export function getIsAndroidOrIphoneNotFigmaMobile(): boolean {
+  return isAndroidOrIphoneNotFigmaMobile
 }
-$$O5() || $$w4();
-let $$P13 = _$$n(() => !$$v9);
-let D = {};
-let $$k0 = {
-  mac: mac,
-  windows: windows,
-  linux: linux,
-  chromeos: chromeos,
-  android: android,
-  ios: ios,
-  chrome: chrome,
-  firefox: firefox,
-  msedge: msedge,
-  safari: safari,
-  msie: msie,
-  webkit: webkit,
-  blink: blink,
-  tablet: tablet,
-  mobile: mobile,
-  name: name,
-  version: version,
-  osname: osname,
-  osversion: osversion,
-  compareVersions: compareVersions,
-  isUnsupportedBrowser: isUnsupportedBrowser,
-  get is64BitBrowser() {
-    if (this.windows && !this.firefox) return /(?:Win64|x64)/.test(window.navigator.userAgent);
-    return /(?:MacIntel|Win64|x86_64)/.test(window.navigator.platform);
+
+/**
+ * Returns true if not any mobile.
+ * Original: $$P13
+ */
+export function isNotMobile(): boolean {
+  return !isAnyMobile
+}
+
+/**
+ * Stores original values for overrides.
+ * Original: D
+ */
+const originalOverrides: Record<string, any> = {}
+
+/**
+ * Browser and platform info object.
+ * Original: $$k0
+ */
+export const BrowserInfo = {
+  mac,
+  windows,
+  linux,
+  chromeos,
+  android,
+  ios,
+  chrome,
+  firefox,
+  msedge,
+  safari,
+  msie,
+  webkit,
+  blink,
+  tablet,
+  mobile,
+  name,
+  version,
+  osname,
+  osversion,
+  compareVersions,
+  isUnsupportedBrowser,
+  /**
+   * Checks if the browser is 64-bit.
+   */
+  get is64BitBrowser(): boolean {
+    if (this.windows && !this.firefox)
+      return /Win64|x64/.test(window.navigator.userAgent)
+    return /MacIntel|Win64|x86_64/.test(window.navigator.platform)
   },
-  get isWasm4gbSupported() {
-    if (this.chrome) return Number(this.version) >= 83;
-    if (this.firefox) return Number(this.version) >= 89;
-    if (this.safari) return Number(this.version) >= 15.2;
-    if (this.msedge) return Number(this.version) >= 89;
-    return !1;
+  /**
+   * Checks if the browser supports WASM 4GB.
+   */
+  get isWasm4gbSupported(): boolean {
+    if (this.chrome)
+      return Number(this.version) >= 83
+    if (this.firefox)
+      return Number(this.version) >= 89
+    if (this.safari)
+      return Number(this.version) >= 15.2
+    if (this.msedge)
+      return Number(this.version) >= 89
+    return false
   },
-  get browserType() {
-    if (this.chrome) return "chrome";
-    if (this.firefox) return "firefox";
-    if (this.safari) return "safari";
-    if (this.msedge) return "msedge";
+  /**
+   * Returns browser type as string.
+   */
+  get browserType(): string | undefined {
+    if (this.chrome)
+      return 'chrome'
+    if (this.firefox)
+      return 'firefox'
+    if (this.safari)
+      return 'safari'
+    if (this.msedge)
+      return 'msedge'
+    return undefined
   },
-  get isMobileBrowser() {
-    return /Mobi/.test(window.navigator.userAgent);
+  /**
+   * Checks if the browser is mobile.
+   */
+  get isMobileBrowser(): boolean {
+    return /Mobi/.test(window.navigator.userAgent)
   },
-  get isInNativeApp() {
-    return $$f6();
+  /**
+   * Checks if running in native app.
+   */
+  get isInNativeApp(): boolean {
+    return isInFigmaMobile()
   },
-  get isIpad() {
-    return $$l26();
+  /**
+   * Checks if the device is iPad.
+   */
+  get isIpad(): boolean {
+    return isIpadDevice()
   },
-  get isIpadNative() {
-    return $$l26() && window.FigmaMobile && window.FigmaMobile.shouldOptimizeForIpadApp;
+  /**
+   * Checks if the device is iPad native app.
+   */
+  get isIpadNative(): boolean {
+    return isIpadDevice() && window.FigmaMobile && window.FigmaMobile.shouldOptimizeForIpadApp
   },
-  get isMeetDevice() {
-    return !!getFeatureFlags().figjam_3p_hardware_device && U1();
+  /**
+   * Checks if the device is a Google Meet hardware device.
+   */
+  get isMeetDevice(): boolean {
+    return !!getFeatureFlags().figjam_3p_hardware_device && isGoogleMeetHardwareIntegration()
   },
-  get isZoomIntegration() {
-    return MP();
+  /**
+   * Checks if the device is a Zoom integration.
+   */
+  get isZoomIntegration(): boolean {
+    return isZoomIntegration()
   },
-  override(e) {
-    for (let t in e) {
-      t in D || (D[t] = this[t]);
-      this[t] = e[t];
+  /**
+   * Override browser info properties.
+   * Original: override
+   */
+  override(overrides: Record<string, any>): void {
+    for (const key in overrides) {
+      if (!(key in originalOverrides)) {
+        originalOverrides[key] = this[key]
+      }
+      this[key] = overrides[key]
     }
   },
-  resetOverrides() {
-    for (let e in D) this[e] = D[e];
-  }
-};
-export const Ay = $$k0;
-export const C8 = $$N1;
-export const EC = $$T2;
-export const FP = $$A3;
-export const Ji = $$w4;
-export const KR = $$O5;
-export const Q1 = $$f6;
-export const Wv = $$x7;
-export const XN = $$o8;
-export const Xb = $$v9;
-export const Yb = $$C10;
-export const Zs = $$p11;
-export const _N = $$m12;
-export const aJ = $$P13;
-export const aR = $$E14;
-export const cX = $$d15;
-export const gR = $$L16;
-export const j5 = $$b17;
-export const j9 = $$c18;
-export const m0 = $$g19;
-export const mt = $$R20;
-export const nW = $$S21;
-export const o4 = $$h22;
-export const rr = $$_23;
-export const uF = $$u24;
-export const uG = $$I25;
-export const wg = $$l26;
+  /**
+   * Reset browser info overrides.
+   * Original: resetOverrides
+   */
+  resetOverrides(): void {
+    for (const key in originalOverrides) {
+      this[key] = originalOverrides[key]
+    }
+  },
+}
+
+// Exported variables and functions (refactored names)
+export const Ay = BrowserInfo
+export const C8 = getIsAndroidOrIphoneNotFigmaMobile
+export const EC = isMobilePlatform
+export const FP = isMobileNotFigmaMobile
+export const Ji = isMirrorOrMobileNoTripleTaps
+export const KR = isFigmaMobileApp
+export const Q1 = isInFigmaMobile
+export const Wv = getIsAnyMobile
+export const XN = isIpadDevice
+export const Xb = isAnyMobile
+export const Yb = isFigmaMobileWithoutTripleTaps
+export const Zs = getIsChromeOS
+export const _N = isFigmaMirrorAndroid
+export const aJ = isNotMobile
+export const aR = isIOSUA
+export const cX = getIsMac
+export const gR = isFigmaMobileIOSApp
+export const j5 = getIsIOS
+export const j9 = getIsLinux
+export const m0 = isAndroidUA
+export const mt = isFigmaMirrorAndroidApp
+export const nW = isAndroidOrIphoneNotFigmaMobile
+export const o4 = getIsMobile
+export const rr = isMobileUA
+export const uF = getIsWindows
+export const uG = isMobilePlatformNotFigmaMobile
+export const wg = isIpadDevice

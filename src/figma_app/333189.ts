@@ -5,7 +5,7 @@ import { getInitialOptions } from "../figma_app/169182";
 import { vd } from "../figma_app/637027";
 import { u as _$$u } from "../905/684425";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { sZ } from "../905/845253";
 import { Ju } from "../905/102752";
 import { K } from "../905/12775";
@@ -25,15 +25,15 @@ let $$y0 = Ju(function () {
   }) : jsx(_$$u, {
     imageSrc: A,
     imageClassName: g,
-    headerText: _$$t("link_expired.header"),
-    secondaryText: _$$t("link_expired.description"),
+    headerText: getI18nString("link_expired.header"),
+    secondaryText: getI18nString("link_expired.description"),
     children: !t && jsx(vd, {
       className: f,
       type: "submit",
       onClick: () => {
         Ay.redirect("/");
       },
-      children: tx("link_expired.go_back_to_figma")
+      children: renderI18nText("link_expired.go_back_to_figma")
     })
   });
 }, $$E1);

@@ -4,10 +4,10 @@ import { uQ6 } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { a as _$$a, v as _$$v } from "../figma_app/163822";
 import { getSingletonSceneGraph } from "../905/700578";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
-import { M4 } from "../905/609396";
-import { $D } from "../905/11";
+import { Timer } from "../905/609396";
+import { reportError } from "../905/11";
 import { ds } from "../figma_app/314264";
 import { Ay as _$$Ay } from "../figma_app/432652";
 import { Ay as _$$Ay2 } from "../figma_app/948389";
@@ -159,7 +159,7 @@ export let $$F4 = async ({
     customNodeSelection,
     ignoreDescendants
   } = i;
-  let M = new M4();
+  let M = new Timer();
   M.start();
   let j = null;
   let U = debugState.getState();
@@ -274,7 +274,7 @@ export let $$F4 = async ({
     } of (W += i.length, n)) id && (q.push({
       taskId: id,
       state: z8.INCOMPLETE
-    }), zl.set(r8(id), {
+    }), atomStoreManager.set(r8(id), {
       guid: id,
       boundingBox: e.absoluteBoundingBox,
       state: "pending",
@@ -289,7 +289,7 @@ export let $$F4 = async ({
   if (0 === Q) throw new $$w2();
   if (W > $$D0) throw new $$T1(W);
   t && t(q);
-  zl.set(uK, {
+  atomStoreManager.set(uK, {
     autoScroll: !0
   });
   ds("ai_rename_layers_started", B, U, {
@@ -401,7 +401,7 @@ export let $$F4 = async ({
     oZ();
     L(Z);
     Y5.triggerAction("commit");
-    $D(_$$e.AI_PRODUCTIVITY, e, {
+    reportError(_$$e.AI_PRODUCTIVITY, e, {
       extra: {
         numItemsTotal: W,
         numItemsNameable: Q,

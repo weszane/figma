@@ -1,3 +1,3 @@
-import { eU } from "../figma_app/27355";
-export let $$n0 = eU(!1);
+import { atom } from "../figma_app/27355";
+export let $$n0 = atom(!1);
 export const R = $$n0;

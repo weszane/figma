@@ -6,12 +6,12 @@ import { vNG } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { eU, fp, zl, md } from "../figma_app/27355";
-import { Rz, az } from "../905/449184";
-import { sn } from "../905/542194";
+import { atom, useAtomValueAndSetter, atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
+import { getFigmaCluster, analyticsEventManager } from "../905/449184";
+import { globalPerfTimer } from "../905/542194";
 import { debugState } from "../905/407919";
 import { getInitialOptions } from "../figma_app/169182";
-import { nl, lZ } from "../figma_app/257275";
+import { isInteractionPathCheck, isInteractionPathCheck } from "../figma_app/897289";
 import { g as _$$g } from "../905/880308";
 import { f as _$$f, v as _$$v } from "../905/257689";
 import { g as _$$g2 } from "../figma_app/411986";
@@ -36,7 +36,7 @@ import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { Z } from "../905/279476";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { D as _$$D2 } from "../905/425476";
 import { a as _$$a } from "../905/38236";
@@ -44,12 +44,12 @@ import { HA, _b, q9, Dw, o7 } from "../figma_app/618665";
 import { J as _$$J } from "../905/916681";
 import { g as _$$g3 } from "../905/252386";
 import { X as _$$X } from "../905/578754";
-let H = eU([]);
+let H = atom([]);
 function z() {
   let {
     errors
   } = function () {
-    let [e, t] = fp(H);
+    let [e, t] = useAtomValueAndSetter(H);
     return {
       errors: e,
       setErrors: t
@@ -72,7 +72,7 @@ function z() {
         variant: "destructive",
         iconPrefix: jsx(Z, {}),
         onClick: () => a(!0),
-        children: tx("sites.lint.errors.materialization_error", {
+        children: renderI18nText("sites.lint.errors.materialization_error", {
           errorCount: errors.length
         })
       })
@@ -82,7 +82,7 @@ function z() {
       children: jsxs(vo, {
         children: [jsx(Y9, {
           children: jsx(hE, {
-            children: tx("sites.lint.errors.materialization_error", {
+            children: renderI18nText("sites.lint.errors.materialization_error", {
               errorCount: errors.length
             })
           })
@@ -121,14 +121,14 @@ Node: ${e.nodeId}
 Error: ${e.message}`).join("\n")}`;
                 navigator.clipboard.writeText(n).then(() => {
                   t(_$$F.enqueue({
-                    message: _$$t("sites.lint.errors.copied_visual_bell")
+                    message: getI18nString("sites.lint.errors.copied_visual_bell")
                   }));
                 });
               },
-              children: tx("sites.lint.errors.copy_to_clipboard")
+              children: renderI18nText("sites.lint.errors.copy_to_clipboard")
             }), jsx($n, {
               onClick: () => a(!1),
-              children: tx("common.close")
+              children: renderI18nText("common.close")
             })]
           })
         })]
@@ -140,7 +140,7 @@ let J = new EventTarget();
 export function $$Z4() {
   J.dispatchEvent(new CustomEvent("showLayoutDebugStyles"));
 }
-export let $$Q3 = Wh(() => eU(function () {
+export let $$Q3 = Wh(() => atom(function () {
   if (document.baseURI.startsWith("http://localhost:9000/")) return "http://localhost:8045/preview_page_v1.html";
   let e = `${_$$g()}-figmaiframepreview`;
   return `https://${e}.${nC()}/preview_page.html`;
@@ -213,9 +213,9 @@ export class $$ee0 {
               org_id: t.org_id,
               local_dev_on_cluster: t.local_dev_on_cluster,
               sites_preview_sentry_dsn: t.sites_preview_sentry_dsn || t.frontend_sentry_dsn,
-              file_key: zl.get(ze),
+              file_key: atomStoreManager.get(ze),
               render_options: JSON.stringify(e),
-              reporting_domain: Rz(),
+              reporting_domain: getFigmaCluster(),
               analyticsHeaders: r,
               feature_name: n
             };
@@ -262,7 +262,7 @@ export function $$er1({
   testFlags: y
 }) {
   let b = getFeatureFlags().sts_runtime_debug_tools ?? !1;
-  let I = md($$Q3);
+  let I = useAtomWithSubscription($$Q3);
   let S = Td();
   let v = Oc();
   let [A, x] = useState(() => ++et);
@@ -275,7 +275,7 @@ export function $$er1({
     independentRootNode: h,
     withBaseStyles: !v,
     useGuidUrls: m,
-    generateFullAssets: nl(),
+    generateFullAssets: isInteractionPathCheck(),
     neverCombineSVGAndPNG: f,
     onlyFlattenSVGIfVectorLike: E,
     labs: {
@@ -301,7 +301,7 @@ export function $$er1({
       t && n.oncePageRendered().then(() => {
         t();
       });
-      zl.set(HA, n);
+      atomStoreManager.set(HA, n);
     }
   }, [N, r, t, e, o, w, S]);
   !function ({
@@ -321,7 +321,7 @@ export function $$er1({
     isVisible: !!e,
     onShow: O,
     onHide: useCallback(() => {
-      zl.set(HA, null);
+      atomStoreManager.set(HA, null);
       N.resetSitesPreview();
       x(() => ++et);
     }, [N])
@@ -373,7 +373,7 @@ export class $$en2 {
     i.style.left = "0px";
     i.style.width = `${t.x}px`;
     i.style.height = `${t.y}px`;
-    i.src = zl.get($$Q3);
+    i.src = atomStoreManager.get($$Q3);
     document.body.appendChild(i);
     n.mountIframe(i);
     this.ready = new Promise(async e => {
@@ -425,7 +425,7 @@ class ei {
     this.onInspectElementEvent = l ?? null;
     this.imageAssetsHolder = o;
     this._iframe = c;
-    this.directManipulationEditor = new _$$w(Zr, e => zl.set(JL, e));
+    this.directManipulationEditor = new _$$w(Zr, e => atomStoreManager.set(JL, e));
     this.fileKey = p;
     this.eventTarget = new EventTarget();
     this.pageRenderedPromise = null;
@@ -498,26 +498,26 @@ class ei {
         this.onCloseRequested?.();
       },
       nodeDebugInformation: e => {
-        let t = zl.get(_$$f2);
-        t && (t.nodeByGuidMap[e.materializedNode.id] = e.materializedNode, zl.set(_$$f2, {
+        let t = atomStoreManager.get(_$$f2);
+        t && (t.nodeByGuidMap[e.materializedNode.id] = e.materializedNode, atomStoreManager.set(_$$f2, {
           currentRoot: t.currentRoot,
           nodeByGuidMap: t.nodeByGuidMap
         }));
       },
       runtimeExpansionError: e => {
         e.missingKeys.forEach(t => {
-          az.trackDefinedEvent("sites.runtime_expansion_error", {
+          analyticsEventManager.trackDefinedEvent("sites.runtime_expansion_error", {
             error: "missingKey",
             field: t
           });
           e.extraKeys.forEach(e => {
-            az.trackDefinedEvent("sites.runtime_expansion_error", {
+            analyticsEventManager.trackDefinedEvent("sites.runtime_expansion_error", {
               error: "extraKey",
               field: e
             });
           });
           e.differentKeys.forEach(e => {
-            az.trackDefinedEvent("sites.runtime_expansion_error", {
+            analyticsEventManager.trackDefinedEvent("sites.runtime_expansion_error", {
               error: "differingKey",
               field: e.key
             });
@@ -528,7 +528,7 @@ class ei {
         this.perfTracker.record(e.eventName);
       },
       timerEvent: e => {
-        "timer_start" === e.eventName ? sn.start(`sites.runtime.${e.timerName}`) : "timer_stop" === e.eventName && sn.stop(`sites.runtime.${e.timerName}`);
+        "timer_start" === e.eventName ? globalPerfTimer.start(`sites.runtime.${e.timerName}`) : "timer_stop" === e.eventName && globalPerfTimer.stop(`sites.runtime.${e.timerName}`);
       },
       testingMaterializedNodeProps: e => {
         this.eventTarget.dispatchEvent(new CustomEvent("testingMaterializedNodeProps", {
@@ -553,7 +553,7 @@ class ei {
         this.onConsoleLog?.(e.type, e.message);
       },
       handleReactError: e => {
-        if (nl()) {
+        if (isInteractionPathCheck()) {
           console.error("Caught error from sites preview", e.error.name, e.error.message);
           return e;
         }
@@ -566,13 +566,13 @@ class ei {
         });
       },
       focusEvent: async e => {
-        let t = zl.get(_b);
+        let t = atomStoreManager.get(_b);
         if (!t || "modal" !== t.mode) return;
         let {
           type
         } = e;
         await new Promise(e => requestAnimationFrame(e));
-        "focus" === type ? zl.set(q9, Dw.Iframe) : "blur" === type && zl.set(q9, Dw.None);
+        "focus" === type ? atomStoreManager.set(q9, Dw.Iframe) : "blur" === type && atomStoreManager.set(q9, Dw.None);
       },
       resize: e => {
         this.eventTarget.dispatchEvent(new CustomEvent("resize", {
@@ -580,7 +580,7 @@ class ei {
         }));
       },
       updateMaterializationErrors: e => {
-        zl.set(H, e.errors);
+        atomStoreManager.set(H, e.errors);
       },
       inspectElementEvent: e => {
         this.onInspectElementEvent && this.onInspectElementEvent(e);
@@ -762,7 +762,7 @@ class ei {
     }));
   }
   async unsafeEval(e, ...t) {
-    if (!lZ()) throw Error("unsafeEval is only available in interaction tests");
+    if (!isInteractionPathCheck()) throw Error("unsafeEval is only available in interaction tests");
     "function" == typeof e && (e = `(${e.toString()}).apply(this, ${JSON.stringify(t)})`);
     try {
       return (await this.sendMessage("unsafeEval", {
@@ -864,7 +864,7 @@ class ei {
       height: h
     }).$$finally(() => {
       o7(this);
-      nl() && window.dispatchEvent(new CustomEvent(U5));
+      isInteractionPathCheck() && window.dispatchEvent(new CustomEvent(U5));
     });
   }
   analyzeCodeFile({

@@ -3,7 +3,7 @@ import { memo, useState, useMemo, useRef, useEffect, useReducer, useCallback } f
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { nB, wi, jk, vo, Y9, hE } from "../figma_app/272243";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { M4, IT } from "../905/713695";
 import { m as _$$m } from "../905/325034";
 import { Ju } from "../905/102752";
@@ -51,7 +51,7 @@ let D = memo(function (e) {
               children: jsx("img", {
                 className: _$$s.flex.$,
                 src: buildUploadUrl("bf11a5c5f29b282039d94f59b56517aa288aa536"),
-                alt: _$$t("feature_flag_overrides.statsig_logo"),
+                alt: getI18nString("feature_flag_overrides.statsig_logo"),
                 width: "16",
                 height: "16"
               })
@@ -61,12 +61,12 @@ let D = memo(function (e) {
                 navigator.clipboard.writeText(e.flagName);
                 t(_$$F2.enqueue({
                   type: "feature-flag-copy-to-clipboard",
-                  message: _$$t("feature_flag_overrides.copied_to_clipboard", {
+                  message: getI18nString("feature_flag_overrides.copied_to_clipboard", {
                     flagName: e.flagName
                   })
                 }));
               },
-              "data-tooltip": _$$t("feature_flag_overrides.copy_to_clipboard"),
+              "data-tooltip": getI18nString("feature_flag_overrides.copy_to_clipboard"),
               "data-tooltip-type": Ib.TEXT
             }), !e.status && a && e.enabled !== i && jsx(Z, {
               className: _$$s.cursorPointer.$,
@@ -77,14 +77,14 @@ let D = memo(function (e) {
         }), e.status ? jsxs("div", {
           className: _$$s.flex.gap8.itemsCenter.$,
           children: ["pending" === e.status && jsx(_$$x, {
-            "aria-label": _$$t("feature_flag_overrides.pending_change")
+            "aria-label": getI18nString("feature_flag_overrides.pending_change")
           }), "loading" === e.status && jsx("div", {
             "data-testid": `${e.flagName}-loading-spinner`,
             children: jsx(_$$k2, {})
           }), "success" === e.status && jsx(_$$g, {
-            "aria-label": _$$t("feature_flag_overrides.success")
+            "aria-label": getI18nString("feature_flag_overrides.success")
           }), "error" === e.status && jsx(Z, {
-            "aria-label": _$$t("feature_flag_overrides.error")
+            "aria-label": getI18nString("feature_flag_overrides.error")
           })]
         }) : null]
       }),
@@ -129,10 +129,10 @@ function F(e) {
   let N = jsxs(Fragment, {
     children: [jsxs("div", {
       className: _$$s.sticky.top0.zIndex1.colorBg.pt8.$,
-      children: [tx("feature_flag_overrides.description"), jsxs("div", {
+      children: [renderI18nText("feature_flag_overrides.description"), jsxs("div", {
         className: _$$s.flex.gap8.pt8.$,
         children: [jsx(ks, {
-          placeholder: _$$t("feature_flag_overrides.search_feature_flags"),
+          placeholder: getI18nString("feature_flag_overrides.search_feature_flags"),
           value: i,
           onChange: e => a(e.target.value),
           className: _$$s.wFull.$,
@@ -143,13 +143,13 @@ function F(e) {
           variant: "highlighted",
           checked: d,
           onChange: c,
-          "aria-label": _$$t("feature_flag_overrides.regex_mode")
+          "aria-label": getI18nString("feature_flag_overrides.regex_mode")
         })]
       })]
     }), isLoading && jsx("span", {
-      children: tx("feature_flag_overrides.loading")
+      children: renderI18nText("feature_flag_overrides.loading")
     }), !isLoading && C && jsx("span", {
-      children: tx("feature_flag_overrides.loaded_feature_flags", {
+      children: renderI18nText("feature_flag_overrides.loaded_feature_flags", {
         count: Object.keys(currentFlagValues).length
       })
     }), !isLoading && !C && jsx("div", {
@@ -196,11 +196,11 @@ function F(e) {
           variant: "secondary",
           iconPrefix: jsx($, {}),
           href: `https://go/statsig-override/${encodeURIComponent(getInitialOptions().user_data?.email || "")}`,
-          children: tx("feature_flag_overrides.view_current_overrides")
+          children: renderI18nText("feature_flag_overrides.view_current_overrides")
         }), jsx($n, {
           disabled: 0 === Object.keys(pendingChanges).length,
           onClick: e.onReviewChanges,
-          children: tx("feature_flag_overrides.review_changes")
+          children: renderI18nText("feature_flag_overrides.review_changes")
         })]
       })
     })]
@@ -267,7 +267,7 @@ function V(e) {
     children: [jsx(nB, {
       children: jsxs("div", {
         className: _$$s.flex.flexColumn.gap8.$,
-        children: [m ? tx("feature_flag_overrides.waiting_for_changes_to_propagate") : tx("feature_flag_overrides.review_changes_description"), i.map(i => jsx(D, {
+        children: [m ? renderI18nText("feature_flag_overrides.waiting_for_changes_to_propagate") : renderI18nText("feature_flag_overrides.review_changes_description"), i.map(i => jsx(D, {
           flagName: i,
           flagDescription: e.flagDescriptions[i],
           enabled: pendingChanges[i],
@@ -280,7 +280,7 @@ function V(e) {
         children: [jsx($n, {
           variant: "secondary",
           onClick: e.onBack,
-          children: tx("feature_flag_overrides.back")
+          children: renderI18nText("feature_flag_overrides.back")
         }), jsx($n, {
           disabled: a || m,
           onClick: () => {
@@ -293,9 +293,9 @@ function V(e) {
               p(e.data.meta);
             });
           },
-          children: m ? tx("feature_flag_overrides.reloading_in_seconds", {
+          children: m ? renderI18nText("feature_flag_overrides.reloading_in_seconds", {
             seconds: h
-          }) : tx("feature_flag_overrides.confirm_changes")
+          }) : renderI18nText("feature_flag_overrides.confirm_changes")
         })]
       })
     })]
@@ -339,7 +339,7 @@ let $$W0 = Ju(function (e) {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: tx("feature_flag_overrides.view_and_change_feature_flags")
+          children: renderI18nText("feature_flag_overrides.view_and_change_feature_flags")
         })
       }), 0 === g ? jsx(F, {
         isLoading: "loading" === i.status || "loading" === p.status,

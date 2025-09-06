@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { Yx } from "../figma_app/930338";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { H8 } from "../905/590952";
 import { C, e as _$$e } from "../905/937623";
 import { MP, i8 } from "../905/149906";
@@ -14,9 +14,9 @@ export function $$c0(e) {
   }, [e.replyContainerRef]);
   let i = jsx(C, {
     allowAttachments: e.allowAttachments,
-    ariaLabel: e.authorNames ? _$$t("fullscreen.accessibility.reply_to_comment_with_authors", {
+    ariaLabel: e.authorNames ? getI18nString("fullscreen.accessibility.reply_to_comment_with_authors", {
       username: Yx(e.authorNames)
-    }) : _$$t("fullscreen.accessibility.reply_to_comment"),
+    }) : getI18nString("fullscreen.accessibility.reply_to_comment"),
     attachments: e.attachments,
     authorChanged: e.authorChanged,
     className: e.className,

@@ -1,7 +1,7 @@
-import { eU, Iz, mg } from "../figma_app/27355";
+import { atom, createRemovableAtomFamily, mg } from "../figma_app/27355";
 import { jm, qe } from "../figma_app/416935";
 import { HB } from "../3973/538504";
-import { bt } from "../905/270322";
+import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { Tej, UpR } from "../figma_app/43951";
 import { w5 } from "../figma_app/345997";
 import { bW } from "../905/587414";
@@ -27,7 +27,7 @@ let $$f15 = Z1(Tej.Query({}), e => null != e.currentUser.studentValidatedAt);
 let $$E6 = Z1(UpR.Query({}), e => e.currentUser.eduPeriodEnd);
 let $$y8 = Z1(Tej.Query({}), e => e.currentUser.teamRoles);
 let $$b7 = Z1($$y8, e => e?.map(e => e.team).filter(e => null != e));
-let T = bt(e => e.isFreeUser);
+let T = createReduxSubscriptionAtomWithState(e => e.isFreeUser);
 let I = J9([rg, $$b7], ([e, t]) => (!e?.length || !(e.length > 0)) && (null == t || !t.some(e => e.canEdit && w5({
   subscription: e.subscription,
   student_team: !!e.studentTeamAt,
@@ -46,12 +46,12 @@ Z1($$N4, e => {
   return "designer" !== t && "other" !== t && "unknown" !== t;
 });
 Z1(Tej.Query({}), e => e.currentUser.profile?.usagePurpose);
-let C = bt(e => e.authedProfilesById);
-eU(e => Object.values(e(C)).some(e => !!e.org_id || !!e.team_id));
+let C = createReduxSubscriptionAtomWithState(e => e.authedProfilesById);
+atom(e => Object.values(e(C)).some(e => !!e.org_id || !!e.team_id));
 Z1(Tej.Query({}), e => e.currentUser.email);
 let $$w10 = Z1(Tej.Query({}), e => e.currentUser.emailValidatedAt);
-let O = bt(e => e.userAnalyticsData);
-let $$R14 = Iz(e => mg(O, t => {
+let O = createReduxSubscriptionAtomWithState(e => e.userAnalyticsData);
+let $$R14 = createRemovableAtomFamily(e => mg(O, t => {
   if (null == t) return;
   let r = t[e];
   return bW.includes(e) && r ? new Date(r) : r;

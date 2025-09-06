@@ -3,8 +3,8 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { getSingletonSceneGraph } from "../905/700578";
 import { AW, sN } from "../figma_app/191804";
 import { hC } from "../figma_app/901889";
-import { $D } from "../905/11";
-import { Lg } from "../figma_app/257275";
+import { reportError } from "../905/11";
+import { getFalseValue } from "../figma_app/897289";
 import { sb, bn } from "../figma_app/385874";
 import { Fk } from "../figma_app/167249";
 import { X7 } from "../905/713167";
@@ -117,10 +117,10 @@ export function $$A0(e, t, i, r) {
     let a = Fk((e, t) => t.map(t => e.get(t)?.absoluteBoundingBox), e);
     let s = Fk(e => e.getCurrentPage()?.guid);
     let l = hC();
-    let c = !Lg() && e.length > 1;
+    let c = !getFalseValue() && e.length > 1;
     let p = useMemo(() => {
       if (!c) {
-        if (!s || !t || a.length > 1 && !Lg()) return [];
+        if (!s || !t || a.length > 1 && !getFalseValue()) return [];
         let i = performance.now();
         let n = a.map((t, i) => $$_4(s, t, e[i]));
         l("color_contrast.background_calculation_performance", {
@@ -246,7 +246,7 @@ export function $$y1(e) {
           y: n,
           w: o,
           h: d
-        } : $D(_$$e.EDITOR_USABILITY, Error("Background nodes do not overlap"));
+        } : reportError(_$$e.EDITOR_USABILITY, Error("Background nodes do not overlap"));
       } else t = e.absoluteBoundingBox;
     }
     if (!i?.isTransparent && !i?.isTranslucent) break;

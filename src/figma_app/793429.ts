@@ -1,7 +1,7 @@
 import { useMemo, useCallback } from "react";
 import { useSelector } from "../vendor/514228";
-import { md } from "../figma_app/27355";
-import { R } from "../905/103090";
+import { useAtomWithSubscription } from "../figma_app/27355";
+import { selectWithShallowEqual } from "../905/103090";
 import { gq } from "../905/125333";
 import { y as _$$y } from "../figma_app/404310";
 import { v4 } from "../figma_app/655139";
@@ -29,7 +29,7 @@ export function $$I1() {
     selectionStyles,
     library,
     sceneGraph
-  } = R(e => ({
+  } = selectWithShallowEqual(e => ({
     selectionColors: e.mirror.selectionPaints.paints,
     selectionStyles: e.mirror.selectionPaints.styles,
     library: e.library,
@@ -86,7 +86,7 @@ let S = (e, t) => e.name.localeCompare(t.name);
 export function $$v2(e) {
   let {
     styles
-  } = md(gq);
+  } = useAtomWithSubscription(gq);
   let r = useSelector(e => e.library);
   let n = styles.map(e => {
     let t = Gp(e.key, e.guids, r);

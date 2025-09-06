@@ -2,12 +2,12 @@ import { useCallback } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { l as _$$l } from "../905/716947";
-import { eU, Xr, zl } from "../figma_app/27355";
+import { atom, Xr, atomStoreManager } from "../figma_app/27355";
 import { resourceUtils } from "../905/989992";
 import { A as _$$A } from "../vendor/90566";
-import { sx, az } from "../905/449184";
+import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { debugState } from "../905/407919";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { hW } from "../figma_app/594947";
 import { g as _$$g } from "../905/880308";
 import { Point } from "../905/736624";
@@ -26,7 +26,7 @@ import { UR, cu, Al } from "../figma_app/707943";
 import { KK } from "../905/276025";
 import { h as _$$h } from "../figma_app/198885";
 import { vx, t_ } from "../905/91038";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { $W } from "../905/144933";
 import { r6 } from "../figma_app/517115";
 import { cY, I1 } from "../figma_app/825489";
@@ -36,10 +36,10 @@ import { Ci } from "../figma_app/318590";
 import { dd } from "../figma_app/604494";
 import { s as _$$s } from "../905/234042";
 import { Jh } from "../figma_app/552876";
-let $$V3 = eU({
+let $$V3 = atom({
   currentSearch: null
 });
-let $$G0 = eU({
+let $$G0 = atom({
   type: _$$I.ALL
 });
 export function $$z2({
@@ -75,13 +75,13 @@ export async function $$H1(e, t) {
   let d = vx(i);
   let g = B0();
   let f = await Ci("input-text" === e.type);
-  let C = zl.get(cY("fileKey"));
-  let P = zl.get(cY("libraryKey"));
+  let C = atomStoreManager.get(cY("fileKey"));
+  let P = atomStoreManager.get(cY("libraryKey"));
   let L = Jh(i.selectedView) ? "figmake" : "input-text" === e.type ? "actions_assets_tab" : "actions_visual_search";
   if (!n || null == d) return;
   let U = _$$g();
-  let G = zl.get(dd);
-  zl.set($$V3, () => ({
+  let G = atomStoreManager.get(dd);
+  atomStoreManager.set($$V3, () => ({
     currentSearch: {
       queryId: U,
       input: e,
@@ -101,12 +101,12 @@ export async function $$H1(e, t) {
       ...e,
       openFile: tB(i),
       selectedView: _$$h(i),
-      inDesignEditor: XE(_$$h(i)) === nT.Design,
+      inDesignEditor: XE(_$$h(i)) === FEditorType.Design,
       fileVersion: d,
       currentOrgId: eD(i),
       fileByKey: t_(i),
-      libraryByLibraryKey: zl.get(qp),
-      includeVisualAssets: zl.get(lj).length > 0,
+      libraryByLibraryKey: atomStoreManager.get(qp),
+      includeVisualAssets: atomStoreManager.get(lj).length > 0,
       usedAssetKeys: ET(i, debugState.dispatch)
     };
     let M = {
@@ -156,8 +156,8 @@ export async function $$H1(e, t) {
       default:
         throwTypeError(h);
     }
-    if (zl.get($$V3).currentSearch?.queryId !== U) return;
-    null === G && sx("asset_search.missing_session_id", {
+    if (atomStoreManager.get($$V3).currentSearch?.queryId !== U) return;
+    null === G && trackEventAnalytics("asset_search.missing_session_id", {
       previousSessionId: i.search.lastLoadedQuery.sessionId,
       entryPoint: g_[Cn.QuickActions]
     }, {
@@ -177,24 +177,24 @@ export async function $$H1(e, t) {
         subscribedSearchResultCount: a.length,
         entryPoint: L,
         fileKey: n?.key,
-        numSubscribedLibraries: zl.get(I1).data?.length ?? 0,
+        numSubscribedLibraries: atomStoreManager.get(I1).data?.length ?? 0,
         queryType: h.type.replace("input-", ""),
         selectedViewFileKey: "fullscreen" === i.selectedView.view && i.selectedView.fileKey ? i.selectedView.fileKey : void 0,
         totalShownResults: a.length,
-        tier: zl.get(KK(!0)).data?.tier
+        tier: atomStoreManager.get(KK(!0)).data?.tier
       };
       await hW("exp_asset_search_refactor");
-      az.trackDefinedEvent("assets_panel.search_time", {
+      analyticsEventManager.trackDefinedEvent("assets_panel.search_time", {
         ...e,
         searchSessionId: G ?? ""
       });
-      az.trackDefinedEvent("asset_search.query_result", {
+      analyticsEventManager.trackDefinedEvent("asset_search.query_result", {
         ...e,
         sessionId: G ?? "",
         componentSuggestionSessionId: r6()
       });
     }
-    zl.set($$V3, () => ({
+    atomStoreManager.set($$V3, () => ({
       currentSearch: {
         queryId: U,
         input: e,
@@ -203,8 +203,8 @@ export async function $$H1(e, t) {
     }));
     t && t();
   } catch (t) {
-    if ($D(_$$e.SEARCH_AI, t), zl.get($$V3).currentSearch?.queryId !== U) return;
-    zl.set($$V3, () => ({
+    if (reportError(_$$e.SEARCH_AI, t), atomStoreManager.get($$V3).currentSearch?.queryId !== U) return;
+    atomStoreManager.set($$V3, () => ({
       currentSearch: {
         queryId: U,
         input: e,
@@ -215,7 +215,7 @@ export async function $$H1(e, t) {
 }
 function W(e, t, i) {
   let n;
-  e.assetTypeOption.type === _$$I.FILE ? n = [e.assetTypeOption.libraryKey] : i && (YG.subscribedLibraryKeys.size < UR ? n = Array.from(YG.subscribedLibraryKeys) : sx("actions_visual_search.maximum_subscribed_libraries_reached", {
+  e.assetTypeOption.type === _$$I.FILE ? n = [e.assetTypeOption.libraryKey] : i && (YG.subscribedLibraryKeys.size < UR ? n = Array.from(YG.subscribedLibraryKeys) : trackEventAnalytics("actions_visual_search.maximum_subscribed_libraries_reached", {
     searchSessionId: t,
     fileKey: e.openFile?.key,
     fileVersion: e.fileVersion,
@@ -267,7 +267,7 @@ async function Y(e, t, i) {
 export function $$q4(e) {
   let {
     currentSearch
-  } = zl.get($$V3);
+  } = atomStoreManager.get($$V3);
   return null === currentSearch || "input-text" !== currentSearch.input.type ? e.length > 0 : currentSearch.input.query !== e;
 }
 export const B1 = $$G0;

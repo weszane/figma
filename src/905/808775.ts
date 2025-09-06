@@ -1,26 +1,26 @@
 import { useMemo } from "react";
 import { useSelector } from "../vendor/514228";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { $A } from "../905/862883";
 export function $$$$o1() {
   let e = useSelector(e => e.selectedView.editorType);
-  useSelector(e => "orgAdminSettings" === e.selectedView.view) && (e = nT.DevHandoff);
+  useSelector(e => "orgAdminSettings" === e.selectedView.view) && (e = FEditorType.DevHandoff);
   return useMemo(() => $$l0(e), [e]);
 }
 export function $$l0(e) {
   switch (e) {
-    case nT.Design:
-    case nT.Sites:
-    case nT.Figmake:
-    case nT.Illustration:
+    case FEditorType.Design:
+    case FEditorType.Sites:
+    case FEditorType.Figmake:
+    case FEditorType.Illustration:
       return $A.Design;
-    case nT.Cooper:
+    case FEditorType.Cooper:
       return $A.Cooper;
-    case nT.Slides:
+    case FEditorType.Slides:
       return $A.Slides;
-    case nT.DevHandoff:
+    case FEditorType.DevHandoff:
       return $A.Handoff;
-    case nT.Whiteboard:
+    case FEditorType.Whiteboard:
       return $A.FigJam;
   }
 }

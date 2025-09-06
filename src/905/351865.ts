@@ -2,7 +2,7 @@ import { htN, ZEs, Ez5 } from "../figma_app/763686";
 import { r as _$$r } from "../905/249071";
 import { M } from "../905/512402";
 import { getSingletonSceneGraph } from "../905/700578";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { C } from "../905/217042";
 import { j } from "../905/881708";
 export class $$c0 extends j {
@@ -10,7 +10,7 @@ export class $$c0 extends j {
     super(e);
   }
   render(e, t) {
-    if (!zl.get(C)) return;
+    if (!atomStoreManager.get(C)) return;
     let i = htN?.getSelectedNodesToConvertIntoRepeatersGUIDs(ZEs.HAS_IDENTICAL_CHILDREN) ?? [];
     let d = new Set(getSingletonSceneGraph().getDirectlySelectedNodes().map(e => e.id));
     for (let o = 0; o < i.length; o++) for (let l of i[o] ?? []) if (!d.has(l)) {

@@ -3,10 +3,10 @@ import { memo, useMemo, createRef, useEffect, useState, useRef } from "react";
 import { A as _$$A } from "../vendor/648136";
 import { _m } from "../vendor/891888";
 import { mergeSorted } from "../figma_app/656233";
-import { md, fp } from "../figma_app/27355";
+import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { zN } from "../905/19536";
 import c from "../vendor/73823";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { parsePxNumber } from "../figma_app/783094";
 import { ZC } from "../figma_app/39751";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -219,7 +219,7 @@ function H({
 function W({
   value: e
 }) {
-  let t = md(Cc);
+  let t = useAtomWithSubscription(Cc);
   let i = bU(e, t.sensitiveTextPolicy);
   return jsxs("span", {
     className: B.$,
@@ -414,8 +414,8 @@ let $$eu0 = memo(function ({
   diffItems: i,
   extraItems: d
 }) {
-  let [c, u] = fp("middle" === e ? l3 : _Y);
-  let [p, m] = fp("middle" === e ? A9 : fQ);
+  let [c, u] = useAtomValueAndSetter("middle" === e ? l3 : _Y);
+  let [p, m] = useAtomValueAndSetter("middle" === e ? A9 : fQ);
   let h = useMemo(() => {
     let e = [];
     for (let t of d ?? []) e = e.concat(ey(t, 0, void 0, c, p));
@@ -538,14 +538,14 @@ let eh = memo(function ({
       alignItems: "flex-start"
     } : u,
     toggleExpanded: i => {
-      r || az.trackDefinedEvent("figmascope.expand_row", {
+      r || analyticsEventManager.trackDefinedEvent("figmascope.expand_row", {
         field: d,
         panel: A
       });
       y(t, i ? e : []);
     },
     togglePinned: l ? void 0 : () => {
-      s || az.trackDefinedEvent("figmascope.pin_row", {
+      s || analyticsEventManager.trackDefinedEvent("figmascope.pin_row", {
         field: d,
         panel: A
       });

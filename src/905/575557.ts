@@ -7,7 +7,7 @@ import { e as _$$e } from "../905/478588";
 import { glU, rXF } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { dI } from "../905/871411";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Oe } from "../figma_app/933328";
 import { h7 } from "../figma_app/975811";
 import { Y5 } from "../figma_app/455680";
@@ -101,7 +101,7 @@ export function $$N0({
     children: jsx(Jl, {
       bigNudgeAmount,
       className: A ? hf : void 0,
-      "data-tooltip": _$$P(_$$t("fullscreen.type_panel.line_height")),
+      "data-tooltip": _$$P(getI18nString("fullscreen.type_panel.line_height")),
       "data-tooltip-type": Ib.TEXT,
       disabled: i,
       dispatch: N,
@@ -111,7 +111,7 @@ export function $$N0({
       min: 0,
       noBorderOnHover: !A,
       onValueChange: U,
-      placeholder: M ? null == F ? _$$t("fullscreen.mixed") : parseFloat(F.toFixed(1)).toString() : void 0,
+      placeholder: M ? null == F ? getI18nString("fullscreen.mixed") : parseFloat(F.toFixed(1)).toString() : void 0,
       recordingKey: h,
       scrubMultiplier: gl(e) || e?.units === "PIXELS" ? 1 : .01,
       shouldClearOnFocus: M,

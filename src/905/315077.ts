@@ -1,12 +1,12 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { Ay } from "../905/612521";
 import { Rs } from "../figma_app/288654";
 import { h1 } from "../905/986103";
 import { $E, w4 } from "../905/445814";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { G } from "../905/720066";
 import { Q } from "../905/61477";
 import { EN, AR, K4 } from "../905/182534";
@@ -28,7 +28,7 @@ export function $$v0({
   let b = useSelector(e => e.currentTeamId);
   let v = useSelector(e => e.user);
   let E = useSelector(e => e.search.sessionId);
-  let x = md(Q);
+  let x = useAtomWithSubscription(Q);
   let S = $E();
   let w = _6();
   let C = EN(e);
@@ -84,7 +84,7 @@ function I({
     enabled: !!e.folder_id
   });
   let i = data?.project?.path || "";
-  let r = e.touched_at ? tx("search.preview_item.edited_from_now", {
+  let r = e.touched_at ? renderI18nText("search.preview_item.edited_from_now", {
     relativeTimeString: jsx(h1, {
       date: e.touched_at,
       style: "narrow"

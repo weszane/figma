@@ -1,6 +1,6 @@
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
-import { sx } from "../905/449184";
+import { atomStoreManager } from "../figma_app/27355";
+import { trackEventAnalytics } from "../905/449184";
 import { xf } from "../figma_app/416935";
 import { t as _$$t } from "../905/897919";
 import { Ay } from "../905/612521";
@@ -16,7 +16,7 @@ import { qB, By, RE } from "../905/862321";
 import { g as _$$g } from "../905/248178";
 import { p as _$$p } from "../905/300815";
 import { s as _$$s } from "../905/573154";
-import { t as _$$t2 } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
 import { nF } from "../905/350402";
 import { e0 } from "../905/696396";
@@ -54,7 +54,7 @@ let $$k5 = nF((e, {
     if ("two_factor" === a.reason.missing) {
       let t;
       e.dispatch(IY(a.reason.sms));
-      a.reason.phone_number && (t = _$$t2("auth.two-factor.sms-hint", {
+      a.reason.phone_number && (t = getI18nString("auth.two-factor.sms-hint", {
         phoneNumber: a.reason.phone_number
       }), e.dispatch(kQ({
         hint: t
@@ -66,7 +66,7 @@ let $$k5 = nF((e, {
       return;
     }
   }
-  let s = J(t, a?.message || _$$t2("auth.default-error"));
+  let s = J(t, a?.message || getI18nString("auth.default-error"));
   if (a?.reason === "account_unverified") {
     e.dispatch(_$$E({
       formState: qB.VALIDATE_EMAIL
@@ -94,7 +94,7 @@ let $$R1 = nF((e, {
   let i = e.getState();
   if (_$$p("sign_in_user_pass"), _$$g("sign_in_success", i.auth.origin, {
     user_id: t?.meta?.id
-  }), getInitialOptions().integration_host && sx("Integration Login Success", {
+  }), getInitialOptions().integration_host && trackEventAnalytics("Integration Login Success", {
     user_id: t?.meta?.id,
     integrationHost: getInitialOptions().integration_host,
     trackedContext: e0.MS_TEAMS_TAB
@@ -110,7 +110,7 @@ let $$R1 = nF((e, {
     e.dispatch(My({
       userId: t.meta.id
     }));
-    e.dispatch(_$$s.flash(_$$t2("auth.sign-in-success", {
+    e.dispatch(_$$s.flash(getI18nString("auth.sign-in-success", {
       email: t.meta.email
     })));
     new _$$P().sendToOtherTabs(Rg, t.meta.email);
@@ -141,10 +141,10 @@ let F = e => e ? xf(e) ? {
   message: "",
   invalidInput: null
 } : {
-  message: _$$t2("auth.input-validation.invalid-email"),
+  message: getI18nString("auth.input-validation.invalid-email"),
   invalidInput: RE.EMAIL
 } : {
-  message: _$$t2("auth.input-validation.no-email"),
+  message: getI18nString("auth.input-validation.no-email"),
   invalidInput: RE.EMAIL
 };
 let M = (e, t) => {
@@ -153,17 +153,17 @@ let M = (e, t) => {
     message: "",
     invalidInput: null
   } : {
-    message: _$$t2("auth.input-validation.no-password"),
+    message: getI18nString("auth.input-validation.no-password"),
     invalidInput: RE.PASSWORD
   };
 };
 let $$j4 = (e = "") => !!parseQuery(Ay.location.search).is_not_gen_0 || e && P.includes(e);
 let U = (e, t, i) => {
   let n = "";
-  YH(e).length > 500 && (n = _$$t2("auth.input-validation.long-password"));
-  Array.from(e).length < 8 && (n = _$$t2("auth.input-validation.short-password"));
-  e === t && (n = _$$t2("auth.input-validation.email-is-password"));
-  i && e === i && (n = _$$t2("auth.input-validation.name-is-password"));
+  YH(e).length > 500 && (n = getI18nString("auth.input-validation.long-password"));
+  Array.from(e).length < 8 && (n = getI18nString("auth.input-validation.short-password"));
+  e === t && (n = getI18nString("auth.input-validation.email-is-password"));
+  i && e === i && (n = getI18nString("auth.input-validation.name-is-password"));
   return n ? {
     message: n,
     invalidInput: RE.PASSWORD
@@ -187,7 +187,7 @@ export let $$V6 = nF((e, {
   let i = document.getElementById(t);
   let a = _$$t(i);
   let s = null;
-  let l = zl.get(_G);
+  let l = atomStoreManager.get(_G);
   s = l ? {
     name: l.name,
     token: l.token,
@@ -199,7 +199,7 @@ export let $$V6 = nF((e, {
   }) => {
     _$$g("sms_recover_success", e.getState().auth.origin);
     t && t.meta && e.dispatch(kQ({
-      hint: _$$t2("auth.two-factor.code-hint-confirmation", {
+      hint: getI18nString("auth.two-factor.code-hint-confirmation", {
         phoneNumber: t.meta.phone_number
       })
     }));
@@ -231,4 +231,4 @@ export const q_ = $$V6;
 export const qF = $$N7;
 export const f1 = $$L8;
 export const PG = $$O9;
-export const Ng = $$D10; 
+export const Ng = $$D10;

@@ -1,9 +1,9 @@
 import { mapFilter } from "../figma_app/656233";
 import { W2B, uXP } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { sx } from "../905/449184";
-import { Zx } from "../905/11";
-import { Lo, xi } from "../905/714362";
+import { trackEventAnalytics } from "../905/449184";
+import { sentryEventEmitter } from "../905/11";
+import { logInfo, logWarning } from "../905/714362";
 import { O } from "../905/291063";
 import { DB, h5 } from "../905/25189";
 import { U4, Lf, W6 } from "../905/327522";
@@ -42,7 +42,7 @@ export async function $$h0() {
         let n = new Set(r.map(e => e.userID)).size;
         let a = r.reduce((e, t) => Math.min(e, t.startTime), 1 / 0);
         let o = r.reduce((e, t) => Math.max(e, t.endTime), 0);
-        sx("activity log garbage collect", {
+        trackEventAnalytics("activity log garbage collect", {
           numRows: r.length,
           numFiles: i,
           numUsers: n,
@@ -66,7 +66,7 @@ async function g(e) {
 class f {
   constructor(e, t, i) {
     this.queue = new O();
-    this.nextPromiseResolve = () => { };
+    this.nextPromiseResolve = () => {};
     this.nextFlushPromise = new Promise(e => this.nextPromiseResolve = e);
     this.hasLoggedFlushError = !1;
     this.currentLog = {
@@ -80,7 +80,7 @@ class f {
   }
   addCommit(e) {
     this.currentLog.endTime = Date.now();
-    this.currentLog.autosaveChanges && e.commitPolicy === W2B.ADD_CHANGES && e.reason === this.currentLog.autosaveChanges.commitReason ? this.currentLog.autosaveChanges.commit = function(e, t) {
+    this.currentLog.autosaveChanges && e.commitPolicy === W2B.ADD_CHANGES && e.reason === this.currentLog.autosaveChanges.commitReason ? this.currentLog.autosaveChanges.commit = function (e, t) {
       let i = {};
       e.changedNodes.forEach(e => i[e.nodeID] = e);
       e.clearedNodes.forEach(e => i[e] = null);
@@ -126,14 +126,14 @@ class f {
     return this.nextFlushPromise;
   }
   logFlushError(e, t, i) {
-    this.hasLoggedFlushError || (this.hasLoggedFlushError = !0, t && W6(`Activity log flush error: ${e}`, i), sx("activity log flush error", {
+    this.hasLoggedFlushError || (this.hasLoggedFlushError = !0, t && W6(`Activity log flush error: ${e}`, i), trackEventAnalytics("activity log flush error", {
       message: e,
       ...i
     }));
   }
   async flushToDisk() {
     if (!this.currentLog.autosaveChanges && 0 === this.currentLog.logs.length) {
-      Lo("Autosave activity log", "Nothing to write");
+      logInfo("Autosave activity log", "Nothing to write");
       return;
     }
     let e = this.currentLog;
@@ -195,7 +195,7 @@ async function A() {
       }
     }, "readonly");
   } catch (e) {
-    xi("Autosave", "Failed to get activity log data for telemetry", {
+    logWarning("Autosave", "Failed to get activity log data for telemetry", {
       error: e?.message
     });
   }
@@ -206,7 +206,7 @@ async function A() {
     let o = Date.now() - a;
     let l = i.reduce((e, t) => Math.max(e, t.endTime), 0);
     let d = Date.now() - l;
-    sx("activity log usage", {
+    trackEventAnalytics("activity log usage", {
       numRows: i.length,
       numFiles: n,
       numUsers: r,
@@ -225,10 +225,10 @@ export class $$y1 {
       type: "online"
     };
     A();
-    Zx.on("breadcrumb", e => this.recordSentryBreadcrumb(e));
+    sentryEventEmitter.on("breadcrumb", e => this.recordSentryBreadcrumb(e));
   }
   startFlushInterval() {
-    return function(e, t) {
+    return function (e, t) {
       let i = setInterval(() => {
         "done" === e() && clearInterval(i);
       }, t);
@@ -251,7 +251,7 @@ export class $$y1 {
       startTime: Date.now()
     } : {
       type: "online"
-    }; else if (n.reason === uXP.SYNCED) {
+    };else if (n.reason === uXP.SYNCED) {
       let {
         activityTracker,
         cancelFlushTimer,
@@ -280,4 +280,4 @@ export class $$y1 {
   }
 }
 export const L_ = $$h0;
-export const hS = $$y1; 
+export const hS = $$y1;

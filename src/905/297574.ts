@@ -1,6 +1,6 @@
 import { useMemo, useContext } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { qp } from "../905/977779";
 import { aV } from "../905/405710";
 import { M4 } from "../905/713695";
@@ -19,7 +19,7 @@ export function $$A2({
   productComponentStats: e,
   libraryKey: t
 }) {
-  let i = zl.get(qp);
+  let i = atomStoreManager.get(qp);
   let o = t ? i[t] : void 0;
   let l = useMemo(() => $$_1(e?.components ?? [], e?.stateGroups ?? []), [e]);
   let h = function ({

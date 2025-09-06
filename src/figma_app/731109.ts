@@ -6,11 +6,11 @@ import { bL } from "../905/911410";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { l as _$$l } from "../905/479687";
 import { O } from "../3591/240710";
-import { eU, fp } from "../figma_app/27355";
-import { t as _$$t, tx } from "../905/303541";
-import { Gq } from "../figma_app/363242";
-import { P5 } from "../figma_app/195123";
-export let $$m0 = eU(!1);
+import { atom, useAtomValueAndSetter } from "../figma_app/27355";
+import { getI18nString, renderI18nText } from "../905/303541";
+import { getI18nState } from "../figma_app/363242";
+import { decodeZeroWidth } from "../figma_app/195123";
+export let $$m0 = atom(!1);
 function g(e) {
   let [t, r] = useState({});
   function u(e) {
@@ -23,7 +23,7 @@ function g(e) {
           className: "xmjk8bn xuxw1ft xb3r6kr xlyipyv",
           children: e.id
         }), jsx(K, {
-          "aria-label": _$$t("string_inspector.copy_id"),
+          "aria-label": getI18nString("string_inspector.copy_id"),
           onClick: () => {
             navigator.clipboard.writeText(e.id);
             r(!0);
@@ -48,7 +48,7 @@ function g(e) {
       for (; t = i.nextNode();) if (t.textContent) {
         let e = t.textContent.match(r);
         e && e.map(e => {
-          n.push(P5(e));
+          n.push(decodeZeroWidth(e));
         });
       }
       return n;
@@ -56,7 +56,7 @@ function g(e) {
     let t = t => {
       let n = e(t.target).map(e => ({
         id: e,
-        string: Gq()?.getDictionary(languageCodes.EN)?.entries[e]?.string || ""
+        string: getI18nState()?.getDictionary(languageCodes.EN)?.entries[e]?.string || ""
       }));
       if (n.length > 0) {
         let e = {};
@@ -87,13 +87,13 @@ function g(e) {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: tx("string_inspector.string_inspector")
+          children: renderI18nText("string_inspector.string_inspector")
         })
       }), jsx(nB, {
         children: jsxs("div", {
           className: "x78zum5 xdt5ytf xou54vl x1l90r2v",
           children: [jsx("div", {
-            children: tx("string_inspector.click_on_an_element_to_inspect_its_strings")
+            children: renderI18nText("string_inspector.click_on_an_element_to_inspect_its_strings")
           }), Object.entries(t).map(([e, t]) => jsx(u, {
             id: e,
             string: t
@@ -104,7 +104,7 @@ function g(e) {
   });
 }
 export function $$f1() {
-  let [e, t] = fp($$m0);
+  let [e, t] = useAtomValueAndSetter($$m0);
   return e ? jsx(g, {
     onClose: () => t(!1)
   }) : null;

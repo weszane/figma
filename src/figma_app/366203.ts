@@ -11,7 +11,7 @@ import { F_ } from "../figma_app/191804";
 import { g as _$$g } from "../905/880308";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { hS } from "../905/216495";
 import { lJ } from "../905/275640";
 import { Sh } from "../figma_app/889655";
@@ -144,7 +144,7 @@ export function $$W3() {
     onlyShowingColorSwatches: er
   }) : void 0, [S, v, k, er]);
   if (0 === et.length && !S) return null;
-  let ei = _$$t("whiteboard.inline_menu.line_style");
+  let ei = getI18nString("whiteboard.inline_menu.line_style");
   return jsx(Fn, {
     OptionWrapper: S ? function ({
       children: e
@@ -196,15 +196,15 @@ export function $$W3() {
         if (j.strokeStyle && j.strokeWeight) {
           let e = Z(j.strokeStyle);
           let t = $$J2(j.strokeWeight);
-          s = t ? _$$t("whiteboard.inline_menu.line_style_label_both", {
+          s = t ? getI18nString("whiteboard.inline_menu.line_style_label_both", {
             currentStrokeStyle: e.toLocaleLowerCase(),
             currentStrokeWeight: t.toLocaleLowerCase()
-          }) : _$$t("whiteboard.inline_menu.line_style_label_singular", {
+          }) : getI18nString("whiteboard.inline_menu.line_style_label_singular", {
             currentLineStyle: e.toLocaleLowerCase()
           });
         } else {
           let e = q(j);
-          s = e ? _$$t("whiteboard.inline_menu.line_style_label_singular", {
+          s = e ? getI18nString("whiteboard.inline_menu.line_style_label_singular", {
             currentLineStyle: e.toLocaleLowerCase()
           }) : void 0;
         }
@@ -393,9 +393,9 @@ function q(e) {
 export function $$J2(e) {
   switch (e) {
     case _$$wv:
-      return _$$t("whiteboard.delightful_toolbar.thin");
+      return getI18nString("whiteboard.delightful_toolbar.thin");
     case uM:
-      return _$$t("whiteboard.delightful_toolbar.thick");
+      return getI18nString("whiteboard.delightful_toolbar.thick");
     default:
       return;
   }
@@ -403,11 +403,11 @@ export function $$J2(e) {
 function Z(e) {
   switch (e) {
     case "solid":
-      return _$$t("whiteboard.inline_menu.stroke_solid");
+      return getI18nString("whiteboard.inline_menu.stroke_solid");
     case "dashed":
-      return _$$t("whiteboard.inline_menu.stroke_dashed");
+      return getI18nString("whiteboard.inline_menu.stroke_dashed");
     default:
-      return _$$t("whiteboard.inline_menu.stroke_none");
+      return getI18nString("whiteboard.inline_menu.stroke_none");
   }
 }
 export const XH = $$z0;

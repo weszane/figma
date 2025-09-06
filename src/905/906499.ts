@@ -4,7 +4,7 @@ import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 export let $$d0 = Ju(function (e) {
   let {
     message,
@@ -17,7 +17,7 @@ export let $$d0 = Ju(function (e) {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: tx("autosave.unable_to_leave_document.title")
+          children: renderI18nText("autosave.unable_to_leave_document.title")
         })
       }), jsx(nB, {
         children: message
@@ -25,7 +25,7 @@ export let $$d0 = Ju(function (e) {
         children: jsx(jk, {
           children: jsx($n, {
             onClick: onClose,
-            children: tx("autosave.unable_to_leave_document.ok_button")
+            children: renderI18nText("autosave.unable_to_leave_document.ok_button")
           })
         })
       })]

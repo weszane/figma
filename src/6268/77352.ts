@@ -23,7 +23,7 @@ import { nP } from "../figma_app/484865";
 import { t2 } from "../figma_app/911720";
 import { IT } from "../figma_app/566371";
 import { n as _$$n } from "../905/734251";
-import { t as _$$t2 } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { yT } from "../figma_app/332598";
 import { $e } from "../figma_app/711907";
 import { D as _$$D } from "../6268/819008";
@@ -49,7 +49,7 @@ function q({
     onClick: e,
     variant: "destructiveSecondary",
     disabled: n,
-    children: o ? _$$t2("dev_handoff.component_browser.has_code_equivalent") : _$$t2("dev_handoff.component_browser.disconnect")
+    children: o ? getI18nString("dev_handoff.component_browser.has_code_equivalent") : getI18nString("dev_handoff.component_browser.disconnect")
   });
 }
 function B({
@@ -93,10 +93,10 @@ function U() {
   return jsx(Yy, {
     variant: "warn",
     children: jsxs(_$$Q, {
-      title: _$$t2("dev_handoff.component_browser.cli_only_title"),
-      children: [_$$t2("dev_handoff.component_browser.cli_only_message"), jsx(_$$N, {
+      title: getI18nString("dev_handoff.component_browser.cli_only_title"),
+      children: [getI18nString("dev_handoff.component_browser.cli_only_message"), jsx(_$$N, {
         href: "https://www.figma.com/code-connect-docs/",
-        children: _$$t2("dev_handoff.component_browser.learn_more")
+        children: getI18nString("dev_handoff.component_browser.learn_more")
       })]
     })
   });
@@ -114,11 +114,11 @@ function z({
       className: F,
       children: jsxs("tbody", {
         children: [jsx($, {
-          label: _$$t2("dev_handoff.component_browser.marked_on"),
+          label: getI18nString("dev_handoff.component_browser.marked_on"),
           icon: jsx(_$$v, {}),
           value: o.component.name
         }), s && jsx($, {
-          label: _$$t2("dev_handoff.component_browser.marked_by"),
+          label: getI18nString("dev_handoff.component_browser.marked_by"),
           icon: jsx(_$$_, {}),
           value: s
         })]
@@ -132,11 +132,11 @@ function z({
         className: F,
         children: jsxs("tbody", {
           children: [jsx($, {
-            label: _$$t2("dev_handoff.component_browser.connected_on"),
+            label: getI18nString("dev_handoff.component_browser.connected_on"),
             icon: jsx(_$$v, {}),
             value: o.component.name
           }), s && jsx($, {
-            label: _$$t2("dev_handoff.component_browser.connected_by"),
+            label: getI18nString("dev_handoff.component_browser.connected_by"),
             icon: jsx(_$$_, {}),
             value: s
           })]
@@ -190,7 +190,7 @@ function J({
     children: [jsxs("div", {
       className: "component_browser_detail_view--emptySourceCodeTabTitle--FGecJ",
       children: [jsx("span", {
-        children: _$$t2("dev_handoff.component_browser.source_code")
+        children: getI18nString("dev_handoff.component_browser.source_code")
       }), jsx($n, {
         onClick: () => {
           n({
@@ -208,10 +208,10 @@ function J({
           });
         },
         variant: "secondary",
-        children: _$$t2("dev_handoff.component_browser.no_code_equivalent")
+        children: getI18nString("dev_handoff.component_browser.no_code_equivalent")
       })]
     }), jsx(G, {
-      label: _$$t2("dev_handoff.component_browser.empty_source_code_overlay_text")
+      label: getI18nString("dev_handoff.component_browser.empty_source_code_overlay_text")
     })]
   });
 }
@@ -237,7 +237,7 @@ function Q({
       }
     } catch (e) {
       return {
-        errorMessage: _$$t2("dev_handoff.component_browser.error_retrieving_component_path_and_repository"),
+        errorMessage: getI18nString("dev_handoff.component_browser.error_retrieving_component_path_and_repository"),
         error: e
       };
     }
@@ -285,7 +285,7 @@ function Q({
       }],
       copyAllActionEnabled: !0
     }) : jsx(G, {
-      label: i?.errorMessage ?? _$$t2("dev_handoff.component_browser.file_not_found")
+      label: i?.errorMessage ?? getI18nString("dev_handoff.component_browser.file_not_found")
     })
   });
 }
@@ -335,7 +335,7 @@ function H({
   return jsxs("div", {
     children: [jsx("div", {
       className: "component_browser_detail_view--mcpTabInfoText--cp8bE",
-      children: _$$t2("dev_handoff.component_browser.mcp_tab_info_text")
+      children: getI18nString("dev_handoff.component_browser.mcp_tab_info_text")
     }), n ? jsx(_$$k, {}) : jsx(CH, {
       value: i ?? "",
       extensions: [g4],
@@ -361,7 +361,7 @@ function V({
         children: jsx(_$$K, {
           size: "lg",
           variant: "secondary",
-          "aria-label": _$$t2("dev_handoff.component_browser.change_theme"),
+          "aria-label": getI18nString("dev_handoff.component_browser.change_theme"),
           onClick: () => c("light" === o ? "dark" : "light"),
           children: jsx(_$$S, {})
         })
@@ -427,11 +427,11 @@ function X({
           children: function (e) {
             switch (e) {
               case "Info":
-                return _$$t2("dev_handoff.component_browser.info_tab_title");
+                return getI18nString("dev_handoff.component_browser.info_tab_title");
               case "SourceCode":
-                return _$$t2("dev_handoff.component_browser.source_code");
+                return getI18nString("dev_handoff.component_browser.source_code");
               case "Mcp":
-                return _$$t2("dev_handoff.component_browser.mcp_tab_title");
+                return getI18nString("dev_handoff.component_browser.mcp_tab_title");
             }
           }(e)
         }, e) : null)
@@ -537,7 +537,7 @@ export function $$Z0({
         children: [jsxs("div", {
           className: "component_browser_detail_view--titleContainerLeft--ilpvY",
           children: [!w && jsx(_$$K, {
-            "aria-label": _$$t2("dev_handoff.component_browser.close_component_browser"),
+            "aria-label": getI18nString("dev_handoff.component_browser.close_component_browser"),
             onClick: () => o(),
             children: jsx(_$$O, {})
           }), jsx(W, {
@@ -545,7 +545,7 @@ export function $$Z0({
               className: D,
               children: [jsx("div", {
                 className: O,
-                children: _$$t2("dev_handoff.component_browser.design_component")
+                children: getI18nString("dev_handoff.component_browser.design_component")
               }), jsx("div", {
                 className: P,
                 children: e.component.name
@@ -560,7 +560,7 @@ export function $$Z0({
               className: D,
               children: [jsx("div", {
                 className: O,
-                children: _$$t2("dev_handoff.component_browser.code_component")
+                children: getI18nString("dev_handoff.component_browser.code_component")
               }), jsx("div", {
                 className: P,
                 children: jsx(B, {
@@ -572,7 +572,7 @@ export function $$Z0({
               className: D,
               children: [jsx("div", {
                 className: O,
-                children: _$$t2("dev_handoff.component_browser.code_component")
+                children: getI18nString("dev_handoff.component_browser.code_component")
               }), jsx("div", {
                 className: P,
                 children: "--"
@@ -608,7 +608,7 @@ export function $$Z0({
             }) : A ? jsx($n, {
               onClick: K,
               variant: "secondary",
-              children: _$$t2("dev_handoff.component_browser.has_code_equivalent")
+              children: getI18nString("dev_handoff.component_browser.has_code_equivalent")
             }) : null
           })
         })]

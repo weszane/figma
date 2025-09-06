@@ -1,15 +1,15 @@
-import { E2, fp } from "../figma_app/27355";
+import { createValidatedLocalStorageAtom, useAtomValueAndSetter } from "../figma_app/27355";
 import { z } from "../905/239603";
-let a = E2("workflows_recently_viewed", {}, z.record(z.string(), z.record(z.string(), z.number())));
+let a = createValidatedLocalStorageAtom("workflows_recently_viewed", {}, z.record(z.string(), z.record(z.string(), z.number())));
 export function $$s2(e) {
-  let [t] = fp(a);
+  let [t] = useAtomValueAndSetter(a);
   return e ? t[e] : null;
 }
 export function $$o1(e, t) {
   return (t.lastViewedTimestamp ?? 0) - (e.lastViewedTimestamp ?? 0);
 }
 export function $$l0() {
-  let [e, t] = fp(a);
+  let [e, t] = useAtomValueAndSetter(a);
   return (i, r) => {
     let n = Date.now();
     t({

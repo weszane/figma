@@ -1,22 +1,22 @@
 import { useMemo, useEffect, useCallback } from "react";
 import { Bll, RN1, w3z, SES } from "../figma_app/763686";
 import { l7 } from "../905/189185";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { r as _$$r } from "../905/955316";
 import { wA } from "../figma_app/167249";
 var d = (e => (e[e.DARK = 0] = "DARK", e[e.LIGHT = 1] = "LIGHT", e))(d || {});
 export function $$c5(e) {
   switch (e) {
     case Bll.ACCESSIBILITY:
-      return t("dev_handoff.annotations.category_preset.accessibility");
+      return getI18nString("dev_handoff.annotations.category_preset.accessibility");
     case Bll.BEHAVIOR:
-      return t("dev_handoff.annotations.category_preset.behavior");
+      return getI18nString("dev_handoff.annotations.category_preset.behavior");
     case Bll.CONTENT:
-      return t("dev_handoff.annotations.category_preset.content");
+      return getI18nString("dev_handoff.annotations.category_preset.content");
     case Bll.DEVELOPMENT:
-      return t("dev_handoff.annotations.category_preset.development");
+      return getI18nString("dev_handoff.annotations.category_preset.development");
     case Bll.INTERACTION:
-      return t("dev_handoff.annotations.category_preset.interaction");
+      return getI18nString("dev_handoff.annotations.category_preset.interaction");
   }
 }
 export function $$u0(e) {
@@ -36,35 +36,35 @@ export function $$u0(e) {
 export let $$p9 = {
   [RN1.GREEN]: {
     color: "rgba(61, 160, 89, 1)",
-    label: () => t("dev_handoff.annotations.categories_edit_window.category_color.green")
+    label: () => getI18nString("dev_handoff.annotations.categories_edit_window.category_color.green")
   },
   [RN1.PINK]: {
     color: "rgba(216, 52, 158, 1)",
-    label: () => t("dev_handoff.annotations.categories_edit_window.category_color.pink")
+    label: () => getI18nString("dev_handoff.annotations.categories_edit_window.category_color.pink")
   },
   [RN1.RED]: {
     color: "rgba(227, 76, 44, 1)",
-    label: () => t("dev_handoff.annotations.categories_edit_window.category_color.red")
+    label: () => getI18nString("dev_handoff.annotations.categories_edit_window.category_color.red")
   },
   [RN1.BLUE]: {
     color: "rgba(27, 113, 217, 1)",
-    label: () => t("dev_handoff.annotations.categories_edit_window.category_color.blue")
+    label: () => getI18nString("dev_handoff.annotations.categories_edit_window.category_color.blue")
   },
   [RN1.YELLOW]: {
     color: "rgba(251, 198, 69, 1)",
-    label: () => t("dev_handoff.annotations.categories_edit_window.category_color.yellow")
+    label: () => getI18nString("dev_handoff.annotations.categories_edit_window.category_color.yellow")
   },
   [RN1.ORANGE]: {
     color: "rgba(255, 165, 0, 1)",
-    label: () => t("dev_handoff.annotations.categories_edit_window.category_color.orange")
+    label: () => getI18nString("dev_handoff.annotations.categories_edit_window.category_color.orange")
   },
   [RN1.TEAL]: {
     color: "rgba(0, 128, 128, 1)",
-    label: () => t("dev_handoff.annotations.categories_edit_window.category_color.teal")
+    label: () => getI18nString("dev_handoff.annotations.categories_edit_window.category_color.teal")
   },
   [RN1.VIOLET]: {
     color: "rgba(148, 0, 211, 1)",
-    label: () => t("dev_handoff.annotations.categories_edit_window.category_color.violet")
+    label: () => getI18nString("dev_handoff.annotations.categories_edit_window.category_color.violet")
   }
 };
 export function $$_3(e = {

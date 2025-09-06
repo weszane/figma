@@ -7,21 +7,21 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { i6g, NUh, W2B, Bko, uXP, h3O } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
-import { zl, eU, md } from "../figma_app/27355";
+import { atomStoreManager, atom, useAtomWithSubscription } from "../figma_app/27355";
 import { resourceUtils } from "../905/989992";
 import { MR } from "../vendor/390973";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { l as _$$l } from "../905/728491";
 import { debugState } from "../905/407919";
 import { getInitialOptions } from "../figma_app/169182";
 import { p as _$$p } from "../figma_app/288654";
-import { M4 } from "../905/609396";
-import { Ay as _$$Ay } from "../figma_app/778880";
-import { $D } from "../905/11";
-import { x1, Lo, ED, xi } from "../905/714362";
+import { Timer } from "../905/609396";
+import { BrowserInfo } from "../figma_app/778880";
+import { reportError } from "../905/11";
+import { logError, logInfo, logDebug, logWarning } from "../905/714362";
 import { fF } from "../905/471229";
 import { YQ } from "../905/502364";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { _ as _$$_ } from "../905/170564";
 import { Q as _$$Q } from "../905/463586";
 import { yJ } from "../figma_app/78808";
@@ -44,7 +44,7 @@ import { mc, A2, LX } from "../905/58217";
 function K(e, t) {
   let r = "unknown";
   e ? "string" == typeof e ? r = e : "message" in e && (r = e.message) : r = "no error message";
-  x1("Autosave", r, {
+  logError("Autosave", r, {
     message: t
   });
 }
@@ -143,7 +143,7 @@ async function q(e, t, r) {
   });
   dU(e);
   await e.done;
-  Lo("Autosave", `Found claimed autosave changes from ${o.length} sessions`, void 0, {
+  logInfo("Autosave", `Found claimed autosave changes from ${o.length} sessions`, void 0, {
     logToConsole: NUh.ALWAYS
   });
   return {
@@ -167,7 +167,7 @@ async function J(e, t) {
     }
     await t.done;
   });
-  n.length > 0 && ED("Autosave", "Found auto-saved data for this file", void 0, {
+  n.length > 0 && logDebug("Autosave", "Found auto-saved data for this file", void 0, {
     logToConsole: NUh.ALWAYS
   });
   return n;
@@ -177,7 +177,7 @@ async function Z(e) {
     let t = await Promise.all(e.map(e => mc(e)));
     let r = Date.now() - $$Y11();
     let n = e.filter((e, n) => !t[n] && e.lastUpdatedAt > r);
-    0 === n.length && Lo("Autosave", "Changes not available or already claimed by another tab", void 0, {
+    0 === n.length && logInfo("Autosave", "Changes not available or already claimed by another tab", void 0, {
       logToConsole: NUh.ALWAYS
     });
     return n;
@@ -191,7 +191,7 @@ export async function $$ee5(e) {
       let t = await $$ed14(cu(e), e => Date.now() - e.lastUpdatedAt < $$Y11());
       if (t.length > 0) {
         let e = t.map(e => e.lastUpdatedAt);
-        sx("autosave garbage collect", {
+        trackEventAnalytics("autosave garbage collect", {
           numSessions: t.length,
           localSessionCount: t.reduce((e, t) => e + (t.isLocalFile ? 1 : 0), 0),
           nodeCount: t.reduce((e, t) => e + t.nodeCount, 0),
@@ -266,7 +266,7 @@ async function en(e, t) {
   let n = Error("original async stack");
   r.done.catch(e => {
     e.cause = n;
-    $D(_$$e.UNOWNED, e);
+    reportError(_$$e.UNOWNED, e);
   });
   let i = r.objectStore(Sp);
   let a = await i.index(SW).getAll(cu(t));
@@ -353,7 +353,7 @@ export async function $$ed14(e, t) {
   let i = Error("original async stack");
   n.done.catch(e => {
     e.cause = i;
-    $D(_$$e.UNOWNED, e);
+    reportError(_$$e.UNOWNED, e);
   });
   let s = n.objectStore(Sp);
   let o = n.objectStore(jP);
@@ -480,7 +480,7 @@ async function ep(e) {
   return A;
 }
 async function e_(e, t, r) {
-  Lo("Autosave", "assigning file key for new file", {
+  logInfo("Autosave", "assigning file key for new file", {
     localFileKey: t,
     newFileKey: r
   });
@@ -544,7 +544,7 @@ class eg {
   set fileKey(e) {
     this._fileKey = e;
     let t = isLocalFileKey(e) ? e : null;
-    zl.set(_$$h, t);
+    atomStoreManager.set(_$$h, t);
   }
   async assignFileKeyForLocalFile(e) {
     if ("connected" !== this._state.type) {
@@ -565,16 +565,16 @@ class eg {
     this._state = {
       type: "terminated"
     };
-    zl.set(_$$h, null);
+    atomStoreManager.set(_$$h, null);
     await e?.destroy().catch(() => W6("Failed to destroy autosave session"));
   }
   terminateDueToError(e, t) {
-    xi("Autosave", "autosave disabled", {
+    logWarning("Autosave", "autosave disabled", {
       message: e
     });
     t && W6(e);
     let r = "connected" === this._state.type;
-    this._hasReportedError || (sx("autosave_disabled", {
+    this._hasReportedError || (trackEventAnalytics("autosave_disabled", {
       message: e,
       hasSessionInProgress: r
     }, {
@@ -590,16 +590,16 @@ class eg {
     try {
       await Fy();
     } catch (e) {
-      Lo("Autosave", "IDB is not available in the current browser session.", void 0, {
+      logInfo("Autosave", "IDB is not available in the current browser session.", void 0, {
         logToConsole: NUh.ALWAYS
       });
-      sx("autosave_db_failure", {
+      trackEventAnalytics("autosave_db_failure", {
         message: e.message
       });
       this.terminateDueToError("unable to open DB", !1);
       return;
     }
-    let t = new M4();
+    let t = new Timer();
     t.start();
     let r = await this._sessionsToRestore;
     isLocalFileKey(this.fileKey) && (r.length > 1 ? (W6("Local file has multiple sessions", {
@@ -632,7 +632,7 @@ class eg {
           fileKey: t,
           userID: this.userID,
           editorType: e.editorType,
-          name: e.fileName ?? _$$t("fullscreen.fullscreen_view_selector.untitled"),
+          name: e.fileName ?? getI18nString("fullscreen.fullscreen_view_selector.untitled"),
           createdAt: Date.now(),
           orgID: e.org_id
         };
@@ -662,7 +662,7 @@ async function ef(e, t, r) {
     }, "readwrite");
     HZ();
   } catch (e) {
-    $D(_$$e.SCENEGRAPH_AND_SYNC, Error("unable to update new file info"));
+    reportError(_$$e.SCENEGRAPH_AND_SYNC, Error("unable to update new file info"));
   }
 }
 class eE {
@@ -754,7 +754,7 @@ class ey {
   sessionTransaction(e, t, r, n) {
     let i = DB(t, r, n);
     i.catch(t => {
-      sx("autosave_transaction_failure", {
+      trackEventAnalytics("autosave_transaction_failure", {
         transactionName: e,
         message: t.message
       });
@@ -875,7 +875,7 @@ class ey {
       file_key: fileKey,
       manager_file_key: this.manager.fileKey
     };
-    if (Lo("Autosave", "commit completed", g), ds("autosave_commit_completed", fileKey, debugState.getState(), g), !this.reportedStorageError && void 0 !== numberOfUncleanRegisters && numberOfUncleanRegisters !== m) {
+    if (logInfo("Autosave", "commit completed", g), ds("autosave_commit_completed", fileKey, debugState.getState(), g), !this.reportedStorageError && void 0 !== numberOfUncleanRegisters && numberOfUncleanRegisters !== m) {
       if (m > 0 && 0 === numberOfUncleanRegisters) {
         let e = e => {
           if (!(e.length > 5)) return e;
@@ -886,7 +886,7 @@ class ey {
           }
         };
         let r = await $$eu8(5, !0);
-        x1("Autosave", "Dumping autosave since we expect IDB to be empty", {
+        logError("Autosave", "Dumping autosave since we expect IDB to be empty", {
           debug: r,
           changedNodes: e(changes.changedNodes.map(e => e.nodeID)),
           clearedNodes: e(changes.clearedNodes),
@@ -911,7 +911,7 @@ class ey {
     this.restoreAnalytics.isLocalFile = isLocalFileKey(this.manager.fileKey);
     this.restoring = !0;
     let e = function () {
-      if (!_$$Ay.chrome || !navigator.storage?.persist) return Promise.resolve(!1);
+      if (!BrowserInfo.chrome || !navigator.storage?.persist) return Promise.resolve(!1);
       let e = new Promise(e => setTimeout(() => e(!1), 200));
       return Promise.race([navigator.storage.persist(), e]);
     }();
@@ -961,9 +961,9 @@ class ey {
     } of (i ? (isLocalFileKey(this.manager.fileKey) || (await _$$m(this.manager.fileKey, "Offline sync", "Before syncing changes", debugState.dispatch).catch(e => W6("Failed to create before savepoint", {
       status: e.status,
       message: e.data?.message
-    }))), Lo("Autosave", "Restoring auto-saved data", void 0, {
+    }))), logInfo("Autosave", "Restoring auto-saved data", void 0, {
       logToConsole: NUh.ALWAYS
-    }), await this.restoreChanges(changesByNode, referencedNodeMap, fileVersion)) : Lo("Autosave", "Changes are empty!", void 0, {
+    }), await this.restoreChanges(changesByNode, referencedNodeMap, fileVersion)) : logInfo("Autosave", "Changes are empty!", void 0, {
       logToConsole: NUh.ALWAYS
     }), this.commitEventListener.waitForNextCommit().then(() => {
       hp.sendToOtherTabs(_$$a);
@@ -985,10 +985,10 @@ class ey {
       decodedAsEmptyMultiplayerMessage && s.push([e, i]);
     }
     let o = Promise.resolve();
-    if (s.length > 0 && (xi("Autosave", "Deleting nodes without phase or property changes", {
+    if (s.length > 0 && (logWarning("Autosave", "Deleting nodes without phase or property changes", {
       numNodes: s.length,
       guids: JSON.stringify(s.map(([e]) => e).slice(0, 10))
-    }), sx("autosave delete empty changes", {
+    }), trackEventAnalytics("autosave delete empty changes", {
       numNodes: s.length,
       willDelete: !0
     }), o = this.sessionTransaction("delete_empty_changes", [jP, DV, w8, Sp], async e => {
@@ -1017,17 +1017,17 @@ class ey {
     i6g.migrateAndSetAutosaveChanges(p, r);
     l7.autosave("autosave", () => i6g.applyAutosavedChanges());
     this.restoreAnalytics.timeToApply = this.restoreTimer.getElapsedTime();
-    Lo("Autosave", "Successfully applied auto-saved changes", void 0, {
+    logInfo("Autosave", "Successfully applied auto-saved changes", void 0, {
       logToConsole: NUh.ALWAYS
     });
     let _ = () => {
       debugState.dispatch(_$$Q.enqueueFront({
         notification: {
           type: _$$_.AUTOSAVE_CHANGES_RESTORED,
-          message: _$$t("autosave.changes_synced")
+          message: getI18nString("autosave.changes_synced")
         }
       }));
-      Lo("Autosave", "Successfully synced auto-saved changes", void 0, {
+      logInfo("Autosave", "Successfully synced auto-saved changes", void 0, {
         logToConsole: NUh.ALWAYS
       });
     };
@@ -1122,7 +1122,7 @@ export function $$eT9() {
 export function $$eI18(e, t) {
   if (eb) {
     if (eb.fileKey === e) {
-      Lo("Autosave", "Autosave manager already exists");
+      logInfo("Autosave", "Autosave manager already exists");
       return eb;
     }
     W6("Manager already exists. Updating file key", {
@@ -1132,7 +1132,7 @@ export function $$eI18(e, t) {
     eb.terminateAndWaitForCleanup();
     eb = null;
   }
-  ED("Autosave", "Create autosave manager", {
+  logDebug("Autosave", "Create autosave manager", {
     fileKey: e
   });
   return eb = new eg(t, e);
@@ -1141,8 +1141,8 @@ export function $$eS20() {
   $$ev22().catch(e => K(e, "failed to destroy autosave manager"));
 }
 export async function $$ev22() {
-  if (ED("Autosave", "Destroy autosave manager"), !eb) {
-    Lo("Autosave", "No manager to destroy");
+  if (logDebug("Autosave", "Destroy autosave manager"), !eb) {
+    logInfo("Autosave", "No manager to destroy");
     return;
   }
   let e = eb;
@@ -1201,13 +1201,13 @@ let $$eC12 = _$$M.Mutation(({
     mutationFileKey: e,
     fileCreationManagerFileKey: o.fileKey
   }));
-  sx("Rename New Autosave File", {
+  trackEventAnalytics("Rename New Autosave File", {
     source: r,
     isOffline: !navigator.onLine
   });
   return ef(s, e, t);
 });
-let ew = eU(e => {
+let ew = atom(e => {
   let t = e(kS);
   let r = {};
   if (t) {
@@ -1218,7 +1218,7 @@ let ew = eU(e => {
   }
   return r;
 });
-let $$eO17 = eU(e => {
+let $$eO17 = atom(e => {
   let t = e(_$$h);
   let r = e(kS);
   if (t && r) {
@@ -1231,21 +1231,21 @@ let $$eO17 = eU(e => {
   return null;
 });
 export function $$eR1() {
-  return zl.get($$eO17);
+  return atomStoreManager.get($$eO17);
 }
-let eL = eU(null);
+let eL = atom(null);
 export function $$eP13(e) {
-  zl.set(eL, e.fileKey);
+  atomStoreManager.set(eL, e.fileKey);
 }
-let eD = eU({});
+let eD = atom({});
 export function $$ek2(e, t) {
-  let r = zl.get(eD);
-  zl.set(eD, {
+  let r = atomStoreManager.get(eD);
+  atomStoreManager.set(eD, {
     ...r,
     [e]: t
   });
 }
-let eM = eU(e => {
+let eM = atom(e => {
   let t = {
     ...e(ew)
   };
@@ -1263,7 +1263,7 @@ let eM = eU(e => {
   return i;
 });
 export function $$eF7() {
-  return md(eM);
+  return useAtomWithSubscription(eM);
 }
 export function $$ej4(e) {
   let t = useSelector(t => !!t.autosave.unclaimedFilesWithChangesInIDB.find(t => t.fileKey === e));

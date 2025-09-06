@@ -9,7 +9,7 @@ import { A as _$$A } from "../905/920142";
 import { getInitialOptions } from "../figma_app/169182";
 import { Rs } from "../figma_app/288654";
 import { mI, IT } from "../figma_app/566371";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { T as _$$T } from "../1577/951568";
 import { Az } from "../5132/863145";
 import { k as _$$k2 } from "../figma_app/618031";
@@ -32,7 +32,7 @@ function w(e, t, r, n) {
   let [s] = mI(i);
   let o = s.data;
   if (!o) {
-    $D(_$$e.SCALE, Error("Plan renewal modal could not load price information"), {
+    reportError(_$$e.SCALE, Error("Plan renewal modal could not load price information"), {
       extra: {
         planKey: t,
         prices: o
@@ -109,7 +109,7 @@ function G(e, t) {
   let i = N_.dict(e => 0);
   r.forEach(e => {
     if (!e.billableProductKey || !dA(e.billableProductKey)) {
-      $D(_$$e.BILLING_EXPERIENCE, Error(`Confirmed seat count with unexpected billable product key: ${e.billableProductKey}`));
+      reportError(_$$e.BILLING_EXPERIENCE, Error(`Confirmed seat count with unexpected billable product key: ${e.billableProductKey}`));
       return;
     }
     let t = e.billableProductKey;
@@ -138,7 +138,7 @@ export function $$H5(e, t) {
   let [n] = mI(r);
   if ("loaded" !== n.status) {
     let e = Error("Error fetching next annual renewal confirmed seat counts");
-    $D(_$$e.SCALE, e);
+    reportError(_$$e.SCALE, e);
     return e;
   }
   return n.data;

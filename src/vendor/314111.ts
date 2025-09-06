@@ -1,5 +1,5 @@
 import { SB } from "../vendor/728046";
-import { S8 } from "../vendor/231181";
+import { normalize } from "../vendor/231181";
 import { Ce } from "../vendor/998256";
 import { O } from "../vendor/240444";
 export function $$o4(e, n = []) {
@@ -37,7 +37,7 @@ ${JSON.stringify(n)}
       try {
         e = JSON.stringify(i);
       } catch (n) {
-        e = JSON.stringify(S8(i));
+        e = JSON.stringify(normalize(i));
       }
       r(e);
     }

@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { Cv } from "../figma_app/795938";
 import { gw } from "../figma_app/162807";
 import { XU } from "../figma_app/756995";
@@ -20,12 +20,12 @@ let $$c2 = {
   mobileListSortKeys: d,
   sortKeyDescriptions: {
     [XU.GRID]: {
-      [gw.POPULARITY]: tx("tile.sort_filter.trending"),
-      [gw.RECENCY]: tx("tile.sort_filter.recent")
+      [gw.POPULARITY]: renderI18nText("tile.sort_filter.trending"),
+      [gw.RECENCY]: renderI18nText("tile.sort_filter.recent")
     },
     [XU.LIST]: {
-      [gw.POPULARITY]: tx("tile.sort_filter.trending"),
-      [gw.RECENCY]: tx("tile.sort_filter.recent")
+      [gw.POPULARITY]: renderI18nText("tile.sort_filter.trending"),
+      [gw.RECENCY]: renderI18nText("tile.sort_filter.recent")
     }
   },
   defaultOptions: {

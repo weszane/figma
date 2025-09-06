@@ -1,10 +1,10 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { XN, rr } from "../figma_app/778880";
-import { md, Iz, eU as _$$eU } from "../figma_app/27355";
+import { isIpadDevice, isMobileUA } from "../figma_app/778880";
+import { useAtomWithSubscription, createRemovableAtomFamily, atom } from "../figma_app/27355";
 import { getFeatureFlags } from "../905/601108";
 import s from "classnames";
 import { vd, nD as _$$nD, $9, eM as _$$eM, Kz } from "../figma_app/637027";
-import { tx as _$$tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { F_ } from "../905/748636";
 import { CR, NJ } from "../figma_app/419216";
 import { fu, jm } from "../figma_app/831799";
@@ -62,14 +62,14 @@ import { Z as _$$Z } from "../905/296690";
 import { RG } from "../figma_app/684446";
 import { sortByPropertyWithOptions, shuffle } from "../figma_app/656233";
 import { ServiceCategories as _$$e2 } from "../905/165054";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { Z1 } from "../905/401885";
 import { g as _$$g } from "../1250/695038";
 import { sZ, dq } from "../905/845253";
 import { saW, bel } from "../figma_app/43951";
 import { D6 as _$$D2, S2 } from "../figma_app/465071";
 import { G as _$$G } from "../figma_app/124713";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { tM as _$$tM, vd as _$$vd } from "../figma_app/60079";
 import { Jn } from "../905/17223";
 import { P as _$$P } from "../905/347284";
@@ -112,7 +112,7 @@ import { WX } from "../figma_app/482142";
 import { X as _$$X2 } from "../5885/331878";
 import { UG } from "../905/414007";
 import { Bq, lc } from "../figma_app/598111";
-import { bt } from "../905/270322";
+import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { Hj } from "../figma_app/336229";
 import { p as _$$p } from "../figma_app/288654";
 import { I as _$$I } from "../c5e2cae0/718426";
@@ -163,21 +163,21 @@ function m(e) {
       pointerBackgroundColor: "var(--color-bg, $figmaBGWhite)",
       children: [jsx("h1", {
         className: "custom_sections_onboarding_modal--header--Z4mnG",
-        children: _$$tx("favorited_resources.custom_sections_nudge_header")
+        children: renderI18nText("favorited_resources.custom_sections_nudge_header")
       }), jsx("p", {
-        children: _$$tx("favorited_resources.custom_sections_nudge_body", {
+        children: renderI18nText("favorited_resources.custom_sections_nudge_body", {
           ellipses: jsx("strong", {
-            children: _$$tx("favorited_resources.ellipses")
+            children: renderI18nText("favorited_resources.ellipses")
           }),
           plus: jsx("strong", {
-            children: _$$tx("favorited_resources.plus")
+            children: renderI18nText("favorited_resources.plus")
           })
         })
       }), jsx("div", {
         className: "custom_sections_onboarding_modal--footerContainerButtonRight--EToy- custom_sections_onboarding_modal--footerContainer---KhkM",
         children: jsx(vd, {
           onClick: e.onClickPrimaryCta,
-          children: _$$tx("rcs.file_browser.got_it")
+          children: renderI18nText("rcs.file_browser.got_it")
         })
       })]
     })
@@ -187,7 +187,7 @@ let v = "seen_custom_sections_nudge";
 let $$w0 = "favorites-count-crossed-threshold";
 let T = r1(v);
 function j() {
-  let e = md(T);
+  let e = useAtomWithSubscription(T);
   let t = _$$e({
     overlay: LB2,
     priority: _$$N.OVERRIDING_MODAL
@@ -212,11 +212,11 @@ let $$A1 = "seen_whats_new_v2_modal";
 let S = r1($$A1);
 let N = _$$tH("last_figjam_at");
 function O() {
-  let e = md(GW);
-  let t = md(mp);
-  let n = md(N);
-  let r = md(S);
-  let o = md(Ot);
+  let e = useAtomWithSubscription(GW);
+  let t = useAtomWithSubscription(mp);
+  let n = useAtomWithSubscription(N);
+  let r = useAtomWithSubscription(S);
+  let o = useAtomWithSubscription(Ot);
   let {
     show,
     isShowing,
@@ -243,25 +243,25 @@ function O() {
 let et = "File Browser Onboarding -";
 function en(e) {
   return jsx(_$$X, {
-    description: _$$tx("rcs.take_tour.see_how_to_create_files_learn_about_drafts_and_teams_ways_to_access_community_and_more"),
+    description: renderI18nText("rcs.take_tour.see_how_to_create_files_learn_about_drafts_and_teams_ways_to_access_community_and_more"),
     emphasized: !0,
     isShowing: e.isShowing,
     onClose: e.onManualDismiss,
     position: _$$Q.BOTTOM_RIGHT,
     primaryCta: {
-      label: _$$tx("rcs.take_tour.let_s_go"),
+      label: renderI18nText("rcs.take_tour.let_s_go"),
       type: "button",
       onClick: e.onClickPrimaryCta,
       ctaTrackingDescriptor: _$$c.LETS_GO
     },
     secondaryCta: {
-      label: _$$tx("rcs.take_tour.no_thanks"),
+      label: renderI18nText("rcs.take_tour.no_thanks"),
       type: "button",
       onClick: e.onManualDismiss,
       ctaTrackingDescriptor: _$$c.NO_THANKS
     },
     testId: "TakeTourOfFileBrowserOverlay",
-    title: _$$tx("rcs.take_tour.take_a_quick_tour_of_the_file_browser"),
+    title: renderI18nText("rcs.take_tour.take_a_quick_tour_of_the_file_browser"),
     trackingContextName: `${et} Take tour`
   });
 }
@@ -302,7 +302,7 @@ function es(e) {
       targetKey: _$$l,
       topPadding: 12,
       alignPointerToLeft: !0,
-      children: [_$$tx("rcs.create_files.create_files_from_scratch_import_designs_from_sketch_or_start_from_templates"), jsx(IY, {
+      children: [renderI18nText("rcs.create_files.create_files_from_scratch_import_designs_from_sketch_or_start_from_templates"), jsx(IY, {
         onClick: e.onClickPrimaryCta,
         step: 1,
         totalSteps: 6
@@ -329,7 +329,7 @@ function ec(e) {
     targetKey: uZ,
     topPadding: 8,
     alignPointerToLeft: !0,
-    children: [_$$tx("rcs.create_files.files_are_great_for_collaboration_while_your_drafts_are_more_personal_if_you_share_them_they_re_view_only"), jsx(IY, {
+    children: [renderI18nText("rcs.create_files.files_are_great_for_collaboration_while_your_drafts_are_more_personal_if_you_share_them_they_re_view_only"), jsx(IY, {
       onClick: e.onClickPrimaryCta,
       step: 2,
       totalSteps: 6
@@ -358,7 +358,7 @@ function em(e) {
     targetKey: vM,
     alignPointerToLeft: !0,
     topPadding: 12,
-    children: [_$$tx("rcs.account_switching.explore_files_plugins_and_widgets_created_by_the_figma_community"), jsx(IY, {
+    children: [renderI18nText("rcs.account_switching.explore_files_plugins_and_widgets_created_by_the_figma_community"), jsx(IY, {
       onClick: () => {
         open();
         e.onClickPrimaryCta();
@@ -390,7 +390,7 @@ function ef(e) {
     targetKey: _$$U2,
     alignPointerToLeft: !0,
     topPadding: 12,
-    children: [_$$tx("rcs.account_switching.explore_resource_hub"), jsx(IY, {
+    children: [renderI18nText("rcs.account_switching.explore_resource_hub"), jsx(IY, {
       onClick: () => {
         open();
         e.onClickPrimaryCta();
@@ -417,7 +417,7 @@ function ex() {
     children: [jsx(Gv, {
       src: buildStaticUrl("app/onboarding/page-4.gif")
     }), jsxs(ak, {
-      children: [_$$tx("rcs.import.one_of_the_coolest_things_about_figma_is_that_you_don_t_have_to_start_from_scratch_to_get_to_work"), jsx("br", {}), jsx("br", {}), _$$tx("rcs.import.just_drag_your_sketch_files_onto_the_browser_and_we_ll_convert_them_to_figma_for_you")]
+      children: [renderI18nText("rcs.import.one_of_the_coolest_things_about_figma_is_that_you_don_t_have_to_start_from_scratch_to_get_to_work"), jsx("br", {}), jsx("br", {}), renderI18nText("rcs.import.just_drag_your_sketch_files_onto_the_browser_and_we_ll_convert_them_to_figma_for_you")]
     })]
   });
 }
@@ -432,7 +432,7 @@ function ey(e) {
     onManualDismiss: e.onManualDismiss,
     onboardingKey: "import",
     testId: "ImportOverlay",
-    title: () => _$$t("rcs.import.import_sketch_files"),
+    title: () => getI18nString("rcs.import.import_sketch_files"),
     totalNumSteps: e.totalNumSteps,
     trackingContextName: "Import Sketch File Onboarding Modal",
     userFlagOnShow: "import_file_onboarded"
@@ -458,10 +458,10 @@ function ev(e) {
 }
 function eE(e) {
   return jsx(_$$h2, {
-    ctaText: _$$tx("rcs.open_file.create_file"),
+    ctaText: renderI18nText("rcs.open_file.create_file"),
     currentStepIndex: e.currentStepIndex,
     element: () => jsx(ak, {
-      children: _$$tx("rcs.open_file.open_a_file_to_learn_more_about_figma_s_powerful_editing_features")
+      children: renderI18nText("rcs.open_file.open_a_file_to_learn_more_about_figma_s_powerful_editing_features")
     }),
     isShowing: e.isShowing,
     modalType: q3.DRAGGABLE,
@@ -478,7 +478,7 @@ function eE(e) {
     onClose: e.onClose,
     onManualDismiss: e.onManualDismiss,
     testId: "OpenFileOverlay",
-    title: () => _$$t("rcs.open_file.edit_a_file"),
+    title: () => getI18nString("rcs.open_file.edit_a_file"),
     totalNumSteps: e.totalNumSteps,
     trackingContextName: "Edit a File Onboarding Modal"
   });
@@ -486,8 +486,8 @@ function eE(e) {
 function eI() {
   let e = useSelector(e => e.currentUserOrgId);
   let t = c4(e).data ?? !1;
-  let n = _$$tx("rcs.org_welcome.click_the_all_teams_button_on_the_left_to_find_teams_to_join");
-  t && (n = _$$tx("rcs.bigma_org_welcome.click_the_all_workspaces_button_on_the_left_to_find_teams_to_join"));
+  let n = renderI18nText("rcs.org_welcome.click_the_all_teams_button_on_the_left_to_find_teams_to_join");
+  t && (n = renderI18nText("rcs.bigma_org_welcome.click_the_all_workspaces_button_on_the_left_to_find_teams_to_join"));
   return jsxs("div", {
     children: [jsx(Gv, {
       src: buildUploadUrl("6f3307f82aeddf6f609eaf97ee9e66e788d485c1"),
@@ -495,7 +495,7 @@ function eI() {
       margin: "14px 0px 14px 27px"
     }), jsxs(ak, {
       children: [jsx("p", {
-        children: _$$tx("rcs.org_welcome.figma_organization_connects_files_projects_libraries_and_teams_securely_across_your_company")
+        children: renderI18nText("rcs.org_welcome.figma_organization_connects_files_projects_libraries_and_teams_securely_across_your_company")
       }), n]
     })]
   });
@@ -511,7 +511,7 @@ function eA(e) {
     onClose: e.onClose,
     onManualDismiss: e.onManualDismiss,
     testId: "OrgWelcomeOverlay",
-    title: () => _$$t("rcs.org_welcome.welcome_to_your_figma_organization"),
+    title: () => getI18nString("rcs.org_welcome.welcome_to_your_figma_organization"),
     totalNumSteps: e.totalNumSteps,
     trackingContextName: "Orgs Welcome Onboarding Modal",
     userFlagOnShow: "orgs_onboarded",
@@ -533,7 +533,7 @@ function eO(e) {
     topPadding: 8,
     alignPointerToLeft: !0,
     className: "plan_spaces_overlay--planSpacesPointerModal--aClGx pointer_modal--pointerModalBlue--9Jjg8 pointer_modal--pointerModal--wrpFz",
-    children: [_$$tx("rcs.plan_spaces.file_browser_onboarding_step.seat_rename"), jsx(IY, {
+    children: [renderI18nText("rcs.plan_spaces.file_browser_onboarding_step.seat_rename"), jsx(IY, {
       onClick: () => {
         close();
         e.onClickPrimaryCta();
@@ -558,21 +558,21 @@ function eR(e) {
 function eP(e) {
   return jsxs(Fragment, {
     children: [jsxs(ak, {
-      children: [_$$tx("rcs.welcome_step.welcome_to_figma"), jsx("br", {}), jsx("br", {}), _$$tx("rcs.welcome_step.we_re_different_from_other_design_tools_in_some_really_special_ways_so_we_d_like_to_take_you_through_them")]
+      children: [renderI18nText("rcs.welcome_step.welcome_to_figma"), jsx("br", {}), jsx("br", {}), renderI18nText("rcs.welcome_step.we_re_different_from_other_design_tools_in_some_really_special_ways_so_we_d_like_to_take_you_through_them")]
     }), jsx(iy, {
       children: jsx($z, {
         onClick: e.onClickPrimaryCta,
         variant: "primary",
-        children: _$$tx("rcs.welcome_step_view.next")
+        children: renderI18nText("rcs.welcome_step_view.next")
       })
     })]
   });
 }
 function eD(e) {
   let t = useSelector(e => e.user?.name);
-  let n = t ? _$$t("rcs.welcome_step.welcome_user_name", {
+  let n = t ? getI18nString("rcs.welcome_step.welcome_user_name", {
     userFirstName: t
-  }) : _$$t("rcs.welcome_step.welcome");
+  }) : getI18nString("rcs.welcome_step.welcome");
   return jsx(_$$h2, {
     currentStepIndex: e.currentStepIndex,
     disableFooter: !0,
@@ -601,14 +601,14 @@ let eU = () => {
 };
 function eG() {
   let e = useDispatch();
-  let t = md(qG);
-  let n = md(eL);
+  let t = useAtomWithSubscription(qG);
+  let n = useAtomWithSubscription(eL);
   let r = ZC(n);
-  let s = md(d2);
+  let s = useAtomWithSubscription(d2);
   let l = useSelector(e => e.currentUserOrgId);
   let d = UC(l);
-  let c = md(d);
-  let _ = md(Ot);
+  let c = useAtomWithSubscription(d);
+  let _ = useAtomWithSubscription(Ot);
   let u = _$$e({
     overlay: Ob5,
     priority: _$$N.OVERRIDING_MODAL
@@ -686,10 +686,10 @@ function eW(e) {
 }
 function eK() {
   let e = useSelector(e => e.currentUserOrgId);
-  let t = md(_$$Z);
+  let t = useAtomWithSubscription(_$$Z);
   let n = RG();
-  let r = _$$tx("rcs.org_welcome.click_on_the_organization_button_on_the_left_to_find_teams_to_join");
-  D6(e) ? r = n ? _$$tx("rcs.bigma_org_welcome.click_the_all_workspaces_button_on_the_left_to_find_teams_to_join") : _$$tx("rcs.org_welcome.click_the_all_teams_button_on_the_left_to_find_teams_to_join") : t && (r = _$$tx("rcs.org_welcome.click_the_current_org_name_span_button_on_the_left_to_find_teams_to_join", {
+  let r = renderI18nText("rcs.org_welcome.click_on_the_organization_button_on_the_left_to_find_teams_to_join");
+  D6(e) ? r = n ? renderI18nText("rcs.bigma_org_welcome.click_the_all_workspaces_button_on_the_left_to_find_teams_to_join") : renderI18nText("rcs.org_welcome.click_the_all_teams_button_on_the_left_to_find_teams_to_join") : t && (r = renderI18nText("rcs.org_welcome.click_the_current_org_name_span_button_on_the_left_to_find_teams_to_join", {
     orgName: jsx("span", {
       className: _$$s.fontBold.$,
       children: t.name
@@ -698,15 +698,15 @@ function eK() {
   return jsxs(Fragment, {
     children: [jsx("p", {
       className: _$$s.pb8.$,
-      children: _$$tx("rcs.org_welcome.figma_organization_connects_files_projects_libraries_and_teams_securely_across_your_company")
+      children: renderI18nText("rcs.org_welcome.figma_organization_connects_files_projects_libraries_and_teams_securely_across_your_company")
     }), r]
   });
 }
 let eY = "orgs_onboarded";
 let eQ = r1(eY);
 function eZ() {
-  let e = md(d2);
-  let t = md(eQ);
+  let e = useAtomWithSubscription(d2);
+  let t = useAtomWithSubscription(eQ);
   let n = _$$e({
     overlay: X5_,
     priority: _$$N.OVERRIDING_MODAL
@@ -727,12 +727,12 @@ function eZ() {
     onClose: n.complete,
     position: _$$Q.CENTER,
     primaryCta: {
-      label: _$$tx("rcs.rcs_shared.done"),
+      label: renderI18nText("rcs.rcs_shared.done"),
       type: "button",
       onClick: n.complete,
       ctaTrackingDescriptor: _$$c.DONE
     },
-    title: _$$tx("rcs.org_welcome.welcome_to_your_figma_organization"),
+    title: renderI18nText("rcs.org_welcome.welcome_to_your_figma_organization"),
     trackingContextName: "Orgs Welcome Onboarding Modal",
     userFlagOnShow: eY,
     width: 350
@@ -761,16 +761,16 @@ function ti({
       height: 100
     }), jsx("span", {
       className: _$$s.textHeadingLarge.colorText.$,
-      children: _$$tx("onboarding.workspace_step.title")
+      children: renderI18nText("onboarding.workspace_step.title")
     }), jsx("span", {
       className: _$$s.textBodyLarge.colorText.$,
       children: jsx("div", {
         className: "workspace_selector--descriptionContainer---ZBF1",
-        children: _$$tx("onboarding.workspace_step.subtitle_v2", {
+        children: renderI18nText("onboarding.workspace_step.subtitle_v2", {
           orgName: s.name,
           tipText: jsx("span", {
             className: _$$s.textBodyLargeStrong.$,
-            children: _$$tx("onboarding.workspace_step.tip")
+            children: renderI18nText("onboarding.workspace_step.tip")
           })
         })
       })
@@ -794,7 +794,7 @@ function ti({
         trackingProperties: {
           trackingDescriptor: _$$c.SKIP
         },
-        children: _$$tx("onboarding.skip")
+        children: renderI18nText("onboarding.skip")
       }), jsx(_$$vd, {
         onClick: () => {
           n && (i(_$$x({
@@ -805,7 +805,7 @@ function ti({
         trackingProperties: {
           trackingDescriptor: _$$c.JOIN
         },
-        children: _$$tx("onboarding.workspace_step.join")
+        children: renderI18nText("onboarding.workspace_step.join")
       })]
     })
   });
@@ -818,7 +818,7 @@ function ti({
       padding: 0,
       tintedModalBackground: !0,
       hide: e => {
-        sx("Modal Close", {
+        trackEventAnalytics("Modal Close", {
           source: e,
           trackingContext: tr
         });
@@ -868,7 +868,7 @@ function to({
 }
 let ts = "workspace_selector_seen";
 let tl = _$$g(ts);
-let td = Iz(e => Z1(saW.Query({
+let td = createRemovableAtomFamily(e => Z1(saW.Query({
   orgId: e
 }), e => {
   if (!e.org?.workspaces) return null;
@@ -882,11 +882,11 @@ function tc() {
   let n = "loaded" === t.status ? t?.data?.key.parentId ?? void 0 : void 0;
   let r = useRef();
   r.current = n;
-  let o = md(d2);
-  let s = md(uA);
+  let o = useAtomWithSubscription(d2);
+  let s = useAtomWithSubscription(uA);
   let l = Au(e);
-  let d = md(td(e));
-  let c = md(tl);
+  let d = useAtomWithSubscription(td(e));
+  let c = useAtomWithSubscription(tl);
   let {
     show,
     complete,
@@ -914,45 +914,45 @@ function tc() {
       onModalClose: complete,
       workspaces: d.data
     })
-  }) : ($D(_$$e2.SCALE, Error("workspaceSelectorOptionsAtomQuery.data not present after OrgSelectWorkspace overlay is showing")), complete(), null) : null;
+  }) : (reportError(_$$e2.SCALE, Error("workspaceSelectorOptionsAtomQuery.data not present after OrgSelectWorkspace overlay is showing")), complete(), null) : null;
 }
 let tw = (e, t) => e ? jsx(_$$E2, {
   fontSize: 20,
   fontWeight: "medium",
-  children: _$$tx("rcs.plan_spaces.drafts_have_a_new_home")
+  children: renderI18nText("rcs.plan_spaces.drafts_have_a_new_home")
 }) : t ? jsx(_$$E2, {
   fontSize: 20,
   fontWeight: "medium",
-  children: _$$tx("rcs.plan_spaces.a_simpler_switcher_menu")
+  children: renderI18nText("rcs.plan_spaces.a_simpler_switcher_menu")
 }) : jsx(_$$E2, {
   fontSize: 20,
   fontWeight: "medium",
-  children: _$$tx("rcs.plan_spaces.changes_to_your_drafts")
+  children: renderI18nText("rcs.plan_spaces.changes_to_your_drafts")
 });
 let tT = (e, t) => e ? jsx(_$$E2, {
   fontSize: 14,
-  children: _$$tx("rcs.plan_spaces.drafts_lived_in_separate_area")
+  children: renderI18nText("rcs.plan_spaces.drafts_lived_in_separate_area")
 }) : t ? jsx(_$$E2, {
   fontSize: 14,
-  children: _$$tx("rcs.plan_spaces.a_simpler_switcher_menu.description")
+  children: renderI18nText("rcs.plan_spaces.a_simpler_switcher_menu.description")
 }) : jsx(_$$E2, {
   fontSize: 14,
-  children: _$$tx("rcs.plan_spaces.starter_pro.onboarding_modal_description")
+  children: renderI18nText("rcs.plan_spaces.starter_pro.onboarding_modal_description")
 });
 let tj = (e, t) => e ? jsx(_$$E2, {
   fontSize: 14,
-  children: _$$tx("rcs.plan_spaces.nothing_else_has_changed")
+  children: renderI18nText("rcs.plan_spaces.nothing_else_has_changed")
 }) : t ? jsx(_$$E2, {
   fontSize: 14,
   color: "secondary",
-  children: _$$tx("rcs.plan_spaces.user_help_migrating_drafts_awareness")
+  children: renderI18nText("rcs.plan_spaces.user_help_migrating_drafts_awareness")
 }) : jsx(_$$E2, {
   fontSize: 14,
-  children: _$$tx("rcs.plan_spaces.starter_pro.onboarding_modal_body")
+  children: renderI18nText("rcs.plan_spaces.starter_pro.onboarding_modal_body")
 });
 let tk = (e, t) => jsx(_$$E2, {
   fontSize: 13,
-  children: _$$tx(t || e ? "rcs.plan_spaces.got_it" : "rcs.plan_spaces.show_me_what_changed")
+  children: renderI18nText(t || e ? "rcs.plan_spaces.got_it" : "rcs.plan_spaces.show_me_what_changed")
 });
 let tE = memo(({
   hasOrgPlan: e,
@@ -1001,7 +1001,7 @@ let tC = memo(({
           onClick: l,
           children: jsx(_$$E2, {
             fontSize: 13,
-            children: _$$tx("rcs.plan_spaces.learn_more")
+            children: renderI18nText("rcs.plan_spaces.learn_more")
           })
         })]
       })]
@@ -1026,7 +1026,7 @@ function tS() {
   let r = e.filter(e => e.plan_type === _$$O.TEAM).map(e => t[e.plan_id]).filter(e => !!e);
   let s = useDispatch();
   let l = DP();
-  let d = md(mp);
+  let d = useAtomWithSubscription(mp);
   let _ = e.some(e => e.plan_type === _$$O.ORG);
   let u = 1 === r.length && r[0].starter_team && !_;
   let m = function (e, t, n) {
@@ -1057,16 +1057,16 @@ function tS() {
     onComplete: lQ
   });
   let T = [{
-    title: _$$tx("rcs.plan_spaces_onboarding_sequence.drafts_in_a_team"),
-    description: _$$tx("rcs.plan_spaces_onboarding_sequence.private_drafts_folder"),
+    title: renderI18nText("rcs.plan_spaces_onboarding_sequence.drafts_in_a_team"),
+    description: renderI18nText("rcs.plan_spaces_onboarding_sequence.private_drafts_folder"),
     trackingContextName: "Plan spaces onboarding - Team drafts folder",
     targetKey: uZ,
     emphasized: !0,
     pointToLeftEdge: !0,
     disableHighlight: !0
   }, {
-    title: _$$tx("rcs.plan_spaces_onboarding_sequence.new_space_for_teams"),
-    description: _$$tx("rcs.plan_spaces_onboarding_sequence.switch_between_teams"),
+    title: renderI18nText("rcs.plan_spaces_onboarding_sequence.new_space_for_teams"),
+    description: renderI18nText("rcs.plan_spaces_onboarding_sequence.switch_between_teams"),
     trackingContextName: "Plan spaces onboarding - A new way to access teams",
     targetKey: _$$U3,
     emphasized: !0,
@@ -1074,8 +1074,8 @@ function tS() {
     disableHighlight: !0
   }];
   x && T.push({
-    title: _$$tx("rcs.plan_spaces_onboarding_sequence.lets_move_these_files"),
-    description: _$$tx("rcs.plan_spaces_onboarding_sequence.finding_the_right_home"),
+    title: renderI18nText("rcs.plan_spaces_onboarding_sequence.lets_move_these_files"),
+    description: renderI18nText("rcs.plan_spaces_onboarding_sequence.finding_the_right_home"),
     trackingContextName: "Plan spaces onboarding - Drafts to move",
     targetKey: _$$P2,
     emphasized: !0,
@@ -1130,9 +1130,9 @@ let tO = "saw_recreated_starter_team_onboarding";
 let tR = r1(tO);
 let tM = r1("had_recreated_starter_team");
 function tP() {
-  let e = md(tR);
+  let e = useAtomWithSubscription(tR);
   let t = _$$d();
-  let n = md(tM);
+  let n = useAtomWithSubscription(tM);
   let {
     show,
     isShowing,
@@ -1149,14 +1149,14 @@ function tP() {
   return jsx(rq, {
     arrowPosition: _$$F_.LEFT_TITLE,
     description: jsx("p", {
-      children: _$$tx("rcs.plan_spaces_new_starter_team.text")
+      children: renderI18nText("rcs.plan_spaces_new_starter_team.text")
     }),
     emphasized: !0,
     isShowing,
     onClose: complete,
     targetKey: _$$U3,
     testId: "PlanSpacesRecreatedStarterTeamOverlay",
-    title: _$$tx("rcs.plan_spaces_new_starter_team.title"),
+    title: renderI18nText("rcs.plan_spaces_new_starter_team.title"),
     trackingContextName: "plan_spaces_recreated_starter_team_modal",
     userFlagOnShow: tO
   });
@@ -1255,7 +1255,7 @@ function tV(e) {
         children: [stepProps && jsx(_$$E2, {
           color: "secondary",
           fontSize: 13,
-          children: _$$tx("pro_trials_v3.pro_trial_initiation_modal.step_counter", {
+          children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.step_counter", {
             currentStep: stepProps.currentStep + 1,
             totalSteps: stepProps.totalSteps
           })
@@ -1281,13 +1281,13 @@ function t0() {
   let [e, t] = useState();
   let n = useMemo(() => [{
     title: jsx(_$$E2, {
-      children: _$$tx("pro_trials_v3.downgrade_modal.feature_downgrade.consumption_limit.title", {
+      children: renderI18nText("pro_trials_v3.downgrade_modal.feature_downgrade.consumption_limit.title", {
         maxNumOfFiles: WW,
         maxNumOfProjects: Wf
       })
     }),
     children: jsx(_$$E2, {
-      children: _$$tx("pro_trials_v3.downgrade_modal.feature_downgrade.consumption_limit.description")
+      children: renderI18nText("pro_trials_v3.downgrade_modal.feature_downgrade.consumption_limit.description")
     }),
     leftComponent: jsx(_$$Y, {
       width: "hug-contents",
@@ -1302,10 +1302,10 @@ function t0() {
     })
   }, {
     title: jsx(_$$E2, {
-      children: _$$tx("pro_trials_v3.downgrade_modal.feature_downgrade.team_library.title")
+      children: renderI18nText("pro_trials_v3.downgrade_modal.feature_downgrade.team_library.title")
     }),
     children: jsx(_$$E2, {
-      children: _$$tx("pro_trials_v3.downgrade_modal.feature_downgrade.team_library.description")
+      children: renderI18nText("pro_trials_v3.downgrade_modal.feature_downgrade.team_library.description")
     }),
     leftComponent: jsx(_$$Y, {
       width: "hug-contents",
@@ -1320,10 +1320,10 @@ function t0() {
     })
   }, {
     title: jsx(_$$E2, {
-      children: _$$tx("pro_trials_v3.downgrade_modal.feature_downgrade.other.title")
+      children: renderI18nText("pro_trials_v3.downgrade_modal.feature_downgrade.other.title")
     }),
     children: jsx(_$$E2, {
-      children: _$$tx("pro_trials_v3.downgrade_modal.feature_downgrade.other.description")
+      children: renderI18nText("pro_trials_v3.downgrade_modal.feature_downgrade.other.description")
     }),
     leftComponent: jsx(_$$Y, {
       width: "hug-contents",
@@ -1397,22 +1397,22 @@ let t1 = Ju(function ({
       titleText: jsx(_$$E2, {
         fontSize: 24,
         fontWeight: "bold",
-        children: _$$tx("pro_trials_v3.downgrade_modal.title")
+        children: renderI18nText("pro_trials_v3.downgrade_modal.title")
       }),
       descriptionText: jsx(_$$E2, {
         color: "secondary",
         fontSize: 13,
-        children: _$$tx("pro_trials_v3.downgrade_modal.description")
+        children: renderI18nText("pro_trials_v3.downgrade_modal.description")
       }),
       middleContent: jsx(t0, {}),
       ctaOnClick: n,
       ctaDisabled: !1,
       ctaText: jsx(_$$E2, {
-        children: _$$tx("pro_trials_v3.downgrade_modal.cta.text")
+        children: renderI18nText("pro_trials_v3.downgrade_modal.cta.text")
       }),
       textCtaOnClick: r,
       textCtaText: jsx(_$$E2, {
-        children: _$$tx("pro_trials_v3.downgrade_modal.text_cta.text")
+        children: renderI18nText("pro_trials_v3.downgrade_modal.text_cta.text")
       }),
       hideModal: n
     })
@@ -1433,11 +1433,11 @@ function t3(e) {
       ctaDisabled: 0 === selectedFeatures.size,
       ctaOnClick: onClickCTA,
       ctaText: jsx(_$$E2, {
-        children: _$$tx("pro_trials_v3.pro_trial_initiation_modal.finish")
+        children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.finish")
       }),
       descriptionText: jsx(_$$E2, {
         fontSize: 13,
-        children: _$$tx("pro_trials_v3.pro_trial_initiation_modal.you_have_14_days", {
+        children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.you_have_14_days", {
           proTrialDuration: $g
         })
       }),
@@ -1463,12 +1463,12 @@ function t3(e) {
       textCtaOnClick: onBack,
       textCtaText: jsx(_$$E2, {
         fontSize: 13,
-        children: _$$tx("pro_trials_v3.pro_trial_initiation_modal.go_back")
+        children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.go_back")
       }),
       titleText: jsx(_$$E2, {
         fontSize: 24,
         fontWeight: "bold",
-        children: _$$tx("pro_trials_v3.pro_trial_initiation_modal.what_are_you_excited")
+        children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.what_are_you_excited")
       })
     })
   });
@@ -1516,11 +1516,11 @@ function t8(e) {
       ctaDisabled: void 0 === selectedTeamType,
       ctaOnClick: onClickCTA,
       ctaText: jsx(_$$E2, {
-        children: _$$tx("pro_trials_v3.pro_trial_initiation_modal.continue")
+        children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.continue")
       }),
       descriptionText: jsx(_$$E2, {
         fontSize: 13,
-        children: _$$tx("pro_trials_v3.pro_trial_initiation_modal.not_being_nosy")
+        children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.not_being_nosy")
       }),
       hideModal,
       middleContent: jsx(_$$Y, {
@@ -1552,12 +1552,12 @@ function t8(e) {
       textCtaOnClick: onBack,
       textCtaText: jsx(_$$E2, {
         fontSize: 13,
-        children: _$$tx("pro_trials_v3.pro_trial_initiation_modal.go_back")
+        children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.go_back")
       }),
       titleText: jsx(_$$E2, {
         fontSize: 24,
         fontWeight: "bold",
-        children: _$$tx("pro_trials_v3.pro_trial_initiation_modal.what_type_of_team", {
+        children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.what_type_of_team", {
           teamName: selectedTeamName
         })
       })
@@ -1603,11 +1603,11 @@ function nt(e) {
       ctaDisabled: void 0 === selectedTeamID,
       ctaOnClick: onClickCTA,
       ctaText: jsx(_$$E2, {
-        children: _$$tx("pro_trials_v3.pro_trial_initiation_modal.upgrade_to_pro")
+        children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.upgrade_to_pro")
       }),
       descriptionText: jsx(_$$E2, {
         fontSize: 13,
-        children: _$$tx("pro_trials_v3.pro_trial_initiation_modal.everyone_will_be_upgraded")
+        children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.everyone_will_be_upgraded")
       }),
       hideModal,
       middleContent: jsx("div", {
@@ -1627,12 +1627,12 @@ function nt(e) {
       textCtaOnClick: onBack,
       textCtaText: jsx(_$$E2, {
         fontSize: 13,
-        children: _$$tx("pro_trials_v3.pro_trial_initiation_modal.cancel")
+        children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.cancel")
       }),
       titleText: jsx(_$$E2, {
         fontSize: 24,
         fontWeight: "bold",
-        children: _$$tx("pro_trials_v3.pro_trial_initiation_modal.pick_a_team")
+        children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.pick_a_team")
       })
     })
   });
@@ -1665,7 +1665,7 @@ function nn(e) {
       color: "secondary",
       fontSize: 14,
       fontWeight: "medium",
-      children: _$$tx("pro_trials_v3.pro_trial_initiation_modal.editors.seat_rename", {
+      children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.editors.seat_rename", {
         numEditors: team.editors
       })
     })]
@@ -1680,9 +1680,9 @@ let na = Ju(function () {
   let [u, m] = useState(PG);
   let p = xX();
   let g = useDispatch();
-  let f = useCallback(() => p.find(e => e.id === n)?.name ?? _$$t("pro_trials_v3.pro_trial_initiation_modal.your_team"), [p, n]);
+  let f = useCallback(() => p.find(e => e.id === n)?.name ?? getI18nString("pro_trials_v3.pro_trial_initiation_modal.your_team"), [p, n]);
   let h = useCallback(() => g(Ce()), [g]);
-  let b = _$$t("payments.pro_trial.start_pro_trial_error");
+  let b = getI18nString("payments.pro_trial.start_pro_trial_error");
   useEffect(() => {
     _(shuffle(TB));
     m(shuffle(PG));
@@ -1749,7 +1749,7 @@ function no(e) {
   let r = jsxs(Fragment, {
     children: [jsx(_$$E2, {
       fontSize: 13,
-      children: _$$tx("pro_trials_v3.entry_modal_explanation")
+      children: renderI18nText("pro_trials_v3.entry_modal_explanation")
     }), jsx(nc, {})]
   });
   let i = jsx(_$$nD, {
@@ -1762,14 +1762,14 @@ function no(e) {
     trackingProperties: _$$ng.getTrackingProperties("Start professional trial"),
     children: jsx(_$$E2, {
       fontSize: 13,
-      children: _$$tx("pro_trials_v3.entry_modal_cta_text")
+      children: renderI18nText("pro_trials_v3.entry_modal_cta_text")
     })
   });
   return jsx(nd, {
     titleText: jsx(_$$E2, {
       fontSize: 24,
       fontWeight: "bold",
-      children: _$$tx("pro_trials_v3.entry_modal_title")
+      children: renderI18nText("pro_trials_v3.entry_modal_title")
     }),
     descriptionText: r,
     ctaButton: i,
@@ -1785,7 +1785,7 @@ function ns(e) {
   let i = jsxs(Fragment, {
     children: [jsx(_$$E2, {
       fontSize: 13,
-      children: _$$tx("pro_trials_v3.team_welcome_modal_explanation")
+      children: renderI18nText("pro_trials_v3.team_welcome_modal_explanation")
     }), jsx(nc, {})]
   });
   let o = jsx(_$$nD, {
@@ -1799,7 +1799,7 @@ function ns(e) {
     trackingProperties: _$$ng.getTrackingProperties("Team welcome to Professional trial"),
     children: jsx(_$$E2, {
       fontSize: 13,
-      children: _$$tx("pro_trials_v3.team_welcome_modal_cta")
+      children: renderI18nText("pro_trials_v3.team_welcome_modal_cta")
     })
   });
   return jsx(nd, {
@@ -1807,7 +1807,7 @@ function ns(e) {
     titleText: jsx(_$$E2, {
       fontSize: 24,
       fontWeight: "bold",
-      children: _$$tx("pro_trials_v3.team_welcome_modal_title")
+      children: renderI18nText("pro_trials_v3.team_welcome_modal_title")
     }),
     imgSrc: buildUploadUrl("4323e87513cec17f5decef84ebf66c12c0d2ea59"),
     ctaButton: o
@@ -1834,7 +1834,7 @@ function nl(e) {
     trackingProperties: _$$ng.getTrackingProperties("Upgrade from Pro trial expiry modal"),
     children: jsx(_$$E2, {
       fontSize: 13,
-      children: _$$tx("pro_trials_v3.expiry_modal_cta_text")
+      children: renderI18nText("pro_trials_v3.expiry_modal_cta_text")
     })
   });
   let s = jsx($9, {
@@ -1849,18 +1849,18 @@ function nl(e) {
     trackingProperties: _$$ng.getTrackingProperties("Go back to Starter from Pro trial expiry modal"),
     children: jsx(_$$E2, {
       fontSize: 13,
-      children: _$$tx("pro_trials_v3.expiry_modal_secondary_cta_text")
+      children: renderI18nText("pro_trials_v3.expiry_modal_secondary_cta_text")
     })
   });
   return jsx(nd, {
     titleText: jsx(_$$E2, {
       fontSize: 24,
       fontWeight: "bold",
-      children: _$$tx("pro_trials_v3.expiry_modal_title")
+      children: renderI18nText("pro_trials_v3.expiry_modal_title")
     }),
     descriptionText: jsx(_$$E2, {
       fontSize: 13,
-      children: _$$tx("pro_trials_v3.expiry_modal_explanation")
+      children: renderI18nText("pro_trials_v3.expiry_modal_explanation")
     }),
     ctaButton: o,
     secondaryCtaButton: s,
@@ -1897,11 +1897,11 @@ function nc() {
   return jsxs("div", {
     className: "pro_trials_v3_modal_components--proFeatureCheckBullets--B5Jb5",
     children: [jsx(_$$X2, {
-      bulletLabel: _$$t("pro_trials_v3.entry_modal_bullet_pt_1")
+      bulletLabel: getI18nString("pro_trials_v3.entry_modal_bullet_pt_1")
     }), jsx(_$$X2, {
-      bulletLabel: _$$t("pro_trials_v3.entry_modal_bullet_pt_2")
+      bulletLabel: getI18nString("pro_trials_v3.entry_modal_bullet_pt_2")
     }), jsx(_$$X2, {
-      bulletLabel: _$$t("pro_trials_v3.entry_modal_bullet_pt_3")
+      bulletLabel: getI18nString("pro_trials_v3.entry_modal_bullet_pt_3")
     })]
   });
 }
@@ -2050,7 +2050,7 @@ function np() {
     children: _()
   });
 }
-let nb = _$$eU(() => {
+let nb = atom(() => {
   let e = UG();
   try {
     return e.get(Bq);
@@ -2059,7 +2059,7 @@ let nb = _$$eU(() => {
   }
   return !1;
 });
-let nx = bt(e => null != e.payment.promo);
+let nx = createReduxSubscriptionAtomWithState(e => null != e.payment.promo);
 let ny = Z1(Vm, e => (e ?? []).some(e => null != e && !w5({
   subscription: e.subscription,
   student_team: !!e.studentTeamAt,
@@ -2082,16 +2082,16 @@ function nw({
     shouldScrollTargetIntoView: !0,
     children: [jsx("div", {
       className: Hj,
-      children: _$$tx("rcs.promo_new_team_create_pointer.first_create_a_team")
-    }), _$$tx("rcs.promo_new_team_create_pointer.to_get_professional_free_for_days_you_ll_need_to_set_up_a_new_team_first_it_ll_take_less_than_a_minute", {
+      children: renderI18nText("rcs.promo_new_team_create_pointer.first_create_a_team")
+    }), renderI18nText("rcs.promo_new_team_create_pointer.to_get_professional_free_for_days_you_ll_need_to_set_up_a_new_team_first_it_ll_take_less_than_a_minute", {
       days: parseInt(t.promo_value)
     })]
   });
 }
 function nT() {
-  let e = md(ny);
-  let t = md(nb);
-  let n = md(nx);
+  let e = useAtomWithSubscription(ny);
+  let t = useAtomWithSubscription(nb);
+  let n = useAtomWithSubscription(nx);
   let r = _$$e({
     overlay: Qlc,
     priority: _$$N.OVERRIDING_MODAL
@@ -2121,16 +2121,16 @@ function nI(e) {
   let i = parseInt(n.promo_value);
   if (n.claims_end_at) {
     let e = new Date(Date.parse(n.claims_end_at));
-    r = n.is_multi_redeemable ? _$$t("promo.select_team.multi_redeem_w_deadline_promo_str.seat_rename", {
+    r = n.is_multi_redeemable ? getI18nString("promo.select_team.multi_redeem_w_deadline_promo_str.seat_rename", {
       days: i,
       date: e
-    }) : _$$t("promo.select_team.single_redeem_w_deadline_promo_str.seat_rename", {
+    }) : getI18nString("promo.select_team.single_redeem_w_deadline_promo_str.seat_rename", {
       days: i,
       date: e
     });
-  } else r = n.is_multi_redeemable ? _$$t("promo.select_team.multi_redeem_without_deadline_promo_str.seat_rename", {
+  } else r = n.is_multi_redeemable ? getI18nString("promo.select_team.multi_redeem_without_deadline_promo_str.seat_rename", {
     days: i
-  }) : _$$t("promo.select_team.single_redeem_without_deadline_promo_str.seat_rename", {
+  }) : getI18nString("promo.select_team.single_redeem_without_deadline_promo_str.seat_rename", {
     days: i
   });
   return jsxs(_$$ey, {
@@ -2139,7 +2139,7 @@ function nI(e) {
     className: "promo_code_select_team_content--modal--20aUA",
     children: [jsx("div", {
       className: "promo_code_select_team_content--promoSelectTeamTitle--f1dSV text--fontPos13--xW8hS text--_fontBase--QdLsd",
-      children: _$$tx("promo.select_team.choose_teams_to_upgrade")
+      children: renderI18nText("promo.select_team.choose_teams_to_upgrade")
     }), jsx("div", {
       className: "promo_code_select_team_content--promoSelectTeamDescription--pHb18 text--fontPos11--2LvXf text--_fontBase--QdLsd",
       children: r
@@ -2193,9 +2193,9 @@ function nA({
   });
 }
 function nS() {
-  let e = md(ny);
-  let t = md(nb);
-  let n = md(nx);
+  let e = useAtomWithSubscription(ny);
+  let t = useAtomWithSubscription(nb);
+  let n = useAtomWithSubscription(nx);
   let r = _$$e({
     overlay: I$z,
     priority: _$$N.OVERRIDING_MODAL
@@ -2220,8 +2220,8 @@ function nS() {
 }
 let nD = r1(J5);
 function nL() {
-  let e = md(nD);
-  let t = md(Fy);
+  let e = useAtomWithSubscription(nD);
+  let t = useAtomWithSubscription(Fy);
   let n = Fz();
   let {
     show,
@@ -2241,12 +2241,12 @@ function nL() {
   let _ = _$$P4();
   return jsx(rq, {
     arrowPosition: _$$F_.LEFT_TITLE,
-    description: _$$tx("community.resource_hub.promotion"),
+    description: renderI18nText("community.resource_hub.promotion"),
     emphasized: !0,
     isShowing,
     onClose: complete,
     primaryCta: {
-      label: _$$tx("community.resource_hub.promotion.show_me_more"),
+      label: renderI18nText("community.resource_hub.promotion.show_me_more"),
       type: "button",
       onClick: () => {
         _$$Ay.push(new au({
@@ -2258,13 +2258,13 @@ function nL() {
       ctaTrackingDescriptor: _$$c.SHOW_ME_MORE
     },
     secondaryCta: {
-      label: _$$tx("community.resource_hub.promotion.cancel"),
+      label: renderI18nText("community.resource_hub.promotion.cancel"),
       type: "button",
       onClick: complete,
       ctaTrackingDescriptor: _$$c.CANCEL
     },
     targetKey: "resource_hub_link",
-    title: _$$tx("community.resource_hub.promotion.title"),
+    title: renderI18nText("community.resource_hub.promotion.title"),
     trackingContextName: HH.RESOURCE_HUB_PROMOTIONAL_OVERLAY,
     userFlagOnShow: J5,
     width: 300
@@ -2273,7 +2273,7 @@ function nL() {
 let nW = "seen_team_project_link_overlay";
 let nz = r1(nW);
 function n$() {
-  let e = md(nz);
+  let e = useAtomWithSubscription(nz);
   let t = fn();
   let n = () => t === ih.CONTROL;
   let {
@@ -2296,7 +2296,7 @@ function n$() {
   });
   return jsx(rq, {
     arrowPosition: F_.LEFT_TITLE,
-    description: _$$tx("team_project_link.overlay.description"),
+    description: renderI18nText("team_project_link.overlay.description"),
     emphasized: !0,
     isShowing,
     onClose: complete,
@@ -2336,7 +2336,7 @@ function n0() {
   });
   return jsx(_l, {
     closeButtonColor: "dark",
-    description: _$$tx("starter_plan_updates_modal.description"),
+    description: renderI18nText("starter_plan_updates_modal.description"),
     isShowing,
     media: jsx(B$, {
       aspectRatio: 1.625,
@@ -2347,18 +2347,18 @@ function n0() {
     onClose: complete,
     orientation: "landscape",
     primaryCta: {
-      label: _$$tx("starter_plan_updates_modal.primary_cta_button"),
+      label: renderI18nText("starter_plan_updates_modal.primary_cta_button"),
       type: "button",
       onClick: complete,
       ctaTrackingDescriptor: _$$c.GOT_IT
     },
     secondaryCta: {
-      label: _$$tx("starter_plan_updates_modal.secondary_cta_button"),
+      label: renderI18nText("starter_plan_updates_modal.secondary_cta_button"),
       type: "link",
       href: "https://help.figma.com/hc/categories/31823555275671-Figma-Sites",
       ctaTrackingDescriptor: _$$c.LEARN_MORE
     },
-    title: _$$tx("starter_plan_updates_modal.title"),
+    title: renderI18nText("starter_plan_updates_modal.title"),
     trackingContextName: "starter_plan_updates_overlay",
     trackingProperties: {
       plan: n
@@ -2366,9 +2366,9 @@ function n0() {
   });
 }
 function n6() {
-  let e = md(qG);
-  let t = md(Qm);
-  let n = md(zN);
+  let e = useAtomWithSubscription(qG);
+  let t = useAtomWithSubscription(Qm);
+  let n = useAtomWithSubscription(zN);
   let a = ol();
   let r = useDispatch();
   let o = _$$e({
@@ -2434,9 +2434,9 @@ let ar = Fu("seen_limited_spaces_onboarding");
 let ai = new Date("2024-10-30T20:00:00.000Z").getTime();
 function ao() {
   let e = useSelector(e => e.plans);
-  let t = md(mp);
-  let n = md(aa);
-  let r = md(ar);
+  let t = useAtomWithSubscription(mp);
+  let n = useAtomWithSubscription(aa);
+  let r = useAtomWithSubscription(ar);
   let s = e.some(e => e.plan_type === _$$O.TEAM && e.is_guest);
   let l = !!getFeatureFlags().limited_plan_spaces && s;
   let {
@@ -2453,26 +2453,26 @@ function ao() {
     });
   }, [l, show]), e.length) ? jsx(rq, {
     arrowPosition: _$$F_.RIGHT_TITLE,
-    description: _$$tx("rcs.limited_spaces.external_projects"),
+    description: renderI18nText("rcs.limited_spaces.external_projects"),
     disableHighlight: !0,
     emphasized: !0,
     isShowing,
     onClose: complete,
     primaryCta: {
-      label: _$$tx("rcs.got_it"),
+      label: renderI18nText("rcs.got_it"),
       type: "button",
       onClick: complete,
       ctaTrackingDescriptor: _$$c.GOT_IT
     },
     targetKey: _$$U3,
     testId: "limited_plan_spaces_onboarding_test_id",
-    title: _$$tx("rcs.limited_spaces.find_shared_projects"),
+    title: renderI18nText("rcs.limited_spaces.find_shared_projects"),
     trackingContextName: "Limited Spaces Onboarding Overlay"
   }) : null;
 }
 function a_() {
   let e = useDispatch();
-  let t = md(d2);
+  let t = useAtomWithSubscription(d2);
   let n = _$$e({
     overlay: Wb3,
     priority: _$$N.URGENT_ALERT
@@ -2533,7 +2533,7 @@ export function $$au2() {
       children: jsx(NuxOnboardingOverlay, {
         entryPoint: C5.FileBrowser
       })
-    }), (XN || !rr) && jsxs(Fragment, {
+    }), (isIpadDevice || !isMobileUA) && jsxs(Fragment, {
       children: [jsx(_$$p2, {
         children: jsx(eG, {})
       }), jsx(_$$p2, {

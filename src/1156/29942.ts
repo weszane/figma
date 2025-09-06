@@ -14,16 +14,16 @@ import { T as _$$T2 } from "../905/256551";
 import { l7 } from "../905/189185";
 import { Ay } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
-import { Xr, md, fp, zl } from "../figma_app/27355";
+import { Xr, useAtomWithSubscription, useAtomValueAndSetter, atomStoreManager } from "../figma_app/27355";
 import { N as _$$N } from "../vendor/930821";
 import { P as _$$P } from "../vendor/348225";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { F as _$$F } from "../905/680873";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { useSprigWithSampling } from "../905/99656";
 import { EJ, jN, gU } from "../figma_app/930338";
 import { Y as _$$Y } from "../905/506207";
-import { t as _$$t, tx as _$$tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { O1, Zl, uQ, Tv } from "../figma_app/311375";
 import { to as _$$to } from "../905/156213";
 import { eY as _$$eY } from "../figma_app/722362";
@@ -283,7 +283,7 @@ function eB({
       className: "x10l6tqk xclnmbr",
       children: jsx(_$$K, {
         onClick: n,
-        "aria-label": _$$t("living_designs.chat.errors.close"),
+        "aria-label": getI18nString("living_designs.chat.errors.close"),
         children: jsx(_$$L, {})
       })
     })]
@@ -308,8 +308,8 @@ function eU() {
     placement: "top"
   });
   let d = Xr(Xl);
-  let u = md(Xl);
-  let x = md(GV);
+  let u = useAtomWithSubscription(Xl);
+  let x = useAtomWithSubscription(GV);
   let m = _$$A4();
   return (_$$h(() => {
     x && m({
@@ -330,10 +330,10 @@ function eU() {
           className: "x78zum5 xdt5ytf",
           children: [jsx("p", {
             ...Ay.props(eG.textBodyMediumStrong),
-            children: _$$t("figmake.deploy_nudge.init.title")
+            children: getI18nString("figmake.deploy_nudge.init.title")
           }), jsx("p", {
             ...Ay.props(eG.textBodyMedium),
-            children: _$$t("figmake.deploy_nudge.init.subtitle")
+            children: getI18nString("figmake.deploy_nudge.init.subtitle")
           })]
         })]
       }), jsxs(mc, {
@@ -352,7 +352,7 @@ function eU() {
           className: "x78zum5 xkh2ocl xz9dl7a xsag5q8 xnm25rq",
           children: jsx("p", {
             ...Ay.props(eG.textBodyMediumStrong),
-            children: _$$t("figmake.deploy_nudge.popover.title")
+            children: getI18nString("figmake.deploy_nudge.popover.title")
           })
         }), jsx("div", {
           className: "xv42yna xh8yej3"
@@ -360,7 +360,7 @@ function eU() {
           className: "x78zum5 xdt5ytf xkh2ocl x1bptt5e x1v2ro7d x1cy8zhl",
           children: [jsx("p", {
             ...Ay.props(eG.textBodyMedium),
-            children: _$$t("figmake.deploy_nudge.popover.subtitle")
+            children: getI18nString("figmake.deploy_nudge.popover.subtitle")
           }), jsxs("div", {
             className: "x78zum5 x1q0g3np x167g77z",
             children: [jsx(ls, {
@@ -372,7 +372,7 @@ function eU() {
                 children: t
               }), jsx("p", {
                 ...Ay.props(eG.textBodyMediumSecondary),
-                children: _$$t("figmake.deploy_nudge.popover.user_avatar.subtitle")
+                children: getI18nString("figmake.deploy_nudge.popover.user_avatar.subtitle")
               })]
             }), jsx("div", {})]
           })]
@@ -388,7 +388,7 @@ function eU() {
             showVisualBells: !0
           })
         }) : {}),
-        children: _$$t("figmake.settings.connected_project.deploy_button")
+        children: getI18nString("figmake.settings.connected_project.deploy_button")
       })]
     })
   });
@@ -488,7 +488,7 @@ function tr({
       className: "xb3r6kr xlyipyv xuxw1ft xazcve0",
       children: t
     }), "prompt" === n && i ? jsx(_$$K, {
-      "aria-label": _$$t("figmake.chat.click_to_inspect.remove"),
+      "aria-label": getI18nString("figmake.chat.click_to_inspect.remove"),
       onClick: i,
       children: jsx(_$$f2, {
         className: "xmauxvm"
@@ -500,7 +500,7 @@ function ti({
   tagName: e,
   variant: t = "prompt"
 }) {
-  let n = md(f3);
+  let n = useAtomWithSubscription(f3);
   let s = useCallback(() => {
     n?.setDirectManipulationEnabled({
       enabled: !1
@@ -629,7 +629,7 @@ let tl = (e, t) => {
 };
 let th = "dismissed_chat_soft_limit_banner";
 function tN() {
-  let e = Y9(_$$t("auth.welcome-to-figma"));
+  let e = Y9(getI18nString("auth.welcome-to-figma"));
   let t = useDispatch();
   return jsx(fu, {
     name: "Logged Out File Chatbox Banner",
@@ -639,7 +639,7 @@ function tN() {
         className: "x1tk3asg x1g2dr8m xiqqdae x1j61x8r xkezfkh x14kxzw3 xqp8s7e x78zum5 x6s0dn4 xxk0z11 x1iyjqo2 xeuugli",
         children: jsx("span", {
           className: "xb3r6kr xuxw1ft xlyipyv",
-          children: _$$t("auth.sign_up_to_use_figma_rev")
+          children: getI18nString("auth.sign_up_to_use_figma_rev")
         })
       }), jsxs("div", {
         className: "xeq5yr9 x78zum5 x13a6bvl x167g77z x3psx0u",
@@ -652,7 +652,7 @@ function tN() {
             });
           },
           className: "xxk0z11 x16v0e3u xf67zum x19y5rnk x1akne3o x2b8uid xeq5yr9 xclx6tv xiqqdae x1j61x8r xkezfkh x14kxzw3 xqp8s7e x2lah0s",
-          children: _$$t("auth.sign_up")
+          children: getI18nString("auth.sign_up")
         }), jsx(_$$M2, {
           onClick: () => {
             UK("GOOGLE_SSO_BUTTON");
@@ -917,7 +917,7 @@ function tR() {
   return jsx(_$$N2, {
     href: "https://creativecommons.org/licenses/by/4.0/",
     newTab: !0,
-    children: _$$tx("design_systems.preset_libraries.tooltip.figma_license_link")
+    children: renderI18nText("design_systems.preset_libraries.tooltip.figma_license_link")
   });
 }
 function tF({
@@ -940,15 +940,15 @@ function tF({
         className: "x2lah0s",
         children: jsx(_$$f, {})
       }), jsx("div", {
-        children: 1 === e.length ? _$$tx("figmake.chat.community_attribution.attributions_one", {
+        children: 1 === e.length ? renderI18nText("figmake.chat.community_attribution.attributions_one", {
           hubFileLink: n[0],
           creatorName: e[0].creatorName,
           licenseLink: jsx(tR, {})
-        }) : 2 === e.length ? _$$tx("figmake.chat.community_attribution.attributions_two", {
+        }) : 2 === e.length ? renderI18nText("figmake.chat.community_attribution.attributions_two", {
           hubFileLink1: n[0],
           hubFileLink2: n[1],
           licenseLink: jsx(tR, {})
-        }) : _$$tx("figmake.chat.community_attribution.attributions_three", {
+        }) : renderI18nText("figmake.chat.community_attribution.attributions_three", {
           hubFileLink1: n[0],
           hubFileLink2: n[1],
           hubFileLink3: n[2],
@@ -978,7 +978,7 @@ function tD({
     curfCtaLabel
   } = mT(e);
   let u = l;
-  shouldShowCurf || getPendingRequest(e)?.entryPoint !== _$$tc.CODE_CHAT_LIMIT || (u = _$$t("fullscreen.toolbar_banner.provisional_access.code_chat"));
+  shouldShowCurf || getPendingRequest(e)?.entryPoint !== _$$tc.CODE_CHAT_LIMIT || (u = getI18nString("fullscreen.toolbar_banner.provisional_access.code_chat"));
   return jsx(fu, {
     name: "ChatBoxProvisionalAccessBanner",
     properties: {
@@ -1006,13 +1006,13 @@ function tB({
 }) {
   let t = No();
   let n = t.unwrapOr(null)?.tier;
-  let i = _$$t("figmake.meter_limit.enjoy_more_ai_credits");
-  let s = _$$tx("figmake.meter_limit.used_all_your_credits", {
+  let i = getI18nString("figmake.meter_limit.enjoy_more_ai_credits");
+  let s = renderI18nText("figmake.meter_limit.used_all_your_credits", {
     learnMoreLink: jsx(Ph, {
       newTab: !0,
       trusted: !0,
       href: _t,
-      children: _$$tx("general.learn_more")
+      children: renderI18nText("general.learn_more")
     })
   });
   return jsx(fu, {
@@ -1047,7 +1047,7 @@ function tq() {
   return t === FPlanNameType.STARTER && getFeatureFlags().bake_starter_limit && a ? jsx($z, {
     variant: "primary",
     onClick: o,
-    children: _$$tx("figmake.meter_limit.view_plans")
+    children: renderI18nText("figmake.meter_limit.view_plans")
   }) : null;
 }
 function t$() {
@@ -1062,7 +1062,7 @@ function t$() {
   return getIsUpgradeHandlerLoading() ? jsx($z, {
     variant: "primary",
     disabled: !0,
-    children: _$$tx("figmake.meter_limit.request_full_seat")
+    children: renderI18nText("figmake.meter_limit.request_full_seat")
   }) : jsx($z, {
     variant: "primary",
     onClick: handleUpgrade({
@@ -1070,7 +1070,7 @@ function t$() {
       upgradeReason: _$$i.CODE_CHAT_LIMIT,
       entryPoint: _$$tc.CODE_CHAT_LIMIT
     }),
-    children: _$$tx("figmake.meter_limit.request_full_seat")
+    children: renderI18nText("figmake.meter_limit.request_full_seat")
   });
 }
 function tP() {
@@ -1097,7 +1097,7 @@ function tU() {
     resetDate,
     meteringWindow
   } = tP();
-  return resetDate ? meteringWindow === co.DAILY ? _$$tx("figmake.meter_limit.plans_ai_credit_limit_reached_reset_imminent") : _$$tx("figmake.meter_limit.plans_ai_credit_limit_reached", {
+  return resetDate ? meteringWindow === co.DAILY ? renderI18nText("figmake.meter_limit.plans_ai_credit_limit_reached_reset_imminent") : renderI18nText("figmake.meter_limit.plans_ai_credit_limit_reached", {
     resetDate
   }) : null;
 }
@@ -1105,18 +1105,18 @@ function tG() {
   let {
     resetDate
   } = tP();
-  return resetDate ? _$$tx("figmake.meter_limit.reached_your_current_credits_limit", {
+  return resetDate ? renderI18nText("figmake.meter_limit.reached_your_current_credits_limit", {
     resetDate
-  }) : _$$tx("figmake.meter_limit.primary");
+  }) : renderI18nText("figmake.meter_limit.primary");
 }
 function tH() {
   let {
     resetDate,
     meteringWindow
   } = tP();
-  return resetDate ? meteringWindow === co.DAILY ? _$$tx("figmake.meter_limit.seat_credit_limit_reached_daily") : meteringWindow === co.MONTHLY ? _$$tx("figmake.meter_limit.seat_credit_limit_reached_monthly", {
+  return resetDate ? meteringWindow === co.DAILY ? renderI18nText("figmake.meter_limit.seat_credit_limit_reached_daily") : meteringWindow === co.MONTHLY ? renderI18nText("figmake.meter_limit.seat_credit_limit_reached_monthly", {
     resetDate
-  }) : _$$tx("figmake.meter_limit.seat_credit_limit_reached", {
+  }) : renderI18nText("figmake.meter_limit.seat_credit_limit_reached", {
     resetDate
   }) : null;
 }
@@ -1126,47 +1126,47 @@ function tW() {
   let n = t.unwrapOr(null)?.tier || null;
   let i = Tk();
   let s = yy();
-  let a = md(Hu);
+  let a = useAtomWithSubscription(Hu);
   if (!i || i === _$$ee.DISABLE_WITHOUT_TOAST) return null;
   let l = function (e, t) {
     switch (e) {
       case _$$ee.UNAVAILABLE_ON_EDU_PLANS:
         return {
-          title: _$$tx("figmake.view_only.unavailable_on_edu")
+          title: renderI18nText("figmake.view_only.unavailable_on_edu")
         };
       case _$$ee.MAKE_UNAVAILABLE_ON_PLAN:
         return {
-          title: _$$tx("figmake.view_only.unavailable_on_plan", {
+          title: renderI18nText("figmake.view_only.unavailable_on_plan", {
             learnMoreLink: jsx(Ph, {
               newTab: !0,
               trusted: !0,
               href: tL,
-              children: _$$tx("general.learn_more")
+              children: renderI18nText("general.learn_more")
             })
           }),
           icon: jsx(_$$t2, {})
         };
       case _$$ee.MAKE_UNAVAILABLE_ON_SEAT:
         return {
-          title: _$$tx("figmake.view_only.unavailable_on_seat", {
+          title: renderI18nText("figmake.view_only.unavailable_on_seat", {
             learnMoreLink: jsx(Ph, {
               newTab: !0,
               trusted: !0,
               href: tL,
-              children: _$$tx("general.learn_more")
+              children: renderI18nText("general.learn_more")
             })
           }),
           icon: jsx(_$$t2, {})
         };
       case _$$ee.INTERIM_VIEW_ONLY_COMING_SOON:
         return {
-          title: _$$tx("figmake.view_only.coming_soon_title"),
-          content: () => _$$tx("figmake.view_only.check_back_in_coming_weeks_learn_more", {
+          title: renderI18nText("figmake.view_only.coming_soon_title"),
+          content: () => renderI18nText("figmake.view_only.check_back_in_coming_weeks_learn_more", {
             learnMoreLink: jsx(Ph, {
               newTab: !0,
               trusted: !0,
               href: tL,
-              children: _$$tx("general.learn_more")
+              children: renderI18nText("general.learn_more")
             })
           }),
           icon: jsx(_$$t2, {})
@@ -1174,7 +1174,7 @@ function tW() {
       case _$$ee.VIEW_ONLY_ASK_TO_EDIT:
         return {
           title: void 0,
-          content: () => _$$tx("figmake.view_only.banner_message"),
+          content: () => renderI18nText("figmake.view_only.banner_message"),
           button: jsx(RJ, {
             viewOnly: !0,
             variant: "primary"
@@ -1201,14 +1201,14 @@ function tW() {
         };
       case _$$ee.PLAN_AI_DISABLED:
         return {
-          title: _$$tx("living_designs.chat.disabled_reason.title.not_available"),
-          content: () => _$$tx("living_designs.chat.disabled_reason.subtitle.ai_disabled", {
+          title: renderI18nText("living_designs.chat.disabled_reason.title.not_available"),
+          content: () => renderI18nText("living_designs.chat.disabled_reason.subtitle.ai_disabled", {
             planName: t
           })
         };
       case _$$ee.DISABLE_CATCH_ALL:
         return {
-          title: _$$tx("living_designs.chat.disabled_reason.title.not_available")
+          title: renderI18nText("living_designs.chat.disabled_reason.title.not_available")
         };
       case _$$ee.DISABLE_WITHOUT_TOAST:
         return {
@@ -1273,11 +1273,11 @@ function tK() {
           style: {
             "--color-icon": "currentColor"
           }
-        }), _$$t("figmake.supabase_error.title")]
+        }), getI18nString("figmake.supabase_error.title")]
       }), jsx($n, {
         variant: "secondary",
         onClick: e,
-        children: _$$t("figmake.supabase_error.button")
+        children: getI18nString("figmake.supabase_error.button")
       })]
     })
   });
@@ -1329,7 +1329,7 @@ function tX({
         children: jsx($n, {
           variant: "secondary",
           onClick: n,
-          children: _$$t("ai.try_again")
+          children: getI18nString("ai.try_again")
         })
       })]
     })
@@ -1345,20 +1345,20 @@ function tY({
 }) {
   let l = Xr(YD);
   let o = Xr(Vo);
-  let c = _$$t("living_designs.chat.errors.error_count", {
+  let c = getI18nString("living_designs.chat.errors.error_count", {
     count: s
   });
-  c = "error" === a ? i ? s > 10 ? _$$t("figmake.errors.autofix_failed_max_errors", {
+  c = "error" === a ? i ? s > 10 ? getI18nString("figmake.errors.autofix_failed_max_errors", {
     maxCount: 10
-  }) : _$$t("figmake.errors.autofix_failed", {
+  }) : getI18nString("figmake.errors.autofix_failed", {
     count: s
-  }) : s > 10 ? _$$t("figmake.errors.max_errors", {
+  }) : s > 10 ? getI18nString("figmake.errors.max_errors", {
     maxCount: 10
-  }) : _$$t("living_designs.chat.errors.error_count", {
+  }) : getI18nString("living_designs.chat.errors.error_count", {
     count: s
-  }) : s > 10 ? _$$t("figmake.chat.warning_message_max_errors", {
+  }) : s > 10 ? getI18nString("figmake.chat.warning_message_max_errors", {
     maxCount: 10
-  }) : _$$t("figmake.chat.warning_message", {
+  }) : getI18nString("figmake.chat.warning_message", {
     count: s
   });
   return jsxs(eB, {
@@ -1390,7 +1390,7 @@ function tY({
         variant: "secondary",
         onClick: t,
         disabled: n,
-        children: _$$t("living_designs.chat.errors.ask_figma_fix")
+        children: getI18nString("living_designs.chat.errors.ask_figma_fix")
       })
     })]
   });
@@ -1403,7 +1403,7 @@ function tJ({
     onClose: e,
     children: jsxs("span", {
       className: "x78zum5 x1q0g3np x6s0dn4 x1jnr06f",
-      children: [jsx(et, {}), _$$t("figmake.chat.autofix_message")]
+      children: [jsx(et, {}), getI18nString("figmake.chat.autofix_message")]
     })
   });
 }
@@ -1454,7 +1454,7 @@ let tQ = forwardRef((e, t) => {
     featureType,
     onFocus
   } = e;
-  let [k, E] = fp(mC(chatMessagesNodeGuid));
+  let [k, E] = useAtomValueAndSetter(mC(chatMessagesNodeGuid));
   let {
     chatError,
     clearChatError
@@ -1492,7 +1492,7 @@ let tQ = forwardRef((e, t) => {
   useEffect(() => {
     (R?.length !== L.length || O !== chatMessageCount) && B(!1);
   }, [R, L, O, chatMessageCount]);
-  let [P, G] = fp(o0(chatMessagesNodeGuid));
+  let [P, G] = useAtomValueAndSetter(o0(chatMessagesNodeGuid));
   let [H, W] = useState(300);
   let [V, K] = useState(0);
   let {
@@ -1522,12 +1522,12 @@ let tQ = forwardRef((e, t) => {
     J();
   }, [H, k, J, V]);
   let Z = _$$ry();
-  let Q = md(Ng);
+  let Q = useAtomWithSubscription(Ng);
   let ee = _$$k2();
   let et = Oc();
   let en = et ? FProductAccessType.FIGMAKE : FProductAccessType.SITES;
   let er = Xu();
-  let ei = md(Xl);
+  let ei = useAtomWithSubscription(Xl);
   let {
     connectedProject,
     isConnectedNonOwner
@@ -1605,7 +1605,7 @@ let tQ = forwardRef((e, t) => {
       G(!0);
       let e = Array.from(new Set([...(L.map(e => e.message) ?? []), ...I.map(e => e.event_message)]));
       sendMessage({
-        message: F ? _$$t("figmake.chat.warning_fix_message") : _$$t("living_designs.chat.errors.fix_these_errors"),
+        message: F ? getI18nString("figmake.chat.warning_fix_message") : getI18nString("living_designs.chat.errors.fix_these_errors"),
         errors: e
       });
       T([]);
@@ -1676,13 +1676,13 @@ function t0({
   let E = Oc();
   let w = O1();
   let A = k === lV.AI_ASSISTANT && w && !u;
-  let T = md(f3);
+  let T = useAtomWithSubscription(f3);
   let I = useCallback(e => {
     let t = e.target;
     d();
     c(t.value);
   }, [c, d]);
-  let R = zl.get(Z3(e));
+  let R = atomStoreManager.get(Z3(e));
   let F = _$$ry();
   let {
     attachments,
@@ -1804,7 +1804,7 @@ function t0({
                 },
                 initial: "play",
                 animate: t ? "stop" : "play",
-                "aria-label": t ? _$$t("living_designs.chat.stop_button.alt_text") : _$$t("living_designs.chat.send_button.alt_text"),
+                "aria-label": t ? getI18nString("living_designs.chat.stop_button.alt_text") : getI18nString("living_designs.chat.send_button.alt_text"),
                 "data-testid": t ? "code-chat-stop-button" : "code-chat-send-button",
                 children: [jsx(_$$P.div, {
                   className: "x1n2onr6 x78zum5 x6s0dn4 xl56j7k xvy4d1p xxk0z11",
@@ -1902,7 +1902,7 @@ function t0({
                         ease: e
                       }
                     },
-                    children: _$$t("living_designs.chat.stop_button")
+                    children: getI18nString("living_designs.chat.stop_button")
                   })
                 })]
               })
@@ -1918,7 +1918,7 @@ function t1() {
     className: "x78zum5 x1q0g3np x6s0dn4 x1nejdyq x1ruevkc x1opjl2c xxs4gfe x1sxf85j",
     children: [jsx(t5, {}), jsx("div", {
       className: "x1nmd3yn xm735u9 xkbmbem xqp8s7e xv1l7n4 xvwc6ox x1j61x8r",
-      children: _$$t("figmake.chat.paste_existing_design_callout")
+      children: getI18nString("figmake.chat.paste_existing_design_callout")
     })]
   });
 }
@@ -1949,7 +1949,7 @@ function t8({
   return jsx("div", {
     className: "xh8yej3 x78zum5 x87ps6o",
     children: jsx(Wv, {
-      titleTx: _$$tx("living_designs.chat.default_title"),
+      titleTx: renderI18nText("living_designs.chat.default_title"),
       children: e ? jsx(_$$y4, {
         helpUrlVariant: JT.CODE_CHAT
       }) : null
@@ -1990,7 +1990,7 @@ function ni({
   };
   return jsx("div", {
     role: "region",
-    "aria-label": _$$t("figmake.chat.artifact.a11y_prompt_section_title", {
+    "aria-label": getI18nString("figmake.chat.artifact.a11y_prompt_section_title", {
       user: e.name ?? e.handle
     }),
     className: "x1eaahee",
@@ -2150,18 +2150,18 @@ function nS({
     n();
   }, [n, t.persistentEntityId, t.clientLifecycleId, s]);
   return jsx(nv, {
-    title: _$$t("figmake.supabase.cta.list.account_connected"),
-    subtitle: _$$t("figmake.supabase.cta.auth.body_text"),
+    title: getI18nString("figmake.supabase.cta.list.account_connected"),
+    subtitle: getI18nString("figmake.supabase.cta.auth.body_text"),
     interaction: jsxs("div", {
       className: "x78zum5 x167g77z",
       children: [jsx(WW, {
         variant: "primary",
         onClick: a,
-        children: _$$t("figmake.supabase.connect")
+        children: getI18nString("figmake.supabase.connect")
       }), jsx(WW, {
         variant: "secondary",
         onClick: () => e(),
-        children: _$$t("figmake.supabase.cancel")
+        children: getI18nString("figmake.supabase.cancel")
       })]
     })
   });
@@ -2179,14 +2179,14 @@ function nw({
   return jsxs("div", {
     className: "x78zum5 xdt5ytf x167g77z xkh2ocl",
     children: [jsx(nb, {
-      text: _$$t("figmake.supabase.cta.list.account_connected")
+      text: getI18nString("figmake.supabase.cta.list.account_connected")
     }), jsx(nb, {
-      text: _$$t("figmake.supabase.cta.list.org_connected", {
+      text: getI18nString("figmake.supabase.cta.list.org_connected", {
         org: organization?.name ?? ""
       })
     }), jsx(nv, {
-      title: _$$t("figmake.supabase.cta.connect_to_existing_projects.title"),
-      subtitle: _$$t("figmake.supabase.cta.connect_to_existing_projects.subtitle"),
+      title: getI18nString("figmake.supabase.cta.connect_to_existing_projects.title"),
+      subtitle: getI18nString("figmake.supabase.cta.connect_to_existing_projects.subtitle"),
       interaction: jsxs("div", {
         className: "x78zum5 x167g77z",
         children: [jsx(WW, {
@@ -2203,11 +2203,11 @@ function nw({
               showModalsBeneath: !0
             }));
           },
-          children: _$$t("figmake.supabase.cta.connect_to_existing_projects.button")
+          children: getI18nString("figmake.supabase.cta.connect_to_existing_projects.button")
         }), jsx(WW, {
           variant: "secondary",
           onClick: () => n(),
-          children: _$$t("figmake.supabase.cancel")
+          children: getI18nString("figmake.supabase.cancel")
         })]
       })
     })]
@@ -2224,13 +2224,13 @@ function nA() {
   return jsxs("div", {
     className: "x78zum5 xdt5ytf x167g77z xkh2ocl",
     children: [jsx(nb, {
-      text: _$$t("figmake.supabase.cta.list.account_connected")
+      text: getI18nString("figmake.supabase.cta.list.account_connected")
     }), jsx(nb, {
-      text: _$$t("figmake.supabase.cta.list.org_connected", {
+      text: getI18nString("figmake.supabase.cta.list.org_connected", {
         org: organization?.name ?? ""
       })
     }), jsx(nb, {
-      text: _$$t("figmake.supabase.cta.list.project_connected", {
+      text: getI18nString("figmake.supabase.cta.list.project_connected", {
         project: n
       })
     })]
@@ -2240,22 +2240,22 @@ function nT() {
   let {
     organization
   } = mS();
-  let t = md(Kj);
+  let t = useAtomWithSubscription(Kj);
   if (!t || "connecting" !== t.state) return null;
   let n = t.project.name ?? "";
   return jsxs("div", {
     className: "x78zum5 xdt5ytf x167g77z xkh2ocl",
     children: [jsx(nb, {
-      text: _$$t("figmake.supabase.cta.list.account_connected")
+      text: getI18nString("figmake.supabase.cta.list.account_connected")
     }), jsx(nb, {
-      text: _$$t("figmake.supabase.cta.list.org_connected", {
+      text: getI18nString("figmake.supabase.cta.list.org_connected", {
         org: organization?.name ?? ""
       })
     }), jsx(nj, {
-      title: _$$t("figmake.supabase.cta.list.project_connecting", {
+      title: getI18nString("figmake.supabase.cta.list.project_connecting", {
         project: n
       }),
-      subtitle: _$$t("figmake.supabase.cta.list.project_connecting.subtitle")
+      subtitle: getI18nString("figmake.supabase.cta.list.project_connecting.subtitle")
     })]
   });
 }
@@ -2272,14 +2272,14 @@ function nL({
   return jsxs("div", {
     className: "x78zum5 xdt5ytf x167g77z xkh2ocl",
     children: [jsx(nb, {
-      text: _$$t("figmake.supabase.cta.list.account_connected")
+      text: getI18nString("figmake.supabase.cta.list.account_connected")
     }), jsx(nb, {
-      text: _$$t("figmake.supabase.cta.list.org_connected", {
+      text: getI18nString("figmake.supabase.cta.list.org_connected", {
         org: organization?.name ?? ""
       })
     }), jsx(nv, {
-      title: _$$t("figmake.supabase.cta.create_project.title"),
-      subtitle: _$$t("figmake.supabase.cta.create_project.subtitle"),
+      title: getI18nString("figmake.supabase.cta.create_project.title"),
+      subtitle: getI18nString("figmake.supabase.cta.create_project.subtitle"),
       interaction: jsxs("div", {
         className: "x78zum5 x167g77z",
         children: [jsx(WW, {
@@ -2296,11 +2296,11 @@ function nL({
               showModalsBeneath: !0
             }));
           },
-          children: _$$t("figmake.supabase.cta.create_project.button")
+          children: getI18nString("figmake.supabase.cta.create_project.button")
         }), jsx(WW, {
           variant: "secondary",
           onClick: () => n(),
-          children: _$$t("figmake.supabase.cancel")
+          children: getI18nString("figmake.supabase.cancel")
         })]
       })
     })]
@@ -2325,7 +2325,7 @@ function nM({
     isLoading
   } = zA();
   let d = Xr(hR);
-  let u = md(Kj);
+  let u = useAtomWithSubscription(Kj);
   useEffect(() => {
     if (isLoading) {
       d(s8.LOADING);
@@ -2350,7 +2350,7 @@ function nR({
   dismissSupabase: n,
   trackingContext: s
 }) {
-  let a = md(hR);
+  let a = useAtomWithSubscription(hR);
   let l = _$$tS() || "";
   let o = useRef(!1);
   switch (useEffect(() => {
@@ -2415,12 +2415,12 @@ function nD({
   let t = useMemo(() => {
     switch (e) {
       case nd.TOOL_CALL_SUCCESS:
-        return _$$t("figmake.supabase.cta.collapsed.success");
+        return getI18nString("figmake.supabase.cta.collapsed.success");
       case nd.TOOL_CALL_DISABLED:
-        return _$$t("figmake.supabase.cta.collapsed.disabled");
+        return getI18nString("figmake.supabase.cta.collapsed.disabled");
       case nd.TOOL_CALL_CANCELLED:
       default:
-        return _$$t("figmake.supabase.cta.collapsed.failure");
+        return getI18nString("figmake.supabase.cta.collapsed.failure");
     }
   }, [e]);
   return jsxs("div", {
@@ -2454,11 +2454,11 @@ function nB() {
         })
       }), jsx("p", {
         ...Ay.props(nq.textBodyLargeStrong),
-        children: _$$t("figmake.supabase.cta.title")
+        children: getI18nString("figmake.supabase.cta.title")
       })]
     }), jsx(jc, {
       url: kS,
-      linkText: _$$t("figmake.supabase.cta.link")
+      linkText: getI18nString("figmake.supabase.cta.link")
     })]
   });
 }
@@ -2499,14 +2499,14 @@ function nV({
   let n = useMemo(() => {
     switch (t) {
       case nd.TOOL_CALL_SUCCESS:
-        return _$$t("figmake.supabase.create_secret_cta.collapsed.success", {
+        return getI18nString("figmake.supabase.create_secret_cta.collapsed.success", {
           secretName: e
         });
       case nd.TOOL_CALL_DISABLED:
-        return _$$t("figmake.supabase.create_secret_cta.collapsed.disabled");
+        return getI18nString("figmake.supabase.create_secret_cta.collapsed.disabled");
       case nd.TOOL_CALL_CANCELLED:
       default:
-        return _$$t("figmake.supabase.create_secret_cta.collapsed.failure");
+        return getI18nString("figmake.supabase.create_secret_cta.collapsed.failure");
     }
   }, [t, e]);
   return jsxs("div", {
@@ -2527,11 +2527,11 @@ function nK() {
       className: "x78zum5 x1q0g3np x6s0dn4 x167g77z",
       children: [jsx(_$$m, {}), jsx("p", {
         ...Ay.props(nZ.textBodyLargeStrong),
-        children: _$$t("figmake.supabase.create_secret_cta.header")
+        children: getI18nString("figmake.supabase.create_secret_cta.header")
       })]
     }), jsx(jc, {
       url: C4(connectedProject?.id),
-      linkText: _$$t("figmake.supabase.create_secret_cta.link")
+      linkText: getI18nString("figmake.supabase.create_secret_cta.link")
     })]
   });
 }
@@ -2550,10 +2550,10 @@ function nX({
   switch (l) {
     case "init":
       return jsx(nv, {
-        title: _$$tx("figmake.supabase.create_secret_cta.body.title_secret_name", {
+        title: renderI18nText("figmake.supabase.create_secret_cta.body.title_secret_name", {
           secretName: c
         }),
-        subtitle: _$$t("figmake.supabase.create_secret_cta.body.subtitle"),
+        subtitle: getI18nString("figmake.supabase.create_secret_cta.body.subtitle"),
         interaction: jsx(nJ, {
           interactionState: l,
           setInterationState: o,
@@ -2566,19 +2566,19 @@ function nX({
       });
     case "loading":
       return jsx(nj, {
-        title: _$$t("figmake.supabase.create_secret_cta.body.loading.title"),
-        subtitle: _$$t("figmake.supabase.create_secret_cta.body.loading.subtitle")
+        title: getI18nString("figmake.supabase.create_secret_cta.body.loading.title"),
+        subtitle: getI18nString("figmake.supabase.create_secret_cta.body.loading.subtitle")
       });
     case "success":
       return jsx(nb, {
-        text: _$$t("figmake.supabase.create_secret_cta.body.title")
+        text: getI18nString("figmake.supabase.create_secret_cta.body.title")
       });
     case "failed":
       return jsx(nk, {
-        title: _$$tx("figmake.supabase.create_secret_cta.body.error.title_secret_name", {
+        title: renderI18nText("figmake.supabase.create_secret_cta.body.error.title_secret_name", {
           secretName: c
         }),
-        subtitle: _$$t("figmake.supabase.create_secret_cta.body.error.subtitle"),
+        subtitle: getI18nString("figmake.supabase.create_secret_cta.body.error.subtitle"),
         interaction: jsx(nJ, {
           interactionState: l,
           setInterationState: o,
@@ -2640,23 +2640,23 @@ function nJ({
       id: "password",
       value: c,
       onChange: d,
-      placeholder: _$$t("figmake.supabase.create_secret_cta.body.secret_value"),
+      placeholder: getI18nString("figmake.supabase.create_secret_cta.body.secret_value"),
       size: "lg",
       disabled: x
     }), x ? jsx(_$$lV, {
       variant: "primary",
-      children: _$$t("figmake.supabase.create_secret_cta.body.button")
+      children: getI18nString("figmake.supabase.create_secret_cta.body.button")
     }) : jsxs("div", {
       className: "x78zum5 x167g77z",
       children: [jsx(WW, {
         type: "submit",
         variant: "primary",
         onClick: h,
-        children: _$$t("figmake.supabase.create_secret_cta.body.button")
+        children: getI18nString("figmake.supabase.create_secret_cta.body.button")
       }), jsx(WW, {
         variant: "secondary",
         onClick: () => l(),
-        children: _$$t("figmake.supabase.cancel")
+        children: getI18nString("figmake.supabase.cancel")
       })]
     })]
   });
@@ -2930,12 +2930,12 @@ function rp({
       ...Ay.props(rg.reasoningTitle, o && rg.reasoningTitleExpanded),
       onClick: () => c(!o),
       "aria-expanded": o,
-      "aria-label": o ? _$$t("figmake.chat.hide_reasoning") : _$$t("figmake.chat.show_reasoning"),
-      children: [_$$t("figmake.chat.reasoning"), jsx(_$$a2, {
+      "aria-label": o ? getI18nString("figmake.chat.hide_reasoning") : getI18nString("figmake.chat.show_reasoning"),
+      children: [getI18nString("figmake.chat.reasoning"), jsx(_$$a2, {
         ...Ay.props(rg.chevronIcon, o && rg.chevronIconExpanded)
       })]
     }) : jsx(_$$N4, {
-      children: _$$t("figmake.chat.reasoning")
+      children: getI18nString("figmake.chat.reasoning")
     }), jsx("div", {
       className: "xb3r6kr",
       children: jsxs(_$$N, {
@@ -3130,7 +3130,7 @@ function ry({
   }, `version-${c}`) : null;
   return jsx("div", {
     role: "region",
-    "aria-label": _$$t("figmake.chat.artifact.a11y_reasoning_section_title", {
+    "aria-label": getI18nString("figmake.chat.artifact.a11y_reasoning_section_title", {
       version: c,
       title: u || ""
     }),
@@ -3145,7 +3145,7 @@ function r_() {
   return jsxs("div", {
     className: "x78zum5 x6s0dn4 x167g77z",
     children: [jsx(_$$H3, {}), jsx(_$$N4, {
-      children: _$$t("figmake.chat.thinking")
+      children: getI18nString("figmake.chat.thinking")
     })]
   });
 }
@@ -3153,7 +3153,7 @@ function rb() {
   return jsxs("div", {
     className: "x78zum5 x6s0dn4 x167g77z",
     children: [jsx(_$$H3, {}), jsx(_$$N4, {
-      children: _$$t("figmake.chat.working")
+      children: getI18nString("figmake.chat.working")
     })]
   });
 }
@@ -3161,7 +3161,7 @@ function rj() {
   return jsxs("div", {
     className: "x78zum5 x6s0dn4 x167g77z",
     children: [jsx(_$$H3, {}), jsx(_$$N4, {
-      children: _$$t("figmake.chat.fixing")
+      children: getI18nString("figmake.chat.fixing")
     })]
   });
 }
@@ -3224,8 +3224,8 @@ function rE({
       hideInitialText: !0,
       externalFeedbackState: feedbackState,
       setExternalFeedbackState: setFeedbackState,
-      thumbsUpLabel: _$$t("figmake.chat.thumbs_up"),
-      thumbsDownLabel: _$$t("figmake.chat.thumbs_down")
+      thumbsUpLabel: getI18nString("figmake.chat.thumbs_up"),
+      thumbsDownLabel: getI18nString("figmake.chat.thumbs_down")
     }), getFeatureFlags().make_edits_debug && d === lV.AI_ASSISTANT && jsx(Suspense, {
       fallback: null,
       children: jsx(rS, {
@@ -4207,7 +4207,7 @@ function rV() {
             duration: .2,
             ease: "easeOut"
           },
-          children: _$$t("figmake.code_chat.drag_upload_overlay.title")
+          children: getI18nString("figmake.code_chat.drag_upload_overlay.title")
         }), jsx(_$$P.p, {
           className: "x17hqfcz xemv814 x1ma9mv9 x1n0bwc9 x1xmf6yo x2b8uid x1jkqq1h",
           initial: {
@@ -4230,7 +4230,7 @@ function rV() {
             delay: .1,
             ease: "easeOut"
           },
-          children: _$$t("figmake.code_chat.drag_upload_overlay.description")
+          children: getI18nString("figmake.code_chat.drag_upload_overlay.description")
         })]
       })]
     })
@@ -4243,20 +4243,20 @@ function im({
 }) {
   return jsx(_$$rq, {
     arrowPosition: F_.BOTTOM,
-    description: _$$tx("figmake.design_system_imports.selected_design_system_overlay.description"),
+    description: renderI18nText("figmake.design_system_imports.selected_design_system_overlay.description"),
     emphasized: !0,
     isShowing: t,
     onClose: n,
     onTargetLost: n,
     primaryCta: {
-      label: _$$tx("figmake.design_system_imports.learn_more"),
+      label: renderI18nText("figmake.design_system_imports.learn_more"),
       href: kC,
       type: "link",
       variantOverride: "white",
       ctaTrackingDescriptor: _$$c2.DS_IMPORT_LEARN_MORE
     },
     targetKey: e,
-    title: _$$tx("figmake.design_system_imports.selected_design_system_overlay.title"),
+    title: renderI18nText("figmake.design_system_imports.selected_design_system_overlay.title"),
     trackingContextName: "Make Design System Imports > Selected Design System Overlay"
   });
 }
@@ -4409,14 +4409,14 @@ let ih = {
   }
 };
 let ig = _$$r4("seen_figmake_selected_design_system_onboarding");
-let ip = zl.get(_$$nM);
+let ip = atomStoreManager.get(_$$nM);
 function iy({
   isViewOnly: e,
   hasMessages: t,
   libraryImports: n,
   disabled: a
 }) {
-  let o = md(ig);
+  let o = useAtomWithSubscription(ig);
   let {
     show,
     isShowing,
@@ -4444,7 +4444,7 @@ function iy({
   let E = Xr(jx);
   let N = useDispatch();
   useEffect(() => {
-    libraryImport && !zl.get(FX) && show({
+    libraryImport && !atomStoreManager.get(FX) && show({
       canShow: e => !e
     });
   }, [libraryImport, show]);
@@ -4475,7 +4475,7 @@ function iy({
     }
     let e = k.current;
     if (!e || j) return;
-    az.trackDefinedEvent("ds_import.library_import_button_clicked", {
+    analyticsEventManager.trackDefinedEvent("ds_import.library_import_button_clicked", {
       selected_library_key: libraryImport?.library.library_key,
       file_key: x || ""
     });
@@ -4501,7 +4501,7 @@ function iy({
   F.onMouseDown = e => {
     e.preventDefault();
     e.stopPropagation();
-    az.trackDefinedEvent("ds_import.settings_button_clicked", {
+    analyticsEventManager.trackDefinedEvent("ds_import.settings_button_clicked", {
       library_key: libraryImport?.library.library_key,
       file_key: x || ""
     });
@@ -4519,7 +4519,7 @@ function iy({
     }, jsx(_$$g3, {})), jsxs(_$$mc, {
       children: [jsxs(q7, {
         onClick: () => {
-          az.trackDefinedEvent("ds_import.edit_styles_menu_item_clicked", {
+          analyticsEventManager.trackDefinedEvent("ds_import.edit_styles_menu_item_clicked", {
             library_key: libraryImport?.library.library_key,
             file_key: x || ""
           });
@@ -4528,13 +4528,13 @@ function iy({
         children: [jsx(Q$, {
           children: jsx(_$$G2, {})
         }), jsxs("div", {
-          children: [_$$t("sites.modal.edit_styles_menu_title"), jsx(ME, {
-            children: _$$t("sites.modal.edit_styles_menu_subtitle")
+          children: [getI18nString("sites.modal.edit_styles_menu_title"), jsx(ME, {
+            children: getI18nString("sites.modal.edit_styles_menu_subtitle")
           })]
         })]
       }), jsxs(q7, {
         onClick: () => {
-          az.trackDefinedEvent("ds_import.edit_guidelines_menu_item_clicked", {
+          analyticsEventManager.trackDefinedEvent("ds_import.edit_guidelines_menu_item_clicked", {
             library_key: libraryImport?.library.library_key,
             file_key: x || ""
           });
@@ -4544,8 +4544,8 @@ function iy({
         children: [jsx(Q$, {
           children: jsx(_$$A7, {})
         }), jsxs("div", {
-          children: [_$$t("sites.modal.edit_guidelines_menu_title"), jsx(ME, {
-            children: _$$t("sites.modal.edit_guidelines_menu_subtitle")
+          children: [getI18nString("sites.modal.edit_guidelines_menu_title"), jsx(ME, {
+            children: getI18nString("sites.modal.edit_guidelines_menu_subtitle")
           })]
         })]
       })]
@@ -4585,7 +4585,7 @@ function iy({
   }) : jsx("div", {
     ref: k,
     children: jsx(_$$d2, {
-      "aria-label": _$$t("sites.modal.select_library"),
+      "aria-label": getI18nString("sites.modal.select_library"),
       "aria-expanded": j,
       "data-tooltip-show-above": !0,
       disabled: a,
@@ -4623,7 +4623,7 @@ function iv({
         ease: "easeInOut"
       },
       children: jsx(_$$K, {
-        "aria-label": _$$t("figmake.chat_box.undo_enhance_prompt"),
+        "aria-label": getI18nString("figmake.chat_box.undo_enhance_prompt"),
         "data-tooltip-show-above": !0,
         disabled: e,
         onClick: n,
@@ -4647,7 +4647,7 @@ function iv({
         ease: "easeInOut"
       },
       children: jsx(_$$K, {
-        "aria-label": _$$t("figmake.chat_box.enhance_prompt"),
+        "aria-label": getI18nString("figmake.chat_box.enhance_prompt"),
         "data-tooltip-show-above": !0,
         disabled: e,
         onClick: t,
@@ -4672,9 +4672,9 @@ function ik({
   libraryImports: j
 }) {
   let k = useDispatch();
-  let E = md(f3);
+  let E = useAtomWithSubscription(f3);
   let N = useRef(null);
-  let [A, T] = fp(mC(u));
+  let [A, T] = useAtomValueAndSetter(mC(u));
   let [M, R] = useState("");
   let [F, O] = useState(!1);
   let D = useCallback(async e => {
@@ -4688,7 +4688,7 @@ function ik({
     } catch (e) {
       R("");
       O(!1);
-      $D(_$$e.MAKE, e instanceof Error ? e : Error(String(e)));
+      reportError(_$$e.MAKE, e instanceof Error ? e : Error(String(e)));
     }
   }, [g, A, T]);
   let P = useCallback(() => {
@@ -4708,9 +4708,9 @@ function ik({
         }
       }));
     },
-    "aria-label": l.length >= qQ ? _$$t("sites.panel.make.attach_limit_reached", {
+    "aria-label": l.length >= qQ ? getI18nString("sites.panel.make.attach_limit_reached", {
       limit: qQ
-    }) : _$$t("sites.panel.make.attach_design"),
+    }) : getI18nString("sites.panel.make.attach_design"),
     "data-tooltip-show-above": !0,
     disabled: d || l.length >= qQ,
     htmlAttributes: {
@@ -4726,9 +4726,9 @@ function ik({
       accept: xp.join(","),
       onChange: D
     }), jsx(_$$K, {
-      "aria-label": l.length >= qQ ? _$$t("sites.panel.make.attach_limit_reached", {
+      "aria-label": l.length >= qQ ? getI18nString("sites.panel.make.attach_limit_reached", {
         limit: qQ
-      }) : _$$t("sites.panel.make.attach_image"),
+      }) : getI18nString("sites.panel.make.attach_image"),
       "data-tooltip-show-above": !0,
       disabled: d || l.length >= qQ,
       onClick: () => {
@@ -4820,7 +4820,7 @@ export function $$iC0({
     if (!es.current) return;
     let r = es.current.selectionStart;
     let i = es.current.selectionEnd;
-    let s = zl.get(mC(t));
+    let s = atomStoreManager.get(mC(t));
     e(s.substring(0, r) + n + s.substring(i));
   });
   let {
@@ -4860,11 +4860,11 @@ export function $$iC0({
     clearChatError
   } = _$$tk(t);
   let [ek, eC] = useState(!0);
-  let eE = md(Ng);
+  let eE = useAtomWithSubscription(Ng);
   let eS = useRef(!1);
   useMemo(() => {
     (() => {
-      let e = zl.get(mC(t)).length;
+      let e = atomStoreManager.get(mC(t)).length;
       let {
         figmaNodeLength,
         imageTokens,
@@ -4903,7 +4903,7 @@ export function $$iC0({
       let c = (a ? JSON.stringify(a).length : 0) / 3;
       let d = l + o + c + imageTokens;
       let u = d <= 15e4;
-      u !== eS.current && (u || az.trackDefinedEvent("ai_for_production.code_chat_client_side_context_limit_exceeded", {
+      u !== eS.current && (u || analyticsEventManager.trackDefinedEvent("ai_for_production.code_chat_client_side_context_limit_exceeded", {
         total_number_of_tokens_estimate: d,
         image_tokens_estimate: imageTokens,
         figma_node_tokens_estimate: o,
@@ -4984,7 +4984,7 @@ export function $$iC0({
             let n = e.code;
             let r = !1;
             if (n = n.replace(/^(?!export\s)(async\s+)?function\s+(\w+)/gm, e => (r = !0, `export ${e}`)), r && e.fullFilePath) {
-              let t = zl.get(_$$nM);
+              let t = atomStoreManager.get(_$$nM);
               let r = _$$W(t, NJ, e.fullFilePath);
               r && r.sourceCode !== n && l7.ai("export-functions", () => {
                 r.sourceCode = n;
@@ -5005,7 +5005,7 @@ export function $$iC0({
 export default function App() {
   return <${t.functionName} />;
 }`;
-          let r = zl.get(_$$nM);
+          let r = atomStoreManager.get(_$$nM);
           let i = _$$W(r, NJ, "/App.tsx");
           i && l7.ai("update-app-tsx", () => {
             i.sourceCode = n;
@@ -5044,7 +5044,7 @@ export default function App() {
   useEffect(() => {
     let e = () => {
       eM.current({
-        message: zl.get(mC(t)),
+        message: atomStoreManager.get(mC(t)),
         isUserInput: !0
       });
     };
@@ -5063,7 +5063,7 @@ export default function App() {
     let a = getFeatureFlags().killswitch_make_initial_message;
     let [l, o] = useState(!1);
     let [c, d, u] = Vc("figmake-initial-message", "", {});
-    let [x, m] = fp(lA);
+    let [x, m] = useAtomValueAndSetter(lA);
     if (x) {
       let e = _$$Z4().find(e => e.key === x.toLowerCase());
       e && (s = e.prompt);
@@ -5101,7 +5101,7 @@ export default function App() {
         e.returnValue = !0;
         let i = exchange.messages[0];
         i && i.type === K$p.USER_MESSAGE && (r = MK(i.textContent).requestUuid);
-        az.trackDefinedEvent("ai_for_production.unsaved_changes_warning_shown", {
+        analyticsEventManager.trackDefinedEvent("ai_for_production.unsaved_changes_warning_shown", {
           fileKey: l,
           featureType: t,
           requestUuid: r,
@@ -5162,7 +5162,7 @@ export default function App() {
     };
   }(t);
   let eq = !eF && attachmentsReady && !eO && (ek || !X) && !isEnhancing && !eE;
-  let e$ = B?.length ? _$$t("living_designs.chat.placeholder.iterate") : _$$t("living_designs.chat.placeholder.blank_slate");
+  let e$ = B?.length ? getI18nString("living_designs.chat.placeholder.iterate") : getI18nString("living_designs.chat.placeholder.blank_slate");
   let [eP, eU] = useState(!1);
   let eG = async e => {
     if (V || eE || !g || !v || 0 === e.files.length || e.files.length > qQ) return;
@@ -5247,7 +5247,7 @@ export default function App() {
           message: e,
           errors: n
         }) => ez({
-          message: e ?? zl.get(mC(t)),
+          message: e ?? atomStoreManager.get(mC(t)),
           errors: n,
           isUserInput: !0
         }),

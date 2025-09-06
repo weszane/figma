@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "../vendor/514228";
 import { IK } from "../905/521428";
 import { QOV } from "../figma_app/763686";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { fu } from "../figma_app/831799";
 import { Cu } from "../figma_app/314264";
 import { f4 } from "../figma_app/722362";
@@ -44,7 +44,7 @@ export function $$y0() {
             PF(r, e);
           });
         },
-        children: _$$t("slides.general.copy_to_figma_slides")
+        children: getI18nString("slides.general.copy_to_figma_slides")
       })
     })
   });

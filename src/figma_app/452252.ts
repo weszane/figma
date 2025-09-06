@@ -5,13 +5,13 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { E as _$$E } from "../905/632989";
 import { _ as _$$_ } from "../figma_app/496441";
 import { getFeatureFlags } from "../905/601108";
-import { md, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, Xr } from "../figma_app/27355";
 import p from "classnames";
 import { gY } from "../figma_app/566371";
 import { o6, cZ, Pt, rf } from "../figma_app/806412";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { _C } from "../figma_app/709893";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { N as _$$N } from "../905/438674";
 import { F_ } from "../905/748636";
 import { b as _$$b } from "../figma_app/47801";
@@ -26,7 +26,7 @@ import { hx } from "../figma_app/290668";
 import { q5, tB, l3 } from "../figma_app/516028";
 import { iZ } from "../905/372672";
 import { o3 as _$$o, nt } from "../905/226610";
-import { wN } from "../figma_app/53721";
+import { mapFileTypeToEditorType } from "../figma_app/53721";
 import { Ib } from "../905/129884";
 import { l as _$$l, O as _$$O } from "../figma_app/471586";
 import { V1 } from "../figma_app/834392";
@@ -44,9 +44,9 @@ function S({
   let r = jsx(_$$N, {
     href: "https://help.figma.com/hc/articles/30124855491863-Guide-to-connected-projects",
     newTab: !0,
-    children: tx("resource_connection.connected_project_link")
+    children: renderI18nText("resource_connection.connected_project_link")
   });
-  let n = tx("resource_connection.onboarding.this_file_is_in_your_team_s_connected_project", {
+  let n = renderI18nText("resource_connection.onboarding.this_file_is_in_your_team_s_connected_project", {
     hostPlanName: e.hostPlanName,
     connectedProject: r,
     connectedPlanName: e.connectedPlanName
@@ -54,7 +54,7 @@ function S({
   return jsx(_$$b, {
     projectUrl: t,
     description: n,
-    title: tx("resource_connection.onboarding.the_perks_of_being_a_connected_file"),
+    title: renderI18nText("resource_connection.onboarding.the_perks_of_being_a_connected_file"),
     trackingContext: "Connected Projects File Editor Onboarding Modal",
     onboardingKey: I,
     arrowPosition: F_.LEFT_TITLE
@@ -82,7 +82,7 @@ class W extends o6 {
       textRef: this.nameRef,
       text: this.props.name
     });
-    let t = _$$t("fullscreen.filename_view.file_input_title.aria_label", {
+    let t = getI18nString("fullscreen.filename_view.file_input_title.aria_label", {
       fileName: this.props.name
     });
     return jsx(_$$E, {
@@ -113,7 +113,7 @@ class W extends o6 {
       recordingKey: Pt(this.props, "input"),
       maxLength: this.props.maxLength,
       inputId: "filename",
-      hiddenLabelText: _$$t("fullscreen.filename_view.file_input_title")
+      hiddenLabelText: getI18nString("fullscreen.filename_view.file_input_title")
     }) : this.renderButton();
   }
 }
@@ -135,7 +135,7 @@ export function $$Y3(e) {
   let r = iZ();
   let n = q5();
   let a = useSelector(e => e.isRenaming);
-  let o = md(lu);
+  let o = useAtomWithSubscription(lu);
   let l = !!n && DF(n, r);
   let d = null == n && null != o ? {
     type: "new-autosave-file",
@@ -164,11 +164,11 @@ function $(e) {
   "open-file" === renamableFile.type ? (t = renamableFile.canRename, r = renamableFile.openFile?.name) : (t = !0, r = renamableFile.newAutosaveFile.name, n = renamableFile.newAutosaveFile.editorType);
   let d = "new-autosave-file" === renamableFile.type;
   useEffect(() => {
-    d && r && n && hL(r, wN(n));
+    d && r && n && hL(r, mapFileTypeToEditorType(n));
   }, [d, r, n]);
   return jsx(W, {
     ...e,
-    name: r || _$$t("fullscreen.filename_view.title_placeholder"),
+    name: r || getI18nString("fullscreen.filename_view.title_placeholder"),
     canRename: t,
     onRename: t => {
       "new-autosave-file" === renamableFile.type ? s({
@@ -178,7 +178,7 @@ function $(e) {
       }) : renamableFile.openFile ? e.dispatch(Nw({
         file: renamableFile.openFile,
         name: t
-      })) : $D(_$$e.UNOWNED, Error("Tried renaming but file does not exist"));
+      })) : reportError(_$$e.UNOWNED, Error("Tried renaming but file does not exist"));
     },
     isUI3: !0,
     maxLength: 100
@@ -193,7 +193,7 @@ export function $$q4({
   let r = function (e, t) {
     if (!e?.project) return "";
     let r = e.project;
-    return r.path ? r.path : r.id === t?.personal_drafts_folder_id ? _$$t("fullscreen.filename_view.drafts_to_move") : _$$t("fullscreen.filename_view.drafts");
+    return r.path ? r.path : r.id === t?.personal_drafts_folder_id ? getI18nString("fullscreen.filename_view.drafts_to_move") : getI18nString("fullscreen.filename_view.drafts");
   }(e, t);
   let n = r.length > 25 ? r : void 0;
   let o = function () {

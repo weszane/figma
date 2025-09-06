@@ -18,7 +18,7 @@ import { A as _$$A9 } from "../vendor/706709";
 import { c2 } from "../figma_app/243213";
 import { Uz } from "../905/63728";
 import { z as _$$z } from "../905/69245";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Ib } from "../905/129884";
 import { _ as _$$_ } from "../905/142361";
 import { mv, OZ, mm } from "../905/491152";
@@ -407,49 +407,49 @@ _$$A9["code-block"] = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height
 let I = {
   [_$$_.Bold]: () => jsx(H, {
     className: "ql-bold",
-    tooltip: t("proto.starting_points.description_bold_tooltip"),
+    tooltip: getI18nString("proto.starting_points.description_bold_tooltip"),
     keyShortcutKey: "B"
   }),
   [_$$_.Italic]: () => jsx(H, {
     className: "ql-italic",
-    tooltip: t("proto.starting_points.description_italic_tooltip"),
+    tooltip: getI18nString("proto.starting_points.description_italic_tooltip"),
     keyShortcutKey: "I"
   }),
   [_$$_.Strikethrough]: () => jsx(H, {
     className: "ql-strike",
-    tooltip: t("proto.starting_points.description_strikethrough_tooltip"),
+    tooltip: getI18nString("proto.starting_points.description_strikethrough_tooltip"),
     keyShortcutKey: "X",
     keyShortcutShift: !0
   }),
   [_$$_.Header1]: () => jsx(H, {
     className: "ql-header",
     value: "2",
-    tooltip: t("proto.starting_points.description_header_tooltip")
+    tooltip: getI18nString("proto.starting_points.description_header_tooltip")
   }),
   [_$$_.BulletedList]: () => jsx(H, {
     className: "ql-list",
     value: "bullet",
-    tooltip: t("proto.starting_points.description_bulleted_list_tooltip")
+    tooltip: getI18nString("proto.starting_points.description_bulleted_list_tooltip")
   }),
   [_$$_.OrderedList]: () => jsx(H, {
     className: "ql-list",
     value: "ordered",
-    tooltip: t("proto.starting_points.description_ordered_list_tooltip")
+    tooltip: getI18nString("proto.starting_points.description_ordered_list_tooltip")
   }),
   [_$$_.Link]: () => jsx(H, {
     className: "ql-link",
-    tooltip: t("proto.starting_points.description_link_tooltip"),
+    tooltip: getI18nString("proto.starting_points.description_link_tooltip"),
     keyShortcutKey: "K"
   }),
   [_$$_.Code]: () => jsx(H, {
     className: "ql-code",
-    tooltip: t("proto.starting_points.description_code_tooltip"),
+    tooltip: getI18nString("proto.starting_points.description_code_tooltip"),
     keyShortcutKey: "C",
     keyShortcutShift: !0
   }),
   [_$$_.CodeBlock]: () => jsx(H, {
     className: "ql-code-block",
-    tooltip: t("proto.starting_points.description_code_block_tooltip"),
+    tooltip: getI18nString("proto.starting_points.description_code_block_tooltip"),
     keyShortcutKey: "C",
     keyShortcutShift: !0,
     keyShortcutOption: !0

@@ -3,7 +3,7 @@ import { useDispatch } from "../vendor/514228";
 import { Yy } from "../figma_app/59509";
 import { Q } from "../905/363675";
 import { N } from "../905/572042";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { to } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { Ju } from "../905/102752";
@@ -16,14 +16,14 @@ let _ = Ju(function (e) {
       planType: e.planType
     },
     children: jsx(Dd, {
-      title: _$$t("admin_settings.ai.features_toggle.modal.header"),
+      title: getI18nString("admin_settings.ai.features_toggle.modal.header"),
       maxWidth: 440,
       minWidth: 440,
       fixedTop: !1,
       onConfirm: e.onEnable,
-      confirmText: _$$t("admin_settings.ai.features_toggle.modal.button"),
+      confirmText: getI18nString("admin_settings.ai.features_toggle.modal.button"),
       children: jsx("div", {
-        children: tx("admin_settings.ai.features_toggle.modal.description")
+        children: renderI18nText("admin_settings.ai.features_toggle.modal.description")
       })
     })
   });
@@ -34,12 +34,12 @@ export function $$$$p0(e) {
     variant: "brand",
     "data-testid": e.testId,
     children: [jsx(Q, {
-      title: _$$t("admin_settings.ai.banner.title"),
+      title: getI18nString("admin_settings.ai.banner.title"),
       children: jsx("span", {
         style: {
           marginRight: 8
         },
-        children: tx("admin_settings.ai.banner.description")
+        children: renderI18nText("admin_settings.ai.banner.description")
       })
     }), jsx(N, {
       href: "#",
@@ -55,7 +55,7 @@ export function $$$$p0(e) {
           }
         }));
       },
-      children: tx("admin_settings.ai.features_toggle.enable_ai")
+      children: renderI18nText("admin_settings.ai.features_toggle.enable_ai")
     })]
   });
 }

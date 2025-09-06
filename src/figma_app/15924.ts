@@ -2,8 +2,8 @@ import a from 'classnames';
 import { jsx, jsxs } from 'react/jsx-runtime';
 import { Uv } from '../905/54385';
 import { Ib } from '../905/129884';
-import { tx } from '../905/303541';
-import { sx } from '../905/449184';
+import { renderI18nText } from '../905/303541';
+import { trackEventAnalytics } from '../905/449184';
 import { e0 } from '../905/696396';
 import { O as _$$O } from '../905/791978';
 import { s as _$$s } from '../cssbuilder/589278';
@@ -17,7 +17,7 @@ import { Z_ } from '../figma_app/858013';
 let s = a;
 let b = 'purchase_button_view--primaryText--TzFkq';
 export function $$T3(e, t, r, n) {
-  sx('cmty_redirect_purchase_button_click', {
+  trackEventAnalytics('cmty_redirect_purchase_button_click', {
     context: t,
     resource_type: Dl(e),
     resource_id: e.id,
@@ -26,7 +26,7 @@ export function $$T3(e, t, r, n) {
   });
 }
 export function $$I2(e, t, r, n) {
-  sx('cmty_purchase_button_click', {
+  trackEventAnalytics('cmty_purchase_button_click', {
     context: t,
     resource_type: Dl(e),
     resource_id: e.id,
@@ -50,7 +50,7 @@ export function $$S1({
   let x = m3(e);
   let N = !!(U(e) && e.viewer_mode === FTemplateCategoryType.WHITEBOARD || (I0(e) || xQ(e)) && e.editor_type === HK.FIGJAM);
   let C = r === aL.DETAIL && BS(e);
-  let w = tx('community.buyer.preview');
+  let w = renderI18nText('community.buyer.preview');
   let O = jsx(e6, {
     onClick: I,
     className: 'purchase_button_view--previewButton--d8Fc0',
@@ -97,7 +97,7 @@ export function $$S1({
             opacity: p ? 0 : 1
           },
           className: b,
-          children: x && Uv(e.monetized_resource_metadata) ? tx('community.buyer.subscribe') : zF(e) ? tx('community.buyer.buy_third_party_monetized') : tx('community.buyer.buy')
+          children: x && Uv(e.monetized_resource_metadata) ? renderI18nText('community.buyer.subscribe') : zF(e) ? renderI18nText('community.buyer.buy_third_party_monetized') : renderI18nText('community.buyer.buy')
         }), jsx('div', {
           style: {
             opacity: p ? 0 : 1
@@ -124,9 +124,9 @@ export function $$v0({
 }) {
   return jsx('span', {
     className: t ? 'purchase_button_view--freeTrialCondensed--zoo-d text--fontPos9--naThA text--_fontBase--QdLsd' : 'purchase_button_view--freeTrial--KSIhj text--fontPos13--xW8hS text--_fontBase--QdLsd',
-    children: t ? tx('community.resource.free_trial_days', {
+    children: t ? renderI18nText('community.resource.free_trial_days', {
       days: e.trial_length_in_days
-    }) : tx('community.resource.includes_free_trial_days', {
+    }) : renderI18nText('community.resource.includes_free_trial_days', {
       days: e.trial_length_in_days
     })
   });

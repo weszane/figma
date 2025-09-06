@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { sx } from "../905/449184";
-import { jk } from "../905/609396";
-import { t as _$$t } from "../905/303541";
+import { trackEventAnalytics } from "../905/449184";
+import { PerfTimer } from "../905/609396";
+import { getI18nString } from "../905/303541";
 import { pY, MZ, Dy } from "../figma_app/925970";
 import { F } from "../905/302958";
 import { mk } from "../figma_app/999312";
@@ -59,7 +59,7 @@ let T = e => {
 };
 let I = (e, t) => {
   e(F.enqueue({
-    message: t.message || _$$t("community.error.search_request_failed"),
+    message: t.message || getI18nString("community.error.search_request_failed"),
     error: !0,
     type: "community-search-error",
     timeoutOverride: 2e3
@@ -106,7 +106,7 @@ let S = async (e, t, r, s, i) => {
   }
 };
 let R = async (e, t, r, s) => {
-  let i = new jk("searchResourcesAndProfiles", {});
+  let i = new PerfTimer("searchResourcesAndProfiles", {});
   let a = null;
   i.start();
   try {
@@ -124,7 +124,7 @@ let R = async (e, t, r, s) => {
     I(s, e);
   } finally {
     let s = i.stop();
-    sx(M5.SEARCH_QUERY_RESULT, {
+    trackEventAnalytics(M5.SEARCH_QUERY_RESULT, {
       elapsedMs: s,
       mixed: a?.resourcesResponse?.data.meta.results.length,
       profiles: a?.profilesResponse?.data.meta.results.length,
@@ -222,7 +222,7 @@ export function $$A0(e) {
         [_$$L.SearchResourceTypes.FILES]: g,
         [_$$L.SearchResourceTypes.PLUGINS]: w,
         [_$$L.SearchResourceTypes.WIDGETS]: T
-      })), d(!1), sx(M5.SEARCH_QUERY_RESULT, {
+      })), d(!1), trackEventAnalytics(M5.SEARCH_QUERY_RESULT, {
         query: e.query,
         mixed: o.resources.length,
         entry_point: "community",
@@ -293,7 +293,7 @@ export function $$P2(e, t) {
         files: !0,
         plugins: !0,
         widgets: !0
-      }), sx(M5.SEARCH_QUERY_RESULT, {
+      }), trackEventAnalytics(M5.SEARCH_QUERY_RESULT, {
         query: e.query,
         scope: mk.RESOURCE_HUB,
         entry_point: mk.RESOURCE_HUB,

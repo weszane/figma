@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "../vendor/514228";
 import { E } from "../905/632989";
 import o from "classnames";
 import { V } from "../figma_app/312987";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { aZ } from "../figma_app/405906";
 import { U } from "../905/331038";
 import { w as _$$w } from "../905/113805";
@@ -15,9 +15,9 @@ var l = o;
 function _(e) {
   if (e && "exception" !== e.type) switch (e.key) {
     case "MISSING_CATEGORY":
-      return _$$t("community.publishing.category_cant_be_empty");
+      return getI18nString("community.publishing.category_cant_be_empty");
     case "CATEGORY_WITH_SUBCATEGORIES":
-      return _$$t("community.publishing.category_sub_cant_be_empty");
+      return getI18nString("community.publishing.category_sub_cant_be_empty");
   }
 }
 let A = "RESOURCE_PUBLISHING_CATEGORY_SELECT_DROPDOWN";
@@ -64,7 +64,7 @@ export let $$v0 = forwardRef(function ({
     }
   }), []);
   return jsx(_$$A, {
-    label: _$$t("community.publishing.category"),
+    label: getI18nString("community.publishing.category"),
     error: w,
     required: !0,
     children: jsxs(V, {
@@ -83,7 +83,7 @@ export let $$v0 = forwardRef(function ({
         disabled: !x,
         children: C ? aZ(C) : jsx("span", {
           className: "category_select--selectedItemPlaceholder--Q5Gcm",
-          children: _$$t("community.publishing.select_a_category")
+          children: getI18nString("community.publishing.select_a_category")
         })
       }), T && k && jsx(j, {
         showPoint: !1,

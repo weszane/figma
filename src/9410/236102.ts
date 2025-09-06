@@ -1,6 +1,6 @@
 import { Jh } from "../9410/60886";
 import { useCallback, useEffect } from "react";
-import { um, md, fp } from "../figma_app/27355";
+import { um, useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { Wh } from "../figma_app/615482";
 import { WS, S7 } from "../7222/396421";
 let o = {
@@ -97,7 +97,7 @@ function d(e) {
   return "OUTLINE" === e.step;
 }
 export function $$c2() {
-  return md(l).step;
+  return useAtomWithSubscription(l).step;
 }
 export function $$u4() {
   switch ($$c2()) {
@@ -111,10 +111,10 @@ export function $$u4() {
   }
 }
 export function $$p0() {
-  return md(l).data;
+  return useAtomWithSubscription(l).data;
 }
 export function $$h1() {
-  let [e, t] = fp(l);
+  let [e, t] = useAtomValueAndSetter(l);
   let i = useCallback(() => {
     t({
       type: "SET_STEP",

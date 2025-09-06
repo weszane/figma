@@ -1,11 +1,11 @@
-import { eU } from "../figma_app/27355";
+import { atom } from "../figma_app/27355";
 var $$i4 = (e => (e.INTRO = "Intro Step", e.STATUSES = "Statuses Step", e.COMPARE_CHANGES = "Compare Changes Step", e.ANNOTATIONS = "Annotations Step", e.CODE_CONNECT = "Code Connect Step", e.OUTRO = "Outro Step", e))($$i4 || {});
 let $$a2 = 4;
-let $$s3 = eU("Intro Step");
-let $$o0 = eU(!1);
-let $$l6 = eU(!1);
-let $$d1 = eU(!1);
-let $$c5 = eU(!1);
+let $$s3 = atom("Intro Step");
+let $$o0 = atom(!1);
+let $$l6 = atom(!1);
+let $$d1 = atom(!1);
+let $$c5 = atom(!1);
 export const Bl = $$o0;
 export const HO = $$d1;
 export const PY = $$a2;

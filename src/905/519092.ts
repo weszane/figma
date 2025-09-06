@@ -8,7 +8,7 @@ import { Jn } from "../905/17223";
 import { qM, vd, tM } from "../figma_app/637027";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Lo } from "../905/156213";
 import { Dm } from "../figma_app/8833";
 import { ft } from "../figma_app/753501";
@@ -118,12 +118,12 @@ export function $$v0(e) {
   };
   let s = jsxs(Fragment, {
     children: [e.hideCancel || jsx(tM, {
-      innerText: _$$t("general.cancel"),
+      innerText: getI18nString("general.cancel"),
       onClick: r,
       className: x7,
-      children: e.cancelText || _$$t("general.cancel")
+      children: e.cancelText || getI18nString("general.cancel")
     }), jsx(i, {
-      innerText: e.confirmText || _$$t("general.okay"),
+      innerText: e.confirmText || getI18nString("general.okay"),
       onClick: i => {
         if (i.preventDefault(), e.onSubmit) {
           e.onSubmit();
@@ -135,7 +135,7 @@ export function $$v0(e) {
       className: EJ,
       trackingProperties: e.trackedConfirmationProperties || {},
       disabled: e.disabled,
-      children: e.confirmText || _$$t("general.okay")
+      children: e.confirmText || getI18nString("general.okay")
     })]
   });
   return jsx($$b1, {

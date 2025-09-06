@@ -4,7 +4,7 @@ import { k } from "../905/749197";
 import { KjJ } from "../figma_app/763686";
 import { F0, rV, PA, nO } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
-import { fp } from "../figma_app/27355";
+import { useAtomValueAndSetter } from "../figma_app/27355";
 import { xx } from "../figma_app/815945";
 import { Fj, GY } from "../figma_app/76123";
 import { cX, YI, K3 } from "../figma_app/678300";
@@ -304,8 +304,8 @@ export function $$j3({
   getNode: e,
   selection: t
 }) {
-  let [r, i] = fp(Fj);
-  let [a, s] = fp(GY);
+  let [r, i] = useAtomValueAndSetter(Fj);
+  let [a, s] = useAtomValueAndSetter(GY);
   let o = useCallback(() => {
     i(new Set());
     s(new Set());

@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { N } from "../905/438674";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { b } from "../905/217163";
 import { E4, m3, bj } from "../905/66449";
 export function $$l0({
@@ -30,7 +30,7 @@ export function $$l0({
         onMouseDown: e => e.stopPropagation()
       },
       ref,
-      children: tx("design_systems.libraries_modal.open_file")
+      children: renderI18nText("design_systems.libraries_modal.open_file")
     })
   }) : null;
 }

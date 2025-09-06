@@ -8,7 +8,7 @@ import { p as _$$p } from "../905/951634";
 import { K as _$$K } from "../905/851274";
 import u from "classnames";
 import { Pt } from "../figma_app/806412";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { f0 } from "../figma_app/975811";
 import { RU } from "../figma_app/740163";
 import { _P } from "../figma_app/2590";
@@ -52,7 +52,7 @@ export function $$E0(e) {
         [wz]: !P,
         [vn]: P
       }),
-      "data-tooltip": _$$t("fullscreen.properties_panel.video_time"),
+      "data-tooltip": getI18nString("fullscreen.properties_panel.video_time"),
       "data-tooltip-type": Ib.TEXT,
       dataTestId: "editorVideoPreview-input",
       disabled,
@@ -89,7 +89,7 @@ export function $$E0(e) {
       setPlaying(!1);
       F("pause");
     },
-    "aria-label": _$$t("fullscreen.properties_panel.pause"),
+    "aria-label": getI18nString("fullscreen.properties_panel.pause"),
     recordingKey: Pt(e, "pauseVideo"),
     children: jsx(_$$p, {})
   }) : jsx(K, {
@@ -97,12 +97,12 @@ export function $$E0(e) {
     onClick: () => {
       t && (setPlaying(!0), F("play"));
     },
-    "aria-label": _$$t("fullscreen.properties_panel.play"),
+    "aria-label": getI18nString("fullscreen.properties_panel.play"),
     recordingKey: Pt(e, "playVideo"),
     children: jsx(_$$K, {})
   });
   let U = jsx(_$$A, {
-    "aria-label": _$$t("fullscreen.properties_panel.video_time"),
+    "aria-label": getI18nString("fullscreen.properties_panel.video_time"),
     bigStep: .1,
     defaultValue: 0,
     disabled: disabled || !isVideoLoaded || playing,

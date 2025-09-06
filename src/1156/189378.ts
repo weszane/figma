@@ -5,7 +5,7 @@ import { b as _$$b, q7, Q$, bL, mc } from "../figma_app/860955";
 import { K } from "../905/443068";
 import { s as _$$s } from "../905/551945";
 import { e as _$$e } from "../905/149844";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { to } from "../905/156213";
 import { xp } from "../905/966582";
 import { wj } from "../1156/721826";
@@ -58,9 +58,9 @@ export function $$y0({
       children: jsx(o, {})
     }), jsx("div", {
       className: "xifkd7f",
-      children: n.length >= qQ ? _$$t("sites.panel.make.attach_limit_reached", {
+      children: n.length >= qQ ? getI18nString("sites.panel.make.attach_limit_reached", {
         limit: qQ
-      }) : _$$t("figmake.attachments.import_from_figma")
+      }) : getI18nString("figmake.attachments.import_from_figma")
     })]
   }) : null;
   let w = t ? jsx(Fragment, {
@@ -73,9 +73,9 @@ export function $$y0({
         children: jsx(_$$s, {})
       }), jsx("div", {
         className: "xifkd7f",
-        children: n.length >= qQ ? _$$t("sites.panel.make.attach_limit_reached", {
+        children: n.length >= qQ ? getI18nString("sites.panel.make.attach_limit_reached", {
           limit: qQ
-        }) : _$$t("figmake.attachments.upload_image")
+        }) : getI18nString("figmake.attachments.upload_image")
       })]
     })
   }) : null;
@@ -85,7 +85,7 @@ export function $$y0({
       ...getTriggerProps()
     }) : jsx(K, {
       ...getTriggerProps(),
-      "aria-label": _$$t("sites.panel.make.attach_design"),
+      "aria-label": getI18nString("sites.panel.make.attach_design"),
       "data-tooltip-show-above": !0,
       "data-onboarding-key": wj,
       disabled: y || n.length >= qQ,

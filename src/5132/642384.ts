@@ -1,9 +1,9 @@
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { dR } from "../905/508367";
 import { Ay } from "../905/612521";
-import { rr } from "../figma_app/778880";
+import { isMobileUA } from "../figma_app/778880";
 import { XHR } from "../905/910117";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Hx } from "../905/321397";
 import { F } from "../905/302958";
 import { wr } from "../figma_app/387599";
@@ -26,7 +26,7 @@ async function j(e, l, i, t, a, r) {
     c = await nm(!0)(i);
     s = _$$F(t, l, c);
   } catch (l) {
-    let e = l?.data?.message || _$$t("file_browser.error_try_again");
+    let e = l?.data?.message || getI18nString("file_browser.error_try_again");
     i(F.enqueue({
       message: e,
       type: "error"
@@ -71,7 +71,7 @@ let $$T1 = (e, l = {
       let d = c.meta;
       let h = m3(i);
       let f = !0 !== h ? "none" : !0 === l.isFreemiumPreview ? "trial" : "paid";
-      sx(M5.HUB_FILE_DUPLICATED, {
+      trackEventAnalytics(M5.HUB_FILE_DUPLICATED, {
         hubFileId: i.id,
         figFileKey: d.key,
         isMonetized: h,
@@ -94,7 +94,7 @@ let $$T1 = (e, l = {
       !0 === l.isFreemiumPreview && (g = dR(g, {
         "is-freemium-preview": "1"
       }));
-      Ay.redirect(g, rr ? void 0 : "_blank");
+      Ay.redirect(g, isMobileUA ? void 0 : "_blank");
     });
   }
   YN() && l.skipWorkspaceSelection ? h() : await j(e, i, n, u, h);
@@ -111,7 +111,7 @@ let $$A2 = (e, l = {
     })) : l.userId && (t = dR(t, {
       fuid: l.userId
     }));
-    Ay.redirect(t, rr ? void 0 : "_blank");
+    Ay.redirect(t, isMobileUA ? void 0 : "_blank");
   }
   YN() && l.skipWorkspaceSelection ? o() : await j(e, i, t, n, o);
 };
@@ -127,7 +127,7 @@ let $$S0 = (e, l = {
     })) : l.userId && (t = dR(t, {
       fuid: l.userId
     }));
-    Ay.redirect(t, rr ? void 0 : "_blank");
+    Ay.redirect(t, isMobileUA ? void 0 : "_blank");
   }
   YN() && l.skipWorkspaceSelection ? o() : await j(e, i, t, n, o, !0);
 };

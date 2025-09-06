@@ -3,7 +3,7 @@ import { isValidElement, useMemo } from "react";
 import { R } from "../905/621802";
 import { J } from "../905/125993";
 import { B } from "../905/714743";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { $z } from "../figma_app/831799";
 import { P } from "../905/842406";
 import { A5 } from "../figma_app/707808";
@@ -44,7 +44,7 @@ export function $$f1(e) {
   let t = jsx(J, {});
   return jsx($$g2, {
     icon: t,
-    text: _$$t("file_permissions_modal.share_as.more"),
+    text: getI18nString("file_permissions_modal.share_as.more"),
     onClick: e.onClick,
     isSecondaryStyling: !0,
     testId: "share-modal-more-options-row"
@@ -60,7 +60,7 @@ export function $$_0(e) {
   }, [e.roles]);
   let o = E4(s[0], i);
   let d = E4(s[1], i);
-  let f = tx("file_permissions_modal.collaborators_row_v2", {
+  let f = renderI18nText("file_permissions_modal.collaborators_row_v2", {
     collaborator_1_name: jsx("span", {
       className: bv,
       children: o
@@ -71,7 +71,7 @@ export function $$_0(e) {
     }),
     remaining_collaborator_text: jsx("span", {
       className: bv,
-      children: tx("file_permissions_modal.collaborators_row_v2.num_remaining_collaborators_others", {
+      children: renderI18nText("file_permissions_modal.collaborators_row_v2.num_remaining_collaborators_others", {
         num_remaining_collaborators: t - 2
       })
     })

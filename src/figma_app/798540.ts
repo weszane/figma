@@ -5,7 +5,7 @@ import { glU } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { AD } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { HH } from "../figma_app/3776";
 import { Gc } from "../figma_app/456871";
 import { I9 } from "../figma_app/151869";
@@ -86,7 +86,7 @@ export function $$E0(e, t) {
               let d = Math.max(0, p + u - (o - 16));
               let _ = e.lineHeightOrMixed;
               "mixed" === _ && (_ = e.getRangeLineHeight(0, 1));
-              "mixed" === _ ? (t = 1, $D(_$$e.AI_PRODUCTIVITY, Error("Unexpected mixed line height while resizing text node for slide bounds"))) : "PIXELS" === _.units ? (t = _.value / e.fontSize, e.lineHeight = {
+              "mixed" === _ ? (t = 1, reportError(_$$e.AI_PRODUCTIVITY, Error("Unexpected mixed line height while resizing text node for slide bounds"))) : "PIXELS" === _.units ? (t = _.value / e.fontSize, e.lineHeight = {
                 units: "RAW",
                 value: t
               }) : t = _.value;

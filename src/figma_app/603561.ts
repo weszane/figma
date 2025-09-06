@@ -1,6 +1,6 @@
 import { resourceUtils } from "../905/989992";
 import { IT, mI } from "../figma_app/566371";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { zqW } from "../figma_app/43951";
 import { XP } from "../figma_app/465071";
@@ -43,7 +43,7 @@ export function $$c0({
   let [n] = mI(r);
   if ("loaded" !== n.status) {
     let t = Error("Error fetching isELA info");
-    $D(e, t);
+    reportError(e, t);
     return t;
   }
   return n.data;

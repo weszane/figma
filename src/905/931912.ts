@@ -1,21 +1,21 @@
 import n from "lodash-es/mapValues";
 import a from "../vendor/149674";
-import { sx, pp } from "../905/449184";
+import { trackEventAnalytics, getAnonymousId } from "../905/449184";
 import { k } from "../905/651849";
 import { getInitialOptions } from "../figma_app/169182";
-import { Br } from "../3973/348894";
+import { normalizeUrl } from "../3973/348894";
 import { G } from "../figma_app/714966";
 import { secondaryModalZ } from "../figma_app/786175";
 var r = n;
 var s = a;
 export let $$m0 = {
-  sendMessage() { },
+  sendMessage() {},
   listenForMatchingMessage: e => Promise.resolve({
     type: e,
     content: {}
   }),
-  setCallbacks() { },
-  tearDown() { }
+  setCallbacks() {},
+  tearDown() {}
 };
 function h(e, t) {
   return "string" == typeof e && (!t || t.test(e)) ? Date.parse(e) : NaN;
@@ -267,7 +267,7 @@ let f = class e {
     }
     async function i() {
       let t = await e.listenForMatchingMessage(G.Error);
-      0 !== e.instanceCount && (t && sx("sprig_sandbox_error", t.content), i());
+      0 !== e.instanceCount && (t && trackEventAnalytics("sprig_sandbox_error", t.content), i());
     }
     async function n() {
       let t = await e.listenForMatchingMessage(G.GetPermissionToShowSurvey);
@@ -307,7 +307,7 @@ let f = class e {
       e.iframe = s;
       k.debug("[Sprigma] Sandbox iframe injected into DOM");
       let m = setInterval(() => {
-        e.updatePageUrl(Br(location.href));
+        e.updatePageUrl(normalizeUrl(location.href));
       }, 100);
       e.tearDownIframeCallback = () => {
         k.debug("[Sprigma] Sandbox iframe is tearing down as there are no users left");
@@ -320,17 +320,17 @@ let f = class e {
       try {
         a = await e.listenForMatchingMessage(G.SDKReady, void 0, 1e4);
       } catch {
-        sx("sprig_sdk_loading_timeout", {
+        trackEventAnalytics("sprig_sdk_loading_timeout", {
           threshold: 1e4
         });
       }
       if (void 0 === a || 0 === e.instanceCount) return;
       e.isSDKReady = !0;
-      sx("sprig_sdk_ready", {
+      trackEventAnalytics("sprig_sdk_ready", {
         time_to_readiness: a.content.timeToReadinessInMs
       });
       k.info("[Sprigma] Sprig SDK is ready");
-      let h = pp();
+      let h = getAnonymousId();
       h && (k.debug(`[Sprigma] Setting anonymous ID to ${h}`), e.sendMessage({
         type: G.Call,
         content: {
@@ -400,4 +400,4 @@ let _ = (e, t) => {
 };
 let $$A1 = f;
 export const An = $$m0;
-export const Ay = $$A1; 
+export const Ay = $$A1;

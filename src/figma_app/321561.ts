@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { l7 } from "../905/189185";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { mG } from "../figma_app/15924";
 import { XR } from "../figma_app/808294";
 import { v as _$$v } from "../905/581647";
@@ -18,7 +18,7 @@ import { sZ } from "../905/845253";
 import { TA } from "../905/372672";
 import { R as _$$R } from "../figma_app/612938";
 import { aL } from "../figma_app/45218";
-import { wN } from "../figma_app/53721";
+import { mapFileTypeToEditorType } from "../figma_app/53721";
 import { k0 } from "../figma_app/155287";
 import { Kp } from "../figma_app/189990";
 import { q8, U4, S3 } from "../figma_app/254872";
@@ -91,7 +91,7 @@ export function $$O0({
       orgId: q.parentOrgId,
       workspaceDetails: J.loaded ? J.data : void 0,
       openedFrom: "editor",
-      fullscreenEditorType: wN(q.editorType)
+      fullscreenEditorType: mapFileTypeToEditorType(q.editorType)
     };
     D(to({
       type: _$$S,
@@ -110,16 +110,16 @@ export function $$O0({
       actionText: XR(e)
     } : M && j ? {
       onAction: G,
-      actionText: _$$t("qa.extensions.update_payment")
+      actionText: getI18nString("qa.extensions.update_payment")
     } : canRun ? {
       onAction: X,
-      actionText: _$$t("qa.extensions.run")
+      actionText: getI18nString("qa.extensions.run")
     } : ee ? {
       onAction: () => {},
-      actionText: _$$t("qa.extensions.approval_pending")
+      actionText: getI18nString("qa.extensions.approval_pending")
     } : canRequest ? {
       onAction: Z,
-      actionText: _$$t("qa.extensions.request_approval")
+      actionText: getI18nString("qa.extensions.request_approval")
     } : {
       onAction: () => {},
       actionText: ""

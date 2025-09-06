@@ -9,7 +9,7 @@ import { parsePxNumber } from "../figma_app/783094";
 import { Pt } from "../figma_app/806412";
 import { Zl } from "../905/211621";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { zE } from "../905/8732";
 import { dG } from "../figma_app/753501";
 import { hS, gl } from "../905/216495";
@@ -92,12 +92,12 @@ export function $$k1(e) {
         className: c()("instance_swap_toggle--pickerButtonContent--wSQrI ellipsis--ellipsis--Tjyfa", {
           [S]: fill
         }),
-        children: gl(instanceSwapNode) ? tx("design_systems.instance_swap_picker.mixed") : kH(instanceSwapNode.name)
+        children: gl(instanceSwapNode) ? renderI18nText("design_systems.instance_swap_picker.mixed") : kH(instanceSwapNode.name)
       }) : jsx("div", {
         className: c()("instance_swap_toggle--pickerButtonPlaceholder--OIjte instance_swap_toggle--pickerButtonContent--wSQrI ellipsis--ellipsis--Tjyfa", {
           [S]: fill
         }),
-        children: tx("design_systems.instance_swap_picker.pick_instance")
+        children: renderI18nText("design_systems.instance_swap_picker.pick_instance")
       }), !disableToggle && jsx("span", {
         className: "instance_swap_toggle--chevronIcon--4CRVk",
         children: jsx(_$$r, {})

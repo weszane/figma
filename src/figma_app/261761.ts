@@ -5,7 +5,7 @@ import { E as _$$E } from "../905/632989";
 import { j0r } from "../figma_app/763686";
 import { dI } from "../905/805904";
 import d from "classnames";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { v4 } from "../figma_app/655139";
 import { Fj } from "../figma_app/793429";
 import { Q } from "../905/217916";
@@ -172,26 +172,26 @@ export function $$V3(e) {
   } = e;
   let z = "PROGRESSIVE" === blurOpType;
   let [W, K, Y, $] = hg([xVar, yVar, radiusVar, spreadVar, colorVar].map(e => e?.value?.alias ? dI(e.value.alias) : void 0));
-  let X = $$M6(offset?.x, W, _$$t("inspect_panel.shadows.x"));
-  let q = $$M6(offset?.y, K, _$$t("inspect_panel.shadows.y"));
+  let X = $$M6(offset?.x, W, getI18nString("inspect_panel.shadows.x"));
+  let q = $$M6(offset?.y, K, getI18nString("inspect_panel.shadows.y"));
   let J = Cm(startOffset?.x);
   let Z = Cm(startOffset?.y);
   let Q = Cm(endOffset?.x);
   let ee = Cm(endOffset?.y);
-  let et = $$M6(startRadius, Y, _$$t("inspect_panel.shadows.blur.start"));
-  let er = $$M6(radius, Y, z ? _$$t("inspect_panel.shadows.blur.end") : _$$t("inspect_panel.shadows.blur"));
-  let en = $$M6(spread, $, _$$t("inspect_panel.shadows.spread_tooltip"));
+  let et = $$M6(startRadius, Y, getI18nString("inspect_panel.shadows.blur.start"));
+  let er = $$M6(radius, Y, z ? getI18nString("inspect_panel.shadows.blur.end") : getI18nString("inspect_panel.shadows.blur"));
+  let en = $$M6(spread, $, getI18nString("inspect_panel.shadows.spread_tooltip"));
   let ei = pc("MISSING", offset?.x ?? 0);
   let ea = pc("MISSING", offset?.y ?? 0);
   let es = pc("MISSING", radius ?? 0);
   let eo = pc("MISSING", spread ?? 0);
-  let el = sD(z ? _$$t("inspect_panel.shadows.x.end") : _$$t("inspect_panel.shadows.x"));
-  let ed = sD(z ? _$$t("inspect_panel.shadows.y.end") : _$$t("inspect_panel.shadows.y"));
-  let ec = sD(_$$t("inspect_panel.shadows.x.start"));
-  let eu = sD(_$$t("inspect_panel.shadows.y.start"));
-  let ep = sD(_$$t("inspect_panel.shadows.blur.start"));
-  let e_ = sD(z ? _$$t("inspect_panel.shadows.blur.end") : _$$t("inspect_panel.shadows.blur"));
-  let eh = sD(_$$t("inspect_panel.shadows.spread_tooltip"));
+  let el = sD(z ? getI18nString("inspect_panel.shadows.x.end") : getI18nString("inspect_panel.shadows.x"));
+  let ed = sD(z ? getI18nString("inspect_panel.shadows.y.end") : getI18nString("inspect_panel.shadows.y"));
+  let ec = sD(getI18nString("inspect_panel.shadows.x.start"));
+  let eu = sD(getI18nString("inspect_panel.shadows.y.start"));
+  let ep = sD(getI18nString("inspect_panel.shadows.blur.start"));
+  let e_ = sD(z ? getI18nString("inspect_panel.shadows.blur.end") : getI18nString("inspect_panel.shadows.blur"));
+  let eh = sD(getI18nString("inspect_panel.shadows.spread_tooltip"));
   if (!visible) return null;
   let em = "DROP_SHADOW" === e.type || "INNER_SHADOW" === e.type;
   let eg = "DROP_SHADOW" === e.type && showShadowBehindNode;
@@ -204,7 +204,7 @@ export function $$V3(e) {
       isHovered: o,
       button1: jsx($$B2, {
         tooltipRef: ec,
-        label: _$$t("inspect_panel.shadows.x.start"),
+        label: getI18nString("inspect_panel.shadows.x.start"),
         onClick: J,
         value: eE.format(startOffset?.x),
         rowRef: a,
@@ -212,7 +212,7 @@ export function $$V3(e) {
       }),
       button2: jsx($$B2, {
         tooltipRef: eu,
-        label: _$$t("inspect_panel.shadows.y.start"),
+        label: getI18nString("inspect_panel.shadows.y.start"),
         onClick: Z,
         value: eE.format(startOffset?.y),
         rowRef: a,
@@ -224,7 +224,7 @@ export function $$V3(e) {
       isHovered: o,
       button1: jsx($$B2, {
         tooltipRef: el,
-        label: _$$t("inspect_panel.shadows.x.end"),
+        label: getI18nString("inspect_panel.shadows.x.end"),
         onClick: Q,
         value: eE.format(endOffset?.x),
         rowRef: a,
@@ -233,7 +233,7 @@ export function $$V3(e) {
       }),
       button2: jsx($$B2, {
         tooltipRef: ed,
-        label: _$$t("inspect_panel.shadows.y.end"),
+        label: getI18nString("inspect_panel.shadows.y.end"),
         onClick: ee,
         value: eE.format(endOffset?.y),
         rowRef: a,
@@ -248,7 +248,7 @@ export function $$V3(e) {
     isHovered: o,
     button1: jsx($$B2, {
       isHovered: o,
-      label: _$$t("inspect_panel.shadows.x"),
+      label: getI18nString("inspect_panel.shadows.x"),
       onClick: X,
       recordingKey: "shadows_panel_x",
       rowRef: a,
@@ -260,7 +260,7 @@ export function $$V3(e) {
     }),
     button2: jsx($$B2, {
       isHovered: o,
-      label: _$$t("inspect_panel.shadows.y"),
+      label: getI18nString("inspect_panel.shadows.y"),
       onClick: q,
       recordingKey: "shadows_panel_y",
       rowRef: a,
@@ -277,7 +277,7 @@ export function $$V3(e) {
     isHovered: p,
     button1: jsx($$B2, {
       tooltipRef: ep,
-      label: _$$t("inspect_panel.shadows.blur.start"),
+      label: getI18nString("inspect_panel.shadows.blur.start"),
       onClick: et,
       value: Wf(startRadius),
       rowRef: a,
@@ -285,7 +285,7 @@ export function $$V3(e) {
     }),
     button2: jsx($$B2, {
       tooltipRef: e_,
-      label: _$$t("inspect_panel.shadows.blur.end"),
+      label: getI18nString("inspect_panel.shadows.blur.end"),
       onClick: er,
       value: Wf(radius),
       rowRef: a,
@@ -298,7 +298,7 @@ export function $$V3(e) {
     isHovered: p,
     button1: jsx($$B2, {
       isHovered: p,
-      label: _$$t("inspect_panel.shadows.blur"),
+      label: getI18nString("inspect_panel.shadows.blur"),
       onClick: er,
       recordingKey: "shadows_panel_blur",
       rowRef: a,
@@ -310,7 +310,7 @@ export function $$V3(e) {
     }),
     button2: em ? jsx($$B2, {
       isHovered: p,
-      label: _$$t("inspect_panel.shadows.spread_tooltip"),
+      label: getI18nString("inspect_panel.shadows.spread_tooltip"),
       onClick: en,
       recordingKey: "shadows_panel_spread",
       rowRef: a,
@@ -336,8 +336,8 @@ export function $$V3(e) {
         blendMode,
         className: eg ? t ? TX : RI : W0
       }), eg && jsx(_p, {
-        name: _$$t("inspect_panel.shadows.behind_transparent_areas"),
-        value: _$$t("inspect_panel.shadows.behind_transparent_areas_true"),
+        name: getI18nString("inspect_panel.shadows.behind_transparent_areas"),
+        value: getI18nString("inspect_panel.shadows.behind_transparent_areas_true"),
         className: t ? TX : RI
       }), !!e.formattableColor && jsx(DP, {
         formattableColor: e.formattableColor,
@@ -416,7 +416,7 @@ export function $$z4({
     yVar: e.yVar
   }, e.id), []);
   return 1 !== s || !o || o.length < 1 || l.shadowsAndBlurs.length < 1 ? null : jsx(VZ, {
-    title: _$$t("inspect_panel.shadows.title"),
+    title: getI18nString("inspect_panel.shadows.title"),
     recordingKey: "shadows",
     copyAllValue: d,
     additionalHeaders: jsx(Af, {}),

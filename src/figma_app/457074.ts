@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "../vendor/514228";
 import { xae } from "../figma_app/763686";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { localStorageRef } from "../905/657224";
 import { FP } from "../figma_app/91703";
 import { Em } from "../figma_app/976749";
@@ -41,7 +41,7 @@ export function $$T2() {
   let {
     hasAnyUiKit
   } = I7();
-  let p = md(UQ);
+  let p = useAtomWithSubscription(UQ);
   let g = Em();
   let f = q5()?.canEdit;
   useEffect(() => {

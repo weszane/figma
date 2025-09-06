@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useDispatch } from "../vendor/514228";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { $z } from "../figma_app/617427";
 import { Ph } from "../905/160095";
 import { to } from "../905/156213";
@@ -10,7 +10,7 @@ export function $$c0({
   title: t
 }) {
   let i = useDispatch();
-  return Ay.isMeetDevice ? jsx($z, {
+  return BrowserInfo.isMeetDevice ? jsx($z, {
     variant: "link",
     onClick: () => i(to({
       type: kn,

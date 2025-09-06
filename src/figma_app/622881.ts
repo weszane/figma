@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { RYP } from "../figma_app/763686";
-import { eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { n as _$$n } from "../905/347702";
 export function $$o2(e) {
   switch (e) {
@@ -60,8 +60,8 @@ let $$p1 = () => "undefined" != typeof CSS && "function" == typeof CSS.supports 
 let _ = () => window.matchMedia("(color-gamut: p3)").matches;
 let $$h3 = () => !$$p1();
 async function m() {
-  if (!eD) return;
-  let e = await eD.getActiveNSScreens();
+  if (!desktopAPIInstance) return;
+  let e = await desktopAPIInstance.getActiveNSScreens();
   if (e) {
     for (let t of e) if (!t.isCurrentWindow && t.canRepresentDisplayGamutP3) return t.localizedName;
   }
@@ -95,7 +95,7 @@ let E = () => {
   }, []);
   return e;
 };
-let y = () => eD && "unmanaged" === eD.getColorSpace();
+let y = () => desktopAPIInstance && "unmanaged" === desktopAPIInstance.getColorSpace();
 export function $$b0() {
   let e = useMemo(() => c(RYP.DISPLAY_P3), []);
   let t = useMemo(() => u(RYP.DISPLAY_P3), []);
@@ -123,7 +123,7 @@ export function $$b0() {
   } : {
     status: "ClientNotSupported",
     diagnostics: {
-      client: eD ? "desktop-app" : "browser"
+      client: desktopAPIInstance ? "desktop-app" : "browser"
     }
   };
 }

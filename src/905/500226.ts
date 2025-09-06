@@ -1,6 +1,6 @@
 import { useMemo, useCallback } from "react";
-import { md } from "../figma_app/27355";
-import { sx, az } from "../905/449184";
+import { useAtomWithSubscription } from "../figma_app/27355";
+import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { pi } from "../figma_app/314264";
 import { o as _$$o } from "../figma_app/915774";
 import { X } from "../905/853613";
@@ -31,13 +31,13 @@ export function $$C1({
 }) {
   let {
     currentSearch
-  } = md(WP);
-  let R = md(TG);
+  } = useAtomWithSubscription(WP);
+  let R = useAtomWithSubscription(TG);
   let N = "visual-search";
   currentSearch?.input.type === "input-text" && (N = currentSearch.input.query);
   let P = Hu(e.library_key);
   let O = GZ(e.library_key, P);
-  let D = md(dd);
+  let D = useAtomWithSubscription(dd);
   let L = Nv(currentSearch?.input.type === "input-text");
   let F = Oc();
   let M = F ? "figmake" : "actions_assets_tab";
@@ -79,11 +79,11 @@ export function $$C1({
         productType: B.productType,
         entryPoint: M
       };
-      sx("actions_assets_tab.insert", {
+      trackEventAnalytics("actions_assets_tab.insert", {
         ...t,
         sectionPosition: i
       });
-      az.trackDefinedEvent("asset_search.result_inserted", {
+      analyticsEventManager.trackDefinedEvent("asset_search.result_inserted", {
         ...t,
         libraryType: B.libraryType,
         position: i,

@@ -9,13 +9,13 @@ import { Y as _$$Y } from "../905/762765";
 import { O as _$$O } from "../905/487602";
 import { Ez5, rrT, VD3, e0R } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { xx } from "../figma_app/815945";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Pt } from "../figma_app/806412";
 import { E as _$$E2 } from "../905/277716";
 import { k as _$$k2 } from "../905/582200";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { XE, u1 } from "../figma_app/91703";
 import { F as _$$F } from "../figma_app/8833";
 import { dG } from "../figma_app/753501";
@@ -65,10 +65,10 @@ let $ = e => {
   switch (e.pattern) {
     case "GRID":
     default:
-      return _$$t("fullscreen.grid_panel.grid");
+      return getI18nString("fullscreen.grid_panel.grid");
     case "STRIPES":
-      if ("X" === e.axis) return _$$t("fullscreen.grid_panel.columns_formatter");
-      return _$$t("fullscreen.grid_panel.rows_formatter");
+      if ("X" === e.axis) return getI18nString("fullscreen.grid_panel.columns_formatter");
+      return getI18nString("fullscreen.grid_panel.rows_formatter");
   }
 };
 let Z = new PO();
@@ -77,27 +77,27 @@ let Q = e => {
   let t = [];
   switch (e.pattern) {
     case "GRID":
-      t.push(_$$t("properties_panel.transform_modifiers.repeat.units_pixels_lowercase", {
+      t.push(getI18nString("properties_panel.transform_modifiers.repeat.units_pixels_lowercase", {
         numPx: X.format(e.sectionSize)
       }));
       break;
     case "STRIPES":
       switch (t.push(Z.format(e.numSections)), e.type) {
         case "MIN":
-          t.push("X" === e.axis ? _$$t("fullscreen.grids_panel.grid_settings.left") : _$$t("fullscreen.grids_panel.grid_settings.top"));
+          t.push("X" === e.axis ? getI18nString("fullscreen.grids_panel.grid_settings.left") : getI18nString("fullscreen.grids_panel.grid_settings.top"));
           break;
         case "CENTER":
-          t.push(_$$t("fullscreen.grids_panel.grid_settings.center"));
+          t.push(getI18nString("fullscreen.grids_panel.grid_settings.center"));
           break;
         case "STRETCH":
-          t.push(_$$t("fullscreen.grids_panel.grid_settings.stretch"));
+          t.push(getI18nString("fullscreen.grids_panel.grid_settings.stretch"));
           break;
         case "MAX":
-          t.push("X" === e.axis ? _$$t("fullscreen.grids_panel.grid_settings.right") : _$$t("fullscreen.grids_panel.grid_settings.bottom"));
+          t.push("X" === e.axis ? getI18nString("fullscreen.grids_panel.grid_settings.right") : getI18nString("fullscreen.grids_panel.grid_settings.bottom"));
       }
       break;
     default:
-      t.push(_$$t("fullscreen.properties_panel.section_transform_modifiers.tooltip_add_transform_modifier"));
+      t.push(getI18nString("fullscreen.properties_panel.section_transform_modifiers.tooltip_add_transform_modifier"));
   }
   return t;
 };
@@ -128,19 +128,19 @@ let ee = (e, t) => {
     sectionSize,
     pattern
   } = e;
-  let o = "STRETCH" === type ? t ? "" : _$$t("fullscreen.grid_panel.auto") : _$$t("fullscreen.grid_panel.section_size_px", {
+  let o = "STRETCH" === type ? t ? "" : getI18nString("fullscreen.grid_panel.auto") : getI18nString("fullscreen.grid_panel.section_size_px", {
     sectionSize
   });
-  return "GRID" === pattern ? _$$t("fullscreen.grid_panel.grid_size", {
+  return "GRID" === pattern ? getI18nString("fullscreen.grid_panel.grid_size", {
     sectionSize
-  }) : "X" === axis ? numSections === _$$F ? _$$t("fullscreen.grid_panel.columns", {
+  }) : "X" === axis ? numSections === _$$F ? getI18nString("fullscreen.grid_panel.columns", {
     suffix: o ?? ""
-  }) : _$$t("fullscreen.grid_panel.num_columns", {
+  }) : getI18nString("fullscreen.grid_panel.num_columns", {
     numColumns: numSections,
     suffix: o
-  }) : numSections === _$$F ? _$$t("fullscreen.grid_panel.rows", {
+  }) : numSections === _$$F ? getI18nString("fullscreen.grid_panel.rows", {
     suffix: o ?? ""
-  }) : _$$t("fullscreen.grid_panel.num_rows", {
+  }) : getI18nString("fullscreen.grid_panel.num_rows", {
     numRows: numSections,
     suffix: o
   });
@@ -220,7 +220,7 @@ class ea extends PureComponent {
       this.addConfiguredProperty("GRID");
     };
     this.addConfiguredProperty = e => {
-      sx("editor-layout-grid-add", {
+      trackEventAnalytics("editor-layout-grid-add", {
         fileKey: this.props.openFile?.key || "",
         nodeIds: Object.keys(this.props.sceneGraphSelection).slice(0, 50),
         layoutType: "GRID" === e ? "grid" : "X" === e ? "columns" : "rows"
@@ -242,12 +242,12 @@ class ea extends PureComponent {
           };
       }
       let i = _W(this.props.propertyList, []);
-      zl.set(et, i.length);
+      atomStoreManager.set(et, i.length);
       this.props.onChange(i.concat([t]));
     };
     this.removeProperty = e => {
       let t = _W(this.props.propertyList, []);
-      sx("editor-layout-guide-removed", {
+      trackEventAnalytics("editor-layout-guide-removed", {
         fileKey: this.props.openFile?.key || "",
         nodeIds: Object.keys(this.props.sceneGraphSelection).slice(0, 50),
         layoutType: t?.[e] ? t[e]?.pattern === "GRID" ? "grid" : t[e]?.axis === "X" ? "columns" : "rows" : null
@@ -294,7 +294,7 @@ class ea extends PureComponent {
       }),
       onChange: this.props.onChange,
       propertyList: this.props.propertyList,
-      title: _$$t("fullscreen.grid_panel.layout_guide"),
+      title: getI18nString("fullscreen.grid_panel.layout_guide"),
       ...(!getFeatureFlags().ds_qw_variable_and_style_visibility && {
         styleVisibility: this.memoizedStyleVisibility(this.props.showFrameGrids)
       }),
@@ -302,7 +302,7 @@ class ea extends PureComponent {
       currentSelectedProperty: this.props.currentSelectedProperty,
       dispatch: this.props.dispatch,
       openStylePickerToLeft: "ui3" === this.props.version,
-      overrideAddPropertyTooltip: _$$t("fullscreen.properties_panel.section_layout_grid.tooltip_addLayoutGuide"),
+      overrideAddPropertyTooltip: getI18nString("fullscreen.properties_panel.section_layout_grid.tooltip_addLayoutGuide"),
       pickerShown: this.props.pickerShown,
       recordingKey: this.props.recordingKey,
       renderProperty: this.renderProperty,
@@ -369,7 +369,7 @@ class es extends PureComponent {
       name: "toggle_settings_picker_button",
       children: jsx(_$$d, {
         ref: this.windowButtonRef,
-        "aria-label": _$$t("fullscreen.grid_panel.layout_guide_settings"),
+        "aria-label": getI18nString("fullscreen.grid_panel.layout_guide_settings"),
         recordingKey: Pt(this.props, "settings"),
         "aria-expanded": !!t,
         onClick: this.toggleSettings,
@@ -380,7 +380,7 @@ class es extends PureComponent {
           },
           onMouseUp: dG,
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": _$$t("fullscreen.grid_panel.layout_guide_settings")
+          "data-tooltip": getI18nString("fullscreen.grid_panel.layout_guide_settings")
         },
         children: e
       })
@@ -408,7 +408,7 @@ class es extends PureComponent {
       children: jsx(_$$K, {
         recordingKey: Pt(this.props, "removeButton"),
         onClick: this.props.onRemoveGrid,
-        "aria-label": _$$t("fullscreen.grid_panel.remove_layout_guide"),
+        "aria-label": getI18nString("fullscreen.grid_panel.remove_layout_guide"),
         htmlAttributes: {
           onMouseDown: dG
         },

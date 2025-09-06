@@ -11,10 +11,10 @@ import { X } from "../905/399133";
 import { z } from "../905/821223";
 import { Ez5, mrc } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Pt } from "../figma_app/806412";
 import { E as _$$E } from "../905/277716";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { Y5 } from "../figma_app/455680";
 import { oV, _W } from "../905/216495";
 import { kl } from "../905/275640";
@@ -41,7 +41,7 @@ export function $$C0(e) {
   return e.isUI3 ? i ? jsxs(Fragment, {
     children: [jsx(DE, {
       ref: e.alignmentRowRef,
-      label: tx("properties.label.alignment"),
+      label: renderI18nText("properties.label.alignment"),
       input: t,
       icon: e.textPathFlipButton
     }), jsx(DE, {
@@ -52,7 +52,7 @@ export function $$C0(e) {
     })]
   }) : jsx(fn, {
     ref: e.alignmentRowRef,
-    leftLabel: tx("properties.label.alignment"),
+    leftLabel: renderI18nText("properties.label.alignment"),
     leftInput: t,
     rightLabel: null,
     rightInput: r,
@@ -82,7 +82,7 @@ export function $$O3({
   debug(!!(r || p), "TypePanel missing textAlignHorizontal");
   return jsxs(bL, {
     legend: jsx(q, {
-      children: _$$t("fullscreen.type_panel.align_horizontal")
+      children: getI18nString("fullscreen.type_panel.align_horizontal")
     }),
     value: r,
     onChange: e => {
@@ -95,19 +95,19 @@ export function $$O3({
     recordingKey: e,
     children: [jsx(c$, {
       value: "LEFT",
-      "aria-label": _$$t("fullscreen.type_panel.align_left"),
+      "aria-label": getI18nString("fullscreen.type_panel.align_left"),
       icon: jsx(_$$h, {})
     }), jsx(c$, {
       value: "CENTER",
-      "aria-label": _$$t("fullscreen.type_panel.align_center"),
+      "aria-label": getI18nString("fullscreen.type_panel.align_center"),
       icon: jsx(_$$N, {})
     }), jsx(c$, {
       value: "RIGHT",
-      "aria-label": _$$t("fullscreen.type_panel.align_right"),
+      "aria-label": getI18nString("fullscreen.type_panel.align_right"),
       icon: jsx(K, {})
     }), _ && jsx(c$, {
       value: "JUSTIFIED",
-      "aria-label": _$$t("fullscreen.type_panel.justify"),
+      "aria-label": getI18nString("fullscreen.type_panel.justify"),
       icon: jsx(_$$h2, {})
     })]
   });
@@ -118,7 +118,7 @@ export function $$R1(e) {
   let i = vK();
   return jsxs(bL, {
     value: e.textAlignVertical,
-    onChange: e => (getFeatureFlags().ce_properties_panel_tracking && sx("editor_type_panel_change", {
+    onChange: e => (getFeatureFlags().ce_properties_panel_tracking && trackEventAnalytics("editor_type_panel_change", {
       key: "textAlignVertical",
       value: e
     }), Y5.updateSelectionProperties({
@@ -127,19 +127,19 @@ export function $$R1(e) {
     readonly: t || r,
     recordingKey: e.recordingKey,
     legend: jsx(q, {
-      children: _$$t("fullscreen.type_panel.align_vertical")
+      children: getI18nString("fullscreen.type_panel.align_vertical")
     }),
     children: [jsx(c$, {
       value: "TOP",
-      "aria-label": i ? _$$t("fullscreen.type_panel.text_on_a_path_align_above") : _$$t("fullscreen.type_panel.align_top"),
+      "aria-label": i ? getI18nString("fullscreen.type_panel.text_on_a_path_align_above") : getI18nString("fullscreen.type_panel.align_top"),
       icon: jsx(_$$b, {})
     }), jsx(c$, {
       value: "CENTER",
-      "aria-label": i ? _$$t("fullscreen.type_panel.text_on_a_path_align_on") : _$$t("fullscreen.type_panel.align_middle"),
+      "aria-label": i ? getI18nString("fullscreen.type_panel.text_on_a_path_align_on") : getI18nString("fullscreen.type_panel.align_middle"),
       icon: jsx(X, {})
     }), jsx(c$, {
       value: "BOTTOM",
-      "aria-label": i ? _$$t("fullscreen.type_panel.text_on_a_path_align_below") : _$$t("fullscreen.type_panel.align_bottom"),
+      "aria-label": i ? getI18nString("fullscreen.type_panel.text_on_a_path_align_below") : getI18nString("fullscreen.type_panel.align_bottom"),
       icon: jsx(z, {})
     })]
   });

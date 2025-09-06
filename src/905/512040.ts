@@ -1,5 +1,5 @@
 import { Hyj, zkO } from "../figma_app/763686";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { bj } from "../figma_app/880974";
 import { j } from "../905/881708";
 export class $$o0 extends j {
@@ -13,7 +13,7 @@ export class $$o0 extends j {
     Hyj.hitTestTemplatePreview(e) && e.accept(this);
   }
   handleMouseUp(e) {
-    Hyj.hitTestTemplatePreview(e) && zl.set(bj, {
+    Hyj.hitTestTemplatePreview(e) && atomStoreManager.set(bj, {
       selectTemplateAfterCommit: !0,
       moveViewportAfterCommit: !1,
       priority: "user-visible",

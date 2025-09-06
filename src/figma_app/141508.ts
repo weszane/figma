@@ -2,7 +2,7 @@ import n from "../vendor/239910";
 import a from "../vendor/626715";
 import { Mz } from "../vendor/925040";
 import { Vh, P8 } from "../905/270781";
-import { bt } from "../905/270322";
+import { createReduxSubscriptionAtomWithState } from "../905/270322";
 var i = n;
 var s = a;
 function c(e) {
@@ -39,7 +39,7 @@ Mz([$$p11], e => new Set(e.map(e => e.key)));
 let $$P5 = Mz([$$f7], A);
 let D = Mz([$$y10], A);
 let $$k18 = Mz([b], e => new Set(e.map(e => e.key)));
-let $$M17 = bt(D);
+let $$M17 = createReduxSubscriptionAtomWithState(D);
 let $$F16 = Mz([S], A);
 export const C9 = $$x0;
 export const Co = $$I1;

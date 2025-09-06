@@ -1,5 +1,6 @@
 {
   "name": "figma",
+  "type": "module",
   "version": "1.0.0",
   "description": "",
   "author": "",
@@ -16,13 +17,20 @@
     "lint:fix": "eslint --fix . --ext .js,.mjs,.ts"
   },
   "dependencies": {
+    "@datadog/browser-rum": "^6.19.0",
+    "@formatjs/fast-memoize": "^2.2.7",
+    "@sentry/browser": "^10.10.0",
+    "@sentry/core": "^10.10.0",
+    "@sentry/wasm": "^10.10.0",
     "@stylexjs/stylex": "^0.15.3",
     "@types/node": "^24.3.0",
     "@zip.js/zip.js": "^2.7.72",
     "bowser": "^1.9.4",
     "classnames": "^2.5.1",
     "common-tags": "^1.8.2",
+    "dayjs": "^1.11.18",
     "history": "^5.3.0",
+    "intl-messageformat": "^10.7.16",
     "jotai": "^2.13.1",
     "lodash-es": "^4.17.21",
     "ni": "^0.0.2",
@@ -33,6 +41,7 @@
     "redux-optimist": "^1.0.0",
     "redux-thunk": "^3.1.0",
     "reselect": "^5.1.1",
+    "sentry-javascript": "^1.0.3",
     "statsig-js": "^5.1.0",
     "statsig-react": "^2.1.0",
     "zod": "^3.0.0"

@@ -1,6 +1,6 @@
 import { useMemo, useCallback, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
-import { E3, eU, fp } from "../figma_app/27355";
+import { createLocalStorageAtom, atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { ZC } from "../figma_app/39751";
 import { uQ } from "../figma_app/311375";
 import { sf } from "../905/929976";
@@ -8,9 +8,9 @@ import { AS } from "../905/156213";
 import { u as _$$u, Rb, L5, rW } from "../figma_app/852050";
 import { _6 } from "../figma_app/386952";
 import { Pw } from "../905/782020";
-let _ = E3("last-used-dev-mode-variable-set", null);
+let _ = createLocalStorageAtom("last-used-dev-mode-variable-set", null);
 let $$h5 = "ALL_VARIABLES";
-let $$m3 = eU($$h5);
+let $$m3 = atom($$h5);
 export function $$g0() {
   let e = useSelector(e => "devModeVariablesTableSelectedVariable" in e.selectedView ? e.selectedView.devModeVariablesTableSelectedVariable : void 0);
   let t = _$$u(e);
@@ -35,7 +35,7 @@ export function $$E6() {
   }, [t, e]);
 }
 export function $$y2(e) {
-  let [t, r] = fp(_);
+  let [t, r] = useAtomValueAndSetter(_);
   let i = e[0]?.node_id ?? "";
   useEffect(() => {
     t || r(i);

@@ -1,6 +1,6 @@
-import { FZ, eU } from "../figma_app/27355";
+import { setupCustomAtom, atom } from "../figma_app/27355";
 import r from "../vendor/128080";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { Cc, lX } from "../905/545842";
 import { AJ } from "../905/235262";
 var a = r;
@@ -8,12 +8,12 @@ var $$d0 = (e => (e.None = "No Diff", e.Layer = "Layer Diff", e.Tree = "Tree Dif
 function c(e) {
   return "Layer Diff" === e ? "layer" : "tree";
 }
-let $$u1 = FZ(eU(null), (e, t, i) => {
+let $$u1 = setupCustomAtom(atom(null), (e, t, i) => {
   let n;
   let r;
   let a = new Date();
   if ("clear" === t.type) {
-    e && az.trackDefinedEvent("figmascope.diff_end", {
+    e && analyticsEventManager.trackDefinedEvent("figmascope.diff_end", {
       type: c(e.type),
       duration_seconds: (a.getTime() - e.time.getTime()) / 1e3
     });
@@ -21,7 +21,7 @@ let $$u1 = FZ(eU(null), (e, t, i) => {
   }
   if ("start" === t.type ? (n = t.id, r = t.diffType) : "refresh" === t.type && e && (n = e.object.id, r = e.type), !n || !r) return null;
   let l = i(Cc).getObject(n)?.freeze();
-  return l ? (az.trackDefinedEvent("figmascope.diff_start", {
+  return l ? (analyticsEventManager.trackDefinedEvent("figmascope.diff_start", {
     type: c(r)
   }), {
     type: r,
@@ -29,7 +29,7 @@ let $$u1 = FZ(eU(null), (e, t, i) => {
     time: new Date()
   }) : null;
 });
-let $$p3 = eU(e => {
+let $$p3 = atom(e => {
   let t = e(lX);
   return t ? {
     type: "Full Diff",
@@ -38,7 +38,7 @@ let $$p3 = eU(e => {
     type: "No Diff"
   };
 });
-let $$m4 = eU(e => {
+let $$m4 = atom(e => {
   let t = e(AJ);
   let i = e($$p3);
   switch (i.type) {

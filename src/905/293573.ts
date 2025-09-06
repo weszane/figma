@@ -4,7 +4,7 @@ import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { K } from "../905/443068";
 import { L } from "../905/704296";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 export function $$c0({
   children: e,
   onClose: t,
@@ -28,7 +28,7 @@ export function $$c0({
       children: jsx(K, {
         ref: u,
         onClick: t,
-        "aria-label": _$$t("general.close"),
+        "aria-label": getI18nString("general.close"),
         "data-testid": "modal-close-button",
         children: jsx(L, {})
       })

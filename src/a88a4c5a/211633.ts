@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useState, useCallback, useLayoutEffect, memo } from "react";
 import { xk } from "@stylexjs/stylex";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { R } from "../figma_app/636548";
 import { W } from "../figma_app/896386";
 import { g } from "../figma_app/103028";
@@ -49,7 +49,7 @@ export let $$h0 = memo(e => {
           return jsx("div", {
             className: Zp,
             children: jsx("span", {
-              children: t("fullscreen.properties_panel.layer_header.node_type_multiple_selected", {
+              children: getI18nString("fullscreen.properties_panel.layer_header.node_type_multiple_selected", {
                 count: nodeCount
               })
             })

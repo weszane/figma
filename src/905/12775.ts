@@ -1,9 +1,9 @@
 import { useState, useLayoutEffect } from "react";
 import { getFeatureFlags } from "../905/601108";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { _ } from "../905/401345";
 export function $$o0() {
-  let e = md(_);
+  let e = useAtomWithSubscription(_);
   let [t, i] = useState(!1);
   useLayoutEffect(() => {
     e && i(!0);

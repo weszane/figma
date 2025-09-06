@@ -5,12 +5,12 @@ import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, r1, nB } from "../figma_app/272243";
 import { A as _$$A } from "../905/920165";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { vd } from "../figma_app/637027";
 import { x } from "../905/211326";
 import { s as _$$s } from "../cssbuilder/589278";
 import { s as _$$s2 } from "../905/573154";
-import { t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { pI, nx, _E } from "../figma_app/443991";
 import { c as _$$c } from "../905/370443";
 import { A as _$$A2 } from "../905/639174";
@@ -98,12 +98,12 @@ class w extends Component {
       try {
         this.image = await this.loadImageFile(this.props.avatarEditorState.file);
       } catch {
-        this.props.dispatch(_$$s2.error(t("avatar_editor.an_error_occurred_while_loading_the_image")));
+        this.props.dispatch(_$$s2.error(getI18nString("avatar_editor.an_error_occurred_while_loading_the_image")));
         this.props.onClose();
         return;
       }
       if (this.image.width < Pf.LARGE || this.image.height < Pf.LARGE) {
-        this.props.dispatch(_$$s2.error(t("avatar_editor.your_profile_image_must_be_at_least_500_x500_px")));
+        this.props.dispatch(_$$s2.error(getI18nString("avatar_editor.your_profile_image_must_be_at_least_500_x500_px")));
         this.props.onClose();
         return;
       }
@@ -121,7 +121,7 @@ class w extends Component {
         large: nx(_E(this.image, Pf.LARGE, this.computeImagePosition(Pf.LARGE), e)),
         contentType: e
       }));
-      sx("Change Profile Picture");
+      trackEventAnalytics("Change Profile Picture");
     };
     this.loadImageFile = e => {
       let t = new Image();
@@ -212,7 +212,7 @@ class w extends Component {
       width: 296,
       children: jsxs(vo, {
         children: [jsx(r1, {
-          children: tx("avatar_editor.modal_title")
+          children: renderI18nText("avatar_editor.modal_title")
         }), jsx(nB, {
           children: jsx(x, {
             isLoading: this.props.avatarEditorState.status !== hv.POSITIONING,
@@ -229,7 +229,7 @@ class w extends Component {
                   className: _$$s.selectNone.$,
                   children: "-"
                 }), jsx(_$$A, {
-                  "aria-label": t("avatar_editor.scale"),
+                  "aria-label": getI18nString("avatar_editor.scale"),
                   min: -.5,
                   max: 1,
                   step: .001,
@@ -259,7 +259,7 @@ class w extends Component {
                 trackingProperties: {
                   trackingDescriptor: _$$c.SAVE_PROFILE_PICTURE
                 },
-                children: tx("avatar_editor.save_image")
+                children: renderI18nText("avatar_editor.save_image")
               })]
             })
           })

@@ -5,8 +5,8 @@ import { Ay } from "../905/612521";
 import { getInitialOptions } from "../figma_app/169182";
 import { parseAndNormalizeQuery } from "../905/634134";
 import { sy } from "../figma_app/930338";
-import { nl } from "../figma_app/257275";
-import { t as _$$t } from "../905/303541";
+import { isInteractionPathCheck } from "../figma_app/897289";
+import { getI18nString } from "../905/303541";
 import { c5 } from "../905/93909";
 import { L8, gN, At } from "../905/760074";
 import { Zt } from "../figma_app/617727";
@@ -18,7 +18,7 @@ function A(e) {
 }
 export class $$y0 {
   pathToSelectedView(e, t, i, s) {
-    let d = "test" === t[1] && "interactions" === t[2] && A(t[3]) && nl();
+    let d = "test" === t[1] && "interactions" === t[2] && A(t[3]) && isInteractionPathCheck();
     d && (t = t.slice()).splice(1, 2);
     let u = t[1];
     if (A(u)) {
@@ -127,7 +127,7 @@ export class $$y0 {
         e && (n = At(i, e));
         n = n ?? i.name;
       }
-      return n ?? _$$t("proto.prototype_view_selector.untitled");
+      return n ?? getI18nString("proto.prototype_view_selector.untitled");
     }
     return null;
   }

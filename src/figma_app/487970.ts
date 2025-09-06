@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useSelector } from "../vendor/514228";
 import { E } from "../905/53857";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { I } from "../figma_app/4253";
 import { bV, QQ } from "../figma_app/808294";
 import { cs } from "../figma_app/740025";
@@ -22,7 +22,7 @@ export function $$_3({
   let c = QQ(r);
   return !cs(t) && c ? jsx(E, {
     variant: "defaultOutline",
-    children: tx("community.buyer.purchased")
+    children: renderI18nText("community.buyer.purchased")
   }) : null;
 }
 export function $$h2({
@@ -30,7 +30,7 @@ export function $$h2({
 }) {
   return jsx(E, {
     size: e,
-    children: tx("community.buyer.purchased")
+    children: renderI18nText("community.buyer.purchased")
   });
 }
 function m({
@@ -38,7 +38,7 @@ function m({
 }) {
   return jsx(E, {
     size: e,
-    children: tx("community.resource_tiles.paid")
+    children: renderI18nText("community.resource_tiles.paid")
   });
 }
 function g({
@@ -46,7 +46,7 @@ function g({
 }) {
   return jsx(E, {
     size: e,
-    children: tx("community.resource_tiles.paid")
+    children: renderI18nText("community.resource_tiles.paid")
   });
 }
 function f({
@@ -54,7 +54,7 @@ function f({
 }) {
   return jsx(E, {
     size: e,
-    children: tx("community.resource_tiles.free")
+    children: renderI18nText("community.resource_tiles.free")
   });
 }
 export var $$E4 = (e => (e.PURCHASED = "purchased", e.OFF_PLATFORM = "off_platform", e.FREEMIUM = "freemium", e.PRICE = "price", e.FREE = "free", e))($$E4 || {});

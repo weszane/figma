@@ -1,9 +1,9 @@
 import { jsx } from "react/jsx-runtime";
 import { createContext, useContext, useMemo, useEffect, useCallback } from "react";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { wm, zN } from "../905/19536";
 import l from "../vendor/656470";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { n1 } from "../figma_app/657017";
 import { Fl } from "../figma_app/236178";
 import { tS } from "../figma_app/516028";
@@ -49,7 +49,7 @@ var d = l;
     let u = o && !d && !r;
     let p = n();
     let m = E(p, t);
-    let h = md(_$$S.lastActionAtom);
+    let h = useAtomWithSubscription(_$$S.lastActionAtom);
     let g = function () {
       let {
         hasProAccess,
@@ -62,7 +62,7 @@ var d = l;
     let _ = f?.sessionId;
     let I = x();
     useEffect(function () {
-      u && az.trackDefinedEvent("library_modal.page_opened", {
+      u && analyticsEventManager.trackDefinedEvent("library_modal.page_opened", {
         ...I,
         planType: g,
         libraryModalSessionId: _,

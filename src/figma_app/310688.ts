@@ -1,7 +1,7 @@
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 export let $$i10 = "sidebar favorited row";
 export function $$a9(e, t, r, i, a, s) {
-  sx("resource_removed_from_favorites", {
+  trackEventAnalytics("resource_removed_from_favorites", {
     resource_id: e,
     selectedView: t,
     entrypoint: r,
@@ -11,7 +11,7 @@ export function $$a9(e, t, r, i, a, s) {
   });
 }
 export function $$s6(e, t, r, i, a, s) {
-  sx("resource_added_to_favorites", {
+  trackEventAnalytics("resource_added_to_favorites", {
     resourceId: e,
     editor_type: a,
     selectedView: t,
@@ -21,7 +21,7 @@ export function $$s6(e, t, r, i, a, s) {
   });
 }
 export function $$o3(e, t, r, i, a) {
-  sx("favorited_resource_clicked", {
+  trackEventAnalytics("favorited_resource_clicked", {
     resource_id: e,
     resource_type: t,
     editor_type: a,
@@ -30,43 +30,43 @@ export function $$o3(e, t, r, i, a) {
   });
 }
 export function $$l1(e, t) {
-  sx("favorites_to_move_add_to_sidebar_click", {
+  trackEventAnalytics("favorites_to_move_add_to_sidebar_click", {
     favorited_resource_id: e,
     dest_team_id: t
   });
 }
 export function $$d8(e) {
-  sx("favorites_to_move_unstar_all_click", {
+  trackEventAnalytics("favorites_to_move_unstar_all_click", {
     favorited_resource_id: e
   });
 }
 export function $$c11(e) {
-  sx("sidebar_section_collapsed", {
+  trackEventAnalytics("sidebar_section_collapsed", {
     is_collapse: e,
     section: "favorites"
   });
 }
 export function $$u7() {
-  sx("favorites_reordered", {});
+  trackEventAnalytics("favorites_reordered", {});
 }
 export function $$p0(e) {
-  sx("favorites_context_menu_action_clicked", {
+  trackEventAnalytics("favorites_context_menu_action_clicked", {
     action: e
   });
 }
 export function $$_5(e, t) {
-  sx("File Browser Sidebar Custom Section Created", {
+  trackEventAnalytics("File Browser Sidebar Custom Section Created", {
     new_custom_section_name: t,
     new_custom_section_id: e
   });
 }
 export function $$h4(e) {
-  sx("File Browser Sidebar Custom Section Deleted", {
+  trackEventAnalytics("File Browser Sidebar Custom Section Deleted", {
     new_custom_section_id: e
   });
 }
 export function $$m2(e, t) {
-  sx("File Browser Sidebar Custom Section Renamed", {
+  trackEventAnalytics("File Browser Sidebar Custom Section Renamed", {
     new_custom_section_new_name: t,
     new_custom_section_id: e
   });

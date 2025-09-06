@@ -1,6 +1,6 @@
 import { useDispatch } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { AC, Pg } from "../figma_app/777551";
 import { JZ } from "../figma_app/696043";
 import { r as _$$r } from "../figma_app/896657";
@@ -22,10 +22,10 @@ export function $$I1(e) {
   let r = useDispatch();
   let i = TA();
   if (!e || i !== e.creator.id) return null;
-  if (AC(e)) t = _$$t("community.plugins.cancel_review");else if (m3(e)) {
+  if (AC(e)) t = getI18nString("community.plugins.cancel_review");else if (m3(e)) {
     if (Pg(e)) return null;
-    t = _$$t("community.resource.delist");
-  } else t = _$$t("community.resource.unpublish");
+    t = getI18nString("community.resource.delist");
+  } else t = getI18nString("community.resource.unpublish");
   return {
     displayText: t,
     callback: () => {
@@ -45,7 +45,7 @@ export function $$S0(e, t) {
   let {
     close
   } = cq();
-  let o = e && !e.error ? t ? _$$t("community.plugins.publish_new_version") : _$$t("community.resource.publish") : t ? t.is_widget ? _$$t("community.plugins.edit_resource_details.widget") : _$$t("community.plugins.edit_resource_details.plugin") : void 0;
+  let o = e && !e.error ? t ? getI18nString("community.plugins.publish_new_version") : getI18nString("community.resource.publish") : t ? t.is_widget ? getI18nString("community.plugins.edit_resource_details.widget") : getI18nString("community.plugins.edit_resource_details.plugin") : void 0;
   return o ? {
     displayText: o,
     callback: () => {
@@ -72,9 +72,9 @@ export function $$v2(e, t) {
             localFileIdToRemove: e
           }));
         },
-        msg: _$$t("universal_insert.missing_manifest"),
-        buttonText: _$$t("universal_insert.locate"),
-        displayText: _$$t("universal_insert.locate_missing_manifest")
+        msg: getI18nString("universal_insert.missing_manifest"),
+        buttonText: getI18nString("universal_insert.locate"),
+        displayText: getI18nString("universal_insert.locate_missing_manifest")
       };
     case ho.VALIDATE:
     case ho.PARSE:
@@ -87,9 +87,9 @@ export function $$v2(e, t) {
             }
           }));
         },
-        msg: _$$t("universal_insert.manifest_error"),
-        buttonText: _$$t("universal_insert.see_details"),
-        displayText: _$$t("universal_insert.manifest_error_view")
+        msg: getI18nString("universal_insert.manifest_error"),
+        buttonText: getI18nString("universal_insert.see_details"),
+        displayText: getI18nString("universal_insert.manifest_error_view")
       };
     default:
       throwTypeError(e);
@@ -101,7 +101,7 @@ export function $$A5(e, t, r, i = k2.EDITOR) {
     close
   } = cq();
   return {
-    displayText: _$$t("universal_insert.manage_permissions"),
+    displayText: getI18nString("universal_insert.manage_permissions"),
     callback: () => {
       r && r();
       close();
@@ -126,7 +126,7 @@ export function $$x4(e) {
 }
 export function $$N3(e, t) {
   return {
-    displayText: e ? _$$t("universal_insert.remove_local_version") : _$$t("universal_insert.remove"),
+    displayText: e ? getI18nString("universal_insert.remove_local_version") : getI18nString("universal_insert.remove"),
     callback: t
   };
 }
@@ -138,7 +138,7 @@ export function $$C6(e) {
   } = e;
   let s = useDispatch();
   return !publishedExtension || localPublishedExtension ? null : {
-    displayText: _$$t("qa.extensions.locate_local_version"),
+    displayText: getI18nString("qa.extensions.locate_local_version"),
     callback: () => {
       s(JZ({
         resourceType: k0(extension) ? "widget" : "plugin"

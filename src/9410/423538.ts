@@ -5,8 +5,8 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { glU, XJn } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
-import { $D } from "../905/11";
-import { xi } from "../905/714362";
+import { reportError } from "../905/11";
+import { logWarning } from "../905/714362";
 import { p4 } from "../figma_app/412398";
 import { t_ } from "../9410/141954";
 import { B as _$$B } from "../905/521763";
@@ -217,7 +217,7 @@ export function $$j2({
         try {
           await t?.(nodeIdRef.current, themeOverrideMapRef.current, M.current, D.current ?? []);
         } catch (e) {
-          $D(_$$e.AI_GENERATION, e, {
+          reportError(_$$e.AI_GENERATION, e, {
             extra: {
               nodeId: nodeIdRef.current,
               themeOverrideMap: themeOverrideMapRef.current,
@@ -296,7 +296,7 @@ export function $$j2({
         clientLifecycleId: k,
         kitIdentifier: P.current?.metadata.identifier ?? null
       };
-      let l = $D(_$$e.AI_GENERATION, e, {
+      let l = reportError(_$$e.AI_GENERATION, e, {
         extra: o
       });
       userFlowRef.current?.addContext({
@@ -359,7 +359,7 @@ export function $$j2({
     try {
       designSystem && (await Q(designSystem));
     } catch (e) {
-      $D(_$$e.AI_GENERATION, e);
+      reportError(_$$e.AI_GENERATION, e);
       return {
         nodeId: null,
         success: !1,
@@ -388,7 +388,7 @@ export function $$j2({
     let m = null;
     if (t.selectedNodeIds && t.selectedNodeThumbnailsCache && t.selectedNodeIds.length > 0) {
       let i = t.selectedNodeIds.map(e => getSingletonSceneGraph().get(e)).filter(isNotNullish);
-      i.length !== t.selectedNodeIds.length && xi("first-draft", "Some selected nodes were not found", {
+      i.length !== t.selectedNodeIds.length && logWarning("first-draft", "Some selected nodes were not found", {
         selectedNodeIds: t.selectedNodeIds,
         selectedNodes: i
       });

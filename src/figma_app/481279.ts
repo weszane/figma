@@ -8,7 +8,7 @@ import { y as _$$y } from "../905/292472";
 import { o as _$$o } from "../905/347208";
 import { rXF, rrT, j0r, Z6A } from "../figma_app/763686";
 import { B } from "../905/714743";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { A as _$$A } from "../2854/374356";
 import { A as _$$A2 } from "../2854/731650";
 import { A as _$$A3 } from "../2854/668810";
@@ -23,88 +23,88 @@ let v = new Set([j0r.FRAME_FILL, j0r.SHAPE_FILL, j0r.TEXT_FILL]);
 let A = [{
   type: "scope",
   scope: j0r.ALL_SCOPES,
-  name: tx("variables.scopes.all_properties")
+  name: renderI18nText("variables.scopes.all_properties")
 }, {
   type: "scope",
   scope: j0r.CORNER_RADIUS,
-  name: tx("variables.scopes.corner_radius"),
+  name: renderI18nText("variables.scopes.corner_radius"),
   iconElement: jsx(B, {
     svg: _$$A
   })
 }, {
   type: "scope",
   scope: j0r.WIDTH_HEIGHT,
-  name: tx("variables.scopes.width_height"),
+  name: renderI18nText("variables.scopes.width_height"),
   iconElement: jsx(B, {
     svg: _$$A5
   })
 }, {
   type: "scope",
   scope: j0r.GAP,
-  name: tx("variables.scopes.gap"),
+  name: renderI18nText("variables.scopes.gap"),
   iconElement: jsx(B, {
     svg: _$$A3
   }),
-  subLabel: tx("variables.scopes.auto_layout")
+  subLabel: renderI18nText("variables.scopes.auto_layout")
 }, {
   type: "scope",
   scope: j0r.TEXT_CONTENT,
-  name: tx("variables.scopes.text_content"),
+  name: renderI18nText("variables.scopes.text_content"),
   iconElement: jsx(B, {
     svg: _$$A7
   })
 }, {
   type: "scope",
   scope: j0r.STROKE_FLOAT,
-  name: tx("variables.scopes.stroke"),
+  name: renderI18nText("variables.scopes.stroke"),
   iconElement: jsx(B, {
     svg: _$$A6
   })
 }, {
   type: "scope",
   scope: j0r.OPACITY,
-  name: tx("variables.scopes.layer_opacity"),
+  name: renderI18nText("variables.scopes.layer_opacity"),
   iconElement: jsx(_$$N, {})
 }, {
   type: "scope",
   scope: j0r.EFFECT_FLOAT,
-  name: tx("variables.scopes.effects"),
+  name: renderI18nText("variables.scopes.effects"),
   iconElement: jsx(B, {
     svg: _$$A2
   })
 }, {
   type: "label",
   key: "typography",
-  label: tx("fullscreen.type_panel.typography")
+  label: renderI18nText("fullscreen.type_panel.typography")
 }, {
   type: "scope",
   scope: j0r.FONT_STYLE,
-  name: tx("variables.scopes.font_weight"),
+  name: renderI18nText("variables.scopes.font_weight"),
   iconElement: jsx(j, {})
 }, {
   type: "scope",
   scope: j0r.FONT_SIZE,
-  name: tx("variables.scopes.font_size"),
+  name: renderI18nText("variables.scopes.font_size"),
   iconElement: jsx(Z, {})
 }, {
   type: "scope",
   scope: j0r.LINE_HEIGHT,
-  name: tx("variables.scopes.line_height"),
+  name: renderI18nText("variables.scopes.line_height"),
   iconElement: jsx(e, {})
 }, {
   type: "scope",
   scope: j0r.LETTER_SPACING,
-  name: tx("variables.scopes.letter_spacing"),
+  name: renderI18nText("variables.scopes.letter_spacing"),
   iconElement: jsx(_$$y, {})
 }, {
   type: "scope",
   scope: j0r.PARAGRAPH_SPACING,
-  name: tx("variables.scopes.paragraph_spacing"),
+  name: renderI18nText("variables.scopes.paragraph_spacing"),
   iconElement: jsx(_$$o, {})
 }, {
   type: "scope",
   scope: j0r.PARAGRAPH_INDENT,
-  name: tx("variables.scopes.paragraph_indent"),
+  name: renderI18nText("variables.scopes.paragraph_indent"),
   iconElement: jsx(B, {
     svg: _$$A4
   })
@@ -112,58 +112,58 @@ let A = [{
 let x = [{
   type: "scope",
   scope: j0r.ALL_SCOPES,
-  name: tx("variables.scopes.all_properties")
+  name: renderI18nText("variables.scopes.all_properties")
 }, {
   type: "scope",
   scope: j0r.ALL_FILLS,
-  name: tx("variables.scopes.all_fills")
+  name: renderI18nText("variables.scopes.all_fills")
 }, {
   type: "scope",
   scope: j0r.FRAME_FILL,
-  name: tx("variables.scopes.frame_fill"),
-  devModeName: tx("variables.scopes.frame_fill_dev_mode"),
+  name: renderI18nText("variables.scopes.frame_fill"),
+  devModeName: renderI18nText("variables.scopes.frame_fill_dev_mode"),
   indented: !0
 }, {
   type: "scope",
   scope: j0r.SHAPE_FILL,
-  name: tx("variables.scopes.shape_fill"),
-  devModeName: tx("variables.scopes.shape_fill_dev_mode"),
+  name: renderI18nText("variables.scopes.shape_fill"),
+  devModeName: renderI18nText("variables.scopes.shape_fill_dev_mode"),
   indented: !0
 }, {
   type: "scope",
   scope: j0r.TEXT_FILL,
-  name: tx("variables.scopes.text_fill"),
-  devModeName: tx("variables.scopes.text_fill_dev_mode"),
+  name: renderI18nText("variables.scopes.text_fill"),
+  devModeName: renderI18nText("variables.scopes.text_fill_dev_mode"),
   indented: !0
 }, {
   type: "scope",
   scope: j0r.STROKE,
-  name: tx("variables.scopes.stroke")
+  name: renderI18nText("variables.scopes.stroke")
 }, {
   type: "scope",
   scope: j0r.EFFECT_COLOR,
-  name: tx("variables.scopes.effects")
+  name: renderI18nText("variables.scopes.effects")
 }];
 let N = [{
   type: "scope",
   scope: j0r.ALL_SCOPES,
-  name: tx("variables.scopes.all_properties")
+  name: renderI18nText("variables.scopes.all_properties")
 }, {
   type: "scope",
   scope: j0r.TEXT_CONTENT,
-  name: tx("variables.scopes.text_content"),
+  name: renderI18nText("variables.scopes.text_content"),
   iconElement: jsx(B, {
     svg: _$$A7
   })
 }, {
   type: "scope",
   scope: j0r.FONT_FAMILY,
-  name: tx("variables.scopes.font_family"),
+  name: renderI18nText("variables.scopes.font_family"),
   iconElement: jsx(Z, {})
 }, {
   type: "scope",
   scope: j0r.FONT_STYLE,
-  name: tx("variables.scopes.font_weight_or_style"),
+  name: renderI18nText("variables.scopes.font_weight_or_style"),
   iconElement: jsx(j, {})
 }];
 let C = [...A, ...x, ...N].reduce((e, t, r, n) => ("scope" in t && (e[t.scope] = t.name), e), {});
@@ -175,15 +175,15 @@ export function $$O6(e, {
 }
 export function $$R2(e) {
   let t;
-  if (e?.length === 0) return tx("variables.scopes.no_supported_properties");
-  if (e.includes(j0r.ALL_SCOPES)) return tx("variables.scopes.all_properties_label");
+  if (e?.length === 0) return renderI18nText("variables.scopes.no_supported_properties");
+  if (e.includes(j0r.ALL_SCOPES)) return renderI18nText("variables.scopes.all_properties_label");
   for (let r of mapFilter(e, e => $$O6(e))) t = t ? jsx(Fragment, {
-    children: tx("variables.scopes.scope_list", {
+    children: renderI18nText("variables.scopes.scope_list", {
       scope1: t,
       scope2: r
     })
   }) : r;
-  return t ?? tx("variables.scopes.no_supported_properties");
+  return t ?? renderI18nText("variables.scopes.no_supported_properties");
 }
 export let $$L3 = {
   CORNER_RADIUS: j0r.CORNER_RADIUS,

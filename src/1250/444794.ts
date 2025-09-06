@@ -10,7 +10,7 @@ import { _ as _$$_ } from "../905/563242";
 import { e as _$$e } from "../905/149844";
 import { g as _$$g } from "../905/687265";
 import { xk } from "@stylexjs/stylex";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import f from "classnames";
 import { FJ } from "../905/508367";
 import { oW } from "../905/675859";
@@ -19,7 +19,7 @@ import { A as _$$A } from "../905/615098";
 import { F as _$$F } from "../905/171275";
 import { s as _$$s } from "../cssbuilder/589278";
 import { e6 } from "../figma_app/617427";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Q as _$$Q } from "../905/978641";
 import { ce, Lm, U_, mF } from "../figma_app/755939";
 import { c as _$$c } from "../905/370443";
@@ -68,11 +68,11 @@ export function $$q8({
   let {
     numComponents
   } = zA(s);
-  let c = numComponents > 0 ? l ? _$$t("cooper.templates.view_n_templates_short", {
+  let c = numComponents > 0 ? l ? getI18nString("cooper.templates.view_n_templates_short", {
     numTemplates: numComponents
-  }) : _$$t("cooper.templates.view_n_templates", {
+  }) : getI18nString("cooper.templates.view_n_templates", {
     numTemplates: numComponents
-  }) : l ? _$$t("cooper.templates.view") : _$$t("cooper.templates.view_templates");
+  }) : l ? getI18nString("cooper.templates.view") : getI18nString("cooper.templates.view_templates");
   return jsx(_$$E, {
     onClick: i,
     htmlAttributes: {
@@ -222,11 +222,11 @@ export function $$Y2({
         className: M,
         children: [jsx(Q, {}), jsx(ea, {
           variant: "add",
-          buttonText: _$$t("cooper.templates.new_template")
+          buttonText: getI18nString("cooper.templates.new_template")
         })]
       }), jsx(et, {
-        title: _$$t("cooper.templates.new_template"),
-        subtitle: n && _$$t("cooper.templates.for_plan_name", {
+        title: getI18nString("cooper.templates.new_template"),
+        subtitle: n && getI18nString("cooper.templates.for_plan_name", {
           planName: n
         })
       })]
@@ -269,7 +269,7 @@ export function $$Q6({
           })
         }), jsx(ea, {
           variant: "add",
-          buttonText: _$$t("cooper.templates.add_blank"),
+          buttonText: getI18nString("cooper.templates.add_blank"),
           ariaLabel: name
         })]
       }), jsx(et, {
@@ -345,7 +345,7 @@ export function $$X4({
         className: B,
         children: jsx("span", {
           className: U,
-          children: _$$t("cooper.templates.custom_size")
+          children: getI18nString("cooper.templates.custom_size")
         })
       })]
     })
@@ -362,9 +362,9 @@ export function $$ee9({
   children: t
 }) {
   let n = VU();
-  let r = md(ce);
-  let i = md(Lm);
-  let o = md(U_);
+  let r = useAtomWithSubscription(ce);
+  let i = useAtomWithSubscription(Lm);
+  let o = useAtomWithSubscription(U_);
   let s = r.length > 0;
   let l = s && n;
   let d = n && i.type === mF.TEMPLATES;
@@ -487,7 +487,7 @@ function en({
     },
     children: [i && jsx(ea, {
       variant: "add",
-      buttonText: d.current?.clientWidth && d.current.clientWidth > 140 ? _$$t("cooper.templates.add_template") : _$$t("cooper.templates.add"),
+      buttonText: d.current?.clientWidth && d.current.clientWidth > 140 ? getI18nString("cooper.templates.add_template") : getI18nString("cooper.templates.add"),
       ariaLabel: s
     }), e, l && jsx(_$$_, {
       className: "x10l6tqk x1bfpjnn x1473dw x1n327nk x47corl x192jxwq xmkeg23 x1y0btm7 x1co876m x68m4m9 xwa2v1s"
@@ -531,13 +531,13 @@ export function $$er3({
   return e ? jsx(IK, {
     variant: "secondary",
     onClick: () => FJ($$G0, "_blank"),
-    children: tx("cooper.templates.show_me_how")
+    children: renderI18nText("cooper.templates.show_me_how")
   }) : jsx(_$$N.Button, {
     href: $$G0,
     variant: "secondary",
     trusted: !0,
     newTab: !0,
-    children: tx("cooper.templates.show_me_how")
+    children: renderI18nText("cooper.templates.show_me_how")
   });
 }
 export const qv = $$G0;

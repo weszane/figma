@@ -1,11 +1,11 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
-import { sx } from "../905/449184";
-import { eD } from "../figma_app/876459";
+import { trackEventAnalytics } from "../905/449184";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { buildUploadUrl, getInitialOptions } from "../figma_app/169182";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { We } from "../figma_app/165623";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { ds } from "../figma_app/314264";
 import { R9 } from "../905/977824";
 import { b as _$$b } from "../905/154029";
@@ -107,8 +107,8 @@ let I = class e {
       return e;
     };
     this.startPollingMicState = () => {
-      eD && (this.microphonePermissionDenied && eD.setUsingMicrophone(!1), this.micStateInterval = setInterval(() => {
-        this.client && (eD?.setIsInVoiceCall("DISCONNECTED" !== this.client.connectionState), eD?.setUsingMicrophone(!!this.isPublishingLocalTrack()));
+      desktopAPIInstance && (this.microphonePermissionDenied && desktopAPIInstance.setUsingMicrophone(!1), this.micStateInterval = setInterval(() => {
+        this.client && (desktopAPIInstance?.setIsInVoiceCall("DISCONNECTED" !== this.client.connectionState), desktopAPIInstance?.setUsingMicrophone(!!this.isPublishingLocalTrack()));
       }, 5e3));
     };
     this.stopPollingMicState = () => {
@@ -160,8 +160,8 @@ let I = class e {
     this.onCallDisconnect = () => {
       R9.sendVoiceMetadata("");
       this.stopPollingVolumeData();
-      eD?.setIsInVoiceCall(!1);
-      eD?.setUsingMicrophone(!1);
+      desktopAPIInstance?.setIsInVoiceCall(!1);
+      desktopAPIInstance?.setUsingMicrophone(!1);
       this.localAudioTrack?.setEnabled(!1);
       this.unpublishedLocalAudioTrack?.setEnabled(!1);
     };
@@ -172,7 +172,7 @@ let I = class e {
         });
       };
       e.onPlaybackDeviceChanged = e => {
-        this.playbackDevice?.deviceId === e.device.deviceId && "INACTIVE" === e.state && Ay.chrome && this.getPlaybackDevices().then(e => {
+        this.playbackDevice?.deviceId === e.device.deviceId && "INACTIVE" === e.state && BrowserInfo.chrome && this.getPlaybackDevices().then(e => {
           this.playbackDevice = e.length > 0 ? e[0] : null;
         });
       };
@@ -235,7 +235,7 @@ let I = class e {
     this.callEventCallback = _;
     try {
       let e = "vp8";
-      Ay.safari && +Ay.version >= 13 && (e = "h264");
+      BrowserInfo.safari && +BrowserInfo.version >= 13 && (e = "h264");
       await this.client?.leave();
       this.client = this.AgoraRTC.createClient({
         mode: "live",
@@ -247,7 +247,7 @@ let I = class e {
       this.client.setEncryptionConfig("aes-256-xts", d);
       this.attachClientListeners(r, n, o, d, _);
       await this.client.join(t, r, n, i);
-      eD?.setIsInVoiceCall(!0);
+      desktopAPIInstance?.setIsInVoiceCall(!0);
       await this.client.setClientRole("host");
       this.microphonePermissionDenied || (this.localAudioTrack = await this.AgoraRTC.createMicrophoneAudioTrack({
         AEC: !0,
@@ -263,7 +263,7 @@ let I = class e {
       this.localAudioTrack && (await this.client.publish(this.localAudioTrack));
       await this.unmute();
     } catch (i) {
-      sx("Voice Call - Error", {
+      trackEventAnalytics("Voice Call - Error", {
         callId: r,
         token: n,
         userId: o,
@@ -294,7 +294,7 @@ let I = class e {
   async renewToken(e) {
     await this.client?.renewToken(e);
     this.handlingTokenExpiration = !1;
-    sx("Voice Call - Token Renewed", {
+    trackEventAnalytics("Voice Call - Token Renewed", {
       token: e,
       userId: this.client?.uid && this.decryptedUserMap[this.client?.uid]
     });
@@ -308,13 +308,13 @@ let I = class e {
   async mute() {
     await this.localAudioTrack?.setEnabled(!1);
     this.audioCaptionQueues.removeTrack(this.userId, this.localAudioTrack?.getMediaStreamTrack());
-    eD?.setUsingMicrophone(!1);
+    desktopAPIInstance?.setUsingMicrophone(!1);
     this.isMuted = !0;
   }
   async unmute() {
     await this.localAudioTrack?.setEnabled(!0);
     WO() && this.streamingAudioForCaptions && this.audioCaptionQueues.addTrack(this.userId, this.localAudioTrack?.getMediaStreamTrack());
-    eD?.setUsingMicrophone(!0);
+    desktopAPIInstance?.setUsingMicrophone(!0);
     this.isMuted = !1;
   }
   streamAudioForCaptions(e) {
@@ -341,7 +341,7 @@ let I = class e {
       }
     });
     this.client?.on("user-unpublished", async (e, t) => {
-      if (!eD || "audio" !== t) return;
+      if (!desktopAPIInstance || "audio" !== t) return;
       let r = await this.getDecryptedUserId(e.uid);
       if (!r) return;
       let n = new Set();
@@ -354,7 +354,7 @@ let I = class e {
     });
     let o = !0;
     this.client?.on("network-quality", function (i) {
-      o && (i.downlinkNetworkQuality >= 4 || i.uplinkNetworkQuality >= 4) ? (sx("Voice Call - Bad Call Quality", {
+      o && (i.downlinkNetworkQuality >= 4 || i.uplinkNetworkQuality >= 4) ? (trackEventAnalytics("Voice Call - Bad Call Quality", {
         callId: e,
         token: t,
         userId: r,
@@ -434,7 +434,7 @@ let I = class e {
           o = $E.WARNING_RECV_AUDIO_DECODE_FAILED_RECOVER;
       }
       o && i(o);
-      s.code >= 3e3 ? (console.error(s), sx("Voice Call - Error", {
+      s.code >= 3e3 ? (console.error(s), trackEventAnalytics("Voice Call - Error", {
         callId: e,
         token: t,
         userId: r,
@@ -446,7 +446,7 @@ let I = class e {
         join: !1
       }, {
         forwardToDatadog: !0
-      })) : sx("Voice Call - Error", {
+      })) : trackEventAnalytics("Voice Call - Error", {
         callId: e,
         token: t,
         userId: r,
@@ -464,7 +464,7 @@ let I = class e {
       if (!this.handlingTokenExpiration) {
         if (this.handlingTokenExpiration = !0, !this.client?.remoteUsers.length) {
           i($E.CALL_INACTIVE);
-          sx("Voice Call - Token Will Expire", {
+          trackEventAnalytics("Voice Call - Token Will Expire", {
             callId: e,
             token: t,
             userId: r,
@@ -474,7 +474,7 @@ let I = class e {
           return;
         }
         i($E.TOKEN_WILL_EXPIRE_DETECT_MIC_INPUT);
-        sx("Voice Call - Token Will Expire", {
+        trackEventAnalytics("Voice Call - Token Will Expire", {
           callId: e,
           token: t,
           userId: r,
@@ -484,7 +484,7 @@ let I = class e {
     });
     this.client?.on("token-privilege-did-expire", () => {
       i($E.TOKEN_EXPIRED);
-      sx("Voice Call - Token Did Expire", {
+      trackEventAnalytics("Voice Call - Token Did Expire", {
         callId: e,
         token: t,
         userId: r,
@@ -497,13 +497,13 @@ let I = class e {
       this.decryptedUserMap[e] || (this.decryptedUserMap[e] = await We(this.userEncryptionKey, e.toString()));
       return this.decryptedUserMap[e];
     } catch {
-      $D(_$$e.UNOWNED, Error(`Failed to decrypt encrypted user: ${e}`));
+      reportError(_$$e.UNOWNED, Error(`Failed to decrypt encrypted user: ${e}`));
       this.callEventCallback?.($E.ERROR);
     }
   }
   async setMicrophonePermissions() {
-    if (eD) {
-      this._microphonePermissionDenied = !(await eD.requestMicrophonePermission());
+    if (desktopAPIInstance) {
+      this._microphonePermissionDenied = !(await desktopAPIInstance.requestMicrophonePermission());
       return;
     }
     try {

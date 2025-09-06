@@ -2,10 +2,10 @@ import { sj, uf, C as _$$C, A$, o6, IO, JO, NE, Ff, ai, Gg, gG, LY, eZ, CM, q, I
 import { MCP_INTERNAL_GET_RESOURCES_LIST, MCP_INTERNAL_GET_PROMPTS_LIST, MCP_INTERNAL_GET_RESOURCE, MCP_INTERNAL_GET_PROMPT, MCP_INTERNAL_GET_TOOLS } from "../905/106287";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
-import { sn } from "../905/542194";
+import { atomStoreManager } from "../figma_app/27355";
+import { globalPerfTimer } from "../905/542194";
 import { debugState } from "../905/407919";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { XP } from "../figma_app/655139";
 import { tn } from "../figma_app/473493";
 import { yT } from "../905/359509";
@@ -56,7 +56,7 @@ async function x({
     return `Successfully linked node ${e.guid} to Code Connect with source path ${n} and name ${i}.`;
   } catch (e) {
     console.error(e);
-    $D(_$$e.DEVELOPER_TOOLS, e, {
+    reportError(_$$e.DEVELOPER_TOOLS, e, {
       extra: {
         backingLibraryKey,
         openFileKey: o,
@@ -79,7 +79,7 @@ function R({
   });
 }
 async function N(e) {
-  let t = function(e, t) {
+  let t = function (e, t) {
     if (!t) return null;
     let {
       w,
@@ -134,7 +134,7 @@ function P(e, t, i, n) {
       type: "text",
       text: e.map(e => function e(t, i, n) {
         let r = "  ".repeat(n);
-        let a = function(e) {
+        let a = function (e) {
           let t = {
             id: e.guid,
             name: e.name.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"),
@@ -147,7 +147,7 @@ function P(e, t, i, n) {
           return t;
         }(t);
         let s = t.type.toLocaleLowerCase().split("_").join("-");
-        let o = function(e) {
+        let o = function (e) {
           let t = [];
           for (let [i, n] of Object.entries(e)) void 0 !== n && t.push(`${i}="${n}"`);
           return t.join(" ");
@@ -211,14 +211,14 @@ let V = "Code Connect is only available on the Organization and Enterprise plans
 let G = {};
 export async function $$z1(e, t, i, d) {
   let _ = performance.now();
-  if (function(e) {
+  if (function (e) {
     if ("fullscreen" !== e.getState().selectedView.view) throw Error("The MCP server is only available if your active tab is a Figma design file");
     if (!getFeatureFlags().dt_my_cool_plugin || !UK().enableCodegenMcpServer) throw Error("The MCP server is not enabled for this user");
   }(i), i.dispatch(_$$b({
     dev_mode_mcp_has_used_a_tool: !0
   })), e === MCP_INTERNAL_GET_TOOLS) {
     let e = {
-      tools: ["write-to-disk" === zl.get(pe) ? eZ : CM, q, If, Qn, ...(getFeatureFlags().dt_mcp_get_metadata ? [Y9] : []), ...(getFeatureFlags().dt_my_cool_plugin_internal ? [Zj] : []), ...(getFeatureFlags().dt_mcp_link_node_via_code_connect ? [rV] : []), ...(getFeatureFlags().dt_mcp_design_system_rules_tool ? [sl] : [])]
+      tools: ["write-to-disk" === atomStoreManager.get(pe) ? eZ : CM, q, If, Qn, ...(getFeatureFlags().dt_mcp_get_metadata ? [Y9] : []), ...(getFeatureFlags().dt_my_cool_plugin_internal ? [Zj] : []), ...(getFeatureFlags().dt_mcp_link_node_via_code_connect ? [rV] : []), ...(getFeatureFlags().dt_mcp_design_system_rules_tool ? [sl] : [])]
     };
     GS("mcp.get_tools_call", i.getState().openFile?.key || "", i.getState(), {
       availableTools: JSON.stringify(e.tools.map(e => e.name)),
@@ -232,7 +232,7 @@ export async function $$z1(e, t, i, d) {
   });
   if (!b.success) {
     let e = Error(`[MCP server] Invalid tool arguments: ${b.error.message}`);
-    $D(_$$e.DEVELOPER_TOOLS, e);
+    reportError(_$$e.DEVELOPER_TOOLS, e);
     return e;
   }
   let v = b.data;
@@ -286,17 +286,17 @@ export async function $$z1(e, t, i, d) {
     } = v;
     if (!config) {
       let e = Error("[MCP server] No config provided");
-      $D(_$$e.DEVELOPER_TOOLS, e);
+      reportError(_$$e.DEVELOPER_TOOLS, e);
       return e;
     }
-    zl.set(Kx, config.codeOption);
-    zl.set(tz, config.codeConnectToolsEnabled);
-    zl.set(SV, config.codebaseSuggestionsEnabled);
-    zl.set(pe, config.markupImageOptions);
-    zl.set(rx, config.mockCodeConnect);
-    zl.set(DR, config.mockCodebaseSuggestions);
-    zl.set(lk, config.useTailwind);
-    zl.set(_$$f, config.mockDirForImageWritesToDisk);
+    atomStoreManager.set(Kx, config.codeOption);
+    atomStoreManager.set(tz, config.codeConnectToolsEnabled);
+    atomStoreManager.set(SV, config.codebaseSuggestionsEnabled);
+    atomStoreManager.set(pe, config.markupImageOptions);
+    atomStoreManager.set(rx, config.mockCodeConnect);
+    atomStoreManager.set(DR, config.mockCodebaseSuggestions);
+    atomStoreManager.set(lk, config.useTailwind);
+    atomStoreManager.set(_$$f, config.mockDirForImageWritesToDisk);
     return {
       content: [{
         type: "text",
@@ -305,14 +305,14 @@ export async function $$z1(e, t, i, d) {
     };
   }
   if (uT(i.getState())) throw Error("The MCP server has been disabled by admin");
-  if (!function(e) {
+  if (!function (e) {
     let t = e.getState();
     let i = tB({
       openFile: t.openFile ?? null
     });
     return i?.editorType === FFileType.DESIGN;
   }(i)) throw Error("The MCP server tools are only available for design files.");
-  if (!function(e) {
+  if (!function (e) {
     let t = e.getState();
     return tn(t);
   }(i)) throw Error("The user doesn't have access to Figma Dev Mode which is required to use this, to get access they need to be subscribed to a paid Dev seat in Figma");
@@ -320,24 +320,24 @@ export async function $$z1(e, t, i, d) {
     let {
       uri
     } = v;
-    return function(e) {
+    return function (e) {
       if (!getFeatureFlags().dt_mcp_auto_resources) throw Error("Resources not supported");
       if ("autocomplete://selection" === e) return {
         contents: [{
           uri: e,
-          text: zl.get(jb) ?? ""
+          text: atomStoreManager.get(jb) ?? ""
         }]
       };
       if ("autocomplete://tlf" === e) return {
         contents: [{
           uri: e,
-          text: zl.get(Lv) ?? ""
+          text: atomStoreManager.get(Lv) ?? ""
         }]
       };
       if ("autocomplete://page" === e) return {
         contents: [{
           uri: e,
-          text: zl.get(oG) ?? ""
+          text: atomStoreManager.get(oG) ?? ""
         }]
       };
       throw Error("Unknown resource URI");
@@ -348,7 +348,7 @@ export async function $$z1(e, t, i, d) {
       promptName,
       args
     } = v;
-    return function(e, t) {
+    return function (e, t) {
       if (e === xy) return {
         description: Ob,
         messages: [{
@@ -428,7 +428,7 @@ export async function $$z1(e, t, i, d) {
   let T = XP(C);
   let k = yT(T.id) || "unknown";
   CX(v.toolName);
-  sn.start("mcp.tool_call");
+  globalPerfTimer.start("mcp.tool_call");
   let [R, N] = await W({
     validatedArgs: v,
     nodes: E,
@@ -437,7 +437,7 @@ export async function $$z1(e, t, i, d) {
     store: i,
     codeConnectSnippetLanguage: k
   });
-  sn.stop("mcp.tool_call");
+  globalPerfTimer.stop("mcp.tool_call");
   Kl({
     store: i,
     startingNode: x,
@@ -447,7 +447,7 @@ export async function $$z1(e, t, i, d) {
     toolName: I,
     codeConnectMapping: N.codeConnectMapping ?? {}
   });
-  (function({
+  (function ({
     validatedToolName: e,
     store: t,
     durationMs: i
@@ -468,7 +468,7 @@ export async function $$z1(e, t, i, d) {
 }
 export function $$H0() {
   console.warn("SSE is deprecated, please use localhost/mcp instead");
-  zl.set(_$$A, !0);
+  atomStoreManager.set(_$$A, !0);
   GS("mcp.deprecated_sse_query", debugState.getState().openFile?.key || "", debugState.getState(), {});
 }
 async function W({
@@ -487,7 +487,7 @@ async function W({
     switch (toolName) {
       case sj:
         {
-          if ("xml" === zl.get(Kx)) {
+          if ("xml" === atomStoreManager.get(Kx)) {
             let [[e], [t]] = await nP(l, toolName);
             return [df({
               node: l,
@@ -500,7 +500,7 @@ async function W({
               codeConnectMapping: e
             }];
           }
-          zl.get(Kx);
+          atomStoreManager.get(Kx);
           let c = $w(l);
           let u = Z(c) > E4;
           if (getFeatureFlags().dt_mcp_get_code_returns_metadata && (u || t.length > 1)) {
@@ -558,7 +558,7 @@ async function W({
     }
   } catch (i) {
     let t = i instanceof Error ? i : Error(String(i));
-    if (t.message.includes(V) || $D(_$$e.DEVELOPER_TOOLS, t, {
+    if (t.message.includes(V) || reportError(_$$e.DEVELOPER_TOOLS, t, {
       extra: {
         toolName: e.toolName
       }
@@ -568,4 +568,4 @@ async function W({
   }
 }
 export const f = $$H0;
-export const r = $$z1; 
+export const r = $$z1;

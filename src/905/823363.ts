@@ -4,7 +4,7 @@ import { c$, bL } from "../905/575478";
 import { q } from "../905/932270";
 import { eVK } from "../figma_app/763686";
 import l from "classnames";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { _r } from "../figma_app/451499";
 var d = l;
 let p = [eVK.TOP_LEFT, eVK.TOP_CENTER, eVK.TOP_RIGHT, eVK.MIDDLE_LEFT, eVK.MIDDLE_CENTER, eVK.MIDDLE_RIGHT, eVK.BOTTOM_LEFT, eVK.BOTTOM_CENTER, eVK.BOTTOM_RIGHT];
@@ -79,7 +79,7 @@ export function $$_0(e) {
   }, [restoreFocusElements]);
   return jsx(bL, {
     legend: jsx(q, {
-      children: tx("fullscreen.scale_panel.anchor_point")
+      children: renderI18nText("fullscreen.scale_panel.anchor_point")
     }),
     value: anchorPoint.toString(),
     onChange: (e, {

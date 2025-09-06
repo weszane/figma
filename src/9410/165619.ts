@@ -7,15 +7,15 @@ import { getFeatureFlags } from "../905/601108";
 import d from "classnames";
 import { am } from "../figma_app/901889";
 import { tH } from "../905/751457";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { EE, lB } from "../figma_app/731583";
 import { _X, Yb } from "../figma_app/62612";
 import { OF } from "../figma_app/562352";
 import { m as _$$m } from "../9410/643761";
 import { Y5 } from "../figma_app/455680";
 import { Mj } from "../figma_app/624361";
-import { md, fp } from "../figma_app/27355";
-import { Ay } from "../figma_app/778880";
+import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
+import { BrowserInfo } from "../figma_app/778880";
 import { sQ, _L } from "../9410/635978";
 import { s4 } from "../figma_app/8833";
 import { RJ, mc, DD, ZU } from "../9410/640042";
@@ -50,7 +50,7 @@ async function E(e) {
 let N = "rich_media_overlay--loadingFallback---qUKd";
 let A = "rich_media_overlay--croppedClipPath--BeUH-";
 function O(e, t) {
-  e && (t ? (e.play(), Ay.safari && (e.currentTime = .1)) : sQ(e) ? e.pause() : (Ay.safari && e.currentTime > .1 && (e.currentTime -= .1), e.play()));
+  e && (t ? (e.play(), BrowserInfo.safari && (e.currentTime = .1)) : sQ(e) ? e.pause() : (BrowserInfo.safari && e.currentTime > .1 && (e.currentTime -= .1), e.play()));
 }
 let L = memo(({
   nodeId: e,
@@ -80,7 +80,7 @@ let L = memo(({
   }();
   let f = useRef(null);
   let g = useRef(!1);
-  let _ = md(vE);
+  let _ = useAtomWithSubscription(vE);
   let [x, y] = useState(!1);
   let [b, C] = useState(!0);
   let v = useRef(!1);
@@ -115,7 +115,7 @@ let L = memo(({
   }, [s, t]);
   let E = DD(e);
   let N = ZU(e);
-  let [L, R] = fp(H);
+  let [L, R] = useAtomValueAndSetter(H);
   let {
     isVideoNodeHovered,
     pointerDownOnVideo
@@ -134,12 +134,12 @@ let L = memo(({
       children: jsx("video", {
         ref: p,
         crossOrigin: "anonymous",
-        autoPlay: _ && !Ay.safari,
+        autoPlay: _ && !BrowserInfo.safari,
         className: c()("rich_media_overlay--video--O6uP2", i && s4, i && "rich_media_overlay--maximizedVideoBg--FUhbn"),
         onMouseUp: function () {
           document.activeElement instanceof HTMLElement && document.activeElement.blur();
         },
-        controls: Ay.isIpad && i,
+        controls: BrowserInfo.isIpad && i,
         onClick: function () {
           i && O(d, x);
         }
@@ -235,8 +235,8 @@ function P({
   mediaHash: e,
   mediaType: t
 }) {
-  let i = tx("whiteboard.gif.failed_to_load");
-  "VIDEO" === t && (i = tx("whiteboard.video.failed_to_load"), tHB?.isVideoBeingUploaded(e) && (i = tx("whiteboard.video.still_uploading")));
+  let i = renderI18nText("whiteboard.gif.failed_to_load");
+  "VIDEO" === t && (i = renderI18nText("whiteboard.video.failed_to_load"), tHB?.isVideoBeingUploaded(e) && (i = renderI18nText("whiteboard.video.still_uploading")));
   return jsx("div", {
     className: c()(N, A),
     children: jsx("div", {

@@ -7,7 +7,7 @@ import { h as _$$h } from "../905/270045";
 import { l as _$$l } from "../905/479687";
 import { generateRecordingKey } from "../figma_app/878298";
 import { e as _$$e } from "../905/713353";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { E as _$$E } from "../905/984674";
 import { AC, Pt as _$$Pt, v4 } from "../figma_app/655139";
 import { gB } from "../905/294543";
@@ -161,9 +161,9 @@ export function $$x2({
   let E = useDispatch();
   useEffect(() => E(aq()), [E]);
   let y = _?.format(c) ?? o?.[0];
-  let b = y ? _$$t("dev_handoff.code.language_named", {
+  let b = y ? getI18nString("dev_handoff.code.language_named", {
     codeLanguage: y
-  }) : _$$t("dev_handoff.code.language");
+  }) : getI18nString("dev_handoff.code.language");
   return jsxs(bL, {
     manager,
     children: [jsx(_$$h, {
@@ -180,7 +180,7 @@ export function $$x2({
       recordingKey: "preferencesDropdownButton",
       disabled: d,
       "aria-label": b,
-      children: y ?? _$$t("dev_handoff.code.language")
+      children: y ?? getI18nString("dev_handoff.code.language")
     }), jsx(mc, {
       children: t.map(e => A(e, e.name, "preferencesDropdown"))
     })]
@@ -202,9 +202,9 @@ export function $$N4({
   let g = useDispatch();
   useEffect(() => g(aq()), [g]);
   let E = d?.format(o) ?? r?.[0];
-  let y = E ? _$$t("dev_handoff.code.settings.language_dropdown_with_unit", {
+  let y = E ? getI18nString("dev_handoff.code.settings.language_dropdown_with_unit", {
     unit: E
-  }) : _$$t("dev_handoff.code.options");
+  }) : getI18nString("dev_handoff.code.options");
   return jsxs(bL, {
     manager,
     children: [jsx(_$$h, {
@@ -220,7 +220,7 @@ export function $$N4({
         "data-testid": "code_language_dropdown"
       },
       disabled: c,
-      children: E ?? _$$t("dev_handoff.code.options")
+      children: E ?? getI18nString("dev_handoff.code.options")
     }), jsx(mc, {
       children: t.map(e => A(e, e.name, "preferencesDropdown"))
     })]

@@ -1,8 +1,8 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { debugState } from "../905/407919";
-import { $D } from "../905/11";
-import { t as _$$t } from "../905/303541";
+import { reportError } from "../905/11";
+import { getI18nString } from "../905/303541";
 import { bV } from "../figma_app/808294";
 import { hN } from "../figma_app/248118";
 import { Rm } from "../figma_app/86989";
@@ -11,7 +11,7 @@ import { Eh } from "../figma_app/12796";
 import { M5, _V, JT, _H, VQ, Pl, Oe, YQ } from "../figma_app/300692";
 import { SH } from "../figma_app/790714";
 import { m3 } from "../figma_app/45218";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { ZQ, bH, ho, am, k0 } from "../figma_app/155287";
 import { isPluginConfigMatching } from "../905/240440";
 import { Ah } from "../figma_app/221114";
@@ -25,7 +25,7 @@ function S(e, t) {
   let n = gy(i);
   return 0 === n.length ? [] : [{
     type: "submenu",
-    name: _$$t("fullscreen_actions.plugins-menu-saved-plugins"),
+    name: getI18nString("fullscreen_actions.plugins-menu-saved-plugins"),
     submenu: n
   }];
 }
@@ -101,7 +101,7 @@ function C(e, t, i) {
       });
     }
   } catch (e) {
-    $D(_$$e.EXTENSIBILITY, e);
+    reportError(_$$e.EXTENSIBILITY, e);
   }
   return h;
 }
@@ -111,7 +111,7 @@ export function $$T0(e, t) {
   let s = !!e.isReadOnly;
   let l = debugState.getState();
   let c = Eh(l);
-  let g = e.editorType === nT.DevHandoff;
+  let g = e.editorType === FEditorType.DevHandoff;
   let A = SH();
   if (Ah(l.mirror.appModel.activeCanvasEditModeType)) return [];
   let v = [];
@@ -128,7 +128,7 @@ export function $$T0(e, t) {
       }).slice(0, e.unboundedRecents ? void 0 : Zm);
       i.length > 0 && !e.hideRecentsHeader && i.unshift({
         type: "header",
-        name: _$$t("fullscreen_actions.recents")
+        name: getI18nString("fullscreen_actions.recents")
       });
       return i;
     }(e);
@@ -174,7 +174,7 @@ export function $$T0(e, t) {
     type: "separator"
   }), n.push({
     type: "submenu",
-    name: _$$t("whiteboard.inserts.plugin_from_org", {
+    name: getI18nString("whiteboard.inserts.plugin_from_org", {
       orgName: e.org?.name || "your org"
     }),
     submenu: E
@@ -183,7 +183,7 @@ export function $$T0(e, t) {
     type: "separator"
   }), n.push({
     type: "submenu",
-    name: _$$t("widgets.development"),
+    name: getI18nString("widgets.development"),
     submenu: function (e) {
       let t = M();
       let i = function (e) {
@@ -195,7 +195,7 @@ export function $$T0(e, t) {
         let r = debugState.getState();
         let s = Eh(r);
         let o = [];
-        let l = editorType === nT.DevHandoff;
+        let l = editorType === FEditorType.DevHandoff;
         if (!s) return o;
         for (let n in localExtensions) {
           let r = +n;

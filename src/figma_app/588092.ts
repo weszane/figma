@@ -2,7 +2,7 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { tM } from "../figma_app/637027";
 import { Q9 } from "../905/773401";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { h1 } from "../figma_app/530167";
 import { Ce } from "../905/156213";
 import { b as _$$b } from "../905/985254";
@@ -76,11 +76,11 @@ function v({
       children: e?.handle
     }), jsx("h2", {
       className: m_,
-      children: tx("community.onboarding.here_s_how_you_ll_look_when_using_the_figma_community")
+      children: renderI18nText("community.onboarding.here_s_how_you_ll_look_when_using_the_figma_community")
     }), jsxs("h3", {
       className: N4,
-      children: [tx("community.onboarding.change_your_photo_or_name_in_your_settings"), S(t, 0) && jsxs(Fragment, {
-        children: [jsx("br", {}), tx("community.onboarding.when_leaving_comments_we_ask_that_you")]
+      children: [renderI18nText("community.onboarding.change_your_photo_or_name_in_your_settings"), S(t, 0) && jsxs(Fragment, {
+        children: [jsx("br", {}), renderI18nText("community.onboarding.when_leaving_comments_we_ask_that_you")]
       })]
     })]
   });
@@ -89,10 +89,10 @@ function A() {
   return jsxs(Fragment, {
     children: [jsx("h1", {
       className: wx,
-      children: tx("community.onboarding.follow_our_guidelines")
+      children: renderI18nText("community.onboarding.follow_our_guidelines")
     }), jsx("h2", {
       className: m_,
-      children: tx("community.onboarding.when_leaving_comments_we_ask_that_you")
+      children: renderI18nText("community.onboarding.when_leaving_comments_we_ask_that_you")
     })]
   });
 }
@@ -102,21 +102,21 @@ function x() {
     children: [jsxs("li", {
       children: [jsx("div", {
         className: Qk,
-        children: tx("community.onboarding.stay_on_topic")
+        children: renderI18nText("community.onboarding.stay_on_topic")
       }), jsx(iF, {})]
     }), jsxs("li", {
       children: [jsx("div", {
         className: Qk,
-        children: tx("community.onboarding.be_respectful")
+        children: renderI18nText("community.onboarding.be_respectful")
       }), jsx(B1, {})]
     }), jsxs("li", {
       children: [jsx("div", {
         className: Qk,
-        children: tx("community.onboarding.read_our_guidelines", {
+        children: renderI18nText("community.onboarding.read_our_guidelines", {
           guidelinesLink: jsx("a", {
             href: "https://help.figma.com/hc/articles/360038510573-Figma-Community-Guidelines",
             target: "_blank",
-            children: tx("community.onboarding.guidelines")
+            children: renderI18nText("community.onboarding.guidelines")
           })
         })
       }), jsx($E, {})]
@@ -165,11 +165,11 @@ Ju(function ({
           })), y());
           S(r, 0) && e && (y(), n || t?.());
         },
-        children: S(r, 0) ? tx("community.onboarding.got_it") : tx("community.onboarding.looks_good")
+        children: S(r, 0) ? renderI18nText("community.onboarding.got_it") : renderI18nText("community.onboarding.looks_good")
       }), !T && jsx(tM, {
         className: IK,
         onClick: E,
-        children: tx("general.cancel")
+        children: renderI18nText("general.cancel")
       })]
     })
   });

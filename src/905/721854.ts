@@ -6,7 +6,7 @@ import { h as _$$h } from "../905/207101";
 import { e as _$$e } from "../905/280005";
 import { Uz, xH } from "../905/63728";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { RK } from "../figma_app/815170";
 import { JT } from "../905/913055";
@@ -45,7 +45,7 @@ function E({
     onAction: "custom" === i.type ? i.onPerform : () => f(i.url),
     iconPrefix: "custom" === i.type ? i.iconPrefix : void 0,
     variant: "secondary",
-    children: "custom" === i.type ? i.label : tx("ai.learn_more")
+    children: "custom" === i.type ? i.label : renderI18nText("ai.learn_more")
   }) : null;
   return jsx(_$$y2, {
     dataTestId: "instruction",
@@ -69,7 +69,7 @@ function E({
             key: Uz.ESCAPE
           }],
           recordingKey: "cancel-instruction",
-          children: tx("ai.cancel")
+          children: renderI18nText("ai.cancel")
         })]
       })]
     })
@@ -152,7 +152,7 @@ export function $$x0({
           children: function (e, t) {
             if (!e) return null;
             let i = t ? t(e) : e.length;
-            return 0 === i ? null : 1 === i ? e[0].name : tx("ai.n_selected", {
+            return 0 === i ? null : 1 === i ? e[0].name : renderI18nText("ai.n_selected", {
               n: i
             });
           }(N, w)

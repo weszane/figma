@@ -1,13 +1,13 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback, useRef } from "react";
-import { eU, fp } from "../figma_app/27355";
+import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { $ } from "../figma_app/938538";
 import { s as _$$s } from "../cssbuilder/589278";
 import { Tc } from "../905/797478";
 import { Y5 } from "../figma_app/455680";
 import { Y } from "../905/1768";
 import { qM } from "../9410/607036";
-let $$p1 = eU(-1);
+let $$p1 = atom(-1);
 let $$h2 = "slide-insert-shape-modal-button";
 export function $$m0({
   activateTool: e,
@@ -15,7 +15,7 @@ export function $$m0({
   areAnyShapesActive: i,
   shapes: m
 }) {
-  let [f, g] = fp($$p1);
+  let [f, g] = useAtomValueAndSetter($$p1);
   let _ = useCallback((e = !1) => {
     e && Y5.triggerAction("set-tool-default", null);
     g(-1);

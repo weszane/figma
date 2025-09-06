@@ -1,8 +1,8 @@
 import { useMemo } from "react";
 import { CWU, Z_n, rXF, JTp } from "../figma_app/763686";
 import { AD } from "../905/871411";
-import { az } from "../905/449184";
-import { xi } from "../905/714362";
+import { analyticsEventManager } from "../905/449184";
+import { logWarning } from "../905/714362";
 import { ff } from "../figma_app/933328";
 import { q } from "../905/113809";
 import { o as _$$o } from "../905/609215";
@@ -59,7 +59,7 @@ export function $$k4(e) {
     let e = $$M17(t, n);
     return e ? [t, r, n, e.varValue.resolvedType] : [];
   }
-  xi("Invalid node field when parsing node field alias expression text", r);
+  logWarning("Invalid node field when parsing node field alias expression text", r);
   return [];
 }
 export function $$M17(e, t) {
@@ -76,7 +76,7 @@ export function $$F9(e) {
   return i && a && s ? [JSON.parse(i), a, s] : [[], "", ""];
 }
 export function $$j18(e, t, r) {
-  return "COMPONENT_PROP_ASSIGNMENTS" === t ? `StablePathToNode:${JSON.stringify(e)}$$$NodeField:${t}$$$IndexOrKey:${r}` : (xi("Invalid node field when parsing for node field alias", t), "");
+  return "COMPONENT_PROP_ASSIGNMENTS" === t ? `StablePathToNode:${JSON.stringify(e)}$$$NodeField:${t}$$$IndexOrKey:${r}` : (logWarning("Invalid node field when parsing for node field alias", t), "");
 }
 export function $$U0(e) {
   if (e && e.varValue.type === Z_n.ALIAS) return CWU.getVariableResolvedValue(e.varValue.value, new Map());
@@ -240,7 +240,7 @@ export function $$q2(e, t, r, n) {
   try {
     l = q(e);
   } catch {
-    xi("could not tokenize expression for logging:", e);
+    logWarning("could not tokenize expression for logging:", e);
   }
   let u = l.filter(e => "TOKEN_VARIABLE" === e.type || "TOKEN_VARIABLE_WITH_MODE" === e.type).map(e => {
     let [t, r] = $$P11(e.stringValue);
@@ -260,7 +260,7 @@ export function $$q2(e, t, r, n) {
     variable_data: JSON.stringify(u),
     entry: n
   };
-  az.trackDefinedEvent("prototype.expression_submit", _);
+  analyticsEventManager.trackDefinedEvent("prototype.expression_submit", _);
 }
 export const Cq = $$U0;
 export const DE = $$T1;

@@ -9,7 +9,7 @@ import { ZC } from "../figma_app/39751";
 import { WB } from "../905/761735";
 import { IT } from "../figma_app/566371";
 import { GI, IZ, ez, lC, U9, qL } from "../905/125333";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { tS } from "../figma_app/516028";
 import { nD6 } from "../figma_app/43951";
@@ -30,7 +30,7 @@ export function $$N2() {
     e && (r(i), WB().optimisticallyUpdate({}, _$$v.setUserColorPaletteOverrideForFile(e, n)).catch(e => {
       console.error(e);
       a || t(F.enqueue({
-        message: _$$t("fullscreen.color_palette.apply_palette_failure")
+        message: getI18nString("fullscreen.color_palette.apply_palette_failure")
       }));
     }).$$finally(() => {
       r(0);

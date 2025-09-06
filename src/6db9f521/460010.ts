@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "../vendor/514228";
 import { Ez5, rcl, luZ, J6N, QOV, AlE, YdF, S2l, CNR, mgy, v$l, tbx, ibQ, qYO, zMY, glU, zkO, nQ7, iCO, ruz, Sqb, rrT, FAf, lyf, Oin } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { tH as _$$tH, H4 } from "../905/751457";
-import { t as _$$t, tx as _$$tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { Hm, Bs, AV, Gb } from "../figma_app/933328";
 import { ED } from "../figma_app/504823";
@@ -14,7 +14,7 @@ import { q5, ze, tS as _$$tS } from "../figma_app/516028";
 import { W as _$$W } from "../441/503702";
 import { ut } from "../figma_app/84367";
 import { Lk } from "../figma_app/122682";
-import { wN, nT as _$$nT } from "../figma_app/53721";
+import { mapFileTypeToEditorType, FEditorType } from "../figma_app/53721";
 import { m as _$$m } from "../905/99004";
 import { A as _$$A } from "../9410/188255";
 import { pO } from "../figma_app/42945";
@@ -60,7 +60,7 @@ import { xG } from "../figma_app/121043";
 import { $n, WW, IK } from "../905/521428";
 import { P as _$$P } from "../905/143421";
 import { x as _$$x } from "../905/764527";
-import { Xr, fp, md, um, zl } from "../figma_app/27355";
+import { Xr, useAtomValueAndSetter, useAtomWithSubscription, um, atomStoreManager } from "../figma_app/27355";
 import { G1 } from "../figma_app/691470";
 import { CortexErrorV2, UnsafeOrHarmfulPromptError, ProviderUnsafeOrHarmfulContentError } from "../figma_app/316567";
 import { Z as _$$Z } from "../905/829242";
@@ -116,7 +116,7 @@ import { z as _$$z } from "../940032c6/265110";
 import { AD, fn, sH as _$$sH2, dI as _$$dI } from "../905/871411";
 import { Pt, aH as _$$aH, of as _$$of } from "../figma_app/806412";
 import { D8 } from "../905/511649";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { s as _$$s5 } from "../cssbuilder/589278";
 import { Uc, tJ as _$$tJ } from "../figma_app/741237";
 import { gl, hS, oV as _$$oV, _W, E7 } from "../905/216495";
@@ -203,8 +203,8 @@ import { DF } from "../vendor/463802";
 import { Sd } from "../vendor/425002";
 import { Ey, $7, jZ, pF } from "../vendor/408361";
 import rJ from "../vendor/128080";
-import { az as _$$az } from "../905/449184";
-import { $D } from "../905/11";
+import { analyticsEventManager } from "../905/449184";
+import { reportError } from "../905/11";
 import { u4 } from "../figma_app/991591";
 import { kt } from "../figma_app/858013";
 import { P as _$$P2 } from "../905/347284";
@@ -263,7 +263,7 @@ import { xX } from "../897/564585";
 import { J5, w_ } from "../897/602108";
 import { A as _$$A8 } from "../figma_app/121266";
 import { e7 as _$$e3 } from "../figma_app/316316";
-import { Im } from "../figma_app/493477";
+import { isEmptyObject } from "../figma_app/493477";
 import { zp } from "../figma_app/740025";
 import { b as _$$b4 } from "../figma_app/203891";
 import { GR, F$, gc, B8, w5, tC as _$$tC } from "../figma_app/229710";
@@ -333,7 +333,7 @@ import { j as _$$j3 } from "../905/253683";
 import { s as _$$s7 } from "../905/702260";
 import { W as _$$W5 } from "../905/378870";
 import { Z as _$$Z5 } from "../905/498136";
-import { R as _$$R2 } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { u as _$$u5 } from "../figma_app/852050";
 import { pn } from "../905/714538";
 import { _S, OS, WH } from "../figma_app/836943";
@@ -351,7 +351,7 @@ import { MH } from "../figma_app/394327";
 import { N as _$$N4 } from "../2b17fec9/152433";
 import { r as _$$r5 } from "../905/571562";
 import { n3 as _$$n5, IA as _$$IA } from "../905/859698";
-import { yQ } from "../905/236856";
+import { waitForAnimationFrame } from "../905/236856";
 import { ZC } from "../figma_app/39751";
 import { XE, Uv, bS } from "../figma_app/91703";
 import { TK } from "../905/129660";
@@ -2279,7 +2279,7 @@ let is = {
   }
 };
 function ia() {
-  let [e, t] = fp(DM);
+  let [e, t] = useAtomValueAndSetter(DM);
   let i = _$$sH();
   let n = NG(i).data;
   let s = n?.[0];
@@ -2351,7 +2351,7 @@ function id() {
   let {
     state
   } = wj(JT.SLIDES_GENERATE_OUTLINE);
-  let i = md(DM);
+  let i = useAtomWithSubscription(DM);
   let {
     data,
     setOutline
@@ -2409,7 +2409,7 @@ function ip() {
     modules: e
   }) {
     let t = useDispatch();
-    let i = md(ze);
+    let i = useAtomWithSubscription(ze);
     let n = m4();
     let {
       data,
@@ -2706,7 +2706,7 @@ let iV = um({
   }
 });
 function iK() {
-  return "SLIDE_TRANSITION" === md(iV).type;
+  return "SLIDE_TRANSITION" === useAtomWithSubscription(iV).type;
 }
 var iG = iz;
 let iY = "slides_expandable_section--section--5Gnqz";
@@ -2830,20 +2830,20 @@ let i6 = new class {
     this.format = e => {
       switch (e) {
         case luZ.TRIGGER:
-          return _$$t("slides.properties_panel.object_animations.start_condition.trigger");
+          return getI18nString("slides.properties_panel.object_animations.start_condition.trigger");
         case luZ.AFTER_PREVIOUS:
-          return _$$t("slides.properties_panel.object_animations.start_condition.after_previous_short");
+          return getI18nString("slides.properties_panel.object_animations.start_condition.after_previous_short");
       }
     };
     this.formatExtended = e => {
       switch (e) {
         case luZ.TRIGGER:
           return {
-            text: _$$t("slides.properties_panel.object_animations.start_condition.trigger")
+            text: getI18nString("slides.properties_panel.object_animations.start_condition.trigger")
           };
         case luZ.AFTER_PREVIOUS:
           return {
-            text: _$$t("slides.properties_panel.object_animations.start_condition.after_previous")
+            text: getI18nString("slides.properties_panel.object_animations.start_condition.after_previous")
           };
       }
     };
@@ -2868,7 +2868,7 @@ function i8({
   if (void 0 === e) return null;
   let u = gl(e) ? i4 : i6.format(e);
   return jsx(_LabelInputRow, {
-    labelTx: _$$tx("slides.properties_panel.object_animations.animation_trigger"),
+    labelTx: renderI18nText("slides.properties_panel.object_animations.animation_trigger"),
     input: jsxs(_$$bL, {
       onChange: _$$nc.user("change-slides-animation-start-condition", d),
       value: u,
@@ -2876,16 +2876,16 @@ function i8({
       children: [jsx(_$$l4, {
         width: "fill",
         label: jsx(_$$h2, {
-          children: _$$t("slides.properties_panel.object_animations.animation_trigger")
+          children: getI18nString("slides.properties_panel.object_animations.animation_trigger")
         }),
-        children: gl(e) ? _$$t("common.mixed") : void 0
+        children: gl(e) ? getI18nString("common.mixed") : void 0
       }), jsxs(mc, {
         "data-testid": `slides-animation-trigger-control-select-${s}`,
         children: [gl(e) && jsxs(Fragment, {
           children: [jsx(c$, {
             value: i4,
             disabled: !0,
-            children: _$$t("common.mixed")
+            children: getI18nString("common.mixed")
           }), jsx(wv, {})]
         }), o.map(e => jsx(c$, {
           value: i6.format(e),
@@ -2956,13 +2956,13 @@ function nj({
 }) {
   let t = [{
     value: 0.2,
-    label: _$$t("slides.properties_panel.object_animations.duration.200ms")
+    label: getI18nString("slides.properties_panel.object_animations.duration.200ms")
   }, {
     value: 0.4,
-    label: _$$t("slides.properties_panel.object_animations.duration.400ms")
+    label: getI18nString("slides.properties_panel.object_animations.duration.400ms")
   }, {
     value: 0.6,
-    label: _$$t("slides.properties_panel.object_animations.duration.600ms")
+    label: getI18nString("slides.properties_panel.object_animations.duration.600ms")
   }];
   let i = useDispatch();
   let n = Um();
@@ -2973,7 +2973,7 @@ function nj({
   let a = A5("objectAnimationDuration");
   let o = xl();
   return void 0 === l ? null : jsx(_LabelInputRow2, {
-    labelTx: _$$tx("slides.properties_panel.object_animations.duration"),
+    labelTx: renderI18nText("slides.properties_panel.object_animations.duration"),
     input: jsx(_$$ow, {
       value: {
         select: SelectOverride,
@@ -2984,8 +2984,8 @@ function nj({
           chevron: _$$t2
         },
         children: jsx(W0, {
-          ariaLabel: _$$t("slides.properties_panel.slide_transition.duration"),
-          "data-tooltip": _$$t("slides.properties_panel.object_animations.duration"),
+          ariaLabel: getI18nString("slides.properties_panel.slide_transition.duration"),
+          "data-tooltip": getI18nString("slides.properties_panel.object_animations.duration"),
           "data-tooltip-type": Ib.TEXT,
           dispatch: i,
           dropdownShown: n,
@@ -3020,9 +3020,9 @@ let nT = new class {
     this.format = e => {
       switch (e) {
         case "IN":
-          return _$$t("slides.properties_panel.object_animations.animation_phase.in");
+          return getI18nString("slides.properties_panel.object_animations.animation_phase.in");
         case "OUT":
-          return _$$t("slides.properties_panel.object_animations.animation_phase.out");
+          return getI18nString("slides.properties_panel.object_animations.animation_phase.out");
       }
     };
   }
@@ -3033,7 +3033,7 @@ function nS({
   let [t, i] = _$$lJ("objectAnimationPhase");
   let n = _$$sQ();
   return t ? jsx(_LabelInputRow3, {
-    labelTx: _$$tx("slides.properties_panel.object_animations.animation_phase"),
+    labelTx: renderI18nText("slides.properties_panel.object_animations.animation_phase"),
     input: jsx(_$$bL3, {
       value: hS(t) ? t : void 0,
       onChange: e => {
@@ -3042,7 +3042,7 @@ function nS({
       },
       recordingKey: e,
       legend: jsx(_$$q3, {
-        children: _$$tx("slides.properties_panel.object_animations.animation_phase")
+        children: renderI18nText("slides.properties_panel.object_animations.animation_phase")
       }),
       children: ["IN", "OUT"].map(e => jsx(RT, {
         value: e,
@@ -3087,17 +3087,17 @@ let nD = new class {
     this.format = e => {
       switch (e) {
         case "NONE":
-          return _$$t("slides.properties_panel.object_animations.animation_type.none");
+          return getI18nString("slides.properties_panel.object_animations.animation_type.none");
         case "SLIDE_FROM_BOTTOM":
-          return _$$t("slides.properties_panel.object_animations.animation_type.slide_up");
+          return getI18nString("slides.properties_panel.object_animations.animation_type.slide_up");
         case "SLIDE_FROM_TOP":
-          return _$$t("slides.properties_panel.object_animations.animation_type.slide_down");
+          return getI18nString("slides.properties_panel.object_animations.animation_type.slide_down");
         case "SLIDE_FROM_RIGHT":
-          return _$$t("slides.properties_panel.object_animations.animation_type.slide_left");
+          return getI18nString("slides.properties_panel.object_animations.animation_type.slide_left");
         case "SLIDE_FROM_LEFT":
-          return _$$t("slides.properties_panel.object_animations.animation_type.slide_right");
+          return getI18nString("slides.properties_panel.object_animations.animation_type.slide_right");
         case "FADE":
-          return _$$t("slides.properties_panel.object_animations.animation_type.fade");
+          return getI18nString("slides.properties_panel.object_animations.animation_type.fade");
       }
     };
   }
@@ -3137,7 +3137,7 @@ function nR({
     })
   })) ?? [];
   return jsx(_LabelInputRow4, {
-    labelTx: _$$tx("slides.properties_panel.object_animations.animation_type"),
+    labelTx: renderI18nText("slides.properties_panel.object_animations.animation_type"),
     input: jsxs(_$$bL, {
       onChange: e => {
         l(hS(i) ? i : void 0, e);
@@ -3150,15 +3150,15 @@ function nR({
         width: "fill",
         size: "md",
         label: jsx(_$$h2, {
-          children: _$$t("slides.properties_panel.object_animations.animation_type")
+          children: getI18nString("slides.properties_panel.object_animations.animation_type")
         }),
-        children: gl(i) ? _$$t("common.mixed") : void 0
+        children: gl(i) ? getI18nString("common.mixed") : void 0
       }), jsxs(mc, {
         children: [gl(i) && jsxs(Fragment, {
           children: [jsx(c$, {
             value: nP,
             disabled: !0,
-            children: _$$t("common.mixed")
+            children: getI18nString("common.mixed")
           }, nP), jsx(wv, {})]
         }), p.map(e => jsx(c$, {
           value: e.type,
@@ -3173,7 +3173,7 @@ let nF = new _$$ag(i5.SECONDS, 10);
 function nU() {
   return jsx("div", {
     className: "xilkfi8 x1cmmqis xuxw1ft",
-    children: _$$tx("slides.properties_panel.object_animations.badge.invalid")
+    children: renderI18nText("slides.properties_panel.object_animations.badge.invalid")
   });
 }
 function nV({
@@ -3280,7 +3280,7 @@ function n$({
         isInvalid: d
       }),
       title: v ?? "",
-      tooltip: d ? _$$t("slides.properties_panel.object_animations.icon.tooltip_invalid_animation") : void 0,
+      tooltip: d ? getI18nString("slides.properties_panel.object_animations.icon.tooltip_invalid_animation") : void 0,
       children: jsxs("div", {
         className: _$$s5.flex.flexColumn.px16.py8.$,
         children: [jsx(nR, {
@@ -3386,7 +3386,7 @@ function nB({
             recordingKey: m,
             icon: L,
             labelName: S ?? "",
-            "aria-label": _$$t("slides.properties_panel.object_animations.label.aria_label", {
+            "aria-label": getI18nString("slides.properties_panel.object_animations.label.aria_label", {
               nodeName: S ?? "",
               animationType: nD.format(e.action.animationType),
               animationDuration: nF.format(A)
@@ -3485,9 +3485,9 @@ function nH({
           let r = Gu(e.action.transitionNodeID);
           i && r && (l(), i.removeObjectAnimation(r), Y5.commit());
         }),
-        "aria-label": _$$t("slides.properties_panel.object_animations.delete_button.aria_label"),
+        "aria-label": getI18nString("slides.properties_panel.object_animations.delete_button.aria_label"),
         htmlAttributes: {
-          "data-tooltip": _$$t("slides.properties_panel.object_animations.delete_button.tooltip"),
+          "data-tooltip": getI18nString("slides.properties_panel.object_animations.delete_button.tooltip"),
           "data-tooltip-type": Ib.TEXT
         },
         recordingKey: i,
@@ -3553,7 +3553,7 @@ function nq({
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$t("slides.properties_panel.object_animations.multiedit_modal.title")
+          children: getI18nString("slides.properties_panel.object_animations.multiedit_modal.title")
         })
       }), jsx(_$$nB, {
         children: jsxs("div", {
@@ -3645,7 +3645,7 @@ function nW({
     if (!O) return;
     let i = e?.[0];
     if (1 !== e.length || !i || !uc(i)) {
-      x1("Slides reorder object animations", "onInsertItemsIn expected to be inserting a single action", {
+      logError("Slides reorder object animations", "onInsertItemsIn expected to be inserting a single action", {
         selectedValues: e
       }, {
         reportAsSentryError: !0
@@ -3653,7 +3653,7 @@ function nW({
       return;
     }
     if (!_$$eB(t)) {
-      x1("Slides reorder object animations", "onInsertItemsIn expected to be inserting into a section header item", {
+      logError("Slides reorder object animations", "onInsertItemsIn expected to be inserting into a section header item", {
         itemToInsertIn: t
       }, {
         reportAsSentryError: !0
@@ -3667,7 +3667,7 @@ function nW({
     if (!O) return;
     let n = e?.[0];
     if (1 !== e.length || !n || !uc(n)) {
-      x1("Slides reorder object animations", "onInsertItemsBetween expected to be inserting a single action", {
+      logError("Slides reorder object animations", "onInsertItemsBetween expected to be inserting a single action", {
         selectedValues: e
       }, {
         reportAsSentryError: !0
@@ -3790,7 +3790,7 @@ function nJ({
   let d = o.length;
   let u = d > 1 || 1 === d && Object.keys(s).length > 1 && !i;
   return jsxs(Wv, {
-    titleTx: _$$tx("slides.properties_panel.object_animations.panel_title"),
+    titleTx: renderI18nText("slides.properties_panel.object_animations.panel_title"),
     children: [u && jsx(nQ, {
       slideId: e,
       selectedGuids: o,
@@ -3827,9 +3827,9 @@ function nQ({
     Y5.commit();
   }, [a, e, t, i, s]);
   return jsx(_$$K3, {
-    "aria-label": _$$t("slides.properties_panel.object_animations.bulk_delete_button.aria_label"),
+    "aria-label": getI18nString("slides.properties_panel.object_animations.bulk_delete_button.aria_label"),
     htmlAttributes: {
-      "data-tooltip": _$$t("slides.properties_panel.object_animations.bulk_delete_button.tooltip"),
+      "data-tooltip": getI18nString("slides.properties_panel.object_animations.bulk_delete_button.tooltip"),
       "data-tooltip-type": Ib.TEXT
     },
     onClick: _$$nc.user("delete-selected-slide-object-animations", o),
@@ -3850,9 +3850,9 @@ function nX({
     n(i);
   }, [e, i, n]);
   return jsx(_$$K3, {
-    "aria-label": _$$t("slides.properties_panel.object_animations.play_button.aria_label"),
+    "aria-label": getI18nString("slides.properties_panel.object_animations.play_button.aria_label"),
     htmlAttributes: {
-      "data-tooltip": _$$t("slides.properties_panel.object_animations.play_button.tooltip"),
+      "data-tooltip": getI18nString("slides.properties_panel.object_animations.play_button.tooltip"),
       "data-tooltip-type": Ib.TEXT
     },
     onClick: s,
@@ -3870,9 +3870,9 @@ function nZ({
   let a = _$$l5();
   let o = Object.keys(l).filter(e => !a.includes(e)).length;
   let d = useSelector(e => Yh(e.mirror.appModel, "add-slide-object-animation"));
-  t = d ? _$$t("slides.properties_panel.object_animations.plus_button.tooltip_valid_selection") : n ? _$$t("slides.properties_panel.object_animations.plus_button.tooltip_already_animated") : o > 0 ? 1 === o ? _$$t("slides.properties_panel.object_animations.plus_button.tooltip_animation_unsupported_singular") : _$$t("slides.properties_panel.object_animations.plus_button.tooltip_animation_unsupported_multiple") : _$$t("slides.properties_panel.object_animations.plus_button.tooltip_invalid_selection");
+  t = d ? getI18nString("slides.properties_panel.object_animations.plus_button.tooltip_valid_selection") : n ? getI18nString("slides.properties_panel.object_animations.plus_button.tooltip_already_animated") : o > 0 ? 1 === o ? getI18nString("slides.properties_panel.object_animations.plus_button.tooltip_animation_unsupported_singular") : getI18nString("slides.properties_panel.object_animations.plus_button.tooltip_animation_unsupported_multiple") : getI18nString("slides.properties_panel.object_animations.plus_button.tooltip_invalid_selection");
   return jsx(_$$K3, {
-    "aria-label": _$$t("slides.properties_panel.object_animations.plus_button.aria_label"),
+    "aria-label": getI18nString("slides.properties_panel.object_animations.plus_button.aria_label"),
     htmlAttributes: {
       "data-tooltip": t,
       "data-tooltip-type": Ib.TEXT,
@@ -3892,7 +3892,7 @@ function n0() {
     className: _$$s5.pl16.relative.$,
     children: jsx("p", {
       className: _$$s5.textBodyMedium.colorTextSecondary.alignLeft.py8.$,
-      children: _$$t("slides.properties_panel.object_animations.empty_state_text")
+      children: getI18nString("slides.properties_panel.object_animations.empty_state_text")
     })
   });
 }
@@ -3972,7 +3972,7 @@ function n3(e) {
 function ra() {
   let e = ut(Ez5?.canvasGrid().canvasGridArray, []);
   let t = ut(Ez5?.slideThumbnailEdits(), new Map());
-  let i = md(uY);
+  let i = useAtomWithSubscription(uY);
   let n = _$$ie();
   let {
     width,
@@ -4028,7 +4028,7 @@ function rh({
       }),
       iconPrefix: jsx(_$$H3, {}),
       variant: "ghost",
-      children: _$$t("fullscreen.context_menu.ungroup")
+      children: getI18nString("fullscreen.context_menu.ungroup")
     })
   }) : null;
 }
@@ -4075,7 +4075,7 @@ function rR() {
   let t = J3();
   let i = _$$JU(t);
   let n = _$$r3(uM);
-  let a = md(n);
+  let a = useAtomWithSubscription(n);
   let o = jY();
   let {
     show,
@@ -4131,7 +4131,7 @@ function rM({
       style: {
         whiteSpace: "pre-line"
       },
-      children: _$$tx("slides.onboarding.template_preview.description")
+      children: renderI18nText("slides.onboarding.template_preview.description")
     }),
     disableHighlight: !0,
     hideCloseButton: !1,
@@ -4140,13 +4140,13 @@ function rM({
     onTargetLost: t,
     primaryCta: {
       type: "button",
-      label: l > 1 ? _$$tx("general.next") : _$$tx("general.done"),
+      label: l > 1 ? renderI18nText("general.next") : renderI18nText("general.done"),
       onClick: () => {
         l > 1 ? (a(j7({
           type: _$$eg,
           data: {
             targetRect: o,
-            activatePathOnMount: [_$$t("tile.dropdown.publish_as_template")]
+            activatePathOnMount: [getI18nString("tile.dropdown.publish_as_template")]
           }
         })), e()) : t();
       },
@@ -4157,7 +4157,7 @@ function rM({
       totalNumSteps: l
     },
     targetKey: R4,
-    title: _$$tx("slides.onboarding.template_preview.title"),
+    title: renderI18nText("slides.onboarding.template_preview.title"),
     trackingContextName: "SlidesTemplateOnboarding > TemplateImportedStep"
   });
 }
@@ -4176,7 +4176,7 @@ function rF({
       style: {
         whiteSpace: "pre-line"
       },
-      children: _$$tx("slides.onboarding.template_publish.description")
+      children: renderI18nText("slides.onboarding.template_publish.description")
     }),
     disableHighlight: !0,
     hideCloseButton: !1,
@@ -4185,7 +4185,7 @@ function rF({
     onTargetLost: t,
     primaryCta: {
       type: "button",
-      label: _$$tx("general.done"),
+      label: renderI18nText("general.done"),
       onClick: e,
       ctaTrackingDescriptor: _$$c2.NEXT
     },
@@ -4194,7 +4194,7 @@ function rF({
       totalNumSteps: l
     },
     targetKey: w1,
-    title: _$$tx("slides.onboarding.template_publish.title"),
+    title: renderI18nText("slides.onboarding.template_publish.title"),
     trackingContextName: "SlidesTemplateOnboarding > TemplatePublishStep",
     zIndex: _$$R.MODAL
   });
@@ -4361,7 +4361,7 @@ function lT({
   let [o] = DF();
   let [d, u] = useState(!1);
   return jsxs("section", {
-    "aria-label": _$$t("slides.speaker_notes.title"),
+    "aria-label": getI18nString("slides.speaker_notes.title"),
     className: "speaker_notes_lexical_editor--editableWrapper--N5dWt",
     children: [n && jsx(_$$E, {
       ref: a,
@@ -4369,7 +4369,7 @@ function lT({
       onClick: e => {
         d || (e.preventDefault(), u(!0), o.focus());
       },
-      children: _$$t("slides.speaker_notes.button")
+      children: getI18nString("slides.speaker_notes.button")
     }), jsx(_$$a2, {
       tabIndex: n ? d ? 0 : -1 : 0,
       className: iG()(ly, e),
@@ -4378,7 +4378,7 @@ function lT({
       onKeyDown: e => {
         "Escape" === e.key && d && (u(!1), a.current?.focus());
       },
-      "aria-placeholder": _$$t("slides.speaker_notes.placeholder"),
+      "aria-placeholder": getI18nString("slides.speaker_notes.placeholder"),
       placeholder: s
     })]
   });
@@ -4392,7 +4392,7 @@ function lS({
   let r = _$$k6();
   useEffect(() => {
     let e = n.registerEditableListener(e => {
-      e === i || r || x1(_$$e2.SLIDES, "lexical_editor_editable_mismatch", {
+      e === i || r || logError(_$$e2.SLIDES, "lexical_editor_editable_mismatch", {
         expectedIsEditable: i,
         actualIsEditable: e
       });
@@ -4413,7 +4413,7 @@ function lI({
   return jsx(_$$E3, {
     children: jsx(_$$E, {
       onClick: e,
-      children: _$$t("slides.toolbar.show_presenter_notes")
+      children: getI18nString("slides.toolbar.show_presenter_notes")
     })
   });
 }
@@ -4437,7 +4437,7 @@ function lN({
       try {
         t.setEditorState(t.parseEditorState(r));
       } catch (e) {
-        $D(_$$e2.SLIDES, Error("Speaker notes crash"), {
+        reportError(_$$e2.SLIDES, Error("Speaker notes crash"), {
           extra: {
             error: e
           }
@@ -4540,17 +4540,17 @@ function lk({
           role: "separator",
           "aria-orientation": "horizontal",
           "aria-valuenow": I,
-          "aria-valuetext": _$$t("slides.speaker_notes.size", {
+          "aria-valuetext": getI18nString("slides.speaker_notes.size", {
             percentValue: I
           }),
-          "aria-label": _$$t("slides.speaker_notes.drag_handle_label"),
+          "aria-label": getI18nString("slides.speaker_notes.drag_handle_label"),
           className: "speaker_notes_overlay--dragHandleSeparator---EdOi",
           "data-fullscreen-intercept": getFeatureFlags().slides_a11y,
           children: jsx("div", {
             className: "speaker_notes_overlay--dragHandleHoverOverlay--jNQh3",
             children: jsx("p", {
               className: "speaker_notes_overlay--dragHandleText--kGSNu",
-              children: _$$t("slides.toolbar.show_presenter_notes")
+              children: getI18nString("slides.toolbar.show_presenter_notes")
             })
           })
         })]
@@ -4596,7 +4596,7 @@ function lC({
       let i = JSON.parse(getSingletonSceneGraph().get(e)?.slideSpeakerNotes || lj);
       rQ()(i, t) || (_$$l3.user("set-slide-speaker-notes", () => {
         _$$lq(e, JSON.stringify(t));
-      }), _$$az.trackDefinedEvent("slides.presentation_mode.speaker_notes_inserted", {
+      }), analyticsEventManager.trackDefinedEvent("slides.presentation_mode.speaker_notes_inserted", {
         slideId: e,
         fileKey: n,
         productType: "slides"
@@ -4625,7 +4625,7 @@ function lw({
   let n = _$$k6();
   let s = () => {
     let e = _$$f.EDITOR_PLACEHOLDER;
-    zl.set(zF, e);
+    atomStoreManager.set(zF, e);
     B3(JT.SLIDES_GENERATE_SPEAKER_NOTES);
     Ag(JT.SLIDES_GENERATE_SPEAKER_NOTES, _$$O, {
       source: e
@@ -4633,10 +4633,10 @@ function lw({
   };
   let a = useMemo(() => e && isSlidesAiEnabled && i && !n ? jsxs("div", {
     className: _$$s5.flex.justifyBetween.$,
-    children: [_$$t("slides.speaker_notes.placeholder"), jsxs(_$$E, {
+    children: [getI18nString("slides.speaker_notes.placeholder"), jsxs(_$$E, {
       className: "speaker_notes_overlay--generateButton--OoZBZ",
       onClick: () => s(),
-      children: [jsx(_$$B2, {}), _$$t("slides.speaker_notes.draft"), jsx("div", {
+      children: [jsx(_$$B2, {}), getI18nString("slides.speaker_notes.draft"), jsx("div", {
         className: _$$s5.ml4.$,
         children: jsx(_$$y, {
           variant: _$$x3.SLIDES_SPEAKER_NOTES,
@@ -4648,8 +4648,8 @@ function lw({
     className: _$$s5.flex.gap8.$,
     children: [jsx(kt, {
       size: "small"
-    }), _$$t("slides.speaker_notes.loading")]
-  }) : e ? _$$t("slides.speaker_notes.placeholder") : _$$t("slides.speaker_notes.no-notes-placeholder"), [e, isSlidesAiEnabled, i, n]);
+    }), getI18nString("slides.speaker_notes.loading")]
+  }) : e ? getI18nString("slides.speaker_notes.placeholder") : getI18nString("slides.speaker_notes.no-notes-placeholder"), [e, isSlidesAiEnabled, i, n]);
   return jsx("div", {
     className: "speaker_notes_overlay--placeholder--8XzW-",
     children: a
@@ -5020,7 +5020,7 @@ function sg({
           chevron: _$$t2
         },
         children: jsx(W0, {
-          "data-tooltip": _$$t("slides.properties_panel.slide_transition.delay"),
+          "data-tooltip": getI18nString("slides.properties_panel.slide_transition.delay"),
           "data-tooltip-type": Ib.TEXT,
           dispatch: i,
           dropdownShown: n,
@@ -5063,8 +5063,8 @@ function sb({
           chevron: _$$t2
         },
         children: jsx(W0, {
-          ariaLabel: _$$t("slides.properties_panel.slide_transition.duration"),
-          "data-tooltip": _$$t("slides.properties_panel.slide_transition.duration"),
+          ariaLabel: getI18nString("slides.properties_panel.slide_transition.duration"),
+          "data-tooltip": getI18nString("slides.properties_panel.slide_transition.duration"),
           "data-tooltip-type": Ib.TEXT,
           disabled: st(t),
           dispatch: n,
@@ -5101,7 +5101,7 @@ function sT({
       recordingKey: i,
       children: [jsx(_$$l4, {
         label: jsx(_$$h2, {
-          children: _$$tx("slides.properties_panel.slide_transition.curve")
+          children: renderI18nText("slides.properties_panel.slide_transition.curve")
         }),
         width: "fill",
         size: "md"
@@ -5135,7 +5135,7 @@ function sN({
       recordingKey: i,
       children: [jsx(_$$l4, {
         label: jsx(_$$h2, {
-          children: _$$tx("slides.properties_panel.slide_transition.style")
+          children: renderI18nText("slides.properties_panel.slide_transition.style")
         }),
         width: "fill",
         size: "md"
@@ -5174,7 +5174,7 @@ function sO({
     recordingKey: i,
     children: [jsx(_$$l4, {
       label: jsx(_$$h2, {
-        children: _$$t("slides.properties_panel.slide_transition.timing")
+        children: getI18nString("slides.properties_panel.slide_transition.timing")
       }),
       width: "fill",
       size: "md",
@@ -5203,9 +5203,9 @@ function sP({
       eventListeners: ["onPointerDown", "onMouseDown"],
       children: jsx(_$$K3, {
         onClick: e,
-        "aria-label": _$$t("slides.properties_panel.slide_transitions.delete_button.aria_label"),
+        "aria-label": getI18nString("slides.properties_panel.slide_transitions.delete_button.aria_label"),
         htmlAttributes: {
-          "data-tooltip": _$$t("slides.properties_panel.slide_transitions.delete_button.tooltip"),
+          "data-tooltip": getI18nString("slides.properties_panel.slide_transitions.delete_button.tooltip"),
           "data-tooltip-type": Ib.TEXT
         },
         recordingKey: Pt(t, "deleteButton"),
@@ -5247,7 +5247,7 @@ function sR({
     name: "slides_transition_panel",
     children: jsxs(_$$tR, {
       children: [jsx(Uz, {
-        titleTx: _$$tx("slides.properties_panel.transition_panel.slide")
+        titleTx: renderI18nText("slides.properties_panel.transition_panel.slide")
       }), getFeatureFlags().slides_a11y_animation_panel ? jsx(sM, {
         appliedProperties: n,
         selectedSlideGuids: t,
@@ -5295,7 +5295,7 @@ function sM({
           icon: jsx(_$$l8, {}),
           labelName: sS.format(e.behavior),
           recordingKey: i,
-          "aria-label": _$$t("slides.properties_panel.slide_transitions.label.aria_label", {
+          "aria-label": getI18nString("slides.properties_panel.slide_transitions.label.aria_label", {
             transitionBehavior: sS.format(e.behavior),
             animationDuration: nF.format(e.duration)
           })
@@ -5385,7 +5385,7 @@ function sU({
     className: "slides_transition_panel--controlContainer--0Qihw",
     children: [jsxs(sV, {
       children: [jsx(LabelInputRow, {
-        labelTx: _$$tx("slides.properties_panel.slide_transition.style"),
+        labelTx: renderI18nText("slides.properties_panel.slide_transition.style"),
         input: jsx(sN, {
           behavior: e.behavior,
           onChange: o,
@@ -5394,7 +5394,7 @@ function sU({
       }), _ && jsx(_$$E5, {
         name: "slide_transition_direction",
         children: jsx(LabelInputRow, {
-          labelTx: _$$tx("slides.properties_panel.slide_transition.direction"),
+          labelTx: renderI18nText("slides.properties_panel.slide_transition.direction"),
           input: jsx(_$$sP, {
             onChange: d,
             property: e.direction ?? null,
@@ -5403,14 +5403,14 @@ function sU({
         })
       }), g && jsxs(Fragment, {
         children: [jsx(LabelInputRow, {
-          labelTx: _$$tx("slides.properties_panel.slide_transition.curve"),
+          labelTx: renderI18nText("slides.properties_panel.slide_transition.curve"),
           input: jsx(sT, {
             easingType: e.easingType,
             onChange: x,
             recordingKey: Pt(i, "easingControl")
           })
         }), jsx(LabelInputRow, {
-          labelTx: _$$tx("slides.properties_panel.slide_transition.duration"),
+          labelTx: renderI18nText("slides.properties_panel.slide_transition.duration"),
           input: jsx(sb, {
             duration: e.duration,
             easingType: e.easingType,
@@ -5421,13 +5421,13 @@ function sU({
       })]
     }), g && jsxs(sV, {
       children: [jsx(LabelInputRow, {
-        labelTx: _$$tx("slides.properties_panel.slide_transition.timing"),
+        labelTx: renderI18nText("slides.properties_panel.slide_transition.timing"),
         input: jsx(sO, {
           triggerType: e.triggerType,
           onChange: h
         })
       }), y && jsx(LabelInputRow, {
-        labelTx: _$$tx("slides.properties_panel.slide_transition.delay"),
+        labelTx: renderI18nText("slides.properties_panel.slide_transition.delay"),
         input: jsx(sg, {
           delay: e.triggerDelay,
           onChange: m
@@ -5455,11 +5455,11 @@ function sU({
               Y5.commit();
             });
             l(_$$F.enqueue({
-              message: _$$t("slides.properties_panel.slide_transition.apply_all_slides_confirmation")
+              message: getI18nString("slides.properties_panel.slide_transition.apply_all_slides_confirmation")
             }));
           },
           recordingKey: Pt(i, "applyToAllButton"),
-          children: _$$tx("slides.properties_panel.slide_transition.apply_to_all")
+          children: renderI18nText("slides.properties_panel.slide_transition.apply_to_all")
         })
       })]
     })]
@@ -5515,11 +5515,11 @@ function as({
           onClick: () => {
             Y5.triggerActionInUserEditScope("insert-slide-numbers-all-slides");
             t(_$$F.enqueue({
-              message: _$$t("slides.properties_panel.slide_number.insert_all_slides_confirmation")
+              message: getI18nString("slides.properties_panel.slide_number.insert_all_slides_confirmation")
             }));
           },
           variant: "secondary",
-          children: _$$t("slides.properties_panel.slide_number.insert_all_slides")
+          children: getI18nString("slides.properties_panel.slide_number.insert_all_slides")
         })
       })]
     })
@@ -5532,7 +5532,7 @@ function aa({
   let i = Um();
   let [n, l] = _$$lJ("slideNumber");
   return jsx(No, {
-    label: _$$tx("slides.properties_panel.slide_number.slide_number_type"),
+    label: renderI18nText("slides.properties_panel.slide_number.slide_number_type"),
     input: jsx(_$$E5, {
       name: "slide_number_count_selector",
       children: jsxs(_$$l6, {
@@ -5558,16 +5558,16 @@ function aa({
 }
 let ao = {
   format: e => {
-    if (gl(e)) return _$$t("fullscreen.mixed");
+    if (gl(e)) return getI18nString("fullscreen.mixed");
     switch (e) {
       case "SLIDE":
       case "TOTAL_WITHIN_DECK":
-        return _$$t("slides.properties_panel.slide_number.deck");
+        return getI18nString("slides.properties_panel.slide_number.deck");
       case "TOTAL_WITHIN_SECTION":
       case "SUBSECTION":
-        return _$$t("slides.properties_panel.slide_number.subsection");
+        return getI18nString("slides.properties_panel.slide_number.subsection");
       default:
-        return _$$t("slides.properties_panel.slide_number.none");
+        return getI18nString("slides.properties_panel.slide_number.none");
     }
   }
 };
@@ -5576,12 +5576,12 @@ function ad({
 }) {
   let [t, i] = _$$lJ("slideNumber");
   return jsx(No, {
-    label: _$$tx("slides.properties_panel.slide_number.include_total"),
+    label: renderI18nText("slides.properties_panel.slide_number.include_total"),
     input: jsx(_$$E5, {
       name: "slide_number_include_total_switch",
       children: jsx(_$$d5, {
         label: jsx(_$$h2, {
-          children: _$$t("slides.properties_panel.slide_number.include_total")
+          children: getI18nString("slides.properties_panel.slide_number.include_total")
         }),
         checked: e,
         onChange: () => {
@@ -5619,7 +5619,7 @@ function ac({
     }, [t, e]);
     return {
       format: e => {
-        if (gl(e)) return _$$t("fullscreen.mixed");
+        if (gl(e)) return getI18nString("fullscreen.mixed");
         switch (e) {
           case "of":
           default:
@@ -5635,7 +5635,7 @@ function ac({
     };
   }(n);
   return jsx(No, {
-    label: _$$tx("slides.properties_panel.slide_number.format"),
+    label: renderI18nText("slides.properties_panel.slide_number.format"),
     input: jsx(_$$E5, {
       name: "slide_number_format_selector",
       children: jsxs(_$$l6, {
@@ -5677,9 +5677,9 @@ function ap({
       withTopPadding: !0,
       hideBorderBottom: !0,
       children: [n && jsx(_$$iz, {
-        label: _$$tx("slides.properties_panel.code_block_panel.language"),
+        label: renderI18nText("slides.properties_panel.code_block_panel.language"),
         input: jsx(_$$l6, {
-          "aria-label": _$$tx("slides.properties_panel.code_block_panel.language"),
+          "aria-label": renderI18nText("slides.properties_panel.code_block_panel.language"),
           id: "slide-code-block-language-select",
           property: n,
           onChange: l,
@@ -5694,9 +5694,9 @@ function ap({
           }, t))
         })
       }), a && jsx(_$$iz, {
-        label: _$$tx("slides.properties_panel.code_block_panel.color"),
+        label: renderI18nText("slides.properties_panel.code_block_panel.color"),
         input: jsx(_$$l6, {
-          "aria-label": _$$tx("slides.properties_panel.code_block_panel.color"),
+          "aria-label": renderI18nText("slides.properties_panel.code_block_panel.color"),
           id: "slide-code-block-theme-select",
           property: a,
           onChange: o,
@@ -5732,10 +5732,10 @@ function am({
     n && (n = n.filter(e => l.has(e)));
     let s = Ez5?.slideThemeLibBindings().swapSelectedSlidesToNewTheme(e, n || []);
     void 0 !== s && (s === qYO.NO_THEME_COLORS ? t(_$$F.enqueue({
-      message: _$$t("slides.properties_panel.theme.shuffle_no_change_visual_bell")
+      message: getI18nString("slides.properties_panel.theme.shuffle_no_change_visual_bell")
     })) : s === qYO.NONE_AVAILABLE && t(_$$F.enqueue({
-      message: _$$t("slides.properties_panel.theme.no_swap_available")
-    })), d && _$$az.trackDefinedEvent("slides.editor.theme_swap", {
+      message: getI18nString("slides.properties_panel.theme.no_swap_available")
+    })), d && analyticsEventManager.trackDefinedEvent("slides.editor.theme_swap", {
       fromThemeId: gl(i) ? "Mixed" : i,
       toThemeId: e,
       fileKey: d,
@@ -5753,7 +5753,7 @@ function am({
     name: "slides_theme_panel",
     children: jsxs(Zk, {
       children: [jsx(_$$r, {
-        titleTx: _$$tx("slides.properties_panel.theme.panel_title")
+        titleTx: renderI18nText("slides.properties_panel.theme.panel_title")
       }), jsx("div", {
         className: _$$s5.grid.px16.$,
         children: jsx(_$$n4, {
@@ -5787,7 +5787,7 @@ function a_({
   stylePickerShown: b
 }) {
   let E = useDispatch();
-  let v = md(_$$b4);
+  let v = useAtomWithSubscription(_$$b4);
   let T = qh();
   let S = hD();
   let I = So(y, !0);
@@ -5993,7 +5993,7 @@ function a_({
       children: () => jsx(_$$Q5, {
         allSavedPlugins: e.plugins,
         dispatch: E,
-        editorType: c?.editorType ? wN(c.editorType) : null,
+        editorType: c?.editorType ? mapFileTypeToEditorType(c.editorType) : null,
         localPlugins: l,
         numSelected: numSelected ?? 0,
         openFileKey: c?.key || null,
@@ -6026,7 +6026,7 @@ function ay({
   stylePickerShown: b
 }) {
   let E = useDispatch();
-  let [v, T] = fp(_$$b4);
+  let [v, T] = useAtomValueAndSetter(_$$b4);
   let S = _$$s("currentPage", "currentSelectedProperty");
   let I = qh();
   let N = So(y, !0);
@@ -6216,7 +6216,7 @@ function ay({
         children: () => jsx(_$$Q5, {
           allSavedPlugins: e.plugins,
           dispatch: E,
-          editorType: c?.editorType ? wN(c.editorType) : null,
+          editorType: c?.editorType ? mapFileTypeToEditorType(c.editorType) : null,
           localPlugins: l,
           numSelected: numSelected ?? 0,
           openFileKey: c?.key || null,
@@ -6231,7 +6231,7 @@ function ay({
       children: () => jsx(_$$Q5, {
         allSavedPlugins: e.plugins,
         dispatch: E,
-        editorType: c?.editorType ? wN(c.editorType) : null,
+        editorType: c?.editorType ? mapFileTypeToEditorType(c.editorType) : null,
         localPlugins: l,
         numSelected: numSelected ?? 0,
         openFileKey: c?.key || null,
@@ -6244,13 +6244,13 @@ function ay({
   });
 }
 function af(e) {
-  let t = md(_$$b4);
+  let t = useAtomWithSubscription(_$$b4);
   let i = zp();
   let n = _$$u3();
   useEffect(() => {
-    if (Im(e.shownPanels) || Object.keys(e.shownPanels).every(t => !e.shownPanels[parseInt(t)])) {
+    if (isEmptyObject(e.shownPanels) || Object.keys(e.shownPanels).every(t => !e.shownPanels[parseInt(t)])) {
       let e = Error("Rendering SlidesPropertiesPanel design tab with no shownPanels");
-      $D(_$$e2.SLIDES, e, {
+      reportError(_$$e2.SLIDES, e, {
         extra: {
           selectionCount: n.count,
           selectionNodeType: n.nodeType
@@ -6364,7 +6364,7 @@ function oN({
       children: jsxs(vo, {
         children: [jsx(Y9, {
           children: jsx(hE, {
-            children: _$$t("design_systems.create_style.text")
+            children: getI18nString("design_systems.create_style.text")
           })
         }), jsxs(_$$nB, {
           padding: 0,
@@ -6378,7 +6378,7 @@ function oN({
             onEnterPressed: j
           }), !styleRef && jsx("div", {
             className: _$$s5.pl16.pr16.pt16.$,
-            children: _$$tx("design_systems.create_style.an_error_occurred_while_creating_the_style")
+            children: renderI18nText("design_systems.create_style.an_error_occurred_while_creating_the_style")
           }), jsx(AutoLayout, {
             horizontalAlignItems: p.current ? void 0 : "end",
             verticalAlignItems: "center",
@@ -6389,12 +6389,12 @@ function oN({
                 variant: "secondary",
                 onClick: () => h(!x),
                 recordingKey: Pt(t, "showHideOptionsButton"),
-                children: x ? _$$tx("design_systems.create_style.hide_options") : _$$tx("design_systems.create_style.show_more_options")
+                children: x ? renderI18nText("design_systems.create_style.hide_options") : renderI18nText("design_systems.create_style.show_more_options")
               }), jsx($n, {
                 onClick: j,
                 disabled: !styleRef,
                 recordingKey: Pt(t, "createStyleButton"),
-                children: _$$tx("design_systems.create_style.create_style")
+                children: renderI18nText("design_systems.create_style.create_style")
               })]
             })
           })]
@@ -6434,7 +6434,7 @@ function oU({
       inheritStyleID: i,
       styleType: _$$s8.TEXT
     }), d && jsx(UP, {
-      customPickerTitle: _$$t("slides.properties_panel.library_text_styles"),
+      customPickerTitle: getI18nString("slides.properties_panel.library_text_styles"),
       hideBrowseLibraries: !getFeatureFlags().piper_style_libraries,
       hideCreateStyleButton: !0,
       hideLocalStyles: !0,
@@ -6470,7 +6470,7 @@ function oU({
             }));
           }
         },
-        "aria-label": _$$t("fullscreen.properties_panel.tooltip_applyStyles"),
+        "aria-label": getI18nString("fullscreen.properties_panel.tooltip_applyStyles"),
         recordingKey: Pt(l, "showStylesButton"),
         children: jsx(oM, {})
       })
@@ -6515,7 +6515,7 @@ function o$({
         className: "slides_text_style_dropdown_contents--dropdownHeader--m278H",
         children: [jsx("span", {
           className: _$$s5.flexGrow1.$,
-          children: _$$tx("slides.properties_panel.text_styles")
+          children: renderI18nText("slides.properties_panel.text_styles")
         }), jsx(oU, {
           parentRef: f,
           styleIdForText: t,
@@ -6524,7 +6524,7 @@ function o$({
           recordingKey: o
         }), jsx(_$$d6, {
           "aria-expanded": b,
-          "aria-label": _$$t("slides.properties_panel.text_style.create_new_style"),
+          "aria-label": getI18nString("slides.properties_panel.text_style.create_new_style"),
           onClick: () => {
             if (b) d(_$$sw());else if (f.current) {
               _$$l3.user("slides-create-style", () => {
@@ -6544,7 +6544,7 @@ function o$({
           disabled: !y,
           recordingKey: Pt(o, "addStyleButton"),
           htmlAttributes: {
-            "data-tooltip": _$$t("slides.properties_panel.text_style.create_new_style"),
+            "data-tooltip": getI18nString("slides.properties_panel.text_style.create_new_style"),
             "data-tooltip-type": Ib.TEXT
           },
           children: jsx(_$$e5, {})
@@ -6594,12 +6594,12 @@ function oB({
 }) {
   return jsx("span", {
     className: _$$s5.px8.colorTextSecondary.$,
-    children: e ? _$$tx("slides.properties_panel.text_style.deleted_theme") : _$$tx("slides.properties_panel.text_style.empty_styles", {
+    children: e ? renderI18nText("slides.properties_panel.text_style.deleted_theme") : renderI18nText("slides.properties_panel.text_style.empty_styles", {
       title: jsx("strong", {
-        children: _$$tx("slides.properties_panel.text_style.title_style")
+        children: renderI18nText("slides.properties_panel.text_style.title_style")
       }),
       body: jsx("strong", {
-        children: _$$tx("slides.properties_panel.text_style.body_style")
+        children: renderI18nText("slides.properties_panel.text_style.body_style")
       })
     })
   });
@@ -6654,7 +6654,7 @@ function oz({
         children: e.name
       }), y && jsx("span", {
         className: _$$s5.colorTextSecondary.pl2.$,
-        children: _$$tx("slides.properties_panel.text.style_description_font_size", {
+        children: renderI18nText("slides.properties_panel.text.style_description_font_size", {
           fontSize: z0(y)
         })
       })]
@@ -6664,7 +6664,7 @@ function oz({
     }), jsx("span", {
       className: E ? _$$s5.visible.$ : _$$s5.invisible.$,
       children: jsx(_$$d6, {
-        "aria-label": _$$t("slides.properties_panel.text_style.edit_text_style"),
+        "aria-label": getI18nString("slides.properties_panel.text_style.edit_text_style"),
         onClick: t => {
           if (b) m(_$$sw());else if (j.current) {
             glU?.selectStyleByGuid(e.node_id);
@@ -6690,10 +6690,10 @@ function oG({
   closePicker: i
 }) {
   let n = AH(E7(e?.key), E7(t));
-  let s = md(TN);
+  let s = useAtomWithSubscription(TN);
   let o = useMemo(() => {
     if (e?.node_id) for (let t of s) {
-      let i = zl.get(_$$i(t)).data;
+      let i = atomStoreManager.get(_$$i(t)).data;
       if (i && i.styleGUIDs.includes(e.node_id) && Ez5) return Ez5.slideThemeLibBindings().getThemeName(t);
     }
     return null;
@@ -6721,7 +6721,7 @@ function oH({
     className: _$$s5.pb4.$,
     children: [jsx("div", {
       className: oK,
-      children: _$$tx("slides.properties_panel.text_style.custom")
+      children: renderI18nText("slides.properties_panel.text_style.custom")
     }), jsxs(D8, {
       className: oV,
       onClick: e,
@@ -6740,11 +6740,11 @@ function oH({
           style: {
             paddingLeft: "3px"
           },
-          children: n && _$$tx("slides.properties_panel.text.style_description_font_size", {
+          children: n && renderI18nText("slides.properties_panel.text.style_description_font_size", {
             fontSize: z0(n)
           })
         })]
-      }) : _$$tx("slides.properties_panel.text_style.mixed")]
+      }) : renderI18nText("slides.properties_panel.text_style.mixed")]
     })]
   });
 }
@@ -6806,7 +6806,7 @@ function oW({
   let u;
   let p = oJ(e);
   let x = oJ(n);
-  u = gl(t) ? _$$tx("slides.properties_panel.text_style.mixed") : e && !e.is_soft_deleted ? p ? jsx(oQ, {
+  u = gl(t) ? renderI18nText("slides.properties_panel.text_style.mixed") : e && !e.is_soft_deleted ? p ? jsx(oQ, {
     mainStyle: e,
     textPreviewColor: l
   }) : e.name : x ? jsxs(Fragment, {
@@ -6815,14 +6815,14 @@ function oW({
       textPreviewColor: l
     }), jsx("span", {
       className: _$$s5.pl4.colorTextSecondary.$,
-      children: _$$tx("slides.properties_panel.text_style.edited")
+      children: renderI18nText("slides.properties_panel.text_style.edited")
     })]
-  }) : _$$tx("design_systems.styles.custom");
+  }) : renderI18nText("design_systems.styles.custom");
   return jsxs("div", {
     children: [jsxs(_$$E, {
       htmlAttributes: {
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("slides.properties_panel.text_style.tooltip")
+        "data-tooltip": getI18nString("slides.properties_panel.text_style.tooltip")
       },
       recordingKey: d,
       className: iG()(_$$t3, _$$s5.relative.wFull.h40.py4.pl8.pr4.$, _$$s5.bRadius5.b1.bSolid.colorBorder.$, _$$s5.flex.itemsCenter.$),
@@ -6855,7 +6855,7 @@ function oQ({
   let i = _$$s6();
   let n = e.node_id;
   let s = Fk((e, t) => e.get(t)?.name ?? "", n);
-  let [a, o] = fp(q0);
+  let [a, o] = useAtomValueAndSetter(q0);
   let d = a[n];
   let c = k9(() => ({
     color: t,
@@ -6901,7 +6901,7 @@ function oX({
     fontStyle,
     fontSize,
     lineHeight
-  } = _$$R2(e => {
+  } = selectWithShallowEqual(e => {
     let t = e.mirror.selectionProperties;
     return {
       fontFamily: hS(t.fontFamily) && t.fontFamily ? t.fontFamily : "",
@@ -6975,7 +6975,7 @@ function o0({
     fontSize,
     lineHeight,
     letterSpacing
-  } = _$$R2(e => {
+  } = selectWithShallowEqual(e => {
     let t = e.mirror.selectionProperties;
     return {
       fontFamily: t.fontFamily,
@@ -6991,12 +6991,12 @@ function o0({
     e.isLocal && fontFamily && fontStyle && fontSize && lineHeight && letterSpacing && (i(AV({
       style: e,
       inheritStyleKeyField: "inheritTextStyleKey"
-    })), glU?.selectStyleByGuid(e.node_id), await yQ(), Y5.updateSelectionProperties({
+    })), glU?.selectStyleByGuid(e.node_id), await waitForAnimationFrame(), Y5.updateSelectionProperties({
       fontFamily
     }, {
       shouldCommit: zk.NO,
       editScopeType: zkO.USER
-    }), await yQ(), Y5.updateSelectionProperties({
+    }), await waitForAnimationFrame(), Y5.updateSelectionProperties({
       fontStyle,
       fontSize,
       lineHeight: TK(x, lineHeight),
@@ -7010,7 +7010,7 @@ function o0({
     variant: "primary",
     onClick: h,
     recordingKey: Pt(t, "saveButton"),
-    children: _$$tx("slides.properties_panel.text_style.save_button")
+    children: renderI18nText("slides.properties_panel.text_style.save_button")
   });
 }
 function o1({
@@ -7019,7 +7019,7 @@ function o1({
   let {
     inheritTextStyleKey,
     styleIdForText
-  } = _$$R2(e => ({
+  } = selectWithShallowEqual(e => ({
     inheritTextStyleKey: e.mirror.selectionProperties.inheritTextStyleKey || null,
     styleIdForText: e.mirror.selectionProperties.styleIdForText || null
   }));
@@ -7066,7 +7066,7 @@ function o1({
           variant: "secondary",
           onClick: () => p(!0),
           recordingKey: Pt(e, "showDetails"),
-          children: _$$tx("slides.properties_panel.text.show_details")
+          children: renderI18nText("slides.properties_panel.text.show_details")
         }),
         label: null
       })]
@@ -7197,9 +7197,9 @@ function o5({
   }) : null;
   return jsxs(Fragment, {
     children: [I, jsx(_$$g4, {
-      leftLabel: _$$tx("slides.properties_panel.text.weight_label"),
+      leftLabel: renderI18nText("slides.properties_panel.text.weight_label"),
       leftInput: N,
-      rightLabel: _$$tx("slides.properties_panel.text.font_size_label"),
+      rightLabel: renderI18nText("slides.properties_panel.text.font_size_label"),
       rightInput: k
     }), jsx(_$$g4, {
       ref: C,
@@ -7223,7 +7223,7 @@ function o2({
     isUnderline,
     isUnorderedList,
     fontFamily
-  } = _$$R2(e => ({
+  } = selectWithShallowEqual(e => ({
     isBold: _$$N4(e.mirror.selectionProperties.fontStyle?.toString() || ""),
     isItalic: o4(e.mirror.selectionProperties.fontStyle?.toString() || ""),
     isUnderline: "UNDERLINE" === e.mirror.selectionProperties.textDecoration,
@@ -7247,7 +7247,7 @@ function o2({
         icon: jsx(_$$j3, {
           color: isBold ? "var(--color-border-selected)" : void 0
         }),
-        tooltip: _$$t("slides.properties_panel.text.bold"),
+        tooltip: getI18nString("slides.properties_panel.text.bold"),
         trackingName: "slides_bold_button",
         recordingKey: Pt(t, "bold")
       }), jsx(o6, {
@@ -7259,7 +7259,7 @@ function o2({
         icon: jsx(_$$s7, {
           color: isItalic ? "var(--color-border-selected)" : void 0
         }),
-        tooltip: _$$t("slides.properties_panel.text.italic"),
+        tooltip: getI18nString("slides.properties_panel.text.italic"),
         trackingName: "slides_italic_button",
         recordingKey: Pt(t, "italic")
       }), jsx(o6, {
@@ -7271,7 +7271,7 @@ function o2({
         icon: jsx(_$$W5, {
           color: isUnderline ? "var(--color-border-selected)" : void 0
         }),
-        tooltip: _$$t("slides.properties_panel.text.underline"),
+        tooltip: getI18nString("slides.properties_panel.text.underline"),
         trackingName: "slides_underline_button",
         recordingKey: Pt(t, "underline")
       }), jsx(o6, {
@@ -7283,7 +7283,7 @@ function o2({
         icon: jsx(_$$Z5, {
           color: isUnorderedList ? "var(--color-border-selected)" : void 0
         }),
-        tooltip: _$$t("slides.properties_panel.text.unordered_list"),
+        tooltip: getI18nString("slides.properties_panel.text.unordered_list"),
         trackingName: "slides_unordered_list_button",
         recordingKey: Pt(t, "unorderedList")
       })]
@@ -7402,21 +7402,21 @@ function o9(e) {
     let t = _$$j2(e);
     if (t) return t;
   }
-  if (e.isSlideNumber) return _$$t("slides.properties_panel.slide_number.title");
+  if (e.isSlideNumber) return getI18nString("slides.properties_panel.slide_number.title");
   switch (e.type) {
     case "SLIDE":
-      return _$$Y3(e) && e.isSkippedSlide ? _$$t("fullscreen.properties_panel.layer_header.node_type_slide_skipped") : _$$t("fullscreen.properties_panel.layer_header.node_type_slide", {
+      return _$$Y3(e) && e.isSkippedSlide ? getI18nString("fullscreen.properties_panel.layer_header.node_type_slide_skipped") : getI18nString("fullscreen.properties_panel.layer_header.node_type_slide", {
         slideNumber: e.name
       });
     case "INTERACTIVE_SLIDE_ELEMENT":
-      if ("YOUTUBE" === e.interactiveSlideElementType) return _$$t("slides.flapp.embed.widget_youtube");
-      return _$$t("fullscreen.properties_panel.layer_header.node_type_interactive_slide_element");
+      if ("YOUTUBE" === e.interactiveSlideElementType) return getI18nString("slides.flapp.embed.widget_youtube");
+      return getI18nString("fullscreen.properties_panel.layer_header.node_type_interactive_slide_element");
     case "SHAPE_WITH_TEXT":
       return t.format(e.shapeWithTextType);
     case "FRAME":
-      if ("NONE" !== e.stackMode) return _$$t("fullscreen.properties_panel.layer_header.node_type_frame_auto_layout");
-      if (e.isGroup) return _$$t("fullscreen.properties_panel.layer_header.node_type_group");
-      return _$$t("fullscreen.properties_panel.layer_header.node_type_frame");
+      if ("NONE" !== e.stackMode) return getI18nString("fullscreen.properties_panel.layer_header.node_type_frame_auto_layout");
+      if (e.isGroup) return getI18nString("fullscreen.properties_panel.layer_header.node_type_group");
+      return getI18nString("fullscreen.properties_panel.layer_header.node_type_frame");
     default:
       return null;
   }
@@ -7472,7 +7472,7 @@ let dt = memo(() => {
         helpUrlVariant: JT.REMOVE_BACKGROUND
       }),
       isSelected: !1,
-      getTitle: () => _$$t("fullscreen_actions.remove_background"),
+      getTitle: () => getI18nString("fullscreen_actions.remove_background"),
       recordingKey: "removeBackground"
     };
   }();
@@ -7511,7 +7511,7 @@ let dt = memo(() => {
         helpUrlVariant: JT.UPSCALE_IMAGE
       }),
       isSelected: !1,
-      getTitle: () => _$$t("fullscreen_actions.upscale_image"),
+      getTitle: () => getI18nString("fullscreen_actions.upscale_image"),
       recordingKey: "upscaleImage"
     };
   }();
@@ -7536,7 +7536,7 @@ let dt = memo(() => {
         },
         icon: jsx(_$$V, {}),
         isSelected: !1,
-        getTitle: () => t.title ?? _$$t("slides.flapp.embed.widget_youtube"),
+        getTitle: () => t.title ?? getI18nString("slides.flapp.embed.widget_youtube"),
         recordingKey: "youtube"
       };
     }, [t]);
@@ -7553,7 +7553,7 @@ let dt = memo(() => {
         ref: j,
         className: Zp,
         children: jsx("span", {
-          children: _$$t("fullscreen.properties_panel.layer_header.node_type_multiple_selected", {
+          children: getI18nString("fullscreen.properties_panel.layer_header.node_type_multiple_selected", {
             count
           })
         })
@@ -7607,17 +7607,17 @@ function df({
     let d = useMemo(() => ({
       NONE: {
         value: void 0,
-        displayText: _$$t("slides.properties_panel.border_panel.style_none"),
+        displayText: getI18nString("slides.properties_panel.border_panel.style_none"),
         icon: jsx(_$$t4, {})
       },
       SOLID: {
         value: [],
-        displayText: _$$t("slides.properties_panel.border_panel.style_solid"),
+        displayText: getI18nString("slides.properties_panel.border_panel.style_solid"),
         icon: jsx(_$$y2, {})
       },
       DASHED_BIG: {
         value: [20, 24],
-        displayText: _$$t("slides.properties_panel.border_panel.style_dashed_big"),
+        displayText: getI18nString("slides.properties_panel.border_panel.style_dashed_big"),
         icon: jsx(_$$B6, {
           svg: _$$A0,
           className: _$$s5.colorIconSecondary.$
@@ -7625,7 +7625,7 @@ function df({
       },
       DASHED_SMALL: {
         value: [8, 10],
-        displayText: _$$t("slides.properties_panel.border_panel.style_dashed_small"),
+        displayText: getI18nString("slides.properties_panel.border_panel.style_dashed_small"),
         icon: jsx(_$$B6, {
           svg: _$$A1,
           className: _$$s5.colorIconSecondary.$
@@ -7691,7 +7691,7 @@ function df({
     name: "slides_border_panel",
     children: jsxs(_$$tR, {
       children: [jsx(_$$r, {
-        titleTx: _$$tx("slides.properties_panel.border_panel.title")
+        titleTx: renderI18nText("slides.properties_panel.border_panel.title")
       }), jsx(db, {
         selectedPreset,
         presets,
@@ -7699,7 +7699,7 @@ function df({
         onChange,
         recordingKey: e
       }), "NONE" !== selectedPreset && paint && jsx(_$$g4, {
-        leftLabel: _$$tx("slides.properties_panel.border_panel.color"),
+        leftLabel: renderI18nText("slides.properties_panel.border_panel.color"),
         leftInput: jsx(dE, {
           paint,
           onChange: _onChange2,
@@ -7708,7 +7708,7 @@ function df({
           inheritStyleId,
           recordingKey: e
         }),
-        rightLabel: _$$tx("slides.properties_panel.border_panel.width_slider_tooltip"),
+        rightLabel: renderI18nText("slides.properties_panel.border_panel.width_slider_tooltip"),
         rightInput: jsx(_$$E5, {
           name: "slides_corner_radius_dropdown",
           children: jsx(dv, {
@@ -7735,7 +7735,7 @@ function db({
   recordingKey: l
 }) {
   return jsx(_$$M, {
-    legend: _$$tx("slides.properties_panel.border_panel.legend"),
+    legend: renderI18nText("slides.properties_panel.border_panel.legend"),
     value: e,
     onChange: n,
     recordingKey: Pt(l, "borderStyle"),
@@ -7787,7 +7787,7 @@ function dv({
   return jsx(dT, {
     children: jsx(YZ, {
       bigNudgeAmount,
-      "data-tooltip": _$$t("slides.properties_panel.border_panel.width_slider_tooltip"),
+      "data-tooltip": getI18nString("slides.properties_panel.border_panel.width_slider_tooltip"),
       "data-tooltip-type": Ib.TEXT,
       dispatch: d,
       dropdownShown: u,
@@ -7840,7 +7840,7 @@ function dw({
   return Qr(Sqb.CORNER_RADIUS) ? jsx(_$$k7, {
     name: "slides_corner_panel",
     children: jsx(bz, {
-      titleTx: _$$tx("slides.properties_panel.corner"),
+      titleTx: renderI18nText("slides.properties_panel.corner"),
       input: jsx(_$$E5, {
         name: "slides_corner_radius_dropdown",
         children: jsx(dO, {
@@ -7883,7 +7883,7 @@ function dO({
         chevron: _$$t2
       },
       children: jsxs(YZ, {
-        "data-tooltip": _$$t("slides.properties_panel.corner_radius"),
+        "data-tooltip": getI18nString("slides.properties_panel.corner_radius"),
         "data-tooltip-type": Ib.TEXT,
         dispatch: n,
         dropdownShown: a,
@@ -7905,7 +7905,7 @@ function dO({
         }, `corner-radius-${e}`)), jsx(_$$sK, {}, "divider"), jsx(dN, {
           value: 1e6,
           recordingKey: Pt(t, "cornerRadius", "select", "circular"),
-          children: _$$tx("slides.properties_panel.corners_panel.circular")
+          children: renderI18nText("slides.properties_panel.corners_panel.circular")
         }, "corner-radius-circular")]
       })
     })
@@ -7976,7 +7976,7 @@ function dU({
     className: dM,
     children: [jsx("label", {
       id: u,
-      children: _$$tx("slides.properties_panel.embeddable_prototype.flow_label")
+      children: renderI18nText("slides.properties_panel.embeddable_prototype.flow_label")
     }), jsx(_$$E5, {
       name: "slide_embeddable_prototype_flow_selector",
       children: jsx(_$$l6, {
@@ -8021,12 +8021,12 @@ function dV({
         tooltip: e,
         children: e
       })
-    }) : _$$tx("slides.properties_panel.embeddable_prototype.default_title"),
+    }) : renderI18nText("slides.properties_panel.embeddable_prototype.default_title"),
     icon: jsx(_$$K3, {
-      "aria-label": _$$t("slides.properties_panel.embeddable_prototype.open_prototype_label"),
+      "aria-label": getI18nString("slides.properties_panel.embeddable_prototype.open_prototype_label"),
       onClick: n,
       htmlAttributes: {
-        "data-tooltip": _$$t("slides.properties_panel.embeddable_prototype.open_prototype_label"),
+        "data-tooltip": getI18nString("slides.properties_panel.embeddable_prototype.open_prototype_label"),
         "data-tooltip-type": "text"
       },
       children: jsx(_$$E6, {})
@@ -8040,12 +8040,12 @@ function dK({
   return jsxs("div", {
     className: dM,
     children: [jsx("label", {
-      children: _$$tx("slides.properties_panel.embeddable_prototype.device_frame_label")
+      children: renderI18nText("slides.properties_panel.embeddable_prototype.device_frame_label")
     }), jsx(_$$E5, {
       name: "slides_embeddable_prototype_device_frame_switch",
       children: jsx(_$$d5, {
         label: jsx(_$$h2, {
-          children: _$$t("slides.properties_panel.embeddable_prototype.device_frame_label")
+          children: getI18nString("slides.properties_panel.embeddable_prototype.device_frame_label")
         }),
         checked: e,
         onChange: t
@@ -8084,19 +8084,19 @@ function cr({
         onClick: o,
         ref: d,
         recordingKey: t,
-        "aria-label": _$$t("slides.properties_panel.blur.label"),
+        "aria-label": getI18nString("slides.properties_panel.blur.label"),
         children: jsxs("div", {
           className: _$$s5.inlineFlex.itemsCenter.$,
           children: [jsx(_$$V2, {}), jsx("div", {
             id: "flyout-label",
-            children: _$$tx("slides.properties_panel.blur.label")
+            children: renderI18nText("slides.properties_panel.blur.label")
           })]
         })
       })
     }), i && s && jsx("div", {
       ref: u,
       children: jsx(Ao, {
-        title: _$$t("slides.properties_panel.blur.title"),
+        title: getI18nString("slides.properties_panel.blur.title"),
         headerSize: "small",
         initialPosition: s,
         initialWidth: 240,
@@ -8122,14 +8122,14 @@ function cl({
   return jsx(_$$k7, {
     name: "slides_blur_controls",
     children: jsx(_$$K6, {
-      ariaLabel: _$$t("slides.properties_panel.blur.strength"),
+      ariaLabel: getI18nString("slides.properties_panel.blur.strength"),
       bigStep: 0.1,
       max: 1,
       min: 0,
       numberInput: jsx(_$$E5, {
         name: "slides_blur_strength_input",
         children: jsx(_$$Y8, {
-          "data-tooltip": _$$t("slides.properties_panel.blur.strength"),
+          "data-tooltip": getI18nString("slides.properties_panel.blur.strength"),
           value: gl(i) ? _$$oV : (i || 0) / 100,
           onValueChange: a,
           dispatch: t,
@@ -8264,7 +8264,7 @@ function co({
             recordingKey: Pt(n, "imageScaleMode"),
             children: [jsx(_$$l4, {
               label: jsx(_$$h2, {
-                children: _$$tx("slides.properties_panel.fill.fill_type_media.scale_options.legend")
+                children: renderI18nText("slides.properties_panel.fill.fill_type_media.scale_options.legend")
               }),
               width: "fill",
               size: "md"
@@ -8339,13 +8339,13 @@ function cd() {
         variant: "secondary",
         children: jsxs("span", {
           className: "x78zum5 x6s0dn4 xl56j7k",
-          children: [jsx(_$$A9, {}), _$$t("proto.prototype_panel.video_playback_settings")]
+          children: [jsx(_$$A9, {}), getI18nString("proto.prototype_panel.video_playback_settings")]
         })
       })
     }), jsx(_$$mc, {
       children: jsxs($Q, {
         title: jsx(_$$hE, {
-          children: _$$t("proto.prototype_panel.video_playback_settings")
+          children: getI18nString("proto.prototype_panel.video_playback_settings")
         }),
         onChange: e => {
           e.includes("mediaLoop") && !0 !== i ? Y5.updateSelectionProperties({
@@ -8372,16 +8372,16 @@ function cd() {
         selectedItems: o,
         children: [jsx(_$$a5, {
           value: "mediaLoop",
-          children: _$$t("proto.prototype_panel.loop")
+          children: getI18nString("proto.prototype_panel.loop")
         }), jsx(_$$a5, {
           value: "sound",
-          children: _$$t("proto.prototype_panel.play_sound")
+          children: getI18nString("proto.prototype_panel.play_sound")
         }), jsx(_$$a5, {
           value: "autoplay",
-          children: _$$t("proto.prototype_panel.autoplay")
+          children: getI18nString("proto.prototype_panel.autoplay")
         }), jsx(_$$a5, {
           value: "showControls",
-          children: _$$t("proto.prototype_panel.show_video_controls")
+          children: getI18nString("proto.prototype_panel.show_video_controls")
         })]
       })
     })]
@@ -8429,19 +8429,19 @@ function ch({
   let [h] = _$$lJ("styleIdForFill");
   let _ = useMemo(() => ({
     NONE: {
-      displayText: _$$t("slides.properties_panel.fill.fill_type_none"),
+      displayText: getI18nString("slides.properties_panel.fill.fill_type_none"),
       icon: jsx(_$$f3, {})
     },
     SOLID: {
-      displayText: _$$t("slides.properties_panel.fill.fill_type_solid"),
+      displayText: getI18nString("slides.properties_panel.fill.fill_type_solid"),
       icon: jsx(_$$H4, {})
     },
     GRADIENT: {
-      displayText: _$$t("slides.properties_panel.fill.fill_type_gradient"),
+      displayText: getI18nString("slides.properties_panel.fill.fill_type_gradient"),
       icon: jsx(_$$z3, {})
     },
     MEDIA: {
-      displayText: _$$t("slides.properties_panel.fill.fill_type_media"),
+      displayText: getI18nString("slides.properties_panel.fill.fill_type_media"),
       icon: jsx(_$$Z8, {})
     }
   }), []);
@@ -8467,13 +8467,13 @@ function ch({
       children: [jsx(_$$r, {
         titleTx: (() => {
           if (t) {
-            if (i) return _$$tx("slides.properties_panel.fill.slide_fill_title");
-            if (OU(t, ["TEXT"])) return _$$tx("slides.properties_panel.fill.text_fill_title");
+            if (i) return renderI18nText("slides.properties_panel.fill.slide_fill_title");
+            if (OU(t, ["TEXT"])) return renderI18nText("slides.properties_panel.fill.text_fill_title");
           }
-          return _$$tx("slides.properties_panel.fill.fill_title");
+          return renderI18nText("slides.properties_panel.fill.fill_title");
         })()
       }), jsx(_$$M, {
-        legend: _$$tx("slides.properties_panel.fill.legend"),
+        legend: renderI18nText("slides.properties_panel.fill.legend"),
         value: f,
         onChange: b,
         recordingKey: Pt(e, "fillType"),
@@ -8520,16 +8520,16 @@ function cf({
     if (null === i || "EMBED" === i) return;
     switch (i) {
       case "POLL":
-        t = _$$t("slides.flapp.embed.widget_poll");
+        t = getI18nString("slides.flapp.embed.widget_poll");
         break;
       case "FACEPILE":
-        t = _$$t("slides.flapp.embed.widget_stamps");
+        t = getI18nString("slides.flapp.embed.widget_stamps");
         break;
       case "ALIGNMENT":
-        t = _$$t("slides.flapp.embed.widget_alignment");
+        t = getI18nString("slides.flapp.embed.widget_alignment");
         break;
       case "YOUTUBE":
-        t = _$$t("slides.flapp.embed.widget_youtube");
+        t = getI18nString("slides.flapp.embed.widget_youtube");
     }
     let n = Object.keys(e.interactiveSlideParticipantData).length > 0;
     let r = e.interactiveSlideConfigData;
@@ -8588,10 +8588,10 @@ function cj() {
       className: _$$s5.colorBgSecondary.radiusMedium.p8.$,
       children: [jsx("div", {
         className: _$$s5.textBodyMediumStrong.colorText.pb4.$,
-        children: _$$tx("slides.properties_panel.interactive_widget.usage_guidance_header")
+        children: renderI18nText("slides.properties_panel.interactive_widget.usage_guidance_header")
       }), jsx("div", {
         className: _$$s5.textBodyMedium.colorTextTertiary.$,
-        children: _$$tx("slides.properties_panel.interactive_widget.usage_guidance_text")
+        children: renderI18nText("slides.properties_panel.interactive_widget.usage_guidance_text")
       })]
     })
   });
@@ -8607,7 +8607,7 @@ function cb({
   let s = useRef(null);
   return jsxs(Fragment, {
     children: [jsx(_$$K3, {
-      "aria-label": _$$t("slides.properties_panel.interactive_widget.reset_label"),
+      "aria-label": getI18nString("slides.properties_panel.interactive_widget.reset_label"),
       disabled: !e,
       onClick: () => toggle(),
       ref: s,
@@ -8617,10 +8617,10 @@ function cb({
       displayOverTarget: !0,
       children: [jsx(_$$c$3, {
         disabled: !0,
-        children: _$$tx("slides.properties_panel.interactive_widget.reset_confirmation_title")
+        children: renderI18nText("slides.properties_panel.interactive_widget.reset_confirmation_title")
       }), jsx(_$$c$3, {
         onClick: t,
-        children: _$$tx("slides.properties_panel.interactive_widget.confirm_reset_label")
+        children: renderI18nText("slides.properties_panel.interactive_widget.confirm_reset_label")
       })]
     })]
   });
@@ -8637,7 +8637,7 @@ function cv({
     className: dM,
     children: [jsx("label", {
       id: a,
-      children: _$$tx("slides.properties_panel.interactive_widget.theme_selector_label")
+      children: renderI18nText("slides.properties_panel.interactive_widget.theme_selector_label")
     }), jsx(_$$E5, {
       name: "slides_interactive_widget_theme_selector",
       children: jsxs(_$$l6, {
@@ -8664,11 +8664,11 @@ let cT = new class {
   format(e) {
     switch (e) {
       case Pm.Light:
-        return _$$t("slides.properties_panel.interactive_widget.light_theme_label");
+        return getI18nString("slides.properties_panel.interactive_widget.light_theme_label");
       case Pm.Dark:
-        return _$$t("slides.properties_panel.interactive_widget.dark_theme_label");
+        return getI18nString("slides.properties_panel.interactive_widget.dark_theme_label");
       case Pm.Translucent:
-        return _$$t("slides.properties_panel.interactive_widget.transparent_theme_label");
+        return getI18nString("slides.properties_panel.interactive_widget.transparent_theme_label");
     }
   }
 }();
@@ -8679,12 +8679,12 @@ function cS({
   return jsxs("div", {
     className: dM,
     children: [jsx("label", {
-      children: _$$tx("slides.properties_panel.interactive_widget.background_label")
+      children: renderI18nText("slides.properties_panel.interactive_widget.background_label")
     }), jsx(_$$E5, {
       name: "slides_interactive_widget_background_switch",
       children: jsx(_$$d5, {
         label: jsx(_$$h2, {
-          children: _$$t("slides.properties_panel.interactive_widget.background_label")
+          children: getI18nString("slides.properties_panel.interactive_widget.background_label")
         }),
         checked: e,
         onChange: t,
@@ -8717,11 +8717,11 @@ function cC({
   let h = useMemo(() => ({
     format: e => {
       if (null === e) return "";
-      if (gl(e)) return _$$t("fullscreen.mixed");
+      if (gl(e)) return getI18nString("fullscreen.mixed");
       if ("guid" === e.type) {
         let t = _$$dI(e.guid);
         let i = carouselItemsById[t]?.number;
-        return null == i ? _$$t("slides.properties_panel.link_panel.skipped_slide") : _$$t("slides.properties_panel.link_panel.slide_number", {
+        return null == i ? getI18nString("slides.properties_panel.link_panel.skipped_slide") : getI18nString("slides.properties_panel.link_panel.slide_number", {
           orderNum: i
         });
       }
@@ -8729,7 +8729,7 @@ function cC({
     },
     parse: e => {
       if (!e) return null;
-      let t = _$$t("slides.properties_panel.link_panel.slide_number", {
+      let t = getI18nString("slides.properties_panel.link_panel.slide_number", {
         orderNum: ""
       });
       let i = e.replace(t, "").trim();
@@ -8758,7 +8758,7 @@ function cC({
     name: "slides_link_panel",
     children: jsxs(_$$tR, {
       children: [jsx(_$$r, {
-        titleTx: _$$tx("slides.properties_panel.link_panel.title")
+        titleTx: renderI18nText("slides.properties_panel.link_panel.title")
       }), jsx(Ad, {
         input: jsx(_$$ow, {
           value: {
@@ -8779,7 +8779,7 @@ function cC({
               onChange: e => {
                 m(e);
               },
-              placeholder: _$$t("slides.properties_panel.link_panel.placeholder"),
+              placeholder: getI18nString("slides.properties_panel.link_panel.placeholder"),
               property: d,
               recordingKey: Pt(e, "link"),
               children: x.map(t => jsx(_$$c$, {
@@ -8816,7 +8816,7 @@ function cL({
   return jsx(_$$k7, {
     name: "slides_opacity_panel",
     children: jsx(bz, {
-      titleTx: _$$tx("slides.properties_panel.opacity"),
+      titleTx: renderI18nText("slides.properties_panel.opacity"),
       input: jsx(_$$E5, {
         name: "slides_opacity_dropdown",
         children: jsx(_$$ow, {
@@ -8829,7 +8829,7 @@ function cL({
               chevron: _$$t2
             },
             children: jsx(xW, {
-              "data-tooltip": _$$t("slides.properties_panel.opacity"),
+              "data-tooltip": getI18nString("slides.properties_panel.opacity"),
               "data-tooltip-type": Ib.TEXT,
               dispatch: t,
               dropdownShown: i,
@@ -9136,17 +9136,17 @@ let cK = memo(({
           ref: O
         }), !_$$T() && jsx(_$$m, {
           role: "region",
-          "aria-label": _$$t("fullscreen_actions.left_sidebar_label"),
+          "aria-label": getI18nString("fullscreen_actions.left_sidebar_label"),
           children: J ? jsx(_$$K2, {}) : jsx(SG, {})
         }), jsxs(_$$G, {
           children: [jsx(rB, {}), jsx(cU, {})]
         }), jsx(_$$m, {
           role: "region",
-          "aria-label": _$$t("fullscreen_actions.speaker_notes_overlay.aria_label"),
+          "aria-label": getI18nString("fullscreen_actions.speaker_notes_overlay.aria_label"),
           children: jsx(lO, {})
         }), e && jsx(X5, {})]
       }), jsx(_$$A, {
-        editorType: _$$nT.Slides,
+        editorType: FEditorType.Slides,
         openFile: A
       }), jsx(_$$l, {
         defaultViewTabsAvailable: !0,
@@ -9204,10 +9204,10 @@ function cB() {
 function cz() {
   !function () {
     let e = q5();
-    let t = md(_$$lu);
+    let t = useAtomWithSubscription(_$$lu);
     (function (e, t) {
       let i = e?.name || t?.name;
-      let n = !!i && i !== _$$t("fullscreen.filename_view.title_placeholder");
+      let n = !!i && i !== getI18nString("fullscreen.filename_view.title_placeholder");
       let r = useSelector(e => e.isRenaming);
       let o = useRef(n);
       let d = Fk(e => !!e.get(Ez5?.canvasGrid().gridGUID() || "-1:-1"));

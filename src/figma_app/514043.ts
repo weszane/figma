@@ -1,6 +1,6 @@
 import { getFeatureFlags } from "../905/601108";
 import { getInitialOptions } from "../figma_app/169182";
-import { us } from "../905/11";
+import { captureMessage } from "../905/11";
 import { D } from "../905/347702";
 let o = ["jpy", "usd", "gbp", "cad", "eur"];
 let $$l1 = D(() => {
@@ -21,7 +21,7 @@ export class $$d7 {
       gbp: "GBP",
       cad: "CAD"
     };
-    null === e && us("Currency should not be null. Defaulted to usd.");
+    null === e && captureMessage("Currency should not be null. Defaulted to usd.");
     this.currency = e ?? "usd";
     this.hasCents = "jpy" !== this.currency;
     this.locale = $$l1();

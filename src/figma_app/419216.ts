@@ -4,12 +4,12 @@ import { lQ } from "../905/934246";
 import { $n } from "../905/521428";
 import { J } from "../905/614223";
 import { AD } from "../905/871411";
-import { fp } from "../figma_app/27355";
+import { useAtomValueAndSetter } from "../figma_app/27355";
 import c from "classnames";
 import { parsePxInt } from "../figma_app/783094";
 import { ww } from "../figma_app/194956";
 import { pW } from "../905/160095";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { c as _$$c } from "../905/370443";
 import { $z, tf } from "../figma_app/831799";
 import { Yk } from "../figma_app/644079";
@@ -79,7 +79,7 @@ export function $$w0(e) {
     }));
   }, [e.height, e.width, o, e.alignPointerToLeft, e.alignPointerToTop, e.shouldCenterArrow, d, t, e.arrowPosition, r]);
   useEffect(() => {
-    let t = EE(`useCanvasNodeRepositioning-${e.targetKey}`, [e.targetKey], (e) => {
+    let t = EE(`useCanvasNodeRepositioning-${e.targetKey}`, [e.targetKey], e => {
       n.current = e.position;
       c();
     });
@@ -180,7 +180,7 @@ export function $$P4(e) {
   let l = e.onVisibilityChange;
   let d = e.setArrowPosition;
   let [c, p] = useState(0);
-  let _ = useCallback((e) => {
+  let _ = useCallback(e => {
     null !== e && p(e.getBoundingClientRect().height);
   }, []);
   let h = (e.isCanvasNode ? $$w0 : eP)({
@@ -234,7 +234,7 @@ export function $$P4(e) {
           children: jsx(Jn, {
             onClick: e.dismissModal,
             innerText: "close",
-            "aria-label": _$$t("general.close")
+            "aria-label": getI18nString("general.close")
           })
         })]
       })
@@ -251,7 +251,7 @@ export function $$D5(e) {
   let o = "dark" === DP();
   let l = "light" === e.background;
   let [d, c] = useState(0);
-  let p = useCallback((e) => {
+  let p = useCallback(e => {
     null !== e && c(e.getBoundingClientRect().height);
   }, []);
   let _ = eP({
@@ -273,7 +273,7 @@ export function $$D5(e) {
     children: jsx(Jn, {
       onClick: e.dismissModal,
       innerText: "close",
-      "aria-label": _$$t("general.close"),
+      "aria-label": getI18nString("general.close"),
       emphasized: !0
     })
   });
@@ -341,7 +341,7 @@ export function $$D5(e) {
 }
 export let $$k1 = forwardRef(function (e, t) {
   let [r, s] = useState(0);
-  let o = useCallback((e) => {
+  let o = useCallback(e => {
     null !== e && s(e.getBoundingClientRect().height);
     null != t && (t.current = e);
   }, [t]);
@@ -397,7 +397,7 @@ export let $$k1 = forwardRef(function (e, t) {
             e.dismissModal();
           },
           innerText: "close",
-          "aria-label": _$$t("general.close"),
+          "aria-label": getI18nString("general.close"),
           trackingProperties: {
             trackingDescriptor: _$$c.CLOSE_BUTTON
           }
@@ -410,7 +410,7 @@ export function $$M2({
   skipConnectorModal: e,
   shouldSkipConnectorModalAtom: t
 }) {
-  let [r, n] = fp(t);
+  let [r, n] = useAtomValueAndSetter(t);
   r && e && e();
   return {
     handleTargetLost: function (t, r) {

@@ -1,7 +1,7 @@
 import { h as _$$h, G } from "../905/706725";
 import { throwTypeError } from "../figma_app/465776";
-import { zl } from "../figma_app/27355";
-import { sx } from "../905/449184";
+import { atomStoreManager } from "../figma_app/27355";
+import { trackEventAnalytics } from "../905/449184";
 import { g as _$$g } from "../905/880308";
 import { Point } from "../905/736624";
 import { dd } from "../figma_app/604494";
@@ -154,7 +154,7 @@ export function $$x15(e) {
 export async function $$N7(e, t, r, l, c, u, p, _) {
   let h = _$$g();
   let m = Date.now();
-  let g = zl.get(dd);
+  let g = atomStoreManager.get(dd);
   let f = $$E9(t, g, h, e, !1, r, u);
   let y = "input-selection" === e.type ? function (e) {
     let t = e.editInfo;
@@ -171,7 +171,7 @@ export async function $$N7(e, t, r, l, c, u, p, _) {
     };
   }(e.node) : {};
   _$$h.setFragmentSearchLoading(h, e, l, u, c);
-  sx("Fragment search query", {
+  trackEventAnalytics("Fragment search query", {
     ...y,
     ...f
   }, {
@@ -205,11 +205,11 @@ export async function $$N7(e, t, r, l, c, u, p, _) {
       ...e,
       type: "fig-file-fragment"
     })), _$$h.getSearchId(u) !== h) return;
-    sx("Fragment search time to load", {
+    trackEventAnalytics("Fragment search time to load", {
       ...f,
       elapsed_time: Date.now() - m
     });
-    sx("Fragment search result", {
+    trackEventAnalytics("Fragment search result", {
       ...f,
       count: a.length
     });

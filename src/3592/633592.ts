@@ -19,10 +19,10 @@ import { T as _$$T } from "../7021/675372";
 import { V as _$$V } from "../905/802779";
 import { X as _$$X } from "../905/736922";
 import { getFeatureFlags } from "../905/601108";
-import { eU, E3, md, fp } from "../figma_app/27355";
+import { atom, createLocalStorageAtom, useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { n as _$$n } from "../draftjs_composer/589474";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t2 } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { H8 } from "../905/590952";
 import { uQ } from "../figma_app/311375";
 import { q5 } from "../figma_app/516028";
@@ -38,7 +38,7 @@ import { P as _$$P } from "../3592/617429";
 import { hB } from "../figma_app/609511";
 import { Ay } from "../figma_app/432652";
 import { xg, XT, Co, Yz } from "../figma_app/677646";
-let I = eU(`- IMPORTANT: Do not refactor or modify the code, unless following a specific instruction from Figma or the user.
+let I = atom(`- IMPORTANT: Do not refactor or modify the code, unless following a specific instruction from Figma or the user.
 - Remove node-id attributes from the code
 - Remove any data- attributes
 - Try to rename the App function to something related to the content
@@ -47,11 +47,11 @@ let I = eU(`- IMPORTANT: Do not refactor or modify the code, unless following a 
 - IMPORTANT: Do not extract any other elements to components or otherwise modify the code. Leave the code as-is unless the user instructs you otherwise.
 - Remove the span with tracking-[0px] around the last character of text
 - If the user supplies a Tailwind config, use the values from this instead of the raw custom values where appropriate`);
-let B = E3("dt_mlcg_user_system_prompt", "");
-let D = E3("dt_mlcg_figma_system_prompt_files", []);
-let L = E3("dt_mlcg_user_system_prompt_files", []);
-eU(!1);
-let X = eU(!1);
+let B = createLocalStorageAtom("dt_mlcg_user_system_prompt", "");
+let D = createLocalStorageAtom("dt_mlcg_figma_system_prompt_files", []);
+let L = createLocalStorageAtom("dt_mlcg_user_system_prompt_files", []);
+atom(!1);
+let X = atom(!1);
 let J = createContext(null);
 function W({
   children: e,
@@ -75,7 +75,7 @@ async function q(e, t) {
 }
 let K = "claude-3-5-sonnet-20240620";
 let Q = "anthropic";
-let Z = E3("dt_mlcg_refactor_codegen_with_prompts", !0);
+let Z = createLocalStorageAtom("dt_mlcg_refactor_codegen_with_prompts", !0);
 async function ee(e, t, s, n, r, o, i, a) {
   let {
     files
@@ -240,11 +240,11 @@ export function $$el0(e) {
       let [c, d] = useState({
         type: "none"
       });
-      let p = md(I);
-      let u = md(B);
-      let m = md(D);
-      let f = md(L);
-      let h = md(Z);
+      let p = useAtomWithSubscription(I);
+      let u = useAtomWithSubscription(B);
+      let m = useAtomWithSubscription(D);
+      let f = useAtomWithSubscription(L);
+      let h = useAtomWithSubscription(Z);
       let x = useRef(0);
       useEffect(() => {
         (async function () {
@@ -473,7 +473,7 @@ export default App
   let [l, c] = useState(0);
   let [d, p] = useState(400);
   let [u, m] = useState(500);
-  let [f, h] = fp(X);
+  let [f, h] = useAtomValueAndSetter(X);
   let x = useRef(null);
   return (useEffect(() => {
     if (!x.current || !x.current.children[0]) return;
@@ -519,7 +519,7 @@ export default App
   }) : null;
 }
 function ec() {
-  let e = q5()?.name || _$$t2("dev_handoff.dev_handoff_view_selector.untitled");
+  let e = q5()?.name || getI18nString("dev_handoff.dev_handoff_view_selector.untitled");
   let t = uQ();
   let s = Fk((e, t) => e?.get(t ?? "")?.name, t);
   return jsx(hE, {
@@ -559,10 +559,10 @@ function ep() {
       manager: s,
       children: [jsx(_$$t.Tab, {
         ...e.chat,
-        children: _$$t2("dev_handoff.mc.chat")
+        children: getI18nString("dev_handoff.mc.chat")
       }), jsx(_$$t.Tab, {
         ...e.prompts,
-        children: _$$t2("dev_handoff.mc.prompts")
+        children: getI18nString("dev_handoff.mc.prompts")
       })]
     }), jsx(_$$t.TabPanel, {
       ...t.chat,
@@ -618,7 +618,7 @@ function eu() {
         },
         children: [jsx("textarea", {
           className: _$$s.flexGrow1.resizeNone.minH64.flex.p8.$,
-          placeholder: _$$t2("dev_handoff.mc.chat_placeholder"),
+          placeholder: getI18nString("dev_handoff.mc.chat_placeholder"),
           onChange: e => {
             setInput(e.target.value);
           },
@@ -634,7 +634,7 @@ function eu() {
           },
           children: jsx(_$$K, {
             type: "submit",
-            "aria-label": _$$t2("dev_handoff.mc.chat_send"),
+            "aria-label": getI18nString("dev_handoff.mc.chat_send"),
             children: jsx(_$$W, {})
           })
         })]
@@ -643,11 +643,11 @@ function eu() {
   });
 }
 function em() {
-  let [e, t] = fp(Z);
-  let [s, o] = fp(I);
-  let [i, a] = fp(B);
-  let [l, c] = fp(D);
-  let [p, u] = fp(L);
+  let [e, t] = useAtomValueAndSetter(Z);
+  let [s, o] = useAtomValueAndSetter(I);
+  let [i, a] = useAtomValueAndSetter(B);
+  let [l, c] = useAtomValueAndSetter(D);
+  let [p, u] = useAtomValueAndSetter(L);
   let [m, f] = useState(s);
   let [h, x] = useState(i);
   let [g, y] = useState(l);
@@ -661,17 +661,17 @@ function em() {
         onChange: () => t(!e),
         label: jsx("label", {
           className: _$$s.fontSemiBold.$,
-          children: _$$t2("dev_handoff.mc.refactor_with_prompts")
+          children: getI18nString("dev_handoff.mc.refactor_with_prompts")
         })
       })
     }), jsxs("div", {
       className: _$$s.flex.flexColumn.flexGrow1.gap8.$,
       children: [jsx("label", {
         className: _$$s.fontSemiBold.$,
-        children: _$$t2("dev_handoff.mc.figma_system_prompt")
+        children: getI18nString("dev_handoff.mc.figma_system_prompt")
       }), jsx("textarea", {
         className: _$$s.flexGrow1.resizeNone.minH64.flex.p8.$,
-        placeholder: _$$t2("dev_handoff.mc.figma_system_prompt_placeholder"),
+        placeholder: getI18nString("dev_handoff.mc.figma_system_prompt_placeholder"),
         value: m,
         onChange: e => f(e.target.value)
       }), jsx(ef, {
@@ -682,10 +682,10 @@ function em() {
       className: _$$s.flex.flexColumn.flexGrow1.gap8.$,
       children: [jsx("label", {
         className: _$$s.fontSemiBold.$,
-        children: _$$t2("dev_handoff.mc.user_system_prompt")
+        children: getI18nString("dev_handoff.mc.user_system_prompt")
       }), jsx("textarea", {
         className: _$$s.flexGrow1.resizeNone.minH64.flex.p8.$,
-        placeholder: _$$t2("dev_handoff.mc.user_system_prompt_placeholder"),
+        placeholder: getI18nString("dev_handoff.mc.user_system_prompt_placeholder"),
         value: h,
         onChange: e => x(e.target.value)
       }), jsx(ef, {
@@ -700,7 +700,7 @@ function em() {
         c(g);
         u(b);
       },
-      children: _$$t2("dev_handoff.mc.regenerate")
+      children: getI18nString("dev_handoff.mc.regenerate")
     })]
   });
 }
@@ -712,7 +712,7 @@ function ef({
   return jsxs("div", {
     className: _$$s.flex.flexRow.gap8.$,
     children: [jsx(_$$n, {
-      svgAltText: _$$t2("dev_handoff.mc.upload_file"),
+      svgAltText: getI18nString("dev_handoff.mc.upload_file"),
       acceptedFileTypes: "*",
       isDisabled: !1,
       inputRef: s,
@@ -738,7 +738,7 @@ function ef({
         };
       },
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": _$$t2("dev_handoff.mc.upload_file"),
+      "data-tooltip": getI18nString("dev_handoff.mc.upload_file"),
       children: jsx(_$$e, {})
     }), jsx("div", {
       className: _$$s.flex.flexRow.gap8.overflowAuto.$,
@@ -749,7 +749,7 @@ function ef({
           tabIndex: 0,
           className: _$$s.cursorPointer.$,
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": _$$t2("dev_handoff.mc.remove_file"),
+          "data-tooltip": getI18nString("dev_handoff.mc.remove_file"),
           onClick: () => t(e => e.filter((e, t) => t !== s)),
           children: jsx(_$$q2, {})
         })]
@@ -838,12 +838,12 @@ function eb({
       chat: _chat
     } = U();
     let t = Vr();
-    let s = md(Z);
-    let n = md(I);
-    let r = md(B);
-    let o = md(D);
-    let i = md(L);
-    let [, a] = fp(X);
+    let s = useAtomWithSubscription(Z);
+    let n = useAtomWithSubscription(I);
+    let r = useAtomWithSubscription(B);
+    let o = useAtomWithSubscription(D);
+    let i = useAtomWithSubscription(L);
+    let [, a] = useAtomValueAndSetter(X);
     return async function (l) {
       if ("refactor_props" === l.type) {
         _chat.setLastMessageActions([{
@@ -1004,7 +1004,7 @@ function eS() {
 function ew() {
   return jsxs("div", {
     className: _$$s.flex.itemsCenter.$,
-    children: [jsx(_$$V, {}), _$$t2("dev_handoff.mc.simple_components")]
+    children: [jsx(_$$V, {}), getI18nString("dev_handoff.mc.simple_components")]
   });
 }
 function ej() {
@@ -1015,7 +1015,7 @@ function ej() {
   let s = chat.codegen?.files[selectedFileIndex]?.contents;
   return jsx(_$$K, {
     disabled: chat.isLoading || !s,
-    "aria-label": _$$t2("dev_handoff.mc.copy"),
+    "aria-label": getI18nString("dev_handoff.mc.copy"),
     onClick: () => {
       s && navigator.clipboard.writeText(s);
     },
@@ -1121,7 +1121,7 @@ function eT() {
       style: {
         left: 8
       },
-      children: _$$t2("dev_handoff.mc.preview")
+      children: getI18nString("dev_handoff.mc.preview")
     }), jsx(eF, {})]
   });
 }
@@ -1138,13 +1138,13 @@ function eF() {
       manager: s,
       children: [jsx(_$$t.Tab, {
         ...e.sideBySide,
-        children: _$$t2("dev_handoff.mc.side_by_side")
+        children: getI18nString("dev_handoff.mc.side_by_side")
       }), jsx(_$$t.Tab, {
         ...e.overlay,
-        children: _$$t2("dev_handoff.mc.overlay")
+        children: getI18nString("dev_handoff.mc.overlay")
       }), jsx(_$$t.Tab, {
         ...e.diff,
-        children: _$$t2("dev_handoff.mc.diff")
+        children: getI18nString("dev_handoff.mc.diff")
       })]
     }), jsx(_$$t.TabPanel, {
       ...t.sideBySide,

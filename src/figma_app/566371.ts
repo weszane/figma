@@ -1,8 +1,8 @@
 import { useMemo, useLayoutEffect, useEffect, useRef } from "react";
-import { fp, eU, md, zl } from "../figma_app/27355";
+import { useAtomValueAndSetter, atom, useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import { wm } from "../905/19536";
 import { resourceUtils } from "../905/989992";
-import { WE } from "../905/607410";
+import { logErrorAndReturn } from "../905/607410";
 import { bu } from "../905/663269";
 import { k } from "../905/745286";
 import { GC, ff } from "../905/80725";
@@ -13,7 +13,7 @@ export function $$_2(e, t = {}) {
     let r;
     let a;
     let o = k(t) ? e : h;
-    [r, a] = fp(o);
+    [r, a] = useAtomValueAndSetter(o);
     k(t) || (r = resourceUtils.Paginated.disabled(), a = void 0);
     let l = useMemo(() => GC(a), [a]);
     return useMemo(() => [r, l], [r, l]);
@@ -21,7 +21,7 @@ export function $$_2(e, t = {}) {
     let r;
     let a;
     let o = k(t) ? e : h;
-    [r, a] = fp(o);
+    [r, a] = useAtomValueAndSetter(o);
     k(t) || (r = resourceUtils.disabledSuspendable({
       release: () => {}
     }), a = void 0);
@@ -32,23 +32,23 @@ export function $$_2(e, t = {}) {
     return useMemo(() => [r, l], [r, l]);
   }(e, t) : bu(e) ? m(gc(e.view)(e.args), t) : m(e, t);
 }
-let h = eU([null, null]);
+let h = atom([null, null]);
 function m(e, t) {
-  return k(t) ? [md(e), void 0] : (md(h), [resourceUtils.disabledSuspendable({
+  return k(t) ? [useAtomWithSubscription(e), void 0] : (useAtomWithSubscription(h), [resourceUtils.disabledSuspendable({
     release: () => {}
   }), void 0]);
 }
 export function $$g1(e, t = {}) {
   let r = k(t);
   let o = wm(() => e, [e]);
-  let l = useMemo(() => r ? eU(e => o.map(t => e(t))) : eU(() => o.map(() => resourceUtils.disabled())), [o, r]);
+  let l = useMemo(() => r ? atom(e => o.map(t => e(t))) : atom(() => o.map(() => resourceUtils.disabled())), [o, r]);
   useEffect(() => {
-    let e = zl.sub(l, () => {});
+    let e = atomStoreManager.sub(l, () => {});
     return () => {
       requestAnimationFrame(e);
     };
   }, [l]);
-  return md(l);
+  return useAtomWithSubscription(l);
 }
 let f = 0;
 setInterval(() => {
@@ -57,7 +57,7 @@ setInterval(() => {
 let $$E6 = function (...e) {
   let t = e.filter(e => "loading" === e.status).map(e => e.suspense);
   let r = e.filter(e => "loading" !== e.status).map(e => e.suspense);
-  t.length > 0 && (f++, t.forEach(e => e.retain()), WE(Promise.all(t.map(e => e.getPromise()))));
+  t.length > 0 && (f++, t.forEach(e => e.retain()), logErrorAndReturn(Promise.all(t.map(e => e.getPromise()))));
   useEffect(() => {
     r.forEach(e => e.release());
   }, [r]);
@@ -69,7 +69,7 @@ export function $$b4(e, t, r) {
   let a = r?.metricKey;
   let s = "loading" !== e.status;
   let l = "loaded" === e.status;
-  "loading" === e.status && "suspend" === t && (a && (r?.willSuspend(), y[a] = performance.now()), e.suspense.retain(), WE(e.suspense.getPromise()));
+  "loading" === e.status && "suspend" === t && (a && (r?.willSuspend(), y[a] = performance.now()), e.suspense.retain(), logErrorAndReturn(e.suspense.getPromise()));
   useEffect(() => {
     s && e.suspense.release();
   }, [s, e.suspense]);
@@ -91,14 +91,14 @@ export function $$T0(e, t) {
 }
 export function $$I7(e, t) {
   let r = t?.enabled;
-  let n = md(e);
+  let n = useAtomWithSubscription(e);
   if (!1 !== r) return n;
 }
 export function $$S5(e, t) {
   return $$I7(e, t)?.mutate;
 }
 export function $$v3(e) {
-  return t => zl.set(e, [t]);
+  return t => atomStoreManager.set(e, [t]);
 }
 export const DC = $$T0;
 export const En = $$g1;

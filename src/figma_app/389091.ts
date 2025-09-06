@@ -3,14 +3,14 @@ import { h3O } from "../figma_app/763686";
 import { NC } from "../905/17179";
 import { k } from "../905/651849";
 import { getInitialOptions } from "../figma_app/169182";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { ds } from "../figma_app/314264";
 import { d1 } from "../905/766303";
 import { L8 } from "../905/760074";
 import { hL } from "../905/697795";
 import { d1 as _$$d } from "../figma_app/603466";
-import { wN } from "../figma_app/53721";
+import { mapFileTypeToEditorType } from "../figma_app/53721";
 import { N as _$$N } from "../905/949295";
 import { a as _$$a } from "../905/870666";
 import { ym, qV as _$$qV } from "../figma_app/818609";
@@ -31,7 +31,7 @@ export function $$v43(e, t, r) {
     let n = YI((t - r) / 60);
     return `${n}:${YI(r)}`;
   }(r), `${n} \u2013 `) : "";
-  hL(i, wN(e.editor_type), a);
+  hL(i, mapFileTypeToEditorType(e.editor_type), a);
 }
 export function $$A15(e) {
   return e ? e.isPaused ? e.lastReceivedSongTimestampMs : e.lastReceivedSongTimestampMs + (performance.now() - e.timeOrigin) : 0;
@@ -50,7 +50,7 @@ async function N(e, t) {
       r = "";
       t.dispatch($$er42());
       t.dispatch(F.enqueue({
-        message: _$$t("whiteboard.timer.song_not_available_error"),
+        message: getI18nString("whiteboard.timer.song_not_available_error"),
         error: !0,
         type: $$x33
       }));

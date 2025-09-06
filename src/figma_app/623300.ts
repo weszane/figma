@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useSelector } from "../vendor/514228";
 import { Ez5, xal } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
-import { eU, md } from "../figma_app/27355";
+import { atom, useAtomWithSubscription } from "../figma_app/27355";
 import { F } from "../905/989956";
 import { DP } from "../905/640017";
 import { E7 } from "../905/216495";
@@ -16,7 +16,7 @@ export function $$h3() {
     theme: DP()
   });
 }
-export let $$m1 = eU(!1);
+export let $$m1 = atom(!1);
 export function $$g5({
   selectedView: e,
   isLoadingVersionHistory: t,
@@ -26,10 +26,10 @@ export function $$g5({
   let d = i ? null : getSingletonSceneGraph().getCurrentPage();
   let h = useMemo(() => d?.backgroundColor, [d]);
   let g = !!ut(Ez5?.currentPageState().requestedPageChange, "");
-  let f = md(s6);
-  let E = md(rp);
-  let y = md($$m1);
-  let b = md(nc);
+  let f = useAtomWithSubscription(s6);
+  let E = useAtomWithSubscription(rp);
+  let y = useAtomWithSubscription($$m1);
+  let b = useAtomWithSubscription(nc);
   return useMemo(() => {
     let e;
     if (i) return {

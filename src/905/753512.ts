@@ -14,7 +14,7 @@ import { saW } from "../figma_app/43951";
 import { Wv } from "../figma_app/633080";
 import { F as _$$F, r as _$$r } from "../905/336143";
 import { l as _$$l } from "../905/716947";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { IT } from "../figma_app/566371";
 import { tS } from "../figma_app/516028";
 import { XD } from "../905/842072";
@@ -168,7 +168,7 @@ export function $$N0({
         }, [t]);
         let m = "loaded" === e.status;
         useEffect(function () {
-          t && a && !o && m && (az.trackDefinedEvent("library_modal.search_result", {
+          t && a && !o && m && (analyticsEventManager.trackDefinedEvent("library_modal.search_result", {
             fileKey: d,
             teamId: c,
             orgId: u,

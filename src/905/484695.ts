@@ -1,5 +1,5 @@
 import { debug } from "../figma_app/465776";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 var a = (e => (e.SLIDE = "SLIDE", e.SLIDE_MASTER = "SLIDE_MASTER", e.SLIDE_LAYOUT = "SLIDE_LAYOUT", e.NODE = "NODE", e.META = "META", e))(a || {});
 var $$s1 = (e => (e.IMPORT = "IMPORT", e.EXPORT = "EXPORT", e))($$s1 || {});
 let o = class e {
@@ -49,7 +49,7 @@ let o = class e {
     t.durationMs = i;
   }
   toFigmentLatency(e, t, i, n) {
-    "IMPORT" !== e && az.trackDefinedEvent("slides.export.pptx.latency", {
+    "IMPORT" !== e && analyticsEventManager.trackDefinedEvent("slides.export.pptx.latency", {
       durationMs: t,
       numSlides: i,
       success: n
@@ -101,7 +101,7 @@ let o = class e {
     let d = null != t && null == s;
     let c = Object.keys(o.scopes).filter(e => o.scopes[Number(e)]?.type === "SLIDE").length;
     let u = o.totalDurationMs();
-    az.trackDefinedEvent("IMPORT" === i ? "slides.import.pptx" : "slides.export.pptx", {
+    analyticsEventManager.trackDefinedEvent("IMPORT" === i ? "slides.import.pptx" : "slides.export.pptx", {
       fileKey: t,
       numSlides: c,
       durationMs: u,

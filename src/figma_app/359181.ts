@@ -1,11 +1,11 @@
 import { debugState } from "../905/407919";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { j } from "../figma_app/172303";
 import { zX, XU } from "../905/576487";
 import { lW } from "../figma_app/11182";
 import { RT, uw } from "../figma_app/171413";
-var $$c2 = ((e) => (e.PublishingSuccess = "sites.PublishingSuccess", e.PublishingFailed = "sites.PublishingFailed", e))($$c2 || {});
+var $$c2 = (e => (e.PublishingSuccess = "sites.PublishingSuccess", e.PublishingFailed = "sites.PublishingFailed", e))($$c2 || {});
 export function $$u3({
   onDismiss: e,
   isFigmake: t
@@ -14,7 +14,7 @@ export function $$u3({
     matchType: "sites.PublishingInProgress"
   }));
   j("sites.PublishingFailed", !0, {
-    message: t ? _$$t("figmake.publish.unsuccessful_publish_bell") : _$$t("sites.toolbar.publish_modal.unsuccessful_publish_bell")
+    message: t ? getI18nString("figmake.publish.unsuccessful_publish_bell") : getI18nString("sites.toolbar.publish_modal.unsuccessful_publish_bell")
   }, void 0, zX.EXCLAMATION, void 0, e);
 }
 export function $$p1({
@@ -35,7 +35,7 @@ export function $$p1({
       }
     }
   }, void 0, zX.CHECK, {
-    text: _$$t("sites.toolbar.publish_modal.copy_to_clipboard"),
+    text: getI18nString("sites.toolbar.publish_modal.copy_to_clipboard"),
     action: () => {
       debugState.dispatch(lW({
         stringToCopy: u,
@@ -46,7 +46,7 @@ export function $$p1({
 }
 export function $$_0(e) {
   debugState.dispatch(F.enqueue({
-    message: e ? _$$t("figmake.publish.failed_to_unpublish_site") : _$$t("sites.toolbar.publish_modal.failed_to_unpublish_site"),
+    message: e ? getI18nString("figmake.publish.failed_to_unpublish_site") : getI18nString("sites.toolbar.publish_modal.failed_to_unpublish_site"),
     error: !0
   }));
 }

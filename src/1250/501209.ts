@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { e as _$$e } from "../5132/291975";
 import { Ay } from "../905/612521";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { E } from "../905/984674";
 import { Oe } from "../905/34809";
 import { SidebarRow } from "../451de8f0/94979";
@@ -40,7 +40,7 @@ export function $$b1() {
     icon: jsx(_$$e, {}),
     text: jsx(E, {
       truncate: !0,
-      children: tx("sidebar.templates_and_tools")
+      children: renderI18nText("sidebar.templates_and_tools")
     }),
     wrapInListItem: !0
   });

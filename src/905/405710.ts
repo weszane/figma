@@ -2,9 +2,9 @@ import { assert } from "../figma_app/465776";
 import { c2 } from "../905/382883";
 import { cd, _H } from "../figma_app/243058";
 import { glU, Vzr } from "../figma_app/763686";
-import { Iz, eU, fp } from "../figma_app/27355";
+import { createRemovableAtomFamily, atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { hp } from "../vendor/162266";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { Mk } from "../figma_app/31188";
 import { Wh } from "../figma_app/615482";
 import { PW } from "../figma_app/633080";
@@ -83,21 +83,21 @@ let E = e => {
     case PW.CODE_COMPONENT:
       t = _H.toGuidStrIfLocal(e.assetId);
   }
-  return t || (x1("thumbnails", "Could not parse nodeId for thumbnail generation", {
+  return t || (logError("thumbnails", "Could not parse nodeId for thumbnail generation", {
     assetId: e.assetId,
     type: e.type
   }), null);
 };
-let x = Iz(e => {
+let x = createRemovableAtomFamily(e => {
   let t = E(e);
   assert(!!t, "A valid nodeId is required for local asset thumbnail atom");
-  return Wh(() => eU(null));
+  return Wh(() => atom(null));
 }, c2);
-let S = Iz(e => eU(t => t(x(e)), (t, i, n) => {
+let S = createRemovableAtomFamily(e => atom(t => t(x(e)), (t, i, n) => {
   let r = x(e);
   let a = t(Mk[e.type].local)[e.assetId];
   if (!a) {
-    x1("thumbnails", "Could not find local asset for thumbnail generation", {
+    logError("thumbnails", "Could not find local asset for thumbnail generation", {
       assetId: e.assetId,
       type: e.type
     });
@@ -118,7 +118,7 @@ let S = Iz(e => eU(t => t(x(e)), (t, i, n) => {
   }
 }), c2);
 export function $$w3(e) {
-  let [t, i] = fp(S(e));
+  let [t, i] = useAtomValueAndSetter(S(e));
   i(void 0);
   return t;
 }

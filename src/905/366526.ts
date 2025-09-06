@@ -3,7 +3,7 @@ import { PureComponent, Suspense, useCallback, useEffect, useLayoutEffect, useMe
 import { H as _$$H } from 'react-dom';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import iN, { BEGIN, COMMIT, REVERT } from 'redux-optimist';
-import { $D, DZ, kF, XM } from '../905/11';
+import { reportError, SeverityLevel, setSentryTag, setSentryContext } from '../905/11';
 import { WR, X0 } from '../905/2848';
 import { vq as _$$vq } from '../905/8732';
 import { cL as _$$cL4, hZ as _$$hZ2 } from '../905/14223';
@@ -78,7 +78,7 @@ import { Mv as _$$Mv2, oV as _$$oV } from '../905/216495';
 import { w as _$$w } from '../905/230422';
 import { J as _$$J } from '../905/231762';
 import { y as _$$y } from '../905/235145';
-import { fm } from '../905/236856';
+import { delay } from '../905/236856';
 import { N as _$$N5 } from '../905/239398';
 import { z as _$$z3 } from '../905/239603';
 import { $ as _$$$4 } from '../905/240853';
@@ -86,20 +86,20 @@ import { a as _$$a5 } from '../905/242083';
 import { g as _$$g2 } from '../905/248178';
 import { nE as _$$nE, EU } from '../905/255097';
 import { dK as _$$dK, TE, v9 } from '../905/266289';
-import { bt } from '../905/270322';
-import { L as _$$L4 } from '../905/270963';
+import { createReduxSubscriptionAtomWithState } from '../905/270322';
+import { datadogRum } from '../905/270963';
 import { hS as _$$hS, oy as _$$oy } from '../905/276025';
 import { A as _$$A } from '../905/289770';
 import { L as _$$L } from '../905/293182';
 import { Q8, R9 } from '../905/294085';
 import { m as _$$m3, z as _$$z2 } from '../905/298920';
-import { V6 } from '../905/298923';
+import { setLastUsedEditorType } from '../905/298923';
 import { E as _$$E3, ie as _$$ie, nM as _$$nM, Nu, SL } from '../905/300250';
 import { F as _$$F5 } from '../905/300562';
 import { p as _$$p2 } from '../905/300815';
 import { r as _$$r } from '../905/302698';
 import { F as _$$F } from '../905/302958';
-import { t as _$$t2, tx as _$$tx, yF } from '../905/303541';
+import { getI18nString, renderI18nText, loadI18nState } from '../905/303541';
 import { T as _$$T3, v as _$$v4 } from '../905/309844';
 import { sR as _$$sR } from '../905/309846';
 import { $N, an as _$$an, OX, OZ, Sp, U_ } from '../905/327855';
@@ -129,7 +129,7 @@ import { f as _$$f2, P as _$$P5 } from '../905/412913';
 import { UG } from '../905/414007';
 import { Ok } from '../905/414069';
 import { t as _$$t6 } from '../905/414363';
-import { X as _$$X } from '../905/414972';
+import { performanceMetricsTracker } from '../905/414972';
 import { v as _$$v3 } from '../905/417890';
 import { getResourceDataOrFallback } from '../905/419236';
 import { H as _$$H5 } from '../905/422284';
@@ -139,7 +139,7 @@ import { N as _$$N2 } from '../905/438674';
 import { _O, vf, Y7, z$ } from '../905/438864';
 import { k as _$$k2 } from '../905/443820';
 import { CL as _$$CL, Dc as _$$Dc, hf as _$$hf, Mt } from '../905/445022';
-import { az as _$$az, sx as _$$sx } from '../905/449184';
+import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
 import { o as _$$o5 } from '../905/451156';
 import { Q as _$$Q4 } from '../905/463586';
 import { N as _$$N4 } from '../905/465068';
@@ -159,7 +159,7 @@ import { f as _$$f, r as _$$r2 } from '../905/501976';
 import { YQ } from '../905/502364';
 import { au as _$$au2, hK as _$$hK, Y9 as _$$Y2, yu } from '../905/504768';
 import { $R, dR as _$$dR, mc as _$$mc, Lb, NQ, wy } from '../905/508367';
-import { tr as _$$tr } from '../905/508408';
+import { TranslationErrors } from '../905/508408';
 import { vv } from '../905/508457';
 import { T9 } from '../905/511649';
 import { Z as _$$Z5 } from '../905/515860';
@@ -173,7 +173,7 @@ import { oU as _$$oU, B3, Sr } from '../905/535224';
 import { q as _$$q5 } from '../905/540614';
 import { a as _$$a4, V as _$$V2 } from '../905/541060';
 import { R as _$$R5 } from '../905/542113';
-import { rH as _$$rH } from '../905/542194';
+import { reactTimerGroup } from '../905/542194';
 import { xH } from '../905/546357';
 import { subscribeAndGetStatus } from '../905/553831';
 import { $B, aL as _$$aL, hT as _$$hT2, Y4 } from '../905/561087';
@@ -194,7 +194,7 @@ import { P as _$$P7, z as _$$z } from '../905/595507';
 import { getFeatureFlags } from '../905/601108';
 import { Im } from '../905/608145';
 import { TH } from '../905/609392';
-import { jk as _$$jk } from '../905/609396';
+import { PerfTimer } from '../905/609396';
 import { Ay as _$$Ay, Ix } from '../905/612521';
 import { uW as _$$uW, yJ as _$$yJ9, Z as _$$Z3 } from '../905/618921';
 import { _G, Pv } from '../905/619652';
@@ -212,7 +212,7 @@ import { $T, KJ as _$$KJ, Vx as _$$Vx, V0 } from '../905/657710';
 import { oA as _$$oA, tT as _$$tT } from '../905/663269';
 import { j2 } from '../905/667970';
 import { S as _$$S4 } from '../905/669334';
-import { vo, ZO } from '../905/670985';
+import { measureSyncDuration, measureAsyncDuration } from '../905/670985';
 import { sh as _$$sh, uA as _$$uA, xN, YO } from '../905/672897';
 import { oW as _$$oW } from '../905/675859';
 import { c as _$$c2, r as _$$r4 } from '../905/676456';
@@ -231,11 +231,11 @@ import { U as _$$U } from '../905/707331';
 import { S3 } from '../905/708054';
 import { vV } from '../905/709095';
 import { eE as _$$eE } from '../905/709171';
-import { V as _$$V } from '../905/709735';
+import { uiVariantName } from '../905/709735';
 import { us as _$$us2, xp } from '../905/711212';
 import { S as _$$S5 } from '../905/711770';
 import { IT, M4 } from '../905/713695';
-import { ED, Lo, x1, xi } from '../905/714362';
+import { logDebug, logInfo, logError, logWarning } from '../905/714362';
 import { lG as _$$lG } from '../905/714538';
 import { B as _$$B2 } from '../905/714743';
 import { H as _$$H6 } from '../905/715533';
@@ -279,7 +279,7 @@ import { u as _$$u3 } from '../905/831362';
 import { O as _$$O } from '../905/833838';
 import { $ as _$$$ } from '../905/834575';
 import { oO as _$$oO, EE, Pq, Rg, XV, Yw } from '../905/837497';
-import { F as _$$F2 } from '../905/842794';
+import { generateOptimistId } from '../905/842794';
 import { o0 as _$$o4, NG } from '../905/844131';
 import { N as _$$N8 } from '../905/844455';
 import { sZ as _$$sZ } from '../905/845253';
@@ -300,7 +300,7 @@ import { $I as _$$$I, ay as _$$ay, cr as _$$cr, dC as _$$dC, iE as _$$iE2, lx as
 import { g as _$$g3 } from '../905/880308';
 import { P6, VK, YF, YK } from '../905/880488';
 import { D as _$$D4 } from '../905/882262';
-import { v as _$$v6 } from '../905/883621';
+import { updateEnvironmentInfo } from '../905/883621';
 import { cR as _$$cR2, hG as _$$hG2, HZ as _$$HZ2, os as _$$os2, Qv as _$$Qv2, vv as _$$vv, b1, KW, L_, Nh, Nr, RF } from '../905/890368';
 import { iz as _$$iz, oo as _$$oo, r_ as _$$r_ } from '../905/895600';
 import { p as _$$p4 } from '../905/895920';
@@ -345,7 +345,7 @@ import { lW as _$$lW2 } from '../figma_app/11182';
 import { GV as _$$GV, us as _$$us, PK } from '../figma_app/12220';
 import { cb as _$$cb2, Eh } from '../figma_app/12796';
 import { yJ as _$$yJ, S5, WJ } from '../figma_app/24841';
-import { eU as _$$eU, md as _$$md, tP as _$$tP, An, E3, fp, Xr, zl } from '../figma_app/27355';
+import { atom, useAtomWithSubscription, tP as _$$tP, AtomProvider, createLocalStorageAtom, useAtomValueAndSetter, Xr, atomStoreManager } from '../figma_app/27355';
 import { YQL } from '../figma_app/27776';
 import { hZ as _$$hZ6, w4, yo } from '../figma_app/28323';
 import { ec as _$$ec } from '../figma_app/29089';
@@ -354,7 +354,7 @@ import { ZC } from '../figma_app/39751';
 import { abL, B_E, c2_, CrP, ehp, EmG, EZU, G9Z, H2R, hbX, HSg, IiJ, ISl, JS_, k$m, M7X, N8H, nXJ, o8f, P0r, qn8, qYc, Ra2, T0, Thl, V15, vvS, wj_, WKb, X$D, XKS, zz3 } from '../figma_app/43951';
 import { Qv as _$$Qv, vt as _$$vt } from '../figma_app/45218';
 import { eq as _$$eq, FO as _$$FO, Ri as _$$Ri, D3, L1, QA, Sb, wO, yh } from '../figma_app/49598';
-import { nT as _$$nT, Bu, wN, xq, YP } from '../figma_app/53721';
+import { FEditorType, mapEditorTypeToStringWithObfuscated, mapFileTypeToEditorType, mapEditorTypeToYF, mapEditorTypeToString } from '../figma_app/53721';
 import { o as _$$o6 } from '../figma_app/54816';
 import { c3 as _$$c, S as _$$S, sF as _$$sF, uo as _$$uo, bE, jO, Lk, Nw, PB, PF, U2, yJ, Yp } from '../figma_app/78808';
 import { Eo, qv } from '../figma_app/80990';
@@ -391,7 +391,7 @@ import { N as _$$N9 } from '../figma_app/240060';
 import { $I, $V, $w, aB as _$$aB, bE as _$$bE2, ii as _$$ii, Jt as _$$Jt, mw as _$$mw, n9 as _$$n, r1 as _$$r5, uo as _$$uo2, yH as _$$yH, yJ as _$$yJ3, _E, bQ, TI, WC } from '../figma_app/240735';
 import { m as _$$m2 } from '../figma_app/247343';
 import { tB as _$$tB, wc, Zp } from '../figma_app/253220';
-import { nl as _$$nl, Lg, PN } from '../figma_app/257275';
+import { isInteractionPathCheck, getFalseValue, isInteractionOrEvalMode } from '../figma_app/897289';
 import { N as _$$N0 } from '../figma_app/268271';
 import { hE as _$$hE2, nB as _$$nB, vo as _$$vo, jk, wi, Y9 } from '../figma_app/272243';
 import { td as _$$td } from '../figma_app/273118';
@@ -412,7 +412,7 @@ import { E as _$$E7, hZ as _$$hZ5 } from '../figma_app/342125';
 import { ce as _$$ce, cm as _$$cm, GH } from '../figma_app/347146';
 import { Ns } from '../figma_app/349248';
 import { fj } from '../figma_app/357047';
-import { tu as _$$tu, Gq } from '../figma_app/363242';
+import { reportTranslationIssue, getI18nState } from '../figma_app/363242';
 import { bE as _$$bE3, hV as _$$hV3, z9 } from '../figma_app/375098';
 import { Ob as _$$Ob, Po, Zy } from '../figma_app/378195';
 import { Tm } from '../figma_app/385874';
@@ -433,12 +433,12 @@ import { Cp as _$$Cp } from '../figma_app/457074';
 import { q as _$$q } from '../figma_app/458300';
 import { D6 as _$$D3, Kd as _$$Kd, px as _$$px, j_, S2 } from '../figma_app/465071';
 import { noop, debug, assert, throwTypeError } from '../figma_app/465776';
-import { ck as _$$ck2, MP } from '../figma_app/469876';
+import { isIntegrationContext, isZoomIntegration } from '../figma_app/469876';
 import { G as _$$G } from '../figma_app/471068';
 import { Cg, Ug, v7 } from '../figma_app/475303';
 import { $h, Ay as _$$Ay4, eK as _$$eK, Lo as _$$Lo, pv as _$$pv, Qg as _$$Qg, Ts as _$$Ts2, Az, Ef, i, I2, Je, js, M2, MN, Mv, Qe, qU, WG, XS, yy } from '../figma_app/482142';
 import { qE, yT } from '../figma_app/492908';
-import { Im as _$$Im } from '../figma_app/493477';
+import { isEmptyObject } from '../figma_app/493477';
 import { I2 as _$$I, pk as _$$pk, tb as _$$tb, tp as _$$tp, _X, Il, kb, Um, yk } from '../figma_app/502247';
 import { ih as _$$ih, l7 as _$$l } from '../figma_app/504640';
 import { up as _$$up2 } from '../figma_app/506364';
@@ -489,7 +489,7 @@ import { nx as _$$nx } from '../figma_app/761870';
 import { aTn, Egt, EW4, Ez5, FAf, fZb, glU, H4l, h62, ibQ, kul, Lov, lyf, m1T, Oin, RY1, tvY, vXe, w3z, W8Y, xae, xal, ywP } from '../figma_app/763686';
 import { $0, $M, cL as _$$cL3, Fm as _$$Fm, i4 as _$$i3, js as _$$js, lI as _$$lI, li as _$$li, nb as _$$nb, on as _$$on2, PB as _$$PB2, pD as _$$pD, pI as _$$pI, Q8 as _$$Q5, RI as _$$RI, RO as _$$RO, rW as _$$rW, sQ as _$$sQ, U3 as _$$U5, uy as _$$uy, uz as _$$uz, wg as _$$wg, xH as _$$xH3, y3 as _$$y4, yH as _$$yH4, Df, F8, gi, Jc, k7, NJ, Oo, q4, QD, RP, UU, We, wJ, Z5 } from '../figma_app/770088';
 import { A as _$$A1 } from '../figma_app/776368';
-import { Ay, KR } from '../figma_app/778880';
+import { BrowserInfo, isFigmaMobileApp } from '../figma_app/778880';
 import { dO as _$$dO, ZN as _$$ZN } from '../figma_app/781852';
 import { parsePxInt } from '../figma_app/783094';
 import { S as _$$S2 } from '../figma_app/787550';
@@ -505,14 +505,14 @@ import { Ay as _$$Ay5 } from '../figma_app/846003';
 import { hV as _$$hV, id as _$$id, lW as _$$lW, pn as _$$pn, rH as _$$rH2, u2 as _$$u, _p, Dz, gN, k$, M3, MH, TV } from '../figma_app/847915';
 import { r5 as _$$r3, r$ as _$$r$, ZH } from '../figma_app/855490';
 import { vP } from '../figma_app/864378';
-import { aw as _$$aw, eD as _$$eD, S8 } from '../figma_app/876459';
+import { OpenTarget, desktopAPIInstance, bellFeedAPIInstance } from '../figma_app/876459';
 import { Ed } from '../figma_app/883490';
 import { o as _$$o } from '../figma_app/885533';
 import { iN as _$$iN, lF as _$$lF3, Mv as _$$Mv, pS as _$$pS, to as _$$to2, U6 as _$$U4, X7 as _$$X4, gG, jv, N9, qP } from '../figma_app/909778';
 import { nH as _$$nH, sw as _$$sw, Ev, FL } from '../figma_app/914957';
 import { ai as _$$ai, kF as _$$kF, lF as _$$lF2 } from '../figma_app/915202';
 import { l0 as _$$l9, OP } from '../figma_app/920435';
-import { bM } from '../figma_app/925651';
+import { desktopVisibilityEmitter } from '../figma_app/925651';
 import { $h as _$$$h, e$ as _$$e$, nz as _$$nz, tL as _$$tL, Z as _$$Z2, BK, Ee, fv, Kd, NW, Yx } from '../figma_app/933328';
 import { Q$ } from '../figma_app/934707';
 import { b4 } from '../figma_app/937413';
@@ -606,13 +606,13 @@ let U = {
 };
 function B(e) {
   (async () => {
-    if (_$$eD && e.getState().selectedView.view === 'fullscreen' && (await Y5.onReady(), Y5.isReady())) {
+    if (desktopAPIInstance && e.getState().selectedView.view === 'fullscreen' && (await Y5.onReady(), Y5.isReady())) {
       let t = e.getState();
       !function (e, t, i) {
-        if (!_$$eD || e.view !== 'fullscreen') return;
+        if (!desktopAPIInstance || e.view !== 'fullscreen') return;
         let n = {
           selectedView: e,
-          isEnLocale: Gq().getPrimaryLocale(!1) === languageCodes.EN,
+          isEnLocale: getI18nState().getPrimaryLocale(!1) === languageCodes.EN,
           appModel: i
         };
         let r = _$$p({
@@ -628,10 +628,10 @@ function B(e) {
           menus,
           actionCheckedState
         } = G.build(r, n);
-        _$$eD.updateFullscreenMenuState({
+        desktopAPIInstance.updateFullscreenMenuState({
           menus,
           actionCheckedState,
-          editorType: YP(e.editorType)
+          editorType: mapEditorTypeToString(e.editorType)
         });
       }(t.selectedView, t.theme.themePreference, t.mirror.appModel);
     }
@@ -722,19 +722,19 @@ function z(e) {
 }
 let H = new Set(['a', 'as', 'in', 'of', 'on', 'to', 'and', 'for', 'the', 'into', 'with']);
 let $ = vv(() => H4l?.documentColorProfile(), null);
-let Z = _$$eU(e => {
+let Z = atom(e => {
   let t = e($);
   return t == null ? null : t === ywP.DISPLAY_P3 ? 'display-p3' : 'srgb';
 });
-let X = bt(e => e.isOpenFileLoadedFromLiveGraph);
-let Q = _$$tP(_$$eU(e => {
+let X = createReduxSubscriptionAtomWithState(e => e.isOpenFileLoadedFromLiveGraph);
+let Q = _$$tP(atom(e => {
   let t = e(ze);
   return t == null ? null : [t, e(X)];
 }));
 function J(e, t) {
-  t(zl.get(e));
-  zl.sub(e, () => {
-    t(zl.get(e));
+  t(atomStoreManager.get(e));
+  atomStoreManager.sub(e, () => {
+    t(atomStoreManager.get(e));
   });
 }
 let es = '__figma.embed.test.cookie__';
@@ -742,11 +742,11 @@ let eo = null;
 async function el() {
   try {
     if (!_$$l() && !_$$ih()) {
-      ED('[rehydrateStorageAccessIfNeeded]', 'Not an embed. Skip.');
+      logDebug('[rehydrateStorageAccessIfNeeded]', 'Not an embed. Skip.');
       return;
     }
     if (!document.requestStorageAccess) {
-      ED('[rehydrateStorageAccessIfNeeded]', 'Storage Access API is not available. Give up.');
+      logDebug('[rehydrateStorageAccessIfNeeded]', 'Storage Access API is not available. Give up.');
       return;
     }
     if (function () {
@@ -765,12 +765,12 @@ async function el() {
         return !1;
       }
     }()) {
-      ED('[rehydrateStorageAccessIfNeeded]', 'Cookies are already accessible. No need to rehydrate storage access.');
+      logDebug('[rehydrateStorageAccessIfNeeded]', 'Cookies are already accessible. No need to rehydrate storage access.');
       return;
     }
-    if (Ay.chrome || Ay.firefox) {
+    if (BrowserInfo.chrome || BrowserInfo.firefox) {
       let e = await document.hasStorageAccess();
-      ED('[rehydrateStorageAccessIfNeeded]', 'Checking document.hasStorageAccess()', {
+      logDebug('[rehydrateStorageAccessIfNeeded]', 'Checking document.hasStorageAccess()', {
         hasStorageAccess: e
       });
       let {
@@ -779,20 +779,20 @@ async function el() {
         name: 'storage-access'
       });
       let i = state === 'granted';
-      ED('[rehydrateStorageAccessIfNeeded]', 'Checking navigator.permissions.query({ name: "storage-access" })', {
+      logDebug('[rehydrateStorageAccessIfNeeded]', 'Checking navigator.permissions.query({ name: "storage-access" })', {
         storageAccessGranted: i
       });
-      (i || e) && i !== e && (ED('[rehydrateStorageAccessIfNeeded]', 'Conflicting storage access state. Rehydrating.', {
+      (i || e) && i !== e && (logDebug('[rehydrateStorageAccessIfNeeded]', 'Conflicting storage access state. Rehydrating.', {
         storageAccessGranted: i,
         hasStorageAccess: e
       }), await document.requestStorageAccess().catch(e => {
-        ED('[rehydrateStorageAccessIfNeeded]', 'Error rehydrating storage access', {
+        logDebug('[rehydrateStorageAccessIfNeeded]', 'Error rehydrating storage access', {
           error: e
         });
       }));
     }
   } catch (e) {
-    ED('[rehydrateStorageAccessIfNeeded]', 'Error checking storage access. Give up.', {
+    logDebug('[rehydrateStorageAccessIfNeeded]', 'Error checking storage access. Give up.', {
       error: e
     });
   }
@@ -994,7 +994,7 @@ class e$ extends PureComponent {
     };
   }
   componentDidCatch(e, t) {
-    e instanceof eX || (As(e, t), $D(_$$e.GROWTH_PLATFORM, e, {
+    e instanceof eX || (As(e, t), reportError(_$$e.GROWTH_PLATFORM, e, {
       tags: {
         react: !0,
         errorBoundary: 'StatsigProvider'
@@ -1045,7 +1045,7 @@ function eJ({
   } = e;
   let s = !_$$pF() || initialized;
   let [o, l] = useState(null);
-  let c = _$$md(ZJ)?.initCompletedPromise;
+  let c = useAtomWithSubscription(ZJ)?.initCompletedPromise;
   let u = z3();
   let p = u === 'fullscreen';
   let m = useMemo(() => g5.includes(u), [u]);
@@ -1081,8 +1081,8 @@ function e0(e) {
     getFeatureFlags().statsig_suspend_gremlin && _$$cZ(e);
   }, []);
   let l = function () {
-    let e = _$$md(ZJ).status;
-    let t = _$$md(gR);
+    let e = useAtomWithSubscription(ZJ).status;
+    let t = useAtomWithSubscription(gR);
     let [i, n] = useState(!1);
     let r = e !== Uv.NOT_STARTED;
     let a = r && e !== Uv.IN_PROGRESS;
@@ -1106,7 +1106,7 @@ function e0(e) {
       planKey: _planKey,
       callingHookLocation
     } = e;
-    let s = _$$md(ZJ).status;
+    let s = useAtomWithSubscription(ZJ).status;
     let o = Xr(_$$r_);
     let l = Xr(gR);
     let c = useRef(s !== Uv.NOT_STARTED);
@@ -1139,7 +1139,7 @@ function e0(e) {
       orgId: _orgId2,
       planKey: _planKey2
     } = e;
-    let a = _$$md(ZJ).status;
+    let a = useAtomWithSubscription(ZJ).status;
     let s = Xr(_$$iz);
     let o = Xr(gR);
     let l = useRef(_userId2);
@@ -1185,10 +1185,10 @@ function e1({
   let a = null;
   let s = null;
   let l = getInitialOptions().statsig_plan_key;
-  let c = _$$md(_$$oy);
-  let u = _$$md(_$$hS);
+  let c = useAtomWithSubscription(_$$oy);
+  let u = useAtomWithSubscription(_$$hS);
   if (getFeatureFlags().statsig_plan_key_bootstrap) {
-    if (!l && (c || u) && $D(_$$e.APPLICATION_PLATFORM, new Error(`One of the plan keys is not set. This should never happen, and means that the server disagrees with the client on what the plan key should be.
+    if (!l && (c || u) && reportError(_$$e.APPLICATION_PLATFORM, new Error(`One of the plan keys is not set. This should never happen, and means that the server disagrees with the client on what the plan key should be.
           initialOptionsPlanKey: ${l}
           sidebarOrOpenFileOrgId: ${c}
           sidebarOrOpenFileTeamId: ${u}`)), l && _$$tU()) {
@@ -1210,7 +1210,7 @@ function e1({
         currentOrgId: t
       });
       return useMemo(() => {
-        if (KR()) return [];
+        if (isFigmaMobileApp()) return [];
         let r = [{
           userId: e,
           teamId: '',
@@ -1235,7 +1235,7 @@ function e1({
         return r;
       }, [n, e, t, i]);
     }(e, t, i);
-    let a = _$$md(ZJ).status === Uv.COMPLETED;
+    let a = useAtomWithSubscription(ZJ).status === Uv.COMPLETED;
     useEffect(() => {
       a && n(r);
     }, [r, n, a]);
@@ -1280,10 +1280,10 @@ async function e7(e) {
     await e();
   } catch (t) {
     console.error('Failed to render react root', t);
-    let e = $D(_$$e.FRONTEND_PLATFORM, t, {
+    let e = reportError(_$$e.FRONTEND_PLATFORM, t, {
       tags: {
         rootRenderer: 'root',
-        severity: DZ.Critical
+        severity: SeverityLevel.Critical
       }
     });
     _$$Q2().render(jsx(S1, {
@@ -1329,7 +1329,7 @@ let t_ = e => t => async function (i) {
         opt_in_email: void 0,
         is_not_gen_0: _$$mI(n.auth.origin),
         signup_source: n.auth.signupSource,
-        locale: Gq()?.getPrimaryLocale(!0),
+        locale: getI18nState()?.getPrimaryLocale(!0),
         arkose_token: t,
         origin: n.auth.origin,
         google_fed_cm_enabled: getFeatureFlags().google_federated_cm ?? !1
@@ -1343,7 +1343,7 @@ let t_ = e => t => async function (i) {
           forwardToDatadog: !0
         });
         e.dispatch(My());
-        _$$sx('Sign Up (GTM)', {
+        trackEventAnalytics('Sign Up (GTM)', {
           isWorkEmail: _$$iE(t),
           sha256_email: await qV(t.meta?.email)
         });
@@ -1366,7 +1366,7 @@ let t_ = e => t => async function (i) {
         job_title: n.auth.jobTitle,
         usage_purpose: n.auth.usagePurpose,
         is_not_gen_0: _$$mI(n.auth.origin),
-        locale: Gq()?.getPrimaryLocale(!0),
+        locale: getI18nState()?.getPrimaryLocale(!0),
         signup_source: n.auth.signupSource,
         cont: n.auth.redirectUrl,
         origin: n.auth.origin
@@ -1383,13 +1383,13 @@ let t_ = e => t => async function (i) {
         }), getInitialOptions().integration_host || e.getState().auth.fromMsTeams) {
           let i = e.getState().auth.fromMsTeams ? _$$e3.MS_TEAMS_BOT : _$$e3.MS_TEAMS_TAB;
           let n = getInitialOptions().integration_host === 'msft' || e.getState().auth.fromMsTeams;
-          _$$sx('Integration Signup Success', {
+          trackEventAnalytics('Integration Signup Success', {
             user_id: t?.meta?.id,
             integrationHost: getInitialOptions().integration_host,
             trackedContext: n ? i : getInitialOptions().integration_host
           });
         }
-        if (_$$sx('Sign Up (GTM)', {
+        if (trackEventAnalytics('Sign Up (GTM)', {
           isWorkEmail: _$$iE(t),
           sha256_email: await qV(n.auth.email)
         }), qF(t, n.auth.redirectUrl)) {
@@ -1428,7 +1428,7 @@ let t_ = e => t => async function (i) {
       usage_purpose: n.auth.usagePurpose,
       is_not_gen_0: _$$mI(n.auth.origin),
       signup_source: n.auth.signupSource,
-      locale: Gq()?.getPrimaryLocale(!0),
+      locale: getI18nState()?.getPrimaryLocale(!0),
       arkose_token: a,
       origin: n.auth.origin,
       google_fed_cm_enabled: getFeatureFlags().google_federated_cm ?? !1,
@@ -1443,7 +1443,7 @@ let t_ = e => t => async function (i) {
         forwardToDatadog: !0
       });
       e.dispatch(My());
-      _$$sx('Sign Up (GTM)', {
+      trackEventAnalytics('Sign Up (GTM)', {
         isWorkEmail: _$$iE(t),
         sha256_email: await qV(t.meta?.email)
       });
@@ -1472,7 +1472,7 @@ let t_ = e => t => async function (i) {
         data: t
       }));
     }).catch(t => {
-      _$$J(t, t?.data?.message) === _$$t2('auth.error.magic-link-server-validation-error') && t?.status === 401 ? (a.modality = 'login', a.cont = n.auth.redirectUrl, XHR.post('/api/session/request_magic_link', a).then(({
+      _$$J(t, t?.data?.message) === getI18nString('auth.error.magic-link-server-validation-error') && t?.status === 401 ? (a.modality = 'login', a.cont = n.auth.redirectUrl, XHR.post('/api/session/request_magic_link', a).then(({
         data: t
       }) => {
         _$$g2('magic_link_request_success', n.auth.origin, {
@@ -1528,7 +1528,7 @@ let t_ = e => t => async function (i) {
         cont: n.auth.redirectUrl
       });
     }).catch(t => {
-      _$$J(t, t?.data?.message) === _$$t2('auth.error.magic-link-server-validation-error') && t?.status === 401 ? (_$$g2('saml_redirect_to_magic_link', n.auth.origin), a.modality = 'either', a.cont = n.auth.redirectUrl, XHR.post('/api/session/request_magic_link', a).then(({
+      _$$J(t, t?.data?.message) === getI18nString('auth.error.magic-link-server-validation-error') && t?.status === 401 ? (_$$g2('saml_redirect_to_magic_link', n.auth.origin), a.modality = 'either', a.cont = n.auth.redirectUrl, XHR.post('/api/session/request_magic_link', a).then(({
         data: t
       }) => {
         _$$g2('magic_link_request_success', n.auth.origin, {
@@ -1557,7 +1557,7 @@ let t_ = e => t => async function (i) {
         url: t.meta.org_saml_config.sp_sso_target_url,
         cont: n.auth.redirectUrl
       })) : e.dispatch(Qg({
-        message: _$$t2('auth.sso-gate.invalid-session')
+        message: getI18nString('auth.sso-gate.invalid-session')
       }));
     }).catch(t => e.dispatch(P8({
       resp: t
@@ -1580,7 +1580,7 @@ let t_ = e => t => async function (i) {
         formState: qB.SSO_GATE
       }));
     }).catch(t => {
-      _$$J(t, t?.data?.message) === _$$t2('auth.error.magic-link-server-validation-error') && t?.status === 401 ? (a.modality = 'either', a.cont = n.auth.redirectUrl, XHR.post('/api/session/request_magic_link', a).then(({
+      _$$J(t, t?.data?.message) === getI18nString('auth.error.magic-link-server-validation-error') && t?.status === 401 ? (a.modality = 'either', a.cont = n.auth.redirectUrl, XHR.post('/api/session/request_magic_link', a).then(({
         data: t
       }) => {
         _$$g2('magic_link_request_success', n.auth.origin, {
@@ -1605,7 +1605,7 @@ let t_ = e => t => async function (i) {
     let r = document.getElementById(i.payload.formId);
     let a = _$$t(r);
     a.password !== a.password_retype ? e.dispatch(Qg({
-      message: _$$t2('auth.reset-password.password-retype-error'),
+      message: getI18nString('auth.reset-password.password-retype-error'),
       invalidInput: RE.PASSWORD
     })) : XHR.post('/api/password/recover', a).then(({}) => {
       _$$g2('reset_password_success', n.auth.origin);
@@ -1642,7 +1642,7 @@ let t_ = e => t => async function (i) {
   }
 };
 let tT = tC;
-let tN = _$$eU(null);
+let tN = atom(null);
 let t8 = {
   setLoadingBackgroundColor(e, t) {
     e.dispatch(_$$mg(t));
@@ -1659,7 +1659,7 @@ let t8 = {
     e.dispatch(_$$sf(t));
   },
   setRealtimeToken(e, t) {
-    _$$eD?.setRealtimeToken({
+    desktopAPIInstance?.setRealtimeToken({
       realtimeToken: e,
       fileKey: t
     });
@@ -1717,10 +1717,10 @@ async function t9(e, t) {
     let e = i.fileByKey[s.fileKey];
     r = e?.editor_type;
   }
-  r && s.editorType !== _$$nT.DevHandoff && s.editorType !== _$$nT.Illustration && (s.editorType = wN(r));
+  r && s.editorType !== FEditorType.DevHandoff && s.editorType !== FEditorType.Illustration && (s.editorType = mapFileTypeToEditorType(r));
   let o = () => t8.setLoadingBackgroundColor(e, t.loadingBackgroundColor ?? _$$on(i.theme.visibleTheme, t.editorType));
   let l = i => {
-    i?.editor_type && s.editorType !== wN(i.editor_type) && (s.editorType !== _$$nT.DevHandoff || i.editor_type !== 'design') && (s.editorType !== _$$nT.Illustration || i.editor_type !== 'design') && (s.editorType = wN(i.editor_type));
+    i?.editor_type && s.editorType !== mapFileTypeToEditorType(i.editor_type) && (s.editorType !== FEditorType.DevHandoff || i.editor_type !== 'design') && (s.editorType !== FEditorType.Illustration || i.editor_type !== 'design') && (s.editorType = mapFileTypeToEditorType(i.editor_type));
     let n = e.getState();
     if (i && (n.currentUserOrgId ?? null) !== (i.parent_org_id ?? null)) {
       t.isNewTabShown && o();
@@ -1780,30 +1780,30 @@ let ic = new class {
     return this.refillRate;
   }
 }(20, 1e3);
-if (_$$eD && getInitialOptions().user_data && (_$$eD.setInitialOptions({
+if (desktopAPIInstance && getInitialOptions().user_data && (desktopAPIInstance.setInitialOptions({
   userId: getInitialOptions().user_data.id,
   orgId: getInitialOptions().org_id,
   teamId: getInitialOptions().team_id,
-  navigationConfig: filterNavigationConfig(_$$eD.getVersion(), _$$eD.getInformationalVersion(), navigationConfig)
-}), _$$eD.initLivegraph({
+  navigationConfig: filterNavigationConfig(desktopAPIInstance.getVersion(), desktopAPIInstance.getInformationalVersion(), navigationConfig)
+}), desktopAPIInstance.initLivegraph({
   userId: getInitialOptions().user_data.id,
   figmaCookieName: isLocalCluster() ? 'figma.authn' : '__Host-figma.authn',
   isDesktopLivegraphClientEnabled: getFeatureFlags().desktop_livegraph_client || !1,
   allPlans: _$$td
-}), _$$eD.initializeFCM({
+}), desktopAPIInstance.initializeFCM({
   appId: getInitialOptions().firebase_cloud_messaging_browser_notifications.app_id,
   apiKey: getInitialOptions().firebase_cloud_messaging_browser_notifications.api_key,
   projectId: getInitialOptions().firebase_cloud_messaging_browser_notifications.project_id,
   vapidKey: getInitialOptions().firebase_cloud_messaging_browser_notifications.vapid_id,
   userId: getInitialOptions().user_data.id
-})), _$$eD) {
+})), desktopAPIInstance) {
   let e = FB();
-  e !== null && _$$eD.setThemePreference(e);
+  e !== null && desktopAPIInstance.setThemePreference(e);
 }
-if (_$$eD) {
+if (desktopAPIInstance) {
   let e = getFeatureFlags();
   let t = Object.fromEntries(_$$a2.map(t => [t, e[t]]));
-  _$$eD.setFeatureFlags({
+  desktopAPIInstance.setFeatureFlags({
     desktop_push_notifs_win: !0,
     desktop_extension_registry: !0,
     desktop_shell_allow_focus: !0,
@@ -1829,7 +1829,7 @@ function iv() {
   iy && (fZb?.stopRootProfile('request-frame', 100), iy = !1);
   ye?.onFrameStart();
   ig = !1;
-  _$$rH.start('frame');
+  reactTimerGroup.start('frame');
   fZb?.startProfile(vV, 100);
   try {
     _$$q.onFrame();
@@ -1840,7 +1840,7 @@ function iv() {
   ec?.();
   fZb?.stopProfile('redux-frame-handler', 100);
   fZb?.stopProfile(vV, 100);
-  _$$rH.stop('frame');
+  reactTimerGroup.stop('frame');
   i_ = !1;
   fl();
   ye?.onFrame();
@@ -1853,7 +1853,7 @@ let iz = e => t => function (i) {
     let n = P6.matches(i);
     let r = !!i.payload.hideVisualBell;
     if (i.payload.userInitiated) {
-      let a = _$$F2();
+      let a = generateOptimistId();
       let s = Object.keys(i.payload.fileKeys);
       let o = XHR.del('/api/files_batch', {
         files: s.map(e => ({
@@ -1876,9 +1876,9 @@ let iz = e => t => function (i) {
         e.dispatch(_$$F.dequeue({}));
       };
       if (o.then(o => {
-        if (assert(P6.matches(i) || YK.matches(i)), _$$eD) {
+        if (assert(P6.matches(i) || YK.matches(i)), desktopAPIInstance) {
           let t = e.getState();
-          t.openFile && i.payload.fileKeys[t.openFile?.key] && _$$eD.close({
+          t.openFile && i.payload.fileKeys[t.openFile?.key] && desktopAPIInstance.close({
             suppressReopening: !0
           });
         }
@@ -1900,31 +1900,31 @@ let iz = e => t => function (i) {
             }));
             e.dispatch(_$$s2.error(t.message));
           } catch (t) {
-            e.dispatch(_$$s2.error(_$$t2('file_browser.file_browser_actions.file_delete_error')));
+            e.dispatch(_$$s2.error(getI18nString('file_browser.file_browser_actions.file_delete_error')));
           }
         } else {
           l ? n ? e.dispatch(_$$F.enqueue({
             type: 'file_deleted',
-            message: _$$t2('file_browser.file_browser_actions.branch_archived'),
+            message: getI18nString('file_browser.file_browser_actions.branch_archived'),
             button: {
-              text: _$$t2('general.undo'),
+              text: getI18nString('general.undo'),
               action: d
             }
           })) : e.dispatch(_$$F.enqueue({
             type: 'file_deleted',
-            message: _$$t2('file_browser.file_browser_actions.branch_deleted')
+            message: getI18nString('file_browser.file_browser_actions.branch_deleted')
           })) : r || (n ? e.dispatch(_$$F.enqueue({
             type: 'file_deleted',
-            message: _$$t2('file_browser.file_browser_actions.files_trashed', {
+            message: getI18nString('file_browser.file_browser_actions.files_trashed', {
               numFiles: s.length
             }),
             button: {
-              text: _$$t2('general.undo'),
+              text: getI18nString('general.undo'),
               action: d
             }
           })) : e.dispatch(_$$F.enqueue({
             type: 'file_deleted',
-            message: _$$t2('file_browser.file_browser_actions.files_deleted_forever', {
+            message: getI18nString('file_browser.file_browser_actions.files_deleted_forever', {
               numFiles: s.length
             })
           })));
@@ -1944,7 +1944,7 @@ let iz = e => t => function (i) {
           i = JSON.parse(i);
           e.dispatch(_$$s2.error(i.message));
         } catch (t) {
-          l ? e.dispatch(_$$s2.error(n ? _$$t2('file_browser.file_browser_actions.branch_archive_error') : _$$t2('file_browser.file_browser_actions.branch_delete_error'))) : e.dispatch(_$$s2.error(_$$t2('file_browser.file_browser_actions.file_delete_error')));
+          l ? e.dispatch(_$$s2.error(n ? getI18nString('file_browser.file_browser_actions.branch_archive_error') : getI18nString('file_browser.file_browser_actions.branch_delete_error'))) : e.dispatch(_$$s2.error(getI18nString('file_browser.file_browser_actions.file_delete_error')));
         }
         t({
           type: null,
@@ -1974,7 +1974,7 @@ let iz = e => t => function (i) {
     });
     _$$Q3({
       requestPromise: n,
-      fallbackError: _$$t2('file_browser.file_browser_actions.version_update_error'),
+      fallbackError: getI18nString('file_browser.file_browser_actions.version_update_error'),
       store: e,
       next: t,
       action: i
@@ -1992,7 +1992,7 @@ let iz = e => t => function (i) {
       });
       let a = _$$Q3({
         requestPromise: n,
-        fallbackError: _$$t2('file_browser.file_browser_actions.file_processing_error'),
+        fallbackError: getI18nString('file_browser.file_browser_actions.file_processing_error'),
         store: e,
         next: t,
         action: i
@@ -2031,7 +2031,7 @@ let iz = e => t => function (i) {
     });
     _$$Q3({
       requestPromise: a,
-      fallbackError: _$$t2('file_browser.file_browser_actions.version_restore_error'),
+      fallbackError: getI18nString('file_browser.file_browser_actions.version_restore_error'),
       store: e,
       next: t,
       action: i
@@ -2130,14 +2130,14 @@ let i2 = e => t => function (i) {
     let p = yH({
       folderIds: d
     });
-    let m = _$$F2();
+    let m = generateOptimistId();
     if (i.payload.userInitiated && (p.optimist = {
       type: BEGIN,
       id: m
     }), e.dispatch(p), i.payload.userInitiated && i.payload.teamDelete) {
       return _$$Q3({
         requestPromise: XHR.del(`/api/teams/${o}`).then(() => {
-          e.dispatch(_$$s2.flash(_$$t2('team_delete_modal.post_delete_flash', {
+          e.dispatch(_$$s2.flash(getI18nString('team_delete_modal.post_delete_flash', {
             teamName: i.payload.team.name
           })));
           u();
@@ -2160,7 +2160,7 @@ let i2 = e => t => function (i) {
       z_('Role Deleted', r);
       return _$$Q3({
         requestPromise: XHR.del(`/api/roles/${r.id}`).then(() => {
-          e.dispatch(_$$s2.flash(_$$t2('leave_team_modal.post_leave_flash', {
+          e.dispatch(_$$s2.flash(getI18nString('leave_team_modal.post_leave_flash', {
             teamName: i.payload.team.name
           })));
           u();
@@ -2207,7 +2207,7 @@ let i6 = e => t => function (i) {
         requestPromise: _$$k5.putUser({
           user: i.payload.user
         }),
-        fallbackError: _$$t2('api_user.error.an_error_occurred_while_updating_your_information'),
+        fallbackError: getI18nString('api_user.error.an_error_occurred_while_updating_your_information'),
         store: e,
         next: t,
         action: i
@@ -2256,7 +2256,7 @@ let i6 = e => t => function (i) {
     let n = XHR.post('/api/user/user_team_flags', i.payload);
     return _$$Q3({
       requestPromise: n,
-      fallbackError: _$$t2('api_user.error.an_unknown_error_occurred'),
+      fallbackError: getI18nString('api_user.error.an_unknown_error_occurred'),
       store: e,
       next: t,
       action: i
@@ -2388,7 +2388,7 @@ let nS = e => t => function (i) {
       return;
     }
   }
-  if (!_$$eD) return t(i);
+  if (!desktopAPIInstance) return t(i);
   if (_$$sf.matches(i)) {
     let n = e.getState();
     let r = i.payload;
@@ -2397,27 +2397,27 @@ let nS = e => t => function (i) {
       mode: 'auto'
     }), r.view === 'fullscreen' && n.selectedView.view === 'desktopNewTab') {
       let e = r.fileKey ? n.fileByKey[r.fileKey] : void 0;
-      e && _$$eD.setTabPreviewData({
+      e && desktopAPIInstance.setTabPreviewData({
         editedAt: e.touched_at,
         thumbnail: _$$pf(e)
       });
     }
     let a = vU(n, new URL(_$$Ay.location.href).pathname);
     if (r.view === 'communityHub' && a.view !== 'communityHub') {
-      _$$eD.openCommunity(Np(n, r), n.user?.id ?? '');
+      desktopAPIInstance.openCommunity(Np(n, r), n.user?.id ?? '');
       return;
     }
     if (r.view === 'fullscreen' && n.selectedView.view === 'fullscreen') {
       let e = n.selectedView;
-      let t = r.editorType === _$$nT.Figmake && e.editorType === _$$nT.Figmake;
+      let t = r.editorType === FEditorType.Figmake && e.editorType === FEditorType.Figmake;
       let i = e.figmakeView === f0.FULLSCREEN_PREVIEW || r.figmakeView === f0.FULLSCREEN_PREVIEW;
       if (t && e.figmakeView !== r.figmakeView && i) {
         let e = n.openFile?.name ?? '';
-        _$$eD.openFile({
+        desktopAPIInstance.openFile({
           fileKey: r.fileKey ?? '',
           title: e,
-          fileEditorType: YP(r.editorType),
-          target: _$$aw.FOCAL_TAB,
+          fileEditorType: mapEditorTypeToString(r.editorType),
+          target: OpenTarget.FOCAL_TAB,
           userId: n.user?.id ?? void 0
         });
         return;
@@ -2436,12 +2436,12 @@ let nS = e => t => function (i) {
         let o = new URL(Np(n, r), document.baseURI);
         if (r.view === 'fullscreen') {
           let o = r.fileKey ? n.fileByKey[r.fileKey] : void 0;
-          e = r.editorType ? Bu(r.editorType) : void 0;
+          e = r.editorType ? mapEditorTypeToStringWithObfuscated(r.editorType) : void 0;
           o && (t = o.name, i = Xm(o), a = !!o.last_published_at, s = !!(o.is_team_template && LQ(n)));
         } else {
           r.view === 'prototype' && (t = Iu(n, r));
         }
-        _$$eD.openFileFromNewTab({
+        desktopAPIInstance.openFileFromNewTab({
           url: o.href,
           fileEditorType: e ?? '',
           title: t,
@@ -2452,28 +2452,28 @@ let nS = e => t => function (i) {
       }
       return;
     }
-    if (r.view === 'fullscreen' || _$$eD.isFileBrowserTab() && r.view === 'prototype') {
+    if (r.view === 'fullscreen' || desktopAPIInstance.isFileBrowserTab() && r.view === 'prototype') {
       let t = _$$U2(r);
-      if (_$$eD.isFileBrowserTab() || n.selectedView && n.selectedView.view === 'prototype' || n.openFile && n.openFile?.key !== t) {
+      if (desktopAPIInstance.isFileBrowserTab() || n.selectedView && n.selectedView.view === 'prototype' || n.openFile && n.openFile?.key !== t) {
         let t = Np(n, r);
         let i = e.getState().user?.id;
         i && (t = NQ(t, 'fuid', i));
-        r.view === 'fullscreen' && (t = NQ(t, 'editor_type', Bu(r.editorType)));
+        r.view === 'fullscreen' && (t = NQ(t, 'editor_type', mapEditorTypeToStringWithObfuscated(r.editorType)));
         _$$Ay.unsafeRedirectWithLocationHref(t);
         return;
       }
     }
-    if (!_$$eD.isFileBrowserTab() && r.view !== 'communityHub') {
+    if (!desktopAPIInstance.isFileBrowserTab() && r.view !== 'communityHub') {
       if (!r || r.view !== 'fullscreen' && r.view !== 'prototype' && r.view !== 'desktopNewTab') {
         let e = Np(n, r);
         e && _$$Ay.unsafeRedirectWithLocationHref(e);
         return;
       }
-      r.view === 'prototype' && _$$eD.setLoading(!1);
+      r.view === 'prototype' && desktopAPIInstance.setLoading(!1);
     }
-    if (t(i), _$$eD && r.view === 'fullscreen' && n.selectedView.view === 'fullscreen' && r.editorType !== n.selectedView.editorType) {
+    if (t(i), desktopAPIInstance && r.view === 'fullscreen' && n.selectedView.view === 'fullscreen' && r.editorType !== n.selectedView.editorType) {
       let t = e.getState();
-      t.selectedView.view === 'fullscreen' && (_$$eD.setEditorType(YP(t.selectedView.editorType)), B(e));
+      t.selectedView.view === 'fullscreen' && (desktopAPIInstance.setEditorType(mapEditorTypeToString(t.selectedView.editorType)), B(e));
     }
     return;
   }
@@ -2481,12 +2481,12 @@ let nS = e => t => function (i) {
     let t = e.getState();
     let n = i.payload.file;
     let r = n.key ? t.fileByKey[n.key] : void 0;
-    if ((_$$K3(t.selectedView) && !_$$eD.isFileBrowserTab() || t.selectedView.view === 'fullscreen' && t.selectedView.fileKey === n.key) && (n.thumbnail_url !== r?.thumbnail_url || n.touched_at !== r?.touched_at || n.client_meta !== r?.client_meta || n.thumbnail_guid !== r?.thumbnail_guid)) {
+    if ((_$$K3(t.selectedView) && !desktopAPIInstance.isFileBrowserTab() || t.selectedView.view === 'fullscreen' && t.selectedView.fileKey === n.key) && (n.thumbnail_url !== r?.thumbnail_url || n.touched_at !== r?.touched_at || n.client_meta !== r?.client_meta || n.thumbnail_guid !== r?.thumbnail_guid)) {
       let e = {
         editedAt: n.touched_at,
         thumbnail: _$$pf(n)
       };
-      _$$eD.setTabPreviewData(e);
+      desktopAPIInstance.setTabPreviewData(e);
     }
   } else if (Am.matches(i)) {
     if (e.getState().selectedView.view === 'prototype') {
@@ -2497,7 +2497,7 @@ let nS = e => t => function (i) {
           fullWidth: !0,
           backgroundColor: 'white'
         };
-        _$$eD.setTabPreviewData({
+        desktopAPIInstance.setTabPreviewData({
           editedAt: e.accessed_at,
           thumbnail: t
         });
@@ -2520,26 +2520,26 @@ let nS = e => t => function (i) {
           fullWidth: !0,
           backgroundColor: 'white'
         };
-        _$$eD?.setTabPreviewData({
+        desktopAPIInstance?.setTabPreviewData({
           thumbnail: e
         });
       }
     }).catch(e => {});
   } else if (SL.matches(i)) {
-    _$$eD.isFileBrowserTab() || _$$eD.setMergingStatus(_$$y2.MERGING);
+    desktopAPIInstance.isFileBrowserTab() || desktopAPIInstance.setMergingStatus(_$$y2.MERGING);
   } else if (_$$E3.matches(i)) {
-    _$$eD.isFileBrowserTab() || _$$eD.setMergingStatus(_$$y2.NOT_MERGING);
+    desktopAPIInstance.isFileBrowserTab() || desktopAPIInstance.setMergingStatus(_$$y2.NOT_MERGING);
   } else if (OB.matches(i)) {
     t(i);
     let n = e.getState();
     let r = new URL(Np(n, n.selectedView), document.baseURI);
-    _$$eD.setLoading(!1);
-    _$$eD.setUrl({
+    desktopAPIInstance.setLoading(!1);
+    desktopAPIInstance.setUrl({
       url: r.href,
       fileKey: i.payload.file.key
     });
     let a = n.fileByKey[i.payload.file.key];
-    a && _$$eD.setTabPreviewData({
+    a && desktopAPIInstance.setTabPreviewData({
       editedAt: a.touched_at,
       thumbnail: _$$pf(a)
     });
@@ -2549,11 +2549,11 @@ let nS = e => t => function (i) {
     let n = e.getState();
     let r = n.currentUserOrgId ?? getInitialOptions().org_id;
     let a = n.currentTeamId ?? getInitialOptions().team_id;
-    _$$eD.setWorkspaceProperties({
+    desktopAPIInstance.setWorkspaceProperties({
       orgId: r,
       teamId: a
     });
-    _$$eD.setAuthedUsers(e.getState().authedUsers.orderedIds);
+    desktopAPIInstance.setAuthedUsers(e.getState().authedUsers.orderedIds);
     return;
   }
   return t(i);
@@ -2567,29 +2567,29 @@ let nK = Ju(e => {
     children: jsxs(_$$vo, {
       children: [jsx(Y9, {
         children: jsx(_$$hE2, {
-          children: _$$tx('webgl_error.message.we_cant_open_that_file_header')
+          children: renderI18nText('webgl_error.message.we_cant_open_that_file_header')
         })
       }), jsx(_$$nB, {
-        children: (t = e.result, _$$eD && t !== xt.SUCCESS ? jsxs('p', {
-          children: [_$$tx('webgl_error.message.we_cant_open_this_file_webgl_trouble'), jsx('br', {}), jsx('br', {}), _$$tx('webgl_error.message.if_this_problem_persists')]
+        children: (t = e.result, desktopAPIInstance && t !== xt.SUCCESS ? jsxs('p', {
+          children: [renderI18nText('webgl_error.message.we_cant_open_this_file_webgl_trouble'), jsx('br', {}), jsx('br', {}), renderI18nText('webgl_error.message.if_this_problem_persists')]
         }) : t === xt.NO_WEBGL ? jsx('p', {
-          children: _$$tx('webgl_error.message.webgl_disabled', {
+          children: renderI18nText('webgl_error.message.webgl_disabled', {
             helpArticleLink: jsx(_$$N2, {
               newTab: !0,
               href: 'https://help.figma.com/hc/articles/360039828614',
               trusted: !0,
-              children: _$$tx('webgl_error.message.this_help_article_link')
+              children: renderI18nText('webgl_error.message.this_help_article_link')
             })
           })
         }) : t === xt.STENCIL_TEST_FAILURE ? jsxs('span', {
-          children: [_$$tx('webgl_error.message.browser_bug'), jsx('br', {}), jsx('br', {}), _$$tx('webgl_error.message.figma_is_working_with_the_browser_developers')]
+          children: [renderI18nText('webgl_error.message.browser_bug'), jsx('br', {}), jsx('br', {}), renderI18nText('webgl_error.message.figma_is_working_with_the_browser_developers')]
         }) : void 0)
       }), jsx(wi, {
         children: jsx(jk, {
           children: jsx($n, {
             variant: 'primary',
             onClick: e.onClose,
-            children: _$$tx('webgl_error.message.got_it')
+            children: renderI18nText('webgl_error.message.got_it')
           })
         })
       })]
@@ -2614,13 +2614,13 @@ let nQ = e => t => function (i) {
     let r = n.selectedView;
     let a = i.payload;
     if (r.view === 'fullscreen' && a.view === 'fullscreen' && a.fileKey !== r.fileKey && gD()) {
-      x1('fullscreen', 'cannot change selected view while file creation is in progress', {
+      logError('fullscreen', 'cannot change selected view while file creation is in progress', {
         'current selected view': r.view,
         'new selected view': a.view,
         'current selected file key': r.fileKey,
         'new selected file key': a.fileKey
       });
-      $D(_$$e.SCENEGRAPH_AND_SYNC, new Error('File creation in progress'));
+      reportError(_$$e.SCENEGRAPH_AND_SYNC, new Error('File creation in progress'));
       return t(i);
     }
     let s = t(i);
@@ -2633,7 +2633,7 @@ let nQ = e => t => function (i) {
       e.dispatch(_$$V2());
     } else if (r.view !== 'fullscreen' && a.view === 'fullscreen') {
       if (_$$dK2() !== xt.SUCCESS) {
-        n.user && !_$$eD && e.dispatch(_$$sf({
+        n.user && !desktopAPIInstance && e.dispatch(_$$sf({
           view: 'recentsAndSharing'
         }));
         e.dispatch(_$$to({
@@ -2648,7 +2648,7 @@ let nQ = e => t => function (i) {
         if (a.preloaded) {
           let t = a.fileKey;
           let i = () => OZ(e, t, a.editorType).catch(t => {
-            let i = _$$an(t, _$$t2('user_facing_error.loading_a_file'));
+            let i = _$$an(t, getI18nString('user_facing_error.loading_a_file'));
             e.dispatch(_$$s2.error(i));
           });
           r.view === 'desktopNewTab' ? U_(e, a.editorType, !0).then(async () => {
@@ -2677,15 +2677,15 @@ let nQ = e => t => function (i) {
           isPlaygroundFile,
           tryPluginParams
         } = a;
-        if (editorType === _$$nT.DevHandoff) throw new Error('selectView(...) was called with { view: \'fullscreen\', fileKey: undefined, editorType: \'dev_handoff\' }. Cannot create new files with editor type dev_handoff.');
+        if (editorType === FEditorType.DevHandoff) throw new Error('selectView(...) was called with { view: \'fullscreen\', fileKey: undefined, editorType: \'dev_handoff\' }. Cannot create new files with editor type dev_handoff.');
         if (n.user && tryPluginId && tryPluginName && tryPluginVersionId) {
           let a = n.user?.drafts_folder_id;
           let c = n.currentUserOrgId && n.orgById[n.currentUserOrgId];
           let u = {
-            editor_type: Bu(editorType),
-            name: _$$t2('community.try.plugin_name_with_community', {
+            editor_type: mapEditorTypeToStringWithObfuscated(editorType),
+            name: getI18nString('community.try.plugin_name_with_community', {
               pluginName: tryPluginName
-            }) || _$$t2('fullscreen.filename_view.title_placeholder')
+            }) || getI18nString('fullscreen.filename_view.title_placeholder')
           };
           a && (u.folder_id = a);
           c && (u.org_id = c.id);
@@ -2704,7 +2704,7 @@ let nQ = e => t => function (i) {
                       tryPluginParams
                     }));
                   });
-                }).catch(() => e.dispatch(_$$s2.error(_$$t2('flash.unable_to_try_resource'))));
+                }).catch(() => e.dispatch(_$$s2.error(getI18nString('flash.unable_to_try_resource'))));
               }).catch(t => {
                 e.dispatch(_$$s2.error(OX(t)));
               });
@@ -2724,12 +2724,12 @@ let nQ = e => t => function (i) {
         throw new Error('selectView(...) was called with { view: \'fullscreen\', fileKey: undefined } while a file was already open. We don\'t handle this case.');
       } else if (r.editorType !== a.editorType) {
         let t = e.getState().mirror.appModel.currentTool === _$$ec.tool;
-        if (_$$L(), V6(a.editorType), Y5.isReady()) {
-          glU?.setEditorType(xq(a.editorType));
+        if (_$$L(), setLastUsedEditorType(a.editorType), Y5.isReady()) {
+          glU?.setEditorType(mapEditorTypeToYF(a.editorType));
           let e = n.theme.visibleTheme;
           glU?.setEditorTheme(e || '');
         }
-        a.editorType === _$$nT.DevHandoff ? (e.dispatch(KE()), e.dispatch(Ce()), t && Y5.onReady().then(() => Y5.triggerAction('set-tool-comments'))) : (a.editorType === _$$nT.Design && (r.editorType === _$$nT.Illustration || r.editorType === _$$nT.DevHandoff) || a.editorType === _$$nT.Illustration && (r.editorType === _$$nT.Design || r.editorType === _$$nT.DevHandoff)) && (e.dispatch(Ce()), Y5.onReady().then(() => {
+        a.editorType === FEditorType.DevHandoff ? (e.dispatch(KE()), e.dispatch(Ce()), t && Y5.onReady().then(() => Y5.triggerAction('set-tool-comments'))) : (a.editorType === FEditorType.Design && (r.editorType === FEditorType.Illustration || r.editorType === FEditorType.DevHandoff) || a.editorType === FEditorType.Illustration && (r.editorType === FEditorType.Design || r.editorType === FEditorType.DevHandoff)) && (e.dispatch(Ce()), Y5.onReady().then(() => {
           t && Y5.triggerAction('set-tool-comments');
           let i = e.getState();
           let n = !!i.openFile?.canEdit;
@@ -2743,7 +2743,7 @@ let nQ = e => t => function (i) {
           }
         }));
       } else {
-        z4.getIsExtension() && r.editorType === _$$nT.DevHandoff && a.nodeId && a.nodeId !== r.nodeId && Egt?.setSelectedNodeAndCanvas(a.nodeId, !1);
+        z4.getIsExtension() && r.editorType === FEditorType.DevHandoff && a.nodeId && a.nodeId !== r.nodeId && Egt?.setSelectedNodeAndCanvas(a.nodeId, !1);
       }
       if (a.commentThreadId) {
         let e = Jj();
@@ -2762,10 +2762,10 @@ let nQ = e => t => function (i) {
         Kz(t.openFile) && n?.default_file_key ? e.dispatch(_$$sf({
           view: 'fullscreen',
           fileKey: n.default_file_key,
-          editorType: _$$nT.Design
-        })) : _$$eD ? i.payload.userInitiated || _$$Ay.reload('File deleted', {
+          editorType: FEditorType.Design
+        })) : desktopAPIInstance ? i.payload.userInitiated || _$$Ay.reload('File deleted', {
           key: t.openFile?.key || null
-        }) : zl.get(_$$_) || e.dispatch(_$$sf({
+        }) : atomStoreManager.get(_$$_) || e.dispatch(_$$sf({
           view: 'recentsAndSharing'
         }));
       }
@@ -2960,7 +2960,7 @@ function rK({
       children: r.toLocaleString()
     }), jsx('div', {
       className: rH,
-      children: s ? _$$t2('design_systems.libraries_modal.plural.num_component', {
+      children: s ? getI18nString('design_systems.libraries_modal.plural.num_component', {
         numComponents: a
       }) : a.toLocaleString()
     })]
@@ -3051,17 +3051,17 @@ function rX({
 }) {
   switch (e) {
     case 'alpha':
-      return _$$tx('design_systems.libraries_modal.teams_and_libraries');
+      return renderI18nText('design_systems.libraries_modal.teams_and_libraries');
     case 'components':
-      return _$$tx('design_systems.libraries_modal.components');
+      return renderI18nText('design_systems.libraries_modal.components');
     case 'styles':
-      return _$$tx('design_systems.libraries_modal.styles');
+      return renderI18nText('design_systems.libraries_modal.styles');
     case 'teams':
-      return _$$tx('design_systems.libraries_modal.used_by');
+      return renderI18nText('design_systems.libraries_modal.used_by');
     case 'inserts':
-      return _$$tx('design_systems.libraries_modal.inserts_last_week');
+      return renderI18nText('design_systems.libraries_modal.inserts_last_week');
     case 'variables':
-      return _$$tx('design_systems.libraries_modal.variables');
+      return renderI18nText('design_systems.libraries_modal.variables');
     case 'search':
       return null;
   }
@@ -3166,7 +3166,7 @@ function r0({
           children: [e && jsxs(Fragment, {
             children: [jsx(FO, {}), !isSearching && jsx('div', {
               className: 'dsa_list_view--dsaLoadingText--35uXw',
-              children: getFeatureFlags().dsa_styles_variables_ui ? _$$tx('design_systems.libraries_modal.loading_dsa_message_all_assets') : _$$tx('design_systems.libraries_modal.loading_dsa_message')
+              children: getFeatureFlags().dsa_styles_variables_ui ? renderI18nText('design_systems.libraries_modal.loading_dsa_message_all_assets') : renderI18nText('design_systems.libraries_modal.loading_dsa_message')
             })]
           }), !e && !isSearching && jsx(r1, {
             isLoading: e,
@@ -3204,45 +3204,45 @@ function r1({
   let c = useMemo(() => {
     let e = [{
       type: _$$V3.STAT,
-      header: _$$t2('design_systems.libraries_modal.total_teams'),
+      header: getI18nString('design_systems.libraries_modal.total_teams'),
       count: t,
-      word: _$$t2('design_systems.libraries_modal.plural.team', {
+      word: getI18nString('design_systems.libraries_modal.plural.team', {
         teamCount: t
       })
     }, {
       type: _$$V3.STAT,
-      header: _$$t2('design_systems.libraries_modal.teams_with_libraries'),
+      header: getI18nString('design_systems.libraries_modal.teams_with_libraries'),
       count: teamsWithLibraries,
-      word: _$$t2('design_systems.libraries_modal.plural.team', {
+      word: getI18nString('design_systems.libraries_modal.plural.team', {
         teamCount: teamsWithLibraries
       })
     }, {
       type: _$$V3.STAT,
-      header: _$$t2('design_systems.libraries_modal.total_libraries'),
+      header: getI18nString('design_systems.libraries_modal.total_libraries'),
       count: totalLibraries,
-      word: _$$t2('design_systems.libraries_modal.plural.library', {
+      word: getI18nString('design_systems.libraries_modal.plural.library', {
         libraryCount: totalLibraries
       })
     }, {
       type: _$$V3.STAT,
-      header: _$$t2('design_systems.libraries_modal.total_components'),
+      header: getI18nString('design_systems.libraries_modal.total_components'),
       count: totalComponents,
-      word: _$$t2('design_systems.libraries_modal.plural.component', {
+      word: getI18nString('design_systems.libraries_modal.plural.component', {
         componentCount: totalComponents
       })
     }, {
       type: _$$V3.STAT,
-      header: _$$t2('design_systems.libraries_modal.total_styles'),
+      header: getI18nString('design_systems.libraries_modal.total_styles'),
       count: totalStyles,
-      word: _$$t2('design_systems.libraries_modal.plural.style', {
+      word: getI18nString('design_systems.libraries_modal.plural.style', {
         styleCount: totalStyles
       })
     }];
     getFeatureFlags().dsa_styles_variables_ui && e.push({
       type: _$$V3.STAT,
-      header: _$$t2('design_systems.libraries_modal.total_variables'),
+      header: getI18nString('design_systems.libraries_modal.total_variables'),
       count: totalVariables,
-      word: _$$t2('design_systems.libraries_modal.plural.variable', {
+      word: getI18nString('design_systems.libraries_modal.plural.variable', {
         variableCount: totalVariables
       })
     });
@@ -3404,12 +3404,12 @@ function r7({
 }
 let an = parsePxInt(YQL);
 let ar = () => ({
-  [_$$X2.YOUR_TEAMS]: _$$t2('org_view.your_teams'),
-  [_$$X2.LIBRARIES]: _$$t2('org_view.libraries'),
-  [_$$X2.FONTS]: _$$t2('org_view.shared_fonts'),
-  [_$$X2.CONNECTED_PROJECTS]: _$$t2('org_view.connected_projects'),
-  [_$$X2.PLUGINS]: _$$t2('org_view.plugins'),
-  [_$$X2.WIDGETS]: _$$t2('org_view.widgets')
+  [_$$X2.YOUR_TEAMS]: getI18nString('org_view.your_teams'),
+  [_$$X2.LIBRARIES]: getI18nString('org_view.libraries'),
+  [_$$X2.FONTS]: getI18nString('org_view.shared_fonts'),
+  [_$$X2.CONNECTED_PROJECTS]: getI18nString('org_view.connected_projects'),
+  [_$$X2.PLUGINS]: getI18nString('org_view.plugins'),
+  [_$$X2.WIDGETS]: getI18nString('org_view.widgets')
 });
 class aa extends _$$o5 {}
 let as = Ju(e => {
@@ -3576,7 +3576,7 @@ let ac = e => t => function (i) {
 let am = e => t => function (i) {
   if (_$$sf.matches(i)) {
     let t = $A(e.getState().selectedView);
-    let n = i.payload.view === 'fullscreen' && i.payload.editorType === _$$nT.DevHandoff;
+    let n = i.payload.view === 'fullscreen' && i.payload.editorType === FEditorType.DevHandoff;
     _$$hM() && t !== n && wY();
   }
   return t(i);
@@ -3642,14 +3642,14 @@ function aF(e, t) {
   let i = t.component || t.state_group;
   let n = t.component ? PW.COMPONENT : PW.STATE_GROUP;
   let r = e.getState();
-  let a = zl.get(qp);
+  let a = atomStoreManager.get(qp);
   if (i.length === 0) return;
   let s = aL(i[0]);
   let l = i[0].library_key;
   let d = r.fileByKey[s];
   let c = a[l];
   let u = getFeatureFlags().dse_lk_realtime_file_lookup ? c : d;
-  if (getFeatureFlags().dse_lk_realtime_audit && !c && d && $D(_$$e.DESIGN_SYSTEMS_ECOSYSTEM, new Error('Design System Asset Shim count not find file via library key'), {
+  if (getFeatureFlags().dse_lk_realtime_audit && !c && d && reportError(_$$e.DESIGN_SYSTEMS_ECOSYSTEM, new Error('Design System Asset Shim count not find file via library key'), {
     tags: {
       fileKey: s,
       libraryKey: l
@@ -3696,8 +3696,8 @@ function aF(e, t) {
           t.component && e.getState().selectedView?.view === 'fullscreen' && setTimeout(() => {
             let {
               updateCount
-            } = zl.get(_$$WJ);
-            updateCount && _$$sx('component_update_from_realtime', {
+            } = atomStoreManager.get(_$$WJ);
+            updateCount && trackEventAnalytics('component_update_from_realtime', {
               updateCount,
               isShimFFEnabled: !0
             });
@@ -3705,8 +3705,8 @@ function aF(e, t) {
           t.state_group && e.getState().selectedView?.view === 'fullscreen' && setTimeout(() => {
             let {
               updateCount
-            } = zl.get(_$$WJ);
-            updateCount && _$$sx('state_group_update_from_realtime', {
+            } = atomStoreManager.get(_$$WJ);
+            updateCount && trackEventAnalytics('state_group_update_from_realtime', {
               updateCount,
               isShimFFEnabled: !0
             });
@@ -3775,7 +3775,7 @@ let aU = new _$$H6({
     let r = [];
     for (let a of t.project?.componentUpdates || []) {
       let t = a.component?.nodeId || a.nodeId || '';
-      let s = zl.get(qp);
+      let s = atomStoreManager.get(qp);
       let o = _$$l6(a.component?.libraryKey ?? a.libraryKey ?? '');
       let l = a.component?.file?.teamId || s[o]?.team_id || '';
       let d = e.getState().library.publishedByLibraryKey.components;
@@ -3827,7 +3827,7 @@ let aB = new _$$H6({
       idForDeletion: t
     }), i.file?.componentUpdates || [])) {
       let t = o.component?.nodeId || o.nodeId || '';
-      let i = zl.get(qp);
+      let i = atomStoreManager.get(qp);
       let s = _$$l6(o.component?.libraryKey ?? o.libraryKey ?? '');
       let l = e.getState().library.publishedByLibraryKey.components;
       let d = o.component?.file?.teamId || i[s]?.team_id || '';
@@ -3990,7 +3990,7 @@ let aH = new _$$H6({
     let r = [];
     for (let a of t.project?.stateGroupUpdates || []) {
       let t = a.stateGroup?.nodeId || a.nodeId || '';
-      let s = zl.get(qp);
+      let s = atomStoreManager.get(qp);
       let o = _$$l6(a.stateGroup?.libraryKey ?? a.libraryKey ?? '');
       let l = e.getState().library.publishedByLibraryKey.stateGroups;
       let d = a.stateGroup?.file?.teamId || s[o]?.team_id || '';
@@ -4042,7 +4042,7 @@ let aW = new _$$H6({
       idForDeletion: t
     }), i.file?.stateGroupUpdates || [])) {
       let t = o.stateGroup?.nodeId || o.nodeId || '';
-      let i = zl.get(qp);
+      let i = atomStoreManager.get(qp);
       let s = _$$l6(o.stateGroup?.libraryKey ?? o.libraryKey ?? '');
       let l = e.getState().library.publishedByLibraryKey.stateGroups;
       let d = o.stateGroup?.file?.teamId || i[s]?.team_id || '';
@@ -5046,7 +5046,7 @@ class sI {
   }
   logMatchToFigment(e, t) {
     let i = diff(e, t);
-    _$$sx('lg_realtime_shim_messages', {
+    trackEventAnalytics('lg_realtime_shim_messages', {
       realtimeMsg: JSON.stringify(e.objects),
       lgMsg: JSON.stringify(t.objects),
       diff: JSON.stringify(i),
@@ -5056,7 +5056,7 @@ class sI {
   }
   logSingleMessageToFigment(e = null, t = null) {
     let i = e?.enqueueTime || t?.enqueueTime;
-    _$$sx('lg_realtime_shim_messages', {
+    trackEventAnalytics('lg_realtime_shim_messages', {
       realtimeMsg: e ? JSON.stringify(e.objects) : '',
       lgMsg: t ? JSON.stringify(t.objects) : '',
       diff: 'No match found',
@@ -5620,7 +5620,7 @@ sj.registerShim(sO, (e, t) => {
 });
 let sU = !1;
 async function sB(e, t) {
-  if (await Lb(), _$$sx('file-browser-hydrate', {
+  if (await Lb(), trackEventAnalytics('file-browser-hydrate', {
     location: 'realtime.tokenExpired'
   }), sU) {
     return;
@@ -5705,7 +5705,7 @@ function sV(e) {
   t.selectedView.view === 'fullscreen' && function (e, t, i) {
     let n = e.getState();
     let r = new Set();
-    let a = zl.get(qp);
+    let a = atomStoreManager.get(qp);
     for (let e of [n.library.publishedByLibraryKey.components, n.library.publishedByLibraryKey.stateGroups]) {
       for (let [n, s] of Object.entries(e)) {
         if (!i.has(n)) {
@@ -5840,7 +5840,7 @@ let sW = getInitialOptions().disable_realtime ? e => e => e : e => t => function
         fileKey: t
       }).then(n => {
         let r = n?.data?.meta;
-        r && r.realtime_token && (sG(e, EM(r.realtime_token)), i.payload.view === 'fullscreen' && _$$eD?.setRealtimeToken({
+        r && r.realtime_token && (sG(e, EM(r.realtime_token)), i.payload.view === 'fullscreen' && desktopAPIInstance?.setRealtimeToken({
           realtimeToken: r.realtime_token,
           fileKey: t
         }));
@@ -6358,16 +6358,16 @@ let oo = e => t => function (i) {
       fileFilter && e.dispatch(Rz({
         fileTypeFilter: fileFilter
       }));
-      t.search.parameters.facetFilters || (searchModelType === _$$uH.HUB_FILES || searchModelType === _$$uH.PUBLIC_PLUGINS || searchModelType === _$$uH.PUBLIC_PROFILES || searchModelType === _$$uH.PUBLIC_WIDGETS ? (zl.set(R9, _$$uH.FILES), e.dispatch(Rz({
+      t.search.parameters.facetFilters || (searchModelType === _$$uH.HUB_FILES || searchModelType === _$$uH.PUBLIC_PLUGINS || searchModelType === _$$uH.PUBLIC_PROFILES || searchModelType === _$$uH.PUBLIC_WIDGETS ? (atomStoreManager.set(R9, _$$uH.FILES), e.dispatch(Rz({
         facetFilters: {
           searchModelType: _$$uH.FILES
         }
-      }))) : (zl.set(R9, searchModelType), e.dispatch(Rz({
+      }))) : (atomStoreManager.set(R9, searchModelType), e.dispatch(Rz({
         facetFilters: {
           searchModelType
         }
       }))));
-      query ? (zl.set(Q8, query), e.dispatch(PI({
+      query ? (atomStoreManager.set(Q8, query), e.dispatch(PI({
         searchModelType,
         query,
         searchScope,
@@ -6380,13 +6380,13 @@ let oo = e => t => function (i) {
       }));
     }
     t(i);
-    oa && (_$$sx('Search Mode Closed', {
+    oa && (trackEventAnalytics('Search Mode Closed', {
       anyResultsClicked: os
     }), oa = !1, os = !1);
     return;
   }
   if (HZ.matches(i)) {
-    _$$sx('Search Result Clicked', {
+    trackEventAnalytics('Search Result Clicked', {
       index: i.payload.index
     });
     os = !0;
@@ -6527,7 +6527,7 @@ let of = e => t => function (i) {
 let oA = e => t => function (i) {
   if (_$$os.matches(i)) {
     let t = e.getState().loadingState;
-    if (!_$$ck2() && i.payload.orgs.length > 0) {
+    if (!isIntegrationContext() && i.payload.orgs.length > 0) {
       let i = _$$au2.loadingKeyForPayload();
       Sc(t, i) && e.dispatch(_$$au2());
     }
@@ -6550,7 +6550,7 @@ let oE = class e {
     this.visualBells = [];
   }
   static getInstance() {
-    return _$$nl() || Lg() ? (this.instance == null && (this.instance = new e()), this.instance) : null;
+    return isInteractionPathCheck() || getFalseValue() ? (this.instance == null && (this.instance = new e()), this.instance) : null;
   }
   add(e) {
     this.visualBells.push(e);
@@ -7551,7 +7551,7 @@ function lp(e, t) {
   if (Ud.matches(t)) {
     t.payload.forEach(t => {
       if (kI(t.name) && e.step === _$$Y3.FILE_IMPORT_WITH_CANCELED_PDF) return;
-      let i = new _$$jk('file.import', {});
+      let i = new PerfTimer('file.import', {});
       let n = {
         id: lc++,
         name: t.name,
@@ -7988,7 +7988,7 @@ function lD(e) {
       i.payload.nodeIds.forEach(e => {
         delete a[r][n][e];
       });
-      _$$Im(a[r][n]) && delete a[r][n];
+      isEmptyObject(a[r][n]) && delete a[r][n];
       return a;
     }
     if (_$$ru.matches(i)) {
@@ -9626,7 +9626,7 @@ function dJ(e = Object.create(null), t) {
   }
 }
 let d1 = 'music-standalone-volume';
-let d2 = () => Ay.isIpad ? 30 : getStorage().get(d1);
+let d2 = () => BrowserInfo.isIpad ? 30 : getStorage().get(d1);
 let d5 = () => ({
   music: {
     musicMessageID: 0,
@@ -9736,8 +9736,8 @@ function d4(e = d5(), t) {
 }
 let d3 = 'timer-audio-enabled';
 let d6 = 'timer-and-music-volume';
-let d7 = () => Ay.isIpad ? 30 : getStorage().get(d6);
-let d8 = () => !!Ay.isIpad || !1 !== getStorage().get(d3);
+let d7 = () => BrowserInfo.isIpad ? 30 : getStorage().get(d6);
+let d8 = () => !!BrowserInfo.isIpad || !1 !== getStorage().get(d3);
 let d9 = () => ({
   modalState: 'original',
   audioEnabled: d8(),
@@ -9988,7 +9988,7 @@ let cE = HY({
     if (_$$p3.matches(t) && t.payload.selectionProperties) {
       let i = t.payload.selectionProperties;
       let n = i.message;
-      if (n == null && _$$Im(i.derivedProperties.changes) && _$$Im(i.derivedProperties.mixed)) return e;
+      if (n == null && isEmptyObject(i.derivedProperties.changes) && isEmptyObject(i.derivedProperties.mixed)) return e;
       let r = Object.assign(Object.create(null), e);
       if (n != null && n.type === 'NODE_CHANGES' && n.nodeChanges) {
         for (let e of n.nodeChanges) {
@@ -10872,7 +10872,7 @@ let uZ = new Xc('TEAM_USER', {}, {
       let r = n.team_id;
       let a = n.user_id;
       if (!r || !a) {
-        $D(_$$e.FRONTEND_PLATFORM, new Error('LiveStore received TeamUser with no team_id/user_id'), {
+        reportError(_$$e.FRONTEND_PLATFORM, new Error('LiveStore received TeamUser with no team_id/user_id'), {
           tags: {
             teamUserId: e,
             teamId: r,
@@ -11093,12 +11093,12 @@ function pa(e) {
 }
 let ps = () => pa(e => e);
 window && (window.userAnalyticsDataTools = {
-  setUserAnalyticsDataOverrides: (e, t) => pa(i => (i[e] = t, _$$sx('Set UserAnalyticsData Override', {
+  setUserAnalyticsDataOverrides: (e, t) => pa(i => (i[e] = t, trackEventAnalytics('Set UserAnalyticsData Override', {
     userId: e
   }), i)),
   setCurrentUserAnalyticsDataOverrides: e => {
     let t = getInitialOptions().user_data?.id;
-    return t ? pa(i => (i[t] = e, _$$sx('Set UserAnalyticsData Override', {
+    return t ? pa(i => (i[t] = e, trackEventAnalytics('Set UserAnalyticsData Override', {
       currentUserId: t
     }), i)) : ps();
   },
@@ -11217,7 +11217,7 @@ let pg = {
     return _$$s2.removeAll.matches(t) ? {} : e;
   },
   modalShown(e = null, t) {
-    return (getFeatureFlags().datadog_rum_modal_shown_action && ($O.matches(t) || _$$Lo2.matches(t) || Ce.matches(t) || ES.matches(t) || _$$hm.matches(t) || _$$aZ.matches(t)) && _$$L4?.addAction('modalAction', {
+    return (getFeatureFlags().datadog_rum_modal_shown_action && ($O.matches(t) || _$$Lo2.matches(t) || Ce.matches(t) || ES.matches(t) || _$$hm.matches(t) || _$$aZ.matches(t)) && datadogRum?.addAction('modalAction', {
       action: t.type,
       modalType: t.payload?.type
     }), $O.matches(t)) ? e ? {
@@ -11270,7 +11270,7 @@ let pg = {
         for (; e >= 0 && _$$R4(n[e]) === 1 / 0;) e--;
         n.splice(e + 1, 0, i);
       }
-      if (PN() || Lg()) {
+      if (isInteractionOrEvalMode() || getFalseValue()) {
         let e = oE.getInstance();
         e?.add(i);
       }
@@ -11608,7 +11608,7 @@ let pg = {
   },
   twoFactorAuth: Wm,
   tooltip(e = u6, t) {
-    return Ay.isIpadNative || Ay.isMeetDevice ? e : fW.matches(t) ? {
+    return BrowserInfo.isIpadNative || BrowserInfo.isMeetDevice ? e : fW.matches(t) ? {
       ...e,
       ...t.payload.tooltip
     } : _$$Ts.matches(t) ? u6 : (_$$pP.matches(t) && (e.targetRefMap ||= {}, e.targetRefMap[t.payload.targetKey] = t.payload.targetRef), e);
@@ -12942,7 +12942,7 @@ function pv({
     children: jsx(_$$oW, {
       className: py,
       src: pb[r],
-      alt: _$$t2('desktop_open_views.interstitial.figma_app_logo')
+      alt: getI18nString('desktop_open_views.interstitial.figma_app_logo')
     })
   });
 }
@@ -12977,7 +12977,7 @@ function px() {
   return jsx(_$$oW, {
     className: pA,
     src: buildUploadUrl('3214f8f4f9e232539e7f89f2f34bd066db442f69'),
-    alt: _$$t2('desktop_open_views.interstitial.figma_app_logo')
+    alt: getI18nString('desktop_open_views.interstitial.figma_app_logo')
   });
 }
 class pS extends PureComponent {
@@ -12989,7 +12989,7 @@ class pS extends PureComponent {
       this.tabCloseTimerID = null;
     };
     this.onOpenHereInstead = () => {
-      _$$sx('Open Here Instead Clicked');
+      trackEventAnalytics('Open Here Instead Clicked');
       this.clearTabCloseTimer();
       this.props.onDismiss();
     };
@@ -13013,15 +13013,15 @@ class pS extends PureComponent {
         className: 'desktop_app_interstitial--container--evmaU',
         children: [getFeatureFlags().desktop_interstitial_animation ? jsx(pE, {}) : jsx(px, {}), jsx('div', {
           className: 'desktop_app_interstitial--message--wmVwt',
-          children: t ? e ? _$$tx('desktop_open_views.interstitial.opened_in_app', {
+          children: t ? e ? renderI18nText('desktop_open_views.interstitial.opened_in_app', {
             fileName: t.name
-          }) : _$$tx('desktop_open_views.interstitial.opening_in_app', {
+          }) : renderI18nText('desktop_open_views.interstitial.opening_in_app', {
             fileName: t.name
-          }) : e ? _$$tx('desktop_open_views.interstitial.opened_link_in_app') : _$$tx('desktop_open_views.interstitial.opening_link_in_app')
+          }) : e ? renderI18nText('desktop_open_views.interstitial.opened_link_in_app') : renderI18nText('desktop_open_views.interstitial.opening_link_in_app')
         }), jsx(_$$E9, {
           className: 'desktop_app_interstitial--link--XNAnR',
           onClick: this.onOpenHereInstead,
-          children: _$$tx('desktop_open_views.interstitial.open_here_instead')
+          children: renderI18nText('desktop_open_views.interstitial.open_here_instead')
         })]
       })
     });
@@ -13057,7 +13057,7 @@ let pG = isProdCluster() || isGovCluster() ? 'https://s3-figma-force-client-relo
 let pz = getFeatureFlags().force_client_reloads_v2_testing ? 1e4 : 3e5;
 let pH = getFeatureFlags().force_client_reloads_v2_testing ? 6e4 : 36e5;
 function pW(e, t) {
-  _$$az.trackDefinedEvent('scenegraph_and_sync.force_client_reload_fetch_error', {
+  analyticsEventManager.trackDefinedEvent('scenegraph_and_sync.force_client_reload_fetch_error', {
     message: e,
     status: t
   });
@@ -13068,7 +13068,7 @@ async function pK(e) {
       cache: 'no-store'
     });
     if (!t.ok) {
-      x1('force client reload', 'Failed to fetch', {
+      logError('force client reload', 'Failed to fetch', {
         status: t.status,
         message: t.statusText
       });
@@ -13095,7 +13095,7 @@ async function pY(e, t) {
   return n.success ? {
     status: 'success',
     data: n.data
-  } : (x1('force client reload', 'Failed to parse response', {
+  } : (logError('force client reload', 'Failed to parse response', {
     error: n.error.message
   }), pX('schema_violation'), {
     status: 'error'
@@ -13155,17 +13155,17 @@ async function pZ(e) {
   };
 }
 function pX(e) {
-  _$$az.trackDefinedEvent('scenegraph_and_sync.force_client_reload_aborted', {
+  analyticsEventManager.trackDefinedEvent('scenegraph_and_sync.force_client_reload_aborted', {
     reason: e
   });
 }
 let pQ = !1;
 async function pJ(e, t) {
   let i = Math.random() * t.reloadIntervalMs;
-  Lo('force client reload', 'Waiting for reload interval', {
+  logInfo('force client reload', 'Waiting for reload interval', {
     reloadInterval: i
   });
-  let n = fm(i).then(() => ({
+  let n = delay(i).then(() => ({
     status: 'done'
   }));
   let r = () => {};
@@ -13213,7 +13213,7 @@ async function p0(e, t) {
   }
 }
 function p1(e, t, i) {
-  e === 'poisoned' ? _$$az.trackDefinedEvent('scenegraph_and_sync.force_client_reload_poisoned', {
+  e === 'poisoned' ? analyticsEventManager.trackDefinedEvent('scenegraph_and_sync.force_client_reload_poisoned', {
     selectedView: i.getState().selectedView.view,
     coarseSelectedView: p3(i),
     isSafeToReload: pB(i, t.additionalViewsToReload),
@@ -13222,7 +13222,7 @@ function p1(e, t, i) {
     disableFullscreenBanner: t.disableFullscreenBanner,
     disableAutomaticReload: t.disableAutomaticReload,
     isBackgrounded: document.hidden
-  }) : e === 'triggered' ? _$$az.trackDefinedEvent('scenegraph_and_sync.force_client_reload_triggered', {
+  }) : e === 'triggered' ? analyticsEventManager.trackDefinedEvent('scenegraph_and_sync.force_client_reload_triggered', {
     selectedView: i.getState().selectedView.view,
     coarseSelectedView: p3(i),
     isSafeToReload: pB(i, t.additionalViewsToReload),
@@ -13235,14 +13235,14 @@ function p1(e, t, i) {
   }) : throwTypeError(e);
 }
 async function p2(e, t, i) {
-  if (Lo('force client reload', 'Release is poisoned', t), p1('poisoned', t, i), (await p0(e, t)).status === 'canceled') {
+  if (logInfo('force client reload', 'Release is poisoned', t), p1('poisoned', t, i), (await p0(e, t)).status === 'canceled') {
     pX('reload_cancel');
     return 'canceled';
   }
   let n = await pZ(e);
-  return n.status === 'error' ? (pX('fetch_error_currently_deployed'), 'canceled') : n.data ? (pX('on_currently_deployed'), 'canceled') : (p1('triggered', t, i), Lo('force client reload', 'Reload when convenient', {
+  return n.status === 'error' ? (pX('fetch_error_currently_deployed'), 'canceled') : n.data ? (pX('on_currently_deployed'), 'canceled') : (p1('triggered', t, i), logInfo('force client reload', 'Reload when convenient', {
     selectedView: i.getState().selectedView.view
-  }), t.disableFullscreenBanner || zl.set(_$$T4, !0), t.disableAutomaticReload || i.dispatch(Dl({
+  }), t.disableFullscreenBanner || atomStoreManager.set(_$$T4, !0), t.disableAutomaticReload || i.dispatch(Dl({
     reason: 'force client reload',
     delay: RH.NONE,
     metadata: {
@@ -13272,10 +13272,10 @@ class p4 {
           this._state = e === 'reloading' ? 'reloading' : 'safe';
         }
       } else {
-        this._state === 'reloading' ? t.status === 'safe' && (_$$l2(), zl.set(_$$T4, !1), this._state = 'safe', pX('reload_cancel_after_interval')) : this._state === 'waiting_for_reload_interval' ? Lo('force client reload', 'Skipping check because reload interval is in progress') : throwTypeError(this._state);
+        this._state === 'reloading' ? t.status === 'safe' && (_$$l2(), atomStoreManager.set(_$$T4, !1), this._state = 'safe', pX('reload_cancel_after_interval')) : this._state === 'waiting_for_reload_interval' ? logInfo('force client reload', 'Skipping check because reload interval is in progress') : throwTypeError(this._state);
       }
     } catch (e) {
-      pQ || ($D(_$$e.SCENEGRAPH_AND_SYNC, e, {
+      pQ || (reportError(_$$e.SCENEGRAPH_AND_SYNC, e, {
         tags: {
           force_client_reload: !0
         }
@@ -13316,7 +13316,7 @@ let md = _$$nF2((e, {
   let a = t.multiplayerSessionState;
   void 0 !== a && function (e, t, i) {
     _$$QI(t, i);
-    i === kul.SHOULD_UPGRADE ? (_$$sx('Upgrade Banner Shown'), e.dispatch(_$$il())) : i === kul.JOINED && e.dispatch(D9());
+    i === kul.SHOULD_UPGRADE ? (trackEventAnalytics('Upgrade Banner Shown'), e.dispatch(_$$il())) : i === kul.JOINED && e.dispatch(D9());
   }(e, r, a);
   void 0 !== t.currentTool && n.multiplayerEmoji.type === 'REACTING_OR_CHATTING' && e.dispatch(_$$mu());
 });
@@ -13374,10 +13374,10 @@ let mm = _$$nF2((e, t) => {
 });
 let mh = _$$nF2((e, t) => {
   let i = e.getState();
-  _$$eD && function (e, t) {
+  desktopAPIInstance && function (e, t) {
     if (V || !t.isInitialized || (V = !0, e.view !== 'fullscreen')) return;
     let i = _$$K(t.keyboardShortcuts);
-    _$$eD?.updateFullscreenMenuState({
+    desktopAPIInstance?.updateFullscreenMenuState({
       actionShortcuts: i
     });
   }(i.selectedView, i.mirror.appModel);
@@ -13394,7 +13394,7 @@ let mh = _$$nF2((e, t) => {
 });
 let mg = _$$nF2(e => {
   let t = e.getState();
-  t.selectedView.view === 'fullscreen' && zl.set(_$$hg, {
+  t.selectedView.view === 'fullscreen' && atomStoreManager.set(_$$hg, {
     type: 'HANDLE_EDITOR_SELECTION_CHANGED',
     payload: {
       sceneGraph: t.mirror.sceneGraph
@@ -13402,11 +13402,11 @@ let mg = _$$nF2(e => {
   });
 });
 let mf = new Map([['hideMultiplayerCursors', e => ({
-  message: e ? _$$t2('visual_bell.multiplayer_cursors_hidden') : _$$t2('visual_bell.multiplayer_cursors_visible')
+  message: e ? getI18nString('visual_bell.multiplayer_cursors_hidden') : getI18nString('visual_bell.multiplayer_cursors_visible')
 })], ['showFrameGrids', (e, t, i) => jH() ? (_$$Gk(), {
-  message: _$$t2('visual_bell.show_frame_guides_visible'),
+  message: getI18nString('visual_bell.show_frame_guides_visible'),
   button: {
-    text: _$$t2('visual_bell.show_frame_grids_hide_button'),
+    text: getI18nString('visual_bell.show_frame_grids_hide_button'),
     action: e => {
       e.stopPropagation();
       i.dispatch(_$$F.dequeue({}));
@@ -13414,7 +13414,7 @@ let mf = new Map([['hideMultiplayerCursors', e => ({
     }
   }
 }) : {
-  message: e ? _$$t2('visual_bell.show_frame_guides_visible') : _$$t2('visual_bell.show_frame_guides_hidden')
+  message: e ? getI18nString('visual_bell.show_frame_guides_visible') : getI18nString('visual_bell.show_frame_guides_hidden')
 }]]);
 async function my(e) {
   try {
@@ -13468,17 +13468,17 @@ class mS {
         success: e
       });
       e.on('initialized', () => {
-        _$$sx('launchdarkly_client_actual_init_time', n(!0), {
+        trackEventAnalytics('launchdarkly_client_actual_init_time', n(!0), {
           forwardToDatadog: !0
         });
       });
       e.on('failed', () => {
-        _$$sx('launchdarkly_client_actual_init_time', n(!1), {
+        trackEventAnalytics('launchdarkly_client_actual_init_time', n(!1), {
           forwardToDatadog: !0
         });
       });
     }(this.ldClient, i, n);
-    _$$sx('launchdarkly_client_block_time', {
+    trackEventAnalytics('launchdarkly_client_block_time', {
       duration: performance.now() - i,
       source: 'figma_app',
       bootstrapped: n,
@@ -13497,7 +13497,7 @@ class mS {
       custom: {
         cluster_name: getInitialOptions().cluster_name || '',
         service: 'figma_app',
-        is_desktop: !!_$$eD
+        is_desktop: !!desktopAPIInstance
       }
     };
   }
@@ -13590,7 +13590,7 @@ function mB() {
     });
   }, [Sprig, e]);
   useEffect(() => {
-    if (c === _$$nT.DevHandoff) {
+    if (c === FEditorType.DevHandoff) {
       let {
         viewer_city,
         viewer_region
@@ -13615,7 +13615,7 @@ function mV() {
   };
 }
 let mG = {
-  [_$$nT.Design]: {
+  [FEditorType.Design]: {
     eventName: 'enter_design_editor',
     trackingCalls: [() => ({
       samplingRateDenominator: getFeatureFlags().perf_sentiment_survey ? 1 : 3,
@@ -13630,7 +13630,7 @@ let mG = {
       extraProperties: getFeatureFlags().perf_sentiment_survey ? void 0 : mV()
     })]
   },
-  [_$$nT.Whiteboard]: {
+  [FEditorType.Whiteboard]: {
     eventName: 'enter_figjam_editor',
     trackingCalls: [() => ({
       samplingRateDenominator: getFeatureFlags().perf_sentiment_survey ? 1 : 3
@@ -13642,7 +13642,7 @@ let mG = {
       samplingRateDenominator: 100
     }]
   },
-  [_$$nT.Slides]: {
+  [FEditorType.Slides]: {
     eventName: 'enter_slides_editor',
     trackingCalls: [{
       samplingRateDenominator: 1
@@ -13654,7 +13654,7 @@ let mG = {
       samplingRateDenominator: 100
     }]
   },
-  [_$$nT.Sites]: {
+  [FEditorType.Sites]: {
     eventName: 'enter_sites_editor',
     trackingCalls: [() => ({
       samplingRateDenominator: getFeatureFlags().perf_sentiment_survey ? 1 : 3
@@ -13720,7 +13720,7 @@ function mZ() {
   let {
     Sprig
   } = useSprigWithSampling();
-  let t = _$$md(_$$dO2);
+  let t = useAtomWithSubscription(_$$dO2);
   let i = ZC(t);
   useEffect(() => {
     i?.status === _$$c6.LOADING && t.status === _$$c6.SUCCESS && (t.type === 'board' ? Sprig('track', _$$Dl) : Sprig('track', _$$i_2));
@@ -13790,8 +13790,8 @@ let hc = e => t => function (i) {
   if (getFeatureFlags().datadog_rum_selected_view && _$$sf.matches(i)) {
     let t = e.getState().selectedView.view;
     let n = i.payload.view;
-    _$$L4?.setViewContextProperty('selectedView', n);
-    t !== n && _$$L4?.addAction('selectedView', {
+    datadogRum?.setViewContextProperty('selectedView', n);
+    t !== n && datadogRum?.addAction('selectedView', {
       fromView: t,
       toView: n
     });
@@ -13859,19 +13859,19 @@ let hx = _$$ex('frontend_commit_preview_indicator', ({
       children: (() => {
         switch (t) {
           case 'feature_flag_off':
-            return _$$tx('frontend_sha_override_indicator.blocked_flag');
+            return renderI18nText('frontend_sha_override_indicator.blocked_flag');
           case 'not_test_account':
-            return _$$tx('frontend_sha_override_indicator.blocked_user');
+            return renderI18nText('frontend_sha_override_indicator.blocked_user');
           case 'invalid_commit_sha':
-            return _$$tx('frontend_sha_override_indicator.blocked_commit');
+            return renderI18nText('frontend_sha_override_indicator.blocked_commit');
           default:
             if (void 0 !== t) {
-              return _$$tx('frontend_sha_override_indicator.blocked_unknown', {
+              return renderI18nText('frontend_sha_override_indicator.blocked_unknown', {
                 blockedReason: t
               });
             }
             noop(t);
-            return _$$tx('frontend_sha_override_indicator.description');
+            return renderI18nText('frontend_sha_override_indicator.description');
         }
       })()
     }), jsx('button', {
@@ -13905,7 +13905,7 @@ let hx = _$$ex('frontend_commit_preview_indicator', ({
     }), jsx($n, {
       variant: 'primary',
       onClick: hE,
-      children: _$$tx('frontend_sha_override_indicator.return_to_latest')
+      children: renderI18nText('frontend_sha_override_indicator.return_to_latest')
     })]
   });
 }, e => ({
@@ -13997,7 +13997,7 @@ function hk(e) {
     children: e.children
   }), document.body);
 }
-let hN = E3('should-suppress-frontend-commit-preview-indicator', !1, {
+let hN = createLocalStorageAtom('should-suppress-frontend-commit-preview-indicator', !1, {
   subscribeToChanges: !0
 });
 function hP() {
@@ -14009,8 +14009,8 @@ function hP() {
   let r = Ng(user_data?.email);
   let a = !!manifest_commit_sha_override_desired;
   let s = isNotNullish(manifest_commit_sha_override_blocked_reason);
-  let o = !_$$nl() && !s;
-  let [l, c] = fp(hN);
+  let o = !isInteractionPathCheck() && !s;
+  let [l, c] = useAtomValueAndSetter(hN);
   return (useEffect(() => (a && (window.frontendCommitPreviewIndicator = {
     hide: () => c(!0),
     show: () => c(!1)
@@ -14041,11 +14041,11 @@ let hD = {
   [languageCodes.ES_LA]: 'desktop_language_support_modal_interacted_es_la'
 };
 let hL = {
-  [languageCodes.JA]: _$$tx('desktop_version_support.using_figma_in_japanese'),
-  [languageCodes.ES_ES]: _$$tx('desktop_version_support.using_figma_in_spanish'),
-  [languageCodes.KO_KR]: _$$tx('desktop_version_support.using_figma_in_korean'),
-  [languageCodes.PT_BR]: _$$tx('desktop_version_support.using_figma_in_portuguese'),
-  [languageCodes.ES_LA]: _$$tx('desktop_version_support.using_figma_in_latin_american_spanish')
+  [languageCodes.JA]: renderI18nText('desktop_version_support.using_figma_in_japanese'),
+  [languageCodes.ES_ES]: renderI18nText('desktop_version_support.using_figma_in_spanish'),
+  [languageCodes.KO_KR]: renderI18nText('desktop_version_support.using_figma_in_korean'),
+  [languageCodes.PT_BR]: renderI18nText('desktop_version_support.using_figma_in_portuguese'),
+  [languageCodes.ES_LA]: renderI18nText('desktop_version_support.using_figma_in_latin_american_spanish')
 };
 let hF = _$$tf(_$$N2.Button);
 function hM(e) {
@@ -14056,12 +14056,12 @@ function hM(e) {
 }
 let hj = Ju(e => {
   let t = _$$hS2(e);
-  let i = Gq()?.getPrimaryLocale(!1);
+  let i = getI18nState()?.getPrimaryLocale(!1);
   let r = useDispatch();
   let a = i && hD[i];
   let o = i && hL[i];
   let l = useSelector(e => a && !!e.userFlags[a]);
-  if (a == null || o == null || l || !_$$eD) return null;
+  if (a == null || o == null || l || !desktopAPIInstance) return null;
   let d = () => {
     r(_$$b({
       [a]: !0
@@ -14078,7 +14078,7 @@ let hj = Ju(e => {
       children: jsxs(_$$vo, {
         children: [jsx(Y9, {
           children: jsx(_$$hE2, {
-            children: _$$tx('desktop_version_support.update_recommended')
+            children: renderI18nText('desktop_version_support.update_recommended')
           })
         }), jsxs(_$$nB, {
           children: [jsx('p', {
@@ -14092,7 +14092,7 @@ let hj = Ju(e => {
                 d();
                 r(_$$Lo2());
               },
-              children: _$$tx('desktop_version_support.close')
+              children: renderI18nText('desktop_version_support.close')
             }), jsx(hF, {
               onClick: () => {
                 d();
@@ -14100,7 +14100,7 @@ let hj = Ju(e => {
               },
               href: `https://figma.com/${i}/downloads`,
               newTab: !0,
-              children: _$$tx('desktop_version_support.get_app')
+              children: renderI18nText('desktop_version_support.get_app')
             })]
           })
         })]
@@ -14124,19 +14124,19 @@ export async function $$hz0(e, t, d = {
   loadBlank: !1
 }) {
   await e7(async () => {
-    if (_$$nl() || J1.connect(), _$$eD && !_$$eD.isFileBrowserTab() && !getInitialOptions().user_data) {
+    if (isInteractionPathCheck() || J1.connect(), desktopAPIInstance && !desktopAPIInstance.isFileBrowserTab() && !getInitialOptions().user_data) {
       _$$a();
       return;
     }
     TH(_$$Ay.location.search);
     _$$R2(ib);
-    _$$X.domContentLoadedMs = Math.round(window.performance.now());
+    performanceMetricsTracker.domContentLoadedMs = Math.round(window.performance.now());
     xK.start('createStoreStart');
     let c = !!new URLSearchParams(_$$Ay.location.search).get('reduxDebug');
     let u = _$$A2.withExtraArgument({
       liveStore: M4
     });
-    kF('ReduxDevtoolsInstalled', !!window.__REDUX_DEVTOOLS_EXTENSION__);
+    setSentryTag('ReduxDevtoolsInstalled', !!window.__REDUX_DEVTOOLS_EXTENSION__);
     let p = Zz(Tw(u, ao, t_, sW, iK, iz, nS, nQ, i2, i6, ng, ns, am, oA, od, _$$Ay5, ob, ac, _$$v3, sK, sq, oo, of, hc, hd, hh), c && window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__({
       stateSanitizer: mN
     }) : e => e, function (e, t) {
@@ -14257,10 +14257,10 @@ export async function $$hz0(e, t, d = {
       return iP()(HY(e));
     }(), p);
     throttle(b);
-    let x = await ZO('initI18nStateWithLocale', _$$e.GROWTH_PLATFORM, () => yF(!0));
-    _$$X.i18nInitStateWithLocaleDurationMs = Math.round(x.duration);
+    let x = await measureAsyncDuration('initI18nStateWithLocale', _$$e.GROWTH_PLATFORM, () => loadI18nState(!0));
+    performanceMetricsTracker.i18nInitStateWithLocaleDurationMs = Math.round(x.duration);
     (function () {
-      let e = Gq()?.getPrimaryLocale(!1);
+      let e = getI18nState()?.getPrimaryLocale(!1);
       switch (e) {
         case 'ja':
           _$$A5.locale(e);
@@ -14286,7 +14286,7 @@ export async function $$hz0(e, t, d = {
     try {
       _$$d5.createInstance();
     } catch (e) {
-      $D(_$$e.WAYFINDING, e);
+      reportError(_$$e.WAYFINDING, e);
     }
     await hH();
     let T = null;
@@ -14378,23 +14378,23 @@ export async function $$hz0(e, t, d = {
         e = JSON.parse(t)?.meta || null;
         delete window.sessionStateXHR;
       }
-      if (e && !_$$ck2() && !_$$l()) {
+      if (e && !isIntegrationContext() && !_$$l()) {
         b.dispatch(_$$os(e));
         b.dispatch(q0(e));
         let t = new _$$P2();
-        _$$nl() || t.register(_$$y, e => {
+        isInteractionPathCheck() || t.register(_$$y, e => {
           let t = getInitialOptions().user_data?.id;
           let i = e.users.some(e => e.id === t);
           if (t && i) {
             b.dispatch(_$$os(e));
           } else if (t) {
-            if (_$$eD && !_$$eD.isFileBrowserTab()) {
-              b.getState().selectedView.view !== 'desktopNewTab' && _$$eD.close({
+            if (desktopAPIInstance && !desktopAPIInstance.isFileBrowserTab()) {
+              b.getState().selectedView.view !== 'desktopNewTab' && desktopAPIInstance.close({
                 suppressReopening: !0
               });
-            } else if (S8) {
+            } else if (bellFeedAPIInstance) {
               let e = b.getState().authedUsers.orderedIds;
-              S8.loggedOut(e);
+              bellFeedAPIInstance.loggedOut(e);
             } else {
               _$$Ay.redirect('/?fuid=');
             }
@@ -14406,12 +14406,12 @@ export async function $$hz0(e, t, d = {
     async function M() {
       let e;
       if (!P) throw new Error('start: expect userStateXHR to be defined');
-      _$$X.logUserStateInfo(P);
+      performanceMetricsTracker.logUserStateInfo(P);
       let t = null;
       let i = getWAFChallengeType(P);
       i && (await wafManager.waitForWAFValidation(i));
       i || XHR.retryStrategyForStatusCode(P.status) !== XHR.RetryStrategy.NO_RETRY ? (delete window.userStateXHR, t = (await _X('onUserStateLoaded', 10)).response) : (t = P.responseText, delete window.userStateXHR);
-      _$$X.jsonParseDurationMs = Math.round(vo('apiUserStateJsonParse', _$$e.APPLICATION_PLATFORM, () => {
+      performanceMetricsTracker.jsonParseDurationMs = Math.round(measureSyncDuration('apiUserStateJsonParse', _$$e.APPLICATION_PLATFORM, () => {
         e = JSON.parse(t);
       }));
       T ? xK.time('hydrateActionWithUserState', () => {
@@ -14423,16 +14423,16 @@ export async function $$hz0(e, t, d = {
       await my(b);
     }
     function j(c) {
-      _$$X.fileBrowserInitDurationMs = Math.round(vo('fileBrowserInit', _$$e.WAYFINDING, () => {
+      performanceMetricsTracker.fileBrowserInitDurationMs = Math.round(measureSyncDuration('fileBrowserInit', _$$e.WAYFINDING, () => {
         _$$a5(getInitialOptions().user_data || null, b, b.getState().userFlags, t);
         _$$h4();
         b.dispatch(_$$De());
         b.dispatch(_$$S6());
         b.dispatch(_$$Ts());
       }));
-      d.loadBlank ? U_(b, _$$nT.Design).catch(e => $D(_$$e.SCENEGRAPH_AND_SYNC, e)) : d.newFileInfo && $N(b, d.newFileInfo, !0);
-      _$$X.hydrateDurationMs = Math.round(vo('fileBrowserHydrate', _$$e.WAYFINDING, () => {
-        _$$sx('file-browser-hydrate', {
+      d.loadBlank ? U_(b, FEditorType.Design).catch(e => reportError(_$$e.SCENEGRAPH_AND_SYNC, e)) : d.newFileInfo && $N(b, d.newFileInfo, !0);
+      performanceMetricsTracker.hydrateDurationMs = Math.round(measureSyncDuration('fileBrowserHydrate', _$$e.WAYFINDING, () => {
+        trackEventAnalytics('file-browser-hydrate', {
           location: 'app_entry'
         });
         b.dispatch(Qv(c));
@@ -14446,11 +14446,11 @@ export async function $$hz0(e, t, d = {
         promo: getInitialOptions().promo || null
       }));
       _$$M().catch(e => {
-        xi('fonts', 'Unable to cache fonts', {
+        logWarning('fonts', 'Unable to cache fonts', {
           error: e.message
         });
       });
-      _$$eD && _$$eD.setMessageHandler((...[e, t]) => {
+      desktopAPIInstance && desktopAPIInstance.setMessageHandler((...[e, t]) => {
         if (e === 'newFile') {
           let e = t.editorType || FFileType.DESIGN;
           let i = t.source && typeof t.source == 'string' ? {
@@ -14464,7 +14464,7 @@ export async function $$hz0(e, t, d = {
             editorType: e
           });
           b.dispatch(_$$uM(n));
-        } else if (e !== 'handleAction' || _$$eD.isFileBrowserTab() || wl()) {
+        } else if (e !== 'handleAction' || desktopAPIInstance.isFileBrowserTab() || wl()) {
           if (e === 'handlePageCommand') {
             let {
               activeElement
@@ -14534,7 +14534,7 @@ export async function $$hz0(e, t, d = {
             }, 'osmenu', t.pluginMenuAction);
           } else if (e === 'segmentTrackEvent') {
             if (t.event === 'Desktop Tab Copy Link V2') {
-              if (_$$sx('Desktop Tab Copy Link', t.params || void 0), t.params.source === 'context-menu') {
+              if (trackEventAnalytics('Desktop Tab Copy Link', t.params || void 0), t.params.source === 'context-menu') {
                 let e = b.getState().openFile?.key;
                 if (e == null || b.getState().selectedView.view !== 'fullscreen') return;
                 _$$ds('File Share Link Copied', e, b.getState(), {
@@ -14547,7 +14547,7 @@ export async function $$hz0(e, t, d = {
                 batchRequest: e.batchRequest,
                 forwardToDatadog: e.forwardToDatadog
               } : void 0;
-              _$$sx(t.event, t.params || void 0, i);
+              trackEventAnalytics(t.event, t.params || void 0, i);
             }
           } else if (e === 'showColorManagementSettings') {
             console.log('showColorManagementSettings');
@@ -14563,11 +14563,11 @@ export async function $$hz0(e, t, d = {
                 workspace: e.data.meta.workspace,
                 path: t.path
               }));
-              getFeatureFlags().desktop_server_error_pages && _$$eD?.finishAppAuth(null);
+              getFeatureFlags().desktop_server_error_pages && desktopAPIInstance?.finishAppAuth(null);
             }).catch(e => {
               console.error(e);
               b.dispatch(_$$F.enqueue({
-                message: _$$t2('desktop_bindings.visual_bell.redeem_app_auth_error'),
+                message: getI18nString('desktop_bindings.visual_bell.redeem_app_auth_error'),
                 error: !0
               }));
             });
@@ -14576,8 +14576,8 @@ export async function $$hz0(e, t, d = {
           } else if (e === 'handleCopyLink') {
             let e = removeQueryParam(window.location.href, 'viewport');
             let t = '';
-            if (_$$eD.isFileBrowserTab() || wl()) {
-              t = _$$t2('desktop_bindings.interstitial.page_link_copied');
+            if (desktopAPIInstance.isFileBrowserTab() || wl()) {
+              t = getI18nString('desktop_bindings.interstitial.page_link_copied');
               Dk(e).then(() => b.dispatch(_$$F.enqueue({
                 message: t
               })));
@@ -14597,15 +14597,15 @@ export async function $$hz0(e, t, d = {
               }
               let a = Object.keys(i.mirror.sceneGraphSelection);
               let s = a.length === 1 ? i.mirror.sceneGraph.get(a[0])?.type : null;
-              let o = a.length && zl.get(v2) ? i.mirror.sceneGraph.get(a[0]) : null;
+              let o = a.length && atomStoreManager.get(v2) ? i.mirror.sceneGraph.get(a[0]) : null;
               if (Wl(i.selectedView)) {
-                t = _$$t2('desktop_bindings.visual_bell.summary_link_copied');
+                t = getI18nString('desktop_bindings.visual_bell.summary_link_copied');
               } else if (s === 'FRAME') {
-                t = _$$t2('desktop_bindings.interstitial.frame_link_copied');
+                t = getI18nString('desktop_bindings.interstitial.frame_link_copied');
               } else if (s === 'SECTION') {
-                t = _$$t2('desktop_bindings.interstitial.section_link_copied');
+                t = getI18nString('desktop_bindings.interstitial.section_link_copied');
               } else if (i.mirror.appModel.pagesList.length > 1) {
-                t = _$$t2('desktop_bindings.interstitial.page_link_copied');
+                t = getI18nString('desktop_bindings.interstitial.page_link_copied');
               } else if (_$$P3(i.selectedView)) {
                 if (o) {
                   let t = parseQuery(_$$Ay.location.search);
@@ -14614,11 +14614,11 @@ export async function $$hz0(e, t, d = {
                   let i = tT()(t) ? '' : `?${serializeQuery(t)}`;
                   e = `${window.location.origin}${_$$Ay.location.pathname}${i}`;
                 }
-                t = o ? _$$t2('copy_to_clipboard.slides.link_to_slide_copied_to_clipboard', {
+                t = o ? getI18nString('copy_to_clipboard.slides.link_to_slide_copied_to_clipboard', {
                   name: o.name
-                }) : _$$t2('desktop_bindings.visual_bell.slide_deck_link_copied');
+                }) : getI18nString('desktop_bindings.visual_bell.slide_deck_link_copied');
               } else {
-                t = _$$t2('desktop_bindings.visual_bell.file_link_copied');
+                t = getI18nString('desktop_bindings.visual_bell.file_link_copied');
               }
               b.dispatch(_$$S({
                 fileKey: n.key,
@@ -14638,8 +14638,8 @@ export async function $$hz0(e, t, d = {
               issueType,
               errorMessage
             } = t.issue;
-            if (!Object.values(_$$tr).includes(issueType)) return;
-            _$$tu(locale, primaryLocale, id, issueType, errorMessage ? {
+            if (!Object.values(TranslationErrors).includes(issueType)) return;
+            reportTranslationIssue(locale, primaryLocale, id, issueType, errorMessage ? {
               message: errorMessage
             } : void 0);
           } else if (e === 'showFlashMessage') {
@@ -14647,13 +14647,13 @@ export async function $$hz0(e, t, d = {
           } else if (e === 'logOutAllUsers') {
             b.dispatch(S5());
           } else if (e === 'tabVisibilityChange') {
-            bM.emit(t.isVisible ? 'visible' : 'hidden');
+            desktopVisibilityEmitter.emit(t.isVisible ? 'visible' : 'hidden');
           } else if (e === 'windowStateChange') {
-            zl.set(tN, t.windowState);
+            atomStoreManager.set(tN, t.windowState);
           } else if (e === 'importFiles') {
             let e = {
               type: _$$A7.FILE_IMPORT,
-              moveText: _$$t2('file_browser.file_move.import'),
+              moveText: getI18nString('file_browser.file_move.import'),
               files: t.files,
               orgId: b.getState().currentUserOrgId
             };
@@ -14669,7 +14669,7 @@ export async function $$hz0(e, t, d = {
                 key: i
               },
               name: t.newTitle
-            })), _$$sx('Desktop Tab Renamed', {
+            })), trackEventAnalytics('Desktop Tab Renamed', {
               fileKey: i,
               editorType: e.openFile?.editorType
             }));
@@ -14682,18 +14682,18 @@ export async function $$hz0(e, t, d = {
             } = t;
             if (!ic.consume()) {
               let t = 'Rate limit exceeded. Please try again later.';
-              _$$eD.sendMCPResult(queryId, {
+              desktopAPIInstance.sendMCPResult(queryId, {
                 error: t,
                 errorObj: new Error(t)
               });
               return;
             }
             _$$r2(toolName, args, b, clientInfo).then(t => {
-              _$$eD.sendMCPResult(queryId, {
+              desktopAPIInstance.sendMCPResult(queryId, {
                 result: t
               });
             }).catch(t => {
-              _$$eD.sendMCPResult(queryId, {
+              desktopAPIInstance.sendMCPResult(queryId, {
                 error: t.message,
                 errorObj: t
               });
@@ -14704,17 +14704,17 @@ export async function $$hz0(e, t, d = {
               filename
             } = t;
             LP(filename).then(t => {
-              _$$eD.sendMCPImageResult(queryId, {
+              desktopAPIInstance.sendMCPImageResult(queryId, {
                 result: t
               });
             }).catch(t => {
-              _$$eD.sendMCPImageResult(queryId, {
+              desktopAPIInstance.sendMCPImageResult(queryId, {
                 error: t.message,
                 errorObj: t
               });
             });
           } else {
-            e === 'sendMCPDeprecatedSSEAlert' ? _$$f() : e === 'updateEyedropper' && zl.set(_$$U, t);
+            e === 'sendMCPDeprecatedSSEAlert' ? _$$f() : e === 'updateEyedropper' && atomStoreManager.set(_$$U, t);
           }
         } else {
           let e = {};
@@ -14723,14 +14723,14 @@ export async function $$hz0(e, t, d = {
           t.action === 'save-as' ? (Dc(_$$hV2.SaveLocalFile, i.saveAsState, b.dispatch, t.action, ['0:0'], t.action), _$$ce2()) : t.action === 'export-all-frames-to-pdf' ? Dc(_$$hV2.Export, i.saveAsState, b.dispatch, t.action, [i.mirror.appModel.currentPage], t.action) : Y5.triggerActionInUserEditScope(t.action, e);
         }
       });
-      _$$eD && _$$eD.setLocales(Gq().locales);
+      desktopAPIInstance && desktopAPIInstance.setLocales(getI18nState().locales);
       (function (e) {
         let t = e.getState().selectedView;
-        t.view === 'fullscreen' && _$$eD?.setEditorType(YP(e.getState().selectedView.editorType));
-        t.view === 'prototype' && t.file.editor_type === 'slides' && _$$eD?.setEditorType('slides');
+        t.view === 'fullscreen' && desktopAPIInstance?.setEditorType(mapEditorTypeToString(e.getState().selectedView.editorType));
+        t.view === 'prototype' && t.file.editor_type === 'slides' && desktopAPIInstance?.setEditorType('slides');
       })(b);
       (function () {
-        let e = _$$eD;
+        let e = desktopAPIInstance;
         e != null && (J(Z, t => {
           t != null && e.updateColorProfile(t);
         }), J(Q, e => {
@@ -14741,11 +14741,11 @@ export async function $$hz0(e, t, d = {
       _$$aZ2(b);
       wy();
       (function (e) {
-        let t = Gq()?.getPrimaryLocale(!1);
-        if (!t || !_$$eD) return;
+        let t = getI18nState()?.getPrimaryLocale(!1);
+        if (!t || !desktopAPIInstance) return;
         let i = hM(t);
         let n = t && hD[t];
-        (!n || !e.getState().userFlags[n]) && i && i > _$$eD.getVersion() && e.dispatch(_$$to({
+        (!n || !e.getState().userFlags[n]) && i && i > desktopAPIInstance.getVersion() && e.dispatch(_$$to({
           type: hj
         }));
       })(b);
@@ -14757,11 +14757,11 @@ export async function $$hz0(e, t, d = {
         let n;
         let r;
         function a(e = 'notset', t) {
-          _$$v6({
+          updateEnvironmentInfo({
             browser_name: 'VS Code Extension',
             vscode_extension_version: e
           });
-          XM('browser', {
+          setSentryContext('browser', {
             name: 'VS Code Extension',
             vscode_extension_version: e
           });
@@ -14788,7 +14788,7 @@ export async function $$hz0(e, t, d = {
                 wS.resolveMessage(t);
                 break;
               case 'TRACK_EVENT':
-                _$$sx(t.data.eventName, t.data.eventProperties);
+                trackEventAnalytics(t.data.eventName, t.data.eventProperties);
                 break;
               case 'GET_HTML_SKELETON':
                 b();
@@ -14866,7 +14866,7 @@ export async function $$hz0(e, t, d = {
                 e.dispatch(_$$sf({
                   view: 'fullscreen',
                   fileKey: i,
-                  editorType: _$$nT.DevHandoff,
+                  editorType: FEditorType.DevHandoff,
                   nodeId: n
                 }));
                 break;
@@ -14874,7 +14874,7 @@ export async function $$hz0(e, t, d = {
                 (function (t) {
                   let i = new URL(`https://figma.com/file/${t}`);
                   let n = vU(e.getState(), i.pathname, i.search, i.hash);
-                  'editorType' in n && (n.editorType = _$$nT.DevHandoff);
+                  'editorType' in n && (n.editorType = FEditorType.DevHandoff);
                   let r = e.getState().mirror.sceneGraphSelection;
                   e.dispatch(_$$sf(n));
                   let a = i.searchParams.get('node-id');
@@ -15038,7 +15038,7 @@ export async function $$hz0(e, t, d = {
             });
             return;
           }
-          if (_$$sx('Code Connect Mapping Suggestion Requested', {
+          if (trackEventAnalytics('Code Connect Mapping Suggestion Requested', {
             file_key: t,
             react_component_name: e.reactComponentName,
             figma_component_uri: e.figmaComponentUri,
@@ -15060,7 +15060,7 @@ export async function $$hz0(e, t, d = {
             existingDefinitionSoFar: e.existingDefinitionSoFar,
             extraContext: e.extraContext
           }).then(i => {
-            _$$sx('Code Connect Mapping Suggestion Generated', {
+            trackEventAnalytics('Code Connect Mapping Suggestion Generated', {
               file_key: t,
               react_component_name: e.reactComponentName,
               figma_component_uri: e.figmaComponentUri,
@@ -15208,22 +15208,22 @@ export async function $$hz0(e, t, d = {
           Rh('active_session', {
             is_safe_to_reload: pB(e),
             has_pending_reload: _$$rg(),
-            is_showing_banner: zl.get(_$$T4),
+            is_showing_banner: atomStoreManager.get(_$$T4),
             is_backgrounded: document.hidden,
             selected_view: p3(e),
             reload_state: p6?.state ?? 'safe'
           });
         }, 3e5);
-        setInterval(() => _$$sx('Force Client Reload Selected View', {
+        setInterval(() => trackEventAnalytics('Force Client Reload Selected View', {
           view: e.getState().selectedView.view,
           is_safe_to_reload: pB(e),
           is_backgrounded: document.hidden,
-          is_showing_banner: zl.get(_$$T4),
+          is_showing_banner: atomStoreManager.get(_$$T4),
           reload_state: p6?.state ?? 'safe'
         }), 36e5);
         let t = getFeatureFlags().force_client_reloads_v2_testing && isStagingCluster() && getInitialOptions().manifest_commit_sha_override_desired ? getInitialOptions().manifest_commit_sha_override_desired : getInitialOptions().release_manifest_git_commit;
         if (!t) {
-          isLocalCluster() || $D(_$$e.SCENEGRAPH_AND_SYNC, new Error('Missing release'), {
+          isLocalCluster() || reportError(_$$e.SCENEGRAPH_AND_SYNC, new Error('Missing release'), {
             extra: {
               release: t
             }
@@ -15241,7 +15241,7 @@ export async function $$hz0(e, t, d = {
         });
         window.addEventListener('online', async () => await p6?.check());
       })(b);
-      let u = xK.time('initialReactRender', () => vo('initialRender', _$$e.CLIENT_PLATFORM, () => {
+      let u = xK.time('initialReactRender', () => measureSyncDuration('initialRender', _$$e.CLIENT_PLATFORM, () => {
         let t = function (e) {
           if (!mx()) return e;
           let t = getInitialOptions().launchdarkly_client_side_id || '';
@@ -15256,7 +15256,7 @@ export async function $$hz0(e, t, d = {
             t.sentryTags = {
               launchdarkly_sdk: !0
             };
-            $D(_$$e.GROWTH_PLATFORM, t);
+            reportError(_$$e.GROWTH_PLATFORM, t);
             return e;
           }
         }(() => {
@@ -15264,9 +15264,9 @@ export async function $$hz0(e, t, d = {
             store: b,
             children: jsx(_$$oD, {
               userId: getInitialOptions().user_data?.id || null,
-              children: jsx(An, {
+              children: jsx(AtomProvider, {
                 children: jsx(m, {
-                  initialVersion: _$$V,
+                  initialVersion: uiVariantName,
                   children: jsx(_$$r, {
                     debug: !1,
                     children: jsxs(T9, {
@@ -15288,7 +15288,7 @@ export async function $$hz0(e, t, d = {
               })
             })
           });
-          return getFeatureFlags().common_app_entry_suspense && !PN() ? jsx(_$$g, {
+          return getFeatureFlags().common_app_entry_suspense && !isInteractionOrEvalMode() ? jsx(_$$g, {
             fallback: null,
             source: 'common_app_entry',
             children: t
@@ -15303,9 +15303,9 @@ export async function $$hz0(e, t, d = {
           children: jsx(t, {})
         }));
       }));
-      _$$X.initialRenderDurationMs = Math.round(u);
-      _$$X.timeToLoadMs = Math.round(performance.now());
-      _$$X.report(_$$sx);
+      performanceMetricsTracker.initialRenderDurationMs = Math.round(u);
+      performanceMetricsTracker.timeToLoadMs = Math.round(performance.now());
+      performanceMetricsTracker.report(trackEventAnalytics);
     }
     await (eo || (eo = el()), eo);
     getSingletonSceneGraph().setChangeListenersConfig({
@@ -15326,7 +15326,7 @@ let hH = async () => {
   }
 };
 function hW() {
-  _$$rH.start('react-render');
+  reactTimerGroup.start('react-render');
   let e = XP();
   Object.keys(e).length > 0 && debugState.dispatch(mp(e));
   TG();
@@ -15337,7 +15337,7 @@ function hW() {
   })();
 }
 function hK() {
-  _$$rH.stop('react-render');
-  (!_$$ck2() || MP()) && F2.focusIfUnfocused();
+  reactTimerGroup.stop('react-render');
+  (!isIntegrationContext() || isZoomIntegration()) && F2.focusIfUnfocused();
 }
 export const n = $$hz0;

@@ -12,11 +12,11 @@ import { to } from '../905/156213';
 import { o as _$$o, Ph, pW } from '../905/160095';
 import { E as _$$E } from '../905/172252';
 import { h as _$$h } from '../905/207101';
-import { t as _$$t, tx } from '../905/303541';
+import { getI18nString, renderI18nText } from '../905/303541';
 import { Q as _$$Q } from '../905/363675';
 import { c as _$$c } from '../905/370443';
 import { b as _$$b2 } from '../905/484176';
-import { Iv } from '../905/548208';
+import { DashboardSections } from '../905/548208';
 import { getFeatureFlags } from '../905/601108';
 import { A3, Hj } from '../905/682977';
 import { g as _$$g } from '../905/687265';
@@ -121,7 +121,7 @@ function B(e) {
           'data-testid': e.testIdPrefix && `${e.testIdPrefix}-line-${t.bpKey}`,
           'className': _$$s.flex.justifyBetween.textBodyMedium.colorTextSecondary.gap16.itemsCenter.$,
           'children': [jsx('span', {
-            children: _$$t('plan_invoices.seat_type_count', {
+            children: getI18nString('plan_invoices.seat_type_count', {
               quantity: t.quantity,
               seatType: tI(t.bpKey)
             })
@@ -143,20 +143,20 @@ function z(e) {
     endDate: _$$A(e.invoice.period_ends_at).toDate()
   }), [e.invoice, a]);
   let r = useCallback(() => _8(e.invoice) ? {
-    heading: _$$t('plan_invoices.cost_breakdown.renewing_monthly_seats_heading'),
+    heading: getI18nString('plan_invoices.cost_breakdown.renewing_monthly_seats_heading'),
     subheading: null
   } : e.invoice.plan_parent_type === FOrganizationLevelType.TEAM && e.invoice.billing_interval === _$$NW.MONTH && e.invoice.subtype === ly.SUBSCRIPTION_RENEWED && _$$A(e.invoice.issued_at).isAfter(_$$A.utc('2018-05-01')) ? {
-    heading: _$$t('plan_invoices.cost_breakdown.renewing_monthly_seats_heading'),
-    subheading: e.invoice.state === qH.PENDING ? _$$t('plan_invoices.cost_breakdown.renewing_monthly_seats_subheading.pending', i) : _$$t('plan_invoices.cost_breakdown.renewing_monthly_seats_subheading', i)
+    heading: getI18nString('plan_invoices.cost_breakdown.renewing_monthly_seats_heading'),
+    subheading: e.invoice.state === qH.PENDING ? getI18nString('plan_invoices.cost_breakdown.renewing_monthly_seats_subheading.pending', i) : getI18nString('plan_invoices.cost_breakdown.renewing_monthly_seats_subheading', i)
   } : e.invoice.plan_parent_type === FOrganizationLevelType.TEAM && e.invoice.billing_interval === _$$NW.MONTH ? {
-    heading: _$$t('plan_invoices.cost_breakdown.monthly_seats_heading'),
-    subheading: _$$t('plan_invoices.cost_breakdown.monthly_seats_subheading', i)
+    heading: getI18nString('plan_invoices.cost_breakdown.monthly_seats_heading'),
+    subheading: getI18nString('plan_invoices.cost_breakdown.monthly_seats_subheading', i)
   } : e.invoice.plan_parent_type === FOrganizationLevelType.TEAM && e.invoice.billing_interval === _$$NW.YEAR ? {
-    heading: _$$t('plan_invoices.cost_breakdown.annual_seats_heading'),
-    subheading: _$$t('plan_invoices.cost_breakdown.annual_seats_subheading', i)
+    heading: getI18nString('plan_invoices.cost_breakdown.annual_seats_heading'),
+    subheading: getI18nString('plan_invoices.cost_breakdown.annual_seats_subheading', i)
   } : {
-    heading: _$$t('plan_invoices.cost_breakdown.seats_heading'),
-    subheading: _$$t('plan_invoices.cost_breakdown.seats_subheading', i)
+    heading: getI18nString('plan_invoices.cost_breakdown.seats_heading'),
+    subheading: getI18nString('plan_invoices.cost_breakdown.seats_subheading', i)
   }, [e.invoice, i]);
   let l = useMemo(() => {
     let t = rK(e.invoice).sort(AG);
@@ -164,11 +164,11 @@ function z(e) {
     if (a) {
       let a;
       let r;
-      e.invoice.billing_mechanics === fA.PRORATED ? (a = _$$t('plan_invoices.cost_breakdown.seat_charges_subheading.prorated', {
+      e.invoice.billing_mechanics === fA.PRORATED ? (a = getI18nString('plan_invoices.cost_breakdown.seat_charges_subheading.prorated', {
         endDate: i.endDate
-      }), r = _$$t('plan_invoices.cost_breakdown.seat_credits_subheading', {
+      }), r = getI18nString('plan_invoices.cost_breakdown.seat_credits_subheading', {
         endDate: i.endDate
-      })) : (e.invoice.billing_mechanics, a = _$$t('plan_invoices.cost_breakdown.seat_charges_subheading.legacy', i), r = null);
+      })) : (e.invoice.billing_mechanics, a = getI18nString('plan_invoices.cost_breakdown.seat_charges_subheading.legacy', i), r = null);
       let l = $(t.map(t => {
         let a = e.invoice.seats_breakdown[t];
         return a ? {
@@ -190,7 +190,7 @@ function z(e) {
       return I()([{
         key: 'seat-charges',
         content: jsx(B, {
-          getHeading: () => _$$t('plan_invoices.cost_breakdown.seat_charges_heading'),
+          getHeading: () => getI18nString('plan_invoices.cost_breakdown.seat_charges_heading'),
           subheading: a,
           currency: e.invoice.currency,
           lines: l,
@@ -199,7 +199,7 @@ function z(e) {
       }, o.length > 0 && {
         key: 'seat-credits',
         content: jsx(B, {
-          getHeading: () => _$$t('plan_invoices.cost_breakdown.seat_credits_heading'),
+          getHeading: () => getI18nString('plan_invoices.cost_breakdown.seat_credits_heading'),
           subheading: r,
           currency: e.invoice.currency,
           lines: o,
@@ -242,8 +242,8 @@ function z(e) {
     let m = _.length > 0 && {
       key: 'seat-adjustments',
       content: jsx(B, {
-        getHeading: () => getFeatureFlags().billing_page_updates_jul_2025_content_updates ? _$$t('plan_invoices.cost_breakdown.new_seat_costs_heading_new') : _$$t('plan_invoices.cost_breakdown.new_seat_costs_heading'),
-        subheading: e.invoice.billing_mechanics === fA.PRORATED && e.invoice.plan_parent_type === FOrganizationLevelType.TEAM ? tx('plan_invoices.cost_breakdown.new_seat_costs_learn_more_subheading', {
+        getHeading: () => getFeatureFlags().billing_page_updates_jul_2025_content_updates ? getI18nString('plan_invoices.cost_breakdown.new_seat_costs_heading_new') : getI18nString('plan_invoices.cost_breakdown.new_seat_costs_heading'),
+        subheading: e.invoice.billing_mechanics === fA.PRORATED && e.invoice.plan_parent_type === FOrganizationLevelType.TEAM ? renderI18nText('plan_invoices.cost_breakdown.new_seat_costs_learn_more_subheading', {
           learnMore: jsx(_$$o, {
             className: 'x1quhyk7 x1ypdohk xuxw1ft x5hs570',
             href: 'https://help.figma.com/hc/articles/360041061034',
@@ -252,9 +252,9 @@ function z(e) {
             trackingProperties: {
               trackingDescriptor: _$$c.LEARN_MORE
             },
-            children: _$$t('general.learn_more')
+            children: getI18nString('general.learn_more')
           })
-        }) : _$$t('plan_invoices.cost_breakdown.new_seat_costs_subheading'),
+        }) : getI18nString('plan_invoices.cost_breakdown.new_seat_costs_subheading'),
         currency: e.invoice.currency,
         lines: _,
         testIdPrefix: 'invoice-seat-adjustments'
@@ -272,31 +272,31 @@ function z(e) {
         value: _
       }),
       'seat-adjustments': () => ({
-        label: _$$t('plan_invoices.cost_breakdown.new_seat_costs_heading'),
+        label: getI18nString('plan_invoices.cost_breakdown.new_seat_costs_heading'),
         value: Hx(e.invoice)
       }),
       'seat-charges': () => ({
-        label: _$$t('plan_invoices.cost_breakdown.seat_charges_heading'),
+        label: getI18nString('plan_invoices.cost_breakdown.seat_charges_heading'),
         value: iy(e.invoice)
       }),
       'seat-credits': () => ({
-        label: _$$t('plan_invoices.cost_breakdown.seat_credits_heading'),
+        label: getI18nString('plan_invoices.cost_breakdown.seat_credits_heading'),
         value: Bf(e.invoice)
       })
     };
     let a = () => ({
       key: 'taxes',
-      label: _$$t('plan_invoices.taxes_label'),
+      label: getI18nString('plan_invoices.taxes_label'),
       value: e.invoice.total_tax_amount
     });
     let n = () => ({
       key: 'projected-subtotal',
-      label: Dc(e.invoice) === fx.LOCKED ? _$$t('plan_invoices.locked_subtotal') : _$$t('plan_invoices.projected_total'),
+      label: Dc(e.invoice) === fx.LOCKED ? getI18nString('plan_invoices.locked_subtotal') : getI18nString('plan_invoices.projected_total'),
       value: e.invoice.subtotal
     });
     let s = () => ({
       key: 'total',
-      label: _$$t('plan_invoices.total_label'),
+      label: getI18nString('plan_invoices.total_label'),
       value: e.invoice.total
     });
     if (!d) return e.invoice.state === qH.PENDING ? [n()] : [s()];
@@ -311,7 +311,7 @@ function z(e) {
     }
     return e.invoice.state === qH.PENDING ? [n()] : [{
       key: 'subtotal',
-      label: _$$t('plan_invoices.subtotal_label'),
+      label: getI18nString('plan_invoices.subtotal_label'),
       value: e.invoice.subtotal
     }, a(), s()];
   }, [l, m, e.invoice, r, d, _]);
@@ -370,15 +370,15 @@ function W(e) {
     let t = e.invoice.state !== qH.PENDING;
     return I()([{
       key: 'due-date',
-      label: _$$t('plan_invoices.due_date_column_label'),
+      label: getI18nString('plan_invoices.due_date_column_label'),
       value: nm(e.invoice)
     }, {
       key: 'status',
-      label: _$$t('plan_invoices.status_column_label'),
+      label: getI18nString('plan_invoices.status_column_label'),
       value: _$$V(e.invoice, e.currentDate)?.children
     }, t && {
       key: 'invoice-number',
-      label: _$$t('plan_invoices.invoice_number_label'),
+      label: getI18nString('plan_invoices.invoice_number_label'),
       value: e.invoice.hosted_invoice_url ? jsx(Ph, {
         href: e.invoice.hosted_invoice_url,
         trusted: !0,
@@ -387,13 +387,13 @@ function W(e) {
       }) : $b(e.invoice)
     }, t && {
       key: 'payment-method',
-      label: _$$t('plan_invoices.payment_method_label'),
+      label: getI18nString('plan_invoices.payment_method_label'),
       value: gL(e.invoice) || jsxs(Fragment, {
         children: [jsx(_$$E, {
-          children: _$$t('plan_invoices.empty_aria_label')
+          children: getI18nString('plan_invoices.empty_aria_label')
         }), jsx('span', {
           'aria-hidden': !0,
-          'children': _$$t('plan_invoices.empty_details')
+          'children': getI18nString('plan_invoices.empty_details')
         })]
       })
     }]);
@@ -425,7 +425,7 @@ function er(e) {
       trackingDescriptor: _$$c.CONVERT_MONTHLY_TO_ANNUAL,
       adjustAnnualSeatsActionId: e.adjustAnnualSeatsActionId
     },
-    children: _$$t('plan_invoices.monthly_to_annual_cta.discount')
+    children: getI18nString('plan_invoices.monthly_to_annual_cta.discount')
   });
   return jsx($y, {
     'variant': 'brand',
@@ -461,7 +461,7 @@ function el(e) {
         children: [jsx('div', {
           className: 'x10l6tqk xu96u03 x5i6ehr',
           children: jsx(_$$b2, {})
-        }), _$$t('plan_invoices.cta_download_pdf')]
+        }), getI18nString('plan_invoices.cta_download_pdf')]
       })
     })
   }, {
@@ -472,13 +472,13 @@ function el(e) {
         t(sf({
           view: 'teamAdminConsole',
           teamId: o,
-          teamAdminConsoleViewTab: Iv.MEMBERS
+          teamAdminConsoleViewTab: DashboardSections.MEMBERS
         }));
       },
       trackingProperties: {
         trackingDescriptor: _$$c.MANAGE_SEATS
       },
-      children: _$$t('plan_invoices.manage_seats')
+      children: getI18nString('plan_invoices.manage_seats')
     })
   }, {
     key: 'org-view-new-seat-charges',
@@ -497,7 +497,7 @@ function el(e) {
       trackingProperties: {
         trackingDescriptor: _$$c.VIEW_NEW_SEATS
       },
-      children: _$$t('plan_invoices.view_new_seat_charges_updated')
+      children: getI18nString('plan_invoices.view_new_seat_charges_updated')
     })
   }, {
     key: 'org-true-up-review',
@@ -521,7 +521,7 @@ function el(e) {
       trackingProperties: {
         trackingDescriptor: _$$c.REVIEW_AND_FINALIZE_INVOICE
       },
-      children: _$$t('org_admin_details.billing_banner.details.upcoming_invoice.button.review_and_finalize_invoice')
+      children: getI18nString('org_admin_details.billing_banner.details.upcoming_invoice.button.review_and_finalize_invoice')
     })
   }].filter(({
     content: e
@@ -541,7 +541,7 @@ function el(e) {
             });
           },
           adjustAnnualSeatsActionId: a.id,
-          renderMessage: e => tx('plan_invoices.monthly_to_annual_cta.upgrade', {
+          renderMessage: e => renderI18nText('plan_invoices.monthly_to_annual_cta.upgrade', {
             discount: e
           })
         });
@@ -554,7 +554,7 @@ function el(e) {
             });
           },
           adjustAnnualSeatsActionId: a.id,
-          renderMessage: e => tx('plan_invoices.monthly_to_annual_cta.convert', {
+          renderMessage: e => renderI18nText('plan_invoices.monthly_to_annual_cta.convert', {
             discount: e
           })
         });
@@ -710,7 +710,7 @@ function ev(e) {
           })]
         }), jsx('div', {
           ...Ay.props(eb.dateRange),
-          children: _$$t('plan_invoices.invoice_date_with_value', {
+          children: getI18nString('plan_invoices.invoice_date_with_value', {
             date: _$$A(e.invoice.issued_at).toDate()
           })
         })]
@@ -724,7 +724,7 @@ function ef(e) {
   let t = Jv(e.invoice, e.currentDate);
   let a = _$$R() ? {
     'data-tooltip-type': Ib.TEXT,
-    'data-tooltip': _$$t('billing.open_invoice_reminder.button_tooltip'),
+    'data-tooltip': getI18nString('billing.open_invoice_reminder.button_tooltip'),
     'data-tooltip-show-immediately': !0
   } : void 0;
   return jsx('div', {
@@ -732,14 +732,14 @@ function ef(e) {
     children: jsxs(Yy, {
       variant: t ? 'danger' : 'brand',
       children: [jsx(_$$Q, {
-        title: t ? _$$t('plan_invoices.invoice_flyout.overdue_invoice_notice') : _$$t('plan_invoices.invoice_flyout.open_invoice_notice'),
+        title: t ? getI18nString('plan_invoices.invoice_flyout.overdue_invoice_notice') : getI18nString('plan_invoices.invoice_flyout.open_invoice_notice'),
         children: null
       }), e.invoice.hosted_invoice_url && jsx(pW, {
         htmlAttributes: a,
         variant: 'secondary',
         newTab: !0,
         href: e.invoice.hosted_invoice_url,
-        children: _$$t('plan_invoices.pay_invoice')
+        children: getI18nString('plan_invoices.pay_invoice')
       })]
     })
   });
@@ -780,12 +780,12 @@ function ey() {
     style: sx.add({
       paddingLeft: '6px'
     }).$,
-    children: _$$t('plan_invoices.description_column_label')
+    children: getI18nString('plan_invoices.description_column_label')
   });
 }
 let ew = [{
   id: 'due-date',
-  renderHeader: () => _$$t('plan_invoices.due_date_column_label'),
+  renderHeader: () => getI18nString('plan_invoices.due_date_column_label'),
   renderCell: ({
     dueDate: e
   }) => jsx('span', {
@@ -809,7 +809,7 @@ let ew = [{
   className: () => 'plan_invoices_table--descriptionColumn--rBf4W plan_invoices_table--_column--1Fkpv'
 }, {
   id: 'status',
-  renderHeader: () => _$$t('plan_invoices.status_column_label'),
+  renderHeader: () => getI18nString('plan_invoices.status_column_label'),
   renderCell: ({
     invoice: e,
     currentDate: t
@@ -823,7 +823,7 @@ let ew = [{
   className: () => 'plan_invoices_table--statusColumn--ikvEE plan_invoices_table--_column--1Fkpv'
 }, {
   id: 'invoice-total',
-  renderHeader: () => _$$t('plan_invoices.invoice_total_column_label'),
+  renderHeader: () => getI18nString('plan_invoices.invoice_total_column_label'),
   renderCell: ({
     invoice: e,
     localizeCurrency: t
@@ -834,7 +834,7 @@ let ew = [{
         'aria-hidden': !0,
         'children': '\u2013'
       }), jsx(_$$E, {
-        children: _$$t('plan_invoices.empty_aria_label')
+        children: getI18nString('plan_invoices.empty_aria_label')
       })]
     }) : t.formatMoney(e.total, {
       showCents: !0
@@ -844,7 +844,7 @@ let ew = [{
 }, {
   id: 'view-invoice',
   renderHeader: () => jsx(_$$E, {
-    children: _$$t('plan_invoices.view_invoice_column_aria_label')
+    children: getI18nString('plan_invoices.view_invoice_column_aria_label')
   }),
   renderCell: ({
     invoice: e,
@@ -905,14 +905,14 @@ function eC(e) {
 function eS(e) {
   return e.invoices.length === 0 ? jsx('div', {
     className: _$$s.mt36.mxAuto.alignCenter.$,
-    children: _$$t('plan_invoices.no_invoices_to_show')
+    children: getI18nString('plan_invoices.no_invoices_to_show')
   }) : jsx('div', {
     role: 'rowgroup',
     children: e.invoices.map(t => {
       let a = new vr(t.currency);
       let s = nm(t);
       let i = zz(t);
-      let r = _$$t('plan_invoices.row_aria_label', {
+      let r = getI18nString('plan_invoices.row_aria_label', {
         dueDate: s,
         description: i
       });
@@ -998,7 +998,7 @@ export function $$eI0(e) {
     children: [jsxs('div', {
       'role': 'table',
       'ref': l,
-      'aria-label': _$$t('plan_invoices.table_label'),
+      'aria-label': getI18nString('plan_invoices.table_label'),
       'children': [jsx(eC, {
         stickyContent: e.stickyContent
       }), jsx(eS, {

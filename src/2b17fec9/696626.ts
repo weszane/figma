@@ -1,5 +1,5 @@
 import { getFeatureFlags } from "../905/601108";
-import { eU } from "../figma_app/27355";
+import { atom } from "../figma_app/27355";
 import { Yk } from "../2b17fec9/441720";
 function s() {
   return [Yk.TEXT, Yk.SECTION, Yk.TABLE, Yk.STAMP, Yk.COMMENTS, ...(getFeatureFlags().figjam_quick_actions_v2 ? [Yk.ACTIONS] : [])];
@@ -25,7 +25,7 @@ let u = {
   thresholdWidth: 0,
   numVisibleTools: 0
 };
-let $$p3 = eU(u);
+let $$p3 = atom(u);
 export function $$h2(e) {
   let t = [$$c1()];
   let i = d();

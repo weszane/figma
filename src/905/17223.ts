@@ -3,7 +3,7 @@ import { A } from "../905/251970";
 import { generateRecordingKey } from "../figma_app/878298";
 import { Uz } from "../905/63728";
 import { GG } from "../905/511649";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Lo } from "../905/156213";
 import { tf } from "../figma_app/831799";
 import { $ } from "../905/355607";
@@ -15,7 +15,7 @@ export let $$m0 = tf(({
   disabled: d,
   dataOnboardingKey: c,
   dataTestId: m = "close-button",
-  "aria-label": h = _$$t("general.close"),
+  "aria-label": h = getI18nString("general.close"),
   ...g
 }) => {
   let f = $();

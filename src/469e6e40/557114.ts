@@ -1,5 +1,5 @@
 import { EJ } from "../figma_app/930338";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Ad } from "../figma_app/951233";
 export let $$r0 = 75;
 export function $$l1(e, t) {
@@ -13,7 +13,7 @@ export function $$l1(e, t) {
   }, {
     type: "option",
     key: "",
-    text: Ad(e) ? _$$t("members_table.workspace_cell.unassign") : _$$t("workspace.unassigned")
+    text: Ad(e) ? getI18nString("members_table.workspace_cell.unassign") : getI18nString("workspace.unassigned")
   }];
 }
 export const A = $$r0;

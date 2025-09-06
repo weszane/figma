@@ -1,9 +1,9 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { xae } from "../figma_app/763686";
-import { az, sx } from "../905/449184";
+import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { WB } from "../905/761735";
-import { $D } from "../905/11";
-import { t as _$$t } from "../905/303541";
+import { reportError } from "../905/11";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { nF } from "../905/350402";
 import { yH } from "../figma_app/714946";
@@ -114,10 +114,10 @@ let $$S3 = nF(async (e, t) => {
     await E;
   } catch (t) {
     e.dispatch(F.enqueue({
-      message: _$$t("design_systems.subscriptions.unable_to_change_setting"),
+      message: getI18nString("design_systems.subscriptions.unable_to_change_setting"),
       error: !0
     }));
-    $D(_$$e.DESIGN_SYSTEMS_ECOSYSTEM, t, {
+    reportError(_$$e.DESIGN_SYSTEMS_ECOSYSTEM, t, {
       tags: {
         openFileKey: m,
         fileKey: file_key,
@@ -158,7 +158,7 @@ let $$v4 = nF(async (e, t) => {
   try {
     if (!library_key) throw Error("Library key is required for user subscription");
     await _;
-    az.trackDefinedMetric("library_preferences_modal.library_subscription_toggle.outcome", {
+    analyticsEventManager.trackDefinedMetric("library_preferences_modal.library_subscription_toggle.outcome", {
       designSubscribed: subscriptions.design,
       figjamSubscribed: subscriptions.figjam,
       slidesSubscribed: subscriptions.slides,
@@ -168,10 +168,10 @@ let $$v4 = nF(async (e, t) => {
     });
   } catch (t) {
     e.dispatch(F.enqueue({
-      message: _$$t("design_systems.subscriptions.unable_to_change_setting"),
+      message: getI18nString("design_systems.subscriptions.unable_to_change_setting"),
       error: !0
     }));
-    az.trackDefinedMetric("library_preferences_modal.library_subscription_toggle.outcome", {
+    analyticsEventManager.trackDefinedMetric("library_preferences_modal.library_subscription_toggle.outcome", {
       designSubscribed: subscriptions.design,
       figjamSubscribed: subscriptions.figjam,
       slidesSubscribed: subscriptions.slides,
@@ -179,7 +179,7 @@ let $$v4 = nF(async (e, t) => {
       subscriptionType: "user",
       outcome: "error"
     });
-    $D(_$$e.DESIGN_SYSTEMS_ECOSYSTEM, t, {
+    reportError(_$$e.DESIGN_SYSTEMS_ECOSYSTEM, t, {
       tags: {
         libraryKey: library_key,
         designSubscribed: subscriptions.design,
@@ -223,7 +223,7 @@ let $$A5 = nF(async (e, t) => {
   try {
     if (!library_key) throw Error("Team subscription requires a library key");
     await _;
-    az.trackDefinedMetric("library_preferences_modal.library_subscription_toggle.outcome", {
+    analyticsEventManager.trackDefinedMetric("library_preferences_modal.library_subscription_toggle.outcome", {
       designSubscribed: subscriptions.design,
       figjamSubscribed: subscriptions.figjam,
       slidesSubscribed: subscriptions.slides,
@@ -233,10 +233,10 @@ let $$A5 = nF(async (e, t) => {
     });
   } catch (t) {
     e.dispatch(F.enqueue({
-      message: _$$t("design_systems.subscriptions.unable_to_change_setting"),
+      message: getI18nString("design_systems.subscriptions.unable_to_change_setting"),
       error: !0
     }));
-    az.trackDefinedMetric("library_preferences_modal.library_subscription_toggle.outcome", {
+    analyticsEventManager.trackDefinedMetric("library_preferences_modal.library_subscription_toggle.outcome", {
       designSubscribed: subscriptions.design,
       figjamSubscribed: subscriptions.figjam,
       slidesSubscribed: subscriptions.slides,
@@ -244,7 +244,7 @@ let $$A5 = nF(async (e, t) => {
       subscriptionType: "team",
       outcome: "error"
     });
-    $D(_$$e.DESIGN_SYSTEMS_ECOSYSTEM, t, {
+    reportError(_$$e.DESIGN_SYSTEMS_ECOSYSTEM, t, {
       tags: {
         libraryKey: library_key,
         designSubscribed: subscriptions.design,
@@ -296,14 +296,14 @@ let $$x1 = nF(async (e, t) => {
   try {
     await u;
     e.dispatch(F.enqueue({
-      message: _$$t("design_systems.subscriptions.settings_updated_for", {
+      message: getI18nString("design_systems.subscriptions.settings_updated_for", {
         libraryName,
         orgOrWorkspaceName: workspaceName
       })
     }));
   } catch (t) {
     e.dispatch(F.enqueue({
-      message: t?.message ?? _$$t("design_systems.subscriptions.unable_to_change_setting"),
+      message: t?.message ?? getI18nString("design_systems.subscriptions.unable_to_change_setting"),
       error: !0
     }));
   }
@@ -330,14 +330,14 @@ let $$N6 = nF(async (e, t) => {
   try {
     await c;
     e.dispatch(F.enqueue({
-      message: _$$t("design_systems.subscriptions.settings_updated_for", {
+      message: getI18nString("design_systems.subscriptions.settings_updated_for", {
         libraryName,
         orgOrWorkspaceName: workspaceName
       })
     }));
   } catch (t) {
     e.dispatch(F.enqueue({
-      message: t?.message ?? _$$t("design_systems.subscriptions.unable_to_change_setting"),
+      message: t?.message ?? getI18nString("design_systems.subscriptions.unable_to_change_setting"),
       error: !0
     }));
   }
@@ -359,16 +359,16 @@ let $$C2 = nF(async (e, t) => {
   })), userInitiated) {
     if (t.currentSubscription) {
       let e = libraryOrgSubscription.subscriptions.design;
-      !(t.currentSubscription?.design || t.currentSubscription?.figjam) && e ? sx("Org Library File Enabled", {
+      !(t.currentSubscription?.design || t.currentSubscription?.figjam) && e ? trackEventAnalytics("Org Library File Enabled", {
         orgId,
         libraryKey,
         fileTeamId: libraryTeamId
-      }) : sx("Org Library File Disabled", {
+      }) : trackEventAnalytics("Org Library File Disabled", {
         orgId,
         libraryKey,
         fileTeamId: libraryTeamId
       });
-      az.trackDefinedMetric("library_preferences_modal.library_subscription_toggle", {
+      analyticsEventManager.trackDefinedMetric("library_preferences_modal.library_subscription_toggle", {
         designSubscribed: libraryOrgSubscription.subscriptions.design,
         figjamSubscribed: libraryOrgSubscription.subscriptions.figjam,
         slidesSubscribed: libraryOrgSubscription.subscriptions.slides,
@@ -383,12 +383,12 @@ let $$C2 = nF(async (e, t) => {
         orgId
       });
       e.dispatch(F.enqueue({
-        message: _$$t("design_systems.subscriptions.settings_updated_for", {
+        message: getI18nString("design_systems.subscriptions.settings_updated_for", {
           libraryName: t.libraryName,
           orgOrWorkspaceName: t.orgName
         })
       }));
-      az.trackDefinedMetric("library_preferences_modal.library_subscription_toggle.outcome", {
+      analyticsEventManager.trackDefinedMetric("library_preferences_modal.library_subscription_toggle.outcome", {
         designSubscribed: libraryOrgSubscription.subscriptions.design,
         figjamSubscribed: libraryOrgSubscription.subscriptions.figjam,
         slidesSubscribed: libraryOrgSubscription.subscriptions.slides,
@@ -398,10 +398,10 @@ let $$C2 = nF(async (e, t) => {
       });
     } catch (t) {
       e.dispatch(F.enqueue({
-        message: _$$t("design_systems.subscriptions.unable_to_change_setting"),
+        message: getI18nString("design_systems.subscriptions.unable_to_change_setting"),
         error: !0
       }));
-      az.trackDefinedMetric("library_preferences_modal.library_subscription_toggle.outcome", {
+      analyticsEventManager.trackDefinedMetric("library_preferences_modal.library_subscription_toggle.outcome", {
         designSubscribed: libraryOrgSubscription.subscriptions.design,
         figjamSubscribed: libraryOrgSubscription.subscriptions.figjam,
         slidesSubscribed: libraryOrgSubscription.subscriptions.slides,
@@ -409,7 +409,7 @@ let $$C2 = nF(async (e, t) => {
         subscriptionType: "org",
         outcome: "error"
       });
-      $D(_$$e.DESIGN_SYSTEMS_ECOSYSTEM, t, {
+      reportError(_$$e.DESIGN_SYSTEMS_ECOSYSTEM, t, {
         tags: {
           libraryKey: libraryOrgSubscription.libraryKey,
           designSubscribed: subscriptions.design,

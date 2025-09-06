@@ -1,33 +1,33 @@
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 let $$r7 = 1920;
 let $$a10 = 1080;
 let $$s8 = 10;
 let $$o0 = 3;
 let $$l1 = 30;
 let $$d3 = "https://help.figma.com/hc/articles/360041423614--Who-can-publish-Files-and-Plugins-to-the-Community-#organization";
-let $$c6 = [() => _$$t("community.publishing.getting_everything_ready"), () => _$$t("community.publishing.gathering_all_the_layers"), () => _$$t("community.publishing.compiling_all_components")];
-let $$u5 = [() => _$$t("community.publishing.getting_everything_ready"), () => _$$t("community.publishing.publishing_your_site"), () => _$$t("community.publishing.gathering_all_the_layers"), () => _$$t("community.publishing.compiling_all_components")];
-let $$p9 = [() => _$$t("community.publishing.getting_everything_ready"), () => _$$t("community.publishing.gathering_all_the_layers"), () => _$$t("community.publishing.compiling_all_templates")];
+let $$c6 = [() => getI18nString("community.publishing.getting_everything_ready"), () => getI18nString("community.publishing.gathering_all_the_layers"), () => getI18nString("community.publishing.compiling_all_components")];
+let $$u5 = [() => getI18nString("community.publishing.getting_everything_ready"), () => getI18nString("community.publishing.publishing_your_site"), () => getI18nString("community.publishing.gathering_all_the_layers"), () => getI18nString("community.publishing.compiling_all_components")];
+let $$p9 = [() => getI18nString("community.publishing.getting_everything_ready"), () => getI18nString("community.publishing.gathering_all_the_layers"), () => getI18nString("community.publishing.compiling_all_templates")];
 let $$m4 = {
-  public: () => _$$t("community.publishing.and_youre_live"),
-  private: () => _$$t("community.publishing.and_youre_live"),
-  inReview: () => _$$t("community.publishing.we_have_received_your_submission"),
-  error: () => _$$t("community.publishing.something_went_wrong")
+  public: () => getI18nString("community.publishing.and_youre_live"),
+  private: () => getI18nString("community.publishing.and_youre_live"),
+  inReview: () => getI18nString("community.publishing.we_have_received_your_submission"),
+  error: () => getI18nString("community.publishing.something_went_wrong")
 };
 let $$h2 = {
-  public: () => _$$t("community.publishing.you_did_it_thanks_for_putting_your_work_out_there"),
+  public: () => getI18nString("community.publishing.you_did_it_thanks_for_putting_your_work_out_there"),
   privateExtension: ({
     resourceName: e,
     orgName: t
-  }) => _$$t("community.publishing.resource_is_now_available_to_members_of_org", {
+  }) => getI18nString("community.publishing.resource_is_now_available_to_members_of_org", {
     resourceName: e,
     orgName: t
   }),
-  private: e => _$$t("community.publishing.your_templates_are_published_to", {
+  private: e => getI18nString("community.publishing.your_templates_are_published_to", {
     publishScopeEntityName: e
   }),
-  inReview: () => _$$t("community.publishing.our_team_will_review_this_resource"),
-  error: () => _$$t("community.publishing.please_try_again_or_report_this_file_to_the_figma_team_for_support")
+  inReview: () => getI18nString("community.publishing.our_team_will_review_this_resource"),
+  error: () => getI18nString("community.publishing.please_try_again_or_report_this_file_to_the_figma_team_for_support")
 };
 export const DM = $$o0;
 export const GT = $$l1;

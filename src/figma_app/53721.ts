@@ -1,316 +1,365 @@
-import { returnSecond } from "../figma_app/465776";
-import { _YF } from "../figma_app/763686";
-import { x1 } from "../905/714362";
-import { FFileType } from "../figma_app/191312";
-let $$o11 = "si" + function () {
-  var e = Array.prototype.slice.call(arguments);
-  var t = e.shift();
-  return e.reverse().map(function (e, r) {
-    return String.fromCharCode(e - t - 2 - r);
-  }).join("");
-}(45, 149, 163) + "s";
-let $$l3 = "fig" + function () {
-  var e = Array.prototype.slice.call(arguments);
-  var t = e.shift();
-  return e.reverse().map(function (e, r) {
-    return String.fromCharCode(e - t - 31 - r);
-  }).join("");
-}(55, 195, 184, 195) + "e";
-let $$d16 = function () {
-  var e = Array.prototype.slice.call(arguments);
-  var t = e.shift();
-  return e.reverse().map(function (e, r) {
-    return String.fromCharCode(e - t - 0 - r);
-  }).join("");
-}(50, 159) + "ak" + function () {
-  var e = Array.prototype.slice.call(arguments);
-  var t = e.shift();
-  return e.reverse().map(function (e, r) {
-    return String.fromCharCode(e - t - 57 - r);
-  }).join("");
-}(18, 176);
-let $$c13 = "co" + function () {
-  var e = Array.prototype.slice.call(arguments);
-  var t = e.shift();
-  return e.reverse().map(function (e, r) {
-    return String.fromCharCode(e - t - 36 - r);
-  }).join("");
-}(2, 149) + "per";
-let $$u0 = function () {
-  var e = Array.prototype.slice.call(arguments);
-  var t = e.shift();
-  return e.reverse().map(function (e, r) {
-    return String.fromCharCode(e - t - 63 - r);
-  }).join("");
-}(35, 196) + "u" + function () {
-  var e = Array.prototype.slice.call(arguments);
-  var t = e.shift();
-  return e.reverse().map(function (e, r) {
-    return String.fromCharCode(e - t - 48 - r);
-  }).join("");
-}(15, 186, 185);
-let p = function () {
-  var e = Array.prototype.slice.call(arguments);
-  var t = e.shift();
-  return e.reverse().map(function (e, r) {
-    return String.fromCharCode(e - t - 61 - r);
-  }).join("");
-}(32, 202, 198) + "lu" + function () {
-  var e = Array.prototype.slice.call(arguments);
-  var t = e.shift();
-  return e.reverse().map(function (e, r) {
-    return String.fromCharCode(e - t - 5 - r);
-  }).join("");
-}(4, 119, 129, 109, 125, 126, 124) + "o" + function () {
-  var e = Array.prototype.slice.call(arguments);
-  var t = e.shift();
-  return e.reverse().map(function (e, r) {
-    return String.fromCharCode(e - t - 30 - r);
-  }).join("");
-}(39, 179);
-export function $$_18(e) {
-  return 1 === e || 7 === e;
+import { logError } from '../905/714362'
+import { FFileType } from '../figma_app/191312'
+import { returnSecond } from '../figma_app/465776'
+import { _YF } from '../figma_app/763686'
+
+// Decoded constants (original obfuscated names: $$o11, $$l3, $$d16, $$c13, $$u0, p)
+const SITES_STRING = 'sites'
+const FIGMAKE_STRING = 'figmake'
+const SLACK_STRING = 'slack'
+const COOPER_STRING = 'cooper'
+const DEV_MODE_STRING = 'dev_mode'
+const DRAW_STRING = 'draw'
+
+// Original function: $$_18
+/**
+ * Checks if the editor type is Design or Illustration.
+ * @param editorType - The editor type number.
+ * @returns True if editor type is 1 (Design) or 7 (Illustration).
+ */
+export function isDesignOrIllustration(editorType: number): boolean {
+  return editorType === 1 || editorType === 7
 }
-export function $$h4(e) {
-  return 2 === e || $$_18(e);
+
+// Original function: $$h4
+/**
+ * Checks if the editor type is Whiteboard or Design/Illustration.
+ * @param editorType - The editor type number.
+ * @returns True if editor type is 2 (Whiteboard) or Design/Illustration.
+ */
+export function isWhiteboardOrDesignOrIllustration(editorType: number): boolean {
+  return editorType === 2 || isDesignOrIllustration(editorType)
 }
-export function $$m6(e) {
-  return 4 === e || $$h4(e);
+
+// Original function: $$m6
+/**
+ * Checks if the editor type is Slides or Whiteboard/Design/Illustration.
+ * @param editorType - The editor type number.
+ * @returns True if editor type is 4 (Slides) or Whiteboard/Design/Illustration.
+ */
+export function isSlidesOrWhiteboardOrDesignOrIllustration(editorType: number): boolean {
+  return editorType === 4 || isWhiteboardOrDesignOrIllustration(editorType)
 }
-export function $$g8(e, t) {
-  switch (e) {
+
+// Original function: $$g8
+/**
+ * Checks if the editor type matches the file type.
+ * @param editorType - The editor type number.
+ * @param fileType - The file type.
+ * @returns True if they match, false otherwise.
+ */
+export function doesEditorTypeMatchFileType(editorType: number, fileType: FFileType): boolean {
+  switch (editorType) {
     case 1:
     case 7:
     case 3:
-      return t === FFileType.DESIGN;
+      return fileType === FFileType.DESIGN
     case 2:
-      return t === FFileType.WHITEBOARD;
+      return fileType === FFileType.WHITEBOARD
     case 4:
-      return t === FFileType.SLIDES;
+      return fileType === FFileType.SLIDES
     case 5:
-      return t === FFileType.SITES;
+      return fileType === FFileType.SITES
     case 8:
-      return t === FFileType.FIGMAKE;
+      return fileType === FFileType.FIGMAKE
     case 6:
-      return t === FFileType.COOPER;
+      return fileType === FFileType.COOPER
     default:
-      x1("editorType", "Unknown editor type", {
-        editorType: e
-      });
-      return !1;
+      logError('editorType', 'Unknown editor type', {
+        editorType,
+      })
+      return false
   }
 }
-export var $$f9 = (e => (e[e.Design = 1] = "Design", e[e.Whiteboard = 2] = "Whiteboard", e[e.DevHandoff = 3] = "DevHandoff", e[e.Slides = 4] = "Slides", e[e.Sites = 5] = "Sites", e[e.Cooper = 6] = "Cooper", e[e.Illustration = 7] = "Illustration", e[e.Figmake = 8] = "Figmake", e))($$f9 || {});
-export function $$E17(e) {
-  switch (e) {
+
+// Original enum: FEditorType
+export enum FEditorType {
+  Design = 1,
+  Whiteboard = 2,
+  DevHandoff = 3,
+  Slides = 4,
+  Sites = 5,
+  Cooper = 6,
+  Illustration = 7,
+  Figmake = 8,
+}
+
+// Original function: $$E17
+/**
+ * Maps editor type to _YF enum value.
+ * @param editorType - The editor type number.
+ * @returns The corresponding _YF value.
+ */
+export function mapEditorTypeToYF(editorType: number): typeof _YF[keyof typeof _YF] {
+  switch (editorType) {
     case 1:
-      return _YF.DESIGN;
+      return _YF.DESIGN
     case 2:
-      return _YF.WHITEBOARD;
+      return _YF.WHITEBOARD
     case 3:
-      return _YF.DEV_HANDOFF;
+      return _YF.DEV_HANDOFF
     case 4:
-      return _YF.SLIDES;
+      return _YF.SLIDES
     case 5:
-      return _YF.SITES;
+      return _YF.SITES
     case 6:
-      return _YF.COOPER;
+      return _YF.COOPER
     case 7:
-      return _YF.ILLUSTRATION;
+      return _YF.ILLUSTRATION
     case 8:
-      return _YF.FIGMAKE;
+      return _YF.FIGMAKE
     default:
-      x1("editorType", "Unknown editor type", {
-        editorType: e
-      });
-      return _YF.DESIGN;
+      logError('editorType', 'Unknown editor type', {
+        editorType,
+      })
+      return _YF.DESIGN
   }
 }
-export function $$y10(e) {
-  switch (e) {
+
+// Original function: $$y10
+/**
+ * Maps editor type to file type.
+ * @param editorType - The editor type number.
+ * @returns The corresponding file type.
+ */
+export function mapEditorTypeToFileType(editorType: number): FFileType {
+  switch (editorType) {
     case 2:
-      return FFileType.WHITEBOARD;
+      return FFileType.WHITEBOARD
     case 4:
-      return FFileType.SLIDES;
+      return FFileType.SLIDES
     case 5:
-      return FFileType.SITES;
+      return FFileType.SITES
     case 8:
-      return FFileType.FIGMAKE;
+      return FFileType.FIGMAKE
     case 3:
     case 1:
     case 7:
-      return FFileType.DESIGN;
+      return FFileType.DESIGN
     case 6:
-      return FFileType.COOPER;
+      return FFileType.COOPER
     default:
-      x1("editorType", "Unknown editor type", {
-        editorType: e
-      });
-      return FFileType.DESIGN;
+      logError('editorType', 'Unknown editor type', {
+        editorType,
+      })
+      return FFileType.DESIGN
   }
 }
-export function $$b5(e) {
-  switch (e) {
+
+// Original function: $$b5
+/**
+ * Maps editor type to a string representation.
+ * @param editorType - The editor type number.
+ * @returns The string representation.
+ */
+export function mapEditorTypeToString(editorType: number): string {
+  switch (editorType) {
     case 2:
-      return "whiteboard";
+      return 'whiteboard'
     case 4:
-      return "slides";
+      return 'slides'
     case 5:
-      return "sites";
+      return 'sites'
     case 8:
-      return $$l3;
+      return FIGMAKE_STRING
     case 3:
-      return "dev_handoff";
+      return 'dev_handoff'
     case 7:
-      return "draw";
+      return 'draw'
     case 6:
-      return "cooper";
+      return 'cooper'
     case 1:
-      return "design";
+      return 'design'
     default:
-      return returnSecond(e, "design");
+      return returnSecond(editorType, 'design')
   }
 }
-export function $$T12(e) {
-  if (null == e) return null;
-  switch (e) {
+
+// Original function: $$T12
+/**
+ * Maps file type to editor type (nullable).
+ * @param fileType - The file type.
+ * @returns The corresponding editor type or null.
+ */
+export function mapFileTypeToEditorTypeNullable(fileType: FFileType | null): number | null {
+  if (fileType == null) return null
+  switch (fileType) {
     case FFileType.DESIGN:
-      return 1;
+      return 1
     case FFileType.WHITEBOARD:
-      return 2;
+      return 2
     case FFileType.SLIDES:
-      return 4;
+      return 4
     case FFileType.SITES:
-      return 5;
+      return 5
     case FFileType.COOPER:
-      return 6;
+      return 6
     case FFileType.FIGMAKE:
-      return 8;
+      return 8
   }
+  return null
 }
-export function $$I15(e) {
-  if (null == e) return 1;
-  switch (e) {
+
+// Original function: $$I15
+/**
+ * Maps file type to editor type (default to 1).
+ * @param fileType - The file type.
+ * @returns The corresponding editor type.
+ */
+export function mapFileTypeToEditorType(fileType: FFileType | null): number {
+  if (fileType == null) return 1
+  switch (fileType) {
     case FFileType.DESIGN:
-      return 1;
+      return 1
     case FFileType.WHITEBOARD:
-      return 2;
+      return 2
     case FFileType.SLIDES:
-      return 4;
+      return 4
     case FFileType.SITES:
-      return 5;
+      return 5
     case FFileType.COOPER:
-      return 6;
+      return 6
     case FFileType.FIGMAKE:
-      return 8;
+      return 8
   }
+  return 1
 }
-export function $$S1(e) {
-  switch (e) {
+
+// Original function: $$S1
+/**
+ * Maps editor type to a string (with obfuscated strings).
+ * @param editorType - The editor type number.
+ * @returns The string representation.
+ */
+export function mapEditorTypeToStringWithObfuscated(editorType: number): string {
+  switch (editorType) {
     case 1:
-      return "design";
+      return 'design'
     case 2:
-      return "whiteboard";
+      return 'whiteboard'
     case 3:
-      return "dev_handoff";
+      return 'dev_handoff'
     case 4:
-      return "slides";
+      return 'slides'
     case 5:
-      return $$o11;
+      return SITES_STRING
     case 8:
-      return $$l3;
+      return FIGMAKE_STRING
     case 6:
-      return $$c13;
+      return COOPER_STRING
     case 7:
-      return p;
+      return DRAW_STRING
     default:
-      return e;
+      return editorType as any
   }
 }
-export function $$v7(e) {
-  switch (e) {
+
+// Original function: $$v7
+/**
+ * Maps _YF enum to editor type.
+ * @param yfValue - The _YF value.
+ * @returns The corresponding editor type.
+ */
+export function mapYFToEditorType(yfValue: typeof _YF[keyof typeof _YF]): number {
+  switch (yfValue) {
     case _YF.DESIGN:
-      return 1;
+      return 1
     case _YF.WHITEBOARD:
-      return 2;
+      return 2
     case _YF.DEV_HANDOFF:
-      return 3;
+      return 3
     case _YF.SLIDES:
-      return 4;
+      return 4
     case _YF.SITES:
-      return 5;
+      return 5
     case _YF.FIGMAKE:
-      return 8;
+      return 8
     case _YF.COOPER:
-      return 6;
+      return 6
     case _YF.ILLUSTRATION:
-      return 7;
+      return 7
     default:
-      x1("editorType", "Unknown editor type", {
-        editorType: e
-      });
-      return 1;
+      logError('editorType', 'Unknown editor type', {
+        editorType: yfValue,
+      })
+      return 1
   }
 }
-export function $$A2(e) {
-  switch (e) {
+
+// Original function: $$A2
+/**
+ * Maps editor type to string with error logging.
+ * @param editorType - The editor type number.
+ * @returns The string representation.
+ */
+export function mapEditorTypeToStringWithError(editorType: number): string {
+  switch (editorType) {
     case 1:
-      return "design";
+      return 'design'
     case 2:
-      return "whiteboard";
+      return 'whiteboard'
     case 3:
-      return "dev_handoff";
+      return 'dev_handoff'
     case 4:
-      return "slides";
+      return 'slides'
     case 5:
-      return $$o11;
+      return SITES_STRING
     case 8:
-      return $$l3;
+      return FIGMAKE_STRING
     case 6:
-      return $$c13;
+      return COOPER_STRING
     case 7:
-      return p;
+      return DRAW_STRING
     default:
-      x1("editorType", "Unknown editor type", {
-        editorType: e
-      });
-      return "";
+      logError('editorType', 'Unknown editor type', {
+        editorType,
+      })
+      return ''
   }
 }
-export function $$x14(e) {
-  switch (e) {
+
+// Original function: $$x14
+/**
+ * Maps file type to a numeric string.
+ * @param fileType - The file type.
+ * @returns The numeric string representation.
+ */
+export function mapFileTypeToNumericString(fileType: FFileType): string {
+  switch (fileType) {
     case FFileType.DESIGN:
-      return "0";
+      return '0'
     case FFileType.WHITEBOARD:
-      return "1";
+      return '1'
     case FFileType.SLIDES:
-      return "2";
+      return '2'
     case FFileType.SITES:
-      return "3";
+      return '3'
     case FFileType.COOPER:
-      return "4";
+      return '4'
     case FFileType.FIGMAKE:
-      return "5";
+      return '5'
     default:
-      return returnSecond(e, "0");
+      return returnSecond(fileType, '0')
   }
 }
-export const $t = $$u0;
-export const Bu = $$S1;
-export const CO = $$A2;
-export const GJ = $$l3;
-export const Nw = $$h4;
-export const YP = $$b5;
-export const co = $$m6;
-export const fB = $$v7;
-export const fP = $$g8;
-export const nT = $$f9;
-export const oD = $$y10;
-export const oQ = $$o11;
-export const sL = $$T12;
-export const sq = $$c13;
-export const vD = $$x14;
-export const wN = $$I15;
-export const xi = $$d16;
-export const xq = $$E17;
-export const yY = $$_18;
+
+// Refactored exports (original aliases: $t, Bu, CO, GJ, Nw, YP, co, fB, fP, nT, oD, oQ, sL, sq, vD, wN, xi, xq, yY)
+export const $t = DEV_MODE_STRING
+export const Bu = mapEditorTypeToStringWithObfuscated
+export const CO = mapEditorTypeToStringWithError
+export const GJ = FIGMAKE_STRING
+export const Nw = isWhiteboardOrDesignOrIllustration
+export const YP = mapEditorTypeToString
+export const co = isSlidesOrWhiteboardOrDesignOrIllustration
+export const fB = mapYFToEditorType
+export const fP = doesEditorTypeMatchFileType
+export const nT = FEditorType
+export const oD = mapEditorTypeToFileType
+export const oQ = SITES_STRING
+export const sL = mapFileTypeToEditorTypeNullable
+export const sq = COOPER_STRING
+export const vD = mapFileTypeToNumericString
+export const wN = mapFileTypeToEditorType
+export const xi = SLACK_STRING
+export const xq = mapEditorTypeToYF
+export const yY = isDesignOrIllustration

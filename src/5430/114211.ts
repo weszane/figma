@@ -6,7 +6,7 @@ import { s_ } from "../905/17223";
 import { Lf } from "../figma_app/637027";
 import { kt } from "../figma_app/858013";
 import { s as _$$s } from "../905/573154";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { j as _$$j } from "../5430/272190";
 import { G } from "../905/971006";
 import { _6 } from "../figma_app/386952";
@@ -33,11 +33,11 @@ export let $$w0 = Ju(function (e) {
   let O = useCallback(() => {
     if (!r || P) return;
     if (!C) {
-      t(_$$s.error(_$$t("community.seller.collect_tax_info_modal.enter_a_first_name")));
+      t(_$$s.error(getI18nString("community.seller.collect_tax_info_modal.enter_a_first_name")));
       return;
     }
     if (!T) {
-      t(_$$s.error(_$$t("community.seller.collect_tax_info_modal.enter_a_last_name")));
+      t(_$$s.error(getI18nString("community.seller.collect_tax_info_modal.enter_a_last_name")));
       return;
     }
     let {
@@ -48,11 +48,11 @@ export let $$w0 = Ju(function (e) {
       postal_code
     } = N;
     if (!line1 || !city || !country || !postal_code || "US" === country && !region) {
-      t(_$$s.error(_$$t("community.seller.collect_tax_info_modal.enter_a_valid_address")));
+      t(_$$s.error(getI18nString("community.seller.collect_tax_info_modal.enter_a_valid_address")));
       return;
     }
     if (S && !k) {
-      t(_$$s.error(_$$t("community.seller.collect_tax_info_modal.enter_a_valid_vat_id")));
+      t(_$$s.error(getI18nString("community.seller.collect_tax_info_modal.enter_a_valid_vat_id")));
       return;
     }
     M(!0);
@@ -76,16 +76,16 @@ export let $$w0 = Ju(function (e) {
       dispatch: t
     }), jsx("div", {
       className: "collect_tax_info_modal--title--wFmJh text--fontPos20--Bcz97 text--_fontBase--QdLsd",
-      children: tx("community.seller.collect_tax_info_modal.title")
+      children: renderI18nText("community.seller.collect_tax_info_modal.title")
     }), jsx("div", {
       className: "collect_tax_info_modal--body--M1wrr text--fontPos13--xW8hS text--_fontBase--QdLsd",
-      children: tx("community.seller.collect_tax_info_modal.body")
+      children: renderI18nText("community.seller.collect_tax_info_modal.body")
     }), jsxs("div", {
       className: "xh8yej3",
       children: [jsx(Lf, {
         value: C,
         htmlName: "firstName",
-        label: _$$t("community.seller.collect_tax_info_modal.first_name"),
+        label: getI18nString("community.seller.collect_tax_info_modal.first_name"),
         onChange: e => {
           L(e.target.value);
         },
@@ -94,7 +94,7 @@ export let $$w0 = Ju(function (e) {
       }), jsx(Lf, {
         value: T,
         htmlName: "lastName",
-        label: _$$t("community.seller.collect_tax_info_modal.last_name"),
+        label: getI18nString("community.seller.collect_tax_info_modal.last_name"),
         onChange: e => {
           I(e.target.value);
         },
@@ -121,7 +121,7 @@ export let $$w0 = Ju(function (e) {
           children: jsx(kt, {
             shouldMatchTextColor: !0
           })
-        }), tx("community.seller.collect_tax_info_modal.continue_to_stripe")]
+        }), renderI18nText("community.seller.collect_tax_info_modal.continue_to_stripe")]
       })
     })]
   });

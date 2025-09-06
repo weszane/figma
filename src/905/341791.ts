@@ -4,7 +4,7 @@ import s from "../vendor/336892";
 import { debugState } from "../905/407919";
 import { J } from "../905/931050";
 import { r as _$$r } from "../905/520829";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { p as _$$p } from "../905/896627";
 import { A as _$$A } from "../905/17894";
@@ -39,8 +39,8 @@ function A({
           duplicateMediaBySha1
         } = e.data;
         let a = Object.values(duplicateMediaBySha1).reduce((e, i) => {
-          let r = i.find((e) => Sq(e)) ?? i[0];
-          let a = i.filter((e) => e !== r);
+          let r = i.find(e => Sq(e)) ?? i[0];
+          let a = i.filter(e => e !== r);
           t.thumbnailMedium && a.includes(t.thumbnailMedium) && (n = r, e.push(t.thumbnailMedium));
           e.push(...a);
           return e;
@@ -53,7 +53,7 @@ function A({
           allMedia: o()(t.allMedia, ...a)
         });
         debugState.dispatch(F.enqueue({
-          message: _$$t("community.publishing.some_media_was_deduplicated"),
+          message: getI18nString("community.publishing.some_media_was_deduplicated"),
           error: !1
         }));
         return !0;
@@ -67,7 +67,7 @@ function A({
     case "VIDEOS_NOT_ALLOWED":
       i({
         ...t,
-        allMedia: t.allMedia.filter((e) => "video" !== e.type)
+        allMedia: t.allMedia.filter(e => "video" !== e.type)
       });
       return !0;
   }
@@ -91,7 +91,7 @@ export function $$b0(e, t) {
       currentValue
     } = e;
     if (currentValue !== _$$A) {
-      o()(r.current, ...currentValue.allMedia).filter((e) => dE(e) && (i.status !== _$$r.SUCCESS || e.url !== i.value?.url)).forEach((e) => {
+      o()(r.current, ...currentValue.allMedia).filter(e => dE(e) && (i.status !== _$$r.SUCCESS || e.url !== i.value?.url)).forEach(e => {
         nK(e);
       });
       return () => {

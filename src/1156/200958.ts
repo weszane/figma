@@ -5,7 +5,7 @@ import { K$p } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { fp, zl } from "../figma_app/27355";
+import { useAtomValueAndSetter, atomStoreManager } from "../figma_app/27355";
 import { Pp } from "../vendor/330821";
 import { Y5 } from "../figma_app/455680";
 import { q5, tS } from "../figma_app/516028";
@@ -33,8 +33,8 @@ export function $$S0(e, t, n) {
   let l = e?.guid || "";
   let o = q5();
   let x = o?.key || null;
-  let [h, g] = fp(C(l));
-  let [p, j] = fp($$E(l));
+  let [h, g] = useAtomValueAndSetter(C(l));
+  let [p, j] = useAtomValueAndSetter($$E(l));
   let {
     entryPointCodeInstance
   } = oA();
@@ -44,7 +44,7 @@ export function $$S0(e, t, n) {
   let T = getFeatureFlags().bake_manual_edits;
   let I = function (e) {
     let t = e?.guid || "";
-    let [n, i] = fp(k(t));
+    let [n, i] = useAtomValueAndSetter(k(t));
     useEffect(() => {
       let t = e?.chatMessages || [];
       v()(t, n) || i(t);
@@ -201,7 +201,7 @@ export function $$N1({
   chatMessagesNodeGuid: e,
   featureType: t
 }) {
-  let [n] = fp(C(e));
+  let [n] = useAtomValueAndSetter(C(e));
   let a = tS();
   return {
     restoreFile: useCallback(r => {
@@ -220,7 +220,7 @@ export function $$N1({
           let {
             codeFile
           } = Ur(n, e, l, u);
-          codeFile && (codeFile.sourceCode = u, zl.set(Nm(a.guid), "user"));
+          codeFile && (codeFile.sourceCode = u, atomStoreManager.set(Nm(a.guid), "user"));
           Y5.commit();
         });
       };

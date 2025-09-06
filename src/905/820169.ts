@@ -6,7 +6,7 @@ import { getFeatureFlags } from "../905/601108";
 import l from "../vendor/267721";
 import c from "../vendor/223926";
 import { parsePxNumber } from "../figma_app/783094";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { pP } from "../figma_app/328825";
 import { uJ } from "../figma_app/646357";
 import { Pw } from "../905/782020";
@@ -87,7 +87,7 @@ export function $$E6({
   i.forEach((e, i) => {
     t.push({
       type: "SECTION_HEADER",
-      name: _$$t("proto.variable_picker.properties", {
+      name: getI18nString("proto.variable_picker.properties", {
         componentName: i
       })
     });
@@ -110,10 +110,10 @@ export function $$x8({
     let n = i.find(t => t.fieldType === e.value.fieldType && !isNullish(t.disabledReason));
     switch (n?.disabledReason) {
       case pP.DISABLED_FOR_INSTANCE_SUBLAYER_IN_CMS_LIST:
-        t = _$$t("variables.binding_ui.variable_dakota_tab_name.disabled_for_instance_sublayer_in_cms_list");
+        t = getI18nString("variables.binding_ui.variable_dakota_tab_name.disabled_for_instance_sublayer_in_cms_list");
         break;
       case pP.DISABLED_FOR_INSTANCE_SUBLAYER:
-        t = _$$t("variables.binding_ui.variable_dakota_tab_name.disabled_for_instance_sublayer");
+        t = getI18nString("variables.binding_ui.variable_dakota_tab_name.disabled_for_instance_sublayer");
     }
     return {
       type: "CMS_FIELDS",
@@ -137,7 +137,7 @@ function S(e, t, i, n, r) {
   s.length > 0 && (a.push({
     type: "SECTION_HEADER",
     name: e,
-    secondaryText: r ? _$$t("slides.properties_panel.variable_list.current_slide") : void 0
+    secondaryText: r ? getI18nString("slides.properties_panel.variable_list.current_slide") : void 0
   }), a.push(...s));
   return a;
 }
@@ -194,8 +194,8 @@ export function $$w14({
       });
       a.length > 0 && s.length > 0 && a.push({
         type: "ASSET_TYPE",
-        name: _$$t("fullscreen.properties_panel.styles"),
-        tooltip: _$$t("fullscreen.properties_panel.styles_description")
+        name: getI18nString("fullscreen.properties_panel.styles"),
+        tooltip: getI18nString("fullscreen.properties_panel.styles_description")
       });
       a.push(...s);
       return a;
@@ -214,8 +214,8 @@ export function $$w14({
   o.push(...l);
   l.length > 0 && d.length > 0 && o.push({
     type: "ASSET_TYPE",
-    name: _$$t("fullscreen.properties_panel.styles"),
-    tooltip: _$$t("fullscreen.properties_panel.styles_description")
+    name: getI18nString("fullscreen.properties_panel.styles"),
+    tooltip: getI18nString("fullscreen.properties_panel.styles_description")
   });
   o.push(...d);
   return o;
@@ -302,8 +302,8 @@ export function $$C5({
       let c = [...s];
       if (s.length > 0 && d.length > 0 && c.push({
         type: "ASSET_TYPE",
-        name: _$$t("fullscreen.properties_panel.styles"),
-        tooltip: _$$t("fullscreen.properties_panel.styles_description")
+        name: getI18nString("fullscreen.properties_panel.styles"),
+        tooltip: getI18nString("fullscreen.properties_panel.styles_description")
       }), c.push(...d), c.length > 0 && n) {
         let e = {
           type: "FILE_NAME",
@@ -340,7 +340,7 @@ export function $$C5({
   let A = [..._];
   _.length > 0 && f.length > 0 && A.push({
     type: "SECTION_HEADER",
-    name: _$$t("variables.binding_ui.set_labels.variables_created_in_file")
+    name: getI18nString("variables.binding_ui.set_labels.variables_created_in_file")
   });
   A.push(...f);
   return A;

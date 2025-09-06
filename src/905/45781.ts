@@ -9,7 +9,7 @@ import { Uz } from "../905/63728";
 import { Pt } from "../figma_app/806412";
 import { s as _$$s } from "../cssbuilder/589278";
 import { S as _$$S } from "../figma_app/552746";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { gl, hS } from "../905/216495";
 import { p_ } from "../905/203369";
 import { p as _$$p } from "../905/427409";
@@ -25,7 +25,7 @@ export function $$v0(e) {
   let v = useMemo(() => {
     if (!t?.boundVariableId) return [];
     if (gl(property) || gl(t.mismatchedValue)) return [{
-      value: _$$t("fullscreen.mixed")
+      value: getI18nString("fullscreen.mixed")
     }];
     let e = t.mismatchedValue;
     return [{
@@ -38,19 +38,19 @@ export function $$v0(e) {
           case eii.NONE:
             return null;
           case eii.LESS_THAN_MIN_WIDTH:
-            return _$$t("variables.invalid.less_than_min_width");
+            return getI18nString("variables.invalid.less_than_min_width");
           case eii.LESS_THAN_MIN_HEIGHT:
-            return _$$t("variables.invalid.less_than_min_height");
+            return getI18nString("variables.invalid.less_than_min_height");
           case eii.GREATER_THAN_MAX_WIDTH:
-            return _$$t("variables.invalid.greater_than_max_width");
+            return getI18nString("variables.invalid.greater_than_max_width");
           case eii.GREATER_THAN_MAX_HEIGHT:
-            return _$$t("variables.invalid.greater_than_max_height");
+            return getI18nString("variables.invalid.greater_than_max_height");
           case eii.LESS_THAN_ONE:
-            return _$$t("variables.invalid.less_than_one");
+            return getI18nString("variables.invalid.less_than_one");
           case eii.NEGATIVE:
-            return _$$t("variables.invalid.negative");
+            return getI18nString("variables.invalid.negative");
           case eii.NEGATIVE_OR_ZERO:
-            return _$$t("variables.invalid.negative_or_zero");
+            return getI18nString("variables.invalid.negative_or_zero");
         }
       }(e?.reason) ?? void 0
     }];
@@ -143,7 +143,7 @@ export function $$v0(e) {
       }),
       children: jsx(p_, {
         allowEmpty: e.allowEmpty,
-        ariaDescription: _$$t("fullscreen.properties_panel.apply_variable_hotkey"),
+        ariaDescription: getI18nString("fullscreen.properties_panel.apply_variable_hotkey"),
         ariaLabel: e.ariaLabel,
         autoFocus: e.autoFocus,
         className: l()({

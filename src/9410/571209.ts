@@ -2,7 +2,7 @@ import { useMemo, useState, useCallback, useLayoutEffect } from "react";
 import { useSelector } from "../vendor/514228";
 import { PU } from "../figma_app/343967";
 import { r as _$$r } from "../905/249071";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { wm } from "../905/19536";
 import { parsePxNumber } from "../figma_app/783094";
 import { uc } from "../905/763714";
@@ -33,7 +33,7 @@ function f(e, t, i, r) {
 var _ = (e => (e.TOP = "TOP", e.RIGHT = "RIGHT", e.BOTTOM = "BOTTOM", e.LEFT = "LEFT", e.UNKNOWN = "UNKNONWN", e))(_ || {});
 var x = (e => (e.TOP_LEFT = "TOP_LEFT", e.TOP = "TOP", e.TOP_RIGHT = "TOP_RIGHT", e.RIGHT = "RIGHT", e.BOTTOM_RIGHT = "BOTTOM_RIGHT", e.BOTTOM = "BOTTOM", e.BOTTOM_LEFT = "BOTTOM_LEFT", e.LEFT = "LEFT", e.OVERLAP = "OVERLAP", e))(x || {});
 export function $$C2() {
-  return md(uc);
+  return useAtomWithSubscription(uc);
 }
 export function $$v1() {
   let e = useSelector(({

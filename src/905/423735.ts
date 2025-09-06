@@ -8,7 +8,7 @@ import { Rs } from "../figma_app/288654";
 import { IT } from "../figma_app/566371";
 import { rf } from "../figma_app/806412";
 import { P as _$$P } from "../905/347284";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { fu } from "../figma_app/831799";
 import { n1 } from "../figma_app/657017";
 import { d1 } from "../905/766303";
@@ -147,7 +147,7 @@ export function $$F0({
       className: p9,
       children: [jsx("h2", {
         className: FA,
-        children: tx("design_systems.libraries_modal.header_styles")
+        children: renderI18nText("design_systems.libraries_modal.header_styles")
       }), jsx(_$$c, {
         styleList: J
       })]
@@ -155,7 +155,7 @@ export function $$F0({
       className: p9,
       children: [jsx("h2", {
         className: FA,
-        children: tx("design_systems.libraries_modal.header_components")
+        children: renderI18nText("design_systems.libraries_modal.header_components")
       }), jsx(ev, {
         width: i,
         items: Q,

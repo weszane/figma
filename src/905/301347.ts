@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { s as _$$s } from "../905/518538";
 import { mW, qN } from "../905/123443";
@@ -59,7 +59,7 @@ export function $$S13() {
 export function $$w10() {
   let e = _$$s();
   let t = useDispatch();
-  let i = _$$t("comments.comments_cannot_be_placed_in_this_area");
+  let i = getI18nString("comments.comments_cannot_be_placed_in_this_area");
   let l = e.commentDisabledPositionBellMessage ?? i;
   return useCallback(() => {
     t(F.enqueue({

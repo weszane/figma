@@ -6,7 +6,7 @@ import { o6, C0, cZ } from "../figma_app/806412";
 import { Point } from "../905/736624";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { MJ } from "../figma_app/80990";
 import { Jr } from "../figma_app/624361";
 import { E7 } from "../905/216495";
@@ -89,9 +89,9 @@ let T = forwardRef(function ({
     "aria-label": function (e) {
       if (e) switch (e.type) {
         case "GRADIENT_LINEAR":
-          return _$$t("fullscreen.accessibility.chit_gradient_linear");
+          return getI18nString("fullscreen.accessibility.chit_gradient_linear");
         case "GRADIENT_RADIAL":
-          return _$$t("fullscreen.accessibility.chit_gradient_radial");
+          return getI18nString("fullscreen.accessibility.chit_gradient_radial");
         default:
           return;
       }
@@ -285,17 +285,17 @@ function M(e) {
 function j(e) {
   if (e) switch (e.type) {
     case "VIDEO":
-      return _$$t("fullscreen.accessibility.chit_video");
+      return getI18nString("fullscreen.accessibility.chit_video");
     case "IMAGE":
-      return null != e.animatedImage ? _$$t("fullscreen.accessibility.chit_gif") : _$$t("fullscreen.accessibility.chit_image");
+      return null != e.animatedImage ? getI18nString("fullscreen.accessibility.chit_gif") : getI18nString("fullscreen.accessibility.chit_image");
     case "EMOJI":
-      return _$$t("fullscreen.accessibility.chit_emoji");
+      return getI18nString("fullscreen.accessibility.chit_emoji");
     case "PATTERN":
-      return _$$t("fullscreen.accessibility.chit_pattern");
+      return getI18nString("fullscreen.accessibility.chit_pattern");
     case "GRADIENT_ANGULAR":
-      return _$$t("fullscreen.accessibility.chit_gradient_angular");
+      return getI18nString("fullscreen.accessibility.chit_gradient_angular");
     case "GRADIENT_DIAMOND":
-      return _$$t("fullscreen.accessibility.chit_gradient_diamond");
+      return getI18nString("fullscreen.accessibility.chit_gradient_diamond");
     default:
       return;
   }

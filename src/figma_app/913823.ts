@@ -1,9 +1,9 @@
 import { isNotNullish } from "../figma_app/95419";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
-import { zl, eU } from "../figma_app/27355";
+import { atomStoreManager, atom } from "../figma_app/27355";
 import { getInitialOptions } from "../figma_app/169182";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { XHR } from "../905/910117";
 import { f as _$$f } from "../905/412913";
 import { D3 } from "../905/359847";
@@ -20,7 +20,7 @@ import { aV } from "../905/405710";
 import { Sc, D2, VP } from "../905/18797";
 import { zg } from "../figma_app/193867";
 import { kb } from "../figma_app/502247";
-import { nT, Bu } from "../figma_app/53721";
+import { FEditorType, mapEditorTypeToStringWithObfuscated } from "../figma_app/53721";
 import { PW, Yu } from "../figma_app/633080";
 import { $A } from "../905/862883";
 import { Z } from "../905/939602";
@@ -47,11 +47,11 @@ async function R(e, t) {
     let r = c.selectedView.editorType;
     let o = function (e) {
       switch (e) {
-        case nT.Whiteboard:
+        case FEditorType.Whiteboard:
           return "figjam";
-        case nT.Slides:
+        case FEditorType.Slides:
           return "slides";
-        case nT.Cooper:
+        case FEditorType.Cooper:
           return "cooper";
         default:
           return "design";
@@ -70,7 +70,7 @@ async function R(e, t) {
     m.data.meta.files.forEach(e => {
       Ve(e.key);
     });
-    let y = zl.get(qp);
+    let y = atomStoreManager.get(qp);
     let T = m.data.meta.hub_files;
     T && (T.forEach(e => {
       Ve(e.id);
@@ -92,7 +92,7 @@ async function R(e, t) {
     })), getFeatureFlags().dse_lk_realtime_audit) {
       let e = S.filter(e => !e.library_key);
       let t = I.filter(e => !e.library_key);
-      (e.length > 0 || t.length > 0) && $D(_$$e.DESIGN_SYSTEMS_ECOSYSTEM, Error("Missing library keys for components or state groups"), {
+      (e.length > 0 || t.length > 0) && reportError(_$$e.DESIGN_SYSTEMS_ECOSYSTEM, Error("Missing library keys for components or state groups"), {
         tags: {
           numComponentsWithMissingLibraryKeys: e.length,
           numStateGroupsWithMissingLibraryKeys: t.length
@@ -125,7 +125,7 @@ async function L(e) {
       let t = e.getState().selectedView;
       if ("fullscreen" !== t.view) return;
       let i = await Z.getDefaultLibraries({
-        editorType: Bu(t.editorType)
+        editorType: mapEditorTypeToStringWithObfuscated(t.editorType)
       });
       D(e, i.data.meta.components, PW.COMPONENT);
       D(e, i.data.meta.state_groups, PW.STATE_GROUP);
@@ -170,20 +170,20 @@ let D = (e, t, r) => {
     type: r
   }));
 };
-let $$k2 = eU("loading");
+let $$k2 = atom("loading");
 let $$M3 = nF(e => {
   let t = e.getState();
   let r = !!t.user;
   if (!t.openFile?.key) return;
   let n = e.getState().selectedView;
-  n && "fullscreen" === n.view && (n.editorType === nT.Whiteboard || n.editorType === nT.Slides || n.editorType === nT.Cooper ? L(e) : kG(), r && j(e, n.editorType === nT.Whiteboard ? $A.FigJam : $A.Design));
+  n && "fullscreen" === n.view && (n.editorType === FEditorType.Whiteboard || n.editorType === FEditorType.Slides || n.editorType === FEditorType.Cooper ? L(e) : kG(), r && j(e, n.editorType === FEditorType.Whiteboard ? $A.FigJam : $A.Design));
   r && (e.dispatch(tg()), xZ(e));
 });
 let $$F1 = "FETCH_RECENTLY_USED_LIBRARY_ITEMS";
 async function j(e, t) {
   let r;
   if (VP(e.getState().loadingState, $$F1)) return;
-  zl.set($$k2, "loading");
+  atomStoreManager.set($$k2, "loading");
   e.dispatch(Cx({
     key: $$F1
   }));
@@ -192,7 +192,7 @@ async function j(e, t) {
     e.dispatch(x2({
       key: $$F1
     }));
-    zl.set($$k2, "loaded");
+    atomStoreManager.set($$k2, "loaded");
     return;
   }
   let i = new Set();
@@ -205,7 +205,7 @@ async function j(e, t) {
     e.dispatch(x2({
       key: $$F1
     }));
-    zl.set($$k2, "loaded");
+    atomStoreManager.set($$k2, "loaded");
     return;
   }
   try {
@@ -218,13 +218,13 @@ async function j(e, t) {
     e.dispatch(of({
       key: $$F1
     }));
-    zl.set($$k2, "loaded");
+    atomStoreManager.set($$k2, "loaded");
     return;
   }
   e.dispatch(x2({
     key: $$F1
   }));
-  zl.set($$k2, "loaded");
+  atomStoreManager.set($$k2, "loaded");
   e.dispatch(uo({
     files: r.data.meta.files,
     subscribeToRealtime: !1
@@ -233,7 +233,7 @@ async function j(e, t) {
     subscribedOldKeyToNewKey: r.data.meta.move_remappings,
     localOldGuidToNewKey: {}
   }));
-  let o = zl.get(qp);
+  let o = atomStoreManager.get(qp);
   VF(r.data.meta.components, PW.COMPONENT, o, e.dispatch);
   VF(r.data.meta.state_groups, PW.STATE_GROUP, o, e.dispatch);
 }

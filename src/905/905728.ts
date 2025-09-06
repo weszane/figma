@@ -1,8 +1,8 @@
 import { qmM } from "../figma_app/763686";
 import { r as _$$r } from "../905/249071";
 import { M } from "../905/512402";
-import { zl } from "../figma_app/27355";
-import { Ay } from "../figma_app/778880";
+import { atomStoreManager } from "../figma_app/27355";
+import { BrowserInfo } from "../figma_app/778880";
 import { H } from "../figma_app/376315";
 import { j } from "../905/881708";
 export class $$c0 extends j {
@@ -10,11 +10,11 @@ export class $$c0 extends j {
     super(e);
   }
   handleMouseDown(e) {
-    if (this.isPointWithinVideoNode(e.viewportSpaceMouse()) && Ay.isIpad) {
+    if (this.isPointWithinVideoNode(e.viewportSpaceMouse()) && BrowserInfo.isIpad) {
       let {
         pointerDownOnVideo
-      } = zl.get(H);
-      zl.set(H, {
+      } = atomStoreManager.get(H);
+      atomStoreManager.set(H, {
         isVideoNodeHovered: !0,
         pointerDownOnVideo: !pointerDownOnVideo
       });
@@ -24,12 +24,12 @@ export class $$c0 extends j {
     if (this.isPointWithinVideoNode(e.viewportSpaceMouse())) {
       let {
         pointerDownOnVideo
-      } = zl.get(H);
-      zl.set(H, {
+      } = atomStoreManager.get(H);
+      atomStoreManager.set(H, {
         isVideoNodeHovered: !0,
         pointerDownOnVideo
       });
-    } else zl.set(H, {
+    } else atomStoreManager.set(H, {
       isVideoNodeHovered: !1,
       pointerDownOnVideo: !1
     });

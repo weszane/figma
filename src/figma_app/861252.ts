@@ -5,10 +5,10 @@ import { lQ } from "../905/934246";
 import { U1 } from "../figma_app/343967";
 import { Ez5 } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { Xr, fp, md } from "../figma_app/27355";
+import { Xr, useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import u from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { gs } from "../figma_app/624706";
 import { o as _$$o } from "../905/821217";
 import { E as _$$E } from "../905/632989";
@@ -16,7 +16,7 @@ import { x as _$$x } from "../905/587214";
 import { f as _$$f } from "../905/335032";
 import { Pt } from "../figma_app/806412";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Y5 } from "../figma_app/455680";
 import { Zr } from "../figma_app/678782";
 import { aV } from "../figma_app/722362";
@@ -101,7 +101,7 @@ function R(e) {
       "data-tooltip-type": Ib.LOOKUP,
       "data-tooltip": "zoom-in"
     },
-    "aria-label": t("fullscreen_actions.zoom-in"),
+    "aria-label": getI18nString("fullscreen_actions.zoom-in"),
     children: jsx("div", {
       className: "zoom_menu--zoomPlusIcon--oPqo4",
       "aria-hidden": !0,
@@ -130,7 +130,7 @@ function L(e) {
       "data-tooltip-type": Ib.LOOKUP,
       "data-tooltip": "zoom-out"
     },
-    "aria-label": t("fullscreen_actions.zoom-out"),
+    "aria-label": getI18nString("fullscreen_actions.zoom-out"),
     children: jsx("div", {
       className: "zoom_menu--zoomMinusIcon--l-8CN",
       "aria-hidden": !0,
@@ -151,7 +151,7 @@ function B() {
     },
     children: [jsx("div", {
       className: "x1tk3asg x17akokd x1qxcl5b xclx6tv",
-      children: tx("cms.onboarding.give_feedback")
+      children: renderI18nText("cms.onboarding.give_feedback")
     }), jsx(_$$S, {
       className: "xwa2v1s"
     })]
@@ -161,7 +161,7 @@ function es() {
   let e = Xr(Px);
   let t = Xr(Bl);
   let r = Xr(go);
-  let [i, a] = fp(HO);
+  let [i, a] = useAtomValueAndSetter(HO);
   return i ? jsx(e6, {
     className: "dev_mode_demo_file_restart_button--restartButton--jXEnp",
     onClick: () => {
@@ -209,7 +209,7 @@ let $$eh0 = memo(function () {
   let F = B5(L);
   let j = !!g?.shouldOptimizeForIpadApp || z4.getIsExtension() && isDevHandoff || F || w;
   let U = $$eg1();
-  let H = md(P4);
+  let H = useAtomWithSubscription(P4);
   let W = ut(Ez5?.uiState().inProductHelpSidePanelWidth, 0);
   if (jl() || !_ && j) return null;
   let q = jsxs("div", {
@@ -248,7 +248,7 @@ let $$eh0 = memo(function () {
   });
 });
 export function $$em2() {
-  return _$$R(e => ({
+  return selectWithShallowEqual(e => ({
     keyboardShortcuts: e.mirror.appModel.keyboardShortcuts,
     isEditingFile: !!d1(e),
     isDevHandoff: $A(e.selectedView),

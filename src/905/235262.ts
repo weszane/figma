@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useEffect, createContext, useCallback, useMemo } from "react";
 import { useDispatch } from "../vendor/514228";
-import { xP, eU, md, fp } from "../figma_app/27355";
+import { useUndoRedoAtom, atom, useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { k9 } from "../905/19536";
 import { sf } from "../905/929976";
 import { Y5 } from "../figma_app/455680";
@@ -16,8 +16,8 @@ let {
   undoAtom,
   redoAtom,
   historyAtom
-} = xP(SW.fromString("0:0"));
-let $$b5 = eU(e => {
+} = useUndoRedoAtom(SW.fromString("0:0"));
+let $$b5 = atom(e => {
   let t = e(Cc);
   let i = e(valueAtom);
   return t.getObject(i);
@@ -28,7 +28,7 @@ export function $$I7({
   appSelection: t,
   setAppSelection: i
 }) {
-  let r = md(Cc);
+  let r = useAtomWithSubscription(Cc);
   return i && r instanceof G2 ? jsx(S, {
     resource: r,
     appSelection: t,
@@ -41,7 +41,7 @@ export function $$I7({
 function E() {
   let e = useDispatch();
   let t = _6();
-  let [i, n] = fp(valueAtom);
+  let [i, n] = useAtomValueAndSetter(valueAtom);
   let o = useRef(!0);
   useEffect(() => {
     _$$E(t) && (o.current ? (o.current = !1, t.selection && n(SW.fromString(t.selection))) : i !== t.selection && e(sf({
@@ -62,8 +62,8 @@ function S({
   children: a
 }) {
   let l = e.scene;
-  let c = md($$v4);
-  let [p, m] = fp(valueAtom);
+  let c = useAtomWithSubscription($$v4);
+  let [p, m] = useAtomValueAndSetter(valueAtom);
   let h = useRef(p);
   let g = useRef(null);
   let _ = useRef(c);

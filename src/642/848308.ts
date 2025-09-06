@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useMemo, useCallback } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { $n } from "../905/521428";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { to } from "../905/156213";
 import { n5, zE, HF } from "../figma_app/646357";
 import { Sh } from "../figma_app/889655";
@@ -49,7 +49,7 @@ export function $$f0() {
   return validNodeIds.size ? jsx($n, {
     variant: "secondary",
     onClick,
-    children: n ? t("design_systems.updates.publish") : t("design_systems.component_panel.publish_new_changes")
+    children: n ? getI18nString("design_systems.updates.publish") : getI18nString("design_systems.component_panel.publish_new_changes")
   }) : null;
 }
 export function $$$$x1() {
@@ -59,7 +59,7 @@ export function $$$$x1() {
   } = g();
   return validNodeIds.size ? jsx(z, {
     onClick,
-    children: t("design_systems.component_panel.publish_new_changes")
+    children: getI18nString("design_systems.component_panel.publish_new_changes")
   }) : null;
 }
 export const U = $$f0;

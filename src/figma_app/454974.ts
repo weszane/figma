@@ -3,7 +3,7 @@ import { _YF } from "../figma_app/822011";
 import { uQ6 } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { yV } from "../figma_app/516028";
 import { W7 } from "../figma_app/251115";
 import { JT } from "../figma_app/632248";
@@ -83,7 +83,7 @@ export function $$y1({
 }
 export function $$b0(e) {
   if (!W7()) return !1;
-  let t = zl.get(yV);
+  let t = atomStoreManager.get(yV);
   if (!t?.canEdit || t.editorType !== _YF.DESIGN) return !1;
   switch (e) {
     case uQ6.READY_FOR_DEV:

@@ -1,6 +1,6 @@
-import { eU, zl } from "../figma_app/27355";
+import { atom, atomStoreManager } from "../figma_app/27355";
 import i from "../vendor/946678";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { rw } from "../905/485103";
 import { w0 } from "../figma_app/594947";
 import { PW, Do } from "../figma_app/633080";
@@ -25,7 +25,7 @@ export async function $$f2(e, t, r, n, i, a, o, l) {
     elapsedTime,
     backgrounded
   } = d();
-  az.trackDefinedEvent("asset_search.get_search_results_for_file_time", {
+  analyticsEventManager.trackDefinedEvent("asset_search.get_search_results_for_file_time", {
     elapsedTime,
     searchSessionId: n ?? "",
     backgrounded
@@ -54,7 +54,7 @@ export async function $$E1(e, t, r, n, i, a, o, l, d, c, _, h, m, g, f, b = !1, 
     elapsedTime,
     backgrounded
   } = S();
-  az.trackDefinedEvent("asset_search.get_search_results_for_all_promise_time", {
+  analyticsEventManager.trackDefinedEvent("asset_search.get_search_results_for_all_promise_time", {
     elapsedTime,
     searchSessionId: l ?? "",
     backgrounded
@@ -65,7 +65,7 @@ export async function $$E1(e, t, r, n, i, a, o, l, d, c, _, h, m, g, f, b = !1, 
     elapsedTime: _elapsedTime,
     backgrounded: _backgrounded
   } = F();
-  az.trackDefinedEvent("asset_search.combine_fuse_and_server_results_time", {
+  analyticsEventManager.trackDefinedEvent("asset_search.combine_fuse_and_server_results_time", {
     elapsedTime: _elapsedTime,
     searchSessionId: l ?? "",
     backgrounded: _backgrounded
@@ -123,7 +123,7 @@ export async function $$I7(e) {
     let l = e.library_key;
     let m = $$b10(l, libraryKey, subscribedLibraryKeys);
     let g = e.server_score || e.ai_score || e.lexical_score ? "server" : "fuse";
-    az.trackDefinedEvent("asset_search.top_k_results", {
+    analyticsEventManager.trackDefinedEvent("asset_search.top_k_results", {
       sessionId,
       queryId,
       entryPoint,
@@ -156,9 +156,9 @@ export function $$S12(e) {
       return e.key;
   }
 }
-export let $$v4 = eU(0);
+export let $$v4 = atom(0);
 export function $$A9(e) {
-  zl.set($$v4, e);
+  atomStoreManager.set($$v4, e);
 }
 export const B0 = $$T0;
 export const BG = $$E1;

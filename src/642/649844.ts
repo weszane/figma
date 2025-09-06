@@ -7,7 +7,7 @@ import { rXF, glU, hJs } from "../figma_app/763686";
 import d from "classnames";
 import { am } from "../figma_app/901889";
 import { B as _$$B } from "../905/714743";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { sT } from "../figma_app/740163";
 import { gl, oV, Q8, SX, hS } from "../905/216495";
 import { lJ, kl } from "../905/275640";
@@ -71,7 +71,7 @@ export function $$M0({
     }), glU.temporarilyHideOverlay(hJs.SELECTION));
     "number" == typeof e || null === e ? (F("AUTO", zk.NO), R(e, s)) : (clearVariableConsumption(), F("SPACE_BETWEEN", s));
   };
-  let Y = _$$t("fullscreen.properties_panel.stack_panel.gap_rows_vertical");
+  let Y = getI18nString("fullscreen.properties_panel.stack_panel.gap_rows_vertical");
   let X = "spacing-rows-vertical-icon";
   let q = [jsx(c$, {
     value: Et(L) ? L : bigNudgeAmount

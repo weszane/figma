@@ -5,7 +5,7 @@ import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Ce } from "../905/156213";
 import { Ju } from "../905/102752";
 import { P } from "../905/932818";
@@ -27,20 +27,20 @@ export let $$h0 = Ju(function () {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$t("figmake.supabase_disconnect_required_modal.title")
+          children: getI18nString("figmake.supabase_disconnect_required_modal.title")
         })
       }), jsx(nB, {
-        children: _$$t("figmake.supabase_disconnect_required_modal.body")
+        children: getI18nString("figmake.supabase_disconnect_required_modal.body")
       }), jsx(wi, {
         children: jsxs(jk, {
           children: [jsx($n, {
             variant: "secondary",
             onClick: r,
-            children: _$$t("general.cancel")
+            children: getI18nString("general.cancel")
           }), jsx($n, {
             variant: "primary",
             onClick: p,
-            children: _$$t("figmake.supabase_disconnect_required_modal.go_to_settings")
+            children: getI18nString("figmake.supabase_disconnect_required_modal.go_to_settings")
           })]
         })
       })]

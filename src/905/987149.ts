@@ -1,6 +1,6 @@
 import { R } from "../905/531474";
 import { biQ } from "../figma_app/763686";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Mo } from "../905/913055";
 import { hm } from "../905/487011";
 import { $J, o2, sd, Cq } from "../905/278499";
@@ -44,7 +44,7 @@ function u(e) {
 }
 export function $$p3() {
   return [{
-    content: t("fullscreen_actions.ai_content_fill.placeholder_fill_realistic_content")
+    content: getI18nString("fullscreen_actions.ai_content_fill.placeholder_fill_realistic_content")
   }];
 }
 export const SZ = function e(t) {

@@ -7,9 +7,9 @@ const path = require('node:path')
 const parser = require('@babel/parser')
 const traverse = require('@babel/traverse').default
 const generate = require('@babel/generator').default
-// const { transformSync } = require('@babel/core')
+const { transformSync } = require('@babel/core')
 const t = require('@babel/types')
-// const transformImport = require('./transform-import').default
+const transformImport = require('./transform-import').default
 
 const PROJECT_ROOT = path.resolve('.')
 const targetFileArg = process.argv[2]
@@ -88,13 +88,15 @@ function updateImportFiles(lines, renameMap, candidateFiles) {
       //   compact: false,
       // })
       // if (res && res.code) {
-      //   fs.writeFileSync(file, res.code, 'utf-8')
+      //   // fs.writeFileSync(file, res.code, 'utf-8')
       //   console.log(`🔄 更新导入: ${getRelativePath(file)}`)
       //   updatedCount++
       // }
+      // continue
     }
     catch (e) {
       console.log('读取文件失败:', e)
+      continue
     }
 
     const ast = parser.parse(content, {

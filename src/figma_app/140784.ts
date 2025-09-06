@@ -1,16 +1,16 @@
 import { useMemo, useCallback, useEffect } from "react";
 import { MoD, Vzr } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { eU, zl, fp } from "../figma_app/27355";
+import { atom, atomStoreManager, useAtomValueAndSetter } from "../figma_app/27355";
 import { c6 } from "../figma_app/659187";
 import { Jr } from "../figma_app/624361";
 import { Fk } from "../figma_app/167249";
 var c = (e => (e.VALID = "valid", e.GENERATING = "generating", e.ERROR = "error", e))(c || {});
-let u = eU({});
+let u = atom({});
 export function $$p0() {
-  let e = zl.get(u);
+  let e = atomStoreManager.get(u);
   for (let t of Object.getOwnPropertyNames(e)) e[t]?.state === "valid" && URL.revokeObjectURL(e[t].url);
-  zl.set(u, {});
+  atomStoreManager.set(u, {});
 }
 export function $$_1({
   assetId: e,
@@ -45,9 +45,9 @@ export function $$_1({
       width: c.width,
       height: p.height / p.width * c.width
     } : {
-        width: c.width,
-        height: c.height
-      };
+      width: c.width,
+      height: c.height
+    };
     return {
       imgStyle: {
         maxWidth: _width / 2,
@@ -58,7 +58,7 @@ export function $$_1({
       height: _height
     };
   }, [p.width, p.height, c.width, c.height]);
-  let g = function({
+  let g = function ({
     assetId: e,
     width: t,
     height: r,
@@ -71,7 +71,7 @@ export function $$_1({
     height,
     scale: r
   });
-  let [f, E] = fp(u);
+  let [f, E] = useAtomValueAndSetter(u);
   let y = f[g];
   let b = y?.state === "valid" ? y.url : void 0;
   let T = useCallback(e => {
@@ -118,4 +118,4 @@ export function $$_1({
   };
 }
 export const K = $$p0;
-export const O = $$_1; 
+export const O = $$_1;

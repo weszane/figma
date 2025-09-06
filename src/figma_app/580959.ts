@@ -20,19 +20,19 @@ import { l7 } from "../905/189185";
 import { GP } from "../figma_app/15927";
 import { dI } from "../905/805904";
 import { getFeatureFlags } from "../905/601108";
-import { zl, eU as _$$eU, fp } from "../figma_app/27355";
+import { atomStoreManager, atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { xx } from "../figma_app/815945";
 import C from "classnames";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { M as _$$M } from "../figma_app/648761";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { Pt, rf } from "../figma_app/806412";
 import { td as _$$td } from "../figma_app/930338";
 import { k as _$$k2 } from "../905/582200";
 import { Y as _$$Y } from "../905/506207";
 import { tH, H4 } from "../905/751457";
 import { B as _$$B } from "../905/714743";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { _j } from "../figma_app/843119";
 import { U as _$$U2 } from "../905/492359";
 import { XE, u1, Uv, Y as _$$Y2, bS } from "../figma_app/91703";
@@ -121,7 +121,7 @@ let tr = e => {
   });
 };
 let tn = (e, t, r, n) => {
-  getFeatureFlags().ce_properties_panel_tracking && sx("editor-paints-panel-fill-change");
+  getFeatureFlags().ce_properties_panel_tracking && trackEventAnalytics("editor-paints-panel-fill-change");
   Y5.updateSelectionProperties({
     fillPaints: e
   }, {
@@ -158,7 +158,7 @@ let $$ti6 = memo(function (e) {
   });
   let _ = xm(e);
   let h = useCallback(() => {
-    getFeatureFlags().ce_properties_panel_tracking && sx("editor-paints-panel-fill-color-picker-show");
+    getFeatureFlags().ce_properties_panel_tracking && trackEventAnalytics("editor-paints-panel-fill-color-picker-show");
   }, []);
   let m = o3(nt.useGrid);
   return jsx(tH, {
@@ -204,13 +204,13 @@ let $$ti6 = memo(function (e) {
                   recordingKey: Pt(e, "exportDisableCheckbox"),
                   label: jsx(_$$J, {
                     htmlAttributes: {
-                      "data-tooltip": _$$t("fullscreen.properties_panel.fill.include_the_canvas_or_group_background_in_exports"),
+                      "data-tooltip": getI18nString("fullscreen.properties_panel.fill.include_the_canvas_or_group_background_in_exports"),
                       "data-tooltip-type": Ib.TEXT
                     },
-                    children: tx("fullscreen.properties_panel.fill.show_in_exports")
+                    children: renderI18nText("fullscreen.properties_panel.fill.show_in_exports")
                   }),
                   htmlAttributes: {
-                    "data-tooltip": _$$t("fullscreen.properties_panel.fill.include_the_canvas_or_group_background_in_exports"),
+                    "data-tooltip": getI18nString("fullscreen.properties_panel.fill.include_the_canvas_or_group_background_in_exports"),
                     "data-tooltip-type": Ib.TEXT
                   }
                 })
@@ -260,7 +260,7 @@ export function $$ta0(e) {
   });
 }
 function ts() {
-  getFeatureFlags().ce_properties_panel_tracking && sx("editor-paints-panel-stroke-color-picker-show");
+  getFeatureFlags().ce_properties_panel_tracking && trackEventAnalytics("editor-paints-panel-stroke-color-picker-show");
 }
 class to extends PureComponent {
   constructor() {
@@ -272,7 +272,7 @@ class to extends PureComponent {
     };
     this.stopPropagation = e => e.stopPropagation();
     this.onPaintsChange = (e, t, r, n) => {
-      getFeatureFlags().ce_properties_panel_tracking && sx("editor-paints-panel-stroke-change", {
+      getFeatureFlags().ce_properties_panel_tracking && trackEventAnalytics("editor-paints-panel-stroke-change", {
         key: "color"
       });
       let i = 0 === e.length ? {
@@ -302,7 +302,7 @@ class to extends PureComponent {
         let {
           strokeAlign
         } = e;
-        sx("Individual Border Alignment Changed", {
+        trackEventAnalytics("Individual Border Alignment Changed", {
           position: hS(strokeAlign) ? strokeAlign : "__mixed__"
         });
       }
@@ -312,7 +312,7 @@ class to extends PureComponent {
     this.toggleSettings = () => {
       if (this.props.pickerShown?.id === this.settingsId) this.props.dispatch(XE());else {
         if (!this.forwardedRef || !this.forwardedRef.current) return;
-        sx("editor-paints-panel-advanced-stroke-show");
+        trackEventAnalytics("editor-paints-panel-advanced-stroke-show");
         let e = cn(this.forwardedRef.current);
         this.props.dispatch(u1({
           id: this.settingsId,
@@ -385,7 +385,7 @@ class to extends PureComponent {
           variableScopes: $$tt9,
           ...Rz(this.props),
           ...e,
-          advancedSettingsTooltip: _$$t("fullscreen.properties_panel.fill.advanced_stroke_settings"),
+          advancedSettingsTooltip: getI18nString("fullscreen.properties_panel.fill.advanced_stroke_settings"),
           isPanelBodyCollapsedAtom: this.props.isPanelBodyCollapsedAtom,
           onToggleAdvancedSettings: t && n ? this.toggleSettings : void 0,
           onToggleListLayout: this.toggleSettings
@@ -590,14 +590,14 @@ export function $$tu7(e) {
           a2("strokePaints");
           Y5.triggerActionInUserEditScope("add-stroke-to-selection");
           let e = _W(c, []);
-          r.preventAutoToggle || zl.set(td, e.length);
+          r.preventAutoToggle || atomStoreManager.set(td, e.length);
         }
         break;
       case rrT.FILL:
         if (l) Y5.triggerActionInUserEditScope("add-fill-to-style-selection");else {
           Y5.triggerActionInUserEditScope("add-fill-to-selection", t);
           let e = _W(c, []);
-          r.preventAutoToggle || zl.set(tl, e.length);
+          r.preventAutoToggle || atomStoreManager.set(tl, e.length);
         }
         a2("fillPaints");
     }
@@ -679,9 +679,9 @@ export function $$tu7(e) {
     let t = _W(c, []);
     switch (e.selectedPropertyType) {
       case rrT.STROKE:
-        return 0 === t.length ? _$$t("fullscreen.properties_panel.section_stroke.tooltip_addStroke") : _$$t("fullscreen.properties_panel.section_stroke.tooltip_addStrokeFill");
+        return 0 === t.length ? getI18nString("fullscreen.properties_panel.section_stroke.tooltip_addStroke") : getI18nString("fullscreen.properties_panel.section_stroke.tooltip_addStrokeFill");
       case rrT.FILL:
-        return _$$t("fullscreen.properties_panel.section_fill.tooltip_addFill");
+        return getI18nString("fullscreen.properties_panel.section_fill.tooltip_addFill");
       default:
         return;
     }
@@ -700,9 +700,9 @@ export function $$tu7(e) {
     title: (() => {
       switch (e.selectedPropertyType) {
         case rrT.STROKE:
-          return _$$t("fullscreen.properties_panel.fill.stroke");
+          return getI18nString("fullscreen.properties_panel.fill.stroke");
         case rrT.FILL:
-          return _$$t("fullscreen.properties_panel.fill.fill");
+          return getI18nString("fullscreen.properties_panel.fill.fill");
         default:
           return "";
       }
@@ -881,12 +881,12 @@ export class $$tp1 extends PureComponent {
         children: jsx(_$$T, {
           selected: t,
           children: jsx(_$$K, {
-            "aria-label": _$$t("fullscreen.properties_panel.fill.detach_variable"),
+            "aria-label": getI18nString("fullscreen.properties_panel.fill.detach_variable"),
             onClick: this.onDetachVariableClick,
             recordingKey: Pt(this.props, "paint", "detachVariableButton"),
             htmlAttributes: {
               onMouseDown: dG,
-              "data-tooltip": _$$t("fullscreen.properties_panel.fill.detach_variable"),
+              "data-tooltip": getI18nString("fullscreen.properties_panel.fill.detach_variable"),
               "data-tooltip-type": Ib.TEXT
             },
             children: jsx(_$$U, {})
@@ -909,10 +909,10 @@ export class $$tp1 extends PureComponent {
               removeBoundData: !0
             });
           } : this.props.onRemovePaint,
-          "aria-label": _$$t("fullscreen.properties_panel.fill.remove"),
+          "aria-label": getI18nString("fullscreen.properties_panel.fill.remove"),
           htmlAttributes: {
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t("fullscreen.properties_panel.fill.remove"),
+            "data-tooltip": getI18nString("fullscreen.properties_panel.fill.remove"),
             onMouseDown: dG
           },
           children: jsx(_$$O, {})
@@ -1296,11 +1296,11 @@ export function $$tg3(e) {
   });
   let o = Qu();
   return "SOLID" === e.paint.type ? jsx(AN, {
-    ariaLabel: _$$t("fullscreen.color"),
+    ariaLabel: getI18nString("fullscreen.color"),
     className: w()(e.visible ? EX : wh, e.appendedColorInputClassname),
     formatter: t,
     forwardedRef: e.focusableRef,
-    name: _$$t("fullscreen.color"),
+    name: getI18nString("fullscreen.color"),
     noBorderOnFocus: e.noBorderOnFocus,
     noLeftBorder: !1,
     onBlur: e.onBlur,
@@ -1335,7 +1335,7 @@ function tf({
   let {
     stateStylePickerShown,
     stylePreviewShown
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     stateStylePickerShown: e.stylePickerShown,
     stylePreviewShown: e.stylePreviewShown
   }));
@@ -1386,7 +1386,7 @@ function tf({
         l7.user("apply-style", () => Osy.updateStyle(n, e));
       }
     }));
-    sx("Edit Selection Style", {
+    trackEventAnalytics("Edit Selection Style", {
       fileKey: _,
       count: t
     });
@@ -1399,7 +1399,7 @@ function tf({
   }, [n]);
   let q = useCallback(() => {
     Osy.selectOnlySameStyle(n);
-    sx("Select Selection Style", {
+    trackEventAnalytics("Select Selection Style", {
       count: t
     });
   }, [t, n]);
@@ -1433,10 +1433,10 @@ function tf({
   let et = jsx(_$$K, {
     actionOnPointerDown: !0,
     recordingKey: Pt(d, "detachButton"),
-    "aria-label": _$$t("fullscreen.properties_panel.fill.detach_style"),
+    "aria-label": getI18nString("fullscreen.properties_panel.fill.detach_style"),
     onClick: X,
     htmlAttributes: {
-      "data-tooltip": _$$t("fullscreen.properties_panel.fill.detach_style"),
+      "data-tooltip": getI18nString("fullscreen.properties_panel.fill.detach_style"),
       "data-tooltip-type": Ib.TEXT
     },
     children: jsx(_$$U, {})
@@ -1592,7 +1592,7 @@ $$t_2.displayName = "Paint";
             }));else {
               let t = GP(this.props.paint);
               l7.user("apply-style", () => Osy.applyStyleToPaintDatas(t, e));
-              sx("Apply Style to Selection Paint ", {
+              trackEventAnalytics("Apply Style to Selection Paint ", {
                 count: this.props.uniqueNodesCount
               });
             }
@@ -1601,7 +1601,7 @@ $$t_2.displayName = "Paint";
         this.hidePicker();
       };
       this.debouncedTrackPaintChangeFromPicker = debounce(e => {
-        sx("Edit Selection Paint", {
+        trackEventAnalytics("Edit Selection Paint", {
           fileKey: this.props.openFile?.key || "",
           count: this.props.count
         });
@@ -1653,7 +1653,7 @@ $$t_2.displayName = "Paint";
       this.onSelectSamePaintMouseDown = () => {
         let e = GP(this.props.paint);
         Osy.selectOnlySamePaint(e);
-        sx("Select Selection Paint", {
+        trackEventAnalytics("Select Selection Paint", {
           count: this.props.uniqueNodesCount
         });
       };
@@ -1761,12 +1761,12 @@ $$t_2.displayName = "Paint";
         button: jsx("span", {
           className: zm,
           children: jsx(_$$K, {
-            "aria-label": _$$t("fullscreen.properties_panel.fill.detach_variable"),
+            "aria-label": getI18nString("fullscreen.properties_panel.fill.detach_variable"),
             onClick: this.onDetachVariableClick,
             recordingKey: Pt(this.props, "paint", "detachVariableButton"),
             htmlAttributes: {
               onMouseDown: dG,
-              "data-tooltip": _$$t("fullscreen.properties_panel.fill.detach_variable"),
+              "data-tooltip": getI18nString("fullscreen.properties_panel.fill.detach_variable"),
               "data-tooltip-type": Ib.TEXT
             },
             children: jsx(_$$U, {})
@@ -1780,11 +1780,11 @@ $$t_2.displayName = "Paint";
           button: jsx("span", {
             className: zm,
             children: jsx(_$$K, {
-              "aria-label": t ? _$$t("slides.properties_panel.color_picker.theme_colors") : _$$A2("style"),
+              "aria-label": t ? getI18nString("slides.properties_panel.color_picker.theme_colors") : _$$A2("style"),
               onClick: this.onStyleClick,
               recordingKey: Pt(this.props, "paint", "styleButton"),
               htmlAttributes: {
-                "data-tooltip": t ? _$$t("slides.properties_panel.color_picker.theme_colors") : "style",
+                "data-tooltip": t ? getI18nString("slides.properties_panel.color_picker.theme_colors") : "style",
                 "data-tooltip-type": t ? Ib.TEXT : Ib.LOOKUP
               },
               children: jsx(_$$y, {})
@@ -1799,12 +1799,12 @@ $$t_2.displayName = "Paint";
           className: zm,
           children: jsx(_$$K, {
             onClick: this.onSelectSamePaintMouseDown,
-            "aria-label": _$$t("fullscreen.properties_panel.select_item_using_this_color", {
+            "aria-label": getI18nString("fullscreen.properties_panel.select_item_using_this_color", {
               numItems: this.props.uniqueNodesCount
             }),
             recordingKey: Pt(this.props, "paint", "selectSamePaintButton"),
             htmlAttributes: {
-              "data-tooltip": _$$t("fullscreen.properties_panel.select_item_using_this_color", {
+              "data-tooltip": getI18nString("fullscreen.properties_panel.select_item_using_this_color", {
                 numItems: this.props.uniqueNodesCount
               }),
               "data-tooltip-type": Ib.TEXT
@@ -1854,8 +1854,8 @@ export function $$tb4(e) {
   let r = p8("currentSelectedGradientStop");
   let n = p8("currentTool");
   let o = p8("activeCanvasEditModeType");
-  let l = useMemo(() => _$$eU(!0), []);
-  let [d, c] = fp(l);
+  let l = useMemo(() => atom(!0), []);
+  let [d, c] = useAtomValueAndSetter(l);
   let u = useSelector(e => e.mirror.selectionPaints);
   let [p, h] = useState(void 0);
   let g = useCallback(e => {
@@ -1915,7 +1915,7 @@ export function $$tb4(e) {
   let et = useRef(!1);
   J !== ee.current && (B(Q.current, sceneGraphSelection) || (et.current = !1), Q.current = sceneGraphSelection, ee.current = J);
   let er = jsx(mS, {
-    titleTx: tx("fullscreen.properties_panel.fill.selection_colors"),
+    titleTx: renderI18nText("fullscreen.properties_panel.fill.selection_colors"),
     dataTestId: "selection-colors-title"
   });
   if (u.emptyDueToLimitExceeded) t = jsx(Ad, {
@@ -1924,15 +1924,15 @@ export function $$tb4(e) {
       className: gr,
       children: jsx($n, {
         onClick: () => {
-          sx("Show Selection Paints For Large Selection", {
+          trackEventAnalytics("Show Selection Paints For Large Selection", {
             fileKey: e.openFile?.key || ""
           });
           Osy.ignoreLimitWhenCollectingPaints();
         },
-        "aria-label": _$$t("fullscreen.properties_panel.fill.show_selection_colors"),
+        "aria-label": getI18nString("fullscreen.properties_panel.fill.show_selection_colors"),
         recordingKey: Pt(e, "limitExceeded"),
         variant: "secondary",
-        children: tx("fullscreen.properties_panel.fill.show_selection_colors")
+        children: renderI18nText("fullscreen.properties_panel.fill.show_selection_colors")
       })
     })
   });else if (J < 4 && !et.current) {
@@ -1982,7 +1982,7 @@ export function $$tb4(e) {
       isPanelBodyCollapsedAtom: l,
       recordingKey: Pt(e, "collapseExpandToggleArea"),
       children: jsx(mS, {
-        titleTx: tx("fullscreen.properties_panel.fill.selection_colors"),
+        titleTx: renderI18nText("fullscreen.properties_panel.fill.selection_colors"),
         isPanelBodyCollapsedAtom: l,
         appendedClassName: r,
         input: a,
@@ -2005,13 +2005,13 @@ export function $$tb4(e) {
             actionOnPointerDown: !0,
             onClick: en ? t => {
               t.stopPropagation();
-              sx("Show All Selection Styles", {
+              trackEventAnalytics("Show All Selection Styles", {
                 fileKey: e.openFile?.key || ""
               });
               M(!D);
             } : t => {
               t.stopPropagation();
-              sx("Show All Selection Paints", {
+              trackEventAnalytics("Show All Selection Paints", {
                 fileKey: e.openFile?.key || ""
               });
               L(!R);
@@ -2023,7 +2023,7 @@ export function $$tb4(e) {
             }),
             children: jsx(nV, {
               className: zy,
-              children: tx(en ? "fullscreen.properties_panel.fill.see_all_x_library_colors" : "fullscreen.properties_panel.fill.see_all_x_colors", {
+              children: renderI18nText(en ? "fullscreen.properties_panel.fill.see_all_x_library_colors" : "fullscreen.properties_panel.fill.see_all_x_colors", {
                 number: J
               })
             })

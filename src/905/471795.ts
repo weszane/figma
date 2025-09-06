@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from "react";
-import { Bq, mapFilter } from "../figma_app/656233";
+import { flatten, mapFilter } from "../figma_app/656233";
 import { Z_n } from "../figma_app/763686";
 import { k9 } from "../905/19536";
 import o from "../vendor/728460";
@@ -18,7 +18,7 @@ export function $$g1({
 }) {
   let u = useMemo(() => function (e, t) {
     let i = Ex(e, t);
-    let n = Bq(e.map(e => i.includes(e.name) && e.variables.length > 0 ? [{
+    let n = flatten(e.map(e => i.includes(e.name) && e.variables.length > 0 ? [{
       type: "group",
       name: e.name
     }, ...e.variables.map(e => ({

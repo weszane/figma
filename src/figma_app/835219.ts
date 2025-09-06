@@ -1,7 +1,7 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import i from "classnames";
-import { Ay } from "../figma_app/778880";
-import { tx, t as _$$t } from "../905/303541";
+import { BrowserInfo } from "../figma_app/778880";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { r5 } from "../figma_app/947784";
 import { So } from "../figma_app/209680";
 import { y } from "../905/158417";
@@ -32,14 +32,14 @@ export function $$g1(e, t = !1, r = !1, i = !1) {
     profile: e,
     openInNewTab: i
   });
-  if (Ay.mobile) {
+  if (BrowserInfo.mobile) {
     let t = 1 === e.length ? c(e[0]) : jsx("span", {
       className: "resource_header_creators--otherAuthorsLabel--E-8MS dropdown--dropdown--IX0tU text--fontPos14--OL9Hp text--_fontBase--QdLsd",
-      children: tx("community.resource.multiple_creators")
+      children: renderI18nText("community.resource.multiple_creators")
     });
     return jsx("div", {
       className: _,
-      children: tx("community.resource.by_creator", {
+      children: renderI18nText("community.resource.by_creator", {
         spaceChar: jsx(Fragment, {
           children: "\xa0"
         }),
@@ -51,14 +51,14 @@ export function $$g1(e, t = !1, r = !1, i = !1) {
     className: a()(_, {
       "resource_header_creators--authorContainerSmallWidth--PFZaH": t
     }),
-    children: [1 === e.length && (r ? tx("community.resource.creator", {
+    children: [1 === e.length && (r ? renderI18nText("community.resource.creator", {
       creator: c(e[0])
-    }) : tx("community.resource.by_creator", {
+    }) : renderI18nText("community.resource.by_creator", {
       spaceChar: jsx(Fragment, {
         children: "\xa0"
       }),
       creator: c(e[0])
-    })), 2 === e.length && tx(r ? "community.resource.2_creators" : "community.resource.by_2_creators", {
+    })), 2 === e.length && renderI18nText(r ? "community.resource.2_creators" : "community.resource.by_2_creators", {
       spaceChar: jsx(Fragment, {
         children: "\xa0"
       }),
@@ -70,21 +70,21 @@ export function $$g1(e, t = !1, r = !1, i = !1) {
         authors: e
       }),
       className: "resource_header_creators--otherAuthorsDropdownLabel--jxCHO resource_header_creators--otherAuthorsLabel--E-8MS dropdown--dropdown--IX0tU text--fontPos14--OL9Hp text--_fontBase--QdLsd",
-      children: tx(r ? "community.resource.more_than_2_creators" : "community.resource.by_more_than_2_creators", {
+      children: renderI18nText(r ? "community.resource.more_than_2_creators" : "community.resource.by_more_than_2_creators", {
         spaceChar: jsx(Fragment, {
           children: "\xa0"
         }),
         creator1: e[0].name,
-        others: tx("community.resource.by_others")
+        others: renderI18nText("community.resource.by_others")
       })
     })]
   });
 }
 export function $$f2(e) {
   let t = e.community_publishers.accepted;
-  return 0 === t.length ? "" : 1 === e.community_publishers.accepted.length ? t[0].name : _$$t("community.publisher_with_suffix", {
+  return 0 === t.length ? "" : 1 === e.community_publishers.accepted.length ? t[0].name : getI18nString("community.publisher_with_suffix", {
     publisherName: t[0].name,
-    publishersSuffix: _$$t("community.cards.pluralize_num_other_publishers", {
+    publishersSuffix: getI18nString("community.cards.pluralize_num_other_publishers", {
       numOtherPublishers: t.length - 1
     })
   });
@@ -99,17 +99,17 @@ export function $$E3(e) {
   });
   let a = jsx("span", {
     className: Zz,
-    children: _$$t("community.cards.pluralize_num_other_publishers", {
+    children: getI18nString("community.cards.pluralize_num_other_publishers", {
       numOtherPublishers: t.length - 1
     })
   });
-  let s = tx("community.publisher_with_suffix", {
+  let s = renderI18nText("community.publisher_with_suffix", {
     publisherName: i,
     publishersSuffix: a
   });
   return jsx("span", {
     className: r ? tF : cy,
-    children: tx("community.resource_tiles.by_author", {
+    children: renderI18nText("community.resource_tiles.by_author", {
       author: r ? s : i
     })
   });

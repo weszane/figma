@@ -1,13 +1,13 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { NC } from "../905/17179";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
 import { qW } from "../905/623179";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { J as _$$J } from "../905/231762";
 import { F } from "../905/302958";
 import { KH, nF } from "../figma_app/471982";
@@ -279,7 +279,7 @@ let $$J14 = _$$nF(async (e, t, {
     }));
     return i;
   } catch (t) {
-    _$$s.flash(t.message || _$$t("community.actions.an_error_occurred_while_trying_to_fetch_the_org_widgets_list"));
+    _$$s.flash(t.message || getI18nString("community.actions.an_error_occurred_while_trying_to_fetch_the_org_widgets_list"));
     e.dispatch(of({
       key: r
     }));
@@ -287,7 +287,7 @@ let $$J14 = _$$nF(async (e, t, {
   }
 }, e => `GET_ORG_PUBLISHED_WIDGETS_${e}`);
 async function Z(e, t, r) {
-  if (null === e.current_plugin_version_id || !e.id) throw Error(_$$t("community.actions.resource_is_invalid"));
+  if (null === e.current_plugin_version_id || !e.id) throw Error(getI18nString("community.actions.resource_is_invalid"));
   let i = 0;
   t.iconBlob && (i = wf(t.iconBlob));
   let a = 0;
@@ -302,21 +302,21 @@ async function Z(e, t, r) {
   let f = Promise.resolve(!1);
   let E = t.iconBlob;
   void 0 !== E && (f = _$$c(E).then(e => Ac(g.iconUploadUrl, E, e)).then(() => !0).catch(t => {
-    $D(_$$e.COMMUNITY, t);
-    let r = _$$J(t, _$$t("community.actions.could_not_connect_to_the_server"));
-    throw Error(xQ(e) ? _$$t("community.actions.error_uploading_widget_icon_error", {
+    reportError(_$$e.COMMUNITY, t);
+    let r = _$$J(t, getI18nString("community.actions.could_not_connect_to_the_server"));
+    throw Error(xQ(e) ? getI18nString("community.actions.error_uploading_widget_icon_error", {
       error: r
-    }) : _$$t("community.actions.error_uploading_plugin_icon_error", {
+    }) : getI18nString("community.actions.error_uploading_plugin_icon_error", {
       error: r
     }));
   }));
   let y = Promise.resolve(!1);
   let b = t.coverBlob;
   void 0 !== b && (y = _$$c(b).then(e => Ac(g.coverImageUploadUrl, b, e)).then(() => !0).catch(t => {
-    $D(_$$e.COMMUNITY, t);
-    return Error(xQ(e) ? _$$t("community.actions.error_uploading_widget_artwork_image_error", {
+    reportError(_$$e.COMMUNITY, t);
+    return Error(xQ(e) ? getI18nString("community.actions.error_uploading_widget_artwork_image_error", {
       error: _$$J(t, t.data?.message || "unknown error")
-    }) : _$$t("community.actions.error_uploading_plugin_artwork_image_error", {
+    }) : getI18nString("community.actions.error_uploading_plugin_artwork_image_error", {
       error: _$$J(t, t.data?.message || "unknown error")
     }));
   }));
@@ -328,8 +328,8 @@ async function Z(e, t, r) {
     if (!g.snapshotUploadUrl) throw Error("Snapshot upload url is missing");
     return Ac(g.snapshotUploadUrl, snapshotBlob, e);
   }).then(() => !0).catch(e => {
-    $D(_$$e.COMMUNITY, e);
-    return Error(_$$t("community.actions.error_uploading_widget_snapshot_image_error", {
+    reportError(_$$e.COMMUNITY, e);
+    return Error(getI18nString("community.actions.error_uploading_widget_snapshot_image_error", {
       error: _$$J(e, e.data?.message || "unknown error")
     }));
   }));
@@ -348,8 +348,8 @@ async function Z(e, t, r) {
       video_thumbnail_sha1: e.videoThumbnailSha1
     });
   }).then(() => !0).catch(e => {
-    $D(_$$e.COMMUNITY, e);
-    return Error(_$$t("community.actions.error_uploading_plugin_video_error", {
+    reportError(_$$e.COMMUNITY, e);
+    return Error(getI18nString("community.actions.error_uploading_plugin_video_error", {
       error: _$$J(e, e.data?.message || "unknown error")
     }));
   }));
@@ -374,15 +374,15 @@ async function Z(e, t, r) {
     playground_fig_file_key: t.playground_fig_file_key,
     playground_file_publish_type: r
   }).catch(e => {
-    $D(_$$e.COMMUNITY, e);
-    return Error(_$$t("community.actions.error_finalizing_plugin_error", {
+    reportError(_$$e.COMMUNITY, e);
+    return Error(getI18nString("community.actions.error_finalizing_plugin_error", {
       error: _$$J(e, e.data?.message || "unknown error")
     }));
   });
   let D = data.meta;
   let k = D.plugin;
-  if (k.id !== e.id) throw Error(_$$t("community.actions.the_published_resource_i_ds_do_not_match"));
-  sx("Hub Plugin Update Version", {
+  if (k.id !== e.id) throw Error(getI18nString("community.actions.the_published_resource_i_ds_do_not_match"));
+  trackEventAnalytics("Hub Plugin Update Version", {
     pluginId: e.id,
     isWidget: e.is_widget,
     iconFileSize: i,
@@ -395,7 +395,7 @@ async function Z(e, t, r) {
 }
 async function Q(e, t, r, i, a, o, l, u, h, g, f) {
   let E;
-  if (!e) throw Error(_$$t("community.actions.plugin_id_is_invalid"));
+  if (!e) throw Error(getI18nString("community.actions.plugin_id_is_invalid"));
   let [y, b] = await Promise.all([c2(t, {
     resourceType: nF(g),
     isPublishing: !0
@@ -426,8 +426,8 @@ async function Q(e, t, r, i, a, o, l, u, h, g, f) {
   try {
     E = await _$$w.postPluginUpload(L, e, g);
   } catch (e) {
-    $D(_$$e.COMMUNITY, e);
-    return Error(_$$J(e, _$$t("community.actions.could_not_connect_to_the_server")));
+    reportError(_$$e.COMMUNITY, e);
+    return Error(_$$J(e, getI18nString("community.actions.could_not_connect_to_the_server")));
   }
   let {
     codeUploadUrl,
@@ -441,33 +441,33 @@ async function Q(e, t, r, i, a, o, l, u, h, g, f) {
   } = E;
   let G = Promise.resolve(!1);
   b && (G = $$ep30(codeUploadUrl, b).then(() => !0).catch(e => {
-    $D(_$$e.COMMUNITY, e);
-    let t = $$e_25(e) ?? _$$J(e, _$$t("community.actions.could_not_connect_to_the_server"));
-    throw Error(g ? _$$t("community.actions.error_uploading_widget_code_error", {
+    reportError(_$$e.COMMUNITY, e);
+    let t = $$e_25(e) ?? _$$J(e, getI18nString("community.actions.could_not_connect_to_the_server"));
+    throw Error(g ? getI18nString("community.actions.error_uploading_widget_code_error", {
       error: t
-    }) : _$$t("community.actions.error_uploading_plugin_code_error", {
+    }) : getI18nString("community.actions.error_uploading_plugin_code_error", {
       error: t
     }));
   }));
   let V = Promise.resolve(!1);
   let H = r.iconBlob;
   null != H && (V = _$$c(H).then(e => Ac(iconUploadUrl, H, e)).then(() => !0).catch(e => {
-    $D(_$$e.COMMUNITY, e);
+    reportError(_$$e.COMMUNITY, e);
     let t = $$e_25(e) ?? _$$J(e, e.data?.message || "unknown error");
-    throw Error(g ? _$$t("community.actions.error_uploading_widget_icon_error", {
+    throw Error(g ? getI18nString("community.actions.error_uploading_widget_icon_error", {
       error: t
-    }) : _$$t("community.actions.error_uploading_plugin_icon_error", {
+    }) : getI18nString("community.actions.error_uploading_plugin_icon_error", {
       error: t
     }));
   }));
   let z = Promise.resolve(!1);
   let W = r.coverBlob;
   null != W && (z = _$$c(W).then(e => Ac(coverImageUploadUrl, W, e)).then(() => !0).catch(e => {
-    $D(_$$e.COMMUNITY, e);
-    let t = $$e_25(e) ?? _$$J(e, _$$t("community.actions.could_not_connect_to_the_server"));
-    throw Error(g ? _$$t("community.actions.error_uploading_widget_artwork_image_error", {
+    reportError(_$$e.COMMUNITY, e);
+    let t = $$e_25(e) ?? _$$J(e, getI18nString("community.actions.could_not_connect_to_the_server"));
+    throw Error(g ? getI18nString("community.actions.error_uploading_widget_artwork_image_error", {
       error: t
-    }) : _$$t("community.actions.error_uploading_plugin_artwork_image_error", {
+    }) : getI18nString("community.actions.error_uploading_plugin_artwork_image_error", {
       error: t
     }));
   }));
@@ -476,8 +476,8 @@ async function Q(e, t, r, i, a, o, l, u, h, g, f) {
   } = r;
   let Y = Promise.resolve(!1);
   null != snapshotBlob && snapshotUploadUrl && (Y = _$$c(snapshotBlob).then(e => Ac(snapshotUploadUrl, snapshotBlob, e)).then(() => !0).catch(e => {
-    $D(_$$e.COMMUNITY, e);
-    return Error(_$$t("community.actions.error_uploading_widget_snapshot_image_error", {
+    reportError(_$$e.COMMUNITY, e);
+    return Error(getI18nString("community.actions.error_uploading_widget_snapshot_image_error", {
       error: $$e_25(e) ?? _$$J(e, e.data?.message || "unknown error")
     }));
   }));
@@ -497,8 +497,8 @@ async function Q(e, t, r, i, a, o, l, u, h, g, f) {
       });
       return !0;
     } catch (e) {
-      $D(_$$e.COMMUNITY, e);
-      return Error(_$$t("community.actions.error_uploading_plugin_video_error", {
+      reportError(_$$e.COMMUNITY, e);
+      return Error(getI18nString("community.actions.error_uploading_plugin_video_error", {
         error: _$$J(e, e.data?.message || "unknown error")
       }));
     }
@@ -523,17 +523,17 @@ async function Q(e, t, r, i, a, o, l, u, h, g, f) {
     playground_fig_file_key: r.playground_fig_file_key,
     playground_file_publish_type: f
   }).catch(e => {
-    $D(_$$e.COMMUNITY, e);
-    return Error(g ? _$$t("community.actions.error_finalizing_widget_error", {
+    reportError(_$$e.COMMUNITY, e);
+    return Error(g ? getI18nString("community.actions.error_finalizing_widget_error", {
       error: _$$J(e, e.data?.message || "")
-    }) : _$$t("community.actions.error_finalizing_plugin_error", {
+    }) : getI18nString("community.actions.error_finalizing_plugin_error", {
       error: _$$J(e, e.data?.message || "")
     }));
   });
   let et = data.meta;
   let er = et.plugin;
-  if (er.id !== e) throw Error(_$$t("community.actions.the_published_resource_i_ds_do_not_match"));
-  sx("Hub Plugin Publish Version", {
+  if (er.id !== e) throw Error(getI18nString("community.actions.the_published_resource_i_ds_do_not_match"));
+  trackEventAnalytics("Hub Plugin Publish Version", {
     pluginId: e,
     hasUI: !!y.ui,
     apiVersion: y.api,
@@ -604,14 +604,14 @@ let $$ea2 = _$$nF(async (e, t) => {
         error: r.message
       }
     }));
-    let t = _$$t("community.actions.could_not_publish_plugin_error", {
+    let t = getI18nString("community.actions.could_not_publish_plugin_error", {
       error: _$$J(r, r.message)
     });
-    r instanceof qW ? MZ(e.dispatch, _$$t("check_network_compatibility.error_bell.video_upload.message")) : r.message.includes("invalid word") || e.dispatch(F.enqueue({
+    r instanceof qW ? MZ(e.dispatch, getI18nString("check_network_compatibility.error_bell.video_upload.message")) : r.message.includes("invalid word") || e.dispatch(F.enqueue({
       message: t,
       error: !0
     }));
-    $D(_$$e.COMMUNITY, r);
+    reportError(_$$e.COMMUNITY, r);
     return Error(t);
   }
 });
@@ -648,7 +648,7 @@ let $$es11 = _$$nF(async (e, t) => {
     callback();
   } catch (r) {
     let t = _$$J(r, r.message);
-    r instanceof qW ? MZ(e.dispatch, _$$t("check_network_compatibility.error_bell.video_upload.message")) : e.dispatch(F.enqueue({
+    r instanceof qW ? MZ(e.dispatch, getI18nString("check_network_compatibility.error_bell.video_upload.message")) : e.dispatch(F.enqueue({
       message: t,
       error: !0
     }));
@@ -659,7 +659,7 @@ let $$es11 = _$$nF(async (e, t) => {
         error: t
       }
     }));
-    $D(_$$e.COMMUNITY, r);
+    reportError(_$$e.COMMUNITY, r);
     return Error(`Failed plugin patchVersion: ${r.message}`);
   }
 });
@@ -680,7 +680,7 @@ let $$eo35 = _$$nF(async (e, {
     data: r
   }) => {
     let n = r.meta;
-    sx("Hub Plugin Publish Role", {
+    trackEventAnalytics("Hub Plugin Publish Role", {
       pluginId: t,
       toPublic: n.roles.is_public,
       toOrg: !!n.roles.org,
@@ -693,12 +693,12 @@ let $$eo35 = _$$nF(async (e, {
     }));
   }).catch(t => {
     e.dispatch(F.enqueue({
-      message: _$$t("community.publishing.could_not_publish_plugin_error", {
+      message: getI18nString("community.publishing.could_not_publish_plugin_error", {
         error: _$$J(t, t.data?.message)
       }),
       error: !0
     }));
-    $D(_$$e.COMMUNITY, t);
+    reportError(_$$e.COMMUNITY, t);
   });
 });
 let $$el10 = _$$nF(async (e, t) => {
@@ -741,12 +741,12 @@ let $$el10 = _$$nF(async (e, t) => {
     t.onSuccess?.();
   }).catch(t => {
     e.dispatch(F.enqueue({
-      message: _$$t("community.publishing.could_not_publish_plugin_error", {
+      message: getI18nString("community.publishing.could_not_publish_plugin_error", {
         error: _$$J(t, t.data?.message)
       }),
       error: !0
     }));
-    $D(_$$e.COMMUNITY, t);
+    reportError(_$$e.COMMUNITY, t);
   });
 });
 let $$ed17 = _$$nF((e, {
@@ -762,20 +762,20 @@ let $$ed17 = _$$nF((e, {
       publishedPlugins: [n],
       src: "unpublishPublishedPlugin"
     }));
-    sx("Hub Unpublish Plugin", {
+    trackEventAnalytics("Hub Unpublish Plugin", {
       pluginId: t.id,
       ...L8(t)
     });
   }).catch(r => {
     e.dispatch(F.enqueue({
-      message: xQ(t) ? _$$t("community.actions.could_not_publish_widget_error", {
+      message: xQ(t) ? getI18nString("community.actions.could_not_publish_widget_error", {
         error: _$$J(r, r.data?.message)
-      }) : _$$t("community.actions.could_not_publish_plugin_error", {
+      }) : getI18nString("community.actions.could_not_publish_plugin_error", {
         error: _$$J(r, r.data?.message)
       }),
       error: !0
     }));
-    $D(_$$e.COMMUNITY, r);
+    reportError(_$$e.COMMUNITY, r);
   });
 });
 let $$ec15 = _$$nF((e, {
@@ -861,7 +861,7 @@ let $$eu34 = _$$nF(async (e, t) => {
       message: _$$J(t, t.message),
       error: !0
     }));
-    $D(_$$e.COMMUNITY, t);
+    reportError(_$$e.COMMUNITY, t);
     return Error(t.message);
   }
 });
@@ -891,7 +891,7 @@ export function $$e_25(e) {
   let t = e.data;
   if (!t || "string" != typeof t) return;
   let r = new DOMParser().parseFromString(t, "text/xml").getElementsByTagName("Code");
-  if (r && r[0] && "EntityTooLarge" === r[0].textContent) return _$$t("community.actions.file_too_large");
+  if (r && r[0] && "EntityTooLarge" === r[0].textContent) return getI18nString("community.actions.file_too_large");
 }
 export { GV, Qi, Vx, l5, l7, uV } from "../905/172918";
 export const $Z = $$z0;
@@ -923,4 +923,4 @@ export const uT = $$ep30;
 export const uX = $$G32;
 export const uw = $$H33;
 export const wx = $$eu34;
-export const zn = $$eo35; 
+export const zn = $$eo35;

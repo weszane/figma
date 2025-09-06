@@ -1,5 +1,5 @@
 import { K } from "../905/498709";
-import { fp } from "../figma_app/27355";
+import { useAtomValueAndSetter } from "../figma_app/27355";
 let {
   useRegisterMenu,
   open,
@@ -7,7 +7,7 @@ let {
   isOpenAtom
 } = K();
 let $$l0 = s;
-let $$d2 = () => fp(isOpenAtom)[0];
+let $$d2 = () => useAtomValueAndSetter(isOpenAtom)[0];
 let $$c1 = r;
 export const Dp = $$l0;
 export const VX = $$c1;

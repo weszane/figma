@@ -2,7 +2,7 @@ import { glU } from "../figma_app/763686";
 import { debugState } from "../905/407919";
 import { F6, Ho, sp, sm } from "../figma_app/308685";
 import { gR } from "../905/486443";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { q } from "../figma_app/403368";
 export let $$n0;
 class c {
@@ -11,7 +11,7 @@ class c {
     this._triggerActiveWheelButtonListeners = [];
   }
   startChat(e, t, r) {
-    q().then((n) => {
+    q().then(n => {
       n || debugState.dispatch(F6({
         position: {
           x: e,
@@ -32,7 +32,7 @@ class c {
     wheelType: d
   }) {
     let c = debugState.getState();
-    if ("fullscreen" !== c.selectedView.view || c.selectedView.editorType !== nT.Whiteboard || this._wheelActivatedAtMs > 0) return;
+    if ("fullscreen" !== c.selectedView.view || c.selectedView.editorType !== FEditorType.Whiteboard || this._wheelActivatedAtMs > 0) return;
     this._wheelActivatedAtMs = window.performance.now();
     let u = c.multiplayerEmoji;
     "WHEEL" === u.type ? (e = u.viewportX, t = u.viewportY, n = n ?? u.openedViaHover) : n || glU?.triggerAction("set-tool-default", null);
@@ -70,7 +70,7 @@ class c {
   }
   updateEmojiWheelPosition(e, t) {
     let r = debugState.getState();
-    "fullscreen" === r.selectedView.view && r.selectedView.editorType === nT.Whiteboard && debugState.dispatch(sm({
+    "fullscreen" === r.selectedView.view && r.selectedView.editorType === FEditorType.Whiteboard && debugState.dispatch(sm({
       viewportX: e,
       viewportY: t
     }));

@@ -1,7 +1,7 @@
 import { ruz } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
-import { zl, eU, Xr, md } from "../figma_app/27355";
+import { atomStoreManager, atom, Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { Vs } from "../figma_app/930338";
 import { Ay } from "../figma_app/432652";
 import { Ay as _$$Ay } from "../figma_app/948389";
@@ -26,7 +26,7 @@ let $$u3 = async ({
     e.signal.addEventListener("abort", () => t("aborted"));
   });
   let c = await Promise.race([a, o]);
-  "aborted" !== c && (zl.set(p, e => ({
+  "aborted" !== c && (atomStoreManager.set(p, e => ({
     ...e,
     pendingOperations: [...e.pendingOperations, {
       ...c,
@@ -39,7 +39,7 @@ let $$u3 = async ({
       setTimeout(e, 1e3);
       return;
     }
-    zl.set(p, e => {
+    atomStoreManager.set(p, e => {
       if (!r.video) return e;
       let n = {
         ...c,
@@ -58,10 +58,10 @@ let $$u3 = async ({
     });
   }, 1e3));
 };
-let p = eU({
+let p = atom({
   pendingOperations: []
 });
-let _ = eU(null, (e, t) => {
+let _ = atom(null, (e, t) => {
   let r = e(p).currentOperation;
   r && ("success" === r.status && l7.ai("make video", () => {
     if (!ruz) return;
@@ -79,7 +79,7 @@ let _ = eU(null, (e, t) => {
     Y5.triggerAction("commit");
   }), t(h));
 });
-let h = eU(null, (e, t) => {
+let h = atom(null, (e, t) => {
   t(p, e => {
     let t = e.pendingOperations.find(e => "success" === e.status || "error" === e.status);
     return t ? {
@@ -99,7 +99,7 @@ export function $$g1() {
   return Xr(h);
 }
 export function $$f0() {
-  return md(p).currentOperation;
+  return useAtomWithSubscription(p).currentOperation;
 }
 export const XV = $$f0;
 export const hk = $$g1;

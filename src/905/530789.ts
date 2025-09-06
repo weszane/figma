@@ -7,7 +7,7 @@ import { l7 } from "../905/189185";
 import { ts } from "../905/929949";
 import { Pt, rf } from "../figma_app/806412";
 import { c$ } from "../figma_app/236327";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { rW } from "../figma_app/852050";
 import { BK } from "../905/848862";
 import { Cf } from "../905/504727";
@@ -22,7 +22,7 @@ let I = forwardRef((e, t) => jsxs(E, {
   className: ZS,
   ref: t,
   children: [jsx(x, {}), jsx("span", {
-    children: _$$t("variables.authoring_modal.table.create_variable")
+    children: getI18nString("variables.authoring_modal.table.create_variable")
   })]
 }));
 export function $$E0(e) {
@@ -48,7 +48,7 @@ export function $$E0(e) {
       ref: s,
       onClick: o,
       recordingKey: Pt(e.recordingKey, "createVariableButton"),
-      "aria-label": _$$t("variables.authoring_modal.create_variable_button_label"),
+      "aria-label": getI18nString("variables.authoring_modal.create_variable_button_label"),
       "aria-controls": e.id,
       "aria-expanded": showing
     }), showing && s.current && jsx($$x1, {

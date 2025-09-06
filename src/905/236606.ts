@@ -7,7 +7,7 @@ import { glU } from "../figma_app/763686";
 import d from "classnames";
 import { jB, My } from "../vendor/46587";
 import { tH, H4 } from "../905/751457";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { k as _$$k } from "../905/963262";
 import { Fj } from "../figma_app/793429";
 import { Z4, M$, NT, Q6 } from "../905/77776";
@@ -75,8 +75,8 @@ function O({
     let t = je();
     return useMemo(() => "loaded" === t.status && e ? t.data.find(t => e === t.libraryKey) : null, [e, t.status, t.data]);
   }(a?.subscriptionStatus === "SUBSCRIBED" ? a?.library_key : void 0);
-  let l = o ? o.name : _$$t("dev_handoff.variables.suggested_variables.library_not_found");
-  let d = i?.subscriptionStatus === "SUBSCRIBED" ? l : _$$t("dev_handoff.variables.details_local");
+  let l = o ? o.name : getI18nString("dev_handoff.variables.suggested_variables.library_not_found");
+  let d = i?.subscriptionStatus === "SUBSCRIBED" ? l : getI18nString("dev_handoff.variables.details_local");
   return jsxs("div", {
     className: "matching_vars_modal--variablesGroup--eqnoq",
     children: [jsxs("div", {
@@ -150,7 +150,7 @@ let L = Ju(function (e) {
         children: jsxs(vo, {
           children: [jsx(Y9, {
             children: jsx(hE, {
-              children: tx("dev_handoff.variables.suggested_variables.title")
+              children: renderI18nText("dev_handoff.variables.suggested_variables.title")
             })
           }), jsx(nB, {
             padding: 0,
@@ -191,7 +191,7 @@ let B = Ju(function (e) {
       children: jsxs(vo, {
         children: [jsx(Y9, {
           children: jsx(hE, {
-            children: tx("dev_handoff.variables.details_title")
+            children: renderI18nText("dev_handoff.variables.details_title")
           })
         }), jsx(nB, {
           padding: 0,
@@ -274,7 +274,7 @@ function Q({
             i.push(jsx("span", {
               className: "token instance-pill",
               "data-tooltip-type": Ib.TEXT,
-              "data-tooltip": _$$t("dev_handoff.inspect_panel.inspect_nested_component"),
+              "data-tooltip": getI18nString("dev_handoff.inspect_panel.inspect_nested_component"),
               "data-id": id,
               children: name
             }));
@@ -288,14 +288,14 @@ function Q({
               errorObject
             } = e;
             let s = t;
-            errorObject?.type === "PROPERTY_NOT_FOUND" ? s = _$$t("dev_handoff.figmadocs.error_property_not_found", {
+            errorObject?.type === "PROPERTY_NOT_FOUND" ? s = getI18nString("dev_handoff.figmadocs.error_property_not_found", {
               propertyName: errorObject.propertyName
-            }) : errorObject?.type === "PROPERTY_TYPE_MISMATCH" ? s = _$$t("dev_handoff.figmadocs.error_property_type_mismatch", {
+            }) : errorObject?.type === "PROPERTY_TYPE_MISMATCH" ? s = getI18nString("dev_handoff.figmadocs.error_property_type_mismatch", {
               propertyName: errorObject.propertyName,
               propertyType: errorObject.expectedType
-            }) : errorObject?.type === "CHILD_LAYER_NOT_FOUND" ? s = _$$t("dev_handoff.figmadocs.error_child_layer_not_found", {
+            }) : errorObject?.type === "CHILD_LAYER_NOT_FOUND" ? s = getI18nString("dev_handoff.figmadocs.error_child_layer_not_found", {
               layerName: errorObject.layerName
-            }) : errorObject?.type === "CHILD_LAYER_ID_NOT_FOUND" && (s = _$$t("dev_handoff.figmadocs.error_child_layer_id_not_found", {
+            }) : errorObject?.type === "CHILD_LAYER_ID_NOT_FOUND" && (s = getI18nString("dev_handoff.figmadocs.error_child_layer_id_not_found", {
               codeConnectId: errorObject.codeConnectId
             }));
             i.push(jsx("span", {
@@ -303,7 +303,7 @@ function Q({
               "data-tooltip-type": Ib.TEXT,
               "data-tooltip": s,
               "data-id": id,
-              children: _$$t("dev_handoff.code_connect.error_pill_text")
+              children: getI18nString("dev_handoff.code_connect.error_pill_text")
             }));
           }
       } else i.push(jsx("span", {
@@ -504,7 +504,7 @@ function ei({
     children: jsx(_$$E, {
       htmlAttributes: {
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("dev_handoff.code_panel.suggested_vars_tooltip", {
+        "data-tooltip": getI18nString("dev_handoff.code_panel.suggested_vars_tooltip", {
           count: f
         }),
         "data-tooltip-show-above": !0

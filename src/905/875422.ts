@@ -1,6 +1,6 @@
 import _require from "../0c62c2fd/847117";
-import { zl } from "../figma_app/27355";
-import { t as _$$t } from "../905/303541";
+import { atomStoreManager } from "../figma_app/27355";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { A } from "../905/658244";
 import { Ju, Ij } from "../905/102752";
@@ -17,10 +17,10 @@ function d() {
 export let $$f0 = nF((e, t) => {
   if (!_$$F) return;
   let i = kI(t.name);
-  if (i && zl.get(D)) {
+  if (i && atomStoreManager.get(D)) {
     e.dispatch(F.enqueue({
       type: "pdf_import_failed_because_pdf_importing_is_disabled",
-      message: _$$t("fullscreen.file_import.import_pdf_blocked"),
+      message: getI18nString("fullscreen.file_import.import_pdf_blocked"),
       error: !0
     }));
     return;

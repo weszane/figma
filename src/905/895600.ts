@@ -7,9 +7,9 @@ import { yY, _q, Vj, bz, Tr, kX } from "../3973/890507";
 import { PG, MU, Uv, Uw, bT, DK, ss } from "../3973/473379";
 import { fU, wj, et, vl, nK, pF, Xu, l2, Cj, me } from "../905/683495";
 import { MQ, hH, ZJ } from "../3973/697935";
-import { jk } from "../905/609396";
+import { PerfTimer } from "../905/609396";
 import { createDeferredPromise } from "../905/874553";
-import { eU, zl } from "../figma_app/27355";
+import { atom, atomStoreManager } from "../figma_app/27355";
 async function u(e, t, i, n) {
   if (null == e) return null;
   let a = n ?? fU(getInitialOptions().iso_code);
@@ -49,7 +49,7 @@ async function p({
   if (a.getTimedOut()) throw new MU();
   return p;
 }
-let _ = eU(() => new Set());
+let _ = atom(() => new Set());
 let A = M4.Query({
   fetch: async e => {
     let t = e.__IGNORE__overrideValues;
@@ -59,7 +59,7 @@ let A = M4.Query({
       orgId,
       planKey
     } = e;
-    let s = zl.get(_);
+    let s = atomStoreManager.get(_);
     let o = () => {
       let e = et({
         userId,
@@ -101,7 +101,7 @@ let y = M4.Query({
     });
     if (null == o) throw Error("Call to retrieve Statsig batched user values failed");
     let l = o.map(e => {
-      if (e.bootstrap_values) return function(e, t, i) {
+      if (e.bootstrap_values) return function (e, t, i) {
         let n = A({
           __IGNORE__overrideValues: t,
           __IGNORE__reason: PG.PREFETCH,
@@ -125,7 +125,7 @@ let y = M4.Query({
   key: "statsig_batched_user_values",
   stalenessPolicy: "never"
 });
-let $$b1 = eU(null, async (e, t, i, n, a) => {
+let $$b1 = atom(null, async (e, t, i, n, a) => {
   if (!pF()) return;
   let s = getInitialOptions().statsig_figma_app_client_api_key;
   if (null == s) return;
@@ -150,7 +150,7 @@ let $$b1 = eU(null, async (e, t, i, n, a) => {
   l.resolve();
   await u;
 });
-let $$v0 = eU(null, async (e, t, i) => {
+let $$v0 = atom(null, async (e, t, i) => {
   if (!pF() || !l2()) return;
   let o = e(MQ);
   if (o.status === Uv.NOT_STARTED) return;
@@ -167,13 +167,13 @@ let $$v0 = eU(null, async (e, t, i) => {
   } = i;
   let I = vl(userId, teamId, orgId, planKey);
   let E = fU(getInitialOptions().iso_code);
-  let x = new jk("statsigContextSwitch", {});
+  let x = new PerfTimer("statsigContextSwitch", {});
   let S = null;
   let w = !1;
   let C = !1;
   async function T() {
     let t = null;
-    let r = zl.get(_);
+    let r = atomStoreManager.get(_);
     let o = r.size;
     let m = o > 20 ? null : [...r.values()];
     let h = Cj(i);
@@ -210,7 +210,7 @@ let $$v0 = eU(null, async (e, t, i) => {
     }
     let g = !1;
     try {
-      null != t && (zl.set(_$$a, t), g = Statsig.updateUserWithValues(I, t));
+      null != t && (atomStoreManager.set(_$$a, t), g = Statsig.updateUserWithValues(I, t));
     } catch (e) {
       S = `Failed to update user with new values when context switching: ${e}`;
       g = !1;
@@ -250,12 +250,12 @@ let $$v0 = eU(null, async (e, t, i) => {
   x.stop();
   bz(x.getElapsedTime(), C, w, S);
 });
-let $$I2 = eU(null, async (e, t, i) => {
+let $$I2 = atom(null, async (e, t, i) => {
   if (!pF() || 0 === i.length) return;
   let n = getInitialOptions().statsig_figma_app_client_api_key;
   if (null == n) return;
   let s = null;
-  let o = zl.get(_);
+  let o = atomStoreManager.get(_);
   let d = i.filter(e => {
     if (Cj(e)) return !1;
     let t = et(e);
@@ -299,7 +299,7 @@ async function E(e, t, i, o, u) {
   }
   function x(e, t, i, r) {
     try {
-      null != t ? (Statsig.bootstrap(e, t, i, r), zl.set(_$$a, t)) : Statsig.bootstrap(e, {}, i, r);
+      null != t ? (Statsig.bootstrap(e, t, i, r), atomStoreManager.set(_$$a, t)) : Statsig.bootstrap(e, {}, i, r);
       return {
         type: Uw.COMPLETE
       };
@@ -317,7 +317,7 @@ async function E(e, t, i, o, u) {
   let S = vl(userId, teamId, orgId, planKey);
   let w = me(E);
   let C = fU(getInitialOptions().iso_code);
-  if (b.startTimer(), null != y) p = y; else try {
+  if (b.startTimer(), null != y) p = y;else try {
     let t = A({
       __IGNORE__reason: PG.INITIALIZE,
       __IGNORE__sdkKey: e,
@@ -344,4 +344,4 @@ async function E(e, t, i, o, u) {
 }
 export const iz = $$v0;
 export const r_ = $$b1;
-export const oo = $$I2; 
+export const oo = $$I2;

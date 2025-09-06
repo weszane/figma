@@ -1,5 +1,5 @@
 import { useEffect, useCallback } from "react";
-import { eU, fp, Xr, md } from "../figma_app/27355";
+import { atom, useAtomValueAndSetter, Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { N } from "../905/972754";
 import { ku, Os, qA, fn } from "../figma_app/255679";
 import { useDispatch, useSelector } from "../vendor/514228";
@@ -10,14 +10,14 @@ import { n1 } from "../figma_app/657017";
 import { SS, Qp } from "../figma_app/349248";
 import { Yu, PW } from "../figma_app/633080";
 import { qq } from "../905/72677";
-let g = eU(e => {
+let g = atom(e => {
   let t = e(qq);
   return ku(Os, [...t].sort().map(e => ({
     hubFileId: e
   })), e);
 });
 export function $$f0() {
-  let [e, t] = fp(qA);
+  let [e, t] = useAtomValueAndSetter(qA);
   let i = Xr(fn);
   !function () {
     let e = useDispatch();
@@ -25,7 +25,7 @@ export function $$f0() {
       components,
       stateGroups
     } = useSelector(e => e.library.publishedByLibraryKey);
-    let a = md(g);
+    let a = useAtomWithSubscription(g);
     let s = ZC(a);
     let h = n1();
     useEffect(() => {

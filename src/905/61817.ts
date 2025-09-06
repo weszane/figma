@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { K } from "../905/443068";
 import { L } from "../905/704296";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Y } from "../905/830372";
 import { H8 } from "../905/590952";
 import { E } from "../905/984674";
@@ -44,24 +44,24 @@ export function $$p0({
           children: [(e => {
             switch (entity_type) {
               case o1.TEAM:
-                return _$$t("community.publishing.team_name", {
+                return getI18nString("community.publishing.team_name", {
                   team: e
                 });
               case o1.ORG:
-                return _$$t("community.publishing.org_name", {
+                return getI18nString("community.publishing.org_name", {
                   org: e
                 });
               case o1.USER:
                 return e;
             }
-          })(name), " ", isPending && _$$t("community.publish.pending")]
+          })(name), " ", isPending && getI18nString("community.publish.pending")]
         }), t && jsxs(E, {
           color: "tertiary",
           children: ["@", t]
         })]
       })]
     }), i && jsx(K, {
-      "aria-label": _$$t("general.close"),
+      "aria-label": getI18nString("general.close"),
       onClick: i,
       children: jsx(L, {})
     })]

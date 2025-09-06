@@ -1,12 +1,12 @@
 import { H } from "../905/457575";
 import { useCallback } from "react";
 import { lV } from "../figma_app/617606";
-import { fp } from "../figma_app/27355";
-import { az } from "../905/449184";
+import { useAtomValueAndSetter } from "../figma_app/27355";
+import { analyticsEventManager } from "../905/449184";
 import { ow } from "../figma_app/976749";
 let o = H({});
 export function $$c0(e, t, n, c, d) {
-  let [u, x] = fp(o(d));
+  let [u, x] = useAtomValueAndSetter(o(d));
   let m = `${d || "unknown"}-${c}`;
   let h = u[m] || {
     selectedFeedback: null,
@@ -25,7 +25,7 @@ export function $$c0(e, t, n, c, d) {
   let y = ow();
   let _ = n === lV.FIGMAKE ? "figmake" : n === lV.CODE_IN_SITES ? "sites" : y ? "figjam" : "design";
   let b = useCallback((e, r, i) => {
-    clientLifecycleId && az.trackDefinedEvent("ai_for_production.chat_feedback", {
+    clientLifecycleId && analyticsEventManager.trackDefinedEvent("ai_for_production.chat_feedback", {
       feedbackType: e,
       productType: _,
       feedback: r,

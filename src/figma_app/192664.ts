@@ -6,11 +6,11 @@ import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { b as _$$b, c as _$$c } from "../905/308099";
 import { s as _$$s } from "../905/932270";
 import { J } from "../905/270045";
-import { eU, fp } from "../figma_app/27355";
+import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { s as _$$s2 } from "../cssbuilder/589278";
 import { YQ } from "../905/502364";
 import { Ph } from "../905/160095";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { In } from "../905/672640";
 import { E as _$$E } from "../905/984674";
 import { to } from "../905/156213";
@@ -25,7 +25,7 @@ let x = (e, t) => {
   switch (e) {
     case M.SRGB:
       return {
-        text: _$$t("fullscreen.color_management.user_color_profile_modal.info.srgb_supported"),
+        text: getI18nString("fullscreen.color_management.user_color_profile_modal.info.srgb_supported"),
         type: "info"
       };
     case M.DISPLAY_P3:
@@ -33,30 +33,30 @@ let x = (e, t) => {
         case "SupportedNatively":
         case "SupportedWithPolyfill":
           return {
-            text: _$$t("fullscreen.color_management.user_color_profile_modal.info.display_p3_supported"),
+            text: getI18nString("fullscreen.color_management.user_color_profile_modal.info.display_p3_supported"),
             type: "info"
           };
         case "ClientNotSupported":
-          let r = t.diagnostics && "client" in t.diagnostics && "desktop-app" === t.diagnostics.client ? _$$t("fullscreen.color_management.user_color_profile_modal.client_type.desktop_app") : _$$t("fullscreen.color_management.user_color_profile_modal.client_type.browser");
+          let r = t.diagnostics && "client" in t.diagnostics && "desktop-app" === t.diagnostics.client ? getI18nString("fullscreen.color_management.user_color_profile_modal.client_type.desktop_app") : getI18nString("fullscreen.color_management.user_color_profile_modal.client_type.browser");
           if (t.diagnostics && "shouldRestartDesktopAppInManagedColorSpace" in t.diagnostics && t.diagnostics.shouldRestartDesktopAppInManagedColorSpace) return {
-            text: _$$t("fullscreen.color_management.beta.warning.desktop_unmanaged"),
+            text: getI18nString("fullscreen.color_management.beta.warning.desktop_unmanaged"),
             type: "warning"
           };
           return {
-            text: _$$t("fullscreen.color_management.user_color_profile_modal.warning.display_p3_not_supported.client", {
+            text: getI18nString("fullscreen.color_management.user_color_profile_modal.warning.display_p3_not_supported.client", {
               client: r
             }),
             type: "warning"
           };
         case "MonitorNotSupported":
           if (t.diagnostics && "alternativeMonitorName" in t.diagnostics && t.diagnostics.alternativeMonitorName) return {
-            text: _$$t("fullscreen.color_management.user_color_profile_modal.warning.display_p3_not_supported.alternative_display", {
+            text: getI18nString("fullscreen.color_management.user_color_profile_modal.warning.display_p3_not_supported.alternative_display", {
               displayName: t.diagnostics.alternativeMonitorName
             }),
             type: "warning"
           };
           return {
-            text: _$$t("fullscreen.color_management.user_color_profile_modal.warning.display_p3_not_supported.display"),
+            text: getI18nString("fullscreen.color_management.user_color_profile_modal.warning.display_p3_not_supported.display"),
             type: "warning"
           };
       }
@@ -69,7 +69,7 @@ let C = {
   supportDetailsWarningIcon: `${N}-warning-icon`,
   supportDetailsInfoIcon: `${N}-info-icon`
 };
-let $$w2 = eU(!1);
+let $$w2 = atom(!1);
 let $$O0 = "user_color_profile_modal_closed";
 let R = Ju(function (e) {
   let t = jK();
@@ -86,12 +86,12 @@ let R = Ju(function (e) {
   let S = function (e) {
     switch (e) {
       case M.SRGB:
-        return _$$t("fullscreen.color_management.user_color_profile_modal.options.srgb.description");
+        return getI18nString("fullscreen.color_management.user_color_profile_modal.options.srgb.description");
       case M.DISPLAY_P3:
-        return _$$t("fullscreen.color_management.user_color_profile_modal.options.display_p3.description");
+        return getI18nString("fullscreen.color_management.user_color_profile_modal.options.display_p3.description");
     }
   }(r);
-  let [N, R] = fp($$w2);
+  let [N, R] = useAtomValueAndSetter($$w2);
   useEffect(() => (N || R(!0), () => {
     N && (YQ({
       id: $$O0
@@ -106,13 +106,13 @@ let R = Ju(function (e) {
       children: jsxs(vo, {
         children: [jsx(Y9, {
           children: jsx(hE, {
-            children: _$$t("fullscreen.color_management.user_color_profile_modal.title")
+            children: getI18nString("fullscreen.color_management.user_color_profile_modal.title")
           })
         }), jsxs(nB, {
           children: [jsx("form", {
             children: jsx(_$$b, {
               legend: jsx(_$$s, {
-                children: tx("fullscreen.color_management.user_color_profile_modal.options.label")
+                children: renderI18nText("fullscreen.color_management.user_color_profile_modal.options.label")
               }),
               value: r,
               onChange: e => {
@@ -126,7 +126,7 @@ let R = Ju(function (e) {
                 children: [jsx(_$$c, {
                   value: M.SRGB,
                   label: jsx(J, {
-                    children: _$$t("fullscreen.color_management.user_color_profile_modal.options.srgb.value")
+                    children: getI18nString("fullscreen.color_management.user_color_profile_modal.options.srgb.value")
                   }),
                   htmlAttributes: {
                     "data-testid": C.srgbOption
@@ -134,7 +134,7 @@ let R = Ju(function (e) {
                 }), jsx(_$$c, {
                   value: M.DISPLAY_P3,
                   label: jsx(J, {
-                    children: _$$t("fullscreen.color_management.user_color_profile_modal.options.display_p3.value")
+                    children: getI18nString("fullscreen.color_management.user_color_profile_modal.options.display_p3.value")
                   }),
                   htmlAttributes: {
                     "data-testid": C.p3Option
@@ -149,7 +149,7 @@ let R = Ju(function (e) {
             className: jH
           }), jsx(_$$E, {
             color: "secondary",
-            children: tx("fullscreen.color_management.user_color_profile_modal.descriptions.affected_files")
+            children: renderI18nText("fullscreen.color_management.user_color_profile_modal.descriptions.affected_files")
           }), jsx("span", {
             style: {
               whiteSpace: "pre"
@@ -159,7 +159,7 @@ let R = Ju(function (e) {
             newTab: !0,
             trusted: !0,
             href: _$$s3,
-            children: tx("rcs.rcs_shared.learn_more")
+            children: renderI18nText("rcs.rcs_shared.learn_more")
           }), jsx("div", {
             className: jH
           }), jsx("div", {
@@ -180,7 +180,7 @@ let R = Ju(function (e) {
                   newTab: !0,
                   trusted: !0,
                   href: _$$s3,
-                  children: tx("rcs.rcs_shared.learn_more")
+                  children: renderI18nText("rcs.rcs_shared.learn_more")
                 })]
               })]
             })]

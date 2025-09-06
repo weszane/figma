@@ -11,21 +11,21 @@ import { TY } from "../figma_app/701001";
 import { aV, p8 } from "../figma_app/722362";
 import { iZ, Pc } from "../905/372672";
 import { debounce } from "../905/915765";
-import { Xr, md } from "../figma_app/27355";
+import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { j6, fu } from "../figma_app/831799";
 import { P as _$$P } from "../905/347284";
 import { s as _$$s2 } from "../cssbuilder/589278";
 import { useDispatch } from "../vendor/514228";
 import C from "classnames";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { FJ } from "../905/508367";
 import { isGovCluster, buildUploadUrl } from "../figma_app/169182";
 import { Fb } from "../figma_app/819458";
 import { F as _$$F } from "../5132/756360";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { q5 } from "../figma_app/516028";
 import { w5 } from "../figma_app/345997";
-import { sL as _$$sL } from "../figma_app/53721";
+import { mapFileTypeToEditorTypeNullable } from "../figma_app/53721";
 import { DF } from "../figma_app/861252";
 import { K as _$$K } from "../905/443068";
 import { A as _$$A } from "../905/251970";
@@ -36,7 +36,7 @@ import { IW } from "../figma_app/563413";
 import { getFeatureFlags } from "../905/601108";
 import { B as _$$B } from "../905/714743";
 import { $z } from "../figma_app/617427";
-import { Gq } from "../figma_app/363242";
+import { getI18nState } from "../figma_app/363242";
 import { A as _$$A2 } from "../b2835def/491732";
 import { oW } from "../905/675859";
 import { sx as _$$sx } from "../905/941192";
@@ -69,13 +69,13 @@ function P() {
     unsortedTeams
   } = DF();
   let l = q5();
-  let a = _$$sL(l?.editorType);
+  let a = mapFileTypeToEditorTypeNullable(l?.editorType);
   let o = createRef();
   return jsxs(Fragment, {
     children: [jsx("button", {
       className: j()(_$$s2.flex.justifyCenter.itemsCenter.absolute.bottom0.left0.wFull.h40.colorBg.font11.fpl__textBodyMediumStrongFontWeight.cursorPointer.$, _$$s2.b1.colorBorder.bb0.br0.bl0.$, "first_level_resource_contact_support--contactSupportButton--Ioy3K"),
       onClick: () => {
-        if (sx("help_widget_get_help", {
+        if (trackEventAnalytics("help_widget_get_help", {
           isEditingFile,
           editorType: a,
           source: "in-product-help-panel-button"
@@ -89,7 +89,7 @@ function P() {
           locale: t?.locale
         });
       },
-      children: _$$t("help_widget.menu.contact_support")
+      children: getI18nString("help_widget.menu.contact_support")
     }), jsx(_$$F, {
       ref: o,
       dispatch: e,
@@ -106,12 +106,12 @@ function D() {
     className: _$$s2.flex.flexRow.justifyBetween.itemsCenter.$,
     children: [jsx("p", {
       className: _$$s2.font16.colorText.fpl__textHeadingLargeFontWeight.$,
-      children: _$$t("in_product_help_and_learning.first_level_header.title")
+      children: getI18nString("in_product_help_and_learning.first_level_header.title")
     }), jsx(_$$K, {
       onClick: () => {
         hideInProductHelpView();
       },
-      "aria-label": _$$t("general.close"),
+      "aria-label": getI18nString("general.close"),
       children: jsx(_$$A, {})
     })]
   });
@@ -166,7 +166,7 @@ function G() {
         variant: "primary",
         type: "submit",
         ref: o,
-        children: tx("in_product_help_and_learning.search")
+        children: renderI18nText("in_product_help_and_learning.search")
       })
     })]
   });
@@ -184,32 +184,32 @@ function W({
   });
 }
 let Y = () => {
-  let e = !!getFeatureFlags().web_help_widget_report_translations && Gq()?.getPrimaryLocale(!0) !== "en";
+  let e = !!getFeatureFlags().web_help_widget_report_translations && getI18nState()?.getPrimaryLocale(!0) !== "en";
   return [{
-    label: _$$t("help_widget.menu.help_center"),
+    label: getI18nString("help_widget.menu.help_center"),
     href: "https://help.figma.com/"
   }, {
-    label: _$$t("help_widget.menu.support_forum"),
+    label: getI18nString("help_widget.menu.support_forum"),
     href: "https://forum.figma.com/"
   }, {
-    label: _$$t("help_widget.menu.release_notes"),
+    label: getI18nString("help_widget.menu.release_notes"),
     href: "https://www.figma.com/release-notes/"
   }, {
-    label: _$$t("help_widget.menu.legal_summary"),
+    label: getI18nString("help_widget.menu.legal_summary"),
     href: "/legal"
   }, {
-    label: _$$t("help_widget.menu.submit_feedback"),
+    label: getI18nString("help_widget.menu.submit_feedback"),
     href: "https://forum.figma.com/submit-feedback"
   }, ...(e ? [{
-    label: _$$t("help_widget.menu.report_translation_issues"),
+    label: getI18nString("help_widget.menu.report_translation_issues"),
     href: "https://form.asana.com/?k=2lONzHHSiZJo3FThA47peg&d=10497086658021",
     onClick: () => {
-      sx("help_widget_report_translations", {
+      trackEventAnalytics("help_widget_report_translations", {
         source: "in_product_help_and_learning_panel"
       });
     }
   }] : []), {
-    label: _$$t("help_widget.menu.ask_the_community"),
+    label: getI18nString("help_widget.menu.ask_the_community"),
     href: "https://forum.figma.com/ask-community"
   }];
 };
@@ -230,7 +230,7 @@ let X = memo(function () {
       children: e.label
     })
   }, e.label));
-  let t = _$$t("in_product_help_and_learning.more_help_resources.section_title");
+  let t = getI18nString("in_product_help_and_learning.more_help_resources.section_title");
   return jsx(W, {
     sectionName: t,
     sectionOptions: e
@@ -241,74 +241,74 @@ function Q(e) {
   switch (e) {
     case 0:
       return [{
-        displayString: _$$t("in_product_help_and_learning.article.get_started_with_layers"),
+        displayString: getI18nString("in_product_help_and_learning.article.get_started_with_layers"),
         articleId: 0x182dc2b40797
       }, {
-        displayString: _$$t("in_product_help_and_learning.article.explore_layer_types"),
+        displayString: getI18nString("in_product_help_and_learning.article.explore_layer_types"),
         articleId: 0x183601f04d17
       }, {
-        displayString: _$$t("in_product_help_and_learning.article.combine_layers"),
+        displayString: getI18nString("in_product_help_and_learning.article.combine_layers"),
         articleId: 0x1833cfa8cf97
       }, {
-        displayString: _$$t("in_product_help_and_learning.article.create_and_edit_text"),
+        displayString: getI18nString("in_product_help_and_learning.article.create_and_edit_text"),
         articleId: 0x53d40dbffa
       }, {
-        displayString: _$$t("in_product_help_and_learning.article.browse_and_apply_fonts"),
+        displayString: getI18nString("in_product_help_and_learning.article.browse_and_apply_fonts"),
         articleId: 0x53d4225f82
       }, {
-        displayString: _$$t("in_product_help_and_learning.article.apply_paints_with_the_color_picker"),
+        displayString: getI18nString("in_product_help_and_learning.article.apply_paints_with_the_color_picker"),
         articleId: 0x53d41dbafe
       }, {
-        displayString: _$$t("in_product_help_and_learning.article.add_images_and_videos_to_design_file"),
+        displayString: getI18nString("in_product_help_and_learning.article.add_images_and_videos_to_design_file"),
         articleId: 0x53d40ed782
       }, {
-        displayString: _$$t("in_product_help_and_learning.article.export_from_figma_design"),
+        displayString: getI18nString("in_product_help_and_learning.article.export_from_figma_design"),
         articleId: 0x53d40ed7d2
       }];
     case 1:
       return [{
-        displayString: _$$t("in_product_help_and_learning.article.frames_in_figma_design"),
+        displayString: getI18nString("in_product_help_and_learning.article.frames_in_figma_design"),
         articleId: 0x53d425e791
       }, {
-        displayString: _$$t("in_product_help_and_learning.article.add_auto_layout_to_a_design"),
+        displayString: getI18nString("in_product_help_and_learning.article.add_auto_layout_to_a_design"),
         articleId: 0x53677016397
       }, {
-        displayString: _$$t("in_product_help_and_learning.article.explore_auto_layout_properties"),
+        displayString: getI18nString("in_product_help_and_learning.article.explore_auto_layout_properties"),
         articleId: 0x53d4154d2d
       }, {
-        displayString: _$$t("in_product_help_and_learning.article.create_color_text_effect_and_layout_grid_styles"),
+        displayString: getI18nString("in_product_help_and_learning.article.create_color_text_effect_and_layout_grid_styles"),
         articleId: 0x53d3fb49a6
       }, {
-        displayString: _$$t("in_product_help_and_learning.article.create_interactions"),
+        displayString: getI18nString("in_product_help_and_learning.article.create_interactions"),
         articleId: 0x53d4133b7d
       }, {
-        displayString: _$$t("in_product_help_and_learning.article.prototype_triggers"),
+        displayString: getI18nString("in_product_help_and_learning.article.prototype_triggers"),
         articleId: 0x53d40ef5fa
       }, {
-        displayString: _$$t("in_product_help_and_learning.article.prototype_actions"),
+        displayString: getI18nString("in_product_help_and_learning.article.prototype_actions"),
         articleId: 0x53d40ef622
       }, {
-        displayString: _$$t("in_product_help_and_learning.article.prototype_animations"),
+        displayString: getI18nString("in_product_help_and_learning.article.prototype_animations"),
         articleId: 0x53d4166285
       }, {
-        displayString: _$$t("in_product_help_and_learning.article.parent_child_and_sibling_relationships"),
+        displayString: getI18nString("in_product_help_and_learning.article.parent_child_and_sibling_relationships"),
         articleId: 0x53d40dc9e6
       }];
     case 2:
       return [{
-        displayString: _$$t("in_product_help_and_learning.article.create_components_to_resuse_in_designs"),
+        displayString: getI18nString("in_product_help_and_learning.article.create_components_to_resuse_in_designs"),
         articleId: 0x53d3fa03f2
       }, {
-        displayString: _$$t("in_product_help_and_learning.article.create_and_insert_component_instances"),
+        displayString: getI18nString("in_product_help_and_learning.article.create_and_insert_component_instances"),
         articleId: 0x53d401725d
       }, {
-        displayString: _$$t("in_product_help_and_learning.article.create_and_use_variants"),
+        displayString: getI18nString("in_product_help_and_learning.article.create_and_use_variants"),
         articleId: 0x53d5094712
       }, {
-        displayString: _$$t("in_product_help_and_learning.article.create_interactive_components_with_variants"),
+        displayString: getI18nString("in_product_help_and_learning.article.create_interactive_components_with_variants"),
         articleId: 0x53d5518626
       }, {
-        displayString: _$$t("in_product_help_and_learning.article.explore_component_properties"),
+        displayString: getI18nString("in_product_help_and_learning.article.explore_component_properties"),
         articleId: 0x513129d7517
       }];
     default:
@@ -360,35 +360,35 @@ function ee({
 function et() {
   let e = [{
     resource: 0,
-    title: _$$t("in_product_help_and_learning.popular_resources.new_to_figma.title"),
-    description: _$$t("in_product_help_and_learning.popular_resources.new_to_figma.description"),
+    title: getI18nString("in_product_help_and_learning.popular_resources.new_to_figma.title"),
+    description: getI18nString("in_product_help_and_learning.popular_resources.new_to_figma.description"),
     image: buildUploadUrl("a657c232671f190106d0943282bf1a970f036718")
   }, {
     resource: 1,
-    title: _$$t("in_product_help_and_learning.popular_resources.explore_more_features.title"),
-    description: _$$t("in_product_help_and_learning.popular_resources.explore_more_features.description"),
+    title: getI18nString("in_product_help_and_learning.popular_resources.explore_more_features.title"),
+    description: getI18nString("in_product_help_and_learning.popular_resources.explore_more_features.description"),
     image: buildUploadUrl("033919a9d852c5a37b60923805a0e11f625cd9b1")
   }, {
     resource: 2,
-    title: _$$t("in_product_help_and_learning.popular_resources.create_components.title"),
-    description: _$$t("in_product_help_and_learning.popular_resources.create_components.description"),
+    title: getI18nString("in_product_help_and_learning.popular_resources.create_components.title"),
+    description: getI18nString("in_product_help_and_learning.popular_resources.create_components.description"),
     image: buildUploadUrl("4f93c71141e5989d9f4d8259d2e2751dc3b3d7ab")
   }, {
     resource: 3,
-    title: _$$t("in_product_help_and_learning.popular_resources.design_your_first_button.title"),
-    description: _$$t("in_product_help_and_learning.popular_resources.design_your_first_button.description"),
+    title: getI18nString("in_product_help_and_learning.popular_resources.design_your_first_button.title"),
+    description: getI18nString("in_product_help_and_learning.popular_resources.design_your_first_button.description"),
     image: buildUploadUrl("13d91474245b8e3949763a713a12805283cfe2a2")
   }, {
     resource: 4,
-    title: _$$t("in_product_help_and_learning.popular_resources.video_tutorials.title"),
-    description: _$$t("in_product_help_and_learning.popular_resources.video_tutorials.description"),
+    title: getI18nString("in_product_help_and_learning.popular_resources.video_tutorials.title"),
+    description: getI18nString("in_product_help_and_learning.popular_resources.video_tutorials.description"),
     image: buildUploadUrl("02377d4618e4b063422da13c18efd5debece9591")
   }];
   return jsxs("div", {
     className: _$$s2.flex.flexColumn.rowGap8.$,
     children: [jsx("p", {
       className: _$$s2.font13.colorText.fpl__textBodyMediumStrongFontWeight.$,
-      children: _$$t("in_product_help_and_learning.popular_resources.section_title")
+      children: getI18nString("in_product_help_and_learning.popular_resources.section_title")
     }), e.map(e => jsx(ee, {
       resource: e
     }, e.title))]
@@ -409,14 +409,14 @@ function el({
 function ea() {
   let e = useDispatch();
   let t = [{
-    label: _$$t("help_widget.menu.change_keyboard_layout"),
+    label: getI18nString("help_widget.menu.change_keyboard_layout"),
     onClick: function () {
       Y5.isReady() && (e(FU({
         tab: "layout"
       })), Y5.triggerAction("toggle-keyboard-shortcuts"));
     }
   }, {
-    label: _$$t("help_widget.menu.change_languages"),
+    label: getI18nString("help_widget.menu.change_languages"),
     onClick: function () {
       e(to({
         type: kA,
@@ -426,14 +426,14 @@ function ea() {
       }));
     }
   }, {
-    label: _$$t("help_widget.menu.keyboard_shortcuts"),
+    label: getI18nString("help_widget.menu.keyboard_shortcuts"),
     onClick: () => {
       Y5.isReady() && Y5.triggerAction("toggle-keyboard-shortcuts");
     }
   }].map(e => jsx(el, {
     option: e
   }, e.label));
-  let s = _$$t("in_product_help_and_learning.settings.section_title");
+  let s = getI18nString("in_product_help_and_learning.settings.section_title");
   return jsx(W, {
     sectionName: s,
     sectionOptions: t
@@ -493,7 +493,7 @@ function eu({
   });
 }
 function em() {
-  let e = md(J9);
+  let e = useAtomWithSubscription(J9);
   let {
     hideInProductHelpView
   } = A5();
@@ -504,14 +504,14 @@ function em() {
       onClick: () => {
         s(e - 1);
       },
-      "aria-label": _$$t("general.back"),
+      "aria-label": getI18nString("general.back"),
       className: _$$s2.flex.flexRow.itemsCenter.justifyCenter.font11.colorText.fpl__textBodyMediumStrongFontWeight.cursorPointer.$,
-      children: [jsx(_$$C, {}), tx("general.back")]
+      children: [jsx(_$$C, {}), renderI18nText("general.back")]
     }), jsx(_$$K, {
       onClick: () => {
         hideInProductHelpView();
       },
-      "aria-label": _$$t("general.close"),
+      "aria-label": getI18nString("general.close"),
       children: jsx(_$$A, {})
     })]
   });
@@ -524,9 +524,9 @@ function eC({
   let {
     name
   } = j6();
-  let s = md(Zf);
-  let i = md(J9);
-  let l = md(QU);
+  let s = useAtomWithSubscription(Zf);
+  let i = useAtomWithSubscription(J9);
+  let l = useAtomWithSubscription(QU);
   let a = createRef();
   let [o, d] = useState();
   let c = useCallback(() => {
@@ -539,7 +539,7 @@ function eC({
         e.href = `#${t[1]}`;
       }
       e.onclick = () => {
-        sx("CTA Clicked", {
+        trackEventAnalytics("CTA Clicked", {
           text: e.text,
           linkUrl: e.href,
           trackingContext: name,
@@ -650,8 +650,8 @@ function ej({
 }
 function ev() {
   let e = Xr(J9);
-  let t = md(Zf);
-  let s = md(QU);
+  let t = useAtomWithSubscription(Zf);
+  let s = useAtomWithSubscription(QU);
   if (!t) return null;
   let n = null;
   return t.resource === Z.DESIGN_FIRST_BUTTON ? jsx(eC, {
@@ -661,21 +661,21 @@ function ev() {
       switch (e) {
         case 0:
           return {
-            description: _$$t("in_product_help_and_learning.popular_resources.new_to_figma.details.description"),
+            description: getI18nString("in_product_help_and_learning.popular_resources.new_to_figma.details.description"),
             webm: buildUploadUrl("6db4a35b80ddb5910781af9bc60c66bf902dff3a"),
             mp4: buildUploadUrl("88dea447c3d80062d168b864c9c01aa5645790e5"),
             articles: Q(0)
           };
         case 1:
           return {
-            description: _$$t("in_product_help_and_learning.popular_resources.explore_more_features.details.description"),
+            description: getI18nString("in_product_help_and_learning.popular_resources.explore_more_features.details.description"),
             webm: buildUploadUrl("23c86354e978f77d1ca96b6cc52dfdc216f5a99d"),
             mp4: buildUploadUrl("fd204bb233c3be09b2e29f8621d93342c24b07af"),
             articles: Q(1)
           };
         case 2:
           return {
-            description: _$$t("in_product_help_and_learning.popular_resources.create_components.details.description"),
+            description: getI18nString("in_product_help_and_learning.popular_resources.create_components.details.description"),
             webm: buildUploadUrl("0f0aad5b442ba063078c23b06010aab77ecf0c07"),
             mp4: buildUploadUrl("34285a0d04fb97f14cc2611ddc825950aec93300"),
             articles: Q(2)
@@ -763,10 +763,10 @@ function ek() {
       }).$,
       children: [jsx("p", {
         className: _$$s2.colorText.fpl__textBodyMediumStrongFontWeight.$,
-        children: tx("in_product_help_and_learning.article.design_an_interactive_button")
+        children: renderI18nText("in_product_help_and_learning.article.design_an_interactive_button")
       }), jsxs("p", {
         className: _$$s2.colorTextSecondary.$,
-        children: [tx("in_product_help_and_learning.design_an_interactive_button.description"), " \u2022", " ", tx("in_product_help_and_learning.minute_estimate", {
+        children: [renderI18nText("in_product_help_and_learning.design_an_interactive_button.description"), " \u2022", " ", renderI18nText("in_product_help_and_learning.minute_estimate", {
           minutes: 20
         })]
       })]
@@ -814,7 +814,7 @@ function eP({
     hideInProductHelpView,
     updateInProductHelpViewOnWindowWidthResize
   } = A5();
-  let a = md(J9);
+  let a = useAtomWithSubscription(J9);
   return (1 === a ? t = jsx(eo, {
     isFloatingModal: "floating_modal" === inProductHelpViewType
   }) : 2 === a ? t = jsx(ev, {}) : 3 === a && (t = jsx(eC, {})), useEffect(() => {

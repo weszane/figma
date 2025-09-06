@@ -1,5 +1,5 @@
-import { sx } from "../905/449184";
-import { eD } from "../figma_app/876459";
+import { trackEventAnalytics } from "../905/449184";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { Ay } from "../905/612521";
 import { XHR } from "../905/910117";
 import { nF } from "../905/350402";
@@ -10,14 +10,14 @@ export let $$u0 = nF(async (e, t, {
   loadingKey: r
 }) => {
   let a = t.user.stripe_account_status === P5.STARTED_ONBOARDING ? "stripe_onboarding_continue" : "stripe_onboarding_start";
-  sx(a, {
+  trackEventAnalytics(a, {
     userId: t.user.id,
     entrypoint: t.selectedView.subView
   });
   try {
     let s = XHR.post("/api/community/seller/onboard", {
       accepted_seller_tos: !0,
-      is_desktop: !!eD,
+      is_desktop: !!desktopAPIInstance,
       first_name: t.firstName,
       last_name: t.lastName,
       address: t.address,
@@ -30,7 +30,7 @@ export let $$u0 = nF(async (e, t, {
       return;
     }
     let d = a.data.meta;
-    eD ? e.dispatch(RK({
+    desktopAPIInstance ? e.dispatch(RK({
       rawInput: d
     })) : Ay.unsafeRedirect(d);
     setTimeout(() => {

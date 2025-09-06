@@ -3,13 +3,13 @@ import { useMemo, useRef, useState, useCallback } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { throwTypeError, debug } from "../figma_app/465776";
 import { xk } from "@stylexjs/stylex";
-import { md, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, Xr } from "../figma_app/27355";
 import { m8 } from "../905/864644";
 import { gX } from "../figma_app/448654";
 import { xD } from "../905/174697";
 import { e as _$$e } from "../905/457828";
 import { s as _$$s } from "../905/573154";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { v as _$$v } from "../905/939922";
 import { A as _$$A } from "../905/351112";
 import { Fh, Mw, U1 } from "../905/191601";
@@ -45,7 +45,7 @@ import { M as _$$M } from "../905/269719";
 import { TA, Pc } from "../905/372672";
 import { A as _$$A2 } from "../905/100919";
 import { Ib } from "../905/129884";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { L as _$$L } from "../905/477111";
 import { O as _$$O } from "../905/969533";
 import { j as _$$j, l as _$$l } from "../905/618243";
@@ -96,9 +96,9 @@ function $(e) {
     case nb.REPO:
     case nb.PINNED_FILE:
     case nb.OFFLINE_FILE:
-      return tx(e.shorter ? "tile.file_tile.password_protected_shorter" : "tile.file_tile.password_protected");
+      return renderI18nText(e.shorter ? "tile.file_tile.password_protected_shorter" : "tile.file_tile.password_protected");
     case nb.PROTOTYPE:
-      return tx(e.shorter ? "tile.file_tile.password_protected_shorter" : "tile.file_tile.password_protected_prototype");
+      return renderI18nText(e.shorter ? "tile.file_tile.password_protected_shorter" : "tile.file_tile.password_protected_prototype");
     default:
       throwTypeError(e.tile);
   }
@@ -110,9 +110,9 @@ function X(e) {
     tile: e.tile,
     getDateFromGenericTile: Tf.getTrashedAt
   });
-  return i && i === t ? tx("tile.file_tile.trashed_by_you", {
+  return i && i === t ? renderI18nText("tile.file_tile.trashed_by_you", {
     time: r
-  }) : tx("tile.file_tile.trashed_generic", {
+  }) : renderI18nText("tile.file_tile.trashed_generic", {
     time: r
   });
 }
@@ -134,7 +134,7 @@ function Q({
 function J(e) {
   let t = e.tile.type === nb.REPO && e.tile.branches.filter(e => !e.trashed_at).length || 0;
   return !e.hideBranchIndicator && t > 1 ? jsxs(Fragment, {
-    children: [tx("tile.file_tile.branch_count", {
+    children: [renderI18nText("tile.file_tile.branch_count", {
       branchCount: t
     }), "\xa0\xb7\xa0"]
   }) : jsx(et, {
@@ -142,8 +142,8 @@ function J(e) {
   });
 }
 function ee(e) {
-  let t = md(hi(e.tile));
-  let i = tx("tile.file_tile.edited_time", {
+  let t = useAtomWithSubscription(hi(e.tile));
+  let i = renderI18nText("tile.file_tile.edited_time", {
     time: jsx(_$$M, {
       tile: e.tile,
       getDateFromGenericTile: Tf.getTouchedAt
@@ -151,19 +151,19 @@ function ee(e) {
   });
   return "deletedFiles" === e.selectedView.view ? jsx(X, {
     tile: e.tile
-  }) : "recentsAndSharing" === e.selectedView.view && e.selectedView.tab === _$$G.SHARED_FILES ? Tf.getSharedBy(e.tile) ? tx("team_tile.shared_by", {
+  }) : "recentsAndSharing" === e.selectedView.view && e.selectedView.tab === _$$G.SHARED_FILES ? Tf.getSharedBy(e.tile) ? renderI18nText("team_tile.shared_by", {
     shared_by_text: Tf.getSharedByName(e.tile)
-  }) : tx("swy_tile.shared_date", {
+  }) : renderI18nText("swy_tile.shared_date", {
     shared_date: jsx(_$$M, {
       tile: e.tile,
       getDateFromGenericTile: Tf.getSharedAt
     })
-  }) : "user" === e.selectedView.view ? tx("tile.file_tile.last_activity_time", {
+  }) : "user" === e.selectedView.view ? renderI18nText("tile.file_tile.last_activity_time", {
     time: jsx(_$$M, {
       tile: e.tile,
       getDateFromGenericTile: Tf.getTouchedAt
     })
-  }) : e.tile.type === nb.FILE && e.tile.file.trackTags?.source === "import" && new Date(e.tile.file.touchedAt) <= e.tile.file.createdAt ? tx("tile.file_tile.imported_time", {
+  }) : e.tile.type === nb.FILE && e.tile.file.trackTags?.source === "import" && new Date(e.tile.file.touchedAt) <= e.tile.file.createdAt ? renderI18nText("tile.file_tile.imported_time", {
     time: jsx(_$$M, {
       tile: e.tile,
       getDateFromGenericTile: Tf.getCreatedAt
@@ -184,7 +184,7 @@ function et(e) {
   let a = i.data?.isTrashed || !1;
   let s = _$$E4();
   return "loaded" === i.status && r && t ? a ? jsxs(Fragment, {
-    children: [r, "\xa0", _$$t("file_browser.folder.trashed_folder"), "\xa0\xb7\xa0"]
+    children: [r, "\xa0", getI18nString("file_browser.folder.trashed_folder"), "\xa0\xb7\xa0"]
   }) : jsxs("span", {
     children: [jsx(_$$E3, {
       onClick: e => {
@@ -265,7 +265,7 @@ let e_ = (e, t, i, n, r, a) => {
     separator: !0,
     displayText: ""
   }, {
-    displayText: _$$t("tile.branching.see_all_branches"),
+    displayText: getI18nString("tile.branching.see_all_branches"),
     children: c
   }), "hidden" !== r.status && i) {
     let e;
@@ -292,7 +292,7 @@ let e_ = (e, t, i, n, r, a) => {
       separator: !0,
       displayText: ""
     }, {
-      displayText: _$$t("tile.branching.create_new_branch"),
+      displayText: getI18nString("tile.branching.create_new_branch"),
       disabled: "disabled" === r.status,
       callback: e
     });
@@ -314,7 +314,7 @@ function eA(e) {
     let d = jsxs(_$$E3, {
       className: "x78zum5 x6s0dn4 xfawy5m x1jnr06f xon4yw5 x1sxf85j xh8yej3",
       "data-testid": "branch-indicator-dropdown",
-      "aria-label": _$$t("tile.branching.change_default_branch"),
+      "aria-label": getI18nString("tile.branching.change_default_branch"),
       children: [jsx(_$$L, {
         style: {
           "--color-icon": "var(--color-icon-menu)",
@@ -358,7 +358,7 @@ function eb({
     branches: u,
     selectedBranchKey: c.key,
     onSelectBranch: t => {
-      sx("Branch Tile Drop Down Clicked Through", {
+      trackEventAnalytics("Branch Tile Drop Down Clicked Through", {
         fileRepoId: e.repo.id,
         selectedFileKey: t,
         previousFileKey: c?.key
@@ -419,7 +419,7 @@ function eI({
       selectedView: f
     }),
     bottomRightContent: e.type === nb.OFFLINE_FILE ? jsx(_$$z, {
-      "data-tooltip": _$$t("tile.offline_file_tile.offline_upload_tooltip"),
+      "data-tooltip": getI18nString("tile.offline_file_tile.offline_upload_tooltip"),
       "data-tooltip-type": Ib.TEXT
     }) : !getFeatureFlags().dtm_deprecation_pre_migration_onboarding || _ || A ? jsx(_$$V, {
       tile: e
@@ -428,7 +428,7 @@ function eI({
         "--color-icon": "var(--color-icon-secondary)"
       },
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": _$$t("tile.dtm_onboarding.dtm_files_will_be_relocated_soon"),
+      "data-tooltip": getI18nString("tile.dtm_onboarding.dtm_files_will_be_relocated_soon"),
       "data-tooltip-timeout-delay": 50,
       "data-tooltip-align": "center"
     }),
@@ -458,7 +458,7 @@ function eE({
       brand: _$$K2(r),
       children: jsx(_$$E2, {
         variant: "brandFilled",
-        children: _$$t("file_browser.file_grid_view.published")
+        children: getI18nString("file_browser.file_grid_view.published")
       })
     }) : null;
   })();
@@ -548,7 +548,7 @@ export function $$eT0({
   let j = dq();
   let U = Xr(yH);
   let B = _$$v();
-  let V = md(Y6);
+  let V = useAtomWithSubscription(Y6);
   let G = useCallback(e => {
     F(an());
     let {
@@ -644,7 +644,7 @@ export function $$eT0({
         let a = m8(e, filePermissions.data);
         let s = gX(n, repoPermissions.data);
         if (a.length + s.length < r) {
-          F(_$$s.error(_$$t("flash.dont_have_permission_permanently_delete_files")));
+          F(_$$s.error(getI18nString("flash.dont_have_permission_permanently_delete_files")));
           return;
         }
         F(Fh({
@@ -662,7 +662,7 @@ export function $$eT0({
           selectedCount
         } = Mw(e, filePermissions.data, repoPermissions.data);
         if (deletableCount < selectedCount) {
-          F(_$$s.error(_$$t("tile.error.permission_error_trash_file", {
+          F(_$$s.error(getI18nString("tile.error.permission_error_trash_file", {
             selectedCount: e.length
           })));
           return;

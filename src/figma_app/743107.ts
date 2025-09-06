@@ -2,9 +2,9 @@ import { useMemo, useRef, useEffect } from "react";
 import { rXF } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { eU, fp, md } from "../figma_app/27355";
+import { atom, useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import { k9 } from "../905/19536";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { w0 } from "../figma_app/594947";
 import { g as _$$g } from "../905/880308";
 import { qd } from "../figma_app/852050";
@@ -15,13 +15,13 @@ import { kA } from "../figma_app/726579";
 import { Px } from "../figma_app/152690";
 import { JC, UN as _$$UN, _t, O0, Mv, cQ, _e } from "../figma_app/225126";
 import { Cg, wj, hs } from "../905/491994";
-let b = eU({
+let b = atom({
   status: "unset"
 });
-let T = eU({
+let T = atom({
   status: "unset"
 });
-let I = eU({
+let I = atom({
   status: "unset"
 });
 export function $$S2(e) {
@@ -64,7 +64,7 @@ export function $$A1({
   let A = useMemo(() => !!f.sessionId, [f]);
   let x = function (e, t) {
     let r = uQ();
-    let [i, a] = fp(b);
+    let [i, a] = useAtomValueAndSetter(b);
     useEffect(() => {
       if (!t) {
         a({
@@ -103,7 +103,7 @@ export function $$A1({
   let C = k9(() => A ? e.map(e => e) : [], [e, A]);
   let w = k9(() => A ? r.map(e => e.libraryKey) : [], [r, A]);
   !function (e, t, r) {
-    let [i, a] = fp(T);
+    let [i, a] = useAtomValueAndSetter(T);
     let l = useMemo(() => _$$UN(e), [e]);
     useEffect(() => (r ? (a({
       status: "loading"
@@ -140,9 +140,9 @@ export function $$A1({
     }), [t, l, a, r]);
   }(f.suggestionType, w, A);
   let O = function (e, t, r, i) {
-    let a = md(b);
-    let l = md(T);
-    let [d, c] = fp(I);
+    let a = useAtomWithSubscription(b);
+    let l = useAtomWithSubscription(T);
+    let [d, c] = useAtomValueAndSetter(I);
     useEffect(() => {
       if (!getFeatureFlags().aip_flower_garden_shadow_reranker || !i) return;
       let e = _t(t);
@@ -190,7 +190,7 @@ export function $$A1({
   }(C, N, f, A);
   let R = function (e, t) {
     let r = uQ();
-    let [i] = fp(b);
+    let [i] = useAtomValueAndSetter(b);
     return useMemo(() => {
       if (!getFeatureFlags().aip_flower_garden_shadow_reranker || !r || !t || !e || "loaded" !== i.status) return null;
       let n = performance.now();
@@ -211,7 +211,7 @@ export function $$A1({
         case rXF.FLOAT:
           e = "NUMBER";
       }
-      e && az.trackDefinedMetric("ai_productivity.variable_suggestion_context_collection_time", {
+      e && analyticsEventManager.trackDefinedMetric("ai_productivity.variable_suggestion_context_collection_time", {
         loadTimeMS: O.timing + R.timing + x.timing,
         candidatesLoadTimeMS: O.timing,
         selectionContextLoadTimeMS: R.timing,

@@ -3,9 +3,9 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { filterNotNullish } from "../figma_app/656233";
 import { getFeatureFlags } from "../905/601108";
-import { eU, zl } from "../figma_app/27355";
-import { ED } from "../905/714362";
-import { t as _$$t } from "../905/303541";
+import { atom, atomStoreManager } from "../figma_app/27355";
+import { logDebug } from "../905/714362";
+import { getI18nString } from "../905/303541";
 import { to } from "../905/156213";
 import { PK } from "../figma_app/124493";
 import { Dm } from "../figma_app/8833";
@@ -26,7 +26,7 @@ import { A as _$$A } from "../figma_app/965813";
 import { DV } from "../905/739964";
 import { E as _$$E } from "../figma_app/999099";
 import { HZ as _$$HZ, $t } from "../figma_app/29287";
-export let $$A1 = eU(!1);
+export let $$A1 = atom(!1);
 export function $$O0({
   clientX: e,
   clientY: t,
@@ -75,7 +75,7 @@ export function $$O0({
         nodeId: e
       }
     }, ...A(s)];
-    let O = () => getFeatureFlags().move_page_to_new_file && T && t ? (ED("getPageMoveMenuItem", "Parameters", {
+    let O = () => getFeatureFlags().move_page_to_new_file && T && t ? (logDebug("getPageMoveMenuItem", "Parameters", {
       pageId: e,
       folderId: "1",
       fileKey: t.key
@@ -106,7 +106,7 @@ export function $$O0({
         }, s, e);
       }
     }) : null;
-    let L = n ? (g = w ? _$$t("fullscreen_actions.divider-duplicate") : _$$t("fullscreen_actions.page-duplicate"), t && (J9({
+    let L = n ? (g = w ? getI18nString("fullscreen_actions.divider-duplicate") : getI18nString("fullscreen_actions.page-duplicate"), t && (J9({
       openFile: t,
       pageCount: _
     }) || a({
@@ -144,7 +144,7 @@ export function $$O0({
         nodeIds: [e]
       },
       loadingIndicatorString: "Deleting",
-      displayText: _$$t("fullscreen_actions.divider-delete")
+      displayText: getI18nString("fullscreen_actions.divider-delete")
     }] : [{
       action: "page-copy-link",
       args: {
@@ -157,7 +157,7 @@ export function $$O0({
       args: {
         nodeId: e
       },
-      displayText: _$$t("fullscreen_actions.pages-rename", {
+      displayText: getI18nString("fullscreen_actions.pages-rename", {
         pageCount: 1
       })
     }, L, O(), {
@@ -170,7 +170,7 @@ export function $$O0({
       },
       loadingIndicatorString: "Deleting",
       disabled: 1 === E,
-      displayText: _$$t("fullscreen_actions.pages-delete", {
+      displayText: getI18nString("fullscreen_actions.pages-delete", {
         pageCount: 1
       })
     }, ...A(s)];
@@ -201,7 +201,7 @@ export function $$O0({
       args: {
         nodeIds: s
       },
-      displayText: _$$t("fullscreen_actions.pages-rename", {
+      displayText: getI18nString("fullscreen_actions.pages-rename", {
         pageCount: o
       })
     }, {
@@ -213,13 +213,13 @@ export function $$O0({
         nodeIds: s
       },
       loadingIndicatorString: "Deleting",
-      displayText: _$$t("fullscreen_actions.pages-delete", {
+      displayText: getI18nString("fullscreen_actions.pages-delete", {
         pageCount: o
       }),
       disabled: a.size <= o
     }, ...(t => {
       if (!_$$HZ()) return [];
-      let i = zl.get(yV);
+      let i = atomStoreManager.get(yV);
       return i && i.editorType === FFileType.WHITEBOARD ? [{
         separator: !0
       }, {
@@ -238,8 +238,8 @@ export function $$O0({
     isFileReadOnly: U,
     isK12OrgStudent: G
   });
-  useEffect(() => (zl.set($$A1, !0), () => {
-    zl.set($$A1, !1);
+  useEffect(() => (atomStoreManager.set($$A1, !0), () => {
+    atomStoreManager.set($$A1, !1);
   }), []);
   return jsx("div", {
     className: `${Dm}`,

@@ -1,9 +1,9 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { memo, useMemo } from "react";
 import o from "classnames";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { y1, w4 } from "../905/445814";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { FTemplateCategoryType } from "../figma_app/191312";
 import { Ro } from "../figma_app/805373";
 import { ev, ll, nK } from "../905/224306";
@@ -26,7 +26,7 @@ export let $$g2 = memo(function (e) {
 });
 export function $$f0(e) {
   let t = {
-    backgroundClip: Ay.safari ? "padding-box" : ""
+    backgroundClip: BrowserInfo.safari ? "padding-box" : ""
   };
   e.backgroundColor && (t.backgroundColor = e.backgroundColor);
   return jsxs("div", {
@@ -126,7 +126,7 @@ export function $$f0(e) {
   e.FullMetadata = function (e) {
     if (!e.publishers || 0 === e.publishers.length) return null;
     let t = e.publishers.length - 1;
-    let r = e.publishers.length > 1 ? _$$t("community.cards.pluralize_num_other_publishers", {
+    let r = e.publishers.length > 1 ? getI18nString("community.cards.pluralize_num_other_publishers", {
       numOtherPublishers: t
     }) : "";
     return jsxs("div", {
@@ -146,7 +146,7 @@ export function $$f0(e) {
           children: e.name
         }), jsxs("div", {
           className: e.hoverText ? Jk : Rb,
-          children: [_$$t("community.cards.by"), " ", e.publishers[0].name, " ", r]
+          children: [getI18nString("community.cards.by"), " ", e.publishers[0].name, " ", r]
         }), e.hoverText && jsx("div", {
           className: yG,
           children: e.hoverText

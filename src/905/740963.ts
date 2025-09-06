@@ -1,13 +1,13 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo, useEffect } from "react";
-import { md, fp, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, useAtomValueAndSetter, Xr } from "../figma_app/27355";
 import { zD, L8, jM, J, P_, l4, a3, wf } from "../905/124270";
 import { Hz, RF, p2, H9, aI } from "../905/714062";
 import { gl, jN, yA, FR, C8, M2, q1, gh, oM, nX } from "../905/171315";
 import { WY, uH, uR } from "../figma_app/162807";
 import { P } from "../905/16832";
 import { useSelector } from "../vendor/514228";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { A as _$$A } from "../905/484713";
 import { hO } from "../figma_app/545293";
 import { Q8, sC, BA, R9 } from "../905/61477";
@@ -18,17 +18,17 @@ import { iZ } from "../905/372672";
 import { E as _$$E } from "../905/632989";
 import v from "classnames";
 import { M3 } from "../figma_app/119475";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { f as _$$f2 } from "../905/287602";
 var I = v;
 let w = e => {
   switch (e) {
     case WY.RESOURCE:
-      return t("search.facets.filter_by_resource");
+      return getI18nString("search.facets.filter_by_resource");
     case WY.CREATOR:
-      return t("search.facets.filter_by_creator");
+      return getI18nString("search.facets.filter_by_creator");
     case WY.SPACE:
-      return t("search.facets.filter_by_space");
+      return getI18nString("search.facets.filter_by_space");
     default:
       return "";
   }
@@ -41,7 +41,7 @@ function C({
   id: s,
   path: o
 }) {
-  let d = md(Q8);
+  let d = useAtomWithSubscription(Q8);
   let {
     setKeyboardNavigationElement,
     isFauxFocused
@@ -85,25 +85,25 @@ export function $$k0({
   id: e,
   path: t
 }) {
-  let i = md(zD);
-  let b = md(L8);
-  let v = md(Hz);
-  let [I, E] = fp(Q8);
+  let i = useAtomWithSubscription(zD);
+  let b = useAtomWithSubscription(L8);
+  let v = useAtomWithSubscription(Hz);
+  let [I, E] = useAtomValueAndSetter(Q8);
   let x = iZ();
   let S = RF(b, i);
   let w = function () {
-    let e = md(Hz);
-    let t = md(sC);
-    let i = md(BA);
-    let n = md(jM);
-    let c = md(J);
-    let u = md(P_);
-    let [p, m] = fp(R9);
-    let [y, b] = fp(Q8);
+    let e = useAtomWithSubscription(Hz);
+    let t = useAtomWithSubscription(sC);
+    let i = useAtomWithSubscription(BA);
+    let n = useAtomWithSubscription(jM);
+    let c = useAtomWithSubscription(J);
+    let u = useAtomWithSubscription(P_);
+    let [p, m] = useAtomValueAndSetter(R9);
+    let [y, b] = useAtomValueAndSetter(Q8);
     let v = _$$f();
     let I = _$$n();
     let E = Xr(l4(e?.facetType ?? null));
-    let x = md(hO.isFragmentSearchAtom);
+    let x = useAtomWithSubscription(hO.isFragmentSearchAtom);
     let S = _$$L(x ? "fragment_search_modal" : "file_browser", t, !0);
     let w = useCallback(t => {
       if (e) {
@@ -145,11 +145,11 @@ export function $$k0({
     E(I ? I + " " + i : i);
   }, [I, E]);
   return (!function () {
-    let e = md(Hz);
-    let [t, i] = fp(a3);
-    let [n, l] = fp(p2);
-    let h = md(wf);
-    let g = md(H9);
+    let e = useAtomWithSubscription(Hz);
+    let [t, i] = useAtomValueAndSetter(a3);
+    let [n, l] = useAtomValueAndSetter(p2);
+    let h = useAtomWithSubscription(wf);
+    let g = useAtomWithSubscription(H9);
     let f = g?.valueToQuery ?? "";
     let _ = function () {
       let e = useSelector(e => e.search.sessionId);
@@ -163,7 +163,7 @@ export function $$k0({
           facet_entrypoint: uR.AUTOCOMPLETE,
           facet_type: n
         };
-        sx("facet_type_shown", r);
+        trackEventAnalytics("facet_type_shown", r);
       };
     }();
     let A = P();

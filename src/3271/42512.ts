@@ -4,7 +4,7 @@ import { useDispatch, useStore, useSelector } from "../vendor/514228";
 import { d as _$$d } from "../905/976845";
 import { S as _$$S } from "../905/989967";
 import { S as _$$S2 } from "../905/711470";
-import { md, fp } from "../figma_app/27355";
+import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import u from "classnames";
 import { A as _$$A } from "../vendor/90566";
 import { Uz } from "../905/63728";
@@ -13,7 +13,7 @@ import { dP, M3 } from "../figma_app/119475";
 import { P as _$$P } from "../905/347284";
 import { IW } from "../figma_app/563413";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx as _$$tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { Dy, ky } from "../figma_app/925970";
 import { to as _$$to } from "../figma_app/828186";
 import { N as _$$N } from "../3271/584206";
@@ -97,7 +97,7 @@ import { bT, Ol } from "../figma_app/279454";
 import { h as _$$h } from "../9410/146161";
 import { BI } from "../figma_app/546509";
 import { N as _$$N3 } from "../905/301843";
-import { R as _$$R2 } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { s7 } from "../905/551193";
 import { tS as _$$tS } from "../figma_app/516028";
 import { FUserRoleType } from "../figma_app/191312";
@@ -110,8 +110,8 @@ import { vtl } from "../figma_app/822011";
 import { shuffle } from "../figma_app/656233";
 import { ServiceCategories as _$$e2 } from "../905/165054";
 import { k as _$$k2 } from "../905/443820";
-import { sx } from "../905/449184";
-import { $D } from "../905/11";
+import { trackEventAnalytics } from "../905/449184";
+import { reportError } from "../905/11";
 import { a as _$$a } from "../905/925868";
 import { Me } from "../figma_app/617427";
 import { C as _$$C } from "../905/237873";
@@ -194,7 +194,7 @@ function ec({
       })
     }), jsx("div", {
       className: hI,
-      children: _$$tx("community.buyer.payment_for_this_resource_is_moving_over_to_figma")
+      children: renderI18nText("community.buyer.payment_for_this_resource_is_moving_over_to_figma")
     }), jsx("div", {
       className: JL,
       children: jsx("button", {
@@ -202,7 +202,7 @@ function ec({
           mG(e, aL.INSERTS, s.id, t?.id);
           r();
         },
-        children: _$$tx("community.buyer.update_payment")
+        children: renderI18nText("community.buyer.update_payment")
       })
     })]
   });
@@ -213,7 +213,7 @@ function ex({
 }) {
   return jsx("span", {
     className: em,
-    "aria-label": _$$t("community.detail_view.full_star"),
+    "aria-label": getI18nString("community.detail_view.full_star"),
     children: jsx("svg", {
       width: "16",
       height: "15",
@@ -229,7 +229,7 @@ function ex({
 function ep() {
   return jsx("span", {
     className: em,
-    "aria-label": _$$t("community.detail_view.empty_star"),
+    "aria-label": getI18nString("community.detail_view.empty_star"),
     children: jsx("svg", {
       width: "16",
       height: "15",
@@ -257,20 +257,20 @@ function ef({
   let [d, c] = useState(0);
   let [u, _] = useState(0);
   let [m, x] = useState(!1);
-  let p = [_$$t("community.star_ratings.i_really_dont_like_it"), _$$t("community.star_ratings.i_dont_like_it"), _$$t("community.star_ratings.its_okay"), _$$t("community.star_ratings.i_like_it"), _$$t("community.star_ratings.i_love_it")];
+  let p = [getI18nString("community.star_ratings.i_really_dont_like_it"), getI18nString("community.star_ratings.i_dont_like_it"), getI18nString("community.star_ratings.its_okay"), getI18nString("community.star_ratings.i_like_it"), getI18nString("community.star_ratings.i_love_it")];
   useEffect(() => {
     void 0 === t || d || (c(t), _(t));
   }, [t, d]);
   let g = r ? jsx(_$$B, {
     svg: _$$A3,
     className: "rating_star_selector--emptyStar--P-7A1 rating_star_selector--star--ML342",
-    "aria-label": _$$t("community.detail_view.empty_star"),
+    "aria-label": getI18nString("community.detail_view.empty_star"),
     dataTestId: "empty-star-big"
   }) : jsx(ep, {});
   let h = r ? jsx(_$$B, {
     svg: _$$A4,
     className: m ? "rating_star_selector--fullStarHover--JKgxp rating_star_selector--star--ML342" : "rating_star_selector--fullStar--rCWKu rating_star_selector--star--ML342",
-    "aria-label": _$$t("community.detail_view.full_star"),
+    "aria-label": getI18nString("community.detail_view.full_star"),
     dataTestId: "full-star-big"
   }) : jsx(ex, {
     isHovered: m
@@ -313,7 +313,7 @@ function ef({
           children: p[d - 1]
         }), i && 0 === d && jsx("div", {
           className: eg,
-          children: l ? _$$tx("community.rating_review.ratings_not_available") : _$$tx("community.rating_review.optional")
+          children: l ? renderI18nText("community.rating_review.ratings_not_available") : renderI18nText("community.rating_review.optional")
         })]
       })
     })]
@@ -335,8 +335,8 @@ function eC({
         className: "rating_stats_view--editRating---V3U6",
         role: "button",
         tabIndex: 0,
-        children: _$$tx("community.detail_view.edit_rating")
-      }) : _$$tx("community.detail_view.leave_a_rating")
+        children: renderI18nText("community.detail_view.edit_rating")
+      }) : renderI18nText("community.detail_view.leave_a_rating")
     }), jsx(ef, {
       onSelect: n,
       existingRating: e?.ratingValue,
@@ -548,10 +548,10 @@ function eG(e) {
                 children: [jsx("div", {
                   className: "detail_view--dotsContainer--JdwCt",
                   children: jsx(_$$K, {
-                    "aria-label": _$$t("universal_insert.more_options"),
+                    "aria-label": getI18nString("universal_insert.more_options"),
                     htmlAttributes: {
                       "data-tooltip-type": Ib.TEXT,
-                      "data-tooltip": _$$t("universal_insert.more_options")
+                      "data-tooltip": getI18nString("universal_insert.more_options")
                     },
                     onClick: F,
                     children: jsx(_$$J, {})
@@ -562,10 +562,10 @@ function eG(e) {
                   resourceType: r ? vt.PLUGIN : vt.WIDGET
                 })]
               }) : jsx(_$$K, {
-                "aria-label": _$$t("universal_insert.copy_link"),
+                "aria-label": getI18nString("universal_insert.copy_link"),
                 htmlAttributes: {
                   "data-tooltip-type": Ib.TEXT,
-                  "data-tooltip": _$$t("universal_insert.copy_link")
+                  "data-tooltip": getI18nString("universal_insert.copy_link")
                 },
                 onClick: O,
                 children: jsx(_$$W, {})
@@ -606,7 +606,7 @@ function ez() {
   } = IT();
   return jsx(eH, {
     onBack: closeResource,
-    text: activeTab === _$$s2.PLUGIN ? _$$tx("universal_insert.plugin") : _$$tx("universal_insert.widget")
+    text: activeTab === _$$s2.PLUGIN ? renderI18nText("universal_insert.plugin") : renderI18nText("universal_insert.widget")
   });
 }
 function e$(e) {
@@ -629,7 +629,7 @@ function e$(e) {
       children: [jsx(_$$B, {
         svg: _$$A6,
         className: "detail_view--communityLinkIcon--FPd8D fd_browse_resource_modal--communityLinkIcon--gNQIW text--fontPos12--YsUAh text--_fontBase--QdLsd"
-      }), _$$tx("universal_insert.see_more_details_in_community")]
+      }), renderI18nText("universal_insert.see_more_details_in_community")]
     }), jsx("div", {
       className: "detail_view--communityLinkSpacer--2-rRR"
     })]
@@ -659,7 +659,7 @@ function e5({
     learnMoreLink: jsx(_$$N2, {
       href: "https://www.figma.com/plugin-docs",
       newTab: !0,
-      children: _$$tx("dev_handoff.inspect_panel.learn_more_plugin_development")
+      children: renderI18nText("dev_handoff.inspect_panel.learn_more_plugin_development")
     })
   };
   return jsx(Fragment, {
@@ -668,21 +668,21 @@ function e5({
         className: _$$s.alignCenter.$,
         children: [jsx(_$$E2, {
           color: "secondary",
-          children: _$$tx("dev_handoff.inspect_panel.create_first_here")
+          children: renderI18nText("dev_handoff.inspect_panel.create_first_here")
         }), jsx("br", {}), jsx(_$$E2, {
-          children: _$$tx("dev_handoff.inspect_panel.learn_more_link", t)
+          children: renderI18nText("dev_handoff.inspect_panel.learn_more_link", t)
         })]
       }), jsx(e8, {})]
     }) : jsxs("div", {
       className: _$$s.alignCenter.$,
       children: [jsx(_$$E2, {
         color: "secondary",
-        children: _$$tx("dev_handoff.inspect_panel.inspect_plugins_go_here")
+        children: renderI18nText("dev_handoff.inspect_panel.inspect_plugins_go_here")
       }), jsx("br", {}), jsx(_$$E2, {
         color: "secondary",
-        children: _$$tx("dev_handoff.inspect_panel.use_desktop_to_develop")
+        children: renderI18nText("dev_handoff.inspect_panel.use_desktop_to_develop")
       }), jsx("br", {}), jsx(_$$E2, {
-        children: _$$tx("dev_handoff.inspect_panel.learn_more_link", t)
+        children: renderI18nText("dev_handoff.inspect_panel.learn_more_link", t)
       })]
     })
   });
@@ -711,7 +711,7 @@ function e8() {
         children: [jsx(_$$e, {
           className: _$$s.pr8.$
         }), jsx(_$$E2, {
-          children: _$$tx("dev_handoff.inspect_panel.new_plugin")
+          children: renderI18nText("dev_handoff.inspect_panel.new_plugin")
         }), jsx(_$$r, {})]
       })
     }), s && jsx("div", {
@@ -791,7 +791,7 @@ function tf() {
     children: [jsx(_$$B, {
       svg: _$$A6,
       className: "fd_browse_resource_modal--communityLinkIcon--gNQIW text--fontPos12--YsUAh text--_fontBase--QdLsd"
-    }), _$$tx("universal_insert.browse_more_in_community")]
+    }), renderI18nText("universal_insert.browse_more_in_community")]
   });
 }
 function tC({
@@ -822,7 +822,7 @@ function tj({
     activeTab
   } = IT();
   let n = activeTab === _$$s2.PLUGIN;
-  s = e === _$$Y.ORG_PRIVATE_EXPANDED_LIST ? n ? _$$tx("universal_insert.all_internal_plugins") : _$$tx("universal_insert.all_internal_widgets") : n ? _$$tx("universal_insert.all_approved_plugins") : _$$tx("universal_insert.all_approved_widgets");
+  s = e === _$$Y.ORG_PRIVATE_EXPANDED_LIST ? n ? renderI18nText("universal_insert.all_internal_plugins") : renderI18nText("universal_insert.all_internal_widgets") : n ? renderI18nText("universal_insert.all_approved_plugins") : renderI18nText("universal_insert.all_approved_widgets");
   return jsxs("div", {
     className: "fd_browse_resource_modal--expandedViewHeader--uLZl5",
     children: [jsxs("div", {
@@ -914,7 +914,7 @@ function tM(e) {
   let E = I.orgWidgets;
   let P = I.orgPlugins;
   let k = useSelector(e => e.orgUsersByOrgId[currentOrgId][e.user.id]?.permission === FUserRoleType.GUEST);
-  let R = _$$R2(e => k ? {} : Qt(i8(Object.values(e.publishedPlugins)), currentOrgId));
+  let R = selectWithShallowEqual(e => k ? {} : Qt(i8(Object.values(e.publishedPlugins)), currentOrgId));
   let M = useMemo(() => {
     let e = Object.values(P).filter(e => !R[e.plugin_id]);
     l && (e = e.filter(e => j[e.plugin_id]));
@@ -943,11 +943,11 @@ function tM(e) {
       viewExpandedList: () => {
         viewExpandedList(_$$Y.ORG_PRIVATE_EXPANDED_LIST);
       },
-      ctaText: c ? _$$t("universal_insert.all_internal_widgets") : _$$t("universal_insert.all_internal_plugins")
+      ctaText: c ? getI18nString("universal_insert.all_internal_widgets") : getI18nString("universal_insert.all_internal_plugins")
     })]
   }) : jsx("div", {
     className: th,
-    children: c ? _$$tx("universal_insert.no_internal_widgets") : _$$tx("universal_insert.no_internal_plugins")
+    children: c ? renderI18nText("universal_insert.no_internal_widgets") : renderI18nText("universal_insert.no_internal_plugins")
   });
   let {
     href,
@@ -958,22 +958,22 @@ function tM(e) {
       className: tu
     }), jsxs("div", {
       className: td,
-      children: [_$$tx("universal_insert.approved_from_figma_community"), jsx("a", {
+      children: [renderI18nText("universal_insert.approved_from_figma_community"), jsx("a", {
         href,
         target: "_blank",
         children: jsx(_$$K, {
           onClick,
-          "aria-label": _$$t("universal_insert.go_to_community"),
+          "aria-label": getI18nString("universal_insert.go_to_community"),
           htmlAttributes: {
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t("universal_insert.go_to_community")
+            "data-tooltip": getI18nString("universal_insert.go_to_community")
           },
           children: jsx(_$$N3, {})
         })
       })]
     }), f && 0 === F.length ? jsx("div", {
       className: th,
-      children: c ? _$$tx("universal_insert.organization_has_no_approved_community_widgets") : _$$tx("universal_insert.organization_has_no_approved_community_plugins")
+      children: c ? renderI18nText("universal_insert.organization_has_no_approved_community_widgets") : renderI18nText("universal_insert.organization_has_no_approved_community_plugins")
     }) : jsxs(Fragment, {
       children: [(p ? F.slice(0, 5) : F).map((e, t) => jsx(_$$ff, {
         resourceId: e,
@@ -983,7 +983,7 @@ function tM(e) {
         viewExpandedList: () => {
           viewExpandedList(_$$Y.ORG_ALLOWLIST_EXPANDED_LIST);
         },
-        ctaText: c ? _$$t("universal_insert.all_approved_widgets") : _$$t("universal_insert.all_approved_plugins")
+        ctaText: c ? getI18nString("universal_insert.all_approved_widgets") : getI18nString("universal_insert.all_approved_plugins")
       })]
     })]
   });
@@ -992,14 +992,14 @@ function tM(e) {
       className: tc
     }), jsxs("div", {
       className: td,
-      children: [_$$tx("universal_insert.saved_from_community"), jsx("a", {
+      children: [renderI18nText("universal_insert.saved_from_community"), jsx("a", {
         href,
         target: "_blank",
         children: jsx(_$$K, {
-          "aria-label": _$$t("universal_insert.go_to_community"),
+          "aria-label": getI18nString("universal_insert.go_to_community"),
           htmlAttributes: {
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t("universal_insert.go_to_community")
+            "data-tooltip": getI18nString("universal_insert.go_to_community")
           },
           onClick,
           children: jsx(_$$N3, {})
@@ -1015,22 +1015,22 @@ function tM(e) {
       className: tc
     }), jsxs("div", {
       className: td,
-      children: [_$$tx("universal_insert.saved_from_community"), jsx("a", {
+      children: [renderI18nText("universal_insert.saved_from_community"), jsx("a", {
         href,
         target: "_blank",
         children: jsx(_$$K, {
           onClick,
-          "aria-label": _$$t("universal_insert.go_to_community"),
+          "aria-label": getI18nString("universal_insert.go_to_community"),
           htmlAttributes: {
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t("universal_insert.go_to_community")
+            "data-tooltip": getI18nString("universal_insert.go_to_community")
           },
           children: jsx(_$$N3, {})
         })
       })]
     }), jsx("div", {
       className: th,
-      children: c ? _$$tx("universal_insert.no_saved_widgets") : _$$tx("universal_insert.no_saved_plugins")
+      children: c ? renderI18nText("universal_insert.no_saved_widgets") : renderI18nText("universal_insert.no_saved_plugins")
     })]
   });
   return jsxs(fu, {
@@ -1098,7 +1098,7 @@ function tJ({
   } = IT();
   let l = activeTab === _$$s2.WIDGET;
   let o = m0();
-  let d = md(RB) && o;
+  let d = useAtomWithSubscription(RB) && o;
   let [u, _] = useState(!1);
   let {
     allowListIsLoading,
@@ -1125,7 +1125,7 @@ function tJ({
       P(!1);
       _(d);
     }).catch(e => {
-      $D(_$$e2.COMMUNITY, e);
+      reportError(_$$e2.COMMUNITY, e);
       P(!1);
       y([]);
       _(d);
@@ -1140,7 +1140,7 @@ function tJ({
       L(shuffle(e));
       R(!1);
     }).catch(e => {
-      $D(_$$e2.COMMUNITY, e);
+      reportError(_$$e2.COMMUNITY, e);
       R(!1);
       L([]);
     }));
@@ -1165,15 +1165,15 @@ function tJ({
       }), jsxs("div", {
         className: td,
         "data-onboarding-key": "community_feed_header",
-        children: [hasAllowList ? _$$tx("universal_insert.approved_from_figma_community") : _$$tx("universal_insert.from_community"), jsx("a", {
+        children: [hasAllowList ? renderI18nText("universal_insert.approved_from_figma_community") : renderI18nText("universal_insert.from_community"), jsx("a", {
           href,
           target: "_blank",
           children: jsx(Me, {
             onClick,
-            "aria-label": _$$t("universal_insert.go_to_community"),
+            "aria-label": getI18nString("universal_insert.go_to_community"),
             htmlAttributes: {
               "data-tooltip-type": Ib.TEXT,
-              "data-tooltip": _$$t("universal_insert.go_to_community")
+              "data-tooltip": getI18nString("universal_insert.go_to_community")
             },
             trackingEventName: "Inserts - Browse More From Community Icon Button",
             children: jsx(_$$N3, {})
@@ -1187,11 +1187,11 @@ function tJ({
         viewExpandedList: () => {
           e(_$$Y.ORG_ALLOWLIST_EXPANDED_LIST);
         },
-        ctaText: l ? _$$t("universal_insert.all_approved_widgets") : _$$t("universal_insert.all_approved_plugins")
+        ctaText: l ? getI18nString("universal_insert.all_approved_widgets") : getI18nString("universal_insert.all_approved_plugins")
       }) : jsxs(Fragment, {
         children: [jsx(tf, {}), jsx(_$$a, {
           onIntersectionChange: e => {
-            e.isIntersecting && sx("community_feed_bottom_reached", {
+            e.isIntersecting && trackEventAnalytics("community_feed_bottom_reached", {
               location: "inserts",
               resourceType: activeTab
             });
@@ -1224,7 +1224,7 @@ function t3(e) {
     name: "saved",
     children: [jsx("div", {
       className: to,
-      children: _$$tx("universal_insert.saved")
+      children: renderI18nText("universal_insert.saved")
     }), i.map((e, t) => jsx(_$$ff, {
       resourceId: e,
       type: R7.SAVED,
@@ -1232,7 +1232,7 @@ function t3(e) {
     }, e)), t.length > 40 && !s && jsx("button", {
       className: "fd_browse_resource_modal--showAllSavedExtensionsButton--LDbiv text--fontPos12--YsUAh text--_fontBase--QdLsd",
       onClick: () => r(!0),
-      children: e.isWidget ? _$$tx("universal_insert.show_all_saved_widgets") : _$$tx("universal_insert.show_all_saved_plugins")
+      children: e.isWidget ? renderI18nText("universal_insert.show_all_saved_widgets") : renderI18nText("universal_insert.show_all_saved_plugins")
     })]
   });
 }
@@ -1256,7 +1256,7 @@ function t2(e) {
     children: [jsx("div", {
       className: to,
       "data-onboarding-key": "recents_plugin_header",
-      children: _$$tx("universal_insert.recents")
+      children: renderI18nText("universal_insert.recents")
     }), c.slice(0, Zm).map((e, t) => jsx(_$$ff, {
       type: R7.RECENT,
       resourceId: e.plugin_id,
@@ -1447,28 +1447,28 @@ function st(e) {
   let eL = hasResolved && (ef || ej || ew || ey || eC);
   if (hasResolved && !(ew || eb || eL)) t = jsx("div", {
     className: th,
-    children: r ? ev ? _$$tx("universal_insert.no_widgets_matching_query_for_allowlist", {
+    children: r ? ev ? renderI18nText("universal_insert.no_widgets_matching_query_for_allowlist", {
       orgName: ed.name,
       query: o
-    }) : _$$tx("universal_insert.no_widgets_matching_query", {
+    }) : renderI18nText("universal_insert.no_widgets_matching_query", {
       query: o
-    }) : ev ? _$$tx("universal_insert.no_plugins_matching_query_for_allowlist", {
+    }) : ev ? renderI18nText("universal_insert.no_plugins_matching_query_for_allowlist", {
       orgName: ed.name,
       query: o
-    }) : _$$tx("universal_insert.no_plugins_matching_query", {
+    }) : renderI18nText("universal_insert.no_plugins_matching_query", {
       query: o
     })
   });else {
     t = [];
     let e = B6;
     ew && (t.push(jsx(sa, {
-      sectionHeader: _$$tx("universal_insert.recents"),
+      sectionHeader: renderI18nText("universal_insert.recents"),
       ids: w,
       type: R7.RECENT,
       sectionIdx: e
     }, R7.RECENT)), e += 1);
     eb && (t.push(jsx(sa, {
-      sectionHeader: _$$tx("universal_insert.development"),
+      sectionHeader: renderI18nText("universal_insert.development"),
       ids: k,
       type: R7.DEVELOPMENT,
       sectionIdx: e
@@ -1476,7 +1476,7 @@ function st(e) {
     isLoading && !eL ? t.push(jsx(kt, {
       className: tv
     }, "Loading spinner")) : (ey && (t.push(jsx(sa, {
-      sectionHeader: _$$tx("universal_insert.saved"),
+      sectionHeader: renderI18nText("universal_insert.saved"),
       ids: D,
       type: R7.SAVED,
       sectionIdx: e
@@ -1486,12 +1486,12 @@ function st(e) {
       type: R7.ORG_PRIVATE,
       sectionIdx: e
     }, R7.ORG_PRIVATE)), e += 1), eC && (t.push(jsx(sa, {
-      sectionHeader: _$$tx("universal_insert.approved_from_figma_community"),
+      sectionHeader: renderI18nText("universal_insert.approved_from_figma_community"),
       ids: G,
       type: R7.COMMUNITY,
       sectionIdx: e
     }, `ALLOW_LIST_${R7.COMMUNITY}`)), e += 1), ef && t.push(jsx(sa, {
-      sectionHeader: _$$tx("universal_insert.from_community"),
+      sectionHeader: renderI18nText("universal_insert.from_community"),
       ids: K,
       type: R7.COMMUNITY,
       sectionIdx: e
@@ -1520,7 +1520,7 @@ let ss = (e, t) => {
 };
 function sr(e) {
   return jsx("div", {
-    onClick: () => sx("search result clicked"),
+    onClick: () => trackEventAnalytics("search result clicked"),
     "data-testid": `browse-resource-tile-${e.resourceId}`,
     children: jsx(_$$ff, {
       resourceId: e.resourceId,
@@ -1546,19 +1546,19 @@ function sa(e) {
 }
 let sn = () => ({
   [_$$s2.COMPONENT]: {
-    label: _$$t("universal_insert.components"),
+    label: getI18nString("universal_insert.components"),
     tab: _$$s2.COMPONENT,
-    resourceTypeLabel: _$$t("universal_insert.components_resource_type")
+    resourceTypeLabel: getI18nString("universal_insert.components_resource_type")
   },
   [_$$s2.PLUGIN]: {
-    label: _$$t("community.view_bar.plugins"),
+    label: getI18nString("community.view_bar.plugins"),
     tab: _$$s2.PLUGIN,
-    resourceTypeLabel: _$$t("community.plugins.plugin")
+    resourceTypeLabel: getI18nString("community.plugins.plugin")
   },
   [_$$s2.WIDGET]: {
-    label: _$$t("community.view_bar.widgets"),
+    label: getI18nString("community.view_bar.widgets"),
     tab: _$$s2.WIDGET,
-    resourceTypeLabel: _$$t("community.plugins.widget")
+    resourceTypeLabel: getI18nString("community.plugins.widget")
   }
 });
 function si(e) {
@@ -1642,7 +1642,7 @@ export function $$so0() {
             ref: e,
             children: jsx(sd, {
               searchQuery: p,
-              placeholder: activeTab === _$$s2.PLUGIN ? _$$t("universal_insert.search_all_plugins") : activeTab === _$$s2.WIDGET ? _$$t("universal_insert.search_all_widgets") : _$$t("universal_insert.search_all_extensions"),
+              placeholder: activeTab === _$$s2.PLUGIN ? getI18nString("universal_insert.search_all_plugins") : activeTab === _$$s2.WIDGET ? getI18nString("universal_insert.search_all_widgets") : getI18nString("universal_insert.search_all_extensions"),
               setSearchQuery: h
             })
           }), 0 === p.length && jsx(sc, {
@@ -1695,7 +1695,7 @@ function sd({
   let x = Um();
   let h = x?.type === sl;
   let f = useRef(null);
-  let [N, T] = fp(RB);
+  let [N, T] = useAtomValueAndSetter(RB);
   let E = N && !h;
   let R = LR();
   let M = useCallback(s => "Escape" === s.key && (e ? t("") : R(), !0), [R, e, t]);
@@ -1725,7 +1725,7 @@ function sd({
       H();
     },
     role: "menuitemcheckbox",
-    children: _$$t("dev_handoff.inspect_panel.search_bar_filter_codegen_option")
+    children: getI18nString("dev_handoff.inspect_panel.search_bar_filter_codegen_option")
   }));
   let O = m0();
   let Z = _$$to();
@@ -1761,9 +1761,9 @@ function sd({
           onClick: H,
           htmlAttributes: {
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t("dev_handoff.inspect_panel.search_bar_filter")
+            "data-tooltip": getI18nString("dev_handoff.inspect_panel.search_bar_filter")
           },
-          "aria-label": _$$t("dev_handoff.inspect_panel.search_bar_filter"),
+          "aria-label": getI18nString("dev_handoff.inspect_panel.search_bar_filter"),
           "aria-haspopup": "menu",
           "aria-controls": U,
           children: E ? jsx(_$$S, {
@@ -1870,16 +1870,16 @@ function s_(e) {
   let o = useCallback(e => function (e, t) {
     switch (e) {
       case "recents_and_saved":
-        return _$$t("universal_insert.recents_and_saved");
+        return getI18nString("universal_insert.recents_and_saved");
       case "development":
-        return _$$t("universal_insert.development");
+        return getI18nString("universal_insert.development");
       case "org":
-        return t?.name || _$$t("universal_insert.from_your_org");
+        return t?.name || getI18nString("universal_insert.from_your_org");
     }
   }(e, r), [r]);
   let d = ["recents_and_saved"];
   return (l && d.push("development"), 1 !== d.length || r) ? jsxs(l6, {
-    ariaLabel: _$$t("universal_insert.resource.select.aria_label"),
+    ariaLabel: getI18nString("universal_insert.resource.select.aria_label"),
     chevronClassName: "fd_browse_resource_modal--mainViewSelectorChevron--P-lJ8",
     className: "fd_browse_resource_modal--mainViewSelector--chQy5",
     dispatch: t,

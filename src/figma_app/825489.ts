@@ -1,6 +1,6 @@
 import { lQ } from "../905/934246";
 import { l as _$$l } from "../905/716947";
-import { eU, Iz, mg, M2, FZ } from "../figma_app/27355";
+import { atom, createRemovableAtomFamily, mg, createAtomWithEquality, setupCustomAtom } from "../figma_app/27355";
 import s from "../vendor/239910";
 import { Xm } from "../905/723791";
 import { yZ } from "../figma_app/476572";
@@ -14,14 +14,14 @@ import { o as _$$o } from "../905/738144";
 import { F } from "../905/686267";
 import { kX, cM } from "../905/261982";
 import { yV } from "../figma_app/516028";
-import { OX, bt, Pj, S9 } from "../905/270322";
+import { createAtomWithReduxWithState, createReduxSubscriptionAtomWithState, setupReduxAtomWithState, attachReducerWrapper } from "../905/270322";
 import { DtB, vsj, Acj, eHy, CfA } from "../figma_app/43951";
 import { w5 } from "../figma_app/345997";
 import { gM } from "../figma_app/155728";
 import { Me } from "../figma_app/598018";
 import { o as _$$o2 } from "../figma_app/633080";
 var o = s;
-let $$x0 = eU(e => {
+let $$x0 = atom(e => {
   let t = e(yV);
   if (!t) return Xm();
   let r = t.parentOrgId;
@@ -39,18 +39,18 @@ let $$x0 = eU(e => {
   let d = w5(o);
   return gM(a, n, i, s, r, d);
 });
-let N = Iz(e => mg($$x0, t => new Set(t.data?.map(t => t[e])), yZ));
+let N = createRemovableAtomFamily(e => mg($$x0, t => new Set(t.data?.map(t => t[e])), yZ));
 export function $$C2(e) {
   return N(e);
 }
-let $$w5 = OX(_$$o2.LIBRARY, "SET_LIBRARY_PUBLISHING_MODE");
-let $$O6 = bt(e => e.openFile?.publishedHubFile?.id);
-let $$R1 = bt(e => e.openFile?.publishedHubFile?.libraryKey ? _$$l(e.openFile.publishedHubFile.libraryKey) : null);
-let L = bt(e => e.openFile?.editorType);
-let $$P3 = eU(null);
+let $$w5 = createAtomWithReduxWithState(_$$o2.LIBRARY, "SET_LIBRARY_PUBLISHING_MODE");
+let $$O6 = createReduxSubscriptionAtomWithState(e => e.openFile?.publishedHubFile?.id);
+let $$R1 = createReduxSubscriptionAtomWithState(e => e.openFile?.publishedHubFile?.libraryKey ? _$$l(e.openFile.publishedHubFile.libraryKey) : null);
+let L = createReduxSubscriptionAtomWithState(e => e.openFile?.editorType);
+let $$P3 = atom(null);
 let D = (e, t) => t;
 let $$k4 = (() => {
-  let e = M2(eU(e => {
+  let e = createAtomWithEquality(atom(e => {
     let t = e($$O6);
     let r = e(L);
     let n = {
@@ -94,7 +94,7 @@ let $$k4 = (() => {
     n.modules = o()(b, "node_id");
     return n;
   }, lQ));
-  let t = Pj(e, "SET_OPEN_HUB_FILE_PUBLISHED_LIVEGRAPH", {
+  let t = setupReduxAtomWithState(e, "SET_OPEN_HUB_FILE_PUBLISHED_LIVEGRAPH", {
     variableSets: {},
     variables: {},
     styles: {},
@@ -102,8 +102,8 @@ let $$k4 = (() => {
     stateGroups: {},
     modules: {}
   });
-  let r = FZ(t, D);
-  return S9(r, t.reducer);
+  let r = setupCustomAtom(t, D);
+  return attachReducerWrapper(r, t.reducer);
 })();
 export const I1 = $$x0;
 export const RG = $$R1;

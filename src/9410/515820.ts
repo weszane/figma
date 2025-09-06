@@ -4,7 +4,7 @@ import { o as _$$o } from "../905/821217";
 import { Y9, JU, X0, bL, UC } from "../figma_app/57171";
 import { getFeatureFlags } from "../905/601108";
 import l from "classnames";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { dh, nn, rE } from "../figma_app/186343";
 import { uF } from "../9410/398228";
 import { Pt } from "../figma_app/806412";
@@ -161,13 +161,13 @@ function W({
     onClick: v,
     trusted: !0,
     "data-testid": "page_tracker_upsell_link",
-    children: tx("fullscreen.pages_panel.see_plans_that_offer_more")
+    children: renderI18nText("fullscreen.pages_panel.see_plans_that_offer_more")
   });
   let T = jsx(Us, {
     onClick: v,
     trusted: !0,
     "data-testid": "page_tracker_upsell_link",
-    children: tx("fullscreen.pages_panel.get_unlimited_pages_and_more")
+    children: renderI18nText("fullscreen.pages_panel.get_unlimited_pages_and_more")
   });
   let w = s / LF[i.editorType ?? FFileType.DESIGN];
   let S = d()({
@@ -204,19 +204,19 @@ function W({
           children: (() => {
             let e = LF[i.editorType ?? FFileType.DESIGN] - s;
             return e >= 2 ? jsxs(Fragment, {
-              children: [tx("fullscreen.pages_panel.n_free_pages_left", {
+              children: [renderI18nText("fullscreen.pages_panel.n_free_pages_left", {
                 numPagesRemaining: e
               }), jsx("br", {}), E]
             }) : 1 === e ? jsxs(Fragment, {
-              children: [tx("fullscreen.pages_panel.n_free_pages_left", {
+              children: [renderI18nText("fullscreen.pages_panel.n_free_pages_left", {
                 numPagesRemaining: e
               }), jsx("br", {}), T]
             }) : 0 === e ? jsxs(Fragment, {
-              children: [tx("fullscreen.pages_panel.all_n_free_pages_used", {
+              children: [renderI18nText("fullscreen.pages_panel.all_n_free_pages_used", {
                 maxFreePages: LF[i.editorType ?? FFileType.DESIGN]
               }), jsx("br", {}), T]
             }) : jsxs(Fragment, {
-              children: [tx("fullscreen.pages_panel.all_free_pages_used"), jsx("br", {}), T]
+              children: [renderI18nText("fullscreen.pages_panel.all_free_pages_used"), jsx("br", {}), T]
             });
           })()
         })]
@@ -340,8 +340,8 @@ export function $$et0({
           onClickNewPage: () => k(null),
           onPageContextMenu: E,
           recordingKey: w,
-          title: _$$t("fullscreen.pages_panel.pages"),
-          tooltipText: _$$t("fullscreen.pages_panel.add_new_page")
+          title: getI18nString("fullscreen.pages_panel.pages"),
+          tooltipText: getI18nString("fullscreen.pages_panel.add_new_page")
         }), jsx(UC, {
           children: jsx(Z, {
             extraControls: f,
@@ -377,8 +377,8 @@ export function $$et0({
         onPageContextMenu: E,
         onTogglePages: l,
         recordingKey: w,
-        title: _$$t("fullscreen.pages_panel.pages"),
-        tooltipText: _$$t("fullscreen.pages_panel.add_new_page")
+        title: getI18nString("fullscreen.pages_panel.pages"),
+        tooltipText: getI18nString("fullscreen.pages_panel.add_new_page")
       }), i && jsx(Z, {
         extraControls: f,
         filterState: g,

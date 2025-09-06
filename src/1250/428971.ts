@@ -1,9 +1,9 @@
 import { jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
 import { throwTypeError } from "../figma_app/465776";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { Vc } from "../figma_app/211694";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { c as _$$c } from "../905/370443";
 import { e as _$$e } from "../905/621515";
 import { A } from "../905/956262";
@@ -31,11 +31,11 @@ function v(e) {
   switch (step) {
     case "ManualStep1":
       return jsx(rq, {
-        description: tx("dev_handoff.component_browser_onboarding_callout.manual_step_1_description"),
+        description: renderI18nText("dev_handoff.component_browser_onboarding_callout.manual_step_1_description"),
         isShowing: isOverlayShowing,
         onClose: complete,
         primaryCta: {
-          label: tx("general.next"),
+          label: renderI18nText("general.next"),
           type: "button",
           onClick: next,
           ctaTrackingDescriptor: _$$c.NEXT
@@ -49,11 +49,11 @@ function v(e) {
       });
     case "ManualStep2":
       return jsx(rq, {
-        description: tx("dev_handoff.component_browser_onboarding_callout.manual_step_2_description"),
+        description: renderI18nText("dev_handoff.component_browser_onboarding_callout.manual_step_2_description"),
         isShowing: isOverlayShowing,
         onClose: complete,
         primaryCta: {
-          label: tx("general.next"),
+          label: renderI18nText("general.next"),
           type: "button",
           onClick: next,
           ctaTrackingDescriptor: _$$c.NEXT
@@ -63,16 +63,16 @@ function v(e) {
           totalNumSteps: 3
         },
         targetKey: $$b1.Step2,
-        title: tx("dev_handoff.component_browser_onboarding_callout.manual_step_2_title"),
+        title: renderI18nText("dev_handoff.component_browser_onboarding_callout.manual_step_2_title"),
         trackingContextName: "dev_mode_component_browser_step_2 - identify the component"
       });
     case "ManualStep3":
       return jsx(rq, {
-        description: tx("dev_handoff.component_browser_onboarding_callout.manual_step_3_description"),
+        description: renderI18nText("dev_handoff.component_browser_onboarding_callout.manual_step_3_description"),
         isShowing: isOverlayShowing,
         onClose: complete,
         primaryCta: {
-          label: tx("general.got_it"),
+          label: renderI18nText("general.got_it"),
           type: "button",
           onClick: next,
           ctaTrackingDescriptor: _$$c.NEXT
@@ -82,7 +82,7 @@ function v(e) {
           totalNumSteps: 3
         },
         targetKey: $$b1.Step3,
-        title: tx("dev_handoff.component_browser_onboarding_callout.manual_step_3_title"),
+        title: renderI18nText("dev_handoff.component_browser_onboarding_callout.manual_step_3_title"),
         trackingContextName: "dev_mode_component_browser_step_3 - review or edit the mapping"
       });
     default:
@@ -93,7 +93,7 @@ export function $$w0({
   onOnboardingSequenceAction: e,
   canShowOnboarding: t
 }) {
-  let n = md(h);
+  let n = useAtomWithSubscription(h);
   let [i, l] = Vc("componentBrowserOnboardingSelection", null);
   let {
     show,

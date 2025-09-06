@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
 import s, { B } from "../905/714743";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { e as _$$e } from "../905/579755";
 import { oT } from "../905/478473";
 import { Ce } from "../905/156213";
@@ -55,7 +55,7 @@ export let $$$$_1 = Ju(function (e) {
       }), jsx("button", {
         className: genericSelectorModalCancel,
         onClick: i,
-        children: tx("community.try.pick_workspace.cancel")
+        children: renderI18nText("community.try.pick_workspace.cancel")
       })]
     })
   });

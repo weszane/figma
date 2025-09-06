@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useLayoutEffect, useMemo, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Ay } from "../905/612521";
 import { ZC } from "../figma_app/39751";
 import { Uz } from "../905/63728";
@@ -14,7 +14,7 @@ import { P as _$$P } from "../905/347284";
 import { B as _$$B } from "../905/714743";
 import { YQ } from "../905/502364";
 import { s as _$$s } from "../905/573154";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { Pf, H8 } from "../905/590952";
 import { $M, nb } from "../figma_app/770088";
 import { sf } from "../905/929976";
@@ -172,7 +172,7 @@ function eo() {
     priority: _$$N.DEFAULT_MODAL
   });
   let t = zl(B);
-  let n = useMemo(() => tx("rcs.feed_onboarding.zoom_pan.title"), []);
+  let n = useMemo(() => renderI18nText("rcs.feed_onboarding.zoom_pan.title"), []);
   let s = !!_$$f("has_seen_feed_post_details_zoom_pan_nudge");
   useEffect(() => {
     !s && t.completed && e.show();
@@ -189,13 +189,13 @@ function eo() {
       targetKey: en,
       dismissModal: e.dismissModal,
       title: n,
-      ctaText: _$$t("rcs.got_it"),
+      ctaText: getI18nString("rcs.got_it"),
       onClickPrimaryCta: e.onClickPrimaryCta,
       width: 268,
       modalLocation: LN.BOTTOM_LEFT,
       positionOffset: 16,
       children: jsx("p", {
-        children: tx("rcs.feed_onboarding.zoom_pan.content", {
+        children: renderI18nText("rcs.feed_onboarding.zoom_pan.content", {
           macKeyboardShortcut: a,
           windowsKeyboardShortcut: d
         })
@@ -213,7 +213,7 @@ let ef = "feed_post_detail_modal--detailModal--MMYKj";
 let e_ = "feed_post_detail_modal--headerSvg--9mFA0";
 function eC() {
   return jsx("div", {
-    children: _$$t("fig_feed.post_dne")
+    children: getI18nString("fig_feed.post_dne")
   });
 }
 export let $$eb0 = Ju(function (e) {
@@ -255,10 +255,10 @@ export let $$eb0 = Ju(function (e) {
   useEffect(() => {
     !e.inFileView && b.data?.feedPost?.title && hL(b.data.feedPost.title);
   }, [e.inFileView, b.data]);
-  useEffect(() => (sx("Team Feed Post Details View Visited", {
+  useEffect(() => (trackEventAnalytics("Team Feed Post Details View Visited", {
     postUuid: e.postUuid
   }), () => {
-    sx("Team Feed Post Closed", {
+    trackEventAnalytics("Team Feed Post Closed", {
       postUuid: e.postUuid
     });
   }), [e.postUuid]);
@@ -295,7 +295,7 @@ export let $$eb0 = Ju(function (e) {
         size: "any"
       });
     case "loaded":
-      t(_$$s.error(_$$t("fig_feed.post_dne")));
+      t(_$$s.error(getI18nString("fig_feed.post_dne")));
       t(Ce());
       return null;
     default:
@@ -368,7 +368,7 @@ function eT(e) {
     }), jsx("button", {
       onClick: m,
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": _$$t("fig_feed.copy_link_to_post"),
+      "data-tooltip": getI18nString("fig_feed.copy_link_to_post"),
       children: jsx(_$$B, {
         svg: _$$A3,
         className: e_
@@ -395,7 +395,7 @@ function eT(e) {
     className: "feed_post_detail_modal--headerContainer--oByFt",
     children: [jsx("div", {
       className: "feed_post_detail_modal--headerTitle--SJpLy",
-      children: tx("fig_feed.details")
+      children: renderI18nText("fig_feed.details")
     }), jsx("div", {
       className: "feed_post_detail_modal--headerRight--VNHRM",
       "data-testid": "feed-modal-open-file",
@@ -419,7 +419,7 @@ function eT(e) {
     }), fileLoaded && !e.inFileView && jsx("button", {
       className: "feed_post_detail_modal--fileInfo--IsxWn",
       onClick: e.inFileView ? void 0 : openFile,
-      children: tx("fig_feed.from_file", {
+      children: renderI18nText("fig_feed.from_file", {
         fileComponent: jsxs(Fragment, {
           children: [jsx("div", {
             className: "feed_post_detail_modal--detailsFileButtonIcon--wfORW",
@@ -536,7 +536,7 @@ function eI(e) {
         children: [jsx(_$$B, {
           svg: _$$A,
           className: "feed_post_detail_modal--arrowDown--XpvZj"
-        }), tx("fig_feed.num_comments", {
+        }), renderI18nText("fig_feed.num_comments", {
           numComments: m.length
         })]
       })]

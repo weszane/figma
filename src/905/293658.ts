@@ -1,4 +1,4 @@
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 export let $$r0 = new class {
   constructor(e) {
     this.type = e;
@@ -16,7 +16,7 @@ export let $$r0 = new class {
     });
     try {
       let e = performance.measure(`${i}`, `${i}.startSpan`, `${i}.endSpan`).duration;
-      az.trackDefinedEvent("file_browser.total_context_menu_load_time", {
+      analyticsEventManager.trackDefinedEvent("file_browser.total_context_menu_load_time", {
         durationMs: Math.round(e),
         type: this.type
       });

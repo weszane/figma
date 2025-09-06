@@ -1,11 +1,11 @@
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { getCookieValue } from "../905/657224";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { FJ } from "../905/508367";
 import { debugState } from "../905/407919";
 import { Ay } from "../905/612521";
-import { xi } from "../905/714362";
+import { logWarning } from "../905/714362";
 import { XHR } from "../905/910117";
 import { WY, Ts, OZ, fX, m9, dl, E as _$$E, Sr, Qg } from "../905/194276";
 import { _G } from "../905/164233";
@@ -16,7 +16,7 @@ import { sT } from "../905/694658";
 import { a as _$$a } from "../905/105502";
 import { p as _$$p } from "../905/300815";
 import { s as _$$s } from "../905/573154";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
 import { to } from "../905/156213";
 import { D as _$$D } from "../905/347702";
@@ -31,10 +31,10 @@ let L = _$$D(() => new Promise((e, t) => {
   document.cookie = C + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
   let r = FJ("/start_google_sso", "", "width=600,height=600");
   if (null === r) {
-    sx("GoogleSSOError", {
+    trackEventAnalytics("GoogleSSOError", {
       step: "window-not-found"
     });
-    t(Error(_$$t("auth.google-sso.unable-to-get-info")));
+    t(Error(getI18nString("auth.google-sso.unable-to-get-info")));
     return;
   }
   window.setTimeout(function n() {
@@ -42,12 +42,12 @@ let L = _$$D(() => new Promise((e, t) => {
     if (null !== i) {
       let r = JSON.parse(i);
       document.cookie = C + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-      r.token ? e(r) : (sx("GoogleSSOError", {
+      r.token ? e(r) : (trackEventAnalytics("GoogleSSOError", {
         step: "token-not-found"
-      }), t(Error(_$$t("auth.google-sso.unable-to-get-info"))));
-    } else r.closed ? (sx("GoogleSSOError", {
+      }), t(Error(getI18nString("auth.google-sso.unable-to-get-info"))));
+    } else r.closed ? (trackEventAnalytics("GoogleSSOError", {
       step: "cookie-not-found"
-    }), t(Error(_$$t("auth.google-sso.unable-to-get-info")))) : window.setTimeout(n, 250);
+    }), t(Error(getI18nString("auth.google-sso.unable-to-get-info")))) : window.setTimeout(n, 250);
   }, 250);
 }));
 export async function $$P7(e, t) {
@@ -121,13 +121,13 @@ export async function $$F3(e, {
       };
       return XHR.post(e, i);
     }(r, e, C?.totp_key);
-    t(_$$s.flash(_$$t("auth.sign-in-success", {
+    t(_$$s.flash(getI18nString("auth.sign-in-success", {
       email: data.meta.email
     })));
-    data.meta && data.meta.email_domain_type ? (sx("Sign Up (GTM)", {
+    data.meta && data.meta.email_domain_type ? (trackEventAnalytics("Sign Up (GTM)", {
       isWorkEmail: iE(data),
       sha256_email: await qV(data.meta.email)
-    }), await _$$p("sign_up_google_sso")) : (sx("google_sso", {
+    }), await _$$p("sign_up_google_sso")) : (trackEventAnalytics("google_sso", {
       eventSubtype: "google_sso_success_signin",
       user_id: data?.meta?.id,
       origin: a
@@ -143,7 +143,7 @@ export async function $$F3(e, {
     let n = J({
       data
     }, data?.message);
-    let s = _$$t("auth.google-sso.unable-to-auth");
+    let s = getI18nString("auth.google-sso.unable-to-auth");
     if (data && data.reason && "object" == typeof data.reason && "two_factor" === data.reason.missing) {
       MZ() && null != a && (t(Ts({
         origin: a,
@@ -153,7 +153,7 @@ export async function $$F3(e, {
         type: _$$a,
         data: {}
       })));
-      zl.set(_G, e);
+      atomStoreManager.set(_G, e);
       t(P8({
         resp: u
       }));
@@ -164,7 +164,7 @@ export async function $$F3(e, {
     let o = debugState?.getState().auth.redirectUrl || "";
     if (v && _$$g("google_one_tap_login_error", a, {
       error: n
-    }), n === _$$t("auth.error.account-not-found") || n === _$$t("auth.error.api.cannot_verify_captcha_token")) {
+    }), n === getI18nString("auth.error.account-not-found") || n === getI18nString("auth.error.api.cannot_verify_captcha_token")) {
       (function ({
         userInfo: e,
         origin: t,
@@ -180,7 +180,7 @@ export async function $$F3(e, {
         })), r(to({
           type: _$$a,
           data: {}
-        }))) : debugState?.getState()?.modalShown?.type !== _$$a && MZ() && xi("authenticate_google_user", "Skipped launching auth modal before arkose verification", {
+        }))) : debugState?.getState()?.modalShown?.type !== _$$a && MZ() && logWarning("authenticate_google_user", "Skipped launching auth modal before arkose verification", {
           auth_origin: t
         }, {
           reportAsSentryError: !0,
@@ -227,7 +227,7 @@ export async function $$F3(e, {
       return e;
     }
     t(_$$s.error(n || s, 15e3));
-    return Error(n || _$$t("auth.google-sso.unable-to-auth"));
+    return Error(n || getI18nString("auth.google-sso.unable-to-auth"));
   }
 }
 export function $$j4({

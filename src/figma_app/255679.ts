@@ -1,8 +1,8 @@
 import { useCallback } from "react";
 import { l as _$$l } from "../905/716947";
-import { md, zl, eU } from "../figma_app/27355";
+import { useAtomWithSubscription, atomStoreManager, atom } from "../figma_app/27355";
 import { oA } from "../905/663269";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { subscribeMultipleAndAwaitAll } from "../905/553831";
 import { w0 } from "../figma_app/594947";
 import { N as _$$N } from "../905/972754";
@@ -20,12 +20,12 @@ export function $$g2(e, t) {
   }
 }
 export function $$f6(e) {
-  let t = md(TG);
+  let t = useAtomWithSubscription(TG);
   return !!e && t.has(e);
 }
 export function $$E1() {
   return useCallback(e => {
-    let t = zl.get(TG);
+    let t = atomStoreManager.get(TG);
     return !!e && t.has(e);
   }, []);
 }
@@ -33,25 +33,25 @@ export function $$y9(e, t) {
   return t.has(e.library_key);
 }
 export function $$b15() {
-  let e = md(TG);
+  let e = useAtomWithSubscription(TG);
   return useCallback(t => $$y9(t, e), [e]);
 }
-let $$T7 = eU(null);
-let $$I13 = eU({
+let $$T7 = atom(null);
+let $$I13 = atom({
   value: _$$N(),
   updateSource: "page_load"
 });
 export function $$S5(e) {
-  return !!e && zl.get(qq).has(_$$l(e));
+  return !!e && atomStoreManager.get(qq).has(_$$l(e));
 }
 export function $$v11(e) {
-  let t = zl.get(TG);
+  let t = atomStoreManager.get(TG);
   return !!e && t.has(e);
 }
 export function $$A0(e) {
   if (!e) return !1;
-  let t = zl.get(QN);
-  let r = zl.get(r9);
+  let t = atomStoreManager.get(QN);
+  let r = atomStoreManager.get(r9);
   return t.includes(e) || r.includes(e);
 }
 let x = {
@@ -69,7 +69,7 @@ let O = e => M4.Query({
     let n = w(e._name);
     if (n) {
       let r = x[n];
-      (null === r || t.nonce.value > r) && (az.trackDefinedEvent("preset_libraries.static_update_fetch", {
+      (null === r || t.nonce.value > r) && (analyticsEventManager.trackDefinedEvent("preset_libraries.static_update_fetch", {
         viewName: w(e._name),
         batchSize: t.$$arguments.length,
         updateSource: t.nonce.updateSource

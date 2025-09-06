@@ -2,14 +2,14 @@ import { xv } from "../figma_app/701982";
 import { xv as _$$xv } from "../figma_app/701982";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { NC } from "../905/17179";
-import { sx } from "../905/449184";
-import { eD } from "../figma_app/876459";
+import { trackEventAnalytics } from "../905/449184";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { Ay } from "../905/612521";
 import { P } from "../905/724705";
-import { $D } from "../905/11";
-import { Lo } from "../905/714362";
+import { reportError } from "../905/11";
+import { logInfo } from "../905/714362";
 import { XHR } from "../905/910117";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { vv } from "../905/890368";
 import { F } from "../905/302958";
 import { q0 } from "../figma_app/976345";
@@ -26,7 +26,7 @@ let $$A1 = nF(async () => {
   try {
     await XHR.post("/api/user/migrate_personal_drafts");
   } catch (e) {
-    Lo("planSpaces", "Personal drafts not auto-migrated for user", e);
+    logInfo("planSpaces", "Personal drafts not auto-migrated for user", e);
   }
 });
 let $$x2 = nF(async e => {
@@ -47,12 +47,12 @@ let $$x2 = nF(async e => {
       return;
     }
   } catch (e) {
-    $D(_$$e.SCENEGRAPH_AND_SYNC, Error("Failed to get autosave files for user"));
+    reportError(_$$e.SCENEGRAPH_AND_SYNC, Error("Failed to get autosave files for user"));
   }
   e.dispatch(N());
 });
 let N = nF(e => {
-  if (eD) {
+  if (desktopAPIInstance) {
     Ay.redirect("/logout");
     return;
   }
@@ -63,7 +63,7 @@ let N = nF(e => {
     new P().sendToAllTabs(_$$y, J);
     Ay.redirect(`${t ? "/community" : ""}/?fuid=`);
   }).catch(t => {
-    let r = t.data?.message || _$$t("file_browser.file_browser_actions.logout_error_without_email");
+    let r = t.data?.message || getI18nString("file_browser.file_browser_actions.logout_error_without_email");
     e.dispatch(F.enqueue({
       error: !0,
       message: r
@@ -86,17 +86,17 @@ let $$C5 = nF(async (e, t) => {
       }));
     } else e.dispatch(O(t));
   } catch (r) {
-    $D(_$$e.SCENEGRAPH_AND_SYNC, Error("Failed to get autosave files for user"));
+    reportError(_$$e.SCENEGRAPH_AND_SYNC, Error("Failed to get autosave files for user"));
     e.dispatch(O(t));
   }
 });
 let w = () => {
   try {
-    sx("autosave_modal_shown", {}, {
+    trackEventAnalytics("autosave_modal_shown", {}, {
       forwardToDatadog: !0,
       batchRequest: !0
     });
-  } catch (e) { }
+  } catch (e) {}
 };
 let O = nF((e, t) => {
   H.logoutOneUser(t.user.id).then(r => {
@@ -105,12 +105,12 @@ let O = nF((e, t) => {
     r.data?.meta?.users?.length === 0 && (Pg(), U2.clear());
     let n = r.data?.meta?.redirect_url;
     n ? Ay.redirect(n) : e.dispatch(F.enqueue({
-      message: _$$t("file_browser.file_browser_actions.successfully_logged_out", {
+      message: getI18nString("file_browser.file_browser_actions.successfully_logged_out", {
         emailAddress: t.user.email
       })
     }));
   }).catch(r => {
-    let n = r.data?.message || _$$t("file_browser.file_browser_actions.logout_error_with_email", {
+    let n = r.data?.message || getI18nString("file_browser.file_browser_actions.logout_error_with_email", {
       emailAddress: t.user.email
     });
     e.dispatch(F.enqueue({
@@ -129,4 +129,4 @@ export const S5 = $$x2;
 export const WJ = $$L3;
 export const hz = $$R4;
 export const ql = $$C5;
-export const yJ = $$D6; 
+export const yJ = $$D6;

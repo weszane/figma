@@ -2,13 +2,13 @@ import { useRef, useCallback, useEffect, useState } from "react";
 import { useDispatch } from "../vendor/514228";
 import { debug } from "../figma_app/465776";
 import { glU, Ez5 } from "../figma_app/763686";
-import { eU, md, fp, Xr, Ut } from "../figma_app/27355";
-import { az } from "../905/449184";
+import { atom, useAtomWithSubscription, useAtomValueAndSetter, Xr, Ut } from "../figma_app/27355";
+import { analyticsEventManager } from "../905/449184";
 import { h as _$$h } from "../905/207101";
 import { R as _$$R } from "../905/165069";
-import { Zt, B1 } from "../figma_app/925651";
-import { x1 } from "../905/714362";
-import { t as _$$t } from "../905/303541";
+import { getAppVisibilityState, subscribeToAppVisibility } from "../figma_app/925651";
+import { logError } from "../905/714362";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { zX } from "../905/576487";
 import { DM, $K } from "../figma_app/223206";
@@ -16,7 +16,7 @@ import { tS } from "../figma_app/516028";
 import { TA } from "../905/372672";
 import { R as _$$R2 } from "../figma_app/53049";
 import { EI } from "../figma_app/21029";
-let T = eU({
+let T = atom({
   status: "idle"
 });
 let I = {
@@ -37,19 +37,19 @@ let I = {
     status: "idle"
   })
 };
-eU(e => "idle" === e(T).status);
-let S = eU(e => "creating" === e(T).status);
-let v = eU(e => "waiting-for-attachments" === e(T).status);
-let $$A3 = eU(e => "completed" === e(T).status);
-eU(e => "error" === e(T).status);
-let $$x1 = eU(e => e(S) || e(v));
-let N = eU(null);
+atom(e => "idle" === e(T).status);
+let S = atom(e => "creating" === e(T).status);
+let v = atom(e => "waiting-for-attachments" === e(T).status);
+let $$A3 = atom(e => "completed" === e(T).status);
+atom(e => "error" === e(T).status);
+let $$x1 = atom(e => e(S) || e(v));
+let N = atom(null);
 export function $$C2() {
-  let e = md($$A3);
-  let [t, r] = fp(N);
+  let e = useAtomWithSubscription($$A3);
+  let [t, r] = useAtomValueAndSetter(N);
   let i = useRef(!1);
   let a = useCallback((e, r) => {
-    t && az.trackDefinedEvent("activation.send_to_make_from_design.prompt_with_attachments", {
+    t && analyticsEventManager.trackDefinedEvent("activation.send_to_make_from_design.prompt_with_attachments", {
       ...t,
       status: e,
       ...(r && {
@@ -79,11 +79,11 @@ export function $$O0({
 }) {
   let a = useDispatch();
   let s = Xr(T);
-  let c = md(v);
-  let [u, p] = fp(N);
+  let c = useAtomWithSubscription(v);
+  let [u, p] = useAtomValueAndSetter(N);
   let g = useRef(!1);
   let f = useCallback((e, t) => {
-    u && az.trackDefinedEvent("activation.send_to_make_from_design.frame_pasted_as_attachment", {
+    u && analyticsEventManager.trackDefinedEvent("activation.send_to_make_from_design.frame_pasted_as_attachment", {
       ...u,
       status: e,
       ...(t && {
@@ -96,7 +96,7 @@ export function $$O0({
       matchType: "send-to-make-from-design-load"
     }));
     a(F.enqueue({
-      message: _$$t("figmake.send_to_make_from_design.visual_bell.complete"),
+      message: getI18nString("figmake.send_to_make_from_design.visual_bell.complete"),
       type: "send-to-make-from-design-complete",
       icon: zX.CHECK,
       timeoutOverride: 3e3
@@ -107,7 +107,7 @@ export function $$O0({
       matchType: "send-to-make-from-design-load"
     }));
     a(F.enqueue({
-      message: _$$t("figmake.send_to_make_from_design.error.something-went-wrong"),
+      message: getI18nString("figmake.send_to_make_from_design.error.something-went-wrong"),
       type: "send-to-make-from-design-failed",
       icon: zX.EXCLAMATION,
       error: !0,
@@ -150,20 +150,20 @@ export function $$R4() {
   let e = useDispatch();
   let t = EI();
   let r = tS();
-  let y = md(DM);
+  let y = useAtomWithSubscription(DM);
   let S = Xr($K);
   let v = Ez5?.figmakeState();
   let A = Xr(T);
   let x = Xr(N);
   let C = TA();
-  let [O, R] = useState(() => "visible" === Zt());
-  _$$h(() => B1(e => {
+  let [O, R] = useState(() => "visible" === getAppVisibilityState());
+  _$$h(() => subscribeToAppVisibility(e => {
     R("visible" === e);
   }));
   return _$$R(() => {
     debug(!!y, "makeCreationData is undefined. This should never happen");
     e(F.enqueue({
-      message: y.exceedsMakePasteThreshold ? _$$t("figmake.send_to_make_from_design.visual_bell.copying_complex_frames") : _$$t("figmake.send_to_make_from_design.visual_bell.copying_frames"),
+      message: y.exceedsMakePasteThreshold ? getI18nString("figmake.send_to_make_from_design.visual_bell.copying_complex_frames") : getI18nString("figmake.send_to_make_from_design.visual_bell.copying_frames"),
       type: "send-to-make-from-design-load",
       icon: zX.SPINNER,
       preventDismissal: !0,
@@ -186,20 +186,20 @@ export function $$R4() {
       fileKey: y.fileKey,
       selectedNodeId: y.selectedNodeId
     }).then(() => {
-      az.trackDefinedEvent("activation.send_to_make_from_design.file_bootstrapped_from_design", {
+      analyticsEventManager.trackDefinedEvent("activation.send_to_make_from_design.file_bootstrapped_from_design", {
         ...t,
         status: "success"
       });
       S(Ut);
       A(I.waitForAttachments());
     }).catch(r => {
-      x1("sendToMakeFromDesign", "copyNodeToMakeFromDesign failed with some error", {
+      logError("sendToMakeFromDesign", "copyNodeToMakeFromDesign failed with some error", {
         ...t,
         error: r?.message ?? JSON.stringify(r)
       }, {
         reportAsSentryError: !0
       });
-      az.trackDefinedEvent("activation.send_to_make_from_design.file_bootstrapped_from_design", {
+      analyticsEventManager.trackDefinedEvent("activation.send_to_make_from_design.file_bootstrapped_from_design", {
         ...t,
         status: "error",
         error: r?.message ?? JSON.stringify(r)
@@ -210,7 +210,7 @@ export function $$R4() {
         matchType: "send-to-make-from-design-load"
       }));
       e(F.enqueue({
-        message: _$$t("figmake.send_to_make_from_design.error.something-went-wrong"),
+        message: getI18nString("figmake.send_to_make_from_design.error.something-went-wrong"),
         type: "send-to-make-from-design-failed",
         icon: zX.EXCLAMATION,
         error: !0,

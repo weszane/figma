@@ -1,5 +1,5 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { Ay, nW } from "../figma_app/778880";
+import { BrowserInfo, isAndroidOrIphoneNotFigmaMobile } from "../figma_app/778880";
 import { s as _$$s } from "../cssbuilder/589278";
 import { UP, kc, s_, cs, gc, Tm, cJ } from "../figma_app/740025";
 import { useState, useRef, useEffect } from "react";
@@ -13,7 +13,7 @@ import x from "classnames";
 import { N as _$$N } from "../figma_app/469468";
 import { Ex, zE } from "../figma_app/919079";
 import { g as _$$g } from "../1556/359896";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { H8, Pf } from "../905/590952";
 import { E as _$$E2 } from "../905/984674";
 import { YW } from "../figma_app/350203";
@@ -25,7 +25,7 @@ import { q as _$$q } from "../1556/198651";
 import { j as _$$j } from "../905/834956";
 import { c2 } from "../905/382883";
 import E from "../vendor/116389";
-import { eD as _$$eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { am } from "../905/640017";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { CU, z6 } from "../905/963340";
@@ -40,7 +40,7 @@ import { J as _$$J2 } from "../1556/905117";
 import { x as _$$x2 } from "../905/149501";
 import { getFeatureFlags } from "../905/601108";
 import { Ay as _$$Ay2 } from "../905/612521";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { _l, rq } from "../figma_app/976345";
 import { e as _$$e2 } from "../905/579755";
 import { sf, j7, oB } from "../905/929976";
@@ -71,7 +71,7 @@ import { S as _$$S } from "../1556/805548";
 import { s as _$$s3 } from "../905/539471";
 import { T$ as _$$T$, B$, SO } from "../1556/114224";
 import { d8i } from "../figma_app/27776";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { X9 } from "../figma_app/236327";
 import { J as _$$J3 } from "../1577/181415";
 import { dG } from "../figma_app/753501";
@@ -117,14 +117,14 @@ let ed = Ju(function () {
     onClose: t,
     minWidth: 400,
     maxWidth: 400,
-    title: _$$t("multi-account.max_accounts_title"),
+    title: getI18nString("multi-account.max_accounts_title"),
     children: jsxs("div", {
       className: kL,
-      children: [tx("multi-account.max_accounts_body"), jsx("div", {
+      children: [renderI18nText("multi-account.max_accounts_body"), jsx("div", {
         className: v0,
         children: jsx($$, {
           onClick: t,
-          children: tx("multi-account.max_accounts_submit")
+          children: renderI18nText("multi-account.max_accounts_submit")
         })
       })]
     })
@@ -207,13 +207,13 @@ function eT({
   let f = d ? p : t.email;
   let [g, _] = useState(null);
   let w = g?.subText ?? f;
-  let y = h ? _$$t("account_switcher.view_community_profile") : _$$t("account_switcher.view_profile");
+  let y = h ? getI18nString("account_switcher.view_community_profile") : getI18nString("account_switcher.view_profile");
   let k = e => _({
     type: "view-profile",
     subText: y,
     showOutline: e
   });
-  let C = _$$t("account_switcher.change_photo");
+  let C = getI18nString("account_switcher.change_photo");
   let N = e => _({
     type: "change-photo",
     subText: C,
@@ -467,7 +467,7 @@ let eH = (e, t) => e.map(e => {
   };
 });
 let eq = (e, t) => {
-  let n = _$$t("navbar.profile_switcher.create_a_community_profile");
+  let n = getI18nString("navbar.profile_switcher.create_a_community_profile");
   let l = () => {
     t(_$$to({
       type: G$,
@@ -552,7 +552,7 @@ function eX() {
     let h = S()(Object.values(d).map(e => e.community_profile_id && a[e.community_profile_id]));
     let m = S()(Object.values(u).map(e => e.community_profile_id && a[e.community_profile_id]));
     let x = UP();
-    let p = !_$$eD && (Ay.mac || Ay.windows);
+    let p = !desktopAPIInstance && (BrowserInfo.mac || BrowserInfo.windows);
     return [{
       key: "profile-settings",
       items: S()([{
@@ -565,17 +565,17 @@ function eX() {
               onClick: () => console.warn("upload photo"),
               children: [jsx(Q$, {
                 children: jsx(_$$A2, {})
-              }), _$$t("account_switcher.upload_photo")]
+              }), getI18nString("account_switcher.upload_photo")]
             }), jsxs(q7, {
               onClick: () => console.warn("customize figpal"),
               children: [jsx(Q$, {
                 children: jsx(_$$J2, {})
-              }), _$$t("account_switcher.customize_photo")]
+              }), getI18nString("account_switcher.customize_photo")]
             }), jsxs(q7, {
               onClick: () => console.warn("reset to default"),
               children: [jsx(Q$, {
                 children: jsx(_$$x2, {})
-              }), _$$t("account_switcher.reset_to_default_photo")]
+              }), getI18nString("account_switcher.reset_to_default_photo")]
             })]
           })]
         }, "edit-profile") : jsx(eT, {
@@ -585,7 +585,7 @@ function eX() {
         legacyItems: [{
           className: "account_switcher_items--profileClassOverride--7JiNH",
           disabled: !0,
-          displayText: _$$t("navbar.settings_dropdown.profile_label"),
+          displayText: getI18nString("navbar.settings_dropdown.profile_label"),
           render: () => jsx(eT, {
             user: n,
             dispatch: e,
@@ -593,7 +593,7 @@ function eX() {
           })
         }]
       }, function (e, t) {
-        let n = _$$t("navbar.settings_dropdown.theme");
+        let n = getI18nString("navbar.settings_dropdown.theme");
         let l = "theme";
         return {
           element: jsxs(g8, {
@@ -631,7 +631,7 @@ function eX() {
           })]
         };
       }(o, e), function (e) {
-        let t = _$$t("navbar.settings_dropdown.settings");
+        let t = getI18nString("navbar.settings_dropdown.settings");
         let n = "adjust";
         let l = "settings-nav-bar-item";
         let o = () => {
@@ -658,10 +658,10 @@ function eX() {
           })]
         };
       }(e), p && function () {
-        let e = _$$t("navbar.settings_dropdown.desktop_app_cta");
+        let e = getI18nString("navbar.settings_dropdown.desktop_app_cta");
         let t = "download";
         let n = () => {
-          _$$Ay2.redirect(`/download/desktop/${Ay.mac ? "mac" : "win"}`, "_blank");
+          _$$Ay2.redirect(`/download/desktop/${BrowserInfo.mac ? "mac" : "win"}`, "_blank");
         };
         return {
           element: jsxs(q7, {
@@ -680,7 +680,7 @@ function eX() {
     }, function (e, t, n, l, o) {
       let s = eH(S()([t, ...n, ...l]), o);
       if (t || s.push(eq(e, o)), getFeatureFlags().cmty_profile_selection_cleanup && 1 === s.length) {
-        let e = t ? _$$t("navbar.profile_switcher.your_community_profile") : null;
+        let e = t ? getI18nString("navbar.profile_switcher.your_community_profile") : null;
         return {
           key: "community-profiles",
           title: e,
@@ -694,7 +694,7 @@ function eX() {
           }]
         };
       }
-      let a = _$$t("navbar.profile_switcher.community");
+      let a = getI18nString("navbar.profile_switcher.community");
       let r = "community";
       return {
         key: "community-profiles",
@@ -745,7 +745,7 @@ function eX() {
           return n ? eW(n, !1, () => o(e)) : null;
         }));
         if (!n && 0 === s.length) return null;
-        let a = _$$t("navbar.profile_switcher.switch_account");
+        let a = getI18nString("navbar.profile_switcher.switch_account");
         let r = getFeatureFlags().cmty_profile_selection_cleanup;
         let d = eW(e, !0, () => o(e.id));
         return {
@@ -766,7 +766,7 @@ function eX() {
           } : null, ...d.legacyItems, ...s.flatMap(e => e.legacyItems)])
         };
       }(n, t, x, e), function (e, t, n) {
-        let l = _$$t("navbar.profile_switcher.add_account");
+        let l = getI18nString("navbar.profile_switcher.add_account");
         let o = "plus";
         let s = nT;
         let a = () => {
@@ -789,11 +789,11 @@ function eX() {
             callback: a
           })]
         };
-      }(t.orderedIds.length, !!_$$eD, e)])
+      }(t.orderedIds.length, !!desktopAPIInstance, e)])
     }, {
       key: "logout",
       items: [function (e, t, n) {
-        let l = _$$t("navbar.navbar.logout_button_label");
+        let l = getI18nString("navbar.navbar.logout_button_label");
         let o = "signOut";
         let s = e.orderedIds;
         let a = e => {
@@ -819,7 +819,7 @@ function eX() {
             })]
           };
         }
-        let r = _$$t("navbar.profile_switcher.logout_all_accounts");
+        let r = getI18nString("navbar.profile_switcher.logout_all_accounts");
         let d = () => {
           t(S5());
         };
@@ -854,7 +854,7 @@ function eX() {
                 optionHeight: 24,
                 className: eB,
                 callback: () => a(n)
-              }] : ($D(_$$e.WAYFINDING, Error("authedUsers.byId[userId] not defined")), []);
+              }] : (reportError(_$$e.WAYFINDING, Error("authedUsers.byId[userId] not defined")), []);
             }), _$$w, {
               displayText: r,
               optionHeight: 24,
@@ -873,7 +873,7 @@ function eX() {
   let u = s_();
   let h = _$$N(`(max-width: ${YW}px)`);
   let m = _$$N(`(max-width: ${d8i})`);
-  let x = _$$t("navbar.settings_dropdown.button_label");
+  let x = getI18nString("navbar.settings_dropdown.button_label");
   let _ = jsxs("div", {
     className: "account_switcher--dropdownButtonContent--GPGDx",
     "data-testid": "ProfileButton",
@@ -892,7 +892,7 @@ function eX() {
     }), d && cs(a) && jsx(Ex, {
       className: p()("account_switcher--adminBadge--ys5HM", _$$s.mr0.$),
       color: zE.TERTIARY,
-      text: _$$t("navbar.community.admin_label")
+      text: getI18nString("navbar.community.admin_label")
     })]
   });
   return _$$q() ? jsx(eK, {
@@ -1118,12 +1118,12 @@ export function $$th1() {
   let p = Pc();
   let f = useSelector(e => e.userNotifications);
   let g = "Web";
-  if (_$$eD ? g = "Desktop" : u && (g = "Web Editor"), n) e = !!h && !!f.communityProfileBellStates[h.id];else if (d) {
+  if (desktopAPIInstance ? g = "Desktop" : u && (g = "Web Editor"), n) e = !!h && !!f.communityProfileBellStates[h.id];else if (d) {
     let t = !d || d.key !== x?.fileKeyWithoutBadge;
     e = x.isHigh && t;
   } else e = m?.[p.id]?.[_$$td] ?? !1;
   let _ = !l && e;
-  let v = c ? _$$t("navbar.navbar.notifications_disabled_tooltip") : _ ? _$$t("fullscreen_actions.notifications_new_notification_received") : _$$t("fullscreen_actions.notifications");
+  let v = c ? getI18nString("navbar.navbar.notifications_disabled_tooltip") : _ ? getI18nString("fullscreen_actions.notifications_new_notification_received") : getI18nString("fullscreen_actions.notifications");
   return jsxs("div", {
     children: [jsx(_$$J3, {
       "aria-label": v,
@@ -1143,7 +1143,7 @@ export function $$th1() {
           data: {
             targetRect: e
           }
-        })), sx("notification_dropdown_opened", {
+        })), trackEventAnalytics("notification_dropdown_opened", {
           source: g
         }));
       },
@@ -1172,7 +1172,7 @@ export function $$tm0({
   let t = UP();
   let n = kc();
   let a = t && !cJ(n);
-  let r = !e && !a && !nW;
+  let r = !e && !a && !isAndroidOrIphoneNotFigmaMobile;
   return jsxs("div", {
     className: _$$s.justifyBetween.flex.flexRow.itemsCenter.pt8.ml8.mr8.mb8.lh0.$,
     children: [jsx(eX, {}), r && jsx($$th1, {})]

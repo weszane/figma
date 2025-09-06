@@ -3,12 +3,12 @@ import { localStorageRef } from "../905/657224";
 import { my } from "../figma_app/976749";
 import { FPublisherType } from "../figma_app/191312";
 import { bD } from "../figma_app/45218";
-import { nT, yY } from "../figma_app/53721";
+import { FEditorType, isDesignOrIllustration } from "../figma_app/53721";
 import { $A, dB, vt } from "../905/862883";
 import { uF } from "../figma_app/300692";
 export function $$u5() {
   let e = my();
-  return e === nT.Whiteboard ? $A.FigJam : yY(e) ? $A.Design : e === nT.DevHandoff ? $A.Handoff : e === nT.Slides ? $A.Slides : e === nT.Cooper ? $A.Cooper : null;
+  return e === FEditorType.Whiteboard ? $A.FigJam : isDesignOrIllustration(e) ? $A.Design : e === FEditorType.DevHandoff ? $A.Handoff : e === FEditorType.Slides ? $A.Slides : e === FEditorType.Cooper ? $A.Cooper : null;
 }
 let $$p12 = "recent-widgets-figjam";
 let $$_2 = "recent-plugins-figjam";

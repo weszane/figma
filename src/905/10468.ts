@@ -5,7 +5,7 @@ import { xk } from "@stylexjs/stylex";
 import { dl, E as _$$E } from "../905/194276";
 import { qB } from "../905/862321";
 import { B } from "../905/714743";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { H8, Pf } from "../905/590952";
 import { A } from "../6828/865061";
 let m = {
@@ -88,7 +88,7 @@ export function $$g0(e) {
       }, t.id))
     }), jsx("div", {
       className: "x1dz1jew x1j5rzib x1h4j7j7 xdyg6lv x2b8uid x4z9k3i x1n0bwc9 x1o2sk6j",
-      children: e.footer ? e.footer : tx("auth.add-another-account-with-link", {
+      children: e.footer ? e.footer : renderI18nText("auth.add-another-account-with-link", {
         addAnotherLink: jsx("span", {
           className: "x1quhyk7 x1ypdohk",
           children: jsx(N, {
@@ -108,7 +108,7 @@ export function $$g0(e) {
             htmlAttributes: {
               "data-testid": "add-account-button"
             },
-            children: tx("auth.add-another-no-punctuation")
+            children: renderI18nText("auth.add-another-no-punctuation")
           })
         })
       })

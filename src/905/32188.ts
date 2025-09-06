@@ -1,13 +1,13 @@
 import { jsx } from "react/jsx-runtime";
 import { useState, useMemo, useCallback, useEffect } from "react";
 import { useDispatch } from "../vendor/514228";
-import { Im, mf } from "../figma_app/493477";
+import { isEmptyObject, sortObjectByKeys } from "../figma_app/493477";
 import { AlE, t8O } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Pt } from "../figma_app/806412";
 import { B as _$$B } from "../905/714743";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { _r } from "../figma_app/451499";
 import { Y5 } from "../figma_app/455680";
 import { E7, bU, gl, hS, oV } from "../905/216495";
@@ -22,8 +22,8 @@ import { Q7, EO, iF, Le, Gb, q_, hC } from "../905/71683";
 import { A as _$$A } from "../3850/217317";
 import { $$default } from "../svg/764361";
 let w = "Mixed";
-let $$C1 = () => _$$t("fullscreen.type_panel.variable_font_axes");
-let $$T2 = () => _$$t("fullscreen.properties_panel.apply_variable_ellipses");
+let $$C1 = () => getI18nString("fullscreen.type_panel.variable_font_axes");
+let $$T2 = () => getI18nString("fullscreen.properties_panel.apply_variable_ellipses");
 let k = l6;
 let R = c$;
 export function $$N4(e) {
@@ -100,7 +100,7 @@ export function $$N4(e) {
       l = t;
     }
     if (e.fontFamily && !gl(e.fontFamily) && !G) {
-      for (let e of (o = v, (t || !Im(o)) && a.push(jsx(sK, {}, B.length)), Object.keys(v))) a.push(i(e));
+      for (let e of (o = v, (t || !isEmptyObject(o)) && a.push(jsx(sK, {}, B.length)), Object.keys(v))) a.push(i(e));
       t && t !== w && !o[t] && a.push(i(t));
     }
     j && !e.hideVariableFontOptions && (a.push(jsx(sK, {}, B.length + 1)), a.push(i($$C1())));
@@ -135,7 +135,7 @@ export function $$N4(e) {
         });
       }
     }
-    return mf(t, ([e, t], [i, n]) => t.tags < n.tags ? -1 : t.tags > n.tags ? 1 : e.localeCompare(i, void 0, {
+    return sortObjectByKeys(t, ([e, t], [i, n]) => t.tags < n.tags ? -1 : t.tags > n.tags ? 1 : e.localeCompare(i, void 0, {
       numeric: !0
     }));
   }, [j, B]);
@@ -173,7 +173,7 @@ export function $$N4(e) {
     t && t !== w && !P[t] && !q && t.length > 25 && (q = !0);
   }
   return jsx(k, {
-    ariaLabel: _$$t("fullscreen.type_panel.font_style"),
+    ariaLabel: getI18nString("fullscreen.type_panel.font_style"),
     chevronClassName: EO,
     className: iF,
     dataOnboardingKey: Lh(D8.TEXT_PANEL, "font-style-button"),
@@ -208,7 +208,7 @@ export function $$N4(e) {
     targetDomNode: e.targetDomNode,
     willShowDropdown: () => {
       Y5.commit();
-      getFeatureFlags().ce_properties_panel_tracking && sx("editor-type-panel-dropdown-show", {
+      getFeatureFlags().ce_properties_panel_tracking && trackEventAnalytics("editor-type-panel-dropdown-show", {
         key: "fontStyle"
       });
       let {

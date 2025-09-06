@@ -3,10 +3,10 @@ import { useMemo, useCallback, useEffect } from "react";
 import { useSelector } from "../vendor/514228";
 import { Ez5, ywP, RYP, glU } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { oA } from "../905/663269";
 import { Rs } from "../figma_app/288654";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { V3 } from "../figma_app/976345";
 import { l as _$$l } from "../905/714607";
 import { I as _$$I } from "../905/531560";
@@ -52,7 +52,7 @@ import { fA, p9, F9 } from "../figma_app/803787";
 import { jB, Cp, Px, zS } from "../figma_app/722141";
 import { b as _$$b } from "../905/165519";
 import { Eg, _b } from "../figma_app/841351";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { o1 } from "../figma_app/10554";
 import { Yh, c1 } from "../figma_app/357047";
 import { e0 as _$$e } from "../905/696396";
@@ -125,7 +125,7 @@ export function $$eO1({
     enabled: !!eM?.key
   });
   let e4 = useSelector(fA);
-  let e8 = md(p9);
+  let e8 = useAtomWithSubscription(p9);
   SR();
   let e6 = Rs(iY3({
     branchFileKey: eM?.key || ""
@@ -178,7 +178,7 @@ export function $$eO1({
   let tv = xo();
   let tA = ty;
   let tx = !1;
-  eM && eP.editorType && (tx = eP.editorType === nT.Slides && oA(eM.org?.isSlidesDisabled) || eP.editorType === nT.Sites && !!eM.org?.isSitesDisabled || eP.editorType === nT.Cooper && !!eM.org?.isCooperDisabled);
+  eM && eP.editorType && (tx = eP.editorType === FEditorType.Slides && oA(eM.org?.isSlidesDisabled) || eP.editorType === FEditorType.Sites && !!eM.org?.isSitesDisabled || eP.editorType === FEditorType.Cooper && !!eM.org?.isCooperDisabled);
   let tN = eX && tI.requiresUpgrade && !eQ;
   let tC = Px(tI, tx);
   let tw = tv || tC || tN;
@@ -204,13 +204,13 @@ export function $$eO1({
   let tk = _$$tz();
   if (!eM || !ew) return null;
   let tM = eP.editorType;
-  let tF = tM !== nT.Whiteboard;
+  let tF = tM !== FEditorType.Whiteboard;
   let tj = !!(tF && Kz(eM));
   let tU = "loaded" === eK.status && gV(eK.data, eV);
   let tB = "loaded" === e6.status && (null === e6.data.file || e6.data.file && AM(e6.data.file) === pT.MERGED);
   let tG = tj && ("loaded" !== e6.status || tB);
   let tV = !eM.canExport;
-  let tH = tM === nT.Whiteboard && !!eM.org?.figjamDisabledAt || tM === nT.Slides && oA(eM.org?.isSlidesDisabled) || tM === nT.Sites && !!eM.org?.isSitesDisabled || tM === nT.Cooper && !!eM.org?.isCooperDisabled || isOrgUserExternallyRestrictedFromState(eD) || tV;
+  let tH = tM === FEditorType.Whiteboard && !!eM.org?.figjamDisabledAt || tM === FEditorType.Slides && oA(eM.org?.isSlidesDisabled) || tM === FEditorType.Sites && !!eM.org?.isSitesDisabled || tM === FEditorType.Cooper && !!eM.org?.isCooperDisabled || isOrgUserExternallyRestrictedFromState(eD) || tV;
   let tz = tO && eM.canManage;
   let tW = !!(tj && eM.trashedAt);
   let tK = tW && !tG;
@@ -229,14 +229,14 @@ export function $$eO1({
     let e = [];
     0 === t1.length && e.push({
       recordingKey: "favorite-custom",
-      displayText: _$$t("sidebar.starred"),
+      displayText: getI18nString("sidebar.starred"),
       isChecked: !1,
       callback: () => t6(!1)
     });
     t1.map(t => {
       e.push({
         recordingKey: "favorite-custom",
-        displayText: "" === t.name ? _$$t("sidebar.starred") : t.name,
+        displayText: "" === t.name ? getI18nString("sidebar.starred") : t.name,
         isChecked: !!t2 && t2.id === t.id,
         callback: () => t6(!!t2 && t2.id === t.id, t.id)
       });
@@ -252,13 +252,13 @@ export function $$eO1({
       workspaceHasMaxPins
     } = td.data;
     return canPinFileToWorkspace ? [{
-      displayText: _$$t("tile.dropdown.pin_to_workspace"),
+      displayText: getI18nString("tile.dropdown.pin_to_workspace"),
       callback: () => tc(eM.key, workspaceHasMaxPins)
     }] : canEditPin ? [{
-      displayText: _$$t("tile.dropdown.edit_workspace_pin"),
+      displayText: getI18nString("tile.dropdown.edit_workspace_pin"),
       callback: () => t7(existingFilePinId)
     }, {
-      displayText: _$$t("tile.dropdown.remove_workspace_pin"),
+      displayText: getI18nString("tile.dropdown.remove_workspace_pin"),
       callback: () => t9(existingFilePinId)
     }] : [];
   };
@@ -307,7 +307,7 @@ export function $$eO1({
       }
     }));
   };
-  let re = !eC && eP.editorType === nT.Design && eM.canEdit;
+  let re = !eC && eP.editorType === FEditorType.Design && eM.canEdit;
   let rt = jv(_$$t2(tn, _$$e.EDITOR_TOOLBAR, tt), {
     appModel: eL,
     selectedView: eP
@@ -320,11 +320,11 @@ export function $$eO1({
     if (eC || !ez) return [];
     let e = [];
     !tJ && (t$ && (!tU || tY) && e.push({
-      displayText: tY ? _$$t("favorited_resources.indicate_section_prefix") + ": " + (t2 && "" !== t2.name ? t2.name : _$$t("sidebar.starred")) : _$$t("favorited_resources.add_to_sidebar"),
+      displayText: tY ? getI18nString("favorited_resources.indicate_section_prefix") + ": " + (t2 && "" !== t2.name ? t2.name : getI18nString("sidebar.starred")) : getI18nString("favorited_resources.add_to_sidebar"),
       children: t5()
     }), tY && e.push({
       recordingKey: "favorite-custom-remove",
-      displayText: _$$t("favorited_resources.remove_from_sidebar"),
+      displayText: getI18nString("favorited_resources.remove_from_sidebar"),
       callback: () => t6(!0, t2?.id)
     }));
     e.push(...t3());
@@ -337,7 +337,7 @@ export function $$eO1({
   }, ...ri(ez && !eC && !tu && !eX, [{
     disabled: !Yh(eL, "enter-history-mode"),
     recordingKey: "toggleVersionHistory",
-    displayText: Ah(eL.activeCanvasEditModeType) ? _$$t("fullscreen.filename_view.version-history-hide") : _$$t("fullscreen.filename_view.version-history-show"),
+    displayText: Ah(eL.activeCanvasEditModeType) ? getI18nString("fullscreen.filename_view.version-history-hide") : getI18nString("fullscreen.filename_view.version-history-show"),
     callback: () => {
       z(oB());
       Ah(eL.activeCanvasEditModeType) ? z(Eg()) : z(_b({
@@ -361,25 +361,25 @@ export function $$eO1({
     fileNeedsMovingBeforePublish: tl,
     isPublished: !!ta,
     source: "filename-context-menu"
-  })]), ...ri(ez && !eC && !(tF && tj) && tM !== nT.Whiteboard && !eJ && !eY && !eX && (!e$ || eq) && tf, [{
+  })]), ...ri(ez && !eC && !(tF && tj) && tM !== FEditorType.Whiteboard && !eJ && !eY && !eX && (!e$ || eq) && tf, [{
     recordingKey: "libraryActions",
-    displayText: _$$t("fullscreen.filename_view.library_actions"),
+    displayText: getI18nString("fullscreen.filename_view.library_actions"),
     children: [{
       disabled: "disabled" === tp,
       recordingKey: "publishVersion",
-      displayText: _$$t("fullscreen.filename_view.publish-styles-and-components"),
+      displayText: getI18nString("fullscreen.filename_view.publish-styles-and-components"),
       callback: () => {
         "show_upsell_modal" === tp ? t8() : "publish" === tp && t4();
       }
     }, ...ri(e0, [{
       recordingKey: "codeConnect",
-      displayText: _$$t("dev_handoff.component_browser.menu_item"),
+      displayText: getI18nString("dev_handoff.component_browser.menu_item"),
       callback: () => {
         e1();
       }
     }]), ...ri(!!tr, [{
       recordingKey: "viewFileAnalytics",
-      displayText: _$$t("fullscreen.filename_view.file_analytics"),
+      displayText: getI18nString("fullscreen.filename_view.file_analytics"),
       callback: () => {
         z(_$$to2({
           type: _$$e3,
@@ -393,7 +393,7 @@ export function $$eO1({
   }]), ...ri(tF && !eY && !eJ && !e$ && !tu && !eX, [{
     disabled: !tO,
     recordingKey: "exportSelectedExportables",
-    displayText: _$$t("fullscreen.filename_view.export"),
+    displayText: getI18nString("fullscreen.filename_view.export"),
     shortcut: eL.keyboardShortcuts && c1(eL.keyboardShortcuts, "export-selected-exportables"),
     callback: () => {
       Y5.triggerAction("export-selected-exportables", {
@@ -403,7 +403,7 @@ export function $$eO1({
   }]), ...ri(eZ && eM.canEdit, [{
     disabled: !tO,
     recordingKey: "copyToFigmaSlides",
-    displayText: _$$t("slides.general.copy_current_page_to_figma_slides"),
+    displayText: getI18nString("slides.general.copy_current_page_to_figma_slides"),
     callback: () => {
       Cu({
         name: "slides_file_dropdown_entrypoint"
@@ -419,25 +419,25 @@ export function $$eO1({
     separator: !0,
     displayText: ""
   }, ...ri(re, [{
-    displayText: _$$t("fullscreen.filename_view.color_management.file_color_profile"),
+    displayText: getI18nString("fullscreen.filename_view.color_management.file_color_profile"),
     children: function (e, t) {
       switch (e) {
         case ywP.LEGACY:
           return [{
-            displayText: _$$t("fullscreen.filename_view.color_management.menu_item_title.legacy_file", {
-              colorProfile: t === RYP.DISPLAY_P3 ? _$$t("fullscreen.properties_panel.export_settings_color_profile.p3") : _$$t("fullscreen.properties_panel.export_settings_color_profile.srgb")
+            displayText: getI18nString("fullscreen.filename_view.color_management.menu_item_title.legacy_file", {
+              colorProfile: t === RYP.DISPLAY_P3 ? getI18nString("fullscreen.properties_panel.export_settings_color_profile.p3") : getI18nString("fullscreen.properties_panel.export_settings_color_profile.srgb")
             }),
             isChecked: !0
           }, {
-            displayText: _$$t("fullscreen.filename_view.color_management.menu_item_title.legacy.assign", {
-              color_profile: _$$t("fullscreen.filename_view.color_management.color_profile_srgb")
+            displayText: getI18nString("fullscreen.filename_view.color_management.menu_item_title.legacy.assign", {
+              color_profile: getI18nString("fullscreen.filename_view.color_management.color_profile_srgb")
             }),
             callback: () => {
               glU.triggerAction("change-document-color-profile-to-srgb", {});
             }
           }, {
-            displayText: _$$t("fullscreen.filename_view.color_management.menu_item_title.legacy.assign", {
-              color_profile: _$$t("fullscreen.filename_view.color_management.color_profile_display_p3")
+            displayText: getI18nString("fullscreen.filename_view.color_management.menu_item_title.legacy.assign", {
+              color_profile: getI18nString("fullscreen.filename_view.color_management.color_profile_display_p3")
             }),
             callback: () => {
               glU.triggerAction("change-document-color-profile-to-display-p3", {});
@@ -445,11 +445,11 @@ export function $$eO1({
           }];
         case ywP.SRGB:
           return [{
-            displayText: _$$t("fullscreen.filename_view.color_management.color_profile_srgb"),
+            displayText: getI18nString("fullscreen.filename_view.color_management.color_profile_srgb"),
             isChecked: !0
           }, {
-            displayText: _$$t("fullscreen.filename_view.color_management.menu_item_title", {
-              color_profile: _$$t("fullscreen.filename_view.color_management.color_profile_display_p3")
+            displayText: getI18nString("fullscreen.filename_view.color_management.menu_item_title", {
+              color_profile: getI18nString("fullscreen.filename_view.color_management.color_profile_display_p3")
             }),
             callback: () => {
               glU.triggerAction("change-document-color-profile-to-display-p3", {});
@@ -457,11 +457,11 @@ export function $$eO1({
           }];
         case ywP.DISPLAY_P3:
           return [{
-            displayText: _$$t("fullscreen.filename_view.color_management.color_profile_display_p3"),
+            displayText: getI18nString("fullscreen.filename_view.color_management.color_profile_display_p3"),
             isChecked: !0
           }, {
-            displayText: _$$t("fullscreen.filename_view.color_management.menu_item_title", {
-              color_profile: _$$t("fullscreen.filename_view.color_management.color_profile_srgb")
+            displayText: getI18nString("fullscreen.filename_view.color_management.menu_item_title", {
+              color_profile: getI18nString("fullscreen.filename_view.color_management.color_profile_srgb")
             }),
             callback: () => {
               glU.triggerAction("change-document-color-profile-to-srgb", {});
@@ -480,7 +480,7 @@ export function $$eO1({
   }]), ...ri(ez && !tW, [{
     disabled: !tR,
     recordingKey: "rename",
-    displayText: tj ? _$$t("fullscreen.filename_view.rename-branch") : _$$t("fullscreen.filename_view.rename"),
+    displayText: tj ? getI18nString("fullscreen.filename_view.rename-branch") : getI18nString("fullscreen.filename_view.rename"),
     callback: () => {
       z(oB());
       z(vg());
@@ -499,7 +499,7 @@ export function $$eO1({
     }
   }]), ...ri(ez && !eC && !!tq, [{
     disabled: !1,
-    displayText: _$$t("fullscreen.filename_view.go_to_project"),
+    displayText: getI18nString("fullscreen.filename_view.go_to_project"),
     callback: () => {
       if (tq) {
         let e = cU(tq.id, tq.orgId ?? null, tq.teamId, eD, !!tq?.team?.canView, "FilenameViewDropdown._goToProject", eF);
@@ -514,12 +514,12 @@ export function $$eO1({
     rightJustifySideText: !0,
     recordingKey: "moveToProject",
     "data-onboarding-key": $$eN0,
-    displayText: _$$t("fullscreen.filename_view.move_file"),
+    displayText: getI18nString("fullscreen.filename_view.move_file"),
     callback: RG(z, eM, eB, tD())
   }]), ...ri(rn.length > 0, [...rn]), ...ri(ez && !eC && !tW && !tJ && tE, [{
     disabled: !tP,
     recordingKey: "delete",
-    displayText: tj ? _$$t("fullscreen.filename_view.archive-branch") : _$$t("fullscreen.filename_view.move_to_trash"),
+    displayText: tj ? getI18nString("fullscreen.filename_view.archive-branch") : getI18nString("fullscreen.filename_view.move_to_trash"),
     callback: tj ? () => {
       z(oB());
       eU && (z(VK({
@@ -550,7 +550,7 @@ export function $$eO1({
     }
   }]), ...ri(ez && !eC && tW, [{
     disabled: !tz,
-    displayText: _$$t("fullscreen.filename_view.delete-branch"),
+    displayText: getI18nString("fullscreen.filename_view.delete-branch"),
     callback: () => {
       z(oB());
       z(_$$to2({
@@ -571,7 +571,7 @@ export function $$eO1({
     displayText: ""
   }, {
     recordingKey: "resetFileThumbnail",
-    displayText: getFeatureFlags().dse_library_pg_thumbnails ? _$$t("fullscreen.filename_view.restore_default_file_thumbnail") : _$$t("fullscreen.filename_view.restore_default_thumbnail"),
+    displayText: getFeatureFlags().dse_library_pg_thumbnails ? getI18nString("fullscreen.filename_view.restore_default_file_thumbnail") : getI18nString("fullscreen.filename_view.restore_default_thumbnail"),
     callback: () => {
       z($m({
         file_key: eM.key,
@@ -587,7 +587,7 @@ export function $$eO1({
     },
     children: jsx(_$$j, {
       activatePathOnMount: eO,
-      allowCodegenOptions: eP.editorType === nT.Design,
+      allowCodegenOptions: eP.editorType === FEditorType.Design,
       dispatch: z,
       items: ra,
       lean: "right",

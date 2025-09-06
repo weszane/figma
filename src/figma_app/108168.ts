@@ -8,12 +8,12 @@ import { e as _$$e } from "../905/428849";
 import { E as _$$E } from "../905/632989";
 import { V as _$$V } from "../905/291719";
 import { getFeatureFlags } from "../905/601108";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import h from "classnames";
 import { y6, nS, Pt } from "../figma_app/806412";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { wv } from "../figma_app/236327";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { A as _$$A } from "../905/482208";
 import { VU } from "../905/625959";
 import { LW, bs } from "../figma_app/553940";
@@ -37,23 +37,23 @@ function M(e) {
 let F = e => {
   switch (e) {
     case "move-flyout":
-      return _$$t("fullscreen.flyout.move_tools");
+      return getI18nString("fullscreen.flyout.move_tools");
     case "region-flyout":
-      return _$$t("fullscreen.flyout.region_tools");
+      return getI18nString("fullscreen.flyout.region_tools");
     case "pen-flyout":
-      return _$$t("fullscreen.flyout.drawing_tools");
+      return getI18nString("fullscreen.flyout.drawing_tools");
     case "shape-flyout":
-      return _$$t("fullscreen.flyout.shape_tools");
+      return getI18nString("fullscreen.flyout.shape_tools");
     case "boolean-flyout":
-      return _$$t("fullscreen.flyout.boolean_groups");
+      return getI18nString("fullscreen.flyout.boolean_groups");
     case "styles-flyout":
-      return _$$t("fullscreen.flyout.styles");
+      return getI18nString("fullscreen.flyout.styles");
     case "symbol-flyout":
-      return _$$t("fullscreen.flyout.components");
+      return getI18nString("fullscreen.flyout.components");
     case "prototype-view-flyout":
-      return _$$t("fullscreen.flyout.prototype_view");
+      return getI18nString("fullscreen.flyout.prototype_view");
     case "slides-presentation-flyout":
-      return _$$t("fullscreen.flyout.slides_presentation");
+      return getI18nString("fullscreen.flyout.slides_presentation");
     default:
       return "";
   }
@@ -113,7 +113,7 @@ export function $$B1(e) {
   }, U);
   let v = useSelector(e => !!I && Yh(e.mirror.appModel, I.action));
   if (!I) return null;
-  v || x1("FlyoutView", `Expected defaultItem with action ${I.action} to be enabled`);
+  v || logError("FlyoutView", `Expected defaultItem with action ${I.action} to be enabled`);
   let A = _?.type === M(item.name);
   let N = !0;
   if (A) {
@@ -284,7 +284,7 @@ function V(e) {
 }
 function H(e) {
   let t = useSelector(e => e.dropdownShown);
-  let r = md(oO);
+  let r = useAtomWithSubscription(oO);
   if (!t || !t.data?.targetRect) return jsx(Fragment, {});
   let i = e.item.flyoutShowItemIcons || void 0 === e.item.flyoutShowItemIcons;
   return jsx(Cf, {
@@ -404,7 +404,7 @@ export function $$Y0(e) {
   try {
     return _$$A(e);
   } catch (t) {
-    return _$$t(`fullscreen_actions.${e}`);
+    return getI18nString(`fullscreen_actions.${e}`);
   }
 }
 export const Jg = $$Y0;

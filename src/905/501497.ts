@@ -3,7 +3,7 @@ import { useDispatch } from "../vendor/514228";
 import { IK } from "../905/521428";
 import { T } from "../905/632137";
 import o from "classnames";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { Ce } from "../905/156213";
 import { GM } from "../figma_app/251115";
 import { JT } from "../figma_app/632248";
@@ -37,7 +37,7 @@ export function $$b0({
       onClick: e,
       recordingKey: t,
       ref: o,
-      children: E ? tx("slides.properties_panel.replace_media") : tx("fullscreen.properties_panel.image_settings.upload_new")
+      children: E ? renderI18nText("slides.properties_panel.replace_media") : renderI18nText("fullscreen.properties_panel.image_settings.upload_new")
     }), S && !b && jsx("div", {
       className: zr,
       children: jsx(IK, {
@@ -61,7 +61,7 @@ export function $$b0({
         },
         iconPrefix: jsx(T, {}),
         variant: "secondary",
-        children: tx("fullscreen.properties_panel.image_settings.generate_new")
+        children: renderI18nText("fullscreen.properties_panel.image_settings.generate_new")
       })
     })]
   });

@@ -3,7 +3,7 @@ import { memo, useState, useEffect, useRef } from "react";
 import { A as _$$A } from "../vendor/648136";
 import { Y1 } from "../vendor/891888";
 import { i as _$$i } from "../905/97346";
-import { eU, md, fp, Xr } from "../figma_app/27355";
+import { atom, useAtomWithSubscription, useAtomValueAndSetter, Xr } from "../figma_app/27355";
 import { dP } from "../figma_app/119475";
 import { s as _$$s } from "../cssbuilder/589278";
 import { M } from "../905/830372";
@@ -14,10 +14,10 @@ import { Z } from "../905/27174";
 import { HA } from "../figma_app/618665";
 import { c1 } from "../905/589717";
 import { Pd, io } from "../905/440046";
-let y = eU(new Set());
-let b = eU(null);
-let $$T1 = eU(null);
-let I = eU(e => {
+let y = atom(new Set());
+let b = atom(null);
+let $$T1 = atom(null);
+let I = atom(e => {
   let t = e(y);
   let r = e($$T1);
   if (!r) return [];
@@ -121,10 +121,10 @@ function v({
 export function $$A0({
   modalHistory: e
 }) {
-  let t = md(HA);
-  let r = md(e.currentAtom);
-  let [c, u] = fp(b);
-  let [p, _] = fp($$T1);
+  let t = useAtomWithSubscription(HA);
+  let r = useAtomWithSubscription(e.currentAtom);
+  let [c, u] = useAtomValueAndSetter(b);
+  let [p, _] = useAtomValueAndSetter($$T1);
   let m = Xr(y);
   let [S, A] = useState(200);
   let [, x] = _$$i({
@@ -139,7 +139,7 @@ export function $$A0({
       return r;
     });
   };
-  let C = md(I);
+  let C = useAtomWithSubscription(I);
   useEffect(() => {
     t && t.fetchMaterializedNodeProps().then(e => {
       _({

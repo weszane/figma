@@ -1,4 +1,4 @@
-import { S8 } from "../figma_app/876459";
+import { bellFeedAPIInstance } from "../figma_app/876459";
 import { vh, td } from "../figma_app/181241";
 import { XHR } from "../905/910117";
 export let $$s0 = new class {
@@ -18,7 +18,7 @@ export let $$s0 = new class {
     }) => t.put("/api/user_notifications", td.toAPIParameters({
       id: e.notification_id,
       currentView: e.currentView,
-      medium: S8 ? "desktop_bell" : "web",
+      medium: bellFeedAPIInstance ? "desktop_bell" : "web",
       appVersion: "1",
       clientType: "web",
       ["resolve" === e.notification_action ? "resolvedAt" : "rejectedAt"]: "true"
@@ -30,7 +30,7 @@ export let $$s0 = new class {
     }) => t.put("/api/user_notifications/read", {
       id: e.notification_id,
       currentView: e.currentView,
-      medium: S8 ? "desktop_bell" : "web",
+      medium: bellFeedAPIInstance ? "desktop_bell" : "web",
       appVersion: "1",
       clientType: "web"
     }));
@@ -41,7 +41,7 @@ export let $$s0 = new class {
     }) => t.put("/api/user_notifications/accept", {
       id: e.notification_id,
       currentView: e.currentView,
-      medium: S8 ? "desktop_bell" : "web",
+      medium: bellFeedAPIInstance ? "desktop_bell" : "web",
       appVersion: "1",
       clientType: "web"
     }));
@@ -52,7 +52,7 @@ export let $$s0 = new class {
     }) => t.put("/api/user_notifications/reject", {
       id: e.notification_id,
       currentView: e.currentView,
-      medium: S8 ? "desktop_bell" : "web",
+      medium: bellFeedAPIInstance ? "desktop_bell" : "web",
       appVersion: "1",
       clientType: "web"
     }));

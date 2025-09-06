@@ -1,4 +1,4 @@
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 let r = ["heartbeat"];
 export function $$a0() {
   let e = new Set();
@@ -7,7 +7,7 @@ export function $$a0() {
       if (e.has(t)) return;
       e.add(t);
     }
-    az.trackDefinedMetric("sites.preview_message_timeout", {
+    analyticsEventManager.trackDefinedMetric("sites.preview_message_timeout", {
       messageName: t
     });
   };

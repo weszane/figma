@@ -2,7 +2,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { buildUploadUrl } from "../figma_app/169182";
 import { F } from "../figma_app/954027";
 import { Pt } from "../figma_app/806412";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { lg } from "../figma_app/976749";
 import { p as _$$p } from "../905/42189";
 import { F5, oM } from "../905/192343";
@@ -24,15 +24,15 @@ export function $$m0(e) {
 export function $$f1(e) {
   switch (e) {
     case "Table":
-      return t("whiteboard.inserts.table_title");
+      return getI18nString("whiteboard.inserts.table_title");
     case "CodeBlock":
-      return t("whiteboard.inserts.code_block_title");
+      return getI18nString("whiteboard.inserts.code_block_title");
     case "MindMap":
-      return t("whiteboard.inserts.mind_map_title");
+      return getI18nString("whiteboard.inserts.mind_map_title");
     case "Text":
-      return t("whiteboard.inserts.text_title");
+      return getI18nString("whiteboard.inserts.text_title");
     case "Section":
-      return t("whiteboard.inserts.section_title");
+      return getI18nString("whiteboard.inserts.section_title");
     default:
       throwTypeError(e);
   }

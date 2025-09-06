@@ -1,4 +1,4 @@
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Y5 } from "../figma_app/455680";
 export let $$a0 = new class {
   constructor() {
@@ -18,10 +18,10 @@ export let $$a0 = new class {
       window.removeEventListener("visibilitychange", this.pauseOrResume);
     };
     this.trackSearchResultRetained = () => {
-      this.localSession && sx("search_result_retained", this.getEventPayload());
+      this.localSession && trackEventAnalytics("search_result_retained", this.getEventPayload());
     };
     this.trackBounce = () => {
-      this.localSession && sx("search_result_bounced", this.getEventPayload(), {
+      this.localSession && trackEventAnalytics("search_result_bounced", this.getEventPayload(), {
         forwardToDatadog: !0,
         sendAsBeacon: !0
       });

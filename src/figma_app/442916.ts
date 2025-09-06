@@ -10,7 +10,7 @@ import u from "classnames";
 import { debugState } from "../905/407919";
 import { Ay } from "../905/612521";
 import { buildUploadUrl } from "../figma_app/169182";
-import { Ay as _$$Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { Ts } from "../905/194276";
 import { qB } from "../905/862321";
 import { F0 } from "../905/178707";
@@ -18,7 +18,7 @@ import { k as _$$k } from "../905/585996";
 import { il } from "../figma_app/637027";
 import { Ak } from "../905/773401";
 import { lR, $z } from "../figma_app/617427";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { S as _$$S } from "../5132/668270";
 import { to, Ce } from "../905/156213";
 import { cq } from "../figma_app/107215";
@@ -42,7 +42,7 @@ function V({
   file: t
 }) {
   let r = useDispatch();
-  let n = useMemo(() => _$$Ay.isMeetDevice ? _$$t("figjam_try.google_meet_user_name") : localStorage.getItem(_$$H()) || "", []);
+  let n = useMemo(() => BrowserInfo.isMeetDevice ? getI18nString("figjam_try.google_meet_user_name") : localStorage.getItem(_$$H()) || "", []);
   let [s, o] = useState(n);
   let [l, d] = useState(!1);
   let c = nF();
@@ -75,7 +75,7 @@ function V({
       }
       p ? (r(cq({
         name: s
-      })), _ && t?.name === _$$t("fullscreen.fullscreen_view_selector.untitled") && r(_$$S({
+      })), _ && t?.name === getI18nString("fullscreen.fullscreen_view_selector.untitled") && r(_$$S({
         userName: s,
         file_key: t.key
       }))) : $$K2(u, e.email);
@@ -93,9 +93,9 @@ function V({
       e.preventDefault();
       e.stopPropagation();
       r(cq({
-        name: _$$t("figjam_try.google_meet_user_name")
+        name: getI18nString("figjam_try.google_meet_user_name")
       }));
-      _ && t?.name === _$$t("fullscreen.fullscreen_view_selector.untitled") && r(_$$S({
+      _ && t?.name === getI18nString("fullscreen.fullscreen_view_selector.untitled") && r(_$$S({
         userName: s,
         file_key: t.key
       }));
@@ -127,7 +127,7 @@ function H({
       className: U,
       children: jsx("h1", {
         className: "workshop_modals--figjamTryHeader--5gdQ2 text--fontPos20--Bcz97 text--_fontBase--QdLsd",
-        children: tx("figjam_try.onboarding_title")
+        children: renderI18nText("figjam_try.onboarding_title")
       })
     }), jsx(_$$k, {
       multiple: 1
@@ -135,54 +135,54 @@ function H({
       className: U,
       children: jsx("div", {
         className: "workshop_modals--figjamTrySubtitle--XIYgl text--fontPos13--xW8hS text--_fontBase--QdLsd",
-        children: tx("figjam_try.onboarding_subtext")
+        children: renderI18nText("figjam_try.onboarding_subtext")
       })
     }), jsx(_$$k, {
       multiple: 3
-    }), _$$Ay.isMeetDevice ? jsx(lR, {
+    }), BrowserInfo.isMeetDevice ? jsx(lR, {
       onClick: onClose,
       type: "submit",
-      children: tx("figjam_try.onboarding_submit")
+      children: renderI18nText("figjam_try.onboarding_submit")
     }) : jsxs("form", {
       onSubmit,
       children: [jsx(il, {
         autoFocus: !0,
         className: p()("workshop_modals--figjamTryInput--vCslR", isNameError && "workshop_modals--figjamTryInputError--wUBqP"),
-        placeholder: _$$t("figjam_try.name_input_placeholder"),
+        placeholder: getI18nString("figjam_try.name_input_placeholder"),
         onChange: onNameChanged,
         value: name
       }), isNameError && jsx("div", {
         className: "workshop_modals--figjamTryError--tCLy- text--fontPos14--OL9Hp text--_fontBase--QdLsd",
-        children: tx("figjam_try.onboarding_name_validation_error")
+        children: renderI18nText("figjam_try.onboarding_name_validation_error")
       }), jsx(_$$k, {
         multiple: 2
       }), jsx(lR, {
         type: "submit",
-        children: tx("figjam_try.onboarding_submit")
+        children: renderI18nText("figjam_try.onboarding_submit")
       })]
     }), jsx(_$$k, {
       multiple: 3
     }), jsx("div", {
       className: G,
-      children: tx("figjam_try.onboarding_disclaimer", {
+      children: renderI18nText("figjam_try.onboarding_disclaimer", {
         tos: jsx(_$$V, {
-          url: _$$Ay.isMeetDevice ? _$$A : Uw,
-          title: _$$t("figjam_try.onboarding_disclaimer_tos")
+          url: BrowserInfo.isMeetDevice ? _$$A : Uw,
+          title: getI18nString("figjam_try.onboarding_disclaimer_tos")
         }),
         privacy_policy: jsx(_$$V, {
-          url: _$$Ay.isMeetDevice ? bO : JD,
-          title: _$$t("figjam_try.onboarding_disclaimer_privacy_policy")
+          url: BrowserInfo.isMeetDevice ? bO : JD,
+          title: getI18nString("figjam_try.onboarding_disclaimer_privacy_policy")
         })
       })
     }), jsx(_$$k, {
       multiple: 1
-    }), d && !_$$Ay.isMeetDevice && jsx("div", {
+    }), d && !BrowserInfo.isMeetDevice && jsx("div", {
       className: G,
-      children: tx("figjam_try.already_have_an_account", {
+      children: renderI18nText("figjam_try.already_have_an_account", {
         log_in: jsx($z, {
           onClick: openLoginModal,
           variant: "link",
-          children: tx("figjam_try.already_have_an_account_log_in")
+          children: renderI18nText("figjam_try.already_have_an_account_log_in")
         })
       })
     })]
@@ -208,7 +208,7 @@ function z({
       className: U,
       children: [jsx("h1", {
         className: "workshop_modals--header--1TwZ- text--fontPos24Whyte--gYiFz text--_fontBaseWhyte--efAjI",
-        children: tx("whiteboard.open_sessions.onboarding_title")
+        children: renderI18nText("whiteboard.open_sessions.onboarding_title")
       }), jsx("h1", {
         className: "workshop_modals--headerFilename--Z60l0 workshop_modals--header--1TwZ- text--fontPos24Whyte--gYiFz text--_fontBaseWhyte--efAjI",
         children: t?.name
@@ -219,27 +219,27 @@ function z({
       className: U,
       children: jsx("div", {
         className: "workshop_modals--subtitle---dQsr text--fontPos16Whyte--OfwSP text--_fontBaseWhyte--efAjI",
-        children: tx("whiteboard.open_sessions.onboarding_subtext")
+        children: renderI18nText("whiteboard.open_sessions.onboarding_subtext")
       })
     }), jsx(_$$k, {
       multiple: 2
     }), jsxs("form", {
       onSubmit,
-      children: [l && !_$$Ay.isMeetDevice && jsxs(Fragment, {
+      children: [l && !BrowserInfo.isMeetDevice && jsxs(Fragment, {
         children: [jsx(F0, {
           autoFocus: !0,
-          placeholder: _$$t("whiteboard.open_sessions.onboarding_name_input_placeholder"),
+          placeholder: getI18nString("whiteboard.open_sessions.onboarding_name_input_placeholder"),
           onChange: onNameChanged,
           value: name
         }), isNameError && jsx("div", {
           className: "workshop_modals--brandError--wMV-m text--fontPos16Whyte--OfwSP text--_fontBaseWhyte--efAjI",
-          children: tx("whiteboard.open_sessions.onboarding_name_validation_error")
+          children: renderI18nText("whiteboard.open_sessions.onboarding_name_validation_error")
         }), jsx(_$$k, {
           multiple: 2
         })]
       }), jsx(Ak, {
         type: "submit",
-        children: l ? _$$t("whiteboard.open_sessions.onboarding_anonymous_submit") : _$$t("whiteboard.open_sessions.onboarding_viewer_submit", {
+        children: l ? getI18nString("whiteboard.open_sessions.onboarding_anonymous_submit") : getI18nString("whiteboard.open_sessions.onboarding_viewer_submit", {
           email: e.email
         })
       })]
@@ -250,27 +250,27 @@ function z({
         className: U,
         children: [jsx("div", {
           className: B,
-          children: tx("whiteboard.open_sessions.onboarding_disclaimer", {
-            button_text: l ? _$$t("whiteboard.open_sessions.onboarding_disclaimer_access_file") : _$$t("whiteboard.open_sessions.onboarding_disclaimer_continue"),
+          children: renderI18nText("whiteboard.open_sessions.onboarding_disclaimer", {
+            button_text: l ? getI18nString("whiteboard.open_sessions.onboarding_disclaimer_access_file") : getI18nString("whiteboard.open_sessions.onboarding_disclaimer_continue"),
             tos: jsx(_$$V, {
               url: Uw,
-              title: _$$t("whiteboard.open_sessions.onboarding_disclaimer_tos")
+              title: getI18nString("whiteboard.open_sessions.onboarding_disclaimer_tos")
             }),
             privacy_policy: jsx(_$$V, {
               url: JD,
-              title: _$$t("whiteboard.open_sessions.onboarding_disclaimer_privacy_policy")
+              title: getI18nString("whiteboard.open_sessions.onboarding_disclaimer_privacy_policy")
             })
           })
-        }), !_$$Ay.isMeetDevice && jsxs(Fragment, {
+        }), !BrowserInfo.isMeetDevice && jsxs(Fragment, {
           children: [jsx(_$$k, {
             multiple: 1
           }), jsx("div", {
             className: B,
-            children: tx("whiteboard.open_sessions.already_have_an_account", {
+            children: renderI18nText("whiteboard.open_sessions.already_have_an_account", {
               log_in: jsx($z, {
                 onClick: openLoginModal,
                 variant: "link",
-                children: tx("whiteboard.open_sessions.already_have_an_account_log_in")
+                children: renderI18nText("whiteboard.open_sessions.already_have_an_account_log_in")
               })
             })
           })]

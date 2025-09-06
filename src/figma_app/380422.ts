@@ -3,14 +3,14 @@ import { useEffect, useRef, useState } from "react";
 import { useSelector } from "../vendor/514228";
 import { W as _$$W } from "../905/933320";
 import { r as _$$r } from "../905/571838";
-import { md, zl } from "../figma_app/27355";
+import { useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import { k9 } from "../905/19536";
 import c from "../vendor/524488";
 import { wY } from "../figma_app/708845";
 import { Uz } from "../905/63728";
 import { z3 } from "../figma_app/119475";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { fi } from "../figma_app/913823";
 import { g5 } from "../figma_app/178752";
@@ -54,7 +54,7 @@ export function $$W0({
 }) {
   let {
     currentSearch
-  } = md(WP);
+  } = useAtomWithSubscription(WP);
   let G = useSelector(tB);
   let V = g5($A.Design).productComponents;
   let H = k9(() => V.map(e => e.library_key), [V]);
@@ -110,7 +110,7 @@ export function $$W0({
           children: [jsx(_$$N.ArtworkIcon, {
             children: jsx(_$$W, {})
           }), jsx(_$$N.Text, {
-            title: _$$t("assets_in_actions.assets_section.initial_state.title"),
+            title: getI18nString("assets_in_actions.assets_section.initial_state.title"),
             dataTestId: "assets-grid-initial-state"
           })]
         })
@@ -125,7 +125,7 @@ export function $$W0({
       openFileKey: G?.key ?? "",
       queryId: currentSearch ? currentSearch.queryId : "",
       searchQuery: Z,
-      searchSessionId: zl.get(dd) ?? "",
+      searchSessionId: atomStoreManager.get(dd) ?? "",
       sectionPosition: t
     }, e.node_id));
     return jsxs("div", {
@@ -156,8 +156,8 @@ export function $$W0({
           variant: "danger",
           children: jsx(_$$r, {})
         }), jsx(_$$N.Text, {
-          title: _$$t("assets_in_actions.assets_section.error.title"),
-          subtitle: _$$t("assets_in_actions.assets_section.error.description")
+          title: getI18nString("assets_in_actions.assets_section.error.title"),
+          subtitle: getI18nString("assets_in_actions.assets_section.error.description")
         })]
       })
     })]
@@ -173,7 +173,7 @@ export function $$W0({
       children: jsx("span", {
         className: _$$s.textBodyMedium.colorTextSecondary.$,
         "data-testid": "assets-grid-no-results",
-        children: tx("assets_in_actions.no_results_no_libraries.title")
+        children: renderI18nText("assets_in_actions.no_results_no_libraries.title")
       })
     })]
   });
@@ -188,7 +188,7 @@ export function $$W0({
       children: jsx("span", {
         className: _$$s.textBodyMedium.colorTextSecondary.$,
         "data-testid": "assets-grid-no-results",
-        children: tx("assets_in_actions.assets_section.no_results.title", {
+        children: renderI18nText("assets_in_actions.assets_section.no_results.title", {
           query: u()(Z, {
             length: 24
           })
@@ -205,7 +205,7 @@ export function $$W0({
     openFileKey: G?.key ?? "",
     queryId: currentSearch ? currentSearch.queryId : "",
     searchQuery: Z,
-    searchSessionId: zl.get(dd) ?? "",
+    searchSessionId: atomStoreManager.get(dd) ?? "",
     sectionPosition: t
   }, e.node_id));
   p && en.push(jsx(_$$x.Item, {

@@ -4,12 +4,12 @@ import { useDispatch } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { c2 } from "../905/382883";
 import l from "classnames";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { ks } from "../figma_app/637027";
 import { z as _$$z } from "../905/284530";
 import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Y } from "../905/830372";
 import { $ } from "../905/355181";
 import { E as _$$E } from "../905/984674";
@@ -222,7 +222,7 @@ function M(e) {
       onChange,
       placeholder
     }), o && jsx(D, {
-      text: t("community.publishing.data_security.incomplete_text")
+      text: getI18nString("community.publishing.data_security.incomplete_text")
     })]
   });
 }
@@ -235,7 +235,7 @@ function j(e) {
   let {
     prompt,
     options
-  } = t;
+  } = getI18nString;
   let o = L(question);
   return jsxs("div", {
     className: _$$s.flex.flexColumn.gap16.$,
@@ -277,7 +277,7 @@ function j(e) {
         }, `option-${t}`);
       })
     }), o && jsx(D, {
-      text: t("community.publishing.data_security.incomplete_single_select")
+      text: getI18nString("community.publishing.data_security.incomplete_single_select")
     })]
   });
 }
@@ -332,7 +332,7 @@ function U(e) {
         }, `option-${r}`);
       })
     }), o && jsx(D, {
-      text: t("community.publishing.data_security.incomplete_multi_select")
+      text: getI18nString("community.publishing.data_security.incomplete_multi_select")
     })]
   });
 }
@@ -381,8 +381,8 @@ function V(e) {
     securityForm,
     dispatch
   } = e;
-  let a = "plugin" === extensionType ? tx("community.publishing.security_form.plugin_description") : tx("community.publishing.security_form.widget_description");
-  let s = "plugin" === extensionType ? tx("community.publishing.security_form.plugin_sharing_description") : tx("community.publishing.security_form.widget_sharing_description");
+  let a = "plugin" === extensionType ? renderI18nText("community.publishing.security_form.plugin_description") : renderI18nText("community.publishing.security_form.widget_description");
+  let s = "plugin" === extensionType ? renderI18nText("community.publishing.security_form.plugin_sharing_description") : renderI18nText("community.publishing.security_form.widget_sharing_description");
   return jsxs("div", {
     className: _$$s.p16.flex.flexColumn.$,
     "data-testid": "extension-security-form",
@@ -391,7 +391,7 @@ function V(e) {
       children: jsx(_$$E, {
         fontSize: 14,
         fontWeight: "medium",
-        children: tx("community.publishing.security_form.header")
+        children: renderI18nText("community.publishing.security_form.header")
       })
     }), jsx("div", {
       className: _$$s.pb16.$,
@@ -402,7 +402,7 @@ function V(e) {
         href: "plugin" === extensionType ? "https://help.figma.com/hc/articles/360042293394" : "https://help.figma.com/hc/articles/4410337103639",
         target: "_blank",
         className: _$$s.colorTextBrand.cursorPointer.$,
-        children: tx("community.publishing.security_form.learn_more")
+        children: renderI18nText("community.publishing.security_form.learn_more")
       })]
     }), jsx("div", {
       className: _$$s.flex.flexColumn.gap32.$,
@@ -446,14 +446,14 @@ function G({
           },
           showModalsBeneath: !0
         }));
-        sx("Data Security Plugin Form", {
+        trackEventAnalytics("Data Security Plugin Form", {
           action: "Remove security details",
           extensionType,
           extensionId: p
         });
       },
       disabled: optedOutOfSecurityForm,
-      children: tx("community.publishing.security_form.opt_out_button")
+      children: renderI18nText("community.publishing.security_form.opt_out_button")
     }), jsxs(Y, {
       width: "fill-parent",
       horizontalAlignItems: "end",
@@ -461,19 +461,19 @@ function G({
         variant: "secondary",
         onClick: () => {
           e();
-          sx("Data Security Plugin Form", {
+          trackEventAnalytics("Data Security Plugin Form", {
             action: "Discard changes",
             extensionType,
             extensionId: p
           });
         },
         disabled: !m,
-        children: tx("community.publishing.security_form.discard_changes")
+        children: renderI18nText("community.publishing.security_form.discard_changes")
       }), jsx($, {
         variant: "primary",
         onClick: t,
         disabled: canShowErrors && numberOfErrors > 0,
-        children: tx("general.done")
+        children: renderI18nText("general.done")
       })]
     })]
   });
@@ -491,11 +491,11 @@ function z({
         children: [jsx("div", {
           children: jsx(_$$E, {
             fontWeight: "semi-bold",
-            children: tx("community.publishing.security_banner.approved.title")
+            children: renderI18nText("community.publishing.security_banner.approved.title")
           })
         }), jsx("div", {
           children: jsx(_$$E, {
-            children: tx("community.publishing.security_banner.approved.description")
+            children: renderI18nText("community.publishing.security_banner.approved.description")
           })
         })]
       });
@@ -507,11 +507,11 @@ function z({
         children: [jsx("div", {
           children: jsx(_$$E, {
             fontWeight: "semi-bold",
-            children: tx("community.publishing.security_banner.pending.title")
+            children: renderI18nText("community.publishing.security_banner.pending.title")
           })
         }), jsx("div", {
           children: jsx(_$$E, {
-            children: tx("community.publishing.security_banner.pending.description")
+            children: renderI18nText("community.publishing.security_banner.pending.description")
           })
         })]
       });
@@ -523,15 +523,15 @@ function z({
         children: [jsx("div", {
           children: jsx(_$$E, {
             fontWeight: "semi-bold",
-            children: tx("community.publishing.security_banner.rejected.title")
+            children: renderI18nText("community.publishing.security_banner.rejected.title")
           })
         }), jsx("div", {
           children: jsx(_$$E, {
-            children: tx("community.publishing.security_banner.rejected.description")
+            children: renderI18nText("community.publishing.security_banner.rejected.description")
           })
         }), jsx("div", {}), jsx("div", {
           children: jsx(_$$E, {
-            children: tx("community.publishing.security_banner.rejected.description.check_email")
+            children: renderI18nText("community.publishing.security_banner.rejected.description.check_email")
           })
         })]
       });

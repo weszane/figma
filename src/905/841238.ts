@@ -15,7 +15,7 @@ import { Point } from "../905/736624";
 import { Jn } from "../905/17223";
 import { TQ, Zl } from "../905/211621";
 import { L as _$$L } from "../905/408237";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { XE } from "../figma_app/91703";
 import { vq } from "../905/8732";
@@ -60,7 +60,7 @@ function W({
       children: [jsx(Y9, {
         children: jsx("div", {
           className: "x78zum5 x6s0dn4 x1qughib x1iyjqo2 x1s688f x1j6dyjg x163pfp",
-          children: tx("design_systems.component_properties.slot_create_modal.create_slot_title")
+          children: renderI18nText("design_systems.component_properties.slot_create_modal.create_slot_title")
         })
       }), jsx(nB, {
         padding: {
@@ -119,21 +119,21 @@ function K({
     autoComplete: "no",
     className: "x78zum5 xdt5ytf xh8yej3 x167g77z",
     children: [jsx(Y, {
-      label: _$$t("variables.create_modal.name_label"),
+      label: getI18nString("variables.create_modal.name_label"),
       children: jsx(_$$p, {
-        "aria-label": _$$t("design_systems.component_properties.name"),
+        "aria-label": getI18nString("design_systems.component_properties.name"),
         defaultValue: u.propName,
         autoFocus: !0,
         onChange: m
       })
     }), jsx(Y, {
-      label: _$$t("design_systems.component_properties.description"),
+      label: getI18nString("design_systems.component_properties.description"),
       children: jsx(_$$u, {
         autoFocus: !1,
         description: u.propDescription,
         namespace: "slot-component-prop-create-modal",
         onSave: g,
-        placeholder: _$$t("design_systems.component_properties.slot_create_modal.description_placeholder"),
+        placeholder: getI18nString("design_systems.component_properties.slot_create_modal.description_placeholder"),
         recordingKey: s
       })
     }), jsx(_$$D2, {
@@ -155,10 +155,10 @@ function K({
         disabled: !p,
         recordingKey: Pt(s, "createButton"),
         htmlAttributes: {
-          "data-tooltip": _$$t("design_systems.component_properties.slot_create_modal.invalid_property_name"),
+          "data-tooltip": getI18nString("design_systems.component_properties.slot_create_modal.invalid_property_name"),
           "data-tooltip-type": p ? void 0 : Ib.TEXT
         },
-        children: tx("design_systems.component_properties.slot_create_modal.create_component_property")
+        children: renderI18nText("design_systems.component_properties.slot_create_modal.create_component_property")
       })
     })]
   });
@@ -245,7 +245,7 @@ let $$X0 = Ju(function (e) {
   });
   let em = useCallback(e => {
     glU.wouldCreateCycleUnderParent(singleSelectedNode?.guid || "", e) ? (U(_$$F.enqueue({
-      message: _$$t("design_systems.component_properties.choose_default_instance_value_cycle")
+      message: getI18nString("design_systems.component_properties.choose_default_instance_value_cycle")
     })), ea("")) : (U(_$$F.clearAll()), ea(e));
   }, [U, singleSelectedNode?.guid]);
   let eh = bq(eo);
@@ -309,7 +309,7 @@ let $$X0 = Ju(function (e) {
       className: "create_component_prop_modal--modalTop--eHoJn",
       children: [jsx("p", {
         className: "create_component_prop_modal--heading--qr9K5",
-        children: tx("design_systems.component_properties.create_property")
+        children: renderI18nText("design_systems.component_properties.create_property")
       }), jsx(Jn, {
         onClick: eu
       })]
@@ -318,7 +318,7 @@ let $$X0 = Ju(function (e) {
         className: $,
         children: [jsx("p", {
           className: q,
-          children: tx("design_systems.component_properties.name")
+          children: renderI18nText("design_systems.component_properties.name")
         }), jsx(_$$L, {
           ref: inputRef,
           autoCorrect: "off",
@@ -339,7 +339,7 @@ let $$X0 = Ju(function (e) {
         children: [jsx("label", {
           className: q,
           htmlFor: propType === J0O.INSTANCE_SWAP ? _$$D : propType === J0O.VARIANT ? "create-component-prop-variant-input" : void 0,
-          children: tx("design_systems.component_properties.default_value")
+          children: renderI18nText("design_systems.component_properties.default_value")
         }), propType === J0O.INSTANCE_SWAP && jsx("div", {
           className: "create_component_prop_modal--selectInput--Oom9E",
           children: jsx(_$$x, {
@@ -347,7 +347,7 @@ let $$X0 = Ju(function (e) {
             pickerWidth: modalWidth,
             shouldPerformSwapOnClick: !1,
             instanceSwapNode: el,
-            title: _$$t("design_systems.component_properties.choose_instance"),
+            title: getI18nString("design_systems.component_properties.choose_instance"),
             preferredItems: es,
             sceneGraph: H,
             onSwapCallback: e => {
@@ -395,7 +395,7 @@ let $$X0 = Ju(function (e) {
             defaultValue: er
           }),
           type: "submit",
-          children: tx("design_systems.component_properties.create_property")
+          children: renderI18nText("design_systems.component_properties.create_property")
         })
       })]
     })]

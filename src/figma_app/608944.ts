@@ -1,14 +1,14 @@
 import { useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { eU, fp, zl } from "../figma_app/27355";
+import { atom, useAtomValueAndSetter, atomStoreManager } from "../figma_app/27355";
 import { ES } from "../905/156213";
 let $$o2 = "ComponentFlyoutModal";
 let $$l0 = "ComponentFlyoutModalContent";
-let d = eU(null);
+let d = atom(null);
 export function $$c1() {
   let e = useDispatch();
   let t = useSelector(e => e.modalShown);
-  let [r, l] = fp(d);
+  let [r, l] = useAtomValueAndSetter(d);
   let c = useCallback(e => {
     null === e && l(null);
     l(t => null === t ? null : {
@@ -32,7 +32,7 @@ export function $$c1() {
   };
 }
 export function $$u3(e) {
-  zl.set(d, null);
+  atomStoreManager.set(d, null);
   e(ES({
     type: $$o2
   }));

@@ -1,6 +1,6 @@
 import { throwTypeError } from "../figma_app/465776";
 import { Ez } from "../figma_app/766708";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { to } from "../905/156213";
 import { E8 } from "../figma_app/633080";
 export function $$l0(e) {
@@ -14,13 +14,13 @@ export function $$l0(e) {
 export function $$d3(e) {
   switch (e) {
     case E8.CHANGED:
-      return tx("design_systems.publishing_modal.modified");
+      return renderI18nText("design_systems.publishing_modal.modified");
     case E8.CURRENT:
-      return tx("design_systems.publishing_modal.no_changes");
+      return renderI18nText("design_systems.publishing_modal.no_changes");
     case E8.DELETED:
-      return tx("design_systems.publishing_modal.removed");
+      return renderI18nText("design_systems.publishing_modal.removed");
     case E8.NEW:
-      return tx("design_systems.publishing_modal.added");
+      return renderI18nText("design_systems.publishing_modal.added");
     case E8.NOT_STAGED:
       return "";
     default:

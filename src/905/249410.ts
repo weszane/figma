@@ -1,10 +1,10 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { PureComponent } from "react";
 import { useDispatch } from "../vendor/514228";
-import { eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { Jn } from "../905/17223";
 import { tM, rb, Us, vd } from "../figma_app/637027";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { sf } from "../905/929976";
 import { Ce, Lo } from "../905/156213";
 import { WX } from "../figma_app/482142";
@@ -13,7 +13,7 @@ import { T8, fu } from "../figma_app/831799";
 import { F } from "../905/224";
 import { Ht, WW, Wf } from "../figma_app/345997";
 import { Bi } from "../905/652992";
-import { Iv } from "../905/548208";
+import { DashboardSections } from "../905/548208";
 import { pE, ZN } from "../figma_app/630077";
 import { qK, Ju } from "../905/102752";
 import { d_ } from "../figma_app/918700";
@@ -35,7 +35,7 @@ function T(e) {
   let o = !i.subscription;
   let h = i.canEdit;
   let g = i.canAdmin;
-  let f = o ? _$$t("payments_modal.upgrade_to_professional") : _$$t("payments_modal.update_your_payment");
+  let f = o ? getI18nString("payments_modal.upgrade_to_professional") : getI18nString("payments_modal.update_your_payment");
   return jsxs(d_, {
     size: "small",
     children: [jsx("div", {
@@ -47,10 +47,10 @@ function T(e) {
         href: "/pricing",
         target: "_blank",
         rel: "noopener",
-        children: tx("payments_modal.learn_more_about_team_plans")
+        children: renderI18nText("payments_modal.learn_more_about_team_plans")
       }), !h && jsx("div", {
         className: x,
-        children: tx("payments_modal.contact_an_admin_of_team_name_to_upgrade", {
+        children: renderI18nText("payments_modal.contact_an_admin_of_team_name_to_upgrade", {
           teamName: jsx("span", {
             className: "upsell_modals--team_name--q8B5-",
             children: i.name
@@ -64,7 +64,7 @@ function T(e) {
             teamId: i.id,
             trackingDescriptor: _$$c.CANCEL
           },
-          children: tx("payments_modal.cancel")
+          children: renderI18nText("payments_modal.cancel")
         }), h && jsx(rb, {
           className: pL,
           onClick: () => {
@@ -78,13 +78,13 @@ function T(e) {
             teamId: i.id,
             trackingDescriptor: _$$c.UPGRADE
           },
-          children: tx("payments_modal.upgrade")
+          children: renderI18nText("payments_modal.upgrade")
         })]
       })]
     }), !o && jsxs("div", {
       children: [!g && jsx("div", {
         className: x,
-        children: tx("payments_modal.contact_an_admin_to_update_your_payment_source")
+        children: renderI18nText("payments_modal.contact_an_admin_to_update_your_payment_source")
       }), jsxs("div", {
         className: v0,
         children: [jsx(tM, {
@@ -93,7 +93,7 @@ function T(e) {
             teamId: i.id,
             trackingDescriptor: _$$c.CANCEL
           },
-          children: tx("payments_modal.cancel")
+          children: renderI18nText("payments_modal.cancel")
         }), g && jsx(rb, {
           className: pL,
           onClick: () => {
@@ -101,13 +101,13 @@ function T(e) {
             e.dispatch(sf({
               view: "teamAdminConsole",
               teamId: i.id,
-              teamAdminConsoleViewTab: Iv.SETTINGS
+              teamAdminConsoleViewTab: DashboardSections.SETTINGS
             }));
           },
           trackingProperties: {
             teamId: i.id
           },
-          children: tx("payments_modal.update_payment")
+          children: renderI18nText("payments_modal.update_payment")
         })]
       })]
     })]
@@ -156,14 +156,14 @@ let k = class e extends PureComponent {
     } = this.props.modalShown.data;
     let r = team?.name;
     t = team && team.subscription ? jsx("div", {
-      children: tx("payments_modal.team_name_is_currently_locked_please_update_your_payment_source_to_unlock_team_name_and_modify_team_members", {
+      children: renderI18nText("payments_modal.team_name_is_currently_locked_please_update_your_payment_source_to_unlock_team_name_and_modify_team_members", {
         teamName: r
       })
     }) : jsxs("div", {
-      children: [tx("payments_modal.you_ve_reached_your_plan_s_m_a_x_f_r_e_e_editors_editor_limit_user_text_you_ve_invited_will_be_granted_view_access_but_they_won_t_be_able_to_edit.seat_rename", {
+      children: [renderI18nText("payments_modal.you_ve_reached_your_plan_s_m_a_x_f_r_e_e_editors_editor_limit_user_text_you_ve_invited_will_be_granted_view_access_but_they_won_t_be_able_to_edit.seat_rename", {
         userText: r,
         maxFreeEditors: Ht
-      }), jsx("br", {}), jsx("br", {}), tx("payments_modal.you_may_give_them_edit_access_later_if_you_upgrade_to_the_professional_plan_or_downgrade_other_editors_on_your_team_to_viewers.seat_rename")]
+      }), jsx("br", {}), jsx("br", {}), renderI18nText("payments_modal.you_may_give_them_edit_access_later_if_you_upgrade_to_the_professional_plan_or_downgrade_other_editors_on_your_team_to_viewers.seat_rename")]
     });
     return T8(jsx(T, {
       message: t,
@@ -183,26 +183,26 @@ Ju(function (e) {
     r(Lo());
   };
   let g = e.team;
-  g.subscription ? (t = tx("payments_modal.your_team_is_locked"), i = tx("payments_modal.your_professional_team_plan_is_no_longer_active_please", {
+  g.subscription ? (t = renderI18nText("payments_modal.your_team_is_locked"), i = renderI18nText("payments_modal.your_professional_team_plan_is_no_longer_active_please", {
     teamName: g.name
-  })) : (t = tx("payments_modal.upgrade_to_verb_resource_name", {
+  })) : (t = renderI18nText("payments_modal.upgrade_to_verb_resource_name", {
     verb: (() => {
       switch (e.action) {
         case ZN.MOVE_FILES:
         case ZN.MOVE_FOLDER:
-          return _$$t("payments_modal.move");
+          return getI18nString("payments_modal.move");
         case ZN.DUPLICATE_FILES:
-          return _$$t("payments_modal.duplicate");
+          return getI18nString("payments_modal.duplicate");
         case ZN.RESTORE_FILES:
-          return _$$t("payments_modal.restore");
+          return getI18nString("payments_modal.restore");
         case ZN.IMPORT_FILES:
-          return _$$t("payments_modal.import");
+          return getI18nString("payments_modal.import");
         default:
-          return _$$t("payments_modal.add");
+          return getI18nString("payments_modal.add");
       }
     })(),
-    resourceName: e.action === ZN.MOVE_FOLDER ? _$$t("payments_modal.this_project") : e.action === ZN.IMPORT_FILES ? _$$t("payments_modal.more_files") : e.numFiles && e.numFiles > 1 ? _$$t("payments_modal.these_files") : _$$t("payments_modal.this_file")
-  }), i = tx("payments_modal.on_the_starter_plan_your_team_is_limited", {
+    resourceName: e.action === ZN.MOVE_FOLDER ? getI18nString("payments_modal.this_project") : e.action === ZN.IMPORT_FILES ? getI18nString("payments_modal.more_files") : e.numFiles && e.numFiles > 1 ? getI18nString("payments_modal.these_files") : getI18nString("payments_modal.this_file")
+  }), i = renderI18nText("payments_modal.on_the_starter_plan_your_team_is_limited", {
     maxFreeFiles: WW,
     maxFreeFolders: Wf
   }));
@@ -226,12 +226,12 @@ Ju(function (e) {
         children: [i, jsx("br", {})]
       }), !g.subscription && jsxs(Fragment, {
         children: [jsx("br", {}), jsx("span", {
-          children: tx("payments_modal.if_you_d_like_you_can_upgrade_your_plan_now_or_learn_more_about_our_paid_plans", {
+          children: renderI18nText("payments_modal.if_you_d_like_you_can_upgrade_your_plan_now_or_learn_more_about_our_paid_plans", {
             learnMoreAboutOurPaidPlans: jsx(Us, {
               target: "_blank",
               href: "/pricing",
               trusted: !0,
-              children: tx("payments_modal.learn_more_about_our_paid_plans")
+              children: renderI18nText("payments_modal.learn_more_about_our_paid_plans")
             })
           })
         })]
@@ -242,14 +242,14 @@ Ju(function (e) {
           trackingProperties: {
             trackingDescriptor: _$$c.CANCEL
           },
-          children: tx("payments_modal.cancel")
+          children: renderI18nText("payments_modal.cancel")
         }), jsx(vd, {
           className: pL,
           onClick: () => {
             c();
             r(WX({
               teamId: e.team.id,
-              openInNewTab: !eD,
+              openInNewTab: !desktopAPIInstance,
               selectedView: {
                 view: "team",
                 teamId: e.team.id
@@ -260,7 +260,7 @@ Ju(function (e) {
             teamId: g.id,
             trackingDescriptor: _$$c.UPGRADE
           },
-          children: tx("payments_modal.upgrade")
+          children: renderI18nText("payments_modal.upgrade")
         })]
       })]
     })

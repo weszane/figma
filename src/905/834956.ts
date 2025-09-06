@@ -8,7 +8,7 @@ import { parsePxInt } from "../figma_app/783094";
 import { y as _$$y } from "../905/52479";
 import { Uz } from "../905/63728";
 import { o6, C0, Ht, cZ } from "../figma_app/806412";
-import { PN } from "../figma_app/257275";
+import { isInteractionOrEvalMode } from "../figma_app/897289";
 import { Pg } from "../905/149328";
 import { Point } from "../905/736624";
 import { ms, wv } from "../figma_app/236327";
@@ -26,7 +26,7 @@ import { J as _$$J2 } from "../905/125993";
 import { k as _$$k } from "../905/44647";
 import { D8 } from "../905/511649";
 import { S as _$$S } from "../figma_app/420927";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { KD } from "../figma_app/975811";
 import { Ib } from "../905/129884";
 import { Q7 } from "../905/203369";
@@ -222,7 +222,7 @@ class H extends z {
         onPointerDown: this.props.isActive ? void 0 : this.onPointerDown,
         onPointerUp: this.props.isActive ? void 0 : this.onPointerUp,
         "data-tooltip-type": Ib.TEXT,
-        "data-dropdown-tooltip": _$$t("fullscreen.properties_panel.tooltip_moreActions"),
+        "data-dropdown-tooltip": getI18nString("fullscreen.properties_panel.tooltip_moreActions"),
         "data-tooltip-show-below": !0,
         children: jsx(_$$J2, {
           className: B
@@ -461,7 +461,7 @@ let er = class e extends o6 {
         et = !0;
         return;
       }
-      !PN() && Q ? setTimeout(() => {
+      !isInteractionOrEvalMode() && Q ? setTimeout(() => {
         let i = this.options[t];
         let n = findDOMNode(i);
         if (n && J.length > 0) {
@@ -495,7 +495,7 @@ let er = class e extends o6 {
             let r = new Point(e, i.bottom);
             let a = J[0];
             let s = new Point(t.clientX, t.clientY);
-            if (!PN() && _$$y(s, [a, n, r])) {
+            if (!isInteractionOrEvalMode() && _$$y(s, [a, n, r])) {
               Q = !0;
               return;
             }

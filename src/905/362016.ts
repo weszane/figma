@@ -6,7 +6,7 @@ import { getFeatureFlags } from "../905/601108";
 import { Rs } from "../figma_app/288654";
 import { IT } from "../figma_app/566371";
 import { P as _$$P } from "../905/347284";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Gj, Lk } from "../figma_app/646357";
 import { l as _$$l } from "../905/997221";
 import { LH } from "../905/872904";
@@ -172,30 +172,30 @@ function M({
   let [t] = IT(U(e));
   let i = useMemo(() => [{
     type: _$$V.STAT,
-    header: _$$t("design_systems.libraries_modal.used_by"),
+    header: getI18nString("design_systems.libraries_modal.used_by"),
     count: t?.data?.num_teams ?? null,
-    word: _$$t("design_systems.libraries_modal.plural.team", {
+    word: getI18nString("design_systems.libraries_modal.plural.team", {
       teamCount: t?.data?.num_teams ?? 0
     })
   }, {
     type: _$$V.STAT,
-    header: _$$t("design_systems.libraries_modal.total_components"),
+    header: getI18nString("design_systems.libraries_modal.total_components"),
     count: t?.data?.num_components ?? null,
-    word: _$$t("design_systems.libraries_modal.plural.component", {
+    word: getI18nString("design_systems.libraries_modal.plural.component", {
       componentCount: t?.data?.num_components ?? 0
     })
   }, {
     type: _$$V.STAT,
-    header: _$$t("design_systems.libraries_modal.total_styles"),
+    header: getI18nString("design_systems.libraries_modal.total_styles"),
     count: t?.data?.num_styles ?? null,
-    word: _$$t("design_systems.libraries_modal.plural.style", {
+    word: getI18nString("design_systems.libraries_modal.plural.style", {
       styleCount: t?.data?.num_styles ?? 0
     })
   }, {
     type: _$$V.STAT,
-    header: _$$t("design_systems.libraries_modal.activity_this_week"),
+    header: getI18nString("design_systems.libraries_modal.activity_this_week"),
     count: t?.data?.num_weekly_insertions ?? null,
-    word: _$$t("design_systems.libraries_modal.plural.insert", {
+    word: getI18nString("design_systems.libraries_modal.plural.insert", {
       insertCount: t?.data?.num_weekly_insertions ?? 0
     })
   }], [t]);
@@ -211,37 +211,37 @@ function j({
   let i = t.data;
   let a = useMemo(() => [{
     type: _$$V.STAT,
-    header: _$$t("design_systems.libraries_modal.used_by"),
+    header: getI18nString("design_systems.libraries_modal.used_by"),
     count: i?.num_teams ?? null,
-    word: _$$t("design_systems.libraries_modal.plural.team", {
+    word: getI18nString("design_systems.libraries_modal.plural.team", {
       teamCount: i?.num_teams ?? 0
     })
   }, {
     type: _$$V.STAT,
-    header: _$$t("design_systems.libraries_modal.total_components"),
+    header: getI18nString("design_systems.libraries_modal.total_components"),
     count: i?.num_components ?? null,
-    word: _$$t("design_systems.libraries_modal.plural.component", {
+    word: getI18nString("design_systems.libraries_modal.plural.component", {
       componentCount: i?.num_components ?? 0
     })
   }, {
     type: _$$V.STAT,
-    header: _$$t("design_systems.libraries_modal.total_styles"),
+    header: getI18nString("design_systems.libraries_modal.total_styles"),
     count: i?.num_styles ?? null,
-    word: _$$t("design_systems.libraries_modal.plural.style", {
+    word: getI18nString("design_systems.libraries_modal.plural.style", {
       styleCount: i?.num_styles ?? 0
     })
   }, {
     type: _$$V.STAT,
-    header: _$$t("design_systems.libraries_modal.total_variables"),
+    header: getI18nString("design_systems.libraries_modal.total_variables"),
     count: i?.num_variables ?? null,
-    word: _$$t("design_systems.libraries_modal.plural.variable", {
+    word: getI18nString("design_systems.libraries_modal.plural.variable", {
       variableCount: i?.num_variables ?? 0
     })
   }, {
     type: _$$V.STAT,
-    header: _$$t("design_systems.libraries_modal.activity_this_week"),
+    header: getI18nString("design_systems.libraries_modal.activity_this_week"),
     count: i?.num_weekly_insertions ?? null,
-    word: _$$t("design_systems.libraries_modal.plural.insert", {
+    word: getI18nString("design_systems.libraries_modal.plural.insert", {
       insertCount: i?.num_weekly_insertions ?? 0
     })
   }], [i]);
@@ -296,7 +296,7 @@ export function $$H0(e) {
       className: G,
       children: [jsx("div", {
         className: V,
-        children: tx("design_systems.libraries_modal.header_styles")
+        children: renderI18nText("design_systems.libraries_modal.header_styles")
       }), jsx(_$$c, {
         styleList: v
       })]
@@ -311,7 +311,7 @@ export function $$H0(e) {
       className: G,
       children: [jsx("div", {
         className: V,
-        children: tx("design_systems.libraries_modal.header_components")
+        children: renderI18nText("design_systems.libraries_modal.header_components")
       }), jsx(T, {
         items: x,
         onItemClick
@@ -334,14 +334,14 @@ function W({
     className: G,
     children: [jsx("div", {
       className: V,
-      children: _$$t("design_systems.libraries_modal.header_variable_collections")
+      children: getI18nString("design_systems.libraries_modal.header_variable_collections")
     }), jsx("div", {
       className: "dsa_file_view_overview--variablesSection--4Nm9y",
       children: o.map(e => jsx("div", {
         className: "dsa_file_view_overview--variableSetThumb--A92GL",
         "data-tooltip-type": Ib.TEXT,
         "data-tooltip": e.name,
-        "data-tooltip-subtext": _$$t("design_systems.libraries_modal.plural.num_variables", {
+        "data-tooltip-subtext": getI18nString("design_systems.libraries_modal.plural.num_variables", {
           numVariables: e.variables.length
         }),
         role: "img",

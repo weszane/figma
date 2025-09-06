@@ -1,8 +1,8 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { Hdj, DV9, daH, Ez5 } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { $D } from "../905/11";
-import { t as _$$t } from "../905/303541";
+import { reportError } from "../905/11";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/989956";
 import { A$, X0 } from "../figma_app/837500";
 import { W, r } from "../905/134572";
@@ -27,7 +27,7 @@ function g(e) {
     let e = DV9?.getWhiteboardPaletteTypeToRampValue();
     if (e) for (let [t, r] of e.entries()) {
       if (!p.includes(t)) {
-        $D(_$$e.FIGJAM, Error(`${t} doesn't exist in the WhiteboardPaletteType union type`));
+        reportError(_$$e.FIGJAM, Error(`${t} doesn't exist in the WhiteboardPaletteType union type`));
         continue;
       }
       m.set(t, r);
@@ -197,109 +197,109 @@ export function $$H1(e, t) {
   }
   return r ? F.parse(r) : void 0;
 }
-export function $$z10(e, t = "base", r = _$$t("whiteboard.colors.custom")) {
+export function $$z10(e, t = "base", r = getI18nString("whiteboard.colors.custom")) {
   let n = Array.isArray(e) ? e[0] : e;
   let a = $$V14(n, t);
   "base" === t && a === daH.CUSTOM && (a = $$V14(n, "baseLight"));
   return function (e) {
     switch (e) {
       case daH.BLACK:
-        return _$$t("whiteboard.colors.black");
+        return getI18nString("whiteboard.colors.black");
       case daH.WHITE:
-        return _$$t("whiteboard.colors.white");
+        return getI18nString("whiteboard.colors.white");
       case daH.GRAY_DARK:
-        return _$$t("whiteboard.colors.dark_gray");
+        return getI18nString("whiteboard.colors.dark_gray");
       case daH.GRAY:
-        return _$$t("whiteboard.colors.gray");
+        return getI18nString("whiteboard.colors.gray");
       case daH.GRAY_LIGHT:
-        return _$$t("whiteboard.colors.light_gray");
+        return getI18nString("whiteboard.colors.light_gray");
       case daH.YELLOW:
-        return _$$t("whiteboard.colors.yellow");
+        return getI18nString("whiteboard.colors.yellow");
       case daH.YELLOW_LIGHT:
-        return _$$t("whiteboard.colors.light_yellow");
+        return getI18nString("whiteboard.colors.light_yellow");
       case daH.ORANGE:
-        return _$$t("whiteboard.colors.orange");
+        return getI18nString("whiteboard.colors.orange");
       case daH.ORANGE_LIGHT:
-        return _$$t("whiteboard.colors.light_orange");
+        return getI18nString("whiteboard.colors.light_orange");
       case daH.RED:
-        return _$$t("whiteboard.colors.red");
+        return getI18nString("whiteboard.colors.red");
       case daH.RED_LIGHT:
-        return _$$t("whiteboard.colors.light_red");
+        return getI18nString("whiteboard.colors.light_red");
       case daH.PINK:
-        return _$$t("whiteboard.colors.pink");
+        return getI18nString("whiteboard.colors.pink");
       case daH.PINK_LIGHT:
-        return _$$t("whiteboard.colors.light_pink");
+        return getI18nString("whiteboard.colors.light_pink");
       case daH.VIOLET:
-        return _$$t("whiteboard.colors.violet");
+        return getI18nString("whiteboard.colors.violet");
       case daH.VIOLET_LIGHT:
-        return _$$t("whiteboard.colors.light_violet");
+        return getI18nString("whiteboard.colors.light_violet");
       case daH.INDIGO:
-        return _$$t("whiteboard.colors.indigo");
+        return getI18nString("whiteboard.colors.indigo");
       case daH.INDIGO_LIGHT:
-        return _$$t("whiteboard.colors.light_indigo");
+        return getI18nString("whiteboard.colors.light_indigo");
       case daH.COBALT:
-        return _$$t("whiteboard.colors.cobalt");
+        return getI18nString("whiteboard.colors.cobalt");
       case daH.COBALT_LIGHT:
-        return _$$t("whiteboard.colors.light_cobalt");
+        return getI18nString("whiteboard.colors.light_cobalt");
       case daH.BLUE:
-        return _$$t("whiteboard.colors.blue");
+        return getI18nString("whiteboard.colors.blue");
       case daH.BLUE_LIGHT:
-        return _$$t("whiteboard.colors.light_blue");
+        return getI18nString("whiteboard.colors.light_blue");
       case daH.TEAL:
-        return _$$t("whiteboard.colors.teal");
+        return getI18nString("whiteboard.colors.teal");
       case daH.TEAL_LIGHT:
-        return _$$t("whiteboard.colors.light_teal");
+        return getI18nString("whiteboard.colors.light_teal");
       case daH.GREEN:
-        return _$$t("whiteboard.colors.green");
+        return getI18nString("whiteboard.colors.green");
       case daH.GREEN_LIGHT:
-        return _$$t("whiteboard.colors.light_green");
+        return getI18nString("whiteboard.colors.light_green");
       case daH.OLIVE:
-        return _$$t("whiteboard.colors.olive");
+        return getI18nString("whiteboard.colors.olive");
       case daH.OLIVE_LIGHT:
-        return _$$t("whiteboard.colors.light_olive");
+        return getI18nString("whiteboard.colors.light_olive");
       case daH.STICKY_GRAY_LIGHT:
-        return _$$t("whiteboard.colors.light_gray");
+        return getI18nString("whiteboard.colors.light_gray");
       case daH.STICKY_GRAY:
       case daH.STICKY_GRAY_UI3:
-        return _$$t("whiteboard.colors.gray");
+        return getI18nString("whiteboard.colors.gray");
       case daH.STICKY_BLUE:
-        return _$$t("whiteboard.colors.blue");
+        return getI18nString("whiteboard.colors.blue");
       case daH.STICKY_VIOLET:
-        return _$$t("whiteboard.colors.violet");
+        return getI18nString("whiteboard.colors.violet");
       case daH.STICKY_RED:
-        return _$$t("whiteboard.colors.red");
+        return getI18nString("whiteboard.colors.red");
       case daH.STICKY_PINK:
-        return _$$t("whiteboard.colors.pink");
+        return getI18nString("whiteboard.colors.pink");
       case daH.STICKY_ORANGE:
-        return _$$t("whiteboard.colors.orange");
+        return getI18nString("whiteboard.colors.orange");
       case daH.STICKY_YELLOW:
-        return _$$t("whiteboard.colors.yellow");
+        return getI18nString("whiteboard.colors.yellow");
       case daH.STICKY_GREEN:
-        return _$$t("whiteboard.colors.green");
+        return getI18nString("whiteboard.colors.green");
       case daH.STICKY_COBALT:
-        return _$$t("whiteboard.colors.cobalt");
+        return getI18nString("whiteboard.colors.cobalt");
       case daH.STICKY_INDIGO:
-        return _$$t("whiteboard.colors.indigo");
+        return getI18nString("whiteboard.colors.indigo");
       case daH.STICKY_TEAL:
-        return _$$t("whiteboard.colors.teal");
+        return getI18nString("whiteboard.colors.teal");
       case daH.STICKY_OLIVE:
-        return _$$t("whiteboard.colors.olive");
+        return getI18nString("whiteboard.colors.olive");
       case daH.HIGHLIGHT_RED:
-        return _$$t("whiteboard.colors.pink");
+        return getI18nString("whiteboard.colors.pink");
       case daH.HIGHLIGHT_YELLOW:
-        return _$$t("whiteboard.colors.yellow");
+        return getI18nString("whiteboard.colors.yellow");
       case daH.HIGHLIGHT_GREEN:
-        return _$$t("whiteboard.colors.green");
+        return getI18nString("whiteboard.colors.green");
       case daH.HIGHLIGHT_BLUE:
-        return _$$t("whiteboard.colors.blue");
+        return getI18nString("whiteboard.colors.blue");
       case daH.HIGHLIGHT_VIOLET:
-        return _$$t("whiteboard.colors.violet");
+        return getI18nString("whiteboard.colors.violet");
       case daH.HIGHLIGHT_ORANGE:
-        return _$$t("whiteboard.colors.orange");
+        return getI18nString("whiteboard.colors.orange");
       case daH.HIGHLIGHT_GRAY:
-        return _$$t("whiteboard.colors.gray");
+        return getI18nString("whiteboard.colors.gray");
       case daH.HIGHLIGHT_WHITE:
-        return _$$t("whiteboard.colors.white");
+        return getI18nString("whiteboard.colors.white");
       case daH.CODE_BLOCK_DRACULA:
       case daH.CODE_BLOCK_DUOTONE_EARTH:
       case daH.CODE_BLOCK_DUOTONE_FOREST:
@@ -316,15 +316,15 @@ export function $$W0(e, t = "base") {
   let r = e + 1;
   switch (t) {
     case "highlight":
-      return _$$t("whiteboard.colors.palette.highlight", {
+      return getI18nString("whiteboard.colors.palette.highlight", {
         index: r
       });
     case "baseLight":
-      return _$$t("whiteboard.colors.palette.light", {
+      return getI18nString("whiteboard.colors.palette.light", {
         index: r
       });
     default:
-      return _$$t("whiteboard.colors.palette.base", {
+      return getI18nString("whiteboard.colors.palette.base", {
         index: r
       });
   }

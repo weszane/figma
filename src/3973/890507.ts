@@ -1,20 +1,20 @@
 import { n as _$$n, D } from "../905/347702";
-import { sx, az, pp } from "../905/449184";
+import { trackEventAnalytics, analyticsEventManager, getAnonymousId } from "../905/449184";
 import { Ay } from "../905/612521";
 import { getInitialOptions } from "../figma_app/169182";
-import { jk } from "../905/609396";
-import { mt, gR } from "../figma_app/778880";
-import { vn } from "../3973/348894";
-import { $D } from "../905/11";
+import { PerfTimer } from "../905/609396";
+import { isFigmaMirrorAndroidApp, isFigmaMobileIOSApp } from "../figma_app/778880";
+import { normalizePathname } from "../3973/348894";
+import { reportError } from "../905/11";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { nl } from "../figma_app/257275";
+import { isInteractionPathCheck } from "../figma_app/897289";
 import { bT, ss, PG, MU } from "../3973/473379";
 export let $$p13 = "exp_aa_test_fullscreen_view";
 export function $$m11(e, t) {
   (getInitialOptions().is_second_page_for_perf_tests || C()) && (void 0 === window.STATSIG_PERF && (window.STATSIG_PERF = {}), window.STATSIG_PERF[e] = t);
 }
 export function $$f15(e, t, r, a, i, n) {
-  sx("statsig_client_exp_eval", {
+  trackEventAnalytics("statsig_client_exp_eval", {
     eval_reason: a,
     eval_method: r,
     experiment: e,
@@ -32,7 +32,7 @@ export function $$b12(e, t) {
   return null == e || "" === e || void 0 === e ? null == t || "" === t || void 0 === t : e === t;
 }
 export function $$v0(e, t, r) {
-  sx("user_values_bootstrap_mismatch", {
+  trackEventAnalytics("user_values_bootstrap_mismatch", {
     mismatch_reason: e,
     bootstrap_value: t,
     user_key_value: r
@@ -42,7 +42,7 @@ export function $$v0(e, t, r) {
   });
 }
 export function $$y2(e, t, r, a, i) {
-  az.trackDefinedEvent("application_platform.invalid_bootstrap_info", {
+  analyticsEventManager.trackDefinedEvent("application_platform.invalid_bootstrap_info", {
     experiment_name: e,
     bootstrap_user_id: t,
     bootstrap_custom_ids: r,
@@ -51,7 +51,7 @@ export function $$y2(e, t, r, a, i) {
   });
 }
 export function $$T3(e, t, r, a, i, n, o, _, l, u) {
-  az.trackDefinedEvent("application_platform.statsig_plan_key_bootstrap", {
+  analyticsEventManager.trackDefinedEvent("application_platform.statsig_plan_key_bootstrap", {
     statsig_feature_flag_value: e,
     initial_options_plan_key: t,
     initial_options_org_id: r,
@@ -65,9 +65,9 @@ export function $$T3(e, t, r, a, i, n, o, _, l, u) {
   });
 }
 export function $$E10(e, t, r, a, o, u, c = null, p = null, f = null, h = "") {
-  (nl() || C()) && $$m11("INIT_TIME", a);
-  let v = mt() || gR();
-  let y = p ? [p.userId, p.teamId, p.orgId, pp(), p.planKey].map(e => e || "") : [];
+  (isInteractionPathCheck() || C()) && $$m11("INIT_TIME", a);
+  let v = isFigmaMirrorAndroidApp() || isFigmaMobileIOSApp();
+  let y = p ? [p.userId, p.teamId, p.orgId, getAnonymousId(), p.planKey].map(e => e || "") : [];
   let T = getInitialOptions().statsig_bootstrap_values;
   let k = Array.isArray(T) ? T[0] : T;
   let R = function (e) {
@@ -78,7 +78,7 @@ export function $$E10(e, t, r, a, o, u, c = null, p = null, f = null, h = "") {
     }
     return [];
   }(f ?? k);
-  sx("Statsig Client Init Time", {
+  trackEventAnalytics("Statsig Client Init Time", {
     client_init_time: a,
     userId: getInitialOptions().user_data?.id,
     source: "figma_app",
@@ -87,7 +87,7 @@ export function $$E10(e, t, r, a, o, u, c = null, p = null, f = null, h = "") {
     error_cause: null === c ? null : bT[c],
     entry_route: function () {
       let e = Ay.location.pathname;
-      return vn(e);
+      return normalizePathname(e);
     }(),
     entry_point: window.ENTRY_POINT,
     bootstrapped: t === ss.BOOTSTRAP,
@@ -113,7 +113,7 @@ export function $$w1(e, t, r) {
   return "string" != typeof a ? r : a;
 }
 export function $$k7(e, t, r) {
-  sx("Statsig Client Values Network Call", {
+  trackEventAnalytics("Statsig Client Values Network Call", {
     client_values_network_call_latency_ms: e.getElapsedTimeMs(),
     entry_point: window.ENTRY_POINT,
     reason: PG[r],
@@ -127,7 +127,7 @@ export function $$k7(e, t, r) {
   });
 }
 export function $$R6(e, t, r) {
-  sx("Statsig Client Context Switch Cache Miss", {
+  trackEventAnalytics("Statsig Client Context Switch Cache Miss", {
     keys: JSON.stringify(e),
     cached_keys: t,
     cached_key_count: r,
@@ -141,7 +141,7 @@ export class $$S14 {
     this.caughtError = !1;
     this.elapsedTimeMs = 0;
     this.error = null;
-    this.timer = new jk(e, {});
+    this.timer = new PerfTimer(e, {});
   }
   startTimer() {
     this.timer.start();
@@ -170,7 +170,7 @@ export class $$S14 {
   }
 }
 export function $$I4(e, t, r) {
-  sx("Statsig prefetch calls", {
+  trackEventAnalytics("Statsig prefetch calls", {
     nb_users: e,
     cache_hits: t,
     error_message: r,
@@ -181,7 +181,7 @@ export function $$I4(e, t, r) {
   });
 }
 export function $$D8(e, t, r, a) {
-  sx("Statsig Client Update User Time", {
+  trackEventAnalytics("Statsig Client Update User Time", {
     client_update_user_time_ms: e,
     userId: getInitialOptions().user_data?.id,
     entry_point: window.ENTRY_POINT,
@@ -199,7 +199,7 @@ let O = D(() => .05 >= Math.random());
 export function $$x5(e) {
   if (e && O()) {
     let t = Error(e);
-    $D(_$$e.GROWTH_PLATFORM, t, {
+    reportError(_$$e.GROWTH_PLATFORM, t, {
       tags: {
         statsig_sdk: !0
       }

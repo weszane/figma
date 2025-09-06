@@ -2,10 +2,10 @@ import { useState, useCallback } from "react";
 import { glU, cfv } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
-import { zl } from "../figma_app/27355";
-import { sx } from "../905/449184";
+import { atomStoreManager } from "../figma_app/27355";
+import { trackEventAnalytics } from "../905/449184";
 import { am } from "../figma_app/901889";
-import { jk } from "../905/609396";
+import { PerfTimer } from "../905/609396";
 import { useSprigWithSampling } from "../905/99656";
 import { fF } from "../905/471229";
 import { g as _$$g } from "../905/880308";
@@ -52,11 +52,11 @@ async function R({
   let I;
   let v;
   let A = {
-    orgId: zl.get(_s),
-    teamId: zl.get(As) || null,
-    fileKey: zl.get(ze) || null,
-    userId: zl.get(kS) || null,
-    fileSeq: zl.get(J)?.toString() || null,
+    orgId: atomStoreManager.get(_s),
+    teamId: atomStoreManager.get(As) || null,
+    fileKey: atomStoreManager.get(ze) || null,
+    userId: atomStoreManager.get(kS) || null,
+    fileSeq: atomStoreManager.get(J)?.toString() || null,
     trackingSessionId: fF()
   };
   let C = e => {
@@ -64,7 +64,7 @@ async function R({
     "figjam_summarize_out_of_date" === e.type && (t = {
       type: tE.Reload
     });
-    "content_length_limit_exceeded" === e.type && "DISCOVERY_NUDGE" === T && sx("ai_summarize_from_nudge_exceeded_token_length_limit", {}, {
+    "content_length_limit_exceeded" === e.type && "DISCOVERY_NUDGE" === T && trackEventAnalytics("ai_summarize_from_nudge_exceeded_token_length_limit", {}, {
       forwardToDatadog: !0
     });
     s(e.message, ez.SUMMARIZE, t);
@@ -119,7 +119,7 @@ async function R({
     v && P && WN(P, v);
   }), v) {
     let e = _.stop();
-    e && sx(mr.TIME_TAKEN_TO_COMPLETE, {
+    e && trackEventAnalytics(mr.TIME_TAKEN_TO_COMPLETE, {
       elapsed_ms: e
     }, {
       forwardToDatadog: !0
@@ -164,7 +164,7 @@ export function $$L0(e, t = !0, r) {
   }();
   return {
     summarizeCanvasSelection: async () => {
-      let n = new jk(mr.TIME_TAKEN_TO_COMPLETE, {});
+      let n = new PerfTimer(mr.TIME_TAKEN_TO_COMPLETE, {});
       n.start();
       let {
         v,

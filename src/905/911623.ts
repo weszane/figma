@@ -1,5 +1,5 @@
 import { useRef, useCallback } from "react";
-import { Xb } from "../figma_app/778880";
+import { isAnyMobile } from "../figma_app/778880";
 export function $$a0({
   onClick: e,
   onMouseDown: t,
@@ -8,7 +8,7 @@ export function $$a0({
   isDisabled: s = !1
 }) {
   let o = useRef(!1);
-  let l = Xb;
+  let l = isAnyMobile;
   let d = useCallback(t => {
     o.current = !0;
     l || e?.(t);

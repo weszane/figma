@@ -12,7 +12,7 @@ import { d as _$$d } from "../vendor/456530";
 import { P } from "../vendor/348225";
 import { M } from "../figma_app/648761";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 var u = c;
 let v = createContext(null);
 function b() {
@@ -29,7 +29,7 @@ function j() {
     className: u()(_$$s.absolute.flex.itemsCenter.justifyCenter.$, "flyout--close--SKgKT"),
     children: jsx(K, {
       onClick: () => e("button"),
-      "aria-label": t("modal.close"),
+      "aria-label": getI18nString("modal.close"),
       children: jsx(A, {})
     })
   });

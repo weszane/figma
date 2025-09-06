@@ -10,15 +10,15 @@ import { iCO, glU, X3B } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { aI, Hr, dI } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
-import { md, fp } from "../figma_app/27355";
+import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import y from "classnames";
 import { parsePxNumber, parsePercentNumber } from "../figma_app/783094";
 import { d as _$$d } from "../figma_app/429226";
 import { Pt, v_, aH } from "../figma_app/806412";
-import { us } from "../905/11";
+import { captureMessage } from "../905/11";
 import { Point } from "../905/736624";
 import { P as _$$P } from "../905/347284";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { o$ } from "../figma_app/8833";
 import { Y5 } from "../figma_app/455680";
 import { fG, C4 } from "../figma_app/540726";
@@ -31,8 +31,8 @@ import { zy } from "../figma_app/915202";
 import { Ib } from "../905/129884";
 import { vL } from "../905/826900";
 import { ht } from "../figma_app/741785";
-import { az, sx } from "../905/449184";
-import { sn } from "../905/542194";
+import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
+import { globalPerfTimer } from "../905/542194";
 import { h as _$$h } from "../905/207101";
 import { YT, Oz, Qe, dJ, eG as _$$eG, uU, n6, iC, zt } from "../figma_app/84580";
 import { hh } from "../905/417232";
@@ -55,9 +55,9 @@ import { W4, qd } from "../figma_app/178475";
 import { L as _$$L } from "../905/550169";
 import { _i, E8, U8 as _$$U, RI, pu, wb } from "../figma_app/800999";
 import { A as _$$A4 } from "../897/590880";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { Q as _$$Q } from "../figma_app/67145";
-import { nl } from "../figma_app/257275";
+import { isInteractionPathCheck } from "../figma_app/897289";
 import { VG, EX, JV, Eq } from "../figma_app/451499";
 import { dq, e7 as _$$e } from "../figma_app/316316";
 import { NE } from "../3276/373312";
@@ -92,7 +92,7 @@ let Y = _$$ex("prototype_action_info", function () {
       style: {
         maxWidth: 144
       },
-      children: tx("proto.prototype_panel.use_the_circular_node_to_connect_the_selected_object_to_another_frame_tooltip")
+      children: renderI18nText("proto.prototype_panel.use_the_circular_node_to_connect_the_selected_object_to_another_frame_tooltip")
     })]
   });
 }, () => ({
@@ -136,9 +136,9 @@ function es({
   let u = null;
   let h = E8(t);
   d ? a = jsx(ed, {
-    children: tx("proto.keyCapture.press_key_lowercase")
+    children: renderI18nText("proto.keyCapture.press_key_lowercase")
   }) : t?.triggerDevice === "KEYBOARD" && l ? u = _$$U(l) : h ? u = h : a = jsx(ed, {
-    children: tx("proto.keyCapture.click_to_set_key")
+    children: renderI18nText("proto.keyCapture.click_to_set_key")
   });
   return jsx(rp, {
     ref: p,
@@ -186,12 +186,12 @@ function ej(e) {
   let o = cJ();
   let {
     showVideoV2Triggers
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     allStatesInSelection: e.mirror.selectionProperties.stateGroupSelectionInfo?.mode === iCO.STATE,
     allTopLevelFramesInSelection: !!e.mirror.selectionProperties.allTopLevelFramesInSelection,
     showVideoV2Triggers: dq(e.mirror.selectionProperties)
   }));
-  let s = md(NE);
+  let s = useAtomWithSubscription(NE);
   let d = t => {
     let n = jsx("div", {
       className: "transition_interaction_dropdown--prototypeInteractionIcon---njby",
@@ -239,7 +239,7 @@ function ej(e) {
       dropdownShown: n,
       dropdownWidth: I,
       formatter: f,
-      hideDropdownWhenContainerMoves: !nl(),
+      hideDropdownWhenContainerMoves: !isInteractionPathCheck(),
       icon: j ? _$$e(j) : void 0,
       id: "interaction-type-select",
       onChange: e.onChange,
@@ -274,7 +274,7 @@ function ew(e) {
     interactionDuration = .3,
     keyTrigger = eS
   } = detailPropsMultipleActions.interactionEvent;
-  let h = md(_$$j);
+  let h = useAtomWithSubscription(_$$j);
   let m = useMemo(() => new Set(h.map(e => JSON.stringify(e))).size, [h]);
   let x = useMemo(() => !interactionType && m > 1 || interactionType && m > 0 ? oV : interactionType || "NONE", [interactionType, m]);
   let y = (e, t) => {
@@ -305,7 +305,7 @@ function ew(e) {
     let y = ["MOUSE_IN", "MOUSE_OUT", "MOUSE_ENTER", "MOUSE_LEAVE", "MOUSE_DOWN", "MOUSE_UP"].indexOf(E7(e.interactionType) || "") > -1;
     let f = useId();
     let _ = jsx(ej, {
-      ariaLabel: _$$t("proto.trigger"),
+      ariaLabel: getI18nString("proto.trigger"),
       ariaLabelledBy: f,
       className: sQ,
       interactionContainsOpenLinkAction: e.interactionContainsOpenLinkAction,
@@ -313,7 +313,7 @@ function ew(e) {
       interactionOnlyContainsBack: e.interactionOnlyContainsBack,
       interactionsOnSelectedNodes: e.interactionsOnSelectedNodes,
       onChange: o => {
-        sn.start("interaction_details_changed");
+        globalPerfTimer.start("interaction_details_changed");
         n({
           interactionType: o
         });
@@ -331,16 +331,16 @@ function ew(e) {
     });
     let b = c ? jsx(_$$A4, {
       labelId: f,
-      label: _$$t("proto.trigger"),
+      label: getI18nString("proto.trigger"),
       input: _
     }) : jsx("div", {
       className: BX,
       children: _
     });
     let I = jsxs(Fragment, {
-      children: [x && eA(_$$t("proto.delay"), jsx(W4, {
+      children: [x && eA(getI18nString("proto.delay"), jsx(W4, {
         className: Lp,
-        "data-tooltip": _$$t("proto.trigger.after_delay_timeout"),
+        "data-tooltip": getI18nString("proto.trigger.after_delay_timeout"),
         "data-tooltip-type": Ib.TEXT,
         dataTestId: "timeout-input",
         dispatch: t,
@@ -357,7 +357,7 @@ function ew(e) {
         value: e.timeout,
         wheelMultiplier: o / 1e3,
         children: jsx(_$$A3, {})
-      }), c), m && eA(_$$t("proto.key"), jsx(es, {
+      }), c), m && eA(getI18nString("proto.key"), jsx(es, {
         onChange: e => {
           n({
             keyTrigger: e
@@ -366,9 +366,9 @@ function ew(e) {
         value: h,
         shouldFocusKeyCaptureField: l,
         setShouldFocusKeyCaptureField: s
-      }), c), g && eA(_$$t("proto.time"), jsx(qd, {
+      }), c), g && eA(getI18nString("proto.time"), jsx(qd, {
         className: Ym,
-        "data-tooltip": _$$t("proto.trigger.video_hit_time"),
+        "data-tooltip": getI18nString("proto.trigger.video_hit_time"),
         "data-tooltip-type": Ib.TEXT,
         dataTestId: "mediaHitTime-input",
         dispatch: t,
@@ -386,10 +386,10 @@ function ew(e) {
         value: e.mediaHitTime,
         wheelMultiplier: o / 1e3,
         children: jsx(_$$Y2, {})
-      }), c), y && eA(_$$t("proto.delay"), jsx(W4, {
+      }), c), y && eA(getI18nString("proto.delay"), jsx(W4, {
         allowEmpty: !0,
         className: Lp,
-        "data-tooltip": _$$t("proto.trigger.after_delay_timeout"),
+        "data-tooltip": getI18nString("proto.trigger.after_delay_timeout"),
         "data-tooltip-type": Ib.TEXT,
         dataTestId: "duration-input",
         dispatch: t,
@@ -403,7 +403,7 @@ function ew(e) {
             interactionMaintained: !1
           });
         },
-        placeholder: _$$t("proto.trigger.add_delay_placeholder"),
+        placeholder: getI18nString("proto.trigger.add_delay_placeholder"),
         recordingKey: Pt(e, "delayInput"),
         scrubMultiplier: o / 1e3,
         tooltipForScreenReadersOnly: !0,
@@ -462,7 +462,7 @@ function eM(e) {
     newActionIndexPath,
     resetNewActionIndexPath
   } = e;
-  let I = md(_$$j);
+  let I = useAtomWithSubscription(_$$j);
   let C = cJ() && kc({
     interactionType: e.interactionType,
     actions: mergedActions
@@ -510,7 +510,7 @@ function eM(e) {
       className: S,
       children: [e.shouldHideTitle ? null : jsx(fI, {
         children: jsx(U8, {
-          title: _$$t("proto.interaction.interaction"),
+          title: getI18nString("proto.interaction.interaction"),
           dataTooltipContentKey: Y,
           dataTooltipTimeoutDelay: 50
         })
@@ -531,7 +531,7 @@ function eM(e) {
               vertical: 8
             },
             children: jsx(JU, {
-              children: tx("fullscreen.mixed")
+              children: renderI18nText("fullscreen.mixed")
             })
           })), differentLengthActions && jsx(_$$Y, {
             direction: "horizontal",
@@ -540,7 +540,7 @@ function eM(e) {
               vertical: 8
             },
             children: jsx(nV, {
-              children: tx("fullscreen.properties_panel.click_plus_to_replace_mixed_content")
+              children: renderI18nText("fullscreen.properties_panel.click_plus_to_replace_mixed_content")
             })
           }), !differentLengthActions && 0 === I.length && jsx(Fragment, {
             children: mergedActions?.map((r, a) => jsx(_$$P2, {
@@ -585,7 +585,7 @@ function e$({
   let c = 1 === o ? jsx(d, {
     variant: "secondary",
     onClick: () => {
-      az.trackDefinedEvent("prototype.state_management_noodle_reverted", {
+      analyticsEventManager.trackDefinedEvent("prototype.state_management_noodle_reverted", {
         num_interactions: r.length
       });
       n({
@@ -596,11 +596,11 @@ function e$({
     htmlAttributes: {
       "data-testid": "revert-state-management-button"
     },
-    children: tx("proto.state_management.revert_controls")
+    children: renderI18nText("proto.state_management.revert_controls")
   }) : jsx(d, {
     variant: "primary",
     onClick: () => {
-      for (let t of (az.trackDefinedEvent("prototype.state_management_noodle_upgraded", {
+      for (let t of (analyticsEventManager.trackDefinedEvent("prototype.state_management_noodle_upgraded", {
         num_interactions: r.length,
         preserve_scroll_position_value: !!e.preserveScroll
       }), r)) uU(t.stateManagementVersion) && t.id && t.sourceNodeID && zZ.recordInteractionUpgraded(t.id, t.sourceNodeID);
@@ -612,28 +612,28 @@ function e$({
       });
       l(_$$F.enqueue({
         type: "state-management-updated",
-        message: _$$t("proto.state_management.visual_bell_updated_message"),
+        message: getI18nString("proto.state_management.visual_bell_updated_message"),
         button: {
-          text: _$$t("proto.state_management.visual_bell_update_all"),
+          text: getI18nString("proto.state_management.visual_bell_update_all"),
           action: () => {
             Y5.triggerActionInUserEditScope("update-interactions-state-management-on-page");
             l(_$$F.enqueue({
               type: "state-management-updated-all",
-              message: _$$t("proto.state_management.visual_bell_update_all_message")
+              message: getI18nString("proto.state_management.visual_bell_update_all_message")
             }));
           }
         }
       }));
     },
     recordingKey: Pt(t, "update-state-management-version"),
-    children: tx("proto.state_management.update_controls")
+    children: renderI18nText("proto.state_management.update_controls")
   });
-  let p = 1 === o ? tx("proto.state_management.new_controls") : tx("proto.state_management.old_controls");
+  let p = 1 === o ? renderI18nText("proto.state_management.new_controls") : renderI18nText("proto.state_management.old_controls");
   let u = jsx(_$$N, {
     trusted: !0,
     newTab: !0,
     href: "https://help.figma.com/hc/articles/14397859494295",
-    children: tx("proto.state_management.controls_help_link_new")
+    children: renderI18nText("proto.state_management.controls_help_link_new")
   });
   let h = jsxs("div", {
     className: "prototype_state_management_version_panel--containerUI3--V5tpG",
@@ -679,9 +679,9 @@ function eW(e) {
     selectedInteractions
   } = Ay(e.category, e.filterOutNoneActions);
   _$$h(() => {
-    if (void 0 !== sn.get(ez)) {
-      let e = sn.stop(ez);
-      sx(ez, {
+    if (void 0 !== globalPerfTimer.get(ez)) {
+      let e = globalPerfTimer.stop(ez);
+      trackEventAnalytics(ez, {
         elapsedMs: e,
         numConnectors: selectedInteractions.length
       }, {
@@ -824,7 +824,7 @@ let e7 = memo(function ({
   let A;
   let V = useDispatch();
   let [B, H] = useState(!1);
-  let [, F] = fp(_$$x);
+  let [, F] = useAtomValueAndSetter(_$$x);
   let K = useRef(null);
   let [$, z] = useState(0);
   let W = x || B;
@@ -852,7 +852,7 @@ let e7 = memo(function ({
   }, []);
   useEffect(() => {
     if (0 === mergedActions.length) {
-      us("the interactions panel should always have actions if rendered");
+      captureMessage("the interactions panel should always have actions if rendered");
       let e = JSON.parse(JSON.stringify(selectedInteractions));
       for (let t of e) if (t && t.actions?.length === 0) {
         let e = {
@@ -928,7 +928,7 @@ let e7 = memo(function ({
       name: "prototype_interaction_details_modal_closed"
     }));
   }, [V]);
-  let eH = md(_$$u);
+  let eH = useAtomWithSubscription(_$$u);
   useEffect(() => {
     ec && eH?.focus();
   }, [ec, eH]);
@@ -1193,11 +1193,11 @@ let e7 = memo(function ({
   let tI = !X.isConditional() && !tv;
   let tC = jsx(_$$K, {
     onClick: () => tp(X),
-    "aria-label": _$$t("proto.prototype_panel.delete"),
+    "aria-label": getI18nString("proto.prototype_panel.delete"),
     disabled: tI,
     recordingKey: Pt(dJ, "actionDeleteButton"),
     htmlAttributes: {
-      "data-tooltip": _$$t("proto.prototype_panel.delete"),
+      "data-tooltip": getI18nString("proto.prototype_panel.delete"),
       "data-tooltip-type": Ib.TEXT
     },
     children: jsx(_$$O, {})
@@ -1472,7 +1472,7 @@ function te({
       };
       let n = X3B?.getMatchingInteractions(_$$d(t)) ?? [];
       glU?.selectInteractionsAndSourceNodes(n);
-      let o = _$$t("proto.interaction_details.visual_bell.selected_n_matching_interactions", {
+      let o = getI18nString("proto.interaction_details.visual_bell.selected_n_matching_interactions", {
         total_num_interactions: n.length
       });
       Y5.showVisualBellWithUndo("selected-matching-noodles", o, !1);
@@ -1483,7 +1483,7 @@ function te({
         }
       }));
     },
-    "aria-label": _$$t("proto.interaction_details.select_n_matching_interactions", {
+    "aria-label": getI18nString("proto.interaction_details.select_n_matching_interactions", {
       total_num_interactions: c
     }),
     htmlAttributes: {
@@ -1499,7 +1499,7 @@ function te({
         glU?.hoverInteractions(n);
       },
       onMouseLeave: () => glU?.hoverInteractions([]),
-      "data-tooltip": _$$t("proto.interaction_details.select_n_matching_interactions", {
+      "data-tooltip": getI18nString("proto.interaction_details.select_n_matching_interactions", {
         total_num_interactions: c
       }),
       "data-tooltip-type": Ib.TEXT
@@ -1512,7 +1512,7 @@ function te({
         className: "prototype_interaction_edit_modal--ui3ExpandedModalHeader--Ka7aM",
         children: [jsx("span", {
           id: o,
-          children: tx("proto.interaction_details.header")
+          children: renderI18nText("proto.interaction_details.header")
         }), jsxs("div", {
           className: "prototype_interaction_edit_modal--ui3ExpandedModalHeaderButtons--UqykU",
           children: [h, t]
@@ -1522,7 +1522,7 @@ function te({
       return jsxs(Fragment, {
         children: [jsx("span", {
           id: o,
-          children: tx("proto.interaction_details.header")
+          children: renderI18nText("proto.interaction_details.header")
         }), jsxs("div", {
           className: eL,
           children: [h, n, t]
@@ -1534,7 +1534,7 @@ function tt({
   closeButton: e
 }) {
   return jsxs(Fragment, {
-    children: [tx("proto.sites_interaction_link_details.header"), jsx("div", {
+    children: [renderI18nText("proto.sites_interaction_link_details.header"), jsx("div", {
       className: eL,
       children: e
     })]

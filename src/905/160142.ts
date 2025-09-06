@@ -2,8 +2,8 @@ import { n as _$$n } from "../905/347702";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { X3B } from "../figma_app/763686";
 import { FJ } from "../905/508367";
-import { Ay } from "../figma_app/778880";
-import { xO } from "../905/11";
+import { BrowserInfo } from "../figma_app/778880";
+import { reportNullOrUndefined } from "../905/11";
 import { XHR } from "../905/910117";
 import { nF } from "../905/350402";
 import { sf } from "../905/929976";
@@ -29,7 +29,7 @@ let $$y0 = _$$n(nF(async (e, t, {
     scalingInfo
   } = t;
   let C = e.getState();
-  xO(_$$e.PROTOTYPING, C.mirror.appModel);
+  reportNullOrUndefined(_$$e.PROTOTYPING, C.mirror.appModel);
   let T = C.mirror.appModel.currentPage;
   let k = s6(C);
   let R = C.mirror.sceneGraph.get(T);
@@ -75,7 +75,7 @@ let $$y0 = _$$n(nF(async (e, t, {
         fileKey: t.meta.file_key,
         pageId: t.meta.page_id
       }));
-    }).catch(e => { });
+    }).catch(e => {});
     let n = await i.fetchFile(fileKey);
     if (_$$m) {
       e.dispatch(sf({
@@ -93,7 +93,7 @@ let $$y0 = _$$n(nF(async (e, t, {
   }
   setTimeout(() => {
     let e = null;
-    if (null != (e = Ay.safari && +Ay.version >= 12 ? FJ(F, M(), "menubar=yes") : FJ(F, M())) && (e.focus(), Ay.chrome)) try {
+    if (null != (e = BrowserInfo.safari && +BrowserInfo.version >= 12 ? FJ(F, M(), "menubar=yes") : FJ(F, M())) && (e.focus(), BrowserInfo.chrome)) try {
       e.location === e.href && console.log(" ");
     } catch (t) {
       b++;
@@ -102,4 +102,4 @@ let $$y0 = _$$n(nF(async (e, t, {
   });
 }));
 let b = 0;
-export const F = $$y0; 
+export const F = $$y0;

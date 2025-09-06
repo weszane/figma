@@ -7,13 +7,13 @@ import { q } from "../905/932270";
 import { J } from "../905/270045";
 import { $n } from "../905/521428";
 import { getFeatureFlags } from "../905/601108";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { XHR } from "../905/910117";
 import { s_ } from "../905/17223";
 import { z, Z } from "../905/306088";
 import { s as _$$s } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
-import { tx, t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { vi } from "../figma_app/808294";
 import { c9, oW } from "../figma_app/395505";
 import { to, Ce } from "../905/156213";
@@ -50,12 +50,12 @@ let $$N0 = Ju(function (e) {
   };
   return jsx(yX, {
     autoFocusCta: !1,
-    cancelText: tx("general.close"),
-    confirmText: tx("general.confirm"),
-    confirmationTitle: tx("community.buyer.need_a_refund"),
+    cancelText: renderI18nText("general.close"),
+    confirmText: renderI18nText("general.confirm"),
+    confirmationTitle: renderI18nText("community.buyer.need_a_refund"),
     content: jsxs("div", {
       className: _$$s.flexColumn.colorText.$,
-      children: [tx("community.buyer.we_re_sorry_to_hear_resource_name_didnt_work_out", {
+      children: [renderI18nText("community.buyer.we_re_sorry_to_hear_resource_name_didnt_work_out", {
         resourceName: jsx("span", {
           className: _$$s.fontBold.$,
           children: name
@@ -68,7 +68,7 @@ let $$N0 = Ju(function (e) {
             b(e);
           },
           legend: jsx(q, {
-            children: tx("community.buyer.refund_reason")
+            children: renderI18nText("community.buyer.refund_reason")
           }),
           children: Object.values(bG).map(e => jsx(_$$c, {
             value: e,
@@ -81,7 +81,7 @@ let $$N0 = Ju(function (e) {
           children: jsx(_$$v, {
             value: S,
             onChange: e => x(e.target.value),
-            placeholder: t("community.buyer.refund_reason.add_additional_details"),
+            placeholder: getI18nString("community.buyer.refund_reason.add_additional_details"),
             maxLength: JV
           })
         }) : null]
@@ -102,7 +102,7 @@ let $$N0 = Ju(function (e) {
           children: jsx(_$$v, {
             value: S,
             onChange: e => x(e.target.value),
-            placeholder: t("community.buyer.refund_reason.add_additional_details"),
+            placeholder: getI18nString("community.buyer.refund_reason.add_additional_details"),
             maxLength: JV
           })
         }) : null]
@@ -113,7 +113,7 @@ let $$N0 = Ju(function (e) {
     isLoading: c,
     onConfirm: () => {
       h(!0);
-      sx("Request Refund Modal Confirm", {
+      trackEventAnalytics("Request Refund Modal Confirm", {
         refundReason: f,
         refundOtherReasonText: S,
         monetizedResourceMetadataId: monetizedResource.id
@@ -143,23 +143,23 @@ let C = Ju(function (e) {
   return jsxs(ey, {
     size: "small",
     hide: lQ,
-    title: t("community.buyer.refund_requested"),
+    title: getI18nString("community.buyer.refund_requested"),
     children: [jsx(s_, {
       dispatch: r
-    }), tx("community.buyer.keep_an_eye_out", {
+    }), renderI18nText("community.buyer.keep_an_eye_out", {
       here: jsx($n.Link, {
         onClick: () => {
           c9(user);
           r(Ce());
         },
-        children: tx("community.buyer.here")
+        children: renderI18nText("community.buyer.here")
       })
     }), jsx("div", {
       className: v0,
       children: jsx($z, {
         onClick: () => r(Ce()),
         variant: "secondary",
-        children: tx("general.close")
+        children: renderI18nText("general.close")
       })
     })]
   });
@@ -170,14 +170,14 @@ let w = Ju(function (e) {
   } = e;
   return jsx(yX, {
     size: "small",
-    confirmationTitle: tx("community.buyer.unable_to_process_refund"),
+    confirmationTitle: renderI18nText("community.buyer.unable_to_process_refund"),
     content: jsx("span", {
       className: _$$s.colorText.$,
-      children: tx("community.buyer.error_requesting_refund_please_contact_support")
+      children: renderI18nText("community.buyer.error_requesting_refund_please_contact_support")
     }),
-    confirmText: tx("community.buyer.get_support"),
+    confirmText: renderI18nText("community.buyer.get_support"),
     onConfirm: () => oW(user),
-    cancelText: tx("general.close"),
+    cancelText: renderI18nText("general.close"),
     autoFocusCta: !1
   });
 }, "CommunityErrorRequestingRefundModal");

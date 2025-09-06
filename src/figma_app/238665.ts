@@ -5,7 +5,7 @@ import { N } from "../905/438674";
 import { x } from "../905/587214";
 import { w } from "../905/955293";
 import { Pt } from "../figma_app/806412";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { BK } from "../905/848862";
 import { hO } from "../905/616572";
 import { Z_ } from "../905/831801";
@@ -51,12 +51,12 @@ function E({
   return jsxs(Fragment, {
     children: [e && jsx($n, {
       iconPrefix: jsx(x, {}),
-      "aria-label": _$$t("variables.authoring_modal.create_variable_button_label"),
+      "aria-label": getI18nString("variables.authoring_modal.create_variable_button_label"),
       ref: _,
       variant: "primary",
       onClick: () => toggle(),
       recordingKey: Pt(l, "createVariableButton"),
-      children: _$$t("variables.authoring_modal.create")
+      children: getI18nString("variables.authoring_modal.create")
     }), e && showing && _.current && jsx(mw, {
       targetRect: _.current.getBoundingClientRect(),
       variableSetID: t ?? null,
@@ -89,31 +89,31 @@ export function $$y1({
     });
   }, [r]);
   return I === I9.filterApplied ? jsx($$f0, {
-    title: _$$t("variables.authoring_modal.no_variables_match_filters"),
-    text: _$$t("variables.authoring_modal.no_variables_match_filters.text"),
+    title: getI18nString("variables.authoring_modal.no_variables_match_filters"),
+    text: getI18nString("variables.authoring_modal.no_variables_match_filters.text"),
     actions: jsx($n, {
       iconPrefix: jsx(w, {}),
       onClick: S,
       variant: "secondary",
-      children: _$$t("variables.authoring_modal.no_variables_match_filters.clear_filters")
+      children: getI18nString("variables.authoring_modal.no_variables_match_filters.clear_filters")
     })
   }) : I === I9.queryApplied ? jsx($$f0, {
-    title: _$$t("variables.authoring_modal.no_variables_match_search"),
-    text: _$$t("variables.authoring_modal.no_variables_match_search.text"),
+    title: getI18nString("variables.authoring_modal.no_variables_match_search"),
+    text: getI18nString("variables.authoring_modal.no_variables_match_search.text"),
     actions: jsx($n, {
       iconPrefix: jsx(w, {}),
       onClick: o,
       variant: "secondary",
-      children: _$$t("variables.authoring_modal.no_variables_match_search.clear_search")
+      children: getI18nString("variables.authoring_modal.no_variables_match_search.clear_search")
     })
   }) : jsx($$f0, {
-    title: T ? _$$t("variables.authoring_modal.no_variables_in_collection") : _$$t("variables.authoring_modal.no_variables_in_file"),
+    title: T ? getI18nString("variables.authoring_modal.no_variables_in_collection") : getI18nString("variables.authoring_modal.no_variables_in_file"),
     text: jsxs(Fragment, {
-      children: [_$$t("variables.authoring_modal.empty_state_text"), " ", jsxs(N, {
+      children: [getI18nString("variables.authoring_modal.empty_state_text"), " ", jsxs(N, {
         href: "https://help.figma.com/hc/articles/15339657135383-Guide-to-variables-in-Figma",
         trusted: !0,
         newTab: !0,
-        children: [_$$t("variables.authoring_modal.empty_state_learn_more_link"), " \u2192"]
+        children: [getI18nString("variables.authoring_modal.empty_state_learn_more_link"), " \u2192"]
       })]
     }),
     actions: t && H(e) && hO(e) ? jsx(E, {

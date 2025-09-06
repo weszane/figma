@@ -8,9 +8,9 @@ import { getFeatureFlags } from "../905/601108";
 import c from "../vendor/223926";
 import { Ay } from "../905/612521";
 import { Pt } from "../figma_app/806412";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { B as _$$B } from "../905/714743";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Wo } from "../figma_app/933328";
 import { to } from "../905/156213";
 import { UK } from "../figma_app/740163";
@@ -75,8 +75,8 @@ function w(e) {
         children: leftInput
       })]
     }),
-    leftLabel: _$$t("variables.create_modal.collection_label"),
-    rightLabel: _$$t("variables.authoring_modal.action_bar.new_mode"),
+    leftLabel: getI18nString("variables.create_modal.collection_label"),
+    rightLabel: getI18nString("variables.authoring_modal.action_bar.new_mode"),
     rightInput: jsx("div", {
       className: "x78zum5 x6s0dn4 x1n2onr6",
       children: jsx("div", {
@@ -101,28 +101,28 @@ function V({
 }) {
   return {
     format: a => {
-      if (a === iw.LEARN_MORE) return _$$t("variables.modes.option.learn_more");
-      if (a === iw.REVIEW_UPDATES) return _$$t("variables.modes.option.review_updates");
+      if (a === iw.LEARN_MORE) return getI18nString("variables.modes.option.learn_more");
+      if (a === iw.REVIEW_UPDATES) return getI18nString("variables.modes.option.review_updates");
       if (a === UE) {
-        if (t === Mo) return _$$t("variables.mode_properties_panel.select.option.auto_with_name", {
-          modeName: _$$t("variables.mode_properties_panel.select.option.mixed")
+        if (t === Mo) return getI18nString("variables.mode_properties_panel.select.option.auto_with_name", {
+          modeName: getI18nString("variables.mode_properties_panel.select.option.mixed")
         });
         let n = e.find(e => c2(e.modeId, t))?.name;
-        return n ? _$$t("variables.mode_properties_panel.select.option.auto_with_name", {
+        return n ? getI18nString("variables.mode_properties_panel.select.option.auto_with_name", {
           modeName: n
-        }) : _$$t("variables.mode_properties_panel.select.option.auto");
+        }) : getI18nString("variables.mode_properties_panel.select.option.auto");
       }
       {
         if (a === Ws) {
-          0 === e.length && x1("variables", "No mode options available");
-          return _$$t("variables.mode_properties_panel.select.option.default_with_name", {
+          0 === e.length && logError("variables", "No mode options available");
+          return getI18nString("variables.mode_properties_panel.select.option.default_with_name", {
             modeName: e[0].name ?? ""
           });
         }
-        if (a === Mo) return _$$t("variables.mode_properties_panel.select.option.mixed");
-        if (a === Yn) return _$$t("variables.mode_properties_panel.select.option.deleted");
+        if (a === Mo) return getI18nString("variables.mode_properties_panel.select.option.mixed");
+        if (a === Yn) return getI18nString("variables.mode_properties_panel.select.option.deleted");
         let t = e.find(e => c2(e.modeId, a));
-        return t ? n ? `${t.name} (${t.modeId.guid})` : t.name : (x1("variables", "Option does not exist in modeOptions"), _$$t("variables.mode_properties_panel.select.option.deleted"));
+        return t ? n ? `${t.name} (${t.modeId.guid})` : t.name : (logError("variables", "Option does not exist in modeOptions"), getI18nString("variables.mode_properties_panel.select.option.deleted"));
       }
     },
     isEqual: (e, t) => c2(e, t)
@@ -339,11 +339,11 @@ export function $$W1(e) {
     children: variableSetName
   });
   let eE = jsx(_$$K, {
-    "aria-label": _$$t("general.remove"),
+    "aria-label": getI18nString("general.remove"),
     onClick: () => en("INHERIT", !0),
     actionOnPointerDown: !0,
     htmlAttributes: {
-      "data-tooltip": _$$t("general.remove"),
+      "data-tooltip": getI18nString("general.remove"),
       "data-tooltip-type": Ib.TEXT
     },
     children: jsx(_$$f, {})

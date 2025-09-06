@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { t_, eU } from "../figma_app/27355";
+import { t_, atom } from "../figma_app/27355";
 import { Y5 } from "../figma_app/455680";
 export function $$s0() {
   let [e, t] = useState(void 0 !== Y5 && Y5.isReady());
@@ -17,7 +17,7 @@ export let $$o1 = (() => {
       e(Y5.isReady());
     });
   };
-  return eU(t => t(e));
+  return atom(t => t(e));
 })();
 export const q = $$s0;
 export const w = $$o1;

@@ -1,12 +1,12 @@
 import { debug } from "../figma_app/465776";
 import { Ez5, glU, zMY } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
-import { zl, md, fp, Ut } from "../figma_app/27355";
+import { atomStoreManager, useAtomWithSubscription, useAtomValueAndSetter, Ut } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { R } from "../905/165069";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { YQ } from "../905/502364";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { zX } from "../905/576487";
 import { zE } from "../905/738636";
@@ -22,7 +22,7 @@ import { o as _$$o } from "../905/556276";
 import { Bn } from "../figma_app/835688";
 export function $$A0(e, t) {
   !function (e, t) {
-    let r = zl.get(Me);
+    let r = atomStoreManager.get(Me);
     let n = debugState.getState();
     let i = Kl(n);
     e(zE({
@@ -38,7 +38,7 @@ export function $$A0(e, t) {
 export function $$x2(e, t, r = !1) {
   return new Promise((n, o) => {
     if (null === t || null === e) {
-      x1("storeFigmaContentForSlidesCreation", "No openFile or file version", {
+      logError("storeFigmaContentForSlidesCreation", "No openFile or file version", {
         fileKey: e?.key,
         fileVersion: t
       }, {
@@ -56,7 +56,7 @@ export function $$x2(e, t, r = !1) {
     }
     let p = l.getCurrentPage()?.guid;
     if (!p || 0 === u.length) {
-      x1("storeFigmaContentForSlidesCreation", "No page guid or empty target node ids", {
+      logError("storeFigmaContentForSlidesCreation", "No page guid or empty target node ids", {
         pageGuid: p,
         targetNodeIds: u
       }, {
@@ -65,7 +65,7 @@ export function $$x2(e, t, r = !1) {
       o();
       return;
     }
-    n(zl.set(u2, {
+    n(atomStoreManager.set(u2, {
       fileKey: e.key,
       fileVersion: t,
       pageGuid: p,
@@ -86,14 +86,14 @@ async function N({
 export function $$C1() {
   let e = EI();
   let t = tS();
-  let r = md(u2);
-  let [a, d] = fp($K);
+  let r = useAtomWithSubscription(u2);
+  let [a, d] = useAtomValueAndSetter($K);
   return R(() => {
     debug(!!r, "slideCreationData is undefined. This should never happen");
     Ez5?.slideThemeLibBindings().insertDefaultLocalTheme(zMY.LIGHT, "Template style");
     Ez5?.uiState().leftPanelCollapsedUI3.set(!0);
     debugState.dispatch(F.enqueue({
-      message: _$$t("slides.general.copying_slides_over"),
+      message: getI18nString("slides.general.copying_slides_over"),
       type: "design-to-slides-load",
       icon: zX.SPINNER,
       timeoutOverride: 3e5
@@ -108,7 +108,7 @@ export function $$C1() {
         matchType: "design-to-slides-load"
       }));
       debugState.dispatch(F.enqueue({
-        message: _$$t("slides.present_summary.visual_bells.complete"),
+        message: getI18nString("slides.present_summary.visual_bells.complete"),
         type: "design-to-slides-complete",
         icon: zX.CHECK,
         timeoutOverride: 3e3

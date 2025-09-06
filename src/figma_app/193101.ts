@@ -9,9 +9,9 @@ import { V } from "../905/735518";
 import { glU } from "../figma_app/763686";
 import { RR } from "../figma_app/338442";
 import { l7 } from "../905/189185";
-import { md } from "../figma_app/27355";
-import { R as _$$R } from "../905/103090";
-import { t as _$$t } from "../905/303541";
+import { useAtomWithSubscription } from "../figma_app/27355";
+import { selectWithShallowEqual } from "../905/103090";
+import { getI18nString } from "../905/303541";
 import { Y5 } from "../figma_app/455680";
 import { rT, dT } from "../figma_app/889655";
 import { Xn } from "../905/429125";
@@ -31,7 +31,7 @@ export function $$L2() {
   let e = P();
   return useMemo(() => ({
     type: ZU.ACTION_SUBMENU,
-    getTitle: () => _$$t("fullscreen.properties_panel.layer_header.reset_specific_changes"),
+    getTitle: () => getI18nString("fullscreen.properties_panel.layer_header.reset_specific_changes"),
     icon: jsx(_$$N, {}),
     recordingKey: "resetSubmenu",
     items: [...sy, ...e],
@@ -40,7 +40,7 @@ export function $$L2() {
 }
 let P = () => {
   let e = useMemo($H, []);
-  let t = _$$R(t => e(t, rT(Object.keys(t.mirror.sceneGraphSelection), t.mirror.sceneGraph)));
+  let t = selectWithShallowEqual(t => e(t, rT(Object.keys(t.mirror.sceneGraphSelection), t.mirror.sceneGraph)));
   return useMemo(() => {
     let e = [];
     for (let r in t) for (let i in t[r]) {
@@ -50,7 +50,7 @@ let P = () => {
         customActionType: Wg.STANDARD_BUTTON,
         onClick: () => l7.user("reset-prop-assignments", () => glU.resetComponentPropAssignmentForInstances(a.instanceGUIDs, i)),
         icon: jsx($, {}),
-        getTitle: () => _$$t("design_systems.instance_panel.reset_property_assignment", {
+        getTitle: () => getI18nString("design_systems.instance_panel.reset_property_assignment", {
           assignmentName: a.name
         }),
         recordingKey: `reset_property_assignment_${a.name}`,
@@ -69,7 +69,7 @@ export function $$k0() {
   if ("SYMBOL_AS_STATE" === restoreType) return {
     type: ZU.CUSTOM_ACTION,
     customActionType: Wg.STANDARD_BUTTON,
-    getTitle: () => _$$t("design_systems.instance_panel.restore_variant"),
+    getTitle: () => getI18nString("design_systems.instance_panel.restore_variant"),
     recordingKey: "restoreVariant",
     icon: jsx(_$$y, {}),
     onClick: () => Y5.triggerActionInUserEditScope("restore-symbol-or-state-group")
@@ -81,7 +81,7 @@ function M(e) {
 }
 export function $$F1(e) {
   let t = useRef(null);
-  let r = md(_$$c);
+  let r = useAtomWithSubscription(_$$c);
   let s = useSelector(dT);
   let o = function (e) {
     let t = useSelector(dT);
@@ -105,7 +105,7 @@ export function $$F1(e) {
       className: IU,
       children: jsx(_$$o, {})
     }),
-    getTitle: () => _$$t("design_systems.instance_panel.update_available"),
+    getTitle: () => getI18nString("design_systems.instance_panel.update_available"),
     recordingKey: p,
     isSelected: dropdownShown,
     dropdownTargetButtonRef: t,
@@ -120,7 +120,7 @@ export function $$F1(e) {
 }
 export function $$j3(e) {
   let t = useRef(null);
-  let r = md(_$$c);
+  let r = useAtomWithSubscription(_$$c);
   let s = useSelector(dT);
   let o = _B(s);
   let l = Yc(RR.OVERRIDDEN_SYMBOL_ID, s);

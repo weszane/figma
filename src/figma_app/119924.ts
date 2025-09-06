@@ -1,14 +1,14 @@
 import { useCallback } from "react";
-import { md, fp } from "../figma_app/27355";
+import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { lQ } from "../905/934246";
 import { UK } from "../figma_app/740163";
 import { wt, At, Je } from "../figma_app/74043";
 export function $$l0({
   shouldDeferCanvasUpdateOnPanelResize: e
 }) {
-  let t = md(wt);
-  let r = md(At);
-  let [l, d] = fp(Je);
+  let t = useAtomWithSubscription(wt);
+  let r = useAtomWithSubscription(At);
+  let [l, d] = useAtomValueAndSetter(Je);
   let c = useCallback(() => {
     let e = UK().renderRulers.getCopy();
     d(e);

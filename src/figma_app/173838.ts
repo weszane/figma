@@ -1,6 +1,6 @@
 import { useSelector } from "../vendor/514228";
 import { Rs } from "../figma_app/288654";
-import { lZ } from "../figma_app/257275";
+import { isInteractionPathCheck } from "../figma_app/897289";
 import { FPublicationStatusType } from "../figma_app/191312";
 import { a9b, ehp } from "../figma_app/43951";
 import { B4 } from "../905/71785";
@@ -12,7 +12,7 @@ export function $$d0(e) {
 }
 export function $$c1() {
   let e = useSelector(e => e.openFile?.key);
-  if (lZ()) return useSelector(t => {
+  if (isInteractionPathCheck()) return useSelector(t => {
     let {
       hubFiles,
       figFilePublishedAsHubFile

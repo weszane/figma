@@ -1,9 +1,9 @@
-import { $D } from '../905/11';
+import { reportError } from '../905/11';
 import { ServiceCategories as _$$e } from '../905/165054';
-import { sx } from '../905/449184';
+import { trackEventAnalytics } from '../905/449184';
 import { c as _$$c } from '../905/499575';
 import { getFeatureFlags } from '../905/601108';
-import { Lo, x1, xi } from '../905/714362';
+import { logInfo, logError, logWarning } from '../905/714362';
 import { createDeferredPromise } from '../905/874553';
 import { XHR, XHRError } from '../905/910117';
 import { debounce } from '../905/915765';
@@ -98,11 +98,11 @@ let A = class e {
       if (this.isExpired()) throw new S();
       if (e.status !== 0 && e.status < 500) {
         let t = this.s3Path?.includes('resize') ? 'Can\'t load image! Make sure Pixie service is running locally' : 'Image is missing from S3!';
-        x1('image', t, {
+        logError('image', t, {
           hash: this.hash,
           status: e.status
         });
-        $D(_$$e.SCENEGRAPH_AND_SYNC, new Error('Image missing from S3'));
+        reportError(_$$e.SCENEGRAPH_AND_SYNC, new Error('Image missing from S3'));
       }
       throw e;
     });
@@ -265,14 +265,14 @@ let w = class e {
               failed
             } = e.parseFileUpdateResponseForImages(d, r);
             for (let e of (Bko.imagePermissionsCopied(success), failed)) this.markImageMissing(e);
-            for (let e of (failed.length > 0 && sx('image_permission_copy_failed', {
+            for (let e of (failed.length > 0 && trackEventAnalytics('image_permission_copy_failed', {
               shas: failed.join(',')
             }), d)) delete this.pendingPasteRequests[e];
             o.type === 'fileKey' ? n[o.fileKey].resolve() : a[o.libraryKey].resolve();
             return;
           } catch (e) {
             if (e.status >= 400 && e.status < 500) {
-              for (let e of (Jj(), sx('image_permission_copy_failed', {
+              for (let e of (Jj(), trackEventAnalytics('image_permission_copy_failed', {
                 shas: d.join(',')
               }), d)) {
                 this.markImageMissing(e);
@@ -387,14 +387,14 @@ let w = class e {
   }
   queueImageForLookup(e) {
     let t = e.hash;
-    this.verbose && Lo('image', 'incoming', {
+    this.verbose && logInfo('image', 'incoming', {
       hash: t
     });
     e.state = 0;
     this.incomingImages.set(t, e);
     this.pendingLookupCallback == null && (this.pendingLookupCallback = setTimeout(() => {
       this.pendingLookupCallback = null;
-      this.lookupImages().catch(e => $D(_$$e.SCENEGRAPH_AND_SYNC, e));
+      this.lookupImages().catch(e => reportError(_$$e.SCENEGRAPH_AND_SYNC, e));
     }, 0));
   }
   setExternalSource(e, t) {
@@ -464,7 +464,7 @@ let w = class e {
   setImageDownloadPriority(e, t) {
     let r = this.getOrCreateImageLogData(e);
     if (r.downloadPriority = t, r.downloadPriorityTimestamp = performance.now(), !e) {
-      xi('setImageDownloadPriority', 'invalid hash');
+      logWarning('setImageDownloadPriority', 'invalid hash');
       return;
     }
     let n = this.allImages.get(e);
@@ -474,7 +474,7 @@ let w = class e {
       this.queueImageForLookup(n);
       return;
     }
-    n.state === 4 && x1('image', 'Got download request for currently uploading image', {
+    n.state === 4 && logError('image', 'Got download request for currently uploading image', {
       hash: e
     }, {
       reportAsSentryError: !0
@@ -499,13 +499,13 @@ let w = class e {
       if (t == null) break;
       if (!t.found) {
         let e = t.retryDelay;
-        !Number.isFinite(e) || e <= 0 ? $D(_$$e.SCENEGRAPH_AND_SYNC, new Error('Logic error in download queue, cannot compute next retry')) : setTimeout(() => this.maybeDownloadMoreImages(), e);
+        !Number.isFinite(e) || e <= 0 ? reportError(_$$e.SCENEGRAPH_AND_SYNC, new Error('Logic error in download queue, cannot compute next retry')) : setTimeout(() => this.maybeDownloadMoreImages(), e);
         break;
       }
       let r = t.image;
       let n = this.getOrCreateImageLogData(r.hash);
       if (r.hash) {
-        this.verbose && Lo('image', 'download start', {
+        this.verbose && logInfo('image', 'download start', {
           hash: r.hash,
           ok: !this.pendingDownloads.has(r.hash)
         });
@@ -515,7 +515,7 @@ let w = class e {
       }
       r.download(this.imageMaxSize).then(t => {
         if (this.cancelDownloads.$$delete(r.hash)) return;
-        this.verbose && (Lo('image', 'download done', {
+        this.verbose && (logInfo('image', 'download done', {
           hash: r.hash,
           ok: !this.alreadyDownloaded.has(r.hash)
         }), this.getOrCreateImageLogData(r.hash).downloadFinishedTimestamp = performance.now());
@@ -538,15 +538,15 @@ let w = class e {
           }
           Bko.imageDownloaded(r.hash, i);
         }
-        n || this.pendingDecodes.has(r.hash) || (xi('ImageManager', 'missing pending decode after download', {
+        n || this.pendingDecodes.has(r.hash) || (logWarning('ImageManager', 'missing pending decode after download', {
           hash: r.hash
-        }), $D(_$$e.SCENEGRAPH_AND_SYNC, new Error('missing pending decode after image marked as downloaded')), r.imageIsReady());
+        }), reportError(_$$e.SCENEGRAPH_AND_SYNC, new Error('missing pending decode after image marked as downloaded')), r.imageIsReady());
       }, e => {
         if (this.pendingDecodes.$$delete(r.hash) && this.maybeResolveImageQueueEmptyAndPendingImages(), this.cancelDownloads.$$delete(r.hash)) return;
         if (e instanceof T) {
           this.markImageMissing(r.hash);
         } else if (e instanceof I) {
-          $D(_$$e.SCENEGRAPH_AND_SYNC, e);
+          reportError(_$$e.SCENEGRAPH_AND_SYNC, e);
           this.markImageFailed(r.hash);
         } else if (e instanceof S) {
           this.queueImageForLookup(r);
@@ -578,7 +578,7 @@ let w = class e {
     this.setImageDownloadPriority(e, A.MAX_PRIORITY);
   }
   setImageDecodePending(e) {
-    this.verbose && Lo('image', 'decode start', {
+    this.verbose && logInfo('image', 'decode start', {
       hash: e,
       ok: !this.pendingDecodes.has(e)
     });
@@ -594,7 +594,7 @@ let w = class e {
     return t;
   }
   clearImageDecodePending(e, t) {
-    this.verbose && Lo('image', 'decode done', {
+    this.verbose && logInfo('image', 'decode done', {
       hash: e,
       ok: this.pendingDecodes.has(e)
     });
@@ -602,7 +602,7 @@ let w = class e {
     r.decodeFinishedTimestamp = performance.now();
     this.pendingDecodes.$$delete(e) && this.maybeResolveImageQueueEmptyAndPendingImages();
     t ? (this.markImageReady(e), r.decodedImageState = 5) : (this.markImageFailed(e), r.decodedImageState = 7);
-    getFeatureFlags().image_log_timing && Math.random() < this.LOGGING_RATE && sx('image_log_timing', {
+    getFeatureFlags().image_log_timing && Math.random() < this.LOGGING_RATE && trackEventAnalytics('image_log_timing', {
       hash: e,
       ...r
     });
@@ -634,7 +634,7 @@ let w = class e {
   async lookupImages() {
     let t = [];
     for (let e of this.incomingImages.values()) {
-      e.state === 0 && (t.push(e), e.state = 1, this.verbose && Lo('image', 'lookup', {
+      e.state === 0 && (t.push(e), e.state = 1, this.verbose && logInfo('image', 'lookup', {
         hash: e.hash
       }));
     }
@@ -647,7 +647,7 @@ let w = class e {
             try {
               await t;
             } catch (t) {
-              x1('lookupImages', 'pastePromise failed', {
+              logError('lookupImages', 'pastePromise failed', {
                 hash: e.hash
               });
             }
@@ -658,9 +658,9 @@ let w = class e {
           let r = n.s3_urls[t.hash];
           let i = null;
           e.shouldUseCompressedTextures() && (i = n.compressed_texture_s3_urls[t.hash]);
-          r ? (t.s3Path = r, i ? (t.compressedTextureS3Path = i, this.compressedTextureLookupQueue.push(t.hash), this.markImageNeedsCompressedTextureAvailabilityLookup(t.hash), this.lookupCompressedTextureAvailabilities(t.hash)) : (this.markImagePresent(t.hash), this.downloadQueue.push(t)), this.verbose && Lo('image', 'enqueued-batch', {
+          r ? (t.s3Path = r, i ? (t.compressedTextureS3Path = i, this.compressedTextureLookupQueue.push(t.hash), this.markImageNeedsCompressedTextureAvailabilityLookup(t.hash), this.lookupCompressedTextureAvailabilities(t.hash)) : (this.markImagePresent(t.hash), this.downloadQueue.push(t)), this.verbose && logInfo('image', 'enqueued-batch', {
             hash: t.hash
-          })) : (this.markImageMissing(t.hash), this.verbose && Lo('image', 'missing', {
+          })) : (this.markImageMissing(t.hash), this.verbose && logInfo('image', 'missing', {
             hash: t.hash
           }));
           this.incomingImages.$$delete(t.hash);
@@ -668,7 +668,7 @@ let w = class e {
       }
     } finally {
       for (let e of t) {
-        this.incomingImages.$$delete(e.hash) && xi('image', 'incoming fallback delete', {
+        this.incomingImages.$$delete(e.hash) && logWarning('image', 'incoming fallback delete', {
           hash: e.hash
         });
       }
@@ -683,7 +683,7 @@ let w = class e {
   }
   forgetImage(e) {
     if (this.imagesNeedingDirectUpload.has(e)) return;
-    this.verbose && Lo('image', 'forget', {
+    this.verbose && logInfo('image', 'forget', {
       hash: e
     });
     this.incomingImages.$$delete(e);
@@ -702,7 +702,7 @@ let w = class e {
   }
   get pendingImages() {
     let e = this.getNumEligibleForDownload();
-    this.verbose && Lo('image', 'pendingImages', {
+    this.verbose && logInfo('image', 'pendingImages', {
       incoming: this.incomingImages.size,
       eligible: e,
       downloads: this.pendingDownloads.size,
@@ -717,16 +717,16 @@ let w = class e {
     if (!this.imageQueueEmpty) {
       let e = performance.now();
       this.imageQueueEmpty = createDeferredPromise();
-      this.verbose && Lo('image', 'queue empty defer installed', {
+      this.verbose && logInfo('image', 'queue empty defer installed', {
         start: e
       });
       this.imageQueueEmpty.promise.$$finally(() => {
         this.imageQueueEmpty = null;
         let t = performance.now() - e;
-        this.verbose ? Lo('image', 'queue empty defer cleared', {
+        this.verbose ? logInfo('image', 'queue empty defer cleared', {
           start: e,
           elapsed: t
-        }) : t > 1e4 && xi('image', 'queue empty finished after a long time', {
+        }) : t > 1e4 && logWarning('image', 'queue empty finished after a long time', {
           start: e,
           elapsed: t
         });
@@ -749,13 +749,13 @@ let w = class e {
     setTimeout(() => {
       if (e === this.imageQueueEmpty) {
         let n = Math.round(0.001 * (performance.now() - t));
-        xi('image', 'queue empty is taking a long time', {
+        logWarning('image', 'queue empty is taking a long time', {
           elapsedSec: n,
           pending: this.pendingImages,
           downloads: this.pendingDownloads.size,
           decodes: this.pendingDecodes.size
         });
-        this.verbose && Lo('image', 'slow', {
+        this.verbose && logInfo('image', 'slow', {
           downloads: this.pendingDownloads,
           decodes: this.pendingDecodes
         });
@@ -767,7 +767,7 @@ let w = class e {
   maybeResolveImageQueueEmptyAndPendingImages() {
     let e = this.pendingImages;
     for (let t of this.progressCallbacks) t(e);
-    this.imageQueueEmpty && e === 0 && (this.verbose && Lo('image', 'resolve queue empty!'), this.imageQueueEmpty.resolve(), this.progressCallbacks = []);
+    this.imageQueueEmpty && e === 0 && (this.verbose && logInfo('image', 'resolve queue empty!'), this.imageQueueEmpty.resolve(), this.progressCallbacks = []);
     this.maybeResolveImagesLookedUp();
   }
   maybeResolveImagesLookedUp() {
@@ -790,12 +790,12 @@ let w = class e {
   }
   async loadAllImages(e, t, r, n = null, i, a) {
     let s = performance.now();
-    this.verbose && Lo('image', 'loadAllImagesUnder', {
+    this.verbose && logInfo('image', 'loadAllImagesUnder', {
       reason: r,
       guids: e,
       start: s
     });
-    e.includes('0:0') && r !== 'playground.initialLoad' && x1('image', 'loadAllImagesUnder called with full document', {
+    e.includes('0:0') && r !== 'playground.initialLoad' && logError('image', 'loadAllImagesUnder called with full document', {
       reason: r
     });
     let o = 0;
@@ -824,7 +824,7 @@ let w = class e {
     return await l;
   }
   async loadImageByHash(e) {
-    this.verbose && Lo('image', 'loadImageByHash', {
+    this.verbose && logInfo('image', 'loadImageByHash', {
       hash: e
     });
     let t = this.allImages.get(e);
@@ -850,7 +850,7 @@ let w = class e {
     this.pendingUploads.add(e);
   }
   markImageUploaded(e) {
-    this.pendingUploads.has(e) || xi('image', 'markImageUploaded called for unknown image', {
+    this.pendingUploads.has(e) || logWarning('image', 'markImageUploaded called for unknown image', {
       imageHash: e
     });
     this.pendingUploads.$$delete(e);
@@ -880,7 +880,7 @@ let w = class e {
       }
     }).then(e => {
       if (e.status !== 200) {
-        x1('image', 'unexpected status code from image upload', {
+        logError('image', 'unexpected status code from image upload', {
           hash: n,
           status: e.status
         }, {
@@ -888,7 +888,7 @@ let w = class e {
         });
         return;
       }
-      Lo('image', 'uploaded new image', {
+      logInfo('image', 'uploaded new image', {
         hash: n
       });
       this.pendingUploads.$$delete(n);
@@ -898,7 +898,7 @@ let w = class e {
       this.maybeResolveImagesUploaded();
     }, e => {
       let t;
-      e.status === 415 ? (x1('image', 'image upload failed, removing invalid image', {
+      e.status === 415 ? (logError('image', 'image upload failed, removing invalid image', {
         hash: n
       }), t = d8m.UNSUPPORTED_MEDIA) : t = d8m.OTHER_FAILURE;
       this.pendingUploads.$$delete(n);
@@ -954,7 +954,7 @@ let w = class e {
       for (let e of Object.values(this.pendingImagesToRecord)) {
         for (let t of e) r.add(t);
       }
-      Lo('ImageManager', 'Blocking image info', {
+      logInfo('ImageManager', 'Blocking image info', {
         hash: t,
         state: e ? e.state : 'NO IMAGE',
         inIncoming: t in this.incomingImages,
@@ -971,7 +971,7 @@ let w = class e {
     let s = this.downloadQueue.debugString();
     let o = Array.from(t).join(',');
     let l = Array.from(r).join(',');
-    Lo('ImageManager', 'ImageManager debug info', {
+    logInfo('ImageManager', 'ImageManager debug info', {
       incomingImages: n,
       downloadQueue: s,
       pendingDownloads: i,

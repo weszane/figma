@@ -1,5 +1,5 @@
 import { throwTypeError } from "../figma_app/465776";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 export class $$a0 {
   constructor(e) {
     this.eventName = e;
@@ -39,7 +39,7 @@ export class $$a0 {
                 ...o(this.nodeChangesTs, "node", 5),
                 ...o(this.repliesTs, "reply", 5)
               };
-              sx(this.eventName, t);
+              trackEventAnalytics(this.eventName, t);
               this.alreadySent = !0;
             }
           } else console.error(`IncrementalLoadTimer: file key mismatch ${e.fileKey} != ${this.fileKey}`);

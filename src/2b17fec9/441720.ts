@@ -16,7 +16,7 @@ import { NLJ } from "../figma_app/763686";
 import { Pt } from "../figma_app/806412";
 import { N } from "../figma_app/176280";
 import { I as _$$I } from "../figma_app/131348";
-import { t as _$$t2 } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { D1 } from "../9410/67768";
 import { N as _$$N } from "../figma_app/57000";
 import { pN } from "../9410/983733";
@@ -43,14 +43,14 @@ let u = memo(function (e) {
 export let $$N0 = {
   SELECT: {
     toolId: NLJ.SELECT,
-    getText: () => _$$t2("fullscreen_actions.set-tool-default-desc-figjam"),
+    getText: () => getI18nString("fullscreen_actions.set-tool-default-desc-figjam"),
     icon: jsx(H, {}),
     smallIcon: jsx(_$$y, {}),
     recordingKey: hj.SELECT
   },
   HAND: {
     toolId: NLJ.HAND,
-    getText: () => _$$t2("fullscreen_actions.set-tool-hand"),
+    getText: () => getI18nString("fullscreen_actions.set-tool-hand"),
     icon: jsx(t, {}),
     smallIcon: jsx(O, {}),
     recordingKey: hj.HAND,
@@ -58,51 +58,51 @@ export let $$N0 = {
   },
   STICKY: {
     toolId: NLJ.STICKY,
-    getText: () => _$$t2("fullscreen_actions.set-tool-sticky"),
+    getText: () => getI18nString("fullscreen_actions.set-tool-sticky"),
     recordingKey: hj.STICKY,
     onboardingKey: s2
   },
   SHAPE_COLLAGE: {
     toolId: NLJ.SHAPE_WHITEBOARD_SQUARE,
-    getText: () => _$$t2("whiteboard.delightful_toolbar.shapes_and_connectors_label"),
+    getText: () => getI18nString("whiteboard.delightful_toolbar.shapes_and_connectors_label"),
     recordingKey: hj.SHAPES,
     onboardingKey: BC
   },
   TEXT: {
     toolId: NLJ.TYPE,
-    getText: () => _$$t2("fullscreen_actions.set-tool-type"),
+    getText: () => getI18nString("fullscreen_actions.set-tool-type"),
     icon: jsx(B, {}),
     recordingKey: hj.TEXT
   },
   SECTION: {
     toolId: NLJ.SECTION,
-    getText: () => _$$t2("fullscreen_actions.set-tool-section"),
+    getText: () => getI18nString("fullscreen_actions.set-tool-section"),
     icon: jsx(P, {}),
     recordingKey: hj.SECTION,
     onboardingKey: pN
   },
   TABLE: {
     toolId: NLJ.TABLE,
-    getText: () => _$$t2("fullscreen_actions.set-tool-table"),
+    getText: () => getI18nString("fullscreen_actions.set-tool-table"),
     icon: jsx(_$$s, {}),
     recordingKey: hj.TABLE
   },
   STAMP: {
     toolId: NLJ.STAMP,
-    getText: () => _$$t2("fullscreen_actions.set-tool-stamp"),
+    getText: () => getI18nString("fullscreen_actions.set-tool-stamp"),
     icon: jsx(u, {}),
     recordingKey: hj.STAMP,
     onboardingKey: E$
   },
   COMMENTS: {
     toolId: NLJ.COMMENTS,
-    getText: e => e?.numUnreadComments != null && e.numUnreadComments > 0 ? _$$t2("fullscreen.accessibility.view_comments_with_unreads") : _$$t2("fullscreen.accessibility.view_comments"),
+    getText: e => e?.numUnreadComments != null && e.numUnreadComments > 0 ? getI18nString("fullscreen.accessibility.view_comments_with_unreads") : getI18nString("fullscreen.accessibility.view_comments"),
     getIcon: e => e?.numUnreadComments != null && e?.numUnreadComments > 0 ? jsx(X, {}) : jsx(_$$f, {}),
     recordingKey: hj.COMMENT
   },
   ACTIONS: {
     toolId: _$$y2,
-    getText: () => _$$t2("qa.extensions.tooltip_actions"),
+    getText: () => getI18nString("qa.extensions.tooltip_actions"),
     getIcon: e => e?.hasAIPermission ? jsx(_$$P, {}) : jsx(_$$t, {}),
     recordingKey: hj.ACTIONS,
     onboardingKey: D1
@@ -155,7 +155,7 @@ export let $$O1 = {
     overlayId: Ls.MoveTools,
     tools: [$$N0.SELECT, $$N0.HAND],
     recordingKey: "toolGroupMove",
-    getTooltipText: () => _$$t2("fullscreen.flyout.move_tools")
+    getTooltipText: () => getI18nString("fullscreen.flyout.move_tools")
   }
 };
 export function $$k3({

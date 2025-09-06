@@ -6,7 +6,7 @@ import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { parsePxInt } from "../figma_app/783094";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { on } from "../905/420347";
 import { IT, M4 } from "../905/713695";
 import { H as _$$H } from "../905/216861";
@@ -15,7 +15,7 @@ import { Ju, ZU } from "../905/102752";
 import { K as _$$K } from "../905/443068";
 import { C as _$$C } from "../905/520159";
 import { l as _$$l } from "../905/716947";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { P as _$$P } from "../905/347284";
 import { fu } from "../figma_app/831799";
 import { u as _$$u } from "../figma_app/187359";
@@ -34,10 +34,10 @@ import { kz } from "../905/691188";
 import { A as _$$A } from "../svg/562176";
 import { Tn } from "../figma_app/933328";
 import { dq } from "../905/845253";
-import { Bu } from "../figma_app/53721";
+import { mapEditorTypeToStringWithObfuscated } from "../figma_app/53721";
 import { Z as _$$Z } from "../905/939602";
 import { getFeatureFlags } from "../905/601108";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { IT as _$$IT } from "../figma_app/566371";
 import { qp } from "../905/977779";
 import { ud } from "../905/862913";
@@ -125,7 +125,7 @@ function z() {
 function H() {
   let e = useSelector(e => e.selectedView);
   let t = useMemo(() => {
-    if ("fullscreen" === e.view) return Bu(e.editorType);
+    if ("fullscreen" === e.view) return mapEditorTypeToStringWithObfuscated(e.editorType);
   }, [e]);
   let [i] = IT(W(t ?? ""), {
     enabled: !!t
@@ -145,7 +145,7 @@ function K(e) {
     dropdownShown,
     selectedView,
     defaultPublished
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     dropdownShown: e.dropdownShown,
     selectedView: e.selectedView,
     defaultPublished: e.library.defaultPublished
@@ -180,7 +180,7 @@ function K(e) {
           className: "figjam_subscription_file_view--header--cDFWN",
           children: [jsx(_$$K, {
             onClick: e.backToList,
-            "aria-label": _$$t("general.back"),
+            "aria-label": getI18nString("general.back"),
             children: jsx(_$$C, {})
           }), jsx(j, {
             canEditSubscriptions: !0,
@@ -210,7 +210,7 @@ function K(e) {
 let ea = "figjam_subscriptions_list_view--teamSectionHeaderSticky--6-qao figjam_subscriptions_list_view--sectionHeader--0sArV";
 function es(e) {
   let t = ud();
-  let i = md(qp);
+  let i = useAtomWithSubscription(qp);
   let s = useSelector(e => e.openFile);
   let o = useSelector(e => e.folders);
   let l = useSelector(e => e.library);
@@ -319,7 +319,7 @@ function es(e) {
         isFigjam: !0,
         isVisible: !0,
         onChange: setSearchQuery,
-        placeholder: _$$t("whiteboard.library_subscriptions.search_for_libraries"),
+        placeholder: getI18nString("whiteboard.library_subscriptions.search_for_libraries"),
         query: searchQuery,
         recordingKey: "subscriptionListViewLibrarySearch",
         selectOnFocus: !0
@@ -329,20 +329,20 @@ function es(e) {
       height: 480,
       children: [jsx(_$$W, {
         dismissable: !1,
-        buttonText: _$$t("whiteboard.inserts.libraries_update_all"),
-        formatBannerText: e => _$$t("whiteboard.inserts.libraries_update_to_your_components", {
+        buttonText: getI18nString("whiteboard.inserts.libraries_update_all"),
+        formatBannerText: e => getI18nString("whiteboard.inserts.libraries_update_to_your_components", {
           numUpdates: e
         })
       }), "loading" === _.status && jsx(FO, {}), "loading" !== _.status && jsxs(Fragment, {
         children: [searchQuery && 0 === E.length && jsx("div", {
           className: "figjam_subscriptions_list_view--noSearchResults--0YZBG ellipsis--ellipsis--Tjyfa",
-          children: tx("whiteboard.library_subscriptions.no_results_for", {
+          children: renderI18nText("whiteboard.library_subscriptions.no_results_for", {
             query: searchQuery
           })
         }), w && jsxs(Fragment, {
           children: [jsx("div", {
             className: ea,
-            children: tx("whiteboard.library_subscriptions.in_this_file")
+            children: renderI18nText("whiteboard.library_subscriptions.in_this_file")
           }), S.map(i => {
             let r = t[i.library_file_key];
             return r ? jsx(j, {
@@ -384,7 +384,7 @@ function es(e) {
         }), l.defaultPublished.libraryKeys.length > 0 && !searchQuery && jsxs(Fragment, {
           children: [jsx("div", {
             className: ea,
-            children: tx("whiteboard.library_subscriptions.default_files")
+            children: renderI18nText("whiteboard.library_subscriptions.default_files")
           }), l.defaultPublished.libraryKeys.map(t => {
             let r = i[t];
             if (!r) return null;
@@ -432,7 +432,7 @@ let $$eu0 = Ju(function (e) {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: tx("design_systems.libraries_modal.manage_libraries")
+          children: renderI18nText("design_systems.libraries_modal.manage_libraries")
         })
       }), jsx(nB, {
         padding: 0,

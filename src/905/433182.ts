@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useDispatch } from "../vendor/514228";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { In } from "../905/672640";
 import { SX } from "../figma_app/199513";
 import { Ah } from "../905/316062";
@@ -17,7 +17,7 @@ export function $$p0(e) {
     className: rm,
     disabled: !p,
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": p ? void 0 : _$$t("file_browser.file_move.you_dont_have_edit_access_to_this_team"),
+    "data-tooltip": p ? void 0 : getI18nString("file_browser.file_move.you_dont_have_edit_access_to_this_team"),
     "data-tooltip-show-above": !0,
     "data-tooltip-timeout-delay": 100,
     "data-tooltip-max-width": 250,
@@ -41,7 +41,7 @@ export function $$p0(e) {
         icon: "plus-32",
         fill: p ? "default" : "disabled"
       })
-    }), _$$t("file_browser.file_move.new_project")]
+    }), getI18nString("file_browser.file_move.new_project")]
   });
 }
 export const S = $$p0;

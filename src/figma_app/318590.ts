@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { getFeatureFlags } from "../905/601108";
-import { eU, zl, fp, md } from "../figma_app/27355";
+import { atom, atomStoreManager, useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { Rs } from "../figma_app/288654";
 import { tT } from "../905/723791";
@@ -9,19 +9,19 @@ import { dZ } from "../figma_app/459490";
 import { JV } from "../figma_app/976749";
 import { Z } from "../905/296690";
 import { YTs, WoR } from "../figma_app/43951";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { Jh } from "../figma_app/552876";
 import { P } from "../905/35881";
 import { n as _$$n } from "../905/347702";
 import { PE, W7 } from "../figma_app/251115";
 import { C7 } from "../figma_app/144974";
 import { p9, $7 } from "../905/509613";
-let T = eU(!1);
-let I = eU(null);
-let S = _$$n(() => zl.get(T));
+let T = atom(!1);
+let I = atom(null);
+let S = _$$n(() => atomStoreManager.get(T));
 export function $$v8(e) {
   let t = function (e) {
-    let t = zl.get(Z);
+    let t = atomStoreManager.get(Z);
     let r = getFeatureFlags().ai_search_llama_enable_workaround && dZ(t);
     let n = Rs(r ? YTs : WoR, {
       key: e
@@ -34,22 +34,22 @@ export function $$v8(e) {
     } = n.data;
     return !!(file?.status === tT.Loaded && file?.data) && file.data.hasPermission;
   }(e);
-  let [r, s] = fp(T);
+  let [r, s] = useAtomValueAndSetter(T);
   useEffect(() => {
     s(t);
   }, [t, s]);
 }
-let A = _$$n(() => !!md(p9));
+let A = _$$n(() => !!useAtomWithSubscription(p9));
 export function $$x1() {
   return !!$7("getHasAssetVisualSearchPermission") && !!getFeatureFlags().api_asset_search && S();
 }
 export function $$N0(e) {
   return getFeatureFlags().api_asset_search ? function (e) {
     if (!e) return Promise.resolve(!1);
-    let t = zl.get(I);
+    let t = atomStoreManager.get(I);
     return null !== t ? Promise.resolve(t) : vs("exp_search_ai_assets").then(e => {
       let t = e.getValue("allow_ai_results", null);
-      null !== t && zl.set(I, !!t);
+      null !== t && atomStoreManager.set(I, !!t);
       return !!t;
     });
   }(e).then(e => !!(e || $7("getHasAssetSearchPermission")) && S()) : Promise.resolve(!1);
@@ -66,7 +66,7 @@ let $$w2 = _$$n(() => {
 });
 export function $$O6() {
   let e = function () {
-    let e = zl.get(p9);
+    let e = atomStoreManager.get(p9);
     return !!$7("useHasFragmentSearchPermission") && (!getFeatureFlags().asset_suggestions_require_completed_backfill || !!e) && S();
   }();
   return $$R3() && e && C7();
@@ -75,7 +75,7 @@ export function $$R3() {
   let e = debugState.getState().selectedView;
   let t = P(e);
   let r = Jh(e);
-  return JV(e) === nT.Design || t || r;
+  return JV(e) === FEditorType.Design || t || r;
 }
 export function $$L7() {
   let e = PE();

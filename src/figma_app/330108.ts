@@ -5,7 +5,7 @@ import { A } from "../vendor/21595";
 import { NC } from "../905/17179";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
 import { nF } from "../905/350402";
 import { yJ } from "../figma_app/240735";
@@ -26,7 +26,7 @@ nF(async (e, t) => {
       teams: [n]
     }));
   } catch (t) {
-    e.dispatch(_$$s.error(J(t, _$$t("org_team_actions.an_error_occurred_while_changing_team_s_org_access"))));
+    e.dispatch(_$$s.error(J(t, getI18nString("org_team_actions.an_error_occurred_while_changing_team_s_org_access"))));
   }
 });
 let $$T7 = nF(async (e, t) => {
@@ -46,11 +46,11 @@ let $$T7 = nF(async (e, t) => {
     e.dispatch($$O8({
       teams: i
     }));
-    e.dispatch(_$$s.flash(_$$t("org_team_actions.teams_were_unassigned", {
+    e.dispatch(_$$s.flash(getI18nString("org_team_actions.teams_were_unassigned", {
       numTeams: i.length
     })));
   } catch (t) {
-    e.dispatch(_$$s.error(J(t, _$$t("org_team_actions.an_error_occurred_while_unassigning_team_s_from_a_workspace"))));
+    e.dispatch(_$$s.error(J(t, getI18nString("org_team_actions.an_error_occurred_while_unassigning_team_s_from_a_workspace"))));
   }
 });
 let $$I10 = nF(async (e, t) => {
@@ -63,12 +63,12 @@ let $$I10 = nF(async (e, t) => {
     e.dispatch($$O8({
       teams: i
     }));
-    e.dispatch(_$$s.flash(_$$t("org_team_actions.teams_were_assigned_to_workspace", {
+    e.dispatch(_$$s.flash(getI18nString("org_team_actions.teams_were_assigned_to_workspace", {
       numTeams: i.length,
       workspaceName: t.workspaceName
     })));
   } catch (t) {
-    e.dispatch(_$$s.error(J(t, _$$t("org_team_actions.an_error_occurred_while_assigning_team_s_to_a_workspace"))));
+    e.dispatch(_$$s.error(J(t, getI18nString("org_team_actions.an_error_occurred_while_assigning_team_s_to_a_workspace"))));
   }
 });
 nF(async (e, t) => {
@@ -84,7 +84,7 @@ nF(async (e, t) => {
     }));
     e.dispatch($$C4("loaded"));
   } catch (t) {
-    e.dispatch(_$$s.error(J(t, _$$t("org_team_actions.an_error_occurred_while_fetching_teams"))));
+    e.dispatch(_$$s.error(J(t, getI18nString("org_team_actions.an_error_occurred_while_fetching_teams"))));
     e.dispatch($$C4("errors"));
   }
 });
@@ -105,7 +105,7 @@ let $$S6 = nF((e, t) => {
       level: t.level
     }));
   }).catch(t => {
-    e.dispatch(_$$s.error(J(t, _$$t("org_team_actions.an_error_occurred_while_joining_teams"))));
+    e.dispatch(_$$s.error(J(t, getI18nString("org_team_actions.an_error_occurred_while_joining_teams"))));
     e.dispatch(of({
       key: a
     }));
@@ -128,7 +128,7 @@ let v = nF((e, t) => {
       level: t.level
     }));
   }).catch(t => {
-    e.dispatch(_$$s.error(J(t, _$$t("org_team_actions.an_error_occurred_while_joining"))));
+    e.dispatch(_$$s.error(J(t, getI18nString("org_team_actions.an_error_occurred_while_joining"))));
     e.dispatch(of({
       key: a
     }));
@@ -154,7 +154,7 @@ let $$A2 = nF((e, t, {
       userInitiated: !1
     }));
   }).catch(t => {
-    disableFlashError || e.dispatch(_$$s.error(J(t, _$$t("org_team_actions.an_error_occurred_while_trying_to_fetch_this_team"))));
+    disableFlashError || e.dispatch(_$$s.error(J(t, getI18nString("org_team_actions.an_error_occurred_while_trying_to_fetch_this_team"))));
   });
 }, ({
   teamId: e
@@ -180,7 +180,7 @@ let $$N3 = nF((e, t) => {
       teams: r
     }));
   }).catch(t => {
-    e.dispatch(_$$s.error(J(t, _$$t("org_team_actions.an_error_occurred_while_trying_to_fetch_teams_within_the_organization"))));
+    e.dispatch(_$$s.error(J(t, getI18nString("org_team_actions.an_error_occurred_while_trying_to_fetch_teams_within_the_organization"))));
   });
   e.dispatch($$x0(t));
 });

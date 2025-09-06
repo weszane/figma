@@ -7,7 +7,7 @@ import { Ez5, glU, Z_n } from "../figma_app/763686";
 import { l7, nc } from "../905/189185";
 import { Ay } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
-import { M2, eU as _$$eU, md, fp } from "../figma_app/27355";
+import { createAtomWithEquality, atom, useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { k9 } from "../905/19536";
 import h from "classnames";
 import { Pt } from "../figma_app/806412";
@@ -15,7 +15,7 @@ import { D8, GG } from "../905/511649";
 import { k as _$$k2 } from "../905/582200";
 import { Point } from "../905/736624";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Y5 } from "../figma_app/455680";
 import { hS, gl } from "../905/216495";
 import { ut } from "../figma_app/84367";
@@ -36,7 +36,7 @@ import { e as _$$e } from "../905/149844";
 import { Ad } from "../figma_app/273493";
 import { getSingletonSceneGraph } from "../905/700578";
 import { A as _$$A2 } from "../vendor/850789";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { UE, J1 } from "../figma_app/191804";
 import { ZC } from "../figma_app/39751";
 import { u1, XE } from "../figma_app/91703";
@@ -67,14 +67,14 @@ import { y8 } from "../905/188169";
 import { R4 } from "../figma_app/835688";
 import { t as _$$t2 } from "../905/100946";
 var g = h;
-let ec = Wh(() => M2(_$$eU({})));
+let ec = Wh(() => createAtomWithEquality(atom({})));
 let eu = "slides.advancedEditThemeModal";
 function ep({
   themeId: e,
   initialPosition: t,
   closePicker: i
 }) {
-  let a = md(TN);
+  let a = useAtomWithSubscription(TN);
   useEffect(() => {
     a.includes(e) || i();
   }, [a, e, i]);
@@ -121,14 +121,14 @@ function em({
   recordingKey: t,
   onClose: i
 }) {
-  let a = md(TN).length;
+  let a = useAtomWithSubscription(TN).length;
   let s = Ez5?.slideThemeLibBindings().numSlidesUsingTheme(e) ?? 0;
   let o = !0;
-  let c = _$$t("slides.properties_panel.theme.remove_style_from_deck");
-  1 === a ? (o = !1, c = _$$t("slides.properties_panel.theme.cant_remove_only_style")) : s > 0 && (o = !1, c = _$$t("slides.properties_panel.theme.cant_remove_used_style"));
+  let c = getI18nString("slides.properties_panel.theme.remove_style_from_deck");
+  1 === a ? (o = !1, c = getI18nString("slides.properties_panel.theme.cant_remove_only_style")) : s > 0 && (o = !1, c = getI18nString("slides.properties_panel.theme.cant_remove_used_style"));
   let u = useCallback(() => {
     l7.user("delete-theme", () => {
-      o && (Ez5.slideThemeLibBindings().deleteTheme(e), sx("Theme Removed"), i());
+      o && (Ez5.slideThemeLibBindings().deleteTheme(e), trackEventAnalytics("Theme Removed"), i());
     });
   }, [e, o, i]);
   let m = Pt(t, "removeTheme");
@@ -151,7 +151,7 @@ function eg({
   themeId: e,
   recordingKey: t
 }) {
-  let i = md(Dq)[e];
+  let i = useAtomWithSubscription(Dq)[e];
   let [a, s] = useState(!1);
   return i ? a ? jsx(ef, {
     themeId: e,
@@ -167,7 +167,7 @@ function eg({
       children: i
     }), jsx(_$$E2, {
       id: eh,
-      children: _$$t("slides.properties_panel.theme.click_to_edit_theme_name")
+      children: getI18nString("slides.properties_panel.theme.click_to_edit_theme_name")
     })]
   }) : null;
 }
@@ -194,11 +194,11 @@ function ef({
     className: "slides_edit_theme_modal--textInput--a8Tb-",
     delay: 50,
     id: "themeName",
-    name: _$$t("slides.properties_panel.theme.name_input_description"),
+    name: getI18nString("slides.properties_panel.theme.name_input_description"),
     onBlur: c,
     onChange: u,
     onKeyDown: p,
-    placeholder: _$$t("slides.properties_panel.theme.panel_title"),
+    placeholder: getI18nString("slides.properties_panel.theme.panel_title"),
     recordingKey: Pt(i, "editThemeName"),
     value: s
   });
@@ -225,8 +225,8 @@ function e_({
       children: [jsx("p", {
         className: _$$s.pl16.pr8.pb8.$,
         children: jsx(eS, {
-          sectionName: _$$t("slides.properties_panel.text_styles"),
-          buttonLabel: _$$t("slides.properties_panel.theme.add_text_style_label"),
+          sectionName: getI18nString("slides.properties_panel.text_styles"),
+          buttonLabel: getI18nString("slides.properties_panel.theme.add_text_style_label"),
           onClickAdd: p
         })
       }), jsx(eA, {
@@ -359,7 +359,7 @@ function ey({
     "aria-controls": _$$W2,
     "aria-expanded": E,
     "aria-haspopup": "menu",
-    "aria-label": _$$t("slides.properties_panel.library_text_styles.text_label", {
+    "aria-label": getI18nString("slides.properties_panel.library_text_styles.text_label", {
       textStyleName: t.name,
       fontName: s,
       fontSize: o.toString()
@@ -422,7 +422,7 @@ function ev({
   previewColor: i
 }) {
   let a = Fk((e, t) => e.get(t)?.name ?? "", e);
-  let [s, o] = fp(ec);
+  let [s, o] = useAtomValueAndSetter(ec);
   let l = s[t];
   let d = useCallback(e => {
     o(i => {
@@ -482,7 +482,7 @@ function ex({
 }) {
   let i = lK(e);
   let s = UZ(e);
-  let [o, c] = fp(E_);
+  let [o, c] = useAtomValueAndSetter(E_);
   let u = ZC(o);
   let m = function (e, t) {
     let i = _$$bL2(e?.varId ?? "", t);
@@ -562,8 +562,8 @@ function ex({
       children: [jsx("div", {
         className: _$$s.pl16.pr8.pb8.$,
         children: jsx(eS, {
-          sectionName: _$$t("slides.properties_panel.theme.colors"),
-          buttonLabel: _$$t("slides.properties_panel.theme.add_color_label"),
+          sectionName: getI18nString("slides.properties_panel.theme.colors"),
+          buttonLabel: getI18nString("slides.properties_panel.theme.add_color_label"),
           onClickAdd: O
         })
       }), jsx("div", {
@@ -732,9 +732,9 @@ function eM({
       children: jsx(_$$E, {
         htmlAttributes: {
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": _$$t("slides.properties_panel.theme.dropdown_tooltip")
+          "data-tooltip": getI18nString("slides.properties_panel.theme.dropdown_tooltip")
         },
-        "aria-label": _$$t("slides.properties_panel.theme.dropdown_tooltip"),
+        "aria-label": getI18nString("slides.properties_panel.theme.dropdown_tooltip"),
         onClick: g,
         children: S && jsx(ek, {
           className: "slides_theme_preview_row--shuffleIconHoverColor--vVBe0"
@@ -787,7 +787,7 @@ function eU({
             marginLeft: "8px"
           },
           children: [jsx(eG, {
-            name: _$$t("slides.properties_panel.theme.mixed"),
+            name: getI18nString("slides.properties_panel.theme.mixed"),
             width: e
           }), jsx(ez, {})]
         })]
@@ -798,7 +798,7 @@ function eU({
     description: jsx("div", {
       className: _$$s.ml8.flexGrow1.colorText.overflowHidden.$,
       children: jsx(eG, {
-        name: _$$t("slides.properties_panel.theme.mixed"),
+        name: getI18nString("slides.properties_panel.theme.mixed"),
         width: e
       })
     }),
@@ -830,7 +830,7 @@ function eB({
         onClick: () => i(r, Array.from(a)),
         htmlAttributes: {
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": _$$t("slides.properties_panel.theme.dropdown_tooltip")
+          "data-tooltip": getI18nString("slides.properties_panel.theme.dropdown_tooltip")
         },
         children: jsx(ek, {})
       })
@@ -847,11 +847,11 @@ function eV({
 }) {
   return kO(e) ? jsx("div", {
     className: _$$s.ml8.flexGrow1.colorTextSecondary.overflowHidden.$,
-    children: _$$t("slides.properties_panel.theme.dropdown_deleted_theme_name")
+    children: getI18nString("slides.properties_panel.theme.dropdown_deleted_theme_name")
   }) : jsxs("div", {
     className: _$$s.ml8.flexGrow1.colorText.overflowHidden.$,
     children: [jsx(eG, {
-      name: t || _$$t("slides.properties_panel.theme.generic_theme_name"),
+      name: t || getI18nString("slides.properties_panel.theme.generic_theme_name"),
       width: i
     }), jsx("div", {
       className: "slides_theme_preview_row--fontPreview--GZAXr",
@@ -885,7 +885,7 @@ function eG({
     style: {
       width: t ? `${t - 76}px` : "140px"
     },
-    children: e || _$$t("slides.properties_panel.theme.generic_theme_name")
+    children: e || getI18nString("slides.properties_panel.theme.generic_theme_name")
   });
 }
 function ez() {
@@ -903,7 +903,7 @@ function eH({
   return e && jsx("span", {
     className: i ? _$$s.visible.$ : _$$s.invisible.$,
     children: jsx(_$$d, {
-      "aria-label": _$$t("slides.properties_panel.theme.edit_template_style"),
+      "aria-label": getI18nString("slides.properties_panel.theme.edit_template_style"),
       onClick: e,
       "aria-expanded": !!t,
       recordingKey: `slides.edit_theme_toggle.${r}`,
@@ -1094,7 +1094,7 @@ export function $$eX0({
   allowEditTheme: o,
   recordingKey: c
 }) {
-  let u = md(TN);
+  let u = useAtomWithSubscription(TN);
   let [h, g] = useState("");
   let [_, v] = useState(!1);
   let [k, R] = useState(new Point(0, 0));
@@ -1151,8 +1151,8 @@ export function $$eX0({
     onPreviewRowEditClick: d,
     recordingKey: c
   }) {
-    let u = md(TN);
-    let h = md(Dq);
+    let u = useAtomWithSubscription(TN);
+    let h = useAtomWithSubscription(Dq);
     let g = function () {
       let e = ut(Ez5?.canvasGrid().canvasGridArray, []);
       let t = Fk((e, t) => {
@@ -1269,8 +1269,8 @@ let eQ = forwardRef((e, t) => {
   let h = useSelector(e => e.fonts);
   let f = UG();
   let A = function (e) {
-    let t = md(Dq);
-    return gl(e) ? _$$t("slides.properties_panel.theme.mixed") : t[e] || _$$t("slides.properties_panel.theme.generic_theme_name");
+    let t = useAtomWithSubscription(Dq);
+    return gl(e) ? getI18nString("slides.properties_panel.theme.mixed") : t[e] || getI18nString("slides.properties_panel.theme.generic_theme_name");
   }(themeId);
   return getFeatureFlags().slides_a11y_template_styles ? jsx(bL, {
     ...Ay.props(e1.selectedRoot, isActive ? e1.active : e1.inactive),
@@ -1326,7 +1326,7 @@ function eJ({
       variant: "secondary",
       onClick: e,
       recordingKey: Pt(t, "createThemeButton"),
-      children: _$$t("slides.properties_panel.theme.theme_dropdown.create_new_theme_button")
+      children: getI18nString("slides.properties_panel.theme.theme_dropdown.create_new_theme_button")
     })
   }, "create_new_slide_theme_button");
 }

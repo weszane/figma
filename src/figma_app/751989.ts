@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useRef, useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
 import { getSingletonSceneGraph } from "../905/700578";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { b as _$$b } from "../905/985254";
 import { E as _$$E } from "../905/453826";
 import { e as _$$e } from "../905/621515";
@@ -25,17 +25,17 @@ import { r4m } from "../figma_app/6204";
 export let $$N1 = "Node Count Reached for Draft";
 export function $$C0() {
   let e = useRef(!1);
-  let t = md(yV);
-  let r = md(wg);
+  let t = useAtomWithSubscription(yV);
+  let r = useAtomWithSubscription(wg);
   let C = XO();
-  let w = md(zo);
+  let w = useAtomWithSubscription(zo);
   let O = jO();
-  let R = md(pQ);
-  let L = md(_$$t);
-  let P = md(d2);
-  let D = md(qG);
-  let k = md($);
-  let M = md(RIo.Query({
+  let R = useAtomWithSubscription(pQ);
+  let L = useAtomWithSubscription(_$$t);
+  let P = useAtomWithSubscription(d2);
+  let D = useAtomWithSubscription(qG);
+  let k = useAtomWithSubscription($);
+  let M = useAtomWithSubscription(RIo.Query({
     orgId: null
   }));
   let F = useDispatch();

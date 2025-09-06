@@ -4,7 +4,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { o as _$$o } from "../905/821217";
 import o from "classnames";
 import { ks } from "../figma_app/637027";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { U } from "../905/331038";
 import { w } from "../905/113805";
 import { Lz, Zc } from "../905/497882";
@@ -17,11 +17,11 @@ let _ = e => {
     let t = e.key;
     switch (t) {
       case "SUPPORT_CONTACT_MISSING":
-        return _$$t("community.publishing.support_contact_must_not_be_empty");
+        return getI18nString("community.publishing.support_contact_must_not_be_empty");
       case "INVALID_SUPPORT_CONTACT":
-        return _$$t("community.publishing.support_contact_must_be_a_valid_email_or_url");
+        return getI18nString("community.publishing.support_contact_must_be_a_valid_email_or_url");
       case "SUPPORT_CONTACT_TOO_LONG":
-        return _$$t("community.publishing.support_contact_must_be_at_most_n_characters_long", {
+        return getI18nString("community.publishing.support_contact_must_be_at_most_n_characters_long", {
           maxLength: e.data.maxLength
         });
       default:
@@ -44,7 +44,7 @@ let $$A0 = forwardRef(function ({
     }
   }), []);
   return jsx(_$$A, {
-    label: _$$t("community.publishing.support_contact"),
+    label: getI18nString("community.publishing.support_contact"),
     error: y,
     required: Bs(t.deps.valueRequired, e),
     children: jsx(_$$o, {
@@ -60,7 +60,7 @@ let $$A0 = forwardRef(function ({
           t.setValue?.(e.currentTarget.value);
         },
         value: Lz(t, void 0) ?? "",
-        placeholder: _$$t("community.publishing.email_or_website_where_users_can_contact_you"),
+        placeholder: getI18nString("community.publishing.email_or_website_where_users_can_contact_you"),
         disabled: !Zc(t)
       })
     })

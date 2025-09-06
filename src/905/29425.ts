@@ -1,8 +1,8 @@
 import { throwTypeError } from "../figma_app/465776";
 import { fZb } from "../figma_app/763686";
-import { eU, zl } from "../figma_app/27355";
+import { atom, atomStoreManager } from "../figma_app/27355";
 import s from "../vendor/128080";
-import { rH } from "../905/542194";
+import { reactTimerGroup } from "../905/542194";
 import { z8 } from "../905/709095";
 import { getInitialOptions } from "../figma_app/169182";
 import { Zv } from "../905/760682";
@@ -170,8 +170,8 @@ class I {
     this.windowAssert(this.bottomIdx === t || this.topToBottom[this.bottomIdx].y > e.y + e.height);
   }
 }
-let $$R3 = eU(!1);
-let $$N2 = eU(null);
+let $$R3 = atom(!1);
+let $$N2 = atom(null);
 let P = `
 .overlay {
   height: 0px;
@@ -334,13 +334,13 @@ let D = class e extends HTMLElement {
     this.renderWrapperPosition(e);
   }
   render(e, t) {
-    rH.start("comments-render");
+    reactTimerGroup.start("comments-render");
     let i = !1;
     o()(t, e) || (this.processViewportUpdate(e, t), i = !0);
     this._lastRenderedDataset !== this.ds && (this.processDatasetUpdate(e), i = !0);
     i && ye && ye.setNumberOfRenderedComments(this.clusterElementsById.size);
     (e.isPanning !== t?.isPanning || e.isZooming !== t?.isZooming || this.shouldDisablePointerEvents !== this._lastRenderedShouldDisablePointerEvents) && (e.isPanning || e.isZooming || this.shouldDisablePointerEvents ? this.wrapper.classList.add("overlayPassthrough") : this.wrapper.classList.remove("overlayPassthrough"));
-    rH.stop("comments-render");
+    reactTimerGroup.stop("comments-render");
   }
   renderWrapperPosition(e) {
     this.wrapper.style.top = `${e.y + e.height / 2}px`;
@@ -519,13 +519,13 @@ let D = class e extends HTMLElement {
       n.render();
       s = n;
     }
-    let d = zl.get($$R3);
+    let d = atomStoreManager.get($$R3);
     if (t.isSinglePin && !d) {
-      let e = zl.get($$N2);
+      let e = atomStoreManager.get($$N2);
       let i = t.pins[0];
       let n = !!i?.isOurs;
       let r = !!e && e === i?.id;
-      n && r && (s.setAttribute("data-onboarding-key", UU), zl.set($$R3, !0));
+      n && r && (s.setAttribute("data-onboarding-key", UU), atomStoreManager.set($$R3, !0));
     }
     if (this.clusterElementsById.set(t.id, s), this.wrapper.append(s), !this.ds.clusters.applyInstant && "data" === r && s.animateDatasetChange && t.isSinglePin) {
       s.animateDatasetChange({

@@ -3,8 +3,8 @@ import { useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
 import { V } from "../1577/311426";
 import { getFeatureFlags } from "../905/601108";
-import { md } from "../figma_app/27355";
-import { t as _$$t } from "../905/303541";
+import { useAtomWithSubscription } from "../figma_app/27355";
+import { getI18nString } from "../905/303541";
 import { RK } from "../figma_app/815170";
 import { tq, yc } from "../figma_app/671547";
 import { E7 } from "../905/216495";
@@ -29,20 +29,20 @@ export function $$y1() {
   }, [t, e, r]);
 }
 export function $$b0(e) {
-  let t = md(_$$n);
+  let t = useAtomWithSubscription(_$$n);
   let i = x();
   let n = $$y1();
   return i && (e.inModal || !t) ? getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(_$$V, {
     variant: "button",
-    tooltip: _$$t("whiteboard.embeds.inline_menu.open_link"),
-    ariaLabel: _$$t("whiteboard.embeds.inline_menu.open_link"),
+    tooltip: getI18nString("whiteboard.embeds.inline_menu.open_link"),
+    ariaLabel: getI18nString("whiteboard.embeds.inline_menu.open_link"),
     onClick: n,
     recordingKey: "embedOpenExternalControl",
     children: jsx(V, {})
   }) : jsx(K0, {
     svg: A,
     active: "NONE",
-    tooltip: _$$t("whiteboard.embeds.inline_menu.open_link"),
+    tooltip: getI18nString("whiteboard.embeds.inline_menu.open_link"),
     onClick: n,
     recordingKey: "embedOpenExternalControl"
   }) : null;

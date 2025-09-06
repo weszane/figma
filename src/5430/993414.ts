@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import i from "classnames";
-import { sx } from "../905/449184";
-import { t as _$$t } from "../905/303541";
+import { trackEventAnalytics } from "../905/449184";
+import { getI18nString } from "../905/303541";
 import { A5 } from "../figma_app/209680";
 import { Jm } from "../figma_app/387599";
 import { Vr } from "../5430/297093";
@@ -21,7 +21,7 @@ export function $$f0({
 }) {
   let u = Vr(r, i);
   return u.length <= 1 ? null : jsx(A5, {
-    name: _$$t("community.landing_page.dropdown_filter__editor"),
+    name: getI18nString("community.landing_page.dropdown_filter__editor"),
     onUpdate: ([t]) => {
       e(t);
     },
@@ -29,7 +29,7 @@ export function $$f0({
     adtlClassName: n()(km, "sm" === c && u9),
     dataOnboardingKey: "community_feed_product_filter",
     onClick: () => {
-      sx("editor_type_filter_clicked");
+      trackEventAnalytics("editor_type_filter_clicked");
     },
     options: [u]
   });
@@ -47,14 +47,14 @@ export function $$y1({
   let y = Jm();
   return f.length <= 1 ? null : jsx(_$$n, {
     context: e,
-    defaultOption: _$$t("community.landing_page.sort.all_products"),
+    defaultOption: getI18nString("community.landing_page.sort.all_products"),
     selectedOption: r,
     options: f,
     searchParamUpdate: e => ({
       editor_type: e
     }),
     onOptionSelect: (e, t) => {
-      sx(M5.EDITOR_TYPE_FILTER_CHANGED, {
+      trackEventAnalytics(M5.EDITOR_TYPE_FILTER_CHANGED, {
         editor_type: e,
         from: t,
         search_session_id: y

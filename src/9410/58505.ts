@@ -6,7 +6,7 @@ import { getFeatureFlags } from "../905/601108";
 import { z } from "../905/239603";
 import d from "../vendor/656470";
 import { _i } from "../figma_app/476572";
-import { xi } from "../905/714362";
+import { logWarning } from "../905/714362";
 import { nX } from "../figma_app/445976";
 import { Fk } from "../figma_app/167249";
 import { Tv } from "../figma_app/151869";
@@ -30,7 +30,7 @@ export function $$x0(e) {
       enableTsArrays: !!getFeatureFlags().first_draft_ts_arrays
     });
     if (!e) {
-      xi("first-draft", "Component info not found for user-selected node", {
+      logWarning("first-draft", "Component info not found for user-selected node", {
         componentGuid: i.guid
       }, {
         reportAsSentryError: !0
@@ -46,14 +46,14 @@ export async function $$y3(e, t, i) {
     var i;
     let r = await nX(e);
     if (!r) {
-      xi("first-draft", "Unable to get JSX for user-selected node", {
+      logWarning("first-draft", "Unable to get JSX for user-selected node", {
         nodeGuid: e.guid
       });
       return null;
     }
     let n = t.get(e.guid);
     if (!n) {
-      xi("first-draft", "No image data found for user-selected node", {
+      logWarning("first-draft", "No image data found for user-selected node", {
         nodeGuid: e.guid
       });
       return null;
@@ -200,4 +200,4 @@ export const ce = $$x0;
 export const eb = $$v1;
 export const qi = $$E2;
 export const yh = $$y3;
-export const zs = $$b4; 
+export const zs = $$b4;

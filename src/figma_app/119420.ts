@@ -4,28 +4,28 @@ import { debounce } from "../905/915765";
 import { FDn, glU, tvY } from "../figma_app/763686";
 import { l7, Hq } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
-import { eU, zl, fp } from "../figma_app/27355";
-import { az } from "../905/449184";
+import { atom, atomStoreManager, useAtomValueAndSetter } from "../figma_app/27355";
+import { analyticsEventManager } from "../905/449184";
 import { debugState } from "../905/407919";
 import { Ay } from "../905/612521";
 import { Rw } from "../figma_app/930338";
 import { g as _$$g } from "../905/880308";
 import { Point } from "../905/736624";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { _G, Pv } from "../905/619652";
 import { yV, tS } from "../figma_app/516028";
 import { Wh } from "../figma_app/615482";
 import { tk, T_ } from "../figma_app/883638";
 import { MD } from "../figma_app/176302";
-let $$S0 = Wh(() => eU([]));
-let v = Wh(() => eU([]));
-let $$A11 = eU(e => e($$S0).filter(e => "error" !== e.status).length >= $$C12);
-let x = eU(e => {
+let $$S0 = Wh(() => atom([]));
+let v = Wh(() => atom([]));
+let $$A11 = atom(e => e($$S0).filter(e => "error" !== e.status).length >= $$C12);
+let x = atom(e => {
   let t = e(yV);
   return !!(t?.canEdit && t?.canEditCanvas);
 });
-let $$N2 = eU(null, (e, t) => {
+let $$N2 = atom(null, (e, t) => {
   if (e(x)) {
     let r = e($$S0);
     t($$S0, [...r, {
@@ -53,7 +53,7 @@ export function $$O9(e) {
       timeoutOverride: 5e3,
       error: r,
       button: {
-        text: _$$t("figmake.attachments.learn_more_button"),
+        text: getI18nString("figmake.attachments.learn_more_button"),
         action: () => {
           Ay.unsafeRedirect("https://help.figma.com/hc/articles/31722591905559", "_blank");
         }
@@ -62,40 +62,40 @@ export function $$O9(e) {
   }
   switch (e) {
     case FDn.MORE_THAN_ONE_HIGHLEVEL_NODE_FOUND:
-      t(_$$t("figmake.attachments.attachment_not_in_frame_toast"));
+      t(getI18nString("figmake.attachments.attachment_not_in_frame_toast"));
       break;
     case FDn.INSERTED_NODES_TOO_LARGE:
-      t(_$$t("figmake.attachments.attachment_too_large_toast"), !1);
+      t(getI18nString("figmake.attachments.attachment_too_large_toast"), !1);
       break;
     case FDn.MAXIMUM_ATTACHMENTS_EXCEEDED:
-      t(_$$t("figmake.attachments.too_many_attachments_toast", {
+      t(getI18nString("figmake.attachments.too_many_attachments_toast", {
         max_num: $$C12
       }));
       break;
     case FDn.USER_PASTED_FIGMA_LINK_IN_CHAT:
-      t(_$$t("figmake.attachments.cant_read_figma_link_toast"), !1);
+      t(getI18nString("figmake.attachments.cant_read_figma_link_toast"), !1);
       break;
     case FDn.DESIGN_2_REACT_STATE_GROUP:
-      t(_$$t("figmake.attachments.failure_state_group"));
+      t(getI18nString("figmake.attachments.failure_state_group"));
       break;
     case FDn.DESIGN_2_REACT_OTHER:
     case FDn.OTHER:
-      t(_$$t("figmake.attachments.generic_failed_to_load_attachment_toast"));
+      t(getI18nString("figmake.attachments.generic_failed_to_load_attachment_toast"));
       break;
     default:
       throwTypeError(e);
   }
 }
 export function $$R5(e) {
-  zl.set($$S0, e => {
+  atomStoreManager.set($$S0, e => {
     let t = e.find(e => "pending" === e.status);
     return t ? e.filter(e => e.uniqueId !== t.uniqueId) : e;
   });
   $$O9(e);
 }
 export function $$L3() {
-  let e = zl.get(v);
-  e.length > 0 && (zl.set($$S0, e), zl.set(v, []));
+  let e = atomStoreManager.get(v);
+  e.length > 0 && (atomStoreManager.set($$S0, e), atomStoreManager.set(v, []));
 }
 export function $$P7(e) {
   return "pending" !== e.status && "error" !== e.status;
@@ -107,7 +107,7 @@ function k() {
   return _$$g();
 }
 export function $$M10() {
-  let [e, t] = fp($$S0);
+  let [e, t] = useAtomValueAndSetter($$S0);
   return useCallback(r => {
     t(e.filter(e => e.uniqueId !== r.uniqueId));
     $$P7(r) && r.nodeGuid && l7.ai("clean-up-attachments", () => {
@@ -125,12 +125,12 @@ let j = debounce(function (e, t, r) {
   if (e !== t) switch (t) {
     case "loading":
       debugState.dispatch(_$$F.enqueue({
-        message: _$$t("figmake.chat.a11y_attachment_loading"),
+        message: getI18nString("figmake.chat.a11y_attachment_loading"),
         role: "status"
       }));
       break;
     case "success":
-      let n = "IMAGE" === r.type ? _$$t("figmake.chat.a11y_image_attached_successfully") : _$$t("figmake.chat.a11y_design_attached_successfully");
+      let n = "IMAGE" === r.type ? getI18nString("figmake.chat.a11y_image_attached_successfully") : getI18nString("figmake.chat.a11y_design_attached_successfully");
       debugState.dispatch(_$$F.enqueue({
         message: n,
         role: "status"
@@ -138,27 +138,27 @@ let j = debounce(function (e, t, r) {
       break;
     case "error":
       debugState.dispatch(_$$F.enqueue({
-        message: _$$t("figmake.chat.a11y_attachment_failed_to_load"),
+        message: getI18nString("figmake.chat.a11y_attachment_failed_to_load"),
         role: "status"
       }));
       break;
     case "removed":
       debugState.dispatch(_$$F.enqueue({
-        message: _$$t("figmake.chat.a11y_attachment_removed"),
+        message: getI18nString("figmake.chat.a11y_attachment_removed"),
         role: "status"
       }));
   }
 }, 1e3);
 export function $$U6(e) {
-  let [t, r] = fp($$S0);
-  let [i, a] = fp(v);
+  let [t, r] = useAtomValueAndSetter($$S0);
+  let [i, a] = useAtomValueAndSetter(v);
   let {
     chatError,
     setChatError
   } = tk(e);
   let _ = tS();
   let h = useCallback(() => {
-    zl.set($$S0, [...zl.get($$S0), {
+    atomStoreManager.set($$S0, [...atomStoreManager.get($$S0), {
       status: "pending",
       uniqueId: k()
     }]);
@@ -195,7 +195,7 @@ export function $$U6(e) {
       status: "success",
       ...e,
       uniqueId: k()
-    }]), az.trackDefinedEvent("ai_for_production.chat_attachment_added", {
+    }]), analyticsEventManager.trackDefinedEvent("ai_for_production.chat_attachment_added", {
       attachmentType: e.type,
       fileKey: _ ?? void 0
     }));

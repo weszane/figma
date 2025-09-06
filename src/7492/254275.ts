@@ -6,7 +6,7 @@ import { y } from "../7492/736516";
 import { T } from "../7492/468457";
 import { H } from "../7492/428990";
 import u from "classnames";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Ib } from "../905/129884";
 import { QK } from "../figma_app/882116";
 import { Xb, ez, _P } from "../figma_app/968638";
@@ -52,11 +52,11 @@ function j(e) {
     className: i,
     children: jsx(K, {
       onClick: e.onClick,
-      "aria-label": e.isSaved ? t("community.saves.remove_from_saves") : t("community.saves.save"),
+      "aria-label": e.isSaved ? getI18nString("community.saves.remove_from_saves") : getI18nString("community.saves.save"),
       "aria-pressed": e.isSaved,
       htmlAttributes: {
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": e.isSaved ? t("community.saves.remove_from_saves") : t("community.saves.save")
+        "data-tooltip": e.isSaved ? getI18nString("community.saves.remove_from_saves") : getI18nString("community.saves.save")
       },
       children: e.isSaved ? jsx(SaveIconFilled, {}) : jsx(SaveIcon, {})
     })

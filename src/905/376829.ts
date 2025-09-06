@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { E as _$$E } from "../905/632989";
 import { O as _$$O } from "../905/969533";
-import { md, fp, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, useAtomValueAndSetter, Xr } from "../figma_app/27355";
 import { s as _$$s } from "../cssbuilder/589278";
 import { KJ, $T, Vx, V0 } from "../905/657710";
 import { hO } from "../figma_app/545293";
@@ -22,9 +22,9 @@ import { l as _$$l } from "../figma_app/676249";
 import { r4, jN, nX } from "../905/171315";
 import { L as _$$L } from "../905/713563";
 import { R9, sC, Q8 } from "../905/61477";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { B as _$$B } from "../905/714743";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { E as _$$E2 } from "../905/409917";
 import { A as _$$A } from "../3850/824007";
 import { G as _$$G } from "../figma_app/119843";
@@ -91,11 +91,11 @@ function M({
   onChange: d
 }) {
   let u = useDispatch();
-  let p = md(R9);
+  let p = useAtomWithSubscription(R9);
   let m = useCallback((t, i, n) => {
     t.stopPropagation();
     u(oB());
-    sx("Sort Changed - Dropdown", {
+    trackEventAnalytics("Sort Changed - Dropdown", {
       oldValueString: e,
       newValueString: i,
       model: p,
@@ -106,7 +106,7 @@ function M({
   return jsxs("div", {
     children: [jsx("div", {
       className: D,
-      children: tx("tile.sort_filter.sort_by_label")
+      children: renderI18nText("tile.sort_filter.sort_by_label")
     }), o.map(t => jsxs("div", {
       className: O,
       onMouseDown: e => {
@@ -123,7 +123,7 @@ function M({
         className: "relevancy_dropdown_options--separator--3yf35"
       }), jsx("div", {
         className: D,
-        children: tx("tile.sort_filter.order_label")
+        children: renderI18nText("tile.sort_filter.order_label")
       })]
     }), n.map((n, a) => jsxs("div", {
       className: O,
@@ -145,9 +145,9 @@ let ee = r1(X);
 function et() {
   let e = useSelector(e => e.currentUserOrgId);
   let t = UC(e);
-  let i = md(t);
-  let n = md(J);
-  let a = md(ee);
+  let i = useAtomWithSubscription(t);
+  let n = useAtomWithSubscription(J);
+  let a = useAtomWithSubscription(ee);
   let o = _$$e({
     overlay: tBR,
     priority: _$$N.DEFAULT_MODAL
@@ -163,9 +163,9 @@ function et() {
     userFlagOnShow: X,
     onClose: o.complete,
     targetKey: Q,
-    title: tx("rcs.search_workspace_onboarding_modal.title"),
+    title: renderI18nText("rcs.search_workspace_onboarding_modal.title"),
     description: jsx("p", {
-      children: tx("rcs.search_workspace_onboarding_modal.text")
+      children: renderI18nText("rcs.search_workspace_onboarding_modal.text")
     }),
     emphasized: !0
   });
@@ -187,7 +187,7 @@ function er({
   return jsxs("div", {
     children: [jsx("div", {
       className: "workspace_dropdown_filters--heading--zYZzJ workspace_dropdown_filters--row--HUwI-",
-      children: tx("search.facets.workspaces")
+      children: renderI18nText("search.facets.workspaces")
     }), jsxs("div", {
       className: ei,
       onMouseDown: e => {
@@ -251,11 +251,11 @@ function em(e) {
     };
   }, [n]);
   let d = useSelector(e => e.orgById[i]);
-  eu.ALL = _$$t("search.search_filter.all_org_results", {
+  eu.ALL = getI18nString("search.search_filter.all_org_results", {
     orgName: d?.name
   });
   let u = [];
-  let p = md(P_);
+  let p = useAtomWithSubscription(P_);
   return useMemo(() => p && !p.value[qy.FOLDER].length && !p.value[qy.TEAM].length && 1 === p.value[qy.ORG].length, [p]) && e.planId && "NON_ORG_TEAMS" !== e.planId && viewableWorkspaces?.length ? (currentWorkspace && u.push(currentWorkspace.id), viewableWorkspaces?.sort(ep).forEach(e => {
     e.id !== currentWorkspace?.id && u.push(e.id);
     eu[e.id] = e.name;
@@ -323,12 +323,12 @@ function eC(e) {
   let i = useSelector(e => t ? e.authedUsers.byId[t.id]?.plans : null);
   if (i && 0 === i.length) return jsx(Fragment, {});
   let n = [];
-  ew.ALL = _$$t("search.search_filter.all_organizations_results");
+  ew.ALL = getI18nString("search.search_filter.all_organizations_results");
   let a = !1;
   i?.forEach(e => {
     e.is_org ? (n.push(e.plan_id), ew[e.plan_id] = e.name) : a = !0;
   });
-  a && (n.push(eS), ew[eS] = _$$t("search.search_filter.non_org_teams"));
+  a && (n.push(eS), ew[eS] = getI18nString("search.search_filter.non_org_teams"));
   return jsx(eT, {
     dropdownId: "search-dropdown-plan-filter",
     sortControlsDisabled: e.sortControlsDisabled,
@@ -564,9 +564,9 @@ export function $$eD0(e) {
   let t = useDispatch();
   let i = useSelector(e => e.search.parameters);
   let n = useSelector(e => e.viewBarViewModeOptionByView);
-  let [o, l] = fp(R9);
-  let d = md(P_);
-  let p = md(_$$J);
+  let [o, l] = useAtomValueAndSetter(R9);
+  let d = useAtomWithSubscription(P_);
+  let p = useAtomWithSubscription(_$$J);
   let h = o ?? uH.FILES;
   let g = r4(h);
   let f = g.includes(WY.RESOURCE);
@@ -576,10 +576,10 @@ export function $$eD0(e) {
   let E = $$eO1[h](i, n);
   let k = E.viewMode;
   let R = !v && (E.shouldShowPlanFilter ?? !1);
-  let N = md(hO.isFragmentSearchAtom);
-  let P = md(sC);
+  let N = useAtomWithSubscription(hO.isFragmentSearchAtom);
+  let P = useAtomWithSubscription(sC);
   let O = _$$L(N ? "fragment_search_modal" : "file_browser", P, !1);
-  let D = md(Q8);
+  let D = useAtomWithSubscription(Q8);
   let L = Xr(l4(WY.RESOURCE));
   let F = useCallback(e => {
     if (e === h) return;

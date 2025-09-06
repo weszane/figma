@@ -1,10 +1,10 @@
 import { ServiceCategories as _$$e } from "../905/165054";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { r as _$$r } from "../1156/791040";
 import { ym, ZK, u, it, jx, n9, m8 } from "../1156/929233";
 export function $$l7(e) {
   _$$r();
-  $D(_$$e.AI_FOR_PRODUCTION, e);
+  reportError(_$$e.AI_FOR_PRODUCTION, e);
 }
 export function $$o2(e) {
   if (e.message.match(/^(.*?)Project with name (.+?) already exists in your organization\.$/)) {

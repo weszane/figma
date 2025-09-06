@@ -4,7 +4,7 @@ import { isNotNullish } from "../figma_app/95419";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { glU, vXe, Ez5 } from "../figma_app/763686";
 import { k9 } from "../905/19536";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { eY } from "../figma_app/722362";
 import { Fk } from "../figma_app/167249";
 import { Xo } from "../figma_app/687767";
@@ -163,7 +163,7 @@ let f = async ({
     }
   }
   let d = Error("Text preview generation failed after all retry attempts");
-  $D(_$$e.SLIDES, d, {
+  reportError(_$$e.SLIDES, d, {
     extra: {
       styleId: e,
       textToRender: t,

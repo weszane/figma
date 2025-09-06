@@ -1,5 +1,5 @@
 import { jXp } from "../figma_app/763686";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { G5 } from "../figma_app/795674";
 import { Uw, HB } from "../905/698759";
 import { l6, c$ } from "../905/794875";
@@ -18,12 +18,12 @@ function m(e, t, i) {
     let n = t.match(/width="(.*?)"/);
     let a = t.match(/viewBox="(.*?)"/);
     if (!e || !n || !a) {
-      x1("Cannot resize svg, missing data.", t);
+      logError("Cannot resize svg, missing data.", t);
       return t;
     }
     let s = a[1].split(" ");
     if (4 !== s.length) {
-      x1("Cannot resize svg, incorrectly formatted viewBox", a[1]);
+      logError("Cannot resize svg, incorrectly formatted viewBox", a[1]);
       return t;
     }
     let o = parseFloat(n[1]) * i;
@@ -31,7 +31,7 @@ function m(e, t, i) {
     let d = parseFloat(s[1]) / i;
     t = (t = (t = t.replace(/width="(.*?)"/, `width="${o.toString()}"`)).replace(/height="(.*?)"/, `height="${l.toString()}"`)).replace(/viewBox="(.*?)"/, `viewBox="${s[0]} ${d.toString()} ${s[2]} ${s[3]}"`);
   } catch (e) {
-    x1("Could not resize mono/script preview: ", e);
+    logError("Could not resize mono/script preview: ", e);
   }
   return t;
 }
@@ -102,7 +102,7 @@ export function $$w6(e, t, i) {
       });
       break;
     default:
-      x1("Font picker", "Reached unreachable code: unhandled FontListType", {
+      logError("Font picker", "Reached unreachable code: unhandled FontListType", {
         fontSet: t
       }, {
         reportAsSentryError: !0

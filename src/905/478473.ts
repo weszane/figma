@@ -3,7 +3,7 @@ import { useDispatch } from "../vendor/514228";
 import a from "classnames";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { $ } from "../905/355181";
 import { E as _$$E } from "../905/984674";
 import { qD } from "../figma_app/471982";
@@ -26,7 +26,7 @@ export function $$v0({
     "data-testid": "disabled-text",
     children: [jsx("div", {
       className: Vj,
-      children: _$$t("community.try.unavailable")
+      children: getI18nString("community.try.unavailable")
     }), jsx(B, {
       svg: _$$A2,
       svgClassName: xo
@@ -41,33 +41,33 @@ function I(e) {
     extension
   } = e;
   if (workspace.isFigJamDisabled) return jsx($$v0, {
-    tooltipText: _$$t("community.try.figjam_disabled_by_your_org", {
+    tooltipText: getI18nString("community.try.figjam_disabled_by_your_org", {
       orgName: workspace.workspaceName
     })
   });
   if (workspace.isSlidesDisabled) return jsx($$v0, {
-    tooltipText: _$$t("community.try.slides_disabled_by_admins")
+    tooltipText: getI18nString("community.try.slides_disabled_by_admins")
   });
   if (workspace.isSitesDisabled) return jsx($$v0, {
-    tooltipText: _$$t("community.try.sites_disabled_by_admins")
+    tooltipText: getI18nString("community.try.sites_disabled_by_admins")
   });
   if (workspace.isCooperDisabled) return jsx($$v0, {
-    tooltipText: _$$t("community.try.buzz_disabled_by_admins")
+    tooltipText: getI18nString("community.try.buzz_disabled_by_admins")
   });
   if (workspace.isFigmakeDisabled) return jsx($$v0, {
-    tooltipText: _$$t("community.try.figmake_disabled_by_admins")
+    tooltipText: getI18nString("community.try.figmake_disabled_by_admins")
   });
   if (workspace.isDsePresetsDisabled) return jsx($$v0, {
-    tooltipText: _$$t("community.try.presets_disabled_by_admins")
+    tooltipText: getI18nString("community.try.presets_disabled_by_admins")
   });
   if (workspace.isDisabledDueToECC) return jsx($$v0, {
-    tooltipText: _$$t("community.try.externally_restricted")
+    tooltipText: getI18nString("community.try.externally_restricted")
   });
   if (workspace.isPlanLocked) return jsx($$v0, {
-    tooltipText: _$$t("plan_picker.locked_plan_tooltip")
+    tooltipText: getI18nString("plan_picker.locked_plan_tooltip")
   });
   if (!workspace.draftFolderId) return jsx($$v0, {
-    tooltipText: _$$t("plan_picker.limited_access_tooltip")
+    tooltipText: getI18nString("plan_picker.limited_access_tooltip")
   });
   if (workspace.publicPluginsOrWidgetDisabled) {
     if (hasPendingRequest) return jsx("div", {
@@ -75,7 +75,7 @@ function I(e) {
       children: jsx(_$$E, {
         fontSize: 11,
         color: "secondary",
-        children: tx("community.try.pick_workspace.approval_pending")
+        children: renderI18nText("community.try.pick_workspace.approval_pending")
       })
     });
     if (!XL({
@@ -88,9 +88,9 @@ function I(e) {
         isWidget: t,
         extension: i
       }) {
-        return i?.roles.org ? t ? _$$t("community.try.org_private_widget_request_disabled") : _$$t("community.try.org_private_plugin_request_disabled") : t ? _$$t("community.try.widget_requests_disabled_by_your_org", {
+        return i?.roles.org ? t ? getI18nString("community.try.org_private_widget_request_disabled") : getI18nString("community.try.org_private_plugin_request_disabled") : t ? getI18nString("community.try.widget_requests_disabled_by_your_org", {
           orgName: e.workspaceName
-        }) : _$$t("community.try.plugin_requests_disabled_by_your_org", {
+        }) : getI18nString("community.try.plugin_requests_disabled_by_your_org", {
           orgName: e.workspaceName
         });
       }({
@@ -104,14 +104,14 @@ function I(e) {
           disabled: !0,
           "data-tooltip": e,
           "data-tooltip-type": Ib.TEXT,
-          children: tx("community.try.pick_workspace.request_approval")
+          children: renderI18nText("community.try.pick_workspace.request_approval")
         })
       });
     }
     return jsx("div", {
       className: _$$s.mlAuto.$,
       children: jsx($, {
-        children: tx("community.try.pick_workspace.request_approval")
+        children: renderI18nText("community.try.pick_workspace.request_approval")
       })
     });
   }
@@ -241,23 +241,23 @@ export function $$w2(e) {
         fontWeight: "medium",
         fontSize: 20,
         color: "default",
-        children: tx("community.allowlist.choose_an_organization")
+        children: renderI18nText("community.allowlist.choose_an_organization")
       }) : jsx(_$$E, {
         fontWeight: "medium",
         fontSize: 20,
         color: "default",
-        children: tx("community.using.pick_workspace.title")
+        children: renderI18nText("community.using.pick_workspace.title")
       })
     }), jsx("div", {
       className: _$$s.alignCenter.pt6.$,
       children: "manage_allowlist" === e.mode ? jsx(_$$E, {
         fontSize: 13,
         color: "default",
-        children: tx("community.allowlist.select_the_organization_you_would_like")
+        children: renderI18nText("community.allowlist.select_the_organization_you_would_like")
       }) : jsx(_$$E, {
         fontSize: 13,
         color: "default",
-        children: tx("community.try.pick_workspace.subtitle")
+        children: renderI18nText("community.try.pick_workspace.subtitle")
       })
     }), jsx("div", {
       className: sw,

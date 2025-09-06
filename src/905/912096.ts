@@ -1,10 +1,10 @@
-import { NA } from "../vendor/288996";
+import { setTag } from "../vendor/288996";
 import { getStorage } from "../905/657224";
 import { OZ } from "../905/414007";
 let s = "figma.reporting";
 let o = "user.plan.max";
 export function $$l0(e) {
-  e && NA(o, e);
+  e && setTag(o, e);
 }
 export function $$d1() {
   (function () {

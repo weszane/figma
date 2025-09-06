@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 function n() {
   return jsxs("svg", {
     width: "60",
@@ -46,10 +46,10 @@ export function $$l0(e) {
       className: "saved_view_empty_state--emptyStateTextContainer--xRmL3",
       children: [jsx("div", {
         className: "saved_view_empty_state--emptyStateHeader--t4hjK text--fontPos11--2LvXf text--_fontBase--QdLsd",
-        children: tx("universal_insert.saved_empty_state")
+        children: renderI18nText("universal_insert.saved_empty_state")
       }), jsx("div", {
         className: "saved_view_empty_state--emptyStateSubheader--FndRk text--fontPos11--2LvXf text--_fontBase--QdLsd",
-        children: e.isWidget ? tx("universal_insert.saved_for_quick_access_widgets") : tx("universal_insert.saved_for_quick_access_plugins")
+        children: e.isWidget ? renderI18nText("universal_insert.saved_for_quick_access_widgets") : renderI18nText("universal_insert.saved_for_quick_access_plugins")
       })]
     })]
   });

@@ -1,4 +1,4 @@
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { c as _$$c } from "../905/370443";
 import { FPlanNameType } from "../figma_app/191312";
 import { WW, Wf } from "../figma_app/345997";
@@ -9,11 +9,11 @@ import { ex } from "../905/524523";
 let u = ex("plan_comparison_feature_custom_color_palettes", function () {
   let e = jsx("span", {
     className: _$$s.colorTextFigjam.fontMedium.$,
-    children: _$$t("plan_comparison.chart.callout.figjam_board")
+    children: getI18nString("plan_comparison.chart.callout.figjam_board")
   });
   return jsx("div", {
     className: _$$s.alignCenter.$,
-    children: tx("plan_comparison.chart.custom_color_palettes.details_with_callout", {
+    children: renderI18nText("plan_comparison.chart.custom_color_palettes.details_with_callout", {
       figJamCallout: e
     })
   });
@@ -21,11 +21,11 @@ let u = ex("plan_comparison_feature_custom_color_palettes", function () {
 let p = ex("plan_comparison_feature_custom_templates", function () {
   let e = jsx("span", {
     className: _$$s.colorTextFigjam.fontMedium.$,
-    children: _$$t("plan_comparison.chart.callout.figjam")
+    children: getI18nString("plan_comparison.chart.callout.figjam")
   });
   return jsx("div", {
     className: _$$s.alignCenter.$,
-    children: tx("plan_comparison.chart.custom_templates_v2.details_with_callout", {
+    children: renderI18nText("plan_comparison.chart.custom_templates_v2.details_with_callout", {
       figJamCallout: e
     })
   });
@@ -33,11 +33,11 @@ let p = ex("plan_comparison_feature_custom_templates", function () {
 let m = ex("plan_comparison_feature_open_sessions", function () {
   let e = jsx("span", {
     className: _$$s.colorTextFigjam.fontMedium.$,
-    children: _$$t("plan_comparison.chart.callout.figjam_board")
+    children: getI18nString("plan_comparison.chart.callout.figjam_board")
   });
   return jsx("div", {
     className: _$$s.alignCenter.$,
-    children: tx("plan_comparison.chart.open_sessions.details_with_callout", {
+    children: renderI18nText("plan_comparison.chart.open_sessions.details_with_callout", {
       figJamCallout: e
     })
   });
@@ -45,25 +45,25 @@ let m = ex("plan_comparison_feature_open_sessions", function () {
 let h = ex("plan_comparison_feature_voting", function () {
   let e = jsx("span", {
     className: _$$s.colorTextFigjam.fontMedium.$,
-    children: _$$t("plan_comparison.chart.callout.figjam_board")
+    children: getI18nString("plan_comparison.chart.callout.figjam_board")
   });
   return jsx("div", {
     className: _$$s.alignCenter.$,
-    children: tx("plan_comparison.chart.voting.details_with_callout", {
+    children: renderI18nText("plan_comparison.chart.voting.details_with_callout", {
       figJamCallout: e
     })
   });
 });
 export var $$g1 = (e => (e.MOST_POPULAR = "MOST_POPULAR", e.RECOMMENDED = "RECOMMENDED", e.MOST_VALUED = "MOST_VALUED", e))($$g1 || {});
 let $$f8 = {
-  MOST_POPULAR: () => _$$t("plan_comparison.plans.most_popular"),
-  RECOMMENDED: () => _$$t("plan_comparison.plans.recommended"),
-  MOST_VALUED: () => _$$t("plan_comparison.plans.most_valued")
+  MOST_POPULAR: () => getI18nString("plan_comparison.plans.most_popular"),
+  RECOMMENDED: () => getI18nString("plan_comparison.plans.recommended"),
+  MOST_VALUED: () => getI18nString("plan_comparison.plans.most_valued")
 };
 let _ = {
-  name: () => _$$t("plan_details.professional"),
-  description: () => _$$t("plan_comparison.plans.pro.description"),
-  buttonText: () => _$$t("plan_comparison.plans.pro.choose_button"),
+  name: () => getI18nString("plan_details.professional"),
+  description: () => getI18nString("plan_comparison.plans.pro.description"),
+  buttonText: () => getI18nString("plan_comparison.plans.pro.choose_button"),
   hasAnnualOnlyMessage: !1,
   highlightBadgeText: $$f8.MOST_POPULAR,
   canContactSales: !1,
@@ -71,9 +71,9 @@ let _ = {
 };
 let $$A10 = {
   [FPlanNameType.STARTER]: {
-    name: () => _$$t("plan_details.starter"),
-    description: () => _$$t("plan_comparison.plans.starter.description"),
-    buttonText: () => _$$t("plan_comparison.plans.starter.choose_button"),
+    name: () => getI18nString("plan_details.starter"),
+    description: () => getI18nString("plan_comparison.plans.starter.description"),
+    buttonText: () => getI18nString("plan_comparison.plans.starter.choose_button"),
     canContactSales: !1,
     hasAnnualOnlyMessage: !1,
     trackingDescriptor: void 0
@@ -82,25 +82,25 @@ let $$A10 = {
     ..._
   },
   [FPlanNameType.ORG]: {
-    name: () => _$$t("plan_details.organization"),
-    description: () => _$$t("plan_comparison.plans.org.description"),
-    buttonText: () => _$$t("plan_comparison.plans.org.choose_button"),
+    name: () => getI18nString("plan_details.organization"),
+    description: () => getI18nString("plan_comparison.plans.org.description"),
+    buttonText: () => getI18nString("plan_comparison.plans.org.choose_button"),
     highlightBadgeText: e => $$f8[e](),
     canContactSales: !0,
     hasAnnualOnlyMessage: !0,
     trackingDescriptor: _$$c.UPGRADE_TO_ORGANIZATION
   },
   [FPlanNameType.ENTERPRISE]: {
-    name: () => _$$t("plan_details.enterprise"),
-    description: () => _$$t("plan_comparison.plans.ent.description"),
-    buttonText: () => _$$t("plan_comparison.plans.ent.choose_button"),
+    name: () => getI18nString("plan_details.enterprise"),
+    description: () => getI18nString("plan_comparison.plans.ent.description"),
+    buttonText: () => getI18nString("plan_comparison.plans.ent.choose_button"),
     canContactSales: !1,
     hasAnnualOnlyMessage: !0,
     trackingDescriptor: _$$c.CONTACT_SALES
   },
   [FPlanNameType.STUDENT]: {
     ..._,
-    additionalMessage: () => _$$t("plan_details.free_for_students_and_educators"),
+    additionalMessage: () => getI18nString("plan_details.free_for_students_and_educators"),
     trackingDescriptor: _$$c.UPGRADE_TO_EDUCATION
   }
 };
@@ -111,249 +111,249 @@ export var $$I0 = (e => (e.USAGE_LIMITS = "usage-limits", e.USAGE_LIMITS_V2 = "u
 let $$E5 = {
   "usage-limits": {
     id: "Usage limits",
-    name: () => _$$t("plan_comparison.chart.usage_limits.name"),
-    details: () => _$$t("plan_comparison.chart.usage_limits.details")
+    name: () => getI18nString("plan_comparison.chart.usage_limits.name"),
+    details: () => getI18nString("plan_comparison.chart.usage_limits.details")
   },
   "usage-limits-v2": {
     id: "Usage limits",
-    name: () => _$$t("plan_comparison.chart.usage_limits.name"),
-    details: () => _$$t("plan_comparison.chart.usage_limits.details")
+    name: () => getI18nString("plan_comparison.chart.usage_limits.name"),
+    details: () => getI18nString("plan_comparison.chart.usage_limits.details")
   },
   "version-history": {
     id: "Version history",
-    name: () => _$$t("plan_comparison.chart.version_history.name"),
-    details: () => _$$t("plan_comparison.chart.version_history.details")
+    name: () => getI18nString("plan_comparison.chart.version_history.name"),
+    details: () => getI18nString("plan_comparison.chart.version_history.details")
   },
   libraries: {
     id: "Libraries",
-    name: () => _$$t("plan_comparison.chart.libraries.name"),
-    details: () => _$$t("plan_comparison.chart.libraries.details")
+    name: () => getI18nString("plan_comparison.chart.libraries.name"),
+    details: () => getI18nString("plan_comparison.chart.libraries.details")
   },
   "shared-libraries": {
     id: "Shared libraries",
-    name: () => _$$t("plan_comparison.chart.shared_libraries.name"),
-    details: () => _$$t("plan_comparison.chart.shared_libraries.details")
+    name: () => getI18nString("plan_comparison.chart.shared_libraries.name"),
+    details: () => getI18nString("plan_comparison.chart.shared_libraries.details")
   },
   "custom-permissions": {
     id: "Custom file and user permissions",
-    name: () => _$$t("plan_comparison.chart.custom_permissions.name"),
-    details: () => _$$t("plan_comparison.chart.custom_permissions.details")
+    name: () => getI18nString("plan_comparison.chart.custom_permissions.name"),
+    details: () => getI18nString("plan_comparison.chart.custom_permissions.details")
   },
   "audio-conversations": {
     id: "Audio conversations",
-    name: () => _$$t("plan_comparison.chart.audio_conversations.name"),
-    details: () => _$$t("plan_comparison.chart.audio_conversations.details")
+    name: () => getI18nString("plan_comparison.chart.audio_conversations.name"),
+    details: () => getI18nString("plan_comparison.chart.audio_conversations.details")
   },
   security: {
     id: "SSO, advanced security",
-    name: () => _$$t("plan_comparison.chart.security.name"),
-    details: () => _$$t("plan_comparison.chart.security.details")
+    name: () => getI18nString("plan_comparison.chart.security.name"),
+    details: () => getI18nString("plan_comparison.chart.security.details")
   },
   "design-system-analytics": {
     id: "Design system analytics",
-    name: () => _$$t("plan_comparison.chart.design_system_analytics.name"),
-    details: () => _$$t("plan_comparison.chart.design_system_analytics.details")
+    name: () => getI18nString("plan_comparison.chart.design_system_analytics.name"),
+    details: () => getI18nString("plan_comparison.chart.design_system_analytics.details")
   },
   "custom-templates": {
     id: "Custom templates",
-    name: () => _$$t("plan_comparison.chart.custom_templates.name"),
-    details: () => _$$t("plan_comparison.chart.custom_templates.details")
+    name: () => getI18nString("plan_comparison.chart.custom_templates.name"),
+    details: () => getI18nString("plan_comparison.chart.custom_templates.details")
   },
   "unified-admin-and-billing": {
     id: "Unified admin and billing",
-    name: () => _$$t("plan_comparison.chart.unified_admin_and_billing.name"),
-    details: () => _$$t("plan_comparison.chart.unified_admin_and_billing.details")
+    name: () => getI18nString("plan_comparison.chart.unified_admin_and_billing.name"),
+    details: () => getI18nString("plan_comparison.chart.unified_admin_and_billing.details")
   },
   "branching-and-merging": {
     id: "Branching and merging",
-    name: () => _$$t("plan_comparison.chart.branching_and_merging.name"),
-    details: () => _$$t("plan_comparison.chart.branching_and_merging.details")
+    name: () => getI18nString("plan_comparison.chart.branching_and_merging.name"),
+    details: () => getI18nString("plan_comparison.chart.branching_and_merging.details")
   },
   "single-sign-on": {
     id: "Single sign on",
-    name: () => _$$t("plan_comparison.chart.single_sign_on.name"),
-    details: () => _$$t("plan_comparison.chart.single_sign_on.details")
+    name: () => getI18nString("plan_comparison.chart.single_sign_on.name"),
+    details: () => getI18nString("plan_comparison.chart.single_sign_on.details")
   },
   workspaces: {
     id: "Workspaces",
-    name: () => _$$t("plan_comparison.chart.workspaces.name"),
-    details: () => _$$t("plan_comparison.chart.workspaces.details")
+    name: () => getI18nString("plan_comparison.chart.workspaces.name"),
+    details: () => getI18nString("plan_comparison.chart.workspaces.details")
   },
   "guest-access-controls": {
     id: "Guest access controls",
-    name: () => _$$t("plan_comparison.chart.guest_access_controls.name"),
-    details: () => _$$t("plan_comparison.chart.guest_access_controls.details")
+    name: () => getI18nString("plan_comparison.chart.guest_access_controls.name"),
+    details: () => getI18nString("plan_comparison.chart.guest_access_controls.details")
   },
   onboarding: {
     id: "Onboarding and account support",
-    name: () => _$$t("plan_comparison.chart.onboarding.name"),
-    details: () => _$$t("plan_comparison.chart.onboarding.details")
+    name: () => getI18nString("plan_comparison.chart.onboarding.name"),
+    details: () => getI18nString("plan_comparison.chart.onboarding.details")
   },
   "advanced-prototyping": {
     id: "Advanced prototyping",
-    name: () => _$$t("plan_comparison.chart.advanced_prototyping.name"),
-    details: () => _$$t("plan_comparison.chart.advanced_prototyping.details")
+    name: () => getI18nString("plan_comparison.chart.advanced_prototyping.name"),
+    details: () => getI18nString("plan_comparison.chart.advanced_prototyping.details")
   },
   "advanced-inspection": {
     id: "Advanced inspection",
-    name: () => _$$t("plan_comparison.chart.dev_mode.advanced_inspection.name"),
-    details: () => _$$t("plan_comparison.chart.dev_mode.advanced_inspection.details")
+    name: () => getI18nString("plan_comparison.chart.dev_mode.advanced_inspection.name"),
+    details: () => getI18nString("plan_comparison.chart.dev_mode.advanced_inspection.details")
   },
   "codegen-languages": {
     id: "More codegen languages",
-    name: () => _$$t("plan_comparison.chart.dev_mode.codegen_languages.name"),
-    details: () => _$$t("plan_comparison.chart.dev_mode.codegen_languages.details")
+    name: () => getI18nString("plan_comparison.chart.dev_mode.codegen_languages.name"),
+    details: () => getI18nString("plan_comparison.chart.dev_mode.codegen_languages.details")
   },
   "annotations-and-status": {
     id: "Annotations and status",
-    name: () => _$$t("plan_comparison.chart.dev_mode.annotations_and_status.name"),
-    details: () => _$$t("plan_comparison.chart.dev_mode.annotations_and_status.details")
+    name: () => getI18nString("plan_comparison.chart.dev_mode.annotations_and_status.name"),
+    details: () => getI18nString("plan_comparison.chart.dev_mode.annotations_and_status.details")
   },
   "compare-changes": {
     id: "Compare changes",
-    name: () => _$$t("plan_comparison.chart.dev_mode.compare_changes.name"),
-    details: () => _$$t("plan_comparison.chart.dev_mode.compare_changes.details")
+    name: () => getI18nString("plan_comparison.chart.dev_mode.compare_changes.name"),
+    details: () => getI18nString("plan_comparison.chart.dev_mode.compare_changes.details")
   },
   "plugins-and-extensions": {
     id: "Plugins and extensions",
-    name: () => _$$t("plan_comparison.chart.dev_mode.plugins_and_extensions.name"),
-    details: () => _$$t("plan_comparison.chart.dev_mode.plugins_and_extensions.details")
+    name: () => getI18nString("plan_comparison.chart.dev_mode.plugins_and_extensions.name"),
+    details: () => getI18nString("plan_comparison.chart.dev_mode.plugins_and_extensions.details")
   },
   "private-plugins": {
     id: "Private plugins",
-    name: () => _$$t("plan_comparison.chart.dev_mode.private_plugins.name"),
-    details: () => _$$t("plan_comparison.chart.dev_mode.private_plugins.details")
+    name: () => getI18nString("plan_comparison.chart.dev_mode.private_plugins.name"),
+    details: () => getI18nString("plan_comparison.chart.dev_mode.private_plugins.details")
   },
   "dev-mode": {
     id: "Dev Mode",
-    name: () => _$$t("plan_comparison.chart.dev_mode.name"),
-    details: () => _$$t("plan_comparison.chart.dev_mode.details")
+    name: () => getI18nString("plan_comparison.chart.dev_mode.name"),
+    details: () => getI18nString("plan_comparison.chart.dev_mode.details")
   },
   "video-in-prototype": {
     id: "Video in Prototypes",
-    name: () => _$$t("plan_comparison.chart.video_in_prototype.name"),
-    details: () => _$$t("plan_comparison.chart.video_in_prototype.details")
+    name: () => getI18nString("plan_comparison.chart.video_in_prototype.name"),
+    details: () => getI18nString("plan_comparison.chart.video_in_prototype.details")
   },
   "project-and-team-transfer": {
     id: "Project transfer",
-    name: () => _$$t("plan_comparison.chart.project_transfer.name"),
-    details: () => _$$t("plan_comparison.chart.project_transfer.details")
+    name: () => getI18nString("plan_comparison.chart.project_transfer.name"),
+    details: () => getI18nString("plan_comparison.chart.project_transfer.details")
   },
   "private-projects": {
     id: "Private projects",
-    name: () => _$$t("plan_comparison.chart.private_projects.name"),
-    details: () => _$$t("plan_comparison.chart.private_projects.details")
+    name: () => getI18nString("plan_comparison.chart.private_projects.name"),
+    details: () => getI18nString("plan_comparison.chart.private_projects.details")
   },
   "prototype-sharing-permissions": {
     id: "Prototype sharing permissions",
-    name: () => _$$t("plan_comparison.chart.prototype_sharing_permissions.name"),
-    details: () => _$$t("plan_comparison.chart.prototype_sharing_permissions.details")
+    name: () => getI18nString("plan_comparison.chart.prototype_sharing_permissions.name"),
+    details: () => getI18nString("plan_comparison.chart.prototype_sharing_permissions.details")
   },
   "design-system-modes": {
     id: "Design system modes",
-    name: () => _$$t("plan_comparison.chart.design_system_modes.name"),
-    details: () => _$$t("plan_comparison.chart.design_system_modes.details")
+    name: () => getI18nString("plan_comparison.chart.design_system_modes.name"),
+    details: () => getI18nString("plan_comparison.chart.design_system_modes.details")
   },
   "password-protection": {
     id: "Password protection",
-    name: () => _$$t("plan_comparison.chart.password_protection.name"),
-    details: () => _$$t("plan_comparison.chart.password_protection.details")
+    name: () => getI18nString("plan_comparison.chart.password_protection.name"),
+    details: () => getI18nString("plan_comparison.chart.password_protection.details")
   },
   "default-roles": {
     id: "Default roles",
-    name: () => _$$t("plan_comparison.chart.default_roles.name"),
-    details: () => _$$t("plan_comparison.chart.default_roles.details")
+    name: () => getI18nString("plan_comparison.chart.default_roles.name"),
+    details: () => getI18nString("plan_comparison.chart.default_roles.details")
   },
   "open-sessions": {
     id: "Open sessions",
-    name: () => _$$t("plan_comparison.chart.open_sessions.name"),
+    name: () => getI18nString("plan_comparison.chart.open_sessions.name"),
     tooltipSpecialKey: m
   },
   voting: {
     id: "Voting",
-    name: () => _$$t("plan_comparison.chart.voting.name"),
+    name: () => getI18nString("plan_comparison.chart.voting.name"),
     tooltipSpecialKey: h
   },
   "custom-templates-v2": {
     id: "Custom templates",
-    name: () => _$$t("plan_comparison.chart.custom_templates_v2.name"),
+    name: () => getI18nString("plan_comparison.chart.custom_templates_v2.name"),
     tooltipSpecialKey: p
   },
   "custom-color-palettes": {
     id: "Custom color palettes",
-    name: () => _$$t("plan_comparison.chart.custom_color_palettes.name"),
+    name: () => getI18nString("plan_comparison.chart.custom_color_palettes.name"),
     tooltipSpecialKey: u
   },
   "shared-fonts": {
     id: "Shared fonts",
-    name: () => _$$t("plan_comparison.chart.shared_fonts.name"),
-    details: () => _$$t("plan_comparison.chart.shared_fonts.details")
+    name: () => getI18nString("plan_comparison.chart.shared_fonts.name"),
+    details: () => getI18nString("plan_comparison.chart.shared_fonts.details")
   },
   "centralized-admin": {
     id: "Centralized admin",
-    name: () => _$$t("plan_comparison.chart.centralized_admin.name"),
-    details: () => _$$t("plan_comparison.chart.centralized_admin.details")
+    name: () => getI18nString("plan_comparison.chart.centralized_admin.name"),
+    details: () => getI18nString("plan_comparison.chart.centralized_admin.details")
   },
   "domain-capture": {
     id: "Domain capture",
-    name: () => _$$t("plan_comparison.chart.domain_capture.name"),
-    details: () => _$$t("plan_comparison.chart.domain_capture.details")
+    name: () => getI18nString("plan_comparison.chart.domain_capture.name"),
+    details: () => getI18nString("plan_comparison.chart.domain_capture.details")
   },
   "link-access-control": {
     id: "Link access control",
-    name: () => _$$t("plan_comparison.chart.link_access_control.name"),
-    details: () => _$$t("plan_comparison.chart.link_access_control.details")
+    name: () => getI18nString("plan_comparison.chart.link_access_control.name"),
+    details: () => getI18nString("plan_comparison.chart.link_access_control.details")
   },
   "centralized-content-management": {
     id: "Centralized content management",
-    name: () => _$$t("plan_comparison.chart.centralized_content_management.name"),
-    details: () => _$$t("plan_comparison.chart.centralized_content_management.details")
+    name: () => getI18nString("plan_comparison.chart.centralized_content_management.name"),
+    details: () => getI18nString("plan_comparison.chart.centralized_content_management.details")
   },
   "activity-logs": {
     id: "Activity logs",
-    name: () => _$$t("plan_comparison.chart.activity_logs.name"),
-    details: () => _$$t("plan_comparison.chart.activity_logs.details")
+    name: () => getI18nString("plan_comparison.chart.activity_logs.name"),
+    details: () => getI18nString("plan_comparison.chart.activity_logs.details")
   },
   "plugin-widget-management": {
     id: "Plugin widget management",
-    name: () => _$$t("plan_comparison.chart.plugin_widget_management.name"),
-    details: () => _$$t("plan_comparison.chart.plugin_widget_management.details")
+    name: () => getI18nString("plan_comparison.chart.plugin_widget_management.name"),
+    details: () => getI18nString("plan_comparison.chart.plugin_widget_management.details")
   },
   "dev-mode-v2": {
     id: "Dev Mode",
-    name: () => _$$t("plan_comparison.chart.dev_mode_v2.name"),
-    details: () => _$$t("plan_comparison.chart.dev_mode_v2.details")
+    name: () => getI18nString("plan_comparison.chart.dev_mode_v2.name"),
+    details: () => getI18nString("plan_comparison.chart.dev_mode_v2.details")
   },
   "audio-conversations-v2": {
     id: "Audio conversations",
-    name: () => _$$t("plan_comparison.chart.audio_conversations_v2.name"),
-    details: () => _$$t("plan_comparison.chart.audio_conversations_v2.details")
+    name: () => getI18nString("plan_comparison.chart.audio_conversations_v2.name"),
+    details: () => getI18nString("plan_comparison.chart.audio_conversations_v2.details")
   },
   "design-system-analytics-v2": {
     id: "Design system analytics",
-    name: () => _$$t("plan_comparison.chart.design_system_analytics_v2.name"),
-    details: () => _$$t("plan_comparison.chart.design_system_analytics_v2.details")
+    name: () => getI18nString("plan_comparison.chart.design_system_analytics_v2.name"),
+    details: () => getI18nString("plan_comparison.chart.design_system_analytics_v2.details")
   },
   "single-sign-on-v2": {
     id: "Single sign on",
-    name: () => _$$t("plan_comparison.chart.single_sign_on_v2.name"),
-    details: () => _$$t("plan_comparison.chart.single_sign_on_v2.details")
+    name: () => getI18nString("plan_comparison.chart.single_sign_on_v2.name"),
+    details: () => getI18nString("plan_comparison.chart.single_sign_on_v2.details")
   },
   "private-plugins-v2": {
     id: "Private plugins",
-    name: () => _$$t("plan_comparison.chart.private_plugins_v2.name"),
-    details: () => _$$t("plan_comparison.chart.private_plugins_v2.details")
+    name: () => getI18nString("plan_comparison.chart.private_plugins_v2.name"),
+    details: () => getI18nString("plan_comparison.chart.private_plugins_v2.details")
   }
 };
 let $$x2 = ["usage-limits", "version-history", "libraries", "custom-permissions", "dev-mode", "audio-conversations", "security", "design-system-analytics", "custom-templates"];
 let $$S12 = ["usage-limits-v2", "shared-libraries", "dev-mode", "unified-admin-and-billing", "branching-and-merging", "design-system-analytics", "single-sign-on", "workspaces", "guest-access-controls", "onboarding"];
 let $$w3 = ["usage-limits", "advanced-inspection", "codegen-languages", "annotations-and-status", "compare-changes", "plugins-and-extensions", "private-plugins"];
 let C = {
-  "usage-limits": () => _$$t("plan_comparison.chart.usage_limits.unlimited"),
-  "usage-limits-v2": () => _$$t("plan_comparison.chart.usage_limits_v2.unlimited"),
+  "usage-limits": () => getI18nString("plan_comparison.chart.usage_limits.unlimited"),
+  "usage-limits-v2": () => getI18nString("plan_comparison.chart.usage_limits_v2.unlimited"),
   "version-history": !0,
-  libraries: () => _$$t("plan_comparison.chart.libraries.team_wide"),
-  "shared-libraries": () => _$$t("plan_comparison.chart.libraries.team_wide"),
+  libraries: () => getI18nString("plan_comparison.chart.libraries.team_wide"),
+  "shared-libraries": () => getI18nString("plan_comparison.chart.libraries.team_wide"),
   "custom-permissions": !0,
   "audio-conversations": !0,
   security: !1,
@@ -399,12 +399,12 @@ let C = {
 };
 let $$T9 = {
   [FPlanNameType.STARTER]: {
-    "usage-limits": () => _$$t("plan_comparison.chart.usage_limits_limited_pages.starter", {
+    "usage-limits": () => getI18nString("plan_comparison.chart.usage_limits_limited_pages.starter", {
       maxFreeFiles: WW,
       maxFreeProjects: Wf
     }),
     "usage-limits-v2": !1,
-    "version-history": () => _$$t("plan_comparison.chart.version_history.starter"),
+    "version-history": () => getI18nString("plan_comparison.chart.version_history.starter"),
     libraries: !1,
     "shared-libraries": !1,
     "custom-permissions": !1,
@@ -453,11 +453,11 @@ let $$T9 = {
   [FPlanNameType.PRO]: C,
   [FPlanNameType.STUDENT]: C,
   [FPlanNameType.ORG]: {
-    "usage-limits": () => _$$t("plan_comparison.chart.usage_limits.unlimited"),
-    "usage-limits-v2": () => _$$t("plan_comparison.chart.usage_limits_v2.unlimited_teams"),
+    "usage-limits": () => getI18nString("plan_comparison.chart.usage_limits.unlimited"),
+    "usage-limits-v2": () => getI18nString("plan_comparison.chart.usage_limits_v2.unlimited_teams"),
     "version-history": !0,
-    libraries: () => _$$t("plan_comparison.chart.libraries.org_wide"),
-    "shared-libraries": () => _$$t("plan_comparison.chart.shared_libraries.organization_wide"),
+    libraries: () => getI18nString("plan_comparison.chart.libraries.org_wide"),
+    "shared-libraries": () => getI18nString("plan_comparison.chart.shared_libraries.organization_wide"),
     "custom-permissions": !0,
     "audio-conversations": !0,
     security: !0,
@@ -502,11 +502,11 @@ let $$T9 = {
     "private-plugins-v2": !0
   },
   [FPlanNameType.ENTERPRISE]: {
-    "usage-limits": () => _$$t("plan_comparison.chart.usage_limits.unlimited"),
-    "usage-limits-v2": () => _$$t("plan_comparison.chart.usage_limits_v2.unlimited_teams"),
+    "usage-limits": () => getI18nString("plan_comparison.chart.usage_limits.unlimited"),
+    "usage-limits-v2": () => getI18nString("plan_comparison.chart.usage_limits_v2.unlimited_teams"),
     "version-history": !0,
-    libraries: () => _$$t("plan_comparison.chart.shared_libraries.company_wide"),
-    "shared-libraries": () => _$$t("plan_comparison.chart.shared_libraries.company_wide"),
+    libraries: () => getI18nString("plan_comparison.chart.shared_libraries.company_wide"),
+    "shared-libraries": () => getI18nString("plan_comparison.chart.shared_libraries.company_wide"),
     "custom-permissions": !0,
     "audio-conversations": !0,
     security: !0,
@@ -568,7 +568,7 @@ export function $$N6({
   upsellSource: t,
   buttonText: i
 }) {
-  return (e === FPlanNameType.PRO || e === FPlanNameType.STUDENT) && t === b.CREATE_NEW_PAID_TEAM ? _$$t("plan_comparison.plans.pro.choose_professional") : e === FPlanNameType.ORG && t === b.CREATE_NEW_PAID_TEAM ? _$$t("plan_comparison.plans.org.choose_organization") : i();
+  return (e === FPlanNameType.PRO || e === FPlanNameType.STUDENT) && t === b.CREATE_NEW_PAID_TEAM ? getI18nString("plan_comparison.plans.pro.choose_professional") : e === FPlanNameType.ORG && t === b.CREATE_NEW_PAID_TEAM ? getI18nString("plan_comparison.plans.org.choose_organization") : i();
 }
 export const Xj = $$I0;
 export const zS = $$g1;

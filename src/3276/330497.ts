@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useDispatch, useStore, useSelector } from "../vendor/514228";
 import { $n } from "../905/521428";
 import { E } from "../905/632989";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { jT, Pp } from "../905/989765";
 import { ds } from "../figma_app/314264";
 import { q5 } from "../figma_app/516028";
@@ -27,7 +27,7 @@ export function $$u0(e) {
     "data-dropdown-tooltip": e["data-tooltip"],
     "data-tooltip-type": e["data-tooltip-type"],
     "data-tooltip": e["data-tooltip"],
-    "aria-label": _$$t("collaboration.voice.start_conversation"),
+    "aria-label": getI18nString("collaboration.voice.start_conversation"),
     "data-fullscreen-intercept": !0
   };
   if (e.isJoinWidget) {

@@ -9,8 +9,8 @@ import p from "../vendor/223926";
 import h from "lodash-es/mapValues";
 import x from "../vendor/626715";
 import { Pt } from "../figma_app/806412";
-import { Lo } from "../905/714362";
-import { t as _$$t } from "../905/303541";
+import { logInfo } from "../905/714362";
+import { getI18nString } from "../905/303541";
 import { gl } from "../905/216495";
 import { h6 } from "../figma_app/852050";
 import { Um } from "../905/848862";
@@ -76,7 +76,7 @@ export function $$M1() {
     }, ...t]).flat(1);
     _unknownFile && (o.push({
       libraryKey: CC,
-      fileName: _$$t("variables.mode_properties_panel.used_variables.subheading")
+      fileName: getI18nString("variables.mode_properties_panel.used_variables.subheading")
     }), o.push(..._unknownFile));
     return [_local ?? [], o];
   }, [p, a]);
@@ -134,10 +134,10 @@ export function $$V0({
   useEffect(() => {
     if (!n || gl(n)) return;
     let e = allVariableSets.find(e => e.setKey === n);
-    e ? (Lo("SetVariableModeControls", "updating variable set key to non-deprecated id value"), r({
+    e ? (logInfo("SetVariableModeControls", "updating variable set key to non-deprecated id value"), r({
       targetVariableSetKey: void 0,
       targetVariableSetID: e?.modeData.collectionID
-    })) : (Lo("SetVariableModeControls", "attempted to update variable set key to non-deprecated id value, but could not find it in the list of variable sets, will just clear out the bad data."), r({
+    })) : (logInfo("SetVariableModeControls", "attempted to update variable set key to non-deprecated id value, but could not find it in the list of variable sets, will just clear out the bad data."), r({
       targetVariableSetKey: void 0
     }));
   }, [n, allVariableSets, r]);
@@ -167,7 +167,7 @@ export function $$V0({
   });
   let y = jsx(_$$A, {
     input: g,
-    label: _$$t("proto.set_variable_mode.collection_label"),
+    label: getI18nString("proto.set_variable_mode.collection_label"),
     labelId: x
   });
   let v = useId();
@@ -184,7 +184,7 @@ export function $$V0({
   });
   let C = jsx(_$$A, {
     input: I,
-    label: _$$t("proto.set_variable_mode.mode_label"),
+    label: getI18nString("proto.set_variable_mode.mode_label"),
     labelId: v
   });
   return jsxs("div", {
@@ -192,7 +192,7 @@ export function $$V0({
   });
 }
 let B = {
-  format: e => void 0 === e ? _$$t("proto.prototype_panel.edit_set_mode.none") : e === k ? _$$t("proto.prototype_panel.edit_set_mode.missing_collection") : e.modeData.collectionName,
+  format: e => void 0 === e ? getI18nString("proto.prototype_panel.edit_set_mode.none") : e === k ? getI18nString("proto.prototype_panel.edit_set_mode.missing_collection") : e.modeData.collectionName,
   isEqual: (e, t) => void 0 !== e && void 0 !== t && e !== k && t !== k && (e.setKey === t.setKey || e.modeData.collectionID === t.modeData.collectionID)
 };
 function H(e, t) {
@@ -230,12 +230,12 @@ function U({
     },
     children: allVariableSets.length > 0 ? [localVariableSets.length > 0 && jsx(O, {
       isHeader: !0,
-      formattedValue: _$$t("variables.mode_properties_panel.assets_created_in_file.subheading")
+      formattedValue: getI18nString("variables.mode_properties_panel.assets_created_in_file.subheading")
     }, Pt(s, "local_variables")), ...localVariableSets.map(e => H(e, !1)), ...subscribedVariableSetsWithSections.map((e, t) => H(e, localVariableSets.length > 0 || t > 0))] : []
   });
 }
 let F = {
-  format: e => void 0 === e ? _$$t("proto.prototype_panel.edit_set_mode.none") : e === k ? _$$t("proto.prototype_panel.edit_set_mode.missing_mode") : e?.name ?? ""
+  format: e => void 0 === e ? getI18nString("proto.prototype_panel.edit_set_mode.none") : e === k ? getI18nString("proto.prototype_panel.edit_set_mode.missing_mode") : e?.name ?? ""
 };
 function K(e) {
   return jsx(D, {

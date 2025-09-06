@@ -5,7 +5,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { g as _$$g } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
 import { ms, c$ } from "../figma_app/236327";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { f as _$$f } from "../905/412913";
 import { sx } from "../905/941192";
 import { lW } from "../figma_app/850075";
@@ -209,7 +209,7 @@ export function $$P1() {
           resourceType: Rt.STICKERS_AND_COMPONENTS
         });
       },
-      children: tx("whiteboard.inserts.view_stickers_in_this_set")
+      children: renderI18nText("whiteboard.inserts.view_stickers_in_this_set")
     })
   }) : null;
 }

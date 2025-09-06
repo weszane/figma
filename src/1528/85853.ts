@@ -2,12 +2,12 @@ import { useState, useCallback, useEffect, useMemo } from "react";
 import { useSelector } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { glU, MoD } from "../figma_app/763686";
-import { eU, fp } from "../figma_app/27355";
-import { fm } from "../905/236856";
-import { az } from "../905/449184";
-import { $D } from "../905/11";
+import { atom, useAtomValueAndSetter } from "../figma_app/27355";
+import { delay } from "../905/236856";
+import { analyticsEventManager } from "../905/449184";
+import { reportError } from "../905/11";
 import { Point } from "../905/736624";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { wS } from "../figma_app/221240";
 import { Eo } from "../figma_app/80990";
 import { Jr } from "../figma_app/624361";
@@ -21,31 +21,31 @@ var N = (e => (e.GENERIC = "GENERIC", e.OFFLINE = "OFFLINE", e.THUMBNAIL_TIMEOUT
 export function $$y0(e) {
   switch (e) {
     case "GENERIC":
-      return t("design_systems.playground.unable_to_load");
+      return getI18nString("design_systems.playground.unable_to_load");
     case "OFFLINE":
-      return t("design_systems.playground.unable_to_load_while_offline");
+      return getI18nString("design_systems.playground.unable_to_load_while_offline");
     case "THUMBNAIL_TIMEOUT":
-      return t("design_systems.playground.unable_to_load_thumbnail");
+      return getI18nString("design_systems.playground.unable_to_load_thumbnail");
   }
 }
 export function $$b4(e) {
   switch (e) {
     case "GENERIC":
-      return t("design_systems.playground.unable_to_load_help_text");
+      return getI18nString("design_systems.playground.unable_to_load_help_text");
     case "OFFLINE":
-      return t("design_systems.playground.unable_to_load_while_offline_help_text");
+      return getI18nString("design_systems.playground.unable_to_load_while_offline_help_text");
     case "THUMBNAIL_TIMEOUT":
-      return t("design_systems.playground.unable_to_load_thumbnail_help_hext");
+      return getI18nString("design_systems.playground.unable_to_load_thumbnail_help_hext");
   }
 }
-export let $$C2 = eU(!1);
+export let $$C2 = atom(!1);
 function S(e) {
   let [t, n] = useState();
   let [l, r] = useState();
   let [o, d] = useState(!1);
   let [c, p] = useState(!1);
   let [h, m] = useState(!1);
-  let [_, g] = fp($$C2);
+  let [_, g] = useAtomValueAndSetter($$C2);
   let f = useCallback(() => {
     let t = glU.generatePlaygroundThumbnail(e ?? null);
     let a = glU.getPlaygroundNodeData();
@@ -145,13 +145,13 @@ export function $$T1({
       let e = Eo.getCanvas({
         canvas_url: t.canvas_url
       });
-      (await Promise.race([e, fm(100)])) || (p(t), setPlaygroundNodeData(void 0), setHasChangesToReset(!1));
+      (await Promise.race([e, delay(100)])) || (p(t), setPlaygroundNodeData(void 0), setHasChangesToReset(!1));
       n = await e;
     } catch (e) {
       0 === e.status ? D("OFFLINE") : D("GENERIC");
       O();
       p(t);
-      $D(_$$e.DESIGN_SYSTEMS_ECOSYSTEM, e, {
+      reportError(_$$e.DESIGN_SYSTEMS_ECOSYSTEM, e, {
         tags: {
           openFileKey: T,
           libraryKey: t.library_key,
@@ -165,7 +165,7 @@ export function $$T1({
       setHasChangesToReset(!1);
       setPlaygroundNodeData(glU.getPlaygroundNodeData());
       p(t);
-      az.trackDefinedEvent("playground.set_scene", {
+      analyticsEventManager.trackDefinedEvent("playground.set_scene", {
         duration: Date.now() - a,
         assetType: t.type,
         isLocal: t.isLocal ?? !1,

@@ -5,7 +5,7 @@ import { K } from "../905/443068";
 import { U } from "../905/708285";
 import { J } from "../905/614223";
 import { getFeatureFlags } from "../905/601108";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Dm } from "../figma_app/8833";
 export function $$p0(e) {
   let {
@@ -48,7 +48,7 @@ export function $$p0(e) {
             htmlAttributes: {
               onBlur
             },
-            placeholder: t("hyperlink.type_or_paste_url"),
+            placeholder: getI18nString("hyperlink.type_or_paste_url"),
             autoFocus: !0
           })
         }) : jsx("input", {
@@ -60,13 +60,13 @@ export function $$p0(e) {
           onBlur,
           onChange: onInputChange,
           onKeyDown: onInputKeyDown,
-          placeholder: t("hyperlink.type_or_paste_url"),
+          placeholder: getI18nString("hyperlink.type_or_paste_url"),
           spellCheck: !1,
           value: url
         }), "" !== url && jsx("span", {
           className: "hyperlink_editor--breakIcon--ntEK8",
           children: jsx(K, {
-            "aria-label": t("hyperlink.remove_link"),
+            "aria-label": getI18nString("hyperlink.remove_link"),
             onClick: onClickTrash,
             actionOnPointerDown: !0,
             children: jsx(U, {})

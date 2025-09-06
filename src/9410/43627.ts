@@ -1,5 +1,5 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import a from "classnames";
 import { Qp, JR, Wi } from "../figma_app/162641";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -13,7 +13,7 @@ var s = a;
 let m = "loading_state--container--ouiBF";
 function g() {
   let e = r$();
-  let t = md(bY);
+  let t = useAtomWithSubscription(bY);
   let i = s()({
     [C9]: e === Ji.OVERLAY_MODAL,
     [_P]: e === Ji.PICKER || e === Ji.OUTLINE_TO_DECK,
@@ -46,7 +46,7 @@ export function $$y4({
   numSections: t = 3,
   numTemplates: i
 }) {
-  let a = md(bY).type === Vf.TEMPLATE_PICKER ? 3 : 4;
+  let a = useAtomWithSubscription(bY).type === Vf.TEMPLATE_PICKER ? 3 : 4;
   return jsx("div", {
     className: s()("loading_state--loadingStateContainer--dcv3D", {
       [_$$s.px8.$]: !e

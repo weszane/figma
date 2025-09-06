@@ -1,9 +1,9 @@
 import { jsx } from "react/jsx-runtime";
 import { useDispatch } from "../vendor/514228";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { h as _$$h } from "../905/207101";
 import { getInitialOptions, buildUploadUrl } from "../figma_app/169182";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { to } from "../905/156213";
 import { c as _$$c } from "../905/370443";
 import { e as _$$e } from "../905/621515";
@@ -21,8 +21,8 @@ let w = r1(v);
 export function $$T0() {
   let e = useDispatch();
   let t = TA();
-  let n = md(mp);
-  let m = md(w);
+  let n = useAtomWithSubscription(mp);
+  let m = useAtomWithSubscription(w);
   let x = _$$e({
     overlay: hxO,
     priority: N.DEFAULT_MODAL
@@ -36,8 +36,8 @@ export function $$T0() {
   });
   return jsx(_l, {
     isShowing: x.isShowing,
-    title: tx("rcs.japanese_launch_modal.title"),
-    description: tx("rcs.japanese_launch_modal.body"),
+    title: renderI18nText("rcs.japanese_launch_modal.title"),
+    description: renderI18nText("rcs.japanese_launch_modal.body"),
     media: jsx("img", {
       width: 408,
       src: buildUploadUrl("aa243114f8307af99f0c1728ada3182f8568a919"),
@@ -45,7 +45,7 @@ export function $$T0() {
     }),
     primaryCta: {
       type: "button",
-      label: tx("rcs.japanese_launch_modal.button"),
+      label: renderI18nText("rcs.japanese_launch_modal.button"),
       onClick: () => {
         e(to({
           type: kA,

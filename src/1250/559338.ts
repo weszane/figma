@@ -3,20 +3,20 @@ import { useCallback, useRef, useEffect, useState } from "react";
 import { useSelector, useDispatch, useStore } from "../vendor/514228";
 import { K } from "../905/443068";
 import { m1T, CeL, Ez5, hMR } from "../figma_app/763686";
-import { eU, md, fp } from "../figma_app/27355";
-import { sx } from "../905/449184";
+import { atom, useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
+import { trackEventAnalytics } from "../905/449184";
 import { Ay } from "../905/612521";
 import { F } from "../905/680873";
 import { B } from "../905/714743";
 import { Ih } from "../figma_app/617427";
 import { o as _$$o } from "../905/160095";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { sf } from "../905/929976";
 import { E3 } from "../figma_app/976749";
 import { TY, Ht } from "../figma_app/701001";
 import { Wy, xk, P3, Zz, Tm, Vu, eE, pl, im } from "../figma_app/952446";
 import { Wh } from "../figma_app/615482";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { $w } from "../figma_app/453508";
 import { Ce, to } from "../905/156213";
 import { gG } from "../905/684180";
@@ -37,24 +37,24 @@ function O(e) {
   let c = TY();
   let _ = useSelector(e => e.mirror.appModel.activeCanvasEditModeType === m1T.HISTORY && e.versionHistory.activeId && "current_version" !== e.versionHistory.activeId);
   let m = e.warningLevel;
-  m === Wy.WARNING ? (l = tx("fullscreen.pages_panel.memory_usage_try_removing_unneeded_content"), c ? l = tx("fullscreen.pages_panel.memory_usage_recovery_mode_high_content") : d && !_ ? l = tx("fullscreen.pages_panel.memory_usage_warning_edit_access_needed") : d && _ ? l = tx("fullscreen.pages_panel.memory_usage_read_only_view_version_history") : !d && _ && (l = tx("fullscreen.pages_panel.memory_usage_warning_edit_view_version_history"))) : m === Wy.ERROR ? (l = tx("fullscreen.pages_panel.memory_usage_to_avoid_losing_file_access"), c ? l = tx("fullscreen.pages_panel.memory_usage_recovery_mode_high_content") : d && !_ ? l = tx("fullscreen.pages_panel.memory_usage_error_contact_file_owner") : d && _ ? l = tx("fullscreen.pages_panel.memory_usage_read_only_view_version_history") : !d && _ && (l = tx("fullscreen.pages_panel.memory_usage_error_edit_view_version_history"))) : m === Wy.SAFE && e.hasHadUnsafeWarningLevel && (l = tx("fullscreen.pages_panel.memory_usage_this_file_has_enough_memory"), c && (l = tx("fullscreen.pages_panel.memory_usage_recovery_mode_low_content")));
+  m === Wy.WARNING ? (l = renderI18nText("fullscreen.pages_panel.memory_usage_try_removing_unneeded_content"), c ? l = renderI18nText("fullscreen.pages_panel.memory_usage_recovery_mode_high_content") : d && !_ ? l = renderI18nText("fullscreen.pages_panel.memory_usage_warning_edit_access_needed") : d && _ ? l = renderI18nText("fullscreen.pages_panel.memory_usage_read_only_view_version_history") : !d && _ && (l = renderI18nText("fullscreen.pages_panel.memory_usage_warning_edit_view_version_history"))) : m === Wy.ERROR ? (l = renderI18nText("fullscreen.pages_panel.memory_usage_to_avoid_losing_file_access"), c ? l = renderI18nText("fullscreen.pages_panel.memory_usage_recovery_mode_high_content") : d && !_ ? l = renderI18nText("fullscreen.pages_panel.memory_usage_error_contact_file_owner") : d && _ ? l = renderI18nText("fullscreen.pages_panel.memory_usage_read_only_view_version_history") : !d && _ && (l = renderI18nText("fullscreen.pages_panel.memory_usage_error_edit_view_version_history"))) : m === Wy.SAFE && e.hasHadUnsafeWarningLevel && (l = renderI18nText("fullscreen.pages_panel.memory_usage_this_file_has_enough_memory"), c && (l = renderI18nText("fullscreen.pages_panel.memory_usage_recovery_mode_low_content")));
   let f = l;
   if (m === Wy.WARNING) {
     t = "memory_warning--warningMemoryContentContainerWarning--SUOy5 memory_warning--warningMemoryContentContainer--xajq3";
     n = "memory_warning--memoryWarningContentIconWarning--7lQhY";
     r = c ? _$$A4 : _$$A2;
-    o = c ? tx("fullscreen.pages_panel.memory_usage_recovery_mode_high") : tx("fullscreen.pages_panel.memory_usage_memory_running_low");
+    o = c ? renderI18nText("fullscreen.pages_panel.memory_usage_recovery_mode_high") : renderI18nText("fullscreen.pages_panel.memory_usage_memory_running_low");
   } else if (m === Wy.ERROR) {
     t = "memory_warning--warningMemoryContentContainerError---AmhI memory_warning--warningMemoryContentContainer--xajq3";
     n = "memory_warning--memoryWarningContentIconError--iWcmQ";
     r = c ? _$$A4 : _$$A5;
-    o = c ? tx("fullscreen.pages_panel.memory_usage_recovery_mode_high") : tx("fullscreen.pages_panel.memory_usage_almost_out_of_memory");
+    o = c ? renderI18nText("fullscreen.pages_panel.memory_usage_recovery_mode_high") : renderI18nText("fullscreen.pages_panel.memory_usage_almost_out_of_memory");
   } else {
     if (m !== Wy.SAFE || !e.hasHadUnsafeWarningLevel) return null;
     t = "memory_warning--warningMemoryContentContainerSafe--KUmYN memory_warning--warningMemoryContentContainer--xajq3";
     n = "memory_warning--memoryWarningContentIconSafe--BHw5o";
     r = _$$A;
-    o = c ? tx("fullscreen.pages_panel.memory_usage_recovery_mode_low") : tx("fullscreen.pages_panel.memory_usage_youre_good_to_go");
+    o = c ? renderI18nText("fullscreen.pages_panel.memory_usage_recovery_mode_low") : renderI18nText("fullscreen.pages_panel.memory_usage_youre_good_to_go");
   }
   return jsx("div", {
     className: "memory_warning--memoryWarningContentBetaContainer--xcDgj",
@@ -78,7 +78,7 @@ function O(e) {
             href: "https://help.figma.com/hc/articles/360040528173-Reduce-memory-usage-in-files",
             trusted: !1,
             trackingEventName: "memory_warning_learn_more_clicked",
-            children: tx("fullscreen.pages_panel.memory_usage_learn_more")
+            children: renderI18nText("fullscreen.pages_panel.memory_usage_learn_more")
           })]
         })]
       })]
@@ -112,7 +112,7 @@ export function $$R0(e) {
     })]
   });
 }
-let M = Wh(() => eU(Wy.SAFE));
+let M = Wh(() => atom(Wy.SAFE));
 export function $$P1(e) {
   let t = useDispatch();
   let {
@@ -123,7 +123,7 @@ export function $$P1(e) {
     let t = useDispatch();
     let n = useCallback(() => {
       let n = P3();
-      sx("toggle_manage_memory_modal", {
+      trackEventAnalytics("toggle_manage_memory_modal", {
         memoryUsedPercent: n,
         totalLayers: CeL?.getFileNodeCount(),
         pageContentPct: n - Zz()
@@ -148,9 +148,9 @@ export function $$P1(e) {
       closeManageMemoryModal: a
     };
   }();
-  let c = md(Tm);
-  let u = md(Vu);
-  let m = md(eE);
+  let c = useAtomWithSubscription(Tm);
+  let u = useAtomWithSubscription(Vu);
+  let m = useAtomWithSubscription(eE);
   let p = function ({
     warningLevel: e
   }) {
@@ -172,7 +172,7 @@ export function $$P1(e) {
     memoryUsedPercent: n,
     fileKey: a
   }) {
-    let [o, s] = fp(M);
+    let [o, s] = useAtomValueAndSetter(M);
     let d = useStore();
     let c = F(() => {
       var t;
@@ -256,11 +256,11 @@ function D(e) {
   let t = t => {
     let n = {
       view: "fullscreen",
-      editorType: t === nT.Design ? nT.Design : nT.Whiteboard,
+      editorType: t === FEditorType.Design ? FEditorType.Design : FEditorType.Whiteboard,
       fileKey: e.fileKey,
       isRecoveryMode: !1
     };
-    sx("exit_recovery_mode", {
+    trackEventAnalytics("exit_recovery_mode", {
       currentAllocatedBytes: hMR?.getTotalUsedHeapMemory(),
       maxAllocatedBytes: hMR?.getMaxUsedHeapMemory(),
       fileKey: e.fileKey
@@ -286,13 +286,13 @@ function D(e) {
         className: "memory_warning--memoryUsageHeader--WNS5R",
         children: [jsx("div", {
           className: "memory_warning--memoryUsageHeaderTitle--65Nsp",
-          children: tx("fullscreen.pages_panel.memory_usage")
+          children: renderI18nText("fullscreen.pages_panel.memory_usage")
         }), jsx("div", {
           className: "memory_warning--memoryUsageCloseIcon--6rw0p",
           children: !h && jsx(K, {
-            "aria-label": _$$t("common.close"),
+            "aria-label": getI18nString("common.close"),
             onClick: () => {
-              sx("manage_memory_modal_closed", {
+              trackEventAnalytics("manage_memory_modal_closed", {
                 currentAllocatedBytes: hMR?.getTotalUsedHeapMemory(),
                 maxAllocatedBytes: hMR?.getMaxUsedHeapMemory(),
                 fileKey: e.fileKey
@@ -318,7 +318,7 @@ function D(e) {
         warningLevel,
         hasHadUnsafeWarningLevel
       }), (() => {
-        let t = _$$t("manage_memory_modal.manage_memory_button");
+        let t = getI18nString("manage_memory_modal.manage_memory_button");
         let n = () => {
           e.toggleManageMemoryModal();
         };
@@ -338,7 +338,7 @@ function D(e) {
         children: jsx(Ih, {
           variant: "primary",
           onClick: () => t(editorType),
-          children: tx("fullscreen.pages_panel.memory_usage_recovery_mode_exit")
+          children: renderI18nText("fullscreen.pages_panel.memory_usage_recovery_mode_exit")
         })
       })]
     })

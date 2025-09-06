@@ -10,7 +10,7 @@ import { rXF } from "../figma_app/763686";
 import { U } from "../figma_app/901889";
 import { j } from "../905/918929";
 import { Pt } from "../figma_app/806412";
-import { tx, t as _$$t2 } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { wJ } from "../figma_app/630951";
 import { FX } from "../figma_app/12491";
 import { sF } from "../figma_app/777207";
@@ -65,7 +65,7 @@ function T({
     value: "SUBSCRIBED_VARIABLES" === t.type ? t.libraryKey : t.type,
     children: [jsx(l9, {
       label: jsx(_$$h, {
-        children: tx("variables.binding_ui.variable_set")
+        children: renderI18nText("variables.binding_ui.variable_set")
       }),
       "data-testid": "variable-set-selector-trigger",
       children: jsx(k, {
@@ -75,11 +75,11 @@ function T({
     }), jsxs(mc, {
       children: [jsx(R, {
         value: "ALL_LIBRARIES",
-        formattedValue: _$$t2("variables.binding_ui.set_labels.all_libraries")
+        formattedValue: getI18nString("variables.binding_ui.set_labels.all_libraries")
       }), i.length > 0 && jsxs(Fragment, {
         children: [jsx(wv, {}), jsx(R, {
           value: "LOCAL_VARIABLES",
-          formattedValue: _$$t2("variables.binding_ui.set_labels.assets_created_in_file")
+          formattedValue: getI18nString("variables.binding_ui.set_labels.assets_created_in_file")
         }), jsx(wv, {})]
       }), fail.map(e => {
         let t = d && sF(e.libraryKey);
@@ -100,7 +100,7 @@ function k({
   currentView: e,
   selectedLibraryKey: t
 }) {
-  return "ALL_LIBRARIES" === e.type ? tx("variables.binding_ui.set_labels.all_libraries") : "LOCAL_VARIABLES" === e.type ? tx("variables.binding_ui.set_labels.assets_created_in_file") : jsxs("span", {
+  return "ALL_LIBRARIES" === e.type ? renderI18nText("variables.binding_ui.set_labels.all_libraries") : "LOCAL_VARIABLES" === e.type ? renderI18nText("variables.binding_ui.set_labels.assets_created_in_file") : jsxs("span", {
     className: "x3nfvp2 x6s0dn4",
     children: [e.fileName, t && jsx(_$$P, {
       libraryKey: t
@@ -133,9 +133,9 @@ function P({
     let i = function (e) {
       switch (e) {
         case "list":
-          return 0 === s ? _$$t2("variables.binding_ui.grid_view_unavailable_multiple_modes") : _$$t2("variables.binding_ui.show_as_grid_tooltip");
+          return 0 === s ? getI18nString("variables.binding_ui.grid_view_unavailable_multiple_modes") : getI18nString("variables.binding_ui.show_as_grid_tooltip");
         case "grid":
-          return _$$t2("variables.binding_ui.show_as_list_tooltip");
+          return getI18nString("variables.binding_ui.show_as_list_tooltip");
       }
     }(t.layout);
     return jsx(K, {
@@ -170,7 +170,7 @@ export function $$O0({
       onSetSelect: s
     }) : jsx("div", {
       className: b8,
-      children: _$$t2("proto.action_set_variable_dropdown_option")
+      children: getI18nString("proto.action_set_variable_dropdown_option")
     }), (o || r) && jsxs("div", {
       className: aX,
       children: [o && jsx(P, {

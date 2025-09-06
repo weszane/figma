@@ -4,7 +4,7 @@ import { createPortal } from "../vendor/944059";
 import { E as _$$E } from "../905/632989";
 import { glU, V5h, rcl } from "../figma_app/763686";
 import { l7 } from "../905/189185";
-import { fp, md } from "../figma_app/27355";
+import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import c from "classnames";
 import { rf } from "../figma_app/806412";
 import { W6 } from "../905/125333";
@@ -40,7 +40,7 @@ export function $$N0({
   testId: w
 }) {
   let N = useRef(null);
-  let [k, R] = fp(Hf);
+  let [k, R] = useAtomValueAndSetter(Hf);
   let M = L(e);
   let D = useCallback(() => {
     ko({
@@ -60,7 +60,7 @@ export function $$N0({
   });
   let U = Yt();
   let F = U ? lx.get(U) : null;
-  let H = md(W6);
+  let H = useAtomWithSubscription(W6);
   let B = useMemo(() => e === F && c === H, [F, H, e, c]);
   let V = U_();
   let {

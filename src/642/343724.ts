@@ -9,9 +9,9 @@ import { _ as _$$_2 } from "../905/862468";
 import { g as _$$g } from "../905/687265";
 import { glU, rcl, uQ6 } from "../figma_app/763686";
 import { Ay } from "@stylexjs/stylex";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { Pt } from "../figma_app/806412";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { A as _$$A } from "../905/482208";
 import { jo } from "../figma_app/753501";
 import { A0, Br } from "../figma_app/454974";
@@ -81,7 +81,7 @@ export function $$M0({
           htmlAttributes: {
             onContextMenu: jo
           },
-          children: tx("fullscreen.pages_panel.layers_tab")
+          children: renderI18nText("fullscreen.pages_panel.layers_tab")
         }), e && jsx(X0, {
           children: jsx(A, {
             recordingKey: Pt(s, "layersOptionMenu")
@@ -98,14 +98,14 @@ export function $$M0({
       children: jsxs(_$$E, {
         onClick: n.showAllLayers,
         ...Ay.props(E.showAllLayersButton),
-        children: [jsx(_$$f, {}), tx("sites.layer_view.show_all_layers")]
+        children: [jsx(_$$f, {}), renderI18nText("sites.layer_view.show_all_layers")]
       })
     })]
   });
 }
 function A(e) {
   let t = useSelector(e => e.mirror.appModel.keyboardShortcuts);
-  let s = md(X);
+  let s = useAtomWithSubscription(X);
   let i = "collapse-layers";
   let l = () => {
     glU?.triggerActionEnumInUserEditScope(rcl.COLLAPSE_LAYERS, {});

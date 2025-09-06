@@ -4,8 +4,8 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { glU } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { buildUploadUrl } from "../figma_app/169182";
-import { $D } from "../905/11";
-import { Lo, xi } from "../905/714362";
+import { reportError } from "../905/11";
+import { logInfo, logWarning } from "../905/714362";
 import { T } from "../figma_app/409248";
 import { w6, Dl } from "../figma_app/291892";
 import { A } from "../905/426471";
@@ -158,7 +158,7 @@ export function $$T7(e, t, r) {
 }
 export async function $$I4(e, t) {
   let r = await T(e, m);
-  Lo("activateStampToolWithImageURL", "setting stamp tool", {
+  logInfo("activateStampToolWithImageURL", "setting stamp tool", {
     label: t,
     bytesLength: r?.length
   });
@@ -185,7 +185,7 @@ export function $$N0(e, t) {
   for (let r of e) {
     let e = $$x5(r, t);
     e && T(e, m).catch(e => {
-      $D(_$$e.FIGJAM, e);
+      reportError(_$$e.FIGJAM, e);
     });
   }
 }
@@ -196,7 +196,7 @@ export async function $$C3(e, t) {
     let e = await T(r, m);
     return `data:image/png;base64,${encodeBase64(e)}`;
   } catch {
-    xi("emoji wheel", "unable to load emoji data", {
+    logWarning("emoji wheel", "unable to load emoji data", {
       url: r,
       name: e.name
     });
@@ -206,13 +206,13 @@ export async function $$C3(e, t) {
 function w(...e) {
   for (let t of e) if (t && (!(t instanceof HTMLImageElement) || !t.src || !t.width || !t.height)) {
     let e = t.outerHTML || Object.prototype.toString.call(t);
-    $D(_$$e.FIGJAM, Error(`Expected object to be a valid HTMLImageElement but it wasn't: '${e}'`));
+    reportError(_$$e.FIGJAM, Error(`Expected object to be a valid HTMLImageElement but it wasn't: '${e}'`));
   }
 }
 function O(e, t) {
-  if (t && $D(_$$e.FIGJAM, t), !e) return;
+  if (t && reportError(_$$e.FIGJAM, t), !e) return;
   let r = e.outerHTML || Object.prototype.toString.call(e);
-  $D(_$$e.FIGJAM, Error(`Expected object to be a valid HTMLImageElement but it wasn't: '${r}'`));
+  reportError(_$$e.FIGJAM, Error(`Expected object to be a valid HTMLImageElement but it wasn't: '${r}'`));
 }
 export const C7 = $$N0;
 export const LL = $$b1;
@@ -223,4 +223,4 @@ export const k6 = $$x5;
 export const uL = $$y6;
 export const vv = $$T7;
 export const w8 = $$A8;
-export const xG = $$v9; 
+export const xG = $$v9;

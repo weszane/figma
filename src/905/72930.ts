@@ -4,7 +4,7 @@ import { useDispatch } from "../vendor/514228";
 import { O } from "../905/969533";
 import { Ay } from "@stylexjs/stylex";
 import { Pt } from "../figma_app/806412";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { gI, dS, Pc } from "../figma_app/396464";
 import { ZH } from "../figma_app/504823";
 import { wr, Dh, D$ } from "../figma_app/741237";
@@ -41,12 +41,12 @@ export function $$v0({
   return (useEffect(() => {
     w($$b1(f, v, x, l));
   }, [x, l, f, v]), u = f && x && f.length === x.length ? jsxs("div", {
-    children: [_$$t("cooper.toolbar.export_modal.all_assets"), " ", jsx("span", {
+    children: [getI18nString("cooper.toolbar.export_modal.all_assets"), " ", jsx("span", {
       className: "x1n0bwc9",
       children: "(" + x.length + ")"
     })]
   }) : jsx("div", {
-    children: _$$t("cooper.toolbar.export_modal.asset_count_selected", {
+    children: getI18nString("cooper.toolbar.export_modal.asset_count_selected", {
       assetCount: S.length
     })
   }), 0 === x.length || void 0 === x[0]) ? null : jsxs(l6, {
@@ -94,7 +94,7 @@ export function $$v0({
         className: "x78zum5 x6s0dn4 x1nfngrj",
         children: [jsx(I, {
           cooperFrameId: x[0]
-        }), _$$t("cooper.toolbar.export_modal.all_assets") + " (" + x.length + ")"]
+        }), getI18nString("cooper.toolbar.export_modal.all_assets") + " (" + x.length + ")"]
       })
     }, A), jsx(sK, {}), [...x].map(e => {
       let t = l.get(e)?.name;

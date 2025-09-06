@@ -1,8 +1,8 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import o from "classnames";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { zS, qD } from "../figma_app/471982";
 import { Ay } from "../905/506641";
 import { YW } from "../figma_app/350203";
@@ -40,7 +40,7 @@ function j({
   let [o, a] = useState(void 0);
   let [d, u] = useState(!1);
   let [m, p] = useState(!1);
-  let x = md(kS);
+  let x = useAtomWithSubscription(kS);
   useEffect(() => {
     if (!e) return;
     let t = t => {
@@ -97,7 +97,7 @@ function j({
     children: [jsxs("div", {
       className: "canvas_viewer--iframeWrapper--eemgJ",
       children: [jsx("iframe", {
-        title: _$$t("community.embed.preview_title_long"),
+        title: getI18nString("community.embed.preview_title_long"),
         style: {
           width: r ? "100%" : zS(d),
           height: "100%"

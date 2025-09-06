@@ -1,9 +1,9 @@
 import { V } from '../905/84612';
-import { t as _$$t } from '../905/303541';
+import { getI18nString } from '../905/303541';
 import { m as _$$m } from '../905/380385';
 import { x as _$$x } from '../905/437800';
 import { $N, S as _$$S, b9, C_, CA, Fm, Gb, gy, i1, ij, KV, kW, Nz, pd, rC, rX, se, sz, T7, tu, Ud, v3, V_, VH, wH, zn, Zr, ZR } from '../905/540111';
-import { sn } from '../905/542194';
+import { globalPerfTimer } from '../905/542194';
 import { getFeatureFlags } from '../905/601108';
 import { Point } from '../905/736624';
 import { G } from '../905/799129';
@@ -231,7 +231,7 @@ let T = class e extends HTMLElement {
     </div>
     `);
     this.onClick = cZ(this, 'click', e => {
-      this.onPinClick && (sn.start('view_comment_thread'), this.onPinClick(this.id, e));
+      this.onPinClick && (globalPerfTimer.start('view_comment_thread'), this.onPinClick(this.id, e));
     });
     this.pendingTimeout = null;
     registerRecording(this);
@@ -468,11 +468,11 @@ let T = class e extends HTMLElement {
     let t = e.replies || 0;
     let i = e.numAttachments;
     let n = !!e.numUnreadReplies && e.numUnreadReplies !== t;
-    let r = t ? _$$t('comments.preview_reply_count', {
+    let r = t ? getI18nString('comments.preview_reply_count', {
       replyCount: n ? e.numUnreadReplies : t,
       new: n ? 'true' : 'false'
     }) : '';
-    let a = i ? _$$t('comments.attachment_count', {
+    let a = i ? getI18nString('comments.attachment_count', {
       attachmentCount: i
     }) : '';
     let s = '';

@@ -6,14 +6,14 @@ import { ii, F7 } from "../905/859698";
 import { VTL, glU, DV9, rcl, NLJ, V5h, BXd, zol, ZiZ, Ez5 } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import _ from "../vendor/946678";
 import { A as _$$A } from "../vendor/518290";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { getInitialOptions } from "../figma_app/169182";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { W6 } from "../905/125333";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { jsxs, jsx } from "react/jsx-runtime";
 import { Eo } from "../figma_app/80990";
 import { Y5 } from "../figma_app/455680";
@@ -389,19 +389,19 @@ var h = _;
 })(n || (n = {}));
 export function $$tH1(e, t, r) {
   if (t === VTL.NO) return;
-  let n = r ?? zl.get(Rg);
+  let n = r ?? atomStoreManager.get(Rg);
   if (t === VTL.YES_WITHOUT_REORDER) {
-    let t = zl.get(Gn).map(t => t.id === e ? {
+    let t = atomStoreManager.get(Gn).map(t => t.id === e ? {
       ...t,
       lastAddedAtByUserId: {
         ...t.lastAddedAtByUserId,
         [n]: Date.now()
       }
     } : t);
-    zl.set(Gn, t);
+    atomStoreManager.set(Gn, t);
     return;
   }
-  let [[i], a] = h()(zl.get(Gn), t => t.id === e);
+  let [[i], a] = h()(atomStoreManager.get(Gn), t => t.id === e);
   let s = {
     id: e,
     lastAddedAtByUserId: {
@@ -409,21 +409,21 @@ export function $$tH1(e, t, r) {
       [n]: Date.now()
     }
   };
-  zl.set(Gn, [s, ...a]);
+  atomStoreManager.set(Gn, [s, ...a]);
 }
 export function $$tz14(e, t) {
   t && (glU?.triggerActionEnumInUserEditScope(t.actionEnum, {
     source: YV
-  }), zl.set(W6, e));
+  }), atomStoreManager.set(W6, e));
 }
 export async function $$tW13(e, t, r) {
   try {
     let n = await Eo.getCanvas(e);
     DV9?.setPlatformShapeSelected(n, $$t$2(e), e.type, e.userFacingVersion.toString(), e.library_key, r);
     glU?.triggerActionEnumInUserEditScope(rcl.SET_TOOL_SHAPE_WHITEBOARD_PLATFORM, {});
-    zl.set(W6, t);
+    atomStoreManager.set(W6, t);
   } catch (e) {
-    $D(_$$e.FIGJAM, e);
+    reportError(_$$e.FIGJAM, e);
   }
 }
 export function $$tK8(e, t) {
@@ -468,10 +468,10 @@ export function $$tY9(e, t) {
       }
       glU && (glU.triggerActionEnumInUserEditScope(rcl.COMMIT, {}), glU.triggerActionEnumInUserEditScope(rcl.SET_TOOL_DEFAULT, {}), (e.type === PW.COMPONENT || e.type === PW.STATE_GROUP) && $$tH1($$t$2(e), t, getInitialOptions().user_data?.id));
     }).catch(e => {
-      $D(_$$e.FIGJAM, e);
+      reportError(_$$e.FIGJAM, e);
     });
   } catch (e) {
-    $D(_$$e.FIGJAM, e);
+    reportError(_$$e.FIGJAM, e);
   }
 }
 export function $$t$2(e) {
@@ -687,36 +687,36 @@ export function $$t05(e, t, r, n) {
 }
 let t1 = _$$A(() => ({
   advanced: {
-    activity: t("whiteboard.shapes_sidebar.shapes.activity"),
-    archive: t("whiteboard.shapes_sidebar.shapes.archive"),
-    authentication: t("whiteboard.shapes_sidebar.shapes.authentication"),
-    chat: t("whiteboard.shapes_sidebar.shapes.chat"),
-    cloud: t("whiteboard.shapes_sidebar.shapes.cloud"),
-    compute: t("whiteboard.shapes_sidebar.shapes.compute"),
-    database: t("whiteboard.shapes_sidebar.shapes.database"),
-    desktop: t("whiteboard.shapes_sidebar.shapes.desktop"),
-    email: t("whiteboard.shapes_sidebar.shapes.email"),
-    file: t("whiteboard.shapes_sidebar.shapes.file"),
-    frontEndService: t("whiteboard.shapes_sidebar.shapes.frontEndService"),
-    instant: t("whiteboard.shapes_sidebar.shapes.instant"),
-    location: t("whiteboard.shapes_sidebar.shapes.location"),
-    mobile: t("whiteboard.shapes_sidebar.shapes.mobile"),
-    package: t("whiteboard.shapes_sidebar.shapes.package"),
-    payment: t("whiteboard.shapes_sidebar.shapes.payment"),
-    security: t("whiteboard.shapes_sidebar.shapes.security"),
-    send: t("whiteboard.shapes_sidebar.shapes.send"),
-    server: t("whiteboard.shapes_sidebar.shapes.server"),
-    service: t("whiteboard.shapes_sidebar.shapes.service"),
-    settings: t("whiteboard.shapes_sidebar.shapes.settings"),
-    storage: t("whiteboard.shapes_sidebar.shapes.storage"),
-    terminal: t("whiteboard.shapes_sidebar.shapes.terminal"),
-    user: t("whiteboard.shapes_sidebar.shapes.user"),
-    wallet: t("whiteboard.shapes_sidebar.shapes.wallet"),
-    web: t("whiteboard.shapes_sidebar.shapes.web")
+    activity: getI18nString("whiteboard.shapes_sidebar.shapes.activity"),
+    archive: getI18nString("whiteboard.shapes_sidebar.shapes.archive"),
+    authentication: getI18nString("whiteboard.shapes_sidebar.shapes.authentication"),
+    chat: getI18nString("whiteboard.shapes_sidebar.shapes.chat"),
+    cloud: getI18nString("whiteboard.shapes_sidebar.shapes.cloud"),
+    compute: getI18nString("whiteboard.shapes_sidebar.shapes.compute"),
+    database: getI18nString("whiteboard.shapes_sidebar.shapes.database"),
+    desktop: getI18nString("whiteboard.shapes_sidebar.shapes.desktop"),
+    email: getI18nString("whiteboard.shapes_sidebar.shapes.email"),
+    file: getI18nString("whiteboard.shapes_sidebar.shapes.file"),
+    frontEndService: getI18nString("whiteboard.shapes_sidebar.shapes.frontEndService"),
+    instant: getI18nString("whiteboard.shapes_sidebar.shapes.instant"),
+    location: getI18nString("whiteboard.shapes_sidebar.shapes.location"),
+    mobile: getI18nString("whiteboard.shapes_sidebar.shapes.mobile"),
+    package: getI18nString("whiteboard.shapes_sidebar.shapes.package"),
+    payment: getI18nString("whiteboard.shapes_sidebar.shapes.payment"),
+    security: getI18nString("whiteboard.shapes_sidebar.shapes.security"),
+    send: getI18nString("whiteboard.shapes_sidebar.shapes.send"),
+    server: getI18nString("whiteboard.shapes_sidebar.shapes.server"),
+    service: getI18nString("whiteboard.shapes_sidebar.shapes.service"),
+    settings: getI18nString("whiteboard.shapes_sidebar.shapes.settings"),
+    storage: getI18nString("whiteboard.shapes_sidebar.shapes.storage"),
+    terminal: getI18nString("whiteboard.shapes_sidebar.shapes.terminal"),
+    user: getI18nString("whiteboard.shapes_sidebar.shapes.user"),
+    wallet: getI18nString("whiteboard.shapes_sidebar.shapes.wallet"),
+    web: getI18nString("whiteboard.shapes_sidebar.shapes.web")
   }
 }));
 let t2 = _$$A(() => ({
-  advanced: t("whiteboard.shapes_sidebar.section_title.advanced")
+  advanced: getI18nString("whiteboard.shapes_sidebar.section_title.advanced")
 }));
 export function $$t54(e, t) {
   let r = t1();
@@ -766,7 +766,7 @@ export function $$t716({
         return "CLOSED_PANEL";
     }
   }(e);
-  az.trackDefinedEvent("figjam_advanced_diagramming.shapes_sidebar_search_completion", {
+  analyticsEventManager.trackDefinedEvent("figjam_advanced_diagramming.shapes_sidebar_search_completion", {
     shape: t,
     result: n,
     libraryTitle: r.libraryTitle,

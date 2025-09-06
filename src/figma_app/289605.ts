@@ -18,7 +18,7 @@ import { Uz } from "../905/63728";
 import { tH, H4 } from "../905/751457";
 import { s as _$$s } from "../cssbuilder/589278";
 import { c as _$$c } from "../905/241436";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { X as _$$X } from "../905/99316";
 import { J as _$$J } from "../905/45438";
@@ -171,7 +171,7 @@ function ei({
               variable
             }), jsx(_$$K, {
               onClick: t,
-              "aria-label": _$$t("dev_handoff.variables.details_button_close_aria_label"),
+              "aria-label": getI18nString("dev_handoff.variables.details_button_close_aria_label"),
               children: jsx(_$$L, {})
             })]
           }) : jsx(ea, {
@@ -198,7 +198,7 @@ function ei({
       children: jsxs("div", {
         className: Ct,
         children: [jsx(ed, {
-          name: _$$t("dev_handoff.variables.details_collection"),
+          name: getI18nString("dev_handoff.variables.details_collection"),
           value: variableSet?.name,
           copyValue: null,
           trackingName: "collection"
@@ -234,7 +234,7 @@ function ea({
     ...o
   } = _$$X2(e.name);
   let d = a ? {
-    "data-tooltip": _$$t("variables.variable_was_deleted"),
+    "data-tooltip": getI18nString("variables.variable_was_deleted"),
     "data-tooltip-type": Ib.TEXT
   } : void 0;
   let c = useCallback(() => {
@@ -290,7 +290,7 @@ function es({
       containerClassName: Yv,
       link: l.data,
       isLocal: r,
-      localFallback: _$$t("dev_handoff.variables.details_local"),
+      localFallback: getI18nString("dev_handoff.variables.details_local"),
       onClickLocalFallback: c,
       onTrackClickName: o,
       dataTestId: "var-details-library",
@@ -337,7 +337,7 @@ function el({
     children: [jsx("span", {
       id: p,
       className: xZ,
-      children: tx("dev_handoff.variables.details_mode")
+      children: renderI18nText("dev_handoff.variables.details_mode")
     }), jsx("span", {
       className: _,
       "data-testid": "var-details-mode",
@@ -403,7 +403,7 @@ let eu = ex("variable_value_from_other_mode", function ({
 }) {
   return jsx("div", {
     className: _$$s.cursorDefault.colorTextTooltip.wFitContent.$,
-    children: tx("dev_handoff.variables.details_value_from_other_mode", {
+    children: renderI18nText("dev_handoff.variables.details_value_from_other_mode", {
       modeName: jsx("span", {
         className: _$$s.fontSemiBold.$,
         children: e
@@ -451,10 +451,10 @@ function ep({
   return a && !_ && r && (a?.subscriptionStatus !== "SUBSCRIBED" || "loaded" === g.status) ? c ? jsx("div", {
     className: Iw,
     children: jsx(_$$K, {
-      "aria-label": _$$t("dev_handoff.variables.details_view_in_collection"),
+      "aria-label": getI18nString("dev_handoff.variables.details_view_in_collection"),
       htmlAttributes: {
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("dev_handoff.variables.details_view_in_collection")
+        "data-tooltip": getI18nString("dev_handoff.variables.details_view_in_collection")
       },
       onClick: b,
       children: jsx(_$$E2, {})
@@ -462,10 +462,10 @@ function ep({
   }) : g.data?.type === "community" ? jsx(_$$E, {
     disabled: !0,
     className: E()(WF, Iw),
-    "aria-label": _$$t("dev_handoff.variables.details_from_community"),
+    "aria-label": getI18nString("dev_handoff.variables.details_from_community"),
     htmlAttributes: {
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": _$$t("dev_handoff.variables.details_from_community")
+      "data-tooltip": getI18nString("dev_handoff.variables.details_from_community")
     },
     children: jsx(_$$U, {})
   }) : f ? jsx(tH, {
@@ -481,10 +481,10 @@ function ep({
       href: f,
       trusted: !0,
       onClick: b,
-      "aria-label": _$$t("dev_handoff.variables.details_view_in_collection"),
+      "aria-label": getI18nString("dev_handoff.variables.details_view_in_collection"),
       htmlAttributes: {
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("dev_handoff.variables.details_view_in_collection")
+        "data-tooltip": getI18nString("dev_handoff.variables.details_view_in_collection")
       },
       children: jsx(_$$E2, {})
     })
@@ -524,7 +524,7 @@ function e_({
       collectionName: I.name
     } : null;
   }, [r, I, t, y, S]);
-  let w = _$$t("dev_handoff.variables.details_value_show_more", {
+  let w = getI18nString("dev_handoff.variables.details_value_show_more", {
     count: o - 2
   });
   let {
@@ -539,12 +539,12 @@ function e_({
       children: [k ? jsx(np, {
         color: b.value,
         variable: y,
-        label: y?.name ?? _$$t("variables.missing_name"),
+        label: y?.name ?? getI18nString("variables.missing_name"),
         onClick: N,
         shouldStretch: !0
       }) : jsx(wG, {
         thumbnailValue: T,
-        text: y?.name ?? _$$t("variables.missing_name"),
+        text: y?.name ?? getI18nString("variables.missing_name"),
         onClick: N,
         isDeleted: y ? eF(y) : void 0,
         fullWidth: !0,
@@ -570,7 +570,7 @@ function e_({
       className: E()(my, D && mH),
       children: [jsxs(_$$E, {
         onClick: u,
-        "aria-label": _$$t("dev_handoff.variables.details_value_expand_aria_label"),
+        "aria-label": getI18nString("dev_handoff.variables.details_value_expand_aria_label"),
         className: X1,
         htmlAttributes: L,
         children: [jsx(_$$f, {
@@ -582,7 +582,7 @@ function e_({
         })]
       }), d && jsx(_$$B, {
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("dev_handoff.variables.details_values_not_all_from_same_mode"),
+        "data-tooltip": getI18nString("dev_handoff.variables.details_values_not_all_from_same_mode"),
         className: Kk
       })]
     }) : null]
@@ -701,7 +701,7 @@ function ef({
     let e = T.type === Z_n.FLOAT ? nd(T.value, "") : T.value.toString();
     return jsx(ed, {
       trackingName: "value",
-      name: _$$t("dev_handoff.variables.details_value"),
+      name: getI18nString("dev_handoff.variables.details_value"),
       value: e,
       copyValue: e
     });
@@ -710,7 +710,7 @@ function ef({
     className: e9,
     children: [jsx("span", {
       className: xZ,
-      children: tx("dev_handoff.variables.details_value")
+      children: renderI18nText("dev_handoff.variables.details_value")
     }), jsx("div", {
       className: E()(n8, T.type !== Z_n.COLOR && jl, T.type === Z_n.COLOR && Kv),
       children: I.map((e, t) => {
@@ -740,7 +740,7 @@ function eE({
 }) {
   let t = _$$u(e);
   let r = ON();
-  let i = _$$t("dev_handoff.variables.details_scope");
+  let i = getI18nString("dev_handoff.variables.details_scope");
   let a = _$$X2(i);
   return t?.scopes && t.scopes.length > 0 && t.scopes[0] !== j0r.ALL_SCOPES ? jsxs(_$$c, {
     className: e9,
@@ -754,7 +754,7 @@ function eE({
         ...a,
         children: i
       }), jsx("div", {
-        "data-tooltip": _$$t("dev_handoff.variables.details_scope_info"),
+        "data-tooltip": getI18nString("dev_handoff.variables.details_scope_info"),
         "data-tooltip-type": Ib.TEXT,
         className: Kk,
         children: jsx(_$$B, {})
@@ -778,7 +778,7 @@ function ey({
     children: [jsx("div", {
       className: _$$s.h8.$
     }), jsx(VZ, {
-      title: _$$t("dev_handoff.variables.details_code_syntax"),
+      title: getI18nString("dev_handoff.variables.details_code_syntax"),
       recordingKey: "dev-var-details-code-syntax",
       children: Object.entries(e).map(([e, t]) => {
         let r = ov(e);

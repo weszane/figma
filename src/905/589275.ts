@@ -10,7 +10,7 @@ import { Qp, JR, Wi } from "../figma_app/162641";
 import { P as _$$P } from "../905/347284";
 import { B as _$$B } from "../905/714743";
 import { n as _$$n } from "../905/734251";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { oB, j7 } from "../905/929976";
 import { to } from "../905/156213";
 import { NY } from "../figma_app/646357";
@@ -101,7 +101,7 @@ function M({
       className: "preferred_values_list_view--listItemRemoveButton--QevDg preferred_values_instance_picker--listItemRemoveButton--HO05L",
       svg: _$$A,
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": _$$t("fullscreen.draggable_list.remove"),
+      "data-tooltip": getI18nString("fullscreen.draggable_list.remove"),
       tooltipForScreenReadersOnly: !0,
       onClick: () => {
         t(e);
@@ -149,7 +149,7 @@ function Y(e) {
     className: hasValues || h.isShown ? fieldContainer : fieldContainerFaded,
     children: [jsx("span", {
       className: label,
-      children: tx("design_systems.component_properties.preferred_values")
+      children: renderI18nText("design_systems.component_properties.preferred_values")
     }), jsx("span", {
       className: learnMore,
       children: jsx(CY, {
@@ -157,7 +157,7 @@ function Y(e) {
         target: "_blank",
         onClick: dG,
         trusted: !0,
-        children: tx("general.learn_more")
+        children: renderI18nText("general.learn_more")
       })
     }), jsxs("div", {
       className: buttons,
@@ -165,13 +165,13 @@ function Y(e) {
         isSwapPicker: !1,
         isPreferredValues: !0
       }), jsx(_$$d, {
-        "aria-label": _$$t("design_systems.component_properties.select_preferred_values"),
+        "aria-label": getI18nString("design_systems.component_properties.select_preferred_values"),
         "aria-expanded": h.isShown && h.id === pickerID,
         ref: _,
         onClick: y,
         htmlAttributes: {
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": _$$t("design_systems.component_properties.select_preferred_values"),
+          "data-tooltip": getI18nString("design_systems.component_properties.select_preferred_values"),
           onKeyDown: b
         },
         recordingKey: Pt("instanceSwapToggle", pickerID),
@@ -227,7 +227,7 @@ function J({
         e(i.data.component);
         r(oB());
       },
-      children: tx("design_systems.component_properties.remove_value")
+      children: renderI18nText("design_systems.component_properties.remove_value")
     })
   }) : null;
 }
@@ -250,11 +250,11 @@ function ee({
     children: [jsx(_$$B, {
       className: warningIcon,
       svg: _$$A2
-    }), tx("design_systems.component_properties.unpublished_preferred_values"), jsx($n, {
+    }), renderI18nText("design_systems.component_properties.unpublished_preferred_values"), jsx($n, {
       onClick: o,
       recordingKey: t,
       variant: "link",
-      children: tx("design_systems.component_properties.publish_preferred_values")
+      children: renderI18nText("design_systems.component_properties.publish_preferred_values")
     })]
   });
 }
@@ -338,7 +338,7 @@ export function $$ei0({
         pickerWidth: i,
         preferredValues: s,
         shouldPerformSwapOnClick: !1,
-        title: _$$t("design_systems.component_properties.choose_instances")
+        title: getI18nString("design_systems.component_properties.choose_instances")
       }), s.length > 0 && jsxs(Fragment, {
         children: [jsx(_$$P, {
           className: K[`scrollContainer_${C ? "list" : "grid"}`],

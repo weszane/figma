@@ -1,18 +1,18 @@
 import { useCallback } from "react";
 import { debug } from "../figma_app/465776";
-import { R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { Y5 } from "../figma_app/455680";
 import { oV } from "../905/216495";
 import { zk } from "../figma_app/198712";
 export function $$d10(...e) {
-  return R(t => {
+  return selectWithShallowEqual(t => {
     let i = {};
     for (let n of e) i[n] = t.mirror.selectionProperties[n];
     return i;
   });
 }
 export function $$c4(...e) {
-  return R(t => {
+  return selectWithShallowEqual(t => {
     let i = t.mirror.selectionProperties;
     let n = {};
     for (let t of e) {
@@ -23,7 +23,7 @@ export function $$c4(...e) {
   });
 }
 export function $$u7(...e) {
-  return R(t => {
+  return selectWithShallowEqual(t => {
     let i = t.mirror.selectedStyleProperties && t.mirror.selectedStyleProperties.guid;
     let n = {};
     for (let r of e) i ? n[r] = t.mirror.selectedStyleProperties[r] : n[r] = t.mirror.selectionProperties[r];
@@ -31,7 +31,7 @@ export function $$u7(...e) {
   });
 }
 export function $$p1(...e) {
-  return R(t => {
+  return selectWithShallowEqual(t => {
     let i = t.mirror.selectedStyleProperties && t.mirror.selectedStyleProperties.guid;
     let n = {};
     for (let a of e) {
@@ -42,21 +42,21 @@ export function $$p1(...e) {
   });
 }
 export function $$m5(e) {
-  return R(t => t.mirror.selectionProperties[e]);
+  return selectWithShallowEqual(t => t.mirror.selectionProperties[e]);
 }
 export function $$h9(e) {
-  return R(t => {
+  return selectWithShallowEqual(t => {
     if (t.mirror.selectedStyleProperties && t.mirror.selectedStyleProperties.guid) return t.mirror.selectedStyleProperties[e];
   });
 }
 export function $$g2() {
-  return R(e => !!e.mirror.selectedStyleProperties?.guid);
+  return selectWithShallowEqual(e => !!e.mirror.selectedStyleProperties?.guid);
 }
 export function $$f8(e) {
-  return R(t => t.mirror.selectedStyleProperties && t.mirror.selectedStyleProperties.guid ? t.mirror.selectedStyleProperties[e] : t.mirror.selectionProperties[e]);
+  return selectWithShallowEqual(t => t.mirror.selectedStyleProperties && t.mirror.selectedStyleProperties.guid ? t.mirror.selectedStyleProperties[e] : t.mirror.selectionProperties[e]);
 }
 export function $$_3(e) {
-  return R(t => {
+  return selectWithShallowEqual(t => {
     let i = t.mirror.selectionProperties[e];
     debug(i !== oV, `Mixed value for ${e} found in useNonMixedSelectionPropertyValue. Use useSelectionPropertyValue and handle the MIXED value instead.`);
     return i;

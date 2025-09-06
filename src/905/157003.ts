@@ -1,6 +1,6 @@
 import { c2 } from "../905/382883";
 import { getFeatureFlags } from "../905/601108";
-import { Iz, eU, zl, yu, t_ } from "../figma_app/27355";
+import { createRemovableAtomFamily, atom, atomStoreManager, setupAtomWithMount, t_ } from "../figma_app/27355";
 import { resourceUtils } from "../905/989992";
 import { W } from "../905/491061";
 import { serializeJSON } from "../905/251556";
@@ -49,20 +49,20 @@ let m = {
   now: Date.now,
   clearExpireIn: e => clearTimeout(e)
 };
-let h = Iz(e => eU(() => $$f0(e)));
+let h = createRemovableAtomFamily(e => atom(() => $$f0(e)));
 export function $$g1(e) {
   let t = h(e);
-  return zl.get(t);
+  return atomStoreManager.get(t);
 }
 export let $$f0 = function (e, t, i = new u(m, t)) {
   return t => function (e, t, i) {
-    let d = Iz(n => {
-      let u = new W(() => zl.sub(_, () => {}));
-      if (null === n) return eU(resourceUtils.disabledSuspendable(u));
+    let d = createRemovableAtomFamily(n => {
+      let u = new W(() => atomStoreManager.sub(_, () => {}));
+      if (null === n) return atom(resourceUtils.disabledSuspendable(u));
       let m = serializeJSON(n);
       let h = `${e._name}:${m}`;
       let g = null;
-      let f = yu(t_(() => i.get(h) || Xm()), ({
+      let f = setupAtomWithMount(t_(() => i.get(h) || Xm()), ({
         setSelf: a
       }) => {
         let s = t().subscribe(e, n, e => {
@@ -99,7 +99,7 @@ export let $$f0 = function (e, t, i = new u(m, t)) {
           s();
         };
       });
-      let _ = eU(i => resourceUtils.suspendableFrom(i(f), () => {
+      let _ = atom(i => resourceUtils.suspendableFrom(i(f), () => {
         var i;
         i = t();
         return new Promise((t, r) => {

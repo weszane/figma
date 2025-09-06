@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { memo, useMemo } from "react";
 import { L } from "../905/857916";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Ib } from "../905/129884";
 let a = memo(function (e) {
   return jsx("svg", {
@@ -18,7 +18,7 @@ let a = memo(function (e) {
 });
 export function $$d0(e) {
   let t = useMemo(() => e.hostPlanName && e.connectedPlanName ? {
-    "data-tooltip": _$$t("file_browser.tooltip.connected_project", {
+    "data-tooltip": getI18nString("file_browser.tooltip.connected_project", {
       hostPlanName: e.hostPlanName,
       connectedPlanName: e.connectedPlanName
     }),

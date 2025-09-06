@@ -6,7 +6,7 @@ import { x$, cn } from "../figma_app/141320";
 import { Us, vd } from "../figma_app/637027";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { Dw } from "../figma_app/976345";
 import { Ce } from "../905/156213";
 import { WX } from "../figma_app/482142";
@@ -38,11 +38,11 @@ export let $$k0 = Ju(function (e) {
   let A = C > 0 ? function (e) {
     if (e.studentTeamState !== FStudentTeamStatusType.STUDENT_TEAM_CURRENT) return null;
     let t = null;
-    e.isOwner ? t = tx("edu.offboarding_modal.the_team_you_own_will_become_view_only_for_all_members_once_your_plan_expires", {
+    e.isOwner ? t = renderI18nText("edu.offboarding_modal.the_team_you_own_will_become_view_only_for_all_members_once_your_plan_expires", {
       teamName: jsx("strong", {
         children: e.name
       })
-    }) : e.canEdit && (t = tx("edu.offboarding_modal.you_ll_lose_edit_access_to_team_once_your_plan_expires", {
+    }) : e.canEdit && (t = renderI18nText("edu.offboarding_modal.you_ll_lose_edit_access_to_team_once_your_plan_expires", {
       teamName: jsx("strong", {
         children: e.name
       })
@@ -51,11 +51,11 @@ export let $$k0 = Ju(function (e) {
   }(k.data.team) : function (e) {
     if (e.studentTeamState !== FStudentTeamStatusType.STUDENT_TEAM_EXPIRED) return null;
     let t = null;
-    e.isOwner ? t = tx("edu.offboarding_modal.the_team_you_own_is_now_view_only_for_all_members", {
+    e.isOwner ? t = renderI18nText("edu.offboarding_modal.the_team_you_own_is_now_view_only_for_all_members", {
       teamName: jsx("strong", {
         children: e.name
       })
-    }) : e.canView && (t = tx("edu.offboarding_modal.you_can_no_longer_edit_team", {
+    }) : e.canView && (t = renderI18nText("edu.offboarding_modal.you_can_no_longer_edit_team", {
       teamName: jsx("strong", {
         children: e.name
       })
@@ -73,7 +73,7 @@ export let $$k0 = Ju(function (e) {
   return jsx(fu, {
     name: "Edu Offboarding Modal",
     children: jsxs(OJ, {
-      title: _$$t("edu.offboarding_modal.your_education_status"),
+      title: getI18nString("edu.offboarding_modal.your_education_status"),
       maxWidth: 381,
       onClose: S,
       children: [jsxs("div", {
@@ -83,9 +83,9 @@ export let $$k0 = Ju(function (e) {
           svg: _$$A
         }), jsx("p", {
           children: jsx("strong", {
-            children: C > 0 ? tx("edu.offboarding_modal.your_education_plan_expires_in_days", {
+            children: C > 0 ? renderI18nText("edu.offboarding_modal.your_education_plan_expires_in_days", {
               daysLeft: C
-            }) : tx("edu.offboarding_modal.your_education_plan_has_expired")
+            }) : renderI18nText("edu.offboarding_modal.your_education_plan_has_expired")
           })
         })]
       }), jsxs("div", {
@@ -98,14 +98,14 @@ export let $$k0 = Ju(function (e) {
             className: _$$s.w4.h4.colorBgDisabled.mt6.mr8.flexShrink0.$
           }), jsxs("p", {
             children: [jsx("strong", {
-              children: tx("edu.offboarding_modal.if_you_graduated")
-            }), I ? tx("edu.offboarding_modal.continue_below_to_upgrade_your_team_s_to_the_professional_plan_or", {
+              children: renderI18nText("edu.offboarding_modal.if_you_graduated")
+            }), I ? renderI18nText("edu.offboarding_modal.continue_below_to_upgrade_your_team_s_to_the_professional_plan_or", {
               createProTeamLink: jsx(Us, {
                 onClick: N,
                 trusted: !0,
-                children: tx("edu.offboarding_modal.create_a_new_professional_team")
+                children: renderI18nText("edu.offboarding_modal.create_a_new_professional_team")
               })
-            }) : tx("edu.offboarding_modal.create_a_new_professional_team_and_start_fresh")]
+            }) : renderI18nText("edu.offboarding_modal.create_a_new_professional_team_and_start_fresh")]
           })]
         }), !E && jsxs("div", {
           className: _$$s.pt16.flex.$,
@@ -113,13 +113,13 @@ export let $$k0 = Ju(function (e) {
             className: _$$s.w4.h4.colorBgDisabled.mt6.mr8.flexShrink0.$
           }), jsxs("p", {
             children: [jsx("strong", {
-              children: tx("edu.offboarding_modal.if_you_re_still_in_education")
-            }), tx("edu.offboarding_modal.verify_your_status_to_keep_collaborating_with_your_teams", {
+              children: renderI18nText("edu.offboarding_modal.if_you_re_still_in_education")
+            }), renderI18nText("edu.offboarding_modal.verify_your_status_to_keep_collaborating_with_your_teams", {
               verifyStatusLink: jsx(Us, {
                 href: "/education/apply",
                 target: "_blank",
                 trusted: !0,
-                children: tx("edu.offboarding_modal.verify_your_status")
+                children: renderI18nText("edu.offboarding_modal.verify_your_status")
               })
             })]
           })]
@@ -129,15 +129,15 @@ export let $$k0 = Ju(function (e) {
             className: _$$s.w4.h4.colorBgDisabled.mt6.mr8.flexShrink0.$
           }), jsxs("p", {
             children: [jsx("strong", {
-              children: tx("edu.offboarding_modal.to_save_your_work")
-            }), I ? tx("edu.offboarding_modal.duplicate_or_move_files_to_your_drafts_to_save_them_for_later_and_consider_transferring_ownership_of_your_team_s", {
+              children: renderI18nText("edu.offboarding_modal.to_save_your_work")
+            }), I ? renderI18nText("edu.offboarding_modal.duplicate_or_move_files_to_your_drafts_to_save_them_for_later_and_consider_transferring_ownership_of_your_team_s", {
               transferringOwnershipLink: jsx(Us, {
                 href: "https://help.figma.com/hc/articles/360038512093",
                 target: "_blank",
                 trusted: !0,
-                children: tx("edu.offboarding_modal.transferring_ownership")
+                children: renderI18nText("edu.offboarding_modal.transferring_ownership")
               })
-            }) : tx("edu.offboarding_modal.duplicate_or_move_files_to_your_drafts_to_save_them_for_later")]
+            }) : renderI18nText("edu.offboarding_modal.duplicate_or_move_files_to_your_drafts_to_save_them_for_later")]
           })]
         }), jsx("div", {
           className: _$$s.flex.flexColumn.itemsEnd.pt32.$,
@@ -149,10 +149,10 @@ export let $$k0 = Ju(function (e) {
                 selectedView: i
               }));
             },
-            children: tx("edu.offboarding_modal.upgrade_to_professional")
+            children: renderI18nText("edu.offboarding_modal.upgrade_to_professional")
           }) : jsx(vd, {
             onClick: N,
-            children: tx("edu.offboarding_modal.create_a_new_professional_team_cta")
+            children: renderI18nText("edu.offboarding_modal.create_a_new_professional_team_cta")
           })
         })]
       })]

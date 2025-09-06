@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
-import { az } from "../905/449184";
-import { O as _$$O } from "../905/561581";
-import { L } from "../905/270963";
+import { analyticsEventManager } from "../905/449184";
+import { isAppShellEnabled } from "../905/561581";
+import { datadogRum } from "../905/270963";
 import { F } from "../905/680873";
-import { J6 } from "../905/602906";
-import { $ } from "../905/361972";
-import { $D } from "../905/11";
+import { observabilityClient } from "../905/602906";
+import { LogLevelStr } from "../905/361972";
+import { reportError } from "../905/11";
 import { g as _$$g } from "../905/880308";
 import { z } from "../905/239603";
 import { tc } from "../figma_app/386952";
@@ -18,7 +18,7 @@ let y = ["Sidebar", "MainBodyContent", "FileCreateEntrypoint"];
 let b = ["Sidebar", "MainBodyContent"];
 let T = new Map([["RecentFiles", new Set(y)], ["SharedFiles", new Set(y)], ["SharedProjects", new Set(y)], ["OrgAllWorkspaces", new Set(b)], ["Workspace", new Set(b)], ["Team", new Set(b)], ["Drafts", new Set(y)], ["Folder", new Set(y)]]);
 let I = "BEGIN_NAVIGATION";
-let S = _$$O();
+let S = isAppShellEnabled();
 let v = null;
 class A {
   constructor() {
@@ -83,7 +83,7 @@ let w = z.object({
 });
 function O(e) {
   let t = w.safeParse(e.detail);
-  return t.success ? t.data : ($D(_$$e.WAYFINDING, Error("Invalid detail for contentful paint tracker mark"), {
+  return t.success ? t.data : (reportError(_$$e.WAYFINDING, Error("Invalid detail for contentful paint tracker mark"), {
     extra: {
       mark: e
     }
@@ -93,11 +93,11 @@ function R(e) {
   let t = O(e);
   if (!t || !x.activeView) return;
   let r = e.name;
-  let n = function(e) {
+  let n = function (e) {
     let t = e.split("ContentfulPaint:Component:")[1];
     if (t) return t;
   }(r);
-  let i = function(e) {
+  let i = function (e) {
     let t = e.split("ContentfulPaint:View:")[1];
     if (t) return t;
   }(x.activeView);
@@ -129,7 +129,7 @@ function R(e) {
       view: i,
       navigationEventId: _ ?? void 0,
       coldLoad: r,
-      criticalContentfulPaintComplete: function(e) {
+      criticalContentfulPaintComplete: function (e) {
         let t = T.get(e);
         let r = x.paintedComponents.get(e);
         return !!t && !!r && [...t].every(e => r.has(e));
@@ -146,11 +146,11 @@ function R(e) {
       duration: p,
       context: E
     };
-    az.trackDefinedEvent("file_browser.contentful_paint", E);
-    getFeatureFlags().observability_client ? J6.logVital("file_browser.contentful_paint", {
-      level: $.INFO,
+    analyticsEventManager.trackDefinedEvent("file_browser.contentful_paint", E);
+    getFeatureFlags().observability_client ? observabilityClient.logVital("file_browser.contentful_paint", {
+      level: LogLevelStr.INFO,
       ...y
-    }) : L?.addDurationVital("file_browser.contentful_paint", y);
+    }) : datadogRum?.addDurationVital("file_browser.contentful_paint", y);
   }
 }
 export function $$L4({
@@ -218,7 +218,7 @@ function j(e, t) {
 }
 export function $$U3() {
   performance.getEntriesByName(I, "mark").forEach(e => {
-    $D(_$$e.WAYFINDING, Error("Stale navigation mark present"), {
+    reportError(_$$e.WAYFINDING, Error("Stale navigation mark present"), {
       extra: {
         staleNavigationMark: e
       }
@@ -231,4 +231,4 @@ export const YD = $$D1;
 export const $o = $$N2;
 export const Fi = $$U3;
 export const WX = $$L4;
-export const kF = $$P5; 
+export const kF = $$P5;

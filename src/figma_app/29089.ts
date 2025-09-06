@@ -1,7 +1,7 @@
 import { isNotNullish } from "../figma_app/95419";
 import { m1T, NLJ, Ez5, xc1, YnC, F84, dBj } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { tn } from "../figma_app/473493";
 import { P as _$$P } from "../905/36308";
 import { kg } from "../figma_app/120210";
@@ -586,7 +586,7 @@ let eI = {
 let eS = {
   type: ZU.FLYOUT,
   dropdownKey: "component_actions",
-  getTooltip: () => t("fullscreen.selection_actions.tooltip_component_actions"),
+  getTooltip: () => getI18nString("fullscreen.selection_actions.tooltip_component_actions"),
   actions: [X, q, J],
   flyoutRecordingKey: "componentActionsFlyout",
   id: uo
@@ -594,7 +594,7 @@ let eS = {
 let ev = {
   type: ZU.FLYOUT,
   dropdownKey: "boolean_operations",
-  getTooltip: () => t("fullscreen.selection_actions.tooltip_boolean_operations"),
+  getTooltip: () => getI18nString("fullscreen.selection_actions.tooltip_boolean_operations"),
   actions: [D, k, M, F, j],
   flyoutRecordingKey: "booleanFlyout",
   id: IF

@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { useSelector } from "../vendor/514228";
 import { l as _$$l } from "../905/716947";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { n1 } from "../figma_app/657017";
 import { oA } from "../905/71785";
 import { PP } from "../figma_app/633080";
@@ -88,7 +88,7 @@ export function $$E5(e) {
 export function $$y2() {
   let e = n1();
   let t = je();
-  let r = md(TG);
+  let r = useAtomWithSubscription(TG);
   return e ? "loading" === t.status ? {
     hasAnyUiKit: !1,
     status: "loading"
@@ -106,7 +106,7 @@ export function $$y2() {
 export function $$b6() {
   let e = je();
   let t = useSelector(e => Object.keys(e.library.local.components).length);
-  let r = md(TG);
+  let r = useAtomWithSubscription(TG);
   if (e.data && "loaded" === e.status) {
     var n;
     n = e.data;

@@ -1,6 +1,6 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { z as _$$z, Ip } from "../905/239603";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { YV, Rq, td } from "../figma_app/181241";
 import { XHR } from "../905/910117";
 import { H } from "../figma_app/324237";
@@ -42,7 +42,7 @@ let $$m0 = new class {
             prevPage: r.data.pagination.prevPage
           };
         } catch (e) {
-          $D(_$$e.COMMUNITY, e);
+          reportError(_$$e.COMMUNITY, e);
           return e;
         }
       }
@@ -62,7 +62,7 @@ let $$m0 = new class {
             timeout: 1e4
           });
         } catch (e) {
-          $D(_$$e.COMMUNITY, e);
+          reportError(_$$e.COMMUNITY, e);
           return e;
         }
       })

@@ -4,17 +4,17 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { XJn, NUh, glU } from "../figma_app/763686";
 import { s4 } from "../figma_app/276332";
 import { getFeatureFlags } from "../905/601108";
-import { yQ } from "../905/236856";
+import { waitForAnimationFrame } from "../905/236856";
 import c from "../vendor/223926";
 import { NC } from "../905/17179";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { S3, Rh } from "../905/485103";
-import { jk } from "../905/609396";
+import { PerfTimer } from "../905/609396";
 import { ET, qW } from "../905/623179";
-import { $D } from "../905/11";
-import { x1, xi } from "../905/714362";
+import { reportError } from "../905/11";
+import { logError, logWarning } from "../905/714362";
 import { YQ } from "../905/502364";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { _ as _$$_ } from "../905/170564";
 import { Q } from "../905/463586";
 import { F as _$$F } from "../905/302958";
@@ -95,7 +95,7 @@ export let $$Q8 = nF((e, {
   }));
 });
 async function ee(e, t, r, n) {
-  let i = new jk("publish.client.generate_and_upload_thumbnails", {});
+  let i = new PerfTimer("publish.client.generate_and_upload_thumbnails", {});
   if (i.start(), !e.length) return {
     s3Paths: [],
     failedThumbnailNodeIds: [],
@@ -134,7 +134,7 @@ async function ee(e, t, r, n) {
       });
       e.type === PW.STYLE && (d[e.node_id] = JSON.stringify(fn(e, r)));
     } catch (t) {
-      x1("publish", "Failed to upload thumbnail for asset", {
+      logError("publish", "Failed to upload thumbnail for asset", {
         guid: e.node_id
       }, {
         reportAsSentryError: !0
@@ -181,7 +181,7 @@ async function ee(e, t, r, n) {
   }) => {
     let r = b.shift();
     if (!r) {
-      $D(_$$e.DESIGN_SYSTEMS_EDITOR, Error("Popped a concatenated buffer that does not exist"));
+      reportError(_$$e.DESIGN_SYSTEMS_EDITOR, Error("Popped a concatenated buffer that does not exist"));
       return;
     }
     try {
@@ -192,9 +192,9 @@ async function ee(e, t, r, n) {
       c.push(...r.guids);
     }
   }));
-  S && $D(_$$e.DESIGN_SYSTEMS_EDITOR, Error("uploadThumbnails: encountered non-S3 presigned POST error"));
+  S && reportError(_$$e.DESIGN_SYSTEMS_EDITOR, Error("uploadThumbnails: encountered non-S3 presigned POST error"));
   let v = i.stop();
-  v && sx("Library generate and upload thumbnails", {
+  v && trackEventAnalytics("Library generate and upload thumbnails", {
     elapsedMs: v,
     duration: v
   }, {
@@ -209,19 +209,19 @@ async function ee(e, t, r, n) {
   };
 }
 function et(e) {
-  return e.state === Qx.NONE ? (x1(J, "Attempted to update progress while not assembling components", e), null) : e.publishStartMs;
+  return e.state === Qx.NONE ? (logError(J, "Attempted to update progress while not assembling components", e), null) : e.publishStartMs;
 }
 function er(e, t, r, n) {
   let i = et(e);
   if (i) {
     let e = performance.now() - i;
-    sx(t, {
+    trackEventAnalytics(t, {
       duration: e
     });
     S3(r, e, {
       error: n
     });
-  } else x1(J, "Publish start time was null");
+  } else logError(J, "Publish start time was null");
 }
 function en(e, t, r, n, i, a, s, o) {
   0 === t ? function (e, t, r, n) {
@@ -238,7 +238,7 @@ function en(e, t, r, n, i, a, s, o) {
           clientPreWorkDurationMs: t.clientPreWorkDurationMs,
           createSavePointDurationMs: t.createSavePointDurationMs
         };
-        sx(`Client perceived ${t.publishType} duration`, a);
+        trackEventAnalytics(`Client perceived ${t.publishType} duration`, a);
         let s = getFeatureFlags().ssp_stop_client_gen_thumb_generation ? "true" : "false";
         for (let [e, r] of Object.entries(a)) {
           let n = `${t.publishType}.success.${e}`;
@@ -246,7 +246,7 @@ function en(e, t, r, n, i, a, s, o) {
             skip_client_thumbnail: s
           });
         }
-      } else x1(J, "Publish start time was null");
+      } else logError(J, "Publish start time was null");
     }
     n({
       publishProgress: t,
@@ -277,7 +277,7 @@ function en(e, t, r, n, i, a, s, o) {
   }(n, e, t, r, a, s, o);
 }
 export function $$ei6(e, t, r, n, i, a, s, o) {
-  sx("Publish ended", {
+  trackEventAnalytics("Publish ended", {
     savepointId: i.id,
     hadException: a
   });
@@ -288,12 +288,12 @@ let ea = async e => {
   let t;
   if (getFeatureFlags().first_draft_publish_ux && (e.publishAsFirstDraftKit || e.unpublishAll)) {
     let r = XJn.getLocalDesignSystemKits();
-    if (r.length > 1) xi("first_draft", "Attempting to publish a file with multiple kits", {
+    if (r.length > 1) logWarning("first_draft", "Attempting to publish a file with multiple kits", {
       kitNames: r.map(e => e.name)
     });else if (1 === r.length) {
       let n = r[0];
       if (!n) {
-        xi("first_draft", "No kit found for publishing", {
+        logWarning("first_draft", "No kit found for publishing", {
           kits: r
         });
         return;
@@ -310,7 +310,7 @@ let $$es7 = nF(async (e, t = {}) => {
   let n = d1(r);
   let i = n?.key;
   if (!i) {
-    xi("first_draft", "No file key found for publishing");
+    logWarning("first_draft", "No file key found for publishing");
     return;
   }
   let a = _$$F.enqueue({
@@ -333,7 +333,7 @@ let $$es7 = nF(async (e, t = {}) => {
   e.dispatch(a);
   let l = await ea(t);
   if (!l) {
-    xi("first_draft", "No kit metadata found for publishing");
+    logWarning("first_draft", "No kit metadata found for publishing");
     e.dispatch(o);
     return;
   }
@@ -344,7 +344,7 @@ let $$es7 = nF(async (e, t = {}) => {
     });
     e.dispatch(s);
   } catch (t) {
-    xi("first_draft", "Failed to publish changes", {
+    logWarning("first_draft", "Failed to publish changes", {
       error: t
     });
     e.dispatch(o);
@@ -362,7 +362,7 @@ let $$eo4 = nF(async (e, t = {}) => {
   let x = t.onPublishSuccess ?? cc;
   let G = t.onPublishProgress ?? UN;
   let V = t.onPublishError ?? tZ;
-  t.publishingMode && t.publishingMode !== A.library.libraryPublishingMode && x1(J, "Publishing Mode does not match Redux state, and this will cause downstream errors.", {
+  t.publishingMode && t.publishingMode !== A.library.libraryPublishingMode && logError(J, "Publishing Mode does not match Redux state, and this will cause downstream errors.", {
     desiredPublishingMode: t.publishingMode,
     reduxLibraryPublishingMode: A.library.libraryPublishingMode
   });
@@ -405,7 +405,7 @@ let $$eo4 = nF(async (e, t = {}) => {
     let o = a?.encounteredNonS3PresignedPostError ? "non_s3_error" : n;
     er(e.getState().library.publishProgress, r, `${ei ? M$.UNPUBLISH : M$.PUBLISH}.error.duration`, o);
     let l = a?.error;
-    x1(J, r, {
+    logError(J, r, {
       ...t,
       name: l?.name,
       message: l?.message,
@@ -415,7 +415,7 @@ let $$eo4 = nF(async (e, t = {}) => {
       reportAsSentryError: !0,
       forwardToDatadog: !0
     });
-    null !== i && sx("Publish ended", {
+    null !== i && trackEventAnalytics("Publish ended", {
       savepointId: i,
       hadException: !0
     });
@@ -436,14 +436,14 @@ let $$eo4 = nF(async (e, t = {}) => {
     unpublishAll: t.unpublishAll
   });
   !function (e) {
-    let t = new jk("publish.client.prep_nodes_for_thumbnailing", {});
+    let t = new PerfTimer("publish.client.prep_nodes_for_thumbnailing", {});
     t.start();
     let r = e[PW.STYLE][M$.PUBLISH].filter(e => e.style_type === s4.TEXT);
     r.forEach(e => {
       glU.prepNodeForAssetThumbnailRendering(e.node_id);
     });
     let n = t.stop();
-    n && sx("Prepared node fields used for thumbnail rendering", {
+    n && trackEventAnalytics("Prepared node fields used for thumbnail rendering", {
       elapsedMs: n,
       textStylesCount: r.length
     }, {
@@ -451,11 +451,11 @@ let $$eo4 = nF(async (e, t = {}) => {
     });
   }(es);
   let eo = getFeatureFlags().ds_ssp_thumbnailing_client_prep_wait_extra_frames ? 10 : 2;
-  for (let e = 0; e < eo; e++) await yQ();
+  for (let e = 0; e < eo; e++) await waitForAnimationFrame();
   let el = performance.now();
   let ed = "slides" === X.editor_type;
-  let ec = ed ? _$$t("design_systems.publish_actions.savepoint_for_unpublish_slides") : _$$t("design_systems.publish_actions.savepoint_for_unpublish");
-  let eu = ed ? _$$t("design_systems.publish_actions.savepoint_for_publish_slides") : _$$t("design_systems.publish_actions.savepoint_for_publish");
+  let ec = ed ? getI18nString("design_systems.publish_actions.savepoint_for_unpublish_slides") : getI18nString("design_systems.publish_actions.savepoint_for_unpublish");
+  let eu = ed ? getI18nString("design_systems.publish_actions.savepoint_for_publish_slides") : getI18nString("design_systems.publish_actions.savepoint_for_publish");
   try {
     r = await _$$m(X.key, ei ? ec : eu, t.savepointDescription, e.dispatch, !0);
   } catch (t) {
@@ -473,7 +473,7 @@ let $$eo4 = nF(async (e, t = {}) => {
     return;
   }
   let ep = performance.now() - el;
-  sx("Publish start: savepoint successfully created", {
+  trackEventAnalytics("Publish start: savepoint successfully created", {
     savepointId: r.id
   });
   let e_ = u()(Object.values(A.library.local.components).filter(e => e.isLocal), e => E2(e) || Nv);
@@ -631,7 +631,7 @@ let $$eo4 = nF(async (e, t = {}) => {
     numCodeComponentBuffers: 0,
     numCodeComponentBuffersUnpublished: 0
   });
-  sx("Library publish upload", {
+  trackEventAnalytics("Library publish upload", {
     fileKey: X.key,
     publishMode: _$$z(Io(A)),
     publishScope: t.publishScope,
@@ -687,12 +687,12 @@ let $$eo4 = nF(async (e, t = {}) => {
   }).filter(isNotNullish);
   if (getFeatureFlags().first_draft_publish_ux && (t.publishAsFirstDraftKit || t.unpublishAll)) {
     let e = XJn.getLocalDesignSystemKits();
-    if (e.length > 1) xi("first_draft", "Attempting to publish a file with multiple kits", {
+    if (e.length > 1) logWarning("first_draft", "Attempting to publish a file with multiple kits", {
       kitNames: e.map(e => e.name)
     });else if (1 === e.length) {
       let r = e[0];
       if (!r) {
-        xi("first_draft", "No kit found for publishing", {
+        logWarning("first_draft", "No kit found for publishing", {
           kits: e
         });
         return;
@@ -712,7 +712,7 @@ let $$eo4 = nF(async (e, t = {}) => {
       assetType: e.assetType,
       guids: e.assets.map(e => {
         let t = p$(e);
-        t || (console.warn("Asset with null nodeId:", e), $D(_$$e.DESIGN_SYSTEMS_EDITOR, Error("Asset with null node ID found during publish")));
+        t || (console.warn("Asset with null nodeId:", e), reportError(_$$e.DESIGN_SYSTEMS_EDITOR, Error("Asset with null node ID found during publish")));
         return t;
       }).filter(isNotNullish)
     })),

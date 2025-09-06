@@ -1,4 +1,4 @@
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { nE, W0, Ut, v4, qp } from "../figma_app/761118";
 import { FR } from "../figma_app/827216";
 import { debugState } from "../905/407919";
@@ -31,18 +31,18 @@ export function $$u5(e) {
 }
 export function $$p1() {
   return {
-    availableVariables: zl.get(nE),
-    availableLibraryKeys: zl.get(W0),
-    selectedLibraryKeys: zl.get(Ut) ?? new Set()
+    availableVariables: atomStoreManager.get(nE),
+    availableLibraryKeys: atomStoreManager.get(W0),
+    selectedLibraryKeys: atomStoreManager.get(Ut) ?? new Set()
   };
 }
 export function $$_4() {
   return function () {
-    let e = zl.get(v4);
-    let t = zl.get(qp);
+    let e = atomStoreManager.get(v4);
+    let t = atomStoreManager.get(qp);
     return {
-      availableVariables: zl.get(nE),
-      localVariables: t ? zl.get(uk) : [],
+      availableVariables: atomStoreManager.get(nE),
+      localVariables: t ? atomStoreManager.get(uk) : [],
       libraryVariables: e.libraryVariables,
       libraryVariableSetIdToSet: e.libraryVariableSetIdToSet,
       libraryKeys: e.libraryKeys
@@ -56,9 +56,9 @@ export function $$m7(e) {
   return e === FR.LIBRARY_SELECTOR_INITIAL || e === FR.LIBRARY_SELECTOR_FROM_ALL_GROUPS_VIEW || e === FR.LIBRARY_SELECTOR_FROM_SELECTED_GROUP_VIEW;
 }
 export function $$g0() {
-  let e = zl.get(Ut);
+  let e = atomStoreManager.get(Ut);
   let t = {};
-  e?.forEach((e) => {
+  e?.forEach(e => {
     t[e] = !0;
   });
   return t;

@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { Q } from "../1250/220026";
 import { KWd } from "../figma_app/763686";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Ce, $O } from "../905/156213";
 import { c as _$$c } from "../905/370443";
 import { oW } from "../figma_app/247611";
@@ -24,7 +24,7 @@ export function $$_1() {
       }
     })));
   }, [e, t]);
-  let _ = _$$t("whiteboard.inserts.templates");
+  let _ = getI18nString("whiteboard.inserts.templates");
   return jsx(Z, {
     tooltip: {
       type: Ib.TEXT,

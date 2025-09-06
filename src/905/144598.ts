@@ -5,7 +5,7 @@ import { A as _$$A } from "../905/410311";
 import o from "classnames";
 import { B } from "../905/714743";
 import { e6 } from "../figma_app/617427";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { nl, Pf } from "../905/590952";
 import { lx } from "../figma_app/297957";
 import { c as _$$c } from "../905/370443";
@@ -67,9 +67,9 @@ export function $$x2(e) {
           o(A5.UPDATE_SEAT);
         },
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("role_row.upgrade_seat.tooltip"),
+        "data-tooltip": getI18nString("role_row.upgrade_seat.tooltip"),
         "data-tooltip-timeout-delay": 50,
-        "aria-label": _$$t("role_row.upgrade_seat"),
+        "aria-label": getI18nString("role_row.upgrade_seat"),
         children: [jsxs("span", {
           className: iA,
           children: [jsx(B, {
@@ -78,7 +78,7 @@ export function $$x2(e) {
           }), jsx(N, {
             className: qD
           })]
-        }), _$$t("role_row.upgrade_seat")]
+        }), getI18nString("role_row.upgrade_seat")]
       }) : jsxs(Fragment, {
         children: [e.warningMessage && jsx(B, {
           className: QW,
@@ -112,7 +112,7 @@ export function $$x2(e) {
         isOpen: !!(e.dropdownShown && e.dropdownShown.type === i && e.dropdownShown.data.dropdownId === e.id)
       }) : e.isPrototypeRole && e.level === _$$e.VIEW_PROTOTYPES ? jsx("span", {
         className: _$$C,
-        children: _$$t("permissions.level_name.can_view")
+        children: getI18nString("permissions.level_name.can_view")
       }) : jsx("span", {
         className: l()(_$$C, C && mL),
         children: C1(e.level, e.isBranchFile)
@@ -180,14 +180,14 @@ export function $$T4(e, t, i, n, r, a, s) {
     key: _$$e.VIEW_PROTOTYPES,
     text: C1(_$$e.VIEWER)
   }) : t ? o.push(k(a)) : (e && !r && o.push(k(_$$e.OWNER)), n && o.push(k(_$$e.ADMIN)), o.push(k(_$$e.EDITOR)), o.push(k(_$$e.VIEWER)), l = r);
-  let d = t && !e ? _$$t("confirm_remove_role.leave") : _$$t("confirm_remove_role.remove");
+  let d = t && !e ? getI18nString("confirm_remove_role.leave") : getI18nString("confirm_remove_role.remove");
   o.push({
     type: "separator"
   });
   l && o.push({
     type: "option",
     key: "resend",
-    text: _$$t("role_row.resend_invite")
+    text: getI18nString("role_row.resend_invite")
   });
   o.push({
     type: "option",

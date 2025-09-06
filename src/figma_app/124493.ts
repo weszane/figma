@@ -1,13 +1,13 @@
 import { ofk, W8Y } from "../figma_app/763686";
-import { zl } from "../figma_app/27355";
-import { f as _$$f } from "../905/842794";
+import { atomStoreManager } from "../figma_app/27355";
+import { handleOptimistTransaction } from "../905/842794";
 import { oA } from "../905/663269";
 import { NC } from "../905/17179";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { WB } from "../905/761735";
 import { XHR } from "../905/910117";
 import { Q } from "../905/573154";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { nF } from "../905/350402";
 import { wr } from "../figma_app/741237";
@@ -35,7 +35,7 @@ let $$S6 = nF(async (e, {
     }));
     e.dispatch(F.enqueue({
       type: o,
-      message: _$$t("voting.visual_bell.end_voting_session_failed")
+      message: getI18nString("voting.visual_bell.end_voting_session_failed")
     }));
   };
   e.dispatch(Cx({
@@ -51,7 +51,7 @@ let $$S6 = nF(async (e, {
   }) => {
     200 === r ? (e.dispatch(x2({
       key: s
-    })), "MeetingsPanel" === t && zl.set(Qs, {
+    })), "MeetingsPanel" === t && atomStoreManager.set(Qs, {
       type: "SET_VIEW",
       payload: iN.PAST_VOTES
     })) : l();
@@ -78,7 +78,7 @@ let $$A14 = nF((e, {
     }));
     e.dispatch(F.enqueue({
       type: "start-voting-session-failed",
-      message: _$$t("voting.visual_bell.start_voting_session_failed")
+      message: getI18nString("voting.visual_bell.start_voting_session_failed")
     }));
   };
   e.dispatch(Cx({
@@ -90,12 +90,12 @@ let $$A14 = nF((e, {
   XHR.post(`/api/file/${fileKey}/voting_sessions`, n).then(n => {
     200 === n.status ? (e.dispatch($$I10({
       votingSessionId: n.data.meta.id
-    })), "MeetingsPanel" === a && zl.get(Qs).activeToolModal === _$$sx.VOTING && zl.set(Qs, {
+    })), "MeetingsPanel" === a && atomStoreManager.get(Qs).activeToolModal === _$$sx.VOTING && atomStoreManager.set(Qs, {
       type: "SET_TOOL",
       payload: null
     }), e.dispatch(x2({
       key: o
-    })), sx("start_voting_session", {
+    })), trackEventAnalytics("start_voting_session", {
       source: t,
       usedCustomTitle: r,
       votingSessionId: n.data.meta.id,
@@ -115,12 +115,12 @@ let $$N1 = nF((e, {
   let n = XHR.del(`/api/file/${r.fileKey}/voting_sessions/${t}`);
   e.dispatch(Q({
     promise: n,
-    fallbackError: _$$t("voting.modal.delete_voting_session_error")
+    fallbackError: getI18nString("voting.modal.delete_voting_session_error")
   }));
   e.dispatch(F.enqueue({
-    message: _$$t("voting.modal.delete_voting_session_visual_bell")
+    message: getI18nString("voting.modal.delete_voting_session_visual_bell")
   }));
-  _$$f(n, e.dispatch, L({
+  handleOptimistTransaction(n, e.dispatch, L({
     votingSessionId: t
   }));
   WB().optimisticallyDelete({
@@ -132,12 +132,12 @@ let $$N1 = nF((e, {
 export function $$C3(e, t) {
   let r = e?.openFile?.votingSessions?.find(e => e.id === t);
   if (!r) return;
-  let i = function(e) {
+  let i = function (e) {
     let t = e.createdAt.toISOString().split("T")[0];
-    return e.title ? _$$t("voting.csv_export.filename_with_session_title", {
+    return e.title ? getI18nString("voting.csv_export.filename_with_session_title", {
       date: t,
       votingSessionTitle: e.title
-    }) : _$$t("voting.csv_export.filename_no_session_title", {
+    }) : getI18nString("voting.csv_export.filename_no_session_title", {
       date: t
     });
   }(r);
@@ -183,4 +183,4 @@ export const hL = $$P12;
 export const rT = $$b13;
 export const vt = $$A14;
 export const w9 = $$T15;
-export const wQ = $$v16; 
+export const wQ = $$v16;

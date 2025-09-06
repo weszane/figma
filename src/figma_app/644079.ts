@@ -2,12 +2,12 @@ import { useCallback, useState, useEffect } from "react";
 import { useSelector } from "../vendor/514228";
 import { Ez5 } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { eU, md } from "../figma_app/27355";
+import { atom, useAtomWithSubscription } from "../figma_app/27355";
 import { parsePxInt, parsePxNumber } from "../figma_app/783094";
 import { zm } from "../figma_app/384673";
 import { P4 } from "../905/18800";
 import { r as _$$r } from "../figma_app/375550";
-import { e as _$$e } from "../figma_app/433958";
+import { isInteractionReady } from "../figma_app/433958";
 import { hA } from "../figma_app/88239";
 import { ow, m0 } from "../figma_app/976749";
 import { UX } from "../figma_app/740163";
@@ -25,7 +25,7 @@ import { _ as _$$_ } from "../figma_app/91620";
 import { A as _$$A } from "../905/638715";
 import { xEX, yNw, ea4, M$q, j4N, F6W, IuL, jl4, P4e } from "../figma_app/27776";
 let w = parsePxInt(xEX);
-let O = eU(0);
+let O = atom(0);
 export function $$R4() {
   let e = useSelector(e => e.downtime.status === _$$A.Ongoing || e.downtime.status === _$$A.Imminent || e.showingDowntimeBanner);
   let t = TZ({
@@ -40,13 +40,13 @@ export function $$L2() {
 }
 export function $$P0() {
   let e = ow();
-  let t = md(P4);
-  let r = md(O);
+  let t = useAtomWithSubscription(P4);
+  let r = useAtomWithSubscription(O);
   let n = ut(Ez5?.editorPreferences()?.showFigmaScope, !1);
   let d = UX();
   let u = useSelector(e => e.mirror.appModel.showKeyboardShortcuts);
   let p = lq();
-  let g = md(_$$O);
+  let g = useAtomWithSubscription(_$$O);
   let E = !!hA();
   let T = 0;
   u && (T = parsePxNumber(yNw));
@@ -58,7 +58,7 @@ export function $$P0() {
 }
 export function $$D3() {
   let e = _$$N();
-  let t = _$$e();
+  let t = isInteractionReady();
   let r = m0();
   let n = useSelector(e => !!e.prototype?.isFooterVisible);
   let a = zm() && !r ? parsePxNumber(F6W) : 0;
@@ -68,8 +68,8 @@ export function $$D3() {
   let m = L();
   let g = _$$_();
   let f = G();
-  let E = md(gT);
-  let y = md(_$$r);
+  let E = useAtomWithSubscription(gT);
+  let y = useAtomWithSubscription(_$$r);
   return _ && !m ? g && f ? parsePxNumber(IuL) + parsePxNumber(jl4) : g && E ? c : g ? parsePxNumber(IuL) : 0 : t ? c + (y ? 40 : 0) : n ? parsePxNumber(P4e) : s ? c : 0;
 }
 export function $$k1(e) {

@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { g } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { lW } from "../figma_app/850075";
 import { to } from "../figma_app/828186";
 import { E } from "../905/511388";
@@ -29,7 +29,7 @@ export function $$u0({
       isNewIcon: !0
     }), s && t && jsx("span", {
       ...Ay.props(c.communitySourceText),
-      children: tx("whiteboard.inserts.by_publisher_name", {
+      children: renderI18nText("whiteboard.inserts.by_publisher_name", {
         publisherName: t
       })
     })]

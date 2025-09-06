@@ -52,7 +52,7 @@ import { A as _$$A2 } from '../905/295481';
 import { m as _$$m3 } from '../905/298920';
 import { O as _$$O } from '../905/301080';
 import { F as _$$F4 } from '../905/302958';
-import { t as _$$t2, tx as _$$tx } from '../905/303541';
+import { getI18nString, renderI18nText } from '../905/303541';
 import { EE } from '../905/316062';
 import { t as _$$t } from '../905/316903';
 import { e as _$$e3 } from '../905/318479';
@@ -76,7 +76,7 @@ import { F as _$$F } from '../905/427107';
 import { N as _$$N4 } from '../905/430294';
 import { hS } from '../905/437088';
 import { k as _$$k4 } from '../905/443820';
-import { sx } from '../905/449184';
+import { trackEventAnalytics } from '../905/449184';
 import { aJ, Oc } from '../905/449579';
 import { n as _$$n2 } from '../905/451212';
 import { K as _$$K2 } from '../905/459096';
@@ -128,7 +128,7 @@ import { E as _$$E4 } from '../905/701278';
 import { s as _$$s3 } from '../905/702260';
 import { U as _$$U } from '../905/708285';
 import { u as _$$u4 } from '../905/712485';
-import { Lo } from '../905/714362';
+import { logInfo } from '../905/714362';
 import { v as _$$v } from '../905/717395';
 import { x as _$$x3 } from '../905/719609';
 import { R as _$$R3 } from '../905/726507';
@@ -170,7 +170,7 @@ import { h as _$$h } from '../905/994594';
 import _require from '../5052/635052';
 import { y as _$$y4 } from '../figma_app/13082';
 import { S5 } from '../figma_app/24841';
-import { zl } from '../figma_app/27355';
+import { atomStoreManager } from '../figma_app/27355';
 import { $t, HZ } from '../figma_app/29287';
 import { eH as _$$eH } from '../figma_app/91703';
 import { isNotNullish } from '../figma_app/95419';
@@ -196,7 +196,7 @@ import { OX } from '../figma_app/407414';
 import { k1 } from '../figma_app/407767';
 import { Ay as _$$Ay2 } from '../figma_app/432652';
 import { Y5 } from '../figma_app/455680';
-import { MP, pb } from '../figma_app/469876';
+import { isZoomIntegration, IntegrationUtils } from '../figma_app/469876';
 import { xt } from '../figma_app/475303';
 import { tS as _$$tS } from '../figma_app/516028';
 import { N5 } from '../figma_app/528509';
@@ -216,12 +216,12 @@ import { eY as _$$eY } from '../figma_app/722362';
 import { UK } from '../figma_app/740163';
 import { Ez5, F84, glU, mgy, nQ7, NUh, otU, Qej, tKW, Vzr } from '../figma_app/763686';
 import { X as _$$X4 } from '../figma_app/765161';
-import { Ay as _$$Ay } from '../figma_app/778880';
+import { BrowserInfo } from '../figma_app/778880';
 import { As } from '../figma_app/802241';
 import { of, Pt } from '../figma_app/806412';
 import { hV as _$$hV, M3 as _$$M2, _p, lW, MH, pn, rH, u2 } from '../figma_app/847915';
 import { YA } from '../figma_app/865646';
-import { eD as _$$eD } from '../figma_app/876459';
+import { desktopAPIInstance } from '../figma_app/876459';
 import { Fn, OO, qM } from '../figma_app/913518';
 import { bb } from '../figma_app/926950';
 import { Ay as _$$Ay3 } from '../figma_app/948389';
@@ -3335,13 +3335,13 @@ function iY(e) {
     children: [jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$tx('auto_suggest.eval.title')
+          children: renderI18nText('auto_suggest.eval.title')
         })
       }), jsx(nB, {
         children: jsxs('div', {
           children: [jsx(_$$J, {
             htmlFor: 'config',
-            children: _$$tx('auto_suggest.eval.config.label')
+            children: renderI18nText('auto_suggest.eval.config.label')
           }), jsx('textarea', {
             rows: 10,
             value: d,
@@ -3357,20 +3357,20 @@ function iY(e) {
           children: jsx($n, {
             onClick: g,
             disabled: b,
-            children: _$$tx('auto_suggest.eval.start_button')
+            children: renderI18nText('auto_suggest.eval.start_button')
           })
         })
       })]
     }), jsx('br', {}), s !== 0 && jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$tx('auto_suggest.eval.results.title')
+          children: renderI18nText('auto_suggest.eval.results.title')
         })
       }), jsxs(nB, {
         children: [jsxs('div', {
           children: [jsxs('div', {
             className: 'x78zum5 x1q0g3np x167g77z x6xwguf',
-            children: [_$$tx('auto_suggest.eval.results.tests_run'), ' ', m.progress.numComplete, ' /', ' ', m.progress.numTotal, ' ', b && jsx(_$$k4, {})]
+            children: [renderI18nText('auto_suggest.eval.results.tests_run'), ' ', m.progress.numComplete, ' /', ' ', m.progress.numTotal, ' ', b && jsx(_$$k4, {})]
           }), jsx('br', {}), jsxs('div', {
             className: 'x78zum5 x1q0g3np x167g77z',
             children: [iG.map(e => jsxs('div', {
@@ -3380,20 +3380,20 @@ function iY(e) {
                 children: ['@', ' ', e === 'MAX' ? `MAX (${l.numResults ? 2 * l.numResults : 'undefined'})` : e]
               }), jsxs('ul', {
                 children: [jsxs('li', {
-                  children: [_$$tx('auto_suggest.eval.results.tests_pass'), m.results[e].resultCount.PASS]
+                  children: [renderI18nText('auto_suggest.eval.results.tests_pass'), m.results[e].resultCount.PASS]
                 }), jsxs('li', {
-                  children: [_$$tx('auto_suggest.eval.results.tests_fail'), m.results[e].resultCount.FAIL]
+                  children: [renderI18nText('auto_suggest.eval.results.tests_fail'), m.results[e].resultCount.FAIL]
                 }), jsxs('li', {
-                  children: [_$$tx('auto_suggest.eval.results.tests_no_suggestions'), m.results[e].resultCount.NO_SUGGESTIONS]
+                  children: [renderI18nText('auto_suggest.eval.results.tests_no_suggestions'), m.results[e].resultCount.NO_SUGGESTIONS]
                 })]
               }), jsx('br', {}), jsx('div', {
                 children: jsxs('ul', {
                   children: [jsxs('li', {
-                    children: [_$$tx('auto_suggest.eval.results.tests_recall'), ' ', m.results[e].recall?.toFixed(2)]
+                    children: [renderI18nText('auto_suggest.eval.results.tests_recall'), ' ', m.results[e].recall?.toFixed(2)]
                   }), jsxs('li', {
-                    children: [_$$tx('auto_suggest.eval.results.tests_precision'), ' ', m.results[e].precision?.toFixed(2)]
+                    children: [renderI18nText('auto_suggest.eval.results.tests_precision'), ' ', m.results[e].precision?.toFixed(2)]
                   }), jsxs('li', {
-                    children: [_$$tx('auto_suggest.eval.results.tests_score'), ' ', m.results[e].fBetaScore?.toFixed(2)]
+                    children: [renderI18nText('auto_suggest.eval.results.tests_score'), ' ', m.results[e].fBetaScore?.toFixed(2)]
                   })]
                 })
               })]
@@ -3409,15 +3409,15 @@ function iY(e) {
           children: [jsx($n, {
             onClick: f,
             disabled: b || !u,
-            children: _$$tx('auto_suggest.eval.results.copy_summary')
+            children: renderI18nText('auto_suggest.eval.results.copy_summary')
           }), jsx($n, {
             onClick: A,
             disabled: b || !u,
-            children: _$$tx('auto_suggest.eval.results.copy_details')
+            children: renderI18nText('auto_suggest.eval.results.copy_details')
           }), jsx($n, {
             onClick: y,
             disabled: b || !u,
-            children: _$$tx('auto_suggest.eval.results.download')
+            children: renderI18nText('auto_suggest.eval.results.download')
           })]
         })
       })]
@@ -3548,7 +3548,7 @@ ${t}: ${i.join(', ')}`;
 }
 function i$(e, t) {
   let i = _$$A5(t);
-  Lo('AutoSuggestEval', e, i, {
+  logInfo('AutoSuggestEval', e, i, {
     logToConsole: NUh.ALWAYS,
     forwardToDatadog: !1,
     reportAsSentryError: !1
@@ -3793,23 +3793,23 @@ let nS = Ju(e => {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$tx('cms_file_operations_import_export.save_without_cms')
+          children: renderI18nText('cms_file_operations_import_export.save_without_cms')
         })
       }), jsx(nB, {
-        children: _$$tx('cms_file_operations_import_export.local_copies_of_sites_files')
+        children: renderI18nText('cms_file_operations_import_export.local_copies_of_sites_files')
       }), jsx(wi, {
         children: jsxs(jk, {
           children: [jsx($n, {
             variant: 'secondary',
             onClick: onClose,
-            children: _$$tx('cms_file_operations_import_export.cancel')
+            children: renderI18nText('cms_file_operations_import_export.cancel')
           }), jsx($n, {
             variant: 'primary',
             onClick: () => {
               onSaveClick();
               onClose();
             },
-            children: _$$tx('cms_file_operations_import_export.save')
+            children: renderI18nText('cms_file_operations_import_export.save')
           })]
         })
       })]
@@ -3861,7 +3861,7 @@ export function $$nN0(e) {
   let tX = debugState.getState();
   return [...(backToFileArgs.shouldShowBackToFiles ? [{
     'callback': (e, t, i, n) => {
-      if (n?.preventDefault(), sx('Back to files button clicked', {
+      if (n?.preventDefault(), trackEventAnalytics('Back to files button clicked', {
         source: 'fullscreen_menu'
       }), !LR()) {
         if (n.metaKey || n.button === 1) {
@@ -3883,7 +3883,7 @@ export function $$nN0(e) {
     separator: !0
   }] : []), {
     action: 'toggle-menu',
-    displayText: gn() ? _$$t2('fullscreen_actions.toggle-actions-menu') : _$$t2('fullscreen_actions.toggle-menu'),
+    displayText: gn() ? getI18nString('fullscreen_actions.toggle-actions-menu') : getI18nString('fullscreen_actions.toggle-menu'),
     hideForQuickCommand: !0,
     iconType: 'search',
     featureFlags: [],
@@ -4001,7 +4001,7 @@ export function $$nN0(e) {
       callback: (e, i, n) => {
         mU(t, n, e);
       },
-      searchSynonyms: [_$$t2('fullscreen.export.export_to_pptx'), _$$t2('fullscreen.export.export_to_pdf')],
+      searchSynonyms: [getI18nString('fullscreen.export.export_to_pptx'), getI18nString('fullscreen.export.export_to_pdf')],
       flags: ['view_restricted', 'slides']
     }, {
       action: 'export-cooper-assets',
@@ -4240,14 +4240,14 @@ export function $$nN0(e) {
         iconType: createElement(i),
         flags: ['design', 'sites'],
         callback: () => {
-          sx('edit_menu_copy_as_css_clicked');
+          trackEventAnalytics('edit_menu_copy_as_css_clicked');
         },
         featureFlags: []
       }, {
         action: 'copy-as-css-recursive',
         flags: ['design', 'sites'],
         callback: () => {
-          sx('edit_menu_copy_as_css_all_layers_clicked');
+          trackEventAnalytics('edit_menu_copy_as_css_all_layers_clicked');
         },
         featureFlags: []
       }, {
@@ -4523,7 +4523,7 @@ export function $$nN0(e) {
       property: 'showComments',
       propertyValue: !0,
       displayForQuickCommand: 'show-comments',
-      hideForQuickCommand: _$$Ay.isIpadNative,
+      hideForQuickCommand: BrowserInfo.isIpadNative,
       featureFlags: []
     }, {
       action: 'toggle-show-annotations',
@@ -4531,7 +4531,7 @@ export function $$nN0(e) {
       property: Ez5.uiState().showAnnotationsInDevMode,
       propertyValue: !0,
       displayForQuickCommand: 'show-annotations',
-      hideForQuickCommand: _$$Ay.isIpadNative,
+      hideForQuickCommand: BrowserInfo.isIpadNative,
       featureFlags: []
     }, {
       action: 'toggle-always-expand-annotations',
@@ -4539,7 +4539,7 @@ export function $$nN0(e) {
       property: Ez5.uiState().alwaysExpandAnnotations,
       propertyValue: !1,
       displayForQuickCommand: 'toggle-always-expand-annotations',
-      hideForQuickCommand: _$$Ay.isIpadNative,
+      hideForQuickCommand: BrowserInfo.isIpadNative,
       featureFlags: [],
       notFeatureFlags: ['dt_annotations_always_expand']
     }, {
@@ -4615,7 +4615,7 @@ export function $$nN0(e) {
       separator: !0
     }, ...(Ez5.uiState().isUI3.getCopy() ? [{
       callback: () => {
-        let e = zl.get(Bu);
+        let e = atomStoreManager.get(Bu);
         Y5.triggerAction('toggle-show-property-labels', {
           source: e ? 'quick-action' : 'view-menu'
         });
@@ -4626,10 +4626,10 @@ export function $$nN0(e) {
       featureFlags: []
     }, {
       action: 'toggle-sidebar',
-      displayText: _$$t2('fullscreen_actions.minimize-ui'),
+      displayText: getI18nString('fullscreen_actions.minimize-ui'),
       displayForQuickCommand: 'minimize-ui',
       checked: Ez5?.uiState().leftPanelCollapsedUI3.getCopy(),
-      searchSynonyms: [_$$t2('fullscreen_actions.expand-ui')],
+      searchSynonyms: [getI18nString('fullscreen_actions.expand-ui')],
       featureFlags: []
     }] : []), {
       action: 'toggle-ui',
@@ -4661,7 +4661,7 @@ export function $$nN0(e) {
       action: 'enter-inspect-mode',
       flags: ['!dev_handoff', '!recovery', '!slides', '!sites', '!cooper'],
       searchSynonyms: ['mode', 'open'],
-      disabled: MP(),
+      disabled: isZoomIntegration(),
       featureFlags: []
     }, Ez5.interopToolMode().getCopy() === nQ7.SELF ? {
       action: 'enter-slides-design-mode',
@@ -5597,9 +5597,9 @@ export function $$nN0(e) {
     let t = _$$td(e.currentUserOrgId, e.orgById);
     let i = [{
       name: 'see-all-plugins',
-      displayText: _$$t2('fullscreen_actions.see-all-plugins'),
+      displayText: getI18nString('fullscreen_actions.see-all-plugins'),
       callback: () => {
-        zl.set(Lk, _$$x.PLUGINS);
+        atomStoreManager.set(Lk, _$$x.PLUGINS);
       },
       iconType: createElement(_$$u),
       flags: ['cooper'],
@@ -5609,12 +5609,12 @@ export function $$nN0(e) {
     }];
     t && i.push({
       name: 'plugins-from-org',
-      displayText: _$$t2('fullscreen_actions.plugins-from-org', {
+      displayText: getI18nString('fullscreen_actions.plugins-from-org', {
         orgName: t.name
       }),
       callback: () => {
-        zl.set(Lk, _$$x.PLUGINS);
-        zl.set(zM, 'org');
+        atomStoreManager.set(Lk, _$$x.PLUGINS);
+        atomStoreManager.set(zM, 'org');
       },
       flags: ['cooper'],
       featureFlags: ['buzz_plugins'],
@@ -5822,7 +5822,7 @@ export function $$nN0(e) {
         return _$$N7.shouldShowOnce() ? [] : ['mac', 'windows'];
       },
       featureFlags: []
-    }, ...(_$$eD?.hasFeature('addCodegenMCPStartupBinding') && getFeatureFlags().show_mcp_server_upsell && !mcpArgs?.canStartCodegenMcpServer && fileMenuArgs?.openFile?.plan?.tier === FPlanNameType.STARTER ? [{
+    }, ...(desktopAPIInstance?.hasFeature('addCodegenMCPStartupBinding') && getFeatureFlags().show_mcp_server_upsell && !mcpArgs?.canStartCodegenMcpServer && fileMenuArgs?.openFile?.plan?.tier === FPlanNameType.STARTER ? [{
       action: 'toggle-enable-codegen-mcp-server',
       property: UK().enableCodegenMcpServer,
       flags: ['desktop', 'design', 'dev_handoff'],
@@ -5843,7 +5843,7 @@ export function $$nN0(e) {
         }));
       },
       featureFlags: ['dt_my_cool_plugin']
-    }] : []), ...(_$$eD?.hasFeature('addCodegenMCPStartupBinding') && mcpArgs?.canStartCodegenMcpServer ? [{
+    }] : []), ...(desktopAPIInstance?.hasFeature('addCodegenMCPStartupBinding') && mcpArgs?.canStartCodegenMcpServer ? [{
       action: 'toggle-enable-codegen-mcp-server',
       property: UK().enableCodegenMcpServer,
       flags: ['desktop', 'design', 'dev_handoff'],
@@ -5855,116 +5855,116 @@ export function $$nN0(e) {
       featureFlags: ['dt_my_cool_plugin'],
       children: [...(getFeatureFlags().dt_my_cool_plugin_internal || getFeatureFlags().dt_my_cool_plugin_xml ? [{
         name: 'dev-mode-mcp-server-settings',
-        displayText: _$$t2('fullscreen_actions.mcp-react-tailwind-code'),
+        displayText: getI18nString('fullscreen_actions.mcp-react-tailwind-code'),
         get checked() {
-          return zl.get(Kx) === 'design_to_react';
+          return atomStoreManager.get(Kx) === 'design_to_react';
         },
         callback: () => {
-          zl.set(Kx, 'design_to_react');
+          atomStoreManager.set(Kx, 'design_to_react');
         }
       }, {
         name: 'dev-mode-codegen-mcp-server-settings',
-        displayText: _$$t2('fullscreen_actions.mcp-xml-code'),
+        displayText: getI18nString('fullscreen_actions.mcp-xml-code'),
         get checked() {
-          return zl.get(Kx) === 'xml';
+          return atomStoreManager.get(Kx) === 'xml';
         },
         callback: () => {
-          zl.set(Kx, 'xml');
+          atomStoreManager.set(Kx, 'xml');
         },
         featureFlags: ['dt_my_cool_plugin_xml']
       }, {
         name: 'dev-mode-codegen-mcp-server-settings',
-        displayText: _$$t2('fullscreen_actions.mcp-jsx-code'),
+        displayText: getI18nString('fullscreen_actions.mcp-jsx-code'),
         get checked() {
-          return zl.get(Kx) === 'jsx';
+          return atomStoreManager.get(Kx) === 'jsx';
         },
         callback: () => {
-          zl.set(Kx, 'jsx');
+          atomStoreManager.set(Kx, 'jsx');
         },
         featureFlags: ['dt_my_cool_plugin_internal']
       }, {
         separator: !0
       }] : []), {
         name: 'dev-mode-mcp-server-settings',
-        displayText: _$$t2('fullscreen_actions.mcp-use-tailwind'),
+        displayText: getI18nString('fullscreen_actions.mcp-use-tailwind'),
         get checked() {
-          return zl.get(Kx) === 'design_to_react' && zl.get(lk);
+          return atomStoreManager.get(Kx) === 'design_to_react' && atomStoreManager.get(lk);
         },
         callback: () => {
-          zl.set(lk, e => !e);
+          atomStoreManager.set(lk, e => !e);
         },
-        disabled: zl.get(Kx) !== 'design_to_react',
+        disabled: atomStoreManager.get(Kx) !== 'design_to_react',
         featureFlags: ['dt_my_cool_plugin_d2r_tailwind_option']
       }, ...(mcpArgs?.canAccessCodeConnect ? [{
         name: 'dev-mode-mcp-server-settings',
-        displayText: _$$t2('fullscreen_actions.mcp-enable-code-connect'),
+        displayText: getI18nString('fullscreen_actions.mcp-enable-code-connect'),
         get checked() {
-          return zl.get(_$$tz);
+          return atomStoreManager.get(_$$tz);
         },
         callback: () => {
-          zl.set(_$$tz, e => !e);
+          atomStoreManager.set(_$$tz, e => !e);
         }
       }] : []), {
         name: 'dev-mode-mcp-server-settings',
-        displayText: _$$t2('fullscreen_actions.mcp-enable-codebase-suggestions'),
+        displayText: getI18nString('fullscreen_actions.mcp-enable-codebase-suggestions'),
         get checked() {
           return Lw();
         },
         callback: () => {
-          zl.set(SV, !Lw());
+          atomStoreManager.set(SV, !Lw());
         },
         featureFlags: ['dt_my_cool_plugin_codebase_suggestions']
       }, ...function () {
-        if (!_$$eD?.hasFeature('addMcpImageSupport') || zl.get(Kx) === 'xml') return [];
+        if (!desktopAPIInstance?.hasFeature('addMcpImageSupport') || atomStoreManager.get(Kx) === 'xml') return [];
         let e = [{
           name: 'dev-mode-mcp-server-settings',
-          displayText: _$$t2('fullscreen_actions.mcp-use-placeholder-images'),
+          displayText: getI18nString('fullscreen_actions.mcp-use-placeholder-images'),
           get checked() {
-            return zl.get(pe) === 'placeholder-svg';
+            return atomStoreManager.get(pe) === 'placeholder-svg';
           },
           callback: () => {
-            zl.set(pe, 'placeholder-svg');
+            atomStoreManager.set(pe, 'placeholder-svg');
           },
           featureFlags: []
         }, {
           name: 'dev-mode-mcp-server-settings',
-          displayText: _$$t2('fullscreen_actions.mcp-use-local-images'),
+          displayText: getI18nString('fullscreen_actions.mcp-use-local-images'),
           get checked() {
-            return zl.get(pe) === 'local';
+            return atomStoreManager.get(pe) === 'local';
           },
           callback: () => {
-            zl.set(pe, 'local');
+            atomStoreManager.set(pe, 'local');
           },
           hideForQuickCommand: !0,
           featureFlags: []
         }, ...(As() ? [{
           name: 'dev-mode-mcp-server-settings',
-          displayText: _$$t2('fullscreen_actions.mcp-write-images-to-disk'),
+          displayText: getI18nString('fullscreen_actions.mcp-write-images-to-disk'),
           get checked() {
-            return zl.get(pe) === 'write-to-disk';
+            return atomStoreManager.get(pe) === 'write-to-disk';
           },
           callback: () => {
-            zl.set(pe, 'write-to-disk');
+            atomStoreManager.set(pe, 'write-to-disk');
           },
           featureFlags: [],
           hideForQuickCommand: !0
-        }, ...(zl.get(pe) === 'write-to-disk' ? [{
+        }, ...(atomStoreManager.get(pe) === 'write-to-disk' ? [{
           separator: !0
         }, {
           name: 'dev-mode-mcp-server-settings',
-          displayText: _$$t2('fullscreen_actions.mcp-allow-overwriting-files'),
+          displayText: getI18nString('fullscreen_actions.mcp-allow-overwriting-files'),
           get checked() {
-            return !zl.get(Pq);
+            return !atomStoreManager.get(Pq);
           },
           callback: () => {
-            zl.set(Pq, e => !e);
+            atomStoreManager.set(Pq, e => !e);
           },
           featureFlags: [],
           hideForQuickCommand: !0
         }] : [])] : [])];
         return [{
           name: 'dev-mode-mcp-server-settings',
-          displayText: _$$t2('fullscreen_actions.mcp-image-settings'),
+          displayText: getI18nString('fullscreen_actions.mcp-image-settings'),
           children: e,
           hideForQuickCommand: !0,
           featureFlags: []
@@ -5977,7 +5977,7 @@ export function $$nN0(e) {
         displayText: 'Mock Code Connect from clipboard',
         callback: () => {
           let e = () => {
-            zl.set(rx, null);
+            atomStoreManager.set(rx, null);
             debugState.dispatch(_$$F4.enqueue({
               message: 'Reset Code Connect mock'
             }));
@@ -5985,7 +5985,7 @@ export function $$nN0(e) {
           navigator.clipboard.readText().then(t => {
             try {
               let e = JSON.parse(t);
-              zl.set(rx, e);
+              atomStoreManager.set(rx, e);
               debugState.dispatch(_$$F4.enqueue({
                 message: 'Set Code Connect mock'
               }));
@@ -6012,7 +6012,7 @@ export function $$nN0(e) {
         featureFlags: ['dt_my_cool_plugin_internal']
       }, {
         name: 'dev-mode-mcp-server-settings',
-        displayText: _$$t2('fullscreen_actions.mcp-get-test-cases-snapshot'),
+        displayText: getI18nString('fullscreen_actions.mcp-get-test-cases-snapshot'),
         callback: async () => {
           let {
             getTestCasesSnapshot
@@ -6090,7 +6090,7 @@ export function $$nN0(e) {
           let r = i();
           r.forEach(e => e.resetToDefault(debugState.getState().user, n));
           n(_$$F4.enqueue({
-            message: _$$t2('lab.menu.changed_to_default', {
+            message: getI18nString('lab.menu.changed_to_default', {
               count: r.length
             })
           }));
@@ -6191,9 +6191,9 @@ export function $$nN0(e) {
       featureFlags: []
     }, {
       name: 'sign-out',
-      flags: pb.isGoogleClassroomIntegration() ? [] : ['!integration'],
+      flags: IntegrationUtils.isGoogleClassroomIntegration() ? [] : ['!integration'],
       callback: (e, t, i) => {
-        pb.isGoogleClassroomIntegration() ? _$$m3({
+        IntegrationUtils.isGoogleClassroomIntegration() ? _$$m3({
           action: 'logOut'
         }) : i(S5());
       },
@@ -6230,7 +6230,7 @@ export function $$nN0(e) {
     action: 'set-tool-comments',
     iconType: createElement(_$$S),
     searchOnly: !0,
-    disabled: _$$Ay.isIpadNative,
+    disabled: BrowserInfo.isIpadNative,
     featureFlags: []
   }, {
     action: 'spotlight-me',
@@ -6530,15 +6530,15 @@ export function $$nN0(e) {
     flags: ['whiteboard'],
     searchOnly: !0,
     callback: () => {
-      zl.set(Qs, {
+      atomStoreManager.set(Qs, {
         type: 'OPEN'
       });
-      zl.set(qM, !1);
-      sx(Fn.OPEN, {
+      atomStoreManager.set(qM, !1);
+      trackEventAnalytics(Fn.OPEN, {
         source: OO.QUICK_ACTIONS
       });
       _$$D6(() => {
-        zl.set(Qs, {
+        atomStoreManager.set(Qs, {
           type: 'CLOSE'
         });
       });
@@ -7374,7 +7374,7 @@ export function $$nN0(e) {
     iconType: createElement(_$$c2),
     searchSynonyms: ['check', 'check designs', 'detect issues', 'detect violations', 'detect', 'suggested actions', 'suggestions', 'find suggestions', 'linter', 'lint', 'linting'],
     onRender: e => {
-      let t = zl.get(dd);
+      let t = atomStoreManager.get(dd);
       t && OX({
         impressionId: t,
         source: Qej.ACTIONS_MENU,

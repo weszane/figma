@@ -10,7 +10,7 @@ import { j7 } from "../905/929976";
 import { Y5 } from "../figma_app/455680";
 import { wr, Dh } from "../figma_app/741237";
 import { Gj } from "../figma_app/646357";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { PW } from "../figma_app/633080";
 import { sp } from "../figma_app/678300";
 import { K, h as _$$h } from "../905/275787";
@@ -174,7 +174,7 @@ export function $$D1(e) {
   let d = null;
   let v = !1;
   e.dropdownShown && e.dropdownShown.type === K.LIBRARY_MODAL && (d = e.dropdownShown.data.component);
-  let E = "fullscreen" === e.selectedView.view && e.selectedView.editorType === nT.Whiteboard;
+  let E = "fullscreen" === e.selectedView.view && e.selectedView.editorType === FEditorType.Whiteboard;
   let x = [];
   let w = e.ui3Compact ? 64 : t ? 56 : P(e.width, 24);
   for (let t of e.items) {

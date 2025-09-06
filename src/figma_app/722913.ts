@@ -4,8 +4,8 @@ import { qE } from "../figma_app/492908";
 import { l7 } from "../905/189185";
 import { dI } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
-import { md } from "../figma_app/27355";
-import { t } from "../905/303541";
+import { useAtomWithSubscription } from "../figma_app/27355";
+import { getI18nString } from "../905/303541";
 import { Y5 } from "../figma_app/455680";
 import { C8, oV, gl } from "../905/216495";
 import { Gt } from "../905/275640";
@@ -33,17 +33,17 @@ export function $$T2() {
   return C8(Gt("dynamicStrokeSettings")).every(e => !e || !E(e));
 }
 export function $$I0(e) {
-  let t = md(e);
+  let t = useAtomWithSubscription(e);
   let r = t.strokeBrushGuid;
   let n = t.dynamicStrokeSettings;
   return r && f(dI(r)) ? "Brush" : n && E(n) ? "Dynamic" : "Basic";
 }
 let S = {
-  gap: () => t("fullscreen.properties_panel.gap"),
-  wiggle: () => t("fullscreen.properties_panel.wiggle"),
-  sizeJitter: () => t("fullscreen.properties_panel.size_jitter"),
-  angularJitter: () => t("fullscreen.properties_panel.angular_jitter"),
-  rotation: () => t("fullscreen.properties_panel.transform_panel.rotation")
+  gap: () => getI18nString("fullscreen.properties_panel.gap"),
+  wiggle: () => getI18nString("fullscreen.properties_panel.wiggle"),
+  sizeJitter: () => getI18nString("fullscreen.properties_panel.size_jitter"),
+  angularJitter: () => getI18nString("fullscreen.properties_panel.angular_jitter"),
+  rotation: () => getI18nString("fullscreen.properties_panel.transform_panel.rotation")
 };
 let v = {
   gap: "scatterBrushGap",
@@ -91,9 +91,9 @@ export function $$N4(e) {
   };
 }
 let C = {
-  frequency: () => t("fullscreen.properties_panel.interval"),
-  wiggle: () => t("fullscreen.properties_panel.wiggle"),
-  smoothen: () => t("fullscreen.properties_panel.smoothen")
+  frequency: () => getI18nString("fullscreen.properties_panel.interval"),
+  wiggle: () => getI18nString("fullscreen.properties_panel.wiggle"),
+  smoothen: () => getI18nString("fullscreen.properties_panel.smoothen")
 };
 export function $$w5(e, t) {
   let r = "frequency" === e ? "interval" : e;

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "../vendor/514228";
 import { M } from "../figma_app/749682";
 import { H4 } from "../905/992467";
 import { c$ } from "../figma_app/236327";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { Pf } from "../905/590952";
 import { uy, cL, Df, pD } from "../figma_app/770088";
 import { to } from "../905/156213";
@@ -176,10 +176,10 @@ function I(e) {
   } = e;
   let d = useMemo(() => [jsx(c$, {
     onClick: onEdit,
-    children: tx("comments.edit")
+    children: renderI18nText("comments.edit")
   }, "edit"), jsx(c$, {
     onClick: n,
-    children: tx("comments.delete_comment")
+    children: renderI18nText("comments.delete_comment")
   }, "delete")], [n, onEdit]);
   return e.commentId.startsWith(v6) ? null : jsx(V, {
     hideTarget: e.hideTarget,

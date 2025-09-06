@@ -1,4 +1,4 @@
-import { bt } from "../905/270322";
+import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { useMemo } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { oB, j7 } from "../905/929976";
@@ -34,7 +34,7 @@ export function $$o0(e) {
     };
   }, [t, i, e]);
 }
-export let $$l2 = bt(e => e.dropdownShown);
+export let $$l2 = createReduxSubscriptionAtomWithState(e => e.dropdownShown);
 export const BK = $$o0;
 export const Um = $$s1;
 export const xc = $$l2;

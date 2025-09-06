@@ -1,5 +1,5 @@
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { D, d } from "../905/433403";
 import { wm } from "../figma_app/601682";
 import { K } from "../905/621769";
@@ -48,8 +48,8 @@ export function $$l0(e, t, i) {
   }(e, i);
   try {
     let e = l.filter(e => !t.has(e.nodeGuid));
-    zl.set(D, e);
-    zl.set(d, e.length > 0);
+    atomStoreManager.set(D, e);
+    atomStoreManager.set(d, e.length > 0);
   } catch (e) {
     console.error("Error storing unmapped components:", e);
   }

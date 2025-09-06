@@ -4,10 +4,10 @@ import { useDispatch } from "../vendor/514228";
 import { J0O, glU } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { Pt } from "../figma_app/806412";
 import { wv } from "../figma_app/236327";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { to } from "../905/156213";
 import { Um } from "../905/848862";
 import { a1 } from "../figma_app/23780";
@@ -29,7 +29,7 @@ export function $$I0({
     containingComponentDefs,
     defReferencedBySelection,
     containingProductComponent
-  } = _$$R(e => {
+  } = selectWithShallowEqual(e => {
     let i = Lg(e);
     return {
       containingProductComponent: i ? e.mirror.sceneGraph.get(i) : null,
@@ -67,7 +67,7 @@ export function $$I0({
   }, [containingProductComponent, t, e, T, o, P?.left, P?.top]);
   let D = useMemo(() => {
     let e = eM(t).defaultType;
-    return _$$t("design_systems.component_properties.no_available_properties", {
+    return getI18nString("design_systems.component_properties.no_available_properties", {
       propType: xb(e).toLocaleLowerCase()
     });
   }, [t]);
@@ -105,7 +105,7 @@ export function $$I0({
     }, "create-prop")]
   }) : null;
 }
-let E = (e, t) => t || ("create-prop" === e ? _$$t("design_systems.component_properties.create_property_menu_option") : "");
+let E = (e, t) => t || ("create-prop" === e ? getI18nString("design_systems.component_properties.create_property_menu_option") : "");
 function x({
   action: e,
   nodeField: t,

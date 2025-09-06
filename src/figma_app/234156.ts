@@ -6,7 +6,7 @@ import o from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
 import { ZC } from "../figma_app/39751";
 import { Pt } from "../figma_app/806412";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Pyi, vE6 } from "../figma_app/27776";
 var l = o;
 let h = parsePxNumber(Pyi);
@@ -20,10 +20,10 @@ export function $$g0(e) {
     recordingKey
   } = e;
   let _ = ZC(activeMode) ?? activeMode;
-  let g = useCallback((e) => modes.findIndex((t) => t.mode === e), [modes]);
+  let g = useCallback(e => modes.findIndex(t => t.mode === e), [modes]);
   let E = g(activeMode);
   let y = Math.abs(E - g(_));
-  let b = (e) => e === activeMode;
+  let b = e => e === activeMode;
   return jsx("div", {
     className: "toolbelt_mode_segmented_control--container--E5mSs",
     children: jsxs(bL, {
@@ -32,7 +32,7 @@ export function $$g0(e) {
       value: activeMode,
       onChange: onModeSwitch,
       legend: jsx(q, {
-        children: t("fullscreen.toolbar.toolbelt_mode_segmented_control.toolbelt_mode")
+        children: getI18nString("fullscreen.toolbar.toolbelt_mode_segmented_control.toolbelt_mode")
       }),
       htmlAttributes: {
         "data-testid": "toolbelt-mode-segmented-control",
@@ -46,7 +46,7 @@ export function $$g0(e) {
           transform: `translateX(${E * (h + m)}px)`,
           transition: `${.1 * y}s`
         }
-      }), modes.map((e) => jsx(f, {
+      }), modes.map(e => jsx(f, {
         modeItem: e,
         isSelected: b(e.mode)
       }, e.mode))]

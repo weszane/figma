@@ -1,17 +1,17 @@
 import { useCallback, useEffect } from "react";
-import { fp } from "../figma_app/27355";
-import { sx } from "../905/449184";
-import { jk } from "../905/609396";
+import { useAtomValueAndSetter } from "../figma_app/27355";
+import { trackEventAnalytics } from "../905/449184";
+import { PerfTimer } from "../905/609396";
 import { zq, We } from "../figma_app/782261";
 import { q5 } from "../figma_app/516028";
 import { rt } from "../figma_app/615482";
 import { D } from "../905/367723";
 let $$u2 = "performance.ds_eco.asset_panel_loading";
-let $$p3 = new jk($$u2, {});
+let $$p3 = new PerfTimer($$u2, {});
 let _ = rt(!1);
 let $$h0 = rt(!1);
 export function $$m4() {
-  let [e, t] = fp(_);
+  let [e, t] = useAtomValueAndSetter(_);
   return useCallback(() => {
     e || (t(!0), $$p3.start());
   }, [e, t]);
@@ -19,12 +19,12 @@ export function $$m4() {
 let g = (e, t) => {
   let r = q5();
   let s = D();
-  let [d, _] = fp($$h0);
+  let [d, _] = useAtomValueAndSetter($$h0);
   useEffect(() => {
     if (!s && !d && t) {
       _(!0);
       let t = $$p3.stop();
-      t && sx($$u2, {
+      t && trackEventAnalytics($$u2, {
         elapsedMs: t,
         fileKey: r?.key,
         teamId: r?.teamId,

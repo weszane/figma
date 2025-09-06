@@ -8,7 +8,7 @@ import d from "classnames";
 import { AF } from "../figma_app/806412";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Dm } from "../figma_app/8833";
 import { A as _$$A2 } from "../905/482208";
 import { o3, nt } from "../905/226610";
@@ -29,14 +29,14 @@ function w({
   focus: t
 }) {
   return jsx(K, {
-    "aria-label": _$$t("search.search_bar.clear"),
+    "aria-label": getI18nString("search.search_bar.clear"),
     onClick: r => {
       r.stopPropagation();
       e();
       t();
     },
     htmlAttributes: {
-      "data-tooltip": _$$t("search.search_bar.clear"),
+      "data-tooltip": getI18nString("search.search_bar.clear"),
       "data-tooltip-type": Ib.TEXT
     },
     children: jsx(_$$C, {
@@ -208,7 +208,7 @@ let $$D0 = forwardRef(({
       }) : null]
     }), jsx(K, {
       onClick: close,
-      "aria-label": _$$t("common.close"),
+      "aria-label": getI18nString("common.close"),
       children: jsx(_$$A, {
         style: {
           "--color-icon": "var(--color-icon-secondary)"

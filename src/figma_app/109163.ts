@@ -4,13 +4,13 @@ import { useSelector } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { nj } from "../905/125019";
 import { NLJ, cxo, glU, rrT } from "../figma_app/763686";
-import { fp, md } from "../figma_app/27355";
+import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import c from "classnames";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Uv } from "../figma_app/191804";
 import { Pt } from "../figma_app/806412";
 import { GI, IZ, SK } from "../905/125333";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/989956";
 import { Y5 } from "../figma_app/455680";
 import { F as _$$F2 } from "../905/258517";
@@ -50,8 +50,8 @@ let $$K0 = memo(function ({
   recordingKey: r,
   optimizeForCompactSize: s
 }) {
-  let [c, T] = fp(GI);
-  let [C, O] = fp(IZ);
+  let [c, T] = useAtomValueAndSetter(GI);
+  let [C, O] = useAtomValueAndSetter(IZ);
   let [M, K] = useState(!1);
   let [$, X] = useState(!1);
   let {
@@ -60,12 +60,12 @@ let $$K0 = memo(function ({
   } = $J(X);
   let {
     washiTapePaint
-  } = md(SK);
+  } = useAtomWithSubscription(SK);
   let Q = washiTapePaint?.image?.hash && nj(washiTapePaint?.image?.hash);
   let [ee, et] = useState(!1);
   let [er, en] = useState(!1);
   let ei = useSelector(e => e.mirror?.appModel.isReadOnly);
-  let [ea, es] = fp(_$$B);
+  let [ea, es] = useAtomValueAndSetter(_$$B);
   useEffect(() => {
     Qc(_$$B2);
   }, []);
@@ -114,7 +114,7 @@ let $$K0 = memo(function ({
       ...c,
       strokeWeight: "THIN" === t ? wv : uM
     });
-    sx("Drawing Tool Change Thickness", {
+    trackEventAnalytics("Drawing Tool Change Thickness", {
       thickness: t,
       tool: NLJ[e]
     });
@@ -137,7 +137,7 @@ let $$K0 = memo(function ({
   let ex = GQ(e);
   let eN = TS(ex);
   let eC = eA ? ev.variations[ex] : eN;
-  let ew = md(Qv);
+  let ew = useAtomWithSubscription(Qv);
   let eO = !!ew;
   return jsxs(Fragment, {
     children: [jsxs(br, {
@@ -278,7 +278,7 @@ let $$K0 = memo(function ({
           children: jsx($n, {
             active: ee ? "LOUD" : "NONE",
             animateCaret: !0,
-            ariaLabel: _$$t("whiteboard.washi_tapes.custom_aria_label"),
+            ariaLabel: getI18nString("whiteboard.washi_tapes.custom_aria_label"),
             buttonStyle: {
               "--menu-padding-right": "12px",
               marginLeft: "4px",
@@ -309,7 +309,7 @@ let $$K0 = memo(function ({
               swatchStyle: {
                 boxShadow: ee ? "0px 0px 0px 1px rgba(225, 255, 255, 0.8) inset" : "0px 0px 0px 1px rgba(0, 0, 0, 0.2) inset"
               },
-              tooltip: _$$t("whiteboard.washi_tapes.custom"),
+              tooltip: getI18nString("whiteboard.washi_tapes.custom"),
               fallbackSvg: xY
             }) : jsx(Fragment, {
               children: jsx(YR, {

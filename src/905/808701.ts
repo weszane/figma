@@ -1,5 +1,5 @@
 import { z } from "../905/239603";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { FAnimationEffectType, FNodeType, FAnimationTriggerType } from "../figma_app/191312";
 import { Zx } from "../905/497152";
 function o(e, {
@@ -9,7 +9,7 @@ function o(e, {
   name: a,
   userFacingVersion: o
 }) {
-  Zx(n) !== e && x1("design-systems", "Expected asset types to match", {
+  Zx(n) !== e && logError("design-systems", "Expected asset types to match", {
     actual: Zx(n),
     expected: e
   });
@@ -31,14 +31,14 @@ export function $$l5(e, t) {
     localGuid: t.localFields.localGuid,
     containingFrame: t.localFields.containingFrame,
     mainThumbnailInfo: t.localFields.mainThumbnailInfo
-  } : (x1("design-systems", "Expected localFields on local asset"), null);
+  } : (logError("design-systems", "Expected localFields on local asset"), null);
 }
 export function $$d4(e, t) {
   return t.subscribedFields ? {
     ...o(e, t),
     subscriptionStatus: "SUBSCRIBED",
     key: t.subscribedFields.key
-  } : (x1("design-systems", "Expected subscribedFields on subscribed asset"), null);
+  } : (logError("design-systems", "Expected subscribedFields on subscribed asset"), null);
 }
 export function $$c2(e, t, i) {
   return `/api/file_proxy/library_asset/${e}/${t}/canvas?ver=${i}`;

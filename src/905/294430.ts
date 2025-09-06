@@ -6,15 +6,15 @@ import { K as _$$K } from "../905/443068";
 import { O as _$$O } from "../905/487602";
 import { VD3, e0R, rXF, Ez5, hxu, j0r, goc, m1T, rrT } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { xx } from "../figma_app/815945";
-import { az, sx } from "../905/449184";
+import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
 import { Q as _$$Q } from "../figma_app/67145";
 import { Pt, qP } from "../figma_app/806412";
 import { useSprigWithSampling } from "../905/99656";
 import { k as _$$k2 } from "../905/582200";
-import { t as _$$t, tx as _$$tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { XE, Uv, u1 } from "../figma_app/91703";
 import { qj } from "../figma_app/451499";
 import { Dc } from "../figma_app/314264";
@@ -69,7 +69,7 @@ import { Z as _$$Z2 } from "../905/557139";
 import { N as _$$N } from "../905/696319";
 import { i as _$$i } from "../905/97346";
 import { G as _$$G } from "../905/289770";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { S as _$$S } from "../905/274480";
 import { m as _$$m } from "../905/357539";
 import { N as _$$N2 } from "../905/720559";
@@ -207,15 +207,15 @@ function eu(e) {
     onMouseEnter: () => r(hxu.START),
     onMouseLeave: a,
     children: jsx(yw, {
-      ariaLabel: _$$t("properties_panel.effects.blur.start_blur"),
+      ariaLabel: getI18nString("properties_panel.effects.blur.start_blur"),
       bigStep: e.bigNudgeAmount,
-      dataTooltip: _$$t("properties_panel.effects.blur.start_blur"),
+      dataTooltip: getI18nString("properties_panel.effects.blur.start_blur"),
       fullWidth: !0,
       icon: jsx(M, {}),
       inputMax: isProgressiveBlur ? aO : void 0,
       min: 0,
       onValueChange: onStartRadiusChange,
-      rowLabel: isProgressiveBlur ? _$$t("properties_panel.effects.blur.start_blur") : _$$t("fullscreen.properties_panel.effects.blur"),
+      rowLabel: isProgressiveBlur ? getI18nString("properties_panel.effects.blur.start_blur") : getI18nString("fullscreen.properties_panel.effects.blur"),
       sliderMax: aO,
       step: e.smallNudgeAmount,
       value: e.effect.startRadius || 0
@@ -227,15 +227,15 @@ function eu(e) {
     onMouseEnter: e => r(hxu.END),
     onMouseLeave: a,
     children: jsx(yw, {
-      ariaLabel: isProgressiveBlur ? _$$t("properties_panel.effects.blur.end_blur") : _$$t("properties_panel.effects.blur_radius"),
+      ariaLabel: isProgressiveBlur ? getI18nString("properties_panel.effects.blur.end_blur") : getI18nString("properties_panel.effects.blur_radius"),
       bigStep: e.bigNudgeAmount,
-      dataTooltip: isProgressiveBlur ? _$$t("properties_panel.effects.blur.end_blur") : _$$t("properties_panel.effects.blur_radius"),
+      dataTooltip: isProgressiveBlur ? getI18nString("properties_panel.effects.blur.end_blur") : getI18nString("properties_panel.effects.blur_radius"),
       fullWidth: !0,
       icon: jsx(M, {}),
       inputMax: isProgressiveBlur ? aO : void 0,
       min: 0,
       onValueChange: e.onRadiusChange,
-      rowLabel: isProgressiveBlur ? _$$t("properties_panel.effects.blur.end_blur") : _$$t("fullscreen.properties_panel.effects.blur"),
+      rowLabel: isProgressiveBlur ? getI18nString("properties_panel.effects.blur.end_blur") : getI18nString("fullscreen.properties_panel.effects.blur"),
       sliderMax: aO,
       step: e.smallNudgeAmount,
       value: e.effect.radius || 0
@@ -252,11 +252,11 @@ function ep(e) {
     isProgressiveBlur
   } = e;
   let r = jsx(cS, {
-    label: _$$t("properties_panel.effects.blur.start_blur"),
+    label: getI18nString("properties_panel.effects.blur.start_blur"),
     input: jsx($j, {
       autoFocus: !0,
       bigNudgeAmount: e.bigNudgeAmount,
-      "data-tooltip": _$$t("properties_panel.effects.blur.start_blur"),
+      "data-tooltip": getI18nString("properties_panel.effects.blur.start_blur"),
       "data-tooltip-type": Ib.TEXT,
       dispatch: e.dispatch,
       inputClassName: ea,
@@ -279,7 +279,7 @@ function ep(e) {
   return jsxs("div", {
     className: "ui3_effects_settings_picker--blurScrubbableInputsContainer--lSidt ui3_effects_settings_picker--scrubbableInputsContainer--B2I7g",
     children: [isProgressiveBlur ? r : null, jsx(cS, {
-      label: isProgressiveBlur ? _$$t("properties_panel.effects.blur.end_blur") : _$$t("fullscreen.properties_panel.effects.blur"),
+      label: isProgressiveBlur ? getI18nString("properties_panel.effects.blur.end_blur") : getI18nString("fullscreen.properties_panel.effects.blur"),
       input: jsx(ed, {
         recordingKey: Pt(e, "radiusVar"),
         fieldName: "radiusVar",
@@ -289,7 +289,7 @@ function ep(e) {
         children: jsx($j, {
           autoFocus: !0,
           bigNudgeAmount: e.bigNudgeAmount,
-          "data-tooltip": isProgressiveBlur ? _$$t("properties_panel.effects.blur.end_blur") : _$$t("properties_panel.effects.blur_radius"),
+          "data-tooltip": isProgressiveBlur ? getI18nString("properties_panel.effects.blur.end_blur") : getI18nString("properties_panel.effects.blur_radius"),
           "data-tooltip-type": Ib.TEXT,
           dispatch: e.dispatch,
           inputClassName: ea,
@@ -344,7 +344,7 @@ function em(e) {
           onChange: i => {
             let n = "PROGRESSIVE" !== e.effect.blurOpType && "PROGRESSIVE" === i;
             let r = "PROGRESSIVE" === e.effect.blurOpType && "PROGRESSIVE" !== i;
-            (n || r) && az.trackDefinedEvent("illustration.web_progressive_blur_toggle", {
+            (n || r) && analyticsEventManager.trackDefinedEvent("illustration.web_progressive_blur_toggle", {
               changedToProgressive: n,
               blurType: "FOREGROUND_BLUR" === t.type ? "layer" : "background",
               productType: Dc(debugState.getState().selectedView.editorType)
@@ -357,14 +357,14 @@ function em(e) {
             }, zk.YES);
           },
           legend: jsx(_$$q, {
-            children: _$$tx("properties_panel.effects.blur.type")
+            children: renderI18nText("properties_panel.effects.blur.type")
           }),
           children: [jsx(RT, {
             value: "NORMAL",
-            label: _$$t("properties_panel.effects.blur.type.normal")
+            label: getI18nString("properties_panel.effects.blur.type.normal")
           }), jsx(RT, {
             value: "PROGRESSIVE",
-            label: _$$t("properties_panel.effects.blur.type.progressive")
+            label: getI18nString("properties_panel.effects.blur.type.progressive")
           })]
         })
       }), o]
@@ -387,7 +387,7 @@ function eh(e) {
   }) : jsxs(Fragment, {
     children: [jsx(Id, {
       children: jsx(cS, {
-        label: _$$tx("fullscreen.properties_panel.effects.blur"),
+        label: renderI18nText("fullscreen.properties_panel.effects.blur"),
         input: jsx(ed, {
           recordingKey: Pt(e, "radiusVar"),
           fieldName: "radiusVar",
@@ -397,7 +397,7 @@ function eh(e) {
           children: jsx($j, {
             autoFocus: !0,
             bigNudgeAmount: e.bigNudgeAmount,
-            "data-tooltip": _$$t("properties_panel.effects.blur_radius"),
+            "data-tooltip": getI18nString("properties_panel.effects.blur_radius"),
             "data-tooltip-type": Ib.TEXT,
             dispatch: e.dispatch,
             inputClassName: ea,
@@ -437,9 +437,9 @@ function ek(e, t, i) {
         case "allowed":
           return;
         case "disallowedForGlassType":
-          return _$$t("properties_panel.effects.glass.non_frame_warning");
+          return getI18nString("properties_panel.effects.glass.non_frame_warning");
         case "disallowedForCount":
-          return _$$t("properties_panel.effects.already_applied");
+          return getI18nString("properties_panel.effects.already_applied");
       }
     }(e, r, t),
     tooltipType: Ib.TEXT,
@@ -678,7 +678,7 @@ function eZ({
 }) {
   let t = _$$G();
   let [i, a, s, o] = [useId(), useId(), useId(), useId()];
-  (e < 0 || e > 1) && x1("GlassEffectsSettings", "Light intensity value outside valid range", {
+  (e < 0 || e > 1) && logError("GlassEffectsSettings", "Light intensity value outside valid range", {
     component: "LightIntensityIndicator",
     intensity: e,
     expectedRange: "[0,1]",
@@ -800,7 +800,7 @@ function e0(e) {
       ...e,
       refractionIntensity: t / 100
     }),
-    label: _$$t("properties_panel.effects.glass.refraction"),
+    label: getI18nString("properties_panel.effects.glass.refraction"),
     min: 0,
     max: 100,
     step: 1
@@ -810,7 +810,7 @@ function e0(e) {
       ...e,
       refractionRadius: t
     }),
-    label: _$$t("properties_panel.effects.glass.depth"),
+    label: getI18nString("properties_panel.effects.glass.depth"),
     min: 1,
     max: 100,
     step: 1
@@ -820,7 +820,7 @@ function e0(e) {
       ...e,
       chromaticAberration: t / 100
     }),
-    label: _$$t("properties_panel.effects.glass.chromatic_aberration"),
+    label: getI18nString("properties_panel.effects.glass.chromatic_aberration"),
     min: 0,
     max: 100,
     step: 1
@@ -830,7 +830,7 @@ function e0(e) {
       ...e,
       radius: t
     }),
-    label: _$$t("properties_panel.effects.glass.frost"),
+    label: getI18nString("properties_panel.effects.glass.frost"),
     min: 0,
     max: 100,
     step: 1
@@ -863,9 +863,9 @@ function e0(e) {
   });
 }
 function e1(e) {
-  let t = _$$t("properties_panel.effects.glass.specular_angle");
+  let t = getI18nString("properties_panel.effects.glass.specular_angle");
   return jsx(Zo, {
-    label: _$$t("properties_panel.effects.glass.light"),
+    label: getI18nString("properties_panel.effects.glass.light"),
     input: jsxs("div", {
       className: "x78zum5 x1q0g3np x1rjybxy",
       children: [jsx(eq, {
@@ -906,7 +906,7 @@ function e2(e) {
     min: 0,
     max: 100
   }), []);
-  let i = _$$t("properties_panel.effects.glass.specular_intensity");
+  let i = getI18nString("properties_panel.effects.glass.specular_intensity");
   return jsx(_$$N, {
     "aria-label": i,
     "data-tooltip": i,
@@ -948,30 +948,30 @@ function e7(e) {
     onRadiusChange
   } = e;
   let r = jsx(yw, {
-    ariaLabel: _$$t("properties_panel.effects.texture.noise_size"),
+    ariaLabel: getI18nString("properties_panel.effects.texture.noise_size"),
     bigStep: e.bigNudgeAmount,
-    dataTooltip: _$$t("properties_panel.effects.texture.noise_size"),
+    dataTooltip: getI18nString("properties_panel.effects.texture.noise_size"),
     fullWidth: !0,
     icon: jsx(_$$m, {}),
     inputMax: ml,
     min: 0.01,
     onValueChange: onNoiseSizeChange,
-    rowLabel: _$$t("properties_panel.effects.texture.noise_size"),
+    rowLabel: getI18nString("properties_panel.effects.texture.noise_size"),
     sliderMax: ml,
     step: e.smallNudgeAmount,
     transformType: ir.EXPONENTIAL,
     value: e.effect.noiseSize?.x ?? 0
   });
   let a = jsx(yw, {
-    ariaLabel: _$$t("properties_panel.effects.texture.radius"),
+    ariaLabel: getI18nString("properties_panel.effects.texture.radius"),
     bigStep: e.bigNudgeAmount,
-    dataTooltip: _$$t("properties_panel.effects.texture.radius"),
+    dataTooltip: getI18nString("properties_panel.effects.texture.radius"),
     fullWidth: !0,
     icon: jsx(e6, {}),
     inputMax: aO,
     min: 0.01,
     onValueChange: onRadiusChange,
-    rowLabel: _$$t("properties_panel.effects.texture.radius"),
+    rowLabel: getI18nString("properties_panel.effects.texture.radius"),
     sliderMax: aO,
     step: e.smallNudgeAmount,
     transformType: ir.EXPONENTIAL,
@@ -988,11 +988,11 @@ function e8(e) {
     onRadiusChange
   } = e;
   let r = jsx(cS, {
-    label: _$$tx("properties_panel.effects.texture.noise_size"),
+    label: renderI18nText("properties_panel.effects.texture.noise_size"),
     input: jsx($j, {
       autoFocus: !0,
       bigNudgeAmount: e.bigNudgeAmount,
-      "data-tooltip": _$$t("properties_panel.effects.texture.noise_size"),
+      "data-tooltip": getI18nString("properties_panel.effects.texture.noise_size"),
       "data-tooltip-type": Ib.TEXT,
       dispatch: e.dispatch,
       inputClassName: ea,
@@ -1013,11 +1013,11 @@ function e8(e) {
     })
   });
   let a = jsx(cS, {
-    label: _$$tx("properties_panel.effects.texture.radius"),
+    label: renderI18nText("properties_panel.effects.texture.radius"),
     input: jsx($j, {
       autoFocus: !0,
       bigNudgeAmount: e.bigNudgeAmount,
-      "data-tooltip": _$$t("properties_panel.effects.texture.radius"),
+      "data-tooltip": getI18nString("properties_panel.effects.texture.radius"),
       "data-tooltip-type": Ib.TEXT,
       dispatch: e.dispatch,
       inputClassName: ea,
@@ -1086,7 +1086,7 @@ function e9(e) {
             e.onChange(i, zk.YES);
           },
           label: jsx(_$$J, {
-            children: _$$t("properties_panel.effects.texture.clip_to_shape")
+            children: getI18nString("properties_panel.effects.texture.clip_to_shape")
           })
         })
       })
@@ -1176,36 +1176,36 @@ function ts(e) {
     secondaryColorInput
   } = e;
   let l = jsx(yw, {
-    ariaLabel: _$$t("properties_panel.noise.noise_size"),
+    ariaLabel: getI18nString("properties_panel.noise.noise_size"),
     bigStep: e.bigNudgeAmount,
-    dataTooltip: _$$t("properties_panel.noise.noise_size"),
+    dataTooltip: getI18nString("properties_panel.noise.noise_size"),
     fullWidth: !0,
     icon: jsx(_$$m, {}),
     inputMax: ml,
     min: 0.01,
     onValueChange: onNoiseSizeChange,
-    rowLabel: _$$t("properties_panel.noise.noise_size"),
+    rowLabel: getI18nString("properties_panel.noise.noise_size"),
     sliderMax: ml,
     step: e.smallNudgeAmount,
     transformType: ir.EXPONENTIAL,
     value: e.effect.noiseSize?.x ?? 0
   });
   let d = jsx(iQ, {
-    ariaLabel: _$$t("properties_panel.effects.noise.density"),
-    dataTooltip: _$$t("properties_panel.effects.noise.density"),
+    ariaLabel: getI18nString("properties_panel.effects.noise.density"),
+    dataTooltip: getI18nString("properties_panel.effects.noise.density"),
     fullWidth: !0,
     icon: jsx(te, {}),
     onValueChange: onDensityChange,
-    rowLabel: _$$t("properties_panel.effects.noise.density"),
+    rowLabel: getI18nString("properties_panel.effects.noise.density"),
     value: e.effect.density ?? 0
   });
   let c = jsx(iQ, {
-    ariaLabel: _$$t("properties_panel.effects.noise.opacity"),
-    dataTooltip: _$$t("properties_panel.effects.noise.opacity"),
+    ariaLabel: getI18nString("properties_panel.effects.noise.opacity"),
+    dataTooltip: getI18nString("properties_panel.effects.noise.opacity"),
     fullWidth: !0,
     icon: jsx(_$$N2, {}),
     onValueChange: onOpacityChange,
-    rowLabel: _$$t("properties_panel.effects.noise.opacity"),
+    rowLabel: getI18nString("properties_panel.effects.noise.opacity"),
     value: e.effect.opacity ?? 0
   });
   return jsxs("div", {
@@ -1217,7 +1217,7 @@ function ts(e) {
         className: "ui3_effects_settings_picker--illustrationColorContainer--WVM8z",
         children: [(t || i) && jsx(I6, {
           ref: chitRowRef,
-          rowLabel: _$$t("properties_panel.effects.noise.color", {
+          rowLabel: getI18nString("properties_panel.effects.noise.color", {
             numColors: t ? 1 : 2
           }),
           input: primaryColorInput
@@ -1239,11 +1239,11 @@ function to(e) {
     chitRowRef
   } = e;
   let l = jsx(cS, {
-    label: _$$tx("properties_panel.noise.noise_size"),
+    label: renderI18nText("properties_panel.noise.noise_size"),
     input: jsx($j, {
       autoFocus: !0,
       bigNudgeAmount: e.bigNudgeAmount,
-      "data-tooltip": _$$t("properties_panel.noise.noise_size"),
+      "data-tooltip": getI18nString("properties_panel.noise.noise_size"),
       "data-tooltip-type": Ib.TEXT,
       dispatch: e.dispatch,
       inputClassName: ea,
@@ -1263,11 +1263,11 @@ function to(e) {
     })
   });
   let d = jsx(cS, {
-    label: _$$tx("properties_panel.effects.noise.density"),
+    label: renderI18nText("properties_panel.effects.noise.density"),
     input: jsx(w2, {
       autoFocus: !0,
       bigNudgeAmount: e.bigNudgeAmount,
-      "data-tooltip": _$$t("properties_panel.effects.noise.density"),
+      "data-tooltip": getI18nString("properties_panel.effects.noise.density"),
       "data-tooltip-type": Ib.TEXT,
       dispatch: e.dispatch,
       inputClassName: ea,
@@ -1284,11 +1284,11 @@ function to(e) {
     })
   });
   let c = jsx(cS, {
-    label: _$$tx("properties_panel.effects.noise.opacity"),
+    label: renderI18nText("properties_panel.effects.noise.opacity"),
     input: jsx(w2, {
       autoFocus: !0,
       bigNudgeAmount: e.bigNudgeAmount,
-      "data-tooltip": _$$t("properties_panel.effects.noise.opacity"),
+      "data-tooltip": getI18nString("properties_panel.effects.noise.opacity"),
       "data-tooltip-type": Ib.TEXT,
       dispatch: e.dispatch,
       inputClassName: ea,
@@ -1313,7 +1313,7 @@ function to(e) {
         className: "ui3_effects_settings_picker--colorContainer--Mmsr9",
         children: [(t || i) && jsx(cS, {
           ref: chitRowRef,
-          label: _$$tx("properties_panel.effects.noise.color", {
+          label: renderI18nText("properties_panel.effects.noise.color", {
             numColors: t ? 1 : 2
           }),
           input: primaryColorInput
@@ -1422,7 +1422,7 @@ function tl(e) {
         label: null,
         input: jsxs(bL, {
           legend: jsx(_$$q, {
-            children: _$$tx("properties_panel.noise.noise_type")
+            children: renderI18nText("properties_panel.noise.noise_type")
           }),
           value: e.effect.noiseType,
           onChange: i => {
@@ -1434,13 +1434,13 @@ function tl(e) {
             e.onChange(n, zk.YES);
           },
           children: [jsx(RT, {
-            label: _$$t("properties_panel.effects.noise.type.mono"),
+            label: getI18nString("properties_panel.effects.noise.type.mono"),
             value: "MONOTONE"
           }), jsx(RT, {
-            label: _$$t("properties_panel.effects.noise.type.duo"),
+            label: getI18nString("properties_panel.effects.noise.type.duo"),
             value: "DUOTONE"
           }), jsx(RT, {
-            label: _$$t("properties_panel.effects.noise.type.multi"),
+            label: getI18nString("properties_panel.effects.noise.type.multi"),
             value: "MULTITONE"
           })]
         })
@@ -1501,22 +1501,22 @@ function tp(e) {
   let c = jsxs(Fragment, {
     children: [jsx(yw, {
       ...d,
-      ariaLabel: _$$t("properties_panel.effects.x"),
-      dataTooltip: _$$t("properties_panel.effects.x"),
+      ariaLabel: getI18nString("properties_panel.effects.x"),
+      dataTooltip: getI18nString("properties_panel.effects.x"),
       icon: jsx("span", {
         className: es,
-        children: _$$tx("properties_panel.effects.x")
+        children: renderI18nText("properties_panel.effects.x")
       }),
       onValueChange: onXChange,
-      rowLabel: _$$t("fullscreen.properties_panel.effects.position"),
+      rowLabel: getI18nString("fullscreen.properties_panel.effects.position"),
       value: e.effect.offset.x
     }), jsx(yw, {
       ...d,
-      ariaLabel: _$$t("properties_panel.effects.y"),
-      dataTooltip: _$$t("properties_panel.effects.y"),
+      ariaLabel: getI18nString("properties_panel.effects.y"),
+      dataTooltip: getI18nString("properties_panel.effects.y"),
       icon: jsx("span", {
         className: es,
-        children: _$$tx("properties_panel.effects.y")
+        children: renderI18nText("properties_panel.effects.y")
       }),
       onValueChange: onYChange,
       rowLabel: null,
@@ -1524,21 +1524,21 @@ function tp(e) {
     })]
   });
   let u = jsx(yw, {
-    ariaLabel: _$$t("fullscreen.properties_panel.effects.blur"),
+    ariaLabel: getI18nString("fullscreen.properties_panel.effects.blur"),
     bigStep: e.bigNudgeAmount,
-    dataTooltip: _$$t("fullscreen.properties_panel.effects.blur"),
+    dataTooltip: getI18nString("fullscreen.properties_panel.effects.blur"),
     fullWidth: !0,
     icon: jsx(M, {}),
     inputMax: aO,
     min: 0,
     onValueChange: onRadiusChange,
-    rowLabel: _$$t("fullscreen.properties_panel.effects.blur"),
+    rowLabel: getI18nString("fullscreen.properties_panel.effects.blur"),
     sliderMax: aO,
     step: e.smallNudgeAmount,
     value: e.effect.radius || 0
   });
   let p = jsx(yw, {
-    ariaLabel: _$$t("fullscreen.properties_panel.effects.spread"),
+    ariaLabel: getI18nString("fullscreen.properties_panel.effects.spread"),
     bigStep: e.bigNudgeAmount,
     dataTooltip: spreadTooltipText,
     disabled: !e.selectionContainsOnlySpreadEligibleNodes,
@@ -1548,14 +1548,14 @@ function tp(e) {
     inputMin: -3e4,
     min: -300,
     onValueChange: onSpreadChange,
-    rowLabel: _$$t("fullscreen.properties_panel.effects.spread"),
+    rowLabel: getI18nString("fullscreen.properties_panel.effects.spread"),
     sliderMax: 300,
     step: e.smallNudgeAmount,
     value: e.effect.spread
   });
   let m = jsx(I6, {
     ref: chitRowRef,
-    rowLabel: _$$t("properties_panel.effects.color"),
+    rowLabel: getI18nString("properties_panel.effects.color"),
     input: renderColorInputInner()
   });
   return jsxs("div", {
@@ -1577,7 +1577,7 @@ function tm(e) {
   } = e;
   let d = jsxs(Fragment, {
     children: [jsx(cS, {
-      label: _$$tx("fullscreen.properties_panel.effects.position"),
+      label: renderI18nText("fullscreen.properties_panel.effects.position"),
       input: jsx(ed, {
         recordingKey: Pt(e, "xVar"),
         fieldName: "xVar",
@@ -1588,7 +1588,7 @@ function tm(e) {
           autoFocus: !0,
           bigNudgeAmount: e.bigNudgeAmount,
           className: ei,
-          "data-tooltip": _$$t("properties_panel.effects.x"),
+          "data-tooltip": getI18nString("properties_panel.effects.x"),
           "data-tooltip-type": Ib.TEXT,
           dispatch: e.dispatch,
           inputClassName: ea,
@@ -1601,7 +1601,7 @@ function tm(e) {
           value: e.effect.offset.x,
           children: jsx("span", {
             className: `${es}`,
-            children: _$$tx("properties_panel.effects.x")
+            children: renderI18nText("properties_panel.effects.x")
           })
         })
       })
@@ -1616,7 +1616,7 @@ function tm(e) {
         children: jsx(gq, {
           bigNudgeAmount: e.bigNudgeAmount,
           className: ei,
-          "data-tooltip": _$$t("properties_panel.effects.y"),
+          "data-tooltip": getI18nString("properties_panel.effects.y"),
           "data-tooltip-type": Ib.TEXT,
           dispatch: e.dispatch,
           inputClassName: ea,
@@ -1629,14 +1629,14 @@ function tm(e) {
           value: e.effect.offset.y,
           children: jsx("span", {
             className: es,
-            children: _$$tx("properties_panel.effects.y")
+            children: renderI18nText("properties_panel.effects.y")
           })
         })
       })
     })]
   });
   let c = jsx(cS, {
-    label: _$$tx("fullscreen.properties_panel.effects.blur"),
+    label: renderI18nText("fullscreen.properties_panel.effects.blur"),
     input: jsx(ed, {
       recordingKey: Pt(e, "radiusVar"),
       fieldName: "radiusVar",
@@ -1645,7 +1645,7 @@ function tm(e) {
       inputClassName: ei,
       children: jsx($j, {
         bigNudgeAmount: e.bigNudgeAmount,
-        "data-tooltip": _$$t("properties_panel.effects.blur_radius"),
+        "data-tooltip": getI18nString("properties_panel.effects.blur_radius"),
         "data-tooltip-type": Ib.TEXT,
         dispatch: e.dispatch,
         inputClassName: ea,
@@ -1667,7 +1667,7 @@ function tm(e) {
     })
   });
   let u = jsx(cS, {
-    label: _$$tx("fullscreen.properties_panel.effects.spread"),
+    label: renderI18nText("fullscreen.properties_panel.effects.spread"),
     input: jsx(ed, {
       recordingKey: Pt(e, "spreadVar"),
       fieldName: "spreadVar",
@@ -1697,7 +1697,7 @@ function tm(e) {
   });
   let p = jsx(cS, {
     ref: chitRowRef,
-    label: _$$tx("properties_panel.effects.color"),
+    label: renderI18nText("properties_panel.effects.color"),
     input: renderColorInputInner()
   });
   return jsxs("div", {
@@ -1753,8 +1753,8 @@ function th(e) {
     });
     t.stopPropagation();
   };
-  let g = _$$t("properties_panel.effects.spread");
-  e.selectionContainsOnlySpreadEligibleNodes || (g = e.framelikeWithoutFills ? _$$t("properties_panel.effects.spread_fills_warning") : e.framelikeWithoutClipping ? _$$t("properties_panel.effects.spread_clip_warning") : _$$t("properties_panel.effects.spread_rect_ellipse_warning"));
+  let g = getI18nString("properties_panel.effects.spread");
+  e.selectionContainsOnlySpreadEligibleNodes || (g = e.framelikeWithoutFills ? getI18nString("properties_panel.effects.spread_fills_warning") : e.framelikeWithoutClipping ? getI18nString("properties_panel.effects.spread_clip_warning") : getI18nString("properties_panel.effects.spread_rect_ellipse_warning"));
   let _ = "DROP_SHADOW" === e.effect.type && e.selectionContainsAnyKnockoutShadowEligibleNodes;
   let {
     showIllustrationSliderInputs
@@ -1822,7 +1822,7 @@ function th(e) {
         }), jsx("span", {
           className: "ui3_effects_settings_picker--colorVariableUnbindButton---TaIC",
           children: jsx(_$$K, {
-            "aria-label": _$$t("fullscreen.properties_panel.fill.detach_style"),
+            "aria-label": getI18nString("fullscreen.properties_panel.fill.detach_style"),
             onClick: h,
             children: jsx(_$$U, {})
           })
@@ -1856,7 +1856,7 @@ function th(e) {
           className: "ui3_effects_settings_picker--showBehindTransparentOption--bT-nE",
           children: jsx(_$$S, {
             label: jsx(_$$J, {
-              children: _$$tx("properties_panel.effects.show_behind_transparent_areas")
+              children: renderI18nText("properties_panel.effects.show_behind_transparent_areas")
             }),
             checked: e.effect.showShadowBehindNode,
             onChange: t => {
@@ -1904,7 +1904,7 @@ function tg(e) {
         className: "ui3_effects_settings_picker--effectTitle--uwti2",
         children: [jsx(eR, {
           allowedEffects: e.allowedEffects,
-          ariaLabel: _$$t("properties_panel.effects.effect_settings"),
+          ariaLabel: getI18nString("properties_panel.effects.effect_settings"),
           currentEffectType: e.effect.type,
           dispatch: e.dispatch,
           dropdownShown: e.dropdownShown,
@@ -1922,7 +1922,7 @@ function tg(e) {
       }), "GLASS" === e.effect.type && jsx(_$$E, {
         variant: "defaultFilled",
         size: "md",
-        children: _$$t("general.beta")
+        children: getI18nString("general.beta")
       })]
     }), e.showBlendModeOption && jsx(Rk, {
       blendMode: e.effect.blendMode,
@@ -1966,11 +1966,11 @@ function tA(e) {
   let i = getFeatureFlags().eu_fpl_migration_styles_picker_selects;
   let [a, s] = useState(e.effect.type);
   let o = (e, t) => {
-    e !== t && (("NOISE" === t || "NOISE" === e) && az.trackDefinedEvent("illustration.web_noise_effect_toggle", {
+    e !== t && (("NOISE" === t || "NOISE" === e) && analyticsEventManager.trackDefinedEvent("illustration.web_noise_effect_toggle", {
       changedToNoise: "NOISE" === t
-    }), ("GRAIN" === t || "GRAIN" === e) && az.trackDefinedEvent("illustration.web_texture_effect_toggle", {
+    }), ("GRAIN" === t || "GRAIN" === e) && analyticsEventManager.trackDefinedEvent("illustration.web_texture_effect_toggle", {
       changedToTexture: "GRAIN" === t
-    }), ("GLASS" === t || "GLASS" === e) && az.trackDefinedEvent("illustration.web_glass_effect_toggle", {
+    }), ("GLASS" === t || "GLASS" === e) && analyticsEventManager.trackDefinedEvent("illustration.web_glass_effect_toggle", {
       changedToGlass: "GLASS" === t
     }));
   };
@@ -2046,19 +2046,19 @@ let tC = "effects_panel--ui3EffectIconInvisible--R6Gby";
 let tk = e => {
   switch (e.type) {
     case "DROP_SHADOW":
-      return _$$t("fullscreen.properties_panel.effects.drop_shadow");
+      return getI18nString("fullscreen.properties_panel.effects.drop_shadow");
     case "INNER_SHADOW":
-      return _$$t("fullscreen.properties_panel.effects.inner_shadow");
+      return getI18nString("fullscreen.properties_panel.effects.inner_shadow");
     case "BACKGROUND_BLUR":
-      return _$$t("fullscreen.properties_panel.effects.background_blur");
+      return getI18nString("fullscreen.properties_panel.effects.background_blur");
     case "FOREGROUND_BLUR":
-      return _$$t("fullscreen.properties_panel.effects.layer_blur");
+      return getI18nString("fullscreen.properties_panel.effects.layer_blur");
     case "GRAIN":
-      return _$$t("fullscreen.properties_panel.effects.texture");
+      return getI18nString("fullscreen.properties_panel.effects.texture");
     case "NOISE":
-      return _$$t("fullscreen.properties_panel.effects.noise");
+      return getI18nString("fullscreen.properties_panel.effects.noise");
     case "GLASS":
-      return _$$t("fullscreen.properties_panel.effects.glass");
+      return getI18nString("fullscreen.properties_panel.effects.glass");
     default:
       return "Effect";
   }
@@ -2076,34 +2076,34 @@ let tP = e => {
   switch (e.type) {
     case "DROP_SHADOW":
     case "INNER_SHADOW":
-      t.push(`${_$$t("properties_panel.effects.x")} ${tN.format(e.offset.x)}`);
-      t.push(`${_$$t("properties_panel.effects.y")} ${tN.format(e.offset.y)}`);
-      t.push(`${_$$t("properties_panel.effects.b")} ${tN.format(e.radius)}`);
-      t.push(`${_$$t("properties_panel.effects.s")} ${tN.format(e.spread)}`);
+      t.push(`${getI18nString("properties_panel.effects.x")} ${tN.format(e.offset.x)}`);
+      t.push(`${getI18nString("properties_panel.effects.y")} ${tN.format(e.offset.y)}`);
+      t.push(`${getI18nString("properties_panel.effects.b")} ${tN.format(e.radius)}`);
+      t.push(`${getI18nString("properties_panel.effects.s")} ${tN.format(e.spread)}`);
       break;
     case "BACKGROUND_BLUR":
     case "FOREGROUND_BLUR":
-      e.blurOpType && "NORMAL" !== e.blurOpType ? (t.push(_$$t("properties_panel.effects.blur.type.progressive")), t.push(`${tN.format(e.startRadius)} \u2192 ${tN.format(e.radius)}`)) : (t.push(_$$t("properties_panel.effects.blur.type.normal")), t.push(tN.format(e.radius)));
+      e.blurOpType && "NORMAL" !== e.blurOpType ? (t.push(getI18nString("properties_panel.effects.blur.type.progressive")), t.push(`${tN.format(e.startRadius)} \u2192 ${tN.format(e.radius)}`)) : (t.push(getI18nString("properties_panel.effects.blur.type.normal")), t.push(tN.format(e.radius)));
       break;
     case "GRAIN":
-      t.push(`${_$$t("properties_panel.effects.s_size")} ${tN.format(e.noiseSize?.x || 0)}`);
-      t.push(`${_$$t("properties_panel.effects.r")} ${tN.format(e.radius)}`);
+      t.push(`${getI18nString("properties_panel.effects.s_size")} ${tN.format(e.noiseSize?.x || 0)}`);
+      t.push(`${getI18nString("properties_panel.effects.r")} ${tN.format(e.radius)}`);
       break;
     case "NOISE":
       t.push(`${(e => {
         switch (e) {
           case "MONOTONE":
-            return _$$t("properties_panel.effects.noise.type.mono");
+            return getI18nString("properties_panel.effects.noise.type.mono");
           case "DUOTONE":
-            return _$$t("properties_panel.effects.noise.type.duo");
+            return getI18nString("properties_panel.effects.noise.type.duo");
           case "MULTITONE":
-            return _$$t("properties_panel.effects.noise.type.multi");
+            return getI18nString("properties_panel.effects.noise.type.multi");
           default:
             return "";
         }
       })(e.noiseType)}`);
-      t.push(`${_$$t("properties_panel.effects.s_size")} ${tN.format(e.noiseSize?.x || 0)}`);
-      t.push(`${_$$t("properties_panel.effects.d")} ${tR.format(e.density)}`);
+      t.push(`${getI18nString("properties_panel.effects.s_size")} ${tN.format(e.noiseSize?.x || 0)}`);
+      t.push(`${getI18nString("properties_panel.effects.d")} ${tR.format(e.density)}`);
       break;
     default:
       t.push("Effect values");
@@ -2222,22 +2222,22 @@ class tU extends PureComponent {
     super(...arguments);
     this.addConfiguredEffect = e => {
       let t = _W(this.props.propertyList, []);
-      zl.set(tD, t.length);
+      atomStoreManager.set(tD, t.length);
       let i = UF(e, e.type);
       this.props.onChange(t.concat([{
         ...e,
         ...i
       }]));
       Y5.deselectProperty();
-      sx("editor-effects-panel-add");
+      trackEventAnalytics("editor-effects-panel-add");
       a2("effects");
-      "NOISE" === e.type ? az.trackDefinedEvent("illustration.web_noise_effect_toggle", {
+      "NOISE" === e.type ? analyticsEventManager.trackDefinedEvent("illustration.web_noise_effect_toggle", {
         changedToNoise: !0,
         productType: this.props.productType
-      }) : "GRAIN" === e.type ? az.trackDefinedEvent("illustration.web_texture_effect_toggle", {
+      }) : "GRAIN" === e.type ? analyticsEventManager.trackDefinedEvent("illustration.web_texture_effect_toggle", {
         changedToTexture: !0,
         productType: this.props.productType
-      }) : "GLASS" === e.type && az.trackDefinedEvent("illustration.web_glass_effect_toggle", {
+      }) : "GLASS" === e.type && analyticsEventManager.trackDefinedEvent("illustration.web_glass_effect_toggle", {
         changedToGlass: !0,
         productType: this.props.productType
       });
@@ -2253,7 +2253,7 @@ class tU extends PureComponent {
       this.props.dispatch(XE());
       this.props.dispatch(Uv());
       Y5.deselectProperty();
-      sx("editor-effects-panel-remove");
+      trackEventAnalytics("editor-effects-panel-remove");
       a2("effects");
     };
     this.renderProperty = (e, t, i, r, a, s, o, l, d) => jsx(tV, {
@@ -2275,7 +2275,7 @@ class tU extends PureComponent {
         s(t, i);
       },
       onMouseDown: (...e) => {
-        sx("editor-effects-panel-dropdown-open");
+        trackEventAnalytics("editor-effects-panel-dropdown-open");
         o(...e);
       },
       onMouseMove: l,
@@ -2303,13 +2303,13 @@ class tU extends PureComponent {
       }),
       onChange: this.props.onChange,
       openStylePickerToLeft: this.props.isUI3,
-      overrideAddPropertyTooltip: this.props.isUI3 ? _$$t("fullscreen.properties_panel.section_effects.tooltip_addEffect") : void 0,
+      overrideAddPropertyTooltip: this.props.isUI3 ? getI18nString("fullscreen.properties_panel.section_effects.tooltip_addEffect") : void 0,
       pickerShown: this.props.pickerShown,
       propertyList: this.props.propertyList,
       recordingKey: this.props.recordingKey,
       renderProperty: this.renderProperty,
       selectedPropertyType: this.props.selectedPropertyType,
-      title: _$$t("properties_panel.effects.effects"),
+      title: getI18nString("properties_panel.effects.effects"),
       ...yT(this.props)
     });
   }
@@ -2327,13 +2327,13 @@ class tV extends PureComponent {
       this.props.onChange(e, t);
     };
     this.logEffectChange = (e, t) => {
-      e !== t && (("NOISE" === t || "NOISE" === e) && az.trackDefinedEvent("illustration.web_noise_effect_toggle", {
+      e !== t && (("NOISE" === t || "NOISE" === e) && analyticsEventManager.trackDefinedEvent("illustration.web_noise_effect_toggle", {
         changedToNoise: "NOISE" === t,
         productType: this.props.productType
-      }), ("GRAIN" === t || "GRAIN" === e) && az.trackDefinedEvent("illustration.web_texture_effect_toggle", {
+      }), ("GRAIN" === t || "GRAIN" === e) && analyticsEventManager.trackDefinedEvent("illustration.web_texture_effect_toggle", {
         changedToTexture: "GRAIN" === t,
         productType: this.props.productType
-      }), ("GLASS" === t || "GLASS" === e) && az.trackDefinedEvent("illustration.web_glass_effect_toggle", {
+      }), ("GLASS" === t || "GLASS" === e) && analyticsEventManager.trackDefinedEvent("illustration.web_glass_effect_toggle", {
         changedToGlass: "GLASS" === t,
         productType: this.props.productType
       }));
@@ -2439,7 +2439,7 @@ class tV extends PureComponent {
       onClick: this.toggleSettings,
       recordingKey: Pt(this.props, "toggleSettings"),
       "aria-expanded": !!r,
-      "aria-label": _$$t("properties_panel.effects.effect_settings"),
+      "aria-label": getI18nString("properties_panel.effects.effect_settings"),
       children: jsx("span", {
         className: this.props.effect.visible ? "" : tC,
         children: vG(this.props.effect)
@@ -2448,7 +2448,7 @@ class tV extends PureComponent {
     let _ = jsxs(Fragment, {
       children: [jsx(eR, {
         allowedEffects: this.props.allowedEffects,
-        ariaLabel: _$$t("properties_panel.effects.effect_settings"),
+        ariaLabel: getI18nString("properties_panel.effects.effect_settings"),
         chevronClassName: "effects_panel--chevron--YSS-g",
         className: "effects_panel--select--7QYY9",
         currentEffectType: this.props.effect.type,
@@ -2476,10 +2476,10 @@ class tV extends PureComponent {
       children: jsx(_$$K, {
         recordingKey: Pt(this.props, "removeButton"),
         onClick: this.props.onRemoveEffect,
-        "aria-label": _$$t("fullscreen.properties_panel.tooltip_remove"),
+        "aria-label": getI18nString("fullscreen.properties_panel.tooltip_remove"),
         htmlAttributes: {
           onMouseDown: this.stopPropagation,
-          "data-tooltip": _$$t("fullscreen.properties_panel.tooltip_remove"),
+          "data-tooltip": getI18nString("fullscreen.properties_panel.tooltip_remove"),
           "data-tooltip-type": Ib.TEXT
         },
         children: jsx(_$$O, {})

@@ -10,7 +10,7 @@ import { B as _$$B } from "../905/714743";
 import { NU } from "../figma_app/204891";
 import { y as _$$y } from "../905/171275";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { E as _$$E } from "../905/984674";
 import { k as _$$k2 } from "../figma_app/618031";
@@ -52,22 +52,22 @@ export let $$z2 = Ju(function (e) {
   let t = useDispatch();
   let a = _$$k2();
   let s = e.orgUserIds.length;
-  let r = _$$t("org_settings.remove_user_modal.title.users_only_text", {
+  let r = getI18nString("org_settings.remove_user_modal.title.users_only_text", {
     userCount: s
   });
-  let l = _$$t("org_settings.remove_user_modal.button");
-  let d = getFeatureFlags().ext_figma_apps ? _$$t("org_settings.remove_user_modal.warning_no_username_text_v2", {
+  let l = getI18nString("org_settings.remove_user_modal.button");
+  let d = getFeatureFlags().ext_figma_apps ? getI18nString("org_settings.remove_user_modal.warning_no_username_text_v2", {
     userCount: s,
     orgName: e.org.name
-  }) : _$$t("org_settings.remove_user_modal.warning_no_username_text", {
+  }) : getI18nString("org_settings.remove_user_modal.warning_no_username_text", {
     userCount: s,
     orgName: e.org.name
   });
-  let c = tx("org_settings.remove_user_modal.information_text", {
+  let c = renderI18nText("org_settings.remove_user_modal.information_text", {
     userCount: s,
     sharedProjects: jsx("span", {
       className: _$$s.fontSemiBold.$,
-      children: tx("org_settings.remove_user_modal.unassigned_drafts")
+      children: renderI18nText("org_settings.remove_user_modal.unassigned_drafts")
     })
   });
   return jsx(fu, {
@@ -98,7 +98,7 @@ export let $$z2 = Ju(function (e) {
       disableClickOutsideToHide: !0,
       buttonText: l,
       title: r,
-      checkboxText: _$$t("org_settings.remove_user_modal.confirmation_checkbox_text"),
+      checkboxText: getI18nString("org_settings.remove_user_modal.confirmation_checkbox_text"),
       makeButtonAppearNegative: !0,
       children: jsxs("div", {
         children: [jsx("p", {
@@ -110,7 +110,7 @@ export let $$z2 = Ju(function (e) {
         }), a ? jsx("p", {
           className: F,
           children: jsx(_$$E, {
-            children: _$$t("org_settings.remove_user_modal.any_available_seats_free_up", {
+            children: getI18nString("org_settings.remove_user_modal.any_available_seats_free_up", {
               userCount: s
             })
           })
@@ -123,45 +123,45 @@ function V(e) {
   let t = useDispatch();
   let a = _$$q(Wq, !0);
   function s(e, t) {
-    return 1 === e ? t ? tx("confirm_account_change.upgrade.all_licenses.description_p1.singular", {
+    return 1 === e ? t ? renderI18nText("confirm_account_change.upgrade.all_licenses.description_p1.singular", {
       userName: t,
       seatType: jsx("span", {
         className: _$$s.fontSemiBold.$,
-        children: tx("confirm_account_change.seat_type.full_seat")
+        children: renderI18nText("confirm_account_change.seat_type.full_seat")
       })
-    }) : tx("confirm_account_change.upgrade.all_licenses.description_p1.singular.no_username", {
+    }) : renderI18nText("confirm_account_change.upgrade.all_licenses.description_p1.singular.no_username", {
       seatType: jsx("span", {
         className: _$$s.fontSemiBold.$,
-        children: tx("confirm_account_change.seat_type.full_seat")
+        children: renderI18nText("confirm_account_change.seat_type.full_seat")
       })
-    }) : tx("confirm_account_change.upgrade.all_licenses.description_p1.plural", {
+    }) : renderI18nText("confirm_account_change.upgrade.all_licenses.description_p1.plural", {
       numUsers: e,
       seatType: jsx("span", {
         className: _$$s.fontSemiBold.$,
-        children: tx("confirm_account_change.seat_type.full_seat")
+        children: renderI18nText("confirm_account_change.seat_type.full_seat")
       })
     });
   }
   function o(e, t) {
-    return 1 === e ? t ? tx("confirm_account_change.downgrade.all_licenses.description_p1.singular", {
+    return 1 === e ? t ? renderI18nText("confirm_account_change.downgrade.all_licenses.description_p1.singular", {
       userName: jsx("span", {
         className: _$$s.fontSemiBold.$,
         children: t
       }),
       viewerRestricted: jsx("span", {
         className: _$$s.fontSemiBold.$,
-        children: tx("confirm_account_change.seat_type.viewer_restricted")
+        children: renderI18nText("confirm_account_change.seat_type.viewer_restricted")
       })
-    }) : tx("confirm_account_change.downgrade.all_licenses.description_p1.singular.no_username", {
+    }) : renderI18nText("confirm_account_change.downgrade.all_licenses.description_p1.singular.no_username", {
       viewerRestricted: jsx("span", {
         className: _$$s.fontSemiBold.$,
-        children: tx("confirm_account_change.seat_type.viewer_restricted")
+        children: renderI18nText("confirm_account_change.seat_type.viewer_restricted")
       })
-    }) : tx("confirm_account_change.downgrade.all_licenses.description_p1.plural", {
+    }) : renderI18nText("confirm_account_change.downgrade.all_licenses.description_p1.plural", {
       numUsers: e,
       viewerRestricted: jsx("span", {
         className: _$$s.fontSemiBold.$,
-        children: tx("confirm_account_change.seat_type.viewer_restricted")
+        children: renderI18nText("confirm_account_change.seat_type.viewer_restricted")
       })
     });
   }
@@ -174,7 +174,7 @@ function V(e) {
         return jsxs(Fragment, {
           children: [s(a, void 0), jsx("span", {
             className: _$$s.ml2.$,
-            children: tx("confirm_account_change.upgrade.design.description_p2")
+            children: renderI18nText("confirm_account_change.upgrade.design.description_p2")
           }), jsxs("ul", {
             className: _$$s.mt8.$,
             children: [jsxs("li", {
@@ -182,19 +182,19 @@ function V(e) {
               children: [jsx(_$$B, {
                 className: _$$s.colorIcon.mr8.$,
                 svg: _$$A
-              }), tx("confirm_account_change.generic.design.edit_share_or_create")]
+              }), renderI18nText("confirm_account_change.generic.design.edit_share_or_create")]
             }), jsxs("li", {
               className: _$$s.flex.ml2.mt8.$,
               children: [jsx(_$$B, {
                 className: _$$s.colorIcon.mr8.$,
                 svg: _$$A
-              }), tx("confirm_account_change.generic.design.give_access_to_drafts")]
+              }), renderI18nText("confirm_account_change.generic.design.give_access_to_drafts")]
             }), jsxs("li", {
               className: _$$s.flex.ml2.mt8.$,
               children: [jsx(_$$B, {
                 className: _$$s.colorIcon.mr8.$,
                 svg: _$$A
-              }), tx("confirm_account_change.generic.design.access_all_templates_and_libraries")]
+              }), renderI18nText("confirm_account_change.generic.design.access_all_templates_and_libraries")]
             }), jsxs("li", {
               className: _$$s.flex.ml2.mt8.$,
               children: [jsx(_$$B, {
@@ -202,13 +202,13 @@ function V(e) {
                 svg: _$$A
               }), jsx("span", {
                 className: _$$s.mr4.$,
-                children: tx("confirm_account_change.generic.design.free_dev_mode_access")
+                children: renderI18nText("confirm_account_change.generic.design.free_dev_mode_access")
               }), jsx("a", {
                 className: q,
                 target: "_blank",
                 rel: "noopener",
                 href: "https://help.figma.com/hc/articles/19813618057623",
-                children: tx("confirm_account_change.generic.design.free_dev_mode_access.learn_more")
+                children: renderI18nText("confirm_account_change.generic.design.free_dev_mode_access.learn_more")
               })]
             })]
           })]
@@ -217,7 +217,7 @@ function V(e) {
         return jsxs(Fragment, {
           children: [s(a, void 0), jsx("span", {
             className: _$$s.ml2.$,
-            children: tx("confirm_account_change.upgrade.design.description_p2")
+            children: renderI18nText("confirm_account_change.upgrade.design.description_p2")
           }), jsxs("ul", {
             className: _$$s.mt8.$,
             children: [jsxs("li", {
@@ -225,29 +225,29 @@ function V(e) {
               children: [jsx(_$$B, {
                 className: _$$s.colorIcon.mr8.$,
                 svg: _$$A
-              }), tx("confirm_account_change.generic.figjam.edit_share_or_create")]
+              }), renderI18nText("confirm_account_change.generic.figjam.edit_share_or_create")]
             }), jsxs("li", {
               className: _$$s.flex.ml2.mt8.$,
               children: [jsx(_$$B, {
                 className: _$$s.colorIcon.mr8.$,
                 svg: _$$A
-              }), tx("confirm_account_change.generic.figjam.give_access_to_drafts")]
+              }), renderI18nText("confirm_account_change.generic.figjam.give_access_to_drafts")]
             }), jsxs("li", {
               className: _$$s.flex.ml2.mt8.$,
               children: [jsx(_$$B, {
                 className: _$$s.colorIcon.mr8.$,
                 svg: _$$A
-              }), tx("confirm_account_change.generic.figjam.access_all_templates_and_libraries")]
+              }), renderI18nText("confirm_account_change.generic.figjam.access_all_templates_and_libraries")]
             })]
           })]
         });
       case ud.DEV_MODE:
         let d;
-        d = 1 === a ? tx("confirm_account_change.upgrade.dev_mode.another_option.singular.no_username") : tx("confirm_account_change.upgrade.dev_mode.another_option.plural");
+        d = 1 === a ? renderI18nText("confirm_account_change.upgrade.dev_mode.another_option.singular.no_username") : renderI18nText("confirm_account_change.upgrade.dev_mode.another_option.plural");
         return jsxs(Fragment, {
           children: [s(a, i), jsx("span", {
             className: _$$s.ml2.$,
-            children: tx("confirm_account_change.upgrade.dev_mode.description_p2")
+            children: renderI18nText("confirm_account_change.upgrade.dev_mode.description_p2")
           }), jsxs("ul", {
             className: _$$s.mt8.$,
             children: [jsxs("li", {
@@ -255,19 +255,19 @@ function V(e) {
               children: [jsx(_$$B, {
                 className: _$$s.colorIcon.mr8.$,
                 svg: _$$A
-              }), tx("confirm_account_change.generic.dev_mode.advanced_inspect")]
+              }), renderI18nText("confirm_account_change.generic.dev_mode.advanced_inspect")]
             }), jsxs("li", {
               className: _$$s.flex.ml2.mt8.$,
               children: [jsx(_$$B, {
                 className: _$$s.colorIcon.mr8.$,
                 svg: _$$A
-              }), tx("confirm_account_change.generic.dev_mode.integrations")]
+              }), renderI18nText("confirm_account_change.generic.dev_mode.integrations")]
             }), jsxs("li", {
               className: _$$s.flex.ml2.mt8.$,
               children: [jsx(_$$B, {
                 className: _$$s.colorIcon.mr8.$,
                 svg: _$$A
-              }), tx("confirm_account_change.generic.dev_mode.annotations")]
+              }), renderI18nText("confirm_account_change.generic.dev_mode.annotations")]
             })]
           }), jsxs("div", {
             className: _$$s.flex.mt32.mb8.py8.px4.colorBgSecondary.$,
@@ -281,7 +281,7 @@ function V(e) {
                 target: "_blank",
                 rel: "noopener",
                 href: "https://help.figma.com/hc/articles/19813618057623",
-                children: tx("confirm_account_change.generic.design.free_dev_mode_access.learn_more")
+                children: renderI18nText("confirm_account_change.generic.design.free_dev_mode_access.learn_more")
               })]
             })]
           })]
@@ -293,7 +293,7 @@ function V(e) {
         return jsxs(Fragment, {
           children: [o(a, void 0), jsx("span", {
             className: _$$s.ml2.$,
-            children: tx("confirm_account_change.downgrade.design.description_p2")
+            children: renderI18nText("confirm_account_change.downgrade.design.description_p2")
           }), jsxs("ul", {
             className: _$$s.mt8.$,
             children: [jsxs("li", {
@@ -301,25 +301,25 @@ function V(e) {
               children: [jsx(_$$B, {
                 className: _$$s.colorIconDanger.mr8.$,
                 svg: _$$A2
-              }), tx("confirm_account_change.generic.design.edit_share_or_create")]
+              }), renderI18nText("confirm_account_change.generic.design.edit_share_or_create")]
             }), jsxs("li", {
               className: _$$s.flex.ml2.mt8.$,
               children: [jsx(_$$B, {
                 className: _$$s.colorIconDanger.mr8.$,
                 svg: _$$A2
-              }), tx("confirm_account_change.generic.design.give_access_to_drafts")]
+              }), renderI18nText("confirm_account_change.generic.design.give_access_to_drafts")]
             }), jsxs("li", {
               className: _$$s.flex.ml2.mt8.$,
               children: [jsx(_$$B, {
                 className: _$$s.colorIconDanger.mr8.$,
                 svg: _$$A2
-              }), tx("confirm_account_change.generic.design.access_all_templates_and_libraries")]
+              }), renderI18nText("confirm_account_change.generic.design.access_all_templates_and_libraries")]
             }), jsxs("li", {
               className: _$$s.flex.ml2.mt8.$,
               children: [jsx(_$$B, {
                 className: _$$s.colorIconDanger.mr8.$,
                 svg: _$$A2
-              }), tx("confirm_account_change.downgrade.design.give_access_to_drafts")]
+              }), renderI18nText("confirm_account_change.downgrade.design.give_access_to_drafts")]
             }), jsxs("li", {
               className: _$$s.flex.ml2.mt8.$,
               children: [jsx(_$$B, {
@@ -327,13 +327,13 @@ function V(e) {
                 svg: _$$A2
               }), jsx("span", {
                 className: _$$s.mr4.$,
-                children: tx("confirm_account_change.generic.design.free_dev_mode_access")
+                children: renderI18nText("confirm_account_change.generic.design.free_dev_mode_access")
               }), jsx("a", {
                 className: q,
                 target: "_blank",
                 rel: "noopener",
                 href: "https://help.figma.com/hc/articles/19813618057623",
-                children: tx("confirm_account_change.generic.design.free_dev_mode_access.learn_more")
+                children: renderI18nText("confirm_account_change.generic.design.free_dev_mode_access.learn_more")
               })]
             })]
           })]
@@ -342,7 +342,7 @@ function V(e) {
         return jsxs(Fragment, {
           children: [o(a, void 0), jsx("span", {
             className: _$$s.ml2.$,
-            children: tx("confirm_account_change.downgrade.design.description_p2")
+            children: renderI18nText("confirm_account_change.downgrade.design.description_p2")
           }), jsxs("ul", {
             className: _$$s.mt8.$,
             children: [jsxs("li", {
@@ -350,25 +350,25 @@ function V(e) {
               children: [jsx(_$$B, {
                 className: _$$s.colorIconDanger.mr8.$,
                 svg: _$$A2
-              }), tx("confirm_account_change.generic.figjam.edit_share_or_create")]
+              }), renderI18nText("confirm_account_change.generic.figjam.edit_share_or_create")]
             }), jsxs("li", {
               className: _$$s.flex.ml2.mt8.$,
               children: [jsx(_$$B, {
                 className: _$$s.colorIconDanger.mr8.$,
                 svg: _$$A2
-              }), tx("confirm_account_change.generic.figjam.give_access_to_drafts")]
+              }), renderI18nText("confirm_account_change.generic.figjam.give_access_to_drafts")]
             }), jsxs("li", {
               className: _$$s.flex.ml2.mt8.$,
               children: [jsx(_$$B, {
                 className: _$$s.colorIconDanger.mr8.$,
                 svg: _$$A2
-              }), tx("confirm_account_change.generic.figjam.access_all_templates_and_libraries")]
+              }), renderI18nText("confirm_account_change.generic.figjam.access_all_templates_and_libraries")]
             }), jsxs("li", {
               className: _$$s.flex.ml2.mt8.$,
               children: [jsx(_$$B, {
                 className: _$$s.colorIconDanger.mr8.$,
                 svg: _$$A2
-              }), tx("confirm_account_change.downgrade.design.give_access_to_drafts")]
+              }), renderI18nText("confirm_account_change.downgrade.design.give_access_to_drafts")]
             })]
           })]
         });
@@ -376,7 +376,7 @@ function V(e) {
         return jsxs(Fragment, {
           children: [o(a, void 0), jsx("span", {
             className: _$$s.ml2.$,
-            children: tx("confirm_account_change.downgrade.dev_mode.description_p2")
+            children: renderI18nText("confirm_account_change.downgrade.dev_mode.description_p2")
           }), jsxs("ul", {
             className: _$$s.mt8.$,
             children: [jsxs("li", {
@@ -384,19 +384,19 @@ function V(e) {
               children: [jsx(_$$B, {
                 className: _$$s.colorIconDanger.mr8.$,
                 svg: _$$A2
-              }), tx("confirm_account_change.generic.dev_mode.advanced_inspect")]
+              }), renderI18nText("confirm_account_change.generic.dev_mode.advanced_inspect")]
             }), jsxs("li", {
               className: _$$s.flex.ml2.mt8.$,
               children: [jsx(_$$B, {
                 className: _$$s.colorIconDanger.mr8.$,
                 svg: _$$A2
-              }), tx("confirm_account_change.generic.dev_mode.integrations")]
+              }), renderI18nText("confirm_account_change.generic.dev_mode.integrations")]
             }), jsxs("li", {
               className: _$$s.flex.ml2.mt8.$,
               children: [jsx(_$$B, {
                 className: _$$s.colorIconDanger.mr8.$,
                 svg: _$$A2
-              }), tx("confirm_account_change.generic.dev_mode.annotations")]
+              }), renderI18nText("confirm_account_change.generic.dev_mode.annotations")]
             })]
           })]
         });
@@ -413,27 +413,27 @@ function V(e) {
       numUsers: d
     },
     children: jsx(yX, {
-      confirmText: c ? _$$t("confirm_account_change.grant_edit_access_confirm_text") : _$$t("confirm_account_change.remove_edit_access_confirm_text"),
+      confirmText: c ? getI18nString("confirm_account_change.grant_edit_access_confirm_text") : getI18nString("confirm_account_change.remove_edit_access_confirm_text"),
       confirmationTitle: function (e, t, a) {
         if (e) switch (t) {
           case ud.DESIGN:
             return jsx("span", {
               className: U,
-              children: tx("confirm_account_change.grant_figma_design_access_title.seat_rename", {
+              children: renderI18nText("confirm_account_change.grant_figma_design_access_title.seat_rename", {
                 numUsers: a
               })
             });
           case ud.FIGJAM:
             return jsx("span", {
               className: U,
-              children: tx("confirm_account_change.grant_figjam_access_title.seat_rename", {
+              children: renderI18nText("confirm_account_change.grant_figjam_access_title.seat_rename", {
                 numUsers: a
               })
             });
           case ud.DEV_MODE:
             return jsx("span", {
               className: U,
-              children: tx("confirm_account_change.upgrade.dev_mode.title", {
+              children: renderI18nText("confirm_account_change.upgrade.dev_mode.title", {
                 numUsers: a
               })
             });
@@ -443,21 +443,21 @@ function V(e) {
           case ud.DESIGN:
             return jsx("span", {
               className: U,
-              children: tx("confirm_account_change.remove_figma_design_access_title.seat_rename", {
+              children: renderI18nText("confirm_account_change.remove_figma_design_access_title.seat_rename", {
                 numUsers: a
               })
             });
           case ud.FIGJAM:
             return jsx("span", {
               className: U,
-              children: tx("confirm_account_change.remove_figjam_access_title.seat_rename", {
+              children: renderI18nText("confirm_account_change.remove_figjam_access_title.seat_rename", {
                 numUsers: a
               })
             });
           case ud.DEV_MODE:
             return jsx("span", {
               className: U,
-              children: tx("confirm_account_change.remove_dev_mode_access_title", {
+              children: renderI18nText("confirm_account_change.remove_dev_mode_access_title", {
                 numUsers: a
               })
             });
@@ -485,7 +485,7 @@ function V(e) {
             params: a,
             successCallback: () => {
               t(_$$F.enqueue({
-                message: _$$t("confirm_account_change.account_type_successfully_updated.seat_rename", {
+                message: getI18nString("confirm_account_change.account_type_successfully_updated.seat_rename", {
                   numUsers: e.orgUserIds.length
                 }),
                 type: "paid-status-changed"
@@ -517,8 +517,8 @@ let $$W1 = Ju(function (e) {
 let $$H3 = Ju(function (e) {
   let t = useDispatch();
   return jsx(yX, {
-    confirmationTitle: _$$t("confirm_billing_group_change.title"),
-    confirmText: _$$t("confirm_billing_group_change.confirm_button"),
+    confirmationTitle: getI18nString("confirm_billing_group_change.title"),
+    confirmText: getI18nString("confirm_billing_group_change.confirm_button"),
     onConfirm: () => {
       let a;
       a = e.newLicenseGroup ? {
@@ -535,7 +535,7 @@ let $$H3 = Ju(function (e) {
         successCallback: () => {
           let a = e.orgUserIds.length;
           t(_$$F.enqueue({
-            message: _$$t("confirm_billing_group_change.success_message", {
+            message: getI18nString("confirm_billing_group_change.success_message", {
               numUsers: a
             }),
             type: "license-group-changed"
@@ -552,19 +552,19 @@ let $$H3 = Ju(function (e) {
       let t = e.orgUserIds.length;
       let a = _$$e(e.newLicenseGroup?.admin_users_metadata);
       let s = !!e.newLicenseGroup?.is_orphaned;
-      return !e.isCurrentUserOrgAdmin && e.newLicenseGroup ? tx("confirm_workspace_change.confirmation_description_no_username", {
+      return !e.isCurrentUserOrgAdmin && e.newLicenseGroup ? renderI18nText("confirm_workspace_change.confirmation_description_no_username", {
         numUsers: t,
         workspaceName: jsx("span", {
           className: U,
           children: e.newLicenseGroup.name
         })
-      }) : !e.newLicenseGroup || s ? tx("confirm_workspace_change.confirmation_description_with_organization_admin_warning_no_username", {
+      }) : !e.newLicenseGroup || s ? renderI18nText("confirm_workspace_change.confirmation_description_with_organization_admin_warning_no_username", {
         numUsers: t,
         workspaceName: jsx("span", {
           className: U,
-          children: e.newLicenseGroup ? e.newLicenseGroup.name : _$$t("confirm_workspace_change.unassigned")
+          children: e.newLicenseGroup ? e.newLicenseGroup.name : getI18nString("confirm_workspace_change.unassigned")
         })
-      }) : tx("confirm_billing_group_change.confirmation_description_with_billing_group_admin_warning_no_username", {
+      }) : renderI18nText("confirm_billing_group_change.confirmation_description_with_billing_group_admin_warning_no_username", {
         numUsers: t,
         billingGroupName: jsx("span", {
           className: U,
@@ -596,7 +596,7 @@ let $$Y0 = Ju(function (e) {
     }) => {
       x(e.meta);
     }).catch(e => {
-      let t = e?.data?.message || _$$t("org_join_request.generic_fetch_error");
+      let t = e?.data?.message || getI18nString("org_join_request.generic_fetch_error");
       l(_$$F.enqueue({
         message: t,
         type: "org-join-request-get-error",
@@ -612,28 +612,28 @@ let $$Y0 = Ju(function (e) {
   if (o.inviter_user) switch (o.resource_type) {
     case "file":
     case "file_repo":
-      E = f ? tx("org_join_request.description_view_file", {
+      E = f ? renderI18nText("org_join_request.description_view_file", {
         inviterName: o.inviter_user.handle,
         resourceName: o.resource_name
-      }) : tx("org_join_request.description_edit_file", {
+      }) : renderI18nText("org_join_request.description_edit_file", {
         inviterName: o.inviter_user.handle,
         resourceName: o.resource_name
       });
       break;
     case "folder":
-      E = f ? tx("org_join_request.description_view_folder", {
+      E = f ? renderI18nText("org_join_request.description_view_folder", {
         inviterName: o.inviter_user.handle,
         resourceName: o.resource_name
-      }) : tx("org_join_request.description_edit_folder", {
+      }) : renderI18nText("org_join_request.description_edit_folder", {
         inviterName: o.inviter_user.handle,
         resourceName: o.resource_name
       });
       break;
     case "team":
-      E = f ? tx("org_join_request.description_view_team", {
+      E = f ? renderI18nText("org_join_request.description_view_team", {
         inviterName: o.inviter_user.handle,
         resourceName: o.resource_name
-      }) : tx("org_join_request.description_edit_team", {
+      }) : renderI18nText("org_join_request.description_edit_team", {
         inviterName: o.inviter_user.handle,
         resourceName: o.resource_name
       });
@@ -648,10 +648,10 @@ let $$Y0 = Ju(function (e) {
         deprovisionedUser: y
       },
       children: jsxs(yX, {
-        confirmationTitle: _$$t("org_join_request.modal_title", {
+        confirmationTitle: getI18nString("org_join_request.modal_title", {
           requesterName: v ?? ""
         }),
-        confirmText: y ? _$$t("org_join_request.deprovisioned_confirmation_button_text") : _$$t("org_join_request.add_to_org_confirmation_button_text"),
+        confirmText: y ? getI18nString("org_join_request.deprovisioned_confirmation_button_text") : getI18nString("org_join_request.add_to_org_confirmation_button_text"),
         onConfirm: y ? k : () => {
           let e = XHR.put(`/api/org_join_request/${t}/approve`, {
             source: "email"
@@ -662,13 +662,13 @@ let $$Y0 = Ju(function (e) {
           e.then(() => {
             k();
             l(_$$F.enqueue({
-              message: _$$t("org_join_request.request_approved_message", {
+              message: getI18nString("org_join_request.request_approved_message", {
                 requesterName: v ?? ""
               }),
               type: "org-join-request-approve-success"
             }));
           }, e => {
-            let t = e.message || e?.data?.message || _$$t("org_join_request.approve_error");
+            let t = e.message || e?.data?.message || getI18nString("org_join_request.approve_error");
             l(_$$F.enqueue({
               message: t,
               type: "org-join-request-approve-failure",
@@ -676,12 +676,12 @@ let $$Y0 = Ju(function (e) {
             }));
           });
         },
-        cancelText: _$$t("org_join_request.cancel_text"),
+        cancelText: getI18nString("org_join_request.cancel_text"),
         hideCancel: y,
         disableClickOutsideToHide: !0,
         hideOnConfirm: !1,
         isLoading: VP(debugState.getState().loadingState, b),
-        loadingText: _$$t("org_join_request.loading_confirmation_button_text"),
+        loadingText: getI18nString("org_join_request.loading_confirmation_button_text"),
         children: [y && jsxs("div", {
           className: "confirm_org_user_actions--alertBanner--7G9Lr confirm_org_user_actions--banner--T7B90",
           children: [jsx(_$$B, {
@@ -692,7 +692,7 @@ let $$Y0 = Ju(function (e) {
             style: {
               marginRight: 14
             }
-          }), tx("org_join_request.user_deprovisioned_warning")]
+          }), renderI18nText("org_join_request.user_deprovisioned_warning")]
         }), jsxs("div", {
           className: _$$s.flex.flexRow.gap10.$,
           children: [o.file && jsx("div", {
@@ -703,7 +703,7 @@ let $$Y0 = Ju(function (e) {
               size: _$$y.SMALL
             })
           }), jsxs("div", {
-            children: [tx("org_join_request.description_would_like_to_join", {
+            children: [renderI18nText("org_join_request.description_would_like_to_join", {
               requesterNameAndEmail: jsxs("span", {
                 className: U,
                 children: [v, " (", o.requester_user.email, ")"]
@@ -713,7 +713,7 @@ let $$Y0 = Ju(function (e) {
           })]
         }), !y && cg(r) && jsx("div", {
           className: "confirm_org_user_actions--banner--T7B90",
-          children: tx("org_join_request.scim_enabled_banner")
+          children: renderI18nText("org_join_request.scim_enabled_banner")
         })]
       })
     })

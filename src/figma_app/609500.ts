@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, useMemo, useCallback } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { s as _$$s } from "../905/328136";
 import { A as _$$A } from "../905/351112";
 import { gI } from "../figma_app/399472";
@@ -26,7 +26,7 @@ export function $$y1() {
     widgets: o
   }) : jsx("div", {
     className: _$$p,
-    children: tx("org_view.private_widgets_will_appear_here")
+    children: renderI18nText("org_view.private_widgets_will_appear_here")
   });
 }
 export function $$b0({

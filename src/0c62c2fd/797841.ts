@@ -1,9 +1,9 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useDispatch } from "../vendor/514228";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { N_ } from "../figma_app/637027";
 import { P } from "../905/347284";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { PF } from "../figma_app/78808";
 import { Ce, Lo } from "../905/156213";
 import { Ro } from "../figma_app/805373";
@@ -59,14 +59,14 @@ function f(e) {
       onClick: e.callback,
       className: "file_restore_from_version_modal--fileRestoreAction--414BR",
       trusted: !0,
-      children: tx("file_restore_from_version_modal.restore")
+      children: renderI18nText("file_restore_from_version_modal.restore")
     })]
   });
 }
 export function $$g0(e) {
   let t = useDispatch();
   let r = r => {
-    sx("restore_version_from_modal", {
+    trackEventAnalytics("restore_version_from_modal", {
       fileKey: e.fig.key,
       versionId: r
     });
@@ -78,7 +78,7 @@ export function $$g0(e) {
   };
   let n = e.versions.filter(e => !e.disabled);
   return jsx(OJ, {
-    title: _$$t("file_restore_from_version_modal.restore_from_version_history"),
+    title: getI18nString("file_restore_from_version_modal.restore_from_version_history"),
     maxWidth: 396,
     onClose: () => {
       t(Lo());

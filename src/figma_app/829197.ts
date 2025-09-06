@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { RYP } from "../figma_app/763686";
-import { eU, zl, md } from "../figma_app/27355";
+import { atom, atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
 import { NC } from "../905/17179";
 import { debugState } from "../905/407919";
 import { Zx } from "../905/888985";
@@ -14,7 +14,7 @@ let h = {
   id: ""
 };
 let $$m2 = NC("USER_UPDATE_COLOR_PROFILE");
-let g = eU(e => {
+let g = atom(e => {
   let t = e(Zx({}));
   let r = h.colorProfilePreference;
   "loading" === t.status && void 0 !== debugState && debugState?.getState()?.user?.color_profile ? r = debugState.getState().user?.color_profile : t.data?.userColorProfilePreference?.colorProfilePreference && (r = t.data?.userColorProfilePreference?.colorProfilePreference);
@@ -47,10 +47,10 @@ export function $$f3(e) {
   }
 }
 export function $$E1() {
-  return zl.get(g);
+  return atomStoreManager.get(g);
 }
 export function $$y5() {
-  return md(g);
+  return useAtomWithSubscription(g);
 }
 export function $$b4({
   colorProfilePreference: e,

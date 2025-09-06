@@ -2,9 +2,9 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { Ez5, CNR } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { mz } from "../figma_app/456871";
 import { Ay, c6 } from "../figma_app/432652";
 import { Ay as _$$Ay } from "../figma_app/948389";
@@ -37,14 +37,14 @@ let $$E0 = async ({
     source
   } = e;
   let c = debugState.getState().openFile?.key;
-  let T = zl.get(ed);
-  let w = zl.get(hD);
+  let T = atomStoreManager.get(ed);
+  let w = atomStoreManager.get(hD);
   if (!w) {
-    $D(_$$e.AI_PRODUCTIVITY, Error("Editor is null when trying to generate speaker notes"));
+    reportError(_$$e.AI_PRODUCTIVITY, Error("Editor is null when trying to generate speaker notes"));
     return;
   }
   let S = w.getEditorState();
-  zl.set(TD, S);
+  atomStoreManager.set(TD, S);
   let j = (Ez5?.editorPreferences().speakerNotesHeight.getCopy() ?? 0) === 0;
   _$$x({
     eventName: "started",
@@ -113,7 +113,7 @@ let $$E0 = async ({
     k0(e, () => {
       (function () {
         let e = _$$f.TRY_AGAIN;
-        zl.set(zF, e);
+        atomStoreManager.set(zF, e);
         B3(JT.SLIDES_GENERATE_SPEAKER_NOTES);
         Ag(JT.SLIDES_GENERATE_SPEAKER_NOTES, $$E0, {
           source: e
@@ -128,7 +128,7 @@ let $$E0 = async ({
       errorType: e.type || e.marker
     });
     cT(JT.SLIDES_GENERATE_SPEAKER_NOTES);
-    dk.some(t => e instanceof t) || $D(_$$e.AI_PRODUCTIVITY, Error(`Unexpected error encountered while generating speaker notes: ${e.message}`));
+    dk.some(t => e instanceof t) || reportError(_$$e.AI_PRODUCTIVITY, Error(`Unexpected error encountered while generating speaker notes: ${e.message}`));
     return;
   }
 };

@@ -1,6 +1,6 @@
 import { useState, useCallback, useMemo, useEffect } from "react";
 import { getFeatureFlags } from "../905/601108";
-import { Xr, md, zl, eU, fp } from "../figma_app/27355";
+import { Xr, useAtomWithSubscription, atomStoreManager, atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { f3, JL } from "../figma_app/690664";
 import { $5, Rg } from "../figma_app/504321";
 export function $$o0(e) {
@@ -10,7 +10,7 @@ export function $$o0(e) {
   return useMemo(() => [t, a], [t, a]);
 }
 export function $$c4(e, t) {
-  let n = md(e.editingSnippetAtom);
+  let n = useAtomWithSubscription(e.editingSnippetAtom);
   if (!n || !n.snippet || !$5(n.snippet) || !getFeatureFlags().click_to_inspect_reset_styles) return !1;
   let r = n.snippet;
   if ("static" !== r.editingInfo.classNameAttribute.type) return !1;
@@ -22,22 +22,22 @@ export function $$c4(e, t) {
   });
 }
 export function $$d2(e) {
-  return zl.get(e.hasPopoverOpenAtom);
+  return atomStoreManager.get(e.hasPopoverOpenAtom);
 }
-let u = eU(() => null);
-let x = eU(() => ({
+let u = atom(() => null);
+let x = atom(() => ({
   snippet: null,
   isLoading: !1
 }));
 export function $$m1() {
-  let e = md(f3);
+  let e = useAtomWithSubscription(f3);
   return {
-    selectedElement: md(e?.directManipulationEditor.selectedElementInfoAtom ?? u),
-    selectedElementCodeSnippet: md(e?.directManipulationEditor.editingSnippetAtom ?? x).snippet
+    selectedElement: useAtomWithSubscription(e?.directManipulationEditor.selectedElementInfoAtom ?? u),
+    selectedElementCodeSnippet: useAtomWithSubscription(e?.directManipulationEditor.editingSnippetAtom ?? x).snippet
   };
 }
 export function $$h3(e) {
-  let [t, n] = fp(JL);
+  let [t, n] = useAtomValueAndSetter(JL);
   useEffect(() => {
     t && !t.switchedToCodeTab && (n({
       ...t,

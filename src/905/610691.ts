@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { xD } from "../905/174697";
 import { oY } from "../905/485103";
 import { tH, H4 } from "../905/751457";
@@ -80,7 +80,7 @@ export function $$I0({
   });
   let N = R.loading && i?.type !== nb.OFFLINE_FILE || "loaded" !== filePermissions.status || "loaded" !== repoPermissions.status || "loaded" !== protoPermissions.status;
   return (oY(N, e => {
-    az.trackDefinedEvent("file_browser.context_menu_load_queries_time", {
+    analyticsEventManager.trackDefinedEvent("file_browser.context_menu_load_queries_time", {
       durationMs: Math.round(e),
       type: "tile-action-dropdown"
     });

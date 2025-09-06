@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "../vendor/514228";
 import { sD } from "../figma_app/243058";
 import { Z_n, CWU, rXF, Ez5, m1T } from "../figma_app/763686";
 import { l7 } from "../905/189185";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { Uv, AW } from "../figma_app/191804";
 import { Oe, nh, AV } from "../figma_app/933328";
 import { Y5 } from "../figma_app/455680";
@@ -47,7 +47,7 @@ export function $$v4(e) {
 export function $$A7(e) {
   let t = s1();
   let r = UZ(t);
-  let i = md(E_);
+  let i = useAtomWithSubscription(E_);
   let a = bL(i?.varId || "", r);
   return useMemo(() => i && a && a.type === Z_n.COLOR ? $$v4(a.value) : hS(e) ? e : $$v4(Uv), [i, a, e]);
 }
@@ -65,7 +65,7 @@ export function $$x0() {
   }, [e]);
 }
 export function $$N10(e) {
-  let t = md(E_);
+  let t = useAtomWithSubscription(E_);
   return useCallback((r, n) => {
     t && r.color ? l7.user("slides-edit-theme-color", () => $$C6(t.varId, t.modeId, r)) : e(r, n);
   }, [t, e]);
@@ -82,7 +82,7 @@ export function $$C6(e, t, r) {
 }
 export function $$w5(e) {
   let t = useDispatch();
-  let r = md(E_);
+  let r = useAtomWithSubscription(E_);
   return useCallback(async n => {
     let i = await t(Oe(n));
     let l = sD.fromString(i);
@@ -98,7 +98,7 @@ export function $$O3(e, t, r) {
 }
 export function $$R9(e, t) {
   let r = useDispatch();
-  let a = md(E_);
+  let a = useAtomWithSubscription(E_);
   let s = eY();
   return useCallback((n, i) => {
     a ? r(nh({

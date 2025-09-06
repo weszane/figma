@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useCallback, useRef } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { Ay } from "../figma_app/272902";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { h as _$$h } from "../905/207101";
 import { M3 } from "../figma_app/119475";
 import { IW, Lp } from "../figma_app/563413";
@@ -62,7 +62,7 @@ export function $$y1(e) {
     return e;
   });
   let j = useCallback(() => {
-    "editor:assets_panel" === entryPointForTracking && az.trackDefinedEvent("assets_panel.search_cleared", {
+    "editor:assets_panel" === entryPointForTracking && analyticsEventManager.trackDefinedEvent("assets_panel.search_cleared", {
       searchQuery: query,
       assetsPanelVersion: D,
       fileKey: L?.key,
@@ -81,7 +81,7 @@ export function $$y1(e) {
     "" === query || P || R(Dy({
       entryPoint: entryPointForTracking
     }));
-    "editor:assets_panel" === entryPointForTracking && az.trackDefinedEvent("assets_panel.search_focused", {
+    "editor:assets_panel" === entryPointForTracking && analyticsEventManager.trackDefinedEvent("assets_panel.search_focused", {
       assetsPanelVersion: D,
       fileKey: L?.key,
       fileTeamId: L?.teamId ?? void 0,
@@ -90,7 +90,7 @@ export function $$y1(e) {
     f(e) && e.onFocus();
   }, [entryPointForTracking, L?.key, L?.parentOrgId, L?.teamId, e, D, P, R, query]);
   let G = useCallback(() => {
-    "editor:assets_panel" === entryPointForTracking && az.trackDefinedEvent("assets_panel.search_unfocused", {
+    "editor:assets_panel" === entryPointForTracking && analyticsEventManager.trackDefinedEvent("assets_panel.search_unfocused", {
       assetsPanelVersion: D,
       fileKey: L?.key,
       fileTeamId: L?.teamId ?? void 0,

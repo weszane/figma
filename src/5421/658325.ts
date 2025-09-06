@@ -13,7 +13,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { U as _$$U } from "../figma_app/901889";
 import { Pt } from "../figma_app/806412";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { VC } from "../figma_app/565242";
 import { X } from "../905/190511";
 import { _j } from "../figma_app/843119";
@@ -506,7 +506,7 @@ function G({
   let w = () => !e || gl(e) || e?.type !== "url" ? null : jsx(_$$K, {
     onClick: A,
     children: N ? jsx(_$$a, {}) : jsx(_$$V, {}),
-    "aria-label": N ? _$$t("sites.panel.copy_link") : _$$t("sites.panel.open_link_new_tab")
+    "aria-label": N ? getI18nString("sites.panel.copy_link") : getI18nString("sites.panel.open_link_new_tab")
   });
   let k = () => jsxs(Fragment, {
     children: [jsx(DE, {
@@ -523,7 +523,7 @@ function G({
     }), j && jsx(TN, {
       children: jsx(_$$S, {
         label: jsx(J, {
-          children: tx("proto.action_open_url_in_new_tab")
+          children: renderI18nText("proto.action_open_url_in_new_tab")
         }),
         onChange: h,
         recordingKey: Pt(C, "open-url-in-new-tab-check"),
@@ -544,13 +544,13 @@ function G({
         className: "xz9dl7a",
         children: k()
       }) : jsx(_$$u, {
-        title: _$$t("sites.panel.link"),
+        title: getI18nString("sites.panel.link"),
         addProperty: p,
         removeProperty: u,
         contentsVisibleOrMixed: b,
         recordingKey: C,
-        plusButtonLabel: _$$t("sites.panel.create_link"),
-        minusButtonLabel: _$$t("sites.panel.remove_link"),
+        plusButtonLabel: getI18nString("sites.panel.create_link"),
+        minusButtonLabel: getI18nString("sites.panel.remove_link"),
         children: k()
       })
     })

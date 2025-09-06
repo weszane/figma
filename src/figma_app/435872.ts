@@ -1,7 +1,7 @@
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { NC } from "../905/17179";
-import { sx } from "../905/449184";
-import { eD } from "../figma_app/876459";
+import { trackEventAnalytics } from "../905/449184";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { nF } from "../905/350402";
 import { sf } from "../905/929976";
 import { h } from "../905/662353";
@@ -14,7 +14,7 @@ let $$_4 = nF(async (e, t) => {
   let n = Object.keys(t);
   await wI(r, n);
   hp.sendToAllTabs(c6, n);
-  sx("Delete New Autosave Files", {
+  trackEventAnalytics("Delete New Autosave Files", {
     deletedCount: n.length
   });
 });
@@ -43,8 +43,8 @@ export function $$E3(e) {
     });
   }(e));
   hp.register(c6, t => function (e, t) {
-    let r = zl.get(h);
-    r && t.includes(r) && (eD ? eD.close({
+    let r = atomStoreManager.get(h);
+    r && t.includes(r) && (desktopAPIInstance ? desktopAPIInstance.close({
       suppressReopening: !0,
       shouldForceClose: !0
     }) : e.dispatch(sf({

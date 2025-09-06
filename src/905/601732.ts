@@ -4,7 +4,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { b } from "../905/22449";
 import { c as _$$c } from "../905/34525";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { H8, nl } from "../905/590952";
 import { Lz, Zc } from "../905/497882";
 import { LG } from "../905/448440";
@@ -25,7 +25,7 @@ export function $$$$A0({
   return existingResourceContent && mr(existingResourceContent) && !Zc(e) ? jsx(x, {
     existingResourceContent
   }) : jsx(_$$A, {
-    label: t("community.publishing.author_share_as"),
+    label: getI18nString("community.publishing.author_share_as"),
     children: jsx(b, {
       className: iy,
       value: a ? $$b1(a) : void 0,
@@ -69,7 +69,7 @@ export function $$b1(e) {
   return jr(e) ? `user-${e.user_id}` : Z7(e) ? `team-${e.team_id}` : MO(e) ? `org-${e.org_id}` : void throwTypeError(e);
 }
 let v = e => jr(e) ? 1 : Z7(e) ? 2 : MO(e) ? 3 : void throwTypeError(e);
-let I = e => jr(e) ? t("community.publishing.individual_creator") : Z7(e) ? t("community.publishing.team_author") : MO(e) ? t("community.publishing.organization_author") : throwTypeError(e);
+let I = e => jr(e) ? getI18nString("community.publishing.individual_creator") : Z7(e) ? getI18nString("community.publishing.team_author") : MO(e) ? getI18nString("community.publishing.organization_author") : throwTypeError(e);
 let E = (e, t) => jr(e) ? jsx(H8, {
   user: t
 }) : Z7(e) || MO(e) ? jsx(nl, {
@@ -82,7 +82,7 @@ function x({
     id
   } = e.publisher;
   return jsx(_$$A, {
-    label: t("community.publishing.author_share_as"),
+    label: getI18nString("community.publishing.author_share_as"),
     children: jsx(b, {
       className: iy,
       value: id,
@@ -128,6 +128,6 @@ function S({
     })]
   });
 }
-let w = e => e.entity_type === o1.USER ? t("community.publishing.individual_creator") : e.entity_type === o1.TEAM ? t("community.publishing.team_author") : e.entity_type === o1.ORG ? t("community.publishing.organization_author") : void 0;
+let w = e => e.entity_type === o1.USER ? getI18nString("community.publishing.individual_creator") : e.entity_type === o1.TEAM ? getI18nString("community.publishing.team_author") : e.entity_type === o1.ORG ? getI18nString("community.publishing.organization_author") : void 0;
 export const A = $$$$A0;
 export const s = $$b1;

@@ -1,4 +1,4 @@
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { FEntityType } from "../figma_app/191312";
 export function $$a0(e) {
   return !0;
@@ -49,7 +49,7 @@ export function $$d5(e, t) {
   }
 }
 function c(e, t, r, i, a, s) {
-  sx("data_drift_favorited_resource_corrected", {
+  trackEventAnalytics("data_drift_favorited_resource_corrected", {
     favoritedResourceId: e,
     resourceType: t,
     resourceTeamId: r,

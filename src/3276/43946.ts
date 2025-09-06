@@ -6,7 +6,7 @@ import { f as _$$f } from "../905/809171";
 import { J as _$$J } from "../905/614223";
 import { Ez5 } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { md, eU } from "../figma_app/27355";
+import { useAtomWithSubscription, atom } from "../figma_app/27355";
 import { A as _$$A } from "../905/920142";
 import { Ay } from "../905/612521";
 import { buildUploadUrl, getInitialOptions } from "../figma_app/169182";
@@ -15,7 +15,7 @@ import { WN } from "../figma_app/638601";
 import { s as _$$s } from "../cssbuilder/589278";
 import { nt, d6 } from "../figma_app/687776";
 import { $z, Me, lR } from "../figma_app/617427";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { N as _$$N } from "../905/438674";
 import { hh } from "../figma_app/42945";
@@ -133,7 +133,7 @@ function ed(e) {
             }), jsx("div", {
               className: "announcement--announcementCloseButton--vgH6U",
               children: jsx(Me, {
-                "aria-label": _$$t("general.close"),
+                "aria-label": getI18nString("general.close"),
                 onClick: e.onDismiss ? e.onDismiss : () => {
                   a(_$$b({
                     [e.userFlagName]: !0
@@ -212,13 +212,13 @@ let eg = [{
     let c = {
       type: "video",
       src: a ? buildUploadUrl("001c68beb7c3ebcc9c080f1104272404696c536b") : buildUploadUrl("8aa3d03397da517c320149f5e387c1030ceebe13"),
-      alt: _$$t("upsell.figma_make_prototype_announcement.image_alt"),
+      alt: getI18nString("upsell.figma_make_prototype_announcement.image_alt"),
       bg: a ? "#2D2E46" : "#F7F6FF",
       noPaddingTop: !0
     };
     return jsx(ed, {
       asset: c,
-      description: _$$t("upsell.figma_make_prototype_announcement.description"),
+      description: getI18nString("upsell.figma_make_prototype_announcement.description"),
       layoutStyle: "brand",
       mainButtonOverride: jsx(_$$J, {
         brand: "seascape",
@@ -228,7 +228,7 @@ let eg = [{
           trackingProperties: {
             trackingDescriptor: _$$c.TRY_FIGMA_MAKE
           },
-          children: _$$t("upsell.figma_make_prototype_announcement.button_title")
+          children: getI18nString("upsell.figma_make_prototype_announcement.button_title")
         })
       }),
       onDismiss: () => {
@@ -236,7 +236,7 @@ let eg = [{
           [e]: !0
         }));
       },
-      title: _$$t("upsell.figma_make_prototype_announcement.title"),
+      title: getI18nString("upsell.figma_make_prototype_announcement.title"),
       trackingContextName: "Figma Make Prototype Announcement",
       userFlagName: e
     });
@@ -250,28 +250,28 @@ let eg = [{
   userFlagName: "seen_mobile_proto_announcement",
   AnnouncementComponent: function () {
     let e = useDispatch();
-    return md(NE) ? jsx(ed, {
+    return useAtomWithSubscription(NE) ? jsx(ed, {
       asset: {
         type: "image",
         src: buildUploadUrl("b50fba0faeea245feed92fe60337297d827e4984"),
-        alt: _$$t("cross_sell.mobile_app_prompt.comment_image_alt_text")
+        alt: getI18nString("cross_sell.mobile_app_prompt.comment_image_alt_text")
       },
-      description: _$$t("mobile_download_prompts.play_mobile_prototypes"),
+      description: getI18nString("mobile_download_prompts.play_mobile_prototypes"),
       isLoading: !1,
       layoutStyle: "app",
-      mainButtonTitle: _$$t("mobile_download_prompts.email_me"),
+      mainButtonTitle: getI18nString("mobile_download_prompts.email_me"),
       onCtaClick: () => {
         XHR.post("/api/send_mobile_download_email", {
           type: "prototype"
         });
         e(_$$F.enqueue({
-          message: _$$t("rcs.mobile_comment_reply_upsell.email_sent")
+          message: getI18nString("rcs.mobile_comment_reply_upsell.email_sent")
         }));
         e(_$$b({
           seen_mobile_proto_announcement: !0
         }));
       },
-      title: _$$t("mobile_download_prompts.run_prototypes_from_your_phone"),
+      title: getI18nString("mobile_download_prompts.run_prototypes_from_your_phone"),
       trackingContextName: "Mobile App Prototype Announcement",
       trackingDisabled: !0,
       userFlagName: "seen_mobile_proto_announcement"
@@ -291,24 +291,24 @@ let eg = [{
       asset: {
         type: "image",
         src: buildUploadUrl("5b8af9ed88cb76b20858a7a8ac9fed784e5cbeb7"),
-        alt: _$$t("cross_sell.mobile_app_prompt.comment_image_alt_text")
+        alt: getI18nString("cross_sell.mobile_app_prompt.comment_image_alt_text")
       },
-      description: _$$t("mobile_download_prompts.join_team_conversations"),
+      description: getI18nString("mobile_download_prompts.join_team_conversations"),
       isLoading: !1,
       layoutStyle: "app",
-      mainButtonTitle: _$$t("mobile_download_prompts.email_me"),
+      mainButtonTitle: getI18nString("mobile_download_prompts.email_me"),
       onCtaClick: () => {
         XHR.post("/api/send_mobile_download_email", {
           type: "comment"
         });
         e(_$$F.enqueue({
-          message: _$$t("rcs.mobile_comment_reply_upsell.email_sent")
+          message: getI18nString("rcs.mobile_comment_reply_upsell.email_sent")
         }));
         e(_$$b({
           seen_mobile_comment_announcement: !0
         }));
       },
-      title: _$$t("mobile_download_prompts.meet_your_team"),
+      title: getI18nString("mobile_download_prompts.meet_your_team"),
       trackingContextName: "Mobile App Comments Announcement",
       trackingDisabled: !0,
       userFlagName: "seen_mobile_comment_announcement"
@@ -343,11 +343,11 @@ let eg = [{
       asset: {
         type: "image",
         src: assetSrc,
-        alt: _$$t("inspect_panel.code.promo_image_alt"),
+        alt: getI18nString("inspect_panel.code.promo_image_alt"),
         bg: backgroundColor,
         noPaddingTop: imageNoPaddingTop
       },
-      description: _$$t("inspect_panel.properties.dev_mode_upsell_message"),
+      description: getI18nString("inspect_panel.properties.dev_mode_upsell_message"),
       layoutStyle: "brand",
       mainButtonOverride: jsx("div", {
         className: _$$s.wFull.$,
@@ -359,12 +359,12 @@ let eg = [{
               r();
               a("handoff");
             },
-            children: _$$t("dev_handoff.paywall.blocking_modal.button.request_access")
+            children: getI18nString("dev_handoff.paywall.blocking_modal.button.request_access")
           })
         })
       }),
       onDismiss: r,
-      title: tx("dev_handoff.paywall.banner.title"),
+      title: renderI18nText("dev_handoff.paywall.banner.title"),
       trackingContextName: "Dev Mode announcement",
       userFlagName: e
     });
@@ -403,20 +403,20 @@ let eg = [{
       className: "dev_handoff_comments_panel_slack_teams_hint--hintPanel--cjNDL",
       idForTests: "hintFigmaForSlackTeams",
       userFlag: P,
-      title: _$$t("dev_handoff.comments_panel.slack_teams_hint.title"),
+      title: getI18nString("dev_handoff.comments_panel.slack_teams_hint.title"),
       icon_DEPRECATED: _$$A2,
-      hintText: tx("dev_handoff.comments_panel.slack_teams_hint", {
+      hintText: renderI18nText("dev_handoff.comments_panel.slack_teams_hint", {
         figmaForSlackLink: jsx(_$$N, {
           href: "https://figma.slack.com/apps/A01N2QYSA81-figma-and-figjam?tab=more_info",
           newTab: !0,
           trusted: !0,
-          children: tx("dev_handoff.comments_panel.slack_teams_hint.slack_link")
+          children: renderI18nText("dev_handoff.comments_panel.slack_teams_hint.slack_link")
         }),
         figmaForTeamsLink: jsx(_$$N, {
           href: "https://appsource.microsoft.com/en-us/product/office/WA200004521?exp=ubp8",
           newTab: !0,
           trusted: !0,
-          children: tx("dev_handoff.comments_panel.slack_teams_hint.teams_link")
+          children: renderI18nText("dev_handoff.comments_panel.slack_teams_hint.teams_link")
         })
       })
     });
@@ -441,9 +441,9 @@ let eg = [{
       asset: {
         type: "image",
         src: buildUploadUrl("0381fb8f01b5e71da6e1f3d65e2bab6be47de673"),
-        alt: _$$t("inspect_panel.code.promo_image_alt")
+        alt: getI18nString("inspect_panel.code.promo_image_alt")
       },
-      description: _$$t("dev_mode_demo_file.check_out_our_interactive_test"),
+      description: getI18nString("dev_mode_demo_file.check_out_our_interactive_test"),
       layoutStyle: "brand",
       mainButtonOverride: jsx(_$$J, {
         brand: "dev-handoff",
@@ -460,10 +460,10 @@ let eg = [{
               dev_mode_demo_file_props_panel_upsell_dismissed: !0
             }));
           },
-          children: _$$t("dev_mode_playground_file.try_it_now")
+          children: getI18nString("dev_mode_playground_file.try_it_now")
         })
       }),
-      title: tx("dev_mode_playground_file.want_to_try_dev_mode"),
+      title: renderI18nText("dev_mode_playground_file.want_to_try_dev_mode"),
       trackingContextName: "Dev Mode Demo Props Upsell",
       userFlagName: "dev_mode_demo_file_props_panel_upsell_dismissed"
     }) : null;
@@ -476,7 +476,7 @@ let eg = [{
     plan: o
   }) => !e.dev_mode_dismissed_properties_panel_announcement || n || !t || o?.tier === FPlanNameType.STARTER
 }];
-let ev = eU(e => {
+let ev = atom(e => {
   let t = {};
   eg.forEach(n => {
     n.lifecycle && (t[n.userFlagName] = e(eC(n.lifecycle)));
@@ -489,7 +489,7 @@ export function $$ex0(e) {
   let l = S2().unwrapOr(null);
   let h = l?.figjamDisabledAt || null;
   let f = useSelector(e => e.userFlags);
-  let g = md(ev);
+  let g = useAtomWithSubscription(ev);
   let x = iZ();
   let y = useSelector(e => e.userAnalyticsData);
   let C = useSelector(e => e.selectedView);
@@ -517,10 +517,10 @@ export function $$ex0(e) {
   let W = oW();
   if (K.isInFigmaMakePrototypeTabUpsellExp = W, k) return jsxs("div", {
     className: "announcement--loggedOutSignupCta--qrt2V",
-    children: [jsx(_$$f, {}), _$$t("auth.create_account_to_view_reply_comments"), jsx($n, {
+    children: [jsx(_$$f, {}), getI18nString("auth.create_account_to_view_reply_comments"), jsx($n, {
       variant: "link",
       onClick: () => P("SIGN_UP_CTA_COMMENTS_PANEL"),
-      children: _$$t("auth.sign_up")
+      children: getI18nString("auth.sign_up")
     })]
   });
   if (n === FFileType.WHITEBOARD || n === FFileType.SLIDES || "fullscreen" !== C.view || null != h || j || "Comments" === e.panelName && "fullscreen" === C.view && n === FFileType.DESIGN && f.claimed_invite_with_pending_user_mention && !f.has_closed_comment && Ay.location.hash) return null;

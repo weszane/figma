@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { k } from "../905/443820";
 import a from "classnames";
 import { B } from "../905/714743";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { $K } from "../905/901964";
 import { hr, RS, P3, zG, i3, ig, vi, nL, q_, ck, Xu, VO } from "../905/958668";
 import { A } from "../svg/927263";
@@ -51,7 +51,7 @@ export function $$f0(e) {
     }) : jsx("img", {
       src: e.thumbnailUrl,
       crossOrigin: "use-credentials",
-      alt: e.altText || _$$t("comments.attachment_thumbnail_alt_text_default"),
+      alt: e.altText || getI18nString("comments.attachment_thumbnail_alt_text_default"),
       className: s()(q_, {
         [ck]: e.isFigmake && e.isUploading
       })

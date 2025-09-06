@@ -1,8 +1,8 @@
 import { ServiceCategories as _$$e } from "../905/165054";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 export class $$a1 {
   constructor(e, t, r) {
-    this.equals = (e) => JSON.stringify(this) === JSON.stringify(e);
+    this.equals = e => JSON.stringify(this) === JSON.stringify(e);
     this.result = e;
     this.score = t;
     this.text = r;
@@ -13,15 +13,15 @@ export class $$s0 {
     this.isValidQuery = () => !!this.forwardRegex || !!this.backwardRegex;
     this.matchAndSort = (e, t) => {
       let r = [];
-      e.forEach((e) => {
+      e.forEach(e => {
         let n = this.matchAgainstItem(e, t);
         n && r.push(n);
       });
       return r.sort((e, t) => e.score > t.score || e.score === t.score && e.text < t.text ? -1 : 1);
     };
-    this.matchAgainst = (e) => {
+    this.matchAgainst = e => {
       let t = [];
-      e.forEach((e) => {
+      e.forEach(e => {
         let r = this.matchAgainstText(e);
         r && t.push(r);
       });
@@ -34,13 +34,13 @@ export class $$s0 {
       let i = this.backwardRegex?.exec(this.reverseText(r));
       if (!n || !i) return null;
       let s = n.slice(1);
-      let o = i.slice(1).map((e) => this.reverseText(e)).reverse();
+      let o = i.slice(1).map(e => this.reverseText(e)).reverse();
       let l = this.scoreMatch(s);
       let d = this.scoreMatch(o);
       let c = Math.max(l, d);
       return new $$a1(l >= d ? s : o, c, e);
     };
-    this.matchAgainstText = (e) => this.matchAgainstItem(e, (e) => e);
+    this.matchAgainstText = e => this.matchAgainstItem(e, e => e);
     this.compileRegularExpression = (e, t) => {
       let r = "^(.*)";
       let a = !1;
@@ -57,7 +57,7 @@ export class $$s0 {
       try {
         return new RegExp(r, t ? "iu" : "i");
       } catch (a) {
-        $D(_$$e.EXTENSIBILITY, a, {
+        reportError(_$$e.EXTENSIBILITY, a, {
           extra: {
             query: e,
             acceptsUnicode: t,
@@ -67,12 +67,12 @@ export class $$s0 {
         return null;
       }
     };
-    this.reverseText = (e) => {
+    this.reverseText = e => {
       let t = "";
       for (let r = e.length - 1; r >= 0; r--) t += e[r];
       return t;
     };
-    this.scoreMatch = (e) => {
+    this.scoreMatch = e => {
       let t = "";
       let r = 0;
       for (let n = 0; n < e.length; n++) {

@@ -12,7 +12,7 @@ import { k as _$$k } from "../905/443820";
 import { WW } from "../905/521428";
 import { J as _$$J } from "../905/341359";
 import { J as _$$J2 } from "../905/614223";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { _6 } from "../figma_app/386952";
 import { iZ } from "../905/372672";
 import { z } from "../905/239603";
@@ -96,16 +96,16 @@ let w = jsx("span", {
   children: "*"
 });
 let O = {
-  [b.UNRECOGNIZED]: tx("report_abuse.abuse_type.unspecified_value"),
-  [b.ABUSE_TYPE_UNSPECIFIED]: tx("report_abuse.abuse_type.unspecified_value"),
-  [b.ABUSE_TYPE_SPAM]: tx("report_abuse.abuse_type.spam"),
-  [b.ABUSE_TYPE_MALWARE]: tx("report_abuse.abuse_type.malware"),
-  [b.ABUSE_TYPE_PHISHING]: tx("report_abuse.abuse_type.phishing"),
-  [b.ABUSE_TYPE_FRAUD_SCAM_IMPERSONATION]: tx("report_abuse.abuse_type.fraud_scam_impersonation"),
-  [b.ABUSE_TYPE_INAPPROPRIATE_CONTENT]: tx("report_abuse.abuse_type.inappropriate_content"),
-  [b.ABUSE_TYPE_ILLEGAL_CONTENT]: tx("report_abuse.abuse_type.illegal_content"),
-  [b.ABUSE_TYPE_DMCA_COPYRIGHT_TRADEMARK]: tx("report_abuse.abuse_type.dmca_copyright_trademark"),
-  [b.ABUSE_TYPE_OTHER]: tx("report_abuse.abuse_type.other")
+  [b.UNRECOGNIZED]: renderI18nText("report_abuse.abuse_type.unspecified_value"),
+  [b.ABUSE_TYPE_UNSPECIFIED]: renderI18nText("report_abuse.abuse_type.unspecified_value"),
+  [b.ABUSE_TYPE_SPAM]: renderI18nText("report_abuse.abuse_type.spam"),
+  [b.ABUSE_TYPE_MALWARE]: renderI18nText("report_abuse.abuse_type.malware"),
+  [b.ABUSE_TYPE_PHISHING]: renderI18nText("report_abuse.abuse_type.phishing"),
+  [b.ABUSE_TYPE_FRAUD_SCAM_IMPERSONATION]: renderI18nText("report_abuse.abuse_type.fraud_scam_impersonation"),
+  [b.ABUSE_TYPE_INAPPROPRIATE_CONTENT]: renderI18nText("report_abuse.abuse_type.inappropriate_content"),
+  [b.ABUSE_TYPE_ILLEGAL_CONTENT]: renderI18nText("report_abuse.abuse_type.illegal_content"),
+  [b.ABUSE_TYPE_DMCA_COPYRIGHT_TRADEMARK]: renderI18nText("report_abuse.abuse_type.dmca_copyright_trademark"),
+  [b.ABUSE_TYPE_OTHER]: renderI18nText("report_abuse.abuse_type.other")
 };
 function R(e, t, r) {
   return jsxs("div", {
@@ -143,7 +143,7 @@ export let $$L0 = function (e) {
         }, 8e3);
         K(!0);
       } catch (e) {
-        console.error(e.cause?.message || e.data?.message || e.message || _$$t("report_abuse.api_call_failure"));
+        console.error(e.cause?.message || e.data?.message || e.message || getI18nString("report_abuse.api_call_failure"));
         z(!1);
         K(!1);
       }
@@ -157,13 +157,13 @@ export let $$L0 = function (e) {
         children: [null !== W && jsx($y, {
           variant: W ? "success" : "danger",
           children: jsx(Q, {
-            title: W ? tx("report_abuse.submission_successful_title") : tx("report_abuse.submission_failed_title"),
-            children: W ? tx("report_abuse.submission_successful_description") : tx("report_abuse.submission_failed_description")
+            title: W ? renderI18nText("report_abuse.submission_successful_title") : renderI18nText("report_abuse.submission_failed_title"),
+            children: W ? renderI18nText("report_abuse.submission_successful_description") : renderI18nText("report_abuse.submission_failed_description")
           })
         }), !W && jsxs(Fragment, {
           children: [jsx(J, {
             variant: "secondary",
-            children: tx("report_abuse.required_field_info_text", {
+            children: renderI18nText("report_abuse.required_field_info_text", {
               asterisk: w
             })
           }), jsx("div", {
@@ -176,8 +176,8 @@ export let $$L0 = function (e) {
               children: [jsx(l9, {
                 width: "fill",
                 size: "lg",
-                label: R(tx("report_abuse.abuse_type.label")),
-                placeholder: _$$t("report_abuse.abuse_type.placeholder"),
+                label: R(renderI18nText("report_abuse.abuse_type.label")),
+                placeholder: getI18nString("report_abuse.abuse_type.placeholder"),
                 "data-testid": "abuse-type-select-trigger"
               }), jsx(mc, {
                 "data-testid": "abuse-type-select-container",
@@ -189,22 +189,22 @@ export let $$L0 = function (e) {
             })
           }), L ? jsx("div", {
             "data-testid": "abuse-hub-link-text",
-            children: tx("report_abuse.abuse_hub_link_label", {
+            children: renderI18nText("report_abuse.abuse_hub_link_label", {
               form_link: jsx(_$$N, {
                 newTab: !0,
                 href: "https://help.figma.com/hc/requests/new?ticket_form_id=29069632540055",
-                children: tx("report_abuse.abuse_hub_link_text")
+                children: renderI18nText("report_abuse.abuse_hub_link_text")
               })
             })
           }) : jsxs(Fragment, {
             children: [jsxs("div", {
               className: N,
-              children: [R(tx("report_abuse.reported_content_input_label"), "reportedContent"), jsx("div", {
+              children: [R(renderI18nText("report_abuse.reported_content_input_label"), "reportedContent"), jsx("div", {
                 className: C,
                 children: jsx(_$$p, {
                   id: "reportedContent",
                   size: "lg",
-                  placeholder: _$$t("report_abuse.reported_content_placeholder"),
+                  placeholder: getI18nString("report_abuse.reported_content_placeholder"),
                   value: P || "",
                   onChange: e => {
                     e.length <= 1e3 && D(e);
@@ -214,11 +214,11 @@ export let $$L0 = function (e) {
               })]
             }), jsxs("div", {
               className: N,
-              children: [R(tx("report_abuse.additional_description_input_label"), "additionalDescription"), jsx("div", {
+              children: [R(renderI18nText("report_abuse.additional_description_input_label"), "additionalDescription"), jsx("div", {
                 className: C,
                 children: jsx(_$$T, {
                   id: "additionalDescription",
-                  placeholder: _$$t("report_abuse.additional_description_placeholder"),
+                  placeholder: getI18nString("report_abuse.additional_description_placeholder"),
                   value: k || "",
                   onChange: e => {
                     e.length <= 1e3 && M(e);
@@ -228,12 +228,12 @@ export let $$L0 = function (e) {
               })]
             }), jsxs("div", {
               className: N,
-              children: [R(tx("report_abuse.email_input_label"), "email"), jsx("div", {
+              children: [R(renderI18nText("report_abuse.email_input_label"), "email"), jsx("div", {
                 className: C,
                 children: jsx(_$$p, {
                   id: "email",
                   size: "lg",
-                  placeholder: _$$t("report_abuse.email_placeholder"),
+                  placeholder: getI18nString("report_abuse.email_placeholder"),
                   value: F || "",
                   onChange: j,
                   disabled: H
@@ -244,14 +244,14 @@ export let $$L0 = function (e) {
               onChange: G,
               disabled: H,
               label: jsxs(J, {
-                children: [tx("report_abuse.confirmation_checkbox_label"), " ", w]
+                children: [renderI18nText("report_abuse.confirmation_checkbox_label"), " ", w]
               })
             }), function (e, t, r) {
               let i = jsx("span", {
                 className: "form-module--inlineLoadingSpinner--DrfkC",
                 children: jsx(_$$k, {
                   size: "md",
-                  loadingText: _$$t("report_abuse.submit_report_button_loading_text")
+                  loadingText: getI18nString("report_abuse.submit_report_button_loading_text")
                 })
               });
               return jsx("div", {
@@ -261,7 +261,7 @@ export let $$L0 = function (e) {
                   onClick: e,
                   disabled: !t || r,
                   "data-testid": "submit-report-button",
-                  children: [r && i, r ? _$$t("report_abuse.submit_report_button_loading_text") : tx("report_abuse.submit_report_button")]
+                  children: [r && i, r ? getI18nString("report_abuse.submit_report_button_loading_text") : renderI18nText("report_abuse.submit_report_button")]
                 })
               });
             }(Y, V, H)]

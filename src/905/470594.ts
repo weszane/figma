@@ -12,7 +12,7 @@ import { getFeatureFlags } from "../905/601108";
 import { ET, qW } from "../905/623179";
 import { Ex, zE, vj } from "../figma_app/919079";
 import { B } from "../905/714743";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { F } from "../905/302958";
 import { zX } from "../905/576487";
@@ -49,14 +49,14 @@ let N = Ju(function (e) {
   let i = hS(e);
   let a = jsxs(Fragment, {
     children: [jsx("span", {
-      children: _$$t("check_network_compatibility.description")
+      children: getI18nString("check_network_compatibility.description")
     }), jsx("br", {}), jsx("br", {}), jsx("span", {
-      children: _$$t("check_network_compatibility.description_cta")
+      children: getI18nString("check_network_compatibility.description_cta")
     }), "\xa0", jsx(_$$N, {
       href: "https://help.figma.com/hc/articles/19424714305943-Adjust-firewall-settings",
       newTab: !0,
       style: sx.colorTextBrand.cursorPointer.my16.$,
-      children: tx("check_network_compatibility.view_help_center")
+      children: renderI18nText("check_network_compatibility.view_help_center")
     })]
   });
   let s = ({
@@ -73,15 +73,15 @@ let N = Ju(function (e) {
         children: [(() => {
           switch (e) {
             case x.LibraryPublish:
-              return tx("check_network_compatibility.feature.library_publish");
+              return renderI18nText("check_network_compatibility.feature.library_publish");
             case x.ExtensionPublish:
-              return tx("check_network_compatibility.feature.extension_publish");
+              return renderI18nText("check_network_compatibility.feature.extension_publish");
             case x.CommentAttachment:
-              return tx("check_network_compatibility.feature.comment_attachment");
+              return renderI18nText("check_network_compatibility.feature.comment_attachment");
             case x.Video:
-              return tx("check_network_compatibility.feature.video");
+              return renderI18nText("check_network_compatibility.feature.video");
             case S.FontList:
-              return tx("check_network_compatibility.feature.font_list");
+              return renderI18nText("check_network_compatibility.feature.font_list");
           }
         })(), jsx(Ex, {
           text: a,
@@ -92,10 +92,10 @@ let N = Ju(function (e) {
       }), jsx("div", {
         children: r === w.NONE ? jsx("div", {
           style: sx.colorTextSuccess.$,
-          children: tx("check_network_compatibility.available")
+          children: renderI18nText("check_network_compatibility.available")
         }) : jsx("div", {
           style: sx.colorTextDanger.$,
-          children: tx("check_network_compatibility.blocked")
+          children: renderI18nText("check_network_compatibility.blocked")
         })
       })]
     }), r === w.NON_S3_RESPONSE ? jsxs("div", {
@@ -109,7 +109,7 @@ let N = Ju(function (e) {
         onClick: () => {
           navigator.clipboard.writeText(i).then(() => {
             t(F.enqueue({
-              message: _$$t("check_network_compatibility.copied_to_clipboard")
+              message: getI18nString("check_network_compatibility.copied_to_clipboard")
             }));
           });
         }
@@ -122,7 +122,7 @@ let N = Ju(function (e) {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: tx("check_network_compatibility.title")
+          children: renderI18nText("check_network_compatibility.title")
         })
       }), jsxs(nB, {
         children: [jsx("div", {
@@ -134,7 +134,7 @@ let N = Ju(function (e) {
           children: jsx($n, {
             variant: "secondary",
             onClick: e.onClose,
-            children: tx("check_network_compatibility.close")
+            children: renderI18nText("check_network_compatibility.close")
           })
         })
       })]
@@ -146,7 +146,7 @@ export function $$O1(e, t) {
   e(F.enqueue({
     message: t,
     button: {
-      text: _$$t("check_network_compatibility.error_bell.view_settings"),
+      text: getI18nString("check_network_compatibility.error_bell.view_settings"),
       action: () => ($$D0(e), !0)
     },
     error: !0
@@ -157,7 +157,7 @@ export function $$D0(e) {
     matchType: P
   }));
   e(F.enqueue({
-    message: _$$t("check_network_compatibility.checking_network_settings"),
+    message: getI18nString("check_network_compatibility.checking_network_settings"),
     icon: zX.SPINNER,
     type: P
   }));
@@ -226,11 +226,11 @@ export function $$D0(e) {
         results: i
       }
     }))) : e(F.enqueue({
-      message: _$$t("check_network_compatibility.network_settings_compatible")
+      message: getI18nString("check_network_compatibility.network_settings_compatible")
     }));
   }).catch(() => {
     e(F.enqueue({
-      message: _$$t("check_network_compatibility.error"),
+      message: getI18nString("check_network_compatibility.error"),
       error: !0
     }));
   });

@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useState } from "react";
 import { sortByPropertyWithOptions } from "../figma_app/656233";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { X } from "../0c62c2fd/409644";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { kg } from "../figma_app/976345";
@@ -67,7 +67,7 @@ export function $$b0(e) {
   sortByPropertyWithOptions(t, "name");
   let [r, l] = useState(void 0);
   return jsx(X, {
-    emptyView: tx("team_tile.guest.no_teams.info", {
+    emptyView: renderI18nText("team_tile.guest.no_teams.info", {
       orgName: e.orgName
     }),
     children: t.map(t => jsx(x, {

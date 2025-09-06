@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useCallback, useState } from "react";
 import { useDispatch } from "../vendor/514228";
 import a from "../vendor/128080";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { gB } from "../905/723791";
 import { $E, y1 } from "../905/445814";
 import { V3 } from "../figma_app/976345";
@@ -62,7 +62,7 @@ export function $$R6(e, t, i) {
     fileIcon: h,
     fileLoaded: g,
     openFile: useCallback(() => {
-      if (sx("Team Feed File Clicked", {
+      if (trackEventAnalytics("Team Feed File Clicked", {
         postUuid: e
       }), s) {
         if (s.type === cM.NODE) {
@@ -96,7 +96,7 @@ export var $$N4 = (e => (e.TILE = "tile", e.DETAIL = "detail", e))($$N4 || {});
 export function $$P0(e, t) {
   let i = useDispatch();
   return useCallback(() => {
-    sx("Team Feed Copy Link Clicked", {
+    trackEventAnalytics("Team Feed Copy Link Clicked", {
       postUuid: e,
       source: t
     });
@@ -121,7 +121,7 @@ export function $$O5(e, t, i, r) {
         message: e.error?.message || ""
       })));
       console.error(`Failed to load feed posts: ${t}`);
-      sx("Livegraph Feed Post Comments Errors", {
+      trackEventAnalytics("Livegraph Feed Post Comments Errors", {
         errors: t
       });
     }

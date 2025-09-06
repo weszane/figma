@@ -2,7 +2,7 @@ import { NC } from "../905/17179";
 import { Q } from "../905/150006";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { bx } from "../905/34809";
 import { sf } from "../905/929976";
@@ -25,7 +25,7 @@ let $$b10 = nF((e, t) => XHR.put(`/api/folders/${t.folderId}/description`, {
   }));
 }).catch(t => {
   console.error(t);
-  e.dispatch(_$$s.error(_$$t("file_browser.file_browser_actions.update_subscription_error")));
+  e.dispatch(_$$s.error(getI18nString("file_browser.file_browser_actions.update_subscription_error")));
 }));
 let $$T6 = NC("FOLDER_UNPIN_FILE");
 let $$I15 = nF((e, t) => {
@@ -34,7 +34,7 @@ let $$I15 = nF((e, t) => {
     r.commit();
   }).catch(() => {
     r.revert();
-    e.dispatch(_$$s.error(_$$t("file_browser.file_browser_actions.file_unpin_error")));
+    e.dispatch(_$$s.error(getI18nString("file_browser.file_browser_actions.file_unpin_error")));
   });
 });
 let $$S1 = NC("FOLDER_PIN_FILE");
@@ -47,11 +47,11 @@ let $$v8 = nF(async (e, t) => {
     r.commit();
     e.dispatch(F.enqueue({
       error: !1,
-      message: _$$t("file_browser.file_browser_actions.file_pinned_to_project")
+      message: getI18nString("file_browser.file_browser_actions.file_pinned_to_project")
     }));
   }).catch(() => {
     r.revert();
-    e.dispatch(_$$s.error(_$$t("file_browser.file_browser_actions.file_pin_error")));
+    e.dispatch(_$$s.error(getI18nString("file_browser.file_browser_actions.file_pin_error")));
   });
 });
 let $$A5 = NC("FOLDER_SET_PINNED_FILE");
@@ -142,7 +142,7 @@ let $$w11 = nF((e, t) => {
   return Q({
     store: e,
     requestPromise: l,
-    fallbackError: _$$t("file_browser.file_browser_actions.create_project_error"),
+    fallbackError: getI18nString("file_browser.file_browser_actions.create_project_error"),
     next: e.dispatch,
     action: $$k7(n)
   });
@@ -160,7 +160,7 @@ nF((e, {
   Q({
     store: e,
     requestPromise: l,
-    fallbackError: _$$t("file_browser.file_browser_actions.update_project_error"),
+    fallbackError: getI18nString("file_browser.file_browser_actions.update_project_error"),
     next: e.dispatch,
     action: $$P14({
       folder: {
@@ -191,4 +191,4 @@ export const vt = $$w11;
 export const y2 = $$R12;
 export const yH = $$N13;
 export const yJ = $$P14;
-export const z6 = $$I15; 
+export const z6 = $$I15;

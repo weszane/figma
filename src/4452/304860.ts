@@ -1,7 +1,7 @@
 import { xk } from '@stylexjs/stylex';
 import { Suspense, useCallback, useEffect, useMemo, useState } from 'react';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
-import { $D } from '../905/11';
+import { reportError } from '../905/11';
 import { bL } from '../905/38914';
 import { Ln } from '../905/84777';
 import { Ju } from '../905/102752';
@@ -11,12 +11,12 @@ import { ServiceCategories as _$$e } from '../905/165054';
 import { V as _$$V } from '../905/223084';
 import { B as _$$B } from '../905/261906';
 import { F as _$$F } from '../905/302958';
-import { t as _$$t, tx } from '../905/303541';
+import { getI18nString, renderI18nText } from '../905/303541';
 import { N_ } from '../905/332483';
 import { c as _$$c } from '../905/370443';
 import { hS } from '../905/437088';
 import { N as _$$N } from '../905/438674';
-import { sx } from '../905/449184';
+import { trackEventAnalytics } from '../905/449184';
 import { l as _$$l } from '../905/479687';
 import { ud } from '../905/513035';
 import { $n } from '../905/521428';
@@ -174,7 +174,7 @@ function es({
   let n = jsx('div', {
     'data-testid': `${t}-price`,
     'style': _$$sx.noWrap.colorTextSecondary.$,
-    'children': e ? tx('general.whats_included') : tx('general.price_per_month', {
+    'children': e ? renderI18nText('general.whats_included') : renderI18nText('general.price_per_month', {
       priceString: a
     })
   });
@@ -212,13 +212,13 @@ function er(e) {
     V.status === 'errors' && console.error('orgManagesSeatsViaScimQueryResult error', V.errors);
   }, [V]), y.status !== 'loaded') {
     let e = new Error(y.status === 'disabled' ? 'Plan fetching disabled' : 'Error fetching plan');
-    $D(_$$e.MONETIZATION_EXPANSION, e);
+    reportError(_$$e.MONETIZATION_EXPANSION, e);
     return e;
   }
   let z = y.data;
   if (!z) {
     let e = new Error('No Plan found');
-    $D(_$$e.MONETIZATION_EXPANSION, e);
+    reportError(_$$e.MONETIZATION_EXPANSION, e);
     return e;
   }
   let {
@@ -232,7 +232,7 @@ function er(e) {
     let [n] = mI(s);
     let r = _$$k();
     let i = n.status === 'disabled' ? new Error('Missing contract rate args.') : n.status === 'errors' ? new Error('Error while fetching pricing.') : void 0;
-    if (i && $D(_$$e.MONETIZATION_EXPANSION, i), i || !t) {
+    if (i && reportError(_$$e.MONETIZATION_EXPANSION, i), i || !t) {
       return {
         billableProductKeyContractPrices: M,
         status: n.status
@@ -282,7 +282,7 @@ function er(e) {
       source: 'button'
     });
     t(_$$F.enqueue({
-      message: _$$t('plan_settings.auto_approval_settings.approval_settings_applied'),
+      message: getI18nString('plan_settings.auto_approval_settings.approval_settings_applied'),
       icon: zX.CHECK_WITH_CIRCLE
     }));
   }, [Y, t, p.props, z.key.parentId, z.key.type]);
@@ -319,15 +319,15 @@ function er(e) {
               className: _$$s.mb16.$
             }), jsx('div', {
               className: _$$s.textHeadingMedium.mb8.$,
-              children: e.isCurfEnabledForMembers ? tx('plan_settings.auto_approval_settings.title.curf_enabled_for_members') : tx('plan_settings.auto_approval_settings.title')
+              children: e.isCurfEnabledForMembers ? renderI18nText('plan_settings.auto_approval_settings.title.curf_enabled_for_members') : renderI18nText('plan_settings.auto_approval_settings.title')
             }), jsxs('span', {
               children: [jsx('span', {
                 className: _$$s.textBodyMedium.colorTextSecondary.preWrap.$,
-                children: g ? e.isCurfEnabledForMembers ? tx('plan_settings.auto_approval_settings_subtitle_ela_and_curf_enabled_for_members') : tx('plan_settings.auto_approval_settings_subtitle_ela') : e.isCurfEnabledForMembers ? tx('plan_settings.auto_approval_settings.subtitle_curf_members') : tx('plan_settings.auto_approval_settings.subtitle')
+                children: g ? e.isCurfEnabledForMembers ? renderI18nText('plan_settings.auto_approval_settings_subtitle_ela_and_curf_enabled_for_members') : renderI18nText('plan_settings.auto_approval_settings_subtitle_ela') : e.isCurfEnabledForMembers ? renderI18nText('plan_settings.auto_approval_settings.subtitle_curf_members') : renderI18nText('plan_settings.auto_approval_settings.subtitle')
               }), jsx(_$$N, {
                 href: 'https://help.figma.com/hc/articles/4414038570007',
                 newTab: !0,
-                children: tx('plan_settings.auto_approval_settings.learn_about_seat_management_options')
+                children: renderI18nText('plan_settings.auto_approval_settings.learn_about_seat_management_options')
               })]
             }), jsxs('div', {
               className: _$$s.mt24.flex.flexColumn.gap24.mb8.$,
@@ -361,14 +361,14 @@ function er(e) {
               trackingProperties: {
                 trackingDescriptor: _$$c.CANCEL
               },
-              children: tx('plan_settings.auto_approval_settings.cancel')
+              children: renderI18nText('plan_settings.auto_approval_settings.cancel')
             }), jsx($z, {
               variant: 'primary',
               onClick: X,
               trackingProperties: {
                 trackingDescriptor: z.key.type ? z.key.type === FOrganizationLevelType.ORG ? _$$c.SAVE_FOR_ORGANIZATION : _$$c.SAVE_FOR_TEAM : _$$c.SAVE
               },
-              children: z.key.type ? z.key.type === FOrganizationLevelType.ORG ? tx('plan_settings.auto_approval_settings.save_for_plan.organization') : tx('plan_settings.auto_approval_settings.save_for_plan.team') : tx('plan_settings.auto_approval_settings.save_for_plan.no_plan')
+              children: z.key.type ? z.key.type === FOrganizationLevelType.ORG ? renderI18nText('plan_settings.auto_approval_settings.save_for_plan.organization') : renderI18nText('plan_settings.auto_approval_settings.save_for_plan.team') : renderI18nText('plan_settings.auto_approval_settings.save_for_plan.no_plan')
             })]
           })
         })]
@@ -380,7 +380,7 @@ function ei({
   failedToLoadPrices: e
 }) {
   return (useEffect(() => {
-    e && sx('seat_purchasing.non_blocking_fetch_error', {
+    e && trackEventAnalytics('seat_purchasing.non_blocking_fetch_error', {
       price_fetch_error: e,
       view: 'seat_approval_settings_modal'
     }, {
@@ -390,7 +390,7 @@ function ei({
     dataTestId: 'pricing-error-badge',
     color: _$$S.WARNING,
     padding: 8,
-    text: tx('plan_settings.auto_approval_settings.pricing_error')
+    text: renderI18nText('plan_settings.auto_approval_settings.pricing_error')
   }) : null;
 }
 function el() {
@@ -405,9 +405,9 @@ function el() {
         spacing: 4,
         children: [jsx('p', {
           ...xk(_$$g.textBodyMediumStrong),
-          children: tx('plan_settings.auto_approval_settings.scim_badge.title')
+          children: renderI18nText('plan_settings.auto_approval_settings.scim_badge.title')
         }), jsx('p', {
-          children: tx('plan_settings.auto_approval_settings.scim_badge.subtitle')
+          children: renderI18nText('plan_settings.auto_approval_settings.scim_badge.subtitle')
         })]
       })
     })
@@ -425,9 +425,9 @@ function eo() {
         spacing: 4,
         children: [jsx('p', {
           className: _$$s.textBodyMediumStrong.$,
-          children: tx('plan_settings.auto_approval_settings.curf_badge.title')
+          children: renderI18nText('plan_settings.auto_approval_settings.curf_badge.title')
         }), jsxs('p', {
-          children: [' ', tx('plan_settings.auto_approval_settings.curf_badge.subtitle')]
+          children: [' ', renderI18nText('plan_settings.auto_approval_settings.curf_badge.subtitle')]
         })]
       })
     })
@@ -473,10 +473,10 @@ let eu = Ju(e => {
               className: _$$s.mb16.$
             }), jsx('div', {
               className: _$$s.textHeadingMedium.mb8.$,
-              children: tx('plan_settings.curf_auto_approval_settings_modal.title')
+              children: renderI18nText('plan_settings.curf_auto_approval_settings_modal.title')
             }), jsx('span', {
               className: _$$s.textBodyMedium.colorTextSecondary.$,
-              children: tx('plan_settings.curf_auto_approval_settings_modal.description')
+              children: renderI18nText('plan_settings.curf_auto_approval_settings_modal.description')
             })]
           })
         }), jsx(wi, {
@@ -486,7 +486,7 @@ let eu = Ju(e => {
               onClick: () => a.props?.close({
                 source: 'button'
               }),
-              children: tx('plan_settings.curf_auto_approval_settings_modal.got_it')
+              children: renderI18nText('plan_settings.curf_auto_approval_settings_modal.got_it')
             })
           })
         })]

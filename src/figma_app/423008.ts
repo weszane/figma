@@ -6,7 +6,7 @@ import o from "classnames";
 import { isGovCluster } from "../figma_app/169182";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Z } from "../905/224161";
 import { _6 } from "../figma_app/386952";
 import { ju } from "../905/187165";
@@ -33,7 +33,7 @@ export function $$E0({
           "data-test-id": "google-btn"
         },
         className: l()(x6, zB, t ? as : Hg, r && _$$s.colorTextBrand.$),
-        "aria-label": _$$t("footer_banner.continue_with_google"),
+        "aria-label": getI18nString("footer_banner.continue_with_google"),
         ...o,
         children: jsxs("span", {
           className: _d,
@@ -65,7 +65,7 @@ export function $$y1(e) {
           "data-test-id": "google-btn"
         },
         className: "x3nfvp2 x1n2onr6 x1c5tqo3 x8ge37t x19y5rnk xxk0z11",
-        "aria-label": _$$t("footer_banner.continue_with_google"),
+        "aria-label": getI18nString("footer_banner.continue_with_google"),
         ...e,
         children: jsx(B, {
           className: "x78zum5 x6s0dn4 x46zyou",

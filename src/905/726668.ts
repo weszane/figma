@@ -5,7 +5,7 @@ import { getFeatureFlags } from "../905/601108";
 import { resourceUtils } from "../905/989992";
 import l from "../vendor/239910";
 import { Rs, p as _$$p } from "../figma_app/288654";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { o27 } from "../figma_app/43951";
 var d = l;
 export function $$m1(e, {
@@ -53,7 +53,7 @@ function g(e, t) {
     thumbnailUrl: file.thumbnailUrl,
     thumbnailUrlOverride: file.thumbnailUrlOverride,
     thumbnailGuid: file.thumbnailGuid
-  } : (t?.has(libraryKey) || (e.libraryKeyToFile && getFeatureFlags().dse_lk_library_metadata_sentry && x1("designSystems", "Unexpectedly failed to access library by key", {
+  } : (t?.has(libraryKey) || (e.libraryKeyToFile && getFeatureFlags().dse_lk_library_metadata_sentry && logError("designSystems", "Unexpectedly failed to access library by key", {
     libraryKey
   }, {
     reportAsSentryError: !0

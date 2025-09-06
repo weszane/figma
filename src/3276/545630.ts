@@ -3,7 +3,7 @@ import { memo, useMemo, useRef, useEffect, useState, useCallback, useContext, us
 import { useDispatch, useSelector, useStore } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
-import { md, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, Xr } from "../figma_app/27355";
 import { am } from "../figma_app/901889";
 import c, { Point, expandRect } from "../905/736624";
 import { tH as _$$tH, H4 } from "../905/751457";
@@ -54,11 +54,11 @@ import { ay } from "../905/56623";
 import { my, v2, Di, gy, rX, IS, u_, A3, Nz } from "../905/428481";
 import { H as _$$H, K_, my as _$$my, el as _$$el, e7 as _$$e2, dQ, u_ as _$$u_, Ws, OF, q_, $N, Ud, T7, Zr, se, V_, S as _$$S, sz, ij, C_, wH, rX as _$$rX, Fm, gy as _$$gy, kW, tu as _$$tu, Nz as _$$Nz } from "../905/540111";
 import e_ from "../vendor/197638";
-import { sn } from "../905/542194";
+import { globalPerfTimer } from "../905/542194";
 import { sP, I as _$$I, Kx, pV } from "../figma_app/819288";
 import { rf, BV, v_ } from "../figma_app/806412";
 import { JD } from "../905/986103";
-import { t as _$$t2, YD, tx as _$$tx } from "../905/303541";
+import { getI18nString, getI18nStringAlias, renderI18nText } from "../905/303541";
 import { Y5 } from "../figma_app/455680";
 import { T as _$$T, w as _$$w } from "../3276/279527";
 import { Vi } from "../figma_app/955650";
@@ -72,7 +72,7 @@ import { dDF } from "../figma_app/43951";
 import { throwTypeError } from "../figma_app/465776";
 import { qE } from "../figma_app/492908";
 import { k as _$$k3 } from "../905/443820";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { parsePxNumber, parsePxInt } from "../figma_app/783094";
 import { h as _$$h } from "../905/207101";
 import { g as _$$g2 } from "../905/880308";
@@ -106,7 +106,7 @@ import { Pf } from "../905/590952";
 import { to as _$$to } from "../905/156213";
 import { gX } from "../905/504768";
 import { sZ } from "../905/845253";
-import { nT as _$$nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { J as _$$J } from "../905/375499";
 import { HH } from "../figma_app/841415";
 import { gk } from "../905/222884";
@@ -141,7 +141,7 @@ import { R3, Dr, QQ, Vm } from "../figma_app/728075";
 import { lQ } from "../905/934246";
 import { i as _$$i2 } from "../905/718764";
 import { D as _$$D } from "../3276/853301";
-import { eD as _$$eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { AU, on } from "../figma_app/242565";
 import { C as _$$C2, e as _$$e3 } from "../905/937623";
 import { Z as _$$Z3, _ as _$$_ } from "../3276/890696";
@@ -424,11 +424,11 @@ let eT = memo(function ({
     let t = e.avatars.reduce((e, t) => e + t.num_comments, 0) - 1;
     let n = e.numAttachments;
     let o = !!e.numUnreadReplies && e.numUnreadReplies !== t;
-    let a = t ? _$$t2("comments.preview_reply_count", {
+    let a = t ? getI18nString("comments.preview_reply_count", {
       replyCount: o ? e.numUnreadReplies : t,
       new: o ? "true" : "false"
     }) : "";
-    let i = n ? _$$t2("comments.attachment_count", {
+    let i = n ? getI18nString("comments.attachment_count", {
       attachmentCount: n
     }) : "";
     let s = "";
@@ -512,7 +512,7 @@ let eN = memo(function ({
   let [h, f] = useState(!1);
   let [_, g] = useState(!1);
   let v = rf(m, "click", useCallback(() => {
-    sn.start("view_comment_thread");
+    globalPerfTimer.start("view_comment_thread");
     n(e.id);
   }, [n, e.id]));
   let {
@@ -907,7 +907,7 @@ let eU = memo(function (e) {
   let u = useContext(viewportNavigatorContext);
   let p = useSelector(e => e.mirror.appModel.currentTool);
   let f = ut(Ez5?.editorState().handToolTemporarilyEnabled, !1);
-  let _ = md(_$$R);
+  let _ = useAtomWithSubscription(_$$R);
   let g = BI();
   let v = useSelector(e => ![m1T.DESIGN_LAYOUT, m1T.WHITEBOARD_LAYOUT, m1T.HISTORY, m1T.PREVIEW, m1T.COMMENTS, m1T.DEV_HANDOFF, m1T.SITES_LAYOUT].includes(e.mirror.appModel.activeCanvasEditModeType) || e.mirror.appModel.activeUserAction !== QOV.DEFAULT) && (!g || g?.shouldOptimizeForIpadApp && g?.shouldFadeCommentsDuringEdit);
   let x = e.activeThread?.id === hm;
@@ -1181,7 +1181,7 @@ function tV(e) {
     commentReactions: {}
   }, [f, e.feedPost.feedPostPublicUuid]);
   let [x, ...b] = p;
-  let y = useSelector(e => "fullscreen" === e.selectedView.view && e.selectedView.editorType === _$$nT.Whiteboard);
+  let y = useSelector(e => "fullscreen" === e.selectedView.view && e.selectedView.editorType === FEditorType.Whiteboard);
   let [C, w] = _$$R2();
   let {
     feedPost
@@ -1301,7 +1301,7 @@ function tV(e) {
         className: "feed_post_popover_modal--subtitleRow--kW-8f",
         children: [jsx("div", {
           className: "feed_post_popover_modal--postedToFeed--mHMFC",
-          children: _$$t2("fig_feed.posted_to_feed")
+          children: getI18nString("fig_feed.posted_to_feed")
         }), " "]
       }), jsxs("div", {
         children: [jsx("div", {
@@ -1365,13 +1365,13 @@ function tV(e) {
       onComposeFocus: e.onComposeFocus,
       onEditStart: S,
       onSubmit: E,
-      placeholderText: _$$t2("comments.reply"),
+      placeholderText: getI18nString("comments.reply"),
       recordingKey: Dw.feedPopover,
       replyContainerRef: F,
       setHyperlinkEditorRef: e.setHyperlinkEditorRef,
       setHyperlinkLocation: e.setHyperlinkLocation,
       setIsEditorFocused: e.setIsEditorFocused,
-      submitText: _$$t2("comments.reply"),
+      submitText: getI18nString("comments.reply"),
       threadId: k,
       threadPosition,
       typeahead: e.comments.typeahead,
@@ -1383,8 +1383,8 @@ function tV(e) {
   }) : null;
 }
 function t3(e) {
-  let t = md(p9);
-  let n = md(yV);
+  let t = useAtomWithSubscription(p9);
+  let n = useAtomWithSubscription(yV);
   let a = kJ();
   return yo({
     user: t,
@@ -1406,7 +1406,7 @@ function t4(e) {
   return k3() ? e.children : null;
 }
 function t6(e) {
-  let t = !md(_$$wg);
+  let t = !useAtomWithSubscription(_$$wg);
   let {
     pinApi
   } = I_();
@@ -1425,7 +1425,7 @@ function t6(e) {
         message: _$$J2(e, e.data.message),
         error: !0
       })) : a(_$$F.enqueue({
-        message: YD("comments.pinning.err.fallback"),
+        message: getI18nStringAlias("comments.pinning.err.fallback"),
         error: !0
       }));
     }
@@ -1441,9 +1441,9 @@ function t6(e) {
         "data-onboarding-key": s ? "unpin-comment-icon" : "pin-comment-icon",
         "data-testId": "pin-comment-button-thread-header",
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": s ? _$$t2("comments.pinning.unpin_comment") : _$$t2("comments.pinning.pin_comment")
+        "data-tooltip": s ? getI18nString("comments.pinning.unpin_comment") : getI18nString("comments.pinning.pin_comment")
       },
-      "aria-label": _$$t2("comments.pinning.pin_comment"),
+      "aria-label": getI18nString("comments.pinning.pin_comment"),
       onClick: d,
       recordingKey: "threadHeader.pinCommentButton",
       children: jsx(_$$B, {
@@ -1482,14 +1482,14 @@ function t8(e) {
       "data-onboarding-key": "thread-header-left-section",
       "data-fullscreen-intercept": !0,
       children: jsx("h2", {
-        children: _$$tx("comments.comment_n")
+        children: renderI18nText("comments.comment_n")
       })
     }), jsxs("div", {
       className: _$$eX,
       children: [e.thread.comments[0] && jsx(_$$V, {
         comment: e.thread.comments[0],
         isUnread: e.thread.comments.some(e => e.isUnread),
-        label: _$$t2("comments.thread_actions"),
+        label: getI18nString("comments.thread_actions"),
         recordingKey: "threadHeader.moreActionsButton",
         thread: e.thread,
         possibleActions: e.overflowMenuActions,
@@ -1502,7 +1502,7 @@ function t8(e) {
         disabled: r,
         "data-fullscreen-intercept": !0,
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": e.resolved ? r ? _$$t2("comments.pinning.cannot_unresolve") : _$$t2("comments.mark_as_unresolved") : r ? _$$t2("comments.pinning.cannot_resolve") : _$$t2("comments.mark_as_resolved"),
+        "data-tooltip": e.resolved ? r ? getI18nString("comments.pinning.cannot_unresolve") : getI18nString("comments.mark_as_unresolved") : r ? getI18nString("comments.pinning.cannot_resolve") : getI18nString("comments.mark_as_resolved"),
         onClick: () => {
           e.setResolved({
             thread: e.thread,
@@ -1517,8 +1517,8 @@ function t8(e) {
         className: _$$UR,
         recordingKey: "threadHeader",
         onClick: e.onClose,
-        innerText: _$$t2("comments.close"),
-        "aria-label": _$$t2("comments.close"),
+        innerText: getI18nString("comments.close"),
+        "aria-label": getI18nString("comments.close"),
         "data-fullscreen-intercept": !0
       })]
     })]
@@ -1581,7 +1581,7 @@ function nr(e) {
   let f = m?.reply.attachments ? Object.values(m?.reply.attachments) : ni;
   let _ = useSelector(e => e.comments.editingComment);
   let [v, x] = useState(!1);
-  let b = md(_$$R);
+  let b = useAtomWithSubscription(_$$R);
   let [y, C] = useState(_$$t$());
   let [w, j] = useState(ne);
   let k = function (e) {
@@ -1665,8 +1665,8 @@ function nr(e) {
     comments
   } = e.thread;
   _$$h(() => {
-    let e = sn.tryStop("view_comment_thread");
-    e && sx("view_comment_thread", {
+    let e = globalPerfTimer.tryStop("view_comment_thread");
+    e && trackEventAnalytics("view_comment_thread", {
       elapsedMs: e
     }, {
       forwardToDatadog: !0
@@ -1685,7 +1685,7 @@ function nr(e) {
   let es = thread.uuid;
   let er = useCallback(() => {
     let e = _$$g2();
-    sn.start(`comment_reply_creation_${e}`);
+    globalPerfTimer.start(`comment_reply_creation_${e}`);
     submitReply({
       threadId: ei,
       threadUuid: es ?? void 0,
@@ -1695,7 +1695,7 @@ function nr(e) {
   }, [submitReply, ei, es, en]);
   _$$h(() => () => {
     comments.map(e => {
-      e.uuid && e.isPendingFromSinatra && sn.tryStop(`comment_reply_creation_${e.uuid}`);
+      e.uuid && e.isPendingFromSinatra && globalPerfTimer.tryStop(`comment_reply_creation_${e.uuid}`);
     });
   });
   let el = useCallback(e => {
@@ -1833,7 +1833,7 @@ function nr(e) {
     let i = jsx(K0, {
       svg: _$$A6,
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": _$$t2("comments.dock_to_side"),
+      "data-tooltip": getI18nString("comments.dock_to_side"),
       recordingKey: "activeThread.dockToSideButton",
       onClick: eH,
       onMouseDown: e => e.stopPropagation(),
@@ -1913,7 +1913,7 @@ function nr(e) {
           ref: P,
           className: OM,
           tabIndex: -1,
-          "aria-label": _$$t2("fullscreen.accessibility.comment_thread_label"),
+          "aria-label": getI18nString("fullscreen.accessibility.comment_thread_label"),
           role: "region",
           "data-fullscreen-intercept": !0,
           children: [jsx(t8, {
@@ -1998,13 +1998,13 @@ function nr(e) {
               onComposeFocus: e.onComposeFocus,
               onEditStart: eh,
               onSubmit: er,
-              placeholderText: _$$t2("comments.reply"),
+              placeholderText: getI18nString("comments.reply"),
               recordingKey: Dw.reply,
               replyContainerRef: eq,
               setHyperlinkEditorRef: eL,
               setHyperlinkLocation: eD,
               setIsEditorFocused: e.setIsEditorFocused,
-              submitText: _$$t2("comments.reply"),
+              submitText: getI18nString("comments.reply"),
               threadId: ei,
               threadPosition,
               typeahead: e.comments.typeahead,
@@ -2334,7 +2334,7 @@ class nx extends PureComponent {
       onMouseDown: this.props.onMouseDown,
       onMouseMove: this.props.onMouseMove,
       onContextMenu: e => {
-        _$$eD || (e.stopPropagation(), e.preventDefault());
+        desktopAPIInstance || (e.stopPropagation(), e.preventDefault());
       },
       children: this.props.children
     });
@@ -2486,7 +2486,7 @@ function nP(e) {
   let q = `calc(${e.viewportBounds.height}px - (2 * ${nj}px))`;
   let z = !0 === e.disablePointerEvents ? "new_comment_container--translatedThreadContainerNoPointerEvents--9z1L5 new_comment_container--translatedThreadContainer--2xkOH" : `new_comment_container--translatedThreadContainer--2xkOH ${Dm}`;
   let Z = e.thread.id === hm ? "new_comment_container--newCommentContainerNext--bCfo7 new_comment_container--threadContainer--XIsVX text--fontPos11--2LvXf text--_fontBase--QdLsd overflow--overflowYAuto--nfK38 overflow--momentumScroll--qtsu7" : "new_comment_container--threadContainer--XIsVX text--fontPos11--2LvXf text--_fontBase--QdLsd overflow--overflowYAuto--nfK38 overflow--momentumScroll--qtsu7";
-  let $ = _$$t2("comments.add_a_comment");
+  let $ = getI18nString("comments.add_a_comment");
   return jsx(ny, {
     onDragUpdate: e => {
       _(Point.subtract(e.position, e.start));
@@ -2550,7 +2550,7 @@ function nP(e) {
               setHyperlinkEditorRef: lQ,
               setHyperlinkLocation: T,
               setIsEditorFocused: e.setIsEditorFocused,
-              submitText: _$$t2("comments.post"),
+              submitText: getI18nString("comments.post"),
               threadId: hm,
               threadPosition: e.thread.threadPosition,
               typeahead: e.typeahead,
@@ -3111,7 +3111,7 @@ function nG(e) {
   } = e;
   let s = _$$ni();
   let r = useSelector(e => e.selectedView.view);
-  let d = md(_$$R);
+  let d = useAtomWithSubscription(_$$R);
   let c = void 0 !== e.isActiveCommentPinned ? e.isActiveCommentPinned : d;
   let m = useSelector(e => e.comments.editingComment);
   let u = useSelector(e => e.comments.emojiPicker);

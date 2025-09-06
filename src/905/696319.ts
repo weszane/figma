@@ -18,7 +18,7 @@ import { l as _$$l } from "../905/490996";
 import { C as _$$C } from "../905/294086";
 import { Ib } from "../905/129884";
 import { useDispatch } from "../vendor/514228";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 let p = "data-alt-scrub-target";
 let m = null;
@@ -623,7 +623,7 @@ export function $$X0({
     return useCallback((t, i) => {
       let n = i <= -8 ? "1/8" : i <= -4 ? "1/4" : i <= -2 ? "1/2" : i >= 8 ? "8x" : i >= 4 ? "4x" : i >= 2 ? "2x" : "1x";
       e(_$$F.enqueue({
-        message: _$$t("common.scrubScale", {
+        message: getI18nString("common.scrubScale", {
           value: n
         }),
         type: "scrub-scale"

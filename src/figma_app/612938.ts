@@ -2,10 +2,10 @@ import { useCallback, useEffect } from "react";
 import { bT } from "../905/851937";
 import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
-import { yQ } from "../905/236856";
+import { waitForAnimationFrame } from "../905/236856";
 import { k } from "../905/651849";
 import { debugState } from "../905/407919";
-import { nl } from "../figma_app/257275";
+import { isInteractionPathCheck } from "../figma_app/897289";
 import { dW } from "../905/515076";
 import { wR } from "../figma_app/765689";
 import { q5 } from "../figma_app/516028";
@@ -93,7 +93,7 @@ let y = class e {
     return bT(runPluginArgs);
   }
   setRunPluginForTest(e) {
-    if (!nl()) throw Error("Cannot set run plugin for test when not running interaction tests");
+    if (!isInteractionPathCheck()) throw Error("Cannot set run plugin for test when not running interaction tests");
     this.runPlugin = e;
   }
   createTask(e) {
@@ -177,7 +177,7 @@ let y = class e {
     this.log("terminatePlugin", "Terminating plugin");
     this.currentRunState = null;
     await wY();
-    await yQ();
+    await waitForAnimationFrame();
   }
   findExistingRunState({
     runPluginArgs: e,

@@ -4,7 +4,7 @@ import { Gu } from "../figma_app/262240";
 import { bL, mc, q7 } from "../figma_app/860955";
 import { luZ } from "../figma_app/763686";
 import { l7 } from "../905/189185";
-import { R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { Dm } from "../figma_app/8833";
 import { A } from "../905/482208";
 import { Y5 } from "../figma_app/455680";
@@ -22,7 +22,7 @@ export function $$_0({
     appModel,
     sceneGraph,
     sceneGraphSelection
-  } = R(e => ({
+  } = selectWithShallowEqual(e => ({
     appModel: e.mirror.appModel,
     sceneGraph: e.mirror.sceneGraph,
     sceneGraphSelection: e.mirror.sceneGraphSelection
@@ -67,7 +67,7 @@ export function $$x1({
 }) {
   let {
     sceneGraph
-  } = R(e => ({
+  } = selectWithShallowEqual(e => ({
     sceneGraph: e.mirror.sceneGraph
   }));
   let {

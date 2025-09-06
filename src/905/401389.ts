@@ -14,11 +14,11 @@ import { f as _$$f2 } from "../905/640587";
 import { rrT, VD3, e0R, glU } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { AD, dI } from "../905/871411";
-import { mC } from "../figma_app/27355";
+import { useMemoizedAtomValue } from "../figma_app/27355";
 import v from "classnames";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { Pt, rf, uA, _3 } from "../figma_app/806412";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { XE, Uv, bS } from "../figma_app/91703";
 import { AV } from "../figma_app/933328";
 import { Y5 } from "../figma_app/455680";
@@ -80,7 +80,7 @@ function $(e) {
   return jsx(_$$K, {
     recordingKey: Pt(e, "removeButton"),
     disabled: 0 === m,
-    "aria-label": _$$t("fullscreen.draggable_list.remove"),
+    "aria-label": getI18nString("fullscreen.draggable_list.remove"),
     onClick: u,
     htmlAttributes: {
       onMouseDown: p
@@ -102,13 +102,13 @@ function Z(e) {
   }, [current, toggleShowingStyles]);
   let o = q();
   return e.toggleShowingStyles ? jsx(_$$d, {
-    "aria-label": _$$t("fullscreen.properties_panel.style"),
+    "aria-label": getI18nString("fullscreen.properties_panel.style"),
     recordingKey: Pt(e, "stylesButton"),
     "aria-expanded": e.isStylesPickerShown,
     onClick: s,
     htmlAttributes: {
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": _$$t("fullscreen.properties_panel.style"),
+      "data-tooltip": getI18nString("fullscreen.properties_panel.style"),
       onMouseDown: o
     },
     children: jsx(_$$y, {})
@@ -117,10 +117,10 @@ function Z(e) {
 function X(e) {
   return jsx(_$$K, {
     recordingKey: Pt(e, "resetInteractionsButton"),
-    "aria-label": _$$t("proto.prototype_panel.reset_interactions"),
+    "aria-label": getI18nString("proto.prototype_panel.reset_interactions"),
     onClick: e.onResetInteractions,
     htmlAttributes: {
-      "data-tooltip": _$$t("proto.prototype_panel.reset_interactions"),
+      "data-tooltip": getI18nString("proto.prototype_panel.reset_interactions"),
       "data-tooltip-type": Ib.TEXT
     },
     children: jsx(p, {})
@@ -132,10 +132,10 @@ function Q(e) {
     children: jsx(_$$K, {
       actionOnPointerDown: !0,
       recordingKey: Pt(e, "addButton"),
-      "aria-label": e.overrideAddPropertyTooltip ?? _$$t("fullscreen.draggable_list.add"),
+      "aria-label": e.overrideAddPropertyTooltip ?? getI18nString("fullscreen.draggable_list.add"),
       onClick: e.addProperty,
       htmlAttributes: {
-        "data-tooltip": e.overrideAddPropertyTooltip ?? _$$t("fullscreen.draggable_list.add"),
+        "data-tooltip": e.overrideAddPropertyTooltip ?? getI18nString("fullscreen.draggable_list.add"),
         "data-tooltip-type": Ib.TEXT
       },
       children: jsx(_$$e, {
@@ -150,12 +150,12 @@ function J(e) {
     className: kG,
     children: jsx(_$$K, {
       recordingKey: Pt(e, "scrollBehaviorButton"),
-      "aria-label": _$$t("fullscreen.draggable_list.scroll_behavior"),
+      "aria-label": getI18nString("fullscreen.draggable_list.scroll_behavior"),
       onClick: e.toggleScrollBehaviorPicker,
       htmlAttributes: {
         onMouseDown: t,
         "data-testid": "scroll-behavior-button",
-        "data-tooltip": _$$t("fullscreen.draggable_list.scroll_behavior"),
+        "data-tooltip": getI18nString("fullscreen.draggable_list.scroll_behavior"),
         "data-tooltip-type": Ib.TEXT
       },
       children: jsx(_$$J, {})
@@ -164,7 +164,7 @@ function J(e) {
 }
 function ee(e) {
   return jsx(_$$f, {
-    "aria-label": _$$t("fullscreen.toolbar.prototyping-visibility"),
+    "aria-label": getI18nString("fullscreen.toolbar.prototyping-visibility"),
     recordingKey: Pt(e, "addButton"),
     checked: !!e.checked,
     onIcon: jsx(_$$l, {}),
@@ -174,7 +174,7 @@ function ee(e) {
     },
     htmlAttributes: {
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": _$$t("fullscreen.toolbar.prototyping-visibility"),
+      "data-tooltip": getI18nString("fullscreen.toolbar.prototyping-visibility"),
       "data-tooltip-shortcut-key": "toggle-prototyping-info",
       "data-onboarding-key": "visible-flows-toggle"
     }
@@ -270,7 +270,7 @@ function en(e) {
   }, [addProperty, propertyList, hideAddButton, onHeaderClick, headerClickTriggersAddProperty]);
   let d = rf(Pt(e, "panelTitle"), "click", l);
   let c = useRef(null);
-  let u = mC(!1, e.isPanelBodyCollapsedAtom);
+  let u = useMemoizedAtomValue(!1, e.isPanelBodyCollapsedAtom);
   if (!e.title) return null;
   let p = 0 === Number(_W(propertyList, []).length);
   let m = !(e.isMixed || gl(propertyList)) && !e.boldHeaderRow && (p || u);
@@ -332,7 +332,7 @@ class er extends uA {
           break;
         case 68:
           if (this.props.shouldIgnoreKeyboardEventDuplicateProperty) return;
-          (t.metaKey && Ay.mac || t.ctrlKey && !Ay.mac) && (this.duplicateProperty(), e.accept());
+          (t.metaKey && BrowserInfo.mac || t.ctrlKey && !BrowserInfo.mac) && (this.duplicateProperty(), e.accept());
           break;
         case 27:
           this.props.selectionHandler.getSelectedIndices().length && (this.props.selectionHandler.setSelectedIndices([]), e.accept());
@@ -502,7 +502,7 @@ class er extends uA {
         children: [t && jsx(fI, {
           children: jsx(nV, {
             className: Pf,
-            children: this.props.selectedPropertyType === rrT.EXPORT ? tx("fullscreen.properties_panel.click_plus_to_replace_mixed_export_settings") : tx("fullscreen.properties_panel.click_plus_to_replace_mixed_content")
+            children: this.props.selectedPropertyType === rrT.EXPORT ? renderI18nText("fullscreen.properties_panel.click_plus_to_replace_mixed_export_settings") : renderI18nText("fullscreen.properties_panel.click_plus_to_replace_mixed_content")
           })
         }), !t && e.length > 0 && jsx(_$$q, {
           listItems: e,
@@ -626,7 +626,7 @@ export class $$es2 extends uA {
         className: t || this.isInCreateStyleModal() || this.isInCreateVariableStyleModal() ? wx : Qf,
         children: jsx($$ea0, {
           ...this.props,
-          title: _$$t("design_systems.styles.properties"),
+          title: getI18nString("design_systems.styles.properties"),
           addProperty: this.addProperty
         })
       });

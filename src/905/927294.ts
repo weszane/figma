@@ -4,7 +4,7 @@ import { A } from "../905/251970";
 import { generateRecordingKey } from "../figma_app/878298";
 import o from "classnames";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { tf } from "../figma_app/831799";
 import { F } from "../905/759613";
@@ -16,7 +16,7 @@ export let $$g2 = tf(({
   dataOnboardingKey: i,
   dataTestId: o = "close-button",
   emphasized: d,
-  "aria-label": u = _$$t("general.close"),
+  "aria-label": u = getI18nString("general.close"),
   ...p
 }) => jsx(K, {
   "aria-label": u,
@@ -60,7 +60,7 @@ export function $$f0(e) {
       }),
       children: jsx($$g2, {
         onClick: () => e.onClose("close_button_clicked"),
-        "aria-label": _$$t("general.close"),
+        "aria-label": getI18nString("general.close"),
         innerText: "close",
         emphasized: e.emphasized
       })
@@ -77,7 +77,7 @@ export function $$_1(e) {
       style: sx.add({
         letterSpacing: "0.055px"
       }).$,
-      children: e.stepCounter && tx("rcs.rcs_shared.step_counter", {
+      children: e.stepCounter && renderI18nText("rcs.rcs_shared.step_counter", {
         currentStepNum: e.stepCounter.stepNum,
         totalNumSteps: e.stepCounter.totalNumSteps
       })

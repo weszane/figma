@@ -8,7 +8,7 @@ import { glU, Ez5 } from "../figma_app/763686";
 import { dI, Hr } from "../905/871411";
 import u from "classnames";
 import { s as _$$s } from "../figma_app/429226";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { zX } from "../905/576487";
 import { RK } from "../figma_app/815170";
@@ -32,7 +32,7 @@ class x {
     return !e || gl(e) ? "" : this.formatter.format(e);
   }
 }
-let N = () => _$$t("inspect_panel.property.missing");
+let N = () => getI18nString("inspect_panel.property.missing");
 class C {
   constructor(e) {
     this.nodeNameFormatter = new x(e);
@@ -76,7 +76,7 @@ class C {
       isSpringTransition: a,
       curveFunction: l,
       type: e.connectionType,
-      openUrlInNewTab: e.openUrlInNewTab ? _$$t("inspect_panel.interactions.open_in_new_tab_true") : void 0
+      openUrlInNewTab: e.openUrlInNewTab ? getI18nString("inspect_panel.interactions.open_in_new_tab_true") : void 0
     };
   }
   getEventArgs(e) {
@@ -152,7 +152,7 @@ let M = e => {
     if (!guid) return;
     o(guid);
     r.current = guid;
-    let d = _$$t("inspect_panel.interactions.return_to_node", {
+    let d = getI18nString("inspect_panel.interactions.return_to_node", {
       previous: n.format(a[0])
     });
     s(_$$F.enqueue({
@@ -183,7 +183,7 @@ function F(e) {
     let r = e.get(t);
     if (r) return r.type;
   }, action?.guid);
-  let m = "FRAME" === _ ? _$$t("inspect_panel.interactions.select_frame") : _ ? _$$t("inspect_panel.interactions.select_layer") : void 0;
+  let m = "FRAME" === _ ? getI18nString("inspect_panel.interactions.select_frame") : _ ? getI18nString("inspect_panel.interactions.select_layer") : void 0;
   let g = action?.value;
   let E = action && onClick && action.hasAnimation ? jsx(K, {
     onClick: p,
@@ -192,18 +192,18 @@ function F(e) {
       "data-tooltip-type": Ib.TEXT,
       "data-tooltip-show-immediately": !0
     },
-    "aria-label": m ?? _$$t("proto.action"),
+    "aria-label": m ?? getI18nString("proto.action"),
     children: jsx(_$$A, {})
   }) : action?.type === "URL" && g ? jsx(K, {
     onClick: () => u(RK({
       rawInput: g
     })),
     htmlAttributes: {
-      "data-tooltip": _$$t("inspect_panel.interactions.new_tab"),
+      "data-tooltip": getI18nString("inspect_panel.interactions.new_tab"),
       "data-tooltip-type": Ib.TEXT,
       "data-tooltip-show-immediately": !0
     },
-    "aria-label": _$$t("inspect_panel.interactions.new_tab"),
+    "aria-label": getI18nString("inspect_panel.interactions.new_tab"),
     children: jsx(V, {})
   }) : void 0;
   let b = action?.guid && c ? action.guid : void 0;
@@ -232,45 +232,45 @@ function j(e) {
       "animation_panel--highlightedAnimationSection--cPkZz": e.highlighted
     }),
     children: [o ? jsx(_p, {
-      name: _$$t("proto.action"),
+      name: getI18nString("proto.action"),
       value: event
     }) : jsx(_p, {
       className: "animation_panel--animationTitle--Xmsme text--fontPos11--2LvXf text--_fontBase--QdLsd",
       copyValue: event,
       children: event
     }), jsx(lz, {
-      name: _$$t("inspect_panel.interactions.delay"),
+      name: getI18nString("inspect_panel.interactions.delay"),
       value: delay
     }), jsx(_p, {
-      name: _$$t("inspect_panel.interactions.trigger"),
+      name: getI18nString("inspect_panel.interactions.trigger"),
       value: trigger
     }), jsx(_p, {
-      name: _$$t("inspect_panel.interactions.phrase"),
+      name: getI18nString("inspect_panel.interactions.phrase"),
       value: phrase
     }), jsx(F, {
       action,
       onClick: e.onActionClicked
     }), jsx(_p, {
-      name: _$$t("inspect_panel.interactions.should_open_in_new_tab"),
+      name: getI18nString("inspect_panel.interactions.should_open_in_new_tab"),
       value: action?.openUrlInNewTab
     }), action?.hasAnimation && jsxs(Fragment, {
       children: [jsx(_p, {
-        name: _$$t("inspect_panel.interactions.animate"),
+        name: getI18nString("inspect_panel.interactions.animate"),
         value: action?.animation
       }), jsx(_p, {
-        name: _$$t("inspect_panel.interactions.curve"),
+        name: getI18nString("inspect_panel.interactions.curve"),
         value: action?.curve
       }), !action?.isSpringTransition && jsx(lz, {
-        name: _$$t("inspect_panel.interactions.duration"),
+        name: getI18nString("inspect_panel.interactions.duration"),
         value: action?.duration
       }), action?.isSpringTransition && action?.curveFunction && jsx(_p, {
-        name: _$$t("inspect_panel.interactions.mass"),
+        name: getI18nString("inspect_panel.interactions.mass"),
         value: action?.curveFunction[0]
       }), action?.isSpringTransition && action?.curveFunction && jsx(_p, {
-        name: _$$t("inspect_panel.interactions.stiffness"),
+        name: getI18nString("inspect_panel.interactions.stiffness"),
         value: action?.curveFunction[1]
       }), action?.isSpringTransition && action?.curveFunction && jsx(_p, {
-        name: _$$t("inspect_panel.interactions.damping"),
+        name: getI18nString("inspect_panel.interactions.damping"),
         value: action?.curveFunction[2]
       })]
     })]
@@ -299,33 +299,33 @@ export function $$U0({
   let E = "SCROLLS" !== l || !!o && "NONE" !== o;
   let y = !(t.length < 1 && hS(t));
   return y || E ? jsxs(VZ, {
-    title: _$$t("inspect_panel.interactions.title"),
+    title: getI18nString("inspect_panel.interactions.title"),
     recordingKey: "interactions",
     copyAllValue: p,
     isSubsection: e,
     children: [E && jsxs(Fragment, {
       children: [jsx(_p, {
-        name: _$$t("inspect_panel.interactions.scroll_direction"),
+        name: getI18nString("inspect_panel.interactions.scroll_direction"),
         value: function (e) {
           switch (e) {
             case "HORIZONTAL":
-              return _$$t("inspect_panel.interactions.scroll_direction_horizontal");
+              return getI18nString("inspect_panel.interactions.scroll_direction_horizontal");
             case "VERTICAL":
-              return _$$t("inspect_panel.interactions.scroll_direction_vertical");
+              return getI18nString("inspect_panel.interactions.scroll_direction_vertical");
             case "BOTH":
-              return _$$t("inspect_panel.interactions.scroll_direction_both");
+              return getI18nString("inspect_panel.interactions.scroll_direction_both");
           }
         }(o)
       }), jsx(_p, {
-        name: _$$t("inspect_panel.interactions.scroll_behaviour"),
+        name: getI18nString("inspect_panel.interactions.scroll_behaviour"),
         value: function (e) {
           switch (e) {
             case "SCROLLS":
-              return _$$t("inspect_panel.interactions.scroll_behaviour_with_parent");
+              return getI18nString("inspect_panel.interactions.scroll_behaviour_with_parent");
             case "FIXED_WHEN_CHILD_OF_SCROLLING_FRAME":
-              return _$$t("inspect_panel.interactions.scroll_behaviour_fixed");
+              return getI18nString("inspect_panel.interactions.scroll_behaviour_fixed");
             case "STICKY_SCROLLS":
-              return _$$t("inspect_panel.interactions.scroll_behaviour_sticky");
+              return getI18nString("inspect_panel.interactions.scroll_behaviour_sticky");
           }
         }(l)
       }), y && jsx("div", {

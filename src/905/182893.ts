@@ -4,11 +4,11 @@ import { useDispatch } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { bL, l9, mc, c$ } from "../905/493196";
 import { h as _$$h } from "../905/270045";
-import { fp, md } from "../figma_app/27355";
-import { sx } from "../905/449184";
+import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
+import { trackEventAnalytics } from "../905/449184";
 import { Uz } from "../905/63728";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx, t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { CZ } from "../905/294085";
 import { hO, d3 } from "../figma_app/545293";
 import { l1 } from "../figma_app/502363";
@@ -98,10 +98,10 @@ function C({
 function T({
   entryPoint: e
 }) {
-  let [t, i] = fp(hO.sortByAtom);
-  let a = md(hO.currentSearchAtom);
-  let s = md(CZ);
-  let p = md(dd);
+  let [t, i] = useAtomValueAndSetter(hO.sortByAtom);
+  let a = useAtomWithSubscription(hO.currentSearchAtom);
+  let s = useAtomWithSubscription(CZ);
+  let p = useAtomWithSubscription(dd);
   let f = !!a?.result?.data?.length;
   let _ = [...QB.map(e => ({
     type: "checkableOption",
@@ -140,7 +140,7 @@ function T({
     }, 0);
   }, [R, focus]);
   let P = useCallback(t => {
-    a && (sx("Fragment search sorted results", {
+    a && (trackEventAnalytics("Fragment search sorted results", {
       ...d3(e, p, a.searchId, a.input, !1, s),
       sort_by: t
     }), i(t), N());
@@ -155,11 +155,11 @@ function T({
         active,
         children: jsx(l9, {
           label: jsx(_$$h, {
-            children: tx("fragment_search.sort_by")
+            children: renderI18nText("fragment_search.sort_by")
           }),
           children: jsx("div", {
             ref: A,
-            children: t ? k(t) : tx("fragment_search.sort_by")
+            children: t ? k(t) : renderI18nText("fragment_search.sort_by")
           })
         })
       }), jsx(mc, {
@@ -174,9 +174,9 @@ function T({
 function k(e) {
   switch (e) {
     case "percent_match":
-      return t("fragment_search.sort_percent_match");
+      return getI18nString("fragment_search.sort_percent_match");
     case "last_modified":
-      return t("fragment_search.sort_last_modified");
+      return getI18nString("fragment_search.sort_last_modified");
     default:
       throwTypeError(e);
   }

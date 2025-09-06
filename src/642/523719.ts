@@ -4,7 +4,7 @@ import { K } from "../905/443068";
 import { e as _$$e } from "../905/149844";
 import { O } from "../905/487602";
 import { Pt } from "../figma_app/806412";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { dG } from "../figma_app/753501";
 import { oV } from "../905/216495";
 import { fI, nV } from "../figma_app/626177";
@@ -36,7 +36,7 @@ export function $$g0({
     recordingKey: Pt(x, "addButton"),
     onClick: e,
     disabled: f,
-    "aria-label": S ?? _$$t("fullscreen.properties_panel.add"),
+    "aria-label": S ?? getI18nString("fullscreen.properties_panel.add"),
     htmlAttributes: {
       onMouseDown: dG,
       "data-testid": C ?? "",
@@ -48,7 +48,7 @@ export function $$g0({
     recordingKey: Pt(x, "removeButton"),
     onClick: y,
     disabled: g,
-    "aria-label": k ?? _$$t("fullscreen.properties_panel.remove"),
+    "aria-label": k ?? getI18nString("fullscreen.properties_panel.remove"),
     htmlAttributes: {
       onMouseDown: dG,
       "data-testid": C ?? "",
@@ -70,7 +70,7 @@ export function $$g0({
     }), T && jsx(fI, {
       children: jsx(nV, {
         className: Pf,
-        children: tx("fullscreen.properties_panel.click_plus_to_replace_mixed_content")
+        children: renderI18nText("fullscreen.properties_panel.click_plus_to_replace_mixed_content")
       })
     }), !T && !N && t]
   });

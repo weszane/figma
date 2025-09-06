@@ -1,7 +1,7 @@
 import { IPZ, glU } from "../figma_app/763686";
-import { sx } from "../905/449184";
-import { rH } from "../905/542194";
-import { UP } from "../905/609396";
+import { trackEventAnalytics } from "../905/449184";
+import { reactTimerGroup } from "../905/542194";
+import { FPSDistribution } from "../905/609396";
 import { y } from "../905/913008";
 import { R9 } from "../905/977824";
 import { l as _$$l, q } from "../905/190247";
@@ -139,7 +139,7 @@ export class $$p0 {
     };
     this._logToAnalytics = (e, t = !1) => {
       let r = {};
-      r.schema = new UP().schema();
+      r.schema = new FPSDistribution().schema();
       r.reason = e;
       r.isFirstLogAfterLoad = this._isFirstLogForTab;
       r.imagesLoading = "loading" === this._imagesLoadingState;
@@ -176,7 +176,7 @@ export class $$p0 {
         forwardToDatadog: this._forwardToDatadog,
         batchRequest: !0
       };
-      sx(this._analyticsEventName, e, t);
+      trackEventAnalytics(this._analyticsEventName, e, t);
     };
     this._processTimerTree = (e, t, r) => {
       if (t >= this._timerDepth) return [];
@@ -242,11 +242,11 @@ export class $$p0 {
             this._singleFrameNamedEvents.clear();
           }
         }
-        if (this._lastKnownFrameMs = e, rH.areTimersOpen()) {
+        if (this._lastKnownFrameMs = e, reactTimerGroup.areTimersOpen()) {
           this._isCanceled = !0;
           return "canceled";
         }
-        let t = this._processTimerTree(rH.report(), 0, []);
+        let t = this._processTimerTree(reactTimerGroup.report(), 0, []);
         for (let e of this._processTimersForLogging(t)) this._getOrCreateDistribution(e.path.join(".")).add(e.elapsedTime);
         this._tsmerMetrics?.onFrame();
         null !== this._scheduledLogAtMs && performance.now() > this._scheduledLogAtMs && (this._logToAnalytics("two-minutes-elapsed", !0), this._resetLogState());
@@ -346,7 +346,7 @@ export class $$p0 {
   }
   _getOrCreateDistribution(e) {
     let t = this._distributionByWorkName.get(e);
-    t || (t = new UP(), this._distributionByWorkName.set(e, t));
+    t || (t = new FPSDistribution(), this._distributionByWorkName.set(e, t));
     return t;
   }
   addEventTracker(e, t) {

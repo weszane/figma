@@ -2,7 +2,7 @@ import { n as _$$n } from "../905/121869";
 import { jsx } from "react/jsx-runtime";
 import { Component } from "react";
 import { connect } from "../vendor/514228";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { tH, H4 } from "../905/751457";
 import { Lo } from "../905/156213";
 import { l$ } from "../905/766303";
@@ -36,7 +36,7 @@ class f extends Component {
           if ("dialog" !== a || "true" !== o) {
             if (A.has(r.type)) continue;
             A.add(r.type);
-            x1("app_modal", "AppModal rendered a non-modal element", {
+            logError("app_modal", "AppModal rendered a non-modal element", {
               type: r.type,
               showModalsBeneath: !!r.showModalsBeneath,
               optOutOfPrevModal: !!r.optOutOfPrevModal,
@@ -94,7 +94,7 @@ class f extends Component {
     }
     if (e !== this.modalStack[this.modalStack.length - 1]?.modal) {
       let t = np(e.type);
-      t || x1("app_modal", `No modal registered for type ${e.type}`, {}, {
+      t || logError("app_modal", `No modal registered for type ${e.type}`, {}, {
         reportAsSentryError: !0
       });
       this.modalStack.push({

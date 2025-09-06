@@ -1,4 +1,4 @@
-import { E2, tx, Iz, eU } from "../figma_app/27355";
+import { createValidatedLocalStorageAtom, tx, createRemovableAtomFamily, atom } from "../figma_app/27355";
 import { z } from "../905/239603";
 import { MZ } from "../figma_app/925970";
 let s = z.object({
@@ -55,9 +55,9 @@ let _ = z.discriminatedUnion("type", [s.extend({
   type: z.literal("send-to-buzz-from-design"),
   data: p
 })]);
-let h = E2("new-file-data", null, _.nullable());
+let h = createValidatedLocalStorageAtom("new-file-data", null, _.nullable());
 let $$m0 = tx(null);
-let g = Iz(e => eU(t => {
+let g = createRemovableAtomFamily(e => atom(t => {
   let r = t($$m0);
   let n = t(h);
   return n && n.key === r && n.type === e ? n.data : null;
@@ -82,4 +82,4 @@ export const Uf = $$I2;
 export const bW = $$b3;
 export const me = $$y4;
 export const s5 = $$E5;
-export const u2 = $$f6; 
+export const u2 = $$f6;

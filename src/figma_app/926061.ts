@@ -9,7 +9,7 @@ import c from "classnames";
 import { parsePxInt } from "../figma_app/783094";
 import { wv as _$$wv, rr, gw } from "../figma_app/236327";
 import { YQ } from "../905/502364";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Y } from "../905/830372";
 import { E as _$$E } from "../905/984674";
 import { oB, j7 } from "../905/929976";
@@ -83,7 +83,7 @@ export function $$O1({
       "data-onboarding-key": `dropdown-option-${String(t.key)}`,
       children: jsx(rr, {
         checked: i,
-        onClick: (r) => {
+        onClick: r => {
           r.stopPropagation();
           i || o(t.key);
           e(oB());
@@ -124,7 +124,7 @@ export function $$O1({
   L === a.length - 1 && (D = 8);
   "auto" !== I.top && void 0 !== I.top && (I.top -= Math.min(S, w - D), I.top = Math.max(16, I.top));
   let k = jsx(g1, {
-    maxDropdownHeight: (e) => "auto" === I.top || void 0 === I.top ? A : Math.min(A, Math.round(e - I.top - 8 - 16)),
+    maxDropdownHeight: e => "auto" === I.top || void 0 === I.top ? A : Math.min(A, Math.round(e - I.top - 8 - 16)),
     dropdownChildrenHeight: O,
     ref: b,
     children: P
@@ -153,7 +153,7 @@ export function $$R0({
   ui3Icon: f
 }) {
   let b = useRef(null);
-  let T = a.findIndex((e) => "option" === e.type && e.key === r);
+  let T = a.findIndex(e => "option" === e.type && e.key === r);
   let I = a[T];
   let S = I?.type === "option" ? I.selectedLabel || I.text : d;
   let A = I?.type === "option" && I.selectedLabelClass || "";
@@ -166,7 +166,7 @@ export function $$R0({
         [Lt]: !c,
         [rp]: f
       }),
-      onClick: c ? void 0 : (r) => {
+      onClick: c ? void 0 : r => {
         r.stopPropagation();
         r.preventDefault();
         t && t.type === l ? e(oB()) : a.length && !c && (e(j7({
@@ -218,7 +218,7 @@ export function $$L2({
   showSeparators: c,
   label: u
 }) {
-  let p = useCallback((e) => l ? jsxs(Fragment, {
+  let p = useCallback(e => l ? jsxs(Fragment, {
     children: [jsx("div", {
       ...xk(P.selectPrimaryText),
       children: o(e)
@@ -228,8 +228,8 @@ export function $$L2({
     })]
   }) : o(e), [o, l]);
   let _ = j6();
-  let h = (e) => e.toString();
-  let g = useCallback((e) => {
+  let h = e => e.toString();
+  let g = useCallback(e => {
     let t = parseInt(e);
     r(isNaN(t) ? e : t);
     _ && Cu({
@@ -243,7 +243,7 @@ export function $$L2({
     onChange: g,
     children: [jsx(l9, {
       label: jsx(_$$h, {
-        children: u || _$$t("folder_permissions_modal.email_invite_level")
+        children: u || getI18nString("folder_permissions_modal.email_invite_level")
       }),
       children: o(e)
     }), jsx(mc, {

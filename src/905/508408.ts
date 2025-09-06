@@ -842,7 +842,19 @@ export let $$aQ0 = {
   ...aZ,
   ...aX
 };
-var aJ = (e => (e[e.WARN = 0] = "WARN", e[e.ERROR = 1] = "ERROR", e))(aJ || {});
-var $$a01 = (e => (e.BAD = "Bad translation", e.MISSING = "Missing string", e.DICT_NOT_LOADED = "Dict Not Loaded", e.UNKNOWN = "Unknown error", e.MISSING_ARGS = "Missing Args", e))($$a01 || {});
+
+
+enum aJ {
+  WARN = "WARN",
+  ERROR = "ERROR"
+}
+export enum TranslationErrors {
+  BAD = "Bad translation",
+  MISSING = "Missing string",
+  DICT_NOT_LOADED = "Dict Not Loaded",
+  UNKNOWN = "Unknown error",
+  MISSING_ARGS = "Missing Args"
+}
+
 export const W = $$aQ0;
-export const tr = $$a01;
+export const tr = TranslationErrors;

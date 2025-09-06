@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "../vendor/514228";
-import { eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { ZC } from "../figma_app/39751";
-import { wg, o4 } from "../figma_app/778880";
-import { Gq } from "../figma_app/363242";
+import { isIpadDevice, getIsMobile } from "../figma_app/778880";
+import { getI18nState } from "../figma_app/363242";
 import { t7 } from "../905/989765";
 import { q5 } from "../figma_app/516028";
 import { PS } from "../figma_app/598018";
 import { MK } from "../figma_app/120529";
-let _ = () => !(wg() || o4());
+let _ = () => !(isIpadDevice() || getIsMobile());
 export function $$h1() {
   let e = q5();
   let t = useSelector(e => e.orgById);
@@ -43,10 +43,10 @@ export function $$g5(e) {
   return 2;
 }
 export function $$f4() {
-  return Gq()?.getPrimaryLocale(!0) === "en";
+  return getI18nState()?.getPrimaryLocale(!0) === "en";
 }
 export function $$E3() {
-  return !!eD;
+  return !!desktopAPIInstance;
 }
 export function $$y2(e) {
   return e >= MK.STARTED && e < MK.DONE;
@@ -55,7 +55,7 @@ export function $$b7(e) {
   return e < MK.NOT_STARTED;
 }
 export function $$T0(e, t) {
-  eD?.setCaptionsEnabled(t);
+  desktopAPIInstance?.setCaptionsEnabled(t);
   e(t7(t));
 }
 export const HJ = $$T0;

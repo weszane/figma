@@ -6,7 +6,7 @@ import { f as _$$f } from "../905/335032";
 import { Pt } from "../figma_app/806412";
 import { E as _$$E } from "../905/277716";
 import { k } from "../905/582200";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { gl, oV, hS } from "../905/216495";
 import { lJ } from "../905/275640";
 import { f4 } from "../figma_app/722362";
@@ -93,9 +93,9 @@ export function $$I0({
     name: "slides_shadow_panel",
     children: jsxs(tR, {
       children: [jsx(_$$r, {
-        titleTx: tx("slides.properties_panel.shadow")
+        titleTx: renderI18nText("slides.properties_panel.shadow")
       }), jsx(M, {
-        legend: tx("slides.properties_panel.shadow.legend"),
+        legend: renderI18nText("slides.properties_panel.shadow.legend"),
         value: selectedShadowStyle,
         onChange: onChangeShadowStyleControl,
         recordingKey: Pt(e, "shadowStyle"),
@@ -108,14 +108,14 @@ export function $$I0({
           }
         }, e))
       }), showShadowOpacityControl && jsx(K, {
-        ariaLabel: _$$t("slides.properties_panel.shadow_opacity"),
+        ariaLabel: getI18nString("slides.properties_panel.shadow_opacity"),
         bigStep: .1,
         max: 1,
         min: 0,
         numberInput: jsx(_$$E, {
           name: "slides_shadow_opacity_input",
           children: jsx(Y, {
-            "data-tooltip": _$$t("slides.properties_panel.shadow_opacity"),
+            "data-tooltip": getI18nString("slides.properties_panel.shadow_opacity"),
             value: shadowOpacity,
             onValueChange: onChangeShadowOpacity,
             recordingKey: Pt(e, "shadowOpacity", "input"),
@@ -137,7 +137,7 @@ export function $$T1() {
     NONE: {
       value: null,
       legacyValue: null,
-      displayText: _$$t("slides.properties_panel.shadow_style_none"),
+      displayText: getI18nString("slides.properties_panel.shadow_style_none"),
       icon: jsx(_$$f, {})
     },
     LIGHT: {
@@ -152,7 +152,7 @@ export function $$T1() {
         x: 0,
         y: 1
       }],
-      displayText: _$$t("slides.properties_panel.shadow_style_light"),
+      displayText: getI18nString("slides.properties_panel.shadow_style_light"),
       icon: jsx(a, {})
     },
     MEDIUM: {
@@ -177,7 +177,7 @@ export function $$T1() {
         x: 0,
         y: 5
       }],
-      displayText: _$$t("slides.properties_panel.shadow_style_medium"),
+      displayText: getI18nString("slides.properties_panel.shadow_style_medium"),
       icon: jsx(d, {})
     },
     STRONG: {
@@ -202,7 +202,7 @@ export function $$T1() {
         x: 0,
         y: 10
       }],
-      displayText: _$$t("slides.properties_panel.shadow_style_strong"),
+      displayText: getI18nString("slides.properties_panel.shadow_style_strong"),
       icon: jsx(c, {})
     }
   }), []);

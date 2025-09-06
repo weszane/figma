@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { buildUploadUrl } from "../figma_app/169182";
 import { B } from "../905/714743";
 import { YQ } from "../905/502364";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { D } from "../figma_app/861252";
 import { J } from "../9410/591377";
 import { O } from "../9410/241650";
@@ -57,7 +57,7 @@ export function $$x4(e) {
         trackingProperties: {
           text: "Skip intro"
         },
-        children: [tx("figjam_onboarding_make_something.all.skip_intro"), jsx(B, {
+        children: [renderI18nText("figjam_onboarding_make_something.all.skip_intro"), jsx(B, {
           svg: A
         })]
       })

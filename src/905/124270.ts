@@ -1,5 +1,5 @@
 import { Jj } from "../905/382883";
-import { eU, M2, Iz, zl } from "../figma_app/27355";
+import { atom, createAtomWithEquality, createRemovableAtomFamily, atomStoreManager } from "../figma_app/27355";
 import a from "../vendor/373725";
 import o from "../vendor/128080";
 import { hO } from "../figma_app/545293";
@@ -8,45 +8,45 @@ import { R9, BA } from "../905/61477";
 import { WY, qy, $L } from "../figma_app/162807";
 var s = a;
 var l = o;
-let $$m3 = eU(null);
-let $$h15 = eU(null);
-let $$g6 = eU(null);
-let $$f16 = eU(null);
-let $$_0 = eU(e => {
+let $$m3 = atom(null);
+let $$h15 = atom(null);
+let $$g6 = atom(null);
+let $$f16 = atom(null);
+let $$_0 = atom(e => {
   let t = e(M);
   let i = e(j);
   let n = e(U);
   let r = e(R9);
   return nX(t, i, n, r ?? void 0);
 });
-let $$A2 = eU(e => e(y));
-let y = M2(eU([]));
-let $$b10 = eU(e => {
+let $$A2 = atom(e => e(y));
+let y = createAtomWithEquality(atom([]));
+let $$b10 = atom(e => {
   let t = e($$A2);
   return t.length > 0 ? t[t.length - 1] : null;
 });
-let $$v14 = eU(null);
-let $$I8 = eU(e => e(M));
-let $$E1 = eU(e => e(j));
-let $$x4 = eU(e => e(U));
-let $$S17 = eU(e => {
+let $$v14 = atom(null);
+let $$I8 = atom(e => e(M));
+let $$E1 = atom(e => e(j));
+let $$x4 = atom(e => e(U));
+let $$S17 = atom(e => {
   if (e(hO.isFragmentSearchAtom)) return [WY.CREATOR, WY.SPACE];
   let t = e(M);
   return t && -1 === ES().indexOf(t.value) ? Object.values(WY).filter(e => e !== WY.CREATOR) : Object.values(WY);
 });
-let $$w11 = eU(e => {
+let $$w11 = atom(e => {
   if (e(hO.isFragmentSearchAtom)) return [qy.FOLDER, qy.TEAM];
   let t = e(M);
   return C(t?.value || null);
 });
 let C = e => e === $L.USERS || e === $L.TEAMS ? [qy.ORG] : e === $L.PROJECTS ? [qy.TEAM, qy.ORG] : e === $L.PLUGINS || e === $L.WIDGETS ? [] : [qy.FOLDER, qy.TEAM, qy.ORG];
-let $$T7 = eU(e => {
+let $$T7 = atom(e => {
   let t = e(j);
   let i = e(U);
   let n = e(BA);
   return n ? ES() : R(t, i, n);
 });
-let $$k5 = eU(e => R(e(j), e(U), e(BA)));
+let $$k5 = atom(e => R(e(j), e(U), e(BA)));
 let R = (e, t, i) => {
   let n = i ? ES().concat($L.ALL_FILES) : ES();
   let r = n.concat([$L.USERS, $L.PROJECTS, $L.TEAMS]);
@@ -60,7 +60,7 @@ let R = (e, t, i) => {
   }
   return r;
 };
-let $$N9 = Iz(e => eU(t => e === WY.RESOURCE ? t(M) : e === WY.CREATOR ? t(j) : e === WY.SPACE ? t(U) : null, (t, i, r) => {
+let $$N9 = createRemovableAtomFamily(e => atom(t => e === WY.RESOURCE ? t(M) : e === WY.CREATOR ? t(j) : e === WY.SPACE ? t(U) : null, (t, i, r) => {
   if (!e) return null;
   let a = !r || II(r);
   if (e === WY.RESOURCE ? i(M, a ? null : r) : e === WY.CREATOR ? i(j, a ? null : r) : e === WY.SPACE && i(U, a ? null : r), t($$v14) && i($$v14, null), a) {
@@ -145,17 +145,17 @@ let L = (e, t, i, n) => {
   });
   return r;
 };
-let $$F12 = eU(e => {}, (e, t) => {
+let $$F12 = atom(e => {}, (e, t) => {
   e($$A2).forEach(e => {
     t($$N9(e.type), null);
   });
   t(R9, null);
 });
-let M = eU(null);
-let j = eU(null);
-let U = eU(null);
+let M = atom(null);
+let j = atom(null);
+let U = atom(null);
 export function $$B13() {
-  let e = zl.get($$A2);
+  let e = atomStoreManager.get($$A2);
   let t = [];
   let i = [];
   let n = [];

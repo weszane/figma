@@ -1,10 +1,10 @@
 import { Tj } from "../figma_app/342207";
 import { Nfd, Ez5 } from "../figma_app/763686";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { s0 } from "../figma_app/115923";
 import { x5 } from "../905/319777";
 export function $$l1(e) {
-  zl.get(s0) === Nfd.CODE ? Ez5?.codeSelection().fullscreenCodeFileNodeId.set(e.guid) : Ez5?.codeSelection().selectedCodeFileNodeId.set(e.guid);
+  atomStoreManager.get(s0) === Nfd.CODE ? Ez5?.codeSelection().fullscreenCodeFileNodeId.set(e.guid) : Ez5?.codeSelection().selectedCodeFileNodeId.set(e.guid);
 }
 export function $$d0(e) {
   return {

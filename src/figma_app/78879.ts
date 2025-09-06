@@ -1,6 +1,6 @@
 import { O5 } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { WB } from "../905/761735";
 import { oA } from "../905/723791";
@@ -22,7 +22,7 @@ export async function $$p0(e) {
       return [];
     }
   }();
-  zl.set(up, {
+  atomStoreManager.set(up, {
     inProgress: !0,
     bundleId: null,
     error: !1
@@ -34,14 +34,14 @@ export async function $$p0(e) {
       responsiveSetGuids: p
     });
   } catch (e) {
-    zl.set(up, {
+    atomStoreManager.set(up, {
       inProgress: !1,
       bundleId: null,
       error: !0
     });
     return e;
   }
-  zl.set(up, {
+  atomStoreManager.set(up, {
     inProgress: !0,
     bundleId: t,
     error: !1
@@ -71,7 +71,7 @@ export async function $$p0(e) {
       });
     });
   }(e, t);
-  zl.set(up, {
+  atomStoreManager.set(up, {
     inProgress: !1,
     bundleId: t,
     error: !1

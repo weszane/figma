@@ -1,10 +1,10 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { glU, rcl } from "../figma_app/763686";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { g as _$$g } from "../905/880308";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { zX } from "../905/576487";
 import { O } from "../905/195092";
@@ -22,7 +22,7 @@ class m {
     try {
       a = await O(e, t, r, n);
     } catch (e) {
-      $D(_$$e.AI_PRODUCTIVITY, e);
+      reportError(_$$e.AI_PRODUCTIVITY, e);
     }
     return {
       text: a?.text,
@@ -39,16 +39,16 @@ class m {
     }
     debugState.dispatch(F.enqueue({
       type: "text-suggestion-nudge",
-      message: _$$t("fullscreen.text_suggestion_nudge_message"),
+      message: getI18nString("fullscreen.text_suggestion_nudge_message"),
       icon: zX.SPARKLE,
       button: {
-        text: _$$t("fullscreen.text_suggestion_nudge_turn_off"),
+        text: getI18nString("fullscreen.text_suggestion_nudge_turn_off"),
         action: () => {
           glU?.triggerActionEnum(rcl.TOGGLE_TEXT_SUGGESTIONS_PREFERENCE, {});
         }
       }
     }));
-    sx("autosuggest_text.preference_nudge_shown", {
+    trackEventAnalytics("autosuggest_text.preference_nudge_shown", {
       sessionId: e
     });
     f(e);
@@ -64,7 +64,7 @@ function g() {
 function f(e) {
   let t = g();
   localStorage.removeItem(h);
-  t > 0 && sx("autosuggest_text.dismiss_count_reset", {
+  t > 0 && trackEventAnalytics("autosuggest_text.dismiss_count_reset", {
     sessionId: e,
     dismiss_count: t
   });

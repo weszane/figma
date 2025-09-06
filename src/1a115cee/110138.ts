@@ -9,17 +9,17 @@ import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { hS } from "../905/437088";
 import x from "../vendor/656470";
-import { eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { Ay } from "../905/612521";
-import { $D } from "../905/11";
-import { Lo, x1 } from "../905/714362";
+import { reportError } from "../905/11";
+import { logInfo, logError } from "../905/714362";
 import { h1 } from "../905/986103";
 import { B as _$$B } from "../905/714743";
 import { NU } from "../figma_app/204891";
 import { A as _$$A } from "../905/222027";
 import { y as _$$y } from "../905/171275";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { NA } from "../905/738636";
 import { Ce, Lo as _$$Lo } from "../905/156213";
 import { Gg, go, ZW, bD } from "../figma_app/840917";
@@ -60,7 +60,7 @@ async function G(e, a) {
     });
     (l = data.meta) && (l.deleted_at || !l.can_edit_canvas) && (s = !0);
   } catch (e) {
-    404 === e.status ? s = !0 : Lo("Autosave", "Failed to retrieve information about autosave file");
+    404 === e.status ? s = !0 : logInfo("Autosave", "Failed to retrieve information about autosave file");
   }
   return {
     userID: e,
@@ -116,7 +116,7 @@ function Y(e) {
         children: fileName
       }), jsx("div", {
         className: hL,
-        children: tx("tile.file_tile.edited_time", {
+        children: renderI18nText("tile.file_tile.edited_time", {
           time: jsx(h1, {
             date: e.fileState.lastUpdatedAt
           })
@@ -127,7 +127,7 @@ function Y(e) {
       children: jsx($n, {
         variant: "secondary",
         onClick,
-        children: tx("autosave.has_changes.open_to_sync")
+        children: renderI18nText("autosave.has_changes.open_to_sync")
       })
     })]
   }, e.fileState.fileKey);
@@ -162,7 +162,7 @@ function V({
     h(Ce());
   });
   let f = Z(s);
-  let m = tx("autosave.has_changes.sync_offline_changes");
+  let m = renderI18nText("autosave.has_changes.sync_offline_changes");
   let j = 1 === v()(Object.values(a)).length;
   let _ = null;
   let g = null;
@@ -186,7 +186,7 @@ function V({
           children: b
         }), jsx("div", {
           className: MV,
-          children: tx("autosave.has_changes.unsaved_changes_to_file", {
+          children: renderI18nText("autosave.has_changes.unsaved_changes_to_file", {
             fileName: jsx("span", {
               className: DD,
               children: p
@@ -198,7 +198,7 @@ function V({
   } else r = jsxs(Fragment, {
     children: [jsx("div", {
       className: Jm,
-      children: tx("autosave.has_changes.unsynced_changes_offline")
+      children: renderI18nText("autosave.has_changes.unsynced_changes_offline")
     }), jsx(H, {
       files: a,
       users: t
@@ -217,12 +217,12 @@ function V({
   let L = i && jsx($n, {
     variant: "secondary",
     onClick: x,
-    children: tx("autosave.has_changes.dismiss.later")
+    children: renderI18nText("autosave.has_changes.dismiss.later")
   });
   let F = j && N && jsx($n, {
     variant: "primary",
     onClick: N,
-    children: tx("autosave.has_changes.open_to_sync")
+    children: renderI18nText("autosave.has_changes.open_to_sync")
   });
   return jsx(bL, {
     manager: e,
@@ -282,12 +282,12 @@ function z(e) {
   };
   let j = 0 === Object.values(e.files).length;
   if (r || j && e.loaded) {
-    let s = tx("autosave.logout.offline_changes");
-    let t = r ? tx("autosave.logout.offline_changes_discarded") : tx("autosave.logout.offline_changes_synced");
+    let s = renderI18nText("autosave.logout.offline_changes");
+    let t = r ? renderI18nText("autosave.logout.offline_changes_discarded") : renderI18nText("autosave.logout.offline_changes_synced");
     let n = jsx($n, {
       variant: "secondary",
       onClick: e.onLogOut,
-      children: tx("autosave.logout.log_out")
+      children: renderI18nText("autosave.logout.log_out")
     });
     return jsx(bL, {
       width: "md",
@@ -318,34 +318,34 @@ function z(e) {
     let t;
     let n;
     let i;
-    let o = tx("autosave.has_changes.sync_offline_changes");
-    let r = eD ? _$$t("autosave.logout.log_out_text.desktop") : _$$t("autosave.logout.log_out_text.web");
-    eD ? (t = jsx($n, {
+    let o = renderI18nText("autosave.has_changes.sync_offline_changes");
+    let r = desktopAPIInstance ? getI18nString("autosave.logout.log_out_text.desktop") : getI18nString("autosave.logout.log_out_text.web");
+    desktopAPIInstance ? (t = jsx($n, {
       variant: "destructiveSecondary",
       onClick: v,
-      children: tx("autosave.logout.discard_and_logout")
+      children: renderI18nText("autosave.logout.discard_and_logout")
     }), n = jsx($n, {
       variant: "secondary",
       onClick: () => {
         s(_$$Lo());
       },
-      children: tx("autosave.logout.cancel")
+      children: renderI18nText("autosave.logout.cancel")
     }), i = jsx($n, {
       variant: "secondary",
       onClick: m,
-      children: tx("autosave.logout.show_changes")
+      children: renderI18nText("autosave.logout.show_changes")
     })) : (t = jsx($n, {
       variant: "destructiveSecondary",
       onClick: v,
-      children: tx("autosave.logout.discard")
+      children: renderI18nText("autosave.logout.discard")
     }), n = jsx($n, {
       variant: "secondary",
       onClick: e.onLogOut,
-      children: tx("autosave.logout.log_out")
+      children: renderI18nText("autosave.logout.log_out")
     }), i = jsx($n, {
       variant: "primary",
       onClick: m,
-      children: tx("autosave.logout.sync_changes")
+      children: renderI18nText("autosave.logout.sync_changes")
     }));
     return jsx(bL, {
       manager: a,
@@ -414,10 +414,10 @@ export function $$J0(e) {
             autosaveFilesToDelete: t
           });
         } catch (e) {
-          e instanceof Error ? (x1("Autosave", "Failed to call autosave callback", {
+          e instanceof Error ? (logError("Autosave", "Failed to call autosave callback", {
             name: e.name,
             message: e.message
-          }), $D(_$$e.SCENEGRAPH_AND_SYNC, e)) : $D(_$$e.SCENEGRAPH_AND_SYNC, Error("Failed to call autosave callback"));
+          }), reportError(_$$e.SCENEGRAPH_AND_SYNC, e)) : reportError(_$$e.SCENEGRAPH_AND_SYNC, Error("Failed to call autosave callback"));
         }
       };
       hp.register(_$$a, a);
@@ -435,7 +435,7 @@ export function $$J0(e) {
     files: multiUserUnsyncedFiles,
     onLogOut: () => {
       for (let e of autosaveFilesToDelete) go(Zt(e.userID, e.fileKey)).catch(e => {
-        $D(_$$e.UNOWNED, Error("Failed to delete autosave data for sessions"));
+        reportError(_$$e.UNOWNED, Error("Failed to delete autosave data for sessions"));
       });
       e.onLogOut();
     },
@@ -445,7 +445,7 @@ export function $$J0(e) {
 $$X1.displayName = "HasAutosaveChangesModal";
 let Z = e => {
   let a = Math.floor((bD() - (Date.now() - e)) / 864e5);
-  return a > 5 ? null : a < 1 ? tx("autosave.has_changes.expiry_text_shortly") : tx("autosave.has_changes.expiry_text_days", {
+  return a > 5 ? null : a < 1 ? renderI18nText("autosave.has_changes.expiry_text_shortly") : renderI18nText("autosave.has_changes.expiry_text_days", {
     days: a
   });
 };

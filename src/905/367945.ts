@@ -3,7 +3,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { S } from "../905/274480";
 import { J } from "../905/270045";
 import { N } from "../905/438674";
-import { tx, t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { U } from "../905/331038";
 import { w } from "../905/113805";
 import { Zc } from "../905/497882";
@@ -14,13 +14,13 @@ import { A as _$$A } from "../905/567946";
 let f = e => {
   if (e && "validation" === e.type) switch (e.key) {
     case "AUTHOR_MUST_BE_USER":
-      return tx("community.seller.you_can_only_publish_paid_resources_from_a_personal_profile", {
+      return renderI18nText("community.seller.you_can_only_publish_paid_resources_from_a_personal_profile", {
         learnMoreLink: jsx(y, {})
       });
     case "FREEMIUM_EXTENSION_MUST_BE_PAID":
-      return t("community.seller.pricing_using_payments_api");
+      return getI18nString("community.seller.pricing_using_payments_api");
     case "FREEMIUM_REQUIRED_FOR_MIGRATION":
-      return t("community.seller.freemium_required_for_migration");
+      return getI18nString("community.seller.freemium_required_for_migration");
     case "PRICE_EMPTY":
     case "PRICE_TOO_LOW":
     case "PRICE_TOO_HIGH":
@@ -36,16 +36,16 @@ let f = e => {
 let _ = e => {
   if (e) switch (e.key) {
     case "USER_IS_NOT_FILE_OWNER":
-      return t("community.seller.only_explicit_owner_can_sell");
+      return getI18nString("community.seller.only_explicit_owner_can_sell");
     case "USER_CANNOT_SELL_RESOURCE":
     case "CANNOT_SELL_PRIVATE_EXTENSION":
     case "USER_CANNOT_SELL_ON_COMMUNITY":
       return;
     case "UNABLE_TO_IDENTIFY_FILE_OWNER":
     case "FREE_RESOURCE_ALREADY_PUBLISHED":
-      return t("community.seller.only_new_resources_can_be_sold_on_community");
+      return getI18nString("community.seller.only_new_resources_can_be_sold_on_community");
     case "USER_AUTHOR_DISABLED_BY_ORG":
-      return tx("community.seller.pricing_is_disabled_because_your_organization_does_not_allow", {
+      return renderI18nText("community.seller.pricing_is_disabled_because_your_organization_does_not_allow", {
         learnMoreLink: jsx(y, {})
       });
     default:
@@ -69,13 +69,13 @@ export function $$A0({
   let A = w(e);
   let y = U(A, f);
   return o.some(e => ["USER_CANNOT_SELL_ON_COMMUNITY", "CANNOT_SELL_PRIVATE_EXTENSION"].includes(e.key)) ? null : jsx(_$$A, {
-    label: t("community.publishing.monetization"),
+    label: getI18nString("community.publishing.monetization"),
     disabled: !Zc(e),
     error: y,
     afterErrorContent: o.length > 0 ? _(o[0]) : void 0,
     children: jsx(S, {
       label: jsx(J, {
-        children: t("community.publishing.sell_this_resource_on_community")
+        children: getI18nString("community.publishing.sell_this_resource_on_community")
       }),
       checked: wC(e),
       onChange: () => {
@@ -90,7 +90,7 @@ function y() {
     newTab: !0,
     href: "https://help.figma.com/hc/articles/12067637274519-About-selling-Community-resources",
     trusted: !0,
-    children: t("general.learn_more")
+    children: getI18nString("general.learn_more")
   });
 }
 export const H = $$A0;

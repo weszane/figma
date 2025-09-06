@@ -2,40 +2,40 @@ import { useEffect, useState, useCallback } from "react";
 import { c2 } from "../905/382883";
 import { rXF } from "../figma_app/763686";
 import { ZC } from "../figma_app/39751";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { $d, dB } from "../905/901822";
 let $$d3 = -1;
 let $$c2 = {
   ALL: {
-    label: tx("variables.authoring_modal.filters.all"),
+    label: renderI18nText("variables.authoring_modal.filters.all"),
     type: $$d3
   },
   COLOR: {
-    label: tx("variables.authoring_modal.filters.colors"),
+    label: renderI18nText("variables.authoring_modal.filters.colors"),
     type: rXF.COLOR
   },
   FLOAT: {
-    label: tx("variables.authoring_modal.filters.numbers"),
+    label: renderI18nText("variables.authoring_modal.filters.numbers"),
     type: rXF.FLOAT
   },
   STRING: {
-    label: tx("variables.authoring_modal.filters.strings"),
+    label: renderI18nText("variables.authoring_modal.filters.strings"),
     type: rXF.STRING
   },
   BOOLEAN: {
-    label: tx("variables.authoring_modal.filters.booleans"),
+    label: renderI18nText("variables.authoring_modal.filters.booleans"),
     type: rXF.BOOLEAN
   }
 };
 let $$u4 = {
   ALL: {
-    label: tx("variables.authoring_modal.filters.all")
+    label: renderI18nText("variables.authoring_modal.filters.all")
   },
   LOCAL_TO_COLLECTION: {
-    label: tx("variables.authoring_modal.filters.local_to_extended_collection")
+    label: renderI18nText("variables.authoring_modal.filters.local_to_extended_collection")
   },
   OVERRIDES: {
-    label: tx("variables.authoring_modal.filters.overridden_in_extended_collection")
+    label: renderI18nText("variables.authoring_modal.filters.overridden_in_extended_collection")
   }
 };
 let p = {

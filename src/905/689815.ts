@@ -1,9 +1,9 @@
 import { dR } from "../905/508367";
-import { eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { Ay } from "../905/612521";
-import { Xb } from "../figma_app/778880";
+import { isAnyMobile } from "../figma_app/778880";
 import { XHR } from "../905/910117";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 async function d(e) {
   let t = {
     org_id: e.orgId,
@@ -36,27 +36,27 @@ export async function $$c0(e, t, i, o) {
     "is-playground-file": e.isPlaygroundFile && c ? "1" : "0"
   };
   switch (e.fileKey && (p["try-plugin-file-key"] = e.fileKey), e.fullscreenEditorType) {
-    case nT.Design:
+    case FEditorType.Design:
       p.mode = "design";
       p.type = "design";
       break;
-    case nT.DevHandoff:
+    case FEditorType.DevHandoff:
       p.mode = "dev";
       p.type = "design";
       break;
-    case nT.Whiteboard:
+    case FEditorType.Whiteboard:
       p.type = "whiteboard";
       break;
-    case nT.Slides:
+    case FEditorType.Slides:
       p.type = "slides";
       break;
-    case nT.Cooper:
+    case FEditorType.Cooper:
       p.type = "cooper";
   }
   e.fuid && (p.fuid = e.fuid);
   e.tryPluginEditorType && (p["try-plugin-editor-type"] = e.tryPluginEditorType);
-  eD && (p["time-opened"] = Date.now().toString());
+  desktopAPIInstance && (p["time-opened"] = Date.now().toString());
   let m = dR(u, p);
-  Ay.redirect(m, Xb ? void 0 : "_blank");
+  Ay.redirect(m, isAnyMobile ? void 0 : "_blank");
 }
 export const j = $$c0;

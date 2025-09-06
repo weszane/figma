@@ -6,11 +6,11 @@ import o from "classnames";
 import { useMemo, useEffect, useState, useContext } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { lyf } from "../figma_app/763686";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Rs } from "../figma_app/288654";
 import { oA } from "../905/723791";
-import { $D } from "../905/11";
-import { t as _$$t } from "../905/303541";
+import { reportError } from "../905/11";
+import { getI18nString } from "../905/303541";
 import { _ as _$$_ } from "../905/170564";
 import { Q } from "../905/463586";
 import { hx } from "../905/292918";
@@ -69,13 +69,13 @@ function j(e) {
       let n = i.data.repo?.files;
       if (repo && Ns(e, repo)) return !1;
       if (null == repo || !n) {
-        $D(_$$e.SCENEGRAPH_AND_SYNC, Error("useUpdatesAvailableFromMain called with invalid repo or repo files data"));
+        reportError(_$$e.SCENEGRAPH_AND_SYNC, Error("useUpdatesAvailableFromMain called with invalid repo or repo files data"));
         return !1;
       }
       let a = n.find(t => t.key === e.key);
       let s = n.find(e => Ns(e, repo));
       if (!a || !s) {
-        $D(_$$e.SCENEGRAPH_AND_SYNC, Error("useUpdatesAvailableFromMain called with invalid branch or source file data"));
+        reportError(_$$e.SCENEGRAPH_AND_SYNC, Error("useUpdatesAvailableFromMain called with invalid branch or source file data"));
         return !1;
       }
       if (a.sourceCheckpointId === s.checkpointId) return !1;
@@ -123,27 +123,27 @@ function j(e) {
       }));
       return;
     }
-    canEdit && modalShown?.type !== $l.type && topLevelMode !== lyf.BRANCHING && j ? (sx("Branch Update Alert", {
+    canEdit && modalShown?.type !== $l.type && topLevelMode !== lyf.BRANCHING && j ? (trackEventAnalytics("Branch Update Alert", {
       action: "Shown",
       fileKey: key,
       fileRepoId
     }), dispatch(Q.enqueue({
       notification: {
         type: _$$_.BRANCHING_SOURCE_FILE_UPDATED,
-        message: _$$t("collaboration.branching.updates_available_from_main_file"),
+        message: getI18nString("collaboration.branching.updates_available_from_main_file"),
         acceptCallback: () => {
           dispatch(hx({
             direction: Kn.FROM_SOURCE,
             trackingContextName: e0.BRANCHING_UPDATE_NOTIFICATION
           }));
-          sx("Branch Update Alert", {
+          trackEventAnalytics("Branch Update Alert", {
             action: "Update",
             fileKey: key,
             fileRepoId
           });
         },
         dismissCallback: () => {
-          sx("Branch Update Alert", {
+          trackEventAnalytics("Branch Update Alert", {
             action: "Dismiss",
             fileKey: key,
             fileRepoId
@@ -244,15 +244,15 @@ function H({
   let y = useMemo(() => o?.state !== 2 || l?.state === 3 ? null : {
     icon: zX.CHECK,
     type: "file-merge-submit",
-    message: c?.direction === 0 ? _$$t("collaboration.branching.merge_success") : _$$t("collaboration.branching.update_success"),
+    message: c?.direction === 0 ? getI18nString("collaboration.branching.merge_success") : getI18nString("collaboration.branching.update_success"),
     button: c?.direction === 0 ? {
-      text: _$$t("collaboration.branching.edit_merge_description"),
+      text: getI18nString("collaboration.branching.edit_merge_description"),
       action: () => {
         u(_$$T({
           fileKey: t,
           versionId: c?.mergeResultFileversionId
         }));
-        sx("Merge Finished Edit Description Clicked", {
+        trackEventAnalytics("Merge Finished Edit Description Clicked", {
           branchKey: o.mergeFile?.key,
           sourceKey: o.mergeFile?.sourceFileKey
         });

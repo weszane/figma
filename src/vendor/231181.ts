@@ -1,7 +1,7 @@
 import { L2, mE } from "../vendor/314131";
 import { W4 } from "../vendor/998256";
 import { qQ } from "../vendor/156870";
-export function $$a0(e, n = 100, i = Infinity) {
+export function normalize(e, n = 100, i = Infinity) {
   try {
     return function e(n, i, a = Infinity, o = Infinity, u = function () {
       let e = "function" == typeof WeakSet;
@@ -74,8 +74,8 @@ export function $$a0(e, n = 100, i = Infinity) {
     };
   }
 }
-export const S8 = $$a0;
-export const cd = function e(n, i = 3, t = 102400) {
-  let f = $$a0(n, i);
-  return ~-encodeURI(JSON.stringify(f)).split(/%..|./).length > t ? e(n, i - 1, t) : f;
+export const S8 = normalize;
+export function normalizeToSize(n, i = 3, t = 102400) {
+  let f = normalize(n, i);
+  return ~-encodeURI(JSON.stringify(f)).split(/%..|./).length > t ? normalizeToSize(n, i - 1, t) : f;
 };

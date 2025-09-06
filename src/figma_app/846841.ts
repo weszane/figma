@@ -11,16 +11,16 @@ import { T as _$$T } from "../905/256551";
 import { A as _$$A } from "../905/800065";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { md, fp, Xr, zl } from "../figma_app/27355";
+import { useAtomWithSubscription, useAtomValueAndSetter, Xr, atomStoreManager } from "../figma_app/27355";
 import { generateRecordingKey } from "../figma_app/878298";
 import E from "classnames";
-import { az, sx } from "../905/449184";
+import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { parsePxNumber } from "../figma_app/783094";
 import { h as _$$h } from "../905/207101";
 import { EJ } from "../figma_app/930338";
 import { g as _$$g } from "../905/880308";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t2, tx as _$$tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { sx as _$$sx } from "../905/941192";
 import { E as _$$E2 } from "../905/984674";
 import { CZ, q4 } from "../905/294085";
@@ -91,13 +91,13 @@ export function $$eR6({
 }) {
   let {
     currentSearch
-  } = md(WP);
-  let C = md(hO.currentSearchAtom);
-  let K = md(hO.currentCommunitySearchAtom);
+  } = useAtomWithSubscription(WP);
+  let C = useAtomWithSubscription(hO.currentSearchAtom);
+  let K = useAtomWithSubscription(hO.currentCommunitySearchAtom);
   e = e || t && K?.input.type === "input-image";
   let Q = _$$V();
   let et = Ko();
-  let [er, ei] = fp(Q8);
+  let [er, ei] = useAtomValueAndSetter(Q8);
   let eu = Xr(Rt);
   let {
     recentFragments
@@ -120,7 +120,7 @@ export function $$eR6({
   useEffect(() => {
     if (e) return () => {
       _$$R();
-      zl.set(WP, {
+      atomStoreManager.set(WP, {
         currentSearch: null
       });
     };
@@ -138,7 +138,7 @@ export function $$eR6({
     presets,
     librariesForConnectedProject
   } = _$$g2();
-  let eX = md(Sh);
+  let eX = useAtomWithSubscription(Sh);
   let eq = e ? 0 === libraries.length && 0 === librariesForConnectedProject.length : !eX && 0 === libraries.length && 0 === presets.length && 0 === librariesForConnectedProject.length;
   let eJ = useMemo(() => N2(!0, !0), []);
   let {
@@ -153,7 +153,7 @@ export function $$eR6({
     onToggleLibraryModal();
   }, [close, onToggleLibraryModal]);
   let e0 = {
-    title: _$$t2("assets_in_actions.browse_libraries_button"),
+    title: getI18nString("assets_in_actions.browse_libraries_button"),
     onAction: () => {
       eQ();
     },
@@ -193,7 +193,7 @@ export function $$eR6({
     onSearchSuccess: e1,
     isFigmake: t
   });
-  let [ti, ta] = fp(B1);
+  let [ti, ta] = useAtomValueAndSetter(B1);
   let ts = e ? "actions-visual-search-library-filter" : $$ew1;
   let to = !e || et;
   let [tl, td, tc] = _$$t.useTabs({
@@ -202,8 +202,8 @@ export function $$eR6({
   }, {
     defaultActive: r
   });
-  let [tu, tp] = fp(hO.sortByAtom);
-  let t_ = md(CZ);
+  let [tu, tp] = useAtomValueAndSetter(hO.sortByAtom);
+  let t_ = useAtomWithSubscription(CZ);
   let [th, tm] = useState(p);
   let tg = th && tc.activeTab === Qx.PLAN_FILE_ASSETS;
   function tf(t) {
@@ -266,15 +266,15 @@ export function $$eR6({
             }
           }));
           "percent_match" !== tu && tp("percent_match");
-          t_ && (zl.set(q4), C && Hl(C?.input, ez));
-          az.trackDefinedEvent("asset_search.actions_search_panel_open", {
+          t_ && (atomStoreManager.set(q4), C && Hl(C?.input, ez));
+          analyticsEventManager.trackDefinedEvent("asset_search.actions_search_panel_open", {
             ...tb,
             assets_tab_type: _$$D(Qx.PLAN_FILE_ASSETS, void 0)
           });
           tm(void 0);
         },
         className: _$$s.bgTransparent.$,
-        "aria-label": _$$t2("assets_in_actions.clear_search_tag", {
+        "aria-label": getI18nString("assets_in_actions.clear_search_tag", {
           tagType: t
         }),
         children: jsx(_$$f, {
@@ -283,7 +283,7 @@ export function $$eR6({
       })]
     });
   }
-  let tE = zl.get(dd);
+  let tE = atomStoreManager.get(dd);
   let ty = useMemo(() => _$$D(tc.activeTab, th), [th, tc.activeTab]);
   let tb = useMemo(() => {
     let e = {
@@ -313,7 +313,7 @@ export function $$eR6({
   }, [ez, tE, ty, tc.activeTab, th, currentSearch, K, C]);
   let tT = useCallback(e => {
     let [t] = e;
-    t.isIntersecting && az.trackDefinedEvent("fragment_search.assets_details_panel_reached_bottom_of_scroll", {
+    t.isIntersecting && analyticsEventManager.trackDefinedEvent("fragment_search.assets_details_panel_reached_bottom_of_scroll", {
       ...tb,
       is_community_fragment_search: tc.activeTab === Qx.COMMUNITY
     });
@@ -343,7 +343,7 @@ export function $$eR6({
         throwTypeError(t);
     }
     tc.setActiveTab(tl[t].id);
-    az.trackDefinedEvent("asset_search.actions_search_panel_open", {
+    analyticsEventManager.trackDefinedEvent("asset_search.actions_search_panel_open", {
       ...tb,
       assets_tab_type: _$$D(t, th)
     });
@@ -370,7 +370,7 @@ export function $$eR6({
     }), jsx(oz, {
       tabId: Qx.COMMUNITY,
       onAction: () => tS(Qx.COMMUNITY),
-      children: _$$tx("assets_in_actions.detail_view.community_tab.title")
+      children: renderI18nText("assets_in_actions.detail_view.community_tab.title")
     })]
   });
   let tO = oh(fi);
@@ -402,7 +402,7 @@ export function $$eR6({
     let s;
     let o = tB ? K : tk ? currentSearch : C;
     tB && K?.input.type === "input-text" ? s = K?.input.value : tk && currentSearch?.input.type === "input-text" ? s = currentSearch?.input.query : C?.input.type === "input-text" && (s = C?.input.value);
-    sx("Search Feedback", {
+    trackEventAnalytics("Search Feedback", {
       feedbackType: e,
       feedback: t,
       activeTab: ty,
@@ -423,11 +423,11 @@ export function $$eR6({
     tY(e.toString(), t, eB.clientLifecycleId, ez, eB.file_key, eB.quick_actions_session_id);
   }, [tY, eB, ez]);
   let tq = _$$s3();
-  _$$h(() => (az.trackDefinedEvent("asset_search.actions_search_panel_open", {
+  _$$h(() => (analyticsEventManager.trackDefinedEvent("asset_search.actions_search_panel_open", {
     ...tb
   }), () => {
-    $$eL4(zl.get(Q8), lQ, Q, !0, tq, G4.ACTIONS_ASSETS_TAB_DETAIL);
-    zl.set(q4);
+    $$eL4(atomStoreManager.get(Q8), lQ, Q, !0, tq, G4.ACTIONS_ASSETS_TAB_DETAIL);
+    atomStoreManager.set(q4);
     ta({
       type: _$$I.ALL
     });
@@ -457,7 +457,7 @@ export function $$eR6({
     dataTestId: tZ,
     gatherFeedback: !0,
     height: 480,
-    rateOutputStrOverride: _$$t2("qa.rate_output_helpful"),
+    rateOutputStrOverride: getI18nString("qa.rate_output_helpful"),
     recordingKey: tZ,
     sentimentFeedbackCallback: t$,
     width: parsePxNumber(_$$X),
@@ -569,16 +569,16 @@ export function $$eR6({
                 children: [tk && jsx(_$$O, {
                   onLoadStateChange: eH,
                   header: !th && Q ? {
-                    title: _$$t2("assets_in_actions.assets_section.title"),
+                    title: getI18nString("assets_in_actions.assets_section.title"),
                     icon: jsx(_$$k, {}),
                     seeMore: t0 ? e0 : {
-                      title: _$$t2("assets_in_actions.see_more_button"),
+                      title: getI18nString("assets_in_actions.see_more_button"),
                       onAction: () => {
-                        az.trackDefinedEvent("asset_search.actions_search_panel_open", {
+                        analyticsEventManager.trackDefinedEvent("asset_search.actions_search_panel_open", {
                           ...tb,
                           assets_tab_type: _$$D(Qx.PLAN_FILE_ASSETS, qG.COMPONENTS)
                         });
-                        az.trackDefinedEvent("asset_search.see_more", {
+                        analyticsEventManager.trackDefinedEvent("asset_search.see_more", {
                           ...tb
                         });
                         tm(qG.COMPONENTS);
@@ -596,16 +596,16 @@ export function $$eR6({
                   focusHandle: e ? eD : eF,
                   forceLoadingState: eG,
                   header: th ? void 0 : {
-                    title: _$$t2("assets_in_actions.fragments_section.title"),
+                    title: getI18nString("assets_in_actions.fragments_section.title"),
                     icon: jsx(_$$q, {}),
                     seeMore: {
-                      title: _$$t2("assets_in_actions.see_more_button"),
+                      title: getI18nString("assets_in_actions.see_more_button"),
                       onAction: () => {
-                        az.trackDefinedEvent("asset_search.actions_search_panel_open", {
+                        analyticsEventManager.trackDefinedEvent("asset_search.actions_search_panel_open", {
                           ...tb,
                           assets_tab_type: _$$D(Qx.PLAN_FILE_ASSETS, qG.DESIGNS)
                         });
-                        sx("Fragment search see more", {
+                        trackEventAnalytics("Fragment search see more", {
                           ...d3(ez, tE, C ? C.searchId : "", C ? C.input : null, !1, void 0, !1)
                         });
                         tm(qG.DESIGNS);
@@ -631,7 +631,7 @@ export function $$eR6({
           children: jsx(_$$q2, {
             children: jsx(_$$M, {
               header: !K && recommendedHubFileFragments && recommendedHubFileFragments.length > 0 ? {
-                title: _$$t2("assets_in_actions.recommended_fragments_header"),
+                title: getI18nString("assets_in_actions.recommended_fragments_header"),
                 primaryText: !0,
                 px: 12
               } : void 0,
@@ -654,15 +654,15 @@ export function $$eR6({
   });
 }
 export function $$eL4(e, t, r, n, i, a) {
-  let s = zl.get(dd);
-  let o = zl.get(ze);
+  let s = atomStoreManager.get(dd);
+  let o = atomStoreManager.get(ze);
   if (!s || !o) return;
   let {
     currentSearch
-  } = zl.get(WP);
+  } = atomStoreManager.get(WP);
   let d = currentSearch?.input.assetTypeOption;
-  let c = zl.get(CZ);
-  let u = zl.get(hO.sortByAtom);
+  let c = atomStoreManager.get(CZ);
+  let u = atomStoreManager.get(hO.sortByAtom);
   let p = d?.type !== _$$I.ALL;
   e && (r && (G1(e) || c || "percent_match" !== u) && Hl({
     type: "input-text",
@@ -687,7 +687,7 @@ function eP({
   closeOnEscape: t = !1
 }) {
   let r;
-  let a = md(hO.currentCommunitySearchAtom);
+  let a = useAtomWithSubscription(hO.currentCommunitySearchAtom);
   let s = Ko();
   let o = useRef(null);
   let l = _$$U();
@@ -711,7 +711,7 @@ function eP({
         recordingKey: generateRecordingKey(l, "backButton")
       }), jsx(_$$E2, {
         fontSize: 13,
-        children: _$$tx("fragment_search.visual_search_results_title")
+        children: renderI18nText("fragment_search.visual_search_results_title")
       }), jsx(_$$E2, {
         fontSize: 13,
         color: "secondary",
@@ -748,14 +748,14 @@ export function $$ek2({
   });
   let d = useRef(null);
   let c = useCallback(() => {
-    e === G4.FIGMAKE ? (sx("Visual search in search bar clicked", {
+    e === G4.FIGMAKE ? (trackEventAnalytics("Visual search in search bar clicked", {
       has_selection: getSingletonSceneGraph().getCurrentPage()?.directlySelectedNodes?.length === 1,
-      session_id: zl.get(dd),
+      session_id: atomStoreManager.get(dd),
       entry_point: e
     }), d.current?.click()) : function (e) {
-      sx("Visual search in search bar clicked", {
+      trackEventAnalytics("Visual search in search bar clicked", {
         has_selection: getSingletonSceneGraph().getCurrentPage()?.directlySelectedNodes?.length === 1,
-        session_id: zl.get(dd)
+        session_id: atomStoreManager.get(dd)
       });
       XG({
         action: "find-inspiration",
@@ -790,16 +790,16 @@ export function $$ek2({
       ref: d
     }), jsx(_$$E, {
       ref: s,
-      "aria-label": _$$t2("fragment_search.visual_search_icon_button_tooltip"),
+      "aria-label": getI18nString("fragment_search.visual_search_icon_button_tooltip"),
       onClick: c,
       htmlAttributes: getFeatureFlags().fragment_search_tweaks ? {
         "data-tooltip-type": Ib.SPECIAL,
         "data-tooltip-show-above": !0,
         "data-tooltip": _$$S2,
-        "data-tooltip-ai-beta-text": _$$t2("fragment_search.visual_search_icon_button_tooltip_with_beta_tag"),
+        "data-tooltip-ai-beta-text": getI18nString("fragment_search.visual_search_icon_button_tooltip_with_beta_tag"),
         "data-tooltip-ai-beta-action": JT.FIND_INSPIRATION
       } : {
-        "data-tooltip": _$$t2("fragment_search.visual_search_icon_button_tooltip"),
+        "data-tooltip": getI18nString("fragment_search.visual_search_icon_button_tooltip"),
         "data-tooltip-type": Ib.TEXT,
         "data-tooltip-show-above": !0
       },

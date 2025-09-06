@@ -3,7 +3,7 @@ import { FAf } from "../figma_app/763686";
 import { WY, cy } from "../figma_app/387100";
 import { getInitialOptions } from "../figma_app/169182";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { c as _$$c } from "../905/370443";
 import { $z } from "../figma_app/831799";
 import { Lh, D8 } from "../figma_app/242339";
@@ -170,7 +170,7 @@ export function $$x0(e, t) {
         props: i
       });
       return jsx(Z, {
-        bodyText: t ? _$$t("cursor_bot.design_panel_can_change_objects") : _$$t("cursor_bot.design_panel_is_key"),
+        bodyText: t ? getI18nString("cursor_bot.design_panel_can_change_objects") : getI18nString("cursor_bot.design_panel_is_key"),
         frameNodeMatcher: t ? e => WY(e => TT(e, Dl), e) || cy((e, t) => Q$(e, t), e) : void 0,
         fromCursorBot: !0,
         isFollowUp: i.isFollowUp,
@@ -180,7 +180,7 @@ export function $$x0(e, t) {
           trackingProperties: {
             ctaTrackingDescriptor: _$$c.BACK
           },
-          children: tx("cursor_bot.back")
+          children: renderI18nText("cursor_bot.back")
         }) : void 0,
         onClose: i.onClickClose,
         onPrimaryCtaClick,
@@ -188,7 +188,7 @@ export function $$x0(e, t) {
         primaryCtaProps,
         secondaryCtaProps,
         skip: i.skip,
-        title: _$$t("cursor_bot.make_it_look_just_right")
+        title: getI18nString("cursor_bot.make_it_look_just_right")
       });
     }
   };

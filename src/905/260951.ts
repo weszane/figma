@@ -1,6 +1,6 @@
 import { GUn, f2e, Ez5 } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { c as _$$c } from "../905/370443";
 import { Cu } from "../figma_app/314264";
@@ -13,7 +13,7 @@ export class $$p0 extends j {
     this.sectionId = null;
   }
   handleMouseDown(e) {
-    if (!zl.get(w)) return;
+    if (!atomStoreManager.get(w)) return;
     let t = e.findHoveredNodeId();
     let i = getSingletonSceneGraph().get(t);
     if (i && i.isSection && GUn.eventHitTestNameUIBounds(e, t, f2e.SECTION_PRESET_PICKER)) {
@@ -47,7 +47,7 @@ export class $$p0 extends j {
       Ez5.clearHoveredSectionPresetPickerNode();
       return;
     }
-    zl.get(w) && (GUn.eventHitTestNameUIBounds(e, t, f2e.SECTION_PRESET_PICKER) ? Ez5.setHoveredSectionPresetPickerNode(t) : Ez5.clearHoveredSectionPresetPickerNode());
+    atomStoreManager.get(w) && (GUn.eventHitTestNameUIBounds(e, t, f2e.SECTION_PRESET_PICKER) ? Ez5.setHoveredSectionPresetPickerNode(t) : Ez5.clearHoveredSectionPresetPickerNode());
   }
   handleMouseLeave(e) {}
   handleMouseDrag(e) {}

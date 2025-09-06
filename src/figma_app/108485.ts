@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useDispatch } from "../vendor/514228";
-import { eU, md, Xr } from "../figma_app/27355";
+import { atom, useAtomWithSubscription, Xr } from "../figma_app/27355";
 import { h as _$$h } from "../905/207101";
 import { b as _$$b } from "../905/985254";
 import { e as _$$e } from "../905/621515";
@@ -21,21 +21,21 @@ import { h as _$$h2 } from "../905/284399";
 import { yP, Iy } from "../figma_app/551322";
 import { q3 } from "../figma_app/450829";
 import { nWd } from "../figma_app/6204";
-let $$x0 = eU(!1);
+let $$x0 = atom(!1);
 let N = () => new Date(Date.now() - 1e4);
 let C = "Move Drafts Nudge -";
 let w = r1("dismissed_move_drafts_nudge");
 export function $$O1() {
-  let e = md(yV);
-  let t = md(d2);
-  let r = md(qG);
+  let e = useAtomWithSubscription(yV);
+  let t = useAtomWithSubscription(d2);
+  let r = useAtomWithSubscription(qG);
   let O = XO();
-  let R = md(zo);
+  let R = useAtomWithSubscription(zo);
   let L = jO();
-  let P = md(pQ);
-  let D = md(_$$t);
-  let k = md(_$$N);
-  let M = md(w);
+  let P = useAtomWithSubscription(pQ);
+  let D = useAtomWithSubscription(_$$t);
+  let k = useAtomWithSubscription(_$$N);
+  let M = useAtomWithSubscription(w);
   let F = Xr($$x0);
   let j = _$$e({
     overlay: nWd,

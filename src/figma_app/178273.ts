@@ -1,26 +1,26 @@
-import { eU, Iz, zl } from "../figma_app/27355";
+import { atom, createRemovableAtomFamily, atomStoreManager } from "../figma_app/27355";
 import { i as _$$i } from "../vendor/753650";
-let a = eU({});
-let $$s4 = Iz(e => eU(t => t(a)[e], (t, r, n) => {
+let a = atom({});
+let $$s4 = createRemovableAtomFamily(e => atom(t => t(a)[e], (t, r, n) => {
   r(a, t => ({
     ...t,
     [e]: n
   }));
 }));
-let $$o0 = eU(e => Object.values(e(a)));
-let $$l1 = eU(!1);
-let $$d5 = eU({
+let $$o0 = atom(e => Object.values(e(a)));
+let $$l1 = atom(!1);
+let $$d5 = atom({
   autoScroll: !1
 });
 export async function $$c2(e, t, r, o) {
   let {
     guid
   } = e;
-  zl.set($$d5, e => e.autoScroll ? {
+  atomStoreManager.set($$d5, e => e.autoScroll ? {
     ...e,
     guid
   } : e);
-  o || zl.set($$l1, !0);
+  o || atomStoreManager.set($$l1, !0);
   await function (e, t) {
     let {
       guid: _guid,
@@ -30,7 +30,7 @@ export async function $$c2(e, t, r, o) {
     return new Promise(l => {
       _$$i(name.length, 0, {
         onUpdate: i => {
-          !t.signal.aborted && e.isAlive && zl.set($$s4(_guid), {
+          !t.signal.aborted && e.isAlive && atomStoreManager.set($$s4(_guid), {
             guid: _guid,
             boundingBox: e.absoluteBoundingBox,
             state: "deleting",
@@ -51,7 +51,7 @@ export async function $$c2(e, t, r, o) {
     return new Promise(l => {
       _$$i(0, t.length, {
         onUpdate: i => {
-          !r.signal.aborted && e.isAlive && zl.set($$s4(_guid2), {
+          !r.signal.aborted && e.isAlive && atomStoreManager.set($$s4(_guid2), {
             guid: _guid2,
             boundingBox: e.absoluteBoundingBox,
             state: "writing",
@@ -65,14 +65,14 @@ export async function $$c2(e, t, r, o) {
     });
   }(e, t, r);
   $$s4.remove(guid);
-  zl.set(a, e => {
+  atomStoreManager.set(a, e => {
     let t = {
       ...e
     };
     delete t[guid];
     return t;
   });
-  o || zl.set($$l1, !1);
+  o || atomStoreManager.set($$l1, !1);
 }
 export function $$u3() {
   $$s4.removeAll();

@@ -3,9 +3,9 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useMemo, useCallback } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { lQ } from "../905/934246";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { h as _$$h } from "../905/207101";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { e as _$$e } from "../905/579755";
 import { V6 } from "../figma_app/487970";
 import { Dl } from "../figma_app/471982";
@@ -96,7 +96,7 @@ function w(e) {
       title: jsxs("div", {
         className: workspaceTitleWrapper,
         children: [i.name, !_$$c(t) && r && jsx("div", {
-          "data-tooltip": _$$t("community.buyer.this_account_has_already_purchased"),
+          "data-tooltip": getI18nString("community.buyer.this_account_has_already_purchased"),
           "data-tooltip-type": Ib.TEXT,
           children: jsx(V6, {})
         })]
@@ -124,13 +124,13 @@ function w(e) {
     description: e.email,
     onClick: lQ,
     disabledText: {
-      displayText: _$$t("community.try.not_allowed"),
-      tooltipText: _$$t("community.buyer.user_is_a_publisher")
+      displayText: getI18nString("community.try.not_allowed"),
+      tooltipText: getI18nString("community.buyer.user_is_a_publisher")
     }
   })));
   return jsx(E, {
-    title: _$$t("community.buyer.confirm_account"),
-    description: _$$t("community.buyer.this_resource_will_only_be_accesible"),
+    title: getI18nString("community.buyer.confirm_account"),
+    description: getI18nString("community.buyer.this_resource_will_only_be_accesible"),
     options: v
   });
 }
@@ -141,7 +141,7 @@ export let $$T0 = Ju(function (e) {
   }, [t]);
   let s = useMemo(() => function (e) {
     _$$h(() => {
-      sx("Pre Purchase User Selector Modal - Opened", {
+      trackEventAnalytics("Pre Purchase User Selector Modal - Opened", {
         resourceType: Dl(e.resource),
         resourceId: e.resource.id
       });
@@ -157,7 +157,7 @@ export let $$T0 = Ju(function (e) {
         }), jsx("button", {
           className: genericSelectorModalCancel,
           onClick: i,
-          children: tx("community.try.pick_workspace.cancel")
+          children: renderI18nText("community.try.pick_workspace.cancel")
         })]
       })
     });

@@ -1,36 +1,86 @@
-import { getFeatureFlags } from '../905/601108';
-import { zl } from '../figma_app/27355';
-import { getInitialOptions } from '../figma_app/169182';
-import { h } from '../figma_app/276445';
-let n;
-class $$s {
-  useSentryErrors;
-  slogToConsole;
-  haveDSN;
-  enabled;
-  shouldIgnoreErrors;
-  constructor(e) {
-    this.useSentryErrors = e.useSentryErrors;
-    this.slogToConsole = e.slogToConsole;
-    this.haveDSN = e.haveDSN;
-    this.enabled = e.useSentryErrors;
-    this.shouldIgnoreErrors = e.shouldIgnoreErrors;
+import { getFeatureFlags } from '../905/601108'
+import { atomStoreManager } from '../figma_app/27355'
+import { getInitialOptions } from '../figma_app/169182'
+import { h } from '../figma_app/276445'
+
+/**
+ * Error configuration options for Sentry integration.
+ */
+export interface SentryConfigOptions {
+  useSentryErrors: boolean
+  slogToConsole: boolean
+  haveDSN: boolean
+  shouldIgnoreErrors: () => boolean
+}
+
+/**
+ * Sentry configuration class.
+ * (Original: $$s)
+ */
+export class SentryConfig {
+  useSentryErrors: boolean
+  slogToConsole: boolean
+  haveDSN: boolean
+  enabled: boolean
+  shouldIgnoreErrors: () => boolean
+
+  constructor(options: SentryConfigOptions) {
+    this.useSentryErrors = options.useSentryErrors
+    this.slogToConsole = options.slogToConsole
+    this.haveDSN = options.haveDSN
+    this.enabled = options.useSentryErrors
+    this.shouldIgnoreErrors = options.shouldIgnoreErrors
   }
-  get ignoreErrors() {
-    return this.shouldIgnoreErrors();
+
+  /**
+   * Returns whether errors should be ignored.
+   */
+  get ignoreErrors(): boolean {
+    return this.shouldIgnoreErrors()
   }
 }
-class d {
-  constructor(e) {
-    this.config = e;
+
+/**
+ * Wrapper for SentryConfig.
+ * (Original: d)
+ */
+export class SentryConfigWrapper {
+  config: SentryConfig
+
+  constructor(config: SentryConfig) {
+    this.config = config
   }
 }
-export function $$c0() {
-  return n ? n.config : (n || (n = new d(new $$s({
-    slogToConsole: getFeatureFlags().slog_to_console || !1,
-    haveDSN: !!getInitialOptions().frontend_sentry_dsn,
-    useSentryErrors: !!getInitialOptions().frontend_sentry_dsn && !getInitialOptions().local_dev_on_cluster,
-    shouldIgnoreErrors: () => zl.get(h) !== 'ok'
-  })))).config;
+
+let sentryConfigInstance: SentryConfigWrapper | undefined
+
+/**
+ * Returns the current Sentry configuration.
+ * (Original: $$c0)
+ */
+export function getSentryConfig(): SentryConfig {
+  if (sentryConfigInstance) {
+    return sentryConfigInstance.config
+  }
+
+  const featureFlags = getFeatureFlags()
+  const initialOptions = getInitialOptions()
+
+  sentryConfigInstance = new SentryConfigWrapper(
+    new SentryConfig({
+      slogToConsole: featureFlags.slog_to_console || false,
+      haveDSN: !!initialOptions.frontend_sentry_dsn,
+      useSentryErrors:
+        !!initialOptions.frontend_sentry_dsn && !initialOptions.local_dev_on_cluster,
+      shouldIgnoreErrors: () => atomStoreManager.get(h) !== 'ok',
+    }),
+  )
+
+  return sentryConfigInstance.config
 }
-export const s = $$c0;
+
+/**
+ * Alias for getSentryConfig.
+ * (Original: s)
+ */
+export const s = getSentryConfig

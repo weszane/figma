@@ -10,14 +10,14 @@ import { Ns } from "../figma_app/686647";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { eU, zl, Xr, md } from "../figma_app/27355";
+import { atom, atomStoreManager, Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { g as _$$g } from "../905/871474";
 import { k as _$$k2 } from "../905/651849";
 import { hC } from "../figma_app/901889";
 import { F as _$$F } from "../905/422355";
 import { lQ } from "../905/934246";
-import { $D } from "../905/11";
-import { x1 } from "../905/714362";
+import { reportError } from "../905/11";
+import { logError } from "../905/714362";
 import { uQ, NM } from "../figma_app/311375";
 import { lg } from "../figma_app/976749";
 import { Ay } from "../figma_app/432652";
@@ -553,9 +553,9 @@ class k {
     }(this, "node", void 0), !T(e)) throw Error("Node is not a valid AI Chat node");
   }
 }
-let Y = eU(null);
+let Y = atom(null);
 export function $$J1(e) {
-  zl.set(Y, e);
+  atomStoreManager.set(Y, e);
 }
 export function $$X0() {
   let e = getFeatureFlags().ai_assistant_server_side_chat ?? !1;
@@ -653,7 +653,7 @@ export function $$X0() {
     let a = persistedMessages.length;
     let d = new AbortController();
     let c = _$$g();
-    zl.set(_$$J, e.selectedNodeIds ?? r);
+    atomStoreManager.set(_$$J, e.selectedNodeIds ?? r);
     let u = {
       role: "user",
       content: [{
@@ -715,8 +715,8 @@ export function $$X0() {
           ...y,
           ...e.fields
         }),
-        reportToSentry: e => $D(_$$e.AI_ASSISTANT, e),
-        sloge: (e, t) => x1(g, e, t),
+        reportToSentry: e => reportError(_$$e.AI_ASSISTANT, e),
+        sloge: (e, t) => logError(g, e, t),
         setThreadId: J,
         onUpdateThread: (e, t) => {
           ee([...e]);
@@ -737,11 +737,11 @@ export function $$X0() {
       persistedMessages,
       serverSideChatParams: structuredClone(eo)
     });
-    zl.set(_$$J, []);
+    atomStoreManager.set(_$$J, []);
   }, [m, t, persistedMessages, appendPersistedMessages, ei, eo, J, n, o, l]);
-  let ed = md(Y);
+  let ed = useAtomWithSubscription(Y);
   useEffect(() => {
-    ed && (el(ed, "canvas"), zl.set(Y, null));
+    ed && (el(ed, "canvas"), atomStoreManager.set(Y, null));
   }, [ed, el]);
   let ec = Q(s, persistedMessages);
   let eu = Q(s, X);

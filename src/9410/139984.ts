@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, memo, useCallback, useRef, useMemo, useState } from "react";
 import { useSelector, useDispatch, useStore } from "../vendor/514228";
 import { NLJ, glU, kul } from "../figma_app/763686";
-import { md, fp } from "../figma_app/27355";
+import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { uM } from "../905/738636";
 import { b as _$$b } from "../905/985254";
 import { e } from "../905/621515";
@@ -28,7 +28,7 @@ import { Of, XC } from "../figma_app/631279";
 import { b as _$$b2 } from "../9410/881782";
 import { Mz } from "../vendor/925040";
 import { getInitialOptions, buildUploadUrl } from "../figma_app/169182";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { W as _$$W2 } from "../9410/216737";
 import { C7, e7, HX, b7, mg, Ur, xK, g1, $5, ok, qw, A8, $j, N1 } from "../9410/837048";
 import { e as _$$e } from "../figma_app/278289";
@@ -40,7 +40,7 @@ import { b as _$$b3 } from "../figma_app/5657";
 import { p as _$$p } from "../9410/889115";
 import { Z as _$$Z } from "../9410/452531";
 import X from "classnames";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Kz } from "../figma_app/637027";
 import { ni, _X, Yb } from "../figma_app/62612";
 import { Ib } from "../905/129884";
@@ -154,7 +154,7 @@ function F(e, t) {
         primaryCtaProps,
         secondaryCtaProps,
         onClose: t.onClickClose,
-        bodyText: _$$t("cursor_bot.a_frame_will_hold_the_rest_of_your_design"),
+        bodyText: getI18nString("cursor_bot.a_frame_will_hold_the_rest_of_your_design"),
         fromCursorBot: !0
       });
     }
@@ -174,7 +174,7 @@ function z(e) {
       trackingProperties: {
         ctaTrackingDescriptor: _$$c.BACK
       },
-      children: tx("general.back")
+      children: renderI18nText("general.back")
     }),
     onPrimaryCtaClick: e.onPrimaryCtaClick,
     onSecondaryCtaClick: e.onSecondaryCtaClick,
@@ -182,9 +182,9 @@ function z(e) {
     primaryCtaProps: e.primaryCtaProps,
     secondaryCtaProps: e.secondaryCtaProps,
     targetKey: "tool-type-onboarding",
-    title: tx("cursor_bot.add_words_where_needed"),
+    title: renderI18nText("cursor_bot.add_words_where_needed"),
     trackingContextName: "Cursor Bot Create Text Step",
-    children: tx("cursor_bot.all_designs_need_words_so_create_a_text_layer_anywhere_and_start_typing_simple_as_that")
+    children: renderI18nText("cursor_bot.all_designs_need_words_so_create_a_text_layer_anywhere_and_start_typing_simple_as_that")
   });
 }
 function V(e, t, i) {
@@ -351,15 +351,15 @@ let en = memo(({
   stateManager: t
 }) => {
   let i;
-  let a = md(a8);
-  let s = md(jE);
+  let a = useAtomWithSubscription(a8);
+  let s = useAtomWithSubscription(jE);
   let l = useCallback(() => {
     let e = u.current;
     return e ? Math.min(Math.round(e / s * 100), 100) : 0;
   }, [s]);
   useEffect(() => {
     let i = i => {
-      i && 27 === i.keyCode && XC(a) && (sx("Cursor Bot Tutorial Canceled via Escape", {
+      i && 27 === i.keyCode && XC(a) && (trackEventAnalytics("Cursor Bot Tutorial Canceled via Escape", {
         tutorialName: e.name
       }), t.stopCurrentTutorial({
         timeElapsed: u.current,
@@ -371,7 +371,7 @@ let en = memo(({
     window.addEventListener("keydown", i);
     return () => window.removeEventListener("keydown", i);
   }, [a, t, l, e.name]);
-  let [d, c] = fp(mH);
+  let [d, c] = useAtomValueAndSetter(mH);
   let u = useRef(0);
   let p = useRef();
   if (useEffect(() => {
@@ -426,13 +426,13 @@ let en = memo(({
             });
           },
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": _$$t("cursor_bot.stop_tutorial"),
+          "data-tooltip": getI18nString("cursor_bot.stop_tutorial"),
           trackingProperties: {
             trackingDescriptor: _$$c.STOP_TUTORIAL,
             tutorialName: e.name
           },
-          "aria-label": _$$t("cursor_bot.stop_tutorial"),
-          children: tx("collaboration.spotlight.bell.presenter.stop")
+          "aria-label": getI18nString("cursor_bot.stop_tutorial"),
+          children: renderI18nText("collaboration.spotlight.bell.presenter.stop")
         })]
       })
     })
@@ -443,7 +443,7 @@ function es() {
   let e = _X({
     subscribeToUpdates_expensive: !1
   });
-  let t = md(Dh);
+  let t = useAtomWithSubscription(Dh);
   if (null == t) return null;
   let {
     x,
@@ -521,7 +521,7 @@ export function $$eo1() {
   let R = useSelector(e => e.isFullscreenDocumentLoaded);
   let D = useSelector(e => e.mirror.appModel.multiplayerSessionState === kul.JOINED);
   let M = _$$b2();
-  let P = md(a8);
+  let P = useAtomWithSubscription(a8);
   let B = _$$f("has_cursor_bot_onboarding_v2");
   !function (e, t, i) {
     let r = iZ();

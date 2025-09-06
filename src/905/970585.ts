@@ -1,14 +1,14 @@
 import { glU, kul, h3O, ccR, J5D } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
-import { az, sx } from "../905/449184";
+import { atomStoreManager } from "../figma_app/27355";
+import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { w as _$$w } from "../905/5147";
 import { Ay } from "../905/612521";
 import { isLocalDevOnCluster } from "../figma_app/169182";
 import { parseQuery } from "../905/634134";
-import { $D, kF } from "../905/11";
+import { reportError, setSentryTag } from "../905/11";
 import { s as _$$s } from "../905/573154";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { nF } from "../905/350402";
 import { nA, lp, eH, J4 } from "../figma_app/91703";
@@ -27,7 +27,7 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { $n } from "../905/521428";
 import { fn, sH } from "../905/871411";
-import { eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getSingletonSceneGraph } from "../905/700578";
 import { XHR } from "../905/910117";
@@ -84,13 +84,13 @@ async function j(e, t) {
   } catch (e) {
     i = JSON.stringify(e);
     r = !1;
-    $D(_$$e.SCENEGRAPH_AND_SYNC, Error("Failed to load file buffer for too-many-connections fallback"), {
+    reportError(_$$e.SCENEGRAPH_AND_SYNC, Error("Failed to load file buffer for too-many-connections fallback"), {
       extra: {
         error: i
       }
     });
   } finally {
-    az.trackDefinedEvent("scenegraph_and_sync.too_many_connections_fallback", {
+    analyticsEventManager.trackDefinedEvent("scenegraph_and_sync.too_many_connections_fallback", {
       success: r,
       error: i
     });
@@ -123,7 +123,7 @@ function W(e) {
         onClick: () => {
           e.dispatch(Ce());
         },
-        children: [" ", tx("multiplayer_connection_error.dismiss_button"), " "]
+        children: [" ", renderI18nText("multiplayer_connection_error.dismiss_button"), " "]
       })
     })]
   });
@@ -150,15 +150,15 @@ function K(e) {
     ...e,
     children: [jsx("div", {
       className: DD,
-      children: tx("multiplayer_connection_error.too_many_connections.title")
+      children: renderI18nText("multiplayer_connection_error.too_many_connections.title")
     }), jsx("div", {
       className: jE,
-      children: tx("multiplayer_connection_error.too_many_connections.content")
-    }), !eD && jsx("div", {
+      children: renderI18nText("multiplayer_connection_error.too_many_connections.content")
+    }), !desktopAPIInstance && jsx("div", {
       className: v0,
       children: jsx($n, {
         onClick: t,
-        children: tx("multiplayer_connection_error.too_many_connections.view_only_button")
+        children: renderI18nText("multiplayer_connection_error.too_many_connections.view_only_button")
       })
     })]
   });
@@ -175,19 +175,19 @@ let Z = Ju(function () {
     className: Be,
     href: "https://help.figma.com/hc/articles/1500006775761",
     target: "_blank",
-    children: tx("multiplayer_limit.help_center")
+    children: renderI18nText("multiplayer_limit.help_center")
   });
   return jsxs(d_, {
     size: "small",
-    title: _$$t("multiplayer_limit.editor_limit_modal_title.seat_rename"),
+    title: getI18nString("multiplayer_limit.editor_limit_modal_title.seat_rename"),
     children: [jsx(s_, {
       dispatch: e
     }), jsxs("div", {
       className: jE,
       children: [jsx("p", {
-        children: tx("multiplayer_limit.editor_limit_modal_content.seat_rename")
+        children: renderI18nText("multiplayer_limit.editor_limit_modal_content.seat_rename")
       }), jsx("br", {}), jsx("p", {
-        children: tx("multiplayer_limit.more_info", {
+        children: renderI18nText("multiplayer_limit.more_info", {
           moreInfoLink: t
         })
       }), jsx("div", {
@@ -196,7 +196,7 @@ let Z = Ju(function () {
           onClick: () => {
             e(Ce());
           },
-          children: tx("multiplayer_limit.done_button")
+          children: renderI18nText("multiplayer_limit.done_button")
         })
       })]
     })]
@@ -208,19 +208,19 @@ let X = Ju(function () {
     className: Be,
     href: "https://help.figma.com/hc/articles/1500006775761",
     target: "_blank",
-    children: tx("multiplayer_limit.help_center")
+    children: renderI18nText("multiplayer_limit.help_center")
   });
   return jsxs(d_, {
     size: "small",
-    title: _$$t("multiplayer_limit.cursor_limit_modal_title"),
+    title: getI18nString("multiplayer_limit.cursor_limit_modal_title"),
     children: [jsx(s_, {
       dispatch: e
     }), jsxs("div", {
       className: jE,
       children: [jsx("p", {
-        children: tx("multiplayer_limit.cursor_limit_modal_content")
+        children: renderI18nText("multiplayer_limit.cursor_limit_modal_content")
       }), jsx("br", {}), jsx("p", {
-        children: tx("multiplayer_limit.more_info", {
+        children: renderI18nText("multiplayer_limit.more_info", {
           moreInfoLink: t
         })
       })]
@@ -230,7 +230,7 @@ let X = Ju(function () {
         onClick: () => {
           e(Ce());
         },
-        children: tx("multiplayer_limit.done_button")
+        children: renderI18nText("multiplayer_limit.done_button")
       })
     })]
   });
@@ -282,7 +282,7 @@ export class $$eu0 {
   }
   restartPresentation(e) {
     h3O.startPresenting();
-    sx("Spotlight Restarted After Disconnect", {
+    trackEventAnalytics("Spotlight Restarted After Disconnect", {
       timeElapsedSeconds: e
     });
   }
@@ -303,8 +303,8 @@ export class $$eu0 {
   handleMultiplayerSignal(e, t, i) {
     if ("force-refresh" === e) Ay.reload("Multiplayer got force-refresh signal");else if ("too-many-connections" === e) {
       if (this.hasUnsavedChanges()) {
-        let e = _$$t("unsaved_changes.syncing.changes_cannot_be_saved");
-        let t = _$$t("unsaved_changes.syncing.too_many_people_in_file");
+        let e = getI18nString("unsaved_changes.syncing.changes_cannot_be_saved");
+        let t = getI18nString("unsaved_changes.syncing.too_many_people_in_file");
         this.dispatch(to({
           type: G,
           data: {
@@ -320,14 +320,14 @@ export class $$eu0 {
         }
       }));
     } else if ("message-decode-failure" === e) this.hasShownMultiplayerDecodeError || (this.hasShownMultiplayerDecodeError = !0, this.dispatch(_$$F.enqueue({
-      message: _$$t("unsaved_changes.syncing.experiencing_server_issues")
+      message: getI18nString("unsaved_changes.syncing.experiencing_server_issues")
     })));else if ("invalid-permissions" === e) {
       let e;
       let t;
-      this.hasUnsavedChanges() ? (t = _$$t("unsaved_changes.syncing.changes_cannot_be_saved"), e = _$$t("unsaved_changes.syncing.unsaved_revoked_access")) : (t = _$$t("unsaved_changes.syncing.access_revoked"), e = _$$t("unsaved_changes.syncing.someone_revoked_access_to_the_file_you_had_open_ask_the_owner_for_access_to_open_it_again"), this.dispatch(eH({
+      this.hasUnsavedChanges() ? (t = getI18nString("unsaved_changes.syncing.changes_cannot_be_saved"), e = getI18nString("unsaved_changes.syncing.unsaved_revoked_access")) : (t = getI18nString("unsaved_changes.syncing.access_revoked"), e = getI18nString("unsaved_changes.syncing.someone_revoked_access_to_the_file_you_had_open_ask_the_owner_for_access_to_open_it_again"), this.dispatch(eH({
         closeDesktopTabWithMessage: e
       })));
-      sx("Context Viewed", {
+      trackEventAnalytics("Context Viewed", {
         name: "multiplayer-revoked-access-modal"
       }, {
         forwardToDatadog: !0
@@ -342,7 +342,7 @@ export class $$eu0 {
     } else if ("not-logged-in" === e) {
       let e;
       let t;
-      this.hasUnsavedChanges() ? (t = _$$t("unsaved_changes.syncing.changes_cannot_be_saved"), e = _$$t("unsaved_changes.syncing.unsaved_not_logged_in")) : (this.dispatch(eH()), t = _$$t("unsaved_changes.syncing.logged_out"), e = _$$t("unsaved_changes.syncing.you_have_been_logged_out_of_figma"));
+      this.hasUnsavedChanges() ? (t = getI18nString("unsaved_changes.syncing.changes_cannot_be_saved"), e = getI18nString("unsaved_changes.syncing.unsaved_not_logged_in")) : (this.dispatch(eH()), t = getI18nString("unsaved_changes.syncing.logged_out"), e = getI18nString("unsaved_changes.syncing.you_have_been_logged_out_of_figma"));
       this.dispatch(to({
         type: G,
         data: {
@@ -352,8 +352,8 @@ export class $$eu0 {
       }));
     } else if ("client-too-old" === e) {
       if (this.hasUnsavedChanges()) {
-        let e = _$$t("unsaved_changes.syncing.changes_cannot_be_saved");
-        let t = _$$t("unsaved_changes.syncing.app_out_of_date");
+        let e = getI18nString("unsaved_changes.syncing.changes_cannot_be_saved");
+        let t = getI18nString("unsaved_changes.syncing.app_out_of_date");
         this.dispatch(to({
           type: G,
           data: {
@@ -362,11 +362,11 @@ export class $$eu0 {
           }
         }));
       } else {
-        this.dispatch(_$$s.flash(_$$t("unsaved_changes.syncing.updating_the_app")));
+        this.dispatch(_$$s.flash(getI18nString("unsaved_changes.syncing.updating_the_app")));
         setTimeout(() => {
           let e = location.href;
           e += /\?/.test(e) ? "&" : "?";
-          e += "flash=" + encodeURIComponent(_$$t("unsaved_changes.syncing.figma_was_automatically_updated_to_the_latest_version"));
+          e += "flash=" + encodeURIComponent(getI18nString("unsaved_changes.syncing.figma_was_automatically_updated_to_the_latest_version"));
           location.assign(e);
         }, 50);
       }
@@ -376,7 +376,7 @@ export class $$eu0 {
     } else if ("network-access-restriction" === e) {
       let e = `/ip_account_restriction?reason=network_access_restriction&redirect_uri=${encodeURIComponent(window.location.href)}`;
       location.assign(e);
-    } else "schema-validation-failure" === e && this.dispatch(_$$s.flash(_$$t("unsaved_changes.syncing.we_re_experiencing_issues_opening_this_file_please_try_again_later")));
+    } else "schema-validation-failure" === e && this.dispatch(_$$s.flash(getI18nString("unsaved_changes.syncing.we_re_experiencing_issues_opening_this_file_please_try_again_later")));
   }
   socketBufferedAmount() {
     return Yq();
@@ -384,7 +384,7 @@ export class $$eu0 {
   async showRestoreComponentDialog(e) {
     let [t] = await Promise.all([Dz(this.store), QO]);
     let i = this.store.getState();
-    let n = zl.get(qp);
+    let n = atomStoreManager.get(qp);
     if (t) {
       let r = VO(e, i.library.movedLibraryItems.local, i.library.publishedByLibraryKey.components, n) || void 0;
       t.canEdit ? this.store.dispatch(to({
@@ -394,15 +394,15 @@ export class $$eu0 {
           movedToFile: r
         }
       })) : this.store.dispatch(_$$F.enqueue({
-        message: r ? _$$t("unsaved_changes.syncing.the_main_component_has_been_moved_to_moved_to_file", {
+        message: r ? getI18nString("unsaved_changes.syncing.the_main_component_has_been_moved_to_moved_to_file", {
           movedToFile: r
-        }) : _$$t("unsaved_changes.syncing.the_main_component_has_been_deleted")
+        }) : getI18nString("unsaved_changes.syncing.the_main_component_has_been_deleted")
       }));
     }
   }
   showComponentRemovedDialog() {
     this.store.dispatch(_$$F.enqueue({
-      message: _$$t("design_systems.instance_panel.component_removed")
+      message: getI18nString("design_systems.instance_panel.component_removed")
     }));
   }
   buildMultiplayerUrl(e, t, i, r, a, s, o, l, c, u, p) {
@@ -430,9 +430,9 @@ export class $$eu0 {
   }
   notifyCursorHidden() {
     this.store.dispatch(_$$F.enqueue({
-      message: _$$t("unsaved_changes.syncing.your_cursor_has_been_hidden_from_others_users"),
+      message: getI18nString("unsaved_changes.syncing.your_cursor_has_been_hidden_from_others_users"),
       button: {
-        text: _$$t("unsaved_changes.syncing.learn_more"),
+        text: getI18nString("unsaved_changes.syncing.learn_more"),
         action: () => {
           this.store.dispatch(to({
             type: X
@@ -447,19 +447,19 @@ export class $$eu0 {
   }
   notifyCursorUnhiddenFromObserver() {
     this.store.dispatch(_$$F.enqueue({
-      message: _$$t("unsaved_changes.syncing.your_cursor_is_now_visible_to_others_as_someone_is_observing_you")
+      message: getI18nString("unsaved_changes.syncing.your_cursor_is_now_visible_to_others_as_someone_is_observing_you")
     }));
   }
   notifyCursorUnhiddenFromConnectionCount() {
     this.store.dispatch(_$$F.enqueue({
-      message: _$$t("unsaved_changes.syncing.your_cursor_is_now_visible_to_others_as_users_have_left_the_file")
+      message: getI18nString("unsaved_changes.syncing.your_cursor_is_now_visible_to_others_as_users_have_left_the_file")
     }));
   }
   notifyEditorConvertedToViewer() {
     this.store.dispatch(_$$F.enqueue({
-      message: _$$t("unsaved_changes.syncing.you_have_been_converted_to_a_viewer_with_a_hidden_cursor"),
+      message: getI18nString("unsaved_changes.syncing.you_have_been_converted_to_a_viewer_with_a_hidden_cursor"),
       button: {
-        text: _$$t("unsaved_changes.syncing.learn_more"),
+        text: getI18nString("unsaved_changes.syncing.learn_more"),
         action: () => {
           this.store.dispatch(to({
             type: Z
@@ -473,8 +473,8 @@ export class $$eu0 {
     console.log("[MultiplayerDebugging]", _$$w.decodeMessage(e));
   }
   reconnectSequenceNumberChanged(e) {
-    kF("reconnect_sequence_number", e);
-    null === e || (!1 === zl.get(b2) && zl.set(b2, !0), zl.set(_$$J, e), this.store.getState().versionHistory.docHasChanged || this.dispatch(A9({
+    setSentryTag("reconnect_sequence_number", e);
+    null === e || (!1 === atomStoreManager.get(b2) && atomStoreManager.set(b2, !0), atomStoreManager.set(_$$J, e), this.store.getState().versionHistory.docHasChanged || this.dispatch(A9({
       status: !0
     })));
   }

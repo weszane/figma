@@ -1,21 +1,21 @@
 import { throwTypeError } from "../figma_app/465776";
 import { zGX } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { zl, md } from "../figma_app/27355";
-import { bt } from "../905/111321";
+import { atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
+import { createReduxSubscriptionAtom } from "../905/111321";
 import { y$ } from "../vendor/156872";
 import { jm } from "../figma_app/416935";
 import { debugState } from "../905/407919";
 import { getInitialOptions } from "../figma_app/169182";
 import { NU } from "../905/11";
-import { ED, xi } from "../905/714362";
-import { t } from "../905/303541";
+import { logDebug, logWarning } from "../905/714362";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { b as _$$b } from "../905/985254";
 import { k as _$$k } from "../905/651849";
 import { uE } from "../figma_app/314264";
 function y() {
-  return debugState || (ED("Labs", "No global redux store set, so creating a mock store with empty userFlags"), y$(() => ({
+  return debugState || (logDebug("Labs", "No global redux store set, so creating a mock store with empty userFlags"), y$(() => ({
     userFlags: {},
     isStarterUser: !1
   })));
@@ -34,17 +34,17 @@ class b {
     this.defaultValue = n;
     this.trueOverrideUserFlag = `${e}_override_true`;
     this.falseOverrideUserFlag = `${e}_override_false`;
-    this.atom = bt(y, e => this.getEffectiveValue(e.userFlags));
-    this.canOverrideAtom = bt(y, e => i(e));
+    this.atom = createReduxSubscriptionAtom(y, e => this.getEffectiveValue(e.userFlags));
+    this.canOverrideAtom = createReduxSubscriptionAtom(y, e => i(e));
   }
   getValue() {
-    return zl.get(this.atom);
+    return atomStoreManager.get(this.atom);
   }
   getEffectiveValue(e) {
     let t = this.isUserOverriddenToTrue(e);
     let i = this.isUserOverriddenToFalse(e);
     if (t && i) {
-      xi("Labs", "Unexpected state: both lab flags are set", {
+      logWarning("Labs", "Unexpected state: both lab flags are set", {
         falseOverrideFlagId: e[this.falseOverrideUserFlag]?.id,
         falseOverrideFlagCreatedAt: e[this.falseOverrideUserFlag]?.createdAt,
         falseOverrideUserFlagUpdatedAt: e[this.falseOverrideUserFlag]?.updatedAt,
@@ -81,7 +81,7 @@ class b {
     return !!e[this.falseOverrideUserFlag];
   }
   canOverride() {
-    return zl.get(this.canOverrideAtom);
+    return atomStoreManager.get(this.canOverrideAtom);
   }
   isOverridden(e) {
     return this.canOverride() && (this.isUserOverriddenToTrue(e) || this.isUserOverriddenToFalse(e));
@@ -107,9 +107,9 @@ class b {
     });
   }
   getDefaultVisualBellMessage(e) {
-    return e ? t("lab.enabled", {
+    return e ? getI18nString("lab.enabled", {
       labName: this.getDisplayName()
-    }) : t("lab.disabled", {
+    }) : getI18nString("lab.disabled", {
       labName: this.getDisplayName()
     });
   }
@@ -147,21 +147,21 @@ class b {
   }
 }
 export function $$v2(e) {
-  return md(e.atom);
+  return useAtomWithSubscription(e.atom);
 }
 var I = (e => (e[e.DEFAULT = 0] = "DEFAULT", e[e.OVERRIDDEN = 1] = "OVERRIDDEN", e))(I || {});
 let E = "prod" !== getInitialOptions().cluster_name;
 let $$x0 = Object.freeze({
   customKeyboardShortcuts: new b({
     name: "ce_custom_keyboard_shortcuts",
-    getDisplayName: () => t("keyboard_settings.custom_keyboard_shortcuts"),
+    getDisplayName: () => getI18nString("keyboard_settings.custom_keyboard_shortcuts"),
     getCanOverride: () => !!getFeatureFlags().ce_custom_keyboard_shortcuts,
     getDefaultValue: () => !!getFeatureFlags().ce_custom_keyboard_default
   }),
   ui3: new b({
     name: "unified_index_v3_endpoint",
-    getDisplayName: () => t("lab.ui3"),
-    getVisualBellMessage: e => e ? t("lab.ui3_enabled_message") : t("lab.ui3_disabled_message"),
+    getDisplayName: () => getI18nString("lab.ui3"),
+    getVisualBellMessage: e => e ? getI18nString("lab.ui3_enabled_message") : getI18nString("lab.ui3_disabled_message"),
     getCanOverride: () => !0,
     getDefaultValue: () => !0
   }),
@@ -173,7 +173,7 @@ let $$x0 = Object.freeze({
   }),
   trackableDebug: new b({
     name: "lab_trackable_debug_toggle",
-    getDisplayName: () => t("lab.trackable_debug"),
+    getDisplayName: () => getI18nString("lab.trackable_debug"),
     getCanOverride: () => E || jm(getInitialOptions().user_data?.email),
     getDefaultValue: () => !1
   }),

@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { eU, zl } from "../figma_app/27355";
-import { sx } from "../905/449184";
-import { v } from "../905/883621";
-import { Ay } from "../figma_app/778880";
-import { kF } from "../905/11";
+import { atom, atomStoreManager } from "../figma_app/27355";
+import { trackEventAnalytics } from "../905/449184";
+import { updateEnvironmentInfo } from "../905/883621";
+import { BrowserInfo } from "../figma_app/778880";
+import { setSentryTag } from "../905/11";
 export function $$d3() {
-  return !!(Ay.chromeos && window.matchMedia("(display-mode: tabbed)").matches);
+  return !!(BrowserInfo.chromeos && window.matchMedia("(display-mode: tabbed)").matches);
 }
 let c = /^\/(files|idle_timeout|ip_account_restriction|my_plugins|user|org|team)(\/.*)?$/;
 export function $$u4(e) {
@@ -14,28 +14,28 @@ export function $$u4(e) {
 export function $$p1(e) {
   document.body.style.backgroundColor = "#2c2c2c";
 }
-export let $$_0 = eU(null);
+export let $$_0 = atom(null);
 export function $$h2() {
   m();
-  Ay.chromeos && Ay.chrome && (window.matchMedia("(display-mode: tabbed)").addEventListener("change", () => {
+  BrowserInfo.chromeos && BrowserInfo.chrome && (window.matchMedia("(display-mode: tabbed)").addEventListener("change", () => {
     $$d3() && ($$p1("dark"), m());
   }), window.addEventListener("appinstalled", () => {
-    sx("chrome_os_app_installed");
+    trackEventAnalytics("chrome_os_app_installed");
   }), window.addEventListener("beforeinstallprompt", e => {
-    zl.set($$_0, e);
+    atomStoreManager.set($$_0, e);
   }));
 }
 function m() {
   let e = $$d3();
-  kF("chrome_os_app", e);
-  e && v({
+  setSentryTag("chrome_os_app", e);
+  e && updateEnvironmentInfo({
     browser_name: "Figma ChromeOS App"
   });
 }
 export function $$g6() {
   let [e, t] = useState($$d3());
   useEffect(() => {
-    if (!Ay.chromeos || !Ay.chrome) return;
+    if (!BrowserInfo.chromeos || !BrowserInfo.chrome) return;
     let e = () => t($$d3());
     let r = window.matchMedia("(display-mode: tabbed)");
     r.addEventListener("change", e);

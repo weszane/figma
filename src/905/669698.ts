@@ -1,22 +1,22 @@
 import { debug } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import { EvaluationReason } from "../vendor/625526";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { getFeatureFlagRulesExport } from "../figma_app/169182";
 import { F } from "../905/422355";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { Statsig } from "../vendor/735621";
 import { Tq, sb } from "../3973/663243";
 import { ZJ } from "../3973/697935";
 import { Uv } from "../3973/473379";
-import { PN } from "../figma_app/257275";
+import { isInteractionOrEvalMode } from "../figma_app/897289";
 import { L, K } from "../905/958077";
-function h(e = zl.get(ZJ)) {
+function h(e = atomStoreManager.get(ZJ)) {
   return !!Statsig.initializeCalled() && e.status === Uv.COMPLETED;
 }
 let _ = class e {
   static notInTestingEnvForLogging() {
-    return ("undefined" == typeof process || void 0 === process?.env?.JEST_WORKER_ID) && !PN();
+    return ("undefined" == typeof process || void 0 === process?.env?.JEST_WORKER_ID) && !isInteractionOrEvalMode();
   }
   static populateDynamicConfig(e, t) {
     if (!this.FrozenDyanmicConfigs.get(e)) {
@@ -32,7 +32,7 @@ let _ = class e {
             resource_name: e,
             statsig_ready: h()
           };
-          sx(this.DataDogInvalidStatsigFetchKey, i, {
+          trackEventAnalytics(this.DataDogInvalidStatsigFetchKey, i, {
             forwardToDatadog: !0
           });
         }
@@ -44,7 +44,7 @@ let _ = class e {
   static populateExperimentConfig(e, t) {
     if (!this.FrozenDyanmicConfigs.get(e)) {
       let i = function (e, t) {
-        let i = zl.get(ZJ);
+        let i = atomStoreManager.get(ZJ);
         let n = Tq(i, e, "getFrozenExperiment", !1, t);
         return n && n !== sb && n.getEvaluationDetails().reason !== EvaluationReason.Unrecognized ? n : null;
       }(e, !0);
@@ -59,7 +59,7 @@ let _ = class e {
             resource_name: e,
             statsig_ready: h()
           };
-          sx(this.DataDogInvalidStatsigFetchKey, i, {
+          trackEventAnalytics(this.DataDogInvalidStatsigFetchKey, i, {
             forwardToDatadog: !0
           });
         }
@@ -184,7 +184,7 @@ _.LogExposureCallback = () => {
           source: "web",
           statsig_ready: h()
         };
-        sx(_.DataDogInvalidStatsigFetchKey, e, {
+        trackEventAnalytics(_.DataDogInvalidStatsigFetchKey, e, {
           forwardToDatadog: !0
         });
       }

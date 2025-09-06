@@ -1,7 +1,7 @@
 import { T } from "../vendor/381201";
 import { vF } from "../vendor/150583";
 let r = [];
-export function $$a3(e) {
+export function getIntegrationsToSetup(e) {
   let n;
   let i = e.defaultIntegrations || [];
   let t = e.integrations;
@@ -29,17 +29,17 @@ export function $$a3(e) {
   }
   return f;
 }
-export function $$o0(e, n) {
+export function setupIntegrations(e, n) {
   let i = {};
   n.forEach(n => {
-    n && $$l4(e, n, i);
+    n && setupIntegration(e, n, i);
   });
   return i;
 }
-export function $$u2(e, n) {
+export function afterSetupIntegrations(e, n) {
   for (let i of n) i && i.afterAllSetup && i.afterAllSetup(e);
 }
-export function $$l4(e, n, i) {
+export function setupIntegration(e, n, i) {
   if (i[n.name]) {
     T && vF.log(`Integration skipped because it was already installed: ${n.name}`);
     return;
@@ -57,11 +57,11 @@ export function $$l4(e, n, i) {
   }
   T && vF.log(`Integration installed: ${n.name}`);
 }
-export function $$d1(e) {
+export function defineIntegration(e) {
   return e;
 }
-export const P$ = $$o0;
-export const _C = $$d1;
-export const lc = $$u2;
-export const mH = $$a3;
-export const qm = $$l4;
+export const P$ = setupIntegrations;
+export const _C = defineIntegration;
+export const lc = afterSetupIntegrations;
+export const mH = getIntegrationsToSetup;
+export const qm = setupIntegration;

@@ -1,9 +1,9 @@
 import { useEffect, useCallback } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { Iz, eU, zl, md } from "../figma_app/27355";
-import { J6 } from "../905/602906";
-import { $D } from "../905/11";
-import { xi, x1 } from "../905/714362";
+import { createRemovableAtomFamily, atom, atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
+import { observabilityClient } from "../905/602906";
+import { reportError } from "../905/11";
+import { logWarning, logError } from "../905/714362";
 import { useSprigWithSampling } from "../905/99656";
 import { B } from "../905/969273";
 import { sZ } from "../figma_app/948389";
@@ -23,7 +23,7 @@ let b = {
   file_key: "invalid",
   product_type: "invalid"
 };
-let T = Iz(() => eU({
+let T = createRemovableAtomFamily(() => atom({
   state: "initial",
   aiTrackingContext: b,
   tasks: []
@@ -43,13 +43,13 @@ export async function $$v0(e, t, r, n?: any) {
   let {
     state,
     aiTrackingContext
-  } = zl.get(s);
+  } = atomStoreManager.get(s);
   if ("running" === state) {
-    xi("quick-actions", "Can't start action while another invocation of the same action is running");
+    logWarning("quick-actions", "Can't start action while another invocation of the same action is running");
     return;
   }
   let g = new AbortController();
-  zl.set(s, {
+  atomStoreManager.set(s, {
     state: "running",
     abortController: g,
     aiTrackingContext,
@@ -69,7 +69,7 @@ export async function $$v0(e, t, r, n?: any) {
       params: r,
       abortController: g,
       onTasksUpdate: e => {
-        zl.set(s, t => ({
+        atomStoreManager.set(s, t => ({
           ...t,
           tasks: e
         }));
@@ -78,7 +78,7 @@ export async function $$v0(e, t, r, n?: any) {
     });
     let o = await Promise.race([i, e]);
     if (o !== S) {
-      zl.set(s, e => ({
+      atomStoreManager.set(s, e => ({
         state: "done",
         result: o,
         aiTrackingContext,
@@ -93,7 +93,7 @@ export async function $$v0(e, t, r, n?: any) {
       });
       return o;
     }
-    zl.set(s, e => ({
+    atomStoreManager.set(s, e => ({
       state: "cancelled",
       aiTrackingContext,
       tasks: e.tasks
@@ -107,11 +107,11 @@ export async function $$v0(e, t, r, n?: any) {
     return;
   } catch (t) {
     g.abort();
-    x1("quick-actions", "Error encountered running action", {
+    logError("quick-actions", "Error encountered running action", {
       error: t
     });
-    t instanceof JB && !1 === t.reportToSentry || $D(I[e] ?? _$$e.UNOWNED, t);
-    zl.set(s, e => ({
+    t instanceof JB && !1 === t.reportToSentry || reportError(I[e] ?? _$$e.UNOWNED, t);
+    atomStoreManager.set(s, e => ({
       state: "error",
       error: t,
       originalParams: r,
@@ -130,9 +130,9 @@ export async function $$v0(e, t, r, n?: any) {
 }
 export function $$A1(e, t) {
   let r = T(e);
-  if ("running" === zl.get(r).state) return;
+  if ("running" === atomStoreManager.get(r).state) return;
   let n = Uu(e, t);
-  zl.set(r, {
+  atomStoreManager.set(r, {
     state: "initial",
     aiTrackingContext: n,
     tasks: []
@@ -140,11 +140,11 @@ export function $$A1(e, t) {
 }
 export function $$x5(e) {
   let t = T(e);
-  return zl.get(t);
+  return atomStoreManager.get(t);
 }
 export function $$N7(e) {
   let t = T(e);
-  let r = md(t);
+  let r = useAtomWithSubscription(t);
   let {
     Sprig
   } = useSprigWithSampling();
@@ -193,16 +193,16 @@ export function $$N7(e) {
 }
 export function $$C3(e) {
   let t = T(e);
-  let r = zl.get(t);
+  let r = atomStoreManager.get(t);
   "running" === r.state && r.abortController.abort();
 }
 export function $$w2(e, t, r) {
   let i = $$N7(e);
-  let a = useCallback(async n => (J6.startVital(e, {
+  let a = useCallback(async n => (observabilityClient.startVital(e, {
     context: r
   }), await $$v0(e, t, n, r)), [e, t, r]);
   let o = useCallback(() => {
-    J6.stopVital(e, {
+    observabilityClient.stopVital(e, {
       context: r
     });
     $$C3(e);

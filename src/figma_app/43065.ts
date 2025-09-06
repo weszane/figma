@@ -9,7 +9,7 @@ import { getFeatureFlags } from "../905/601108";
 import { buildUploadUrl } from "../figma_app/169182";
 import { e6 } from "../figma_app/617427";
 import { Ph, o as _$$o } from "../905/160095";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { B } from "../905/261906";
 import { WX } from "../figma_app/482142";
 import { fu } from "../figma_app/831799";
@@ -29,16 +29,16 @@ export function $$A0(e) {
     onClose
   } = e;
   let A = !!getFeatureFlags().bake_starter_rollout;
-  let x = A ? tx("figmake.paywall.title_rollout") : tx("figmake.paywall.title");
-  let N = A ? tx("figmake.paywall.subtitle_rollout") : tx("figmake.paywall.feature.available_on_full_seats");
-  let C = A ? tx("figmake.paywall.footer_credits_rollout_learn_more", {
+  let x = A ? renderI18nText("figmake.paywall.title_rollout") : renderI18nText("figmake.paywall.title");
+  let N = A ? renderI18nText("figmake.paywall.subtitle_rollout") : renderI18nText("figmake.paywall.feature.available_on_full_seats");
+  let C = A ? renderI18nText("figmake.paywall.footer_credits_rollout_learn_more", {
     learnMoreLink: jsx(Ph, {
       href: v,
       newTab: !0,
-      children: tx("figmake.paywall.learn_more")
+      children: renderI18nText("figmake.paywall.learn_more")
     })
-  }) : tx("figmake.paywall.footer_credits");
-  let w = [tx("figmake.paywall.feature.prototypes"), tx("figmake.paywall.feature.prompt_design"), tx("figmake.paywall.feature.ai_outputs")];
+  }) : renderI18nText("figmake.paywall.footer_credits");
+  let w = [renderI18nText("figmake.paywall.feature.prototypes"), renderI18nText("figmake.paywall.feature.prompt_design"), renderI18nText("figmake.paywall.feature.ai_outputs")];
   return jsx(bL, {
     manager: r,
     width: 408,
@@ -94,12 +94,12 @@ export function $$A0(e) {
                 onClose();
               },
               className: "x78zum5 xl56j7k x6s0dn4 x1vqgdyp x19y5rnk x4z9k3i x1o2sk6j xu5wzci x1tk3asg xk50ysn",
-              children: tx("figmake.paywall.upgrade_button")
+              children: renderI18nText("figmake.paywall.upgrade_button")
             }), jsx(_$$o, {
               href: v,
               newTab: !0,
               className: "x78zum5 xl56j7k x6s0dn4 x1vqgdyp x19y5rnk x4z9k3i x1o2sk6j xv2f06h xt0e3qv x1akne3o x1oo3vh0",
-              children: tx("figmake.paywall.learn_more")
+              children: renderI18nText("figmake.paywall.learn_more")
             })]
           }), jsx("div", {
             className: "x1j6dyjg x1d3mw78 x1n0bwc9 xamitd3 x2b8uid x1yuz8eb xt0e3qv",

@@ -1,5 +1,5 @@
 import { useSelector } from "../vendor/514228";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { OC } from "../figma_app/386952";
 import { iZ } from "../905/372672";
 import { FFileType } from "../figma_app/191312";
@@ -7,7 +7,7 @@ import { M4 } from "../905/713695";
 import { Q7 } from "../905/98947";
 var $$c3 = (e => (e.FILE = "file", e.TEAM = "team", e.PROJECT = "project", e.NONE = "none", e))($$c3 || {});
 export function $$u1() {
-  let e = md(OC);
+  let e = useAtomWithSubscription(OC);
   let t = M4.File.useValue(e.fileKey);
   let a = M4.Team.useValue(e.teamId);
   let o = M4.Folder.useValue(e.folderId);
@@ -71,7 +71,7 @@ export function $$m2(e, t) {
   }
 }
 export function $$_0() {
-  let e = md(Q7);
+  let e = useAtomWithSubscription(Q7);
   let t = iZ();
   return e || t?.email?.split("@")[0];
 }

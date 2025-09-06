@@ -2,7 +2,7 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useCallback, useEffect, useLayoutEffect, useRef, useMemo, Component, useState, useContext, memo } from "react";
 import { AWq, Egt, glU, xae, m1T, Ez5 } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { eU as _$$eU, md, fp, zl } from "../figma_app/27355";
+import { atom, useAtomWithSubscription, useAtomValueAndSetter, atomStoreManager } from "../figma_app/27355";
 import { YQ } from "../905/502364";
 import { A as _$$A } from "../573/289674";
 import { X0 } from "../figma_app/88239";
@@ -31,7 +31,7 @@ import { o3, nt } from "../905/226610";
 import { p as _$$p } from "../figma_app/353099";
 import { Ay } from "../642/998522";
 import { QU } from "../1250/559338";
-import { tx as _$$tx, t as _$$t2 } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { _ as _$$_ } from "../905/170564";
 import { Q as _$$Q2 } from "../905/463586";
 import { E as _$$E } from "../905/95280";
@@ -44,7 +44,7 @@ import { ZI } from "../figma_app/597338";
 import { wt, R4 } from "../figma_app/74043";
 import { localStorageRef, useStorageEventSync, useLocalStorageSync } from "../905/657224";
 import { A as _$$A2 } from "../vendor/90566";
-import { az, sx as _$$sx } from "../905/449184";
+import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { parsePxInt } from "../figma_app/783094";
 import { h as _$$h } from "../905/207101";
 import { Rs } from "../figma_app/288654";
@@ -68,7 +68,7 @@ import { jO } from "../figma_app/242339";
 import { w5 } from "../figma_app/345997";
 import { h as _$$h2 } from "../figma_app/198885";
 import { dK, Xt } from "../figma_app/889655";
-import { P as _$$P } from "../905/338617";
+import { selectTeams } from "../905/338617";
 import { sp as _$$sp } from "../figma_app/678300";
 import { r6 } from "../figma_app/517115";
 import { dL } from "../figma_app/825489";
@@ -76,7 +76,7 @@ import { Wq, od } from "../figma_app/392189";
 import { r6 as _$$r } from "../905/542608";
 import ew from "classnames";
 import { Uz } from "../905/63728";
-import { Ay as _$$Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { eu as _$$eu, q5 as _$$q } from "../figma_app/807786";
 import { vb, E1, aU } from "../figma_app/757606";
 import { I as _$$I2, v as _$$v } from "../figma_app/130633";
@@ -108,7 +108,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { oz, zq, l$ } from "../figma_app/782261";
 import { V as _$$V } from "../figma_app/473391";
 import { ZC } from "../figma_app/39751";
-import { PN } from "../figma_app/257275";
+import { isInteractionOrEvalMode } from "../figma_app/897289";
 import { NG } from "../figma_app/709893";
 import { B as _$$B } from "../905/714743";
 import { Y as _$$Y } from "../905/830372";
@@ -191,7 +191,7 @@ function V() {
   }, [i, c]), 0 === i) ? null : jsxs(Fragment, {
     children: [jsx("div", {
       className: "chunk_change_navigator--chunkChangeCount--ZFnfP",
-      children: _$$tx("collaboration.feedback.change_count", {
+      children: renderI18nText("collaboration.feedback.change_count", {
         changeCount: i
       })
     }), jsxs("div", {
@@ -203,7 +203,7 @@ function V() {
           d(glU.navigateToNextChange(-1));
         },
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t2("collaboration.feedback.previous_change"),
+        "data-tooltip": getI18nString("collaboration.feedback.previous_change"),
         recordingKey: "change_stepper.previous",
         disabled: 0 === i
       }), jsx(K0, {
@@ -213,7 +213,7 @@ function V() {
           d(glU.navigateToNextChange(1));
         },
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t2("collaboration.feedback.next_change"),
+        "data-tooltip": getI18nString("collaboration.feedback.next_change"),
         recordingKey: "change_stepper.next",
         disabled: 0 === i
       })]
@@ -242,7 +242,7 @@ function eL({
   });
   useEffect(() => {
     let e = e => {
-      (_$$Ay.chromeos ? e.altKey && e.shiftKey && e.keyCode === Uz.KEY_2 : e.altKey && e.keyCode === Uz.KEY_2) && u !== m1T.TEXT && (h(), e.preventDefault());
+      (BrowserInfo.chromeos ? e.altKey && e.shiftKey && e.keyCode === Uz.KEY_2 : e.altKey && e.keyCode === Uz.KEY_2) && u !== m1T.TEXT && (h(), e.preventDefault());
     };
     document.addEventListener("keydown", e);
     return () => {
@@ -267,7 +267,7 @@ function eL({
     isVisible: d,
     onChange: p,
     path: t,
-    placeholder: _$$t2("design_systems.assets_panel.search"),
+    placeholder: getI18nString("design_systems.assets_panel.search"),
     query: i.query,
     recordingKey: "componentsLibrarySearch",
     selectOnFocus: !0
@@ -279,7 +279,7 @@ function eL({
     hideSearchIcon: !0,
     isVisible: d,
     onChange: p,
-    placeholder: _$$t2("design_systems.assets_panel.search"),
+    placeholder: getI18nString("design_systems.assets_panel.search"),
     query: i.query,
     recordingKey: "componentsLibrarySearch",
     selectOnFocus: !0
@@ -304,7 +304,7 @@ function eW(e) {
   let g = Fl();
   let y = useCallback(() => {
     closeFlyout();
-    az.trackDefinedEvent("assets_panel.asset_type_dropdown_opened", {
+    analyticsEventManager.trackDefinedEvent("assets_panel.asset_type_dropdown_opened", {
       fileKey: u?.key,
       assetsPanelVersion: 2
     });
@@ -333,11 +333,11 @@ function eW(e) {
     format: e => {
       switch (e.type) {
         case _$$I2.RECENT:
-          return _$$t2("design_systems.assets_panel.dropdown_type_recents");
+          return getI18nString("design_systems.assets_panel.dropdown_type_recents");
         case _$$I2.ALL:
-          return _$$t2("design_systems.assets_panel.dropdown_type_all_libraries");
+          return getI18nString("design_systems.assets_panel.dropdown_type_all_libraries");
         case _$$I2.LOCAL:
-          return _$$t2("design_systems.assets_panel.created_in_this_file");
+          return getI18nString("design_systems.assets_panel.created_in_this_file");
         case _$$I2.FILE:
           return libraryNameByLibraryKey[e.libraryKey] ?? "";
         case _$$I2.SITE_KIT:
@@ -347,7 +347,7 @@ function eW(e) {
     isEqual: eG
   }), [libraryNameByLibraryKey]);
   return jsxs(l6, {
-    ariaLabel: _$$t2("design_systems.assets_panel.dropdown.aria_label"),
+    ariaLabel: getI18nString("design_systems.assets_panel.dropdown.aria_label"),
     chevronClassName: "sidebar_asset_type_select--chevron--xyZLx",
     className: "sidebar_asset_type_select--select--PTmwH",
     dispatch: d,
@@ -381,9 +381,9 @@ function eW(e) {
       }
     }), b.length > 0 ? jsx(sK, {}) : null, b.length > 0 ? jsx(c$, {
       isHeader: !0,
-      formattedValue: u?.org?.name ? _$$t2("design_systems.assets_panel.dropdown_org_libraries", {
+      formattedValue: u?.org?.name ? getI18nString("design_systems.assets_panel.dropdown_org_libraries", {
         orgName: u.org.name
-      }) : _$$t2("design_systems.assets_panel.dropdown_libraries")
+      }) : getI18nString("design_systems.assets_panel.dropdown_libraries")
     }) : null, b.map(e => sF(fileKeyToLibraryKey[e]) ? jsx(c$, {
       value: {
         type: _$$I2.FILE,
@@ -399,7 +399,7 @@ function eW(e) {
       fullWidth: !0
     }, e)), v ? jsx(sK, {}) : null, v ? jsx(c$, {
       isHeader: !0,
-      formattedValue: _$$t2("design_systems.assets_panel.dropdown_curated_libraries")
+      formattedValue: getI18nString("design_systems.assets_panel.dropdown_curated_libraries")
     }) : null, v && x.map(e => jsx(c$, {
       value: {
         type: _$$I2.FILE,
@@ -420,7 +420,7 @@ function eY({
   onToggleViewMode: r,
   recordingKey: a
 }) {
-  let i = t ? _$$t2("design_systems.assets_panel.show_as_grid") : _$$t2("design_systems.assets_panel.show_as_list");
+  let i = t ? getI18nString("design_systems.assets_panel.show_as_grid") : getI18nString("design_systems.assets_panel.show_as_list");
   return jsx(K0, {
     ref: s,
     recordingKey: Pt(a, "toggleComponentsSidebarViewMode"),
@@ -431,8 +431,8 @@ function eY({
     disabled: e
   });
 }
-let e0 = Wh(() => _$$eU(0));
-let e1 = Wh(() => _$$eU(Bk.Grid));
+let e0 = Wh(() => atom(0));
+let e1 = Wh(() => atom(Bk.Grid));
 function e5(e, t, s) {
   return null != e && (t[e.type] || e.type === _$$I2.FILE && s[e.libraryKey]) ? e : {
     type: _$$I2.ALL
@@ -466,7 +466,7 @@ function tS({
   } = _$$I(Cn.AssetsPanel);
   let _ = useSelector(dK);
   let T = useSelector(F9);
-  let k = md(_$$T2);
+  let k = useAtomWithSubscription(_$$T2);
   let S = searchOption?.type === _$$I2.ALL;
   let w = fV(e.library_key);
   let N = fd(e.library_key);
@@ -494,7 +494,7 @@ function tS({
   useEffect(() => {
     U && !z && f(jD());
   }, [U, f, z]);
-  let $ = e.isLocal && PN() ? _$$eT(e.node_id, _).join("-") : e.node_id;
+  let $ = e.isLocal && isInteractionOrEvalMode() ? _$$eT(e.node_id, _).join("-") : e.node_id;
   let B = "Local components" === u || "Local private components" === u || e.isLocal;
   let V = l !== rp.SMALL && !F;
   let W = !F && getFeatureFlags().api_asset_search_with_scores;
@@ -1043,7 +1043,7 @@ let t3 = {
   }
 };
 function t7(e, t) {
-  _$$sx("Component Sidebar Viewed", {
+  trackEventAnalytics("Component Sidebar Viewed", {
     viewMode: RN(e),
     assetsPanelVersion: 2,
     fileKey: t?.key,
@@ -1058,7 +1058,7 @@ function t6({
 }) {
   let s = iZ();
   let a = q5();
-  let [i, l] = fp(e0);
+  let [i, l] = useAtomValueAndSetter(e0);
   let d = _$$A2(e => {
     l(e);
     s && uE("action_left_panel_scroll", {
@@ -1071,7 +1071,7 @@ function t6({
       fileOrgId: a?.parentOrgId ?? void 0
     });
   }, 500);
-  let [c, u] = fp(e1);
+  let [c, u] = useAtomValueAndSetter(e1);
   _$$h(() => {
     t7(c, a);
   });
@@ -1111,7 +1111,7 @@ function t9({
   let y = useSelector(_$$h2);
   let m = useSelector(dK);
   let f = useSelector(Xt);
-  let b = useSelector(_$$P);
+  let b = useSelector(selectTeams);
   let x = useSelector(e => e.userFlags.has_dismissed_component_sidebar_library_upsell_banner);
   let v = useSelector(e => e.isFreeUser);
   let _ = useSelector(e => e.user);
@@ -1145,12 +1145,12 @@ function t9({
     let a = function () {
       let e = useSelector(_$$e_);
       let t = useSelector(_$$tB);
-      let s = md(_$$O2);
+      let s = useAtomWithSubscription(_$$O2);
       let n = useSelector(MH);
       let a = useSelector(dM);
-      let i = useSelector(_$$P);
+      let i = useSelector(selectTeams);
       let l = n1();
-      let d = md(qp);
+      let d = useAtomWithSubscription(qp);
       let c = Fl();
       let u = t?.teamId ? i[t.teamId] : null;
       let p = !!u && w5(u);
@@ -1239,7 +1239,7 @@ function t9({
           }
         }(e)), l && o(gP({
           searchOptions: e
-        })), az.trackDefinedEvent("assets_panel.asset_type_changed", {
+        })), analyticsEventManager.trackDefinedEvent("assets_panel.asset_type_changed", {
           assetType: e.type,
           isSearching: !!l,
           fileKey: e.type === _$$I2.FILE ? e.libraryKey : void 0,
@@ -1274,7 +1274,7 @@ function t9({
       let [d, c] = useState(!1);
       let u = l === Bk.List;
       let h = _$$I(Cn.AssetsPanel);
-      let p = md(oE);
+      let p = useAtomWithSubscription(oE);
       let g = useMemo(() => ({
         isList: u,
         isExpanded: xO,
@@ -1323,10 +1323,10 @@ function t9({
               key: `${a}:moreResultsLink`,
               element: jsxs("div", {
                 className: "component_sidebar--text--g20jk",
-                children: [r && _$$tx("design_systems.assets_panel.showing_results_from_all_libraries"), !r && jsx("a", {
+                children: [r && renderI18nText("design_systems.assets_panel.showing_results_from_all_libraries"), !r && jsx("a", {
                   className: "component_sidebar--link--I-ane blue_link--blueLink--9rlnd",
                   onClick: l,
-                  children: _$$tx("design_systems.assets_panel.more_results_in_all_libraries", {
+                  children: renderI18nText("design_systems.assets_panel.more_results_in_all_libraries", {
                     results: s.length
                   })
                 })]
@@ -1428,7 +1428,7 @@ function t9({
     viewMode: s,
     containerSizingOptions: l
   });
-  let [O, R] = fp(dL);
+  let [O, R] = useAtomValueAndSetter(dL);
   useEffect(() => {
     O && (onSetAssetType({
       type: _$$I2.FILE,
@@ -1682,7 +1682,7 @@ function sw({
   let f = useSelector(e => e.versionHistory);
   let b = dh();
   nn();
-  let x = md(l7);
+  let x = useAtomWithSubscription(l7);
   let v = _$$U2();
   let _ = _$$T();
   let {
@@ -1770,7 +1770,7 @@ function sw({
       scene: a,
       nodeIds: i
     }) {
-      if (!t || zl.get(sl)) {
+      if (!t || atomStoreManager.get(sl)) {
         e.current = sc;
         return;
       }
@@ -1809,8 +1809,8 @@ function sw({
       clearFocusedNodes: s ? y : void 0
     };
   }();
-  let er = md(wt);
-  let ea = md(R4);
+  let er = useAtomWithSubscription(wt);
+  let ea = useAtomWithSubscription(R4);
   let ei = o3(nt.newResizablePanel);
   let [eo, el, ed] = BN(m, p);
   let ec = jsxs(Fragment, {
@@ -1910,7 +1910,7 @@ function sN({
   }) : null;
 }
 export let $$sC0 = memo(function () {
-  let e = md(Xh(void 0));
+  let e = useAtomWithSubscription(Xh(void 0));
   let t = q5();
   let s = aV();
   bi();
@@ -1918,7 +1918,7 @@ export let $$sC0 = memo(function () {
   let S = !!t && e;
   let w = ut(Ez5?.uiState().showCanvasSearch, !1);
   let N = p8("showUi");
-  let I = md(_$$G);
+  let I = useAtomWithSubscription(_$$G);
   useEffect(() => {
     S && YQ({
       id: "Found Updates To Publish"

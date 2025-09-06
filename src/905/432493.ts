@@ -6,7 +6,7 @@ import l from "../vendor/946678";
 import c from "../vendor/626715";
 import { HD } from "../figma_app/191804";
 import { parsePxInt } from "../figma_app/783094";
-import { xi } from "../905/714362";
+import { logWarning } from "../905/714362";
 import { XHR } from "../905/910117";
 import { f as _$$f } from "../905/412913";
 import { z5 } from "../905/713722";
@@ -69,7 +69,7 @@ let N = async (e, t) => {
   let i;
   let n = new Promise(e => {
     i = setTimeout(() => {
-      xi("merge", "gave up waiting on images");
+      logWarning("merge", "gave up waiting on images");
       e();
     }, t);
   });

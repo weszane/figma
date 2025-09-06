@@ -3,10 +3,10 @@ import { getFeatureFlags } from "../905/601108";
 import a from "../vendor/116389";
 import { A } from "../905/920142";
 import { nD } from "../figma_app/416935";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { cn, SH } from "../figma_app/141320";
 import { s as _$$s } from "../905/573154";
-import { YD } from "../905/303541";
+import { getI18nStringAlias } from "../905/303541";
 import { J } from "../905/231762";
 import { jd, Gi, VA } from "../figma_app/528509";
 import { FFileType, FPaymentHealthStatusType, FPlanLimitationType, FPlanRestrictionType } from "../figma_app/191312";
@@ -120,7 +120,7 @@ export function $$Y15(e, t) {
     let r = J(e);
     r && t(_$$s.error(r));
   } else {
-    let r = J(e, YD("error.unknown_contact_support"));
+    let r = J(e, getI18nStringAlias("error.unknown_contact_support"));
     t(_$$s.error(r));
   }
 }
@@ -141,7 +141,7 @@ export function $$J30(e) {
     case tY.ANNUAL:
       return NW.YEAR;
     default:
-      $D(_$$e.MONETIZATION_UPGRADES, Error(`Attempted to get BillingInterval from invalid BillingPeriod: ${e}`));
+      reportError(_$$e.MONETIZATION_UPGRADES, Error(`Attempted to get BillingInterval from invalid BillingPeriod: ${e}`));
       return null;
   }
 }
@@ -152,7 +152,7 @@ export function $$Z3(e) {
     case NW.YEAR:
       return tY.ANNUAL;
     default:
-      $D(_$$e.MONETIZATION_UPGRADES, Error(`Attempted to get BillingPeriod from invalid BillingInterval: ${e}`));
+      reportError(_$$e.MONETIZATION_UPGRADES, Error(`Attempted to get BillingPeriod from invalid BillingInterval: ${e}`));
       return null;
   }
 }

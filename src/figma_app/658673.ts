@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "../vendor/514228";
 import { NLJ, glU } from "../figma_app/763686";
 import { KE, En } from "../905/116101";
 import { Cu } from "../figma_app/314264";
-import { pb } from "../figma_app/469876";
+import { IntegrationUtils } from "../figma_app/469876";
 import { Ib } from "../905/129884";
 import { hx } from "../figma_app/630194";
 import { gd } from "../figma_app/837467";
@@ -37,7 +37,7 @@ export function $$E0() {
       toolType: "universal-insert",
       recordingKey: hx("universal-insert"),
       isSelected: r,
-      className: pb.isGoogleClassroomIntegration() ? vy : pN,
+      className: IntegrationUtils.isGoogleClassroomIntegration() ? vy : pN,
       onClick: y,
       "data-tooltip-type": Ib.LOOKUP,
       "data-tooltip": "browse-all-resources-dlt",

@@ -7,7 +7,7 @@ import { getFeatureFlags } from "../905/601108";
 import d from "classnames";
 import { Q } from "../figma_app/67145";
 import { Pt } from "../figma_app/806412";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Oe } from "../figma_app/933328";
 import { sT } from "../figma_app/740163";
 import { q, gl, oV } from "../905/216495";
@@ -88,7 +88,7 @@ export function $$L3(e) {
         className: c()(TL, {
           [py]: e.gridRight
         }),
-        "data-tooltip": _$$t("fullscreen.properties_panel.fill.stroke_width"),
+        "data-tooltip": getI18nString("fullscreen.properties_panel.fill.stroke_width"),
         "data-tooltip-type": Ib.TEXT,
         dataTestId: e.dataTestId,
         disabled: e.disabled,
@@ -109,7 +109,7 @@ export function $$L3(e) {
         className: c()(TL, {
           [py]: e.gridRight
         }),
-        "data-tooltip": _$$t("fullscreen.properties_panel.fill.stroke_width"),
+        "data-tooltip": getI18nString("fullscreen.properties_panel.fill.stroke_width"),
         "data-tooltip-type": Ib.TEXT,
         dataTestId: e.dataTestId,
         disabled: e.disabled,
@@ -135,11 +135,11 @@ export class $$P1 {
   format(e) {
     switch (e) {
       case "CENTER":
-        return _$$t("fullscreen.properties_panel.stroke.center");
+        return getI18nString("fullscreen.properties_panel.stroke.center");
       case "INSIDE":
-        return _$$t("fullscreen.properties_panel.stroke.inside");
+        return getI18nString("fullscreen.properties_panel.stroke.inside");
       case "OUTSIDE":
-        return _$$t("fullscreen.properties_panel.stroke.outside");
+        return getI18nString("fullscreen.properties_panel.stroke.outside");
     }
   }
 }
@@ -156,7 +156,7 @@ export function $$k2(e) {
   });
   return jsxs(Fragment, {
     children: [jsxs(w, {
-      ariaLabel: _$$t("fullscreen.properties_panel.stroke_align"),
+      ariaLabel: getI18nString("fullscreen.properties_panel.stroke_align"),
       chevronClassName: Xd,
       className: c()(os, {
         [IX]: e.gridLeft

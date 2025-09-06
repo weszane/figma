@@ -7,7 +7,7 @@ import { c as _$$c } from "../905/752260";
 import { biQ } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { Ay } from "../figma_app/432652";
 import { B } from "../905/969273";
 import { sZ } from "../figma_app/948389";
@@ -50,7 +50,7 @@ export function $$D0() {
   }) : jsx(_$$A, {
     action: JT.CONTENT_FILL,
     actionIcon: jsx(_$$c, {}),
-    actionLabel: tx("fullscreen_actions.ai_content_fill.replace_content"),
+    actionLabel: renderI18nText("fullscreen_actions.ai_content_fill.replace_content"),
     onPerform: () => {
       r.confirmInitialSelection();
     },
@@ -63,9 +63,9 @@ export function $$D0() {
       onlyAllowSingular: !1,
       allowEmptyText: !0,
       onlyAllowSingleTLF: !0,
-      instruction: tx("fullscreen_actions.ai_content_fill.select_items_with_text")
+      instruction: renderI18nText("fullscreen_actions.ai_content_fill.select_items_with_text")
     }),
-    children: tx("fullscreen_actions.ai_content_fill.select_items_with_text")
+    children: renderI18nText("fullscreen_actions.ai_content_fill.select_items_with_text")
   });
 }
 function k({
@@ -138,14 +138,14 @@ function k({
         prompt: _,
         promptHistory,
         recordingKey: "contentFill.prompt",
-        submitLabel: tx("fullscreen_actions.ai_content_fill.replace_content"),
+        submitLabel: renderI18nText("fullscreen_actions.ai_content_fill.replace_content"),
         suggestion: g.content
       });
     case qy.RUNNING:
       return jsx(_$$F, {
         onCancel: M,
         aiTrackingContext: r,
-        children: tx("ai.replacing")
+        children: renderI18nText("ai.replacing")
       });
     case qy.DONE:
       if (getFeatureFlags().aip_content_fill_image) switch (state) {
@@ -153,7 +153,7 @@ function k({
           return jsx(_$$F, {
             onCancel: M,
             aiTrackingContext: r,
-            children: tx("fullscreen_actions.ai_content_fill.replacing_images")
+            children: renderI18nText("fullscreen_actions.ai_content_fill.replacing_images")
           });
         case qy.DONE:
       }
@@ -298,12 +298,12 @@ function j(e) {
   return error instanceof Vz || error instanceof Lg || sZ(error) === B.CONTENT_LENGTH_LIMIT ? jsx(_$$E, {
     error,
     aiTrackingContext: r.aiTrackingContext,
-    customMessage: tx("ai.error.content_length_limit")
-  }) : (error instanceof Jd && (t = tx("fullscreen_actions.ai_content_fill.missing_font")), error instanceof Aq) ? jsx(_$$E, {
+    customMessage: renderI18nText("ai.error.content_length_limit")
+  }) : (error instanceof Jd && (t = renderI18nText("fullscreen_actions.ai_content_fill.missing_font")), error instanceof Aq) ? jsx(_$$E, {
     error,
     aiTrackingContext: r.aiTrackingContext,
-    customMessage: tx("fullscreen_actions.ai_content_fill.no_duplicates_to_replace_error")
-  }) : (l > 0 && d > 0 && d < l && (i = tx("fullscreen_actions.ai_content_fill.couldnt_count", {
+    customMessage: renderI18nText("fullscreen_actions.ai_content_fill.no_duplicates_to_replace_error")
+  }) : (l > 0 && d > 0 && d < l && (i = renderI18nText("fullscreen_actions.ai_content_fill.couldnt_count", {
     failed: d,
     total: l
   })), t) ? jsx(_$$E, {
@@ -350,7 +350,7 @@ export function $$U1() {
       return jsx(_$$A, {
         action: JT.CONTENT_FILL,
         actionIcon: jsx(_$$c, {}),
-        actionLabel: tx("fullscreen_actions.ai_content_fill.replace_content"),
+        actionLabel: renderI18nText("fullscreen_actions.ai_content_fill.replace_content"),
         onPerform: () => {
           biQ && biQ.repeatedContentFillAvailableBindings() && start({
             guids: [],
@@ -363,7 +363,7 @@ export function $$U1() {
           type: "learn_more",
           url: KL
         },
-        children: tx("fullscreen_actions.ai_content_fill.select_a_stack_of_repeating_frames")
+        children: renderI18nText("fullscreen_actions.ai_content_fill.select_a_stack_of_repeating_frames")
       });
     case qy.RUNNING:
       return jsx(_$$F, {
@@ -372,7 +372,7 @@ export function $$U1() {
           close();
         },
         aiTrackingContext,
-        children: tx("ai.replacing")
+        children: renderI18nText("ai.replacing")
       });
     case qy.DONE:
       {

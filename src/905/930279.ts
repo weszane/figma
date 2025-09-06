@@ -4,18 +4,18 @@ import { Agb } from "../figma_app/822011";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { lyf, kul } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { resourceUtils } from "../905/989992";
 import { Rs } from "../figma_app/288654";
-import { $D } from "../905/11";
-import { Lo } from "../905/714362";
+import { reportError } from "../905/11";
+import { logInfo } from "../905/714362";
 import { up, SA, Kz, Ns } from "../905/760074";
 import { Wy, eE } from "../figma_app/952446";
 import { q5 } from "../figma_app/516028";
 import { FProductAccessType, FFileType } from "../figma_app/191312";
 import { QrR, op7 } from "../figma_app/43951";
 import { isOrgUserExternallyRestrictedFromState } from "../figma_app/642025";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { TY } from "../figma_app/701001";
 import { FC } from "../figma_app/212807";
 import { d as _$$d } from "../905/647058";
@@ -37,7 +37,7 @@ export function $$w2(e, t, i, n, r, a, d, c, u, f) {
         status: "hidden",
         reason: "User is in limited space"
       };
-      if (a !== nT.Design) return {
+      if (a !== FEditorType.Design) return {
         status: "hidden",
         reason: "Invalid editor type"
       };
@@ -191,7 +191,7 @@ export function $$w2(e, t, i, n, r, a, d, c, u, f) {
         reason: "No branch file in redux"
       };
       if (!k(d, l)) {
-        Lo("branching", "No changes", {
+        logInfo("branching", "No changes", {
           sourceCheckpointId: l.checkpoint_id,
           branchCheckpointId: d.source_checkpoint_id
         });
@@ -241,7 +241,7 @@ export function $$w2(e, t, i, n, r, a, d, c, u, f) {
         };
         let t = c.files;
         if (!t) {
-          $D(_$$e.SCENEGRAPH_AND_SYNC, Error("Repo has no files"));
+          reportError(_$$e.SCENEGRAPH_AND_SYNC, Error("Repo has no files"));
           return {
             status: "disabled",
             reason: "No files in repo"
@@ -258,7 +258,7 @@ export function $$w2(e, t, i, n, r, a, d, c, u, f) {
           reason: "No source file in livegraph"
         };
         if (!n.checkpointId || !i.sourceCheckpointId || i.sourceCheckpointId === n.checkpointId) {
-          Lo("branching", "No changes", {
+          logInfo("branching", "No changes", {
             sourceCheckpointId: n.checkpointId,
             branchPointCheckpointId: i.sourceCheckpointId
           });
@@ -279,7 +279,7 @@ export function $$w2(e, t, i, n, r, a, d, c, u, f) {
           reason: "No source file in redux"
         };
         if (!k(n, t)) {
-          Lo("branching", "No changes", {
+          logInfo("branching", "No changes", {
             sourceCheckpointId: t.checkpoint_id,
             branchCheckpointId: n.source_checkpoint_id
           });
@@ -311,7 +311,7 @@ export function $$C0() {
   let i = _$$d();
   let a = useSelector(e => e.selectedView.editorType);
   let s = TY();
-  let o = md(eE);
+  let o = useAtomWithSubscription(eE);
   let l = useSelector(e => e.mirror.appModel.topLevelMode);
   let p = useSelector(e => e.mirror.appModel.multiplayerSessionState);
   let m = t?.teamId ?? null;

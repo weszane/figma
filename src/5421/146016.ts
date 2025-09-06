@@ -1,13 +1,13 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useMemo, useContext, useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
-import { fp } from "../figma_app/27355";
+import { useAtomValueAndSetter } from "../figma_app/27355";
 import s from "classnames";
 import { h4, Nz } from "../905/417232";
 import { d as _$$d } from "../figma_app/429226";
 import { Pt, rf } from "../figma_app/806412";
 import { S as _$$S } from "../figma_app/552746";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { js, Z6, cP, _X } from "../figma_app/451499";
 import { Um } from "../905/848862";
 import { _P } from "../figma_app/2590";
@@ -77,7 +77,7 @@ function S({
           })
         })
       }), jsx("div", {
-        children: "MIXED" === t ? tx("fullscreen.mixed") : e.format(t)
+        children: "MIXED" === t ? renderI18nText("fullscreen.mixed") : e.format(t)
       })]
     })
   });
@@ -113,10 +113,10 @@ function w(e) {
           children: a
         }),
         label: jsx(_$$h, {
-          children: tx("proto.action")
+          children: renderI18nText("proto.action")
         }),
         width: "fill",
-        children: gl(e.action) ? _$$t("fullscreen.mixed") : null
+        children: gl(e.action) ? getI18nString("fullscreen.mixed") : null
       }), jsx(mc, {
         children: function (e, t) {
           let n = cJ();
@@ -267,7 +267,7 @@ function Y({
           let i = e.transitionNodeID;
           if (gl(i)) return jsx("div", {
             className: t,
-            children: _$$t("proto.variant_actions.mixed")
+            children: getI18nString("proto.variant_actions.mixed")
           });
           if (void 0 === i || aI(i, Hr)) return null;
           let r = dI(i);
@@ -283,7 +283,7 @@ function Y({
           if (!i) return null;
           if (gl(i)) return jsx("div", {
             className: t,
-            children: _$$t("proto.variant_actions.mixed")
+            children: getI18nString("proto.variant_actions.mixed")
           });
           return jsx("div", {
             className: n,
@@ -343,7 +343,7 @@ function Y({
           [W]: !0,
           [Z]: a
         });
-        if ((gl(e.connectionType) || gl(f)) && (t = _$$t("fullscreen.mixed")), !e.connectionType || gl(e.connectionType) || "NONE" === e.connectionType || "BACK" === e.connectionType || "CLOSE" === e.connectionType) return jsx(Fragment, {
+        if ((gl(e.connectionType) || gl(f)) && (t = getI18nString("fullscreen.mixed")), !e.connectionType || gl(e.connectionType) || "NONE" === e.connectionType || "BACK" === e.connectionType || "CLOSE" === e.connectionType) return jsx(Fragment, {
           children: jsx("div", {
             className: n,
             children: t
@@ -355,14 +355,14 @@ function Y({
             if ("SWAP_STATE" === e.navigationType) return jsxs(Fragment, {
               children: [jsx("div", {
                 className: n,
-                children: _$$t("proto.action_change_to")
+                children: getI18nString("proto.action_change_to")
               }), i]
             });
             if (i) {
               if ("OVERLAY" === e.navigationType) return jsx(Fragment, {
                 children: jsx("div", {
                   className: z,
-                  children: tx("proto.action_overlay_title", {
+                  children: renderI18nText("proto.action_overlay_title", {
                     overlayFrameName: jsx("span", {
                       children: i
                     })
@@ -372,7 +372,7 @@ function Y({
               if ("SWAP" === e.navigationType) return jsxs(Fragment, {
                 children: [jsx("div", {
                   className: n,
-                  children: _$$t("proto.action_swap_overlay_title")
+                  children: getI18nString("proto.action_swap_overlay_title")
                 }), i]
               });
             }
@@ -393,7 +393,7 @@ function Y({
             return jsxs(Fragment, {
               children: [jsx("div", {
                 className: n,
-                children: i ? _$$t("proto.action_url_title") : _$$t("proto.action_open_link")
+                children: i ? getI18nString("proto.action_url_title") : getI18nString("proto.action_open_link")
               }), i]
             });
           case "SET_VARIABLE":
@@ -406,7 +406,7 @@ function Y({
               if (h && i) return jsx(Fragment, {
                 children: jsx("div", {
                   className: r ? l : z,
-                  children: tx("proto.action_set_variable_title", {
+                  children: renderI18nText("proto.action_set_variable_title", {
                     variableName: jsx("span", {
                       className: "prototype_action_verbose_title--variableNameContainer--XeJX2",
                       children: jsx(wG, {
@@ -433,14 +433,14 @@ function Y({
             return jsx(Fragment, {
               children: jsx("div", {
                 className: n,
-                children: _$$t("proto.action_set_variable_mode")
+                children: getI18nString("proto.action_set_variable_mode")
               })
             });
           case "CONDITIONAL":
             return jsxs(Fragment, {
               children: [jsx("div", {
                 className: n,
-                children: a ? _$$t("proto.if") : _$$t("proto.action_conditional_title")
+                children: a ? getI18nString("proto.if") : getI18nString("proto.action_conditional_title")
               }), i]
             });
           case "OBJECT_ANIMATION":
@@ -502,7 +502,7 @@ export function $$en0({
   let en = L && !W;
   let eo = L && W;
   let ei = useRef(null);
-  let [er, ea] = fp(hV);
+  let [er, ea] = useAtomValueAndSetter(hV);
   let {
     position,
     dragItem
@@ -750,7 +750,7 @@ export function $$en0({
   let eN = jsx(_$$S.div, {
     className: eI,
     children: R || B ? jsx(_$$A, {
-      label: _$$t("proto.action"),
+      label: getI18nString("proto.action"),
       input: ej
     }) : ej
   });

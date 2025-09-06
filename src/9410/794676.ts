@@ -9,8 +9,8 @@ import { fp } from "../figma_app/347146";
 import { Tf } from "../905/280919";
 import { ji } from "../figma_app/814196";
 import { xH, vN } from "../905/63728";
-import { Ay, XN } from "../figma_app/778880";
-import { R as _$$R } from "../905/103090";
+import { BrowserInfo, isIpadDevice } from "../figma_app/778880";
+import { selectWithShallowEqual } from "../905/103090";
 import { I7 } from "../figma_app/594947";
 import { k as _$$k2 } from "../905/582200";
 import { Hb, tH as _$$tH, H4 } from "../905/751457";
@@ -22,7 +22,7 @@ import { NX } from "../figma_app/568591";
 import { fu, T8 } from "../figma_app/831799";
 import { o as _$$o } from "../905/808775";
 import { A as _$$A } from "../vendor/90566";
-import { az, sx as _$$sx } from "../905/449184";
+import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { E3 } from "../figma_app/976749";
 import { ds, Dc, oP } from "../figma_app/314264";
 import { i as _$$i } from "../1250/937941";
@@ -32,7 +32,7 @@ import { wG } from "../figma_app/504823";
 import { K7 } from "../905/346794";
 import { xK } from "../905/125218";
 import { debounce } from "../905/915765";
-import { eD as _$$eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { $0 } from "../905/944871";
 import { wX } from "../905/964786";
 import { x as _$$x, V2, QZ, op, Be, NU, qr, ZT } from "../figma_app/844435";
@@ -46,7 +46,7 @@ import { iZ, TA } from "../905/372672";
 import { Bc } from "../figma_app/615482";
 import { aTn, kul, h3O, P2e, hMR, Ez5, glU } from "../figma_app/763686";
 import { As, CZ, rd, v7 } from "../figma_app/475303";
-import { t as _$$t, tx as _$$tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { FU } from "../905/26824";
 import { b as _$$b } from "../905/985254";
@@ -66,13 +66,13 @@ import { x as _$$x2 } from "../figma_app/612938";
 import { a4 } from "../figma_app/457074";
 import { vY, S7, a7, YN, xk, SO, JG } from "../figma_app/190980";
 import { DW } from "../figma_app/578011";
-import { nT, Bu } from "../figma_app/53721";
+import { FEditorType, mapEditorTypeToStringWithObfuscated } from "../figma_app/53721";
 import { lM } from "../905/574958";
 import { e0 as _$$e } from "../905/696396";
 import { L as _$$L } from "../905/92291";
-import { eU as _$$eU, md, zl, Xr } from "../figma_app/27355";
+import { atom, useAtomWithSubscription, atomStoreManager, Xr } from "../figma_app/27355";
 import eO from "../vendor/879378";
-import { bt } from "../905/270322";
+import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { Rs } from "../figma_app/288654";
 import { NSA } from "../figma_app/43951";
 import { U2 } from "../figma_app/193867";
@@ -155,11 +155,11 @@ let f = new Set(["-", "="]);
 let g = new Set(["-", "=", "f", "o", "p", "r", "s"]);
 function _(e) {
   if (!g.has(e.key)) return;
-  let t = Ay.mac ? xH.META : xH.CONTROL;
+  let t = BrowserInfo.mac ? xH.META : xH.CONTROL;
   vN(e, t) ? e.target instanceof Element && e.target.matches(".cm-content") || e.preventDefault() : f.has(e.key) && (t |= xH.SHIFT, vN(e, t) && e.preventDefault());
 }
 let W = debounce((e, t) => {
-  _$$eD.updateFullscreenMenuState({
+  desktopAPIInstance.updateFullscreenMenuState({
     pluginMenuData: e,
     widgetMenuData: t
   });
@@ -176,11 +176,11 @@ let ec = (e, t, i, r) => {
     keyboard_manual_supported_bell: !0
   }));
   e(_$$F.enqueue({
-    message: _$$t("keyboard_settings.new_keyboard_name_keyboard_shortcuts_are_available", {
+    message: getI18nString("keyboard_settings.new_keyboard_name_keyboard_shortcuts_are_available", {
       newKeyboardName: As(t)
     }),
     button: {
-      text: _$$t("keyboard_settings.update_keyboard_shortcuts"),
+      text: getI18nString("keyboard_settings.update_keyboard_shortcuts"),
       action: () => ed(e, "layout", r)
     },
     type: el,
@@ -202,11 +202,11 @@ let eu = (e, t, i) => {
     keyboard_generic_supported_first_bell: !0
   }));
   e(_$$F.enqueue({
-    message: _$$t("keyboard_settings.new_keyboard_name_keyboard_shortcuts_are_now_available", {
+    message: getI18nString("keyboard_settings.new_keyboard_name_keyboard_shortcuts_are_now_available", {
       newKeyboardName: As(t)
     }),
     button: {
-      text: _$$t("keyboard_settings.enable_and_show_new_shortcuts"),
+      text: getI18nString("keyboard_settings.enable_and_show_new_shortcuts"),
       action: () => {
         ed(e, "layout", i);
         rd({
@@ -224,8 +224,8 @@ let eu = (e, t, i) => {
   });
 };
 async function ep(e, t) {
-  if (!_$$eD) return null;
-  let i = await _$$eD.getKeyboardLayout();
+  if (!desktopAPIInstance) return null;
+  let i = await desktopAPIInstance.getKeyboardLayout();
   if (!i) return null;
   if (t === i) return i;
   let r = pB(i);
@@ -257,13 +257,13 @@ async function eh(e, t) {
 }
 var eL = eO;
 var eR = (e => (e.NOT_INITIALIZED = "not_initialized", e.ACTIVE_FIRST_TIME = "active_first_time", e.ACTIVE_AFTER_IDLE = "active_after_idle", e.IDLE_DUE_TO_INACTIVITY = "idle_due_to_inactivity", e.IDLE_DUE_TO_TAB_SWITCH = "idle_due_to_tab_switch", e))(eR || {});
-let eM = _$$eU(eR.NOT_INITIALIZED);
-let eP = bt(e => ({
+let eM = atom(eR.NOT_INITIALIZED);
+let eP = createReduxSubscriptionAtomWithState(e => ({
   state: e,
   fileKey: e.openFile?.key
 }));
 let eF = [eR.ACTIVE_AFTER_IDLE, eR.ACTIVE_FIRST_TIME];
-let eB = _$$eU(null, (e, t, i) => {
+let eB = atom(null, (e, t, i) => {
   let {
     state,
     fileKey
@@ -337,7 +337,7 @@ function e6(e) {
       accountPickerData: {
         authed_users: i,
         authed_user_access_reason: {},
-        destination_name: _$$t("mfa_required_modal.account_switcher.destination")
+        destination_name: getI18nString("mfa_required_modal.account_switcher.destination")
       },
       closeAuth: () => {
         o(!1);
@@ -346,16 +346,16 @@ function e6(e) {
       org: e.org,
       switchAccountsSection: jsx(function () {
         let e = iZ();
-        return !e || _$$eD ? null : jsx("div", {
+        return !e || desktopAPIInstance ? null : jsx("div", {
           className: eJ()(_$$s2.mt24.$, "mfa_required--secondaryText--eCIsl"),
-          children: _$$tx("mfa_required_modal.account_switcher.text", {
+          children: renderI18nText("mfa_required_modal.account_switcher.text", {
             userEmail: e.email,
             link: jsx($n, {
               variant: "link",
               onClick: () => {
                 o(!0);
               },
-              children: _$$tx("mfa_required_modal.account_switcher.switch_accounts")
+              children: renderI18nText("mfa_required_modal.account_switcher.switch_accounts")
             })
           })
         });
@@ -381,12 +381,12 @@ function tu(e) {
           className: "workshop_expiry_footer--textContent--TN7cv",
           children: jsx("span", {
             className: "workshop_expiry_footer--title--cmlOu text--fontPos13Whyte--VhWqH text--_fontBaseWhyte--efAjI",
-            children: _$$tx("whiteboard.open_sessions.expiry_banner_title")
+            children: renderI18nText("whiteboard.open_sessions.expiry_banner_title")
           })
         })]
       }), jsx(_$$K3, {
         onClick: onDismiss,
-        "aria-label": _$$t("general.close"),
+        "aria-label": getI18nString("general.close"),
         children: jsx(_$$A2, {})
       })]
     })
@@ -441,7 +441,7 @@ function tm(e) {
     let _ = g?.key;
     let x = g?.name;
     useEffect(() => {
-      if (s && !_$$T(c) && i && u && _ && x === _$$t("fullscreen.fullscreen_view_selector.untitled")) {
+      if (s && !_$$T(c) && i && u && _ && x === getI18nString("fullscreen.fullscreen_view_selector.untitled")) {
         let t = localStorage.getItem(_$$K2(o));
         t && e(_$$S({
           userName: t,
@@ -490,10 +490,10 @@ function tm(e) {
       r(_$$to({
         type: _$$x3,
         data: {
-          headerText: _$$t("whiteboard.open_sessions.expiry_modal_title", {
+          headerText: getI18nString("whiteboard.open_sessions.expiry_modal_title", {
             file_name: l || ""
           }),
-          subtitle: _$$t("whiteboard.open_sessions.expiry_modal_subtext"),
+          subtitle: getI18nString("whiteboard.open_sessions.expiry_modal_subtext"),
           disableHiding: !0
         }
       }));
@@ -533,7 +533,7 @@ let t5 = memo(({
   let s = t?.parentOrgId || "";
   let o = useRef(null);
   let d = useDispatch();
-  let c = md(_$$h2);
+  let c = useAtomWithSubscription(_$$h2);
   let u = useSelector(e => e.openFile?.canEdit ?? !1);
   let p = p8("isReadOnly");
   let h = dq();
@@ -556,7 +556,7 @@ let t5 = memo(({
       });
     };
     window.scrollTo(0, 0);
-    XN && document.addEventListener("focusout", e);
+    isIpadDevice && document.addEventListener("focusout", e);
     document.documentElement.classList.add(FC);
     document.body.classList.add(Wc);
     d(_J());
@@ -613,7 +613,7 @@ let t5 = memo(({
       };
     });
     return () => {
-      XN && document.removeEventListener("focusout", e);
+      isIpadDevice && document.removeEventListener("focusout", e);
       document.body.classList.remove(Wc);
       document.documentElement.classList.remove(FC);
     };
@@ -627,7 +627,7 @@ let t5 = memo(({
     RS(d, t?.key, h);
   }, [d, h, t?.key, f]);
   useEffect(() => {
-    _$$eD && _$$eD.setEditFilePermissions(u);
+    desktopAPIInstance && desktopAPIInstance.setEditFilePermissions(u);
   }, [u]);
   let _ = useRef(null);
   let x = useRef(null);
@@ -685,7 +685,7 @@ export function $$t80({
       d && u && (o(!0), e());
     }, [d, u, e]);
     useEffect(() => {
-      d && p && az.trackDefinedEvent("mfa.file_access_without_restriction", {
+      d && p && analyticsEventManager.trackDefinedEvent("mfa.file_access_without_restriction", {
         orgId: r ?? void 0,
         userId: i ?? void 0,
         fileKey: t ?? void 0
@@ -735,7 +735,7 @@ export function $$t80({
     }(i, r);
     let l = useCallback(async () => {
       if (s) {
-        if (_$$eD) {
+        if (desktopAPIInstance) {
           let t = await ep(o, e.current ?? null);
           e.current = t;
         } else {
@@ -789,7 +789,7 @@ export function $$t80({
   })();
   ji();
   gN();
-  _$$eD && function () {
+  desktopAPIInstance && function () {
     let e = _$$x();
     let t = V2();
     let i = QZ();
@@ -843,7 +843,7 @@ export function $$t80({
   (function () {
     let e = E3();
     let t = useCallback(() => {
-      _$$sx("display_redline", {
+      trackEventAnalytics("display_redline", {
         source: "keyboard_shortcut",
         mode: e
       });
@@ -966,10 +966,10 @@ export function $$t80({
           }));
         };
         u._trigger_undo = () => {
-          h && (Y5.triggerActionInUserEditScope("undo"), t(_$$t("fullscreen_actions.undo")));
+          h && (Y5.triggerActionInUserEditScope("undo"), t(getI18nString("fullscreen_actions.undo")));
         };
         u._trigger_redo = () => {
-          m && (Y5.triggerActionInUserEditScope("redo"), t(_$$t("fullscreen_actions.redo")));
+          m && (Y5.triggerActionInUserEditScope("redo"), t(getI18nString("fullscreen_actions.redo")));
         };
       }
     }, [i, e, h, m, u]);
@@ -1073,14 +1073,14 @@ export function $$t80({
       glU?.handleOpenFromJsonString(i, wu.MOBILE_NATIVE_NAVBAR);
     }, u._get_zoom_scale = () => glU?.getViewportZoomScale() ?? 1);
     f && (f._open_timer = () => {
-      zl.set(Qs, {
+      atomStoreManager.set(Qs, {
         type: "OPEN"
       });
-      _$$sx(Fn.OPEN, {
+      trackEventAnalytics(Fn.OPEN, {
         source: OO.IPAD_MENU
       });
     }, f._close_timer = () => {
-      zl.set(Qs, {
+      atomStoreManager.set(Qs, {
         type: "CLOSE"
       });
     }, f._activate_multiselect_mode = () => {
@@ -1106,7 +1106,7 @@ export function $$t80({
   _$$i();
   useEffect(() => Bc, []);
   DW();
-  useEffect(() => (h === nT.Whiteboard && Ay.isMeetDevice && "undefined" != typeof document && document.addEventListener("visibilitychange", t7), () => {
+  useEffect(() => (h === FEditorType.Whiteboard && BrowserInfo.isMeetDevice && "undefined" != typeof document && document.addEventListener("visibilitychange", t7), () => {
     document.removeEventListener("visibilitychange", t7);
   }), [h]);
   let Y = _$$o();
@@ -1115,12 +1115,12 @@ export function $$t80({
       i(HQ({
         storeInRecentsKey: Y
       }));
-      h === nT.Whiteboard && (i(gr({
+      h === FEditorType.Whiteboard && (i(gr({
         storeInRecentsKey: Y
       })), i(vZ({
         storeInRecentsKey: Y
       })));
-      h !== nT.DevHandoff && i(aF({
+      h !== FEditorType.DevHandoff && i(aF({
         storeInRecentsKey: Y
       }));
       window.addEventListener("storage", e, !1);
@@ -1242,11 +1242,11 @@ export function $$t80({
   return jsx(_$$k2, {
     name: "editor",
     alsoTrack: () => ({
-      editorType: Bu(h),
+      editorType: mapEditorTypeToStringWithObfuscated(h),
       productType: Dc(h),
       uiVersion: x.version,
       fileKey: d?.key || "",
-      slideView: C ? zl.get(v2) ? "ssv" : "grid" : void 0
+      slideView: C ? atomStoreManager.get(v2) ? "ssv" : "grid" : void 0
     }),
     trackImpressions: !1,
     children: jsx(wG, {
@@ -1268,7 +1268,7 @@ function t9({
 }) {
   let s = useSelector(e => e.userStateLoaded);
   let o = useSelector(e => e.mirror.appModel.isInitialized);
-  let l = _$$R(e => e.comments);
+  let l = selectWithShallowEqual(e => e.comments);
   let {
     anchorPositions,
     boundingBoxPositions,

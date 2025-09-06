@@ -8,11 +8,11 @@ import { n3, IA } from "../905/859698";
 import { glU } from "../figma_app/763686";
 import { nc } from "../905/189185";
 import { dI } from "../905/871411";
-import { R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { Pt } from "../figma_app/806412";
 import { k as _$$k } from "../905/582200";
 import { Point } from "../905/736624";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { sw } from "../figma_app/914957";
 import { p8 } from "../figma_app/722362";
 import { tS } from "../figma_app/516028";
@@ -34,7 +34,7 @@ export function $$w1() {
     styleIdForText,
     stylePreviewShown,
     selectedStyleProperties
-  } = R(e => ({
+  } = selectWithShallowEqual(e => ({
     inheritTextStyleKey: e.mirror.selectionProperties.inheritTextStyleKey,
     styleIdForText: e.mirror.selectionProperties.styleIdForText,
     stylePreviewShown: e.stylePreviewShown,
@@ -67,14 +67,14 @@ export function $$w1() {
         children: jsxs(vo, {
           children: [jsxs(Y9, {
             children: [jsx(hE, {
-              children: tx("slides.properties_panel.text_style.edit_text_style")
+              children: renderI18nText("slides.properties_panel.text_style.edit_text_style")
             }), jsx(jk, {
               children: jsx(K, {
                 htmlAttributes: {
                   "data-tooltip-type": Ib.TEXT,
-                  "data-tooltip": _$$t("slides.properties_panel.text_style.delete_style")
+                  "data-tooltip": getI18nString("slides.properties_panel.text_style.delete_style")
                 },
-                "aria-label": _$$t("slides.properties_panel.text_style.delete_style"),
+                "aria-label": getI18nString("slides.properties_panel.text_style.delete_style"),
                 onClick: j,
                 recordingKey: Pt(w, "deleteStyle"),
                 children: jsx(_$$i, {})

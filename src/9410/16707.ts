@@ -2,13 +2,13 @@ import { jsx } from "react/jsx-runtime";
 import { useMemo, createElement, useEffect } from "react";
 import { useDispatch } from "../vendor/514228";
 import { Ez5, nQ7 } from "../figma_app/763686";
-import { Xr, md, zl } from "../figma_app/27355";
+import { Xr, useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { h as _$$h } from "../905/207101";
 import { buildUploadUrl, isGovCluster, getLocaleFallbacks } from "../figma_app/169182";
 import { lt } from "../figma_app/459490";
 import { CY } from "../figma_app/637027";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { sf } from "../905/929976";
 import { b as _$$b } from "../905/985254";
 import { c as _$$c } from "../905/370443";
@@ -94,7 +94,7 @@ export function $$H1({
 }) {
   let d;
   let _ = Xr(VZ);
-  let x = md(d2);
+  let x = useAtomWithSubscription(d2);
   let C = function () {
     let {
       getPlanAndPlanUser
@@ -107,8 +107,8 @@ export function $$H1({
   }();
   let v = useDispatch();
   let T = x.data === qo.ORG;
-  let S = zl.get(Z);
-  let j = zl.get(Me);
+  let S = atomStoreManager.get(Z);
+  let j = atomStoreManager.get(Me);
   let k = debugState.getState().openFile;
   let N = !k || !k.canEdit;
   let A = isGovCluster();
@@ -119,34 +119,34 @@ export function $$H1({
   });
   let L = "/sub-processors/";
   let R = "/ssa/";
-  let M = "ja" === getLocaleFallbacks()[0] ? tx("slides.onboarding.welcome.title.jp") : tx("slides.onboarding.welcome.title");
-  d = C ? tx("slides.onboarding.ga.billable_seat.welcome.description") : tx("slides.onboarding.ga.welcome.description");
-  let B = T ? O ? tx("slides.onboarding.welcome.org.footer.no_ai", {
+  let M = "ja" === getLocaleFallbacks()[0] ? renderI18nText("slides.onboarding.welcome.title.jp") : renderI18nText("slides.onboarding.welcome.title");
+  d = C ? renderI18nText("slides.onboarding.ga.billable_seat.welcome.description") : renderI18nText("slides.onboarding.ga.welcome.description");
+  let B = T ? O ? renderI18nText("slides.onboarding.welcome.org.footer.no_ai", {
     services_agreement: jsx(CY, {
       href: R,
       target: "_blank",
       trusted: !0,
-      children: tx("slides.onboarding.services_agreement")
+      children: renderI18nText("slides.onboarding.services_agreement")
     })
-  }) : tx("slides.onboarding.welcome.org.footer.ai", {
+  }) : renderI18nText("slides.onboarding.welcome.org.footer.ai", {
     subprocessors: jsx(CY, {
       href: L,
       target: "_blank",
       trusted: !0,
-      children: tx("slides.onboarding.subprocessors")
+      children: renderI18nText("slides.onboarding.subprocessors")
     }),
     services_agreement: jsx(CY, {
       href: R,
       target: "_blank",
       trusted: !0,
-      children: tx("slides.onboarding.services_agreement")
+      children: renderI18nText("slides.onboarding.services_agreement")
     })
-  }) : O ? void 0 : tx("slides.onboarding.welcome.starter.footer", {
+  }) : O ? void 0 : renderI18nText("slides.onboarding.welcome.starter.footer", {
     subprocessors: jsx(CY, {
       href: L,
       target: "_blank",
       trusted: !0,
-      children: tx("slides.onboarding.subprocessors")
+      children: renderI18nText("slides.onboarding.subprocessors")
     })
   });
   useEffect(() => {
@@ -188,13 +188,13 @@ export function $$H1({
     preventUserClose: !A,
     primaryCta: {
       type: "button",
-      label: tx("slides.onboarding.welcome.primary_cta"),
+      label: renderI18nText("slides.onboarding.welcome.primary_cta"),
       onClick: G,
       ctaTrackingDescriptor: _$$c.NEXT
     },
     secondaryCta: A ? void 0 : {
       type: "button",
-      label: tx("slides.onboarding.welcome.secondary_cta"),
+      label: renderI18nText("slides.onboarding.welcome.secondary_cta"),
       onClick: K,
       ctaTrackingDescriptor: _$$c.CLOSE
     },
@@ -211,7 +211,7 @@ function z({
   let a = ut(Ez5?.singleSlideView().isInFocusedNodeView, !0);
   return jsx(rq, {
     arrowPosition: F_.BOTTOM,
-    description: tx("slides.onboarding.new_slide.description"),
+    description: renderI18nText("slides.onboarding.new_slide.description"),
     isShowing: i,
     media: jsx(_$$y, {
       src: buildUploadUrl("2811dcf7f07f10fbc8543106336765058bc83266"),
@@ -221,7 +221,7 @@ function z({
     onClose: t,
     primaryCta: {
       type: "button",
-      label: tx("slides.onboarding.callout.next"),
+      label: renderI18nText("slides.onboarding.callout.next"),
       onClick: () => {
         e();
         a && Ez5?.singleSlideView().exitFocusedNodeViewAndLeavePanelsOpen();
@@ -230,7 +230,7 @@ function z({
     },
     secondaryCta: {
       type: "button",
-      label: tx("slides.onboarding.callout.close"),
+      label: renderI18nText("slides.onboarding.callout.close"),
       onClick: t,
       ctaTrackingDescriptor: _$$c.CLOSE
     },
@@ -240,7 +240,7 @@ function z({
       totalNumSteps: n
     },
     targetKey: MB,
-    title: tx("slides.onboarding.new_slide.title"),
+    title: renderI18nText("slides.onboarding.new_slide.title"),
     trackingContextName: "Slides Onboarding > New Slide"
   });
 }
@@ -251,7 +251,7 @@ function V({
   totalSteps: n
 }) {
   return jsx(rq, {
-    description: tx("slides.onboarding.views.description"),
+    description: renderI18nText("slides.onboarding.views.description"),
     isShowing: i,
     media: jsx(_$$y, {
       src: buildUploadUrl("8ad8b13cac28f9fb6eaaed9cad7c621684fadd6b"),
@@ -261,7 +261,7 @@ function V({
     onClose: t,
     primaryCta: {
       type: "button",
-      label: tx("slides.onboarding.callout.next"),
+      label: renderI18nText("slides.onboarding.callout.next"),
       onClick: () => {
         Y5.triggerAction("enter-focus-view");
         e();
@@ -270,7 +270,7 @@ function V({
     },
     secondaryCta: {
       type: "button",
-      label: tx("slides.onboarding.callout.close"),
+      label: renderI18nText("slides.onboarding.callout.close"),
       onClick: t,
       ctaTrackingDescriptor: _$$c.CLOSE
     },
@@ -280,7 +280,7 @@ function V({
       totalNumSteps: n
     },
     targetKey: b_,
-    title: tx("slides.onboarding.views.title"),
+    title: renderI18nText("slides.onboarding.views.title"),
     trackingContextName: "Slides Onboarding > Views"
   });
 }
@@ -293,7 +293,7 @@ function W({
   let a = Bk();
   let o = _$$E();
   return jsx(rq, {
-    description: tx("slides.onboarding.nondesigner.tools.description"),
+    description: renderI18nText("slides.onboarding.nondesigner.tools.description"),
     isShowing: i,
     media: jsx(_$$y, {
       src: buildUploadUrl("aca6af2d36ffc1a4f65a12247f598a7598a530b7"),
@@ -303,7 +303,7 @@ function W({
     onClose: t,
     primaryCta: {
       type: "button",
-      label: tx("slides.onboarding.callout.next"),
+      label: renderI18nText("slides.onboarding.callout.next"),
       onClick: () => {
         e();
         a && o(nQ7.DESIGN);
@@ -312,7 +312,7 @@ function W({
     },
     secondaryCta: {
       type: "button",
-      label: tx("slides.onboarding.callout.close"),
+      label: renderI18nText("slides.onboarding.callout.close"),
       onClick: () => {
         t();
       },
@@ -326,7 +326,7 @@ function W({
       totalNumSteps: n
     },
     targetKey: hx,
-    title: tx("slides.onboarding.nondesigner.tools.title"),
+    title: renderI18nText("slides.onboarding.nondesigner.tools.title"),
     trackingContextName: "Slides Onboarding > Tools"
   });
 }
@@ -338,7 +338,7 @@ function Y({
 }) {
   let a = _$$E();
   return jsx(rq, {
-    description: tx("slides.onboarding.designer.tools.description"),
+    description: renderI18nText("slides.onboarding.designer.tools.description"),
     isShowing: i,
     media: jsx(_$$y, {
       src: buildUploadUrl("5064800f3f60febf8b2ad2ad8ba4efdd6167eeaa"),
@@ -348,7 +348,7 @@ function Y({
     onClose: t,
     primaryCta: {
       type: "button",
-      label: tx("slides.onboarding.callout.next"),
+      label: renderI18nText("slides.onboarding.callout.next"),
       onClick: () => {
         e();
         a(nQ7.DESIGN);
@@ -357,7 +357,7 @@ function Y({
     },
     secondaryCta: {
       type: "button",
-      label: tx("slides.onboarding.callout.close"),
+      label: renderI18nText("slides.onboarding.callout.close"),
       onClick: () => {
         t();
       },
@@ -371,7 +371,7 @@ function Y({
       totalNumSteps: n
     },
     targetKey: uy,
-    title: tx("slides.onboarding.designer.tools.title"),
+    title: renderI18nText("slides.onboarding.designer.tools.title"),
     trackingContextName: "Slides Onboarding > Design Mode"
   });
 }
@@ -381,7 +381,7 @@ function J({
   totalSteps: i
 }) {
   return jsx(rq, {
-    description: tx("slides.onboarding.share.description"),
+    description: renderI18nText("slides.onboarding.share.description"),
     isShowing: t,
     media: jsx(_$$y, {
       src: buildUploadUrl("a3ed241305c3e13d9ec5cab6e9a88db7572695c5"),
@@ -392,7 +392,7 @@ function J({
     onTargetLost: e,
     primaryCta: {
       type: "button",
-      label: tx("slides.onboarding.callout.done"),
+      label: renderI18nText("slides.onboarding.callout.done"),
       onClick: e,
       ctaTrackingDescriptor: _$$c.DONE
     },
@@ -402,7 +402,7 @@ function J({
       totalNumSteps: i
     },
     targetKey: J5,
-    title: tx("slides.onboarding.share.title"),
+    title: renderI18nText("slides.onboarding.share.title"),
     trackingContextName: "Slides Onboarding > Present"
   });
 }

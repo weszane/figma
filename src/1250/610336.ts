@@ -1,7 +1,7 @@
 import { returnSecond, throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import { N } from "../figma_app/469468";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { yl } from "../figma_app/275462";
 import { t as _$$t } from "../905/178090";
 import { vt } from "../figma_app/306946";
@@ -52,11 +52,11 @@ export function $$b3(e, t, n) {
 export function $$x2(e) {
   switch (e) {
     case _$$t.PLUGINS:
-      return t("community.view_bar.plugins");
+      return getI18nString("community.view_bar.plugins");
     case _$$t.WIDGETS:
-      return t("community.view_bar.widgets");
+      return getI18nString("community.view_bar.widgets");
     case _$$t.FILES:
-      return t("community.saves.all_files");
+      return getI18nString("community.saves.all_files");
     default:
       return;
   }
@@ -64,21 +64,21 @@ export function $$x2(e) {
 export function $$y5(e) {
   switch (e) {
     case M.PLUGINS:
-      return t("community.view_bar.plugins");
+      return getI18nString("community.view_bar.plugins");
     case M.FIGJAM_TEMPLATES:
-      return t("categories.whiteboarding");
+      return getI18nString("categories.whiteboarding");
     case M.WIDGETS:
-      return t("categories.widgets");
+      return getI18nString("categories.widgets");
     case M.SLIDE_TEMPLATES:
-      return t("categories.presentations");
+      return getI18nString("categories.presentations");
     case M.LIBRARIES:
-      return t("categories.libraries");
+      return getI18nString("categories.libraries");
     case M.COOPER_TEMPLATES:
-      return t("community.resource_hub.cooper_templates");
+      return getI18nString("community.resource_hub.cooper_templates");
     case M.FIGMAKE_TEMPLATES:
-      return t("community.resource_hub.figmake_templates");
+      return getI18nString("community.resource_hub.figmake_templates");
     case M.RECENTLY_ADDED_TEMPLATES:
-      return t("community.resource_hub.recently_added_templates");
+      return getI18nString("community.resource_hub.recently_added_templates");
     default:
       throwTypeError(e);
   }

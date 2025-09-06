@@ -1,6 +1,6 @@
 import { throwTypeError, returnSecond } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { L } from "../905/178090";
 import { vt } from "../figma_app/306946";
 import { Uo } from "../figma_app/354658";
@@ -76,7 +76,7 @@ export function $$k14(e) {
   return "content" in e && O(e);
 }
 export function $$M28(e) {
-  return e.content.hub_file ? e.content.hub_file : e.content.plugin ? e.content.plugin : e.content.widget ? e.content.widget : void $D(_$$e.COMMUNITY, Error("Resource has no content"), {
+  return e.content.hub_file ? e.content.hub_file : e.content.plugin ? e.content.plugin : e.content.widget ? e.content.widget : void reportError(_$$e.COMMUNITY, Error("Resource has no content"), {
     extra: {
       resourceId: e.id
     }

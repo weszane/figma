@@ -1,4 +1,4 @@
-import { eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { WO } from "../figma_app/122682";
 export class $$a0 {
   constructor() {
@@ -37,16 +37,16 @@ class s {
     this.scriptNode = this.context.createScriptProcessor(4096, 1, 1);
     this.scriptNode.onaudioprocess = e => {
       let t = e.inputBuffer.getChannelData(0);
-      eD?.audioStreamSink(this.streamID, t);
+      desktopAPIInstance?.audioStreamSink(this.streamID, t);
     };
     this.inputNode.connect(this.scriptNode);
     this.scriptNode.connect(this.context.destination);
-    eD?.audioStreamOpen(this.streamID);
+    desktopAPIInstance?.audioStreamOpen(this.streamID);
   }
   close() {
     this.inputNode.disconnect();
     this.scriptNode.disconnect();
-    eD?.audioStreamClose(this.streamID);
+    desktopAPIInstance?.audioStreamClose(this.streamID);
   }
 }
 export const b = $$a0;

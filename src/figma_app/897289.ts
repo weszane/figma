@@ -92,3 +92,6 @@ export const $$o5 = isInteractionPathCheckDuplicate;
 export const $$d7 = getNullValue;
 export const nl = isInteractionPathCheck;
 export const b_ = isDebugMode;
+export const Lg = getFalseValue
+export const PN = isInteractionOrEvalMode
+export const QJ = isEvalViewPathCheck

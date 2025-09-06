@@ -12,7 +12,7 @@ import { lX } from "../figma_app/588397";
 import { w } from "../905/768636";
 import { er } from "../905/753512";
 import { W } from "../905/729905";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { Q } from "../905/620793";
 import { lh } from "../905/424623";
 import { U as _$$U } from "../905/763676";
@@ -23,7 +23,7 @@ function b({
   numMissingLibraries: t
 }) {
   return jsx(Q, {
-    title: tx("design_systems.libraries_modal.plural.missing_library", {
+    title: renderI18nText("design_systems.libraries_modal.plural.missing_library", {
       missingLibCount: t
     }),
     onBack: e

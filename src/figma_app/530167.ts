@@ -1,11 +1,11 @@
 import { getFeatureFlags } from "../905/601108";
 import { NC } from "../905/17179";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { yr } from "../905/827765";
 import { u9, En, vs, AS } from "../figma_app/661371";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
 import { cR as _$$cR } from "../905/890368";
 import { F } from "../905/302958";
@@ -51,7 +51,7 @@ let $$M3 = nF((e, t) => {
   };
   if (!m) {
     e.dispatch(F.enqueue({
-      message: _$$t("community.actions.profile_not_found"),
+      message: getI18nString("community.actions.profile_not_found"),
       type: "COMMUNITY_PROFILE_ERROR"
     }));
     e.dispatch(sf(f));
@@ -69,7 +69,7 @@ let $$M3 = nF((e, t) => {
     let t = teamAdminRolesForAuthedUsers[e];
     return t?.find(e => e.team_id === m.team_id)?.user_id;
   })) : r = m.primary_user_id === user?.id ? user?.id : authedUsers.orderedIds.find(e => m.associated_users?.find(t => t.user_id === e)?.user_id);
-  if (Il(m.id), sx("Community profile IA switched", {
+  if (Il(m.id), trackEventAnalytics("Community profile IA switched", {
     profileId: m.id,
     view: selectedView.view
   }), e.dispatch($$k14(m)), e.dispatch($$P2()), r && (r !== user?.id || currentUserOrgId !== E)) {
@@ -125,7 +125,7 @@ let $$Y24 = nF((e, t) => {
     e.selected_comment && (o.selectedCommentId = e.selected_comment.id);
     t.onSuccess && t.onSuccess(o);
   }).catch(r => {
-    e.dispatch(_$$s.error(_$$t("community.actions.unable_to_fetch_comments")));
+    e.dispatch(_$$s.error(getI18nString("community.actions.unable_to_fetch_comments")));
     t.onError && t.onError();
   });
 });
@@ -143,7 +143,7 @@ let $$X10 = nF((e, {
   }).catch(t => {
     let r = J(t);
     r && e.dispatch(F.enqueue({
-      message: _$$t("community.actions.couldnt_restrict_profile_error", {
+      message: getI18nString("community.actions.couldnt_restrict_profile_error", {
         error: r
       }),
       type: "RESTRICT_PROFILE_ERROR"
@@ -169,7 +169,7 @@ let $$J16 = nF((e, {
   }).catch(t => {
     let r = J(t);
     r && e.dispatch(F.enqueue({
-      message: _$$t("community.actions.couldnt_unrestrict_profile_error", {
+      message: getI18nString("community.actions.couldnt_unrestrict_profile_error", {
         error: r
       }),
       type: "UNRESTRICT_PROFILE_ERROR"
@@ -206,7 +206,7 @@ nF((e, {
   }) => {
     e.dispatch(Oo(t.meta.profile));
     e.dispatch(sf(e.getState().selectedView));
-  }).catch(t => (404 === t.status && r ? r() : e.dispatch(_$$s.error(_$$t("community.actions.error_fetching_profile_information"))), null));
+  }).catch(t => (404 === t.status && r ? r() : e.dispatch(_$$s.error(getI18nString("community.actions.error_fetching_profile_information"))), null));
 });
 nF((e, {
   handle: t,
@@ -228,7 +228,7 @@ nF((e, {
     data: t
   }) => {
     t?.status === 404 && r && r();
-    e.dispatch(_$$s.error(_$$t("community.actions.error_fetching_profile_information")));
+    e.dispatch(_$$s.error(getI18nString("community.actions.error_fetching_profile_information")));
   });
 }, ({
   handle: e
@@ -322,7 +322,7 @@ let $$er12 = nF((e, t, {
   let I = instagram?.trim();
   if (b && E?.twitter !== b && !HD.test(b)) {
     e.dispatch(F.enqueue({
-      message: _$$t("community.actions.your_twitter_handle_is_not_valid", {
+      message: getI18nString("community.actions.your_twitter_handle_is_not_valid", {
         handle: b
       }),
       error: !0
@@ -331,7 +331,7 @@ let $$er12 = nF((e, t, {
   }
   if (I && E?.instagram !== I && !Co.test(I)) {
     e.dispatch(F.enqueue({
-      message: _$$t("community.actions.your_instagram_handle_is_not_valid", {
+      message: getI18nString("community.actions.your_instagram_handle_is_not_valid", {
         handle: I
       }),
       error: !0
@@ -370,17 +370,17 @@ let $$er12 = nF((e, t, {
         handle: profileHandle
       }));
       r.meta.primary_user_id ? e.dispatch(F.enqueue({
-        message: _$$t("community.actions.your_profile_handle_was_set_to_profile_handle", {
+        message: getI18nString("community.actions.your_profile_handle_was_set_to_profile_handle", {
           profileHandle
         }),
         type: "profile-handle"
       })) : r.meta.team_id ? e.dispatch(F.enqueue({
-        message: _$$t("community.actions.your_team_s_handle_was_set_to_profile_handle", {
+        message: getI18nString("community.actions.your_team_s_handle_was_set_to_profile_handle", {
           profileHandle
         }),
         type: "team-handle"
       })) : r.meta.org_id && e.dispatch(F.enqueue({
-        message: _$$t("community.actions.your_organization_s_handle_was_set_to_profile_handle", {
+        message: getI18nString("community.actions.your_organization_s_handle_was_set_to_profile_handle", {
           profileHandle
         }),
         type: "org-handle"
@@ -389,11 +389,11 @@ let $$er12 = nF((e, t, {
     ["twitter", "location", "instagram", "website", "description"].forEach(n => {
       if (n in r.meta && n in t) {
         let t = {
-          twitter: _$$t("community.actions.your_twitter_handle_was_updated"),
-          location: _$$t("community.actions.your_location_was_updated"),
-          instagram: _$$t("community.actions.your_instagram_handle_was_updated"),
-          website: _$$t("community.actions.your_website_url_was_updated"),
-          description: _$$t("community.actions.your_description_was_updated")
+          twitter: getI18nString("community.actions.your_twitter_handle_was_updated"),
+          location: getI18nString("community.actions.your_location_was_updated"),
+          instagram: getI18nString("community.actions.your_instagram_handle_was_updated"),
+          website: getI18nString("community.actions.your_website_url_was_updated"),
+          description: getI18nString("community.actions.your_description_was_updated")
         };
         e.dispatch(F.enqueue({
           message: t[n],
@@ -429,10 +429,10 @@ let $$en23 = nF((e, t, {
       community_profile_id: void 0
     }));
     e.dispatch(F.enqueue({
-      message: _$$t("community.actions.profile_deleted")
+      message: getI18nString("community.actions.profile_deleted")
     }));
   }).catch(() => {
-    e.dispatch(_$$s.error(_$$t("community.actions.unable_to_delete_profile_please_try_again_later")));
+    e.dispatch(_$$s.error(getI18nString("community.actions.unable_to_delete_profile_please_try_again_later")));
   });
 });
 let $$ei1 = nF(async (e, {
@@ -454,9 +454,9 @@ let $$ei1 = nF(async (e, {
     e.dispatch(Oo(t.meta));
     n();
   }).catch(t => {
-    e.dispatch(_$$s.error(t ? _$$t("community.actions.an_error_occurred_with_error", {
+    e.dispatch(_$$s.error(t ? getI18nString("community.actions.an_error_occurred_with_error", {
       error: t
-    }) : _$$t("community.actions.an_error_occurred")));
+    }) : getI18nString("community.actions.an_error_occurred")));
   });
 }, ({
   profileId: e
@@ -496,7 +496,7 @@ let $$eo18 = nF(async (e, t, {
       followedProfileId: t,
       currentUserProfileId: e.getState().user?.community_profile_id
     })), e.dispatch(F.enqueue({
-      message: _$$t("community.actions.followed_profile_name", {
+      message: getI18nString("community.actions.followed_profile_name", {
         profileName: r.meta.followed_profile.name
       }),
       type: "COMMUNITY_HUB_FOLLOW"
@@ -504,7 +504,7 @@ let $$eo18 = nF(async (e, t, {
   }).catch(t => {
     let r = J(t);
     r && e.dispatch(F.enqueue({
-      message: _$$t("community.actions.unable_to_follow_this_profile_profile_name", {
+      message: getI18nString("community.actions.unable_to_follow_this_profile_profile_name", {
         profileName: r
       }),
       type: "COMMUNITY_HUB_FOLLOW_FAILED",
@@ -526,7 +526,7 @@ let $$ed8 = nF((e, t, {
       followedProfileId: t,
       currentUserProfileId: e.getState().user?.community_profile_id
     })), e.dispatch(F.enqueue({
-      message: _$$t("community.actions.unfollowed_profile"),
+      message: getI18nString("community.actions.unfollowed_profile"),
       type: "COMMUNITY_HUB_UNFOLLOW"
     })));
   }).catch(t => {
@@ -568,7 +568,7 @@ nF(async (e, t) => {
   }).catch(t => {
     e.dispatch(F.enqueue({
       error: !0,
-      message: resolved ? _$$t("community.actions.failed_to_resolve_comment") : _$$t("community.actions.failed_to_unresolve_comment")
+      message: resolved ? getI18nString("community.actions.failed_to_resolve_comment") : getI18nString("community.actions.failed_to_unresolve_comment")
     }));
   });
 });
@@ -601,4 +601,4 @@ export const qo = $$q25;
 export const r1 = $$G26;
 export const rO = $$D27;
 export const vQ = $$ee28;
-export const vr = $$Q29; 
+export const vr = $$Q29;

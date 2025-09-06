@@ -1,14 +1,14 @@
 import { useEffect } from "react";
 import { Ez5 } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { eU, md } from "../figma_app/27355";
+import { atom, useAtomWithSubscription } from "../figma_app/27355";
 import { parsePxNumber } from "../figma_app/783094";
 import { UX, UK } from "../figma_app/740163";
 import { QBm } from "../figma_app/27776";
 let c = parsePxNumber(QBm);
 let u = 300 + c;
 let p = 640 + c;
-let $$_0 = eU(!1);
+let $$_0 = atom(!1);
 export function $$h1(e) {
   return Math.max(u, Math.min(p, e || 0));
 }
@@ -18,7 +18,7 @@ export function $$m2() {
 let g = 320 + c;
 export function $$f4() {
   let e = $$m2();
-  let t = md($$_0);
+  let t = useAtomWithSubscription($$_0);
   useEffect(() => {
     t || (g = e);
   }, [t]);

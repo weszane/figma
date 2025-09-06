@@ -1,4 +1,4 @@
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { N_ } from "../905/332483";
 export function $$a3(e) {
   return e ? JSON.stringify(Object.keys(e).sort().reduce((t, r) => ({
@@ -34,7 +34,7 @@ export function $$d1({
     teamId: e.team_id,
     recommendedSeatType: e.recommended_seat_type?.key
   })));
-  az.trackDefinedEvent("monetization_upgrades.checkout_loaded_eligible_upgrade_data", {
+  analyticsEventManager.trackDefinedEvent("monetization_upgrades.checkout_loaded_eligible_upgrade_data", {
     numEligibleTeams: e.length,
     teamIds: a,
     teamUsers: s,

@@ -8,7 +8,7 @@ import { hE } from "../figma_app/272243";
 import { N } from "../905/438674";
 import { s_ } from "../905/17223";
 import { $z } from "../figma_app/617427";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { F } from "../905/302958";
 import { XU } from "../905/576487";
 import { h as _$$h } from "../905/142086";
@@ -55,7 +55,7 @@ export let $$b0 = Ju(function ({
           trackingProperties: {
             trackingDescriptor: _$$c.CANCEL
           },
-          children: tx("upsell.shared.cancel")
+          children: renderI18nText("upsell.shared.cancel")
         }), jsx("div", {
           className: "upsell_modals--confirmButton--Yk-OB modal--confirmButton--SNUDv",
           children: jsx(N.Button, {
@@ -77,7 +77,7 @@ export let $$b0 = Ju(function ({
                 callback: x
               });
             },
-            children: tx("upsell.move_file_modes.move_to_team")
+            children: renderI18nText("upsell.move_file_modes.move_to_team")
           })
         })]
       })

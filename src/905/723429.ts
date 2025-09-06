@@ -4,12 +4,12 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { CWU, rXF, glU } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { gP } from "../figma_app/594947";
 import { g as _$$g } from "../905/880308";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Ay } from "../figma_app/432652";
 import { Ay as _$$Ay } from "../figma_app/948389";
 import { Eu, $x, tc } from "../figma_app/275370";
@@ -25,7 +25,7 @@ import { Ag } from "../figma_app/407767";
 import { hB } from "../figma_app/609511";
 import { B9, Py } from "../figma_app/346422";
 import { vh, td } from "../figma_app/181241";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { Om, jb, tI, Zc, Ul } from "../905/127813";
 let k = new class {
   constructor() {
@@ -40,7 +40,7 @@ let k = new class {
 function N(e, t, i) {
   let n = debugState.getState().openFile?.key;
   let r = debugState.getState().user?.id;
-  n && r && az.trackDefinedEvent("ds_import.extraction_funnel", {
+  n && r && analyticsEventManager.trackDefinedEvent("ds_import.extraction_funnel", {
     fileKey: n,
     userId: r,
     funnelEvent: t,
@@ -121,7 +121,7 @@ async function O(e, t, i) {
         code: e.toString()
       });
     } catch (a) {
-      $D(_$$e.MAKE, a, {
+      reportError(_$$e.MAKE, a, {
         extra: {
           componentKey: n,
           fileKey: e,
@@ -188,7 +188,7 @@ async function D(e) {
         code: e.toString()
       });
     } catch (t) {
-      $D(_$$e.MAKE, t, {
+      reportError(_$$e.MAKE, t, {
         extra: {
           queryId: e
         }
@@ -245,14 +245,14 @@ async function z(e) {
   if (!t || !i) return;
   let y = _$$g();
   let b = gP("make_large_paste_threshold").get("sizeBytes", 25e4);
-  let x = zl.get(Om);
-  let S = zl.get(jb);
+  let x = atomStoreManager.get(Om);
+  let S = atomStoreManager.get(jb);
   let w = [{
     taskId: "styles",
     state: x ? z8.SUCCEEDED : z8.INCOMPLETE
   }, {
     taskId: "examples",
-    state: S.length > 0 || zl.get(tI) ? z8.SUCCEEDED : z8.INCOMPLETE
+    state: S.length > 0 || atomStoreManager.get(tI) ? z8.SUCCEEDED : z8.INCOMPLETE
   }, {
     taskId: "css",
     state: z8.INCOMPLETE
@@ -378,15 +378,15 @@ async function z(e) {
         variableComponentKeys,
         typographyComponentKeys
       };
-      zl.set(Om, x);
+      atomStoreManager.set(Om, x);
     }
     w = w.map(e => ("styles" === e.taskId && (e.state = z8.SUCCEEDED), e));
     e && e(w);
     let r = [];
-    if (0 !== S.length || zl.get(tI)) S.length > 0 ? (zl.set(Zc, !0), w = w.map(e => ("examples" === e.taskId && (e.state = z8.SUCCEEDED), e))) : w = w.map(e => ("examples" === e.taskId && (e = {
+    if (0 !== S.length || atomStoreManager.get(tI)) S.length > 0 ? (atomStoreManager.set(Zc, !0), w = w.map(e => ("examples" === e.taskId && (e.state = z8.SUCCEEDED), e))) : w = w.map(e => ("examples" === e.taskId && (e = {
       ...e,
       state: z8.FAILED,
-      error: new $$G1(_$$t("figmake.design_system_imports.library_extraction_theming_progress.step.examples.error"))
+      error: new $$G1(getI18nString("figmake.design_system_imports.library_extraction_theming_progress.step.examples.error"))
     }), e));else {
       if ((r = await D(y)).forEach(async e => {
         let t = e.guid;
@@ -398,17 +398,17 @@ async function z(e) {
       }), r = H(r, b), w = w.map(e => {
         if ("examples" === e.taskId) {
           if (r.length > 0) e.state = z8.SUCCEEDED;else if (getFeatureFlags().bake_ds_import_library_guidelines) {
-            zl.set(Zc, !0);
-            return new $$G1(_$$t("figmake.design_system_imports.library_extraction_theming_progress.step.examples.error"));
+            atomStoreManager.set(Zc, !0);
+            return new $$G1(getI18nString("figmake.design_system_imports.library_extraction_theming_progress.step.examples.error"));
           }
         }
         return e;
-      }), zl.set(jb, r), N(y, "create_fragments"), getFeatureFlags().bake_ds_import_library_guidelines && zl.get(Zc)) {
-        zl.set(Zc, !1);
+      }), atomStoreManager.set(jb, r), N(y, "create_fragments"), getFeatureFlags().bake_ds_import_library_guidelines && atomStoreManager.get(Zc)) {
+        atomStoreManager.set(Zc, !1);
         e && e(w);
         return;
       }
-      zl.set(Zc, !1);
+      atomStoreManager.set(Zc, !1);
     }
     e && e(w);
     let c = H(x.variableComponentKeys.map(e => {
@@ -445,7 +445,7 @@ async function z(e) {
       blob: p.globalCss
     });
     l7.user("create-new-code-file", () => {
-      let e = zl.get(nM);
+      let e = atomStoreManager.get(nM);
       let t = W(e, NJ, Ul);
       t ? t.sourceCode = p.globalCss : glU?.createNewCodeFile(Ul, p.globalCss, null, !1);
     });
@@ -465,7 +465,7 @@ async function z(e) {
       }
     }
     e && e(w);
-    $D(_$$e.MAKE, t);
+    reportError(_$$e.MAKE, t);
     N(y, "error", t instanceof Error ? t.message : String(t));
     return t;
   }

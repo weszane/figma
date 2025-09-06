@@ -5,7 +5,7 @@ import { zN, xf } from "../figma_app/416935";
 import { isGovCluster, isDevEnvironment } from "../figma_app/169182";
 import { Rs } from "../figma_app/288654";
 import { Qw } from "../figma_app/47866";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { FCostCenterType } from "../figma_app/191312";
 import { Ct, Gv, CT } from "../figma_app/736948";
 import { les } from "../figma_app/43951";
@@ -40,28 +40,28 @@ export function $$I16(e) {
 export function $$S8(e) {
   switch (e) {
     case null:
-      return t("org_settings.guest_control.null");
+      return getI18nString("org_settings.guest_control.null");
     case Gv.REQUIRE_APPROVAL:
-      return t("org_settings.guest_control.require_approval");
+      return getI18nString("org_settings.guest_control.require_approval");
     case Gv.BANNED:
-      return t("org_settings.guest_control.banned");
+      return getI18nString("org_settings.guest_control.banned");
     default:
       throwTypeError(e);
   }
 }
 export function $$v20(e) {
-  return e === CT.GUESTS || e === CT.ALL_USERS ? t("org_settings.guest_control.mfa_for_guests_setting_required") : t("org_settings.guest_control.mfa_for_guests_setting_null");
+  return e === CT.GUESTS || e === CT.ALL_USERS ? getI18nString("org_settings.guest_control.mfa_for_guests_setting_required") : getI18nString("org_settings.guest_control.mfa_for_guests_setting_null");
 }
 export function $$A13(e) {
   switch (e) {
     case FCostCenterType.COST_CENTER:
-      return t("scim_metadata_display_text.cost_center");
+      return getI18nString("scim_metadata_display_text.cost_center");
     case FCostCenterType.ORGANIZATION:
-      return t("scim_metadata_display_text.organization");
+      return getI18nString("scim_metadata_display_text.organization");
     case FCostCenterType.DIVISION:
-      return t("scim_metadata_display_text.division");
+      return getI18nString("scim_metadata_display_text.division");
     case FCostCenterType.DEPARTMENT:
-      return t("scim_metadata_display_text.department");
+      return getI18nString("scim_metadata_display_text.department");
     default:
       throwTypeError(e);
   }

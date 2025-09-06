@@ -12,12 +12,12 @@ import { p as _$$p } from "../905/185998";
 import { RYP, glU } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import f from "classnames";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Pt } from "../figma_app/806412";
 import { E as _$$E } from "../905/277716";
 import { k as _$$k2 } from "../905/582200";
 import { Point } from "../905/736624";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { XE } from "../figma_app/91703";
 import { Y5 } from "../figma_app/455680";
 import { ZH } from "../figma_app/504823";
@@ -33,15 +33,15 @@ let D = e => ({
   format: t => {
     switch (t) {
       case "DOCUMENT":
-        return _$$t("fullscreen.properties_panel.export_settings_color_profile.document", {
-          documentColorProfile: e === RYP.DISPLAY_P3 ? _$$t("fullscreen.properties_panel.export_settings_color_profile.p3") : _$$t("fullscreen.properties_panel.export_settings_color_profile.srgb")
+        return getI18nString("fullscreen.properties_panel.export_settings_color_profile.document", {
+          documentColorProfile: e === RYP.DISPLAY_P3 ? getI18nString("fullscreen.properties_panel.export_settings_color_profile.p3") : getI18nString("fullscreen.properties_panel.export_settings_color_profile.srgb")
         });
       case "SRGB":
-        return _$$t("fullscreen.properties_panel.export_settings_color_profile.srgb");
+        return getI18nString("fullscreen.properties_panel.export_settings_color_profile.srgb");
       case "DISPLAY_P3_V4":
-        return _$$t("fullscreen.properties_panel.export_settings_color_profile.display_p3");
+        return getI18nString("fullscreen.properties_panel.export_settings_color_profile.display_p3");
       case "CMYK":
-        return _$$t("fullscreen.properties_panel.export_settings_color_profile.cmyk");
+        return getI18nString("fullscreen.properties_panel.export_settings_color_profile.cmyk");
     }
   }
 });
@@ -51,11 +51,11 @@ let $$M4 = {
   format: e => {
     switch (e) {
       case Kj.LOW:
-        return _$$t("fullscreen.properties_panel.export_settings_quality.low");
+        return getI18nString("fullscreen.properties_panel.export_settings_quality.low");
       case Kj.MEDIUM:
-        return _$$t("fullscreen.properties_panel.export_settings_quality.medium");
+        return getI18nString("fullscreen.properties_panel.export_settings_quality.medium");
       case Kj.HIGH:
-        return _$$t("fullscreen.properties_panel.export_settings_quality.high");
+        return getI18nString("fullscreen.properties_panel.export_settings_quality.high");
       default:
         throwTypeError(e);
     }
@@ -63,7 +63,7 @@ let $$M4 = {
 };
 let $$j7 = [Kj.HIGH, Kj.MEDIUM, Kj.LOW];
 let U = {
-  format: e => e ? _$$t("fullscreen.properties_panel.export_settings_image_sampling.bicubic") : _$$t("fullscreen.properties_panel.export_settings_image_sampling.standard")
+  format: e => e ? getI18nString("fullscreen.properties_panel.export_settings_image_sampling.bicubic") : getI18nString("fullscreen.properties_panel.export_settings_image_sampling.standard")
 };
 export class $$B5 extends PureComponent {
   constructor() {
@@ -78,7 +78,7 @@ export class $$B5 extends PureComponent {
         ...t,
         colorProfile: e
       });
-      sx("export_color_profile_change", {
+      trackEventAnalytics("export_color_profile_change", {
         colorProfile: e,
         assetType: t.imageType
       });
@@ -146,10 +146,10 @@ export class $$B5 extends PureComponent {
           onChange: this.onSVGIDChange,
           label: jsx(_$$J, {
             htmlAttributes: {
-              "data-tooltip": _$$t("fullscreen.properties_panel.export_layer_names_using_id_attributes"),
+              "data-tooltip": getI18nString("fullscreen.properties_panel.export_layer_names_using_id_attributes"),
               "data-tooltip-type": Ib.TEXT
             },
-            children: tx("fullscreen.properties_panel.include_id_attribute")
+            children: renderI18nText("fullscreen.properties_panel.include_id_attribute")
           }),
           recordingKey: Pt(this.props, "svgID")
         })
@@ -160,10 +160,10 @@ export class $$B5 extends PureComponent {
           onChange: this.onSVGTextOutlinesChange,
           label: jsx(_$$J, {
             htmlAttributes: {
-              "data-tooltip": _$$t("fullscreen.properties_panel.export_text_as_outlined_path_element"),
+              "data-tooltip": getI18nString("fullscreen.properties_panel.export_text_as_outlined_path_element"),
               "data-tooltip-type": Ib.TEXT
             },
-            children: tx("fullscreen.properties_panel.outline_text")
+            children: renderI18nText("fullscreen.properties_panel.outline_text")
           }),
           recordingKey: Pt(this.props, "svgTextOutlines")
         })
@@ -174,10 +174,10 @@ export class $$B5 extends PureComponent {
           onChange: this.onSVGSimplifyStrokeChange,
           label: jsx(_$$J, {
             htmlAttributes: {
-              "data-tooltip": _$$t("fullscreen.properties_panel.export_stroke_as_inlined_path_element"),
+              "data-tooltip": getI18nString("fullscreen.properties_panel.export_stroke_as_inlined_path_element"),
               "data-tooltip-type": Ib.TEXT
             },
-            children: tx("fullscreen.properties_panel.simplify_stroke")
+            children: renderI18nText("fullscreen.properties_panel.simplify_stroke")
           }),
           recordingKey: Pt(this.props, "svgSimplifyStroke")
         })
@@ -226,7 +226,7 @@ export class $$B5 extends PureComponent {
             checked: !!e.contentsOnly,
             onChange: this.onContentsOnlyChange,
             label: jsx(_$$J, {
-              children: tx("fullscreen.properties_panel.ignore_overlapping_layers")
+              children: renderI18nText("fullscreen.properties_panel.ignore_overlapping_layers")
             }),
             recordingKey: Pt(this.props, "contentsOnly")
           })
@@ -239,7 +239,7 @@ export class $$B5 extends PureComponent {
             checked: !!e.useAbsoluteBounds,
             onChange: this.onUseAbsoluteBoundsChange,
             label: jsx(_$$J, {
-              children: tx("fullscreen.properties_panel.include_bounding_box")
+              children: renderI18nText("fullscreen.properties_panel.include_bounding_box")
             }),
             recordingKey: Pt(this.props, "useAbsoluteBounds")
           })
@@ -255,7 +255,7 @@ export class $$B5 extends PureComponent {
       children: jsxs(vo, {
         children: [jsx(Y9, {
           children: jsx(hE, {
-            children: _$$t("fullscreen.properties_panel.export")
+            children: getI18nString("fullscreen.properties_panel.export")
           })
         }), jsx(nB, {
           padding: {
@@ -276,7 +276,7 @@ export function $$V6() {
     variant: "secondary",
     className: hD,
     htmlFor: $$G10,
-    children: _$$t("fullscreen.properties_panel.export_settings_color_profile")
+    children: getI18nString("fullscreen.properties_panel.export_settings_color_profile")
   });
 }
 $$B5.displayName = "ExportSettings";
@@ -318,7 +318,7 @@ export function $$W9() {
     variant: "secondary",
     className: hD,
     htmlFor: $$H0,
-    children: _$$t("fullscreen.properties_panel.export_settings_quality")
+    children: getI18nString("fullscreen.properties_panel.export_settings_quality")
   });
 }
 export function $$K1({
@@ -358,18 +358,18 @@ export function $$Y8({
   return jsxs(_$$b, {
     value: e,
     legend: jsx(q, {
-      children: _$$t("fullscreen.properties_panel.export_settings.slides_content")
+      children: getI18nString("fullscreen.properties_panel.export_settings.slides_content")
     }),
     onChange: t,
     children: [jsx(_$$c, {
       value: "all",
       label: jsx(_$$J, {
-        children: _$$t("fullscreen.properties_panel.export_settings.slides_content.all")
+        children: getI18nString("fullscreen.properties_panel.export_settings.slides_content.all")
       })
     }), i > 0 && jsx(_$$c, {
       value: "selection",
       label: jsx(_$$J, {
-        children: _$$t("fullscreen.properties_panel.export_settings.slides_content.selected", {
+        children: getI18nString("fullscreen.properties_panel.export_settings.slides_content.selected", {
           numSlides: i
         })
       })
@@ -380,7 +380,7 @@ export function $$q3() {
   return jsx(JU, {
     className: _()(hD, Po),
     htmlFor: $$G10,
-    children: _$$t("fullscreen.properties_panel.export_settings.slides_content")
+    children: getI18nString("fullscreen.properties_panel.export_settings.slides_content")
   });
 }
 function $({
@@ -413,7 +413,7 @@ function Z() {
     variant: "secondary",
     className: hD,
     htmlFor: "export-settings-image-sampling",
-    children: _$$t("fullscreen.properties_panel.export_settings_image_sampling")
+    children: getI18nString("fullscreen.properties_panel.export_settings_image_sampling")
   });
 }
 function X({
@@ -481,13 +481,13 @@ function J({
         variant: "secondary",
         htmlFor: a,
         className: hD,
-        children: _$$t("fullscreen.properties_panel.export_suffix_label")
+        children: getI18nString("fullscreen.properties_panel.export_suffix_label")
       }),
       right: jsx(_$$p.Lazy, {
         id: a,
         value: e,
         onChange: t,
-        placeholder: _$$t("fullscreen.properties_panel.export_suffix_placeholder.none"),
+        placeholder: getI18nString("fullscreen.properties_panel.export_suffix_placeholder.none"),
         recordingKey: i
       })
     })

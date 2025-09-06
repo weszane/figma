@@ -3,7 +3,7 @@ import rh from 'classnames';
 import { createElement, PureComponent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { H as _$$H2 } from 'react-dom';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
-import { $D, kF, xO } from '../905/11';
+import { reportError, setSentryTag, reportNullOrUndefined } from '../905/11';
 import { isWidgetRendering } from '../905/2122';
 import { Q7 } from '../905/15667';
 import { iM as _$$iM, DB, h5, jP, JR, Sp, SW, Z4, Zt } from '../905/25189';
@@ -51,7 +51,7 @@ import { c as _$$c2 } from '../905/217163';
 import { z as _$$z3 } from '../905/223332';
 import { Xo } from '../905/226610';
 import { Ag as _$$Ag } from '../905/235578';
-import { fm } from '../905/236856';
+import { delay } from '../905/236856';
 import { T as _$$T4 } from '../905/239551';
 import { ih as _$$ih, UA } from '../905/250387';
 import { R as _$$R2 } from '../905/256203';
@@ -65,12 +65,12 @@ import { J as _$$J } from '../905/294113';
 import { w as _$$w } from '../905/294864';
 import { _N, Vg } from '../905/300621';
 import { F as _$$F } from '../905/302958';
-import { t as _$$t, tx as _$$tx, YD } from '../905/303541';
+import { getI18nString, renderI18nText, getI18nStringAlias } from '../905/303541';
 import { R as _$$R3 } from '../905/307199';
 import { b as _$$b3, c as _$$c4 } from '../905/308099';
 import { W6 as _$$W, Lf } from '../905/327522';
 import { B as _$$B } from '../905/352524';
-import { $ as _$$$ } from '../905/361972';
+import { LogLevelStr } from '../905/361972';
 import { jp, WS } from '../905/370597';
 import { c2 } from '../905/382883';
 import { $ as _$$$2 } from '../905/383708';
@@ -87,7 +87,7 @@ import { N as _$$N2 } from '../905/438674';
 import { R as _$$R } from '../905/441305';
 import { ch } from '../905/443517';
 import { s as _$$s8 } from '../905/445054';
-import { sx as _$$sx } from '../905/449184';
+import { trackEventAnalytics } from '../905/449184';
 import { CM, xL, Yv } from '../905/459248';
 import { QC } from '../905/461516';
 import { Q as _$$Q } from '../905/463586';
@@ -113,7 +113,7 @@ import { $n } from '../905/521428';
 import { oU as _$$oU, B3, dm, Sr } from '../905/535224';
 import { h as _$$h4 } from '../905/537858';
 import { P as _$$P2 } from '../905/540614';
-import { rH as _$$rH } from '../905/542194';
+import { reactTimerGroup } from '../905/542194';
 import { r6 as _$$r } from '../905/542608';
 import { fJ, x5 } from '../905/543054';
 import { xK } from '../905/543466';
@@ -137,9 +137,9 @@ import { k as _$$k2 } from '../905/582200';
 import { pS } from '../905/588985';
 import { G as _$$G2 } from '../905/591700';
 import { getFeatureFlags } from '../905/601108';
-import { J6 } from '../905/602906';
+import { observabilityClient } from '../905/602906';
 import { a as _$$a3 } from '../905/608122';
-import { M4 } from '../905/609396';
+import { Timer } from '../905/609396';
 import { Ay as _$$Ay2, Cs } from '../905/612521';
 import { jN } from '../905/612685';
 import { qm } from '../905/617744';
@@ -154,7 +154,7 @@ import { h as _$$h } from '../905/662353';
 import { oA as _$$oA } from '../905/663269';
 import { gG } from '../905/684180';
 import { IM } from '../905/687477';
-import { b as _$$b4 } from '../905/690073';
+import { EventEmitter } from '../905/690073';
 import { EO, F4 } from '../905/691205';
 import { ReduxSceneGraph, getSingletonSceneGraph } from '../905/700578';
 import { createPluginContext as _$$e8 } from '../905/700654';
@@ -162,7 +162,7 @@ import { X as _$$X } from '../905/701807';
 import { y as _$$y } from '../905/705736';
 import { T1 } from '../905/711212';
 import { FR } from '../905/714160';
-import { ED, Lo, x1, xi } from '../905/714362';
+import { logDebug, logInfo, logError, logWarning } from '../905/714362';
 import { B as _$$B2 } from '../905/714743';
 import { jk as _$$jk } from '../905/715541';
 import { l as _$$l } from '../905/716947';
@@ -245,10 +245,10 @@ import { El } from '../figma_app/9619';
 import { F1 as _$$F2, Pe, Qn } from '../figma_app/12796';
 import { bJ as _$$bJ } from '../figma_app/16595';
 import { sO as _$$sO } from '../figma_app/21029';
-import { md, zl } from '../figma_app/27355';
+import { useAtomWithSubscription, atomStoreManager } from '../figma_app/27355';
 import { WY } from '../figma_app/31188';
 import { iAs } from '../figma_app/43951';
-import { nT as _$$nT, fB, yY } from '../figma_app/53721';
+import { FEditorType, mapYFToEditorType, isDesignOrIllustration } from '../figma_app/53721';
 import { sF as _$$sF, zJ } from '../figma_app/59657';
 import { J as _$$J2 } from '../figma_app/61771';
 import { lc as _$$lc, gc, QZ } from '../figma_app/62612';
@@ -293,7 +293,7 @@ import { N as _$$N3 } from '../figma_app/240060';
 import { T6 } from '../figma_app/242565';
 import { mr, U2 } from '../figma_app/247611';
 import { W7 } from '../figma_app/251115';
-import { nl as _$$nl } from '../figma_app/257275';
+import { isInteractionPathCheck } from '../figma_app/897289';
 import { fT as _$$fT } from '../figma_app/260703';
 import { n as _$$n3 } from '../figma_app/264395';
 import { z4 } from '../figma_app/266084';
@@ -323,7 +323,7 @@ import { KE as _$$KE } from '../figma_app/351862';
 import { pi as _$$pi, TY, Yh } from '../figma_app/357047';
 import { pH } from '../figma_app/357433';
 import { IU } from '../figma_app/357655';
-import { Gq } from '../figma_app/363242';
+import { getI18nState } from '../figma_app/363242';
 import { uE as _$$uE, Vi as _$$Vi } from '../figma_app/364284';
 import { Yg } from '../figma_app/365713';
 import { vE } from '../figma_app/376315';
@@ -407,7 +407,7 @@ import { s as _$$s4 } from '../figma_app/751989';
 import { w as _$$w2 } from '../figma_app/757236';
 import { RA } from '../figma_app/757723';
 import { $DY, AlE, b3I, biQ, Bko, ByZ, cgc, CUU, dPJ, E63, eL2, Ez5, FAf, Fk7, fRZ, glU, h3O, H9y, hMR, hR8, hzD, i6g, idw, iZB, jDJ, jkn, jXp, KAf, KG_, KtY, lyf, m7W, MoD, mSn, msz, Nfd, NLJ, OGQ, P2e, PHu, PKm, ppO, qOu, QOV, rcl, rCR, rrT, RsU, ruz, sbT, Sie, t8O, tEb, Ubo, UNF, uXP, vhv, vXe, Vzr, W2B, WXh, X3B, x7E, xae, yDE, YnC, ywP, yxn, zdR, zkO, zvt } from '../figma_app/763686';
-import { aJ as _$$aJ, Ay as _$$Ay3 } from '../figma_app/778880';
+import { isNotMobile, BrowserInfo } from '../figma_app/778880';
 import { parsePxInt, parsePxNumber } from '../figma_app/783094';
 import { S as _$$S } from '../figma_app/787550';
 import { T as _$$T } from '../figma_app/792332';
@@ -428,7 +428,7 @@ import { n as _$$n6 } from '../figma_app/860474';
 import { ZW } from '../figma_app/861982';
 import { B3 as _$$B3, Ag } from '../figma_app/862289';
 import { kS } from '../figma_app/864723';
-import { eD as _$$eD } from '../figma_app/876459';
+import { desktopAPIInstance } from '../figma_app/876459';
 import { bJ } from '../figma_app/881578';
 import { rT as _$$rT, dK, vD } from '../figma_app/889655';
 import { a as _$$a } from '../figma_app/894185';
@@ -730,7 +730,7 @@ function tt(e, t, i) {
   let n = new Blob([t], {
     type: i
   });
-  if (_$$Ay3.msie || _$$Ay3.msedge) {
+  if (BrowserInfo.msie || BrowserInfo.msedge) {
     let t = document.createElement('a');
     if (void 0 !== t.download) {
       let i = URL.createObjectURL(n);
@@ -750,7 +750,7 @@ function tt(e, t, i) {
     i.href = t;
     let r = void 0 !== i.download;
     r && (i.download = e);
-    _$$Ay3.safari ? (r || (i.target = '_blank'), i.click()) : _$$Ay3.firefox ? (document.body.appendChild(i), i.click(), document.body.removeChild(i)) : i.click();
+    BrowserInfo.safari ? (r || (i.target = '_blank'), i.click()) : BrowserInfo.firefox ? (document.body.appendChild(i), i.click(), document.body.removeChild(i)) : i.click();
   }
 }
 async function ti(e, t, i) {
@@ -807,12 +807,12 @@ async function ti(e, t, i) {
 }
 async function ts(e, t) {
   if (!e) {
-    let t = zl.get(_$$h);
+    let t = atomStoreManager.get(_$$h);
     if (!t) throw new Error('Must provide a local file key');
     e = t;
   }
   if (!t) {
-    let e = zl.get(kS);
+    let e = atomStoreManager.get(kS);
     if (!e) throw new Error('Must provide a user ID');
     t = e;
   }
@@ -1063,7 +1063,7 @@ function ik(e) {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$tx('design_systems.slots.content_picker.title_add')
+          children: renderI18nText('design_systems.slots.content_picker.title_add')
         })
       }), jsx(_$$nB, {
         'padding': 0,
@@ -1123,7 +1123,7 @@ let iG = {
       actions,
       queries
     } = x0();
-    Lo('Frecency Debug Info:', 'Frecency Data', {
+    logInfo('Frecency Debug Info:', 'Frecency Data', {
       actions: actions.serialize(),
       queries: queries.serialize()
     });
@@ -1137,7 +1137,7 @@ let iG = {
     } = x0();
     let s = actions.data(t)?.debugScore();
     let o = queries.data(e, t)?.debugScore();
-    Lo('Frecency Debug Info:', 'Frecency Score', {
+    logInfo('Frecency Debug Info:', 'Frecency Score', {
       action: t,
       query: e,
       totalScore: n,
@@ -1156,10 +1156,10 @@ let i0 = _$$Ju(e => {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$tx('fullscreen.fullscreen_view.attempted_sketch_import.import_from_sketch')
+          children: renderI18nText('fullscreen.fullscreen_view.attempted_sketch_import.import_from_sketch')
         })
       }), jsx(_$$nB, {
-        children: _$$tx('fullscreen.fullscreen_view.attempted_sketch_import.to_import_your_sketch_files_please_drag_them_into_your_file_space')
+        children: renderI18nText('fullscreen.fullscreen_view.attempted_sketch_import.to_import_your_sketch_files_please_drag_them_into_your_file_space')
       }), jsx(_$$wi, {
         children: jsxs(jk, {
           children: [jsx($n, {
@@ -1167,11 +1167,11 @@ let i0 = _$$Ju(e => {
               t(Ce());
             },
             variant: 'secondary',
-            children: _$$tx('fullscreen.fullscreen_view.attempted_sketch_import.do_it_later')
+            children: renderI18nText('fullscreen.fullscreen_view.attempted_sketch_import.do_it_later')
           }), jsx(_$$N2.Button, {
             newTab: !0,
             href: '/files',
-            children: _$$tx('fullscreen.fullscreen_view.attempted_sketch_import.go_to_file_space')
+            children: renderI18nText('fullscreen.fullscreen_view.attempted_sketch_import.go_to_file_space')
           })]
         })
       })]
@@ -1748,7 +1748,7 @@ function nW() {
       }), jsxs('div', {
         children: [jsx(JU, {
           className: 'perf_tools--label--LWmjv',
-          children: _$$tx('fake_mp.modal.cursors')
+          children: renderI18nText('fake_mp.modal.cursors')
         }), jsx(Ht, {
           'className': nL,
           'value': e,
@@ -1756,7 +1756,7 @@ function nW() {
           'min': 0,
           'dispatch': lQ,
           'data-tooltip-type': Ib.TEXT,
-          'data-tooltip': _$$t('fake_mp.modal.clients'),
+          'data-tooltip': getI18nString('fake_mp.modal.clients'),
           'children': jsx(_$$B2, {
             className: nO,
             svg: _$$A3
@@ -1768,7 +1768,7 @@ function nW() {
           'formatter': nV,
           'dispatch': lQ,
           'data-tooltip-type': Ib.TEXT,
-          'data-tooltip': _$$t('fake_mp.modal.frequency'),
+          'data-tooltip': getI18nString('fake_mp.modal.frequency'),
           'children': jsx(_$$B2, {
             className: nO,
             svg: _$$A2
@@ -1781,7 +1781,7 @@ function nW() {
           'max': 200,
           'dispatch': lQ,
           'data-tooltip-type': Ib.TEXT,
-          'data-tooltip': _$$t('fake_mp.modal.steps'),
+          'data-tooltip': getI18nString('fake_mp.modal.steps'),
           'children': jsx(_$$B2, {
             className: nO,
             svg: _$$A4
@@ -1793,10 +1793,10 @@ function nW() {
           'dispatch': lQ,
           'formatter': nG,
           'data-tooltip-type': Ib.TEXT,
-          'data-tooltip': _$$t('fake_mp.modal.center_x'),
+          'data-tooltip': getI18nString('fake_mp.modal.center_x'),
           'children': jsx('span', {
             className: nO,
-            children: `${_$$t('fake_mp.modal.center_x')}:`
+            children: `${getI18nString('fake_mp.modal.center_x')}:`
           })
         }), jsx(j5, {
           'className': nL,
@@ -1805,10 +1805,10 @@ function nW() {
           'dispatch': lQ,
           'formatter': nG,
           'data-tooltip-type': Ib.TEXT,
-          'data-tooltip': _$$t('fake_mp.modal.center_y'),
+          'data-tooltip': getI18nString('fake_mp.modal.center_y'),
           'children': jsx('span', {
             className: nO,
-            children: `${_$$t('fake_mp.modal.center_y')}:`
+            children: `${getI18nString('fake_mp.modal.center_y')}:`
           })
         })]
       }), jsxs(_$$e6, {
@@ -1821,7 +1821,7 @@ function nW() {
             c(e.offsetX);
             m(e.offsetY);
           },
-          children: _$$tx('fake_mp.modal.center')
+          children: renderI18nText('fake_mp.modal.center')
         }), jsx($n, {
           variant: 'secondary',
           type: 'submit',
@@ -1832,12 +1832,12 @@ function nW() {
             c(0);
             m(0);
           },
-          children: _$$tx('fake_mp.modal.reset')
+          children: renderI18nText('fake_mp.modal.reset')
         }), jsx($n, {
           variant: 'primary',
           type: 'submit',
           onClick: lQ,
-          children: _$$tx('fake_mp.modal.apply')
+          children: renderI18nText('fake_mp.modal.apply')
         })]
       })]
     })
@@ -1886,7 +1886,7 @@ function nJ() {
         })
       }), jsxs(_$$nB, {
         children: [jsx(_$$J3, {
-          children: _$$tx('tsmer_config.modal.levers_label')
+          children: renderI18nText('tsmer_config.modal.levers_label')
         }), jsx(j5, {
           'className': nL,
           'value': 0.016 + e,
@@ -1897,7 +1897,7 @@ function nJ() {
           }),
           'dispatch': lQ,
           'data-tooltip-type': Ib.TEXT,
-          'data-tooltip': _$$t('tsmer_config.modal.edit_frame_budget_seconds'),
+          'data-tooltip': getI18nString('tsmer_config.modal.edit_frame_budget_seconds'),
           'children': jsx(_$$B2, {
             className: nO,
             svg: _$$A3
@@ -1910,7 +1910,7 @@ function nJ() {
           'max': 2e3,
           'dispatch': lQ,
           'data-tooltip-type': Ib.TEXT,
-          'data-tooltip': _$$t('tsmer_config.modal.edit_frame_budget_framebuffer_switches'),
+          'data-tooltip': getI18nString('tsmer_config.modal.edit_frame_budget_framebuffer_switches'),
           'children': jsx(_$$B2, {
             className: nO,
             svg: _$$A4
@@ -1925,7 +1925,7 @@ function nJ() {
           }),
           'dispatch': lQ,
           'data-tooltip-type': Ib.TEXT,
-          'data-tooltip': _$$t('tsmer_config.modal.max_edit_frame_time_seconds'),
+          'data-tooltip': getI18nString('tsmer_config.modal.max_edit_frame_time_seconds'),
           'children': jsx(_$$B2, {
             className: nO,
             svg: _$$A3
@@ -1939,7 +1939,7 @@ function nJ() {
               variant: 'secondary',
               type: 'submit',
               onClick: o,
-              children: _$$tx('tsmer_config.modal.reset')
+              children: renderI18nText('tsmer_config.modal.reset')
             })
           })
         })
@@ -2001,7 +2001,7 @@ let rx = _$$Ju(() => {
     };
   }();
   let i = useRef(null);
-  let n = md(LK.indexedFragmentDataAtom);
+  let n = useAtomWithSubscription(LK.indexedFragmentDataAtom);
   Object.keys(n).forEach(e => {
     e.endsWith('embedding') && (n[e] = '[...]');
   });
@@ -2034,7 +2034,7 @@ let rx = _$$Ju(() => {
       tabIndex: 0,
       children: jsx('div', {
         className: _$$s6.ml8.fontSemiBold.font11.fontUi.$,
-        children: _$$tx('fragment_search.fragment_inspect_modal_title')
+        children: renderI18nText('fragment_search.fragment_inspect_modal_title')
       })
     }),
     children: jsx('div', {
@@ -2114,7 +2114,7 @@ function rL() {
       return jsx(_$$A6, {
         action: 'link-to-existing-component',
         actionIcon: jsx(_$$B5, {}),
-        actionLabel: _$$tx('first_draft.link_component.link_button'),
+        actionLabel: renderI18nText('first_draft.link_component.link_button'),
         onPerform: () => {
           if (i.length === 0) return;
           let e = getSingletonSceneGraph().getCurrentPage();
@@ -2129,7 +2129,7 @@ function rL() {
           close();
         },
         getCustomDisabledTextFromSelectedNodes: e => function (e) {
-          let t = _$$tx('first_draft.link_component.component_selection_instruction');
+          let t = renderI18nText('first_draft.link_component.component_selection_instruction');
           if (e.length !== 1 || e[0].type !== 'SYMBOL') return t;
         }(e),
         aiTrackingContext: void 0,
@@ -2137,7 +2137,7 @@ function rL() {
           type: 'learn_more',
           url: zw
         },
-        children: _$$tx('first_draft.link_component.component_selection_instruction')
+        children: renderI18nText('first_draft.link_component.component_selection_instruction')
       });
     default:
       throwTypeError(e);
@@ -2145,48 +2145,48 @@ function rL() {
 }
 let r0 = (e, t) => {
   if (e === ywP.DISPLAY_P3) {
-    if (t === 'convert') return _$$t('fullscreen.color_management.document_modal.confirm.title.convert_display_p3');
-    if (t === 'assign') return _$$t('fullscreen.color_management.document_modal.confirm.title.assign_display_p3');
+    if (t === 'convert') return getI18nString('fullscreen.color_management.document_modal.confirm.title.convert_display_p3');
+    if (t === 'assign') return getI18nString('fullscreen.color_management.document_modal.confirm.title.assign_display_p3');
   } else if (e === ywP.SRGB) {
-    if (t === 'convert') return _$$t('fullscreen.color_management.document_modal.confirm.title.convert_srgb');
-    if (t === 'assign') return _$$t('fullscreen.color_management.document_modal.confirm.title.assign_srgb');
+    if (t === 'convert') return getI18nString('fullscreen.color_management.document_modal.confirm.title.convert_srgb');
+    if (t === 'assign') return getI18nString('fullscreen.color_management.document_modal.confirm.title.assign_srgb');
   }
-  Lo('DocumentColorProfileModal', `invalid currentDocumentColorProfile (${e}) or changeOption (${t}) for i18NStringForConfirmationText`);
-  return _$$t('general.confirm');
+  logInfo('DocumentColorProfileModal', `invalid currentDocumentColorProfile (${e}) or changeOption (${t}) for i18NStringForConfirmationText`);
+  return getI18nString('general.confirm');
 };
-let r1 = e => _$$t('fullscreen.color_management.document_modal.cancel', {
+let r1 = e => getI18nString('fullscreen.color_management.document_modal.cancel', {
   color_profile: r2(e)
 });
-let r2 = e => e === ywP.DISPLAY_P3 ? _$$t('fullscreen.filename_view.color_management.color_profile_display_p3') : e === ywP.SRGB ? _$$t('fullscreen.filename_view.color_management.color_profile_srgb') : (Lo('DocumentColorProfileModal', `invalid documentColorProfile (${e}) for i18NStringForDocumentColorProfile`), '');
-let r5 = e => e === ywP.DISPLAY_P3 ? _$$t('fullscreen.color_management.file_history.assign-display-p3') : e === ywP.SRGB ? _$$t('fullscreen.color_management.file_history.assign-srgb') : (Lo('DocumentColorProfileModal', `invalid documentColorProfile (${e}) for i18NStringForDocumentColorProfileAssignment`), '');
+let r2 = e => e === ywP.DISPLAY_P3 ? getI18nString('fullscreen.filename_view.color_management.color_profile_display_p3') : e === ywP.SRGB ? getI18nString('fullscreen.filename_view.color_management.color_profile_srgb') : (logInfo('DocumentColorProfileModal', `invalid documentColorProfile (${e}) for i18NStringForDocumentColorProfile`), '');
+let r5 = e => e === ywP.DISPLAY_P3 ? getI18nString('fullscreen.color_management.file_history.assign-display-p3') : e === ywP.SRGB ? getI18nString('fullscreen.color_management.file_history.assign-srgb') : (logInfo('DocumentColorProfileModal', `invalid documentColorProfile (${e}) for i18NStringForDocumentColorProfileAssignment`), '');
 let r4 = (e, t) => {
   switch (t.status) {
     case 'SupportedNatively':
     case 'SupportedWithPolyfill':
       return null;
     case 'ClientNotSupported':
-      return e === 'convert' ? _$$t('fullscreen.color_management.document_modal.warning.display_p3_not_supported.client.convert') : _$$t('fullscreen.color_management.document_modal.warning.display_p3_not_supported.client.assign');
+      return e === 'convert' ? getI18nString('fullscreen.color_management.document_modal.warning.display_p3_not_supported.client.convert') : getI18nString('fullscreen.color_management.document_modal.warning.display_p3_not_supported.client.assign');
     case 'MonitorNotSupported':
-      return _$$t('fullscreen.color_management.document_modal.warning.display_p3_not_supported.monitor');
+      return getI18nString('fullscreen.color_management.document_modal.warning.display_p3_not_supported.monitor');
   }
 };
 let r3 = e => {
   switch (e) {
     case ywP.SRGB:
-      return _$$t('fullscreen.color_management.document_modal.options.convert.subtitle.srgb_to_display_p3');
+      return getI18nString('fullscreen.color_management.document_modal.options.convert.subtitle.srgb_to_display_p3');
     case ywP.DISPLAY_P3:
-      return _$$t('fullscreen.color_management.document_modal.options.convert.subtitle.display_p3_to_srgb');
+      return getI18nString('fullscreen.color_management.document_modal.options.convert.subtitle.display_p3_to_srgb');
   }
 };
 function r6(e, t, i, n, r) {
   switch (r && e(t === ywP.LEGACY ? _$$m3({
     fileKey: r,
-    label: _$$t('fullscreen.color_management.file_history.label'),
+    label: getI18nString('fullscreen.color_management.file_history.label'),
     description: r5(i),
     hideVisualBell: !0
   }) : _$$m3({
     fileKey: r,
-    label: _$$t('fullscreen.color_management.file_history.label'),
+    label: getI18nString('fullscreen.color_management.file_history.label'),
     description: `${r2(t)} \u2192 ${r2(i)}`,
     hideVisualBell: !0
   })), i) {
@@ -2215,7 +2215,7 @@ let r7 = _$$Ju(({
       onClose: i,
       width: 'lg',
       title: jsx(Fragment, {
-        children: _$$tx('fullscreen.color_management.document_modal.title', {
+        children: renderI18nText('fullscreen.color_management.document_modal.title', {
           color_profile: r2(e)
         })
       }),
@@ -2224,7 +2224,7 @@ let r7 = _$$Ju(({
       onConfirm: () => r6(n, u, e, o, r?.key),
       children: [jsxs(_$$b3, {
         legend: jsx(_$$q3, {
-          children: _$$tx('fullscreen.color_management.document_modal.legend')
+          children: renderI18nText('fullscreen.color_management.document_modal.legend')
         }),
         value: o,
         onChange: e => {
@@ -2233,25 +2233,25 @@ let r7 = _$$Ju(({
         children: [jsx(_$$c4, {
           value: 'convert',
           label: jsx(_$$J3, {
-            children: _$$t('fullscreen.color_management.document_modal.options.convert.title')
+            children: getI18nString('fullscreen.color_management.document_modal.options.convert.title')
           }),
           children: jsxs(Fragment, {
             children: [r3(e), e === ywP.SRGB && o === 'convert' && jsxs('div', {
               className: 'document_color_profile_modal--migratedWarning--4bN32',
-              children: [jsx(_$$Z4, {}), _$$tx('fullscreen.color_management.document_modal.warning.clamp.convert'), jsx(Ph, {
+              children: [jsx(_$$Z4, {}), renderI18nText('fullscreen.color_management.document_modal.warning.clamp.convert'), jsx(Ph, {
                 newTab: !0,
                 trusted: !0,
                 href: _$$s8,
-                children: _$$tx('rcs.rcs_shared.learn_more')
+                children: renderI18nText('rcs.rcs_shared.learn_more')
               })]
             })]
           })
         }), jsx(_$$c4, {
           value: 'assign',
           label: jsx(_$$J3, {
-            children: _$$t('fullscreen.color_management.document_modal.options.assign.title')
+            children: getI18nString('fullscreen.color_management.document_modal.options.assign.title')
           }),
-          children: _$$t('fullscreen.color_management.document_modal.options.assign.subtitle')
+          children: getI18nString('fullscreen.color_management.document_modal.options.assign.subtitle')
         })]
       }), c && jsxs('div', {
         className: 'document_color_profile_modal--migratedBottomWarningText--LdbKb',
@@ -2860,8 +2860,8 @@ let aO = _$$Ju(e => {
       })
     })
   });
-  let T = useMemo(() => p === 'pdf' ? l ? _$$tx('fullscreen.export.export_slides_to_pdf') : _$$tx('fullscreen.export.export_frames_to_pdf') : _$$tx('fullscreen.export.export_slides_to_pptx'), [p, l]);
-  let k = p === 'pdf' ? _$$tx('fullscreen.export.exporting_to_pdf') : _$$tx('fullscreen.export.exporting_to_pptx');
+  let T = useMemo(() => p === 'pdf' ? l ? renderI18nText('fullscreen.export.export_slides_to_pdf') : renderI18nText('fullscreen.export.export_frames_to_pdf') : renderI18nText('fullscreen.export.export_slides_to_pptx'), [p, l]);
+  let k = p === 'pdf' ? renderI18nText('fullscreen.export.exporting_to_pdf') : renderI18nText('fullscreen.export.exporting_to_pptx');
   return jsx(_$$bL, {
     manager: o,
     width: 'md',
@@ -2875,7 +2875,7 @@ let aO = _$$Ju(e => {
           label: jsx(JU, {
             className: hD,
             htmlFor: 'export-settings-file-type',
-            children: _$$t('fullscreen.export.export_file_type')
+            children: getI18nString('fullscreen.export.export_file_type')
           }),
           input: jsxs(_$$bL2, {
             onChange: e => {
@@ -2884,7 +2884,7 @@ let aO = _$$Ju(e => {
             value: p,
             children: [jsx(l9, {
               label: jsx(_$$h3, {
-                children: _$$t('fullscreen.export.export_file_type')
+                children: getI18nString('fullscreen.export.export_file_type')
               }),
               width: 'fill'
             }), jsxs(mc, {
@@ -2909,15 +2909,15 @@ let aO = _$$Ju(e => {
               imageBacked: !0
             }), k]
           }), !t && n && jsxs(Fragment, {
-            children: [jsx(_$$R2, {}), _$$tx('fullscreen.export.unable_to_export')]
+            children: [jsx(_$$R2, {}), renderI18nText('fullscreen.export.unable_to_export')]
           })]
         }), jsx(jk, {
           children: jsx($n, {
             'variant': 'primary',
             'onClick': E,
             'disabled': t,
-            'aria-label': _$$t('fullscreen.export.export'),
-            'children': _$$tx('fullscreen.export.export')
+            'aria-label': getI18nString('fullscreen.export.export'),
+            'children': renderI18nText('fullscreen.export.export')
           })
         })]
       })]
@@ -2929,9 +2929,9 @@ let aL = () => ({
   format: e => {
     switch (e) {
       case 'pdf':
-        return _$$t('fullscreen.export.export_to_pdf');
+        return getI18nString('fullscreen.export.export_to_pdf');
       case 'pptx':
-        return _$$t('fullscreen.export.export_to_pptx');
+        return getI18nString('fullscreen.export.export_to_pptx');
     }
   }
 });
@@ -3000,7 +3000,7 @@ class aZ extends PureComponent {
       });
     };
     this.isUsingNumberPattern = () => aY.test(this.state.replacePattern) || aq.test(this.state.replacePattern);
-    this.getSequenceLabel = e => new RegExp(`^.*(?=.*${aY.source})(?=.*${aq.source}).*$`).test(e) ? _$$t('fullscreen.rename_modal.start_sequence_from') : aq.test(e) ? _$$t('fullscreen.rename_modal.stop_descending_at') : aY.test(e) ? _$$t('fullscreen.rename_modal.start_ascending_from') : this.state.sequenceLabel;
+    this.getSequenceLabel = e => new RegExp(`^.*(?=.*${aY.source})(?=.*${aq.source}).*$`).test(e) ? getI18nString('fullscreen.rename_modal.start_sequence_from') : aq.test(e) ? getI18nString('fullscreen.rename_modal.stop_descending_at') : aY.test(e) ? getI18nString('fullscreen.rename_modal.start_ascending_from') : this.state.sequenceLabel;
     this.onSequenceStartChange = e => {
       this.updateShouldRefocusReplaceInput();
       this.setState({
@@ -3063,7 +3063,7 @@ class aZ extends PureComponent {
     this.renderPreview = () => jsxs(Fragment, {
       children: [jsx('div', {
         className: 'rename_modal--sectionHeader--DKvQY',
-        children: _$$tx('fullscreen.rename_modal.preview')
+        children: renderI18nText('fullscreen.rename_modal.preview')
       }), jsx('div', {
         className: 'rename_modal--previewNameContainer--Rls-u',
         children: this.getPreviewNames()
@@ -3074,7 +3074,7 @@ class aZ extends PureComponent {
       children: jsx(_$$N2, {
         href: 'https://help.figma.com/hc/articles/360039958934-Rename-Layers',
         newTab: !0,
-        children: _$$tx('fullscreen.rename_modal.learn_more')
+        children: renderI18nText('fullscreen.rename_modal.learn_more')
       })
     });
     this.renderFormInputs = () => jsxs('div', {
@@ -3086,7 +3086,7 @@ class aZ extends PureComponent {
           value: this.state.matchPattern,
           onFocus: this.onMatchPatternFocus,
           onChange: this.onMatchPatternChange,
-          placeholder: _$$t('fullscreen.rename_modal.match_optional')
+          placeholder: getI18nString('fullscreen.rename_modal.match_optional')
         })
       }), jsx('div', {
         className: aG,
@@ -3095,7 +3095,7 @@ class aZ extends PureComponent {
           value: this.state.replacePattern,
           onChange: this.onReplacePatternChange,
           onBlur: this.setReplacePatternInputSelection,
-          placeholder: this.state.matchPattern ? _$$t('fullscreen.rename_modal.replace_with') : _$$t('fullscreen.rename_modal.rename_to'),
+          placeholder: this.state.matchPattern ? getI18nString('fullscreen.rename_modal.replace_with') : getI18nString('fullscreen.rename_modal.rename_to'),
           ref: this.props.autofocusRef
         })
       }), jsxs('div', {
@@ -3108,7 +3108,7 @@ class aZ extends PureComponent {
           htmlAttributes: {
             onMouseDown: this.updateShouldRefocusReplaceInput
           },
-          children: this.state.matchPattern ? _$$t('fullscreen.rename_modal.current_match') : _$$t('fullscreen.rename_modal.current_name')
+          children: this.state.matchPattern ? getI18nString('fullscreen.rename_modal.current_match') : getI18nString('fullscreen.rename_modal.current_name')
         }), jsx($n, {
           variant: 'secondary',
           onClick: () => {
@@ -3117,7 +3117,7 @@ class aZ extends PureComponent {
           htmlAttributes: {
             onMouseDown: this.updateShouldRefocusReplaceInput
           },
-          children: _$$tx('fullscreen.rename_modal.number_ascending')
+          children: renderI18nText('fullscreen.rename_modal.number_ascending')
         }), jsx($n, {
           variant: 'secondary',
           onClick: () => {
@@ -3126,7 +3126,7 @@ class aZ extends PureComponent {
           htmlAttributes: {
             onMouseDown: this.updateShouldRefocusReplaceInput
           },
-          children: _$$tx('fullscreen.rename_modal.number_descending')
+          children: renderI18nText('fullscreen.rename_modal.number_descending')
         })]
       }), jsxs('div', {
         className: this.isUsingNumberPattern() ? 'rename_modal--sequenceInputContainer--wT55c rename_modal--_inputContainer--Sh9ic raw_components--singleRowHeight--dKM4t' : 'rename_modal--sequenceInputContainerDisabled--EwlG- rename_modal--_inputContainer--Sh9ic raw_components--singleRowHeight--dKM4t',
@@ -3140,7 +3140,7 @@ class aZ extends PureComponent {
           'disabled': !this.isUsingNumberPattern(),
           'min': 0,
           'data-tooltip-type': Ib.TEXT,
-          'data-tooltip': _$$t('fullscreen.rename_modal.start_ascending_from'),
+          'data-tooltip': getI18nString('fullscreen.rename_modal.start_ascending_from'),
           'tooltipForScreenReadersOnly': !0,
           'dispatch': this.props.dispatch
         })]
@@ -3150,10 +3150,10 @@ class aZ extends PureComponent {
       children: [jsx($n, {
         variant: 'secondary',
         onClick: this.props.onClose,
-        children: _$$tx('fullscreen.rename_modal.cancel')
+        children: renderI18nText('fullscreen.rename_modal.cancel')
       }), jsx($n, {
         type: 'submit',
-        children: _$$tx('fullscreen.rename_modal.rename')
+        children: renderI18nText('fullscreen.rename_modal.rename')
       })]
     });
     this.guidSet = new Set(e.guids);
@@ -3162,7 +3162,7 @@ class aZ extends PureComponent {
       matchPattern: '',
       replacePattern: '',
       sequenceStart: 1,
-      sequenceLabel: _$$t('fullscreen.rename_modal.start_ascending_from')
+      sequenceLabel: getI18nString('fullscreen.rename_modal.start_ascending_from')
     };
   }
   componentDidMount() {
@@ -3199,9 +3199,9 @@ class aZ extends PureComponent {
   }
   render() {
     if (this.props.guids.length === 0) return null;
-    let e = this.props.nodeType === 'page' ? _$$t('fullscreen.rename_modal.rename_num_pages_pages', {
+    let e = this.props.nodeType === 'page' ? getI18nString('fullscreen.rename_modal.rename_num_pages_pages', {
       numPages: this.sortedGUIDs.length
-    }) : _$$t('fullscreen.rename_modal.rename_num_layers_layers', {
+    }) : getI18nString('fullscreen.rename_modal.rename_num_layers_layers', {
       numLayers: this.sortedGUIDs.length
     });
     return jsx(_$$o2, {
@@ -3240,7 +3240,7 @@ let aX = _$$Ju(e => {
   let t = hS(e);
   let i = useRef(null);
   let n = _$$X3(i);
-  let r = useSelector(e => (xO(_$$e.UNOWNED, e.mirror.appModel), e.mirror.appModel.currentPage));
+  let r = useSelector(e => (reportNullOrUndefined(_$$e.UNOWNED, e.mirror.appModel), e.mirror.appModel.currentPage));
   let s = useSelector(e => e.mirror.sceneGraph.get);
   return jsx(aZ, {
     ...e,
@@ -3271,9 +3271,9 @@ let s_ = {
   },
   getUpdatesState() {
     return {
-      updatesForCurrentPage: zl.get(P1),
-      updatesForLoadedPages: zl.get(S9),
-      updateStatusForCurrentPage: zl.get(_$$WJ)
+      updatesForCurrentPage: atomStoreManager.get(P1),
+      updatesForLoadedPages: atomStoreManager.get(S9),
+      updateStatusForCurrentPage: atomStoreManager.get(_$$WJ)
     };
   }
 };
@@ -3349,8 +3349,8 @@ function sP(e) {
       this._fullscreenIsReady = !1;
       this._readyPromiseResolve = null;
       this._fontListLoaded = !1;
-      this.fromFullscreen = new _$$b4('fromFullscreen');
-      this.viewport = new _$$b4('viewport');
+      this.fromFullscreen = new EventEmitter('fromFullscreen');
+      this.viewport = new EventEmitter('viewport');
       this.containerElement = null;
       this._viewportInfo = {
         x: 0,
@@ -3415,7 +3415,7 @@ function sP(e) {
       _$$J5.finishLoadingImage();
     }
     setSentryTag(e, t) {
-      kF(e, t);
+      setSentryTag(e, t);
     }
     onFrame() {
       this.isReady() && glU && glU.onFrame();
@@ -3496,7 +3496,7 @@ class sB {
   }
 }
 async function sq(e, t, i) {
-  let n = new M4();
+  let n = new Timer();
   n.start();
   let r = debugState.getState();
   let a = r.openFile?.key;
@@ -3601,7 +3601,7 @@ async function sq(e, t, i) {
       }));
     });
   } catch (n) {
-    $D(_$$e.AI_PRODUCTIVITY, n, {
+    reportError(_$$e.AI_PRODUCTIVITY, n, {
       extra: {
         numRows: e.length,
         numCols: e[0].length,
@@ -3629,7 +3629,7 @@ function or({
   mode: t,
   startingNodeId: i
 }) {
-  if (e !== 'breakpoint_bar' && zl.get(_$$_b)) {
+  if (e !== 'breakpoint_bar' && atomStoreManager.get(_$$_b)) {
     uP();
     return;
   }
@@ -3648,7 +3648,7 @@ function or({
         testFlags: i,
         ...n
       } : null;
-      zl.set(_$$_b, r);
+      atomStoreManager.set(_$$_b, r);
     }({
       startingBreakpointFrameId: i,
       mode: t
@@ -3776,12 +3776,12 @@ class oo {
         }
       case 'toggle-inline-preview':
         let t = e.payload.source === 'toolbar' ? 'button' : e.payload.source;
-        zl.get(hg).modalStatus === _$$bi.OPEN ? (this._store.dispatch(Zh({
+        atomStoreManager.get(hg).modalStatus === _$$bi.OPEN ? (this._store.dispatch(Zh({
           name: 'prototype.close_inline_viewer',
           params: {
             source: t
           }
-        })), zl.set(hg, {
+        })), atomStoreManager.set(hg, {
           type: 'CLOSE_INLINE_PREVIEW'
         })) : this._openPrototype({
           source: t,
@@ -3798,7 +3798,7 @@ class oo {
           });
           this._store.dispatch(_$$F.enqueue({
             icon: zX.NOTES_ON_RECTANGLE,
-            message: _$$t('slides.presenter_view.visual_bells.opened_presentation_in_new_tab')
+            message: getI18nString('slides.presenter_view.visual_bells.opened_presentation_in_new_tab')
           }));
           break;
         }
@@ -3813,7 +3813,7 @@ class oo {
           });
           this._store.dispatch(_$$F.enqueue({
             icon: zX.NOTES_ON_RECTANGLE,
-            message: _$$t('slides.presenter_view.visual_bells.opened_presenter_and_audience_views_in_new_tabs')
+            message: getI18nString('slides.presenter_view.visual_bells.opened_presenter_and_audience_views_in_new_tabs')
           }));
           break;
         }
@@ -3835,7 +3835,7 @@ class oo {
         break;
       case 'inline-preview-reset-size':
         let i = dK(this._store.getState());
-        zl.set(hg, {
+        atomStoreManager.set(hg, {
           type: 'CHANGE_DEVICE_FRAME',
           payload: {
             sceneGraph: i,
@@ -3848,7 +3848,7 @@ class oo {
         break;
       case 'toggle-bold':
         let n = this._state.mirror.appModel.currentTool;
-        _$$XE(this._store.getState().selectedView) === _$$nT.Whiteboard && _$$BG(n) ? this._applyDrawingToolStylingAction(n) : this._applyTextStylingAction(eL2.TOGGLE_BOLD);
+        _$$XE(this._store.getState().selectedView) === FEditorType.Whiteboard && _$$BG(n) ? this._applyDrawingToolStylingAction(n) : this._applyTextStylingAction(eL2.TOGGLE_BOLD);
         break;
       case 'show-prototype-interaction-edit-modal':
         let {
@@ -3902,22 +3902,22 @@ class oo {
   _applyDrawingToolStylingAction(e) {
     switch (e) {
       case NLJ.VECTOR_PENCIL:
-        let t = zl.get(GI);
-        zl.set(GI, {
+        let t = atomStoreManager.get(GI);
+        atomStoreManager.set(GI, {
           ...t,
           strokeWeight: t.strokeWeight === wv ? uM : wv
         });
         return;
       case NLJ.BRUSH:
-        let i = zl.get(Vi);
-        zl.set(Vi, {
+        let i = atomStoreManager.get(Vi);
+        atomStoreManager.set(Vi, {
           ...i,
           strokeWeight: i.strokeWeight === wv ? uM : wv
         });
         return;
       case NLJ.HIGHLIGHTER:
-        let n = zl.get(IZ);
-        zl.set(IZ, {
+        let n = atomStoreManager.get(IZ);
+        atomStoreManager.set(IZ, {
           ...n,
           strokeWeight: n.strokeWeight === g5 ? Iz : g5
         });
@@ -3935,7 +3935,7 @@ let ov = (e, t, i, n, r) => {
     try {
       let a = getInitialOptions().tracking_session_id;
       let s = _$$g();
-      _$$sx('mirror_frame_tracking', {
+      trackEventAnalytics('mirror_frame_tracking', {
         pageName: 'fullscreen',
         fileKey: e,
         pageId: t,
@@ -3953,12 +3953,12 @@ let ov = (e, t, i, n, r) => {
         ord: r
       });
     } catch (t) {
-      x1('mobileAppPush', 'error performing mobile app push', {
+      logError('mobileAppPush', 'error performing mobile app push', {
         fileKey: e,
         frameID: i,
         frameName: n
       });
-      $D(_$$e.MOBILE_PLATFORM, t);
+      reportError(_$$e.MOBILE_PLATFORM, t);
     }
   }
 };
@@ -4082,15 +4082,15 @@ let oN = class e {
     r && r(t, i, n);
   }
   defaultErrorCallback(e, t, i) {
-    x1('RenderingWorker', `Critical error: invalid event ${i} while in state ${e} to ${t}`);
+    logError('RenderingWorker', `Critical error: invalid event ${i} while in state ${e} to ${t}`);
   }
   processStateMachineEvent(e) {
     let t = this._RenderingWorkerStates[this._currentState];
     if (t) {
       let i = t[e];
-      i ? (this._previousState = this._currentState, this._currentState = i._target, i._callback && i._callback(this._previousState, this._currentState, e)) : xi('RenderingWorker', `No transition found for event ${e} in state ${this._currentState}`);
+      i ? (this._previousState = this._currentState, this._currentState = i._target, i._callback && i._callback(this._previousState, this._currentState, e)) : logWarning('RenderingWorker', `No transition found for event ${e} in state ${this._currentState}`);
     } else {
-      x1('RenderingWorker', `No state information found for ${this._currentState}`);
+      logError('RenderingWorker', `No state information found for ${this._currentState}`);
     }
   }
   onMessage(t) {
@@ -4099,10 +4099,10 @@ let oN = class e {
     let {
       id
     } = t.data;
-    id && (id ? e.getInstance().processStateMachineEvent(id) : x1('RenderingWorker', `Unknown event ${id} received`));
+    id && (id ? e.getInstance().processStateMachineEvent(id) : logError('RenderingWorker', `Unknown event ${id} received`));
   }
   onError(e) {
-    x1('RenderingWorker', 'Error from rendering worker', {
+    logError('RenderingWorker', 'Error from rendering worker', {
       error: e
     });
     e.preventDefault();
@@ -4113,11 +4113,11 @@ let oN = class e {
   }
   spawnWorker() {
     if (this._worker || this._currentState !== 'uninitialized') {
-      x1('RenderingWorker', 'Attempting to spawn the rendering worker but it\'s already spawned');
+      logError('RenderingWorker', 'Attempting to spawn the rendering worker but it\'s already spawned');
       return;
     }
     if (this._worker = _$$x4(oT), !this._worker) {
-      x1('RenderingWorker', 'Failed to spawn rendering worker');
+      logError('RenderingWorker', 'Failed to spawn rendering worker');
       this.processStateMachineEvent('error');
       return;
     }
@@ -4130,18 +4130,18 @@ let oN = class e {
   }
   init() {
     if (!this._worker) {
-      x1('RenderingWorker', 'Trying to init Rendering Worker but it isn\'t spawned yet');
+      logError('RenderingWorker', 'Trying to init Rendering Worker but it isn\'t spawned yet');
       return;
     }
-    this._currentState === 'spawned' || x1('RenderingWorker', `Trying to init Rendering Worker that isn't valid in state ${this._currentState}`);
+    this._currentState === 'spawned' || logError('RenderingWorker', `Trying to init Rendering Worker that isn't valid in state ${this._currentState}`);
     let e = document.querySelector('#fullscreen-root canvas');
     if (!e) {
-      x1('RenderingWorker', 'Could not find fullscreen canvas');
+      logError('RenderingWorker', 'Could not find fullscreen canvas');
       return;
     }
     let t = e.parentElement;
     if (!t) {
-      x1('RenderingWorker', 'Could not find fullscreen canvas parent');
+      logError('RenderingWorker', 'Could not find fullscreen canvas parent');
       return;
     }
     e.id = 'fullscreen-main-thread-canvas';
@@ -4225,7 +4225,7 @@ let lp = new class {
     this.scheduleFlushImpressions = debounce(() => {
       let e = debugState?.getState().openFile?.key ?? null;
       let t = this.createWidgetEvent(null, e, this.widgetImpressions);
-      _$$sx('Widget Impression', t, {
+      trackEventAnalytics('Widget Impression', t, {
         forwardToDatadog: !0
       });
       this.widgetImpressions = [];
@@ -4235,7 +4235,7 @@ let lp = new class {
       for (let [t, i] of Object.entries(this.widgetInsertsFromExisting)) {
         if (!i || i.length === 0) continue;
         let n = this.createWidgetEvent(t, e, i);
-        _$$sx('Widget Insert From Existing', n);
+        trackEventAnalytics('Widget Insert From Existing', n);
       }
       this.widgetInsertsFromExisting = {};
     }, 1e3);
@@ -4244,7 +4244,7 @@ let lp = new class {
       for (let [t, i] of Object.entries(this.widgetSelectionStateInteractions)) {
         if (!i || i.length === 0) continue;
         let n = this.createWidgetEvent(t, e, i);
-        _$$sx('Widget Selection State Interaction', n);
+        trackEventAnalytics('Widget Selection State Interaction', n);
       }
       this.widgetSelectionStateInteractions = {};
     }, 1e3);
@@ -4382,8 +4382,8 @@ async function lN({
   if (!m && h) {
     switch (await _$$y6(p ?? void 0, h)) {
       case u8.PLUGIN_NOT_ORG_APPROVED:
-        let A = _$$t('widgets.this_widget_is_not_allowed_by_your_organization');
-        let y = _$$t('widgets.this_widget_is_not_allowed_by_your_organization_v2', {
+        let A = getI18nString('widgets.this_widget_is_not_allowed_by_your_organization');
+        let y = getI18nString('widgets.this_widget_is_not_allowed_by_your_organization_v2', {
           orgName: h.name,
           widgetName: c.widgetName
         });
@@ -4418,20 +4418,20 @@ async function lN({
         });
         return;
       }
-      r !== 'paste_from_url' && (await fR(_$$t('widgets.could_not_find_widget_code_to_run')));
+      r !== 'paste_from_url' && (await fR(getI18nString('widgets.could_not_find_widget_code_to_run')));
       return new lR('Could not find widget code on the node');
     }
     m && lL(t.widgetNodeID, e, p);
   }
   if (i = i || (t.name === 'mount' ? t.context : t.name), !p) {
-    c.widgetVersionId && $D(_$$e.EXTENSIBILITY, new Error('Could not find widget code to run'), {
+    c.widgetVersionId && reportError(_$$e.EXTENSIBILITY, new Error('Could not find widget code to run'), {
       tags: {
         widgetAction: i,
         widgetId: c.widgetId || '',
         widgetVersionId: c.widgetVersionId
       }
     });
-    r !== 'paste_from_url' && (await fR(_$$t('widgets.could_not_find_widget_code_to_run')));
+    r !== 'paste_from_url' && (await fR(getI18nString('widgets.could_not_find_widget_code_to_run')));
     return new lR('Could not find widget code to run');
   }
   if (MH({
@@ -4494,7 +4494,7 @@ async function lO({
       queryMode: !1,
       showLaunchErrors: !0,
       showRuntimeErrors: !0,
-      testMessageHandler: _$$nl() ? r : void 0,
+      testMessageHandler: isInteractionPathCheck() ? r : void 0,
       titleIconURL: '',
       userID: s,
       vmType: 'cppvm',
@@ -4583,7 +4583,7 @@ async function lF(e, {
     });
   } catch (t) {
     console.error(t);
-    let e = t && t.message || _$$t('widgets.an_error_occurred_while_running_this_widget');
+    let e = t && t.message || getI18nString('widgets.an_error_occurred_while_running_this_widget');
     fR(e);
   } finally {
     _$$iu.currentPluginRunID = null;
@@ -4669,7 +4669,7 @@ let lM = new class {
         await lN(e);
       } catch (i) {
         let t = i instanceof Error ? i : new Error('Unable to run widget code');
-        i instanceof lR || $D(_$$e.EXTENSIBILITY, t, {
+        i instanceof lR || reportError(_$$e.EXTENSIBILITY, t, {
           tags: {
             widgetAction: e.widgetAction,
             widgetId: e.pluginID,
@@ -4686,10 +4686,10 @@ let lM = new class {
   }
 }();
 function lj() {
-  return _$$nl() || !1;
+  return isInteractionPathCheck() || !1;
 }
 function lU(e, t) {
-  if (_$$nl() || !t) return;
+  if (isInteractionPathCheck() || !t) return;
   let {
     publishedCanvasWidgetVersions,
     fetchedCanvasWidgetVersions,
@@ -4905,7 +4905,7 @@ class lV {
     });
   }
   logMultipleInputEditorsInWidget(e, t) {
-    t > 1 && _$$sx('Widget Multiple Input Editors', {
+    t > 1 && trackEventAnalytics('Widget Multiple Input Editors', {
       pluginID: e,
       numEditors: t
     });
@@ -4913,7 +4913,7 @@ class lV {
   queueRender(e, t) {
     let i = getSceneGraphInstance().get(t);
     if (i?.isEmbed || i?.isLinkPreview) {
-      $D(_$$e.EXTENSIBILITY, new Error(`Calling queuRender from a first party widget for pluginID=${e}, widgetNodeID=${t}`));
+      reportError(_$$e.EXTENSIBILITY, new Error(`Calling queuRender from a first party widget for pluginID=${e}, widgetNodeID=${t}`));
       return;
     }
     lM.runLowPriority({
@@ -5022,7 +5022,7 @@ class lV {
       return await lG(e);
     } catch (i) {
       let t = i instanceof Error ? i : new Error('Failed to get widget icon');
-      $D(_$$e.EXTENSIBILITY, t, {
+      reportError(_$$e.EXTENSIBILITY, t, {
         extra: {
           widgetID: e,
           msg: t.message,
@@ -5040,7 +5040,7 @@ class lV {
       bounds: t,
       text: i.widgetTooltip
     };
-    c2(n, zl.get(HV)) || HV.syncFromFullscreen(n);
+    c2(n, atomStoreManager.get(HV)) || HV.syncFromFullscreen(n);
   }
   hideTooltip() {
     HV.syncFromFullscreen(null);
@@ -5059,10 +5059,10 @@ class lV {
     if (!r) return;
     switch (r) {
       case lT.FIGMA_ONLY:
-        i = _$$t('widgets.widget_can_only_run_in_figma');
+        i = getI18nString('widgets.widget_can_only_run_in_figma');
         break;
       case lT.FIGJAM_ONLY:
-        i = _$$t('widgets.widget_can_only_run_in_figjam');
+        i = getI18nString('widgets.widget_can_only_run_in_figjam');
         break;
       case lT.ORG_MEMBER_ONLY:
         {
@@ -5074,16 +5074,16 @@ class lV {
             orgById,
             currentUserOrgId
           });
-          i = _$$t('widgets.widget_only_for_members_of_org', {
+          i = getI18nString('widgets.widget_only_for_members_of_org', {
             orgName: n.name
           });
           break;
         }
       case lT.REQUIRES_PAYMENT:
-        i = _$$t('widgets.paid_widgets_can_only_be_run_after_purchasing');
+        i = getI18nString('widgets.paid_widgets_can_only_be_run_after_purchasing');
         break;
       case lT.AI_DISABLED:
-        i = _$$t('widgets.your_organization_has_opted_out_of_ai');
+        i = getI18nString('widgets.your_organization_has_opted_out_of_ai');
         break;
       case lT.DISALLOWED_BY_ORG:
         {
@@ -5095,8 +5095,8 @@ class lV {
             orgById,
             currentUserOrgId
           });
-          let a = _$$t('widgets.this_widget_is_not_allowed_by_your_organization');
-          let s = _$$t('widgets.this_widget_is_not_allowed_by_your_organization_v2', {
+          let a = getI18nString('widgets.this_widget_is_not_allowed_by_your_organization');
+          let s = getI18nString('widgets.this_widget_is_not_allowed_by_your_organization_v2', {
             orgName: r.name,
             widgetName: n.widgetName
           });
@@ -5303,7 +5303,7 @@ let lX = class e extends sP(sN(sR)) {
     this._memorySpikeOnFileLoadBytes = 0;
     this.fileArrayToString = null;
     this.loadAndStartFullscreenIfNecessary = Kt(async () => {
-      let t = _$$nl();
+      let t = isInteractionPathCheck();
       if (this._readyStartTime = window.performance.now(), _$$xK.start('loadAndStartFullscreen'), e.startFetchingFontList(), e.startFetchingInterfaceFont(), _$$oU(location.href).then(e => {
         this._isDesktopAppRunning = e;
         e && _$$N3.shouldShowOnce() && this._store.dispatch(_$$aK(_$$kF.FOR_OPEN));
@@ -5430,8 +5430,8 @@ let lX = class e extends sP(sN(sR)) {
       })) {
         return;
       }
-      let t = _$$t('autosave.unable_to_leave_document.unsaved_changes_save_in_background');
-      !1 === navigator.onLine && (t = _$$t('autosave.unable_to_leave_document.pending_changes'));
+      let t = getI18nString('autosave.unable_to_leave_document.unsaved_changes_save_in_background');
+      !1 === navigator.onLine && (t = getI18nString('autosave.unable_to_leave_document.pending_changes'));
       this.dispatch(_$$to({
         type: _$$v2,
         data: {
@@ -5492,7 +5492,7 @@ let lX = class e extends sP(sN(sR)) {
         mirror.appModel.showUi && (this.dispatch(_$$oB()), Jf(this._state.dropdownShown) && jD(this.dispatch, this._state.dropdownShown, {
           forceClose: t === 'toolbar'
         }));
-        selectedView.view === 'fullscreen' && selectedView.editorType === _$$nT.DevHandoff && _$$wY();
+        selectedView.view === 'fullscreen' && selectedView.editorType === FEditorType.DevHandoff && _$$wY();
       }
     };
     this.getLatestPublishedVersionHashForComponent = (e, t) => {
@@ -5519,15 +5519,15 @@ let lX = class e extends sP(sN(sR)) {
     this.takePencilSample = null;
     this.takeIndirectPinchGesture = null;
     this.openMakePrototypeModal = () => {
-      let e = zl.get(Gh);
-      !zl.get(_$$xP) && e ? $I({
+      let e = atomStoreManager.get(Gh);
+      !atomStoreManager.get(_$$xP) && e ? $I({
         moduleToOpen: {
           type: 'custom',
           module: jsx(_$$x2, {
             aiTrackingContext: e
           }),
           beforeModuleOpen: () => {
-            zl.set(Gh, void 0);
+            atomStoreManager.set(Gh, void 0);
           },
           name: Sn.MAGIC_LINK_DONE_TOAST
         },
@@ -5536,8 +5536,8 @@ let lX = class e extends sP(sN(sR)) {
         }
       }) : e || Y5.triggerAction('end-magic-link');
     };
-    this.isMagicLinkDone = () => zl.get(d_);
-    this.isMagicLinkDoneToastShowing = () => zl.get(_$$xP);
+    this.isMagicLinkDone = () => atomStoreManager.get(d_);
+    this.isMagicLinkDoneToastShowing = () => atomStoreManager.get(_$$xP);
     this.linkToComponent = () => {
       $I({
         moduleToOpen: {
@@ -5551,16 +5551,16 @@ let lX = class e extends sP(sN(sR)) {
       });
     };
     this.logFullscreenActionToDatadogRum = (e, t) => {
-      J6.addAction(e, _$$e.SCENEGRAPH_AND_SYNC, _$$$.INFO, t);
+      observabilityClient.addAction(e, _$$e.SCENEGRAPH_AND_SYNC, LogLevelStr.INFO, t);
     };
     this.showNudgeDesignModeAfterTemplateSetPasted = () => {
-      let e = zl.get(Ji(!0));
+      let e = atomStoreManager.get(Ji(!0));
       let t = e.data?.seatTypeLicenseTypes;
       t?.includes(G_h.DESIGN) && (debugState.dispatch(_$$F.dequeue({})), debugState.dispatch(_$$F.enqueue({
         icon: zX.DESIGN_MODE,
-        message: _$$t('cooper.toolbelt.toast.switch_design_mode_edit_template'),
+        message: getI18nString('cooper.toolbelt.toast.switch_design_mode_edit_template'),
         button: {
-          text: _$$t('cooper.toolbelt.toast.switch_design_mode'),
+          text: getI18nString('cooper.toolbelt.toast.switch_design_mode'),
           action: _$$_o
         }
       })));
@@ -5575,7 +5575,7 @@ let lX = class e extends sP(sN(sR)) {
   }
   addStackOverflowListener() {
     window.addEventListener('oom_trigger', e => {
-      let t = zl.get(qm);
+      let t = atomStoreManager.get(qm);
       _$$y4.showMemoryCrashModal({
         isBranching: t
       }, this.openFileKey(), this._store);
@@ -5592,7 +5592,7 @@ let lX = class e extends sP(sN(sR)) {
     this.fontListPromise == null && (this.fontListPromise = _$$xK.timeAsync('fetchFontList', yF));
   }
   static prepareSpellCheck() {
-    _$$Ay3.isIpad || (hO(), (async () => {
+    BrowserInfo.isIpad || (hO(), (async () => {
       let e = await x5();
       fJ(e);
       e === QC.HUNSPELL && _$$jk();
@@ -5600,7 +5600,7 @@ let lX = class e extends sP(sN(sR)) {
   }
   showFragmentSearchSuggestion() {
     let e = this._store.getState().selectedView;
-    e && e.view === 'fullscreen' && e.editorType === _$$nT.Design && Ez5?.uiState().isUI3 && getFeatureFlags().fragment_search_selection_suggest && _$$iP(JT.FIND_INSPIRATION, {
+    e && e.view === 'fullscreen' && e.editorType === FEditorType.Design && Ez5?.uiState().isUI3 && getFeatureFlags().fragment_search_selection_suggest && _$$iP(JT.FIND_INSPIRATION, {
       fragmentSearchSource: G4.ACTIONS_SUGGESTION
     });
   }
@@ -5693,13 +5693,13 @@ let lX = class e extends sP(sN(sR)) {
         });
       });
       Sr(location.href, B3.FULLSCREEN_MENU).then(t => {
-        t && _$$s5.shouldShowOnce() && Promise.race([e, fm(3e3)]).then(() => {
+        t && _$$s5.shouldShowOnce() && Promise.race([e, delay(3e3)]).then(() => {
           _$$N3.disableAutoOpenIfUnset();
           this._store.dispatch(_$$aK(_$$kF.FOR_MENU));
         });
       });
     } else {
-      e === 'get-desktop-app' && (_$$Ay3.mac ? this.navigateToURL('/download/desktop/mac', jkn.NEW_TAB) : _$$Ay3.windows && this.navigateToURL('/download/desktop/win', jkn.NEW_TAB));
+      e === 'get-desktop-app' && (BrowserInfo.mac ? this.navigateToURL('/download/desktop/mac', jkn.NEW_TAB) : BrowserInfo.windows && this.navigateToURL('/download/desktop/win', jkn.NEW_TAB));
     }
   }
   deselectProperty() {
@@ -5742,7 +5742,7 @@ let lX = class e extends sP(sN(sR)) {
     return this._state.mirror.appModel.showUi;
   }
   openExportPicker() {
-    _$$sx('Export Picker Opened', {
+    trackEventAnalytics('Export Picker Opened', {
       from: 'toolbar-or-keyboard'
     });
     this.dispatch(u1({
@@ -5750,7 +5750,7 @@ let lX = class e extends sP(sN(sR)) {
     }));
   }
   openExportSettingsPicker(e, t, i) {
-    _$$sx('Export Settings Picker Opened', {
+    trackEventAnalytics('Export Settings Picker Opened', {
       from: 'toolbar-or-keyboard'
     });
     this.dispatch(_$$to({
@@ -5780,7 +5780,7 @@ let lX = class e extends sP(sN(sR)) {
   openShortcuts() {
     if (Y5.isReady()) {
       let e = this._store.getState().selectedView;
-      e && e.view === 'fullscreen' && e.editorType === _$$nT.Whiteboard && this._store.getState().screenreader.enabled && this.dispatch(FU({
+      e && e.view === 'fullscreen' && e.editorType === FEditorType.Whiteboard && this._store.getState().screenreader.enabled && this.dispatch(FU({
         tab: _$$J2.ACCESSIBILITY
       }));
       Y5.triggerAction('toggle-keyboard-shortcuts');
@@ -5791,7 +5791,7 @@ let lX = class e extends sP(sN(sR)) {
       source: 'menu'
     });
     let e = this._store.getState().selectedView;
-    if (!(e && e.view === 'fullscreen' && (e.editorType === _$$nT.Whiteboard || e.editorType === _$$nT.Slides || e.editorType === _$$nT.Cooper))) return;
+    if (!(e && e.view === 'fullscreen' && (e.editorType === FEditorType.Whiteboard || e.editorType === FEditorType.Slides || e.editorType === FEditorType.Cooper))) return;
     let t = this._store.getState().universalInsertModal;
     t.showing && t.pinned === _$$t3.NOT_PINNED ? t.pinned === _$$t3.NOT_PINNED ? (Y5.triggerAction('set-tool-default', {
       source: 'menu'
@@ -5820,7 +5820,7 @@ let lX = class e extends sP(sN(sR)) {
     this.dispatch(XE());
   }
   toggleInteractionRecorderVisibility() {
-    if (_$$nl()) {
+    if (isInteractionPathCheck()) {
       this.dispatch(_$$s.error('The interaction recorder is not supported on /test/interactions'));
       return;
     }
@@ -5829,7 +5829,7 @@ let lX = class e extends sP(sN(sR)) {
   togglePerfHUDVisibility() {
     if (!getFeatureFlags().perf_hud) return;
     let e = this._store.getState().selectedView;
-    let t = e && e.view === 'fullscreen' && e.editorType === _$$nT.Whiteboard;
+    let t = e && e.view === 'fullscreen' && e.editorType === FEditorType.Whiteboard;
     _$$v(t);
   }
   toggleFakeMPActivity() {
@@ -5852,9 +5852,9 @@ let lX = class e extends sP(sN(sR)) {
   showImageScaledDownWarning() {
     this.dispatch(_$$F.enqueue({
       type: 'image_resized',
-      message: _$$t('bindings.image_resized_message'),
+      message: getI18nString('bindings.image_resized_message'),
       button: {
-        text: _$$t('bindings.image_resized_message_learn_more'),
+        text: getI18nString('bindings.image_resized_message_learn_more'),
         action: this.onShowImageScaledDownWarningInfoClick
       }
     }));
@@ -5862,9 +5862,9 @@ let lX = class e extends sP(sN(sR)) {
   showGIFConvertedAndScaledDownWarning() {
     this.dispatch(_$$F.enqueue({
       type: 'gif_converted_resized',
-      message: _$$t('bindings.gif_resized_and_converted_to_static_image'),
+      message: getI18nString('bindings.gif_resized_and_converted_to_static_image'),
       button: {
-        text: _$$t('bindings.gif_resized_and_converted_to_static_image_learn_more'),
+        text: getI18nString('bindings.gif_resized_and_converted_to_static_image_learn_more'),
         action: this.onShowGIFConvertedAndScaledDownWarningInfoClick
       }
     }));
@@ -5875,8 +5875,8 @@ let lX = class e extends sP(sN(sR)) {
     }));
   }
   getClipboardData(e) {
-    debug(_$$eD != null, 'clipboard only available on desktop app');
-    return _$$eD.getClipboardData([e]).then(({
+    debug(desktopAPIInstance != null, 'clipboard only available on desktop app');
+    return desktopAPIInstance.getClipboardData([e]).then(({
       data: t,
       format: i
     }) => {
@@ -5887,7 +5887,7 @@ let lX = class e extends sP(sN(sR)) {
   canUseClipboardAPI() {
     let e = !!(navigator.clipboard && navigator.clipboard.read && navigator.clipboard.write);
     let t = window.FigmaMobile;
-    return (e || !!t?.readClipboardData) && !_$$nl();
+    return (e || !!t?.readClipboardData) && !isInteractionPathCheck();
   }
   async readClipboardData() {
     let e = {
@@ -6061,10 +6061,10 @@ let lX = class e extends sP(sN(sR)) {
     if (!_$$n3(n.userAnalyticsData, n.user?.email)) return;
     let r = D2 + btoa(unescape(encodeURIComponent(e))) + cu + FJ + H9(t) + gU;
     let a = 'other';
-    if (_$$Ay3.isIpadNative) {
+    if (BrowserInfo.isIpadNative) {
       a = 'ipad';
     } else {
-      if (!_$$aJ()) return;
+      if (!isNotMobile()) return;
       a = 'desktop';
     }
     let s = Date.now().toString();
@@ -6152,7 +6152,7 @@ let lX = class e extends sP(sN(sR)) {
     }));
   }
   updateViewportInfo(e, t, i, n, r, a, s, o, l) {
-    if (super.updateViewportInfo(e, t, i, n, r, a, s, o, l), _$$eD && !l && !o) {
+    if (super.updateViewportInfo(e, t, i, n, r, a, s, o, l), desktopAPIInstance && !l && !o) {
       let e = `${Math.round(i / 2 - s * r)},${Math.round(n / 2 - s * a)},${Math.round(100 * s) / 100}`;
       this._viewportQueryParamValue !== e && (this._viewportQueryParamValue = e, c3(this._store, e));
     }
@@ -6166,7 +6166,7 @@ let lX = class e extends sP(sN(sR)) {
     i?.showToast && i.showToast(e, t);
   }
   showMobileNativeToastLocalized(e, t, i) {
-    let n = YD(e, t);
+    let n = getI18nStringAlias(e, t);
     this.NOT_LOCALIZED_showMobileNativeToast(n, i);
   }
   NOT_LOCALIZED_showVisualBell(e, t, i, n) {
@@ -6188,7 +6188,7 @@ let lX = class e extends sP(sN(sR)) {
   showVisualBellLocalized(e, t, i, n) {
     let r = i?.icon;
     let a = r ? zX[r] : void 0;
-    let s = YD(t, i);
+    let s = getI18nStringAlias(t, i);
     let o = window.FigmaMobile;
     o?.showToast ? this.NOT_LOCALIZED_showMobileNativeToast(s, null) : (e === 'copy-as' && YQ({
       id: 'copy_as_completed',
@@ -6198,12 +6198,12 @@ let lX = class e extends sP(sN(sR)) {
     }), this.NOT_LOCALIZED_showVisualBell(e, s, n, a));
   }
   showVisualBellLocalizedInf(e, t, i, n) {
-    let r = YD(t, i);
+    let r = getI18nStringAlias(t, i);
     let a = window.FigmaMobile;
     a?.showToast ? this.NOT_LOCALIZED_showMobileNativeToast(r, 1 / 0) : this.NOT_LOCALIZED_showVisualBellInf(e, r, n);
   }
   showVisualBellForMultiEdit(e) {
-    let t = _$$t('visual_bell.multi_editing');
+    let t = getI18nString('visual_bell.multi_editing');
     this.dispatch(_$$F.enqueue({
       type: e,
       message: t,
@@ -6212,8 +6212,8 @@ let lX = class e extends sP(sN(sR)) {
     }));
   }
   showVisualBellForMultiEditGlueError(e) {
-    let t = _$$t('visual_bell.multi_edit_glue_error');
-    let i = _$$t('visual_bell.multi_edit_glue_error.repair_button');
+    let t = getI18nString('visual_bell.multi_edit_glue_error');
+    let i = getI18nString('visual_bell.multi_edit_glue_error.repair_button');
     this.dispatch(_$$F.enqueue({
       type: e,
       message: t,
@@ -6224,7 +6224,7 @@ let lX = class e extends sP(sN(sR)) {
     }));
   }
   showVisualBellWithUndo(e, t, i) {
-    let n = _$$t('bindings.undo');
+    let n = getI18nString('bindings.undo');
     this.dispatch(_$$F.enqueue({
       type: e,
       message: t,
@@ -6245,8 +6245,8 @@ let lX = class e extends sP(sN(sR)) {
     }));
   }
   showVisualBellWithButtonLocalized(e, t, i, n, r, a) {
-    let s = YD(t, i);
-    let o = YD(n);
+    let s = getI18nStringAlias(t, i);
+    let o = getI18nStringAlias(n);
     this.dispatch(_$$F.enqueue({
       type: e,
       message: s,
@@ -6258,7 +6258,7 @@ let lX = class e extends sP(sN(sR)) {
     }));
   }
   showVisualBellWithCloseButtonLocalized(e, t, i, n, r, a, s) {
-    let o = YD(t, i);
+    let o = getI18nStringAlias(t, i);
     _$$j2(e, n, {
       message: o
     }, r, a, s);
@@ -6282,7 +6282,7 @@ let lX = class e extends sP(sN(sR)) {
       let i = 'autosaveVisualBellLastTime';
       if (navigator.onLine) {
         if (this.hasUnsavedChanges()) {
-          e = _$$t('autosave.visual_bell.unsaved_changes');
+          e = getI18nString('autosave.visual_bell.unsaved_changes');
         } else {
           if (localStorageRef) {
             let e = Date.now();
@@ -6290,10 +6290,10 @@ let lX = class e extends sP(sN(sR)) {
             if (localStorageRef.setItem(i, e.toString()), t && parseInt(t) >= e - 12096e5) return;
           }
           let n = Math.round(Math.random() * (t.length - 1));
-          e = `${t[n]} \xA0 ${_$$t('autosave.you_dont_need_to_save_reminder')}`;
+          e = `${t[n]} \xA0 ${getI18nString('autosave.you_dont_need_to_save_reminder')}`;
         }
       } else {
-        e = _$$t('autosave.visual_bell.offline');
+        e = getI18nString('autosave.visual_bell.offline');
       }
       this.dispatch(_$$F.enqueue({
         type: 'save',
@@ -6332,7 +6332,7 @@ let lX = class e extends sP(sN(sR)) {
       numExampleRows: 1,
       source: t
     });
-    let o = zl.get(dd);
+    let o = atomStoreManager.get(dd);
     a.quickActionsSessionId = o;
     ds('ai_text_gen_toast_available', this._state.openFile?.key, this._state, {
       nodeId: r,
@@ -6352,7 +6352,7 @@ let lX = class e extends sP(sN(sR)) {
     if (!t) return;
     this.dismissEphemeralVisualBells();
     let i = getSingletonSceneGraph();
-    if ((Ez5?.propertiesPanelState()?.propertiesPanelTab?.getCopy() ?? FAf.DESIGN) !== FAf.PROTOTYPE || zl.get(_$$xP) && zl.get(d_)) return;
+    if ((Ez5?.propertiesPanelState()?.propertiesPanelTab?.getCopy() ?? FAf.DESIGN) !== FAf.PROTOTYPE || atomStoreManager.get(_$$xP) && atomStoreManager.get(d_)) return;
     let n = t?.directlySelectedNodes || [];
     let r = n.map(e => e.guid);
     if (n.length === 1) {
@@ -6385,7 +6385,7 @@ let lX = class e extends sP(sN(sR)) {
   }
   showPasteWidgetsAsSublayersVisualBell(e, t) {
     let i = t ? {
-      text: _$$t('bindings.paste_as_layers'),
+      text: getI18nString('bindings.paste_as_layers'),
       action: e => {
         this.triggerActionInUserEditScope('paste-widgets-as-sublayers');
         this.dispatch(_$$F.dequeue({
@@ -6396,19 +6396,19 @@ let lX = class e extends sP(sN(sR)) {
     let n = function (e) {
       switch (e) {
         case KAf.EMBED:
-          return _$$t('bindings.embed_paste_notice');
+          return getI18nString('bindings.embed_paste_notice');
         case KAf.LINK_PREVIEW:
-          return _$$t('bindings.link_preview_paste_notice');
+          return getI18nString('bindings.link_preview_paste_notice');
         case KAf.WIDGET:
           {
             let e = debugState.getState()?.selectedView;
             switch (e?.editorType) {
-              case _$$nT.Slides:
-                return _$$t('bindings.widget_paste_notice_slides');
-              case _$$nT.Cooper:
-                return _$$t('bindings.widget_paste_notice_buzz');
+              case FEditorType.Slides:
+                return getI18nString('bindings.widget_paste_notice_slides');
+              case FEditorType.Cooper:
+                return getI18nString('bindings.widget_paste_notice_buzz');
               default:
-                return _$$t('bindings.widget_paste_notice');
+                return getI18nString('bindings.widget_paste_notice');
             }
           }
       }
@@ -6427,7 +6427,7 @@ let lX = class e extends sP(sN(sR)) {
     }));
   }
   showVisualBellWithDelayLocalized(e, t, i, n, r) {
-    let a = YD(t, i);
+    let a = getI18nStringAlias(t, i);
     this.dispatch(_$$F.enqueue({
       type: e,
       message: a,
@@ -6462,13 +6462,13 @@ let lX = class e extends sP(sN(sR)) {
     });
   }
   getUserLocale() {
-    return Gq()?.getPrimaryLocale(!0) || '';
+    return getI18nState()?.getPrimaryLocale(!0) || '';
   }
   getNaturalStyleKey(e) {
     return this._state.library.used__LIVEGRAPH.unnaturalKeyToNaturalKey[_$$n(e)] ?? '';
   }
   getLocalizedString(e, t) {
-    return YD(e, t);
+    return getI18nStringAlias(e, t);
   }
   setTimer(e, t, i, n, r, a, s, o) {
     let {
@@ -6556,7 +6556,7 @@ let lX = class e extends sP(sN(sR)) {
   showPushOverridesVisualBell() {
     this.dispatch(_$$F.enqueue({
       type: 'push_overrides',
-      message: _$$t('design_systems.component_panel.changes_pushed_to_main_component')
+      message: getI18nString('design_systems.component_panel.changes_pushed_to_main_component')
     }));
   }
   showPasteLoadingIndicatorAndPaste() {
@@ -6595,7 +6595,7 @@ let lX = class e extends sP(sN(sR)) {
       this.dispatch(_$$Q.enqueueFront({
         notification: {
           type: _$$_.MOVE_COMPONENTS_PROMPT,
-          message: s ? _$$t('design_systems.updates.to_move_pasted_styles_to_this_file_publish_a_library_update') : _$$t('design_systems.updates.to_move_pasted_components_to_this_file_publish_a_library_update'),
+          message: s ? getI18nString('design_systems.updates.to_move_pasted_styles_to_this_file_publish_a_library_update') : getI18nString('design_systems.updates.to_move_pasted_components_to_this_file_publish_a_library_update'),
           acceptCallback: () => {
             this.dispatch(_$$to({
               type: dD,
@@ -6636,7 +6636,7 @@ let lX = class e extends sP(sN(sR)) {
     this.dispatch(FP({
       tab: xae.LAYERS
     }));
-    zl.set(_$$l3, e);
+    atomStoreManager.set(_$$l3, e);
   }
   startRenamingPages(e) {
     this.dispatch(FP({
@@ -6739,7 +6739,7 @@ let lX = class e extends sP(sN(sR)) {
             domain: u,
             path: o
           });
-          d = _$$t('sites.fullscreen_actions.external_url_copied');
+          d = getI18nString('sites.fullscreen_actions.external_url_copied');
           break;
         case idw.FIGMA:
           let p = _$$$A(this._state.selectedView);
@@ -6752,7 +6752,7 @@ let lX = class e extends sP(sN(sR)) {
             isDevModeOverview: m,
             devModeFocusId: h
           });
-          d = m ? _$$t('desktop_bindings.visual_bell.summary_link_copied') : a?.type === 'FRAME' ? _$$t('desktop_bindings.interstitial.frame_link_copied') : a?.type === 'SECTION' ? _$$t('desktop_bindings.interstitial.section_link_copied') : r.appModel.pagesList.length > 1 ? _$$t('desktop_bindings.interstitial.page_link_copied') : _$$P(this._state.selectedView) ? _$$t('desktop_bindings.visual_bell.slide_deck_link_copied') : _$$t('desktop_bindings.visual_bell.file_link_copied');
+          d = m ? getI18nString('desktop_bindings.visual_bell.summary_link_copied') : a?.type === 'FRAME' ? getI18nString('desktop_bindings.interstitial.frame_link_copied') : a?.type === 'SECTION' ? getI18nString('desktop_bindings.interstitial.section_link_copied') : r.appModel.pagesList.length > 1 ? getI18nString('desktop_bindings.interstitial.page_link_copied') : _$$P(this._state.selectedView) ? getI18nString('desktop_bindings.visual_bell.slide_deck_link_copied') : getI18nString('desktop_bindings.visual_bell.file_link_copied');
           break;
         default:
           throwTypeError(t);
@@ -6823,7 +6823,7 @@ let lX = class e extends sP(sN(sR)) {
     this._documentIsLoaded();
   }
   async _documentIsLoaded() {
-    if (_$$xK.documentIsLoaded(), _$$eD?.addTabAnalyticsMetadata({
+    if (_$$xK.documentIsLoaded(), desktopAPIInstance?.addTabAnalyticsMetadata({
       fileLoadTime: this._fileLoadTime
     }), window.figmaPerfTesting && window.postMessage({
       name: 'DOCUMENT_IS_LOADED',
@@ -6831,7 +6831,7 @@ let lX = class e extends sP(sN(sR)) {
     }, '*'), window.DebuggingHelpers && (window.DebuggingHelpers.documentIsLoaded = !0), mpGlobal.shouldConnectToMultiplayer) {
       let e = ZG();
       let t = h3O?.currentSessionID() ?? -1;
-      e && !isLocalFileKey(e.fileKey) ? (t < 0 && x1('Autosave', 'Trying to initialize autosave without a session ID', {
+      e && !isLocalFileKey(e.fileKey) ? (t < 0 && logError('Autosave', 'Trying to initialize autosave without a session ID', {
         reportErrorToSentry: !0
       }), await e.onConnect(t), await _$$xK.timeAsync('restoreAutosave', async () => {
         try {
@@ -6846,7 +6846,7 @@ let lX = class e extends sP(sN(sR)) {
         let i = ZG();
         if (i && !i.session()) {
           let e = h3O?.currentSessionID() ?? -1;
-          e < 0 && x1('Autosave', 'Trying to initialize autosave without a session ID', {}, {
+          e < 0 && logError('Autosave', 'Trying to initialize autosave without a session ID', {}, {
             reportAsSentryError: !0
           });
           await i.onConnect(e);
@@ -6871,7 +6871,7 @@ let lX = class e extends sP(sN(sR)) {
   static async maybeEnterRecoveryMode(e) {
     let t = await Dz(e);
     let i = e.getState().selectedView;
-    t?.canEdit ? t && i.isRecoveryMode && (Ez5?.uiState().isRecovery.set(!0), _$$sx('enter_recovery_mode', {
+    t?.canEdit ? t && i.isRecoveryMode && (Ez5?.uiState().isRecovery.set(!0), trackEventAnalytics('enter_recovery_mode', {
       currentAllocatedBytes: hMR?.getTotalUsedHeapMemory(),
       maxAllocatedBytes: hMR?.getMaxUsedHeapMemory(),
       fileKey: i.fileKey
@@ -6924,7 +6924,7 @@ let lX = class e extends sP(sN(sR)) {
         let e = Ubo.reportError;
         let t = Ubo.simulateNullNodeAccess;
         getFeatureFlags().internal_only_debug_tools && (window.DebuggingHelpers.webReport = e => {
-          _$$u(() => x1('bindings', `DebuggingHelpers report: ${e}`));
+          _$$u(() => logError('bindings', `DebuggingHelpers report: ${e}`));
         }, window.DebuggingHelpers.cppReport = t => {
           _$$u(() => e(t));
         }, window.DebuggingHelpers.fakeNodeError = () => {
@@ -6943,13 +6943,13 @@ let lX = class e extends sP(sN(sR)) {
       window.DebuggingHelpers.importLocalAutosaveFile = e => to(e);
       window.DebuggingHelpers.exportLocalAutosaveFile = async (e, t) => await ts(e, t);
       window.DebuggingHelpers.exportOfflineLog = () => {
-        let e = this.openFileKey() ?? zl.get(_$$h);
+        let e = this.openFileKey() ?? atomStoreManager.get(_$$h);
         let t = this.getUserId();
         if (!t) throw new Error('Please login and try again');
         if (!e) throw new Error('You must have the file open');
         ti(t, e, `offline-log-${e}.json`);
       };
-      window.figmaPerfTesting && (window.FigmaAppTimer = _$$rH, window.FigmaPerfInfo = P2e, window.triggerActionForPerfTests = e => {
+      window.figmaPerfTesting && (window.FigmaAppTimer = reactTimerGroup, window.FigmaPerfInfo = P2e, window.triggerActionForPerfTests = e => {
         switch (e) {
           case 'insert-lots-of-text':
           case 'zoom-in':
@@ -6985,12 +6985,12 @@ let lX = class e extends sP(sN(sR)) {
           i && (e.figmacMessageHandlers = !0);
           i && i.readBlob && (e.figmacReadBlob = !0);
         })(e);
-        _$$sx('Third Party Apps', e);
+        trackEventAnalytics('Third Party Apps', e);
       });
       try {
         _I(_$$XT(), this.dispatch);
       } catch (e) {
-        $D(_$$e.RENDERING_AND_ANIMATION, new Error(`Error checking hardware acceleration: ${e}`));
+        reportError(_$$e.RENDERING_AND_ANIMATION, new Error(`Error checking hardware acceleration: ${e}`));
       }
       IJ(pi());
       fs();
@@ -7015,7 +7015,7 @@ let lX = class e extends sP(sN(sR)) {
     e.fontListPromise.then(e => {
       _$$xK.time('updateFontListHost', () => {
         let t = i(this._store.dispatch, e);
-        _$$sx('fetched font list', {
+        trackEventAnalytics('fetched font list', {
           index_font_count: e.indexFontsList?.length,
           index_fonts_timing_xhr: t?.indexFonts?.xhr,
           index_fonts_timing_kiwi_decode: t?.indexFonts?.kiwiDecode,
@@ -7030,13 +7030,13 @@ let lX = class e extends sP(sN(sR)) {
       this._fontListLoaded = !0;
       getFeatureFlags().desktop_font_reload_on_focus && (_$$b2() || PE(Date.now() / 1e3), window.addEventListener('focus', () => {
         let e = this._store.getState().selectedView;
-        e.view === 'fullscreen' && yY(e.editorType) && M9(() => yF([jXp.LOCAL]), e => {
+        e.view === 'fullscreen' && isDesignOrIllustration(e.editorType) && M9(() => yF([jXp.LOCAL]), e => {
           getFeatureFlags().desktop_font_reload_on_focus_ux && t8O?.resetNeedsMissingFontsCheck();
           i(this._store.dispatch, e);
         }, e => this.dispatch(_$$F.enqueue(e)));
       }));
     }).catch(e => {
-      e.message === 'fetchFontList(): no results' && getFeatureFlags().ce_font_network_status_ui && MZ(this._store.dispatch, _$$t('check_network_compatibility.error_bell.fetch_font_list.message'));
+      e.message === 'fetchFontList(): no results' && getFeatureFlags().ce_font_network_status_ui && MZ(this._store.dispatch, getI18nString('check_network_compatibility.error_bell.fetch_font_list.message'));
     });
     e.interfaceFontPromise != null && e.interfaceFontPromise.then(() => {
       glU?.interfaceFontLoaded();
@@ -7062,7 +7062,7 @@ let lX = class e extends sP(sN(sR)) {
   handleSignedOutEditAttempt(e, t) {
     if (!e && this.isInWorkshopMode()) return;
     let i = this._store.getState().selectedView;
-    if (i.view !== 'fullscreen' || i.editorType === _$$nT.Design && !this.session.user) return;
+    if (i.view !== 'fullscreen' || i.editorType === FEditorType.Design && !this.session.user) return;
     let n = parseQuery(_$$Ay2.location.search);
     this.dispatch(Ts({
       origin: 'signed_out_edit',
@@ -7072,7 +7072,7 @@ let lX = class e extends sP(sN(sR)) {
     this.dispatch(_$$to({
       type: _$$x,
       data: {
-        headerText: this.isInWorkshopMode() ? _$$t('bindings.create_a_figjam_account') : void 0,
+        headerText: this.isInWorkshopMode() ? getI18nString('bindings.create_a_figjam_account') : void 0,
         actionOrTool: t
       }
     }));
@@ -7086,20 +7086,20 @@ let lX = class e extends sP(sN(sR)) {
     }));
   }
   _jsEditorType(e) {
-    return fB(e);
+    return mapYFToEditorType(e);
   }
   requestEditorType(e) {
     let t = this._store.getState().selectedView;
     if (t.view !== 'fullscreen') return;
     let i = _$$Ay(t, t => {
-      t.editorType === _$$nT.DevHandoff && delete t.devModeFocusId;
+      t.editorType === FEditorType.DevHandoff && delete t.devModeFocusId;
       t.editorType = this._jsEditorType(e);
     });
     i !== t && this.dispatch(_$$sf(i));
   }
   logEnterMode(e, t) {
     let i = this._jsEditorType(e);
-    (i === _$$nT.Design || i === _$$nT.Illustration || i === _$$nT.DevHandoff) && Ym(this._store.getState(), i, t);
+    (i === FEditorType.Design || i === FEditorType.Illustration || i === FEditorType.DevHandoff) && Ym(this._store.getState(), i, t);
   }
   getDeviceInfoForSize(e, t) {
     return BG(e, t);
@@ -7123,16 +7123,16 @@ let lX = class e extends sP(sN(sR)) {
     return A9();
   }
   desktopAppQueueFileForWriting(e, t) {
-    _$$eD && this._writeFilesQueue.push({
+    desktopAPIInstance && this._writeFilesQueue.push({
       name: e,
       buffer: t
     });
   }
   desktopAppWriteFiles() {
-    _$$eD && this._writeFilesQueue.length !== 0 && (_$$eD.writeFiles(this._writeFilesQueue), this._writeFilesQueue = []);
+    desktopAPIInstance && this._writeFilesQueue.length !== 0 && (desktopAPIInstance.writeFiles(this._writeFilesQueue), this._writeFilesQueue = []);
   }
   enableCodegenMcpServer(e) {
-    getFeatureFlags().dt_my_cool_plugin && (zl.get(Kx) !== 'xml' || getFeatureFlags().dt_my_cool_plugin_xml || zl.set(Kx, 'design_to_react'), zl.get(Kx) !== 'jsx' || getFeatureFlags().dt_my_cool_plugin_internal || zl.set(Kx, 'design_to_react'), _$$eD?.setEnableMCP(e, pM, () => this.dispatch(_$$b({
+    getFeatureFlags().dt_my_cool_plugin && (atomStoreManager.get(Kx) !== 'xml' || getFeatureFlags().dt_my_cool_plugin_xml || atomStoreManager.set(Kx, 'design_to_react'), atomStoreManager.get(Kx) !== 'jsx' || getFeatureFlags().dt_my_cool_plugin_internal || atomStoreManager.set(Kx, 'design_to_react'), desktopAPIInstance?.setEnableMCP(e, pM, () => this.dispatch(_$$b({
       dev_mode_has_enabled_mcp_server: !0
     }))).then(t => {
       if (!t) return;
@@ -7149,35 +7149,35 @@ let lX = class e extends sP(sN(sR)) {
         if (didStart) {
           this.dispatch(_$$F.enqueue({
             type: 'codegen-my-cool-plugin-server',
-            message: _$$t('mcp.dev_mode_server_enabled', {
-              url: `http://127.0.0.1:${port}/${_$$eD?.hasFeature('addMcpStreamableHttpSupport') ? 'mcp' : 'sse'}`
+            message: getI18nString('mcp.dev_mode_server_enabled', {
+              url: `http://127.0.0.1:${port}/${desktopAPIInstance?.hasFeature('addMcpStreamableHttpSupport') ? 'mcp' : 'sse'}`
             })
           }));
         } else {
-          throw new Error(_$$t('my_cool_plugin.codegen_server_failed_to_start'));
+          throw new Error(getI18nString('my_cool_plugin.codegen_server_failed_to_start'));
         }
       } else {
         this.dispatch(_$$F.enqueue({
           type: 'codegen-my-cool-plugin-server',
-          message: _$$t('my_cool_plugin.codegen_server_stopped')
+          message: getI18nString('my_cool_plugin.codegen_server_stopped')
         }));
       }
     }).catch(e => {
       let t = e.message.includes('EADDRINUSE');
-      t || $D(_$$e.DEVELOPER_TOOLS, e);
-      console.error(_$$t('my_cool_plugin.codegen_server_failed_to_start'), e);
+      t || reportError(_$$e.DEVELOPER_TOOLS, e);
+      console.error(getI18nString('my_cool_plugin.codegen_server_failed_to_start'), e);
       this.dispatch(_$$F.enqueue({
         type: 'codegen-my-cool-plugin-server',
-        message: t ? _$$t('my_cool_plugin.codegen_server_failed_to_start_port_in_use', {
+        message: t ? getI18nString('my_cool_plugin.codegen_server_failed_to_start_port_in_use', {
           port: pM
-        }) : _$$t('my_cool_plugin.codegen_server_failed_to_start'),
+        }) : getI18nString('my_cool_plugin.codegen_server_failed_to_start'),
         error: !0
       }));
       UK().enableCodegenMcpServer.set(!1);
     }));
   }
   sendMCPUpdate(e, t) {
-    _$$eD?.sendMCPUpdate(e, t);
+    desktopAPIInstance?.sendMCPUpdate(e, t);
   }
   mobileAppExportFile(e, t, i) {
     let n = this.mimeTypeToExportedFileType(t);
@@ -7205,17 +7205,17 @@ let lX = class e extends sP(sN(sR)) {
     return e === 'application/pdf' ? _$$g4.PDF : e === 'image/jpeg' ? _$$g4.JPEG : e === 'image/png' ? _$$g4.PNG : void debug(!1, 'Unexpected MIME type when exporting FigJam selection');
   }
   startMovePagesJob(e, t, i, n) {
-    ED('startMovePagesJob', 'Send request to start move pages job.');
+    logDebug('startMovePagesJob', 'Send request to start move pages job.');
     XHR.post(`/api/files/${e}/move_pages`, {
       folder_id: t,
       page_ids: i,
       file_name: n
     }).catch(e => {
-      x1('startMovePagesJob', 'Error with starting move pages job.', {
+      logError('startMovePagesJob', 'Error with starting move pages job.', {
         err: e
       });
     }).then(() => {
-      ED('startMovePagesJob', 'Move pages job successfully started.');
+      logDebug('startMovePagesJob', 'Move pages job successfully started.');
     });
   }
   retrieveMetadataAndSelectBrokenFixedScrollingNodes() {
@@ -7329,7 +7329,7 @@ let lX = class e extends sP(sN(sR)) {
   showLeftPanelTab(e) {
     let t = this._store.getState().selectedView;
     if (t.view === 'fullscreen') {
-      if (t.editorType === _$$nT.Design || t.editorType === _$$nT.Illustration) {
+      if (t.editorType === FEditorType.Design || t.editorType === FEditorType.Illustration) {
         let t = e === xae.ASSETS;
         this.dispatch(FP({
           tab: e,
@@ -7352,7 +7352,7 @@ let lX = class e extends sP(sN(sR)) {
   }
   toggleTeamLibraryModal() {
     let e = this._store.getState().selectedView;
-    if (e.view === 'fullscreen' && e.editorType === _$$nT.Whiteboard) {
+    if (e.view === 'fullscreen' && e.editorType === FEditorType.Whiteboard) {
       this._store.getState().modalShown?.type === _N ? this.dispatch(Ce()) : this.dispatch(_$$to({
         type: Vg
       }));
@@ -7382,7 +7382,7 @@ let lX = class e extends sP(sN(sR)) {
   }
   toggleComponentInsertModal() {
     let e = this._store.getState();
-    if (e.selectedView.view === 'fullscreen' && e.selectedView.editorType === _$$nT.Design) {
+    if (e.selectedView.view === 'fullscreen' && e.selectedView.editorType === FEditorType.Design) {
       let {
         x,
         y
@@ -7393,7 +7393,7 @@ let lX = class e extends sP(sN(sR)) {
         initialX: x,
         initialY: y,
         pinned: _$$t3.NOT_PINNED
-      }))) : (this.dispatch(KE()), glU?.triggerAction('set-tool-default', null)) : (_$$sx('Inserts menu opened'), Y5.triggerAction('clear-tool', {
+      }))) : (this.dispatch(KE()), glU?.triggerAction('set-tool-default', null)) : (trackEventAnalytics('Inserts menu opened'), Y5.triggerAction('clear-tool', {
         source: 'menu'
       }), this.dispatch(En({
         initialX: x,
@@ -7441,7 +7441,7 @@ let lX = class e extends sP(sN(sR)) {
         timeNow: performance.now()
       }), this.missingFontPopoverReported = !0);
     }
-    Array.isArray(e) || $D(_$$e.TEXT_AND_VECTOR, new Error('Attempting to show missing fonts dialog when missingFonts is not an array'));
+    Array.isArray(e) || reportError(_$$e.TEXT_AND_VECTOR, new Error('Attempting to show missing fonts dialog when missingFonts is not an array'));
     let a = n === vhv.CURRENT_SELECTION;
     if (!i || this._state.modalShown?.type === CM.type) {
       let i = this._store.getState();
@@ -7494,7 +7494,7 @@ let lX = class e extends sP(sN(sR)) {
         });
       } catch {
         this.dispatch(_$$F.enqueue({
-          message: _$$t('templates.publishing.bell.no_publish_access'),
+          message: getI18nString('templates.publishing.bell.no_publish_access'),
           type: 'template-publish-error',
           error: !0
         }));
@@ -7578,7 +7578,7 @@ let lX = class e extends sP(sN(sR)) {
           });
         } catch (e) {
           this.dispatch(_$$F.enqueue({
-            message: _$$t('bindings.no_file_access'),
+            message: getI18nString('bindings.no_file_access'),
             type: 'NAVIGATE_FILE_FAILED',
             error: !0
           }));
@@ -7606,22 +7606,22 @@ let lX = class e extends sP(sN(sR)) {
         if (t) {
           let i = t;
           for (; i && i.type !== 'CANVAS';) i = i.parentNode;
-          xO(_$$e.FIGJAM, e.appModel);
+          reportNullOrUndefined(_$$e.FIGJAM, e.appModel);
           o = i && i.guid !== e.appModel.currentPage && t.type !== 'CANVAS' ? {
             type: _$$F3.FRAME,
-            text: this.trimName(i.name, _$$t('hyperlink.page')),
-            secondaryText: this.trimName(t.name, _$$t('hyperlink.frame'))
+            text: this.trimName(i.name, getI18nString('hyperlink.page')),
+            secondaryText: this.trimName(t.name, getI18nString('hyperlink.frame'))
           } : {
             type: t.type === 'CANVAS' ? _$$F3.PAGE : _$$F3.FRAME,
-            text: this.trimName(t.name, t.type === 'CANVAS' ? _$$t('hyperlink.page') : _$$t('hyperlink.frame'))
+            text: this.trimName(t.name, t.type === 'CANVAS' ? getI18nString('hyperlink.page') : getI18nString('hyperlink.frame'))
           };
         } else {
           _$$lH2(e.appModel.pagesList) ? (o = {
             type: _$$F3.NOT_LOADED,
-            text: _$$t('bindings.hyperlink_popup_link_to_unloaded_from_in_this_file')
+            text: getI18nString('bindings.hyperlink_popup_link_to_unloaded_from_in_this_file')
           }, IL(nodeIdInThisFile, dPJ.HYPERLINK_PRELOAD)) : o = {
             type: _$$F3.MISSING,
-            text: _$$t('bindings.hyperlink_popup_link_to_deleted_object')
+            text: getI18nString('bindings.hyperlink_popup_link_to_deleted_object')
           };
         }
       } else if (url) {
@@ -7770,7 +7770,7 @@ let lX = class e extends sP(sN(sR)) {
   getUserName() {
     if (!this._state.user) {
       let e = this._state.multiplayer.allUsers.find(e => this._state.multiplayer.sessionID === e.sessionID);
-      return _$$Ay3.isMeetDevice ? _$$t('figjam_try.google_meet_user_name') : e?.name || 'FigJam Human';
+      return BrowserInfo.isMeetDevice ? getI18nString('figjam_try.google_meet_user_name') : e?.name || 'FigJam Human';
     }
     return this._state.user?.name || 'FigJam Human';
   }
@@ -7892,7 +7892,7 @@ let lX = class e extends sP(sN(sR)) {
   }
   _validateParsedCsvDataAndCreateTable(e, t) {
     return e.meta && e.meta.aborted ? (this._maybeShowCSVError(t, 'whiteboard.csv.parse_failed'), !1) : e.data.length === 0 ? (this._maybeShowCSVError(t, 'whiteboard.csv.file_empty'), !1) : (this.dispatch(_$$n2.set({
-      message: _$$t('whiteboard.csv.importing_csv'),
+      message: getI18nString('whiteboard.csv.importing_csv'),
       showLoadingSpinner: !1,
       callback: () => {
         l7.user('whiteboard.import-csv', () => {
@@ -7994,7 +7994,7 @@ let lX = class e extends sP(sN(sR)) {
           closeOnEscape: !0
         }),
         beforeModuleOpen: () => {
-          zl.set(_$$Lk, Jc.ASSETS);
+          atomStoreManager.set(_$$Lk, Jc.ASSETS);
         },
         name: Sn.ASSETS_TAB_DETAIL_VIEW
       },
@@ -8060,7 +8060,7 @@ let lX = class e extends sP(sN(sR)) {
     });
     if (a == null) {
       this.dispatch(_$$F.enqueue({
-        message: _$$t('bindings.no_file_access'),
+        message: getI18nString('bindings.no_file_access'),
         type: 'NAVIGATE_FILE_FAILED',
         error: !0
       }));
@@ -8073,7 +8073,7 @@ let lX = class e extends sP(sN(sR)) {
   }
   changeDocumentColorProfile(e, t) {
     let i = this._store.getState().selectedView;
-    (i && i.view === 'fullscreen' && yY(i.editorType) || this._state.openFile?.canEdit) && e !== t && (e === ywP.LEGACY ? r6(this.dispatch, e, t, 'assign', this._state.openFile?.key) : this.dispatch(_$$to({
+    (i && i.view === 'fullscreen' && isDesignOrIllustration(i.editorType) || this._state.openFile?.canEdit) && e !== t && (e === ywP.LEGACY ? r6(this.dispatch, e, t, 'assign', this._state.openFile?.key) : this.dispatch(_$$to({
       type: r7,
       data: {
         newDocumentColorProfile: t
@@ -8143,13 +8143,13 @@ let lX = class e extends sP(sN(sR)) {
   movedSingleNodeVisualBell(e, t, i) {
     this.dispatch(_$$F.enqueue({
       type: 'moved-single-node',
-      message: _$$t('visual_bell.moved_single_node', {
+      message: getI18nString('visual_bell.moved_single_node', {
         nodeName: EJ(t, 30),
         newPage: i
       }),
       ...(getFeatureFlags().ce_move_to_navigate ? {
         button: {
-          text: _$$t('visual_bell.go_there'),
+          text: getI18nString('visual_bell.go_there'),
           Initialize() {
             let e = _$$Z2();
             return t => {
@@ -8323,25 +8323,25 @@ let lX = class e extends sP(sN(sR)) {
     });
   }
   setSitesViewFile() {
-    _$$oz() && (zl.set(_$$s9, Nfd.FILE), this.closeLeftRailOverlay());
+    _$$oz() && (atomStoreManager.set(_$$s9, Nfd.FILE), this.closeLeftRailOverlay());
   }
   setSitesViewCode() {
-    _$$oz() && (zl.set(_$$s9, Nfd.CODE), this.closeLeftRailOverlay());
+    _$$oz() && (atomStoreManager.set(_$$s9, Nfd.CODE), this.closeLeftRailOverlay());
   }
   setSitesViewCms() {
-    _$$oz() && (zl.set(_$$s9, Nfd.DAKOTA), this.closeLeftRailOverlay());
+    _$$oz() && (atomStoreManager.set(_$$s9, Nfd.DAKOTA), this.closeLeftRailOverlay());
   }
   closeLeftRailOverlay() {
-    zl.set(Nl, void 0);
+    atomStoreManager.set(Nl, void 0);
   }
   setSitesInsertsOverlay() {
-    _$$oz() && zl.set(Nl, $e.INSERT);
+    _$$oz() && atomStoreManager.set(Nl, $e.INSERT);
   }
   setSitesFindOverlay() {
-    _$$oz() && zl.set(Nl, $e.FIND);
+    _$$oz() && atomStoreManager.set(Nl, $e.FIND);
   }
   setAnnotationEditingIndex(e) {
-    zl.set(_$$m2, e);
+    atomStoreManager.set(_$$m2, e);
   }
   showSlotPreferredContentPicker(e, t, i) {
     let n;

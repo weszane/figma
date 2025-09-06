@@ -2,7 +2,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { Vzr, zkO } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { getSceneGraphInstance } from "../905/830071";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { j } from "../905/813868";
 export function $$d0(e, t, i) {
   let [n, a] = Vzr.generateThumbnailForNode(e, 4 * t, 4 * i, 4, {});
@@ -27,13 +27,13 @@ export async function $$u1(e) {
   return widgetNodeID && widgetRunPromise ? (await widgetRunPromise, l7(zkO.SYSTEM, "generateWidgetThumbnail", () => {
     let e = getSceneGraphInstance().get(widgetNodeID);
     if (!e) {
-      $D(_$$e.EXTENSIBILITY, Error("Failed to get the node from widget node when attempting to generate widget thumbnail"));
+      reportError(_$$e.EXTENSIBILITY, Error("Failed to get the node from widget node when attempting to generate widget thumbnail"));
       return null;
     }
     let i = $$c2(e);
     e.removeWidgetWithoutSafetyChecks();
     return i;
-  })) : ($D(_$$e.EXTENSIBILITY, Error("Failed to insert the widget on the internal page when attempting to generate widget thumbnail")), null);
+  })) : (reportError(_$$e.EXTENSIBILITY, Error("Failed to insert the widget on the internal page when attempting to generate widget thumbnail")), null);
 }
 export const _e = $$d0;
 export const gI = $$u1;

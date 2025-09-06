@@ -10,7 +10,7 @@ import s from "classnames";
 import { colorToHex } from "../905/436288";
 import { A as _$$A } from "../vendor/90566";
 import { k as _$$k2 } from "../905/651849";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { N as _$$N } from "../905/551536";
 import { s as _$$s } from "../cssbuilder/589278";
 import { Dm } from "../figma_app/8833";
@@ -19,7 +19,7 @@ import { E3 } from "../figma_app/976749";
 import { x as _$$x } from "../905/239551";
 import { Vi, kZ } from "../figma_app/364284";
 import { Um } from "../905/848862";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { Ib } from "../905/129884";
 import { l6, c$ } from "../905/794875";
 import { qW } from "../figma_app/932285";
@@ -32,7 +32,7 @@ let A = UJ(e => e.includes("xmlns") ? "data:image/svg+xml;utf8," + encodeURIComp
 function M(e) {
   let t = E3();
   let n = e.icon ? A(e.icon) : null;
-  let i = void 0 !== t && t === nT.Design;
+  let i = void 0 !== t && t === FEditorType.Design;
   return n ? jsx(P, {
     label: e.label,
     propertyName: e.propertyName,
@@ -124,7 +124,7 @@ function S({
       "data-testid": "emptyColorSelector"
     });
   }
-  let x = n === nT.Design;
+  let x = n === FEditorType.Design;
   return jsx(qW, {
     buttonSize: x ? "xsmall" : "small",
     inlineButtonTooltip: t.tooltip,
@@ -171,7 +171,7 @@ function R({
   let r = Um();
   let a = e.options.find(t => t.option === e.selectedOption);
   let c = generateRecordingKey("widgetControl", e.propertyName);
-  let p = void 0 !== n && n === nT.Design;
+  let p = void 0 !== n && n === FEditorType.Design;
   return jsx("div", {
     className: p ? void 0 : kL,
     "data-tooltip-show-above": !0,
@@ -245,7 +245,7 @@ function W({
 }
 export function $$$0() {
   let e = function () {
-    let e = _$$R(e => e.mirror.selectionProperties.selectedWidgetInfo);
+    let e = selectWithShallowEqual(e => e.mirror.selectionProperties.selectedWidgetInfo);
     return useMemo(() => {
       if (!e) return e;
       let {

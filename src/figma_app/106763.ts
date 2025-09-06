@@ -2,7 +2,7 @@ import { useRef, useEffect } from "react";
 import { useStore } from "../vendor/514228";
 import { Egt, lyf } from "../figma_app/763686";
 import { Ql } from "../figma_app/387100";
-import { R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { _I } from "../figma_app/473493";
 import { hA } from "../figma_app/88239";
 import { ds } from "../figma_app/314264";
@@ -22,7 +22,7 @@ export function $$h1(e) {
     topLevelNodeType,
     urlNodeId,
     fileKey
-  } = R(e => {
+  } = selectWithShallowEqual(e => {
     let r = Object.keys(e.mirror.sceneGraphSelection);
     let n = $A(e.selectedView) ? Ql(e.mirror.sceneGraph, r?.[0] ?? "") : null;
     return {

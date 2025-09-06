@@ -5,7 +5,7 @@ import { N as _$$N } from "../905/438674";
 import { getFeatureFlags } from "../905/601108";
 import { getStorage } from "../905/657224";
 import d from "classnames";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { w as _$$w } from "../905/835474";
 import { G5 } from "../figma_app/795674";
 import { JD, h1 } from "../905/986103";
@@ -13,7 +13,7 @@ import { x as _$$x } from "../905/211326";
 import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
 import { Ph } from "../905/160095";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { b as _$$b } from "../905/217163";
 import { jg, Tb, PW } from "../figma_app/633080";
 import { e0 } from "../905/696396";
@@ -62,15 +62,15 @@ function B({
     };
   }, [a.data, s.data, o]);
   let d = useMemo(() => l ? [{
-    header: _$$t("design_systems.dsa.files"),
+    header: getI18nString("design_systems.dsa.files"),
     count: l.files,
     className: "stats_for_missing_files_view--filesColumn--9W0Wa stats_for_missing_files_view--_baseColumn--b7nv9 library_item_view--oneComponentViewFileNameCol--d9Nqk text--fontPos11--2LvXf text--_fontBase--QdLsd"
   }, {
-    header: _$$t("design_systems.dsa.teams"),
+    header: getI18nString("design_systems.dsa.teams"),
     count: l.teams,
     className: "stats_for_missing_files_view--teamsColumn--mCRJ7 stats_for_missing_files_view--_baseColumn--b7nv9 library_item_view--oneComponentViewTeamCol--2iMZ2 text--fontPos11--2LvXf text--_fontBase--QdLsd"
   }, {
-    header: _$$t("design_systems.dsa.instances_all_time"),
+    header: getI18nString("design_systems.dsa.instances_all_time"),
     count: l.instances,
     className: "stats_for_missing_files_view--instancesColumn--pqnCO stats_for_missing_files_view--_baseColumn--b7nv9 library_item_view--componentNumCol--3rX5Q library_modal_stats--numCol---FbhI text--fontPos11--2LvXf text--_fontBase--QdLsd"
   }] : [], [l]);
@@ -81,12 +81,12 @@ function B({
         svg: _$$A2,
         className: "stats_for_missing_files_view--infoIcon--4-RnW",
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("design_systems.dsa.not_visible_help")
-      }), tx("design_systems.dsa.not_visible"), jsx(Ph, {
+        "data-tooltip": getI18nString("design_systems.dsa.not_visible_help")
+      }), renderI18nText("design_systems.dsa.not_visible"), jsx(Ph, {
         newTab: !0,
         href: "https://help.figma.com/hc/articles/360039238353-View-and-explore-library-analytics",
         trusted: !0,
-        children: tx("design_systems.dsa.learn_more")
+        children: renderI18nText("design_systems.dsa.learn_more")
       })]
     }), jsx(Hj, {
       className: "stats_for_missing_files_view--headerRow--7en-p library_modal_stats--headerRow--MTZxi text--fontPos11--2LvXf text--_fontBase--QdLsd",
@@ -113,7 +113,7 @@ let Y = jg.THIRTY_DAYS;
 let $$q1 = memo(function (e) {
   let {
     fileVersion
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     fileVersion: e.fileVersion
   }));
   let [i, a] = useState(null);
@@ -221,7 +221,7 @@ function Z(e) {
     className: z,
     children: jsx("div", {
       className: H,
-      children: tx("design_systems.libraries_modal.showing_x_variant", {
+      children: renderI18nText("design_systems.libraries_modal.showing_x_variant", {
         variantCount: e.numStates
       })
     })
@@ -234,7 +234,7 @@ class X extends PureComponent {
       className: z,
       children: [jsxs("div", {
         className: H,
-        children: [tx("design_systems.libraries_modal.x_files_shown_open_teams_and_teams_you_re_on", {
+        children: [renderI18nText("design_systems.libraries_modal.x_files_shown_open_teams_and_teams_you_re_on", {
           fileCount: this.props.fileStats.length
         }), " ", jsx("div", {
           className: "library_item_view--componentViewFooterInlineLink--ngFvo",
@@ -242,12 +242,12 @@ class X extends PureComponent {
             href: "https://help.figma.com/hc/articles/360039238353",
             newTab: !0,
             trusted: !0,
-            children: tx("design_systems.libraries_modal.learn_more")
+            children: renderI18nText("design_systems.libraries_modal.learn_more")
           })
         })]
       }), jsx("div", {
         className: "library_item_view--componentViewFooterLastUpdated--K9SEB",
-        children: this.props.fileStats.length > 0 && _$$t("design_systems.libraries_modal.last_updated_time", {
+        children: this.props.fileStats.length > 0 && getI18nString("design_systems.libraries_modal.last_updated_time", {
           timeFromNow: JD(this.props.fileStats[0]?.last_modified)
         })
       })]
@@ -320,19 +320,19 @@ class Q extends PureComponent {
         sortByDateProperty(e, "last_modified", this.state.isDescending);
     }
     let t = [{
-      header: _$$t("design_systems.libraries_modal.file_name"),
+      header: getI18nString("design_systems.libraries_modal.file_name"),
       sortBy: "alpha",
       className: W
     }, {
-      header: _$$t("design_systems.libraries_modal.team"),
+      header: getI18nString("design_systems.libraries_modal.team"),
       sortBy: "teamNames",
       className: K
     }, {
-      header: _$$t("design_systems.libraries_modal.instances_all_time"),
+      header: getI18nString("design_systems.libraries_modal.instances_all_time"),
       sortBy: "instances",
       className: V
     }, {
-      header: _$$t("design_systems.libraries_modal.last_modified"),
+      header: getI18nString("design_systems.libraries_modal.last_modified"),
       sortBy: "lastModified",
       className: V
     }];
@@ -444,26 +444,26 @@ class ee extends PureComponent {
         type: "image",
         url: this.props.item.thumbnail_url
       },
-      description: this.props.item.description || _$$t("design_systems.libraries_modal.n_a")
+      description: this.props.item.description || getI18nString("design_systems.libraries_modal.n_a")
     }, {
       type: _$$V.STAT,
-      header: _$$t("design_systems.libraries_modal.total"),
+      header: getI18nString("design_systems.libraries_modal.total"),
       count: this.state.statsData?.total_instances ?? null,
-      word: _$$t("design_systems.libraries_modal.plural.instance", {
+      word: getI18nString("design_systems.libraries_modal.plural.instance", {
         instanceCount: this.state.statsData?.total_instances ?? 0
       })
     }, {
       type: _$$V.STAT,
-      header: _$$t("design_systems.libraries_modal.used_by"),
+      header: getI18nString("design_systems.libraries_modal.used_by"),
       count: this.state.statsData?.total_team_usage ?? null,
-      word: _$$t("design_systems.libraries_modal.plural.team", {
+      word: getI18nString("design_systems.libraries_modal.plural.team", {
         teamCount: this.state.statsData?.total_team_usage ?? 0
       })
     }, {
       type: _$$V.STAT,
-      header: _$$t("design_systems.libraries_modal.used_in"),
+      header: getI18nString("design_systems.libraries_modal.used_in"),
       count: this.state.statsData?.total_file_usage ?? null,
-      word: _$$t("design_systems.libraries_modal.plural.file", {
+      word: getI18nString("design_systems.libraries_modal.plural.file", {
         fileCount: this.state.statsData?.total_file_usage ?? 0
       })
     }];
@@ -485,7 +485,7 @@ function et({
     href: t.data.link,
     newTab: !0,
     trusted: !0,
-    children: tx("design_systems.libraries_modal.open_in_file")
+    children: renderI18nText("design_systems.libraries_modal.open_in_file")
   });
 }
 ee.displayName = "OneLibraryItemStatsView";

@@ -7,7 +7,7 @@ import l from "classnames";
 import { Y } from "../905/506207";
 import { a as _$$a } from "../905/925868";
 import { B } from "../905/714743";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { A } from "../5724/713301";
 var d = l;
 let p = "sidebar_row--sidebarRow--sY3gb";
@@ -113,7 +113,7 @@ export function $$C0(e) {
         "aria-hidden": !0,
         children: e.icon
       }), jsx(hE, {
-        children: tx("sidebar.drafts")
+        children: renderI18nText("sidebar.drafts")
       })]
     }), jsx(HG, {
       children: e.badge

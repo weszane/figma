@@ -1,12 +1,12 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { CeL, i6g, hMR } from "../figma_app/763686";
-import { sx, az } from "../905/449184";
-import { X } from "../905/883621";
-import { eD } from "../figma_app/876459";
+import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
+import { getEnvironmentInfo } from "../905/883621";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { getInitialOptions } from "../figma_app/169182";
 import { l as _$$l } from "../905/190247";
-import { $D } from "../905/11";
-import { Lk, Dz } from "../905/670985";
+import { reportError } from "../905/11";
+import { startPerformanceSpan, endPerformanceSpan } from "../905/670985";
 import { fF, EG } from "../905/471229";
 import { ys, QM, Nq } from "../figma_app/314264";
 import { ds } from "../905/87821";
@@ -64,7 +64,7 @@ let $$y1 = new class {
     this.reportAbandon = () => {
       if (this.reportedLoad || this.reportedAbandon) return;
       let e = Math.round(performance.now()) - (this.isColdBoot ? 0 : this.timeEvents.openFileActionStart);
-      sx("Fullscreen File Abandon", {
+      trackEventAnalytics("Fullscreen File Abandon", {
         fileKey: this.fileKey,
         loadID: this.loadID(),
         randomID: ds(),
@@ -72,7 +72,7 @@ let $$y1 = new class {
         abandonTime: e,
         fullLoadTime: this.timeEvents.fullLoadTime,
         coldBoot: this.isColdBoot,
-        isDesktopInitialStartupTab: eD && eD.tabWasOpenedAsPartOfInitialStartup()
+        isDesktopInitialStartupTab: desktopAPIInstance && desktopAPIInstance.tabWasOpenedAsPartOfInitialStartup()
       }, {
         forwardToDatadog: !0,
         sendAsBeacon: !0
@@ -82,7 +82,7 @@ let $$y1 = new class {
     this.reportFocusLost = () => {
       if (this.reportedLoad || this.reportedFocusLost) return;
       let e = Math.round(performance.now()) - (this.isColdBoot ? 0 : this.timeEvents.openFileActionStart);
-      sx("Fullscreen Loading Lost Focus", {
+      trackEventAnalytics("Fullscreen Loading Lost Focus", {
         fileKey: this.fileKey,
         randomID: ds(),
         fileOpenIndex: this.fileOpenIndex,
@@ -96,7 +96,7 @@ let $$y1 = new class {
     this.reportFocusGained = () => {
       if (this.reportedLoad || this.reportedFocusGained) return;
       let e = Math.round(performance.now()) - (this.isColdBoot ? 0 : this.timeEvents.openFileActionStart);
-      sx("Fullscreen Loading Gained Focus", {
+      trackEventAnalytics("Fullscreen Loading Gained Focus", {
         fileKey: this.fileKey,
         randomID: ds(),
         fileOpenIndex: this.fileOpenIndex,
@@ -110,7 +110,7 @@ let $$y1 = new class {
     this.reportBackgrounded = () => {
       if (this.reportedLoad || "hidden" !== document.visibilityState || this.reportedBackgrounded) return;
       let e = Math.round(performance.now()) - (this.isColdBoot ? 0 : this.timeEvents.openFileActionStart ?? 0);
-      az.trackDefinedEvent("scenegraph_and_sync.backgrounded_load", {
+      analyticsEventManager.trackDefinedEvent("scenegraph_and_sync.backgrounded_load", {
         fileKey: this.fileKey,
         fileParentOrgId: this.orgId,
         fileTeamId: this.teamId,
@@ -125,7 +125,7 @@ let $$y1 = new class {
     this.reportOffline = () => {
       if (this.reportedLoad || this.reportedOffline) return;
       let e = Math.round(performance.now()) - (this.isColdBoot ? 0 : this.timeEvents.openFileActionStart ?? 0);
-      az.trackDefinedEvent("scenegraph_and_sync.load_went_offline", {
+      analyticsEventManager.trackDefinedEvent("scenegraph_and_sync.load_went_offline", {
         fileKey: this.fileKey,
         fileParentOrgId: this.orgId,
         fileTeamId: this.teamId,
@@ -152,11 +152,11 @@ let $$y1 = new class {
   }
   startFs(e) {
     let t = this.fsHitsManager.getKeyWithIndex(e);
-    null !== t && (Lk(t, _$$e.SCENEGRAPH_AND_SYNC), this.mark(`${t}.start`));
+    null !== t && (startPerformanceSpan(t, _$$e.SCENEGRAPH_AND_SYNC), this.mark(`${t}.start`));
   }
   stopFs(e) {
     let t = this.fsHitsManager.getKeyWithIndex(e);
-    null !== t && (this.mark(`${t}.end`), Dz(t));
+    null !== t && (this.mark(`${t}.end`), endPerformanceSpan(t));
     this.fsHitsManager.increment(e);
   }
   setWsUrl(e) {
@@ -170,7 +170,7 @@ let $$y1 = new class {
     }, this.wsTotalMsgSize = 0, this.wsTotalNodeChangeSize = 0);
     let r = "mp-init";
     let a = Object.keys(this.wsEventTimes).length;
-    0 === a ? Lk(r, _$$e.SCENEGRAPH_AND_SYNC, i) : 1 === a && Dz(r, i);
+    0 === a ? startPerformanceSpan(r, _$$e.SCENEGRAPH_AND_SYNC, i) : 1 === a && endPerformanceSpan(r, i);
     let s = this.wsHitsManager.getKeyWithIndex(e);
     null !== s && (this.wsEventTimes[s] = i);
     this.wsHitsManager.increment(e);
@@ -234,23 +234,23 @@ let $$y1 = new class {
     window.removeEventListener("visibilitychange", this.reportBackgrounded);
   }
   time(e, t) {
-    Lk(e, _$$e.SCENEGRAPH_AND_SYNC);
+    startPerformanceSpan(e, _$$e.SCENEGRAPH_AND_SYNC);
     this.mark(e + "Start");
     try {
       return t();
     } finally {
       this.mark(e + "End");
-      Dz(e);
+      endPerformanceSpan(e);
     }
   }
   async timeAsync(e, t) {
-    Lk(e, _$$e.SCENEGRAPH_AND_SYNC);
+    startPerformanceSpan(e, _$$e.SCENEGRAPH_AND_SYNC);
     this.mark(e + "Start");
     try {
       return await t();
     } finally {
       this.mark(e + "End");
-      Dz(e);
+      endPerformanceSpan(e);
     }
   }
   get isColdBoot() {
@@ -264,7 +264,7 @@ let $$y1 = new class {
     let a = CeL?.getServerSideLoadTimeMetadata() || {};
     let s = i6g?.fileIsReadOnly();
     let l = i6g?.currentFileVersion();
-    let d = eD?.getConcurrentLoadingTabsCount();
+    let d = desktopAPIInstance?.getConcurrentLoadingTabsCount();
     return {
       coldBoot: this.isColdBoot,
       readOnly: s,
@@ -364,7 +364,7 @@ let $$y1 = new class {
       let i = this.getEventsToReport(!0);
       let n = dd();
       let o = PH();
-      if (sx("Fullscreen Load Time", {
+      if (trackEventAnalytics("Fullscreen Load Time", {
         loadID: this.loadID(),
         version: 8,
         fileKey: e,
@@ -386,14 +386,14 @@ let $$y1 = new class {
         forwardToDatadog: !0
       }), "number" == typeof i.documentIsLoaded) {
         let e = -1;
-        let t = "Figma Desktop" === X().browser_name;
+        let t = "Figma Desktop" === getEnvironmentInfo().browser_name;
         this.isColdBoot ? t && i.editorPreloaded ? "number" == typeof i.editorPreloaded && (e = i.documentIsLoaded - i.editorPreloaded) : e = i.documentIsLoaded : "number" == typeof i.openFileActionStart && (e = i.documentIsLoaded - i.openFileActionStart);
         console.log(`[Fullscreen] loadtime=${(e / 1e3).toFixed(2)}s ${hMR ? `maxmem=${hMR.getMaxUsedHeapMemory()}` : ""}`);
       }
     }));
   }
   getClientRenderedMetadata() {
-    null === this._loadID && $D(_$$e.FIGFILE_PLATFORM, Error("reporting client-rendered metadata without load ID"));
+    null === this._loadID && reportError(_$$e.FIGFILE_PLATFORM, Error("reporting client-rendered metadata without load ID"));
     return {
       loadID: this._loadID ?? "",
       reconnectId: Nq(),

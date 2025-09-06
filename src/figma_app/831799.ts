@@ -2,10 +2,10 @@ import { jsx } from "react/jsx-runtime";
 import { createContext, useContext, useRef, useMemo, useEffect, PureComponent, forwardRef, Children, Component } from "react";
 import { shallowEqual } from "../vendor/514228";
 import { N_ } from "../vendor/956898";
-import { sx } from "../905/449184";
-import { ED } from "../905/714362";
+import { trackEventAnalytics } from "../905/449184";
+import { logDebug } from "../905/714362";
 import { YQ } from "../905/502364";
-import { qD, t as _$$t } from "../905/303541";
+import { I18nTextComponent, getI18nString } from "../905/303541";
 import { u as _$$u } from "../905/16237";
 import { K } from "../905/135526";
 import { qD as _$$qD, Cu, fy } from "../figma_app/314264";
@@ -44,7 +44,7 @@ export function $$f4({
     return {
       name: r,
       properties: n,
-      trackEvent: (e, t) => sx(e, {
+      trackEvent: (e, t) => trackEventAnalytics(e, {
         trackingContext: r,
         ...n,
         ...t
@@ -72,7 +72,7 @@ export function $$f4({
       }),
       ...t
     };
-    ED("Context Viewed", e, n);
+    logDebug("Context Viewed", e, n);
     _$$qD(n, f);
     T.current = I;
   }, [r, I, s, u, f]);
@@ -120,13 +120,13 @@ export function $$b10(e, t) {
             if (e && "string" == typeof e) return e;
             {
               let t = Children.map(e, e => {
-                if (e?.type !== qD) return e;
+                if (e?.type !== I18nTextComponent) return e;
                 {
                   let {
                     id,
                     options
                   } = e.props;
-                  return _$$t(id, options);
+                  return getI18nString(id, options);
                 }
               });
               if (t?.every(e => "string" == typeof e)) return t.join("");

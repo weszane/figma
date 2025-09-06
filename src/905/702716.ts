@@ -4,7 +4,7 @@ import { CY } from "../figma_app/637027";
 import { z } from "../905/284530";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Y } from "../905/830372";
 import { E as _$$E } from "../905/984674";
 import { AC } from "../figma_app/777551";
@@ -38,8 +38,8 @@ export function $$N1({
   updatePluginPublishingMetadata: o
 }) {
   let c = {
-    [bD.PLUGIN]: _$$t("community.publishing.resource_id.plugin"),
-    [bD.WIDGET]: _$$t("community.publishing.resource_id.widget")
+    [bD.PLUGIN]: getI18nString("community.publishing.resource_id.plugin"),
+    [bD.WIDGET]: getI18nString("community.publishing.resource_id.widget")
   };
   let u = AC(a) ? jsx("div", {
     className: _$$s.mb8.$,
@@ -71,19 +71,19 @@ export function $$N1({
           localPlugin: t
         })]
       }), jsx(_$$A2, {
-        label: _$$t("community.publishing.editor_type"),
+        label: getI18nString("community.publishing.editor_type"),
         children: jsx(M, {
           publishedPlugin: a,
           localPlugin: t
         })
       }), jsx(_$$A2, {
-        label: _$$t("community.publishing.network"),
+        label: getI18nString("community.publishing.network"),
         children: jsx(U, {
           manifest: h,
           resourceType: s
         })
       }), $$R0(h) && jsx(_$$A2, {
-        label: _$$t("community.publishing.documentAccess"),
+        label: getI18nString("community.publishing.documentAccess"),
         children: jsx($$B2, {})
       })]
     })
@@ -99,12 +99,12 @@ function P({
     children: jsxs("div", {
       className: _$$s.flex.flexRowNoWrap.itemsCenter.justifyBetween.$,
       children: [jsx(_$$E, {
-        children: tx("community.publishing.awaiting_review")
+        children: renderI18nText("community.publishing.awaiting_review")
       }), jsx("span", {
         className: _$$s.w300.flexShrink1.$
       }), jsx(_$$E, {
         color: "secondary",
-        children: tx("community.publishing.submitted_with_date", {
+        children: renderI18nText("community.publishing.submitted_with_date", {
           date: new Date(e).toLocaleDateString()
         })
       })]
@@ -117,12 +117,12 @@ function O() {
     iconSrc: _$$A9,
     orientation: "vertical",
     action: {
-      label: _$$t("general.learn_more"),
+      label: getI18nString("general.learn_more"),
       href: "https://help.figma.com/hc/articles/12067637274519"
     },
     children: jsx("div", {
       "data-testid": "notApprovedPaymentsApiSellerBannerText",
-      children: tx("community.publishing.cannot_use_payments_api_if_non_approved")
+      children: renderI18nText("community.publishing.cannot_use_payments_api_if_non_approved")
     })
   });
 }
@@ -146,9 +146,9 @@ function L({
           }
         }));
       },
-      label: _$$t("universal_insert.see_details")
+      label: getI18nString("universal_insert.see_details")
     },
-    children: tx("community.publishing.failed_to_read_file", {
+    children: renderI18nText("community.publishing.failed_to_read_file", {
       filename: "manifest.json"
     })
   });
@@ -177,12 +177,12 @@ function F({
       children: t
     })
   }) : e ? jsx(_$$A, {
-    suggestion: _$$t("community.publishing.id_with_number", {
+    suggestion: getI18nString("community.publishing.id_with_number", {
       pendingId: e
     }),
     instruction: jsx(_$$E, {
       color: "danger",
-      children: tx("community.publishing.add_this_id_to_your_file", {
+      children: renderI18nText("community.publishing.add_this_id_to_your_file", {
         filename: "manifest.json"
       })
     }),
@@ -192,10 +192,10 @@ function F({
     iconSrc: _$$A9,
     orientation: "horizontal",
     action: {
-      label: _$$t("community.publishing.generate_id"),
+      label: getI18nString("community.publishing.generate_id"),
       onClick: c
     },
-    children: tx("community.publishing.invalid_id_in_manifest", {
+    children: renderI18nText("community.publishing.invalid_id_in_manifest", {
       filename: "manifest.json"
     })
   });
@@ -206,8 +206,8 @@ function M({
 }) {
   let i = e?.manifest?.editorType ?? uF(t).manifest.editorType;
   return e && e.error && $$D3(e.error) || null == i ? jsx(_$$A, {
-    suggestion: _$$t("community.publishing.editor_type_figma"),
-    instruction: _$$t("community.publishing.please_add_this_to_your_manifest", {
+    suggestion: getI18nString("community.publishing.editor_type_figma"),
+    instruction: getI18nString("community.publishing.please_add_this_to_your_manifest", {
       filename: "manifest.json"
     }),
     dataTestId: "editorTypeCodeSuggestion"
@@ -229,28 +229,28 @@ function j({
           case FW.FIGMA:
             return {
               svgSrc: _$$A5,
-              label: _$$t("community.publishing.for_design")
+              label: getI18nString("community.publishing.for_design")
             };
           case FW.FIGJAM:
             return {
               svgSrc: _$$A4,
-              label: _$$t("community.publishing.for_figjam")
+              label: getI18nString("community.publishing.for_figjam")
             };
           case FW.DEV:
           case FW.INSPECT:
             return {
               svgSrc: _$$A3,
-              label: _$$t("community.publishing.for_dev_mode")
+              label: getI18nString("community.publishing.for_dev_mode")
             };
           case FW.SLIDES:
             return {
               svgSrc: _$$A8,
-              label: _$$t("community.publishing.for_slides")
+              label: getI18nString("community.publishing.for_slides")
             };
           case FW.BUZZ:
             return {
               svgSrc: _$$A7,
-              label: _$$t("community.publishing.for_buzz")
+              label: getI18nString("community.publishing.for_buzz")
             };
           default:
             return null;
@@ -293,7 +293,7 @@ function U({
         iconSrc: _$$A9,
         orientation: "vertical",
         children: jsx(_$$E, {
-          children: tx("community.publishing.allowed_domains_reasoning_not_specified")
+          children: renderI18nText("community.publishing.allowed_domains_reasoning_not_specified")
         })
       })
     })]
@@ -303,13 +303,13 @@ function U({
     instruction: jsxs("div", {
       children: [jsx(_$$E, {
         color: "danger",
-        children: tx(e === bD.PLUGIN ? "community.publishing.plugin_missing_network_access" : "community.publishing.widget_missing_network_access", {
+        children: renderI18nText(e === bD.PLUGIN ? "community.publishing.plugin_missing_network_access" : "community.publishing.widget_missing_network_access", {
           filename: "manifest.json"
         })
       }), jsx(CY, {
         href: "/plugin-docs/manifest/",
         trusted: !0,
-        children: tx("general.learn_more")
+        children: renderI18nText("general.learn_more")
       })]
     })
   });
@@ -321,13 +321,13 @@ export function $$B2() {
     instruction: jsxs("div", {
       children: [jsx(_$$E, {
         color: "danger",
-        children: tx("community.publishing.please_add_this_to_your_manifest_period", {
+        children: renderI18nText("community.publishing.please_add_this_to_your_manifest_period", {
           filename: "manifest.json"
         })
       }), jsx(CY, {
         href: "/plugin-docs/migrating-to-dynamic-loading/",
         trusted: !0,
-        children: tx("general.learn_more")
+        children: renderI18nText("general.learn_more")
       })]
     })
   });

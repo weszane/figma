@@ -8,7 +8,7 @@ import { R as _$$R } from "../figma_app/313269";
 import { c$ } from "../figma_app/236327";
 import { P as _$$P } from "../905/347284";
 import { B as _$$B } from "../905/714743";
-import { tx, t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { JZ } from "../figma_app/696043";
 import { af } from "../figma_app/559491";
 import { to, Lo } from "../905/156213";
@@ -104,7 +104,7 @@ export function $$G2(e) {
       children: [jsx(_$$B, {
         svg: _$$A,
         className: JX
-      }), tx("whiteboard.inserts.see_more_details_in_community")]
+      }), renderI18nText("whiteboard.inserts.see_more_details_in_community")]
     }), K && z && jsxs(Cf, {
       targetRect: z,
       lean: "left",
@@ -130,7 +130,7 @@ export function $$G2(e) {
             showModalsBeneath: !0
           }));
         },
-        children: tx("whiteboard.inserts.in_development_version_error_dropdown")
+        children: renderI18nText("whiteboard.inserts.in_development_version_error_dropdown")
       }) : jsx(c$, {
         onClick: () => {
           _$$j({
@@ -141,7 +141,7 @@ export function $$G2(e) {
           });
           J();
         },
-        children: tx("whiteboard.inserts.in_development_version_dropdown")
+        children: renderI18nText("whiteboard.inserts.in_development_version_dropdown")
       }), jsx(c$, {
         onClick: () => {
           _$$j({
@@ -152,7 +152,7 @@ export function $$G2(e) {
           });
           J();
         },
-        children: tx("whiteboard.inserts.published_version_dropdown")
+        children: renderI18nText("whiteboard.inserts.published_version_dropdown")
       })]
     })]
   });
@@ -161,10 +161,10 @@ let $$V0 = Ju(function ({
   dispatch: e
 }) {
   return jsx(yX, {
-    cancelText: t("whiteboard.inserts.widget_development_error_modal_close"),
-    confirmText: t("whiteboard.inserts.widget_development_import_manifest"),
-    confirmationTitle: t("whiteboard.inserts.widget_development_error_modal_title"),
-    content: t("whiteboard.inserts.widget_development_error_modal_description"),
+    cancelText: getI18nString("whiteboard.inserts.widget_development_error_modal_close"),
+    confirmText: getI18nString("whiteboard.inserts.widget_development_import_manifest"),
+    confirmationTitle: getI18nString("whiteboard.inserts.widget_development_error_modal_title"),
+    content: getI18nString("whiteboard.inserts.widget_development_error_modal_description"),
     disableClickOutsideToHide: !0,
     hideCancel: !1,
     hideOnConfirm: !1,

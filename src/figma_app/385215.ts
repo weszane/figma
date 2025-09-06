@@ -1,11 +1,11 @@
 import { useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
 import { h3O } from "../figma_app/763686";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { HW } from "../figma_app/976749";
 import { T as _$$T, N } from "../905/847283";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { hk } from "../figma_app/632319";
 function p(e) {
   let {
@@ -59,7 +59,7 @@ export function $$f0() {
   return useCallback(r => {
     e ? v(r, hk()) : v(r, null);
     t(F.enqueue({
-      message: _$$t("collaboration.spotlight.bell.stopped_following"),
+      message: getI18nString("collaboration.spotlight.bell.stopped_following"),
       role: "status"
     }));
   }, [e, t]);
@@ -74,7 +74,7 @@ function y(e, t, r, n) {
   r ? r.nominatePresenter(e) : h3O.nominatePresenter(e);
   let i = t.allUsers.find(t => t.sessionID === e);
   if (i?.name) {
-    let e = _$$t("collaboration.spotlight.visual_bell.nominated_user_to_spotlight", {
+    let e = getI18nString("collaboration.spotlight.visual_bell.nominated_user_to_spotlight", {
       userName: i.name
     });
     n(F.enqueue({
@@ -82,7 +82,7 @@ function y(e, t, r, n) {
       type: "nominated_presenter"
     }));
   }
-  sx("Spotlight Nomination Requested", {
+  trackEventAnalytics("Spotlight Nomination Requested", {
     nominatedSessionID: e,
     nominatedUserID: i?.userID,
     ...p(t)
@@ -94,12 +94,12 @@ export function $$b6(e, t) {
 function T(e, t, r, n) {
   $$b6(e, r);
   let i = t.allUsers.find(t => t.sessionID === e);
-  let a = _$$t("collaboration.spotlight.visual_bell.stopped_nominating_user_to_spotlight");
+  let a = getI18nString("collaboration.spotlight.visual_bell.stopped_nominating_user_to_spotlight");
   n(F.enqueue({
     message: a,
     type: "nominated_presenter"
   }));
-  sx("Spotlight Nomination Canceled", {
+  trackEventAnalytics("Spotlight Nomination Canceled", {
     cancelledNomineeSessionId: i?.sessionID,
     cancelledNomineeUserId: i?.userID,
     cancelledByNominee: e === t.sessionID,
@@ -110,7 +110,7 @@ function I(e, t) {
   t ? t.startPresenting() : h3O.startPresenting();
   let r = e.sessionsNominatingCurrentUser[0];
   let n = e.allUsers.find(e => e.sessionID === r);
-  sx("Spotlight Nomination Accepted", {
+  trackEventAnalytics("Spotlight Nomination Accepted", {
     nominatorSessionId: n?.sessionID,
     nominatorUserId: n?.userID,
     ...p(e)
@@ -119,7 +119,7 @@ function I(e, t) {
 export function $$S2(e, t, r, n) {
   let i = performance.now();
   e();
-  n && sx(r, {
+  n && trackEventAnalytics(r, {
     sessionId: t.sessionID,
     timeToActionSeconds: Math.trunc(i - n) / 1e3,
     ...p(t)
@@ -127,7 +127,7 @@ export function $$S2(e, t, r, n) {
 }
 function v(e, t) {
   t ? hk()?.setObservingSessionID(-1) : h3O.observeUser(-1);
-  sx("Spotlight Stop Following", {
+  trackEventAnalytics("Spotlight Stop Following", {
     ...p(e)
   });
 }

@@ -7,21 +7,21 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { Vzr, CNR, glU, X3B, bOM } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
-import { zl, md, Xr } from "../figma_app/27355";
+import { atomStoreManager, useAtomWithSubscription, Xr } from "../figma_app/27355";
 import h from "classnames";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { parsePxInt } from "../figma_app/783094";
-import { eD as _$$eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { Ay } from "../905/612521";
 import { buildUploadUrl } from "../figma_app/169182";
 import { ZB } from "../905/491152";
-import { $D } from "../905/11";
-import { x1 } from "../905/714362";
+import { reportError } from "../905/11";
+import { logError } from "../905/714362";
 import { useSprigWithSampling } from "../905/99656";
 import { CY, N_ } from "../figma_app/637027";
 import { kt } from "../figma_app/858013";
 import { B as _$$B } from "../905/714743";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { zX } from "../905/576487";
 import { R as _$$R } from "../905/792510";
@@ -105,7 +105,7 @@ import { A as _$$A19 } from "../svg/619883";
 var n;
 var g = h;
 async function M() {
-  return await Promise.all(rY(zl.get(BT)).map(e => scheduler.postTask(() => function (e) {
+  return await Promise.all(rY(atomStoreManager.get(BT)).map(e => scheduler.postTask(() => function (e) {
     let [t, i] = Vzr.generateThumbnailForNode(e, CNR.slideWidth(), CNR.slideHeight(), 1, {
       useAbsoluteBounds: !0
     });
@@ -176,7 +176,7 @@ function eH({
     className: "publishing_metadata_cocreators_input--autocompleteWrapperUI3--mJb41",
     children: jsx(_$$P, {
       autocomplete: e,
-      placeholder: _$$t("community.publishing.give_up_to_n_creators_credit", {
+      placeholder: getI18nString("community.publishing.give_up_to_n_creators_credit", {
         maxCreatorsPerResource: Wi
       }),
       onChange: t,
@@ -205,10 +205,10 @@ function eY() {
     className: "publishing_metadata_cocreators_input--textOnlyRow--pOsvc",
     children: [jsx("div", {
       className: "publishing_metadata_cocreators_input--profilePrimaryText--2GBUq autocomplete_permissions--name--62sCS ellipsis--ellipsis--Tjyfa",
-      children: tx("community.publishing.editor_or_viewer_not_found")
+      children: renderI18nText("community.publishing.editor_or_viewer_not_found")
     }), jsx("div", {
       className: "publishing_metadata_cocreators_input--profileSecondaryText--OFneI text--fontPos11--2LvXf text--_fontBase--QdLsd",
-      children: tx("community.publishing.invite_creators_to_the_file_to_give_credit_creators_must_have_community_profiles")
+      children: renderI18nText("community.publishing.invite_creators_to_the_file_to_give_credit_creators_must_have_community_profiles")
     })]
   });
 }
@@ -225,7 +225,7 @@ function eZ({
   let [c, u] = useState(!!s?.tokens.length);
   return jsxs(Fragment, {
     children: [jsx(_$$A13, {
-      label: _$$t("community.publishing.creators"),
+      label: getI18nString("community.publishing.creators"),
       children: i ? jsx(eU, {
         authors: t?.community_publishers?.accepted
       }) : jsxs(Fragment, {
@@ -240,7 +240,7 @@ function eZ({
         })]
       })
     }), c && jsx(_$$A13, {
-      label: _$$t("community.publishing.cocreators"),
+      label: getI18nString("community.publishing.cocreators"),
       children: jsx(eH, {
         publishers: s,
         onChange: l,
@@ -252,12 +252,12 @@ function eZ({
 function e2({
   fileKey: e
 }) {
-  let t = tx("community.publishing.this_editor_is_being_published_as_a_file", {
+  let t = renderI18nText("community.publishing.this_editor_is_being_published_as_a_file", {
     fileEditorLink: jsx(CY, {
       href: `/file/${e}`,
       target: "_blank",
       trusted: !0,
-      children: tx("community.publishing.file_editor")
+      children: renderI18nText("community.publishing.file_editor")
     })
   });
   return jsx(_$$A15, {
@@ -297,30 +297,30 @@ function e6({
   let p = useId();
   return jsxs(Fragment, {
     children: [jsx(_$$A13, {
-      label: _$$t("community.publishing.file_preview"),
+      label: getI18nString("community.publishing.file_preview"),
       children: jsxs("div", {
         className: R4,
         children: [jsx(_$$d, {
           checked: t === y4I.PROTOTYPE,
           disabled: n,
           label: jsx(_$$J, {
-            children: tx("community.publishing.use_a_prototype_preview")
+            children: renderI18nText("community.publishing.use_a_prototype_preview")
           }),
           onChange: e => {
             s(e ? y4I.PROTOTYPE : y4I.CANVAS);
           }
         }), jsxs(_$$A16, {
-          children: [tx("community.publishing.instead_of_images_your_resource_will_display_as_a_prototype"), jsx(CY, {
+          children: [renderI18nText("community.publishing.instead_of_images_your_resource_will_display_as_a_prototype"), jsx(CY, {
             href: "https://help.figma.com/hc/articles/360040035974-Publish-files-to-the-Community",
             target: "_blank",
             trusted: !0,
-            children: tx("general.learn_more")
+            children: renderI18nText("general.learn_more")
           })]
         })]
       })
     }), u && jsx(_$$A13, {
       labelId: p,
-      label: _$$t("community.publishing.prototype_preview"),
+      label: getI18nString("community.publishing.prototype_preview"),
       children: jsx(e4, {
         ariaLabelledBy: p,
         dropdownShown: d,
@@ -342,7 +342,7 @@ class ts extends Component {
     this.hasAttemptedToPublish = !1;
     this.hasSucceededToPublish = !1;
     this.onClose = () => {
-      sx("publish_details_view_cancel", {
+      trackEventAnalytics("publish_details_view_cancel", {
         fileKey: this.props.fileKey,
         userId: this.props.user.id,
         teamId: this.props.figFile.team_id,
@@ -433,7 +433,7 @@ class ts extends Component {
         if (this.setState({
           formErrors: r
         }), this.hasFormErrors(r)) {
-          sx("creator_publishing_error", {
+          trackEventAnalytics("creator_publishing_error", {
             errors: Object.values(r),
             errorFields: Object.keys(r),
             resourceType: "hub_file",
@@ -442,7 +442,7 @@ class ts extends Component {
           });
           return;
         }
-        this.shouldPublishHubFileOnSubmit() ? (sx("publish_details_view_publish", {
+        this.shouldPublishHubFileOnSubmit() ? (trackEventAnalytics("publish_details_view_publish", {
           fileKey: this.props.figFile.key,
           hubFileId: this.props.hubFile.id,
           currentHubFileVersionId: this.props.hubFileVersion?.id,
@@ -461,13 +461,13 @@ class ts extends Component {
           (metadata.commentsSetting !== this.props.hubFile.comments_setting || t !== i) && this.props.dispatch(cO());
           this.props.isEditHubFilePageMode && Ay.reload("Published hubfile updated");
           this.props.dispatch(_$$F.enqueue({
-            message: _$$t("community.publishing.changes_saved"),
+            message: getI18nString("community.publishing.changes_saved"),
             icon: zX.CHECK
           }));
         }), this.setState({
           step: 2
         })) : this.props.dispatch(_$$F.enqueue({
-          message: _$$t("community.error.profile_not_found"),
+          message: getI18nString("community.error.profile_not_found"),
           error: !0
         }));
       } else {
@@ -476,14 +476,14 @@ class ts extends Component {
         if (this.setState({
           formErrors: n
         }), this.hasFormErrors(n)) {
-          sx("creator_publishing_error", {
+          trackEventAnalytics("creator_publishing_error", {
             errors: Object.values(n),
             errorFields: Object.keys(n),
             resourceType: "hub_file",
             fileKey: this.props.fileKey,
             isPaid: this.props.isPaid
           });
-          this.isUniversalPosting() && sx("community_publish_modal", {
+          this.isUniversalPosting() && trackEventAnalytics("community_publish_modal", {
             fileKey: this.props.fileKey,
             userId: this.props.user.id,
             teamId: this.props.figFile.team_id,
@@ -493,7 +493,7 @@ class ts extends Component {
           });
           return;
         }
-        this.shouldPublishHubFileOnSubmit() ? (sx("publish_details_view_publish", {
+        this.shouldPublishHubFileOnSubmit() ? (trackEventAnalytics("publish_details_view_publish", {
           fileKey: this.props.figFile.key,
           hubFileId: this.props.hubFile?.id,
           currentHubFileVersionId: this.props.hubFileVersion?.id,
@@ -504,7 +504,7 @@ class ts extends Component {
           isPaid: this.props.isPaid
         }, {
           forwardToDatadog: !0
-        }), this.props.createHubFile(e), this.isUniversalPosting() && sx("community_publish_modal", {
+        }), this.props.createHubFile(e), this.isUniversalPosting() && trackEventAnalytics("community_publish_modal", {
           fileKey: this.props.fileKey,
           userId: this.props.user.id,
           teamId: this.props.figFile.team_id,
@@ -551,7 +551,7 @@ class ts extends Component {
     this.inputDebounce = debounce((e, t) => {
       if ("name" === e || "description" === e) {
         let t = "name" === e ? WX.EDIT_NAME : WX.EDIT_DESCRIPTION;
-        sx("community_publish_modal", {
+        trackEventAnalytics("community_publish_modal", {
           userId: this.props.user.id,
           step: t,
           name: t,
@@ -642,7 +642,7 @@ class ts extends Component {
             carouselMedia: [i]
           });
         });
-        sx("community_publish_modal", {
+        trackEventAnalytics("community_publish_modal", {
           name: "upload_image",
           userId: this.props.user.id,
           resourceType: "hub_file",
@@ -663,7 +663,7 @@ class ts extends Component {
           coverImageCarouselMediaId: "id" in e ? e.id : void 0,
           thumbnailType: mN.USER_UPLOADED
         });
-        sx("community_publish_modal", {
+        trackEventAnalytics("community_publish_modal", {
           name: "use_custom_thumbnail",
           userId: this.props.user.id,
           resourceType: "hub_file",
@@ -708,21 +708,21 @@ class ts extends Component {
       });
       return jsx("span", {
         children: (() => {
-          if ("org_id" in e) return this.props.orgEntity ? tx("community.publishing.you_are_publishing_to_the_org_profile", {
+          if ("org_id" in e) return this.props.orgEntity ? renderI18nText("community.publishing.you_are_publishing_to_the_org_profile", {
             orgName: t(this.props.orgEntity.name)
-          }) : tx("community.publishing.you_are_publishing_to_the_org_profile.fallback", {
-            org: t(_$$t("general.fallback_org_name"))
+          }) : renderI18nText("community.publishing.you_are_publishing_to_the_org_profile.fallback", {
+            org: t(getI18nString("general.fallback_org_name"))
           });
           if ("team_id" in e) {
             let i = this.props.teams[e.team_id];
-            return i ? tx("community.publishing.you_are_publishing_to_the_team_profile", {
+            return i ? renderI18nText("community.publishing.you_are_publishing_to_the_team_profile", {
               teamName: t(i.name)
-            }) : tx("community.publishing.you_are_publishing_to_the_team_profile.fallback", {
-              team: t(_$$t("general.fallback_org_name"))
+            }) : renderI18nText("community.publishing.you_are_publishing_to_the_team_profile.fallback", {
+              team: t(getI18nString("general.fallback_org_name"))
             });
           }
-          return tx("community.publishing.you_are_publishing_to_user_profile", {
-            userName: t(this.props.user?.handle ? this.props.user?.handle : _$$t("general.fallback_user_name"))
+          return renderI18nText("community.publishing.you_are_publishing_to_user_profile", {
+            userName: t(this.props.user?.handle ? this.props.user?.handle : getI18nString("general.fallback_user_name"))
           });
         })()
       });
@@ -852,8 +852,8 @@ class ts extends Component {
     try {
       e = await M();
     } catch (e) {
-      $D(_$$e.COMMUNITY, e);
-      x1("Community slide template thumbnail generation", e);
+      reportError(_$$e.COMMUNITY, e);
+      logError("Community slide template thumbnail generation", e);
     }
     return e;
   }
@@ -884,7 +884,7 @@ class ts extends Component {
     }) : (this.setState({
       isGeneratingThumbnail: !1
     }), this.props.dispatch(_$$F.enqueue({
-      message: _$$t("community.error.slide_template_publishing_error"),
+      message: getI18nString("community.error.slide_template_publishing_error"),
       error: !0
     })));
   }
@@ -892,7 +892,7 @@ class ts extends Component {
     return "design" === this.props.figFile.editor_type;
   }
   getPrimaryButtonText() {
-    return this.props.isEditHubFilePageMode || zv(this.props.hubFile) ? _$$t("general.save") : this.props.isPaid ? _$$t("community.publishing.submit_for_review") : _$$t("community.publishing.publish");
+    return this.props.isEditHubFilePageMode || zv(this.props.hubFile) ? getI18nString("general.save") : this.props.isPaid ? getI18nString("community.publishing.submit_for_review") : getI18nString("community.publishing.publish");
   }
   hasFormErrors(e) {
     return !!$W(Object.keys(e), e);
@@ -970,7 +970,7 @@ class ts extends Component {
           }) : d
         }), jsxs(_$$A6, {
           name: "details",
-          title: _$$t("community.publishing.details"),
+          title: getI18nString("community.publishing.details"),
           defaultActive: !0,
           numErrors: $W(["name", "categoryId", "description", "tags", "tagsV2"], n),
           children: [jsx(_$$A18, {
@@ -1058,7 +1058,7 @@ class ts extends Component {
           })]
         }), this.renderPricingSection(metadata), jsxs(_$$A6, {
           name: "advanced",
-          title: _$$t("community.publishing.advanced"),
+          title: getI18nString("community.publishing.advanced"),
           numErrors: $W(["supportContact", "publisherIds"], n),
           children: [jsx(_$$A1, {
             value: metadata.supportContact || "",
@@ -1107,7 +1107,7 @@ class ts extends Component {
             "data-testid": "publish-modal-footer-text",
             children: [jsx(_$$B, {
               svg: _$$A19
-            }), tx("community.publish.fix_errors")]
+            }), renderI18nText("community.publish.fix_errors")]
           }) : jsx(eC, {
             getFooterProfileIdentifier: () => this.getFooterProfileIdentifier(metadata.author)
           }), jsxs("div", {
@@ -1115,14 +1115,14 @@ class ts extends Component {
             children: [jsx(_$$M, {
               disabled: a,
               onClick: this.onClose,
-              children: this.isUniversalPosting() ? _$$t("general.back") : _$$t("general.cancel")
+              children: this.isUniversalPosting() ? getI18nString("general.back") : getI18nString("general.cancel")
             }), a || this.state.isGeneratingThumbnail ? jsx(UC, {
               children: jsx(kt, {
                 className: u1
               })
             }) : jsx(UC, {
               onClick: () => {
-                sx("community_publish_modal", {
+                trackEventAnalytics("community_publish_modal", {
                   userId: this.props.user.id,
                   resourceType: "hub_file",
                   resourceId: this.props.hubFile?.id,
@@ -1142,20 +1142,20 @@ class ts extends Component {
     });
   }
   getPricingDisabledMessage(e, t) {
-    if (t && t.current_hub_file_version_id && !t.monetized_resource_metadata) return tx("community.seller.only_new_resources_can_be_sold_on_community");
+    if (t && t.current_hub_file_version_id && !t.monetized_resource_metadata) return renderI18nText("community.seller.only_new_resources_can_be_sold_on_community");
     let i = jsx(CY, {
       href: "https://help.figma.com/hc/articles/12067637274519-About-selling-Community-resources",
       target: "_blank",
       trusted: !0,
-      children: tx("general.learn_more")
+      children: renderI18nText("general.learn_more")
     });
-    return "org_id" in e.author ? this.props.org?.cmty_publish_as_user_enabled ? tx("community.seller.you_can_only_publish_paid_resources_from_a_personal_profile", {
+    return "org_id" in e.author ? this.props.org?.cmty_publish_as_user_enabled ? renderI18nText("community.seller.you_can_only_publish_paid_resources_from_a_personal_profile", {
       learnMoreLink: i
-    }) : tx("community.seller.pricing_is_disabled_because_your_organization_does_not_allow", {
+    }) : renderI18nText("community.seller.pricing_is_disabled_because_your_organization_does_not_allow", {
       learnMoreLink: i
-    }) : "team_id" in e.author ? tx("community.seller.you_can_only_publish_paid_resources_from_a_personal_profile", {
+    }) : "team_id" in e.author ? renderI18nText("community.seller.you_can_only_publish_paid_resources_from_a_personal_profile", {
       learnMoreLink: i
-    }) : this.props.isFigFileExplicitOwner ? null : tx("community.seller.only_explicit_owner_can_sell");
+    }) : this.props.isFigFileExplicitOwner ? null : renderI18nText("community.seller.only_explicit_owner_can_sell");
   }
   renderPricingSection(e) {
     if (!this.props.user.can_sell_on_community || getFeatureFlags().cmty_expand_extension_m10n && !this.props.user.cmty_seller_capabilities?.includes(D6.FILE) || e.viewerMode === FTemplateCategoryType.SLIDE_TEMPLATE) return null;
@@ -1163,7 +1163,7 @@ class ts extends Component {
     let i = !!t?.current_hub_file_version_id && !!t.monetized_resource_metadata;
     let n = this.getPricingDisabledMessage(e, this.props.hubFile);
     let a = this.props.isEditHubFilePageMode || i || !!n;
-    let s = i ? _$$t("community.seller.pricing_toggle_text_for_already_paid_resources") : void 0;
+    let s = i ? getI18nString("community.seller.pricing_toggle_text_for_already_paid_resources") : void 0;
     return jsx(_$$A6, {
       name: "pricing",
       title: jsx(Wq, {}),
@@ -1259,7 +1259,7 @@ class ts extends Component {
         userId: this.props.user.id
       },
       children: jsx(OJ, {
-        title: this.props.isEditHubFilePageMode ? _$$t("community.publishing.edit_file_page") : i ? _$$t("community.publishing.publish_slide_deck_template") : _$$t("community.publishing.publish_file"),
+        title: this.props.isEditHubFilePageMode ? getI18nString("community.publishing.edit_file_page") : i ? getI18nString("community.publishing.publish_slide_deck_template") : getI18nString("community.publishing.publish_file"),
         minWidth: tn,
         maxWidth: tn,
         onClose: this.onClose,
@@ -1366,7 +1366,7 @@ let $$tl0 = Ju(function (e) {
     return t ? e.hubFiles[t] ?? null : null;
   });
   let a = _$$W(n?.id, vt.HUB_FILE);
-  let o = md(_g);
+  let o = useAtomWithSubscription(_g);
   let l = Xr(pz);
   return i ? _$$W2(i.editor_type) ? jsx(_$$T, {
     publishingEntryPoint: e.entryPoint,
@@ -1418,7 +1418,7 @@ let $$tl0 = Ju(function (e) {
     className: U5,
     isLoading: loading,
     secondaryButton: {
-      text: _$$t("community.publishing.create_new_profile"),
+      text: getI18nString("community.publishing.create_new_profile"),
       onClick: () => {
         setNextStep(_$$D.Step.SET_PROFILE_HANDLE);
         e.publishHubFile();
@@ -1427,7 +1427,7 @@ let $$tl0 = Ju(function (e) {
       disabled: loading
     },
     primaryButton: {
-      text: _$$t("community.publishing.connect_existing_profile"),
+      text: getI18nString("community.publishing.connect_existing_profile"),
       onClick: () => {
         setNextStep(_$$D.Step.CONNECT_PROFILES);
         e.publishHubFile();
@@ -1441,7 +1441,7 @@ let $$tl0 = Ju(function (e) {
     className: U5,
     isLoading: loading,
     primaryButton: {
-      text: _$$t("community.publishing.create_new_profile"),
+      text: getI18nString("community.publishing.create_new_profile"),
       onClick: () => {
         setNextStep(_$$D.Step.SET_PROFILE_HANDLE);
         e.publishHubFile();
@@ -1457,7 +1457,7 @@ let $$tl0 = Ju(function (e) {
       if (setNextStep(_$$D.Step.INFO), !i || !e.publisher) {
         t(_$$F.enqueue({
           type: "profile-merge-error",
-          message: _$$t("community.publishing.unable_to_connect_profiles"),
+          message: getI18nString("community.publishing.unable_to_connect_profiles"),
           error: !0
         }));
         return;
@@ -1473,7 +1473,7 @@ let $$tl0 = Ju(function (e) {
       },
       className: qw,
       disabled: loading,
-      children: tx("general.back")
+      children: renderI18nText("general.back")
     }),
     profilesOnly: !0
   });
@@ -1488,17 +1488,17 @@ let $$tl0 = Ju(function (e) {
     let s = e.isPaid && !zv(e.hubFile);
     return jsx(XT, {
       className: U5,
-      title: s ? _$$t("community.publishing.is_under_review.file") : _$$t("community.publishing.congratulations"),
+      title: s ? getI18nString("community.publishing.is_under_review.file") : getI18nString("community.publishing.congratulations"),
       body: jsxs(Fragment, {
         children: [s && jsx("p", {
           className: h_,
-          children: tx("community.publishing.our_team_will_review")
+          children: renderI18nText("community.publishing.our_team_will_review")
         }), jsx("p", {
           className: h_,
-          children: e.isPaid ? tx("community.publishing.paid_resource_success_info") : a ? tx("community.publishing.your_slides_file_will_soon_be_available_for_everyone") : tx("community.publishing.your_file_will_soon_be_available_for_everyone_no_remix")
+          children: e.isPaid ? renderI18nText("community.publishing.paid_resource_success_info") : a ? renderI18nText("community.publishing.your_slides_file_will_soon_be_available_for_everyone") : renderI18nText("community.publishing.your_file_will_soon_be_available_for_everyone_no_remix")
         }), jsx("p", {
           className: h_,
-          children: s ? tx("community.publishing.feel_free_to_edit_your_page.file") : a ? tx("community.publishing.help_people_discover_your_template") : tx("community.publishing.help_people_discover_your_file")
+          children: s ? renderI18nText("community.publishing.feel_free_to_edit_your_page.file") : a ? renderI18nText("community.publishing.help_people_discover_your_template") : renderI18nText("community.publishing.help_people_discover_your_file")
         }), e.hubFile && !e.isPaid ? jsx(_$$R, {
           author: Lj(e.hubFile),
           resourceType: vt.HUB_FILE,
@@ -1508,28 +1508,28 @@ let $$tl0 = Ju(function (e) {
           disableHeader: !0
         }) : null]
       }),
-      footerLeftSide: tx("community.publishing.review_our_community_guidelines", {
+      footerLeftSide: renderI18nText("community.publishing.review_our_community_guidelines", {
         communityGuidelinesLink: jsx(N_, {
           href: e.isPaid ? "https://www.figma.com/aup" : "https://help.figma.com/hc/articles/360038510573-Figma-Community-Guidelines",
           target: "_blank",
           trusted: !0,
-          children: e.isPaid ? tx("community.publishing.acceptable_use_policy") : tx("community.publishing.community_guidelines")
+          children: e.isPaid ? renderI18nText("community.publishing.acceptable_use_policy") : renderI18nText("community.publishing.community_guidelines")
         })
       }),
       primaryButton: {
         onClick: () => {
-          n && (_$$eD && i && e.hubFile ? t(sf({
+          n && (desktopAPIInstance && i && e.hubFile ? t(sf({
             view: "communityHub",
             subView: "hubFile",
             hubFileId: e.hubFile.id
           })) : Ay.redirect(n, "_blank"), h());
         },
-        text: _$$t("community.publishing.view_page"),
+        text: getI18nString("community.publishing.view_page"),
         dataTestId: "hub-file-publish-view-page"
       },
       secondaryButton: {
         onClick: h,
-        text: _$$t("general.done"),
+        text: getI18nString("general.done"),
         dataTestId: "hub-file-publish-done"
       },
       headerImgSrc: buildUploadUrl("55cce76b49d5d5c5e62352d0d21ee8ce025eef38")

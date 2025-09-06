@@ -2,7 +2,7 @@ import { useRef, useContext } from "react";
 import { k } from "../905/651849";
 import { Xx } from "../figma_app/243213";
 import { h } from "../905/207101";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { wu, xd } from "../905/729783";
 import { f } from "../905/896141";
 export function $$c4(e) {
@@ -75,7 +75,7 @@ export function $$f7(e, t, i) {
         ...t
       };
       wu.trigger(xd, i);
-      sx(xd, i);
+      trackEventAnalytics(xd, i);
     }({
       trackablePath: e.map(e => e.name)
     }, t());

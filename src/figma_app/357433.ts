@@ -1,5 +1,5 @@
 import { getFeatureFlags } from "../905/601108";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { FFileType } from "../figma_app/191312";
 import { Wc, PT } from "../905/669853";
 export let $$n0;
@@ -14,7 +14,7 @@ class l {
     if (null == n || null == l || !d) return;
     let c = n.editorType;
     if (c === FFileType.SLIDES || c === FFileType.FIGMAKE || getFeatureFlags().dsa_restrict_actions_to_design && !this.isInDesignFile()) {
-      e === Wc.DETACHMENT && az.trackDefinedEvent("design_systems_analytics.non_design_component_detached", {
+      e === Wc.DETACHMENT && analyticsEventManager.trackDefinedEvent("design_systems_analytics.non_design_component_detached", {
         fileKey: l,
         componentKey: Object.keys(t ?? {})[0],
         editorType: c || void 0

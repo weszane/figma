@@ -22,7 +22,7 @@ import { Point } from "../905/736624";
 import { TQ, Zl } from "../905/211621";
 import { P as _$$P } from "../905/347284";
 import { S as _$$S } from "../figma_app/552746";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { u1, XE } from "../figma_app/91703";
 import { vq } from "../905/8732";
 import { uP, Oe } from "../figma_app/933328";
@@ -132,7 +132,7 @@ export function $$eE1({
     e.stopPropagation();
   }, []);
   return (getFeatureFlags().ds_variable_props_number_def || e.type !== J0O.NUMBER) && e.type !== J0O.IMAGE && (getFeatureFlags().dse_slots || e.type !== J0O.SLOT) ? jsxs(Ao, {
-    title: _$$t("design_systems.component_properties.edit_component_property", {
+    title: getI18nString("design_systems.component_properties.edit_component_property", {
       propType: throwTypeError(e.type).toLocaleLowerCase()
     }),
     initialPosition: B,
@@ -145,7 +145,7 @@ export function $$eE1({
       className: ep,
       children: [jsx("p", {
         className: ec,
-        children: tx("design_systems.component_properties.name")
+        children: renderI18nText("design_systems.component_properties.name")
       }), jsx(u2, {
         className: e_,
         forwardedRef: inputRef,
@@ -171,11 +171,11 @@ export function $$eE1({
       onPointerDown: V,
       children: [jsx("p", {
         className: ec,
-        children: tx("design_systems.component_properties.description")
+        children: renderI18nText("design_systems.component_properties.description")
       }), jsx(_$$u2, {
         description: e.description ?? "",
         onSave: D,
-        placeholder: e.type === J0O.SLOT ? _$$t("design_systems.component_properties.slot_create_modal.description_placeholder") : _$$t("design_systems.component_properties.description_placeholder"),
+        placeholder: e.type === J0O.SLOT ? getI18nString("design_systems.component_properties.slot_create_modal.description_placeholder") : getI18nString("design_systems.component_properties.description_placeholder"),
         namespace: "edit-component-prop-description"
       })]
     }), jsx(eN, {
@@ -290,7 +290,7 @@ function ey({
   return jsxs(Fragment, {
     children: [jsx("p", {
       className: "edit_component_prop_picker--variantValuesSubheading--L0zoU edit_component_prop_picker--subheading--JbXut",
-      children: tx("design_systems.component_properties.values")
+      children: renderI18nText("design_systems.component_properties.values")
     }), jsx(_$$P, {
       className: "edit_component_prop_picker--variantList--K6wCE",
       ref: P,
@@ -433,7 +433,7 @@ function eT({
   selectVariantsWithPropertyValue: r,
   index: i
 }) {
-  let a = _$$t("design_systems.component_properties.select_variants_with_property_value", {
+  let a = getI18nString("design_systems.component_properties.select_variants_with_property_value", {
     numVariants: t
   });
   return jsx(_$$K, {
@@ -469,7 +469,7 @@ function eI({
       recordingKey: Pt("editComponentPropDefaultValue", throwTypeError(e.type)),
       innerContainerClassName: "edit_component_prop_picker--booleanCellOverride--F9fS2"
     }) : jsxs(l6, {
-      ariaLabel: _$$t("design_systems.component_properties.default_value"),
+      ariaLabel: getI18nString("design_systems.component_properties.default_value"),
       id: "edit-component-prop-default-value-select",
       property: dl(J0O.BOOL, e.defaultValue),
       onChange: l,
@@ -592,7 +592,7 @@ function eA({
       preferredValuesErrorComponent: p,
       sceneGraph: o,
       shouldPerformSwapOnClick: !0,
-      title: _$$t("design_systems.component_properties.choose_default_instance_value")
+      title: getI18nString("design_systems.component_properties.choose_default_instance_value")
     })
   });
 }
@@ -617,11 +617,11 @@ function ex({
     }), jsx(_$$K, {
       onClick: () => t(a),
       htmlAttributes: {
-        "data-tooltip": _$$t("design_systems.component_properties.detach_property"),
+        "data-tooltip": getI18nString("design_systems.component_properties.detach_property"),
         "data-tooltip-type": Ib.TEXT
       },
       recordingKey: Pt("componentPropDef", "detachVariableButton"),
-      "aria-label": _$$t("design_systems.component_properties.detach_property"),
+      "aria-label": getI18nString("design_systems.component_properties.detach_property"),
       children: jsx(_$$U, {
         className: "edit_component_prop_picker--detachButton--mHZfV"
       })
@@ -669,7 +669,7 @@ function eC({
     className: ep,
     children: [jsx("p", {
       className: ec,
-      children: tx("design_systems.component_properties.default_value")
+      children: renderI18nText("design_systems.component_properties.default_value")
     }), jsx(_$$e, {
       condition: c,
       wrapper: e => (assertNotNullish(variableType), jsxs(hu, {

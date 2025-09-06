@@ -1,8 +1,8 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { r as _$$r } from "../905/857502";
-import { sx } from "../905/449184";
-import { tx, t as _$$t } from "../905/303541";
+import { trackEventAnalytics } from "../905/449184";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { A as _$$A } from "../905/776343";
 import { lW } from "../figma_app/471982";
 import { s0 } from "../figma_app/350203";
@@ -46,7 +46,7 @@ export function $$h0({
 }) {
   let [_, A] = useState(!1);
   let y = e => {
-    sx("CTA Clicked", {
+    trackEventAnalytics("CTA Clicked", {
       communityHubEntity: t,
       communityHubEntityId: i,
       action: e
@@ -57,7 +57,7 @@ export function $$h0({
   return jsxs(Fragment, {
     children: [!0 !== f && jsx("h3", {
       className: "social_links--socialLinksHeader--cm9hk text--fontPos14--OL9Hp text--_fontBase--QdLsd",
-      children: tx("community.detail_view.share")
+      children: renderI18nText("community.detail_view.share")
     }), jsxs("div", {
       className: "social_links--socialLinksContainer--ZOvGc",
       children: [jsxs("div", {
@@ -72,11 +72,11 @@ export function $$h0({
         },
         children: [jsx(p, {
           show: _,
-          text: _$$t("fullscreen_actions.link_copied")
+          text: getI18nString("fullscreen_actions.link_copied")
         }), jsx(_$$r, {})]
       }), jsx("a", {
         className: m,
-        href: `https://twitter.com/intent/tweet?url=${h}&text=${encodeURIComponent(_$$t("community.detail_view.check_out_resource_name_by_publisher_on_figmadesign", {
+        href: `https://twitter.com/intent/tweet?url=${h}&text=${encodeURIComponent(getI18nString("community.detail_view.check_out_resource_name_by_publisher_on_figmadesign", {
           resourceName: g,
           publisherString: e
         }))}`,

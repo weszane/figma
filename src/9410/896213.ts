@@ -9,11 +9,11 @@ import { J as _$$J } from "../905/614223";
 import { h3O, rcl } from "../figma_app/763686";
 import { Ay } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
-import { fp } from "../figma_app/27355";
+import { useAtomValueAndSetter } from "../figma_app/27355";
 import f from "classnames";
 import { A as _$$A } from "../vendor/90566";
 import { parsePxInt, parsePxNumber } from "../figma_app/783094";
-import { eD as _$$eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { Ay as _$$Ay } from "../905/612521";
 import { am } from "../figma_app/901889";
 import { Gc } from "../905/63728";
@@ -25,7 +25,7 @@ import { pz } from "../figma_app/60079";
 import { $$ } from "../figma_app/637027";
 import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { W as _$$W } from "../3276/514864";
 import { gR } from "../figma_app/976345";
 import { ZO } from "../figma_app/88239";
@@ -35,7 +35,7 @@ import { b as _$$b } from "../905/985254";
 import { dG } from "../figma_app/753501";
 import { k as _$$k2 } from "../figma_app/564183";
 import { hx } from "../figma_app/290668";
-import { ck } from "../figma_app/469876";
+import { isIntegrationContext } from "../figma_app/469876";
 import { Zr } from "../figma_app/678782";
 import { AD, wF, Wq, uC, A8 } from "../figma_app/578768";
 import { q5 } from "../figma_app/516028";
@@ -49,14 +49,14 @@ import { x as _$$x } from "../905/106997";
 import { Q as _$$Q } from "../3276/336897";
 import { Cf } from "../905/504727";
 import { rJv } from "../figma_app/27776";
-import { XN } from "../figma_app/778880";
+import { isIpadDevice } from "../figma_app/778880";
 import { to } from "../905/156213";
 import { ds } from "../figma_app/314264";
 import { F as _$$F } from "../905/224";
 import { FFileType } from "../figma_app/191312";
 import { _2 } from "../9410/635666";
 import { Bi } from "../905/652992";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { pE } from "../figma_app/630077";
 import { DV } from "../905/739964";
 import { A as _$$A2 } from "../3276/51271";
@@ -79,9 +79,9 @@ function eg(e) {
   let s = useSelector(e => e.teams);
   let o = useSelector(e => e.selectedView?.editorType);
   let l = useSelector(e => "prototype" === e.selectedView.view);
-  let d = o === nT.Design || o === nT.Whiteboard || o === nT.DevHandoff || o === nT.Slides || o === nT.Illustration;
+  let d = o === FEditorType.Design || o === FEditorType.Whiteboard || o === FEditorType.DevHandoff || o === FEditorType.Slides || o === FEditorType.Illustration;
   let c = useDispatch();
-  if (XN || !i || l || !d) return null;
+  if (isIpadDevice || !i || l || !d) return null;
   let u = YL({
     openFile: i,
     teams: s,
@@ -98,7 +98,7 @@ function eg(e) {
         ds("CTA Clicked", i.key, t.getState(), {
           name: "Disabled Voice Call Button"
         });
-        let r = o === nT.Whiteboard ? FFileType.WHITEBOARD : FFileType.DESIGN;
+        let r = o === FEditorType.Whiteboard ? FFileType.WHITEBOARD : FFileType.DESIGN;
         c(to({
           type: DV,
           data: {
@@ -118,7 +118,7 @@ function eg(e) {
     })
   });
   if (u !== gW.ELIGIBLE) {
-    let e = u === gW.DISABLED_BY_ORG ? _$$t("collaboration.voice.audio_has_been_disabled_by_your_organization") : _$$t("collaboration.voice.to_use_audio_in_this_file_move_it_to_a_team_on_one_of_our_paid_plans");
+    let e = u === gW.DISABLED_BY_ORG ? getI18nString("collaboration.voice.audio_has_been_disabled_by_your_organization") : getI18nString("collaboration.voice.to_use_audio_in_this_file_move_it_to_a_team_on_one_of_our_paid_plans");
     return jsx("span", {
       className: WF,
       "data-tooltip-type": Ib.TEXT,
@@ -136,7 +136,7 @@ function eg(e) {
       fileKey: i.key,
       className: iw,
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": _$$t("collaboration.voice.start_conversation"),
+      "data-tooltip": getI18nString("collaboration.voice.start_conversation"),
       hidePopover: e.hidePopover,
       children: jsx("span", {
         className: iG,
@@ -153,7 +153,7 @@ function eg(e) {
   });
 }
 let eE = "multiplayer-nickname-dropdown";
-ck();
+isIntegrationContext();
 let eT = parsePxNumber(rJv);
 export function $$ew1(e, t, i, r, n, a, s) {
   if (!n) return;
@@ -230,11 +230,11 @@ let ej = forwardRef(function (e, t) {
     className: MT,
     children: jsx(_$$D, {
       ref: s,
-      "aria-label": _$$t("search.search_file_users"),
+      "aria-label": getI18nString("search.search_file_users"),
       autoFocus: !0,
       onChange: setQuery,
       onClick: dG,
-      placeholder: _$$t("collaboration.spotlight.menu.search.placeholder"),
+      placeholder: getI18nString("collaboration.spotlight.menu.search.placeholder"),
       spellCheck: !1,
       value: query
     })
@@ -256,8 +256,8 @@ function eI({
 }) {
   let x = useRef(null);
   let y = useRef(null);
-  let [b, C] = fp(ah);
-  let [v, S] = fp(Dv);
+  let [b, C] = useAtomValueAndSetter(ah);
+  let [v, S] = useAtomValueAndSetter(Dv);
   let [L, R] = useState(310);
   let M = useRef(null);
   let [P, F] = useState(0);
@@ -291,7 +291,7 @@ function eI({
   let ei = et && i.sessionID === et.sessionID ? jsx(pz, {
     onClick: ee,
     className: BK,
-    children: tx("collaboration.spotlight.button.stop")
+    children: renderI18nText("collaboration.spotlight.button.stop")
   }) : jsx($$, {
     onClick: q,
     className: BK,
@@ -303,7 +303,7 @@ function eI({
     "data-dropdown-tooltip": h && f ? f : void 0,
     "data-tooltip-type": Ib.TEXT,
     "data-tooltip-show-below": !0,
-    children: tx("collaboration.spotlight.tooltip.spotlight_me")
+    children: renderI18nText("collaboration.spotlight.tooltip.spotlight_me")
   });
   let er = s.length + (o?.length ?? 0) > 8;
   let [en, ea] = useState("");
@@ -356,7 +356,7 @@ function eI({
     }), "" !== en && ec && jsxs(Fragment, {
       children: [eu, jsx("div", {
         className: `${Tw} ${_$$s.mb8.$}`,
-        children: tx("fullscreen.toolbar.multiplayer.no_user_found")
+        children: renderI18nText("fullscreen.toolbar.multiplayer.no_user_found")
       })]
     }), ed && jsxs(Fragment, {
       children: [eu, jsxs(_$$P, {
@@ -367,10 +367,10 @@ function eI({
         ref: M,
         children: [el && jsx("div", {
           className: Tw,
-          children: tx("fullscreen.toolbar.multiplayer.currently_viewing")
+          children: renderI18nText("fullscreen.toolbar.multiplayer.currently_viewing")
         }), searchResults.length > 0 && jsx(Fragment, {
           children: jsx(_$$W, {
-            label: _$$t("fullscreen.toolbar.multiplayer.currently_viewing_users"),
+            label: getI18nString("fullscreen.toolbar.multiplayer.currently_viewing_users"),
             renderer: d,
             onSelect: e => {
               e.length && (u(e[0]), B(oB()));
@@ -382,9 +382,9 @@ function eI({
         }), _searchResults.length > 0 && jsxs(Fragment, {
           children: [jsx("div", {
             className: Tw,
-            children: tx("fullscreen.toolbar.multiplayer.previously_viewed")
+            children: renderI18nText("fullscreen.toolbar.multiplayer.previously_viewed")
           }), jsx(_$$W, {
-            label: _$$t("fullscreen.toolbar.multiplayer.previously_viewed_users"),
+            label: getI18nString("fullscreen.toolbar.multiplayer.previously_viewed_users"),
             renderer: l,
             initiallyNotSelected: !0,
             customClassName: aK,
@@ -429,8 +429,8 @@ function ek({
 }) {
   let O = useRef(null);
   let L = useRef(null);
-  let [R, M] = fp(ah);
-  let [P, F] = fp(Dv);
+  let [R, M] = useAtomValueAndSetter(ah);
+  let [P, F] = useAtomValueAndSetter(Dv);
   let [B, U] = useState(310);
   let G = useRef(null);
   let [K, z] = useState(0);
@@ -465,7 +465,7 @@ function ek({
   let eo = es && e.sessionID === es.sessionID ? jsx(pz, {
     onClick: ea,
     className: BK,
-    children: tx("collaboration.spotlight.button.stop")
+    children: renderI18nText("collaboration.spotlight.button.stop")
   }) : jsx($$, {
     onClick: er,
     className: BK,
@@ -477,7 +477,7 @@ function ek({
     "data-dropdown-tooltip": d && u ? u : void 0,
     "data-tooltip-type": Ib.TEXT,
     "data-tooltip-show-below": !0,
-    children: tx("collaboration.spotlight.tooltip.spotlight_me")
+    children: renderI18nText("collaboration.spotlight.tooltip.spotlight_me")
   });
   let el = t.length + (i?.length ?? 0) > 8;
   let [ed, ec] = useState("");
@@ -508,20 +508,20 @@ function ek({
   let ey = (e, t) => {
     let i = Gc(() => {
       let t = `/files${g}/user/${e.userID}`;
-      _$$Ay.redirect(t, _$$eD ? void 0 : "_blank");
+      _$$Ay.redirect(t, desktopAPIInstance ? void 0 : "_blank");
     });
     let n = [];
     let a = f.sessionNominatedByCurrentUser === e.sessionID;
     let s = f.presenterSessionID === e.sessionID;
     let o = _ && !!e.sitesViewState && _$$a(e.sitesViewState);
     !t || s || d || (a ? n.push({
-      text: tx("collaboration.spotlight.tooltip.menu.cancel_ask_to_spotlight"),
+      text: renderI18nText("collaboration.spotlight.tooltip.menu.cancel_ask_to_spotlight"),
       onClick: () => {
         AD(e) && C(e.sessionID, f);
       },
       key: "cancel-ask-to-spotlight"
     }) : n.push({
-      text: tx("collaboration.spotlight.tooltip.ask_to_spotlight"),
+      text: renderI18nText("collaboration.spotlight.tooltip.ask_to_spotlight"),
       onClick: () => {
         AD(e) && x(e.sessionID, f);
       },
@@ -529,7 +529,7 @@ function ek({
       key: "ask-to-spotlight"
     }));
     n.push({
-      text: tx("avatar.tooltip.view_profile"),
+      text: renderI18nText("avatar.tooltip.view_profile"),
       onClick: e => {
         i(e);
       },
@@ -570,7 +570,7 @@ function ek({
     }), "" !== ed && ef && jsxs(Fragment, {
       children: [ex, jsx("div", {
         className: `${hg} ${_$$s.mb8.$}`,
-        children: tx("fullscreen.toolbar.multiplayer.no_user_found")
+        children: renderI18nText("fullscreen.toolbar.multiplayer.no_user_found")
       })]
     }), em && jsxs(Fragment, {
       children: [ex, jsxs(_$$P, {
@@ -581,13 +581,13 @@ function ek({
         ref: G,
         children: [eh && jsx("h2", {
           className: hg,
-          children: tx("fullscreen.toolbar.multiplayer.currently_viewing")
+          children: renderI18nText("fullscreen.toolbar.multiplayer.currently_viewing")
         }), searchResults.length > 0 && searchResults.map(e => jsx(_$$Fragment, {
           children: ey(e, !d)
         }, `currentViewer-${e.userID}`)), _searchResults2.length > 0 && jsxs(Fragment, {
           children: [jsx("h2", {
             className: hg,
-            children: tx("fullscreen.toolbar.multiplayer.previously_viewed")
+            children: renderI18nText("fullscreen.toolbar.multiplayer.previously_viewed")
           }), _searchResults2.map(e => jsx(_$$Fragment, {
             children: ey(e, !1)
           }, `previousViewer-${e.userID}`))]
@@ -663,8 +663,8 @@ let $$eO0 = memo(function (e) {
   let ee = Zr("spotlight-me");
   let et = _$$G();
   let ei = !$ && (e.disableFollowing || k || !ee);
-  ei && et && (t = _$$t("left_rail.only_available_on_canvas"));
-  let [er, en] = fp(ah);
+  ei && et && (t = getI18nString("left_rail.only_available_on_canvas"));
+  let [er, en] = useAtomValueAndSetter(ah);
   er && !Y && en(!1);
   let ea = f.current && _.current ? f.current.clientWidth - _.current.clientWidth : void 0;
   let es = Wq(ea, thresholdUsesContainerWidth);
@@ -701,20 +701,20 @@ let $$eO0 = memo(function (e) {
     }) {
       let n = Gc(() => {
         let t = `/files${ef}/user/${e.userID}`;
-        _$$Ay.redirect(t, _$$eD ? void 0 : "_blank");
+        _$$Ay.redirect(t, desktopAPIInstance ? void 0 : "_blank");
       });
       let a = [];
       let s = multiplayer.sessionNominatedByCurrentUser === e.sessionID;
       let o = multiplayer.presenterSessionID === e.sessionID;
       let l = eE && !!e.sitesViewState && _$$a(e.sitesViewState);
       o || ei || (s ? a.push({
-        text: tx("collaboration.spotlight.tooltip.menu.cancel_ask_to_spotlight"),
+        text: renderI18nText("collaboration.spotlight.tooltip.menu.cancel_ask_to_spotlight"),
         onClick: () => {
           AD(e) && eC(e.sessionID, multiplayer);
         },
         key: "cancel-ask-to-spotlight"
       }) : a.push({
-        text: tx("collaboration.spotlight.tooltip.ask_to_spotlight"),
+        text: renderI18nText("collaboration.spotlight.tooltip.ask_to_spotlight"),
         onClick: () => {
           AD(e) && eg(e.sessionID, multiplayer);
         },
@@ -722,7 +722,7 @@ let $$eO0 = memo(function (e) {
         key: "ask-to-spotlight"
       }));
       a.push({
-        text: tx("avatar.tooltip.view_profile"),
+        text: renderI18nText("avatar.tooltip.view_profile"),
         onClick: e => {
           n(e);
         },
@@ -760,7 +760,7 @@ let $$eO0 = memo(function (e) {
     children: jsxs("button", {
       ref: _,
       "aria-expanded": null != x.current && dropdownShown?.type === eA,
-      "aria-label": _$$t("fullscreen.toolbar.multiplayer.multiplayer_tools"),
+      "aria-label": getI18nString("fullscreen.toolbar.multiplayer.multiplayer_tools"),
       className: g()({
         [XE]: !0,
         [yx]: overflowUsers.length > 0,
@@ -768,7 +768,7 @@ let $$eO0 = memo(function (e) {
         [wH]: Y,
         [yo]: !Y && P && !z
       }),
-      "data-tooltip": _$$t("fullscreen.toolbar.multiplayer.multiplayer_tools"),
+      "data-tooltip": getI18nString("fullscreen.toolbar.multiplayer.multiplayer_tools"),
       "data-tooltip-offset-x": _.current && j.current ? _.current.offsetWidth / 2 - j.current.offsetWidth / 2 - 1.5 : 0,
       "data-tooltip-offset-y": _.current && f.current ? f.current.clientHeight / 2 - _.current.clientHeight / 2 : 0,
       "data-tooltip-type": Ib.TEXT,
@@ -861,10 +861,10 @@ let $$eO0 = memo(function (e) {
         }) {
           let i = Gc(() => {
             let t = `/files${ef}/user/${e.userID}`;
-            _$$Ay.redirect(t, _$$eD ? void 0 : "_blank");
+            _$$Ay.redirect(t, desktopAPIInstance ? void 0 : "_blank");
           });
           let n = [{
-            text: tx("avatar.tooltip.view_profile"),
+            text: renderI18nText("avatar.tooltip.view_profile"),
             onClick: e => {
               i(e);
             },

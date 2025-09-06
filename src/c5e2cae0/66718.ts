@@ -8,7 +8,7 @@ import { Jn } from "../905/17223";
 import { I as _$$I } from "../c5e2cae0/393403";
 import { Lf, VE, Kz, tM, vd } from "../figma_app/637027";
 import { B } from "../905/714743";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Lo, to, Ce } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { Ju } from "../905/102752";
@@ -19,23 +19,23 @@ import { A as _$$A } from "../6828/364616";
 import { A as _$$A2 } from "../5724/933949";
 let y = "upgrade_contact_sales_modal--closeButton--715WY";
 let T = () => [{
-  name: _$$t("contact_sales.topic.request_a_sales_demo_or_talk_to_sales"),
+  name: getI18nString("contact_sales.topic.request_a_sales_demo_or_talk_to_sales"),
   value: "request_a_sales_demo_or_talk_to_sales"
 }, {
-  name: _$$t("contact_sales.topic.billing_and_invoicing"),
+  name: getI18nString("contact_sales.topic.billing_and_invoicing"),
   value: "billing_and_invoicing"
 }, {
-  name: _$$t("contact_sales.topic.technical_and_product_support"),
+  name: getI18nString("contact_sales.topic.technical_and_product_support"),
   value: "technical_and_product_support"
 }, {
-  name: _$$t("contact_sales.topic.educators_and_students"),
+  name: getI18nString("contact_sales.topic.educators_and_students"),
   value: "educators_and_students"
 }];
 let N = () => jsxs(Fragment, {
   children: [jsx("option", {
     value: "",
     disabled: !0,
-    children: _$$t("contact_sales.which_topic_best_fits_your_needs")
+    children: getI18nString("contact_sales.which_topic_best_fits_your_needs")
   }), T().map(e => jsx("option", {
     value: e.value,
     "data-testid": `select-option-${e.value}`,
@@ -43,29 +43,29 @@ let N = () => jsxs(Fragment, {
   }, e.value))]
 });
 let b = () => [{
-  name: _$$t("contact_sales.plan.starter"),
+  name: getI18nString("contact_sales.plan.starter"),
   value: "starter"
 }, {
-  name: _$$t("contact_sales.plan.professional"),
+  name: getI18nString("contact_sales.plan.professional"),
   value: "professional"
 }, {
-  name: _$$t("contact_sales.plan.organization"),
+  name: getI18nString("contact_sales.plan.organization"),
   value: "organization"
 }, {
-  name: _$$t("contact_sales.plan.enterprise"),
+  name: getI18nString("contact_sales.plan.enterprise"),
   value: "enterprise"
 }, {
-  name: _$$t("contact_sales.plan.figma_for_government"),
+  name: getI18nString("contact_sales.plan.figma_for_government"),
   value: "figma_for_government"
 }, {
-  name: _$$t("contact_sales.plan.not_sure"),
+  name: getI18nString("contact_sales.plan.not_sure"),
   value: "not_sure"
 }];
 let C = () => jsxs(Fragment, {
   children: [jsx("option", {
     value: "",
     disabled: !0,
-    children: _$$t("contact_sales.what_figma_plan_are_you_inquiring_about")
+    children: getI18nString("contact_sales.what_figma_plan_are_you_inquiring_about")
   }), b().map(e => jsx("option", {
     value: e.value,
     "data-testid": `select-option-${e.value}`,
@@ -87,7 +87,7 @@ let w = Ju(function ({
           children: [jsx(B, {
             className: "upgrade_contact_sales_modal--successIcon---zT4I",
             svg: _$$A2
-          }), tx("universal_upgrade.contact_sales.thank_you")]
+          }), renderI18nText("universal_upgrade.contact_sales.thank_you")]
         }), jsx(Jn, {
           className: y,
           onClick: e,
@@ -95,7 +95,7 @@ let w = Ju(function ({
         })]
       }), jsx("div", {
         className: "upgrade_contact_sales_modal--successModalText--f1aRe text--fontPos13--xW8hS text--_fontBase--QdLsd",
-        children: tx("universal_upgrade.contact_sales.sales_will_reach_out")
+        children: renderI18nText("universal_upgrade.contact_sales.sales_will_reach_out")
       })]
     })
   });
@@ -142,8 +142,8 @@ export function $$E0(e) {
   });
   let A = debounce(() => {
     let e = {};
-    let t = _$$t("universal_upgrade.this_field_is_required");
-    if (g.email ? xf(g.email) || (e.email = _$$t("universal_upgrade.please_provide_a_valid_email_address")) : e.email = t, g.name || (e.name = t), g.companyName || (e.companyName = t), g.topic || (e.topic = t), g.plan || (e.plan = t), S(t => ({
+    let t = getI18nString("universal_upgrade.this_field_is_required");
+    if (g.email ? xf(g.email) || (e.email = getI18nString("universal_upgrade.please_provide_a_valid_email_address")) : e.email = t, g.name || (e.name = t), g.companyName || (e.companyName = t), g.topic || (e.topic = t), g.plan || (e.plan = t), S(t => ({
       ...t,
       formErrors: e,
       result: void 0
@@ -229,7 +229,7 @@ export function $$E0(e) {
         className: "upgrade_contact_sales_modal--titleWrapper--mKMG2",
         children: [jsx("h1", {
           className: "upgrade_contact_sales_modal--modalTitle--7k87R text--fontPos13--xW8hS text--_fontBase--QdLsd",
-          children: tx("universal_upgrade.contact_sales_title")
+          children: renderI18nText("universal_upgrade.contact_sales_title")
         }), jsx(Jn, {
           className: y,
           onClick: T,
@@ -239,16 +239,16 @@ export function $$E0(e) {
         className: "upgrade_contact_sales_modal--modalBody--FTi91",
         children: ["error" === g.result && jsxs(Fragment, {
           children: [jsx(_$$I, {
-            message: _$$t("universal_upgrade.there_was_an_error_processing_your_information_please_try_again")
+            message: getI18nString("universal_upgrade.there_was_an_error_processing_your_information_please_try_again")
           }), jsx(Kz, {
             multiple: .5
           })]
         }), jsxs("fieldset", {
-          children: [P(_$$t("universal_upgrade.email_address"), "email"), P(_$$t("universal_upgrade.full_name"), "name"), P(_$$t("universal_upgrade.company_name"), "companyName"), M(_$$t("contact_sales.which_topic_best_fits_your_needs"), "topic", N()), M(_$$t("contact_sales.what_figma_plan_are_you_inquiring_about"), "plan", C()), P(_$$t("contact_sales.phone_number_optional"), "phone")]
+          children: [P(getI18nString("universal_upgrade.email_address"), "email"), P(getI18nString("universal_upgrade.full_name"), "name"), P(getI18nString("universal_upgrade.company_name"), "companyName"), M(getI18nString("contact_sales.which_topic_best_fits_your_needs"), "topic", N()), M(getI18nString("contact_sales.what_figma_plan_are_you_inquiring_about"), "plan", C()), P(getI18nString("contact_sales.phone_number_optional"), "phone")]
         }), jsx(Kz, {
           multiple: 1
         }), jsx("p", {
-          children: tx("universal_upgrade.how_can_we_help_optional")
+          children: renderI18nText("universal_upgrade.how_can_we_help_optional")
         }), jsx(Kz, {
           multiple: 1
         }), jsx(_$$v, {
@@ -258,17 +258,17 @@ export function $$E0(e) {
             ...t,
             freeText: e.target.value
           })),
-          placeholder: g.overridePlaceholderText ?? _$$t("universal_upgrade.e_g_i_m_looking_to_set_up_a_demo_of_figma"),
+          placeholder: g.overridePlaceholderText ?? getI18nString("universal_upgrade.e_g_i_m_looking_to_set_up_a_demo_of_figma"),
           maxLength: 500
         })]
       }), jsxs("div", {
         className: "upgrade_contact_sales_modal--modalFooter--WNk7P",
         children: [jsx(tM, {
           onClick: T,
-          children: tx("general.cancel")
+          children: renderI18nText("general.cancel")
         }), jsx(vd, {
           onClick: A,
-          children: tx("universal_upgrade.submit")
+          children: renderI18nText("universal_upgrade.submit")
         })]
       })]
     })

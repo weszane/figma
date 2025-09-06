@@ -4,24 +4,24 @@ import { useDispatch, useSelector } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { X as _$$X } from "../905/736922";
 import { Ql } from "../figma_app/387100";
-import { fp, eU } from "../figma_app/27355";
+import { useAtomValueAndSetter, atom } from "../figma_app/27355";
 import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import u from "classnames";
 import { n as _$$n } from "../vendor/547481";
-import { sx, az } from "../905/449184";
+import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { j } from "../905/296640";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { Fo, Uz, sN } from "../905/63728";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { y as _$$y } from "../figma_app/404310";
 import { Me } from "../figma_app/617427";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { hA } from "../figma_app/88239";
 import { lW } from "../figma_app/11182";
 import { m0 } from "../figma_app/976749";
 import { sS } from "../figma_app/516028";
 import { Wh } from "../figma_app/615482";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { Ib } from "../905/129884";
 import { x as _$$x, Q } from "../905/346809";
 import { zi } from "../figma_app/626177";
@@ -48,19 +48,19 @@ function P({
     isMultiSelect,
     sceneGraph,
     editorType
-  } = _$$R(e => {
+  } = selectWithShallowEqual(e => {
     let t = Object.keys(e.mirror.sceneGraphSelection);
     return {
       selectedPageId: e.mirror.appModel.currentPage,
       selectedNodeId: t[0],
       isMultiSelect: t.length > 1,
       sceneGraph: e.mirror.sceneGraph,
-      editorType: "fullscreen" !== e.selectedView.view ? nT.Design : e.selectedView.editorType
+      editorType: "fullscreen" !== e.selectedView.view ? FEditorType.Design : e.selectedView.editorType
     };
   });
   let A = !!hA();
   let x = r => {
-    e && sx("inspection_panel_shortcut", {
+    e && trackEventAnalytics("inspection_panel_shortcut", {
       ...r,
       file_key: t,
       name: e,
@@ -79,7 +79,7 @@ function P({
         action: "copy"
       })) : Fo(e) && e.keyCode === Uz.A ? (t = !0, x({
         action: "select_all"
-      })) : Ay.mac ? "Meta" === e.key && (t = !0) : "Control" === e.key && (t = !0), (e.target?.type === "text" || e.target?.type === "textarea" || e.target?.tabIndex === 0) && (t = !0), t) ;else {
+      })) : BrowserInfo.mac ? "Meta" === e.key && (t = !0) : "Control" === e.key && (t = !0), (e.target?.type === "text" || e.target?.type === "textarea" || e.target?.tabIndex === 0) && (t = !0), t) ;else {
         let e = window.getSelection();
         if (!e) return;
         e.removeAllRanges();
@@ -87,7 +87,7 @@ function P({
     },
     onDoubleClick: r => {
       if (e) {
-        sx("inspection_panel_dbl_clicked", {
+        trackEventAnalytics("inspection_panel_dbl_clicked", {
           name: e,
           x: r.clientX,
           y: r.clientY,
@@ -107,7 +107,7 @@ function P({
           n = e?.guid;
           i = e?.type;
         } catch {}
-        sx("inspection_panel_clicked", {
+        trackEventAnalytics("inspection_panel_clicked", {
           name: e,
           x: r.clientX,
           y: r.clientY,
@@ -216,7 +216,7 @@ export function $$U1(e) {
     title,
     isDevMode: x
   }), [x, title]);
-  let [k, M] = fp(isCollapsedAtom);
+  let [k, M] = useAtomValueAndSetter(isCollapsedAtom);
   let U = hasCollapsibleContent && collapseEnabled;
   let B = useCallback(() => {
     U && M?.(!k);
@@ -285,24 +285,24 @@ export function $$U1(e) {
       children: [additionalHeaders, W && copyAllValue && !x && jsx(Me, {
         htmlAttributes: {
           ...eventHandlers,
-          "data-tooltip": t("inspect_panel.copy"),
+          "data-tooltip": getI18nString("inspect_panel.copy"),
           "data-tooltip-type": Ib.TEXT
         },
         onClick: N,
         trackingProperties: D,
-        "aria-label": t("inspect_panel.copy"),
+        "aria-label": getI18nString("inspect_panel.copy"),
         disabled: e.disableCopyAll,
         children: jsx(_$$X, {})
       })]
     }), H && e.children]
   });
 }
-let B = Wh(() => eU({}));
-let G = eU(() => !1, () => {});
+let B = Wh(() => atom({}));
+let G = atom(() => !1, () => {});
 export function $$V0(e, t = !1) {
   let r = function (e, t = !1) {
     let r = useMemo(() => e ? _$$n(300, !0, (t, r) => {
-      t(B, t => (az.trackDefinedEvent("dev_mode.inspect_panel.collapse", {
+      t(B, t => (analyticsEventManager.trackDefinedEvent("dev_mode.inspect_panel.collapse", {
         panelKey: e,
         expanded: !r
       }), {
@@ -310,7 +310,7 @@ export function $$V0(e, t = !1) {
         [e]: r
       }));
     }) : lQ, [e]);
-    return useMemo(() => e ? eU(r => r(B)[e] ?? t, (e, t, n) => {
+    return useMemo(() => e ? atom(r => r(B)[e] ?? t, (e, t, n) => {
       r(t, n);
     }) : null, [e, r, t]);
   }(m0() ? e : void 0, t);
@@ -356,7 +356,7 @@ export function $$z3(e) {
     collapsedInspectionPanelAtom,
     collapseEnabled
   } = $$V0(collapsiblePanelKey, e.defaultCollapsed);
-  let [b] = fp(collapsedInspectionPanelAtom);
+  let [b] = useAtomValueAndSetter(collapsedInspectionPanelAtom);
   return jsx(P, {
     border: !0,
     dataTestId: `${recordingKey}-inspection-panel`,

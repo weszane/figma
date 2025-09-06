@@ -2,7 +2,7 @@ import { getComponentInfoById } from "../figma_app/664063";
 import { z_ } from "../figma_app/338442";
 import { l7 } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { oy } from "../figma_app/964367";
 export function $$d2(e, t) {
   let r = [];
@@ -59,7 +59,7 @@ export function $$u0(e, t, r, l) {
           u++;
       }
     });
-    sx("autosuggest_props_applied", {
+    trackEventAnalytics("autosuggest_props_applied", {
       componentKey: e?.key,
       numTextProps: c,
       numVariantProps: u,

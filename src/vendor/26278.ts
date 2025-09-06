@@ -1,5 +1,5 @@
 import { U } from "../vendor/885230";
-import { KU } from "../vendor/325489";
+import { getClient } from "../vendor/325489";
 import { sy, i_ } from "../vendor/40198";
 import { Kg } from "../vendor/314131";
 import { Ce } from "../vendor/998256";
@@ -23,7 +23,7 @@ export function $$s0(e, n) {
   return r;
 }
 export function $$c1(e) {
-  let n = KU();
+  let n = getClient();
   if (!n) return {};
   let i = $$s0(et(e).trace_id || "", n);
   let t = zU(e);
@@ -49,7 +49,7 @@ export function $$c1(e) {
   "url" !== b && y && (i.transaction = y);
   (function (e) {
     if ("boolean" == typeof __SENTRY_TRACING__ && !__SENTRY_TRACING__) return !1;
-    let n = KU();
+    let n = getClient();
     let i = n && n.getOptions();
     return !!i && (i.enableTracing || "tracesSampleRate" in i || "tracesSampler" in i);
   })() && (i.sampled = String(pK(t)));

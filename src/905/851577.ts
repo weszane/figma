@@ -1,7 +1,7 @@
 import { useRef, useContext, useCallback } from "react";
 import { useStore, useDispatch } from "../vendor/514228";
 import { h as _$$h } from "../905/207101";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { BV, Pt } from "../figma_app/806412";
 import { Point } from "../905/736624";
 import { jD } from "../905/765855";
@@ -70,9 +70,9 @@ export function $$b0(e, t) {
   });
   let N = useRef(!1);
   let P = BV(Pt("insertableResource", t.recordingKey || ""), "pointerdown", e => {
-    2 === e.button || e.ctrlKey || (e.stopPropagation(), Ay.isMeetDevice && dispatch({
+    2 === e.button || e.ctrlKey || (e.stopPropagation(), BrowserInfo.isMeetDevice && dispatch({
       type: "start click"
-    }), x.current = M(), document.addEventListener("pointerup", D), N.current = !0, Ay.isMeetDevice && document.addEventListener("touchend", D), I.current = !0, R(e));
+    }), x.current = M(), document.addEventListener("pointerup", D), N.current = !0, BrowserInfo.isMeetDevice && document.addEventListener("touchend", D), I.current = !0, R(e));
   });
   let O = useCallback(BV(Pt("insertableResource", t.recordingKey || ""), "pointermove", t => {
     let n = i.getState().mirror.sceneGraphSelection;
@@ -122,7 +122,7 @@ export function $$b0(e, t) {
     let a = n?.dragPosition;
     let o = E.current && a && E.current.distanceTo(a) > Nq;
     if (!e.isDraggingDisabled && r && o || I.current && e.clickToInsert_DEPRECATED) {
-      Ay.isMeetDevice && dispatch({
+      BrowserInfo.isMeetDevice && dispatch({
         type: "end insert"
       });
       let r = zR(I.current ? void 0 : n?.dragPosition);
@@ -136,7 +136,7 @@ export function $$b0(e, t) {
     t.onPointerUpCallback?.();
     C(null);
     N.current = !1;
-    Ay.isMeetDevice && document.removeEventListener("touchend", D);
+    BrowserInfo.isMeetDevice && document.removeEventListener("touchend", D);
     document.removeEventListener("pointerup", D);
     document.removeEventListener("pointermove", O);
   }, {

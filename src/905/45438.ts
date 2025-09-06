@@ -5,7 +5,7 @@ import { E } from "../905/632989";
 import { E as _$$E } from "../905/235326";
 import { U } from "../905/103637";
 import d from "classnames";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { e as _$$e } from "../905/194891";
 import { Ib } from "../905/129884";
 import { sD } from "../figma_app/826998";
@@ -61,7 +61,7 @@ function y({
     trusted: !0,
     onClick: o,
     htmlAttributes: {
-      "data-tooltip": _$$t("design_systems.instance_panel.view_library_in_community"),
+      "data-tooltip": getI18nString("design_systems.instance_panel.view_library_in_community"),
       "data-tooltip-type": Ib.TEXT
     },
     children: [jsx("span", {

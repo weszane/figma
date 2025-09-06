@@ -1,23 +1,54 @@
-import { atom } from "jotai";
-import { atomStoreManager } from "../905/490038";
-export function $$a0({
-  get: e,
-  subscribe: t
+import { atom } from 'jotai'
+import { atomStoreManager } from '../905/490038'
+
+/**
+ * Creates a custom atom that subscribes to external updates and increments its value.
+ *
+ * @param params - Object containing get and subscribe functions.
+ * @returns A Jotai atom that triggers updates based on external subscription.
+ *
+ * Original function name: $$a0
+ */
+export function setupSubscriptionAtom<T>({
+  get,
+  subscribe,
+}: {
+  get: () => T
+  subscribe: (callback: () => void) => () => void
 }) {
-  let i = !1;
-  let a = atom(0);
-  let s = () => atomStoreManager.set(a, e => e + 1);
-  a.onMount = () => {
-    i = !0;
-    let e = t(s);
+  let isMounted = false
+  const countAtom = atom(0)
+
+  /**
+   * Increments the value of countAtom in the atomStoreManager.
+   * Original variable name: s
+   */
+  const incrementAtom = () => atomStoreManager.set(countAtom, val => val + 1)
+
+  // Attach mount lifecycle to atom
+  countAtom.onMount = () => {
+    isMounted = true
+    const unsubscribe = subscribe(incrementAtom)
     return () => {
-      i = !1;
-      e();
-      Promise.resolve().then(s);
-    };
-  };
-  return atom(t => (t(a), Promise.resolve().then(() => {
-    i || s();
-  }), e()));
+      isMounted = false
+      unsubscribe()
+      Promise.resolve().then(incrementAtom)
+    }
+  }
+
+  /**
+   * Atom that triggers updates and returns the current value from get().
+   * Original return atom in $$a0
+   */
+  return atom((getAtom) => {
+    getAtom(countAtom)
+    Promise.resolve().then(() => {
+      if (!isMounted)
+        incrementAtom()
+    })
+    return get()
+  })
 }
-export const S = $$a0;
+
+// Refactored export name for S
+export const S = setupSubscriptionAtom

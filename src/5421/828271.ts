@@ -14,7 +14,7 @@ import { l7, nc } from "../905/189185";
 import { sH, Hr, dI, fn } from "../905/871411";
 import { kh } from "../figma_app/387100";
 import { getFeatureFlags } from "../905/601108";
-import { md, fp } from "../figma_app/27355";
+import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import _ from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
 import { U as _$$U } from "../figma_app/901889";
@@ -24,7 +24,7 @@ import { Pt } from "../figma_app/806412";
 import { D8 } from "../905/511649";
 import { Point } from "../905/736624";
 import { B as _$$B } from "../905/714743";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { XE, u1 } from "../figma_app/91703";
 import { AO, o$ } from "../figma_app/8833";
 import { JV, Eq, sX, cP, js, mj } from "../figma_app/451499";
@@ -92,7 +92,7 @@ function eu() {
   let t = useSelector(e => Yh(e.mirror.appModel, JT.MAGIC_LINK));
   let n = _$$a();
   if (!PE()) return null;
-  let i = n ? _$$t("fullscreen.toolbar.prototyping-add-interactions-tooltip-v2") : _$$t("fullscreen.toolbar.prototyping-add-interactions-tooltip-ga");
+  let i = n ? getI18nString("fullscreen.toolbar.prototyping-add-interactions-tooltip-v2") : getI18nString("fullscreen.toolbar.prototyping-add-interactions-tooltip-ga");
   return jsx("span", {
     className: "magic_link--magicLinkButton--CWefW",
     "data-testid": "magic-link-entry",
@@ -298,7 +298,7 @@ function eS(e) {
     className: "prototype_interaction_list--categoryRow--Xxfm4",
     children: jsx(_$$J, {
       className: "prototype_interaction_list--categoryLabel--0dGOM",
-      children: tx("proto.interaction_list.variant_interactions")
+      children: renderI18nText("proto.interaction_list.variant_interactions")
     })
   });
   let p = o3(nt.useGrid);
@@ -344,7 +344,7 @@ function eS(e) {
         stylePickerShown: {
           isShown: !1
         },
-        title: e.inSites ? "" : _$$t("proto.title_interactions"),
+        title: e.inSites ? "" : getI18nString("proto.title_interactions"),
         toggleScrollBehaviorPicker: e.toggleScrollBehaviorPicker
       })
     }), d && c, d && jsx(dD.Provider, {
@@ -415,7 +415,7 @@ function eA({
   let Q = X?.id === o$ ? X : null;
   let et = useSelector(dK);
   let [en, eo] = useState(!1);
-  let ei = md(NE) ? ej : eE;
+  let ei = useAtomWithSubscription(NE) ? ej : eE;
   let er = useContext(qd);
   let ea = function (e, t) {
     let n = new Set(t.map(e => {
@@ -428,8 +428,8 @@ function eA({
     }
     return !1;
   }(t, G);
-  let [el, es] = fp(_$$j);
-  let ed = md(_$$u2);
+  let [el, es] = useAtomValueAndSetter(_$$j);
+  let ed = useAtomWithSubscription(_$$u2);
   let {
     useGrid
   } = useContext(dD);
@@ -514,7 +514,7 @@ function eA({
   let eO = new js(!0, eN);
   let eL = mj(eS);
   let eD = eA?.actions?.length ?? 0;
-  let eR = eD > 1 ? _$$t("sites.panel.interaction_summary", {
+  let eR = eD > 1 ? getI18nString("sites.panel.interaction_summary", {
     numActions: eD
   }) : eT || !eS || "NONE" === eL ? void 0 : eO.format(eL);
   let {
@@ -589,7 +589,7 @@ function eA({
   let eQ = ea && !g;
   let e0 = jsx(_$$Z, {});
   let e1 = eW || eZ || eX;
-  let e2 = eW ? _$$t("proto.prototype_panel.this_interaction_must_swap_from_a_variant_to_another_variant_within_the_same_component_set_tooltip") : eZ ? _$$t("proto.prototype_panel.prototype_multiple_interactions_mouse_and_hover_tooltip") : eX ? _$$t("proto.prototype_panel.this_interaction_will_not_be_triggered_as_interactions_on_instances_are_triggered_before_inherited_internal_interactions_tooltip") : "";
+  let e2 = eW ? getI18nString("proto.prototype_panel.this_interaction_must_swap_from_a_variant_to_another_variant_within_the_same_component_set_tooltip") : eZ ? getI18nString("proto.prototype_panel.prototype_multiple_interactions_mouse_and_hover_tooltip") : eX ? getI18nString("proto.prototype_panel.this_interaction_will_not_be_triggered_as_interactions_on_instances_are_triggered_before_inherited_internal_interactions_tooltip") : "";
   let e3 = jsx(Y9, {
     ref: eu,
     "data-testid": `prototypeInteractionItem-${n}`,
@@ -629,7 +629,7 @@ function eA({
         hidden: !en,
         children: jsx(_$$K, {
           onClick: ez,
-          "aria-label": _$$t("proto.prototype_panel.remove_interaction_tooltip"),
+          "aria-label": getI18nString("proto.prototype_panel.remove_interaction_tooltip"),
           recordingKey: Pt(B, "removeButton"),
           htmlAttributes: {
             onMouseDown: e$
@@ -668,14 +668,14 @@ function eA({
     }), av(mj(eS)), jsx("div", {
       className: "prototype_interaction_list--targetText--UMXyE",
       dir: "auto",
-      children: eT ? _$$t("proto.variant_actions.mixed") : V === _$$J2.INHERITED_INTERNAL ? _$$t("proto.variant_actions.change_to") : eV(eS, getNodeName, !0, eN)
+      children: eT ? getI18nString("proto.variant_actions.mixed") : V === _$$J2.INHERITED_INTERNAL ? getI18nString("proto.variant_actions.change_to") : eV(eS, getNodeName, !0, eN)
     })]
   });
   let e6 = jsx("span", {
     className: "prototype_interaction_list--removeButton--g6aiQ",
     children: jsx(_$$K, {
       onClick: ez,
-      "aria-label": _$$t("proto.prototype_panel.remove_interaction_tooltip"),
+      "aria-label": getI18nString("proto.prototype_panel.remove_interaction_tooltip"),
       recordingKey: Pt(B, "removeButton"),
       htmlAttributes: {
         onMouseDown: e$
@@ -767,7 +767,7 @@ function eV(e, t, n, o) {
       return i.format(r);
     case "OPEN_URL":
       if (null != e.connectionURL) {
-        if (gl(e.connectionURL)) return _$$t("fullscreen.mixed");
+        if (gl(e.connectionURL)) return getI18nString("fullscreen.mixed");
         return e.connectionURL.replace(/https?:\/\//, "");
       }
       return i.format("NONE");
@@ -782,7 +782,7 @@ function eV(e, t, n, o) {
     case "UPDATE_MEDIA_SKIP_TO":
       return eN.format(e);
   }
-  return e.transitionNodeID ? gl(e.transitionNodeID) ? _$$t("fullscreen.mixed") : t(dI(e.transitionNodeID)) : i.format("NONE");
+  return e.transitionNodeID ? gl(e.transitionNodeID) ? getI18nString("fullscreen.mixed") : t(dI(e.transitionNodeID)) : i.format("NONE");
 }
 function eB(e) {
   return e.interactions.filter(e => e.id && e.sourceNodeID).map(e => _$$d2({

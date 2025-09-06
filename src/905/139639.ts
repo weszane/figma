@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
 import { V } from "../figma_app/304955";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 export function $$l0() {
   let e = useDispatch();
@@ -10,7 +10,7 @@ export function $$l0() {
       if (i === n) return !1;
       if (V().filter(e => !e.isSubscribedAsset && !e.isSoftDeleted && e.codeFilePath === t).map(e => e.name.toLowerCase()).filter(Boolean).includes(n.toLowerCase())) {
         e(F.enqueue({
-          message: _$$t("sites.code_components.code_file_duplicate_name"),
+          message: getI18nString("sites.code_components.code_file_duplicate_name"),
           type: "code-file-rename",
           error: !0
         }));

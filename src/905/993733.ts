@@ -9,7 +9,7 @@ import { g as _$$g } from "../905/880308";
 import { R as _$$R } from "../905/307199";
 import { ph } from "../figma_app/709893";
 import { B as _$$B } from "../905/714743";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Zy } from "../figma_app/955484";
 import { UK } from "../figma_app/740163";
 import { J2 } from "../figma_app/84367";
@@ -36,7 +36,7 @@ import { A as _$$A } from "../6828/523860";
 import { A as _$$A2 } from "../6828/85206";
 var c = d;
 function v(e, t) {
-  return e && e.name ? e.name : t && t.name ? t.name : _$$t("collaboration.branching_node_treatments.unnamed_node");
+  return e && e.name ? e.name : t && t.name ? t.name : getI18nString("collaboration.branching_node_treatments.unnamed_node");
 }
 function I(e) {
   let {
@@ -64,7 +64,7 @@ let P = e => {
       return null;
   }
 };
-let O = (e, t) => t ? e && JSON.stringify(e) === JSON.stringify(t) ? _$$t("branching.chunk_details.no_changes") : e ? _$$t("branching.chunk_details.property_changed") : _$$t("branching.chunk_details.property_added") : _$$t("branching.chunk_details.property_removed");
+let O = (e, t) => t ? e && JSON.stringify(e) === JSON.stringify(t) ? getI18nString("branching.chunk_details.no_changes") : e ? getI18nString("branching.chunk_details.property_changed") : getI18nString("branching.chunk_details.property_added") : getI18nString("branching.chunk_details.property_removed");
 function D(e) {
   let {
     renderDelta,
@@ -125,7 +125,7 @@ function L(e) {
   let d = !o.length || o.some(e => N(e));
   let c = !s.length || s.some(e => R(e));
   let u = !o.length || o.some(e => R(e));
-  return l && d || o.some(e => N(e)) ? renderDelta ? tx("branching.chunk_details.component_set_properties_changed") : null : c && u || o.some(e => R(e)) ? jsx(D, {
+  return l && d || o.some(e => N(e)) ? renderDelta ? renderI18nText("branching.chunk_details.component_set_properties_changed") : null : c && u || o.some(e => R(e)) ? jsx(D, {
     oldValue,
     newValue,
     renderDelta,
@@ -152,7 +152,7 @@ function el(e, t, i, n) {
   return "new" === n && e in i ? i[e] : t[e];
 }
 function ed(e, t) {
-  return void 0 === e ? t : "boolean" == typeof e ? e ? _$$t("collaboration.branching_node_treatments.value.true") : _$$t("collaboration.branching_node_treatments.value.false") : "number" == typeof e ? e % 1 == 0 ? Math.trunc(e).toString() : e.toFixed(2).toString() : e.toString()[0] + zX(e.toString().slice(1));
+  return void 0 === e ? t : "boolean" == typeof e ? e ? getI18nString("collaboration.branching_node_treatments.value.true") : getI18nString("collaboration.branching_node_treatments.value.false") : "number" == typeof e ? e % 1 == 0 ? Math.trunc(e).toString() : e.toFixed(2).toString() : e.toString()[0] + zX(e.toString().slice(1));
 }
 function ec(e, t) {
   if (null != e) {
@@ -168,44 +168,44 @@ function ec(e, t) {
   return t;
 }
 function eu(e) {
-  return wR(e, (e, t, i) => ed(t, _$$t("collaboration.branching_node_treatments.value.empty_dash")), (e, t, i) => ed(i, _$$t("collaboration.branching_node_treatments.value.removed")));
+  return wR(e, (e, t, i) => ed(t, getI18nString("collaboration.branching_node_treatments.value.empty_dash")), (e, t, i) => ed(i, getI18nString("collaboration.branching_node_treatments.value.removed")));
 }
 function ep(e) {
-  return wR(e, (e, t, i) => ec(t, _$$t("collaboration.branching_node_treatments.value.empty_dash")), (e, t, i) => ec(i, _$$t("collaboration.branching_node_treatments.value.removed")));
+  return wR(e, (e, t, i) => ec(t, getI18nString("collaboration.branching_node_treatments.value.empty_dash")), (e, t, i) => ec(i, getI18nString("collaboration.branching_node_treatments.value.removed")));
 }
 function em(e, t) {
   return wR(e, "", (i, n, r) => {
     var a;
     a = t || e;
-    return void 0 === n ? _$$t("collaboration.branching_node_treatments.value.prefix_applied", {
+    return void 0 === n ? getI18nString("collaboration.branching_node_treatments.value.prefix_applied", {
       prefix: a()
-    }) : void 0 === r ? _$$t("collaboration.branching_node_treatments.value.prefix_removed", {
+    }) : void 0 === r ? getI18nString("collaboration.branching_node_treatments.value.prefix_removed", {
       prefix: a()
-    }) : _$$t("collaboration.branching_node_treatments.value.prefix_edited", {
+    }) : getI18nString("collaboration.branching_node_treatments.value.prefix_edited", {
       prefix: a()
     });
   });
 }
 function eh(e) {
   return wR(e, (e, t, i, n, r, a) => {
-    if (!a || !a.has(e)) return _$$t("collaboration.branching_node_treatments.value.empty_dash");
+    if (!a || !a.has(e)) return getI18nString("collaboration.branching_node_treatments.value.empty_dash");
     let s = a.get(e);
-    return s.previousChange?.name || _$$t("collaboration.branching_node_treatments.value.empty_dash");
+    return s.previousChange?.name || getI18nString("collaboration.branching_node_treatments.value.empty_dash");
   }, (e, t, i, n, r, a) => {
-    if (!a || !a.has(e)) return _$$t("collaboration.branching_node_treatments.value.empty_dash");
+    if (!a || !a.has(e)) return getI18nString("collaboration.branching_node_treatments.value.empty_dash");
     let s = a.get(e);
-    return s.currentChange?.name || _$$t("collaboration.branching_node_treatments.value.empty_dash");
+    return s.currentChange?.name || getI18nString("collaboration.branching_node_treatments.value.empty_dash");
   });
 }
 function eg(e, t) {
-  return wR(e, _$$t("collaboration.branching_node_treatments.value.empty_dash"), (i, n, r) => {
+  return wR(e, getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (i, n, r) => {
     var a;
     a = t || e;
-    return !fn(n) && fn(r) ? _$$t("branching.chunk_details.guid_property_applied", {
+    return !fn(n) && fn(r) ? getI18nString("branching.chunk_details.guid_property_applied", {
       propertyLabel: a()
-    }) : fn(n) && !fn(r) ? _$$t("branching.chunk_details.guid_property_removed", {
+    }) : fn(n) && !fn(r) ? getI18nString("branching.chunk_details.guid_property_removed", {
       propertyLabel: a()
-    }) : _$$t("branching.chunk_details.guid_property_modified", {
+    }) : getI18nString("branching.chunk_details.guid_property_modified", {
       propertyLabel: a()
     });
   });
@@ -213,9 +213,9 @@ function eg(e, t) {
 function ef(e, t) {
   return wR(e, (e, i, r) => i ? jsx(t, {
     value: i
-  }) : _$$t("collaboration.branching_node_treatments.value.empty_dash"), (e, i, r) => r ? jsx(t, {
+  }) : getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, i, r) => r ? jsx(t, {
     value: r
-  }) : _$$t("collaboration.branching_node_treatments.value.empty_dash"));
+  }) : getI18nString("collaboration.branching_node_treatments.value.empty_dash"));
 }
 function e_(e) {
   let {
@@ -247,7 +247,7 @@ function e_(e) {
       onClick: () => WD(e, s),
       children: jsx("div", {
         className: X,
-        children: e || _$$t("collaboration.branching_node_treatments.value.empty_dash")
+        children: e || getI18nString("collaboration.branching_node_treatments.value.empty_dash")
       })
     })
   });
@@ -289,7 +289,7 @@ function eA(e) {
           children: e
         }), jsx("td", {
           className: "treatment_definition_reusables--valueCell--hdmLL",
-          children: t || _$$t("collaboration.branching_node_treatments.value.empty_dash")
+          children: t || getI18nString("collaboration.branching_node_treatments.value.empty_dash")
         })]
       }, _$$g()))
     })
@@ -300,75 +300,75 @@ function eb(e) {
   return `${TI.format(e)} ${ey.format(e.a)}`;
 }
 let ev = {
-  EMOJI: () => _$$t("collaboration.branching_node_treatments.value.emoji"),
-  GRADIENT_ANGULAR: () => _$$t("collaboration.branching_node_treatments.value.gradient_angular"),
-  GRADIENT_DIAMOND: () => _$$t("collaboration.branching_node_treatments.value.gradient_diamond"),
-  GRADIENT_LINEAR: () => _$$t("collaboration.branching_node_treatments.value.gradient_linear"),
-  GRADIENT_RADIAL: () => _$$t("collaboration.branching_node_treatments.value.gradient_radial"),
-  IMAGE: () => _$$t("collaboration.branching_node_treatments.value.image"),
-  SOLID: () => _$$t("collaboration.branching_node_treatments.value.solid"),
-  VIDEO: () => _$$t("collaboration.branching_node_treatments.value.video"),
-  PATTERN: () => _$$t("collaboration.branching_node_treatments.value.pattern"),
-  NOISE: () => _$$t("collaboration.branching_node_treatments.value.noise")
+  EMOJI: () => getI18nString("collaboration.branching_node_treatments.value.emoji"),
+  GRADIENT_ANGULAR: () => getI18nString("collaboration.branching_node_treatments.value.gradient_angular"),
+  GRADIENT_DIAMOND: () => getI18nString("collaboration.branching_node_treatments.value.gradient_diamond"),
+  GRADIENT_LINEAR: () => getI18nString("collaboration.branching_node_treatments.value.gradient_linear"),
+  GRADIENT_RADIAL: () => getI18nString("collaboration.branching_node_treatments.value.gradient_radial"),
+  IMAGE: () => getI18nString("collaboration.branching_node_treatments.value.image"),
+  SOLID: () => getI18nString("collaboration.branching_node_treatments.value.solid"),
+  VIDEO: () => getI18nString("collaboration.branching_node_treatments.value.video"),
+  PATTERN: () => getI18nString("collaboration.branching_node_treatments.value.pattern"),
+  NOISE: () => getI18nString("collaboration.branching_node_treatments.value.noise")
 };
 let eI = {
-  PASS_THROUGH: () => _$$t("collaboration.branching_node_treatments.value.blend_mode.pass_through"),
-  NORMAL: () => _$$t("collaboration.branching_node_treatments.value.blend_mode.normal"),
-  DARKEN: () => _$$t("collaboration.branching_node_treatments.value.blend_mode.darken"),
-  MULTIPLY: () => _$$t("collaboration.branching_node_treatments.value.blend_mode.multiply"),
-  LINEAR_BURN: () => _$$t("collaboration.branching_node_treatments.value.blend_mode.linear_burn"),
-  COLOR_BURN: () => _$$t("collaboration.branching_node_treatments.value.blend_mode.color_burn"),
-  LIGHTEN: () => _$$t("collaboration.branching_node_treatments.value.blend_mode.lighten"),
-  SCREEN: () => _$$t("collaboration.branching_node_treatments.value.blend_mode.screen"),
-  LINEAR_DODGE: () => _$$t("collaboration.branching_node_treatments.value.blend_mode.linear_dodge"),
-  COLOR_DODGE: () => _$$t("collaboration.branching_node_treatments.value.blend_mode.color_dodge"),
-  OVERLAY: () => _$$t("collaboration.branching_node_treatments.value.blend_mode.overlay"),
-  SOFT_LIGHT: () => _$$t("collaboration.branching_node_treatments.value.blend_mode.soft_light"),
-  HARD_LIGHT: () => _$$t("collaboration.branching_node_treatments.value.blend_mode.hard_light"),
-  DIFFERENCE: () => _$$t("collaboration.branching_node_treatments.value.blend_mode.difference"),
-  EXCLUSION: () => _$$t("collaboration.branching_node_treatments.value.blend_mode.exclusion"),
-  HUE: () => _$$t("collaboration.branching_node_treatments.value.blend_mode.hue"),
-  SATURATION: () => _$$t("collaboration.branching_node_treatments.value.blend_mode.saturation"),
-  COLOR: () => _$$t("collaboration.branching_node_treatments.value.blend_mode.color"),
-  LUMINOSITY: () => _$$t("collaboration.branching_node_treatments.value.blend_mode.luminosity")
+  PASS_THROUGH: () => getI18nString("collaboration.branching_node_treatments.value.blend_mode.pass_through"),
+  NORMAL: () => getI18nString("collaboration.branching_node_treatments.value.blend_mode.normal"),
+  DARKEN: () => getI18nString("collaboration.branching_node_treatments.value.blend_mode.darken"),
+  MULTIPLY: () => getI18nString("collaboration.branching_node_treatments.value.blend_mode.multiply"),
+  LINEAR_BURN: () => getI18nString("collaboration.branching_node_treatments.value.blend_mode.linear_burn"),
+  COLOR_BURN: () => getI18nString("collaboration.branching_node_treatments.value.blend_mode.color_burn"),
+  LIGHTEN: () => getI18nString("collaboration.branching_node_treatments.value.blend_mode.lighten"),
+  SCREEN: () => getI18nString("collaboration.branching_node_treatments.value.blend_mode.screen"),
+  LINEAR_DODGE: () => getI18nString("collaboration.branching_node_treatments.value.blend_mode.linear_dodge"),
+  COLOR_DODGE: () => getI18nString("collaboration.branching_node_treatments.value.blend_mode.color_dodge"),
+  OVERLAY: () => getI18nString("collaboration.branching_node_treatments.value.blend_mode.overlay"),
+  SOFT_LIGHT: () => getI18nString("collaboration.branching_node_treatments.value.blend_mode.soft_light"),
+  HARD_LIGHT: () => getI18nString("collaboration.branching_node_treatments.value.blend_mode.hard_light"),
+  DIFFERENCE: () => getI18nString("collaboration.branching_node_treatments.value.blend_mode.difference"),
+  EXCLUSION: () => getI18nString("collaboration.branching_node_treatments.value.blend_mode.exclusion"),
+  HUE: () => getI18nString("collaboration.branching_node_treatments.value.blend_mode.hue"),
+  SATURATION: () => getI18nString("collaboration.branching_node_treatments.value.blend_mode.saturation"),
+  COLOR: () => getI18nString("collaboration.branching_node_treatments.value.blend_mode.color"),
+  LUMINOSITY: () => getI18nString("collaboration.branching_node_treatments.value.blend_mode.luminosity")
 };
 function eE(e) {
   let t = [];
   if (e.type) {
     let i = ev[e.type]();
     t.push({
-      displayName: _$$t("collaboration.branching_node_treatments.property.fill_type"),
+      displayName: getI18nString("collaboration.branching_node_treatments.property.fill_type"),
       displayValue: i
     });
   }
   t.push({
-    displayName: _$$t("collaboration.branching_node_treatments.property.opacity"),
+    displayName: getI18nString("collaboration.branching_node_treatments.property.opacity"),
     displayValue: ey.format(e.opacity)
   });
   e.color && t.push({
-    displayName: _$$t("collaboration.branching_node_treatments.property.color"),
+    displayName: getI18nString("collaboration.branching_node_treatments.property.color"),
     displayValue: eb(e.color)
   });
   e.stops && (t = t.concat(e.stops.map((e, t) => ({
-    displayName: _$$t("collaboration.branching_node_treatments.value.color_stop_index", {
+    displayName: getI18nString("collaboration.branching_node_treatments.value.color_stop_index", {
       index: t + 1
     }),
-    displayValue: _$$t("collaboration.branching_node_treatments.value.color_stop", {
+    displayValue: getI18nString("collaboration.branching_node_treatments.value.color_stop", {
       colorValue: eb(e.color),
       percentage: ey.format(e.position)
     })
   }))));
   t.push({
-    displayName: _$$t("collaboration.branching_node_treatments.property.blend_mode"),
+    displayName: getI18nString("collaboration.branching_node_treatments.property.blend_mode"),
     displayValue: e.blendMode && eI[e.blendMode]()
   });
   t.push({
-    displayName: _$$t("collaboration.branching_node_treatments.property.visibility"),
-    displayValue: e.visible ? _$$t("collaboration.branching_node_treatments.value.on") : _$$t("collaboration.branching_node_treatments.value.off")
+    displayName: getI18nString("collaboration.branching_node_treatments.property.visibility"),
+    displayValue: e.visible ? getI18nString("collaboration.branching_node_treatments.value.on") : getI18nString("collaboration.branching_node_treatments.value.off")
   });
   e.paintFilter && t.push({
-    displayName: _$$t("collaboration.branching_node_treatments.property.image_filter"),
-    displayValue: _$$t("collaboration.branching_node_treatments.value.filter_applied")
+    displayName: getI18nString("collaboration.branching_node_treatments.property.image_filter"),
+    displayValue: getI18nString("collaboration.branching_node_treatments.value.filter_applied")
   });
   return t;
 }
@@ -388,26 +388,26 @@ function ex(e) {
 }
 function eS(e) {
   return [{
-    displayName: _$$t("collaboration.branching_node_treatments.property.x"),
+    displayName: getI18nString("collaboration.branching_node_treatments.property.x"),
     displayValue: e.offset?.x?.toString()
   }, {
-    displayName: _$$t("collaboration.branching_node_treatments.property.y"),
+    displayName: getI18nString("collaboration.branching_node_treatments.property.y"),
     displayValue: e.offset?.y?.toString()
   }, {
-    displayName: _$$t("collaboration.branching_node_treatments.property.blur"),
+    displayName: getI18nString("collaboration.branching_node_treatments.property.blur"),
     displayValue: e.radius?.toString()
   }, {
-    displayName: _$$t("collaboration.branching_node_treatments.property.spread"),
+    displayName: getI18nString("collaboration.branching_node_treatments.property.spread"),
     displayValue: e.spread?.toString()
   }, {
-    displayName: _$$t("collaboration.branching_node_treatments.property.fill"),
+    displayName: getI18nString("collaboration.branching_node_treatments.property.fill"),
     displayValue: e.color ? eb(e.color) : void 0
   }, {
-    displayName: _$$t("collaboration.branching_node_treatments.property.blend_mode"),
+    displayName: getI18nString("collaboration.branching_node_treatments.property.blend_mode"),
     displayValue: e.blendMode && eI[e.blendMode]()
   }, {
-    displayName: _$$t("collaboration.branching_node_treatments.property.visibility"),
-    displayValue: e.visible ? _$$t("collaboration.branching_node_treatments.value.on") : _$$t("collaboration.branching_node_treatments.value.off")
+    displayName: getI18nString("collaboration.branching_node_treatments.property.visibility"),
+    displayValue: e.visible ? getI18nString("collaboration.branching_node_treatments.value.on") : getI18nString("collaboration.branching_node_treatments.value.off")
   }];
 }
 function ew(e, t, i) {
@@ -462,28 +462,28 @@ let eR = (e, t) => wR(() => e, (e, t, i) => "lego-table", (e, i, r) => {
   let d = ek(a.offset());
   let c = ek(s.offset());
   (d.x !== c.x || d.y !== c.y) && (o.push({
-    displayName: _$$t("collaboration.branching_node_treatments.property.position"),
+    displayName: getI18nString("collaboration.branching_node_treatments.property.position"),
     displayValue: `x: ${d.x}; y: ${d.y}`
   }), l.push({
-    displayName: _$$t("collaboration.branching_node_treatments.property.position"),
+    displayName: getI18nString("collaboration.branching_node_treatments.property.position"),
     displayValue: `x: ${c.x}; y: ${c.y}`
   }));
   let u = ek(a.toScale());
   let p = ek(s.toScale());
   (u.x !== p.x || u.y !== p.y) && (o.push({
-    displayName: _$$t("collaboration.branching_node_treatments.property.scale"),
+    displayName: getI18nString("collaboration.branching_node_treatments.property.scale"),
     displayValue: `x: ${u.x}; y: ${u.y}`
   }), l.push({
-    displayName: _$$t("collaboration.branching_node_treatments.property.scale"),
+    displayName: getI18nString("collaboration.branching_node_treatments.property.scale"),
     displayValue: `x: ${p.x}; y: ${p.y}`
   }));
   let m = eT(a.toDegrees());
   let h = eT(s.toDegrees());
   m !== h && (o.push({
-    displayName: _$$t("collaboration.branching_node_treatments.property.rotation"),
+    displayName: getI18nString("collaboration.branching_node_treatments.property.rotation"),
     displayValue: `${m}\xb0`
   }), l.push({
-    displayName: _$$t("collaboration.branching_node_treatments.property.rotation"),
+    displayName: getI18nString("collaboration.branching_node_treatments.property.rotation"),
     displayValue: `${h}\xb0`
   }));
   return jsx("div", {
@@ -511,10 +511,10 @@ let eN = (e, t) => wR(() => e, (e, t, i) => "lego-table", (i, r, a) => {
       return null;
     }(e, t));
     d[0] !== d[1] && (a.push({
-      displayName: _$$t("collaboration.branching_node_treatments.value.node_type.variable"),
+      displayName: getI18nString("collaboration.branching_node_treatments.value.node_type.variable"),
       displayValue: d[0]
     }), r.push({
-      displayName: _$$t("collaboration.branching_node_treatments.value.node_type.variable"),
+      displayName: getI18nString("collaboration.branching_node_treatments.value.node_type.variable"),
       displayValue: d[1]
     }));
     c.push(jsx(e_, {
@@ -538,11 +538,11 @@ let eP = (e, t) => wR(() => e, (e, t, i) => "lego-table", (i, r, a) => {
     let r = s[i] ? eS(s[i]) : [];
     let a = o[i] ? eS(o[i]) : [];
     s[i]?.type && r.push({
-      displayName: _$$t("collaboration.branching_node_treatments.value.effect.effect_type"),
+      displayName: getI18nString("collaboration.branching_node_treatments.value.effect.effect_type"),
       displayValue: eO[s[i].type]()
     });
     o[i]?.type && a.push({
-      displayName: _$$t("collaboration.branching_node_treatments.value.effect.effect_type"),
+      displayName: getI18nString("collaboration.branching_node_treatments.value.effect.effect_type"),
       displayValue: eO[o[i].type]()
     });
     d.push(jsx(e_, {
@@ -561,15 +561,15 @@ let eP = (e, t) => wR(() => e, (e, t, i) => "lego-table", (i, r, a) => {
   });
 });
 let eO = {
-  BACKGROUND_BLUR: () => _$$t("collaboration.branching_node_treatments.value.effect.background_blur"),
-  DROP_SHADOW: () => _$$t("collaboration.branching_node_treatments.value.effect.drop_shadow"),
-  FOREGROUND_BLUR: () => _$$t("collaboration.branching_node_treatments.value.effect.foreground_blur"),
-  INNER_SHADOW: () => _$$t("collaboration.branching_node_treatments.value.effect.inner_shadow"),
-  REPEAT: () => _$$t("collaboration.branching_node_treatments.value.effect.repeat"),
-  SYMMETRY: () => _$$t("collaboration.branching_node_treatments.value.effect.symmetry"),
-  GRAIN: () => _$$t("collaboration.branching_node_treatments.value.effect.grain"),
-  NOISE: () => _$$t("collaboration.branching_node_treatments.value.effect.noise"),
-  GLASS: () => _$$t("collaboration.branching_node_treatments.value.effect.glass")
+  BACKGROUND_BLUR: () => getI18nString("collaboration.branching_node_treatments.value.effect.background_blur"),
+  DROP_SHADOW: () => getI18nString("collaboration.branching_node_treatments.value.effect.drop_shadow"),
+  FOREGROUND_BLUR: () => getI18nString("collaboration.branching_node_treatments.value.effect.foreground_blur"),
+  INNER_SHADOW: () => getI18nString("collaboration.branching_node_treatments.value.effect.inner_shadow"),
+  REPEAT: () => getI18nString("collaboration.branching_node_treatments.value.effect.repeat"),
+  SYMMETRY: () => getI18nString("collaboration.branching_node_treatments.value.effect.symmetry"),
+  GRAIN: () => getI18nString("collaboration.branching_node_treatments.value.effect.grain"),
+  NOISE: () => getI18nString("collaboration.branching_node_treatments.value.effect.noise"),
+  GLASS: () => getI18nString("collaboration.branching_node_treatments.value.effect.glass")
 };
 function eD(e) {
   let t = e.value;
@@ -586,48 +586,48 @@ function eD(e) {
   });
 }
 let eL = {
-  MIN: () => _$$t("collaboration.branching_node_treatments.value.layout_grid.min"),
-  CENTER: () => _$$t("collaboration.branching_node_treatments.value.layout_grid.center"),
-  STRETCH: () => _$$t("collaboration.branching_node_treatments.value.layout_grid.stretch"),
-  MAX: () => _$$t("collaboration.branching_node_treatments.value.layout_grid.max")
+  MIN: () => getI18nString("collaboration.branching_node_treatments.value.layout_grid.min"),
+  CENTER: () => getI18nString("collaboration.branching_node_treatments.value.layout_grid.center"),
+  STRETCH: () => getI18nString("collaboration.branching_node_treatments.value.layout_grid.stretch"),
+  MAX: () => getI18nString("collaboration.branching_node_treatments.value.layout_grid.max")
 };
-let eF = de(() => _$$t("collaboration.branching_node_treatments.property.type_details"), () => _$$t("collaboration.branching_node_treatments.value.empty_dash"), () => _$$t("collaboration.branching_node_treatments.value.type_details_edited"));
+let eF = de(() => getI18nString("collaboration.branching_node_treatments.property.type_details"), () => getI18nString("collaboration.branching_node_treatments.value.empty_dash"), () => getI18nString("collaboration.branching_node_treatments.value.type_details_edited"));
 function eM(e) {
-  return wR(e, (e, t, i) => t ? wf.format(t) : _$$t("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i ? wf.format(i) : _$$t("collaboration.branching_node_treatments.value.empty_dash"));
+  return wR(e, (e, t, i) => t ? wf.format(t) : getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i ? wf.format(i) : getI18nString("collaboration.branching_node_treatments.value.empty_dash"));
 }
 function ej() {
-  return wR(() => _$$t("collaboration.branching_node_treatments.property.order"), "", (e, t, i) => t?.sortPosition !== i?.sortPosition ? _$$t("collaboration.branching_node_treatments.value.style_reordered") : _$$t("collaboration.branching_node_treatments.value.empty_dash"));
+  return wR(() => getI18nString("collaboration.branching_node_treatments.property.order"), "", (e, t, i) => t?.sortPosition !== i?.sortPosition ? getI18nString("collaboration.branching_node_treatments.value.style_reordered") : getI18nString("collaboration.branching_node_treatments.value.empty_dash"));
 }
 function eU() {
-  return wR(() => _$$t("collaboration.branching_node_treatments.property.order"), "", (e, t, i) => t !== i ? _$$t("collaboration.branching_node_treatments.value.style_reordered") : _$$t("collaboration.branching_node_treatments.value.empty_dash"));
+  return wR(() => getI18nString("collaboration.branching_node_treatments.property.order"), "", (e, t, i) => t !== i ? getI18nString("collaboration.branching_node_treatments.value.style_reordered") : getI18nString("collaboration.branching_node_treatments.value.empty_dash"));
 }
 let eB = {
   FILL: {
-    name: eu(() => _$$t("collaboration.branching_node_treatments.property.style_name")),
-    description: ep(() => _$$t("collaboration.branching_node_treatments.property.description")),
+    name: eu(() => getI18nString("collaboration.branching_node_treatments.property.style_name")),
+    description: ep(() => getI18nString("collaboration.branching_node_treatments.property.description")),
     sortPosition: eU(),
     sharedStyleMasterData: ej(),
-    fillPaints: ef(() => _$$t("collaboration.branching_node_treatments.property.fill_details"), ex)
+    fillPaints: ef(() => getI18nString("collaboration.branching_node_treatments.property.fill_details"), ex)
   },
   EFFECT: {
-    name: eu(() => _$$t("collaboration.branching_node_treatments.property.style_name")),
-    description: ep(() => _$$t("collaboration.branching_node_treatments.property.description")),
+    name: eu(() => getI18nString("collaboration.branching_node_treatments.property.style_name")),
+    description: ep(() => getI18nString("collaboration.branching_node_treatments.property.description")),
     sortPosition: eU(),
     sharedStyleMasterData: ej(),
-    effects: ef(() => _$$t("collaboration.branching_node_treatments.property.effect_details"), eD)
+    effects: ef(() => getI18nString("collaboration.branching_node_treatments.property.effect_details"), eD)
   },
   TEXT: {
-    name: eu(() => _$$t("collaboration.branching_node_treatments.property.style_name")),
-    description: ep(() => _$$t("collaboration.branching_node_treatments.property.description")),
+    name: eu(() => getI18nString("collaboration.branching_node_treatments.property.style_name")),
+    description: ep(() => getI18nString("collaboration.branching_node_treatments.property.description")),
     sortPosition: eU(),
     sharedStyleMasterData: ej(),
-    fontName: wR(() => _$$t("collaboration.branching_node_treatments.property.font"), (e, t, i) => t ? `${t.family} ${t.style}` : _$$t("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i ? `${i.family} ${i.style}` : _$$t("collaboration.branching_node_treatments.value.empty_dash")),
-    fontSize: eu(() => _$$t("collaboration.branching_node_treatments.property.font_size")),
-    lineHeight: eM(() => _$$t("collaboration.branching_node_treatments.property.line_height")),
-    letterSpacing: eM(() => _$$t("collaboration.branching_node_treatments.property.letter_spacing")),
-    paragraphSpacing: eu(() => _$$t("collaboration.branching_node_treatments.property.paragraph_spacing")),
-    paragraphIndent: eu(() => _$$t("collaboration.branching_node_treatments.property.paragraph_indent")),
-    listSpacing: eu(() => _$$t("collaboration.branching_node_treatments.property.list_spacing")),
+    fontName: wR(() => getI18nString("collaboration.branching_node_treatments.property.font"), (e, t, i) => t ? `${t.family} ${t.style}` : getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i ? `${i.family} ${i.style}` : getI18nString("collaboration.branching_node_treatments.value.empty_dash")),
+    fontSize: eu(() => getI18nString("collaboration.branching_node_treatments.property.font_size")),
+    lineHeight: eM(() => getI18nString("collaboration.branching_node_treatments.property.line_height")),
+    letterSpacing: eM(() => getI18nString("collaboration.branching_node_treatments.property.letter_spacing")),
+    paragraphSpacing: eu(() => getI18nString("collaboration.branching_node_treatments.property.paragraph_spacing")),
+    paragraphIndent: eu(() => getI18nString("collaboration.branching_node_treatments.property.paragraph_indent")),
+    listSpacing: eu(() => getI18nString("collaboration.branching_node_treatments.property.list_spacing")),
     fontVariantCommonLigatures: eF,
     fontVariantContextualLigatures: eF,
     fontVariantDiscretionaryLigatures: eF,
@@ -645,43 +645,43 @@ let eB = {
     detachOpticalSizeFromFontSize: eF
   },
   GRID: {
-    name: eu(() => _$$t("collaboration.branching_node_treatments.property.style_name")),
-    description: ep(() => _$$t("collaboration.branching_node_treatments.property.description")),
+    name: eu(() => getI18nString("collaboration.branching_node_treatments.property.style_name")),
+    description: ep(() => getI18nString("collaboration.branching_node_treatments.property.description")),
     sortPosition: eU(),
     sharedStyleMasterData: ej(),
-    layoutGrids: ef(() => _$$t("collaboration.branching_node_treatments.property.layout_guide_details"), function (e) {
+    layoutGrids: ef(() => getI18nString("collaboration.branching_node_treatments.property.layout_guide_details"), function (e) {
       let t = e.value;
       return jsx("div", {
         children: t.map((e, t) => {
           let i = "GRID" === e.pattern ? "Grid" : "X" === e.axis ? "Columns" : "Y" === e.axis ? "Rows" : null;
           if (!i) return null;
           let r = "Grid" === i ? [{
-            displayName: _$$t("collaboration.branching_node_treatments.property.size"),
+            displayName: getI18nString("collaboration.branching_node_treatments.property.size"),
             displayValue: e.sectionSize?.toString()
           }, {
-            displayName: _$$t("collaboration.branching_node_treatments.property.color"),
+            displayName: getI18nString("collaboration.branching_node_treatments.property.color"),
             displayValue: e.color ? eb(e.color) : void 0
           }] : [{
-            displayName: _$$t("collaboration.branching_node_treatments.property.count"),
+            displayName: getI18nString("collaboration.branching_node_treatments.property.count"),
             displayValue: e.numSections?.toString()
           }, {
-            displayName: _$$t("collaboration.branching_node_treatments.property.color"),
+            displayName: getI18nString("collaboration.branching_node_treatments.property.color"),
             displayValue: e.color ? eb(e.color) : void 0
           }, {
-            displayName: _$$t("collaboration.branching_node_treatments.property.type"),
+            displayName: getI18nString("collaboration.branching_node_treatments.property.type"),
             displayValue: e.type && eL[e.type]()
           }, {
-            displayName: _$$t("collaboration.branching_node_treatments.property.size"),
+            displayName: getI18nString("collaboration.branching_node_treatments.property.size"),
             displayValue: e.sectionSize?.toString()
           }, {
-            displayName: _$$t("collaboration.branching_node_treatments.property.offset"),
+            displayName: getI18nString("collaboration.branching_node_treatments.property.offset"),
             displayValue: e.offset?.toString()
           }, {
-            displayName: _$$t("collaboration.branching_node_treatments.property.gutter"),
+            displayName: getI18nString("collaboration.branching_node_treatments.property.gutter"),
             displayValue: e.gutterSize?.toString()
           }, {
-            displayName: _$$t("collaboration.branching_node_treatments.property.visibility"),
-            displayValue: e.visible ? _$$t("collaboration.branching_node_treatments.value.on") : _$$t("collaboration.branching_node_treatments.value.off")
+            displayName: getI18nString("collaboration.branching_node_treatments.property.visibility"),
+            displayValue: e.visible ? getI18nString("collaboration.branching_node_treatments.value.on") : getI18nString("collaboration.branching_node_treatments.value.off")
           }];
           return jsxs("div", {
             className: eo,
@@ -697,22 +697,22 @@ let eB = {
     })
   }
 };
-let eV = EY(() => _$$t("collaboration.branching_node_treatments.property.prototype"), "", () => _$$t("collaboration.branching_node_treatments.value.prototype_behavior_edited"));
-let eG = EY(() => _$$t("collaboration.branching_node_treatments.property.plugin_data"), "", () => _$$t("collaboration.branching_node_treatments.value.plugin_data_edited"));
-let ez = de(() => _$$t("collaboration.branching_node_treatments.property.font_variations"), "", () => _$$t("collaboration.branching_node_treatments.value.font_variations_edited"));
-let eH = de(() => _$$t("collaboration.branching_node_treatments.property.widget_metadata"), "", () => _$$t("collaboration.branching_node_treatments.value.widget_metadata_edited"));
+let eV = EY(() => getI18nString("collaboration.branching_node_treatments.property.prototype"), "", () => getI18nString("collaboration.branching_node_treatments.value.prototype_behavior_edited"));
+let eG = EY(() => getI18nString("collaboration.branching_node_treatments.property.plugin_data"), "", () => getI18nString("collaboration.branching_node_treatments.value.plugin_data_edited"));
+let ez = de(() => getI18nString("collaboration.branching_node_treatments.property.font_variations"), "", () => getI18nString("collaboration.branching_node_treatments.value.font_variations_edited"));
+let eH = de(() => getI18nString("collaboration.branching_node_treatments.property.widget_metadata"), "", () => getI18nString("collaboration.branching_node_treatments.value.widget_metadata_edited"));
 let eW = {
-  [mKm.FILL_CONTAINER]: () => _$$t("collaboration.branching_node_treatments.value.autolayout.fill"),
-  [mKm.FIXED]: () => _$$t("collaboration.branching_node_treatments.value.autolayout.fixed"),
-  [mKm.HUG_CONTENT]: () => _$$t("collaboration.branching_node_treatments.value.autolayout.hug")
+  [mKm.FILL_CONTAINER]: () => getI18nString("collaboration.branching_node_treatments.value.autolayout.fill"),
+  [mKm.FIXED]: () => getI18nString("collaboration.branching_node_treatments.value.autolayout.fixed"),
+  [mKm.HUG_CONTENT]: () => getI18nString("collaboration.branching_node_treatments.value.autolayout.hug")
 };
 let eK = {
-  BASELINE: () => _$$t("collaboration.branching_node_treatments.value.autolayout.baseline"),
-  CENTER: () => _$$t("collaboration.branching_node_treatments.value.autolayout.center"),
-  MAX: () => _$$t("collaboration.branching_node_treatments.value.autolayout.max"),
-  MIN: () => _$$t("collaboration.branching_node_treatments.value.autolayout.min"),
-  SPACE_EVENLY: () => _$$t("collaboration.branching_node_treatments.value.autolayout.space_between_legacy"),
-  SPACE_BETWEEN: () => _$$t("collaboration.branching_node_treatments.value.autolayout.space_between")
+  BASELINE: () => getI18nString("collaboration.branching_node_treatments.value.autolayout.baseline"),
+  CENTER: () => getI18nString("collaboration.branching_node_treatments.value.autolayout.center"),
+  MAX: () => getI18nString("collaboration.branching_node_treatments.value.autolayout.max"),
+  MIN: () => getI18nString("collaboration.branching_node_treatments.value.autolayout.min"),
+  SPACE_EVENLY: () => getI18nString("collaboration.branching_node_treatments.value.autolayout.space_between_legacy"),
+  SPACE_BETWEEN: () => getI18nString("collaboration.branching_node_treatments.value.autolayout.space_between")
 };
 let eY = {
   value: {
@@ -732,15 +732,15 @@ let e$ = (e, t, i, n, r = !1) => {
   let l;
   let d;
   let c = {};
-  let u = _$$t("collaboration.branching_node_treatments.value.autolayout.px_amount", {
+  let u = getI18nString("collaboration.branching_node_treatments.value.autolayout.px_amount", {
     value: 0
   });
   let p = [u, u, u, u];
   let m = !1;
   let h = !1;
   let f = 0;
-  let _ = _$$t("collaboration.branching_node_treatments.property.horizontal_sizing");
-  let A = _$$t("collaboration.branching_node_treatments.property.vertical_sizing");
+  let _ = getI18nString("collaboration.branching_node_treatments.property.horizontal_sizing");
+  let A = getI18nString("collaboration.branching_node_treatments.property.vertical_sizing");
   let y = el("stackMode", t, i, n);
   let b = el("stackWrap", t, i, n);
   let v = !1;
@@ -755,50 +755,50 @@ let e$ = (e, t, i, n, r = !1) => {
       case "stackSpacing":
         if ("number" != typeof i || c.spacing) break;
         c.spacing = {
-          displayName: _$$t("collaboration.branching_node_treatments.property.stack_spacing"),
+          displayName: getI18nString("collaboration.branching_node_treatments.property.stack_spacing"),
           displayValue: i.toString()
         };
         break;
       case "stackCounterSpacing":
         if ("number" != typeof i || "HORIZONTAL" !== y || "WRAP" !== b) break;
         c.counterSpacing = {
-          displayName: _$$t("collaboration.branching_node_treatments.property.stack_counter_spacing"),
+          displayName: getI18nString("collaboration.branching_node_treatments.property.stack_counter_spacing"),
           displayValue: i.toString()
         };
         break;
       case "stackCounterAlignContent":
         "SPACE_BETWEEN" === i && (c.counterSpacing = {
-          displayName: _$$t("collaboration.branching_node_treatments.property.stack_counter_spacing"),
-          displayValue: _$$t("collaboration.branching_node_treatments.value.autolayout.space_between")
+          displayName: getI18nString("collaboration.branching_node_treatments.property.stack_counter_spacing"),
+          displayValue: getI18nString("collaboration.branching_node_treatments.value.autolayout.space_between")
         });
         break;
       case "stackHorizontalPadding":
         if (m = !0, "number" != typeof i) break;
-        p[0] = _$$t("collaboration.branching_node_treatments.value.autolayout.px_amount", {
+        p[0] = getI18nString("collaboration.branching_node_treatments.value.autolayout.px_amount", {
           value: i.toString()
         });
-        p[2] = _$$t("collaboration.branching_node_treatments.value.autolayout.px_amount", {
+        p[2] = getI18nString("collaboration.branching_node_treatments.value.autolayout.px_amount", {
           value: i.toString()
         });
         break;
       case "stackVerticalPadding":
         if (m = !0, "number" != typeof i) break;
-        p[1] = _$$t("collaboration.branching_node_treatments.value.autolayout.px_amount", {
+        p[1] = getI18nString("collaboration.branching_node_treatments.value.autolayout.px_amount", {
           value: i.toString()
         });
-        p[3] = _$$t("collaboration.branching_node_treatments.value.autolayout.px_amount", {
+        p[3] = getI18nString("collaboration.branching_node_treatments.value.autolayout.px_amount", {
           value: i.toString()
         });
         break;
       case "stackPaddingRight":
         if (m = !0, "number" != typeof i) break;
-        p[2] = _$$t("collaboration.branching_node_treatments.value.autolayout.px_amount", {
+        p[2] = getI18nString("collaboration.branching_node_treatments.value.autolayout.px_amount", {
           value: i.toString()
         });
         break;
       case "stackPaddingBottom":
         if (m = !0, "number" != typeof i) break;
-        p[3] = _$$t("collaboration.branching_node_treatments.value.autolayout.px_amount", {
+        p[3] = getI18nString("collaboration.branching_node_treatments.value.autolayout.px_amount", {
           value: i.toString()
         });
         break;
@@ -833,11 +833,11 @@ let e$ = (e, t, i, n, r = !1) => {
           let e = i ?? eY;
           let r = ("old" === n ? t.newValue : t.oldValue) ?? eY;
           e.value?.x !== r.value?.x && (c.minWidth = {
-            displayName: _$$t("collaboration.branching_node_treatments.value.autolayout.min_width"),
+            displayName: getI18nString("collaboration.branching_node_treatments.value.autolayout.min_width"),
             displayValue: eX(e.value?.x, 0)
           });
           e.value?.y !== r.value?.y && (c.minHeight = {
-            displayName: _$$t("collaboration.branching_node_treatments.value.autolayout.min_height"),
+            displayName: getI18nString("collaboration.branching_node_treatments.value.autolayout.min_height"),
             displayValue: eX(e.value?.y, 0)
           });
           break;
@@ -847,11 +847,11 @@ let e$ = (e, t, i, n, r = !1) => {
           let e = i ?? eq;
           let r = ("old" === n ? t.newValue : t.oldValue) ?? eq;
           e.value?.x !== r.value?.x && (c.maxWidth = {
-            displayName: _$$t("collaboration.branching_node_treatments.value.autolayout.max_width"),
+            displayName: getI18nString("collaboration.branching_node_treatments.value.autolayout.max_width"),
             displayValue: eX(e.value?.x, 1 / 0)
           });
           e.value?.y !== r.value?.y && (c.maxHeight = {
-            displayName: _$$t("collaboration.branching_node_treatments.value.autolayout.max_height"),
+            displayName: getI18nString("collaboration.branching_node_treatments.value.autolayout.max_height"),
             displayValue: eX(e.value?.y, 1 / 0)
           });
           break;
@@ -860,7 +860,7 @@ let e$ = (e, t, i, n, r = !1) => {
         {
           let e = i ?? "AUTO";
           e !== (("old" === n ? t.newValue : t.oldValue) ?? "AUTO") && (c.stackPositioning = {
-            displayName: _$$t("collaboration.branching_node_treatments.value.autolayout.stack_positioning"),
+            displayName: getI18nString("collaboration.branching_node_treatments.value.autolayout.stack_positioning"),
             displayValue: e
           });
         }
@@ -868,16 +868,16 @@ let e$ = (e, t, i, n, r = !1) => {
   }
   if (2 === f ? (c.vertical_sizing = {
     displayName: A,
-    displayValue: _$$t("collaboration.branching_node_treatments.value.autolayout.fill")
+    displayValue: getI18nString("collaboration.branching_node_treatments.value.autolayout.fill")
   }, c.horizontal_sizing = {
     displayName: _,
-    displayValue: _$$t("collaboration.branching_node_treatments.value.autolayout.fill")
+    displayValue: getI18nString("collaboration.branching_node_treatments.value.autolayout.fill")
   }) : 1 !== f || a && a !== mKm.HUG_CONTENT ? 1 !== f || s && s !== mKm.HUG_CONTENT ? 1 === f ? (c.vertical_sizing = {
     displayName: A,
-    displayValue: _$$t("collaboration.branching_node_treatments.value.autolayout.fill_or_fixed")
+    displayValue: getI18nString("collaboration.branching_node_treatments.value.autolayout.fill_or_fixed")
   }, c.horizontal_sizing = {
     displayName: _,
-    displayValue: _$$t("collaboration.branching_node_treatments.value.autolayout.fill_or_fixed")
+    displayValue: getI18nString("collaboration.branching_node_treatments.value.autolayout.fill_or_fixed")
   }) : 0 === f && (void 0 !== s && (c.horizontal_sizing = {
     displayName: _,
     displayValue: eW[s]()
@@ -886,36 +886,36 @@ let e$ = (e, t, i, n, r = !1) => {
     displayValue: eW[a]()
   })) : c.vertical_sizing = {
     displayName: A,
-    displayValue: _$$t("collaboration.branching_node_treatments.value.autolayout.fill")
+    displayValue: getI18nString("collaboration.branching_node_treatments.value.autolayout.fill")
   } : c.horizontal_sizing = {
     displayName: _,
-    displayValue: _$$t("collaboration.branching_node_treatments.value.autolayout.fill")
+    displayValue: getI18nString("collaboration.branching_node_treatments.value.autolayout.fill")
   }, v && "string" == typeof y && "string" == typeof b) {
     let e = (() => {
       switch (y) {
         case "NONE":
         case "GRID":
-          return _$$t("collaboration.branching_node_treatments.value.autolayout.none");
+          return getI18nString("collaboration.branching_node_treatments.value.autolayout.none");
         case "VERTICAL":
-          return _$$t("collaboration.branching_node_treatments.value.autolayout.vertical");
+          return getI18nString("collaboration.branching_node_treatments.value.autolayout.vertical");
         case "HORIZONTAL":
-          if ("WRAP" === b) return _$$t("collaboration.branching_node_treatments.value.autolayout.horizontal_wrap");
-          return _$$t("collaboration.branching_node_treatments.value.autolayout.horizontal");
+          if ("WRAP" === b) return getI18nString("collaboration.branching_node_treatments.value.autolayout.horizontal_wrap");
+          return getI18nString("collaboration.branching_node_treatments.value.autolayout.horizontal");
       }
     })();
     c.direction = {
-      displayName: _$$t("collaboration.branching_node_treatments.property.direction"),
+      displayName: getI18nString("collaboration.branching_node_treatments.property.direction"),
       displayValue: e
     };
   }
   m && (c.padding = {
-    displayName: _$$t("collaboration.branching_node_treatments.property.padding"),
+    displayName: getI18nString("collaboration.branching_node_treatments.property.padding"),
     displayValue: Yx(p, "unit")
   });
   (l || d || h) && (c.align_items = {
-    displayName: _$$t("collaboration.branching_node_treatments.property.align_items"),
-    displayValue: _$$t("collaboration.branching_node_treatments.value.empty_dash")
-  }, l && d ? c.align_items.displayValue = _$$t("collaboration.branching_node_treatments.value.autolayout.align_vertical_and_horizontal", {
+    displayName: getI18nString("collaboration.branching_node_treatments.property.align_items"),
+    displayValue: getI18nString("collaboration.branching_node_treatments.value.empty_dash")
+  }, l && d ? c.align_items.displayValue = getI18nString("collaboration.branching_node_treatments.value.autolayout.align_vertical_and_horizontal", {
     verticalAlignment: l,
     horizontalAlignment: d
   }) : l ? c.align_items.displayValue = l : d && (c.align_items.displayValue = d));
@@ -925,12 +925,12 @@ let eZ = (e, t, i, r) => jsx(eA, {
   properties: Object.values(e$(e, t, i, r))
 }, _$$g());
 function eX(e, t) {
-  return e === t ? _$$t("collaboration.branching_node_treatments.value.autolayout.none") : _$$t("collaboration.branching_node_treatments.value.autolayout.px_amount", {
+  return e === t ? getI18nString("collaboration.branching_node_treatments.value.autolayout.none") : getI18nString("collaboration.branching_node_treatments.value.autolayout.px_amount", {
     value: e
   });
 }
-let eQ = de(() => _$$t("collaboration.branching_node_treatments.property.auto_layout_details"), (e, t, i) => eZ(e, t, i, "old"), (e, t, i) => eZ(e, t, i, "new"));
-let eJ = e => de(() => _$$t("collaboration.branching_node_treatments.property.auto_layout_details"), (e, t, i) => "lego-table", (t, i, r) => {
+let eQ = de(() => getI18nString("collaboration.branching_node_treatments.property.auto_layout_details"), (e, t, i) => eZ(e, t, i, "old"), (e, t, i) => eZ(e, t, i, "new"));
+let eJ = e => de(() => getI18nString("collaboration.branching_node_treatments.property.auto_layout_details"), (e, t, i) => "lego-table", (t, i, r) => {
   let a = e$(t, i, r, "old", !0);
   let s = e$(t, i, r, "new", !0);
   let o = new Set([...Object.keys(a), ...Object.keys(s)]);
@@ -940,17 +940,17 @@ let eJ = e => de(() => _$$t("collaboration.branching_node_treatments.property.au
     break;
   }
   return l ? jsx(e_, {
-    header: _$$t("collaboration.branching_node_treatments.property.auto_layout_details"),
+    header: getI18nString("collaboration.branching_node_treatments.property.auto_layout_details"),
     oldValues: Object.values(a),
     newValues: Object.values(s),
     RenderTable: e
   }) : null;
 });
-let e0 = de(() => _$$t("collaboration.branching_node_treatments.property.properties"), () => _$$t("collaboration.branching_node_treatments.value.empty_dash"), () => _$$t("collaboration.branching_node_treatments.value.prefix_applied", {
-  prefix: _$$t("collaboration.branching_node_treatments.property.properties")
+let e0 = de(() => getI18nString("collaboration.branching_node_treatments.property.properties"), () => getI18nString("collaboration.branching_node_treatments.value.empty_dash"), () => getI18nString("collaboration.branching_node_treatments.value.prefix_applied", {
+  prefix: getI18nString("collaboration.branching_node_treatments.property.properties")
 }));
-let e1 = wR(() => _$$t("collaboration.branching_node_treatments.property.hyperlink"), (e, t, i) => t?.url ? t.url : _$$t("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i?.url ? i.url : _$$t("collaboration.branching_node_treatments.value.empty_dash"));
-let e2 = wR(() => _$$t("collaboration.branching_node_treatments.property.mention"), (e, t, i) => t?.id ? dI(t.id) : _$$t("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i?.id ? dI(i.id) : _$$t("collaboration.branching_node_treatments.value.empty_dash"));
+let e1 = wR(() => getI18nString("collaboration.branching_node_treatments.property.hyperlink"), (e, t, i) => t?.url ? t.url : getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i?.url ? i.url : getI18nString("collaboration.branching_node_treatments.value.empty_dash"));
+let e2 = wR(() => getI18nString("collaboration.branching_node_treatments.property.mention"), (e, t, i) => t?.id ? dI(t.id) : getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i?.id ? dI(i.id) : getI18nString("collaboration.branching_node_treatments.value.empty_dash"));
 let e5 = (e, t, i) => {
   let r = el("borderTopWeight", e, t, i) ?? 0;
   let a = el("borderBottomWeight", e, t, i) ?? 0;
@@ -958,11 +958,11 @@ let e5 = (e, t, i) => {
   let o = el("borderRightWeight", e, t, i) ?? 0;
   return jsx("div", {
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": _$$t("collaboration.branching_node_treatments.property.border_weights_tooltip"),
+    "data-tooltip": getI18nString("collaboration.branching_node_treatments.property.border_weights_tooltip"),
     style: {
       display: "inline-block"
     },
-    children: ed(r, _$$t("collaboration.branching_node_treatments.value.empty_dash")) + ", " + ed(o, _$$t("collaboration.branching_node_treatments.value.empty_dash")) + ", " + ed(a, _$$t("collaboration.branching_node_treatments.value.empty_dash")) + ", " + ed(s, _$$t("collaboration.branching_node_treatments.value.empty_dash"))
+    children: ed(r, getI18nString("collaboration.branching_node_treatments.value.empty_dash")) + ", " + ed(o, getI18nString("collaboration.branching_node_treatments.value.empty_dash")) + ", " + ed(a, getI18nString("collaboration.branching_node_treatments.value.empty_dash")) + ", " + ed(s, getI18nString("collaboration.branching_node_treatments.value.empty_dash"))
   });
 };
 let e4 = (e, t, i) => {
@@ -972,42 +972,42 @@ let e4 = (e, t, i) => {
   let o = el("rectangleBottomLeftCornerRadius", e, t, i) ?? 0;
   return jsx("div", {
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": _$$t("collaboration.branching_node_treatments.property.radii_tooltip"),
+    "data-tooltip": getI18nString("collaboration.branching_node_treatments.property.radii_tooltip"),
     style: {
       display: "inline-block"
     },
-    children: ed(r, _$$t("collaboration.branching_node_treatments.value.empty_dash")) + ", " + ed(a, _$$t("collaboration.branching_node_treatments.value.empty_dash")) + ", " + ed(s, _$$t("collaboration.branching_node_treatments.value.empty_dash")) + ", " + ed(o, _$$t("collaboration.branching_node_treatments.value.empty_dash"))
+    children: ed(r, getI18nString("collaboration.branching_node_treatments.value.empty_dash")) + ", " + ed(a, getI18nString("collaboration.branching_node_treatments.value.empty_dash")) + ", " + ed(s, getI18nString("collaboration.branching_node_treatments.value.empty_dash")) + ", " + ed(o, getI18nString("collaboration.branching_node_treatments.value.empty_dash"))
   });
 };
-let e3 = de(() => _$$t("collaboration.branching_node_treatments.property.border_weights"), (e, t, i) => e5(t, i, "old"), (e, t, i) => e5(t, i, "new"));
-let e6 = de(() => _$$t("collaboration.branching_node_treatments.property.radii"), (e, t, i) => e4(t, i, "old"), (e, t, i) => e4(t, i, "new"));
-let e7 = wR(() => _$$t("collaboration.branching_node_treatments.property.line_height"), (e, t, i) => t?.units && t.value ? t.value.toString() + " " + t.units.toString() : _$$t("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i?.units && i.value ? i.value.toString() + " " + i.units.toString() : _$$t("collaboration.branching_node_treatments.value.empty_dash"));
-let e8 = wR(() => _$$t("collaboration.branching_node_treatments.property.text_data"), (e, t, i) => t?.characters ? t.characters : _$$t("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i?.characters ? i.characters : _$$t("collaboration.branching_node_treatments.value.empty_dash"));
-let e9 = wR(() => _$$t("collaboration.branching_node_treatments.property.letter_spacing"), (e, t, i) => t?.units && t.value ? t.value.toString() + " " + t.units.toString() : _$$t("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i?.units && i.value ? i.value.toString() + " " + i.units.toString() : _$$t("collaboration.branching_node_treatments.value.empty_dash"));
+let e3 = de(() => getI18nString("collaboration.branching_node_treatments.property.border_weights"), (e, t, i) => e5(t, i, "old"), (e, t, i) => e5(t, i, "new"));
+let e6 = de(() => getI18nString("collaboration.branching_node_treatments.property.radii"), (e, t, i) => e4(t, i, "old"), (e, t, i) => e4(t, i, "new"));
+let e7 = wR(() => getI18nString("collaboration.branching_node_treatments.property.line_height"), (e, t, i) => t?.units && t.value ? t.value.toString() + " " + t.units.toString() : getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i?.units && i.value ? i.value.toString() + " " + i.units.toString() : getI18nString("collaboration.branching_node_treatments.value.empty_dash"));
+let e8 = wR(() => getI18nString("collaboration.branching_node_treatments.property.text_data"), (e, t, i) => t?.characters ? t.characters : getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i?.characters ? i.characters : getI18nString("collaboration.branching_node_treatments.value.empty_dash"));
+let e9 = wR(() => getI18nString("collaboration.branching_node_treatments.property.letter_spacing"), (e, t, i) => t?.units && t.value ? t.value.toString() + " " + t.units.toString() : getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i?.units && i.value ? i.value.toString() + " " + i.units.toString() : getI18nString("collaboration.branching_node_treatments.value.empty_dash"));
 function te(e) {
   return (t, i, r) => {
     let a = el("textTruncation", i, r, e) ?? "DISABLED";
     let s = el("maxLines", i, r, e);
     let o = [{
-      displayName: _$$t("collaboration.branching_node_treatments.property.text_truncation"),
+      displayName: getI18nString("collaboration.branching_node_treatments.property.text_truncation"),
       displayValue: tm[a]()
     }];
     "DISABLED" !== a && o.push({
-      displayName: _$$t("collaboration.branching_node_treatments.property.max_lines"),
-      displayValue: null == s ? _$$t("collaboration.branching_node_treatments.value.empty_dash") : 0 === s ? _$$t("collaboration.branching_node_treatments.value.max_lines.auto") : s.toFixed(0)
+      displayName: getI18nString("collaboration.branching_node_treatments.property.max_lines"),
+      displayValue: null == s ? getI18nString("collaboration.branching_node_treatments.value.empty_dash") : 0 === s ? getI18nString("collaboration.branching_node_treatments.value.max_lines.auto") : s.toFixed(0)
     });
     return jsx(eA, {
       properties: o
     });
   };
 }
-let tt = de(() => _$$t("collaboration.branching_node_treatments.property.text_truncation_details"), te("old"), te("new"));
-let ti = wR(() => _$$t("collaboration.branching_node_treatments.property.size"), (e, t, i) => {
+let tt = de(() => getI18nString("collaboration.branching_node_treatments.property.text_truncation_details"), te("old"), te("new"));
+let ti = wR(() => getI18nString("collaboration.branching_node_treatments.property.size"), (e, t, i) => {
   let n = ek(t);
-  return n.x && n.y ? "x: " + n.x.toString() + "; y: " + n.y.toString() : _$$t("collaboration.branching_node_treatments.value.empty_dash");
+  return n.x && n.y ? "x: " + n.x.toString() + "; y: " + n.y.toString() : getI18nString("collaboration.branching_node_treatments.value.empty_dash");
 }, (e, t, i) => {
   let n = ek(i);
-  return n.x && n.y ? "x: " + n.x.toString() + "; y: " + n.y.toString() : _$$t("collaboration.branching_node_treatments.value.empty_dash");
+  return n.x && n.y ? "x: " + n.x.toString() + "; y: " + n.y.toString() : getI18nString("collaboration.branching_node_treatments.value.empty_dash");
 });
 let tn = e => {
   var t = "";
@@ -1017,107 +1017,107 @@ let tn = e => {
   });
   return t;
 };
-let tr = wR(() => _$$t("collaboration.branching_node_treatments.property.dash_pattern"), (e, t, i) => t.length ? tn(t) : _$$t("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i.length ? tn(i) : _$$t("collaboration.branching_node_treatments.value.empty_dash"));
-let ta = wR(() => _$$t("collaboration.branching_node_treatments.property.font_name"), (e, t, i) => t ? `${t.family} ${t.style}` : _$$t("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i ? `${i.family} ${i.style}` : _$$t("collaboration.branching_node_treatments.value.empty_dash"));
-let ts = wR(() => _$$t("collaboration.branching_node_treatments.property.parent"), (e, t, i, n) => {
+let tr = wR(() => getI18nString("collaboration.branching_node_treatments.property.dash_pattern"), (e, t, i) => t.length ? tn(t) : getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i.length ? tn(i) : getI18nString("collaboration.branching_node_treatments.value.empty_dash"));
+let ta = wR(() => getI18nString("collaboration.branching_node_treatments.property.font_name"), (e, t, i) => t ? `${t.family} ${t.style}` : getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i ? `${i.family} ${i.style}` : getI18nString("collaboration.branching_node_treatments.value.empty_dash"));
+let ts = wR(() => getI18nString("collaboration.branching_node_treatments.property.parent"), (e, t, i, n) => {
   let r = rY.getImmediateParentHierarchyNodeChange(n, kz3.BASIS_PARENT);
   let a = r?.name;
-  return aI(t?.guid, i?.guid) ? _$$t("collaboration.branching_node_treatments.value.empty_dash") : a || _$$t("collaboration.branching_node_treatments.value.empty_dash");
+  return aI(t?.guid, i?.guid) ? getI18nString("collaboration.branching_node_treatments.value.empty_dash") : a || getI18nString("collaboration.branching_node_treatments.value.empty_dash");
 }, (e, t, i, n) => {
   let r = rY.getImmediateParentHierarchyNodeChange(n, kz3.PARENT);
   let a = r?.name;
-  return aI(t?.guid, i?.guid) ? _$$t("collaboration.branching_node_treatments.value.node_reordered") : a || _$$t("collaboration.branching_node_treatments.value.empty_dash");
+  return aI(t?.guid, i?.guid) ? getI18nString("collaboration.branching_node_treatments.value.node_reordered") : a || getI18nString("collaboration.branching_node_treatments.value.empty_dash");
 });
-let to = wR(() => _$$t("collaboration.branching_node_treatments.property.annotations"), (e, t, i) => {
+let to = wR(() => getI18nString("collaboration.branching_node_treatments.property.annotations"), (e, t, i) => {
   let n = Array.isArray(t) ? t.length : 0;
-  return _$$t("collaboration.branching_node_treatments.value.annotations", {
+  return getI18nString("collaboration.branching_node_treatments.value.annotations", {
     count: n
   });
 }, (e, t, i) => {
   let n = Array.isArray(i) ? i.length : 0;
-  return _$$t("collaboration.branching_node_treatments.value.annotations", {
+  return getI18nString("collaboration.branching_node_treatments.value.annotations", {
     count: n
   });
 });
-let tl = oZ(() => _$$t("collaboration.branching_node_treatments.property.position_rotation_or_scale"), () => _$$t("collaboration.branching_node_treatments.value.empty_dash"), () => _$$t("collaboration.branching_node_treatments.value.position_rotation_or_scale_changed"));
+let tl = oZ(() => getI18nString("collaboration.branching_node_treatments.property.position_rotation_or_scale"), () => getI18nString("collaboration.branching_node_treatments.value.empty_dash"), () => getI18nString("collaboration.branching_node_treatments.value.position_rotation_or_scale_changed"));
 function td(e) {
   switch (e) {
     case "BUILD":
-      return _$$t("dev_handoff.status.ready_for_dev");
+      return getI18nString("dev_handoff.status.ready_for_dev");
     case "COMPLETED":
-      return _$$t("dev_handoff.status.completed");
+      return getI18nString("dev_handoff.status.completed");
     default:
-      return _$$t("dev_handoff.status.none");
+      return getI18nString("dev_handoff.status.none");
   }
 }
-let tc = wR(() => _$$t("dev_handoff.status"), (e, t, i) => td(t?.status), (e, t, i) => td(i?.status));
-let tu = oZ(() => _$$t("dev_handoff.status"), () => _$$t("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => {
+let tc = wR(() => getI18nString("dev_handoff.status"), (e, t, i) => td(t?.status), (e, t, i) => td(i?.status));
+let tu = oZ(() => getI18nString("dev_handoff.status"), () => getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => {
   let n = i?.entries?.length ?? 0;
-  return _$$t("dev_handoff.status_updates", {
+  return getI18nString("dev_handoff.status_updates", {
     number: n.toString()
   });
 });
 let tp = {
-  NONE: () => _$$t("collaboration.branching_node_treatments.value.node_type.none"),
-  DOCUMENT: () => _$$t("collaboration.branching_node_treatments.value.node_type.document"),
-  CANVAS: () => _$$t("collaboration.branching_node_treatments.value.node_type.canvas"),
-  GROUP: () => _$$t("collaboration.branching_node_treatments.value.node_type.group"),
-  FRAME: () => _$$t("collaboration.branching_node_treatments.value.node_type.frame"),
-  BOOLEAN_OPERATION: () => _$$t("collaboration.branching_node_treatments.value.node_type.boolean_operation"),
-  VECTOR: () => _$$t("collaboration.branching_node_treatments.value.node_type.vector"),
-  STAR: () => _$$t("collaboration.branching_node_treatments.value.node_type.star"),
-  LINE: () => _$$t("collaboration.branching_node_treatments.value.node_type.line"),
-  ELLIPSE: () => _$$t("collaboration.branching_node_treatments.value.node_type.ellipse"),
-  RECTANGLE: () => _$$t("collaboration.branching_node_treatments.value.node_type.rectangle"),
-  REGULAR_POLYGON: () => _$$t("collaboration.branching_node_treatments.value.node_type.regular_polygon"),
-  ROUNDED_RECTANGLE: () => _$$t("collaboration.branching_node_treatments.value.node_type.rounded_rectangle"),
-  TEXT: () => _$$t("collaboration.branching_node_treatments.value.node_type.text"),
-  TEXT_PATH: () => _$$t("collaboration.branching_node_treatments.value.node_type.text_path"),
-  SLICE: () => _$$t("collaboration.branching_node_treatments.value.node_type.slice"),
-  SYMBOL: () => _$$t("collaboration.branching_node_treatments.value.node_type.symbol"),
-  INSTANCE: () => _$$t("collaboration.branching_node_treatments.value.node_type.instance"),
-  STICKY: () => _$$t("collaboration.branching_node_treatments.value.node_type.sticky"),
-  SHAPE_WITH_TEXT: () => _$$t("collaboration.branching_node_treatments.value.node_type.shape_with_text"),
-  CONNECTOR: () => _$$t("collaboration.branching_node_treatments.value.node_type.connector"),
-  CODE_BLOCK: () => _$$t("collaboration.branching_node_treatments.value.node_type.code_block"),
-  WIDGET: () => _$$t("collaboration.branching_node_treatments.value.node_type.widget"),
-  STAMP: () => _$$t("collaboration.branching_node_treatments.value.node_type.stamp"),
-  MEDIA: () => _$$t("collaboration.branching_node_treatments.value.node_type.media"),
-  HIGHLIGHT: () => _$$t("collaboration.branching_node_treatments.value.node_type.highlight"),
-  SECTION: () => _$$t("collaboration.branching_node_treatments.value.node_type.section"),
-  SECTION_OVERLAY: () => _$$t("collaboration.branching_node_treatments.value.node_type.section_overlay"),
-  WASHI_TAPE: () => _$$t("collaboration.branching_node_treatments.value.node_type.washi_tape"),
-  VARIABLE: () => _$$t("collaboration.branching_node_treatments.value.node_type.variable"),
-  VARIABLE_SET: () => _$$t("collaboration.branching_node_treatments.value.node_type.variable_collection"),
-  TABLE: () => _$$t("collaboration.branching_node_treatments.value.node_type.table"),
-  TABLE_CELL: () => _$$t("collaboration.branching_node_treatments.value.node_type.table_cell"),
-  SLIDE: () => _$$t("collaboration.branching_node_treatments.value.node_type.slide"),
-  SLIDE_ROW: () => _$$t("collaboration.branching_node_treatments.value.node_type.frame"),
-  SLIDE_GRID: () => _$$t("collaboration.branching_node_treatments.value.node_type.frame"),
-  ASSISTED_LAYOUT: () => _$$t("collaboration.branching_node_treatments.value.node_type.assisted_layout"),
-  INTERACTIVE_SLIDE_ELEMENT: () => _$$t("collaboration.branching_node_treatments.value.node_type.interactive_slide_element"),
-  MODULE: () => _$$t("collaboration.branching_node_treatments.value.node_type.module"),
+  NONE: () => getI18nString("collaboration.branching_node_treatments.value.node_type.none"),
+  DOCUMENT: () => getI18nString("collaboration.branching_node_treatments.value.node_type.document"),
+  CANVAS: () => getI18nString("collaboration.branching_node_treatments.value.node_type.canvas"),
+  GROUP: () => getI18nString("collaboration.branching_node_treatments.value.node_type.group"),
+  FRAME: () => getI18nString("collaboration.branching_node_treatments.value.node_type.frame"),
+  BOOLEAN_OPERATION: () => getI18nString("collaboration.branching_node_treatments.value.node_type.boolean_operation"),
+  VECTOR: () => getI18nString("collaboration.branching_node_treatments.value.node_type.vector"),
+  STAR: () => getI18nString("collaboration.branching_node_treatments.value.node_type.star"),
+  LINE: () => getI18nString("collaboration.branching_node_treatments.value.node_type.line"),
+  ELLIPSE: () => getI18nString("collaboration.branching_node_treatments.value.node_type.ellipse"),
+  RECTANGLE: () => getI18nString("collaboration.branching_node_treatments.value.node_type.rectangle"),
+  REGULAR_POLYGON: () => getI18nString("collaboration.branching_node_treatments.value.node_type.regular_polygon"),
+  ROUNDED_RECTANGLE: () => getI18nString("collaboration.branching_node_treatments.value.node_type.rounded_rectangle"),
+  TEXT: () => getI18nString("collaboration.branching_node_treatments.value.node_type.text"),
+  TEXT_PATH: () => getI18nString("collaboration.branching_node_treatments.value.node_type.text_path"),
+  SLICE: () => getI18nString("collaboration.branching_node_treatments.value.node_type.slice"),
+  SYMBOL: () => getI18nString("collaboration.branching_node_treatments.value.node_type.symbol"),
+  INSTANCE: () => getI18nString("collaboration.branching_node_treatments.value.node_type.instance"),
+  STICKY: () => getI18nString("collaboration.branching_node_treatments.value.node_type.sticky"),
+  SHAPE_WITH_TEXT: () => getI18nString("collaboration.branching_node_treatments.value.node_type.shape_with_text"),
+  CONNECTOR: () => getI18nString("collaboration.branching_node_treatments.value.node_type.connector"),
+  CODE_BLOCK: () => getI18nString("collaboration.branching_node_treatments.value.node_type.code_block"),
+  WIDGET: () => getI18nString("collaboration.branching_node_treatments.value.node_type.widget"),
+  STAMP: () => getI18nString("collaboration.branching_node_treatments.value.node_type.stamp"),
+  MEDIA: () => getI18nString("collaboration.branching_node_treatments.value.node_type.media"),
+  HIGHLIGHT: () => getI18nString("collaboration.branching_node_treatments.value.node_type.highlight"),
+  SECTION: () => getI18nString("collaboration.branching_node_treatments.value.node_type.section"),
+  SECTION_OVERLAY: () => getI18nString("collaboration.branching_node_treatments.value.node_type.section_overlay"),
+  WASHI_TAPE: () => getI18nString("collaboration.branching_node_treatments.value.node_type.washi_tape"),
+  VARIABLE: () => getI18nString("collaboration.branching_node_treatments.value.node_type.variable"),
+  VARIABLE_SET: () => getI18nString("collaboration.branching_node_treatments.value.node_type.variable_collection"),
+  TABLE: () => getI18nString("collaboration.branching_node_treatments.value.node_type.table"),
+  TABLE_CELL: () => getI18nString("collaboration.branching_node_treatments.value.node_type.table_cell"),
+  SLIDE: () => getI18nString("collaboration.branching_node_treatments.value.node_type.slide"),
+  SLIDE_ROW: () => getI18nString("collaboration.branching_node_treatments.value.node_type.frame"),
+  SLIDE_GRID: () => getI18nString("collaboration.branching_node_treatments.value.node_type.frame"),
+  ASSISTED_LAYOUT: () => getI18nString("collaboration.branching_node_treatments.value.node_type.assisted_layout"),
+  INTERACTIVE_SLIDE_ELEMENT: () => getI18nString("collaboration.branching_node_treatments.value.node_type.interactive_slide_element"),
+  MODULE: () => getI18nString("collaboration.branching_node_treatments.value.node_type.module"),
   VARIABLE_OVERRIDE: () => "Variable override",
-  RESPONSIVE_SET: () => _$$t("collaboration.branching_node_treatments.value.node_type.responsive_set"),
-  CODE_COMPONENT: () => _$$t("collaboration.branching_node_treatments.value.node_type.code_component"),
-  CODE_INSTANCE: () => _$$t("collaboration.branching_node_treatments.value.node_type.code_instance"),
-  CODE_LIBRARY: () => _$$t("collaboration.branching_node_treatments.value.node_type.code_library"),
-  CODE_FILE: () => _$$t("collaboration.branching_node_treatments.value.node_type.code_file"),
-  CODE_LAYER: () => _$$t("collaboration.branching_node_treatments.value.node_type.code_layer"),
-  BRUSH: () => _$$t("collaboration.branching_node_treatments.value.node_type.brush"),
-  MANAGED_STRING: () => _$$t("collaboration.branching_node_treatments.value.node_type.managed_string"),
-  TRANSFORM: () => _$$t("collaboration.branching_node_treatments.value.node_type.transform"),
-  CMS_RICH_TEXT: () => _$$t("collaboration.branching_node_treatments.value.node_type.cms_rich_text"),
-  REPEATER: () => _$$t("collaboration.branching_node_treatments.value.node_type.repeater"),
-  JSX: () => _$$t("collaboration.branching_node_treatments.value.node_type.jsx"),
-  EMBEDDED_PROTOTYPE: () => _$$t("collaboration.branching_node_treatments.value.node_type.embedded_prototype"),
-  REACT_FIBER: () => _$$t("collaboration.branching_node_treatments.value.node_type.react_fiber"),
-  RESPONSIVE_NODE_SET: () => _$$t("collaboration.branching_node_treatments.value.node_type.responsive_node_set"),
-  WEBPAGE: () => _$$t("collaboration.branching_node_treatments.value.node_type.webpage")
+  RESPONSIVE_SET: () => getI18nString("collaboration.branching_node_treatments.value.node_type.responsive_set"),
+  CODE_COMPONENT: () => getI18nString("collaboration.branching_node_treatments.value.node_type.code_component"),
+  CODE_INSTANCE: () => getI18nString("collaboration.branching_node_treatments.value.node_type.code_instance"),
+  CODE_LIBRARY: () => getI18nString("collaboration.branching_node_treatments.value.node_type.code_library"),
+  CODE_FILE: () => getI18nString("collaboration.branching_node_treatments.value.node_type.code_file"),
+  CODE_LAYER: () => getI18nString("collaboration.branching_node_treatments.value.node_type.code_layer"),
+  BRUSH: () => getI18nString("collaboration.branching_node_treatments.value.node_type.brush"),
+  MANAGED_STRING: () => getI18nString("collaboration.branching_node_treatments.value.node_type.managed_string"),
+  TRANSFORM: () => getI18nString("collaboration.branching_node_treatments.value.node_type.transform"),
+  CMS_RICH_TEXT: () => getI18nString("collaboration.branching_node_treatments.value.node_type.cms_rich_text"),
+  REPEATER: () => getI18nString("collaboration.branching_node_treatments.value.node_type.repeater"),
+  JSX: () => getI18nString("collaboration.branching_node_treatments.value.node_type.jsx"),
+  EMBEDDED_PROTOTYPE: () => getI18nString("collaboration.branching_node_treatments.value.node_type.embedded_prototype"),
+  REACT_FIBER: () => getI18nString("collaboration.branching_node_treatments.value.node_type.react_fiber"),
+  RESPONSIVE_NODE_SET: () => getI18nString("collaboration.branching_node_treatments.value.node_type.responsive_node_set"),
+  WEBPAGE: () => getI18nString("collaboration.branching_node_treatments.value.node_type.webpage")
 };
 let tm = {
-  DISABLED: () => _$$t("collaboration.branching_node_treatments.value.text_truncation.disabled"),
-  ENDING: () => _$$t("collaboration.branching_node_treatments.value.text_truncation.ending")
+  DISABLED: () => getI18nString("collaboration.branching_node_treatments.value.text_truncation.disabled"),
+  ENDING: () => getI18nString("collaboration.branching_node_treatments.value.text_truncation.ending")
 };
 let th = new Map();
 function tg(e, t) {
@@ -1129,39 +1129,39 @@ function tg(e, t) {
   let o = e === FO.LEGO;
   let l = o ? eJ(t) : eQ;
   let d = o ? eh : eg;
-  let c = o ? eC(_$$t("collaboration.branching_node_treatments.property.variables"), t) : null;
+  let c = o ? eC(getI18nString("collaboration.branching_node_treatments.property.variables"), t) : null;
   th.set(e, Object.freeze({
-    name: eu(() => _$$t("collaboration.branching_node_treatments.property.node_name")),
-    visible: eu(() => _$$t("collaboration.branching_node_treatments.property.visible")),
-    locked: eu(() => _$$t("collaboration.branching_node_treatments.property.locked")),
+    name: eu(() => getI18nString("collaboration.branching_node_treatments.property.node_name")),
+    visible: eu(() => getI18nString("collaboration.branching_node_treatments.property.visible")),
+    locked: eu(() => getI18nString("collaboration.branching_node_treatments.property.locked")),
     lockMode: null,
     parentIndex: ts,
-    transform: o ? eR(_$$t("collaboration.branching_node_treatments.value.position_rotation_or_scale_changed"), t) : tl,
-    description: ep(() => _$$t("collaboration.branching_node_treatments.property.description")),
+    transform: o ? eR(getI18nString("collaboration.branching_node_treatments.value.position_rotation_or_scale_changed"), t) : tl,
+    description: ep(() => getI18nString("collaboration.branching_node_treatments.property.description")),
     symbolDescription: null,
-    symbolLinks: em(() => _$$t("collaboration.branching_node_treatments.property.symbol_links")),
-    type: (i = () => _$$t("collaboration.branching_node_treatments.property.type"), r = e => tp[e](), wR(i, (e, t, i) => t ? r(t) : _$$t("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i ? r(i) : _$$t("collaboration.branching_node_treatments.value.empty_dash"))),
-    booleanOperation: em(() => _$$t("collaboration.branching_node_treatments.property.boolean")),
-    horizontalConstraint: eu(() => _$$t("collaboration.branching_node_treatments.property.horizontal_constraints")),
-    verticalConstraint: eu(() => _$$t("collaboration.branching_node_treatments.property.vertical_constraints")),
+    symbolLinks: em(() => getI18nString("collaboration.branching_node_treatments.property.symbol_links")),
+    type: (i = () => getI18nString("collaboration.branching_node_treatments.property.type"), r = e => tp[e](), wR(i, (e, t, i) => t ? r(t) : getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i ? r(i) : getI18nString("collaboration.branching_node_treatments.value.empty_dash"))),
+    booleanOperation: em(() => getI18nString("collaboration.branching_node_treatments.property.boolean")),
+    horizontalConstraint: eu(() => getI18nString("collaboration.branching_node_treatments.property.horizontal_constraints")),
+    verticalConstraint: eu(() => getI18nString("collaboration.branching_node_treatments.property.vertical_constraints")),
     hyperlink: e1,
     mention: e2,
-    proportionsConstrained: em(() => _$$t("collaboration.branching_node_treatments.property.resize_behavior")),
-    targetAspectRatio: em(() => _$$t("collaboration.branching_node_treatments.property.target_aspect_ratio")),
-    inheritGridStyleID: d(() => _$$t("collaboration.branching_node_treatments.property.guide_style")),
-    layoutGrids: em(() => _$$t("collaboration.branching_node_treatments.property.layout_guide")),
-    inheritTextStyleID: d(() => _$$t("collaboration.branching_node_treatments.property.text_style")),
+    proportionsConstrained: em(() => getI18nString("collaboration.branching_node_treatments.property.resize_behavior")),
+    targetAspectRatio: em(() => getI18nString("collaboration.branching_node_treatments.property.target_aspect_ratio")),
+    inheritGridStyleID: d(() => getI18nString("collaboration.branching_node_treatments.property.guide_style")),
+    layoutGrids: em(() => getI18nString("collaboration.branching_node_treatments.property.layout_guide")),
+    inheritTextStyleID: d(() => getI18nString("collaboration.branching_node_treatments.property.text_style")),
     inheritFillStyleID: null,
     inheritFillStyleIDForStroke: null,
     inheritEffectStyleID: null,
     inheritExportStyleID: null,
     inheritFillStyleIDForBackground: null,
     inheritStrokeStyleID: null,
-    styleIdForFill: d(() => _$$t("collaboration.branching_node_treatments.property.fill_style")),
-    styleIdForStrokeFill: d(() => _$$t("collaboration.branching_node_treatments.property.stroke_style")),
-    styleIdForText: d(() => _$$t("collaboration.branching_node_treatments.property.text_style")),
-    styleIdForEffect: d(() => _$$t("collaboration.branching_node_treatments.property.effect_style")),
-    styleIdForGrid: d(() => _$$t("collaboration.branching_node_treatments.property.guide_style")),
+    styleIdForFill: d(() => getI18nString("collaboration.branching_node_treatments.property.fill_style")),
+    styleIdForStrokeFill: d(() => getI18nString("collaboration.branching_node_treatments.property.stroke_style")),
+    styleIdForText: d(() => getI18nString("collaboration.branching_node_treatments.property.text_style")),
+    styleIdForEffect: d(() => getI18nString("collaboration.branching_node_treatments.property.effect_style")),
+    styleIdForGrid: d(() => getI18nString("collaboration.branching_node_treatments.property.guide_style")),
     scrollBehavior: eV,
     transitionType: eV,
     transitionDuration: eV,
@@ -1220,7 +1220,7 @@ function tg(e, t) {
     pluginRelaunchData: eG,
     stackPadding: null,
     stackJustify: null,
-    codeBlockLanguage: eu(() => _$$t("collaboration.branching_node_treatments.property.code_block_language")),
+    codeBlockLanguage: eu(() => getI18nString("collaboration.branching_node_treatments.property.code_block_language")),
     codeBlockTheme: null,
     fontVariations: ez,
     detachOpticalSizeFromFontSize: ez,
@@ -1242,7 +1242,7 @@ function tg(e, t) {
     slideTemplateFileKey: null,
     slideNumber: null,
     slideNumberSeparator: null,
-    componentPropDefs: (a = () => _$$t("collaboration.branching_node_treatments.property.properties"), wR(a, (e, t, i, r, a) => t ? jsx(L, {
+    componentPropDefs: (a = () => getI18nString("collaboration.branching_node_treatments.property.properties"), wR(a, (e, t, i, r, a) => t ? jsx(L, {
       oldValue: t,
       newValue: i,
       renderDelta: !1,
@@ -1255,66 +1255,66 @@ function tg(e, t) {
     }) : "-")),
     componentPropRefs: e0,
     componentPropAssignments: null,
-    simplifyInstancePanels: (s = () => _$$t("collaboration.branching_node_treatments.property.instance_simplification"), wR(s, _$$t("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i ? _$$t("branching.chunk_details.added") : _$$t("branching.chunk_details.removed"))),
-    propsAreBubbled: eu(() => _$$t("collaboration.branching_node_treatments.property.props_are_bubbled")),
+    simplifyInstancePanels: (s = () => getI18nString("collaboration.branching_node_treatments.property.instance_simplification"), wR(s, getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i ? getI18nString("branching.chunk_details.added") : getI18nString("branching.chunk_details.removed"))),
+    propsAreBubbled: eu(() => getI18nString("collaboration.branching_node_treatments.property.props_are_bubbled")),
     size: ti,
     guid: null,
-    phase: eu(() => _$$t("collaboration.branching_node_treatments.property.phase")),
-    opacity: eu(() => _$$t("collaboration.branching_node_treatments.property.opacity")),
-    blendMode: eu(() => _$$t("collaboration.branching_node_treatments.property.blend_mode")),
-    count: eu(() => _$$t("collaboration.branching_node_treatments.property.count")),
+    phase: eu(() => getI18nString("collaboration.branching_node_treatments.property.phase")),
+    opacity: eu(() => getI18nString("collaboration.branching_node_treatments.property.opacity")),
+    blendMode: eu(() => getI18nString("collaboration.branching_node_treatments.property.blend_mode")),
+    count: eu(() => getI18nString("collaboration.branching_node_treatments.property.count")),
     dashPattern: tr,
     autoRename: null,
-    backgroundEnabled: eu(() => _$$t("collaboration.branching_node_treatments.property.background_enabled")),
-    mask: eu(() => _$$t("collaboration.branching_node_treatments.property.mask")),
-    maskType: eu(() => _$$t("collaboration.branching_node_treatments.property.mask_type")),
+    backgroundEnabled: eu(() => getI18nString("collaboration.branching_node_treatments.property.background_enabled")),
+    mask: eu(() => getI18nString("collaboration.branching_node_treatments.property.mask")),
+    maskType: eu(() => getI18nString("collaboration.branching_node_treatments.property.mask_type")),
     exportContentsOnly: null,
-    maskIsOutline: eu(() => _$$t("collaboration.branching_node_treatments.property.mask_is_outline")),
-    backgroundOpacity: eu(() => _$$t("collaboration.branching_node_treatments.property.background_opacity")),
-    cornerRadius: eu(() => _$$t("collaboration.branching_node_treatments.property.corner_radius")),
-    fontSize: eu(() => _$$t("collaboration.branching_node_treatments.property.font_size")),
-    paragraphIndent: eu(() => _$$t("collaboration.branching_node_treatments.property.paragraph_indent")),
-    paragraphSpacing: eu(() => _$$t("collaboration.branching_node_treatments.property.paragraph_spacing")),
-    listSpacing: eu(() => _$$t("collaboration.branching_node_treatments.property.list_spacing")),
-    starInnerScale: eu(() => _$$t("collaboration.branching_node_treatments.property.star_inner_scale")),
-    miterLimit: eu(() => _$$t("collaboration.branching_node_treatments.property.miter_limit")),
-    strokeWeight: eu(() => _$$t("collaboration.branching_node_treatments.property.stroke_weight")),
-    textTracking: eu(() => _$$t("collaboration.branching_node_treatments.property.text_tracking")),
-    strokeAlign: eu(() => _$$t("collaboration.branching_node_treatments.property.stroke_align")),
-    strokeCap: eu(() => _$$t("collaboration.branching_node_treatments.property.stroke_cap")),
-    strokeCapSize: eu(() => _$$t("collaboration.branching_node_treatments.property.stroke_cap_size")),
-    strokeJoin: eu(() => _$$t("collaboration.branching_node_treatments.property.stroke_join")),
-    textAlignHorizontal: eu(() => _$$t("collaboration.branching_node_treatments.property.text_align_horizontal")),
-    textAlignVertical: eu(() => _$$t("collaboration.branching_node_treatments.property.text_align_vertical")),
-    textCase: eu(() => _$$t("collaboration.branching_node_treatments.property.text_case")),
-    textDecoration: eu(() => _$$t("collaboration.branching_node_treatments.property.text_decoration")),
-    textDecorationStyle: eu(() => _$$t("collaboration.branching_node_treatments.property.text_decoration_style")),
-    textDecorationFillPaints: o ? eN(_$$t("collaboration.branching_node_treatments.property.text_decoration_fill"), t) : ef(() => _$$t("collaboration.branching_node_treatments.property.text_decoration_fill_paints"), ex),
-    leadingTrim: eu(() => _$$t("collaboration.branching_node_treatments.property.leading_trim")),
+    maskIsOutline: eu(() => getI18nString("collaboration.branching_node_treatments.property.mask_is_outline")),
+    backgroundOpacity: eu(() => getI18nString("collaboration.branching_node_treatments.property.background_opacity")),
+    cornerRadius: eu(() => getI18nString("collaboration.branching_node_treatments.property.corner_radius")),
+    fontSize: eu(() => getI18nString("collaboration.branching_node_treatments.property.font_size")),
+    paragraphIndent: eu(() => getI18nString("collaboration.branching_node_treatments.property.paragraph_indent")),
+    paragraphSpacing: eu(() => getI18nString("collaboration.branching_node_treatments.property.paragraph_spacing")),
+    listSpacing: eu(() => getI18nString("collaboration.branching_node_treatments.property.list_spacing")),
+    starInnerScale: eu(() => getI18nString("collaboration.branching_node_treatments.property.star_inner_scale")),
+    miterLimit: eu(() => getI18nString("collaboration.branching_node_treatments.property.miter_limit")),
+    strokeWeight: eu(() => getI18nString("collaboration.branching_node_treatments.property.stroke_weight")),
+    textTracking: eu(() => getI18nString("collaboration.branching_node_treatments.property.text_tracking")),
+    strokeAlign: eu(() => getI18nString("collaboration.branching_node_treatments.property.stroke_align")),
+    strokeCap: eu(() => getI18nString("collaboration.branching_node_treatments.property.stroke_cap")),
+    strokeCapSize: eu(() => getI18nString("collaboration.branching_node_treatments.property.stroke_cap_size")),
+    strokeJoin: eu(() => getI18nString("collaboration.branching_node_treatments.property.stroke_join")),
+    textAlignHorizontal: eu(() => getI18nString("collaboration.branching_node_treatments.property.text_align_horizontal")),
+    textAlignVertical: eu(() => getI18nString("collaboration.branching_node_treatments.property.text_align_vertical")),
+    textCase: eu(() => getI18nString("collaboration.branching_node_treatments.property.text_case")),
+    textDecoration: eu(() => getI18nString("collaboration.branching_node_treatments.property.text_decoration")),
+    textDecorationStyle: eu(() => getI18nString("collaboration.branching_node_treatments.property.text_decoration_style")),
+    textDecorationFillPaints: o ? eN(getI18nString("collaboration.branching_node_treatments.property.text_decoration_fill"), t) : ef(() => getI18nString("collaboration.branching_node_treatments.property.text_decoration_fill_paints"), ex),
+    leadingTrim: eu(() => getI18nString("collaboration.branching_node_treatments.property.leading_trim")),
     textDecorationSkipInk: null,
-    textUnderlineOffset: eu(() => _$$t("collaboration.branching_node_treatments.property.text_underline_offset")),
-    textDecorationThickness: eu(() => _$$t("collaboration.branching_node_treatments.property.text_decoration_thickness")),
+    textUnderlineOffset: eu(() => getI18nString("collaboration.branching_node_treatments.property.text_underline_offset")),
+    textDecorationThickness: eu(() => getI18nString("collaboration.branching_node_treatments.property.text_decoration_thickness")),
     moduleType: null,
     hangingPunctuation: null,
     hangingList: null,
-    fillPaints: o ? eN(_$$t("collaboration.branching_node_treatments.property.fill"), t) : ef(() => _$$t("collaboration.branching_node_treatments.property.fill_paints"), ex),
-    strokePaints: o ? eN(_$$t("collaboration.branching_node_treatments.property.stroke_paint"), t) : ef(() => _$$t("collaboration.branching_node_treatments.property.stroke_paints"), ex),
+    fillPaints: o ? eN(getI18nString("collaboration.branching_node_treatments.property.fill"), t) : ef(() => getI18nString("collaboration.branching_node_treatments.property.fill_paints"), ex),
+    strokePaints: o ? eN(getI18nString("collaboration.branching_node_treatments.property.stroke_paint"), t) : ef(() => getI18nString("collaboration.branching_node_treatments.property.stroke_paints"), ex),
     lineHeight: e7,
     fontName: ta,
     textData: e8,
-    effects: o ? eP(_$$t("collaboration.branching_node_treatments.property.effect"), t) : ef(() => _$$t("collaboration.branching_node_treatments.property.effect"), eD),
+    effects: o ? eP(getI18nString("collaboration.branching_node_treatments.property.effect"), t) : ef(() => getI18nString("collaboration.branching_node_treatments.property.effect"), eD),
     handleMirroring: null,
     exportSettings: null,
-    textAutoResize: eu(() => _$$t("collaboration.branching_node_treatments.property.text_auto_resize")),
-    vectorData: em(() => _$$t("collaboration.branching_node_treatments.property.vector_data")),
-    styleID: eu(() => _$$t("collaboration.branching_node_treatments.property.style_id")),
+    textAutoResize: eu(() => getI18nString("collaboration.branching_node_treatments.property.text_auto_resize")),
+    vectorData: em(() => getI18nString("collaboration.branching_node_treatments.property.vector_data")),
+    styleID: eu(() => getI18nString("collaboration.branching_node_treatments.property.style_id")),
     backgroundColor: null,
-    fillGeometry: em(() => _$$t("collaboration.branching_node_treatments.property.fill_geometry")),
-    strokeGeometry: em(() => _$$t("collaboration.branching_node_treatments.property.stroke_geometry")),
+    fillGeometry: em(() => getI18nString("collaboration.branching_node_treatments.property.fill_geometry")),
+    strokeGeometry: em(() => getI18nString("collaboration.branching_node_treatments.property.stroke_geometry")),
     guidPath: null,
     symbolData: null,
     frameMaskDisabled: null,
-    resizeToFit: eu(() => _$$t("collaboration.branching_node_treatments.property.resize_to_fit")),
+    resizeToFit: eu(() => getI18nString("collaboration.branching_node_treatments.property.resize_to_fit")),
     exportBackgroundDisabled: null,
     sharedSymbolReference: null,
     isSymbolPublishable: null,
@@ -1323,17 +1323,17 @@ function tg(e, t) {
     nestedInstanceResizeEnabled: null,
     sharedSymbolVersion: null,
     overrideLevel: null,
-    fontVariantCommonLigatures: eu(() => _$$t("collaboration.branching_node_treatments.property.font_variant_common_ligatures")),
-    fontVariantContextualLigatures: eu(() => _$$t("collaboration.branching_node_treatments.property.font_variant_contextual_ligatures")),
-    fontVariantDiscretionaryLigatures: eu(() => _$$t("collaboration.branching_node_treatments.property.font_variant_discretionary_ligatures")),
-    fontVariantHistoricalLigatures: eu(() => _$$t("collaboration.branching_node_treatments.property.font_variant_historical_ligatures")),
-    fontVariantOrdinal: eu(() => _$$t("collaboration.branching_node_treatments.property.font_variant_ordinal")),
-    fontVariantSlashedZero: eu(() => _$$t("collaboration.branching_node_treatments.property.font_variant_slashed_zero")),
-    fontVariantNumericFigure: eu(() => _$$t("collaboration.branching_node_treatments.property.font_variant_numeric_figure")),
-    fontVariantNumericSpacing: eu(() => _$$t("collaboration.branching_node_treatments.property.font_variant_numeric_spacing")),
-    fontVariantNumericFraction: eu(() => _$$t("collaboration.branching_node_treatments.property.font_variant_numeric_fraction")),
-    fontVariantCaps: eu(() => _$$t("collaboration.branching_node_treatments.property.font_variant_caps")),
-    fontVariantPosition: eu(() => _$$t("collaboration.branching_node_treatments.property.font_variant_position")),
+    fontVariantCommonLigatures: eu(() => getI18nString("collaboration.branching_node_treatments.property.font_variant_common_ligatures")),
+    fontVariantContextualLigatures: eu(() => getI18nString("collaboration.branching_node_treatments.property.font_variant_contextual_ligatures")),
+    fontVariantDiscretionaryLigatures: eu(() => getI18nString("collaboration.branching_node_treatments.property.font_variant_discretionary_ligatures")),
+    fontVariantHistoricalLigatures: eu(() => getI18nString("collaboration.branching_node_treatments.property.font_variant_historical_ligatures")),
+    fontVariantOrdinal: eu(() => getI18nString("collaboration.branching_node_treatments.property.font_variant_ordinal")),
+    fontVariantSlashedZero: eu(() => getI18nString("collaboration.branching_node_treatments.property.font_variant_slashed_zero")),
+    fontVariantNumericFigure: eu(() => getI18nString("collaboration.branching_node_treatments.property.font_variant_numeric_figure")),
+    fontVariantNumericSpacing: eu(() => getI18nString("collaboration.branching_node_treatments.property.font_variant_numeric_spacing")),
+    fontVariantNumericFraction: eu(() => getI18nString("collaboration.branching_node_treatments.property.font_variant_numeric_fraction")),
+    fontVariantCaps: eu(() => getI18nString("collaboration.branching_node_treatments.property.font_variant_caps")),
+    fontVariantPosition: eu(() => getI18nString("collaboration.branching_node_treatments.property.font_variant_position")),
     guides: null,
     transitionNodeID: null,
     prototypeBackgroundColor: null,
@@ -1343,11 +1343,11 @@ function tg(e, t) {
     rectangleTopRightCornerRadius: e6,
     rectangleBottomLeftCornerRadius: e6,
     rectangleBottomRightCornerRadius: e6,
-    rectangleCornerRadiiIndependent: eu(() => _$$t("collaboration.branching_node_treatments.property.rectangle_radii_independent")),
+    rectangleCornerRadiiIndependent: eu(() => getI18nString("collaboration.branching_node_treatments.property.rectangle_radii_independent")),
     rectangleCornerToolIndependent: null,
     sharedComponentMasterData: null,
-    cornerSmoothing: eu(() => _$$t("collaboration.branching_node_treatments.property.corner_smoothing")),
-    styleType: eu(() => _$$t("collaboration.branching_node_treatments.property.style_type")),
+    cornerSmoothing: eu(() => getI18nString("collaboration.branching_node_treatments.property.corner_smoothing")),
+    styleType: eu(() => getI18nString("collaboration.branching_node_treatments.property.style_type")),
     styleDescription: null,
     unflatteningMappings: null,
     letterSpacing: e9,
@@ -1368,10 +1368,10 @@ function tg(e, t) {
     arcData: null,
     derivedSymbolDataLayoutVersion: null,
     navigationType: null,
-    fontVersion: eu(() => _$$t("collaboration.branching_node_treatments.property.font_version")),
+    fontVersion: eu(() => getI18nString("collaboration.branching_node_treatments.property.font_version")),
     textUserLayoutVersion: null,
-    textExplicitLayoutVersion: eu(() => _$$t("collaboration.branching_node_treatments.property.text_explicit_layout_version")),
-    textBidiVersion: eu(() => _$$t("collaboration.branching_node_treatments.property.text_bidi_version")),
+    textExplicitLayoutVersion: eu(() => getI18nString("collaboration.branching_node_treatments.property.text_explicit_layout_version")),
+    textBidiVersion: eu(() => getI18nString("collaboration.branching_node_treatments.property.text_bidi_version")),
     toggledOnOTFeatures: null,
     toggledOffOTFeatures: null,
     overrideKey: null,
@@ -1390,9 +1390,9 @@ function tg(e, t) {
     stateGroupPropertyValueOrders: null,
     variantPropSpecs: null,
     nodeGenerationData: null,
-    derivedImmutableFrameData: em(() => _$$t("collaboration.branching_node_treatments.property.derived_immutable_frame_data")),
+    derivedImmutableFrameData: em(() => getI18nString("collaboration.branching_node_treatments.property.derived_immutable_frame_data")),
     derivedImmutableFrameDataVersion: null,
-    shapeWithTextType: eu(() => _$$t("collaboration.branching_node_treatments.value.node_type.shape_with_text")),
+    shapeWithTextType: eu(() => getI18nString("collaboration.branching_node_treatments.value.node_type.shape_with_text")),
     jsxData: null,
     derivedJsxData: null,
     stableKey: null,
@@ -1402,7 +1402,7 @@ function tg(e, t) {
     connectorStartCap: null,
     connectorEndCap: null,
     connectorType: null,
-    shapeUserHeight: eu(() => _$$t("collaboration.branching_node_treatments.property.shape_user_height")),
+    shapeUserHeight: eu(() => getI18nString("collaboration.branching_node_treatments.property.shape_user_height")),
     overrideStash: null,
     overrideStashV2: null,
     internalEnumForTest: null,
@@ -1422,20 +1422,20 @@ function tg(e, t) {
     dynamicStrokeSettings: null,
     scatterStrokeSettings: null,
     stretchStrokeSettings: null,
-    stampData: em(() => _$$t("collaboration.branching_node_treatments.property.stamp_data")),
-    embedData: em(() => _$$t("collaboration.branching_node_treatments.property.embed_data")),
-    linkPreviewData: em(() => _$$t("collaboration.branching_node_treatments.property.link_preview_data")),
-    richMediaData: em(() => _$$t("collaboration.branching_node_treatments.property.rich_media_data")),
+    stampData: em(() => getI18nString("collaboration.branching_node_treatments.property.stamp_data")),
+    embedData: em(() => getI18nString("collaboration.branching_node_treatments.property.embed_data")),
+    linkPreviewData: em(() => getI18nString("collaboration.branching_node_treatments.property.link_preview_data")),
+    richMediaData: em(() => getI18nString("collaboration.branching_node_treatments.property.rich_media_data")),
     textTruncation: tt,
     maxLines: tt,
-    shapeTruncates: eu(() => _$$t("collaboration.branching_node_treatments.property.shape_truncates")),
-    sectionContentsHidden: eu(() => _$$t("collaboration.branching_node_treatments.property.section_contents_hidden")),
+    shapeTruncates: eu(() => getI18nString("collaboration.branching_node_treatments.property.shape_truncates")),
+    sectionContentsHidden: eu(() => getI18nString("collaboration.branching_node_treatments.property.section_contents_hidden")),
     widgetTooltip: null,
     borderTopWeight: e3,
     borderBottomWeight: e3,
     borderLeftWeight: e3,
     borderRightWeight: e3,
-    borderStrokeWeightsIndependent: eu(() => _$$t("collaboration.branching_node_treatments.property.border_stroke_weights_independent")),
+    borderStrokeWeightsIndependent: eu(() => getI18nString("collaboration.branching_node_treatments.property.border_stroke_weights_independent")),
     widgetHoverStyle: null,
     hasHadRTLText: null,
     emojiImageSet: null,
@@ -1462,12 +1462,12 @@ function tg(e, t) {
     agendaMetadataMap: null,
     migrationStatus: null,
     editInfo: null,
-    documentColorProfile: eu(() => _$$t("collaboration.branching_node_treatments.property.document_color_profile")),
-    accessibleHTMLTag: eu(() => _$$t("collaboration.branching_node_treatments.property.html_tag")),
-    ariaRole: eu(() => _$$t("collaboration.branching_node_treatments.property.aria_role")),
-    accessibleLabel: eu(() => _$$t("collaboration.branching_node_treatments.property.accessible_label")),
-    ariaAttributes: eu(() => _$$t("collaboration.branching_node_treatments.property.aria_attributes")),
-    isDecorativeImage: eu(() => _$$t("collaboration.branching_node_treatments.property.image_is_decorative")),
+    documentColorProfile: eu(() => getI18nString("collaboration.branching_node_treatments.property.document_color_profile")),
+    accessibleHTMLTag: eu(() => getI18nString("collaboration.branching_node_treatments.property.html_tag")),
+    ariaRole: eu(() => getI18nString("collaboration.branching_node_treatments.property.aria_role")),
+    accessibleLabel: eu(() => getI18nString("collaboration.branching_node_treatments.property.accessible_label")),
+    ariaAttributes: eu(() => getI18nString("collaboration.branching_node_treatments.property.aria_attributes")),
+    isDecorativeImage: eu(() => getI18nString("collaboration.branching_node_treatments.property.image_is_decorative")),
     tableRowPositions: null,
     tableColumnPositions: null,
     tableRowHeights: null,
@@ -1581,7 +1581,7 @@ function tb({
     let e = "phase";
     d[e] = {
       identifier: e,
-      name: () => _$$t("collaboration.branching_node_treatments.property.added_node"),
+      name: () => getI18nString("collaboration.branching_node_treatments.property.added_node"),
       oldValue: () => "",
       newValue: () => ""
     };
@@ -1589,7 +1589,7 @@ function tb({
     let e = "phase";
     d[e] = {
       identifier: e,
-      name: () => _$$t("collaboration.branching_node_treatments.property.removed_node"),
+      name: () => getI18nString("collaboration.branching_node_treatments.property.removed_node"),
       oldValue: () => "",
       newValue: () => ""
     };
@@ -1725,7 +1725,7 @@ export function $$tx1({
     children: [jsx("div", {
       className: c()(J, "chunk_diff_details--layerColumnHeader--Pyum0", "chunk_diff_details--layerColumnHeaderBold--hYrEv"),
       children: jsx("h3", {
-        children: _$$t("dev_handoff.compare_changes.layers")
+        children: getI18nString("dev_handoff.compare_changes.layers")
       })
     }), h && jsx("div", {
       className: "chunk_diff_details--scrollableSection--D4PjI",
@@ -1859,7 +1859,7 @@ function tC({
     className: c()("chunk_diff_details--removedLabel--h5i2C chunk_diff_details--label---p6Jd", {
       [et]: e
     }),
-    children: tx("collaboration.branching_chunk.phase_removed")
+    children: renderI18nText("collaboration.branching_chunk.phase_removed")
   });
 }
 function tT({
@@ -1869,7 +1869,7 @@ function tT({
     className: c()("chunk_diff_details--changedLabel--jqma6 chunk_diff_details--label---p6Jd", {
       [et]: e
     }),
-    children: tx("collaboration.branching_chunk.phase_updated")
+    children: renderI18nText("collaboration.branching_chunk.phase_updated")
   });
 }
 function tk({
@@ -1879,7 +1879,7 @@ function tk({
     className: c()("chunk_diff_details--addedLabel--gLd-C chunk_diff_details--label---p6Jd", {
       [et]: e
     }),
-    children: tx("collaboration.branching_chunk.phase_created")
+    children: renderI18nText("collaboration.branching_chunk.phase_created")
   });
 }
 function tR(e) {
@@ -1931,7 +1931,7 @@ function tP(e) {
       svg: _$$A2,
       className: K
     }), jsx("div", {
-      children: tx("collaboration.branching_chunk.change_details")
+      children: renderI18nText("collaboration.branching_chunk.change_details")
     })]
   });
   return jsxs(Fragment, {
@@ -2129,7 +2129,7 @@ class tF extends Component {
   }
   componentDidCatch() {}
   render() {
-    return this.state.hasError ? tx("collaboration.branching_chunk.error") : jsx(tL, {
+    return this.state.hasError ? renderI18nText("collaboration.branching_chunk.error") : jsx(tL, {
       changes: this.props.changes,
       basis: this.props.basis,
       chunk: this.props.chunk,

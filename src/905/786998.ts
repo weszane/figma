@@ -4,7 +4,7 @@ import { K } from "../905/443068";
 import { f } from "../905/335032";
 import { x } from "../905/587214";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { jT } from "../figma_app/626177";
 export function $$u0({
   value: e,
@@ -28,7 +28,7 @@ export function $$u0({
   return jsxs("div", {
     className: _$$s.flex.itemsCenter.wFitContent.colorBorder.b1.bRadius5.$,
     children: [jsx(K, {
-      "aria-label": _$$t("billing_modals.decrement_aria_label"),
+      "aria-label": getI18nString("billing_modals.decrement_aria_label"),
       disabled: e <= 0,
       onClick: p,
       htmlAttributes: {
@@ -42,7 +42,7 @@ export function $$u0({
       onChange: u,
       onFocus: e => e.target.select()
     }), jsx(K, {
-      "aria-label": _$$t("billing_modals.increment_aria_label"),
+      "aria-label": getI18nString("billing_modals.increment_aria_label"),
       onClick: m,
       disabled: !!i && e >= i,
       htmlAttributes: {

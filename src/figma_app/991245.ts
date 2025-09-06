@@ -1,13 +1,13 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
-import { az } from "../905/449184";
-import { S8, O_ } from "../figma_app/876459";
+import { atomStoreManager } from "../figma_app/27355";
+import { analyticsEventManager } from "../905/449184";
+import { bellFeedAPIInstance, getBellFeedAPI } from "../figma_app/876459";
 import { Ay } from "../905/612521";
 import { getInitialOptions } from "../figma_app/169182";
 import { WB } from "../905/761735";
-import { Ay as _$$Ay } from "../figma_app/778880";
-import { $D } from "../905/11";
+import { BrowserInfo } from "../figma_app/778880";
+import { reportError } from "../905/11";
 import { sf } from "../905/929976";
 import { d as _$$d } from "../905/531325";
 import { sr } from "../905/894881";
@@ -29,7 +29,7 @@ export function $$b1(e, t, r) {
   };
   i = S(e, r.id, r.openUrl || null, t);
   T(n.id, i);
-  S8 && (_$$Ay.windows && n.title && n.subtitle && (n.title = n.title + " \u2022 " + n.subtitle), S8.sendNotification(n));
+  bellFeedAPIInstance && (BrowserInfo.windows && n.title && n.subtitle && (n.title = n.title + " \u2022 " + n.subtitle), bellFeedAPIInstance.sendNotification(n));
 }
 function T(e, t) {
   E.set(e, t);
@@ -58,18 +58,18 @@ function S(e, t, r, n) {
       currentView: n,
       medium: "desktoppush"
     }).then(async t => {
-      if (r?.includes("/email/link_redirect") && (r = await I(r)), S8) {
+      if (r?.includes("/email/link_redirect") && (r = await I(r)), bellFeedAPIInstance) {
         let t = sL(r || "") || void 0;
         e(sf({
           view: "feed",
           quickReplyInfo: t
         }));
-        S8.toggleTrayWindow(!0);
+        bellFeedAPIInstance.toggleTrayWindow(!0);
       } else r && Ay.redirect(r);
     });
   };
 }
-S8?.setListener({
+bellFeedAPIInstance?.setListener({
   name: "notificationClicked",
   listener(e) {
     E.get(e)?.();
@@ -83,7 +83,7 @@ function A(e, t) {
     v = null;
   } else if (t) v = cz(t);else throw Error("Could not subscribe to PersistentUserNotificationBellData as BellFeed LiveGraphClient was null.");
 }
-let x = O_(10);
+let x = getBellFeedAPI(10);
 function N() {
   let e = getInitialOptions().user_data?.id;
   if ((getFeatureFlags().desktop_fcm_notifications || getFeatureFlags().desktop_fcm_shadow_mode) && x && x.desktopAppVersion && e) {
@@ -92,30 +92,30 @@ function N() {
     t && (sr.sendDesktopToken({
       firebaseToken: t,
       version: r
-    }), az.trackDefinedEvent("notification.firebase_token_registered", {}));
+    }), analyticsEventManager.trackDefinedEvent("notification.firebase_token_registered", {}));
   }
 }
 export function $$C0(e) {
   let t = WB();
-  S8?.setListener({
+  bellFeedAPIInstance?.setListener({
     name: "updateRealtimeTokens",
     listener(e) {
       y.updateSubscriptions(e, t);
     }
   });
-  S8?.setListener({
+  bellFeedAPIInstance?.setListener({
     name: "updateIsLivegraphClientEnabled",
     listener(e) {
-      e !== zl.get(_$$d) && (A(e, t), zl.set(_$$d, e));
+      e !== atomStoreManager.get(_$$d) && (A(e, t), atomStoreManager.set(_$$d, e));
     }
   });
-  let r = O_(9);
+  let r = getBellFeedAPI(9);
   if (r) {
     let e = r.getIsLivegraphClientEnabled();
-    zl.set(_$$d, e);
+    atomStoreManager.set(_$$d, e);
     A(e, t);
   }
-  if (S8?.setListener({
+  if (bellFeedAPIInstance?.setListener({
     name: "pushNotificationReceived",
     listener(t, r, n) {
       !function (e, t, r, n) {
@@ -123,17 +123,17 @@ export function $$C0(e) {
         T(t, i);
       }(e.dispatch, t.id, n, r);
     }
-  }), S8?.setListener({
+  }), bellFeedAPIInstance?.setListener({
     name: "notificationServiceStarted",
     listener(e) {
       N();
     }
-  }), N(), S8) {
-    let e = S8.getRealtimeTokens();
-    if (null == e && ($D(_$$e.DESKTOP, Error(`initDesktopBellFeedBindings: got ${e} from getRealtimeTokens() on first try`), {
+  }), N(), bellFeedAPIInstance) {
+    let e = bellFeedAPIInstance.getRealtimeTokens();
+    if (null == e && (reportError(_$$e.DESKTOP, Error(`initDesktopBellFeedBindings: got ${e} from getRealtimeTokens() on first try`), {
       level: "warning"
-    }), e = S8.getRealtimeTokens()), null == e) {
-      $D(_$$e.DESKTOP, Error(`initDesktopBellFeedBindings: got ${e} from getRealtimeTokens() on second try`));
+    }), e = bellFeedAPIInstance.getRealtimeTokens()), null == e) {
+      reportError(_$$e.DESKTOP, Error(`initDesktopBellFeedBindings: got ${e} from getRealtimeTokens() on second try`));
       return;
     }
     y.updateSubscriptions(e, t);

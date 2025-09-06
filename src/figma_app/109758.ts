@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { G1 } from "../figma_app/691470";
 import { B9 } from "../905/125019";
 import { l7 } from "../905/189185";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { UD } from "../figma_app/624361";
 import { $, b as _$$b } from "../905/776478";
 import { D } from "../905/629114";
@@ -94,7 +94,7 @@ export async function $$E2({
     node: e,
     base64: $,
     shouldContinueStream: t,
-    name: _$$t("ai_image_tools.blocked"),
+    name: getI18nString("ai_image_tools.blocked"),
     scaleMode: "FIT",
     backgroundFill: {
       type: "SOLID",

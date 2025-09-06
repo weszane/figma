@@ -4,7 +4,7 @@ import { useDispatch } from "../vendor/514228";
 import { $n } from "../905/521428";
 import { Us } from "../figma_app/637027";
 import { kt } from "../figma_app/858013";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { F } from "../905/302958";
 import { _8, dL } from "../figma_app/530167";
 import { s as _$$s } from "../905/608932";
@@ -41,10 +41,10 @@ export function $$f1(e) {
   let I = (e, t) => {
     T(e, t);
     m(F.enqueue({
-      message: t ? _$$t("community.comments.restricted_this_user_s_comments") : _$$t("community.comments.unrestricted_this_user_s_comments"),
+      message: t ? getI18nString("community.comments.restricted_this_user_s_comments") : getI18nString("community.comments.unrestricted_this_user_s_comments"),
       type: "profile-restricted-change",
       button: {
-        text: _$$t("community.undo"),
+        text: getI18nString("community.undo"),
         action: () => {
           t ? v(e) : S(e);
         }
@@ -69,16 +69,16 @@ export function $$f1(e) {
   if (!emptyStateText && !A) return jsx(Fragment, {});
   if (y) return jsx(kt, {});
   let x = A ? jsx(Fragment, {
-    children: profileHandle ? _$$t("community.comments.these_people_can_t_comment_on_any_of_profile_handles_community_files_and_plugins", {
+    children: profileHandle ? getI18nString("community.comments.these_people_can_t_comment_on_any_of_profile_handles_community_files_and_plugins", {
       profileHandle
-    }) : _$$t("community.comments.these_people_can_t_comment_on_any_of_your_community_files_and_plugins")
+    }) : getI18nString("community.comments.these_people_can_t_comment_on_any_of_your_community_files_and_plugins")
   }) : jsxs(Fragment, {
-    children: [emptyStateText, " ", tx("community.comments.learn_more_about_managing_comments_on_your_files_and_plugins_in_community", {
+    children: [emptyStateText, " ", renderI18nText("community.comments.learn_more_about_managing_comments_on_your_files_and_plugins_in_community", {
       learnMoreLink: jsx(Us, {
         href: "https://help.figma.com/hc/articles/1500002628062",
         target: "_blank",
         trusted: !0,
-        children: tx("general.learn_more")
+        children: renderI18nText("general.learn_more")
       })
     }), " "]
   });
@@ -91,11 +91,11 @@ export function $$f1(e) {
         rightSide: e.is_restricted_by_current_user ? jsx($n, {
           onClick: v.bind(null, e.id),
           variant: "secondary",
-          children: tx("community.comments.unrestrict")
+          children: renderI18nText("community.comments.unrestrict")
         }) : jsx($n, {
           onClick: S.bind(null, e.id),
           variant: "primary",
-          children: tx("community.comments.restrict")
+          children: renderI18nText("community.comments.restrict")
         })
       }, e.profile_handle))
     })
@@ -103,7 +103,7 @@ export function $$f1(e) {
   return jsxs(Fragment, {
     children: [jsx("div", {
       className: bV,
-      children: tx("settings_tab.community_commenters_label")
+      children: renderI18nText("settings_tab.community_commenters_label")
     }), x, N]
   });
 }

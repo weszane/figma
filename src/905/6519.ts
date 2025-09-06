@@ -2,11 +2,11 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useMemo, useCallback, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import s from "classnames";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { tM, $$, vd, Us } from "../figma_app/637027";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { D as _$$D } from "../905/251759";
 import { fu } from "../figma_app/831799";
 import { FPlanNameType } from "../figma_app/191312";
@@ -45,7 +45,7 @@ function I({
 }) {
   let i = i => {
     let n = i.currentTarget.id;
-    sx("Toggled Billing Display", {
+    trackEventAnalytics("Toggled Billing Display", {
       prevDisplay: e,
       newDisplay: n
     });
@@ -57,15 +57,15 @@ function I({
       id: R$.MONTHLY,
       selected: e === R$.MONTHLY,
       onClick: i,
-      children: tx("plan_comparison.billing_toggle.monthly_billing")
+      children: renderI18nText("plan_comparison.billing_toggle.monthly_billing")
     }), jsx(E, {
       id: R$.ANNUAL,
       selected: e === R$.ANNUAL,
       onClick: i,
-      children: tx("plan_comparison.billing_toggle.yearly_billing", {
+      children: renderI18nText("plan_comparison.billing_toggle.yearly_billing", {
         saveMessage: jsx("strong", {
           className: "billing_toggle--saveMessage--OSfKi",
-          children: tx("plan_comparison.billing_toggle.yearly_billing_save_message", {
+          children: renderI18nText("plan_comparison.billing_toggle.yearly_billing_save_message", {
             saveAmount: 40
           })
         })
@@ -124,7 +124,7 @@ let L = ({
   subscriptionPlan: i
 }) => e && t.billingPeriod === tY.STUDENT ? tY.STUDENT : R[i];
 let F = e => {
-  let t = tx("plan_details.see_all_features");
+  let t = renderI18nText("plan_details.see_all_features");
   return {
     orderedPlans: P(e),
     orderedFeatures: $$O(e),
@@ -148,10 +148,10 @@ function G() {
       className: "enterprise_plan_banner--bannerTextContainer--ArcyT",
       children: [jsx("h2", {
         className: "enterprise_plan_banner--bannerHeader--p-9bR",
-        children: tx("universal_upgrade.enterpise_plan_banner.banner_header")
+        children: renderI18nText("universal_upgrade.enterpise_plan_banner.banner_header")
       }), jsx("span", {
         className: "enterprise_plan_banner--bannerTextBody--MlQOd",
-        children: tx("universal_upgrade.enterpise_plan_banner.banner_body_text")
+        children: renderI18nText("universal_upgrade.enterpise_plan_banner.banner_body_text")
       })]
     }), jsx(tM, {
       className: "enterprise_plan_banner--contactSalesCTA--WGqtx",
@@ -164,7 +164,7 @@ function G() {
       trackingProperties: {
         trackingDescriptor: _$$c.ENTERPRISE_PLAN_BANNER_CONTACT_SALES
       },
-      children: tx("universal_upgrade.enterpise_plan_banner.contact_sales")
+      children: renderI18nText("universal_upgrade.enterpise_plan_banner.contact_sales")
     })]
   });
 }
@@ -183,7 +183,7 @@ function en(e) {
       })]
     }), jsxs("p", {
       className: _$$s.mt8.colorTextSecondary.$,
-      children: [description(), " ", e.isProCurrent && e.planTier !== FPlanNameType.PRO ? tx("plan_comparison.plans.billed_yearly") : null]
+      children: [description(), " ", e.isProCurrent && e.planTier !== FPlanNameType.PRO ? renderI18nText("plan_comparison.plans.billed_yearly") : null]
     })]
   });
 }
@@ -203,12 +203,12 @@ function er({
   if (e === FPlanNameType.STARTER) {
     if (o === _$$b.CREATE_NEW_PAID_TEAM && c) return jsx("strong", {
       className: _$$s.ml8.fontMedium.font11.colorTextSecondary.$,
-      children: tx("plan_comparison.plans.starter.current_plan")
+      children: renderI18nText("plan_comparison.plans.starter.current_plan")
     });
   } else if (e === FPlanNameType.PRO && i) return jsx("strong", {
     className: d,
     children: jsx(_$$E, {
-      children: tx("plan_comparison.plans.current_trial")
+      children: renderI18nText("plan_comparison.plans.current_trial")
     })
   });
   if (r && highlightBadgeText) {
@@ -233,12 +233,12 @@ function ea({
     hasAnnualOnlyMessage
   } = SO[r];
   return e !== R$.ANNUAL && hasAnnualOnlyMessage ? jsx("p", {
-    children: tx("plan_comparison.plans.org.annual_only_message", {
+    children: renderI18nText("plan_comparison.plans.org.annual_only_message", {
       billingToggle: jsx("button", {
         "data-testid": "plan-information-toggle-billing",
         className: "plan_information--annualToggleButton--UnCMk blue_link--blueLink--9rlnd",
         onClick: () => t(R$.ANNUAL),
-        children: tx("plan_comparison.plans.button.annual_billing_toggle")
+        children: renderI18nText("plan_comparison.plans.button.annual_billing_toggle")
       })
     })
   }) : jsx(es, {
@@ -304,14 +304,14 @@ function es({
         style: x,
         children: [jsx("p", {
           className: E,
-          children: tx("plan_details.figma")
+          children: renderI18nText("plan_details.figma")
         }), a && jsx("p", {
           className: C,
           children: jsx(_$$G, {})
         })]
       }), jsx("p", {
         className: w,
-        children: tx("plan_details.price_editor_mo.seat_rename", {
+        children: renderI18nText("plan_details.price_editor_mo.seat_rename", {
           price: jsx("strong", {
             className: S,
             children: v[ud.DESIGN]
@@ -325,11 +325,11 @@ function es({
         style: x,
         children: jsx("p", {
           className: E,
-          children: tx("plan_details.dev_mode_only")
+          children: renderI18nText("plan_details.dev_mode_only")
         })
       }), jsx("p", {
         className: w,
-        children: tx("plan_details.price_editor_mo.seat_rename", {
+        children: renderI18nText("plan_details.price_editor_mo.seat_rename", {
           price: jsx("strong", {
             className: S,
             children: v[ud.DEV_MODE]
@@ -341,10 +341,10 @@ function es({
       "data-testid": "whiteboard-price-row",
       children: [jsx("p", {
         className: E,
-        children: tx("plan_details.fig_jam")
+        children: renderI18nText("plan_details.fig_jam")
       }), jsx("p", {
         className: w,
-        children: tx("plan_details.price_editor_mo.seat_rename", {
+        children: renderI18nText("plan_details.price_editor_mo.seat_rename", {
           price: jsx("strong", {
             className: S,
             children: v[ud.FIGJAM]
@@ -369,7 +369,7 @@ function eo({
     return jsx($$, {
       className: ei,
       "data-testid": `plan-information-${e}-button`,
-      "data-tooltip": t ? _$$t("plan_comparison.plans.starter.you_already_have_a_starter_team") : void 0,
+      "data-tooltip": t ? getI18nString("plan_comparison.plans.starter.you_already_have_a_starter_team") : void 0,
       "data-tooltip-max-width": 200,
       "data-tooltip-offset-y": -8,
       "data-tooltip-show-above": !0,
@@ -378,7 +378,7 @@ function eo({
       disabled: !0,
       onClick: lQ,
       style: _$$sx.wFull.h32.$,
-      children: t ? tx("plan_comparison.plans.starter.limit_reached") : tx("plan_comparison.plans.button.current_plan")
+      children: t ? renderI18nText("plan_comparison.plans.starter.limit_reached") : renderI18nText("plan_comparison.plans.button.current_plan")
     });
   }
   let {
@@ -429,7 +429,7 @@ function el({
   return jsxs("div", {
     className: _$$s.alignCenter.$,
     children: [canContactSales && jsx("p", {
-      children: tx("plan_comparison.plans.or_contact_sales", {
+      children: renderI18nText("plan_comparison.plans.or_contact_sales", {
         contactSalesLink: jsx(Us, {
           className: _$$s.noWrap.cursorDefault.$,
           onClick: () => i(to({
@@ -440,7 +440,7 @@ function el({
           })),
           "data-testid": "plan-information-contact-sales",
           trusted: !0,
-          children: tx("plan_details.contact_sales")
+          children: renderI18nText("plan_details.contact_sales")
         })
       })
     }), !!t && jsx("p", {
@@ -451,7 +451,7 @@ function el({
           trackingDescriptor: _$$c.UPGRADE_EXISTING_TEAM
         },
         trusted: !0,
-        children: tx("plan_comparison.plans.pro.upgrade_an_existing_team")
+        children: renderI18nText("plan_comparison.plans.pro.upgrade_an_existing_team")
       })
     }), additionalMessage && jsx("p", {
       children: additionalMessage()
@@ -675,7 +675,7 @@ function eh({
       onMouseEnter: () => {
         a || (d.current = setTimeout(() => {
           s(!0);
-          sx("Plan Comparison Feature Viewed", {
+          trackEventAnalytics("Plan Comparison Feature Viewed", {
             featureName: qT[e].id
           });
         }, 1e3));
@@ -706,7 +706,7 @@ function eg({
   return "boolean" == typeof i ? i ? jsx(_$$B, {
     svg: _$$A,
     className: "comparison_chart--featureIcon--KVLwL",
-    title: _$$t("plan_comparison.chart.included")
+    title: getI18nString("plan_comparison.chart.included")
   }) : null : jsx(Fragment, {
     children: i()
   });

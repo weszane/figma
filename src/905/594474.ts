@@ -15,7 +15,7 @@ import { H as _$$H } from "../905/620380";
 import { h as _$$h } from "../905/207101";
 import { IT } from "../figma_app/566371";
 import { tH as _$$tH } from "../905/751457";
-import { t as _$$t2, tx as _$$tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { J as _$$J2 } from "../905/231762";
 import { b as _$$b } from "../905/403202";
 import { I as _$$I } from "../905/293573";
@@ -116,7 +116,7 @@ import { vj as _$$vj } from "../905/652712";
 import { l as _$$l } from "../905/493845";
 import { B as _$$B } from "../905/536646";
 import { debugState } from "../905/407919";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { T as _$$T2, e as _$$e2 } from "../905/15569";
 import { q as _$$q } from "../905/840070";
 import { v as _$$v2 } from "../905/513628";
@@ -131,7 +131,7 @@ import { f as _$$f } from "../905/265642";
 import { m as _$$m } from "../905/924751";
 import { Y as _$$Y2 } from "../905/192715";
 import { w as _$$w2 } from "../905/771986";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { i as _$$i } from "../905/970229";
 import { vQ } from "../figma_app/530167";
 import { is as _$$is } from "../905/744076";
@@ -166,10 +166,10 @@ function D({
     currentValue
   } = e;
   return jsx(_$$A3, {
-    label: _$$t2("community.seller.discount"),
+    label: getI18nString("community.seller.discount"),
     children: jsx(_$$S, {
       label: jsx(_$$J3, {
-        children: _$$t2("community.seller.give_a_discount_for_yearly")
+        children: getI18nString("community.seller.give_a_discount_for_yearly")
       }),
       checked: currentValue.isActive,
       onChange: () => {
@@ -189,13 +189,13 @@ let z = e => {
     let t = e.key;
     switch (t) {
       case "DISCOUNT_EMPTY":
-        return _$$t2("community.seller.discount_must_not_be_empty");
+        return getI18nString("community.seller.discount_must_not_be_empty");
       case "DISCOUNT_TOO_LOW":
-        return _$$t2("community.seller.discount_minimum_err");
+        return getI18nString("community.seller.discount_minimum_err");
       case "DISCOUNT_TOO_HIGH":
-        return _$$t2("community.seller.discount_maximum_err");
+        return getI18nString("community.seller.discount_maximum_err");
       case "DISCOUNT_NOT_WHOLE_NUMBER":
-        return _$$t2("community.seller.discount_must_follow_format");
+        return getI18nString("community.seller.discount_must_follow_format");
       default:
         return throwTypeError(t);
     }
@@ -219,7 +219,7 @@ let H = forwardRef(function ({
     currentValue
   } = e;
   return currentValue.isActive ? jsx(_$$A3, {
-    label: _$$t2("community.seller.yearly_discount_percentage"),
+    label: getI18nString("community.seller.yearly_discount_percentage"),
     error: o,
     children: jsxs("div", {
       className: pK,
@@ -257,7 +257,7 @@ let em = forwardRef(function ({
     }
   }), []);
   let [l, d] = useState("");
-  let c = a ? _$$t2("community.publishing.resource_id.widget") : _$$t2("community.publishing.resource_id.plugin");
+  let c = a ? getI18nString("community.publishing.resource_id.widget") : getI18nString("community.publishing.resource_id.plugin");
   let u = Vq(e, t);
   if (e) switch (EX(e, t, i)) {
     case Wh.PAYMENTS_API:
@@ -301,19 +301,19 @@ let em = forwardRef(function ({
         localExtension: e
       })
     }), jsx(_$$A3, {
-      label: _$$t2("community.publishing.compatibility"),
+      label: getI18nString("community.publishing.compatibility"),
       children: jsx(ev, {
         existingExtension: t,
         localExtension: e
       })
     }), u && jsx(_$$A3, {
-      label: _$$t2("community.publishing.network"),
+      label: getI18nString("community.publishing.network"),
       children: jsx(eb, {
         isWidget: a,
         manifest: u
       })
     }), e && Rc(e) && jsx(_$$A3, {
-      label: _$$t2("community.publishing.documentAccess"),
+      label: getI18nString("community.publishing.documentAccess"),
       children: jsx(gG, {})
     })]
   });
@@ -324,7 +324,7 @@ function eh({
   children: i
 }) {
   return jsx(_$$A3, {
-    label: _$$t2("universal_insert.manifest_error_title"),
+    label: getI18nString("universal_insert.manifest_error_title"),
     children: jsxs(Yy, {
       variant: "danger",
       "data-testid": t,
@@ -336,26 +336,26 @@ function eh({
 }
 function eg() {
   return jsx(eh, {
-    message: _$$t2("community.publishing.cannot_use_payments_api_if_non_approved"),
+    message: getI18nString("community.publishing.cannot_use_payments_api_if_non_approved"),
     dataTestId: "notApprovedPaymentsApiSellerBanner",
     children: jsx(_$$N, {
       trusted: !0,
       newTab: !0,
       href: "https://help.figma.com/hc/articles/12067637274519",
-      children: _$$t2("general.learn_more")
+      children: getI18nString("general.learn_more")
     })
   });
 }
 function ef() {
   return jsx(eh, {
-    message: _$$t2("community.publishing.cannot_publish_with_inspect_editor_type"),
+    message: getI18nString("community.publishing.cannot_publish_with_inspect_editor_type"),
     dataTestId: "inspectEditorTypeErrorBanner"
   });
 }
 function e_({
   isWidget: e
 }) {
-  let t = e ? _$$t2("community.publishing.cannot_publish_using_enableProposedApi.widget") : _$$t2("community.publishing.cannot_publish_using_enableProposedApi.plugin");
+  let t = e ? getI18nString("community.publishing.cannot_publish_using_enableProposedApi.widget") : getI18nString("community.publishing.cannot_publish_using_enableProposedApi.plugin");
   return jsx(eh, {
     message: t,
     dataTestId: "proposedApiErrorBanner"
@@ -365,7 +365,7 @@ function eA({
   localExtension: e
 }) {
   let t = useDispatch();
-  let i = _$$tx("community.publishing.failed_to_read_file", {
+  let i = renderI18nText("community.publishing.failed_to_read_file", {
     filename: "manifest.json"
   });
   return jsx(eh, {
@@ -379,7 +379,7 @@ function eA({
           }
         }));
       },
-      children: _$$t2("universal_insert.see_details")
+      children: getI18nString("universal_insert.see_details")
     })
   });
 }
@@ -404,12 +404,12 @@ function ey({
   return i ? jsx(Fragment, {
     children: i
   }) : e ? jsx(_$$A8, {
-    suggestion: _$$t2("community.publishing.id_with_number", {
+    suggestion: getI18nString("community.publishing.id_with_number", {
       pendingId: e
     }),
     instruction: jsx("span", {
       className: "x172n1ly",
-      children: _$$tx("community.publishing.add_this_id_to_your_file", {
+      children: renderI18nText("community.publishing.add_this_id_to_your_file", {
         filename: "manifest.json"
       })
     }),
@@ -417,12 +417,12 @@ function ey({
   }) : jsxs(Yy, {
     variant: "danger",
     children: [jsx(_$$Q, {
-      children: _$$tx("community.publishing.invalid_id_in_manifest", {
+      children: renderI18nText("community.publishing.invalid_id_in_manifest", {
         filename: "manifest.json"
       })
     }), jsx(_$$$2, {
       onClick: l,
-      children: _$$t2("community.publishing.generate_id")
+      children: getI18nString("community.publishing.generate_id")
     })]
   });
 }
@@ -440,7 +440,7 @@ function eb({
       children: jsx(Yy, {
         variant: "danger",
         children: jsx(_$$Q, {
-          children: _$$t2("community.publishing.allowed_domains_reasoning_not_specified")
+          children: getI18nString("community.publishing.allowed_domains_reasoning_not_specified")
         })
       })
     })]
@@ -450,13 +450,13 @@ function eb({
     instruction: jsxs("div", {
       children: [jsx("span", {
         className: "x172n1ly",
-        children: _$$tx(e ? "community.publishing.widget_missing_network_access" : "community.publishing.plugin_missing_network_access", {
+        children: renderI18nText(e ? "community.publishing.widget_missing_network_access" : "community.publishing.plugin_missing_network_access", {
           filename: "manifest.json"
         })
       }), jsx(_$$N2, {
         href: "/plugin-docs/manifest/",
         trusted: !0,
-        children: _$$t2("general.learn_more")
+        children: getI18nString("general.learn_more")
       })]
     })
   });
@@ -467,8 +467,8 @@ function ev({
 }) {
   let i = nT(e, t);
   return e?.error && _$$ic(e.error) || null == i ? jsx(_$$A8, {
-    suggestion: _$$t2("community.publishing.editor_type_figma"),
-    instruction: _$$t2("community.publishing.please_add_this_to_your_manifest", {
+    suggestion: getI18nString("community.publishing.editor_type_figma"),
+    instruction: getI18nString("community.publishing.please_add_this_to_your_manifest", {
       filename: "manifest.json"
     }),
     dataTestId: "editorTypeCodeSuggestion"
@@ -513,15 +513,15 @@ function eL({
   if (void 0 === currentValue || currentValue === _$$A2) return null;
   let s = null === currentValue;
   return jsxs(_$$A3, {
-    label: t ? _$$t2("community.publishing.security_form.share_how_your_widget_handles_data") : _$$t2("community.publishing.security_form.share_how_your_plugin_handles_data"),
-    subLabel: t ? _$$t2("community.publishing.security_form.widget_description") : _$$t2("community.publishing.security_form.plugin_description"),
+    label: t ? getI18nString("community.publishing.security_form.share_how_your_widget_handles_data") : getI18nString("community.publishing.security_form.share_how_your_plugin_handles_data"),
+    subLabel: t ? getI18nString("community.publishing.security_form.widget_description") : getI18nString("community.publishing.security_form.plugin_description"),
     children: [jsx(_$$S, {
       label: jsxs(_$$J3, {
-        children: [_$$t2("community.publishing.security_form.i_agree_to_share_this_information"), " ", jsx(_$$N2, {
+        children: [getI18nString("community.publishing.security_form.i_agree_to_share_this_information"), " ", jsx(_$$N2, {
           href: t ? "https://help.figma.com/hc/articles/4410337103639" : "https://help.figma.com/hc/articles/360042293394",
           trusted: !0,
           newTab: !0,
-          children: _$$t2("community.publishing.security_form.learn_more")
+          children: getI18nString("community.publishing.security_form.learn_more")
         })]
       }),
       checked: !s,
@@ -559,25 +559,25 @@ function eF({
   if (!e) return null;
   switch (e) {
     case FRequestStatusType.APPROVED:
-      t = _$$t2("community.publishing.security_banner.approved.title");
-      i = _$$t2("community.publishing.security_banner.approved.description");
+      t = getI18nString("community.publishing.security_banner.approved.title");
+      i = getI18nString("community.publishing.security_banner.approved.description");
       r = "success";
       break;
     case FRequestStatusType.PENDING:
-      t = _$$t2("community.publishing.security_banner.pending.title");
-      i = _$$t2("community.publishing.security_banner.pending.description");
+      t = getI18nString("community.publishing.security_banner.pending.title");
+      i = getI18nString("community.publishing.security_banner.pending.description");
       r = "brand";
       break;
     case FRequestStatusType.REJECTED:
-      t = _$$t2("community.publishing.security_banner.rejected.title");
+      t = getI18nString("community.publishing.security_banner.rejected.title");
       i = jsxs(Fragment, {
         children: [jsx("div", {
           children: jsx(_$$E, {
-            children: _$$t2("community.publishing.security_banner.rejected.description")
+            children: getI18nString("community.publishing.security_banner.rejected.description")
           })
         }), jsx("div", {}), jsx("div", {
           children: jsx(_$$E, {
-            children: _$$t2("community.publishing.security_banner.rejected.description.check_email")
+            children: getI18nString("community.publishing.security_banner.rejected.description.check_email")
           })
         })]
       });
@@ -675,7 +675,7 @@ function eU({
         })]
       }, `option-${t.concat(i).join("-")}`))
     }), l && jsx(eM, {
-      text: _$$t2("community.publishing.data_security.incomplete_single_select")
+      text: getI18nString("community.publishing.data_security.incomplete_single_select")
     })]
   });
 }
@@ -712,7 +712,7 @@ function eB({
         path: t
       })]
     }, `option-${t.concat(a).join("-")}`)), l && jsx(eM, {
-      text: _$$t2("community.publishing.data_security.incomplete_multi_select")
+      text: getI18nString("community.publishing.data_security.incomplete_multi_select")
     })]
   });
 }
@@ -744,7 +744,7 @@ function eV({
       },
       placeholder
     }), d && jsx(eM, {
-      text: _$$t2("community.publishing.data_security.incomplete_text")
+      text: getI18nString("community.publishing.data_security.incomplete_text")
     })]
   });
 }
@@ -762,7 +762,7 @@ function eG({
   }) : null;
 }
 function eZ(e) {
-  if (e && "exception" !== e.type) return "ICON_MISSING" === e.key ? _$$t2("community.publishing.you_must_set_an_icon_for_your_resource") : throwTypeError(e.key);
+  if (e && "exception" !== e.type) return "ICON_MISSING" === e.key ? getI18nString("community.publishing.you_must_set_an_icon_for_your_resource") : throwTypeError(e.key);
 }
 let eX = forwardRef(function ({
   iconFieldManager: e,
@@ -832,7 +832,7 @@ let eX = forwardRef(function ({
         children: jsx(oW, {
           src: p.url,
           loading: "lazy",
-          alt: _$$t2("community.publishing.extension_icon_image"),
+          alt: getI18nString("community.publishing.extension_icon_image"),
           draggable: !1
         })
       }), jsx(_$$E2, {
@@ -854,14 +854,14 @@ let eX = forwardRef(function ({
           ref: A,
           onClick: f,
           disabled: h || !setIconFromInput,
-          children: _$$t2("community.publishing.add_image")
+          children: getI18nString("community.publishing.add_image")
         })
       })]
     })]
   });
   return jsx(_$$A3, {
-    label: _$$t2("community.publishing.set_an_icon"),
-    subLabel: _$$t2("community.publishing.recommended_size_in_pixels", {
+    label: getI18nString("community.publishing.set_an_icon"),
+    subLabel: getI18nString("community.publishing.recommended_size_in_pixels", {
       mediaWidth: 128,
       mediaHeight: 128
     }),
@@ -883,7 +883,7 @@ let e1 = forwardRef(function ({
   }), []), e.deps.isWidget) return null;
   let s = !Zc(e);
   return jsx(_$$A3, {
-    label: _$$t2("community.seller.payment_type"),
+    label: getI18nString("community.seller.payment_type"),
     required: !0,
     disabled: s,
     children: jsxs(_$$b3, {
@@ -897,10 +897,10 @@ let e1 = forwardRef(function ({
       },
       children: [jsx(e2, {
         value: _$$hE.ONE_TIME,
-        title: _$$t2("community.seller.one_time_payment")
+        title: getI18nString("community.seller.one_time_payment")
       }), jsx(e2, {
         value: _$$hE.SUBSCRIPTION,
-        title: _$$t2("community.seller.monthly_subscription")
+        title: getI18nString("community.seller.monthly_subscription")
       })]
     })
   });
@@ -935,11 +935,11 @@ function e6({
   existingExtension && (s = parseInt(Ar(existingExtension)?.version || "0"));
   a && s++;
   return jsx(_$$A3, {
-    label: _$$t2("community.publishing.version"),
-    afterLabelContent: `${_$$t2("community.publishing.version")} ${s}`,
+    label: getI18nString("community.publishing.version"),
+    afterLabelContent: `${getI18nString("community.publishing.version")} ${s}`,
     children: jsx(_$$S, {
       label: jsx(_$$J3, {
-        children: (i = Lz(t, void 0), i?.is_public ? existingExtension && Ul(existingExtension) ? _$$t2("community.publishing.publish_a_new_version") : existingExtension && AC(existingExtension) ? _$$t2("community.publishing.resubmit_a_new_version") : _$$t2("community.publishing.submit_a_new_version") : _$$t2("community.publishing.publish_a_new_version"))
+        children: (i = Lz(t, void 0), i?.is_public ? existingExtension && Ul(existingExtension) ? getI18nString("community.publishing.publish_a_new_version") : existingExtension && AC(existingExtension) ? getI18nString("community.publishing.resubmit_a_new_version") : getI18nString("community.publishing.submit_a_new_version") : getI18nString("community.publishing.publish_a_new_version"))
       }),
       checked: a,
       onChange: () => {
@@ -951,7 +951,7 @@ function e6({
 let tc = e => {
   if (e && "validation" === e.type) {
     let t = e.key;
-    return "EDITOR_TYPE_MISMATCH" === t ? _$$t2("community.publishing.extension_playground_file_editor_type_error") : throwTypeError(t);
+    return "EDITOR_TYPE_MISMATCH" === t ? getI18nString("community.publishing.extension_playground_file_editor_type_error") : throwTypeError(t);
   }
 };
 let tu = forwardRef(function ({
@@ -1058,9 +1058,9 @@ let tu = forwardRef(function ({
     })]
   });
   return jsx(_$$A3, {
-    label: _$$t2("community.publishing.include_a_playground_file"),
+    label: getI18nString("community.publishing.include_a_playground_file"),
     subLabel: jsx("div", {
-      children: _$$tx("community.publishing.plugin_playground_file_help_text_new", {
+      children: renderI18nText("community.publishing.plugin_playground_file_help_text_new", {
         useTemplateLink: jsx(_$$N2, {
           href: "https://www.figma.com/community/file/1174497187775558195",
           onClick: () => {
@@ -1071,7 +1071,7 @@ let tu = forwardRef(function ({
             });
           },
           trusted: !0,
-          children: _$$t2("community.publishing.use_our_template")
+          children: getI18nString("community.publishing.use_our_template")
         })
       })
     }),
@@ -1104,16 +1104,16 @@ function tp({
           let e = r?.url;
           e && Ay.redirect(e, "_blank");
         },
-        children: _$$t2("community.publishing.playground_file.dropdown.open_file")
+        children: getI18nString("community.publishing.playground_file.dropdown.open_file")
       }), t ? jsx(q7, {
         onClick: t,
-        children: _$$t2("community.publishing.playground_file.dropdown.revert_to_previous_version")
+        children: getI18nString("community.publishing.playground_file.dropdown.revert_to_previous_version")
       }) : void 0, i ? jsx(q7, {
         onClick: i,
-        children: _$$t2("community.publishing.playground_file.dropdown.update_to_latest_version")
+        children: getI18nString("community.publishing.playground_file.dropdown.update_to_latest_version")
       }) : void 0, jsx(q7, {
         onClick: e,
-        children: _$$t2("community.publishing.playground_file.dropdown.remove")
+        children: getI18nString("community.publishing.playground_file.dropdown.remove")
       })]
     })]
   });
@@ -1153,9 +1153,9 @@ let tx = e => {
     case "NO_ORG_TO_PUBLISH_AS":
       return;
     case "EXTENSION_IS_PAID_RESOURCE":
-      return _$$t2("community.publishing.paid_extensions_cannot_be_published_privately");
+      return getI18nString("community.publishing.paid_extensions_cannot_be_published_privately");
     case "USER_IS_NOT_EXTENSION_OWNER":
-      return _$$t2("community.publishing.you_must_be_the_owner_to_update_where_this_is_published");
+      return getI18nString("community.publishing.you_must_be_the_owner_to_update_where_this_is_published");
     default:
       return throwTypeError(e.key);
   }
@@ -1166,7 +1166,7 @@ function tS({
 }) {
   let i = !Zc(e) || t;
   let a = Lz(e, void 0);
-  let s = _$$t2("community.publishing.paid_extensions_cannot_be_published_privately");
+  let s = getI18nString("community.publishing.paid_extensions_cannot_be_published_privately");
   let o = a?.is_public ? Lu.PUBLIC : Lu.ORG;
   let l = tI(e.deps);
   let d = useMemo(() => {
@@ -1179,7 +1179,7 @@ function tS({
     };
   }, [e, l, i]);
   return jsx(_$$A3, {
-    label: _$$t2("community.publishing.publish_to"),
+    label: getI18nString("community.publishing.publish_to"),
     afterErrorContent: a && tx(tv(e.deps, a)) || (t ? s : void 0),
     children: jsxs(_$$b3, {
       className: _$$iy,
@@ -1190,12 +1190,12 @@ function tS({
         icon: jsx(_$$$4, {}),
         roleToPublishAs: Lu.ORG,
         title: l.name,
-        subtitle: _$$t2("community.cards.private")
+        subtitle: getI18nString("community.cards.private")
       }), jsx(tw, {
         icon: jsx(_$$Y, {}),
         roleToPublishAs: Lu.PUBLIC,
-        title: _$$t2("community.community"),
-        subtitle: _$$t2("community.publishing.public")
+        title: getI18nString("community.community"),
+        subtitle: getI18nString("community.publishing.public")
       })]
     })
   });
@@ -1222,7 +1222,7 @@ function tw({
   });
 }
 let tT = e => {
-  if (e && "validation" === e.type) return "RELEASE_NOTES_TOO_LONG" === e.key ? _$$t2("community.publishing.release_notes_must_be_at_most_10000_characters_long") : throwTypeError(e.key);
+  if (e && "validation" === e.type) return "RELEASE_NOTES_TOO_LONG" === e.key ? getI18nString("community.publishing.release_notes_must_be_at_most_10000_characters_long") : throwTypeError(e.key);
 };
 let tk = forwardRef(function ({
   releaseNotesField: e,
@@ -1257,7 +1257,7 @@ let tk = forwardRef(function ({
     });
   }, [c, u, e, i]);
   return Zc(e) ? jsx(_$$A3, {
-    label: _$$t2("community.publishing.version_release_notes"),
+    label: getI18nString("community.publishing.version_release_notes"),
     error: l,
     children: jsx(_$$o3, {
       display: "contents",
@@ -1270,7 +1270,7 @@ let tk = forwardRef(function ({
         onChange: p,
         delay: 0,
         value: c ? u.newVersion : u.oldVersion,
-        placeholder: c ? _$$t2("community.publishing.whats_changed_in_this_new_version") : _$$t2("community.publishing.what_can_users_expect_in_this_current_version")
+        placeholder: c ? getI18nString("community.publishing.whats_changed_in_this_new_version") : getI18nString("community.publishing.what_can_users_expect_in_this_current_version")
       })
     })
   }) : null;
@@ -1278,7 +1278,7 @@ let tk = forwardRef(function ({
 let tN = e => {
   if (e && "validation" === e.type) {
     let t = e.key;
-    return "WIDGET_SNAPSHOT_MISSING" === t ? _$$t2("community.publishing.you_must_set_a_snapshot_for_your_widget") : throwTypeError(t);
+    return "WIDGET_SNAPSHOT_MISSING" === t ? getI18nString("community.publishing.you_must_set_a_snapshot_for_your_widget") : throwTypeError(t);
   }
 };
 let tP = forwardRef(function ({
@@ -1310,11 +1310,11 @@ let tP = forwardRef(function ({
   } = e;
   let v = !l;
   return Zc(e) ? jsx(_$$A3, {
-    label: _$$t2("community.publishing.set_a_widget_snapshot"),
+    label: getI18nString("community.publishing.set_a_widget_snapshot"),
     error: o,
     afterErrorContent: v && jsx(Yy, {
       children: jsx(_$$Q, {
-        children: _$$t2("community.publishing.you_can_right_click_a_widget_and_select_set_as_widget_thumbnail")
+        children: getI18nString("community.publishing.you_can_right_click_a_widget_and_select_set_as_widget_thumbnail")
       })
     }),
     required: !0,
@@ -1360,7 +1360,7 @@ let tP = forwardRef(function ({
             children: jsx(_$$Q2, {
               src: l.url,
               loading: "lazy",
-              alt: _$$t2("community.publishing.snapshot_image"),
+              alt: getI18nString("community.publishing.snapshot_image"),
               draggable: !1,
               crossOrigin: "use-credentials"
             })
@@ -1386,13 +1386,13 @@ let tP = forwardRef(function ({
                 restoreDefaultSnapshot();
                 e.stopPropagation();
               },
-              children: _$$t2("community.publishing.use_default_snapshot")
+              children: getI18nString("community.publishing.use_default_snapshot")
             }), jsx($n, {
               ref: u,
               variant: restoreDefaultSnapshot ? "link" : void 0,
               onClick: m,
               disabled: h || !setSnapshotFromInput,
-              children: l ? _$$t2("community.publishing.change_image") : _$$t2("community.publishing.upload_image")
+              children: l ? getI18nString("community.publishing.change_image") : getI18nString("community.publishing.upload_image")
             })]
           })]
         })]
@@ -1405,9 +1405,9 @@ let tU = e => {
     let t = e.key;
     switch (t) {
       case "TAGLINE_EMPTY":
-        return _$$t2("community.publishing.add_a_tagline");
+        return getI18nString("community.publishing.add_a_tagline");
       case "TAGLINE_TOO_LONG":
-        return _$$t2("community.publishing.tagline_must_be_at_most_100_characters_long");
+        return getI18nString("community.publishing.tagline_must_be_at_most_100_characters_long");
       default:
         return throwTypeError(t);
     }
@@ -1433,7 +1433,7 @@ let tB = forwardRef(function ({
     }
   }), []);
   return jsx(_$$A3, {
-    label: _$$t2("community.general.tagline"),
+    label: getI18nString("community.general.tagline"),
     labelHtmlFor: p,
     afterLabelContent: jsxs("div", {
       id: m,
@@ -1444,7 +1444,7 @@ let tB = forwardRef(function ({
         "aria-hidden": !0,
         children: `${c}/100`
       }), jsx(_$$E3, {
-        children: _$$t2("community.publishing.character_count_status", {
+        children: getI18nString("community.publishing.character_count_status", {
           currentCount: c,
           maxCount: 100
         })
@@ -1472,7 +1472,7 @@ let tB = forwardRef(function ({
           a?.();
           e.setValue?.(t.currentTarget.value);
         },
-        placeholder: t ? _$$t2("community.publishing.widget_tagline_input_placeholder") : _$$t2("community.publishing.plugin_tagline_input_placeholder"),
+        placeholder: t ? getI18nString("community.publishing.widget_tagline_input_placeholder") : getI18nString("community.publishing.plugin_tagline_input_placeholder"),
         value: Lz(e, "")
       })
     })
@@ -1640,7 +1640,7 @@ async function io(e) {
     data
   } = await _$$w2.updateExtensionRoles(u, validExtensionId, isWidget);
   let m = data.meta;
-  sx("Hub Plugin Publish Role", {
+  trackEventAnalytics("Hub Plugin Publish Role", {
     pluginId: validExtensionId,
     toPublic: m.roles.is_public,
     toOrg: !!m.roles.org,
@@ -2329,7 +2329,7 @@ let ic = _$$T2({
           isPublishing: !0
         }), MB(e?.localFileId)]);
       } catch (e) {
-        $D(_$$e.COMMUNITY, e);
+        reportError(_$$e.COMMUNITY, e);
         return new _$$o2.SubmissionError({
           key: "ERROR_GETTING_EXTENSION_MANIFEST",
           data: {
@@ -2346,7 +2346,7 @@ let ic = _$$T2({
           isWidget: n
         });
       } catch (e) {
-        $D(_$$e.COMMUNITY, e);
+        reportError(_$$e.COMMUNITY, e);
         return new _$$o2.SubmissionError({
           key: "ERROR_CREATING_EXTENSION_VERSION",
           data: {
@@ -2357,7 +2357,7 @@ let ic = _$$T2({
     } else try {
       p = await _$$w2.postPluginImagesUpload(h, n, uploadImages);
     } catch (e) {
-      $D(_$$e.COMMUNITY, e);
+      reportError(_$$e.COMMUNITY, e);
       return new _$$o2.SubmissionError({
         key: "ERROR_POST_EXTENSION_IMAGES",
         data: {
@@ -2372,7 +2372,7 @@ let ic = _$$T2({
         code: c
       });
     } catch (e) {
-      if ($D(_$$e.COMMUNITY, e), n1(e)) return new _$$o2.SubmissionError({
+      if (reportError(_$$e.COMMUNITY, e), n1(e)) return new _$$o2.SubmissionError({
         key: "ERROR_FILE_TOO_LARGE",
         data: {
           rawError: e
@@ -2393,7 +2393,7 @@ let ic = _$$T2({
         allMedia
       });
     } catch (e) {
-      $D(_$$e.COMMUNITY, e);
+      reportError(_$$e.COMMUNITY, e);
       return new _$$o2.SubmissionError({
         key: "ERROR_VIDEO_UPLOAD",
         data: {
@@ -2409,7 +2409,7 @@ let ic = _$$T2({
         dataSecurityPromise: r
       });
     } catch (e) {
-      $D(_$$e.COMMUNITY, e);
+      reportError(_$$e.COMMUNITY, e);
       return new _$$o2.SubmissionError({
         key: "ERROR_UPDATE_SECURITY_FORM",
         data: {
@@ -2442,7 +2442,7 @@ let ic = _$$T2({
       });
       m = data.meta.plugin;
     } catch (e) {
-      $D(_$$e.COMMUNITY, e);
+      reportError(_$$e.COMMUNITY, e);
       return new _$$o2.SubmissionError({
         key: "ERROR_FINALIZING_VERSION",
         data: {
@@ -2460,7 +2460,7 @@ let ic = _$$T2({
         isExistingExtensionUnpublished: o
       });
     } catch (e) {
-      $D(_$$e.COMMUNITY, e);
+      reportError(_$$e.COMMUNITY, e);
       return new _$$o2.SubmissionError({
         key: "ERROR_UPDATE_ROLES",
         data: {
@@ -2482,7 +2482,7 @@ let ic = _$$T2({
       });
       m = data.meta;
     } catch (e) {
-      $D(_$$e.COMMUNITY, e);
+      reportError(_$$e.COMMUNITY, e);
       return new _$$o2.SubmissionError({
         key: "ERROR_FINALIZING_EXTENSION",
         data: {
@@ -2501,7 +2501,7 @@ let ic = _$$T2({
       } = e;
       let o = c_(icon).currentValue?.buffer;
       let l = o?.byteLength || 0;
-      isCreatingNewVersion ? sx("Hub Plugin Publish Version", {
+      isCreatingNewVersion ? trackEventAnalytics("Hub Plugin Publish Version", {
         pluginId: validExtensionId,
         hasUI: !!manifest?.ui,
         apiVersion: manifest?.api,
@@ -2509,7 +2509,7 @@ let ic = _$$T2({
         iconFileSize: l,
         isWidget,
         editorType: manifest?.editorType?.sort().join(", ")
-      }) : sx("Hub Plugin Update Version", {
+      }) : trackEventAnalytics("Hub Plugin Update Version", {
         pluginId: validExtensionId,
         isWidget,
         iconFileSize: l
@@ -3023,16 +3023,16 @@ function iM({
         manager: J,
         children: [{
           key: "details",
-          label: _$$t2("community.publishing.describe_your_resource")
+          label: getI18nString("community.publishing.describe_your_resource")
         }, {
           key: "media",
-          label: _$$t2("community.publishing.choose_some_images")
+          label: getI18nString("community.publishing.choose_some_images")
         }, {
           key: "security",
-          label: _$$t2("community.publishing.data_security")
+          label: getI18nString("community.publishing.data_security")
         }, {
           key: "advanced",
-          label: _$$t2("community.publishing.add_the_final_details")
+          label: getI18nString("community.publishing.add_the_final_details")
         }].map(({
           key: e,
           label: t
@@ -3047,7 +3047,7 @@ function iM({
         className: ME,
         children: [jsx("div", {
           className: jc,
-          children: _$$t2("community.publishing.resource_preview")
+          children: getI18nString("community.publishing.resource_preview")
         }), jsx(_$$T, {
           iconField: e.fieldStates.icon,
           nameField: e.fieldStates.name,
@@ -3249,11 +3249,11 @@ function iM({
     children: [J.isOnFirstTab ? jsx($n, {
       variant: "secondary",
       onClick: ec,
-      children: _$$t2("general.cancel")
+      children: getI18nString("general.cancel")
     }) : !eA && jsx($n, {
       variant: "secondary",
       onClick: J.selectPreviousTab,
-      children: _$$t2("general.back")
+      children: getI18nString("general.back")
     }), J.isOnLastTab ? jsx($n, {
       disabled: draftSubmissionResult?.result === "pending" || eA,
       onClick: () => {
@@ -3261,17 +3261,17 @@ function iM({
       },
       children: draftSubmissionResult?.result === "pending" || eA ? jsx(_$$k, {
         size: "sm"
-      }) : _$$t2("community.publishing.publish")
+      }) : getI18nString("community.publishing.publish")
     }) : jsx($n, {
       onClick: () => {
         checkProgress() && J.selectNextTab();
       },
-      children: _$$t2("general.next")
+      children: getI18nString("general.next")
     })]
   }) : jsx($n, {
     variant: "secondary",
     onClick: clearDraftSubmissionResult,
-    children: _$$t2("general.go_back")
+    children: getI18nString("general.go_back")
   }) : jsxs(Fragment, {
     children: [jsx(gx, {
       publishedResourceContent: draftSubmissionResult.data.publishedExtension
@@ -3281,14 +3281,14 @@ function iM({
   });
   let ey = useMemo(() => {
     if (!eA && draftSubmissionResult?.result !== "success") {
-      if (stepWithErrors) return stepWithErrors === J.activeTab ? _$$t2("community.publishing.please_fill_out_required_fields_and_correct_any_errors") : _$$t2("community.publishing.updates_are_needed_in_another_step");
+      if (stepWithErrors) return stepWithErrors === J.activeTab ? getI18nString("community.publishing.please_fill_out_required_fields_and_correct_any_errors") : getI18nString("community.publishing.updates_are_needed_in_another_step");
       if ("error" === e.status) {
         let t;
         let i = e.errors.find(e => "validation" === e.type);
         if (i) return iB(i);
         let n = e.errors.find(e => "submission" === e.type);
         let r = n?.data.rawError;
-        return n?.key === "ERROR_FILE_TOO_LARGE" ? _$$t2("community.actions.file_too_large") : (r && (t = _$$J2(r)), t ?? _$$t2("community.publishing.an_error_occurred_please_try_again"));
+        return n?.key === "ERROR_FILE_TOO_LARGE" ? getI18nString("community.actions.file_too_large") : (r && (t = _$$J2(r)), t ?? getI18nString("community.publishing.an_error_occurred_please_try_again"));
       }
     }
   }, [e, draftSubmissionResult?.result, eA, stepWithErrors, J.activeTab]);
@@ -3323,7 +3323,7 @@ function iM({
       children: [jsxs(vo, {
         children: [jsx(Y9, {
           children: jsx(hE, {
-            children: isWidget ? _$$t2("community.publishing.publish_widget") : _$$t2("community.publishing.publish_plugin")
+            children: isWidget ? getI18nString("community.publishing.publish_widget") : getI18nString("community.publishing.publish_plugin")
           })
         }), jsx(nB, {
           padding: 0,
@@ -3475,7 +3475,7 @@ let $$iU0 = Ju(function (e) {
   return jsx(_$$tH, {
     boundaryKey: "ExtensionFormView",
     fallback: jsx(_$$r5, {
-      title: e.isWidget ? _$$t2("community.publishing.publish_widget") : _$$t2("community.publishing.publish_plugin")
+      title: e.isWidget ? getI18nString("community.publishing.publish_widget") : getI18nString("community.publishing.publish_plugin")
     }),
     team: _$$e.EXTENSIBILITY_ECOSYSTEM,
     children: jsx(ij, {
@@ -3489,11 +3489,11 @@ let iB = e => {
     let t = e.key;
     switch (t) {
       case "EMAIL_NOT_VALIDATED":
-        return _$$t2("community.publishing.please_verify_your_email_address_to_publish");
+        return getI18nString("community.publishing.please_verify_your_email_address_to_publish");
       case "TWO_FACTOR_AUTH_DISABLED":
-        return _$$t2("community.publishing.you_must_enable_two_factor_authentication_to_publish");
+        return getI18nString("community.publishing.you_must_enable_two_factor_authentication_to_publish");
       case "ACCOUNT_DETAILS_CHANGED":
-        return _$$t2("community.publishing.we_detected_a_change_to_your_account_details_please_contact_support_figma_com_to_publish_this_plugin");
+        return getI18nString("community.publishing.we_detected_a_change_to_your_account_details_please_contact_support_figma_com_to_publish_this_plugin");
       default:
         throwTypeError(t);
     }

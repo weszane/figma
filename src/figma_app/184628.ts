@@ -13,9 +13,9 @@ import { V as _$$V } from "../905/802779";
 import { glU } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
-import { md, zl } from "../figma_app/27355";
-import { Lo } from "../905/714362";
-import { t as _$$t } from "../905/303541";
+import { useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
+import { logInfo } from "../905/714362";
+import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { Dm } from "../figma_app/8833";
 import { UK } from "../figma_app/740163";
@@ -42,7 +42,7 @@ import { h3, Mq, xN } from "../905/918995";
 import { l as _$$l } from "../905/674573";
 import { A as _$$A, a as _$$a } from "../905/904550";
 let K = (e, t, r) => {
-  UK().toggleCollaborativeTextDebugLogging.getCopy() && Lo(e, t, r);
+  UK().toggleCollaborativeTextDebugLogging.getCopy() && logInfo(e, t, r);
 };
 let Y = () => !_H();
 function $({
@@ -75,24 +75,24 @@ function $({
       path: e?.codeFileFullPathWithoutScheme ?? null
     }),
     children: [T && jsx(_$$K, {
-      "aria-label": _$$t("sites.panel.code_component_multiplayer_warning"),
+      "aria-label": getI18nString("sites.panel.code_component_multiplayer_warning"),
       onClick: lQ,
       htmlAttributes: {
-        "data-tooltip": _$$t("sites.panel.code_component_multiplayer_warning"),
+        "data-tooltip": getI18nString("sites.panel.code_component_multiplayer_warning"),
         "data-tooltip-type": Ib.TEXT
       },
       children: jsx(_$$R, {})
     }), a && i && jsx(_$$K, {
-      "aria-label": _$$t("sites.panel.format_code_tooltip"),
+      "aria-label": getI18nString("sites.panel.format_code_tooltip"),
       htmlAttributes: {
-        "data-tooltip": _$$t("sites.panel.format_code_tooltip"),
+        "data-tooltip": getI18nString("sites.panel.format_code_tooltip"),
         "data-tooltip-type": Ib.TEXT
       },
       onClick: h,
       disabled: !!f,
       children: jsx(_$$m, {})
     }), s && jsx(_$$K, {
-      "aria-label": _$$t("figmake.code_editor.download_code"),
+      "aria-label": getI18nString("figmake.code_editor.download_code"),
       onClick: s,
       disabled: y,
       children: jsx(q, {})
@@ -123,7 +123,7 @@ export function $$X1({
   let {
     exchange
   } = $W(m?.guid);
-  let P = md(kb);
+  let P = useAtomWithSubscription(kb);
   let {
     code,
     edits
@@ -148,7 +148,7 @@ export function $$X1({
     if (S) {
       let e = _$$O.get(S);
       e && (e.hasUserEdited = !0);
-      zl.set(Nm(y), "user");
+      atomStoreManager.set(Nm(y), "user");
     }
   }, [S, y]);
   let W = useCallback((e, t, r) => {
@@ -170,13 +170,13 @@ export function $$X1({
     try {
       await et.format();
       Q(_$$F.enqueue({
-        message: _$$t("sites.code_component.format_code_success"),
+        message: getI18nString("sites.code_component.format_code_success"),
         error: !1
       }));
     } catch (e) {
       Ho(e, lV.CODE_IN_SITES, a5.FORMAT);
       Q(_$$F.enqueue({
-        message: _$$t("sites.code_component.format_code_error", {
+        message: getI18nString("sites.code_component.format_code_error", {
           message: e.message.split("\n")[0]
         }),
         error: !0
@@ -271,7 +271,7 @@ function J({
       fullHeight: o,
       initialText: () => "",
       maxHeight: l,
-      placeholder: _$$t("living_designs.converting_design_to_code"),
+      placeholder: getI18nString("living_designs.converting_design_to_code"),
       largeFont: m
     }), e && jsx(ee, {})]
   });

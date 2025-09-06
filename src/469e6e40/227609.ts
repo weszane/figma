@@ -11,7 +11,7 @@ import { getFeatureFlags } from "../905/601108";
 import { Rs } from "../figma_app/288654";
 import { Xm, gB, oA } from "../905/723791";
 import { kt } from "../figma_app/858013";
-import { t as _$$t, tx as _$$tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Y as _$$Y } from "../905/830372";
 import { d as _$$d } from "../469e6e40/744116";
 import { y3 } from "../figma_app/307841";
@@ -30,7 +30,7 @@ import { jm, fu, kp } from "../figma_app/831799";
 import { sMZ, yQw, ZY7 } from "../figma_app/43951";
 import { S2, No, YQ, px, W8 } from "../figma_app/465071";
 import { ck } from "../905/952832";
-import { Iv, F9, pu } from "../905/548208";
+import { DashboardSections, MemberSections, BillingSections } from "../905/548208";
 import { ER } from "../figma_app/102449";
 import { ps } from "../figma_app/845611";
 import { F as _$$F } from "../469e6e40/308608";
@@ -99,9 +99,9 @@ import { fAD } from "../figma_app/27776";
 import { Mc, nM, Gb, r2, dG, U0, nf, Hy, kL } from "../469e6e40/504232";
 import { B as _$$B2 } from "../905/950875";
 import { oA as _$$oA } from "../905/663269";
-import { sx as _$$sx, az } from "../905/449184";
+import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { S as _$$S } from "../469e6e40/679996";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { Ex, zE } from "../figma_app/919079";
 import { CY } from "../figma_app/637027";
 import { s as _$$s3 } from "../905/573154";
@@ -234,8 +234,8 @@ function B({
         t(sf({
           view: "teamAdminConsole",
           teamId: n?.key.parentId ?? "",
-          teamAdminConsoleViewTab: Iv.CONTENT,
-          teamAdminConsoleViewSecondaryTab: F9.CONNECTED_PROJECTS
+          teamAdminConsoleViewTab: DashboardSections.CONTENT,
+          teamAdminConsoleViewSecondaryTab: MemberSections.CONNECTED_PROJECTS
         }));
       }
     }), jsx("div", {
@@ -272,22 +272,22 @@ let eq = Ju(function (e) {
     },
     children: jsx(Dd, {
       destructive: !0,
-      title: _$$t("team_view.remove_members_modal.title", {
+      title: getI18nString("team_view.remove_members_modal.title", {
         member_count: s,
         member_identity: e.members[0]?.name || e.members[0]?.email
       }),
-      confirmText: _$$t("team_view.remove_members_modal.confirmation"),
+      confirmText: getI18nString("team_view.remove_members_modal.confirmation"),
       onConfirm: e.onConfirm,
       children: jsx("p", {
-        children: e.includesPendingTeamRole ? _$$t("team_view.remove_members_modal.pending_role_removal_copy", {
+        children: e.includesPendingTeamRole ? getI18nString("team_view.remove_members_modal.pending_role_removal_copy", {
           member_count: s,
           user_name_or_email: e.members[0]?.name || e.members[0]?.email,
           team_name: name
-        }) : getFeatureFlags().ext_figma_apps ? _$$t("team_view.remove_members_modal.confirmed_role_removal_copy_v2", {
+        }) : getFeatureFlags().ext_figma_apps ? getI18nString("team_view.remove_members_modal.confirmed_role_removal_copy_v2", {
           member_count: s,
           user_name_or_email: e.members[0]?.name || e.members[0]?.email,
           team_name: name
-        }) : _$$t("team_view.remove_members_modal.confirmed_role_removal_copy", {
+        }) : getI18nString("team_view.remove_members_modal.confirmed_role_removal_copy", {
           member_count: s,
           user_name_or_email: e.members[0]?.name || e.members[0]?.email,
           team_name: name
@@ -314,19 +314,19 @@ function eJ() {
   });
   return jsx(rq, {
     arrowPosition: F_.BOTTOM,
-    description: e?.pro_team ? _$$tx("admin_settings.people.onboarding.click_on_a_person") : _$$tx("admin_settings.people.onboarding.click_on_a_person.no_paid_status"),
+    description: e?.pro_team ? renderI18nText("admin_settings.people.onboarding.click_on_a_person") : renderI18nText("admin_settings.people.onboarding.click_on_a_person.no_paid_status"),
     emphasized: !0,
     isShowing,
     onClose: complete,
     primaryCta: {
-      label: _$$tx("general.got_it"),
+      label: renderI18nText("general.got_it"),
       ctaTrackingDescriptor: _$$c.GOT_IT,
       type: "button",
       onClick: complete
     },
     shouldCenterArrow: EL.BEST_EFFORT,
     targetKey: fB,
-    title: _$$tx("admin_settings.people.onboarding.easily_manage_people"),
+    title: renderI18nText("admin_settings.people.onboarding.easily_manage_people"),
     trackingContextName: `${Of} flyout tooltip`
   }, "flyout");
 }
@@ -356,7 +356,7 @@ let e0 = nF((e, {
         }));
         e.dispatch(_$$F2.enqueue({
           type: "team-editors-downgraded",
-          message: _$$t("downgrade_member_visual_bell.text", {
+          message: getI18nString("downgrade_member_visual_bell.text", {
             numMembers: t.id ? 1 : 0,
             userName: t.name ?? t.email
           })
@@ -466,12 +466,12 @@ let e5 = kp(function (e) {
               newLevel: _$$e2.NONE
             });
           });
-          let t = 1 === e.length ? e[0].name || e[0].email : _$$t("team_view.upgrade.members_length_users", {
+          let t = 1 === e.length ? e[0].name || e[0].email : getI18nString("team_view.upgrade.members_length_users", {
             memberLength: e.length
           });
           dispatch(_$$F2.enqueue({
             type: "team-users-removed",
-            message: _$$t("team_view.upgrade.members_removed_text_removed_from_this_props_team_name", {
+            message: getI18nString("team_view.upgrade.members_removed_text_removed_from_this_props_team_name", {
               membersRemovedText: t,
               teamName: team.name
             })
@@ -574,51 +574,51 @@ let e5 = kp(function (e) {
     let d = t.member.canRemoveUser;
     let _ = (e, t) => e ? [t] : [];
     let m = [..._(R(t), {
-      text: _$$t("team_view.settings.manage"),
+      text: getI18nString("team_view.settings.manage"),
       innerText: "Manage (menu cell)",
       callback: () => {
         setHighlightedItemId(t.member.email);
       }
     }), ..._(canAdmin && R(t), {
-      text: _$$t("team_view.settings.see_edit_access"),
+      text: getI18nString("team_view.settings.see_edit_access"),
       callback: () => {
         O(t.member);
       }
     }), {
-      text: _$$t("team_view.settings.copy_email"),
+      text: getI18nString("team_view.settings.copy_email"),
       callback: () => {
         c([t.member.email]);
       }
     }, ..._(a && canEdit && !n, {
-      text: _$$t("team_view.settings.invite_to_team"),
+      text: getI18nString("team_view.settings.invite_to_team"),
       callback: () => {
         p(t.member);
       }
     }), ..._("revoke" === i, {
-      text: _$$t("team_view.settings.revoke_admin_access"),
+      text: getI18nString("team_view.settings.revoke_admin_access"),
       callback: () => u({
         member: t.member,
         newLevel: _$$e2.EDITOR
       })
     }), ..._("grant" === i, {
-      text: _$$t("team_view.settings.grant_admin_access"),
+      text: getI18nString("team_view.settings.grant_admin_access"),
       callback: () => u({
         member: t.member,
         newLevel: _$$e2.ADMIN
       })
     })];
     let x = [..._(n && o, {
-      text: _$$t("team_view.settings.resend_invite"),
+      text: getI18nString("team_view.settings.resend_invite"),
       callback: () => {
         v(t.member);
       }
     }), ..._(!t.isCurrentMember && d, {
-      text: _$$t("team_view.settings.remove"),
+      text: getI18nString("team_view.settings.remove"),
       callback: () => {
         b([t.member]);
       }
     }), ..._(t.isCurrentMember && !s, {
-      text: _$$t("team_view.settings.leave_team"),
+      text: getI18nString("team_view.settings.leave_team"),
       callback: () => {
         g(t.member);
       }
@@ -629,7 +629,7 @@ let e5 = kp(function (e) {
     return m;
   }, [R, c, p, g, u, b, v, e.team, setHighlightedItemId, O]);
   let D = e => {
-    let t = "current_seat_billing_interval" in e.member && e.member.current_seat_billing_interval ? e.member.current_seat_billing_interval === FBillingPeriodType.YEAR ? _$$t("team_view.team_members_table.billing_interval_annual") : _$$t("team_view.team_members_table.billing_interval_monthly") : _$$t("team_view.team_members_table.billing_interval_empty");
+    let t = "current_seat_billing_interval" in e.member && e.member.current_seat_billing_interval ? e.member.current_seat_billing_interval === FBillingPeriodType.YEAR ? getI18nString("team_view.team_members_table.billing_interval_annual") : getI18nString("team_view.team_members_table.billing_interval_monthly") : getI18nString("team_view.team_members_table.billing_interval_empty");
     return jsx(e2, {
       cellContent: t
     });
@@ -689,17 +689,17 @@ let e5 = kp(function (e) {
     let t = () => {
       e.onFilter(Ok);
     };
-    let a = _$$tx("team_view.team_members_table.default_empty_state");
+    let a = renderI18nText("team_view.team_members_table.default_empty_state");
     let n = jsx("span", {
-      children: _$$tx("team_view.team_members_table.member_filter_empty_state", {
+      children: renderI18nText("team_view.team_members_table.member_filter_empty_state", {
         reset_link: jsx("a", {
           className: nf,
           onClick: () => t(),
-          children: _$$t("team_view.team_members_table.member_filter_empty_reset_link")
+          children: getI18nString("team_view.team_members_table.member_filter_empty_reset_link")
         })
       })
     });
-    let s = _$$tx("team_view.team_members_table.search_empty_state");
+    let s = renderI18nText("team_view.team_members_table.search_empty_state");
     let r = Object.values(e.filters).some(e => !!e);
     return r && e.searchQuery ? e.lastFilterAction === Vc.SEARCH ? s : n : r ? n : e.searchQuery ? s : a;
   };
@@ -715,7 +715,7 @@ let e5 = kp(function (e) {
           clearSearch: () => {
             e.onSearch("");
           },
-          placeholder: _$$t("team_view.search_bar.search_members_with_ellipsis")
+          placeholder: getI18nString("team_view.search_bar.search_members_with_ellipsis")
         })
       }), jsx(bv, {
         label: Rq(_$$d2.ACTIVE_AT),
@@ -728,11 +728,11 @@ let e5 = kp(function (e) {
         getDisplayText: e => function (e) {
           switch (e) {
             case UW.MORE_SEVEN_DAYS:
-              return _$$t("team_view.team_members_table.filters.last_active..more_than_7_days_ago");
+              return getI18nString("team_view.team_members_table.filters.last_active..more_than_7_days_ago");
             case UW.MORE_THIRTY_DAYS:
-              return _$$t("team_view.team_members_table.filters.last_active..more_than_30_days_ago");
+              return getI18nString("team_view.team_members_table.filters.last_active..more_than_30_days_ago");
             case UW.MORE_THREE_MONTHS:
-              return _$$t("team_view.team_members_table.filters.last_active..more_than_3_months_ago");
+              return getI18nString("team_view.team_members_table.filters.last_active..more_than_3_months_ago");
             default:
               throwTypeError(e);
           }
@@ -754,7 +754,7 @@ let e5 = kp(function (e) {
         selectedValue: e.filters.billingIntervalFilter ?? null,
         values: [FBillingPeriodType.MONTH, FBillingPeriodType.YEAR],
         getCount: t => e.filterCounts.billingInterval?.[t] ?? 0,
-        getDisplayText: e => e === FBillingPeriodType.MONTH ? _$$t("team_view.team_members_table.billing_interval_monthly") : _$$t("team_view.team_members_table.billing_interval_annual"),
+        getDisplayText: e => e === FBillingPeriodType.MONTH ? getI18nString("team_view.team_members_table.billing_interval_monthly") : getI18nString("team_view.team_members_table.billing_interval_annual"),
         updateFilter: t => e.onFilter({
           billingIntervalFilter: t ?? void 0
         })
@@ -779,7 +779,7 @@ let e5 = kp(function (e) {
     let m = _.join();
     return jsxs(Fragment, {
       children: [canAdmin && !r && 1 === a.length && jsx(IU, {
-        label: _$$t("team_view.settings.see_edit_access"),
+        label: getI18nString("team_view.settings.see_edit_access"),
         onClick: () => {
           O(a[0]);
         }
@@ -788,14 +788,14 @@ let e5 = kp(function (e) {
           ...u,
           copiedUserIds: m
         },
-        label: _$$t("team_view.settings.copy_get_plural_or_singular_selected_members_length_email", {
+        label: getI18nString("team_view.settings.copy_get_plural_or_singular_selected_members_length_email", {
           numEmails: a.length
         }),
         onClick: () => {
           c(n);
         }
       }), s && !o && jsx(IU, {
-        label: _$$t("team_view.settings.remove"),
+        label: getI18nString("team_view.settings.remove"),
         trackingProperties: {
           ...u,
           removedUserIds: m
@@ -805,7 +805,7 @@ let e5 = kp(function (e) {
         },
         disabled: l,
         ...(l ? {
-          tooltip: _$$t("team_view.settings.you_can_only_remove_limit_users_at_a_time", {
+          tooltip: getI18nString("team_view.settings.you_can_only_remove_limit_users_at_a_time", {
             batchLimit: 20
           })
         } : {})
@@ -848,7 +848,7 @@ let e5 = kp(function (e) {
         isRowClickable: R,
         itemTypeContext: {
           itemType: "user",
-          getSelectedCountString: e => _$$t("multi_select_list.selected_count_user", {
+          getSelectedCountString: e => getI18nString("multi_select_list.selected_count_user", {
             numSelected: e
           })
         },
@@ -938,7 +938,7 @@ function e8(e) {
   var u = {};
   if ("loading" === _.status) return jsx(kt, {});
   "errors" === _.status ? e.dispatch(_$$F2.enqueue({
-    message: _$$t("file_browser.file_browser_actions.team_member_fetch_error"),
+    message: getI18nString("file_browser.file_browser_actions.team_member_fetch_error"),
     error: !0
   })) : u = _.data || {};
   let m = _$$A().subtract(3, "days");
@@ -1190,10 +1190,10 @@ function tG(e) {
         },
         userInitiated: !0
       }));
-      let t = e ? _$$t("admin_settings.ai.disable_success") : _$$t("admin_settings.ai.enable_success");
+      let t = e ? getI18nString("admin_settings.ai.disable_success") : getI18nString("admin_settings.ai.enable_success");
       r(_$$s3.flash(t));
     } catch {
-      r(_$$s3.error(_$$t("file_browser.file_browser_actions.team_update_error")));
+      r(_$$s3.error(getI18nString("file_browser.file_browser_actions.team_update_error")));
     }
   };
   let v = async e => {
@@ -1202,13 +1202,13 @@ function tG(e) {
         teamId: team.id,
         enabled: e
       });
-      _$$sx("ai_data_sharing_toggled", {
+      trackEventAnalytics("ai_data_sharing_toggled", {
         team_id: team.id,
         enabled: e
       });
-      r(_$$s3.flash(_$$t("admin_settings.ai.data_sharing.update_success")));
+      r(_$$s3.flash(getI18nString("admin_settings.ai.data_sharing.update_success")));
     } catch (e) {
-      r(_$$s3.error(_$$t("admin_settings.ai.data_sharing.update_error")));
+      r(_$$s3.error(getI18nString("admin_settings.ai.data_sharing.update_error")));
     }
   };
   let j = getFeatureFlags().ai_ga;
@@ -1226,14 +1226,14 @@ function tG(e) {
       testId: t$.aiFeaturesEnableButton
     })
   })) : y.push(jsx(T_, {
-    label: _$$t("admin_settings.ai.features_toggle.label"),
+    label: getI18nString("admin_settings.ai.features_toggle.label"),
     description: jsx("p", {
-      children: _$$tx("admin_settings.ai.features_toggle.description.team", {
+      children: renderI18nText("admin_settings.ai.features_toggle.description.team", {
         learnMoreLink: jsx(CY, {
           href: _$$d3.aiFeatures,
           target: "_blank",
           trusted: !0,
-          children: _$$tx("general.learn_more")
+          children: renderI18nText("general.learn_more")
         })
       })
     }),
@@ -1242,16 +1242,16 @@ function tG(e) {
     onToggle: e => {
       b(!e);
     }
-  }, _$$t("admin_settings.ai.features_toggle.label")));
+  }, getI18nString("admin_settings.ai.features_toggle.label")));
   y.push(jsx(T_, {
-    label: _$$t("admin_settings.ai.data_sharing.label"),
+    label: getI18nString("admin_settings.ai.data_sharing.label"),
     description: jsx("p", {
-      children: _$$tx("admin_settings.ai.data_sharing.description.team", {
+      children: renderI18nText("admin_settings.ai.data_sharing.description.team", {
         learnMoreLink: jsx(CY, {
           href: _$$d3.aiDataSharing,
           target: "_blank",
           trusted: !0,
-          children: _$$tx("general.learn_more")
+          children: renderI18nText("general.learn_more")
         })
       })
     }),
@@ -1259,8 +1259,8 @@ function tG(e) {
     testId: t$.aiDataSharingToggle,
     onToggle: v,
     disabled: p,
-    tooltipText: p ? _$$t("admin_settings.ai.data_sharing.disabled_for_student_teams") : void 0
-  }, _$$t("admin_settings.ai.data_sharing.label")));
+    tooltipText: p ? getI18nString("admin_settings.ai.data_sharing.disabled_for_student_teams") : void 0
+  }, getI18nString("admin_settings.ai.data_sharing.label")));
   return jsx(Fragment, {
     children: jsx(fu, {
       name: "Team Admin Console Settings Table",
@@ -1271,7 +1271,7 @@ function tG(e) {
         className: Dg,
         "data-testid": "admin-console-settings-table",
         children: [e.team.pro_team && jsx(Kz, {
-          title: _$$t("settings_table.team_profile"),
+          title: getI18nString("settings_table.team_profile"),
           settings: tV({
             team: e.team,
             teamName: e.team.name,
@@ -1280,7 +1280,7 @@ function tG(e) {
             dispatch: r
           })
         }), jsx(Kz, {
-          title: _$$t("settings_table.plan"),
+          title: getI18nString("settings_table.plan"),
           settings: tz({
             teamBillingSummary: e.billing.summary,
             dispatch: r,
@@ -1288,7 +1288,7 @@ function tG(e) {
             canSeeBillingAddressExp: m
           })
         }), e.team.pro_team && jsx(Kz, {
-          title: _$$t("plan_settings.billing_section_header"),
+          title: getI18nString("plan_settings.billing_section_header"),
           description: tW(c, d),
           settings: tH({
             annualSub: d,
@@ -1304,10 +1304,10 @@ function tG(e) {
             isBillingRemodelEnabled: s
           })
         }), OI(e.team) && jsx(Kz, {
-          title: _$$t("settings_table.resources"),
+          title: getI18nString("settings_table.resources"),
           settings: [jsx(T_, {
-            label: _$$t("settings_tab.ui_kits_toggle_label"),
-            description: _$$t("settings_tab.ui_kits_toggle_description"),
+            label: getI18nString("settings_tab.ui_kits_toggle_label"),
+            description: getI18nString("settings_tab.ui_kits_toggle_description"),
             isActive: !e.team.figma_provided_libraries_disabled,
             testId: "figma-provided-libraries-setting-toggle",
             onToggle: t => {
@@ -1315,7 +1315,7 @@ function tG(e) {
                 figma_provided_libraries_disabled: !t,
                 teamId: e.team.id
               }));
-              az.trackDefinedEvent("preset_libraries.team_status_changed", {
+              analyticsEventManager.trackDefinedEvent("preset_libraries.team_status_changed", {
                 userId: e.userId,
                 teamId: e.team.id,
                 isEnabled: t
@@ -1323,14 +1323,14 @@ function tG(e) {
             }
           }, "figma_libraries")]
         }), jsx(Kz, {
-          title: _$$t("admin_settings.ai.section_title"),
+          title: getI18nString("admin_settings.ai.section_title"),
           badge: j ? void 0 : jsxs(Fragment, {
             children: [jsx(Ex, {
               color: zE.BRAND,
-              text: _$$t("general.beta")
+              text: getI18nString("general.beta")
             }), jsx(_$$B2, {
               "data-tooltip-type": Ib.TEXT,
-              "data-tooltip": _$$t("admin_settings.ai.section_title.free_in_beta"),
+              "data-tooltip": getI18nString("admin_settings.ai.section_title.free_in_beta"),
               "data-tooltip-timeout-delay": 50
             })]
           }),
@@ -1362,7 +1362,7 @@ let tz = ({
   });
   if (!monthly_subscription && !annual_subscription) {
     let e = jsx("span", {
-      children: _$$tx("settings_table.upgrade_to_the_professional_plan_or_to_an_organization_and_get_access_to_shared_team_libraries_advanced_security_features_and_more", {
+      children: renderI18nText("settings_table.upgrade_to_the_professional_plan_or_to_an_organization_and_get_access_to_shared_team_libraries_advanced_security_features_and_more", {
         more: jsx("a", {
           className: tF,
           href: "/pricing",
@@ -1370,20 +1370,20 @@ let tz = ({
             e.stopPropagation();
           },
           target: "_blank",
-          children: _$$tx("settings_table.more")
+          children: renderI18nText("settings_table.more")
         })
       })
     });
     if (u) {
       let t = new Date(a.grace_period_end);
       e = jsx("span", {
-        children: _$$tx("settings_table.to_keep_using_paid_features_like_unlimited_team_figma_files_projects_and_team_libraries_after_your_free_professional_plan_expires_on_date_purchase_the_professional_plan_for_your_team", {
+        children: renderI18nText("settings_table.to_keep_using_paid_features_like_unlimited_team_figma_files_projects_and_team_libraries_after_your_free_professional_plan_expires_on_date_purchase_the_professional_plan_for_your_team", {
           date: t
         })
       });
     }
     _.push(jsx(x8, {
-      label: u ? _$$t("settings_table.purchase_professional_plan") : _$$t("settings_table.upgrade_your_plan"),
+      label: u ? getI18nString("settings_table.purchase_professional_plan") : getI18nString("settings_table.upgrade_your_plan"),
       onClick: () => {
         u ? tJ(t, c) : tK(t, c, _$$b4.BILLING_SETTINGS);
       },
@@ -1392,15 +1392,15 @@ let tz = ({
     return _;
   }
   if (_.push(jsx(x8, {
-    label: _$$t("settings_table.upgrade_your_plan"),
+    label: getI18nString("settings_table.upgrade_your_plan"),
     description: jsx("span", {
-      children: _$$tx("settings_table.consolidate_your_teams_access_shared_libraries_enable_advanced_security_features_and_more", {
+      children: renderI18nText("settings_table.consolidate_your_teams_access_shared_libraries_enable_advanced_security_features_and_more", {
         more: jsx("a", {
           className: tF,
           href: "/organization",
           target: "_blank",
           onClick: e => e.stopPropagation(),
-          children: _$$tx("settings_table.more")
+          children: renderI18nText("settings_table.more")
         })
       })
     }),
@@ -1412,8 +1412,8 @@ let tz = ({
     }
   })), plan_canceled || !monthly_subscription) {
     _.push(jsx(x8, {
-      label: _$$t("settings_table.reactivate_plan"),
-      description: _$$t("settings_table.reactivate_your_subscription_of_professional"),
+      label: getI18nString("settings_table.reactivate_plan"),
+      description: getI18nString("settings_table.reactivate_your_subscription_of_professional"),
       onClick: () => {
         C8({
           team: a,
@@ -1436,8 +1436,8 @@ let tz = ({
   switch (p?.id) {
     case _$$m.ADD_ANNUAL_PLAN:
       _.push(jsx(x8, {
-        label: _$$t("settings_table.add_an_annual_plan"),
-        description: _$$t("settings_table.convert_all_monthly_seats"),
+        label: getI18nString("settings_table.add_an_annual_plan"),
+        description: getI18nString("settings_table.convert_all_monthly_seats"),
         onClick: () => {
           p.perform({
             dispatch: t
@@ -1447,8 +1447,8 @@ let tz = ({
       break;
     case _$$m.TRIAL_READ_ONLY:
       _.push(jsx(bX, {
-        label: _$$t("settings_table.add_an_annual_plan"),
-        description: _$$t("settings_table.your_annual_plan_starts", {
+        label: getI18nString("settings_table.add_an_annual_plan"),
+        description: getI18nString("settings_table.your_annual_plan_starts", {
           date: new Date(p.trialEnd)
         })
       }));
@@ -1457,8 +1457,8 @@ let tz = ({
     case _$$m.ADJUST_RENEWAL_SEATS:
       _.push(jsx(x8, {
         testId: "settings-table-add-seats-setting",
-        label: _$$t("settings_table.add_additional_seats"),
-        description: _$$t("settings_table.add_seats_to_your_annual_plan"),
+        label: getI18nString("settings_table.add_additional_seats"),
+        description: getI18nString("settings_table.add_seats_to_your_annual_plan"),
         onClick: () => {
           p.perform({
             dispatch: t
@@ -1467,8 +1467,8 @@ let tz = ({
       }));
   }
   _.push(jsx(x8, {
-    label: _$$t("settings_table.cancel_plan"),
-    description: _$$t("settings_table.cancel_your_subscription_of_professional"),
+    label: getI18nString("settings_table.cancel_plan"),
+    description: getI18nString("settings_table.cancel_your_subscription_of_professional"),
     onClick: () => {
       t(_$$to({
         type: _$$v3,
@@ -1479,8 +1479,8 @@ let tz = ({
     }
   }));
   n || _.push(jsx(x8, {
-    label: _$$t("settings_table.change_payment_method"),
-    description: _$$t("settings_table.change_and_update_the_payment_method_on_file"),
+    label: getI18nString("settings_table.change_payment_method"),
+    description: getI18nString("settings_table.change_and_update_the_payment_method_on_file"),
     onClick: () => C8({
       team: a,
       dispatch: t,
@@ -1492,8 +1492,8 @@ let tz = ({
     })
   }));
   show_vat_gst && !n && _.push(jsx(x8, {
-    label: _$$t("settings_table.vat_gst"),
-    description: _$$t("settings_table.change_vat_gst_id"),
+    label: getI18nString("settings_table.vat_gst"),
+    description: getI18nString("settings_table.change_vat_gst_id"),
     onClick: () => Hq({
       team: a,
       dispatch: t
@@ -1510,13 +1510,13 @@ let tV = ({
 }) => {
   let r = [];
   r.push(jsx(x8, {
-    label: n ? _$$t("settings_table.display_name.label") : _$$t("settings_table.names"),
-    description: n ? _$$t("settings_table.change_display_name") : _$$t("settings_table.change_names"),
+    label: n ? getI18nString("settings_table.display_name.label") : getI18nString("settings_table.names"),
+    description: n ? getI18nString("settings_table.change_display_name") : getI18nString("settings_table.change_names"),
     onClick: () => {
       s(_$$to({
         type: _$$L,
         data: {
-          modalTitle: n ? _$$t("settings_table.update_team_profile") : _$$t("settings_table.edit_names"),
+          modalTitle: n ? getI18nString("settings_table.update_team_profile") : getI18nString("settings_table.edit_names"),
           displayName: t,
           legalName: a,
           updateNameImmediately: !0,
@@ -1537,42 +1537,42 @@ let tW = (e, t) => {
   if (n && a) {
     let a = tB(e?.current_period_end);
     let n = tB(t?.current_period_end);
-    l = _$$tx("team_view.settings_table.multiple_subscription_renewal", {
+    l = renderI18nText("team_view.settings_table.multiple_subscription_renewal", {
       monthly_billing_date: jsx("span", {
         className: tq,
-        children: _$$tx("team_view.settings_table.billing_date", {
+        children: renderI18nText("team_view.settings_table.billing_date", {
           billing_date: a
         })
       }),
       annual_billing_date: jsx("span", {
         className: tq,
-        children: _$$tx("team_view.settings_table.billing_date", {
+        children: renderI18nText("team_view.settings_table.billing_date", {
           billing_date: n
         })
       })
     });
   } else if (n) {
     let e = tB(t.current_period_end);
-    l = _$$tx("team_view.settings_table.single_subscription_renewal_annual", {
+    l = renderI18nText("team_view.settings_table.single_subscription_renewal_annual", {
       billing_date: jsx("span", {
         className: tq,
-        children: _$$tx("team_view.settings_table.billing_date", {
+        children: renderI18nText("team_view.settings_table.billing_date", {
           billing_date: e
         })
       })
     });
   } else if (a) {
     let t = tB(e.current_period_end);
-    l = _$$tx("team_view.settings_table.single_subscription_renewal_monthly", {
+    l = renderI18nText("team_view.settings_table.single_subscription_renewal_monthly", {
       billing_date: jsx("span", {
         className: tq,
-        children: _$$tx("team_view.settings_table.billing_date", {
+        children: renderI18nText("team_view.settings_table.billing_date", {
           billing_date: t
         })
       })
     });
-  } else if (r && s) l = _$$tx("team_view.settings_table.renewal_information_canceled_team_annual_and_monthly");else if (r) l = _$$tx("team_view.settings_table.renewal_information_canceled_team_annual");else if (s) l = _$$tx("team_view.settings_table.renewal_information_canceled_team_monthly");else if (null != e || null != t) {
-    x1("billing", "Ambiguous pro team renewal status", {
+  } else if (r && s) l = renderI18nText("team_view.settings_table.renewal_information_canceled_team_annual_and_monthly");else if (r) l = renderI18nText("team_view.settings_table.renewal_information_canceled_team_annual");else if (s) l = renderI18nText("team_view.settings_table.renewal_information_canceled_team_monthly");else if (null != e || null != t) {
+    logError("billing", "Ambiguous pro team renewal status", {
       monthly_period_end: e?.current_period_end,
       monthly_canceled_at: e?.canceled_at,
       annual_period_end: t?.current_period_end,
@@ -1602,8 +1602,8 @@ let tH = ({
 }) => {
   let u = [];
   if (d && u.push(jsx(x8, {
-    label: _$$t("team_view.settings_table.update_payment_details.payment_details"),
-    description: _$$t("team_view.settings_table.update_payment_details.update_payment_method"),
+    label: getI18nString("team_view.settings_table.update_payment_details.payment_details"),
+    description: getI18nString("team_view.settings_table.update_payment_details.update_payment_method"),
     onClick: () => C8({
       team: n,
       dispatch: a,
@@ -1614,8 +1614,8 @@ let tH = ({
       canSeeBillingAddressExp: d
     })
   })), d && u.push(jsx(x8, {
-    label: _$$t("team_view.settings_table.update_invoice_details.invoice_details"),
-    description: _$$t("team_view.settings_table.update_invoice_details.update_invoice_details"),
+    label: getI18nString("team_view.settings_table.update_invoice_details.invoice_details"),
+    description: getI18nString("team_view.settings_table.update_invoice_details.update_invoice_details"),
     onClick: () => a(_$$to({
       type: _$$u,
       data: {
@@ -1626,8 +1626,8 @@ let tH = ({
       }
     }))
   })), l && d && u.push(jsx(x8, {
-    label: _$$t("settings_table.vat_gst"),
-    description: _$$t("settings_table.change_vat_gst_id"),
+    label: getI18nString("settings_table.vat_gst"),
+    description: getI18nString("settings_table.change_vat_gst_id"),
     onClick: () => Hq({
       team: n,
       dispatch: a
@@ -1635,8 +1635,8 @@ let tH = ({
   })), c) {
     let n = e && !t || e && t ? IX.MONTH : IX.YEAR;
     u.push(jsx(x8, {
-      label: _$$t("plan_settings.auto_approval_settings"),
-      description: _$$t("plan_settings.auto_approval_settings_description"),
+      label: getI18nString("plan_settings.auto_approval_settings"),
+      description: getI18nString("plan_settings.auto_approval_settings_description"),
       onClick: _$$S2({
         dispatch: a,
         currency: r,
@@ -1644,9 +1644,9 @@ let tH = ({
       })
     }, "auto-approval-settings"));
   } else u.push(jsx(x8, {
-    label: _$$t("plan_settings.default_role"),
-    description: _$$tx("plan_settings.default_role_description", {
-      plan_type: _$$t("settings_table.team")
+    label: getI18nString("plan_settings.default_role"),
+    description: renderI18nText("plan_settings.default_role_description", {
+      plan_type: getI18nString("settings_table.team")
     }),
     onClick: () => {
       a(_$$to({
@@ -1659,8 +1659,8 @@ let tH = ({
     }
   }, "default-role"));
   u.push(jsx(x8, {
-    label: _$$t("plan_settings.seat_upgrade_digests"),
-    description: _$$t("plan_settings.seat_upgrade_digests_description"),
+    label: getI18nString("plan_settings.seat_upgrade_digests"),
+    description: getI18nString("plan_settings.seat_upgrade_digests_description"),
     disabled: !_,
     currentValue: _ ? null : jsx(_$$I, {}),
     onClick: () => {
@@ -1674,8 +1674,8 @@ let tH = ({
     }
   }));
   u.push(jsx(x8, {
-    label: _$$t("settings_table.billing_contacts"),
-    description: _$$t("settings_table.billing_contacts_description"),
+    label: getI18nString("settings_table.billing_contacts"),
+    description: getI18nString("settings_table.billing_contacts_description"),
     onClick: () => {
       tY(a, n, s || "");
     }
@@ -1733,10 +1733,10 @@ function an() {
     isShowing,
     position: _$$Q.CENTER,
     trackingContextName: "TeamAdminAuthorityOverlay",
-    title: _$$tx("team_admin_authority_overlay.title"),
-    description: _$$tx("team_admin_authority_overlay.description"),
+    title: renderI18nText("team_admin_authority_overlay.title"),
+    description: renderI18nText("team_admin_authority_overlay.description"),
     primaryCta: {
-      label: _$$tx("general.got_it"),
+      label: renderI18nText("general.got_it"),
       ctaTrackingDescriptor: _$$c.GOT_IT,
       type: "button",
       onClick: complete
@@ -1766,9 +1766,9 @@ function ah({
   return jsxs("div", {
     "data-testid": "team-admin-console-header",
     children: [jsx(_$$K, {
-      title: e === Iv.MEMBERS ? _$$tx("team_admin.members_tab.header") : pe(e),
+      title: e === DashboardSections.MEMBERS ? renderI18nText("team_admin.members_tab.header") : pe(e),
       rightActions: jsxs(Fragment, {
-        children: [e === Iv.MEMBERS && jsxs(_$$Y, {
+        children: [e === DashboardSections.MEMBERS && jsxs(_$$Y, {
           width: "hug-contents",
           direction: "horizontal",
           spacing: 8,
@@ -1788,7 +1788,7 @@ function ah({
               action: "Add members to team"
             },
             children: jsx(_$$E, {
-              children: _$$tx("team_admin.members_tab.invite_users")
+              children: renderI18nText("team_admin.members_tab.invite_users")
             })
           })]
         }), n]
@@ -1878,10 +1878,10 @@ function aA(e) {
     return t;
   }) : resourceUtils.loaded(null), [u, p]);
   let x = useCallback(() => {
-    e.setActiveTab(pu.INVOICES);
+    e.setActiveTab(BillingSections.INVOICES);
   }, [e.setActiveTab]);
   let b = useCallback(t => {
-    e.setActiveTab(pu.INVOICES, {
+    e.setActiveTab(BillingSections.INVOICES, {
       planInvoiceId: t
     });
   }, [e.setActiveTab]);
@@ -1889,7 +1889,7 @@ function aA(e) {
     t(sf({
       view: "teamAdminConsole",
       teamId: e.team.id,
-      teamAdminConsoleViewTab: Iv.MEMBERS,
+      teamAdminConsoleViewTab: DashboardSections.MEMBERS,
       membersTabInitialFilters: {
         billingIntervalFilter: FBillingPeriodType.YEAR
       }
@@ -1900,7 +1900,7 @@ function aA(e) {
     t(sf({
       view: "teamAdminConsole",
       teamId: e.team.id,
-      teamAdminConsoleViewTab: Iv.MEMBERS,
+      teamAdminConsoleViewTab: DashboardSections.MEMBERS,
       membersTabInitialFilters: s(_) ? {
         billingIntervalFilter: FBillingPeriodType.MONTH
       } : void 0
@@ -1910,7 +1910,7 @@ function aA(e) {
     t(sf({
       view: "teamAdminConsole",
       teamId: e.team.id,
-      teamAdminConsoleViewTab: Iv.MEMBERS
+      teamAdminConsoleViewTab: DashboardSections.MEMBERS
     }));
   }, [t, e.team.id]);
   let y = useCallback(() => {
@@ -1991,7 +1991,7 @@ function aO(e) {
     t(sf({
       view: "teamAdminConsole",
       teamId: e.team.id,
-      teamAdminConsoleViewTab: Iv.BILLING,
+      teamAdminConsoleViewTab: DashboardSections.BILLING,
       teamAdminConsoleViewSecondaryTab: a,
       ...(n?.planInvoiceId && {
         initialHighlightedInvoiceId: n.planInvoiceId
@@ -2036,17 +2036,17 @@ function aO(e) {
       children: jsxs("div", {
         className: _$$s.hFull.flex.flexColumn.$,
         children: [jsx(ah, {
-          selectedTab: Iv.BILLING,
+          selectedTab: DashboardSections.BILLING,
           teamId: e.team.id,
           secondaryTabs: jsxs(_$$t2.TabStrip, {
             manager: d,
             children: [jsx(_$$t2.Tab, {
               ...s.overview,
               "data-onboarding-key": l4,
-              children: _$$t("team_view.toolbar.billing.overview")
+              children: getI18nString("team_view.toolbar.billing.overview")
             }), jsx(_$$t2.Tab, {
               ...s.invoices,
-              children: _$$t("team_view.toolbar.billing.invoices")
+              children: getI18nString("team_view.toolbar.billing.invoices")
             })]
           }),
           rightContent: jsx(_$$p4, {
@@ -2089,7 +2089,7 @@ function aP(e) {
     t(sf({
       view: "teamAdminConsole",
       teamId: e.team.id,
-      teamAdminConsoleViewTab: Iv.CONTENT,
+      teamAdminConsoleViewTab: DashboardSections.CONTENT,
       teamAdminConsoleViewSecondaryTab: a
     }));
   }, [t, e.team.id]));
@@ -2102,19 +2102,19 @@ function aP(e) {
     children: jsxs("div", {
       className: _$$s.hFull.flex.flexColumn.$,
       children: [jsx(ah, {
-        selectedTab: Iv.CONTENT,
+        selectedTab: DashboardSections.CONTENT,
         teamId: e.team.id,
         secondaryTabs: jsxs(_$$t2.TabStrip, {
           manager: d,
           children: [jsx(_$$t2.Tab, {
             ...s["abandoned-drafts"],
-            children: _$$t("team_view.toolbar.drafts")
+            children: getI18nString("team_view.toolbar.drafts")
           }), jsxs(_$$t2.Tab, {
             ...s["connected-projects"],
             ...(c && {
               "data-onboarding-key": _$$k6
             }),
-            children: [_$$t("team_view.toolbar.connected_projects"), c && jsx(_$$Q3, {})]
+            children: [getI18nString("team_view.toolbar.connected_projects"), c && jsx(_$$Q3, {})]
           })]
         })
       }), jsxs("div", {
@@ -2208,7 +2208,7 @@ export function $$aG0(e) {
     let [s] = IT(a$({
       teamId: e
     }), {
-      enabled: !!e && getFeatureFlags().dangling_team_users_backfill_banner && t === Iv.MEMBERS
+      enabled: !!e && getFeatureFlags().dangling_team_users_backfill_banner && t === DashboardSections.MEMBERS
     });
     let {
       show_banner
@@ -2238,10 +2238,10 @@ export function $$aG0(e) {
         children: jsxs(_$$Y, {
           horizontalAlignItems: "start",
           children: [jsx(_$$b, {}), jsx("span", {
-            children: _$$tx("team_admin.members_tab.fixed_issue_members_list")
+            children: renderI18nText("team_admin.members_tab.fixed_issue_members_list")
           }), jsx(_$$N, {
             href: "https://help.figma.com/hc/articles/26628690415255",
-            children: _$$tx("team_admin.members_tab.fixed_issue_members_list_read_more")
+            children: renderI18nText("team_admin.members_tab.fixed_issue_members_list_read_more")
           })]
         })
       })
@@ -2250,7 +2250,7 @@ export function $$aG0(e) {
   let $ = _$$R();
   let G = _$$R2(e.teamId);
   let z = y3(s?.created_at, s?.last_upgraded_at);
-  let V = s && (G || e.selectedTab === Iv.SETTINGS && s.pro_team);
+  let V = s && (G || e.selectedTab === DashboardSections.SETTINGS && s.pro_team);
   let W = Ti(V ? {
     planId: s.id,
     planType: FOrganizationLevelType.TEAM
@@ -2265,14 +2265,14 @@ export function $$aG0(e) {
           teamId: s.id
         }));
       }
-      if (e.selectedTab === Iv.BILLING) {
+      if (e.selectedTab === DashboardSections.BILLING) {
         let e = Be.loadingKeyForPayload({
           teamId: s.id
         });
         VP(D, e) || D2(D, e) || a(Be({
           teamId: s.id
         }));
-      } else if (e.selectedTab === Iv.MEMBERS) {
+      } else if (e.selectedTab === DashboardSections.MEMBERS) {
         let e = Be.loadingKeyForPayload({
           teamId: s.id
         });
@@ -2285,7 +2285,7 @@ export function $$aG0(e) {
         VP(D, e) || D2(D, e) || a(Be({
           teamId: s.id
         }));
-      } else if (e.selectedTab === Iv.SETTINGS) {
+      } else if (e.selectedTab === DashboardSections.SETTINGS) {
         let e = Be.loadingKeyForPayload({
           teamId: s.id
         });
@@ -2298,7 +2298,7 @@ export function $$aG0(e) {
   let H = Rs(ZY7, {
     teamId: e.teamId
   }, {
-    enabled: e.selectedTab === Iv.SETTINGS
+    enabled: e.selectedTab === DashboardSections.SETTINGS
   });
   let Y = oA(H.data?.team);
   let J = useMemo(() => F.unwrapOr({}), [F]);
@@ -2308,8 +2308,8 @@ export function $$aG0(e) {
   let K = !1;
   let X = !0;
   let Q = e.selectedTab;
-  switch (e.selectedTab === Iv.DASHBOARD && (!(s.pro_team && "loaded" === R.status && R.data?.canAdmin) || s.student_team) && (Q = Iv.MEMBERS), Q) {
-    case Iv.DASHBOARD:
+  switch (e.selectedTab === DashboardSections.DASHBOARD && (!(s.pro_team && "loaded" === R.status && R.data?.canAdmin) || s.student_team) && (Q = DashboardSections.MEMBERS), Q) {
+    case DashboardSections.DASHBOARD:
       if ($) {
         t = jsx(_$$i, {
           teamBilling: P
@@ -2325,7 +2325,7 @@ export function $$aG0(e) {
         teamId: s.id
       }));
       break;
-    case Iv.MEMBERS:
+    case DashboardSections.MEMBERS:
       K = "loading" === F.status || "loading" === R.status || VP(D, m$.loadingKeyForPayload({
         teamId: s.id
       })) || VP(D, Be.loadingKeyForPayload({
@@ -2346,7 +2346,7 @@ export function $$aG0(e) {
         billing: P
       }, `admin-team-members-${s.id}`);
       break;
-    case Iv.BILLING:
+    case DashboardSections.BILLING:
       let et = Be.loadingKeyForPayload({
         teamId: s.id
       });
@@ -2359,7 +2359,7 @@ export function $$aG0(e) {
         nextPostBillingRemodelGaRenewal: P.summary.analyze_data_contract_v2_start
       });
       break;
-    case Iv.SETTINGS:
+    case DashboardSections.SETTINGS:
       K = VP(D, Be.loadingKeyForPayload({
         teamId: s.id
       })) || !Y;
@@ -2370,7 +2370,7 @@ export function $$aG0(e) {
         billing: P
       });
       break;
-    case Iv.CONTENT:
+    case DashboardSections.CONTENT:
       X = !1;
       t = jsx(aP, {
         team: s,
@@ -2379,7 +2379,7 @@ export function $$aG0(e) {
         showResourceConnectionFlyout: e.showResourceConnectionFlyout
       });
       break;
-    case Iv.DRAFTS:
+    case DashboardSections.DRAFTS:
       t = jsx(_$$M, {
         planType: _$$O.TEAM,
         team: s

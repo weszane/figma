@@ -7,7 +7,7 @@ import { b as _$$b, bL, mc, q7 } from "../figma_app/860955";
 import { tKW } from "../figma_app/763686";
 import { Pt, rf } from "../figma_app/806412";
 import { e as _$$e } from "../905/713353";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { v4, AC, P0, QN } from "../figma_app/655139";
 import { c as _$$c } from "../469e6e40/927162";
 import { NH } from "../figma_app/755395";
@@ -31,7 +31,7 @@ export function $$E0({
   let n = Em();
   let i = AF();
   return jsx(VZ, {
-    title: _$$t("dev_handoff.code.settings"),
+    title: getI18nString("dev_handoff.code.settings"),
     recordingKey: "codeSettings",
     collapsiblePanelKey: "code_settings",
     additionalHeaders: i ? jsx(_$$u, {}) : void 0,
@@ -49,7 +49,7 @@ export function $$E0({
         })]
       }) : jsx("div", {
         className: k,
-        children: tx("fullscreen.properties_panel.this_file_s_editor_has_disabled_exporting_copying_and_sharing.seat_rename")
+        children: renderI18nText("fullscreen.properties_panel.this_file_s_editor_has_disabled_exporting_copying_and_sharing.seat_rename")
       })
     })
   });
@@ -73,7 +73,7 @@ function T({
     className: k,
     children: [jsx("div", {
       className: A,
-      children: tx("dev_handoff.code.settings.language")
+      children: renderI18nText("dev_handoff.code.settings.language")
     }), jsx("div", {
       className: I,
       children: jsx(NH, {
@@ -100,7 +100,7 @@ function S({
     children: [jsx(J, {
       className: A,
       htmlFor: d,
-      children: tx("dev_handoff.alternative_units.dimension_unit")
+      children: renderI18nText("dev_handoff.alternative_units.dimension_unit")
     }), jsx($$P2, {
       currentUnit: l,
       onChangeUnit: r,
@@ -130,12 +130,12 @@ export function $$P2({
       ...getTriggerProps({
         id: o
       }),
-      "aria-label": _$$t("dev_handoff.alternative_units.dimension_unit_named", {
+      "aria-label": getI18nString("dev_handoff.alternative_units.dimension_unit_named", {
         unit: d
       }),
       htmlAttributes: {
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("dev_handoff.alternative_units.dimension_unit"),
+        "data-tooltip": getI18nString("dev_handoff.alternative_units.dimension_unit"),
         "data-testid": "dimension_unit"
       },
       disabled: n,
@@ -154,7 +154,7 @@ export class $$L3 {
     this.scaledUnitName = e;
   }
   format(e) {
-    return e === tKW.PIXEL ? _$$t("dev_handoff.alternative_units.pixel_unit") : this.scaledUnitName;
+    return e === tKW.PIXEL ? getI18nString("dev_handoff.alternative_units.pixel_unit") : this.scaledUnitName;
   }
 }
 function R(e) {

@@ -1,6 +1,6 @@
 import { aTn, glU } from "../figma_app/763686";
 import { localStorageRef } from "../905/657224";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { FU } from "../905/26824";
 import { uE } from "../figma_app/314264";
 import { Y5 } from "../figma_app/455680";
@@ -12,41 +12,41 @@ let $$_4 = "keyboardLayoutPreference";
 export function $$h0(e) {
   switch (e) {
     case aTn.US_QWERTY:
-      return t("keyboard_settings.us_qwerty");
+      return getI18nString("keyboard_settings.us_qwerty");
     case aTn.DVORAK:
-      return t("keyboard_settings.us_dvorak");
+      return getI18nString("keyboard_settings.us_dvorak");
     case aTn.GERMAN:
-      return t("keyboard_settings.german_qwertz");
+      return getI18nString("keyboard_settings.german_qwertz");
     case aTn.FRENCH_AZERTY:
-      return t("keyboard_settings.french_azerty");
+      return getI18nString("keyboard_settings.french_azerty");
     case aTn.HIRAGANA_KANA:
-      return t("keyboard_settings.japanese_kana");
+      return getI18nString("keyboard_settings.japanese_kana");
     case aTn.UK_MAC:
-      return t("keyboard_settings.uk_mac");
+      return getI18nString("keyboard_settings.uk_mac");
     case aTn.UK_PC:
-      return t("keyboard_settings.uk_pc");
+      return getI18nString("keyboard_settings.uk_pc");
     case aTn.SWEDISH:
-      return t("keyboard_settings.swedish");
+      return getI18nString("keyboard_settings.swedish");
     case aTn.DANISH:
-      return t("keyboard_settings.danish");
+      return getI18nString("keyboard_settings.danish");
     case aTn.NORWEGIAN:
-      return t("keyboard_settings.norwegian");
+      return getI18nString("keyboard_settings.norwegian");
     case aTn.ITALIAN:
-      return t("keyboard_settings.italian");
+      return getI18nString("keyboard_settings.italian");
     case aTn.SPANISH:
-      return t("keyboard_settings.spanish");
+      return getI18nString("keyboard_settings.spanish");
     case aTn.FINNISH:
-      return t("keyboard_settings.finnish");
+      return getI18nString("keyboard_settings.finnish");
     case aTn.SPANISH_LATAM:
-      return t("keyboard_settings.spanish_latin_america");
+      return getI18nString("keyboard_settings.spanish_latin_america");
     case aTn.CHINESE:
-      return t("keyboard_settings.chinese");
+      return getI18nString("keyboard_settings.chinese");
     case aTn.PORTUGUESE:
-      return t("keyboard_settings.portuguese");
+      return getI18nString("keyboard_settings.portuguese");
     case aTn.KOREAN:
-      return t("keyboard_settings.korean");
+      return getI18nString("keyboard_settings.korean");
     case aTn.UNKNOWN:
-      return t("keyboard_settings.default_unknown");
+      return getI18nString("keyboard_settings.default_unknown");
   }
 }
 let m = new Map(Object.entries(aTn).map(([e, t]) => [e, t]));

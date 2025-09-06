@@ -8,7 +8,7 @@ import { getFeatureFlags } from "../905/601108";
 import { Rs } from "../figma_app/288654";
 import { h1 } from "../905/986103";
 import { y2 } from "../figma_app/563413";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Y } from "../905/830372";
 import { p as _$$p } from "../905/597320";
 import { b as _$$b } from "../905/168239";
@@ -60,13 +60,13 @@ function R(e) {
   return jsxs(zx, {
     children: [jsx(_$$p2, {
       onClick: r,
-      children: _$$t("abandoned_drafts_table.open")
+      children: getI18nString("abandoned_drafts_table.open")
     }), e.planType === _$$O2.ORG && jsx(_$$p2, {
       onClick: o,
-      children: _$$t("abandoned_drafts_table.move")
+      children: getI18nString("abandoned_drafts_table.move")
     }), jsx(_$$p2, {
       onClick: l,
-      children: _$$t("project_menu.permanently_delete")
+      children: getI18nString("project_menu.permanently_delete")
     })]
   });
 }
@@ -87,7 +87,7 @@ function L({
         }));
       },
       disabled: 1 !== e.length,
-      label: _$$t("abandoned_drafts_table.open")
+      label: getI18nString("abandoned_drafts_table.open")
     }), t === _$$O2.ORG && jsx(IU, {
       onClick: () => {
         s(to({
@@ -98,7 +98,7 @@ function L({
         }));
       },
       disabled: 1 !== e.length,
-      label: _$$t("abandoned_drafts_table.move")
+      label: getI18nString("abandoned_drafts_table.move")
     }), jsx(IU, {
       onClick: () => {
         s(to({
@@ -108,7 +108,7 @@ function L({
           }
         }));
       },
-      label: _$$t("project_menu.permanently_delete")
+      label: getI18nString("project_menu.permanently_delete")
     })]
   });
 }
@@ -173,7 +173,7 @@ export function $$U0(e) {
         planId: I
       }),
       columns: [{
-        name: _$$t("abandoned_drafts_table.folder_name"),
+        name: getI18nString("abandoned_drafts_table.folder_name"),
         className: "abandoned_drafts_table--folderNameColumn--I7WIR abandoned_drafts_table--column--ZtlI6 table--column--974RA",
         cellComponent: e => jsx(_$$L, {
           folder: e,
@@ -182,13 +182,13 @@ export function $$U0(e) {
         sorting_key: e.planType === _$$O2.ORG ? "path" : "abandoned_draft_user_email",
         getSortValue: e => e.path
       }, {
-        name: _$$t("abandoned_drafts_table.files"),
+        name: getI18nString("abandoned_drafts_table.files"),
         className: "abandoned_drafts_table--fileColumn--uLmQC abandoned_drafts_table--column--ZtlI6 table--column--974RA",
-        cellComponent: e => tx("abandoned_drafts_table.file_count", {
+        cellComponent: e => renderI18nText("abandoned_drafts_table.file_count", {
           numFiles: q.get(e.id) ?? 0
         })
       }, {
-        name: _$$t("abandoned_drafts_table.removed_at"),
+        name: getI18nString("abandoned_drafts_table.removed_at"),
         className: "abandoned_drafts_table--removeAtColumn--2yIZc abandoned_drafts_table--column--ZtlI6 table--column--974RA",
         cellComponent: e => e.abandonedDraftUserRemovedAt ? jsx(h1, {
           date: e.abandonedDraftUserRemovedAt
@@ -205,7 +205,7 @@ export function $$U0(e) {
           verticalAlignItems: "center",
           children: jsx("div", {
             className: "abandoned_drafts_table--emptyTextHeader--OheqK",
-            children: tx("abandoned_drafts_table.no_drafts")
+            children: renderI18nText("abandoned_drafts_table.no_drafts")
           })
         })
       }),
@@ -215,7 +215,7 @@ export function $$U0(e) {
       isLoading: "loaded" !== F.status,
       itemTypeContext: {
         itemType: "folder",
-        getSelectedCountString: e => _$$t("multi_select_list.selected_count_folder", {
+        getSelectedCountString: e => getI18nString("multi_select_list.selected_count_folder", {
           numSelected: e
         })
       },
@@ -249,16 +249,16 @@ export function $$U0(e) {
             onChange: A,
             query: T,
             clearSearch: () => A(""),
-            placeholder: _$$t("abandoned_drafts_table.search.placeholder")
+            placeholder: getI18nString("abandoned_drafts_table.search.placeholder")
           })
         }), (() => {
-          let t = e.planType === _$$O2.ORG ? tx("abandoned_drafts_table.banner_header", {
+          let t = e.planType === _$$O2.ORG ? renderI18nText("abandoned_drafts_table.banner_header", {
             orgName: e.org.name
-          }) : tx("abandoned_drafts_table.banner_header_teams", {
+          }) : renderI18nText("abandoned_drafts_table.banner_header_teams", {
             teamName: e.team.name
           });
-          let a = e.planType === _$$O2.ORG ? tx("abandoned_drafts_table.banner_message") : tx("abandoned_drafts_table.banner_message_teams");
-          let s = getFeatureFlags().delete_empty_abandoned_draft_folders ? tx("abandoned_drafts_table.banner_message_on_cleanup") : null;
+          let a = e.planType === _$$O2.ORG ? renderI18nText("abandoned_drafts_table.banner_message") : renderI18nText("abandoned_drafts_table.banner_message_teams");
+          let s = getFeatureFlags().delete_empty_abandoned_draft_folders ? renderI18nText("abandoned_drafts_table.banner_message_on_cleanup") : null;
           return jsx(Y, {
             padding: {
               top: 8
@@ -272,7 +272,7 @@ export function $$U0(e) {
                 trusted: !0,
                 newTab: !0,
                 href: "https://help.figma.com/hc/articles/4420549259799",
-                children: tx("general.learn_more")
+                children: renderI18nText("general.learn_more")
               })]
             })
           });

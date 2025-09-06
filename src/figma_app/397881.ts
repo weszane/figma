@@ -1,4 +1,4 @@
-import { Im } from "../figma_app/493477";
+import { isEmptyObject } from "../figma_app/493477";
 import { hV, DS } from "../figma_app/387100";
 import { nF } from "../905/350402";
 import { j } from "../905/496937";
@@ -47,7 +47,7 @@ export let $$p0 = nF(e => {
   let m = e => {
     (null != e.exportSettings && e.exportSettings.length > 0 || _(e)) && r.push(e);
   };
-  if (Im(p.sceneGraphSelection)) {
+  if (isEmptyObject(p.sceneGraphSelection)) {
     let e = h.get(Nf(p.appModel));
     e && (hV(e, m), hV(e, e => {
       let t = e.parentNode;

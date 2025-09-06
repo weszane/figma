@@ -1,5 +1,5 @@
 import { useContext, useRef, useCallback } from "react";
-import { yQ } from "../905/236856";
+import { waitForAnimationFrame } from "../905/236856";
 import { A } from "../vendor/90566";
 import { am } from "../figma_app/901889";
 import { viewportNavigatorContext } from "../figma_app/298911";
@@ -21,7 +21,7 @@ export function $$l0(e) {
         ...a.additionalTrackEventParams
       });
     };
-    if (n instanceof Promise && (n = await n, await yQ()), !n || !a.alwaysNavToSimilarViewport && u(n)) {
+    if (n instanceof Promise && (n = await n, await waitForAnimationFrame()), !n || !a.alwaysNavToSimilarViewport && u(n)) {
       s();
       i.current = void 0;
       return;

@@ -5,11 +5,11 @@ import { d as _$$d } from "../905/976845";
 import { J as _$$J } from "../905/125993";
 import { rrT, NLJ, yTM } from "../figma_app/763686";
 import { ri, nc } from "../figma_app/15927";
-import { fp } from "../figma_app/27355";
-import { R as _$$R } from "../905/103090";
+import { useAtomValueAndSetter } from "../figma_app/27355";
+import { selectWithShallowEqual } from "../905/103090";
 import { Pt } from "../figma_app/806412";
 import { GI } from "../905/125333";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { XE, u1, Y as _$$Y } from "../figma_app/91703";
 import { AV } from "../figma_app/933328";
 import { Y5 } from "../figma_app/455680";
@@ -35,7 +35,7 @@ import { wv } from "../905/888175";
 import { A as _$$A } from "../svg/88630";
 function B(e) {
   let t = "stroke-settings";
-  let [n, u] = fp(GI);
+  let [n, u] = useAtomValueAndSetter(GI);
   let v = (n.encodedPaints ? ri(n.encodedPaints) : n.paints) ?? [];
   let w = useDispatch();
   let B = useContext(zK);
@@ -120,7 +120,7 @@ function B(e) {
         });
       },
       recordingKey: Pt(e, "dashCap"),
-      label: _$$t("fullscreen.properties_panel.stroke_settings.end_points"),
+      label: getI18nString("fullscreen.properties_panel.stroke_settings.end_points"),
       kind: "endCap"
     })
   });
@@ -139,12 +139,12 @@ function B(e) {
         }
       },
       "aria-expanded": W,
-      "aria-label": _$$t("fullscreen.pencil_tool.advanced_stroke_settings"),
+      "aria-label": getI18nString("fullscreen.pencil_tool.advanced_stroke_settings"),
       recordingKey: Pt(e, "more"),
       htmlAttributes: {
         onMouseDown: e => e.stopPropagation(),
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("fullscreen.pencil_tool.advanced_stroke_settings")
+        "data-tooltip": getI18nString("fullscreen.pencil_tool.advanced_stroke_settings")
       },
       children: jsx(_$$J, {})
     })
@@ -223,22 +223,22 @@ function B(e) {
         stylePickerListLayout: e.stylePickerListLayout,
         stylePickerShown: e.stylePickerShown,
         styleType: "FILL",
-        title: _$$t("fullscreen.pencil_tool.stroke")
+        title: getI18nString("fullscreen.pencil_tool.stroke")
       }), U && jsx(fn, {
         ref: z,
-        leftLabel: tx("fullscreen.properties_panel.section_stroke.label_weight"),
+        leftLabel: renderI18nText("fullscreen.properties_panel.section_stroke.label_weight"),
         leftInput: Z,
-        rightLabel: tx("fullscreen.properties_panel.section_stroke.label_end_cap"),
+        rightLabel: renderI18nText("fullscreen.properties_panel.section_stroke.label_end_cap"),
         rightInput: q,
         icon: J
       })]
     }), Y && jsx("div", {
       className: "pencil_tool_panel--hintPanel--917wK",
       children: jsx(_$$u, {
-        title: _$$t("fullscreen.pencil_tool.hold_shift_to_draw_straight_lines"),
+        title: getI18nString("fullscreen.pencil_tool.hold_shift_to_draw_straight_lines"),
         icon_DEPRECATED: _$$A,
         userFlag: "dismissed_shift_to_draw_straight_lines_hint",
-        hintText: _$$t("fullscreen.pencil_tool.now_vertical_horizontal_and_diagonal_lines_are_a_breeze")
+        hintText: getI18nString("fullscreen.pencil_tool.now_vertical_horizontal_and_diagonal_lines_are_a_breeze")
       })
     }), W && e.pickerShown && jsx(_2, {
       brushType: Q,
@@ -261,7 +261,7 @@ function B(e) {
 export function $$F0(e) {
   let t = Ku();
   let n = q5();
-  let i = _$$R(e => ({
+  let i = selectWithShallowEqual(e => ({
     currentSelectedGradientStop: e.mirror.appModel.currentSelectedGradientStop,
     library: e.library,
     dropdownShown: e.dropdownShown,

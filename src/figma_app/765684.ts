@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useContext, useCallback, useEffect, cloneElement } from "react";
 import { useSelector } from "../vendor/514228";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import o from "classnames";
 import { Uz } from "../905/63728";
 import { rf } from "../figma_app/806412";
@@ -120,7 +120,7 @@ function L({
   onSetKeyboardNavigationElement: c,
   renderedElement: u
 }) {
-  let p = md(_$$T);
+  let p = useAtomWithSubscription(_$$T);
   let _ = a?.(u) ?? !1;
   useEffect(() => {
     t ? u.element = cloneElement(u.element, {}) : u.element = cloneElement(u.element, {
@@ -166,7 +166,7 @@ export function $$P0({
   let {
     closeFlyout
   } = JA();
-  let b = md(TG);
+  let b = useAtomWithSubscription(TG);
   let T = Ew({
     assetKey: u2(n),
     assetLibraryKey: n.library_key,

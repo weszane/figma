@@ -1,13 +1,13 @@
 import { K } from "../905/807535";
-import { pu, F9, Iv } from "../905/548208";
+import { BillingSections, MemberSections, DashboardSections } from "../905/548208";
 export function $$a2(e) {
-  return e && K(pu, e) || pu.OVERVIEW;
+  return e && K(BillingSections, e) || BillingSections.OVERVIEW;
 }
 export function $$s0(e) {
-  return e && K(F9, e) || F9.ABANDONED_DRAFTS;
+  return e && K(MemberSections, e) || MemberSections.ABANDONED_DRAFTS;
 }
 export function $$o1(e, t, r) {
-  return e === Iv.BILLING ? $$a2(t) : e === Iv.CONTENT ? r.showResourceConnectionInviteModal || r.showResourceConnectionFlyout ? F9.CONNECTED_PROJECTS : $$s0(t) : t;
+  return e === DashboardSections.BILLING ? $$a2(t) : e === DashboardSections.CONTENT ? r.showResourceConnectionInviteModal || r.showResourceConnectionFlyout ? MemberSections.CONNECTED_PROJECTS : $$s0(t) : t;
 }
 export const J = $$s0;
 export const X$ = $$o1;

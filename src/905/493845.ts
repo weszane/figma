@@ -8,7 +8,7 @@ import d from "classnames";
 import { noop } from "../905/419236";
 import { oW } from "../905/675859";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { S as _$$S } from "../905/872825";
 import { Q as _$$Q } from "../905/978641";
 import { U as _$$U } from "../905/331038";
@@ -23,7 +23,7 @@ import { L } from "../905/597048";
 import { A as _$$A2 } from "../905/567946";
 var c = d;
 function C(e) {
-  if (e && "exception" !== e.type && "THUMBNAIL_MEDIUM_MISSING" === e.key) return _$$t("community.publishing.you_must_set_a_thumbnail_for_your_resource");
+  if (e && "exception" !== e.type && "THUMBNAIL_MEDIUM_MISSING" === e.key) return getI18nString("community.publishing.you_must_set_a_thumbnail_for_your_resource");
 }
 export let $$T0 = forwardRef(function ({
   carouselMediaFieldManager: e,
@@ -71,9 +71,9 @@ export let $$T0 = forwardRef(function ({
   }), []);
   let ee = useMemo(() => [...CW, ...(allowVideos ? VY : [])], [allowVideos]);
   return jsx(_$$A2, {
-    label: j ? _$$t("community.publishing.set_a_thumbnail") : _$$t("community.publishing.thumbnail_preview"),
+    label: j ? getI18nString("community.publishing.set_a_thumbnail") : getI18nString("community.publishing.thumbnail_preview"),
     labelHtmlFor: X,
-    subLabel: j ? _$$t("community.publishing.recommended_size_in_pixels", {
+    subLabel: j ? getI18nString("community.publishing.recommended_size_in_pixels", {
       mediaWidth: Vb,
       mediaHeight: wj
     }) : void 0,
@@ -87,7 +87,7 @@ export let $$T0 = forwardRef(function ({
       "aria-hidden": !Y,
       children: [jsx("div", {
         className: "thumbnail_uploader--setAsThumbnailEduBannerText--svmyj",
-        children: getFeatureFlags().dse_library_pg_thumbnails ? _$$t("community.publishing.you_can_right_click_a_frame_and_select_set_as_file_thumbnail") : _$$t("community.publishing.you_can_right_click_a_frame_and_select_set_as_thumbnail")
+        children: getFeatureFlags().dse_library_pg_thumbnails ? getI18nString("community.publishing.you_can_right_click_a_frame_and_select_set_as_file_thumbnail") : getI18nString("community.publishing.you_can_right_click_a_frame_and_select_set_as_thumbnail")
       }), jsxs("div", {
         className: "thumbnail_uploader--setAsThumbnailInfographicContainer--kldhs",
         "aria-hidden": !0,
@@ -97,13 +97,13 @@ export let $$T0 = forwardRef(function ({
         }), jsxs("div", {
           className: "thumbnail_uploader--setAsThumbnailInfographicText--9PLLH",
           children: [jsx("div", {
-            children: _$$t("fullscreen_actions.mask-selection")
+            children: getI18nString("fullscreen_actions.mask-selection")
           }), getFeatureFlags().dse_library_pg_thumbnails ? jsx("div", {
             children: jsx("div", {
-              children: _$$t("fullscreen_actions.set_as_file_thumbnail")
+              children: getI18nString("fullscreen_actions.set_as_file_thumbnail")
             })
           }) : jsx("div", {
-            children: _$$t("fullscreen_actions.set_as_thumbnail")
+            children: getI18nString("fullscreen_actions.set_as_thumbnail")
           })]
         })]
       })]
@@ -149,7 +149,7 @@ export let $$T0 = forwardRef(function ({
           children: T && "image" === G.type ? jsx(_$$Q, {
             src: G.url,
             loading: "lazy",
-            alt: _$$t("community.publishing.thumbnail_image"),
+            alt: getI18nString("community.publishing.thumbnail_image"),
             draggable: !1,
             crossOrigin: "use-credentials"
           }) : (e => {
@@ -158,7 +158,7 @@ export let $$T0 = forwardRef(function ({
                 return jsx(oW, {
                   src: e.url,
                   loading: "lazy",
-                  alt: _$$t("community.publishing.thumbnail_image"),
+                  alt: getI18nString("community.publishing.thumbnail_image"),
                   draggable: !1
                 });
               case "video":
@@ -176,7 +176,7 @@ export let $$T0 = forwardRef(function ({
         }), jsx(_$$E, {
           ref: q,
           className: "thumbnail_uploader--deleteThumbnailButton--4XZZf",
-          "aria-label": _$$t("community.publishing.clear_thumbnail_image"),
+          "aria-label": getI18nString("community.publishing.clear_thumbnail_image"),
           onClick: e => {
             i?.();
             deleteMedia?.(G);
@@ -196,13 +196,13 @@ export let $$T0 = forwardRef(function ({
               restoreDefaultThumbnailMedium();
               e.stopPropagation();
             },
-            children: "file_thumbnail" === defaultThumbnailMediumSource ? _$$t("community.publishing.use_file_thumbnail") : _$$t("community.publishing.use_default_thumbnail")
+            children: "file_thumbnail" === defaultThumbnailMediumSource ? getI18nString("community.publishing.use_file_thumbnail") : getI18nString("community.publishing.use_default_thumbnail")
           }), jsx($n, {
             ref: $,
             variant: restoreDefaultThumbnailMedium ? "link" : void 0,
             onClick: K,
             disabled: H || !setThumbnailMediumFromInput,
-            children: allowVideos ? _$$t("community.publishing.upload_images_or_videos") : _$$t("community.publishing.upload_image")
+            children: allowVideos ? getI18nString("community.publishing.upload_images_or_videos") : getI18nString("community.publishing.upload_image")
           })]
         })]
       })]

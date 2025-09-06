@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { throwTypeError } from "../figma_app/465776";
-import { eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { PureComponent, createContext } from "react";
 import { useDispatch, useStore, useSelector } from "../vendor/514228";
 import { sN } from "../905/63728";
@@ -9,18 +9,18 @@ import { fileEntityDataMapper } from "../905/943101";
 import { uH } from "../figma_app/162807";
 import { G as _$$G } from "../905/186289";
 import { ms, wv, c$ } from "../figma_app/236327";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { S as _$$S, le, TH } from "../figma_app/11182";
 import { qP, Fb } from "../figma_app/909778";
 import { to } from "../905/156213";
 import { y$ } from "../905/81009";
 import { nk } from "../figma_app/2023";
 import { fA } from "../figma_app/543100";
-import { wN } from "../figma_app/53721";
+import { mapFileTypeToEditorType } from "../figma_app/53721";
 import { F as _$$F2 } from "../905/915030";
 import { a as _$$a } from "../905/870666";
 import { g_ } from "../905/646788";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Xr } from "../905/612521";
 import { V3, UN } from "../figma_app/976345";
 import { k1 } from "../figma_app/314264";
@@ -112,10 +112,10 @@ function x(e) {
     } = e;
     return {
       id: "open_view",
-      text: _$$t("general.open"),
+      text: getI18nString("general.open"),
       onClick: () => {
         let e = Xr();
-        "fullscreen" === n.view && n.fileKey && e && (sx("Open File Click", {
+        "fullscreen" === n.view && n.fileKey && e && (trackEventAnalytics("Open File Click", {
           fileKey: n.fileKey,
           uiSelectedView: JSON.stringify(e.view)
         }), k1(n.fileKey, {
@@ -134,7 +134,7 @@ function x(e) {
     } = e;
     return {
       id: "copy_link",
-      text: _$$t("file_browser.copy_link"),
+      text: getI18nString("file_browser.copy_link"),
       onClick: () => t(_$$S(n)),
       ...overrides
     };
@@ -148,7 +148,7 @@ function x(e) {
     } = e;
     return {
       id: "copy_view_link",
-      text: _$$t("file_browser.copy_link"),
+      text: getI18nString("file_browser.copy_link"),
       onClick: () => t(le(n)),
       ...overrides
     };
@@ -161,7 +161,7 @@ function x(e) {
     } = e;
     return {
       id: "open_in_new_tab",
-      text: _$$t("file_browser.open_in_new_tab"),
+      text: getI18nString("file_browser.open_in_new_tab"),
       onClick: () => t(V3(n)),
       ...overrides
     };
@@ -176,10 +176,10 @@ function x(e) {
     } = e;
     return {
       id: "open_view_in_new_tab",
-      text: _$$t("file_browser.open_in_new_tab"),
+      text: getI18nString("file_browser.open_in_new_tab"),
       onClick: () => {
         let e = Xr();
-        "fullscreen" === r.view && r.fileKey && e && (sx("Open File in New Tab Click", {
+        "fullscreen" === r.view && r.fileKey && e && (trackEventAnalytics("Open File in New Tab Click", {
           fileKey: r.fileKey,
           uiSelectedView: JSON.stringify(e.view)
         }), t(UN({
@@ -204,7 +204,7 @@ function x(e) {
 let V = e => ({
   view: "fullscreen",
   fileKey: e.key,
-  editorType: wN(e.editorType || "design")
+  editorType: mapFileTypeToEditorType(e.editorType || "design")
 });
 (e => {
   e.Open = n.Creators.Open(V);
@@ -218,7 +218,7 @@ let V = e => ({
     let i = useSelector(e => e.sharingAttributionContextKey);
     return {
       id: "copy_view_link",
-      text: _$$t("file_browser.copy_link"),
+      text: getI18nString("file_browser.copy_link"),
       onClick: () => {
         let n = new _$$a();
         t(TH({
@@ -273,7 +273,7 @@ let V = e => ({
     let i = useDispatch();
     return t(e) || !e.isFavorited ? null : {
       id: "set_favorite_status",
-      text: e.isFavorited ? _$$t("tile.favoriting.remove_from_favorites") : _$$t("tile.favoriting.add_to_favorites"),
+      text: e.isFavorited ? getI18nString("tile.favoriting.remove_from_favorites") : getI18nString("tile.favoriting.add_to_favorites"),
       onClick: () => {
         e.isFavorited ? i(qP({
           file: {
@@ -293,7 +293,7 @@ let V = e => ({
   };
 })(r || (r = {}));
 let z = e => function (t) {
-  return e && eD ? null : {
+  return e && desktopAPIInstance ? null : {
     view: "folder",
     folderId: t.id
   };
@@ -365,7 +365,7 @@ let Y = e => ({
   };
 })(s || (s = {}));
 let q = e => function (t) {
-  return e && eD ? null : {
+  return e && desktopAPIInstance ? null : {
     view: "communityHub",
     subView: "plugin",
     publishedPluginId: t.id
@@ -401,7 +401,7 @@ let J = e => {
   };
 };
 function ee(e) {
-  return eD ? null : J(e);
+  return desktopAPIInstance ? null : J(e);
 }
 (e => {
   e.Open = n.Creators.Open(J);
@@ -426,7 +426,7 @@ function ee(e) {
   };
 })(d || (d = {}));
 let ei = e => function (t) {
-  return e && eD ? null : {
+  return e && desktopAPIInstance ? null : {
     view: "user",
     userId: t.id,
     orgId: t.org_id,
@@ -439,7 +439,7 @@ let ei = e => function (t) {
   e.CopyLink = n.Creators.CopyViewLink(ei(!1));
 })(c || (c = {}));
 let en = e => function (t) {
-  return e && eD ? null : {
+  return e && desktopAPIInstance ? null : {
     view: "communityHub",
     subView: "widget",
     widgetId: t.id
@@ -470,7 +470,7 @@ function em(e) {
   });
   switch (data.search_model_type) {
     case uH.HUB_FILES:
-      if (eD) return jsx(el, {
+      if (desktopAPIInstance) return jsx(el, {
         targetRect: e.targetRect,
         data: data.model
       });

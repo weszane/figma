@@ -7,7 +7,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { xx } from "../figma_app/815945";
 import u from "../vendor/223926";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Point } from "../905/736624";
 import { hY } from "../figma_app/770088";
 import { y as _$$y } from "../figma_app/705249";
@@ -208,7 +208,7 @@ export function $$P4(e, t, r, a, s, o) {
         message: e.error?.message || ""
       })));
       console.error(`Failed to load comments: ${e}`);
-      sx("Livegraph Comments Errors", {
+      trackEventAnalytics("Livegraph Comments Errors", {
         errors: e
       });
     }
@@ -244,7 +244,7 @@ export function $$k6(e, t, r) {
         message: e.error?.message || ""
       })));
       console.error(`Failed to load canvas mentions: ${e}`);
-      sx("Livegraph Canvas Mention Comments Errors", {
+      trackEventAnalytics("Livegraph Canvas Mention Comments Errors", {
         errors: e
       });
     }

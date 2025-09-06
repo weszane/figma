@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import { NLJ } from "../figma_app/763686";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { LH } from "../figma_app/384673";
 import { Kh, uh } from "../figma_app/370763";
 import { L } from "../figma_app/819472";
@@ -26,7 +26,7 @@ export function $$E1() {
       activeSecondaryToolbeltId,
       setActiveSecondaryToolbeltId
     } = LH();
-    let c = md(Kh);
+    let c = useAtomWithSubscription(Kh);
     let h = _$$g2(Y.FigJamQuickActionsMenuOpen);
     let m = V();
     let f = L();
@@ -64,7 +64,7 @@ export function $$T2() {
   return uh(Jn);
 }
 export function $$w0() {
-  let e = md(hV);
+  let e = useAtomWithSubscription(hV);
   let t = w();
   let i = _$$g();
   let r = _$$a();

@@ -1,6 +1,6 @@
 import { debug } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { rT } from "../905/557142";
 import { createDataMapper, processAdditionalConfig } from "../905/508958";
 import { W } from "../4452/143028";
@@ -22,7 +22,7 @@ let d = createDataMapper(rT, e => ({
   user: e.drop()
 }));
 export function $$c1(e, n) {
-  (e.pending || null === e.userId) && ($D(_$$e.FRONTEND_PLATFORM, Error("toSinatraConfirmedRole received a pending or null user_id"), {
+  (e.pending || null === e.userId) && (reportError(_$$e.FRONTEND_PLATFORM, Error("toSinatraConfirmedRole received a pending or null user_id"), {
     extra: {
       pending: e.pending,
       userId: e.userId
@@ -39,7 +39,7 @@ export function $$c1(e, n) {
   };
 }
 export function $$p0(e, n) {
-  e.pending && null === e.userId || ($D(_$$e.FRONTEND_PLATFORM, Error("toSinatraPendingRole received a non-pending or non-null user_id"), {
+  e.pending && null === e.userId || (reportError(_$$e.FRONTEND_PLATFORM, Error("toSinatraPendingRole received a non-pending or non-null user_id"), {
     extra: {
       pending: e.pending,
       userId: e.userId

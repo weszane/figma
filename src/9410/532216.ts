@@ -6,17 +6,17 @@ import { K as _$$K } from "../905/443068";
 import { O as _$$O } from "../905/969533";
 import { getFeatureFlags } from "../905/601108";
 import c from "classnames";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Pt } from "../figma_app/806412";
 import { WN } from "../figma_app/638601";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { k as _$$k2 } from "../figma_app/564183";
-import { MP } from "../figma_app/469876";
+import { isZoomIntegration } from "../figma_app/469876";
 import { Um } from "../905/848862";
 import { c as _$$c } from "../figma_app/740884";
 import { eg as _$$eg, O0 } from "../figma_app/452252";
 import { i as _$$i } from "../figma_app/825649";
-import { fp, md } from "../figma_app/27355";
+import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import { Ui, FR } from "../figma_app/564528";
 import { s as _$$s } from "../cssbuilder/589278";
 import { OA } from "../figma_app/419216";
@@ -50,7 +50,7 @@ import { getPermissionsStateMemoized, isOrgUserExternallyRestrictedFromState } f
 import { p9, fA, F9 } from "../figma_app/803787";
 import { jB, Cp, Px, zS } from "../figma_app/722141";
 import { b as _$$b2 } from "../905/165519";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { o1 } from "../figma_app/10554";
 import { Yh, c1 } from "../figma_app/357047";
 import { e0 as _$$e } from "../905/696396";
@@ -107,14 +107,14 @@ function S(e) {
     targetKey
   } = e;
   let [i, a] = useState(!1);
-  let [s, o] = fp(Ui);
-  let l = MP() && null !== s && !i;
+  let [s, o] = useAtomValueAndSetter(Ui);
+  let l = isZoomIntegration() && null !== s && !i;
   useEffect(() => (window.addEventListener("message", FR), () => {
     window.removeEventListener("message", FR);
   }), []);
-  let d = s ? tx("fullscreen.filename_view.zoom-integration-popup-header-with-name", {
+  let d = s ? renderI18nText("fullscreen.filename_view.zoom-integration-popup-header-with-name", {
     hostName: s
-  }) : _$$t("fullscreen.filename_view.zoom-integration-popup-header");
+  }) : getI18nString("fullscreen.filename_view.zoom-integration-popup-header");
   return jsx(Fragment, {
     children: l && jsx(OA, {
       targetKey,
@@ -131,7 +131,7 @@ function S(e) {
       }),
       children: jsx("p", {
         className: _$$s.textBodyMedium.alignLeft.$,
-        children: _$$t("fullscreen.filename_view.zoom-integration-popup-body")
+        children: getI18nString("fullscreen.filename_view.zoom-integration-popup-body")
       })
     })
   });
@@ -192,19 +192,19 @@ let eI = memo(function () {
   let i = hP(colorProfilePreference) === RYP.DISPLAY_P3 ? "p3" : "srgb";
   let n = [{
     value: ywP.SRGB,
-    label: _$$t("fullscreen.filename_view.color_management.color_profile_srgb")
+    label: getI18nString("fullscreen.filename_view.color_management.color_profile_srgb")
   }, {
     value: ywP.DISPLAY_P3,
-    label: _$$t("fullscreen.filename_view.color_management.color_profile_display_p3")
+    label: getI18nString("fullscreen.filename_view.color_management.color_profile_display_p3")
   }].sort((t, i) => t.value === e && i.value !== e ? -1 : t.value !== e && i.value === e ? 1 : 0);
   return jsx(YJ, {
     children: jsxs(g8, {
       children: [jsx(Qq, {
-        children: _$$t("fullscreen.filename_view.color_management.file_color_profile")
+        children: getI18nString("fullscreen.filename_view.color_management.file_color_profile")
       }), jsx(MJ, {
         children: jsxs(z6, {
           title: jsx(r1, {
-            children: _$$t("fullscreen.filename_view.color_management.file_color_profile")
+            children: getI18nString("fullscreen.filename_view.color_management.file_color_profile")
           }),
           value: ywP[e],
           onChange: e => {
@@ -212,12 +212,12 @@ let eI = memo(function () {
           },
           children: [e === ywP.LEGACY && jsx(_$$MJ, {
             value: ywP[ywP.LEGACY],
-            children: _$$t("fullscreen.filename_view.color_management.menu_item_title.legacy_file", {
-              colorProfile: _$$t(`fullscreen.properties_panel.export_settings_color_profile.${i}`)
+            children: getI18nString("fullscreen.filename_view.color_management.menu_item_title.legacy_file", {
+              colorProfile: getI18nString(`fullscreen.properties_panel.export_settings_color_profile.${i}`)
             })
           }), n.map(e => jsx(_$$MJ, {
             value: ywP[e.value],
-            children: _$$t("fullscreen.filename_view.color_management.menu_item_title.legacy.assign", {
+            children: getI18nString("fullscreen.filename_view.color_management.menu_item_title.legacy.assign", {
               color_profile: e.label
             })
           }, e.value))]
@@ -333,8 +333,8 @@ let e7 = memo(function ({
       i ? e(qP(n)) : e(Fb(n));
     };
   }();
-  let l = _$$t("favorited_resources.add_to_sidebar");
-  e && (l = `${_$$t("favorited_resources.indicate_section_prefix")}: ${t?.name || _$$t("sidebar.starred")}`);
+  let l = getI18nString("favorited_resources.add_to_sidebar");
+  e && (l = `${getI18nString("favorited_resources.indicate_section_prefix")}: ${t?.name || getI18nString("sidebar.starred")}`);
   return jsxs(Fragment, {
     children: [jsxs(g8, {
       children: [jsx(Qq, {
@@ -344,24 +344,24 @@ let e7 = memo(function ({
           title: jsx(_$$h2, {
             children: l
           }),
-          value: t?.id || (e ? _$$t("sidebar.starred") : void 0),
+          value: t?.id || (e ? getI18nString("sidebar.starred") : void 0),
           recordingKey: "favorite-custom",
           onChange: e => {
-            e === _$$t("sidebar.starred") ? o(!1) : o(!!t && t.id === e, e);
+            e === getI18nString("sidebar.starred") ? o(!1) : o(!!t && t.id === e, e);
           },
           children: [0 === i.length && jsx(_$$MJ, {
-            value: _$$t("sidebar.starred"),
-            children: _$$t("sidebar.starred")
-          }, _$$t("sidebar.starred")), i.map(e => jsx(_$$MJ, {
+            value: getI18nString("sidebar.starred"),
+            children: getI18nString("sidebar.starred")
+          }, getI18nString("sidebar.starred")), i.map(e => jsx(_$$MJ, {
             value: e.id,
-            children: e.name || _$$t("sidebar.starred")
+            children: e.name || getI18nString("sidebar.starred")
           }, e.id))]
         })
       })]
     }), e && jsx(Pu, {
       recordingKey: "favorite-custom-remove",
       onClick: () => o(!0, t?.id),
-      children: _$$t("favorited_resources.remove_from_sidebar")
+      children: getI18nString("favorited_resources.remove_from_sidebar")
     })]
   });
 });
@@ -403,14 +403,14 @@ let e8 = memo(function () {
   return canPinFileToWorkspace ? jsx(Pu, {
     recordingKey: "pin-to-workspace",
     onClick: () => s(e.key, workspaceHasMaxPins),
-    children: _$$t("tile.dropdown.pin_to_workspace")
+    children: getI18nString("tile.dropdown.pin_to_workspace")
   }) : canEditPin ? jsxs(Fragment, {
     children: [jsx(Pu, {
       onClick: () => t(existingFilePinId),
-      children: _$$t("tile.dropdown.edit_workspace_pin")
+      children: getI18nString("tile.dropdown.edit_workspace_pin")
     }), jsx(Pu, {
       onClick: () => i(existingFilePinId),
-      children: _$$t("tile.dropdown.remove_workspace_pin")
+      children: getI18nString("tile.dropdown.remove_workspace_pin")
     })]
   }) : null;
 });
@@ -507,7 +507,7 @@ let ti = memo(function ({
             [e.key]: e
           },
           userInitiated: !0
-        })), sx("Branch Archived", {
+        })), trackEventAnalytics("Branch Archived", {
           fileKey: e.key,
           fileRepoId: e.file_repo_id
         }));
@@ -549,7 +549,7 @@ let ti = memo(function ({
       }, [e, t, i]);
     }(),
     publish: function () {
-      let e = md(p9);
+      let e = useAtomWithSubscription(p9);
       let t = useSelector(fA);
       let i = q5();
       let r = e2();
@@ -668,7 +668,7 @@ let ti = memo(function ({
   let ta = xo();
   let ts = _$$R();
   let to = !1;
-  c && i.editorType && (to = i.editorType === nT.Slides && oA(c.org?.isSlidesDisabled) || i.editorType === nT.Sites && !!c.org?.isSitesDisabled || i.editorType === nT.Cooper && !!c.org?.isCooperDisabled);
+  c && i.editorType && (to = i.editorType === FEditorType.Slides && oA(c.org?.isSlidesDisabled) || i.editorType === FEditorType.Sites && !!c.org?.isSitesDisabled || i.editorType === FEditorType.Cooper && !!c.org?.isCooperDisabled);
   let tl = ew && ti.requiresUpgrade && !e5;
   let td = !!ts && Px(ti, to);
   let tc = ta || td || tl;
@@ -699,24 +699,24 @@ let ti = memo(function ({
       closeSelectMenu();
       publish();
     } : lQ,
-    children: _$$t("fullscreen.filename_view.publish-styles-and-components")
+    children: getI18nString("fullscreen.filename_view.publish-styles-and-components")
   });
   let tT = eV && jsx(Pu, {
     recordingKey: Pt(e, "codeConnect"),
     onClick: eW,
-    children: _$$t("dev_handoff.component_browser.menu_item")
+    children: getI18nString("dev_handoff.component_browser.menu_item")
   });
   let tw = !!eQ && jsx(Pu, {
     recordingKey: Pt(e, "viewFileAnalytics"),
     onClick: openFileAnalytics,
-    children: _$$t("fullscreen.filename_view.file_analytics")
+    children: getI18nString("fullscreen.filename_view.file_analytics")
   });
   if (!c) return null;
   let tS = Ez5 && Ez5.uiState().isRecovery.getCopy();
   let tj = i.editorType;
   let tI = !c.canExport;
-  let tk = tj === nT.Whiteboard && !!c.org?.figjamDisabledAt || tj === nT.Slides && oA(c.org?.isSlidesDisabled) || tj === nT.Sites && !!c.org?.isSitesDisabled || tj === nT.Cooper && !!c.org?.isCooperDisabled || isOrgUserExternallyRestrictedFromState(o) || tI;
-  let tN = tj !== nT.Whiteboard;
+  let tk = tj === FEditorType.Whiteboard && !!c.org?.figjamDisabledAt || tj === FEditorType.Slides && oA(c.org?.isSlidesDisabled) || tj === FEditorType.Sites && !!c.org?.isSitesDisabled || tj === FEditorType.Cooper && !!c.org?.isCooperDisabled || isOrgUserExternallyRestrictedFromState(o) || tI;
+  let tN = tj !== FEditorType.Whiteboard;
   let tA = !!(tN && Kz(c));
   let tO = "loaded" === e$.status && (null === e$.data.file || e$.data.file && AM(e$.data.file) === pT.MERGED);
   let tL = tA && ("loaded" !== e$.status || tO);
@@ -725,7 +725,7 @@ let ti = memo(function ({
   let tM = tD && !tL;
   let tP = c.folderId === eK?.personal_drafts_folder_id;
   let tF = c.canEdit && !!c.thumbnailGuid;
-  let tB = !tt && i.editorType === nT.Design && c.canEdit;
+  let tB = !tt && i.editorType === FEditorType.Design && c.canEdit;
   let tU = em(_$$m(tu, _$$e.EDITOR_TOOLBAR, tp, tm), {
     appModel: t,
     selectedView: i,
@@ -753,7 +753,7 @@ let ti = memo(function ({
           disabled: !Yh(t, "enter-history-mode"),
           recordingKey: Pt(e, "toggleVersionHistory"),
           onClick: toggleVersionHistory,
-          children: Ah(t.activeCanvasEditModeType) ? _$$t("fullscreen.filename_view.version-history-hide") : _$$t("fullscreen.filename_view.version-history-show")
+          children: Ah(t.activeCanvasEditModeType) ? getI18nString("fullscreen.filename_view.version-history-hide") : getI18nString("fullscreen.filename_view.version-history-show")
         }), jsxs(YJ, {
           children: [!!tf && Z5({
             dispatch: _,
@@ -775,7 +775,7 @@ let ti = memo(function ({
           }), tC && jsx(Fragment, {
             children: tv ? jsxs(g8, {
               children: [jsx(Qq, {
-                children: _$$t("fullscreen.filename_view.library_actions")
+                children: getI18nString("fullscreen.filename_view.library_actions")
               }), jsxs(MJ, {
                 children: [tE, tT, tw]
               })]
@@ -790,7 +790,7 @@ let ti = memo(function ({
                 source: "toolbar"
               });
             },
-            children: [_$$t("fullscreen.filename_view.export"), jsx(Ov, {
+            children: [getI18nString("fullscreen.filename_view.export"), jsx(Ov, {
               children: jsx(rm, {
                 children: c1(t.keyboardShortcuts, "export-selected-exportables")
               })
@@ -806,7 +806,7 @@ let ti = memo(function ({
             },
             recordingKey: Pt(e, "copyToFigmaSlides"),
             disabled: !eK,
-            children: _$$t("slides.general.copy_current_page_to_figma_slides")
+            children: getI18nString("slides.general.copy_current_page_to_figma_slides")
           })]
         }), jsx(e6, {}), !tA && tG.length > 0 && jsx(YJ, {
           children: tG.map((e, t) => jsx(_$$Fragment, {
@@ -825,40 +825,40 @@ let ti = memo(function ({
               closeSelectMenu();
               rename();
             },
-            children: tA ? _$$t("fullscreen.filename_view.rename-branch") : _$$t("fullscreen.filename_view.rename")
+            children: tA ? getI18nString("fullscreen.filename_view.rename-branch") : getI18nString("fullscreen.filename_view.rename")
           }), g && !tt && tM && jsx(Pu, {
             disabled: !tR,
             recordingKey: Pt(e, "restore"),
             onClick: restoreBranch,
-            children: _$$t("fullscreen.filename_view.restore")
+            children: getI18nString("fullscreen.filename_view.restore")
           }), g && !tt && projectUrl && "" !== projectUrl && jsx(Oo, {
             recordingKey: "goToProject",
             href: projectUrl,
             newTab: !0,
-            children: _$$t("fullscreen.filename_view.go_to_project")
+            children: getI18nString("fullscreen.filename_view.go_to_project")
           }), g && !tt && !tA && jsxs(Pu, {
             disabled: tc,
             "data-onboarding-key": "FILENAME_VIEW_MOVE_TO_PROJECT",
             recordingKey: Pt(e, "moveToProject"),
             onClick: RG(_, c, m, tn),
-            children: [_$$t("fullscreen.filename_view.move_file"), ts && jsx(Ov, {
+            children: [getI18nString("fullscreen.filename_view.move_file"), ts && jsx(Ov, {
               children: zS(ti, tc, tr)
             })]
           }), g && !tt && !tD && !tP && userCanTrashFile && jsx(Pu, {
             disabled: !te,
             recordingKey: Pt(e, "delete"),
             onClick: tA ? archiveBranch : deleteFile,
-            children: tA ? _$$t("fullscreen.filename_view.archive-branch") : _$$t("fullscreen.filename_view.move_to_trash")
+            children: tA ? getI18nString("fullscreen.filename_view.archive-branch") : getI18nString("fullscreen.filename_view.move_to_trash")
           }), g && !tt && tD && jsx(Pu, {
             disabled: !tR,
             onClick: deleteBranch,
-            children: tA ? _$$t("fullscreen.filename_view.archive-branch") : _$$t("fullscreen.filename_view.move_to_trash")
+            children: tA ? getI18nString("fullscreen.filename_view.archive-branch") : getI18nString("fullscreen.filename_view.move_to_trash")
           })]
         }), !!tF && jsx(YJ, {
           children: jsx(Pu, {
             recordingKey: Pt(e, "resetFileThumbnail"),
             onClick: resetFileThumbnail,
-            children: getFeatureFlags().dse_library_pg_thumbnails ? _$$t("fullscreen.filename_view.restore_default_file_thumbnail") : _$$t("fullscreen.filename_view.restore_default_thumbnail")
+            children: getFeatureFlags().dse_library_pg_thumbnails ? getI18nString("fullscreen.filename_view.restore_default_file_thumbnail") : getI18nString("fullscreen.filename_view.restore_default_thumbnail")
           })
         })]
       })
@@ -891,7 +891,7 @@ export function $$tr0(e) {
       onMouseLeave: () => {
         e.setFileMenuIsHovered?.(!1);
       },
-      children: [MP() && jsx(S, {
+      children: [isZoomIntegration() && jsx(S, {
         isUI3: !0,
         targetKey: O0
       }), N ? jsxs(bL, {
@@ -899,14 +899,14 @@ export function $$tr0(e) {
         children: [jsx(_$$K, {
           ...k,
           recordingKey: Pt(e.recordingKey, "chevron"),
-          "aria-label": _$$t("fullscreen.filename_view.edit_file_menu"),
+          "aria-label": getI18nString("fullscreen.filename_view.edit_file_menu"),
           children: jsx(_$$O, {})
         }), jsx(ti, {
           recordingKey: e.recordingKey
         })]
       }) : jsxs(Fragment, {
         children: [jsx(_$$c, {
-          ariaLabel: _$$t("fullscreen.filename_view.edit_file_menu"),
+          ariaLabel: getI18nString("fullscreen.filename_view.edit_file_menu"),
           canOpenDropdown: w,
           className: "file_menu--chevron--55jNJ",
           dataOnboardingKey: O0,
@@ -920,7 +920,7 @@ export function $$tr0(e) {
           dropdownVisible: c,
           recordingKey: e.recordingKey,
           activatePathOnMount: i?.data?.activatePathOnMount,
-          trackEvent: sx
+          trackEvent: trackEventAnalytics
         })]
       })]
     })

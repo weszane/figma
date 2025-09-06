@@ -1,30 +1,30 @@
-import { jsx } from "react/jsx-runtime";
-import { useMemo, useState, useEffect } from "react";
-import { ServiceCategories as _$$e } from "../905/165054";
-import { N as _$$N } from "../905/670143";
-import { I as _$$I } from "../905/783004";
-import { G } from "../905/594445";
-import { _ as _$$_ } from "../905/144222";
-import { p as _$$p } from "../figma_app/304289";
-import { Egt, Z_n, rXF } from "../figma_app/763686";
-import { l7 } from "../905/189185";
-import { getSingletonSceneGraph } from "../905/700578";
-import { Xr } from "../figma_app/27355";
-import { tT, oA } from "../905/663269";
-import { Nz } from "../905/417232";
-import { Ez, e6, TZ, hu, kI } from "../figma_app/766708";
-import { $D } from "../905/11";
-import { g as _$$g } from "../905/880308";
-import { t as _$$t } from "../905/303541";
-import { lf, hl } from "../figma_app/11329";
-import { X } from "../905/145028";
-import { G as _$$G } from "../905/707993";
-import { rU, _j, ap } from "../figma_app/843119";
-import { oj } from "../figma_app/986594";
-import { sD } from "../905/937198";
-import { Y5 } from "../figma_app/455680";
-import { zk } from "../figma_app/198712";
-import { A2 } from "../figma_app/872077";
+import { useSetAtom } from 'jotai';
+import { useEffect, useMemo, useState } from 'react';
+import { jsx } from 'react/jsx-runtime';
+import { reportError } from '../905/11';
+import { _ as _$$_ } from '../905/144222';
+import { X } from '../905/145028';
+import { ServiceCategories as _$$e } from '../905/165054';
+import { l7 } from '../905/189185';
+import { getI18nString } from '../905/303541';
+import { Nz } from '../905/417232';
+import { G } from '../905/594445';
+import { oA, tT } from '../905/663269';
+import { N as _$$N } from '../905/670143';
+import { getSingletonSceneGraph } from '../905/700578';
+import { G as _$$G } from '../905/707993';
+import { I as _$$I } from '../905/783004';
+import { g as _$$g } from '../905/880308';
+import { sD } from '../905/937198';
+import { hl, lf } from '../figma_app/11329';
+import { zk } from '../figma_app/198712';
+import { p as _$$p } from '../figma_app/304289';
+import { Y5 } from '../figma_app/455680';
+import { Egt, rXF, Z_n } from '../figma_app/763686';
+import { e6, Ez, hu, kI, TZ } from '../figma_app/766708';
+import { _j, ap, rU } from '../figma_app/843119';
+import { A2 } from '../figma_app/872077';
+import { oj } from '../figma_app/986594';
 function O(e) {
   return e.sort((e, t) => Ez(t.position, e.position));
 }
@@ -36,7 +36,7 @@ export function $$R3(e) {
     } = _$$G({
       collectionStableId: e
     });
-    return useMemo(() => "loaded" !== status ? null : null == collection ? (sD("collection is null", {
+    return useMemo(() => status !== 'loaded' ? null : collection == null ? (sD('collection is null', {
       collectionId: e,
       fieldName: t
     }), null) : collection.fieldSchemas.find(e => e.name === t) ?? null, [collection, e, t, status]);
@@ -68,44 +68,48 @@ export function $$k7(e) {
   });
   return t.status === tT.Loaded ? O((oA(t.collection)?.fieldSchemas ?? []).map(e => ({
     ...e,
-    action: "noop"
+    action: 'noop'
   }))) : [];
 }
 function M(e, t, r, n = {}) {
   let {
     name
   } = n;
-  if (name) i = r > 1 ? `${name} ${r}` : `${name}`;else switch (e) {
-    case _j.RICH_TEXT:
-      i = _$$t("dakota.collection_field_editor.create_dropdown.rich_text_with_unique_index", {
-        uniqueIndex: r
-      });
-      break;
-    case _j.PLAIN_TEXT:
-      i = _$$t("dakota.collection_field_editor.create_dropdown.plain_text_with_unique_index", {
-        uniqueIndex: r
-      });
-      break;
-    case _j.LINK:
-      i = _$$t("dakota.collection_field_editor.create_dropdown.link_with_unique_index", {
-        uniqueIndex: r
-      });
-      break;
-    case _j.IMAGE:
-      i = _$$t("dakota.collection_field_editor.create_dropdown.image_with_unique_index", {
-        uniqueIndex: r
-      });
-      break;
-    case _j.DATE:
-      i = _$$t("dakota.collection_field_editor.create_dropdown.date_time_with_unique_index", {
-        uniqueIndex: r
-      });
-      break;
-    default:
-      i = "";
+  if (name) {
+    i = r > 1 ? `${name} ${r}` : `${name}`;
+  } else {
+    switch (e) {
+      case _j.RICH_TEXT:
+        i = getI18nString('dakota.collection_field_editor.create_dropdown.rich_text_with_unique_index', {
+          uniqueIndex: r
+        });
+        break;
+      case _j.PLAIN_TEXT:
+        i = getI18nString('dakota.collection_field_editor.create_dropdown.plain_text_with_unique_index', {
+          uniqueIndex: r
+        });
+        break;
+      case _j.LINK:
+        i = getI18nString('dakota.collection_field_editor.create_dropdown.link_with_unique_index', {
+          uniqueIndex: r
+        });
+        break;
+      case _j.IMAGE:
+        i = getI18nString('dakota.collection_field_editor.create_dropdown.image_with_unique_index', {
+          uniqueIndex: r
+        });
+        break;
+      case _j.DATE:
+        i = getI18nString('dakota.collection_field_editor.create_dropdown.date_time_with_unique_index', {
+          uniqueIndex: r
+        });
+        break;
+      default:
+        i = '';
+    }
   }
   let s = n.properties || {};
-  e !== _j.DATE || ("dateType" in s ? Object.values(ap).includes(s.dateType) || ($D(_$$e.CMS, Error("Invalid DateType on Date field schema properties"), {
+  e !== _j.DATE || ('dateType' in s ? Object.values(ap).includes(s.dateType) || (reportError(_$$e.CMS, new Error('Invalid DateType on Date field schema properties'), {
     extra: {
       properties: n.properties,
       fieldSchemaId: n.id
@@ -124,18 +128,18 @@ function M(e, t, r, n = {}) {
     databaseId: o,
     name,
     fieldType: e,
-    required: !!n.hasOwnProperty("required") && !!n.required,
+    required: !!n.hasOwnProperty('required') && !!n.required,
     position: t ? e6(t) : TZ,
     properties: s,
-    action: "create",
-    version: "1"
+    action: 'create',
+    version: '1'
   };
 }
 export function $$F0(e) {
   let t = e?.id;
   let [r, n] = useState([]);
-  let s = Xr(lf);
-  let o = Xr(hl);
+  let s = useSetAtom(lf);
+  let o = useSetAtom(hl);
   let [l, d] = useState([]);
   useEffect(() => {
     if (!t) {
@@ -144,30 +148,30 @@ export function $$F0(e) {
         let t = _$$g();
         return [{
           name: rU.Title,
-          type: "string",
+          type: 'string',
           fieldType: _j.PLAIN_TEXT,
           required: !0,
           position: TZ,
           properties: {},
-          version: "1",
+          version: '1',
           id: e,
           stableId: e,
           databaseId: e
         }, {
           name: rU.Slug,
-          type: "string",
+          type: 'string',
           required: !0,
           fieldType: _j.SLUG,
           position: e6(TZ),
           properties: {},
-          version: "1",
+          version: '1',
           id: t,
           stableId: t,
           databaseId: t
         }];
       }().map(e => ({
         ...e,
-        action: "create"
+        action: 'create'
       })));
       return;
     }
@@ -176,8 +180,8 @@ export function $$F0(e) {
     }).then(e => {
       e ? e.fieldSchemas && n(O(e.fieldSchemas.map(e => ({
         ...e,
-        action: "noop"
-      })))) : $D(_$$e.CMS, Error("useCollectionFields hook could not get the collection from livegraph"), {
+        action: 'noop'
+      })))) : reportError(_$$e.CMS, new Error('useCollectionFields hook could not get the collection from livegraph'), {
         extra: {
           collectionId: t
         }
@@ -200,7 +204,7 @@ export function $$F0(e) {
         let e = s.trim();
         if (e !== o && e.length > 0) {
           if (!r.find(e => e.id === i)) {
-            $D(_$$e.CMS, Error("Renaming field failed: field not found in collection"), {
+            reportError(_$$e.CMS, new Error('Renaming field failed: field not found in collection'), {
               extra: {
                 fieldId: i,
                 collectionId: t
@@ -210,10 +214,10 @@ export function $$F0(e) {
           }
           let s = r.filter(t => t.id !== i && (t.name === e || t.name.startsWith(e))).length;
           s > 0 && (e = `${e} ${s + 1}`);
-          n(r.map(t => t.id !== i ? t : "noop" === t.action ? {
+          n(r.map(t => t.id !== i ? t : t.action === 'noop' ? {
             ...t,
             name: e,
-            action: "update"
+            action: 'update'
           } : {
             ...t,
             name: e
@@ -225,16 +229,20 @@ export function $$F0(e) {
       n(n => {
         let i;
         let a = n.findIndex(e => e.id === t);
-        if (-1 === a) return n;
+        if (a === -1) return n;
         let s = n[a];
         if (r === Nz.BEFORE) {
-          if (0 === a) i = hu(s.position);else {
+          if (a === 0) {
+            i = hu(s.position);
+          } else {
             let e = n[a - 1];
             if (!e) return n;
             i = kI(e.position, s.position);
           }
         } else if (r === Nz.AFTER) {
-          if (a === n.length - 1) i = e6(s.position);else {
+          if (a === n.length - 1) {
+            i = e6(s.position);
+          } else {
             let e = n[a + 1];
             if (!e) return n;
             i = kI(s.position, e.position);
@@ -243,7 +251,7 @@ export function $$F0(e) {
         return O(n.map(t => t.id === e ? {
           ...t,
           position: i ?? t.position,
-          action: "create" === t.action ? "create" : "update"
+          action: t.action === 'create' ? 'create' : 'update'
         } : t));
       });
     },
@@ -254,30 +262,34 @@ export function $$F0(e) {
     },
     submitFieldChanges: () => {
       if (t) {
-        for (let t of r) "create" === t.action ? A2.createFieldSchema({
-          collection: e,
-          attributes: {
-            name: t.name,
-            required: t.required,
-            position: t.position,
-            fieldType: t.fieldType,
-            properties: t.properties
-          }
-        }) : "update" === t.action && A2.updateFieldSchema({
-          collection: e,
-          fieldSchema: t,
-          newAttributes: {
-            name: t.name,
-            fieldType: t.fieldType,
-            position: t.position,
-            properties: t.properties,
-            required: t.required
-          }
-        });
-        for (let t of l) A2.deleteFieldSchema({
-          collection: e,
-          fieldSchema: t
-        });
+        for (let t of r) {
+          t.action === 'create' ? A2.createFieldSchema({
+            collection: e,
+            attributes: {
+              name: t.name,
+              required: t.required,
+              position: t.position,
+              fieldType: t.fieldType,
+              properties: t.properties
+            }
+          }) : t.action === 'update' && A2.updateFieldSchema({
+            collection: e,
+            fieldSchema: t,
+            newAttributes: {
+              name: t.name,
+              fieldType: t.fieldType,
+              position: t.position,
+              properties: t.properties,
+              required: t.required
+            }
+          });
+        }
+        for (let t of l) {
+          A2.deleteFieldSchema({
+            collection: e,
+            fieldSchema: t
+          });
+        }
       }
     },
     canEditField: e => {
@@ -305,23 +317,23 @@ export function $$F0(e) {
           ...r.properties,
           ...t
         },
-        action: "noop" === r.action ? "update" : r.action
+        action: r.action === 'noop' ? 'update' : r.action
       } : r));
     }
   };
 }
 export function $$j5(e) {
   switch (e) {
-    case "link":
-    case "slug":
+    case 'link':
+    case 'slug':
       return jsx(_$$N, {});
-    case "plain_text":
+    case 'plain_text':
       return jsx(_$$I, {});
-    case "rich_text":
+    case 'rich_text':
       return jsx(G, {});
-    case "image":
+    case 'image':
       return jsx(_$$_, {});
-    case "date":
+    case 'date':
       return jsx(_$$p, {});
   }
 }
@@ -329,7 +341,7 @@ export function $$U1(e, t) {
   let r = getSingletonSceneGraph();
   let n = oj(r.getDirectlySelectedNodes());
   let i = {
-    type: "IMAGE",
+    type: 'IMAGE',
     color: {
       r: 1,
       g: 1,
@@ -337,23 +349,23 @@ export function $$U1(e, t) {
       a: 1
     },
     opacity: 1,
-    imageScaleMode: "FILL",
+    imageScaleMode: 'FILL',
     imageVar: {
       value: {
         cmsAliasValue: {
           collectionId: e,
           fieldId: t,
-          itemId: ""
+          itemId: ''
         }
       },
-      dataType: "CMS_ALIAS",
-      resolvedDataType: "IMAGE"
+      dataType: 'CMS_ALIAS',
+      resolvedDataType: 'IMAGE'
     }
   };
   let a = n[0].fills;
-  let s = a.findIndex(t => "IMAGE" === t.type && t.imageVar?.value?.cmsAliasValue?.collectionId === e);
-  -1 !== s ? a[s] = i : a.push(i);
-  l7.user("dakota-set-image-binding", () => {
+  let s = a.findIndex(t => t.type === 'IMAGE' && t.imageVar?.value?.cmsAliasValue?.collectionId === e);
+  s !== -1 ? a[s] = i : a.push(i);
+  l7.user('dakota-set-image-binding', () => {
     Egt?.clearSelection();
     Egt?.addToSelection([...new Set((n || []).flatMap(t => t.getNodesForCmsBinding(e).map(e => e.guid)))]);
     Y5.updateSelectionProperties({
@@ -373,12 +385,12 @@ export function $$B2(e, t) {
     value: {
       collectionId: e,
       fieldSchemaId: t,
-      itemId: "",
-      type: "DATE"
+      itemId: '',
+      type: 'DATE'
     }
   };
-  l7.user("dakota-set-date-binding", () => {
-    for (let t of (n || []).flatMap(t => t.getNodesForCmsBinding(e).filter(e => "TEXT" === e.type))) t.updateVariableConsumption("TEXT_DATA", i);
+  l7.user('dakota-set-date-binding', () => {
+    for (let t of (n || []).flatMap(t => t.getNodesForCmsBinding(e).filter(e => e.type === 'TEXT'))) t.updateVariableConsumption('TEXT_DATA', i);
   });
 }
 export const $h = $$F0;

@@ -1,8 +1,8 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { Component, createElement } from "react";
 import { connect } from "../vendor/514228";
-import { Ay } from "../figma_app/778880";
-import { tx } from "../905/303541";
+import { BrowserInfo } from "../figma_app/778880";
+import { renderI18nText } from "../905/303541";
 import { _M, W_ } from "../figma_app/162807";
 import { XU } from "../figma_app/756995";
 import { F9 } from "../905/636775";
@@ -20,10 +20,10 @@ let g = "widgets--list--mS7Fg search_results_view--list--ptCB2";
     tabletListSortKeys: [_M.RELEVANCY],
     sortKeyDescriptions: {
       [XU.GRID]: {
-        [_M.RELEVANCY]: tx("search.sort_option.relevancy")
+        [_M.RELEVANCY]: renderI18nText("search.sort_option.relevancy")
       },
       [XU.LIST]: {
-        [_M.RELEVANCY]: tx("search.sort_option.relevancy")
+        [_M.RELEVANCY]: renderI18nText("search.sort_option.relevancy")
       }
     },
     defaultOptions: {
@@ -35,7 +35,7 @@ let g = "widgets--list--mS7Fg search_results_view--list--ptCB2";
       shouldShowPlanFilter: !1
     },
     includeSortDirection: e => !1,
-    settingsSpacer: Ay.tablet || Ay.mobile
+    settingsSpacer: BrowserInfo.tablet || BrowserInfo.mobile
   };
   e.listStyle = g;
   e.getValidOptions = function () {
@@ -51,10 +51,10 @@ let g = "widgets--list--mS7Fg search_results_view--list--ptCB2";
     tabletListSortKeys: [W_.RELEVANCY],
     sortKeyDescriptions: {
       [XU.GRID]: {
-        [W_.RELEVANCY]: tx("search.sort_option.relevancy")
+        [W_.RELEVANCY]: renderI18nText("search.sort_option.relevancy")
       },
       [XU.LIST]: {
-        [W_.RELEVANCY]: tx("search.sort_option.relevancy")
+        [W_.RELEVANCY]: renderI18nText("search.sort_option.relevancy")
       }
     },
     defaultOptions: {
@@ -65,7 +65,7 @@ let g = "widgets--list--mS7Fg search_results_view--list--ptCB2";
       }
     },
     includeSortDirection: e => !1,
-    settingsSpacer: Ay.tablet || Ay.mobile
+    settingsSpacer: BrowserInfo.tablet || BrowserInfo.mobile
   };
   e.listStyle = g;
   e.getValidOptions = function () {

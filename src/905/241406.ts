@@ -4,7 +4,7 @@ import { useSelector, connect } from "../vendor/514228";
 import { s_ } from "../905/17223";
 import { nR, $$, CY } from "../figma_app/637027";
 import { B } from "../905/714743";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { Uu } from "../figma_app/471982";
 import { n7 } from "../905/926523";
 import { Lo } from "../905/156213";
@@ -74,14 +74,14 @@ function P(e) {
       },
       children: [jsx("div", {
         className: "merge_profiles--notAllowedText--9heHc",
-        children: tx("community.merge_profile_modal.not_allowed")
+        children: renderI18nText("community.merge_profile_modal.not_allowed")
       }), i && jsx(NJ, {
         targetKey: s,
         className: "merge_profiles--notAllowedTextTooltip--OtwkV pointer_modal--pointerModal--wrpFz text--fontNeg11--StdFq text--_fontBase--QdLsd text--_negText--j9g-L",
         shouldCenterArrow: EL.FALLBACK,
         backgroundColor: "var(--color-bg-tooltip)",
         children: jsx("div", {
-          children: tx("community.merge_profile_modal.cannot_connect_approved_sellers")
+          children: renderI18nText("community.merge_profile_modal.cannot_connect_approved_sellers")
         })
       })]
     })]
@@ -128,7 +128,7 @@ export function $$O1(e) {
       className: b,
       children: [jsx("div", {
         className: v,
-        children: g ? tx("community.merge_profile_modal.add_an_account_to_connect") : tx("community.merge_profile_modal.pick_the_account_you_want_to_connect")
+        children: g ? renderI18nText("community.merge_profile_modal.add_an_account_to_connect") : renderI18nText("community.merge_profile_modal.pick_the_account_you_want_to_connect")
       }), jsx("div", {
         className: "merge_profiles--connectUserRowsContainer--36Qzg",
         children: g ? jsx(B, {
@@ -144,7 +144,7 @@ export function $$O1(e) {
       }), jsx("div", {
         className: C,
         children: jsx("p", {
-          children: g ? tx("community.merge_profile_modal.no_accounts_found") : tx("community.merge_profile_modal.missing_account_try_again")
+          children: g ? renderI18nText("community.merge_profile_modal.no_accounts_found") : renderI18nText("community.merge_profile_modal.missing_account_try_again")
         })
       })]
     }), jsx(N, {
@@ -152,14 +152,14 @@ export function $$O1(e) {
       footerRight: jsxs(Fragment, {
         children: [e.onCancel && jsx(nR, {
           onClick: e.onCancel,
-          children: tx("general.cancel")
+          children: renderI18nText("general.cancel")
         }), jsx($$, {
           disabled: !c,
           onClick: () => {
             c && e.onSubmit(c);
           },
           className: pL,
-          children: profilesOnly ? tx("community.merge_profile_modal.connect") : tx("general.continue")
+          children: profilesOnly ? renderI18nText("community.merge_profile_modal.connect") : renderI18nText("general.continue")
         })]
       })
     })]
@@ -195,7 +195,7 @@ class L extends Component {
         className: b,
         children: [jsx("div", {
           className: v,
-          children: tx("community.merge_profile_modal.merge_profiles_to_connect_accounts")
+          children: renderI18nText("community.merge_profile_modal.merge_profiles_to_connect_accounts")
         }), jsxs("div", {
           className: w,
           children: [jsxs("div", {
@@ -232,25 +232,25 @@ class L extends Component {
         }), jsxs("div", {
           className: C,
           children: [jsx("p", {
-            children: tx("community.merge_profile_modal.existing_community_profile_merge_info")
+            children: renderI18nText("community.merge_profile_modal.existing_community_profile_merge_info")
           }), jsx("br", {}), jsx("p", {
-            children: tx("community.merge_profile_modal.combine_all_profile_resources_info")
+            children: renderI18nText("community.merge_profile_modal.combine_all_profile_resources_info")
           })]
         })]
       }), jsx(N, {
         footerLeft: jsx("div", {
-          children: tx("community.merge_profile_modal.confirm_your_new_profile_details_next")
+          children: renderI18nText("community.merge_profile_modal.confirm_your_new_profile_details_next")
         }),
         footerRight: jsxs(Fragment, {
           children: [jsx(nR, {
             onClick: () => this.props.dispatch(Lo()),
-            children: tx("general.cancel")
+            children: renderI18nText("general.cancel")
           }), jsx($$, {
             onClick: () => this.setState({
               step: 2
             }),
             className: pL,
-            children: tx("general.continue")
+            children: renderI18nText("general.continue")
           })]
         })
       })]
@@ -264,7 +264,7 @@ class L extends Component {
         className: b,
         children: [jsx("div", {
           className: v,
-          children: tx("community.merge_profile_modal.choose_your_new_profile_handle")
+          children: renderI18nText("community.merge_profile_modal.choose_your_new_profile_handle")
         }), jsx("div", {
           className: I,
           children: e ? jsx(Ro, {
@@ -291,7 +291,7 @@ class L extends Component {
             className: w,
             children: jsx("div", {
               className: "merge_profiles--handleDivide--P9AYd",
-              children: tx("community.profiles.or")
+              children: renderI18nText("community.profiles.or")
             })
           }), jsx("div", {
             className: "merge_profiles--rowContainerFlexStart--fajIh merge_profiles--rowContainer--SYWrB",
@@ -308,24 +308,24 @@ class L extends Component {
         }), jsxs("div", {
           className: C,
           children: [jsx("p", {
-            children: tx("community.merge_profile_modal.handle_selection_info")
+            children: renderI18nText("community.merge_profile_modal.handle_selection_info")
           }), jsx("br", {}), jsx("p", {
-            children: tx("community.merge_profile_modal.community_avatar_info")
+            children: renderI18nText("community.merge_profile_modal.community_avatar_info")
           })]
         })]
       }), jsx(N, {
         footerLeft: jsxs("div", {
-          children: [tx("community.merge_profile_modal.merging_profiles_cant_be_undone"), " ", jsx(CY, {
+          children: [renderI18nText("community.merge_profile_modal.merging_profiles_cant_be_undone"), " ", jsx(CY, {
             href: "https://help.figma.com/hc/articles/1500005162381-Manage-Community-profiles-and-settings#add-profile",
             target: "_blank",
             trusted: !0,
-            children: tx("community.merge_profile_modal.learn_more")
+            children: renderI18nText("community.merge_profile_modal.learn_more")
           })]
         }),
         footerRight: jsxs(Fragment, {
           children: [jsx(nR, {
             onClick: () => this.props.dispatch(Lo()),
-            children: tx("general.cancel")
+            children: renderI18nText("general.cancel")
           }), jsx($$, {
             onClick: () => {
               this.props.dispatch(n7({
@@ -335,7 +335,7 @@ class L extends Component {
               this.props.dispatch(Lo());
             },
             className: pL,
-            children: tx("community.merge_profile_modal.merge_profiles")
+            children: renderI18nText("community.merge_profile_modal.merge_profiles")
           })]
         })
       })]

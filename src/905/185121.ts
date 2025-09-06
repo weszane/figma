@@ -12,16 +12,16 @@ import { J as _$$J } from "../905/341359";
 import { plo, Ez5, yTM, glU, NLJ } from "../figma_app/763686";
 import { nc } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { parsePxInt } from "../figma_app/783094";
-import { m as _$$m } from "../905/717445";
+import { getFilteredFeatureFlags } from "../905/717445";
 import { Pt } from "../figma_app/806412";
 import { useSprigWithSampling } from "../905/99656";
 import { Point } from "../905/736624";
 import { Vi, GI } from "../905/125333";
 import { o as _$$o } from "../905/96108";
 import { rM } from "../figma_app/241541";
-import { t as _$$t2, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { XE } from "../figma_app/91703";
 import { c2 } from "../905/382883";
 import { W3 } from "../905/232641";
@@ -357,10 +357,10 @@ function ex(e) {
     recordingKey: Pt(e.recordingKey, "brush", "rotation")
   });
   return jsxs(Fragment, {
-    children: [r, a, _$$m().ce_il_scatter_size_jitter && s, o, l, getFeatureFlags().ce_il_var_width_points && jsxs(Fragment, {
+    children: [r, a, getFilteredFeatureFlags().ce_il_scatter_size_jitter && s, o, l, getFeatureFlags().ce_il_var_width_points && jsxs(Fragment, {
       children: [jsx(e_, {}), jsx(ev, {
         isFullWidthInput: i,
-        label: _$$t2("fullscreen.properties_panel.width_profile.label"),
+        label: getI18nString("fullscreen.properties_panel.width_profile.label"),
         input: jsx(D7, {
           source: "flyout",
           recordingKey: Pt(e.recordingKey, "widthProfile")
@@ -412,27 +412,27 @@ function ew(e) {
     value: gl(orientation) ? void 0 : orientation,
     onChange: setOrientation,
     legend: jsx(_$$q, {
-      children: _$$t2("fullscreen.properties_panel.direction")
+      children: getI18nString("fullscreen.properties_panel.direction")
     }),
     children: [jsx(c$, {
       icon: jsx(_$$v, {}),
       value: "REVERSE",
-      "aria-label": _$$t2("fullscreen.properties_panel.left_arrow")
+      "aria-label": getI18nString("fullscreen.properties_panel.left_arrow")
     }), jsx(c$, {
       icon: jsx(_$$o2, {}),
       value: "FORWARD",
-      "aria-label": _$$t2("fullscreen.properties_panel.right_arrow")
+      "aria-label": getI18nString("fullscreen.properties_panel.right_arrow")
     })]
   });
   return jsxs(Fragment, {
     children: [jsx(eb, {
       isFullWidthInput: !1,
-      label: _$$t2("fullscreen.properties_panel.direction"),
+      label: getI18nString("fullscreen.properties_panel.direction"),
       input: r
     }), getFeatureFlags().ce_il_var_width_points && jsxs(Fragment, {
       children: [jsx(e_, {}), jsx(ev, {
         isFullWidthInput: !1,
-        label: _$$t2("fullscreen.properties_panel.width_profile.label"),
+        label: getI18nString("fullscreen.properties_panel.width_profile.label"),
         input: jsx(D7, {
           source: "flyout",
           recordingKey: Pt(e.recordingKey, "widthProfile")
@@ -495,11 +495,11 @@ class eU {
     this.format = e => {
       switch (e) {
         case "LINE":
-          return _$$t2("fullscreen.properties_panel.stroke_settings.solid");
+          return getI18nString("fullscreen.properties_panel.stroke_settings.solid");
         case "SIMPLE_DASH":
-          return _$$t2("fullscreen.properties_panel.stroke_settings.simple_dash");
+          return getI18nString("fullscreen.properties_panel.stroke_settings.simple_dash");
         case "CUSTOM_DASH":
-          return _$$t2("fullscreen.properties_panel.stroke_settings.custom");
+          return getI18nString("fullscreen.properties_panel.stroke_settings.custom");
         default:
           return "";
       }
@@ -575,17 +575,17 @@ function eV(e) {
       });
     },
     legend: jsx(_$$q, {
-      children: _$$t2("fullscreen.properties_panel.stroke_settings.path_style")
+      children: getI18nString("fullscreen.properties_panel.stroke_settings.path_style")
     }),
     recordingKey: Pt(e, "pathStyle"),
     children: [jsx(c$, {
       icon: jsx(_$$h, {}),
       value: "STRAIGHT",
-      "aria-label": _$$t2("fullscreen.properties_panel.stroke_settings.straight")
+      "aria-label": getI18nString("fullscreen.properties_panel.stroke_settings.straight")
     }), jsx(c$, {
       icon: jsx(m, {}),
       value: "ELBOWED",
-      "aria-label": _$$t2("fullscreen.properties_panel.stroke_settings.elbowed")
+      "aria-label": getI18nString("fullscreen.properties_panel.stroke_settings.elbowed")
     })]
   });
   let J = jsxs(eM, {
@@ -662,7 +662,7 @@ function eV(e) {
   });
   let ee = jsx($j, {
     bigNudgeAmount: 10,
-    "data-tooltip": _$$t2("fullscreen.properties_panel.stroke_settings.dash"),
+    "data-tooltip": getI18nString("fullscreen.properties_panel.stroke_settings.dash"),
     "data-tooltip-type": Ib.TEXT,
     disabled: W,
     dispatch: t,
@@ -686,7 +686,7 @@ function eV(e) {
   });
   let et = jsx($j, {
     bigNudgeAmount: 10,
-    "data-tooltip": _$$t2("fullscreen.properties_panel.stroke_settings.gap"),
+    "data-tooltip": getI18nString("fullscreen.properties_panel.stroke_settings.gap"),
     "data-tooltip-type": Ib.TEXT,
     disabled: W,
     dispatch: t,
@@ -719,7 +719,7 @@ function eV(e) {
         dashPattern: t
       });
     },
-    placeholder: _$$t2("fullscreen.properties_panel.stroke_settings.dash_gap"),
+    placeholder: getI18nString("fullscreen.properties_panel.stroke_settings.dash_gap"),
     recordingKey: Pt(e, "dashes"),
     disabled: W
   });
@@ -731,7 +731,7 @@ function eV(e) {
       });
     },
     recordingKey: Pt(e, "dashCap"),
-    label: _$$t2("fullscreen.properties_panel.stroke_settings.dash_cap"),
+    label: getI18nString("fullscreen.properties_panel.stroke_settings.dash_cap"),
     kind: "dashCap"
   });
   let er = jsx(D7, {
@@ -740,35 +740,35 @@ function eV(e) {
   });
   return jsxs(Fragment, {
     children: [Z && void 0 !== connectorLineStyle && jsx(cS, {
-      label: tx("fullscreen.properties_panel.stroke_settings.path_style"),
+      label: renderI18nText("fullscreen.properties_panel.stroke_settings.path_style"),
       appendedClassName: eD,
       input: Q
     }), jsx(cS, {
       labelId: d,
-      label: tx("fullscreen.properties_panel.stroke_settings.stroke_style"),
+      label: renderI18nText("fullscreen.properties_panel.stroke_settings.stroke_style"),
       appendedClassName: eD,
       input: J
     }), ("SIMPLE_DASH" === X || X === oV) && jsxs(Fragment, {
       children: [jsx(cS, {
-        label: tx("fullscreen.properties_panel.stroke_settings.dash"),
+        label: renderI18nText("fullscreen.properties_panel.stroke_settings.dash"),
         appendedClassName: eD,
         input: ee
       }), jsx(cS, {
-        label: tx("fullscreen.properties_panel.stroke_settings.gap"),
+        label: renderI18nText("fullscreen.properties_panel.stroke_settings.gap"),
         appendedClassName: eD,
         input: et
       })]
     }), "CUSTOM_DASH" === X && jsx(cS, {
-      label: tx("fullscreen.properties_panel.stroke_settings.dashes"),
+      label: renderI18nText("fullscreen.properties_panel.stroke_settings.dashes"),
       appendedClassName: eD,
       input: ei
     }), (strokePanelMode === yTM.VECTOR || strokePanelMode === yTM.LINE) && ("SIMPLE_DASH" === X || "CUSTOM_DASH" === X) && void 0 !== z && jsx(cS, {
-      label: tx("fullscreen.properties_panel.stroke_settings.dash_cap"),
+      label: renderI18nText("fullscreen.properties_panel.stroke_settings.dash_cap"),
       appendedClassName: eD,
       input: en
     }), !getFeatureFlags().ce_il_stroke_endcap_custom_sizing && getFeatureFlags().ce_il_var_width_points && jsx(ev, {
       isFullWidthInput: !1,
-      label: _$$t2("fullscreen.properties_panel.width_profile.label"),
+      label: getI18nString("fullscreen.properties_panel.width_profile.label"),
       input: er,
       icon: jsx(iI, {
         recordingKey: Pt(e.recordingKey, "flipWidthProfile")
@@ -780,7 +780,7 @@ function eG(e) {
   let t = useDispatch();
   return jsxs(Fragment, {
     children: [jsx(cS, {
-      label: tx("fullscreen.properties_panel.stroke_settings.join"),
+      label: renderI18nText("fullscreen.properties_panel.stroke_settings.join"),
       appendedClassName: eD,
       input: jsx(_$$M, {
         value: e.strokeJoin,
@@ -794,7 +794,7 @@ function eG(e) {
         showValueinDisabledStrokeJoin: e.showValueinDisabledStrokeJoin
       })
     }), !e.disabled && "MITER" === e.strokeJoin && jsx(cS, {
-      label: tx("fullscreen.properties_panel.stroke_settings.miter_angle"),
+      label: renderI18nText("fullscreen.properties_panel.stroke_settings.miter_angle"),
       appendedClassName: eD,
       input: jsx(M4, {
         disabled: e.disabled || "MITER" !== e.strokeJoin,
@@ -807,7 +807,7 @@ function eG(e) {
         recordingKey: Pt(e, "miterAngle"),
         tooltipForScreenReadersOnly: !0,
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t2("fullscreen.properties_panel.stroke_settings.miter_angle"),
+        "data-tooltip": getI18nString("fullscreen.properties_panel.stroke_settings.miter_angle"),
         dispatch: t,
         children: jsx("div", {
           className: "advanced_stroke--inactiveLabel--6LGv4",
@@ -834,7 +834,7 @@ export function $$ez0(e) {
     arcSweep,
     onChange
   } = e;
-  let O = md(T6);
+  let O = useAtomWithSubscription(T6);
   let M = Wn(strokePanelMode);
   let U = dG();
   let {
@@ -870,7 +870,7 @@ export function $$ez0(e) {
           strokeJoin: "MITER",
           variableWidthPoints: t ? [] : W
         }), t) {
-          let e = _$$t2("visual_bell.dynamic_stroke_vector_network_warning");
+          let e = getI18nString("visual_bell.dynamic_stroke_vector_network_warning");
           Y5.showVisualBellWithUndo("dynamic-stroke-vector-network-warning", e, !1);
         }
         activeToolId === NLJ.VECTOR_VAR_WIDTH_POINT && activateTool(NLJ.SELECT);
@@ -922,7 +922,7 @@ export function $$ez0(e) {
       }), getFeatureFlags().ce_il_stroke_endcap_custom_sizing && getFeatureFlags().ce_il_var_width_points && jsxs(Fragment, {
         children: [jsx(e_, {}), jsx(ev, {
           isFullWidthInput: !1,
-          label: _$$t2("fullscreen.properties_panel.width_profile.label"),
+          label: getI18nString("fullscreen.properties_panel.width_profile.label"),
           input: t,
           icon: jsx(iI, {
             recordingKey: Pt(e.recordingKey, "flipWidthProfile")
@@ -932,41 +932,41 @@ export function $$ez0(e) {
     });
   };
   let er = Pt(e, "modal");
-  let ea = _$$m().ce_il_strokes ? jsxs(_$$J, {
+  let ea = getFilteredFeatureFlags().ce_il_strokes ? jsxs(_$$J, {
     children: [jsx("div", {
       className: "stroke_settings--segmentedControl--U-Xpx",
       children: jsxs(bL, {
         value: e.strokeType,
         legend: jsx(_$$q, {
-          children: _$$t2("fullscreen.properties_panel.stroke_settings.stroke_type")
+          children: getI18nString("fullscreen.properties_panel.stroke_settings.stroke_type")
         }),
         recordingKey: Pt(e, "strokeTypeControl"),
         onChange: q,
         children: [jsx(RT, {
           value: "Basic",
           truncate: !0,
-          label: _$$t2("fullscreen.properties_panel.basic"),
+          label: getI18nString("fullscreen.properties_panel.basic"),
           htmlAttributes: {
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t2("fullscreen.properties_panel.basic"),
+            "data-tooltip": getI18nString("fullscreen.properties_panel.basic"),
             "data-tooltip-timeout-delay": 1e3
           }
-        }), _$$m().ce_il_dynamic_strokes && jsx(RT, {
+        }), getFilteredFeatureFlags().ce_il_dynamic_strokes && jsx(RT, {
           value: "Dynamic",
           truncate: !0,
-          label: _$$t2("fullscreen.properties_panel.dynamic"),
+          label: getI18nString("fullscreen.properties_panel.dynamic"),
           htmlAttributes: {
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t2("fullscreen.properties_panel.dynamic"),
+            "data-tooltip": getI18nString("fullscreen.properties_panel.dynamic"),
             "data-tooltip-timeout-delay": 1e3
           }
         }), jsx(RT, {
           value: "Brush",
           truncate: !0,
-          label: _$$t2("fullscreen.properties_panel.brush"),
+          label: getI18nString("fullscreen.properties_panel.brush"),
           htmlAttributes: {
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t2("fullscreen.properties_panel.brush"),
+            "data-tooltip": getI18nString("fullscreen.properties_panel.brush"),
             "data-tooltip-timeout-delay": 1e3
           }
         })]
@@ -1012,7 +1012,7 @@ export function $$ez0(e) {
       children: [jsx(Y9, {
         children: jsx("h2", {
           className: "stroke_settings--settingsHeading--Pvgy-",
-          children: _$$t2("fullscreen.properties_panel.stroke_settings")
+          children: getI18nString("fullscreen.properties_panel.stroke_settings")
         })
       }), jsx(nB, {
         padding: 0,

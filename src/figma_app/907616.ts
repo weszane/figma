@@ -12,13 +12,13 @@ import { b as _$$b2 } from "../905/946806";
 import { getFeatureFlags } from "../905/601108";
 import { EJ } from "../figma_app/930338";
 import { z, Z } from "../905/306088";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { sZ } from "../905/845253";
 import { FPermissionLevelType, FViewPermissionType, FResourceCategoryType } from "../figma_app/191312";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { Fb } from "../figma_app/630077";
 import { Ib } from "../905/129884";
-import { O } from "../905/247093";
+import { UNASSIGNED } from "../905/247093";
 import { Ro } from "../figma_app/805373";
 let A = "audience_selector--radioText--OD-3K";
 let x = "audience_selector--radioOption--4NDFa";
@@ -92,15 +92,15 @@ export function $$M1(e) {
     [FResourceCategoryType.FILE_REPO]: ["anyone", "invite_only"]
   }[e.resourceType];
   let r = null;
-  e.org && (e.workspace && e.workspace.id !== O && t.splice(1, 0, "workspace"), t.splice(1, 0, "org"));
-  e.isPrototype && (t = t.filter(t => k(e.fileShareAudience, t)), "anyone" === e.fileShareAudience && 1 === t.length && "anyone" === t[0] && (r = _$$t("permissions.audience_selector.can_only_be_adjusted_in_the_main_file")));
+  e.org && (e.workspace && e.workspace.id !== UNASSIGNED && t.splice(1, 0, "workspace"), t.splice(1, 0, "org"));
+  e.isPrototype && (t = t.filter(t => k(e.fileShareAudience, t)), "anyone" === e.fileShareAudience && 1 === t.length && "anyone" === t[0] && (r = getI18nString("permissions.audience_selector.can_only_be_adjusted_in_the_main_file")));
   let o = {
-    anyone: _$$t("permissions.audience_selector.anyone"),
+    anyone: getI18nString("permissions.audience_selector.anyone"),
     workspace: e.workspace?.name || "",
     org: e.org?.name || "",
     team: e.team?.name || "",
     folder: "",
-    invite_only: _$$t("permissions.audience_selector.only_invited_people")
+    invite_only: getI18nString("permissions.audience_selector.only_invited_people")
   };
   let l = {
     anyone: jsx(Y, {}),
@@ -120,41 +120,41 @@ export function $$M1(e) {
   };
   let h = useCallback(() => {
     let t = {
-      [FResourceCategoryType.TEAM]: _$$t("permissions.audience_selector.team_resource_name"),
-      [FResourceCategoryType.FOLDER]: _$$t("permissions.audience_selector.project_resource_name"),
-      [FResourceCategoryType.FILE]: _$$t("permissions.audience_selector.file_resource_name"),
-      [FResourceCategoryType.FILE_REPO]: _$$t("permissions.audience_selector.file_resource_name")
+      [FResourceCategoryType.TEAM]: getI18nString("permissions.audience_selector.team_resource_name"),
+      [FResourceCategoryType.FOLDER]: getI18nString("permissions.audience_selector.project_resource_name"),
+      [FResourceCategoryType.FILE]: getI18nString("permissions.audience_selector.file_resource_name"),
+      [FResourceCategoryType.FILE_REPO]: getI18nString("permissions.audience_selector.file_resource_name")
     };
-    return e.isPrototype ? e.editorType === nT.Slides ? _$$t("permissions.audience_selector.presentation_resource_name") : _$$t("permissions.audience_selector.prototype_resource_name") : t[e.resourceType];
+    return e.isPrototype ? e.editorType === FEditorType.Slides ? getI18nString("permissions.audience_selector.presentation_resource_name") : getI18nString("permissions.audience_selector.prototype_resource_name") : t[e.resourceType];
   }, [e.isPrototype, e.resourceType, e.editorType]);
   let m = useMemo(() => {
     let t = h();
     switch (e.value) {
       case "anyone":
-        return e.editorType === nT.Slides ? _$$t("permissions.audience_selector.anyone_even_outside_your_org_can_access_this_resource", {
+        return e.editorType === FEditorType.Slides ? getI18nString("permissions.audience_selector.anyone_even_outside_your_org_can_access_this_resource", {
           resourceName: t
-        }) : _$$t("permissions.audience_selector.anyone_even_those_outside_your_org_can_access_this_resource", {
+        }) : getI18nString("permissions.audience_selector.anyone_even_those_outside_your_org_can_access_this_resource", {
           resourceName: t
         });
       case "org":
-        if (e.searchable) return _$$t("permissions.audience_selector.audience_can_access_through_search_link_or_file_browser", {
+        if (e.searchable) return getI18nString("permissions.audience_selector.audience_can_access_through_search_link_or_file_browser", {
           resourceName: t,
-          audience: _$$t("permissions.audience_selector.org_members")
+          audience: getI18nString("permissions.audience_selector.org_members")
         });
-        return _$$t("permissions.audience_selector.audience_can_access_through_link_or_file_browser", {
+        return getI18nString("permissions.audience_selector.audience_can_access_through_link_or_file_browser", {
           resourceName: t,
-          audience: _$$t("permissions.audience_selector.org_members")
+          audience: getI18nString("permissions.audience_selector.org_members")
         });
       case "workspace":
-        return _$$t("permissions.audience_selector.audience_can_access_through_search_link_or_file_browser", {
+        return getI18nString("permissions.audience_selector.audience_can_access_through_search_link_or_file_browser", {
           resourceName: t,
-          audience: _$$t("permissions.audience_selector.workspace_members")
+          audience: getI18nString("permissions.audience_selector.workspace_members")
         });
       case "team":
       case "folder":
-        return _$$t("permissions.audience_selector.can_access_through_search_file_browser_link");
+        return getI18nString("permissions.audience_selector.can_access_through_search_file_browser_link");
       case "invite_only":
-        return _$$t("permissions.audience_selector.only_people_you_directly_invited_can_access", {
+        return getI18nString("permissions.audience_selector.only_people_you_directly_invited_can_access", {
           resourceName: t
         });
     }
@@ -168,7 +168,7 @@ export function $$M1(e) {
         onChange: e.onChange,
         children: [jsx(l9, {
           label: jsx(_$$h, {
-            children: _$$t("permissions.audience_selector.aria_label")
+            children: getI18nString("permissions.audience_selector.aria_label")
           }),
           disabled: !!r || e.disabled,
           size: "lg",
@@ -218,14 +218,14 @@ export function $$F3(e) {
       readonly: e.disabled || void 0,
       label: jsx(J, {
         className: A,
-        children: tx("team_creation.view")
+        children: renderI18nText("team_creation.view")
       })
     }, "view-only"), jsx(_$$c, {
       value: "edit",
       readonly: e.disabled || e.disableEdit || void 0,
       label: jsx(J, {
         className: A,
-        children: e.teamCanAccess ? tx("permissions.level_name_capitalized.can_access") : tx("team_creation.edit")
+        children: e.teamCanAccess ? renderI18nText("permissions.level_name_capitalized.can_access") : renderI18nText("team_creation.edit")
       })
     }, "edit")]
   });
@@ -240,11 +240,11 @@ export function $$j2(e) {
       className: x,
       children: jsx("p", {
         className: A,
-        children: tx("team_creation.visible")
+        children: renderI18nText("team_creation.visible")
       })
     }, "org_browsable"), jsx("p", {
       className: N,
-      children: tx("team_creation.anyone_can_find_this_team")
+      children: renderI18nText("team_creation.anyone_can_find_this_team")
     })]
   }) : jsx(Fragment, {
     children: jsxs(z, {
@@ -256,61 +256,61 @@ export function $$j2(e) {
         className: x,
         children: jsx("p", {
           className: A,
-          children: tx("team_creation.visible")
+          children: renderI18nText("team_creation.visible")
         })
       }, "org_browsable"), jsx("p", {
         className: N,
-        children: tx("team_creation.anyone_can_find_this_team")
+        children: renderI18nText("team_creation.anyone_can_find_this_team")
       }), jsx(Z, {
         value: Fb.HIDDEN,
         className: x,
         children: jsx("p", {
           className: A,
-          children: tx("team_creation.hidden")
+          children: renderI18nText("team_creation.hidden")
         })
       }, "hidden"), jsx("p", {
         className: N,
-        children: tx("team_creation.only_team_members_can_find_and_access")
+        children: renderI18nText("team_creation.only_team_members_can_find_and_access")
       })]
     })
   });
 }
 export function $$U9(e, t, r, i) {
-  let a = t => e === FResourceCategoryType.TEAM ? tx("team_view.team_permissions_modal.anyone_in_container_can_edit_this_team", {
+  let a = t => e === FResourceCategoryType.TEAM ? renderI18nText("team_view.team_permissions_modal.anyone_in_container_can_edit_this_team", {
     containerName: jsx("span", {
       className: C,
       children: t
     })
-  }) : e === FResourceCategoryType.FOLDER ? tx("folder_access_row.anyone_in_container_can_edit_this_project", {
-    containerName: jsx("span", {
-      className: C,
-      children: t
-    })
-  }) : void 0;
-  let s = t => e === FResourceCategoryType.TEAM ? tx("team_view.team_permissions_modal.anyone_in_container_can_view_this_team", {
-    containerName: jsx("span", {
-      className: C,
-      children: t
-    })
-  }) : e === FResourceCategoryType.FOLDER ? tx("folder_access_row.anyone_in_container_can_view_this_project", {
+  }) : e === FResourceCategoryType.FOLDER ? renderI18nText("folder_access_row.anyone_in_container_can_edit_this_project", {
     containerName: jsx("span", {
       className: C,
       children: t
     })
   }) : void 0;
-  return t && i !== FPermissionLevelType.INVITE_ONLY ? i === FPermissionLevelType.ORG_EDIT ? a(t.name) : i === FPermissionLevelType.WORKSPACE_EDIT && r ? a(r.name) : i === FPermissionLevelType.ORG_VIEW ? s(t.name) : i === FPermissionLevelType.WORKSPACE_VIEW && r ? s(r.name) : jsx(Fragment, {}) : tx("team_view.team_permissions_modal.only_invited_people_can_access");
+  let s = t => e === FResourceCategoryType.TEAM ? renderI18nText("team_view.team_permissions_modal.anyone_in_container_can_view_this_team", {
+    containerName: jsx("span", {
+      className: C,
+      children: t
+    })
+  }) : e === FResourceCategoryType.FOLDER ? renderI18nText("folder_access_row.anyone_in_container_can_view_this_project", {
+    containerName: jsx("span", {
+      className: C,
+      children: t
+    })
+  }) : void 0;
+  return t && i !== FPermissionLevelType.INVITE_ONLY ? i === FPermissionLevelType.ORG_EDIT ? a(t.name) : i === FPermissionLevelType.WORKSPACE_EDIT && r ? a(r.name) : i === FPermissionLevelType.ORG_VIEW ? s(t.name) : i === FPermissionLevelType.WORKSPACE_VIEW && r ? s(r.name) : jsx(Fragment, {}) : renderI18nText("team_view.team_permissions_modal.only_invited_people_can_access");
 }
 export function $$B10(e, t, r, i, a) {
-  return e === FPermissionLevelType.EDIT || e === FPermissionLevelType.VIEW ? i ? tx("file_audience_row.anyone_with_password") : tx("permissions.anyone") : e === FPermissionLevelType.ORG_EDIT || e === FPermissionLevelType.ORG_VIEW ? t && tx("permissions.anyone_in_container_name", {
+  return e === FPermissionLevelType.EDIT || e === FPermissionLevelType.VIEW ? i ? renderI18nText("file_audience_row.anyone_with_password") : renderI18nText("permissions.anyone") : e === FPermissionLevelType.ORG_EDIT || e === FPermissionLevelType.ORG_VIEW ? t && renderI18nText("permissions.anyone_in_container_name", {
     containerName: t.name
-  }) : e === FPermissionLevelType.WORKSPACE_EDIT || e === FPermissionLevelType.WORKSPACE_VIEW ? tx("permissions.anyone_in_container_name", {
-    containerName: r?.name ?? tx("folder_permissions_modal.project_name_s_workspace", {
+  }) : e === FPermissionLevelType.WORKSPACE_EDIT || e === FPermissionLevelType.WORKSPACE_VIEW ? renderI18nText("permissions.anyone_in_container_name", {
+    containerName: r?.name ?? renderI18nText("folder_permissions_modal.project_name_s_workspace", {
       projectName: EJ(a ?? "", 30)
     })
-  }) : e === FPermissionLevelType.INVITE_ONLY || e === FPermissionLevelType.INHERIT ? tx("permissions.only_those_invited") : jsx(Fragment, {});
+  }) : e === FPermissionLevelType.INVITE_ONLY || e === FPermissionLevelType.INHERIT ? renderI18nText("permissions.only_those_invited") : jsx(Fragment, {});
 }
 export function $$G8(e) {
-  return e === FPermissionLevelType.EDIT || e === FPermissionLevelType.ORG_EDIT || e === FPermissionLevelType.WORKSPACE_EDIT ? tx("file_access_row.can_edit") : e === FPermissionLevelType.VIEW || e === FPermissionLevelType.ORG_VIEW || e === FPermissionLevelType.WORKSPACE_VIEW ? tx("file_access_row.can_view") : void 0;
+  return e === FPermissionLevelType.EDIT || e === FPermissionLevelType.ORG_EDIT || e === FPermissionLevelType.WORKSPACE_EDIT ? renderI18nText("file_access_row.can_edit") : e === FPermissionLevelType.VIEW || e === FPermissionLevelType.ORG_VIEW || e === FPermissionLevelType.WORKSPACE_VIEW ? renderI18nText("file_access_row.can_view") : void 0;
 }
 export const J4 = $$O0;
 export const YU = $$M1;

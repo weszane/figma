@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useCallback } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { B } from "../905/714743";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { r as _$$r } from "../905/534055";
 import { s as _$$s } from "../905/328136";
 import { Mr } from "../figma_app/795938";
@@ -11,7 +11,7 @@ import { uF } from "../figma_app/300692";
 import { WM, Wh, dY, sU } from "../905/838765";
 import { YW } from "../figma_app/870683";
 import { dn } from "../figma_app/994403";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { cx } from "../figma_app/558929";
 import { to } from "../905/156213";
 import { k as _$$k } from "../905/882646";
@@ -55,7 +55,7 @@ function T(e) {
         classNameOverride: dropdownIsShown ? m === FW.FIGMA ? Qe : _y : void 0,
         onClick: n => {
           if (n.preventDefault(), n.stopPropagation(), i) {
-            if (Ay.mobile) {
+            if (BrowserInfo.mobile) {
               t(to({
                 type: _$$x,
                 data: {
@@ -151,7 +151,7 @@ export function $$L1({
           children: [jsx(B, {
             className: hz,
             svg: _$$A2
-          }), tx("community.cards.private"), "OrgWidgetsView" === i && jsx(_$$r, {
+          }), renderI18nText("community.cards.private"), "OrgWidgetsView" === i && jsx(_$$r, {
             resource: t
           })]
         })

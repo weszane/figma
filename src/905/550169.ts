@@ -1,19 +1,19 @@
 import { debounce } from "../905/915765";
-import { b } from "../905/690073";
-import { sx } from "../905/449184";
-let s = debounce(sx, 1e3, !0);
+import { EventEmitter } from "../905/690073";
+import { trackEventAnalytics } from "../905/449184";
+let s = debounce(trackEventAnalytics, 1e3, !0);
 let o = "gamepadconnected";
 let l = "gamepaddisconnected";
 let $$d1 = 1e3;
 export class $$c0 {
   constructor() {
-    this.emitter = new b("GameControllerListener");
+    this.emitter = new EventEmitter("GameControllerListener");
     this.state = new Map();
     this.rafHandle = 0;
-    this.onGamePadConnected = (e) => {
+    this.onGamePadConnected = e => {
       this.rafHandle || (this.rafHandle = window.requestAnimationFrame(this.tick));
     };
-    this.onGamePadDisconnected = (e) => {
+    this.onGamePadDisconnected = e => {
       Array.from(window.navigator.getGamepads()).some(Boolean) || (window.cancelAnimationFrame(this.rafHandle), this.rafHandle = 0);
     };
     this.tick = () => {

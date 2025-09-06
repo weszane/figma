@@ -1,32 +1,60 @@
-import { getInitialOptions } from "../figma_app/169182";
-export let $$r0 = new class {
-  constructor() {
-    this.userStateXHRDuration = -1;
-    this.userStateResourceEvents = {};
-    this.domContentLoadedMs = -1;
-    this.jsonParseDurationMs = 0;
-    this.fileBrowserInitDurationMs = -1;
-    this.hydrateDurationMs = -1;
-    this.initialRenderDurationMs = -1;
-    this.timeToLoadMs = -1;
-    this.i18nFetchPreloadedDictMs = 0;
-    this.i18nFetchPreloadedEnglishDictMs = 0;
-    this.i18nFetchPreloadedDbDictMs = 0;
-    this.i18nNonPreloadedFetchDictMs = 0;
-    this.i18nNonPreloadedFetchDbDictMs = 0;
-    this.i18nInitStateWithLocaleDurationMs = 0;
-    this.i18nLocale = "en";
+import { getInitialOptions } from '../figma_app/169182'
+
+/**
+ * Tracks and reports various performance metrics and user state events.
+ * Original class name: anonymous class assigned to $$r0
+ */
+export class PerformanceMetricsTracker {
+  userStateXHRDuration: number = -1
+  userStateResourceEvents: Record<string, any> = {}
+  domContentLoadedMs: number = -1
+  jsonParseDurationMs: number = 0
+  fileBrowserInitDurationMs: number = -1
+  hydrateDurationMs: number = -1
+  initialRenderDurationMs: number = -1
+  timeToLoadMs: number = -1
+  i18nFetchPreloadedDictMs: number = 0
+  i18nFetchPreloadedEnglishDictMs: number = 0
+  i18nFetchPreloadedDbDictMs: number = 0
+  i18nNonPreloadedFetchDictMs: number = 0
+  i18nNonPreloadedFetchDbDictMs: number = 0
+  i18nInitStateWithLocaleDurationMs: number = 0
+  i18nLocale: string = 'en'
+
+  /**
+   * Logs user state info from an XHR response.
+   * Original method name: logUserStateInfo
+   * @param e - The XHR response object
+   */
+  logUserStateInfo(e: { responseURL: string, status: number }) {
+    // Early return if performance API is not available
+    if (!performance.getEntriesByName)
+      return
+
+    this.userStateXHRDuration = Math.round((window as any).userStateXHRDuration || 0)
+
+    const resourceEntry = performance.getEntriesByName(e.responseURL, 'resource').pop()
+    if (!resourceEntry)
+      return
+
+    this.userStateResourceEvents['apiUserState.status'] = e.status
+    const resourceData = (resourceEntry as PerformanceResourceTiming).toJSON()
+    for (const key in resourceData) {
+      this.userStateResourceEvents[`apiUserState.${key}`] = resourceData[key]
+    }
   }
-  logUserStateInfo(e) {
-    if (this.userStateXHRDuration = Math.round(window.userStateXHRDuration || 0), !performance.getEntriesByName) return;
-    let t = performance.getEntriesByName(e.responseURL, "resource").pop();
-    if (!t) return;
-    this.userStateResourceEvents["apiUserState.status"] = e.status;
-    let i = t.toJSON();
-    for (let e in i) this.userStateResourceEvents[`apiUserState.${e}`] = i[e];
-  }
-  report(e) {
-    e("React Load Time", {
+
+  /**
+   * Reports the collected metrics using the provided reporting function.
+   * Original method name: report
+   * @param reportFn - The reporting function
+   */
+  report(reportFn: (
+    eventName: string,
+    metrics: Record<string, any>,
+    options: { forwardToDatadog: boolean }
+  ) => void) {
+    reportFn('React Load Time', {
       version: 1,
       timeToLoad: this.timeToLoadMs,
       timeToDOMContentLoaded: this.domContentLoadedMs,
@@ -40,15 +68,18 @@ export let $$r0 = new class {
       i18nNonPreloadedFetchDictMs: this.i18nNonPreloadedFetchDictMs,
       i18nNonPreloadedFetchDbDictMs: this.i18nNonPreloadedFetchDbDictMs,
       i18nLocale: this.i18nLocale,
-      isFastma: !1,
-      isStatsigBootstrapFlagOn: !0,
+      isFastma: false,
+      isStatsigBootstrapFlagOn: true,
       hasStatsigBootstrapValues: !!getInitialOptions().statsig_bootstrap_values,
-      isUsingStatsigClientSDK: !0,
-      isUsingStatsigPrefetch: !0,
-      ...this.userStateResourceEvents
+      isUsingStatsigClientSDK: true,
+      isUsingStatsigPrefetch: true,
+      ...this.userStateResourceEvents,
     }, {
-      forwardToDatadog: !0
-    });
+      forwardToDatadog: true,
+    })
   }
-}();
-export const X = $$r0;
+}
+
+// Export with original variable names for traceability
+export const performanceMetricsTracker = new PerformanceMetricsTracker()
+export const X = performanceMetricsTracker

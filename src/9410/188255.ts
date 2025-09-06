@@ -1,9 +1,9 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useMemo, useState, useEffect, useRef, useLayoutEffect, useCallback, PureComponent, createElement, Suspense } from "react";
 import { getFeatureFlags } from "../905/601108";
-import { zl, Xr, md, eU as _$$eU, fp, Rq } from "../figma_app/27355";
-import { Ay, Xb } from "../figma_app/778880";
-import { nl as _$$nl } from "../figma_app/257275";
+import { atomStoreManager, Xr, useAtomWithSubscription, atom, useAtomValueAndSetter, Rq } from "../figma_app/27355";
+import { BrowserInfo, isAnyMobile } from "../figma_app/778880";
+import { isInteractionPathCheck } from "../figma_app/897289";
 import { q8 } from "../figma_app/459490";
 import { QI } from "../9410/60600";
 import { xo } from "../figma_app/473493";
@@ -23,7 +23,7 @@ import { cfv, xae, gw5, KpW, kul, glU, hKj, m1T } from "../figma_app/763686";
 import { r as _$$r } from "../905/249071";
 import { a as _$$a } from "../905/29104";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx as _$$tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { E as _$$E } from "../905/984674";
 import { FQ } from "../9410/571209";
 import { wr, Dh } from "../figma_app/741237";
@@ -41,12 +41,12 @@ import { A as _$$A2 } from "../vendor/90566";
 import { EH, ji, xo as _$$xo, MC, l0, zp } from "../figma_app/847014";
 import { gB, oA as _$$oA } from "../905/723791";
 import { Bl } from "../figma_app/967857";
-import { pb } from "../figma_app/469876";
+import { IntegrationUtils } from "../figma_app/469876";
 import { z4 } from "../905/37051";
 import { yV, q5, tS as _$$tS, MY, As, ze } from "../figma_app/516028";
 import { yF } from "../figma_app/386952";
 import { I as _$$I } from "../figma_app/51637";
-import { nT as _$$nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { A as _$$A3 } from "../905/920142";
 import { mp } from "../figma_app/864723";
 import { f as _$$f } from "../905/940356";
@@ -55,7 +55,7 @@ import { Rw, zX } from "../905/576487";
 import { Cu } from "../figma_app/314264";
 import { d as _$$d } from "../figma_app/444297";
 import { $ as _$$$, N as _$$N3 } from "../figma_app/191390";
-import { md as _$$md } from "../vendor/525001";
+import { useAtomValue } from "../vendor/525001";
 import { buildUploadUrl, isDevEnvironment, buildStaticUrl, getInitialOptions } from "../figma_app/169182";
 import { V as _$$V } from "../905/223767";
 import { to as _$$to, Ce, $O } from "../905/156213";
@@ -92,8 +92,8 @@ import { zC } from "../figma_app/186343";
 import { Fk } from "../figma_app/167249";
 import { i as _$$i } from "../905/559280";
 import { ZH } from "../figma_app/957169";
-import { sx as _$$sx } from "../905/449184";
-import { eD as _$$eD } from "../figma_app/876459";
+import { trackEventAnalytics } from "../905/449184";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { Ay as _$$Ay2 } from "../905/612521";
 import { h as _$$h2 } from "../905/207101";
 import { A as _$$A5 } from "../1250/487166";
@@ -197,7 +197,7 @@ import { A as _$$A1 } from "../svg/519128";
 import { A as _$$A10 } from "../svg/221042";
 import { getStorage } from "../905/657224";
 import { Xk } from "../figma_app/107215";
-import { kF as _$$kF, us } from "../905/11";
+import { setSentryTag, captureMessage } from "../905/11";
 import { XZ } from "../figma_app/176973";
 import { WB } from "../905/761735";
 import { kd, mW } from "../figma_app/797994";
@@ -225,7 +225,7 @@ import { Ju } from "../905/102752";
 import { yX } from "../figma_app/918700";
 import { Wk } from "../figma_app/397269";
 import { A as _$$A11 } from "../1250/318790";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { q as _$$q2 } from "../905/924253";
 import { H as _$$H } from "../figma_app/907304";
 import { w as _$$w6 } from "../figma_app/106955";
@@ -272,7 +272,7 @@ import { E1 as _$$E4 } from "../905/696065";
 import { Q as _$$Q4 } from "../905/717951";
 import oR from "../vendor/128080";
 import { B as _$$B5 } from "../figma_app/380543";
-import { bt } from "../905/270322";
+import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { q2 } from "../figma_app/197286";
 import { jS } from "../905/136701";
 import { M3 } from "../905/759412";
@@ -410,8 +410,8 @@ function q({
     selectionIsStable: o
   });
   useEffect(() => {
-    zl.set(EH, e => e + 1);
-    zl.set(ji, () => new Date().toISOString());
+    atomStoreManager.set(EH, e => e + 1);
+    atomStoreManager.set(ji, () => new Date().toISOString());
   }, []);
   let {
     summarizeCanvasSelection
@@ -419,7 +419,7 @@ function q({
   let u = Cb();
   let h = Xr(_$$v2);
   let m = o && l;
-  m && (a = _$$t("whiteboard.ai_summary.nudge.too_many_tokens"));
+  m && (a = getI18nString("whiteboard.ai_summary.nudge.too_many_tokens"));
   let f = useRef(null);
   let g = _$$ni();
   let _ = FQ(f, 8);
@@ -453,12 +453,12 @@ function q({
         className: "ai_summary_nudge--topBar--3FRaK",
         children: [jsx("span", {
           className: _$$s.textHeadingMedium.$,
-          children: _$$tx("whiteboard.ai_summary.nudge.title")
+          children: renderI18nText("whiteboard.ai_summary.nudge.title")
         }), jsx("div", {
           className: "ai_summary_nudge--closeButton--2Lr8q",
           children: jsx(_$$K, {
             onClick: e,
-            "aria-label": _$$t("general.close"),
+            "aria-label": getI18nString("general.close"),
             htmlAttributes: {
               "data-testid": "close-button"
             },
@@ -467,7 +467,7 @@ function q({
         })]
       }), jsx("div", {
         className: _$$s.textBodyLarge.colorTextSecondary.$,
-        children: _$$tx("whiteboard.ai_summary.nudge.subtitle")
+        children: renderI18nText("whiteboard.ai_summary.nudge.subtitle")
       }), jsxs("div", {
         className: "ai_summary_nudge--numberContainer--JqUxZ",
         children: [jsx(Z, {
@@ -497,12 +497,12 @@ function q({
       children: jsxs("div", {
         children: [jsx("span", {
           className: _$$s.textBodyMedium.colorTextSecondary.mr2.$,
-          children: _$$tx("whiteboard.ai_summary.nudge.disclaimer")
+          children: renderI18nText("whiteboard.ai_summary.nudge.disclaimer")
         }), jsx(_$$N2, {
           href: _$$nG,
           newTab: !0,
           trusted: !0,
-          children: _$$t("whiteboard.inline_menu.ai_quick_actions_dropdown_disclaimer_cta")
+          children: getI18nString("whiteboard.inline_menu.ai_quick_actions_dropdown_disclaimer_cta")
         })]
       })
     }), jsx("div", {
@@ -515,7 +515,7 @@ let X = _$$tf(function ({
   disabled: t,
   disabledTooltip: i
 }) {
-  let n = _$$a() ? _$$t("whiteboard.inline_menu.ai_quick_actions_beta_badge_text") : "";
+  let n = _$$a() ? getI18nString("whiteboard.inline_menu.ai_quick_actions_beta_badge_text") : "";
   return jsx(fu, {
     name: "AI Summary Nudge CTA",
     properties: {
@@ -535,7 +535,7 @@ let X = _$$tf(function ({
         children: [jsx("span", {
           className: "ai_summary_nudge--buttonIcon--X-QPt",
           children: jsx(T, {})
-        }), _$$tx("whiteboard.ai_summary.nudge.cta"), jsx("div", {
+        }), renderI18nText("whiteboard.ai_summary.nudge.cta"), jsx("div", {
           className: "ai_summary_nudge--badgeWrapper--QRaRq",
           children: jsx(_$$v, {
             location: t ? "SUMMARIZE_NUDGE_DISABLED" : "SUMMARIZE_NUDGE",
@@ -579,11 +579,11 @@ function et() {
   } = function () {
     let e = function () {
       let e = function () {
-        let e = md(Bl);
-        let t = md(_$$xo);
-        let i = md(MC);
-        let r = md(ji);
-        let a = md(EH);
+        let e = useAtomWithSubscription(Bl);
+        let t = useAtomWithSubscription(_$$xo);
+        let i = useAtomWithSubscription(MC);
+        let r = useAtomWithSubscription(ji);
+        let a = useAtomWithSubscription(EH);
         return useMemo(() => {
           if ("loaded" !== t.status || "loaded" !== i.status || "loaded" !== e.status || e.data) return gB({
             isEligibleToShowUser: !1
@@ -648,7 +648,7 @@ function et() {
     })
   });
 }
-let eu = _$$eU(!1);
+let eu = atom(!1);
 let e_ = "slides_visual_bell_entrypoint_dismissed_user_flag";
 function ex() {
   !function () {
@@ -674,7 +674,7 @@ function ex() {
             name: "slides_conversion_visual_bell_entrypoint_dismissed"
           });
           e(_$$F.enqueue({
-            message: _$$t("slides.visual_bell.we_wont_ask_you_again")
+            message: getI18nString("slides.visual_bell.we_wont_ask_you_again")
           }));
         }
       }));
@@ -692,10 +692,10 @@ function ex() {
 }
 let eR = _$$r2(IR);
 function eD() {
-  let e = _$$md(_$$mp);
-  let t = _$$md(_$$t2);
-  let i = _$$md(eR);
-  let n = _$$md(yV);
+  let e = useAtomValue(_$$mp);
+  let t = useAtomValue(_$$t2);
+  let i = useAtomValue(eR);
+  let n = useAtomValue(yV);
   let a = useDispatch();
   let {
     uniqueId,
@@ -716,7 +716,7 @@ function eD() {
     });
   });
   return jsx(_$$X, {
-    description: _$$tx("upsell.advanced_prototyping.description"),
+    description: renderI18nText("upsell.advanced_prototyping.description"),
     isShowing,
     media: jsx(_$$w, {
       src: buildUploadUrl("30507591ad5cd385aaf75d4a16ef140b74ec821b"),
@@ -725,7 +725,7 @@ function eD() {
     onClose: complete,
     position: _$$Q.BOTTOM_RIGHT,
     primaryCta: {
-      label: _$$tx("upsell.advanced_prototyping.see_plans"),
+      label: renderI18nText("upsell.advanced_prototyping.see_plans"),
       type: "button",
       onClick: () => {
         a(_$$to({
@@ -742,12 +742,12 @@ function eD() {
       ctaTrackingDescriptor: _$$c.SEE_PLANS
     },
     secondaryCta: {
-      label: _$$tx("general.learn_more"),
+      label: renderI18nText("general.learn_more"),
       type: "link",
       href: "https://help.figma.com/hc/articles/14506587589399-Use-variables-in-prototypes",
       ctaTrackingDescriptor: _$$c.LEARN_MORE
     },
-    title: _$$tx("upsell.advanced_prototyping.title"),
+    title: renderI18nText("upsell.advanced_prototyping.title"),
     trackingContextName: "Advanced Prototype Upsell Popup",
     userFlagOnShow: IR
   });
@@ -755,7 +755,7 @@ function eD() {
 let eF = "seen_audio_nux";
 let eB = _$$r2(eF);
 function eU() {
-  let e = md(eB);
+  let e = useAtomWithSubscription(eB);
   let t = _$$e({
     overlay: y4J,
     priority: _$$N.SECONDARY_MODAL
@@ -773,7 +773,7 @@ function eU() {
     isShowing: t.isShowing,
     userFlagOnShow: eF,
     emphasized: !0,
-    title: _$$tx("collaboration.voice.join_the_conversation"),
+    title: renderI18nText("collaboration.voice.join_the_conversation"),
     description: jsx("div", {
       style: {
         display: "inline"
@@ -800,7 +800,7 @@ function e4() {
   let e = Av();
   return _$$tK(e);
 }
-let e6 = _$$eU(null);
+let e6 = atom(null);
 let e7 = "color_management_default_to_p3_modal--onboardingFooter--VSeAU";
 let e8 = "color_management_default_to_p3_modal--content--FzYUr";
 let e9 = "seen_color_management_default_to_p3_modal";
@@ -824,10 +824,10 @@ function tr() {
   let [l] = jJ();
   let d = e4();
   let c = e5();
-  let [u, p] = fp(e6);
+  let [u, p] = useAtomValueAndSetter(e6);
   let h = jK();
   let [m, _] = useState(!1);
-  let [x] = fp(_$$n$);
+  let [x] = useAtomValueAndSetter(_$$n$);
   let b = C$();
   useEffect(() => {
     o || null != u || h.colorProfilePreference !== _$$M2.DEFAULT || (p(_$$M2.DISPLAY_P3), b(_$$M2.DISPLAY_P3, {
@@ -852,7 +852,7 @@ function tr() {
     currentStep,
     isShowing: e.isShowing,
     children: [jsx(_$$h, {
-      ctaText: _$$tx("general.next"),
+      ctaText: renderI18nText("general.next"),
       element: tn,
       isShowing: e.isShowing,
       modalType: q3.ANNOUNCEMENT_POINTER,
@@ -865,16 +865,16 @@ function tr() {
       onboardingKey: te,
       stepCounter: jsx("span", {
         className: e7,
-        children: _$$tx("fullscreen.color_management.curator.step_1of2")
+        children: renderI18nText("fullscreen.color_management.curator.step_1of2")
       }),
       title: jsx(Fragment, {
-        children: _$$tx("fullscreen.color_management.curator.default_to_p3.user_color_profile.title")
+        children: renderI18nText("fullscreen.color_management.curator.default_to_p3.user_color_profile.title")
       }),
       trackingContextName: ti,
       userFlagOnShow: e9,
       width: 300
     }), jsx(_$$h, {
-      ctaText: _$$tx("general.got_it"),
+      ctaText: renderI18nText("general.got_it"),
       element: ta,
       isShowing: e.isShowing,
       modalType: q3.ANNOUNCEMENT_POINTER,
@@ -891,14 +891,14 @@ function tr() {
       preventDismissOnClickSecondaryCta: !0,
       secondaryCtaText: jsx("div", {
         onClick: back,
-        children: _$$tx("general.previous")
+        children: renderI18nText("general.previous")
       }),
       stepCounter: jsx("span", {
         className: e7,
-        children: _$$tx("fullscreen.color_management.curator.step_2of2")
+        children: renderI18nText("fullscreen.color_management.curator.step_2of2")
       }),
       title: jsx(Fragment, {
-        children: _$$tx("fullscreen.color_management.curator.change_document_color_profile.title")
+        children: renderI18nText("fullscreen.color_management.curator.change_document_color_profile.title")
       }),
       trackingContextName: ti,
       userFlagOnShow: e9,
@@ -909,28 +909,28 @@ function tr() {
 function tn() {
   return jsxs("p", {
     className: e8,
-    children: [_$$tx("fullscreen.color_management.curator.default_to_p3.user_color_profile.content", {
+    children: [renderI18nText("fullscreen.color_management.curator.default_to_p3.user_color_profile.content", {
       colorProfileSetting: jsx("strong", {
-        children: _$$tx("fullscreen.color_management.curator.color_profile_setting")
+        children: renderI18nText("fullscreen.color_management.curator.color_profile_setting")
       })
     }), " ", jsx(_$$N2, {
       newTab: !0,
       href: _$$s2,
-      children: _$$tx("rcs.rcs_shared.learn_more")
+      children: renderI18nText("rcs.rcs_shared.learn_more")
     })]
   });
 }
 function ta() {
   return jsxs("p", {
     className: e8,
-    children: [_$$tx("fullscreen.color_management.curator.change_document_color_profile.content", {
+    children: [renderI18nText("fullscreen.color_management.curator.change_document_color_profile.content", {
       fileColorProfile: jsx("strong", {
-        children: _$$tx("fullscreen.color_management.curator.file_color_profile")
+        children: renderI18nText("fullscreen.color_management.curator.file_color_profile")
       })
     }), " ", jsx(_$$N2, {
       newTab: !0,
       href: _$$s2,
-      children: _$$tx("rcs.rcs_shared.learn_more")
+      children: renderI18nText("rcs.rcs_shared.learn_more")
     })]
   });
 }
@@ -938,7 +938,7 @@ function ts() {
   let [e] = jJ();
   let t = e4();
   let i = e5();
-  let [r, a] = fp(e6);
+  let [r, a] = useAtomValueAndSetter(e6);
   let o = jK();
   let l = C$();
   useEffect(() => {
@@ -959,7 +959,7 @@ function to() {
       let i = e5();
       return t && i && ["unmanaged", "default", null].includes(e) ? _$$M2.DISPLAY_P3 : _$$M2.SRGB;
     }();
-    let [i] = fp(e6);
+    let [i] = useAtomValueAndSetter(e6);
     return e && null === i ? 0 : t === _$$M2.SRGB ? 1 : t === _$$M2.DISPLAY_P3 ? 2 : 0;
   }();
   if (!function (e) {
@@ -1021,7 +1021,7 @@ function th() {
       onboardingKey: v4,
       title: jsx("div", {
         className: _$$s.font13.fontMedium.pl8.pt16.pb16.$,
-        children: _$$tx("whiteboard.inserts.custom_templates_header")
+        children: renderI18nText("whiteboard.inserts.custom_templates_header")
       }),
       width: 300,
       disableFooter: !0,
@@ -1038,10 +1038,10 @@ let tx = _$$r2("seen_desktop_download_modal_prompt");
 let ty = _$$r2("seen_desktop_download_modal_prompt_v2");
 let tb = _$$tH("used_desktop_app");
 function tC() {
-  let e = md(tx);
-  let t = md(ty);
-  let i = md(_$$mp);
-  let n = md(tb);
+  let e = useAtomWithSubscription(tx);
+  let t = useAtomWithSubscription(ty);
+  let i = useAtomWithSubscription(_$$mp);
+  let n = useAtomWithSubscription(tb);
   let l = getFeatureFlags().desktop_show_download_prompt;
   let {
     isShowing,
@@ -1052,7 +1052,7 @@ function tC() {
     priority: _$$N.DEFAULT_MODAL
   }, [t, e, i]);
   if (_$$h2(() => {
-    _$$eD || n || !l || show({
+    desktopAPIInstance || n || !l || show({
       canShow: (e, t, i) => function (e) {
         let t = Date.now();
         return e.getTime() <= t - 12096e5;
@@ -1063,7 +1063,7 @@ function tC() {
     complete();
   };
   return jsx(_$$X, {
-    description: _$$tx("desktop_download_modal_prompt.level_up_your_workflow_with_tabs"),
+    description: renderI18nText("desktop_download_modal_prompt.level_up_your_workflow_with_tabs"),
     isShowing,
     media: jsx(_$$y, {
       aspectRatio: 1.75,
@@ -1073,22 +1073,22 @@ function tC() {
     onClose: p,
     position: _$$Q.BOTTOM_RIGHT,
     primaryCta: {
-      label: _$$tx("desktop_download_modal_prompt.get_the_desktop_app"),
+      label: renderI18nText("desktop_download_modal_prompt.get_the_desktop_app"),
       type: "button",
       onClick: () => {
-        _$$sx("desktop_modal_download_prompt_cta_clicked_v2");
+        trackEventAnalytics("desktop_modal_download_prompt_cta_clicked_v2");
         p();
-        _$$Ay2.redirect(`/download/desktop/${Ay.mac ? "mac" : "win"}`, "_blank");
+        _$$Ay2.redirect(`/download/desktop/${BrowserInfo.mac ? "mac" : "win"}`, "_blank");
       },
       ctaTrackingDescriptor: _$$c.DESKTOP_APP_DOWNLOAD
     },
     secondaryCta: {
-      label: _$$tx("desktop_download_modal_prompt.learn_more"),
+      label: renderI18nText("desktop_download_modal_prompt.learn_more"),
       type: "link",
       href: "https://help.figma.com/hc/articles/5601429983767-Guide-to-the-Figma-desktop-app",
       ctaTrackingDescriptor: _$$c.LEARN_MORE
     },
-    title: _$$tx("desktop_download_modal_prompt.download_the_figma_desktop_app"),
+    title: renderI18nText("desktop_download_modal_prompt.download_the_figma_desktop_app"),
     trackingContextName: "Desktop Download Modal Prompt",
     userFlagOnShow: "seen_desktop_download_modal_prompt_v2"
   });
@@ -1121,8 +1121,8 @@ function tD() {
   let o = useSelector(e => !zP(e.mirror.appModel.currentTool));
   let l = Uj(t, e || "");
   let d = Fu("interacted_figjam_whats_new_v2_cta");
-  let c = md(d);
-  let u = md(wg);
+  let c = useAtomWithSubscription(d);
+  let u = useAtomWithSubscription(wg);
   let [h, m] = useState(!1);
   let _ = _$$e({
     overlay: hsL,
@@ -1178,19 +1178,19 @@ function tV({
       className: "figjam_try_confirm_save_steps--textContent--9da6-",
       children: [jsx("h1", {
         className: "figjam_try_confirm_save_steps--headline--RRPzl text--fontPos20--Bcz97 text--_fontBase--QdLsd",
-        children: _$$tx("figjam_try.save_modal.headline")
+        children: renderI18nText("figjam_try.save_modal.headline")
       }), jsx(_$$k2, {
         multiple: 1
       }), jsx("p", {
         className: "figjam_try_confirm_save_steps--description--bpGw9 text--fontPos13--xW8hS text--_fontBase--QdLsd",
-        children: u ? _$$tx("figjam_try.save_modal.new_team") : _$$tx("figjam_try.save_modal.save_one_team", {
+        children: u ? renderI18nText("figjam_try.save_modal.new_team") : renderI18nText("figjam_try.save_modal.save_one_team", {
           share: jsx("p", {
             className: tz,
-            children: _$$tx("figjam_try.save_modal.share")
+            children: renderI18nText("figjam_try.save_modal.share")
           }),
           file_duplicate: jsx("p", {
             className: tz,
-            children: _$$tx("figjam_try.save_modal.file_duplicates")
+            children: renderI18nText("figjam_try.save_modal.file_duplicates")
           })
         })
       }), jsx(_$$k2, {
@@ -1209,7 +1209,7 @@ function tV({
         },
         children: jsx(_$$x, {
           isLoading: d,
-          children: () => _$$tx("figjam_try.save_modal.cta")
+          children: () => renderI18nText("figjam_try.save_modal.cta")
         })
       })]
     })
@@ -1220,7 +1220,7 @@ function tW() {
     overlay: JGK,
     priority: _$$N.HIGH_PRIORITY_MODAL
   });
-  let t = md(yV);
+  let t = useAtomWithSubscription(yV);
   let i = t?.isTryFile;
   let a = _$$s3();
   let [o, l] = useState(!1);
@@ -1257,11 +1257,11 @@ function tQ() {
     overlay: XAb,
     priority: _$$N.HIGH_PRIORITY_MODAL
   });
-  let l = md(yV);
+  let l = useAtomWithSubscription(yV);
   let d = l?.isTryFile;
   let c = _$$s3();
   let u = QL(_$$ao.key) === _$$ao.value;
-  let p = md(_$$N4);
+  let p = useAtomWithSubscription(_$$N4);
   useEffect(() => {
     !e && u && !d && "loaded" === c.status && _$$oA(c.data?.deviceTryFile)?.claimedAt && _$$oA(c.data?.deviceTryFile)?.claimedByUserId !== p.data && show();
   }, [e, d, u, c, show, p]);
@@ -1294,7 +1294,7 @@ function t$(e) {
             className: tZ,
             children: jsx("h1", {
               className: "figjam_try_confirm_save--googleTryDeviceAlreadyClaimedHeader--vNLRA text--fontPos20--Bcz97 text--_fontBase--QdLsd",
-              children: _$$tx("figjam_try.already_claimed_modal.header")
+              children: renderI18nText("figjam_try.already_claimed_modal.header")
             })
           }), jsx(_$$k2, {
             multiple: 1
@@ -1302,10 +1302,10 @@ function t$(e) {
             className: tZ,
             children: jsx("div", {
               className: "figjam_try_confirm_save--googleTryDeviceAlreadyClaimedDescription--WXdx- text--fontPos13--xW8hS text--_fontBase--QdLsd",
-              children: _$$tx("figjam_try.already_claimed_modal.description", {
+              children: renderI18nText("figjam_try.already_claimed_modal.description", {
                 file_duplicate: jsx("p", {
                   className: "figjam_try_confirm_save--googleTryDeviceAlreadyClaimedDescriptionBold--CZgl4",
-                  children: _$$tx("figjam_try.already_claimed_modal.file_duplicate")
+                  children: renderI18nText("figjam_try.already_claimed_modal.file_duplicate")
                 })
               })
             })
@@ -1313,7 +1313,7 @@ function t$(e) {
             multiple: 3
           }), jsx(lR, {
             onClick: e.onClose,
-            children: _$$tx("figjam_try.already_claimed_modal.continue")
+            children: renderI18nText("figjam_try.already_claimed_modal.continue")
           })]
         })
       })
@@ -1324,12 +1324,12 @@ let t5 = _$$r2(USER_FLAG_V2);
 let t4 = _$$tH("last_figjam_at");
 let t6 = _$$r2("dont_show_figjam_updates_in_figma_design");
 function t7() {
-  let e = md(t6);
-  let t = md(wg);
-  let i = md(_$$mp);
-  let n = md(t4);
-  let a = md(t5);
-  let o = md(Ot);
+  let e = useAtomWithSubscription(t6);
+  let t = useAtomWithSubscription(wg);
+  let i = useAtomWithSubscription(_$$mp);
+  let n = useAtomWithSubscription(t4);
+  let a = useAtomWithSubscription(t5);
+  let o = useAtomWithSubscription(Ot);
   let l = jO();
   let d = _$$e({
     overlay: Ttn,
@@ -1377,10 +1377,10 @@ function ir() {
   return jsx(_l, {
     isShowing,
     title: jsx(Fragment, {
-      children: _$$tx("fullscreen.glass_onboarding.title")
+      children: renderI18nText("fullscreen.glass_onboarding.title")
     }),
     description: jsx(Fragment, {
-      children: _$$tx("fullscreen.glass_onboarding.body")
+      children: renderI18nText("fullscreen.glass_onboarding.body")
     }),
     media: jsx("div", {
       style: {
@@ -1402,14 +1402,14 @@ function ir() {
     primaryCta: isDevEnvironment() ? {
       type: "link",
       label: jsx(Fragment, {
-        children: _$$tx("fullscreen.glass_onboarding.cta_playground")
+        children: renderI18nText("fullscreen.glass_onboarding.cta_playground")
       }),
       ctaTrackingDescriptor: _$$c.TRY_IT_OUT,
       href: "https://www.figma.com/community/file/1522715486231239473"
     } : {
       type: "button",
       label: jsx(Fragment, {
-        children: _$$tx("fullscreen.glass_onboarding.cta_playground")
+        children: renderI18nText("fullscreen.glass_onboarding.cta_playground")
       }),
       ctaTrackingDescriptor: _$$c.TRY_IT_OUT,
       onClick: () => {
@@ -1418,7 +1418,7 @@ function ir() {
             file: {
               key: t
             },
-            name: _$$t("fullscreen.glass_onboarding.glass_playground_file")
+            name: getI18nString("fullscreen.glass_onboarding.glass_playground_file")
           })), complete());
         });
       }
@@ -1426,7 +1426,7 @@ function ir() {
     secondaryCta: {
       type: "link",
       label: jsx(Fragment, {
-        children: _$$tx("fullscreen.glass_onboarding.cta_ui_kit")
+        children: renderI18nText("fullscreen.glass_onboarding.cta_ui_kit")
       }),
       ctaTrackingDescriptor: _$$c.TRY_IT_OUT,
       href: "https://www.figma.com/community/file/1527721578857867021"
@@ -1440,10 +1440,10 @@ function ic() {
   let e = useDispatch();
   let t = useSelector(e => e.currentTeamId);
   let i = useStore();
-  let a = md(_$$t2);
-  let o = md(NZ);
+  let a = useAtomWithSubscription(_$$t2);
+  let o = useAtomWithSubscription(NZ);
   let l = jO();
-  let d = md(wg);
+  let d = useAtomWithSubscription(wg);
   let {
     getConfig
   } = I7("exp_library_upsells_v2");
@@ -1484,13 +1484,13 @@ function ic() {
   _$$E2(uniqueId, "component_instance_inserted", x);
   return jsx(_$$rq, {
     arrowPosition: F_.LEFT_TITLE,
-    description: _$$tx("rcs.upsell_libraries.quickly_access_components"),
+    description: renderI18nText("rcs.upsell_libraries.quickly_access_components"),
     emphasized: !0,
     isShowing,
     onClose: b,
     onTargetLost: b,
     primaryCta: {
-      label: _$$tx("rcs.upsell_libraries.see_plans"),
+      label: renderI18nText("rcs.upsell_libraries.see_plans"),
       type: "button",
       onClick: () => {
         e(_$$to({
@@ -1506,13 +1506,13 @@ function ic() {
       ctaTrackingDescriptor: _$$c.GOT_IT
     },
     secondaryCta: {
-      label: _$$tx("rcs.upsell_libraries.not_now"),
+      label: renderI18nText("rcs.upsell_libraries.not_now"),
       type: "button",
       onClick: b,
       ctaTrackingDescriptor: _$$c.GOT_IT
     },
     targetKey: _$$D,
-    title: _$$tx("rcs.upsell_libraries.reuse_components_across_all_files"),
+    title: renderI18nText("rcs.upsell_libraries.reuse_components_across_all_files"),
     trackingContextName: "Upsell Libraries Reuse Components Overlay"
   });
 }
@@ -1520,7 +1520,7 @@ let im = "seen_link_shortcut_overlay";
 let ig = _$$r2(im);
 function i_() {
   let e = useDispatch();
-  let t = _$$md(ig);
+  let t = useAtomValue(ig);
   let {
     show,
     isShowing,
@@ -1546,21 +1546,21 @@ function i_() {
   });
   return jsx(_$$X, {
     description: jsxs("div", {
-      children: [_$$tx("fullscreen.link_shortcuts_onboarding.description"), jsxs("ul", {
+      children: [renderI18nText("fullscreen.link_shortcuts_onboarding.description"), jsxs("ul", {
         className: _$$s.py8.$,
         style: _$$sx2.add({
           listStyle: "disc inside"
         }).$,
         children: [jsx("li", {
-          children: _$$tx("fullscreen.link_shortcuts_onboarding.show_actions_updated", {
+          children: renderI18nText("fullscreen.link_shortcuts_onboarding.show_actions_updated", {
             actionsKeyCommand: jsx("strong", {
               children: d
             })
           })
         }), jsx("li", {
-          children: _$$tx("fullscreen.link_shortcuts_onboarding.show_links_updated", {
+          children: renderI18nText("fullscreen.link_shortcuts_onboarding.show_links_updated", {
             link: jsx("strong", {
-              children: _$$tx("fullscreen.link_shortcuts_onboarding.create_link")
+              children: renderI18nText("fullscreen.link_shortcuts_onboarding.create_link")
             }),
             linkKeyCommand: c
           })
@@ -1571,13 +1571,13 @@ function i_() {
     onClose: complete,
     position: _$$Q.BOTTOM_RIGHT,
     primaryCta: {
-      label: _$$tx("fullscreen.link_shortcuts_onboarding.got_it"),
+      label: renderI18nText("fullscreen.link_shortcuts_onboarding.got_it"),
       type: "button",
       onClick: complete,
       ctaTrackingDescriptor: _$$c.GOT_IT
     },
     testId: "linkShortcutOverlay",
-    title: _$$tx("fullscreen.link_shortcuts_onboarding.title"),
+    title: renderI18nText("fullscreen.link_shortcuts_onboarding.title"),
     trackingContextName: "Link Shortcuts Preference Onboarding Modal",
     userFlagOnShow: im,
     width: 350
@@ -1589,11 +1589,11 @@ let iT = _$$r2(iE);
 function iw() {
   let e = useDispatch();
   let t = TA();
-  let i = md(wg);
-  let a = md(iT);
-  let o = md(NZ);
-  let l = md(pQ);
-  let d = md(_$$t2);
+  let i = useAtomWithSubscription(wg);
+  let a = useAtomWithSubscription(iT);
+  let o = useAtomWithSubscription(NZ);
+  let l = useAtomWithSubscription(pQ);
+  let d = useAtomWithSubscription(_$$t2);
   let c = jO();
   let u = q5()?.teamId == null;
   let {
@@ -1628,16 +1628,16 @@ function iw() {
     description: jsxs(Fragment, {
       children: [jsx("div", {
         className: _$$s.pt6.mr36.$,
-        children: u ? _$$tx("design_systems.assets_panel.drag_drop_component_draft") : _$$tx("design_systems.assets_panel.drag_drop_component")
+        children: u ? renderI18nText("design_systems.assets_panel.drag_drop_component_draft") : renderI18nText("design_systems.assets_panel.drag_drop_component")
       }), jsx(Jn, {
         onClick: v,
-        innerText: _$$t("general.close"),
-        "aria-label": _$$t("general.close"),
+        innerText: getI18nString("general.close"),
+        "aria-label": getI18nString("general.close"),
         className: iy()(Rf, _$$s.absolute.top0.right0.mr8.mt10.$)
       })]
     }),
     primaryCta: {
-      label: _$$tx("design_systems.assets_panel.got_it"),
+      label: renderI18nText("design_systems.assets_panel.got_it"),
       type: "button",
       onClick: v,
       ctaTrackingDescriptor: _$$c.GOT_IT
@@ -1652,7 +1652,7 @@ function iw() {
 let iI = _$$r2("seen_mobile_comment_download_modal_prompt");
 function ik() {
   let e = useDispatch();
-  let t = md(iI);
+  let t = useAtomWithSubscription(iI);
   let i = useSelector(e => e.userAnalyticsData?.is_active_mobile_user);
   let o = useSelector(e => e.user?.created_at);
   let l = _$$A3(o).add(14, "day").isSameOrAfter(_$$A3());
@@ -1674,14 +1674,14 @@ function ik() {
     XHR.post("/api/send_mobile_download_email", {
       type: "comment"
     });
-    _$$sx("post_comment_mobile_app_download_prompt_email_me_cta_clicked");
+    trackEventAnalytics("post_comment_mobile_app_download_prompt_email_me_cta_clicked");
     complete();
     e(_$$F.enqueue({
-      message: _$$t("rcs.mobile_comment_reply_upsell.email_sent")
+      message: getI18nString("rcs.mobile_comment_reply_upsell.email_sent")
     }));
   };
   return jsx(_$$X, {
-    description: _$$tx("mobile_download_prompts.scan_the_qr_code"),
+    description: renderI18nText("mobile_download_prompts.scan_the_qr_code"),
     isShowing,
     media: jsx(_$$y, {
       aspectRatio: 1.75,
@@ -1693,18 +1693,18 @@ function ik() {
     },
     position: _$$Q.BOTTOM_RIGHT,
     primaryCta: {
-      label: _$$tx("mobile_download_prompts.email_me"),
+      label: renderI18nText("mobile_download_prompts.email_me"),
       type: "button",
       onClick: () => m(),
       ctaTrackingDescriptor: _$$c.MOBILE_APP_DOWNLOAD_COMMENT_PROMPT_CLICKED
     },
     secondaryCta: {
-      label: _$$tx("mobile_download_prompts.learn_more"),
+      label: renderI18nText("mobile_download_prompts.learn_more"),
       type: "link",
       href: "https://help.figma.com/hc/articles/1500007537281-Guide-to-the-Figma-mobile-app",
       ctaTrackingDescriptor: _$$c.LEARN_MORE
     },
-    title: _$$tx("mobile_download_prompts.never_miss_a_comment"),
+    title: renderI18nText("mobile_download_prompts.never_miss_a_comment"),
     trackingContextName: "Mobile Comment Download Modal Prompt",
     userFlagOnShow: "seen_mobile_comment_download_modal_prompt"
   });
@@ -1724,7 +1724,7 @@ let iq = "onboard_figjam_viewer--bold--kC3mV";
 class iX extends PureComponent {
   render() {
     let e = jsxs(Fragment, {
-      children: [this.props.buttonText, !this.props.buttonText && this.props.steps && this.props.steps.current === this.props.steps.total && _$$tx("rcs.rcs_shared.done"), !this.props.buttonText && this.props.steps && this.props.steps.current < this.props.steps.total && _$$tx("rcs.figjam_onboarding.next")]
+      children: [this.props.buttonText, !this.props.buttonText && this.props.steps && this.props.steps.current === this.props.steps.total && renderI18nText("rcs.rcs_shared.done"), !this.props.buttonText && this.props.steps && this.props.steps.current < this.props.steps.total && renderI18nText("rcs.figjam_onboarding.next")]
     });
     return jsxs("div", {
       className: iz,
@@ -1761,7 +1761,7 @@ class iX extends PureComponent {
               [iJ]: !this.props.isBold,
               [iq]: !!this.props.isBold
             }),
-            children: this.props.steps ? _$$tx("rcs.rcs_shared.step_counter", {
+            children: this.props.steps ? renderI18nText("rcs.rcs_shared.step_counter", {
               currentStepNum: this.props.steps.current,
               totalNumSteps: this.props.steps.total
             }) : jsx(Fragment, {})
@@ -1778,7 +1778,7 @@ class iX extends PureComponent {
         className: "onboard_figjam_viewer--closeButton--hm43f",
         children: jsx(_$$K, {
           onClick: this.props.onDismiss,
-          "aria-label": _$$t("modal.close"),
+          "aria-label": getI18nString("modal.close"),
           children: jsx(_$$A, {
             className: this.props.isBold ? iq : void 0
           })
@@ -1806,9 +1806,9 @@ function i$(e) {
       hasShadow: e.hasShadow,
       children: jsx(iX, {
         bodyText: jsx("span", {
-          children: _$$tx("rcs.figjam_onboarding.use_the_hand_tool_and_drag_to_move_around_hold_space_to_activate_it_anytime", {
+          children: renderI18nText("rcs.figjam_onboarding.use_the_hand_tool_and_drag_to_move_around_hold_space_to_activate_it_anytime", {
             spaceKey: jsx("b", {
-              children: _$$tx("rcs.figjam_onboarding.space")
+              children: renderI18nText("rcs.figjam_onboarding.space")
             })
           })
         }),
@@ -1830,7 +1830,7 @@ function i$(e) {
 }
 let i1 = buildUploadUrl("4e36d3bbbf8633fef1b86238f66bb1bf54f54d2a");
 function i2(e) {
-  let t = Ay.mac ? _$$t("rcs.figjam_onboarding.cmd") : _$$t("rcs.figjam_onboarding.ctrl");
+  let t = BrowserInfo.mac ? getI18nString("rcs.figjam_onboarding.cmd") : getI18nString("rcs.figjam_onboarding.ctrl");
   let i = _$$v3() ? -10 : -3;
   let a = Un();
   let s = _$$O2();
@@ -1847,12 +1847,12 @@ function i2(e) {
       hasShadow: e.hasShadow,
       children: jsx(iX, {
         bodyText: jsx("span", {
-          children: _$$tx("rcs.figjam_onboarding.pinch_to_zoom_on_a_trackpad_hold_command_while_scrolling_or_use", {
+          children: renderI18nText("rcs.figjam_onboarding.pinch_to_zoom_on_a_trackpad_hold_command_while_scrolling_or_use", {
             commandKey: jsx("b", {
               children: t
             }),
             plusOrMinusKeys: jsx("b", {
-              children: _$$tx("rcs.figjam_onboarding.plus_or_minus")
+              children: renderI18nText("rcs.figjam_onboarding.plus_or_minus")
             })
           })
         }),
@@ -1912,7 +1912,7 @@ let i6 = [i3, i5, function (e) {
         topPadding: -6,
         children: jsx(iX, {
           bodyText: jsx("span", {
-            children: _$$tx("rcs.figjam_onboarding.invite_others_or_share_this_file_with_a_link_to_jam_with_your_team")
+            children: renderI18nText("rcs.figjam_onboarding.invite_others_or_share_this_file_with_a_link_to_jam_with_your_team")
           }),
           onNext: e.onClickPrimaryCta,
           steps: {
@@ -1936,7 +1936,7 @@ function ra({
   let t = _$$aV();
   let i = lg();
   let r = q5();
-  let a = md(_$$mp);
+  let a = useAtomWithSubscription(_$$mp);
   let o = Rs(KMT, {
     currentOrgId: r?.parentOrgId || null
   });
@@ -1968,9 +1968,9 @@ function ro({
         autoWidth: !0,
         children: jsx(iX, {
           isBold: !0,
-          titleText: _$$tx("whiteboard.google_classroom.onboarding.new_user.header"),
-          bodyText: _$$tx("whiteboard.google_classroom.onboarding.new_user.body"),
-          buttonText: _$$tx("whiteboard.google_classroom.onboarding.show_me"),
+          titleText: renderI18nText("whiteboard.google_classroom.onboarding.new_user.header"),
+          bodyText: renderI18nText("whiteboard.google_classroom.onboarding.new_user.body"),
+          buttonText: renderI18nText("whiteboard.google_classroom.onboarding.show_me"),
           onNext: t,
           onDismiss: i,
           imgSrc: rs,
@@ -1988,7 +1988,7 @@ function rl({
     arrowPosition: F_.LEFT_TITLE,
     clickOutsideToHide: !0,
     description: jsx("div", {
-      children: _$$tx("whiteboard.google_classroom.pointer.body")
+      children: renderI18nText("whiteboard.google_classroom.pointer.body")
     }),
     disableHighlight: !0,
     emphasized: !0,
@@ -2012,10 +2012,10 @@ function rg() {
   let t = ra({
     skipAccountCreationDateCheck: !0
   });
-  let i = md(rc);
-  let a = md(rp);
-  let o = md(rh);
-  let l = md(Ij);
+  let i = useAtomWithSubscription(rc);
+  let a = useAtomWithSubscription(rp);
+  let o = useAtomWithSubscription(rh);
+  let l = useAtomWithSubscription(Ij);
   let {
     show,
     isShowing,
@@ -4191,7 +4191,7 @@ let ni = e => {
     e.onUseCasePreview?.(t, r);
   }
   let C = [{
-    headerText: _$$t("figjam_onboarding_make_something.templates_modal.button_title.brainstorm"),
+    headerText: getI18nString("figjam_onboarding_make_something.templates_modal.button_title.brainstorm"),
     headerIcon: _$$A9,
     previewSvg: e => jsx(r0, {
       hovered: e
@@ -4199,7 +4199,7 @@ let ni = e => {
     useCase: fD.BRAINSTORM,
     previewType: KpW.MAKE_SOMETHING_BRAINSTORM
   }, {
-    headerText: _$$t("figjam_onboarding_make_something.templates_modal.button_title.team_updates"),
+    headerText: getI18nString("figjam_onboarding_make_something.templates_modal.button_title.team_updates"),
     headerIcon: _$$A10,
     previewSvg: e => jsx(r3, {
       hovered: e
@@ -4207,7 +4207,7 @@ let ni = e => {
     useCase: fD.UPDATES,
     previewType: KpW.MAKE_SOMETHING_TEAM_UPDATES
   }, {
-    headerText: _$$t("figjam_onboarding_make_something.templates_modal.button_title.planning_ahead"),
+    headerText: getI18nString("figjam_onboarding_make_something.templates_modal.button_title.planning_ahead"),
     headerIcon: _$$A0,
     previewSvg: e => jsx(r2, {
       hovered: e
@@ -4215,7 +4215,7 @@ let ni = e => {
     useCase: fD.PLAN,
     previewType: KpW.MAKE_SOMETHING_PLANNING
   }, {
-    headerText: _$$t("figjam_onboarding_make_something.templates_modal.button_title.team_chart"),
+    headerText: getI18nString("figjam_onboarding_make_something.templates_modal.button_title.team_chart"),
     headerIcon: _$$A1,
     previewSvg: e => jsx(r1, {
       hovered: e
@@ -4347,7 +4347,7 @@ let nn = _$$n2(({
         selectTemplateAfterInsertion: !1
       });
       i(_$$F.enqueue({
-        message: _$$t("figjam_onboarding_make_something.visual_bell.loading_template"),
+        message: getI18nString("figjam_onboarding_make_something.visual_bell.loading_template"),
         icon: zX.SPINNER,
         type: nt
       }));
@@ -4488,7 +4488,7 @@ function ns(e) {
           }),
           children: jsx(Me, {
             onClick: onClickCloseButton,
-            "aria-label": _$$t("general.close"),
+            "aria-label": getI18nString("general.close"),
             trackingEventName: "modal closed",
             htmlAttributes: {
               "data-testid": "MakeSomethingCloseButton"
@@ -4503,10 +4503,10 @@ function ns(e) {
             }),
             children: [jsx("div", {
               className: "browse_templates_make_something_onboarding--title--OqmHP text--fontPos20Whyte--o3mBO text--_fontBaseWhyte--efAjI",
-              children: _$$tx("figjam_onboarding_make_something.templates_modal.main_title")
+              children: renderI18nText("figjam_onboarding_make_something.templates_modal.main_title")
             }), jsx("div", {
               className: "browse_templates_make_something_onboarding--subtitle--T-kBc text--fontPos14Whyte--pEiDq text--_fontBaseWhyte--efAjI",
-              children: _$$tx("figjam_onboarding_make_something.templates_modal.main_subtitle")
+              children: renderI18nText("figjam_onboarding_make_something.templates_modal.main_subtitle")
             }), jsx("div", {
               className: "browse_templates_make_something_onboarding--templateButtonContainer--ey3hb",
               children: jsx("div", {
@@ -4520,13 +4520,13 @@ function ns(e) {
                     onFocus: y
                   },
                   autoFocus: !1,
-                  children: _$$tx("figjam_onboarding_make_something.templates_modal.button_title.templates_button")
+                  children: renderI18nText("figjam_onboarding_make_something.templates_modal.button_title.templates_button")
                 })
               })
             })]
           }), jsx("div", {
             "aria-activedescendant": hoveredUseCase,
-            "aria-label": _$$t("figjam_onboarding_make_something.use_case_listbox.aria_label"),
+            "aria-label": getI18nString("figjam_onboarding_make_something.use_case_listbox.aria_label"),
             "aria-orientation": "horizontal",
             className: "browse_templates_make_something_onboarding--listItems--57vh3",
             onKeyDown: onListBoxKeydown,
@@ -4650,10 +4650,10 @@ function no(e) {
           className: "browse_templates_make_something_onboarding--popupHeader--gqTTZ",
           children: [jsx("div", {
             className: "browse_templates_make_something_onboarding--popupTitle--qSiMo text--fontPos14Whyte--pEiDq text--_fontBaseWhyte--efAjI",
-            children: _$$tx("figjam_onboarding_make_something.popup.title")
+            children: renderI18nText("figjam_onboarding_make_something.popup.title")
           }), jsx(Me, {
             onClick: onClickCloseButton,
-            "aria-label": _$$t("general.close"),
+            "aria-label": getI18nString("general.close"),
             trackingEventName: "modal closed",
             htmlAttributes: {
               "data-testid": "MakeSomethingCloseButton"
@@ -4664,7 +4664,7 @@ function no(e) {
           className: _$$s.pt8.pr12.pb12.pl12.$,
           children: [jsx("div", {
             "aria-activedescendant": hoveredUseCase,
-            "aria-label": _$$t("figjam_onboarding_make_something.use_case_listbox.aria_label"),
+            "aria-label": getI18nString("figjam_onboarding_make_something.use_case_listbox.aria_label"),
             "aria-orientation": "vertical",
             onKeyDown: onListBoxKeydown,
             role: "listbox",
@@ -4707,7 +4707,7 @@ function no(e) {
               onFocus: () => setHoveredUseCase(fD.NONE),
               onMouseEnter: () => setHoveredUseCase(fD.NONE)
             },
-            children: _$$tx("figjam_onboarding_make_something.templates_modal.button_title.templates_button")
+            children: renderI18nText("figjam_onboarding_make_something.templates_modal.button_title.templates_button")
           })]
         })]
       })
@@ -4719,7 +4719,7 @@ function nl() {
     insert,
     canInsert
   } = nn();
-  let [i, r] = fp(l5);
+  let [i, r] = useAtomValueAndSetter(l5);
   let a = useRef(!1);
   useEffect(() => {
     canInsert && i !== fD.NONE && !a.current && (insert(i), a.current = !0);
@@ -4745,13 +4745,13 @@ function nu(e) {
     children: jsx(mI, {
       bodyText: jsx("span", {
         className: RL,
-        children: _$$tx("figjam_onboarding_make_something.templates_toolbar_connector.body_text", {
+        children: renderI18nText("figjam_onboarding_make_something.templates_toolbar_connector.body_text", {
           boldText: jsx("b", {
-            children: _$$tx("figjam_onboarding_make_something.templates_toolbar_connector.body_text_bold")
+            children: renderI18nText("figjam_onboarding_make_something.templates_toolbar_connector.body_text_bold")
           })
         })
       }),
-      buttonText: _$$tx("figjam_onboarding_make_something.templates_toolbar_connector.done_button"),
+      buttonText: renderI18nText("figjam_onboarding_make_something.templates_toolbar_connector.done_button"),
       onButtonClick: e.onClickPrimaryCta
     })
   });
@@ -4767,17 +4767,17 @@ function np(e) {
     children: jsx(mI, {
       titleText: jsx("span", {
         className: "browse_templates_make_something_onboarding--tooltipTitle--EmYZQ",
-        children: _$$tx("figjam_onboarding_make_something.templates_toolbar_onboarding_finished_connector.title_want_to_try_something_else")
+        children: renderI18nText("figjam_onboarding_make_something.templates_toolbar_onboarding_finished_connector.title_want_to_try_something_else")
       }),
       bodyText: jsx("span", {
         className: $s,
-        children: _$$tx("figjam_onboarding_make_something.templates_toolbar_onboarding_finished_connector.body_text", {
+        children: renderI18nText("figjam_onboarding_make_something.templates_toolbar_onboarding_finished_connector.body_text", {
           boldText: jsx("b", {
-            children: _$$tx("figjam_onboarding_make_something.templates_toolbar_onboarding_finished_connector.body_text_bold")
+            children: renderI18nText("figjam_onboarding_make_something.templates_toolbar_onboarding_finished_connector.body_text_bold")
           })
         })
       }),
-      buttonText: _$$tx("figjam_onboarding_make_something.templates_toolbar_connector.done_button"),
+      buttonText: renderI18nText("figjam_onboarding_make_something.templates_toolbar_connector.done_button"),
       onButtonClick: e.onClickPrimaryCta
     })
   });
@@ -4811,7 +4811,7 @@ function ng(e) {
 }
 let n_ = [i3, i5];
 function nx() {
-  let e = md(Am);
+  let e = useAtomWithSubscription(Am);
   let {
     show,
     uniqueId,
@@ -4841,8 +4841,8 @@ function nx() {
   });
 }
 function ny() {
-  let e = md(Am);
-  let t = md(_$$w5);
+  let e = useAtomWithSubscription(Am);
+  let t = useAtomWithSubscription(_$$w5);
   let {
     show,
     uniqueId,
@@ -4898,13 +4898,13 @@ function nR(e) {
             className: iy()(iY, iJ),
             children: [jsx("div", {
               className: "onboard_figjam_viewer--openTutorialModalText--9oABQ onboard_figjam_viewer--text--xkcTB",
-              children: _$$tx("rcs.figjam_onboarding.for_more_tips_and_tricks_here_s_a_2_minute_hands_on_tutorial")
+              children: renderI18nText("rcs.figjam_onboarding.for_more_tips_and_tricks_here_s_a_2_minute_hands_on_tutorial")
             }), jsxs("div", {
               className: "onboard_figjam_viewer--openTutorialBottomContentRow--rVWqG onboard_figjam_viewer--bottomContentRow--PgTeU",
               children: [jsx($n, {
                 variant: "ghost",
                 onClick: e.dismissModal,
-                children: _$$tx("rcs.figjam_onboarding.maybe_later")
+                children: renderI18nText("rcs.figjam_onboarding.maybe_later")
               }), jsx("div", {
                 className: "onboard_figjam_viewer--openTutorialButton--4AqFo",
                 children: jsx($z, {
@@ -4920,7 +4920,7 @@ function nR(e) {
                     htmlAttributes: {
                       "data-testid": "loading-spinner"
                     }
-                  }) : _$$tx("rcs.figjam_onboarding.open_tutorial")
+                  }) : renderI18nText("rcs.figjam_onboarding.open_tutorial")
                 })
               })]
             })]
@@ -4949,9 +4949,9 @@ function nM({
   return !!(e && e.trackTags?.isTemplate && e.editorType === FFileType.WHITEBOARD);
 }
 function nP(e, t) {
-  _$$kF("type", e);
-  _$$kF("source", t);
-  us("FigJam onboarding - Failed to load starter files; we did not render open tutorial overlay");
+  setSentryTag("type", e);
+  setSentryTag("source", t);
+  captureMessage("FigJam onboarding - Failed to load starter files; we did not render open tutorial overlay");
 }
 function nF(e) {
   let t = dq();
@@ -5013,7 +5013,7 @@ function nB() {
       });
     }), r.current) : Promise.resolve(a.current);
   }(Tej, {});
-  let c = md(yV);
+  let c = useAtomWithSubscription(yV);
   let u = Td();
   let m = !nM({
     openFile: c
@@ -5090,9 +5090,9 @@ function nH({
 function nz({
   openFile: e
 }) {
-  let t = md(l5);
-  let i = md(zo);
-  let n = md(Am);
+  let t = useAtomWithSubscription(l5);
+  let i = useAtomWithSubscription(zo);
+  let n = useAtomWithSubscription(Am);
   return t !== fD.NONE ? null : ("loaded" !== i.status || i.data) && !n ? jsx(nY, {
     openFile: e
   }) : jsx(nW, {
@@ -5103,9 +5103,9 @@ let nV = (e, t) => {
   let i = MY();
   let r = Xr(Am);
   let a = Xr(_$$w5);
-  let o = md(zo);
+  let o = useAtomWithSubscription(zo);
   let l = _$$aV();
-  let d = md(dO).status === _$$c3.LOADING;
+  let d = useAtomWithSubscription(dO).status === _$$c3.LOADING;
   rx({
     overlayUniqueId: e,
     afterReset: () => {
@@ -5123,9 +5123,9 @@ function nW({
 }) {
   let t = useSelector(e => e.mirror.appModel.currentPage);
   let i = Fk((e, t) => zC(e, t), t);
-  let a = md(zo);
+  let a = useAtomWithSubscription(zo);
   let o = Fu("interacted_figjam_whats_new_v2_cta");
-  let l = md(o);
+  let l = useAtomWithSubscription(o);
   let d = Xr(Am);
   let {
     getConfig
@@ -5208,9 +5208,9 @@ function nY({
 }) {
   let t = useSelector(e => e.mirror.appModel.currentPage);
   let i = Fk((e, t) => zC(e, t), t);
-  let a = md(zo);
+  let a = useAtomWithSubscription(zo);
   let o = Fu("interacted_figjam_whats_new_v2_cta");
-  let l = md(o);
+  let l = useAtomWithSubscription(o);
   let {
     show,
     uniqueId,
@@ -5254,7 +5254,7 @@ function nJ({
     openFile: e
   });
 }
-let nq = _$$eU(async () => {
+let nq = atom(async () => {
   if (document.fonts && FontFace) {
     let e = new FontFace("Whyte", `url(${buildStaticUrl("webfont/1/Whyte-Regular.woff")})`);
     document.fonts.add(e);
@@ -5290,8 +5290,8 @@ function nQ(e) {
 }
 function n$() {
   let e = _$$r2("figjam_browse_templates_modal_onboarded");
-  let t = md(e);
-  let i = md(nX);
+  let t = useAtomWithSubscription(e);
+  let i = useAtomWithSubscription(nX);
   let [a, o] = useState(!1);
   let l = Un();
   let {
@@ -5337,13 +5337,13 @@ function n7(e) {
     children: jsx(wV, {
       bodyText: jsx("span", {
         className: R9,
-        children: _$$tx("figjam_onboarding_make_something.brainstorm.fig_jam_s_great_for_brainstorming", {
+        children: renderI18nText("figjam_onboarding_make_something.brainstorm.fig_jam_s_great_for_brainstorming", {
           boldText: jsx("b", {
-            children: _$$tx("figjam_onboarding_make_something.brainstorm.fig_jam_s_great_for_brainstorming_prefix")
+            children: renderI18nText("figjam_onboarding_make_something.brainstorm.fig_jam_s_great_for_brainstorming_prefix")
           })
         })
       }),
-      buttonText: _$$tx("figjam_onboarding_make_something.brainstorm.go_on"),
+      buttonText: renderI18nText("figjam_onboarding_make_something.brainstorm.go_on"),
       onButtonClick: e.onClickPrimaryCta,
       svg: _$$A9
     })
@@ -5378,9 +5378,9 @@ function n8(e) {
       isBold: !0,
       children: jsx(mI, {
         bodyText: jsx("span", {
-          children: _$$tx("figjam_onboarding_make_something.brainstorm.sticky_notes_let_you_share_ideas_go_ahead_drag_one_into_the_blue_box_above", {
+          children: renderI18nText("figjam_onboarding_make_something.brainstorm.sticky_notes_let_you_share_ideas_go_ahead_drag_one_into_the_blue_box_above", {
             boldText: jsx("b", {
-              children: _$$tx("figjam_onboarding_make_something.brainstorm.sticky_notes_let_you_share_ideas_go_ahead_drag_one_into_the_blue_box_above_bold_text")
+              children: renderI18nText("figjam_onboarding_make_something.brainstorm.sticky_notes_let_you_share_ideas_go_ahead_drag_one_into_the_blue_box_above_bold_text")
             })
           })
         })
@@ -5409,13 +5409,13 @@ function n9(e) {
       onTargetLost: handleTargetLost,
       children: jsx(mI, {
         bodyText: jsx("span", {
-          children: _$$tx("figjam_onboarding_make_something.brainstorm.just_like_that_keep_it_to_one_idea_per_sticky_next_let_s_check_out_stamps", {
+          children: renderI18nText("figjam_onboarding_make_something.brainstorm.just_like_that_keep_it_to_one_idea_per_sticky_next_let_s_check_out_stamps", {
             boldText: jsx("b", {
-              children: _$$tx("figjam_onboarding_make_something.brainstorm.just_like_that_keep_it_to_one_idea_per_sticky_next_let_s_check_out_stamps_bold_text")
+              children: renderI18nText("figjam_onboarding_make_something.brainstorm.just_like_that_keep_it_to_one_idea_per_sticky_next_let_s_check_out_stamps_bold_text")
             })
           })
         }),
-        buttonText: _$$tx("figjam_onboarding_make_something.brainstorm.next"),
+        buttonText: renderI18nText("figjam_onboarding_make_something.brainstorm.next"),
         onButtonClick: e.onClickPrimaryCta
       })
     })
@@ -5457,9 +5457,9 @@ function ae(e) {
       onTargetLost: handleTargetLost,
       children: jsx(mI, {
         bodyText: jsx("span", {
-          children: _$$tx("figjam_onboarding_make_something.brainstorm.stamps_are_here_or_press_e_they_re_good_for_voting_go_ahead_stamp_something", {
+          children: renderI18nText("figjam_onboarding_make_something.brainstorm.stamps_are_here_or_press_e_they_re_good_for_voting_go_ahead_stamp_something", {
             boldText: jsx("b", {
-              children: _$$tx("figjam_onboarding_make_something.brainstorm.stamps_are_here_or_press_e_they_re_good_for_voting_go_ahead_stamp_something_bold_text")
+              children: renderI18nText("figjam_onboarding_make_something.brainstorm.stamps_are_here_or_press_e_they_re_good_for_voting_go_ahead_stamp_something_bold_text")
             })
           })
         })
@@ -5488,13 +5488,13 @@ function at(e) {
       onTargetLost: handleTargetLost,
       children: jsx(mI, {
         bodyText: jsx("span", {
-          children: _$$tx("figjam_onboarding_make_something.brainstorm.lovely_just_one_more_thing", {
+          children: renderI18nText("figjam_onboarding_make_something.brainstorm.lovely_just_one_more_thing", {
             boldText: jsx("b", {
-              children: _$$tx("figjam_onboarding_make_something.brainstorm.lovely_just_one_more_thing_bold_text")
+              children: renderI18nText("figjam_onboarding_make_something.brainstorm.lovely_just_one_more_thing_bold_text")
             })
           })
         }),
-        buttonText: _$$tx("figjam_onboarding_make_something.brainstorm.next"),
+        buttonText: renderI18nText("figjam_onboarding_make_something.brainstorm.next"),
         onButtonClick: e.onClickPrimaryCta
       })
     })
@@ -5537,13 +5537,13 @@ function ai(e) {
       onTargetLost: handleTargetLost,
       children: jsx(mI, {
         bodyText: jsx("span", {
-          children: _$$tx("figjam_onboarding_make_something.brainstorm.use_the_timer_to_keep_things_moving", {
+          children: renderI18nText("figjam_onboarding_make_something.brainstorm.use_the_timer_to_keep_things_moving", {
             boldText: jsx("b", {
-              children: _$$tx("figjam_onboarding_make_something.brainstorm.use_the_timer_to_keep_things_moving_bold_text")
+              children: renderI18nText("figjam_onboarding_make_something.brainstorm.use_the_timer_to_keep_things_moving_bold_text")
             })
           })
         }),
-        buttonText: _$$tx("figjam_onboarding_make_something.brainstorm.next"),
+        buttonText: renderI18nText("figjam_onboarding_make_something.brainstorm.next"),
         onButtonClick: e.onClickPrimaryCta
       })
     })
@@ -5563,9 +5563,9 @@ function ar(e) {
     isBold: !0,
     hasShadow: !0,
     children: jsx(iX, {
-      titleText: _$$tx("figjam_onboarding_make_something.brainstorm.when_you_re_ready"),
-      bodyText: _$$tx("figjam_onboarding_make_something.brainstorm.start_a_brainstorm_by_inviting_a_few_people_here_that_s_it"),
-      buttonText: _$$tx("figjam_onboarding_make_something.brainstorm.share_board"),
+      titleText: renderI18nText("figjam_onboarding_make_something.brainstorm.when_you_re_ready"),
+      bodyText: renderI18nText("figjam_onboarding_make_something.brainstorm.start_a_brainstorm_by_inviting_a_few_people_here_that_s_it"),
+      buttonText: renderI18nText("figjam_onboarding_make_something.brainstorm.share_board"),
       onNext,
       onDismiss: e.dismissModal,
       imgSrc: mN,
@@ -5736,13 +5736,13 @@ function au(e) {
     children: jsx(wV, {
       bodyText: jsx("span", {
         className: R9,
-        children: _$$tx("figjam_onboarding_make_something.planning_ahead.fig_jam_s_great_for_planning_ahead_here_s_how_it_s_done", {
+        children: renderI18nText("figjam_onboarding_make_something.planning_ahead.fig_jam_s_great_for_planning_ahead_here_s_how_it_s_done", {
           boldText: jsx("b", {
-            children: _$$tx("figjam_onboarding_make_something.planning_ahead.fig_jam_s_great_for_planning_ahead_here_s_how_it_s_done_bold_text")
+            children: renderI18nText("figjam_onboarding_make_something.planning_ahead.fig_jam_s_great_for_planning_ahead_here_s_how_it_s_done_bold_text")
           })
         })
       }),
-      buttonText: _$$tx("figjam_onboarding_make_something.brainstorm.go_on"),
+      buttonText: renderI18nText("figjam_onboarding_make_something.brainstorm.go_on"),
       onButtonClick: e.onClickPrimaryCta,
       svg: _$$A0
     })
@@ -5769,9 +5769,9 @@ function ap(e) {
       onTargetLost: handleTargetLost,
       children: jsx(mI, {
         bodyText: jsx("span", {
-          children: _$$tx("figjam_onboarding_make_something.planning_ahead.start_with_a_simple_timeline_with_a_row_for_each_member_of_your_team")
+          children: renderI18nText("figjam_onboarding_make_something.planning_ahead.start_with_a_simple_timeline_with_a_row_for_each_member_of_your_team")
         }),
-        buttonText: _$$tx("figjam_onboarding_make_something.brainstorm.next"),
+        buttonText: renderI18nText("figjam_onboarding_make_something.brainstorm.next"),
         onButtonClick: e.onClickPrimaryCta
       })
     })
@@ -5811,9 +5811,9 @@ function ah(e) {
       onTargetLost: handleTargetLost,
       children: jsx(mI, {
         bodyText: jsx("span", {
-          children: _$$tx("figjam_onboarding_make_something.planning_ahead.type_your_name_here_right_at_the_top", {
+          children: renderI18nText("figjam_onboarding_make_something.planning_ahead.type_your_name_here_right_at_the_top", {
             boldText: jsx("b", {
-              children: _$$tx("figjam_onboarding_make_something.planning_ahead.type_your_name_here_right_at_the_top_bold_text")
+              children: renderI18nText("figjam_onboarding_make_something.planning_ahead.type_your_name_here_right_at_the_top_bold_text")
             })
           })
         })
@@ -5855,9 +5855,9 @@ function am(e) {
       onTargetLost: handleTargetLost,
       children: jsx(mI, {
         bodyText: jsx("span", {
-          children: _$$tx("figjam_onboarding_make_something.planning_ahead.what_are_you_working_on_this_month_rename_this_block_to_your_current_project", {
+          children: renderI18nText("figjam_onboarding_make_something.planning_ahead.what_are_you_working_on_this_month_rename_this_block_to_your_current_project", {
             boldText: jsx("b", {
-              children: _$$tx("figjam_onboarding_make_something.planning_ahead.what_are_you_working_on_this_month_rename_this_block_to_your_current_project_bold_text")
+              children: renderI18nText("figjam_onboarding_make_something.planning_ahead.what_are_you_working_on_this_month_rename_this_block_to_your_current_project_bold_text")
             })
           })
         })
@@ -5885,8 +5885,8 @@ function af(e) {
       arrowPosition: _$$F_.LEFT_TITLE,
       onTargetLost: handleTargetLost,
       children: jsx(mI, {
-        bodyText: _$$tx("figjam_onboarding_make_something.planning_ahead.you_can_resize_blocks_by_dragging_their_ends"),
-        buttonText: _$$tx("figjam_onboarding_make_something.brainstorm.next"),
+        bodyText: renderI18nText("figjam_onboarding_make_something.planning_ahead.you_can_resize_blocks_by_dragging_their_ends"),
+        buttonText: renderI18nText("figjam_onboarding_make_something.brainstorm.next"),
         onButtonClick: e.onClickPrimaryCta
       })
     })
@@ -5911,8 +5911,8 @@ function ag(e) {
       autoWidth: !0,
       onTargetLost: handleTargetLost,
       children: jsx(mI, {
-        bodyText: _$$tx("figjam_onboarding_make_something.planning_ahead.and_grab_more_shapes_as_needed_from_your_toolbar"),
-        buttonText: _$$tx("figjam_onboarding_make_something.brainstorm.next"),
+        bodyText: renderI18nText("figjam_onboarding_make_something.planning_ahead.and_grab_more_shapes_as_needed_from_your_toolbar"),
+        buttonText: renderI18nText("figjam_onboarding_make_something.brainstorm.next"),
         onButtonClick: e.onClickPrimaryCta
       })
     })
@@ -5933,9 +5933,9 @@ function a_(e) {
     autoWidth: !0,
     hasShadow: !0,
     children: jsx(iX, {
-      titleText: _$$tx("figjam_onboarding_make_something.planning_ahead.try_it_with_your_team"),
-      bodyText: _$$tx("figjam_onboarding_make_something.planning_ahead.share_this_board_and_your_whole_team_can_contribute"),
-      buttonText: _$$tx("figjam_onboarding_make_something.brainstorm.share_board"),
+      titleText: renderI18nText("figjam_onboarding_make_something.planning_ahead.try_it_with_your_team"),
+      bodyText: renderI18nText("figjam_onboarding_make_something.planning_ahead.share_this_board_and_your_whole_team_can_contribute"),
+      buttonText: renderI18nText("figjam_onboarding_make_something.brainstorm.share_board"),
       onNext,
       onDismiss: e.dismissModal,
       imgSrc: mN,
@@ -6105,13 +6105,13 @@ function aw(e) {
     children: jsx(wV, {
       bodyText: jsx("span", {
         className: R9,
-        children: _$$tx("figjam_onboarding_make_something.team_chart.in_fig_jam_you_can_diagram_all_sorts_of_things_here_s_an_example", {
+        children: renderI18nText("figjam_onboarding_make_something.team_chart.in_fig_jam_you_can_diagram_all_sorts_of_things_here_s_an_example", {
           boldText: jsx("b", {
-            children: _$$tx("figjam_onboarding_make_something.team_chart.in_fig_jam_you_can_diagram_all_sorts_of_things_here_s_an_example_bold_text")
+            children: renderI18nText("figjam_onboarding_make_something.team_chart.in_fig_jam_you_can_diagram_all_sorts_of_things_here_s_an_example_bold_text")
           })
         })
       }),
-      buttonText: _$$tx("figjam_onboarding_make_something.brainstorm.go_on"),
+      buttonText: renderI18nText("figjam_onboarding_make_something.brainstorm.go_on"),
       onButtonClick: e.onClickPrimaryCta,
       svg: _$$A1
     })
@@ -6151,9 +6151,9 @@ function aS(e) {
       onTargetLost: handleTargetLost,
       children: jsx(mI, {
         bodyText: jsx("span", {
-          children: _$$tx("figjam_onboarding_make_something.team_chart.double_click_this_text_to_type_in_the_manager_s_name_go_ahead_try_it", {
+          children: renderI18nText("figjam_onboarding_make_something.team_chart.double_click_this_text_to_type_in_the_manager_s_name_go_ahead_try_it", {
             boldText: jsx("b", {
-              children: _$$tx("figjam_onboarding_make_something.team_chart.double_click_this_text_to_type_in_the_manager_s_name_go_ahead_try_it_bold_text")
+              children: renderI18nText("figjam_onboarding_make_something.team_chart.double_click_this_text_to_type_in_the_manager_s_name_go_ahead_try_it_bold_text")
             })
           })
         })
@@ -6182,9 +6182,9 @@ function aj(e) {
       onTargetLost: handleTargetLost,
       children: jsx(mI, {
         bodyText: jsx("span", {
-          children: _$$tx("figjam_onboarding_make_something.team_chart.you_can_add_images_by_simply_dragging_them_into_fig_jam")
+          children: renderI18nText("figjam_onboarding_make_something.team_chart.you_can_add_images_by_simply_dragging_them_into_fig_jam")
         }),
-        buttonText: _$$tx("figjam_onboarding_make_something.brainstorm.next"),
+        buttonText: renderI18nText("figjam_onboarding_make_something.brainstorm.next"),
         onButtonClick: e.onClickPrimaryCta
       })
     })
@@ -6224,9 +6224,9 @@ function aI(e) {
       onTargetLost: handleTargetLost,
       children: jsx(mI, {
         bodyText: jsx("span", {
-          children: _$$tx("figjam_onboarding_make_something.team_chart.adding_to_a_diagram_is_simple_hover_over_a_shape_and_click_this_button_try_it", {
+          children: renderI18nText("figjam_onboarding_make_something.team_chart.adding_to_a_diagram_is_simple_hover_over_a_shape_and_click_this_button_try_it", {
             boldText: jsx("b", {
-              children: _$$tx("figjam_onboarding_make_something.team_chart.adding_to_a_diagram_is_simple_hover_over_a_shape_and_click_this_button_try_it_bold_text")
+              children: renderI18nText("figjam_onboarding_make_something.team_chart.adding_to_a_diagram_is_simple_hover_over_a_shape_and_click_this_button_try_it_bold_text")
             })
           })
         })
@@ -6254,9 +6254,9 @@ function ak(e) {
       onTargetLost: handleTargetLost,
       children: jsx(mI, {
         bodyText: jsx("span", {
-          children: _$$tx("figjam_onboarding_make_something.team_chart.you_can_also_grab_more_shapes_from_here")
+          children: renderI18nText("figjam_onboarding_make_something.team_chart.you_can_also_grab_more_shapes_from_here")
         }),
-        buttonText: _$$tx("figjam_onboarding_make_something.brainstorm.next"),
+        buttonText: renderI18nText("figjam_onboarding_make_something.brainstorm.next"),
         onButtonClick: e.onClickPrimaryCta
       })
     })
@@ -6282,9 +6282,9 @@ function aN(e) {
       onTargetLost: handleTargetLost,
       children: jsx(mI, {
         bodyText: jsx("span", {
-          children: _$$tx("figjam_onboarding_make_something.team_chart.and_use_the_connector_tool_to_connect_any_two_things_together")
+          children: renderI18nText("figjam_onboarding_make_something.team_chart.and_use_the_connector_tool_to_connect_any_two_things_together")
         }),
-        buttonText: _$$tx("figjam_onboarding_make_something.brainstorm.next"),
+        buttonText: renderI18nText("figjam_onboarding_make_something.brainstorm.next"),
         onButtonClick: e.onClickPrimaryCta
       })
     })
@@ -6305,11 +6305,11 @@ function aA(e) {
     autoWidth: !0,
     hasShadow: !0,
     children: jsx(iX, {
-      titleText: _$$tx("figjam_onboarding_make_something.team_chart.diagram_together"),
+      titleText: renderI18nText("figjam_onboarding_make_something.team_chart.diagram_together"),
       bodyText: jsx("span", {
-        children: _$$tx("figjam_onboarding_make_something.team_chart.share_this_board_and_your_whole_team_can_pitch_in")
+        children: renderI18nText("figjam_onboarding_make_something.team_chart.share_this_board_and_your_whole_team_can_pitch_in")
       }),
-      buttonText: _$$tx("figjam_onboarding_make_something.brainstorm.share_board"),
+      buttonText: renderI18nText("figjam_onboarding_make_something.brainstorm.share_board"),
       onNext,
       onDismiss: e.dismissModal,
       imgSrc: mN,
@@ -6492,13 +6492,13 @@ function aB(e) {
     children: jsx(wV, {
       bodyText: jsx("span", {
         className: R9,
-        children: _$$tx("figjam_onboarding_make_something.team_updates.fig_jam_s_great_for_team_syncs_here_s_how_it_works", {
+        children: renderI18nText("figjam_onboarding_make_something.team_updates.fig_jam_s_great_for_team_syncs_here_s_how_it_works", {
           boldText: jsx("b", {
-            children: _$$tx("figjam_onboarding_make_something.team_updates.fig_jam_s_great_for_team_syncs_here_s_how_it_works_bold_text")
+            children: renderI18nText("figjam_onboarding_make_something.team_updates.fig_jam_s_great_for_team_syncs_here_s_how_it_works_bold_text")
           })
         })
       }),
-      buttonText: _$$tx("figjam_onboarding_make_something.brainstorm.go_on"),
+      buttonText: renderI18nText("figjam_onboarding_make_something.brainstorm.go_on"),
       onButtonClick: e.onClickPrimaryCta,
       svg: _$$A10
     })
@@ -6525,9 +6525,9 @@ function aU(e) {
       onTargetLost: handleTargetLost,
       children: jsx(mI, {
         bodyText: jsx("span", {
-          children: _$$tx("figjam_onboarding_make_something.team_updates.each_person_gets_a_row_of_their_own_for_sharing_updates_and_priorities")
+          children: renderI18nText("figjam_onboarding_make_something.team_updates.each_person_gets_a_row_of_their_own_for_sharing_updates_and_priorities")
         }),
-        buttonText: _$$tx("figjam_onboarding_make_something.brainstorm.next"),
+        buttonText: renderI18nText("figjam_onboarding_make_something.brainstorm.next"),
         onButtonClick: e.onClickPrimaryCta
       })
     })
@@ -6554,13 +6554,13 @@ function aG(e) {
       onTargetLost: handleTargetLost,
       children: jsx(mI, {
         bodyText: jsx("span", {
-          children: _$$tx("figjam_onboarding_make_something.team_updates.take_a_selfie_then_drag_it_into_whichever_row_you_d_like_try_and_click_the_red_dot", {
+          children: renderI18nText("figjam_onboarding_make_something.team_updates.take_a_selfie_then_drag_it_into_whichever_row_you_d_like_try_and_click_the_red_dot", {
             boldText: jsx("b", {
-              children: _$$tx("figjam_onboarding_make_something.team_updates.take_a_selfie_then_drag_it_into_whichever_row_you_d_like_try_and_click_the_red_dot_bold_text")
+              children: renderI18nText("figjam_onboarding_make_something.team_updates.take_a_selfie_then_drag_it_into_whichever_row_you_d_like_try_and_click_the_red_dot_bold_text")
             })
           })
         }),
-        buttonText: _$$tx("figjam_onboarding_make_something.brainstorm.next"),
+        buttonText: renderI18nText("figjam_onboarding_make_something.brainstorm.next"),
         onButtonClick: e.onClickPrimaryCta
       })
     })
@@ -6587,9 +6587,9 @@ function aK(e) {
       onTargetLost: handleTargetLost,
       children: jsx(mI, {
         bodyText: jsx("span", {
-          children: _$$tx("figjam_onboarding_make_something.team_updates.your_whole_team_can_share_updates_here")
+          children: renderI18nText("figjam_onboarding_make_something.team_updates.your_whole_team_can_share_updates_here")
         }),
-        buttonText: _$$tx("figjam_onboarding_make_something.brainstorm.next"),
+        buttonText: renderI18nText("figjam_onboarding_make_something.brainstorm.next"),
         onButtonClick: e.onClickPrimaryCta
       })
     })
@@ -6616,9 +6616,9 @@ function aH(e) {
       onTargetLost: handleTargetLost,
       children: jsx(mI, {
         bodyText: jsx("span", {
-          children: _$$tx("figjam_onboarding_make_something.team_updates.and_can_add_important_dates_to_the_calendar_over_here")
+          children: renderI18nText("figjam_onboarding_make_something.team_updates.and_can_add_important_dates_to_the_calendar_over_here")
         }),
-        buttonText: _$$tx("figjam_onboarding_make_something.brainstorm.next"),
+        buttonText: renderI18nText("figjam_onboarding_make_something.brainstorm.next"),
         onButtonClick: e.onClickPrimaryCta
       })
     })
@@ -6658,9 +6658,9 @@ function az(e) {
       onTargetLost: handleTargetLost,
       children: jsx(mI, {
         bodyText: jsx("span", {
-          children: _$$tx("figjam_onboarding_make_something.team_updates.give_it_a_go_try_typing_your_priorities_in_this_sticky_note", {
+          children: renderI18nText("figjam_onboarding_make_something.team_updates.give_it_a_go_try_typing_your_priorities_in_this_sticky_note", {
             boldText: jsx("b", {
-              children: _$$tx("figjam_onboarding_make_something.team_updates.give_it_a_go_try_typing_your_priorities_in_this_sticky_note_bold_text")
+              children: renderI18nText("figjam_onboarding_make_something.team_updates.give_it_a_go_try_typing_your_priorities_in_this_sticky_note_bold_text")
             })
           })
         })
@@ -6683,9 +6683,9 @@ function aV(e) {
     autoWidth: !0,
     hasShadow: !0,
     children: jsx(iX, {
-      titleText: _$$tx("figjam_onboarding_make_something.brainstorm.when_you_re_ready"),
-      bodyText: _$$tx("figjam_onboarding_make_something.team_updates.invite_your_teammates_and_run_a_quick_team_check_in"),
-      buttonText: _$$tx("figjam_onboarding_make_something.brainstorm.share_board"),
+      titleText: renderI18nText("figjam_onboarding_make_something.brainstorm.when_you_re_ready"),
+      bodyText: renderI18nText("figjam_onboarding_make_something.team_updates.invite_your_teammates_and_run_a_quick_team_check_in"),
+      buttonText: renderI18nText("figjam_onboarding_make_something.brainstorm.share_board"),
       onNext,
       onDismiss: e.dismissModal,
       imgSrc: mN,
@@ -7026,25 +7026,25 @@ function st() {
 }
 let si = [{
   key: 1,
-  elem: _$$tx("oss_sales_upsell_overlay.feature1")
+  elem: renderI18nText("oss_sales_upsell_overlay.feature1")
 }, {
   key: 2,
-  elem: _$$tx("oss_sales_upsell_overlay.feature2")
+  elem: renderI18nText("oss_sales_upsell_overlay.feature2")
 }, {
   key: 3,
-  elem: _$$tx("oss_sales_upsell_overlay.feature3")
+  elem: renderI18nText("oss_sales_upsell_overlay.feature3")
 }];
 let sr = Ju(function ({
   onDismiss: e
 }) {
-  let t = md(yV);
+  let t = useAtomWithSubscription(yV);
   let i = useDispatch();
   return jsxs(yX, {
     autoFocusCta: !1,
-    cancelText: _$$tx("oss_sales_upsell_overlay.secondary_cta"),
+    cancelText: renderI18nText("oss_sales_upsell_overlay.secondary_cta"),
     className: "oss_sales_upsell_modal--modal--fdI6U",
-    confirmText: _$$tx("oss_sales_upsell_overlay.primary_cta"),
-    confirmationTitle: _$$tx("oss_sales_upsell_overlay.title"),
+    confirmText: renderI18nText("oss_sales_upsell_overlay.primary_cta"),
+    confirmationTitle: renderI18nText("oss_sales_upsell_overlay.title"),
     hideOnCancel: !1,
     hideOnConfirm: !1,
     isLoading: !t?.teamId,
@@ -7053,7 +7053,7 @@ let sr = Ju(function ({
         type: lk,
         data: {
           source: _$$B3.LIBRARY_DUPLICATE_OSS_SALES_UPSELL,
-          overridePlaceholderText: _$$t("oss_sales_upsell_overlay.contact_sales_form.text_placeholder")
+          overridePlaceholderText: getI18nString("oss_sales_upsell_overlay.contact_sales_form.text_placeholder")
         }
       }));
     },
@@ -7074,13 +7074,13 @@ let sr = Ju(function ({
           direction: "vertical",
           spacing: "12px",
           children: [jsx("p", {
-            children: _$$tx("oss_sales_upsell_overlay.body1")
+            children: renderI18nText("oss_sales_upsell_overlay.body1")
           }), jsxs(_$$Y, {
             direction: "vertical",
             spacing: 8,
             children: [jsx("p", {
               className: _$$s.fontSemiBold.$,
-              children: _$$tx("oss_sales_upsell_overlay.body2")
+              children: renderI18nText("oss_sales_upsell_overlay.body2")
             }), jsx(_$$Y, {
               direction: "vertical",
               spacing: 8,
@@ -7096,7 +7096,7 @@ let sr = Ju(function ({
             })]
           }), jsx("p", {
             className: _$$s.pt4.$,
-            children: _$$tx("oss_sales_upsell_overlay.body3")
+            children: renderI18nText("oss_sales_upsell_overlay.body3")
           })]
         }), jsx("div", {
           className: _$$s.mr16.$,
@@ -7109,8 +7109,8 @@ let sr = Ju(function ({
   });
 }, "OssSalesUpsellModal");
 function sn() {
-  let e = md(As);
-  let t = md(ze);
+  let e = useAtomWithSubscription(As);
+  let t = useAtomWithSubscription(ze);
   return e && t ? jsx(sa, {
     teamId: e,
     fileKey: t
@@ -7121,7 +7121,7 @@ function sa({
   fileKey: t
 }) {
   let i = useDispatch();
-  let a = md(M$);
+  let a = useAtomWithSubscription(M$);
   let o = Rs(TNJ, {
     id: e
   });
@@ -7190,18 +7190,18 @@ function s_({
   };
   return jsx(_$$rq, {
     clickOutsideToHide: !0,
-    description: _$$tx("whiteboard.section_presets_onboarding.picker_callout.description"),
+    description: renderI18nText("whiteboard.section_presets_onboarding.picker_callout.description"),
     fixedPosition: !0,
     isShowing: t,
     location: d,
     onClose: i,
     primaryCta: {
-      label: _$$tx("rcs.got_it"),
+      label: renderI18nText("rcs.got_it"),
       type: "button",
       onClick: i,
       ctaTrackingDescriptor: _$$c.GOT_IT
     },
-    title: _$$tx("whiteboard.section_presets_onboarding.picker_callout.title"),
+    title: renderI18nText("whiteboard.section_presets_onboarding.picker_callout.title"),
     trackingContextName: "section_preset_picker_callout",
     userFlagOnShow: sm,
     width: 300
@@ -7209,9 +7209,9 @@ function s_({
 }
 function sx() {
   let e = _$$q2();
-  let t = md(_$$w6);
-  let i = md(m5);
-  let a = md(sf);
+  let t = useAtomWithSubscription(_$$w6);
+  let i = useAtomWithSubscription(m5);
+  let a = useAtomWithSubscription(sf);
   let o = useRef({
     numShown: 0,
     hasLoggedToSentry: !1
@@ -7236,7 +7236,7 @@ function sx() {
     });
   }, [a, i]), useEffect(() => {
     isShowing && o.current.numShown++;
-    o.current.numShown > 1 && !o.current.hasLoggedToSentry && (o.current.hasLoggedToSentry = !0, x1("SectionPresetPickerCallout", "Callout shown more than once, this should not happen. Please investigate.", void 0, {
+    o.current.numShown > 1 && !o.current.hasLoggedToSentry && (o.current.hasLoggedToSentry = !0, logError("SectionPresetPickerCallout", "Callout shown more than once, this should not happen. Please investigate.", void 0, {
       reportAsSentryError: !0
     }));
   }, [isShowing]), isShowing && l) ? jsx(s_, {
@@ -7256,15 +7256,15 @@ function sb({
     isShowing: e,
     trackingContextName: "Share to Google Classroom Onboarding",
     targetKey: "share",
-    title: _$$tx("whiteboard.google_classroom.onboarding.header"),
-    description: _$$tx("whiteboard.google_classroom.onboarding.body"),
+    title: renderI18nText("whiteboard.google_classroom.onboarding.header"),
+    description: renderI18nText("whiteboard.google_classroom.onboarding.body"),
     media: jsx(_$$y, {
       src: sy,
-      alt: _$$t("whiteboard.google_classroom.onboarding.image_alt"),
+      alt: getI18nString("whiteboard.google_classroom.onboarding.image_alt"),
       aspectRatio: 300 / 169
     }),
     primaryCta: {
-      label: _$$tx("whiteboard.google_classroom.onboarding.show_me"),
+      label: renderI18nText("whiteboard.google_classroom.onboarding.show_me"),
       type: "button",
       onClick: t,
       ctaTrackingDescriptor: _$$c.SHOW_ME
@@ -7275,11 +7275,11 @@ function sb({
 function sC() {
   let e = useDispatch();
   let t = ra({});
-  let i = md(rc);
-  let a = md(rp);
-  let o = md(rh);
-  let l = md(rm);
-  let d = md(Ij);
+  let i = useAtomWithSubscription(rc);
+  let a = useAtomWithSubscription(rp);
+  let o = useAtomWithSubscription(rh);
+  let l = useAtomWithSubscription(rm);
+  let d = useAtomWithSubscription(Ij);
   let {
     show,
     isShowing,
@@ -7351,7 +7351,7 @@ function sC() {
   });
 }
 let sN = "has_onboarded_ai";
-let sA = _$$eU(!1);
+let sA = atom(!1);
 let sL = _$$N.HIGH_PRIORITY_MODAL + 3;
 function sR(e, t) {
   _$$h2(() => {
@@ -7375,7 +7375,7 @@ function sM({
   sR(n, sN);
   return jsx(_$$rq, {
     arrowPosition: F_.BOTTOM,
-    description: _$$tx("ui3_and_ai_tour.ai_callout.description"),
+    description: renderI18nText("ui3_and_ai_tour.ai_callout.description"),
     highlightBlue: !0,
     isShowing: t,
     media: sD,
@@ -7383,7 +7383,7 @@ function sM({
     onTargetLost: i,
     primaryCta: {
       type: "button",
-      label: _$$tx("ui3_and_ai_tour.ai_callout.show_me"),
+      label: renderI18nText("ui3_and_ai_tour.ai_callout.show_me"),
       onClick: () => {
         $I({
           trackingData: {
@@ -7396,13 +7396,13 @@ function sM({
     },
     secondaryCta: {
       type: "link",
-      label: _$$tx("ui3_and_ai_tour.ai_callout.playground_link"),
+      label: renderI18nText("ui3_and_ai_tour.ai_callout.playground_link"),
       href: "https://www.figma.com/community/file/1375505114072192161",
       ctaTrackingDescriptor: _$$c.AI_PLAYGROUND
     },
     targetKey: _$$Ij,
     testId: T4,
-    title: _$$tx("ui3_and_ai_tour.ai_callout.title"),
+    title: renderI18nText("ui3_and_ai_tour.ai_callout.title"),
     trackingContextName: "UI3/AI Onboarding > AI"
   });
 }
@@ -7414,14 +7414,14 @@ function sF({
   sR(useDispatch(), _$$af);
   return jsx(_$$rq, {
     arrowPosition: F_.BOTTOM,
-    description: getFeatureFlags().hub_file_fragments ? _$$tx("ui3_and_ai_callouts.community_fragment_search.description") : _$$tx("ui3_and_ai_callouts.fragment_search.description"),
+    description: getFeatureFlags().hub_file_fragments ? renderI18nText("ui3_and_ai_callouts.community_fragment_search.description") : renderI18nText("ui3_and_ai_callouts.fragment_search.description"),
     highlightBlue: !0,
     isShowing: t,
     onClose: () => e(),
     onTargetLost: i,
     primaryCta: {
       type: "button",
-      label: _$$tx("ui3_and_ai_callouts.fragment_search.cta"),
+      label: renderI18nText("ui3_and_ai_callouts.fragment_search.cta"),
       onClick: () => {
         Bd();
         e();
@@ -7430,7 +7430,7 @@ function sF({
     },
     targetKey: _$$Ij,
     testId: "fragmentSearchCallout",
-    title: _$$tx("ui3_and_ai_callouts.fragment_search.title"),
+    title: renderI18nText("ui3_and_ai_callouts.fragment_search.title"),
     trackingContextName: "Fragment Search Callout"
   });
 }
@@ -7454,13 +7454,13 @@ function sB() {
     return c;
   }();
   let t = _$$r2(sN);
-  let i = md(t);
+  let i = useAtomWithSubscription(t);
   let o = _$$r2("did_sign_up_as_ui3_user");
-  let l = md(o);
+  let l = useAtomWithSubscription(o);
   let d = _$$r2($9);
-  let c = md(d);
+  let c = useAtomWithSubscription(d);
   let u = _$$r2(_$$af);
-  let p = md(u);
+  let p = useAtomWithSubscription(u);
   let h = Em();
   let m = l7();
   let g = hA();
@@ -7468,8 +7468,8 @@ function sB() {
   let x = ZO();
   let b = !!getFeatureFlags().ui3_and_ai_welcome_modal;
   let C = _$$aV();
-  let v = md(Bu);
-  let E = md(Fy);
+  let v = useAtomWithSubscription(Bu);
+  let E = useAtomWithSubscription(Fy);
   let {
     uniqueId,
     show,
@@ -7479,7 +7479,7 @@ function sB() {
     overlay: KTt,
     priority: sL
   }, [i, c, l, p]);
-  let [I, N] = fp(sA);
+  let [I, N] = useAtomValueAndSetter(sA);
   let A = useCallback(() => {
     e.length > 0 && N(!0);
     complete();
@@ -7509,13 +7509,13 @@ function sB() {
   let M = useMemo(() => {
     let t = {
       type: "button",
-      label: _$$tx("general.next"),
+      label: renderI18nText("general.next"),
       onClick: next,
       ctaTrackingDescriptor: _$$c.NEXT
     };
     let i = {
       type: "button",
-      label: _$$tx("general.done"),
+      label: renderI18nText("general.done"),
       onClick: A,
       ctaTrackingDescriptor: _$$c.DONE
     };
@@ -7539,7 +7539,7 @@ function sB() {
 let sG = "UI3 Reactivation Overlay";
 function sK() {
   let e = _$$aV();
-  let t = md(jH);
+  let t = useAtomWithSubscription(jH);
   let {
     isShowing,
     complete
@@ -7565,7 +7565,7 @@ function sK() {
     isShowing,
     children: [jsx(_$$rq, {
       arrowPosition: F_.RIGHT_BODY,
-      description: _$$tx("ui3_reactivation_overlay.ui2_description"),
+      description: renderI18nText("ui3_reactivation_overlay.ui2_description"),
       disableHighlight: !0,
       isShowing,
       media: jsx(_$$w, {
@@ -7583,27 +7583,27 @@ function sK() {
       },
       primaryCta: {
         type: "button",
-        label: _$$tx("ui3_reactivation_overlay.ui2_primary_cta"),
+        label: renderI18nText("ui3_reactivation_overlay.ui2_primary_cta"),
         onClick: next,
         ctaTrackingDescriptor: _$$c.SWITCH_TO_UI3
       },
       secondaryCta: {
         type: "link",
-        label: _$$tx("ui3_reactivation_overlay.secondary_cta"),
+        label: renderI18nText("ui3_reactivation_overlay.secondary_cta"),
         href: "https://www.figma.com/blog/making-the-move-to-ui3-a-guide-to-figmas-next-chapter/",
         ctaTrackingDescriptor: _$$c.LEARN_MORE
       },
       targetKey: J_,
-      title: _$$tx("ui3_reactivation_overlay.ui2_title"),
+      title: renderI18nText("ui3_reactivation_overlay.ui2_title"),
       trackingContextName: `${sG} Step 1`
     }), jsx(_$$rq, {
       arrowPosition: F_.RIGHT_BODY,
-      description: _$$tx("ui3_reactivation_overlay.ui3_description"),
+      description: renderI18nText("ui3_reactivation_overlay.ui3_description"),
       disableHighlight: !0,
       isShowing,
       media: jsx(_$$y, {
         src: buildUploadUrl("94d7810cc12859da29e6f4e32a5ffe858ce5445e"),
-        alt: _$$t("ui3_reactivation_overlay.ui3_media_alt"),
+        alt: getI18nString("ui3_reactivation_overlay.ui3_media_alt"),
         aspectRatio: 16 / 9
       }),
       onClose: e => {
@@ -7617,18 +7617,18 @@ function sK() {
       },
       primaryCta: {
         type: "button",
-        label: _$$tx("ui3_reactivation_overlay.ui3_primary_cta"),
+        label: renderI18nText("ui3_reactivation_overlay.ui3_primary_cta"),
         onClick: next,
         ctaTrackingDescriptor: _$$c.GOT_IT
       },
       secondaryCta: {
         type: "link",
-        label: _$$tx("ui3_reactivation_overlay.secondary_cta"),
+        label: renderI18nText("ui3_reactivation_overlay.secondary_cta"),
         href: "https://www.figma.com/blog/making-the-move-to-ui3-a-guide-to-figmas-next-chapter/",
         ctaTrackingDescriptor: _$$c.LEARN_MORE
       },
       targetKey: J_,
-      title: _$$tx("ui3_reactivation_overlay.ui3_title"),
+      title: renderI18nText("ui3_reactivation_overlay.ui3_title"),
       trackingContextName: `${sG} Step 2`
     })]
   });
@@ -7659,7 +7659,7 @@ function sJ({
 function sq(e) {
   let [t, i] = useState(!0);
   let a = useDispatch();
-  let o = md(yV);
+  let o = useAtomWithSubscription(yV);
   useEffect(() => {
     setTimeout(() => i(!1), 1e3);
   });
@@ -7684,7 +7684,7 @@ function sq(e) {
       shouldNotWrapInParagraphTag: !0,
       shouldCenterArrow: _$$EL.FALLBACK,
       children: [jsx("p", {
-        children: _$$tx("rcs.upsell_libraries.click_here_to_turn_into_component")
+        children: renderI18nText("rcs.upsell_libraries.click_here_to_turn_into_component")
       }), jsx(Kz, {
         multiple: 2
       }), jsx("div", {
@@ -7692,7 +7692,7 @@ function sq(e) {
         children: jsx($z, {
           onClick: l,
           variant: "primary",
-          children: _$$tx("rcs.upsell_libraries.visual_bell.got_it")
+          children: renderI18nText("rcs.upsell_libraries.visual_bell.got_it")
         })
       })]
     })]
@@ -7701,24 +7701,24 @@ function sq(e) {
 q3.SELF_CONTAINED;
 sJ({
   trackingContextName: "FigJam Widget Nudge Generic",
-  getTitle: () => _$$t("rcs.figjam_widget_nudge.generic_title"),
-  getBody: () => _$$t("rcs.figjam_widget_nudge.generic_body")
+  getTitle: () => getI18nString("rcs.figjam_widget_nudge.generic_title"),
+  getBody: () => getI18nString("rcs.figjam_widget_nudge.generic_body")
 });
 sJ({
   trackingContextName: "FigJam Widget Nudge Project Management",
-  getTitle: () => _$$t("rcs.figjam_widget_nudge.pm_title"),
-  getBody: () => _$$t("rcs.figjam_widget_nudge.pm_body"),
+  getTitle: () => getI18nString("rcs.figjam_widget_nudge.pm_title"),
+  getBody: () => getI18nString("rcs.figjam_widget_nudge.pm_body"),
   width: 240
 });
 sJ({
   trackingContextName: "FigJam Widget Nudge Alignment",
-  getTitle: () => _$$t("rcs.figjam_widget_nudge.align_title"),
-  getBody: () => _$$t("rcs.figjam_widget_nudge.align_body")
+  getTitle: () => getI18nString("rcs.figjam_widget_nudge.align_title"),
+  getBody: () => getI18nString("rcs.figjam_widget_nudge.align_body")
 });
 sJ({
   trackingContextName: "FigJam Widget Nudge Fun",
-  getTitle: () => _$$t("rcs.figjam_widget_nudge.fun_title"),
-  getBody: () => _$$t("rcs.figjam_widget_nudge.fun_body")
+  getTitle: () => getI18nString("rcs.figjam_widget_nudge.fun_title"),
+  getBody: () => getI18nString("rcs.figjam_widget_nudge.fun_body")
 });
 var s$ = (e => (e.AwaitIsShowing = "AwaitIsShowing", e.AwaitPastedElementsSelected = "AwaitPastedElementsSelected", e.AwaitOtherElementsSelected = "AwaitOtherElementsSelected", e.Completed = "Completed", e))(s$ || {});
 var s0 = (e => (e.OnShow = "OnShowUpsellLibariesConsecutivePaste", e.SelectionChanged = "Selection Changed", e))(s0 || {});
@@ -7752,12 +7752,12 @@ let s3 = _$$r2("explicitly_dismissed_create_component_pointer");
 let s5 = _$$tH("first_component_created_date");
 function s4() {
   let e = useDispatch();
-  let t = md(_$$t2);
-  let i = md(NZ);
-  let n = md(pQ);
+  let t = useAtomWithSubscription(_$$t2);
+  let i = useAtomWithSubscription(NZ);
+  let n = useAtomWithSubscription(pQ);
   let a = jO();
-  let o = md(s5);
-  let l = md(s3);
+  let o = useAtomWithSubscription(s5);
+  let l = useAtomWithSubscription(s3);
   let d = _$$zl(s2);
   let c = _$$e({
     overlay: g4U,
@@ -7864,7 +7864,7 @@ function oo() {
       })));
     });
   })();
-  let e = md(ot);
+  let e = useAtomWithSubscription(ot);
   let t = _$$e({
     overlay: uPw,
     priority: _$$N.OVERRIDING_MODAL
@@ -7872,43 +7872,43 @@ function oo() {
   let i = function (e) {
     let t = useDispatch();
     return useMemo(() => [{
-      title: _$$tx("rcs.figjam_diagram_onboarding.connectors_title"),
+      title: renderI18nText("rcs.figjam_diagram_onboarding.connectors_title"),
       trackingContextName: or.connectors,
       arrowPosition: F_.BOTTOM,
       media: jsx(_$$y, {
         src: on,
         aspectRatio: 900 / 508,
-        alt: _$$t("rcs.figjam_diagram_onboarding.connectors_title")
+        alt: getI18nString("rcs.figjam_diagram_onboarding.connectors_title")
       }),
-      description: _$$tx("rcs.figjam_diagram_onboarding.connectors"),
+      description: renderI18nText("rcs.figjam_diagram_onboarding.connectors"),
       targetKey: BC,
       onClose: lQ
     }, {
-      title: _$$tx("rcs.figjam_diagram_onboarding.shapes_title"),
+      title: renderI18nText("rcs.figjam_diagram_onboarding.shapes_title"),
       trackingContextName: or.shapes,
       arrowPosition: F_.BOTTOM,
       media: jsx(_$$y, {
         aspectRatio: 900 / 507,
         src: oa,
-        alt: _$$t("rcs.figjam_diagram_onboarding.shapes_title")
+        alt: getI18nString("rcs.figjam_diagram_onboarding.shapes_title")
       }),
-      description: _$$tx("rcs.figjam_diagram_onboarding.shapes"),
+      description: renderI18nText("rcs.figjam_diagram_onboarding.shapes"),
       targetKey: BC,
       onClose: lQ
     }, {
-      title: _$$tx("rcs.figjam_diagram_onboarding.templates_title"),
+      title: renderI18nText("rcs.figjam_diagram_onboarding.templates_title"),
       trackingContextName: or.templates,
       arrowPosition: F_.BOTTOM,
       media: jsx(_$$y, {
         aspectRatio: 900 / 505,
         src: os,
-        alt: _$$t("rcs.figjam_diagram_onboarding.templates_title")
+        alt: getI18nString("rcs.figjam_diagram_onboarding.templates_title")
       }),
-      description: _$$tx("rcs.figjam_diagram_onboarding.templates"),
+      description: renderI18nText("rcs.figjam_diagram_onboarding.templates"),
       targetKey: yl,
       secondaryCta: {
         type: "button",
-        label: _$$tx("rcs.figjam_diagram_onboarding.see_templates"),
+        label: renderI18nText("rcs.figjam_diagram_onboarding.see_templates"),
         onClick: () => {
           t(En({
             initialX: 0,
@@ -7937,10 +7937,10 @@ function oo() {
 let od = "seen_figjam_workshop_onboarding";
 let oc = _$$r2(od);
 function ou(e) {
-  let t = md(J1);
-  let i = md(oc);
-  let n = md(zo);
-  let a = md(PD);
+  let t = useAtomWithSubscription(J1);
+  let i = useAtomWithSubscription(oc);
+  let n = useAtomWithSubscription(zo);
+  let a = useAtomWithSubscription(PD);
   let o = _$$e({
     overlay: Fq3,
     priority: _$$N.SECONDARY_MODAL
@@ -7960,7 +7960,7 @@ function ou(e) {
     onClose: o.complete,
     onManualDismiss: o.complete,
     onboardingKey: v4,
-    title: () => _$$t("rcs.figjam_workshop.invite_the_world_to_your_workshop"),
+    title: () => getI18nString("rcs.figjam_workshop.invite_the_world_to_your_workshop"),
     totalNumSteps: 1,
     trackingContextName: "Fig Jam Workshop Onboarding",
     userFlagOnShow: od,
@@ -7973,7 +7973,7 @@ function op(e) {
       width: 301,
       src: buildUploadUrl("a97e76df2b43ae8b408127c1c63ea0b8485ba8ac")
     }), jsx(_$$ak, {
-      children: _$$tx("rcs.figjam_workshop.open_sessions_let_you_jam_with_anyone_even_people_who_don_t_have_a_figma_account")
+      children: renderI18nText("rcs.figjam_workshop.open_sessions_let_you_jam_with_anyone_even_people_who_don_t_have_a_figma_account")
     })]
   });
 }
@@ -8006,7 +8006,7 @@ function ow() {
   _$$E2(uniqueId, "create_frame", useCallback(() => {
     !l || d || c || u || isShowing || show();
   }, [d, c, isShowing, l, show, u]));
-  let _ = md(_$$a3);
+  let _ = useAtomWithSubscription(_$$a3);
   let x = !!_$$f(Of(wn.FORMAT_FRAME, !1).tutorialPlayedUserFlag);
   let b = useMemo(() => _$$p2(x, !1), [x]);
   if (!isShowing) return null;
@@ -8057,7 +8057,7 @@ function oS() {
   }, [b, _, isShowing, show, C, l, d, c, m]);
   let v = !!_$$f(Of(wn.FORMAT_TEXT, !1).tutorialPlayedUserFlag);
   let E = useMemo(() => _$$Z(v, !1), [v]);
-  let T = md(_$$a3);
+  let T = useAtomWithSubscription(_$$a3);
   if (!isShowing) return null;
   if (T === h0.PLAYING) return jsx(_$$a4, {
     cursorBotStateManager: u,
@@ -8100,14 +8100,14 @@ function ok() {
   };
   return jsx(_$$rq, {
     arrowPosition: F_.RIGHT_BODY,
-    description: _$$tx("tooltips_plus_onboarding.design_panel.description"),
+    description: renderI18nText("tooltips_plus_onboarding.design_panel.description"),
     disableHighlight: !0,
     emphasized: !0,
     isShowing: e.isShowing,
     onClose: l,
     onTargetLost: l,
     targetKey: _$$W,
-    title: _$$tx("tooltips_plus_onboarding.change_properties_in_the_design_panel"),
+    title: renderI18nText("tooltips_plus_onboarding.change_properties_in_the_design_panel"),
     trackingContextName: "Tooltips+ > Reactive Follow Ups > Frame Formatting"
   });
 }
@@ -8132,14 +8132,14 @@ function oN() {
   };
   return jsx(_$$rq, {
     arrowPosition: F_.RIGHT_BODY,
-    description: _$$tx("tooltips_plus_onboarding.text_formatting.description"),
+    description: renderI18nText("tooltips_plus_onboarding.text_formatting.description"),
     disableHighlight: !0,
     emphasized: !0,
     isShowing: e.isShowing,
     onClose: l,
     onTargetLost: l,
     targetKey: _$$B4,
-    title: _$$tx("tooltips_plus_onboarding.text_formatting.title"),
+    title: renderI18nText("tooltips_plus_onboarding.text_formatting.title"),
     trackingContextName: "Tooltips+ > Reactive Follow Ups > Text Formatting"
   });
 }
@@ -8163,14 +8163,14 @@ function oG(e) {
   let p = o.linkExpiresAt;
   let h = Ch(o.filePermissionsData, e.org);
   let m = M3(_$$A3(p));
-  let f = !u && c ? _$$tx("link_expired_overlay.different_branch_permissions_header") : _$$tx("link_expired_overlay.header");
-  t = u ? _$$tx("link_expired_overlay.same_branch_permissions_body", {
+  let f = !u && c ? renderI18nText("link_expired_overlay.different_branch_permissions_header") : renderI18nText("link_expired_overlay.header");
+  t = u ? renderI18nText("link_expired_overlay.same_branch_permissions_body", {
     formattedTimestamp: m,
     audience: h
-  }) : c ? _$$tx("link_expired_overlay.different_branch_permissions_body", {
+  }) : c ? renderI18nText("link_expired_overlay.different_branch_permissions_body", {
     formattedTimestamp: m,
     audience: h
-  }) : _$$tx("link_expired_overlay.body", {
+  }) : renderI18nText("link_expired_overlay.body", {
     formattedTimestamp: m,
     audience: h
   });
@@ -8183,7 +8183,7 @@ function oG(e) {
     onClose: overlay.complete
   });
 }
-let oK = bt(e => e.modalShown);
+let oK = createReduxSubscriptionAtomWithState(e => e.modalShown);
 function oH(e) {
   let t = useRef(null);
   let i = _$$e({
@@ -8191,8 +8191,8 @@ function oH(e) {
     priority: _$$N.SECONDARY_MODAL
   });
   let a = _$$sZ();
-  let o = md(yV);
-  let l = md(oK)?.type === jS;
+  let o = useAtomWithSubscription(yV);
+  let l = useAtomWithSubscription(oK)?.type === jS;
   return (_$$E2(i.uniqueId, [q2], () => {
     a && o && !i.isShowing && !l && i.show();
   }), useEffect(() => (i.isShowing ? t.current = setTimeout(() => {
@@ -8210,9 +8210,9 @@ function oX() {
   let e = useDispatch();
   let t = PE();
   let i = _$$r2(Kt);
-  let r = md(i);
+  let r = useAtomWithSubscription(i);
   let a = _$$r2(wl);
-  let o = md(a);
+  let o = useAtomWithSubscription(a);
   let l = _$$sO();
   let d = _$$aV();
   let {
@@ -8256,14 +8256,14 @@ function o2({
 }) {
   let t = useDispatch();
   let i = _$$r2(Kt);
-  let a = md(i);
+  let a = useAtomWithSubscription(i);
   let o = _$$r2(uM);
-  let l = md(o);
+  let l = useAtomWithSubscription(o);
   let d = hX(`[data-onboarding-key="${O0}"]`);
   let c = q5();
-  let u = md(Fy);
+  let u = useAtomWithSubscription(Fy);
   let h = _$$aV();
-  let m = md(_$$U3({
+  let m = useAtomWithSubscription(_$$U3({
     teamId: e,
     editorType: FFileType.SLIDES
   }));
@@ -8291,7 +8291,7 @@ function o2({
       type: _$$eg,
       data: {
         targetRect: d,
-        activePathOnMount: [_$$t("tile.dropdown.publish_as_template")]
+        activePathOnMount: [getI18nString("tile.dropdown.publish_as_template")]
       }
     }));
   }, [t, d, isShowing]);
@@ -8299,26 +8299,26 @@ function o2({
     arrowPadding: 4,
     arrowPosition: F_.LEFT_TITLE,
     clickOutsideToHide: !0,
-    description: _$$tx("slides.templates.pro_templates_announcement.description"),
+    description: renderI18nText("slides.templates.pro_templates_announcement.description"),
     disableHighlight: !0,
     isShowing,
     onClose: complete,
     onTargetLost: complete,
     primaryCta: {
-      label: _$$tx("slides.templates.pro_templates_announcement.button.done"),
+      label: renderI18nText("slides.templates.pro_templates_announcement.button.done"),
       type: "button",
       onClick: complete,
       ctaTrackingDescriptor: _$$c.DONE
     },
     targetKey: w1,
-    title: _$$tx("slides.templates.pro_templates_announcement.header"),
+    title: renderI18nText("slides.templates.pro_templates_announcement.header"),
     trackingContextName: "Slides Pro Templates Announcement",
     userFlagOnShow: "seen_slides_pro_templates_announcement",
     zIndex: _$$R.MODAL
   });
 }
 function o7() {
-  let e = md(Fy);
+  let e = useAtomWithSubscription(Fy);
   let {
     show,
     isShowing,
@@ -8341,40 +8341,40 @@ function o7() {
   return jsx(_$$rq, {
     arrowPadding: 8,
     arrowPosition: F_.BOTTOM,
-    description: _$$tx("whiteboard.toolbelt.onboarding_feature_callout.description"),
+    description: renderI18nText("whiteboard.toolbelt.onboarding_feature_callout.description"),
     disableHighlight: !0,
     forceUI3Theme: !0,
     isShowing,
     media: jsx(_$$y, {
       src: buildUploadUrl("6462781efe9eeb4aa90be0eed2316ae8fedb7980"),
-      alt: _$$t("whiteboard.toolbelt.onboarding_feature_callout.imageAltText"),
+      alt: getI18nString("whiteboard.toolbelt.onboarding_feature_callout.imageAltText"),
       aspectRatio: 16 / 9
     }),
     onClose: complete,
     primaryCta: {
       type: "button",
-      label: _$$tx("rcs.got_it"),
+      label: renderI18nText("rcs.got_it"),
       onClick: complete,
       ctaTrackingDescriptor: _$$c.GOT_IT
     },
     shouldCenterArrow: EL.BEST_EFFORT,
     shouldDisableAnimation: !0,
     targetKey: yl,
-    title: _$$tx("whiteboard.toolbelt.onboarding_feature_callout.title"),
+    title: renderI18nText("whiteboard.toolbelt.onboarding_feature_callout.title"),
     trackingContextName: "FigJam UI3 Toolbelt Onboarding",
     userFlagOnShow: "seen_figjam_ui3_toolbelt_onboarding"
   });
 }
 function o9(e) {
   return {
-    isDesignEditor: e === _$$nT.Design,
-    isFigjamEditor: e === _$$nT.Whiteboard,
-    isSlidesEditor: e === _$$nT.Slides,
-    isDevModeEditor: e === _$$nT.DevHandoff,
-    isCooperEditor: e === _$$nT.Cooper,
-    isSitesEditor: e === _$$nT.Sites,
-    isFigmakeEditor: e === _$$nT.Figmake,
-    isIllustrationEditor: e === _$$nT.Illustration
+    isDesignEditor: e === FEditorType.Design,
+    isFigjamEditor: e === FEditorType.Whiteboard,
+    isSlidesEditor: e === FEditorType.Slides,
+    isDevModeEditor: e === FEditorType.DevHandoff,
+    isCooperEditor: e === FEditorType.Cooper,
+    isSitesEditor: e === FEditorType.Sites,
+    isFigmakeEditor: e === FEditorType.Figmake,
+    isIllustrationEditor: e === FEditorType.Illustration
   };
 }
 export let $$le0 = memo(function ({
@@ -8390,7 +8390,7 @@ export let $$le0 = memo(function ({
     l.current = !isDesignEditor;
   }, [isDesignEditor]);
   (function (e) {
-    let t = md(_$$a3);
+    let t = useAtomWithSubscription(_$$a3);
     let i = useSelector(e => e.user?.created_at);
     let r = !!i && _$$A3("2023-05-01").isBefore(i);
     useEffect(() => {
@@ -8425,10 +8425,10 @@ export let $$le0 = memo(function ({
   })(l);
   (function (e) {
     let t = useDispatch();
-    let i = md(mp);
+    let i = useAtomWithSubscription(mp);
     let r = null != i && _$$A3("2023-10-31").isBefore(i);
     let a = !!_$$f("has_opened_design_editor");
-    let [o, l] = fp(eu);
+    let [o, l] = useAtomValueAndSetter(eu);
     useEffect(() => {
       r && !a && e && (l(!0), t(_$$b({
         has_opened_design_editor: !0
@@ -8439,14 +8439,14 @@ export let $$le0 = memo(function ({
     }, [o, e, l]);
   })(isDesignEditor);
   let d = MY();
-  let c = md(yF);
+  let c = useAtomWithSubscription(yF);
   let u = _$$I();
-  return z4.getIsExtension() || "loaded" !== d.status || pb.isGoogleClassroomIntegration() || c === _$$E4 || c === _$$XC || isDevModeEditor && u ? null : jsxs(Suspense, {
+  return z4.getIsExtension() || "loaded" !== d.status || IntegrationUtils.isGoogleClassroomIntegration() || c === _$$E4 || c === _$$XC || isDevModeEditor && u ? null : jsxs(Suspense, {
     fallback: null,
     children: [jsx(lt, {
       openFile: t,
       editorType: e
-    }), !Ay.isIpadNative && jsx(li, {
+    }), !BrowserInfo.isIpadNative && jsx(li, {
       openFile: t,
       editorType: e
     })]
@@ -8480,21 +8480,21 @@ function li({
   let g = Oc();
   let _ = function (e) {
     switch (e) {
-      case _$$nT.Design:
+      case FEditorType.Design:
         return C5.Design;
-      case _$$nT.Whiteboard:
+      case FEditorType.Whiteboard:
         return C5.FigJam;
-      case _$$nT.Slides:
+      case FEditorType.Slides:
         return C5.Slides;
-      case _$$nT.DevHandoff:
+      case FEditorType.DevHandoff:
         return C5.DevMode;
-      case _$$nT.Cooper:
+      case FEditorType.Cooper:
         return C5.Cooper;
-      case _$$nT.Sites:
+      case FEditorType.Sites:
         return C5.Sites;
-      case _$$nT.Figmake:
+      case FEditorType.Figmake:
         return C5.FigMake;
-      case _$$nT.Illustration:
+      case FEditorType.Illustration:
         return C5.Illustration;
       default:
         return C5.Unknown;
@@ -8507,7 +8507,7 @@ function li({
       })
     })
   }) : jsxs(Fragment, {
-    children: [isDesignEditor && !_$$nl() && jsx(_$$p3, {
+    children: [isDesignEditor && !isInteractionPathCheck() && jsx(_$$p3, {
       children: jsx(to, {})
     }), isFigjamEditor && !isDesignEditor && jsx(_$$Q4, {
       children: jsx(_$$p3, {
@@ -8521,7 +8521,7 @@ function li({
       children: jsx(_$$F2, {})
     }), !g && jsx(_$$p3, {
       children: jsx(_$$w4, {})
-    }), !Xb && jsxs(Fragment, {
+    }), !isAnyMobile && jsxs(Fragment, {
       children: [jsx(_$$p3, {
         children: jsx(_$$P, {})
       }), jsx(_$$p3, {
@@ -8571,7 +8571,7 @@ function li({
       children: jsx(t7, {})
     }), jsx(_$$p3, {
       children: jsx(tC, {})
-    }), !Xb && jsx(_$$p3, {
+    }), !isAnyMobile && jsx(_$$p3, {
       children: jsx(ik, {})
     }), jsx(_$$p3, {
       children: jsx(_$$b3, {})

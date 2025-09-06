@@ -9,7 +9,7 @@ import { bL, l9, mc, c$ } from "../905/493196";
 import { J } from "../905/270045";
 import { l7 } from "../905/189185";
 import { H0, F_ } from "../figma_app/191804";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Zk } from "../figma_app/626177";
 import { $H, mn, od, Cd } from "../048e062c/416936";
 import { u as _$$u } from "../642/560546";
@@ -35,24 +35,24 @@ function C({
   return jsxs(Zk, {
     children: [jsx($n, {
       onClick: () => i(!0),
-      children: _$$t("react-scenegraph.chart.edit_data")
+      children: getI18nString("react-scenegraph.chart.edit_data")
     }), h && jsx($n, {
       onClick: () => l7.user("chart-clearOverrides", () => od(e)),
-      children: _$$t("react-scenegraph.chart.clear_overrides")
+      children: getI18nString("react-scenegraph.chart.clear_overrides")
     }), jsxs(bL, {
       value: l,
       onChange: e => a(e),
       children: [jsx(l9, {
         label: jsx(J, {
-          children: _$$t("react-scenegraph.chart.chart_type")
+          children: getI18nString("react-scenegraph.chart.chart_type")
         })
       }), jsxs(mc, {
         children: [jsx(c$, {
           value: N.BAR_GROUPED,
-          children: _$$t("react-scenegraph.chart.bar_grouped")
+          children: getI18nString("react-scenegraph.chart.bar_grouped")
         }), jsx(c$, {
           value: N.BAR_STACKED,
-          children: _$$t("react-scenegraph.chart.bar_stacked")
+          children: getI18nString("react-scenegraph.chart.bar_stacked")
         })]
       })]
     }), jsx(j, {

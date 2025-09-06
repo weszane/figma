@@ -2,10 +2,10 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { useSelector } from "../vendor/514228";
 import { N_ } from "../vendor/956898";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { e as _$$e } from "../905/579755";
 import { l as _$$l } from "../905/152724";
 import { y } from "../905/158417";
@@ -28,7 +28,7 @@ export function $$y2({
       (t ? XHR.del : XHR.put)("/api/follows", {
         followed_profile_id: e
       }).then(() => {
-        t || sx("community_hub_profile_follow", {
+        t || trackEventAnalytics("community_hub_profile_follow", {
           profileId: e,
           searchSessionId: i
         });
@@ -41,9 +41,9 @@ export function $$y2({
       });
     },
     className: t ? "author_dropdown_preview--followButtonFollowing--89WFU author_dropdown_preview--followButton--RGrpo" : "author_dropdown_preview--followButton--RGrpo",
-    "data-follow": _$$t("community.follow.follow"),
-    "data-unfollow": _$$t("community.follow.unfollow"),
-    "data-following": _$$t("community.follow.following")
+    "data-follow": getI18nString("community.follow.follow"),
+    "data-unfollow": getI18nString("community.follow.unfollow"),
+    "data-following": getI18nString("community.follow.following")
   });
 }
 let b = {};
@@ -102,7 +102,7 @@ export function $$T0({
       })
     }), jsx("div", {
       className: "author_dropdown_preview--authorFollowerCount--twID0",
-      children: tx("community.profiles.follower_count", {
+      children: renderI18nText("community.profiles.follower_count", {
         followerCount: e.follower_count,
         formattedFollowerCount: jsx("span", {
           children: e.follower_count
@@ -152,7 +152,7 @@ export function $$T0({
       onFollowChange: t => {
         s(t);
         b[e.id] = t;
-        sx("community_hub_profile_preview__profile_follow", {
+        trackEventAnalytics("community_hub_profile_preview__profile_follow", {
           profileId: e.id
         });
       }

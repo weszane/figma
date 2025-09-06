@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext } from 'react';
 import { YZ } from '../905/62762';
-import { pp } from '../905/449184';
+import { getAnonymousId } from '../905/449184';
 import { k } from '../905/651849';
 import { An } from '../905/931912';
 import { getInitialOptions } from '../figma_app/169182';
@@ -72,7 +72,7 @@ const samplingStrategies = {
     if (userId !== undefined) {
       return shouldSample(YZ(`${samplingKey}${userId}`), samplingRate);
     }
-    const anonymousId = pp();
+    const anonymousId = getAnonymousId();
     if (anonymousId !== undefined) {
       return shouldSample(YZ(`${samplingKey}${anonymousId}`), samplingRate);
     }

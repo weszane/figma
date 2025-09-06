@@ -15,17 +15,17 @@ import { r as _$$r } from "../905/571562";
 import { A as _$$A } from "../905/24328";
 import { glU } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
-import { eU, md } from "../figma_app/27355";
+import { atom, useAtomWithSubscription } from "../figma_app/27355";
 import { generateRecordingKey } from "../figma_app/878298";
 import { g as _$$g } from "../905/880308";
 import { c$ as _$$c$ } from "../figma_app/236327";
 import { _ as _$$_ } from "../figma_app/658134";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Y5 } from "../figma_app/455680";
 import { tJ } from "../figma_app/741237";
 import { BK } from "../905/848862";
-import { bt } from "../905/270322";
+import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { Ju, ZU } from "../905/102752";
 import { Jz } from "../905/504727";
 import { uh } from "../figma_app/410518";
@@ -47,7 +47,7 @@ let g = memo(function (e) {
     })
   });
 });
-let B = eU(async e => {
+let B = atom(async e => {
   let t = e(Qy);
   if (t) {
     let r = await e(uh);
@@ -128,7 +128,7 @@ function z({
         "aria-expanded": showing,
         children: jsxs("div", {
           className: "lint_error_modal--fixIssuesDropdownButton--vN-0U",
-          children: [t.recommendationLabelOverride ?? _$$t("sites.lint.fix-issue"), jsx(_$$r, {})]
+          children: [t.recommendationLabelOverride ?? getI18nString("sites.lint.fix-issue"), jsx(_$$r, {})]
         })
       }), showing && d.current && jsx(Jz, {
         options: e,
@@ -181,10 +181,10 @@ function W({
     }), i && jsx("div", {
       className: "lint_error_modal--errorTarget--kau97",
       children: jsx(K, {
-        "aria-label": _$$t("sites.panel.sites_issues.select_nodes_with_issues"),
+        "aria-label": getI18nString("sites.panel.sites_issues.select_nodes_with_issues"),
         onClick: () => V(t.nodeIds),
         htmlAttributes: {
-          "data-tooltip": _$$t("sites.panel.sites_issues.select_nodes_with_issues"),
+          "data-tooltip": getI18nString("sites.panel.sites_issues.select_nodes_with_issues"),
           "data-tooltip-type": "text"
         },
         children: jsx(_$$A, {})
@@ -198,7 +198,7 @@ export function $$K1({
   onlyShowResponsiveSetGuids: r
 }) {
   let a = getSingletonSceneGraph();
-  let s = md(_b)?.mode !== "fullscreen";
+  let s = useAtomWithSubscription(_b)?.mode !== "fullscreen";
   let o = useMemo(uU, []);
   let [c, u] = useState("all");
   let p = useMemo(() => {
@@ -238,8 +238,8 @@ export function $$K1({
     return !r || r.includes(t);
   }), [a, h, r]);
   return 0 === Object.keys(h).length ? jsx($$G2, {
-    title: _$$t("sites.panel.sites_issues.no_issues.title"),
-    description: _$$t("sites.panel.sites_issues.no_issues.description")
+    title: getI18nString("sites.panel.sites_issues.no_issues.title"),
+    description: getI18nString("sites.panel.sites_issues.no_issues.description")
   }) : jsxs("div", {
     className: "lint_error_modal--lintErrorsContent--qTrOy",
     children: [_ && jsx("div", {
@@ -250,13 +250,13 @@ export function $$K1({
         recordingKey: generateRecordingKey(e, "category-filter"),
         children: [jsx(l9, {
           label: jsx(_$$h, {
-            children: _$$t("sites.panel.sites_issues.issue_type")
+            children: getI18nString("sites.panel.sites_issues.issue_type")
           }),
-          children: "all" === c ? _$$t("sites.panel.sites_issues.all_properties") : o[c].label
+          children: "all" === c ? getI18nString("sites.panel.sites_issues.all_properties") : o[c].label
         }), jsxs(mc, {
           children: [jsx(c$, {
             value: "all",
-            children: _$$t("sites.panel.sites_issues.all_properties")
+            children: getI18nString("sites.panel.sites_issues.all_properties")
           }), jsx(wv, {}), Object.entries(o).filter(([e]) => p.has(e)).map(([e, {
             label: t
           }]) => jsx(c$, {
@@ -267,7 +267,7 @@ export function $$K1({
       })
     }), m.map(([t, r]) => {
       let i = a.get(t)?.name;
-      let l = "/" === i ? _$$t("sites.panel.home") : i;
+      let l = "/" === i ? getI18nString("sites.panel.home") : i;
       return jsxs("div", {
         children: [jsx("div", {
           className: "lint_error_modal--lintErrorLocation--lkNBw",
@@ -292,7 +292,7 @@ export function $$Y3() {
   return jsxs("div", {
     className: "lint_error_modal--lintErrorsFallbackContent--dG9tc lint_error_modal--lintErrorsContent--qTrOy",
     children: [jsx(_$$k, {}), jsx("span", {
-      children: tx("sites.lint.looking-for-issues")
+      children: renderI18nText("sites.lint.looking-for-issues")
     })]
   });
 }
@@ -301,8 +301,8 @@ function $(e) {
     onContentLoaded,
     onlyShowResponsiveSetGuids
   } = e;
-  let a = md(Qy) ? B : _$$o;
-  let s = md(a);
+  let a = useAtomWithSubscription(Qy) ? B : _$$o;
+  let s = useAtomWithSubscription(a);
   useEffect(() => {
     onContentLoaded && onContentLoaded();
   }, [onContentLoaded]);
@@ -352,7 +352,7 @@ let $$X0 = Ju(function ({
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$t("sites.panel.sites_issues")
+          children: getI18nString("sites.panel.sites_issues")
         })
       }), jsxs(nB, {
         padding: 0,
@@ -375,7 +375,7 @@ let $$X0 = Ju(function ({
     children: c
   });
 }, "LINT_ERROR_MODAL", ZU.YES);
-let $$q4 = bt(e => e.modalShown?.type === $$X0.type);
+let $$q4 = createReduxSubscriptionAtomWithState(e => e.modalShown?.type === $$X0.type);
 export const bA = $$X0;
 export const F8 = $$K1;
 export const tE = $$G2;

@@ -1,7 +1,7 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useEffect, useMemo } from "react";
 import { getFeatureFlags } from "../905/601108";
-import { Xr, fp } from "../figma_app/27355";
+import { Xr, useAtomValueAndSetter } from "../figma_app/27355";
 import o from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
 import { wY } from "../figma_app/708845";
@@ -31,7 +31,7 @@ function w(e) {
     i(0);
   }), [o, i]);
   let b = function () {
-    let [e] = fp(_$$f);
+    let [e] = useAtomValueAndSetter(_$$f);
     let t = e?.current?.getBoundingClientRect();
     let i = !!(t && t.height > 0);
     let r = xn();

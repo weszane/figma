@@ -6,7 +6,7 @@ import o from "../vendor/128080";
 import { Ay } from "../905/612521";
 import { N as _$$N } from "../figma_app/469468";
 import { fs } from "../figma_app/930338";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { k as _$$k } from "../905/22009";
 import { L as _$$L } from "../905/178090";
 import { co, $2 } from "../figma_app/701107";
@@ -216,9 +216,9 @@ export function $$ei7(e, t) {
   return t?.entity_type !== o1.USER || t?.id === e;
 }
 export function $$ea2(e) {
-  return e.query ? t("community.search_results_tab_title", {
+  return e.query ? getI18nString("community.search_results_tab_title", {
     searchQuery: e.query
-  }) : t("community.browser_home_tab_title");
+  }) : getI18nString("community.browser_home_tab_title");
 }
 export function $$es23(e) {
   return !!e && e?.stripe_account_status && z4(e.stripe_account_status) >= z4(P5.ACCEPTED);

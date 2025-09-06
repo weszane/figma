@@ -4,9 +4,9 @@ import { debug } from "../figma_app/465776";
 import { debounce } from "../905/915765";
 import { glU, vmp } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import c from "classnames";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { E as _$$E, t7 } from "../905/508367";
 import { parsePxInt, parsePxNumber } from "../figma_app/783094";
 import { VZ } from "../figma_app/930338";
@@ -21,7 +21,7 @@ import { A as _$$A } from "../905/482208";
 import { Y5 } from "../figma_app/455680";
 import { Yb } from "../figma_app/62612";
 import { F4 } from "../905/691205";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { F as _$$F } from "../905/162860";
 import { Ib, zr, Zj, MW, Ui, qd } from "../905/129884";
 import { c1 } from "../figma_app/357047";
@@ -201,7 +201,7 @@ function W(e) {
     }
     let n = {};
     getFeatureFlags().exp_help_on_hover_ff && ul(o) && (n.isHelpOnHoverTooltip = c, c && (n.isHelpOnHoverDropdownTooltip = d));
-    sx("Tooltip Shown", {
+    trackEventAnalytics("Tooltip Shown", {
       text: t,
       key: r,
       ...n
@@ -358,7 +358,7 @@ export function $$Y4(e, t, r, n) {
   let i;
   let s = getFeatureFlags().fpl_hide_tooltip_aria_expanded;
   t?.selectedView && "fullscreen" === t.selectedView.view && (i = t.selectedView.editorType);
-  let o = i === nT.Whiteboard || i === nT.Cooper ? 500 : 1e3;
+  let o = i === FEditorType.Whiteboard || i === FEditorType.Cooper ? 500 : 1e3;
   if (e.hasAttribute("data-tooltip-show-on-target-only") && null != n && n !== e) return null;
   let d = e.getAttribute("data-tooltip-proxy-element-id");
   if (d) {
@@ -600,7 +600,7 @@ function q(e, t) {
   let a = i?.selectedView && "fullscreen" === i.selectedView.view;
   let s = $(e, i);
   if ("return" !== s && (s || (s = function () {
-    let e = zl.get(HV);
+    let e = atomStoreManager.get(HV);
     if (!e) return null;
     let t = Y5.getViewportInfo();
     let r = Yb(t, e.bounds);

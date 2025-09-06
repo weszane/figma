@@ -1,7 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { l7 } from '../905/189185';
 import { gl, oV } from '../905/216495';
-import { t } from '../905/303541';
+import { getI18nString } from '../905/303541';
 import { bj } from '../905/420347';
 import { YQ } from '../905/502364';
 import { M as _$$M } from '../905/512402';
@@ -14,7 +14,7 @@ import { qA } from '../1250/182479';
 import { go } from '../1250/447088';
 import { Z } from '../1250/621895';
 import { V as _$$V } from '../1250/993385';
-import { fp as _$$fp, Xr } from '../figma_app/27355';
+import { useAtomValueAndSetter, Xr } from '../figma_app/27355';
 import { iQA } from '../figma_app/43951';
 import { isNotNullish } from '../figma_app/95419';
 import { u as _$$u } from '../figma_app/187359';
@@ -108,10 +108,10 @@ export function $$X7() {
 export function $$J18() {
   let e = _$$U();
   let t = useSelector(e => e.search.sessionId);
-  let [n, i] = _$$fp(ce);
-  let [o, s] = _$$fp(EC);
-  let [l, d] = _$$fp(xB);
-  let [c, _] = _$$fp(Fs);
+  let [n, i] = useAtomValueAndSetter(ce);
+  let [o, s] = useAtomValueAndSetter(EC);
+  let [l, d] = useAtomValueAndSetter(xB);
+  let [c, _] = useAtomValueAndSetter(Fs);
   let m = n.trim();
   let [h] = _$$A(m, 200);
   let b = $$Z20();
@@ -319,7 +319,7 @@ export function $$ea12({
   };
 }
 export function $$er3(e) {
-  let [t, n] = _$$fp(L1);
+  let [t, n] = useAtomValueAndSetter(L1);
   let r = t[e] ?? 0;
   return {
     scrollPosition: r,
@@ -492,24 +492,24 @@ function ef() {
   return useSelector(e => e.mirror.selectionProperties.numSelected || 0) === 1;
 }
 let eh = () => ({
-  [Z64.BANNER_STANDARD]: t('cooper.templates.banner_standard_pretty'),
-  [Z64.BANNER_ULTRAWIDE]: t('cooper.templates.banner_ultrawide_pretty'),
-  [Z64.BANNER_WIDE]: t('cooper.templates.banner_wide_pretty'),
-  [Z64.CARD_HORIZONTAL]: t('cooper.templates.card_horizontal_pretty'),
-  [Z64.CARD_VERTICAL]: t('cooper.templates.card_vertical_pretty'),
-  [Z64.FACEBOOK_AD_PORTRAIT]: t('cooper.templates.facebook_ad_portrait_pretty'),
-  [Z64.FACEBOOK_AD_SQUARE]: t('cooper.templates.facebook_ad_square_pretty'),
-  [Z64.INSTA_POST_PORTRAIT]: t('cooper.templates.instagram_post_portrait_pretty'),
-  [Z64.INSTA_POST_SQUARE]: t('cooper.templates.instagram_post_square_pretty'),
-  [Z64.LINKEDIN_AD_LANDSCAPE]: t('cooper.templates.linked_in_ad_landscape_pretty'),
-  [Z64.LINKEDIN_AD_SQUARE]: t('cooper.templates.linked_in_ad_square_pretty'),
-  [Z64.LINKEDIN_AD_VERTICAL]: t('cooper.templates.linked_in_ad_vertical_pretty'),
-  [Z64.LINKEDIN_POST_LANDSCAPE]: t('cooper.templates.linked_in_post_landscape_pretty'),
-  [Z64.LINKEDIN_POST_PORTRAIT]: t('cooper.templates.linked_in_post_portrait_pretty'),
-  [Z64.LINKEDIN_POST_SQUARE]: t('cooper.templates.linked_in_post_square_pretty'),
-  [Z64.NAME_TAG_LANDSCAPE]: t('cooper.templates.name_tag_landscape_pretty'),
-  [Z64.NAME_TAG_PORTRAIT]: t('cooper.templates.name_tag_portrait_pretty'),
-  [Z64.PRINT_US_LETTER]: t('cooper.templates.print_us_letter_pretty')
+  [Z64.BANNER_STANDARD]: getI18nString('cooper.templates.banner_standard_pretty'),
+  [Z64.BANNER_ULTRAWIDE]: getI18nString('cooper.templates.banner_ultrawide_pretty'),
+  [Z64.BANNER_WIDE]: getI18nString('cooper.templates.banner_wide_pretty'),
+  [Z64.CARD_HORIZONTAL]: getI18nString('cooper.templates.card_horizontal_pretty'),
+  [Z64.CARD_VERTICAL]: getI18nString('cooper.templates.card_vertical_pretty'),
+  [Z64.FACEBOOK_AD_PORTRAIT]: getI18nString('cooper.templates.facebook_ad_portrait_pretty'),
+  [Z64.FACEBOOK_AD_SQUARE]: getI18nString('cooper.templates.facebook_ad_square_pretty'),
+  [Z64.INSTA_POST_PORTRAIT]: getI18nString('cooper.templates.instagram_post_portrait_pretty'),
+  [Z64.INSTA_POST_SQUARE]: getI18nString('cooper.templates.instagram_post_square_pretty'),
+  [Z64.LINKEDIN_AD_LANDSCAPE]: getI18nString('cooper.templates.linked_in_ad_landscape_pretty'),
+  [Z64.LINKEDIN_AD_SQUARE]: getI18nString('cooper.templates.linked_in_ad_square_pretty'),
+  [Z64.LINKEDIN_AD_VERTICAL]: getI18nString('cooper.templates.linked_in_ad_vertical_pretty'),
+  [Z64.LINKEDIN_POST_LANDSCAPE]: getI18nString('cooper.templates.linked_in_post_landscape_pretty'),
+  [Z64.LINKEDIN_POST_PORTRAIT]: getI18nString('cooper.templates.linked_in_post_portrait_pretty'),
+  [Z64.LINKEDIN_POST_SQUARE]: getI18nString('cooper.templates.linked_in_post_square_pretty'),
+  [Z64.NAME_TAG_LANDSCAPE]: getI18nString('cooper.templates.name_tag_landscape_pretty'),
+  [Z64.NAME_TAG_PORTRAIT]: getI18nString('cooper.templates.name_tag_portrait_pretty'),
+  [Z64.PRINT_US_LETTER]: getI18nString('cooper.templates.print_us_letter_pretty')
 });
 export function $$eb1(e, {
   usePrettyName: t

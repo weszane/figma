@@ -4,8 +4,8 @@ import { useDispatch } from "../vendor/514228";
 import { A as _$$A } from "../905/251970";
 import { J } from "../905/614223";
 import { getFeatureFlags } from "../905/601108";
-import { Xr, fp } from "../figma_app/27355";
-import { t as _$$t } from "../905/303541";
+import { Xr, useAtomValueAndSetter } from "../figma_app/27355";
+import { getI18nString } from "../905/303541";
 import { KD } from "../figma_app/975811";
 import { Um } from "../905/848862";
 import { rt } from "../figma_app/615482";
@@ -70,10 +70,10 @@ let $$T1 = 3e3;
 let $$S7 = 3e3;
 export function $$A3() {
   let e = useDispatch();
-  let [t, n] = fp($$_8);
-  let [h, g] = fp($$v5);
-  let [C, E] = fp($$I10);
-  let [A, w] = fp(b);
+  let [t, n] = useAtomValueAndSetter($$_8);
+  let [h, g] = useAtomValueAndSetter($$v5);
+  let [C, E] = useAtomValueAndSetter($$I10);
+  let [A, w] = useAtomValueAndSetter(b);
   let k = Um();
   let P = jsx(_$$A, {
     className: "x52n8ys"
@@ -94,14 +94,14 @@ export function $$A3() {
     C !== $$y2[A]?.width && D("CUSTOM");
   }, [A, C, D]), !getFeatureFlags().bake_mobile_preview || !t) return null;
   let R = {
-    ANDROID_COMPACT: _$$t("figmake.mobile_preview.options.android_compact"),
-    ANDROID_MEDIUM: _$$t("figmake.mobile_preview.options.android_medium"),
-    CUSTOM: _$$t("figmake.mobile_preview.options.custom"),
-    IPHONE_16: _$$t("figmake.mobile_preview.options.iphone_16"),
-    IPHONE_16_PRO: _$$t("figmake.mobile_preview.options.iphone_16_pro"),
-    IPHONE_16_PRO_MAX: _$$t("figmake.mobile_preview.options.iphone_16_pro_max"),
-    IPHONE_16_PLUS: _$$t("figmake.mobile_preview.options.iphone_16_plus"),
-    IPHONE_SE: _$$t("figmake.mobile_preview.options.iphone_se")
+    ANDROID_COMPACT: getI18nString("figmake.mobile_preview.options.android_compact"),
+    ANDROID_MEDIUM: getI18nString("figmake.mobile_preview.options.android_medium"),
+    CUSTOM: getI18nString("figmake.mobile_preview.options.custom"),
+    IPHONE_16: getI18nString("figmake.mobile_preview.options.iphone_16"),
+    IPHONE_16_PRO: getI18nString("figmake.mobile_preview.options.iphone_16_pro"),
+    IPHONE_16_PRO_MAX: getI18nString("figmake.mobile_preview.options.iphone_16_pro_max"),
+    IPHONE_16_PLUS: getI18nString("figmake.mobile_preview.options.iphone_16_plus"),
+    IPHONE_SE: getI18nString("figmake.mobile_preview.options.iphone_se")
   };
   return jsxs("div", {
     className: "x78zum5 x6s0dn4 x1n2onr6 x1qughib xxk0z11 x1yjdb4r xso031l x1y0btm7 x7z60cl xe8ttls",
@@ -137,7 +137,7 @@ export function $$A3() {
                 mode: "dark",
                 children: jsx("div", {
                   className: "x1n9xxwz xxymvpz x1hr2gdg x1n0bwc9 xuxw1ft",
-                  children: _$$t("figmake.mobile_preview.labels.aspect_ratio", {
+                  children: getI18nString("figmake.mobile_preview.labels.aspect_ratio", {
                     width: t,
                     height: n
                   })
@@ -153,7 +153,7 @@ export function $$A3() {
         className: "x1n2onr6 x29ncy0 x1rg5ohu",
         children: [jsx("span", {
           className: "x10l6tqk xncym2f x19up5dg xwa60dl x1cb1t30 x52n8ys x47corl x1j6dyjg x1vjfegm",
-          children: _$$t("figmake.mobile_preview.labels.width")
+          children: getI18nString("figmake.mobile_preview.labels.width")
         }), jsx(Q7, {
           className: "xd3ty66 x1v8gsql xfj9a5l x1et26g5 x3sae66 x177gm3j xl0cjzi",
           property: C,
@@ -169,7 +169,7 @@ export function $$A3() {
         className: "x1n2onr6 x29ncy0 x1rg5ohu",
         children: [jsx("span", {
           className: "x10l6tqk xncym2f x19up5dg xwa60dl x1cb1t30 x52n8ys x47corl x1j6dyjg x1vjfegm",
-          children: _$$t("figmake.mobile_preview.labels.height")
+          children: getI18nString("figmake.mobile_preview.labels.height")
         }), jsx(Q7, {
           className: "xd3ty66 x1v8gsql xfj9a5l x1et26g5 x3sae66 x177gm3j xl0cjzi",
           property: h,

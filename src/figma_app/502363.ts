@@ -3,7 +3,7 @@ import { Component, useMemo, useCallback, useRef, useEffect } from "react";
 import { connect, useSelector, useDispatch } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { c2 } from "../905/382883";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { r } from "../905/398386";
 import { HI, ej as _$$ej, w2, $P, qv, PP, Dy, PI, _z, ky, Ns } from "../905/977218";
 import { VP, GH, aF, Fl } from "../905/18797";
@@ -14,7 +14,7 @@ import { E as _$$E } from "../905/632989";
 import { Rs } from "../figma_app/288654";
 import { x as _$$x } from "../905/211326";
 import { B as _$$B } from "../905/714743";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { H as _$$H } from "../905/799228";
 import { p as _$$p } from "../figma_app/837956";
 import { D6 } from "../figma_app/863319";
@@ -51,7 +51,7 @@ import { A as _$$A6 } from "../1617/586892";
 import { A as _$$A7 } from "../svg/821527";
 import { h as _$$h2 } from "../905/994594";
 import { getFeatureFlags } from "../905/601108";
-import { md, fp, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, useAtomValueAndSetter, Xr } from "../figma_app/27355";
 import { parsePxNumber } from "../figma_app/783094";
 import { hO } from "../figma_app/545293";
 import { to, AS } from "../905/156213";
@@ -74,7 +74,7 @@ import { r as _$$r2 } from "../905/264954";
 import { RAo, aIx } from "../figma_app/27776";
 import { PP as _$$PP, xx, v$ } from "../905/981129";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { UP } from "../figma_app/740025";
 import { Q as _$$Q2 } from "../905/618914";
 import { FOrganizationLevelType, FMemberRoleType } from "../figma_app/191312";
@@ -136,7 +136,7 @@ class U extends Component {
       className: g4,
       children: () => this.props.didFail ? jsx($$G6, {
         illustration: _$$A5,
-        resourceTypeDisplayString: this.props.failureMessage || _$$t("search.search_model_type.search_error"),
+        resourceTypeDisplayString: this.props.failureMessage || getI18nString("search.search_model_type.search_error"),
         searchModelType: this.props.searchModelType,
         query: null,
         activePlan: this.props.activePlan,
@@ -238,8 +238,8 @@ export function $$G6(e) {
         onClick: () => {
           u && u();
         },
-        "aria-label": _$$t("search.empty_state.try_searching_whole_org"),
-        children: tx("search.empty_state.try_searching_whole_org")
+        "aria-label": getI18nString("search.empty_state.try_searching_whole_org"),
+        children: renderI18nText("search.empty_state.try_searching_whole_org")
       })]
     })]
   }), [query, u, c, resourceTypeDisplayString]);
@@ -341,7 +341,7 @@ class V extends Component {
     let e = this.props.searchResults ?? H;
     let t = this.getFilteredResults(e, this.props.sortFilterConfig);
     return jsx(r, {
-      toolbar: Ay.mobile ? jsx(_$$o, {}) : void 0,
+      toolbar: BrowserInfo.mobile ? jsx(_$$o, {}) : void 0,
       viewbar: jsx(ZG, {
         sortControlsDisabled: 0 === e.length
       }),
@@ -541,13 +541,13 @@ function eh(e) {
         onChange: onSearchChange,
         onFocus,
         onKeyDown: onSearchKeyDown,
-        placeholder: _$$t("desktop_new_tab.search.search_for_files_placeholder"),
+        placeholder: getI18nString("desktop_new_tab.search.search_for_files_placeholder"),
         spellCheck: !1,
         value: e.query
       }), !!e.query && jsx(_$$E, {
         className: "search_bar--xIconButton--sKqOL",
         onClick: onClearSearchClick,
-        "aria-label": _$$t("search.search_bar.clear"),
+        "aria-label": getI18nString("search.search_bar.clear"),
         children: jsx(_$$B, {
           className: "search_bar--xIcon--XpjH6",
           svg: _$$A7
@@ -586,7 +586,7 @@ function em(e) {
       className: "search_bar--emptySearchResults--4M2jX",
       children: jsx("p", {
         className: "search_bar--emptySearchResultsMessage--Rqfe9",
-        children: tx("desktop_new_tab.search.no_file_results_matching", {
+        children: renderI18nText("desktop_new_tab.search.no_file_results_matching", {
           searchQuery: jsx("span", {
             className: "search_bar--searchResultsHighlightedQuery--OCvgT",
             children: e.completedQuery
@@ -641,7 +641,7 @@ function eg(e) {
   }, [keyboardNavigationItem, index]);
   let g = $E()(l);
   let f = l.folder_id && r[l.folder_id]?.name;
-  let E = tx("desktop_new_tab.edited_at_time_stamp", {
+  let E = renderI18nText("desktop_new_tab.edited_at_time_stamp", {
     relativeTime: jsx(h1, {
       date: l.touched_at
     })
@@ -716,7 +716,7 @@ function ef(e) {
         [el]: isFauxFocused
       }),
       children: jsx("p", {
-        children: tx("search.preview_item.see_all_search_results")
+        children: renderI18nText("search.preview_item.see_all_search_results")
       })
     })
   });
@@ -749,9 +749,9 @@ let eK = Ju(function () {
   let e = useDispatch();
   let t = useSelector(e => e.modalShown);
   let r = useSelector(e => e.search.sessionId);
-  let s = md(_$$Q);
-  let [o, l] = fp(z5);
-  let d = md(L8);
+  let s = useAtomWithSubscription(_$$Q);
+  let [o, l] = useAtomValueAndSetter(z5);
+  let d = useAtomWithSubscription(L8);
   let c = _$$A8();
   useEffect(() => () => {
     r && vj.Session.searchModalExit(r);
@@ -825,7 +825,7 @@ export function $$e53({
     let r = useSelector(e => getPermissionsStateMemoized(e));
     let n = X$("useUpdateSearchScope");
     let s = useRef(!1);
-    r.currentTeamId && n.data?.key.type === FOrganizationLevelType.ORG && !s.current && (s.current = !0, $D(_$$e.FRONTEND_PLATFORM, Error("Redux vs. plan-hook inconsistency"), {
+    r.currentTeamId && n.data?.key.type === FOrganizationLevelType.ORG && !s.current && (s.current = !0, reportError(_$$e.FRONTEND_PLATFORM, Error("Redux vs. plan-hook inconsistency"), {
       extra: {
         currentTeamId: r.currentTeamId,
         currentUserOrgId: r.currentUserOrgId,
@@ -844,8 +844,8 @@ export function $$e53({
       }));
     }, [e, t]);
   }();
-  let [d, u] = fp(Q8);
-  let _ = md(L8);
+  let [d, u] = useAtomValueAndSetter(Q8);
+  let _ = useAtomWithSubscription(L8);
   let h = useRef(null);
   let g = Xr(q4);
   let f = useCallback(() => {
@@ -879,7 +879,7 @@ export function $$e53({
       document.removeEventListener("keydown", t);
     };
   }, [r, s, f]);
-  let E = md(hO.isFragmentSearchAtom);
+  let E = useAtomWithSubscription(hO.isFragmentSearchAtom);
   return (useEffect(() => {
     E || "search" === o.view || (r(_z({})), u(""), g());
   }, [r, o, u, g, E]), "search" === o.view) ? jsx("div", {
@@ -899,12 +899,12 @@ export function $$e53({
       "data-testid": "facetedSearchEntrypoint"
     },
     ref: h,
-    "aria-label": _$$t("search.search_bar.placeholder"),
+    "aria-label": getI18nString("search.search_bar.placeholder"),
     children: [jsx(_$$h2, {}), jsxs("div", {
       className: "faceted_search_entrypoint--contentContainer--hu0Ox",
       children: [jsx(_$$K, {}), jsx(_$$L2, {
         className: "faceted_search_entrypoint--input--UBJpm faceted_search_bar--input--V5ksZ",
-        placeholder: 0 === _.length ? _$$t("search.search_bar.placeholder") : "",
+        placeholder: 0 === _.length ? getI18nString("search.search_bar.placeholder") : "",
         value: d
       })]
     }), !e && jsx("div", {

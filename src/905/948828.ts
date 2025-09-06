@@ -3,7 +3,7 @@ import { g as _$$g } from "../905/125190";
 import { q } from "../905/636218";
 import { getFeatureFlags } from "../905/601108";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { EK, tg } from "../figma_app/396432";
 import { B } from "../905/261906";
@@ -12,11 +12,11 @@ import { N_ } from "../905/332483";
 import { AG } from "../figma_app/217457";
 import { FPlanNameType } from "../figma_app/191312";
 import { oz } from "../905/561485";
-let $$_4 = tx("plan_comparison.campfire.starter.price.free");
-let A = [tx("plan_comparison.campfire.starter.feature.three_files"), tx("plan_comparison.campfire.starter.feature.basic")];
-let y = [tx("plan_comparison.campfire.pro.feature.unlimited_files"), tx("plan_comparison.campfire.pro.feature.prototyping"), tx("plan_comparison.campfire.pro.feature.library"), tx("plan_comparison.campfire.pro.feature.file_handoff")];
+let $$_4 = renderI18nText("plan_comparison.campfire.starter.price.free");
+let A = [renderI18nText("plan_comparison.campfire.starter.feature.three_files"), renderI18nText("plan_comparison.campfire.starter.feature.basic")];
+let y = [renderI18nText("plan_comparison.campfire.pro.feature.unlimited_files"), renderI18nText("plan_comparison.campfire.pro.feature.prototyping"), renderI18nText("plan_comparison.campfire.pro.feature.library"), renderI18nText("plan_comparison.campfire.pro.feature.file_handoff")];
 let b = [...y];
-let v = [tx("plan_comparison.campfire.org.feature.unlimited_teams"), tx("plan_comparison.campfire.org.feature.branching"), tx("plan_comparison.campfire.org.feature.security"), tx("plan_comparison.campfire.org.feature.scim"), tx("plan_comparison.campfire.org.feature.customizations")];
+let v = [renderI18nText("plan_comparison.campfire.org.feature.unlimited_teams"), renderI18nText("plan_comparison.campfire.org.feature.branching"), renderI18nText("plan_comparison.campfire.org.feature.security"), renderI18nText("plan_comparison.campfire.org.feature.scim"), renderI18nText("plan_comparison.campfire.org.feature.customizations")];
 function I(e) {
   switch (e) {
     case FPlanNameType.STARTER:
@@ -25,13 +25,13 @@ function I(e) {
       return b;
     case FPlanNameType.PRO:
       let t = [...y];
-      getFeatureFlags().ai_ga ? t.push(tx("plan_comparison.feature.ai_credits", {
+      getFeatureFlags().ai_ga ? t.push(renderI18nText("plan_comparison.feature.ai_credits", {
         aiCredits: EK
-      })) : getFeatureFlags().bake_full_seat_description && t.push(tx("plan_comparison.campfire.pro.feature.more_ai_prompts"));
+      })) : getFeatureFlags().bake_full_seat_description && t.push(renderI18nText("plan_comparison.campfire.pro.feature.more_ai_prompts"));
       return t;
     case FPlanNameType.ORG:
       let i = [...v];
-      getFeatureFlags().ai_ga && i.push(tx("plan_comparison.feature.ai_credits", {
+      getFeatureFlags().ai_ga && i.push(renderI18nText("plan_comparison.feature.ai_credits", {
         aiCredits: tg
       }));
       return i;
@@ -44,29 +44,29 @@ let $$x0 = "Plan comparison chart billing remodel";
 export function $$S1() {
   let e = {
     planTier: FPlanNameType.STARTER,
-    name: tx("plan_comparison.campfire.starter.name"),
-    description: tx("plan_comparison.campfire.starter.description"),
+    name: renderI18nText("plan_comparison.campfire.starter.name"),
+    description: renderI18nText("plan_comparison.campfire.starter.description"),
     displayedSeats: null,
     features: I(FPlanNameType.STARTER)
   };
   let t = {
     planTier: FPlanNameType.STUDENT,
-    name: tx("plan_comparison.campfire.edu.name"),
-    description: tx("plan_comparison.campfire.edu.description"),
+    name: renderI18nText("plan_comparison.campfire.edu.name"),
+    description: renderI18nText("plan_comparison.campfire.edu.description"),
     displayedSeats: null,
     features: I(FPlanNameType.STUDENT)
   };
   let i = {
     planTier: FPlanNameType.PRO,
-    name: tx("plan_comparison.campfire.pro.name"),
-    description: tx("plan_comparison.campfire.pro.description"),
+    name: renderI18nText("plan_comparison.campfire.pro.name"),
+    description: renderI18nText("plan_comparison.campfire.pro.description"),
     displayedSeats: C(),
     features: I(FPlanNameType.PRO)
   };
   let n = {
     planTier: FPlanNameType.ORG,
-    name: tx("plan_comparison.campfire.org.name"),
-    description: tx("plan_comparison.campfire.org.description"),
+    name: renderI18nText("plan_comparison.campfire.org.name"),
+    description: renderI18nText("plan_comparison.campfire.org.description"),
     displayedSeats: C(),
     features: I(FPlanNameType.ORG)
   };
@@ -87,7 +87,7 @@ function C() {
       size: "24",
       removeBackgroundColor: !0
     }),
-    name: tx("plan_comparison.campfire.collab_seat.name")
+    name: renderI18nText("plan_comparison.campfire.collab_seat.name")
   };
   let t = {
     seatType: ud.DEVELOPER,
@@ -96,7 +96,7 @@ function C() {
       size: "24",
       removeBackgroundColor: !0
     }),
-    name: tx("plan_comparison.campfire.dev_seat.name")
+    name: renderI18nText("plan_comparison.campfire.dev_seat.name")
   };
   let i = {
     seatType: ud.EXPERT,
@@ -105,7 +105,7 @@ function C() {
       size: "24",
       removeBackgroundColor: !0
     }),
-    name: tx("plan_comparison.campfire.full_seat.name")
+    name: renderI18nText("plan_comparison.campfire.full_seat.name")
   };
   let n = {
     seatType: ud.CONTENT,
@@ -114,7 +114,7 @@ function C() {
       size: "24",
       removeBackgroundColor: !0
     }),
-    name: tx("plan_comparison.campfire.content_seat.name")
+    name: renderI18nText("plan_comparison.campfire.content_seat.name")
   };
   let r = N_.sort(AG);
   let a = {
@@ -132,8 +132,8 @@ export function $$T7() {
       type: ud.COLLABORATOR,
       size: "32"
     }),
-    name: tx("plan_comparison.campfire.collab.name"),
-    description: tx("plan_comparison.campfire.collab.description"),
+    name: renderI18nText("plan_comparison.campfire.collab.name"),
+    description: renderI18nText("plan_comparison.campfire.collab.description"),
     supportedProducts: [0, 1]
   };
   let t = {
@@ -142,8 +142,8 @@ export function $$T7() {
       type: ud.DEVELOPER,
       size: "32"
     }),
-    name: tx("plan_comparison.campfire.dev.name"),
-    description: tx("plan_comparison.campfire.dev.description"),
+    name: renderI18nText("plan_comparison.campfire.dev.name"),
+    description: renderI18nText("plan_comparison.campfire.dev.description"),
     supportedProducts: [0, 1, 2]
   };
   let i = {
@@ -152,8 +152,8 @@ export function $$T7() {
       type: ud.EXPERT,
       size: "32"
     }),
-    name: tx("plan_comparison.campfire.full.name"),
-    description: tx("plan_comparison.campfire.full.description"),
+    name: renderI18nText("plan_comparison.campfire.full.name"),
+    description: renderI18nText("plan_comparison.campfire.full.description"),
     supportedProducts: [0, 1, 2, 3, 4, 5]
   };
   let n = {
@@ -162,8 +162,8 @@ export function $$T7() {
       type: ud.CONTENT,
       size: "32"
     }),
-    name: tx("plan_comparison.campfire.content.name"),
-    description: tx("plan_comparison.campfire.content.description"),
+    name: renderI18nText("plan_comparison.campfire.content.name"),
+    description: renderI18nText("plan_comparison.campfire.content.description"),
     supportedProducts: [0, 1, 3]
   };
   let r = {
@@ -179,22 +179,22 @@ export function $$k2(e) {
     let i;
     switch (t) {
       case 4:
-        i = tx("plan_comparison.campfire.design");
+        i = renderI18nText("plan_comparison.campfire.design");
         break;
       case 2:
-        i = tx("plan_comparison.campfire.dev_mode");
+        i = renderI18nText("plan_comparison.campfire.dev_mode");
         break;
       case 0:
-        i = tx("plan_comparison.campfire.figjam");
+        i = renderI18nText("plan_comparison.campfire.figjam");
         break;
       case 1:
-        i = tx("plan_comparison.campfire.slides");
+        i = renderI18nText("plan_comparison.campfire.slides");
         break;
       case 3:
-        i = tx("plan_comparison.campfire.sites");
+        i = renderI18nText("plan_comparison.campfire.sites");
         break;
       case 5:
-        i = tx("general.figma_rev");
+        i = renderI18nText("general.figma_rev");
     }
     let d = e.includes(t);
     return (3 !== t || oz()) && (5 !== t || getFeatureFlags().bake_full_seat_description) ? jsxs("div", {
@@ -227,20 +227,20 @@ function R({
 }
 export function $$N5() {
   return jsx(R, {
-    text: tx("plan_comparison.campfire.edu.highlight")
+    text: renderI18nText("plan_comparison.campfire.edu.highlight")
   });
 }
 export function $$P3({
   isStaticColor: e
 }) {
   return jsx(R, {
-    text: tx("plan_comparison.plans.most_popular"),
+    text: renderI18nText("plan_comparison.plans.most_popular"),
     isStaticColor: e
   });
 }
 function O() {
   return jsx(R, {
-    text: tx("general.beta"),
+    text: renderI18nText("general.beta"),
     isNoColor: !0
   });
 }

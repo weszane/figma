@@ -3,16 +3,16 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { _em, AlE, Bko, MoD, glU, mSn, Sie } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import o from "../vendor/656470";
-import { sx } from "../905/449184";
-import { eD } from "../figma_app/876459";
+import { trackEventAnalytics } from "../905/449184";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { fT, jm } from "../figma_app/416935";
 import { debugState } from "../905/407919";
-import { $D } from "../905/11";
-import { Lo } from "../905/714362";
+import { reportError } from "../905/11";
+import { logInfo } from "../905/714362";
 import { XHR } from "../905/910117";
 import { v as _$$v } from "../905/479136";
 import { n as _$$n } from "../figma_app/339971";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { zX } from "../905/576487";
 import { nF } from "../905/350402";
@@ -42,7 +42,7 @@ export let $$O1 = {
     if (0 === t.length && 0 === r.size) return;
     async function d(t) {
       let r = 2e3;
-      for (; ;) try {
+      for (;;) try {
         return await t();
       } catch (t) {
         if (e()) return;
@@ -140,9 +140,9 @@ async function P(e, t, r) {
   let h = debugState.dispatch;
   let m = debugState.getState();
   let f = !1;
-  let T = () => { };
+  let T = () => {};
   let I = !1;
-  let S = () => { };
+  let S = () => {};
   let A = new Promise(e => {
     S = e;
   });
@@ -170,18 +170,18 @@ async function P(e, t, r) {
   let k = () => {
     S();
     I = !0;
-    sx("File Export V2 Canceled", D());
+    trackEventAnalytics("File Export V2 Canceled", D());
   };
   L(_$$h.SaveLocalFile, C, k);
   let M = _$$q(_em.SAVE_LOCAL_COPY);
   M.catch(() => {
-    $D(_$$e.SCENEGRAPH_AND_SYNC, Error("saveAs: waitForAllPagesPromise rejected"));
+    reportError(_$$e.SCENEGRAPH_AND_SYNC, Error("saveAs: waitForAllPagesPromise rejected"));
     h(_$$F.dequeue({
       matchType: "save-as-progress"
     }));
     h(_$$F.enqueue({
       error: !0,
-      message: _$$t("visual_bell.save_as_error")
+      message: getI18nString("visual_bell.save_as_error")
     }));
   });
   await Promise.race([M, A, N]);
@@ -200,7 +200,7 @@ async function P(e, t, r) {
   if (R = j.length, P = G.size, I) return;
   h(_$$F.enqueue({
     type: "save-as-actual",
-    message: _$$t("visual_bell.saving"),
+    message: getI18nString("visual_bell.saving"),
     icon: zX.SPINNER
   }));
   await new Promise(e => setTimeout(e, 0));
@@ -236,10 +236,10 @@ async function P(e, t, r) {
     zipWriter: z,
     zipPromise: W()
   };
-  if (getFeatureFlags().export_image_download_logging && sx("Image Download For Export", {
+  if (getFeatureFlags().export_image_download_logging && trackEventAnalytics("Image Download For Export", {
     stage: "start",
     ...D()
-  }), await Promise.race([$$O1.addAssetsToZip(() => f || I, B, G, e.key, K), N, A]), getFeatureFlags().export_image_download_logging && sx("Image Download For Export", {
+  }), await Promise.race([$$O1.addAssetsToZip(() => f || I, B, G, e.key, K), N, A]), getFeatureFlags().export_image_download_logging && trackEventAnalytics("Image Download For Export", {
     stage: "finished",
     ...D(),
     userId: m.user?.id,
@@ -251,7 +251,7 @@ async function P(e, t, r) {
   })), I) return;
   h(_$$F.enqueue({
     type: "save-as-actual",
-    message: _$$t("visual_bell.saving"),
+    message: getI18nString("visual_bell.saving"),
     icon: zX.SPINNER
   }));
   await K.zipPromise;
@@ -268,7 +268,7 @@ async function P(e, t, r) {
       r.onloadend = () => {
         let t = r.result;
         let i = Et(new Uint8Array(t));
-        sx("Support Share Download", {
+        trackEventAnalytics("Support Share Download", {
           sha1Hash: i,
           internalEmail: e
         });
@@ -279,14 +279,14 @@ async function P(e, t, r) {
   let $ = URL.createObjectURL(Y);
   let X = glU.fileExtension();
   let q = `${e.name}${X}`;
-  let J = _$$t("save_as_actions.save_partial_file_name_suffix", {
+  let J = getI18nString("save_as_actions.save_partial_file_name_suffix", {
     date: new Date().toLocaleDateString().replace(/_|\//g, "-")
   });
   let Z = `${e.name} - ${J}${X}`;
   $$O1.downloadFile($, f ? Z : q);
   URL.revokeObjectURL($);
   o = r === _$$h.Export ? "export" : r === _$$h.SaveLocalFile ? "save" : r === _$$h.CopyAsPNG || r === _$$h.CopyAsSVG ? "copy" : "non-export-related";
-  sx("File Export V2 Completed", {
+  trackEventAnalytics("File Export V2 Completed", {
     ...D(),
     exportEvent: o,
     fileName: q,
@@ -302,7 +302,7 @@ export function $$D3(e, t, r) {
   $$k0(_$$h.Export, e, t, r, [mSn?.getCurrentPage(Sie.REDUX, AlE.getActiveDocument()) || ""], "export-all-frames-to-pdf");
 }
 export async function $$k0(e, t, r, n, o, l, u) {
-  Lo("initiateSaveAs", "begin", {
+  logInfo("initiateSaveAs", "begin", {
     completeSaveAction: n,
     nodesToLoad: o,
     mode: e
@@ -313,17 +313,17 @@ export async function $$k0(e, t, r, n, o, l, u) {
   if (getFeatureFlags().antiabuse_file_download_check) try {
     let e = g.openFile?.key || "";
     let t = await XHR.post(`/api/file_download_log/${e}`, {
-      is_desktop: !!eD
+      is_desktop: !!desktopAPIInstance
     });
     t.data?.meta?.download_err && (await _$$S.getWAFValidator());
   } catch (e) {
     if (429 === e.status) throw e;
-    sx("File Download Log Error", {
+    trackEventAnalytics("File Download Log Error", {
       attemptId: f,
       error: e
     });
   }
-  if (e === _$$h.SaveLocalFile && (sx("File Export Initiated", {
+  if (e === _$$h.SaveLocalFile && (trackEventAnalytics("File Export Initiated", {
     attemptId: f,
     reason: l,
     exportV2: !0,
@@ -334,13 +334,13 @@ export async function $$k0(e, t, r, n, o, l, u) {
   }
   L(e, n);
   let E = e === _$$h.SaveLocalFile ? MoD.ALL : MoD.NON_ANIMATED_ONLY;
-  getFeatureFlags().export_image_download_logging && sx("Image Download For Export", {
+  getFeatureFlags().export_image_download_logging && trackEventAnalytics("Image Download For Export", {
     stage: "start",
     attemptId: f,
     reason: l
   });
   await Jr().loadAllImagesUnder(o, E, l, R);
-  getFeatureFlags().export_image_download_logging && sx("Image Download For Export", {
+  getFeatureFlags().export_image_download_logging && trackEventAnalytics("Image Download For Export", {
     stage: "finished",
     attemptId: f,
     reason: l,
@@ -356,28 +356,28 @@ export async function $$k0(e, t, r, n, o, l, u) {
       settings: u
     })), r(hf({
       skipped: !1
-    }))) : sx("File Export V1 Canceled", {
+    }))) : trackEventAnalytics("File Export V1 Canceled", {
       attemptId: f
     });
   } catch (e) {
-    $D(_$$e.SCENEGRAPH_AND_SYNC, e);
+    reportError(_$$e.SCENEGRAPH_AND_SYNC, e);
   }
 }
 let M = nF((e, t) => {
   let r = {
-    text: _$$t("save_as_actions.cancel"),
+    text: getI18nString("save_as_actions.cancel"),
     action: t.cancelCallback || (() => {
       e.dispatch(Mt());
     })
   };
-  let n = function(e, t, r) {
+  let n = function (e, t, r) {
     switch (e) {
       case _$$h.SaveLocalFile:
-        if (t) return _$$t("save_as_actions.save_partial_file");
-        return r ? _$$t("save_as_actions.save_without_images") : _$$t("save_as_actions.save_partial_file");
+        if (t) return getI18nString("save_as_actions.save_partial_file");
+        return r ? getI18nString("save_as_actions.save_without_images") : getI18nString("save_as_actions.save_partial_file");
       case _$$h.Export:
         if (t) return null;
-        return r ? _$$t("save_as_actions.export_without_images") : _$$t("save_as_actions.export_without_content");
+        return r ? getI18nString("save_as_actions.export_without_images") : getI18nString("save_as_actions.export_without_content");
       default:
         return null;
     }
@@ -386,7 +386,7 @@ let M = nF((e, t) => {
   n && (i = {
     text: n,
     action: () => {
-      sx("image_loading_canceled", {
+      trackEventAnalytics("image_loading_canceled", {
         mode: t.mode
       });
       e.dispatch(j({
@@ -401,8 +401,8 @@ let M = nF((e, t) => {
   let a = {
     type: "save-as-progress",
     progressKey: "save-as",
-    message: function(e, t) {
-      return e ? t ? _$$t("save_as_actions.downloading_images") : _$$t("save_as_actions.downloading_content") : t ? _$$t("save_as_actions.cannot_download_images") : _$$t("save_as_actions.cannot_download_content");
+    message: function (e, t) {
+      return e ? t ? getI18nString("save_as_actions.downloading_images") : getI18nString("save_as_actions.downloading_content") : t ? getI18nString("save_as_actions.cannot_download_images") : getI18nString("save_as_actions.cannot_download_content");
     }(navigator.onLine, t.pagesAllLoaded),
     icon: zX.PROGRESS,
     button: r
@@ -431,18 +431,18 @@ let j = nF((e, t) => {
   e.dispatch(_$$F.clearAllExcept(["plugins-status"]));
   let r = e.getState().saveAsState;
   e.dispatch(_$$n.set({
-    message: function(e) {
+    message: function (e) {
       switch (e) {
         case _$$h.SaveLocalFile:
-          return _$$t("visual_bell.saving");
+          return getI18nString("visual_bell.saving");
         case _$$h.Export:
-          return _$$t("visual_bell.exporting");
+          return getI18nString("visual_bell.exporting");
         case _$$h.CopyAsPNG:
-          return _$$t("save_as_actions.copy_as_png_progress");
+          return getI18nString("save_as_actions.copy_as_png_progress");
         case _$$h.CopyAsSVG:
-          return _$$t("save_as_actions.copy_as_svg_progress");
+          return getI18nString("save_as_actions.copy_as_svg_progress");
         case _$$h.RasterizeSelection:
-          return _$$t("save_as_actions.rasterize_selection_progress");
+          return getI18nString("save_as_actions.rasterize_selection_progress");
       }
     }(t.mode),
     showLoadingSpinner: !1,
@@ -458,4 +458,4 @@ let j = nF((e, t) => {
 export const Dc = $$k0;
 export const hI = $$O1;
 export const hV = _$$h;
-export const mU = $$D3; 
+export const mU = $$D3;

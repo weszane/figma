@@ -4,7 +4,7 @@ import { bL } from "../905/911410";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { A } from "../905/920165";
 import { Pt } from "../figma_app/806412";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { LN } from "../figma_app/975811";
 import { Y5 } from "../figma_app/455680";
 import { _W } from "../905/216495";
@@ -18,7 +18,7 @@ export function $$x0(e) {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: tx("fullscreen.properties_panel.transform_panel.corner_smoothing")
+          children: renderI18nText("fullscreen.properties_panel.transform_panel.corner_smoothing")
         })
       }), jsx(nB, {
         padding: 0,
@@ -44,7 +44,7 @@ function y({
     children: [jsx("div", {
       className: "corner_smoothing--sliderWrapper--j9nGR",
       children: jsx(A, {
-        "aria-label": _$$t("fullscreen.properties_panel.transform_panel.corner_smoothing"),
+        "aria-label": getI18nString("fullscreen.properties_panel.transform_panel.corner_smoothing"),
         bigStep: .1,
         defaultValue: 0,
         hints: [.6],
@@ -71,7 +71,7 @@ function y({
         onClick: () => {
           _(.6, !0);
         },
-        children: tx("fullscreen.properties_panel.transform_panel.i_os")
+        children: renderI18nText("fullscreen.properties_panel.transform_panel.i_os")
       })
     })]
   });

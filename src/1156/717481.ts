@@ -13,7 +13,7 @@ import { j as _$$j } from "../905/519202";
 import { g as _$$g } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
 import { b as _$$b } from "../905/966382";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { to } from "../905/156213";
 import { Um } from "../905/848862";
 import { q5 } from "../figma_app/516028";
@@ -32,8 +32,8 @@ function L({
   setValue: t,
   disabled: n
 }) {
-  let i = _$$t("figmake.settings.create_project_modal.project_name.label");
-  let s = _$$t("figmake.settings.create_project_modal.project_name.placeholder");
+  let i = getI18nString("figmake.settings.create_project_modal.project_name.label");
+  let s = getI18nString("figmake.settings.create_project_modal.project_name.placeholder");
   return jsxs("div", {
     className: "x78zum5 xdt5ytf x1v2ro7d",
     children: [jsx("div", {
@@ -63,8 +63,8 @@ function z({
   helperText: n,
   disabled: s
 }) {
-  let a = _$$t("figmake.settings.create_project_modal.db_pass.label");
-  let l = _$$t("figmake.settings.create_project_modal.db_pass.placeholder");
+  let a = getI18nString("figmake.settings.create_project_modal.db_pass.label");
+  let l = getI18nString("figmake.settings.create_project_modal.db_pass.placeholder");
   let [o, c] = useState(!1);
   let [g, _] = useState(!1);
   return jsxs("div", {
@@ -89,7 +89,7 @@ function z({
         children: [jsx(_$$_, {
           ...Ay.props(o ? F.rotatePasswordGenerateIcon : F.passwordGenerateIcon)
         }), jsx("span", {
-          children: _$$t("figmake.settings.create_project_modal.password.generate")
+          children: getI18nString("figmake.settings.create_project_modal.password.generate")
         })]
       })]
     }), jsxs("div", {
@@ -108,9 +108,9 @@ function z({
           checked: g,
           onIcon: jsx(_$$_2, {}),
           offIcon: jsx(_$$j, {}),
-          "aria-label": _$$t("figmake.settings.create_project_modal.password.view_hide"),
+          "aria-label": getI18nString("figmake.settings.create_project_modal.password.view_hide"),
           htmlAttributes: {
-            "data-tooltip": _$$t("figmake.settings.create_project_modal.password.view_hide"),
+            "data-tooltip": getI18nString("figmake.settings.create_project_modal.password.view_hide"),
             "data-tooltip-type": "text"
           },
           onChange: () => _(e => !e)
@@ -132,37 +132,37 @@ function R({
   let a = e => {
     switch (e) {
       case "us-east-1":
-        return _$$t("figmake.settings.create_project_modal.region.us_east_1");
+        return getI18nString("figmake.settings.create_project_modal.region.us_east_1");
       case "us-east-2":
-        return _$$t("figmake.settings.create_project_modal.region.us_east_2");
+        return getI18nString("figmake.settings.create_project_modal.region.us_east_2");
       case "us-west-1":
-        return _$$t("figmake.settings.create_project_modal.region.us_west_1");
+        return getI18nString("figmake.settings.create_project_modal.region.us_west_1");
       case "ap-southeast-1":
-        return _$$t("figmake.settings.create_project_modal.region.ap_southeast_1");
+        return getI18nString("figmake.settings.create_project_modal.region.ap_southeast_1");
       case "ap-northeast-1":
-        return _$$t("figmake.settings.create_project_modal.region.ap_northeast_1");
+        return getI18nString("figmake.settings.create_project_modal.region.ap_northeast_1");
       case "ap-northeast-2":
-        return _$$t("figmake.settings.create_project_modal.region.ap_northeast_2");
+        return getI18nString("figmake.settings.create_project_modal.region.ap_northeast_2");
       case "ap-southeast-2":
-        return _$$t("figmake.settings.create_project_modal.region.ap_southeast_2");
+        return getI18nString("figmake.settings.create_project_modal.region.ap_southeast_2");
       case "eu-west-1":
-        return _$$t("figmake.settings.create_project_modal.region.eu_west_1");
+        return getI18nString("figmake.settings.create_project_modal.region.eu_west_1");
       case "eu-west-2":
-        return _$$t("figmake.settings.create_project_modal.region.eu_west_2");
+        return getI18nString("figmake.settings.create_project_modal.region.eu_west_2");
       case "eu-west-3":
-        return _$$t("figmake.settings.create_project_modal.region.eu_west_3");
+        return getI18nString("figmake.settings.create_project_modal.region.eu_west_3");
       case "eu-north-1":
-        return _$$t("figmake.settings.create_project_modal.region.eu_north_1");
+        return getI18nString("figmake.settings.create_project_modal.region.eu_north_1");
       case "eu-central-1":
-        return _$$t("figmake.settings.create_project_modal.region.eu_central_1");
+        return getI18nString("figmake.settings.create_project_modal.region.eu_central_1");
       case "eu-central-2":
-        return _$$t("figmake.settings.create_project_modal.region.eu_central_2");
+        return getI18nString("figmake.settings.create_project_modal.region.eu_central_2");
       case "ca-central-1":
-        return _$$t("figmake.settings.create_project_modal.region.ca_central_1");
+        return getI18nString("figmake.settings.create_project_modal.region.ca_central_1");
       case "ap-south-1":
-        return _$$t("figmake.settings.create_project_modal.region.ap_south_1");
+        return getI18nString("figmake.settings.create_project_modal.region.ap_south_1");
       case "sa-east-1":
-        return _$$t("figmake.settings.create_project_modal.region.sa_east_1");
+        return getI18nString("figmake.settings.create_project_modal.region.sa_east_1");
       default:
         throw Error("Unknown region");
     }
@@ -172,7 +172,7 @@ function R({
     children: [jsx("label", {
       id: "supabase-project-database-region-select",
       ...Ay.props(F.textBodyMediumStrong),
-      children: _$$t("figmake.settings.create_project_modal.region.label")
+      children: getI18nString("figmake.settings.create_project_modal.region.label")
     }), jsx(l6, {
       ariaLabelledBy: "supabase-project-database-region-select",
       inputClassName: "x1kowl60 x6sinrp",
@@ -312,11 +312,11 @@ let $$O0 = Ju(function (e) {
       e.onClose();
     }, 1e4);
   };
-  let q = "dbPassTooShort" === g ? tx("figmake.settings.create_project_modal.db_pass.too_short") : tx("figmake.settings.create_project_modal.db_pass.context", {
+  let q = "dbPassTooShort" === g ? renderI18nText("figmake.settings.create_project_modal.db_pass.too_short") : renderI18nText("figmake.settings.create_project_modal.db_pass.context", {
     learnMoreLink: jsx("a", {
       target: "_blank",
       href: kS,
-      children: _$$t("general.learn_more")
+      children: getI18nString("general.learn_more")
     })
   });
   return jsx(bL, {
@@ -326,7 +326,7 @@ let $$O0 = Ju(function (e) {
       onSubmit: B,
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$t("figmake.settings.create_project_modal.title")
+          children: getI18nString("figmake.settings.create_project_modal.title")
         })
       }), jsx(nB, {
         scrolling: "none",
@@ -351,21 +351,21 @@ let $$O0 = Ju(function (e) {
           className: "x78zum5 x1q0g3np x13a6bvl x167g77z xhxeiv9 xh8yej3 x9f619",
           children: [C && jsx("p", {
             ...Ay.props(F.textBodyMediumSecondary),
-            children: _$$t("figmake.supabase.creating_project.subtitle")
+            children: getI18nString("figmake.supabase.creating_project.subtitle")
           }), jsx($n, {
             variant: "secondary",
             onClick: () => s.props.close({
               source: "button"
             }),
-            children: _$$t("figmake.settings.create_project_modal.button.cancel")
+            children: getI18nString("figmake.settings.create_project_modal.button.cancel")
           }), C ? jsx(lV, {
             variant: "primary",
-            children: _$$t("figmake.settings.create_project_modal.button.submit.loading")
+            children: getI18nString("figmake.settings.create_project_modal.button.submit.loading")
           }) : jsx($n, {
             variant: "primary",
             type: "submit",
             disabled: M,
-            children: _$$t("figmake.settings.create_project_modal.button.submit")
+            children: getI18nString("figmake.settings.create_project_modal.button.submit")
           })]
         })
       })]

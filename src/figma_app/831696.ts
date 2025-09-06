@@ -1,4 +1,4 @@
-import { Im } from "../figma_app/493477";
+import { isEmptyObject } from "../figma_app/493477";
 import { X3B } from "../figma_app/763686";
 import { fn, sH } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
@@ -45,11 +45,11 @@ export function $$p1(e, t, r) {
     delete i[e];
   });
   a = i;
-  return Im(a) ? "" : `?${serializeQuery(a)}`;
+  return isEmptyObject(a) ? "" : `?${serializeQuery(a)}`;
 }
 export function $$_7(e, t, r, i, a) {
   let s = $$u3(e, t, r, i, a);
-  return Im(s) ? "" : `?${serializeQuery(s)}`;
+  return isEmptyObject(s) ? "" : `?${serializeQuery(s)}`;
 }
 export function $$h2(e) {
   return e ? `#${encodeURIComponent(e)}` : "";

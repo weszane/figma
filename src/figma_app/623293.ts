@@ -3,12 +3,12 @@ import { getFeatureFlags } from "../905/601108";
 import a from "../vendor/197638";
 import { s9 } from "../905/194389";
 import { getInitialOptions } from "../figma_app/169182";
-import { Ay } from "../figma_app/778880";
-import { $D } from "../905/11";
-import { Lo } from "../905/714362";
+import { BrowserInfo } from "../figma_app/778880";
+import { reportError } from "../905/11";
+import { logInfo } from "../905/714362";
 import { Dm } from "../figma_app/8833";
 import { D } from "../905/347702";
-import { nl } from "../figma_app/257275";
+import { isInteractionPathCheck } from "../figma_app/897289";
 var s = a;
 export class $$m3 extends s9 {
   constructor(e) {
@@ -26,7 +26,7 @@ let g = D((e, t, r = window.document) => {
 });
 export function $$f4(e, t) {
   let r = t?.window?.document || window.document;
-  e || (console.error("bad src"), $D(_$$e.CLIENT_PLATFORM, Error("bad loadScript src")));
+  e || (console.error("bad src"), reportError(_$$e.CLIENT_PLATFORM, Error("bad loadScript src")));
   let i = t?.id;
   let a = !t || !1 !== t.cors;
   let s = !t || !1 !== t.retry;
@@ -47,7 +47,7 @@ export function $$f4(e, t) {
           n();
         });
       } catch (t) {
-        Lo("loadScript", "waitForCondition timed out", {
+        logInfo("loadScript", "waitForCondition timed out", {
           src: e
         });
         n(t);
@@ -58,7 +58,7 @@ export function $$f4(e, t) {
     p.onload = c;
     p.onerror = t => {
       let l = e => {
-        Lo("loadScript", "Script load error event", {
+        logInfo("loadScript", "Script load error event", {
           event: e
         });
         n(new $$m3({
@@ -84,7 +84,7 @@ export function $$f4(e, t) {
       _.src = e + h + "lsRetry=" + Math.random();
       r.head.appendChild(_);
       let f = "string" == typeof t ? t : t.message;
-      Lo("loadScript", "Retrying script load", {
+      logInfo("loadScript", "Retrying script load", {
         originalSrc: e,
         retrySrc: _.src,
         initialError: f
@@ -97,7 +97,7 @@ export function $$f4(e, t) {
   return p;
 }
 export function $$E1() {
-  if ((Ay.safari && Number(Ay.version) >= 18 && 19 > Number(Ay.version) || Ay.ios && Ay.chrome && Number(Ay.version) >= 135 && 137 >= Number(Ay.version) || Ay.webkit && Number(Ay.version) >= 135 && 137 >= Number(Ay.version)) && getFeatureFlags().hook_webkit_text_decoder) {
+  if ((BrowserInfo.safari && Number(BrowserInfo.version) >= 18 && 19 > Number(BrowserInfo.version) || BrowserInfo.ios && BrowserInfo.chrome && Number(BrowserInfo.version) >= 135 && 137 >= Number(BrowserInfo.version) || BrowserInfo.webkit && Number(BrowserInfo.version) >= 135 && 137 >= Number(BrowserInfo.version)) && getFeatureFlags().hook_webkit_text_decoder) {
     let e = g(void 0, !0);
     e.text = `
     try {
@@ -126,7 +126,7 @@ export function $$E1() {
 function y() {
   let e = !!(navigator.clipboard && navigator.clipboard.read && navigator.clipboard.write);
   let t = window.FigmaMobile;
-  return (e || !!t?.readClipboardData) && !nl();
+  return (e || !!t?.readClipboardData) && !isInteractionPathCheck();
 }
 function b(e, {
   withLineBreaks: t = !1
@@ -143,7 +143,7 @@ function b(e, {
       r.value = e;
       r.focus();
       r.select();
-      (a = document.execCommand("copy")) || !Ay.msedge || (a = !0);
+      (a = document.execCommand("copy")) || !BrowserInfo.msedge || (a = !0);
       r.remove();
     } finally {
       i?.focus();
@@ -153,14 +153,14 @@ function b(e, {
 }
 export async function $$T0(e, t) {
   if (y()) try {
-    await function(e, {
+    await function (e, {
       withLineBreaks: t = !1
     } = {}) {
       t || (e = e.replace(/$\s?/gm, ""));
       return navigator.clipboard.writeText(e);
     }(e, t);
     return;
-  } catch { }
+  } catch {}
   return b(e, t);
 }
 function I(e, t) {
@@ -187,7 +187,7 @@ export async function $$S2(e) {
   if (y()) try {
     await I(e);
     return;
-  } catch { }
+  } catch {}
   return new Promise((t, r) => {
     let n = document.createElement("div");
     n.style.cssText = "position: fixed; transform: translateX(-200%)";
@@ -214,7 +214,7 @@ export async function $$v5(e, t) {
   if (y()) try {
     await I(e, t);
     return;
-  } catch { }
+  } catch {}
   return b(t);
 }
 export const Dk = $$T0;
@@ -222,4 +222,4 @@ export const RM = $$E1;
 export const Xt = $$S2;
 export const gX = $$m3;
 export const k0 = $$f4;
-export const wY = $$v5; 
+export const wY = $$v5;

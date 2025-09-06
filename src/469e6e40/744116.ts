@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import { useDispatch } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { h as _$$h } from "../905/207101";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { y3 } from "../figma_app/307841";
 import { eC } from "../figma_app/982327";
 import { Ut } from "../figma_app/425283";
@@ -51,7 +51,7 @@ function k({
   _$$E(uniqueId, "settings_tab_click", () => {
     isShowing && N();
   });
-  let I = e ? tx("billing_modals.seat_approval_overlay.description") : tx("billing_modals.seat_approval_overlay.org_description");
+  let I = e ? renderI18nText("billing_modals.seat_approval_overlay.description") : renderI18nText("billing_modals.seat_approval_overlay.org_description");
   return jsx(rq, {
     arrowPosition: F_.LEFT_TITLE,
     description: I,
@@ -60,13 +60,13 @@ function k({
     isShowing,
     onClose: N,
     primaryCta: {
-      label: tx("billing_modals.seat_approval_overlay.cta"),
+      label: renderI18nText("billing_modals.seat_approval_overlay.cta"),
       type: "button",
       onClick: N,
       ctaTrackingDescriptor: _$$c.DONE
     },
     targetKey: e ? eC : Ut,
-    title: tx("billing_modals.seat_approval_overlay.title"),
+    title: renderI18nText("billing_modals.seat_approval_overlay.title"),
     trackingContextName: "Billing Seat Approval Overlay"
   });
 }

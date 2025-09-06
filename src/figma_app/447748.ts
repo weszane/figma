@@ -1,6 +1,6 @@
 import { W } from "../905/187396";
 import { Uz } from "../905/63728";
-import { rr } from "../figma_app/778880";
+import { isMobileUA } from "../figma_app/778880";
 import { bG } from "../905/149328";
 import { e } from "../905/361125";
 let l = class e {
@@ -76,5 +76,5 @@ let l = class e {
     };
   }
 };
-l.FADE_DELAY_MS = rr ? 1e3 : 2e3;
+l.FADE_DELAY_MS = isMobileUA ? 1e3 : 2e3;
 l.RCS_SHOWN_ON_UI = new Set([e]);

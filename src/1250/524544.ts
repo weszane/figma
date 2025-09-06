@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { ResourceStatus } from "../905/957591";
-import { R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { Rs } from "../figma_app/288654";
 import { h3 } from "../figma_app/976345";
 import { jl } from "../figma_app/199513";
@@ -39,7 +39,7 @@ export function $$f0() {
     fileKeysByFolderId,
     deletedFilesByKey,
     loadedFolders
-  } = R(e => ({
+  } = selectWithShallowEqual(e => ({
     fileByKey: e.fileByKey,
     fileKeysByFolderId: e.fileKeysByFolderId,
     deletedFilesByKey: e.deletedFilesByKey,

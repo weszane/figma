@@ -1,10 +1,10 @@
-import { eU } from "../figma_app/27355";
+import { atom } from "../figma_app/27355";
 import { resourceUtils } from "../905/989992";
 export function $$a1(e, t) {
-  return eU(i => i(e).transform(e => t(e, i)));
+  return atom(i => i(e).transform(e => t(e, i)));
 }
 export function $$s0(e, t) {
-  return $$a1(eU(t => {
+  return $$a1(atom(t => {
     let i = e.map(e => t(e));
     return resourceUtils.all(i);
   }), t);

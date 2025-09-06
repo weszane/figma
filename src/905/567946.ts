@@ -3,7 +3,7 @@ import { E } from "../905/172252";
 import { J } from "../905/270045";
 import { g } from "../905/687265";
 import { xk } from "@stylexjs/stylex";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 let $$d0 = function (e) {
   let {
     children,
@@ -26,7 +26,7 @@ let $$d0 = function (e) {
       "aria-hidden": !0,
       children: "*"
     }), jsx(E, {
-      children: t("community.publishing.required_label", {
+      children: getI18nString("community.publishing.required_label", {
         labelText: "textLabel" in e ? e.textLabel : e.label
       })
     })]

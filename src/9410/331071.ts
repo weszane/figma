@@ -9,14 +9,14 @@ import { useDispatch, useSelector } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { i as _$$i } from "../905/718764";
 import { Ez5, NVY, NLJ, XJn, AZ4, glU, biQ, Egt, bbV, ruz, uQ6, Mpt, m1T, CT8 } from "../figma_app/763686";
-import { eU as _$$eU, zl, fp, E3, Iz, md, AY, Xr } from "../figma_app/27355";
+import { atom, atomStoreManager, useAtomValueAndSetter, createLocalStorageAtom, createRemovableAtomFamily, useAtomWithSubscription, AY, Xr } from "../figma_app/27355";
 import { tH as _$$tH, H4 } from "../905/751457";
 import { F as _$$F } from "../905/302958";
 import { PE, GM } from "../figma_app/251115";
 import { I as _$$I } from "../figma_app/827540";
 import { gB, QT, Ct } from "../9410/517270";
 import { _V, KY, el as _$$el, dL as _$$dL } from "../figma_app/322845";
-import { sn as _$$sn } from "../905/542194";
+import { globalPerfTimer } from "../905/542194";
 import { h as _$$h } from "../905/207101";
 import { Kh } from "../figma_app/370763";
 import { s as _$$s } from "../figma_app/523506";
@@ -37,7 +37,7 @@ import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import { Uz, xH } from "../905/63728";
 import { g as _$$g2 } from "../905/880308";
 import { s as _$$s3 } from "../cssbuilder/589278";
-import { t as _$$t, tx as _$$tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { T1, UF, lc as _$$lc, c as _$$c, G4, Hl } from "../figma_app/545293";
 import { aq as _$$aq } from "../figma_app/399472";
 import { ze, tB as _$$tB, tS as _$$tS, q5, Hu } from "../figma_app/516028";
@@ -64,8 +64,8 @@ import { v as _$$v } from "../1250/821962";
 import { b as _$$b3 } from "../905/946806";
 import { getFeatureFlags } from "../905/601108";
 import { A as _$$A } from "../vendor/90566";
-import { $D } from "../905/11";
-import { PN } from "../figma_app/257275";
+import { reportError } from "../905/11";
+import { PN } from "../figma_app/897289";
 import { S as _$$S } from "../figma_app/420927";
 import { B as _$$B2 } from "../905/714743";
 import { sx as _$$sx } from "../905/941192";
@@ -89,7 +89,7 @@ import { x0, fJ } from "../figma_app/963341";
 import { _ as _$$_, h as _$$h3 } from "../9410/755019";
 import { EG, ah as _$$ah, J8, Hr } from "../figma_app/995580";
 import { kp, BB, Z7, Sk, PV } from "../figma_app/98578";
-import { R as _$$R3 } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { filterNotNullish, shuffle } from "../figma_app/656233";
 import { U as _$$U } from "../905/103637";
 import { K as _$$K } from "../905/799615";
@@ -100,7 +100,7 @@ import ez from "../vendor/260986";
 import { E as _$$E } from "../905/984674";
 import { XE, ow as _$$ow, E3 as _$$E2, m0, my, lg as _$$lg } from "../figma_app/976749";
 import { getSingletonSceneGraph } from "../905/700578";
-import { Lo, xi } from "../905/714362";
+import { logInfo, logWarning } from "../905/714362";
 import { Ay } from "../figma_app/432652";
 import { z as _$$z } from "../905/239603";
 import { qp } from "../905/977779";
@@ -111,7 +111,7 @@ import { E9 } from "../905/851937";
 import { wY, mv, iu as _$$iu } from "../905/753206";
 import { h as _$$h4 } from "../figma_app/198885";
 import { vx, t_ as _$$t_ } from "../905/91038";
-import { yY, nT as _$$nT } from "../figma_app/53721";
+import { isDesignOrIllustration, FEditorType } from "../figma_app/53721";
 import { o8 as _$$o2 } from "../905/622391";
 import { gH } from "../figma_app/985200";
 import { P as _$$P } from "../905/545265";
@@ -227,7 +227,7 @@ import { zN, k9 } from "../905/19536";
 import rF from "classnames";
 import { ei as _$$ei } from "../figma_app/9054";
 import { A as _$$A4 } from "../vendor/21595";
-import { az as _$$az, sx as _$$sx2 } from "../905/449184";
+import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { DA, UE, tK as _$$tK, F_ } from "../figma_app/191804";
 import { Rh } from "../905/485103";
 import { Pt as _$$Pt } from "../figma_app/806412";
@@ -356,7 +356,7 @@ import { A as _$$A13 } from "../svg/617101";
 import { A as _$$A14 } from "../svg/586486";
 import { U as _$$U3 } from "../905/544380";
 import { t as _$$t6 } from "../905/572040";
-import { y3 } from "../figma_app/876459";
+import { hasDesktopAPI } from "../figma_app/876459";
 import { R as _$$R6 } from "../905/240644";
 import { C as _$$C4 } from "../905/237873";
 import { $9, Gk } from "../figma_app/427318";
@@ -433,7 +433,7 @@ require.d(r, {
   wideSize: () => lU
 });
 function eP() {
-  return _$$R3(e => {
+  return selectWithShallowEqual(e => {
     let t = {};
     for (let i in e.mirror.appModel) {
       vg(i) && (t[i] = e.mirror.appModel[i]);
@@ -455,7 +455,7 @@ async function eZ(e, t, i) {
             ...e
           }, Object.entries(t))) if (void 0 === e[r] || null === e[r]) {
             if (e[r] = n, Array.isArray(e[r])) for (let t of e[r]) delete t.index;
-          } else if ("string" == typeof e[r] && "string" == typeof n) e[r] += n;else if ("number" == typeof e[r] && "number" == typeof n) e[r] = n;else if (Array.isArray(e[r]) && Array.isArray(n)) {
+          } else if ("string" == typeof e[r] && "string" == typeof n) e[r] += n; else if ("number" == typeof e[r] && "number" == typeof n) e[r] = n; else if (Array.isArray(e[r]) && Array.isArray(n)) {
             let t = e[r];
             for (let e = 0; e < n.length; e++) {
               let {
@@ -491,7 +491,7 @@ let tr = new class {
   }
 }();
 var tn = (e => (e.Idle = "idle", e.Loading = "loading", e.Error = "error", e))(tn || {});
-let ta = _$$eU({
+let ta = atom({
   status: "idle",
   messages: []
 });
@@ -587,7 +587,7 @@ let t_ = _$$z.object({
 async function tx(e) {
   if ("function" !== e.type) throw Error("Unexpected tool_call type:" + e.type);
   let t = JSON.parse(e.$$function.$$arguments);
-  let i = zl.get(ze);
+  let i = atomStoreManager.get(ze);
   if (!i) throw Error("No file key found");
   switch (e.$$function.name) {
     case "autocomplete":
@@ -722,7 +722,7 @@ async function tx(e) {
       let d = {
         title,
         description,
-        chatHistory: zl.get(ta).messages
+        chatHistory: atomStoreManager.get(ta).messages
       };
       await tr.sendFeatureRequest(d);
       return {
@@ -742,7 +742,7 @@ async function tx(e) {
   }
 }
 async function ty(e, t) {
-  let i = zl.get(ze);
+  let i = atomStoreManager.get(ze);
   let r = _$$o2();
   if (!r) throw Error("Cannot run plugin while logged out");
   if (!i) throw Error("No file key found");
@@ -817,8 +817,8 @@ async function tb(e) {
   let a = {
     type: _$$I2.ALL
   };
-  let s = yY(XE(_$$h4(t)));
-  let o = zl.get(qp);
+  let s = isDesignOrIllustration(XE(_$$h4(t)));
+  let o = atomStoreManager.get(qp);
   t = debugState.getState();
   let l = {
     type: "input-text",
@@ -887,7 +887,7 @@ async function tC(e, t, i, r) {
       o.push(t);
     }
     let l = (await eZ(s, o, r)).getReader();
-    for (;;) {
+    for (; ;) {
       let {
         done,
         value
@@ -950,9 +950,9 @@ async function tC(e, t, i, r) {
         messages: [...e.messages.slice(0, -1), value, ...newMessages]
       });
     }
-    n && tC(n, zl.get(ta).messages, i, r);
+    n && tC(n, atomStoreManager.get(ta).messages, i, r);
   } catch (e) {
-    Lo("Send chat message failed: ", e.message);
+    logInfo("Send chat message failed: ", e.message);
     i(e => ({
       ...e,
       status: tn.Error
@@ -988,7 +988,7 @@ function t0(e) {
   } = e;
   if (null === obj) return jsx("span", {
     className: _$$s3.colorTextTertiary.$,
-    children: _$$t("assistant.debug.null")
+    children: getI18nString("assistant.debug.null")
   });
   if ("object" != typeof obj) {
     if ("string" == typeof obj) {
@@ -998,7 +998,7 @@ function t0(e) {
           obj: e,
           depth
         });
-      } catch (e) {}
+      } catch (e) { }
       return obj.startsWith("data:image") ? jsx(t$, {
         url: obj
       }) : obj.length > 300 && obj.match(/^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?$/) ? jsx(t$, {
@@ -1074,7 +1074,7 @@ let t3 = Ju(function ({
     initialWidth: 400,
     allowResizeWidth: !0,
     autoflowHeight: !0,
-    title: _$$t("assistant.debug.title"),
+    title: getI18nString("assistant.debug.title"),
     dragHeaderOnly: !0,
     children: jsxs("div", {
       className: _$$s3.px2.py2.$,
@@ -1087,7 +1087,7 @@ let t3 = Ju(function ({
         onClick: () => {
           navigator.clipboard.writeText(JSON.stringify(e, void 0, 2));
         },
-        children: _$$t("assistant.debug.copy_all")
+        children: getI18nString("assistant.debug.copy_all")
       }), jsx(t2, {
         messages: e
       })]
@@ -1096,7 +1096,7 @@ let t3 = Ju(function ({
 }, "AssistantDebugModal", ZU.YES);
 function t5() {
   let [e, t] = useState("");
-  let [i, r] = fp(ta);
+  let [i, r] = useAtomValueAndSetter(ta);
   let o = useDispatch();
   let l = useSelector(e => e.modalShown);
   _$$b();
@@ -1149,7 +1149,7 @@ function t5() {
       })
     }), jsx(_$$n.Footer, {
       children: jsx(vj, {
-        placeholder: _$$t("fullscreen_actions.assistant-chat"),
+        placeholder: getI18nString("fullscreen_actions.assistant-chat"),
         searchQuery: e,
         onSearchChange: t,
         endEnhancer: jsx(_$$r, {
@@ -1158,7 +1158,7 @@ function t5() {
           }],
           onAction: u,
           disabled: 0 === e.length || i.status === tn.Loading,
-          children: _$$t("assistant.chat.send_message")
+          children: getI18nString("assistant.chat.send_message")
         })
       })
     })]
@@ -1176,17 +1176,17 @@ function t4() {
           children: [jsx(tA, {}), "Find designs"]
         }), jsxs(t6, {
           inputToSend: "I want to request a feature.",
-          children: [jsx(_$$V3, {}), _$$t("assistant.chat.suggestion.request_feature")]
+          children: [jsx(_$$V3, {}), getI18nString("assistant.chat.suggestion.request_feature")]
         })]
       }), jsxs("div", {
         className: _$$s3.flex.flexColumn.itemsCenter.flexGrow1.gap8.$,
         children: [jsxs(t6, {
           inputToSend: "Make a plugin that creates rectangles in a grid",
-          children: [jsx(_$$x2, {}), _$$t("assistant.chat.suggestion.make_tool")]
+          children: [jsx(_$$x2, {}), getI18nString("assistant.chat.suggestion.make_tool")]
         }), jsxs(t6, {
           inputToSend: "",
           disabled: !0,
-          children: [jsx(_$$C, {}), _$$t("assistant.chat.suggestion.coming_soon")]
+          children: [jsx(_$$C, {}), getI18nString("assistant.chat.suggestion.coming_soon")]
         })]
       })]
     })]
@@ -1197,7 +1197,7 @@ function t6({
   inputToSend: t,
   disabled: i
 }) {
-  let [r, s] = fp(ta);
+  let [r, s] = useAtomValueAndSetter(ta);
   let o = useCallback(() => {
     tC(t, r.messages, s, tx);
   }, [t, r.messages, s]);
@@ -1241,13 +1241,13 @@ function t8({
           children: jsx(_$$k2, {})
         }), jsx("div", {
           className: _$$s3.colorTextSecondary.$,
-          children: _$$t("assistant.chat.status.loading")
+          children: getI18nString("assistant.chat.status.loading")
         })]
       });
       break;
     case tn.Error:
       t = jsxs(t7, {
-        children: [jsx(_$$Z, {}), _$$t("assistant.chat.status.error")]
+        children: [jsx(_$$Z, {}), getI18nString("assistant.chat.status.error")]
       });
       break;
     default:
@@ -1306,22 +1306,22 @@ function t9(e) {
         openFileKey: i?.key ?? "",
         queryId: "",
         searchQuery: userFacing.queries[0],
-        searchSessionId: zl.get(_$$dd) ?? "",
+        searchSessionId: atomStoreManager.get(_$$dd) ?? "",
         sectionPosition: t
       }, t))
     });
     if ("selection" === userFacing.type) return jsxs(t7, {
-      children: [jsx(_$$W, {}), _$$t("assistant.chat.tool_result.selection.success")]
+      children: [jsx(_$$W, {}), getI18nString("assistant.chat.tool_result.selection.success")]
     });
     if ("request-feature" === userFacing.type) return jsxs(t7, {
-      children: [jsx(_$$W, {}), _$$t("assistant.chat.tool_result.feature_request")]
+      children: [jsx(_$$W, {}), getI18nString("assistant.chat.tool_result.feature_request")]
     });
     return jsxs(t7, {
-      children: [jsx(_$$g3, {}), _$$t("assistant.chat.tool_result.success")]
+      children: [jsx(_$$g3, {}), getI18nString("assistant.chat.tool_result.success")]
     });
   } catch (e) {
     return jsxs(t7, {
-      children: [jsx(_$$Z, {}), _$$t("assistant.chat.tool_result.error")]
+      children: [jsx(_$$Z, {}), getI18nString("assistant.chat.tool_result.error")]
     });
   }
 }
@@ -1367,7 +1367,7 @@ function it({
   try {
     let i = new DOMParser().parseFromString(e, "text/xml").getElementsByTagName("user_input");
     i.length > 0 && (t = i[0].textContent || "");
-  } catch {}
+  } catch { }
   return jsx("div", {
     children: t.split("\n").map((e, t) => jsxs("span", {
       children: [e, jsx("br", {})]
@@ -1461,7 +1461,7 @@ function iW({
     className: "x78zum5 x1q0g3np x6s0dn4 xg2d0mh",
     children: [e, jsx(_$$E3, {
       variant: "brandOutline",
-      children: _$$tx("fullscreen_actions.new")
+      children: renderI18nText("fullscreen_actions.new")
     })]
   });
 }
@@ -1514,7 +1514,7 @@ function rC({
   actionLabel: r,
   instructionLabel: a
 }) {
-  let [s] = fp(hQ);
+  let [s] = useAtomValueAndSetter(hQ);
   let o = _$$s6(e);
   let {
     close
@@ -1600,7 +1600,7 @@ async function r$(e, t, i) {
         });
       } catch (t) {
         let e = void 0 === t ? "undefined" : t instanceof Error ? t.message : JSON.stringify(t);
-        _$$az.trackDefinedEvent("ai_generation.first_draft_font_error", {
+        analyticsEventManager.trackDefinedEvent("ai_generation.first_draft_font_error", {
           error: e,
           family: s.family,
           style: s.style,
@@ -1625,7 +1625,7 @@ async function nt({
   if (!a) return !1;
   let s = `${t}:${e.affectedId}`;
   if (ne.has(s)) {
-    $D(_$$e.AI_GENERATION, Error("first-draft: Attempted to apply content changes twice"), {
+    reportError(_$$e.AI_GENERATION, Error("first-draft: Attempted to apply content changes twice"), {
       extra: {
         clientLifecycleId: i
       }
@@ -1637,7 +1637,7 @@ async function nt({
       node: e,
       textContent: t
     }) {
-      return "TEXT" !== e.type ? (xi("first-draft", "Update text called on a non-text node", {
+      return "TEXT" !== e.type ? (logWarning("first-draft", "Update text called on a non-text node", {
         nodeId: e.guid,
         nodeType: e.type
       }), !1) : (e.characters = t, !0);
@@ -1717,7 +1717,7 @@ async function na({
       l.removeSelfAndChildren();
     });
   } catch (t) {
-    $D(_$$e.AI_GENERATION, t, {
+    reportError(_$$e.AI_GENERATION, t, {
       extra: {
         action: e,
         dsKitKey: i
@@ -1752,29 +1752,29 @@ var nx = n_;
 var ny = (e => (e.mobile = "MOBILE", e.web = "WEB", e))(ny || {});
 function nb(e = 1) {
   let t = [{
-    label: _$$t("first_draft.make_changes.prompt_labels.change_font"),
-    prompt: _$$t("first_draft.make_changes.prompts.futuristic_font")
+    label: getI18nString("first_draft.make_changes.prompt_labels.change_font"),
+    prompt: getI18nString("first_draft.make_changes.prompts.futuristic_font")
   }, {
-    label: _$$t("first_draft.make_changes.prompt_labels.colors"),
-    prompt: _$$t("first_draft.make_changes.prompts.calming_colors")
+    label: getI18nString("first_draft.make_changes.prompt_labels.colors"),
+    prompt: getI18nString("first_draft.make_changes.prompts.calming_colors")
   }, {
-    label: _$$t("first_draft.make_changes.prompt_labels.round_corners"),
-    prompt: _$$t("first_draft.make_changes.prompts.round_corners")
+    label: getI18nString("first_draft.make_changes.prompt_labels.round_corners"),
+    prompt: getI18nString("first_draft.make_changes.prompts.round_corners")
   }, {
-    label: _$$t("first_draft.make_changes.prompt_labels.colors"),
-    prompt: _$$t("first_draft.make_changes.prompts.watermelon_theme")
+    label: getI18nString("first_draft.make_changes.prompt_labels.colors"),
+    prompt: getI18nString("first_draft.make_changes.prompts.watermelon_theme")
   }, {
-    label: _$$t("first_draft.make_changes.prompt_labels.rewrite"),
-    prompt: _$$t("first_draft.make_changes.prompts.punchier_text")
+    label: getI18nString("first_draft.make_changes.prompt_labels.rewrite"),
+    prompt: getI18nString("first_draft.make_changes.prompts.punchier_text")
   }, {
-    label: _$$t("first_draft.make_changes.prompt_labels.imagery"),
-    prompt: _$$t("first_draft.make_changes.prompts.vibrant_images")
+    label: getI18nString("first_draft.make_changes.prompt_labels.imagery"),
+    prompt: getI18nString("first_draft.make_changes.prompts.vibrant_images")
   }, {
-    label: _$$t("first_draft.make_changes.prompt_labels.add"),
-    prompt: _$$t("first_draft.make_changes.prompts.add_another_section")
+    label: getI18nString("first_draft.make_changes.prompt_labels.add"),
+    prompt: getI18nString("first_draft.make_changes.prompts.add_another_section")
   }, {
-    label: _$$t("first_draft.make_changes.prompt_labels.replace"),
-    prompt: _$$t("first_draft.make_changes.prompts.replace_hero_image")
+    label: getI18nString("first_draft.make_changes.prompt_labels.replace"),
+    prompt: getI18nString("first_draft.make_changes.prompts.replace_hero_image")
   }];
   return eV()(nx()(t.filter(e => "" !== nC(e.label))), e => e.label).slice(0, e);
 }
@@ -2003,7 +2003,7 @@ var nX = (e => (e.TITLE = "title", e.BODY = "body", e.LABLE = "label", e))(nX ||
 let nZ = "theme_editor--svgText--yyKtR";
 let nQ = createContext({
   activeTab: nq.COLOR,
-  onTabChange: () => {},
+  onTabChange: () => { },
   recordingKey: void 0
 });
 function n$({
@@ -2098,7 +2098,7 @@ function n7({
     children: [jsxs("div", {
       className: _$$s3.flex.flexRow.justifyCenter.itemsCenter.flexGrow1.gap8.$,
       children: [jsx(_$$K3, {
-        "aria-label": _$$t("first_draft.theme_tool.close_panel"),
+        "aria-label": getI18nString("first_draft.theme_tool.close_panel"),
         onClick: () => r(),
         recordingKey: "closeSectionEditor",
         children: jsx(_$$C3, {})
@@ -2213,7 +2213,7 @@ function n9(e) {
         justify: "space-between",
         children: [jsx(n$, {
           tab: nq.COLOR,
-          label: _$$t("first_draft.theme_panel.color"),
+          label: getI18nString("first_draft.theme_panel.color"),
           children: jsx(cd, {
             size: "medium",
             value: i,
@@ -2226,21 +2226,21 @@ function n9(e) {
           })
         }), jsx(n$, {
           tab: nq.RADIUS,
-          label: _$$t("first_draft.theme_panel.radius"),
+          label: getI18nString("first_draft.theme_panel.radius"),
           children: jsx(_$$B2, {
             svg: r,
             className: "theme_editor--svgIcon--ongu6"
           })
         }), jsx(n$, {
           tab: nq.SPACING,
-          label: _$$t("first_draft.theme_panel.spacing"),
+          label: getI18nString("first_draft.theme_panel.spacing"),
           children: jsx(_$$B2, {
             svg: s,
             className: nZ
           })
         }), jsx(n$, {
           tab: nq.FONT,
-          label: _$$t("first_draft.theme_panel.font"),
+          label: getI18nString("first_draft.theme_panel.font"),
           children: jsx(_$$B2, {
             svg: _$$A7,
             className: nZ
@@ -2275,18 +2275,18 @@ let ae = {
           value: e.colorMode,
           recordingKey: _$$Pt(e, "colorModePicker"),
           legend: jsx(_$$q3, {
-            children: _$$tx("first_draft.theme_tool.color.mode_picker")
+            children: renderI18nText("first_draft.theme_tool.color.mode_picker")
           }),
           children: [jsx(c$, {
             value: "light",
-            "aria-label": _$$t("first_draft.theme_tool.color.light_mode"),
+            "aria-label": getI18nString("first_draft.theme_tool.color.light_mode"),
             icon: jsx("div", {
               className: _$$s3.flex.w44.itemsCenter.justifyCenter.$,
               children: jsx(_$$Z2, {})
             })
           }), jsx(c$, {
             value: "dark",
-            "aria-label": _$$t("first_draft.theme_tool.color.dark_mode"),
+            "aria-label": getI18nString("first_draft.theme_tool.color.dark_mode"),
             icon: jsx("div", {
               className: _$$s3.flex.w44.itemsCenter.justifyCenter.$,
               children: jsx(_$$a2, {})
@@ -2309,9 +2309,9 @@ let ae = {
         recordingKey: e.recordingKey
       }), jsx(_$$J4, {
         className: _$$s3.opacity0_5.$,
-        children: _$$tx("first_draft.theme_panel.radius")
+        children: renderI18nText("first_draft.theme_panel.radius")
       }), jsx(_$$A5, {
-        "aria-label": _$$t("first_draft.theme_panel.radius"),
+        "aria-label": getI18nString("first_draft.theme_panel.radius"),
         bigStep: .2,
         defaultValue: t,
         max: Ne,
@@ -2332,9 +2332,9 @@ let ae = {
         recordingKey: e.recordingKey
       }), jsx(_$$J4, {
         className: _$$s3.opacity0_5.$,
-        children: _$$tx("first_draft.theme_panel.spacing")
+        children: renderI18nText("first_draft.theme_panel.spacing")
       }), jsx(_$$A5, {
-        "aria-label": _$$t("first_draft.theme_panel.spacing"),
+        "aria-label": getI18nString("first_draft.theme_panel.spacing"),
         bigStep: .2,
         defaultValue: t,
         max: Ne,
@@ -2365,13 +2365,13 @@ let ae = {
           manager: r,
           children: [jsx(_$$t3.Tab, {
             ...t.title,
-            children: _$$tx("first_draft.theme_panel.label.fontTitle")
+            children: renderI18nText("first_draft.theme_panel.label.fontTitle")
           }), jsx(_$$t3.Tab, {
             ...t.body,
-            children: _$$tx("first_draft.theme_panel.label.fontBody")
+            children: renderI18nText("first_draft.theme_panel.label.fontBody")
           }), jsx(_$$t3.Tab, {
             ...t.label,
-            children: _$$tx("first_draft.theme_panel.label.fontLabel")
+            children: renderI18nText("first_draft.theme_panel.label.fontLabel")
           })]
         })]
       }), jsx("div", {
@@ -2506,7 +2506,7 @@ function as({
     children: jsx(_$$K3, {
       recordingKey: _$$Pt(e, "backButton"),
       onClick: pop,
-      "aria-label": _$$t("qa.go_back"),
+      "aria-label": getI18nString("qa.go_back"),
       children: jsx(_$$C3, {})
     })
   });
@@ -2609,7 +2609,7 @@ function am({
   let i = t.clientLifecycleId;
   let r = _$$tS();
   let s = useCallback(() => {
-    _$$sx2("First Draft: Error", {
+    trackEventAnalytics("First Draft: Error", {
       file_key: r,
       clientLifecycleId: i,
       view: "firstDraftMakeChanges"
@@ -2672,7 +2672,7 @@ function af(e) {
             let n = t.get(i);
             return !!n && (n.guid === r || !!n.parentGuid && e(t, n.parentGuid, r));
           }(getSingletonSceneGraph(), e, s.rootNodeId)) {
-            $D(_$$e.AI_GENERATION, Error("first-draft: Node does not have root node as ancestor"), {
+            reportError(_$$e.AI_GENERATION, Error("first-draft: Node does not have root node as ancestor"), {
               extra: {
                 nodeId: e,
                 action: a,
@@ -2682,7 +2682,7 @@ function af(e) {
             return;
           }
           if (e === s.rootNodeId) {
-            $D(_$$e.AI_GENERATION, Error("first-draft: Tried to mutate root node"), {
+            reportError(_$$e.AI_GENERATION, Error("first-draft: Tried to mutate root node"), {
               extra: {
                 nodeId: e,
                 action: a,
@@ -2793,7 +2793,7 @@ function af(e) {
     clientLifecycleId: i
   });
   let [y, b] = useState(0);
-  let [C, v] = useState(Error(_$$t("first_draft.something_went_wrong")));
+  let [C, v] = useState(Error(getI18nString("first_draft.something_went_wrong")));
   let [E, T] = useState(null);
   let [w, S, j] = _$$t3.useTabs({
     prompt: !0,
@@ -2843,7 +2843,7 @@ function af(e) {
         kitKey: o,
         kitIdentifier: l?.metadata?.identifier ?? null
       });
-      _$$sx2("First Draft: Make Changes Started", {
+      trackEventAnalytics("First Draft: Make Changes Started", {
         ...r,
         hasNonRootNodeSelected: !(f.guid in m)
       }, {
@@ -2863,7 +2863,7 @@ function af(e) {
         [f.guid]: !0
       }, !0);
       if (!jsxStr || !_jsxStr) {
-        _$$sx2("First Draft: Make Changes Ended", {
+        trackEventAnalytics("First Draft: Make Changes Ended", {
           ...r,
           timeElapsedMs: Date.now() - L,
           status: "failed",
@@ -2888,7 +2888,7 @@ function af(e) {
         if (!r) return [];
         try {
           return _$$z.array(Db).parse(JSON.parse(r));
-        } catch {}
+        } catch { }
         return [];
       }(f.guid);
       let y = function (e) {
@@ -2928,7 +2928,7 @@ function af(e) {
       })(f.guid, _);
       let v = C.getReader();
       let E = [];
-      for (;;) {
+      for (; ;) {
         let {
           done,
           value
@@ -2937,11 +2937,11 @@ function af(e) {
           v.cancel();
           break;
         }
-        if (instrumentationRef.current.trackFirstByteReceived(), done && instrumentationRef.current.trackLastStreamByteReceived(), Lo("makeChanges", "Response message", {
+        if (instrumentationRef.current.trackFirstByteReceived(), done && instrumentationRef.current.trackLastStreamByteReceived(), logInfo("makeChanges", "Response message", {
           message: value
         }), value?.trace && T(value.trace), value?.action) {
           if ("replaceClasses" === value.action.type && !getFeatureFlags().first_draft_surgical_edits) {
-            xi("makeChanges", "Unsupported action", {
+            logWarning("makeChanges", "Unsupported action", {
               action: value.action.type
             });
             Rh("first_draft.client.make_changes.unsupported_action", {
@@ -2950,7 +2950,7 @@ function af(e) {
             E.push(Promise.reject(new G1("make_changes_unsupported", {})));
             continue;
           }
-          if (_$$sx2("First Draft: Make Changes Prompt Action", {
+          if (trackEventAnalytics("First Draft: Make Changes Prompt Action", {
             ...r,
             action: value.action.type
           }, {
@@ -2974,14 +2974,14 @@ function af(e) {
         if (done) {
           let e = await Promise.allSettled(E);
           if (!E.length) {
-            xi("makeChanges", "No actions were applied from the prompt response");
+            logWarning("makeChanges", "No actions were applied from the prompt response");
             Rh("first_draft.client.make_changes.no_actions_applied");
             return new G1("make_changes_unsupported", {});
           }
           if (e.every(e => "rejected" === e.status)) {
             for (let t of e) if ("rejected" === t.status) throw t.reason;
           }
-          _$$sx2("First Draft: Make Changes Ended", {
+          trackEventAnalytics("First Draft: Make Changes Ended", {
             ...r,
             status: "completed",
             timeElapsedMs: Date.now() - L,
@@ -2999,7 +2999,7 @@ function af(e) {
         }
       }
     } catch (a) {
-      xi("makeChanges", "Error", {
+      logWarning("makeChanges", "Error", {
         error: a
       });
       let e = a instanceof G1;
@@ -3010,10 +3010,10 @@ function af(e) {
         status: "failed",
         reason: "error"
       };
-      let n = e ? "handled_internally" : $D(_$$e.AI_GENERATION, a, {
+      let n = e ? "handled_internally" : reportError(_$$e.AI_GENERATION, a, {
         extra: i
       });
-      _$$sx2("First Draft: Make Changes Ended", {
+      trackEventAnalytics("First Draft: Make Changes Ended", {
         ...i,
         sentryEventId: n
       }, {
@@ -3023,7 +3023,7 @@ function af(e) {
       });
       ax(t, "error");
       instrumentationRef.current.trackFinished("failure");
-      e && ("make_changes_unsupported" === a.type || "make_changes_moderated" === a.type) ? (_$$sx2("First Draft: Make Changes Prompt Action", {
+      e && ("make_changes_unsupported" === a.type || "make_changes_moderated" === a.type) ? (trackEventAnalytics("First Draft: Make Changes Prompt Action", {
         ...r,
         action: "make_changes_unsupported" === a.type ? "iCantDoThis" : "blocked"
       }, {
@@ -3047,13 +3047,13 @@ function af(e) {
         onStop: B,
         aiTrackingContext: t,
         recordingKey: _$$Pt(e, "running"),
-        children: _$$tx("first_draft.making_changes")
+        children: renderI18nText("first_draft.making_changes")
       });
     case 3:
       H && _$$A8(D, E);
       return jsx(_$$E4, {
         error: C,
-        customMessage: _$$t("first_draft.something_went_wrong"),
+        customMessage: getI18nString("first_draft.something_went_wrong"),
         recordingKey: _$$Pt(e, "error"),
         buttons: [{
           type: _$$f5.GO_BACK,
@@ -3066,19 +3066,19 @@ function af(e) {
       return jsx(_$$E4, {
         error: C,
         customMessage: (e => {
-          let t = _$$t("first_draft.make_changes.i_cant_do_this");
+          let t = getI18nString("first_draft.make_changes.i_cant_do_this");
           if (e instanceof G1) {
-            if ("make_changes_moderated" === e.type) return _$$t("ai.error.unsafe_or_harmful");
+            if ("make_changes_moderated" === e.type) return getI18nString("ai.error.unsafe_or_harmful");
             if (!getFeatureFlags().first_draft_make_changes_errors) return t;
             if ("make_changes_unsupported" === e.type && e.data?.rationaleCategory) {
               let t = e.data.rationaleCategory;
               switch (t) {
                 case "component":
-                  return _$$t("first_draft.make_changes.i_cant_do_this_component");
+                  return getI18nString("first_draft.make_changes.i_cant_do_this_component");
                 case "font":
-                  return _$$t("first_draft.make_changes.i_cant_do_this_font");
+                  return getI18nString("first_draft.make_changes.i_cant_do_this_font");
                 case "layout":
-                  return _$$t("first_draft.make_changes.i_cant_do_this_layout");
+                  return getI18nString("first_draft.make_changes.i_cant_do_this_layout");
                 case "other":
                   break;
                 default:
@@ -3102,7 +3102,7 @@ function af(e) {
         callback: () => {
           b(0);
           Y5.triggerAction("undo");
-          _$$sx2("First Draft: Make Changes Undo", {
+          trackEventAnalytics("First Draft: Make Changes Undo", {
             file_key: c,
             clientLifecycleId: i
           }, {
@@ -3220,7 +3220,7 @@ function ag({
     });
   }, [N, x, U, y?.guid, g.radius, g.spacing]);
   let K = _$$A4(e => {
-    _$$sx2("First Draft: Make Changes Color Change", {
+    trackEventAnalytics("First Draft: Make Changes Color Change", {
       ...I,
       color: e
     }, {
@@ -3241,7 +3241,7 @@ function ag({
   let V = useRef(null);
   let W = useRef(null);
   let Y = useCallback((e, t) => {
-    if (W.current) V.current = [e, W.current];else {
+    if (W.current) V.current = [e, W.current]; else {
       W.current = e;
       let i = F_(t);
       _$$l2.user("first-draft-apply-brand-color", () => {
@@ -3269,7 +3269,7 @@ function ag({
     });
   }, [x, K, k, Y, N]);
   let X = _$$A4(e => {
-    _$$sx2("First Draft: Make Changes Radius Change", {
+    trackEventAnalytics("First Draft: Make Changes Radius Change", {
       ...I,
       radius: e
     }, {
@@ -3290,7 +3290,7 @@ function ag({
     }));
   }, [A, x, Z]);
   let et = _$$A4(e => {
-    _$$sx2("First Draft: Make Changes Spacing Change", {
+    trackEventAnalytics("First Draft: Make Changes Spacing Change", {
       ...I,
       spacing: e
     }, {
@@ -3311,7 +3311,7 @@ function ag({
     }));
   }, [x, ei, O]);
   let en = _$$A4((e, t) => {
-    _$$sx2("First Draft: Make Changes Font Change", {
+    trackEventAnalytics("First Draft: Make Changes Font Change", {
       ...I,
       font_location: e,
       font_type: t
@@ -3366,7 +3366,7 @@ function ag({
     onAction: ec,
     disabled: !y || 0 === e.length,
     recordingKey: _$$Pt(d, "submit"),
-    children: _$$tx("first_draft.make_changes")
+    children: renderI18nText("first_draft.make_changes")
   });
   let em = jsx(_$$r, {
     shortcuts: [{
@@ -3375,7 +3375,7 @@ function ag({
     }],
     onAction: close,
     recordingKey: _$$Pt(d, "doneTheming"),
-    children: _$$tx("first_draft.done_theming")
+    children: renderI18nText("first_draft.done_theming")
   });
   return jsxs(Fragment, {
     children: [jsx(_$$B, {
@@ -3434,12 +3434,12 @@ function ag({
           manager: r,
           children: [jsx(_$$t3.Tab, {
             ...s.theme,
-            children: _$$tx("first_draft.style")
+            children: renderI18nText("first_draft.style")
           }), jsx(_$$t3.Tab, {
             ...s.prompt,
             children: jsx("span", {
               "data-testid": "promptTabLabel",
-              children: _$$tx("first_draft.prompt")
+              children: renderI18nText("first_draft.prompt")
             })
           })]
         }), "prompt" === r.activeTab ? eh : em]
@@ -3808,7 +3808,7 @@ function aN() {
                 let c = XJn.findSimilarNodes(e.guid, t.buildingBlocks.guid, !1, !0, !0).concat(XJn.findSimilarNodes(e.guid, t.atoms.guid, !1, !0, !0));
                 let u = c[0] ? i.get(c[0]) : null;
                 if (!u) {
-                  if ("FRAME" === e.type) (u = i.createComponentFromNode(e.clone())).name = name;else {
+                  if ("FRAME" === e.type) (u = i.createComponentFromNode(e.clone())).name = name; else {
                     if (!(u = i.get(e.clone()))) throw Error("Failed to clone instance");
                     _$$T6(u);
                   }
@@ -3874,20 +3874,20 @@ function aP(e) {
   let [t, i] = useState("initial");
   let r = [{
     step: 3,
-    title: _$$t("first_draft.make_kit.all_steps.title"),
-    description: _$$t("first_draft.make_kit.all_steps.description")
+    title: getI18nString("first_draft.make_kit.all_steps.title"),
+    description: getI18nString("first_draft.make_kit.all_steps.description")
   }, {
     step: 0,
-    title: _$$t("first_draft.make_kit.componentize_step.title"),
-    description: _$$t("first_draft.make_kit.componentize_step.description")
+    title: getI18nString("first_draft.make_kit.componentize_step.title"),
+    description: getI18nString("first_draft.make_kit.componentize_step.description")
   }, {
     step: 1,
-    title: _$$t("first_draft.make_kit.add_props_step.title"),
-    description: _$$t("first_draft.make_kit.add_props_step.description")
+    title: getI18nString("first_draft.make_kit.add_props_step.title"),
+    description: getI18nString("first_draft.make_kit.add_props_step.description")
   }, {
     step: 2,
-    title: _$$t("first_draft.make_kit.lint_step.title"),
-    description: _$$t("first_draft.make_kit.lint_step.description")
+    title: getI18nString("first_draft.make_kit.lint_step.title"),
+    description: getI18nString("first_draft.make_kit.lint_step.description")
   }];
   let s = useCallback(e => {
     switch (e) {
@@ -3935,16 +3935,16 @@ function aP(e) {
                 children: jsx(_$$K3, {
                   recordingKey: _$$Pt(e.recordingKey, "backButton"),
                   onClick: e.onBack,
-                  "aria-label": _$$t("qa.go_back"),
+                  "aria-label": getI18nString("qa.go_back"),
                   children: jsx(_$$C3, {})
                 })
               }), jsx("div", {
                 className: _$$s3.colorText.textBodyLarge.$,
-                children: _$$tx("fullscreen_actions.quick_actions.first-draft-make-kit")
+                children: renderI18nText("fullscreen_actions.quick_actions.first-draft-make-kit")
               })]
             }), jsx("div", {
               className: _$$s3.wFull.flex.font11.$,
-              children: _$$tx("first_draft.make_kit.description")
+              children: renderI18nText("first_draft.make_kit.description")
             })]
           })
         }), jsx(_$$n.Body, {
@@ -4016,7 +4016,7 @@ function aB(e) {
     case qy.INITIAL:
       return jsx(_$$A2, {
         action: _$$JT.FIRST_DRAFT_COMPONENTIZE,
-        actionLabel: _$$tx("first_draft.make_kit.componentize_step.title"),
+        actionLabel: renderI18nText("first_draft.make_kit.componentize_step.title"),
         actionIcon: jsx(_$$K, {}),
         onPerform: e.overrides?.perform ?? p,
         instructionAction: {
@@ -4025,18 +4025,18 @@ function aB(e) {
         },
         aiTrackingContext,
         getCustomSelectedNodesAmount: aM,
-        children: _$$tx("first_draft.make_kit.componentize_step.instructions")
+        children: renderI18nText("first_draft.make_kit.componentize_step.instructions")
       });
     case qy.RUNNING:
       return jsx(_$$F3, {
         recordingKey: _$$Pt(e.recordingKey, "componentizeRunning"),
         aiTrackingContext,
         onStop: h,
-        secondaryMessage: g.total ? _$$t("first_draft.make_kit.x_of_y_frames", {
+        secondaryMessage: g.total ? getI18nString("first_draft.make_kit.x_of_y_frames", {
           loaded: g.loaded,
           total: g.total
         }) : void 0,
-        children: _$$tx("first_draft.make_kit.componentize_step.running")
+        children: renderI18nText("first_draft.make_kit.componentize_step.running")
       });
     case qy.DONE:
       return jsx(Oq, {
@@ -4113,7 +4113,7 @@ function aG(e) {
     case qy.INITIAL:
       return jsx(_$$A2, {
         action: _$$JT.FIRST_DRAFT_SUGGEST_PROPS,
-        actionLabel: _$$tx("first_draft.make_kit.add_props_step.add_props_button"),
+        actionLabel: renderI18nText("first_draft.make_kit.add_props_step.add_props_button"),
         actionIcon: jsx(_$$K, {}),
         onPerform: p,
         instructionAction: {
@@ -4121,18 +4121,18 @@ function aG(e) {
           url: "https://figma.com"
         },
         aiTrackingContext,
-        children: _$$tx("first_draft.make_kit.add_props_step.instructions")
+        children: renderI18nText("first_draft.make_kit.add_props_step.instructions")
       });
     case qy.RUNNING:
       return jsx(_$$F3, {
         recordingKey: _$$Pt(e.recordingKey, "suggestPropsRunning"),
         aiTrackingContext,
         onStop: h,
-        secondaryMessage: g.total ? _$$t("first_draft.make_kit.x_of_y_components", {
+        secondaryMessage: g.total ? getI18nString("first_draft.make_kit.x_of_y_components", {
           loaded: g.loaded,
           total: g.total
         }) : void 0,
-        children: _$$tx("first_draft.make_kit.add_props_step.running")
+        children: renderI18nText("first_draft.make_kit.add_props_step.running")
       });
     case qy.DONE:
       return jsx(Oq, {
@@ -4431,20 +4431,20 @@ let aJ = async ({
     for (let r of (i.name = "Results", biQ.setTextContentOnTextNode(i.guid, `False Negative Count: ${l.reduce((e, t) => e + t.falseNegativeCount, 0)}
 False Positive Count: ${l.reduce((e, t) => e + t.falsePositiveCount, 0)}
 Correct Count: ${l.reduce((e, t) => e + t.correctCount, 0)}`), i.x = 10, i.y = 10, i.size = {
-      x: 200,
-      y: 200
-    }, i.fills = i.fills.concat([{
-      type: "SOLID",
-      color: {
-        r: 0,
-        g: 0,
-        b: 0,
-        a: 1
-      },
-      visible: !0,
-      opacity: 1,
-      blendMode: "NORMAL"
-    }]), t.appendChild(i), e.appendChild(t), l)) {
+        x: 200,
+        y: 200
+      }, i.fills = i.fills.concat([{
+        type: "SOLID",
+        color: {
+          r: 0,
+          g: 0,
+          b: 0,
+          a: 1
+        },
+        visible: !0,
+        opacity: 1,
+        blendMode: "NORMAL"
+      }]), t.appendChild(i), e.appendChild(t), l)) {
       let t = r.result;
       if (!yZ(t.expectedComponents, t.components)) {
         let i = XJn.cloneNodeForComponentize(t.node.guid);
@@ -4550,7 +4550,7 @@ let sl = {
   ORG: "org",
   ALL: "all"
 };
-let sd = E3("firstDraftKitPickerTab", sl.ORG);
+let sd = createLocalStorageAtom("firstDraftKitPickerTab", sl.ORG);
 function sc({
   aiTrackingContext: e,
   ParentComponent: t
@@ -4585,9 +4585,9 @@ function sc({
   useEffect(() => {
     u.current?.focus();
   }, [u]);
-  let [_, x] = fp(sd);
+  let [_, x] = useAtomValueAndSetter(sd);
   let y = T5("FirstDraftKitSelection").unwrapOr(null);
-  let b = y?.name || _$$t("first_draft.kits.org_libraries.fallback");
+  let b = y?.name || getI18nString("first_draft.kits.org_libraries.fallback");
   let C = b && b.length > 20;
   let v = getFeatureFlags().first_draft_direct_gen && allUsableKitEntries.some(e => e.metadata.direct_generation);
   let E = f || allUsableKitEntries;
@@ -4611,7 +4611,7 @@ function sc({
             children: jsx(_$$K3, {
               recordingKey: _$$Pt("firstDraftKitSelection", "backButton"),
               onClick: pop,
-              "aria-label": _$$t("qa.go_back"),
+              "aria-label": getI18nString("qa.go_back"),
               children: jsx(_$$C3, {})
             })
           }), jsx("input", {
@@ -4622,13 +4622,13 @@ function sc({
             maxLength: 100,
             onChange: e => {
               !function (e) {
-                if (d(e), 0 === e.length) g(null);else {
+                if (d(e), 0 === e.length) g(null); else {
                   let t = e.toLowerCase();
                   g(allUsableKitEntries.filter(e => sp(e).toLowerCase().includes(t)));
                 }
               }(e.target.value);
             },
-            placeholder: _$$t("first_draft.kits.search_placeholder"),
+            placeholder: getI18nString("first_draft.kits.search_placeholder"),
             spellCheck: !1,
             type: "search",
             value: l
@@ -4651,14 +4651,14 @@ function sc({
                   "data-tooltip-type": Ib.TEXT
                 })
               },
-              children: _$$tx("first_draft.kits.org_libraries", {
+              children: renderI18nText("first_draft.kits.org_libraries", {
                 orgName: EJ(b, 20)
               })
             }), jsx(_$$oz, {
               tabId: sl.ALL,
               onAction: () => x(sl.ALL),
               recordingKey: _$$Pt("firstDraftKitSelection", "allTab"),
-              children: _$$tx("first_draft.kits.all_libraries")
+              children: renderI18nText("first_draft.kits.all_libraries")
             })]
           }) : jsx(sh, {})
         }) : null, jsx("div", {
@@ -4686,7 +4686,7 @@ function su({
     let e = t.length > 20 ? `${t.slice(0, 20)}\u2026` : t;
     return jsx("div", {
       className: _$$s3.p8.selfCenter.justifyCenter.flex.flexGrow0.$,
-      children: _$$tx("first_draft.kits.no_results", {
+      children: renderI18nText("first_draft.kits.no_results", {
         searchQuery: e
       })
     });
@@ -4722,7 +4722,7 @@ function su({
               children: sp(e)
             }), e.numComponents > 0 && jsx("div", {
               className: "kit_picker_view--componentCountText--bBnSq",
-              children: _$$tx("first_draft.kits.components_count", {
+              children: renderI18nText("first_draft.kits.components_count", {
                 count: e.numComponents
               })
             })]
@@ -4738,7 +4738,7 @@ function sp(e) {
     case "USER_LIBRARY":
       return e.name;
     case "1P_LIBRARY":
-      if (e.metadata.identifier) return _$$t(`first_draft.kits.${e.metadata.identifier}`) || e.name;
+      if (e.metadata.identifier) return getI18nString(`first_draft.kits.${e.metadata.identifier}`) || e.name;
       return e.name;
     default:
       return throwTypeError(e.dsKitKey);
@@ -4749,20 +4749,20 @@ function sh() {
     className: "kit_picker_view--tempGettingStartedNotice--ADe-Q",
     children: [jsx("div", {
       className: _$$s3.fontBold.$,
-      children: _$$tx("first_draft.direct_gen.getting_started.heading")
+      children: renderI18nText("first_draft.direct_gen.getting_started.heading")
     }), jsxs("div", {
       className: _$$s3.inline.colorTextSecondary.flexWrap.$,
-      children: [_$$tx("first_draft.direct_gen.getting_started.notice"), " ", jsx(_$$N2, {
+      children: [renderI18nText("first_draft.direct_gen.getting_started.notice"), " ", jsx(_$$N2, {
         newTab: !0,
         trusted: !0,
         href: "https://www.figma.com/blog/figma-ai-first-draft-byods/",
         onClick: e => e.stopPropagation(),
         htmlAttributes: {
-          "data-tooltip": _$$t("qa.learn_more"),
+          "data-tooltip": getI18nString("qa.learn_more"),
           "data-tooltip-type": Ib.TEXT,
           "data-tooltip-show-above": !0
         },
-        children: _$$tx("qa.learn_more")
+        children: renderI18nText("qa.learn_more")
       })]
     })]
   });
@@ -4783,12 +4783,12 @@ function sm({
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$tx("first_draft.reference_settings")
+          children: renderI18nText("first_draft.reference_settings")
         })
       }), jsx(_$$nB, {
         padding: 8,
         children: jsx(_$$v2, {
-          placeholder: _$$t("first_draft.reference_settings.placeholder"),
+          placeholder: getI18nString("first_draft.reference_settings.placeholder"),
           value: i,
           onChange: e => {
             r(e.currentTarget.value);
@@ -4852,7 +4852,7 @@ function sf({
           },
           checked: o === i.guid,
           variant: "highlighted",
-          "aria-label": _$$t("first_draft.reference_settings.adjust_settings") || ""
+          "aria-label": getI18nString("first_draft.reference_settings.adjust_settings") || ""
         })
       })]
     }, i.guid)), o && jsx(sm, {
@@ -4887,197 +4887,197 @@ function sg({
   let [f] = useState(function (e = 3, t) {
     let i = getFeatureFlags().first_draft_new_prompt_pills;
     let r = [{
-      label: _$$t("first_draft.prompts.pricing_page.label"),
-      prompt: _$$t("first_draft.prompts.pricing_page.prompt"),
+      label: getI18nString("first_draft.prompts.pricing_page.label"),
+      prompt: getI18nString("first_draft.prompts.pricing_page.prompt"),
       type: "WEB"
     }, {
-      label: _$$t("first_draft.prompts.sign_in_screen.label"),
-      prompt: _$$t("first_draft.prompts.sign_in_screen.prompt"),
+      label: getI18nString("first_draft.prompts.sign_in_screen.label"),
+      prompt: getI18nString("first_draft.prompts.sign_in_screen.prompt"),
       type: "WEB"
     }, {
-      label: _$$t("first_draft.prompts.blog_post.label"),
-      prompt: _$$t("first_draft.prompts.blog_post.prompt"),
+      label: getI18nString("first_draft.prompts.blog_post.label"),
+      prompt: getI18nString("first_draft.prompts.blog_post.prompt"),
       type: "WEB"
     }, {
-      label: _$$t("first_draft.prompts.portfolio.label"),
-      prompt: _$$t("first_draft.prompts.portfolio.prompt"),
+      label: getI18nString("first_draft.prompts.portfolio.label"),
+      prompt: getI18nString("first_draft.prompts.portfolio.prompt"),
       type: "WEB"
     }, {
-      label: _$$t("first_draft.prompts.news_site.label"),
-      prompt: _$$t("first_draft.prompts.news_site.prompt"),
+      label: getI18nString("first_draft.prompts.news_site.label"),
+      prompt: getI18nString("first_draft.prompts.news_site.prompt"),
       type: "WEB"
     }, {
-      label: _$$t("first_draft.prompts.onboarding.label"),
-      prompt: _$$t("first_draft.prompts.onboarding.prompt"),
+      label: getI18nString("first_draft.prompts.onboarding.label"),
+      prompt: getI18nString("first_draft.prompts.onboarding.prompt"),
       type: "WEB"
     }, {
-      label: _$$t("first_draft.prompts.sign_in_screen.label"),
-      prompt: _$$t("first_draft.prompts.sign_in_screen.prompt"),
+      label: getI18nString("first_draft.prompts.sign_in_screen.label"),
+      prompt: getI18nString("first_draft.prompts.sign_in_screen.prompt"),
       type: "MOBILE"
     }, {
-      label: _$$t("first_draft.prompts.blog_post.label"),
-      prompt: _$$t("first_draft.prompts.blog_post.prompt"),
+      label: getI18nString("first_draft.prompts.blog_post.label"),
+      prompt: getI18nString("first_draft.prompts.blog_post.prompt"),
       type: "MOBILE"
     }, {
-      label: _$$t("first_draft.prompts.map_app_mobile.label"),
-      prompt: _$$t("first_draft.prompts.map_app_mobile.prompt"),
+      label: getI18nString("first_draft.prompts.map_app_mobile.label"),
+      prompt: getI18nString("first_draft.prompts.map_app_mobile.prompt"),
       type: "MOBILE"
     }, {
-      label: _$$t("first_draft.prompts.messaging_mobile.label"),
-      prompt: _$$t("first_draft.prompts.messaging_mobile.prompt"),
+      label: getI18nString("first_draft.prompts.messaging_mobile.label"),
+      prompt: getI18nString("first_draft.prompts.messaging_mobile.prompt"),
       type: "MOBILE"
     }, {
-      label: _$$t("first_draft.prompts.profile.label"),
-      prompt: _$$t("first_draft.prompts.profile_mobile.prompt"),
+      label: getI18nString("first_draft.prompts.profile.label"),
+      prompt: getI18nString("first_draft.prompts.profile_mobile.prompt"),
       type: "MOBILE"
     }, {
-      label: _$$t("first_draft.prompts.travel_app_mobile.label"),
-      prompt: _$$t("first_draft.prompts.travel_app_mobile.prompt"),
+      label: getI18nString("first_draft.prompts.travel_app_mobile.label"),
+      prompt: getI18nString("first_draft.prompts.travel_app_mobile.prompt"),
       type: "MOBILE"
     }, {
-      label: _$$t("first_draft.prompts.social_feed_mobile.label"),
-      prompt: _$$t("first_draft.prompts.social_feed_mobile.prompt"),
+      label: getI18nString("first_draft.prompts.social_feed_mobile.label"),
+      prompt: getI18nString("first_draft.prompts.social_feed_mobile.prompt"),
       type: "MOBILE"
     }, {
-      label: _$$t("first_draft.prompts.ticketing_app.label"),
-      prompt: _$$t("first_draft.prompts.ticketing_app.prompt"),
+      label: getI18nString("first_draft.prompts.ticketing_app.label"),
+      prompt: getI18nString("first_draft.prompts.ticketing_app.prompt"),
       type: "MOBILE"
     }, {
-      label: _$$t("first_draft.prompts.ride_sharing_mobile.label"),
-      prompt: _$$t("first_draft.prompts.ride_sharing_mobile.prompt"),
+      label: getI18nString("first_draft.prompts.ride_sharing_mobile.label"),
+      prompt: getI18nString("first_draft.prompts.ride_sharing_mobile.prompt"),
       type: "MOBILE"
     }, {
-      label: _$$t("first_draft.prompts.to_dos_mobile.label"),
-      prompt: _$$t("first_draft.prompts.to_dos_mobile.prompt"),
+      label: getI18nString("first_draft.prompts.to_dos_mobile.label"),
+      prompt: getI18nString("first_draft.prompts.to_dos_mobile.prompt"),
       type: "MOBILE"
     }];
     i && r.push({
-      label: _$$t("first_draft.prompts.homepage.label"),
-      prompt: _$$t("first_draft.prompts.homepage.prompt"),
+      label: getI18nString("first_draft.prompts.homepage.label"),
+      prompt: getI18nString("first_draft.prompts.homepage.prompt"),
       type: "WEB"
     }, {
-      label: _$$t("first_draft.prompts.homepage.label"),
-      prompt: _$$t("first_draft.prompts.homepage_2.prompt"),
+      label: getI18nString("first_draft.prompts.homepage.label"),
+      prompt: getI18nString("first_draft.prompts.homepage_2.prompt"),
       type: "WEB"
     }, {
-      label: _$$t("first_draft.prompts.video_player_streaming.label"),
-      prompt: _$$t("first_draft.prompts.video_player_streaming.prompt"),
+      label: getI18nString("first_draft.prompts.video_player_streaming.label"),
+      prompt: getI18nString("first_draft.prompts.video_player_streaming.prompt"),
       type: "WEB"
     }, {
-      label: _$$t("first_draft.prompts.video_page_with_comments.label"),
-      prompt: _$$t("first_draft.prompts.video_page_with_comments.prompt"),
+      label: getI18nString("first_draft.prompts.video_page_with_comments.label"),
+      prompt: getI18nString("first_draft.prompts.video_page_with_comments.prompt"),
       type: "WEB"
     }, {
-      label: _$$t("first_draft.prompts.search_results_travel.label"),
-      prompt: _$$t("first_draft.prompts.search_results_travel.prompt"),
+      label: getI18nString("first_draft.prompts.search_results_travel.label"),
+      prompt: getI18nString("first_draft.prompts.search_results_travel.prompt"),
       type: "WEB"
     }, {
-      label: _$$t("first_draft.prompts.social_feed_text_heavy.label"),
-      prompt: _$$t("first_draft.prompts.social_feed_text_heavy.prompt"),
+      label: getI18nString("first_draft.prompts.social_feed_text_heavy.label"),
+      prompt: getI18nString("first_draft.prompts.social_feed_text_heavy.prompt"),
       type: "WEB"
     }, {
-      label: _$$t("first_draft.prompts.profile.label"),
-      prompt: _$$t("first_draft.prompts.profile_social_media.prompt"),
+      label: getI18nString("first_draft.prompts.profile.label"),
+      prompt: getI18nString("first_draft.prompts.profile_social_media.prompt"),
       type: "WEB"
     }, {
-      label: _$$t("first_draft.prompts.news_article.label"),
-      prompt: _$$t("first_draft.prompts.news_article.prompt"),
+      label: getI18nString("first_draft.prompts.news_article.label"),
+      prompt: getI18nString("first_draft.prompts.news_article.prompt"),
       type: "WEB"
     }, {
-      label: _$$t("first_draft.prompts.landing_page.label"),
-      prompt: _$$t("first_draft.prompts.landing_page_beauty.prompt"),
+      label: getI18nString("first_draft.prompts.landing_page.label"),
+      prompt: getI18nString("first_draft.prompts.landing_page_beauty.prompt"),
       type: "WEB"
     }, {
-      label: _$$t("first_draft.prompts.landing_page.label"),
-      prompt: _$$t("first_draft.prompts.landing_page_tech.prompt"),
+      label: getI18nString("first_draft.prompts.landing_page.label"),
+      prompt: getI18nString("first_draft.prompts.landing_page_tech.prompt"),
       type: "WEB"
     }, {
-      label: _$$t("first_draft.prompts.marketing_page_football.label"),
-      prompt: _$$t("first_draft.prompts.marketing_page_football.prompt"),
+      label: getI18nString("first_draft.prompts.marketing_page_football.label"),
+      prompt: getI18nString("first_draft.prompts.marketing_page_football.prompt"),
       type: "WEB"
     }, {
-      label: _$$t("first_draft.prompts.shopping.label"),
-      prompt: _$$t("first_draft.prompts.shopping_hifi.prompt"),
+      label: getI18nString("first_draft.prompts.shopping.label"),
+      prompt: getI18nString("first_draft.prompts.shopping_hifi.prompt"),
       type: "WEB"
     }, {
-      label: _$$t("first_draft.prompts.shopping.label"),
-      prompt: _$$t("first_draft.prompts.product_details_shoes.prompt"),
+      label: getI18nString("first_draft.prompts.shopping.label"),
+      prompt: getI18nString("first_draft.prompts.product_details_shoes.prompt"),
       type: "WEB"
     }, {
-      label: _$$t("first_draft.prompts.admin_dashboard_saas.label"),
-      prompt: _$$t("first_draft.prompts.admin_dashboard_saas.prompt"),
+      label: getI18nString("first_draft.prompts.admin_dashboard_saas.label"),
+      prompt: getI18nString("first_draft.prompts.admin_dashboard_saas.prompt"),
       type: "WEB"
     }, {
-      label: _$$t("first_draft.prompts.settings_mobile.label"),
-      prompt: _$$t("first_draft.prompts.settings_mobile.prompt"),
+      label: getI18nString("first_draft.prompts.settings_mobile.label"),
+      prompt: getI18nString("first_draft.prompts.settings_mobile.prompt"),
       type: "MOBILE"
     }, {
-      label: _$$t("first_draft.prompts.video_player_comments_mobile.label"),
-      prompt: _$$t("first_draft.prompts.video_player_comments_mobile.prompt"),
+      label: getI18nString("first_draft.prompts.video_player_comments_mobile.label"),
+      prompt: getI18nString("first_draft.prompts.video_player_comments_mobile.prompt"),
       type: "MOBILE"
     }, {
-      label: _$$t("first_draft.prompts.checkout_mobile.label"),
-      prompt: _$$t("first_draft.prompts.checkout_mobile.prompt"),
+      label: getI18nString("first_draft.prompts.checkout_mobile.label"),
+      prompt: getI18nString("first_draft.prompts.checkout_mobile.prompt"),
       type: "MOBILE"
     }, {
-      label: _$$t("first_draft.prompts.reviews_mobile.label"),
-      prompt: _$$t("first_draft.prompts.reviews_mobile.prompt"),
+      label: getI18nString("first_draft.prompts.reviews_mobile.label"),
+      prompt: getI18nString("first_draft.prompts.reviews_mobile.prompt"),
       type: "MOBILE"
     }, {
-      label: _$$t("first_draft.prompts.audio_player_mobile.label"),
-      prompt: _$$t("first_draft.prompts.audio_player_mobile.prompt"),
+      label: getI18nString("first_draft.prompts.audio_player_mobile.label"),
+      prompt: getI18nString("first_draft.prompts.audio_player_mobile.prompt"),
       type: "MOBILE"
     }, {
-      label: _$$t("first_draft.prompts.investing_mobile.label"),
-      prompt: _$$t("first_draft.prompts.investing_mobile.prompt"),
+      label: getI18nString("first_draft.prompts.investing_mobile.label"),
+      prompt: getI18nString("first_draft.prompts.investing_mobile.prompt"),
       type: "MOBILE"
     }, {
-      label: _$$t("first_draft.prompts.app_browsing_mobile.label"),
-      prompt: _$$t("first_draft.prompts.app_browsing_mobile.prompt"),
+      label: getI18nString("first_draft.prompts.app_browsing_mobile.label"),
+      prompt: getI18nString("first_draft.prompts.app_browsing_mobile.prompt"),
       type: "MOBILE"
     }, {
-      label: _$$t("first_draft.prompts.reservations_mobile.label"),
-      prompt: _$$t("first_draft.prompts.reservations_mobile.prompt"),
+      label: getI18nString("first_draft.prompts.reservations_mobile.label"),
+      prompt: getI18nString("first_draft.prompts.reservations_mobile.prompt"),
       type: "MOBILE"
     }, {
-      label: _$$t("first_draft.prompts.fitness_mobile.label"),
-      prompt: _$$t("first_draft.prompts.fitness_mobile.prompt"),
+      label: getI18nString("first_draft.prompts.fitness_mobile.label"),
+      prompt: getI18nString("first_draft.prompts.fitness_mobile.prompt"),
       type: "MOBILE"
     }, {
-      label: _$$t("first_draft.prompts.subscriptions_mobile.label"),
-      prompt: _$$t("first_draft.prompts.subscriptions_mobile.prompt"),
+      label: getI18nString("first_draft.prompts.subscriptions_mobile.label"),
+      prompt: getI18nString("first_draft.prompts.subscriptions_mobile.prompt"),
       type: "MOBILE"
     }, {
-      label: _$$t("first_draft.prompts.recipes_mobile.label"),
-      prompt: _$$t("first_draft.prompts.recipes_mobile.prompt"),
+      label: getI18nString("first_draft.prompts.recipes_mobile.label"),
+      prompt: getI18nString("first_draft.prompts.recipes_mobile.prompt"),
       type: "MOBILE"
     }, {
-      label: _$$t("first_draft.prompts.sports_mobile.label"),
-      prompt: _$$t("first_draft.prompts.sports_mobile.prompt"),
+      label: getI18nString("first_draft.prompts.sports_mobile.label"),
+      prompt: getI18nString("first_draft.prompts.sports_mobile.prompt"),
       type: "MOBILE"
     }, {
-      label: _$$t("first_draft.prompts.delivery_app_mobile.label"),
-      prompt: _$$t("first_draft.prompts.delivery_app_mobile.prompt"),
+      label: getI18nString("first_draft.prompts.delivery_app_mobile.label"),
+      prompt: getI18nString("first_draft.prompts.delivery_app_mobile.prompt"),
       type: "MOBILE"
     }, {
-      label: _$$t("first_draft.prompts.calendar_mobile.label"),
-      prompt: _$$t("first_draft.prompts.calendar_mobile.prompt"),
+      label: getI18nString("first_draft.prompts.calendar_mobile.label"),
+      prompt: getI18nString("first_draft.prompts.calendar_mobile.prompt"),
       type: "MOBILE"
     }, {
-      label: _$$t("first_draft.prompts.email_mobile.label"),
-      prompt: _$$t("first_draft.prompts.email_mobile.prompt"),
+      label: getI18nString("first_draft.prompts.email_mobile.label"),
+      prompt: getI18nString("first_draft.prompts.email_mobile.prompt"),
       type: "MOBILE"
     }, {
-      label: _$$t("first_draft.prompts.file_browser_mobile.label"),
-      prompt: _$$t("first_draft.prompts.file_browser_mobile.prompt"),
+      label: getI18nString("first_draft.prompts.file_browser_mobile.label"),
+      prompt: getI18nString("first_draft.prompts.file_browser_mobile.prompt"),
       type: "MOBILE"
     }, {
-      label: _$$t("first_draft.prompts.education_mobile.label"),
-      prompt: _$$t("first_draft.prompts.education_mobile.prompt"),
+      label: getI18nString("first_draft.prompts.education_mobile.label"),
+      prompt: getI18nString("first_draft.prompts.education_mobile.prompt"),
       type: "MOBILE"
     }, {
-      label: _$$t("first_draft.prompts.shopping_mobile.label"),
-      prompt: _$$t("first_draft.prompts.shopping_mobile.prompt"),
+      label: getI18nString("first_draft.prompts.shopping_mobile.label"),
+      prompt: getI18nString("first_draft.prompts.shopping_mobile.prompt"),
       type: "MOBILE"
     });
     let n = r;
@@ -5093,7 +5093,7 @@ function sg({
       s[i] || (s[i] = t);
     }
     let l = Object.values(s).slice(0, e);
-    return l.length < e ? ($D(_$$e.AI_GENERATION, Error(`Unable to generate ${e} unique presets`), {
+    return l.length < e ? (reportError(_$$e.AI_GENERATION, Error(`Unable to generate ${e} unique presets`), {
       extra: {
         count: e,
         generatedCount: l.length,
@@ -5188,7 +5188,7 @@ function sg({
           onAction: g,
           recordingKey: _$$Pt(c, "generate"),
           disabled: !y(),
-          children: _$$tx("first_draft.generate")
+          children: renderI18nText("first_draft.generate")
         })]
       })]
     })]
@@ -5243,7 +5243,7 @@ function sy({
           alignItems: "flex-start"
         },
         children: jsx("img", {
-          alt: _$$t("first_draft.theme_preview", {
+          alt: getI18nString("first_draft.theme_preview", {
             index: e + 1
           }),
           src: t.dataURI,
@@ -5254,9 +5254,9 @@ function sy({
     })
   });
 }
-let sb = E3("draft_prompt_history", []);
+let sb = createLocalStorageAtom("draft_prompt_history", []);
 let sC = "first-draft-done-feedback";
-let sv = Iz(() => _$$eU({
+let sv = createRemovableAtomFamily(() => atom({
   prompt: ""
 }));
 let sE = async ({
@@ -5272,7 +5272,7 @@ let sE = async ({
 }) => {
   if (s.signal.addEventListener("abort", () => {
     r.current = !1;
-  }), !e) throw Error(_$$t("first_draft.no_design_generated"));
+  }), !e) throw Error(getI18nString("first_draft.no_design_generated"));
   let o = await i(t, {
     designSystem: e,
     selectedNodeIds: n ?? void 0,
@@ -5286,7 +5286,7 @@ let sE = async ({
     XJn.clearFDScene();
     return o.error;
   }
-  if (o?.success && !o?.nodeId) throw Error(_$$t("first_draft.no_design_generated"));
+  if (o?.success && !o?.nodeId) throw Error(getI18nString("first_draft.no_design_generated"));
   return {
     result: o
   };
@@ -5298,7 +5298,7 @@ function sT() {
   } = _$$wj(_$$JT.FIRST_DRAFT);
   let i = aiTrackingContext.clientLifecycleId;
   let r = useCallback(() => {
-    _$$sx2("First Draft: Error", {
+    trackEventAnalytics("First Draft: Error", {
       file_key: e,
       clientLifecycleId: i,
       view: "firstDraftGenerate"
@@ -5341,7 +5341,7 @@ function sw({
   let m = _$$tS();
   let f = useRef(null);
   let g = sv(u);
-  let [_, x] = fp(g);
+  let [_, x] = useAtomValueAndSetter(g);
   if (f.current) {
     let e = f.current;
     f.current = null;
@@ -5410,11 +5410,11 @@ function sw({
   });
   let en = useCallback(async () => {
     if (state === qy.RUNNING) {
-      xi("first-draft", "handleSubmit called while already running");
+      logWarning("first-draft", "handleSubmit called while already running");
       return;
     }
     if (!selectedKit) {
-      xi("first-draft", "handleSubmit called without a selected kit");
+      logWarning("first-draft", "handleSubmit called without a selected kit");
       return;
     }
     debugState.dispatch(_$$F.dequeue({
@@ -5451,7 +5451,7 @@ function sw({
         let i = h.get(t);
         let r = i?.firstDraftData;
         let n = r?.kit?.type ?? null;
-        _$$sx2("First Draft: Multiple Options Selected", {
+        trackEventAnalytics("First Draft: Multiple Options Selected", {
           preset_name: e.modeId,
           clientLifecycleId: u,
           isLocal: n === AZ4.LOCAL || null,
@@ -5532,11 +5532,11 @@ function sw({
         recordingKey: _$$Pt(e, "running"),
         onStop: ea,
         aiTrackingContext,
-        secondaryMessage: imageProgress.total && imageProgress.loaded ? _$$t("first_draft.x_of_y_images", {
+        secondaryMessage: imageProgress.total && imageProgress.loaded ? getI18nString("first_draft.x_of_y_images", {
           loaded: imageProgress.loaded,
           total: imageProgress.total
         }) : void 0,
-        children: _$$tx("first_draft.running")
+        children: renderI18nText("first_draft.running")
       });
     case qy.DONE:
       {
@@ -5946,7 +5946,7 @@ async function sz(e, t, i, r, n, a, s, o) {
           l = updatedU;
           d = updatedV;
           let c = sink;
-          for (;;) {
+          for (; ;) {
             let e = predecessors[c];
             s[c] = e;
             let i = o[e];
@@ -5999,7 +5999,7 @@ async function sz(e, t, i, r, n, a, s, o) {
           let i = s[t];
           let r = n[e];
           if (r && i?.imageSetForInsertion) {
-            if (sO(r)) r.insertImageInFillPaint(i.imageSetForInsertion);else if (sD(r)) {
+            if (sO(r)) r.insertImageInFillPaint(i.imageSetForInsertion); else if (sD(r)) {
               let e = d.createNode("RECTANGLE");
               e.name = r.name || r.type;
               e.size = {
@@ -6298,11 +6298,11 @@ function s1({
           }
         }), jsx(_$$A2, {
           action: e,
-          actionLabel: _$$tx("image_to_design.action"),
+          actionLabel: renderI18nText("image_to_design.action"),
           actionIcon: jsx(_$$f3, {}),
           instructionAction: r ? void 0 : {
             type: "custom",
-            label: _$$tx("fragment_search.visual_search_image_upload_button"),
+            label: renderI18nText("fragment_search.visual_search_image_upload_button"),
             iconPrefix: jsx(_$$A1, {}),
             onPerform: () => p.current?.click()
           },
@@ -6319,7 +6319,7 @@ function s1({
           close();
         },
         aiTrackingContext,
-        children: _$$tx("ai.working")
+        children: renderI18nText("ai.working")
       });
     case qy.DONE:
       return jsx(Oq, {
@@ -6343,7 +6343,7 @@ function s1({
       return null;
   }
 }
-let s9 = E3("make_video_prompt_history", []);
+let s9 = createLocalStorageAtom("make_video_prompt_history", []);
 let oe = lazy(() => _require4);
 function ot({
   action: e,
@@ -6600,7 +6600,7 @@ let oi = [{
             },
             children: jsx(Suspense, {
               fallback: jsx("div", {
-                children: _$$t("first_draft.make_edits.loading")
+                children: getI18nString("first_draft.make_edits.loading")
               }),
               children: jsx(e, {})
             })
@@ -6932,7 +6932,7 @@ let oi = [{
 }, {
   name: _$$JT.FIND_INSPIRATION,
   action: _$$JT.FIND_INSPIRATION,
-  displayNode: getFeatureFlags().fragment_search_tweaks ? _$$tx("fullscreen_actions.quick_actions.find-inspiration-verbose") : _$$tx("fullscreen_actions.find-inspiration"),
+  displayNode: getFeatureFlags().fragment_search_tweaks ? renderI18nText("fullscreen_actions.quick_actions.find-inspiration-verbose") : renderI18nText("fullscreen_actions.find-inspiration"),
   displayForQuickCommand: "find-inspiration-quick-command",
   args: {},
   tags: [_$$$.AI],
@@ -7112,11 +7112,11 @@ let oi = [{
             return jsx(_$$A3, {
               action: _$$JT.MAKE_VIDEO,
               aiTrackingContext,
-              ariaLabel: _$$t("fullscreen_actions.make_video"),
+              ariaLabel: getI18nString("fullscreen_actions.make_video"),
               extraFooter: jsx(Ti, {
                 fileInputRef: f,
                 disabled: h.length >= 1,
-                tooltip: h.length >= 1 ? _$$t("video_ai.make_video.initial_frame_already_set") : _$$t("video_ai.make_video.set_initial_frame"),
+                tooltip: h.length >= 1 ? getI18nString("video_ai.make_video.initial_frame_already_set") : getI18nString("video_ai.make_video.set_initial_frame"),
                 onFileUpload: g,
                 multiple: !1
               }),
@@ -7128,14 +7128,14 @@ let oi = [{
               onRun: _,
               prompt: i,
               promptHistory,
-              submitLabel: _$$tx("ai.make_it"),
+              submitLabel: renderI18nText("ai.make_it"),
               useClose: e
             });
           case qy.RUNNING:
             return jsx(_$$F3, {
               onCancel: close,
               aiTrackingContext,
-              children: _$$tx("video_ai.make_video.processing")
+              children: renderI18nText("video_ai.make_video.processing")
             });
           case qy.DONE:
             let x = {
@@ -7145,7 +7145,7 @@ let oi = [{
             return jsx(Oq, {
               iterateOptions: [],
               aiTrackingContext: x,
-              completionString: _$$t("video_ai.make_video.initial_completion"),
+              completionString: getI18nString("video_ai.make_video.initial_completion"),
               showFeedback: !1
             });
           case qy.ERROR:
@@ -7221,7 +7221,7 @@ let oi = [{
       name: Sn.ASSISTANT_CHAT
     },
     beforeModuleOpen: () => {
-      zl.set(ta, {
+      atomStoreManager.set(ta, {
         status: tn.Idle,
         messages: []
       });
@@ -7242,7 +7242,7 @@ let oi = [{
         } = RL(_$$JT.IMAGE_TO_DESIGN, sX);
         return jsx(s1, {
           action: _$$JT.IMAGE_TO_DESIGN,
-          instruction: _$$tx("image_to_design.instruction"),
+          instruction: renderI18nText("image_to_design.instruction"),
           onPerform: () => {
             start({});
           }
@@ -7271,7 +7271,7 @@ let oi = [{
         } = RL(_$$JT.IMAGE_TO_DESIGN_ORACLE, sZ);
         return jsx(s1, {
           action: _$$JT.IMAGE_TO_DESIGN_ORACLE,
-          instruction: _$$tx("image_to_design.oracle_instruction"),
+          instruction: renderI18nText("image_to_design.oracle_instruction"),
           disableImageUpload: !0,
           onPerform: () => {
             let t = getSingletonSceneGraph().getCurrentPage()?.directlySelectedNodes;
@@ -7294,7 +7294,7 @@ let oi = [{
   }
 }, {
   callback: () => {
-    zl.set(bJ);
+    atomStoreManager.set(bJ);
   },
   action: _$$JT.WHITEBOARD_GENERATE_CONTENT,
   featureFlags: ["figjam_quick_actions_v2"],
@@ -7331,12 +7331,12 @@ let oi = [{
                   mermaidText: s
                 });
               },
-              submitLabel: _$$t("figjam_ai.ai_actions.make_diagram_button")
+              submitLabel: getI18nString("figjam_ai.ai_actions.make_diagram_button")
             });
           case qy.RUNNING:
             return jsx(_$$F3, {
               aiTrackingContext,
-              children: _$$t("figjam_ai.ai_actions.make_diagram_progress")
+              children: getI18nString("figjam_ai.ai_actions.make_diagram_progress")
             });
           case qy.DONE:
             return jsx(Oq, {
@@ -7365,44 +7365,44 @@ let oi = [{
 }, ot({
   action: _$$JT.SUMMARIZE_STICKIES,
   aiActionType: hG.SUMMARIZE_STICKIES,
-  actionLabel: _$$tx("fullscreen_actions.summarize-stickies"),
-  instructionLabel: _$$tx("figjam_ai.organize_stickies.make_selection_instruction"),
+  actionLabel: renderI18nText("fullscreen_actions.summarize-stickies"),
+  instructionLabel: renderI18nText("figjam_ai.organize_stickies.make_selection_instruction"),
   icon: jsx(_$$O2, {})
 }), ot({
   action: _$$JT.SORT_STICKIES_BY_TOPIC,
   aiActionType: hG.SORT_STICKIES_BY_TOPIC,
-  actionLabel: _$$tx("fullscreen_actions.sort-stickies-by-topic"),
-  instructionLabel: _$$tx("figjam_ai.organize_stickies.make_selection_instruction"),
+  actionLabel: renderI18nText("fullscreen_actions.sort-stickies-by-topic"),
+  instructionLabel: renderI18nText("figjam_ai.organize_stickies.make_selection_instruction"),
   icon: jsx(_$$$3, {})
 }), ot({
   action: _$$JT.SORT_STICKIES_BY_COLOR,
   aiActionType: hG.SORT_STICKIES_BY_COLOR,
-  actionLabel: _$$tx("fullscreen_actions.sort-stickies-by-color"),
-  instructionLabel: _$$tx("figjam_ai.organize_stickies.make_selection_instruction"),
+  actionLabel: renderI18nText("fullscreen_actions.sort-stickies-by-color"),
+  instructionLabel: renderI18nText("figjam_ai.organize_stickies.make_selection_instruction"),
   icon: jsx(_$$$3, {})
 }), ot({
   action: _$$JT.SORT_STICKIES_BY_AUTHOR,
   aiActionType: hG.SORT_STICKIES_BY_AUTHOR,
-  actionLabel: _$$tx("fullscreen_actions.sort-stickies-by-author"),
-  instructionLabel: _$$tx("figjam_ai.organize_stickies.make_selection_instruction"),
+  actionLabel: renderI18nText("fullscreen_actions.sort-stickies-by-author"),
+  instructionLabel: renderI18nText("figjam_ai.organize_stickies.make_selection_instruction"),
   icon: jsx(_$$$3, {})
 }), ot({
   action: _$$JT.SORT_STICKIES_BY_STAMP_COUNT,
   aiActionType: hG.SORT_STICKIES_BY_STAMP_COUNT,
-  actionLabel: _$$tx("fullscreen_actions.sort-stickies-by-stamp-count"),
-  instructionLabel: _$$tx("figjam_ai.organize_stickies.make_selection_instruction"),
+  actionLabel: renderI18nText("fullscreen_actions.sort-stickies-by-stamp-count"),
+  instructionLabel: renderI18nText("figjam_ai.organize_stickies.make_selection_instruction"),
   icon: jsx(_$$$3, {})
 }), ot({
   action: _$$JT.SORT_STICKIES_BY_STAMP_TYPE,
   aiActionType: hG.SORT_STICKIES_BY_STAMP_TYPE,
-  actionLabel: _$$tx("fullscreen_actions.sort-stickies-by-stamp-type"),
-  instructionLabel: _$$tx("figjam_ai.organize_stickies.make_selection_instruction"),
+  actionLabel: renderI18nText("fullscreen_actions.sort-stickies-by-stamp-type"),
+  instructionLabel: renderI18nText("figjam_ai.organize_stickies.make_selection_instruction"),
   icon: jsx(_$$$3, {})
 }), ot({
   action: _$$JT.MIND_MAP_GENERATE_IDEAS,
   aiActionType: hG.MIND_MAP_GENERATE_IDEAS,
-  actionLabel: _$$tx("fullscreen_actions.mind-map-generate-ideas"),
-  instructionLabel: _$$tx("figjam_ai.make_mindmap_ideas.make_selection_instruction"),
+  actionLabel: renderI18nText("fullscreen_actions.mind-map-generate-ideas"),
+  instructionLabel: renderI18nText("figjam_ai.make_mindmap_ideas.make_selection_instruction"),
   icon: jsx(_$$r2, {}),
   searchSynonyms: ["generate new mind map ideas", "generate mind map ideas", "generate ideas"]
 })];
@@ -7423,7 +7423,7 @@ function or() {
       let i = {
         ...t
       };
-      getFeatureFlags().fragment_search_tweaks && l?.name && !l?.isSlide && (i.displayNode = _$$tx("fullscreen_actions.quick_actions.find-inspiration-with-selection", {
+      getFeatureFlags().fragment_search_tweaks && l?.name && !l?.isSlide && (i.displayNode = renderI18nText("fullscreen_actions.quick_actions.find-inspiration-with-selection", {
         frameName: jsx(_$$E, {
           color: "secondary",
           children: l?.name
@@ -7541,7 +7541,7 @@ function oC({
         })]
       }), r ? jsx(_$$K3, {
         onClick: r,
-        "aria-label": _$$t("qa.dismiss"),
+        "aria-label": getI18nString("qa.dismiss"),
         htmlAttributes: {
           "data-testid": "banner-close-icon"
         },
@@ -7576,7 +7576,7 @@ function ov() {
       let m = !!r;
       let f = m && !!i;
       let g = _$$E2();
-      if (s || g !== _$$nT.Design) return e;
+      if (s || g !== FEditorType.Design) return e;
       if (!$7("useDisabledReasons")) return ["ROLLING_OUT"];
       let _ = [];
       !o || o.parentOrgId || o.teamId || _.push("PERSONAL_DRAFT");
@@ -7625,25 +7625,25 @@ function ov() {
   }();
   let r = useDispatch();
   let o = yy();
-  let l = md(Hu);
-  let d = _$$t("qa.no_ai.title");
+  let l = useAtomWithSubscription(Hu);
+  let d = getI18nString("qa.no_ai.title");
   switch (reason) {
     case oy.ROLLING_OUT:
     case null:
       return null;
     case oy.PERSONAL_DRAFT:
-      d = _$$t("qa.no_ai.title.personal_draft");
-      e = _$$t("qa.no_ai.subtitle.personal_draft");
+      d = getI18nString("qa.no_ai.title.personal_draft");
+      e = getI18nString("qa.no_ai.subtitle.personal_draft");
       break;
     case oy.TEAM_OR_ORG_DISABLED:
-      d = _$$t("qa.no_ai.title.org_disabled");
-      e = _$$t("qa.no_ai.subtitle.org_disabled");
+      d = getI18nString("qa.no_ai.title.org_disabled");
+      e = getI18nString("qa.no_ai.subtitle.org_disabled");
       break;
     case oy.NON_PAID_SEAT:
     case oy.NO_ORG_OR_TEAM_USER:
     case oy.ORG_GUEST:
-      d = _$$t("qa.no_ai.title.not_available_here");
-      e = _$$t("qa.no_ai.subtitle.team_or_org_user_no_access", {
+      d = getI18nString("qa.no_ai.title.not_available_here");
+      e = getI18nString("qa.no_ai.subtitle.team_or_org_user_no_access", {
         orgOrTeamName: o?.name || l?.name || ""
       });
       break;
@@ -7695,16 +7695,16 @@ function oN(e) {
     text: a.name
   };
   if (ZQ(extension) && publishedExtension && AC(publishedExtension)) return {
-    text: _$$t("qa.extensions.in_review"),
+    text: getI18nString("qa.extensions.in_review"),
     variant: _$$x5.BRAND
   };
   if (ZQ(extension)) return {
-    text: _$$t("qa.extensions.development")
+    text: getI18nString("qa.extensions.development")
   };
-  if (canRun) ;else if (o) return {
-    text: _$$t("qa.extensions.approval_pending")
-  };else if (canRequest) return {
-    text: _$$t("qa.extensions.needs_approval")
+  if (canRun); else if (o) return {
+    text: getI18nString("qa.extensions.approval_pending")
+  }; else if (canRequest) return {
+    text: getI18nString("qa.extensions.needs_approval")
   };
   return null;
 }
@@ -7741,7 +7741,7 @@ function oO(e) {
   });
 }
 let oM = e => Zj(e) && !e.hideCheckForQuickCommand;
-let oP = () => {};
+let oP = () => { };
 function oF({
   item: e,
   searchQuery: t,
@@ -7888,12 +7888,12 @@ function oF({
     E(i);
     oM(e) && !PN() ? x() : e.keepMenuOpen || _();
     d ? d().catch(t => {
-      $D(_$$e.AI_FOR_PRODUCTION, t, {
+      reportError(_$$e.AI_FOR_PRODUCTION, t, {
         extra: {
           item: e
         }
       });
-    }) : $D(_$$e.AI_FOR_PRODUCTION, Error("No valid action triggered from quick actions"), {
+    }) : reportError(_$$e.AI_FOR_PRODUCTION, Error("No valid action triggered from quick actions"), {
       extra: {
         item: e
       }
@@ -7989,7 +7989,7 @@ function oF({
           maxWidth: "110px"
         }).$,
         children: jsx(oA, {
-          text: _$$t("fullscreen_actions.development")
+          text: getI18nString("fullscreen_actions.development")
         })
       }) : G && (B.some(t => t.plugin_id === e.pluginId) || U.some(t => t.plugin_id === e.pluginId)) ? jsx("div", {
         style: _$$sx.add({
@@ -8004,7 +8004,7 @@ function oF({
       }) : e.isRepairCommand && getFeatureFlags().internal_only_debug_tools ? jsx(_$$E5, {
         children: "REPAIR"
       }) : e.action === _$$JT.FIRST_DRAFT && e.disabled ? jsx("div", {
-        "data-tooltip": _$$t("qa.unavailable"),
+        "data-tooltip": getI18nString("qa.unavailable"),
         "data-tooltip-type": Ib.TEXT,
         style: {
           "--color-icon": "var(--color-icon-disabled)"
@@ -8019,7 +8019,7 @@ function oF({
           }, "ai")];
         }
         if (Z7(e)) return [jsx(_$$E5, {
-          children: _$$tx("general.beta")
+          children: renderI18nText("general.beta")
         }, "beta")];
       })(),
       keyboardShortcut: w ? jsx(_$$S, {
@@ -8029,7 +8029,7 @@ function oF({
           className: _$$s3.colorBgTertiary.bRadius5.font11.h16.fontMedium.flex.itemsCenter.px4.mr8.$,
           "aria-hidden": !0,
           id: "tab-hint",
-          children: _$$tx("whiteboard.ai_modal.hint_tab")
+          children: renderI18nText("whiteboard.ai_modal.hint_tab")
         }), jsx(_$$B2, {
           svg: _$$A12,
           className: _$$s3.colorIcon.$,
@@ -8044,12 +8044,12 @@ function oB({
   setActiveTab: e
 }) {
   let t = Ev();
-  let i = md(Lk);
-  let r = md(_$$dd);
+  let i = useAtomWithSubscription(Lk);
+  let r = useAtomWithSubscription(_$$dd);
   let o = useSelector(_$$l);
-  let l = md(Rt);
+  let l = useAtomWithSubscription(Rt);
   let u = useRef(l);
-  let p = md(Q8);
+  let p = useAtomWithSubscription(Q8);
   let m = useDeferredValue(p);
   useEffect(() => {
     u.current = l;
@@ -8118,7 +8118,7 @@ function oB({
         },
         iconType: jsx(ic, {}),
         displayNode: jsx(Fragment, {
-          children: _$$tx("fullscreen_actions.quick_actions.go-to-page", {
+          children: renderI18nText("fullscreen_actions.quick_actions.go-to-page", {
             pageName: jsx(_$$E, {
               color: "secondary",
               children: e.name
@@ -8141,7 +8141,7 @@ function oB({
       return useMemo(() => t && i && e() ? [{
         ...Bc,
         displayNode: jsx(iW, {
-          children: _$$tx("fullscreen_actions.quick_actions.send-frame-to-figma-make", {
+          children: renderI18nText("fullscreen_actions.quick_actions.send-frame-to-figma-make", {
             frameName: r
           })
         })
@@ -8175,7 +8175,7 @@ function oB({
           if (e?.isTopLevelFrame()) return [{
             action: "send-to-buzz-from-design",
             ...l,
-            displayNode: _$$tx("buzz.send_from_design.send_node_to_figma_buzz", {
+            displayNode: renderI18nText("buzz.send_from_design.send_node_to_figma_buzz", {
               nodeName: jsx("span", {
                 className: "x1n0bwc9",
                 children: e.name
@@ -8186,13 +8186,13 @@ function oB({
         return a ? [{
           action: "send-selection-to-buzz-from-design",
           ...l,
-          displayNode: _$$tx("buzz.send_from_design.send_selection_to_figma_buzz", {
+          displayNode: renderI18nText("buzz.send_from_design.send_selection_to_figma_buzz", {
             numSelectedNodes: s.length
           })
         }] : [{
           action: "send-to-buzz-from-design",
           ...l,
-          displayNode: _$$tx("buzz.send_from_design.send_frames_to_figma_buzz", {
+          displayNode: renderI18nText("buzz.send_from_design.send_frames_to_figma_buzz", {
             numFrames: s.length
           })
         }];
@@ -8422,12 +8422,12 @@ function oB({
     let p = "" !== i;
     let m = useMemo(() => "" === i ? [] : t.search(e, i).slice(0, 25), [e, t, i]);
     let f = function (e, t) {
-      let i = my() === _$$nT.Design;
+      let i = my() === FEditorType.Design;
       let r = q5();
       let o = _$$V4();
       let l = _$$s4();
       let d = !!getFeatureFlags().prt_legacy_v3;
-      let [u, p] = fp(ta);
+      let [u, p] = useAtomValueAndSetter(ta);
       let h = useSelector(Eh);
       let m = _$$eH();
       let f = T5("useSearchFallbacks").unwrapOr(null);
@@ -8440,13 +8440,13 @@ function oB({
             args: {
               searchQuery: e
             },
-            callback: () => {},
-            displayNode: m ? _$$tx("fullscreen_actions.quick_actions.find-in-community", {
+            callback: () => { },
+            displayNode: m ? renderI18nText("fullscreen_actions.quick_actions.find-in-community", {
               searchQuery: jsx(_$$E, {
                 color: "secondary",
                 children: e
               })
-            }) : _$$tx("fullscreen_actions.quick_actions.find-community-matching", {
+            }) : renderI18nText("fullscreen_actions.quick_actions.find-community-matching", {
               searchQuery: jsx(_$$E, {
                 color: "secondary",
                 children: e
@@ -8478,8 +8478,8 @@ function oB({
             args: {
               searchQuery: e
             },
-            callback: () => {},
-            displayNode: m ? o ? _$$tx("fullscreen_actions.quick_actions.find-at-plan-file", {
+            callback: () => { },
+            displayNode: m ? o ? renderI18nText("fullscreen_actions.quick_actions.find-at-plan-file", {
               searchQuery: jsx(_$$E, {
                 color: "secondary",
                 children: e
@@ -8488,17 +8488,17 @@ function oB({
                 color: "secondary",
                 children: g
               })
-            }) : _$$tx("fullscreen_actions.quick_actions.find-components", {
+            }) : renderI18nText("fullscreen_actions.quick_actions.find-components", {
               searchQuery: jsx(_$$E, {
                 color: "secondary",
                 children: e
               })
-            }) : o ? _$$tx("fullscreen_actions.quick_actions.find-components-matching", {
+            }) : o ? renderI18nText("fullscreen_actions.quick_actions.find-components-matching", {
               searchQuery: jsx(_$$E, {
                 color: "secondary",
                 children: e
               })
-            }) : _$$tx("fullscreen_actions.quick_actions.find-assets-matching", {
+            }) : renderI18nText("fullscreen_actions.quick_actions.find-assets-matching", {
               searchQuery: jsx(_$$E, {
                 color: "secondary",
                 children: e
@@ -8534,21 +8534,21 @@ function oB({
             args: {
               searchQuery: e
             },
-            callback: () => {},
-            displayNode: m ? _$$tx(getFeatureFlags().actions_prioritize_search ? "fullscreen_actions.quick_actions.search-at-plan-file-and-community" : "fullscreen_actions.quick_actions.find-at-plan-file-and-community", {
+            callback: () => { },
+            displayNode: m ? renderI18nText(getFeatureFlags().actions_prioritize_search ? "fullscreen_actions.quick_actions.search-at-plan-file-and-community" : "fullscreen_actions.quick_actions.find-at-plan-file-and-community", {
               searchQuery: jsx(_$$E, {
                 color: "secondary",
-                children: getFeatureFlags().actions_prioritize_search_v3 || getFeatureFlags().actions_prioritize_search ? _$$tx("fullscreen_actions.quick_actions.quoted-query", {
+                children: getFeatureFlags().actions_prioritize_search_v3 || getFeatureFlags().actions_prioritize_search ? renderI18nText("fullscreen_actions.quick_actions.quoted-query", {
                   searchQuery: e
                 }) : e
               }),
               planFileName: g
-            }) : o ? _$$tx("fullscreen_actions.quick_actions.find-components-matching", {
+            }) : o ? renderI18nText("fullscreen_actions.quick_actions.find-components-matching", {
               searchQuery: jsx(_$$E, {
                 color: "secondary",
                 children: e
               })
-            }) : _$$tx("fullscreen_actions.quick_actions.find-assets-matching", {
+            }) : renderI18nText("fullscreen_actions.quick_actions.find-assets-matching", {
               searchQuery: jsx(_$$E, {
                 color: "secondary",
                 children: e
@@ -8584,8 +8584,8 @@ function oB({
             args: {
               searchQuery: e
             },
-            callback: () => {},
-            displayNode: _$$tx("fullscreen_actions.assistant-chat-query", {
+            callback: () => { },
+            displayNode: renderI18nText("fullscreen_actions.assistant-chat-query", {
               query: jsx(_$$E, {
                 color: "secondary",
                 children: e
@@ -8598,7 +8598,7 @@ function oB({
                 name: Sn.ASSISTANT_CHAT
               },
               beforeModuleOpen: e => {
-                zl.set(ta, {
+                atomStoreManager.set(ta, {
                   status: tn.Idle,
                   messages: []
                 });
@@ -8611,14 +8611,14 @@ function oB({
             args: {
               searchQuery: e
             },
-            displayNode: m ? _$$tx(getFeatureFlags().actions_prioritize_search ? "fullscreen_actions.quick_actions.search-plugins-widgets" : "fullscreen_actions.quick_actions.find-plugins-widgets", {
+            displayNode: m ? renderI18nText(getFeatureFlags().actions_prioritize_search ? "fullscreen_actions.quick_actions.search-plugins-widgets" : "fullscreen_actions.quick_actions.find-plugins-widgets", {
               searchQuery: jsx(_$$E, {
                 color: "secondary",
-                children: getFeatureFlags().actions_prioritize_search_v3 || getFeatureFlags().actions_prioritize_search ? _$$tx("fullscreen_actions.quick_actions.quoted-query", {
+                children: getFeatureFlags().actions_prioritize_search_v3 || getFeatureFlags().actions_prioritize_search ? renderI18nText("fullscreen_actions.quick_actions.quoted-query", {
                   searchQuery: e
                 }) : e
               })
-            }) : _$$tx("fullscreen_actions.quick_actions.find-extensions-matching", {
+            }) : renderI18nText("fullscreen_actions.quick_actions.find-extensions-matching", {
               searchQuery: jsx(_$$E, {
                 color: "secondary",
                 children: e
@@ -8701,31 +8701,31 @@ function oB({
         header: function (e) {
           switch (e) {
             case _$$b4.RECENTS:
-              return _$$t("qa.category.recents");
+              return getI18nString("qa.category.recents");
             case _$$b4.DESIGN_TOOLS:
-              return _$$t("qa.category.design_tools");
+              return getI18nString("qa.category.design_tools");
             case _$$b4.RIFFING_AND_WRITING:
-              return _$$t("qa.category.riffing_and_writing");
+              return getI18nString("qa.category.riffing_and_writing");
             case _$$b4.IMAGE_EDITING:
-              return _$$t("qa.category.image_editing");
+              return getI18nString("qa.category.image_editing");
             case _$$b4.COLLABORATION_TOOLS:
-              return _$$t("qa.category.collaboration_tools");
+              return getI18nString("qa.category.collaboration_tools");
             case _$$b4.HANDOFF_TOOLS:
-              return _$$t("qa.category.handoff_tools");
+              return getI18nString("qa.category.handoff_tools");
             case _$$b4.VIEWER_TOOLS:
-              return _$$t("qa.category.viewer_tools");
+              return getI18nString("qa.category.viewer_tools");
             case _$$b4.SUGGESTIONS:
-              return _$$t("qa.category.suggestions");
+              return getI18nString("qa.category.suggestions");
             case _$$b4.COMMON_SETTINGS:
-              return _$$t("qa.category.common_settings");
+              return getI18nString("qa.category.common_settings");
             case _$$b4.SEARCH_FOR:
-              return _$$t("qa.category.search_for");
+              return getI18nString("qa.category.search_for");
             case _$$b4.MATCHING_ACTIONS:
-              return _$$t("qa.category.matching_actions");
+              return getI18nString("qa.category.matching_actions");
             case _$$b4.ORGANIZE:
-              return _$$t("qa.category.organize");
+              return getI18nString("qa.category.organize");
             case _$$b4.TEMPLATES_AND_DIAGRAMS:
-              return _$$t("qa.category.templates_and_diagrams");
+              return getI18nString("qa.category.templates_and_diagrams");
             default:
               return throwTypeError(e);
           }
@@ -8767,17 +8767,17 @@ function oH({
   let r = _$$sZ();
   let s = Cb();
   let o = useMemo(() => ({
-    [BY.ALL]: _$$t("qa.filter.all"),
-    [BY.PLUGINS]: _$$t("qa.filter.plugins"),
-    [BY.WIDGETS]: _$$t("qa.filter.widgets"),
-    [BY.FROM_ORG]: _$$t("qa.filter.from_org_name", {
+    [BY.ALL]: getI18nString("qa.filter.all"),
+    [BY.PLUGINS]: getI18nString("qa.filter.plugins"),
+    [BY.WIDGETS]: getI18nString("qa.filter.widgets"),
+    [BY.FROM_ORG]: getI18nString("qa.filter.from_org_name", {
       org_name: r?.name || ""
     }),
-    [BY.DEVELOPMENT]: _$$t("qa.filter.development")
+    [BY.DEVELOPMENT]: getI18nString("qa.filter.development")
   }), [r?.name]);
   let l = useMemo(() => {
     let e = !!r && !s;
-    let t = y3();
+    let t = hasDesktopAPI();
     let n = [];
     i && n.push({
       type: "checkableOption",
@@ -8810,7 +8810,7 @@ function oH({
     return n;
   }, [r, s, i, o]);
   return jsx(c0, {
-    ariaLabel: _$$t("qa.filter.aria_label"),
+    ariaLabel: getI18nString("qa.filter.aria_label"),
     buttonId: oV,
     displayAboveTarget: !1,
     id: oW,
@@ -8869,7 +8869,7 @@ function ly(e) {
   let t = useDispatch();
   let i = lx(e);
   return useCallback(r => {
-    if (i) t(_$$oB2());else {
+    if (i) t(_$$oB2()); else {
       let i = r.getBoundingClientRect();
       t(j7({
         type: l_,
@@ -8924,7 +8924,7 @@ function lv({
   return jsx("div", {
     className: _$$s3.flex.pl8.$,
     children: i ? jsx("button", {
-      "aria-label": _$$t("qa.plugins_widget.more_options", {
+      "aria-label": getI18nString("qa.plugins_widget.more_options", {
         widget: e.name
       }),
       onClick: s,
@@ -8972,9 +8972,9 @@ function lE(e) {
   let b = [];
   let C = !!publishedExtension;
   !ZQ(extension) && (C ? (d && g && y.push(d), y.push({
-    displayText: _$$t("qa.extensions.view_details"),
+    displayText: getI18nString("qa.extensions.view_details"),
     callback: x
-  }), u && g && y.push(u), p && g && y.push(p), m && g && y.push(m), h && b.push(h), c && g && b.push(c)) : $D(_$$e.AI_FOR_PRODUCTION, Error("[Quick Actions] Published extension is missing publishedExtension from Redux state"), {
+  }), u && g && y.push(u), p && g && y.push(p), m && g && y.push(m), h && b.push(h), c && g && b.push(c)) : reportError(_$$e.AI_FOR_PRODUCTION, Error("[Quick Actions] Published extension is missing publishedExtension from Redux state"), {
     extra: {
       extensionId: extension.plugin_id,
       isWidget: k0(extension),
@@ -9008,11 +9008,11 @@ function lT({
   let o = k0(extension) ? jsx(_$$E, {
     color: "tertiary",
     fontSize: 11,
-    children: _$$tx("qa.extensions.widget")
+    children: renderI18nText("qa.extensions.widget")
   }) : jsx(_$$E, {
     color: "tertiary",
     fontSize: 11,
-    children: _$$tx("qa.extensions.plugin")
+    children: renderI18nText("qa.extensions.plugin")
   });
   let l = oN(e);
   let d = jsxs(Fragment, {
@@ -9131,7 +9131,7 @@ function lj({
       actionText: e.displayText
     } : {
       onAction: p,
-      actionText: _$$t("qa.extensions.run")
+      actionText: getI18nString("qa.extensions.run")
     };
   }({
     manifestError: c,
@@ -9278,9 +9278,9 @@ function lI({
 function lk(e) {
   let t = useDispatch();
   let i = QZ();
-  return y3() && [BY.DEVELOPMENT, BY.ALL].includes(e) ? [{
+  return hasDesktopAPI() && [BY.DEVELOPMENT, BY.ALL].includes(e) ? [{
     itemKey: "newPlugin",
-    text: _$$t("whiteboard.inserts.plugin_development_options_new_plugin"),
+    text: getI18nString("whiteboard.inserts.plugin_development_options_new_plugin"),
     svg: _$$e2,
     onAction: () => {
       t(_$$Lo());
@@ -9293,7 +9293,7 @@ function lk(e) {
     }
   }, i ? {
     itemKey: "newWidget",
-    text: _$$t("whiteboard.inserts.widget_development_options_new_widget"),
+    text: getI18nString("whiteboard.inserts.widget_development_options_new_widget"),
     svg: _$$e2,
     onAction: () => {
       t(_$$Lo());
@@ -9306,7 +9306,7 @@ function lk(e) {
     }
   } : null, {
     itemKey: "importFromManifest",
-    text: _$$t("whiteboard.inserts.development_options_import"),
+    text: getI18nString("whiteboard.inserts.development_options_import"),
     svg: _$$R,
     onAction: () => t(JZ({
       resourceType: "unknown"
@@ -9465,14 +9465,14 @@ function l1({
         variant: "secondary",
         children: jsx(_$$E, {
           fontSize: 11,
-          children: _$$tx("community.detail_view.decline")
+          children: renderI18nText("community.detail_view.decline")
         })
       }), jsx(l0, {
         action: t,
         dataTestId: "accept-invite-button",
         children: jsx(_$$E, {
           fontSize: 11,
-          children: _$$tx("community.detail_view.accept")
+          children: renderI18nText("community.detail_view.accept")
         })
       })]
     })]
@@ -9510,7 +9510,7 @@ function l2({
     "data-testid": "extension-invite-section",
     className: _$$s3.flex.flexColumn.$,
     children: jsx(_$$B6.Section, {
-      header: _$$t("community.detail_view.invitations"),
+      header: getI18nString("community.detail_view.invitations"),
       children: r.map(e => jsx(l1, {
         extension: e
       }, e.id))
@@ -9524,7 +9524,7 @@ function l8({
     extension,
     publishedExtension
   } = e;
-  let r = k0(extension) ? _$$tx("qa.extensions.widget") : _$$tx("qa.extensions.plugin");
+  let r = k0(extension) ? renderI18nText("qa.extensions.widget") : renderI18nText("qa.extensions.plugin");
   let a = publishedExtension?.unique_run_count ?? 0;
   let s = publishedExtension?.like_count ?? 0;
   let o = publishedExtension ? jsx(_$$o5, {
@@ -9541,7 +9541,7 @@ function l8({
         className: _$$s3.mx2.colorIconSecondary.$
       }), jsx("div", {
         className: _$$s3.ml2.$,
-        children: _$$t("qa.extensions.num_users", {
+        children: getI18nString("qa.extensions.num_users", {
           numUsers: a,
           numUsersStr: $M(a)
         })
@@ -9583,7 +9583,7 @@ function de({
   let d = H5.PUBLISHED_WITH_DETAILS;
   let c = _$$D2({
     source: d,
-    text: _$$t("qa.extensions.view_details"),
+    text: getI18nString("qa.extensions.view_details"),
     onAction: l,
     augmentedExtension: e
   });
@@ -9701,7 +9701,7 @@ function da() {
   return jsx("div", {
     className: _$$s3.flex.wFull.mt16.justifyCenter.alignCenter.colorTextSecondary.$,
     "data-testid": "no-extensions-found",
-    children: e ? _$$tx("qa.no_plugins_widgets_found") : _$$tx("qa.no_plugins")
+    children: e ? renderI18nText("qa.no_plugins_widgets_found") : renderI18nText("qa.no_plugins")
   });
 }
 function ds({
@@ -9709,10 +9709,10 @@ function ds({
   selectedFilter: t
 }) {
   let i = Ev();
-  let r = md(Lk);
-  let o = md(_$$dd);
-  let l = md(Rt);
-  let d = md(Q8);
+  let r = useAtomWithSubscription(Lk);
+  let o = useAtomWithSubscription(_$$dd);
+  let l = useAtomWithSubscription(Rt);
+  let d = useAtomWithSubscription(Q8);
   let u = useSelector(_$$l);
   let p = f6();
   let h = wW();
@@ -9885,7 +9885,7 @@ function dl({
 }) {
   return t ? 0 === e.length ? null : jsx(di, {
     augmentedExtensions: e,
-    header: _$$t("qa.suggested"),
+    header: getI18nString("qa.suggested"),
     showExtensionDetails: !0
   }) : jsx("div", {
     className: _$$s3.p8.$,
@@ -9898,7 +9898,7 @@ function dd({
   let t = _$$sZ();
   return t && 0 !== e.length ? jsx(di, {
     augmentedExtensions: e,
-    header: _$$t("qa.other_extensions_from_org", {
+    header: getI18nString("qa.other_extensions_from_org", {
       org_name: t.name
     }),
     showExtensionDetails: !0
@@ -9948,7 +9948,7 @@ let db = M4.Query({
 function dC() {
   return jsx("div", {
     className: "x78zum5 xh8yej3 xw7yly9 xl56j7k x2b8uid x1n0bwc9",
-    children: _$$t("search.error.max_query_length_exceeded")
+    children: getI18nString("search.error.max_query_length_exceeded")
   });
 }
 function dv({
@@ -9956,12 +9956,12 @@ function dv({
   selectedFilter: t
 }) {
   let i = Ev();
-  let r = md(Lk);
-  let l = md(_$$dd);
-  let d = md(Q8);
+  let r = useAtomWithSubscription(Lk);
+  let l = useAtomWithSubscription(_$$dd);
+  let d = useAtomWithSubscription(Q8);
   let [u] = _$$A17(d, 300);
   let p = u.trim();
-  let h = md(Rt);
+  let h = useAtomWithSubscription(Rt);
   let m = useSelector(_$$l);
   let f = useDispatch();
   let {
@@ -9977,21 +9977,21 @@ function dv({
     } = function (e) {
       let t = function (e) {
         switch (e) {
-          case _$$nT.Design:
-          case _$$nT.Illustration:
+          case FEditorType.Design:
+          case FEditorType.Illustration:
             return _$$k6.Editors.FIGMA;
-          case _$$nT.Whiteboard:
+          case FEditorType.Whiteboard:
             return _$$k6.Editors.FIGJAM;
-          case _$$nT.DevHandoff:
+          case FEditorType.DevHandoff:
             return _$$k6.Editors.DEV_MODE;
-          case _$$nT.Slides:
+          case FEditorType.Slides:
             return _$$k6.Editors.SLIDES;
-          case _$$nT.Sites:
+          case FEditorType.Sites:
             return getFeatureFlags().ext_extended_plugin_editor_types ? _$$k6.Editors.SITES : _$$k6.Editors.ALL;
-          case _$$nT.Cooper:
+          case FEditorType.Cooper:
             return getFeatureFlags().ext_extended_plugin_editor_types ? _$$k6.Editors.COOPER : _$$k6.Editors.ALL;
           case null:
-          case _$$nT.Figmake:
+          case FEditorType.Figmake:
             return _$$k6.Editors.ALL;
           default:
             throwTypeError(e);
@@ -10057,7 +10057,7 @@ function dv({
             localExtensions: []
           };
         case "errors":
-          $D(_$$e.EXTENSIBILITY, Error("[useSearchExtensions] Unable to fetch search results"), {
+          reportError(_$$e.EXTENSIBILITY, Error("[useSearchExtensions] Unable to fetch search results"), {
             tags: {
               status
             },
@@ -10142,7 +10142,7 @@ function dv({
   }, [m, i, r, N, l, h, t, loading, A, p]), _$$iC({
     activeTab: Jc.EXTENSIONS,
     isLoading: loading,
-    passthroughErrorMessage: GX(p) ? _$$t("search.error.max_query_length_exceeded") : null,
+    passthroughErrorMessage: GX(p) ? getI18nString("search.error.max_query_length_exceeded") : null,
     query: d,
     resultsCount: N
   }), loading) ? jsx(_$$R6, {}) : GX(p) ? jsx(dC, {}) : 0 === N ? jsx(da, {}) : jsx(M6, {
@@ -10172,7 +10172,7 @@ function dE({
   let a = [...i, ...r];
   return jsx(di, {
     augmentedExtensions: a,
-    header: _$$t("qa.from_org_name", {
+    header: getI18nString("qa.from_org_name", {
       org_name: t.name
     }),
     showExtensionDetails: !0,
@@ -10184,7 +10184,7 @@ function dT({
 }) {
   return 0 === e.length ? null : jsx(di, {
     augmentedExtensions: e,
-    header: _$$t("qa.from_community"),
+    header: getI18nString("qa.from_community"),
     showExtensionDetails: !0,
     dataTestId: "community-extensions-section"
   });
@@ -10213,7 +10213,7 @@ function dS({
   extensions: t,
   selectedFilter: i
 }) {
-  let r = md(Q8);
+  let r = useAtomWithSubscription(Q8);
   let a = JB();
   let s = AY(_$$t6);
   return (_$$h(() => () => {
@@ -10229,8 +10229,8 @@ function dS({
 }
 function dI() {
   !function () {
-    let e = md(IH);
-    let t = md(_$$f);
+    let e = useAtomWithSubscription(IH);
+    let t = useAtomWithSubscription(_$$f);
     let {
       autoClose
     } = cq();
@@ -10273,14 +10273,14 @@ function dI() {
     defaultViewTabsAvailable,
     defaultViewAssetsTabVisible
   } = gB();
-  let [i, r] = fp(Q8);
+  let [i, r] = useAtomValueAndSetter(Q8);
   let o = Xr(Rt);
-  let [l, d] = fp(_$$t6);
-  let [u, p] = fp(Lk);
+  let [l, d] = useAtomValueAndSetter(_$$t6);
+  let [u, p] = useAtomValueAndSetter(Lk);
   let {
     loaded,
     extensions
-  } = md(P_);
+  } = useAtomWithSubscription(P_);
   let g = useDispatch();
   useEffect(() => g(_$$aq()), [g]);
   let _ = q5();
@@ -10350,7 +10350,7 @@ function dI() {
         key: Uz.KEY_1,
         modifier: [xH.ALT]
       },
-      children: _$$tx("qa.all")
+      children: renderI18nText("qa.all")
     }), defaultViewAssetsTabVisible && jsx(_$$oz, {
       tabId: Jc.ASSETS,
       onAction: ed,
@@ -10358,7 +10358,7 @@ function dI() {
         key: Uz.KEY_2,
         modifier: [xH.ALT]
       },
-      children: _$$tx("qa.assets")
+      children: renderI18nText("qa.assets")
     }), ep && jsx(_$$oz, {
       tabId: Jc.EXTENSIONS,
       onAction: () => el(Jc.EXTENSIONS),
@@ -10366,7 +10366,7 @@ function dI() {
         key: Uz.KEY_3,
         modifier: [xH.ALT]
       },
-      children: eh ? _$$tx("qa.plugins_widgets") : _$$tx("qa.plugins")
+      children: eh ? renderI18nText("qa.plugins_widgets") : renderI18nText("qa.plugins")
     })]
   });
   let ef = useCallback(e => {
@@ -10459,7 +10459,7 @@ let dN = (e, t) => {
     ...t,
     qaVersion: $L,
     quickActionsSessionId: e,
-    timeToShowModal: _$$sn.tryStop(mP) || 0,
+    timeToShowModal: globalPerfTimer.tryStop(mP) || 0,
     module: i
   });
 };
@@ -10530,12 +10530,12 @@ function dA() {
     }, [loaded, _, e]);
   }();
   let e = Xr(Bu);
-  let t = md(_$$rE);
-  let i = md(_$$dd);
+  let t = useAtomWithSubscription(_$$rE);
+  let i = useAtomWithSubscription(_$$dd);
   _$$h(() => (e(!0), i && dN(i, t || void 0), () => {
     e(!1);
   }));
-  let r = md(Kh);
+  let r = useAtomWithSubscription(Kh);
   let [s, o] = useState(!1);
   let {
     close
@@ -10597,7 +10597,7 @@ function dP() {
   let b = useCallback(() => {
     f && (Y5.triggerAction(f, p?.payload), KY());
   }, [f, p?.payload]);
-  let C = md(_$$dd);
+  let C = useAtomWithSubscription(_$$dd);
   let v = vI();
   let T = PE();
   _$$K4();
@@ -10619,7 +10619,7 @@ function dP() {
     S.current = w;
   }, [w]);
   useEffect(() => {
-    f && I && _$$sx2(Sq, S.current, {
+    f && I && trackEventAnalytics(Sq, S.current, {
       forwardToDatadog: !0
     });
   }, [f, I]);
@@ -10725,7 +10725,7 @@ function dB() {
                       children: jsx(_$$V2, {})
                     }), jsx("span", {
                       ...xk(dU.text),
-                      children: _$$tx("video_ai.make_video.success", {
+                      children: renderI18nText("video_ai.make_video.success", {
                         prompt: e.prompt
                       })
                     })]
@@ -10736,7 +10736,7 @@ function dB() {
                     }],
                     onAction: i,
                     recordingKey: "VideoToast",
-                    children: _$$tx("video_ai.make_video.insert")
+                    children: renderI18nText("video_ai.make_video.insert")
                   })]
                 });
               case "error":
@@ -10752,7 +10752,7 @@ function dB() {
                     })
                   }), jsx("span", {
                     ...xk(dU.text),
-                    children: _$$tx("video_ai.make_video.error", {
+                    children: renderI18nText("video_ai.make_video.error", {
                       prompt: e.prompt
                     })
                   })]
@@ -10797,7 +10797,7 @@ export function $$dG0(e) {
   }) : null;
 }
 function dK() {
-  let e = md(Bu);
+  let e = useAtomWithSubscription(Bu);
   let t = _$$el();
   let i = XV();
   return e ? jsx(dA, {}) : t ? jsx(dP, {}) : i ? jsx(dB, {}) : null;

@@ -8,7 +8,7 @@ import { YU, H0, Bx } from "../figma_app/191804";
 import { ZC } from "../figma_app/39751";
 import { l as _$$l } from "../905/745972";
 import { kt } from "../figma_app/858013";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { DP } from "../905/640017";
 import { Z as _$$Z } from "../905/823863";
 import { o as _$$o } from "../905/237202";
@@ -39,18 +39,18 @@ import { A as _$$A5 } from "../svg/212295";
 var l = o;
 var k = (e => (e.ActualSize = "Actual Size", e.Default = "Default", e.Fit = "Fit to Screen", e.FitWidth = "Fit Width", e.FillScreen = "Fill Screen", e))(k || {});
 let R = {
-  "Actual Size": () => _$$t("fig_feed.zoom_pan_preset.actual_size"),
-  Default: () => _$$t("fig_feed.zoom_pan_preset.default"),
-  "Fit to Screen": () => _$$t("viewer.options_menu.fit_to_screen"),
-  "Fill Screen": () => _$$t("viewer.options_menu.fill_screen"),
-  "Fit Width": () => _$$t("viewer.options_menu.fit_width")
+  "Actual Size": () => getI18nString("fig_feed.zoom_pan_preset.actual_size"),
+  Default: () => getI18nString("fig_feed.zoom_pan_preset.default"),
+  "Fit to Screen": () => getI18nString("viewer.options_menu.fit_to_screen"),
+  "Fill Screen": () => getI18nString("viewer.options_menu.fill_screen"),
+  "Fit Width": () => getI18nString("viewer.options_menu.fit_width")
 };
 let N = Object.keys(k);
 let P = "Default";
 let O = l6;
 let D = c$;
 let L = {
-  format: e => e in k ? R[k[e]]() : _$$t("fig_feed.zoom_pan_preset.custom")
+  format: e => e in k ? R[k[e]]() : getI18nString("fig_feed.zoom_pan_preset.custom")
 };
 function F({
   reportWidth: e,
@@ -137,10 +137,10 @@ function j(e) {
     className: "edit_preview_toolbar--zoomPanPresetSelectorContainer--45Nn2",
     "data-tooltip-show-above": !0,
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": _$$t("fig_feed.zoom_pan_preset.tooltip"),
+    "data-tooltip": getI18nString("fig_feed.zoom_pan_preset.tooltip"),
     children: [u, c, jsx(O, {
       ...d,
-      ariaLabel: _$$t("fig_feed.zoom_pan_preset.tooltip"),
+      ariaLabel: getI18nString("fig_feed.zoom_pan_preset.tooltip"),
       blurOnChange: !0,
       chevronClassName: "edit_preview_toolbar--chevron--zjsKc",
       dispatch: o,
@@ -181,7 +181,7 @@ function U({
       buttonCaretType: "down",
       buttonSize: "small",
       dropperDisabled: !0,
-      inlineButtonTooltip: _$$t("fig_feed.background_color.tooltip"),
+      inlineButtonTooltip: getI18nString("fig_feed.background_color.tooltip"),
       onColorChange: i,
       onlyShowCustomColorPopover: !0,
       optionSize: "medium",
@@ -196,7 +196,7 @@ function U({
       setZoomPanPreset: a
     }), !!o && jsxs(Fragment, {
       children: [jsx(wv, {}), jsx($n, {
-        tooltip: _$$t("fig_feed.apply_to_all.tooltip"),
+        tooltip: getI18nString("fig_feed.apply_to_all.tooltip"),
         tooltipMaxWidth: 200,
         caret: "none",
         onClick: async () => {
@@ -208,18 +208,18 @@ function U({
           className: l()({
             "edit_preview_toolbar--buttonDisabled--hE0Am": d
           }),
-          children: _$$t("fig_feed.apply_to_all")
+          children: getI18nString("fig_feed.apply_to_all")
         })
       })]
     }), s && jsxs(Fragment, {
       children: [jsx(wv, {}), jsx($n, {
-        tooltip: _$$t("fig_feed.reset.tooltip"),
+        tooltip: getI18nString("fig_feed.reset.tooltip"),
         tooltipMaxWidth: 200,
         caret: "none",
         onClick: s,
         recordingKey: "teamFeedResetPreview",
         children: jsx("span", {
-          children: _$$t("fig_feed.reset")
+          children: getI18nString("fig_feed.reset")
         })
       })]
     })]
@@ -277,13 +277,13 @@ function J({
           "data-tooltip-type": Ib.LOOKUP,
           "data-tooltip": "zoom-out"
         }), jsxs(_$$L, {
-          ariaLabel: _$$t("fullscreen.zoom_menu.zoom_view_options"),
+          ariaLabel: getI18nString("fullscreen.zoom_menu.zoom_view_options"),
           onClick: m,
           selected: o.showing,
           className: l()(LY, o.showing && vu),
           onboardingKey: _$$q,
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": _$$t("fullscreen.zoom_menu.zoom_view_options"),
+          "data-tooltip": getI18nString("fullscreen.zoom_menu.zoom_view_options"),
           children: [jsx("div", {
             className: cm,
             "data-testid": "zoom-amount",
@@ -475,7 +475,7 @@ export function $$ec1(e) {
       right: -(e.width + 200 / eg.zoom)
     });
   }, [eg?.zoom]);
-  let e_ = _$$t("fig_feed.zoom_pan_preset.custom");
+  let e_ = getI18nString("fig_feed.zoom_pan_preset.custom");
   let [eA, ey] = useState(e.initialSnapshotState?.preset);
   let eb = useRef({});
   let ev = useCallback(() => {
@@ -839,7 +839,7 @@ export function $$ec1(e) {
         ref: x,
         src: e.imageSrc,
         crossOrigin: e.crossOrigin,
-        alt: _$$t("fig_feed.thumbnail_alt_text"),
+        alt: getI18nString("fig_feed.thumbnail_alt_text"),
         onLoad: eT
       })
     }), jsx("div", {

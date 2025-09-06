@@ -1,5 +1,5 @@
 import { getFeatureFlags } from "../905/601108";
-import { KR } from "../figma_app/778880";
+import { isFigmaMobileApp } from "../figma_app/778880";
 import { fF } from "../905/471229";
 import { q8 } from "../figma_app/459490";
 import { sZ } from "../905/845253";
@@ -20,7 +20,7 @@ export function $$c0(e) {
 export function $$u2() {
   let e = sZ();
   let t = q8();
-  return !(getFeatureFlags().figjam_generate_handbrake || KR() || t || e?.k12_google_org);
+  return !(getFeatureFlags().figjam_generate_handbrake || isFigmaMobileApp() || t || e?.k12_google_org);
 }
 export const OU = $$c0;
 export const RA = $$d1;

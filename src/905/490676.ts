@@ -7,7 +7,7 @@ import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { $n } from "../905/521428";
 import { J } from "../905/341359";
 import { Ay } from "../905/612521";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { Ce } from "../905/156213";
 export function $$h0({
   title: e
@@ -31,11 +31,11 @@ export function $$h0({
         }), jsx(nB, {
           children: jsxs("div", {
             className: "x1v877vn x78zum5 xdt5ytf x167g77z x6s0dn4 xl56j7k",
-            children: [tx("general.root_error_boundary_title"), jsx($n, {
+            children: [renderI18nText("general.root_error_boundary_title"), jsx($n, {
               onClick: () => {
                 Ay.reload("Invalid publishing entrypoint for PublishFileToCommunityModal");
               },
-              children: _$$t("general.root_error_boundary_refresh")
+              children: getI18nString("general.root_error_boundary_refresh")
             })]
           })
         })]

@@ -14,7 +14,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { Te } from "../vendor/813803";
 import { T6 } from "../vendor/279343";
 import { debugState } from "../905/407919";
-import { t as _$$t2 } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { zX } from "../905/576487";
 import { pj, el, bF, AY } from "../f2246930/170322";
@@ -82,7 +82,7 @@ export function $$b0({
           onClick: f,
           children: "Refresh"
         }), jsx(K, {
-          "aria-label": _$$t2("general.close"),
+          "aria-label": getI18nString("general.close"),
           onClick: e,
           children: jsx(A, {})
         })]
@@ -174,16 +174,16 @@ function k({
   let o = AY(e);
   let u = 0 === e.type ? jsx("span", {
     className: "xju2f9n x117nqv4",
-    children: _$$t2("figmake.scope.user_label")
+    children: getI18nString("figmake.scope.user_label")
   }) : jsx("span", {
     className: "x1prwzq3 x117nqv4",
-    children: _$$t2("figmake.scope.llm_label")
+    children: getI18nString("figmake.scope.llm_label")
   });
   let x = a.map(e => jsx(E, {
     children: e
   }, e));
   let h = i.map(e => jsxs(E, {
-    children: [e.toolName, " ", e.result ? _$$t2("figmake.scope.tool_success") : _$$t2("figmake.scope.tool_failure")]
+    children: [e.toolName, " ", e.result ? getI18nString("figmake.scope.tool_success") : getI18nString("figmake.scope.tool_failure")]
   }, e.toolName));
   let p = e.latency ? e.latency > 1e3 ? `[${e.latency / 1e3}s]` : `[${e.latency}ms]` : null;
   return jsx("div", {

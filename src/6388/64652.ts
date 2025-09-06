@@ -11,7 +11,7 @@ import { xk } from "@stylexjs/stylex";
 import h from "classnames";
 import { l } from "../6388/697965";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Te } from "../1250/12342";
 import { Y5 } from "../figma_app/455680";
 import { UK } from "../figma_app/740163";
@@ -140,14 +140,14 @@ function ep() {
     }).$,
     children: jsxs(bL, {
       legend: jsx(_$$q, {
-        children: _$$t("slides.toolbar.view_mode")
+        children: getI18nString("slides.toolbar.view_mode")
       }),
       value: e ? "SSV" : "GRID",
       onChange: l,
       recordingKey: "slideViewToggle",
       children: [jsx(c$, {
         value: "SSV",
-        "aria-label": _$$t("slides.toolbar.single_slide_view_toggle"),
+        "aria-label": getI18nString("slides.toolbar.single_slide_view_toggle"),
         icon: jsx(ef, {
           isSelected: e
         }),
@@ -156,7 +156,7 @@ function ep() {
         }
       }), jsx(c$, {
         value: "GRID",
-        "aria-label": _$$t("slides.toolbar.grid_view_toggle"),
+        "aria-label": getI18nString("slides.toolbar.grid_view_toggle"),
         icon: jsx(eg, {
           isSelected: !e
         }),
@@ -412,7 +412,7 @@ export function $$eN1({
         className: _$$s.flex.itemsCenter.$,
         children: [null != t && (e ? jsx(_$$O, {}) : jsx(_$$k, {})), jsx("span", {
           ...xk(null == t && ew.indentedHeader),
-          children: tx("fullscreen.pages_panel.layers_tab")
+          children: renderI18nText("fullscreen.pages_panel.layers_tab")
         })]
       })
     }), e ? jsx(eR, {

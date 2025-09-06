@@ -1,6 +1,6 @@
 import { Ay } from "../905/612521";
 import { getSupportEmail } from "../figma_app/169182";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { zX } from "../905/576487";
 import { M$ } from "../figma_app/633080";
@@ -20,7 +20,7 @@ export function $$m1(e) {
   } = e;
   dispatch(F.enqueue({
     type: "library-publish",
-    message: publishType === M$.UNPUBLISH ? _$$t("design_systems.publish_actions.unpublish_success") : _$$t("design_systems.publish_actions.publish_success"),
+    message: publishType === M$.UNPUBLISH ? getI18nString("design_systems.publish_actions.unpublish_success") : getI18nString("design_systems.publish_actions.publish_success"),
     icon: zX.CHECK
   }));
 }
@@ -31,7 +31,7 @@ export function $$h0(e) {
   } = e;
   dispatch(F.enqueue({
     type: "library-publish",
-    message: publishType === M$.UNPUBLISH ? _$$t("design_systems.publish_actions.unpublishing_library") : _$$t("design_systems.publish_actions.publishing_library"),
+    message: publishType === M$.UNPUBLISH ? getI18nString("design_systems.publish_actions.unpublishing_library") : getI18nString("design_systems.publish_actions.publishing_library"),
     icon: e.icon,
     progressKey: e.progressKey
   }));
@@ -52,24 +52,24 @@ export function $$g3(e) {
         type: "library-publish",
         icon: zX.EXCLAMATION,
         error: !0,
-        message: m ? _$$t("design_systems.publish_actions.cant_unpublish") : _$$t("design_systems.publish_actions.cant_publish"),
+        message: m ? getI18nString("design_systems.publish_actions.cant_unpublish") : getI18nString("design_systems.publish_actions.cant_publish"),
         button: {
-          text: _$$t("design_systems.publish_actions.retry"),
+          text: getI18nString("design_systems.publish_actions.retry"),
           action: () => p(dispatch)
         }
       }));
       break;
     case "NonS3PresignedPost":
-      MZ(dispatch, _$$t("check_network_compatibility.error_bell.library_publish.message"));
+      MZ(dispatch, getI18nString("check_network_compatibility.error_bell.library_publish.message"));
       break;
     case "GenericError":
       F.enqueue({
         type: "library-publish",
         icon: zX.EXCLAMATION,
         error: !0,
-        message: _$$t("design_systems.publish_error.generic"),
+        message: getI18nString("design_systems.publish_error.generic"),
         button: {
-          text: _$$t("design_systems.publish_actions.retry"),
+          text: getI18nString("design_systems.publish_actions.retry"),
           action: () => p(dispatch)
         }
       });
@@ -77,9 +77,9 @@ export function $$g3(e) {
     case "PartialPublish":
       {
         let t = "";
-        t = m ? _$$t("design_systems.publish_actions.unpublish_error", {
+        t = m ? getI18nString("design_systems.publish_actions.unpublish_error", {
           numSkipped: e.numPublishSkippedDueToError
-        }) : _$$t("design_systems.publish_actions.publish_error", {
+        }) : getI18nString("design_systems.publish_actions.publish_error", {
           numSkipped: e.numPublishSkippedDueToError
         });
         dispatch(F.enqueue({
@@ -88,7 +88,7 @@ export function $$g3(e) {
           error: !0,
           message: t,
           button: {
-            text: _$$t("design_systems.publish_actions.retry"),
+            text: getI18nString("design_systems.publish_actions.retry"),
             action: () => p(dispatch)
           }
         }));
@@ -104,11 +104,11 @@ export function $$g3(e) {
       {
         if (424 === e.errorCode) {
           dispatch(F.enqueue({
-            message: _$$t("design_systems.publish_actions.validations_failed"),
+            message: getI18nString("design_systems.publish_actions.validations_failed"),
             type: "library-publish",
             error: !0,
             button: {
-              text: _$$t("design_systems.publish_actions.validations_contact"),
+              text: getI18nString("design_systems.publish_actions.validations_contact"),
               action: () => {
                 Ay.unsafeRedirect(`mailto:${getSupportEmail()}`, "_blank");
               }
@@ -117,10 +117,10 @@ export function $$g3(e) {
           break;
         }
         let t = "";
-        413 === e.errorCode ? t = _$$t("design_systems.publish_actions.payload_too_large") : (e.errorCode, t = _$$t("design_systems.publish_actions.reload"));
-        let i = m ? _$$t("design_systems.publish_actions.unpublish_failed", {
+        413 === e.errorCode ? t = getI18nString("design_systems.publish_actions.payload_too_large") : (e.errorCode, t = getI18nString("design_systems.publish_actions.reload"));
+        let i = m ? getI18nString("design_systems.publish_actions.unpublish_failed", {
           reason: t
-        }) : _$$t("design_systems.publish_actions.publish_failed", {
+        }) : getI18nString("design_systems.publish_actions.publish_failed", {
           reason: t
         });
         dispatch(F.enqueue({
@@ -134,9 +134,9 @@ export function $$g3(e) {
       dispatch(F.enqueue({
         type: "library-publish",
         error: !0,
-        message: m ? _$$t("design_systems.publish_actions.unpublish_failed", {
+        message: m ? getI18nString("design_systems.publish_actions.unpublish_failed", {
           reason: e.errorReason
-        }) : _$$t("design_systems.publish_actions.publish_failed", {
+        }) : getI18nString("design_systems.publish_actions.publish_failed", {
           reason: e.errorReason
         })
       }));

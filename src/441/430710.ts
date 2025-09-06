@@ -11,7 +11,7 @@ import { getFeatureFlags } from "../905/601108";
 import p from "classnames";
 import { hk, O5 } from "../figma_app/632319";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { zX } from "../905/576487";
 import { hY } from "../figma_app/349969";
@@ -72,7 +72,7 @@ export function $$L0(e) {
   useEffect(() => {
     nodeId === g && (E(F.enqueue({
       type: "slides-embedded-prototype",
-      message: _$$t("slides.inserting_embed.visual_bell"),
+      message: getI18nString("slides.inserting_embed.visual_bell"),
       icon: zX.SPINNER,
       timeoutOverride: 1 / 0
     })), setActiveEmbed(), setTimeout(() => {
@@ -318,7 +318,7 @@ function j({
       className: pU,
       loading: "eager",
       src: s?.toString(),
-      title: _$$t("slides.flapp.embed.title"),
+      title: getI18nString("slides.flapp.embed.title"),
       allow: "autoplay; encrypted-media; picture-in-picture; fullscreen;",
       sandbox: "allow-scripts allow-same-origin allow-popups allow-top-navigation-by-user-activation",
       referrerPolicy: "same-origin"

@@ -8,8 +8,8 @@ import { k } from "../905/443820";
 import { _ as _$$_ } from "../figma_app/496441";
 import { N as _$$N } from "../905/438674";
 import { Rs } from "../figma_app/288654";
-import { $D } from "../905/11";
-import { t as _$$t } from "../905/303541";
+import { reportError } from "../905/11";
+import { getI18nString } from "../905/303541";
 import { aK } from "../figma_app/401069";
 import { tS } from "../figma_app/516028";
 import { nlH } from "../figma_app/43951";
@@ -59,28 +59,28 @@ export class $$x0 {
   format(e, t, r) {
     switch (e) {
       case "INNER_SHADOW":
-        return _$$t("inspect_panel.property.effect_inner_shadow");
+        return getI18nString("inspect_panel.property.effect_inner_shadow");
       case "DROP_SHADOW":
-        return _$$t("inspect_panel.property.effect_drop_shadow");
+        return getI18nString("inspect_panel.property.effect_drop_shadow");
       case "FOREGROUND_BLUR":
-        if ("PROGRESSIVE" === t) return _$$t("inspect_panel.property.effect_progressive_layer_blur");
-        return _$$t("inspect_panel.property.effect_layer_blur");
+        if ("PROGRESSIVE" === t) return getI18nString("inspect_panel.property.effect_progressive_layer_blur");
+        return getI18nString("inspect_panel.property.effect_layer_blur");
       case "BACKGROUND_BLUR":
-        if ("PROGRESSIVE" === t) return _$$t("inspect_panel.property.effect_progressive_background_blur");
-        return _$$t("inspect_panel.property.effect_background_blur");
+        if ("PROGRESSIVE" === t) return getI18nString("inspect_panel.property.effect_progressive_background_blur");
+        return getI18nString("inspect_panel.property.effect_background_blur");
       case "NOISE":
         switch (r) {
           case "MONOTONE":
-            return _$$t("inspect_panel.property.effect_mono_noise");
+            return getI18nString("inspect_panel.property.effect_mono_noise");
           case "DUOTONE":
-            return _$$t("inspect_panel.property.effect_duo_noise");
+            return getI18nString("inspect_panel.property.effect_duo_noise");
           case "MULTITONE":
-            return _$$t("inspect_panel.property.effect_multi_noise");
+            return getI18nString("inspect_panel.property.effect_multi_noise");
           default:
-            return _$$t("inspect_panel.property.effect_noise");
+            return getI18nString("inspect_panel.property.effect_noise");
         }
       case "GRAIN":
-        return _$$t("inspect_panel.property.effect_texture");
+        return getI18nString("inspect_panel.property.effect_texture");
       default:
         return;
     }
@@ -104,7 +104,7 @@ function N({
         $$S2(t, `${$$A5(e)}.${$$v4(e)}`);
         setTimeout(() => m(!1), 1e3);
       }).catch(e => {
-        $D(_$$e.DEVELOPER_TOOLS, e, {
+        reportError(_$$e.DEVELOPER_TOOLS, e, {
           extra: {
             fileKey: c,
             hexHash: u
@@ -117,16 +117,16 @@ function N({
   if (!u) return jsx(Fragment, {
     children: r
   });
-  let b = t ?? _$$t("common.loading");
+  let b = t ?? getI18nString("common.loading");
   return "icon" === a ? jsx(K, {
     onClick: f,
     disabled: p,
-    "aria-label": _$$t("inspect_panel.images.download_with_type", {
-      type: _$$t("inspect_panel.images.download_type_video")
+    "aria-label": getI18nString("inspect_panel.images.download_with_type", {
+      type: getI18nString("inspect_panel.images.download_type_video")
     }),
     htmlAttributes: {
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": _$$t("inspect_panel.images.download")
+      "data-tooltip": getI18nString("inspect_panel.images.download")
     },
     children: p ? b : r
   }) : jsx($n, {
@@ -141,12 +141,12 @@ function N({
         size: "sm"
       })
     }) : void 0,
-    "aria-label": _$$t("inspect_panel.images.download_with_type", {
-      type: _$$t("inspect_panel.images.download_type_video")
+    "aria-label": getI18nString("inspect_panel.images.download_with_type", {
+      type: getI18nString("inspect_panel.images.download_type_video")
     }),
     htmlAttributes: {
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": _$$t("inspect_panel.images.download")
+      "data-tooltip": getI18nString("inspect_panel.images.download")
     },
     children: p ? b : r
   });
@@ -180,12 +180,12 @@ function C({
     href: s,
     download: d,
     onClick: l,
-    "aria-label": _$$t("inspect_panel.images.download_with_type", {
-      type: _$$t("inspect_panel.images.download_type_image")
+    "aria-label": getI18nString("inspect_panel.images.download_with_type", {
+      type: getI18nString("inspect_panel.images.download_type_image")
     }),
     htmlAttributes: {
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": _$$t("inspect_panel.images.download")
+      "data-tooltip": getI18nString("inspect_panel.images.download")
     },
     className: "inspectors--downloadLinkButton--cqFWb",
     children: t
@@ -194,12 +194,12 @@ function C({
     href: s,
     download: d,
     onClick: l,
-    "aria-label": _$$t("inspect_panel.images.download_with_type", {
-      type: _$$t("inspect_panel.images.download_type_image")
+    "aria-label": getI18nString("inspect_panel.images.download_with_type", {
+      type: getI18nString("inspect_panel.images.download_type_image")
     }),
     htmlAttributes: {
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": _$$t("inspect_panel.images.download")
+      "data-tooltip": getI18nString("inspect_panel.images.download")
     },
     children: t
   });

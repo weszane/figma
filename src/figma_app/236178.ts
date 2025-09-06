@@ -1,16 +1,16 @@
 import { useMemo } from "react";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { d$, S0, Gg, bJ } from "../905/863795";
 export function $$s4() {
-  md(d$);
-  md(S0);
+  useAtomWithSubscription(d$);
+  useAtomWithSubscription(S0);
 }
 export function $$o0(e, t) {
   let r = c(t);
   return !!e && r.has(e);
 }
 export function $$l2(e) {
-  let t = md(S0);
+  let t = useAtomWithSubscription(S0);
   return !!e && t.has(e);
 }
 export function $$d3(e, t) {
@@ -19,11 +19,11 @@ export function $$d3(e, t) {
   return r || n;
 }
 function c(e) {
-  return md(e ? Gg : bJ);
+  return useAtomWithSubscription(e ? Gg : bJ);
 }
 export function $$u1(e) {
   let t = c(e);
-  let r = md(S0);
+  let r = useAtomWithSubscription(S0);
   return useMemo(() => ({
     workspaceApprovedLibraryKeys: t,
     orgApprovedLibraryKeys: r

@@ -4,7 +4,7 @@ import { debounce } from "../905/915765";
 import { getFeatureFlags } from "../905/601108";
 import o from "classnames";
 import { Lf } from "../figma_app/637027";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { conditionalFeatureFlag } from "../figma_app/169182";
 import { V } from "../905/57562";
 var l = o;
@@ -149,7 +149,7 @@ function g(e, t) {
 let f = new Set(["JP", "LI", "MX", "RU", "CH", "ZA", "GB", "IN", "CA", "KR", "NO", "SG", "EG", "AU", "MY", "KE", "PE", conditionalFeatureFlag("vat_save_ph", "PH", "N/A"), conditionalFeatureFlag("vat_save_th", "TH", "N/A"), conditionalFeatureFlag("vat_save_tz", "TZ", "N/A")].concat(["AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", "DE", "GR", "HU", "IE", "IT", "LV", "LT", "LU", "MT", "NL", "PL", "PT", "RO", "SK", "SI", "ES", "SE"]));
 function $$A(e, t) {
   var i;
-  return _$$t("tax.optional_vat_gst_id.input_label", {
+  return getI18nString("tax.optional_vat_gst_id.input_label", {
     taxType: (i = g(e, t), h[i]?.name || "VAT/GST")
   });
 }
@@ -213,12 +213,12 @@ export function $$y0(e) {
           var t;
           t = g(country, region);
           let i = h[t]?.exampleFormat;
-          i && y(_$$t("tax.example_vat_format_placeholder", {
+          i && y(getI18nString("tax.example_vat_format_placeholder", {
             exampleFormat: i
           }));
         },
         placeholder: m,
-        tooltip: _$$t("tax.vat.input_tooltip"),
+        tooltip: getI18nString("tax.vat.input_tooltip"),
         trackingFieldName: "VAT/GST ID",
         value: e.vatId
       }), !!o && jsx("div", {

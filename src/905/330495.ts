@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { useSelector } from "../vendor/514228";
 import { Egt } from "../figma_app/763686";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { k9 } from "../905/19536";
 import { gl } from "../905/216495";
 import { B9 } from "../figma_app/722362";
@@ -13,7 +13,7 @@ export function $$h0(e) {
   let t = Rn("restore-symbol-or-state-group");
   let i = useSelector(e => e.mirror.appModel[t]);
   let h = B9();
-  let g = md(_S);
+  let g = useAtomWithSubscription(_S);
   let f = k9(() => {
     let t = new Set();
     for (let i of e) {

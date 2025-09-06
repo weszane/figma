@@ -10,7 +10,7 @@ import { N as _$$N } from "../vendor/930821";
 import { fU } from "../905/492004";
 import { rf } from "../figma_app/806412";
 import { P as _$$P2 } from "../905/347284";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { w9, rT } from "../figma_app/124493";
 import { n3 } from "../905/797478";
@@ -326,7 +326,7 @@ let F = memo(function ({
                 p();
                 a(!1);
               },
-              "aria-label": _$$t("general.close"),
+              "aria-label": getI18nString("general.close"),
               children: jsx(A, {})
             })
           })]
@@ -441,13 +441,13 @@ function B({
   return jsxs("span", {
     className: TK,
     children: [jsx("span", {
-      children: tx("voting.pin.votes", {
+      children: renderI18nText("voting.pin.votes", {
         numVotes: e
       })
     }), t && jsx("img", {
       src: Ys,
       className: C0,
-      alt: _$$t("voting.pin.medal_img_alt")
+      alt: getI18nString("voting.pin.medal_img_alt")
     })]
   });
 }
@@ -540,7 +540,7 @@ function H({
       children: jsx(xL, {})
     }), jsx("span", {
       className: iG,
-      children: tx("voting.pin.voter_list_overflow", {
+      children: renderI18nText("voting.pin.voter_list_overflow", {
         numOverflowingVoters: e
       })
     })]
@@ -558,9 +558,9 @@ function z({
     let e = WJ.find(e => e.label === i);
     return e && k6(e, t) || tR;
   })();
-  let a = i ? _$$t("voting.pin.stamp_preview_alt_with_type", {
+  let a = i ? getI18nString("voting.pin.stamp_preview_alt_with_type", {
     stampType: i
-  }) : _$$t("voting.pin.stamp_preview_alt_without_type");
+  }) : getI18nString("voting.pin.stamp_preview_alt_without_type");
   return jsx("img", {
     className: O8,
     src: n,

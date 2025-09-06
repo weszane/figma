@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useSelector } from "../vendor/514228";
-import { fp } from "../figma_app/27355";
-import { az } from "../905/449184";
+import { useAtomValueAndSetter } from "../figma_app/27355";
+import { analyticsEventManager } from "../905/449184";
 import { debugState } from "../905/407919";
 import { Dc } from "../figma_app/314264";
 import { kl } from "../905/275640";
@@ -9,14 +9,14 @@ import { AP } from "../figma_app/755783";
 import { Xd } from "../figma_app/359164";
 import { F2, Y4 } from "../figma_app/384713";
 export function $$_0(e) {
-  az.trackDefinedEvent("illustration.set_dynamic_stroke_settings", {
+  analyticsEventManager.trackDefinedEvent("illustration.set_dynamic_stroke_settings", {
     numNodes: debugState.getState().mirror.selectionProperties.numSelected,
     productType: Dc(debugState.getState().selectedView.editorType),
     ...e
   });
 }
 export function $$h2(e, t) {
-  let [r, i] = fp(e);
+  let [r, i] = useAtomValueAndSetter(e);
   return [r[t], useCallback(e => {
     i({
       [t]: e
@@ -80,7 +80,7 @@ export function $$y1(e, t) {
     set
   } = E[t];
   let o = Xd();
-  let [l, p] = fp(e);
+  let [l, p] = useAtomValueAndSetter(e);
   let _ = get(l);
   let h = useSelector(e => e.mirror.selectionProperties.numSelected);
   let m = kl(t);

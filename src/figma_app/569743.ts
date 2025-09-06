@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useState } from "react";
 import { useSelector } from "../vendor/514228";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import o from "classnames";
 import { _ as _$$_ } from "../figma_app/658134";
 import { Gr } from "../figma_app/478006";
@@ -29,7 +29,7 @@ export function $$E0({
 } = {}) {
   let n;
   let a = Yk();
-  let o = md(Gr);
+  let o = useAtomWithSubscription(Gr);
   let l = uo();
   let u = dP() + _$$_;
   let [h, m] = useState(null);

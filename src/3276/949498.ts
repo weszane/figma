@@ -7,7 +7,7 @@ import { getFeatureFlags } from "../905/601108";
 import d from "classnames";
 import { useRef, useLayoutEffect } from "react";
 import { $z } from "../figma_app/617427";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { e as _$$e } from "../905/579755";
 import { _I } from "../figma_app/473493";
 import { to } from "../905/156213";
@@ -114,7 +114,7 @@ function N({
         editRequestPermissionsData: n
       }), jsx(K, {
         onClick: () => t(!0),
-        "aria-label": _$$t("general.close"),
+        "aria-label": getI18nString("general.close"),
         children: jsx(_$$A, {})
       })]
     })
@@ -154,26 +154,26 @@ function S({
 function D({
   requests: e
 }) {
-  let t = (e = _$$t("user_notifications.community.someone")) => jsx("b", {
+  let t = (e = getI18nString("user_notifications.community.someone")) => jsx("b", {
     children: e.length <= 18 ? e : `${e.slice(0, 18).trim()}...`
   });
   let n = (() => {
     switch (e.length) {
       case 1:
-        return tx("role_request.edit_request_tooltip.user_wants_to_request_type", {
+        return renderI18nText("role_request.edit_request_tooltip.user_wants_to_request_type", {
           userHandle: t(e[0].requesterUser?.handle),
           requestType: zg(e[0].level)
         });
       case 2:
-        return tx("role_request.edit_request_tooltip.user1_and_user2_request_access", {
+        return renderI18nText("role_request.edit_request_tooltip.user1_and_user2_request_access", {
           userHandle1: t(e[0].requesterUser?.handle),
           userHandle2: t(e[1].requesterUser?.handle)
         });
       default:
-        return tx("role_request.edit_request_tooltip.user_and_others_request_access", {
+        return renderI18nText("role_request.edit_request_tooltip.user_and_others_request_access", {
           userHandle: t(e[0].requesterUser?.handle),
           othersText: jsx("b", {
-            children: tx("role_request.edit_request_tooltip.othersText", {
+            children: renderI18nText("role_request.edit_request_tooltip.othersText", {
               numOthers: e.length - 1
             })
           })
@@ -194,23 +194,23 @@ function D({
             case 2:
               let n = t(e[0].requesterUser?.handle);
               let a = t(e[1].requesterUser?.handle);
-              if (e[0].requesterUser?.handle.length && e[1].requesterUser?.handle.length && e[1].requesterUser?.handle.length + e[0].requesterUser?.handle.length > 18) return tx("role_request.edit_request_tooltip.user1_and_user2", {
+              if (e[0].requesterUser?.handle.length && e[1].requesterUser?.handle.length && e[1].requesterUser?.handle.length + e[0].requesterUser?.handle.length > 18) return renderI18nText("role_request.edit_request_tooltip.user1_and_user2", {
                 userHandle1: t(e[0].requesterUser?.handle),
                 userHandle2: jsx("b", {
-                  children: tx("role_request.edit_request_tooltip.othersText", {
+                  children: renderI18nText("role_request.edit_request_tooltip.othersText", {
                     numOthers: e.length - 1
                   })
                 })
               });
-              return tx("role_request.edit_request_tooltip.user1_and_user2", {
+              return renderI18nText("role_request.edit_request_tooltip.user1_and_user2", {
                 userHandle1: n,
                 userHandle2: a
               });
             default:
-              return tx("role_request.edit_request_tooltip.user1_and_user2", {
+              return renderI18nText("role_request.edit_request_tooltip.user1_and_user2", {
                 userHandle1: t(e[0].requesterUser?.handle),
                 userHandle2: jsx("b", {
-                  children: tx("role_request.edit_request_tooltip.othersText", {
+                  children: renderI18nText("role_request.edit_request_tooltip.othersText", {
                     numOthers: e.length - 1
                   })
                 })
@@ -219,10 +219,10 @@ function D({
         })()
       }), jsx("div", {
         children: (() => {
-          if (1 !== e.length) return tx("role_request.edit_request_tooltip.request_access");
+          if (1 !== e.length) return renderI18nText("role_request.edit_request_tooltip.request_access");
           {
             let t = zg(e[0].level);
-            return tx("role_request.edit_request_tooltip.wants_to_request_type", {
+            return renderI18nText("role_request.edit_request_tooltip.wants_to_request_type", {
               requestType: t
             });
           }
@@ -267,7 +267,7 @@ function A({
         }));
       },
       variant: "secondary",
-      children: tx("role_request.edit_request_tooltip.view_button_text")
+      children: renderI18nText("role_request.edit_request_tooltip.view_button_text")
     })
   }) : null;
 }
@@ -301,13 +301,13 @@ function L(e) {
       trackingEventName: "Edit Request Tooltip - Request Denied",
       onClick: handleDeny,
       variant: "destructiveLink",
-      children: tx("request_row.deny")
+      children: renderI18nText("request_row.deny")
     }), jsx($z, {
       trackingProperties: u,
       trackingEventName: "Edit Request Tooltip - Request Approved",
       onClick: handleApprove,
       variant: "secondary",
-      children: tx("request_row.approve")
+      children: renderI18nText("request_row.approve")
     })]
   });
 }

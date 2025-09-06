@@ -8,14 +8,14 @@ import { useDispatch } from "../vendor/514228";
 import { d as _$$d } from "../905/976845";
 import { J as _$$J } from "../905/125993";
 import { _gJ } from "../figma_app/763686";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { k9 } from "../905/19536";
 import { U as _$$U } from "../figma_app/901889";
 import { hh } from "../905/417232";
 import { c$ } from "../figma_app/236327";
 import { tH } from "../905/751457";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { _I } from "../figma_app/473493";
 import { oB, j7 } from "../905/929976";
 import { Vg } from "../figma_app/147952";
@@ -102,7 +102,7 @@ function z(e) {
     movePin,
     runPlugin
   } = e;
-  let l = md(be);
+  let l = useAtomWithSubscription(be);
   let [o, c] = useState(!1);
   let _ = K();
   let u = useDispatch();
@@ -183,7 +183,7 @@ function V({
   setIsDropdownShown: l
 }) {
   let o = Gt(e.plugin_id, "pinned");
-  let c = md(be);
+  let c = useAtomWithSubscription(be);
   let _ = c?.plugin_id ?? null;
   let p = _$$U();
   let h = useRef(null);
@@ -304,11 +304,11 @@ function W({
         onClick: () => {
           r(!i);
         },
-        "aria-label": _$$t("dev_handoff.inspect_panel.more_plugins"),
+        "aria-label": getI18nString("dev_handoff.inspect_panel.more_plugins"),
         htmlAttributes: {
           onMouseDown: dG,
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": _$$t("dev_handoff.inspect_panel.more_plugins")
+          "data-tooltip": getI18nString("dev_handoff.inspect_panel.more_plugins")
         },
         children: jsx(_$$J, {})
       }), i && jsxs("div", {
@@ -352,7 +352,7 @@ function H({
     propagateCloseClick: !0,
     children: jsx(c$, {
       onClick: () => t(e.plugin_id),
-      children: tx("dev_handoff.inspect_panel.unpin")
+      children: renderI18nText("dev_handoff.inspect_panel.unpin")
     })
   });
 }

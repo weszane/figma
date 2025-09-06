@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef, useState, useCallback, useEffect } from "react";
 import { debounce } from "../905/915765";
 import { ks, N_ } from "../figma_app/637027";
-import { t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { vr } from "../figma_app/740025";
 import { s as _$$s2 } from "../905/608932";
 export function $$c0(e) {
@@ -14,7 +14,7 @@ export function $$c0(e) {
   let u = e.defaultHandleName || "";
   let p = useRef("");
   let [m, h] = useState({});
-  let g = useCallback((e) => {
+  let g = useCallback(e => {
     let n = vr(e);
     if (n) {
       onProfileHandleValidationFailure && onProfileHandleValidationFailure();
@@ -29,11 +29,11 @@ export function $$c0(e) {
       data: n
     }) => {
       n.meta.handle === p.current && (n.meta.available ? (h({
-        successMsg: t("community.change_profile_handle_modal.profile_handle_is_available", {
+        successMsg: getI18nString("community.change_profile_handle_modal.profile_handle_is_available", {
           profileHandle: e
         })
       }), onProfileHandleValidationSuccess && onProfileHandleValidationSuccess()) : (h({
-        errorMsg: t("community.change_profile_handle_modal.profile_handle_taken", {
+        errorMsg: getI18nString("community.change_profile_handle_modal.profile_handle_taken", {
           profileHandle: e
         })
       }), onProfileHandleValidationFailure && onProfileHandleValidationFailure()));
@@ -42,7 +42,7 @@ export function $$c0(e) {
   useEffect(() => {
     u.length > 0 && prevalidate && g(u);
   }, [u, g, prevalidate]);
-  let f = debounce((e) => {
+  let f = debounce(e => {
     e();
   }, 500);
   return jsxs("div", {
@@ -56,7 +56,7 @@ export function $$c0(e) {
         id: "profile_handle",
         maxLength: 20,
         name: "profile_handle",
-        onChange: (t) => {
+        onChange: t => {
           let i = t.target.value;
           e.saveHandle(i);
           p.current = i;
@@ -81,13 +81,13 @@ export function $$c0(e) {
         children: m.successMsg
       }), jsx("div", {
         className: "profile_handle--handleText--es9hl",
-        children: tx("community.change_profile_handle_modal.profile_handle_requirements")
+        children: renderI18nText("community.change_profile_handle_modal.profile_handle_requirements")
       }), jsx(N_, {
         className: "profile_handle--communityGuidelinesLink--lqfL1",
         href: "https://help.figma.com/hc/articles/360038510573-Figma-Community-Guidelines",
         target: "_blank",
         trusted: !0,
-        children: tx("community.change_profile_handle_modal.review_our_community_guidelines_link")
+        children: renderI18nText("community.change_profile_handle_modal.review_our_community_guidelines_link")
       })]
     })]
   });

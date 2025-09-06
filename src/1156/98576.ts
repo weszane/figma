@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Ju } from "../905/102752";
 import { K } from "../1156/668894";
 export let $$d0 = Ju(function (e) {
@@ -13,7 +13,7 @@ export let $$d0 = Ju(function (e) {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$t("figmake.connect_existing_projects_modal.title")
+          children: getI18nString("figmake.connect_existing_projects_modal.title")
         })
       }), jsx(nB, {
         children: jsx("div", {

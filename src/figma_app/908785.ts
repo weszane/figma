@@ -3,7 +3,7 @@ import { memo, useCallback, useState } from "react";
 import { E as _$$E } from "../905/465157";
 import { getFeatureFlags } from "../905/601108";
 import { Pt } from "../figma_app/806412";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Y5 } from "../figma_app/455680";
 import { sT } from "../figma_app/740163";
 import { gl, BI, hS } from "../905/216495";
@@ -90,22 +90,22 @@ function O(e) {
     value: gl(e.value) ? void 0 : e.value,
     onChange: e.onChange,
     legend: jsx(q, {
-      children: _$$t("fullscreen.properties_panel.stroke.position")
+      children: getI18nString("fullscreen.properties_panel.stroke.position")
     }),
     readonly: e.disabled,
     recordingKey: e.recordingKey,
     children: [jsx(c$, {
       icon: jsx($$N, {}),
       value: "OUTSIDE",
-      "aria-label": _$$t("fullscreen.properties_panel.stroke.position_outside")
+      "aria-label": getI18nString("fullscreen.properties_panel.stroke.position_outside")
     }), jsx(c$, {
       icon: jsx(C, {}),
       value: "CENTER",
-      "aria-label": _$$t("fullscreen.properties_panel.stroke.position_center")
+      "aria-label": getI18nString("fullscreen.properties_panel.stroke.position_center")
     }), jsx(c$, {
       icon: jsx(w, {}),
       value: "INSIDE",
-      "aria-label": _$$t("fullscreen.properties_panel.stroke.position_inside")
+      "aria-label": getI18nString("fullscreen.properties_panel.stroke.position_inside")
     })]
   });
 }
@@ -173,10 +173,10 @@ function X(e) {
       onClick: t,
       disabled: e.disabled,
       recordingKey: Pt(e, "more"),
-      "aria-label": _$$t("fullscreen.properties_panel.fill.advanced_stroke_settings"),
+      "aria-label": getI18nString("fullscreen.properties_panel.fill.advanced_stroke_settings"),
       htmlAttributes: {
         onMouseDown: e => e.stopPropagation(),
-        "data-tooltip": _$$t("fullscreen.properties_panel.fill.advanced_stroke_settings"),
+        "data-tooltip": getI18nString("fullscreen.properties_panel.fill.advanced_stroke_settings"),
         "data-tooltip-type": Ib.TEXT
       },
       children: jsx(_$$A, {})
@@ -231,7 +231,7 @@ export function $$J0(e) {
       strokeCap: e,
       terminalCap: e
     }),
-    label: _$$t("fullscreen.properties_panel.section_stroke.label_end_cap"),
+    label: getI18nString("fullscreen.properties_panel.section_stroke.label_end_cap"),
     recordingKey: Pt(e, "endCap"),
     disabled: !k,
     kind: "endCap"
@@ -245,11 +245,11 @@ export function $$J0(e) {
   });
   return jsxs(Fragment, {
     children: [jsx(DE, {
-      label: tx("fullscreen.properties_panel.section_stroke.label_weight"),
+      label: renderI18nText("fullscreen.properties_panel.section_stroke.label_weight"),
       input: jsx(EX, {
-        ariaLabel: _$$t("fullscreen.properties_panel.fill.stroke_width"),
+        ariaLabel: getI18nString("fullscreen.properties_panel.fill.stroke_width"),
         bigStep: bigNudgeAmount,
-        dataTooltip: _$$t("fullscreen.properties_panel.fill.stroke_width"),
+        dataTooltip: getI18nString("fullscreen.properties_panel.fill.stroke_width"),
         disabled: !F,
         fullWidth: !0,
         icon: jsx(_$$E, {}),
@@ -284,7 +284,7 @@ export function $$J0(e) {
     }), jsx(fn, {
       "data-testid": "stroke-cap-align-join-row",
       ref: e.forwardedRef,
-      leftLabel: _$$t("fullscreen.properties_panel.stroke.position"),
+      leftLabel: getI18nString("fullscreen.properties_panel.stroke.position"),
       leftInput: jsx(O, {
         value: strokeAlign,
         disabled: !D,
@@ -292,7 +292,7 @@ export function $$J0(e) {
           strokeAlign: e
         })
       }),
-      rightLabel: _$$t("fullscreen.properties_panel.stroke_settings.join"),
+      rightLabel: getI18nString("fullscreen.properties_panel.stroke_settings.join"),
       rightInput: jsx(_$$M, {
         value: strokeJoin,
         disabled: !R,
@@ -308,9 +308,9 @@ export function $$J0(e) {
       })
     }), jsx(fn, {
       "data-testid": "stroke-cap-profile-row",
-      leftLabel: _$$t("fullscreen.properties_panel.section_stroke.label_end_cap"),
+      leftLabel: getI18nString("fullscreen.properties_panel.section_stroke.label_end_cap"),
       leftInput: Y,
-      rightLabel: getFeatureFlags().ce_il_var_width_points ? _$$t("fullscreen.properties_panel.width_profile.label") : null,
+      rightLabel: getFeatureFlags().ce_il_var_width_points ? getI18nString("fullscreen.properties_panel.width_profile.label") : null,
       rightInput: getFeatureFlags().ce_il_var_width_points ? J : null,
       icon: getFeatureFlags().ce_il_var_width_points ? Z : null
     }), B && hS(V) && jsx($, {

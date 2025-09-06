@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useDispatch } from "../vendor/514228";
 import { wm } from "../905/19536";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { q3 } from "../figma_app/450829";
 import { i } from "../905/559280";
 import { M } from "../905/152487";
@@ -25,8 +25,8 @@ export function $$c0(e) {
       let n = currentStepIndex === totalNumSteps - 1;
       return {
         ...e,
-        ctaText: e.ctaText || (n ? t("rcs.rcs_shared.done") : t("rcs.rcs_shared.next")),
-        stepCounter: e.totalNumSteps > 1 ? t("rcs.rcs_shared.step_counter", {
+        ctaText: e.ctaText || (n ? getI18nString("rcs.rcs_shared.done") : getI18nString("rcs.rcs_shared.next")),
+        stepCounter: e.totalNumSteps > 1 ? getI18nString("rcs.rcs_shared.step_counter", {
           currentStepNum: currentStepIndex + 1,
           totalNumSteps
         }) : void 0

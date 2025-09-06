@@ -2,7 +2,7 @@ import { Ez5 } from "../figma_app/763686";
 import { AD } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { BT } from "../905/618447";
 import { to, Oe } from "../figma_app/828186";
 import { ut, xB } from "../figma_app/84367";
@@ -20,7 +20,7 @@ export function $$h4() {
   let t = Oe();
   let r = Bk();
   if (!e || t || !r) return !1;
-  let c = zl.get(BT);
+  let c = atomStoreManager.get(BT);
   if (!c.length || 1 === c.length) return !1;
   for (let e = 0; e < c.length; e++) {
     let t = Ez5?.canvasGrid().isRowSelected(e);

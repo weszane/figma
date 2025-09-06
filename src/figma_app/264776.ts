@@ -2,7 +2,7 @@ import { createContext } from "react";
 import { bwI, glU, iCO } from "../figma_app/763686";
 import { l as _$$l } from "../905/716947";
 import { Mz } from "../vendor/925040";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { im } from "../figma_app/828186";
 import { Y5 } from "../figma_app/455680";
 import { i as _$$i } from "../figma_app/741237";
@@ -89,7 +89,7 @@ export function $$T5(e) {
 }
 export function $$I15(e, t, r) {
   let n = glU.getStateGroupAnalyticsInfo(t);
-  sx(e, {
+  trackEventAnalytics(e, {
     ...n,
     ...(r || {})
   });

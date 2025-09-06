@@ -7,12 +7,12 @@ import { k } from "../905/443820";
 import { bL } from "../905/38914";
 import { X } from "../905/128376";
 import { $n } from "../905/521428";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { gY } from "../figma_app/566371";
 import { _ as _$$_, S } from "../figma_app/490799";
 import { s as _$$s } from "../cssbuilder/589278";
 import { s as _$$s2 } from "../905/573154";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { cm } from "../figma_app/544879";
 import { t as _$$t2 } from "../905/53773";
 import { Ce } from "../905/156213";
@@ -47,7 +47,7 @@ export function $$T0(e) {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$t("file_browser.trash_project.move_project_to_trash")
+          children: getI18nString("file_browser.trash_project.move_project_to_trash")
         })
       }), i]
     })
@@ -63,16 +63,16 @@ function E(e) {
   } = e;
   let j = jsx("span", {
     className: _$$s.fontBold.$,
-    children: tx("file_browser.tool_bar.trash")
+    children: renderI18nText("file_browser.tool_bar.trash")
   });
   let T = (e => {
     switch (e) {
       case 0:
-        return _$$t("file_browser.trash_project.generic_confirm_label");
+        return getI18nString("file_browser.trash_project.generic_confirm_label");
       case 1:
-        return _$$t("file_browser.trash_project.one_file_confirm_label");
+        return getI18nString("file_browser.trash_project.one_file_confirm_label");
       default:
-        return _$$t("file_browser.trash_project.plural_files_confirm_label", {
+        return getI18nString("file_browser.trash_project.plural_files_confirm_label", {
           numFiles: _$$t2(e)
         });
     }
@@ -84,15 +84,15 @@ function E(e) {
   let I = (e => {
     switch (e) {
       case 0:
-        return tx("file_browser.trash_project.zero_file_confirm_text_trash_folder", {
+        return renderI18nText("file_browser.trash_project.zero_file_confirm_text_trash_folder", {
           folderName: E
         });
       case 1:
-        return tx("file_browser.trash_project.one_file_confirm_text_trash_folder", {
+        return renderI18nText("file_browser.trash_project.one_file_confirm_text_trash_folder", {
           folderName: E
         });
       default:
-        return tx("file_browser.trash_project.plural_files_confirm_text_trash_folder", {
+        return renderI18nText("file_browser.trash_project.plural_files_confirm_text_trash_folder", {
           folderName: E,
           numFiles: _$$t2(e)
         });
@@ -100,7 +100,7 @@ function E(e) {
   })(numFiles);
   let N = gY(Ct);
   let C = e => {
-    sx("Folder Trash Confirmation Click", {
+    trackEventAnalytics("Folder Trash Confirmation Click", {
       folderId: e.id,
       teamId: e.teamId,
       orgId: e.orgId
@@ -108,7 +108,7 @@ function E(e) {
     N({
       folderId: e.id
     }).catch(() => {
-      t(_$$s2.error(_$$t("file_browser.api_folder.error_when_moving_to_trash")));
+      t(_$$s2.error(getI18nString("file_browser.api_folder.error_when_moving_to_trash")));
     });
     t(Ce());
   };
@@ -122,11 +122,11 @@ function E(e) {
           text: (e => {
             switch (e) {
               case cm.PENDING_ASSET_TRANSFER:
-                return tx("file_browser.trash_project.warning.pending_asset_transfer");
+                return renderI18nText("file_browser.trash_project.warning.pending_asset_transfer");
               case cm.PENDING_RESOURCE_CONNECTION:
-                return tx("file_browser.trash_project.warning.pending_resource_connection");
+                return renderI18nText("file_browser.trash_project.warning.pending_resource_connection");
               case cm.ACTIVE_RESOURCE_CONNECTION:
-                return tx("file_browser.trash_project.warning.active_resource_connection");
+                return renderI18nText("file_browser.trash_project.warning.active_resource_connection");
               default:
                 throwTypeError(e);
             }
@@ -137,9 +137,9 @@ function E(e) {
         children: I
       }), hasPublishedSite && jsx("div", {
         className: _$$s.mb12.$,
-        children: tx("file_browser.trash_project.published_site_warning")
+        children: renderI18nText("file_browser.trash_project.published_site_warning")
       }), jsx("div", {
-        children: tx("file_browser.trash_project.description_restore", {
+        children: renderI18nText("file_browser.trash_project.description_restore", {
           trashStyled: j
         })
       })]
@@ -151,7 +151,7 @@ function E(e) {
             e.onClose();
           },
           ref: r,
-          children: _$$t("modal.cancel")
+          children: getI18nString("modal.cancel")
         }), jsx($n, {
           variant: "destructive",
           onClick: () => C(folder),

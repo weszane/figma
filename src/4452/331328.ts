@@ -7,7 +7,7 @@ import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { getFeatureFlags } from "../905/601108";
 import { tM, vd } from "../figma_app/637027";
 import { qc } from "../figma_app/858013";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { cL } from "../905/748726";
 import { Ce } from "../905/156213";
 import { fu } from "../figma_app/831799";
@@ -49,12 +49,12 @@ export let $$S0 = Ju(function (e) {
         children: [jsx(Y9, {
           children: jsx(hE, {
             children: e.goBack ? jsx(w, {
-              title: _$$t("team_view.team_permissions_modal.access_settings"),
+              title: getI18nString("team_view.team_permissions_modal.access_settings"),
               onClick: e.goBack
             }) : jsx("div", {
               className: DA,
               children: jsx("p", {
-                children: tx("team_view.team_permissions_modal.access_settings")
+                children: renderI18nText("team_view.team_permissions_modal.access_settings")
               })
             })
           })
@@ -105,13 +105,13 @@ export function $$T1(e) {
       setSelectedPermissionsLevel: b
     }), jsx("div", {
       className: VA,
-      children: x === J4.VIEW ? _$$t("team_creation.can_view_and_comment") : _$$t("team_creation.can_create_and_edit_files")
+      children: x === J4.VIEW ? getI18nString("team_creation.can_view_and_comment") : getI18nString("team_creation.can_create_and_edit_files")
     })]
   });
   return jsxs(Fragment, {
     children: [jsx("div", {
       className: bV,
-      children: _$$t("team_creation.who_has_access")
+      children: getI18nString("team_creation.who_has_access")
     }), jsx(YU, {
       resourceType: FResourceCategoryType.TEAM,
       value: u,
@@ -121,12 +121,12 @@ export function $$T1(e) {
       workspace: t ? e.workspace : void 0
     }), jsx("div", {
       className: bV,
-      children: u === _9.INVITE_ONLY ? _$$t("team_creation.visibility") : _$$t("team_creation.what_they_can_do")
+      children: u === _9.INVITE_ONLY ? getI18nString("team_creation.visibility") : getI18nString("team_creation.what_they_can_do")
     }), I, jsxs("div", {
       className: E_,
       children: [jsx(tM, {
         onClick: e.goBack || e.hideModal,
-        children: tx("project_creation.cancel")
+        children: renderI18nText("project_creation.cancel")
       }), jsx(vd, {
         onClick: () => {
           let t = u === _9.INVITE_ONLY && p === Fb.ORG_BROWSABLE;
@@ -143,7 +143,7 @@ export function $$T1(e) {
           }
           e.hideModal();
         },
-        children: tx("team_view.team_permissions_modal.save")
+        children: renderI18nText("team_view.team_permissions_modal.save")
       })]
     })]
   });

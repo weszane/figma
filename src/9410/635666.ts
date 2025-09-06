@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { T } from "../figma_app/257703";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { q5 } from "../figma_app/516028";
 import { W5, bF } from "../figma_app/120294";
 let $$d1 = "audio-paywall-key";
@@ -10,9 +10,9 @@ let $$c2 = (() => {
   let t = !1;
   return i => {
     t || setTimeout(() => {
-      i > 0 && e ? (e = !1, sx("Context Viewed", {
+      i > 0 && e ? (e = !1, trackEventAnalytics("Context Viewed", {
         name: "join-call-with-others"
-      })) : e || 0 !== i || (t = !0, sx("Context Viewed", {
+      })) : e || 0 !== i || (t = !0, trackEventAnalytics("Context Viewed", {
         name: "should-close-open-audio-nux"
       }));
     }, 200);
@@ -25,17 +25,17 @@ export function $$u0() {
     userIdsInCall
   } = W5(t?.key || null);
   let n = bF(userIdsInCall, t?.key || null).map(e => e.name);
-  e = n.length > 3 ? [...n.slice(0, 2), _$$t("collaboration.voice.n_others", {
+  e = n.length > 3 ? [...n.slice(0, 2), getI18nString("collaboration.voice.n_others", {
     numUsers: n.length - 2
   })] : n;
   let d = jsx(T, {
     children: e
   });
-  return tx("collaboration.voice.are_talking_in_this_file", {
+  return renderI18nText("collaboration.voice.are_talking_in_this_file", {
     numVoiceUsers: e.length,
     voiceUserNames: d,
     joinText: jsx("b", {
-      children: tx("collaboration.voice.join_lower")
+      children: renderI18nText("collaboration.voice.join_lower")
     })
   });
 }

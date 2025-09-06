@@ -3,11 +3,11 @@ import { useState, useRef, useCallback, useEffect } from "react";
 import { J } from "../905/614223";
 import { Egt } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
-import { fp, Xr, md } from "../figma_app/27355";
-import { az } from "../905/449184";
+import { useAtomValueAndSetter, Xr, useAtomWithSubscription } from "../figma_app/27355";
+import { analyticsEventManager } from "../905/449184";
 import { buildUploadUrl } from "../figma_app/169182";
 import { $z } from "../figma_app/617427";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { cR } from "../figma_app/297957";
 import { c as _$$c } from "../905/370443";
 import { E as _$$E } from "../905/453826";
@@ -70,12 +70,12 @@ function N({
     width: 240,
     children: [jsx("div", {
       className: Xq,
-      children: _$$t("dev_handoff.rfd_signals_upsell.mark_as_ready")
+      children: getI18nString("dev_handoff.rfd_signals_upsell.mark_as_ready")
     }), jsx("div", {
       className: O6,
       children: jsx("div", {
         className: zu,
-        children: _$$t("dev_handoff.rfd_signals_upsell.description")
+        children: getI18nString("dev_handoff.rfd_signals_upsell.description")
       })
     }), jsx("div", {
       className: JP,
@@ -89,14 +89,14 @@ function N({
           onClick: function () {
             e && (t(), z4.setNodesReady(!0, [e], "dev-node-change-upsell", null));
           },
-          children: _$$t("dev_handoff.rfd_signals_upsell.mark_ready_for_dev")
+          children: getI18nString("dev_handoff.rfd_signals_upsell.mark_ready_for_dev")
         })
       })
     })]
   });
 }
 function $$A(e) {
-  az.trackDefinedEvent("activation.rfd_signal_upsell.disqualification_reason", {
+  analyticsEventManager.trackDefinedEvent("activation.rfd_signal_upsell.disqualification_reason", {
     reason: e,
     upsellSubject: "page"
   });
@@ -104,9 +104,9 @@ function $$A(e) {
 export function $$O1() {
   let [e, t] = useState("show_page_tooltip");
   let [i, d] = useState(null);
-  let [c, _] = fp(hj);
+  let [c, _] = useAtomValueAndSetter(hj);
   let y = Xr(d1);
-  let O = md(Sp);
+  let O = useAtomWithSubscription(Sp);
   let L = Xr(Sp);
   let R = Z("dev-handoff-rfd-signals-page-upsell");
   let D = cR();
@@ -192,7 +192,7 @@ export function $$O1() {
     width: 240,
     children: [jsx("div", {
       className: Rg,
-      children: _$$t("dev_handoff.rfd_signals_upsell.title")
+      children: getI18nString("dev_handoff.rfd_signals_upsell.title")
     }), jsxs("div", {
       className: O6,
       children: [jsx("div", {
@@ -203,7 +203,7 @@ export function $$O1() {
         })
       }), jsx("div", {
         className: zu,
-        children: _$$t("dev_handoff.rfd_signals_upsell.page_upsell.description")
+        children: getI18nString("dev_handoff.rfd_signals_upsell.page_upsell.description")
       })]
     }), jsx("div", {
       className: JP,
@@ -215,7 +215,7 @@ export function $$O1() {
           },
           variant: "primary",
           onClick: U,
-          children: _$$t("dev_handoff.rfd_signals_upsell.page_upsell.show_me_how")
+          children: getI18nString("dev_handoff.rfd_signals_upsell.page_upsell.show_me_how")
         })
       })
     })]

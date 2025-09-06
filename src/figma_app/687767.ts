@@ -5,10 +5,10 @@ import { gr } from "../figma_app/243058";
 import { oB } from "../figma_app/273493";
 import { CWU, Ez5, rXF, Z_n, HS4 } from "../figma_app/763686";
 import { sH } from "../905/871411";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { DA } from "../figma_app/191804";
 import { Ez } from "../figma_app/766708";
-import { bt } from "../905/270322";
+import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { ti } from "../figma_app/646357";
 import { UV } from "../905/438367";
 import { Cg } from "../figma_app/216057";
@@ -19,16 +19,16 @@ export function $$b3(e) {
   let t = i1(e);
   let {
     data
-  } = md(t);
+  } = useAtomWithSubscription(t);
   return !data;
 }
-let T = bt(e => e.library.local.styles);
+let T = createReduxSubscriptionAtomWithState(e => e.library.local.styles);
 export function $$I1(e) {
-  let t = md(T);
+  let t = useAtomWithSubscription(T);
   let r = i1(e);
   let {
     data
-  } = md(r);
+  } = useAtomWithSubscription(r);
   return useMemo(() => {
     if (!e) return [];
     if (!X_(e)) {
@@ -44,18 +44,18 @@ export function $$I1(e) {
   }, [e, data, t]);
 }
 function S(e) {
-  let t = md(Cg);
+  let t = useAtomWithSubscription(Cg);
   let r = i1(e);
   let {
     data
-  } = md(r);
+  } = useAtomWithSubscription(r);
   return e ? X_(e) ? data ? (data.variableIDs || []).map(e => t[e]) || [] : (console.warn("Theme no longer exists in the theme map", e), []) : (console.warn("Expected local theme", e), []) : [];
 }
 export function $$v0(e) {
   let t = i1(e);
   let {
     data
-  } = md(t);
+  } = useAtomWithSubscription(t);
   let i = data?.variableSetID || "";
   return useMemo(() => gr.isValid(i) ? CWU?.getVariableSetDefaultMode(i) ?? "" : "", [i]);
 }
@@ -136,7 +136,7 @@ export function $$C2(e) {
   let t = i1(e);
   let {
     data
-  } = md(t);
+  } = useAtomWithSubscription(t);
   let i = data?.variableSetID || "";
   let a = $$v0(e);
   let s = S(e);

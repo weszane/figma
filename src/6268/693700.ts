@@ -5,11 +5,11 @@ import { N as _$$N } from "../905/438674";
 import { o as _$$o } from "../905/89370";
 import { a as _$$a } from "../905/964520";
 import { getFeatureFlags } from "../905/601108";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import _ from "classnames";
 import { useSprigWithSampling } from "../905/99656";
 import { oW } from "../905/675859";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { a as _$$a2 } from "../6658/303587";
 import { k1 } from "../1250/428971";
 import { useDispatch } from "../vendor/514228";
@@ -46,16 +46,16 @@ function w({
     }
     c(_$$F.enqueue({
       type: x,
-      message: _$$t("dev_handoff.component_browser.bulk_mapping.selected_components_bell.description", {
+      message: getI18nString("dev_handoff.component_browser.bulk_mapping.selected_components_bell.description", {
         count: e
       }),
       button: {
         primary: {
-          text: _$$t("dev_handoff.component_browser.bulk_mapping.selected_components_bell.action_connect"),
+          text: getI18nString("dev_handoff.component_browser.bulk_mapping.selected_components_bell.action_connect"),
           action: () => (n(), !0)
         },
         secondary: {
-          text: _$$t("dev_handoff.component_browser.bulk_mapping.selected_components_bell.action_ignore"),
+          text: getI18nString("dev_handoff.component_browser.bulk_mapping.selected_components_bell.action_ignore"),
           action: () => (o(), !0)
         }
       },
@@ -171,14 +171,14 @@ function A({
     manager.isOpen || l?.();
   }, [manager.isOpen, l]);
   let p = {
-    label: _$$t("dev_handoff.component_browser.open_in_sidebar"),
+    label: getI18nString("dev_handoff.component_browser.open_in_sidebar"),
     onClick: () => i({
       event: _$$d.OpenInSidebar,
       row: e
     })
   };
   let h = [[{
-    label: _$$t("dev_handoff.component_browser.no_code_equivalent_menu"),
+    label: getI18nString("dev_handoff.component_browser.no_code_equivalent_menu"),
     onClick: () => i({
       event: _$$d.Ignore,
       row: e
@@ -187,7 +187,7 @@ function A({
   }]];
   r && h.push([p]);
   let b = [[{
-    label: _$$t("dev_handoff.component_browser.disconnect_menu"),
+    label: getI18nString("dev_handoff.component_browser.disconnect_menu"),
     onClick: () => i({
       event: _$$d.Disconnect,
       row: e
@@ -196,7 +196,7 @@ function A({
   }]];
   r && b.push([p]);
   let f = [[{
-    label: _$$t("dev_handoff.component_browser.has_code_equivalent"),
+    label: getI18nString("dev_handoff.component_browser.has_code_equivalent"),
     onClick: () => i({
       event: _$$d.HasCodeEquivalent,
       row: e
@@ -213,7 +213,7 @@ function A({
     manager,
     children: [jsx(_$$K, {
       ...g,
-      "aria-label": _$$t("dev_handoff.component_browser.more_actions"),
+      "aria-label": getI18nString("dev_handoff.component_browser.more_actions"),
       children: jsx(J, {})
     }), jsxs(mc, {
       children: [v.map((e, n) => jsx(YJ, {
@@ -226,7 +226,7 @@ function A({
         className: "component_browser_more_actions_menu--info--4QHeV",
         children: [jsx(_$$b3, {}), jsx("div", {
           className: "component_browser_more_actions_menu--infoText--4rpGc",
-          children: _$$t("dev_handoff.component_browser.code_connect_cli_only_message")
+          children: getI18nString("dev_handoff.component_browser.code_connect_cli_only_message")
         })]
       })]
     })]
@@ -331,7 +331,7 @@ export function $$q1({
             n.stopPropagation();
           },
           showButton: o,
-          children: _$$t("dev_handoff.component_browser.confirm")
+          children: getI18nString("dev_handoff.component_browser.confirm")
         })]
       });
     }
@@ -613,7 +613,7 @@ export function $$W0({
   }, [v, Sprig]);
   let H = 0 === n.length;
   let Y = useRef(null);
-  let V = md(_$$a2);
+  let V = useAtomWithSubscription(_$$a2);
   let X = getFeatureFlags().dt_component_browser_icons_flow && "icons" === V;
   let [Z, ee] = useState(null);
   let en = o ? _$$I(o) : null;
@@ -637,17 +637,17 @@ export function $$W0({
     className: Gh,
     children: [jsx("div", {
       className: t5,
-      children: _$$t("dev_handoff.component_browser.all_connected")
+      children: getI18nString("dev_handoff.component_browser.all_connected")
     }), jsx("div", {
       className: OC,
-      children: _$$t("dev_handoff.component_browser.all_connected_subtext")
+      children: getI18nString("dev_handoff.component_browser.all_connected_subtext")
     })]
   }) : jsx("div", {
     className: dg,
     children: jsx("span", {
-      children: C.length > 0 ? _$$t("dev_handoff.component_browser.no_components_search_result", {
+      children: C.length > 0 ? getI18nString("dev_handoff.component_browser.no_components_search_result", {
         searchQuery: C
-      }) : _$$t("dev_handoff.component_browser.no_results_found")
+      }) : getI18nString("dev_handoff.component_browser.no_results_found")
     })
   }) : jsxs(Fragment, {
     children: [jsx("div", {
@@ -680,7 +680,7 @@ export function $$W0({
             }), k.includes("design") && jsx("th", {
               className: m()(LU, f_),
               children: jsx("div", {
-                children: _$$t("dev_handoff.component_browser.design_component")
+                children: getI18nString("dev_handoff.component_browser.design_component")
               })
             }), k.includes("decorator") && jsx("th", {
               className: m()(LU, IO)
@@ -689,17 +689,17 @@ export function $$W0({
                 [oE]: "compact" === S
               }),
               children: jsx("div", {
-                children: _$$t("dev_handoff.component_browser.code_file_column")
+                children: getI18nString("dev_handoff.component_browser.code_file_column")
               })
             }), k.includes("variants") && jsx("th", {
               className: m()(LU, $M),
               children: jsx("div", {
-                children: _$$t("dev_handoff.component_browser.variants")
+                children: getI18nString("dev_handoff.component_browser.variants")
               })
             }), k.includes("status") && jsx("th", {
               className: m()(LU, fo),
               children: jsx("div", {
-                children: _$$t("dev_handoff.component_browser.status")
+                children: getI18nString("dev_handoff.component_browser.status")
               })
             }), k.includes("actions") && jsx("th", {
               className: m()(LU, AT)

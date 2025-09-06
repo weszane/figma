@@ -6,12 +6,12 @@ import { Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
 import { qP } from "../figma_app/806412";
 import { kt } from "../figma_app/858013";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 export function $$p0({
   open: e,
   width: t = "md",
-  title: i = tx("modal.are_you_sure"),
-  cancelText: p = tx("modal.cancel"),
+  title: i = renderI18nText("modal.are_you_sure"),
+  cancelText: p = renderI18nText("modal.cancel"),
   ...m
 }) {
   let h = m.autofocusConfirm ?? !m.destructive;

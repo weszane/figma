@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useSelector } from "../vendor/514228";
 import { EJ } from "../figma_app/930338";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { $D } from "../figma_app/789";
 import { _6 } from "../figma_app/386952";
 import { iZ } from "../905/372672";
@@ -23,10 +23,10 @@ function g(e, t, r) {
         return "";
     }
   }(r) : "";
-  return t ? _$$t("avatar.tooltip.current_user_handle", {
+  return t ? getI18nString("avatar.tooltip.current_user_handle", {
     handle: n,
     roleName: i
-  }) : _$$t("avatar.tooltip.other_user_handle", {
+  }) : getI18nString("avatar.tooltip.other_user_handle", {
     handle: n,
     roleName: i
   });

@@ -1,4 +1,4 @@
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 var $$i31 = (e => (e.FILES = "files", e.PROJECTS = "projects", e.TEAMS = "teams", e.USERS = "users", e.HUB_FILES = "hub_files", e.PUBLIC_PLUGINS = "public_plugins", e.PRIVATE_PLUGINS = "private_plugins", e.PUBLIC_PROFILES = "public_profiles", e.PUBLIC_WIDGETS = "public_widgets", e.PRIVATE_WIDGETS = "private_widgets", e))($$i31 || {});
 var $$a9 = (e => (e.RESOURCE = "resource", e.CREATOR = "creator", e.SPACE = "space", e))($$a9 || {});
 var $$s18 = (e => (e.USERS = "users", e.PROJECTS = "projects", e.TEAMS = "teams", e.ORGS = "orgs", e))($$s18 || {});
@@ -130,49 +130,49 @@ var $$R30 = (e => (e.OPEN = "open", e.CLOSE = "close", e))($$R30 || {});
 export function $$L27(e) {
   switch (e) {
     case "files":
-      return t("search.search_model_type_header.files");
+      return getI18nString("search.search_model_type_header.files");
     case "projects":
-      return t("search.search_model_type_header.projects");
+      return getI18nString("search.search_model_type_header.projects");
     case "teams":
-      return t("search.search_model_type_header.teams");
+      return getI18nString("search.search_model_type_header.teams");
     case "users":
-      return t("search.search_model_type_header.people");
+      return getI18nString("search.search_model_type_header.people");
     case "hub_files":
-      return t("search.search_model_type_header.hub_files");
+      return getI18nString("search.search_model_type_header.hub_files");
     case "public_plugins":
-      return t("search.search_model_type_header.public_plugins");
+      return getI18nString("search.search_model_type_header.public_plugins");
     case "private_plugins":
-      return t("search.search_model_type_header.private_plugins");
+      return getI18nString("search.search_model_type_header.private_plugins");
     case "public_profiles":
-      return t("search.search_model_type_header.creators");
+      return getI18nString("search.search_model_type_header.creators");
     case "public_widgets":
-      return t("search.search_model_type_header.public_widgets");
+      return getI18nString("search.search_model_type_header.public_widgets");
     case "private_widgets":
-      return t("search.search_model_type_header.private_widgets");
+      return getI18nString("search.search_model_type_header.private_widgets");
   }
 }
 export function $$P23(e) {
   switch (e) {
     case "files":
-      return t("search.search_model_type.empty_state_files");
+      return getI18nString("search.search_model_type.empty_state_files");
     case "projects":
-      return t("search.search_model_type.empty_state_projects");
+      return getI18nString("search.search_model_type.empty_state_projects");
     case "teams":
-      return t("search.search_model_type.empty_state_teams");
+      return getI18nString("search.search_model_type.empty_state_teams");
     case "users":
-      return t("search.search_model_type.empty_state_people");
+      return getI18nString("search.search_model_type.empty_state_people");
     case "hub_files":
-      return t("search.search_model_type.empty_state_hub_files");
+      return getI18nString("search.search_model_type.empty_state_hub_files");
     case "public_plugins":
-      return t("search.search_model_type.empty_state_public_plugins");
+      return getI18nString("search.search_model_type.empty_state_public_plugins");
     case "private_plugins":
-      return t("search.search_model_type.empty_state_private_plugins");
+      return getI18nString("search.search_model_type.empty_state_private_plugins");
     case "public_profiles":
-      return t("search.search_model_type.empty_state_creators");
+      return getI18nString("search.search_model_type.empty_state_creators");
     case "public_widgets":
-      return t("search.search_model_type.empty_state_public_widgets");
+      return getI18nString("search.search_model_type.empty_state_public_widgets");
     case "private_widgets":
-      return t("search.search_model_type.empty_state_private_widgets");
+      return getI18nString("search.search_model_type.empty_state_private_widgets");
     default:
       return "";
   }

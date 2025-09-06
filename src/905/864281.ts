@@ -1,18 +1,18 @@
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { u8 } from "../figma_app/976749";
 import { OC } from "../figma_app/386952";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { QB } from "../figma_app/707808";
 var $$n0;
 (e => {
   function t() {
-    let e = md(OC);
-    let t = md(u8);
+    let e = useAtomWithSubscription(OC);
+    let t = useAtomWithSubscription(u8);
     return QB(e) ? {
       monetization_surface: "file_browser"
-    } : t === nT.Whiteboard ? {
+    } : t === FEditorType.Whiteboard ? {
       monetization_surface: "figjam_editor"
-    } : t === nT.Design ? {
+    } : t === FEditorType.Design ? {
       monetization_surface: "design_editor"
     } : {
       monetization_surface: "unclassified"

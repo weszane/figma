@@ -7,7 +7,7 @@ import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
 import { qc } from "../figma_app/858013";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { Ce, to, Lo } from "../905/156213";
 import { fu } from "../figma_app/831799";
@@ -39,13 +39,13 @@ let b = Ju(function (e) {
       children: jsxs(vo, {
         children: [jsx(Y9, {
           children: jsx(hE, {
-            children: tx("resource_connection.disconnect_success_modal.project_disconnected")
+            children: renderI18nText("resource_connection.disconnect_success_modal.project_disconnected")
           })
         }), jsxs(nB, {
           scrolling: "none",
           children: [jsx("div", {
             className: _$$s.pt8.$,
-            children: tx("resource_connection.disconnect_success_modal.you_deactivated_the_connected_project", {
+            children: renderI18nText("resource_connection.disconnect_success_modal.you_deactivated_the_connected_project", {
               connectedPlanName: e.connectedPlanName,
               projectName: e.projectName,
               shareACopyLink: jsx($n, {
@@ -62,12 +62,12 @@ let b = Ju(function (e) {
                     }
                   }));
                 },
-                children: tx("resource_connection.disconnect_success_modal.share_a_copy")
+                children: renderI18nText("resource_connection.disconnect_success_modal.share_a_copy")
               })
             })
           }), jsx("div", {
             className: _$$s.pt8.pb16.$,
-            children: tx("resource_connection.disconnect_success_modal.you_now_have_space_to_create_a_new_connected_project")
+            children: renderI18nText("resource_connection.disconnect_success_modal.you_now_have_space_to_create_a_new_connected_project")
           })]
         })]
       })
@@ -92,13 +92,13 @@ let $$v0 = Ju(function (e) {
       children: jsxs(vo, {
         children: [jsx(Y9, {
           children: jsx(hE, {
-            children: tx("resource_connection.disconnect_modal.disconnect_project_name")
+            children: renderI18nText("resource_connection.disconnect_modal.disconnect_project_name")
           })
         }), jsxs(nB, {
           scrolling: "none",
           children: [jsx("div", {
             className: _$$s.pt8.$,
-            children: tx("resource_connection.disconnect_modal.all_connecting_plan_members_will_lose_access", {
+            children: renderI18nText("resource_connection.disconnect_modal.all_connecting_plan_members_will_lose_access", {
               connectingPlanName: jsx("span", {
                 className: _$$s.fontSemiBold.$,
                 children: e.connectedPlan.name
@@ -110,13 +110,13 @@ let $$v0 = Ju(function (e) {
             })
           }), jsx("div", {
             className: _$$s.pt8.$,
-            children: e.isHostPlanAdmin ? tx("resource_connection.disconnect_modal.we_recommend_you_share_a_copy", {
+            children: e.isHostPlanAdmin ? renderI18nText("resource_connection.disconnect_modal.we_recommend_you_share_a_copy", {
               learnMore: jsx("a", {
                 href: "https://help.figma.com/hc/articles/10250387712407-Transfer-a-project-or-team-to-a-different-account#h_01J5BDVCA0YGB4N1KMS59QJQ93",
                 target: "_blank",
-                children: tx("resource_connection.request_modal.learn_more")
+                children: renderI18nText("resource_connection.request_modal.learn_more")
               })
-            }) : tx("resource_connection.we_recommend_asking_for_a_copy", {
+            }) : renderI18nText("resource_connection.we_recommend_asking_for_a_copy", {
               hostPlanName: e.hostPlan.name
             })
           })]
@@ -127,7 +127,7 @@ let $$v0 = Ju(function (e) {
               onClick: () => {
                 t(Lo());
               },
-              children: tx("resource_connection.request_modal.cancel")
+              children: renderI18nText("resource_connection.request_modal.cancel")
             }), f ? jsx($n, {
               disabled: !0,
               children: jsx(qc, {})
@@ -148,7 +148,7 @@ let $$v0 = Ju(function (e) {
                       connectedPlanName: e.connectedPlan.name
                     }
                   })) : t(F.enqueue({
-                    message: _$$t("resource_connection.visual_bell.project_successfully_disconnected", {
+                    message: getI18nString("resource_connection.visual_bell.project_successfully_disconnected", {
                       projectName: e.projectName
                     })
                   }));
@@ -156,12 +156,12 @@ let $$v0 = Ju(function (e) {
                   A(!1);
                   console.error("Error disconnecting project", e);
                   t(F.enqueue({
-                    message: _$$t("resource_connection.visual_bell.generic_error"),
+                    message: getI18nString("resource_connection.visual_bell.generic_error"),
                     error: !0
                   }));
                 });
               },
-              children: tx("resource_connection.manage_modal.deactivate")
+              children: renderI18nText("resource_connection.manage_modal.deactivate")
             })]
           })
         })]

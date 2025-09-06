@@ -3,7 +3,7 @@ import { useRef, useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { I as _$$I, _Z } from "../figma_app/819288";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Dw, hm } from "../905/380385";
 import { Uu } from "../figma_app/585209";
 import { _B } from "../905/852370";
@@ -68,12 +68,12 @@ export function $$g0(e) {
         mountInputFocused: e.autofocus,
         onCancel: x,
         onSubmit: v,
-        placeholderText: e.placeholderText ? e.placeholderText : _$$t("fig_feed.add_a_comment"),
+        placeholderText: e.placeholderText ? e.placeholderText : getI18nString("fig_feed.add_a_comment"),
         recordingKey: Dw.feed,
         scrollToBottom: e.scrollToBottom ? e.scrollToBottom : lQ,
         setIsEditorFocused: g.setIsEditorFocused,
         submitOnEnter: e.submitOnEnter,
-        submitText: _$$t("comments.post"),
+        submitText: getI18nString("comments.post"),
         threadId: hm,
         threadPosition: null,
         typeahead: E,

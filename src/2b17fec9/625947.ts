@@ -4,8 +4,8 @@ import { useState, useEffect, useCallback, useMemo, useRef, useId, forwardRef, u
 import { useDispatch, useStore, useSelector } from "../vendor/514228";
 import { fp8, glU, rcl, VTL, qq, xae, NLJ, hKj, $mk, VIy, OhE, AP3, Ez5, QOV, m1T, gEE, qmM, lMj, Oin, A$i, nzw, rrT, zkO, Tcr, daH, DV9, PoC, ruz, YEY, dNx, EW4, W8Y, lyf, $6Y, wzW, KWd, gw5, KpW } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { fp as _$$fp, md as _$$md, eU as _$$eU, E3, Xr, um as _$$um } from "../figma_app/27355";
-import { FP, Ay, aJ as _$$aJ, XN, Xb } from "../figma_app/778880";
+import { useAtomValueAndSetter, useAtomWithSubscription, atom, createLocalStorageAtom, Xr, um as _$$um } from "../figma_app/27355";
+import { isMobileNotFigmaMobile, BrowserInfo, isNotMobile, isIpadDevice, isAnyMobile } from "../figma_app/778880";
 import { q8 } from "../figma_app/459490";
 import { tH as _$$tH, H4 } from "../905/751457";
 import { F as _$$F } from "../905/302958";
@@ -16,21 +16,21 @@ import { Kx, BI, rN as _$$rN, kM, yx as _$$yx, F4 } from "../figma_app/546509";
 import { IT } from "../905/713695";
 import { W as _$$W } from "../441/503702";
 import { ut as _$$ut, J2 } from "../figma_app/84367";
-import { nT as _$$nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { A as _$$A } from "../9410/188255";
 import { pO as _$$pO } from "../figma_app/42945";
 import { J as _$$J } from "../642/485582";
 import { Fl, wW } from "../figma_app/656450";
 import { iZ as _$$iZ, TA } from "../905/372672";
 import { LQ, MX, h1 as _$$h, wm } from "../905/77316";
-import { t as _$$t, tx as _$$tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { _X as _$$_X, Yb, ZT, Z0, Pl, kE } from "../figma_app/62612";
 import { E as _$$E } from "../905/486517";
 import { ri as _$$ri, f6 as _$$f } from "../905/337179";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { l7 as _$$l, nc as _$$nc, zk } from "../905/189185";
 import { U as _$$U, am as _$$am } from "../figma_app/901889";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { MZ, Dy } from "../figma_app/925970";
 import { b as _$$b } from "../905/985254";
 import { tS as _$$tS, q5 } from "../figma_app/516028";
@@ -59,7 +59,7 @@ import { A as _$$A2 } from "../905/251970";
 import { xk as _$$xk, Ay as _$$Ay } from "@stylexjs/stylex";
 import e_ from "classnames";
 import { A as _$$A3 } from "../vendor/90566";
-import { az as _$$az, sx as _$$sx } from "../905/449184";
+import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { h as _$$h2 } from "../905/207101";
 import { W6, ez as _$$ez, U9, Fk, Ch } from "../905/125333";
 import { P as _$$P } from "../905/347284";
@@ -90,7 +90,7 @@ import { uU as _$$uU, m4 as _$$m3, $I, WB, Fu, WH, VL, HW, xB as _$$xB, nN as _$
 import { Te } from "../vendor/813803";
 import { e as _$$e3 } from "../905/916195";
 import { getInitialOptions, getLocaleFallbacks, buildUploadUrl } from "../figma_app/169182";
-import { x1 as _$$x2, ED } from "../905/714362";
+import { logError, logDebug } from "../905/714362";
 import { B as _$$B } from "../905/714743";
 import { Eo } from "../figma_app/80990";
 import { Y5 } from "../figma_app/455680";
@@ -168,7 +168,7 @@ import { Zk, xw as _$$xw, QY } from "../9410/351585";
 import { l as _$$l4 } from "../9410/990893";
 import { H as _$$H2 } from "../9410/25542";
 import { t as _$$t3 } from "../905/150656";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { IT as _$$IT } from "../figma_app/566371";
 import { a as _$$a2 } from "../905/925868";
 import { YQ } from "../905/502364";
@@ -290,7 +290,7 @@ import { K as _$$K2 } from "../1291/825015";
 import { E2, Hr } from "../905/257019";
 import { bL as _$$bL, l9 as _$$l6, mc as _$$mc, c$ as _$$c$2, wv as _$$wv2 } from "../905/493196";
 import { h as _$$h6 } from "../905/270045";
-import { eD as _$$eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { SI } from "../905/116101";
 import { W as _$$W4 } from "../2b17fec9/950005";
 import { k as _$$k4 } from "../905/443820";
@@ -346,7 +346,7 @@ import { dO as _$$dO, xc as _$$xc, JV, KL, ft as _$$ft, Ac, zS as _$$zS, H4 as _
 import { wg, sM as _$$sM, FN as _$$FN, hZ as _$$hZ, Zj as _$$Zj, fV as _$$fV, LY, es as _$$es2, jJ as _$$jJ, UH as _$$UH, Oo, TQ, fF as _$$fF, assertNotNullish, Cb, w4 as _$$w2, Uy, Cd } from "../figma_app/610446";
 import { k as _$$k5 } from "../905/44647";
 import { P as _$$P3 } from "../vendor/348225";
-import { nl as _$$nl2 } from "../figma_app/257275";
+import { isInteractionPathCheck } from "../figma_app/897289";
 import { Fu as _$$Fu } from "../figma_app/545877";
 import { O1, KD } from "../figma_app/317394";
 import { q as _$$q3 } from "../905/924253";
@@ -366,7 +366,7 @@ import { v5, YW as _$$YW } from "../vendor/231521";
 import { bk as _$$bk, mK as _$$mK, NB, Wn } from "../vendor/693164";
 import { DF as _$$DF } from "../vendor/463802";
 import { Ni, lJ as _$$lJ, R1 as _$$R3, Jj, OX, vJ, I2, $$if } from "../vendor/408361";
-import { QP as _$$QP } from "../figma_app/656233";
+import { randomPick } from "../figma_app/656233";
 import { a as _$$a7 } from "../vendor/683966";
 import { A as _$$A14 } from "../vendor/211731";
 import { G as _$$G4 } from "../vendor/947080";
@@ -466,7 +466,7 @@ import { b as _$$b7, bL as _$$bL3, mc as _$$mc2, r1 as _$$r4, wv as _$$wv3, Ov, 
 import { z6, CU } from "../905/963340";
 import { r as _$$r5, Q as _$$Q3 } from "../figma_app/67145";
 import { g as _$$g6 } from "../905/880308";
-import { EZ } from "../figma_app/363242";
+import { isPrimaryLocaleEnglish } from "../figma_app/363242";
 import { c$ as _$$c$3, l6 as _$$l9, uQ as _$$uQ2, sK as _$$sK } from "../905/794875";
 import { V as _$$V4 } from "../figma_app/144634";
 import { K0, $n as _$$$n, W1, wv as _$$wv4 } from "../figma_app/439493";
@@ -616,7 +616,7 @@ import { u as _$$u4 } from "../905/591949";
 import { A as _$$A72 } from "../svg/854311";
 import { A as _$$A73 } from "../6828/493300";
 import { M as _$$M6 } from "../figma_app/750676";
-import { eM as _$$eM, pb as _$$pb } from "../figma_app/469876";
+import { isGoogleMeetIntegration, IntegrationUtils } from "../figma_app/469876";
 import { Lk } from "../figma_app/122682";
 import { S as _$$S4 } from "../3682/343085";
 import { _Y as _$$_Y2 } from "../figma_app/162807";
@@ -758,7 +758,7 @@ function D(e) {
     typeahead,
     width: 300,
     ...x,
-    getAdditionalMetadata: e => "has_permission" in e && !e.has_permission ? _$$t("whiteboard.editor_mentions_typeahead.not_in_file") : null,
+    getAdditionalMetadata: e => "has_permission" in e && !e.has_permission ? getI18nString("whiteboard.editor_mentions_typeahead.not_in_file") : null,
     zIndex: M
   });
 }
@@ -790,11 +790,11 @@ async function Y(e, t, i, n, r, a) {
       forwardToDatadog: !0
     });
     a && r(_$$F.enqueue({
-      message: _$$t("whiteboard.visual_bell.canvas_at_mentions_mentioned_user_will_be_invited_to_file", {
+      message: getI18nString("whiteboard.visual_bell.canvas_at_mentions_mentioned_user_will_be_invited_to_file", {
         handle: n.handle
       }),
       button: {
-        text: _$$t("whiteboard.visual_bell.canvas_at_mentions_mentioned_undo_invite"),
+        text: getI18nString("whiteboard.visual_bell.canvas_at_mentions_mentioned_undo_invite"),
         action: () => {
           trackEventForFile("canvas_mention_undo_invite", {
             ...p,
@@ -811,22 +811,22 @@ async function Y(e, t, i, n, r, a) {
       }
     }));
   } catch (e) {
-    $D(_$$e.FIGJAM, e);
+    reportError(_$$e.FIGJAM, e);
   }
 }
 function X() {
   let e = useDispatch();
   let t = _$$iZ();
-  let [i, n] = _$$fp(LQ);
-  let r = _$$md(MX);
+  let [i, n] = useAtomValueAndSetter(LQ);
+  let r = useAtomWithSubscription(MX);
   let {
     onInsert,
     onClear
   } = function (e) {
     let t = useDispatch();
-    let [i, n] = _$$fp(LQ);
-    let [r, a] = _$$fp(_$$h);
-    let [s, o] = _$$fp(wm);
+    let [i, n] = useAtomValueAndSetter(LQ);
+    let [r, a] = useAtomValueAndSetter(_$$h);
+    let [s, o] = useAtomValueAndSetter(wm);
     let u = zW({
       checkPermissions: _$$m.VIEW_OR_PENDING
     });
@@ -914,11 +914,11 @@ var eR = ek;
 var eD = eM;
 let eU = new _$$J2();
 let eF = new AW();
-let eH = () => new Map([["SQUARE", [_$$t("whiteboard.shape_keywords.rectangle")]], ["ELLIPSE", [_$$t("whiteboard.shape_keywords.circle"), _$$t("whiteboard.shape_keywords.connector")]], ["ROUNDED_RECTANGLE", [_$$t("whiteboard.shape_keywords.pill"), _$$t("whiteboard.shape_keywords.terminator")]], ["DIAMOND", [_$$t("whiteboard.shape_keywords.decision")]], ["TRIANGLE_UP", []], ["TRIANGLE_DOWN", [_$$t("whiteboard.shape_keywords.merge")]], ["PARALLELOGRAM_RIGHT", [_$$t("whiteboard.shape_keywords.data"), _$$t("whiteboard.shape_keywords.input"), _$$t("whiteboard.shape_keywords.output")]], ["PARALLELOGRAM_LEFT", [_$$t("whiteboard.shape_keywords.data"), _$$t("whiteboard.shape_keywords.input"), _$$t("whiteboard.shape_keywords.output")]], ["ENG_DATABASE", [_$$t("whiteboard.shape_keywords.database")]], ["ENG_QUEUE", [_$$t("whiteboard.shape_keywords.data"), _$$t("whiteboard.shape_keywords.storage"), _$$t("whiteboard.shape_keywords.queue")]], ["ENG_FILE", []], ["ENG_FOLDER", []], ["TRAPEZOID", [_$$t("whiteboard.shape_keywords.manual_operation")]], ["STAR", []], ["SHIELD", [_$$t("whiteboard.shape_keywords.off_page_connector")]], ["HEXAGON", [_$$t("whiteboard.shape_keywords.preparation")]], ["PENTAGON", []], ["OCTAGON", []], ["PLUS", [_$$t("whiteboard.shape_keywords.cross"), _$$t("whiteboard.shape_keywords.and")]], ["PREDEFINED_PROCESS", []], ["MANUAL_INPUT", []], ["CHEVRON", [_$$t("whiteboard.shape_keywords.step"), _$$t("whiteboard.shape_keywords.process")]], ["DOCUMENT_SINGLE", []], ["DOCUMENT_MULTIPLE", []], ["ARROW_LEFT", []], ["ARROW_RIGHT", []], ["SUMMING_JUNCTION", [_$$t("whiteboard.shape_keywords.and")]], ["OR", []], ["SPEECH_BUBBLE", [_$$t("whiteboard.shape_keywords.comment"), _$$t("whiteboard.shape_keywords.quote")]], ["INTERNAL_STORAGE", []]]);
+let eH = () => new Map([["SQUARE", [getI18nString("whiteboard.shape_keywords.rectangle")]], ["ELLIPSE", [getI18nString("whiteboard.shape_keywords.circle"), getI18nString("whiteboard.shape_keywords.connector")]], ["ROUNDED_RECTANGLE", [getI18nString("whiteboard.shape_keywords.pill"), getI18nString("whiteboard.shape_keywords.terminator")]], ["DIAMOND", [getI18nString("whiteboard.shape_keywords.decision")]], ["TRIANGLE_UP", []], ["TRIANGLE_DOWN", [getI18nString("whiteboard.shape_keywords.merge")]], ["PARALLELOGRAM_RIGHT", [getI18nString("whiteboard.shape_keywords.data"), getI18nString("whiteboard.shape_keywords.input"), getI18nString("whiteboard.shape_keywords.output")]], ["PARALLELOGRAM_LEFT", [getI18nString("whiteboard.shape_keywords.data"), getI18nString("whiteboard.shape_keywords.input"), getI18nString("whiteboard.shape_keywords.output")]], ["ENG_DATABASE", [getI18nString("whiteboard.shape_keywords.database")]], ["ENG_QUEUE", [getI18nString("whiteboard.shape_keywords.data"), getI18nString("whiteboard.shape_keywords.storage"), getI18nString("whiteboard.shape_keywords.queue")]], ["ENG_FILE", []], ["ENG_FOLDER", []], ["TRAPEZOID", [getI18nString("whiteboard.shape_keywords.manual_operation")]], ["STAR", []], ["SHIELD", [getI18nString("whiteboard.shape_keywords.off_page_connector")]], ["HEXAGON", [getI18nString("whiteboard.shape_keywords.preparation")]], ["PENTAGON", []], ["OCTAGON", []], ["PLUS", [getI18nString("whiteboard.shape_keywords.cross"), getI18nString("whiteboard.shape_keywords.and")]], ["PREDEFINED_PROCESS", []], ["MANUAL_INPUT", []], ["CHEVRON", [getI18nString("whiteboard.shape_keywords.step"), getI18nString("whiteboard.shape_keywords.process")]], ["DOCUMENT_SINGLE", []], ["DOCUMENT_MULTIPLE", []], ["ARROW_LEFT", []], ["ARROW_RIGHT", []], ["SUMMING_JUNCTION", [getI18nString("whiteboard.shape_keywords.and")]], ["OR", []], ["SPEECH_BUBBLE", [getI18nString("whiteboard.shape_keywords.comment"), getI18nString("whiteboard.shape_keywords.quote")]], ["INTERNAL_STORAGE", []]]);
 function eB(e) {
   return [eU.format(e).toLowerCase(), ...((n || (n = eH()), n).get(e) || [])];
 }
-let eV = () => new Map([["ELBOWED", [_$$t("whiteboard.connector_keywords.angled"), _$$t("whiteboard.connector_keywords.arrow"), _$$t("whiteboard.connector_keywords.bent"), _$$t("whiteboard.shape_keywords.connector"), _$$t("whiteboard.connector_keywords.curved"), _$$t("whiteboard.connector_keywords.elbowed"), _$$t("whiteboard.connector_keywords.edge"), _$$t("whiteboard.connector_keywords.line"), _$$t("whiteboard.connector_keywords.turn")]], ["STRAIGHT", [_$$t("whiteboard.connector_keywords.arrow"), _$$t("whiteboard.connector_keywords.edge"), _$$t("whiteboard.shape_keywords.connector"), _$$t("whiteboard.connector_keywords.line"), _$$t("whiteboard.connector_keywords.straight")]], ["STRAIGHT_NO_ENDPOINTS", [_$$t("whiteboard.connector_keywords.edge"), _$$t("whiteboard.shape_keywords.connector"), _$$t("whiteboard.connector_keywords.line"), _$$t("whiteboard.connector_keywords.straight")]], ["CURVED", [_$$t("whiteboard.connector_keywords.angled"), _$$t("whiteboard.connector_keywords.arrow"), _$$t("whiteboard.connector_keywords.bent"), _$$t("whiteboard.shape_keywords.connector"), _$$t("whiteboard.connector_keywords.edge"), _$$t("whiteboard.connector_keywords.line"), _$$t("whiteboard.connector_keywords.turn"), _$$t("whiteboard.connector_keywords.curved")]]]);
+let eV = () => new Map([["ELBOWED", [getI18nString("whiteboard.connector_keywords.angled"), getI18nString("whiteboard.connector_keywords.arrow"), getI18nString("whiteboard.connector_keywords.bent"), getI18nString("whiteboard.shape_keywords.connector"), getI18nString("whiteboard.connector_keywords.curved"), getI18nString("whiteboard.connector_keywords.elbowed"), getI18nString("whiteboard.connector_keywords.edge"), getI18nString("whiteboard.connector_keywords.line"), getI18nString("whiteboard.connector_keywords.turn")]], ["STRAIGHT", [getI18nString("whiteboard.connector_keywords.arrow"), getI18nString("whiteboard.connector_keywords.edge"), getI18nString("whiteboard.shape_keywords.connector"), getI18nString("whiteboard.connector_keywords.line"), getI18nString("whiteboard.connector_keywords.straight")]], ["STRAIGHT_NO_ENDPOINTS", [getI18nString("whiteboard.connector_keywords.edge"), getI18nString("whiteboard.shape_keywords.connector"), getI18nString("whiteboard.connector_keywords.line"), getI18nString("whiteboard.connector_keywords.straight")]], ["CURVED", [getI18nString("whiteboard.connector_keywords.angled"), getI18nString("whiteboard.connector_keywords.arrow"), getI18nString("whiteboard.connector_keywords.bent"), getI18nString("whiteboard.shape_keywords.connector"), getI18nString("whiteboard.connector_keywords.edge"), getI18nString("whiteboard.connector_keywords.line"), getI18nString("whiteboard.connector_keywords.turn"), getI18nString("whiteboard.connector_keywords.curved")]]]);
 let eK = new _$$kv();
 let eW = "DEFAULT_CONTAINING_FRAME_PLACEHOLDER";
 let ez = new Map();
@@ -993,9 +993,9 @@ function eX(e, t) {
 let eq = e => e.toLowerCase().trim();
 let eJ = e => eq(e).split(/\s+/);
 function eQ(e, t) {
-  let i = eJ(_$$t("whiteboard.shapes_sidebar.connections"));
-  let n = eJ(_$$t("whiteboard.shapes_sidebar.connectors"));
-  let a = eJ(_$$t("whiteboard.shapes.mindmap"));
+  let i = eJ(getI18nString("whiteboard.shapes_sidebar.connections"));
+  let n = eJ(getI18nString("whiteboard.shapes_sidebar.connectors"));
+  let a = eJ(getI18nString("whiteboard.shapes.mindmap"));
   let s = eJ(t);
   return e.filter(e => "MINDMAP_TREE_NUCLEUS" === e ? eX(s, [...i, ...a]) : eX(s, [...i, ...n, ...[eF.format(e).toLowerCase(), ...((r || (r = eV()), r).get(e) || [])].reduce((e, t) => [...e, ...eJ(t)], [])]));
 }
@@ -1035,13 +1035,13 @@ function e1(e, t) {
   });
   return i;
 }
-let ti = _$$eU({});
-let tn = E3("diagramming-shapes-sidebar-section-expanded-state", {});
+let ti = atom({});
+let tn = createLocalStorageAtom("diagramming-shapes-sidebar-section-expanded-state", {});
 var tr = (e => (e[e.Recents = 0] = "Recents", e[e.Connectors = 1] = "Connectors", e[e.SWT = 2] = "SWT", e[e.Advanced = 3] = "Advanced", e[e.OtherLibrary = 4] = "OtherLibrary", e[e.OtherLibraryCategory = 5] = "OtherLibraryCategory", e))(tr || {});
 function ta(e) {
-  let t = _$$md(_$$Ai);
-  let i = _$$fp(ti);
-  let n = _$$fp(tn);
+  let t = useAtomWithSubscription(_$$Ai);
+  let i = useAtomValueAndSetter(ti);
+  let n = useAtomValueAndSetter(tn);
   return useMemo(() => {
     let r = [];
     for (let {
@@ -1160,9 +1160,9 @@ function tc({
     }), jsx("div", {
       className: "xm2njfp x8x9d4c",
       children: t ? jsx(_$$l2, {
-        "aria-label": _$$t("whiteboard.shapes_sidebar.collapse_section")
+        "aria-label": getI18nString("whiteboard.shapes_sidebar.collapse_section")
       }) : jsx(_$$k2, {
-        "aria-label": _$$t("whiteboard.shapes_sidebar.expand_section")
+        "aria-label": getI18nString("whiteboard.shapes_sidebar.expand_section")
       })
     })]
   });
@@ -1175,14 +1175,14 @@ function tu({
     className: _$$m3,
     children: [jsx("div", {
       className: "x1sf2cm4 x1j6dyjg x2b8uid x1e56ztr",
-      children: e ? _$$t("whiteboard.shapes_sidebar.upgrade_cta.library", {
+      children: e ? getI18nString("whiteboard.shapes_sidebar.upgrade_cta.library", {
         libraryTitle: e
-      }) : _$$t("whiteboard.shapes_sidebar.upgrade_cta")
+      }) : getI18nString("whiteboard.shapes_sidebar.upgrade_cta")
     }), jsx(Pw, {
       onClick: t,
       children: jsx("span", {
         ..._$$xk(_$$g.textBodyMediumStrong),
-        children: _$$t("whiteboard.shapes_sidebar.view_plans")
+        children: getI18nString("whiteboard.shapes_sidebar.view_plans")
       })
     })]
   });
@@ -1191,14 +1191,14 @@ let th = "shapes_sidebar_empty_search_result--emptyResultsLabelQuery--SQlGl";
 function tm({
   query: e
 }) {
-  let [t, i] = _$$fp(_$$ah);
-  let n = t ? _$$tx("whiteboard.shapes_sidebar.search.empty.library", {
+  let [t, i] = useAtomValueAndSetter(_$$ah);
+  let n = t ? renderI18nText("whiteboard.shapes_sidebar.search.empty.library", {
     searchQuery: jsx("span", {
       className: th,
       children: e
     }),
     libraryTitle: t
-  }) : _$$tx("whiteboard.shapes_sidebar.search.empty.global", {
+  }) : renderI18nText("whiteboard.shapes_sidebar.search.empty.global", {
     searchQuery: jsx("span", {
       className: th,
       children: e
@@ -1214,7 +1214,7 @@ function tm({
       onClick: () => i(void 0),
       children: jsx("span", {
         className: "xggk2y7 x1y0c0v0 x2b8uid",
-        children: _$$tx("whiteboard.shapes_sidebar.search.search_all")
+        children: renderI18nText("whiteboard.shapes_sidebar.search.search_all")
       })
     }) : null]
   });
@@ -1236,14 +1236,14 @@ function tE({
       try {
         await Eo.getCanvas(e);
       } catch (e) {
-        _$$x2("error", "teamLibraryItemSceneGraphCache.getCanvas", e);
+        logError("error", "teamLibraryItemSceneGraphCache.getCanvas", e);
       }
     })();
   });
   let s = r && r.id ? _$$vo(r.id, e.name) : "";
   let d = HB(e);
-  let u = _$$md(W6) === i;
-  let [h, m] = _$$fp(Hf);
+  let u = useAtomWithSubscription(W6) === i;
+  let [h, m] = useAtomValueAndSetter(Hf);
   let f = useCallback(() => {
     KG(e, i, s);
     ko({
@@ -1330,14 +1330,14 @@ function tS({
         children: _$$pf(e)
       }), n ? jsx("p", {
         className: _$$xB,
-        children: _$$t("whiteboard.shapes_sidebar.shapes_count", {
+        children: getI18nString("whiteboard.shapes_sidebar.shapes_count", {
           numShapes: n
         })
       }) : null]
     }), d ? jsx(_$$k2, {
-      "aria-label": _$$t("whiteboard.shapes_sidebar.collapse_section")
+      "aria-label": getI18nString("whiteboard.shapes_sidebar.collapse_section")
     }) : jsx(_$$l2, {
-      "aria-label": _$$t("whiteboard.shapes_sidebar.expand_section")
+      "aria-label": getI18nString("whiteboard.shapes_sidebar.expand_section")
     })]
   });
 }
@@ -1366,7 +1366,7 @@ function tw({
         children: _$$pf(e)
       }), jsx("p", {
         className: _$$xB,
-        children: _$$t("whiteboard.shapes_sidebar.shapes_count", {
+        children: getI18nString("whiteboard.shapes_sidebar.shapes_count", {
           numShapes: i
         })
       })]
@@ -1485,13 +1485,13 @@ function tM({
   metadataByLibraryKey: e
 }) {
   let t = B8();
-  let i = _$$md(_$$ez);
-  let n = _$$md(U9);
+  let i = useAtomWithSubscription(_$$ez);
+  let n = useAtomWithSubscription(U9);
   let r = _$$es();
   if (t.length < 1) return null;
   let a = t.slice(0, qA);
   return jsx(td, {
-    title: _$$t("whiteboard.shapes_sidebar.recents"),
+    title: getI18nString("whiteboard.shapes_sidebar.recents"),
     localStorageKey: tR,
     sectionType: tr.Recents,
     children: a.map(t => {
@@ -1618,16 +1618,16 @@ function tV({
       sectionType: t
     });
     let n = B8();
-    let r = _$$md(_$$ez);
-    let a = _$$md(U9);
-    let s = _$$md(_$$Ai);
+    let r = useAtomWithSubscription(_$$ez);
+    let a = useAtomWithSubscription(U9);
+    let s = useAtomWithSubscription(_$$Ai);
     let l = _$$es();
     if (n.length < 1 || s) return [];
     let d = n.slice(0, qA);
     return tB({
       isExpanded: i,
       headerInfo: {
-        title: _$$t("whiteboard.shapes_sidebar.recents"),
+        title: getI18nString("whiteboard.shapes_sidebar.recents"),
         localStorageKey: tR,
         sectionType: t
       },
@@ -1670,7 +1670,7 @@ function tV({
       isExpanded: l,
       items: e,
       headerInfo: {
-        title: a ? _$$t("whiteboard.shapes_sidebar.connections") : _$$t("whiteboard.shapes_sidebar.connectors"),
+        title: a ? getI18nString("whiteboard.shapes_sidebar.connections") : getI18nString("whiteboard.shapes_sidebar.connectors"),
         localStorageKey: tG,
         sectionType: s
       },
@@ -1743,8 +1743,8 @@ function tV({
     metadataByLibraryKey: t
   }) {
     let i = _$$es();
-    let n = _$$md(_$$Ai);
-    let r = !!_$$md(_$$ah);
+    let n = useAtomWithSubscription(_$$Ai);
+    let r = !!useAtomWithSubscription(_$$ah);
     let a = e.reduce((e, t) => (e[t.title] || (e[t.title] = []), e[t.title]?.push(t), e), {});
     let s = [];
     for (let [, e] of Object.entries(a)) {
@@ -1815,8 +1815,8 @@ function tV({
     shapeLibraryData: e.shapeLibraryData,
     metadataByLibraryKey: r
   });
-  let h = _$$md(_$$Ai);
-  let m = !!_$$md(_$$ah);
+  let h = useAtomWithSubscription(_$$Ai);
+  let m = !!useAtomWithSubscription(_$$ah);
   let f = useMemo(() => h && eY(e) ? [{
     element: jsx(tm, {
       query: n
@@ -1870,7 +1870,7 @@ function tK({
   let r = vz();
   let a = AE();
   return jsx(td, {
-    title: a ? _$$t("whiteboard.shapes_sidebar.connections") : _$$t("whiteboard.shapes_sidebar.connectors"),
+    title: a ? getI18nString("whiteboard.shapes_sidebar.connections") : getI18nString("whiteboard.shapes_sidebar.connectors"),
     localStorageKey: tG,
     sectionType: tr.Connectors,
     children: e.map(e => "MINDMAP_TREE_NUCLEUS" === e ? jsx(_$$h3, {
@@ -1938,7 +1938,7 @@ function tz({
       "data-testid": `platform-shapes-split-panel-${Pr}-other-libraries`,
       children: jsx("span", {
         className: "x98rzlu xuxw1ft xb3r6kr xlyipyv x1db2dqx",
-        children: _$$t("whiteboard.shapes_sidebar.other_libraries")
+        children: getI18nString("whiteboard.shapes_sidebar.other_libraries")
       })
     }), jsx(_$$P, {
       horizontalScrollingDisabled: !0,
@@ -1955,7 +1955,7 @@ function tz({
             icon: Nd(e),
             count: i.reduce((e, t) => e + t.items.length, 0),
             onClick: () => {
-              _$$az.trackDefinedEvent("figjam_advanced_diagramming.shapes_sidebar_library_open", {
+              analyticsEventManager.trackDefinedEvent("figjam_advanced_diagramming.shapes_sidebar_library_open", {
                 libraryTitle: e,
                 libraryKey: n
               });
@@ -1982,20 +1982,20 @@ function tZ() {
 }
 function t$() {
   let e = U1();
-  let t = _$$md(_$$ah);
-  let i = _$$md(_$$ez);
-  let n = _$$md(U9);
+  let t = useAtomWithSubscription(_$$ah);
+  let i = useAtomWithSubscription(_$$ez);
+  let n = useAtomWithSubscription(U9);
   let {
     libraryItems,
     metadata
   } = _$$uE();
-  let [s, d] = _$$fp(Hf);
-  let [c, h] = _$$fp(_$$oW);
-  let [m, f] = _$$fp(_$$Ai);
+  let [s, d] = useAtomValueAndSetter(Hf);
+  let [c, h] = useAtomValueAndSetter(_$$oW);
+  let [m, f] = useAtomValueAndSetter(_$$Ai);
   let _ = !!t;
   let x = Xr(ti);
   let g = _$$es();
-  let [j, b] = _$$fp(_$$sz);
+  let [j, b] = useAtomValueAndSetter(_$$sz);
   let y = useRef(null);
   _$$h2(() => {
     void 0 === j && b(y.current ? y.current.clientHeight - Zu : 550);
@@ -2032,7 +2032,7 @@ function t$() {
       shapeLibraryData: e1(shapeLibraryData, e),
       connectorData: eQ(connectorData, e)
     });
-    h(t => ("" === t && _$$az.trackDefinedEvent("figjam_advanced_diagramming.shapes_sidebar_search", {}), e));
+    h(t => ("" === t && analyticsEventManager.trackDefinedEvent("figjam_advanced_diagramming.shapes_sidebar_search", {}), e));
     d(_$$vD({
       searchState: s,
       query: e,
@@ -2153,7 +2153,7 @@ function tY({
       onClick: () => {
         t(void 0);
       },
-      "aria-label": _$$t("whiteboard.shapes_sidebar.back"),
+      "aria-label": getI18nString("whiteboard.shapes_sidebar.back"),
       children: jsx(_$$C, {})
     }), jsx("div", {
       className: "xlup9mm x20nx6h",
@@ -2176,7 +2176,7 @@ function tX({
       htmlAttributes: {
         "data-testid": _$$m2
       },
-      "aria-label": _$$t("canvas_search.filter.remove"),
+      "aria-label": getI18nString("canvas_search.filter.remove"),
       onClick: t,
       children: jsx(_$$f2, {})
     })]
@@ -2194,7 +2194,7 @@ function tJ({
   query: n,
   metadataByLibraryKey: r
 }) {
-  let a = _$$md(_$$Ai);
+  let a = useAtomWithSubscription(_$$Ai);
   return a && eY(e) ? jsx(tm, {
     query: n
   }) : jsxs("div", {
@@ -2235,12 +2235,12 @@ function tQ({
   handleSearch: t
 }) {
   let i = Kx();
-  let [n, r] = _$$fp(_$$ah);
+  let [n, r] = useAtomValueAndSetter(_$$ah);
   let a = useCallback(() => t(""), [t]);
   let s = ke();
-  let d = n ? _$$t("whiteboard.shapes_sidebar.search_shapes_in_category", {
+  let d = n ? getI18nString("whiteboard.shapes_sidebar.search_shapes_in_category", {
     categoryTitle: n
-  }) : _$$t("whiteboard.shapes_sidebar.search_shapes");
+  }) : getI18nString("whiteboard.shapes_sidebar.search_shapes");
   return jsxs("div", {
     className: _$$s.wFull.py12.$,
     children: [jsxs("div", {
@@ -2248,11 +2248,11 @@ function tQ({
       className: _$$s.flex.flexRow.pl16.pr8.gap8.$,
       children: [jsx("div", {
         className: _$$s.itemSelfCenter.textBodyLargeStrong.flexGrow1.$,
-        children: _$$t("whiteboard.shapes_sidebar.title")
+        children: getI18nString("whiteboard.shapes_sidebar.title")
       }), jsx("div", {
         className: _$$s.flexGrow0.flex.flexRow.gap8.$,
         children: jsx(_$$K, {
-          "aria-label": _$$t("whiteboard.shapes_sidebar.close"),
+          "aria-label": getI18nString("whiteboard.shapes_sidebar.close"),
           onClick: () => {
             s();
           },
@@ -2287,7 +2287,7 @@ function tQ({
       children: jsx(tX, {
         testId: _$$_U + "-" + n,
         closeAction: () => r(void 0),
-        children: _$$tx("whiteboard.shapes_sidebar.search.token.in_library", {
+        children: renderI18nText("whiteboard.shapes_sidebar.search.token.in_library", {
           libraryTitle: jsx("span", {
             className: "xiuzu7u",
             children: _$$pf(n)
@@ -2414,11 +2414,11 @@ let i_ = forwardRef(function ({
       [iu]: e
     }),
     onClick: t,
-    "aria-label": _$$t("pages_panel.toolbar.add_pages_tooltip"),
+    "aria-label": getI18nString("pages_panel.toolbar.add_pages_tooltip"),
     ref: i,
     "aria-pressed": e,
     htmlAttributes: {
-      "data-tooltip": _$$t("pages_panel.toolbar.add_pages_tooltip"),
+      "data-tooltip": getI18nString("pages_panel.toolbar.add_pages_tooltip"),
       "data-tooltip-type": Ib.TEXT
     },
     children: jsx("span", {
@@ -2437,13 +2437,13 @@ let ix = forwardRef(function ({
   toggleDropdown: s
 }, d) {
   let c = _$$nn();
-  let u = useMemo(() => a && c ? e ? _$$t("pages_panel.toolbar.dropdown_trigger.label", {
+  let u = useMemo(() => a && c ? e ? getI18nString("pages_panel.toolbar.dropdown_trigger.label", {
     currentPageName: c,
     currentPageNumber: e,
     totalPageCount: r
-  }) : _$$t("pages_panel.toolbar.dropdown_trigger.label_without_position", {
+  }) : getI18nString("pages_panel.toolbar.dropdown_trigger.label_without_position", {
     currentPageName: c
-  }) : _$$t("pages_panel.toolbar.view_pages_tooltip"), [c, e, r, a]);
+  }) : getI18nString("pages_panel.toolbar.view_pages_tooltip"), [c, e, r, a]);
   return jsxs(_$$E2, {
     ref: d,
     "aria-controls": a && n || void 0,
@@ -2456,7 +2456,7 @@ let ix = forwardRef(function ({
     onClick: s,
     htmlAttributes: {
       "data-testid": "figjam.pages_panel.toolbar.dropdown_trigger",
-      "data-tooltip": _$$t("pages_panel.toolbar.view_pages_tooltip"),
+      "data-tooltip": getI18nString("pages_panel.toolbar.view_pages_tooltip"),
       "data-tooltip-type": Ib.TEXT,
       id: a && t || void 0
     },
@@ -2524,10 +2524,10 @@ function ij({
     className: "pages_dropdown--dropdownHeader--K3jZk",
     children: [e ? jsx("h2", {
       className: ih,
-      children: _$$t("fullscreen.pages_panel.pages")
+      children: getI18nString("fullscreen.pages_panel.pages")
     }) : jsx("span", {
       className: ih,
-      children: _$$tx("fullscreen.pages_panel.pages")
+      children: renderI18nText("fullscreen.pages_panel.pages")
     }), t && (i ? jsx(_$$t2, {}) : jsx(_$$e4, {}))]
   });
 }
@@ -2619,7 +2619,7 @@ function iN({
       onClick: () => {
         j(!0);
       },
-      "aria-label": _$$t("fullscreen_actions.expand-figjam-left-panel-with-filename", {
+      "aria-label": getI18nString("fullscreen_actions.expand-figjam-left-panel-with-filename", {
         fileName: t
       }),
       htmlAttributes: {
@@ -2639,7 +2639,7 @@ function iN({
             }
           }));
         },
-        "data-tooltip": _$$t("fullscreen_actions.expand-figjam-left-panel"),
+        "data-tooltip": getI18nString("fullscreen_actions.expand-figjam-left-panel"),
         "data-tooltip-type": Ib.TEXT
       },
       recordingKey: "figjam-panel-toggle",
@@ -2656,7 +2656,7 @@ function iN({
       dropdownVisible: r,
       leanPadding: 0,
       activatePathOnMount: n?.data?.activatePathOnMount,
-      trackEvent: _$$sx
+      trackEvent: trackEventAnalytics
     })]
   });
 }
@@ -2742,7 +2742,7 @@ let iR = forwardRef(function ({
     ref: n,
     className: ex()(Dm, "figjam_collapsed_left_panel--container--FYM0w", "figjam_collapsed_left_panel--withShapeSidebar--A1L6c"),
     style: {
-      maxWidth: FP() ? 300 : _$$g_
+      maxWidth: isMobileNotFigmaMobile() ? 300 : _$$g_
     },
     "data-onboarding-key": t,
     "data-testid": i,
@@ -2816,7 +2816,7 @@ function iG() {
     width: 81
   });
 }
-let iW = _$$eU(!1);
+let iW = atom(!1);
 function i0() {
   return jsxs(Fragment, {
     children: [jsx(i1, {}), jsx(_$$d3, {})]
@@ -2834,9 +2834,9 @@ function i1() {
         onClick: () => Y5.triggerAction("toggle-sidebar", {
           source: "figjam-left-panel-header"
         }),
-        "aria-label": _$$t("fullscreen_actions.collapse-figjam-left-panel"),
+        "aria-label": getI18nString("fullscreen_actions.collapse-figjam-left-panel"),
         htmlAttributes: {
-          "data-tooltip": _$$t("fullscreen_actions.collapse-figjam-left-panel"),
+          "data-tooltip": getI18nString("fullscreen_actions.collapse-figjam-left-panel"),
           "data-tooltip-type": Ib.TEXT
         },
         recordingKey: "figjam-collapse-expanded-left-panel",
@@ -2857,10 +2857,10 @@ function i3({
     }),
     children: [e ? jsx("h2", {
       className: i2,
-      children: _$$t("fullscreen.pages_panel.pages")
+      children: getI18nString("fullscreen.pages_panel.pages")
     }) : jsx("div", {
       className: i2,
-      children: _$$tx("fullscreen.pages_panel.pages")
+      children: renderI18nText("fullscreen.pages_panel.pages")
     }), jsx("div", {
       className: "figjam_pages_panel_header--buttonGroup--LWXvA",
       children: t && (i ? jsx(_$$t2, {
@@ -2884,7 +2884,7 @@ function i4({
   });
   let a = U1();
   let s = _$$ew();
-  let [d, c] = _$$fp(iW);
+  let [d, c] = useAtomValueAndSetter(iW);
   let u = Yg();
   let h = ke();
   let m = useRef(null);
@@ -3085,7 +3085,7 @@ let nc = memo(function () {
     children: jsxs(_$$V, {
       className: "figjam_left_panel--leftPanelContents--kBMIg",
       style: {
-        visibility: Ay.isIpadNative ? "hidden" : "visible"
+        visibility: BrowserInfo.isIpadNative ? "hidden" : "visible"
       },
       children: [s, a && jsx(tZ, {})]
     })
@@ -3142,10 +3142,10 @@ function nj() {
         onAnimationEnd: s,
         children: [jsx(_$$_2, {}), jsx("div", {
           className: "reactive_guidance_tooltip--text--Si0XF",
-          children: _$$tx("whiteboard.reactive_guidance.view_only", {
+          children: renderI18nText("whiteboard.reactive_guidance.view_only", {
             permission: jsx("span", {
               className: "reactive_guidance_tooltip--textEmphasis--VIQ6b",
-              children: _$$tx("whiteboard.reactive_guidance.view_only_permission")
+              children: renderI18nText("whiteboard.reactive_guidance.view_only_permission")
             })
           })
         }), jsx(RJ, {
@@ -3157,7 +3157,7 @@ function nj() {
           onClick: a,
           trackingEventName: "reactive_guidance_tooltip_closed",
           recordingKey: "reactiveGuidanceTooltip",
-          "aria-label": _$$t("general.close"),
+          "aria-label": getI18nString("general.close"),
           children: jsx(_$$A2, {})
         })]
       })
@@ -3385,13 +3385,13 @@ function nF({
       return jsx(nP, {
         shouldShowAvatar: t,
         avatarEntity: user,
-        text: i ? _$$tx("voting.stamp_tooltip.vote", {
+        text: i ? renderI18nText("voting.stamp_tooltip.vote", {
           userName: e
         }) : r && n !== r ? jsxs("div", {
           className: "stamp_overlay--faceStampTooltipText--bMf1l",
           children: [_user?.handle, " ", jsx("br", {}), jsx("p", {
             className: "stamp_overlay--stampedByText--fK8AK",
-            children: _$$tx("whiteboard.stamp.stamped_by_tooltip", {
+            children: renderI18nText("whiteboard.stamp.stamped_by_tooltip", {
               userName: e
             })
           })]
@@ -3403,15 +3403,15 @@ function nF({
       return jsx(nP, {
         shouldShowAvatar: t,
         avatarEntity: _user,
-        text: i ? _$$tx("voting.stamp_tooltip.vote", {
+        text: i ? renderI18nText("voting.stamp_tooltip.vote", {
           userName: e
         }) : e
       });
     }
     if (r && Fl(r) || n && Fl(n)) {
-      let e = i ? _$$tx("voting.stamp_tooltip.visitor_vote") : c ? _$$tx("voting.stamp_tooltip.visitor_with_org", {
+      let e = i ? renderI18nText("voting.stamp_tooltip.visitor_vote") : c ? renderI18nText("voting.stamp_tooltip.visitor_with_org", {
         orgName: c
-      }) : _$$tx("voting.stamp_tooltip.visitor_without_org");
+      }) : renderI18nText("voting.stamp_tooltip.visitor_without_org");
       return jsx(nP, {
         shouldShowAvatar: t,
         avatarEntity: {
@@ -3423,13 +3423,13 @@ function nF({
     return n || r ? jsx(nP, {
       shouldShowAvatar: t,
       avatarEntity: {},
-      text: _$$tx("voting.stamp_tooltip.unavailable")
+      text: renderI18nText("voting.stamp_tooltip.unavailable")
     }) : jsxs(Fragment, {
       children: [jsx(nU, {
         size: 16
       }), jsx("div", {
         className: nA,
-        children: _$$tx("voting.stamp_tooltip.old_stamp")
+        children: renderI18nText("voting.stamp_tooltip.old_stamp")
       })]
     });
   })();
@@ -3499,11 +3499,11 @@ let nB = memo(function () {
   });
 });
 let nV = memo(function () {
-  return _$$aJ() ? jsx(nB, {}) : jsx(nH, {});
+  return isNotMobile() ? jsx(nB, {}) : jsx(nH, {});
 });
 function n3() {
-  let e = _$$md(UQ);
-  let t = _$$md(zN);
+  let e = useAtomWithSubscription(UQ);
+  let t = useAtomWithSubscription(zN);
   let i = 1e3 * parseFloat(_$$H2) + 300;
   let [n, r] = useState(!1);
   return (useEffect(() => {
@@ -3511,7 +3511,7 @@ function n3() {
       r(!0);
     }, i);
     return () => clearTimeout(e);
-  }, [i]), e && "loaded" === t.status && !1 === t.data && !1 === Ay.isInNativeApp && n) ? jsx(n5, {}) : null;
+  }, [i]), e && "loaded" === t.status && !1 === t.data && !1 === BrowserInfo.isInNativeApp && n) ? jsx(n5, {}) : null;
 }
 function n5() {
   let e = useSelector(e => e.userFlags);
@@ -3520,7 +3520,7 @@ function n5() {
   let n = t?.key;
   let r = useSelector(e => e.multiplayer.sessionID);
   let a = useSelector(e => e.userAnalyticsData?.first_figjam_at);
-  let s = _$$md(Zk);
+  let s = useAtomWithSubscription(Zk);
   if (!_$$mW(e, "figjam_editor_onboarded")) return null;
   if (i) return jsx(n6, {
     teamId: i,
@@ -3577,7 +3577,7 @@ function n4(e) {
   } = e;
   let c = Xr(_$$xw);
   let u = useDispatch();
-  let h = _$$md(Zk);
+  let h = useAtomWithSubscription(Zk);
   useEffect(() => {
     c({
       showing: !0,
@@ -3641,7 +3641,7 @@ function n4(e) {
               }
             }));
           },
-          children: _$$tx("upsell.history.upgrade_now")
+          children: renderI18nText("upsell.history.upgrade_now")
         })]
       })]
     })
@@ -3650,28 +3650,28 @@ function n4(e) {
 function n9(e) {
   switch (e) {
     case "seen_fj_upsell_draft_modal_1":
-      return _$$tx("whiteboard.paywall_upsell.draft.first.main", {
-        purpleSection: re(_$$tx("whiteboard.paywall_upsell.draft.first.main.purpleSection"))
+      return renderI18nText("whiteboard.paywall_upsell.draft.first.main", {
+        purpleSection: re(renderI18nText("whiteboard.paywall_upsell.draft.first.main.purpleSection"))
       });
     case "seen_fj_upsell_draft_modal_2":
-      return _$$tx("whiteboard.paywall_upsell.draft.second.main", {
-        purpleSection: re(_$$tx("whiteboard.paywall_upsell.draft.second.main.purpleSection"))
+      return renderI18nText("whiteboard.paywall_upsell.draft.second.main", {
+        purpleSection: re(renderI18nText("whiteboard.paywall_upsell.draft.second.main.purpleSection"))
       });
     case "seen_fj_upsell_draft_modal_3":
-      return _$$tx("whiteboard.paywall_upsell.draft.third.main", {
-        purpleSection: re(_$$tx("whiteboard.paywall_upsell.draft.third.main.purpleSection"))
+      return renderI18nText("whiteboard.paywall_upsell.draft.third.main", {
+        purpleSection: re(renderI18nText("whiteboard.paywall_upsell.draft.third.main.purpleSection"))
       });
     case "seen_fj_upsell_team_modal_1":
-      return _$$tx("whiteboard.paywall_upsell.team.main", {
-        fileCount: re(_$$tx("whiteboard.paywall_upsell.team.main.first"))
+      return renderI18nText("whiteboard.paywall_upsell.team.main", {
+        fileCount: re(renderI18nText("whiteboard.paywall_upsell.team.main.first"))
       });
     case "seen_fj_upsell_team_modal_2":
-      return _$$tx("whiteboard.paywall_upsell.team.main", {
-        fileCount: re(_$$tx("whiteboard.paywall_upsell.team.main.second"))
+      return renderI18nText("whiteboard.paywall_upsell.team.main", {
+        fileCount: re(renderI18nText("whiteboard.paywall_upsell.team.main.second"))
       });
     case "seen_fj_upsell_team_modal_3":
-      return _$$tx("whiteboard.paywall_upsell.team.last.main", {
-        purpleSection: re(_$$tx("whiteboard.paywall_upsell.team.last.main.purpleSection"))
+      return renderI18nText("whiteboard.paywall_upsell.team.last.main", {
+        purpleSection: re(renderI18nText("whiteboard.paywall_upsell.team.last.main.purpleSection"))
       });
     default:
       return jsx(Fragment, {});
@@ -3680,15 +3680,15 @@ function n9(e) {
 function n8(e) {
   switch (e) {
     case "seen_fj_upsell_draft_modal_1":
-      return _$$tx("whiteboard.paywall_upsell.draft.first.secondary");
+      return renderI18nText("whiteboard.paywall_upsell.draft.first.secondary");
     case "seen_fj_upsell_draft_modal_2":
-      return _$$tx("whiteboard.paywall_upsell.draft.second.secondary");
+      return renderI18nText("whiteboard.paywall_upsell.draft.second.secondary");
     case "seen_fj_upsell_draft_modal_3":
-      return _$$tx("whiteboard.paywall_upsell.draft.third.secondary");
+      return renderI18nText("whiteboard.paywall_upsell.draft.third.secondary");
     case "seen_fj_upsell_team_modal_1":
     case "seen_fj_upsell_team_modal_2":
     case "seen_fj_upsell_team_modal_3":
-      return _$$tx("whiteboard.paywall_upsell.team.secondary");
+      return renderI18nText("whiteboard.paywall_upsell.team.secondary");
     default:
       return jsx(Fragment, {});
   }
@@ -3796,8 +3796,8 @@ function ad(e) {
     "data-not-draggable": !0,
     "data-testid": "run-cta-button",
     children: jsxs(w, {
-      onClick: Ay.isIpad ? void 0 : I,
-      onPointerDown: Ay.isIpad ? I : void 0,
+      onClick: BrowserInfo.isIpad ? void 0 : I,
+      onPointerDown: BrowserInfo.isIpad ? I : void 0,
       className: T || isPluginBlockedByAllowlist ? NY : _$$lI,
       children: [buttonCta, _ && jsx(_$$B, {
         svg: _$$A6,
@@ -3898,10 +3898,10 @@ let av = forwardRef((e, t) => {
                 }
               }));
             },
-            "aria-label": _$$t("whiteboard.inserts.plugin_development_options_tooltip"),
+            "aria-label": getI18nString("whiteboard.inserts.plugin_development_options_tooltip"),
             htmlAttributes: {
               "data-tooltip-type": Ib.TEXT,
-              "data-tooltip": _$$t("whiteboard.inserts.plugin_development_options_tooltip")
+              "data-tooltip": getI18nString("whiteboard.inserts.plugin_development_options_tooltip")
             },
             children: jsx(_$$J6, {})
           })
@@ -3914,7 +3914,7 @@ let av = forwardRef((e, t) => {
           })
         }), jsx(ad, {
           pluginId: u,
-          buttonCta: _$$t("whiteboard.inserts.plugin_run_cta"),
+          buttonCta: getI18nString("whiteboard.inserts.plugin_run_cta"),
           isNotInHeader: !1,
           view
         })]
@@ -3982,7 +3982,7 @@ let aT = memo(function (e) {
   }) : d ? jsx(aE, {
     plugin
   }) : c ? jsx(Vv, {
-    children: _$$tx("community.buyer.update")
+    children: renderI18nText("community.buyer.update")
   }) : m ? jsx("div", {
     style: _$$sx2.add({
       width: "80px"
@@ -3994,7 +3994,7 @@ let aT = memo(function (e) {
     })
   }) : jsx(ad, {
     pluginId: e.pluginId,
-    buttonCta: _$$t("whiteboard.inserts.plugin_run_cta"),
+    buttonCta: getI18nString("whiteboard.inserts.plugin_run_cta"),
     isNotInHeader: !1,
     view: e.view
   });
@@ -4156,10 +4156,10 @@ function aH(e) {
                   }
                 }));
               },
-              "aria-label": _$$t("whiteboard.inserts.widget_options"),
+              "aria-label": getI18nString("whiteboard.inserts.widget_options"),
               htmlAttributes: {
                 "data-tooltip-type": Ib.TEXT,
-                "data-tooltip": _$$t("whiteboard.inserts.widget_options")
+                "data-tooltip": getI18nString("whiteboard.inserts.widget_options")
               },
               children: jsx(_$$J6, {})
             })
@@ -4251,10 +4251,10 @@ let aV = forwardRef((e, t) => {
                 }
               }));
             },
-            "aria-label": _$$t("whiteboard.inserts.widget_options"),
+            "aria-label": getI18nString("whiteboard.inserts.widget_options"),
             htmlAttributes: {
               "data-tooltip-type": Ib.TEXT,
-              "data-tooltip": _$$t("whiteboard.inserts.widget_options")
+              "data-tooltip": getI18nString("whiteboard.inserts.widget_options")
             },
             children: jsx(_$$J6, {})
           })
@@ -4411,7 +4411,7 @@ function aX(e) {
       children: [jsx("div", {
         children: jsx("div", {
           className: aW,
-          children: _$$tx("whiteboard.inserts.widgets")
+          children: renderI18nText("whiteboard.inserts.widgets")
         })
       }), n > 0 && jsx("button", {
         className: az,
@@ -4445,7 +4445,7 @@ function aq(e) {
       children: [jsx("div", {
         children: jsx("div", {
           className: aW,
-          children: _$$tx("whiteboard.inserts.plugins")
+          children: renderI18nText("whiteboard.inserts.plugins")
         })
       }), n > 0 && jsx("button", {
         className: az,
@@ -4475,7 +4475,7 @@ function aJ(e) {
       className: aK,
       children: [jsx("div", {
         className: aW,
-        children: _$$tx("whiteboard.inserts.faces_title")
+        children: renderI18nText("whiteboard.inserts.faces_title")
       }), t.length > 5 && !e.faceStampSearchIsLoading && jsx("button", {
         className: az,
         onClick: () => {
@@ -4484,7 +4484,7 @@ function aJ(e) {
             type: Rt.ORG_FACE_STAMPS
           });
         },
-        children: _$$tx("whiteboard.inserts.see_more")
+        children: renderI18nText("whiteboard.inserts.see_more")
       })]
     }), jsx("div", {
       className: _$$ts2,
@@ -4514,7 +4514,7 @@ function aQ() {
   let {
     fileVersion,
     loadingState
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     fileVersion: e.fileVersion,
     loadingState: e.loadingState
   }));
@@ -4527,14 +4527,14 @@ function aQ() {
       children: [jsx("div", {
         children: jsx("div", {
           className: aW,
-          children: _$$tx("whiteboard.inserts.stickers")
+          children: renderI18nText("whiteboard.inserts.stickers")
         })
       }), n > 0 && jsx("button", {
         className: az,
         onClick: () => {
           e.setActiveTab(_$$p2.STICKERS_AND_COMPONENTS);
         },
-        children: _$$tx("whiteboard.inserts.see_num_more_resources", {
+        children: renderI18nText("whiteboard.inserts.see_num_more_resources", {
           numMoreResources: n
         })
       })]
@@ -4562,13 +4562,13 @@ function a0(e) {
       className: aK,
       children: [jsx("div", {
         className: aW,
-        children: _$$tx("whiteboard.inserts.templates")
+        children: renderI18nText("whiteboard.inserts.templates")
       }), a > 0 && jsx("button", {
         className: az,
         onClick: () => {
           t.setActiveTab(_$$p2.TEMPLATES);
         },
-        children: _$$tx("whiteboard.inserts.see_num_more_resources", {
+        children: renderI18nText("whiteboard.inserts.see_num_more_resources", {
           numMoreResources: a
         })
       })]
@@ -4627,8 +4627,8 @@ function sh({
 }
 function sm() {
   let e = useSelector(e => e.figjamDefaultInserts.useCases);
-  let t = e => "Brainstorm together" === e ? _$$t("whiteboard.inserts.use_cases_brainstorm_together") : "Run a meeting" === e ? _$$t("whiteboard.inserts.use_cases_run_a_meeting") : "Diagram anything" === e ? _$$t("whiteboard.inserts.use_cases_diagram_anything") : "Lead a workshop" === e ? _$$t("whiteboard.inserts.use_cases_lead_a_workshop") : "Break the ice" === e ? _$$t("whiteboard.inserts.use_cases_break_the_ice") : void 0;
-  let i = e => "Brainstorm together" === e ? _$$t("whiteboard.inserts.use_cases_brainstorm_together_description") : "Run a meeting" === e ? _$$t("whiteboard.inserts.use_cases_run_a_meeting_description") : "Diagram anything" === e ? _$$t("whiteboard.inserts.use_cases_diagram_anything_description") : "Lead a workshop" === e ? _$$t("whiteboard.inserts.use_cases_lead_a_workshop_description") : "Break the ice" === e ? _$$t("whiteboard.inserts.use_cases_break_the_ice_description") : void 0;
+  let t = e => "Brainstorm together" === e ? getI18nString("whiteboard.inserts.use_cases_brainstorm_together") : "Run a meeting" === e ? getI18nString("whiteboard.inserts.use_cases_run_a_meeting") : "Diagram anything" === e ? getI18nString("whiteboard.inserts.use_cases_diagram_anything") : "Lead a workshop" === e ? getI18nString("whiteboard.inserts.use_cases_lead_a_workshop") : "Break the ice" === e ? getI18nString("whiteboard.inserts.use_cases_break_the_ice") : void 0;
+  let i = e => "Brainstorm together" === e ? getI18nString("whiteboard.inserts.use_cases_brainstorm_together_description") : "Run a meeting" === e ? getI18nString("whiteboard.inserts.use_cases_run_a_meeting_description") : "Diagram anything" === e ? getI18nString("whiteboard.inserts.use_cases_diagram_anything_description") : "Lead a workshop" === e ? getI18nString("whiteboard.inserts.use_cases_lead_a_workshop_description") : "Break the ice" === e ? getI18nString("whiteboard.inserts.use_cases_break_the_ice_description") : void 0;
   let n = e.filter(e => !e.name.includes("Whats New"));
   return 0 === n.length ? jsx(sb, {}) : jsx(Fragment, {
     children: n.map(e => "collage_items" === e.name ? null : jsx(sh, {
@@ -4665,7 +4665,7 @@ function sf(e) {
     children: [!!i.length && jsxs(Fragment, {
       children: [jsx("div", {
         className: so,
-        children: _$$tx("whiteboard.inserts.templates")
+        children: renderI18nText("whiteboard.inserts.templates")
       }), jsx(_$$g3, {
         templates: i.map(e => ({
           type: _$$n4.HubFile,
@@ -4676,7 +4676,7 @@ function sf(e) {
     }), !!n.length && jsxs(Fragment, {
       children: [jsx("div", {
         className: so,
-        children: _$$tx("whiteboard.inserts.widgets")
+        children: renderI18nText("whiteboard.inserts.widgets")
       }), jsx("div", {
         className: "browse_resources_use_cases--widgetTilesGridContainer--gv30z browse_widgets_view--widgetTilesGridContainer--t5-lL",
         children: n.map(e => jsx(_$$E2, {
@@ -4689,7 +4689,7 @@ function sf(e) {
     }), !!r.length && jsxs(Fragment, {
       children: [jsx("div", {
         className: so,
-        children: _$$tx("whiteboard.inserts.stickers_and_components")
+        children: renderI18nText("whiteboard.inserts.stickers_and_components")
       }), jsx(_$$OS, {
         items: r,
         showContextMenu: !0
@@ -4697,7 +4697,7 @@ function sf(e) {
     }), !!a.length && jsxs(Fragment, {
       children: [jsx("div", {
         className: so,
-        children: _$$tx("whiteboard.inserts.plugins")
+        children: renderI18nText("whiteboard.inserts.plugins")
       }), jsx("div", {
         className: "browse_resources_use_cases--pluginCategoryViewPadding--e1D-M",
         children: a.map(e => jsx(_$$E2, {
@@ -4782,7 +4782,7 @@ function s_({
           className: ss,
           children: jsx("div", {
             className: ex()(sp, "browse_resources_use_cases--publisher--2akDJ"),
-            children: _$$tx("whiteboard.inserts.by_publisher_name", {
+            children: renderI18nText("whiteboard.inserts.by_publisher_name", {
               publisherName: _.name
             })
           })
@@ -4883,20 +4883,20 @@ function sj(e) {
 function sb() {
   return jsxs(Fragment, {
     children: [jsx(sy, {
-      name: _$$t("whiteboard.inserts.use_cases_brainstorm_together"),
-      description: _$$t("whiteboard.inserts.use_cases_brainstorm_together_description")
+      name: getI18nString("whiteboard.inserts.use_cases_brainstorm_together"),
+      description: getI18nString("whiteboard.inserts.use_cases_brainstorm_together_description")
     }), jsx(sy, {
-      name: _$$t("whiteboard.inserts.use_cases_run_a_meeting"),
-      description: _$$t("whiteboard.inserts.use_cases_run_a_meeting_description")
+      name: getI18nString("whiteboard.inserts.use_cases_run_a_meeting"),
+      description: getI18nString("whiteboard.inserts.use_cases_run_a_meeting_description")
     }), jsx(sy, {
-      name: _$$t("whiteboard.inserts.use_cases_diagram_anything"),
-      description: _$$t("whiteboard.inserts.use_cases_diagram_anything_description")
+      name: getI18nString("whiteboard.inserts.use_cases_diagram_anything"),
+      description: getI18nString("whiteboard.inserts.use_cases_diagram_anything_description")
     }), jsx(sy, {
-      name: _$$t("whiteboard.inserts.use_cases_lead_a_workshop"),
-      description: _$$t("whiteboard.inserts.use_cases_lead_a_workshop_description")
+      name: getI18nString("whiteboard.inserts.use_cases_lead_a_workshop"),
+      description: getI18nString("whiteboard.inserts.use_cases_lead_a_workshop_description")
     }), jsx(sy, {
-      name: _$$t("whiteboard.inserts.use_cases_break_the_ice"),
-      description: _$$t("whiteboard.inserts.use_cases_break_the_ice_description")
+      name: getI18nString("whiteboard.inserts.use_cases_break_the_ice"),
+      description: getI18nString("whiteboard.inserts.use_cases_break_the_ice_description")
     })]
   });
 }
@@ -4929,8 +4929,8 @@ function sv({
     setSelectedCategory
   } = _$$cX();
   let r = !teamTemplates?.length;
-  let a = _$$t("whiteboard.inserts.start_from_a_template");
-  let s = _$$t("whiteboard.inserts.try_handmade_templates_created_by_your_team");
+  let a = getI18nString("whiteboard.inserts.start_from_a_template");
+  let s = getI18nString("whiteboard.inserts.try_handmade_templates_created_by_your_team");
   return isLoading ? jsx(sy, {
     name: a,
     description: s,
@@ -4942,7 +4942,7 @@ function sv({
     onClick: () => setSelectedCategory({
       resourceType: Rt.TEAM_TEMPLATES,
       id: "",
-      title: _$$t("whiteboard.inserts.org_name_templates", {
+      title: getI18nString("whiteboard.inserts.org_name_templates", {
         orgName: e.name
       })
     }),
@@ -4967,7 +4967,7 @@ function sL(e) {
 function sN() {
   let {
     numVisibleTools
-  } = _$$md(Kj);
+  } = useAtomWithSubscription(Kj);
   let t = _$$hn(numVisibleTools);
   return jsx(Fragment, {
     children: t.map(({
@@ -4998,7 +4998,7 @@ function sA({
   }
 }
 function sO() {
-  let e = _$$md(_$$c4);
+  let e = useAtomWithSubscription(_$$c4);
   let t = _$$dQ();
   let i = Q6(e?.numPrimaryTools ?? 0);
   let n = t.filter(e => !i.includes(e));
@@ -5126,8 +5126,8 @@ function sz() {
   return jsxs("div", {
     className: sK,
     children: [jsx(sq, {
-      title: _$$t("whiteboard.inserts.widgets"),
-      subtitle: _$$t("whiteboard.inserts.widgets_subtitle"),
+      title: getI18nString("whiteboard.inserts.widgets"),
+      subtitle: getI18nString("whiteboard.inserts.widgets_subtitle"),
       onClick: () => e.setActiveTab(_$$p2.WIDGETS),
       showCaret: !0,
       shorterSectionHeader: !1
@@ -5139,8 +5139,8 @@ function sZ() {
   return jsxs("div", {
     className: sK,
     children: [jsx(sq, {
-      title: _$$t("whiteboard.inserts.plugins"),
-      subtitle: _$$t("whiteboard.inserts.plugins_subtitle"),
+      title: getI18nString("whiteboard.inserts.plugins"),
+      subtitle: getI18nString("whiteboard.inserts.plugins_subtitle"),
       onClick: () => e.setActiveTab(_$$p2.PLUGINS),
       showCaret: !0,
       shorterSectionHeader: !0
@@ -5152,8 +5152,8 @@ function s$() {
   return jsxs("div", {
     className: sK,
     children: [jsx(sq, {
-      title: _$$t("whiteboard.inserts.stickers"),
-      subtitle: _$$t("whiteboard.inserts.stickers_subtitle"),
+      title: getI18nString("whiteboard.inserts.stickers"),
+      subtitle: getI18nString("whiteboard.inserts.stickers_subtitle"),
       onClick: () => e.setActiveTab(_$$p2.STICKERS_AND_COMPONENTS),
       showCaret: !0,
       shorterSectionHeader: !1
@@ -5165,8 +5165,8 @@ function sY() {
   return jsxs("div", {
     className: sK,
     children: [jsx(sq, {
-      title: _$$t("whiteboard.inserts.templates"),
-      subtitle: _$$t("whiteboard.inserts.templates_subtitle"),
+      title: getI18nString("whiteboard.inserts.templates"),
+      subtitle: getI18nString("whiteboard.inserts.templates_subtitle"),
       onClick: () => e.setActiveTab(_$$p2.TEMPLATES),
       showCaret: !0,
       shorterSectionHeader: !1
@@ -5178,7 +5178,7 @@ function sX() {
   return jsxs("div", {
     className: sK,
     children: [jsx(sq, {
-      title: _$$t("whiteboard.inserts.more"),
+      title: getI18nString("whiteboard.inserts.more"),
       onClick: () => e.setActiveTab(_$$p2.MORE),
       showCaret: !0,
       shorterSectionHeader: !0
@@ -5372,7 +5372,7 @@ function s8(e) {
     children: [p && jsxs(Fragment, {
       children: [jsx("div", {
         className: s9,
-        children: _$$tx("whiteboard.inserts.plugin_recents")
+        children: renderI18nText("whiteboard.inserts.plugin_recents")
       }), savedSearchResultIds.map(e => jsx(aC, {
         pluginId: e,
         view: _$$p2.SAVED
@@ -5380,7 +5380,7 @@ function s8(e) {
     }), m && jsxs(Fragment, {
       children: [jsx("div", {
         className: s9,
-        children: _$$tx("whiteboard.inserts.development")
+        children: renderI18nText("whiteboard.inserts.development")
       }), developmentSearchResultIds.map(e => jsx(av, {
         localFileId: e,
         view: _$$p2.DEVELOPMENT
@@ -5388,7 +5388,7 @@ function s8(e) {
     }), f && jsxs(Fragment, {
       children: [jsx("div", {
         className: s9,
-        children: _$$tx("whiteboard.inserts.plugin_from_org", {
+        children: renderI18nText("whiteboard.inserts.plugin_from_org", {
           orgName: u.name
         })
       }), orgSearchResultIds.map(e => jsx(aC, {
@@ -5398,7 +5398,7 @@ function s8(e) {
     }), h && jsxs(Fragment, {
       children: [jsx("div", {
         className: s9,
-        children: _$$tx("whiteboard.inserts.plugin_from_community")
+        children: renderI18nText("whiteboard.inserts.plugin_from_community")
       }), communitySearchResultIds.map(e => jsx(aC, {
         pluginId: e,
         view: _$$p2.EXPLORE
@@ -5467,7 +5467,7 @@ function ol(e) {
   return s ? 0 === u.length ? null : jsxs(Fragment, {
     children: [jsx("div", {
       className: sU,
-      children: _$$tx("universal_insert.approved_from_figma_community")
+      children: renderI18nText("universal_insert.approved_from_figma_community")
     }), jsx(oo, {
       extensionType: e.extensionType,
       extensionIds: u
@@ -5482,13 +5482,13 @@ function of(e) {
   let n = useCallback(e => function (e, t) {
     switch (e) {
       case oh.RECENT_AND_SAVED:
-        return _$$t("universal_insert.recents_and_saved");
+        return getI18nString("universal_insert.recents_and_saved");
       case oh.DEVELOPMENT:
-        return _$$t("universal_insert.development");
+        return getI18nString("universal_insert.development");
       case oh.ORG:
-        return t ? _$$t("whiteboard.inserts.plugin_from_org", {
+        return t ? getI18nString("whiteboard.inserts.plugin_from_org", {
           orgName: t.name
-        }) : _$$t("universal_insert.from_your_org");
+        }) : getI18nString("universal_insert.from_your_org");
     }
   }(e, i), [i]);
   let r = [oh.RECENT_AND_SAVED];
@@ -5501,7 +5501,7 @@ function of(e) {
       behavior: "smooth"
     }), 0);
   }
-  return (_$$eD && r.push(oh.DEVELOPMENT), 1 !== r.length || i) ? jsx("div", {
+  return (desktopAPIInstance && r.push(oh.DEVELOPMENT), 1 !== r.length || i) ? jsx("div", {
     className: om,
     ref: s,
     children: jsxs(_$$bL, {
@@ -5510,7 +5510,7 @@ function of(e) {
       recordingKey: "figjam-browse-modal-main-view-select",
       children: [jsx(_$$l6, {
         label: jsx(_$$h6, {
-          children: _$$t("universal_insert.view_resources_by")
+          children: getI18nString("universal_insert.view_resources_by")
         })
       }), jsxs(_$$mc, {
         children: [r.map(e => jsx(_$$c$2, {
@@ -5530,8 +5530,8 @@ function of(e) {
     })
   });
 }
-let o_ = _$$eU(oh.RECENT_AND_SAVED);
-let ox = _$$eU(oh.RECENT_AND_SAVED);
+let o_ = atom(oh.RECENT_AND_SAVED);
+let ox = atom(oh.RECENT_AND_SAVED);
 function oj() {
   let e = _$$nl();
   let t = Im();
@@ -5583,12 +5583,12 @@ function oE() {
       })
     }), jsx("div", {
       className: _$$s.mb24.mt16.pl36.pr36.$,
-      children: _$$tx("whiteboard.inserts.plugin_community_disabled", {
+      children: renderI18nText("whiteboard.inserts.plugin_community_disabled", {
         private_plugins: jsx(_$$N, {
           newTab: !0,
           href: "https://www.figma.com/plugin-docs",
           trusted: !0,
-          children: _$$tx("whiteboard.inserts.plugin_community_disabled_private_plugins")
+          children: renderI18nText("whiteboard.inserts.plugin_community_disabled_private_plugins")
         })
       })
     })]
@@ -5617,7 +5617,7 @@ function oI({
   });
   let i = !!(e && e.plugins_whitelist_enforced);
   let n = _$$ll();
-  let r = _$$R(i => e && !t ? Qt(_$$i3(H6(Object.values(i.publishedPlugins))), e.id) : {});
+  let r = selectWithShallowEqual(i => e && !t ? Qt(_$$i3(H6(Object.values(i.publishedPlugins))), e.id) : {});
   let a = Object.keys(r);
   let s = _$$tS();
   let c = _$$Gb(e?.id ?? "", s);
@@ -5647,7 +5647,7 @@ function oI({
     }), _.length > 0 && jsxs(Fragment, {
       children: [jsx("div", {
         className: "browse_plugins_recents_list--sectionHeader--az12L text--fontPos13--xW8hS text--_fontBase--QdLsd",
-        children: _$$tx("universal_insert.saved_from_community")
+        children: renderI18nText("universal_insert.saved_from_community")
       }), _.map(e => {
         let t = e.plugin_id;
         return jsx(aC, {
@@ -5697,7 +5697,7 @@ function oM() {
     children: [_ && jsxs(Fragment, {
       children: [jsx("div", {
         className: ok,
-        children: _$$tx("universal_insert.recents")
+        children: renderI18nText("universal_insert.recents")
       }), jsx(sM, {
         items: f,
         view: _$$p2.RECENTS
@@ -5705,14 +5705,14 @@ function oM() {
     }), _ && x && jsx(_$$F2, {}), x && jsxs(Fragment, {
       children: [jsx("div", {
         className: ok,
-        children: _$$tx("universal_insert.saved")
+        children: renderI18nText("universal_insert.saved")
       }), jsx(sM, {
         items: h,
         view: _$$p2.SAVED
       }), c.length > 40 && !u && jsx("button", {
         className: oR,
         onClick: () => p(!0),
-        children: _$$tx("universal_insert.show_all_saved_plugins")
+        children: renderI18nText("universal_insert.show_all_saved_plugins")
       })]
     })]
   });
@@ -5728,14 +5728,14 @@ function oD() {
   });
 }
 function oP() {
-  let [e, t] = _$$fp(ox);
+  let [e, t] = useAtomValueAndSetter(ox);
   return jsx(of, {
     setCurrentView: t,
     currentView: e
   });
 }
 function oU() {
-  let e = _$$md(ox);
+  let e = useAtomWithSubscription(ox);
   let t = T5("BrowsePluginsCombinedListView").unwrapOr(null);
   let i = !!t?.pluginsWhitelistEnforced;
   return jsxs("div", {
@@ -5815,7 +5815,7 @@ function oQ(e) {
     userCanRunExtensions,
     pluginSubmenuDropdownTargetRect,
     activeTextReviewPlugin
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     orgEntity: _$$EL(e),
     org: e.currentUserOrgId && e.orgById[e.currentUserOrgId] || null,
     appModel: e.mirror.appModel,
@@ -5928,7 +5928,7 @@ function oQ(e) {
       children: [jsx(_$$B, {
         svg: _$$A1,
         className: JX
-      }), _$$tx("whiteboard.inserts.see_more_details_in_community")]
+      }), renderI18nText("whiteboard.inserts.see_more_details_in_community")]
     }), U && pluginSubmenuDropdownTargetRect && jsx(noop, {
       lean: "left",
       minWidth: 130,
@@ -6082,7 +6082,7 @@ function o8(e) {
       children: [jsx(_$$B, {
         svg: _$$A1,
         className: "browse_templates_preview--communityLinkIcon--DC-Q4 text--fontPos11--2LvXf text--_fontBase--QdLsd"
-      }), _$$tx("whiteboard.inserts.see_more_details_in_community")]
+      }), renderI18nText("whiteboard.inserts.see_more_details_in_community")]
     })]
   });
 }
@@ -6116,12 +6116,12 @@ function ln(e) {
       className: "browse_templates_preview_top_bar--left--vErPQ",
       children: [jsx(_$$E2, {
         className: ex()("browse_templates_preview_top_bar--backButton--d3Iws", "browse_templates_preview_top_bar--hasFocusOutline--le5ti"),
-        onClick: Ay.isIpad ? void 0 : goBack,
+        onClick: BrowserInfo.isIpad ? void 0 : goBack,
         htmlAttributes: {
-          onPointerDown: Ay.isIpad ? goBack : void 0,
+          onPointerDown: BrowserInfo.isIpad ? goBack : void 0,
           autoFocus: !0
         },
-        "aria-label": _$$t("general.back"),
+        "aria-label": getI18nString("general.back"),
         children: jsx(_$$B, {
           svg: _$$A10,
           "data-not-draggable": !0,
@@ -6134,13 +6134,13 @@ function ln(e) {
           children: a.name
         }), (r.community_publishers?.accepted.length || 0) > 0 && jsx("div", {
           className: "browse_templates_preview_top_bar--pluginTilePublishers--UFpkz text--fontPos11--2LvXf text--_fontBase--QdLsd ellipsis--ellipsis--Tjyfa",
-          children: _$$tx("whiteboard.inserts.by_publisher", {
+          children: renderI18nText("whiteboard.inserts.by_publisher", {
             numPublishers: v.length,
             firstPublisherName: v[0]?.name,
             multiplePublisherSuffix: jsx("span", {
               "data-tooltip-type": Ib.TEXT,
               "data-tooltip": _$$eg2(v.slice(1), v.length, e => e.name),
-              children: _$$tx("whiteboard.inserts.and_others")
+              children: renderI18nText("whiteboard.inserts.and_others")
             })
           })
         })]
@@ -6176,7 +6176,7 @@ function ln(e) {
         setPinned: e.setPinned
       }) : jsx(_$$K, {
         onClick: g,
-        "aria-label": _$$t("general.close"),
+        "aria-label": getI18nString("general.close"),
         children: jsx(_$$A2, {})
       })]
     })]
@@ -6267,7 +6267,7 @@ function lc(e) {
     children: [h && jsxs(Fragment, {
       children: [jsx("div", {
         className: lo,
-        children: _$$tx("whiteboard.inserts.saved")
+        children: renderI18nText("whiteboard.inserts.saved")
       }), jsx("div", {
         className: ll,
         children: savedSearchResultIds.map(e => jsx(aG, {
@@ -6278,7 +6278,7 @@ function lc(e) {
     }), _ && jsxs(Fragment, {
       children: [jsx("div", {
         className: lo,
-        children: _$$tx("whiteboard.inserts.development")
+        children: renderI18nText("whiteboard.inserts.development")
       }), jsx("div", {
         className: ll,
         children: developmentSearchResultIds.map(e => jsx(aV, {
@@ -6289,7 +6289,7 @@ function lc(e) {
     }), f && jsxs(Fragment, {
       children: [jsx("div", {
         className: lo,
-        children: _$$tx("whiteboard.inserts.widgets_from_org", {
+        children: renderI18nText("whiteboard.inserts.widgets_from_org", {
           orgName: u.name
         })
       }), jsx("div", {
@@ -6301,7 +6301,7 @@ function lc(e) {
     }), m && jsxs(Fragment, {
       children: [jsx("div", {
         className: lo,
-        children: _$$tx("whiteboard.inserts.from_community")
+        children: renderI18nText("whiteboard.inserts.from_community")
       }), jsx("div", {
         className: ll,
         children: communitySearchResultIds.map(e => jsx(aG, {
@@ -6349,20 +6349,20 @@ function lu() {
     children: [h && jsxs(Fragment, {
       children: [jsx("div", {
         className: ex()(ok, _$$s.mb8.$),
-        children: _$$tx("universal_insert.recents")
+        children: renderI18nText("universal_insert.recents")
       }), jsx(sH, {
         items: p
       })]
     }), h && m && jsx(_$$F2, {}), m && jsxs(Fragment, {
       children: [jsx("div", {
         className: ex()(ok, _$$s.mb8.$),
-        children: _$$tx("universal_insert.saved")
+        children: renderI18nText("universal_insert.saved")
       }), jsx(sH, {
         items: u
       }), s.length > 40 && !d && jsx("button", {
         className: oR,
         onClick: () => c(!0),
-        children: _$$tx("universal_insert.show_all_saved_widgets")
+        children: renderI18nText("universal_insert.show_all_saved_widgets")
       })]
     })]
   });
@@ -6460,7 +6460,7 @@ function lg() {
       })
     }), jsx("div", {
       className: _$$s.mt16.mb24.$,
-      children: _$$tx("whiteboard.inserts.disabled_org_widgets_empty_state_description")
+      children: renderI18nText("whiteboard.inserts.disabled_org_widgets_empty_state_description")
     })]
   });
 }
@@ -6508,7 +6508,7 @@ function lb({
     }), x.length > 0 && jsxs(Fragment, {
       children: [jsx("div", {
         className: sU,
-        children: _$$tx("universal_insert.saved_from_community")
+        children: renderI18nText("universal_insert.saved_from_community")
       }), jsx("div", {
         className: sF,
         children: x.map(e => {
@@ -6534,14 +6534,14 @@ function ly() {
   });
 }
 function lv() {
-  let [e, t] = _$$fp(o_);
+  let [e, t] = useAtomValueAndSetter(o_);
   return jsx(of, {
     setCurrentView: t,
     currentView: e
   });
 }
 function lC() {
-  let e = _$$md(o_);
+  let e = useAtomWithSubscription(o_);
   let t = _$$sZ();
   let i = !!(t && t.widgets_whitelist_enforced);
   return jsxs("div", {
@@ -6663,8 +6663,8 @@ function lk(e) {
       children: [jsx(_$$B, {
         svg: _$$A10,
         className: Gv,
-        onClick: Ay.isIpad ? void 0 : goBack,
-        onPointerDown: Ay.isIpad ? goBack : void 0,
+        onClick: BrowserInfo.isIpad ? void 0 : goBack,
+        onPointerDown: BrowserInfo.isIpad ? goBack : void 0,
         "data-not-draggable": !0,
         "data-does-not-dismiss-modal": !0
       }), jsxs("div", {
@@ -6688,13 +6688,13 @@ function lk(e) {
           })]
         }), (r.community_publishers?.accepted.length || 0) > 0 && jsx("div", {
           className: N9,
-          children: _$$tx("whiteboard.inserts.by_publisher", {
+          children: renderI18nText("whiteboard.inserts.by_publisher", {
             numPublishers: p.length,
             firstPublisherName: p[0]?.name,
             multiplePublisherSuffix: jsx("span", {
               "data-tooltip-type": Ib.TEXT,
               "data-tooltip": _$$eg2(p.slice(1), p.length, e => e.name),
-              children: _$$tx("whiteboard.inserts.and_others")
+              children: renderI18nText("whiteboard.inserts.and_others")
             })
           })
         })]
@@ -6709,7 +6709,7 @@ function lk(e) {
           payment: r.community_resource_payment
         }) : jsx("div", {
           "data-tooltip-type": c ? Ib.TEXT : void 0,
-          "data-tooltip": c ? _$$t("whiteboard.inserts.log_in_or_sign_up_to_use", {
+          "data-tooltip": c ? getI18nString("whiteboard.inserts.log_in_or_sign_up_to_use", {
             resourceType: _$$vt.PLUGIN
           }) : void 0,
           children: b ? jsx(_$$s4, {
@@ -6717,7 +6717,7 @@ function lk(e) {
             isPlugin: !0
           }) : jsx(ad, {
             pluginId: r.id,
-            buttonCta: _$$t("whiteboard.inserts.plugin_run_cta"),
+            buttonCta: getI18nString("whiteboard.inserts.plugin_run_cta"),
             isNotInHeader: !0,
             view: _$$p2.PLUGINS
           })
@@ -6730,7 +6730,7 @@ function lk(e) {
         setPinned: e.setPinned
       }) : jsx(_$$K, {
         onClick: v,
-        "aria-label": _$$t("general.close"),
+        "aria-label": getI18nString("general.close"),
         children: jsx(_$$A2, {})
       })]
     })]
@@ -6748,7 +6748,7 @@ function lD(e) {
   let c = Object.values(_$$yQ()).find(e => e.plugin_id === resourceId);
   let p = useSelector(e => e.authedActiveCommunityProfile);
   let m = _$$bh().find(e => e.id === resourceId);
-  let f = _$$eD && !!m && !c;
+  let f = desktopAPIInstance && !!m && !c;
   let _ = !!c || f;
   let x = Um();
   let g = x?.type === lP && x.data.widgetId === resourceId;
@@ -6818,8 +6818,8 @@ function lD(e) {
       children: [jsx(_$$B, {
         svg: _$$A10,
         className: Gv,
-        onClick: Ay.isIpad ? void 0 : goBack,
-        onPointerDown: Ay.isIpad ? goBack : void 0,
+        onClick: BrowserInfo.isIpad ? void 0 : goBack,
+        onPointerDown: BrowserInfo.isIpad ? goBack : void 0,
         "data-not-draggable": !0,
         "data-does-not-dismiss-modal": !0
       }), jsxs("div", {
@@ -6843,13 +6843,13 @@ function lD(e) {
           })]
         }), (n.community_publishers?.accepted.length || 0) > 0 && jsx("div", {
           className: N9,
-          children: _$$tx("whiteboard.inserts.by_publisher", {
+          children: renderI18nText("whiteboard.inserts.by_publisher", {
             numPublishers: r.length,
             firstPublisherName: r[0]?.name,
             multiplePublisherSuffix: jsx("span", {
               "data-tooltip-type": Ib.TEXT,
               "data-tooltip": _$$eg2(r.slice(1), r.length, e => e.name),
-              children: _$$tx("whiteboard.inserts.and_others")
+              children: renderI18nText("whiteboard.inserts.and_others")
             })
           })
         })]
@@ -6865,8 +6865,8 @@ function lD(e) {
           version: j,
           isPlugin: !1
         }) : jsx($n, {
-          onClick: Ay.isIpad ? void 0 : M,
-          actionOnPointerDown: Ay.isIpad ?? void 0,
+          onClick: BrowserInfo.isIpad ? void 0 : M,
+          actionOnPointerDown: BrowserInfo.isIpad ?? void 0,
           variant: "primary",
           htmlAttributes: {
             "data-testid": "add-widget-button",
@@ -6874,7 +6874,7 @@ function lD(e) {
           },
           children: jsxs("span", {
             className: _$$s.flex.flexRow.justifyCenter.itemsCenter.$,
-            children: [_$$t("whiteboard.inserts.add_widget"), _ && jsx(_$$B, {
+            children: [getI18nString("whiteboard.inserts.add_widget"), _ && jsx(_$$B, {
               svg: _$$A6,
               className: _$$sD
             })]
@@ -6890,7 +6890,7 @@ function lD(e) {
         setPinned: e.setPinned
       }) : jsx(_$$K, {
         onClick: R,
-        "aria-label": _$$t("general.close"),
+        "aria-label": getI18nString("general.close"),
         children: jsx(_$$A2, {})
       })]
     })]
@@ -6900,7 +6900,7 @@ let lP = "DROPDOWN_TYPE_WIDGET_DETAIL_SUBMENU";
 function lU() {
   let {
     universalInsertModal
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     universalInsertModal: e.universalInsertModal
   }));
   let [t, i] = useState(universalInsertModal.initialSelectedCategory ?? a);
@@ -6940,7 +6940,7 @@ function lF({
     fileVersion,
     loadingState,
     universalInsertModal
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     fileVersion: e.fileVersion,
     loadingState: e.loadingState,
     universalInsertModal: e.universalInsertModal
@@ -6972,7 +6972,7 @@ function lF({
     requestLoadMoreTeamTemplatesFromSearch
   } = _$$Ib();
   let W = _$$sZ();
-  let z = _$$md(_$$D);
+  let z = useAtomWithSubscription(_$$D);
   useEffect(() => {
     z && !_$$l7.has(z) && YQ({
       id: _$$X,
@@ -7163,7 +7163,7 @@ function lF({
             setSelectedCategory({
               id: e,
               resourceType: Rt.TEAM_TEMPLATES,
-              title: _$$t("whiteboard.inserts.team_name_templates", {
+              title: getI18nString("whiteboard.inserts.team_name_templates", {
                 teamName: t ?? ""
               })
             });
@@ -7218,7 +7218,7 @@ function lF({
         goBack: () => {
           ef && e.resourceType === Rt.TEAM_TEMPLATES && e.id && eu?.type === "org" ? setSelectedCategory({
             id: "",
-            title: _$$t("whiteboard.inserts.org_name_templates", {
+            title: getI18nString("whiteboard.inserts.org_name_templates", {
               orgName: W?.name ?? ""
             }),
             resourceType: Rt.TEAM_TEMPLATES
@@ -7251,7 +7251,7 @@ function lF({
       goBack: () => {
         setPreviewResource(void 0);
       },
-      buttonCta: _$$t("whiteboard.inserts.add_template"),
+      buttonCta: getI18nString("whiteboard.inserts.add_template"),
       setPinned
     }) : i.type === Rt.WIDGETS ? jsx(lD, {
       resourceId: i.id,
@@ -7466,7 +7466,7 @@ function de({
       className: _$$s.flex.itemsCenter.gap4.$,
       children: [i, jsx(Me, {
         onClick: t,
-        "aria-label": _$$t("common.close"),
+        "aria-label": getI18nString("common.close"),
         actionOnPointerDown: a,
         trackingProperties: {
           text: n || "close"
@@ -7512,7 +7512,7 @@ function dl({
         children: wg(i)
       }), jsx(_$$B, {
         className: ex()(_$$s.hidden.colorIconBrand.bRadius2.$, "ai_modal--oneClickAiIcon--fQNmm"),
-        "data-tooltip": _$$t("whiteboard.ai_modal.make"),
+        "data-tooltip": getI18nString("whiteboard.ai_modal.make"),
         "data-tooltip-type": Ib.TEXT,
         "data-tooltip-show-above": "true",
         svg: _$$A13
@@ -7575,7 +7575,7 @@ function dj({
   onSubmit: e
 }) {
   let t = dx();
-  let i = _$$md(_$$dO);
+  let i = useAtomWithSubscription(_$$dO);
   let n = _$$p("keyboardShortcuts");
   let r = _$$c5(n, "quick-create");
   return jsx("div", {
@@ -7590,9 +7590,9 @@ function dj({
         htmlAttributes: {
           "data-testid": "figjam-ai-modal-generate-button"
         },
-        "aria-label": _$$t("whiteboard.ai_modal.make_button_aria_label"),
+        "aria-label": getI18nString("whiteboard.ai_modal.make_button_aria_label"),
         "aria-description": r,
-        children: _$$tx("whiteboard.ai_modal.make_shortcut")
+        children: renderI18nText("whiteboard.ai_modal.make_shortcut")
       })
     })
   });
@@ -7611,10 +7611,10 @@ function dP({
   updatePillSuggestions: t,
   examplePrompt: i
 }) {
-  let n = _$$md(_$$xc);
+  let n = useAtomWithSubscription(_$$xc);
   let [r] = _$$DF();
-  let a = _$$md(_$$dO);
-  let [s, o] = _$$fp(JV);
+  let a = useAtomWithSubscription(_$$dO);
+  let [s, o] = useAtomValueAndSetter(JV);
   let d = Xr(KL);
   useEffect(() => {
     n ? r.update(() => {
@@ -7679,7 +7679,7 @@ function dZ() {
       children: [jsx(_$$B, {
         svg: _$$A16,
         className: "ai_announcement_modal--communityIcon--Gmr2-"
-      }), _$$tx("whiteboard.ai_feature_announcement.more_prompts.community_button")]
+      }), renderI18nText("whiteboard.ai_feature_announcement.more_prompts.community_button")]
     })
   });
 }
@@ -7688,10 +7688,10 @@ function d$() {
     className: "ai_announcement_modal--morePromptsHeader--Av2QS",
     children: [jsx("span", {
       className: "ai_announcement_modal--headerText--iJ5yO",
-      children: _$$tx("whiteboard.ai_feature_announcement.more_prompts.title")
+      children: renderI18nText("whiteboard.ai_feature_announcement.more_prompts.title")
     }), jsx("span", {
       className: _$$s.font13.$,
-      children: _$$tx("whiteboard.ai_feature_announcement.more_prompts.description")
+      children: renderI18nText("whiteboard.ai_feature_announcement.more_prompts.description")
     })]
   });
 }
@@ -7775,7 +7775,7 @@ function dq({
             children: [jsx(_$$B, {
               svg: _$$A13,
               className: "ai_announcement_modal--aiIcon--u4hnd"
-            }), _$$t("whiteboard.ai_modal.make")]
+            }), getI18nString("whiteboard.ai_modal.make")]
           })
         })
       })
@@ -7825,8 +7825,8 @@ function d1({
 }) {
   let r = useDispatch();
   let [a] = _$$DF();
-  let s = _$$md(_$$dO);
-  let [l, c] = _$$fp(JV);
+  let s = useAtomWithSubscription(_$$dO);
+  let [l, c] = useAtomValueAndSetter(JV);
   let u = ex()("ai_modal--suggestionPill--w44sw text--fontPos11--2LvXf text--_fontBase--QdLsd", dt);
   let h = ex()(_$$s.colorBg.pl10.pr8.font11.lh16.borderBox.b1.bRadius6.wFitContent.$, dt);
   let m = dx();
@@ -7875,7 +7875,7 @@ function d1({
         },
         children: jsxs("div", {
           className: _$$s.flex.itemsCenter.gap4.cursorDefault.$,
-          children: [_$$tx("whiteboard.ai_modal.suggestion.more_prompts"), jsx(_$$B, {
+          children: [renderI18nText("whiteboard.ai_modal.suggestion.more_prompts"), jsx(_$$B, {
             svg: _$$A17,
             className: _$$s.colorIconFigjam.$
           })]
@@ -7895,25 +7895,25 @@ function d2({
 }
 function d3() {
   let e = dx();
-  let t = _$$md(JV);
+  let t = useAtomWithSubscription(JV);
   let i = TQ(e, t);
   if (e.length <= 0 || !i) return null;
   let n = _$$jJ(e);
   return jsx("div", {
     className: ex()(_$$s.absolute.zIndex0.top0.left0.bgTransparent.overflowHidden.colorTextTertiary.font13.wFull.lh24.$, "prompt_editor_v2--placeholderParagraph--D5ueD prompt_editor_v2--paragraph--poJzZ"),
-    children: `${n}${_$$t("whiteboard.ai_modal.prompt_builder.trailing_ellipsis")}`
+    children: `${n}${getI18nString("whiteboard.ai_modal.prompt_builder.trailing_ellipsis")}`
   });
 }
 function d5({
   onSubmit: e
 }) {
   let t;
-  let [i, n] = _$$fp(Ac);
+  let [i, n] = useAtomValueAndSetter(Ac);
   let r = useRef(!1);
-  let a = _$$md(JV);
+  let a = useAtomWithSubscription(JV);
   let [s, d] = useState(_$$fF(i, a));
-  let c = _$$md(_$$dO);
-  let [u, h] = useState(() => _$$QP([assertNotNullish.TEMPLATE, assertNotNullish.VISUAL]));
+  let c = useAtomWithSubscription(_$$dO);
+  let [u, h] = useState(() => randomPick([assertNotNullish.TEMPLATE, assertNotNullish.VISUAL]));
   let [m, f] = useState(!0);
   let _ = useMemo(() => Cb(u), [u]);
   let x = _$$sM(_.title, _.subtitle, !1);
@@ -7969,7 +7969,7 @@ function d5({
               disabled: c.status === _$$c6.LOADING,
               dataTestid: "figjam-ai-modal-prompt-editor-v2",
               isAutoFocused: c.status !== _$$c6.LOADING,
-              ariaLabel: _$$t("whiteboard.ai_modal.prompt_label"),
+              ariaLabel: getI18nString("whiteboard.ai_modal.prompt_label"),
               ariaPlaceholder: x
             }),
             placeholder: jsxs("div", {
@@ -8012,7 +8012,7 @@ function d5({
 function d6({
   onSubmit: e
 }) {
-  let t = _$$md(QY);
+  let t = useAtomWithSubscription(QY);
   return jsx("div", {
     className: ex()(_$$s.colorBgSecondary.p16.bRadius6.cursorText.$, "prompt_editor_v2--entryViewPromptBox--EkmRO"),
     "data-onboarding-key": AI,
@@ -8024,14 +8024,14 @@ function d6({
           dataTestid: "figjam-ai-modal-entry-view-prompt-editor",
           disabled: !1,
           isAutoFocused: !0,
-          ariaLabel: _$$t("whiteboard.ai_modal.prompt_label"),
-          ariaPlaceholder: _$$t("whiteboard.ai_modal.prompt_placeholder")
+          ariaLabel: getI18nString("whiteboard.ai_modal.prompt_label"),
+          ariaPlaceholder: getI18nString("whiteboard.ai_modal.prompt_placeholder")
         }),
         placeholder: jsx("div", {
           "aria-hidden": !0,
           className: ex()(_$$s.eventsNone.colorTextTertiary.absolute.$, t.showing ? null : d_),
           children: jsx("span", {
-            children: _$$t("whiteboard.ai_modal.prompt_placeholder")
+            children: getI18nString("whiteboard.ai_modal.prompt_placeholder")
           })
         }),
         ErrorBoundary: _$$A14
@@ -8050,7 +8050,7 @@ function d6({
 function d4() {
   return jsx(Ex, {
     className: ex()(_$$s.font11.fontMedium.h16.px4.bRadius5.ml4.hFitContent.colorTextSecondary.$, "prompt_editor_v2--tabBadge--bntTA"),
-    text: _$$t("whiteboard.ai_modal.hint_tab"),
+    text: getI18nString("whiteboard.ai_modal.hint_tab"),
     color: zE.TERTIARY
   });
 }
@@ -8069,7 +8069,7 @@ function d9({
   let h = useCallback(() => !!c && (u(!1), p.current?.focus(), !0), [p, c]);
   O1(h, KD.EDITING_TEXT_FIELD);
   return jsxs("section", {
-    "aria-label": _$$t("whiteboard.ai_modal.make_templates_and_diagrams"),
+    "aria-label": getI18nString("whiteboard.ai_modal.make_templates_and_diagrams"),
     className: "prompt_editor_v2--editableWrapper---hIpF",
     children: [jsx(_$$E2, {
       className: "prompt_editor_v2--visuallyHiddenButton--AsyAA",
@@ -8080,7 +8080,7 @@ function d9({
       },
       onClick: _$$lQ,
       ref: p,
-      children: _$$t("whiteboard.ai_modal.edit_prompt_button")
+      children: getI18nString("whiteboard.ai_modal.edit_prompt_button")
     }), jsx(_$$a7, {
       "aria-placeholder": s,
       ariaLabel: a,
@@ -8109,7 +8109,7 @@ function d9({
 function d8({
   onGenerate: e
 }) {
-  let t = _$$md(_$$zS);
+  let t = useAtomWithSubscription(_$$zS);
   let i = Xr(_$$H4);
   let n = _$$tS();
   let r = useMemo(() => _$$w2(1), []);
@@ -8140,7 +8140,7 @@ function d8({
       pageNodeId: d
     });
   };
-  let h = _$$a6() ? _$$t("whiteboard.ai_modal.beta_badge") : _$$t("qa.ai");
+  let h = _$$a6() ? getI18nString("whiteboard.ai_modal.beta_badge") : getI18nString("qa.ai");
   return jsx(_$$fu, {
     name: _$$e8.AI_PROMPT_BUILDER_ENTRY_VIEW,
     properties: {
@@ -8154,7 +8154,7 @@ function d8({
           setInitialPrompt: s
         }),
         children: [jsx(de, {
-          title: _$$t("whiteboard.ai_modal.make_templates_and_diagrams"),
+          title: getI18nString("whiteboard.ai_modal.make_templates_and_diagrams"),
           onClose: i,
           badge: jsx(_$$E5, {
             variant: "inactiveOutline",
@@ -8212,17 +8212,17 @@ function d7({
   }) : i;
 }
 function ct() {
-  let e = _$$md(_$$dO);
+  let e = useAtomWithSubscription(_$$dO);
   return getFeatureFlags().cortex_execution_tracing && (e.status === _$$c6.SUCCESS || e.status === _$$c6.ERROR) && e.trace ? jsx("div", {
     style: _$$sx2.mb16.$,
     className: _$$s.mx16.mt16.$,
     children: jsxs("div", {
       className: _$$s.px12.py12.flex.gap12.bRadius6.colorBgFigjamTertiary.font11.colorTextFigjam.overflowBreakWord.$,
       children: [jsx("div", {
-        children: _$$tx("whiteboard.ai_modal.share_trace_nudge_in_modal", {
+        children: renderI18nText("whiteboard.ai_modal.share_trace_nudge_in_modal", {
           weirdOutput: jsx("span", {
             className: _$$s.font11.colorTextFigjam.fontBold.$,
-            children: _$$t("whiteboard.ai_modal.share_trace_nudge_weird_output")
+            children: getI18nString("whiteboard.ai_modal.share_trace_nudge_weird_output")
           })
         })
       }), jsx(_$$E2, {
@@ -8232,7 +8232,7 @@ function ct() {
         },
         children: jsx("div", {
           className: _$$s.font11.lh16.noWrap.$,
-          children: _$$tx("whiteboard.ai_modal.share_trace")
+          children: renderI18nText("whiteboard.ai_modal.share_trace")
         })
       })]
     })
@@ -8242,10 +8242,10 @@ function ci({
   onGenerate: e
 }) {
   let t = Xr(_$$H4);
-  let i = _$$md(_$$dO);
-  let n = _$$md(JV);
-  let [r, a] = _$$fp(_$$Sn);
-  let s = _$$md(_$$l8);
+  let i = useAtomWithSubscription(_$$dO);
+  let n = useAtomWithSubscription(JV);
+  let [r, a] = useAtomValueAndSetter(_$$Sn);
+  let s = useAtomWithSubscription(_$$l8);
   let l = q5();
   let d = i.status === _$$c6.SUCCESS ? _$$Zj.REFINEMENT_MODE : _$$Zj.GENERATE_MODE;
   let u = Xr(_$$ft);
@@ -8264,7 +8264,7 @@ function ci({
   function f(e) {
     e !== r && s && $mk && (a(e), $mk.updateFigjamAiGanttChartType(e, s));
   }
-  let _ = _$$a6() ? _$$t("whiteboard.ai_modal.beta_badge") : _$$t("qa.ai");
+  let _ = _$$a6() ? getI18nString("whiteboard.ai_modal.beta_badge") : getI18nString("qa.ai");
   return jsx(_$$fu, {
     name: _$$e8.AI_PROMPT_BUILDER_GENERATE_STAGE,
     properties: {
@@ -8274,7 +8274,7 @@ function ci({
       "data-testid": "figjam-ai-modal-prompt-builder-v2",
       className: dr,
       children: [jsx(de, {
-        title: _$$t("whiteboard.ai_modal.make_templates_and_diagrams"),
+        title: getI18nString("whiteboard.ai_modal.make_templates_and_diagrams"),
         onClose: t,
         badge: jsx(_$$E5, {
           variant: "inactiveOutline",
@@ -8295,7 +8295,7 @@ function ci({
             className: "ai_modal--ganttChartStyleContainerInner--GQHQh",
             children: [jsx("div", {
               className: ex()(_$$s.colorTextSecondary.$),
-              children: _$$tx("whiteboard.ai_modal.style")
+              children: renderI18nText("whiteboard.ai_modal.style")
             }), jsxs("div", {
               children: [jsx("button", {
                 onClick: () => {
@@ -8309,7 +8309,7 @@ function ci({
                   borderRadius: "6px 0px 0px 6px",
                   fontSize: "10px"
                 }).$,
-                children: _$$tx("whiteboard.ai_modal.basic")
+                children: renderI18nText("whiteboard.ai_modal.basic")
               }), jsx("button", {
                 onClick: () => {
                   f(VIy.EXPANDED);
@@ -8322,7 +8322,7 @@ function ci({
                   borderRadius: "0px 6px 6px 0px",
                   fontSize: "10px"
                 }).$,
-                children: _$$tx("whiteboard.ai_modal.expanded")
+                children: renderI18nText("whiteboard.ai_modal.expanded")
               })]
             })]
           })
@@ -8339,7 +8339,7 @@ function cr() {
 }
 function ca() {
   let e = useSelector(e => e.mirror.appModel.showUi);
-  let t = _$$md(_$$zS);
+  let t = useAtomWithSubscription(_$$zS);
   let i = Xr(_$$H4);
   let n = useRef(null);
   O1(() => {
@@ -8355,10 +8355,10 @@ function cs() {
 }
 function co() {
   let e;
-  let [t, i] = _$$fp(_$$yt);
+  let [t, i] = useAtomValueAndSetter(_$$yt);
   !function () {
     let e = _$$dh();
-    let t = _$$md(J1);
+    let t = useAtomWithSubscription(J1);
     let i = Xr(_$$RJ);
     useEffect(() => {
       e !== t && i();
@@ -8372,7 +8372,7 @@ function co() {
     }, [e, t]);
   })();
   let n = _$$p("showUi");
-  let r = _$$md(_$$zS);
+  let r = useAtomWithSubscription(_$$zS);
   if (r === Wl.NONE || r === Wl.TOP_BAR) return null;
   if (r === Wl.NEW_FILE) e = jsx(cc, {
     onGenerate: () => {
@@ -8410,7 +8410,7 @@ function cl({
 function cd() {
   let e = !q8() && Uy();
   let t = Xr(_$$yt);
-  let i = _$$md(_$$zS) === Wl.TOP_BAR;
+  let i = useAtomWithSubscription(_$$zS) === Wl.TOP_BAR;
   let n = cr();
   return e && i && n ? jsx(lq, {
     children: jsx(cl, {
@@ -8476,7 +8476,7 @@ function cu() {
         className: ex()(_$$s.h2.flex1.$, "ai_modal--hrLeft--trcI7")
       }), jsx("div", {
         className: ex()(_$$s.relative.px10.py4.font11.colorTextSecondary.fontNormal.$),
-        children: _$$tx("whiteboard.ai_modal.or")
+        children: renderI18nText("whiteboard.ai_modal.or")
       }), jsx("div", {
         className: ex()(_$$s.h2.flex1.$, "ai_modal--hrRight--rxij6")
       })]
@@ -8508,7 +8508,7 @@ function cu() {
         children: [jsx("div", {
           children: cn.map((e, t) => jsx(_$$P3.img, {
             src: e,
-            alt: _$$t("whiteboard.ai_modal.template_image_alt"),
+            alt: getI18nString("whiteboard.ai_modal.template_image_alt"),
             style: _$$sx2.add({
               width: "51px",
               position: "relative"
@@ -8540,7 +8540,7 @@ function cu() {
           },
           children: [jsx("div", {
             className: ex()(_$$s.font13.$, "ai_modal--templateCtaV2--n1GTF"),
-            children: _$$tx("whiteboard.ai_modal.template_cta")
+            children: renderI18nText("whiteboard.ai_modal.template_cta")
           }), jsx("div", {
             className: ex()(_$$s.colorIconSecondary.mt2.$),
             children: jsx(_$$k5, {})
@@ -8553,8 +8553,8 @@ function cu() {
 function cp({
   onGenerate: e
 }) {
-  let t = _$$md(_$$zS) === Wl.TOP_BAR;
-  let i = _$$md(_$$Fu(Pg));
+  let t = useAtomWithSubscription(_$$zS) === Wl.TOP_BAR;
+  let i = useAtomWithSubscription(_$$Fu(Pg));
   return jsxs("div", {
     "data-fullscreen-prevent-event-capture": !0,
     className: ex()(_$$s.colorBg.flex.flexColumn.$, "ai_modal--generateContainerV2--vAeZh", {
@@ -8575,12 +8575,12 @@ function c_() {
   });
 }
 function cx() {
-  let e = _$$md(_$$dO);
+  let e = useAtomWithSubscription(_$$dO);
   let t = useDispatch();
   let i = _$$um2();
   useEffect(() => {
     e.status === _$$c6.LOADING ? t(_$$F.enqueue({
-      message: _$$t("whiteboard.ai_modal.streaming"),
+      message: getI18nString("whiteboard.ai_modal.streaming"),
       icon: zX.SPINNER,
       type: cf,
       timeoutOverride: 1 / 0
@@ -8757,7 +8757,7 @@ function cz({
     }), jsx("span", {
       className: "xiqqdae xkezfkh",
       "data-testid": "iterateDoneText",
-      children: e || _$$tx("ai.done")
+      children: e || renderI18nText("ai.done")
     }), t && jsx("span", {
       className: "x17akokd x1qxcl5b",
       children: t
@@ -9116,7 +9116,7 @@ let up = _$$um({
   }
 });
 function uh() {
-  return _$$fp(up);
+  return useAtomValueAndSetter(up);
 }
 function um({
   currentAction: e
@@ -9448,17 +9448,17 @@ function uF({
     children: [jsxs("button", {
       ..._$$xk(uV.tab("stickies" === e)),
       onClick: () => t("stickies"),
-      children: [jsx(_$$i6, {}), _$$t("figjam_ai.canvas.prompt_box.tab_stickies")]
+      children: [jsx(_$$i6, {}), getI18nString("figjam_ai.canvas.prompt_box.tab_stickies")]
     }), jsxs("button", {
       ..._$$xk(uV.tab("image" === e)),
       onClick: () => t("image"),
-      children: [jsx(_$$s7, {}), _$$t("figjam_ai.canvas.prompt_box.tab_image")]
+      children: [jsx(_$$s7, {}), getI18nString("figjam_ai.canvas.prompt_box.tab_image")]
     })]
   });
 }
-let uH = _$$eU("stickies");
+let uH = atom("stickies");
 function uB() {
-  let [e, t] = _$$fp(uH);
+  let [e, t] = useAtomValueAndSetter(uH);
   let {
     promptHistory
   } = _$$a8(_$$i7, e => e);
@@ -9695,12 +9695,12 @@ function uB() {
   let d = useMemo(() => ({
     stickies: {
       action: JT.CREATE_IDEAS,
-      runningText: _$$t("figjam_ai.canvas.create_ideas.in_progress"),
+      runningText: getI18nString("figjam_ai.canvas.create_ideas.in_progress"),
       featureName: "create_ideas"
     },
     image: {
       action: JT.CANVAS_GENERATE_IMAGE,
-      runningText: _$$t("image_ai.make_image.processing"),
+      runningText: getI18nString("image_ai.make_image.processing"),
       featureName: "generate_image"
     }
   }), []);
@@ -9719,28 +9719,28 @@ function uB() {
     });
   }, [g]);
   let v = useMemo(() => "stickies" === e ? [{
-    label: _$$t("figjam_ai.canvas.prompt_box.more_ideas"),
-    prompt: _$$t("figjam_ai.canvas.prompt_box.give_more_ideas")
+    label: getI18nString("figjam_ai.canvas.prompt_box.more_ideas"),
+    prompt: getI18nString("figjam_ai.canvas.prompt_box.give_more_ideas")
   }, {
-    label: _$$t("figjam_ai.canvas.prompt_box.copy_inspirations"),
-    prompt: _$$t("figjam_ai.canvas.prompt_box.create_copy_inspirations")
+    label: getI18nString("figjam_ai.canvas.prompt_box.copy_inspirations"),
+    prompt: getI18nString("figjam_ai.canvas.prompt_box.create_copy_inspirations")
   }, {
-    label: _$$t("figjam_ai.canvas.prompt_box.user_stories"),
-    prompt: _$$t("figjam_ai.canvas.prompt_box.write_user_stories")
+    label: getI18nString("figjam_ai.canvas.prompt_box.user_stories"),
+    prompt: getI18nString("figjam_ai.canvas.prompt_box.write_user_stories")
   }] : [{
-    label: _$$t("figjam_ai.canvas.prompt_box.mockup"),
-    prompt: _$$t("figjam_ai.canvas.prompt_box.mockup_prompt")
+    label: getI18nString("figjam_ai.canvas.prompt_box.mockup"),
+    prompt: getI18nString("figjam_ai.canvas.prompt_box.mockup_prompt")
   }, {
-    label: _$$t("figjam_ai.canvas.prompt_box.storyboard"),
-    prompt: _$$t("figjam_ai.canvas.prompt_box.draw_storyboard")
+    label: getI18nString("figjam_ai.canvas.prompt_box.storyboard"),
+    prompt: getI18nString("figjam_ai.canvas.prompt_box.draw_storyboard")
   }, {
-    label: _$$t("figjam_ai.canvas.prompt_box.concept_image"),
-    prompt: _$$t("figjam_ai.canvas.prompt_box.make_concept_image")
+    label: getI18nString("figjam_ai.canvas.prompt_box.concept_image"),
+    prompt: getI18nString("figjam_ai.canvas.prompt_box.make_concept_image")
   }], [e]);
   let C = useMemo(() => "stickies" === e ? [{
-    content: _$$t("figjam_ai.canvas.create_ideas.five_more_wild_ideas")
+    content: getI18nString("figjam_ai.canvas.create_ideas.five_more_wild_ideas")
   }] : [{
-    content: _$$t("figjam_ai.canvas.prompt_box.make_image")
+    content: getI18nString("figjam_ai.canvas.prompt_box.make_image")
   }], [e]);
   let T = _$$U2(C);
   let E = useCallback(async () => {
@@ -9847,7 +9847,7 @@ function uB() {
           ...R,
           iteration_view_type: _$$$J.SUCCESS_WITH_ITERATION
         },
-        completionString: _$$t("ai.done"),
+        completionString: getI18nString("ai.done"),
         featureNameForInstrumentation: h.featureName,
         hideFeedbackButtons: x === uc.SHOW_PROMPT_BOX,
         iterateOptions: [],
@@ -9858,7 +9858,7 @@ function uB() {
         prompt: f,
         promptHistory,
         showPrompt: x === uc.SHOW_PROMPT_BOX,
-        submitLabel: x === uc.HIDE_PROMPT_BOX ? _$$t("figjam_ai.canvas.create_ideas.add_more_context") : _$$t("figjam_ai.canvas.create_ideas.start"),
+        submitLabel: x === uc.HIDE_PROMPT_BOX ? getI18nString("figjam_ai.canvas.create_ideas.add_more_context") : getI18nString("figjam_ai.canvas.create_ideas.start"),
         suggestion: ""
       });
     case qy.ERROR:
@@ -9998,7 +9998,7 @@ function uW({
         border: "none",
         padding: 0
       },
-      "aria-label": _$$t("figjam_ai.canvas.overlay_label"),
+      "aria-label": getI18nString("figjam_ai.canvas.overlay_label"),
       "data-fullscreen-intercept": !0,
       children: jsx("div", {
         ..._$$Ay.props(uq.buttonBackgroundCircle(e))
@@ -10090,7 +10090,7 @@ function uY() {
     positionXY: uw,
     children: jsx(_$$m6, {
       role: "region",
-      "aria-label": _$$t("figjam_ai.canvas.overlay_label"),
+      "aria-label": getI18nString("figjam_ai.canvas.overlay_label"),
       children: jsx(u$, {})
     })
   });
@@ -10152,7 +10152,7 @@ function uX() {
     positionXY: uw,
     children: jsx(_$$m6, {
       role: "region",
-      "aria-label": _$$t("figjam_ai.canvas.overlay_label"),
+      "aria-label": getI18nString("figjam_ai.canvas.overlay_label"),
       children: jsx(_$$s6, {
         name: "figjamAICanvas",
         recordingKey: "figjamAICanvas",
@@ -10255,11 +10255,11 @@ function u6(e) {
   }, [setIsEditorOpen, h]);
   let x = p ? "image_description_editor--popup--l-kiW _overlayBase--_overlayBase--Rkj8l" : "image_description_editor--popupWithExplanation--0XudB image_description_editor--popup--l-kiW _overlayBase--_overlayBase--Rkj8l";
   let g = n && !_$$gl(n) ? n : "";
-  let j = _$$t("whiteboard.inline_menu.image_description_placeholder");
+  let j = getI18nString("whiteboard.inline_menu.image_description_placeholder");
   return jsxs(Fragment, {
     children: [!p && jsx("div", {
       className: "image_description_editor--explanation--JK2UL",
-      children: _$$tx("whiteboard.inline_menu.image_description_explanation")
+      children: renderI18nText("whiteboard.inline_menu.image_description_explanation")
     }), jsx("div", {
       className: `${x} ${Dm}`,
       children: getFeatureFlags().figjam_a11y_inline_toolbar ? jsx("div", {
@@ -10349,25 +10349,25 @@ var pO = (e => (e.SANS_SERIF = "sansSerif", e.SERIF = "serif", e.MONOSPACE = "mo
 let pk = jsx(pu, {});
 let pR = {
   sansSerif: {
-    getLabel: () => _$$t("whiteboard.fonts.simple"),
+    getLabel: () => getI18nString("whiteboard.fonts.simple"),
     fontFamily: "Inter",
     icon: _$$A20,
     fplIcon: jsx(pu, {})
   },
   serif: {
-    getLabel: () => _$$t("whiteboard.fonts.bookish"),
+    getLabel: () => getI18nString("whiteboard.fonts.bookish"),
     fontFamily: "Merriweather",
     icon: _$$A25,
     fplIcon: jsx(pp, {})
   },
   monospace: {
-    getLabel: () => _$$t("whiteboard.fonts.technical"),
+    getLabel: () => getI18nString("whiteboard.fonts.technical"),
     fontFamily: "Roboto Mono",
     icon: _$$A21,
     fplIcon: jsx(ph, {})
   },
   script: {
-    getLabel: () => _$$t("whiteboard.fonts.cute"),
+    getLabel: () => getI18nString("whiteboard.fonts.cute"),
     fontFamily: "Figma Hand",
     icon: _$$A23,
     fplIcon: jsx(pm, {})
@@ -10637,52 +10637,52 @@ let hf = e => _$$p7({
 }[e], "neg");
 let h_ = {
   omnipresent: {
-    getLabel: () => _$$t("whiteboard.text_sizes.omnipresent"),
+    getLabel: () => getI18nString("whiteboard.text_sizes.omnipresent"),
     maxValue: 1 / 0,
     minValue: 1385
   },
   towering: {
-    getLabel: () => _$$t("whiteboard.text_sizes.towering"),
+    getLabel: () => getI18nString("whiteboard.text_sizes.towering"),
     maxValue: 1384,
     minValue: 745
   },
   mammoth: {
-    getLabel: () => _$$t("whiteboard.text_sizes.mammoth"),
+    getLabel: () => getI18nString("whiteboard.text_sizes.mammoth"),
     maxValue: 744,
     minValue: 377
   },
   ginormous: {
-    getLabel: () => _$$t("whiteboard.text_sizes.ginormous"),
+    getLabel: () => getI18nString("whiteboard.text_sizes.ginormous"),
     maxValue: 376,
     minValue: 185
   },
   huge: {
-    getLabel: () => _$$t("whiteboard.text_sizes.huge"),
+    getLabel: () => getI18nString("whiteboard.text_sizes.huge"),
     maxValue: 96,
     minValue: 96
   },
   extraLarge: {
-    getLabel: () => _$$t("whiteboard.text_sizes.extra_large"),
+    getLabel: () => getI18nString("whiteboard.text_sizes.extra_large"),
     maxValue: 64,
     minValue: 64
   },
   large: {
-    getLabel: () => _$$t("whiteboard.text_sizes.large"),
+    getLabel: () => getI18nString("whiteboard.text_sizes.large"),
     maxValue: 40,
     minValue: 40
   },
   medium: {
-    getLabel: () => _$$t("whiteboard.text_sizes.medium"),
+    getLabel: () => getI18nString("whiteboard.text_sizes.medium"),
     maxValue: 24,
     minValue: 24
   },
   small: {
-    getLabel: () => _$$t("whiteboard.text_sizes.small"),
+    getLabel: () => getI18nString("whiteboard.text_sizes.small"),
     maxValue: 16,
     minValue: 16
   },
   teensy: {
-    getLabel: () => _$$t("whiteboard.text_sizes.teensy"),
+    getLabel: () => getI18nString("whiteboard.text_sizes.teensy"),
     maxValue: 4,
     minValue: -1 / 0
   }
@@ -10771,7 +10771,7 @@ function hS(e) {
 function hw() {
   let e = useSelector(e => e.mirror.appModel.hyperlinkLocation);
   let t = Um();
-  let i = _$$md(_$$n9);
+  let i = useAtomWithSubscription(_$$n9);
   let n = t && t.type === K9;
   let r = useSelector(e => e.progressBarState.mode === Oin.HIDE_UI);
   let a = useSelector(e => e.mirror.selectionProperties.name && -1 !== e.mirror.selectionProperties.name.indexOf("FigJam Stamp Icon") && e.mirror.selectionProperties.numSelectedByType?.ROUNDED_RECTANGLE === 1 && 1 === e.mirror.selectionProperties.numSelected);
@@ -10785,7 +10785,7 @@ function hw() {
   let u = _$$ut(Ez5?.figjamState().isInCanvasAiMode, !1);
   let m = useSelector(hT);
   let f = _$$d4();
-  return !l && !e && !r && (!o || !n) && !m && (s && !XN ? f : !i && !u);
+  return !l && !e && !r && (!o || !n) && !m && (s && !isIpadDevice ? f : !i && !u);
 }
 let hM = "whiteboard_transparency--icon--LOJ7P";
 let hD = "whiteboard_transparency--separator--t8wmx";
@@ -10839,10 +10839,10 @@ function hZ({
 }) {
   let [t, i] = _$$lJ2("shapeWithTextFillType");
   let n = {
-    [A$i.VISIBLE]: _$$t("whiteboard.inline_menu.shape_visibility_visible"),
-    [A$i.TRANSPARENT]: _$$t("whiteboard.inline_menu.shape_visibility_transparent"),
-    [A$i.TRANSPARENT_CUSTOM]: _$$t("whiteboard.inline_menu.shape_visibility_transparent"),
-    [A$i.HIDDEN]: _$$t("whiteboard.inline_menu.shape_visibility_hidden")
+    [A$i.VISIBLE]: getI18nString("whiteboard.inline_menu.shape_visibility_visible"),
+    [A$i.TRANSPARENT]: getI18nString("whiteboard.inline_menu.shape_visibility_transparent"),
+    [A$i.TRANSPARENT_CUSTOM]: getI18nString("whiteboard.inline_menu.shape_visibility_transparent"),
+    [A$i.HIDDEN]: getI18nString("whiteboard.inline_menu.shape_visibility_hidden")
   };
   let [r, a] = _$$lJ2("connectorTextBackgroundTransparent");
   let [s, l] = _$$lJ2("platformShapeFillType");
@@ -10866,7 +10866,7 @@ function hZ({
         className: hM
       }), jsx("div", {
         className: "whiteboard_transparency--connectorFillText--N-Ydb text--fontNeg12--2PWcg text--_fontBase--QdLsd text--_negText--j9g-L",
-        children: _$$t("whiteboard.inline_menu.text_background")
+        children: getI18nString("whiteboard.inline_menu.text_background")
       })]
     }), jsx(hP, {
       className: hD
@@ -10877,7 +10877,7 @@ function hZ({
       children: jsx(_$$b9, {
         value: void 0 === p || _$$gl(p) ? void 0 : hz(p),
         legend: jsx(_$$q4, {
-          children: _$$t("whiteboard.inline_menu.shape_visibility.legend")
+          children: getI18nString("whiteboard.inline_menu.shape_visibility.legend")
         }),
         onChange: h,
         recordingKey: "shapeWithTextFillType",
@@ -10903,107 +10903,107 @@ function hq() {
   return new Map([["ADD_COLUMN_LEFT", {
     identifier: "ADD_COLUMN_LEFT",
     iconImageURL: buildUploadUrl("9400f62ae966871748dbc8fe8bb5db43905451f9"),
-    label: _$$t("fullscreen_actions.add-table-column-before"),
+    label: getI18nString("fullscreen_actions.add-table-column-before"),
     style: _$$_7.normal
   }], ["ADD_COLUMN_RIGHT", {
     identifier: "ADD_COLUMN_RIGHT",
     iconImageURL: buildUploadUrl("a304100b18ea5bc6ac701d1702639b19584f572b"),
-    label: _$$t("fullscreen_actions.add-table-column-after"),
+    label: getI18nString("fullscreen_actions.add-table-column-after"),
     style: _$$_7.normal
   }], ["ADD_ROW_ABOVE", {
     identifier: "ADD_ROW_ABOVE",
     iconImageURL: buildUploadUrl("af73d211189324f341d869dbe6ad31d9293f3b02"),
-    label: _$$t("fullscreen_actions.add-table-row-above"),
+    label: getI18nString("fullscreen_actions.add-table-row-above"),
     style: _$$_7.normal
   }], ["ADD_ROW_BELOW", {
     identifier: "ADD_ROW_BELOW",
     iconImageURL: buildUploadUrl("3ff9e470d8ff8b00bda37a1a7cffbc5cf71f9c50"),
-    label: _$$t("fullscreen_actions.add-table-row-below"),
+    label: getI18nString("fullscreen_actions.add-table-row-below"),
     style: _$$_7.normal
   }], ["DELETE_CONTENT", {
     identifier: "DELETE_CONTENT",
     iconImageURL: buildUploadUrl("fa39374a2621258ff204c8b3d19fabcac205a8bb"),
-    label: _$$t("fullscreen_actions.delete-table-contents"),
+    label: getI18nString("fullscreen_actions.delete-table-contents"),
     style: _$$_7.normal
   }], ["DELETE_COLUMN", {
     identifier: "DELETE_COLUMN",
     iconImageURL: buildUploadUrl("0cdf2f7792c22668c4128463ce1ab2b7daf6cc04"),
-    label: _$$t("fullscreen_actions.delete-current-table-column"),
+    label: getI18nString("fullscreen_actions.delete-current-table-column"),
     style: _$$_7.normal
   }], ["DELETE_ROW", {
     identifier: "DELETE_ROW",
     iconImageURL: buildUploadUrl("b7c2f4ee6638f3636435f94e34b112c111c8a000"),
-    label: _$$t("fullscreen_actions.delete-current-table-row"),
+    label: getI18nString("fullscreen_actions.delete-current-table-row"),
     style: _$$_7.normal
   }], ["MOVE_ROW_UP", {
     identifier: "MOVE_ROW_UP",
     iconImageURL: buildUploadUrl("76b29748240a680d3c70193da514abf2fd7da3bd"),
-    label: _$$t("fullscreen_actions.move-table-row-up"),
+    label: getI18nString("fullscreen_actions.move-table-row-up"),
     style: _$$_7.normal
   }], ["MOVE_ROW_DOWN", {
     identifier: "MOVE_ROW_DOWN",
     iconImageURL: buildUploadUrl("8a24043471d379715530ceb9a27ee89415e80a4e"),
-    label: _$$t("fullscreen_actions.move-table-row-down"),
+    label: getI18nString("fullscreen_actions.move-table-row-down"),
     style: _$$_7.normal
   }], ["MOVE_COLUMN_LEFT", {
     identifier: "MOVE_COLUMN_LEFT",
     iconImageURL: buildUploadUrl("ced31cac875250517fc43e5503917c727ce83697"),
-    label: _$$t("fullscreen_actions.move-table-column-left"),
+    label: getI18nString("fullscreen_actions.move-table-column-left"),
     style: _$$_7.normal
   }], ["MOVE_COLUMN_RIGHT", {
     identifier: "MOVE_COLUMN_RIGHT",
     iconImageURL: buildUploadUrl("90a6ce44002cb629d48a1152811a25e1f8542e9b"),
-    label: _$$t("fullscreen_actions.move-table-column-right"),
+    label: getI18nString("fullscreen_actions.move-table-column-right"),
     style: _$$_7.normal
   }], ["ADD_COMMENT", {
     identifier: "ADD_COMMENT",
     iconImageURL: buildUploadUrl("ef8e7f34cbdd40b6360bfb68ed73e9435f5df6d3"),
-    label: _$$t("comments.add_a_comment"),
+    label: getI18nString("comments.add_a_comment"),
     style: _$$_7.normal
   }], ["CUT", {
     identifier: "CUT",
     iconImageURL: buildUploadUrl("4906ac36ad87b2fbc8c1131de33e50ffcd0f931c"),
-    label: _$$t("fullscreen_actions.cut"),
+    label: getI18nString("fullscreen_actions.cut"),
     style: _$$_7.normal
   }], ["COPY", {
     identifier: "COPY",
     iconImageURL: buildUploadUrl("a9a157a59bc9bea59323414709220f1aabc8e5b0"),
-    label: _$$t("fullscreen_actions.copy"),
+    label: getI18nString("fullscreen_actions.copy"),
     style: _$$_7.normal
   }], ["PASTE_HERE", {
     identifier: "PASTE_HERE",
     iconImageURL: buildUploadUrl("403745040a09ea356a24a823ce8aaa9729275bfc"),
-    label: _$$t("fullscreen_actions.paste"),
+    label: getI18nString("fullscreen_actions.paste"),
     style: _$$_7.normal
   }], ["PASTE_TO_REPLACE", {
     identifier: "PASTE_TO_REPLACE",
     iconImageURL: buildUploadUrl("403745040a09ea356a24a823ce8aaa9729275bfc"),
-    label: _$$t("fullscreen_actions.paste-to-replace"),
+    label: getI18nString("fullscreen_actions.paste-to-replace"),
     style: _$$_7.normal
   }], ["EXPORT_SELECTION", {
     identifier: "EXPORT_SELECTION",
     iconImageURL: buildUploadUrl("069e62f3f6d36c863fcaf132b661541bae26f3b4"),
-    label: _$$t("fullscreen.context_menu.export_selection"),
+    label: getI18nString("fullscreen.context_menu.export_selection"),
     style: _$$_7.normal
   }], ["BRING_TO_FRONT", {
     identifier: "BRING_TO_FRONT",
     iconImageURL: buildUploadUrl("4ea2ce642395384d4e068112439edce0ae6eb308"),
-    label: _$$t("fullscreen_actions.bring-to-front"),
+    label: getI18nString("fullscreen_actions.bring-to-front"),
     style: _$$_7.normal
   }], ["SEND_TO_BACK", {
     identifier: "SEND_TO_BACK",
     iconImageURL: buildUploadUrl("1cd7645083299efad768ed580af47f6e449f3881"),
-    label: _$$t("fullscreen_actions.send-to-back"),
+    label: getI18nString("fullscreen_actions.send-to-back"),
     style: _$$_7.normal
   }], ["LOCK_UNLOCK", {
     identifier: "LOCK_UNLOCK",
     iconImageURL: buildUploadUrl("5b57575766ec6e015d3ad82abdead130f38b51ee"),
-    label: _$$t("fullscreen.context_menu.lock_unlock"),
+    label: getI18nString("fullscreen.context_menu.lock_unlock"),
     style: _$$_7.normal
   }], ["MULTISELECT_MODE", {
     identifier: "MULTISELECT_MODE",
     iconImageURL: buildUploadUrl("5142f326fd3191c3bd589944cd9b9f89e70d53b5"),
-    label: _$$t("fullscreen.context_menu.multiselect"),
+    label: getI18nString("fullscreen.context_menu.multiselect"),
     style: _$$_7.normal
   }]]);
 }
@@ -11086,10 +11086,10 @@ function mc() {
   return _$$gl(t) ? (console.error("whiteboardDividedSwatchColors should never be mixed"), []) : e && _$$hS2(e) ? e : t ?? [];
 }
 function mu() {
-  let e = _$$R(e => e.mirror.selectionProperties.whiteboardNumSelectedByType);
+  let e = selectWithShallowEqual(e => e.mirror.selectionProperties.whiteboardNumSelectedByType);
   let t = useSelector(e => e.mirror.selectionProperties.whiteboardNumSelectedPlatformShape ?? 0);
   let i = useSelector(e => e.mirror.selectionProperties.whiteboardNumSelected);
-  let n = _$$R(e => e.mirror.appModel.activeCanvasEditModeType);
+  let n = selectWithShallowEqual(e => e.mirror.appModel.activeCanvasEditModeType);
   let r = useSelector(e => Object.keys(e.mirror.sceneGraphSelection).some(t => {
     let i = e.mirror.sceneGraph.get(t);
     return !!i?.textSublayer?.textContent.length;
@@ -11260,7 +11260,7 @@ function m$() {
   e.push({
     itemStringType: "textAction",
     identifier: mz,
-    text: _$$t("whiteboard.text_sizes.custom")
+    text: getI18nString("whiteboard.text_sizes.custom")
   });
   return e;
 }
@@ -11300,7 +11300,7 @@ let m1 = {
 function m2() {
   return {
     identifier: "AI_SUMMARIZE",
-    label: _$$t("whiteboard.inline_menu.ai_quick_actions_summarize_button"),
+    label: getI18nString("whiteboard.inline_menu.ai_quick_actions_summarize_button"),
     iconImageURL: buildUploadUrl("1d27a05c1b24aba212490339088465fe5f599e4c"),
     style: _$$_7.normal
   };
@@ -11308,7 +11308,7 @@ function m2() {
 function m3() {
   return {
     identifier: "AI_SORT",
-    label: _$$t("whiteboard.inline_menu.ai_quick_actions_sort_stickies_button"),
+    label: getI18nString("whiteboard.inline_menu.ai_quick_actions_sort_stickies_button"),
     iconImageURL: buildUploadUrl("56fafc9be0e983648b1b6daee4136bc0897aed21"),
     style: _$$_7.normal
   };
@@ -11316,7 +11316,7 @@ function m3() {
 function m5() {
   return {
     identifier: "AI_LEARN_MORE",
-    label: _$$t("whiteboard.inline_menu.ai_quick_actions_dropdown_disclaimer_cta"),
+    label: getI18nString("whiteboard.inline_menu.ai_quick_actions_dropdown_disclaimer_cta"),
     iconImageURL: null,
     style: _$$_7.normal
   };
@@ -12072,9 +12072,9 @@ function fl() {
   };
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(_$$V4, {
     variant: "button",
-    tooltip: _$$t("fullscreen_actions.ungroup-selection"),
+    tooltip: getI18nString("fullscreen_actions.ungroup-selection"),
     tooltipShortcutActionKey: "ungroup-selection",
-    ariaLabel: _$$t("fullscreen_actions.ungroup-selection"),
+    ariaLabel: getI18nString("fullscreen_actions.ungroup-selection"),
     onClick: e,
     recordingKey: "ungroupSelection",
     children: jsx(fa, {})
@@ -12130,13 +12130,13 @@ function fh({
   };
   let h = useMemo(() => _$$g6(), []);
   let m = useMemo(() => _$$g6(), []);
-  let f = useMemo(() => Wj(_$$B5.length + 1, _$$t("whiteboard.inline_menu.washi_tape_pattern"), h), [h]);
+  let f = useMemo(() => Wj(_$$B5.length + 1, getI18nString("whiteboard.inline_menu.washi_tape_pattern"), h), [h]);
   let _ = e => jsx("div", {
     id: m,
     className: ex()({
       [_$$H6]: e
     }),
-    "aria-label": _$$t("whiteboard.washi_tapes.custom"),
+    "aria-label": getI18nString("whiteboard.washi_tapes.custom"),
     role: "option",
     "aria-selected": e,
     children: !Array.isArray(r) && _$$B5.includes(r) ? jsx(HL, {
@@ -12146,7 +12146,7 @@ function fh({
         boxShadow: "0px 0px 0px 1px rgba(255, 255, 255, 0.6) inset"
       },
       onPointerUp: p,
-      tooltip: _$$t("whiteboard.washi_tapes.custom"),
+      tooltip: getI18nString("whiteboard.washi_tapes.custom"),
       fallbackSvg: _$$xY2
     }) : jsx(YR, {
       imagePaint: i,
@@ -12185,7 +12185,7 @@ function fh({
       active: s ? "NORMAL" : "NONE",
       ariaActiveDescendant: l,
       ariaControls: h,
-      ariaLabel: _$$t("whiteboard.inline_menu.washi_tape_pattern_selector_label", {
+      ariaLabel: getI18nString("whiteboard.inline_menu.washi_tape_pattern_selector_label", {
         currentPattern: _$$M5(t).toLocaleLowerCase()
       }),
       caret: "down",
@@ -12193,7 +12193,7 @@ function fh({
       onPointerDown: r,
       recordingKey: _$$Pt(e, "washiTapePatternSelectorButton"),
       role: "combobox",
-      tooltip: Array.isArray(t) ? _$$t("whiteboard.delightful_toolbar.mixed") : _$$M5(t),
+      tooltip: Array.isArray(t) ? getI18nString("whiteboard.delightful_toolbar.mixed") : _$$M5(t),
       children: !Array.isArray(t) && _$$B5.includes(t) ? jsx(_$$W6, {
         size: "small",
         value: _$$M4(t),
@@ -12522,10 +12522,10 @@ let fS = (e, t) => {
   }();
   let l = function () {
     let e = mY();
-    let t = _$$t("whiteboard.text_sizes.custom");
+    let t = getI18nString("whiteboard.text_sizes.custom");
     if (e && e.length > 0) {
       let i = e[0];
-      if (e.length > 1) t = _$$t("whiteboard.inline_menu.font_size_mixed");else {
+      if (e.length > 1) t = getI18nString("whiteboard.inline_menu.font_size_mixed");else {
         let e = m$().find(e => {
           let t = e.identifier.substring(mW.length);
           return t in h_ && h_[t].maxValue === i;
@@ -12669,7 +12669,7 @@ let fS = (e, t) => {
     let i = _$$a6();
     let n = [];
     if (e && n.push(m3().identifier), t && n.push(m2().identifier), !n.length) return null;
-    let r = i ? _$$t("whiteboard.inline_menu.ai_quick_actions_dropdown_mobile_disclaimer") : _$$t("whiteboard.inline_menu.ai_quick_actions_dropdown_mobile_disclaimer.ga");
+    let r = i ? getI18nString("whiteboard.inline_menu.ai_quick_actions_dropdown_mobile_disclaimer") : getI18nString("whiteboard.inline_menu.ai_quick_actions_dropdown_mobile_disclaimer.ga");
     return {
       itemStringType: "menu",
       identifier: m6().identifier,
@@ -12792,7 +12792,7 @@ function fw({
   anchorPointsStateRef: t
 }) {
   let i = _$$rN();
-  let n = fS(fC(), _$$R(e => e.mirror.selectionProperties.whiteboardControls));
+  let n = fS(fC(), selectWithShallowEqual(e => e.mirror.selectionProperties.whiteboardControls));
   !n || _$$c7(n.itemStates, e.current?.itemStates) && _$$c7({
     ...n.anchorPoints,
     displayStateId: null
@@ -12825,8 +12825,8 @@ let fI = (e, t) => {
   let _ = useSelector(e => e.universalInsertModal);
   let x = _$$wi();
   let g = useSelector(e => "NOT_PINNED" !== e.universalInsertModal.pinned);
-  let j = !!_$$md(_$$ph);
-  let b = !!_$$md(LQ);
+  let j = !!useAtomWithSubscription(_$$ph);
+  let b = !!useAtomWithSubscription(LQ);
   let y = useSelector(({
     mirror: {
       appModel: e
@@ -13368,8 +13368,8 @@ function fG(e) {
     AnimatedLockSvg
   } = fB(fF.LOCKED);
   return e.shouldAnimateOnHover ? getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(_$$V4, {
-    tooltip: _$$t("whiteboard.inline_menu.unlock"),
-    ariaLabel: _$$t("whiteboard.inline_menu.unlock"),
+    tooltip: getI18nString("whiteboard.inline_menu.unlock"),
+    ariaLabel: getI18nString("whiteboard.inline_menu.unlock"),
     dataTestId: "unlock-control-v2",
     htmlAttributes: {
       onMouseEnter: unlockAnimation,
@@ -13380,7 +13380,7 @@ function fG(e) {
     variant: "button",
     children: AnimatedLockSvg
   }) : jsx(_$$$n, {
-    tooltip: _$$t("whiteboard.inline_menu.unlock"),
+    tooltip: getI18nString("whiteboard.inline_menu.unlock"),
     onClick: () => Y5.triggerActionInUserEditScope("unlock-selected-nodes"),
     recordingKey: "unlockV2",
     onMouseEnter: unlockAnimation,
@@ -13392,15 +13392,15 @@ function fG(e) {
     children: AnimatedLockSvg
   }) : getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(_$$V4, {
     variant: "button",
-    tooltip: _$$t("whiteboard.inline_menu.unlock"),
+    tooltip: getI18nString("whiteboard.inline_menu.unlock"),
     onClick: () => Y5.triggerActionInUserEditScope("unlock-selected-nodes"),
     recordingKey: "unlock",
     "data-testid": "unlock-control",
-    ariaLabel: _$$t("whiteboard.inline_menu.unlock"),
+    ariaLabel: getI18nString("whiteboard.inline_menu.unlock"),
     children: jsx(_$$$4, {})
   }) : jsx(K0, {
     svg: _$$A38,
-    tooltip: _$$t("whiteboard.inline_menu.unlock"),
+    tooltip: getI18nString("whiteboard.inline_menu.unlock"),
     onClick: () => Y5.triggerActionInUserEditScope("unlock-selected-nodes"),
     recordingKey: "unlock",
     testId: "unlock-control",
@@ -13414,8 +13414,8 @@ class fK extends _$$c$3 {}
 var fW = (e => (e.LOCK_ALL = "lock_all", e.LOCK_SECTION_BACKGROUND_ONLY = "lock_section_background_only", e))(fW || {});
 let fz = ["lock_all", "lock_section_background_only"];
 let fZ = () => ({
-  lock_all: _$$t("whiteboard.inline_menu.lock_all"),
-  lock_section_background_only: _$$t("whiteboard.inline_menu.lock_background_only")
+  lock_all: getI18nString("whiteboard.inline_menu.lock_all"),
+  lock_section_background_only: getI18nString("whiteboard.inline_menu.lock_background_only")
 });
 function f$() {
   let [e, t] = useState([]);
@@ -13470,18 +13470,18 @@ function f$() {
         a(!1);
       },
       "data-tooltip-type": i ? void 0 : "text",
-      "data-tooltip": i ? void 0 : _$$t("whiteboard.inline_menu.unlock"),
+      "data-tooltip": i ? void 0 : getI18nString("whiteboard.inline_menu.unlock"),
       "data-testid": "unlock-with-friction-control"
     },
     recordingKey: "unlock-with-friction-control",
-    "aria-label": i ? void 0 : _$$t("whiteboard.inline_menu.unlock"),
+    "aria-label": i ? void 0 : getI18nString("whiteboard.inline_menu.unlock"),
     children: jsxs("div", {
       className: "lock_control--button--XGLsY",
       ref: d,
       children: [AnimatedLockSvg, jsx("span", {
         className: "lock_control--text--YFFB- text--fontNeg11--StdFq text--_fontBase--QdLsd text--_negText--j9g-L",
         ref: c,
-        children: _$$tx("whiteboard.inline_menu.click_again_to_unlock")
+        children: renderI18nText("whiteboard.inline_menu.click_again_to_unlock")
       })]
     })
   });
@@ -13554,7 +13554,7 @@ function f1({
   });
 }
 function f2(e) {
-  return e ? _$$gl(e) ? _$$t("whiteboard.code_blocks.mixed") : _$$t("whiteboard.inline_menu.programming_language_label", {
+  return e ? _$$gl(e) ? getI18nString("whiteboard.code_blocks.mixed") : getI18nString("whiteboard.inline_menu.programming_language_label", {
     currentLanguage: _$$lR.format(e)
   }) : void 0;
 }
@@ -13585,7 +13585,7 @@ let _u = e => function () {
   let t;
   let [i, n] = _$$lJ2("connectorStartCap" === e ? "connectorStartCapForSelection" : "connectorEndCapForSelection");
   let r = kl("connectorStartCap" === e ? "connectorStartCapDirection" : "connectorEndCapDirection");
-  let a = "connectorStartCap" === e ? _$$t("whiteboard.inline_menu.connector_start_point") : _$$t("whiteboard.inline_menu.connector_end_point");
+  let a = "connectorStartCap" === e ? getI18nString("whiteboard.inline_menu.connector_start_point") : getI18nString("whiteboard.inline_menu.connector_end_point");
   let s = useMemo(() => _$$g6(), []);
   let [d, p] = useState(!1);
   let h = kl("connectorLineStyleForSelection");
@@ -13594,9 +13594,9 @@ let _u = e => function () {
     "STRAIGHT" === h && DV9?.snapshotStraightConnectorCaps();
   };
   let f = _f(i);
-  f && (t = "connectorStartCap" === e ? _$$t("whiteboard.inline_menu.connector_start_point_selector_label", {
+  f && (t = "connectorStartCap" === e ? getI18nString("whiteboard.inline_menu.connector_start_point_selector_label", {
     currentStartCap: f.toLocaleLowerCase()
-  }) : _$$t("whiteboard.inline_menu.connector_end_point_selector_label", {
+  }) : getI18nString("whiteboard.inline_menu.connector_end_point_selector_label", {
     currentEndCap: f.toLocaleLowerCase()
   }));
   let _ = _c.map(t => ({
@@ -13723,17 +13723,17 @@ function _m(e) {
 function _f(e) {
   switch (e) {
     case "ARROW_EQUILATERAL":
-      return _$$t("whiteboard.connector_caps.solid_arrow");
+      return getI18nString("whiteboard.connector_caps.solid_arrow");
     case "ARROW_LINES":
-      return _$$t("whiteboard.connector_caps.line_arrow");
+      return getI18nString("whiteboard.connector_caps.line_arrow");
     case "TRIANGLE_FILLED":
-      return _$$t("whiteboard.connector_caps.triangle");
+      return getI18nString("whiteboard.connector_caps.triangle");
     case "DIAMOND_FILLED":
-      return _$$t("whiteboard.connector_caps.diamond");
+      return getI18nString("whiteboard.connector_caps.diamond");
     case "CIRCLE_FILLED":
-      return _$$t("whiteboard.connector_caps.circle");
+      return getI18nString("whiteboard.connector_caps.circle");
     default:
-      return _$$t("whiteboard.connector_caps.none");
+      return getI18nString("whiteboard.connector_caps.none");
   }
 }
 let __ = _u("connectorStartCap");
@@ -13800,11 +13800,11 @@ function _S(e) {
 function _w(e) {
   switch (e) {
     case "ELBOWED":
-      return _$$t("whiteboard.inline_menu.line_shape_elbowed");
+      return getI18nString("whiteboard.inline_menu.line_shape_elbowed");
     case "STRAIGHT":
-      return _$$t("whiteboard.inline_menu.line_shape_straight");
+      return getI18nString("whiteboard.inline_menu.line_shape_straight");
     case "CURVED":
-      return _$$t("whiteboard.inline_menu.line_shape_curved");
+      return getI18nString("whiteboard.inline_menu.line_shape_curved");
     default:
       return "";
   }
@@ -13824,7 +13824,7 @@ function _O(e) {
   let t = _$$uQ3();
   let i = kl("embedData");
   let n = _$$tq(i);
-  let [r, a] = _$$fp(_$$n9);
+  let [r, a] = useAtomValueAndSetter(_$$n9);
   let s = useCallback(() => {
     t && (n(_$$yc.EMBED_EXPAND), a({
       type: "ACTIVATE_AND_MAXIMIZE",
@@ -13835,15 +13835,15 @@ function _O(e) {
   }, [a, t, n]);
   return i && t && (!r || e.inModal) ? getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(_$$V4, {
     variant: "button",
-    tooltip: _$$t("whiteboard.embeds.inline_menu.maximize"),
-    ariaLabel: _$$t("whiteboard.embeds.inline_menu.maximize"),
+    tooltip: getI18nString("whiteboard.embeds.inline_menu.maximize"),
+    ariaLabel: getI18nString("whiteboard.embeds.inline_menu.maximize"),
     onClick: s,
     recordingKey: "embedMaximizeControl",
     children: jsx(_$$O3, {})
   }) : jsx(K0, {
     svg: _$$A49,
     active: "NONE",
-    tooltip: _$$t("whiteboard.embeds.inline_menu.maximize"),
+    tooltip: getI18nString("whiteboard.embeds.inline_menu.maximize"),
     onClick: s,
     recordingKey: "embedMaximizeControl"
   }) : null;
@@ -13908,12 +13908,12 @@ function _K({
           children: [jsx("img", {
             className: "face_stamp_control--faceStampOptionThumb--Aoyvy",
             src: p[t.id],
-            alt: _$$t("whiteboard.inserts.faces_inline_search_image_alt_text", {
+            alt: getI18nString("whiteboard.inserts.faces_inline_search_image_alt_text", {
               user: t.handle
             })
           }), jsx("span", {
             className: ex()("face_stamp_control--userDropdownOption--WodTi ellipsis--ellipsis--Tjyfa", {
-              [_H]: XN
+              [_H]: isIpadDevice
             }),
             children: t.handle
           })]
@@ -13924,7 +13924,7 @@ function _K({
           className: _B,
           children: jsx("span", {
             className: "face_stamp_control--noSearchFoundText--CAeSf ellipsis--ellipsis--Tjyfa",
-            children: _$$tx("whiteboard.inserts.faces_inline_search_no_results", {
+            children: renderI18nText("whiteboard.inserts.faces_inline_search_no_results", {
               searchQuery: jsx("span", {
                 className: "face_stamp_control--emptyStateStrongText--Og0Ql",
                 children: n
@@ -13952,7 +13952,7 @@ function _K({
       hideXIcon: !n,
       isKeyDownHandled: t => "Escape" === t.key && (e(), !0),
       onChange: i,
-      placeholder: _$$t("whiteboard.face_stamps.enter_name"),
+      placeholder: getI18nString("whiteboard.face_stamps.enter_name"),
       query: n,
       selectTextOnMount: !0
     }, "search"), ...f],
@@ -14205,7 +14205,7 @@ function xn({
       onClick: () => {
         B(!1);
         k(!O);
-        g && "fontFamilyControl" === g && (_$$nl2() ? z(!0) : (z(!1), K.reset(), K.scheduleOnce(() => {
+        g && "fontFamilyControl" === g && (isInteractionPathCheck() ? z(!0) : (z(!1), K.reset(), K.scheduleOnce(() => {
           z(!0);
         }, 250)));
       },
@@ -14288,7 +14288,7 @@ function xh({
     let i = e.get(t);
     return [i?.mainComponent?.sourceLibraryKey, i?.mainComponent?.name];
   }, e);
-  let d = _$$md(Ai);
+  let d = useAtomWithSubscription(Ai);
   let {
     libraryItems,
     metadata
@@ -14429,7 +14429,7 @@ function xh({
         return !0;
       },
       onChange: O,
-      placeholder: _$$t("whiteboard.inline_menu.change_shape_search"),
+      placeholder: getI18nString("whiteboard.inline_menu.change_shape_search"),
       query: j
     }),
     onChange: n,
@@ -14661,7 +14661,7 @@ function xf({
         return !0;
       },
       onChange: L,
-      placeholder: _$$t("whiteboard.inline_menu.change_shape_search"),
+      placeholder: getI18nString("whiteboard.inline_menu.change_shape_search"),
       query: g
     }),
     onChange: n,
@@ -14896,7 +14896,7 @@ function xT({
       iconClassName: "whiteboard_shape_selector--searchIcon--wXneH",
       isKeyDownHandled: e => (e.keyCode === Uz.ESCAPE || "Escape" === e.code || "Escape" === e.key ? "" !== p ? v() : u(!1) : e.keyCode === Uz.ENTER ? "" !== p && m.length > 0 && (i(m[0], e), u(!1)) : ("ArrowUp" === e.code || "ArrowDown" === e.code) && (d.current?.focus(), m.length > 0 && (j(!0), x("ArrowDown" === e.code ? m.length > 1 && "" !== p ? 1 : 0 : m.length - 1)), e.preventDefault()), !0),
       onChange: C,
-      placeholder: _$$t("whiteboard.inline_menu.change_shape_search"),
+      placeholder: getI18nString("whiteboard.inline_menu.change_shape_search"),
       query: p
     }),
     onChange: i,
@@ -14951,9 +14951,9 @@ function xE({
   let r = xv.getShapeGrid({
     ariaLabel: n
   });
-  let a = _$$R(hT);
+  let a = selectWithShallowEqual(hT);
   if (!a) {
-    $D(_$$e.FIGJAM, Error("No selected shape ghost node"));
+    reportError(_$$e.FIGJAM, Error("No selected shape ghost node"));
     return null;
   }
   let s = a.shapeWithTextType;
@@ -14995,7 +14995,7 @@ function xE({
       children: [jsx(_$$B, {
         svg: _$$eg3(s),
         className: "whiteboard_shape_selector--sameShapeSvg--JnJli"
-      }), _$$tx("whiteboard.inline_menu.add_same_shape")]
+      }), renderI18nText("whiteboard.inline_menu.add_same_shape")]
     })]
   });
 }
@@ -15004,7 +15004,7 @@ function xw() {
   let e = _$$nc.user("create-shape-from-inline-quick-add", function (e) {
     glU?.createShapeFromInlineQuickAdd(e);
   });
-  let t = _$$t("whiteboard.inline_menu.change_shape");
+  let t = getI18nString("whiteboard.inline_menu.change_shape");
   return jsx(xE, {
     onSelect: e,
     showShapePreview: function (e) {
@@ -15021,7 +15021,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
   let t = A5("whiteboardColor");
   let i = mc();
   let [n, r] = useState(!1);
-  let a = _$$R(e => e.mirror.selectionProperties.whiteboardNumSelectedByType);
+  let a = selectWithShallowEqual(e => e.mirror.selectionProperties.whiteboardNumSelectedByType);
   let s = useSelector(e => e.mirror.selectionProperties.whiteboardNumSelectedPlatformShape ?? 0);
   let u = useSelector(e => e.mirror.selectionProperties.whiteboardNumSelected);
   let p = useSelector(e => {
@@ -15050,7 +15050,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
     onClick: _$$lQ,
     active: "NONE",
     caret: "down",
-    tooltip: _$$t("whiteboard.no-edit-hidden-section-tooltip"),
+    tooltip: getI18nString("whiteboard.no-edit-hidden-section-tooltip"),
     disabled: !0,
     children: jsx(_$$cd2, {
       size: "small",
@@ -15064,7 +15064,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
         isColorPopoverOpen: n
       });
     })(),
-    ariaLabel: _$$t("whiteboard.inline_menu.color_list_box"),
+    ariaLabel: getI18nString("whiteboard.inline_menu.color_list_box"),
     buttonSize: "small",
     customOpacity: e,
     isColorPopoverOpen: n,
@@ -15094,7 +15094,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
     paletteType: "sticky",
     buttonSize: "small",
     optionSize: "medium",
-    ariaLabel: _$$t("whiteboard.inline_menu.color_list_box"),
+    ariaLabel: getI18nString("whiteboard.inline_menu.color_list_box"),
     isColorPopoverOpen: i,
     setIsColorPopoverOpen: n
   });
@@ -15136,8 +15136,8 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
   let i = _$$g6();
   if (!e) return null;
   let n = _$$gl(e) || !e ? "1" : `${xS.format(e)}`;
-  let r = _$$t("whiteboard.inline_menu.change_shape");
-  let a = "1" !== n ? _$$t("whiteboard.inline_menu.change_shape_label", {
+  let r = getI18nString("whiteboard.inline_menu.change_shape");
+  let a = "1" !== n ? getI18nString("whiteboard.inline_menu.change_shape_label", {
     currentShape: n.toLocaleLowerCase()
   }) : void 0;
   return jsx(xT, {
@@ -15202,8 +15202,8 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
   }, [s, r]);
   if (!t || "INSTANCE" !== i || !n || e) return null;
   let m = _$$g6();
-  let f = _$$t("whiteboard.inline_menu.change_shape");
-  let _ = _$$t("whiteboard.inline_menu.change_shape_label", {
+  let f = getI18nString("whiteboard.inline_menu.change_shape");
+  let _ = getI18nString("whiteboard.inline_menu.change_shape_label", {
     currentShape: n
   });
   let g = getFeatureFlags().ad_branded_shapes_m1 ? xh : xf;
@@ -15237,8 +15237,8 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
   let e = _$$ut(Ez5?.editorState().selectionIsHyperlink, !1);
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(_$$V4, {
     variant: "button",
-    tooltip: _$$t("fullscreen_actions.text-edit-hyperlink"),
-    ariaLabel: _$$t("fullscreen_actions.text-edit-hyperlink"),
+    tooltip: getI18nString("fullscreen_actions.text-edit-hyperlink"),
+    ariaLabel: getI18nString("fullscreen_actions.text-edit-hyperlink"),
     onClick: () => Y5.triggerAction("text-edit-hyperlink"),
     recordingKey: "editHyperlink",
     tooltipShortcutActionKey: "text-edit-hyperlink",
@@ -15257,8 +15257,8 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
   let t = h9();
   return getFeatureFlags().figjam_a11y_inline_toolbar ? t ? jsx(_$$V4, {
     variant: "toggle",
-    tooltip: _$$t("fullscreen_actions.text-toggle-ordered-list"),
-    ariaLabel: _$$t("fullscreen_actions.text-toggle-ordered-list"),
+    tooltip: getI18nString("fullscreen_actions.text-toggle-ordered-list"),
+    ariaLabel: getI18nString("fullscreen_actions.text-toggle-ordered-list"),
     checked: t,
     offIcon: jsx(_$$p8, {}),
     onIcon: jsx(_$$p8, {}),
@@ -15267,8 +15267,8 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
     tooltipShortcutActionKey: "text-toggle-ordered-list"
   }) : jsx(_$$V4, {
     variant: "toggle",
-    tooltip: _$$t("fullscreen_actions.text-toggle-unordered-list"),
-    ariaLabel: _$$t("fullscreen_actions.text-toggle-unordered-list"),
+    tooltip: getI18nString("fullscreen_actions.text-toggle-unordered-list"),
+    ariaLabel: getI18nString("fullscreen_actions.text-toggle-unordered-list"),
     checked: e,
     offIcon: jsx(_$$Z5, {}),
     onIcon: jsx(_$$Z5, {}),
@@ -15298,8 +15298,8 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
   });
 }], [Tcr.FONT_FAMILY, function () {
   let [e, t] = _$$lJ2("whiteboardFontFamilies");
-  let i = _$$R(e => e.mirror.selectionProperties.whiteboardNumSelectedByType);
-  let n = EZ();
+  let i = selectWithShallowEqual(e => e.mirror.selectionProperties.whiteboardNumSelectedByType);
+  let n = isPrimaryLocaleEnglish();
   let [r, a] = useState(void 0);
   let {
     getTriggerProps,
@@ -15310,7 +15310,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
   let p = e => {
     if (e) {
       let n = pD(e);
-      n && (_$$sx("FigJam font family changed", {
+      n && (trackEventAnalytics("FigJam font family changed", {
         source: "default",
         fontFamily: e,
         nodeType: i && 1 === Object.keys(i).length && Object.keys(i).pop() || "MIXED",
@@ -15321,18 +15321,18 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
   let h = Array.from(pM());
   let m = c.length > 0 ? [...h, "divider", ...c] : [...h];
   let f = Math.max(4, 32 * m.indexOf(e[0]));
-  let _ = _$$t("whiteboard.inline_menu.font_family");
+  let _ = getI18nString("whiteboard.inline_menu.font_family");
   let x = _$$g6();
   let g = c.length > 0;
   let j = pU(e);
-  let b = j ? _$$t("whiteboard.inline_menu.font_family_label", {
+  let b = j ? getI18nString("whiteboard.inline_menu.font_family_label", {
     currentFont: j.toLocaleLowerCase()
-  }) : _$$t("whiteboard.inline_menu.font_family");
+  }) : getI18nString("whiteboard.inline_menu.font_family");
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsxs(_$$bL3, {
     manager,
     children: [jsx(_$$V4, {
       variant: "menu",
-      tooltip: _$$t("whiteboard.inline_menu.font_family"),
+      tooltip: getI18nString("whiteboard.inline_menu.font_family"),
       getTriggerProps,
       ariaLabel: b,
       recordingKey: "fontFamilyControl",
@@ -15340,7 +15340,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
     }), jsx(_$$mc2, {
       children: jsxs(z6, {
         title: jsx(_$$r4, {
-          children: _$$t("whiteboard.inline_menu.font_family")
+          children: getI18nString("whiteboard.inline_menu.font_family")
         }),
         onChange: p,
         value: e[0],
@@ -15363,7 +15363,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
         }), g && jsxs(Fragment, {
           children: [jsx(_$$wv3, {}), c.map(e => jsx(CU, {
             value: e,
-            "aria-label": _$$t("whiteboard.inline_menu.font_family_label", {
+            "aria-label": getI18nString("whiteboard.inline_menu.font_family_label", {
               currentFont: e.toLocaleLowerCase()
             }),
             "data-testid": "fontFamilyOption",
@@ -15410,7 +15410,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
       }) => {
         let s;
         let l = pU(e);
-        l && (s = _$$t("whiteboard.inline_menu.font_family_label", {
+        l && (s = getI18nString("whiteboard.inline_menu.font_family_label", {
           currentFont: l.toLocaleLowerCase()
         }));
         return jsx(K0, {
@@ -15425,7 +15425,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
           recordingKey: "fontFamilyControl",
           role: "combobox",
           svg: pF(e),
-          tooltip: _$$t("whiteboard.inline_menu.font_family")
+          tooltip: getI18nString("whiteboard.inline_menu.font_family")
         });
       },
       options: m,
@@ -15492,7 +15492,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
     getTriggerProps,
     manager
   } = _$$b7();
-  let h = _$$R(e => e.mirror.selectionProperties.whiteboardNumSelectedByType);
+  let h = selectWithShallowEqual(e => e.mirror.selectionProperties.whiteboardNumSelectedByType);
   let [m, f] = _$$lJ2("whiteboardFontSizes");
   if (!m || !_$$hS2(m)) return null;
   let _ = _$$hS2(m) ? m : [];
@@ -15525,15 +15525,15 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
   let y = {
     inputClassName: _$$hF,
     formatter: hg,
-    customMixedText: _$$t("whiteboard.inline_menu.font_size_mixed")
+    customMixedText: getI18nString("whiteboard.inline_menu.font_size_mixed")
   };
   let v = {
     height: 40,
     fullWidth: !0,
     additionalStylesClassName: _$$jZ
   };
-  let C = _$$t("whiteboard.inline_menu.font_size_input");
-  let T = _$$t("whiteboard.inline_menu.font_size");
+  let C = getI18nString("whiteboard.inline_menu.font_size_input");
+  let T = getI18nString("whiteboard.inline_menu.font_size");
   let E = 1 === _.length ? _[0] : void 0;
   let S = E ? hg.format(E) : y.customMixedText;
   let w = e => x(e ? parseInt(e) : void 0);
@@ -15543,7 +15543,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
       variant: "menu",
       tooltip: T,
       getTriggerProps,
-      ariaLabel: _$$t("whiteboard.inline_menu.font_size_label", {
+      ariaLabel: getI18nString("whiteboard.inline_menu.font_size_label", {
         currentFontSize: S.toLocaleLowerCase()
       }),
       recordingKey: "whiteboardTextStyle",
@@ -15575,7 +15575,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
         className: "x1xq1gxn",
         children: jsx(_$$p5, {
           type: "number",
-          "aria-label": _$$t("whiteboard.inline_menu.custom_font_size"),
+          "aria-label": getI18nString("whiteboard.inline_menu.custom_font_size"),
           placeholder: C,
           recordingKey: "whiteboardTextStyleNumberInput",
           "data-testid": "whiteboardTextStyleNumberInputDataTestId",
@@ -15654,7 +15654,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
       })
     }), jsxs(hd, {
       ...y,
-      ariaLabel: _$$t("whiteboard.inline_menu.font_size_label", {
+      ariaLabel: getI18nString("whiteboard.inline_menu.font_size_label", {
         currentFontSize: 1 === _.length ? hg.format(_[0]).toLocaleLowerCase() : y.customMixedText.toLocaleLowerCase()
       }),
       blurOnChange: !0,
@@ -15686,7 +15686,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
         selected: 1 === _.length && !hh.has(_[0]),
         ariaLabel: T,
         children: jsx(Q7, {
-          ariaLabel: _$$t("whiteboard.inline_menu.custom_font_size"),
+          ariaLabel: getI18nString("whiteboard.inline_menu.custom_font_size"),
           autoFocus: !0,
           className: QR,
           dataTestId: "whiteboardTextStyleNumberInputDataTestId",
@@ -15711,20 +15711,20 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
   };
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(_$$V4, {
     variant: "button",
-    tooltip: _$$t("whiteboard.inline_menu.start_mind_map"),
-    ariaLabel: _$$t("whiteboard.inline_menu.start_mind_map"),
+    tooltip: getI18nString("whiteboard.inline_menu.start_mind_map"),
+    ariaLabel: getI18nString("whiteboard.inline_menu.start_mind_map"),
     onClick: e,
     recordingKey: "startMindMapControl",
     children: jsx(_3, {})
   }) : jsx(K0, {
     svg: _$$A59,
-    tooltip: _$$t("whiteboard.inline_menu.start_mind_map"),
+    tooltip: getI18nString("whiteboard.inline_menu.start_mind_map"),
     onClick: e,
     recordingKey: "startMindMapControl"
   });
 }], [Tcr.TEXT_ALIGN_H, function () {
   let e = kl("whiteboardTextAlignHorizontal");
-  let t = _$$t("whiteboard.inline_menu.text_alignment");
+  let t = getI18nString("whiteboard.inline_menu.text_alignment");
   let i = _$$nc.user("set-text-align", e => {
     p8(e);
   });
@@ -15734,23 +15734,23 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
     "data-tooltip-type": Ib.LOOKUP,
     "data-tooltip": p7(e)
   }) : "";
-  let d = s ? _$$t("whiteboard.inline_menu.text_alignment_label", {
+  let d = s ? getI18nString("whiteboard.inline_menu.text_alignment_label", {
     currentTextAlignment: s.toLocaleLowerCase()
   }) : void 0;
   let c = useMemo(() => [{
     value: "LEFT",
     content: jsx(_$$h9, {}),
-    label: _$$t("fullscreen_actions.text-align-left"),
+    label: getI18nString("fullscreen_actions.text-align-left"),
     isSelected: "LEFT" === e
   }, {
     value: "CENTER",
     content: jsx(_$$N4, {}),
-    label: _$$t("fullscreen_actions.text-align-center"),
+    label: getI18nString("fullscreen_actions.text-align-center"),
     isSelected: "CENTER" === e
   }, {
     value: "RIGHT",
     content: jsx(_$$K4, {}),
-    label: _$$t("fullscreen_actions.text-align-right"),
+    label: getI18nString("fullscreen_actions.text-align-right"),
     isSelected: "RIGHT" === e
   }], [e]);
   let p = useMemo(() => {
@@ -15779,7 +15779,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
         "data-tooltip-type": Ib.LOOKUP,
         "data-tooltip": p7(e)
       }) : "";
-      let c = d ? _$$t("whiteboard.inline_menu.text_alignment_label", {
+      let c = d ? getI18nString("whiteboard.inline_menu.text_alignment_label", {
         currentTextAlignment: d.toLocaleLowerCase()
       }) : void 0;
       return jsx(K0, {
@@ -15832,7 +15832,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
   });
 }], [Tcr.TEXT_ALIGN_V, function () {
   let e = kl("whiteboardTextAlignVertical");
-  let t = _$$t("whiteboard.inline_menu.text_alignment_v");
+  let t = getI18nString("whiteboard.inline_menu.text_alignment_v");
   let i = useId();
   let [n, r] = useState(!1);
   let a = _$$nc.user("set-text-align-v", e => {
@@ -15842,23 +15842,23 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
     "data-tooltip-type": Ib.LOOKUP,
     "data-tooltip": hi(e)
   }) : "";
-  let d = s ? _$$t("whiteboard.inline_menu.text_alignment_v_label", {
+  let d = s ? getI18nString("whiteboard.inline_menu.text_alignment_v_label", {
     currentTextAlignment: s.toLocaleLowerCase()
   }) : void 0;
   let c = useMemo(() => [{
     value: "TOP",
     content: jsx(_$$b8, {}),
-    label: _$$t("fullscreen_actions.text-align-top"),
+    label: getI18nString("fullscreen_actions.text-align-top"),
     isSelected: "TOP" === e
   }, {
     value: "CENTER",
     content: jsx(_$$X2, {}),
-    label: _$$t("fullscreen_actions.text-align-middle"),
+    label: getI18nString("fullscreen_actions.text-align-middle"),
     isSelected: "CENTER" === e
   }, {
     value: "BOTTOM",
     content: jsx(_$$z6, {}),
-    label: _$$t("fullscreen_actions.text-align-bottom"),
+    label: getI18nString("fullscreen_actions.text-align-bottom"),
     isSelected: "BOTTOM" === e
   }], [e]);
   let p = useMemo(() => jsx(_$$B, {
@@ -15886,7 +15886,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
         "data-tooltip-type": Ib.LOOKUP,
         "data-tooltip": hi(e)
       }) : "";
-      let c = d ? _$$t("whiteboard.inline_menu.text_alignment_v_label", {
+      let c = d ? getI18nString("whiteboard.inline_menu.text_alignment_v_label", {
         currentTextAlignment: d.toLocaleLowerCase()
       }) : void 0;
       return jsx(K0, {
@@ -15947,7 +15947,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
   };
   let d = useId();
   let p = _w(t);
-  p && (e = _$$t("whiteboard.inline_menu.line_shape_selector_label", {
+  p && (e = getI18nString("whiteboard.inline_menu.line_shape_selector_label", {
     currentLineShape: p.toLocaleLowerCase()
   }));
   let h = a.map(e => ({
@@ -15969,7 +15969,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(p0, {
     onChange: s,
     options: h,
-    tooltip: _$$t("whiteboard.inline_menu.line_shape"),
+    tooltip: getI18nString("whiteboard.inline_menu.line_shape"),
     ariaLabel: e,
     buttonContent: m,
     recordingKey: "connectorLineStyleControl"
@@ -15994,7 +15994,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
       recordingKey: "connectorLineStyleControl",
       role: "combobox",
       svg: _S(t),
-      tooltip: _$$t("whiteboard.inline_menu.line_shape")
+      tooltip: getI18nString("whiteboard.inline_menu.line_shape")
     }),
     options: a,
     renderOption: ({
@@ -16015,7 +16015,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
       recordingKey: _$$Pt("connectorLineStyleControl", String(e)),
       role: "option"
     }, String(e)),
-    OptionWrapper: SC(_$$t("whiteboard.inline_menu.line_shape"), d),
+    OptionWrapper: SC(getI18nString("whiteboard.inline_menu.line_shape"), d),
     onToggleMenuOpen: r
   });
 }], [Tcr.CONNECTOR_START_CAP, __], [Tcr.CONNECTOR_END_CAP, _x], [Tcr.AUTHOR_VISIBILITY, function () {
@@ -16025,8 +16025,8 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
   };
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(_$$V4, {
     variant: "toggle",
-    tooltip: _$$t("whiteboard.inline_menu.show_hide_author"),
-    ariaLabel: _$$t("whiteboard.inline_menu.show_hide_author"),
+    tooltip: getI18nString("whiteboard.inline_menu.show_hide_author"),
+    ariaLabel: getI18nString("whiteboard.inline_menu.show_hide_author"),
     checked: !!e,
     offIcon: jsx(fX, {}),
     onIcon: jsx(fX, {}),
@@ -16034,7 +16034,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
     recordingKey: "authorVisibility"
   }) : jsx(K0, {
     svg: _$$A39,
-    tooltip: _$$t("whiteboard.inline_menu.show_hide_author"),
+    tooltip: getI18nString("whiteboard.inline_menu.show_hide_author"),
     active: e ? "LOUD" : void 0,
     onClick: i,
     recordingKey: "authorVisibility",
@@ -16047,14 +16047,14 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
   };
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(_$$V4, {
     variant: "button",
-    tooltip: _$$t("whiteboard.inline_menu.add_connector_text"),
-    ariaLabel: _$$t("whiteboard.inline_menu.add_connector_text"),
+    tooltip: getI18nString("whiteboard.inline_menu.add_connector_text"),
+    ariaLabel: getI18nString("whiteboard.inline_menu.add_connector_text"),
     onClick: e,
     recordingKey: "addTextControl",
     children: jsx(_$$B6, {})
   }) : jsx(K0, {
     svg: _$$A35,
-    tooltip: _$$t("whiteboard.inline_menu.add_connector_text"),
+    tooltip: getI18nString("whiteboard.inline_menu.add_connector_text"),
     active: void 0,
     onClick: e,
     recordingKey: "addTextControl"
@@ -16066,12 +16066,12 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
     getTriggerProps,
     manager
   } = _$$b7();
-  let a = useMemo(() => _$$gl(e) ? _$$t("whiteboard.code_blocks.mixed") : _$$lR.format(e ?? _$$jW), [e]);
+  let a = useMemo(() => _$$gl(e) ? getI18nString("whiteboard.code_blocks.mixed") : _$$lR.format(e ?? _$$jW), [e]);
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsxs(_$$bL3, {
     manager,
     children: [jsx(_$$V4, {
       variant: "menu",
-      tooltip: _$$t("whiteboard.inline_menu.programming_language"),
+      tooltip: getI18nString("whiteboard.inline_menu.programming_language"),
       getTriggerProps,
       ariaLabel: f2(e),
       recordingKey: "codeBlockLanguageSelector",
@@ -16082,7 +16082,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
     }), jsx(_$$mc2, {
       children: jsx(z6, {
         title: jsx(_$$r4, {
-          children: _$$t("whiteboard.inline_menu.programming_language")
+          children: getI18nString("whiteboard.inline_menu.programming_language")
         }),
         onChange: n => {
           i("figjam_code_block_language_select", {
@@ -16101,12 +16101,12 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
       })
     })]
   }) : jsx(f1, {
-    tooltip: _$$t("whiteboard.inline_menu.programming_language"),
+    tooltip: getI18nString("whiteboard.inline_menu.programming_language"),
     ariaLabel: f2(e),
     property: e ?? _$$jW,
     id: "codeBlockLanguageSelector",
     formatter: _$$lR,
-    customMixedText: _$$t("whiteboard.code_blocks.mixed"),
+    customMixedText: getI18nString("whiteboard.code_blocks.mixed"),
     onChange: n => {
       i("figjam_code_block_language_select", {
         previousLanguage: f3(e),
@@ -16131,11 +16131,11 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
   let i = _$$am();
   let [n, r] = useState(!1);
   return jsx(ZE, {
-    ariaLabel: e ? _$$gl(e) ? _$$t("whiteboard.code_blocks.mixed") : _$$t("whiteboard.inline_menu.code_block_theme", {
+    ariaLabel: e ? _$$gl(e) ? getI18nString("whiteboard.code_blocks.mixed") : getI18nString("whiteboard.inline_menu.code_block_theme", {
       currentTheme: A$.format(e)
     }) : void 0,
     buttonSize: "small",
-    inlineButtonTooltip: _$$t("whiteboard.inline_menu.theme"),
+    inlineButtonTooltip: getI18nString("whiteboard.inline_menu.theme"),
     isColorPopoverOpen: n,
     onColorChange: n => {
       i("figjam_code_block_theme_select", {
@@ -16171,12 +16171,12 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
   };
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(_$$V4, {
     variant: "button",
-    tooltip: _$$t("whiteboard.inline_menu.remove_background"),
-    ariaLabel: _$$t("whiteboard.inline_menu.remove_background"),
+    tooltip: getI18nString("whiteboard.inline_menu.remove_background"),
+    ariaLabel: getI18nString("whiteboard.inline_menu.remove_background"),
     onClick: t,
     children: jsx(_$, {})
   }) : jsx(K0, {
-    tooltip: _$$t("whiteboard.inline_menu.remove_background"),
+    tooltip: getI18nString("whiteboard.inline_menu.remove_background"),
     svg: _$$A54,
     onClick: t
   });
@@ -16185,7 +16185,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
   let i = () => {
     t(!e);
   };
-  let n = e ? _$$t("fullscreen_actions.show-section") : _$$t("fullscreen_actions.hide-section");
+  let n = e ? getI18nString("fullscreen_actions.show-section") : getI18nString("fullscreen_actions.hide-section");
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(_$$V4, {
     ariaLabel: n,
     checked: !!e,
@@ -16212,7 +16212,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
   let t = ma();
   let i = kl("name");
   let n = !i || "" === i.trim();
-  let r = n ? _$$t("fullscreen_actions.add-title") : _$$t("fullscreen_actions.rename-section");
+  let r = n ? getI18nString("fullscreen_actions.add-title") : getI18nString("fullscreen_actions.rename-section");
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(_$$V4, {
     variant: "button",
     tooltip: r,
@@ -16242,9 +16242,9 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
   };
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(_$$V4, {
     variant: "button",
-    tooltip: _$$t("fullscreen_actions.resize-to-fit"),
+    tooltip: getI18nString("fullscreen_actions.resize-to-fit"),
     tooltipShortcutActionKey: "resize-to-fit",
-    ariaLabel: _$$t("fullscreen_actions.resize-to-fit"),
+    ariaLabel: getI18nString("fullscreen_actions.resize-to-fit"),
     onClick: i,
     recordingKey: "resizeToFitSection",
     disabled: !!t,
@@ -16252,7 +16252,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
   }) : jsx(K0, {
     svg: e ? _$$A55 : _$$A56,
     disabled: !!t,
-    tooltip: _$$t("fullscreen_actions.resize-to-fit"),
+    tooltip: getI18nString("fullscreen_actions.resize-to-fit"),
     tooltipShortcutActionKey: "resize-to-fit",
     onClick: i,
     recordingKey: "resizeToFitSection"
@@ -16268,7 +16268,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
       loading: _loading2
     } = wW(e?.userId || e?.stampedByUserId || null);
     return {
-      label: e && _$$gl(e) ? _$$t("whiteboard.face_stamps.mixed") : user?.handle || null,
+      label: e && _$$gl(e) ? getI18nString("whiteboard.face_stamps.mixed") : user?.handle || null,
       loading: _loading2
     };
   }(e);
@@ -16295,7 +16295,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
     ref: s,
     children: [jsxs(_$$oj, {
       className: ex()(Wh, "face_stamp_control--userLabel--S-WLt", {
-        [_H]: XN
+        [_H]: isIpadDevice
       }),
       onClick: () => r(!n),
       role: "button",
@@ -16306,7 +16306,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
         className: ex()({
           "face_stamp_control--loadingUserText--r884u": loading,
           "face_stamp_control--userNameLabel--X-7PN": !loading,
-          "face_stamp_control--userNameLabeliPad--P1bIB": XN
+          "face_stamp_control--userNameLabeliPad--P1bIB": isIpadDevice
         }),
         children: jsxs("span", {
           className: "face_stamp_control--userNameOverflow--lNvYi ellipsis--ellipsis--Tjyfa",
@@ -16338,35 +16338,35 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
       manager,
       children: [jsx(_$$V4, {
         variant: "menu",
-        tooltip: _$$t("whiteboard.inline_menu.lock_options"),
+        tooltip: getI18nString("whiteboard.inline_menu.lock_options"),
         getTriggerProps: () => getTriggerProps({
           onClick: () => {
-            _$$az.trackDefinedEvent("figjam.lock_options.clicked", {});
+            analyticsEventManager.trackDefinedEvent("figjam.lock_options.clicked", {});
           }
         }),
-        ariaLabel: _$$t("whiteboard.inline_menu.lock_options"),
+        ariaLabel: getI18nString("whiteboard.inline_menu.lock_options"),
         recordingKey: "lockUnlockOptions",
         dataTestId: "lock-control-inline-options-v2",
         children: jsx(_$$$4, {})
       }), jsx(_$$mc2, {
         children: jsxs(YJ, {
-          "aria-label": _$$t("whiteboard.inline_menu.lock_options"),
+          "aria-label": getI18nString("whiteboard.inline_menu.lock_options"),
           children: [jsx(q7, {
             onClick: () => {
               Y5.triggerActionInUserEditScope("lock-selected-nodes");
-              _$$az.trackDefinedEvent("figjam.lock_options.lock_all.selected", {});
+              analyticsEventManager.trackDefinedEvent("figjam.lock_options.lock_all.selected", {});
             },
             recordingKey: Pt("lockOption", "lock_all"),
-            "aria-label": _$$t("whiteboard.inline_menu.lock_all"),
-            children: _$$t("whiteboard.inline_menu.lock_all")
+            "aria-label": getI18nString("whiteboard.inline_menu.lock_all"),
+            children: getI18nString("whiteboard.inline_menu.lock_all")
           }), jsx(q7, {
             onClick: () => {
               Y5.triggerActionInUserEditScope("lock-selected-section-only");
-              _$$az.trackDefinedEvent("figjam.lock_options.lock_background_only.selected", {});
+              analyticsEventManager.trackDefinedEvent("figjam.lock_options.lock_background_only.selected", {});
             },
             recordingKey: Pt("lockOption", "lock_section_background_only"),
-            "aria-label": _$$t("whiteboard.inline_menu.lock_background_only"),
-            children: _$$t("whiteboard.inline_menu.lock_background_only")
+            "aria-label": getI18nString("whiteboard.inline_menu.lock_background_only"),
+            children: getI18nString("whiteboard.inline_menu.lock_background_only")
           })]
         })
       })]
@@ -16393,21 +16393,21 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
           switch (e) {
             case "lock_all":
               Y5.triggerActionInUserEditScope("lock-selected-nodes");
-              _$$az.trackDefinedEvent("figjam.lock_options.lock_all.selected", {});
+              analyticsEventManager.trackDefinedEvent("figjam.lock_options.lock_all.selected", {});
               break;
             case "lock_section_background_only":
               Y5.triggerActionInUserEditScope("lock-selected-section-only");
-              _$$az.trackDefinedEvent("figjam.lock_options.lock_background_only.selected", {});
+              analyticsEventManager.trackDefinedEvent("figjam.lock_options.lock_background_only.selected", {});
           }
         },
         renderButton: ({
           onClick: t
         }) => jsx(K0, {
           svg: _$$A38,
-          tooltip: e ? _$$t("whiteboard.inline_menu.unlock") : _$$t("whiteboard.inline_menu.lock"),
+          tooltip: e ? getI18nString("whiteboard.inline_menu.unlock") : getI18nString("whiteboard.inline_menu.lock"),
           onClick: () => {
             t();
-            _$$az.trackDefinedEvent("figjam.lock_options.clicked", {});
+            analyticsEventManager.trackDefinedEvent("figjam.lock_options.clicked", {});
           },
           recordingKey: "lockUnlockOptions",
           testId: "lock-control-inline-options-v2",
@@ -16444,7 +16444,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
             }, t)
           }, t);
         },
-        OptionWrapper: (c = _$$t("whiteboard.inline_menu.lock_options"), function ({
+        OptionWrapper: (c = getI18nString("whiteboard.inline_menu.lock_options"), function ({
           children: e
         }) {
           return jsx("div", {
@@ -16462,15 +16462,15 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
   }
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(_$$V4, {
     variant: "button",
-    tooltip: _$$t("whiteboard.inline_menu.unlock"),
+    tooltip: getI18nString("whiteboard.inline_menu.unlock"),
     onClick: d,
-    ariaLabel: e ? _$$t("whiteboard.inline_menu.unlock") : _$$t("whiteboard.inline_menu.lock"),
+    ariaLabel: e ? getI18nString("whiteboard.inline_menu.unlock") : getI18nString("whiteboard.inline_menu.lock"),
     recordingKey: "lockUnlock",
     dataTestId: "lock-control-inline-v2",
     children: jsx(_$$$4, {})
   }) : jsx(K0, {
     svg: _$$A38,
-    tooltip: e ? _$$t("whiteboard.inline_menu.unlock") : _$$t("whiteboard.inline_menu.lock"),
+    tooltip: e ? getI18nString("whiteboard.inline_menu.unlock") : getI18nString("whiteboard.inline_menu.lock"),
     onClick: d,
     recordingKey: "lockUnlock",
     testId: "lock-control-inline-v2",
@@ -16520,7 +16520,7 @@ function xY() {
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(p0, {
     onChange: t,
     options: a,
-    tooltip: _$$t("whiteboard.inline_menu.alignment_button"),
+    tooltip: getI18nString("whiteboard.inline_menu.alignment_button"),
     buttonContent: s,
     recordingKey: "alignmentControl"
   }) : jsx(Fn, {
@@ -16543,7 +16543,7 @@ function xY() {
       recordingKey: "alignmentControl",
       role: "combobox",
       svg: xZ["align-left"],
-      tooltip: _$$t("whiteboard.inline_menu.alignment_button")
+      tooltip: getI18nString("whiteboard.inline_menu.alignment_button")
     }),
     options: e,
     renderOption: ({
@@ -16564,7 +16564,7 @@ function xY() {
       tooltip: e,
       tooltipType: Ib.LOOKUP
     }, e),
-    OptionWrapper: SC(_$$t("whiteboard.inline_menu.alignment_button"), i),
+    OptionWrapper: SC(getI18nString("whiteboard.inline_menu.alignment_button"), i),
     onToggleMenuOpen: r
   });
 }
@@ -16574,9 +16574,9 @@ function xJ() {
   };
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(_$$V4, {
     variant: "button",
-    tooltip: _$$t("fullscreen_actions.create-section-from-selection"),
+    tooltip: getI18nString("fullscreen_actions.create-section-from-selection"),
     tooltipShortcutActionKey: "create-section-from-selection",
-    ariaLabel: _$$t("fullscreen_actions.create-section-from-selection"),
+    ariaLabel: getI18nString("fullscreen_actions.create-section-from-selection"),
     onClick: e,
     recordingKey: "createSectionFromSelection",
     dataTestId: "createSectionFromSelection",
@@ -16650,7 +16650,7 @@ let x5 = memo(function ({
   return t?.allStates && t?.selectedStates ? getFeatureFlags().figjam_a11y_inline_toolbar ? jsxs(Fragment, {
     children: [jsx("div", {
       className: x3,
-      children: _$$tx("whiteboard.inline_menu.variants")
+      children: renderI18nText("whiteboard.inline_menu.variants")
     }), jsx(_$$P, {
       className: x2,
       children: jsx("div", {
@@ -16662,7 +16662,7 @@ let x5 = memo(function ({
     className: "state_swap_library_items--stateSwapMenuContainer--5TGRL",
     children: [jsx("div", {
       className: x3,
-      children: _$$tx("whiteboard.inline_menu.variants")
+      children: renderI18nText("whiteboard.inline_menu.variants")
     }), jsx(_$$P, {
       className: x2,
       children: jsx("div", {
@@ -16686,9 +16686,9 @@ let x4 = memo(function () {
       manager,
       children: [jsx(_$$V4, {
         variant: "menu",
-        tooltip: _$$t("whiteboard.inline_menu.see_variants"),
+        tooltip: getI18nString("whiteboard.inline_menu.see_variants"),
         getTriggerProps,
-        ariaLabel: _$$t("whiteboard.inline_menu.see_variants"),
+        ariaLabel: getI18nString("whiteboard.inline_menu.see_variants"),
         recordingKey: "stateSwapOptions",
         children: jsx(_$$B, {
           svg: _$$A69
@@ -16705,7 +16705,7 @@ let x4 = memo(function () {
       ref: e,
       onClick: () => i(!0),
       caret: "down",
-      tooltip: _$$t("whiteboard.inline_menu.see_variants")
+      tooltip: getI18nString("whiteboard.inline_menu.see_variants")
     }),
     onClose: () => i(!1),
     renderPopoverContents: () => jsx(x5, {
@@ -16722,9 +16722,9 @@ function x7() {
   };
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(_$$V4, {
     variant: "button",
-    tooltip: _$$t("fullscreen_actions.tidy-up"),
+    tooltip: getI18nString("fullscreen_actions.tidy-up"),
     tooltipShortcutActionKey: "tidy-up",
-    ariaLabel: _$$t("fullscreen_actions.tidy-up"),
+    ariaLabel: getI18nString("fullscreen_actions.tidy-up"),
     onClick: e,
     recordingKey: "tidyUp",
     dataTestId: "tidyUp",
@@ -16745,14 +16745,14 @@ function gn() {
   };
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(_$$V4, {
     variant: "button",
-    tooltip: _$$t("whiteboard.inline_menu.delete"),
-    ariaLabel: _$$t("whiteboard.inline_menu.delete"),
+    tooltip: getI18nString("whiteboard.inline_menu.delete"),
+    ariaLabel: getI18nString("whiteboard.inline_menu.delete"),
     onClick: e,
     recordingKey: "delete",
     children: jsx(_$$i9, {})
   }) : jsx(K0, {
     svg: _$$A71,
-    tooltip: _$$t("whiteboard.inline_menu.delete"),
+    tooltip: getI18nString("whiteboard.inline_menu.delete"),
     onClick: e,
     recordingKey: "delete"
   });
@@ -16764,14 +16764,14 @@ function gs() {
   };
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(_$$V4, {
     variant: "button",
-    tooltip: _$$t("whiteboard.inline_menu.duplicate"),
-    ariaLabel: _$$t("whiteboard.inline_menu.duplicate"),
+    tooltip: getI18nString("whiteboard.inline_menu.duplicate"),
+    ariaLabel: getI18nString("whiteboard.inline_menu.duplicate"),
     onClick: e,
     recordingKey: "duplicate",
     children: jsx(_$$u4, {})
   }) : jsx(K0, {
     svg: _$$A72,
-    tooltip: _$$t("whiteboard.inline_menu.duplicate"),
+    tooltip: getI18nString("whiteboard.inline_menu.duplicate"),
     onClick: e,
     recordingKey: "duplicate"
   });
@@ -16783,22 +16783,22 @@ function gl() {
   };
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(_$$V4, {
     variant: "button",
-    tooltip: _$$t("whiteboard.inline_menu.show_additional_items"),
-    ariaLabel: _$$t("whiteboard.inline_menu.show_additional_items"),
+    tooltip: getI18nString("whiteboard.inline_menu.show_additional_items"),
+    ariaLabel: getI18nString("whiteboard.inline_menu.show_additional_items"),
     onClick: e,
     recordingKey: "showAdditionalItems",
     children: jsx(_$$J6, {})
   }) : jsx(K0, {
     svg: _$$A73,
-    tooltip: _$$t("whiteboard.inline_menu.show_additional_items"),
+    tooltip: getI18nString("whiteboard.inline_menu.show_additional_items"),
     onClick: e,
     recordingKey: "showAdditionalItems"
   });
 }
 function gd(e) {
-  return Ay.isIpad ? jsxs(Fragment, {
+  return BrowserInfo.isIpad ? jsxs(Fragment, {
     children: [e.showLeftSeparator ? jsx(_$$wv4, {}) : null, jsx(gn, {}), jsx(_$$wv4, {}), jsx(gs, {}), jsx(_$$wv4, {}), jsx(gl, {})]
-  }) : Ay.isMeetDevice ? jsxs(Fragment, {
+  }) : BrowserInfo.isMeetDevice ? jsxs(Fragment, {
     children: [e.showLeftSeparator ? jsx(_$$wv4, {}) : null, jsx(gs, {}), jsx(_$$wv4, {}), jsx(gn, {})]
   }) : null;
 }
@@ -16819,7 +16819,7 @@ let gp = memo(function () {
           let t = setTimeout(() => {
             window.FigmaMobile.nativeContextualToolbarSupportedVersions = void 0;
             n._native_contextual_toolbar_confirm_configuration = () => {};
-            $D(_$$e.FIGJAM, Error(`Native contextual toolbar did not confirm configuration before timeout, version ${e}`));
+            reportError(_$$e.FIGJAM, Error(`Native contextual toolbar did not confirm configuration before timeout, version ${e}`));
           }, 2e3);
           n._native_contextual_toolbar_confirm_configuration = () => {
             clearTimeout(t);
@@ -16860,12 +16860,12 @@ let gm = memo(function ({
   focusableDivTestId: t
 }) {
   let i = createRef();
-  let n = _$$md(_$$f7);
+  let n = useAtomWithSubscription(_$$f7);
   let r = useSelector(e => e.mirror.selectionProperties.whiteboardNumSelected);
   let a = useSelector(e => e.mirror.selectionProperties.whiteboardNumSelectedPlatformShape ?? 0);
   let s = useSelector(e => e.mirror.selectionProperties.stateGroupSelectionInfo?.stateGroup);
   let f = useSelector(e => e.mirror.sceneGraphSelection);
-  let _ = _$$R(e => e.mirror.selectionProperties.whiteboardControls);
+  let _ = selectWithShallowEqual(e => e.mirror.selectionProperties.whiteboardControls);
   let x = !!_?.includes(Tcr.DESCRIPTION);
   let g = !!kl("locked");
   let [j, b] = useState(!1);
@@ -16942,13 +16942,13 @@ let gm = memo(function ({
     },
     children: jsx("div", {
       className: ex()(gu, {
-        [gc]: L && XN
+        [gc]: L && isIpadDevice
       }),
       children: jsx(_$$i8, {
         children: jsx(W, {
           children: jsxs(W1, {
             ariaHidden: w,
-            ariaLabel: null == E ? _$$t("whiteboard.inline_menu.inline_menu_label") : _$$t("whiteboard.inline_menu.inline_menu_label_with_selected_node", {
+            ariaLabel: null == E ? getI18nString("whiteboard.inline_menu.inline_menu_label") : getI18nString("whiteboard.inline_menu.inline_menu_label_with_selected_node", {
               selectedNodeAriaLabel: E
             }),
             focusableDivTestId: t,
@@ -16993,9 +16993,9 @@ let g_ = memo(function ({
   let i;
   let n;
   let r = createRef();
-  let a = _$$md(_$$f7);
+  let a = useAtomWithSubscription(_$$f7);
   let s = useSelector(e => e.mirror.sceneGraphSelection);
-  let u = _$$R(e => e.mirror.selectionProperties.whiteboardControls);
+  let u = selectWithShallowEqual(e => e.mirror.selectionProperties.whiteboardControls);
   let f = !!u?.includes(Tcr.DESCRIPTION);
   let _ = !!kl("locked");
   let [x, g] = useState(!1);
@@ -17032,11 +17032,11 @@ let g_ = memo(function ({
     setIsEditorOpen: g
   });
   let M = ex()(gu, {
-    [gc]: I && XN
+    [gc]: I && isIpadDevice
   });
-  _ ? (i = _$$t("whiteboard.inline_menu.lock_options"), t = jsx(gx, {
+  _ ? (i = getI18nString("whiteboard.inline_menu.lock_options"), t = jsx(gx, {
     shouldSectionShowUnlockWithFriction: j
-  }), n = {}) : (i = null == C ? _$$t("whiteboard.inline_menu.inline_menu_label") : _$$t("whiteboard.inline_menu.inline_menu_label_with_selected_node", {
+  }), n = {}) : (i = null == C ? getI18nString("whiteboard.inline_menu.inline_menu_label") : getI18nString("whiteboard.inline_menu.inline_menu_label_with_selected_node", {
     selectedNodeAriaLabel: C
   }), n = {
     figjam_ai_control_shown: R,
@@ -17293,7 +17293,7 @@ let gT = memo(function ({
       testID: e,
       focusableDivTestId: t,
       menuRef: i,
-      ariaLabel: _$$t("whiteboard.inline_menu.inline_menu_label"),
+      ariaLabel: getI18nString("whiteboard.inline_menu.inline_menu_label"),
       role: "region",
       tabIndex: -1,
       propagateInputToFullscreen: !0,
@@ -17335,11 +17335,11 @@ function gP() {
     switch (e.keyCode) {
       case Uz.P:
       case Uz.UP_ARROW:
-        (e.keyCode !== Uz.P || Ay.mac && _$$vN(e, _$$xH.CONTROL)) && (next(_$$OP.PREV, "keyboard"), e.stopPropagation(), e.preventDefault());
+        (e.keyCode !== Uz.P || BrowserInfo.mac && _$$vN(e, _$$xH.CONTROL)) && (next(_$$OP.PREV, "keyboard"), e.stopPropagation(), e.preventDefault());
         break;
       case Uz.N:
       case Uz.DOWN_ARROW:
-        (e.keyCode !== Uz.N || Ay.mac && _$$vN(e, _$$xH.CONTROL)) && (next(_$$OP.NEXT, "keyboard"), e.stopPropagation(), e.preventDefault());
+        (e.keyCode !== Uz.N || BrowserInfo.mac && _$$vN(e, _$$xH.CONTROL)) && (next(_$$OP.NEXT, "keyboard"), e.stopPropagation(), e.preventDefault());
         break;
       case Uz.ENTER:
         if (Fo(e)) {
@@ -17390,11 +17390,11 @@ function gP() {
                 next(_$$OP.PREV, "button");
                 !SK(e) && T && (focusedByButtons.current = !0, inputRef.current.focus());
               },
-              "aria-label": _$$t("canvas_search.previous"),
+              "aria-label": getI18nString("canvas_search.previous"),
               recordingKey: "canvas_search.previous",
               htmlAttributes: {
                 "data-tooltip-type": Ib.TEXT,
-                "data-tooltip": _$$t("canvas_search.previous"),
+                "data-tooltip": getI18nString("canvas_search.previous"),
                 "data-tooltip-shortcut-key": "canvas-search-prev"
               },
               children: jsx(_$$l2, {})
@@ -17404,11 +17404,11 @@ function gP() {
                 next(_$$OP.NEXT, "button");
                 !SK(e) && T && (focusedByButtons.current = !0, inputRef.current.focus());
               },
-              "aria-label": _$$t("canvas_search.next"),
+              "aria-label": getI18nString("canvas_search.next"),
               recordingKey: "canvas_search.next",
               htmlAttributes: {
                 "data-tooltip-type": Ib.TEXT,
-                "data-tooltip": _$$t("canvas_search.next"),
+                "data-tooltip": getI18nString("canvas_search.next"),
                 "data-tooltip-shortcut-key": "canvas-search-next"
               },
               children: jsx(_$$k2, {})
@@ -17423,11 +17423,11 @@ function gP() {
           onClick: () => {
             setHidden(!0);
           },
-          "aria-label": _$$t("canvas_search.close"),
+          "aria-label": getI18nString("canvas_search.close"),
           recordingKey: "canvas_search.close",
           htmlAttributes: {
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t("canvas_search.close")
+            "data-tooltip": getI18nString("canvas_search.close")
           },
           children: jsx(_$$A2, {})
         })]
@@ -17447,10 +17447,10 @@ function gP() {
 function gU() {
   let {
     total
-  } = _$$md(Fk);
-  let t = _$$md(Ch);
+  } = useAtomWithSubscription(Fk);
+  let t = useAtomWithSubscription(Ch);
   let i = t?.index == null ? "?" : `${t.index + 1}`;
-  let n = 0 === total ? _$$t("canvas_search.no_results") : _$$t("canvas_search.results_index_count", {
+  let n = 0 === total ? getI18nString("canvas_search.no_results") : getI18nString("canvas_search.results_index_count", {
     index: i,
     total
   });
@@ -17502,7 +17502,7 @@ class gY {
           return;
         }
         if (e.message.toLowerCase().includes("interrupted by a new load request")) {
-          ED("FigJam MusicPlayer", "Benign race condition: new track was requested while the promise to play the previous track was resolving (no user impact)");
+          logDebug("FigJam MusicPlayer", "Benign race condition: new track was requested while the promise to play the previous track was resolving (no user impact)");
           return;
         }
         throw Error(`Failed to play music in the FigJam timer: ${e}`);
@@ -17778,17 +17778,17 @@ function g9({
       onNotFound: () => {
         p(qV());
         p(_$$F.enqueue({
-          message: _$$t("whiteboard.timer.song_not_available_error"),
+          message: getI18nString("whiteboard.timer.song_not_available_error"),
           error: !0,
           type: _$$lm
         }));
       }
     });
   };
-  let b = m === g4 ? _$$t("whiteboard.music.loading") : void 0;
+  let b = m === g4 ? getI18nString("whiteboard.music.loading") : void 0;
   return jsxs(Fragment, {
     children: [jsx(_$$l9, {
-      ariaLabel: _$$t("whiteboard.music_player_select.aria_label"),
+      ariaLabel: getI18nString("whiteboard.music_player_select.aria_label"),
       className: "music_dropdown--songDropdownClosed--PEWeP",
       "data-testid": "music-dropdown-button",
       dispatch: p,
@@ -17825,7 +17825,7 @@ function g9({
 let g8 = {
   format: e => {
     var t;
-    return e?.localization_key ? (t = e.localization_key, _$$t(`figjam_songs.${t}.title`)) : "";
+    return e?.localization_key ? (t = e.localization_key, getI18nString(`figjam_songs.${t}.title`)) : "";
   }
 };
 function g7({
@@ -19513,7 +19513,7 @@ function ji(e) {
   let s = useRef(0);
   let c = useSelector(e => e.music?.music?.isPaused);
   let u = F4();
-  let p = u?.shouldOptimizeForIpadApp || Ay.isIpad;
+  let p = u?.shouldOptimizeForIpadApp || BrowserInfo.isIpad;
   let m = useCallback(e => {
     if (!1 === c) {
       let t = e.clientX;
@@ -19661,10 +19661,10 @@ function ju() {
     className: ex()("volume_hint--hintContainer--A9gj2", Dm),
     "data-testid": "volume-hint",
     children: [jsx("div", {
-      children: _$$tx("whiteboard.timer.music_volume_hint_prompt_cta_v2", {
+      children: renderI18nText("whiteboard.timer.music_volume_hint_prompt_cta_v2", {
         promptQuestion: jsx("span", {
           className: "volume_hint--bold--vS77N",
-          children: _$$t("whiteboard.timer.music_volume_hint_prompt_question")
+          children: getI18nString("whiteboard.timer.music_volume_hint_prompt_question")
         })
       })
     }), jsx(_$$K, {
@@ -19673,7 +19673,7 @@ function ju() {
           dismissed_figjam_music_volume_hint: !0
         }));
       },
-      "aria-label": _$$t("general.close"),
+      "aria-label": getI18nString("general.close"),
       children: jsx(_$$A2, {})
     })]
   });
@@ -19838,10 +19838,10 @@ function jC() {
   }, [g, n, c]);
   let y = useCallback(() => x(), [x]);
   return e ? jsx(jf, {
-    titleText: _$$t("whiteboard.music.stop_music_confirmation_prompt"),
-    bodyText: _$$t("whiteboard.music.stop_music_confirmation_subtext"),
-    cancelButtonText: _$$t("whiteboard.music.stop_music_cancel_button"),
-    confirmButtonText: _$$t("whiteboard.timer.stop_timer_confirmation_button"),
+    titleText: getI18nString("whiteboard.music.stop_music_confirmation_prompt"),
+    bodyText: getI18nString("whiteboard.music.stop_music_confirmation_subtext"),
+    cancelButtonText: getI18nString("whiteboard.music.stop_music_cancel_button"),
+    confirmButtonText: getI18nString("whiteboard.timer.stop_timer_confirmation_button"),
     onCancel: () => t(!1),
     onConfirm: () => {
       t(!1);
@@ -19869,7 +19869,7 @@ function jC() {
         }), jsx(jv, {
           buttonState: m ? jy.STOP : jy.PLAY,
           onClick: m ? b : y,
-          dataTooltip: m ? _$$t("whiteboard.music.end_music_tooltip") : _$$t("whiteboard.music.play_music_tooltip")
+          dataTooltip: m ? getI18nString("whiteboard.music.end_music_tooltip") : getI18nString("whiteboard.music.play_music_tooltip")
         })]
       })]
     }), jsx(ju, {})]
@@ -20050,7 +20050,7 @@ let jX = e => useCallback(() => {
   });
 }, [e]);
 function jq() {
-  let [e, t] = _$$fp(_$$$5);
+  let [e, t] = useAtomValueAndSetter(_$$$5);
   let i = useSelector(e => e.timer.volume);
   let n = _$$F8(useSelector(e => e.timer.volume));
   let r = _$$F8(useSelector(e => e.timer.isMuted));
@@ -20227,7 +20227,7 @@ function j9({
   }(e, t);
   j4({
     minutesRef: c.minutesRef,
-    disabled: Ay.isMeetDevice
+    disabled: BrowserInfo.isMeetDevice
   });
   return jsx(Fragment, {
     children: i ? jsx(be, {
@@ -20256,8 +20256,8 @@ function j8(e) {
     timeDivRef,
     isInUI3Toolbar
   } = e;
-  let u = _$$md(_$$jo);
-  let h = _$$md(Ld);
+  let u = useAtomWithSubscription(_$$jo);
+  let h = useAtomWithSubscription(Ld);
   return jsx(j7, {
     flashing: CM(u.time) && !withoutFlashOnPause,
     isInUI3Toolbar,
@@ -20436,7 +20436,7 @@ let bi = forwardRef((e, t) => {
     children: value
   }) : jsx("input", {
     ref: t,
-    "aria-label": isMinute ? _$$t("whiteboard.timer.minutes.aria_label") : _$$t("whiteboard.timer.seconds.aria_label"),
+    "aria-label": isMinute ? getI18nString("whiteboard.timer.minutes.aria_label") : getI18nString("whiteboard.timer.seconds.aria_label"),
     className: u,
     inputMode: "numeric",
     maxLength: 2,
@@ -20459,7 +20459,7 @@ function bn() {
     pauseTimer,
     resumeTimer
   } = t;
-  let c = _$$md(_$$jo);
+  let c = useAtomWithSubscription(_$$jo);
   let u = useSelector(e => e.multiplayer.allUsers.length);
   let [h, m] = useState(!1);
   let f = c.time;
@@ -20484,17 +20484,17 @@ function bn() {
     stopTimer();
   }, [stopTimer]);
   if (h && !j) return jsx(jf, {
-    titleText: _$$t("whiteboard.timer.end_timer_confirmation_new"),
-    bodyText: _$$t("whiteboard.timer.end_timer_confirmation_subtext_new"),
-    cancelButtonText: _$$t("whiteboard.timer.end_timer_go_back_new"),
-    confirmButtonText: _$$t("whiteboard.timer.end_timer_button_new"),
+    titleText: getI18nString("whiteboard.timer.end_timer_confirmation_new"),
+    bodyText: getI18nString("whiteboard.timer.end_timer_confirmation_subtext_new"),
+    cancelButtonText: getI18nString("whiteboard.timer.end_timer_go_back_new"),
+    confirmButtonText: getI18nString("whiteboard.timer.end_timer_button_new"),
     onCancel: () => m(!1),
     onConfirm: () => {
       m(!1);
       T();
     }
   });
-  let E = x ? _$$t("whiteboard.timer.start_timer_tooltip") : f?.isPaused ? _$$t("whiteboard.timer.resume_timer_tooltip") : _$$t("whiteboard.timer.pause_timer_tooltip");
+  let E = x ? getI18nString("whiteboard.timer.start_timer_tooltip") : f?.isPaused ? getI18nString("whiteboard.timer.resume_timer_tooltip") : getI18nString("whiteboard.timer.pause_timer_tooltip");
   let S = x && _ <= 0;
   let w = f?.isPaused || x;
   return jsx("div", {
@@ -20520,10 +20520,10 @@ function bn() {
             e.preventDefault();
           },
           disabled: !b,
-          "aria-label": _$$t("whiteboard.timer.add_one_minute.aria_label"),
+          "aria-label": getI18nString("whiteboard.timer.add_one_minute.aria_label"),
           children: jsxs("div", {
             className: "timer_view--addTimeButton--tKy9r",
-            children: [jsx(_$$x5, {}), _$$tx("whiteboard.timer.min", {
+            children: [jsx(_$$x5, {}), renderI18nText("whiteboard.timer.min", {
               timeIncrement: AC
             })]
           })
@@ -20534,7 +20534,7 @@ function bn() {
             onClick: () => {
               f && (_$$fQ2(f, u) ? m(!0) : T());
             },
-            dataTooltip: _$$t("whiteboard.timer.end_timer_tooltip"),
+            dataTooltip: getI18nString("whiteboard.timer.end_timer_tooltip"),
             disabled: x || j
           }), jsx(jv, {
             buttonState: w ? jy.PLAY : jy.PAUSE,
@@ -20562,7 +20562,7 @@ function bs({
     i(PK({
       uiSurface: "MeetingsPanel"
     }));
-    _$$sx("confirm_end_voting_session", {
+    trackEventAnalytics("confirm_end_voting_session", {
       source: "voting_modal",
       votingSessionId: t?.id,
       fileKey: n
@@ -20570,17 +20570,17 @@ function bs({
   }, [i, t, n]);
   let s = useCallback(() => {
     e();
-    _$$sx("cancel_end_voting_session", {
+    trackEventAnalytics("cancel_end_voting_session", {
       source: "voting_modal",
       votingSessionId: t?.id,
       fileKey: n
     });
   }, [e, t, n]);
   return jsx(jf, {
-    titleText: _$$t("voting.modal.end_voting_session_modal_header"),
-    bodyText: _$$t("voting.modal.end_voting_session_modal_description"),
-    cancelButtonText: _$$t("meetings_panel.voting.go_back"),
-    confirmButtonText: _$$t("voting.modal.end_voting_session_modal_confirm_button"),
+    titleText: getI18nString("voting.modal.end_voting_session_modal_header"),
+    bodyText: getI18nString("voting.modal.end_voting_session_modal_description"),
+    cancelButtonText: getI18nString("meetings_panel.voting.go_back"),
+    confirmButtonText: getI18nString("voting.modal.end_voting_session_modal_confirm_button"),
     onCancel: s,
     onConfirm: a,
     onCancelDisabled: r || !t,
@@ -20698,7 +20698,7 @@ function bg({
         className: "voting_user_overflow_dropdown--dropdownPadding---VKEq",
         children: n ? jsx("div", {
           className: "voting_user_overflow_dropdown--noVotesText--T2dVF text--fontNeg13--7Ebf5 text--_fontBase--QdLsd text--_negText--j9g-L",
-          children: _$$tx("voting.modal.during_voting_no_votes_dropdown")
+          children: renderI18nText("voting.modal.during_voting_no_votes_dropdown")
         }) : e.map(e => jsx("li", {
           className: "voting_user_overflow_dropdown--listItem--d7eTA",
           children: jsx(b_, {
@@ -20760,9 +20760,9 @@ function bC({
         isActive: r || isDropdownOpen
       }), jsx("p", {
         className: "users_voted--duringSessionText--glncG",
-        children: c.length > 0 ? _$$tx("voting.modal.people_voted", {
+        children: c.length > 0 ? renderI18nText("voting.modal.people_voted", {
           numVotes: c.length
-        }) : _$$tx("voting.modal.during_voting_no_ones_voted")
+        }) : renderI18nText("voting.modal.during_voting_no_ones_voted")
       }), jsx(_$$B, {
         className: ex()({
           "users_voted--chevronDown--LWnXw": !0,
@@ -20800,9 +20800,9 @@ function bE({
       onClick: handleTargetClick,
       ref: e => i(e),
       children: jsx("p", {
-        children: a.length > 0 ? _$$tx("voting.modal.voted", {
+        children: a.length > 0 ? renderI18nText("voting.modal.voted", {
           numVotes: a.length
-        }) : _$$tx("voting.modal.after_voting_no_one_voted")
+        }) : renderI18nText("voting.modal.after_voting_no_one_voted")
       })
     }), isDropdownOpen && t && jsx(bg, {
       targetRect: t.getBoundingClientRect(),
@@ -20851,13 +20851,13 @@ function bw({
         votingSessionInfo: e,
         userVoteLimit: n.userVoteLimit
       })
-    }), !Ay.isMeetDevice && jsx("div", {
+    }), !BrowserInfo.isMeetDevice && jsx("div", {
       className: _$$s.flex.$,
       children: jsx(jh, {
         flexGrow: !0,
         onClick: () => {
           t();
-          _$$sx("click_end_voting_session", {
+          trackEventAnalytics("click_end_voting_session", {
             source: "voting_modal",
             votingSessionId: n.id,
             fileKey: a
@@ -20865,10 +20865,10 @@ function bw({
         },
         disabled: r,
         "data-tooltip-type": r ? Ib.TEXT : void 0,
-        "data-tooltip": r ? _$$t("voting.modal.end_disabled_logged_out_tooltip") : void 0,
+        "data-tooltip": r ? getI18nString("voting.modal.end_disabled_logged_out_tooltip") : void 0,
         recordingKey: Pt(i, "endVotingSession"),
         children: jsx("span", {
-          children: _$$tx("voting.modal.end_for_all")
+          children: renderI18nText("voting.modal.end_for_all")
         })
       })
     })]
@@ -21419,7 +21419,7 @@ function bR({
       children: jsx(jm, {
         onClick: i,
         recordingKey: Pt(e, "joinVotingSession"),
-        children: _$$tx("meetings_panel.voting.join_vote")
+        children: renderI18nText("meetings_panel.voting.join_vote")
       })
     })]
   });
@@ -21501,7 +21501,7 @@ function bH(e) {
     let n = bU(userVoteLimitInput);
     ("" === i || !n || isNaN(n) || n < 1) && setUserVoteLimitInput("1");
   }, [userVoteLimitInput, setUserVoteLimitInput]);
-  let E = _$$t("voting.modal.voting_setup_responsive_placeholder_prompt", {
+  let E = getI18nString("voting.modal.voting_setup_responsive_placeholder_prompt", {
     numVotes: userVoteLimit
   });
   let S = Pd(useCallback(() => {
@@ -21523,7 +21523,7 @@ function bH(e) {
   return jsxs("div", {
     className: "create_new_vote_view--container--mzVZ7",
     children: [jsx(_$$L6, {
-      "aria-label": _$$t("voting.modal.voting_setup_prompt_input_field_aria_label"),
+      "aria-label": getI18nString("voting.modal.voting_setup_prompt_input_field_aria_label"),
       autoComplete: "off",
       autoCorrect: "off",
       autoFocus: !0,
@@ -21543,13 +21543,13 @@ function bH(e) {
             onClick: () => {
               isLimitDisabled || b(-1);
             },
-            "aria-label": _$$t("voting.modal.reduce_limit_tooltip_aria_label"),
+            "aria-label": getI18nString("voting.modal.reduce_limit_tooltip_aria_label"),
             "aria-disabled": isLimitDisabled,
             children: jsx(_$$f8, {})
           })
         }), jsx("input", {
           ref: t,
-          "aria-label": _$$t("voting.modal.voting_limit_input_field_aria_label"),
+          "aria-label": getI18nString("voting.modal.voting_limit_input_field_aria_label"),
           className: "create_new_vote_view--limitInput--1dzSR create_new_vote_view--promptInput--Fd2W3 text--fontPos11--2LvXf text--_fontBase--QdLsd",
           disabled: isLimitDisabled,
           inputMode: "numeric",
@@ -21566,7 +21566,7 @@ function bH(e) {
             onClick: () => {
               isLimitDisabled || b(1);
             },
-            "aria-label": _$$t("voting.modal.increase_limit_tooltip_aria_label"),
+            "aria-label": getI18nString("voting.modal.increase_limit_tooltip_aria_label"),
             "aria-disabled": isLimitDisabled,
             children: jsx(_$$x5, {})
           })
@@ -21576,10 +21576,10 @@ function bH(e) {
         onClick: S,
         disabled: p,
         "data-tooltip-type": r ? Ib.TEXT : void 0,
-        "data-tooltip": r ? _$$t("voting.modal.start_disabled_logged_out_tooltip") : void 0,
+        "data-tooltip": r ? getI18nString("voting.modal.start_disabled_logged_out_tooltip") : void 0,
         recordingKey: "votingModalStartVotingSession",
         children: jsx("span", {
-          children: _$$tx("voting.modal.start_voting_session")
+          children: renderI18nText("voting.modal.start_voting_session")
         })
       })]
     })]
@@ -21603,18 +21603,18 @@ function bV(e) {
       children: [a && jsx(jh, {
         flexGrow: a,
         onClick: () => {
-          _$$sx("view_past_voting_sessions", {
+          trackEventAnalytics("view_past_voting_sessions", {
             source: "meetings_panel",
             fileKey: r
           });
           setOnPastVotesClick();
         },
         recordingKey: Pt(recordingKey, "viewPastVotingSessions"),
-        children: _$$tx("meetings_panel.voting.view_past_results_prompt")
-      }), !Ay.isMeetDevice && jsx(jm, {
+        children: renderI18nText("meetings_panel.voting.view_past_results_prompt")
+      }), !BrowserInfo.isMeetDevice && jsx(jm, {
         flexGrow: a,
         onClick: () => {
-          _$$sx("creating_new_vote_start", {
+          trackEventAnalytics("creating_new_vote_start", {
             source: "meetings_panel",
             fileKey: r
           });
@@ -21623,7 +21623,7 @@ function bV(e) {
         recordingKey: Pt(recordingKey, "newVote"),
         children: jsx("div", {
           className: _$$s.px4.$,
-          children: _$$tx("meetings_panel.voting.new_vote")
+          children: renderI18nText("meetings_panel.voting.new_vote")
         })
       })]
     })]
@@ -21678,17 +21678,17 @@ let b$ = Ju(function ({
   let t = useDispatch();
   let i = _$$tS();
   let n = () => {
-    _$$sx("cancel_delete_voting_session", {
+    trackEventAnalytics("cancel_delete_voting_session", {
       source: bZ,
       votingSessionId: e,
       fileKey: i
     });
   };
   return jsx(_$$yX2, {
-    cancelText: _$$t("voting.modal.delete_voting_session_modal_cancel_button"),
-    confirmText: _$$t("voting.modal.delete_voting_session_modal_confirm_button"),
-    confirmationTitle: _$$t("voting.modal.delete_voting_session_modal_header"),
-    content: _$$t("voting.modal.delete_voting_session_modal_description"),
+    cancelText: getI18nString("voting.modal.delete_voting_session_modal_cancel_button"),
+    confirmText: getI18nString("voting.modal.delete_voting_session_modal_confirm_button"),
+    confirmationTitle: getI18nString("voting.modal.delete_voting_session_modal_header"),
+    content: getI18nString("voting.modal.delete_voting_session_modal_description"),
     destructive: !0,
     disableClickOutsideToHide: !0,
     hideCancel: !1,
@@ -21702,7 +21702,7 @@ let b$ = Ju(function ({
       t(H1({
         votingStage: W8Y.NO_SESSION
       }));
-      _$$sx("confirm_delete_voting_session", {
+      trackEventAnalytics("confirm_delete_voting_session", {
         source: bZ,
         votingSessionId: e,
         fileKey: i
@@ -21744,10 +21744,10 @@ function bX({
       className: "previous_votes_view--nullResultsList--xAcum",
       children: [jsx("p", {
         className: "previous_votes_view--nullResultsListTextHeader--vWsPe previous_votes_view--nullResultsListText--qaiMF text--fontPos11--2LvXf text--_fontBase--QdLsd",
-        children: _$$tx("voting.modal.previous_votes_null_text_title")
+        children: renderI18nText("voting.modal.previous_votes_null_text_title")
       }), jsx("p", {
         className: "previous_votes_view--nullResultsListTextDescription--CNedi previous_votes_view--nullResultsListText--qaiMF text--fontPos11--2LvXf text--_fontBase--QdLsd",
-        children: _$$tx("voting.modal.after_you_vote_results_will_show_up_right_here")
+        children: renderI18nText("voting.modal.after_you_vote_results_will_show_up_right_here")
       })]
     })
   });
@@ -21770,7 +21770,7 @@ function bq({
       recordingKey: Pt(l, "viewPastVotingSession"),
       className: ex()("previous_votes_view--previousVotesListItem--77yUn", r && "previous_votes_view--showSeparator--nHjDd"),
       onClick: () => {
-        _$$sx("view_past_voting_session", {
+        trackEventAnalytics("view_past_voting_session", {
           votingSessionId: t,
           source: "meetings_panel",
           fileKey: h
@@ -21966,7 +21966,7 @@ function b7({
       case "INTERNAL_STORAGE":
         return _$$sJ;
       default:
-        _$$x2("voting", "error unhandled shape type for shapeTypeToSvg", {
+        logError("voting", "error unhandled shape type for shapeTypeToSvg", {
           shapeType: e
         });
         return _$$_K;
@@ -22003,12 +22003,12 @@ function b7({
   }, [r]);
   let v = _$$oC(e);
   function C() {
-    _$$aJ() && s(Vw({
+    isNotMobile() && s(Vw({
       votePinId: n
     }));
   }
   function T() {
-    _$$aJ() && s(_$$gA({
+    isNotMobile() && s(_$$gA({
       votePinId: n
     }));
   }
@@ -22036,7 +22036,7 @@ function b7({
         className: "voting_results_detail_view--resultsListItemCountContainer--1fD-h",
         children: jsx("div", {
           className: "voting_results_detail_view--resultsListItemCountText--m6rWN text--fontPos11--2LvXf text--_fontBase--QdLsd",
-          children: _$$tx("voting.modal.votes", {
+          children: renderI18nText("voting.modal.votes", {
             numVotes: v,
             numVotesElem: jsx("p", {
               className: "voting_results_detail_view--resultsListItemCount--DLrXt text--fontPos13--xW8hS text--_fontBase--QdLsd",
@@ -22054,13 +22054,13 @@ function b7({
           src: b.src,
           width: b.displaySize.x,
           height: b.displaySize.y,
-          alt: _$$t("voting.modal.voting_results_image_preview_alt")
+          alt: getI18nString("voting.modal.voting_results_image_preview_alt")
         }) : jsx(x, {
           color: _
         }), i && jsx("img", {
           src: _$$G6,
           className: "voting_results_detail_view--medal--JzOBO",
-          alt: _$$t("voting.modal.medal_img_alt")
+          alt: getI18nString("voting.modal.medal_img_alt")
         })]
       })]
     })
@@ -22119,9 +22119,9 @@ let yr = memo(e => {
     children: jsxs("div", {
       className: "meetings_panel_header--meetingsPanelHeader--6cBGV",
       children: [jsx(_$$K, {
-        "aria-label": _$$t("general.back"),
+        "aria-label": getI18nString("general.back"),
         onClick: goBack,
-        actionOnPointerDown: Ay.isIpad,
+        actionOnPointerDown: BrowserInfo.isIpad,
         recordingKey: Pt(recordingKey, "backButton"),
         ref: backButtonRef,
         children: jsx(_$$C, {})
@@ -22132,11 +22132,11 @@ let yr = memo(e => {
         className: _$$s.mlAuto.$,
         ref: dropdownTargetRef,
         children: _ && jsx(_$$d1, {
-          "aria-label": _$$t("meetings_panel.header.overflow_menu_aria_label"),
+          "aria-label": getI18nString("meetings_panel.header.overflow_menu_aria_label"),
           onClick: f,
           htmlAttributes: {
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t("meetings_panel.header.overflow_menu_aria_label")
+            "data-tooltip": getI18nString("meetings_panel.header.overflow_menu_aria_label")
           },
           recordingKey: Pt(recordingKey, "expandMenuItems"),
           "aria-expanded": isDropdownShown,
@@ -22150,7 +22150,7 @@ let yr = memo(e => {
           recordingKey: Pt(recordingKey, "expandMenuItems")
         }), onMinimize && jsx(_$$K, {
           onClick: onMinimize,
-          "aria-label": _$$t("common.close"),
+          "aria-label": getI18nString("common.close"),
           children: jsx(_$$A2, {})
         })]
       })]
@@ -22216,12 +22216,12 @@ function ys() {
   let y = useMemo(() => {
     if (t) {
       let e = [{
-        text: _$$t("voting.modal.actions.delete_voting_session"),
+        text: getI18nString("voting.modal.actions.delete_voting_session"),
         callback: j,
         recordingKey: "votingModalDeleteVotingSession"
       }];
-      Ay.isIpadNative || e.unshift({
-        text: _$$t("voting.modal.actions.export_as_csv"),
+      BrowserInfo.isIpadNative || e.unshift({
+        text: getI18nString("voting.modal.actions.export_as_csv"),
         callback: b,
         recordingKey: "votingModalExportAsCsv"
       });
@@ -22229,7 +22229,7 @@ function ys() {
     }
   }, [t, b, j]);
   return jsx(yn, {
-    headerText: _$$t("meetings_panel.voting.results"),
+    headerText: getI18nString("meetings_panel.voting.results"),
     goBack: _,
     onMinimize: x,
     onOptionsMenuClick: g,
@@ -22364,7 +22364,7 @@ function yj(e) {
       svg: yx(u, p),
       "data-tooltip-type": Ib.TEXT,
       tooltipForScreenReadersOnly: blockTooltip,
-      "data-tooltip": p ? _$$t("whiteboard.timer.timer_unmute_tooltip") : _$$t("whiteboard.timer.timer_mute_tooltip"),
+      "data-tooltip": p ? getI18nString("whiteboard.timer.timer_unmute_tooltip") : getI18nString("whiteboard.timer.timer_mute_tooltip"),
       "data-tooltip-show-above": !0,
       ref: muteButtonRef
     })
@@ -22472,7 +22472,7 @@ function yT() {
     }, [t, e, i.startChimePlayed, i.time]);
   }(t.playStartChime), !function () {
     jW();
-    let [e, t] = _$$fp(_$$$5);
+    let [e, t] = useAtomValueAndSetter(_$$$5);
     let i = useSelector(e => e.timer.volume);
     j$(t);
     jz(e);
@@ -22522,9 +22522,9 @@ function yT() {
         userInitiated: !1
       }));
       s(_$$F.enqueue({
-        message: _$$t("whiteboard.timer.unmute_music_message"),
+        message: getI18nString("whiteboard.timer.unmute_music_message"),
         button: {
-          text: _$$t("whiteboard.timer.unmute_music_button"),
+          text: getI18nString("whiteboard.timer.unmute_music_button"),
           action: () => {
             s(_$$tk({
               isMuted: !1,
@@ -22554,10 +22554,10 @@ function yT() {
         });
       }
     }, [n, t, e, o, a]);
-  }(), _$$YR(), FJ(), jF(), jU(), _$$md(Qs).isOpen && i) ? jsx(yE, {}) : null;
+  }(), _$$YR(), FJ(), jF(), jU(), useAtomWithSubscription(Qs).isOpen && i) ? jsx(yE, {}) : null;
 }
 function yE() {
-  let e = _$$md(Qs);
+  let e = useAtomWithSubscription(Qs);
   let t = _$$$();
   let i = qU();
   let n = Av();
@@ -22568,7 +22568,7 @@ function yE() {
     children: e.view !== _$$iN.PAST_VOTES || t ? jsxs("div", {
       className: DZ,
       children: [jsx(de, {
-        title: n ? _$$t("meetings_panel.toolbar_tooltip") : _$$t("meetings_panel.toolbar_tooltip.no_voting"),
+        title: n ? getI18nString("meetings_panel.toolbar_tooltip") : getI18nString("meetings_panel.toolbar_tooltip.no_voting"),
         onClose: () => i({
           source: OO.MEETINGS_PANEL
         })
@@ -22582,8 +22582,8 @@ function yE() {
 function yS() {
   let e = Av();
   let t = _$$Ld();
-  let i = e && Ay.isMeetDevice && t;
-  let n = Ay.isMeetDevice ? i : e;
+  let i = e && BrowserInfo.isMeetDevice && t;
+  let n = BrowserInfo.isMeetDevice ? i : e;
   return jsxs("div", {
     className: _$$s.colorBg.$,
     children: [jsx(yv, {}), jsx(b5, {}), jsx(bn, {}), jsx(b5, {}), jsx(jC, {}), n && jsxs(Fragment, {
@@ -22636,7 +22636,7 @@ function yF() {
     tooltip: {
       type: Ib.LOOKUP,
       key: _$$ec2.action,
-      ariaLabel: _$$t(u ? "fullscreen.accessibility.view_comments_with_unreads" : "fullscreen.accessibility.view_comments")
+      ariaLabel: getI18nString(u ? "fullscreen.accessibility.view_comments_with_unreads" : "fullscreen.accessibility.view_comments")
     },
     isActive: r,
     onClick: c,
@@ -22657,7 +22657,7 @@ function yF() {
   });
 }
 function yW() {
-  let e = _$$md(_$$zS);
+  let e = useAtomWithSubscription(_$$zS);
   let t = Xr(_$$bJ);
   let i = Xr(_$$tz);
   let n = useCallback(n => {
@@ -22665,7 +22665,7 @@ function yW() {
     e === Wl.TOP_BAR ? i() : (_$$W9("right", i), t());
   }, [e, i, t]);
   let r = getFeatureFlags().figjam_generate_handbrake;
-  let a = r ? _$$t("whiteboard.ai_modal.generate_handbrake") : _$$t("whiteboard.ai_modal.make");
+  let a = r ? getI18nString("whiteboard.ai_modal.generate_handbrake") : getI18nString("whiteboard.ai_modal.make");
   let s = useSelector(e => e.mirror.appModel.topLevelMode === lyf.LAYOUT);
   useEffect(() => {
     s || i();
@@ -22804,7 +22804,7 @@ let yq = "meeting_tools_toolbar--withHover--r7Sks";
 let yJ = "meeting_tools_toolbar--selected--Lt0iR";
 let yQ = "meeting_tools_toolbar--hide--t1ZI-";
 function y0() {
-  let e = _$$md(Qs);
+  let e = useAtomWithSubscription(Qs);
   let t = qU();
   let i = MR();
   let n = II();
@@ -22911,7 +22911,7 @@ function y0() {
     }, [e, t, i, n, r]);
     (function (e, t, i) {
       let n = ZC(e);
-      let r = _$$md(Qs);
+      let r = useAtomWithSubscription(Qs);
       let a = II();
       let s = r.isOpen || a.length > 0;
       useEffect(() => {
@@ -22930,7 +22930,7 @@ function y0() {
     }, [s]));
   }(x, j, b, y, g, renderGleam);
   let v = function (e) {
-    let t = _$$md(Qs);
+    let t = useAtomWithSubscription(Qs);
     let i = II();
     return !e && !t.isOpen && 0 === i.length;
   }(renderGleam);
@@ -22940,7 +22940,7 @@ function y0() {
   return jsxs("div", {
     ref: x,
     className: ex()("meeting_tools_toolbar--toolbarItemContainer--3HgdD", {
-      "meeting_tools_toolbar--meetDeviceToolbarItemContainer--8R79s": _$$eM(),
+      "meeting_tools_toolbar--meetDeviceToolbarItemContainer--8R79s": isGoogleMeetIntegration(),
       "meeting_tools_toolbar--hasVolumeControl--jaTZr": f
     }),
     children: [jsxs("button", {
@@ -22951,8 +22951,8 @@ function y0() {
       }),
       onClick: _$$rf("meetingsPanelToolbar", "click", s),
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": T ? _$$t("meetings_panel.toolbar_tooltip") : _$$t("meetings_panel.toolbar_tooltip.no_voting"),
-      "aria-label": T ? _$$t("meetings_panel.toolbar.aria_label") : _$$t("meetings_panel.toolbar.aria_label.no_voting"),
+      "data-tooltip": T ? getI18nString("meetings_panel.toolbar_tooltip") : getI18nString("meetings_panel.toolbar_tooltip.no_voting"),
+      "aria-label": T ? getI18nString("meetings_panel.toolbar.aria_label") : getI18nString("meetings_panel.toolbar.aria_label.no_voting"),
       "aria-pressed": E,
       "data-onboarding-key": "meeting-panel-button",
       children: [jsx(y1, {
@@ -22965,7 +22965,7 @@ function y0() {
           [yJ]: E
         }),
         style: {
-          maxWidth: FP() ? 44 : 122
+          maxWidth: isMobileNotFigmaMobile() ? 44 : 122
         },
         children: _
       }), jsx(y2, {
@@ -23076,7 +23076,7 @@ function y8() {
   let p = _$$aV();
   let f = useSelector(e => e.mirror.appModel.topLevelMode === lyf.HISTORY);
   let _ = !q8() && Uy() && !Cd();
-  let x = Ay.isMeetDevice;
+  let x = BrowserInfo.isMeetDevice;
   let g = _$$L2();
   let b = DG(t?.key || "").enabled;
   let y = useCallback(t => {
@@ -23087,7 +23087,7 @@ function y8() {
   return (C_(C, p), p) ? jsx("div", {
     className: y5,
     style: {
-      visibility: Ay.isIpadNative ? "hidden" : "visible"
+      visibility: BrowserInfo.isIpadNative ? "hidden" : "visible"
     },
     children: jsx(yI, {
       hasHoverableBackground: !1,
@@ -23107,7 +23107,7 @@ function y8() {
       ref: v,
       className: ex()(y5, Dm),
       style: {
-        visibility: Ay.isIpadNative ? "hidden" : "visible"
+        visibility: BrowserInfo.isIpadNative ? "hidden" : "visible"
       },
       "data-cancel-insertable-resource-drag-and-drop": !0,
       children: jsx(yI, {
@@ -23185,7 +23185,7 @@ let vs = memo(function () {
   (function () {
     let e = Kx();
     let t = useSelector(e => e.timer.modalState);
-    let i = _$$md(Qs);
+    let i = useAtomWithSubscription(Qs);
     useEffect(() => {
       e?.updateTimerModalState && e.updateTimerModalState(i.isOpen ? "open" : "closed");
     }, [e, t, i.isOpen]);
@@ -23216,8 +23216,8 @@ function vo({
   inVersionHistory: t,
   isCommentsPanelOpen: i
 }) {
-  let n = _$$md(Qs).isOpen;
-  let r = _$$md(_$$zS) === Wl.TOP_BAR;
+  let n = useAtomWithSubscription(Qs).isOpen;
+  let r = useAtomWithSubscription(_$$zS) === Wl.TOP_BAR;
   let a = _$$S4();
   let s = Lk();
   let d = L3();
@@ -23251,7 +23251,7 @@ function vo({
   let f = t ? e ? jsx(vc, {}) : null : jsx(vd, {
     isCommentsPanelOpen: i
   });
-  return _$$pb.isGoogleClassroomIntegration() ? jsx("div", {
+  return IntegrationUtils.isGoogleClassroomIntegration() ? jsx("div", {
     className: va,
     style: {
       bottom: m
@@ -23288,7 +23288,7 @@ function vl() {
 function vd({
   isCommentsPanelOpen: e
 }) {
-  let [t, i] = _$$fp(qM);
+  let [t, i] = useAtomValueAndSetter(qM);
   let n = useSelector(e => _$$Yh(e.mirror.appModel, JT.SLIDES_REWRITE_TEXT));
   useEffect(() => {
     t && !n && i(!1);
@@ -23306,7 +23306,7 @@ function vc() {
     })
   });
 }
-let vm = Xb ? 18 : 9;
+let vm = isAnyMobile ? 18 : 9;
 function vf({
   initiatorId: e,
   initiatorHandle: t,
@@ -23319,13 +23319,13 @@ function vf({
     return t ? t.color : null;
   }(e);
   let s = _$$tS();
-  let u = _$$md(Fj);
-  let h = _$$nl2() ? 1e3 : u;
+  let u = useAtomWithSubscription(Fj);
+  let h = isInteractionPathCheck() ? 1e3 : u;
   let m = useCallback(e => {
     n(H1({
       votingStage: W8Y.JOINED
     }));
-    _$$sx("join_voting_session", {
+    trackEventAnalytics("join_voting_session", {
       source: e,
       votingSessionId: i,
       fileKey: s
@@ -23333,7 +23333,7 @@ function vf({
   }, [n, s, i]);
   let f = useCallback(e => {
     n(_$$U4());
-    _$$sx("cancel_join_voting_session", {
+    trackEventAnalytics("cancel_join_voting_session", {
       source: e,
       votingSessionId: i,
       fileKey: s
@@ -23355,9 +23355,9 @@ function vf({
       children: jsx(_$$m8, {
         color: a,
         message: {
-          text: t ? _$$tx("voting.join_bell.message_with_username", {
+          text: t ? renderI18nText("voting.join_bell.message_with_username", {
             name: t
-          }) : _$$tx("voting.join_bell.message_without_username"),
+          }) : renderI18nText("voting.join_bell.message_without_username"),
           onClick: () => m("join_bell_click")
         },
         renderKey: i,
@@ -23366,7 +23366,7 @@ function vf({
         autoHide: !1,
         recordingKey: "multiplayerBell",
         button: {
-          text: _$$t("voting.join_bell.cancel"),
+          text: getI18nString("voting.join_bell.cancel"),
           onClick: () => f("join_bell_cancel_click")
         }
       })
@@ -23579,7 +23579,7 @@ function vC() {
       recordingKey: "mindmap-add-sibling-button",
       scaleX: l,
       selectionBounds: s,
-      tooltip: _$$t("whiteboard.mindmaps.add-sibling-tooltip"),
+      tooltip: getI18nString("whiteboard.mindmaps.add-sibling-tooltip"),
       tooltipDirection: l > 0 ? "right" : "left",
       tooltipShortcutActionKey: "quick-create-diagram-sibling"
     })]
@@ -23602,7 +23602,7 @@ function vT({
     recordingKey: n,
     scaleX: s,
     selectionBounds: e,
-    tooltip: _$$t("whiteboard.mindmaps.add-child-tooltip"),
+    tooltip: getI18nString("whiteboard.mindmaps.add-child-tooltip"),
     tooltipDirection: r === $6Y.BACKWARD ? "left" : "right",
     tooltipShortcutActionKey: a ? "quick-create" : void 0
   });
@@ -23631,7 +23631,7 @@ function vE({
     children: jsx("div", {
       className: "mindmap_quick_add_buttons--button--iRZL8",
       children: jsx(_$$K, {
-        "aria-label": _$$t("whiteboard.mindmaps.add-child-tooltip"),
+        "aria-label": getI18nString("whiteboard.mindmaps.add-child-tooltip"),
         onClick: e => {
           e.preventDefault();
           r(e);
@@ -23692,7 +23692,7 @@ function vk(e) {
   let r = -1 !== selectedIndex ? options[selectedIndex] : void 0;
   return jsx("div", {
     className: "starter_kit_ui--optionList--6X7XJ",
-    "aria-label": _$$t("whiteboard.starter_kit.subtitle"),
+    "aria-label": getI18nString("whiteboard.starter_kit.subtitle"),
     role: "listbox",
     "data-fullscreen-intercept": !0,
     "aria-activedescendant": r?.ariaId,
@@ -23737,7 +23737,7 @@ let vD = {
   brainstorm: {
     ariaId: _$$g6(),
     key: "brainstorm",
-    localizedLabel: () => _$$t("whiteboard.starter_kit.options.brainstorm"),
+    localizedLabel: () => getI18nString("whiteboard.starter_kit.options.brainstorm"),
     svg: jsx(function () {
       return jsxs(vO, {
         children: [jsx("path", {
@@ -23761,7 +23761,7 @@ let vD = {
   agenda: {
     ariaId: _$$g6(),
     key: "agenda",
-    localizedLabel: () => _$$t("whiteboard.starter_kit.options.agenda"),
+    localizedLabel: () => getI18nString("whiteboard.starter_kit.options.agenda"),
     svg: jsx(function () {
       return jsxs(vO, {
         children: [jsx("rect", {
@@ -23800,7 +23800,7 @@ let vD = {
   flow: {
     ariaId: _$$g6(),
     key: "flow",
-    localizedLabel: () => _$$t("whiteboard.starter_kit.options.flow"),
+    localizedLabel: () => getI18nString("whiteboard.starter_kit.options.flow"),
     svg: jsx(function () {
       return jsxs(vO, {
         children: [jsx("path", {
@@ -23827,7 +23827,7 @@ let vD = {
   bug_bash: {
     ariaId: _$$g6(),
     key: "bug_bash",
-    localizedLabel: () => _$$t("whiteboard.starter_kit.options.bug_bash"),
+    localizedLabel: () => getI18nString("whiteboard.starter_kit.options.bug_bash"),
     svg: jsx(function () {
       return jsxs(vO, {
         children: [jsx("path", {
@@ -23894,7 +23894,7 @@ let vD = {
   design_crit: {
     ariaId: _$$g6(),
     key: "design_crit",
-    localizedLabel: () => _$$t("whiteboard.starter_kit.options.design_crit"),
+    localizedLabel: () => getI18nString("whiteboard.starter_kit.options.design_crit"),
     svg: jsx(function () {
       return jsxs(vO, {
         children: [jsx("path", {
@@ -23920,7 +23920,7 @@ let vD = {
   user_journey: {
     ariaId: _$$g6(),
     key: "user_journey",
-    localizedLabel: () => _$$t("whiteboard.starter_kit.options.user_journey"),
+    localizedLabel: () => getI18nString("whiteboard.starter_kit.options.user_journey"),
     svg: jsx(function () {
       return jsxs(vO, {
         children: [jsx("path", {
@@ -23954,7 +23954,7 @@ let vD = {
   standup: {
     ariaId: _$$g6(),
     key: "standup",
-    localizedLabel: () => _$$t("whiteboard.starter_kit.standup.title"),
+    localizedLabel: () => getI18nString("whiteboard.starter_kit.standup.title"),
     svg: jsx(function () {
       return jsxs(vO, {
         children: [jsx("circle", {
@@ -24008,7 +24008,7 @@ let vD = {
   retro: {
     ariaId: _$$g6(),
     key: "retro",
-    localizedLabel: () => _$$t("whiteboard.starter_kit.options.retro"),
+    localizedLabel: () => getI18nString("whiteboard.starter_kit.options.retro"),
     svg: jsx(function () {
       return jsxs(vO, {
         children: [jsx("circle", {
@@ -24049,7 +24049,7 @@ let vD = {
   templates: {
     ariaId: _$$g6(),
     key: "templates",
-    localizedLabel: () => _$$t("whiteboard.starter_kit.options.templates"),
+    localizedLabel: () => getI18nString("whiteboard.starter_kit.options.templates"),
     className: "starter_kit_ui--optionTemplates--UEEVb",
     onSelect() {
       gw5.clearFigjamStarterKitPreview();
@@ -24089,7 +24089,7 @@ let vH = _$$g6();
 function vB({
   isFromNewFile: e
 }) {
-  let t = _$$md(_$$P6);
+  let t = useAtomWithSubscription(_$$P6);
   let i = _$$dH();
   let n = _$$tS() || void 0;
   let r = useDispatch();
@@ -24216,16 +24216,16 @@ function vB({
           children: [jsx(_$$E2, {
             className: "starter_kit_ui--closeButton--f40J9",
             onClick: () => s(!0),
-            "aria-label": _$$t("whiteboard.starter_kit.close"),
+            "aria-label": getI18nString("whiteboard.starter_kit.close"),
             children: jsx(vA, {})
           }), jsx("div", {
             className: "starter_kit_ui--title--LN48H text--fontNeg14--ARPWl text--_fontBase--QdLsd text--_negText--j9g-L",
             id: vF,
-            children: _$$t("whiteboard.starter_kit.title")
+            children: getI18nString("whiteboard.starter_kit.title")
           }), jsx("div", {
             className: "starter_kit_ui--subtitle--RFGlJ text--fontNeg14--ARPWl text--_fontBase--QdLsd text--_negText--j9g-L",
             id: vH,
-            children: _$$t("whiteboard.starter_kit.subtitle")
+            children: getI18nString("whiteboard.starter_kit.subtitle")
           }), jsx(vk, {
             options: vP,
             selectedIndex: m,
@@ -24290,7 +24290,7 @@ let vW = memo(({
   return jsx(er, {
     children: jsxs(_$$sk, {
       versionHistoryEnabled: !1,
-      children: [!(Ay.isIpad || Ay.isIpadNative) && !t && jsx(vV, {}), i.mode !== Oin.OFF && jsx("div", {
+      children: [!(BrowserInfo.isIpad || BrowserInfo.isIpadNative) && !t && jsx(vV, {}), i.mode !== Oin.OFF && jsx("div", {
         className: _$$_q
       }), jsxs(_$$pO, {
         initialFilterState: {
@@ -24306,7 +24306,7 @@ let vW = memo(({
           children: [jsx(vs, {}), !!L?.shouldOptimizeForIpadApp && jsx(_$$K3, {}), !!L?.shouldOptimizeForIpadApp && jsx(_$$t5, {})]
         }), e && jsx(X5, {})]
       }), jsx(_$$A, {
-        editorType: _$$nT.Whiteboard,
+        editorType: FEditorType.Whiteboard,
         openFile: p
       }), jsx(_$$l3, {}), y.showing && jsx(_$$tH, {
         boundaryKey: "FigJamBrowseAllResourcesModal",

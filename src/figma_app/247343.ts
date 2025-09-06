@@ -1,7 +1,7 @@
 import { c as _$$c, r as _$$r } from "../905/676456";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { j } from "../905/869261";
 import { to } from "../905/156213";
@@ -35,19 +35,19 @@ nF((e, {
         }));
         let d = t.length;
         let m = {
-          productName: a === j4.WHITEBOARD ? _$$t("general.figjam") : _$$t("general.figma_design"),
+          productName: a === j4.WHITEBOARD ? getI18nString("general.figjam") : getI18nString("general.figma_design"),
           nameOrEmail: t[0].name || t[0].email,
           numTeamMembers: d
         };
         switch (p) {
           case FPlanRestrictionType.FULL:
-            l = _$$t("team_user.actions.team_members_upgraded.seat_rename", m);
+            l = getI18nString("team_user.actions.team_members_upgraded.seat_rename", m);
             break;
           case FPlanRestrictionType.STARTER:
-            l = _$$t("team_user.actions.team_members_downgraded_to_viewer.seat_rename", m);
+            l = getI18nString("team_user.actions.team_members_downgraded_to_viewer.seat_rename", m);
             break;
           case FPlanRestrictionType.RESTRICTED:
-            l = _$$t("team_user.actions.team_members_downgraded_to_viewer_restricted.seat_rename", m);
+            l = getI18nString("team_user.actions.team_members_downgraded_to_viewer_restricted.seat_rename", m);
         }
         e.dispatch(F.enqueue({
           type: "team-paid-status-updated",
@@ -84,7 +84,7 @@ export let $$h0 = MM("TEAM_USER_UPDATE_DESIGN_PAID_STATUS", async (e, {
         return t;
       }),
       entry_point: p
-    }).then(function({
+    }).then(function ({
       data: r
     }) {
       e.dispatch(_$$c(h));
@@ -92,12 +92,12 @@ export let $$h0 = MM("TEAM_USER_UPDATE_DESIGN_PAID_STATUS", async (e, {
         teamUsers: r.meta,
         teamId: t
       }));
-    }).catch(function(t) {
+    }).catch(function (t) {
       e.dispatch(_$$r(h));
-      let r = _$$t("team_user.actions.an_error_occurred_while_changing_a_team_member_s_billing_status");
+      let r = getI18nString("team_user.actions.an_error_occurred_while_changing_a_team_member_s_billing_status");
       e.dispatch(_$$s.error(r));
       console.error(t);
     });
   }
 }, e => `$TEAM_USER_UPDATE_DESIGN_PAID_STATUS::teamId::${e.teamId}`);
-export const m = $$h0; 
+export const m = $$h0;

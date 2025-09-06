@@ -1,55 +1,121 @@
-import { atom } from "jotai";
-import { atomWithDefault } from "../vendor/812047";
-import { S } from "../905/142517";
-import { H } from "../905/623391";
-import { NC } from "../905/73481";
-import { lQ } from "../905/934246";
-export function $$d2(e, t, i, n) {
-  let r = lQ;
-  let {
-    action,
-    reducer
-  } = $$c0(i, "init" in t ? t.init : n);
-  return $$u3(H(t, t => {
-    e()?.dispatch(action(t));
-    r(t, "toRedux");
-  }), reducer);
+import type { Atom, PrimitiveAtom } from 'jotai'
+import type { Store } from 'redux'
+import { atom } from 'jotai'
+import { noop } from 'lodash-es'
+
+import { createActionCreator } from '../905/73481'
+import { setupSubscriptionAtom } from '../905/142517'
+import { setupAtomWithInitialValue } from '../905/623391'
+import { atomWithDefault } from '../vendor/812047'
+
+
+
+/**
+ * Sets up a Redux-integrated atom with initial value and reducer.
+ * Original: $$d2
+ * @param storeAtom - Atom for the Redux store
+ * @param atomValue - Configuration for the atom
+ * @param actionType - Type of the Redux action
+ * @param initialState - Initial state for the reducer
+ * @returns The configured atom with Redux integration
+ */
+export function setupReduxAtom<T = any>(
+  storeAtom: () => Store<T>,
+  atomValue: PrimitiveAtom<T>,
+  actionType: string,
+  initialState?: T,
+) {
+  let unsubscribe = noop
+  const { action, reducer } = createActionAndReducer(actionType, 'init' in atomValue ? atomValue.init : initialState)
+  return attachReducer(
+    setupAtomWithInitialValue(atomValue, (value: any) => {
+      storeAtom()?.dispatch(action(value))
+      unsubscribe(value, 'toRedux')
+    }),
+    reducer,
+  )
 }
-export function $$c0(e, t) {
-  let i = NC(e);
+
+/**
+ * Creates a Redux action creator and corresponding reducer.
+ * Original: $$c0
+ * @param actionType - Type of the Redux action
+ * @param initialState - Initial state for the reducer
+ * @returns Object containing action creator and reducer
+ */
+export function createActionAndReducer<T>(actionType: string, initialState: T) {
+  const actionCreator = createActionCreator(actionType)
   return {
-    action: i,
-    reducer: (e = t, n) => i.matches(n) ? n.payload : e
-  };
+    action: actionCreator,
+    reducer: (state = initialState, action: any) => actionCreator.matches(action) ? action.payload : state,
+  }
 }
-export function $$u3(e, t) {
-  e.reducer = t;
-  return e;
+
+/**
+ * Attaches a reducer to an atom.
+ * Original: $$u3
+ * @param atom - The atom to attach the reducer to
+ * @param reducer - The reducer function
+ * @returns The atom with the reducer attached
+ */
+export function attachReducer(atom: any, reducer: any) {
+  atom.reducer = reducer
+  return atom
 }
-export function $$p1(e, t, i) {
-  return $$d2(e, atom(t), i);
+
+/**
+ * Creates an atom with Redux integration using default initial value.
+ * Original: $$p1
+ * @param storeAtom - Atom for the Redux store
+ * @param initialValue - Initial value for the atom
+ * @param actionType - Type of the Redux action
+ * @returns The configured atom
+ */
+export function createAtomWithRedux<T>(storeAtom: () => Store<T>, initialValue: T, actionType: string) {
+  return setupReduxAtom(storeAtom, atom(initialValue), actionType)
 }
-export function $$m4(e, t, {
-  notifyImmediate: i = !1
-} = {}) {
-  let n = S({
+
+/**
+ * Creates a subscription atom for Redux store state.
+ * Original: $$m4
+ * @param storeAtom - Atom for the Redux store
+ * @param selector - Selector function for the state
+ * @param options - Options for notification
+ * @returns The subscription atom with getStore method
+ */
+export function createReduxSubscriptionAtom<T, S>(
+  storeAtom: () => Store<S> & { subscribeImmediate?: (listener?: () => any) => () => void } | null,
+  selector: (state: S) => T,
+  options: { notifyImmediate?: boolean } = {},
+) {
+  const { notifyImmediate = false } = options
+  const subscriptionAtom = setupSubscriptionAtom({
     get: () => {
-      let i = e();
-      if (!i) throw Error("Redux Store does not exist yet. Please create a store or make sure it's appropriately set.");
-      return t(i.getState());
+      const store = storeAtom()
+      if (!store) {
+        throw new Error('Redux Store does not exist yet. Please create a store or make sure it\'s appropriately set.')
+      }
+      return selector(store.getState())
     },
-    subscribe: t => {
-      let n = e();
-      if (!n) throw Error("Redux Store does not exist yet. Please create a store or make sure it's appropriately set.");
-      return i && n.hasOwnProperty("subscribeImmediate") && "function" == typeof n.subscribeImmediate ? n.subscribeImmediate(() => t()) : n.subscribe(() => t());
-    }
-  });
-  return Object.assign(atomWithDefault(e => e(n)), {
-    getStore: e
-  });
+    subscribe: (callback: () => void) => {
+      const store = storeAtom()
+      if (!store) {
+        throw new Error('Redux Store does not exist yet. Please create a store or make sure it\'s appropriately set.')
+      }
+      if (notifyImmediate && 'subscribeImmediate' in store && typeof store.subscribeImmediate === 'function') {
+        return store.subscribeImmediate(callback)
+      }
+      return store.subscribe(callback)
+    },
+  })
+  return Object.assign(atomWithDefault(() => subscriptionAtom), {
+    getStore: storeAtom,
+  })
 }
-export const B5 = $$c0;
-export const OX = $$p1;
-export const Pj = $$d2;
-export const S9 = $$u3;
-export const bt = $$m4;
+
+// Refactored exports to match new function names
+export const B5 = createActionAndReducer
+export const OX = createAtomWithRedux
+export const Pj = setupReduxAtom
+export const S9 = attachReducer
+export const bt = createReduxSubscriptionAtom

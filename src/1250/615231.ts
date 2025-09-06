@@ -3,11 +3,11 @@ import { useEffect } from "react";
 import { useDispatch } from "../vendor/514228";
 import { languageCodes } from "../905/816253";
 import { getFeatureFlags } from "../905/601108";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { getInitialOptions, buildUploadUrl } from "../figma_app/169182";
 import { oW } from "../905/675859";
 import { sJ, Q5, rX } from "../9864/183809";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { to } from "../905/156213";
 import { b as _$$b } from "../905/985254";
 import { c as _$$c } from "../905/370443";
@@ -42,17 +42,17 @@ let I = (e, t, n) => {
 function A(e) {
   let t = useDispatch();
   let n = DP();
-  let r = e.hasSeenEsEsModal ? tx("es_la_announcement.seen_es_es_description") : tx("es_la_announcement.not_seen_es_es_description");
+  let r = e.hasSeenEsEsModal ? renderI18nText("es_la_announcement.seen_es_es_description") : renderI18nText("es_la_announcement.not_seen_es_es_description");
   return jsx(_l, {
     isShowing: e.isShowing,
     trackingContextName: "es_la_launch_announcement",
     onClose: e.onClose,
     title: jsx(Fragment, {
-      children: tx("es_la_announcement.title")
+      children: renderI18nText("es_la_announcement.title")
     }),
     description: r,
     primaryCta: {
-      label: tx("es_la_announcement.cta_button"),
+      label: renderI18nText("es_la_announcement.cta_button"),
       type: "button",
       onClick: () => {
         t(to({
@@ -68,7 +68,7 @@ function A(e) {
       width: 332,
       height: 404,
       src: buildUploadUrl("dark" === n ? "d0bae5ffbf320d1ec97034348702b49fd549969e" : "28a10c6e6bb3668d3cc281fda53dd7a6f7f27ad8"),
-      alt: _$$t("es_la_launch_announcement.image_alt_text")
+      alt: getI18nString("es_la_launch_announcement.image_alt_text")
     })
   });
 }
@@ -76,9 +76,9 @@ let S = r1("has_tried_es_la");
 let N = r1("seen_es_es_launch_announcement");
 export function $$O0() {
   let e = useDispatch();
-  let t = md(S);
-  let n = md(N);
-  let c = md(mp);
+  let t = useAtomWithSubscription(S);
+  let n = useAtomWithSubscription(N);
+  let c = useAtomWithSubscription(mp);
   let _ = "loaded" === t.status && "loaded" === c.status && "loaded" === n.status;
   let {
     show,

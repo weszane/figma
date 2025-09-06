@@ -1,7 +1,7 @@
 import { Tl, tb, lY } from "../figma_app/703447";
 import { t8O, jXp } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { zl, eU } from "../figma_app/27355";
+import { atomStoreManager, atom } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { H9 } from "../figma_app/930338";
 import { M1 } from "../905/777093";
@@ -123,7 +123,7 @@ class v {
     this.iframe.style.opacity = "0";
     this.iframe.style.top = "0px";
     this.iframe.style.left = "0px";
-    this.iframe.src = zl.get(jD);
+    this.iframe.src = atomStoreManager.get(jD);
     this.sitePreviewIframeManager.mountIframe(this.iframe, {
       compactDOM: n,
       useReactDev: !0
@@ -249,7 +249,7 @@ class v {
 async function A(e, t) {
   return await LE(Object.entries(t ?? {}).filter(([e, t]) => "-1:-1" !== t).map(([e, t]) => t).concat([e]), !1, !1, !0);
 }
-let x = Wh(() => eU({}));
+let x = Wh(() => atom({}));
 export async function $$N0() {
   let e = t8O?.getLocalTextStyleFontInfo();
   if (!e) return "";
@@ -274,7 +274,7 @@ export async function $$N0() {
     }
     {
       let t = `${e.id}|${e.family}|${e.style}`;
-      let r = zl.get(x);
+      let r = atomStoreManager.get(x);
       let i = r[t];
       if (!i) {
         let n = debugState.getState();
@@ -287,7 +287,7 @@ export async function $$N0() {
           orgId: n.currentUserOrgId
         });
         i = H9(a);
-        zl.set(x, {
+        atomStoreManager.set(x, {
           ...r,
           [t]: i
         });

@@ -2,9 +2,9 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
 import { $n } from "../905/521428";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { $z } from "../figma_app/617427";
-import { t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { to } from "../905/156213";
 import { c as _$$c } from "../905/370443";
 import { Hu } from "../figma_app/516028";
@@ -22,13 +22,13 @@ export function $$y0() {
     canMoveFileToProPlus
   } = R();
   let i = useDispatch();
-  let y = !md(Hu);
+  let y = !useAtomWithSubscription(Hu);
   let b = useCallback(() => {
     i(to({
       type: Y,
       data: {
-        titleText: t("upsell.move_file_videos.move_file_to_upload_videos_title"),
-        bodyText: t("upsell.move_file_videos.move_file_to_upload_videos_subtitle")
+        titleText: getI18nString("upsell.move_file_videos.move_file_to_upload_videos_title"),
+        bodyText: getI18nString("upsell.move_file_videos.move_file_to_upload_videos_subtitle")
       }
     }));
   }, [i]);
@@ -37,15 +37,15 @@ export function $$y0() {
     variant: "link",
     children: jsx("span", {
       className: Rh,
-      children: tx("proto.prototype_panel.video_error_panel.move_this_file")
+      children: renderI18nText("proto.prototype_panel.video_error_panel.move_this_file")
     })
   });
   return jsxs(aV, {
     children: [jsx(JU, {
       className: iw,
-      children: canMoveFileToProPlus && y ? tx("proto.prototype_panel.video_error_panel.move_file_to_pro_team_to_upload_video", {
+      children: canMoveFileToProPlus && y ? renderI18nText("proto.prototype_panel.video_error_panel.move_file_to_pro_team_to_upload_video", {
         moveThisFileLink: v
-      }) : tx("proto.prototype_panel.video_error_panel.upgrade_team_to_upload_video")
+      }) : renderI18nText("proto.prototype_panel.video_error_panel.upgrade_team_to_upload_video")
     }), !(canMoveFileToProPlus && y) && jsx("div", {
       className: Tw,
       children: jsx($z, {
@@ -58,7 +58,7 @@ export function $$y0() {
         },
         onClick: showVideosModal,
         variant: "link",
-        children: tx("proto.prototype_panel.video_error_panel.upgrade_to_pro")
+        children: renderI18nText("proto.prototype_panel.video_error_panel.upgrade_to_pro")
       })
     })]
   });

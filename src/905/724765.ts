@@ -5,7 +5,7 @@ import { vo, r1, nB, wi, jk } from "../figma_app/272243";
 import { g as _$$g } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
 import { $z } from "../figma_app/617427";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
 import { FProductAccessType } from "../figma_app/191312";
@@ -40,7 +40,7 @@ function I(e) {
     children: jsxs(vo, {
       children: [jsx(r1, {
         children: jsx("div", {
-          children: tx("1_click_expansion.you_now_have_full_access")
+          children: renderI18nText("1_click_expansion.you_now_have_full_access")
         })
       }), jsxs(nB, {
         children: [jsx("div", {
@@ -61,7 +61,7 @@ function I(e) {
             trackingProperties: {
               trackingDescriptor: _$$c.CONTINUE
             },
-            children: tx("request_upgrade.continue_button")
+            children: renderI18nText("request_upgrade.continue_button")
           })
         })
       })]
@@ -75,10 +75,10 @@ export let $$E0 = Ju(function (e) {
       ...e,
       children: [jsx("div", {
         ...Ay.props(v.title),
-        children: tx("1_click_expansion.you_now_have_full_access")
+        children: renderI18nText("1_click_expansion.you_now_have_full_access")
       }), jsx("div", {
         className: "x1vi7shn",
-        children: tx("1_click_expansion.you_now_have_a_full", {
+        children: renderI18nText("1_click_expansion.you_now_have_a_full", {
           planName: e.planName
         })
       })]

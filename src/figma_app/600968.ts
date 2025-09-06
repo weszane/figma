@@ -2,21 +2,21 @@ import { useMemo } from "react";
 import { isNotNullish } from "../figma_app/95419";
 import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
-import { eU, zl, md } from "../figma_app/27355";
+import { atom, atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
 import { unwrap } from "../vendor/812047";
 import { subscribeAndAwaitData } from "../905/553831";
 import { En } from "../figma_app/566371";
 import { w0 } from "../figma_app/594947";
 import { ZJ } from "../3973/697935";
 import { Uv } from "../3973/473379";
-import { Lg, nl } from "../figma_app/257275";
+import { getFalseValue, isInteractionPathCheck } from "../figma_app/897289";
 import { z } from "../905/239603";
 import { u8 } from "../figma_app/976749";
 import { Eo } from "../figma_app/80990";
 import { FComponentType } from "../figma_app/191312";
 import { IUX, Bu2 } from "../figma_app/43951";
 import { Zi } from "../905/395857";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 let I = z.object({
   assetKey: z.string(),
   name: z.string(),
@@ -29,9 +29,9 @@ let S = z.object({
   assets: z.array(I)
 });
 let v = [];
-let A = eU(async e => {
-  let t = e(u8) === nT.Sites;
-  let r = !!(Lg() || nl()) || e(ZJ).status === Uv.COMPLETED;
+let A = atom(async e => {
+  let t = e(u8) === FEditorType.Sites;
+  let r = !!(getFalseValue() || isInteractionPathCheck()) || e(ZJ).status === Uv.COMPLETED;
   return t && r ? {
     libraryConfigs: (await w0("1p_code_presets_sts")).get("libraries", v, e => Array.isArray(e) && e.every(e => S.safeParse(e).success)),
     enabled: t
@@ -44,7 +44,7 @@ let $$x2 = unwrap(A, () => ({
   libraryConfigs: v,
   enabled: !1
 }));
-let $$N0 = eU(e => {
+let $$N0 = atom(e => {
   let {
     libraryConfigs,
     enabled
@@ -59,7 +59,7 @@ export async function $$w1() {
   let {
     libraryConfigs,
     enabled
-  } = zl.get($$x2);
+  } = atomStoreManager.get($$x2);
   if (!enabled) return [];
   if (C) return C;
   let r = getFeatureFlags().ds_enable_code_presets_sidecar_table;
@@ -106,7 +106,7 @@ export function $$L3() {
   let {
     libraryConfigs,
     enabled
-  } = md($$x2);
+  } = useAtomWithSubscription($$x2);
   let r = getFeatureFlags().ds_enable_code_presets_sidecar_table ? libraryConfigs.map(({
     libraryKey: e
   }) => IUX.Query({

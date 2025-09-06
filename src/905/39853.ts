@@ -1,15 +1,15 @@
 import { Et, aD, nj } from "../905/125019";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { iLo, glU, jXp } from "../figma_app/763686";
-import { fm } from "../905/236856";
-import { sx } from "../905/449184";
+import { delay } from "../905/236856";
+import { trackEventAnalytics } from "../905/449184";
 import { jm } from "../figma_app/416935";
 import { getInitialOptions } from "../figma_app/169182";
 import { qW } from "../905/623179";
-import { $D } from "../905/11";
-import { x1 } from "../905/714362";
+import { reportError } from "../905/11";
+import { logError } from "../905/714362";
 import { XHR } from "../905/910117";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { ds } from "../figma_app/314264";
 import { yF, M1 } from "../905/777093";
 import { GK } from "../905/37051";
@@ -29,7 +29,7 @@ import { XMLParser } from "../vendor/870203";
 import { F as _$$F } from "../905/422355";
 import { Jr } from "../figma_app/624361";
 import { U_ } from "../905/327855";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { F as _$$F2 } from "../905/877554";
 import { bJ } from "../figma_app/687776";
 import { F as _$$F3 } from "../905/302958";
@@ -1444,7 +1444,7 @@ eC.SLIDE_THEME_DIR_PATH = "ppt/theme/";
 eC.KNOWN_NON_VISUAL_NODES = ["p:grpSpPr", "p:nvGrpSpPr"];
 async function eP(e, t, i) {
   Y5.resetLoadedFigFile();
-  await U_(e, nT.Slides);
+  await U_(e, FEditorType.Slides);
   let n = new eC();
   await n.parsePPTX(i);
   let r = n.parseMetadata();
@@ -1528,7 +1528,7 @@ async function eV(e, t, i, n, a, s, o, l, d) {
         type: "restricted-import-type",
         error: !0,
         button: n ? {
-          text: _$$t("fullscreen.file_import.go_to_drafts"),
+          text: getI18nString("fullscreen.file_import.go_to_drafts"),
           action: () => {
             e.dispatch(gN(i));
           }
@@ -1571,21 +1571,21 @@ async function eV(e, t, i, n, a, s, o, l, d) {
         raw: !0,
         retryCount: 3
       }).catch(e => {
-        $D(_$$e.SCENEGRAPH_AND_SYNC, e);
+        reportError(_$$e.SCENEGRAPH_AND_SYNC, e);
         return l;
       }).then(e => {
         if (e.error) throw Error(e.error);
         try {
           return JSON.parse(e.data);
         } catch (e) {
-          $D(_$$e.SCENEGRAPH_AND_SYNC, Error("Unparseable canvas upload response"));
+          reportError(_$$e.SCENEGRAPH_AND_SYNC, Error("Unparseable canvas upload response"));
           return l;
         }
       });
     }(t, n, a, s || eB, o, l, d);
     if (c = f.meta.file.key, t.hasCanceled()) throw new OL.Canceled();
     if (!c) {
-      $D(_$$e.SCENEGRAPH_AND_SYNC, Error("Converted file upload did not return a file key"));
+      reportError(_$$e.SCENEGRAPH_AND_SYNC, Error("Converted file upload did not return a file key"));
       return new lZ.ServiceUnavailable();
     }
     if (f.meta.file.file_repo_id) {
@@ -1685,7 +1685,7 @@ async function eG(e, t, i) {
           };
           r(3);
         }));
-        await fm(0);
+        await delay(0);
       }
       await Promise.all(c);
     }
@@ -1698,13 +1698,13 @@ async function eG(e, t, i) {
     return e;
   }
   let c = [];
-  a > 0 && c.push(_$$t("fullscreen.file_import.oversized_files_images_exceeded_max_size", {
+  a > 0 && c.push(getI18nString("fullscreen.file_import.oversized_files_images_exceeded_max_size", {
     oversizedFiles: a
   }));
-  l > 0 && c.push(_$$t("fullscreen.file_import.import_invalid_images", {
+  l > 0 && c.push(getI18nString("fullscreen.file_import.import_invalid_images", {
     invalidFiles: l
   }));
-  sx("file_import_image_upload_complete", {
+  trackEventAnalytics("file_import_image_upload_complete", {
     oversizedFiles: a,
     invalidFiles: l
   });
@@ -1756,12 +1756,12 @@ async function eH(e, t, i, n, r, a, s) {
   if (".svg" === t.extension) throw new OL.SvgFromFileBrowser();
   let u = i.blob;
   if (!u) {
-    x1("convertAndUploadFile", "attempted to convert a file with no blob");
+    logError("convertAndUploadFile", "attempted to convert a file with no blob");
     return new lZ.NoBlob();
   }
   a.fileLength = u.size;
   let m = jm(getInitialOptions()?.user_data?.email);
-  ".pdf" === t.extension ? (a.pdf_source_selected = bT(s), sx("pdf_import_started", a, {
+  ".pdf" === t.extension ? (a.pdf_source_selected = bT(s), trackEventAnalytics("pdf_import_started", a, {
     forwardToDatadog: !0
   }), c = await Lg(e, t.basename, u, s)) : c = ".pptx" === t.extension ? await eP(e, t.basename, u) : await n.convertFile({
     blob: u,
@@ -1785,7 +1785,7 @@ async function eW(e, t, i, n, a, s, o, l) {
   try {
     await m;
   } catch (t) {
-    t instanceof qW && MZ(e.dispatch, _$$t("check_network_compatibility.error_bell.video_upload.message"));
+    t instanceof qW && MZ(e.dispatch, getI18nString("check_network_compatibility.error_bell.video_upload.message"));
     return t;
   }
   try {
@@ -1800,7 +1800,7 @@ async function eW(e, t, i, n, a, s, o, l) {
       await e.addLinks(t);
     }
   } catch (e) {
-    $D(_$$e.DEVELOPER_TOOLS, e);
+    reportError(_$$e.DEVELOPER_TOOLS, e);
   }
   return {
     warnings: g,

@@ -1,7 +1,7 @@
 import { sFD, VIy, $mk, vwB, miP, QOd, Pls } from "../figma_app/763686";
 import { l7 } from "../905/189185";
-import { zl } from "../figma_app/27355";
-import { Lo } from "../905/714362";
+import { atomStoreManager } from "../figma_app/27355";
+import { logInfo } from "../905/714362";
 import { Ay } from "../figma_app/432652";
 import { Y5 } from "../figma_app/455680";
 import { LX } from "../figma_app/862108";
@@ -17,7 +17,7 @@ export async function $$c0({
     prompt: e,
     visualType: t
   }, n);
-  i.aborted || (u?.requestId && zl.set(LX, u.requestId), u?.trace && Lo("handleTextToVisual", "Trace data", {
+  i.aborted || (u?.requestId && atomStoreManager.set(LX, u.requestId), u?.trace && logInfo("handleTextToVisual", "Trace data", {
     message: u.trace
   }), await Y5.onReady(), $$p1(t, u, {
     ganttColor: r,

@@ -1,5 +1,5 @@
 import { getFeatureFlags } from "../905/601108";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 let a = class e {
   constructor(e, t, i) {
     this.frameNumber = 0;
@@ -40,11 +40,11 @@ let a = class e {
     this.addPerFrameMetricsCallback(u, p);
     this.lastSampledFrame = this.frameNumber;
     getFeatureFlags().defer_network_call_slow_frame ? setTimeout(() => {
-      sx(e.analyticsName, u, {
+      trackEventAnalytics(e.analyticsName, u, {
         ...e.loggerOptions,
         forwardToDatadog: c
       });
-    }, 0) : sx(e.analyticsName, u, {
+    }, 0) : trackEventAnalytics(e.analyticsName, u, {
       ...e.loggerOptions,
       forwardToDatadog: c
     });

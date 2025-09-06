@@ -9,12 +9,12 @@ import { $n } from "../905/521428";
 import { l as _$$l } from "../905/509505";
 import { g as _$$g } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
-import { Xr, md } from "../figma_app/27355";
-import { az } from "../905/449184";
+import { Xr, useAtomWithSubscription } from "../figma_app/27355";
+import { analyticsEventManager } from "../905/449184";
 import { h as _$$h } from "../905/207101";
 import { dP } from "../figma_app/119475";
 import { Ph } from "../905/160095";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { AS, to } from "../905/156213";
 import { tS } from "../figma_app/516028";
 import { aD } from "../figma_app/646357";
@@ -48,13 +48,13 @@ let B = Ju(function (e) {
   } = S1();
   let u = tS();
   _$$h(() => {
-    az.trackDefinedEvent("ds_import.library_warning_modal_shown", {
+    analyticsEventManager.trackDefinedEvent("ds_import.library_warning_modal_shown", {
       library_key: library.library_key,
       file_key: u || ""
     });
   });
   let x = useCallback(() => {
-    az.trackDefinedEvent("ds_import.library_warning_modal_continue_clicked", {
+    analyticsEventManager.trackDefinedEvent("ds_import.library_warning_modal_continue_clicked", {
       library_key: library.library_key,
       file_key: u || ""
     });
@@ -69,7 +69,7 @@ let B = Ju(function (e) {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$t("figmake.ds_imports.library_selector_warning_modal.title")
+          children: getI18nString("figmake.ds_imports.library_selector_warning_modal.title")
         })
       }), jsx(nB, {
         children: jsxs("div", {
@@ -91,14 +91,14 @@ let B = Ju(function (e) {
               })]
             })]
           }), jsx("p", {
-            children: _$$t("figmake.ds_imports.library_selector_warning_modal.body")
+            children: getI18nString("figmake.ds_imports.library_selector_warning_modal.body")
           })]
         })
       }), jsx(wi, {
         children: jsx(jk, {
           children: jsx($n, {
             onClick: x,
-            children: _$$t("figmake.ds_imports.library_selector_warning_modal.continue")
+            children: getI18nString("figmake.ds_imports.library_selector_warning_modal.continue")
           })
         })
       })]
@@ -153,13 +153,13 @@ function G({
         className: "x78zum5 xdt5ytf x1cy8zhl x1jnr06f xc7ga6q x1seouad x1qh3cfz x1b06okx xcr9a89",
         children: [jsx("div", {
           ...Ay.props(_$$g.textBodyMediumStrong),
-          children: _$$t("sites.modal.select_library_banner_title")
+          children: getI18nString("sites.modal.select_library_banner_title")
         }), jsxs("div", {
           ...Ay.props(_$$g.textBodyMedium, P.textSecondary),
-          children: [_$$t("sites.modal.select_library_banner_subtitle"), "\xa0", jsx(Ph, {
+          children: [getI18nString("sites.modal.select_library_banner_subtitle"), "\xa0", jsx(Ph, {
             href: kC,
             newTab: !0,
-            children: _$$t("sites.modal.learn_more")
+            children: getI18nString("sites.modal.learn_more")
           })]
         })]
       })
@@ -176,7 +176,7 @@ function G({
           callToAction: null,
           name: n.library_name,
           onClick: () => {
-            az.trackDefinedEvent("ds_import.library_selector_overlay_library_selected", {
+            analyticsEventManager.trackDefinedEvent("ds_import.library_selector_overlay_library_selected", {
               library_key: n.library_key,
               file_key: c || ""
             });
@@ -195,10 +195,10 @@ function G({
 }
 function H() {
   let e = Xr(jx);
-  let t = md(FX);
+  let t = useAtomWithSubscription(FX);
   let n = tS();
   _$$h(() => {
-    az.trackDefinedEvent("ds_import.library_selector_empty_state_seen", {
+    analyticsEventManager.trackDefinedEvent("ds_import.library_selector_empty_state_seen", {
       file_key: n || ""
     });
   });
@@ -208,13 +208,13 @@ function H() {
       className: "xhwf2h4 x167g77z x78zum5 xdt5ytf x6s0dn4 xl56j7k x2b8uid",
       children: [jsx(_$$l, {}), jsx("div", {
         ...Ay.props(_$$g.textBodyMediumStrong),
-        children: _$$t("sites.modal.no_libraries_found")
+        children: getI18nString("sites.modal.no_libraries_found")
       }), jsxs("div", {
         ...Ay.props(_$$g.textBodyMedium, P.textSecondary),
-        children: [_$$t("sites.modal.select_library_banner_subtitle"), "\xa0", jsx(Ph, {
+        children: [getI18nString("sites.modal.select_library_banner_subtitle"), "\xa0", jsx(Ph, {
           href: kC,
           newTab: !0,
-          children: _$$t("sites.modal.learn_more")
+          children: getI18nString("sites.modal.learn_more")
         })]
       }), !t && jsxs(Fragment, {
         children: [jsxs("div", {
@@ -223,24 +223,24 @@ function H() {
             className: "x1dmp6jm xqtp20y x1bamp8i"
           }), "\xa0", jsx("div", {
             ...Ay.props(_$$g.textBodyMedium, P.textSecondary),
-            children: _$$t("sites.modal.or")
+            children: getI18nString("sites.modal.or")
           }), "\xa0", jsx("div", {
             className: "x1dmp6jm xqtp20y x1bamp8i"
           })]
         }), jsx("div", {
           ...Ay.props(_$$g.textBodyMedium, P.textSecondary),
-          children: _$$t("sites.modal.add_guidelines_text")
+          children: getI18nString("sites.modal.add_guidelines_text")
         }), jsx($n, {
           variant: "primary",
           onClick: () => {
-            az.trackDefinedEvent("ds_import.library_selector_empty_state_guidelines_clicked", {
+            analyticsEventManager.trackDefinedEvent("ds_import.library_selector_empty_state_guidelines_clicked", {
               file_key: n || ""
             });
             let t = Hg(nc);
             let r = t[dY] || t[x1] || null;
             r && (Zr(r), e(Ic.CODE), r.codeFilePath && ci(r.codeFilePath));
           },
-          children: _$$t("sites.modal.add_guidelines_button_text")
+          children: getI18nString("sites.modal.add_guidelines_button_text")
         })]
       })]
     })
@@ -265,7 +265,7 @@ export let $$W0 = Ju(function (e) {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$t("sites.modal.select_library")
+          children: getI18nString("sites.modal.select_library")
         })
       }), jsx(nB, {
         padding: 0,

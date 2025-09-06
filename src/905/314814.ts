@@ -19,7 +19,7 @@ import { C as _$$C } from "../905/641057";
 import { r as _$$r } from "../905/786998";
 import { tH, H4 } from "../905/751457";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { Y as _$$Y } from "../905/830372";
 import { Pf } from "../905/590952";
 import { E as _$$E2 } from "../905/984674";
@@ -69,7 +69,7 @@ function G() {
     href: "https://help.figma.com/hc/articles/360046216313-Upgrade-or-downgrade-your-plan#h_01JN1WZEQ0XHFCM49DXHGJPS7S",
     trusted: !0,
     newTab: !0,
-    children: tx("billing_modals.start_annual_plan.canceling")
+    children: renderI18nText("billing_modals.start_annual_plan.canceling")
   });
 }
 function z(e) {
@@ -78,7 +78,7 @@ function z(e) {
     children: jsx(Q, {
       "data-testid": "team-start-annual-plan-disclaimer",
       title: jsxs(Fragment, {
-        children: [tx("billing_modals.start_annual_plan.banner.your_annual_subscription_starts", {
+        children: [renderI18nText("billing_modals.start_annual_plan.banner.your_annual_subscription_starts", {
           date: e.annualSubscriptionStartDate
         }), " ", jsx(G, {})]
       }),
@@ -108,16 +108,16 @@ function H(e) {
       localizeCurrency
     } = Zz(e);
     if (!prices || !localizeCurrency) return [null, {
-      errorMessage: _$$t("billing_modals.org_renewal.price_error")
+      errorMessage: getI18nString("billing_modals.org_renewal.price_error")
     }];
     let a = N_.dict(e => isNullish(prices[e]) ? void 0 : (t[e] || 0) * prices[e].amount);
     return N_.toArray().some(e => isNullish(a[e])) ? [null, {
-      errorMessage: _$$t("billing_modals.org_renewal.price_error")
+      errorMessage: getI18nString("billing_modals.org_renewal.price_error")
     }] : [{
       id: "projectedCost",
       name: jsx(_$$E2, {
         color: "secondary",
-        children: _$$t("billing_modals.team_renewal.table.header.annual_cost")
+        children: getI18nString("billing_modals.team_renewal.table.header.annual_cost")
       }),
       textAlign: "right",
       cellComponent: e => jsx(_$$E2, {
@@ -133,7 +133,7 @@ function H(e) {
         children: [q > 0 && jsx(_$$E, {
           variant: "successFilled",
           "data-testid": "projected-cost-savings",
-          children: tx("billing_modals.team_add_seats.badge.savings", {
+          children: renderI18nText("billing_modals.team_add_seats.badge.savings", {
             amount: localizeCurrency.formatMoney(q, {
               showCents: !1
             })
@@ -166,7 +166,7 @@ function H(e) {
   }(d.key, P);
   let q = y()(Object.values(Y));
   let $ = !!getFeatureFlags().coterm_modal_ui_improvements;
-  let Z = _$$t("billing_modals.start_annual_plan.header");
+  let Z = getI18nString("billing_modals.start_annual_plan.header");
   let X = y()(Object.values(P));
   let Q = 0 === X || V;
   let J = () => {
@@ -220,10 +220,10 @@ function H(e) {
             children: Z
           }), $ ? jsx("div", {
             className: "xemv814 x1n0bwc9",
-            children: tx("billing_modals.start_annual_plan.description_convert_monthly_seats")
+            children: renderI18nText("billing_modals.start_annual_plan.description_convert_monthly_seats")
           }) : jsx("div", {
             className: "x17akokd x1n0bwc9",
-            children: tx("billing_modals.start_annual_plan.description")
+            children: renderI18nText("billing_modals.start_annual_plan.description")
           })]
         }), jsx(_$$C, {
           styling: {
@@ -236,7 +236,7 @@ function H(e) {
             name: jsx(_$$E2, {
               color: "secondary",
               truncate: !0,
-              children: _$$t("billing_modals.renewal.table.header.seat_type")
+              children: getI18nString("billing_modals.renewal.table.header.seat_type")
             }),
             textAlign: "left",
             gridColumnWidth: "auto",
@@ -246,13 +246,13 @@ function H(e) {
               seatType: e,
               showMonthlyAnnualPriceComparison: !0
             }),
-            getAggregate: () => $ ? _$$t("billing_modals.start_annual_plan.table.annual_seat_subscription") : _$$t("billing_modals.team_add_seats.table.header.total"),
+            getAggregate: () => $ ? getI18nString("billing_modals.start_annual_plan.table.annual_seat_subscription") : getI18nString("billing_modals.team_add_seats.table.header.total"),
             aggregateColumnSpan: 2
           }, {
             id: "monthly",
             name: jsx("span", {
               className: _$$s.textBodyMedium.colorTextSecondary.$,
-              children: _$$t("billing_modals.team_add_seats.table.header.monthly")
+              children: getI18nString("billing_modals.team_add_seats.table.header.monthly")
             }),
             textAlign: "right",
             cellComponent: e => jsx(_$$E2, {
@@ -265,7 +265,7 @@ function H(e) {
             id: "annual",
             name: jsx("span", {
               className: _$$s.textBodyMedium.colorTextSecondary.$,
-              children: _$$t("billing_modals.team_start_annual_plan.table.header.annual")
+              children: getI18nString("billing_modals.team_start_annual_plan.table.header.annual")
             }),
             textAlign: "center",
             cellComponent: e => jsx("div", {
@@ -287,32 +287,32 @@ function H(e) {
             annualSubscriptionStartDate: c
           }), jsx("br", {}), jsx("div", {
             className: _$$s.textBodyMedium.colorTextSecondary.$,
-            children: tx("billing_modals.start_annual_plan.footer.your_annual_subscription_will_automatically_renew")
+            children: renderI18nText("billing_modals.start_annual_plan.footer.your_annual_subscription_will_automatically_renew")
           }), jsx("div", {
             className: _$$s.textBodyMedium.colorTextSecondary.$,
-            children: tx("billing_modals.start_annual_plan.by_upgrading", {
+            children: renderI18nText("billing_modals.start_annual_plan.by_upgrading", {
               termsOfService: jsx(_$$N, {
                 href: "https://www.figma.com/legal/tos/",
                 trusted: !0,
                 newTab: !0,
-                children: tx("billing_modals.start_annual_plan.terms_of_service")
+                children: renderI18nText("billing_modals.start_annual_plan.terms_of_service")
               })
             })
           })]
         }), !$ && jsxs(Fragment, {
           children: [jsxs("div", {
             className: _$$s.textBodyMedium.colorTextSecondary.$,
-            children: [tx("billing_modals.start_annual_plan.your_annual_plan_will_start", {
+            children: [renderI18nText("billing_modals.start_annual_plan.your_annual_plan_will_start", {
               date: c
             }), " ", jsx(G, {})]
           }), jsx("br", {}), jsx("div", {
             className: _$$s.textBodyMedium.colorTextSecondary.$,
-            children: tx("billing_modals.start_annual_plan.by_upgrading", {
+            children: renderI18nText("billing_modals.start_annual_plan.by_upgrading", {
               termsOfService: jsx(_$$N, {
                 href: "https://www.figma.com/legal/tos/",
                 trusted: !0,
                 newTab: !0,
-                children: tx("billing_modals.start_annual_plan.terms_of_service")
+                children: renderI18nText("billing_modals.start_annual_plan.terms_of_service")
               })
             })
           })]
@@ -328,11 +328,11 @@ function H(e) {
           children: [jsx($n, {
             variant: "secondary",
             onClick: e.onClose,
-            children: _$$t("general.cancel")
+            children: getI18nString("general.cancel")
           }), jsx($n, {
             type: "submit",
             disabled: Q,
-            children: tx("billing_modals.team_start_annual_plan.cta")
+            children: renderI18nText("billing_modals.team_start_annual_plan.cta")
           })]
         })
       })]

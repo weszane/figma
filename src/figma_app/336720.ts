@@ -12,7 +12,7 @@ import { useDispatch } from "../vendor/514228";
 import { r as _$$r } from "../905/857502";
 import { getInitialOptions } from "../figma_app/169182";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { F } from "../905/302958";
 import { tS } from "../figma_app/516028";
 import { LB } from "../figma_app/29089";
@@ -53,14 +53,14 @@ let $$A0 = {
         navigator.clipboard.writeText(r);
         t(F.enqueue({
           type: "copy-presentation-link-success",
-          message: _$$t("fullscreen_actions.copy-presentation-link-success")
+          message: getI18nString("fullscreen_actions.copy-presentation-link-success")
         }));
       }, [e, t]);
       return jsx(_$$E, {
         onClick: r,
         children: jsxs("div", {
           className: _$$s.flex.flexRow.itemsCenter.justifyCenter.$,
-          children: [jsx(_$$r, {}), tx("fullscreen_actions.copy-presentation-link")]
+          children: [jsx(_$$r, {}), renderI18nText("fullscreen_actions.copy-presentation-link")]
         })
       });
     }, {})

@@ -1,8 +1,8 @@
 import { jsx } from "react/jsx-runtime";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { buildUploadUrl } from "../figma_app/169182";
 import { B } from "../905/714743";
-import { t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { E as _$$E } from "../905/984674";
 import { ng } from "../figma_app/205827";
 import { A } from "../c5e2cae0/180390";
@@ -28,35 +28,35 @@ let $$I0 = {
 };
 let $$A5 = [{
   teamType: "freelancer",
-  imageAltText: () => t("pro_trials_v3.pro_trial_initiation_modal.freelancer"),
+  imageAltText: () => getI18nString("pro_trials_v3.pro_trial_initiation_modal.freelancer"),
   descriptionText: jsx(_$$E, {
     fontSize: 14,
     fontWeight: "medium",
-    children: tx("pro_trials_v3.pro_trial_initiation_modal.freelancer")
+    children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.freelancer")
   })
 }, {
   teamType: "agency",
-  imageAltText: () => t("pro_trials_v3.pro_trial_initiation_modal.agency"),
+  imageAltText: () => getI18nString("pro_trials_v3.pro_trial_initiation_modal.agency"),
   descriptionText: jsx(_$$E, {
     fontSize: 14,
     fontWeight: "medium",
-    children: tx("pro_trials_v3.pro_trial_initiation_modal.agency")
+    children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.agency")
   })
 }, {
   teamType: "product",
-  imageAltText: () => t("pro_trials_v3.pro_trial_initiation_modal.product"),
+  imageAltText: () => getI18nString("pro_trials_v3.pro_trial_initiation_modal.product"),
   descriptionText: jsx(_$$E, {
     fontSize: 14,
     fontWeight: "medium",
-    children: tx("pro_trials_v3.pro_trial_initiation_modal.product")
+    children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.product")
   })
 }, {
   teamType: "other",
-  imageAltText: () => t("pro_trials_v3.pro_trial_initiation_modal.other_team_type"),
+  imageAltText: () => getI18nString("pro_trials_v3.pro_trial_initiation_modal.other_team_type"),
   descriptionText: jsx(_$$E, {
     fontSize: 14,
     fontWeight: "medium",
-    children: tx("pro_trials_v3.pro_trial_initiation_modal.other_team_type")
+    children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.other_team_type")
   })
 }];
 let $$j6 = {
@@ -90,60 +90,60 @@ let $$P3 = [{
   featureText: jsx(_$$E, {
     fontSize: 14,
     fontWeight: "medium",
-    children: tx("pro_trials_v3.pro_trial_initiation_modal.unlimited_files")
+    children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.unlimited_files")
   })
 }, {
   featureType: "component_libraries",
   featureText: jsx(_$$E, {
     fontSize: 14,
     fontWeight: "medium",
-    children: tx("pro_trials_v3.pro_trial_initiation_modal.component_libraries")
+    children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.component_libraries")
   })
 }, {
   featureType: "organizing_files",
   featureText: jsx(_$$E, {
     fontSize: 14,
     fontWeight: "medium",
-    children: tx("pro_trials_v3.pro_trial_initiation_modal.organizing_files")
+    children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.organizing_files")
   })
 }, {
   featureType: "voting_workshops",
   featureText: jsx(_$$E, {
     fontSize: 14,
     fontWeight: "medium",
-    children: tx("pro_trials_v3.pro_trial_initiation_modal.voting_workshopping")
+    children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.voting_workshopping")
   })
 }, {
   featureType: "playing_videos",
   featureText: jsx(_$$E, {
     fontSize: 14,
     fontWeight: "medium",
-    children: tx("pro_trials_v3.pro_trial_initiation_modal.playing_videos")
+    children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.playing_videos")
   })
 }, {
   featureType: "sharing_files",
   featureText: jsx(_$$E, {
     fontSize: 14,
     fontWeight: "medium",
-    children: tx("pro_trials_v3.pro_trial_initiation_modal.sharing_files")
+    children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.sharing_files")
   })
 }, {
   featureType: "inviting_visitors",
   featureText: jsx(_$$E, {
     fontSize: 14,
     fontWeight: "medium",
-    children: tx("pro_trials_v3.pro_trial_initiation_modal.inviting_visitors")
+    children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.inviting_visitors")
   })
 }, {
   featureType: "audio",
   featureText: jsx(_$$E, {
     fontSize: 14,
     fontWeight: "medium",
-    children: tx("pro_trials_v3.pro_trial_initiation_modal.using_audio")
+    children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.using_audio")
   })
 }];
 ($$a4 || ($$a4 = {})).trackInitiationSubmit = function (e, t) {
-  sx("pro_trial_initiation_submit", {
+  trackEventAnalytics("pro_trial_initiation_submit", {
     startedTrialSuccessfully: t,
     ...e,
     ...ng.getTrackingProperties(),

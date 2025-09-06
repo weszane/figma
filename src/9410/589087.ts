@@ -3,8 +3,8 @@ import { useCallback } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import { g as _$$g } from "../9410/995605";
 import { getSingletonSceneGraph } from "../905/700578";
-import { zl } from "../figma_app/27355";
-import { tx } from "../905/303541";
+import { atomStoreManager } from "../figma_app/27355";
+import { renderI18nText } from "../905/303541";
 import { on } from "../figma_app/456871";
 import { Ay } from "../figma_app/432652";
 import { B } from "../905/969273";
@@ -52,9 +52,9 @@ let $$S0 = async ({
     selection: getSingletonSceneGraph().getCurrentPage()?.directlySelectedNodes ?? [],
     activeNodes: a
   };
-  zl.set(DZ, null);
-  zl.set(F3, s);
-  zl.set(Q8, "");
+  atomStoreManager.set(DZ, null);
+  atomStoreManager.set(F3, s);
+  atomStoreManager.set(Q8, "");
   await GD({
     params: {
       clientLifecycleId: r,
@@ -100,20 +100,20 @@ export function $$j1() {
       return jsx(A, {
         action: JT.SHORTEN_TEXT,
         actionIcon: jsx(_$$g, {}),
-        actionLabel: tx("fullscreen_actions.quick_actions.shorten-text"),
+        actionLabel: renderI18nText("fullscreen_actions.quick_actions.shorten-text"),
         onPerform: () => {
           onRun(null);
         },
         aiTrackingContext,
         getCustomDisabledTextFromSelectedNodes: e => bu(e, {
           onlyAllowSingular: !0,
-          instruction: tx("ai_text_tools.select_text_singular")
+          instruction: renderI18nText("ai_text_tools.select_text_singular")
         }),
         instructionAction: {
           type: "learn_more",
           url: pY
         },
-        children: tx("ai_text_tools.select_text_singular")
+        children: renderI18nText("ai_text_tools.select_text_singular")
       });
     case qy.RUNNING:
       return jsx(F, {
@@ -122,7 +122,7 @@ export function $$j1() {
           close();
         },
         aiTrackingContext,
-        children: tx("ai_text_tools.shorten.running")
+        children: renderI18nText("ai_text_tools.shorten.running")
       });
     case qy.ERROR:
       let N;
@@ -134,10 +134,10 @@ export function $$j1() {
         callback: () => onRun(lastParameters)
       }];
       let L = null;
-      (error instanceof Vz || sZ(error) === B.CONTENT_LENGTH_LIMIT) && (N = tx("ai.error.content_length_limit"), O = []);
-      error instanceof Jd && (N = tx("ai_text_tools.missing_fonts"), O = []);
+      (error instanceof Vz || sZ(error) === B.CONTENT_LENGTH_LIMIT) && (N = renderI18nText("ai.error.content_length_limit"), O = []);
+      error instanceof Jd && (N = renderI18nText("ai_text_tools.missing_fonts"), O = []);
       sZ(error) === B.UNSAFE_OR_HARMFUL_CONTENT && (O = []);
-      I > 0 && k > 0 && k < I && (L = tx("ai_text_tools.shorten.couldnt_count", {
+      I > 0 && k > 0 && k < I && (L = renderI18nText("ai_text_tools.shorten.couldnt_count", {
         failed: k,
         total: I
       }));

@@ -1,18 +1,45 @@
-import { eU } from "../figma_app/27355";
-export let $$n0 = eU([]);
-export function $$i1(e, t, r) {
-  let n = t.get(e);
-  let i = t.get(n?.symbolId ?? "");
-  if (i?.componentKey) {
-    let e = r.getInternalCanvas();
-    for (let t of e?.childrenNodes ?? []) {
-      if (t.componentKey === i?.componentKey) return t.guid;
-      if (t.isStateGroup) {
-        for (let e of t.childrenNodes) if (e.componentKey === i?.componentKey) return e.guid;
+import { atom } from 'jotai'
+
+/**
+ * Atom to store an array of items.
+ * Original name: $$n0
+ */
+export const figmaItemsAtom = atom([])
+
+/**
+ * Finds the GUID or publishID for a given element.
+ * Original name: $$i1
+ *
+ * @param elementId - The ID of the element to look up.
+ * @param elementMap - A map containing element data.
+ * @param canvasManager - An object providing access to the internal canvas.
+ * @returns The GUID if found, otherwise the publishID.
+ */
+export function findComponentGuidOrPublishId(
+  elementId: string,
+  elementMap: Map<string, any>,
+  canvasManager: { getInternalCanvas: () => any },
+): string | undefined {
+  const element = elementMap.get(elementId)
+  const symbolElement = elementMap.get(element?.symbolId ?? '')
+  if (symbolElement?.componentKey) {
+    const canvas = canvasManager.getInternalCanvas()
+    for (const node of canvas?.childrenNodes ?? []) {
+      if (node.componentKey === symbolElement?.componentKey) {
+        return node.guid
+      }
+      if (node.isStateGroup) {
+        for (const childNode of node.childrenNodes) {
+          if (childNode.componentKey === symbolElement?.componentKey) {
+            return childNode.guid
+          }
+        }
       }
     }
   }
-  return i?.publishID;
+  return symbolElement?.publishID
 }
-export const J = $$n0;
-export const n = $$i1;
+
+// Refactored exports to match new names
+export const J = figmaItemsAtom
+export const n = findComponentGuidOrPublishId

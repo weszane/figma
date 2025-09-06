@@ -3,7 +3,7 @@ import { forwardRef, useMemo } from "react";
 import { useSelector } from "../vendor/514228";
 import { E } from "../905/632989";
 import o from "classnames";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { dT } from "../figma_app/889655";
 import { Bf } from "../figma_app/249941";
 import { F } from "../905/280165";
@@ -20,7 +20,7 @@ let $$g1 = forwardRef((e, t) => {
     className: g,
     children: jsx("span", {
       className: TN,
-      children: tx("inspect_panel.property.selected", {
+      children: renderI18nText("inspect_panel.property.selected", {
         numberOfItems: e.selection.length
       })
     })
@@ -34,7 +34,7 @@ let $$g1 = forwardRef((e, t) => {
       guid: f
     }), jsxs("span", {
       className: kv,
-      children: [tx("inspect_panel.property.text"), "\xa0\xa0"]
+      children: [renderI18nText("inspect_panel.property.text"), "\xa0\xa0"]
     }), jsx(E, {
       className: l()(VZ, kh),
       onClick: o,

@@ -1,5 +1,5 @@
 import { getFeatureFlags } from "../905/601108";
-import { eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { d6 } from "../figma_app/687776";
 import { s as _$$s } from "../905/573154";
 import { sf } from "../905/929976";
@@ -7,7 +7,7 @@ import { jd } from "../figma_app/528509";
 import { FFileType, FPlanNameType } from "../figma_app/191312";
 import { rR, sK } from "../figma_app/598018";
 export function $$p0(e, t) {
-  eD ? (eD.showFileBrowser(e), eD.close({
+  desktopAPIInstance ? (desktopAPIInstance.showFileBrowser(e), desktopAPIInstance.close({
     suppressReopening: !1,
     shouldForceClose: !0
   })) : (t(sf({

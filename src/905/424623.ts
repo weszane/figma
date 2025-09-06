@@ -1,7 +1,7 @@
 import { useContext, useMemo, useCallback } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { glU } from "../figma_app/763686";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Rs } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { Qp } from "../figma_app/930338";
@@ -124,7 +124,7 @@ export function $$S0(e) {
     }
     let v = _ + A;
     if (v > 0) {
-      sx("Swap library starting", {
+      trackEventAnalytics("Swap library starting", {
         editingFileKey: t,
         libraryKeyToSwapFrom: e,
         libraryKeyToSwapTo: l,
@@ -136,7 +136,7 @@ export function $$S0(e) {
         total: v
       }));
       Promise.all(p).then(() => {
-        sx("Swap library finished", {
+        trackEventAnalytics("Swap library finished", {
           editingFileKey: t,
           libraryKeyToSwapFrom: e,
           libraryKeyToSwapTo: l,

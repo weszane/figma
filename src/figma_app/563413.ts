@@ -7,7 +7,7 @@ import { f as _$$f } from "../905/54715";
 import { A as _$$A } from "../905/251970";
 import { getFeatureFlags } from "../905/601108";
 import u from "classnames";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { h as _$$h2 } from "../905/207101";
 import { ZC } from "../figma_app/39751";
 import { M } from "../figma_app/648761";
@@ -17,7 +17,7 @@ import { AF, v_, rf, Pt } from "../figma_app/806412";
 import { L as _$$L } from "../905/408237";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
 import { In } from "../905/672640";
 import { m0 } from "../figma_app/976749";
@@ -160,7 +160,7 @@ let $$D1 = forwardRef((e, t) => {
       onKeyDown: onSearchKeyDown,
       onMouseDown,
       onMouseUp,
-      placeholder: e.placeholder || _$$t("general.search"),
+      placeholder: e.placeholder || getI18nString("general.search"),
       spellCheck: !1,
       style: sx.$$if(e.hasTransparentBackground, sx.add({
         background: "transparent"
@@ -212,7 +212,7 @@ let $$k4 = forwardRef((e, t) => {
       onKeyDown: onSearchKeyDown,
       onMouseDown,
       onMouseUp,
-      placeholder: e.placeholder || _$$t("general.search"),
+      placeholder: e.placeholder || getI18nString("general.search"),
       spellCheck: !1,
       style: sx.$$if(e.hasTransparentBackground, sx.add({
         background: "transparent"
@@ -254,7 +254,7 @@ let $$F0 = forwardRef((e, t) => {
     onSearchKeyDown,
     onSearchChange
   } = $$P7(e, t);
-  let h = e.placeholder || _$$t("general.search");
+  let h = e.placeholder || getI18nString("general.search");
   let m = `${e.className || ""} ${W1}`;
   let g = e.query.length > 0 ? p3 : Rt;
   return jsxs("div", {
@@ -306,12 +306,12 @@ let $$j3 = forwardRef((e, t) => {
     onSearchChange
   } = $$P7(e, t);
   useEffect(() => {
-    az.trackDefinedEvent("search_experience.dead_code", {
+    analyticsEventManager.trackDefinedEvent("search_experience.dead_code", {
       userId: getInitialOptions().user_data?.id,
       codeLocation: "SidebarSearchBar"
     });
   }, []);
-  let E = e.placeholder || _$$t("general.search");
+  let E = e.placeholder || getI18nString("general.search");
   let y = `${e.className || ""} ${Gh}`;
   let T = e.query.length > 0 ? r3 : nP;
   return jsxs("div", {
@@ -374,7 +374,7 @@ let $$U9 = forwardRef((e, t) => {
       onKeyDown: onSearchKeyDown,
       onMouseDown,
       onMouseUp,
-      placeholder: e.placeholder || _$$t("general.search"),
+      placeholder: e.placeholder || getI18nString("general.search"),
       spellCheck: !1,
       value: e.query
     }), jsx(B, {
@@ -417,7 +417,7 @@ let $$B2 = forwardRef((e, t) => {
       onKeyDown: onSearchKeyDown,
       onMouseDown,
       onMouseUp,
-      placeholder: e.placeholder || _$$t("design_systems.publishing_modal.search_placeholder"),
+      placeholder: e.placeholder || getI18nString("design_systems.publishing_modal.search_placeholder"),
       spellCheck: !1,
       value: e.query
     }), jsx(z, {
@@ -456,7 +456,7 @@ let $$G5 = forwardRef((e, t) => {
       onKeyDown: onSearchKeyDown,
       onMouseDown,
       onMouseUp,
-      placeholder: e.placeholder || _$$t("general.search"),
+      placeholder: e.placeholder || getI18nString("general.search"),
       spellCheck: !1,
       style: e.hasTransparentBackground ? {
         background: "transparent"
@@ -485,7 +485,7 @@ let $$V8 = forwardRef((e, t) => {
     onSearchChange
   } = $$P7(e, t);
   useEffect(() => {
-    az.trackDefinedEvent("search_experience.dead_code", {
+    analyticsEventManager.trackDefinedEvent("search_experience.dead_code", {
       userId: getInitialOptions().user_data?.id,
       codeLocation: "LoggedOutSearchBar"
     });
@@ -513,7 +513,7 @@ let $$V8 = forwardRef((e, t) => {
         onKeyDown: onSearchKeyDown,
         onMouseDown,
         onMouseUp,
-        placeholder: e.placeholder || _$$t("general.search"),
+        placeholder: e.placeholder || getI18nString("general.search"),
         spellCheck: !1,
         value: e.query
       }), jsx(z, {
@@ -571,11 +571,11 @@ function z({
     className: p()(i3, c),
     children: jsx(K, {
       onClick: i,
-      "aria-label": _$$t("search.search_bar.clear"),
+      "aria-label": getI18nString("search.search_bar.clear"),
       recordingKey: s,
       htmlAttributes: {
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("search.search_bar.clear"),
+        "data-tooltip": getI18nString("search.search_bar.clear"),
         "data-testid": "clearSearchButton"
       },
       children: o || (r ? jsx(_$$f, {}) : jsx(_$$A, {}))

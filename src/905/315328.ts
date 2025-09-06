@@ -1,4 +1,4 @@
-import { eU } from "../figma_app/27355";
+import { atom } from "../figma_app/27355";
 import { fh } from "../figma_app/98072";
 import { Nc } from "../905/617744";
 import { _S } from "../figma_app/516028";
@@ -8,7 +8,7 @@ import { sC } from "../905/395857";
 import { PW } from "../905/497152";
 let $$u0 = {
   [PW.CODE_COMPONENT]: function (e) {
-    return eU(t => {
+    return atom(t => {
       let i = sC[e];
       let n = {};
       let l = t(fh[e].subscribed);
@@ -33,5 +33,5 @@ let $$u0 = {
     });
   }(PW.CODE_COMPONENT)
 };
-let p = eU(e => e(Gd));
+let p = atom(e => e(Gd));
 export const i = $$u0;

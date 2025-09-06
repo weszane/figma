@@ -5,9 +5,9 @@ import { D2E } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { DD, k9 } from "../905/19536";
 import d from "../vendor/529640";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { Tf } from "../905/280919";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { rw, I as _$$I } from "../905/485103";
 import { Z } from "../905/515860";
 import { R as _$$R2, A } from "../905/654645";
@@ -73,13 +73,13 @@ function I({
   };
   if (t.length > 0) {
     let e = t.reduce((e, t) => "high" === t.severity ? "high" : e, "low");
-    az.trackDefinedEvent("data_migrations.shadow_read_discrepancy", {
+    analyticsEventManager.trackDefinedEvent("data_migrations.shadow_read_discrepancy", {
       ...s,
       discrepancy_maxSeverity: e
     });
-  } else az.trackDefinedEvent("data_migrations.shadow_read_match", s);
+  } else analyticsEventManager.trackDefinedEvent("data_migrations.shadow_read_match", s);
   t.length > 0 && (t.sort((e, t) => e.severity === t.severity ? 0 : "high" === e.severity ? -1 : 1), t.slice(0, 10).forEach(e => {
-    az.trackDefinedEvent("data_migrations.shadow_read_discrepancy_details", {
+    analyticsEventManager.trackDefinedEvent("data_migrations.shadow_read_discrepancy_details", {
       ...s,
       discrepancy_path: e.path.join("."),
       discrepancy_oldValue: y(e.oldValue),
@@ -87,11 +87,11 @@ function I({
       discrepancy_severity: e.severity
     });
   }));
-  void 0 !== r && az.trackDefinedEvent("data_migrations.shadow_read_latency_old_value", {
+  void 0 !== r && analyticsEventManager.trackDefinedEvent("data_migrations.shadow_read_latency_old_value", {
     ...s,
     latency_ms: r
   });
-  void 0 !== n && az.trackDefinedEvent("data_migrations.shadow_read_latency_new_value", {
+  void 0 !== n && analyticsEventManager.trackDefinedEvent("data_migrations.shadow_read_latency_new_value", {
     ...s,
     latency_ms: n
   });
@@ -197,7 +197,7 @@ function x({
   if (!U()) return;
   let o = a || s;
   n && console.log(`[Shadow read] [variant: ${t.toUpperCase()}] '${e}' took ${i}ms to be ready \u23F1 (was idle? ${o})`);
-  az.trackDefinedEvent("old" === t ? "data_migrations.shadow_read_latency_old_value" : "data_migrations.shadow_read_latency_new_value", {
+  analyticsEventManager.trackDefinedEvent("old" === t ? "data_migrations.shadow_read_latency_old_value" : "data_migrations.shadow_read_latency_new_value", {
     label: e,
     latency_ms: i,
     idled: o,
@@ -218,7 +218,7 @@ function N({
   if (!U()) return;
   let o = a || s;
   n && console.log(`[Shadow read] '${e}' has timed out after ${i}ms \u23F1 (was idle? ${o})`);
-  az.trackDefinedEvent("old" === t ? "data_migrations.shadow_read_latency_old_value_timeout" : "data_migrations.shadow_read_latency_new_value_timeout", {
+  analyticsEventManager.trackDefinedEvent("old" === t ? "data_migrations.shadow_read_latency_old_value_timeout" : "data_migrations.shadow_read_latency_new_value_timeout", {
     label: e,
     idled: o,
     contextArgs: y(r ?? {}),
@@ -305,7 +305,7 @@ export function $$w4({
 }
 function O(e, t) {
   if (useRef(e).current !== e) throw Error("useMemoizedContextArgs: withDefaultContextArgs cannot change during the lifetime of the hook!");
-  let r = e ? _$$R(e => ({
+  let r = e ? selectWithShallowEqual(e => ({
     currentTeamId: e.currentTeamId,
     getTeamIdReturnValue: Z(e),
     currentOrgId: e.currentUserOrgId,

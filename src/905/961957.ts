@@ -4,7 +4,7 @@ import { useDispatch } from "../vendor/514228";
 import { dm } from "../905/535224";
 import { nR, $$ } from "../figma_app/637027";
 import { B } from "../905/714743";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { Ce } from "../905/156213";
 import { b } from "../905/985254";
 import { Ju } from "../905/102752";
@@ -28,13 +28,13 @@ export let $$_0 = Ju(function () {
         svg: A,
         useOriginalSrcFills_DEPRECATED: !0,
         className: sx
-      }), tx("fullscreen.font_settings.byof_bring_your_own_fonts")]
+      }), renderI18nText("fullscreen.font_settings.byof_bring_your_own_fonts")]
     }), jsxs("div", {
       className: jE,
       children: [jsx("p", {
-        children: tx("fullscreen.font_settings.figma_comes_preloaded")
+        children: renderI18nText("fullscreen.font_settings.figma_comes_preloaded")
       }), jsx("br", {}), jsx("p", {
-        children: tx("fullscreen.font_settings.you_can_always_download_the_font_installer_later_from_the_settings_page")
+        children: renderI18nText("fullscreen.font_settings.you_can_always_download_the_font_installer_later_from_the_settings_page")
       })]
     }), jsxs("div", {
       className: v0,
@@ -43,11 +43,11 @@ export let $$_0 = Ju(function () {
         onClick: () => {
           e(Ce());
         },
-        children: tx("fullscreen.font_settings.do_this_later_in_account_settings")
+        children: renderI18nText("fullscreen.font_settings.do_this_later_in_account_settings")
       }), jsx($$, {
         onClick: dm,
         className: pL,
-        children: tx("fullscreen.font_settings.enable_local_fonts")
+        children: renderI18nText("fullscreen.font_settings.enable_local_fonts")
       })]
     })]
   });

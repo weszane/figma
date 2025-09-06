@@ -5,16 +5,16 @@ import { U1 } from "../figma_app/343967";
 import { Cs } from "../figma_app/59509";
 import { Q } from "../905/363675";
 import { Ez5 } from "../figma_app/763686";
-import { eU, fp } from "../figma_app/27355";
+import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import u from "classnames";
 import { wY, cU } from "../figma_app/708845";
 import { F as _$$F } from "../905/680873";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { Jn } from "../905/17223";
 import { tM } from "../figma_app/637027";
 import { B as _$$B } from "../905/714743";
-import { t as _$$t } from "../905/303541";
-import { nT } from "../figma_app/53721";
+import { getI18nString } from "../905/303541";
+import { FEditorType } from "../figma_app/53721";
 import { VA } from "../figma_app/844818";
 import { x1, MA } from "../figma_app/465413";
 import { B6, fF, O4, r3, Dt, tC, Xs, $j, NM, Aq, jy, Ce, zS, Fl, JT, lI, Y2, av, TL, Kk, J3, v0, $e, h_, iZ, r as _$$r } from "../figma_app/600310";
@@ -48,24 +48,24 @@ export function $$w0(e) {
   }), []), content.bannerType) {
     case x1.INFO:
       switch (editorType) {
-        case nT.Design:
-        case nT.Illustration:
+        case FEditorType.Design:
+        case FEditorType.Illustration:
           t = B6;
           break;
-        case nT.DevHandoff:
+        case FEditorType.DevHandoff:
           t = fF;
           break;
-        case nT.Whiteboard:
+        case FEditorType.Whiteboard:
           t = O4;
           break;
-        case nT.Slides:
+        case FEditorType.Slides:
           t = r3;
           break;
-        case nT.Figmake:
-        case nT.Sites:
+        case FEditorType.Figmake:
+        case FEditorType.Sites:
           t = Dt;
           break;
-        case nT.Cooper:
+        case FEditorType.Cooper:
           t = tC;
           break;
         default:
@@ -173,8 +173,8 @@ export function $$w0(e) {
         throwTypeError(e);
     }
   }
-  let M = useMemo(() => content.dismissedAtom ?? eU(!1), [content.dismissedAtom]);
-  let [F, j] = fp(M);
+  let M = useMemo(() => content.dismissedAtom ?? atom(!1), [content.dismissedAtom]);
+  let [F, j] = useAtomValueAndSetter(M);
   let U = _$$F(e.onDismiss);
   let B = _$$F(content.onDismiss);
   return (useEffect(() => {
@@ -193,7 +193,7 @@ export function $$w0(e) {
     })
   }) : jsx("div", {
     className: p()(D, e.containerClassName),
-    style: Ay.isIpadNative ? {
+    style: BrowserInfo.isIpadNative ? {
       top: `${VA()}px`
     } : {},
     ref: P,
@@ -230,7 +230,7 @@ export function $$w0(e) {
         children: [k, e.content.dismissible && jsx(Jn, {
           onClick: () => j(!0),
           className: _$$r,
-          "aria-label": _$$t("banner.shared.close_banner"),
+          "aria-label": getI18nString("banner.shared.close_banner"),
           recordingKey: content.onDismissRecordingKey,
           innerText: "close"
         })]

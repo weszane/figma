@@ -5,7 +5,7 @@ import { getFeatureFlags } from "../905/601108";
 import { xx } from "../figma_app/815945";
 import { subscribeAndAwaitData } from "../905/553831";
 import { Wk, oA } from "../905/723791";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { DQ, Pw } from "../figma_app/121751";
 import { HZ, A5 } from "../figma_app/391338";
 import { FPlanLimitationType, FFileType, FPaymentHealthStatusType } from "../figma_app/191312";
@@ -15,11 +15,11 @@ import { canAdminTeam } from "../figma_app/642025";
 import { t as _$$t2 } from "../905/504360";
 import { e6 } from "../905/557142";
 import { d as _$$d } from "../figma_app/135698";
-import { Iv, F9, pu } from "../905/548208";
+import { DashboardSections, MemberSections, BillingSections } from "../905/548208";
 import { D as _$$D } from "../905/347702";
 import { ye } from "../figma_app/528509";
 import { Z } from "../905/515860";
-import { bt } from "../905/270322";
+import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { M4 } from "../905/713695";
 export async function $$x10(e) {
   let t = [];
@@ -256,44 +256,44 @@ export function $$B12(e) {
 export function $$G11(e) {
   switch (e) {
     case _$$d.NAME:
-      return _$$t("team_view.team_members_table_column.name");
+      return getI18nString("team_view.team_members_table_column.name");
     case _$$d.ACTIVE_AT:
-      return _$$t("team_view.team_members_table_column.active_at");
+      return getI18nString("team_view.team_members_table_column.active_at");
     case _$$d.DESIGN_PAID_STATUS:
-      return _$$t("team_view.team_members_table_column.design_role.seat_rename");
+      return getI18nString("team_view.team_members_table_column.design_role.seat_rename");
     case _$$d.FIGJAM_PAID_STATUS:
-      return _$$t("team_view.team_members_table_column.figjam_role.seat_rename");
+      return getI18nString("team_view.team_members_table_column.figjam_role.seat_rename");
     case _$$d.BILLING_INTERVAL:
-      return _$$t("team_view.team_members_table_column.billing_interval");
+      return getI18nString("team_view.team_members_table_column.billing_interval");
   }
 }
 export function $$V23(e, t) {
   switch (e) {
-    case Iv.DASHBOARD:
-      return _$$t("team_view.toolbar.dashboard");
-    case Iv.MEMBERS:
-      return _$$t("team_view.toolbar.members");
-    case Iv.DRAFTS:
-      return _$$t("team_view.toolbar.drafts");
-    case Iv.CONTENT:
+    case DashboardSections.DASHBOARD:
+      return getI18nString("team_view.toolbar.dashboard");
+    case DashboardSections.MEMBERS:
+      return getI18nString("team_view.toolbar.members");
+    case DashboardSections.DRAFTS:
+      return getI18nString("team_view.toolbar.drafts");
+    case DashboardSections.CONTENT:
       switch (t) {
-        case F9.ABANDONED_DRAFTS:
-          return _$$t("team_view.toolbar.drafts");
-        case F9.CONNECTED_PROJECTS:
-          return _$$t("team_view.toolbar.connected_projects");
+        case MemberSections.ABANDONED_DRAFTS:
+          return getI18nString("team_view.toolbar.drafts");
+        case MemberSections.CONNECTED_PROJECTS:
+          return getI18nString("team_view.toolbar.connected_projects");
         default:
-          return _$$t("team_view.toolbar.content");
+          return getI18nString("team_view.toolbar.content");
       }
-    case Iv.SETTINGS:
-      return _$$t("team_view.toolbar.settings");
-    case Iv.BILLING:
+    case DashboardSections.SETTINGS:
+      return getI18nString("team_view.toolbar.settings");
+    case DashboardSections.BILLING:
       switch (t) {
-        case pu.OVERVIEW:
-          return _$$t("team_view.toolbar.billing.overview");
-        case pu.INVOICES:
-          return _$$t("team_view.toolbar.billing.invoices");
+        case BillingSections.OVERVIEW:
+          return getI18nString("team_view.toolbar.billing.overview");
+        case BillingSections.INVOICES:
+          return getI18nString("team_view.toolbar.billing.invoices");
         default:
-          return _$$t("team_view.toolbar.billing");
+          return getI18nString("team_view.toolbar.billing");
       }
     default:
       throwTypeError(e);
@@ -320,7 +320,7 @@ export function $$X21() {
     return "" === t || null == e.teams ? null : e.teams[t];
   }) || null;
 }
-export let $$q8 = bt(e => e.teams[Z(e)] || null);
+export let $$q8 = createReduxSubscriptionAtomWithState(e => e.teams[Z(e)] || null);
 export function $$J6(e) {
   return e.teams[Z(e)] || null;
 }

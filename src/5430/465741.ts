@@ -1,15 +1,15 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect, useRef, useMemo } from "react";
 import { useSelector } from "../vendor/514228";
-import { y3 } from "../figma_app/876459";
+import { hasDesktopAPI } from "../figma_app/876459";
 import { Ay } from "../905/612521";
 import { N as _$$N } from "../figma_app/469468";
 import { AG } from "../figma_app/999312";
 import { fk } from "../5430/480225";
 import { T as _$$T } from "../5430/373013";
 import m from "classnames";
-import { Ay as _$$Ay } from "../figma_app/778880";
-import { tx } from "../905/303541";
+import { BrowserInfo } from "../figma_app/778880";
+import { renderI18nText } from "../905/303541";
 import { L as _$$L } from "../905/178090";
 import { Yw } from "../figma_app/795938";
 import { A as _$$A } from "../5430/1650";
@@ -35,27 +35,27 @@ var _ = m;
 let f = (e, t) => {
   switch (e) {
     case _$$L.SearchResourceTypes.MIXED:
-      return tx("community.landing_page.query_header__mixed", {
+      return renderI18nText("community.landing_page.query_header__mixed", {
         query: t
       });
     case _$$L.SearchResourceTypes.PLUGINS:
-      return tx("community.landing_page.query_header__plugins", {
+      return renderI18nText("community.landing_page.query_header__plugins", {
         query: t
       });
     case _$$L.SearchResourceTypes.FILES:
-      return tx("community.landing_page.query_header__files", {
+      return renderI18nText("community.landing_page.query_header__files", {
         query: t
       });
     case _$$L.SearchResourceTypes.WIDGETS:
-      return tx("community.landing_page.query_header__widgets", {
+      return renderI18nText("community.landing_page.query_header__widgets", {
         query: t
       });
     case _$$L.SearchResourceTypes.PROFILES:
-      return tx("community.landing_page.query_header__profiles", {
+      return renderI18nText("community.landing_page.query_header__profiles", {
         query: t
       });
     default:
-      return tx("community.landing_page.query_header", {
+      return renderI18nText("community.landing_page.query_header", {
         query: t
       });
   }
@@ -68,11 +68,11 @@ function y({
   return jsx("div", {
     className: _()({
       "search_page_header--searchHeaderContainer---Qlx3 text--fontPos16--oMC-G text--_fontBase--QdLsd": !0,
-      "search_page_header--mobileSearchHeaderContainer--C0vFW": _$$Ay.mobile
+      "search_page_header--mobileSearchHeaderContainer--C0vFW": BrowserInfo.mobile
     }),
     children: jsx("h1", {
       className: "search_page_header--searchHeaderInnerWrapper--wbW6U",
-      children: r ? tx("community.error.could_not_complete_search", {
+      children: r ? renderI18nText("community.error.could_not_complete_search", {
         error: jsx("strong", {
           children: r
         })
@@ -255,7 +255,7 @@ function W() {
           ref: m,
           className: "search_page--contentContainer--sQFpL",
           children: w
-        }), !y3() && jsx("div", {
+        }), !hasDesktopAPI() && jsx("div", {
           className: "search_page--footerContainer--QV2xJ",
           children: jsx(_$$A, {})
         })]

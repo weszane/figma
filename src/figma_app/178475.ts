@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useContext, useRef, useEffect, useCallback, useMemo } from "react";
 import a from "classnames";
-import { t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { bA, _q } from "../905/668764";
 import { Lk, X9, ag, i5, NB, PZ, f0, LN, cu, h7 } from "../figma_app/975811";
 import { dG } from "../figma_app/753501";
@@ -601,7 +601,7 @@ export function $$G5(e) {
     ...r
   } = e;
   let i = e.ui3RightJustifyPercentSign ?? !0;
-  let a = P(t("fullscreen.scrubbable.opacity"));
+  let a = P(getI18nString("fullscreen.scrubbable.opacity"));
   return jsx($$B18, {
     ...r,
     inputClassName: s()(inputClassName, {
@@ -613,7 +613,7 @@ export function $$G5(e) {
     childrenAtEnd: i,
     children: i ? jsx("span", {
       className: QK,
-      children: tx("fullscreen.scrubbable.percent")
+      children: renderI18nText("fullscreen.scrubbable.percent")
     }) : e.children
   });
 }

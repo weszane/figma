@@ -5,9 +5,9 @@ import { K } from "../905/443068";
 import { A } from "../905/251970";
 import { Ay } from "@stylexjs/stylex";
 import d from "classnames";
-import { Ay as _$$Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { B } from "../905/714743";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { LR } from "../figma_app/120210";
 import { rp } from "../figma_app/703988";
 import { O } from "../figma_app/71774";
@@ -502,12 +502,12 @@ export function $$S0({
       className: "browse_explore_category_top_bar--left--XjCF8",
       children: [jsx(E, {
         className: c()("browse_explore_category_top_bar--backButton--lqLK5", "browse_explore_category_top_bar--hasFocusOutline--RM-Sd"),
-        onClick: _$$Ay.isIpad ? void 0 : e,
+        onClick: BrowserInfo.isIpad ? void 0 : e,
         htmlAttributes: {
-          onPointerDown: _$$Ay.isIpad ? e : void 0,
+          onPointerDown: BrowserInfo.isIpad ? e : void 0,
           autoFocus: !0
         },
-        "aria-label": _$$t("general.back"),
+        "aria-label": getI18nString("general.back"),
         children: jsx(B, {
           svg: _$$A,
           "data-not-draggable": !0,
@@ -541,7 +541,7 @@ export function $$v1(e) {
       setPinned: e.setPinned
     }) : jsx(K, {
       onClick: l,
-      "aria-label": _$$t("general.close"),
+      "aria-label": getI18nString("general.close"),
       children: jsx(A, {})
     })]
   });

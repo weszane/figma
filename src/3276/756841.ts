@@ -7,7 +7,7 @@ import { U1 } from "../figma_app/343967";
 import { getFeatureFlags } from "../905/601108";
 import { x as _$$x } from "../905/211326";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx as _$$tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { AY, QY, Fm, l5, bB, NJ, Oo, Tb, UU, hx, Mv } from "../figma_app/770088";
 import { T8 } from "../figma_app/831799";
 import { y as _$$y } from "../figma_app/705249";
@@ -66,8 +66,8 @@ import { A as _$$A5 } from "../svg/57544";
 import { A as _$$A6 } from "../1617/505000";
 import { xal, glU, fp8 } from "../figma_app/763686";
 import { x7 } from "../905/871411";
-import { yQ } from "../905/236856";
-import { sn } from "../905/542194";
+import { waitForAnimationFrame } from "../905/236856";
+import { globalPerfTimer } from "../905/542194";
 import { Point } from "../905/736624";
 import { F as _$$F2 } from "../905/302958";
 import { S as _$$S } from "../figma_app/11182";
@@ -94,7 +94,7 @@ import { ne } from "../figma_app/563413";
 import { lQ } from "../905/934246";
 import { H_, z6, CU, $Q, a2 } from "../905/963340";
 import { am } from "../figma_app/901889";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { WB } from "../905/761735";
 import { XHR } from "../905/910117";
 import { m0 } from "../figma_app/976749";
@@ -220,7 +220,7 @@ function el(e) {
       children: e.rootUser
     }), "\xa0", jsx("div", {
       className: "comment_metadata--timeCreated---00vM text--fontPos11--2LvXf text--_fontBase--QdLsd",
-      children: e.isPendingFromSinatra ? _$$tx("comments.in_a_moment") : jsx(h1, {
+      children: e.isPendingFromSinatra ? renderI18nText("comments.in_a_moment") : jsx(h1, {
         date: e.createdAt,
         capitalize: !0
       })
@@ -231,17 +231,17 @@ function ed(e) {
   let t = Kq(e.thread);
   if (!e.hideOrphanedState && t) {
     if (e.orderId) {
-      let t = _$$tx("comments.unattached");
-      return _$$tx("comments.parent_name_and_number", {
+      let t = renderI18nText("comments.unattached");
+      return renderI18nText("comments.parent_name_and_number", {
         parentName: t,
         commentNumber: e.orderId
       });
     }
     return null;
   }
-  return e.hideParentName || !e.parentName ? e.orderId ? _$$tx("comments.number_only", {
+  return e.hideParentName || !e.parentName ? e.orderId ? renderI18nText("comments.number_only", {
     commentNumber: e.orderId
-  }) : null : e.orderId ? _$$tx("comments.parent_name_and_number", {
+  }) : null : e.orderId ? renderI18nText("comments.parent_name_and_number", {
     parentName: e.parentName,
     commentNumber: e.orderId
   }) : jsx("span", {
@@ -254,7 +254,7 @@ let ep = nF((e, t) => {
     comment
   } = t;
   receiptsAPI.markAsUnread(comment.uuid).catch(t => {
-    let n = _$$t("whiteboard.an_error_occurred_while_marking_a_canvas_mention_as_unread");
+    let n = getI18nString("whiteboard.an_error_occurred_while_marking_a_canvas_mention_as_unread");
     try {
       t = JSON.parse(t);
       e.dispatch(_$$s2.error(_$$J2(t, n)));
@@ -270,7 +270,7 @@ let eh = nF((e, t) => {
   } = t;
   let a = thread.comments.map(e => e.uuid).filter(e => !!e);
   receiptsAPI.markAsRead(a).catch(t => {
-    let n = _$$t("whiteboard.an_error_occurred_while_marking_a_canvas_mention_as_read");
+    let n = getI18nString("whiteboard.an_error_occurred_while_marking_a_canvas_mention_as_read");
     try {
       t = JSON.parse(t);
       e.dispatch(_$$s2.error(_$$J2(t, n)));
@@ -329,21 +329,21 @@ function ex(e) {
   let y = useMemo(() => {
     if (_ === thread.comments[0].user_id && !thread.isCanvasMention && MV(thread.sidebarItemType)) return jsx(q7, {
       onClick: b,
-      children: _$$tx("comments.delete_thread")
+      children: renderI18nText("comments.delete_thread")
     }, "deleteThread");
   }, [thread, _, b]);
   let C = useMemo(() => {
     let e = [];
     m && f && thread.isCanvasMention ? e.push(jsx(q7, {
       onClick: v,
-      children: isUnread ? _$$tx("comments.mark_as_read") : _$$tx("comments.mark_as_unread")
+      children: isUnread ? renderI18nText("comments.mark_as_read") : renderI18nText("comments.mark_as_unread")
     }, "toggleUnreadCanvasMention")) : commentReceipts && f && !thread.isCanvasMention && _$$m(thread.sidebarItemType) && e.push(jsx(q7, {
       onClick: g,
-      children: isUnread ? _$$tx("comments.mark_as_read") : _$$tx("comments.mark_as_unread")
+      children: isUnread ? renderI18nText("comments.mark_as_read") : renderI18nText("comments.mark_as_unread")
     }, "toggleUnreadComment"));
     e.push(jsx(q7, {
       onClick: x,
-      children: _$$tx("comments.copy_link")
+      children: renderI18nText("comments.copy_link")
     }, "copyCommentLink"));
     y && e.push(y);
     return e;
@@ -361,7 +361,7 @@ let eM = memo(function (e) {
     children: [0 !== e.replyCount && jsxs(Fragment, {
       children: [jsx("div", {
         className: eC,
-        children: _$$tx("comments.reply_count", {
+        children: renderI18nText("comments.reply_count", {
           replyCount: e.replyCount
         })
       }), 0 !== e.attachmentCount && jsx("div", {
@@ -370,7 +370,7 @@ let eM = memo(function (e) {
       })]
     }), 0 !== e.attachmentCount && jsx("div", {
       className: eC,
-      children: _$$tx("comments.attachment_count", {
+      children: renderI18nText("comments.attachment_count", {
         attachmentCount: e.attachmentCount
       })
     })]
@@ -418,9 +418,9 @@ let eS = memo(function (e) {
   let P = thread.sidebarItemType === kT.FEED_POST && !_$$y();
   let I = y ? jsx(HG, {
     children: jsx(_$$E, {
-      "aria-label": _$$t("comments.unavailable_offline"),
+      "aria-label": getI18nString("comments.unavailable_offline"),
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": _$$t("comments.unavailable_offline"),
+      "data-tooltip": getI18nString("comments.unavailable_offline"),
       "data-onboarding-key": "page-unavailable-offline",
       children: jsx("span", {
         "aria-hidden": "true",
@@ -431,7 +431,7 @@ let eS = memo(function (e) {
     })
   }) : jsx("div", {
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": _$$t("comments.unavailable_offline"),
+    "data-tooltip": getI18nString("comments.unavailable_offline"),
     "data-onboarding-key": "page-unavailable-offline",
     children: jsx(_$$B, {
       svg: _$$A
@@ -445,7 +445,7 @@ let eS = memo(function (e) {
   let S = jsxs(_$$bL, {
     manager,
     children: [jsx(_$$d, {
-      "aria-label": _$$t("comments.more_actions"),
+      "aria-label": getI18nString("comments.more_actions"),
       ...getTriggerProps(),
       children: jsx(_$$J, {
         className: manager.isOpen ? void 0 : eb
@@ -463,7 +463,7 @@ let eS = memo(function (e) {
     svg: isResolved ? _$$A4 : _$$A3,
     className: W()(isResolved ? "comments_row_presentation--resolvedButton--EJTu4 comments_row_presentation--button--wBibN" : !T && eb, e.isUnread ? "" : "comments_row_presentation--buttonRead--zeH0O"),
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": T ? _$$t("comments.pinning.cannot_resolve") : isResolved ? _$$t("comments.mark_as_unresolved") : _$$t("comments.mark_as_resolved"),
+    "data-tooltip": T ? getI18nString("comments.pinning.cannot_resolve") : isResolved ? getI18nString("comments.mark_as_unresolved") : getI18nString("comments.mark_as_resolved"),
     onClick: onChangeResolveState,
     onMouseDown: eN,
     disabled: T,
@@ -473,7 +473,7 @@ let eS = memo(function (e) {
     svg: _$$A6,
     className: eb,
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": _$$t("fig_feed.view_post"),
+    "data-tooltip": getI18nString("fig_feed.view_post"),
     onClick: openPostDetailModal,
     onMouseDown: eN
   });
@@ -669,7 +669,7 @@ let e0 = memo(function (e) {
       matchType: "offline-comment-navigation"
     })), !1) : (o(_$$F2.enqueue({
       type: "offline-comment-navigation",
-      message: _$$t("comments.unavailable_offline")
+      message: getI18nString("comments.unavailable_offline")
     })), !0), [_, v, o]);
     let L = useCallback(async () => {
       if (!A() && (l.current = !0, o(Fm({
@@ -684,7 +684,7 @@ let e0 = memo(function (e) {
         }));
         let a = x7;
         e.stablePath ? a = `[${e.stablePath.join(",")}]` : e.nodeId && (a = `[${e.nodeId}]`);
-        e.isCanvasMention && e.page && e.page !== N && (await E(e.page), await yQ());
+        e.isCanvasMention && e.page && e.page !== N && (await E(e.page), await waitForAnimationFrame());
         glU.setActiveCommentAnchorData({
           stablePath: a
         });
@@ -709,7 +709,7 @@ let e0 = memo(function (e) {
         source: "comment_sidebar_list"
       });
       F && F();
-      sn.start("view_comment_thread");
+      globalPerfTimer.start("view_comment_thread");
       let n = x.getViewportInfo();
       let a = {
         thread: e,
@@ -796,16 +796,16 @@ let e0 = memo(function (e) {
   eo && (en = () => ea("SELECT_COMMENT_SIDEBAR"));
   element.isCanvasMention && (en = onCanvasMentionSelect);
   let ei = element.comments.length - 1;
-  let er = m ? _$$t("comments.aria_label_select_comment_descriptive_unread", {
+  let er = m ? getI18nString("comments.aria_label_select_comment_descriptive_unread", {
     authorString: l[0].avatar_user_handle,
     contentString: _$$F(element.comments[0].message_meta[0]?.t) ?? "",
-    replyString: _$$t("comments.reply_count", {
+    replyString: getI18nString("comments.reply_count", {
       replyCount: ei
     })
-  }) : _$$t("comments.aria_label_select_comment_descriptive", {
+  }) : getI18nString("comments.aria_label_select_comment_descriptive", {
     authorString: l[0].avatar_user_handle,
     contentString: _$$F(element.comments[0].message_meta[0]?.t) ?? "",
-    replyString: _$$t("comments.reply_count", {
+    replyString: getI18nString("comments.reply_count", {
       replyCount: ei
     })
   });
@@ -1020,12 +1020,12 @@ let tt = forwardRef((e, t) => {
     className: "sidebar_search--searchContainer--eU94N",
     children: getFeatureFlags().a11y_comments_search ? jsx(_$$D, {
       ref: searchInputRef,
-      "aria-description": _$$t("general.search_will_update"),
-      "aria-label": _$$t("comments.search"),
+      "aria-description": getI18nString("general.search_will_update"),
+      "aria-label": getI18nString("comments.search"),
       disabled: e.disabled,
       onChange: e.onChange,
       onKeyDown: onSearchKeyDown,
-      placeholder: e.placeholder || _$$t("general.search"),
+      placeholder: e.placeholder || getI18nString("general.search"),
       recordingKey: e.recordingKey,
       spellCheck: !1,
       value: e.query
@@ -1038,14 +1038,14 @@ let tt = forwardRef((e, t) => {
         onKeyDown: h,
         onMouseDown,
         onMouseUp,
-        placeholder: e.placeholder || _$$t("search.sidebar_search_placeholder"),
+        placeholder: e.placeholder || getI18nString("search.sidebar_search_placeholder"),
         spellCheck: !1,
         value: e.query
       }), !!e.query && jsx("button", {
         className: "sidebar_search--xIcon--1xoiw",
         onClick: onClearSearchClick,
         onKeyDown: f,
-        "aria-label": _$$t("search.sidebar_search_clear"),
+        "aria-label": getI18nString("search.sidebar_search_clear"),
         children: jsx(_$$L, {})
       })]
     })
@@ -1095,7 +1095,7 @@ function tp() {
       source: "comments_sidebar_setting"
     });
   }, []);
-  let f = _$$R(e => e.mirror.appModel.keyboardShortcuts);
+  let f = selectWithShallowEqual(e => e.mirror.appModel.keyboardShortcuts);
   let _ = c1(f, "toggle-show-comments");
   let v = am();
   if (useEffect(() => {
@@ -1105,7 +1105,7 @@ function tp() {
     children: jsx(q7, {
       disabled: !0,
       onClick: lQ,
-      children: _$$tx("comments.error_loading_notification_preferences")
+      children: renderI18nText("comments.error_loading_notification_preferences")
     })
   });
   let x = n?.data?.notificationPreference || tc.NONE;
@@ -1156,7 +1156,7 @@ function tp() {
     children: [jsxs(H_, {
       checked: !m,
       onChange: h,
-      children: [_$$tx("comments.hide_comments"), _ && jsx(Ov, {
+      children: [renderI18nText("comments.hide_comments"), _ && jsx(Ov, {
         children: jsx(ME, {
           children: jsx(rm, {
             children: _
@@ -1166,31 +1166,31 @@ function tp() {
     }, "preference"), jsx(wv, {}), jsxs(z6, {
       onChange: e => y(e),
       title: jsx(hE, {
-        children: _$$tx("comments.comment_notifications")
+        children: renderI18nText("comments.comment_notifications")
       }),
       value: x,
       children: [jsx(CU, {
         value: tc.ALL,
-        children: _$$tx("comments.everything_option")
+        children: renderI18nText("comments.everything_option")
       }, "notification-all"), jsx(CU, {
         value: tc.PARTICIPATING,
-        children: _$$tx("comments.just_mentions_and_replies_option")
+        children: renderI18nText("comments.just_mentions_and_replies_option")
       }, "notification-participating"), jsx(CU, {
         value: tc.NONE,
-        children: _$$tx("comments.nothing_option")
+        children: renderI18nText("comments.nothing_option")
       }, "notification-none")]
     }, "comment-notification-title"), d && jsxs(z6, {
       title: jsx(hE, {
-        children: _$$tx("comments.dev_mode_notifications")
+        children: renderI18nText("comments.dev_mode_notifications")
       }),
       onChange: e => C("true" === e),
       value: b ? "true" : "false",
       children: [jsx(CU, {
         value: "true",
-        children: _$$tx("comments.status_changes")
+        children: renderI18nText("comments.status_changes")
       }, "notification-dm-status-changes"), jsx(CU, {
         value: "false",
-        children: _$$tx("comments.nothing_option")
+        children: renderI18nText("comments.nothing_option")
       }, "notification-dm-none")]
     }, "dev-mode-notification-title"), jsx(q7, {
       onClick: () => {
@@ -1201,7 +1201,7 @@ function tp() {
         }));
       },
       disabled: 0 === l,
-      children: _$$tx("comments.mark_all_as_read")
+      children: renderI18nText("comments.mark_all_as_read")
     }, "mark_all_read")]
   });
 }
@@ -1226,7 +1226,7 @@ function tg(e) {
     manager,
     children: [jsx(_$$d, {
       ...getTriggerProps(),
-      "aria-label": _$$t("comments.settings"),
+      "aria-label": getI18nString("comments.settings"),
       children: jsx(_$$J, {
         className: W()(manager.isOpen && t_)
       })
@@ -1254,7 +1254,7 @@ function tb({
     let e = [];
     t.sorts.length > 0 && e.push(jsx(z6, {
       title: jsx(r1, {
-        children: _$$t("comments.sort")
+        children: getI18nString("comments.sort")
       }),
       onChange: t.threadManager.setSort,
       value: t.activeSort,
@@ -1265,7 +1265,7 @@ function tb({
     }, "sort-group"));
     t.filters.length > 0 && e.push(jsx($Q, {
       title: jsx(r1, {
-        children: _$$t("comments.filter")
+        children: getI18nString("comments.filter")
       }),
       onChange: e => {
         let n = new Set(e);
@@ -1281,7 +1281,7 @@ function tb({
     }, "filter-group"));
     t.modes && t.modes.length > 0 && e.push(jsx(z6, {
       title: jsx(r1, {
-        children: _$$t("comments.mode")
+        children: getI18nString("comments.mode")
       }),
       onChange: t.threadManager.setMode,
       value: t.activeMode,
@@ -1300,7 +1300,7 @@ function tb({
     manager,
     children: [jsx(_$$d, {
       ...getTriggerProps(),
-      "aria-label": _$$t("comments.sort_filter"),
+      "aria-label": getI18nString("comments.sort_filter"),
       children: jsx(_$$B, {
         className: W()(m ? "comments_sidebar_header--sortButtonActive--sPnuw" : tf, manager.isOpen && t_),
         svg: m ? _$$A8 : _$$A7
@@ -1344,8 +1344,8 @@ function ty(e) {
           className: tf,
           recordingKey: "threadHeader",
           onClick: e.onCloseButton,
-          innerText: _$$t("comments.close_sidebar"),
-          "aria-label": _$$t("comments.close_sidebar")
+          innerText: getI18nString("comments.close_sidebar"),
+          "aria-label": getI18nString("comments.close_sidebar")
         })]
       })]
     })
@@ -1370,14 +1370,14 @@ function tj(e) {
   return e.hasActiveQuery ? jsx(tw, {
     message: getFeatureFlags().a11y_comments_search ? jsx(_$$T, {
       role: "alert",
-      children: _$$tx("comments.no_comments_matched_your_search")
-    }) : _$$tx("comments.no_comments_matched_your_search")
+      children: renderI18nText("comments.no_comments_matched_your_search")
+    }) : renderI18nText("comments.no_comments_matched_your_search")
   }) : {
     filters: e.filters
   }.filters.has("yours") ? jsx(tw, {
-    message: _$$tx("comments.when_you_leave_a_comment_or_get_mentioned_in_one_it_ll_show_up_here")
+    message: renderI18nText("comments.when_you_leave_a_comment_or_get_mentioned_in_one_it_ll_show_up_here")
   }) : jsx(tw, {
-    message: _$$tx("comments.give_feedback_ask_a_question_or_just_leave_a_note_of_appreciation_click_anywhere_in_the_file_to_leave_a_comment")
+    message: renderI18nText("comments.give_feedback_ask_a_question_or_just_leave_a_note_of_appreciation_click_anywhere_in_the_file_to_leave_a_comment")
   });
 }
 function tk({
@@ -1479,7 +1479,7 @@ export function $$tT0(e) {
   let U = U1(A);
   return disableSidebar ? jsxs("div", {
     className: _$$s.flex.flexColumn.justifyStart.alignCenter.m8.mt18.$,
-    children: [_$$tx("comments.you_have_disabled_the_comments_sidebar_via_the_debug_menu"), jsx("div", {
+    children: [renderI18nText("comments.you_have_disabled_the_comments_sidebar_via_the_debug_menu"), jsx("div", {
       className: _$$s.flex.flexRow.justifyCenter.alignCenter.$,
       children: jsx("button", {
         className: _$$s.p10.w100.m8.$,
@@ -1488,7 +1488,7 @@ export function $$tT0(e) {
           color: "white"
         },
         onClick: O,
-        children: _$$tx("comments.re_enable")
+        children: renderI18nText("comments.re_enable")
       })
     })]
   }) : jsxs("div", {
@@ -1501,7 +1501,7 @@ export function $$tT0(e) {
     onMouseDown: tP,
     ref: U,
     tabIndex: -1,
-    "aria-label": _$$t("fullscreen.accessibility.comments_sidebar"),
+    "aria-label": getI18nString("fullscreen.accessibility.comments_sidebar"),
     "data-fullscreen-intercept": !0,
     children: [jsx(ty, {
       activeFilters,

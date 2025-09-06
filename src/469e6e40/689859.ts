@@ -6,7 +6,7 @@ import { V } from "../figma_app/312987";
 import { $$ } from "../figma_app/637027";
 import { kt } from "../figma_app/858013";
 import { s as _$$s } from "../905/573154";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Ce } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { M4, IT, gY } from "../905/713695";
@@ -21,11 +21,11 @@ let j = "default_paid_status--subText--ltbsS";
 let w = e => {
   switch (e) {
     case JO.FULL:
-      return _$$t("general.editor.seat_rename");
+      return getI18nString("general.editor.seat_rename");
     case JO.VIEWER:
-      return _$$t("general.viewer");
+      return getI18nString("general.viewer");
     case JO.VIEWER_RESTRICTED:
-      return _$$t("general.viewer_restricted");
+      return getI18nString("general.viewer_restricted");
   }
 };
 let k = M4.Query({
@@ -90,14 +90,14 @@ let $$C0 = Ju(function (e) {
   let M = (e, a) => {
     let s = [{
       displayText: w(JO.VIEWER_RESTRICTED),
-      subText: _$$t("default_paid_status_modal_v2.viewer_restricted_subtext.seat_rename"),
+      subText: getI18nString("default_paid_status_modal_v2.viewer_restricted_subtext.seat_rename"),
       subTextClassname: j,
       isChecked: e === JO.VIEWER_RESTRICTED,
       optionHeight: 40,
       callback: () => a(JO.VIEWER_RESTRICTED)
     }, {
       displayText: w(JO.VIEWER),
-      subText: _$$t("default_paid_status_modal_v2.viewer_subtext.seat_rename"),
+      subText: getI18nString("default_paid_status_modal_v2.viewer_subtext.seat_rename"),
       subTextClassname: j,
       isChecked: e === JO.VIEWER,
       optionHeight: 40,
@@ -105,14 +105,14 @@ let $$C0 = Ju(function (e) {
     }, {
       displayText: w(JO.FULL),
       displayTextClassName: "default_paid_status--displayText--Hf1lS",
-      subText: _$$t("default_paid_status_modal_v2.editor_subtext.seat_rename"),
+      subText: getI18nString("default_paid_status_modal_v2.editor_subtext.seat_rename"),
       subTextClassname: j,
       isChecked: e === JO.FULL,
       optionHeight: 40,
       callback: () => a(JO.FULL),
       displayTextBadge: jsx(Ex, {
         className: "default_paid_status--badge--r6VCf",
-        text: _$$t("default_paid_status_modal_v2.paid"),
+        text: getI18nString("default_paid_status_modal_v2.paid"),
         color: zE.BRAND,
         size: vj.LARGE
       })
@@ -156,7 +156,7 @@ let $$C0 = Ju(function (e) {
   return jsx(fu, {
     name: "Default License Type Setting Modal",
     children: jsx(OJ, {
-      title: _$$t("default_paid_status_modal_v2.manage_default_roles.seat_rename"),
+      title: getI18nString("default_paid_status_modal_v2.manage_default_roles.seat_rename"),
       onClose: () => t(Ce()),
       maxWidth: 310,
       minWidth: 310,
@@ -166,14 +166,14 @@ let $$C0 = Ju(function (e) {
         className: "default_paid_status--modalContainer--PEJw8 modal--container--LVq8G",
         children: [jsx("span", {
           className: "default_paid_status--textContainer--WVFxT",
-          children: tx("default_paid_status_modal_v2.description.seat_rename", {
-            plan_type: planType === fm.ORGANIZATION ? _$$t("default_paid_status_modal_v2.organization") : _$$t("default_paid_status_modal_v2.team")
+          children: renderI18nText("default_paid_status_modal_v2.description.seat_rename", {
+            plan_type: planType === fm.ORGANIZATION ? getI18nString("default_paid_status_modal_v2.organization") : getI18nString("default_paid_status_modal_v2.team")
           })
         }), jsxs("label", {
           className: v,
           children: [jsx("span", {
             className: f,
-            children: tx("default_paid_status_modal.figma_design")
+            children: renderI18nText("default_paid_status_modal.figma_design")
           }), jsxs(V, {
             showingDropdown: U,
             type: P,
@@ -186,7 +186,7 @@ let $$C0 = Ju(function (e) {
           className: v,
           children: [jsx("span", {
             className: f,
-            children: tx("default_paid_status_modal.figjam")
+            children: renderI18nText("default_paid_status_modal.figjam")
           }), jsxs(V, {
             showingDropdown: q,
             type: F,
@@ -208,14 +208,14 @@ let $$C0 = Ju(function (e) {
                   defaultPaidStatusWhiteboard: T
                 });
                 O(!1);
-                t(_$$s.flash(_$$t("default_paid_status_modal.updated_default_roles.seat_rename")));
+                t(_$$s.flash(getI18nString("default_paid_status_modal.updated_default_roles.seat_rename")));
                 t(Ce());
               } catch (e) {
                 O(!1);
                 t(_$$s.flash("An error has occured. Please try again"));
               }
             },
-            children: tx("general.save")
+            children: renderI18nText("general.save")
           })
         })]
       })

@@ -2,11 +2,11 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useEffect, useRef, useCallback, useMemo, PureComponent, createRef, Component } from "react";
 import { useDispatch, useSelector, connect } from "../vendor/514228";
 import a from "../vendor/241899";
-import { y3 } from "../figma_app/876459";
+import { hasDesktopAPI } from "../figma_app/876459";
 import { Ay } from "../905/612521";
 import { x as _$$x } from "../905/211326";
 import { s as _$$s } from "../905/573154";
-import { t as _$$t, tx as _$$tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { AG } from "../figma_app/999312";
 import { A as _$$A } from "../5430/1650";
 import { S as _$$S } from "../905/872825";
@@ -63,7 +63,7 @@ import { W as _$$W2 } from "../5430/484293";
 import { lQ } from "../905/934246";
 import { getFeatureFlags } from "../905/601108";
 import eO from "classnames";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { parsePxNumber } from "../figma_app/783094";
 import { nR, N_, CY } from "../figma_app/637027";
 import { G as _$$G } from "../905/750789";
@@ -77,7 +77,7 @@ import { Ib } from "../905/129884";
 import { H as _$$H } from "../5430/997712";
 import { a as _$$a2 } from "../905/925868";
 import { p as _$$p } from "../figma_app/353099";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { h as _$$h } from "../905/207101";
 import { E as _$$E } from "../905/453826";
 import { e as _$$e2 } from "../905/621515";
@@ -130,7 +130,7 @@ import { f as _$$f } from "../figma_app/436731";
 import { s as _$$s4 } from "../cssbuilder/589278";
 import { A as _$$A6 } from "../5430/728674";
 import { ServiceCategories as _$$e5 } from "../905/165054";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { ch, td as _$$td, Rq } from "../figma_app/181241";
 import { Y9 } from "../figma_app/306946";
 import { t as _$$t3 } from "../905/331623";
@@ -231,11 +231,11 @@ let X = function ({
       let t = e[0];
       YU(t);
       let s = await l8(URL.createObjectURL(t));
-      if (s.width > M0 || s.height > Zs) throw Error(_$$t("community.profiles.cover_image_must_be_less_than_dimensions", {
+      if (s.width > M0 || s.height > Zs) throw Error(getI18nString("community.profiles.cover_image_must_be_less_than_dimensions", {
         PROFILE_COVER_IMAGE_MAX_WIDTH: M0,
         PROFILE_COVER_IMAGE_MAX_HEIGHT: Zs
       }));
-      if (s.width < gZ || s.height < xj) throw Error(_$$t("community.profiles.cover_image_must_be_at_least_dimensions", {
+      if (s.width < gZ || s.height < xj) throw Error(getI18nString("community.profiles.cover_image_must_be_at_least_dimensions", {
         PROFILE_COVER_IMAGE_MIN_WIDTH: gZ,
         PROFILE_COVER_IMAGE_MIN_HEIGHT: xj
       }));
@@ -332,7 +332,7 @@ function eu({
   href: e
 }) {
   return jsx(_$$N.Button, {
-    "aria-label": _$$t("community.profiles.visit_website"),
+    "aria-label": getI18nString("community.profiles.visit_website"),
     href: e,
     newTab: !0,
     variant: "secondary",
@@ -343,7 +343,7 @@ function em({
   href: e
 }) {
   return jsx(_$$N.Button, {
-    "aria-label": _$$t("community.profiles.visit_x_twitter_profile"),
+    "aria-label": getI18nString("community.profiles.visit_x_twitter_profile"),
     href: e,
     newTab: !0,
     variant: "secondary",
@@ -381,12 +381,12 @@ function ep({
     profileHandle: e.profile_handle
   });
   return jsx(_$$N.Button, {
-    "aria-label": _$$t("community.profiles.view_complete_profile"),
+    "aria-label": getI18nString("community.profiles.view_complete_profile"),
     href: t.href,
     iconPrefix: jsx(_$$V, {}),
     newTab: !0,
     variant: "secondary",
-    children: _$$t("community.profiles.view_complete_profile")
+    children: getI18nString("community.profiles.view_complete_profile")
   });
 }
 function eh({
@@ -424,7 +424,7 @@ function ex({
       className: "x78zum5 x6s0dn4 x1nfngrj",
       children: [jsx("span", {
         ...xk(ef.profileStat),
-        children: _$$tx("community.profiles.follower_count", {
+        children: renderI18nText("community.profiles.follower_count", {
           followerCount: t,
           formattedFollowerCount: t
         })
@@ -432,7 +432,7 @@ function ex({
         className: "x1i1rx1s x170jfvy xbpqucl"
       }), jsx("span", {
         ...xk(ef.profileStat),
-        children: _$$tx("community.profiles.following_count", {
+        children: renderI18nText("community.profiles.following_count", {
           followingCount: r
         })
       })]
@@ -480,24 +480,24 @@ function eI({
       children: jsx(oW, {
         ...xk(_$$Z.asset),
         src: t,
-        alt: _$$t("community.profiles.you_don_t_have_any_resources_yet"),
+        alt: getI18nString("community.profiles.you_don_t_have_any_resources_yet"),
         loading: "lazy"
       })
     }), jsx("div", {
       ...xk(_$$Z.title),
-      children: e ? _$$t("community.profiles.you_don_t_have_any_resources_yet") : _$$t("community.profiles.nothing_published_yet")
+      children: e ? getI18nString("community.profiles.you_don_t_have_any_resources_yet") : getI18nString("community.profiles.nothing_published_yet")
     }), jsx("div", {
       ...xk(_$$Z.description, e && eN.secondaryTextColor),
-      children: e ? _$$tx("community.profiles.getting_started_easy", {
+      children: e ? renderI18nText("community.profiles.getting_started_easy", {
         learnLink: jsx(_$$N, {
           href: "https://help.figma.com/hc/articles/360040035974-Publish-files-to-the-Figma-Community",
           newTab: !0,
-          children: _$$t("community.profiles.learn_how_to_publish_link")
+          children: getI18nString("community.profiles.learn_how_to_publish_link")
         })
       }) : jsx(o3, {
         className: "x1ypdohk",
         to: r.to,
-        children: _$$t("community.profiles.see_whats_being_created_in_figma")
+        children: getI18nString("community.profiles.see_whats_being_created_in_figma")
       })
     })]
   });
@@ -568,7 +568,7 @@ function eR({
     className: "x78zum5 x1q0g3np x1qughib x6s0dn4",
     children: [jsx("div", {
       ...xk(ek.resourcesHeaderTitle),
-      children: r ? _$$t("community.profiles.contributions") : _$$t("community.profiles.resources")
+      children: r ? getI18nString("community.profiles.contributions") : getI18nString("community.profiles.resources")
     }), s && jsx(_$$W2, {
       context: gM.PROFILE,
       filterState: e,
@@ -648,10 +648,10 @@ function eY() {
   return jsxs(Fragment, {
     children: [jsx("div", {
       className: "monetization_metrics_tab_onboarding_modal--title--IfgQI text--fontPos13--xW8hS text--_fontBase--QdLsd",
-      children: _$$t("community.seller.profiles.check_out_your_stats")
+      children: getI18nString("community.seller.profiles.check_out_your_stats")
     }), jsx("div", {
       className: "monetization_metrics_tab_onboarding_modal--description--2j8hj",
-      children: _$$t("community.seller.profiles.added_some_metrics")
+      children: getI18nString("community.seller.profiles.added_some_metrics")
     })]
   });
 }
@@ -696,7 +696,7 @@ let tn = _$$r(_$$e3);
 function to({
   onboardingKey: e
 }) {
-  let t = md(tn);
+  let t = useAtomWithSubscription(tn);
   let r = _$$e2({
     overlay: O9D,
     priority: _$$N2.SECONDARY_MODAL
@@ -767,7 +767,7 @@ let tE = Ju(function () {
     }).catch(() => {
       e(_$$F.enqueue({
         type: "get-payout-statements-error",
-        message: _$$t("community.seller.payout_statement_error"),
+        message: getI18nString("community.seller.payout_statement_error"),
         error: !0
       }));
     });
@@ -779,9 +779,9 @@ let tE = Ju(function () {
   let y = "creator_payout_statements_modal--scrollContainer--8j6P4";
   p && (c || (y += " creator_payout_statements_modal--topBorder--OHBCp"), u || (y += " creator_payout_statements_modal--bottomBorder--tNtIc"));
   return jsx(_$$yX, {
-    title: _$$t("community.seller.community_payout_statements"),
+    title: getI18nString("community.seller.community_payout_statements"),
     titleClassName: "creator_payout_statements_modal--title--t9wed",
-    confirmText: _$$t(0 === r.length ? "general.got_it" : "general.done"),
+    confirmText: getI18nString(0 === r.length ? "general.got_it" : "general.done"),
     onConfirm: lQ,
     hideConfirmationTitle: !0,
     hideCancel: !0,
@@ -790,10 +790,10 @@ let tE = Ju(function () {
       children: jsx(kt, {})
     }) : jsxs("div", {
       children: [0 === r.length && jsx("div", {
-        children: _$$tx("community.seller.no_payout_statements_yet")
+        children: renderI18nText("community.seller.no_payout_statements_yet")
       }), r.length > 0 && jsxs(Fragment, {
         children: [jsx("div", {
-          children: _$$tx("community.seller.click_to_download_statements")
+          children: renderI18nText("community.seller.click_to_download_statements")
         }), jsx(_$$P, {
           className: y,
           ref: x,
@@ -916,16 +916,16 @@ function t7({
       valueClassName: t,
       value: e,
       labelClassName: r,
-      label: _$$t("community.seller.total_views")
+      label: getI18nString("community.seller.total_views")
     }), jsx("div", {
       className: t1
     }), jsx(t8, {
       valueClassName: t,
       value: s,
       labelClassName: r,
-      label: _$$t("community.seller.total_purchases"),
+      label: getI18nString("community.seller.total_purchases"),
       children: jsx(t3, {
-        tooltipText: _$$t("community.seller.total_purchases_includes")
+        tooltipText: getI18nString("community.seller.total_purchases_includes")
       })
     }), jsx("div", {
       className: t1
@@ -933,9 +933,9 @@ function t7({
       valueClassName: t,
       value: n,
       labelClassName: r,
-      label: _$$t("community.seller.total_earned"),
+      label: getI18nString("community.seller.total_earned"),
       children: jsx(t3, {
-        tooltipText: _$$t("community.seller.all_sales_before_figmas_fees")
+        tooltipText: getI18nString("community.seller.all_sales_before_figmas_fees")
       })
     }), o]
   });
@@ -995,7 +995,7 @@ function r_({
             children: name
           }), jsx("div", {
             className: "resource_stat_row--publishDate--oDkDH text--fontPos11--2LvXf text--_fontBase--QdLsd",
-            children: _$$t("community.seller.last_updated_on", {
+            children: getI18nString("community.seller.last_updated_on", {
               date: s
             })
           })]
@@ -1095,7 +1095,7 @@ function ry({
   });
   if ("loaded" !== n.status || n.errors?.length) {
     t(_$$F.enqueue({
-      message: _$$t("community.actions.unable_to_load_stats_for_a_resource"),
+      message: getI18nString("community.actions.unable_to_load_stats_for_a_resource"),
       error: !0
     }));
     return jsx(rf, {
@@ -1118,31 +1118,31 @@ function ry({
       }), jsxs("div", {
         className: rn,
         children: [jsx(rp, {
-          label: _$$t("community.seller.views_label", {
+          label: getI18nString("community.seller.views_label", {
             num: o
           }),
           value: o.toLocaleString()
         }), jsx("div", {
           className: rc
         }), is_subscription ? jsx(rp, {
-          label: _$$t("community.seller.subscribers_label", {
+          label: getI18nString("community.seller.subscribers_label", {
             num: r.num_purchases
           }),
           value: r.num_purchases.toLocaleString()
         }) : jsx(rp, {
-          label: _$$t("community.seller.purchases_label", {
+          label: getI18nString("community.seller.purchases_label", {
             num: r.num_purchases
           }),
           value: r.num_purchases.toLocaleString()
         }), jsx("div", {
           className: rc
         }), jsx(rp, {
-          label: _$$t("community.seller.total_earned"),
+          label: getI18nString("community.seller.total_earned"),
           value: a.formatMoney(r.all_time_total_earned)
         }), jsx("div", {
           className: rc
         }), jsx(rp, {
-          label: _$$t("community.seller.earned_this_month"),
+          label: getI18nString("community.seller.earned_this_month"),
           value: a.formatMoney(r.monthly_total_earned)
         })]
       })]
@@ -1156,7 +1156,7 @@ function rg({
     className: "resource_stats_list--resourceStatsListContainer--3Xmb3",
     children: [jsx("p", {
       className: "resource_stats_list--resourceCount--SHJGY text--fontPos14--OL9Hp text--_fontBase--QdLsd",
-      children: _$$tx("community.seller.resources_for_sale", {
+      children: renderI18nText("community.seller.resources_for_sale", {
         numResources: e.length
       })
     }), e.map((e, t, r) => jsxs("div", {
@@ -1234,7 +1234,7 @@ function rj({
         setupStripeCallback: e => {
           l(!1);
           f(!1);
-          e || r(_$$s.error(_$$t("community.seller.unable_to_launch_stripe_onboarding_please_check_your_details")));
+          e || r(_$$s.error(getI18nString("community.seller.unable_to_launch_stripe_onboarding_please_check_your_details")));
         }
       }
     }));
@@ -1247,7 +1247,7 @@ function rj({
     r(tg({
       callback: e => {
         l(!1);
-        e || r(_$$s.error(_$$t("community.seller.unable_to_open_stripe_dashboard")));
+        e || r(_$$s.error(getI18nString("community.seller.unable_to_open_stripe_dashboard")));
       }
     }));
   };
@@ -1264,7 +1264,7 @@ function rj({
             children: jsx(kt, {
               shouldMatchTextColor: !0
             })
-          }), _$$tx("community.seller.view_stripe_dashboard")]
+          }), renderI18nText("community.seller.view_stripe_dashboard")]
         })
       }), jsx("button", {
         className: "profile_resources_grid--blueLink--WjRaq blue_link--blueLink--9rlnd",
@@ -1274,7 +1274,7 @@ function rj({
             data: {}
           }));
         },
-        children: _$$tx("community.seller.view_payout_statements")
+        children: renderI18nText("community.seller.view_payout_statements")
       })]
     }) : jsxs("div", {
       className: tY,
@@ -1299,22 +1299,22 @@ function rj({
       })]
     });
   }
-  let w = _$$tx("community.seller.set_up_stripe");
-  let C = _$$tx("community.seller.agree_to_figma_terms_of_service", {
+  let w = renderI18nText("community.seller.set_up_stripe");
+  let C = renderI18nText("community.seller.agree_to_figma_terms_of_service", {
     link: Hl
   });
-  a ? w = _$$tx("community.seller.stripe_loading_text") : s?.stripe_account_status === P5.STARTED_ONBOARDING && (w = _$$tx("community.seller.finish_stripe_setup_button"));
+  a ? w = renderI18nText("community.seller.stripe_loading_text") : s?.stripe_account_status === P5.STARTED_ONBOARDING && (w = renderI18nText("community.seller.finish_stripe_setup_button"));
   let L = "profile_resources_grid--metricValue--w627p text--fontPos48--H177Q text--_fontBase--QdLsd";
   let T = "profile_resources_grid--metricLabel--1bOis text--fontPos13--xW8hS text--_fontBase--QdLsd";
-  let I = _$$tx("community.seller.resource_metrics_coming_soon");
-  let E = _$$tx("community.seller.working_on_bringing_you_more_in_depth_metrics");
+  let I = renderI18nText("community.seller.resource_metrics_coming_soon");
+  let E = renderI18nText("community.seller.working_on_bringing_you_more_in_depth_metrics");
   s?.stripe_account_status !== P5.ENABLED && (L = "profile_resources_grid--metricValueDisabled--mYlXF profile_resources_grid--metricValue--w627p text--fontPos48--H177Q text--_fontBase--QdLsd", T = "profile_resources_grid--metricLabelDisabled--dTvu- profile_resources_grid--metricLabel--1bOis text--fontPos13--xW8hS text--_fontBase--QdLsd");
   let S = "loaded" === d ? (c || []).map(e => qY(e)).filter(e => void 0 !== e).filter(rb) : [];
   let R = S.length > 0;
   let A = S.reduce((e, t) => e + (t.view_count || 0), 0);
-  I = _$$tx("community.seller.youre_all_set_up_to_sell_on_community");
-  E = s?.cmty_seller_capabilities?.includes(D6.FILE) ? _$$tx("community.seller.to_publish_your_first_resource") : _$$tx("community.seller.to_publish_your_first_extension");
-  s?.stripe_account_status !== P5.ENABLED && (I = _$$tx("community.seller.resources_youre_selling_will_appear_here"), E = _$$tx("community.seller.well_show_you_stripe_metrics"));
+  I = renderI18nText("community.seller.youre_all_set_up_to_sell_on_community");
+  E = s?.cmty_seller_capabilities?.includes(D6.FILE) ? renderI18nText("community.seller.to_publish_your_first_resource") : renderI18nText("community.seller.to_publish_your_first_extension");
+  s?.stripe_account_status !== P5.ENABLED && (I = renderI18nText("community.seller.resources_youre_selling_will_appear_here"), E = renderI18nText("community.seller.well_show_you_stripe_metrics"));
   return jsxs("div", {
     className: "profile_resources_grid--profileMetricsTabOuterContainer--d-PPR",
     children: [jsx("div", {
@@ -1329,7 +1329,7 @@ function rj({
       if (getFeatureFlags().cmty_m10n_turn_creator_dash_off || "loading" === y.status) return e;
       if ("loaded" !== y.status || y.errors?.length) {
         r(_$$F.enqueue({
-          message: _$$t("community.actions.unable_to_load_creator_stats"),
+          message: getI18nString("community.actions.unable_to_load_creator_stats"),
           error: !0
         }));
         return e;
@@ -1372,11 +1372,11 @@ var rR = (e => (e.COPY_LINK = "Copy profile link", e.RESTRICT_USER = "Restrict u
 let rk = e => {
   switch (e) {
     case "Copy profile link":
-      return _$$t("community.profiles.copy_profile_link");
+      return getI18nString("community.profiles.copy_profile_link");
     case "Restrict user":
-      return _$$t("community.profiles.restrict_user");
+      return getI18nString("community.profiles.restrict_user");
     case "Unrestrict user":
-      return _$$t("community.profiles.unrestrict_user");
+      return getI18nString("community.profiles.unrestrict_user");
     default:
       return "";
   }
@@ -1408,7 +1408,7 @@ function rA() {
             }
           }
         }));
-        sx("comment_profile_restricted", {
+        trackEventAnalytics("comment_profile_restricted", {
           restricted_by_profile_id: t?.community_profile_id,
           restricted_profile_id: r,
           entry_point: "profile_page"
@@ -1441,7 +1441,7 @@ function rA() {
             }
           }
         }));
-        sx("comment_profile_restricted", {
+        trackEventAnalytics("comment_profile_restricted", {
           restricted_by_profile_id: t?.community_profile_id,
           restricted_profile_id: r,
           entry_point: "profile_page"
@@ -1464,7 +1464,7 @@ function rA() {
             }
           }
         }));
-        sx("comment_profile_unrestricted", {
+        trackEventAnalytics("comment_profile_unrestricted", {
           unrestricted_by_profile_id: t?.community_profile_id,
           unrestricted_profile_id: r,
           entry_point: "profile_page"
@@ -1515,10 +1515,10 @@ function rP(e) {
           }
         }));
       },
-      "aria-label": _$$t("community.profiles.profile_actions"),
+      "aria-label": getI18nString("community.profiles.profile_actions"),
       htmlAttributes: {
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("community.profiles.profile_actions")
+        "data-tooltip": getI18nString("community.profiles.profile_actions")
       },
       children: jsx(_$$J2, {})
     }), s && jsx(rA, {})]
@@ -1587,7 +1587,7 @@ let r$ = new class {
             prevPage: r.data.pagination.prevPage
           };
         } catch (e) {
-          $D(_$$e5.COMMUNITY, e);
+          reportError(_$$e5.COMMUNITY, e);
           return e;
         }
       }
@@ -1616,7 +1616,7 @@ let r$ = new class {
             prevPage: r.data.pagination.prevPage
           };
         } catch (e) {
-          $D(_$$e5.COMMUNITY, e);
+          reportError(_$$e5.COMMUNITY, e);
           return e;
         }
       }
@@ -1715,17 +1715,17 @@ function rq() {
       className: _$$s4.flex.flexColumn.gap8.alignCenter.$,
       children: [jsx("h2", {
         className: _$$s4.font14.fontMedium.$,
-        children: _$$tx("community.saves.no_saves_title")
+        children: renderI18nText("community.saves.no_saves_title")
       }), jsx("p", {
         className: _$$s4.font11.$,
-        children: _$$tx("community.saves.no_saves_subtitle")
+        children: renderI18nText("community.saves.no_saves_subtitle")
       })]
     }), jsx(nR, {
       target: "_blank",
       onClick: () => {
         Ay.push("/community");
       },
-      children: _$$tx("community.explore_resources")
+      children: renderI18nText("community.explore_resources")
     })]
   });
 }
@@ -1745,11 +1745,11 @@ class r0 extends Component {
         trusted: !0,
         children: e
       });
-      return this.props.profile.primary_user_id ? _$$tx("community.profiles.your_profile_is_visible_to_the_public_at", {
+      return this.props.profile.primary_user_id ? renderI18nText("community.profiles.your_profile_is_visible_to_the_public_at", {
         link: t
-      }) : this.props.profile.entity_type === o1.TEAM ? _$$tx("community.profiles.your_teams_profile_is_visible_to_the_public_at", {
+      }) : this.props.profile.entity_type === o1.TEAM ? renderI18nText("community.profiles.your_teams_profile_is_visible_to_the_public_at", {
         link: t
-      }) : this.props.profile.entity_type === o1.ORG ? _$$tx("community.profiles.your_organizations_profile_is_visible_to_the_public_at", {
+      }) : this.props.profile.entity_type === o1.ORG ? renderI18nText("community.profiles.your_organizations_profile_is_visible_to_the_public_at", {
         link: t
       }) : void 0;
     };
@@ -1790,7 +1790,7 @@ function r8(e) {
       tabIndex: 0,
       onClick: o,
       className: tJ,
-      children: _$$tx("community.profiles.contact_creator_support")
+      children: renderI18nText("community.profiles.contact_creator_support")
     }) : jsx("div", {
       className: "profile_resources_grid--sellOnCommunity--7r6cV",
       children: jsx(CY, {
@@ -1798,7 +1798,7 @@ function r8(e) {
         className: tJ,
         target: "_blank",
         trusted: !0,
-        children: _$$tx("community.profiles.interested_in_selling_your_resources")
+        children: renderI18nText("community.profiles.interested_in_selling_your_resources")
       })
     })
   }) : jsx(Fragment, {});
@@ -1833,7 +1833,7 @@ function r9(e) {
   };
   let c = (n || profile.description) && jsx(TI, {
     value: profile.description || "",
-    placeholder: _$$t("community.profiles.add_a_description"),
+    placeholder: getI18nString("community.profiles.add_a_description"),
     className: n ? tB : tD,
     submit: l("description"),
     formatter: qU,
@@ -1842,7 +1842,7 @@ function r9(e) {
   });
   let d = (n || profile.location) && jsx(TI, {
     value: profile.location || "",
-    placeholder: _$$t("community.profiles.add_a_location"),
+    placeholder: getI18nString("community.profiles.add_a_location"),
     className: n ? tB : tD,
     submit: l("location"),
     readOnly: !n,
@@ -1850,7 +1850,7 @@ function r9(e) {
   });
   let u = (n || profile.website) && jsx(TI, {
     value: profile.website || "",
-    placeholder: _$$t("community.profiles.add_website_url"),
+    placeholder: getI18nString("community.profiles.add_website_url"),
     className: n ? tB : tD,
     submit: l("website"),
     formatter: qU,
@@ -1859,7 +1859,7 @@ function r9(e) {
   });
   let m = (n || profile.twitter) && jsx(TI, {
     value: profile.twitter || "",
-    placeholder: _$$t("community.profiles.add_x_handle"),
+    placeholder: getI18nString("community.profiles.add_x_handle"),
     className: n ? tB : tD,
     submit: l("twitter"),
     formatter: ec,
@@ -1868,7 +1868,7 @@ function r9(e) {
   });
   let p = (n || profile.instagram) && jsx(TI, {
     value: profile.instagram || "",
-    placeholder: _$$t("community.profiles.add_instagram_handle"),
+    placeholder: getI18nString("community.profiles.add_instagram_handle"),
     className: n ? tB : tD,
     submit: l("instagram"),
     formatter: el,
@@ -1890,7 +1890,7 @@ function r9(e) {
         [tH]: !0
       }),
       onClick: () => e.showFollowsModal(g3.FOLLOWERS),
-      children: _$$tx("community.profiles.follower_count", {
+      children: renderI18nText("community.profiles.follower_count", {
         followerCount: x,
         formattedFollowerCount: jsx("span", {
           className: tU,
@@ -1902,7 +1902,7 @@ function r9(e) {
         [tH]: !0
       }),
       onClick: () => e.showFollowsModal(g3.FOLLOWING),
-      children: _$$tx("community.profiles.following_count", {
+      children: renderI18nText("community.profiles.following_count", {
         followingCount: jsx("span", {
           className: tU,
           children: f
@@ -2029,7 +2029,7 @@ function se({
           }), jsx(r6, {
             profile: s
           })]
-        }), !y3() && jsx("div", {
+        }), !hasDesktopAPI() && jsx("div", {
           className: "community_hub_public_profile--footerContainer--L38Gh",
           children: jsx(_$$A, {})
         })]
@@ -2048,7 +2048,7 @@ function se({
         }));
       };
       this.onFilesPluginsTabClick = () => {
-        sx("Profile Resources Tab Clicked", {
+        trackEventAnalytics("Profile Resources Tab Clicked", {
           tabName: "resources",
           profileId: this.props.profileId,
           viewingUserId: this.props.currentUser?.id
@@ -2056,7 +2056,7 @@ function se({
         Ay.push(bL(this.props.profile.profile_handle, g3.RESOURCES));
       };
       this.onMetricsTabClick = () => {
-        sx("Profile Resources Tab Clicked", {
+        trackEventAnalytics("Profile Resources Tab Clicked", {
           tabName: "metrics",
           profileId: this.props.profileId,
           viewingUserId: this.props.currentUser?.id
@@ -2070,7 +2070,7 @@ function se({
         YQ({
           id: "cmty-profile-saves"
         });
-        sx("Profile Resources Tab Clicked", {
+        trackEventAnalytics("Profile Resources Tab Clicked", {
           tabName: g3.SAVES,
           profileId: this.props.profileId,
           viewingUserId: this.props.currentUser?.id
@@ -2097,11 +2097,11 @@ function se({
           onClick: this.onSavesTabClick,
           tabIndex: 0,
           "data-onboarding-key": "cmty-profile-save-tab",
-          children: [_$$tx("community.profiles.saved"), jsx(_$$B, {
+          children: [renderI18nText("community.profiles.saved"), jsx(_$$B, {
             svg: _$$A9,
             className: tK,
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t("community.only_visible_to_you")
+            "data-tooltip": getI18nString("community.only_visible_to_you")
           })]
         })
       }) : jsx(Fragment, {});
@@ -2135,7 +2135,7 @@ function se({
             onClick: this.onFilesPluginsTabClick,
             role: "button",
             tabIndex: 0,
-            children: _$$tx("community.profiles.resources")
+            children: renderI18nText("community.profiles.resources")
           }), t, s && jsx(fu, {
             name: _$$e.COMMUNITY_PROFILE_METRICS_TAB,
             children: jsx("div", {
@@ -2147,11 +2147,11 @@ function se({
                 onClick: this.onMetricsTabClick,
                 role: "button",
                 tabIndex: 0,
-                children: [_$$tx("community.seller.profiles.metrics"), jsx(_$$B, {
+                children: [renderI18nText("community.seller.profiles.metrics"), jsx(_$$B, {
                   svg: _$$A9,
                   className: tK,
                   "data-tooltip-type": Ib.TEXT,
-                  "data-tooltip": _$$t("community.only_visible_to_you")
+                  "data-tooltip": getI18nString("community.only_visible_to_you")
                 })]
               })
             })
@@ -2167,7 +2167,7 @@ function se({
           onClick: this.onFilesPluginsTabClick,
           role: "button",
           tabIndex: 0,
-          children: _$$tx("community.profiles.resources")
+          children: renderI18nText("community.profiles.resources")
         }), t, s && jsxs(fu, {
           name: _$$e.COMMUNITY_PROFILE_METRICS_TAB,
           children: [jsx(_$$p, {
@@ -2185,7 +2185,7 @@ function se({
               tabIndex: 0,
               children: [jsx("span", {
                 "data-onboarding-key": eX,
-                children: _$$tx("community.seller.profiles.metrics")
+                children: renderI18nText("community.seller.profiles.metrics")
               }), jsx(_$$B, {
                 svg: _$$A9,
                 className: tK
@@ -2236,7 +2236,7 @@ export function $$si0({
   let l = t?.params.profileHandle ?? r?.params.profileHandle ?? null;
   let [c] = IT(ss(l ?? ""));
   useEffect(() => {
-    "errors" === c.status && (404 !== c.errors.status || s ? s && e ? Ay.redirect(e.href) : a(_$$s.error(_$$t("community.actions.error_fetching_profile_information"))) : Ay.redirect("/404"));
+    "errors" === c.status && (404 !== c.errors.status || s ? s && e ? Ay.redirect(e.href) : a(_$$s.error(getI18nString("community.actions.error_fetching_profile_information"))) : Ay.redirect("/404"));
   }, [a, c, s, e]);
   let u = c.data?.profile ?? null;
   return s ? jsx(eA, {

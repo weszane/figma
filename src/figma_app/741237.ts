@@ -4,9 +4,9 @@ import { debounce } from "../905/915765";
 import { Egt, KjJ, glU, Ez5 } from "../figma_app/763686";
 import { dI, Hr as _$$Hr } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
-import { sx } from "../905/449184";
-import { rH } from "../905/542194";
-import { eD } from "../figma_app/876459";
+import { trackEventAnalytics } from "../905/449184";
+import { reactTimerGroup } from "../905/542194";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { m as _$$m } from "../905/770460";
 import { K } from "../905/744769";
 import { debugState } from "../905/407919";
@@ -121,7 +121,7 @@ export function $$$27(e, t, r) {
 }
 let X = ["x", "y", "width", "height", "minWidth", "minHeight", "maxWidth", "maxHeight", "angle", "canBecomeFrame", "canBecomeGroup", "canBecomeSection", "aspectRatioLockToggled", "miterLimitAngle", "terminalCap", "dashCap", "dynamicStrokeFrequency", "dynamicStrokeSmoothen", "dynamicStrokeWiggle", "scatterBrushGap", "scatterBrushWiggle", "scatterBrushAngularJitter", "scatterBrushRotation", "scatterBrushSizeJitter", "availableOTFeaturesForSelection", "availableOTFeaturesForFonts", "toggledOnOTFeaturesForSelection", "toggledOffOTFeaturesForSelection", "mixedStateOTFeaturesForSelection", "detectedList", "destinationOverlayPositionType", "destinationOverlayBackgroundInteraction", "destinationOverlayBackgroundType", "destinationOverlayBackgroundColor", "name", "numSelected", "numSelectedByType", "arcStart", "arcSweep", "arcRadius", "fontFamily", "previewFontFamily", "fontStyle", "fontVariations", "intrinsicLineHeight", "textContent", "textPathStartForward", "prototypeInteractions", "prototypeInheritedInternalInteractions", "isValidPrototypingSourceSelected", "selectionIsHyperlink", "whiteboardControls", "whiteboardColor", "whiteboardDividedSwatchColors", "whiteboardStrokeColor", "whiteboardFontFamilies", "whiteboardFontSizes", "whiteboardTextAlignHorizontal", "whiteboardTextAlignVertical", "whiteboardStrokeStyle", "whiteboardNumSelected", "whiteboardNumSelectedByType", "whiteboardSelectionCanSummarize", "whiteboardSelectionCanCluster", "whiteboardSelectionCanShowAiOnboardingBadge", "whiteboardStickyAIControlsShown", "whiteboardMindmapAIControlsShown", "nodeSelectedValidForQuickAdd", "whiteboardStrokeWeight", "washiTapePaint", "washiTapePaintIsMixed", "connectorLineStyleForSelection", "connectorStartCapForSelection", "connectorEndCapForSelection", "connectorTextBackgroundTransparent", "codeBlockLanguage", "codeBlockTheme", "leftEndCap", "rightEndCap", "leftCapSize", "rightCapSize", "maxStrokeWeight", "shapeWithTextTypeForSelection", "shapeWithTextFillType", "shapeWithTextOpacityOverride", "platformShapeFillType", "platformShapeOpacityOverride", "authorVisibility", "imageAspectRatio", "imageHasNoStroke", "imageOverlayPaint", "sectionContentsHidden", "isSection", "variableConsumptionInfo", "borderTopVisible", "borderRightVisible", "borderBottomVisible", "borderLeftVisible", "borderSharedWeight", "stackCounterSpacing", "gridRowCount", "gridColumnCount", "gridTrackSize", "gridTrackSizingType", "directlySubscribedAssetKeys", "numVideosSelected", "videoAutoplay", "videoMediaLoop", "videoMuted", "videoShowControls", "themeId", "objectAnimationType", "objectAnimationDuration", "objectAnimationPhase", "shadow", "blur", "htmlWidgetYouTubeVideoURL", "htmlWidgetGoogleMapLocation", "htmlWidgetGoogleMapZoom", "htmlWidgetMailchimpFormURL", "htmlWidgetMailchimpInputPlaceholder", "htmlWidgetMailchimpSubmitButtonLabel", "htmlWidgetMailchimpLayoutIsVertical", "htmlWidgetGenericEmbedUrl", "htmlWidgetGenericEmbedCodeType", "htmlWidgetGenericEmbedIframeHtml", "htmlWidgetGenericEmbedAllowFullscreen", "appear", "hover", "press", "focus", "scrollParallax", "scrollTransform", "cursor", "marquee", "code"];
 export function $$q10(e, t, r, a, o) {
-  rH.start("update-selection-properties");
+  reactTimerGroup.start("update-selection-properties");
   try {
     !function (e, t, r, a, o) {
       let l = {
@@ -189,7 +189,7 @@ export function $$q10(e, t, r, a, o) {
   } catch (e) {
     throw e;
   } finally {
-    rH.stop("update-selection-properties");
+    reactTimerGroup.stop("update-selection-properties");
   }
 }
 export function $$J20(e) {
@@ -203,7 +203,7 @@ export function $$J20(e) {
   }
 }
 let Z = debounce(e => {
-  sx("Style Edited", {
+  trackEventAnalytics("Style Edited", {
     styleType: e
   });
 }, 500);
@@ -283,7 +283,7 @@ function ed({
   changes: e,
   shouldIgnoreUserPrefs: t
 }) {
-  if (eD) {
+  if (desktopAPIInstance) {
     let t;
     let r = {};
     let n = {};
@@ -302,7 +302,7 @@ function ed({
     let a = Object.keys(r).length > 0;
     let s = Object.keys(n).length > 0;
     let o = void 0 !== t;
-    (a || s || o) && eD.updateFullscreenMenuState({
+    (a || s || o) && desktopAPIInstance.updateFullscreenMenuState({
       actionEnabledState: a ? r : void 0,
       actionCheckedState: s ? n : void 0,
       actionShortcuts: t

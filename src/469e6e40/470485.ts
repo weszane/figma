@@ -7,7 +7,7 @@ import { Wi } from "../figma_app/162641";
 import { s as _$$s } from "../cssbuilder/589278";
 import { e6 } from "../figma_app/617427";
 import { o as _$$o } from "../905/160095";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { Bq } from "../figma_app/482142";
 import { vt } from "../figma_app/297957";
@@ -46,7 +46,7 @@ export function $$j0(e) {
       ...C,
       trackingDescriptor: _$$c.LEARN_MORE
     },
-    children: _$$t("admin_settings.billing_plan_tier.learn_more_label")
+    children: getI18nString("admin_settings.billing_plan_tier.learn_more_label")
   });
   let N = {
     ...C,
@@ -56,18 +56,18 @@ export function $$j0(e) {
     onClick: k,
     className: E,
     trackingProperties: N,
-    children: _$$t("admin_settings.billing_plan_tier.upgrade_label")
+    children: getI18nString("admin_settings.billing_plan_tier.upgrade_label")
   }) : l.tier === FPlanNameType.ORG ? t = jsx(_$$o, {
     href: "https://www.figma.com/enterprise/",
     trusted: !0,
     newTab: !0,
     className: E,
     trackingProperties: N,
-    children: _$$t("admin_settings.billing_plan_tier.upgrade_label")
+    children: getI18nString("admin_settings.billing_plan_tier.upgrade_label")
   }) : (l.tier, t = null);
   let I = jsx("span", {
     className: _$$s.textBodyMediumStrong.$,
-    children: l.tier === FPlanNameType.PRO && w ? _$$t(`admin_settings.billing_plan_tier.${l.tier}.${w}`) : _$$t(`admin_settings.billing_plan_tier.${l.tier}`)
+    children: l.tier === FPlanNameType.PRO && w ? getI18nString(`admin_settings.billing_plan_tier.${l.tier}.${w}`) : getI18nString(`admin_settings.billing_plan_tier.${l.tier}`)
   });
   return e.isLoading ? jsx(Wi, {
     dataTestId: "billing-plan-tier-loading",
@@ -82,11 +82,11 @@ export function $$j0(e) {
       children: jsx(T, {})
     }), jsx("div", {
       className: "billing_plan_tier--copy--4qKxA",
-      children: t ? tx("admin_settings.billing_plan_tier.copy", {
+      children: t ? renderI18nText("admin_settings.billing_plan_tier.copy", {
         planTier: I,
         learnMore: S,
         upgrade: t
-      }) : tx("admin_settings.billing_plan_tier.copy_no_upgrade", {
+      }) : renderI18nText("admin_settings.billing_plan_tier.copy_no_upgrade", {
         planTier: I,
         learnMore: S
       })

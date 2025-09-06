@@ -3,10 +3,10 @@ import { PcT, q6_, RYP } from "../figma_app/763686";
 import { iL } from "../figma_app/762706";
 import { zD } from "../905/686312";
 import { getFeatureFlags } from "../905/601108";
-import { az } from "../905/449184";
-import { uF } from "../figma_app/778880";
-import { $D } from "../905/11";
-import { xi, x1 } from "../905/714362";
+import { analyticsEventManager } from "../905/449184";
+import { getIsWindows } from "../figma_app/778880";
+import { reportError } from "../905/11";
+import { logWarning, logError } from "../905/714362";
 import { gP } from "../figma_app/594947";
 import { wO, ap, Zj, Vu } from "../figma_app/149304";
 import { l as _$$l } from "../figma_app/773170";
@@ -240,7 +240,7 @@ class f {
     return !0;
   }
   _useContext2D(e) {
-    return !!(getFeatureFlags().webgpu_canvas_2d_readpixels_windows && uF()) || !!getFeatureFlags().webgpu_canvas_2d_readpixels && gP("webgpu_sync_readback_config").get("vendor_architecture_context2d", []).some(t => t.vendor === e.webgpuVendor && t.architecture === e.webgpuArchitecture);
+    return !!(getFeatureFlags().webgpu_canvas_2d_readpixels_windows && getIsWindows()) || !!getFeatureFlags().webgpu_canvas_2d_readpixels && gP("webgpu_sync_readback_config").get("vendor_architecture_context2d", []).some(t => t.vendor === e.webgpuVendor && t.architecture === e.webgpuArchitecture);
   }
 }
 class _ {
@@ -291,25 +291,25 @@ class _ {
     try {
       (t = await navigator.gpu.requestAdapter({
         powerPreference: "high-performance"
-      })) && !t.isFallbackAdapter || (xi("GPU", "Failed to get high-performance WebGPU adapter. Trying low-power."), (t = await navigator.gpu.requestAdapter({
+      })) && !t.isFallbackAdapter || (logWarning("GPU", "Failed to get high-performance WebGPU adapter. Trying low-power."), (t = await navigator.gpu.requestAdapter({
         powerPreference: "low-power"
-      })) && !t.isFallbackAdapter || (xi("GPU", "Failed to get low-power WebGPU adapter. Trying default."), t = await navigator.gpu.requestAdapter()));
+      })) && !t.isFallbackAdapter || (logWarning("GPU", "Failed to get low-power WebGPU adapter. Trying default."), t = await navigator.gpu.requestAdapter()));
     } catch (e) {
-      $D(_$$e.RENDERING_AND_ANIMATION, e);
+      reportError(_$$e.RENDERING_AND_ANIMATION, e);
       try {
         t = await navigator.gpu.requestAdapter();
       } catch (e) {
-        $D(_$$e.RENDERING_AND_ANIMATION, e);
+        reportError(_$$e.RENDERING_AND_ANIMATION, e);
       }
     }
     if (!t) {
-      xi("GPU", "No WebGPU adapters found. We should fallback to WebGL.");
+      logWarning("GPU", "No WebGPU adapters found. We should fallback to WebGL.");
       this._initializationStatus = "webgpu_no_adapter";
       e();
       return;
     }
     if (t.isFallbackAdapter) {
-      xi("GPU", "WebGPU fallback adapter found. We should fallback to WebGL.");
+      logWarning("GPU", "WebGPU fallback adapter found. We should fallback to WebGL.");
       this._initializationStatus = "webgpu_software_rendering";
       e();
       return;
@@ -317,13 +317,13 @@ class _ {
     try {
       this._device = await t.requestDevice();
     } catch (t) {
-      $D(_$$e.RENDERING_AND_ANIMATION, t);
+      reportError(_$$e.RENDERING_AND_ANIMATION, t);
       this._initializationStatus = "webgpu_no_device";
       e();
       return;
     }
     if (!this._device) {
-      x1("GPU", "Unexpectedly failed to create WebGPU device", {
+      logError("GPU", "Unexpectedly failed to create WebGPU device", {
         reportAsSentryError: !0
       });
       this._initializationStatus = "webgpu_no_device";
@@ -337,7 +337,7 @@ class _ {
       this._gpuDeviceInfo.webGLVersion = n.getParameter(n.VERSION);
       let e = n.getExtension("WEBGL_debug_renderer_info");
       e ? (this._gpuDeviceInfo.graphicsCardName = n.getParameter(e.UNMASKED_RENDERER_WEBGL) ?? "", this._gpuDeviceInfo.vendor = n.getParameter(e.UNMASKED_VENDOR_WEBGL) ?? "") : (this._gpuDeviceInfo.graphicsCardName = n.getParameter(n.RENDERER) ?? "", this._gpuDeviceInfo.vendor = n.getParameter(n.VENDOR) ?? "");
-    } else i ? (xi("GPU", "No WebGL context found... using WebGPUAdapterInfo to fill in GPU hardware info"), this._gpuDeviceInfo.graphicsCardName = i.device, this._gpuDeviceInfo.vendor = i.vendor) : xi("GPU", "No WebGL context found and no WebGPUAdapterInfo found. Using empty GPU hardware info");
+    } else i ? (logWarning("GPU", "No WebGL context found... using WebGPUAdapterInfo to fill in GPU hardware info"), this._gpuDeviceInfo.graphicsCardName = i.device, this._gpuDeviceInfo.vendor = i.vendor) : logWarning("GPU", "No WebGL context found and no WebGPUAdapterInfo found. Using empty GPU hardware info");
     if (i && (this._gpuDeviceInfo.webgpuArchitecture = i.architecture, this._gpuDeviceInfo.webgpuDescription = i.description, this._gpuDeviceInfo.webgpuDevice = i.device, this._gpuDeviceInfo.webgpuVendor = i.vendor), this._webglFallbackTriggers = gP("webgl_fallback_triggers").get("webgl_fallback_triggers", {
       request_device_failure: !1,
       webgpu_error: !1,
@@ -346,7 +346,7 @@ class _ {
       compatibility_test: !1
     }), function (e) {
       if (Zj()) return !1;
-      if (uF() && "intel" === e.webgpuVendor.toLowerCase() && ("gen-7" === e.webgpuArchitecture.toLowerCase() || "gen-8" === e.webgpuArchitecture.toLowerCase())) return !0;
+      if (getIsWindows() && "intel" === e.webgpuVendor.toLowerCase() && ("gen-7" === e.webgpuArchitecture.toLowerCase() || "gen-8" === e.webgpuArchitecture.toLowerCase())) return !0;
       if ("apple" === e.webgpuVendor.toLowerCase() && "metal-3" === e.webgpuArchitecture.toLowerCase()) return !getFeatureFlags().webgpu_canvas_2d_readpixels;
       if (gP("webgpu_platform_device_config").get("block_missing_graphics_card_name", !1) && 0 === e.graphicsCardName.length) return !0;
       let t = gP("webgpu_platform_device_config").get("graphics_card_blocklist", []);
@@ -358,16 +358,16 @@ class _ {
       return;
     }
     this._device.lost.then(async e => {
-      xi("GPU", "WebGPU device was lost: ", {
+      logWarning("GPU", "WebGPU device was lost: ", {
         message: e.message,
         reason: e.reason
       });
       PcT?.reportDeviceLost();
       this._device = null;
       this._deviceIdForEmscripten = null;
-      "destroyed" !== e.reason ? (await this.initialize(), this.isDeviceInitialized() ? (xi("GPU", "WebGPU device was re-initialized."), PcT?.reportDeviceRestored()) : (xi("GPU", "WebGPU device was lost and failed to re-initialize."), this._shouldFallbackToWebGLOnDeviceCreateFailure() && PcT?.requestFallbackToWebGL(q6_.REQUEST_DEVICE_FAILURE)), this._recreateDeviceOnNextDestroy = !1) : this._recreateDeviceOnNextDestroy && !this._recreateDeviceOnNextDestroyTimeoutId && (this._recreateDeviceOnNextDestroyTimeoutId = setTimeout(async () => {
+      "destroyed" !== e.reason ? (await this.initialize(), this.isDeviceInitialized() ? (logWarning("GPU", "WebGPU device was re-initialized."), PcT?.reportDeviceRestored()) : (logWarning("GPU", "WebGPU device was lost and failed to re-initialize."), this._shouldFallbackToWebGLOnDeviceCreateFailure() && PcT?.requestFallbackToWebGL(q6_.REQUEST_DEVICE_FAILURE)), this._recreateDeviceOnNextDestroy = !1) : this._recreateDeviceOnNextDestroy && !this._recreateDeviceOnNextDestroyTimeoutId && (this._recreateDeviceOnNextDestroyTimeoutId = setTimeout(async () => {
         await this.initialize();
-        xi("GPU", "WebGPU device was re-initialized after timeout.");
+        logWarning("GPU", "WebGPU device was re-initialized after timeout.");
         PcT?.reportDeviceRestored();
         this._recreateDeviceOnNextDestroy = !1;
         this._recreateDeviceOnNextDestroyTimeoutId = null;
@@ -388,7 +388,7 @@ class _ {
   writeBuffer(e, t, i, n, a, s) {
     let o = this.emscriptenModule().WebGPUEmscriptenObj;
     if (!o) {
-      x1("GPU", "WebGPU emscripten object not initialized when writing buffer", {
+      logError("GPU", "WebGPU emscripten object not initialized when writing buffer", {
         reportAsSentryError: !0
       });
       return;
@@ -398,13 +398,13 @@ class _ {
     try {
       l.writeBuffer(d, i, n, a, s);
     } catch (e) {
-      $D(_$$e.RENDERING_AND_ANIMATION, e);
+      reportError(_$$e.RENDERING_AND_ANIMATION, e);
     }
   }
   writeTexture(e, t, i, n) {
     let a = this.emscriptenModule().WebGPUEmscriptenObj;
     if (!a) {
-      x1("GPU", "WebGPU emscripten object not initialized when writing texture", {
+      logError("GPU", "WebGPU emscripten object not initialized when writing texture", {
         reportAsSentryError: !0
       });
       return;
@@ -423,13 +423,13 @@ class _ {
         height: o.height
       });
     } catch (e) {
-      $D(_$$e.RENDERING_AND_ANIMATION, e);
+      reportError(_$$e.RENDERING_AND_ANIMATION, e);
     }
   }
   copyExternalImageToTexture(e, t, i) {
     let n = this.emscriptenModule().WebGPUEmscriptenObj;
     if (!n) {
-      x1("GPU", "WebGPU emscripten object not initialized when copying external image to texture", {
+      logError("GPU", "WebGPU emscripten object not initialized when copying external image to texture", {
         reportAsSentryError: !0
       });
       return;
@@ -447,13 +447,13 @@ class _ {
         height: s.height
       });
     } catch (e) {
-      $D(_$$e.RENDERING_AND_ANIMATION, e);
+      reportError(_$$e.RENDERING_AND_ANIMATION, e);
     }
   }
   readPixels(e, t, i, n, a, s, o) {
     let l = this.emscriptenModule().WebGPUEmscriptenObj;
     if (!l) {
-      x1("GPU", "WebGPU emscripten object not initialized when reading pixels", {
+      logError("GPU", "WebGPU emscripten object not initialized when reading pixels", {
         reportAsSentryError: !0
       });
       return !1;
@@ -463,7 +463,7 @@ class _ {
     try {
       return this._syncReadback.readPixels(d, c, i, n, a, s, o, this._gpuDeviceInfo);
     } catch (e) {
-      $D(_$$e.RENDERING_AND_ANIMATION, e);
+      reportError(_$$e.RENDERING_AND_ANIMATION, e);
       return !1;
     }
   }
@@ -490,7 +490,7 @@ class _ {
   configure(e, t) {
     let i = this.emscriptenModule().WebGPUEmscriptenObj;
     if (!i) {
-      x1("GPU", "WebGPU emscripten object not initialized when configuring context", {
+      logError("GPU", "WebGPU emscripten object not initialized when configuring context", {
         reportAsSentryError: !0
       });
       return 0;
@@ -510,13 +510,13 @@ class _ {
   deviceId() {
     let e = this.emscriptenModule().WebGPUEmscriptenObj;
     if (!e) {
-      x1("GPU", "WebGPU emscripten object not initialized when getting device id", {
+      logError("GPU", "WebGPU emscripten object not initialized when getting device id", {
         reportAsSentryError: !0
       });
       return -1;
     }
     if (!this._device) {
-      x1("GPU", "WebGPU device not initialized when getting device id", {
+      logError("GPU", "WebGPU device not initialized when getting device id", {
         reportAsSentryError: !0
       });
       return -1;
@@ -534,7 +534,7 @@ class _ {
     return this._gpuDeviceInfo;
   }
   logInitializationStatus() {
-    az.trackDefinedEvent("rendering_and_animation.webgpu_initialization", {
+    analyticsEventManager.trackDefinedEvent("rendering_and_animation.webgpu_initialization", {
       status: this._initializationStatus,
       graphicsCardName: this._gpuDeviceInfo.graphicsCardName,
       vendor: this._gpuDeviceInfo.vendor,
@@ -566,14 +566,14 @@ class _ {
   checkJsErrors() {
     let e = this.emscriptenModule().WebGPUEmscriptenObj;
     if (!e) {
-      x1("GPU", "WebGPU emscripten object not initialized when getting js errors", {
+      logError("GPU", "WebGPU emscripten object not initialized when getting js errors", {
         reportAsSentryError: !0
       });
       return;
     }
     if (e.jsErrorsToReport) for (; e.jsErrorsToReport.length > 0;) {
       let t = e.jsErrorsToReport.shift();
-      t && ($D(_$$e.RENDERING_AND_ANIMATION, t), this._shouldFallbackWebGLOnJSError() && PcT?.requestFallbackToWebGL(q6_.JS_ERROR));
+      t && (reportError(_$$e.RENDERING_AND_ANIMATION, t), this._shouldFallbackWebGLOnJSError() && PcT?.requestFallbackToWebGL(q6_.JS_ERROR));
     }
   }
   async _testCompositeTilePipeline() {
@@ -859,14 +859,14 @@ class _ {
         let t = await this._device.popErrorScope();
         t && this.logWebGPUCompabilityEvent("validation", "basic_rendering", t.message);
         let i = await this._device.popErrorScope();
-        if (i && (x1("GPU", "WebGPU basic rendering internal error", {
+        if (i && (logError("GPU", "WebGPU basic rendering internal error", {
           message: i.message
         }), this.logWebGPUCompabilityEvent("internal", "basic_rendering", i.message)), e || t || i) throw Error("WebGPU basic rendering compatibility test failed");
       }
     }
   }
   logWebGPUCompabilityEvent(e, t, i) {
-    az.trackDefinedEvent("rendering_and_animation.webgpu_compatibility", {
+    analyticsEventManager.trackDefinedEvent("rendering_and_animation.webgpu_compatibility", {
       graphicsCardName: this._gpuDeviceInfo.graphicsCardName,
       vendor: this._gpuDeviceInfo.vendor,
       webGLVersion: this._gpuDeviceInfo.webGLVersion,
@@ -898,7 +898,7 @@ export async function $$y2() {
     return;
   }
   if (!$$n5) {
-    x1("GPU", "WebGPUTsContext binding not initialized.", {
+    logError("GPU", "WebGPUTsContext binding not initialized.", {
       reportAsSentryError: !0
     });
     return;
@@ -908,7 +908,7 @@ export async function $$y2() {
 export async function $$b3() {
   if (!Vu() || !getFeatureFlags().log_webgpu_compatibility) return;
   if (!$$n5) {
-    x1("GPU", "WebGPUTsContext binding not initialized.", {
+    logError("GPU", "WebGPUTsContext binding not initialized.", {
       reportAsSentryError: !0
     });
     return;
@@ -919,7 +919,7 @@ export async function $$b3() {
     await $$n5.logWebGPUCompatibilityStatus(e);
     e || $$A1();
   } catch (e) {
-    x1("GPU", "WebGPU caught error while running compatibility tests", {
+    logError("GPU", "WebGPU caught error while running compatibility tests", {
       message: e
     }, {
       reportAsSentryError: !0

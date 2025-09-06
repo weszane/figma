@@ -1,6 +1,6 @@
 import { getFeatureFlags } from "../905/601108";
 import { isE2ETraffic } from "../figma_app/169182";
-import { nl } from "../figma_app/257275";
+import { isInteractionPathCheck } from "../figma_app/897289";
 import { op } from "../905/622391";
 let n;
 let r;
@@ -8,7 +8,7 @@ let a;
 let s;
 let u = !1;
 export function $$p1() {
-  !u && (u = !0, !getFeatureFlags().ext_init_wdf || nl() || isE2ETraffic() || Object.defineProperty(window, g(), {
+  !u && (u = !0, !getFeatureFlags().ext_init_wdf || isInteractionPathCheck() || isE2ETraffic() || Object.defineProperty(window, g(), {
     get: () => {
       if (!function () {
         let e = Error().stack;

@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { Xr, md } from "../figma_app/27355";
+import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { getInitialOptions } from "../figma_app/169182";
 import { a as _$$a } from "../905/425366";
 import { oo } from "../905/895600";
@@ -20,7 +20,7 @@ export function $$d1() {
   }(t)), [e]);
 }
 export function $$c0() {
-  let e = md(_$$a);
+  let e = useAtomWithSubscription(_$$a);
   return e?.evaluated_keys?.customIDs;
 }
 export const kh = $$c0;

@@ -1,4 +1,4 @@
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { GK } from "../905/37051";
 import { Q } from "../905/917104";
 import { e3 } from "../figma_app/852050";
@@ -17,7 +17,7 @@ class d {
     Q();
   }
   isVariableAvailableInLibraryAsset(e) {
-    let t = zl.get(e3);
+    let t = atomStoreManager.get(e3);
     return t?.status === "loaded" && t.data.some(t => t.node_id === e);
   }
 }

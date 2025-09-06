@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { xK } from "../905/125218";
 import { tS } from "../figma_app/516028";
 import { TA } from "../905/372672";
@@ -14,7 +14,7 @@ export function $$l0(e, t) {
   }, [p]);
   useEffect(() => {
     e((e, t) => {
-      i || (sx(e, {
+      i || (trackEventAnalytics(e, {
         start_time: c,
         end_time: performance.now(),
         file_key: u,

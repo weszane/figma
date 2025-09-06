@@ -1,16 +1,16 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { buildUploadUrl } from "../figma_app/169182";
 import { s_ } from "../905/17223";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Ce } from "../905/156213";
 import { LE } from "../905/71785";
 import { Ju } from "../905/102752";
 import { d_ } from "../figma_app/918700";
 export let $$u0 = Ju(function (e) {
-  let t = _$$t("rcs.redirect_from_mobile_to_desktop.head_to_figjam_on_desktop");
-  let r = _$$t("community.collections.head_to_desktop");
+  let t = getI18nString("rcs.redirect_from_mobile_to_desktop.head_to_figjam_on_desktop");
+  let r = getI18nString("community.collections.head_to_desktop");
   let c = buildUploadUrl("f95cfc857cdc5c164958966add0665b69673667c");
-  e.editorType === LE.SLIDES && (t = _$$t("rcs.redirect_from_mobile_to_desktop.head_to_slides_on_desktop"), r = _$$t("community.collections.head_to_desktop_slides"), c = buildUploadUrl("d5fbdadc97f3d94063357e9819c314ade9055df3"));
+  e.editorType === LE.SLIDES && (t = getI18nString("rcs.redirect_from_mobile_to_desktop.head_to_slides_on_desktop"), r = getI18nString("community.collections.head_to_desktop_slides"), c = buildUploadUrl("d5fbdadc97f3d94063357e9819c314ade9055df3"));
   return jsxs(d_, {
     className: "head_to_desktop_modal--modalContainer--BRiSA",
     children: [jsx(s_, {
@@ -31,7 +31,7 @@ export let $$u0 = Ju(function (e) {
         onClick: () => {
           e.dispatch(Ce());
         },
-        children: tx("general.got_it")
+        children: renderI18nText("general.got_it")
       })]
     })]
   });

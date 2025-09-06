@@ -1,7 +1,7 @@
 import { glU } from "../figma_app/763686";
 import { Js } from "../figma_app/916560";
 import { debugState } from "../905/407919";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { RK } from "../figma_app/815170";
 import { ds } from "../figma_app/314264";
 import { d1 } from "../905/766303";
@@ -17,7 +17,7 @@ export function $$h2(e, t) {
     userId: debugState.getState().user?.id
   });
 }
-export var $$m0 = ((e) => (e.OPEN = "open", e.VERTICAL = "vertical", e.HORIZONTAL = "horizontal", e.CONVERT_TO_TEXT = "convert_to_text", e))($$m0 || {});
+export var $$m0 = (e => (e.OPEN = "open", e.VERTICAL = "vertical", e.HORIZONTAL = "horizontal", e.CONVERT_TO_TEXT = "convert_to_text", e))($$m0 || {});
 let g = `
 <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M12 12H16V13H13V27H27V24H28V27V28H13H12V27V13V12ZM27.0001 13H26.9913L27.0001 13.0088V13ZM20.0001 13H26.2999L17.0251 22.2747L17.7323 22.9818L27.0001 13.714V20H28.0001V12.5V12H27.5001H20.0001V13Z" fill="white" fill-opacity="0.8"/>
@@ -101,7 +101,7 @@ export function $$A1({
     AutoLayout,
     Text,
     SVG
-  } = t;
+  } = getI18nString;
   widget.register(function () {
     let A = widget.useWidgetId();
     let {
@@ -184,26 +184,26 @@ export function $$A1({
     widget.usePropertyMenu([{
       itemType: "action",
       propertyName: "open",
-      tooltip: t("whiteboard.embeds.inline_menu.open_link"),
+      tooltip: getI18nString("whiteboard.embeds.inline_menu.open_link"),
       icon: g
     }, {
       itemType: "separator"
     }, {
       itemType: "action",
       propertyName: "vertical",
-      tooltip: t("whiteboard.embeds.inline_menu.display_vertical"),
+      tooltip: getI18nString("whiteboard.embeds.inline_menu.display_vertical"),
       icon: "vertical" === M ? E : y
     }, {
       itemType: "action",
       propertyName: "horizontal",
-      tooltip: t("whiteboard.embeds.inline_menu.display_horizontal"),
+      tooltip: getI18nString("whiteboard.embeds.inline_menu.display_horizontal"),
       icon: "horizontal" === M ? b : T
     }, {
       itemType: "separator"
     }, {
       itemType: "action",
       propertyName: "convert_to_text",
-      tooltip: t("whiteboard.embeds.inline_menu.change_back_to_text"),
+      tooltip: getI18nString("whiteboard.embeds.inline_menu.change_back_to_text"),
       icon: f
     }], ({
       propertyName: e
@@ -244,7 +244,7 @@ export function $$A1({
         blendMode: "normal"
       }
     };
-    let z = (t) => {
+    let z = t => {
       let n = t ? e.widget.h(Frame, {
         name: "container-frame",
         width: 16,
@@ -298,7 +298,7 @@ export function $$A1({
       }],
       onClick: V
     });
-    let K = (t) => {
+    let K = t => {
       if (t) return e.widget.h(Text, {
         fontSize: 16,
         fontWeight: 500,

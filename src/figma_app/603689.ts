@@ -6,7 +6,7 @@ import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import _require5 from '../6db9f521/460010';
 import _require3 from '../7a72fc59/824430';
 import _require from '../451de8f0/94979';
-import { $D, Cp } from '../905/11';
+import { reportError, captureException } from '../905/11';
 import { F as _$$F4 } from '../905/224';
 import { s as _$$s5 } from '../905/6512';
 import { a as _$$a1 } from '../905/10468';
@@ -27,7 +27,7 @@ import { x as _$$x } from '../905/89282';
 import { X as _$$X } from '../905/91006';
 import { FP as _$$FP } from '../905/98947';
 import { m as _$$m3 } from '../905/99004';
-import { R as _$$R } from '../905/103090';
+import { selectWithShallowEqual } from '../905/103090';
 import { x as _$$x6 } from '../905/106997';
 import { g as _$$g4 } from '../905/125190';
 import { xK } from '../905/125218';
@@ -56,7 +56,7 @@ import { Z as _$$Z2 } from '../905/224161';
 import { AE, Nn } from '../905/225144';
 import { C as _$$C2 } from '../905/226458';
 import { nt as _$$nt, o3 as _$$o } from '../905/226610';
-import { fm as _$$fm } from '../905/236856';
+import { delay } from '../905/236856';
 import { x as _$$x2 } from '../905/239551';
 import { d as _$$d6 } from '../905/241150';
 import { l as _$$l4 } from '../905/241412';
@@ -77,7 +77,7 @@ import { h as _$$h5 } from '../905/284399';
 import { V as _$$V2 } from '../905/292707';
 import { e as _$$e1 } from '../905/295932';
 import { F as _$$F7 } from '../905/302958';
-import { t as _$$t, tx as _$$tx } from '../905/303541';
+import { getI18nString, renderI18nText } from '../905/303541';
 import { R as _$$R5 } from '../905/304671';
 import { b as _$$b3, c as _$$c3 } from '../905/308099';
 import { nr as _$$nr, Op } from '../905/337355';
@@ -107,7 +107,7 @@ import { W as _$$W2 } from '../905/442612';
 import { K as _$$K2 } from '../905/443068';
 import { k as _$$k4 } from '../905/443820';
 import { NN, w4, y1 } from '../905/445814';
-import { az as _$$az, pp as _$$pp2, sx as _$$sx } from '../905/449184';
+import { analyticsEventManager, getAnonymousId, trackEventAnalytics } from '../905/449184';
 import { E as _$$E7 } from '../905/453826';
 import { e as _$$e0 } from '../905/457828';
 import { b as _$$b8 } from '../905/465888';
@@ -129,7 +129,7 @@ import { ex as _$$ex } from '../905/524523';
 import { d as _$$d2 } from '../905/531325';
 import { _T as _$$_T, E5, jv, k4, Yi } from '../905/531551';
 import { B3, Sr } from '../905/535224';
-import { sn as _$$sn } from '../905/542194';
+import { globalPerfTimer } from '../905/542194';
 import { N as _$$N3 } from '../905/544669';
 import { lu as _$$lu } from '../905/545842';
 import { U as _$$U3 } from '../905/566881';
@@ -179,7 +179,7 @@ import { z5 as _$$z, Nv } from '../905/713722';
 import { XA } from '../905/714160';
 import { B as _$$B2 } from '../905/714743';
 import { l as _$$l } from '../905/716947';
-import { m as _$$m } from '../905/717445';
+import { getFilteredFeatureFlags } from '../905/717445';
 import { N as _$$N2 } from '../905/718123';
 import { S as _$$S3 } from '../905/720922';
 import { a as _$$a3 } from '../905/720941';
@@ -203,7 +203,7 @@ import { h as _$$h0 } from '../905/791079';
 import { cq as _$$cq } from '../905/794154';
 import { B as _$$B } from '../905/797453';
 import { Ig } from '../905/805224';
-import { _ as _$$_2 } from '../905/810750';
+import { MultiValueMap } from '../905/810750';
 import { $ as _$$$ } from '../905/819786';
 import { o as _$$o5 } from '../905/821217';
 import { m as _$$m4 } from '../905/822676';
@@ -266,7 +266,7 @@ import { e8 as _$$e2, fd, he, ql } from '../1577/159553';
 import { N as _$$N4 } from '../1577/472492';
 import { H as _$$H } from '../1577/640070';
 import { d as _$$d3 } from '../1577/847459';
-import { qR } from '../3973/348894';
+import { normalizePathnameStrict } from '../3973/348894';
 import { h as _$$h8 } from '../3973/647885';
 import { A as _$$A12 } from '../4711/136271';
 import { z as _$$z2 } from '../5132/283698';
@@ -286,7 +286,7 @@ import { aBI, Dkp, evB, GFz, KP, MYY, t8H, Ujx, Xu4 } from '../figma_app/6204';
 import { bN } from '../figma_app/16595';
 import { $t, lW as _$$lW, FC, JO, y7 } from '../figma_app/20203';
 import { H as _$$H5, U as _$$U } from '../figma_app/23564';
-import { eU as _$$eU, fp, Iz, md, mg, Xr, zl } from '../figma_app/27355';
+import { atom, useAtomValueAndSetter, createRemovableAtomFamily, useAtomWithSubscription, mg, Xr, atomStoreManager } from '../figma_app/27355';
 import { h8, QH, Ze } from '../figma_app/27829';
 import { ki } from '../figma_app/31188';
 import { Ye } from '../figma_app/32128';
@@ -301,7 +301,7 @@ import { Q6 } from '../figma_app/48566';
 import { ts as _$$ts } from '../figma_app/49598';
 import { AS } from '../figma_app/50271';
 import { I as _$$I4 } from '../figma_app/51637';
-import { nT as _$$nT, yY } from '../figma_app/53721';
+import { FEditorType, isDesignOrIllustration } from '../figma_app/53721';
 import { cV as _$$cV } from '../figma_app/59509';
 import { h as _$$h } from '../figma_app/61485';
 import { D6 as _$$D5, Yb } from '../figma_app/62612';
@@ -355,7 +355,7 @@ import { a as _$$a9 } from '../figma_app/234156';
 import { rM as _$$rM } from '../figma_app/241541';
 import { lS as _$$lS } from '../figma_app/242565';
 import { lR as _$$lR, ue as _$$ue, ku } from '../figma_app/255679';
-import { nl as _$$nl, PN } from '../figma_app/257275';
+import { isInteractionPathCheck, isInteractionOrEvalMode } from '../figma_app/897289';
 import { gH, ZF } from '../figma_app/258114';
 import { rG as _$$rG } from '../figma_app/260703';
 import { J as _$$J6 } from '../figma_app/261874';
@@ -504,7 +504,7 @@ import { c as _$$c6 } from '../figma_app/763535';
 import { _3L, _SS, cQy, ElO, Ez5, G1O, glU, J0O, juq, lyf, m1T, NLJ, Q8J, rcl, tIU, uCV, uPi, YMM } from '../figma_app/763686';
 import { c as _$$c7 } from '../figma_app/765216';
 import { l as _$$l2 } from '../figma_app/773170';
-import { Ay as _$$Ay2 } from '../figma_app/778880';
+import { BrowserInfo } from '../figma_app/778880';
 import { jw, Yd } from '../figma_app/781981';
 import { parsePxNumber } from '../figma_app/783094';
 import { S as _$$S } from '../figma_app/787550';
@@ -530,7 +530,7 @@ import { w as _$$w2 } from '../figma_app/859828';
 import { r as _$$r2 } from '../figma_app/860474';
 import { b as _$$b5, bL as _$$bL, hE as _$$hE, ZP as _$$ZP, g8, mc, MJ, q7, Q$, wv, YJ } from '../figma_app/860955';
 import { mv } from '../figma_app/861252';
-import { S8, y3 } from '../figma_app/876459';
+import { bellFeedAPIInstance, hasDesktopAPI } from '../figma_app/876459';
 import { t7 as _$$t3 } from '../figma_app/880974';
 import { ld as _$$ld } from '../figma_app/881578';
 import { O1, RW } from '../figma_app/889655';
@@ -576,7 +576,7 @@ import { rH as _$$rH, Ck, fK, IN, zB } from '../vendor/167083';
 import av from '../vendor/260986';
 import { P as _$$P } from '../vendor/348225';
 import { useSelector, connect, useStore, useDispatch } from '../vendor/514228';
-import { md as _$$md } from '../vendor/525001';
+import { useAtomValue } from '../vendor/525001';
 import { N as _$$N7 } from '../vendor/930821';
 import { flushSync } from '../vendor/944059';
 let n;
@@ -673,7 +673,7 @@ function eu() {
   !function () {
     let e = useStore();
     let t = useMemo(() => _$$g(), []);
-    let r = md(_$$d2);
+    let r = useAtomWithSubscription(_$$d2);
     let n = Rs(fjN, {
       cacheNonce: t
     }, {
@@ -684,7 +684,7 @@ function eu() {
         let t = _$$oA(n.data.currentUser.desktopPushNotification);
         if (t) {
           if (t.userId !== e.getState().user?.id) {
-            _$$sx('desktop_push_not_current_user');
+            trackEventAnalytics('desktop_push_not_current_user');
             return;
           }
           gY(e.dispatch, e.getState().selectedView.view, {
@@ -707,7 +707,7 @@ function eu() {
     selectedView,
     userStateLoaded,
     user
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     currentOrgId: e.currentUserOrgId,
     selectedView: e.selectedView,
     userStateLoaded: e.userStateLoaded,
@@ -717,7 +717,7 @@ function eu() {
   let a = selectedView.quickReplyInfo;
   let [s, o] = useState(0);
   useEffect(() => {
-    S8?.setListener({
+    bellFeedAPIInstance?.setListener({
       name: 'openTray',
       listener: () => {
         o(s + 1);
@@ -727,7 +727,7 @@ function eu() {
   let [d, c] = useState(_$$td);
   return (useEffect(() => {
     let t = () => {
-      S8 && a && e(_$$sf({
+      bellFeedAPIInstance && a && e(_$$sf({
         view: 'feed'
       }));
     };
@@ -740,7 +740,7 @@ function eu() {
     children: jsxs('div', {
       className: j()({
         'user_notifications_desktop_dropdown_container--container--ir8tA': !0,
-        'user_notifications_desktop_dropdown_container--windows--k06Km': _$$Ay2.windows
+        'user_notifications_desktop_dropdown_container--windows--k06Km': BrowserInfo.windows
       }),
       children: [jsxs('div', {
         className: 'user_notifications_desktop_dropdown_container--navbarContainer--iszDD text--fontPos11--2LvXf text--_fontBase--QdLsd',
@@ -757,14 +757,14 @@ function eu() {
         }), jsx(_$$_, {
           'href': '/files/recent',
           'className': ed,
-          'aria-label': _$$t('user_notifications.home'),
+          'aria-label': getI18nString('user_notifications.home'),
           'children': jsx(_$$I, {
             'aria-hidden': !0
           })
-        }), S8 && user && currentOrgId && jsx(_$$_, {
+        }), bellFeedAPIInstance && user && currentOrgId && jsx(_$$_, {
           'href': `/files/${currentOrgId}/user/${user.id}/settings?tab=notifications`,
           'className': ed,
-          'aria-label': _$$t('user_notifications.settings'),
+          'aria-label': getI18nString('user_notifications.settings'),
           'children': jsx(_$$I2, {
             'aria-hidden': !0
           })
@@ -783,7 +783,7 @@ function eu() {
               view: 'feed'
             }));
           }
-        }) : (!S8 || s > 0) && jsx(ec, {
+        }) : (!bellFeedAPIInstance || s > 0) && jsx(ec, {
           selectedPlan: d
         }, s)
       })]
@@ -792,7 +792,7 @@ function eu() {
 }
 let ew = new class {
   openTemplatePicker() {
-    zl.set(YA, !0);
+    atomStoreManager.set(YA, !0);
   }
   getTextFields(e) {
     let t = getSingletonSceneGraph();
@@ -818,7 +818,7 @@ let ew = new class {
 }();
 let e0 = new class {
   clearSlideThemeStylePreview(e) {
-    zl.set(q0, t => {
+    atomStoreManager.set(q0, t => {
       let r = {
         ...t
       };
@@ -1679,10 +1679,10 @@ let rW = new class {
 }();
 let rq = new class {
   setSitesViewState(e) {
-    zl.set(_$$s2, e);
+    atomStoreManager.set(_$$s2, e);
   }
   getSitesViewState() {
-    return zl.get(_$$s2);
+    return atomStoreManager.get(_$$s2);
   }
 }();
 let ni = nn;
@@ -1710,7 +1710,7 @@ let na = {
         type: 'uint8array'
       });
     } catch (e) {
-      $D(_$$e.SCENEGRAPH_AND_SYNC, e);
+      reportError(_$$e.SCENEGRAPH_AND_SYNC, e);
       return new Uint8Array();
     }
   }
@@ -1809,7 +1809,7 @@ let ns = {
   PrototypingFormatter: () => _$$u,
   SlotsBindingsWeb: () => mn,
   jsHelpers: {
-    reportError: Cp,
+    reportError: captureException,
     preventEnteringCpp: () => _$$y.preventEnteringCpp(),
     fatalCppError(e, t) {
       _$$y.fatalCppError(e, t);
@@ -1923,7 +1923,7 @@ let nY = new _$$b({
     }
   }
 });
-let nX = QH(zl, 'Community');
+let nX = QH(atomStoreManager, 'Community');
 let nq = 'filebrowser-loading-page';
 let nJ = h8(nq, e => {
   e.setAttribute('id', '');
@@ -2016,12 +2016,12 @@ function iL() {
     width,
     height,
     displayed
-  } = md(_$$D2);
+  } = useAtomWithSubscription(_$$D2);
   let {
     titleIconURL,
     titleIconSvgSrc,
     title
-  } = md(_$$d7);
+  } = useAtomWithSubscription(_$$d7);
   let c = _$$ox({
     preventUserResize: !0
   });
@@ -2132,16 +2132,16 @@ function iL() {
     })]
   }) : null;
 }
-let iP = [_$$nT.Cooper];
+let iP = [FEditorType.Cooper];
 function iD() {
   let e = debugState.getState().selectedView;
   let t = XE(e);
   return iP.includes(t) ? jsx(_$$K2, {
     'onClick': () => {
       let e = PluginUIManager.getInstance();
-      t === _$$nT.Cooper && (e?.switchContainer(Wh.BUZZ_LEFT_PANEL), zl.set(FP, Wh.BUZZ_LEFT_PANEL), zl.set(Lk, _$$x3.PLUGINS));
+      t === FEditorType.Cooper && (e?.switchContainer(Wh.BUZZ_LEFT_PANEL), atomStoreManager.set(FP, Wh.BUZZ_LEFT_PANEL), atomStoreManager.set(Lk, _$$x3.PLUGINS));
     },
-    'aria-label': _$$t('cooper.plugins.dock'),
+    'aria-label': getI18nString('cooper.plugins.dock'),
     'children': jsx(im, {})
   }) : null;
 }
@@ -2171,7 +2171,7 @@ function ij(e) {
       className: 'abuse_report_form_view-module--reportAbuseFormBox--7ckjg',
       children: [jsx('div', {
         className: 'abuse_report_form_view-module--title--T--Mc',
-        children: _$$tx('report_abuse.title')
+        children: renderI18nText('report_abuse.title')
       }), jsx(_$$A2, {
         reportedContent: e.reportedContent
       })]
@@ -2189,7 +2189,7 @@ function iW() {
     redirectUrl,
     interstitialType
   } = i;
-  interstitialType === U6.ONBOARDING && (e = _$$tx('community.seller.setup_complete'), t = _$$tx('community.seller.head_back_to_figma_to_start_selling'), r = _$$A3, n = 'community_monetization_desktop_interstitial--stripeToFigmaLogo--819Zk');
+  interstitialType === U6.ONBOARDING && (e = renderI18nText('community.seller.setup_complete'), t = renderI18nText('community.seller.head_back_to_figma_to_start_selling'), r = _$$A3, n = 'community_monetization_desktop_interstitial--stripeToFigmaLogo--819Zk');
   return jsx(_$$w, {
     children: jsx(_$$u4, {
       useOriginalSrcFills: !0,
@@ -2202,7 +2202,7 @@ function iW() {
           Sr(redirectUrl, B3.COMMUNITY_INTERSTITIAL);
         },
         className: 'community_monetization_desktop_interstitial--button--Eq1kl',
-        children: _$$tx('community.buyer.return_to_desktop_app')
+        children: renderI18nText('community.buyer.return_to_desktop_app')
       })
     })
   });
@@ -2222,11 +2222,11 @@ function iq() {
       e() && (t(_$$sf({
         view: 'fullscreen',
         fileKey: r.data.meta.file_key,
-        editorType: _$$nT.Whiteboard
-      })), r.data.meta.missing_hub_file && t(_$$s4.error(_$$t('figjam_try.template_creation_failed'))));
+        editorType: FEditorType.Whiteboard
+      })), r.data.meta.missing_hub_file && t(_$$s4.error(getI18nString('figjam_try.template_creation_failed'))));
     }).catch(e => {
       console.error(e);
-      t(_$$s4.error(_$$t('figjam_try.failed_to_create_file')));
+      t(_$$s4.error(getI18nString('figjam_try.failed_to_create_file')));
       setTimeout(() => window.history.go(-1), 2e3);
     });
   }, [t, e, n, r, i]);
@@ -2312,7 +2312,7 @@ class al extends _$$X3 {
 class ad extends al {
   constructor() {
     super(...arguments);
-    this.nodesByParentGuid = new _$$_2();
+    this.nodesByParentGuid = new MultiValueMap();
     this.isComplete = !0;
   }
   addNode(e) {
@@ -2925,7 +2925,7 @@ async function aF(e) {
   for (let t of [250, 250, 250, 500, 1e3, 1e3, ...Array.from({
     length: 24
   }).fill(5e3)]) {
-    await _$$fm(t);
+    await delay(t);
     try {
       let t = await fetch(e);
       if (t.ok) return await t.json();
@@ -4009,7 +4009,7 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
           className: 'survey_view--closeButton--Z6aRE',
           children: jsx(Jn, {
             onClick: e.dismissModal,
-            innerText: _$$t('rcs.surveys.close'),
+            innerText: getI18nString('rcs.surveys.close'),
             trackingProperties: e.trackingPropertiesOnClose
           })
         })
@@ -4052,7 +4052,7 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
           disabled: !n,
           variant: 'secondary',
           onClick: () => r(n),
-          children: _$$tx('rcs.surveys.submit')
+          children: renderI18nText('rcs.surveys.submit')
         })
       })]
     });
@@ -4104,7 +4104,7 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
         className: _$$s3.wFull.flex.justifyBetween.itemsCenter.selectNone.$,
         children: [e.progress && jsx('p', {
           className: _$$s3.colorTextSecondary.$,
-          children: _$$tx('rcs.surveys.question_counter', {
+          children: renderI18nText('rcs.surveys.question_counter', {
             currentStep: e.progress.currentStep,
             totalSteps: e.progress.totalSteps
           })
@@ -4115,8 +4115,8 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
             ...e.trackingProperties,
             ...o
           },
-          innerText: _$$t('rcs.surveys.submit_opinions'),
-          children: _$$tx('rcs.surveys.next')
+          innerText: getI18nString('rcs.surveys.submit_opinions'),
+          children: renderI18nText('rcs.surveys.next')
         })]
       })]
     });
@@ -4163,7 +4163,7 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
         }), e.label ? jsx(Lf, {
           type: 'textarea',
           htmlName: 'enter-free-form',
-          placeholder: e.placeholder_text || _$$t('rcs.surveys.would_love_to_know'),
+          placeholder: e.placeholder_text || getI18nString('rcs.surveys.would_love_to_know'),
           label: e.label,
           className: 'survey_view--labeledTextInput--GJSJP',
           value: t,
@@ -4171,7 +4171,7 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
           maxLength: 1e3
         }) : jsx(_$$L, {
           type: 'textarea',
-          placeholder: e.placeholder_text || _$$t('rcs.surveys.would_love_to_know'),
+          placeholder: e.placeholder_text || getI18nString('rcs.surveys.would_love_to_know'),
           ref: a,
           rows: 5,
           className: `${n && 'survey_view--inputError---xPSn' || ''}`,
@@ -4187,7 +4187,7 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
           className: _$$s3.wFull.flex.justifyBetween.itemsCenter.selectNone.$,
           children: [e.progress && jsx('p', {
             className: _$$s3.colorTextSecondary.$,
-            children: _$$tx('rcs.surveys.question_counter', {
+            children: renderI18nText('rcs.surveys.question_counter', {
               currentStep: e.progress.currentStep,
               totalSteps: e.progress.totalSteps
             })
@@ -4195,17 +4195,17 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
             className: _$$s3.mlAuto.$,
             children: jsx($z, {
               onClick: () => {
-                !e.required || t ? e.onSubmit() : i(_$$t('rcs.surveys.this_field_is_required'));
+                !e.required || t ? e.onSubmit() : i(getI18nString('rcs.surveys.this_field_is_required'));
               },
               trackingProperties: {
                 ...e.trackingProperties,
                 ...d,
                 trackingDescriptor: _$$c5.SUBMIT_FREE_FORM
               },
-              innerText: _$$t('rcs.surveys.submit_free_form'),
+              innerText: getI18nString('rcs.surveys.submit_free_form'),
               variant: e.usePrimaryButton ? 'primary' : 'secondary',
               autoFocus: !e.required,
-              children: _$$tx('rcs.surveys.submit')
+              children: renderI18nText('rcs.surveys.submit')
             })
           })]
         })]
@@ -4226,7 +4226,7 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
           multiple: 1.5
         }), jsx('p', {
           className: 'survey_view--completeViewText--hOTK2',
-          children: e || _$$tx('rcs.surveys.thanks_for_your_feedback')
+          children: e || renderI18nText('rcs.surveys.thanks_for_your_feedback')
         })]
       })
     });
@@ -4276,32 +4276,32 @@ let s4 = {
   [sG.COMPLETE]: 340
 };
 let s8 = () => [{
-  displayValue: _$$t('org_admin_survey.n_a'),
+  displayValue: getI18nString('org_admin_survey.n_a'),
   trackingValue: 0
 }, {
-  displayValue: _$$t('org_admin_survey.strongly_disagree'),
+  displayValue: getI18nString('org_admin_survey.strongly_disagree'),
   trackingValue: 1
 }, {
-  displayValue: _$$t('org_admin_survey.disagree'),
+  displayValue: getI18nString('org_admin_survey.disagree'),
   trackingValue: 2
 }, {
-  displayValue: _$$t('org_admin_survey.neither_agree_nor_disagree'),
+  displayValue: getI18nString('org_admin_survey.neither_agree_nor_disagree'),
   trackingValue: 3
 }, {
-  displayValue: _$$t('org_admin_survey.agree'),
+  displayValue: getI18nString('org_admin_survey.agree'),
   trackingValue: 4
 }, {
-  displayValue: _$$t('org_admin_survey.strongly_agree'),
+  displayValue: getI18nString('org_admin_survey.strongly_agree'),
   trackingValue: 5
 }];
 let s6 = [{
-  displayValue: _$$tx('org_admin_survey.figma_s_billing_model_is_fair'),
+  displayValue: renderI18nText('org_admin_survey.figma_s_billing_model_is_fair'),
   trackingValue: 'billingModal'
 }, {
-  displayValue: _$$tx('org_admin_survey.figma_makes_it_efficient_to_give_users_the_access_they_need'),
+  displayValue: renderI18nText('org_admin_survey.figma_makes_it_efficient_to_give_users_the_access_they_need'),
   trackingValue: 'userAccess'
 }, {
-  displayValue: _$$tx('org_admin_survey.figma_makes_it_easy_to_manage_costs'),
+  displayValue: renderI18nText('org_admin_survey.figma_makes_it_easy_to_manage_costs'),
   trackingValue: 'costManagement'
 }];
 function s7({
@@ -4340,12 +4340,12 @@ function s7({
           return jsx(s.MultipleChoiceQuestionsView, {
             choices: s8(),
             defaultChoice: {
-              displayValue: _$$t('org_admin_survey.not_answered'),
+              displayValue: getI18nString('org_admin_survey.not_answered'),
               trackingValue: 0
             },
             questions: s6,
-            header: _$$t('org_admin_survey.can_you_tell_us_about_your_experience_using_figma'),
-            subHeader: _$$t('org_admin_survey.rate_your_level_of_agreement_with_the_following_statements'),
+            header: getI18nString('org_admin_survey.can_you_tell_us_about_your_experience_using_figma'),
+            subHeader: getI18nString('org_admin_survey.rate_your_level_of_agreement_with_the_following_statements'),
             progress: {
               currentStep: 1,
               totalSteps: 2
@@ -4355,7 +4355,7 @@ function s7({
           });
         case sG.IMPROVEMENT_QUESTION:
           return jsx(s.EnterFreeFormView, {
-            question: _$$t('org_admin_survey.what_would_improve_your_experience'),
+            question: getI18nString('org_admin_survey.what_would_improve_your_experience'),
             progress: {
               currentStep: 2,
               totalSteps: 2
@@ -4406,9 +4406,9 @@ function ol(e, t, r) {
 }
 function od() {
   let e = _$$zl(oi);
-  let t = md(os);
-  let r = md(Hy);
-  let n = md(ZS);
+  let t = useAtomWithSubscription(os);
+  let r = useAtomWithSubscription(Hy);
+  let n = useAtomWithSubscription(ZS);
   let i = _$$e8({
     overlay: GFz,
     priority: _$$N5.SURVEY
@@ -4465,28 +4465,28 @@ function o_({
       switch (e) {
         case sB.WHY_ABANDON_QUESTION:
           return jsx(s.QuestionView, {
-            question: _$$t('rcs.surveys.abandoned_org_upgrade_question'),
+            question: getI18nString('rcs.surveys.abandoned_org_upgrade_question'),
             surveyAnswers: [{
-              answer: _$$t('rcs.surveys.abandoned_org_upgrade_reason_cost'),
+              answer: getI18nString('rcs.surveys.abandoned_org_upgrade_reason_cost'),
               nextState: sB.COMPLETE
             }, {
-              answer: _$$t('rcs.surveys.abandoned_org_upgrade_reason_billing_complexity'),
+              answer: getI18nString('rcs.surveys.abandoned_org_upgrade_reason_billing_complexity'),
               nextState: sB.COMPLETE
             }, {
-              answer: _$$t('rcs.surveys.abandoned_org_upgrade_reason_annual_billing'),
+              answer: getI18nString('rcs.surveys.abandoned_org_upgrade_reason_annual_billing'),
               nextState: sB.COMPLETE
             }, {
-              answer: _$$t('rcs.surveys.abandoned_org_upgrade_reason_just_looking'),
+              answer: getI18nString('rcs.surveys.abandoned_org_upgrade_reason_just_looking'),
               nextState: sB.COMPLETE
             }, {
-              answer: _$$t('rcs.surveys.abandoned_org_upgrade_reason_other'),
+              answer: getI18nString('rcs.surveys.abandoned_org_upgrade_reason_other'),
               nextState: sB.FREE_FORM_INPUT
             }],
             onSubmitAnswer: clickAnswer
           });
         case sB.FREE_FORM_INPUT:
           return jsx(s.EnterFreeFormView, {
-            question: _$$t('rcs.surveys.abandoned_org_upgrade_question'),
+            question: getI18nString('rcs.surveys.abandoned_org_upgrade_question'),
             onSubmit: () => setNextState(sB.COMPLETE)
           });
         case sB.COMPLETE:
@@ -4529,11 +4529,11 @@ let ob = {
   surveyVersion: 1
 };
 function oT() {
-  let e = md(oE);
-  let t = md(Hy);
-  let r = md(_$$zN);
-  let n = md(_$$nZ);
-  let i = md(oy);
+  let e = useAtomWithSubscription(oE);
+  let t = useAtomWithSubscription(Hy);
+  let r = useAtomWithSubscription(_$$zN);
+  let n = useAtomWithSubscription(_$$nZ);
+  let i = useAtomWithSubscription(oy);
   let a = _$$zl(og);
   let s = _$$e8({
     overlay: MYY,
@@ -4570,14 +4570,14 @@ function oO({
   orgTrial: e
 }) {
   if (!e || e.status !== _$$Q4.EXPIRED) return null;
-  let t = e.planType === FPlanTierType.ENTERPRISE ? _$$tx('payments_modal.org_trial.enterprise') : _$$tx('payments_modal.org_trial.organization');
+  let t = e.planType === FPlanTierType.ENTERPRISE ? renderI18nText('payments_modal.org_trial.enterprise') : renderI18nText('payments_modal.org_trial.organization');
   return jsxs(utilityNoop, {
     'className': ow,
     'size': 360,
     'title': jsx(_$$E4, {
       fontSize: 11,
       fontWeight: 'bold',
-      children: _$$tx('payments_modal.org_trial_expired.title', {
+      children: renderI18nText('payments_modal.org_trial_expired.title', {
         planText: t
       })
     }),
@@ -4586,14 +4586,14 @@ function oO({
     'data-testid': 'org_trial_expired_modal',
     'children': [jsx(_$$Y2, {
       children: jsx(_$$E4, {
-        children: _$$tx('payments_modal.org_trial_expired.description')
+        children: renderI18nText('payments_modal.org_trial_expired.description')
       })
     }), jsx(_$$Y2, {
       padding: {
         top: 24
       },
       children: jsx(_$$h6, {
-        text: _$$tx('payments_modal.org_trial.switch_my_workspace'),
+        text: renderI18nText('payments_modal.org_trial.switch_my_workspace'),
         dataTestId: 'workspace-switcher-link'
       })
     })]
@@ -4608,7 +4608,7 @@ function oR() {
 function oL({
   currentOrgId: e
 }) {
-  let t = _$$md(_$$U2(e));
+  let t = useAtomValue(_$$U2(e));
   let {
     show,
     complete,
@@ -4646,13 +4646,13 @@ function oj(e) {
   let o = j_(s);
   if (orgTrial.status !== _$$Q4.PENDING || o.status !== 'loaded') return null;
   let d = o.data;
-  let c = orgTrial.planType === FPlanTierType.ENTERPRISE ? _$$tx('payments_modal.org_trial.enterprise') : _$$tx('payments_modal.org_trial.organization');
+  let c = orgTrial.planType === FPlanTierType.ENTERPRISE ? renderI18nText('payments_modal.org_trial.enterprise') : renderI18nText('payments_modal.org_trial.organization');
   let u = d ? jsx(_$$E4, {
-    children: _$$tx('payments_modal.org_trial_pending.welcome_to_your_figma_trial', {
+    children: renderI18nText('payments_modal.org_trial_pending.welcome_to_your_figma_trial', {
       planText: c
     })
   }) : jsx(_$$E4, {
-    children: _$$tx('payments_modal.org_trial_pending.your_trial_is_almost_ready')
+    children: renderI18nText('payments_modal.org_trial_pending.your_trial_is_almost_ready')
   });
   let p = _$$A6(orgTrial.trialPeriodEnd).utc().format('ll');
   let _ = _$$A7.getEstimatedEditorCount(orgTrial);
@@ -4661,9 +4661,9 @@ function oj(e) {
     'target': '_blank',
     'trusted': !0,
     'data-testid': 'ssa-link',
-    'children': _$$tx('payments_modal.org_trial_pending.ssa_link')
+    'children': renderI18nText('payments_modal.org_trial_pending.ssa_link')
   });
-  let m = _$$tx('payments_modal.org_trial_pending.i_agree');
+  let m = renderI18nText('payments_modal.org_trial_pending.i_agree');
   return jsxs(utilityNoop, {
     'className': ow,
     'size': d ? 380 : 360,
@@ -4682,37 +4682,37 @@ function oj(e) {
         right: 8
       },
       children: [jsx(_$$E4, {
-        children: _$$tx('payments_modal.org_trial_pending.make_sure_things_look_right', {
+        children: renderI18nText('payments_modal.org_trial_pending.make_sure_things_look_right', {
           planText: c
         })
       }), jsx(oU, {
         text: jsx(_$$E4, {
-          children: _$$tx('payments_modal.org_trial_pending.expiration_date', {
+          children: renderI18nText('payments_modal.org_trial_pending.expiration_date', {
             planText: c,
             endDate: p
           })
         })
       }), jsx(oU, {
         text: jsx(_$$E4, {
-          children: _$$tx('payments_modal.org_trial_pending.editor_count.seat_rename', {
+          children: renderI18nText('payments_modal.org_trial_pending.editor_count.seat_rename', {
             planText: c,
             editorCount: _
           })
         })
       }), jsx(oU, {
         text: jsx(_$$E4, {
-          children: _$$tx('payments_modal.org_trial_pending.no_obligation_to_purchase', {
+          children: renderI18nText('payments_modal.org_trial_pending.no_obligation_to_purchase', {
             planText: c
           })
         })
       }), jsx(oU, {
         text: jsx(_$$E4, {
-          children: _$$tx('payments_modal.org_trial_pending.terms_and_conditions', {
+          children: renderI18nText('payments_modal.org_trial_pending.terms_and_conditions', {
             ssaLink: h
           })
         })
       }), jsx(_$$E4, {
-        children: _$$tx('payments_modal.org_trial_pending.by_clicking_agree', {
+        children: renderI18nText('payments_modal.org_trial_pending.by_clicking_agree', {
           agreeText: m,
           ssaLink: h
         })
@@ -4720,7 +4720,7 @@ function oj(e) {
     }) : jsx('div', {
       className: _$$s3.pr8.$,
       children: jsx(_$$E4, {
-        children: _$$tx('payments_modal.org_trial_pending.trial_still_needs_admin_approval', {
+        children: renderI18nText('payments_modal.org_trial_pending.trial_still_needs_admin_approval', {
           planText: c
         })
       })
@@ -4732,7 +4732,7 @@ function oj(e) {
         top: 24
       },
       children: [jsx(_$$h6, {
-        text: _$$tx('payments_modal.org_trial.switch_my_workspace'),
+        text: renderI18nText('payments_modal.org_trial.switch_my_workspace'),
         dataTestId: 'workspace-switcher-link'
       }), d && jsx(_$$$z, {
         disabled: r,
@@ -4742,10 +4742,10 @@ function oj(e) {
             orgId: orgTrial.resourceId,
             billingTrialId: orgTrial.id
           }).then(() => {
-            i(_$$s4.flash(_$$t('payments_modal.org_trial_pending.success')));
+            i(_$$s4.flash(getI18nString('payments_modal.org_trial_pending.success')));
           }).catch(e => {
             console.error(e);
-            i(_$$s4.error(_$$t('payments_modal.org_trial_pending.error')));
+            i(_$$s4.error(getI18nString('payments_modal.org_trial_pending.error')));
             n(!1);
           }));
         },
@@ -4781,7 +4781,7 @@ function oB() {
 function oG({
   currentOrgId: e
 }) {
-  let t = md(_$$U2(e));
+  let t = useAtomWithSubscription(_$$U2(e));
   let {
     show,
     complete,
@@ -4811,7 +4811,7 @@ function oG({
 let oz = M4.Mutation(async e => {
   await Eh.validateTrial(e);
 });
-let oK = Iz(e => Z1(O24.Query({
+let oK = createRemovableAtomFamily(e => Z1(O24.Query({
   orgId: e
 }), e => e?.org?.canAdmin && e.org.billingTrials?.length ? function (e) {
   let t = e.filter(e => e.status === _$$Q4.PENDING && e.trialType === FBillingEntityType.PRODUCT);
@@ -4836,10 +4836,10 @@ function oZ({
           orgId: e.resourceId,
           billingTrialId: e.id
         });
-        n(_$$s4.flash(_$$t('payments_modal.org_trial_pending.success')));
+        n(_$$s4.flash(getI18nString('payments_modal.org_trial_pending.success')));
       } catch (e) {
         console.error(e);
-        n(_$$s4.error(_$$t('payments_modal.org_trial_pending.error')));
+        n(_$$s4.error(getI18nString('payments_modal.org_trial_pending.error')));
       } finally {
         r(!1);
       }
@@ -4852,9 +4852,9 @@ function oZ({
     'target': '_blank',
     'trusted': !0,
     'data-testid': 'ssa-link',
-    'children': _$$tx('payments_modal.org_trial_pending.ssa_link')
+    'children': renderI18nText('payments_modal.org_trial_pending.ssa_link')
   });
-  let c = _$$tx('payments_modal.org_trial_pending.i_agree');
+  let c = renderI18nText('payments_modal.org_trial_pending.i_agree');
   let u = Yx(e.productLicenseTypes?.map(e => _$$E5(e)) || []);
   let p = Yx(e.productLicenseTypes?.map(e => _$$$2(e)) || []);
   let _ = e.productLicenseTypes?.length || 0;
@@ -4868,7 +4868,7 @@ function oZ({
           children: jsx(_$$E4, {
             fontSize: 11,
             fontWeight: 'bold',
-            children: _$$tx('payments_modal.product_trial_pending.welcome_to_your_figma_trial')
+            children: renderI18nText('payments_modal.product_trial_pending.welcome_to_your_figma_trial')
           })
         })
       }), jsx(_$$nB, {
@@ -4879,12 +4879,12 @@ function oZ({
             right: 8
           },
           children: [jsx(_$$E4, {
-            children: _$$tx('payments_modal.product_trial_pending.make_sure_things_look_right', {
+            children: renderI18nText('payments_modal.product_trial_pending.make_sure_things_look_right', {
               productNames: u
             })
           }), jsx(oQ, {
             text: jsx(_$$E4, {
-              children: _$$tx('payments_modal.product_trial_pending.expiration_date', {
+              children: renderI18nText('payments_modal.product_trial_pending.expiration_date', {
                 productNamesShort: p,
                 numProducts: _,
                 endDate: o
@@ -4892,27 +4892,27 @@ function oZ({
             })
           }), jsx(oQ, {
             text: jsx(_$$E4, {
-              children: _$$tx('payments_modal.product_trial_pending.available_to_users_in_org')
+              children: renderI18nText('payments_modal.product_trial_pending.available_to_users_in_org')
             })
           }), jsx(oQ, {
             text: jsx(_$$E4, {
-              children: _$$tx('payments_modal.product_trial_pending.no_obligation_to_purchase', {
+              children: renderI18nText('payments_modal.product_trial_pending.no_obligation_to_purchase', {
                 productNames: u,
                 numProducts: _
               })
             })
           }), jsx(oQ, {
             text: jsx(_$$E4, {
-              children: _$$tx('payments_modal.org_trial_pending.terms_and_conditions', {
+              children: renderI18nText('payments_modal.org_trial_pending.terms_and_conditions', {
                 ssaLink: d
               })
             })
           }), jsx(oQ, {
             text: jsx(_$$E4, {
-              children: _$$tx('payments_modal.product_trial_pending.help_make_decisions')
+              children: renderI18nText('payments_modal.product_trial_pending.help_make_decisions')
             })
           }), jsx(_$$E4, {
-            children: _$$tx('payments_modal.product_trial_pending.by_clicking_agree', {
+            children: renderI18nText('payments_modal.product_trial_pending.by_clicking_agree', {
               agreeText: c,
               ssaLink: d
             })
@@ -4925,7 +4925,7 @@ function oZ({
           verticalAlignItems: 'center',
           padding: 4,
           children: [jsx(_$$h6, {
-            text: _$$tx('payments_modal.org_trial.switch_my_workspace'),
+            text: renderI18nText('payments_modal.org_trial.switch_my_workspace'),
             dataTestId: 'workspace-switcher-link'
           }), jsx(_$$V4, {
             disabled: t,
@@ -4965,7 +4965,7 @@ function o0() {
 function o1({
   currentOrgId: e
 }) {
-  let t = md(oK(e));
+  let t = useAtomWithSubscription(oK(e));
   let {
     show,
     complete,
@@ -5033,7 +5033,7 @@ function l_({
   let u = e => () => {
     r(e);
   };
-  let p = e ? `${e.team.name} / ${e.project.path}` : _$$t('desktop_new_tab.drafts');
+  let p = e ? `${e.team.name} / ${e.project.path}` : getI18nString('desktop_new_tab.drafts');
   return jsx(Fragment, {
     children: jsx(_$$a7, {
       mode: 'match',
@@ -5041,7 +5041,7 @@ function l_({
         manager,
         children: [jsx($n, {
           'variant': 'ghost',
-          'aria-label': _$$t('desktop_new_tab.create_new_file_in_folder', {
+          'aria-label': getI18nString('desktop_new_tab.create_new_file_in_folder', {
             folderName: p
           }),
           ...getTriggerProps(),
@@ -5064,7 +5064,7 @@ function l_({
         }), jsxs(mc, {
           children: [jsxs(YJ, {
             title: jsx(_$$hE, {
-              children: _$$tx('desktop_new_tab.create_new_file_in')
+              children: renderI18nText('desktop_new_tab.create_new_file_in')
             }),
             children: [d.map(e => jsxs(q7, {
               onClick: u({
@@ -5091,7 +5091,7 @@ function l_({
               })]
             }, e.id)), c && c.length > 0 && jsxs(g8, {
               children: [jsx(_$$ZP, {
-                children: _$$tx('file_browser.tool_bar.see_more_editable_projects', {
+                children: renderI18nText('file_browser.tool_bar.see_more_editable_projects', {
                   numberOfEditableProjects: c.length
                 })
               }), jsx(MJ, {
@@ -5127,7 +5127,7 @@ function l_({
               children: jsx(_$$A8, {})
             }), jsx(_$$E4, {
               truncate: !0,
-              children: _$$tx('sidebar.drafts')
+              children: renderI18nText('sidebar.drafts')
             })]
           })]
         })]
@@ -5147,27 +5147,27 @@ function lF({
   let o = useDispatch();
   switch (_$$dB(), e) {
     case FFileType.DESIGN:
-      a = _$$t('desktop_new_tab.file_type.design');
+      a = getI18nString('desktop_new_tab.file_type.design');
       s = _$$pD;
       break;
     case FFileType.WHITEBOARD:
-      a = _$$t('desktop_new_tab.file_type.figjam');
+      a = getI18nString('desktop_new_tab.file_type.figjam');
       s = _$$n2;
       break;
     case FFileType.SLIDES:
-      a = _$$t('desktop_new_tab.file_type.slides');
+      a = getI18nString('desktop_new_tab.file_type.slides');
       s = ZB;
       break;
     case FFileType.SITES:
-      a = _$$t('desktop_new_tab.file_type.site');
+      a = getI18nString('desktop_new_tab.file_type.site');
       s = f7;
       break;
     case FFileType.COOPER:
-      a = _$$t('desktop_new_tab.file_type.buzz');
+      a = getI18nString('desktop_new_tab.file_type.buzz');
       s = FZ;
       break;
     case FFileType.FIGMAKE:
-      a = _$$t('desktop_new_tab.file_type.make');
+      a = getI18nString('desktop_new_tab.file_type.make');
       s = $X;
       break;
     default:
@@ -5247,7 +5247,7 @@ function lF({
           children: a
         }), f && jsx(_$$Ex, {
           className: 'new_file_card--betaTag--2H7Va',
-          text: _$$t('file_browser.creation_buttons.beta'),
+          text: getI18nString('file_browser.creation_buttons.beta'),
           color: zE.DEFAULT_TRANSLUCENT
         })]
       })
@@ -5344,7 +5344,7 @@ function l5({
       }), c !== 0 && jsx(Fragment, {
         children: jsx('p', {
           className: 'recent_files--recentFilesHeader--cQ-VC',
-          children: d ? _$$tx('desktop_new_tab.recent_files_header') : _$$tx('desktop_new_tab.no_recent_files_header')
+          children: d ? renderI18nText('desktop_new_tab.recent_files_header') : renderI18nText('desktop_new_tab.no_recent_files_header')
         })
       })]
     }), jsxs('div', {
@@ -5489,29 +5489,29 @@ function l4({
         'aria-label': function (e) {
           switch (e) {
             case y1.DESIGN:
-              return _$$t('desktop_new_tab.file_type.design');
+              return getI18nString('desktop_new_tab.file_type.design');
             case y1.SLIDES:
-              return _$$t('desktop_new_tab.file_type.slides');
+              return getI18nString('desktop_new_tab.file_type.slides');
             case y1.WHITEBOARD:
-              return _$$t('desktop_new_tab.file_type.figjam');
+              return getI18nString('desktop_new_tab.file_type.figjam');
             case y1.SITES:
-              return _$$t('desktop_new_tab.file_type.site');
+              return getI18nString('desktop_new_tab.file_type.site');
             case y1.FIGMAKE:
-              return _$$t('general.figma_rev_short');
+              return getI18nString('general.figma_rev_short');
             case y1.COOPER:
-              return _$$t('desktop_new_tab.file_type.buzz');
+              return getI18nString('desktop_new_tab.file_type.buzz');
             case y1.PROTOTYPE:
-              return _$$t('desktop_new_tab.file_type.prototype');
+              return getI18nString('desktop_new_tab.file_type.prototype');
             case y1.SLIDES_TEMPLATE:
-              return _$$t('desktop_new_tab.file_type.slides_template');
+              return getI18nString('desktop_new_tab.file_type.slides_template');
             case y1.REPO:
-              return _$$t('desktop_new_tab.file_type.repo');
+              return getI18nString('desktop_new_tab.file_type.repo');
             case y1.PUBLISHED:
-              return _$$t('desktop_new_tab.file_type.published');
+              return getI18nString('desktop_new_tab.file_type.published');
             case y1.WHITEBOARD_TEMPLATE:
-              return _$$t('desktop_new_tab.file_type.figjam_template');
+              return getI18nString('desktop_new_tab.file_type.figjam_template');
             case y1.COOPER_TEMPLATE:
-              return _$$t('desktop_new_tab.file_type.buzz_template');
+              return getI18nString('desktop_new_tab.file_type.buzz_template');
             default:
               throwTypeError(e, `Unknown FileIconType: ${e}`);
           }
@@ -5536,7 +5536,7 @@ function l8() {
       ref: setKeyboardNavigationElement,
       href: t,
       onClick(t) {
-        _$$sx('Desktop New Tab Browse More Recents');
+        trackEventAnalytics('Desktop New Tab Browse More Recents');
         t.preventDefault();
         e(_$$sf({
           view: 'recentsAndSharing'
@@ -5545,7 +5545,7 @@ function l8() {
       htmlAttributes: {
         'data-testid': KN
       },
-      children: _$$tx('desktop_new_tab.browser_more_recent_files_link')
+      children: renderI18nText('desktop_new_tab.browser_more_recent_files_link')
     })
   });
 }
@@ -5597,9 +5597,9 @@ function dr() {
   let s = useSelector(e => e.desktopNewTab.loadingBackgroundColor);
   let o = useRef(null);
   let [d, c] = useState(0);
-  let u = md(_$$d9);
+  let u = useAtomWithSubscription(_$$d9);
   let p = (u.data ? u.data : qo.ORG) === qo.ORG;
-  let _ = mw(!!md(_$$t4).data, p);
+  let _ = mw(!!useAtomWithSubscription(_$$t4).data, p);
   let [h, m] = useState(void 0);
   let g = null;
   let f = function ({
@@ -5709,7 +5709,7 @@ function dr() {
             className: de,
             children: [jsx('div', {
               className: dt,
-              children: _$$t('desktop_new_tab.create_file_in')
+              children: getI18nString('desktop_new_tab.create_file_in')
             }), jsx(l_, {
               currentFolder: g,
               teamsWithEditableProjects: f,
@@ -5828,9 +5828,9 @@ function dR() {
     let t = function () {
       let e = _$$tS();
       let t = _$$n4();
-      let r = md(TG);
-      let [n, i] = fp(dP);
-      let a = md(dD);
+      let r = useAtomWithSubscription(TG);
+      let [n, i] = useAtomValueAndSetter(dP);
+      let a = useAtomWithSubscription(dD);
       let s = useSelector(qC);
       let o = useMemo(() => s.filter(e => !n.has(e)), [s, n]);
       let l = useMemo(() => o.map(t => ({
@@ -5965,8 +5965,8 @@ let dL = Zm(({
   i && (e[i] = n);
   return e;
 }, Object.create(null)));
-let dP = _$$eU(new Set());
-let dD = _$$eU(e => {
+let dP = atom(new Set());
+let dD = atom(e => {
   if (!e(JB)) return {};
   let t = e(ze);
   let r = Array.from(e(dP)).map(e => ({
@@ -5976,7 +5976,7 @@ let dD = _$$eU(e => {
   let n = ku(_$$ue, r, e);
   return n.data ? dO(n.data) : {};
 });
-let dj = _$$eU(e => {
+let dj = atom(e => {
   let t = [];
   for (let r of Object.values(fh)) {
     let n = e(r.subscribed);
@@ -6019,7 +6019,7 @@ function dG({
   !function () {
     let e = useRef(new Set());
     let t = useDispatch();
-    let r = md(dU);
+    let r = useAtomWithSubscription(dU);
     let n = _$$ud();
     let i = k9(() => {
       let e = {};
@@ -6153,7 +6153,7 @@ function dH() {
           error: jO.ErrorReason,
           publishType: r.publishType,
           dispatch: e,
-          errorReason: _$$t('design_systems.publish_actions.reload')
+          errorReason: getI18nString('design_systems.publish_actions.reload')
         });
         return;
       }
@@ -6165,13 +6165,13 @@ function dH() {
           error: jO.ErrorReason,
           publishType: r.publishType,
           dispatch: e,
-          errorReason: _$$t('design_systems.publish_actions.reload')
+          errorReason: getI18nString('design_systems.publish_actions.reload')
         });
         return;
       }
       if (u.error) {
         u.error;
-        let t = _$$t('design_systems.publish_actions.reload');
+        let t = getI18nString('design_systems.publish_actions.reload');
         d(u.assetFailureCount);
         onPublishError({
           error: jO.ErrorReason,
@@ -6200,11 +6200,11 @@ function dH() {
           switch (u.firstAssetError) {
             case 'design_systems.publish_actions.reload':
             default:
-              return _$$t('design_systems.publish_actions.reload');
+              return getI18nString('design_systems.publish_actions.reload');
             case 'design_systems.publish_actions.payload_too_large':
-              return _$$t('design_systems.publish_actions.payload_too_large');
+              return getI18nString('design_systems.publish_actions.payload_too_large');
             case 'design_systems.publish_actions.validations_failed':
-              return _$$t('design_systems.publish_actions.validations_failed');
+              return getI18nString('design_systems.publish_actions.validations_failed');
           }
         })();
         onPublishError({
@@ -6279,12 +6279,12 @@ function d1({
     children: jsxs(_$$cV, {
       variant: 'warn',
       children: [jsx(_$$Q5, {
-        children: _$$t('general.root_error_boundary_title')
+        children: getI18nString('general.root_error_boundary_title')
       }), jsx(_$$Q5, {
         children: t.error?.message
       }), e && jsx(_$$$3, {
         onClick: e,
-        children: _$$t('auth.try_again')
+        children: getI18nString('auth.try_again')
       })]
     })
   });
@@ -6621,7 +6621,7 @@ function cg() {
           },
           children: jsx('h2', {
             ...xk(ch.folderName),
-            children: n.name ? n.name : _$$t('fullscreen.filename_view.drafts')
+            children: n.name ? n.name : getI18nString('fullscreen.filename_view.drafts')
           })
         })
       }), n.description && jsx('p', {
@@ -6646,11 +6646,11 @@ function cf() {
   });
 }
 function cE() {
-  let e = md(V1);
+  let e = useAtomWithSubscription(V1);
   let t = useDeferredValue(e);
   let r = _$$o(_$$nt.interopFiles);
   let n = Xr(V1);
-  let i = md(XU);
+  let i = useAtomWithSubscription(XU);
   return r ? jsxs(_$$J5, {
     mode: 'dark',
     children: [jsx(_$$N7, {
@@ -6673,7 +6673,7 @@ function cE() {
           ..._$$Ay3.props(dX.closeButton),
           children: jsx(_$$K2, {
             'recordingKey': 'file-drawer-close',
-            'aria-label': _$$t('general.close'),
+            'aria-label': getI18nString('general.close'),
             'onClick': () => n(!1),
             'children': jsx(_$$A9, {})
           })
@@ -6692,9 +6692,9 @@ function cX() {
   let i = _$$l5();
   let a = useSelector(e => e.selectedView);
   let s = my();
-  let o = s === _$$nT.Design;
-  let l = s === _$$nT.DevHandoff;
-  let d = s === _$$nT.Illustration;
+  let o = s === FEditorType.Design;
+  let l = s === FEditorType.DevHandoff;
+  let d = s === FEditorType.Illustration;
   useEffect(() => {
     r === _$$n5.NO_ACCESS && (G1O.setCanAccessDrawMode(!1), G1O.setCanEnterDrawMode(!1));
   }, [r]);
@@ -6702,25 +6702,25 @@ function cX() {
     !t || o || i || e(_$$sf({
       ...a,
       view: 'fullscreen',
-      editorType: _$$nT.Design
+      editorType: FEditorType.Design
     }));
   }, [t, o, e, a, i]);
   useEffect(() => {
     r === _$$n5.NO_ACCESS && d && e(_$$sf({
       ...a,
       view: 'fullscreen',
-      editorType: _$$nT.Design
+      editorType: FEditorType.Design
     }));
   }, [r, d, e, a]);
   useEffect(() => {
     (n || i) && !l && e(_$$sf({
       ...a,
       view: 'fullscreen',
-      editorType: _$$nT.DevHandoff
+      editorType: FEditorType.DevHandoff
     }));
   }, [n, l, e, a, i]);
 }
-let c0 = _$$eU(new Set());
+let c0 = atom(new Set());
 let c1 = 'true';
 function c2() {
   let e = useDispatch();
@@ -6742,12 +6742,12 @@ function c2() {
     let a = userLacksLicenseAccess(FFileType.DESIGN);
     return t && !0 === a && e?.canAccessFullDevMode && e?.canEdit === !1;
   }();
-  let a = md(_$$FP);
+  let a = useAtomWithSubscription(_$$FP);
   let s = Em();
   let o = m0();
   let l = vn();
   let d = useSelector(e => e.selectedView);
-  let [, c] = fp(c0);
+  let [, c] = useAtomValueAndSetter(c0);
   let u = !!t && !!r;
   let _ = u && !!n && n.id !== t.creatorId;
   let h = u && t.canView && !t.canEdit;
@@ -6763,19 +6763,19 @@ function c2() {
     } catch (t) {
       let e = 'Unknown error';
       t instanceof Error && (e = t.message);
-      $D(_$$e.ACTIVATION, new Error(`[Dev Mode Link Defaulting] Error checking session storage: ${e}`));
+      reportError(_$$e.ACTIVATION, new Error(`[Dev Mode Link Defaulting] Error checking session storage: ${e}`));
     }
   }
-  let I = d.view === 'fullscreen' && !o && (s || l) && !m && !y3() && h && _ && !a && b && i;
+  let I = d.view === 'fullscreen' && !o && (s || l) && !m && !hasDesktopAPI() && h && _ && !a && b && i;
   useEffect(() => {
     I && queueMicrotask(() => {
       e(_$$sf({
         ...d,
         commentThreadId: g.current,
         view: 'fullscreen',
-        editorType: _$$nT.DevHandoff
+        editorType: FEditorType.DevHandoff
       }));
-      _$$az.trackDefinedEvent('activation.users_defaulted_to_dev_mode', {
+      analyticsEventManager.trackDefinedEvent('activation.users_defaulted_to_dev_mode', {
         userId: n.id,
         fileKey: r
       });
@@ -6794,7 +6794,7 @@ let c6 = _$$ex('dev_mode_toggle_disabled_tracked_tooltip', () => {
   let r = D6('ModeSwitcherTrackedTooltip').unwrapOr(null);
   let n = r?.planKey.type === FOrganizationLevelType.TEAM;
   let i = q5();
-  let a = t?.external_restricted_org_id ? _$$t('dev_handoff.paywall.external_content_control_hint') : i?.parentOrgId ? _$$t('dev_handoff.paywall.org_not_member_hint') : n ? void 0 : _$$t('dev_handoff.paywall.team_not_member_hint');
+  let a = t?.external_restricted_org_id ? getI18nString('dev_handoff.paywall.external_content_control_hint') : i?.parentOrgId ? getI18nString('dev_handoff.paywall.org_not_member_hint') : n ? void 0 : getI18nString('dev_handoff.paywall.team_not_member_hint');
   let s = t?.external_restricted_org_id ? 'ecc' : i?.parentOrgId ? 'not_member_org' : n ? void 0 : 'not_member_pro_team';
   _$$h9(() => {
     e('Dev Mode Disabled Tooltip Viewed', {
@@ -6825,13 +6825,13 @@ let c7 = _$$ex('devmode_toggle_disabled_personal_draft', ({
   }), e) ? jsxs('div', {
     className: _$$s3.cursorDefault.colorTextTooltip.$,
     children: [jsx('span', {
-      children: _$$tx('dev_handoff.paywall.toggle_disabled_for_personal_drafts')
+      children: renderI18nText('dev_handoff.paywall.toggle_disabled_for_personal_drafts')
     }), jsx('div', {
       className: _$$s3.bl1.hFull.inline.bSolid.colorBorderMenu.ml8.mr8.$
     }), jsx('a', {
       href: '/files/drafts-to-move',
       className: _$$s3.cursorPointer.noUnderline.fontBold.colorTextTooltip.$,
-      children: _$$tx('dev_handoff.paywall.toggle_disabled_go_to_drafts_to_move')
+      children: renderI18nText('dev_handoff.paywall.toggle_disabled_go_to_drafts_to_move')
     })]
   }) : jsxs('div', {
     className: _$$s3.cursorDefault.colorTextTooltip.flex.flexColumn.gap4.$,
@@ -6840,10 +6840,10 @@ let c7 = _$$ex('devmode_toggle_disabled_personal_draft', ({
     },
     children: [jsx('div', {
       className: _$$s3.noWrap.$,
-      children: _$$tx('dev_handoff.paywall.toggle_disabled_viewer_title')
+      children: renderI18nText('dev_handoff.paywall.toggle_disabled_viewer_title')
     }), jsx('div', {
       className: _$$s3.colorTextTooltipSecondary.$,
-      children: _$$tx('dev_handoff.paywall.toggle_disabled_viewer_details')
+      children: renderI18nText('dev_handoff.paywall.toggle_disabled_viewer_details')
     })]
   });
 }, e => {
@@ -6874,7 +6874,7 @@ function ue({
     e || onModeSwitch(t ? 'design' : 'handoff');
   });
   let _ = !!s && a?.id === s.creatorId;
-  let h = r ?? (t ? _$$t('dev_handoff.inspect_mode.leave_dev_mode') : _$$t('general.dev_mode'));
+  let h = r ?? (t ? getI18nString('dev_handoff.inspect_mode.leave_dev_mode') : getI18nString('general.dev_mode'));
   let m = {
     'data-tooltip-type': n ?? Ib.TEXT,
     'data-tooltip': h,
@@ -6884,7 +6884,7 @@ function ue({
     'data-onboarding-key': _$$oR,
     'data-tooltip-offset-y': -4
   };
-  let g = n === Ib.SPECIAL ? _$$t('general.dev_mode') : h;
+  let g = n === Ib.SPECIAL ? getI18nString('general.dev_mode') : h;
   return (newModeWhenLoaded !== 'design' || isDesignViewLoaded) && (newModeWhenLoaded !== 'handoff' || isDevHandoffViewLoaded) ? jsx('div', {
     ...m,
     'data-tooltip-show-above': !0,
@@ -6919,18 +6919,18 @@ function ut({
     let e = useDispatch();
     let t = _$$tS();
     let r = _$$xo();
-    let n = _$$m().ce_il_root;
+    let n = getFilteredFeatureFlags().ce_il_root;
     let i = my();
     let a = useRef(i);
-    let s = i === _$$nT.DevHandoff;
-    let o = i === _$$nT.Illustration;
-    let [l, d] = fp(c0);
+    let s = i === FEditorType.DevHandoff;
+    let o = i === FEditorType.Illustration;
+    let [l, d] = useAtomValueAndSetter(c0);
     useEffect(() => {
       if (a.current !== i && t) {
         let i;
         let a;
         let c;
-        n ? (i = s ? _$$t('fullscreen.toolbar.toolbelt_mode_segmented_control.switched_to_dev_mode') : o ? _$$t('fullscreen.toolbar.toolbelt_mode_segmented_control.switched_to_draw') : _$$t('fullscreen.toolbar.toolbelt_mode_segmented_control.switched_to_design'), a = s ? 'dev-mode' : o ? 'draw-mode' : 'design-mode', c = 3e3) : (i = s ? _$$t('dev_handoff.inspect_mode.switched_to_inspect') : _$$t('dev_handoff.inspect_mode.switched_to_design'), a = s ? 'dev-mode' : 'design-mode', c = 1200);
+        n ? (i = s ? getI18nString('fullscreen.toolbar.toolbelt_mode_segmented_control.switched_to_dev_mode') : o ? getI18nString('fullscreen.toolbar.toolbelt_mode_segmented_control.switched_to_draw') : getI18nString('fullscreen.toolbar.toolbelt_mode_segmented_control.switched_to_design'), a = s ? 'dev-mode' : o ? 'draw-mode' : 'design-mode', c = 3e3) : (i = s ? getI18nString('dev_handoff.inspect_mode.switched_to_inspect') : getI18nString('dev_handoff.inspect_mode.switched_to_design'), a = s ? 'dev-mode' : 'design-mode', c = 1200);
         l.has(t) || r ? (l.$$delete(t), d(new Set(l))) : (e(_$$F7.dequeue({
           matchType: 'switched_editor_mode'
         })), e(_$$F7.enqueue({
@@ -6953,13 +6953,13 @@ function ut({
   let c = (t ? 'handoff' : 'design') == 'handoff';
   let u = _$$k3();
   if (!u && (!o || d)) return null;
-  let p = !u && !c && !i && !_$$nl();
+  let p = !u && !c && !i && !isInteractionPathCheck();
   let _ = c && s;
   let h = !!n && !n.parentOrgId && !n.teamId;
   return jsx(ue, {
     onClick_UI3_DO_NOT_REUSE: e,
     disabled: !r || p || _,
-    tooltip: p ? h ? c7 : c6 : s ? _$$t('dev_handoff.paywall.design_mode_disabled') : void 0,
+    tooltip: p ? h ? c7 : c6 : s ? getI18nString('dev_handoff.paywall.design_mode_disabled') : void 0,
     tooltipType: p ? Ib.SPECIAL : Ib.TEXT,
     isDevHandoff: c
   });
@@ -6993,7 +6993,7 @@ function ud(e) {
   let a = _$$k3();
   let s = WN();
   let o = m0();
-  let d = _$$m().ce_il_root && textureModeAccess === _$$n5.HAS_ACCESS;
+  let d = getFilteredFeatureFlags().ce_il_root && textureModeAccess === _$$n5.HAS_ACCESS;
   let c = useMemo(() => d ? ['handoff', 'design', 'illustration'] : ['design', 'handoff'], [d]);
   let u = _$$ub2();
   let p = c.findIndex(e => e === u);
@@ -7020,8 +7020,8 @@ function ud(e) {
     rows: h,
     activeRowIndex: p,
     onAnimationCompletion: () => {
-      _$$sn.tryStop('switch_to_illustration_mode.toolbelt_animation');
-      _$$sn.tryStop('switch_to_design_mode.toolbelt_animation');
+      globalPerfTimer.tryStop('switch_to_illustration_mode.toolbelt_animation');
+      globalPerfTimer.tryStop('switch_to_design_mode.toolbelt_animation');
       m();
     }
   });
@@ -7079,26 +7079,26 @@ function uy(e) {
   });
   let d = {
     type: 'button',
-    label: _$$tx('draw.onboarding.dismiss_button'),
+    label: renderI18nText('draw.onboarding.dismiss_button'),
     onClick: complete,
     ctaTrackingDescriptor: _$$c5.GOT_IT
   };
   let c = {
     type: 'link',
-    label: _$$tx('draw.onboarding.first_time.learn_more'),
+    label: renderI18nText('draw.onboarding.first_time.learn_more'),
     href: 'https://help.figma.com/hc/articles/31440394517143',
     ctaTrackingDescriptor: _$$c5.LEARN_MORE
   };
   return jsx(_$$rq, {
     description: jsx('span', {
-      children: _$$tx('draw.onboarding.first_time.description', {
+      children: renderI18nText('draw.onboarding.first_time.description', {
         icon: jsx('span', {
           className: 'x1rg5ohu x4vbgl9',
           children: jsx(um, {})
         }),
         featureNameBolded: jsx('span', {
           className: 'xkezfkh',
-          children: _$$tx('draw.onboarding.first_time.feature_name')
+          children: renderI18nText('draw.onboarding.first_time.feature_name')
         })
       })
     }),
@@ -7113,7 +7113,7 @@ function uy(e) {
     primaryCta: d,
     secondaryCta: c,
     targetKey: _$$aQ,
-    title: _$$tx('draw.onboarding.first_time.title'),
+    title: renderI18nText('draw.onboarding.first_time.title'),
     trackingContextName: 'draw_onboarding',
     userFlagOnShow: 'seen_draw_first_time_onboarding'
   });
@@ -7123,7 +7123,7 @@ function uT(e) {
   let {
     activeMode
   } = e;
-  let r = md(ub);
+  let r = useAtomWithSubscription(ub);
   let n = _$$Td();
   let {
     show,
@@ -7144,13 +7144,13 @@ function uT(e) {
   }, [activeMode, complete, isShowing]);
   let o = {
     type: 'button',
-    label: _$$tx('draw.onboarding.dismiss_button'),
+    label: renderI18nText('draw.onboarding.dismiss_button'),
     onClick: complete,
     ctaTrackingDescriptor: _$$c5.GOT_IT
   };
   return jsx(_$$rq, {
     description: jsx('span', {
-      children: _$$tx('draw.onboarding.post_config_nudge.description', {
+      children: renderI18nText('draw.onboarding.post_config_nudge.description', {
         icon: jsx('span', {
           style: {
             display: 'inline-block',
@@ -7165,7 +7165,7 @@ function uT(e) {
     onClose: complete,
     primaryCta: o,
     targetKey: _$$aQ,
-    title: _$$tx('draw.onboarding.post_config_nudge.title'),
+    title: renderI18nText('draw.onboarding.post_config_nudge.title'),
     trackingContextName: 'draw_onboarding',
     userFlagOnShow: 'seen_draw_post_config_nudge'
   });
@@ -7205,18 +7205,18 @@ function uv(e) {
   }, [d, complete, show, i]);
   let u = {
     type: 'button',
-    label: _$$tx('draw.onboarding.dismiss_button'),
+    label: renderI18nText('draw.onboarding.dismiss_button'),
     onClick: complete,
     ctaTrackingDescriptor: _$$c5.GOT_IT
   };
   return jsx(_$$rq, {
-    description: _$$tx('draw.onboarding.back_to_design.description'),
+    description: renderI18nText('draw.onboarding.back_to_design.description'),
     disableHighlight: !0,
     isShowing,
     onClose: complete,
     primaryCta: u,
     targetKey: Qj,
-    title: _$$tx('draw.onboarding.back_to_design.title'),
+    title: renderI18nText('draw.onboarding.back_to_design.title'),
     trackingContextName: 'draw_onboarding',
     userFlagOnShow: 'seen_draw_back_to_design_nudge'
   });
@@ -7246,17 +7246,17 @@ function uA() {
   let o = useMemo(() => [{
     mode: 'illustration',
     icon: a.illustration ? jsx(_$$k4, {}) : jsx(uc, {}),
-    label: _$$t('fullscreen.toolbar.toolbelt_mode_segmented_control.draw'),
+    label: getI18nString('fullscreen.toolbar.toolbelt_mode_segmented_control.draw'),
     onboardingKey: _$$aQ
   }, {
     mode: 'design',
     icon: a.design ? jsx(_$$k4, {}) : jsx(_$$P3, {}),
-    label: _$$t('fullscreen.toolbar.toolbelt_mode_segmented_control.design'),
+    label: getI18nString('fullscreen.toolbar.toolbelt_mode_segmented_control.design'),
     onboardingKey: Qj
   }, {
     mode: 'handoff',
     icon: a.handoff ? jsx(_$$k4, {}) : jsx(_$$A0, {}),
-    label: _$$t('fullscreen.toolbar.toolbelt_mode_segmented_control.dev_mode'),
+    label: getI18nString('fullscreen.toolbar.toolbelt_mode_segmented_control.dev_mode'),
     onboardingKey: _$$wA
   }], [a]);
   let d = _$$ub2();
@@ -7299,7 +7299,7 @@ function uO() {
   return jsx(_$$rq, {
     clickOutsideToHide: !0,
     description: jsx(Fragment, {
-      children: _$$tx('fullscreen.dev_mode_nudge_tooltip.description')
+      children: renderI18nText('fullscreen.dev_mode_nudge_tooltip.description')
     }),
     emphasized: !0,
     forceEditorTheme: 'dev-handoff',
@@ -7308,13 +7308,13 @@ function uO() {
     onClose: () => t(!1),
     shouldCenterArrow: EL.BEST_EFFORT,
     targetKey: r,
-    title: _$$tx('fullscreen.dev_mode_nudge_tooltip.title'),
+    title: renderI18nText('fullscreen.dev_mode_nudge_tooltip.title'),
     trackingContextName: 'Dev Mode Nudge'
   });
 }
 let uM = Fu('dev_mode_notified_of_approved_org_request');
 function uF() {
-  let e = md(uM);
+  let e = useAtomWithSubscription(uM);
   let t = useDispatch();
   let {
     show,
@@ -7339,7 +7339,7 @@ function uF() {
   });
   useEffect(() => s, [s]);
   return jsx(_$$rq, {
-    description: _$$tx('dev_handoff.paywall.approved.description'),
+    description: renderI18nText('dev_handoff.paywall.approved.description'),
     disableHighlight: !1,
     emphasized: !0,
     forceEditorTheme: 'dev-handoff',
@@ -7347,7 +7347,7 @@ function uF() {
     onClose: s,
     shouldCenterArrow: EL.BEST_EFFORT,
     targetKey: _$$oR,
-    title: _$$tx('dev_handoff.paywall.approved.title'),
+    title: renderI18nText('dev_handoff.paywall.approved.title'),
     trackingContextName: 'Dev Mode Approved Access Hint',
     trackingEnabled: a?.gracePeriod !== void 0,
     trackingProperties: a
@@ -7366,7 +7366,7 @@ function uj() {
   }();
   let t = function () {
     let e = _$$_I();
-    let t = md(fC).data;
+    let t = useAtomWithSubscription(fC).data;
     let r = MY();
     let n = _$$R5({
       preferOpenFilePlan: !0
@@ -7387,7 +7387,7 @@ function uj() {
   return getHasProvisionalAccess(FProductAccessType.DEV_MODE) || !(t || e) ? null : jsx(uF, {});
 }
 function uY() {
-  let e = _$$Y4(_$$t('auth.sign_up_for_figma'));
+  let e = _$$Y4(getI18nString('auth.sign_up_for_figma'));
   let [t, r] = useState(!1);
   let n = useDispatch();
   useEffect(() => {
@@ -7405,7 +7405,7 @@ function uY() {
       }),
       children: [jsx('div', {
         className: 'logged_out_banner--text--sgucR',
-        children: _$$t('auth.sign_up_to_comment_edit_inspect')
+        children: getI18nString('auth.sign_up_to_comment_edit_inspect')
       }), jsxs('div', {
         className: 'logged_out_banner--buttonGroup--YGRJ9',
         children: [jsx($n, {
@@ -7417,7 +7417,7 @@ function uY() {
               formState: qB.SIGN_UP
             });
           },
-          children: _$$t('auth.sign_up')
+          children: getI18nString('auth.sign_up')
         }), jsx(_$$H6, {
           onClick: () => {
             UK('GOOGLE_SSO_BUTTON');
@@ -7442,7 +7442,7 @@ function uY() {
             });
           },
           brandTextColor: !0,
-          children: _$$t('auth.continue')
+          children: getI18nString('auth.continue')
         })]
       }), jsx(_$$P4, {
         origin: DT.LOGGED_OUT_FILE,
@@ -7464,8 +7464,8 @@ function u8() {
   } = _$$b8({
     offset: 8
   });
-  let r = md(NU);
-  let [n, i] = fp(GI);
+  let r = useAtomWithSubscription(NU);
+  let [n, i] = useAtomValueAndSetter(GI);
   let a = n.dynamicStrokeSettings;
   let {
     currentStroke,
@@ -7563,15 +7563,15 @@ function ph(e) {
   } = e;
   let i = _$$rb();
   let a = z0();
-  let s = _$$m().ce_il_vem_offset_path && Yh(a, 'set-tool-offset-path');
-  let o = _$$m().ce_il_simplify && Yh(a, 'set-tool-simplify-vector');
+  let s = getFilteredFeatureFlags().ce_il_vem_offset_path && Yh(a, 'set-tool-offset-path');
+  let o = getFilteredFeatureFlags().ce_il_simplify && Yh(a, 'set-tool-simplify-vector');
   let d = Dc(debugState.getState().selectedView.editorType);
-  let c = _$$m().ce_il_vem_offset_path && jsx(_$$N8, {
+  let c = getFilteredFeatureFlags().ce_il_vem_offset_path && jsx(_$$N8, {
     activeToolId,
     disabled: !1,
     icon: jsx(_$$Z4, {}),
     onActivateTool: () => {
-      _$$az.trackDefinedEvent('illustration.offset_path', {
+      analyticsEventManager.trackDefinedEvent('illustration.offset_path', {
         action: 'select_tool',
         productType: d,
         nodeType: i
@@ -7585,13 +7585,13 @@ function ph(e) {
     secondary: !0,
     toolId: NLJ.OFFSET_PATH,
     tooltipShortcut: getShortcutTextForTool(NLJ.OFFSET_PATH),
-    tooltipText: _$$t('fullscreen_actions.set-tool-offset-path')
+    tooltipText: getI18nString('fullscreen_actions.set-tool-offset-path')
   });
-  let u = _$$m().ce_il_simplify && jsx(_$$N8, {
+  let u = getFilteredFeatureFlags().ce_il_simplify && jsx(_$$N8, {
     activeToolId,
     icon: jsx(u7, {}),
     onActivateTool: e => {
-      _$$az.trackDefinedEvent('illustration.simplify', {
+      analyticsEventManager.trackDefinedEvent('illustration.simplify', {
         action: 'select_tool',
         productType: d
       });
@@ -7604,7 +7604,7 @@ function ph(e) {
     secondary: !0,
     toolId: NLJ.SIMPLIFY_VECTOR,
     tooltipShortcut: getShortcutTextForTool(NLJ.SIMPLIFY_VECTOR),
-    tooltipText: _$$t('fullscreen_actions.set-tool-simplify-vector')
+    tooltipText: getI18nString('fullscreen_actions.set-tool-simplify-vector')
   });
   return s || o ? jsxs(_$$k6, {
     name: 'secondary_toolbelt_offset_path',
@@ -7701,7 +7701,7 @@ let pf = memo(e => {
 function pb() {
   let [e, t] = useState(3);
   let r = Dc(debugState.getState().selectedView.editorType);
-  let n = t => _$$az.trackDefinedEvent('illustration.simplify', {
+  let n = t => analyticsEventManager.trackDefinedEvent('illustration.simplify', {
     action: t,
     productType: r,
     threshold: e
@@ -7715,13 +7715,13 @@ function pb() {
     className: 'design_toolbelt_simplify_vector--container--OQ-MS',
     children: [jsx('div', {
       className: 'design_toolbelt_simplify_vector--title--5Vw22',
-      children: _$$t('fullscreen.toolbar.simplify_vector.title')
+      children: getI18nString('fullscreen.toolbar.simplify_vector.title')
     }), jsx(_$$X4, {
       extended: !0
     }), jsxs('div', {
       className: 'design_toolbelt_simplify_vector--sliderAndIconContainer--rxTBg',
       children: [jsx(pg, {
-        'data-tooltip': _$$t('fullscreen.toolbar.simplify_vector.tooltip.simpler'),
+        'data-tooltip': getI18nString('fullscreen.toolbar.simplify_vector.tooltip.simpler'),
         'data-tooltip-type': Ib.TEXT,
         'data-tooltip-show-above': !0
       }), jsx('div', {
@@ -7738,10 +7738,10 @@ function pb() {
             i(Number(e), t);
           },
           rangeAnchor: -2,
-          ariaLabel: _$$t('fullscreen.toolbar.simplify_vector.threshold')
+          ariaLabel: getI18nString('fullscreen.toolbar.simplify_vector.threshold')
         })
       }), jsx(pf, {
-        'data-tooltip': _$$t('fullscreen.toolbar.simplify_vector.tooltip.more_detailed'),
+        'data-tooltip': getI18nString('fullscreen.toolbar.simplify_vector.tooltip.more_detailed'),
         'data-tooltip-type': Ib.TEXT,
         'data-tooltip-show-above': !0
       })]
@@ -7753,13 +7753,13 @@ function pb() {
         n('cancel');
         Q8J?.cancel();
       },
-      children: _$$t('fullscreen.toolbar.simplify_vector.cancel')
+      children: getI18nString('fullscreen.toolbar.simplify_vector.cancel')
     }), jsx(_$$E6, {
       'onClick': () => {
         n('apply');
         Q8J?.apply();
       },
-      'aria-label': _$$t('fullscreen.toolbar.simplify_vector.apply'),
+      'aria-label': getI18nString('fullscreen.toolbar.simplify_vector.apply'),
       'className': 'design_toolbelt_simplify_vector--applyButton--4ECWk',
       'children': jsx(_$$g4, {})
     })]
@@ -7862,17 +7862,17 @@ function pP({
     };
   }(e);
   return n && (t || nodeIndex !== -1 && (!i || a)) ? t ? jsx(_$$a0, {
-    ariaLabel: _$$t('dev_handoff.toolbar.inspect_aria_label'),
+    ariaLabel: getI18nString('dev_handoff.toolbar.inspect_aria_label'),
     children: jsxs(_$$$4, {
       onMouseDown: () => {
         e('zoom-to-selection');
       },
-      tooltipText: _$$t('dev_handoff.recenter'),
+      tooltipText: getI18nString('dev_handoff.recenter'),
       children: [jsx(_$$S3, {}), jsxs('div', {
         className: 'secondary_toolbelt_for_dev_mode_inspect--reCenterLabelContainer--WaA1N',
         children: [jsx('span', {
           className: _$$Cg,
-          children: _$$tx('dev_handoff.recenter')
+          children: renderI18nText('dev_handoff.recenter')
         }), jsx('span', {
           style: {
             marginLeft: 'var(--spacer-1)',
@@ -7883,7 +7883,7 @@ function pP({
       })]
     })
   }) : jsx(_$$M6, {
-    ariaLabel: _$$t('dev_handoff.toolbar.inspect_aria_label'),
+    ariaLabel: getI18nString('dev_handoff.toolbar.inspect_aria_label'),
     currentFrameIndex: nodeIndex,
     frameCount: nodesForStepper.length,
     onNavigateBackward: handleStepBack,
@@ -7893,7 +7893,7 @@ function pP({
 }
 function pB() {
   let e = Dc(debugState.getState().selectedView.editorType);
-  let t = t => _$$az.trackDefinedEvent('illustration.offset_path', {
+  let t = t => analyticsEventManager.trackDefinedEvent('illustration.offset_path', {
     action: t,
     productType: e,
     offset: r,
@@ -7915,15 +7915,15 @@ function pB() {
       className: 'secondary_toolbelt_offset_path--container--XV3Iw',
       children: [jsx('div', {
         className: 'secondary_toolbelt_offset_path--title--q9C4J',
-        children: _$$t('fullscreen.toolbar.offset-path-slider-label')
+        children: getI18nString('fullscreen.toolbar.offset-path-slider-label')
       }), jsx(_$$X4, {
         extended: !0
       }), jsx('div', {
         className: 'secondary_toolbelt_offset_path--slider--veLPl',
         children: jsx(EX, {
-          ariaLabel: _$$t('fullscreen.toolbar.offset-path-slider-label'),
+          ariaLabel: getI18nString('fullscreen.toolbar.offset-path-slider-label'),
           bigStep: 5,
-          dataTooltip: _$$t('fullscreen.toolbar.offset-path-slider-tooltip'),
+          dataTooltip: getI18nString('fullscreen.toolbar.offset-path-slider-tooltip'),
           dataTooltipShowAbove: !0,
           min: i,
           onValueChange: (e, t) => {
@@ -7942,17 +7942,17 @@ function pB() {
         },
         value: n === tIU.MITER ? 'miter' : 'round',
         legend: jsx(_$$q2, {
-          children: _$$t('fullscreen.toolbar.offset-path-join-type-aria-label')
+          children: getI18nString('fullscreen.toolbar.offset-path-join-type-aria-label')
         }),
         children: [jsx(_$$c$, {
           'value': 'miter',
           'icon': jsx(_$$H7, {}),
-          'aria-label': _$$t('fullscreen.toolbar.offset-path-join-type-square'),
+          'aria-label': getI18nString('fullscreen.toolbar.offset-path-join-type-square'),
           'data-tooltip-show-above': !0
         }), jsx(_$$c$, {
           'value': 'round',
           'icon': jsx(_$$m4, {}),
-          'aria-label': _$$t('fullscreen.toolbar.offset-path-join-type-round'),
+          'aria-label': getI18nString('fullscreen.toolbar.offset-path-join-type-round'),
           'data-tooltip-show-above': !0
         })]
       }), jsx(_$$X4, {
@@ -7963,13 +7963,13 @@ function pB() {
           t('cancel');
           _SS?.cancel();
         },
-        children: _$$t('fullscreen.toolbar.offset-path-cancel-button')
+        children: getI18nString('fullscreen.toolbar.offset-path-cancel-button')
       }), jsx(_$$E6, {
         'onClick': () => {
           t('apply');
           glU?.triggerAction('set-tool-default', null);
         },
-        'aria-label': _$$t('fullscreen.toolbar.offset-path-apply-button'),
+        'aria-label': getI18nString('fullscreen.toolbar.offset-path-apply-button'),
         'className': 'secondary_toolbelt_offset_path--applyButton--HMal0',
         'children': jsx(_$$g4, {})
       })]
@@ -7990,13 +7990,13 @@ function pV(e) {
     setActiveSecondaryToolbeltId,
     closeSecondaryToolbelt
   } = _$$LH();
-  let u = md(Bu);
+  let u = useAtomWithSubscription(Bu);
   let p = _$$uh(s);
   let _ = vn();
   let h = _$$T2();
-  let g = _ && _$$m().ce_il_root && h === NLJ.VECTOR_PEN;
+  let g = _ && getFilteredFeatureFlags().ce_il_root && h === NLJ.VECTOR_PEN;
   return (useEffect(() => {
-    activeToolId !== NLJ.VECTOR_BEND && activeToolId !== NLJ.VECTOR_PAINT_BUCKET && activeToolId !== NLJ.VECTOR_LASSO && activeToolId !== NLJ.VECTOR_CUT && (activeToolId !== NLJ.SIMPLIFY_VECTOR && (a && editModeType === m1T.VECTOR || g) ? setActiveSecondaryToolbeltId(_$$R6.PenTool) : activeToolId === NLJ.IMAGE_OR_VIDEO ? setActiveSecondaryToolbeltId(_$$R6.ImageOrVideoTool) : s && activeToolId === NLJ.SELECT ? setActiveSecondaryToolbeltId(_$$R6.DevModeInspectTool) : h === NLJ.BRUSH && _ ? setActiveSecondaryToolbeltId(_$$R6.BrushTool) : h === NLJ.VECTOR_PENCIL && _ ? setActiveSecondaryToolbeltId(_$$R6.PencilTool) : _$$m().ce_il_vem_offset_path && activeToolId === NLJ.OFFSET_PATH ? setActiveSecondaryToolbeltId(_$$R6.OffsetPathTool) : h === NLJ.SIMPLIFY_VECTOR ? setActiveSecondaryToolbeltId(_$$R6.SimplifyVectorTool) : _ ? setActiveSecondaryToolbeltId(_$$R6.SecondaryToolbeltForSelectionActions) : setActiveSecondaryToolbeltId(null));
+    activeToolId !== NLJ.VECTOR_BEND && activeToolId !== NLJ.VECTOR_PAINT_BUCKET && activeToolId !== NLJ.VECTOR_LASSO && activeToolId !== NLJ.VECTOR_CUT && (activeToolId !== NLJ.SIMPLIFY_VECTOR && (a && editModeType === m1T.VECTOR || g) ? setActiveSecondaryToolbeltId(_$$R6.PenTool) : activeToolId === NLJ.IMAGE_OR_VIDEO ? setActiveSecondaryToolbeltId(_$$R6.ImageOrVideoTool) : s && activeToolId === NLJ.SELECT ? setActiveSecondaryToolbeltId(_$$R6.DevModeInspectTool) : h === NLJ.BRUSH && _ ? setActiveSecondaryToolbeltId(_$$R6.BrushTool) : h === NLJ.VECTOR_PENCIL && _ ? setActiveSecondaryToolbeltId(_$$R6.PencilTool) : getFilteredFeatureFlags().ce_il_vem_offset_path && activeToolId === NLJ.OFFSET_PATH ? setActiveSecondaryToolbeltId(_$$R6.OffsetPathTool) : h === NLJ.SIMPLIFY_VECTOR ? setActiveSecondaryToolbeltId(_$$R6.SimplifyVectorTool) : _ ? setActiveSecondaryToolbeltId(_$$R6.SecondaryToolbeltForSelectionActions) : setActiveSecondaryToolbeltId(null));
   }, [h, activeToolId, a, s, editModeType, setActiveSecondaryToolbeltId, g, _]), activeSecondaryToolbeltId === _$$R6.PenTool && (editModeType === m1T.VECTOR || g)) ? jsx(_$$A1, {
     activeToolId: h,
     activateTool,
@@ -8007,20 +8007,20 @@ function pV(e) {
   }) : activeSecondaryToolbeltId === _$$R6.ImageOrVideoTool ? jsx(_$$O3, {
     handleAction: $v
   }) : activeSecondaryToolbeltId === _$$R6.BrushTool && _ ? jsx(_$$a0, {
-    ariaLabel: _$$t('fullscreen.toolbar.aria-label-brush'),
+    ariaLabel: getI18nString('fullscreen.toolbar.aria-label-brush'),
     children: jsx(_$$c7, {
       atom: Vi,
       includeStrokePicker: !0,
       recordingKey: e.recordingKey
     })
   }) : activeSecondaryToolbeltId === _$$R6.PencilTool && _ ? jsx(_$$a0, {
-    ariaLabel: _$$t('fullscreen.toolbar.aria-label-pencil'),
+    ariaLabel: getI18nString('fullscreen.toolbar.aria-label-pencil'),
     children: jsx(_$$c7, {
       atom: GI,
       addon: getFeatureFlags().ce_il_pencil_stroke_presets && jsx(u8, {})
     })
   }) : activeSecondaryToolbeltId === _$$R6.SimplifyVectorTool ? jsx(_$$a0, {
-    ariaLabel: _$$t('fullscreen.toolbar.simplify_vector.aria-label'),
+    ariaLabel: getI18nString('fullscreen.toolbar.simplify_vector.aria-label'),
     children: jsx(pb, {})
   }) : _ && !u && activeSecondaryToolbeltId === _$$R6.SecondaryToolbeltForSelectionActions ? jsx(p_, {
     activeToolId,
@@ -8033,7 +8033,7 @@ function pH() {
   return jsx(_$$x6, {
     children: jsx(_$$m3, {
       'role': 'region',
-      'aria-label': _$$t('fullscreen_actions.toolbar_label'),
+      'aria-label': getI18nString('fullscreen_actions.toolbar_label'),
       'children': jsx(pz, {})
     })
   });
@@ -8053,7 +8053,7 @@ function pz() {
     return e || t || r;
   }();
   let s = D_(n);
-  let o = n === _$$nT.DevHandoff;
+  let o = n === FEditorType.DevHandoff;
   let d = q8();
   let c = _$$e11();
   let {
@@ -8077,10 +8077,10 @@ function pz() {
   return (useEffect(() => {
     if (s) {
       close();
-      activeToolId === NLJ.COMMENTS || activeToolId === NLJ.SELECT || (activeToolId === NLJ.MEASURE || activeToolId === NLJ.ANNOTATE ? n === _$$nT.DevHandoff || n === _$$nT.Design : activeToolId === NLJ.BRUSH ? n === _$$nT.Illustration : n === _$$nT.Design || n === _$$nT.Illustration) || activateTool(NLJ.SELECT);
+      activeToolId === NLJ.COMMENTS || activeToolId === NLJ.SELECT || (activeToolId === NLJ.MEASURE || activeToolId === NLJ.ANNOTATE ? n === FEditorType.DevHandoff || n === FEditorType.Design : activeToolId === NLJ.BRUSH ? n === FEditorType.Illustration : n === FEditorType.Design || n === FEditorType.Illustration) || activateTool(NLJ.SELECT);
       h?.showBanner && (g(!0), setTimeout(() => g(!1), 1e3));
     }
-  }, [s, n, activateTool, activeToolId, close, g, h?.showBanner]), i || a || _$$m().ce_il_root && c === _$$n5.LOADING) ? jsx(Fragment, {}) : jsx(fu, {
+  }, [s, n, activateTool, activeToolId, close, g, h?.showBanner]), i || a || getFilteredFeatureFlags().ce_il_root && c === _$$n5.LOADING) ? jsx(Fragment, {}) : jsx(fu, {
     name: _$$e9.EDITOR_TOOLBELT,
     children: jsxs(XS, {
       'data-testid': 'design-toolbelt-wrapper',
@@ -8094,7 +8094,7 @@ function pz() {
             textureModeAccess: c
           })
         }), !d && jsxs(Fragment, {
-          children: [_$$m().ce_il_root && c === _$$n5.HAS_ACCESS ? jsx(uA, {}) : jsx(ui, {
+          children: [getFilteredFeatureFlags().ce_il_root && c === _$$n5.HAS_ACCESS ? jsx(uA, {}) : jsx(ui, {
             setDelayViewOnlyBanner: N
           }), !o && jsxs(_$$p2, {
             children: [jsx(uj, {}), jsx(uO, {})]
@@ -8148,7 +8148,7 @@ function pY() {
   let n = UX();
   let i = xn();
   let a = r && !(_$$T() && getFeatureFlags().dt_vscode_ready_for_dev) ? n : 0;
-  let s = md(_$$P2);
+  let s = useAtomWithSubscription(_$$P2);
   return jsx('div', {
     className: j()(_$$z4, {
       [_$$D6]: t
@@ -8164,7 +8164,7 @@ function p$({
   children: e
 }) {
   let t = q5();
-  let r = _$$R(e => e.comments);
+  let r = selectWithShallowEqual(e => e.comments);
   let {
     anchorPositions,
     boundingBoxPositions,
@@ -8342,7 +8342,7 @@ class _a extends _$$o6 {
             children: jsx(_$$E6, {
               onClick: this.onDismiss,
               className: _r,
-              children: _$$tx('base_notifications.dismiss')
+              children: renderI18nText('base_notifications.dismiss')
             })
           })]
         })]
@@ -8388,17 +8388,17 @@ class _p extends _a {
         case _$$_3.AUTOSAVE_CHANGES_RESTORED:
           return null;
         case _$$_3.BRANCHING_SOURCE_FILE_UPDATED:
-          return _$$t('collaboration.branching.update');
+          return getI18nString('collaboration.branching.update');
         case _$$_3.MOVE_COMPONENTS_PROMPT:
-          return _$$t('design_systems.updates.publish');
+          return getI18nString('design_systems.updates.publish');
         case _$$_3.BRANCHING_OTHER_USER_MERGING:
           return null;
         case _$$_3.SEE_WHATS_CHANGED:
-          return _$$t('collaboration.feedback.compare');
+          return getI18nString('collaboration.feedback.compare');
         case _$$_3.CLIPBOARD_DATA_AVAILABLE:
-          return _$$t('fullscreen_actions.paste');
+          return getI18nString('fullscreen_actions.paste');
         case _$$_3.SUBSCRIBED_TO_COMMENT_NOTIFICATIONS:
-          return _$$t('comments.turn_on');
+          return getI18nString('comments.turn_on');
         default:
           throwTypeError(t);
       }
@@ -8490,10 +8490,10 @@ function _m(e) {
   let r = _$$D4();
   let n = W6();
   let i = useDispatch();
-  let a = md(_$$D7);
+  let a = useAtomWithSubscription(_$$D7);
   let s = t[0]?.type ?? null;
   return (useEffect(() => {
-    a && s !== null && _$$sx('curator_collision', {
+    a && s !== null && trackEventAnalytics('curator_collision', {
       blocking_overlay_id: a,
       blocked_notif_type: _$$_3[s]
     });
@@ -8522,7 +8522,7 @@ function _I() {
       }, 1e3));
     }();
   });
-  _$$sx('browser_locked_account_screen_viewed', {
+  trackEventAnalytics('browser_locked_account_screen_viewed', {
     user: t?.id,
     org: i
   });
@@ -8545,7 +8545,7 @@ function _I() {
       })
     }), jsx('div', {
       className: 'locked_account_view--title--zZnPc',
-      children: _$$tx('locked_org.title')
+      children: renderI18nText('locked_org.title')
     }), jsx('div', {
       className: 'locked_account_view--description--FgKxX',
       children: e()
@@ -8562,9 +8562,9 @@ function _I() {
         className: 'locked_account_view--contentContainer--pfiqF',
         children: s.length > 0 ? jsx(_$$a1, {
           dispatch: e,
-          header: o(() => a ? _$$tx('locked_org.description_no_other_accounts', {
+          header: o(() => a ? renderI18nText('locked_org.description_no_other_accounts', {
             orgName: a.name
-          }) : _$$tx('locked_org.description_no_other_accounts_no_org')),
+          }) : renderI18nText('locked_org.description_no_other_accounts_no_org')),
           users: s,
           onUserSelect: t => {
             e(My({
@@ -8572,26 +8572,26 @@ function _I() {
             }));
           },
           onChangeAccount: d,
-          footer: _$$tx('locked_org.footer', {
+          footer: renderI18nText('locked_org.footer', {
             addAnotherLink: jsx(_$$u3, {
               'defaultClass': _b,
               'onClick': d,
               'data-testid': 'add-account-button',
-              'children': _$$tx('locked_org.footer_button')
+              'children': renderI18nText('locked_org.footer_button')
             })
           })
         }) : jsxs('div', {
           className: 'locked_account_view--loginAccount--VEvAN',
-          children: [o(() => a ? _$$tx('locked_org.description', {
+          children: [o(() => a ? renderI18nText('locked_org.description', {
             orgName: a.name
-          }) : _$$tx('locked_org.description_no_org')), jsx('div', {
+          }) : renderI18nText('locked_org.description_no_org')), jsx('div', {
             className: 'locked_account_view--addAccountText--zFHaY',
-            children: _$$tx('locked_org.footer_no_other_accounts', {
+            children: renderI18nText('locked_org.footer_no_other_accounts', {
               addAnotherLink: jsx(_$$u3, {
                 'defaultClass': _b,
                 'onClick': d,
                 'data-testid': 'add-account-button',
-                'children': _$$tx('locked_org.footer_no_other_accounts_button')
+                'children': renderI18nText('locked_org.footer_no_other_accounts_button')
               })
             })
           })]
@@ -8605,40 +8605,40 @@ function _S({
   fileKey: t
 }) {
   switch (_$$eq(t), yB(t), e) {
-    case _$$nT.Cooper:
+    case FEditorType.Cooper:
       return jsx(n0, {
         fallback: H4.NONE
       });
-    case _$$nT.Design:
+    case FEditorType.Design:
       return jsx(p$, {
         children: jsx(_$$a5, {
           fallback: H4.NONE
         })
       });
-    case _$$nT.Illustration:
+    case FEditorType.Illustration:
       return jsx(p$, {
-        children: _$$m().ce_il_root ? jsx(_$$C, {
+        children: getFilteredFeatureFlags().ce_il_root ? jsx(_$$C, {
           fallback: H4.NONE
         }) : jsx(_$$a5, {
           fallback: H4.NONE
         })
       });
-    case _$$nT.DevHandoff:
+    case FEditorType.DevHandoff:
       return jsx(p$, {
         children: jsx(_$$b2, {
           fallback: H4.NONE
         })
       });
-    case _$$nT.Whiteboard:
+    case FEditorType.Whiteboard:
       return jsx(Ws, {
         fallback: H4.NONE
       });
-    case _$$nT.Figmake:
-    case _$$nT.Sites:
+    case FEditorType.Figmake:
+    case FEditorType.Sites:
       return jsx(sf, {
         fallback: H4.NONE
       });
-    case _$$nT.Slides:
+    case FEditorType.Slides:
       return jsx(sE, {
         fallback: H4.NONE
       });
@@ -8649,7 +8649,7 @@ function _v({
   fileKey: t
 }) {
   let r = _$$o(_$$nt.interopFiles);
-  let n = md(V1);
+  let n = useAtomWithSubscription(V1);
   let i = Xr(XU);
   let a = jsx(_$$e7, {
     condition: r,
@@ -8686,7 +8686,7 @@ function _v({
     }),
     children: jsxs(_$$g2, {
       fallback: jsx(xZ, {}),
-      children: [(yY(e) || e === _$$nT.DevHandoff) && jsx(_A, {}), jsx(_S, {
+      children: [(isDesignOrIllustration(e) || e === FEditorType.DevHandoff) && jsx(_A, {}), jsx(_S, {
         editorType: e,
         fileKey: t
       })]
@@ -8700,13 +8700,13 @@ function _v({
   });
 }
 function _A() {
-  fp(Fj);
-  fp(_$$w3);
-  fp(go);
+  useAtomValueAndSetter(Fj);
+  useAtomValueAndSetter(_$$w3);
+  useAtomValueAndSetter(go);
   return null;
 }
 (e, t) => {
-  $D(_$$e.FPL, e, {
+  reportError(_$$e.FPL, e, {
     extra: t
   });
 };
@@ -8743,7 +8743,7 @@ let _x = memo(() => {
 });
 function _N(e) {
   let t = _6();
-  let r = md(_$$h3);
+  let r = useAtomWithSubscription(_$$h3);
   if (t.view === 'fullscreen' && r !== 'ok') {
     let {
       type,
@@ -8788,8 +8788,8 @@ let _C = memo(() => {
               shouldReload: function (e, t) {
                 let r = getInitialOptions().user_data?.id;
                 if (r && e.target_user_id === r) {
-                  let n = _$$pp2();
-                  if (_$$sx('lg_realtime_client_reload', {
+                  let n = getAnonymousId();
+                  if (trackEventAnalytics('lg_realtime_client_reload', {
                     userId: r,
                     msgTargetUserId: e.target_user_id,
                     analyticsAnonymousId: n,
@@ -8862,23 +8862,23 @@ let _C = memo(() => {
     }, [r, e]);
   })();
   let s = zN({
-    back: _$$t('common.back'),
-    close: _$$t('common.close'),
-    danger: _$$t('common.danger'),
-    dismiss: _$$t('common.dismiss'),
-    error: _$$t('common.error'),
-    hasChecked: _$$t('common.hasChecked'),
-    help: _$$t('common.help'),
-    loading: _$$t('common.loading'),
-    mixed: _$$t('common.mixed'),
-    moveRowDown: _$$t('common.moveDown'),
-    moveRowToBottom: _$$t('common.moveToBottom'),
-    moveRowToTop: _$$t('common.moveToTop'),
-    moveRowUp: _$$t('common.moveUp'),
-    remainingCharacters: _$$t('common.remainingCharacters'),
-    select: _$$t('common.select'),
-    success: _$$t('common.success'),
-    warning: _$$t('common.warning')
+    back: getI18nString('common.back'),
+    close: getI18nString('common.close'),
+    danger: getI18nString('common.danger'),
+    dismiss: getI18nString('common.dismiss'),
+    error: getI18nString('common.error'),
+    hasChecked: getI18nString('common.hasChecked'),
+    help: getI18nString('common.help'),
+    loading: getI18nString('common.loading'),
+    mixed: getI18nString('common.mixed'),
+    moveRowDown: getI18nString('common.moveDown'),
+    moveRowToBottom: getI18nString('common.moveToBottom'),
+    moveRowToTop: getI18nString('common.moveToTop'),
+    moveRowUp: getI18nString('common.moveUp'),
+    remainingCharacters: getI18nString('common.remainingCharacters'),
+    select: getI18nString('common.select'),
+    success: getI18nString('common.success'),
+    warning: getI18nString('common.warning')
   });
   return _$$d8() ? jsx(_$$O, {}) : _$$pK(r) ? jsx(sN, {
     hubFileId: r.hubFileId
@@ -8915,7 +8915,7 @@ let _C = memo(() => {
                     blockedUILoadingIndicator: i,
                     dispatch: e
                   }), jsx(hG, {
-                    enableTracking: r.view === 'fullscreen' && yY(r.editorType)
+                    enableTracking: r.view === 'fullscreen' && isDesignOrIllustration(r.editorType)
                   }), jsx(o3, {}), jsx(mv, {}), n && null, jsx(_$$d6, {
                     children: jsx(Ji, {})
                   }), jsx(nV, {}), jsx(Cj, {})]
@@ -8943,7 +8943,7 @@ _$$v.setDelegate(new Bf());
       id: i.id,
       value: i.value,
       initialPath: t,
-      normalized_current_path: qR(Ay.location.pathname),
+      normalized_current_path: normalizePathnameStrict(Ay.location.pathname),
       bundle: e,
       used_codesplitting: !0,
       bundle_streaming: r,
@@ -8951,7 +8951,7 @@ _$$v.setDelegate(new Bf());
       statsig_client_bootstrap: !0,
       statsig_has_bootstrap_values: !!getInitialOptions().statsig_bootstrap_values
     };
-    _$$sx('Web Vital Metrics', a, {
+    trackEventAnalytics('Web Vital Metrics', a, {
       forwardToDatadog: !0,
       sendAsBeacon: !0
     });
@@ -8966,14 +8966,14 @@ _$$v.setDelegate(new Bf());
       }(),
       value: i.timeStamp,
       initialPath: t,
-      normalized_current_path: qR(Ay.location.pathname),
+      normalized_current_path: normalizePathnameStrict(Ay.location.pathname),
       id: _$$g(),
       bundle: e,
       used_codesplitting: !0,
       bundle_streaming: r,
       resized_images: n
     };
-    _$$sx('Web Vital Metrics', s, {
+    trackEventAnalytics('Web Vital Metrics', s, {
       forwardToDatadog: !0,
       sendAsBeacon: !0
     });
@@ -9011,7 +9011,7 @@ window.addEventListener('load', () => {
     uncompressed: 0
   });
   console.log(`Loaded ${t.length} scripts (${n.compressed}b), ${a.length} from cache (${s.compressed}b)`);
-  _$$sx('scripts_loaded', {
+  trackEventAnalytics('scripts_loaded', {
     entry: i,
     totalScripts: t.length,
     totalSizeCompressed: n.compressed,
@@ -9030,7 +9030,7 @@ function _L() {
   let e = z3();
   let t = _$$s();
   yw();
-  e !== 'prototype' || PN() || _R || ($D(_$$e.PROTOTYPING, new Error('Loading PrototypeAppView as part of AppView')), _R = !0);
+  e !== 'prototype' || isInteractionOrEvalMode() || _R || (reportError(_$$e.PROTOTYPING, new Error('Loading PrototypeAppView as part of AppView')), _R = !0);
   return jsx(_$$uW.Provider, {
     value: t,
     children: e === 'prototype' ? jsx(nu, {}) : e === 'feed' ? jsx(eu, {}) : jsx(_C, {})
@@ -9147,7 +9147,7 @@ t(async () => {
   } else {
     xK.updateAppEntryTimeEvents(d, _k);
     let e = ns;
-    if (_$$nl()) {
+    if (isInteractionPathCheck()) {
       let t = parseQuerySimple(Ay.location.search);
       let r = {
         prototypeApp: void 0,

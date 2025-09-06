@@ -4,9 +4,9 @@ import { useDispatch } from "../vendor/514228";
 import { N as _$$N } from "../905/720559";
 import { RR } from "../figma_app/338442";
 import { rXF } from "../figma_app/763686";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { rf, Pt } from "../figma_app/806412";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Y5 } from "../figma_app/455680";
 import { hS } from "../905/216495";
 import { kl, lJ } from "../905/275640";
@@ -43,7 +43,7 @@ import { o as _$$o } from "../905/821217";
 import { bL, mc } from "../figma_app/860955";
 import { getFeatureFlags } from "../905/601108";
 import { generateRecordingKey } from "../figma_app/878298";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { SU } from "../figma_app/451499";
 import { dG } from "../figma_app/753501";
 import { Um } from "../905/848862";
@@ -60,7 +60,7 @@ function K(e) {
   let {
     isDefReferencedBySelection,
     visibilityIsBoundToComponentProp
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     isDefReferencedBySelection: !!t(e, RR.VISIBLE),
     visibilityIsBoundToComponentProp: B(e, Sh(e), RR.VISIBLE)
   }));
@@ -82,12 +82,12 @@ function K(e) {
       ref: o,
       recordingKey: Pt(e, "visibilityVariableBindingControl"),
       "aria-expanded": p,
-      "aria-label": _$$t("proto.apply_assignment_property"),
+      "aria-label": getI18nString("proto.apply_assignment_property"),
       disabled: x,
       htmlAttributes: {
         "data-testid": "visibility-variable-binding-control",
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("proto.apply_assignment_property"),
+        "data-tooltip": getI18nString("proto.apply_assignment_property"),
         onMouseDown: b
       },
       children: jsx(_$$u, {})
@@ -104,11 +104,11 @@ function eo(e) {
       props: t
     }) => jsx(_$$K2, {
       recordingKey: generateRecordingKey(t.recordingKey, "blendMode"),
-      "aria-label": _$$t("properties.dropdown.apply_blend_mode"),
+      "aria-label": getI18nString("properties.dropdown.apply_blend_mode"),
       onClick: e,
       actionOnPointerDown: !0,
       htmlAttributes: {
-        "data-tooltip": _$$t("properties.dropdown.apply_blend_mode"),
+        "data-tooltip": getI18nString("properties.dropdown.apply_blend_mode"),
         "data-tooltip-type": Ib.TEXT
       },
       children: jsx(MK, {
@@ -145,12 +145,12 @@ function ec({
     }, t);
   });
   return p && o?.type !== t || o?.type === _$$J(e) ? jsx(_$$d, {
-    "aria-label": _$$t("properties.dropdown.remove_blend_mode"),
+    "aria-label": getI18nString("properties.dropdown.remove_blend_mode"),
     "aria-expanded": !0,
     actionOnPointerDown: !0,
     onClick: () => l("PASS_THROUGH"),
     htmlAttributes: {
-      "data-tooltip": _$$t("properties.dropdown.remove_blend_mode"),
+      "data-tooltip": getI18nString("properties.dropdown.remove_blend_mode"),
       "data-tooltip-type": Ib.TEXT
     },
     children: jsx(MK, {
@@ -158,7 +158,7 @@ function ec({
       defaultBlendMode: "PASS_THROUGH"
     })
   }) : jsx(eo, {
-    ariaLabel: _$$t("properties.dropdown.blend_mode"),
+    ariaLabel: getI18nString("properties.dropdown.blend_mode"),
     className: "selection_blend_mode_icon_button--container--Wv9Hd",
     disableSelectFocus: !0,
     dispatch: a,
@@ -173,7 +173,7 @@ function ec({
     onMouseDown: dG,
     property: n,
     recordingKey: Pt(s, "blendMode"),
-    willShowDropdown: () => (sx("editor-blend-mode-dropdown-show"), Promise.resolve()),
+    willShowDropdown: () => (trackEventAnalytics("editor-blend-mode-dropdown-show"), Promise.resolve()),
     children: h
   });
 }
@@ -205,13 +205,13 @@ function eh({
       manager,
       children: [jsx(_$$d, {
         recordingKey: e,
-        "aria-label": _$$t("properties.dropdown.apply_blend_mode"),
+        "aria-label": getI18nString("properties.dropdown.apply_blend_mode"),
         htmlAttributes: {
-          "data-tooltip": _$$t("properties.dropdown.apply_blend_mode"),
+          "data-tooltip": getI18nString("properties.dropdown.apply_blend_mode"),
           "data-tooltip-type": Ib.TEXT
         },
         onClick: e => {
-          sx("editor-blend-mode-dropdown-show");
+          trackEventAnalytics("editor-blend-mode-dropdown-show");
           onClick(e);
         },
         ...p,
@@ -230,9 +230,9 @@ function eh({
       })]
     })
   }) : jsx(_$$K2, {
-    "aria-label": _$$t("properties.dropdown.remove_blend_mode"),
+    "aria-label": getI18nString("properties.dropdown.remove_blend_mode"),
     htmlAttributes: {
-      "data-tooltip": _$$t("properties.dropdown.remove_blend_mode"),
+      "data-tooltip": getI18nString("properties.dropdown.remove_blend_mode"),
       "data-tooltip-type": Ib.TEXT
     },
     onClick: () => n(ep),
@@ -254,7 +254,7 @@ export function $$ey4() {
   let {
     isDefReferencedBySelection,
     selectedGUIDs
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     isDefReferencedBySelection: !!i(e, RR.VISIBLE),
     selectedGUIDs: Sh(e)
   }));
@@ -323,7 +323,7 @@ let $$e_0 = memo(function (e) {
   return jsxs(Zk, {
     "data-testid": "appearance-panel",
     children: [jsxs(Wv, {
-      titleTx: tx("fullscreen.appearance_panel.appearance"),
+      titleTx: renderI18nText("fullscreen.appearance_panel.appearance"),
       children: [!visibilityIsBoundToVariable && !shouldShowVisibilityBindingIcon && jsx(yQ, {
         nodeField: RR.VISIBLE,
         defaultValue: visible,
@@ -372,10 +372,10 @@ let $$e_0 = memo(function (e) {
         disabled: !cornerRadiusEnabled
       }),
       icon: cornerControlIconButton,
-      leftLabel: tx("fullscreen.properties_panel.section_appearance.label_opacity"),
-      rightLabel: tx("fullscreen.properties_panel.transform_panel.corner_radius")
+      leftLabel: renderI18nText("fullscreen.properties_panel.section_appearance.label_opacity"),
+      rightLabel: renderI18nText("fullscreen.properties_panel.transform_panel.corner_radius")
     }), $ && jsx(DE, {
-      label: tx("fullscreen.properties_panel.section_vector.label_mirroring"),
+      label: renderI18nText("fullscreen.properties_panel.section_vector.label_mirroring"),
       input: $,
       icon: null
     }), independentCornerControlEnabled && jsx(_$$j, {

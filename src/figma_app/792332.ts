@@ -1,5 +1,5 @@
 import { hMR } from "../figma_app/763686";
-import { ED } from "../905/714362";
+import { logDebug } from "../905/714362";
 import { K } from "../905/63322";
 import { o_, aW } from "../figma_app/527873";
 let o = 64 * o_;
@@ -17,7 +17,7 @@ function l() {
 }
 function d() {
   let e = l();
-  e && ED("JS memory", "JS memory usage growth", e);
+  e && logDebug("JS memory", "JS memory usage growth", e);
 }
 let c = !1;
 let u = null;

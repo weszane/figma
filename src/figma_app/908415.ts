@@ -1,5 +1,5 @@
 import { s as _$$s } from "../905/573154";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { to } from "../905/156213";
 import { N } from "../905/696711";
@@ -22,7 +22,7 @@ let $$u1 = nF((e, {
   u.then(() => {
     if (s) {
       e.dispatch(F.enqueue({
-        message: _$$t("google_device_try_file_modal.resent_email.visual_bell")
+        message: getI18nString("google_device_try_file_modal.resent_email.visual_bell")
       }));
       return;
     }
@@ -30,11 +30,11 @@ let $$u1 = nF((e, {
   }).catch(t => {
     if (t.data?.message === "Hit Claim Email Job timeout lock") {
       e.dispatch(F.enqueue({
-        message: _$$t("google_device_try_file_modal.resent_email.email_resent")
+        message: getI18nString("google_device_try_file_modal.resent_email.email_resent")
       }));
       return;
     }
-    e.dispatch(_$$s.error(_$$t("google_device_try_file_modal.enter_email.failed_to_send")));
+    e.dispatch(_$$s.error(getI18nString("google_device_try_file_modal.enter_email.failed_to_send")));
   });
 });
 let $$p0 = nF((e, {
@@ -52,8 +52,8 @@ let $$p0 = nF((e, {
       data: {}
     }));
   }).catch(t => {
-    e.dispatch(_$$s.error(_$$t("google_device_try_file.save_board.generic_error")));
+    e.dispatch(_$$s.error(getI18nString("google_device_try_file.save_board.generic_error")));
   });
 });
 export const D = $$p0;
-export const f = $$u1; 
+export const f = $$u1;

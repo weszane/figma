@@ -7,7 +7,7 @@ import { glU, rXF } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { dI } from "../905/871411";
 import u from "classnames";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Oe } from "../figma_app/933328";
 import { bA, _q } from "../905/668764";
 import { h7 } from "../figma_app/975811";
@@ -84,7 +84,7 @@ export function $$N0({
         [ZC]: !0,
         [kL]: U
       }) : void 0,
-      "data-tooltip": _$$P(_$$t("fullscreen.type_panel.letter_spacing")),
+      "data-tooltip": _$$P(getI18nString("fullscreen.type_panel.letter_spacing")),
       "data-tooltip-type": Ib.TEXT,
       disabled: t,
       dispatch: L,

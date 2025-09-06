@@ -1,8 +1,8 @@
 import { debounce } from "../905/915765";
 import { zIx, zkO, z7j } from "../figma_app/763686";
 import { AD } from "../905/871411";
-import { zl } from "../figma_app/27355";
-import { sx } from "../905/449184";
+import { atomStoreManager } from "../figma_app/27355";
+import { trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
 import { XHR } from "../905/910117";
 import { eN } from "../figma_app/401061";
@@ -13,7 +13,7 @@ import { wz } from "../figma_app/879363";
 import { j7, sf } from "../905/929976";
 import { WJ, AM, XX } from "../figma_app/8833";
 import { pY } from "../figma_app/415217";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { T } from "../905/858738";
 export let $$b2 = {
   getIsExtension: () => T(),
@@ -155,10 +155,10 @@ export function $$I1() {
     enterDevModeFocusView(e, t) {
       if (!e || e === AD) return;
       let i = debugState.getState().selectedView;
-      zl.set(wz, "dev_mode_canvas_ii");
+      atomStoreManager.set(wz, "dev_mode_canvas_ii");
       let n = {
         ...i,
-        editorType: nT.DevHandoff,
+        editorType: FEditorType.DevHandoff,
         focusViewBackNavigation: {
           toEditorType: i.editorType,
           toOverview: !1
@@ -167,7 +167,7 @@ export function $$I1() {
         overviewBackButtonTargetNodeId: t
       };
       debugState.dispatch(sf(n));
-      sx("Dev Mode II Focus Entry Clicked");
+      trackEventAnalytics("Dev Mode II Focus Entry Clicked");
     },
     exitDevModeFocusOrOverview() {
       let e = {

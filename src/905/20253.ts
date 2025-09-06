@@ -6,7 +6,7 @@ import { vo, nB } from "../figma_app/272243";
 import { buildUploadUrl } from "../figma_app/169182";
 import { k } from "../905/585996";
 import { lR } from "../figma_app/617427";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { Ce } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { Ju } from "../905/102752";
@@ -38,7 +38,7 @@ export let $$f0 = Ju(function (e) {
             className: FS,
             children: jsxs("h1", {
               className: DX,
-              children: [tx("google_device_try_file_modal.claim_success.header"), " "]
+              children: [renderI18nText("google_device_try_file_modal.claim_success.header"), " "]
             })
           }), jsx(k, {
             multiple: 1
@@ -46,7 +46,7 @@ export let $$f0 = Ju(function (e) {
             className: FS,
             children: jsx("div", {
               className: Kc,
-              children: tx("google_device_try_file_modal.claim_success.description")
+              children: renderI18nText("google_device_try_file_modal.claim_success.description")
             })
           }), jsx(k, {
             multiple: 3
@@ -56,7 +56,7 @@ export let $$f0 = Ju(function (e) {
               e.stopPropagation();
               t(Ce());
             },
-            children: tx("google_device_try_file_modal.claim_success.button")
+            children: renderI18nText("google_device_try_file_modal.claim_success.button")
           })]
         })
       })

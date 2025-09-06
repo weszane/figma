@@ -10,7 +10,7 @@ import { N as _$$N } from "../905/438674";
 import { X } from "../905/128376";
 import { hp } from "../vendor/565136";
 import { R as _$$R } from "../905/441305";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { to } from "../905/156213";
 import { Yu } from "../905/355291";
 import { yJ } from "../figma_app/24841";
@@ -54,17 +54,17 @@ let $$C0 = Ju(function (e) {
     children: pS(s) ? s.two_factor_secret_loaded ? s.two_factor_app_enabled ? jsx(k, {}) : jsx(N, {}) : jsx(R, {}) : jsx(_$$_, {
       twoFactorAuth: d,
       fplModal: !0,
-      title: tx("auth.two-factor-setup.set_up_two_factor_authentication")
+      title: renderI18nText("auth.two-factor-setup.set_up_two_factor_authentication")
     })
   }) : jsx(_$$R, {
-    title: _$$t("auth.two-factor-setup.a_verified_email_is_required"),
+    title: getI18nString("auth.two-factor-setup.a_verified_email_is_required"),
     onConfirm: () => {
       r(qC());
     },
-    confirmText: _$$t("auth.two-factor-setup.resend_verification_email"),
+    confirmText: getI18nString("auth.two-factor-setup.resend_verification_email"),
     ...e,
     children: jsx(Fragment, {
-      children: _$$t("auth.two-factor-setup.verify-before-enabling")
+      children: getI18nString("auth.two-factor-setup.verify-before-enabling")
     })
   }) : null;
 });
@@ -80,16 +80,16 @@ function k() {
   return jsxs(vo, {
     children: [jsx(Y9, {
       children: jsx(hE, {
-        children: tx("auth.two-factor-setup.two_factor_authentication_enabled")
+        children: renderI18nText("auth.two-factor-setup.two_factor_authentication_enabled")
       })
     }), jsx(nB, {
-      children: tx("auth.two-factor-setup.continue-to-recovery-code-setup")
+      children: renderI18nText("auth.two-factor-setup.continue-to-recovery-code-setup")
     }), jsx(wi, {
       children: jsxs(jk, {
         children: [jsx($n, {
           variant: "secondary",
           onClick: t,
-          children: tx("auth.two-factor-setup.close")
+          children: renderI18nText("auth.two-factor-setup.close")
         }), jsx($n, {
           variant: "primary",
           onClick: () => {
@@ -99,7 +99,7 @@ function k() {
               showModalsBeneath: !0
             }));
           },
-          children: tx("auth.two-factor-setup.continue_to_recovery_codes")
+          children: renderI18nText("auth.two-factor-setup.continue_to_recovery_codes")
         })]
       })
     })]
@@ -113,28 +113,28 @@ function R() {
   return t ? jsxs(vo, {
     children: [jsx(Y9, {
       children: jsx(hE, {
-        children: tx("auth.two-factor-setup.download_mobile_app")
+        children: renderI18nText("auth.two-factor-setup.download_mobile_app")
       })
     }), jsxs(nB, {
-      children: [tx("auth.two-factor-setup.authenticator-app-needed"), jsxs("ul", {
+      children: [renderI18nText("auth.two-factor-setup.authenticator-app-needed"), jsxs("ul", {
         className: p_,
         children: [jsx("li", {
           children: jsx(_$$N, {
             newTab: !0,
             href: "https://support.google.com/accounts/answer/1066447",
-            children: tx("auth.two-factor-setup.google_authenticator")
+            children: renderI18nText("auth.two-factor-setup.google_authenticator")
           })
         }), jsx("li", {
           children: jsx(_$$N, {
             newTab: !0,
             href: "https://duo.com/product/trusted-users/two-factor-authentication/duo-mobile",
-            children: tx("auth.two-factor-setup.duo_mobile")
+            children: renderI18nText("auth.two-factor-setup.duo_mobile")
           })
         }), jsx("li", {
           children: jsx(_$$N, {
             newTab: !0,
             href: "https://support.microsoft.com/en-us/account-billing/download-microsoft-authenticator-351498fc-850a-45da-b7b6-27e523b8702a",
-            children: tx("auth.two-factor-setup.msft")
+            children: renderI18nText("auth.two-factor-setup.msft")
           })
         })]
       })]
@@ -147,13 +147,13 @@ function R() {
             r();
             e(Yu());
           },
-          children: tx("auth.two-factor-setup.send_me_an_sms_instead")
+          children: renderI18nText("auth.two-factor-setup.send_me_an_sms_instead")
         }), jsxs("div", {
           className: G6,
           children: [jsx($n, {
             variant: "secondary",
             onClick: r,
-            children: tx("auth.two-factor-setup.cancel")
+            children: renderI18nText("auth.two-factor-setup.cancel")
           }), jsx($n, {
             onClick: () => {
               pS(t) && e(lJ({
@@ -163,7 +163,7 @@ function R() {
             },
             variant: "primary",
             disabled: i.loading,
-            children: tx("auth.two-factor-setup.continue")
+            children: renderI18nText("auth.two-factor-setup.continue")
           })]
         })]
       })
@@ -190,12 +190,12 @@ function N() {
     },
     children: [jsx(Y9, {
       children: jsx(hE, {
-        children: tx("auth.two-factor-setup.scan_qr_code")
+        children: renderI18nText("auth.two-factor-setup.scan_qr_code")
       })
     }), jsxs(nB, {
       children: [o ? jsxs("div", {
         children: [jsx("div", {
-          children: tx("auth.two-factor-setup.scan_the_qr_code_into_your_app")
+          children: renderI18nText("auth.two-factor-setup.scan_the_qr_code_into_your_app")
         }), jsx("div", {
           className: KA,
           children: jsx(hp, {
@@ -207,31 +207,31 @@ function N() {
           children: jsx($n, {
             variant: "link",
             onClick: h,
-            children: tx("auth.two-factor-setup.click_here_to_manually_type_the_code_instead")
+            children: renderI18nText("auth.two-factor-setup.click_here_to_manually_type_the_code_instead")
           })
         })]
       }) : jsxs("div", {
         children: [jsx("div", {
-          children: tx("auth.two-factor-setup.type_the_text_code_into_your_app")
+          children: renderI18nText("auth.two-factor-setup.type_the_text_code_into_your_app")
         }), jsx("div", {
           className: aY,
           children: r6().secret?.match(/.{4}/g)?.join(" ")
         }), jsx($n, {
           variant: "link",
           onClick: h,
-          children: tx("auth.two-factor-setup.click_here_to_scan_a_qr_code_instead")
+          children: renderI18nText("auth.two-factor-setup.click_here_to_scan_a_qr_code_instead")
         })]
       }), jsx("div", {
         style: {
           marginTop: "20px"
         },
-        children: tx("auth.two-factor-setup.enter-code-from-app")
+        children: renderI18nText("auth.two-factor-setup.enter-code-from-app")
       }), jsx("input", {
         name: "otp",
         type: "text",
         className: _Z,
         ref: i,
-        placeholder: _$$t("auth.two-factor.authentication-code")
+        placeholder: getI18nString("auth.two-factor.authentication-code")
       }), jsx("div", {
         className: z3,
         children: t.currentError || ""
@@ -241,12 +241,12 @@ function N() {
         children: [jsx($n, {
           variant: "secondary",
           onClick: s,
-          children: tx("auth.two-factor-setup.cancel")
+          children: renderI18nText("auth.two-factor-setup.cancel")
         }), jsx($n, {
           variant: "primary",
           type: "submit",
           disabled: t.loading,
-          children: tx("auth.two-factor-setup.verify")
+          children: renderI18nText("auth.two-factor-setup.verify")
         })]
       })
     })]

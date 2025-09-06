@@ -3,8 +3,8 @@ import { $n } from "../905/521428";
 import { r as _$$r } from "../905/571838";
 import { iCO, bwI } from "../figma_app/763686";
 import o from "classnames";
-import { R } from "../905/103090";
-import { tx } from "../905/303541";
+import { selectWithShallowEqual } from "../905/103090";
+import { renderI18nText } from "../905/303541";
 import { wr, Dh } from "../figma_app/741237";
 import { ow, _f, Hf, i$ } from "../figma_app/150804";
 import { pg, A } from "../figma_app/264776";
@@ -19,7 +19,7 @@ export function $$m1({
       selectedStates,
       stateGroupError,
       stateGroupSelectionMode
-    } = R(e => ({
+    } = selectWithShallowEqual(e => ({
       allStates: ow(e) ?? [],
       selectedStates: _f(e) ?? [],
       stateGroupError: Hf(e),
@@ -34,66 +34,66 @@ export function $$m1({
       switch (stateGroupError) {
         case bwI.PARSE_ERROR:
           return jsxs(Fragment, {
-            children: [tx("design_systems.states_panel.some_layers_have_invalid_names"), jsx("div", {
+            children: [renderI18nText("design_systems.states_panel.some_layers_have_invalid_names"), jsx("div", {
               children: jsx("strong", {
-                children: tx("design_systems.states_panel.prop_value_prop_value")
+                children: renderI18nText("design_systems.states_panel.prop_value_prop_value")
               })
             }), jsx("div", {
               className: pV,
               children: jsx($n, {
                 variant: "link",
                 onClick: t,
-                children: tx("design_systems.states_panel.select_invalid_variants")
+                children: renderI18nText("design_systems.states_panel.select_invalid_variants")
               })
             })]
           });
         case bwI.DUPLICATE_STATE_ERROR:
           return jsxs(Fragment, {
-            children: [tx("design_systems.states_panel.some_variants_have_the_same_property_values_applied"), jsx("div", {
+            children: [renderI18nText("design_systems.states_panel.some_variants_have_the_same_property_values_applied"), jsx("div", {
               className: pV,
               children: jsx($n, {
                 variant: "link",
                 onClick: t,
-                children: tx("design_systems.states_panel.select_conflicting_variants")
+                children: renderI18nText("design_systems.states_panel.select_conflicting_variants")
               })
             })]
           });
         case bwI.MISSING_PROPERTIES_ERROR:
           return jsxs(Fragment, {
-            children: [tx("design_systems.states_panel.some_variants_are_missing_properties"), jsx("div", {
+            children: [renderI18nText("design_systems.states_panel.some_variants_are_missing_properties"), jsx("div", {
               className: pV,
               children: jsx($n, {
                 variant: "link",
                 onClick: t,
-                children: tx("design_systems.states_panel.select_invalid_variants")
+                children: renderI18nText("design_systems.states_panel.select_invalid_variants")
               })
             })]
           });
         case bwI.TOO_MANY_STATES_ERROR:
           return jsx(Fragment, {
-            children: tx("design_systems.states_panel.components_with_more_than_1000_variants_may_experience_performance_issues")
+            children: renderI18nText("design_systems.states_panel.components_with_more_than_1000_variants_may_experience_performance_issues")
           });
       }
     } else if (stateGroupSelectionMode === iCO.STATE || stateGroupSelectionMode === iCO.STATE_INSTANCE) switch (A(selectedStates)) {
       case bwI.PARSE_ERROR:
         return jsxs(Fragment, {
-          children: [tx("design_systems.states_panel.layer_has_invalid_name", {
+          children: [renderI18nText("design_systems.states_panel.layer_has_invalid_name", {
             layers: selectedStates.length
           }), jsx("div", {
             children: jsx("strong", {
-              children: tx("design_systems.states_panel.prop_value_prop_value")
+              children: renderI18nText("design_systems.states_panel.prop_value_prop_value")
             })
           })]
         });
       case bwI.DUPLICATE_STATE_ERROR:
         return jsx(Fragment, {
-          children: tx("design_systems.states_panel.the_properties_and_values_of_variant_are_conflicting", {
+          children: renderI18nText("design_systems.states_panel.the_properties_and_values_of_variant_are_conflicting", {
             variants: selectedStates.length
           })
         });
       case bwI.MISSING_PROPERTIES_ERROR:
         return jsx(Fragment, {
-          children: tx("design_systems.states_panel.variants_are_missing_one_or_more_properties", {
+          children: renderI18nText("design_systems.states_panel.variants_are_missing_one_or_more_properties", {
             variants: selectedStates.length
           })
         });

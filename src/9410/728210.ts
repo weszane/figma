@@ -3,19 +3,19 @@ import { useMemo, useContext, useRef, useEffect, useState, useCallback } from "r
 import { useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { h3O } from "../figma_app/763686";
-import { md, fp } from "../figma_app/27355";
+import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import d from "classnames";
 import { N as _$$N } from "../vendor/930821";
 import { P as _$$P } from "../vendor/348225";
-import { sx } from "../905/449184";
-import { sn } from "../905/542194";
+import { trackEventAnalytics } from "../905/449184";
+import { globalPerfTimer } from "../905/542194";
 import { ZC } from "../figma_app/39751";
-import { Ay, FP, Xb } from "../figma_app/778880";
+import { BrowserInfo, isMobileNotFigmaMobile, isAnyMobile } from "../figma_app/778880";
 import { y7, oJ, $ as _$$$, jA, NB, L3, KI } from "../figma_app/385215";
 import { Fj, Dv, ah, uc } from "../905/763714";
 import { Av } from "../905/149328";
 import { hk } from "../figma_app/632319";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { O1, KD } from "../figma_app/317394";
 import { _o } from "../figma_app/701001";
 import { ni } from "../figma_app/62612";
@@ -51,7 +51,7 @@ let K = (e, t) => {
     toolbarHeight: n,
     editorBannerHeight: a
   }) {
-    return (2 === r ? t ? 0 : n : e ? Ay.isIpadNative || FP() && i ? _$$VA() : 0 : i || Ay.isIpadNative ? n : 0) + a;
+    return (2 === r ? t ? 0 : n : e ? BrowserInfo.isIpadNative || isMobileNotFigmaMobile() && i ? _$$VA() : 0 : i || BrowserInfo.isIpadNative ? n : 0) + a;
   }({
     isUI3: !("prototype" === o.view && "slides" === o.file.editor_type),
     prototypeHeaderHidden: t,
@@ -72,7 +72,7 @@ function H(e) {
   let r = _o();
   p8("showUi");
   let a = 0;
-  (Ay.isIpad || FP()) && (a = _$$VA());
+  (BrowserInfo.isIpad || isMobileNotFigmaMobile()) && (a = _$$VA());
   let s = i.y + r + a;
   switch (e) {
     case 1:
@@ -106,7 +106,7 @@ let z = (e, t) => {
       a = $$U3;
       break;
     case 1:
-      if (FP()) {
+      if (isMobileNotFigmaMobile()) {
         i = {};
         break;
       }
@@ -147,7 +147,7 @@ function V(e) {
   } = e;
   let n = z3();
   let a = 0;
-  "prototype" === n ? a = 2 : Xb && (a = 1);
+  "prototype" === n ? a = 2 : isAnyMobile && (a = 1);
   let s = K(a, prototypeHeaderHidden || !1);
   let o = 2 === a ? Y$ : void 0;
   let l = 2 === a && prototypeHeaderHidden ? Fd : void 0;
@@ -199,7 +199,7 @@ function J(e) {
   let o = Ww();
   let l = _6();
   let d = 0;
-  "prototype" === l.view ? d = l.isPresenterView ? 3 : 2 : Xb && (d = 1);
+  "prototype" === l.view ? d = l.isPresenterView ? 3 : 2 : isAnyMobile && (d = 1);
   let c = z((() => {
     if (colorOverride) return colorOverride;
     if (!overlayStatus) return s && o?.sessionID === s?.sessionID ? o?.color ?? "transparent" : a?.color ?? "transparent";
@@ -219,7 +219,7 @@ function J(e) {
 var q = (e => (e.PRESENTING = "presenting", e.PROMPT_TO_ACCEPT_NOMINATION = "prompt_to_accept_nomination", e.SHOWING_EXPLAINER = "showing_explainer", e.NONE = "none", e))(q || {});
 var X = (e => (e.PENDING_AUTO_FOLLOW = "pending_auto_follow", e.FOLLOWING = "following", e.PROMPT_TO_REJOIN = "prompt_to_rejoin", e.NONE = "none", e))(X || {});
 function Z() {
-  return "prototype" !== z3() && !FP();
+  return "prototype" !== z3() && !isMobileNotFigmaMobile();
 }
 function Q(e, t, i, r) {
   let a = ZC(e);
@@ -227,22 +227,22 @@ function Q(e, t, i, r) {
   let o = useRef(performance.now());
   useEffect(() => {
     if ("presenting" === e) {
-      let e = sn.tryStop("start_spotlight");
-      e && sx("start_spotlight", {
+      let e = globalPerfTimer.tryStop("start_spotlight");
+      e && trackEventAnalytics("start_spotlight", {
         elapsedMs: e
       }, {
         forwardToDatadog: !0
       });
     } else if ("pending_auto_follow" === t) {
-      let e = sn.tryStop("join_spotlight");
-      e && sx("join_spotlight", {
+      let e = globalPerfTimer.tryStop("join_spotlight");
+      e && trackEventAnalytics("join_spotlight", {
         elapsedMs: e
       }, {
         forwardToDatadog: !0
       });
     } else if ("following" === t) {
-      let e = sn.tryStop("start_following");
-      e && sx("start_following", {
+      let e = globalPerfTimer.tryStop("start_following");
+      e && trackEventAnalytics("start_following", {
         elapsedMs: e
       }, {
         forwardToDatadog: !0
@@ -266,7 +266,7 @@ function $(e) {
   let m = $0();
   let f = _$$y();
   let y = q5();
-  let E = md(Fj);
+  let E = useAtomWithSubscription(Fj);
   let T = _$$T();
   let w = y7();
   let N = oJ();
@@ -292,7 +292,7 @@ function $(e) {
   } = function (e) {
     let [t, i] = useState(!1);
     let r = e.followerCount;
-    let [a, s] = fp(Dv);
+    let [a, s] = useAtomValueAndSetter(Dv);
     0 === r || t || i(!0);
     let d = jA(e) || a;
     jA(e) && a && s(!1);
@@ -320,8 +320,8 @@ function $(e) {
     return jA(_multiplayer) || isPendingPresenting ? "presenting" : showingExplainer ? "showing_explainer" : NB(_multiplayer) ? "prompt_to_accept_nomination" : "none";
   }({
     multiplayer,
-    showingExplainer: md(ah),
-    isPendingPresenting: md(Dv)
+    showingExplainer: useAtomWithSubscription(ah),
+    isPendingPresenting: useAtomWithSubscription(Dv)
   });
   let q = function (e) {
     let {
@@ -372,7 +372,7 @@ function $(e) {
   let el = "none" !== ee;
   let ed = "none" !== ei;
   let ec = ["presenting", "prompt_to_accept_nomination", "showing_explainer"].includes(ee) || ["following"].includes(ei);
-  let [eu, ep] = fp(uc);
+  let [eu, ep] = useAtomValueAndSetter(uc);
   ec !== eu && ep(ec);
   return jsxs(J, {
     overlayStatus: {
@@ -418,8 +418,8 @@ function $(e) {
               case "presenting":
                 if (null === c) return null;
                 if (isWaitingForFirstFollower) {
-                  let e = tx("collaboration.spotlight.bell.presenter.waiting_for_followers");
-                  let t = _$$t("collaboration.spotlight.bell.presenter.cancel");
+                  let e = renderI18nText("collaboration.spotlight.bell.presenter.waiting_for_followers");
+                  let t = getI18nString("collaboration.spotlight.bell.presenter.cancel");
                   return jsx(_$$Y, {
                     color: "brand",
                     message: {
@@ -448,7 +448,7 @@ function $(e) {
                   progressBarDurationMs: 0,
                   autoHide: !1,
                   button: {
-                    text: _$$t("collaboration.spotlight.bell.presenter.stop"),
+                    text: getI18nString("collaboration.spotlight.bell.presenter.stop"),
                     onClick: stopPresenting
                   },
                   docked: es,
@@ -459,7 +459,7 @@ function $(e) {
                 return jsx(_$$Y, {
                   autoHide: !1,
                   button: {
-                    text: _$$t("collaboration.spotlight.tooltip.spotlight_me"),
+                    text: getI18nString("collaboration.spotlight.tooltip.spotlight_me"),
                     onClick: () => {
                       w(multiplayer);
                     }
@@ -467,7 +467,7 @@ function $(e) {
                   color: "brand",
                   isTabAccessible,
                   message: {
-                    text: tx("collaboration.spotlight.bell.follower.nominated", {
+                    text: renderI18nText("collaboration.spotlight.bell.follower.nominated", {
                       nominatorName: f.name
                     })
                   },
@@ -482,9 +482,9 @@ function $(e) {
                 });
               case "showing_explainer":
                 if (null === c) return null;
-                let e = h ? tx("collaboration.spotlight.bell.explainer.takeover", {
+                let e = h ? renderI18nText("collaboration.spotlight.bell.explainer.takeover", {
                   currentPresenter: h?.name
-                }) : tx("collaboration.spotlight.bell.explainer");
+                }) : renderI18nText("collaboration.spotlight.bell.explainer");
                 return jsx(_$$Y, {
                   autoHide: !1,
                   button: null,
@@ -531,17 +531,17 @@ function $(e) {
                   if (!h) return null;
                   let e = h.name;
                   let t = en ? {
-                    text: tx("collaboration.spotlight.bell.follower.spotlighting_presenter_alternate_copy", {
+                    text: renderI18nText("collaboration.spotlight.bell.follower.spotlighting_presenter_alternate_copy", {
                       presenterName: e
                     }),
                     onClick: completeAutoFollowCallback
                   } : {
-                    text: tx("collaboration.spotlight.bell.follower.switching_to_new_presenter", {
+                    text: renderI18nText("collaboration.spotlight.bell.follower.switching_to_new_presenter", {
                       presenterName: e
                     })
                   };
                   let i = en ? {
-                    text: _$$t("collaboration.spotlight.bell.follower.not_now"),
+                    text: getI18nString("collaboration.spotlight.bell.follower.not_now"),
                     onClick: er
                   } : null;
                   return jsx(_$$Y, {
@@ -561,17 +561,17 @@ function $(e) {
                   let e = multiplayer.observingSessionID === multiplayer.presenterSessionID;
                   if (null === m) return null;
                   let i = m?.name || "";
-                  let n = e ? tx("collaboration.spotlight.bell.follower.spotlight_on_presenter", {
+                  let n = e ? renderI18nText("collaboration.spotlight.bell.follower.spotlight_on_presenter", {
                     observedUserName: i
-                  }) : tx("collaboration.spotlight.bell.follower.following_non_presenter", {
+                  }) : renderI18nText("collaboration.spotlight.bell.follower.following_non_presenter", {
                     observedUserName: i
                   });
                   let s = {
-                    text: e ? _$$t("collaboration.spotlight.bell.stop_following") : _$$t("collaboration.spotlight.bell.stop"),
+                    text: e ? getI18nString("collaboration.spotlight.bell.stop_following") : getI18nString("collaboration.spotlight.bell.stop"),
                     onClick: () => A(multiplayer)
                   };
                   return jsx(_$$Y, {
-                    autoHide: !Xb,
+                    autoHide: !isAnyMobile,
                     button: s,
                     color: m?.color,
                     docked: es,
@@ -588,10 +588,10 @@ function $(e) {
               case "prompt_to_rejoin":
                 let e = () => KI(observeCurrentPresenter, multiplayer, "Spotlight Rejoined", statusChangedAt);
                 if (null !== m || null === h) return null;
-                let i = tx("collaboration.spotlight.bell.follower.reprompt_spotlight_on_presenter", {
+                let i = renderI18nText("collaboration.spotlight.bell.follower.reprompt_spotlight_on_presenter", {
                   presenterUserName: h.name
                 });
-                let n = _$$t("collaboration.spotlight.bell.follower.follow");
+                let n = getI18nString("collaboration.spotlight.bell.follower.follow");
                 return jsx(_$$Y, {
                   autoHide: !1,
                   button: {
@@ -663,7 +663,7 @@ function et(e) {
   let u = useMemo(() => {
     let e = s?.name || "";
     return {
-      text: tx("collaboration.spotlight.bell.follower.following_non_presenter", {
+      text: renderI18nText("collaboration.spotlight.bell.follower.following_non_presenter", {
         observedUserName: e
       })
     };
@@ -676,7 +676,7 @@ function et(e) {
         color: s?.color,
         message: u,
         renderKey: c,
-        autoHide: !Xb,
+        autoHide: !isAnyMobile,
         progressBar: !1,
         progressBarDurationMs: 0,
         button: null,
@@ -687,8 +687,8 @@ function et(e) {
   });
 }
 export function $$ei1() {
-  let e = md(a8) === h0.PLAYING;
-  let t = md($i);
+  let e = useAtomWithSubscription(a8) === h0.PLAYING;
+  let t = useAtomWithSubscription($i);
   if (!e) return null;
   switch (t) {
     case JJ.CANVAS:

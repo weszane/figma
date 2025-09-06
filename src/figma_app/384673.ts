@@ -1,9 +1,9 @@
 import { useCallback, useMemo } from "react";
-import { eU, fp, md } from "../figma_app/27355";
+import { atom, useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import { VU } from "../905/625959";
-let s = eU(null);
+let s = atom(null);
 export function $$o0() {
-  let [e, t] = fp(s);
+  let [e, t] = useAtomValueAndSetter(s);
   let r = useCallback(() => {
     t(null);
     (function (e) {
@@ -16,10 +16,10 @@ export function $$o0() {
     closeSecondaryToolbelt: r
   }), [e, t, r]);
 }
-export let $$l1 = eU(null);
+export let $$l1 = atom(null);
 export function $$d2() {
-  let e = md(s);
-  let t = md($$l1);
+  let e = useAtomWithSubscription(s);
+  let t = useAtomWithSubscription($$l1);
   return null !== e && null !== t;
 }
 export const LH = $$o0;

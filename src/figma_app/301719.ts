@@ -1,7 +1,7 @@
 import { c2 } from "../905/382883";
 import { Osy, rXF } from "../figma_app/763686";
 import { GP } from "../figma_app/15927";
-import { eU, zl } from "../figma_app/27355";
+import { atom, atomStoreManager } from "../figma_app/27355";
 import { gq } from "../905/125333";
 import { Gm } from "../figma_app/91703";
 import { QA, Xp, n0, Lh, uQ, Mc, oI } from "../905/854717";
@@ -10,7 +10,7 @@ import { Gp, uH } from "../figma_app/646357";
 import { S, K } from "../905/733706";
 import { Z as _$$Z } from "../905/939602";
 import { E_ } from "../figma_app/177697";
-export let $$m0 = eU({});
+export let $$m0 = atom({});
 export class $$g1 {
   constructor(e) {
     this.store = e;
@@ -36,7 +36,7 @@ export class $$g1 {
     this.dispatch(Gm(null));
   }
   updateSelectionImages(e) {
-    let t = zl.get($$m0);
+    let t = atomStoreManager.get($$m0);
     let r = Object.keys(e).length !== Object.keys(t).length;
     if (!r) {
       for (let n in t) if (!e[n]) {
@@ -44,7 +44,7 @@ export class $$g1 {
         break;
       }
     }
-    r && zl.set($$m0, e);
+    r && atomStoreManager.set($$m0, e);
   }
   updateSelectionPaintsWithFillEncodedPaints(e, t, r, i, a, s, o, l) {
     let c = S(e, t, r, i, a, s, l);
@@ -132,7 +132,7 @@ export class $$g1 {
     };
     let t = this.store.getState().pickerShown?.id;
     let r = t?.startsWith(Yr);
-    let n = zl.get(E_);
+    let n = atomStoreManager.get(E_);
     return r && n ? n : {};
   }
   isPrototypingModalOpen() {

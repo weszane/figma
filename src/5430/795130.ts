@@ -1,9 +1,9 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { N as _$$N } from "../figma_app/469468";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { u5 } from "../5132/642384";
 import { s as _$$s } from "../5430/913603";
 import { Q } from "../5430/345616";
@@ -42,7 +42,7 @@ export function $$T0({
       return;
     }
     let t = u5(e => {
-      sx("try_it_out_drafts_picker_menu_opened", r);
+      trackEventAnalytics("try_it_out_drafts_picker_menu_opened", r);
       T(to({
         type: _$$_,
         data: {
@@ -66,7 +66,7 @@ export function $$T0({
     })
   });
   if (!R) {
-    let e = _$$t("community.use_slide_template.disabled_tooltip");
+    let e = getI18nString("community.use_slide_template.disabled_tooltip");
     return jsx(fu, {
       name: "slide_template_use_button",
       properties: {

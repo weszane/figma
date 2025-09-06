@@ -6,16 +6,16 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, nB, wi, jk } from "../figma_app/272243";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { A as _$$A } from "../905/920142";
 import { HB, lb } from "../3973/538504";
 import { mI } from "../figma_app/566371";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { tH, H4 } from "../905/751457";
 import { h1 } from "../905/986103";
 import { s as _$$s } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { zX } from "../905/576487";
 import { Y as _$$Y } from "../905/830372";
@@ -58,13 +58,13 @@ function $$Z(e) {
   let [g] = mI(_);
   if ("loaded" !== g.status) {
     let e = Error("disabled" === g.status ? "Plan fetching disabled" : "Error fetching plan");
-    $D(_$$e.SCALE, e);
+    reportError(_$$e.SCALE, e);
     return e;
   }
   let f = g.data;
   if (!f) {
     let e = Error("No Plan found");
-    $D(_$$e.SCALE, e);
+    reportError(_$$e.SCALE, e);
     return e;
   }
   let y = _$$k();
@@ -126,12 +126,12 @@ function $$Z(e) {
             },
             children: [jsx(_$$j, {
               user: e.planUser,
-              text: null === a ? _$$t("modify_plan_user_seat_modal.choose_seat", {
+              text: null === a ? getI18nString("modify_plan_user_seat_modal.choose_seat", {
                 name: r
-              }) : a !== Gu.VIEW && Y ? _$$t("modify_plan_user_seat_modal.move_to_available_seat", {
+              }) : a !== Gu.VIEW && Y ? getI18nString("modify_plan_user_seat_modal.move_to_available_seat", {
                 name: r,
                 seatType: JT(a)
-              }) : _$$t("modify_plan_user_seat_modal.move_to_unavailable_seat", {
+              }) : getI18nString("modify_plan_user_seat_modal.move_to_unavailable_seat", {
                 name: r,
                 seatType: JT(a)
               })
@@ -247,24 +247,24 @@ function ee({
     let e = m ? function (e, t) {
       switch (t) {
         case ud.EXPERT:
-          return _$$t("modify_plan_user_seat_modal.visual_bell.message_with_previous_full", {
+          return getI18nString("modify_plan_user_seat_modal.visual_bell.message_with_previous_full", {
             userName: e
           });
         case ud.DEVELOPER:
-          return _$$t("modify_plan_user_seat_modal.visual_bell.message_with_previous_dev", {
+          return getI18nString("modify_plan_user_seat_modal.visual_bell.message_with_previous_dev", {
             userName: e
           });
         case ud.COLLABORATOR:
-          return _$$t("modify_plan_user_seat_modal.visual_bell.message_with_previous_collab", {
+          return getI18nString("modify_plan_user_seat_modal.visual_bell.message_with_previous_collab", {
             userName: e
           });
         case Gu.VIEW:
         default:
-          return _$$t("modify_plan_user_seat_modal.visual_bell.message_with_previous_view", {
+          return getI18nString("modify_plan_user_seat_modal.visual_bell.message_with_previous_view", {
             userName: e
           });
       }
-    }(p, _) : _$$t("modify_plan_user_seat_modal.visual_bell.message_with_previous_view", {
+    }(p, _) : getI18nString("modify_plan_user_seat_modal.visual_bell.message_with_previous_view", {
       userName: p
     });
     t();
@@ -299,7 +299,7 @@ function ee({
         trackingProperties: {
           trackingDescriptor: _$$c.BACK
         },
-        children: _$$t("modify_plan_user_seat_modal.button.back")
+        children: getI18nString("modify_plan_user_seat_modal.button.back")
       }), jsx($z, {
         disabled: A,
         onClick: () => {
@@ -326,7 +326,7 @@ function ee({
           nextSeatType: e
         },
         trackingOptions: P,
-        children: g ? _$$t("modify_plan_user_seat_modal.button.add_seat") : _$$t("modify_plan_user_seat_modal.button.confirm")
+        children: g ? getI18nString("modify_plan_user_seat_modal.button.add_seat") : getI18nString("modify_plan_user_seat_modal.button.confirm")
       })]
     })
   });
@@ -336,7 +336,7 @@ function et({
   failedToLoadPrices: t
 }) {
   useEffect(() => {
-    (e || t) && sx("seat_purchasing.non_blocking_fetch_error", {
+    (e || t) && trackEventAnalytics("seat_purchasing.non_blocking_fetch_error", {
       seat_counts_fetch_error: e,
       price_fetch_error: t,
       view: "modify_plan_user_seat_modal"
@@ -345,7 +345,7 @@ function et({
     });
   }, [e, t]);
   let r = null;
-  return (e && t ? r = _$$t("modify_plan_user_seat_modal.error.missing_pricing_and_seat_avability") : e ? r = _$$t("modify_plan_user_seat_modal.error.missing_seat_availability") : t && (r = _$$t("modify_plan_user_seat_modal.error.missing_pricing")), r) ? jsx("div", {
+  return (e && t ? r = getI18nString("modify_plan_user_seat_modal.error.missing_pricing_and_seat_avability") : e ? r = getI18nString("modify_plan_user_seat_modal.error.missing_seat_availability") : t && (r = getI18nString("modify_plan_user_seat_modal.error.missing_pricing")), r) ? jsx("div", {
     "data-testid": "modify-seat-modal-error-message",
     children: jsx(_$$E, {
       color: "danger",
@@ -377,7 +377,7 @@ function er({
         children: [u && jsxs(Fragment, {
           children: [jsx(_$$E, {
             color: "secondary",
-            children: _$$t("modify_plan_user_seat_modal.role", {
+            children: getI18nString("modify_plan_user_seat_modal.role", {
               jobTitle: lb(l)
             })
           }), jsx("div", {
@@ -405,7 +405,7 @@ function er({
             children: " "
           }), jsx(_$$E, {
             color: "secondary",
-            children: tx("members_table.user_upgrade_date", {
+            children: renderI18nText("members_table.user_upgrade_date", {
               upgradeDate: c
             })
           })]
@@ -413,7 +413,7 @@ function er({
       })
     }), d && jsx(_$$E, {
       color: "secondary",
-      children: tx("modify_plan_user_seat_modal.last_active", {
+      children: renderI18nText("modify_plan_user_seat_modal.last_active", {
         lastActiveAt: jsx(h1, {
           date: t
         })

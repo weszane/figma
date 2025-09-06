@@ -1,8 +1,8 @@
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { WB } from "../905/761735";
 import { XHR } from "../905/910117";
 import { s as _$$s, Q } from "../905/573154";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { nF } from "../905/350402";
 import { cL } from "../905/748726";
@@ -36,8 +36,8 @@ let T = Ju(function (e) {
       resourceType: e.resourceType
     },
     children: jsx(yX, {
-      confirmationTitle: _$$t("permissions.guests_banned.sharing_with_external_users_is_disabled"),
-      confirmText: _$$t("permissions.guests_banned.got_it"),
+      confirmationTitle: getI18nString("permissions.guests_banned.sharing_with_external_users_is_disabled"),
+      confirmText: getI18nString("permissions.guests_banned.got_it"),
       onConfirm: () => t(Lo()),
       hideOnConfirm: !1,
       disableClickOutsideToHide: !0,
@@ -46,7 +46,7 @@ let T = Ju(function (e) {
       hideCancel: !0,
       children: jsx("div", {
         className: jE,
-        children: tx("permissions.guests_banned.invite_wasnt_sent_org_name", {
+        children: renderI18nText("permissions.guests_banned.invite_wasnt_sent_org_name", {
           numEmails: e.emails.length,
           listEmails: jsx(_$$T, {
             children: e.emails.map(e => jsx("span", {
@@ -76,8 +76,8 @@ let R = Ju(function (e) {
       resourceType: e.resourceType
     },
     children: jsx(yX, {
-      confirmationTitle: _$$t("permissions.invites_require_access.almost_there"),
-      confirmText: _$$t("permissions.invites_require_access.got_it"),
+      confirmationTitle: getI18nString("permissions.invites_require_access.almost_there"),
+      confirmText: getI18nString("permissions.invites_require_access.got_it"),
       onConfirm: () => t(Lo()),
       disableClickOutsideToHide: !0,
       hideOnConfirm: !1,
@@ -86,7 +86,7 @@ let R = Ju(function (e) {
       hideCancel: !0,
       children: jsxs("div", {
         className: jE,
-        children: [tx("permissions.invites_require_access.invites_sent_but_will_require_access_org_name", {
+        children: [renderI18nText("permissions.invites_require_access.invites_sent_but_will_require_access_org_name", {
           numEmails: e.emails.length,
           listEmails: jsx(_$$T, {
             children: e.emails.map(e => jsx("span", {
@@ -97,7 +97,7 @@ let R = Ju(function (e) {
           orgName: e.orgName
         }), jsx(k, {
           height: 24
-        }), tx("permissions.invites_require_access.we_ll_connect_them_with_an_admin_who_can_help")]
+        }), renderI18nText("permissions.invites_require_access.we_ll_connect_them_with_an_admin_who_can_help")]
       })
     })
   });
@@ -112,8 +112,8 @@ let N = Ju(function (e) {
       resourceType: e.resourceType
     },
     children: jsx(yX, {
-      confirmationTitle: _$$t("permissions.invite_error_modal.couldn_t_send_invite"),
-      confirmText: _$$t("permissions.invites_whitelist.got_it"),
+      confirmationTitle: getI18nString("permissions.invite_error_modal.couldn_t_send_invite"),
+      confirmText: getI18nString("permissions.invites_whitelist.got_it"),
       onConfirm: () => t(Lo()),
       hideOnConfirm: !1,
       disableClickOutsideToHide: !0,
@@ -122,7 +122,7 @@ let N = Ju(function (e) {
       hideCancel: !0,
       children: jsx("div", {
         className: jE,
-        children: tx("permissions.invites_whitelist.the_following_users_were_not_approved_guests_in_org_name_org_please_request_access_for_them", {
+        children: renderI18nText("permissions.invites_whitelist.the_following_users_were_not_approved_guests_in_org_name_org_please_request_access_for_them", {
           numEmails: e.emails.length,
           listEmails: jsx(_$$T, {
             children: e.emails.map(e => jsx("span", {
@@ -145,8 +145,8 @@ let P = Ju(function (e) {
       resourceType: e.resourceType
     },
     children: jsx(yX, {
-      confirmationTitle: _$$t("permissions.invite_error_modal.couldn_t_send_invite"),
-      confirmText: _$$t("permissions.deprovisioned_users.got_it"),
+      confirmationTitle: getI18nString("permissions.invite_error_modal.couldn_t_send_invite"),
+      confirmText: getI18nString("permissions.deprovisioned_users.got_it"),
       onConfirm: () => t(Lo()),
       hideOnConfirm: !1,
       disableClickOutsideToHide: !0,
@@ -155,7 +155,7 @@ let P = Ju(function (e) {
       hideCancel: !0,
       children: jsx("div", {
         className: jE,
-        children: tx("permissions.deprovisioned_users.these_users_are_no_longer_in_the_org_name_organization_add_them_again_through_SCIM", {
+        children: renderI18nText("permissions.deprovisioned_users.these_users_are_no_longer_in_the_org_name_organization_add_them_again_through_SCIM", {
           numEmails: e.emails.length,
           listEmails: jsx(_$$T, {
             children: e.emails.map(e => jsx("span", {
@@ -178,8 +178,8 @@ let O = Ju(function (e) {
       resourceType: e.resourceType
     },
     children: jsx(yX, {
-      confirmationTitle: _$$t("permissions.invite_error_modal.couldn_t_send_invite"),
-      confirmText: _$$t("permissions.org_restricted_invite.got_it"),
+      confirmationTitle: getI18nString("permissions.invite_error_modal.couldn_t_send_invite"),
+      confirmText: getI18nString("permissions.org_restricted_invite.got_it"),
       onConfirm: () => t(Lo()),
       hideOnConfirm: !1,
       disableClickOutsideToHide: !0,
@@ -188,7 +188,7 @@ let O = Ju(function (e) {
       hideCancel: !0,
       children: jsx("div", {
         className: jE,
-        children: tx("permissions.org_restricted_invite.these_invites_couldn_t_be_sent_with_org_name.seat_rename", {
+        children: renderI18nText("permissions.org_restricted_invite.these_invites_couldn_t_be_sent_with_org_name.seat_rename", {
           numEmails: e.emails.length,
           listEmails: jsx(_$$T, {
             children: e.emails.map(e => jsx("span", {
@@ -262,7 +262,7 @@ let $$M3 = nF((e, {
       initialView: x,
       billableProductKey: w
     };
-    "file" === i ? ds("Invited Emails", o, P, s) : sx("Invited Emails", {
+    "file" === i ? ds("Invited Emails", o, P, s) : trackEventAnalytics("Invited Emails", {
       ...s,
       source: E
     });
@@ -370,7 +370,7 @@ let j = (e, t, i) => {
 export function $$U0(e, t, i, n, r, a) {
   let l = e.reduce((e, t) => (t.type && (e[t.type] = e[t.type] || [], e[t.type].push(t)), e), Object.create(null));
   let d = Object.keys(l).length > 0;
-  l.no_self_invite?.length > 0 && n(_$$s.error(_$$t("team_view.team_permissions_modal.youre_not_able_to_send_an_invite_to_yourself")));
+  l.no_self_invite?.length > 0 && n(_$$s.error(getI18nString("team_view.team_permissions_modal.youre_not_able_to_send_an_invite_to_yourself")));
   l.user_requires_approval?.length > 0 && a && (n(to({
     type: R,
     data: {
@@ -441,7 +441,7 @@ let $$B1 = nF((e, {
     })(t, n.name, r, a)
   })) : e.dispatch(_$$F.enqueue({
     type: "invite-sent",
-    message: _$$t("file_permissions_modal.invited_num_people", {
+    message: getI18nString("file_permissions_modal.invited_num_people", {
       num_invites: t.length
     })
   }));

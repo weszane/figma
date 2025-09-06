@@ -5,7 +5,7 @@ import { $n } from "../905/521428";
 import { wQ } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
-import { t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { up } from "../figma_app/692987";
 import { C8 } from "../figma_app/920435";
 import { c as _$$c } from "../905/370443";
@@ -39,7 +39,7 @@ export function $$j0(e) {
     setupIntentParams: {
       redirect_url: A,
       subtotal_estimate: amount,
-      success_message: t("resubscribe_modal.success_message"),
+      success_message: getI18nString("resubscribe_modal.success_message"),
       currency,
       teamId: team.id
     },
@@ -77,12 +77,12 @@ export function $$j0(e) {
       children: jsxs(vo, {
         children: [jsx(Y9, {
           children: jsx(hE, {
-            children: tx("resubscribe_modal.title")
+            children: renderI18nText("resubscribe_modal.title")
           })
         }), jsx(nB, {
           className: "x1dc814f",
           children: jsx("p", {
-            children: tx("resubscribe_modal.body", {
+            children: renderI18nText("resubscribe_modal.body", {
               last4: O,
               formattedAmount: D,
               nextBillDate
@@ -106,7 +106,7 @@ export function $$j0(e) {
               trackingProperties: {
                 trackingDescriptor: _$$c.UPDATE_PAYMENT
               },
-              children: tx("resubscribe_modal.different_payment_method")
+              children: renderI18nText("resubscribe_modal.different_payment_method")
             }), jsx(v, {
               variant: "primary",
               disabled: !I,
@@ -122,7 +122,7 @@ export function $$j0(e) {
               trackingProperties: {
                 trackingDescriptor: _$$c.REACTIVATE_YOUR_PROFESSIONAL_PLAN
               },
-              children: tx("resubscribe_modal.reactivate_plan")
+              children: renderI18nText("resubscribe_modal.reactivate_plan")
             })]
           })
         })]

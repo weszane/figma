@@ -1,8 +1,8 @@
 import { Oin, kul } from "../figma_app/763686";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { Y7 } from "../figma_app/553184";
-import { Ay } from "../figma_app/778880";
-import { kF } from "../905/11";
+import { BrowserInfo } from "../figma_app/778880";
+import { setSentryTag } from "../905/11";
 import { v5 } from "../figma_app/314264";
 import { qm } from "../905/617744";
 import { y as _$$y } from "../905/913008";
@@ -24,7 +24,7 @@ export class $$p0 {
       totalMemoryInBytes: t,
       fileLoaded: !!i,
       timeSinceFileLoad: n,
-      is64BitBrowser: Ay.is64BitBrowser,
+      is64BitBrowser: BrowserInfo.is64BitBrowser,
       lastAction: this._lastAction,
       lastWebContextMessage: this._lastWebContextMessage
     };
@@ -54,7 +54,7 @@ export class $$m1 extends $$p0 {
   }
   allocationFailed(e, t, i, s, p, m, h, g, f, _) {
     if (this._receivedFailedAllocation) return;
-    kF("wasm_oom", "yes");
+    setSentryTag("wasm_oom", "yes");
     this._receivedFailedAllocation = !0;
     let A = le();
     let y = (m / 1024).toFixed(1);
@@ -84,7 +84,7 @@ export class $$m1 extends $$p0 {
       appType: "editor",
       productType: v5(this._state.selectedView, null)
     });
-    let E = zl.get(qm);
+    let E = atomStoreManager.get(qm);
     _$$y.showMemoryCrashModal({
       isBranching: E
     }, this.openFileKey(), this._store);

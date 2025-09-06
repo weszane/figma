@@ -15,7 +15,7 @@ import { k as _$$k2 } from "../905/44647";
 import { vhv, _em, vXe, t8O } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
-import { fp } from "../figma_app/27355";
+import { useAtomValueAndSetter } from "../figma_app/27355";
 import v from "classnames";
 import E from "../vendor/223926";
 import S from "../vendor/128080";
@@ -24,13 +24,13 @@ import { parsePxNumber } from "../figma_app/783094";
 import { U as _$$U } from "../figma_app/901889";
 import { h as _$$h } from "../905/207101";
 import { Pt } from "../figma_app/806412";
-import { $D } from "../905/11";
-import { Lo } from "../905/714362";
+import { reportError } from "../905/11";
+import { logInfo } from "../905/714362";
 import { bG } from "../905/149328";
 import { Point } from "../905/736624";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { F as _$$F } from "../905/302958";
 import { zX } from "../905/576487";
@@ -55,7 +55,7 @@ import { Ao } from "../905/748636";
 import { cJ } from "../905/561485";
 import { sO } from "../figma_app/21029";
 import { R as _$$R } from "../905/256203";
-import { sx as _$$sx2 } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { x4 } from "../figma_app/211694";
 import { K1 } from "../905/956994";
 import { D as _$$D } from "../905/347702";
@@ -88,7 +88,7 @@ function ec() {
       className: _$$s.m2.colorIcon.$
     }), jsx("div", {
       className: _$$s.lh16.cursorDefault.$,
-      children: _$$t("fullscreen.toolbar.missing_fonts_modal.google_only_banner.text")
+      children: getI18nString("fullscreen.toolbar.missing_fonts_modal.google_only_banner.text")
     })]
   });
 }
@@ -110,7 +110,7 @@ function ev(e) {
         className: "missing_fonts_modal_secondary_banner_modal--closeButtonContainer--1Wt9U",
         children: jsx(_$$K, {
           onClick: e.onClose,
-          "aria-label": _$$t("general.close"),
+          "aria-label": getI18nString("general.close"),
           "data-testid": "modal-close-button",
           children: jsx(_$$L, {})
         })
@@ -125,7 +125,7 @@ let ex = _$$D(() => {
 });
 function eS(e) {
   return (_$$h(() => {
-    Kk() || _$$sx2("Missing Fonts Modal No Agent Banner Shown", {}, {
+    Kk() || trackEventAnalytics("Missing Fonts Modal No Agent Banner Shown", {}, {
       forwardToDatadog: !0
     });
   }), Kk()) ? jsx(Fragment, {}) : jsx(ev, {
@@ -139,7 +139,7 @@ function eS(e) {
 }
 function ej(e) {
   let t = useDispatch();
-  let i = e.canAdminCurrentTeam ? tx("fullscreen.toolbar.missing_fonts_modal.org_upsell_banner.admin.text", {
+  let i = e.canAdminCurrentTeam ? renderI18nText("fullscreen.toolbar.missing_fonts_modal.org_upsell_banner.admin.text", {
     upgradeLink: jsx(Us, {
       onClick: () => {
         t(Bq({
@@ -149,14 +149,14 @@ function ej(e) {
       },
       target: "_blank",
       trusted: !0,
-      children: tx("fullscreen.toolbar.missing_fonts_modal.org_upsell_banner.admin.link")
+      children: renderI18nText("fullscreen.toolbar.missing_fonts_modal.org_upsell_banner.admin.link")
     })
-  }) : tx("fullscreen.toolbar.missing_fonts_modal.org_upsell_banner.nonadmin.text", {
+  }) : renderI18nText("fullscreen.toolbar.missing_fonts_modal.org_upsell_banner.nonadmin.text", {
     learnMoreLink: jsx(Us, {
       href: gg,
       target: "_blank",
       trusted: !0,
-      children: tx("fullscreen.toolbar.missing_fonts_modal.org_upsell_banner.nonadmin.link")
+      children: renderI18nText("fullscreen.toolbar.missing_fonts_modal.org_upsell_banner.nonadmin.link")
     })
   });
   return jsx(ev, {
@@ -191,19 +191,19 @@ function eV({
     },
     children: [jsx(MM, {
       onClick: () => {
-        Lo("missing fonts", "setting scope to current page");
+        logInfo("missing fonts", "setting scope to current page");
         r(vhv.CURRENT_PAGE);
       },
       checked: i === vhv.CURRENT_PAGE,
-      children: tx("fullscreen.toolbar.missing_fonts_modal.current_page")
+      children: renderI18nText("fullscreen.toolbar.missing_fonts_modal.current_page")
     }), jsx(MM, {
       onClick: () => {
-        Lo("missing fonts", "setting scope to all pages");
+        logInfo("missing fonts", "setting scope to all pages");
         r(vhv.ALL_PAGES);
       },
       checked: i === vhv.ALL_PAGES,
       children: jsx("div", {
-        children: tx("fullscreen.toolbar.missing_fonts_modal.all_pages")
+        children: renderI18nText("fullscreen.toolbar.missing_fonts_modal.all_pages")
       })
     })]
   });
@@ -269,7 +269,7 @@ export let $$eZ0 = Ju(function (e) {
     let [u, p] = useState({});
     let [m, h] = useState(!1);
     let [g, f] = useState(n && !l ? vhv.CURRENT_SELECTION : vhv.CURRENT_PAGE);
-    let [v, I] = fp(QR);
+    let [v, I] = useAtomValueAndSetter(QR);
     useEffect(() => () => {
       I(!1);
       o(_$$F.dequeue({
@@ -283,7 +283,7 @@ export let $$eZ0 = Ju(function (e) {
     useEffect(() => {
       g !== vhv.ALL_PAGES || E || (I(!0), o(_$$F.enqueue({
         type: "missing-fonts-load-all-pages",
-        message: _$$t("fullscreen.toolbar.missing_fonts_modal.finding_missing_fonts"),
+        message: getI18nString("fullscreen.toolbar.missing_fonts_modal.finding_missing_fonts"),
         error: !1,
         icon: zX.IMAGE_BACKED_SPINNER,
         delay: 1500
@@ -292,7 +292,7 @@ export let $$eZ0 = Ju(function (e) {
           vXe.fontsAreLoading() ? $$eq2 = e : e();
         }).then(() => {
           let e = t8O.getMissingFontInfoFromAllPages();
-          e && e.missingFonts ? x(e) : $D(_$$e.TEXT_AND_VECTOR, Error("Could not get missing fonts from all pages"));
+          e && e.missingFonts ? x(e) : reportError(_$$e.TEXT_AND_VECTOR, Error("Could not get missing fonts from all pages"));
           I(!1);
           o(_$$F.dequeue({
             matchType: "missing-fonts-load-all-pages"
@@ -357,7 +357,7 @@ export let $$eZ0 = Ju(function (e) {
     let T = useCallback((e, t) => {
       Y5.selectMissingFontNodes(e, t, g);
     }, [g]);
-    let k = useMemo(() => g === vhv.ALL_PAGES ? tx("fullscreen.toolbar.missing_fonts_modal.all_pages") : tx("fullscreen.toolbar.missing_fonts_modal.current_page"), [g]);
+    let k = useMemo(() => g === vhv.ALL_PAGES ? renderI18nText("fullscreen.toolbar.missing_fonts_modal.all_pages") : renderI18nText("fullscreen.toolbar.missing_fonts_modal.current_page"), [g]);
     return {
       scope: g,
       missingFontsInfoForCurrentScope: S,
@@ -386,7 +386,7 @@ export let $$eZ0 = Ju(function (e) {
     let a = missingFontsInfoForCurrentScope.missingFonts[e];
     if (!a) return;
     if (t && null == versionsForStyles[t]) {
-      $D(_$$e.EDITOR_USABILITY, Error(`Attempted to replace missing font ${JSON.stringify(a)} with family ${t} but was not available`));
+      reportError(_$$e.EDITOR_USABILITY, Error(`Attempted to replace missing font ${JSON.stringify(a)} with family ${t} but was not available`));
       return;
     }
     let o = null;
@@ -443,7 +443,7 @@ export let $$eZ0 = Ju(function (e) {
         }
       }, i++);
     }
-    Lo("missing fonts", "EULA agreed", {
+    logInfo("missing fonts", "EULA agreed", {
       eula: e,
       fontsReplacedCount: i,
       totalMissingFonts: missingFontsInfoForCurrentScope.missingFonts.length
@@ -516,13 +516,13 @@ export let $$eZ0 = Ju(function (e) {
         className: _$$s.flex.flexGrow1.ml8.$,
         children: [jsx("span", {
           className: _$$s.textBodyMediumStrong.flexGrow1.$,
-          children: tx("fullscreen.toolbar.missing_fonts_modal.missing_font")
+          children: renderI18nText("fullscreen.toolbar.missing_fonts_modal.missing_font")
         }), jsx("span", {
           className: _$$s.textBodyMediumStrong.pl4.borderBox.$,
           style: sx.add({
             width: `calc(${ef} - 16px)`
           }).$,
-          children: tx("fullscreen.toolbar.missing_fonts_modal.replacement")
+          children: renderI18nText("fullscreen.toolbar.missing_fonts_modal.replacement")
         })]
       }),
       headerSize: "small",
@@ -567,7 +567,7 @@ export let $$eZ0 = Ju(function (e) {
             children: [jsx(_$$B, {
               svg: _$$A5,
               className: "missing_fonts_modal--overflowDotsIcon--nOli9"
-            }), tx("fullscreen.toolbar.missing_fonts_modal.show_other_missing_fonts")]
+            }), renderI18nText("fullscreen.toolbar.missing_fonts_modal.show_other_missing_fonts")]
           })]
         }), k && jsx("div", {
           className: _$$s.mt8.$,
@@ -579,7 +579,7 @@ export let $$eZ0 = Ju(function (e) {
           checked: scope === vhv.CURRENT_PAGE,
           onChange: () => setScope(scope === vhv.CURRENT_PAGE ? vhv.CURRENT_SELECTION : vhv.CURRENT_PAGE),
           label: jsx(_$$J, {
-            children: tx("fullscreen.toolbar.missing_fonts_modal.replace_on_the_whole_page")
+            children: renderI18nText("fullscreen.toolbar.missing_fonts_modal.replace_on_the_whole_page")
           })
         }), e0 && !eE && jsxs(Fragment, {
           children: [jsx($n, {
@@ -609,14 +609,14 @@ export let $$eZ0 = Ju(function (e) {
           children: [!e1 && jsx($n, {
             variant: "secondary",
             onClick: onClose,
-            children: tx("fullscreen.toolbar.missing_fonts_modal.close")
+            children: renderI18nText("fullscreen.toolbar.missing_fonts_modal.close")
           }), e1 && jsxs($n, {
             recordingKey: Pt(h, "replaceFonts"),
             disabled: !e1 || isReplacing || isLoadingMissingFonts,
             onClick: onApply,
             children: [jsx("span", {
               style: sx.$$if(isReplacing, sx.invisible).$,
-              children: tx("fullscreen.toolbar.missing_fonts_modal.replace_fonts")
+              children: renderI18nText("fullscreen.toolbar.missing_fonts_modal.replace_fonts")
             }), isReplacing && jsx("span", {
               className: _$$s.absolute.leftHalf.topHalf.$,
               style: sx.add({
@@ -653,7 +653,7 @@ function eX({
   let C = useSelector(e => e.selectedView);
   let k = _$$XE(C);
   let R = jb(x.family, d, w) && !_D(x.family, k);
-  let N = _$$t("fullscreen.toolbar.missing_fonts_modal.select_items_count_using_this_font", {
+  let N = getI18nString("fullscreen.toolbar.missing_fonts_modal.select_items_count_using_this_font", {
     numItems: T()(m.missingFonts.map((e, t) => e.family === x.family ? m.counts?.[t] : 0))
   });
   let O = useMemo(() => jsx("div", {
@@ -695,7 +695,7 @@ function eX({
       className: _$$s.flex.flexColumn.pl16.$,
       children: e.map(e => {
         let r = i[eY(e)];
-        let a = _$$t("fullscreen.toolbar.missing_fonts_modal.select_items_count_using_this_font", {
+        let a = getI18nString("fullscreen.toolbar.missing_fonts_modal.select_items_count_using_this_font", {
           numItems: m.counts?.[e.index] ?? 1
         });
         return jsxs("div", {
@@ -717,7 +717,7 @@ function eX({
               }).$,
               children: jsx(ay, {
                 clearable: !0,
-                customPlaceholder: _$$t("fullscreen.toolbar.missing_fonts_modal.select_font"),
+                customPlaceholder: getI18nString("fullscreen.toolbar.missing_fonts_modal.select_font"),
                 editingStyleGuid: void 0,
                 fontFamily: r?.newName.family,
                 fontPickerId: `MFM_FONT_PICKER_ID_${e.index}`,
@@ -735,7 +735,7 @@ function eX({
             }), jsx("div", {
               className: "missing_fonts_modal--fontStyle--5bvih",
               children: jsx(zz, {
-                customPlaceholder: _$$t("fullscreen.toolbar.missing_fonts_modal.select_style"),
+                customPlaceholder: getI18nString("fullscreen.toolbar.missing_fonts_modal.select_style"),
                 enablePreview: !1,
                 fontFamily: r?.newName.family,
                 fontStyle: r?.newName?.style,
@@ -782,22 +782,22 @@ function eX({
           variant: "secondary",
           children: jsx("div", {
             className: _$$s.inlineFlex.overflowHidden.wFull.itemsStart.$,
-            children: _$$t("fullscreen.mixed")
+            children: getI18nString("fullscreen.mixed")
           })
         }) : jsxs(Fragment, {
           children: [R && jsxs(Fragment, {
             children: [jsx($n, {
               onClick: D,
-              children: _$$t("fullscreen.toolbar.missing_fonts_modal.enable_font")
+              children: getI18nString("fullscreen.toolbar.missing_fonts_modal.enable_font")
             }), jsx("span", {
               className: "missing_fonts_modal--orText--5tZjH",
-              children: _$$t("fullscreen.toolbar.missing_fonts_modal.or")
+              children: getI18nString("fullscreen.toolbar.missing_fonts_modal.or")
             })]
           }), jsx("div", {
             className: _$$s.flexAuto.minW0.$,
             children: jsx(ay, {
               clearable: !0,
-              customPlaceholder: R ? _$$t("fullscreen.toolbar.missing_fonts_modal.select_font_replace") : _$$t("fullscreen.toolbar.missing_fonts_modal.select_font"),
+              customPlaceholder: R ? getI18nString("fullscreen.toolbar.missing_fonts_modal.select_font_replace") : getI18nString("fullscreen.toolbar.missing_fonts_modal.select_font"),
               editingStyleGuid: void 0,
               fontFamily: i[eY(x)]?.newName.family,
               fontPickerId: `MFM_FONT_PICKER_ID_${x.index}`,

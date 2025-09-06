@@ -1,7 +1,7 @@
 import { useLayoutEffect } from "react";
-import { eU, Xr, md } from "../figma_app/27355";
-let i = eU(0);
-let n = eU(e => e(i) > 0);
+import { atom, Xr, useAtomWithSubscription } from "../figma_app/27355";
+let i = atom(0);
+let n = atom(e => e(i) > 0);
 export function $$l0({
   isVisible: e
 }) {
@@ -14,7 +14,7 @@ export function $$l0({
   }, [e, t]);
 }
 export function $$r1() {
-  return md(n);
+  return useAtomWithSubscription(n);
 }
 export const N = $$l0;
 export const S = $$r1;

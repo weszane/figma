@@ -6,10 +6,10 @@ import { e as _$$e } from "../905/149844";
 import { nc } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { Ay } from "@stylexjs/stylex";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { generateRecordingKey } from "../figma_app/878298";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Ib } from "../905/129884";
 import { oY } from "../figma_app/524655";
 import { MB } from "../figma_app/835688";
@@ -23,7 +23,7 @@ let $$C1 = forwardRef(function ({
     toggleTemplatePicker,
     closeTemplatePicker
   } = uu();
-  let C = md(Ei);
+  let C = useAtomWithSubscription(Ei);
   let E = nc.user("ssv-carousel", () => {
     closeTemplatePicker();
     let e = getSingletonSceneGraph();
@@ -38,14 +38,14 @@ let $$C1 = forwardRef(function ({
       onClick: toggleTemplatePicker,
       htmlAttributes: {
         "data-fullscreen-intercept": !0,
-        "data-tooltip": _$$t("slides.carousel.add-slide-from-template"),
+        "data-tooltip": getI18nString("slides.carousel.add-slide-from-template"),
         "data-tooltip-type": Ib.TEXT,
         "data-onboarding-key": MB
       },
-      "aria-label": _$$t("slides.carousel.add-slide-from-template"),
+      "aria-label": getI18nString("slides.carousel.add-slide-from-template"),
       children: [jsx("p", {
         className: _$$s.noWrap.$,
-        children: _$$t("slides.carousel.new_slide")
+        children: getI18nString("slides.carousel.new_slide")
       }), jsx(O, {})]
     }), jsx(_$$E, {
       className: "x15cczae x1icplyp x1bamp8i x78zum5 x6s0dn4 xww3pen",
@@ -53,12 +53,12 @@ let $$C1 = forwardRef(function ({
       recordingKey: generateRecordingKey(e, "addSlideButton"),
       htmlAttributes: {
         "data-fullscreen-intercept": !0,
-        "data-tooltip": _$$t("slides.carousel.add-blank-slide"),
+        "data-tooltip": getI18nString("slides.carousel.add-blank-slide"),
         "data-tooltip-type": Ib.TEXT,
         "data-tooltip-shortcut-key": "create-slide",
         "data-testid": "addSlideButton"
       },
-      "aria-label": _$$t("slides.carousel.add-blank-slide"),
+      "aria-label": getI18nString("slides.carousel.add-blank-slide"),
       children: jsx(_$$e, {})
     })]
   });

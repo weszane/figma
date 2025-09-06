@@ -4,15 +4,15 @@ import { useSelector, useDispatch } from "../vendor/514228";
 import { c2 } from "../905/382883";
 import { getFeatureFlags } from "../905/601108";
 import { xx } from "../figma_app/815945";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { cs, Rc } from "../figma_app/819288";
 import { ZC } from "../figma_app/39751";
 import { S6 } from "../905/761735";
 import { ZA, Rs } from "../figma_app/288654";
 import { gB, Xm } from "../905/723791";
-import { kF } from "../905/11";
+import { setSentryTag } from "../905/11";
 import { Zv } from "../905/760682";
-import { x1, Lo } from "../905/714362";
+import { logError, logInfo } from "../905/714362";
 import { g as _$$g } from "../905/880308";
 import { XHR } from "../905/910117";
 import { pI } from "../figma_app/770088";
@@ -24,7 +24,7 @@ import { W9, gu, Hu } from "../figma_app/936061";
 import { N as _$$N } from "../figma_app/261650";
 import { iZ } from "../905/372672";
 import { ZBn, qRE, gkf } from "../figma_app/43951";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { i as _$$i } from "../905/637293";
 import { $J, kR } from "../905/234821";
 import { r } from "../905/808413";
@@ -112,7 +112,7 @@ class j {
     _$$O.records[r.id] = {
       parentId: r.parent_id,
       report: (t, o) => {
-        if (!s && (s = !0, kF("comments_optimistic_updates", "true"), kF("isLoadedComments", i.isLoadedComments ? "true" : "false"), kF("commentType", e), x1(t, o, {
+        if (!s && (s = !0, setSentryTag("comments_optimistic_updates", "true"), setSentryTag("isLoadedComments", i.isLoadedComments ? "true" : "false"), setSentryTag("commentType", e), logError(t, o, {
           id: r.id,
           fileKey: this.client.fileKey,
           parentId: r.parent_id,
@@ -125,17 +125,17 @@ class j {
           let r = null;
           let i = null;
           let a = null;
-          for (let n of e) if ("VIEW_QUERY_NODE.REMOVE_RESULT" === n.type || "STORE.ADD_INSTANCE" === n.type || "STORE.REMOVE_INSTANCE" === n.type || "SESSION.APPLY_MUTATIONS" === n.type || "SESSION.APPLY_SHADOW_MUTATIONS" === n.type || "SESSION.REMOVE_SHADOW_MUTATIONS" === n.type || "REQUEST_MESSAGE" === n.type && "sync" === n.message.messageType || "RESPONSE_MESSAGE" === n.type && "synced" === n.message.messageType || "RESPONSE_MESSAGE" === n.type && "pendingMutations" === n.message.messageType) Lo(t, JSON.stringify(n));else if ("VIEW_QUERY_NODE.ADD_RESULT" === n.type || "VIEW_QUERY_NODE.UPDATE_RESULT" === n.type) {
+          for (let n of e) if ("VIEW_QUERY_NODE.REMOVE_RESULT" === n.type || "STORE.ADD_INSTANCE" === n.type || "STORE.REMOVE_INSTANCE" === n.type || "SESSION.APPLY_MUTATIONS" === n.type || "SESSION.APPLY_SHADOW_MUTATIONS" === n.type || "SESSION.REMOVE_SHADOW_MUTATIONS" === n.type || "REQUEST_MESSAGE" === n.type && "sync" === n.message.messageType || "RESPONSE_MESSAGE" === n.type && "synced" === n.message.messageType || "RESPONSE_MESSAGE" === n.type && "pendingMutations" === n.message.messageType) logInfo(t, JSON.stringify(n));else if ("VIEW_QUERY_NODE.ADD_RESULT" === n.type || "VIEW_QUERY_NODE.UPDATE_RESULT" === n.type) {
             if (n.type === r && n.queryId === i && n.instance === a) continue;
-            Lo(t, JSON.stringify(n));
+            logInfo(t, JSON.stringify(n));
             r = n.type;
             i = n.queryId;
             a = n.instance;
-          } else "SESSION.NOTIFY_OBSERVERS" === n.type && n.view._name.includes("Comments") && Lo(t, JSON.stringify({
+          } else "SESSION.NOTIFY_OBSERVERS" === n.type && n.view._name.includes("Comments") && logInfo(t, JSON.stringify({
             type: "SESSION.NOTIFY_OBSERVERS",
             viewName: n.view._name
           }));
-          x1(t, o);
+          logError(t, o);
         }
       }
     };
@@ -156,7 +156,7 @@ class j {
       pageId,
       uuid
     } = e;
-    sx("New comment API create", {
+    trackEventAnalytics("New comment API create", {
       uuid
     });
     let _ = getFeatureFlags().show_at_mention_invited_users ? [...new Set(cs(messageMeta))] : [];
@@ -165,7 +165,7 @@ class j {
       if (!r || "comment_validation_failure" !== r.reason || !t?.onValidationError) throw e;
       let o = r.failure_info;
       let c = await t.onValidationError(F(o.users_without_view), F(o.ext_users_without_view), F(o.uninvitable_users));
-      return c ? (sx("New comment API handling validation", {
+      return c ? (trackEventAnalytics("New comment API handling validation", {
         uuid
       }), XHR.post(`/api/file/${fileKey}/comments`, {
         file_key: fileKey,
@@ -311,7 +311,7 @@ class j {
           }
         }
       }, _);
-      sx("Livegraph Optimistic Comment Update", {
+      trackEventAnalytics("Livegraph Optimistic Comment Update", {
         flow: "reply",
         isOptimistic: !!threadUuid
       });
@@ -557,7 +557,7 @@ export function $$H0(e) {
     children
   } = e;
   let g = useRef({});
-  let f = E3() === nT.Whiteboard;
+  let f = E3() === FEditorType.Whiteboard;
   let y = !!getFeatureFlags().xr_debounce_threshold;
   let S = file?.key;
   let v = !!S;

@@ -6,7 +6,7 @@ import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { Ce, Lo } from "../905/156213";
 import { fu } from "../figma_app/831799";
@@ -28,12 +28,12 @@ export let $$g0 = Ju(function (e) {
       children: jsxs(vo, {
         children: [jsx(Y9, {
           children: jsx(hE, {
-            children: tx("resource_connection.revoke_modal.revoke_connection_invite")
+            children: renderI18nText("resource_connection.revoke_modal.revoke_connection_invite")
           })
         }), jsx(nB, {
           scrolling: "none",
           children: jsx("div", {
-            children: tx("resource_connection.revoke_modal.this_will_end_the_connection_request", {
+            children: renderI18nText("resource_connection.revoke_modal.this_will_end_the_connection_request", {
               connectingPlanName: jsx("span", {
                 className: _$$s.fontSemiBold.$,
                 children: e.resourceConnectionInvite.connectingPlan.name
@@ -51,24 +51,24 @@ export let $$g0 = Ju(function (e) {
               onClick: () => {
                 t(Lo());
               },
-              children: tx("resource_connection.request_modal.cancel")
+              children: renderI18nText("resource_connection.request_modal.cancel")
             }), jsx($n, {
               variant: "destructive",
               onClick: () => {
                 _$$c.revokeResourceConnectionInvite(e.resourceConnectionInvite.id).then(() => {
                   g();
                   t(F.enqueue({
-                    message: _$$t("resource_connection.visual_bell.connection_request_revoked")
+                    message: getI18nString("resource_connection.visual_bell.connection_request_revoked")
                   }));
                 }).catch(e => {
                   g();
                   t(F.enqueue({
-                    message: _$$t("resource_connection.visual_bell.generic_error"),
+                    message: getI18nString("resource_connection.visual_bell.generic_error"),
                     error: !0
                   }));
                 });
               },
-              children: tx("resource_connection.revoke_modal.revoke")
+              children: renderI18nText("resource_connection.revoke_modal.revoke")
             })]
           })
         })]

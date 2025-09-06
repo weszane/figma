@@ -1,13 +1,13 @@
 import { Wh } from "../figma_app/615482";
 import { Vzr, MoD } from "../figma_app/763686";
-import { eU, Iz, md, zl } from "../figma_app/27355";
-import { sx } from "../905/449184";
+import { atom, createRemovableAtomFamily, useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
+import { trackEventAnalytics } from "../905/449184";
 import { H9 } from "../figma_app/930338";
 import { Y5 } from "../figma_app/455680";
 import { Jr } from "../figma_app/624361";
 import { wK } from "../figma_app/546509";
-let c = Wh(() => eU({}));
-let u = Iz(e => eU(t => t(c)[e] ?? "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALUAAABmCAYAAACN+dAoAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABeSURBVHgB7cAxAQAAAMKg9U9tDQ8oAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4NyDtAAG2m4HvAAAAAElFTkSuQmCC", (t, r, n) => {
+let c = Wh(() => atom({}));
+let u = createRemovableAtomFamily(e => atom(t => t(c)[e] ?? "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALUAAABmCAYAAACN+dAoAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABeSURBVHgB7cAxAQAAAMKg9U9tDQ8oAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4NyDtAAG2m4HvAAAAAElFTkSuQmCC", (t, r, n) => {
   let i = t(c);
   r(c, {
     ...i,
@@ -16,10 +16,10 @@ let u = Iz(e => eU(t => t(c)[e] ?? "data:image/png;base64,iVBORw0KGgoAAAANSUhEUg
 }));
 export function $$p2(e) {
   let t = u(e);
-  return md(t);
+  return useAtomWithSubscription(t);
 }
 export function $$_3(e) {
-  return !!zl.get(c)[e];
+  return !!atomStoreManager.get(c)[e];
 }
 function h(e, t, r, i, a, d, c = 20, u = {}) {
   let p = !0;
@@ -68,10 +68,10 @@ export function $$g0(e, t, r, n, s, o = 20, l = {}) {
   h(e, t, r, n, s, {
     onSuccess: t => {
       let r = wK();
-      r?.updateSlideThumbnail ? r.updateSlideThumbnail(e, t.base64) : zl.set(u(e), t.dataUrl);
+      r?.updateSlideThumbnail ? r.updateSlideThumbnail(e, t.base64) : atomStoreManager.set(u(e), t.dataUrl);
     },
     onFailure: e => {
-      sx("Failed to generate thumbnail in editor for node", {
+      trackEventAnalytics("Failed to generate thumbnail in editor for node", {
         fileKey: e.fileKey,
         guid: e.guid
       }, {

@@ -10,10 +10,10 @@ import { v as _$$v } from "../905/439487";
 import { o as _$$o } from "../905/89370";
 import { W as _$$W } from "../905/592530";
 import { N as _$$N } from "../905/7587";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { Pt } from "../figma_app/806412";
-import { nl } from "../figma_app/257275";
-import { t as _$$t, tx } from "../905/303541";
+import { isInteractionPathCheck } from "../figma_app/897289";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { _r, el } from "../figma_app/451499";
 import { cJ } from "../figma_app/976749";
 import { EU } from "../figma_app/740163";
@@ -256,7 +256,7 @@ export function $$q2({
   let d = useDispatch();
   let h = _$$Um();
   let T = EU();
-  let w = md(_$$x);
+  let w = useAtomWithSubscription(_$$x);
   let P = (t, n) => {
     let i = e.easingFunction;
     if (hS(i)) {
@@ -319,7 +319,7 @@ export function $$q2({
   let er = jsxs(Fragment, {
     children: [Q && jsx(W4, {
       className: Lp,
-      "data-tooltip": _$$t("proto.animation_panel.easing_duration_tooltip"),
+      "data-tooltip": getI18nString("proto.animation_panel.easing_duration_tooltip"),
       "data-tooltip-type": Ib.TEXT,
       dispatch: d,
       inputClassName: Gl,
@@ -346,7 +346,7 @@ export function $$q2({
     }), !ee && hS(e.easing) && $(e.easing) && hS(e.easingFunction) && jsx(_$$y.Consumer, {
       children: ([e]) => jsx(W4, {
         className: Lp,
-        "data-tooltip": _$$t("proto.animation_panel.easing_duration_tooltip"),
+        "data-tooltip": getI18nString("proto.animation_panel.easing_duration_tooltip"),
         "data-tooltip-type": Ib.TEXT,
         dispatch: d,
         inputClassName: Gl,
@@ -362,11 +362,11 @@ export function $$q2({
   });
   let es = jsxs(Fragment, {
     children: [jsx(_$$A2, {
-      label: _$$t("proto.curve"),
+      label: getI18nString("proto.curve"),
       labelId: et,
       input: ei
     }), jsx(_$$A2, {
-      label: _$$t("proto.duration"),
+      label: getI18nString("proto.duration"),
       input: er
     })]
   });
@@ -435,17 +435,17 @@ export function $$q2({
   }) : null;
   let eu = k ? jsx(Fragment, {
     children: jsx(_$$A2, {
-      label: _$$t("proto.animation"),
+      label: getI18nString("proto.animation"),
       labelId: el,
       input: ec
     })
   }) : jsx(_$$A2, {
-    label: _$$t("proto.animation"),
+    label: getI18nString("proto.animation"),
     labelId: el,
     input: ec
   });
   let e_ = k && jsx(_$$A2, {
-    label: _$$t("proto.direction"),
+    label: getI18nString("proto.direction"),
     input: ep
   });
   let ed = jsx(_$$S, {
@@ -473,7 +473,7 @@ export function $$q2({
     mixed: gl(e.shouldSmartAnimate),
     recordingKey: Pt(l, "transition-should-smart-animate"),
     label: jsx(_$$J, {
-      children: tx("proto.animation_panel.animate_matching_layers")
+      children: renderI18nText("proto.animation_panel.animate_matching_layers")
     })
   });
   let eh = jsx(TN, {
@@ -512,31 +512,31 @@ export class $$Q0 {
     if (null == e) return "";
     switch (e) {
       case "LINEAR":
-        return _$$t("proto.easing_behavior.linear");
+        return getI18nString("proto.easing_behavior.linear");
       case "EASE_IN":
-        return _$$t("proto.easing_behavior.bezier_ease_in");
+        return getI18nString("proto.easing_behavior.bezier_ease_in");
       case "EASE_OUT":
-        return _$$t("proto.easing_behavior.bezier_ease_out");
+        return getI18nString("proto.easing_behavior.bezier_ease_out");
       case "EASE_IN_AND_OUT":
-        return _$$t("proto.easing_behavior.bezier_ease_in_and_out");
+        return getI18nString("proto.easing_behavior.bezier_ease_in_and_out");
       case "EASE_IN_BACK":
-        return _$$t("proto.easing_behavior.bezier_ease_in_back");
+        return getI18nString("proto.easing_behavior.bezier_ease_in_back");
       case "EASE_OUT_BACK":
-        return _$$t("proto.easing_behavior.bezier_ease_out_back");
+        return getI18nString("proto.easing_behavior.bezier_ease_out_back");
       case "EASE_IN_AND_OUT_BACK":
-        return _$$t("proto.easing_behavior.bezier_ease_in_and_out_back");
+        return getI18nString("proto.easing_behavior.bezier_ease_in_and_out_back");
       case "CUSTOM_BEZIER":
-        return _$$t("proto.easing_behavior.bezier_custom");
+        return getI18nString("proto.easing_behavior.bezier_custom");
       case "GENTLE":
-        return _$$t("proto.easing_behavior.spring_gentle");
+        return getI18nString("proto.easing_behavior.spring_gentle");
       case "QUICK":
-        return _$$t("proto.easing_behavior.spring_quick");
+        return getI18nString("proto.easing_behavior.spring_quick");
       case "BOUNCY":
-        return _$$t("proto.easing_behavior.spring_bouncy");
+        return getI18nString("proto.easing_behavior.spring_bouncy");
       case "SLOW":
-        return _$$t("proto.easing_behavior.spring_slow");
+        return getI18nString("proto.easing_behavior.spring_slow");
       case "CUSTOM_SPRING":
-        return _$$t("proto.easing_behavior.spring_custom");
+        return getI18nString("proto.easing_behavior.spring_custom");
       default:
         return new _r().format(e);
     }
@@ -560,7 +560,7 @@ class en extends PureComponent {
       dropdownShown: this.props.dropdownShown,
       dropdownWidth: DxS,
       formatter: et,
-      hideDropdownWhenContainerMoves: !nl(),
+      hideDropdownWhenContainerMoves: !isInteractionPathCheck(),
       id: `animation-behavior-select-${this.props.recordingKey}`,
       inputClassName: hF,
       onChange: this.props.onChange,
@@ -609,24 +609,24 @@ export class $$eo3 extends PureComponent {
       recordingKey: this.props.recordingKey,
       value: hS(this.props.property) ? this.props.property ?? "LEFT" : void 0,
       legend: jsx(q, {
-        children: _$$t("proto.animation_panel.transition_direction")
+        children: getI18nString("proto.animation_panel.transition_direction")
       }),
       children: [jsx(c$, {
         value: "RIGHT",
         icon: jsx(_$$v, {}),
-        "aria-label": _$$t("proto.animation_panel.transition_direction.left")
+        "aria-label": getI18nString("proto.animation_panel.transition_direction.left")
       }), jsx(c$, {
         value: "LEFT",
         icon: jsx(_$$o, {}),
-        "aria-label": _$$t("proto.animation_panel.transition_direction.right")
+        "aria-label": getI18nString("proto.animation_panel.transition_direction.right")
       }), jsx(c$, {
         value: "TOP",
         icon: jsx(_$$W, {}),
-        "aria-label": _$$t("proto.animation_panel.transition_direction.down")
+        "aria-label": getI18nString("proto.animation_panel.transition_direction.down")
       }), jsx(c$, {
         value: "BOTTOM",
         icon: jsx(_$$N, {}),
-        "aria-label": _$$t("proto.animation_panel.transition_direction.up")
+        "aria-label": getI18nString("proto.animation_panel.transition_direction.up")
       })]
     });
   }

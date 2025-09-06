@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { useDispatch } from "../vendor/514228";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { S } from "../figma_app/11182";
 import { q5 } from "../figma_app/516028";
 import { _6 } from "../figma_app/386952";
@@ -34,7 +34,7 @@ export function $$p1() {
 export function $$m0() {
   let [e, t] = useState(null);
   return [e, () => {
-    e?.endsWith("\xa0") ? t(_$$t("comments.accessibility_reply_added")) : t(_$$t("comments.accessibility_reply_added") + "\xa0");
+    e?.endsWith("\xa0") ? t(getI18nString("comments.accessibility_reply_added")) : t(getI18nString("comments.accessibility_reply_added") + "\xa0");
   }];
 }
 export const R = $$m0;

@@ -1,8 +1,8 @@
-import { Iz, eU, md } from "../figma_app/27355";
+import { createRemovableAtomFamily, atom, useAtomWithSubscription } from "../figma_app/27355";
 import { resourceUtils } from "../905/989992";
 import { getInitialOptions } from "../figma_app/169182";
 import { zE } from "../figma_app/919079";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { TA, Zx } from "../figma_app/217457";
 import { Pe, Bk } from "../4452/207203";
 import { createMapperFactory, processAdditionalConfig } from "../905/508958";
@@ -36,20 +36,20 @@ export function $$b0(e, i, t) {
 export function $$E1(e) {
   return e.team_role?.level === e6.ADMIN ? e.team_role.pending ? {
     color: zE.DEFAULT,
-    text: t("team_view.settings.pending_admin")
+    text: getI18nString("team_view.settings.pending_admin")
   } : {
     color: zE.DEFAULT,
-    text: t("permissions.level_name_capitalized.admin")
+    text: getI18nString("permissions.level_name_capitalized.admin")
   } : e.team_role?.level === e6.OWNER ? {
     color: zE.DEFAULT,
-    text: t("permissions.level_name_capitalized.owner")
+    text: getI18nString("permissions.level_name_capitalized.owner")
   } : e.team_role?.pending ? {
     color: zE.DEFAULT,
     subtle: !1,
-    text: t("team_view.settings.pending")
+    text: getI18nString("team_view.settings.pending")
   } : void 0;
 }
-let w = Iz(e => eU(i => {
+let w = createRemovableAtomFamily(e => atom(i => {
   let t = i(mZ(!0)).data;
   let n = t ? t.campfireModelEnabledAt : null;
   return pw("migrate_team_data_to_livegraph", wv.GROUP_1) ? i(khT.Query({
@@ -187,7 +187,7 @@ let w = Iz(e => eU(i => {
   }) : resourceUtils.disabled();
 }));
 export function $$h2(e) {
-  return md(w(e));
+  return useAtomWithSubscription(w(e));
 }
 export const k_ = $$b0;
 export const BP = $$E1;

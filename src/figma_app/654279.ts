@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { getFeatureFlags } from "../905/601108";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { ex } from "../905/524523";
 import { Qq } from "../905/736956";
 export let $$d0 = ex("ai_features_tooltip", function () {
@@ -9,13 +9,13 @@ export let $$d0 = ex("ai_features_tooltip", function () {
     className: _$$s.flex.flexColumn.justifyCenter.$,
     children: [jsx("p", {
       className: Qq,
-      children: t("whiteboard.inline_menu.ai_quick_actions_disabled_header")
+      children: getI18nString("whiteboard.inline_menu.ai_quick_actions_disabled_header")
     }), jsx("p", {
       className: Qq,
-      children: t("whiteboard.inline_menu.ai_quick_actions_disabled_try_again_later")
+      children: getI18nString("whiteboard.inline_menu.ai_quick_actions_disabled_try_again_later")
     })]
   }) : jsx("span", {
-    children: t("whiteboard.inline_menu.ai_quick_actions_button_text")
+    children: getI18nString("whiteboard.inline_menu.ai_quick_actions_button_text")
   });
 });
 export const w = $$d0;

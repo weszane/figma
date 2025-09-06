@@ -1,6 +1,6 @@
 import { YEY, dNx, w3z, Ez5, glU } from "../figma_app/763686";
 import { NC } from "../905/17179";
-import { Lo } from "../905/714362";
+import { logInfo } from "../905/714362";
 import { F } from "../905/302958";
 import { G } from "../905/674940";
 import { Y5 } from "../figma_app/455680";
@@ -13,7 +13,7 @@ import { ot, g6 } from "../figma_app/389091";
 import { XE } from "../figma_app/91703";
 let $$f1 = NC("FULLSCREEN_CLOSE");
 let $$_0 = nF(e => {
-  Lo("fullscreen cleanup", "Closing fullscreen file", {
+  logInfo("fullscreen cleanup", "Closing fullscreen file", {
     fileKey: e.getState().openFile?.key
   });
   e.dispatch(_$$cL());

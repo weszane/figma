@@ -10,7 +10,7 @@ import { buildUploadUrl } from "../figma_app/169182";
 import { oW } from "../905/675859";
 import { qc } from "../figma_app/858013";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { F } from "../905/302958";
 import { b as _$$b, A as _$$A } from "../905/723768";
 import { Ce } from "../905/156213";
@@ -40,24 +40,24 @@ export let $$A0 = Ju(function (e) {
       N(!1);
       a();
       t(F.enqueue({
-        message: _$$t("resource_connection.visual_bell.connection_request_approved")
+        message: getI18nString("resource_connection.visual_bell.connection_request_approved")
       }));
     }).catch(e => {
       N(!1);
       a();
       "Connecting plan has reached active connection and outgoing invite limit" === e.message ? t(F.enqueue({
-        message: S?.key.type === FOrganizationLevelType.TEAM ? _$$t("resource_connection.visual_bell.org_at_limit") : _$$t("resource_connection.visual_bell.team_at_limit"),
+        message: S?.key.type === FOrganizationLevelType.TEAM ? getI18nString("resource_connection.visual_bell.org_at_limit") : getI18nString("resource_connection.visual_bell.team_at_limit"),
         error: !0
       })) : "Connecting plan cannot have external collaboration controls enabled" === e.message ? t(F.enqueue({
-        message: _$$t("resource_connection.visual_bell.org_must_disable_ecc"),
+        message: getI18nString("resource_connection.visual_bell.org_must_disable_ecc"),
         error: !0
       })) : "Host settings" === e.message ? t(F.enqueue({
-        message: _$$t("resource_connection.visual_bell.host_settings", {
+        message: getI18nString("resource_connection.visual_bell.host_settings", {
           hostPlanName: R.name
         }),
         error: !0
       })) : t(F.enqueue({
-        message: _$$t("resource_connection.visual_bell.generic_error"),
+        message: getI18nString("resource_connection.visual_bell.generic_error"),
         error: !0
       }));
     });
@@ -73,7 +73,7 @@ export let $$A0 = Ju(function (e) {
       children: jsxs(vo, {
         children: [jsx(Y9, {
           children: jsx(hE, {
-            children: tx("resource_connection.confirm_modal.connect_with_host_plan", {
+            children: renderI18nText("resource_connection.confirm_modal.connect_with_host_plan", {
               hostPlanName: R.name
             })
           })
@@ -87,7 +87,7 @@ export let $$A0 = Ju(function (e) {
             className: _$$s.flex.flexColumn.pl16.pr16.pt16.pb0.maxWFull.$,
             children: [jsx("p", {
               className: _$$s.$,
-              children: tx("resource_connection.confirm_modal.in_a_connected_project_anyone_you_invite_can_edit", {
+              children: renderI18nText("resource_connection.confirm_modal.in_a_connected_project_anyone_you_invite_can_edit", {
                 connectingPlanName: jsx("span", {
                   className: _$$s.fontSemiBold.$,
                   children: C.name
@@ -104,7 +104,7 @@ export let $$A0 = Ju(function (e) {
                 className: F5,
                 children: [jsx("p", {
                   className: QU,
-                  children: _$$t("resource_connection.project_name")
+                  children: getI18nString("resource_connection.project_name")
                 }), jsx("p", {
                   children: e.resourceConnectionInvite.resourceName
                 })]
@@ -112,7 +112,7 @@ export let $$A0 = Ju(function (e) {
                 className: F5,
                 children: [jsx("p", {
                   className: QU,
-                  children: _$$t("resource_connection.host")
+                  children: getI18nString("resource_connection.host")
                 }), jsx("p", {
                   children: R.name
                 })]
@@ -120,7 +120,7 @@ export let $$A0 = Ju(function (e) {
                 className: F5,
                 children: [jsx("p", {
                   className: QU,
-                  children: _$$t("resource_connection.invited_by")
+                  children: getI18nString("resource_connection.invited_by")
                 }), jsx("p", {
                   children: e.resourceConnectionInvite.hostInviter?.name
                 })]
@@ -130,10 +130,10 @@ export let $$A0 = Ju(function (e) {
                   className: j1,
                   children: [jsx("p", {
                     className: QU,
-                    children: _$$t("resource_connection.available_projects")
+                    children: getI18nString("resource_connection.available_projects")
                   }), jsx("div", {
                     ...(S?.tier ? {
-                      "data-tooltip": _$$t("resource_connection.available_projects_tooltip", {
+                      "data-tooltip": getI18nString("resource_connection.available_projects_tooltip", {
                         connectedProjectLimit: _$$b[S.tier],
                         planType: _$$A(S.tier) ?? ""
                       }),
@@ -149,7 +149,7 @@ export let $$A0 = Ju(function (e) {
                     })
                   })]
                 }), jsx("p", {
-                  children: S ? S?.unlimitedConnectionsEnabled || S?.testingOnlyUnlimitedConnectionsEnabled ? _$$t("resource_connection.unlimited") : (_$$b[S.tier] - (S?.connectionCount ?? 0)).toString() : ""
+                  children: S ? S?.unlimitedConnectionsEnabled || S?.testingOnlyUnlimitedConnectionsEnabled ? getI18nString("resource_connection.unlimited") : (_$$b[S.tier] - (S?.connectionCount ?? 0)).toString() : ""
                 })]
               })]
             }), jsx("div", {
@@ -167,7 +167,7 @@ export let $$A0 = Ju(function (e) {
               children: jsx($n, {
                 variant: "link",
                 onClick: e => e.stopPropagation(),
-                children: tx("resource_connection.request_modal.learn_more")
+                children: renderI18nText("resource_connection.request_modal.learn_more")
               })
             }), jsxs("div", {
               className: _$$s.flex.gap8.itemsCenter.$,
@@ -178,24 +178,24 @@ export let $$A0 = Ju(function (e) {
                     N(!1);
                     a();
                     t(F.enqueue({
-                      message: _$$t("resource_connection.visual_bell.connection_request_denied")
+                      message: getI18nString("resource_connection.visual_bell.connection_request_denied")
                     }));
                   }).catch(e => {
                     N(!1);
                     console.error("Error denying resource connection invite", e);
                     t(F.enqueue({
-                      message: _$$t("resource_connection.visual_bell.generic_error"),
+                      message: getI18nString("resource_connection.visual_bell.generic_error"),
                       error: !0
                     }));
                   });
                 },
-                children: tx("resource_connection.confirm_modal.decline")
+                children: renderI18nText("resource_connection.confirm_modal.decline")
               }), w ? jsx($n, {
                 disabled: !0,
                 children: jsx(qc, {})
               }) : jsx($n, {
                 onClick: k,
-                children: tx("resource_connection.connect")
+                children: renderI18nText("resource_connection.connect")
               })]
             })]
           })]

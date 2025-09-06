@@ -1,6 +1,6 @@
 import { c as _$$c, r as _$$r } from "../905/676456";
 import { s as _$$s } from "../905/573154";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { MM } from "../905/350402";
 import { yJ } from "../905/584989";
 import { Gu } from "../905/513035";
@@ -31,7 +31,7 @@ export let $$c0 = MM("TEAM_USER_UPDATE_SEAT_TYPE", async (e, {
       return i;
     }),
     entry_point: s
-  }).then(function({
+  }).then(function ({
     data: r
   }) {
     e.dispatch(_$$c(p));
@@ -40,9 +40,9 @@ export let $$c0 = MM("TEAM_USER_UPDATE_SEAT_TYPE", async (e, {
       teamId: t
     }));
     c?.();
-  }).catch(function(t) {
+  }).catch(function (t) {
     e.dispatch(_$$r(p));
-    e.dispatch(_$$s.error(function(e) {
+    e.dispatch(_$$s.error(function (e) {
       let {
         reason
       } = e;
@@ -51,11 +51,11 @@ export let $$c0 = MM("TEAM_USER_UPDATE_SEAT_TYPE", async (e, {
       } = e;
       switch (reason) {
         case "seat_increase_unauthorized":
-          return _$$t("modify_plan_user_seat_modal.error.seat_increase_unauthorized");
+          return getI18nString("modify_plan_user_seat_modal.error.seat_increase_unauthorized");
         case "upgrade_on_suspended_plan":
-          if (message) return _$$t("modify_plan_user_seat_modal.error.upgrade_on_suspended_plan");
+          if (message) return getI18nString("modify_plan_user_seat_modal.error.upgrade_on_suspended_plan");
       }
-      return _$$t("team_user.actions.an_error_occurred_while_changing_a_team_member_s_billing_status");
+      return getI18nString("team_user.actions.an_error_occurred_while_changing_a_team_member_s_billing_status");
     }(t.data)));
     u?.();
     console.error(t);
@@ -115,4 +115,4 @@ export function $$u1(e, t) {
   };
 }
 export const P = $$c0;
-export const Z = $$u1; 
+export const Z = $$u1;

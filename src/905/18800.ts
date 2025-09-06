@@ -1,4 +1,4 @@
-import { M2, t_, zl, eU, Ut } from "../figma_app/27355";
+import { createAtomWithEquality, t_, atomStoreManager, atom, Ut } from "../figma_app/27355";
 import { getConsentRegion } from "../figma_app/169182";
 import { W } from "../905/423575";
 let s = "pref";
@@ -28,12 +28,12 @@ async function c(e, t = "background") {
     });
   } catch {}
 }
-let u = M2(t_(() => l()));
+let u = createAtomWithEquality(t_(() => l()));
 async function p() {
-  zl.set(u, await d());
+  atomStoreManager.set(u, await d());
 }
 async function m(e) {
-  zl.set(u, e);
+  atomStoreManager.set(u, e);
   await c(e);
 }
 export async function $$h2({
@@ -48,7 +48,7 @@ export async function $$h2({
   });
 }
 window.addEventListener("focus", () => p());
-let $$g0 = eU(e => {
+let $$g0 = atom(e => {
   switch (e(u)) {
     case Ut:
     case void 0:
@@ -59,7 +59,7 @@ let $$g0 = eU(e => {
       return "yes";
   }
 });
-let $$f1 = eU(e => {
+let $$f1 = atom(e => {
   let t = e(u);
   switch (t) {
     case Ut:
@@ -71,7 +71,7 @@ let $$f1 = eU(e => {
       return t.a;
   }
 });
-let $$_6 = eU(e => {
+let $$_6 = atom(e => {
   let t = e(u);
   switch (t) {
     case Ut:
@@ -83,7 +83,7 @@ let $$_6 = eU(e => {
       return t.m;
   }
 });
-let $$A5 = eU(e => {
+let $$A5 = atom(e => {
   let t = e(u);
   switch (t) {
     case Ut:
@@ -95,7 +95,7 @@ let $$A5 = eU(e => {
       return t.f;
   }
 });
-let $$y3 = eU(0);
+let $$y3 = atom(0);
 export const Dr = $$g0;
 export const EA = $$f1;
 export const L3 = $$h2;

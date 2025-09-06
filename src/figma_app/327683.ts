@@ -2,7 +2,7 @@ import { rXF, j0r } from "../figma_app/763686";
 import { sD } from "../figma_app/243058";
 import { l7 } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { colorToHex } from "../905/436288";
 import { _W } from "../figma_app/191804";
 import { l as _$$l, i as _$$i } from "../905/283360";
@@ -266,7 +266,7 @@ async function O({
   });
   let w = [...popularVariables, ...similarVariables.slice(0, _)];
   let O = _$$g();
-  let R = zl.get(Vg) ?? "";
+  let R = atomStoreManager.get(Vg) ?? "";
   let L = await _$$i(e, w, t, O, R, Array.from(i.libraryKeys), a);
   return L && 0 !== L.length ? {
     fixContext: {

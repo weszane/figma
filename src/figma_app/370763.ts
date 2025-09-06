@@ -1,10 +1,10 @@
 import { useCallback } from "react";
 import { useSelector } from "../vendor/514228";
 import { NLJ } from "../figma_app/763686";
-import { eU } from "../figma_app/27355";
+import { atom } from "jotai";
 import { VU } from "../905/625959";
 import { xc } from "../905/848862";
-import { bt } from "../905/270322";
+import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { c1 } from "../figma_app/357047";
 export function $$u3(e) {
   switch (e) {
@@ -194,10 +194,10 @@ export function $$_7(e) {
 export function $$h0(e) {
   VU.get(e, "toolbar")();
 }
-let $$m4 = bt(e => e.mirror.appModel.topLevelMode);
-let g = bt(e => e.mirror.appModel.activeCanvasEditModeType);
-let $$f2 = bt(e => e.mirror.appModel.currentTool);
-let $$E6 = eU(e => e($$f2), (e, t, r) => {
+let $$m4 = createReduxSubscriptionAtomWithState(e => e.mirror.appModel.topLevelMode);
+let g = createReduxSubscriptionAtomWithState(e => e.mirror.appModel.activeCanvasEditModeType);
+let $$f2 = createReduxSubscriptionAtomWithState(e => e.mirror.appModel.currentTool);
+let $$E6 = atom(e => e($$f2), (e, t, r) => {
   $$h0($$u3(r));
 });
 let $$y5 = {

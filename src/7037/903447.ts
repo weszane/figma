@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useRef, useEffect } from "react";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { In } from "../905/672640";
 import { BK } from "../905/848862";
 import { Ib } from "../905/129884";
@@ -20,7 +20,7 @@ export function $$u0(e) {
     } : void 0,
     selected: t.showing,
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": _$$t("fig_feed.more_actions"),
+    "data-tooltip": getI18nString("fig_feed.more_actions"),
     onClick: e => {
       e.stopPropagation();
       t.toggle();

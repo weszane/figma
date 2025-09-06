@@ -8,7 +8,7 @@ import { Dj } from "../figma_app/28817";
 import { F4 } from "../905/795642";
 import { M } from "../905/609813";
 import { DEFAULT_LOADING_STATE } from "../905/957591";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { ZC } from "../figma_app/39751";
 import { g as _$$g } from "../905/880308";
 import { ob } from "../905/436043";
@@ -180,7 +180,7 @@ export function $$N5(e, t, r = {}) {
   useEffect(() => {
     if (!a.current && "loading" !== e.status && "disabled" !== e.status) {
       let n = window.performance.now();
-      sx(t, {
+      trackEventAnalytics(t, {
         ...r,
         durationMs: n - i.current,
         status: e.status

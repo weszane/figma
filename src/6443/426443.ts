@@ -4,11 +4,11 @@ import { debounce } from "../905/915765";
 import { Ez5 } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { SelectionState, Modifier, EditorState, convertToRaw, convertFromRaw, KeyBindingUtil, CompositeDecorator, getDefaultKeyBinding, convertFromHTML, ContentState, RichUtils, Editor } from "../vendor/279643";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { l5, vj, Wf } from "../figma_app/819288";
-import { eD } from "../figma_app/876459";
-import { Lg } from "../figma_app/257275";
-import { t as _$$t } from "../905/303541";
+import { desktopAPIInstance } from "../figma_app/876459";
+import { getFalseValue } from "../figma_app/897289";
+import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { We, UU, Qe } from "../figma_app/770088";
 import { Hx } from "../figma_app/530167";
@@ -839,7 +839,7 @@ export class $$tA0 extends Component {
     this.trackMentionSearchMetrics = (t, e, n) => {
       let i = e.index;
       let r = e.mentions ? e.mentions.length : 0;
-      sx("at_mention_search_metrics", {
+      trackEventAnalytics("at_mention_search_metrics", {
         did_click_through: n,
         search_text_length: t.length,
         selected_index: i,
@@ -956,7 +956,7 @@ export class $$tA0 extends Component {
     };
     this.onMentionSearchChange = debounce(async t => {
       let e = this.newMentionsSearch(t);
-      Lg() && (this.TEST_ONLY_mentionsSearchPending = e);
+      getFalseValue() && (this.TEST_ONLY_mentionsSearchPending = e);
       let {
         result,
         canceled
@@ -1243,7 +1243,7 @@ export class $$tA0 extends Component {
           t = Modifier.removeInlineStyle(t, n, "HIGHLIGHT");
           e = EditorState.push(e, t, "change-inline-style");
           this.props.dispatch(_$$F.enqueue({
-            message: _$$t("hyperlink.invalid_link_plain")
+            message: getI18nString("hyperlink.invalid_link_plain")
           }));
         }
         this.onChange(e);
@@ -1425,7 +1425,7 @@ export class $$tA0 extends Component {
       t.stopPropagation();
     };
     this.onContextMenu = t => {
-      eD || t.stopPropagation();
+      desktopAPIInstance || t.stopPropagation();
     };
     this.addAriaHiddenToPlaceholder = () => {
       let t = this.wrapperRef.current?.querySelector(".public-DraftEditorPlaceholder-root");

@@ -12,11 +12,11 @@ import { E as _$$E } from "../905/500201";
 import { s as _$$s } from "../905/539471";
 import { g as _$$g } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
-import { t as _$$t2 } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Ju } from "../905/102752";
 import { memo, useState, useEffect, useMemo } from "react";
 import { W as _$$W } from "../figma_app/304955";
-import { fp, zl } from "../figma_app/27355";
+import { useAtomValueAndSetter, atomStoreManager } from "../figma_app/27355";
 import { JT } from "../figma_app/632248";
 import { RL, qy, z8, wj, Ag } from "../figma_app/862289";
 import { nM, NJ } from "../figma_app/570630";
@@ -91,19 +91,19 @@ function P({
           className: "x78zum5 xdt5ytf x167g77z x1cy8zhl xkh2ocl",
           children: [jsx("span", {
             ...Ay.props(O.title),
-            children: _$$t2("figmake.design_system_imports.library_extraction_theming_progress.intro.title")
+            children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.intro.title")
           }), jsx("span", {
             ...Ay.props(O.subtitle),
-            children: _$$t2("figmake.design_system_imports.library_extraction_theming_progress.intro.description")
+            children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.intro.description")
           })]
         }), jsxs("div", {
           className: "x78zum5 x1cy8zhl x1v2ro7d",
           children: [jsx(WW, {
             onClick: e,
-            children: _$$t2("figmake.design_system_imports.library_extraction_theming_progress.intro.cta")
+            children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.intro.cta")
           }), jsx(WW, {
             variant: "secondary",
-            children: _$$t2("figmake.design_system_imports.library_extraction_theming_progress.intro.learn_more")
+            children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.intro.learn_more")
           })]
         })]
       }), jsx(fh, {
@@ -155,16 +155,16 @@ function L({
       })
     }), jsx("h3", {
       ...Ay.props(F.title),
-      children: _$$t2("figmake.design_system_imports.library_extraction_theming_progress.title.failed")
+      children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.title.failed")
     }), jsx("span", {
       ...Ay.props(F.errorSubtitle),
-      children: _$$t2("figmake.design_system_imports.library_extraction_theming_progress.subtitle.failed")
+      children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.subtitle.failed")
     }), e && jsx($n, {
       variant: "primary",
       onClick: () => {
         e();
       },
-      children: _$$t2("figmake.design_system_imports.library_extraction_theming_progress.try_again")
+      children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.try_again")
     })]
   });
 }
@@ -190,7 +190,7 @@ function W({
     className: "x78zum5 x193iq5w xdt5ytf x1cy8zhl x167g77z x1vcdrz3 xkh2ocl",
     children: [jsx("span", {
       ...Ay.props(q.optionalText),
-      children: _$$t2("figmake.design_system_imports.library_extraction_theming_progress.step.examples.found.subtitle")
+      children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.step.examples.found.subtitle")
     }), jsx("div", {
       className: "x78zum5 x1cy8zhl x167g77z x1a02dak",
       children: jsx($n, {
@@ -198,7 +198,7 @@ function W({
           e(!1);
           t.start();
         },
-        children: _$$t2("figmake.design_system_imports.library_extraction_theming_progress.step.examples.found.cta")
+        children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.step.examples.found.cta")
       })
     })]
   });
@@ -212,36 +212,36 @@ function K({
     className: "x78zum5 x193iq5w xdt5ytf x1cy8zhl x167g77z x1vcdrz3 xkh2ocl",
     children: [jsx("span", {
       ...Ay.props(q.optionalText),
-      children: _$$t2("figmake.design_system_imports.library_extraction_theming_progress.step.examples.error_description")
+      children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.step.examples.error_description")
     }), jsxs("div", {
       className: "x78zum5 x1cy8zhl x167g77z",
       children: [jsx(_$$E2, {
         variant: "brandOutline",
         size: "md",
-        children: _$$t2("figmake.design_system_imports.library_extraction_theming_progress.step.examples.step_1_number")
+        children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.step.examples.step_1_number")
       }), jsx("span", {
         ...Ay.props(q.optionalText),
-        children: _$$t2("figmake.design_system_imports.library_extraction_theming_progress.step.examples.step_1")
+        children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.step.examples.step_1")
       })]
     }), jsxs("div", {
       className: "x78zum5 x1cy8zhl x167g77z",
       children: [jsx(_$$E2, {
         variant: "brandOutline",
         size: "md",
-        children: _$$t2("figmake.design_system_imports.library_extraction_theming_progress.step.examples.step_2_number")
+        children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.step.examples.step_2_number")
       }), jsx("span", {
         ...Ay.props(q.optionalText),
-        children: _$$t2("figmake.design_system_imports.library_extraction_theming_progress.step.examples.step_2")
+        children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.step.examples.step_2")
       })]
     }), jsxs("div", {
       className: "x78zum5 x1cy8zhl x167g77z",
       children: [jsx(_$$E2, {
         variant: "brandOutline",
         size: "md",
-        children: _$$t2("figmake.design_system_imports.library_extraction_theming_progress.step.examples.step_3_number")
+        children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.step.examples.step_3_number")
       }), jsx("span", {
         ...Ay.props(q.optionalText),
-        children: _$$t2("figmake.design_system_imports.library_extraction_theming_progress.step.examples.step_3")
+        children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.step.examples.step_3")
       })]
     }), jsxs("div", {
       className: "x78zum5 x1cy8zhl x167g77z x1a02dak",
@@ -250,14 +250,14 @@ function K({
           e(!0);
           t.start();
         },
-        children: _$$t2("figmake.design_system_imports.library_extraction_theming_progress.step.examples.skip")
+        children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.step.examples.skip")
       }), jsx($n, {
         variant: "secondary",
         onClick: () => {
           i(aZ());
           i(Lo());
         },
-        children: _$$t2("figmake.design_system_imports.library_extraction_theming_progress.step.examples.go_to_canvas")
+        children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.step.examples.go_to_canvas")
       })]
     })]
   });
@@ -270,8 +270,8 @@ function Y({
     tasks,
     state
   } = RL(JT.PUBLISH_LIBRARY_FOR_AI, Iq);
-  let [a, s] = fp(tI);
-  let [o] = fp(Zc);
+  let [a, s] = useAtomValueAndSetter(tI);
+  let [o] = useAtomValueAndSetter(Zc);
   let [u, m] = useState(!1);
   useEffect(() => {
     o && state === qy.ERROR && (m(!0), start());
@@ -283,11 +283,11 @@ function Y({
   let x = e => {
     switch (e.taskId) {
       case mp.STYLES:
-        return _$$t2("figmake.design_system_imports.library_extraction_theming_progress.step.styles");
+        return getI18nString("figmake.design_system_imports.library_extraction_theming_progress.step.styles");
       case mp.EXAMPLES:
-        return e.state === z8.FAILED ? e.error.message : e.state === z8.SUCCEEDED && u ? _$$t2("figmake.design_system_imports.library_extraction_theming_progress.step.examples.found") : _$$t2("figmake.design_system_imports.library_extraction_theming_progress.step.examples");
+        return e.state === z8.FAILED ? e.error.message : e.state === z8.SUCCEEDED && u ? getI18nString("figmake.design_system_imports.library_extraction_theming_progress.step.examples.found") : getI18nString("figmake.design_system_imports.library_extraction_theming_progress.step.examples");
       case mp.CSS:
-        return _$$t2("figmake.design_system_imports.library_extraction_theming_progress.step.css");
+        return getI18nString("figmake.design_system_imports.library_extraction_theming_progress.step.css");
     }
   };
   let T = e => {
@@ -344,10 +344,10 @@ function Y({
       children: jsxs(fh, {
         children: [jsx("h3", {
           ...Ay.props(q.title),
-          children: g ? _$$t2("figmake.design_system_imports.library_extraction_theming_progress.title.completed") : b ? _$$t2("figmake.design_system_imports.library_extraction_theming_progress.title.error") : _$$t2("figmake.design_system_imports.library_extraction_theming_progress.title.in_progress")
+          children: g ? getI18nString("figmake.design_system_imports.library_extraction_theming_progress.title.completed") : b ? getI18nString("figmake.design_system_imports.library_extraction_theming_progress.title.error") : getI18nString("figmake.design_system_imports.library_extraction_theming_progress.title.in_progress")
         }), jsx("span", {
           ...Ay.props(q.subtitle),
-          children: g ? _$$t2("figmake.design_system_imports.library_extraction_theming_progress.description.completed") : b ? _$$t2("figmake.design_system_imports.library_extraction_theming_progress.description.error") : _$$t2("figmake.design_system_imports.library_extraction_theming_progress.description.in_progress")
+          children: g ? getI18nString("figmake.design_system_imports.library_extraction_theming_progress.description.completed") : b ? getI18nString("figmake.design_system_imports.library_extraction_theming_progress.description.error") : getI18nString("figmake.design_system_imports.library_extraction_theming_progress.description.in_progress")
         })]
       })
     }), jsx(fI, {
@@ -367,17 +367,17 @@ function Y({
               children: x(t)
             }), t.taskId === mp.EXAMPLES && !a && jsx("span", {
               ...Ay.props(q.optionalText),
-              children: _$$t2("figmake.design_system_imports.library_extraction_theming_progress.step.examples.optional")
+              children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.step.examples.optional")
             }), t.taskId === mp.EXAMPLES && o && a && jsx("span", {
               ...Ay.props(q.optionalText),
-              children: _$$t2("figmake.design_system_imports.library_extraction_theming_progress.step.examples.skipped")
+              children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.step.examples.skipped")
             }), t.taskId === mp.CSS && g && jsx("div", {
               className: "x78zum5 x6s0dn4 xpvyfi4 xeq5yr9 x8x9d4c",
               children: jsx($n, {
                 onClick: () => {
                   e(!0);
                 },
-                children: _$$t2("figmake.design_system_imports.library_extraction_theming_progress.button.complete")
+                children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.button.complete")
               })
             })]
           }), t.taskId === mp.EXAMPLES && b && state === qy.ERROR && jsx(K, {
@@ -424,7 +424,7 @@ let q = {
 function Z({
   filePath: e
 }) {
-  let t = zl.get(nM);
+  let t = atomStoreManager.get(nM);
   let i = _$$W(t, NJ, e);
   return i ? jsx(Fragment, {
     children: jsx(_$$R, {
@@ -468,22 +468,22 @@ function ei({
     children: jsxs(vo, {
       children: [jsxs(Y9, {
         children: [jsx(hE, {
-          children: _$$t2("figmake.design_system_imports.library_extraction_theming_progress.re_extract.title")
+          children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.re_extract.title")
         }), jsx(Jn, {})]
       }), jsx(nB, {
         children: jsxs("div", {
           className: "x78zum5 xdt5ytf x1usb9k9 xw5ewwj x1m7nem5",
           children: [jsx("span", {
             ...Ay.props(en.updateStylesWindowText),
-            children: _$$t2("figmake.design_system_imports.library_extraction_theming_progress.re_extract.description_top")
+            children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.re_extract.description_top")
           }), jsx("span", {
             ...Ay.props(en.updateStylesWindowText),
-            children: _$$t2("figmake.design_system_imports.library_extraction_theming_progress.re_extract.description_bottom")
+            children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.re_extract.description_bottom")
           }), jsx("div", {
             className: "x14atkfc",
             children: jsx($n, {
               onClick: e,
-              children: _$$t2("figmake.design_system_imports.library_extraction_theming_progress.re_extract.parse_again")
+              children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.re_extract.parse_again")
             })
           })]
         })
@@ -497,7 +497,7 @@ function ei({
         variant: "secondary",
         iconPrefix: jsx(_$$f, {}),
         onClick: () => i(!0),
-        children: _$$t2("figmake.design_system_imports.library_extraction_theming_progress.parse_styles")
+        children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.parse_styles")
       })
     }), createPortal(s, document.body)]
   });
@@ -539,7 +539,7 @@ function ea() {
   let e = wj(JT.PUBLISH_LIBRARY_FOR_AI);
   let [t, i] = useState(e.state !== qy.INITIAL);
   let [r, a] = useState(() => {
-    let e = zl.get(nM);
+    let e = atomStoreManager.get(nM);
     return !!_$$W(e, NJ, Ul);
   });
   useEffect(() => {
@@ -555,7 +555,7 @@ function ea() {
   });
   let l = null;
   if (r) {
-    let e = zl.get(nM);
+    let e = atomStoreManager.get(nM);
     let t = _$$W(e, NJ, Ul);
     t ? (o = jsx(Z, {
       filePath: t.name
@@ -638,7 +638,7 @@ or initiating processes. They communicate interactivity and should have clear, a
 };
 function ed() {
   l7.user("create-new-code-file", () => {
-    let e = zl.get(nM);
+    let e = atomStoreManager.get(nM);
     _$$W(e, NJ, R6) || glU?.createNewCodeFile(R6, es["1"] || "", null, !1);
   });
   let [e, t] = useState(jsx("span", {
@@ -760,10 +760,10 @@ let $$ep0 = Ju(function (e) {
                 className: "x78zum5 xdt5ytf x1tamke2 x167g77z x1cy8zhl xkh2ocl x1kgkb76",
                 children: [jsx(_$$e, {}), jsx("span", {
                   ...Ay.props(eu.leftPanelHeaderTitle),
-                  children: _$$t2("figmake.design_system_imports.library_extraction_modal.sidebar_title")
+                  children: getI18nString("figmake.design_system_imports.library_extraction_modal.sidebar_title")
                 }), jsx("span", {
                   ...Ay.props(eu.leftPanelHeaderSubtitle),
-                  children: _$$t2("figmake.design_system_imports.library_extraction_modal.sidebar_subtitle")
+                  children: getI18nString("figmake.design_system_imports.library_extraction_modal.sidebar_subtitle")
                 })]
               }), jsx(fI, {
                 children: jsxs(_$$t.TabStrip, {
@@ -775,10 +775,10 @@ let $$ep0 = Ju(function (e) {
                       className: "x78zum5 xdt5ytf xl56j7k x1cy8zhl x5mp9sv",
                       children: [jsx("span", {
                         ...Ay.props(eu.leftPanelTabTextTitle),
-                        children: _$$t2("figmake.design_system_imports.library_extraction_modal.tabs.styles.title")
+                        children: getI18nString("figmake.design_system_imports.library_extraction_modal.tabs.styles.title")
                       }), jsx("span", {
                         ...Ay.props(eu.leftPanelTabTextSubtitle),
-                        children: _$$t2("figmake.design_system_imports.library_extraction_modal.tabs.styles.subtitle")
+                        children: getI18nString("figmake.design_system_imports.library_extraction_modal.tabs.styles.subtitle")
                       })]
                     })]
                   }), jsxs(_$$r, {
@@ -788,10 +788,10 @@ let $$ep0 = Ju(function (e) {
                       className: "x78zum5 xdt5ytf xl56j7k x1cy8zhl x5mp9sv",
                       children: [jsx("span", {
                         ...Ay.props(eu.leftPanelTabTextTitle),
-                        children: _$$t2("figmake.design_system_imports.library_extraction_modal.tabs.guidelines.title")
+                        children: getI18nString("figmake.design_system_imports.library_extraction_modal.tabs.guidelines.title")
                       }), jsx("span", {
                         ...Ay.props(eu.leftPanelTabTextSubtitle),
-                        children: _$$t2("figmake.design_system_imports.library_extraction_modal.tabs.guidelines.subtitle")
+                        children: getI18nString("figmake.design_system_imports.library_extraction_modal.tabs.guidelines.subtitle")
                       })]
                     })]
                   })]

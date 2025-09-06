@@ -1,8 +1,8 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { h as _$$h } from "../905/207101";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { _I } from "../figma_app/473493";
 import { m0 } from "../figma_app/976749";
 import { E } from "../905/453826";
@@ -15,10 +15,10 @@ import { N } from "../figma_app/268271";
 import { h as _$$h2 } from "../905/284399";
 import { q3 } from "../figma_app/450829";
 import { hPP } from "../figma_app/6204";
-let $$b = () => t("collaboration.spotlight.nudge_spotlight.title");
+let $$b = () => getI18nString("collaboration.spotlight.nudge_spotlight.title");
 export function $$y0() {
-  let e = md(PD);
-  let t = md(E6);
+  let e = useAtomWithSubscription(PD);
+  let t = useAtomWithSubscription(E6);
   let n = m0();
   let r = _I();
   let y = n && !r;

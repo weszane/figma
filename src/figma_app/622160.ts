@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { PureComponent, useState, useRef, useEffect } from "react";
 import { arraysEqual } from "../figma_app/656233";
 import { Point } from "../905/736624";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { jS, Pv } from "../905/619652";
 export class $$d0 extends PureComponent {
   constructor(e) {
@@ -44,7 +44,7 @@ export class $$d0 extends PureComponent {
       src: this.state.src ? this.state.src : "",
       width: this.props.width,
       height: this.props.height,
-      alt: t("fullscreen.properties_panel.image_preview.alt_text")
+      alt: getI18nString("fullscreen.properties_panel.image_preview.alt_text")
     });
   }
 }

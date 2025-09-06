@@ -1,6 +1,6 @@
 import { Et } from "../figma_app/397267";
-import { zl } from "../figma_app/27355";
-import { az } from "../905/449184";
+import { atomStoreManager } from "../figma_app/27355";
+import { analyticsEventManager } from "../905/449184";
 import { r6 } from "../figma_app/517115";
 import { P } from "../figma_app/235371";
 import { qd, YQ } from "../figma_app/257779";
@@ -29,7 +29,7 @@ export class $$p0 {
     if (this.timers.length > 0) {
       let o = i - this.timers[Et(r) ? r : this.timers.length - 1];
       let l = this.timers.push(i);
-      this.shouldLog && az.trackDefinedEvent("auto_suggest.timer", {
+      this.shouldLog && analyticsEventManager.trackDefinedEvent("auto_suggest.timer", {
         ...this.analyticsData,
         context: e,
         stepName: t,
@@ -48,7 +48,7 @@ export class $$p0 {
   }
 }
 export function $$_1(e, t, r) {
-  az.trackDefinedEvent("auto_suggest.funnel", {
+  analyticsEventManager.trackDefinedEvent("auto_suggest.funnel", {
     ...e,
     funnelEvent: t,
     sessionId: r6(),
@@ -60,8 +60,8 @@ export function $$_1(e, t, r) {
 export function $$h2(e) {
   let {
     analyticsData
-  } = zl.get(P);
-  az.trackDefinedEvent("auto_suggest.component_inserted", {
+  } = atomStoreManager.get(P);
+  analyticsEventManager.trackDefinedEvent("auto_suggest.component_inserted", {
     ...e,
     ...analyticsData,
     sessionId: r6(),

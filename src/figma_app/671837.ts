@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useCallback, useEffect } from "react";
 import { nj } from "../905/125019";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import o from "classnames";
 import { buildUploadUrl } from "../figma_app/169182";
 import { Point } from "../905/736624";
@@ -40,8 +40,8 @@ export let $$I0 = 72;
 export function $$S1({
   action: e
 }) {
-  let t = md(GI);
-  let r = md(IZ);
+  let t = useAtomWithSubscription(GI);
+  let r = useAtomWithSubscription(IZ);
   let i = F.format(t.paints?.[0]?.color);
   let a = F.format(r.paints?.[0]?.color);
   return "set-tool-eraser" === e ? jsx($$N2, {
@@ -118,8 +118,8 @@ export function $$N2({
   color: r,
   isPlaceholder: i = !1
 }) {
-  let a = md(GI);
-  let o = md(IZ);
+  let a = useAtomWithSubscription(GI);
+  let o = useAtomWithSubscription(IZ);
   let l = a.strokeWeight === uM;
   let d = o.strokeWeight === Iz;
   if (i) switch (e) {
@@ -1063,7 +1063,7 @@ function D({
 }) {
   let {
     washiTapePaint
-  } = md(SK);
+  } = useAtomWithSubscription(SK);
   let r = washiTapePaint?.image?.hash && nj(washiTapePaint?.image?.hash);
   let i = r && buildUploadUrl(r);
   let o = r && !_$$B.map(e => e.image).includes(r);
@@ -1100,7 +1100,7 @@ function k({
 }) {
   let {
     washiTapePaint
-  } = md(SK);
+  } = useAtomWithSubscription(SK);
   let [r, a] = useState();
   let o = useCallback(e => {
     let t = jS(e, new Point((e.originalImageWidth || 244) / (e.originalImageHeight || 244) * 244, 244), {

@@ -1,6 +1,6 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getInitialOptions } from "../figma_app/169182";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { O } from "../905/833838";
 let o = ["recentsAndSharing", "draftsToMove", "communityHub", "search", "user"];
 export function $$l0(e) {
@@ -15,7 +15,7 @@ export function $$l0(e) {
     }
     if ((o.includes(e.selectedView.view) || "deletedFiles" === e.selectedView.view || "limitedTeamSharedProjects" === e.selectedView.view || "trashedFolders" === e.selectedView.view || "desktopNewTab" === e.selectedView.view || "resourceHub" === e.selectedView.view) && !e.currentUserOrgId) return e.currentTeamId || "";
   } catch (e) {
-    $D(_$$e.GROWTH_PLATFORM, Error(`Error getting team ID from Redux state: ${e.message}`));
+    reportError(_$$e.GROWTH_PLATFORM, Error(`Error getting team ID from Redux state: ${e.message}`));
   }
   return "";
 }

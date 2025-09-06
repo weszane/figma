@@ -2,11 +2,11 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useCallback } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { Ay } from "@stylexjs/stylex";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { MD } from "../figma_app/672951";
 import { gY } from "../figma_app/566371";
 import { s as _$$s } from "../905/573154";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { kg } from "../figma_app/976345";
 import { U as _$$U } from "../905/926550";
 import { V as _$$V } from "../905/633585";
@@ -58,7 +58,7 @@ function B({
     truncate: !0,
     children: jsx("span", {
       ...Ay.props(_$$g.textBodyMedium),
-      children: _$$t("file_browser.folder.number_of_files", {
+      children: getI18nString("file_browser.folder.number_of_files", {
         formattedNumFiles: _$$t2(i.data),
         numFiles: i.data
       })
@@ -111,7 +111,7 @@ let Y = (e, t, i) => ({
   field: Dq.NAME,
   renderHeaderCell: () => jsx(_$$E2, {
     truncate: !0,
-    children: tx("file_browser.folder_list_view.header_name_column")
+    children: renderI18nText("file_browser.folder_list_view.header_name_column")
   }),
   renderRowCell: (r, {
     itemIndex: a
@@ -127,7 +127,7 @@ let Y = (e, t, i) => ({
 let q = {
   renderHeaderCell: () => jsx(_$$E2, {
     truncate: !0,
-    children: tx("file_browser.folder_list_view.header_files_column")
+    children: renderI18nText("file_browser.folder_list_view.header_files_column")
   }),
   renderRowCell: e => jsx(B, {
     folderId: e.id
@@ -137,7 +137,7 @@ let $ = {
   field: Dq.LAST_MODIFIED,
   renderHeaderCell: () => jsx(_$$E2, {
     truncate: !0,
-    children: tx("file_browser.folder_list_view.header_updated_column")
+    children: renderI18nText("file_browser.folder_list_view.header_updated_column")
   }),
   renderRowCell: e => jsx(BV, {
     children: jsx(h1, {
@@ -148,7 +148,7 @@ let $ = {
 let Z = {
   renderHeaderCell: () => jsx(_$$E2, {
     truncate: !0,
-    children: tx("file_browser.folder_list_view.header_updated_column")
+    children: renderI18nText("file_browser.folder_list_view.header_updated_column")
   }),
   renderRowCell: e => jsx(BV, {
     children: jsx(h1, {
@@ -160,7 +160,7 @@ let X = {
   field: Dq.CREATED_AT,
   renderHeaderCell: () => jsx(_$$E2, {
     truncate: !0,
-    children: tx("file_browser.folder_list_view.header_created_column")
+    children: renderI18nText("file_browser.folder_list_view.header_created_column")
   }),
   renderRowCell: e => jsx(BV, {
     children: jsx(h1, {
@@ -172,7 +172,7 @@ let Q = {
   field: Dq.SHARED_AT,
   renderHeaderCell: () => jsx(_$$E2, {
     truncate: !0,
-    children: tx("file_browser.folder_list_view.header_shared_at_column")
+    children: renderI18nText("file_browser.folder_list_view.header_shared_at_column")
   }),
   renderRowCell: e => jsx(BV, {
     children: jsx(V, {
@@ -183,7 +183,7 @@ let Q = {
 let J = {
   renderHeaderCell: () => jsx(_$$E2, {
     truncate: !0,
-    children: tx("file_browser.folder_list_view.header_shared_by_column")
+    children: renderI18nText("file_browser.folder_list_view.header_shared_by_column")
   }),
   renderRowCell: e => jsx(BV, {
     children: jsx(H, {
@@ -194,7 +194,7 @@ let J = {
 let ee = {
   renderHeaderCell: () => jsx(_$$E2, {
     truncate: !0,
-    children: tx("file_browser.folder_list_view.header_trashed_at_column")
+    children: renderI18nText("file_browser.folder_list_view.header_trashed_at_column")
   }),
   renderRowCell: e => jsx(BV, {
     children: jsx(W, {
@@ -250,7 +250,7 @@ export function $$ea0(e) {
   } = er(S, e.dataOnboardingKey, e.dataOnboardingKeyIndex, e.checksForViewOnlyLabels);
   let P = _$$E();
   let O = useCallback((e, t) => {
-    sx("Folder Permanently Delete Click", {
+    trackEventAnalytics("Folder Permanently Delete Click", {
       folderId: e.id,
       teamId: e.team_id,
       orgId: t
@@ -264,7 +264,7 @@ export function $$ea0(e) {
     }));
   }, [s, C]);
   let D = useCallback((e, t) => {
-    sx("Folder Trash Click", {
+    trackEventAnalytics("Folder Trash Click", {
       folderId: e.id,
       teamId: e.team_id,
       orgId: t
@@ -272,7 +272,7 @@ export function $$ea0(e) {
     e.folderPerms?.canSkipDeletionConfirmation ? w({
       folderId: e.id
     }).catch(() => {
-      s(_$$s.error(_$$t("file_browser.api_folder.error_when_moving_to_trash")));
+      s(_$$s.error(getI18nString("file_browser.api_folder.error_when_moving_to_trash")));
     }) : "loaded" === C.projects.status && C.projects.data[e.id].canTrash && s(to({
       type: _$$V(),
       data: {

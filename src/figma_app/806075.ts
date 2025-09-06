@@ -2,12 +2,12 @@ import { getInitialOptions } from "../figma_app/169182";
 import { tn } from "../figma_app/473493";
 import { ds } from "../figma_app/314264";
 import { FFileActivityType } from "../figma_app/191312";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { L } from "../905/657783";
 export let $$d0 = "Enter Design Mode";
 export function $$c1(e, t, r, u, p = {}) {
-  let _ = t === nT.DevHandoff;
-  let h = t === nT.Illustration;
+  let _ = t === FEditorType.DevHandoff;
+  let h = t === FEditorType.Illustration;
   let m = {
     source: r,
     hasSeatForDevMode: tn(e),

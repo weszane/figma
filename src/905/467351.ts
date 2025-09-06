@@ -2,7 +2,7 @@ import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { E as _$$E } from "../905/632989";
 import { Rs } from "../figma_app/288654";
 import { vj } from "../figma_app/919079";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { _iU } from "../figma_app/43951";
 let d = "branching_status_helpers--badgeIndicatorBase--MfU-L";
 let c = "branching_status_helpers--badgeIndicatorInReview--l8PLk branching_status_helpers--badgeIndicatorBase--MfU-L";
@@ -71,17 +71,17 @@ export function $$R3(e) {
     case 0:
       a = u;
       l = _;
-      I = _$$t("collaboration.branching.approved");
+      I = getI18nString("collaboration.branching.approved");
       break;
     case 1:
       a = c;
       l = f;
-      I = _$$t("collaboration.branching.in_review");
+      I = getI18nString("collaboration.branching.in_review");
       break;
     case 4:
       a = p;
       l = A;
-      I = _$$t("collaboration.branching.changes_suggested");
+      I = getI18nString("collaboration.branching.changes_suggested");
       break;
     default:
       return jsx(Fragment, {});
@@ -106,31 +106,31 @@ let N = (e, t) => {
     case 4:
       i = u;
       n = _;
-      r = _$$t("collaboration.branching.approved");
+      r = getI18nString("collaboration.branching.approved");
       a = I;
       break;
     case 3:
       i = t ? "branching_status_helpers--badgeIndicatorInReviewToolbar--n55T5 branching_status_helpers--badgeIndicatorInReview--l8PLk branching_status_helpers--badgeIndicatorBase--MfU-L" : c;
       n = t ? "branching_status_helpers--reviewStatusLabelInReviewToolbar--bc9VP branching_status_helpers--reviewStatusLabelInReview--ur-AW branching_status_helpers--reviewStatesLabelBase--r6PQJ" : f;
-      r = _$$t("collaboration.branching.in_review");
+      r = getI18nString("collaboration.branching.in_review");
       a = t ? x : E;
       break;
     case 5:
       i = p;
       n = A;
-      r = _$$t("collaboration.branching.changes_suggested");
+      r = getI18nString("collaboration.branching.changes_suggested");
       a = "branching_status_helpers--yellowDot--qVtFs branching_status_helpers--branchStatusDot--U0L5n red_dot--inlineRedDot--SrY0e";
       break;
     case 1:
       i = "branching_status_helpers--badgeIndicatorMerged--s7zP9 branching_status_helpers--badgeIndicatorApproved--4E-Aq branching_status_helpers--badgeIndicatorBase--MfU-L";
       n = "branching_status_helpers--reviewStatusLabelMerged--uGCWA branching_status_helpers--reviewStatusLabelApproved--rQiO4 branching_status_helpers--reviewStatesLabelBase--r6PQJ";
-      r = _$$t("collaboration.branching.merged");
+      r = getI18nString("collaboration.branching.merged");
       a = I;
       break;
     case 2:
       i = t ? "branching_status_helpers--badgeIndicatorArchivedToolbar--gYOR5 branching_status_helpers--badgeIndicatorInReviewToolbar--n55T5 branching_status_helpers--badgeIndicatorInReview--l8PLk branching_status_helpers--badgeIndicatorBase--MfU-L" : "branching_status_helpers--badgeIndicatorArchived--DiCp6 branching_status_helpers--badgeIndicatorOutdated--LORl7 branching_status_helpers--badgeIndicatorBase--MfU-L";
       n = t ? "branching_status_helpers--reviewStatusLabelArchivedToolbar--7sejI branching_status_helpers--reviewStatusLabelArchived--GmltE branching_status_helpers--reviewStatusLabelOutdated--IfApl branching_status_helpers--reviewStatesLabelBase--r6PQJ" : "branching_status_helpers--reviewStatusLabelArchived--GmltE branching_status_helpers--reviewStatusLabelOutdated--IfApl branching_status_helpers--reviewStatesLabelBase--r6PQJ";
-      r = _$$t("collaboration.branching.archived");
+      r = getI18nString("collaboration.branching.archived");
       a = t ? x : E;
       break;
     default:

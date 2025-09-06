@@ -3,7 +3,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { MoD, Msn } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { getInitialOptions } from "../figma_app/169182";
-import { Cp, $D } from "../905/11";
+import { captureException, reportError } from "../905/11";
 import { Jr } from "../figma_app/624361";
 import { z } from "../905/931953";
 import { F } from "../905/672930";
@@ -77,7 +77,7 @@ class h {
         e.startsWith(p) && e !== this.cacheStorageName && (await this.caches.$$delete(e));
       });
     } catch (e) {
-      Cp(e);
+      captureException(e);
     }
   }
 }
@@ -204,7 +204,7 @@ let I = class {
       };
       this.cache.set(t, n);
     } catch (e) {
-      $D(_$$e.SITES_WEB_RUNTIME, Error(`Failed to fetch video metadata for ${t}`));
+      reportError(_$$e.SITES_WEB_RUNTIME, Error(`Failed to fetch video metadata for ${t}`));
     }
   }
   async populateCacheForHashes(e, t) {

@@ -1,6 +1,6 @@
 import { l7 } from "../905/189185";
 import { uW } from "../905/426868";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { F_, tK } from "../figma_app/191804";
 import { _ } from "../figma_app/436731";
 import { z } from "../figma_app/153551";
@@ -176,7 +176,7 @@ export async function $$f3(e, t, r) {
             });
           } catch (r) {
             let t = void 0 === r ? "undefined" : r instanceof Error ? r.message : JSON.stringify(r);
-            az.trackDefinedEvent("ai_generation.first_draft_font_error", {
+            analyticsEventManager.trackDefinedEvent("ai_generation.first_draft_font_error", {
               error: t,
               family: e.family,
               style: e.style,

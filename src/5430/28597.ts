@@ -4,11 +4,11 @@ import { G as _$$G } from "../5430/796068";
 import { X as _$$X } from "../5430/169009";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useCallback, useEffect, useMemo, createElement, useContext } from "react";
-import n, { fp } from "../figma_app/27355";
+import n, { useAtomValueAndSetter } from "../figma_app/27355";
 import o from "classnames";
 import { N as _$$N } from "../figma_app/469468";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx as _$$tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { H as _$$H } from "../5430/816957";
 import { Lj } from "../figma_app/835219";
 import { JJ, qD, $l, _t, eD as _$$eD, ss, _m, z$, DV } from "../figma_app/471982";
@@ -71,7 +71,7 @@ import { UH, G as _$$G2, Ev, tx as _$$tx2, Rc, D9, OC, $h, tJ, hV } from "../543
 import { A as _$$A5 } from "../5724/663128";
 import { useDispatch } from "../vendor/514228";
 import { C as _$$C } from "../905/222694";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { o as _$$o2 } from "../figma_app/70618";
 import { V as _$$V } from "../905/480825";
 import { Ho } from "../figma_app/878651";
@@ -394,7 +394,7 @@ function eu({
       className: G,
       children: jsx("div", {
         className: a()(_$$s.wFull.$, z, $),
-        children: _$$t("community.detail_view.library_viewer.search_no_results")
+        children: getI18nString("community.detail_view.library_viewer.search_no_results")
       })
     }), jsxs("div", {
       className: "library_detail_page_viewer--libraryViewerEmptyState--2o6bb",
@@ -404,7 +404,7 @@ function eu({
         className: "library_detail_page_viewer--libraryViewerEmptyIcon--6OLZt"
       }), jsx("div", {
         className: _$$s.flexRow.$,
-        children: _$$tx("search.empty_state.no_results_matching", {
+        children: renderI18nText("search.empty_state.no_results_matching", {
           searchQuery: jsx("span", {
             className: _$$s.fontBold.$,
             children: e
@@ -415,7 +415,7 @@ function eu({
   });
   let f = jsx("div", {
     className: n ? _$$s.flexRow.mb8.$ : _$$s.flexRow.mb16.$,
-    children: _$$tx("community.detail_view.library_viewer.search_results_num", {
+    children: renderI18nText("community.detail_view.library_viewer.search_results_num", {
       numResults: numSearchResults,
       query: jsx("span", {
         className: _$$s.fontBold.$,
@@ -492,14 +492,14 @@ function e_({
         onClick: () => {
           t(et.COMPONENTS);
         },
-        children: _$$t("community.detail_view.library_viewer.components_tab")
+        children: getI18nString("community.detail_view.library_viewer.components_tab")
       }), jsx(eh, {
         tab: et.STYLES,
         selectedTab: e,
         onClick: () => {
           t(et.STYLES);
         },
-        children: _$$t("community.detail_view.library_viewer.styles_tab")
+        children: getI18nString("community.detail_view.library_viewer.styles_tab")
       })]
     }), jsx(ep, {
       query: r,
@@ -523,7 +523,7 @@ function ep({
     className: "library_detail_page_viewer--libraryViewerSearchBar--x-K2j",
     focusOnMount: !1,
     query: e,
-    placeholder: _$$t("community.detail_view.library_viewer.search_placeholder"),
+    placeholder: getI18nString("community.detail_view.library_viewer.search_placeholder"),
     clearSearch: o,
     onChange: n,
     hideXIcon: !0
@@ -654,7 +654,7 @@ function eF({
       className: qS,
       children: [jsx(Gx, {
         children: l
-      }), _$$tx("community.detail_view.made_by_a_figma_partner")]
+      }), renderI18nText("community.detail_view.made_by_a_figma_partner")]
     }), c, u]
   });
 }
@@ -666,7 +666,7 @@ function eH() {
       svgClassName: Uk,
       useOriginalSrcFills_DEPRECATED: !0
     }), jsx("div", {
-      children: _$$t("community.detail_view.ui_kit")
+      children: getI18nString("community.detail_view.ui_kit")
     })]
   });
 }
@@ -676,7 +676,7 @@ function eU() {
     children: [jsx(_$$ZA, {
       is24x24: !0
     }), jsx("div", {
-      children: _$$t("community.detail_view.made_for_codegen")
+      children: getI18nString("community.detail_view.made_for_codegen")
     })]
   });
 }
@@ -687,7 +687,7 @@ function eV() {
       className: _$$DV,
       children: jsx(_$$k2, {})
     }), jsx("div", {
-      children: _$$t("community.detail_view.site_devices")
+      children: getI18nString("community.detail_view.site_devices")
     })]
   });
 }
@@ -717,17 +717,17 @@ function eZ({
 }) {
   if (t && e) {
     let t = X2(e);
-    return _$$tx("community.detail_view.in_app_purchases", {
+    return renderI18nText("community.detail_view.in_app_purchases", {
       priceString: t
     });
   }
   return r ? jsxs("div", {
     className: UH,
-    children: [_$$tx("community.detail_view.third_party_badge.off_platform"), jsx(_$$B, {
+    children: [renderI18nText("community.detail_view.third_party_badge.off_platform"), jsx(_$$B, {
       svg: _$$A5,
       className: _$$G2,
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": _$$t("community.detail_view.resource_outside_of_figma"),
+      "data-tooltip": getI18nString("community.detail_view.resource_outside_of_figma"),
       "data-tooltip-show-immediately": !0
     })]
   }) : null;
@@ -745,14 +745,14 @@ function eq(e) {
   supportContact && (xf(supportContact) ? u = `mailto:${supportContact}` : supportContact.startsWith("https://") || supportContact.startsWith("http://") || (u = `//${supportContact}`));
   return jsxs(_$$z, {
     children: [jsx("div", {
-      children: _$$tx("community.detail_view.last_updated_at_time_stamp", {
+      children: renderI18nText("community.detail_view.last_updated_at_time_stamp", {
         timeStamp: jsx(h1, {
           date: updatedAt
         })
       })
     }), supportContact && jsx("div", {
       className: Ev,
-      children: _$$tx("community.detail_view.support_contact", {
+      children: renderI18nText("community.detail_view.support_contact", {
         supportContact: jsx("a", {
           href: u || void 0,
           className: _$$tx2,
@@ -769,9 +769,9 @@ function eq(e) {
         },
         tabIndex: 0,
         className: Rc,
-        children: _$$tx("community.detail_view.creator_policy")
+        children: renderI18nText("community.detail_view.creator_policy")
       }), l && jsx(OJ, {
-        title: _$$t("community.detail_view.creator_policy"),
+        title: getI18nString("community.detail_view.creator_policy"),
         maxWidth: 450,
         onClose: () => {
           c(!1);
@@ -782,7 +782,7 @@ function eq(e) {
           className: OC,
           children: jsx("div", {
             className: $h,
-            children: _$$tx("community.detail_view.creator_policy_publisher_name", {
+            children: renderI18nText("community.detail_view.creator_policy_publisher_name", {
               publisherName: creatorPolicyData.publisherName
             })
           })
@@ -831,7 +831,7 @@ function eY({
     }) : null, _$$M() ? jsx(dx, {}) : jsx("a", {
       href: "mailto:content-reviews@figma.com",
       className: hV,
-      children: _$$tx("community.detail_view.report_resource")
+      children: renderI18nText("community.detail_view.report_resource")
     })]
   });
 }
@@ -943,7 +943,7 @@ function tt({
   });
 }
 let tr = (e, t) => {
-  sx("Community Related Content Clicked", {
+  trackEventAnalytics("Community Related Content Clicked", {
     community_resource: Vm(e),
     community_resource_id: e.id,
     related_content_type: e.related_content?.types.join(","),
@@ -960,7 +960,7 @@ function ts({
   openLightboxRDP: l
 }) {
   useEffect(() => {
-    sx("Community Related Content Viewed", {
+    trackEventAnalytics("Community Related Content Viewed", {
       communityResource: e,
       communityResourceId: t,
       relatedContentType: n,
@@ -968,7 +968,7 @@ function ts({
       itemsImpressed: r.map(e => e.id).join(",")
     });
   }, [r.map(e => e.id).join(",")]);
-  let c = 1 === n.length && n[0] === _$$o2.by_creator ? o.accepted.length > 1 ? _$$t("community.related_content.more_by_these_creators") : _$$t("community.related_content.more_by_this_creator") : _$$t("community.related_content.more_like_this");
+  let c = 1 === n.length && n[0] === _$$o2.by_creator ? o.accepted.length > 1 ? getI18nString("community.related_content.more_by_these_creators") : getI18nString("community.related_content.more_by_this_creator") : getI18nString("community.related_content.more_like_this");
   return jsxs("div", {
     className: e3,
     "data-testid": "related-content",
@@ -1022,7 +1022,7 @@ function tl({
   let _ = c?.data?.meta?.content;
   let h = c?.data?.meta?.is_same_creator ?? !1;
   if (useEffect(() => {
-    _?.length && sx("Community Resource Related Content Viewed", {
+    _?.length && trackEventAnalytics("Community Resource Related Content Viewed", {
       resource_type: e,
       resource_id: t,
       is_same_creator: h,
@@ -1030,7 +1030,7 @@ function tl({
       items_impressed: _.map(e => e.id).join(",")
     });
   }, [_, e, t, r, h]), "errors" === u || !m && (!_ || 0 === _.length)) return null;
-  let x = h && n ? n.accepted.length > 1 ? _$$t("community.related_content.more_by_these_creators") : _$$t("community.related_content.more_by_this_creator") : _$$t("community.related_content.more_like_this");
+  let x = h && n ? n.accepted.length > 1 ? getI18nString("community.related_content.more_by_these_creators") : getI18nString("community.related_content.more_by_this_creator") : getI18nString("community.related_content.more_like_this");
   return jsxs(Fragment, {
     children: [jsxs("div", {
       className: e3,
@@ -1056,7 +1056,7 @@ function tl({
           t && trackResourceImpression(e);
         },
         onClickTracking: e => {
-          sx("Community Resource Related Content Clicked", {
+          trackEventAnalytics("Community Resource Related Content Clicked", {
             resource_type: e.resource_type,
             resource_id: e.id,
             is_same_creator: h,
@@ -1081,7 +1081,7 @@ function tu({
     className: "sidebar_publisher_details_container--detailsContainer--7fYCs",
     children: [jsx("h3", {
       className: "sidebar_publisher_details_container--detailsHeader--U5a0X",
-      children: _$$tx("community.detail_view.details")
+      children: renderI18nText("community.detail_view.details")
     }), jsxs("div", {
       className: "sidebar_publisher_details_container--authors--MY-d7",
       children: [jsx(_$$L, {
@@ -1166,12 +1166,12 @@ function tb({
         children: [jsxs("div", {
           className: "x78zum5 x6s0dn4 x1nfngrj x1n0bwc9",
           children: [jsx(_$$B2, {}), jsx("span", {
-            children: _$$t("community.site_preview.error_message")
+            children: getI18nString("community.site_preview.error_message")
           })]
         }), jsx($n, {
           variant: "secondary",
           onClick: j,
-          children: _$$t("community.site_preview.retry")
+          children: getI18nString("community.site_preview.retry")
         })]
       })
     }) : jsxs("div", {
@@ -1190,7 +1190,7 @@ function tb({
         src: e,
         title: h ?? void 0
       }), jsx(_$$E, {
-        "aria-label": _$$t("community.site_preview.reload"),
+        "aria-label": getI18nString("community.site_preview.reload"),
         onClick: j,
         className: "x19y5rnk xz16r55 xsqpjig xn0whsw x78zum5 x6s0dn4 xl56j7k x1jnr06f x2lah0s x10l6tqk x191j7n5 x1qpfodn x100vrsf x1vqgdyp x1mh6rdz",
         children: jsx(_$$T2, {})
@@ -1199,7 +1199,7 @@ function tb({
         href: e,
         onClick: w,
         className: "x19y5rnk xz16r55 xsqpjig xn0whsw x78zum5 x6s0dn4 xl56j7k x1jnr06f x2lah0s x10l6tqk x191j7n5 xn5hqff x10w6t97 xo9t39a",
-        children: [jsx(_$$V2, {}), _$$t("community.site_preview.preview")]
+        children: [jsx(_$$V2, {}), getI18nString("community.site_preview.preview")]
       })]
     })]
   });
@@ -1231,7 +1231,7 @@ function tR({
   return jsxs(Fragment, {
     children: [!r && jsx("h3", {
       className: Pr,
-      children: t || _$$tx("community.detail_view.tags")
+      children: t || renderI18nText("community.detail_view.tags")
     }), jsx("div", {
       className: Pc,
       children: _ && Object.entries(u).map(([e, t]) => {
@@ -1289,7 +1289,7 @@ function tA({
         plugin: a
       }), jsx("span", {
         className: "version_history--title--1a95q text--fontPos14--OL9Hp text--_fontBase--QdLsd",
-        children: _$$tx("community.plugins.version_history")
+        children: renderI18nText("community.plugins.version_history")
       })]
     }), jsxs("div", {
       children: [Object.keys(versions).map(parseFloat).sort((e, t) => e > t ? -1 : 1).map(e => versions[e]).filter(e => !!e).map(e => {
@@ -1303,7 +1303,7 @@ function tA({
           className: t ? "version_history--releaseSectionEmpty--t8k4f" : "version_history--releaseSection--mOmlB",
           children: [jsx("span", {
             className: "version_history--versionName--PC5Ws",
-            children: _$$tx("community.plugins.version_version_on_date", {
+            children: renderI18nText("community.plugins.version_version_on_date", {
               createdAt: r,
               versionName: e.version
             })
@@ -1317,7 +1317,7 @@ function tA({
         onClick: () => r(!0),
         role: "button",
         tabIndex: 0,
-        children: _$$tx("community.plugins.see_all")
+        children: renderI18nText("community.plugins.see_all")
       })]
     })]
   });
@@ -1346,7 +1346,7 @@ function tD({
   commentCount: e,
   hasCommentsEnabled: t
 }) {
-  let [r, o] = fp(_$$R);
+  let [r, o] = useAtomValueAndSetter(_$$R);
   useEffect(() => {
     let e = () => {
       let e = document.getElementById($O.CommentsView);
@@ -1369,7 +1369,7 @@ function tD({
         className: a()(Vj, {
           [k9]: r === $O.DescriptionView
         }),
-        children: _$$t("community.resource_page.about")
+        children: getI18nString("community.resource_page.about")
       })
     }), t && jsx("button", {
       onClick: e => tB(e, $O.CommentsView),
@@ -1377,7 +1377,7 @@ function tD({
         className: a()(Vj, {
           [k9]: r === $O.CommentsView
         }),
-        children: _$$tx("community.resource_page.comments", {
+        children: renderI18nText("community.resource_page.comments", {
           numComments: jsx("span", {
             className: a()(p9, {
               [_$$sB]: r === $O.CommentsView
@@ -1413,7 +1413,7 @@ export function $$tF0({
   return a && !l ? jsxs(Fragment, {
     children: [jsx("h3", {
       className: _$$s.font14.fontSemiBold.mb16.$,
-      children: _$$t("community.embed.preview_title")
+      children: getI18nString("community.embed.preview_title")
     }), jsx(_$$A, {
       enableEmbedOnSmallScreens: !0,
       resource: r

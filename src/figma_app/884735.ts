@@ -11,12 +11,12 @@ import { J0O, glU } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import h from "classnames";
 import { parsePxInt } from "../figma_app/783094";
-import { R as _$$R2 } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { rf } from "../figma_app/806412";
 import { ms, c$ } from "../figma_app/236327";
 import { a as _$$a } from "../905/632329";
 import { n as _$$n } from "../905/734251";
-import { tx, t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { n0 } from "../figma_app/389091";
 import { j7 } from "../905/929976";
 import { wr, Dh } from "../figma_app/741237";
@@ -56,7 +56,7 @@ export function $$H0(e) {
     def,
     selectionHasInstanceSublayer,
     dropdownShown
-  } = _$$R2(e => {
+  } = selectWithShallowEqual(e => {
     let t = Sh(e);
     return {
       containingProductComponentGUID: Lg(e),
@@ -171,7 +171,7 @@ export function $$H0(e) {
       children: jsx(B, {
         onClick: Z,
         recordingKey: "go-to-property",
-        children: tx("design_systems.component_properties.go_to_property")
+        children: renderI18nText("design_systems.component_properties.go_to_property")
       })
     }), jsx(Xn, {
       source: Fv.PILL,
@@ -195,10 +195,10 @@ export function $$z1(e) {
   }, [c, propDefId, o]);
   return jsx(_$$K, {
     onClick: u,
-    "aria-label": t("design_systems.component_properties.go_to_property"),
+    "aria-label": getI18nString("design_systems.component_properties.go_to_property"),
     recordingKey: "selectContainingInstance",
     htmlAttributes: {
-      "data-tooltip": t("design_systems.component_properties.go_to_property"),
+      "data-tooltip": getI18nString("design_systems.component_properties.go_to_property"),
       "data-tooltip-type": Ib.TEXT
     },
     children: jsx(_$$A, {})
@@ -213,10 +213,10 @@ function W(e) {
   }, [nodeField]);
   return jsx(_$$K, {
     onClick: r,
-    "aria-label": t("design_systems.component_properties.detach_property"),
+    "aria-label": getI18nString("design_systems.component_properties.detach_property"),
     recordingKey: "deleteComponentPropRef",
     htmlAttributes: {
-      "data-tooltip": t("design_systems.component_properties.detach_property"),
+      "data-tooltip": getI18nString("design_systems.component_properties.detach_property"),
       "data-tooltip-type": Ib.TEXT,
       "data-onboarding-key": FX
     },

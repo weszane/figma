@@ -1,18 +1,18 @@
 import { getStorage } from "../905/657224";
-import { sn } from "../905/542194";
+import { globalPerfTimer } from "../905/542194";
 import { sf } from "../905/929976";
 import { yJ, bE, sF } from "../figma_app/78808";
 import { OB, M3, ST } from "../figma_app/91703";
 import { MV, lX, Xk, zU, q0, N, hh } from "../figma_app/107215";
 import { ge } from "../figma_app/349248";
 import { K } from "../905/301652";
-import { oD } from "../figma_app/53721";
+import { mapEditorTypeToFileType } from "../figma_app/53721";
 export let $$p1 = {
   view: "recentsAndSharing"
 };
 export function $$m0(e = $$p1, t) {
   if (sf.matches(t)) {
-    sn.start("page_selected_view");
+    globalPerfTimer.start("page_selected_view");
     let {
       fromPopstate,
       forceReplaceState,
@@ -25,7 +25,7 @@ export function $$m0(e = $$p1, t) {
       ...e,
       fileKey: t.payload.file.key
     };
-    oD(e.editorType) !== oD(t.payload.fullscreenEditorType) && (i.editorType = t.payload.fullscreenEditorType);
+    mapEditorTypeToFileType(e.editorType) !== mapEditorTypeToFileType(t.payload.fullscreenEditorType) && (i.editorType = t.payload.fullscreenEditorType);
     return i;
   }
   if (MV.matches(t)) return {

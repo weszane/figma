@@ -1,5 +1,14 @@
-import { useSelector, shallowEqual } from "../vendor/514228";
-export function $$r0(e) {
-  return useSelector(e, shallowEqual);
+import { shallowEqual, useSelector } from 'react-redux'
+
+/**
+ * Selects state from the Redux store using a selector function and shallow equality.
+ * @param selector - The selector function to retrieve state.
+ * @returns The selected state.
+ * @see $$r0
+ */
+export function selectWithShallowEqual(selector: (state: any) => any) {
+  return useSelector(selector, shallowEqual)
 }
-export const R = $$r0;
+
+// Export alias for compatibility with original usage
+export const R = selectWithShallowEqual

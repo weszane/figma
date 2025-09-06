@@ -4,8 +4,8 @@ import { O } from "../905/587457";
 import { glU, zkO } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
-import { Xr, md } from "../figma_app/27355";
-import { t as _$$t } from "../905/303541";
+import { Xr, useAtomWithSubscription } from "../figma_app/27355";
+import { getI18nString } from "../905/303541";
 import { tq, yc } from "../figma_app/671547";
 import { E7 } from "../905/216495";
 import { kl } from "../905/275640";
@@ -54,22 +54,22 @@ export function $$b1(e) {
   }, [r, a, s, t, e]);
 }
 export function $$C0(e) {
-  let t = md(_$$n);
+  let t = useAtomWithSubscription(_$$n);
   let i = uQ() || "";
   let n = kl("embedData");
   let a = decodeURIComponent(E7(n)?.originalText || "");
   let l = $$b1(zkO.USER);
   return n && i && a && (!t || e.inModal) ? getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(V, {
     variant: "button",
-    tooltip: _$$t("whiteboard.embeds.inline_menu.change_back_to_text"),
-    ariaLabel: _$$t("whiteboard.embeds.inline_menu.change_back_to_text"),
+    tooltip: getI18nString("whiteboard.embeds.inline_menu.change_back_to_text"),
+    ariaLabel: getI18nString("whiteboard.embeds.inline_menu.change_back_to_text"),
     onClick: l,
     recordingKey: "embedConvertToTextControl",
     children: jsx(s, {})
   }) : jsx(K0, {
     svg: A,
     active: "NONE",
-    tooltip: _$$t("whiteboard.embeds.inline_menu.change_back_to_text"),
+    tooltip: getI18nString("whiteboard.embeds.inline_menu.change_back_to_text"),
     onClick: l,
     recordingKey: "embedConvertToTextControl"
   }) : null;

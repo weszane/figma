@@ -1,55 +1,55 @@
-import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { useRef, useEffect, useState } from "react";
-import { useDispatch } from "../vendor/514228";
-import { $n } from "../905/521428";
-import { b as _$$b, c as _$$c } from "../905/308099";
-import { s as _$$s } from "../905/932270";
-import { J } from "../905/270045";
-import { eU, Xr } from "../figma_app/27355";
-import { FJ } from "../905/508367";
-import { buildUploadUrl } from "../figma_app/169182";
-import { HB } from "../3973/538504";
-import { s as _$$s2 } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
-import { sx } from "../905/941192";
-import { b as _$$b2 } from "../905/985254";
-import { tf, fu, $z } from "../figma_app/831799";
-import { q5 } from "../figma_app/516028";
-import { jN } from "../905/612685";
-import { A5 } from "../figma_app/707808";
-import { fb, J4 } from "../figma_app/907616";
-import { o as _$$o } from "../905/382697";
-import { sR } from "../905/932881";
-import { S as _$$S } from "../905/73063";
+import { atom, useSetAtom } from 'jotai';
+import { useEffect, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
+import { S as _$$S } from '../905/73063';
+import { J } from '../905/270045';
+import { getI18nString, renderI18nText } from '../905/303541';
+import { b as _$$b, c as _$$c } from '../905/308099';
+import { o as _$$o } from '../905/382697';
+import { FJ } from '../905/508367';
+import { $n } from '../905/521428';
+import { jN } from '../905/612685';
+import { s as _$$s } from '../905/932270';
+import { sR } from '../905/932881';
+import { sx } from '../905/941192';
+import { b as _$$b2 } from '../905/985254';
+import { HB } from '../3973/538504';
+import { s as _$$s2 } from '../cssbuilder/589278';
+import { buildUploadUrl } from '../figma_app/169182';
+import { q5 } from '../figma_app/516028';
+import { A5 } from '../figma_app/707808';
+import { $z, fu, tf } from '../figma_app/831799';
+import { fb, J4 } from '../figma_app/907616';
 export function $$x3(e) {
-  return "education" === HB(e);
+  return HB(e) === 'education';
 }
-var N = (e => (e.EDIT = "edit", e.DUPLICATE = "duplicate", e))(N || {});
-let C = buildUploadUrl("cee072aec57608cbb49c64eb6cb3765896cea921");
-let $$w4 = "share-to-google-classroom-row";
-let $$O0 = eU(null);
+var N = (e => (e.EDIT = 'edit', e.DUPLICATE = 'duplicate', e))(N || {});
+let C = buildUploadUrl('cee072aec57608cbb49c64eb6cb3765896cea921');
+let $$w4 = 'share-to-google-classroom-row';
+let $$O0 = atom(null);
 let R = tf(sR);
 function L(e) {
   let t = useDispatch();
-  let r = Xr($$O0);
+  let r = useSetAtom($$O0);
   let s = useRef(null);
   useEffect(() => (r(s), () => {
     r(null);
   }), [s, r]);
-  let o = jsx("div", {
+  let o = jsx('div', {
     ref: s,
     className: _$$S,
-    children: jsx("img", {
+    children: jsx('img', {
       src: C,
-      alt: "share to google classroom",
+      alt: 'share to google classroom',
       className: _$$S
     })
   });
   return jsx(fu, {
-    name: "share_to_google_classroom_row",
+    name: 'share_to_google_classroom_row',
     children: jsx(R, {
       icon: o,
-      text: _$$t("file_permissions_modal.share_as.google_classroom"),
+      text: getI18nString('file_permissions_modal.share_as.google_classroom'),
       onClick: () => {
         t(_$$b2({
           has_shared_to_google_classroom: !0
@@ -60,7 +60,7 @@ function L(e) {
       dataOnboardingKey: $$w4,
       expandCaret: !0,
       trackingProperties: {
-        text: "Share to Google Classroom"
+        text: 'Share to Google Classroom'
       }
     })
   });
@@ -71,96 +71,96 @@ export function $$P1({
 }) {
   let r = _$$o();
   let i = e?.k12_google_org;
-  let a = $$x3(t?.profile?.jobTitle || "");
+  let a = $$x3(t?.profile?.jobTitle || '');
   return i || a ? jsx(L, {
     onClick: () => r(A5.SHARE_TO_GOOGLE_CLASSROOM)
   }) : null;
 }
 let D = tf($n);
 let k = sx.add({
-  color: "var(--color-text-figjam)",
-  cursor: "pointer",
-  userSelect: "auto"
+  color: 'var(--color-text-figjam)',
+  cursor: 'pointer',
+  userSelect: 'auto'
 }).$;
 let M = sx.add({
-  transform: "translateY(-4px)"
+  transform: 'translateY(-4px)'
 }).$;
 export function $$F2(e) {
   let t = fb[e.linkAccess].audienceAccessLevel !== J4.EDIT;
   let r = q5();
-  let [a, s] = useState("edit");
+  let [a, s] = useState('edit');
   let c = _$$o();
   return jsx(fu, {
-    name: "google_classroom_share_modal",
-    children: jsxs("div", {
+    name: 'google_classroom_share_modal',
+    children: jsxs('div', {
       className: _$$s2.flex.flexColumn.p16.$,
-      children: [jsx("form", {
+      children: [jsx('form', {
         children: jsx(_$$b, {
           legend: jsx(_$$s, {
-            children: t ? jsx("div", {
-              className: _$$s2.textBodyMedium.pb8.$,
-              "data-testid": "share-to-google-classroom-disclaimer",
-              children: tx("file_permissions_modal.google_classroom_modal.disclaimer", {
+            children: t ? jsx('div', {
+              'className': _$$s2.textBodyMedium.pb8.$,
+              'data-testid': 'share-to-google-classroom-disclaimer',
+              'children': renderI18nText('file_permissions_modal.google_classroom_modal.disclaimer', {
                 link: jsx($z, {
                   onClick: () => c(A5.SHARE_SETTINGS),
-                  type: "button",
+                  type: 'button',
                   style: k,
-                  children: tx("file_permissions_modal.google_classroom_modal.disclaimer_link")
+                  children: renderI18nText('file_permissions_modal.google_classroom_modal.disclaimer_link')
                 })
               })
             }) : jsx(Fragment, {})
           }),
           value: a,
           onChange: s,
-          children: jsxs("div", {
+          children: jsxs('div', {
             className: _$$s2.mt8.$,
             children: [jsx(_$$c, {
-              value: "edit",
+              value: 'edit',
               label: jsx(J, {
                 htmlAttributes: {
-                  "data-testid": "share-to-google-classroom-edit-option"
+                  'data-testid': 'share-to-google-classroom-edit-option'
                 },
-                children: tx("file_permissions_modal.google_classroom_modal.editable_option")
+                children: renderI18nText('file_permissions_modal.google_classroom_modal.editable_option')
               }),
-              children: t ? jsx("div", {
+              children: t ? jsx('div', {
                 style: M,
-                children: tx("file_permissions_modal.google_classroom_modal.editable_option_description")
+                children: renderI18nText('file_permissions_modal.google_classroom_modal.editable_option_description')
               }) : null
             }), jsx(_$$c, {
-              value: "duplicate",
+              value: 'duplicate',
               label: jsx(J, {
                 htmlAttributes: {
-                  "data-testid": "share-to-google-classroom-duplicate-option"
+                  'data-testid': 'share-to-google-classroom-duplicate-option'
                 },
-                children: tx("file_permissions_modal.google_classroom_modal.duplicate_option")
+                children: renderI18nText('file_permissions_modal.google_classroom_modal.duplicate_option')
               }),
-              children: t ? jsx("div", {
+              children: t ? jsx('div', {
                 style: M,
-                children: tx("file_permissions_modal.google_classroom_modal.duplicate_option_description")
+                children: renderI18nText('file_permissions_modal.google_classroom_modal.duplicate_option_description')
               }) : null
             })]
           })
         })
-      }), jsx("div", {
+      }), jsx('div', {
         className: _$$s2.flex.flexRow.justifyEnd.$,
         children: jsx(D, {
-          variant: "primary",
+          variant: 'primary',
           onClick: () => {
             let t = r ? jN({
               file: r
-            }) : "";
-            let n = "duplicate" === a ? "/duplicate" : "";
-            let i = t ? `?url=${t}${n}` : "";
-            FJ(`https://classroom.google.com/share${i}`, "_blank", "popup,width=650,height=505");
+            }) : '';
+            let n = a === 'duplicate' ? '/duplicate' : '';
+            let i = t ? `?url=${t}${n}` : '';
+            FJ(`https://classroom.google.com/share${i}`, '_blank', 'popup,width=650,height=505');
             e.closeModal();
           },
           trackingProperties: {
             googleClassroomShareOption: a
           },
           htmlAttributes: {
-            "data-testid": "share-to-google-classroom-share-button"
+            'data-testid': 'share-to-google-classroom-share-button'
           },
-          children: tx("general.next")
+          children: renderI18nText('general.next')
         })
       })]
     })

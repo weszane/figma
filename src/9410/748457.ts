@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { lQ } from "../905/934246";
 import s from "classnames";
 import { Uz } from "../905/63728";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { v } from "../905/318279";
 import { Rt, tI } from "../9410/733790";
 var o = s;
@@ -40,7 +40,7 @@ export function $$p0({
     onKeyDown: e => {
       switch (e.keyCode) {
         case Uz.ENTER:
-          if (e.preventDefault(), g && (e.shiftKey || Ay.mac && e.ctrlKey)) {
+          if (e.preventDefault(), g && (e.shiftKey || BrowserInfo.mac && e.ctrlKey)) {
             let {
               selectionStart,
               selectionEnd

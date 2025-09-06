@@ -4,8 +4,8 @@ import { M } from "../905/512402";
 import { fn, sH } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
-import { t as _$$t } from "../905/303541";
+import { atomStoreManager } from "../figma_app/27355";
+import { getI18nString } from "../905/303541";
 import { BT } from "../905/618447";
 import { C } from "../905/407781";
 import { zw } from "../905/877407";
@@ -21,7 +21,7 @@ export class $$_0 extends C {
       console.error("buzz grid add behavior", "No active document");
       return null;
     }
-    let c = zl.get(BT);
+    let c = atomStoreManager.get(BT);
     let p = null;
     if ((l = l || c[e]?.[t - 1] || c[e - 1]?.[(c[e - 1]?.length || 0) - 1]) && fn(sH(l))) p = IPu?.duplicateAsBlankCooperAsset(l, e, t, i) ?? null;else {
       let r = M.toVectorD(this.getDefaultChildSize());
@@ -29,15 +29,15 @@ export class $$_0 extends C {
     }
     r && Y5.commit();
     setTimeout(() => {
-      Ez5?.cooperFocusView().isFocusedNodeViewEnabled() || (Ez5?.cooperFocusView().panToSelectedNodeIfOutsideViewport(.6), zl.set(Lk, x.TEMPLATES));
+      Ez5?.cooperFocusView().isFocusedNodeViewEnabled() || (Ez5?.cooperFocusView().panToSelectedNodeIfOutsideViewport(.6), atomStoreManager.set(Lk, x.TEMPLATES));
     }, 0);
     return p;
   }
   shouldHideUI() {
-    return zl.get(I);
+    return atomStoreManager.get(I);
   }
   shouldRenderEmptyCanvasPlaceholder() {
-    return !zl.get(I);
+    return !atomStoreManager.get(I);
   }
   renderEmptyCanvasPlaceholder(e, t) {
     let i = Ez5?.canvasGrid();
@@ -93,7 +93,7 @@ export class $$_0 extends C {
         x: o.x,
         y: p.y + l + i
       };
-      t.fillText(a, _$$t("cooper.templates.canvas_placeholder_button"), Ez5 ? R0(Ez5.getTextPrimary()) : {
+      t.fillText(a, getI18nString("cooper.templates.canvas_placeholder_button"), Ez5 ? R0(Ez5.getTextPrimary()) : {
         red: 0,
         green: 0,
         blue: 0,

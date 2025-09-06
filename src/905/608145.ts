@@ -4,12 +4,12 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { _gJ } from "../figma_app/763686";
 import { getSceneGraphInstance } from "../905/830071";
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
-import { sx } from "../905/449184";
+import { atomStoreManager } from "../figma_app/27355";
+import { trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
 import { Ay } from "../905/612521";
 import { e as _$$e2 } from "../905/280005";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { F as _$$F } from "../905/302958";
 import { zM } from "../figma_app/580736";
 import { Lk, x as _$$x } from "../figma_app/639711";
@@ -97,7 +97,7 @@ export function $$J0(e, t, i) {
       {
         if (O) return _$$R.instance.handleUpgrade(Q7.RUN_WIDGET);
         if (!Z(e)) {
-          $D(_$$e.EXTENSIBILITY, Error("runExtensionMenuAction: Expected WidgetsMenuArgs"), {
+          reportError(_$$e.EXTENSIBILITY, Error("runExtensionMenuAction: Expected WidgetsMenuArgs"), {
             tags: {
               menuActionType: "insert-local-widget"
             }
@@ -113,7 +113,7 @@ export function $$J0(e, t, i) {
           pluginID: t.plugin_id,
           widgetName: t.name,
           pluginVersionID: ""
-        }) : $D(_$$e.EXTENSIBILITY, Error("runExtensionMenuAction: Widget not found"), {
+        }) : reportError(_$$e.EXTENSIBILITY, Error("runExtensionMenuAction: Widget not found"), {
           tags: {
             menuActionType: "insert-local-widget",
             localFileId: i.localFileId
@@ -125,7 +125,7 @@ export function $$J0(e, t, i) {
       {
         if (O) return _$$R.instance.handleUpgrade(Q7.RUN_WIDGET);
         if (!Z(e)) {
-          $D(_$$e.EXTENSIBILITY, Error("runExtensionMenuAction: Expected WidgetsMenuArgs"), {
+          reportError(_$$e.EXTENSIBILITY, Error("runExtensionMenuAction: Expected WidgetsMenuArgs"), {
             tags: {
               menuActionType: "insert-installed-widget"
             }
@@ -138,7 +138,7 @@ export function $$J0(e, t, i) {
           pluginID: t.id,
           widgetName: n.name,
           pluginVersionID: n.id
-        }) : $D(_$$e.EXTENSIBILITY, Error("runExtensionMenuAction: Widget not found"), {
+        }) : reportError(_$$e.EXTENSIBILITY, Error("runExtensionMenuAction: Widget not found"), {
           tags: {
             menuActionType: "insert-installed-widget",
             widgetId: i.pluginId
@@ -150,7 +150,7 @@ export function $$J0(e, t, i) {
       {
         if (O) return _$$R.instance.handleUpgrade(Q7.RUN_PLUGIN);
         if (!$(e)) {
-          $D(_$$e.EXTENSIBILITY, Error("runExtensionMenuAction: Expected PluginsMenuArgs"), {
+          reportError(_$$e.EXTENSIBILITY, Error("runExtensionMenuAction: Expected PluginsMenuArgs"), {
             tags: {
               menuActionType: "run-local-plugin"
             }
@@ -163,7 +163,7 @@ export function $$J0(e, t, i) {
         }
         let r = localExtensions[i.localFileId];
         if (!r) {
-          $D(_$$e.EXTENSIBILITY, Error("runExtensionMenuAction: Plugin not found"), {
+          reportError(_$$e.EXTENSIBILITY, Error("runExtensionMenuAction: Plugin not found"), {
             tags: {
               menuActionType: "run-local-plugin"
             },
@@ -188,7 +188,7 @@ export function $$J0(e, t, i) {
             openFileKey: openFile?.key || "",
             isWidget: !1
           }
-        }) : $D(_$$e.EXTENSIBILITY, Error("runExtensionMenuAction: Cannot run plugin"), {
+        }) : reportError(_$$e.EXTENSIBILITY, Error("runExtensionMenuAction: Cannot run plugin"), {
           tags: {
             menuActionType: "run-local-plugin",
             canRunMessage: s.message
@@ -200,7 +200,7 @@ export function $$J0(e, t, i) {
       {
         if (O) return _$$R.instance.handleUpgrade(Q7.RUN_PLUGIN);
         if (!$(e)) {
-          $D(_$$e.EXTENSIBILITY, Error("runExtensionMenuAction: Expected PluginsMenuArgs"), {
+          reportError(_$$e.EXTENSIBILITY, Error("runExtensionMenuAction: Expected PluginsMenuArgs"), {
             tags: {
               menuActionType: "run-installed-plugin"
             }
@@ -231,7 +231,7 @@ export function $$J0(e, t, i) {
           publishedPlugins: e.publishedPlugins
         });
         if (!r) {
-          $D(_$$e.EXTENSIBILITY, Error("runExtensionMenuAction: Plugin not found"), {
+          reportError(_$$e.EXTENSIBILITY, Error("runExtensionMenuAction: Plugin not found"), {
             tags: {
               menuActionType: "run-installed-plugin",
               pluginId: i.pluginId
@@ -253,7 +253,7 @@ export function $$J0(e, t, i) {
             openFileKey: openFile?.key || "",
             isWidget: !1
           }
-        }) : $D(_$$e.EXTENSIBILITY, Error("runExtensionMenuAction: Cannot run plugin"), {
+        }) : reportError(_$$e.EXTENSIBILITY, Error("runExtensionMenuAction: Cannot run plugin"), {
           tags: {
             menuActionType: "run-installed-plugin",
             pluginId: i.pluginId,
@@ -294,13 +294,13 @@ export function $$J0(e, t, i) {
       {
         if ("dev" === w || "inspect" === w) {
           ax(_gJ.PLUGIN);
-          zl.set(HT, "development");
+          atomStoreManager.set(HT, "development");
           mN.getInstance()?.getIframeId() === Wh.INSPECT && wY();
           return;
         }
         if ("buzz" === w) {
-          zl.set(Lk, _$$x.PLUGINS);
-          zl.set(zM, "development");
+          atomStoreManager.set(Lk, _$$x.PLUGINS);
+          atomStoreManager.set(zM, "development");
           mN.getInstance()?.getIframeId() === Wh.BUZZ_LEFT_PANEL && wY();
           return;
         }
@@ -330,18 +330,18 @@ export function $$J0(e, t, i) {
         toolType: "plugin"
       })), Y5.triggerAction("clear-tool", {
         source: "menu"
-      }), sx(s0.FIND_MORE_PLUGINS, {
+      }), trackEventAnalytics(s0.FIND_MORE_PLUGINS, {
         isWidget: !1,
         triggeredFrom: t
       }), "dev" === w || "inspect" === w) {
         ax(_gJ.PLUGIN);
-        zl.set(HT, "recents_and_saved");
+        atomStoreManager.set(HT, "recents_and_saved");
         mN.getInstance()?.getIframeId() === Wh.INSPECT && wY();
         return;
       }
       if ("buzz" === w) {
-        zl.set(Lk, _$$x.PLUGINS);
-        zl.set(zM, "recents_and_saved");
+        atomStoreManager.set(Lk, _$$x.PLUGINS);
+        atomStoreManager.set(zM, "recents_and_saved");
         mN.getInstance()?.getIframeId() === Wh.BUZZ_LEFT_PANEL && wY();
         return;
       }
@@ -365,7 +365,7 @@ export function $$J0(e, t, i) {
       Y5.triggerAction("clear-tool", {
         source: "menu"
       });
-      sx(s0.FIND_MORE_PLUGINS, {
+      trackEventAnalytics(s0.FIND_MORE_PLUGINS, {
         isWidget: !0,
         triggeredFrom: t
       });
@@ -453,7 +453,7 @@ export function $$J0(e, t, i) {
         return;
       }
       W.toggleDevTools("bottom");
-      i.showError ? console.error(i.showError) : sx("Plugin Open Dev Tools");
+      i.showError ? console.error(i.showError) : trackEventAnalytics("Plugin Open Dev Tools");
       return;
     case "toggle-use-local-related-link-plugin":
       {

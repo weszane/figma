@@ -3,7 +3,7 @@ import { useState, useRef, useCallback, useEffect } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { o as _$$o } from "../905/821217";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { H8 } from "../905/590952";
 import { U } from "../905/331038";
 import { w as _$$w } from "../905/113805";
@@ -22,9 +22,9 @@ let E = new MH();
 let x = e => {
   if (e && "validation" === e.type) switch (e.key) {
     case "COCREATORS_NOT_ALLOWED_FOR_PAID_RESOURCE":
-      return _$$t("community.publishing.there_can_only_be_one_creator_for_a_paid_resource");
+      return getI18nString("community.publishing.there_can_only_be_one_creator_for_a_paid_resource");
     case "TOO_MANY_COCREATORS":
-      return _$$t("community.publishing.add_up_to_n_creators", {
+      return getI18nString("community.publishing.add_up_to_n_creators", {
         maxCreatorsPerResource: e.data.maxCocreators
       });
     case "AUTHOR_IS_INVALID_COCREATOR":
@@ -79,7 +79,7 @@ export function $$S0({
       }))
     }));
   }, [e.currentValue]), e.currentValue === _$$A || I && !Zc(e)) ? null : jsx(_$$A2, {
-    label: _$$t("community.publishing.additional_contributors"),
+    label: getI18nString("community.publishing.additional_contributors"),
     error: k,
     children: jsx(_$$o, {
       display: "contents",
@@ -109,7 +109,7 @@ export function $$S0({
             let t = e.inputValue.trim().toLowerCase().replace(/^@/, "");
             return I ? t ? E.search(t).then(e => e.filter(D)) : [] : P.current.search(t);
           },
-          placeholder: _$$t("community.publishing.give_up_to_n_creators_credit", {
+          placeholder: getI18nString("community.publishing.give_up_to_n_creators_credit", {
             maxCreatorsPerResource: Wi
           })
         })
@@ -125,7 +125,7 @@ function w({
     isPending
   } = e.content;
   return jsxs("div", {
-    children: [name, " ", isPending && _$$t("community.publish.pending")]
+    children: [name, " ", isPending && getI18nString("community.publish.pending")]
   });
 }
 function C({
@@ -155,10 +155,10 @@ function T() {
     className: "cocreators_input--textRow--IEHo4",
     children: [jsx("div", {
       className: v,
-      children: _$$t("community.publishing.editor_or_viewer_not_found")
+      children: getI18nString("community.publishing.editor_or_viewer_not_found")
     }), jsx("div", {
       className: I,
-      children: _$$t("community.publishing.invite_creators_to_the_file_to_give_credit_creators_must_have_community_profiles")
+      children: getI18nString("community.publishing.invite_creators_to_the_file_to_give_credit_creators_must_have_community_profiles")
     })]
   });
 }

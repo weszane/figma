@@ -1,13 +1,13 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useMemo, useEffect, useCallback, useState, useRef } from "react";
-import { md, Xr, zl, fp } from "../figma_app/27355";
+import { useAtomWithSubscription, Xr, atomStoreManager, useAtomValueAndSetter } from "../figma_app/27355";
 import { J3, JU, wv, kN, Gi, GR, e2 as _$$e, li } from "../figma_app/622574";
 import { bY, Vf, q7, oQ, V6, i6, ux, VZ, Ei, OR, xw } from "../figma_app/60023";
 import d from "classnames";
 import { buildUploadUrl, isLocalCluster } from "../figma_app/169182";
 import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx as _$$tx, Yd } from "../905/303541";
+import { getI18nString, renderI18nText, getTranslatedDynamicContent } from "../905/303541";
 import { q5, tS as _$$tS, ze, As } from "../figma_app/516028";
 import { JY } from "../9410/236102";
 import { kM, gu, v8, oJ, yx } from "../9410/43627";
@@ -26,7 +26,7 @@ import { mp } from "../figma_app/29287";
 import { Ji, Zx, h0, qm } from "../figma_app/553488";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { $n } from "../905/521428";
-import { Xr as _$$Xr } from "../vendor/525001";
+import { useSetAtom } from "../vendor/525001";
 import { IT } from "../figma_app/566371";
 import { eE as _$$eE } from "../figma_app/106207";
 import { Cu } from "../figma_app/314264";
@@ -50,7 +50,7 @@ import { C as _$$C } from "../905/520159";
 import { lQ } from "../905/934246";
 import { ServiceCategories as _$$e3 } from "../905/165054";
 import { AD } from "../905/871411";
-import { Lo, x1 } from "../905/714362";
+import { logInfo, logError } from "../905/714362";
 import { Point } from "../905/736624";
 import { F as _$$F } from "../905/302958";
 import { zX } from "../905/576487";
@@ -79,7 +79,7 @@ import { _E } from "../905/788069";
 import { R as _$$R } from "../figma_app/53049";
 import { n as _$$n2 } from "../905/347702";
 import { Y as _$$Y, Sk, D1, tO as _$$tO, D0 } from "../9410/989613";
-import { nl } from "../figma_app/257275";
+import { isInteractionPathCheck } from "../figma_app/897289";
 import { kt } from "../figma_app/858013";
 import { Um } from "../905/848862";
 import { l6, c$, sK } from "../905/794875";
@@ -114,17 +114,17 @@ function T({
     e();
   };
   return jsxs(MR, {
-    title: _$$t("slides.templates.dev_environment_only"),
+    title: getI18nString("slides.templates.dev_environment_only"),
     children: [jsx(FA, {
       thumbnailWidth: "184px",
       thumbnailHeight: "101px",
-      name: _$$t("slides.templates.light"),
+      name: getI18nString("slides.templates.light"),
       thumbnailUrl: buildUploadUrl("4a01804a5d4ad3a2d38ea604c0d8d63520e9b97b"),
       onPointerDown: () => t(zMY.LIGHT)
     }, "light"), jsx(FA, {
       thumbnailWidth: "184px",
       thumbnailHeight: "101px",
-      name: _$$t("slides.templates.dark"),
+      name: getI18nString("slides.templates.dark"),
       thumbnailUrl: buildUploadUrl("01a1fc814ce18d9da3ba738aef79acc82c752ab7"),
       onPointerDown: () => t(zMY.DARK)
     }, "dark")]
@@ -167,8 +167,8 @@ function L({
       id: "start_from_scratch",
       onClick: maybeUseLightTemplateOnDismiss,
       icon: jsx(_$$e2, {}),
-      title: _$$t("slides.templates.start_from.scratch.title"),
-      subtitle: _$$t("slides.templates.start_from.scratch.subtitle"),
+      title: getI18nString("slides.templates.start_from.scratch.title"),
+      subtitle: getI18nString("slides.templates.start_from.scratch.subtitle"),
       buttonStyle: "dashedBorder",
       iconStyle: "startFromScratchIcon",
       dataTestId: "start-from-scratch"
@@ -176,7 +176,7 @@ function L({
       id: "outline_to_deck",
       onClick: t,
       icon: jsx(j, {}),
-      title: _$$t("slides.templates.start_from.outline.title"),
+      title: getI18nString("slides.templates.start_from.outline.title"),
       subtitle: "Generate deck from outline",
       iconStyle: "startFromOutlineIcon",
       dataTestId: "outline-to-deck"
@@ -184,8 +184,8 @@ function L({
       id: "start_from_outline",
       onClick: e,
       icon: jsx(j, {}),
-      title: _$$t("slides.templates.start_from.outline.title"),
-      subtitle: _$$t("slides.templates.start_from.outline.subtitle"),
+      title: getI18nString("slides.templates.start_from.outline.title"),
+      subtitle: getI18nString("slides.templates.start_from.outline.subtitle"),
       iconStyle: "startFromOutlineIcon",
       dataTestId: "start-from-outline"
     }), c && a.push({
@@ -195,8 +195,8 @@ function L({
         setUserDraftTemplateKeyForCurrentFile();
       },
       icon: jsx(_$$Q, {}),
-      title: _$$t("slides.templates.make_a_template.title"),
-      subtitle: _$$t("slides.templates.make_a_template.subtitle"),
+      title: getI18nString("slides.templates.make_a_template.title"),
+      subtitle: getI18nString("slides.templates.make_a_template.subtitle"),
       iconStyle: "makeATemplate",
       dataTestId: "make-a-template"
     }), 1 === a.length && a[0]?.id === "start_from_scratch") ? [] : a;
@@ -223,14 +223,14 @@ function X({
   return jsx("button", {
     className: c()("see_all_button--seeAllButton--TAlLw", _$$s.font11.fontMedium.fontInter.flexShrink0.$),
     onClick: e,
-    children: _$$tx("slides.templates.view_type.see_all")
+    children: renderI18nText("slides.templates.view_type.see_all")
   });
 }
 function Q({
   currentTeam: e
 }) {
   let t = fK();
-  let i = _$$Xr(bY);
+  let i = useSetAtom(bY);
   let {
     teamTemplates,
     numTemplatesForTeam
@@ -238,7 +238,7 @@ function Q({
   if (!teamTemplates || 0 === teamTemplates.length) return null;
   let s = (numTemplatesForTeam ?? 0) > t;
   return jsx(ei, {
-    title: _$$tx("slides.templates.template_picker.header_with_name", {
+    title: renderI18nText("slides.templates.template_picker.header_with_name", {
       orgOrTeamName: e.name
     }),
     previewData: teamTemplates,
@@ -257,14 +257,14 @@ function $({
     teamTemplates,
     isLoading
   } = wv(FFileType.SLIDES, t);
-  let a = _$$Xr(bY);
+  let a = useSetAtom(bY);
   let s = teamTemplates && teamTemplates.length >= t;
   if (isLoading || !teamTemplates || !teamTemplates.length || !t) return null;
   let d = s ? () => a({
     type: Vf.ORG
   }) : void 0;
   return jsx(ei, {
-    title: _$$tx("slides.templates.theme_picker.org_template_header", {
+    title: renderI18nText("slides.templates.theme_picker.org_template_header", {
       orgName: e.name
     }),
     previewData: teamTemplates,
@@ -276,7 +276,7 @@ function ee() {
     data: e,
     status: t
   }] = IT(_$$_2());
-  let i = _$$Xr(bY);
+  let i = useSetAtom(bY);
   let r = fK();
   return "loading" === t ? jsx(kM, {
     removePadding: !0,
@@ -290,7 +290,7 @@ function ee() {
       }));
       let a = t.slice(0, r);
       return 0 === a.length ? null : jsx(ei, {
-        title: Yd(e.i18n_meta.title, e.title),
+        title: getTranslatedDynamicContent(e.i18n_meta.title, e.title),
         previewData: a,
         onSeeAllClick: t.length > r ? () => i({
           type: Vf.HUB_FILE,
@@ -318,7 +318,7 @@ function et() {
     numTemplates: t,
     removePadding: !0
   }) : jsx(ei, {
-    title: _$$t("slides.templates.recents"),
+    title: getI18nString("slides.templates.recents"),
     previewData: e.slice(0, i),
     onPublishTemplateClick: l && !c ? () => {
       ZW({
@@ -353,7 +353,7 @@ function ei({
     onClick: r,
     recordingKey: "template-picker-publish-template",
     variant: "secondary",
-    children: _$$tx("slides.templates.button.publish_template")
+    children: renderI18nText("slides.templates.button.publish_template")
   }) : void 0;
   return jsx(MR, {
     title: e,
@@ -382,14 +382,14 @@ function eo({
       svg: _$$A,
       useOriginalSrcFills_DEPRECATED: !0
     }), jsx("div", {
-      children: _$$tx("slides.templates.search.empty", {
+      children: renderI18nText("slides.templates.search.empty", {
         searchTerm: jsx("span", {
           className: _$$s.fontBold.$,
           children: t
         })
       })
     }), jsx("div", {
-      children: _$$tx("slides.templates.search.empty.tip")
+      children: renderI18nText("slides.templates.search.empty.tip")
     })]
   }) : jsx(_$$P, {
     className: _$$s.px8.hFull.$,
@@ -426,7 +426,7 @@ function ed({
   let {
     onShowSeparatorScroll
   } = gH();
-  let y = md(q7);
+  let y = useAtomWithSubscription(q7);
   let b = _$$tS();
   let C = Gi();
   let {
@@ -484,7 +484,7 @@ function ec({
         searchQuery,
         setSearchQuery,
         showCloseButton: !!t,
-        placeholder: _$$t("slides.templates.search_templates")
+        placeholder: getI18nString("slides.templates.search_templates")
       })
     }), trimmedSearchQuery ? jsx(eo, {
       isSearchQueryLoading,
@@ -509,7 +509,7 @@ function em({
       [me]: o
     }),
     children: [jsx(_$$K, {
-      "aria-label": _$$t("slides.templates.back"),
+      "aria-label": getI18nString("slides.templates.back"),
       onClick: t,
       children: jsx(_$$C, {
         "data-not-draggable": !0,
@@ -534,7 +534,7 @@ function ef({
     data: t,
     status: i
   }] = _$$IT(_$$Q2(e));
-  let r = _$$Xr(bY);
+  let r = useSetAtom(bY);
   let {
     scrollPosition,
     scrollRef,
@@ -551,7 +551,7 @@ function ef({
     }), jsx(kM, {})]
   }) : t ? jsxs(x, {
     children: [jsx(em, {
-      title: Yd(t.i18n_meta.title, t.title),
+      title: getTranslatedDynamicContent(t.i18n_meta.title, t.title),
       onClick: d
     }), jsx(_$$P, {
       className: _$$s.px8.pt16.hFull.$,
@@ -576,7 +576,7 @@ function ef({
   }) {
     return jsxs("div", {
       className: GM,
-      children: [_$$tx("slides.templates.templates_modal.templates_title"), jsx("span", {
+      children: [renderI18nText("slides.templates.templates_modal.templates_title"), jsx("span", {
         className: HE,
         children: " / "
       }), e]
@@ -587,7 +587,7 @@ function ef({
   }) {
     return jsx("div", {
       className: m_,
-      children: _$$tx("slides.templates.templates_modal.published_by", {
+      children: renderI18nText("slides.templates.templates_modal.published_by", {
         publisherName: e
       })
     });
@@ -660,7 +660,7 @@ class eX {
   }
   update() {
     if (!Zdr) return;
-    if (this.abortController.signal.aborted || !zl.get(ze)) {
+    if (this.abortController.signal.aborted || !atomStoreManager.get(ze)) {
       this.cancel();
       return;
     }
@@ -708,14 +708,14 @@ async function eZ({
       version: "1.1",
       data: e
     }, {
-      orgId: zl.get(_s),
-      teamId: zl.get(As) || null,
-      fileKey: zl.get(ze) || null,
-      fileSeq: zl.get(_$$J)?.toString() || null,
-      userId: zl.get(kS) || null,
+      orgId: atomStoreManager.get(_s),
+      teamId: atomStoreManager.get(As) || null,
+      fileKey: atomStoreManager.get(ze) || null,
+      fileSeq: atomStoreManager.get(_$$J)?.toString() || null,
+      userId: atomStoreManager.get(kS) || null,
       trackingSessionId: fF()
     });
-    if (r.signal.aborted || !zl.get(ze)) {
+    if (r.signal.aborted || !atomStoreManager.get(ze)) {
       i.cancel();
       return;
     }
@@ -785,8 +785,8 @@ function e1(e) {
   });
 }
 function e2() {
-  let e = md(oQ) ?? void 0;
-  let t = md(bY);
+  let e = useAtomWithSubscription(oQ) ?? void 0;
+  let t = useAtomWithSubscription(bY);
   let i = t?.figjamEntryPointData;
   let r = i?.figjamFileKey ?? e;
   let {
@@ -799,7 +799,7 @@ function e2() {
     removeAllPlaceholderOverlays
   } = Wb();
   let p = useDispatch();
-  let h = md(ze);
+  let h = useAtomWithSubscription(ze);
   let m = t?.source ?? _$$E.SLIDES_TEMPLATE;
   Xr(zF)(m);
   let g = _$$D(slidePresetModules[0]?.library_key);
@@ -865,12 +865,12 @@ let e3 = async ({
     })]), e.signal);
     if ("rejected" === n.status) {
       _$$k2.error("Failed to ingest templates", n.reason);
-      D0(_$$t("slides.present_summary.visual_bells.error_unknown"));
+      D0(getI18nString("slides.present_summary.visual_bells.error_unknown"));
       return;
     }
     if (x = n.value, "rejected" === r.status) {
       _$$k2.error("Failed to fetch canvas data from file", r.reason);
-      D0(_$$t("slides.present_summary.visual_bells.error_unknown"));
+      D0(getI18nString("slides.present_summary.visual_bells.error_unknown"));
       return;
     }
     subscribeToLibrary && subscribeToLibrary();
@@ -881,7 +881,7 @@ let e3 = async ({
           file: {
             key: openFileKey
           },
-          name: `${e} ${_$$t("slides.templates.presentation")}`
+          name: `${e} ${getI18nString("slides.templates.presentation")}`
         }));
       },
       showPlaceholderOverlay,
@@ -892,11 +892,11 @@ let e3 = async ({
       _$$Y();
       return;
     }
-    D0(_$$t("slides.present_summary.visual_bells.error_unknown"));
+    D0(getI18nString("slides.present_summary.visual_bells.error_unknown"));
     _$$k2.error("Failed to generate slides", t);
   } finally {
     removeAllPlaceholderOverlays();
-    openFileKey !== zl.get(ze) || addFirstPresetToEmptyDeck();
+    openFileKey !== atomStoreManager.get(ze) || addFirstPresetToEmptyDeck();
     Zdr?.finishDeckGeneration();
     e1(x);
   }
@@ -904,12 +904,12 @@ let e3 = async ({
 function e8() {
   let e = useDispatch();
   let t = Um();
-  let i = md(oQ);
+  let i = useAtomWithSubscription(oQ);
   let [r, o] = useState([]);
-  let [d, c] = fp(V6);
+  let [d, c] = useAtomValueAndSetter(V6);
   let u = M0(i);
   return (useEffect(() => {
-    !nl() && i && (c({
+    !isInteractionPathCheck() && i && (c({
       type: i6.NONE
     }), (async () => {
       let e = await u();
@@ -930,7 +930,7 @@ function e8() {
   }, [i, c, u]), i) ? d.type === i6.NONE ? jsx(e9, {}) : jsx("div", {
     "data-testid": "page-selector",
     children: jsxs(l6, {
-      ariaLabel: _$$t("slides.templates.file_picker.page_selector.label"),
+      ariaLabel: getI18nString("slides.templates.file_picker.page_selector.label"),
       className: "slides_template_page_selector--pageSelector--PuTJR",
       dispatch: e,
       dropdownShown: t,
@@ -941,7 +941,7 @@ function e8() {
             case i6.SINGLE:
               return e.page.name;
             case i6.ALL:
-              return _$$t("slides.templates.file_picker.page_selector.all_pages");
+              return getI18nString("slides.templates.file_picker.page_selector.all_pages");
             default:
               return "";
           }
@@ -960,7 +960,7 @@ function e8() {
         },
         disabled: !0,
         ignoreCheck: !0,
-        children: _$$t("slides.templates.file_picker.page_selector.label")
+        children: getI18nString("slides.templates.file_picker.page_selector.label")
       }), r.map(e => jsx(c$, {
         value: {
           type: i6.SINGLE,
@@ -972,7 +972,7 @@ function e8() {
           type: i6.ALL,
           allPages: r
         },
-        children: _$$t("slides.templates.file_picker.page_selector.all_pages")
+        children: getI18nString("slides.templates.file_picker.page_selector.all_pages")
       }, -1)]
     })
   }) : null;
@@ -982,7 +982,7 @@ function e9() {
     className: "slides_template_page_selector--pageSelectorLoadingState--oaDQH",
     children: [jsx("div", {
       className: _$$s.fontMedium.overflowHidden.colorTextSecondary.$,
-      children: _$$t("slides.templates.file_picker.page_selector.loading")
+      children: getI18nString("slides.templates.file_picker.page_selector.loading")
     }), jsx(kt, {})]
   });
 }
@@ -999,7 +999,7 @@ function te({
       variant: "primary",
       onClick: startAction,
       disabled: !figjamFileKey,
-      children: _$$tx(e ? "slides.templates.template_picker.submit.button.with_template" : "slides.templates.template_picker.submit.button.without_template")
+      children: renderI18nText(e ? "slides.templates.template_picker.submit.button.with_template" : "slides.templates.template_picker.submit.button.without_template")
     })
   });
 }
@@ -1018,12 +1018,12 @@ function tt({
       variant: "secondary",
       onClick: e,
       disabled: i,
-      children: _$$tx("slides.templates.outline_with_template.button")
+      children: renderI18nText("slides.templates.outline_with_template.button")
     }), jsx($n, {
       variant: "secondary",
       onClick: t,
       disabled: i,
-      children: _$$tx("slides.templates.add_all_slides")
+      children: renderI18nText("slides.templates.add_all_slides")
     })]
   });
 }
@@ -1038,7 +1038,7 @@ function ti({
   });
 }
 function tr() {
-  let e = md(V6);
+  let e = useAtomWithSubscription(V6);
   let {
     startAction,
     figjamFileKey
@@ -1049,14 +1049,14 @@ function tr() {
       variant: "primary",
       onClick: startAction,
       disabled: !figjamFileKey || e.type === i6.NONE,
-      children: _$$tx("slides.templates.file_picker.submit_button.generate")
+      children: renderI18nText("slides.templates.file_picker.submit_button.generate")
     })
   });
 }
 function tn() {
-  let e = md(V6);
+  let e = useAtomWithSubscription(V6);
   let t = Xr(bY);
-  let i = md(oQ);
+  let i = useAtomWithSubscription(oQ);
   return jsx(ti, {
     children: jsx($n, {
       variant: "primary",
@@ -1066,7 +1066,7 @@ function tn() {
         });
       },
       disabled: !i || e.type === i6.NONE,
-      children: _$$tx("slides.templates.file_picker.submit_button.pick_template")
+      children: renderI18nText("slides.templates.file_picker.submit_button.pick_template")
     })
   });
 }
@@ -1087,14 +1087,14 @@ function to({
   libraryKey: e
 }) {
   let t = NG(e);
-  let [i, r] = fp(bY);
+  let [i, r] = useAtomValueAndSetter(bY);
   let o = null === _$$tS();
   let d = r$();
   let c = S7();
   let u = Xr(ux);
   let p = Xr(oQ);
   return (useEffect(() => {
-    o || ["loading", "loaded"].includes(t.status) || Lo(_$$e3.SLIDES, `Query result status has unexpected value: ${t.status}`);
+    o || ["loading", "loaded"].includes(t.status) || logInfo(_$$e3.SLIDES, `Query result status has unexpected value: ${t.status}`);
   }, [o, t.status]), "loading" === t.status || o) ? jsxs(x, {
     children: [jsx(em, {
       title: "",
@@ -1126,7 +1126,7 @@ function tl({
 }) {
   let i = q5();
   let r = r$();
-  let [o, d] = fp(bY);
+  let [o, d] = useAtomValueAndSetter(bY);
   let c = Xr(ux);
   let u = Xr(oQ);
   let {
@@ -1147,16 +1147,16 @@ function tl({
         });
         return;
       }
-      e ? (x1(_$$e3.SLIDES, "Expected to find at least one module in slides template", {
+      e ? (logError(_$$e3.SLIDES, "Expected to find at least one module in slides template", {
         libraryKey: e
       }, {
         reportAsSentryError: !0
       }), h(_$$F.enqueue({
         type: "slides-template",
-        message: _$$t("slides.templates.toast.no_longer_available"),
+        message: getI18nString("slides.templates.toast.no_longer_available"),
         error: !0,
         icon: zX.EXCLAMATION
-      }))) : x1(_$$e3.SLIDES, "No library key found for slides template", {}, {
+      }))) : logError(_$$e3.SLIDES, "No library key found for slides template", {}, {
         reportAsSentryError: !0
       });
       d({
@@ -1215,7 +1215,7 @@ function tl({
     l7.user("add-all-slides", () => {
       Ez5?.slideThemeLibBindings().setDocumentTemplateLibraryKey(t[0].library_key);
     });
-    !getFeatureFlags().piper_auto_rename && i?.key && S.file_name && !e && i.name === _$$t("fullscreen.fullscreen_view_selector.untitled") && h(Nw({
+    !getFeatureFlags().piper_auto_rename && i?.key && S.file_name && !e && i.name === getI18nString("fullscreen.fullscreen_view_selector.untitled") && h(Nw({
       file: {
         key: i.key
       },
@@ -1264,7 +1264,7 @@ function td({
     children: jsx($n, {
       variant: "secondary",
       onClick: e,
-      children: _$$tx("slides.templates.add_all_slides")
+      children: renderI18nText("slides.templates.add_all_slides")
     })
   }) : null;
 }
@@ -1318,7 +1318,7 @@ function tm({
   });
   let g = getFeatureFlags().pro_templates_lg;
   let y = g ? teamTemplates : templatesByTeam;
-  let b = _$$Xr(bY);
+  let b = useSetAtom(bY);
   let {
     scrollPosition,
     scrollRef,
@@ -1404,7 +1404,7 @@ function t_({
     teamId: e,
     editorType: FFileType.SLIDES
   });
-  let a = _$$Xr(bY);
+  let a = useSetAtom(bY);
   let {
     scrollPosition,
     scrollRef,
@@ -1440,7 +1440,7 @@ function t_({
 function tE({
   showCloseButton: e
 }) {
-  let [t, i] = fp(bY);
+  let [t, i] = useAtomValueAndSetter(bY);
   let {
     files,
     searchQuery,
@@ -1448,7 +1448,7 @@ function tE({
     setSearchQuery,
     status
   } = _$$_(FFileType.WHITEBOARD);
-  let [p, f] = fp(ux);
+  let [p, f] = useAtomValueAndSetter(ux);
   let g = Xr(oQ);
   let {
     showSeparator
@@ -1470,7 +1470,7 @@ function tE({
         }), f(null), g(null)));
       },
       showCloseButton: !!e,
-      placeholder: _$$t("slides.templates.file_picker.search_files")
+      placeholder: getI18nString("slides.templates.file_picker.search_files")
     }), jsx("div", {
       className: c()(_$$s.pt16.pb24.px16.flex.flexColumn.gap2.$, {
         [me]: showSeparator
@@ -1480,8 +1480,8 @@ function tE({
           size: 16,
           type: y1.WHITEBOARD
         }),
-        title: _$$t("slides.templates.file_picker.title"),
-        subtitle: _$$t("slides.templates.file_picker.subtitle")
+        title: getI18nString("slides.templates.file_picker.title"),
+        subtitle: getI18nString("slides.templates.file_picker.subtitle")
       })
     }), jsx(tT, {
       status,
@@ -1531,7 +1531,7 @@ function tw({
   file: e
 }) {
   let t = iZ();
-  let [i, r] = fp(oQ);
+  let [i, r] = useAtomValueAndSetter(oQ);
   let {
     disabled,
     tooltipText
@@ -1545,17 +1545,17 @@ function tw({
     };
     if (t.data.file?.viewerExportRestricted && t.data.file?.canEdit === !1) return {
       disabled: !0,
-      tooltipText: _$$t("slides.template.file_picker.viewer_export_restricted_disabled")
+      tooltipText: getI18nString("slides.template.file_picker.viewer_export_restricted_disabled")
     };
     let i = t.data.file?.org;
     if (i?.k12GoogleOrg || i?.aiFeaturesDisabledAt) return {
       disabled: !0,
-      tooltipText: _$$t("slides.template.file_picker.ai_disabled.org")
+      tooltipText: getI18nString("slides.template.file_picker.ai_disabled.org")
     };
     let r = t.data.file?.team;
     return r?.aiFeaturesDisabledAt ? {
       disabled: !0,
-      tooltipText: _$$t("slides.template.file_picker.ai_disabled.team")
+      tooltipText: getI18nString("slides.template.file_picker.ai_disabled.team")
     } : {
       disabled: !1,
       tooltipText: void 0
@@ -1587,14 +1587,14 @@ function tS({
   debouncedSearchQuery: e,
   status: t
 }) {
-  return t === J_.NO_QUERY_RESULTS ? _$$tx("slides.templates.file_picker.no_files_match", {
+  return t === J_.NO_QUERY_RESULTS ? renderI18nText("slides.templates.file_picker.no_files_match", {
     searchQuery: jsx("p", {
       className: _$$s.colorText.textBodyLargeStrong.$,
       children: e
     })
   }) : t === J_.NO_RECENT_FILES ? jsx("h1", {
     className: _$$s.colorText.textBodyLarge.$,
-    children: _$$tx("slides.templates.file_picker.no_recent_files")
+    children: renderI18nText("slides.templates.file_picker.no_recent_files")
   }) : null;
 }
 function tj({
@@ -1604,16 +1604,16 @@ function tj({
     searchQuery,
     setSearchQuery
   } = $N();
-  let [r, a] = fp(bY);
+  let [r, a] = useAtomValueAndSetter(bY);
   let o = !!(r.type === Vf.TEMPLATE_PICKER && r.figjamEntryPointData);
-  let d = useSelector(e => e.mirror.appModel.multiplayerSessionState === kul.JOINED) || nl();
+  let d = useSelector(e => e.mirror.appModel.multiplayerSessionState === kul.JOINED) || isInteractionPathCheck();
   return jsxs(x, {
     dataTestId: "template-picker-view",
     children: [o ? jsx(tJ, {
       searchQuery,
       setSearchQuery,
       showCloseButton: !0,
-      placeholder: _$$t("slides.templates.search_templates")
+      placeholder: getI18nString("slides.templates.search_templates")
     }) : jsx(ui, {
       searchQuery,
       setSearchQuery,
@@ -1624,7 +1624,7 @@ function tj({
         });
       },
       showCloseButton: !!e,
-      placeholder: _$$t("slides.templates.template_picker.search_templates")
+      placeholder: getI18nString("slides.templates.template_picker.search_templates")
     }), d ? jsx(tI, {
       footer: e => jsx(te, {
         templateSelected: e
@@ -1643,7 +1643,7 @@ function tI({
     searchQueryResult,
     requestLoadMore
   } = $N();
-  let o = md(ux);
+  let o = useAtomWithSubscription(ux);
   let {
     showSeparator
   } = gH();
@@ -1660,8 +1660,8 @@ function tI({
           className: _$$s.colorBgBrand.h14.w14.bRadius2.flex.alignCenter.itemsCenter.$,
           children: jsx(_$$Q, {})
         }),
-        title: _$$t("slides.templates.template_picker.title"),
-        subtitle: _$$t("slides.templates.template_picker.subtitle")
+        title: getI18nString("slides.templates.template_picker.title"),
+        subtitle: getI18nString("slides.templates.template_picker.subtitle")
       })
     }), trimmedSearchQuery ? jsx(eo, {
       isSearchQueryLoading,
@@ -1698,7 +1698,7 @@ function tN() {
     if (d.length > 0 && t.push({
       type: 1,
       id: "recents",
-      label: _$$t("slides.templates.recents")
+      label: getI18nString("slides.templates.recents")
     }), o) for (let e of o) t.push({
       type: 2,
       shelf: e,
@@ -1708,7 +1708,7 @@ function tN() {
     e && t.push({
       type: 3,
       id: "org",
-      label: _$$t("slides.templates.org_templates")
+      label: getI18nString("slides.templates.org_templates")
     });
     i(t);
     t.length > 0 && s(t[0].id);
@@ -1734,7 +1734,7 @@ function tN() {
           [_$$s.colorTextSecondary.$]: r !== e.id
         }),
         onClick: y(e.id),
-        children: 2 === e.type ? Yd(e.shelf.i18n_meta.title, e.shelf.title) : e.label
+        children: 2 === e.type ? getTranslatedDynamicContent(e.shelf.i18n_meta.title, e.shelf.title) : e.label
       }, e.id))
     }), (t => {
       switch (t.type) {
@@ -1898,7 +1898,7 @@ function tR({
 export function $$tD0({
   showCloseButton: e
 }) {
-  let t = md(bY);
+  let t = useAtomWithSubscription(bY);
   let i = Xr(VZ);
   let r = Xr(Ei);
   let d = Xr(OR);

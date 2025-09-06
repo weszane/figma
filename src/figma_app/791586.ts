@@ -1,4 +1,4 @@
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { FJ } from "../905/508367";
 import { Rs } from "../figma_app/288654";
 import { IT } from "../figma_app/566371";
@@ -104,7 +104,7 @@ export function $$b2() {
     connectedProjectExpired,
     isConnectedNonOwner
   } = $$f10();
-  return !!md(rK) && !isConnectedNonOwner && (authenticationExpired || connectedProjectExpired || !!connectedProject && ((e = connectedProject.status.toLowerCase()) === $$y5.REMOVED || e === $$y5.INACTIVE || e === $$y5.PAUSING || e === $$y5.RESTORING || e === $$y5.ACTIVE_UNHEALTHY || e === $$y5.UNKNOWN || e === $$y5.INIT_FAILED || e === $$y5.RESTORE_FAILED || e === $$y5.PAUSE_FAILED));
+  return !!useAtomWithSubscription(rK) && !isConnectedNonOwner && (authenticationExpired || connectedProjectExpired || !!connectedProject && ((e = connectedProject.status.toLowerCase()) === $$y5.REMOVED || e === $$y5.INACTIVE || e === $$y5.PAUSING || e === $$y5.RESTORING || e === $$y5.ACTIVE_UNHEALTHY || e === $$y5.UNKNOWN || e === $$y5.INIT_FAILED || e === $$y5.RESTORE_FAILED || e === $$y5.PAUSE_FAILED));
 }
 let T = ["active_healthy", "active_unhealthy", "pausing", "coming_up", "restoring"];
 export function $$I6(e = !1) {

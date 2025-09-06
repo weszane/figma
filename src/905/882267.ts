@@ -8,10 +8,10 @@ import { d as _$$d } from "../905/976845";
 import { S as _$$S } from "../905/720922";
 import { D as _$$D } from "../905/716990";
 import { getFeatureFlags } from "../905/601108";
-import { fp, Xr } from "../figma_app/27355";
+import { useAtomValueAndSetter, Xr } from "../figma_app/27355";
 import h from "classnames";
-import { sx } from "../905/449184";
-import { sn } from "../905/542194";
+import { trackEventAnalytics } from "../905/449184";
+import { globalPerfTimer } from "../905/542194";
 import { parsePxNumber } from "../figma_app/783094";
 import { Ay } from "../905/612521";
 import { Rs } from "../figma_app/288654";
@@ -25,7 +25,7 @@ import { B as _$$B, V as _$$V } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
 import { S as _$$S2 } from "../figma_app/552746";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Y as _$$Y, M as _$$M } from "../905/830372";
 import { XE, u1 } from "../figma_app/91703";
 import { Lo, to as _$$to } from "../905/156213";
@@ -147,7 +147,7 @@ export function $$eD0({
     title: e => jsxs(Fragment, {
       children: [jsx("div", {
         className: "font_picker--pickerTitle--5gCK6 header_modal--headerModalTitle--32hFx",
-        children: _$$t("fullscreen.properties_panel.font_picker.title")
+        children: getI18nString("fullscreen.properties_panel.font_picker.title")
       }), jsxs("div", {
         className: hS,
         onKeyDown: eK,
@@ -277,7 +277,7 @@ function eL({
   let eq = useCallback(e => {
     eA(e);
     Uh(e);
-    sx("font picker font set updated", {
+    trackEventAnalytics("font picker font set updated", {
       section: e
     });
   }, []);
@@ -332,7 +332,7 @@ function eL({
     scrollContainerHeight: parseInt(bb$),
     fontSetRowHeight: parseInt(oBL)
   });
-  let [e6, e7] = fp(_$$k3);
+  let [e6, e7] = useAtomValueAndSetter(_$$k3);
   let e8 = useRef(null);
   useEffect(() => {
     el ? window.requestAnimationFrame(() => {
@@ -372,13 +372,13 @@ function eL({
   let ti = useSelector(e => e.userFlags);
   let tn = useCallback(async (e, i = !0, n = !0) => {
     if (getFeatureFlags().dse_sf_pro_font && !(await Cj(e, ti, h, t, "font_picker"))) return;
-    sn.start("update_text_node_font");
+    globalPerfTimer.start("update_text_node_font");
     clearPreview();
     setSelectedFontBeforePreviews(e ?? null);
     d(e, void 0, n ? zk.YES : zk.NO);
     let r = e ? h[e] : void 0;
     let a = If(r)?.source;
-    sx("font picker font selected", {
+    trackEventAnalytics("font picker font selected", {
       pageId: eZ,
       nodeIds: E,
       section: eg,
@@ -389,7 +389,7 @@ function eL({
       fileTeamId: eG?.id
     });
     !eX && i ? t(XE()) : eX && eD();
-    sx("font picker font selected", {
+    trackEventAnalytics("font picker font selected", {
       pageId: eZ,
       nodeIds: E,
       section: eg,
@@ -563,7 +563,7 @@ function eL({
             tn(void 0, !0, !0);
           },
           iconPrefix: jsx(_$$S, {}),
-          children: _$$t("fullscreen.properties_panel.font_picker.clear_selection")
+          children: getI18nString("fullscreen.properties_panel.font_picker.clear_selection")
         })
       })]
     })
@@ -592,20 +592,20 @@ function eF({
     children: jsx("div", {
       className: "font_picker--fontSetDropdown--8aux5",
       children: jsx(e2, {
-        ariaLabel: _$$t("fullscreen.properties_panel.font_picker.font_set.all_fonts"),
+        ariaLabel: getI18nString("fullscreen.properties_panel.font_picker.font_set.all_fonts"),
         dispatch: s,
         dropdownShown: a,
         formatter: {
           format: e => {
             if (e === Qr.SHARED_FONTS) {
-              if (o) return _$$t("fullscreen.properties_panel.font_picker.font_set.shared_fonts.org", {
+              if (o) return getI18nString("fullscreen.properties_panel.font_picker.font_set.shared_fonts.org", {
                 orgName: o.name
               });
-              if (d && l) return _$$t("fullscreen.properties_panel.font_picker.font_set.shared_fonts.team", {
+              if (d && l) return getI18nString("fullscreen.properties_panel.font_picker.font_set.shared_fonts.team", {
                 teamName: l
               });
             }
-            return _$$t(`fullscreen.properties_panel.font_picker.font_set.${e}`);
+            return getI18nString(`fullscreen.properties_panel.font_picker.font_set.${e}`);
           }
         },
         id: eP,
@@ -710,13 +710,13 @@ let eM = memo(function ({
       className: eS,
       children: jsx("div", {
         className: ew,
-        children: _$$t("fullscreen.properties_panel.font_picker.new_font_badge")
+        children: getI18nString("fullscreen.properties_panel.font_picker.new_font_badge")
       })
     }) : "", t.recentlyInstalled && y !== _$$O.IS_LOADING ? jsx("div", {
       className: eS,
       children: jsx("div", {
         className: ew,
-        children: _$$t("fullscreen.properties_panel.font_picker.new_font_badge")
+        children: getI18nString("fullscreen.properties_panel.font_picker.new_font_badge")
       })
     }) : "", y === _$$O.IS_LOADING || f ? "" : jsx(_$$B, {
       className: "font_picker--fontPickerLoadingPreviewCover--h6OmW",
@@ -785,7 +785,7 @@ let eU = forwardRef(({
         onMouseDown(e);
       },
       onMouseUp,
-      placeholder: i.placeholder || _$$t("fullscreen.properties_panel.font_picker.search_fonts"),
+      placeholder: i.placeholder || getI18nString("fullscreen.properties_panel.font_picker.search_fonts"),
       role: "combobox",
       spellCheck: !1,
       value: i.query
@@ -821,7 +821,7 @@ function eV({
     className: g()("font_picker--fontPickerNoFontsToShow--3Nnsz text--fontPos11--2LvXf text--_fontBase--QdLsd", {
       "font_picker--extraSearchPadding---PY3g": e
     }),
-    children: e ? _$$t("fullscreen.properties_panel.font_picker.no_search_results") : _$$t("fullscreen.properties_panel.font_picker.no_fonts_in_current_set")
+    children: e ? getI18nString("fullscreen.properties_panel.font_picker.no_search_results") : getI18nString("fullscreen.properties_panel.font_picker.no_fonts_in_current_set")
   });
 }
 function eG({
@@ -831,22 +831,22 @@ function eG({
 }) {
   let r;
   let a = e ? _$$A3 : _$$A5;
-  r = e ? _$$t("fullscreen.properties_panel.font_picker.org_upsell") : t ? _$$t("fullscreen.properties_panel.font_picker.no_shared_fonts_orgname", {
+  r = e ? getI18nString("fullscreen.properties_panel.font_picker.org_upsell") : t ? getI18nString("fullscreen.properties_panel.font_picker.no_shared_fonts_orgname", {
     orgName: t
-  }) : _$$t("fullscreen.properties_panel.font_picker.no_shared_fonts");
+  }) : getI18nString("fullscreen.properties_panel.font_picker.no_shared_fonts");
   let s = jsx($z, {
     variant: "secondary",
     innerText: "Learn more",
     onClick: () => {
       Ay.unsafeRedirect(gg, "_blank");
     },
-    children: _$$t("fullscreen.properties_panel.font_picker.no_shared_fonts.cta")
+    children: getI18nString("fullscreen.properties_panel.font_picker.no_shared_fonts.cta")
   });
   let o = jsx($z, {
     variant: "primary",
     innerText: "Upgrade",
     onClick: i,
-    children: _$$t("fullscreen.properties_panel.font_picker.org_upsell.cta")
+    children: getI18nString("fullscreen.properties_panel.font_picker.org_upsell.cta")
   });
   return jsxs(_$$Y, {
     direction: "vertical",
@@ -884,11 +884,11 @@ function ez({
         className: _$$s.colorIcon.$,
         svg: _$$A6
       }), jsx("div", {
-        children: tx("fullscreen.properties_panel.font_picker.org_consumption_modal.non_admin.text")
+        children: renderI18nText("fullscreen.properties_panel.font_picker.org_consumption_modal.non_admin.text")
       }), jsx(_$$M, {}), jsx($z, {
         variant: "primary",
         onClick: e,
-        children: tx("fullscreen.properties_panel.font_picker.org_consumption_modal.non_admin.cta")
+        children: renderI18nText("fullscreen.properties_panel.font_picker.org_consumption_modal.non_admin.cta")
       })]
     })]
   });
@@ -926,13 +926,13 @@ function eW({
   }, [i, t, a, s]);
   return jsx(_$$d, {
     ref: o,
-    "aria-label": _$$t("fullscreen.properties_panel.apply_variable"),
+    "aria-label": getI18nString("fullscreen.properties_panel.apply_variable"),
     "aria-expanded": !!s?.isShowingBindingUI,
     recordingKey: e,
     onClick: l,
     htmlAttributes: {
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": _$$t("fullscreen.properties_panel.apply_variable")
+      "data-tooltip": getI18nString("fullscreen.properties_panel.apply_variable")
     },
     children: jsx(_$$D, {})
   });

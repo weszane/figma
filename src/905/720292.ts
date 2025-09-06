@@ -3,7 +3,7 @@ import { K } from "../905/443068";
 import { _ } from "../905/410717";
 import { j } from "../905/519202";
 import o from "classnames";
-import { t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { FO } from "../905/869235";
 import { xp } from "../905/247367";
 import { Yz, _5 } from "../figma_app/449837";
@@ -88,15 +88,15 @@ export function $$b1(e) {
     children: [showOptions && jsxs("div", {
       className: "comparison_container--optionsSelector--irMl4",
       children: [jsx("button", {
-        "aria-label": t("collaboration.branching.side_by_side"),
+        "aria-label": getI18nString("collaboration.branching.side_by_side"),
         className: l()(h, "side-by-side" === view && g, "comparison_container--leftOption--n-kTR", !!additionalStyles && additionalStyles),
         onClick: onSideBySideClick,
-        children: tx("collaboration.branching.side_by_side")
+        children: renderI18nText("collaboration.branching.side_by_side")
       }), jsx("button", {
-        "aria-label": t("collaboration.branching.overlay"),
+        "aria-label": getI18nString("collaboration.branching.overlay"),
         className: l()(h, "overlay" === view && g, "comparison_container--rightOption--tJz4u", !!additionalStyles && additionalStyles),
         onClick: onOverlayClick,
-        children: tx("collaboration.branching.overlay")
+        children: renderI18nText("collaboration.branching.overlay")
       })]
     }), jsx(_5, {
       className: "comparison_container--optionsZoom--bIAxA",
@@ -114,7 +114,7 @@ export function $$v2(e) {
   return jsxs("div", {
     className: "comparison_container--overlayOptionsContainer--JOrMq",
     children: [jsx(K, {
-      "aria-label": isAfterImageShown ? t("collaboration.branching.overlay_hide_after_image") : t("collaboration.branching.overlay_show_after_image"),
+      "aria-label": isAfterImageShown ? getI18nString("collaboration.branching.overlay_hide_after_image") : getI18nString("collaboration.branching.overlay_show_after_image"),
       onClick: onToggleClick,
       children: isAfterImageShown ? jsx(_, {}) : jsx(j, {})
     }), jsx(xp, {

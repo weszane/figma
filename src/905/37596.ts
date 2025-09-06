@@ -13,7 +13,7 @@ import { gY } from "../figma_app/566371";
 import { B as _$$B2 } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { s as _$$s2 } from "../905/573154";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { wR } from "../905/346715";
 import { y as _$$y } from "../905/76789";
 import { Lg, Lq } from "../figma_app/392626";
@@ -34,7 +34,7 @@ import { fu, j6 } from "../figma_app/831799";
 import { FOrganizationLevelType, FPlanNameType, FPermissionDenialReason } from "../figma_app/191312";
 import { S2 } from "../figma_app/465071";
 import { J7, SN } from "../figma_app/650409";
-import { Iv, F9 } from "../905/548208";
+import { DashboardSections, MemberSections } from "../905/548208";
 import { Ju } from "../905/102752";
 import { r6 } from "../905/542608";
 import { T as _$$T } from "../figma_app/472024";
@@ -112,9 +112,9 @@ let Y = Ju(function (e) {
     className: YM,
     children: [jsx("div", {
       className: _$$s.colorTextSecondary.$,
-      children: p ? tx("resource_connection.connected_by") : tx("resource_connection.approved_by")
+      children: p ? renderI18nText("resource_connection.connected_by") : renderI18nText("resource_connection.approved_by")
     }), jsx("div", {
-      children: tx("resource_connection.connected_by_info", {
+      children: renderI18nText("resource_connection.connected_by_info", {
         inviter: q?.connectedBy,
         timeStamp: V(q?.connectedByTimestamp)
       })
@@ -138,9 +138,9 @@ let Y = Ju(function (e) {
                 onClick: () => {
                   m(Lo());
                 },
-                "aria-label": _$$t("resource_connection.aria_label.button"),
+                "aria-label": getI18nString("resource_connection.aria_label.button"),
                 children: jsx(_$$C, {})
-              }), tx("resource_connection.manage_connection")]
+              }), renderI18nText("resource_connection.manage_connection")]
             })
           })
         }), jsxs(nB, {
@@ -157,7 +157,7 @@ let Y = Ju(function (e) {
               rounded: !1,
               dataTestId: "viewer-upgrade-banner",
               color: _$$S.PLAIN,
-              text: tx("resource_connection.pending_modal.connecting_plan_hasnt_approved_invite_yet", {
+              text: renderI18nText("resource_connection.pending_modal.connecting_plan_hasnt_approved_invite_yet", {
                 connectingPlan: c.name
               })
             })
@@ -165,7 +165,7 @@ let Y = Ju(function (e) {
             className: _$$s.pl16.pr16.$,
             children: [jsx("div", {
               className: _$$s.textBodyMediumStrong.pb4.$,
-              children: _$$t("resource_connection.teams")
+              children: getI18nString("resource_connection.teams")
             }), jsxs("div", {
               className: Ec,
               children: [jsx(nl, {
@@ -179,12 +179,12 @@ let Y = Ju(function (e) {
                 }), jsxs("span", {
                   children: [I && jsxs("span", {
                     className: _$$s.textBodyMedium.colorTextSecondary.$,
-                    children: [_$$t("resource_connection.num_members", {
+                    children: [getI18nString("resource_connection.num_members", {
                       count: v
                     }), " \xb7\xa0"]
                   }), jsx(_$$N, {
                     href: "https://help.figma.com/hc/articles/30124855491863-Guide-to-connected-projects#h_01JMJDKJFD8C3M4MDEVKBHAFEQ",
-                    children: _$$t("resource_connection.host")
+                    children: getI18nString("resource_connection.host")
                   })]
                 })]
               })]
@@ -200,7 +200,7 @@ let Y = Ju(function (e) {
                   children: c.name
                 }), jsx("div", {
                   className: _$$s.textBodyMedium.colorTextSecondary.$,
-                  children: i ? tx("resource_connection.invite_pending") : I ? _$$t("resource_connection.num_members", {
+                  children: i ? renderI18nText("resource_connection.invite_pending") : I ? getI18nString("resource_connection.num_members", {
                     count: b
                   }) : null
                 })]
@@ -210,10 +210,10 @@ let Y = Ju(function (e) {
               children: !i && (() => {
                 let t = [];
                 p && e.resourceConnection.projectTeamId && t.push({
-                  label: _$$t("resource_connection.manage_modal.libraries"),
-                  description: E ? void 0 : g.data ? _$$t("resource_connection.n_libraries_in_connected_project", {
+                  label: getI18nString("resource_connection.manage_modal.libraries"),
+                  description: E ? void 0 : g.data ? getI18nString("resource_connection.n_libraries_in_connected_project", {
                     count: g.data
-                  }) : _$$t("resource_connection.manage_modal.allow_external_teams_to_use_libraries"),
+                  }) : getI18nString("resource_connection.manage_modal.allow_external_teams_to_use_libraries"),
                   onClick: () => {
                     m(to({
                       type: _$$T,
@@ -253,9 +253,9 @@ let Y = Ju(function (e) {
               className: YM,
               children: [jsx("div", {
                 className: _$$s.colorTextSecondary.$,
-                children: tx("resource_connection.invite_sent")
+                children: renderI18nText("resource_connection.invite_sent")
               }), jsx("div", {
-                children: tx("resource_connection.invite_sent_info", {
+                children: renderI18nText("resource_connection.invite_sent_info", {
                   inviter: Y?.inviteSentBy,
                   timeStamp: V(Y?.inviteSentByTimestamp)
                 })
@@ -274,12 +274,12 @@ let Y = Ju(function (e) {
                     view: "teamAdminConsole",
                     teamId: t.key.parentId,
                     isProTeam: t.tier === FPlanNameType.PRO,
-                    teamAdminConsoleViewTab: Iv.CONTENT,
-                    teamAdminConsoleViewSecondaryTab: F9.CONNECTED_PROJECTS,
+                    teamAdminConsoleViewTab: DashboardSections.CONTENT,
+                    teamAdminConsoleViewSecondaryTab: MemberSections.CONNECTED_PROJECTS,
                     showResourceConnectionFlyout: e.resourceConnection.id
                   })), m(Ce()));
                 },
-                children: _$$t("resource_connection.manage_modal.view_in_admin_dashboard")
+                children: getI18nString("resource_connection.manage_modal.view_in_admin_dashboard")
               })
             })]
           })]
@@ -292,7 +292,7 @@ let Y = Ju(function (e) {
               children: jsx($n, {
                 variant: "link",
                 onClick: e => e.stopPropagation(),
-                children: tx("resource_connection.request_modal.learn_more")
+                children: renderI18nText("resource_connection.request_modal.learn_more")
               })
             }), jsx($n, {
               variant: "destructiveSecondary",
@@ -306,7 +306,7 @@ let Y = Ju(function (e) {
               } : () => {
                 if (!e.resourceConnection.projectTeamId) {
                   m(_$$F.enqueue({
-                    message: _$$t("resource_connection.visual_bell.generic_error")
+                    message: getI18nString("resource_connection.visual_bell.generic_error")
                   }));
                   return;
                 }
@@ -323,7 +323,7 @@ let Y = Ju(function (e) {
                   }
                 }));
               },
-              children: i ? tx("resource_connection.pending_modal.revoke_invite") : tx("resource_connection.manage_modal.deactivate")
+              children: i ? renderI18nText("resource_connection.pending_modal.revoke_invite") : renderI18nText("resource_connection.manage_modal.deactivate")
             })]
           })
         })]
@@ -389,7 +389,7 @@ let eo = (e, t) => {
     }));
   };
   let N = [{
-    label: tx("file_browser.folder_settings_modal.name"),
+    label: renderI18nText("file_browser.folder_settings_modal.name"),
     description: o.name,
     onClick: () => {
       a(to({
@@ -403,8 +403,8 @@ let eo = (e, t) => {
     noDisabledStyling: !0,
     noChevron: !C.canEdit
   }, {
-    label: tx("file_browser.folder_settings_modal.description"),
-    description: o.description && "" !== o.description ? o.description : C.canEdit ? tx("file_browser.folder_settings_modal.add_description") : tx("file_browser.folder_settings_modal.no_description_added_yet"),
+    label: renderI18nText("file_browser.folder_settings_modal.description"),
+    description: o.description && "" !== o.description ? o.description : C.canEdit ? renderI18nText("file_browser.folder_settings_modal.add_description") : renderI18nText("file_browser.folder_settings_modal.no_description_added_yet"),
     onClick: () => {
       a(to({
         type: _$$C2(),
@@ -425,8 +425,8 @@ let eo = (e, t) => {
   let D = u?.isAdmin;
   let F = f?.isAdmin;
   c && (D || F) ? N.push({
-    label: _$$t("file_browser.folder_settings_modal.manage_connection"),
-    description: D ? _$$t("file_browser.folder_settings_modal.manage_connection_description") : void 0,
+    label: getI18nString("file_browser.folder_settings_modal.manage_connection"),
+    description: D ? getI18nString("file_browser.folder_settings_modal.manage_connection_description") : void 0,
     onClick: () => {
       c && a(to({
         type: Y,
@@ -455,8 +455,8 @@ let eo = (e, t) => {
       }));
     }
   }) : _ && D ? N.push({
-    label: _$$t("file_browser.folder_settings_modal.manage_connection"),
-    description: _$$t("file_browser.folder_settings_modal.manage_connection_description"),
+    label: getI18nString("file_browser.folder_settings_modal.manage_connection"),
+    description: getI18nString("file_browser.folder_settings_modal.manage_connection_description"),
     onClick: () => {
       _ && a(to({
         type: Y,
@@ -482,10 +482,10 @@ let eo = (e, t) => {
       }));
     }
   }) : O && N.push({
-    label: _$$t("file_browser.folder_settings_modal.connect_with_external_plan"),
+    label: getI18nString("file_browser.folder_settings_modal.connect_with_external_plan"),
     onClick: w,
     disabled: !!S,
-    disabledMessage: _$$t("file_browser.folder_settings_modal.tooltip.cannot_connect_folder_with_team_asset_transfer_request"),
+    disabledMessage: getI18nString("file_browser.folder_settings_modal.tooltip.cannot_connect_folder_with_team_asset_transfer_request"),
     trackingEventName: "Folder Connect Click",
     trackingProperties: {
       folderId: o.id
@@ -493,7 +493,7 @@ let eo = (e, t) => {
     showNewBadge: l
   });
   x ? (C.isPlanMember || C.isPlanAdmin) && N.push({
-    label: _$$t("project_menu.manage_transfer_request"),
+    label: getI18nString("project_menu.manage_transfer_request"),
     onClick: () => {
       x && a(to({
         type: _$$d(),
@@ -509,24 +509,24 @@ let eo = (e, t) => {
       }));
     }
   }) : (_ || c || !C.canTransferExternally || N.push({
-    label: _$$t("project_menu.transfer"),
+    label: getI18nString("project_menu.transfer"),
     onClick: () => {
       p ? R() : k(!1);
     },
     disabled: !!S,
-    disabledMessage: _$$t("file_browser.folder_settings_modal.tooltip.cannot_transfer_folder_with_team_asset_transfer_request"),
+    disabledMessage: getI18nString("file_browser.folder_settings_modal.tooltip.cannot_transfer_folder_with_team_asset_transfer_request"),
     trackingEventName: "Folder Transfer Click",
     trackingProperties: {
       folderId: o.id,
       entryPoint: "Folder Settings Modal"
     }
   }), C.canTransferCopy && N.push({
-    label: _$$t("project_menu.send_a_copy"),
+    label: getI18nString("project_menu.send_a_copy"),
     onClick: () => {
       p ? R() : k(!0);
     },
     disabled: !!S,
-    disabledMessage: _$$t("file_browser.folder_settings_modal.tooltip.cannot_transfer_folder_with_team_asset_transfer_request"),
+    disabledMessage: getI18nString("file_browser.folder_settings_modal.tooltip.cannot_transfer_folder_with_team_asset_transfer_request"),
     trackingEventName: "Folder Transfer Copy Click",
     trackingProperties: {
       folderId: o.id,
@@ -538,13 +538,13 @@ let eo = (e, t) => {
     separator: !0
   });
   C.canTrash && N.push({
-    label: tx("project_menu.move_to_trash"),
+    label: renderI18nText("project_menu.move_to_trash"),
     onClick: () => {
       let e = T();
       C.canSkipDeletionConfirmation && !e ? (s({
         folderId: o.id
       }).catch(() => {
-        a(_$$s2.error(_$$t("file_browser.api_folder.error_when_moving_to_trash")));
+        a(_$$s2.error(getI18nString("file_browser.api_folder.error_when_moving_to_trash")));
       }), t()) : a(to({
         type: _$$V(),
         data: {
@@ -561,9 +561,9 @@ let eo = (e, t) => {
     }
   });
   !C.canTrashWithReasons?.result && C.canTrashWithReasons?.publicDenyReasons.includes(FPermissionDenialReason.CONNECTED_FOLDER_DENY_CAN_TRASH_DESPITE_CAN_MANAGE_LIFECYCLE) && N.push({
-    label: tx("project_menu.move_to_trash"),
+    label: renderI18nText("project_menu.move_to_trash"),
     disabled: !0,
-    disabledMessage: C.isPlanAdmin ? _$$t("file_browser.folder_settings_modal.tooltip.disconnect_folder_before_moving_to_trash") : _$$t("file_browser.folder_settings_modal.tooltip.contact_your_admin_to_disconnect_folder_before_moving_to_trash"),
+    disabledMessage: C.isPlanAdmin ? getI18nString("file_browser.folder_settings_modal.tooltip.disconnect_folder_before_moving_to_trash") : getI18nString("file_browser.folder_settings_modal.tooltip.contact_your_admin_to_disconnect_folder_before_moving_to_trash"),
     noChevron: !0
   });
   return N;
@@ -607,7 +607,7 @@ let $$el0 = Ju(function (e) {
       children: jsxs(vo, {
         children: [jsx(Y9, {
           children: jsx(hE, {
-            children: tx("file_browser.folder_settings_modal.settings")
+            children: renderI18nText("file_browser.folder_settings_modal.settings")
           })
         }), jsx(nB, {
           scrolling: "none",
@@ -634,7 +634,7 @@ let $$el0 = Ju(function (e) {
                 className: "folder_settings_modal--rightSideOptions--pIWL8",
                 children: [e.showNewBadge && jsx(_$$E2, {
                   variant: "brandFilled",
-                  children: tx("resource_connection.onboarding.new")
+                  children: renderI18nText("resource_connection.onboarding.new")
                 }), r && jsx("span", {
                   className: "folder_settings_modal--iconContainer--9ZlTr",
                   children: jsx(_$$B2, {

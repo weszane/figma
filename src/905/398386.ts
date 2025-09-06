@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import o from "classnames";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { tH, H4 } from "../905/751457";
 import { s as _$$s } from "../cssbuilder/589278";
 import { F } from "../905/302958";
@@ -44,7 +44,7 @@ export function $$_0(e) {
   let b = window.performance.getEntriesByType("navigation")[0];
   useEffect(() => {
     let e = b?.loadEventEnd;
-    0 === e || A || (sx("File Browser Cold Start Page Load Time", {
+    0 === e || A || (trackEventAnalytics("File Browser Cold Start Page Load Time", {
       elapsedMs: e,
       selectedView: u.view
     }, {

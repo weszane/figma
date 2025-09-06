@@ -5,10 +5,10 @@ import { c2 } from "../905/382883";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { Z_n, rXF, zIx, Ez5, glU, w3z, xOL, XQq, X3B, Oin, nQ7, h3O, PcT, CeL } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { eD as _$$eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { ZC } from "../figma_app/39751";
 import { tH as _$$tH, H4 } from "../905/751457";
-import { t as _$$t, tx as _$$tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { k as _$$k2 } from "../905/443820";
 import { Vc } from "../figma_app/211694";
 import { uv } from "../figma_app/518364";
@@ -40,7 +40,7 @@ import { P as _$$P } from "../1250/665611";
 import { e as _$$e2 } from "../1250/871209";
 import { A as _$$A3 } from "../1250/29260";
 import { ox } from "../905/163832";
-import { fp, eU as _$$eU, md, Xr, E2 } from "../figma_app/27355";
+import { useAtomValueAndSetter, atom, useAtomWithSubscription, Xr, createValidatedLocalStorageAtom } from "../figma_app/27355";
 import { hC, U as _$$U } from "../figma_app/901889";
 import { F as _$$F } from "../905/302958";
 import { f as _$$f2 } from "../9410/228507";
@@ -50,7 +50,7 @@ import { D as _$$D2 } from "../905/882262";
 import { T as _$$T } from "../905/858738";
 import { U as _$$U2 } from "../figma_app/65327";
 import { e as _$$e3 } from "../905/383776";
-import { Bq } from "../figma_app/656233";
+import { flatten } from "../figma_app/656233";
 import { Te } from "../vendor/813803";
 import { parsePxNumber } from "../figma_app/783094";
 import { rf as _$$rf, Pt, aH } from "../figma_app/806412";
@@ -59,7 +59,7 @@ import { G as _$$G2 } from "../905/750789";
 import { s as _$$s } from "../cssbuilder/589278";
 import { E6 } from "../905/560959";
 import { throwTypeError, assert, assertNotNullish } from "../figma_app/465776";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { ON, oy, gs } from "../figma_app/31103";
 import { Ku, UK, dP } from "../figma_app/740163";
 import { Kd, BQ, u as _$$u, yp } from "../figma_app/852050";
@@ -82,7 +82,7 @@ import { sf } from "../905/929976";
 import { Um, BK } from "../905/848862";
 import { Ww, dR } from "../figma_app/440875";
 import { iZ as _$$iZ } from "../905/372672";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { Ib } from "../905/129884";
 import { v7, Lx } from "../9410/896213";
 import { w as _$$w } from "../9410/519056";
@@ -107,7 +107,7 @@ import { O as _$$O2 } from "../905/301080";
 import { J as _$$J2 } from "../905/614223";
 import { z as _$$z } from "../905/239603";
 import { ei as _$$ei } from "../figma_app/9054";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { h as _$$h3 } from "../905/207101";
 import { lt } from "../905/511649";
 import { B4 } from "../figma_app/385215";
@@ -149,7 +149,7 @@ import { y as _$$y2 } from "../figma_app/53571";
 import { s as _$$s2 } from "../9410/841699";
 import { A as _$$A5 } from "../vendor/90566";
 import { Ax } from "../figma_app/616261";
-import { jk } from "../905/609396";
+import { PerfTimer } from "../905/609396";
 import { oz, _6 as _$$_2, _o, c7, zz, wz } from "../figma_app/879363";
 import { A as _$$A6 } from "../svg/674356";
 import { A as _$$A7 } from "../svg/236983";
@@ -182,7 +182,7 @@ import { e as _$$e6 } from "../905/916195";
 import { H as _$$H2 } from "../905/999677";
 import { getSingletonSceneGraph } from "../905/700578";
 import { generateRecordingKey } from "../figma_app/878298";
-import { Lg, nl } from "../figma_app/257275";
+import { Lg, isInteractionPathCheck } from "../figma_app/897289";
 import { Point } from "../905/736624";
 import { F as _$$F2 } from "../905/160142";
 import { hY, qt, bq, L_, Gn } from "../figma_app/349969";
@@ -254,7 +254,7 @@ function Z({
     children: [jsx("div", {
       className: Y,
       children: jsx(_$$K, {
-        "aria-label": _$$t("dev_handoff.component_browser_onboarding.close"),
+        "aria-label": getI18nString("dev_handoff.component_browser_onboarding.close"),
         onClick: t,
         children: jsx(_$$A, {})
       })
@@ -267,14 +267,14 @@ function Z({
             src: a ? q : X,
             height: 111,
             width: 155,
-            alt: _$$t("dev_handoff.component_browser_onboarding.connect_your_running_app")
+            alt: getI18nString("dev_handoff.component_browser_onboarding.connect_your_running_app")
           })
         }), jsx("div", {
           className: V,
-          children: _$$t("dev_handoff.component_browser_onboarding.connect_your_running_app")
+          children: getI18nString("dev_handoff.component_browser_onboarding.connect_your_running_app")
         }), jsx("div", {
           className: P()(W, "codebase_suggestions_onboarding--headerDescriptionCentered--Mp6aa"),
-          children: _$$t("dev_handoff.codebase_suggestions.we_ll_collect_components_from_your_running_app_that_we_ll_match_to_design_components_choose_a_set_up_option_to_get_started")
+          children: getI18nString("dev_handoff.codebase_suggestions.we_ll_collect_components_from_your_running_app_that_we_ll_match_to_design_components_choose_a_set_up_option_to_get_started")
         })]
       }), jsx("div", {
         className: "codebase_suggestions_onboarding--cards--lhl8b",
@@ -292,11 +292,11 @@ function Z({
       }), jsx("div", {
         className: "codebase_suggestions_onboarding--footer--ys3HK",
         children: jsx($n, {
-          "aria-label": _$$t("dev_handoff.codebase_suggestions.back_to_all_options"),
+          "aria-label": getI18nString("dev_handoff.codebase_suggestions.back_to_all_options"),
           variant: "link",
           onClick: e,
           iconPrefix: jsx(_$$t3, {}),
-          children: _$$t("dev_handoff.codebase_suggestions.back_to_all_options")
+          children: getI18nString("dev_handoff.codebase_suggestions.back_to_all_options")
         })
       })]
     }), jsx("div", {
@@ -324,16 +324,16 @@ function Q({
     children: [jsx("div", {
       className: P()("codebase_suggestions_onboarding--backButton--KRIT-", "codebase_suggestions_onboarding--backButtonTopLeft--52IvP"),
       children: jsx($n, {
-        "aria-label": _$$t("dev_handoff.codebase_suggestions.back_to_all_options"),
+        "aria-label": getI18nString("dev_handoff.codebase_suggestions.back_to_all_options"),
         variant: "link",
         onClick: t,
         iconPrefix: jsx(_$$t3, {}),
-        children: _$$t("dev_handoff.codebase_suggestions.back_to_all_options")
+        children: getI18nString("dev_handoff.codebase_suggestions.back_to_all_options")
       })
     }), jsx("div", {
       className: Y,
       children: jsx(_$$K, {
-        "aria-label": _$$t("dev_handoff.component_browser_onboarding.close"),
+        "aria-label": getI18nString("dev_handoff.component_browser_onboarding.close"),
         onClick: e,
         children: jsx(_$$A, {})
       })
@@ -345,7 +345,7 @@ function Q({
           className: "codebase_suggestions_onboarding--methodHeaderIcon--5uHPs",
           children: jsx(oW, {
             src: s ? q : X,
-            alt: _$$t("dev_handoff.component_browser_onboarding.connect_your_running_app"),
+            alt: getI18nString("dev_handoff.component_browser_onboarding.connect_your_running_app"),
             height: 111,
             width: 155
           })
@@ -353,10 +353,10 @@ function Q({
           className: "codebase_suggestions_onboarding--methodHeaderTitle--bIE7f",
           children: [jsx("div", {
             className: V,
-            children: _$$t("dev_handoff.component_browser_onboarding.connect_your_running_app")
+            children: getI18nString("dev_handoff.component_browser_onboarding.connect_your_running_app")
           }), jsx("div", {
             className: W,
-            children: _$$t("dev_handoff.codebase_suggestions.we_ll_collect_components_from_your_running_app_that_we_ll_match_to_design_components_choose_a_set_up_option_to_get_started")
+            children: getI18nString("dev_handoff.codebase_suggestions.we_ll_collect_components_from_your_running_app_that_we_ll_match_to_design_components_choose_a_set_up_option_to_get_started")
           })]
         }), jsx("div", {
           className: "codebase_suggestions_onboarding--methodMenu--O6Pdz",
@@ -451,7 +451,7 @@ let en = function ({
       children: [jsx("div", {
         className: "component_browser_onboarding--closeButton--D5H4w",
         children: jsx(_$$K, {
-          "aria-label": _$$t("dev_handoff.component_browser_onboarding.close"),
+          "aria-label": getI18nString("dev_handoff.component_browser_onboarding.close"),
           onClick: a,
           children: jsx(_$$A, {})
         })
@@ -461,17 +461,17 @@ let en = function ({
           className: "component_browser_onboarding--header--ka15q",
           children: [jsx(oW, {
             src: c,
-            alt: _$$t("dev_handoff.component_browser_onboarding.connected_projects_icon"),
+            alt: getI18nString("dev_handoff.component_browser_onboarding.connected_projects_icon"),
             className: "component_browser_onboarding--headerImage--6Y9rK"
           }), jsx("span", {
             className: "component_browser_onboarding--pageTitle--sFI0G",
-            children: _$$t("dev_handoff.component_browser_onboarding.choose_how_to_connect_to_code")
+            children: getI18nString("dev_handoff.component_browser_onboarding.choose_how_to_connect_to_code")
           })]
         }), jsxs("div", {
           className: "component_browser_onboarding--cards--G6Oto",
           children: [o && jsx(B, {
-            title: _$$t("dev_handoff.component_browser_onboarding.connect_to_github"),
-            description: _$$t("dev_handoff.component_browser_onboarding.map_files_from_your_repo"),
+            title: getI18nString("dev_handoff.component_browser_onboarding.connect_to_github"),
+            description: getI18nString("dev_handoff.component_browser_onboarding.map_files_from_your_repo"),
             onClick: () => {
               switch (_.status) {
                 case w6.NeedsInfo:
@@ -488,7 +488,7 @@ let en = function ({
             disabled: _.queryStatus === _$$H.LOADING,
             badge: jsx(_$$E, {
               variant: "successOutline",
-              children: _$$t("dev_handoff.component_browser_onboarding.recommended")
+              children: getI18nString("dev_handoff.component_browser_onboarding.recommended")
             }),
             children: jsxs("div", {
               className: "component_browser_onboarding--onboardingCardContentContainer--ZZzWH",
@@ -504,27 +504,27 @@ let en = function ({
               })]
             })
           }), x && jsx(B, {
-            title: _$$t("dev_handoff.component_browser_onboarding.connect_your_running_app"),
-            description: _$$t("dev_handoff.component_browser_onboarding.map_collected_components"),
+            title: getI18nString("dev_handoff.component_browser_onboarding.connect_your_running_app"),
+            description: getI18nString("dev_handoff.component_browser_onboarding.map_collected_components"),
             onClick: () => {
               g("codebase-suggestion-options");
             },
             iconBackgroundStyle: "light",
             children: jsx(oW, {
               src: u,
-              alt: _$$t("dev_handoff.component_browser_onboarding.connected_projects_icon"),
+              alt: getI18nString("dev_handoff.component_browser_onboarding.connected_projects_icon"),
               style: {
                 height: "46px",
                 width: "60px"
               }
             })
           }), !o && jsx(B, {
-            title: _$$t("dev_handoff.component_browser_onboarding.connect_to_github"),
-            description: _$$t("dev_handoff.component_browser_onboarding.map_files_from_your_repo"),
+            title: getI18nString("dev_handoff.component_browser_onboarding.connect_to_github"),
+            description: getI18nString("dev_handoff.component_browser_onboarding.map_files_from_your_repo"),
             onClick: lQ,
             disabled: !0,
             badge: jsx(_$$E, {
-              children: _$$t("dev_handoff.component_browser_onboarding.coming_soon")
+              children: getI18nString("dev_handoff.component_browser_onboarding.coming_soon")
             }),
             children: jsx("div", {
               className: l ? er : ei,
@@ -534,13 +534,13 @@ let en = function ({
               })
             })
           }), jsx(B, {
-            title: _$$t("dev_handoff.component_browser_onboarding.skip_for_now_and_map_manually"),
-            description: _$$t("dev_handoff.component_browser_onboarding.copy_and_paste_links"),
+            title: getI18nString("dev_handoff.component_browser_onboarding.skip_for_now_and_map_manually"),
+            description: getI18nString("dev_handoff.component_browser_onboarding.copy_and_paste_links"),
             onClick: e,
             iconBackgroundStyle: "light",
             children: jsx(oW, {
               src: p,
-              alt: _$$t("dev_handoff.component_browser_onboarding.connected_projects_icon")
+              alt: getI18nString("dev_handoff.component_browser_onboarding.connected_projects_icon")
             })
           })]
         })]
@@ -567,7 +567,7 @@ function ea() {
           children: jsx(_$$k2, {})
         }),
         errorFallback: jsx("div", {
-          children: _$$t("dev_handoff.component_browser_onboarding.error_loading_component_browser")
+          children: getI18nString("dev_handoff.component_browser_onboarding.error_loading_component_browser")
         }),
         location: "file",
         defaultFilter: "all",
@@ -593,8 +593,8 @@ function eh({}) {
     y: 0
   });
   let c = useRef(!1);
-  let [u] = fp(_$$D);
-  let [p, m] = fp(_$$d);
+  let [u] = useAtomValueAndSetter(_$$D);
+  let [p, m] = useAtomValueAndSetter(_$$d);
   let f = useCallback(e => {
     m(!1);
     c.current = !1;
@@ -633,16 +633,16 @@ function eh({}) {
     let i = crypto.randomUUID();
     e(_$$F.enqueue({
       type: ep,
-      message: _$$t("dev_handoff.mcp.unmapped_components_banner.description", {
+      message: getI18nString("dev_handoff.mcp.unmapped_components_banner.description", {
         count: u.length
       }),
       button: {
         primary: {
-          text: _$$t("dev_handoff.mcp.unmapped_components_banner.map_now"),
+          text: getI18nString("dev_handoff.mcp.unmapped_components_banner.map_now"),
           action: () => g(i)
         },
         secondary: {
-          text: _$$t("dev_handoff.mcp.unmapped_components_banner.ignore"),
+          text: getI18nString("dev_handoff.mcp.unmapped_components_banner.ignore"),
           action: () => f(i)
         }
       },
@@ -713,7 +713,7 @@ function eK({
   if (useEffect(() => {
     if (h) {
       let e = p && u ? "Variables table cell has mixed value" : "Variables table cell has no value";
-      $D(_$$e.DEVELOPER_TOOLS, Error(e));
+      reportError(_$$e.DEVELOPER_TOOLS, Error(e));
     }
   }, [h, p, u]), h) return null;
   switch (p.type) {
@@ -827,14 +827,14 @@ function eV({
   return t.resolvedType === rXF.COLOR ? jsx(np, {
     color: t.value,
     variable: s,
-    label: s?.name ?? _$$t("variables.missing_name"),
+    label: s?.name ?? getI18nString("variables.missing_name"),
     onClick: s && i ? c : void 0,
     selected: i
   }) : jsx("div", {
     className: P()("variable_cell_content--aliasWrapper--mHIWi", e.resolvedType === rXF.COLOR && "variable_cell_content--shiftLeft--x6CPr"),
     children: jsx(wG, {
       thumbnailValue: t,
-      text: s?.name ?? _$$t("variables.missing_name"),
+      text: s?.name ?? getI18nString("variables.missing_name"),
       variableValue: e.value,
       onClick: s && i ? c : void 0,
       disableHover: !i,
@@ -866,14 +866,14 @@ function eW({
     children: o
   });
 }
-let e$ = _$$eU({
+let e$ = atom({
   nameColumnWidth: void 0,
   valueColumnWidths: {}
 });
 function e0({
   modeID: e
 }) {
-  let [t, i] = fp(e$);
+  let [t, i] = useAtomValueAndSetter(e$);
   let a = useRef(null);
   let s = useRef(0);
   let [o, l] = _$$i({
@@ -970,7 +970,7 @@ function tu() {
       return useMemo(() => {
         if (!e) return [];
         let r = i.filter(e => !t || t === _$$eb || e.name === t || e.name.startsWith(`${t}/`));
-        return Bq(r.map((t, i) => {
+        return flatten(r.map((t, i) => {
           let r = [];
           let n = t.variables.map(i => {
             let r = e.modes.map(e => ({
@@ -999,13 +999,13 @@ function tu() {
           return r;
         }));
       }, [t, e, i]);
-    }(r, md(bE));
+    }(r, useAtomWithSubscription(bE));
     let o = A8();
     let l = _$$i_();
     let d = useMemo(() => s.findIndex(e => e.variableId === o), [s, o]);
     let c = useMemo(() => {
       let e = r ? r.modes.map(e => {
-        let t = 1 === r.modes.length && e.name === nm ? _$$t("variables.create_modal.value_label") : e.name;
+        let t = 1 === r.modes.length && e.name === nm ? getI18nString("variables.create_modal.value_label") : e.name;
         return {
           id: e.id,
           label: t
@@ -1016,7 +1016,7 @@ function tu() {
         setCurrentVariableSet: a,
         variablesTableColumns: [{
           id: "name",
-          label: _$$t("dev_handoff.variables.table_column_name")
+          label: getI18nString("dev_handoff.variables.table_column_name")
         }, ...e],
         variablesTableData: s,
         selectedRowIndex: d,
@@ -1049,11 +1049,11 @@ function tu() {
     }), a(!0));
   }, [i, selectedRowIndex, y]);
   let b = function () {
-    let e = md(e$);
+    let e = useAtomWithSubscription(e$);
     return e.nameColumnWidth ? `${e.nameColumnWidth}px` : Wsk;
   }();
   let C = function (e) {
-    let t = md(e$);
+    let t = useAtomWithSubscription(e$);
     let i = e?.length === 1;
     if (!e) return "";
     if (i) {
@@ -1068,7 +1068,7 @@ function tu() {
     }).join(" ");
   }(currentVariableSet?.modes);
   let v = _$$u(selectedVariable || void 0);
-  let T = md(_$$$);
+  let T = useAtomWithSubscription(_$$$);
   let S = useMemo(() => ({
     numColumns: variablesTableColumns?.length,
     numRows: variablesTableData?.length,
@@ -1114,8 +1114,8 @@ function tu() {
           }), jsx("div", {
             className: "variables_table--tableWrapper---mT7S",
             children: j ? I ? jsx(fQ, {
-              title: _$$t("variables.authoring_modal.no_variables_in_collection"),
-              text: _$$t("dev_handoff.variables.table_collection_empty")
+              title: getI18nString("variables.authoring_modal.no_variables_in_collection"),
+              text: getI18nString("dev_handoff.variables.table_collection_empty")
             }) : jsxs(Fragment, {
               children: [jsx("div", {
                 className: "variables_table--scrollContainer--rlU7K",
@@ -1128,7 +1128,7 @@ function tu() {
                   className: P()("variables_table--stickyTopOverride--A1TnP", "variables_table--stickyLeftOverride--mSdpV"),
                   stickyTop: !0,
                   stickyLeft: !0,
-                  "aria-label": _$$t("dev_handoff.variables.table_aria-label"),
+                  "aria-label": getI18nString("dev_handoff.variables.table_aria-label"),
                   "aria-describedby": "dev_mode_variables_table_title",
                   "aria-rowcount": variablesTableData.length,
                   children: [jsxs($y, {
@@ -1216,11 +1216,11 @@ function tu() {
                 className: "variables_table--detailsSidePanel--U-Z97",
                 children: [jsxs("div", {
                   className: "variables_table--detailsSidePanelHeader--pF3Tn",
-                  children: [_$$tx("dev_handoff.variables.details_title"), jsx(_$$K, {
-                    "aria-label": _$$t("general.close"),
+                  children: [renderI18nText("dev_handoff.variables.details_title"), jsx(_$$K, {
+                    "aria-label": getI18nString("general.close"),
                     htmlAttributes: {
                       "data-tooltip-type": Ib.TEXT,
-                      "data-tooltip": _$$t("general.close")
+                      "data-tooltip": getI18nString("general.close")
                     },
                     onClick: x,
                     children: jsx(_$$A, {})
@@ -1233,8 +1233,8 @@ function tu() {
                 })]
               })]
             }) : jsx(fQ, {
-              title: _$$t("variables.authoring_modal.no_variables_in_file"),
-              text: _$$t("dev_handoff.variables.table_empty")
+              title: getI18nString("variables.authoring_modal.no_variables_in_file"),
+              text: getI18nString("dev_handoff.variables.table_empty")
             })
           })]
         })
@@ -1286,7 +1286,7 @@ function th({
     c(sf({
       ...d,
       view: "fullscreen",
-      editorType: nT.DevHandoff,
+      editorType: FEditorType.DevHandoff,
       showDevModeVariablesTable: !1,
       devModeFocusId: u
     }));
@@ -1296,10 +1296,10 @@ function th({
     children: [jsxs("div", {
       className: _$$s.flex.itemsCenter.$,
       children: [jsx(_$$K, {
-        "aria-label": _$$t("general.close"),
+        "aria-label": getI18nString("general.close"),
         htmlAttributes: {
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": _$$t("general.close")
+          "data-tooltip": getI18nString("general.close")
         },
         onClick: m,
         recordingKey: "dev_handoff.variables_table.close",
@@ -1345,12 +1345,12 @@ function t9() {
         }));
       },
       children: [jsx(_$$Q, {
-        title: _$$t("dev_handoff.workflows.overview.banner.title"),
-        children: _$$tx("dev_handoff.workflows.overview.banner.subtitle")
+        title: getI18nString("dev_handoff.workflows.overview.banner.title"),
+        children: renderI18nText("dev_handoff.workflows.overview.banner.subtitle")
       }), jsx(_$$N2, {
         href: "https://help.figma.com/hc/articles/23918228264855",
         newTab: !0,
-        children: _$$tx("dev_handoff.workflows.overview.banner.learn_more")
+        children: renderI18nText("dev_handoff.workflows.overview.banner.learn_more")
       })]
     })
   });
@@ -1464,7 +1464,7 @@ function iw({
       children: jsx(iE, {
         user: t,
         icon: iT(s, !0, n),
-        editedString: _$$tx("dev_handoff.workflows.edit_info.edited", {
+        editedString: renderI18nText("dev_handoff.workflows.edit_info.edited", {
           user: t.handle,
           dateFromNow: jsx("span", {
             className: iy,
@@ -1512,13 +1512,13 @@ function iS({
   });
   let m = o.status === zIx.BUILD && (o.status === o.prevStatus || !!o.description);
   let f = u && _$$y2(o, u);
-  let g = m ? _$$tx("dev_handoff.workflows.edit_info.updated_design", {
+  let g = m ? renderI18nText("dev_handoff.workflows.edit_info.updated_design", {
     user: t.handle,
     dateFromNow: jsx("span", {
       className: iy,
       children: c
     })
-  }) : _$$tx("dev_handoff.workflows.edit_info.marked", {
+  }) : renderI18nText("dev_handoff.workflows.edit_info.marked", {
     user: t.handle,
     status: p,
     dateFromNow: jsx("span", {
@@ -1569,10 +1569,10 @@ function ij({
       }
     }
     i(_$$F.enqueue({
-      message: _$$t("dev_handoff.compare_changes.button.failed"),
+      message: getI18nString("dev_handoff.compare_changes.button.failed"),
       error: !0
     }));
-    $D(_$$e.DEVELOPER_TOOLS, Error("Open compare changes button failed"), {
+    reportError(_$$e.DEVELOPER_TOOLS, Error("Open compare changes button failed"), {
       extra: {
         fileKey: n,
         activityInfoStatus: a?.file.status,
@@ -1586,14 +1586,14 @@ function ij({
   return jsx($n, {
     variant: "secondary",
     onClick: l,
-    children: _$$tx("inspect_panel.history.compare_changes")
+    children: renderI18nText("inspect_panel.history.compare_changes")
   });
 }
-let iA = Wh(() => _$$eU(""), {
+let iA = Wh(() => atom(""), {
   preserveValue: !1
 });
 let iL = "performance.dev_mode.workflows.overview.time_to_first_thumbnail";
-let iR = new jk(iL, {});
+let iR = new PerfTimer(iL, {});
 let iD = _$$rt(void 0);
 let iM = _$$rt(!1);
 let iG = 2 * parsePxNumber(Evg);
@@ -1623,7 +1623,7 @@ function iV(e) {
     })
   });
 }
-let iW = Wh(() => _$$eU(!1), {
+let iW = Wh(() => atom(!1), {
   preserveValue: !1
 });
 function iY() {
@@ -1653,11 +1653,11 @@ function iY() {
     })]
   });
 }
-let iJ = E2("workflows_summary_tab", oz.ALL, _$$z.nativeEnum(oz));
-let iq = Wh(() => _$$eU({}), {
+let iJ = createValidatedLocalStorageAtom("workflows_summary_tab", oz.ALL, _$$z.nativeEnum(oz));
+let iq = Wh(() => atom({}), {
   preserveValue: !0
 });
-let iX = E2("workflows_overview_sorted_by", _$$_2.RECENT, _$$z.nativeEnum(_$$_2));
+let iX = createValidatedLocalStorageAtom("workflows_overview_sorted_by", _$$_2.RECENT, _$$z.nativeEnum(_$$_2));
 function iZ() {
   let e = useSelector(e => e.selectedView.overviewBackButtonTargetNodeId);
   let t = useSelector(e => e.mirror.appModel.pagesList[0]);
@@ -1692,8 +1692,8 @@ function iZ() {
     href: c,
     "data-testid": "dev_handoff.workflows.overview.back_button",
     recordingKey: "dev_handoff.workflows.overview.back_button",
-    "aria-label": _$$t("dev_handoff.workflows.overview.back_to_page_tooltip"),
-    "data-tooltip": _$$t("dev_handoff.workflows.overview.back_to_page_tooltip"),
+    "aria-label": getI18nString("dev_handoff.workflows.overview.back_to_page_tooltip"),
+    "data-tooltip": getI18nString("dev_handoff.workflows.overview.back_to_page_tooltip"),
     "data-tooltip-type": Ib.TEXT,
     children: jsx(_$$C, {})
   }) : null;
@@ -1705,7 +1705,7 @@ function iQ() {
   _$$T() && getFeatureFlags().dt_vscode_ready_for_dev && (i = 0);
   let s = _$$U();
   let o = function () {
-    let [e, t] = fp(iD);
+    let [e, t] = useAtomValueAndSetter(iD);
     return useCallback(i => {
       e || (t({
         source: i
@@ -1717,8 +1717,8 @@ function iQ() {
   _$$O3();
   let p = J2(Ez5.currentSceneState().nodesWithStatusForFile);
   let f = useRef(null);
-  let [g, _] = fp(gk);
-  let [x, y] = fp(iX);
+  let [g, _] = useAtomValueAndSetter(gk);
+  let [x, y] = useAtomValueAndSetter(iX);
   let v = useCallback(e => {
     s("Dev Mode Overview Sort Changed", {
       sort: e
@@ -1726,7 +1726,7 @@ function iQ() {
     y(e);
   }, [y, s]);
   let E = e ? x : _$$_2.PAGE;
-  let [T, w] = fp(iJ);
+  let [T, w] = useAtomValueAndSetter(iJ);
   let S = n9(t);
   let {
     setSearchString,
@@ -1734,7 +1734,7 @@ function iQ() {
     searchFilter,
     searchActive
   } = function () {
-    let [e, t] = fp(iA);
+    let [e, t] = useAtomValueAndSetter(iA);
     let i = _$$U();
     let r = useMemo(() => function (e) {
       let t = e ? new Ax(e.toLowerCase()) : null;
@@ -1783,18 +1783,18 @@ function iQ() {
   }, [p, T, S, searchFilter, A, O]);
   let R = useMemo(() => [{
     key: oz.ALL,
-    label: _$$t("dev_handoff.workflows.overview.tab_all")
+    label: getI18nString("dev_handoff.workflows.overview.tab_all")
   }, ...(getFeatureFlags().dt_workflows_recently_viewed ? [{
     key: oz.RECENTLY_VIEWED,
-    label: _$$t("dev_handoff.workflows.overview.tab_recent")
+    label: getI18nString("dev_handoff.workflows.overview.tab_recent")
   }] : []), {
     key: oz.BUILD,
     count: A.length,
-    label: _$$t("dev_handoff.workflows.overview.tab_ready")
+    label: getI18nString("dev_handoff.workflows.overview.tab_ready")
   }, {
     key: oz.COMPLETED,
     count: O.length,
-    label: _$$t("dev_handoff.workflows.overview.tab_completed")
+    label: getI18nString("dev_handoff.workflows.overview.tab_completed")
   }], [A.length, O.length]);
   let D = useMemo(() => {
     if (0 === L.length) return [];
@@ -1827,7 +1827,7 @@ function iQ() {
         }];
     }
   }, [T, L, E]);
-  let [M, F] = fp(iq);
+  let [M, F] = useAtomValueAndSetter(iq);
   useEffect(() => {
     F(e => {
       let t = {
@@ -1864,7 +1864,7 @@ function iQ() {
     nodesWithStatusForFile: e,
     enabled: t
   }) {
-    let [i, r] = fp(iW);
+    let [i, r] = useAtomValueAndSetter(iW);
     let a = useRef();
     let s = _$$eY();
     useEffect(() => {
@@ -1883,7 +1883,7 @@ function iQ() {
         }
       }), !i) {
         let e = performance.now() - l;
-        sx("performance.dev_mode.workflows.overview.materialize_nodes", {
+        trackEventAnalytics("performance.dev_mode.workflows.overview.materialize_nodes", {
           nodeCount: n,
           worstNodeMs: o,
           elapsedMs: e
@@ -1902,7 +1902,7 @@ function iQ() {
     V(!0);
     _(f.current?.scrollTop);
   }, [_]);
-  let [Y] = fp(_o);
+  let [Y] = useAtomValueAndSetter(_o);
   _$$h3(() => {
     let t = Y || "init";
     s("Dev Mode Overview Shown", {
@@ -1939,13 +1939,13 @@ function iQ() {
     })
   });
   let Z = "";
-  numSections > 0 && (Z += _$$t("dev_handoff.workflows.overview.sections_count", {
+  numSections > 0 && (Z += getI18nString("dev_handoff.workflows.overview.sections_count", {
     count: numSections
   }));
-  numFrames > 0 && (numSections > 0 && (Z += ", "), Z += _$$t("dev_handoff.workflows.overview.frames_count", {
+  numFrames > 0 && (numSections > 0 && (Z += ", "), Z += getI18nString("dev_handoff.workflows.overview.frames_count", {
     count: numFrames
   }));
-  numSections + numFrames > 0 && (Z += " " + _$$t("dev_handoff.workflows.overview.pages_count", {
+  numSections + numFrames > 0 && (Z += " " + getI18nString("dev_handoff.workflows.overview.pages_count", {
     count: numPages
   }));
   let Q = 0 === D.length;
@@ -1972,7 +1972,7 @@ function iQ() {
             className: "overview--overviewTitleIcon--NvF-4",
             children: jsx(_$$O, {})
           }), jsx("h1", {
-            children: _$$tx("dev_handoff.workflows.overview.title")
+            children: renderI18nText("dev_handoff.workflows.overview.title")
           })]
         }), jsx("div", {
           className: "overview--overviewTitleInfo--3e2oX text--fontPos11--2LvXf text--_fontBase--QdLsd",
@@ -1992,17 +1992,17 @@ function iQ() {
         className: "overview--scrollAndEmptyMessage--3hOyM",
         children: [Q && jsx("span", {
           className: "overview--emptyMessage--lyEC8",
-          children: searchActive ? _$$tx("dev_handoff.workflows.overview.empty_message_search") : jsx("div", {
+          children: searchActive ? renderI18nText("dev_handoff.workflows.overview.empty_message_search") : jsx("div", {
             className: _$$s.preWrap.$,
-            children: _$$tx("dev_handoff.workflows.overview.no_designs", {
+            children: renderI18nText("dev_handoff.workflows.overview.no_designs", {
               status: function (e) {
                 switch (e) {
                   case oz.BUILD:
-                    return _$$tx("dev_handoff.workflows.overview.no_designs_ready");
+                    return renderI18nText("dev_handoff.workflows.overview.no_designs_ready");
                   case oz.COMPLETED:
-                    return _$$tx("dev_handoff.workflows.overview.no_designs_completed");
+                    return renderI18nText("dev_handoff.workflows.overview.no_designs_completed");
                   default:
-                    return _$$tx("dev_handoff.workflows.overview.no_designs_ready");
+                    return renderI18nText("dev_handoff.workflows.overview.no_designs_ready");
                 }
               }(T),
               link: jsx("span", {
@@ -2011,7 +2011,7 @@ function iQ() {
                   href: "https://help.figma.com/hc/articles/23918228264855",
                   trusted: !0,
                   newTab: !0,
-                  children: _$$tx("dev_handoff.workflows.overview.learn_more")
+                  children: renderI18nText("dev_handoff.workflows.overview.learn_more")
                 })
               })
             })
@@ -2069,9 +2069,9 @@ function i$({
   return jsx(_$$E2, {
     className: "overview--pageHeader--dubsT",
     onClick: i,
-    "aria-label": t ? _$$t("dev_handoff.workflows.overview.collapse_page", {
+    "aria-label": t ? getI18nString("dev_handoff.workflows.overview.collapse_page", {
       pageName: e
-    }) : _$$t("dev_handoff.workflows.overview.expand_page", {
+    }) : getI18nString("dev_handoff.workflows.overview.expand_page", {
       pageName: e
     }),
     children: jsxs("div", {
@@ -2096,7 +2096,7 @@ function i0({
     children: jsxs("div", {
       className: "overview--searchBar--NX8cb",
       children: [jsx(_$$h2, {}), jsx(_$$L2, {
-        placeholder: _$$t("dev_handoff.workflows.overview.search_placeholder"),
+        placeholder: getI18nString("dev_handoff.workflows.overview.search_placeholder"),
         value: e,
         onChange: e => {
           t(e.target.value);
@@ -2105,9 +2105,9 @@ function i0({
         spellCheck: !1
       }), !!e && jsx(_$$K, {
         onClick: () => t(""),
-        "aria-label": _$$t("dev_handoff.workflows.overview.clear_search"),
+        "aria-label": getI18nString("dev_handoff.workflows.overview.clear_search"),
         htmlAttributes: {
-          "data-tooltip": _$$t("dev_handoff.workflows.overview.clear_search"),
+          "data-tooltip": getI18nString("dev_handoff.workflows.overview.clear_search"),
           "data-tooltip-type": Ib.TEXT
         },
         children: jsx(_$$L, {})
@@ -2167,7 +2167,7 @@ function i2({
     let s = Ak(a);
     return a ? s : null;
   }(nodeId, e.hasBeenEditedSinceLastStatusChange);
-  let v = useMemo(() => e.hasBeenEditedSinceLastStatusChange ? _$$tx("dev_handoff.workflows.edit_info.changed") : e.status === zIx.COMPLETED ? _$$tx("dev_handoff.status.completed") : e.status === zIx.BUILD ? e.description ? _$$tx("dev_handoff.workflows.edit_info.new version") : _$$tx("dev_handoff.status.ready_for_dev") : _$$tx("dev_handoff.workflows.edit_info.changed"), [e.description, e.hasBeenEditedSinceLastStatusChange, e.status]);
+  let v = useMemo(() => e.hasBeenEditedSinceLastStatusChange ? renderI18nText("dev_handoff.workflows.edit_info.changed") : e.status === zIx.COMPLETED ? renderI18nText("dev_handoff.status.completed") : e.status === zIx.BUILD ? e.description ? renderI18nText("dev_handoff.workflows.edit_info.new version") : renderI18nText("dev_handoff.status.ready_for_dev") : renderI18nText("dev_handoff.workflows.edit_info.changed"), [e.description, e.hasBeenEditedSinceLastStatusChange, e.status]);
   let {
     getTriggerProps,
     manager
@@ -2201,7 +2201,7 @@ function i2({
         })]
       }), s && updatedAt > 1 && jsx("div", {
         className: "overview--updatedAtText--z05FL text--fontPos11--2LvXf text--_fontBase--QdLsd",
-        children: _$$tx("dev_handoff.overview_mode.design_status", {
+        children: renderI18nText("dev_handoff.overview_mode.design_status", {
           fromNow: C,
           status: v
         })
@@ -2212,15 +2212,15 @@ function i2({
         manager,
         children: [jsx(_$$K, {
           ...getTriggerProps(),
-          "aria-label": _$$t("dev_handoff.workflows.more_actions_tooltip"),
+          "aria-label": getI18nString("dev_handoff.workflows.more_actions_tooltip"),
           children: jsx(_$$J, {})
         }), jsxs(mc, {
           children: [jsx(q7, {
             onClick: () => b("Dev Mode Overview Card Go To Canvas Clicked", nodeId, pageId),
-            children: _$$tx("dev_handoff.workflows.overview.show_on_page_action")
+            children: renderI18nText("dev_handoff.workflows.overview.show_on_page_action")
           }), jsx(q7, {
             onClick: () => y?.(),
-            children: _$$tx("dev_handoff.status.copy_focus_link")
+            children: renderI18nText("dev_handoff.status.copy_focus_link")
           })]
         })]
       }), jsx(_$$p, {
@@ -2284,9 +2284,9 @@ function i5({
   } = e;
   let p = VW(nodeId);
   let h = useSelector(e => Np(e, p));
-  let [m] = fp(iX);
+  let [m] = useAtomValueAndSetter(iX);
   let f = m === _$$_2.RECENT && updatedAt > 1;
-  let [, g] = fp(wz);
+  let [, g] = useAtomValueAndSetter(wz);
   let _ = n.usersById?.[e.userId];
   let y = f && (n.loading || _);
   function b(e) {
@@ -2358,8 +2358,8 @@ function i4({
     isDevModeBlendedSection: w3z.canBeBlendedSection(e)
   });
   let y = function () {
-    let [e, t] = fp(iM);
-    let [i] = fp(iD);
+    let [e, t] = useAtomValueAndSetter(iM);
+    let [i] = useAtomValueAndSetter(iD);
     let r = _$$U();
     return useCallback(n => {
       if (!e && i) {
@@ -2392,13 +2392,13 @@ function i4({
         maxWidth: x.displaySize.x,
         maxHeight: x.displaySize.y
       },
-      alt: _$$t("dev_handoff.nodes_panel.thumbnail_aria_label"),
-      "aria-label": _$$t("dev_handoff.nodes_panel.thumbnail_aria_label")
+      alt: getI18nString("dev_handoff.nodes_panel.thumbnail_aria_label"),
+      "aria-label": getI18nString("dev_handoff.nodes_panel.thumbnail_aria_label")
     }), jsx(_$$J2, {
       mode: "dark",
       children: jsx("div", {
         className: "overview--previewExpandIcon--nqhxn",
-        "data-tooltip": _$$t("dev_handoff.workflows.overview.card_hover_expand_tooltip"),
+        "data-tooltip": getI18nString("dev_handoff.workflows.overview.card_hover_expand_tooltip"),
         "data-tooltip-type": "text",
         children: jsx(_$$O2, {})
       })
@@ -2409,11 +2409,11 @@ let i6 = new class {
   format(e) {
     switch (e) {
       case _$$_2.PAGE:
-        return _$$t("dev_handoff.workflows.overview.sort_pages");
+        return getI18nString("dev_handoff.workflows.overview.sort_pages");
       case _$$_2.RECENT:
-        return _$$t("dev_handoff.workflows.overview.sort_recent");
+        return getI18nString("dev_handoff.workflows.overview.sort_recent");
       case _$$_2.ALPHABETICAL:
-        return _$$t("dev_handoff.workflows.overview.sort_alphabetical");
+        return getI18nString("dev_handoff.workflows.overview.sort_alphabetical");
     }
   }
 }();
@@ -2426,11 +2426,11 @@ function i7({
     onChange: t,
     children: [jsx(l9, {
       label: jsx(_$$h, {
-        children: _$$t("dev_handoff.workflows.overview.sort_by")
+        children: getI18nString("dev_handoff.workflows.overview.sort_by")
       })
     }), jsxs(_$$mc, {
       children: [jsx(WL, {
-        children: _$$t("dev_handoff.workflows.overview.sort_by")
+        children: getI18nString("dev_handoff.workflows.overview.sort_by")
       }), Object.values(_$$_2).map(e => jsx(c$, {
         value: e,
         children: i6.format(e)
@@ -2445,7 +2445,7 @@ function i8() {
       href: "https://form.asana.com/?k=dyYqSpHdZqetESFQzNb8hQ&d=10497086658021",
       className: "overview--betaFeedbackBadge--PUv9s text--fontPos11--2LvXf text--_fontBase--QdLsd",
       newTab: !0,
-      children: [_$$tx("dev_handoff.workflows.overview.feedback"), jsx(_$$B, {
+      children: [renderI18nText("dev_handoff.workflows.overview.feedback"), jsx(_$$B, {
         className: "overview--badgeIcon--rKOUQ",
         svg: _$$A6
       })]
@@ -2641,16 +2641,16 @@ let r$ = memo(function ({
 }) {
   let [{
     previewKeyForErrorBoundary: i
-  }, n] = fp(t.stateAtom);
+  }, n] = useAtomValueAndSetter(t.stateAtom);
   return jsx(_$$tH, {
     boundaryKey: "InlinePreviewModal",
     fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
     onError: () => {
-      if (sx("inline_preview_crashed", {}, {
+      if (trackEventAnalytics("inline_preview_crashed", {}, {
         forwardToDatadog: !0
       }), n({
         type: "HANDLE_PREVIEW_CRASHED"
-      }), Lg() || nl() || isDevEnvironment()) throw Error("Inline preview crashed");
+      }), Lg() || isInteractionPathCheck() || isDevEnvironment()) throw Error("Inline preview crashed");
     },
     children: jsx(r0, {
       pageId: e,
@@ -2673,7 +2673,7 @@ let r0 = memo(function ({
     sizeInfo: m,
     showDeviceFrameEnabled: f,
     scalingInfo: g
-  }, _] = fp(t.stateAtom);
+  }, _] = useAtomValueAndSetter(t.stateAtom);
   let x = useDispatch();
   let y = _$$eY();
   let C = useMemo(() => h === bi.OPEN, [h]);
@@ -3034,7 +3034,7 @@ function r1({
     currentPresentedNode: j,
     targetFrameFollowingEnabled: I,
     showDeviceFrameEnabled: k
-  }, N] = fp(T.stateAtom);
+  }, N] = useAtomValueAndSetter(T.stateAtom);
   let {
     showing,
     toggle
@@ -3086,7 +3086,7 @@ function r1({
   }, [w, k, b, N]);
   let M = useCallback(() => {
     let n = {
-      displayText: _$$t("inline_preview.overflow_menu.responsive"),
+      displayText: getI18nString("inline_preview.overflow_menu.responsive"),
       name: "responsive",
       recordingKey: "responsiveButton",
       callback: () => {
@@ -3097,7 +3097,7 @@ function r1({
       unsetStrokeOnActiveOption: !0
     };
     let a = {
-      displayText: s ? _$$t("inline_preview.overflow_menu.fixed") : _$$t("inline_preview.overflow_menu.fit_width"),
+      displayText: s ? getI18nString("inline_preview.overflow_menu.fixed") : getI18nString("inline_preview.overflow_menu.fit_width"),
       name: s ? "fixed" : "fit-width",
       isChecked: !x,
       recordingKey: "fixedButton",
@@ -3108,14 +3108,14 @@ function r1({
       unsetStrokeOnActiveOption: !0
     };
     let o = {
-      displayText: _$$t("inline_preview.overflow_menu.follow_prototype"),
+      displayText: getI18nString("inline_preview.overflow_menu.follow_prototype"),
       name: "follow-active-frame",
       recordingKey: "followActiveFrame",
       callback: R,
       isChecked: I
     };
     let l = {
-      displayText: s ? _$$t("inline_preview.overflow_menu.resize_device_100_percent") : _$$t("inline_preview.overflow_menu.resize_window_100_percent"),
+      displayText: s ? getI18nString("inline_preview.overflow_menu.resize_device_100_percent") : getI18nString("inline_preview.overflow_menu.resize_window_100_percent"),
       name: "actual-size",
       recordingKey: "actualSizeButton",
       callback: f,
@@ -3124,7 +3124,7 @@ function r1({
       "data-onboarding-key": "resize-to-actual-size"
     };
     let c = {
-      displayText: _$$t("inline_preview.overflow_menu.reset_aspect_ratio"),
+      displayText: getI18nString("inline_preview.overflow_menu.reset_aspect_ratio"),
       name: "reset-size",
       recordingKey: "resetSizeButton",
       callback: d,
@@ -3133,7 +3133,7 @@ function r1({
       hidden: i
     };
     let u = {
-      displayText: _$$t("inline_preview.overflow_menu.show_device_frame"),
+      displayText: getI18nString("inline_preview.overflow_menu.show_device_frame"),
       name: "show-device-frame",
       recordingKey: "showDeviceFrame",
       callback: D,
@@ -3145,7 +3145,7 @@ function r1({
       separator: !0,
       displayText: ""
     }, o, l, c, u, {
-      displayText: _$$t("inline_preview.new_tab"),
+      displayText: getI18nString("inline_preview.new_tab"),
       recordingKey: "openInNewTabButton",
       name: "open-in-new-tab",
       callback: L,
@@ -3159,10 +3159,10 @@ function r1({
     children: [u && jsx("div", {
       ref: S,
       children: jsx(_$$K, {
-        "aria-label": _$$t("inline_preview.overflow_menu"),
+        "aria-label": getI18nString("inline_preview.overflow_menu"),
         htmlAttributes: {
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": _$$t("inline_preview.overflow_menu")
+          "data-tooltip": getI18nString("inline_preview.overflow_menu")
         },
         actionOnPointerDown: !0,
         onClick: e => {
@@ -3175,10 +3175,10 @@ function r1({
     }), C > kl && jsx(_$$K, {
       htmlAttributes: {
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("inline_preview.new_tab"),
+        "data-tooltip": getI18nString("inline_preview.new_tab"),
         "data-testid": "preview-open-in-presentation-view"
       },
-      "aria-label": _$$t("inline_preview.new_tab"),
+      "aria-label": getI18nString("inline_preview.new_tab"),
       onClick: L,
       recordingKey: generateRecordingKey(rZ, "openInNewTabButton"),
       children: jsx(_$$V3, {})
@@ -3186,9 +3186,9 @@ function r1({
       onClick: P,
       htmlAttributes: {
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("inline_preview.open_fullscreen")
+        "data-tooltip": getI18nString("inline_preview.open_fullscreen")
       },
-      "aria-label": _$$t("inline_preview.open_fullscreen"),
+      "aria-label": getI18nString("inline_preview.open_fullscreen"),
       children: jsx(_$$O2, {})
     }), showing && S.current && jsx(_$$j, {
       dispatch: w,
@@ -3224,13 +3224,13 @@ function r2({
         htmlAttributes: {
           "data-testid": "preview-navigate-backward"
         },
-        "aria-label": _$$t("viewer.footer.previous_frame"),
+        "aria-label": getI18nString("viewer.footer.previous_frame"),
         onClick: s,
         disabled: !t,
         recordingKey: generateRecordingKey(rZ, "navigateBackwardButton"),
         children: jsx(_$$C, {})
       }), jsx(_$$K, {
-        "aria-label": _$$t("viewer.footer.next_frame"),
+        "aria-label": getI18nString("viewer.footer.next_frame"),
         onClick: o,
         disabled: !e,
         recordingKey: generateRecordingKey(rZ, "navigateForwardButton"),
@@ -3240,10 +3240,10 @@ function r2({
         children: jsx(_$$e6, {})
       })]
     }), n <= kl ? null : jsx(_$$K, {
-      "aria-label": _$$t("inline_preview.restart"),
+      "aria-label": getI18nString("inline_preview.restart"),
       htmlAttributes: {
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("inline_preview.restart"),
+        "data-tooltip": getI18nString("inline_preview.restart"),
         "data-testid": "preview-restart-prototype"
       },
       onClick: () => {
@@ -3283,7 +3283,7 @@ function r5() {
     o && t && m && Y5.onReady().then(() => {
       getFeatureFlags()?.fullscreen_send_client_rendered_message ? h3O?.sendClientRendered(xK.getClientRenderedMetadata()) : h3O?.sendSignal("client-rendered", "");
       window.requestAnimationFrame(() => {
-        _$$eD?.addTabAnalyticsMetadata({
+        desktopAPIInstance?.addTabAnalyticsMetadata({
           reactFullscreenViewRenderTime: window.performance.now()
         });
         xK.reactFullscreenViewIsRendered();
@@ -3314,7 +3314,7 @@ function r5() {
             ...r,
             are_context_attributes_correct: s
           };
-          sx("fullscreen_load_gpu_parameters", o);
+          trackEventAnalytics("fullscreen_load_gpu_parameters", o);
         }();
       });
     });
@@ -3346,7 +3346,7 @@ function r5() {
       isTryFile: p.isTryFile,
       pages: T.length > 0 ? T : [{
         id: S,
-        name: _$$t("fullscreen.pages_panel.pages_placeholder"),
+        name: getI18nString("fullscreen.pages_panel.pages_placeholder"),
         divider: !1
       }],
       currentPageId: S

@@ -1,10 +1,10 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { XHR } from "../905/910117";
 import { c$ } from "../figma_app/236327";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { AS, to } from "../905/156213";
 import { Y9 } from "../905/504768";
 import { iZ } from "../905/372672";
@@ -13,18 +13,18 @@ import { Ju } from "../905/102752";
 import { yX } from "../figma_app/918700";
 import { V } from "../7037/903447";
 let h = Ju(function (e) {
-  let t = tx("fig_feed.delete_confirmation");
-  e.numComments && e.numReactions ? t = tx("fig_feed.delete_confirmation_with_comments_and_reactions", {
+  let t = renderI18nText("fig_feed.delete_confirmation");
+  e.numComments && e.numReactions ? t = renderI18nText("fig_feed.delete_confirmation_with_comments_and_reactions", {
     numCommentsAndReactions: e.numComments + e.numReactions
-  }) : e.numComments ? t = tx("fig_feed.delete_confirmation_with_comments", {
+  }) : e.numComments ? t = renderI18nText("fig_feed.delete_confirmation_with_comments", {
     numComments: e.numComments
-  }) : e.numReactions && (t = tx("fig_feed.delete_confirmation_with_reactions", {
+  }) : e.numReactions && (t = renderI18nText("fig_feed.delete_confirmation_with_reactions", {
     numReactions: e.numReactions
   }));
   return jsx(yX, {
     destructive: !0,
-    confirmationTitle: tx("fig_feed.delete_post"),
-    confirmText: tx("fig_feed.delete"),
+    confirmationTitle: renderI18nText("fig_feed.delete_post"),
+    confirmText: renderI18nText("fig_feed.delete"),
     onConfirm: e.onConfirm,
     popStack: !0,
     children: jsx("p", {
@@ -57,7 +57,7 @@ export function $$y1(e) {
   let y = useCallback(() => {
     t(AS());
     XHR.del(`/api/feed_posts/post_uuid/${feedPost.publicUuid}`).then(() => {
-      sx("Team Feed Post Deleted", {
+      trackEventAnalytics("Team Feed Post Deleted", {
         postUuid: feedPost.publicUuid
       });
       n();
@@ -75,7 +75,7 @@ export function $$y1(e) {
     }));
   }, [t, y, g, b]);
   if (!canDelete && !canAdminDelete) return null;
-  let T = canDelete ? tx("fig_feed.delete_ellipsis") : tx("fig_feed.delete_admin_ellipsis");
+  let T = canDelete ? renderI18nText("fig_feed.delete_ellipsis") : renderI18nText("fig_feed.delete_admin_ellipsis");
   let j = [(!!canDelete || !!canAdminDelete) && jsx(c$, {
     onClick: w,
     children: T

@@ -1,36 +1,76 @@
-import { x4 } from "../figma_app/211694";
-export function $$r1() {
-  let e = x4?.getItem("ddr_user_debug_flow");
-  return !!e && new Date(e) > new Date();
+/* eslint-disable no-fallthrough */
+import { x4 } from '../figma_app/211694'
+
+/**
+ * Checks if the debug flow is active based on the stored date.
+ * @returns {boolean} True if the debug flow is active, false otherwise.
+ * (Original: $$r1)
+ */
+export function isDebugFlowActive(): boolean {
+  const debugFlowDate = x4?.getItem('ddr_user_debug_flow')
+  return !!debugFlowDate && new Date(debugFlowDate) > new Date()
 }
-export function $$a0(e, t) {
-  let i;
-  let n;
-  let r = 3 & e.length;
-  let a = e.length - r;
-  let s = t;
-  let o = 0;
-  for (; o < a;) {
-    n = 255 & e.charCodeAt(o) | (255 & e.charCodeAt(++o)) << 8 | (255 & e.charCodeAt(++o)) << 16 | (255 & e.charCodeAt(++o)) << 24;
-    ++o;
-    s ^= n = (65535 & (n = (n = (65535 & n) * 0xcc9e2d51 + (((n >>> 16) * 0xcc9e2d51 & 65535) << 16) & 0xffffffff) << 15 | n >>> 17)) * 0x1b873593 + (((n >>> 16) * 0x1b873593 & 65535) << 16) & 0xffffffff;
-    s = (65535 & (i = (65535 & (s = s << 13 | s >>> 19)) * 5 + (((s >>> 16) * 5 & 65535) << 16) & 0xffffffff)) + 27492 + (((i >>> 16) + 58964 & 65535) << 16);
+
+/**
+ * Generates a hash value for a given string and seed.
+ * Implements a MurmurHash-like algorithm.
+ * @param {string} input - The string to hash.
+ * @param {number} seed - The seed value for hashing.
+ * @returns {number} The resulting hash value.
+ * (Original: $$a0)
+ */
+export function murmurHash(input: string, seed: number): number {
+  let hash: number
+  let k: number
+  const remainder = input.length & 3
+  const bytes = input.length - remainder
+  let h = seed
+  let i = 0
+
+  // Process 4 bytes at a time
+  while (i < bytes) {
+    k = (input.charCodeAt(i) & 0xFF)
+      | ((input.charCodeAt(++i) & 0xFF) << 8)
+      | ((input.charCodeAt(++i) & 0xFF) << 16)
+      | ((input.charCodeAt(++i) & 0xFF) << 24)
+    ++i
+
+    k = ((k & 0xFFFF) * 0xCC9E2D51 + (((k >>> 16) * 0xCC9E2D51 & 0xFFFF) << 16)) & 0xFFFFFFFF
+    k = (k << 15 | k >>> 17)
+    k = ((k & 0xFFFF) * 0x1B873593 + (((k >>> 16) * 0x1B873593 & 0xFFFF) << 16)) & 0xFFFFFFFF
+
+    h ^= k
+    h = (h << 13 | h >>> 19)
+    hash = ((h & 0xFFFF) * 5 + (((h >>> 16) * 5 & 0xFFFF) << 16)) & 0xFFFFFFFF
+    h = (hash & 0xFFFF) + 0x6B64 + (((hash >>> 16) + 0xE654 & 0xFFFF) << 16)
   }
-  switch (n = 0, r) {
+
+  // Handle remaining bytes
+  k = 0
+  switch (remainder) {
     case 3:
-      n ^= (255 & e.charCodeAt(o + 2)) << 16;
+      k ^= (input.charCodeAt(i + 2) & 0xFF) << 16
     case 2:
-      n ^= (255 & e.charCodeAt(o + 1)) << 8;
+      k ^= (input.charCodeAt(i + 1) & 0xFF) << 8
     case 1:
-      n ^= 255 & e.charCodeAt(o);
-      s ^= n = (65535 & (n = (n = (65535 & n) * 0xcc9e2d51 + (((n >>> 16) * 0xcc9e2d51 & 65535) << 16) & 0xffffffff) << 15 | n >>> 17)) * 0x1b873593 + (((n >>> 16) * 0x1b873593 & 65535) << 16) & 0xffffffff;
+      k ^= (input.charCodeAt(i) & 0xFF)
+      k = ((k & 0xFFFF) * 0xCC9E2D51 + (((k >>> 16) * 0xCC9E2D51 & 0xFFFF) << 16)) & 0xFFFFFFFF
+      k = (k << 15 | k >>> 17)
+      k = ((k & 0xFFFF) * 0x1B873593 + (((k >>> 16) * 0x1B873593 & 0xFFFF) << 16)) & 0xFFFFFFFF
+      h ^= k
   }
-  s ^= e.length;
-  s ^= s >>> 16;
-  s = (65535 & s) * 0x85ebca6b + (((s >>> 16) * 0x85ebca6b & 65535) << 16) & 0xffffffff;
-  s ^= s >>> 13;
-  s = (65535 & s) * 0xc2b2ae35 + (((s >>> 16) * 0xc2b2ae35 & 65535) << 16) & 0xffffffff;
-  return (s ^= s >>> 16) >>> 0;
+
+  // Finalization mix
+  h ^= input.length
+  h ^= h >>> 16
+  h = ((h & 0xFFFF) * 0x85EBCA6B + (((h >>> 16) * 0x85EBCA6B & 0xFFFF) << 16)) & 0xFFFFFFFF
+  h ^= h >>> 13
+  h = ((h & 0xFFFF) * 0xC2B2AE35 + (((h >>> 16) * 0xC2B2AE35 & 0xFFFF) << 16)) & 0xFFFFFFFF
+  h ^= h >>> 16
+
+  return h >>> 0
 }
-export const u = $$a0;
-export const z = $$r1;
+
+// Export aliases for backward compatibility
+export const u = murmurHash // (Original: u)
+export const z = isDebugFlowActive // (Original: z)

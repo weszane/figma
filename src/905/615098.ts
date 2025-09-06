@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef, useState, useRef, useEffect } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
 import s from "classnames";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { V } from "../figma_app/385855";
 import { s as _$$s } from "../cssbuilder/589278";
 import { E as _$$E, N as _$$N } from "../905/139531";
@@ -27,15 +27,15 @@ export let $$m0 = forwardRef(({
   let T = C.length;
   let k = C[f];
   useEffect(() => {
-    S || Promise.all(t.map((e) => _$$N(e))).then(() => {
+    S || Promise.all(t.map(e => _$$N(e))).then(() => {
       w(!0);
-    }).catch((e) => {
-      x1(_$$e.SEARCH, "[fb-scrubber] Error: Could not pre-load fragment thumbnails", e);
+    }).catch(e => {
+      logError(_$$e.SEARCH, "[fb-scrubber] Error: Could not pre-load fragment thumbnails", e);
     });
   }, [S, t]);
   let R = () => {
     x.current || (x.current = window.setInterval(() => {
-      _((e) => (e + 1) % T);
+      _(e => (e + 1) % T);
     }, 800));
   };
   let N = () => {
@@ -74,8 +74,8 @@ export let $$m0 = forwardRef(({
     length: C.length
   }).map((e, t) => jsx("div", {
     className: j6,
-    onMouseEnter: b ? (e) => O(t, e) : void 0,
-    onMouseMove: b ? (e) => O(t, e) : void 0,
+    onMouseEnter: b ? e => O(t, e) : void 0,
+    onMouseMove: b ? e => O(t, e) : void 0,
     children: jsx("button", {
       className: o()(Om, {
         [_$$o]: t === f
@@ -118,4 +118,4 @@ export let $$m0 = forwardRef(({
     })
   });
 });
-export const A = $$m0; 
+export const A = $$m0;

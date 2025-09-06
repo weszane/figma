@@ -4,10 +4,10 @@ import { throwTypeError } from "../figma_app/465776";
 import { bL, l9, mc, c$, wv, YJ, WL } from "../905/493196";
 import { h as _$$h } from "../905/270045";
 import { l as _$$l } from "../905/716947";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { Uz } from "../905/63728";
 import { _C } from "../figma_app/709893";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { FX } from "../figma_app/12491";
 import { sF } from "../figma_app/777207";
 import { t as _$$t2 } from "../905/511388";
@@ -29,7 +29,7 @@ export function $$x0({
   dropdownDataTestId: C
 }) {
   let T = _G() ?? _$$l("");
-  let k = md(Sh);
+  let k = useAtomWithSubscription(Sh);
   let {
     libraries,
     presets,
@@ -112,7 +112,7 @@ export function $$x0({
         "data-testid": "library-select-trigger",
         ref: L,
         label: jsx(_$$h, {
-          children: tx("design_systems.assets_panel.dropdown.aria_label")
+          children: renderI18nText("design_systems.assets_panel.dropdown.aria_label")
         })
       })
     }), jsx(mc, {
@@ -121,10 +121,10 @@ export function $$x0({
         className: "x1hfn5x7",
         children: [jsx(c$, {
           value: "all",
-          children: tx("design_systems.assets_panel.dropdown_type_all_libraries")
+          children: renderI18nText("design_systems.assets_panel.dropdown_type_all_libraries")
         }), k && !u && jsx(S, {
           value: T,
-          text: _$$t("design_systems.assets_panel.created_in_this_file"),
+          text: getI18nString("design_systems.assets_panel.created_in_this_file"),
           showTooltipOnEllipsis: e
         }, T), libraries.length > 0 && jsxs(Fragment, {
           children: [jsx("div", {
@@ -141,7 +141,7 @@ export function $$x0({
         }), librariesForConnectedProject.length > 0 && jsx(Fragment, {
           children: jsx(YJ, {
             groupLabel: jsx(WL, {
-              children: tx("design_systems.libraries_modal.connected_project_libraries")
+              children: renderI18nText("design_systems.libraries_modal.connected_project_libraries")
             }),
             children: librariesForConnectedProject.map(({
               libraryKey: t

@@ -6,7 +6,7 @@ import o from "classnames";
 import { Kz } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { Y, M } from "../905/830372";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
@@ -58,7 +58,7 @@ function A(e) {
               trackingProperties: {
                 ctaTrackingDescriptor: e.secondaryCtaProps?.ctaTrackingDescriptor || _$$c.BACK
               },
-              children: e.secondaryCtaProps?.ctaText || tx("tooltips_plus_onboarding.back")
+              children: e.secondaryCtaProps?.ctaText || renderI18nText("tooltips_plus_onboarding.back")
             })
           })
         }), e.onPrimaryCtaClick && jsx(J, {
@@ -72,7 +72,7 @@ function A(e) {
               },
               variant: "primary",
               disabled: t,
-              children: e.primaryCtaProps?.ctaText || tx("tooltips_plus_onboarding.next")
+              children: e.primaryCtaProps?.ctaText || renderI18nText("tooltips_plus_onboarding.next")
             })
           })
         })]

@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { CY } from "../figma_app/637027";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { jQ } from "../5430/920085";
 var l = (e => (e.FREE_HUB_FILE_LICENSE = "https://creativecommons.org/licenses/by/4.0/", e.FREE_RESOURCE_LICENSE = "https://www.figma.com/community-free-resource-license/", e.PAID_RESOURCE_LICENSE = "https://www.figma.com/community-paid-resource-license/", e.APPLE_RESOURCE_LICENSE = "https://developer.apple.com/apple-design-resources-license/", e))(l || {});
 export function $$o0({
@@ -11,7 +11,7 @@ export function $$o0({
 }) {
   return s ? null : jsx("div", {
     className: jQ,
-    children: tx("community.detail_view.licensed_under_license_type", {
+    children: renderI18nText("community.detail_view.licensed_under_license_type", {
       licenseType: jsx($$d1, {
         isMonetizedResource: e,
         isHubFile: t,
@@ -28,9 +28,9 @@ export function $$d1({
   let r;
   let l = {
     "https://creativecommons.org/licenses/by/4.0/": "CC BY 4.0",
-    "https://www.figma.com/community-free-resource-license/": _$$t("community.detail_view.free_plugin_license"),
-    "https://www.figma.com/community-paid-resource-license/": _$$t("community.detail_view.paid_resource_license"),
-    "https://developer.apple.com/apple-design-resources-license/": _$$t("community.detail_view.apple_resource_license")
+    "https://www.figma.com/community-free-resource-license/": getI18nString("community.detail_view.free_plugin_license"),
+    "https://www.figma.com/community-paid-resource-license/": getI18nString("community.detail_view.paid_resource_license"),
+    "https://developer.apple.com/apple-design-resources-license/": getI18nString("community.detail_view.apple_resource_license")
   };
   r = a ? "https://developer.apple.com/apple-design-resources-license/" : e ? "https://www.figma.com/community-paid-resource-license/" : t ? "https://creativecommons.org/licenses/by/4.0/" : "https://www.figma.com/community-free-resource-license/";
   return jsx(CY, {

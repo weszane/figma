@@ -1,25 +1,25 @@
-import { $D } from '../905/11';
+import { reportError } from '../905/11';
 import { tM } from '../905/149196';
 import { ServiceCategories as _$$e } from '../905/165054';
 import { W as _$$W } from '../905/187396';
 import { h as _$$h } from '../905/310723';
 import { n as _$$n } from '../905/347702';
-import { $ as _$$$ } from '../905/361972';
+import { LogLevelStr } from '../905/361972';
 import { nL, UG } from '../905/414007';
 import { aK, EG, fF } from '../905/471229';
 import { YQ } from '../905/502364';
 import { getFeatureFlags } from '../905/601108';
-import { J6 } from '../905/602906';
+import { observabilityClient } from '../905/602906';
 import { k as _$$k2 } from '../905/651849';
-import { sessionStorageRef, getLocalStorage } from '../905/657224';
-import { Je, zo } from '../905/747968';
+import { getLocalStorage, sessionStorageRef } from '../905/657224';
+import { getInitialReferrer, getCurrentReferrer } from '../905/747968';
 import { g as _$$g } from '../905/880308';
-import { X as _$$X } from '../905/883621';
-import { isDevEnvironment, isLocalCluster, getInitialOptions } from '../figma_app/169182';
-import { Lg } from '../figma_app/257275';
+import { getEnvironmentInfo } from '../905/883621';
+import { getInitialOptions, isDevEnvironment, isLocalCluster } from '../figma_app/169182';
+import { getFalseValue } from '../figma_app/897289';
 import { N as _$$N } from '../figma_app/347406';
-import { eD } from '../figma_app/876459';
-import { bM } from '../figma_app/925651';
+import { desktopAPIInstance } from '../figma_app/876459';
+import { desktopVisibilityEmitter } from '../figma_app/925651';
 let m = () => [{
   event: 'Sign Up (GTM)',
   paramNames: ['isWorkEmail', 'sha256_email']
@@ -94,7 +94,7 @@ class g {
     t == null && (t = {});
     let r = {
       ...t,
-      ..._$$X(),
+      ...getEnvironmentInfo(),
       tracking_session_id: fF(),
       tracking_session_sequence_id: EG()
     };
@@ -110,8 +110,8 @@ class g {
 }
 let f = () => ({
   path: self.window?.location?.pathname,
-  referrer: zo(),
-  document_referrer: Je(),
+  referrer: getCurrentReferrer(),
+  document_referrer: getInitialReferrer(),
   search: self.window?.location?.search,
   title: self.document?.title,
   url: self.window?.location?.href
@@ -306,7 +306,7 @@ class j {
       let t = this._eventRateLimiters.get(e).smallLimiter.canMakeRequest();
       if (isDevEnvironment() && !t) {
         let t = new Error(`Received more than ${this.MAX_EVENT_REQUESTS_PER_SECOND} logs per second for event ${e}`);
-        $D(_$$e.DATA_INFRA, t);
+        reportError(_$$e.DATA_INFRA, t);
       }
       if (!t) {
         if (F.includes(e)) {
@@ -370,7 +370,7 @@ class V {
     document.addEventListener('visibilitychange', this._onVisibilityChange);
     window.addEventListener('pagehide', this._onPageHide);
     window.addEventListener('beforeunload', this._onPageHide);
-    eD && (this._desktopVisibilityUnsubscribe = bM.subscribe(this._onDesktopVisibilityChange));
+    desktopAPIInstance && (this._desktopVisibilityUnsubscribe = desktopVisibilityEmitter.subscribe(this._onDesktopVisibilityChange));
     this._namespace = e;
     this._flushTask = new _$$W();
     this._identifyBuffer = [];
@@ -380,7 +380,7 @@ class V {
     this._retryTrackBufferKib = 0;
     this._rateLimiter = new j();
     this._requestRateLimiter = new U();
-    Lg() && (this._disableTracking = !0);
+    getFalseValue() && (this._disableTracking = !0);
   }
   maybeScheduleFlushTask() {
     this._flushTask.isScheduled() || this._flushTask.scheduleRepeating(() => {
@@ -455,7 +455,7 @@ class V {
             action: 'rate_limited',
             shadowed_event_limiting: getFeatureFlags().figment_rate_limit_events ? '0' : '1',
             shadowed_requests_limiting: '0',
-            ..._$$X(),
+            ...getEnvironmentInfo(),
             tracking_session_id: fF(),
             events_namespace: this._namespace
           },
@@ -494,7 +494,7 @@ class V {
       return;
     }
     let r = e;
-    let a = eD && getFeatureFlags().figment_desktop_batch_holdout && t?.batchRequest == null && ['Statsig prefetch calls', 'keyboard_shortcuts', 'rcs_client_init_time'].includes(e.data.event);
+    let a = desktopAPIInstance && getFeatureFlags().figment_desktop_batch_holdout && t?.batchRequest == null && ['Statsig prefetch calls', 'keyboard_shortcuts', 'rcs_client_init_time'].includes(e.data.event);
     a && (e.data.properties._1is_shadow = 'true', r = {
       ...e,
       figment_metadata: {
@@ -631,7 +631,7 @@ class V {
         properties: {
           retry_count: e.toString(),
           action: 'retry_attempt',
-          ..._$$X(),
+          ...getEnvironmentInfo(),
           tracking_session_id: fF(),
           path: t,
           retried_events: n,
@@ -708,7 +708,7 @@ class V {
     return i => {
       _$$k2.error(`[Figment] Http Error: ${i}`);
       _$$N(t, tM.FAILURE);
-      getFeatureFlags().figment_sentry_errors && !this.isUsingDevAssets() && $D(_$$e.DATA_INFRA, i, {
+      getFeatureFlags().figment_sentry_errors && !this.isUsingDevAssets() && reportError(_$$e.DATA_INFRA, i, {
         extra: {
           payload: e
         }
@@ -805,7 +805,7 @@ let Y = W('figfs');
 function q() {
   return isLocalCluster() ? 'https://staging.figma.com' : getInitialOptions().figma_url;
 }
-let Z = {
+let AnalyticsEventDefinitions = {
   'sites.finish_copy_to_sites': {
     throttle: {
       type: 'DOCUMENT'
@@ -1883,70 +1883,98 @@ let Z = {
     mlEvent: !0
   }
 };
-function X(e) {
-  return e in Z ? Z[e] : {};
+function getAnalyticsByName(e: string) {
+  return e in AnalyticsEventDefinitions ? AnalyticsEventDefinitions[e] : {};
 }
-export function $$J0() {
+export function clearAnalyticsStorage() {
   K.clearAnalyticsStorage?.();
 }
-let $$ee4 = _$$n((e, t = {}, i = {}) => {
-  en(e, t, i);
-});
-let $$et5 = _$$n((e, t = {}, i = {}) => {
-  er(e, t, i);
-});
-let ei = !!navigator.cookieEnabled && localStorage.getItem('DEV_LOG_ANALYTICS') === 'yes';
+export let trackEventAnalytics = (e, t = {}, i = {}) => {
+  trackEvent(e, t, i);
+};
+export let trackFullScreenAnalytics = (e, t = {}, i = {}) => {
+  trackFullscreenEvent(e, t, i);
+};
+let isDevLogAnalyticsEnabled = !!navigator.cookieEnabled && localStorage.getItem('DEV_LOG_ANALYTICS') === 'yes';
 window.setDevLogAnalytics = function (e = !0) {
   localStorage.setItem('DEV_LOG_ANALYTICS', e ? 'yes' : 'no');
-  (ei = e) ? _$$k2.log('dev logging of analytics is enabled') : _$$k2.log('dev logging of analytics is disabled');
+  (isDevLogAnalyticsEnabled = e) ? _$$k2.log('dev logging of analytics is enabled') : _$$k2.log('dev logging of analytics is disabled');
 };
-let en = _$$n((e, t, i) => {
+/**
+ * trackEvent - Tracks an analytics event using the main analytics instance.
+ * Original variable: en
+ * @param eventName The event name.
+ * @param properties Event properties.
+ * @param options Additional tracking options.
+ */
+export function trackEvent(eventName: string, properties: Record<string, any>, options: Record<string, any>) {
   YQ({
-    id: e,
-    properties: t
+    id: eventName,
+    properties
   });
-  (getFeatureFlags().analytics_log_to_console || ei) && _$$k2.log(`%ctrack: ${e}`, 'font-weight: bold', function (e) {
-    let t = {};
-    for (let i in e) {
-      e.hasOwnProperty(i) && e instanceof Object && (t[i] = JSON.stringify(e[i]));
-      typeof t[i] == 'string' && t[i].length > 50 && (t[i] = `${t[i].slice(0, 50)}...`);
-    }
-    return {
-      ...t,
-      raw: e
-    };
-  }(t), {
-    options: {
-      ...i,
-      stack: new Error().stack
-    }
-  });
-  (function (e, t, i) {
-    K.track(e, t, i);
-    J6.addAction(e, _$$e.UNOWNED, i.addToRUM ? _$$$.INFO : _$$$.DEBUG, t, {
-      forceEnable: !!i.forceEnableActionLogging
+
+  // Log to console if enabled
+  if (getFeatureFlags().analytics_log_to_console || isDevLogAnalyticsEnabled) {
+    const summarizedProps = Object.keys(properties).reduce((acc, key) => {
+      let value = properties[key];
+      if (typeof value === 'object') value = JSON.stringify(value);
+      if (typeof value === 'string' && value.length > 50) value = `${value.slice(0, 50)}...`;
+      acc[key] = value;
+      return acc;
+    }, {} as Record<string, any>);
+    _$$k2.log(`%ctrack: ${eventName}`, 'font-weight: bold', {
+      ...summarizedProps,
+      raw: properties
+    }, {
+      options: {
+        ...options,
+        stack: new Error().stack
+      }
     });
-  })(e, t, i);
-});
-function er(e, t, i) {
-  YQ({
-    id: e,
-    properties: t
-  });
-  getFeatureFlags().analytics_log_to_console && _$$k2.log(`%ctrack: ${e}`, 'font-weight: bold', {
-    properties: t
-  }, {
-    options: {
-      ...i,
-      stack: new Error().stack
-    }
-  });
-  Y.track(e, t, i);
-  J6.addAction(e, _$$e.UNOWNED, i.addToRUM ? _$$$.INFO : _$$$.DEBUG, t, {
-    forceEnable: !!i.forceEnableActionLogging
+  }
+
+  // Track event and add action
+  K.track(eventName, properties, options);
+  observabilityClient.addAction(eventName, _$$e.UNOWNED, options.addToRUM ? LogLevelStr.INFO : LogLevelStr.DEBUG, properties, {
+    forceEnable: !!options.forceEnableActionLogging
   });
 }
-let $$ea2 = () => b();
+
+/**
+ * trackFullscreenEvent - Tracks an analytics event using the fullscreen analytics instance.
+ * Original function: er
+ * @param eventName The event name.
+ * @param properties Event properties.
+ * @param options Additional tracking options.
+ */
+function trackFullscreenEvent(eventName: string, properties: Record<string, any>, options: Record<string, any>) {
+  YQ({
+    id: eventName,
+    properties
+  });
+
+  // Log to console if enabled
+  if (getFeatureFlags().analytics_log_to_console) {
+    _$$k2.log(`%ctrack: ${eventName}`, 'font-weight: bold', {
+      properties
+    }, {
+      options: {
+        ...options,
+        stack: new Error().stack
+      }
+    });
+  }
+  Y.track(eventName, properties, options);
+  observabilityClient.addAction(eventName, _$$e.UNOWNED, options.addToRUM ? LogLevelStr.INFO : LogLevelStr.DEBUG, properties, {
+    forceEnable: !!options.forceEnableActionLogging
+  });
+}
+
+/**
+ * getAnonymousId - Returns the current anonymous analytics ID.
+ * Original variable: $$ea2
+ */
+const getAnonymousId = (): string | undefined => b();
 /**
  * AnalyticsEventManager - manages defined analytics events, throttling, and options.
  * Original variable: $$es1
@@ -1965,9 +1993,9 @@ class AnalyticsEventManager {
    * @param properties Event properties.
    */
   trackDefinedEvent = (eventName, properties) => {
-    const def = X(eventName);
+    const def = getAnalyticsByName(eventName);
     if (this.shouldSendDefinedEvent(eventName, def)) {
-      en(this.getCorrectEventName(eventName, def), properties, this.getEventOptions(def));
+      trackEvent(this.getCorrectEventName(eventName, def), properties, this.getEventOptions(def));
       this.recordEventSent(eventName, def);
     }
   };
@@ -1978,9 +2006,9 @@ class AnalyticsEventManager {
    * @param properties Event properties.
    */
   trackDefinedMetric = _$$n((eventName, properties) => {
-    const def = X(eventName);
+    const def = getAnalyticsByName(eventName);
     if (this.shouldSendDefinedEvent(eventName, def)) {
-      en(this.getCorrectEventName(eventName, def), properties, this.getEventOptions(def));
+      trackEvent(this.getCorrectEventName(eventName, def), properties, this.getEventOptions(def));
       this.recordEventSent(eventName, def);
     }
   });
@@ -1991,9 +2019,9 @@ class AnalyticsEventManager {
    * @param properties Event properties.
    */
   trackDefinedFullscreenEvent = (eventName, properties) => {
-    const def = X(eventName);
+    const def = getAnalyticsByName(eventName);
     if (this.shouldSendDefinedEvent(eventName, def)) {
-      er(this.getCorrectEventName(eventName, def), properties, this.getEventOptions(def));
+      trackFullscreenEvent(this.getCorrectEventName(eventName, def), properties, this.getEventOptions(def));
       this.recordEventSent(eventName, def);
     }
   };
@@ -2080,13 +2108,13 @@ class AnalyticsEventManager {
 }
 
 // Exported as az (original: $$es1)
-const analyticsEventManager = new AnalyticsEventManager();
-export function $$eo3() {
+export const analyticsEventManager = new AnalyticsEventManager();
+export function getFigmaCluster() {
   return q();
 }
-export const Pg = $$J0;
+export const Pg = clearAnalyticsStorage;
 export const az = analyticsEventManager;
-export const pp = $$ea2;
-export const Rz = $$eo3;
-export const sx = $$ee4;
-export const NP = $$et5;
+export const pp = getAnonymousId;
+export const Rz = getFigmaCluster;
+export const sx = trackEventAnalytics;
+export const NP = trackFullScreenAnalytics;

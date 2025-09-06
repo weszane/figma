@@ -1,10 +1,10 @@
-import { eU } from "../figma_app/27355";
-import { bt } from "../905/270322";
-let $$a4 = bt(e => e.user);
-let $$s2 = eU(e => e($$a4)?.id);
-let $$o3 = eU(e => e($$a4)?.created_at);
-let $$l1 = bt(e => e.userStateLoaded);
-let $$d0 = bt(e => e.isStarterUser);
+import { atom } from "../figma_app/27355";
+import { createReduxSubscriptionAtomWithState } from "../905/270322";
+let $$a4 = createReduxSubscriptionAtomWithState(e => e.user);
+let $$s2 = atom(e => e($$a4)?.id);
+let $$o3 = atom(e => e($$a4)?.created_at);
+let $$l1 = createReduxSubscriptionAtomWithState(e => e.userStateLoaded);
+let $$d0 = createReduxSubscriptionAtomWithState(e => e.isStarterUser);
 export const UQ = $$d0;
 export const VF = $$l1;
 export const kS = $$s2;

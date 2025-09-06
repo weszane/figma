@@ -16,7 +16,7 @@ import { c$, ms, MM } from "../figma_app/236327";
 import { B as _$$B } from "../905/714743";
 import { $z } from "../figma_app/617427";
 import { Ph } from "../905/160095";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { oB, j7 } from "../905/929976";
 import { $O, Lo } from "../905/156213";
 import { $$do, F1, Nw, ui, LN, Kq } from "../905/941249";
@@ -88,7 +88,7 @@ let $$L0 = connect(e => ({
   let h = useMemo(() => e.includeCopyLinkButton ? jsx($n, {
     onClick: g,
     disabled: !m,
-    children: tx("team_join_links.copy_link")
+    children: renderI18nText("team_join_links.copy_link")
   }) : f(), [g, e.includeCopyLinkButton, m, f]);
   return !u && !e.teamJoinLinks || !teamPermissions.canAdmin && e.teamJoinLinks?.disabled ? null : jsxs(Fragment, {
     children: [jsxs("div", {
@@ -100,7 +100,7 @@ let $$L0 = connect(e => ({
       className: "team_join_link_permissions--inviteLinkTitleWrapper--LSkbL",
       children: [jsx("span", {
         className: "team_join_link_permissions--inviteHeader--80xpy",
-        children: tx("team_join_links.invite_link")
+        children: renderI18nText("team_join_links.invite_link")
       }), _ && f()]
     }), "loading" === c.status || e.teamJoinLinks?.url ? jsx(M, {
       dropdownShown: e.dropdownShown,
@@ -139,7 +139,7 @@ function D(e) {
       children: jsx(_$$d, {
         "aria-expanded": o(),
         disabled: e.loading,
-        "aria-label": _$$t("team_join_links.team_invite_link_settings"),
+        "aria-label": getI18nString("team_join_links.team_invite_link_settings"),
         onClick: () => {
           let e = n.current?.getBoundingClientRect();
           o() ? t(oB()) : e && t(j7({
@@ -151,7 +151,7 @@ function D(e) {
         },
         htmlAttributes: {
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": _$$t("team_join_links.team_invite_link_settings")
+          "data-tooltip": getI18nString("team_join_links.team_invite_link_settings")
         },
         children: jsx(_$$P, {})
       })
@@ -163,10 +163,10 @@ function D(e) {
       propagateCloseClick: !0,
       children: [jsx(c$, {
         onClick: e.resetInviteLinks,
-        children: tx("team_join_links.reset_invite_links")
+        children: renderI18nText("team_join_links.reset_invite_links")
       }), e.canAdmin && jsx(c$, {
         onClick: e.disableInviteLinks,
-        children: tx("team_join_links.turn_off_invite_links")
+        children: renderI18nText("team_join_links.turn_off_invite_links")
       })]
     })]
   });
@@ -241,10 +241,10 @@ function M(e) {
 function B(e) {
   return jsxs("div", {
     className: A,
-    children: [tx("team_join_links.share_a_secret_link_people_can_use_to_join_your_team"), " ", jsx(Ph, {
+    children: [renderI18nText("team_join_links.share_a_secret_link_people_can_use_to_join_your_team"), " ", jsx(Ph, {
       href: "#",
       onClick: e.turnOnInviteLinks,
-      children: tx("team_join_links.turn_on_invite_links")
+      children: renderI18nText("team_join_links.turn_on_invite_links")
     })]
   });
 }
@@ -258,23 +258,23 @@ Ju(function (e) {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: tx("team_join_links.reset_invite_links")
+          children: renderI18nText("team_join_links.reset_invite_links")
         })
       }), jsx(nB, {
-        children: tx("team_join_links.modal_description")
+        children: renderI18nText("team_join_links.modal_description")
       }), jsx(wi, {
         children: jsxs(jk, {
           children: [jsx($z, {
             variant: "secondary",
             onClick: () => t(Lo()),
-            children: tx("team_join_links.cancel")
+            children: renderI18nText("team_join_links.cancel")
           }), jsx($z, {
             variant: "destructive",
             onClick: () => {
               e.resetLink();
               t(Lo());
             },
-            children: tx("team_join_links.reset_links")
+            children: renderI18nText("team_join_links.reset_links")
           })]
         })
       })]

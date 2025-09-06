@@ -1,4 +1,4 @@
-import { Iz, zl, M2, eU } from "../figma_app/27355";
+import { createRemovableAtomFamily, atomStoreManager, createAtomWithEquality, atom } from "../figma_app/27355";
 import { Wh } from "../figma_app/615482";
 import { hR, hW } from "../905/508457";
 let $$s3 = hR([], {
@@ -7,7 +7,7 @@ let $$s3 = hR([], {
 let $$o1 = hR({}, {
   changeFileBehavior: hW.RESET_VALUE_ON_FILE_CHANGE
 });
-let $$l4 = Iz(e => hR({
+let $$l4 = createRemovableAtomFamily(e => hR({
   id: e,
   data: null
 }, {
@@ -15,10 +15,10 @@ let $$l4 = Iz(e => hR({
 }));
 export function $$d0(e) {
   let t = $$l4(e);
-  return zl.get(t).data;
+  return atomStoreManager.get(t).data;
 }
-let $$c5 = Wh(() => M2(eU({})));
-let $$u2 = Wh(() => eU(null));
+let $$c5 = Wh(() => createAtomWithEquality(atom({})));
+let $$u2 = Wh(() => atom(null));
 export const Dh = $$d0;
 export const Dq = $$o1;
 export const E_ = $$u2;

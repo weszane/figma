@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { Ez5, NLJ, glU, rcl } from "../figma_app/763686";
-import { fp, Xr, md } from "../figma_app/27355";
+import { useAtomValueAndSetter, Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { yE } from "../905/125333";
 import { V } from "../905/223767";
 import { to } from "../905/156213";
@@ -30,7 +30,7 @@ export function $$A6() {
   return ut(Ez5?.figjamState().isShapesSidebarOpen, !1);
 }
 export function $$O7() {
-  let [e, t] = fp(oh);
+  let [e, t] = useAtomValueAndSetter(oh);
   return useCallback(() => {
     Ez5?.figjamState().isShapesSidebarOpen.set(!0);
     t({
@@ -42,7 +42,7 @@ export function $$O7() {
 export function $$L9() {
   let e = Xr(oW);
   let t = Xr(Ai);
-  let [i, n] = fp(Hf);
+  let [i, n] = useAtomValueAndSetter(Hf);
   return useCallback(() => {
     ko({
       event: fT.ClosedPanel,
@@ -58,8 +58,8 @@ export function $$L9() {
 }
 export function $$R1() {
   let e = TA();
-  let t = md(Rg);
-  let [i, n] = fp(Gn);
+  let t = useAtomWithSubscription(Rg);
+  let [i, n] = useAtomValueAndSetter(Gn);
   useEffect(() => {
     if (e) return;
     let r = () => {
@@ -88,7 +88,7 @@ export function $$D4(e, t) {
   return t ? `${i} - ${t}` : i;
 }
 export function $$M2(e) {
-  let t = md(yE);
+  let t = useAtomWithSubscription(yE);
   if (!useSelector(e => e?.mirror?.appModel?.currentTool === NLJ.SHAPE_WHITEBOARD_PLATFORM) || !t) return !1;
   let i = e.type === PW.COMPONENT ? e.component_key : e.key;
   let r = e.type;

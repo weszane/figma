@@ -8,7 +8,7 @@ import { L as _$$L } from "../905/704296";
 import { getFeatureFlags } from "../905/601108";
 import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { b as _$$b } from "../905/985254";
 import { f as _$$f } from "../905/940356";
 import { e0 as _$$e } from "../905/696396";
@@ -38,7 +38,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { t as _$$t2 } from "../905/150656";
 import { J as _$$J } from "../905/270045";
 import { bL, DZ, mc, zW, c$ } from "../905/493196";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { iZ } from "../905/372672";
 import { X as _$$X } from "../905/27228";
 import { Dd, $G, Yu, Gy, vA } from "../905/193404";
@@ -64,7 +64,7 @@ function y({
     className: _,
     children: jsx("span", {
       className: A,
-      children: tx("design_systems.libraries_modal.plural.num_components_shown", {
+      children: renderI18nText("design_systems.libraries_modal.plural.num_components_shown", {
         numComponents: t
       })
     })
@@ -76,15 +76,15 @@ function b({
 }) {
   switch (e) {
     case _$$n.PRODUCT_COMPONENTS:
-      return tx("design_systems.libraries_modal.plural.num_library_components_shown", {
+      return renderI18nText("design_systems.libraries_modal.plural.num_library_components_shown", {
         numItems: t
       });
     case _$$n.STYLES:
-      return tx("design_systems.libraries_modal.plural.num_library_styles_shown", {
+      return renderI18nText("design_systems.libraries_modal.plural.num_library_styles_shown", {
         numItems: t
       });
     case _$$n.VARIABLES:
-      return tx("design_systems.libraries_modal.plural.num_library_variables_shown", {
+      return renderI18nText("design_systems.libraries_modal.plural.num_library_variables_shown", {
         numItems: t
       });
   }
@@ -122,14 +122,14 @@ function R({
     c(e);
   }, [c]);
   let A = useMemo(() => {
-    if (!getFeatureFlags().dsa_styles_variables_ui) return tx("design_systems.libraries_modal.component_insertions");
+    if (!getFeatureFlags().dsa_styles_variables_ui) return renderI18nText("design_systems.libraries_modal.component_insertions");
     switch (e) {
       case _$$n.PRODUCT_COMPONENTS:
-        return tx("design_systems.libraries_modal.component_insertions");
+        return renderI18nText("design_systems.libraries_modal.component_insertions");
       case _$$n.STYLES:
-        return tx("design_systems.libraries_modal.style_insertions");
+        return renderI18nText("design_systems.libraries_modal.style_insertions");
       case _$$n.VARIABLES:
-        return tx("design_systems.libraries_modal.variable_insertions");
+        return renderI18nText("design_systems.libraries_modal.variable_insertions");
     }
   }, [e]);
   let y = useMemo(() => x()(h, "library_file_key"), [h]);
@@ -155,20 +155,20 @@ function R({
       children: [s && jsx("span", {
         className: "dsa_file_view_analytics_header--comparisonDot--Ftd-Z"
       }), getFeatureFlags().dse_fpl_wave_1 ? jsx(_$$h, {
-        labelContent: tx("design_systems.libraries_modal.compare_with"),
+        labelContent: renderI18nText("design_systems.libraries_modal.compare_with"),
         value: s ?? void 0,
         onChange: E,
         options: b,
-        placeholder: _$$t("design_systems.libraries_modal.select_library"),
-        resetOption: _$$t("design_systems.libraries_modal.none")
+        placeholder: getI18nString("design_systems.libraries_modal.select_library"),
+        resetOption: getI18nString("design_systems.libraries_modal.none")
       }) : jsxs(Fragment, {
         children: [jsx("span", {
           className: "dsa_file_view_analytics_header--libraryComparisonText--yPSZD",
-          children: tx("design_systems.libraries_modal.compare_with")
+          children: renderI18nText("design_systems.libraries_modal.compare_with")
         }), jsxs("span", {
           onClick: g,
           className: "dsa_file_view_analytics_header--libraryComparisonDropdown--RjNol",
-          children: [o ?? tx("design_systems.libraries_modal.select_library"), jsx("div", {
+          children: [o ?? renderI18nText("design_systems.libraries_modal.select_library"), jsx("div", {
             className: "dsa_file_view_analytics_header--dropdownIcon--lXL7e",
             children: jsx(_$$r, {})
           })]
@@ -178,7 +178,7 @@ function R({
             children: [jsx(MM, {
               onClick: l,
               checked: null == s,
-              children: tx("design_systems.libraries_modal.none")
+              children: renderI18nText("design_systems.libraries_modal.none")
             }, "none"), h.map(e => jsx(rr, {
               onClick: _(e),
               innerText: "DS Analytics Compare Libraries",
@@ -303,14 +303,14 @@ class eg extends PureComponent {
               size: "sm"
             })
           }), jsx("div", {
-            children: tx("design_systems.libraries_modal.loading_library_activity")
+            children: renderI18nText("design_systems.libraries_modal.loading_library_activity")
           })]
         })
       }), jsx("div", {
         className: ea,
         children: jsx("div", {
           className: er,
-          children: tx("design_systems.libraries_modal.top_teams")
+          children: renderI18nText("design_systems.libraries_modal.top_teams")
         })
       }), jsx("div", {
         className: ei,
@@ -412,7 +412,7 @@ class eg extends PureComponent {
           "data-tooltip-show-above": !0,
           "data-tooltip-show-immediately": !0,
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": [_$$t("design_systems.libraries_modal.dsa_graph_tooltip", {
+          "data-tooltip": [getI18nString("design_systems.libraries_modal.dsa_graph_tooltip", {
             numInsertions: e[r].value
           }), e[r].date.toLocaleDateString()].join("\n"),
           children: jsx("div", {
@@ -496,7 +496,7 @@ class eg extends PureComponent {
         className: ea,
         children: [jsx("div", {
           className: er,
-          children: tx("design_systems.libraries_modal.top_teams")
+          children: renderI18nText("design_systems.libraries_modal.top_teams")
         }), F.length > 0 ? jsx(e_, {
           name: this.props.libraryFile.name,
           usage: F
@@ -542,7 +542,7 @@ function ef({
           children: e.team_name
         }), jsx("div", {
           className: ee,
-          children: tx("design_systems.libraries_modal.plural.insert", {
+          children: renderI18nText("design_systems.libraries_modal.plural.insert", {
             insertCount: +e.num_insertions
           })
         }), jsx("div", {
@@ -552,7 +552,7 @@ function ef({
       }, i)), 0 === e.length && 0 === t && jsx("div", {
         className: J,
         children: jsx("div", {
-          children: tx("design_systems.libraries_modal.no_usage_recorded")
+          children: renderI18nText("design_systems.libraries_modal.no_usage_recorded")
         })
       })]
     })]
@@ -565,7 +565,7 @@ function e_({
   return jsx("div", {
     children: jsxs("div", {
       className: V,
-      children: [tx("design_systems.libraries_modal.plural.num_teams_total", {
+      children: [renderI18nText("design_systems.libraries_modal.plural.num_teams_total", {
         teamCount: t.length
       }), jsx(eA, {
         name: e,
@@ -578,19 +578,19 @@ function eA({
   name: e,
   usage: t
 }) {
-  let i = [[_$$t("design_systems.libraries_modal.dsa_csv_team_id"), _$$t("design_systems.libraries_modal.dsa_csv_team_name"), _$$t("design_systems.libraries_modal.dsa_csv_num_insertions"), _$$t("design_systems.libraries_modal.dsa_csv_percent_insertions")].join(",")];
+  let i = [[getI18nString("design_systems.libraries_modal.dsa_csv_team_id"), getI18nString("design_systems.libraries_modal.dsa_csv_team_name"), getI18nString("design_systems.libraries_modal.dsa_csv_num_insertions"), getI18nString("design_systems.libraries_modal.dsa_csv_percent_insertions")].join(",")];
   for (let e of t) i.push(`${e.team_id},${e.team_name},${e.num_insertions},${e.percent_insertions}`);
   let r = "data:text/plain;charset=utf-8," + encodeURIComponent(i.join("\r\n"));
   return jsx("span", {
     className: _$$s.ml12.$,
     children: jsx(Ph, {
       href: r,
-      download: _$$t("design_systems.libraries_modal.dsa_csv_file_name", {
+      download: getI18nString("design_systems.libraries_modal.dsa_csv_file_name", {
         libraryName: e
       }),
       innerText: "DSAnalytics Download CSV",
       trusted: !0,
-      children: tx("design_systems.libraries_modal.download_csv")
+      children: renderI18nText("design_systems.libraries_modal.download_csv")
     })
   });
 }
@@ -671,7 +671,7 @@ let eS = _$$ex("dsa_graph", function ({
   return jsxs("div", {
     className: _$$s.flex.flexColumn.itemsCenter.justifyCenter.$,
     children: [jsx("div", {
-      children: tx("design_systems.libraries_modal.dsa_graph_tooltip", {
+      children: renderI18nText("design_systems.libraries_modal.dsa_graph_tooltip", {
         numInsertions: i
       })
     }), jsx("div", {
@@ -743,14 +743,14 @@ function eT({}) {
           className: X,
           children: jsx(_$$k2, {})
         }), jsx("div", {
-          children: tx("design_systems.libraries_modal.loading_library_activity")
+          children: renderI18nText("design_systems.libraries_modal.loading_library_activity")
         })]
       })
     }), jsx("div", {
       className: ea,
       children: jsx("div", {
         className: er,
-        children: tx("design_systems.libraries_modal.top_teams")
+        children: renderI18nText("design_systems.libraries_modal.top_teams")
       })
     }), jsx("div", {
       className: ei,
@@ -926,7 +926,7 @@ function ek({
       className: ea,
       children: [jsx("h4", {
         className: er,
-        children: tx("design_systems.libraries_modal.top_teams")
+        children: renderI18nText("design_systems.libraries_modal.top_teams")
       }), o.length > 0 ? jsx(eF, {
         name: i.name,
         usage: o,
@@ -1074,7 +1074,7 @@ function eL({
           children: e.team_name
         }), jsx("div", {
           className: "library_analytics_view--insertCount--UXHQd library_analytics_view--numColGray--OS-BX",
-          children: tx("design_systems.libraries_modal.plural.insert_count", {
+          children: renderI18nText("design_systems.libraries_modal.plural.insert_count", {
             insertCount: +e.num_insertions
           })
         }), jsx("div", {
@@ -1084,7 +1084,7 @@ function eL({
       }, i)), 0 === e.length && 0 === t && jsx("div", {
         className: J,
         children: jsx("div", {
-          children: tx("design_systems.libraries_modal.no_usage_recorded")
+          children: renderI18nText("design_systems.libraries_modal.no_usage_recorded")
         })
       })]
     })]
@@ -1098,7 +1098,7 @@ function eF({
   return jsx("div", {
     children: jsxs("div", {
       className: V,
-      children: [tx("design_systems.libraries_modal.plural.num_teams_total", {
+      children: [renderI18nText("design_systems.libraries_modal.plural.num_teams_total", {
         teamCount: i.length
       }), jsx(eM, {
         name: t,
@@ -1113,20 +1113,20 @@ function eM({
   name: t,
   usage: i
 }) {
-  let r = [[_$$t("design_systems.libraries_modal.dsa_csv_team_id"), _$$t("design_systems.libraries_modal.dsa_csv_team_name"), _$$t("design_systems.libraries_modal.dsa_csv_num_insertions"), _$$t("design_systems.libraries_modal.dsa_csv_percent_insertions")].join(",")];
+  let r = [[getI18nString("design_systems.libraries_modal.dsa_csv_team_id"), getI18nString("design_systems.libraries_modal.dsa_csv_team_name"), getI18nString("design_systems.libraries_modal.dsa_csv_num_insertions"), getI18nString("design_systems.libraries_modal.dsa_csv_percent_insertions")].join(",")];
   for (let e of i) r.push(`${e.team_id},${e.team_name},${e.num_insertions},${e.percent_insertions}`);
   let a = "data:text/plain;charset=utf-8," + encodeURIComponent(r.join("\r\n"));
   return jsx("span", {
     className: _$$s.ml12.$,
     children: jsx(Ph, {
       href: a,
-      download: _$$t("design_systems.libraries_modal.dsa_csv_team_file_name", {
+      download: getI18nString("design_systems.libraries_modal.dsa_csv_team_file_name", {
         libraryName: t,
         assetType: e
       }),
       innerText: "DSAnalytics Download CSV",
       trusted: !0,
-      children: tx("design_systems.libraries_modal.download_csv")
+      children: renderI18nText("design_systems.libraries_modal.download_csv")
     })
   });
 }
@@ -1210,7 +1210,7 @@ function e$({
   let A = useId();
   let y = useCallback(e => {
     g(e);
-    az.trackDefinedEvent("design_systems_analytics.dsa_variable_set_selected", {
+    analyticsEventManager.trackDefinedEvent("design_systems_analytics.dsa_variable_set_selected", {
       variableSetId: e,
       previousVariableSetId: h,
       fileKey: l?.key,
@@ -1241,26 +1241,26 @@ function e$({
         manager: x,
         children: [jsx(_$$t2.Tab, {
           ...I.variables,
-          children: _$$t("design_systems.libraries_modal.variables")
+          children: getI18nString("design_systems.libraries_modal.variables")
         }), jsx(_$$t2.Tab, {
           ...I.modes,
-          children: _$$t("design_systems.libraries_modal.modes")
+          children: getI18nString("design_systems.libraries_modal.modes")
         })]
       }), m && jsxs("div", {
         className: _$$s.flex.alignCenter.gap8.$,
         children: [jsx(_$$J, {
           className: "library_item_stats_by_asset--dropdownLabel--pciWg text--fontPos11--2LvXf text--_fontBase--QdLsd",
           htmlFor: A,
-          children: _$$t("design_systems.libraries_modal.collection")
+          children: getI18nString("design_systems.libraries_modal.collection")
         }), jsxs(bL, {
           value: h,
           onChange: y,
           children: [jsx(DZ, {
             id: A,
-            children: _?.name ?? tx("design_systems.libraries_modal.all")
+            children: _?.name ?? renderI18nText("design_systems.libraries_modal.all")
           }), jsxs(mc, {
             children: [jsx(zW, {
-              children: tx("design_systems.libraries_modal.all")
+              children: renderI18nText("design_systems.libraries_modal.all")
             }), i.map(e => jsx(c$, {
               value: e.key,
               children: e.name
@@ -1347,7 +1347,7 @@ export function $$eJ0({
         }) : jsx(eg, {
           libraryFile: a,
           comparisonFileKey: _,
-          comparisonFileName: b ?? _$$t("design_systems.libraries_modal.select_library"),
+          comparisonFileName: b ?? getI18nString("design_systems.libraries_modal.select_library"),
           numDays: _$$o[t]
         }, t)), isLoading && jsx(FO, {}), !isLoading && (getFeatureFlags().dsa_styles_variables_ui ? jsx(eq, {
           libraryFile: a,
@@ -1384,14 +1384,14 @@ function e1() {
     children: [jsx(_$$B, {}), jsxs("div", {
       className: _$$s.flex.flex1.flexColumn.gap1.$,
       children: [jsx("strong", {
-        children: tx("design_systems.libraries_modal.dsa_missing_data_header")
+        children: renderI18nText("design_systems.libraries_modal.dsa_missing_data_header")
       }), jsx("div", {
-        children: tx("design_systems.libraries_modal.dsa_missing_data_message")
+        children: renderI18nText("design_systems.libraries_modal.dsa_missing_data_message")
       })]
     }), jsx("div", {
       className: _$$s.flex.itemsCenter.$,
       children: jsx(_$$K, {
-        "aria-label": _$$t("design_systems.libraries_modal.dsa_missing_data_dismiss"),
+        "aria-label": getI18nString("design_systems.libraries_modal.dsa_missing_data_dismiss"),
         onClick: i,
         children: jsx(_$$L, {})
       })

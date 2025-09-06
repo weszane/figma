@@ -2,9 +2,9 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useSelector } from "../vendor/514228";
 import { $n } from "../905/521428";
 import { Osy } from "../figma_app/763686";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { y as _$$y } from "../figma_app/404310";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { X } from "../figma_app/521331";
 import { M } from "../469e6e40/302359";
 import { Ku } from "../figma_app/740163";
@@ -35,7 +35,7 @@ export function $$y0({
     shouldResetOnSelectionChange: !0
   });
   return y || visibleItems.length ? jsxs(VZ, {
-    title: _$$t("dev_handoff.selection_colors"),
+    title: getI18nString("dev_handoff.selection_colors"),
     recordingKey: "handoffColorStyles",
     additionalHeaders: n ? void 0 : jsx(Af, {}),
     fadedTitle: n,
@@ -49,12 +49,12 @@ export function $$y0({
         children: jsx($n, {
           variant: "secondary",
           onClick: () => {
-            sx("Show Selection Paints For Large Selection", {
+            trackEventAnalytics("Show Selection Paints For Large Selection", {
               fileKey: g || ""
             });
             Osy.ignoreLimitWhenCollectingPaints();
           },
-          children: tx("dev_handoff.selection_colors.show_colors")
+          children: renderI18nText("dev_handoff.selection_colors.show_colors")
         })
       })
     }), visibleItems.map((e, t) => e.type === q.STYLE ? jsx(b, {

@@ -4,15 +4,15 @@ import { useDispatch, useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { NLJ, Ez5, m1T, QOV } from "../figma_app/763686";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import c from "../vendor/635";
 import { A as _$$A } from "../vendor/90566";
 import { am } from "../figma_app/901889";
 import { ZC } from "../figma_app/39751";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { Point } from "../905/736624";
 import { WN } from "../figma_app/638601";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { wg, RP } from "../figma_app/770088";
 import { j7 } from "../905/929976";
 import { qN } from "../905/234821";
@@ -136,9 +136,9 @@ let er = memo(function (e) {
   let ex = WN();
   let [eb, ey] = useState(void 0);
   let [eC, ew] = useState(!1);
-  let ej = md(ux);
+  let ej = useAtomWithSubscription(ux);
   let ek = useRef(null);
-  let eP = md(_$$R);
+  let eP = useAtomWithSubscription(_$$R);
   let eI = useSelector(e => ![m1T.DESIGN_LAYOUT, m1T.WHITEBOARD_LAYOUT, m1T.HISTORY, m1T.PREVIEW, m1T.COMMENTS, m1T.DEV_HANDOFF, m1T.SLIDE_LAYOUT, m1T.SITES_LAYOUT].includes(e.mirror.appModel.activeCanvasEditModeType) || e.mirror.appModel.activeUserAction !== QOV.DEFAULT);
   let eT = useSelector(e => e.mirror.appModel.activeCanvasEditModeType === m1T.COMMENTS);
   let eM = eI && (!et || et?.shouldOptimizeForIpadApp && et?.shouldFadeCommentsDuringEdit) || J === NLJ.MULTISELECT;
@@ -217,7 +217,7 @@ let er = memo(function (e) {
   let e$ = useCallback(e => {
     if (ez) {
       if ("function" != typeof ez.onViewportUpdate) {
-        $D(_$$e.WAYFINDING, Error("pinRenderer.onViewportUpdate is not a function"), {
+        reportError(_$$e.WAYFINDING, Error("pinRenderer.onViewportUpdate is not a function"), {
           extra: {
             pinRendererProperties: Object.getOwnPropertyNames(ez)
           }
@@ -517,7 +517,7 @@ let er = memo(function (e) {
     }), ta ? jsxs(_$$v, {
       isAccessible: eT,
       role: "region",
-      "aria-label": _$$t("comments.accessibility_pin_region_name"),
+      "aria-label": getI18nString("comments.accessibility_pin_region_name"),
       children: [jsx("clustered-pins", {
         onKeyDown: tc,
         ref: e8

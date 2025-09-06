@@ -6,16 +6,16 @@ import { K as _$$K } from "../905/443068";
 import { C as _$$C } from "../905/520159";
 import { N as _$$N } from "../905/301843";
 import { W as _$$W } from "../905/865092";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { e as _$$e2 } from "../905/280005";
 import { R as _$$R } from "../figma_app/313269";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { $M } from "../figma_app/930338";
 import { P as _$$P } from "../905/347284";
 import { B as _$$B } from "../905/714743";
 import { x as _$$x } from "../905/868466";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
 import { H8, Pf } from "../905/590952";
 import { X as _$$X } from "../figma_app/514836";
@@ -119,7 +119,7 @@ function Z({
 function Q({
   augmentedExtension: e
 }) {
-  let t = md(_$$t3);
+  let t = useAtomWithSubscription(_$$t3);
   return jsx(M6, {
     numResults: 1,
     moduleFilters: t,
@@ -133,7 +133,7 @@ function ee({
   onGoBack: t
 }) {
   let r = k0(e);
-  let s = r ? _$$t("qa.extensions.widget") : _$$t("qa.extensions.plugin");
+  let s = r ? getI18nString("qa.extensions.widget") : getI18nString("qa.extensions.plugin");
   let u = e.plugin_id;
   let _ = function (e) {
     let t = useDispatch();
@@ -162,7 +162,7 @@ function ee({
         className: _$$s.flex.flexRow.$,
         children: [jsx(_$$K, {
           onClick: t,
-          "aria-label": _$$t("qa.go_back"),
+          "aria-label": getI18nString("qa.go_back"),
           children: jsx(_$$C, {})
         }), jsx("div", {
           className: _$$s.pl8.colorText.textBodyLarge.$,
@@ -172,17 +172,17 @@ function ee({
         className: _$$s.flex.flexRow.itemsCenter.gap8.$,
         children: [jsx(_$$K, {
           onClick: _,
-          "aria-label": _$$t("qa.extensions.open_in_community"),
+          "aria-label": getI18nString("qa.extensions.open_in_community"),
           htmlAttributes: {
-            "data-tooltip": _$$t("qa.extensions.open_in_community"),
+            "data-tooltip": getI18nString("qa.extensions.open_in_community"),
             "data-tooltip-type": Ib.TEXT
           },
           children: jsx(_$$N, {})
         }), jsx(_$$K, {
           onClick: m,
-          "aria-label": _$$t("qa.copy_link"),
+          "aria-label": getI18nString("qa.copy_link"),
           htmlAttributes: {
-            "data-tooltip": _$$t("qa.copy_link"),
+            "data-tooltip": getI18nString("qa.copy_link"),
             "data-tooltip-type": Ib.TEXT
           },
           children: jsx(_$$W, {})
@@ -317,7 +317,7 @@ export function $$ea1({
   });
   return useCallback(() => {
     if (JT(e)) {
-      $D(_$$e.AI_FOR_PRODUCTION, Error("[Quick Actions] Trying to open details view for a local extension, which should not be possible."), {
+      reportError(_$$e.AI_FOR_PRODUCTION, Error("[Quick Actions] Trying to open details view for a local extension, which should not be possible."), {
         extra: {
           extensionId: e.extension.plugin_id,
           isWidget: k0(e.extension),
@@ -327,7 +327,7 @@ export function $$ea1({
       return;
     }
     if (!e.publishedExtension) {
-      $D(_$$e.AI_FOR_PRODUCTION, Error("[Quick Actions] Trying to open details view for an extension without a published extension, which should not be possible."), {
+      reportError(_$$e.AI_FOR_PRODUCTION, Error("[Quick Actions] Trying to open details view for an extension without a published extension, which should not be possible."), {
         extra: {
           extensionId: e.extension.plugin_id,
           isWidget: k0(e.extension),

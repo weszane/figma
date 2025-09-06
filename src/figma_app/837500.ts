@@ -1,7 +1,7 @@
 import { throwTypeError } from "../figma_app/465776";
 import { daH } from "../figma_app/763686";
 import { YU } from "../figma_app/191804";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Tn, OF, Zv, L5, QE, B8 } from "../figma_app/728075";
 let $$l5 = "TYPESCRIPT";
 let $$d3 = ["BASH", "CPP", "CSS", "GO", "GRAPHQL", "HTML", "JAVASCRIPT", "JSON", "KOTLIN", "PLAINTEXT", "PYTHON", "RUBY", "RUST", "SQL", "SWIFT", "TYPESCRIPT"];
@@ -9,37 +9,37 @@ let $$c6 = {
   format: e => {
     switch (e) {
       case "CSS":
-        return t("whiteboard.code_blocks.css");
+        return getI18nString("whiteboard.code_blocks.css");
       case "TYPESCRIPT":
-        return t("whiteboard.code_blocks.type_script");
+        return getI18nString("whiteboard.code_blocks.type_script");
       case "CPP":
-        return t("whiteboard.code_blocks.c");
+        return getI18nString("whiteboard.code_blocks.c");
       case "RUBY":
-        return t("whiteboard.code_blocks.ruby");
+        return getI18nString("whiteboard.code_blocks.ruby");
       case "JAVASCRIPT":
-        return t("whiteboard.code_blocks.java_script");
+        return getI18nString("whiteboard.code_blocks.java_script");
       case "HTML":
-        return t("whiteboard.code_blocks.html");
+        return getI18nString("whiteboard.code_blocks.html");
       case "JSON":
-        return t("whiteboard.code_blocks.json");
+        return getI18nString("whiteboard.code_blocks.json");
       case "GRAPHQL":
-        return t("whiteboard.code_blocks.graph_ql");
+        return getI18nString("whiteboard.code_blocks.graph_ql");
       case "PYTHON":
-        return t("whiteboard.code_blocks.python");
+        return getI18nString("whiteboard.code_blocks.python");
       case "GO":
-        return t("whiteboard.code_blocks.go");
+        return getI18nString("whiteboard.code_blocks.go");
       case "SQL":
-        return t("whiteboard.code_blocks.sql");
+        return getI18nString("whiteboard.code_blocks.sql");
       case "SWIFT":
-        return t("whiteboard.code_blocks.swift");
+        return getI18nString("whiteboard.code_blocks.swift");
       case "KOTLIN":
-        return t("whiteboard.code_blocks.kotlin");
+        return getI18nString("whiteboard.code_blocks.kotlin");
       case "RUST":
-        return t("whiteboard.code_blocks.rust");
+        return getI18nString("whiteboard.code_blocks.rust");
       case "BASH":
-        return t("whiteboard.code_blocks.bash");
+        return getI18nString("whiteboard.code_blocks.bash");
       case "PLAINTEXT":
-        return t("whiteboard.code_blocks.plaintext");
+        return getI18nString("whiteboard.code_blocks.plaintext");
       default:
         return "";
     }
@@ -102,19 +102,19 @@ export let $$m0 = {
   format: e => {
     switch (e) {
       case "FIGJAM_DARK":
-        return t("whiteboard.code_blocks.theme.figjam_dark");
+        return getI18nString("whiteboard.code_blocks.theme.figjam_dark");
       case "DRACULA":
-        return t("whiteboard.code_blocks.theme.dracula");
+        return getI18nString("whiteboard.code_blocks.theme.dracula");
       case "DUOTONE_SEA":
-        return t("whiteboard.code_blocks.theme.duotone_sea");
+        return getI18nString("whiteboard.code_blocks.theme.duotone_sea");
       case "DUOTONE_SPACE":
-        return t("whiteboard.code_blocks.theme.duotone_space");
+        return getI18nString("whiteboard.code_blocks.theme.duotone_space");
       case "DUOTONE_EARTH":
-        return t("whiteboard.code_blocks.theme.duotone_earth");
+        return getI18nString("whiteboard.code_blocks.theme.duotone_earth");
       case "DUOTONE_FOREST":
-        return t("whiteboard.code_blocks.theme.duotone_forest");
+        return getI18nString("whiteboard.code_blocks.theme.duotone_forest");
       case "DUOTONE_LIGHT":
-        return t("whiteboard.code_blocks.theme.duotone_light");
+        return getI18nString("whiteboard.code_blocks.theme.duotone_light");
       default:
         return throwTypeError(e);
     }

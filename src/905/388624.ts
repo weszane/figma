@@ -9,7 +9,7 @@ import { Ex, zE } from "../figma_app/919079";
 import { B as _$$B } from "../905/714743";
 import { t as _$$t } from "../905/331623";
 import { n as _$$n } from "../figma_app/3731";
-import { t as _$$t2, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { _l } from "../figma_app/976345";
 import { cs, UP, T9, nR } from "../figma_app/740025";
@@ -47,7 +47,7 @@ function P(e, t, i, r, a, s, o) {
     }),
     itemBadge: cs(e) ? jsx(Ex, {
       className: w,
-      text: _$$t2("navbar.community.admin_label"),
+      text: getI18nString("navbar.community.admin_label"),
       color: zE.INVERT,
       subtle: !0
     }) : void 0,
@@ -85,7 +85,7 @@ function z() {
   let X = useSelector(e => e.userNotifications.communityProfileBellStates);
   useEffect(() => {
     nm()(t).catch(e => {
-      let i = e?.data?.message || _$$t2("file_browser.error_try_again");
+      let i = e?.data?.message || getI18nString("file_browser.error_try_again");
       t(_$$F.enqueue({
         message: i,
         type: "error"
@@ -124,7 +124,7 @@ function z() {
             optionHeight: G,
             itemBadge: o ? jsx(Ex, {
               className: "workspace_switcher--badge--lsDwX",
-              text: _$$t2("navbar.navbar.guest"),
+              text: getI18nString("navbar.navbar.guest"),
               color: zE.INVERT,
               subtle: !0
             }) : void 0,
@@ -225,7 +225,7 @@ function z() {
               isActive: A,
               itemBadge: jsx(Ex, {
                 className: w,
-                text: _$$t2("navbar.community.admin_label"),
+                text: getI18nString("navbar.community.admin_label"),
                 color: zE.INVERT,
                 subtle: !0
               }),
@@ -252,11 +252,11 @@ function z() {
         }(x.byId, $, W, K, Y, z, X, q, s, t);
         if (i.length > 1) {
           let t = [{
-            displayText: Z ? "" : _$$t2("navbar.community.browse_community_workspace_switcher_label"),
+            displayText: Z ? "" : getI18nString("navbar.community.browse_community_workspace_switcher_label"),
             optionHeight: V,
             itemBadge: Z ? jsxs("div", {
               className: "workspace_switcher--browseCommunityRowContainer--X6NW8",
-              children: [tx("navbar.community.browse_community_workspace_switcher_label"), jsx("a", {
+              children: [renderI18nText("navbar.community.browse_community_workspace_switcher_label"), jsx("a", {
                 href: "https://help.figma.com/hc/articles/4404108672663",
                 target: "_blank",
                 className: "workspace_switcher--infoBadgeContainer--5BRbv",
@@ -272,7 +272,7 @@ function z() {
             disabled: !0
           }];
           return [{
-            displayText: _$$t2("navbar.community.community_label"),
+            displayText: getI18nString("navbar.community.community_label"),
             optionHeight: V,
             icon: jsxs("div", {
               className: R,
@@ -294,7 +294,7 @@ function z() {
         {
           let t = i[0];
           return [{
-            displayText: _$$t2("navbar.community.community_label"),
+            displayText: getI18nString("navbar.community.community_label"),
             sideText: t.sideText,
             rightJustifySideText: !0,
             optionHeight: V,

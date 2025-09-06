@@ -3,8 +3,8 @@ import { useState, useRef, useCallback, useEffect, useMemo } from "react";
 import { Lz, L0, Ri, Hg, Aw, yh, ve, w4, $P, ij, $t, b6, Z9, qf, Pe } from "../figma_app/770359";
 import { throwTypeError } from "../figma_app/465776";
 import { bL, mc, YJ, q7, Ov, ME, b as _$$b } from "../figma_app/860955";
-import { nl } from "../figma_app/257275";
-import { t as _$$t } from "../905/303541";
+import { isInteractionPathCheck } from "../figma_app/897289";
+import { getI18nString } from "../905/303541";
 import { DP } from "../905/640017";
 import { tS } from "../figma_app/516028";
 import { useDispatch } from "../vendor/514228";
@@ -18,12 +18,12 @@ import { W as _$$W } from "../905/592530";
 import { L as _$$L } from "../905/704296";
 import { k as _$$k } from "../905/888808";
 import { a as _$$a } from "../905/964520";
-import { eU, fp } from "../figma_app/27355";
+import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { L as _$$L2 } from "../905/408237";
 import { BK } from "../905/848862";
 import { noop } from "../905/834956";
 import { Nx, AF } from "../figma_app/346422";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { A9 } from "../905/414242";
 import { wr, ox, LI, _Z, Yt } from "../905/319777";
 var C = (e => (e.MATCH_CASE = "MATCH_CASE", e.USE_REGEX = "USE_REGEX", e.MATCH_WHOLE_WORDS = "MATCH_WHOLE_WORDS", e))(C || {});
@@ -39,7 +39,7 @@ function T(e) {
       throw Error(`Unknown search option type: ${e}`);
   }
 }
-let k = eU({
+let k = atom({
   matchCase: !1,
   useRegex: !1,
   matchWholeWords: !1
@@ -52,7 +52,7 @@ function R({
   let [s, o] = useState("");
   let [l, c] = useState("");
   let [u, R] = useState(!1);
-  let [N, P] = fp(k);
+  let [N, P] = useAtomValueAndSetter(k);
   let O = useRef(null);
   let D = useDispatch();
   let L = BK("search-options-dropdown");
@@ -154,15 +154,15 @@ function R({
     s && void 0 !== l && e.current && (yh(e.current), z());
   };
   let Y = [{
-    displayText: _$$t("sites.code_component.search.match_case"),
+    displayText: getI18nString("sites.code_component.search.match_case"),
     isChecked: N.matchCase,
     name: C.MATCH_CASE
   }, {
-    displayText: _$$t("sites.code_component.search.use_regex"),
+    displayText: getI18nString("sites.code_component.search.use_regex"),
     isChecked: N.useRegex,
     name: C.USE_REGEX
   }, {
-    displayText: _$$t("sites.code_component.search.match_whole_words"),
+    displayText: getI18nString("sites.code_component.search.match_whole_words"),
     isChecked: N.matchWholeWords,
     name: C.MATCH_WHOLE_WORDS
   }];
@@ -170,7 +170,7 @@ function R({
     children: [jsx(_$$K, {
       ref: O,
       "aria-expanded": !1,
-      "aria-label": _$$t("sites.code_component.search.search_options"),
+      "aria-label": getI18nString("sites.code_component.search.search_options"),
       onClick: e => {
         L.toggle({});
       },
@@ -206,7 +206,7 @@ function R({
         className: "x12m7bs9 x1v8gsql x1iyjqo2 xeuugli",
         ref: i,
         "data-testid": "code-search-input",
-        placeholder: _$$t("fullscreen_actions.find"),
+        placeholder: getI18nString("fullscreen_actions.find"),
         value: s,
         onChange: e => {
           o(e.target.value);
@@ -217,21 +217,21 @@ function R({
         }
       }), jsx("span", {
         className: "x1n0bwc9 xuxw1ft x1ug7bdz",
-        children: _$$t("sites.code_component.search.num_matches", {
+        children: getI18nString("sites.code_component.search.num_matches", {
           matchIndex: F,
           totalMatches: j
         })
       })]
     }), jsx(_$$K, {
-      "aria-label": _$$t("sites.code_component.search.find_previous"),
+      "aria-label": getI18nString("sites.code_component.search.find_previous"),
       onClick: Z,
       children: jsx(_$$N, {})
     }), jsx(_$$K, {
-      "aria-label": _$$t("sites.code_component.search.find_next"),
+      "aria-label": getI18nString("sites.code_component.search.find_next"),
       onClick: $,
       children: jsx(_$$W, {})
     }), q, jsx(_$$K, {
-      "aria-label": _$$t("common.close"),
+      "aria-label": getI18nString("common.close"),
       onClick: t,
       children: jsx(_$$L, {})
     })]
@@ -240,7 +240,7 @@ function R({
     className: "x1q0g3np x1v8gsql xxk0z11 x1n3k48f x78zum5 x6s0dn4 xilkfi8 x1cmmqis x19y5rnk x3hja5i x5xtlel x1iyjqo2 xg2d0mh",
     children: jsx(_$$L2, {
       className: "x12m7bs9 x1v8gsql x1iyjqo2 xeuugli",
-      placeholder: _$$t("sites.code_component.search.replace_placeholder"),
+      placeholder: getI18nString("sites.code_component.search.replace_placeholder"),
       value: l,
       onChange: e => {
         c(e.target.value);
@@ -275,12 +275,12 @@ function R({
       variant: "secondary",
       onClick: W,
       disabled: ee,
-      children: _$$t("sites.code_component.search.replace_next")
+      children: getI18nString("sites.code_component.search.replace_next")
     }), jsx($n, {
       variant: "secondary",
       onClick: K,
       disabled: ee,
-      children: _$$t("sites.code_component.search.replace_all")
+      children: getI18nString("sites.code_component.search.replace_all")
     })]
   });
   return jsx("div", {
@@ -291,7 +291,7 @@ function R({
       children: [jsx("div", {
         className: "xvijh9v",
         children: jsx(_$$K, {
-          "aria-label": _$$t("sites.code_component.search.replace"),
+          "aria-label": getI18nString("sites.code_component.search.replace"),
           onClick: () => R(!u),
           children: u ? jsx(_$$k, {}) : jsx(_$$a, {})
         })
@@ -311,7 +311,7 @@ function O({
   codeMirrorViewRef: i,
   formatCode: r
 }) {
-  let a = Ay.windows ? "Ctrl+" : "\u2318";
+  let a = BrowserInfo.windows ? "Ctrl+" : "\u2318";
   let s = () => {
     let e = i?.current?.state;
     if (e) return {
@@ -339,7 +339,7 @@ function O({
             }];
             i?.current?.dispatch(i?.current?.state.update(...t));
           },
-          children: [_$$t("sites.code_component.editor_context_menu.cut"), jsx(Ov, {
+          children: [getI18nString("sites.code_component.editor_context_menu.cut"), jsx(Ov, {
             children: jsx(ME, {
               children: `${a}X`
             })
@@ -352,7 +352,7 @@ function O({
             let e = s();
             e && navigator.clipboard.writeText(e.text);
           },
-          children: [_$$t("sites.code_component.editor_context_menu.copy"), jsx(Ov, {
+          children: [getI18nString("sites.code_component.editor_context_menu.copy"), jsx(Ov, {
             children: jsx(ME, {
               children: `${a}C`
             })
@@ -372,7 +372,7 @@ function O({
               i?.current?.dispatch(i?.current?.state.update(...n));
             });
           },
-          children: [_$$t("sites.code_component.editor_context_menu.paste"), jsx(Ov, {
+          children: [getI18nString("sites.code_component.editor_context_menu.paste"), jsx(Ov, {
             children: jsx(ME, {
               children: `${a}V`
             })
@@ -386,7 +386,7 @@ function O({
               }
             }));
           },
-          children: [_$$t("sites.code_component.editor_context_menu.select_all"), jsx(Ov, {
+          children: [getI18nString("sites.code_component.editor_context_menu.select_all"), jsx(Ov, {
             children: jsx(ME, {
               children: `${a}A`
             })
@@ -398,7 +398,7 @@ function O({
           onClick: () => {
             r?.();
           },
-          children: _$$t("sites.code_component.editor_context_menu.format_code")
+          children: getI18nString("sites.code_component.editor_context_menu.format_code")
         })
       })]
     })
@@ -425,7 +425,7 @@ export function $$M0({
   largeFont: S = !1
 }) {
   let [w, C] = useState(null);
-  let [T, k] = useState(_$$t("sites.code_component.editor_statistics_line_column", {
+  let [T, k] = useState(getI18nString("sites.code_component.editor_statistics_line_column", {
     line: 1,
     column: 1
   }));
@@ -478,10 +478,10 @@ export function $$M0({
     let a = e.state.selection.asSingle().main;
     let s = r.length > 1 ? r[r.length - 1].length : a.to - t.from + 1;
     let o = n.length;
-    let l = o ? _$$t("sites.code_component.editor_statistics_selected_length", {
+    let l = o ? getI18nString("sites.code_component.editor_statistics_selected_length", {
       length: o
     }) : "";
-    k(`${_$$t("sites.code_component.editor_statistics_line_column", {
+    k(`${getI18nString("sites.code_component.editor_statistics_line_column", {
       line: i,
       column: s
     })}${l}`);
@@ -577,7 +577,7 @@ export function $$M0({
   let el = useCallback(e => {
     e.stopPropagation();
   }, []);
-  let ed = null === w ? null : "started" === w.status ? _$$t("sites.code_component.dependency_types_status_started") : "finished" === w.status ? _$$t("sites.code_component.dependency_types_status_finished") : _$$t("sites.code_component.dependency_types_status_progress", {
+  let ed = null === w ? null : "started" === w.status ? getI18nString("sites.code_component.dependency_types_status_started") : "finished" === w.status ? getI18nString("sites.code_component.dependency_types_status_finished") : getI18nString("sites.code_component.dependency_types_status_progress", {
     downloaded: w.downloaded ?? 0,
     total: w.total ?? 0
   });
@@ -607,7 +607,7 @@ export function $$M0({
         t.contentDOM.setAttribute("data-testid", "code-editor");
         V.current = t;
       }
-      nl() && A9(V.current);
+      isInteractionPathCheck() && A9(V.current);
     }
   }, [eo, A, ec, V]);
   return jsxs(Fragment, {

@@ -6,14 +6,14 @@ import { lQ } from "../905/934246";
 import { _ as _$$_ } from "../figma_app/496441";
 import { resourceUtils } from "../905/989992";
 import d from "classnames";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { N7, QV } from "../905/508367";
 import { IT } from "../905/864644";
 import { YO } from "../figma_app/672951";
-import { eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { oJ } from "../905/63728";
 import { Rs } from "../figma_app/288654";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { Ex, zE } from "../figma_app/919079";
 import { tH, H4 } from "../905/751457";
 import { Qp, JR, Wi } from "../figma_app/162641";
@@ -22,7 +22,7 @@ import { C as _$$C } from "../905/196436";
 import { B as _$$B } from "../905/714743";
 import { NU } from "../figma_app/204891";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { E as _$$E } from "../905/984674";
 import { kg, UN } from "../figma_app/976345";
 import { R as _$$R } from "../905/731725";
@@ -50,7 +50,7 @@ import { TA } from "../905/372672";
 import { FEntityType, FFileType } from "../figma_app/191312";
 import { qjT } from "../figma_app/43951";
 import { Bp } from "../figma_app/349248";
-import { wN } from "../figma_app/53721";
+import { mapFileTypeToEditorType } from "../figma_app/53721";
 import { f6, ai } from "../figma_app/915202";
 import { G as _$$G } from "../figma_app/471068";
 import { F as _$$F } from "../905/915030";
@@ -67,13 +67,13 @@ let eo = ex("team_folder_rename", function (e) {
   return jsxs("div", {
     className: _$$s.cursorDefault.colorTextTooltip.pl8.pr8.$,
     children: [jsx("span", {
-      children: tx("team_view.folder_list_card.team_root_folder_info")
+      children: renderI18nText("team_view.folder_list_card.team_root_folder_info")
     }), jsx("div", {
       className: _$$s.bl1.hFull.inline.bSolid.colorBorderMenu.ml8.mr8.$
     }), jsx(_$$_, {
       href: `/files/project/${folderId}?renameProject=true`,
       className: _$$s.cursorPointer.noUnderline.fontBold.colorTextTooltip.$,
-      children: tx("team_view.folder_list_card.team_root_folder_rename")
+      children: renderI18nText("team_view.folder_list_card.team_root_folder_rename")
     })]
   });
 }, e => ({
@@ -145,7 +145,7 @@ function em(e) {
     }) : t(sf({
       view: "fullscreen",
       fileKey: e.key,
-      editorType: wN(e.editor_type),
+      editorType: mapFileTypeToEditorType(e.editor_type),
       prevSelectedView: n
     }));
   }, [d, u, t, i.user, o]);
@@ -171,7 +171,7 @@ function em(e) {
     onClick: e.inItemsView ? lQ : e => {
       e.preventDefault();
       e.stopPropagation();
-      (2 === e.detail || Ay.mobile || Ay.tablet) && w(e);
+      (2 === e.detail || BrowserInfo.mobile || BrowserInfo.tablet) && w(e);
     },
     onContextMenu: e.inItemsView ? lQ : i => {
       i.stopPropagation();
@@ -289,8 +289,8 @@ function e_(e) {
           children: e.folderName
         }), r && jsx(Ex, {
           color: zE.WARNING_TERTIARY,
-          text: _$$t("locked_team.label.view_only"),
-          dataTooltip: _$$t("locked_team.label.tooltip"),
+          text: getI18nString("locked_team.label.view_only"),
+          dataTooltip: getI18nString("locked_team.label.tooltip"),
           dataTooltipType: Ib.TEXT,
           className: "folder_list_card--viewOnlyLabel--in8ZA"
         }), !r && t.is_connected_project && jsx("div", {
@@ -336,7 +336,7 @@ function eA({
     className: _$$s.h16.w150.$,
     animationType: JR.NO_SHIMMER
   });
-  let a = _$$t("file_browser.folder.number_of_files", {
+  let a = getI18nString("file_browser.folder.number_of_files", {
     numFiles: r.data,
     formattedNumFiles: _$$t2(r.data)
   });
@@ -366,7 +366,7 @@ function ey(e) {
   let p = t => {
     t.preventDefault();
     t.stopPropagation();
-    eD && sx("Open File Click", {
+    desktopAPIInstance && trackEventAnalytics("Open File Click", {
       fileKey: e.file.key,
       uiSelectedView: JSON.stringify({
         teamId: e.teamId
@@ -437,7 +437,7 @@ function eb(e) {
         e.stopPropagation();
       }
     },
-    "aria-label": _$$t("team_view.empty_file_tile.label"),
+    "aria-label": getI18nString("team_view.empty_file_tile.label"),
     className: "folder_list_card--emptyFileTile--nywuu",
     onClick: n => {
       n.preventDefault();

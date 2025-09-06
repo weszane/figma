@@ -8,9 +8,9 @@ import { glU, Ws0, mNT, Nfd, Ez5, K$p, mSn } from "../figma_app/763686";
 import { Tq, _H } from "../figma_app/243058";
 import { l7 } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
-import { eU, zl, fp, md, Xr } from "../figma_app/27355";
+import { atom, atomStoreManager, useAtomValueAndSetter, useAtomWithSubscription, Xr } from "../figma_app/27355";
 import { debugState } from "../905/407919";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { sf } from "../905/929976";
 import { Mk } from "../figma_app/31188";
 import { R9 } from "../905/977824";
@@ -32,15 +32,15 @@ import { VF } from "../figma_app/251814";
 import { cu } from "../figma_app/139865";
 import { wh, UM, Zr, ZY } from "../figma_app/114522";
 var $$M0 = (e => (e.BUILD = "build", e.RUNTIME = "runtime", e))($$M0 || {});
-let F = Wh(() => eU([]));
-let j = eU(null);
+let F = Wh(() => atom([]));
+let j = atom(null);
 export function $$U2() {
-  zl.set(F, []);
+  atomStoreManager.set(F, []);
 }
 export function $$B13() {
-  let [e, t] = fp(F);
-  let [r, i] = fp(j);
-  let a = md(wh);
+  let [e, t] = useAtomValueAndSetter(F);
+  let [r, i] = useAtomValueAndSetter(j);
+  let a = useAtomWithSubscription(wh);
   let s = Oc();
   useEffect(() => {
     null === r ? i(a) : JSON.stringify(a) !== JSON.stringify(r) && (s || t([]), i(a));
@@ -48,7 +48,7 @@ export function $$B13() {
   return [e, t];
 }
 export function $$G4(e) {
-  let t = md(Mk[PW.CODE_COMPONENT].local);
+  let t = useAtomWithSubscription(Mk[PW.CODE_COMPONENT].local);
   return e?.isCodeFile ? Object.values(t).filter(t => t.exportedFromCodeFileId === Tq.fromLocalNodeIdObj(e)).sort((e, t) => "default" === e.codeExportName ? -1 : "default" === t.codeExportName ? 1 : e.name.localeCompare(t.name)) : [];
 }
 export function $$V19() {
@@ -80,7 +80,7 @@ export function $$z9(e) {
     try {
       return _$$jT(t);
     } catch (e) {
-      $D(_$$e.MAKE, e);
+      reportError(_$$e.MAKE, e);
       return {};
     }
   }, e);
@@ -105,7 +105,7 @@ export function $$K8(e) {
     try {
       return K8(t);
     } catch (e) {
-      $D(_$$e.MAKE, e);
+      reportError(_$$e.MAKE, e);
       return {};
     }
   }, e);
@@ -148,7 +148,7 @@ export async function $$$1({
 }
 export function $$X20(e) {
   let t = getSingletonSceneGraph();
-  let [r, n] = fp(KL);
+  let [r, n] = useAtomValueAndSetter(KL);
   let i = Fk((e, t, r) => {
     if (!t) return null;
     if (t in r) return r[t];
@@ -174,7 +174,7 @@ export function $$X20(e) {
   return (i ? t.get(i) : null) ?? t.get(e ?? "");
 }
 export function $$q3() {
-  let [e, t] = fp(s0);
+  let [e, t] = useAtomValueAndSetter(s0);
   return useCallback(e => {
     e && (t(Nfd.FILE), UM(), l7.user("sites-add-code-instance-to-canvas", () => {
       glU.startInsertingCodeComponentOnCanvas(e.guid);
@@ -182,7 +182,7 @@ export function $$q3() {
   }, [t]);
 }
 export function $$J18() {
-  let e = Object.values(md(Mk[PW.CODE_FILE].local)).filter(e => !e.isSoftDeleted);
+  let e = Object.values(useAtomWithSubscription(Mk[PW.CODE_FILE].local)).filter(e => !e.isSoftDeleted);
   useEffect(() => {
     if (e.length > 0 && Ez5?.codeSelection().fullscreenCodeNodeIds.getCopy().length === 0) {
       let t = e[0]?.assetId;
@@ -206,7 +206,7 @@ function ee(e) {
 }
 export function $$et10() {
   let e = Oc();
-  let t = md(s0);
+  let t = useAtomWithSubscription(s0);
   let r = useRef(!0);
   let i = useRef(!1);
   let [a, s] = useState(null);
@@ -273,7 +273,7 @@ export function $$en5(e) {
 }
 export function $$ei11(e, t) {
   let r = getSingletonSceneGraph();
-  let i = md(s0);
+  let i = useAtomWithSubscription(s0);
   let a = $$en5(e);
   let s = function (e) {
     let t = $$G4($$en5(e));
@@ -283,7 +283,7 @@ export function $$ei11(e, t) {
     let i = n && _H.toGuidStrIfLocal(n);
     return i ? getSingletonSceneGraph().get(i) : null;
   }(e);
-  let o = md(TJ);
+  let o = useAtomWithSubscription(TJ);
   let l = a ? o[a.guid] ?? s?.guid ?? null : null;
   let u = l === s?.guid;
   let h = $$X20(l);
@@ -292,7 +292,7 @@ export function $$ei11(e, t) {
   let f = h?.guid;
   let E = useMemo(() => f ? [f] : [], [f]);
   let y = useMemo(() => m ? [m] : E, [m, E]);
-  let b = md(ZY) || i === Nfd.CODE || 0 === g.length;
+  let b = useAtomWithSubscription(ZY) || i === Nfd.CODE || 0 === g.length;
   let T = useMemo(() => u ? b ? y : g : E, [u, b, E, y, g]);
   return useMemo(() => {
     let e = getSingletonSceneGraph();

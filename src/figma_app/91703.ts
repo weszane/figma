@@ -1,14 +1,14 @@
 import { Ez5, Osy, E63 } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { NC } from "../905/17179";
-import { sx as _$$sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { GZ } from "../905/508367";
-import { eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { Ay } from "../905/612521";
 import { getInitialOptions } from "../figma_app/169182";
 import { LR } from "../figma_app/564528";
 import { YQ } from "../905/502364";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { sf } from "../905/929976";
 import { to } from "../905/156213";
 import { oI } from "../905/854717";
@@ -48,7 +48,7 @@ let $$V20 = NC("FULLSCREEN_SET_PREFERRED_VALUES_PICKER_LIST_LAYOUT");
 let $$H36 = NC("FULLSCREEN_SET_INSTANCE_SWAP_PICKER_LIST_LAYOUT");
 let $$z9 = NC("FULLSCREEN_SET_PICKER_LIST_LAYOUT");
 let $$W28 = nF((e, t) => {
-  _$$sx("Style Picker View Changed", {
+  trackEventAnalytics("Style Picker View Changed", {
     styleType: "FILL",
     oldViewMode: t.isListLayout ? "GRID" : "LIST",
     newViewMode: t.isListLayout ? "LIST" : "GRID"
@@ -85,7 +85,7 @@ function Q(e, t, r) {
     prototypeBackgroundPickerOpen: !0
   }) : c ? Y5.updateAppModel({
     prototypeBackgroundPickerOpen: !1
-  }) : u ? (Ez5?.propertiesPanelState().typeDetailsPanelOpen.set(!0), _$$sx("Type Details Panel Opened")) : p && Ez5?.propertiesPanelState().typeDetailsPanelOpen.set(!1);
+  }) : u ? (Ez5?.propertiesPanelState().typeDetailsPanelOpen.set(!0), trackEventAnalytics("Type Details Panel Opened")) : p && Ez5?.propertiesPanelState().typeDetailsPanelOpen.set(!1);
   m ? Osy?.setIsPaintPickerOpen(!0) : E && Osy?.setIsPaintPickerOpen(!1);
   b ? Osy?.setIsStylePickerOpen(!0) : T && Osy?.setIsStylePickerOpen(!1);
   _ ? Ez5?.uiState().minMaxModalShown.set(!0) : h && Ez5?.uiState().minMaxModalShown.set(!1);
@@ -114,7 +114,7 @@ let $$es24 = nF((e, t) => {
   let i = t.newSelectedView;
   if (r.saveStatus && r.saveStatus.hasUnsavedChanges && r.saveStatus.tabCloseText !== E63.SUPPRESS_UNSAVED_CHANGES_UI) {
     if (!Ed(() => e.dispatch($$eA35()))) {
-      let t = _$$t("autosave.unable_to_leave_document.unsaved_changes_save_in_background");
+      let t = getI18nString("autosave.unable_to_leave_document.unsaved_changes_save_in_background");
       e.dispatch(to({
         type: _$$v,
         data: {
@@ -129,7 +129,7 @@ let $$es24 = nF((e, t) => {
     });
     e.dispatch(sf(t.oldSelectedView));
   } else {
-    r.saveStatus && r.saveStatus.tabCloseText === E63.SUPPRESS_UNSAVED_CHANGES_UI && _$$sx("suppress_unsaved_changes_ui", {}, {
+    r.saveStatus && r.saveStatus.tabCloseText === E63.SUPPRESS_UNSAVED_CHANGES_UI && trackEventAnalytics("suppress_unsaved_changes_ui", {}, {
       forwardToDatadog: !0
     });
     e.dispatch(sf({
@@ -168,11 +168,11 @@ let $$eS45 = nF(e => {
 });
 let $$ev33 = NC("FULLSCREEN_ATTEMPT_CLOSE");
 let $$eA35 = nF((e, t) => {
-  if (eD) {
-    t?.closeDesktopTabWithMessage ? (eD.showFileBrowser(t.closeDesktopTabWithMessage), eD.close({
+  if (desktopAPIInstance) {
+    t?.closeDesktopTabWithMessage ? (desktopAPIInstance.showFileBrowser(t.closeDesktopTabWithMessage), desktopAPIInstance.close({
       suppressReopening: !0,
       shouldForceClose: !0
-    })) : eD.showFileBrowser();
+    })) : desktopAPIInstance.showFileBrowser();
     return;
   }
   if (GZ()) {

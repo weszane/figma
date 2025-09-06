@@ -2,12 +2,12 @@ import { useRef, useMemo, useState, useCallback } from "react";
 import { Hur, glU } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { am } from "../figma_app/901889";
-import { jk } from "../905/609396";
+import { PerfTimer } from "../905/609396";
 import { useSprigWithSampling } from "../905/99656";
 import { fF } from "../905/471229";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Ay } from "../figma_app/432652";
 import { _s } from "../figma_app/33126";
 import { J as _$$J } from "../905/915227";
@@ -25,7 +25,7 @@ let A = e => ({
   height: e.h
 });
 export function $$x1() {
-  let e = useRef(_$$t("whiteboard.ai_cluster.loading_section_base"));
+  let e = useRef(getI18nString("whiteboard.ai_cluster.loading_section_base"));
   let t = useMemo(() => getSingletonSceneGraph(), []);
   let {
     Sprig
@@ -35,11 +35,11 @@ export function $$x1() {
   let w = useRef();
   let O = Z("figjam_summary_navigate");
   let R = um();
-  let L = md(_s);
-  let P = md(As);
-  let D = md(kS);
-  let k = md(ze);
-  let M = md(_$$J);
+  let L = useAtomWithSubscription(_s);
+  let P = useAtomWithSubscription(As);
+  let D = useAtomWithSubscription(kS);
+  let k = useAtomWithSubscription(ze);
+  let M = useAtomWithSubscription(_$$J);
   let F = {
     orgId: L,
     teamId: P || null,
@@ -56,7 +56,7 @@ export function $$x1() {
   return {
     clusterCanvasSelection: () => {
       if (!glU) return;
-      let n = new jk(Ux.TIME_TAKEN_TO_COMPLETE, {});
+      let n = new PerfTimer(Ux.TIME_TAKEN_TO_COMPLETE, {});
       n.start();
       N(e => !e);
       let s = glU.getSelectionBounds();

@@ -1,5 +1,5 @@
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { r as _$$r } from "../905/520829";
 import { nF } from "../905/350402";
 import { uo } from "../905/395917";
@@ -34,12 +34,12 @@ let $$h1 = (e = !1) => async t => {
   }
 };
 async function g(e, t = !1) {
-  let i = zl.get(_$$g);
+  let i = atomStoreManager.get(_$$g);
   if (!t && i !== _$$r.INIT && i !== _$$r.LOADING) return i;
   try {
-    i === _$$r.INIT && zl.set(_$$g, _$$r.LOADING);
+    i === _$$r.INIT && atomStoreManager.set(_$$g, _$$r.LOADING);
     let t = await _$$k.getPlansForAuthedUsers();
-    zl.set(_$$g, t);
+    atomStoreManager.set(_$$g, t);
     e(_$$uo2({
       teams: t.teams
     }));
@@ -48,7 +48,7 @@ async function g(e, t = !1) {
     }));
     return t;
   } catch (e) {
-    i === _$$r.LOADING && zl.set(_$$g, _$$r.INIT);
+    i === _$$r.LOADING && atomStoreManager.set(_$$g, _$$r.INIT);
     return Promise.reject(e);
   }
 }

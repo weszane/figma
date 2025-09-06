@@ -2,7 +2,7 @@ import { useCallback, useMemo, useEffect } from "react";
 import { ZC } from "../figma_app/39751";
 import { gY, IT } from "../figma_app/566371";
 import { XHR } from "../905/910117";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { jL } from "../figma_app/658324";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { M4 } from "../905/713695";
@@ -75,7 +75,7 @@ export function $$b4(e, t = !0) {
   let [d, c] = IT(n.orgBillingDataQuery(e), {
     enabled: t
   });
-  _$$i(d, _$$t("org_billing_error_default"));
+  _$$i(d, getI18nString("org_billing_error_default"));
   let u = ZC(e);
   let h = useMemo(() => u !== e && !!u, [e, u]);
   let m = ZC(o);
@@ -90,4 +90,4 @@ export const I2 = $$m0;
 export const QD = $$g1;
 export const SM = $$E2;
 export const T1 = $$y3;
-export const Xf = $$b4; 
+export const Xf = $$b4;

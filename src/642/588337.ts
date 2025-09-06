@@ -14,7 +14,7 @@ import { Ay } from "@stylexjs/stylex";
 import { buildUploadUrl } from "../figma_app/169182";
 import { s_, H4 } from "../905/992467";
 import { oW } from "../905/675859";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { zR } from "../figma_app/817077";
 import { Sh } from "../figma_app/889655";
 import { Cd, $H } from "../048e062c/416936";
@@ -159,14 +159,14 @@ export function $$I0({
   let W = [{
     type: N.BAR_GROUPED,
     icon: "e3bae6898ed50d51dc6ca312b486d7d4eb64883f",
-    title: _$$t("slides.charts.bar")
+    title: getI18nString("slides.charts.bar")
   }];
   let $ = jsx("div", {
     className: "x78zum5 x1jnr06f",
     children: K ? jsx($n, {
       variant: "secondary",
       onClick: H,
-      children: _$$t("slides.charts.reupload_file")
+      children: getI18nString("slides.charts.reupload_file")
     }) : I ? jsxs(Fragment, {
       children: [jsx($n, {
         variant: "secondary",
@@ -176,11 +176,11 @@ export function $$I0({
           let t = U(e, R[0]);
           t && V(e, t, "City,2011-10-01,2011-10-02,2011-10-03,2011-10-04,2011-10-05,2011-10-06,2011-10-07,2011-10-08,2011-10-09,2011-10-10,2011-10-11,2011-10-12\nNew York,63.4,58.0,53.3,55.7,64.2,58.8,57.9,61.8,69.3,71.2,68.7,61.8\nSan Francisco,53.4,48.0,43.3,45.7,54.2,48.8,47.9,51.8,59.3,61.2,58.7,51.8", I);
         },
-        children: _$$t("slides.charts.start_from_scratch")
+        children: getI18nString("slides.charts.start_from_scratch")
       }), jsx($n, {
         variant: "primary",
         onClick: H,
-        children: _$$t("slides.charts.upload_csv")
+        children: getI18nString("slides.charts.upload_csv")
       })]
     }) : null
   });
@@ -194,7 +194,7 @@ export function $$I0({
         children: jsxs("div", {
           className: "x78zum5 x1qughib x6s0dn4 xh8yej3 xmzs88n",
           children: [jsx(hE, {
-            children: P || _$$t("slides.charts.charts")
+            children: P || getI18nString("slides.charts.charts")
           }), $]
         })
       }), jsx(nB, {
@@ -215,7 +215,7 @@ export function $$I0({
             className: "x78zum5 xl56j7k x6s0dn4 x5yr21d x167g77z",
             children: [jsx(_$$k, {}), jsx("div", {
               className: "x1n0bwc9",
-              children: _$$t("slides.charts.import_data_modal.loading")
+              children: getI18nString("slides.charts.import_data_modal.loading")
             })]
           });
         }, {}) : jsx(function () {

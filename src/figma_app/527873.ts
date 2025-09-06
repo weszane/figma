@@ -2,7 +2,7 @@ import { rCR, hMR, YyC } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { Ay } from "../905/612521";
 import { isDevEnvironment } from "../figma_app/169182";
-import { Lo } from "../905/714362";
+import { logInfo } from "../905/714362";
 import { Y5 } from "../figma_app/455680";
 let $$d7 = 1048576;
 let $$c4 = 0x40000000;
@@ -11,7 +11,7 @@ let p = Ay.location && "true" === new URLSearchParams(Ay.location.search).get("r
 let $$_5 = u ? rCR.MAXIMUM : p ? rCR.RECOVERY : rCR.DEFAULT;
 export function $$h0(e) {
   let t = hMR.setHeapMemoryMode(e);
-  Lo("memory", `setHeapMemoryMode(${e}) ${t ? "success" : "failed"}`);
+  logInfo("memory", `setHeapMemoryMode(${e}) ${t ? "success" : "failed"}`);
   return t;
 }
 let m = null;

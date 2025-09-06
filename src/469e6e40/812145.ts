@@ -6,7 +6,7 @@ import { zN } from "../figma_app/416935";
 import { Ay } from "../figma_app/930338";
 import { bv } from "../figma_app/421401";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Y } from "../905/830372";
 import { E as _$$E } from "../905/984674";
 import { B as _$$B } from "../905/261906";
@@ -41,7 +41,7 @@ function A({
   hideTooltip: l
 }) {
   return {
-    name: _$$t("members_table.column_header.seat_type"),
+    name: getI18nString("members_table.column_header.seat_type"),
     className: e,
     sortNumerically: !0,
     sortReversed: !0,
@@ -167,7 +167,7 @@ export function $$D2({
   onFilter: i
 }) {
   return jsx(bv, {
-    label: _$$t("members_table.column_header.seat_type"),
+    label: getI18nString("members_table.column_header.seat_type"),
     dispatch: e,
     dropdownShown: t,
     dropdownType: "FILTER_BILLING_PRODUCT_SEAT",
@@ -225,9 +225,9 @@ function M({
     });
   }
   if (N || L) {
-    let e = L ? _$$t("external_collaboration_restricted.members.tooltip.v2", {
+    let e = L ? getI18nString("external_collaboration_restricted.members.tooltip.v2", {
       eccDomain: L
-    }) : _$$t("members_table.role_idp_tooltip.seat_rename");
+    }) : getI18nString("members_table.role_idp_tooltip.seat_rename");
     return jsx("div", {
       children: jsxs(Y, {
         direction: "horizontal",
@@ -250,7 +250,7 @@ function M({
       if (!e) return null;
       let n = mb(t);
       return n && a ? {
-        "data-tooltip": _$$t("admin_settings.people_tab.user_upgrade_date", {
+        "data-tooltip": getI18nString("admin_settings.people_tab.user_upgrade_date", {
           upgradeReason: n,
           upgradeDate: a
         }),

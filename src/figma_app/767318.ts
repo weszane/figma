@@ -12,7 +12,7 @@ import { hC } from "../figma_app/901889";
 import { Pt } from "../figma_app/806412";
 import { useSprigWithSampling } from "../905/99656";
 import { B } from "../905/714743";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { hA } from "../figma_app/88239";
 import { N as _$$N } from "../figma_app/673778";
 import { Wo } from "../figma_app/933328";
@@ -58,7 +58,7 @@ export function $$G0(e) {
     let T = t === Jo.FOCUS_NODE ? iw.LEARN_MORE : E;
     let N = useCallback((e, t, r, i, a) => {
       let c = r ?? (i ? UE : Ws);
-      let u = i === Mo ? _$$t("variables.mode_properties_panel.select.option.mixed") : t.find(e => c2(e.modeId, i))?.name;
+      let u = i === Mo ? getI18nString("variables.mode_properties_panel.select.option.mixed") : t.find(e => c2(e.modeId, i))?.name;
       let p = jsx(B, {
         className: F,
         svg: _$$A2
@@ -67,20 +67,20 @@ export function $$G0(e) {
       let h = (e, t) => e ? t : [];
       return [...h(c === Mo, [{
         recordingKey: "mode-MIXED",
-        displayText: _$$t("variables.mode_properties_panel.select.option.mixed"),
+        displayText: getI18nString("variables.mode_properties_panel.select.option.mixed"),
         isChecked: !0
       }]), ...h(!!i, [{
         recordingKey: "mode-INHERIT",
-        displayText: u ? _$$t("variables.mode_properties_panel.select.option.auto_with_name", {
+        displayText: u ? getI18nString("variables.mode_properties_panel.select.option.auto_with_name", {
           modeName: u
-        }) : _$$t("variables.mode_properties_panel.select.option.auto"),
+        }) : getI18nString("variables.mode_properties_panel.select.option.auto"),
         isChecked: c === UE,
         callback: () => {
           g(e, UE, u);
         }
       }]), ...h(!i && t.length > 0, [{
         recordingKey: "mode-DEFAULT",
-        displayText: _$$t("variables.mode_properties_panel.select.option.default_with_name", {
+        displayText: getI18nString("variables.mode_properties_panel.select.option.default_with_name", {
           modeName: t[0].name
         }),
         rightIcon: t[0].isCompatible ? void 0 : p,
@@ -131,7 +131,7 @@ export function $$G0(e) {
           displayText: ""
         }, ...(a && a !== Mo && e.every(e => !c2(e.modeId, a)) ? [{
           recordingKey: "mode-DELETED",
-          displayText: _$$t("variables.mode_properties_panel.select.option.deleted"),
+          displayText: getI18nString("variables.mode_properties_panel.select.option.deleted"),
           disabled: !0,
           isChecked: !0
         }] : []), ..._];
@@ -140,7 +140,7 @@ export function $$G0(e) {
         displayText: ""
       }, {
         recordingKey: "mode-review-update",
-        displayText: _$$t("variables.modes.option.review_updates"),
+        displayText: getI18nString("variables.modes.option.review_updates"),
         callback: () => {
           o(to({
             type: _$$T,
@@ -156,7 +156,7 @@ export function $$G0(e) {
         displayText: ""
       }, {
         recordingKey: "mode-learn-more",
-        displayText: _$$t("variables.modes.option.learn_more"),
+        displayText: getI18nString("variables.modes.option.learn_more"),
         callback: () => {
           Ay.unsafeRedirect(Yc, "_blank");
         },
@@ -207,7 +207,7 @@ export function $$G0(e) {
       let e = [];
       for (let [t, n] of (Object.values(O).length > 0 && e.push({
         recordingKey: Pt(r, "local"),
-        displayText: _$$t("variables.mode_properties_panel.assets_created_in_file.subheading"),
+        displayText: getI18nString("variables.mode_properties_panel.assets_created_in_file.subheading"),
         header: !0
       }), Object.entries(O))) {
         let i = getFeatureFlags().ds_new_mode_dropdown_data ? V(t, n.modeOptions, n.explicitMode, n.inheritMode, o, g, d, T, W) : N(t, n.modeOptions, n.explicitMode, n.inheritMode);
@@ -224,7 +224,7 @@ export function $$G0(e) {
           separator: !0,
           displayText: ""
         });
-        let i = G.data?.[t] ?? _$$t("variables.mode_properties_panel.used_variables.subheading");
+        let i = G.data?.[t] ?? getI18nString("variables.mode_properties_panel.used_variables.subheading");
         for (let [t, a] of (e.push({
           recordingKey: Pt(r, "fileName-" + i),
           displayText: i,
@@ -264,20 +264,20 @@ function V(e, t, r, i, a, s, o, l, d, c) {
   let p = [];
   for (let t of u.formattedModeOptions) t.type === Z.Mixed ? p.push({
     recordingKey: "mode-MIXED",
-    displayText: _$$t("variables.mode_properties_panel.select.option.mixed"),
+    displayText: getI18nString("variables.mode_properties_panel.select.option.mixed"),
     isChecked: t.isCurrentlyActive
   }) : t.type === Z.Inherited ? p.push({
     recordingKey: "mode-INHERIT",
-    displayText: t.name ? _$$t("variables.mode_properties_panel.select.option.auto_with_name", {
-      modeName: t.name === Mo ? _$$t("variables.mode_properties_panel.select.option.mixed") : t.name
-    }) : _$$t("variables.mode_properties_panel.select.option.auto"),
+    displayText: t.name ? getI18nString("variables.mode_properties_panel.select.option.auto_with_name", {
+      modeName: t.name === Mo ? getI18nString("variables.mode_properties_panel.select.option.mixed") : t.name
+    }) : getI18nString("variables.mode_properties_panel.select.option.auto"),
     isChecked: t.isCurrentlyActive,
     callback: () => {
       s(e, UE, t.name);
     }
   }) : t.type === Z.Default && p.push({
     recordingKey: "mode-DEFAULT",
-    displayText: _$$t("variables.mode_properties_panel.select.option.default_with_name", {
+    displayText: getI18nString("variables.mode_properties_panel.select.option.default_with_name", {
       modeName: t.name
     }),
     rightIcon: t.isCompatible ? void 0 : jsx(B, {
@@ -311,7 +311,7 @@ function V(e, t, r, i, a, s, o, l, d, c) {
     })
   }) : t.type === Z.Deleted && p.push({
     recordingKey: "mode-DELETED",
-    displayText: _$$t("variables.mode_properties_panel.select.option.deleted"),
+    displayText: getI18nString("variables.mode_properties_panel.select.option.deleted"),
     disabled: !0,
     isChecked: t.isCurrentlyActive
   });
@@ -320,7 +320,7 @@ function V(e, t, r, i, a, s, o, l, d, c) {
     displayText: ""
   }), p.push({
     recordingKey: l === iw.REVIEW_UPDATES ? "mode-review-update" : "mode-learn-more",
-    displayText: l === iw.REVIEW_UPDATES ? _$$t("variables.modes.option.review_updates") : _$$t("variables.modes.option.learn_more"),
+    displayText: l === iw.REVIEW_UPDATES ? getI18nString("variables.modes.option.review_updates") : getI18nString("variables.modes.option.learn_more"),
     callback: () => {
       l === iw.REVIEW_UPDATES ? a(to({
         type: _$$T,

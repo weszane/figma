@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "../vendor/514228";
 import s from "classnames";
 import { c$ } from "../figma_app/236327";
 import { B } from "../905/714743";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { oB, j7 } from "../905/929976";
 import { tf } from "../figma_app/831799";
 import { Cf } from "../905/504727";
@@ -14,38 +14,38 @@ let g = "CART_CURRENCY_SWITCHER_DROPDOWN_TYPE";
 let f = {
   jpy: {
     currency: "jpy",
-    optionLeft: tx("universal_upgrade.currency_switcher_option.japanese_yen"),
-    optionRight: tx("universal_upgrade.currency_switcher_option.jpy_symbol"),
-    headerShort: tx("universal_upgrade.currency_switcher.short_pricing_in_jpy"),
-    headerLong: tx("universal_upgrade.currency_switcher.pricing_in_jpy")
+    optionLeft: renderI18nText("universal_upgrade.currency_switcher_option.japanese_yen"),
+    optionRight: renderI18nText("universal_upgrade.currency_switcher_option.jpy_symbol"),
+    headerShort: renderI18nText("universal_upgrade.currency_switcher.short_pricing_in_jpy"),
+    headerLong: renderI18nText("universal_upgrade.currency_switcher.pricing_in_jpy")
   },
   usd: {
     currency: "usd",
-    optionLeft: tx("universal_upgrade.currency_switcher_option.us_dollar"),
-    optionRight: tx("universal_upgrade.currency_switcher_option.usd_symbol"),
-    headerShort: tx("universal_upgrade.currency_switcher.short_pricing_in_usd"),
-    headerLong: tx("universal_upgrade.currency_switcher.pricing_in_usd")
+    optionLeft: renderI18nText("universal_upgrade.currency_switcher_option.us_dollar"),
+    optionRight: renderI18nText("universal_upgrade.currency_switcher_option.usd_symbol"),
+    headerShort: renderI18nText("universal_upgrade.currency_switcher.short_pricing_in_usd"),
+    headerLong: renderI18nText("universal_upgrade.currency_switcher.pricing_in_usd")
   },
   eur: {
     currency: "eur",
-    optionLeft: tx("universal_upgrade.currency_switcher_option.european_euro"),
-    optionRight: tx("universal_upgrade.currency_switcher_option.eur_symbol"),
-    headerShort: tx("universal_upgrade.currency_switcher.short_pricing_in_eur"),
-    headerLong: tx("universal_upgrade.currency_switcher.pricing_in_eur")
+    optionLeft: renderI18nText("universal_upgrade.currency_switcher_option.european_euro"),
+    optionRight: renderI18nText("universal_upgrade.currency_switcher_option.eur_symbol"),
+    headerShort: renderI18nText("universal_upgrade.currency_switcher.short_pricing_in_eur"),
+    headerLong: renderI18nText("universal_upgrade.currency_switcher.pricing_in_eur")
   },
   cad: {
     currency: "cad",
-    optionLeft: tx("universal_upgrade.currency_switcher_option.cad_dollar"),
-    optionRight: tx("universal_upgrade.currency_switcher_option.cad_symbol"),
-    headerShort: tx("universal_upgrade.currency_switcher.short_pricing_in_cad"),
-    headerLong: tx("universal_upgrade.currency_switcher.pricing_in_cad")
+    optionLeft: renderI18nText("universal_upgrade.currency_switcher_option.cad_dollar"),
+    optionRight: renderI18nText("universal_upgrade.currency_switcher_option.cad_symbol"),
+    headerShort: renderI18nText("universal_upgrade.currency_switcher.short_pricing_in_cad"),
+    headerLong: renderI18nText("universal_upgrade.currency_switcher.pricing_in_cad")
   },
   gbp: {
     currency: "gbp",
-    optionLeft: tx("universal_upgrade.currency_switcher_option.british_pound"),
-    optionRight: tx("universal_upgrade.currency_switcher_option.gbp_symbol"),
-    headerShort: tx("universal_upgrade.currency_switcher.short_pricing_in_gbp"),
-    headerLong: tx("universal_upgrade.currency_switcher.pricing_in_gbp")
+    optionLeft: renderI18nText("universal_upgrade.currency_switcher_option.british_pound"),
+    optionRight: renderI18nText("universal_upgrade.currency_switcher_option.gbp_symbol"),
+    headerShort: renderI18nText("universal_upgrade.currency_switcher.short_pricing_in_gbp"),
+    headerLong: renderI18nText("universal_upgrade.currency_switcher.pricing_in_gbp")
   }
 };
 let _ = Object.keys(f);

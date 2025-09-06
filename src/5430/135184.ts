@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { dx, Nn, MZ } from "../figma_app/399472";
 import { A, jT } from "../figma_app/711113";
@@ -24,7 +24,7 @@ export function $$m0({
           src: Nn.COMMUNITY_PAGE
         }));
         r(F.enqueue({
-          message: _$$t("community.detail_view.accepted_publisher_invite")
+          message: getI18nString("community.detail_view.accepted_publisher_invite")
         }));
       },
       onClickDecline: () => {
@@ -34,10 +34,10 @@ export function $$m0({
           src: Nn.COMMUNITY_PAGE
         }));
         r(F.enqueue({
-          message: _$$t("community.detail_view.declined_publisher_invite")
+          message: getI18nString("community.detail_view.declined_publisher_invite")
         }));
       },
-      label: _$$t("community.detail_view.you_have_been_added_as_a_publisher_of_this_resource")
+      label: getI18nString("community.detail_view.you_have_been_added_as_a_publisher_of_this_resource")
     })
   }) : null;
 }

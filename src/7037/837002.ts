@@ -8,7 +8,7 @@ import { M as _$$M } from "../figma_app/749682";
 import { pz } from "../figma_app/60079";
 import { x as _$$x } from "../905/211326";
 import { B as _$$B } from "../905/714743";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { $ as _$$$ } from "../905/355181";
 import { cU } from "../905/966582";
 import { cM, aT } from "../905/530837";
@@ -19,7 +19,7 @@ import { dp, DH } from "../905/508893";
 import { kt } from "../figma_app/858013";
 import { lD } from "../figma_app/831696";
 import { lQ } from "../905/934246";
-import { eU, fp, md } from "../figma_app/27355";
+import { atom, useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import { ZC } from "../figma_app/39751";
 import { Fe, uz } from "../905/284552";
 import { g as _$$g } from "../7037/183814";
@@ -90,17 +90,17 @@ function P(e) {
   });
 }
 let N = e => e.preventDefault();
-let k = eU(null);
-let M = eU(new Map());
-let L = eU(null, (e, t, n) => {
+let k = atom(null);
+let M = atom(new Map());
+let L = atom(null, (e, t, n) => {
   t(M, new Map(e(M).set(n.id, n.snapshot)));
 });
-let A = eU(new Set());
-let D = eU(e => {
+let A = atom(new Set());
+let D = atom(e => {
   let t = e(A);
   return 0 === t.size ? null : Array.from(t).pop() ?? null;
 });
-let R = eU(null);
+let R = atom(null);
 function H(e) {
   let t = useRef(null);
   let [n, s, a] = _$$M();
@@ -108,13 +108,13 @@ function H(e) {
   let l = useRef(!1);
   let u = useRef(!1);
   let m = useRef(!1);
-  let [f, _] = fp(k);
+  let [f, _] = useAtomValueAndSetter(k);
   let [g, v] = useState();
-  let C = fp(M)[0];
-  let b = fp(L)[1];
-  let [T, I] = fp(A);
-  let w = md(D);
-  let [P, H] = fp(R);
+  let C = useAtomValueAndSetter(M)[0];
+  let b = useAtomValueAndSetter(L)[1];
+  let [T, I] = useAtomValueAndSetter(A);
+  let w = useAtomWithSubscription(D);
+  let [P, H] = useAtomValueAndSetter(R);
   let B = f?.id === e.id;
   let W = e.source === Zp.TILE && !e.isThumbnail;
   let V = W && f?.isPreviewing;
@@ -387,7 +387,7 @@ function K(e) {
       n(t => t && Math.abs(e - dp) > .01);
     };
   }, [e.imgUrl]), null === e.imgUrl) return jsx("div", {
-    children: _$$t("fig_feed.could_not_load_preview_image")
+    children: getI18nString("fig_feed.could_not_load_preview_image")
   });
   let s = e.isThumbnail && e.thumbnailUrl ? e.thumbnailUrl : e.imgUrl;
   return jsxs(Fragment, {
@@ -395,16 +395,16 @@ function K(e) {
       className: "feed_post_content--previewFacadeOverlay--EXG86 feed_post_content--thumbnailOverlay--feEzZ",
       children: jsx(pz, {
         onClick: e.onUpdatePreviewImage,
-        children: _$$t("fig_feed.update_preview_image")
+        children: getI18nString("fig_feed.update_preview_image")
       })
     }), jsx("img", {
       src: s,
-      alt: _$$t("fig_feed.thumbnail_alt_text"),
+      alt: getI18nString("fig_feed.thumbnail_alt_text"),
       draggable: !1,
       className: d()("feed_post_content--itemImage--pGodc", e.isThumbnail && "feed_post_content--itemImageThumbnail--LBdlC", t && "feed_post_content--itemImagePadded--exY8B")
     }), e.isThumbnail ? null : "image/gif" === e.mediaType ? jsx("div", {
       className: B,
-      children: _$$t("fig_feed.gif")
+      children: getI18nString("fig_feed.gif")
     }) : null]
   });
 }
@@ -476,9 +476,9 @@ function ee(e) {
 }
 function et(e) {
   return e.isThumbnail ? jsx("div", {
-    children: tx("fig_feed.video")
+    children: renderI18nText("fig_feed.video")
   }) : jsx("div", {
-    children: tx("fig_feed.transcode_after_submit")
+    children: renderI18nText("fig_feed.transcode_after_submit")
   });
 }
 function en(e) {
@@ -509,7 +509,7 @@ function eo(e) {
       })
     }), !e.isThumbnail && jsx("div", {
       className: B,
-      children: tx("fig_feed.prototype_badge")
+      children: renderI18nText("fig_feed.prototype_badge")
     })]
   });
 }
@@ -631,7 +631,7 @@ export function $$ea0(e) {
         children: jsx("button", {
           onClick: openEditPreviewModalCallback,
           className: "feed_post_content--editPreviewButton--Z9MT5",
-          children: tx("fig_feed.edit_preview")
+          children: renderI18nText("fig_feed.edit_preview")
         })
       }), deleteSelectedItemCallback && jsx(_$$B, {
         svg: _$$A3,
@@ -639,7 +639,7 @@ export function $$ea0(e) {
         onClick: deleteSelectedItemCallback,
         autosize: !0,
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("fig_feed.delete"),
+        "data-tooltip": getI18nString("fig_feed.delete"),
         dataTestId: "delete-content-item"
       })]
     });
@@ -692,7 +692,7 @@ function ed(e) {
     });
   }, [e.direction, e.selectedIdx]);
   let n = function () {
-    let e = fp(k)[0];
+    let e = useAtomValueAndSetter(k)[0];
     return useCallback(t => {
       e && e.ref?.current && (t && t !== e?.feedPostUuid || e.ref?.current.pause());
     }, [e]);

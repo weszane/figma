@@ -1,6 +1,6 @@
 import { vRS } from "../figma_app/763686";
-import { Ay } from "../figma_app/778880";
-import { t as _$$t } from "../905/303541";
+import { BrowserInfo } from "../figma_app/778880";
+import { getI18nString } from "../905/303541";
 import { Ts } from "../905/929976";
 import { p5 } from "../figma_app/91703";
 import { Gf } from "../figma_app/198712";
@@ -41,7 +41,7 @@ export function $$y6(e, t) {
   let r = "\u{1F310}";
   switch (t) {
     case "set-tool-bend":
-      return Ay.mac ? "\u2318" : "Ctrl";
+      return BrowserInfo.mac ? "\u2318" : "Ctrl";
     case "set-tool-vector-lasso":
       return "Q";
     case "stack-reorder-left":
@@ -76,10 +76,10 @@ export function $$y6(e, t) {
     case "set-tool-connector-elbowed":
       return "X";
     case "toggle-publish":
-      return Ay.mac ? "\u23252" : "Alt+2";
+      return BrowserInfo.mac ? "\u23252" : "Alt+2";
     case "toggle-inline-preview":
     case "toggle-inline-html-preview":
-      return "\u21E7" + _$$t("whiteboard.keyboard_shortcuts.key_label.space");
+      return "\u21E7" + getI18nString("whiteboard.keyboard_shortcuts.key_label.space");
     case "set-tool-sites-responsive-set":
       return "W";
     case "deselect-all":
@@ -87,10 +87,10 @@ export function $$y6(e, t) {
     case "multi-edit-text":
       return "Enter";
     case "page-next":
-      if (Ay.mac) return r + "\u2193";
+      if (BrowserInfo.mac) return r + "\u2193";
       break;
     case "page-previous":
-      if (Ay.mac) return r + "\u2191";
+      if (BrowserInfo.mac) return r + "\u2191";
   }
   if (e[t]) {
     let r = e[t];

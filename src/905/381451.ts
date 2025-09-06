@@ -2,7 +2,7 @@ import { useEffect, useState, useRef, useMemo, useCallback } from "react";
 import { shallowEqual } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { wm, ID } from "../905/19536";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { A as _$$A } from "../905/17894";
 let $$d = Symbol("RESET");
 export function $$c0(e, t, i = _$$A) {
@@ -34,7 +34,7 @@ export function $$c0(e, t, i = _$$A) {
             error: t
           };
           console.error(`Unhandled exception in ${e.displayName}.fetchInitialValue:`, t);
-          $D(_$$e.COMMUNITY, t, {
+          reportError(_$$e.COMMUNITY, t, {
             extra: {
               source: `${e.displayName}.fetchInitialValue`
             }
@@ -77,7 +77,7 @@ export function $$c0(e, t, i = _$$A) {
             error: i
           });
           console.error(`Unhandled exception in ${e.displayName}.validate:`, i);
-          $D(_$$e.COMMUNITY, i, {
+          reportError(_$$e.COMMUNITY, i, {
             extra: {
               source: `${e.displayName}.validate`
             }

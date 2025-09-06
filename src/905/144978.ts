@@ -5,7 +5,7 @@ import { E as _$$E } from "../905/172252";
 import { o as _$$o } from "../905/821217";
 import l from "classnames";
 import { ks } from "../figma_app/637027";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { U } from "../905/331038";
 import { w as _$$w } from "../905/113805";
 import { Lz, Zc } from "../905/497882";
@@ -19,13 +19,13 @@ let y = e => {
     let t = e.key;
     switch (t) {
       case "NAME_EMPTY":
-        return _$$t("community.publishing.name_must_not_be_empty");
+        return getI18nString("community.publishing.name_must_not_be_empty");
       case "NAME_TOO_SHORT":
-        return _$$t("community.publishing.name_must_be_n_characters_long", {
+        return getI18nString("community.publishing.name_must_be_n_characters_long", {
           minLength: e.data.minLength
         });
       case "NAME_TOO_LONG":
-        return _$$t("community.publishing.name_must_be_at_most_n_characters_long", {
+        return getI18nString("community.publishing.name_must_be_at_most_n_characters_long", {
           maxLength: e.data.maxLength
         });
       default:
@@ -52,7 +52,7 @@ let $$b0 = forwardRef(function ({
     }
   }), []);
   return jsx(_$$A, {
-    label: _$$t("community.general.name"),
+    label: getI18nString("community.general.name"),
     labelHtmlFor: x,
     afterLabelContent: jsxs("div", {
       id: S,
@@ -63,7 +63,7 @@ let $$b0 = forwardRef(function ({
         "aria-hidden": !0,
         children: `${I}/${EM}`
       }), jsx(_$$E, {
-        children: _$$t("community.publishing.character_count_status", {
+        children: getI18nString("community.publishing.character_count_status", {
           currentCount: I,
           maxCount: EM
         })

@@ -2,12 +2,12 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
 import { useSelector } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { buildUploadUrl } from "../figma_app/169182";
-import { C8 } from "../figma_app/778880";
+import { getIsAndroidOrIphoneNotFigmaMobile } from "../figma_app/778880";
 import { oW } from "../905/675859";
 import { nt } from "../figma_app/687776";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { E as _$$E } from "../905/984674";
 import { $ as _$$$ } from "../figma_app/61705";
 import { c as _$$c } from "../905/370443";
@@ -61,7 +61,7 @@ function C() {
     children: [jsx("div", {
       className: "xeq5yr9 xod5an3",
       children: jsx(M, {})
-    }), tx("figmake.marketing_modal.body")]
+    }), renderI18nText("figmake.marketing_modal.body")]
   });
 }
 export function $$I0() {
@@ -76,8 +76,8 @@ export function $$I0() {
   let I = X$("FigmakePromoModalOverlay");
   let S = I.unwrapOr(null)?.tier || null;
   let N = S && ([FPlanNameType.PRO, FPlanNameType.ORG, FPlanNameType.ENTERPRISE].includes(S) || S === FPlanNameType.STARTER && getFeatureFlags().bake_starter_limit);
-  let O = md(mp);
-  let R = C8();
+  let O = useAtomWithSubscription(mp);
+  let R = getIsAndroidOrIphoneNotFigmaMobile();
   let M = _$$$({
     isDraftsFolder: !0,
     editorType: FFileType.FIGMAKE,
@@ -105,7 +105,7 @@ export function $$I0() {
   }, [show, t, j, N, S, R]);
   return jsx(_l, {
     closeButtonColor: "dark",
-    description: tx("figmake.marketing_modal.subtitle"),
+    description: renderI18nText("figmake.marketing_modal.subtitle"),
     disclaimerFooter: jsx(aX, {}),
     isShowing,
     media: jsx(A, {}),
@@ -113,7 +113,7 @@ export function $$I0() {
     primaryCta: {
       type: "button",
       label: jsx(_$$E, {
-        children: tx("figmake.marketing_modal.button")
+        children: renderI18nText("figmake.marketing_modal.button")
       }),
       onClick: () => {
         onAcknowledge();

@@ -5,12 +5,12 @@ import { $n } from "../905/521428";
 import { d as _$$d } from "../905/976845";
 import { J } from "../905/125993";
 import { getFeatureFlags } from "../905/601108";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { vj } from "../figma_app/919079";
 import { gS, c$ } from "../figma_app/236327";
 import { h1 } from "../905/986103";
 import { p as _$$p } from "../905/991924";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { WB } from "../905/761735";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
@@ -23,7 +23,7 @@ import { S as _$$S } from "../figma_app/78808";
 import { kj } from "../905/191601";
 import { to, Ce } from "../905/156213";
 import { d as _$$d2 } from "../905/91820";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { Ib } from "../905/129884";
 import { e0 } from "../905/696396";
 import { Ro } from "../figma_app/805373";
@@ -56,7 +56,7 @@ let x = nF(async (e, t) => {
       }
     }
   }, n).catch(t => {
-    let i = t.data.message || _$$t("collaboration.branching.an_error_occurred_while_renaming_this_file");
+    let i = t.data.message || getI18nString("collaboration.branching.an_error_occurred_while_renaming_this_file");
     e.dispatch(_$$s.error(i));
   });
   E9("File Renamed", t.branch, {
@@ -67,7 +67,7 @@ let S = nF(async (e, t) => {
   let i = await J8(t.branches.map(e => e.key));
   "error" === i.status ? e.dispatch(_$$s.error(i.message)) : e.dispatch(_$$F.enqueue({
     type: "file_restored",
-    message: _$$t("collaboration.branching.branches_restored", {
+    message: getI18nString("collaboration.branching.branches_restored", {
       branchCount: t.branches.length
     })
   }));
@@ -98,12 +98,12 @@ let w = nF(async (e, t) => {
         let t = JSON.parse(r.response);
         e.dispatch(_$$s.error(t.message));
       } catch (t) {
-        e.dispatch(_$$s.error(_$$t("collaboration.branching.an_error_occurred_while_deleting_these_files")));
+        e.dispatch(_$$s.error(getI18nString("collaboration.branching.an_error_occurred_while_deleting_these_files")));
       }
       return;
     }
     let a = {
-      text: _$$t("collaboration.branching.undo_archive"),
+      text: getI18nString("collaboration.branching.undo_archive"),
       action: () => {
         e.dispatch(S({
           branches: t.branches
@@ -113,7 +113,7 @@ let w = nF(async (e, t) => {
     };
     e.dispatch(_$$F.enqueue({
       type: "file_deleted",
-      message: _$$t("collaboration.branching.branch_archived"),
+      message: getI18nString("collaboration.branching.branch_archived"),
       button: a
     }));
   } catch ({
@@ -123,7 +123,7 @@ let w = nF(async (e, t) => {
       let t = JSON.parse(i);
       e.dispatch(_$$s.error(t.message));
     } catch (i) {
-      e.dispatch(_$$s.error(_$$t("collaboration.branching.error_archiving_branches", {
+      e.dispatch(_$$s.error(getI18nString("collaboration.branching.error_archiving_branches", {
         branchCount: t.branches.length
       })));
     }
@@ -139,13 +139,13 @@ function B(e) {
   let i = useMemo(() => jsx(h1, {
     date: e.touchedAt
   }), [e.touchedAt]);
-  return e.isMain || !e.isArchived ? tx("collaboration.branching.edited", {
+  return e.isMain || !e.isArchived ? renderI18nText("collaboration.branching.edited", {
     userHandle: t,
     relativeTimestamp: i
-  }) : e.isMerged ? tx("collaboration.branching.merged_v2", {
+  }) : e.isMerged ? renderI18nText("collaboration.branching.merged_v2", {
     userHandle: t,
     relativeTimestamp: i
-  }) : tx("collaboration.branching.archived_v2", {
+  }) : renderI18nText("collaboration.branching.archived_v2", {
     userHandle: t,
     relativeTimestamp: i
   });
@@ -175,14 +175,14 @@ export function $$V0(e) {
       fileKey: e.branch.key,
       fileRepoId: e.branch.fileRepoId
     },
-    children: tx("collaboration.branching.archive")
+    children: renderI18nText("collaboration.branching.archive")
   }, "archive")), ...U(V, jsx(c$, {
     onClick: () => {
       t(S({
         branches: [e.branch]
       }));
     },
-    children: tx("collaboration.branching.restore")
+    children: renderI18nText("collaboration.branching.restore")
   }, "restore")), jsx(c$, {
     onClick: () => {
       t(_$$S({
@@ -191,7 +191,7 @@ export function $$V0(e) {
         source: _$$d2.FULLSCREEN_BRANCH
       }));
     },
-    children: tx("collaboration.branching.copy_link")
+    children: renderI18nText("collaboration.branching.copy_link")
   }, "copy-link"), ...U(G, jsx(c$, {
     onClick: () => {
       t(to({
@@ -207,12 +207,12 @@ export function $$V0(e) {
         }
       }));
     },
-    children: tx("collaboration.branching.delete")
+    children: renderI18nText("collaboration.branching.delete")
   }, "delete")), ...U(z, jsx(c$, {
     onClick: () => {
       b(!0);
     },
-    children: tx("collaboration.branching.rename")
+    children: renderI18nText("collaboration.branching.rename")
   }, "rename"))];
   return jsxs("li", {
     className: `branch_row--container--MD7zC ${e.isSelected ? "branch_row--selected--qBm47" : ""}`,
@@ -256,7 +256,7 @@ export function $$V0(e) {
           title: e.name
         }), e.isCurrentBranch && !y && jsx("span", {
           className: "branch_row--currentBranchIndicator--78nIx",
-          children: tx("collaboration.branching.current_branch")
+          children: renderI18nText("collaboration.branching.current_branch")
         }), !y && jsx("div", {
           className: "branch_row--branchStatus--FFzmU",
           children: jsx(a$, {
@@ -299,15 +299,15 @@ export function $$V0(e) {
           t(sf({
             view: "fullscreen",
             fileKey: e.branch.key,
-            editorType: nT.Design
+            editorType: FEditorType.Design
           }));
-          sx("Open File Click", {
+          trackEventAnalytics("Open File Click", {
             fileKey: e.branch.key,
             source: e0.BRANCHES_MODAL,
             fileRepoId: e.branch.fileRepoId
           });
         },
-        children: tx("collaboration.branching.open")
+        children: renderI18nText("collaboration.branching.open")
       })
     }), jsx("div", {
       className: "branch_row--menuColumn--XSWVZ",
@@ -324,10 +324,10 @@ export function $$V0(e) {
             }));
           }
         },
-        "aria-label": _$$t("collaboration.branching.options"),
+        "aria-label": getI18nString("collaboration.branching.options"),
         htmlAttributes: {
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": _$$t("collaboration.branching.options")
+          "data-tooltip": getI18nString("collaboration.branching.options")
         },
         ref: A,
         "aria-expanded": m && !h,

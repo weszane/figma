@@ -7,7 +7,7 @@ import { XHR } from "../905/910117";
 import { ks, nR, $$ } from "../figma_app/637027";
 import { z, Z } from "../905/306088";
 import { kt } from "../figma_app/858013";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { i as _$$i } from "../469e6e40/651707";
 import { Ce, to, Lo } from "../905/156213";
 import { hZ } from "../figma_app/342125";
@@ -23,23 +23,23 @@ let k = "configure_saml--idpMetadata--Mx-jC";
 function E() {
   return [{
     value: "okta",
-    text: _$$t("org_settings.sso.okta"),
+    text: getI18nString("org_settings.sso.okta"),
     placeholder: "https://example.okta.com/app/abc123/sso/saml/metadata"
   }, {
     value: "azure",
-    text: _$$t("org_settings.sso.microsoft_azure_active_directory"),
+    text: getI18nString("org_settings.sso.microsoft_azure_active_directory"),
     placeholder: "https://login.microsoftonline.com/fedcba09-8765-4321-abcd-ef1234567890/federationmetadata/2007-06/federationmetadata.xml?appid=567890ab-cdef-1234-5678-90abcdef1234"
   }, {
     value: "google",
-    text: _$$t("org_settings.sso.google_workspace"),
+    text: getI18nString("org_settings.sso.google_workspace"),
     placeholder: ""
   }, {
     value: "onelogin",
-    text: _$$t("org_settings.sso.one_login"),
+    text: getI18nString("org_settings.sso.one_login"),
     placeholder: "https://app.onelogin.com/saml/metadata/123-abc-456a-bcd4-789abc"
   }, {
     value: "other",
-    text: _$$t("org_settings.sso.other"),
+    text: getI18nString("org_settings.sso.other"),
     placeholder: ""
   }];
 }
@@ -139,26 +139,26 @@ class S extends PureComponent {
     let a = "google" === this.state.idp_name ? "https://accounts.google.com/o/saml2/idp?idpid=123abc" : "https://idp.com/saml/metadata/abc123";
     let s = "google" === this.state.idp_name ? "https://accounts.google.com/o/saml2?idpid=123abc" : "https://sso.idp.com/abc123/saml2";
     return jsx(OJ, {
-      title: _$$t("org_settings.sso.configure_saml_sso"),
+      title: getI18nString("org_settings.sso.configure_saml_sso"),
       maxWidth: 459,
       onClose: this.onCancel,
       fixedTopDynamic: !0,
       children: jsxs("div", {
         className: "configure_saml--container--I-eq0 configure_saml--baseContainer--1WzcF",
         children: [jsx("div", {
-          children: tx("org_settings.sso.saml_single_sign_on", {
+          children: renderI18nText("org_settings.sso.saml_single_sign_on", {
             helpArticle: jsx("a", {
               className: "configure_saml--blueLink--v0lyt blue_link--blueLink--9rlnd",
               href: "https://help.figma.com/hc/articles/360040532333",
               target: "_blank",
               rel: "noopener",
-              children: tx("org_settings.sso.help_article")
+              children: renderI18nText("org_settings.sso.help_article")
             })
           })
         }), jsxs("div", {
           children: [jsx("div", {
             className: y,
-            children: tx("org_settings.sso.identity_provider_id_p")
+            children: renderI18nText("org_settings.sso.identity_provider_id_p")
           }), jsx(z, {
             className: "configure_saml--radioGroup--GhzVi",
             value: this.state.idp_name,
@@ -173,7 +173,7 @@ class S extends PureComponent {
           children: [("other" === this.state.idp_name || "google" === this.state.idp_name) && jsxs(Fragment, {
             children: [jsx("div", {
               className: y,
-              children: tx("org_settings.sso.idp_entity_id")
+              children: renderI18nText("org_settings.sso.idp_entity_id")
             }), jsx(ks, {
               type: "url",
               className: w,
@@ -183,7 +183,7 @@ class S extends PureComponent {
               onKeyDown: this.onKeyDown
             }), jsx("div", {
               className: y,
-              children: tx("org_settings.sso.idp_sso_target_url")
+              children: renderI18nText("org_settings.sso.idp_sso_target_url")
             }), jsx(ks, {
               type: "url",
               className: w,
@@ -193,7 +193,7 @@ class S extends PureComponent {
               onKeyDown: this.onKeyDown
             }), jsx("div", {
               className: y,
-              children: tx("org_settings.sso.signing_certificate")
+              children: renderI18nText("org_settings.sso.signing_certificate")
             }), jsx("input", {
               type: "file",
               onChange: this.onCertificateChange
@@ -201,7 +201,7 @@ class S extends PureComponent {
           }), this.state.idp_name && "other" !== this.state.idp_name && "google" !== this.state.idp_name && jsxs(Fragment, {
             children: [jsx("div", {
               className: y,
-              children: tx("org_settings.sso.id_p_metadata_url")
+              children: renderI18nText("org_settings.sso.id_p_metadata_url")
             }), jsx(ks, {
               type: "url",
               className: w,
@@ -221,11 +221,11 @@ class S extends PureComponent {
           className: "configure_saml--buttonBox--c1x8J",
           children: [jsx(nR, {
             onClick: () => this.props.dispatch(Lo()),
-            children: tx("modal.cancel")
+            children: renderI18nText("modal.cancel")
           }), jsx($$, {
             disabled: e,
             onClick: this.onConfirm,
-            children: this.props.org?.can_use_multi_idp ? tx("general.continue") : tx("org_settings.sso.review")
+            children: this.props.org?.can_use_multi_idp ? renderI18nText("general.continue") : renderI18nText("org_settings.sso.review")
           })]
         })]
       })
@@ -272,7 +272,7 @@ function A(e) {
           dispatch: e.dispatch,
           idp_name: e.idp_name || void 0,
           idp_metadata_url: e.idp_metadata_url || void 0,
-          error: t.data?.message || _$$t("org_settings.sso.an_error_occurred_while_configuring_saml_sso"),
+          error: t.data?.message || getI18nString("org_settings.sso.an_error_occurred_while_configuring_saml_sso"),
           org: e.org,
           orgDomains: e.orgDomains,
           orgSamlConfig: e.orgSamlConfig
@@ -323,7 +323,7 @@ function A(e) {
           dispatch: e.dispatch,
           idp_name: e.idp_name,
           idp_metadata_url: e.idp_metadata_url,
-          error: t.data?.message || _$$t("org_settings.sso.an_error_occurred_while_configuring_saml_sso"),
+          error: t.data?.message || getI18nString("org_settings.sso.an_error_occurred_while_configuring_saml_sso"),
           org: e.org,
           orgDomains: e.orgDomains,
           orgSamlConfig: e.orgSamlConfig
@@ -337,28 +337,28 @@ function A(e) {
       className: "x1g2dr8m xiqqdae xkezfkh x14kxzw3 x1giz659",
       children: e
     });
-    return 0 === t.length ? "" : e.org.saml_sso_only ? 1 === t.length ? tx("idp_management.unmapped_domains_warning.sso_only_description.one", {
+    return 0 === t.length ? "" : e.org.saml_sso_only ? 1 === t.length ? renderI18nText("idp_management.unmapped_domains_warning.sso_only_description.one", {
       domain: a(t[0])
-    }) : 2 === t.length ? tx("idp_management.unmapped_domains_warning.sso_only_description.two", {
+    }) : 2 === t.length ? renderI18nText("idp_management.unmapped_domains_warning.sso_only_description.two", {
       firstDomain: a(t[0]),
       secondDomain: a(t[1])
-    }) : tx("idp_management.unmapped_domains_warning.sso_only_description.many", {
+    }) : renderI18nText("idp_management.unmapped_domains_warning.sso_only_description.many", {
       firstDomain: a(t[0]),
       secondDomain: a(t[1]),
       numOthers: t.length - 2
-    }) : 1 === t.length ? tx("idp_management.unmapped_domains_warning.description.one", {
+    }) : 1 === t.length ? renderI18nText("idp_management.unmapped_domains_warning.description.one", {
       domain: a(t[0])
-    }) : 2 === t.length ? tx("idp_management.unmapped_domains_warning.description.two", {
+    }) : 2 === t.length ? renderI18nText("idp_management.unmapped_domains_warning.description.two", {
       firstDomain: a(t[0]),
       secondDomain: a(t[1])
-    }) : tx("idp_management.unmapped_domains_warning.description.many", {
+    }) : renderI18nText("idp_management.unmapped_domains_warning.description.many", {
       firstDomain: a(t[0]),
       secondDomain: a(t[1]),
       numOthers: t.length - 2
     });
   };
   return jsxs(OJ, {
-    title: _$$t("org_settings.sso.configure_saml_sso"),
+    title: getI18nString("org_settings.sso.configure_saml_sso"),
     maxWidth: 459,
     onClose: w,
     disableClickOutsideToHide: c,
@@ -367,11 +367,11 @@ function A(e) {
     children: [jsxs("div", {
       className: "configure_saml--baseContainer--1WzcF",
       children: [jsx("div", {
-        children: tx("org_settings.sso.please_review_the_information_you_entered")
+        children: renderI18nText("org_settings.sso.please_review_the_information_you_entered")
       }), f && e.idp_name && jsxs(Fragment, {
         children: [jsx("div", {
           className: y,
-          children: tx("org_settings.sso.identity_provider_id_p")
+          children: renderI18nText("org_settings.sso.identity_provider_id_p")
         }), jsx("div", {
           className: k,
           children: A[e.idp_name]
@@ -380,19 +380,19 @@ function A(e) {
           children: [("other" === e.idp_name || "google" === e.idp_name) && jsxs(Fragment, {
             children: [jsx("div", {
               className: y,
-              children: tx("org_settings.sso.idp_entity_id")
+              children: renderI18nText("org_settings.sso.idp_entity_id")
             }), jsx("div", {
               className: k,
               children: e.idp_entity_id
             }), jsx("div", {
               className: y,
-              children: tx("org_settings.sso.idp_sso_url")
+              children: renderI18nText("org_settings.sso.idp_sso_url")
             }), jsx("div", {
               className: k,
               children: e.idp_sso_target_url
             }), jsx("div", {
               className: y,
-              children: tx("org_settings.sso.signing_certificate")
+              children: renderI18nText("org_settings.sso.signing_certificate")
             }), jsx("div", {
               className: k,
               children: e.certificate.name
@@ -400,7 +400,7 @@ function A(e) {
           }), "other" !== e.idp_name && "google" !== e.idp_name && jsxs(Fragment, {
             children: [jsx("div", {
               className: y,
-              children: tx("org_settings.sso.id_p_metadata_url")
+              children: renderI18nText("org_settings.sso.id_p_metadata_url")
             }), jsx("div", {
               className: k,
               children: e.idp_metadata_url
@@ -417,7 +417,7 @@ function A(e) {
             return jsxs(_$$Fragment, {
               children: [i, r && jsxs("span", {
                 className: "configure_saml--remappedLabel--mMlqG",
-                children: [" ", _$$t("idp_management.remapped_label")]
+                children: [" ", getI18nString("idp_management.remapped_label")]
               })]
             }, t);
           }));
@@ -429,15 +429,15 @@ function A(e) {
               className: l.length > 0 ? "" : j,
               children: [jsx("div", {
                 className: y,
-                children: tx("idp_management.mapped_domains")
+                children: renderI18nText("idp_management.mapped_domains")
               }), jsx("div", {
                 className: k,
-                children: 0 === t.length ? tx("idp_management.no_mapped_domains") : a
+                children: 0 === t.length ? renderI18nText("idp_management.no_mapped_domains") : a
               })]
             }), l.length > 0 && jsxs(Fragment, {
               children: [jsx("div", {
                 className: y,
-                children: tx("idp_management.unmapped_domains")
+                children: renderI18nText("idp_management.unmapped_domains")
               }), jsx("div", {
                 className: k,
                 children: l.map(e => e.domain).join(", ")
@@ -446,7 +446,7 @@ function A(e) {
                 children: jsx($y, {
                   variant: "warn",
                   children: jsx(Q, {
-                    title: tx("idp_management.unmapped_domains_warning.title", {
+                    title: renderI18nText("idp_management.unmapped_domains_warning.title", {
                       membersCount: d
                     }),
                     children: jsx("span", {
@@ -513,10 +513,10 @@ function A(e) {
           }
         }));
       },
-      confirmButtonText: _$$t("org_settings.sso.configure_saml_sso"),
-      cancelButtonText: _$$t("org_settings.sso.edit"),
+      confirmButtonText: getI18nString("org_settings.sso.configure_saml_sso"),
+      cancelButtonText: getI18nString("org_settings.sso.edit"),
       children: jsx("div", {
-        children: tx("org_settings.sso.this_information_is_correct")
+        children: renderI18nText("org_settings.sso.this_information_is_correct")
       })
     })]
   });
@@ -527,4 +527,4 @@ qK($$T0, e => jsx(A, {
   ...e.modalShown.data
 }));
 export const rp = $$T0;
-export const mW = $$I1; 
+export const mW = $$I1;

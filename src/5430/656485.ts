@@ -4,7 +4,7 @@ import { useDispatch } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
 import a from "classnames";
 import { a as _$$a } from "../905/925868";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { e as _$$e } from "../905/579755";
 import { QP, op } from "../figma_app/487970";
 import { X as _$$X } from "../figma_app/514836";
@@ -30,7 +30,7 @@ import { Uo } from "../figma_app/354658";
 import { HK } from "../figma_app/155287";
 import { gz, kJ, GJ } from "../5430/455879";
 import { cz, i8 } from "../905/14017";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { s as _$$s } from "../cssbuilder/589278";
 import { sx as _$$sx } from "../905/941192";
 import { P as _$$P, Mf } from "../5430/367577";
@@ -51,7 +51,7 @@ function M({
       id: e.id
     }),
     className: r,
-    children: tx("community.view")
+    children: renderI18nText("community.view")
   });
 }
 let V = "plugin_dropdown_preview--pluginMediaContainer--QVFs6";
@@ -101,7 +101,7 @@ function $({
       autoPlay: !0,
       muted: !0,
       onEnded: () => {
-        sx("rdp_video_ended", {
+        trackEventAnalytics("rdp_video_ended", {
           community_resource_id: e.id,
           resouce_type: "plugin",
           searchSessionId: i
@@ -263,7 +263,7 @@ function eo({
       }), jsx(So, {
         disableRepositioning: !0,
         className: l()("plugin_row--toolTip--Uxz1M dropdown--dropdown--IX0tU text--fontPos14--OL9Hp text--_fontBase--QdLsd", "plugin_row--toolTipPositioning--OgVuh"),
-        preview: tx("community.try.used_by_n_people", {
+        preview: renderI18nText("community.try.used_by_n_people", {
           num: n.unique_run_count
         }),
         children: jsx(i8, {
@@ -279,7 +279,7 @@ function eo({
       })
     }), e && t && jsx("div", {
       className: "plugin_row--creatorRowText--wDppz text--fontPos13--xW8hS text--_fontBase--QdLsd",
-      children: tx("community.by_publisher", {
+      children: renderI18nText("community.by_publisher", {
         publisher: a?.name
       })
     })]
@@ -423,7 +423,7 @@ export function $$ea0({
         style: ed ? {
           WebkitLineClamp: 1
         } : {},
-        children: A ? tx("community.by_publisher", {
+        children: A ? renderI18nText("community.by_publisher", {
           publisher: e_?.name
         }) : G8(W, void 0, !0)
       })]

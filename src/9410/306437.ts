@@ -1,5 +1,5 @@
 import { useLayoutEffect } from "react";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { parsePxInt } from "../figma_app/783094";
 import { F } from "../905/680873";
 import { dh } from "../figma_app/186343";
@@ -11,7 +11,7 @@ export function $$u0({
   scrollContainerRef: t
 }) {
   let i = dh();
-  let a = md(l7);
+  let a = useAtomWithSubscription(l7);
   let d = F(e);
   let c = F(!!a);
   useLayoutEffect(() => {
@@ -36,7 +36,7 @@ function p({
 }) {
   let r = i.current;
   if (!r) return;
-  let n = t.findIndex((t) => t.nodeId === e);
+  let n = t.findIndex(t => t.nodeId === e);
   if (-1 === n) return;
   let a = n * c;
   let s = a + c;

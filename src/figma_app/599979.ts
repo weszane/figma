@@ -7,9 +7,9 @@ import { i as _$$i } from "../905/970229";
 import { yr, aB } from "../905/827765";
 import { debugState } from "../905/407919";
 import { VV } from "../905/623179";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { XHR } from "../905/910117";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
 import { S as _$$S } from "../905/872825";
 import { AC, XU } from "../figma_app/777551";
@@ -263,20 +263,20 @@ export function $$ed35(e, t) {
 export function $$ec40(e, t) {
   if ("org_id" in e) {
     let r = t.orgById[e.org_id];
-    return r ? _$$t("community.publishing.org_name", {
+    return r ? getI18nString("community.publishing.org_name", {
       org: r.name
-    }) : _$$t("general.fallback_org_name");
+    }) : getI18nString("general.fallback_org_name");
   }
   if ("team_id" in e) {
     let r = t.teams[e.team_id];
-    return r ? _$$t("community.publishing.team_name", {
+    return r ? getI18nString("community.publishing.team_name", {
       team: r.name
-    }) : _$$t("general.fallback_team_name");
+    }) : getI18nString("general.fallback_team_name");
   }
   {
     let r = t.authedUsers.byId[e.user_id] ?? t.user;
     let n = sD(r, t.authedProfilesById);
-    return n ? n.name : r?.name || _$$t("general.fallback_user_name");
+    return n ? n.name : r?.name || getI18nString("general.fallback_user_name");
   }
 }
 export function $$eu37(e, t) {
@@ -296,14 +296,14 @@ export function $$eu37(e, t) {
 }
 export let $$ep3 = [yj.PNG, yj.JPEG];
 export function $$e_26(e, t = "Image") {
-  if (!e) throw Error(_$$t("community.publishing.error_thumbnail_image_not_found", {
+  if (!e) throw Error(getI18nString("community.publishing.error_thumbnail_image_not_found", {
     filename: t
   }));
   let r = _$$S(e.type, yj);
-  if (!r || !$$ep3.includes(r)) throw Error(_$$t("community.publishing.error_thumbnail_image_wrong_format", {
+  if (!r || !$$ep3.includes(r)) throw Error(getI18nString("community.publishing.error_thumbnail_image_wrong_format", {
     filename: t
   }));
-  if (e.size > Uc) throw Error(_$$t("community.publishing.error_thumbnail_image_too_large", {
+  if (e.size > Uc) throw Error(getI18nString("community.publishing.error_thumbnail_image_too_large", {
     filename: t,
     max_size: Math.floor(Uc / 1e6)
   }));
@@ -319,10 +319,10 @@ export function $$eh36(e) {
 }
 let em = new Set();
 export async function $$eg1(e, t) {
-  if (null === e.files || !e.files[0]) throw Error(_$$t("community.publishing.error_thumbnail_image_not_found_no_filename"));
+  if (null === e.files || !e.files[0]) throw Error(getI18nString("community.publishing.error_thumbnail_image_not_found_no_filename"));
   t && $$eN39(t);
   let r = e.files[0];
-  $$e_26(r, _$$t("community.publishing.thumbnail_image"));
+  $$e_26(r, getI18nString("community.publishing.thumbnail_image"));
   let [n, i] = await Promise.all([$$eh36(URL.createObjectURL(r)), _$$c(r)]);
   em.add(n.src);
   return {
@@ -335,13 +335,13 @@ export async function $$ef9(e, t, r = en) {
   for (let i of Array.from(e).slice(0, r)) if (t && i.type.startsWith("video/")) {
     !function (e) {
       let t = e.name;
-      if (!e) throw Error(_$$t("community.publishing.error_thumbnail_image_not_found", {
+      if (!e) throw Error(getI18nString("community.publishing.error_thumbnail_image_not_found", {
         filename: t
       }));
-      if (!VY.includes(e.type)) throw Error(_$$t("community.publishing.error_video_wrong_format", {
+      if (!VY.includes(e.type)) throw Error(getI18nString("community.publishing.error_video_wrong_format", {
         filename: t
       }));
-      if (e.size > Gq) throw Error(_$$t("community.publishing.error_thumbnail_image_too_large", {
+      if (e.size > Gq) throw Error(getI18nString("community.publishing.error_thumbnail_image_too_large", {
         filename: t,
         max_size: Math.floor(Gq / 1e6)
       }));
@@ -361,7 +361,7 @@ export async function $$ef9(e, t, r = en) {
       thumbnail_sha1: Et(r)
     });
   } else {
-    $$e_26(i, _$$t("community.publishing.carousel_media_image"));
+    $$e_26(i, getI18nString("community.publishing.carousel_media_image"));
     let [e, t] = await Promise.all([$$eh36(URL.createObjectURL(i)), _$$c(i)]);
     em.add(e.src);
     let r = new Uint8Array(t);
@@ -378,7 +378,7 @@ export async function $$eE15(e, t) {
   return null === e.files || 0 === e.files.length ? Promise.resolve([]) : await $$ef9(e.files, t);
 }
 export function $$ey44(e) {
-  if (!e || !e.length) return _$$t("community.publishing.upload_at_least_one_image");
+  if (!e || !e.length) return getI18nString("community.publishing.upload_at_least_one_image");
 }
 async function eb(e, t) {
   if ((await new Promise((t, r) => {
@@ -396,7 +396,7 @@ async function eb(e, t) {
     setTimeout(() => {
       r("Video load timeout during video length validation");
     }, 1e4);
-  })) > GT) throw Error(_$$t("community.publishing.error_video_too_long", {
+  })) > GT) throw Error(getI18nString("community.publishing.error_video_too_long", {
     filename: t,
     max_length: GT
   }));
@@ -408,7 +408,7 @@ export function $$eT11(e) {
   e && e.forEach((e, i) => {
     if ("buffer" in e) {
       if ("video" === e.type) {
-        if (!e.thumbnail_buffer) throw Error(_$$t("community.publishing.error_video_thumbnail_not_found"));
+        if (!e.thumbnail_buffer) throw Error(getI18nString("community.publishing.error_video_thumbnail_not_found"));
         let t = {
           carousel_position: i,
           sha1: Et(e.buffer),
@@ -475,8 +475,8 @@ export function $$eI20(e, t) {
         await yr(e, t);
       }
     } catch (e) {
-      $D(_$$e.COMMUNITY, e);
-      return Error(_$$t("community.actions.error_uploading_carousel_image_error", {
+      reportError(_$$e.COMMUNITY, e);
+      return Error(getI18nString("community.actions.error_uploading_carousel_image_error", {
         error: J(e, e.data?.message || "unknown error")
       }));
     }
@@ -510,8 +510,8 @@ export async function $$ev18(e, t, r, n) {
       images_sha1: uploadImages
     })).data.meta;
   } catch (e) {
-    $D(_$$e.COMMUNITY, e);
-    return Error(J(e, _$$t("community.actions.could_not_connect_to_the_server")));
+    reportError(_$$e.COMMUNITY, e);
+    return Error(J(e, getI18nString("community.actions.could_not_connect_to_the_server")));
   }
   let l = [];
   for (let e of i.carousel_images) {
@@ -535,8 +535,8 @@ export async function $$ev18(e, t, r, n) {
       carousel_images: allMedia
     };
   } catch (e) {
-    $D(_$$e.COMMUNITY, e);
-    return Error(J(e, _$$t("community.actions.error_connecting_to_server_to_upload_file_images")));
+    reportError(_$$e.COMMUNITY, e);
+    return Error(J(e, getI18nString("community.actions.error_connecting_to_server_to_upload_file_images")));
   }
 }
 export function $$eA27(e, t) {
@@ -670,7 +670,7 @@ export async function $$eD7(e, t, r, n, s) {
     fields: videoThumbnail.fields,
     signedCloudfrontUrl: videoThumbnail.signedCloudfrontUrl
   }, p, n).catch(e => {
-    throw Error(_$$t("community.actions.error_uploading_plugin_video_thumbnail_error", {
+    throw Error(getI18nString("community.actions.error_uploading_plugin_video_thumbnail_error", {
       error: J(e, e.data?.message || "unknown error")
     }));
   });

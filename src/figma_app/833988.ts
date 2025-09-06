@@ -1,6 +1,6 @@
 import { useCallback } from "react";
-import { md } from "../figma_app/27355";
-import { az } from "../905/449184";
+import { useAtomWithSubscription } from "../figma_app/27355";
+import { analyticsEventManager } from "../905/449184";
 import { isGovCluster } from "../figma_app/169182";
 import { zN } from "../figma_app/579169";
 import { tS } from "../figma_app/516028";
@@ -15,7 +15,7 @@ export function $$u1(e) {
 export function $$p0() {
   let e = iZ();
   let t = tS();
-  let r = md(zN);
+  let r = useAtomWithSubscription(zN);
   let c = "loaded" !== r.status || !0 === r.data || isGovCluster();
   return useCallback(({
     newTitle: r,
@@ -29,7 +29,7 @@ export function $$p0() {
   }) {
     if (i) return;
     let s = $$u1(r);
-    az.trackDefinedEvent("node_name.changed", {
+    analyticsEventManager.trackDefinedEvent("node_name.changed", {
       fileKey: e,
       nodeType: t,
       userId: n,

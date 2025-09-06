@@ -1,11 +1,11 @@
 import { useSelector } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 export function $$s2() {
   return !!getFeatureFlags().sites;
 }
 export function $$o0(e) {
-  return !!$$s2() && "fullscreen" === e.view && e.editorType === nT.Sites;
+  return !!$$s2() && "fullscreen" === e.view && e.editorType === FEditorType.Sites;
 }
 export function $$l1() {
   return useSelector(e => $$o0(e.selectedView));

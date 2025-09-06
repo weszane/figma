@@ -6,7 +6,7 @@ import { A as _$$A } from "../905/251970";
 import l from "classnames";
 import { buildUploadUrl } from "../figma_app/169182";
 import { Kz } from "../figma_app/637027";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { b as _$$b } from "../905/985254";
 import { fu } from "../figma_app/831799";
 import { DP } from "../905/640017";
@@ -75,8 +75,8 @@ function P() {
       className: "no_figma_basics_panning_and_zooming_step--readyToDesignMoreContainer--nu9cG",
       children: [jsx("div", {
         className: "no_figma_basics_panning_and_zooming_step--readyToDesignMoreBoldText--H6Q1p",
-        children: tx("tooltips_plus_onboarding.ready_to_design_more")
-      }), tx("tooltips_plus_onboarding.go_to_a_blank_spot_in_your_canvas"), jsx(Kz, {
+        children: renderI18nText("tooltips_plus_onboarding.ready_to_design_more")
+      }), renderI18nText("tooltips_plus_onboarding.go_to_a_blank_spot_in_your_canvas"), jsx(Kz, {
         multiple: 3
       }), jsx("div", {
         style: {
@@ -108,14 +108,14 @@ function k() {
                 [N]: "mouse" !== t
               }),
               onClick: () => r("mouse"),
-              children: tx("tooltips_plus_onboarding.mouse")
+              children: renderI18nText("tooltips_plus_onboarding.mouse")
             }), jsx("button", {
               className: d()({
                 [x]: "trackpad" === t,
                 [N]: "trackpad" !== t
               }),
               onClick: () => r("trackpad"),
-              children: tx("tooltips_plus_onboarding.trackpad")
+              children: renderI18nText("tooltips_plus_onboarding.trackpad")
             })]
           }), jsx("div", {
             className: "no_figma_basics_panning_and_zooming_step--closeButton--UAV5m",
@@ -125,7 +125,7 @@ function k() {
                   dismissed_no_figma_basics_panning_and_zooming_tooltip: !0
                 }));
               },
-              "aria-label": _$$t("general.close"),
+              "aria-label": getI18nString("general.close"),
               htmlAttributes: {
                 "data-testid": "close-button"
               },
@@ -169,11 +169,11 @@ function G({
     }), jsxs("div", {
       children: [jsx("span", {
         className: O,
-        children: tx("tooltips_plus_onboarding.to_zoom")
-      }), "\xa0", "mouse" !== e ? tx("tooltips_plus_onboarding.pinch_your_trackpad") : a ? tx("tooltips_plus_onboarding.scroll_your_mouse") : tx("tooltips_plus_onboarding.hold_key_and_scroll", {
+        children: renderI18nText("tooltips_plus_onboarding.to_zoom")
+      }), "\xa0", "mouse" !== e ? renderI18nText("tooltips_plus_onboarding.pinch_your_trackpad") : a ? renderI18nText("tooltips_plus_onboarding.scroll_your_mouse") : renderI18nText("tooltips_plus_onboarding.hold_key_and_scroll", {
         keyboardKey: jsx("span", {
           className: R,
-          children: tx(_$$y.isMac() ? "tooltips_plus_onboarding.command_key" : "tooltips_plus_onboarding.control_key")
+          children: renderI18nText(_$$y.isMac() ? "tooltips_plus_onboarding.command_key" : "tooltips_plus_onboarding.control_key")
         })
       })]
     })]
@@ -194,11 +194,11 @@ function V({
     }), jsxs("div", {
       children: [jsx("span", {
         className: O,
-        children: tx("tooltips_plus_onboarding.to_move")
-      }), "\xa0", "mouse" !== e ? tx("tooltips_plus_onboarding.swipe_your_trackpad_with_two_fingers") : r ? tx("tooltips_plus_onboarding.hold_right_click_while_moving_mouse") : tx("tooltips_plus_onboarding.hold_space_and_left_click_while_moving_your_mouse", {
+        children: renderI18nText("tooltips_plus_onboarding.to_move")
+      }), "\xa0", "mouse" !== e ? renderI18nText("tooltips_plus_onboarding.swipe_your_trackpad_with_two_fingers") : r ? renderI18nText("tooltips_plus_onboarding.hold_right_click_while_moving_mouse") : renderI18nText("tooltips_plus_onboarding.hold_space_and_left_click_while_moving_your_mouse", {
         spaceKey: jsx("span", {
           className: R,
-          children: tx("tooltips_plus_onboarding.space_key")
+          children: renderI18nText("tooltips_plus_onboarding.space_key")
         })
       })]
     })]

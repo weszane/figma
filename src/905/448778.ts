@@ -1,5 +1,5 @@
 import { ServiceCategories as _$$e } from "../905/165054";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { L } from "../905/694400";
 export function $$s0(e, t, i) {
   let [s] = t.useSyncedState(i, null);
@@ -11,7 +11,7 @@ export function $$s0(e, t, i) {
         let i = e.createImage(t).hash;
         l(i);
       } catch (e) {
-        $D(_$$e.FIGJAM, e);
+        reportError(_$$e.FIGJAM, e);
         return;
       }
     }

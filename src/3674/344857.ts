@@ -4,15 +4,15 @@ import { useEffect, useCallback, useRef, memo, createContext, useContext, useMem
 import { useDispatch, useSelector } from "../vendor/514228";
 import { w3z, NLJ, NVY, m1T, _gJ, Egt, glU, juq, Vzr, J0O, Z_n, JTp, Ez5, mKm, zIx, Oin, rrT, vXe, i1K, FAf, lyf } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { fp as _$$fp, md, eU as _$$eU, zl, Xr, AY, E3 } from "../figma_app/27355";
+import { useAtomValueAndSetter, useAtomWithSubscription, atom, atomStoreManager, Xr, AY, createLocalStorageAtom } from "../figma_app/27355";
 import { D as _$$D } from "../905/882262";
 import { si as _$$si, wS, g$, iX as _$$iX, Bv, x9 } from "../figma_app/221240";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { tH as _$$tH, H4 } from "../905/751457";
-import { sx as _$$sx } from "../905/449184";
-import { sn as _$$sn } from "../905/542194";
+import { trackEventAnalytics } from "../905/449184";
+import { globalPerfTimer } from "../905/542194";
 import { h as _$$h } from "../905/207101";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { tw as _$$tw, ax as _$$ax, Uc, wr, tJ as _$$tJ, NI, aY as _$$aY, NT } from "../figma_app/741237";
 import { Fk, $y, wA as _$$wA, Gj } from "../figma_app/167249";
 import { ec as _$$ec, Te } from "../figma_app/29089";
@@ -37,7 +37,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { sx as _$$sx2 } from "../905/941192";
 import { J as _$$J2 } from "../905/799737";
 import { buildUploadUrl, isGovCluster } from "../figma_app/169182";
-import { tx as _$$tx, t as _$$t2 } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { c as _$$c2 } from "../905/370443";
 import { D2i, oBY, Pns, XGw, Ssd, jJU, nlH } from "../figma_app/43951";
 import { U as _$$U } from "../figma_app/65327";
@@ -74,7 +74,7 @@ import { t as _$$t3 } from "../905/331623";
 import { ue as _$$ue, n2 as _$$n3, vl, yT } from "../figma_app/332598";
 import { uz as _$$uz, MT, p as _$$p, Ap, LK, NU } from "../905/359509";
 import { E as _$$E } from "../905/632989";
-import { md as _$$md } from "../vendor/525001";
+import { useAtomValue } from "../vendor/525001";
 import eU from "../vendor/77708";
 import { v4, QN, AC, Pt } from "../figma_app/655139";
 import { fk, B7, Qm, g6, vI, $R, yP, p2 as _$$p2, cZ as _$$cZ, Vx } from "../figma_app/883490";
@@ -245,7 +245,7 @@ import { dI as _$$dI } from "../figma_app/204145";
 import { lW as _$$lW } from "../figma_app/11182";
 import { Up, P8, Zl as _$$Zl } from "../figma_app/455620";
 import { B as _$$B3 } from "../figma_app/539422";
-import { yQ as _$$yQ } from "../905/236856";
+import { waitForAnimationFrame } from "../905/236856";
 import { $1, cW as _$$cW, uf as _$$uf, YN, nl as _$$nl, Be as _$$Be } from "../figma_app/844435";
 import { se as _$$se, Ut, Jc, xG, r2 as _$$r5 } from "../figma_app/603466";
 import { tk as _$$tk, uF as _$$uF, $u } from "../figma_app/300692";
@@ -282,7 +282,7 @@ import { b as _$$b5 } from "../905/217163";
 import { bj } from "../905/420347";
 import { b as _$$b6 } from "../1528/176770";
 import { x as _$$x2 } from "../1528/887790";
-import { J as _$$J6, n as _$$n7 } from "../figma_app/854115";
+import { figmaItemsAtom, findComponentGuidOrPublishId } from "../figma_app/854115";
 import { A as _$$A13 } from "../1617/230645";
 import { gl } from "../905/216495";
 import { z4 as _$$z3 } from "../figma_app/95266";
@@ -297,7 +297,7 @@ import { L as _$$L2 } from "../905/408237";
 import { A as _$$A14 } from "../svg/86097";
 import { k9 } from "../905/19536";
 import { z as _$$z4 } from "../905/239603";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { Ns } from "../905/760074";
 import { yX } from "../figma_app/918700";
 import { X as _$$X4 } from "../905/128376";
@@ -374,7 +374,7 @@ import { g as _$$g2 } from "../905/125190";
 import { pc as _$$pc } from "../figma_app/715641";
 import { Fe, r_ as _$$r_ } from "../469e6e40/936617";
 import { Yo } from "../figma_app/543529";
-import { nT as _$$nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { Q as _$$Q3 } from "../1528/190444";
 import { L as _$$L3 } from "../469e6e40/302359";
 import { Nh, b6, xX, vl as _$$vl, E6 } from "../905/560959";
@@ -399,7 +399,7 @@ import { l as _$$l6 } from "../905/716947";
 import cP from "../vendor/7508";
 import cR from "../vendor/656470";
 import cO from "../vendor/260986";
-import { nl as _$$nl2 } from "../figma_app/257275";
+import { nl as _$$nl2 } from ".../figma_app/897289";
 import { zX } from "../905/576487";
 import { O as _$$O5, K as _$$K5 } from "../figma_app/140784";
 import { rg as _$$rg, aK as _$$aK } from "../figma_app/401069";
@@ -431,7 +431,7 @@ import { G as _$$G4 } from "../905/800369";
 import { f as _$$f5, pe as _$$pe, Pq, Kx, tz as _$$tz, SV, lk as _$$lk2 } from "../figma_app/342355";
 import { Fc } from "../figma_app/484865";
 import { $k, As } from "../figma_app/802241";
-import { y3, eD as _$$eD } from "../figma_app/876459";
+import { hasDesktopAPI, desktopAPIInstance } from "../figma_app/876459";
 import { gP as _$$gP } from "../figma_app/594947";
 import { mp as _$$mp } from "../figma_app/864723";
 import { pT as _$$pT } from "../figma_app/297957";
@@ -473,7 +473,7 @@ import { J as _$$J0 } from "../figma_app/785050";
 import { A as _$$A23 } from "../svg/757731";
 import { A as _$$A24 } from "../svg/454921";
 import { A as _$$A25 } from "../svg/220638";
-import { W as _$$W4 } from "../figma_app/433958";
+import { useSetupInteractionTimeout } from "../figma_app/433958";
 import { K as _$$K6 } from "../figma_app/291291";
 import { C as _$$C2 } from "../905/520159";
 import { c as _$$c9 } from "../905/90943";
@@ -500,26 +500,26 @@ function b({
   let {
     commentsActive,
     isNodeSelected
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     commentsActive: e.mirror.appModel.currentTool === _$$ec.tool,
     isNodeSelected: Object.keys(e.mirror.sceneGraphSelection).length > 0
   }));
   let o = _$$uQ();
   let l = Fk((e, t) => e?.get(t ?? "")?.isTopLevelFrame(), o);
   _$$h(() => {
-    let t = _$$sn.tryStop("switch_to_inspect_mode.right_panel_tti");
-    e && t && _$$sx("switch_to_inspect_mode.right_panel_tti", {
+    let t = globalPerfTimer.tryStop("switch_to_inspect_mode.right_panel_tti");
+    e && t && trackEventAnalytics("switch_to_inspect_mode.right_panel_tti", {
       elapsedMs: t,
       isNodeSelected
     }, {
       forwardToDatadog: !0
     });
-    _$$sn.tryStop("dev_handoff.select_node_tti");
+    globalPerfTimer.tryStop("dev_handoff.select_node_tti");
   });
   useEffect(() => {
     o && !commentsActive && requestAnimationFrame(() => {
-      let n = _$$sn.tryStop("dev_handoff.select_node_tti");
-      e && n && _$$sx("dev_handoff.select_node_tti", {
+      let n = globalPerfTimer.tryStop("dev_handoff.select_node_tti");
+      e && n && trackEventAnalytics("dev_handoff.select_node_tti", {
         elapsedMs: n,
         isTopLevelFrame: l,
         activeTab: t
@@ -543,10 +543,10 @@ function Q() {
   let s = jsxs(Fragment, {
     children: [jsx(_$$J2, {
       className: DD,
-      children: l ? _$$tx("dev_handoff.paywall.pending_modal.grace_period_end.title") : _$$tx("dev_handoff.paywall.pending_modal.no_grace_period.title")
+      children: l ? renderI18nText("dev_handoff.paywall.pending_modal.grace_period_end.title") : renderI18nText("dev_handoff.paywall.pending_modal.no_grace_period.title")
     }), jsx("div", {
       className: P_,
-      children: l ? _$$tx("dev_handoff.paywall.pending_modal.grace_period.description") : _$$tx("dev_handoff.paywall.pending_modal.no_grace_period.billing_remodel_description")
+      children: l ? renderI18nText("dev_handoff.paywall.pending_modal.grace_period.description") : renderI18nText("dev_handoff.paywall.pending_modal.no_grace_period.billing_remodel_description")
     })]
   });
   let r = useCallback(() => {
@@ -557,7 +557,7 @@ function Q() {
     content: s,
     modalType: "request pending modal",
     primaryButtonProps: {
-      label: _$$tx("dev_handoff.paywall.blocking_modal.button.back_to_design"),
+      label: renderI18nText("dev_handoff.paywall.blocking_modal.button.back_to_design"),
       onClick: r,
       trackingDescriptor: _$$c2.BACK_TO_DESIGN,
       type: "back to design"
@@ -575,15 +575,15 @@ function Y() {
     content: jsxs(Fragment, {
       children: [jsx(_$$J2, {
         className: DD,
-        children: _$$tx("dev_handoff.paywall.success_modal.youre_all_set")
+        children: renderI18nText("dev_handoff.paywall.success_modal.youre_all_set")
       }), jsx("div", {
         className: P_,
-        children: _$$tx("dev_handoff.paywall.success_modal.well_let_you_know_when")
+        children: renderI18nText("dev_handoff.paywall.success_modal.well_let_you_know_when")
       })]
     }),
     modalType: "request sent modal",
     primaryButtonProps: {
-      label: _$$tx("dev_handoff.paywall.blocking_modal.button.back_to_design"),
+      label: renderI18nText("dev_handoff.paywall.blocking_modal.button.back_to_design"),
       onClick: t,
       trackingDescriptor: _$$c2.BACK_TO_DESIGN,
       type: "back to design"
@@ -599,18 +599,18 @@ function eu({
   let l = jsxs(Fragment, {
     children: [jsx("div", {
       className: DD,
-      children: _$$tx("dev_handoff.paywall.request_reminder_modal.title")
+      children: renderI18nText("dev_handoff.paywall.request_reminder_modal.title")
     }), jsx("div", {
       className: P_,
-      children: _$$tx("dev_handoff.paywall.request_reminder_modal.description")
+      children: renderI18nText("dev_handoff.paywall.request_reminder_modal.description")
     })]
   });
   let s = () => {
     n(_$$F.enqueue({
-      message: _$$t2("admin_dashboard.requests.error_generic"),
+      message: getI18nString("admin_dashboard.requests.error_generic"),
       error: !0,
       button: {
-        text: _$$t2("admin_dashboard.requests.error_reload"),
+        text: getI18nString("admin_dashboard.requests.error_reload"),
         action: () => {
           Ay.reload("Seat request reminder error");
         }
@@ -625,7 +625,7 @@ function eu({
     modalType: "request reminder modal",
     content: l,
     primaryButtonProps: {
-      label: _$$tx("dev_handoff.paywall.request_reminder_modal.button.send_a_reminder"),
+      label: renderI18nText("dev_handoff.paywall.request_reminder_modal.button.send_a_reminder"),
       onClick: () => {
         _$$w.nudgeRequest({
           request_id: e
@@ -637,7 +637,7 @@ function eu({
       type: "send reminder"
     },
     secondaryButtonProps: {
-      label: _$$tx("dev_handoff.paywall.blocking_modal.button.back_to_design"),
+      label: renderI18nText("dev_handoff.paywall.blocking_modal.button.back_to_design"),
       onClick: r,
       trackingDescriptor: _$$c2.BACK_TO_DESIGN,
       type: "back to design"
@@ -650,10 +650,10 @@ function eh() {
   let t = jsxs(Fragment, {
     children: [jsx("div", {
       className: DD,
-      children: _$$tx("dev_handoff.paywall.reminder_sent_modal.title")
+      children: renderI18nText("dev_handoff.paywall.reminder_sent_modal.title")
     }), jsx("div", {
       className: P_,
-      children: _$$tx("dev_handoff.paywall.reminder_sent_modal.description")
+      children: renderI18nText("dev_handoff.paywall.reminder_sent_modal.description")
     })]
   });
   let n = useCallback(() => {
@@ -664,7 +664,7 @@ function eh() {
     content: t,
     modalType: "reminder sent modal",
     primaryButtonProps: {
-      label: _$$tx("dev_handoff.paywall.blocking_modal.button.back_to_design"),
+      label: renderI18nText("dev_handoff.paywall.blocking_modal.button.back_to_design"),
       onClick: n,
       trackingDescriptor: _$$c2.BACK_TO_DESIGN,
       type: "back to design"
@@ -684,10 +684,10 @@ function em() {
     className: _$$s.gap6.$,
     children: [jsx("div", {
       className: DD,
-      children: _$$tx("dev_handoff.paywall.blocking_modal.title.locked")
+      children: renderI18nText("dev_handoff.paywall.blocking_modal.title.locked")
     }), jsx("div", {
       className: P_,
-      children: n ? _$$tx("dev_handoff.paywall.blocking_modal.content.locked_upgrade") : _$$tx("dev_handoff.paywall.blocking_modal.content.locked")
+      children: n ? renderI18nText("dev_handoff.paywall.blocking_modal.content.locked_upgrade") : renderI18nText("dev_handoff.paywall.blocking_modal.content.locked")
     })]
   });
   return jsx(_$$I, {
@@ -709,7 +709,7 @@ function em() {
 }
 function e_() {
   !function () {
-    let [e, t] = _$$fp(_$$t);
+    let [e, t] = useAtomValueAndSetter(_$$t);
     let n = _$$J3();
     let a = _$$tS() ?? "";
     let o = w_();
@@ -727,7 +727,7 @@ function e_() {
       !s && a && !d && c && e === _$$c.REQUESTED && (t(_$$c.DEFAULT), u.current = !1);
     }, [e, c, d, s, n, t]);
   }();
-  let e = md(_$$t);
+  let e = useAtomWithSubscription(_$$t);
   let t = _$$tS() ?? "";
   let n = _$$J3();
   let l = useSelector(e => _$$oc(H7(e)?.id ?? "", e));
@@ -822,7 +822,7 @@ function eO() {
           children: [jsx(_$$n2, {}), jsx(_$$d2, {})]
         }), jsx("div", {
           className: "left_panel--panelTitle--Q4BOG dev_handoff_nodes_panel--panelTitle--wcEcM",
-          children: _$$tx("dev_handoff.tag.ready_for_development")
+          children: renderI18nText("dev_handoff.tag.ready_for_development")
         }), jsxs("div", {
           className: "left_panel--loadingParentRow--9WZnv",
           children: [jsx(_$$B, {
@@ -932,7 +932,7 @@ function tr({
             corner: Ck.TOP_LEFT
           }), jsxs(tg, {
             children: [jsx(tx, {
-              children: _$$tx("dev_handoff.box_model.border")
+              children: renderI18nText("dev_handoff.box_model.border")
             }), jsx(tb, {
               side: gP.TOP
             })]
@@ -948,7 +948,7 @@ function tr({
               children: [jsx("div", {
                 className: "box_model--paddingLabel--MsGiF",
                 children: jsx(tx, {
-                  children: _$$tx("dev_handoff.box_model.padding")
+                  children: renderI18nText("dev_handoff.box_model.padding")
                 })
               }), t ? jsx(tN, {}) : jsx(tj, {
                 side: gP.TOP
@@ -1025,7 +1025,7 @@ function tu({
 function tp({
   image: e
 }) {
-  let t = _$$md(Qm);
+  let t = useAtomValue(Qm);
   let n = x$(e);
   let i = W3(e);
   "VIDEO" !== e.type && i && t?.[i] && (n = t[i]);
@@ -1161,57 +1161,57 @@ function tm({
       case "distance":
         switch (e) {
           case gP.TOP:
-            return _$$t2("dev_handoff.box_model.copy_distance_top", {
+            return getI18nString("dev_handoff.box_model.copy_distance_top", {
               value: n
             });
           case gP.RIGHT:
-            return _$$t2("dev_handoff.box_model.copy_distance_right", {
+            return getI18nString("dev_handoff.box_model.copy_distance_right", {
               value: n
             });
           case gP.BOTTOM:
-            return _$$t2("dev_handoff.box_model.copy_distance_bottom", {
+            return getI18nString("dev_handoff.box_model.copy_distance_bottom", {
               value: n
             });
           case gP.LEFT:
-            return _$$t2("dev_handoff.box_model.copy_distance_left", {
+            return getI18nString("dev_handoff.box_model.copy_distance_left", {
               value: n
             });
         }
       case "padding":
         switch (e) {
           case gP.TOP:
-            return _$$t2("dev_handoff.box_model.copy_padding_top_to_parent", {
+            return getI18nString("dev_handoff.box_model.copy_padding_top_to_parent", {
               value: n
             });
           case gP.RIGHT:
-            return _$$t2("dev_handoff.box_model.copy_padding_right_to_parent", {
+            return getI18nString("dev_handoff.box_model.copy_padding_right_to_parent", {
               value: n
             });
           case gP.BOTTOM:
-            return _$$t2("dev_handoff.box_model.copy_padding_bottom_to_parent", {
+            return getI18nString("dev_handoff.box_model.copy_padding_bottom_to_parent", {
               value: n
             });
           case gP.LEFT:
-            return _$$t2("dev_handoff.box_model.copy_padding_left_to_parent", {
+            return getI18nString("dev_handoff.box_model.copy_padding_left_to_parent", {
               value: n
             });
         }
       case "spacing":
         switch (e) {
           case gP.LEFT:
-            return _$$t2("dev_handoff.box_model.copy_gap_left", {
+            return getI18nString("dev_handoff.box_model.copy_gap_left", {
               value: n
             });
           case gP.TOP:
-            return _$$t2("dev_handoff.box_model.copy_gap_top", {
+            return getI18nString("dev_handoff.box_model.copy_gap_top", {
               value: n
             });
           case gP.RIGHT:
-            return _$$t2("dev_handoff.box_model.copy_gap_right", {
+            return getI18nString("dev_handoff.box_model.copy_gap_right", {
               value: n
             });
           case gP.BOTTOM:
-            return _$$t2("dev_handoff.box_model.copy_gap_bottom", {
+            return getI18nString("dev_handoff.box_model.copy_gap_bottom", {
               value: n
             });
         }
@@ -1244,59 +1244,59 @@ function tm({
 function t_(e, t) {
   if (e) switch (t) {
     case "STACK_PADDING_TOP":
-      return _$$t2("dev_handoff.box_model.copy_padding_top", {
+      return getI18nString("dev_handoff.box_model.copy_padding_top", {
         value: e
       });
     case "STACK_PADDING_RIGHT":
-      return _$$t2("dev_handoff.box_model.copy_padding_right", {
+      return getI18nString("dev_handoff.box_model.copy_padding_right", {
         value: e
       });
     case "STACK_PADDING_BOTTOM":
-      return _$$t2("dev_handoff.box_model.copy_padding_bottom", {
+      return getI18nString("dev_handoff.box_model.copy_padding_bottom", {
         value: e
       });
     case "STACK_PADDING_LEFT":
-      return _$$t2("dev_handoff.box_model.copy_padding_left", {
+      return getI18nString("dev_handoff.box_model.copy_padding_left", {
         value: e
       });
     case "BORDER_TOP_WEIGHT":
-      return _$$t2("dev_handoff.box_model.copy_border_top", {
+      return getI18nString("dev_handoff.box_model.copy_border_top", {
         value: e
       });
     case "BORDER_RIGHT_WEIGHT":
-      return _$$t2("dev_handoff.box_model.copy_border_right", {
+      return getI18nString("dev_handoff.box_model.copy_border_right", {
         value: e
       });
     case "BORDER_BOTTOM_WEIGHT":
-      return _$$t2("dev_handoff.box_model.copy_border_bottom", {
+      return getI18nString("dev_handoff.box_model.copy_border_bottom", {
         value: e
       });
     case "BORDER_LEFT_WEIGHT":
-      return _$$t2("dev_handoff.box_model.copy_border_left", {
+      return getI18nString("dev_handoff.box_model.copy_border_left", {
         value: e
       });
     case "RECTANGLE_TOP_LEFT_CORNER_RADIUS":
-      return _$$t2("dev_handoff.box_model.copy_border_radius_top_left", {
+      return getI18nString("dev_handoff.box_model.copy_border_radius_top_left", {
         value: e
       });
     case "RECTANGLE_TOP_RIGHT_CORNER_RADIUS":
-      return _$$t2("dev_handoff.box_model.copy_border_radius_top_right", {
+      return getI18nString("dev_handoff.box_model.copy_border_radius_top_right", {
         value: e
       });
     case "RECTANGLE_BOTTOM_RIGHT_CORNER_RADIUS":
-      return _$$t2("dev_handoff.box_model.copy_border_radius_bottom_right", {
+      return getI18nString("dev_handoff.box_model.copy_border_radius_bottom_right", {
         value: e
       });
     case "RECTANGLE_BOTTOM_LEFT_CORNER_RADIUS":
-      return _$$t2("dev_handoff.box_model.copy_border_radius_bottom_left", {
+      return getI18nString("dev_handoff.box_model.copy_border_radius_bottom_left", {
         value: e
       });
     case "WIDTH":
-      return _$$t2("dev_handoff.box_model.copy_width", {
+      return getI18nString("dev_handoff.box_model.copy_width", {
         value: e
       });
     case "HEIGHT":
-      return _$$t2("dev_handoff.box_model.copy_height", {
+      return getI18nString("dev_handoff.box_model.copy_height", {
         value: e
       });
     default:
@@ -1494,11 +1494,11 @@ function tk() {
     className: "box_model--borderBoxMessage--2jJc- text--fontPos11--2LvXf text--_fontBase--QdLsd",
     onClick: e,
     htmlAttributes: {
-      "data-tooltip": _$$t2("dev_handoff.box_model.border-box-tooltip"),
+      "data-tooltip": getI18nString("dev_handoff.box_model.border-box-tooltip"),
       "data-tooltip-type": Ib.TEXT,
       "data-tooltip-show-above": !0
     },
-    children: _$$tx("dev_handoff.box_model.border-box")
+    children: renderI18nText("dev_handoff.box_model.border-box")
   });
 }
 function tA(e) {
@@ -1605,7 +1605,7 @@ let t8 = {
     activeCodegenPlugin: null,
     codeLanguageOptions: [],
     formatter: {
-      format: e => _$$t2("dev_handoff.code.lang_css")
+      format: e => getI18nString("dev_handoff.code.lang_css")
     }
   }
 };
@@ -1625,12 +1625,12 @@ function t6() {
             withBorder: !1,
             children: [jsx("div", {
               className: "right_panel--tabActive--X7gwU legacy_pages_panel--tabActive--hmo0j legacy_pages_panel--tab--inhND",
-              "data-label": _$$t2("dev_handoff.tab.inspect"),
-              children: _$$tx("dev_handoff.tab.inspect")
+              "data-label": getI18nString("dev_handoff.tab.inspect"),
+              children: renderI18nText("dev_handoff.tab.inspect")
             }), jsx("div", {
               className: "right_panel--tab--qt6mo legacy_pages_panel--tab--inhND",
-              "data-label": _$$t2("dev_handoff.tab.plugins"),
-              children: _$$tx("dev_handoff.tab.plugins")
+              "data-label": getI18nString("dev_handoff.tab.plugins"),
+              children: renderI18nText("dev_handoff.tab.plugins")
             })]
           }), t && jsx(_$$H, {
             recordingKey: "propertiesPanel.zoomMenu"
@@ -1644,7 +1644,7 @@ function t6() {
               children: [jsx("div", {
                 dir: "auto",
                 className: tV,
-                children: _$$tx("dev_handoff.paywall.panel.button")
+                children: renderI18nText("dev_handoff.paywall.panel.button")
               }), jsx("div", {
                 className: tB
               })]
@@ -1682,7 +1682,7 @@ function t6() {
               })
             })
           }), jsxs(VZ, {
-            title: _$$t2("dev_handoff.layer_properties"),
+            title: getI18nString("dev_handoff.layer_properties"),
             recordingKey: "code_panel",
             collapsiblePanelKey: "code",
             children: [jsx(tr, {
@@ -1693,7 +1693,7 @@ function t6() {
             }), jsx(_$$ue, {
               header: jsx(_$$n3, {
                 type: "default",
-                title: _$$t2("inspect_panel.properties.layout"),
+                title: getI18nString("inspect_panel.properties.layout"),
                 actions: jsx("div", {})
               }),
               content: jsx(t3, {}),
@@ -1704,7 +1704,7 @@ function t6() {
             }), jsx("div", {
               className: _$$s.wFull.h12.$
             }), jsx(VZ, {
-              title: _$$t2("inspect_panel.colors.title"),
+              title: getI18nString("inspect_panel.colors.title"),
               isSubsection: !0,
               recordingKey: "colors",
               children: t4.map(({
@@ -1732,7 +1732,7 @@ function t6() {
               }, i))
             })]
           }), jsx(VZ, {
-            title: _$$t2("dev_handoff.assets"),
+            title: getI18nString("dev_handoff.assets"),
             recordingKey: "paywall-assets",
             collapsiblePanelKey: "assets",
             children: t7.map(({
@@ -1777,9 +1777,9 @@ function nl({
   canAccessDevModeEntryPoint: l
 }) {
   let r = Gu();
-  let d = [_$$t2("dev_handoff.paywall.vscode.list1"), _$$t2("dev_handoff.paywall.vscode.list2"), _$$t2("dev_handoff.paywall.vscode.list3"), _$$t2("dev_handoff.paywall.vscode.list4")];
+  let d = [getI18nString("dev_handoff.paywall.vscode.list1"), getI18nString("dev_handoff.paywall.vscode.list2"), getI18nString("dev_handoff.paywall.vscode.list3"), getI18nString("dev_handoff.paywall.vscode.list4")];
   let c = useCallback(() => {
-    _$$sx("Dev Mode Paywall clicked", {
+    trackEventAnalytics("Dev Mode Paywall clicked", {
       entryPoint: "vscode_paywall",
       type: "VS Code Upgrade CTAAAA",
       fileKey: e,
@@ -1797,7 +1797,7 @@ function nl({
     }));
   }, [e, n, o, t]);
   let u = useCallback(() => {
-    _$$sx("Dev Mode Paywall clicked", {
+    trackEventAnalytics("Dev Mode Paywall clicked", {
       entryPoint: "vscode_paywall",
       type: "VS Code Open docs",
       fileKey: e,
@@ -1810,7 +1810,7 @@ function nl({
     Qn("https://help.figma.com/hc/articles/15023121296151-Figma-for-VS-Code");
   }, [e, n, o, t]);
   let p = useCallback(() => {
-    _$$sx("Dev Mode Paywall clicked", {
+    trackEventAnalytics("Dev Mode Paywall clicked", {
       entryPoint: "vscode_paywall",
       type: "VS Code Play Video",
       fileKey: e,
@@ -1822,7 +1822,7 @@ function nl({
     });
   }, [e, n, o, t]);
   let f = useCallback(() => {
-    _$$sx("Dev Mode Paywall clicked", {
+    trackEventAnalytics("Dev Mode Paywall clicked", {
       entryPoint: "vscode_paywall",
       type: "VS Code Finish Video",
       fileKey: e,
@@ -1850,13 +1850,13 @@ function nl({
         className: _$$s.flex.flexGrow1.flexColumn.justifyCenter.alignTop.pt32.pl20.pr32.pb32.$,
         children: [jsx("div", {
           className: "vscode_paywall--vscodePaywallTitle---OrBg text--fontPos24--YppUD text--_fontBase--QdLsd",
-          children: _$$tx("dev_handoff.paywall.vscode.title")
+          children: renderI18nText("dev_handoff.paywall.vscode.title")
         }), jsx(Kz, {
           direction: "y",
           multiple: 1
         }), jsx("div", {
           className: na,
-          children: _$$tx("dev_handoff.paywall.vscode.description")
+          children: renderI18nText("dev_handoff.paywall.vscode.description")
         }), jsx(Kz, {
           direction: "y",
           multiple: 3
@@ -1871,11 +1871,11 @@ function nl({
           multiple: 3
         }), jsx("div", {
           className: na,
-          children: l ? _$$tx("dev_handoff.paywall.vscode.need_access", {
+          children: l ? renderI18nText("dev_handoff.paywall.vscode.need_access", {
             devMode: jsx("strong", {
-              children: _$$tx("dev_handoff.paywall.vscode.need_access_dev_mode")
+              children: renderI18nText("dev_handoff.paywall.vscode.need_access_dev_mode")
             })
-          }) : _$$tx("dev_handoff.paywall.vscode.no_access")
+          }) : renderI18nText("dev_handoff.paywall.vscode.no_access")
         }), jsx(Kz, {
           direction: "y",
           multiple: 3
@@ -1884,16 +1884,16 @@ function nl({
           children: [l && r ? jsx($n, {
             variant: "signup",
             disabled: !0,
-            children: _$$tx("dev_handoff.paywall.request_pending")
+            children: renderI18nText("dev_handoff.paywall.request_pending")
           }) : jsx($n, {
             variant: "signup",
             onClick: c,
             disabled: !l,
-            children: _$$tx("dev_handoff.paywall.get_dev_mode")
+            children: renderI18nText("dev_handoff.paywall.get_dev_mode")
           }), jsx($n, {
             variant: "secondary",
             onClick: u,
-            children: _$$tx("dev_handoff.paywall.vscode.view_button")
+            children: renderI18nText("dev_handoff.paywall.vscode.view_button")
           })]
         }), !getFeatureFlags().dt_vscode_ready_for_dev && jsxs(Fragment, {
           children: [jsx(Kz, {
@@ -1901,7 +1901,7 @@ function nl({
             multiple: 5
           }), jsx("div", {
             className: "vscode_paywall--vscodeVideoDescription--b-s1K text--fontPos11--2LvXf text--_fontBase--QdLsd",
-            children: _$$tx("dev_handoff.paywall.vscode.video")
+            children: renderI18nText("dev_handoff.paywall.vscode.video")
           }), jsx(Kz, {
             direction: "y",
             multiple: 1
@@ -1944,7 +1944,7 @@ function nr() {
   b({
     doReport: !1
   });
-  let [n, o] = _$$fp(_$$t);
+  let [n, o] = useAtomValueAndSetter(_$$t);
   return (useEffect(() => () => o(_$$c.DEFAULT), [o]), e) ? jsx(ns, {}) : jsx(_$$tH, {
     boundaryKey: "DevModePaywall",
     fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
@@ -2161,9 +2161,9 @@ let nV = "variables_side_panel--hovered---OfAh";
 let nH = "variables_side_panel--selected--v6nN1";
 let nW = "variables_side_panel--numVars--EMeTC";
 let nG = [];
-let nU = _$$eU(0);
+let nU = atom(0);
 function nK() {
-  let e = md(_$$$3);
+  let e = useAtomWithSubscription(_$$$3);
   let t = useMemo(() => ({
     entrypoint: e
   }), [e]);
@@ -2199,7 +2199,7 @@ function nJ({
   let l = useRef(null);
   let s = ON();
   let [d, c] = useState(!0);
-  let [u, p] = _$$fp(nU);
+  let [u, p] = useAtomValueAndSetter(nU);
   let h = useMemo(() => Math.min(32 * n.length, 144), [n.length]);
   useEffect(() => {
     0 === u && p(h);
@@ -2215,7 +2215,7 @@ function nJ({
     children: [jsxs(_$$E, {
       className: "variables_side_panel--header--fc-N2",
       onClick: f,
-      "aria-label": d ? _$$t2("dev_handoff.variables.table_collections_local_collapse_aria_label") : _$$t2("dev_handoff.variables.table_collections_local_expand_aria_label"),
+      "aria-label": d ? getI18nString("dev_handoff.variables.table_collections_local_collapse_aria_label") : getI18nString("dev_handoff.variables.table_collections_local_expand_aria_label"),
       "aria-expanded": d,
       "aria-controls": o,
       children: [jsx("div", {
@@ -2223,7 +2223,7 @@ function nJ({
         children: d ? jsx(_$$O2, {}) : jsx(_$$k3, {})
       }), jsx("div", {
         className: "variables_side_panel--variableSetsHeader--xvYxN ellipsis--ellipsis--Tjyfa",
-        children: _$$tx("dev_handoff.variables.table_collections_local")
+        children: renderI18nText("dev_handoff.variables.table_collections_local")
       })]
     }), d && jsx("div", {
       id: o,
@@ -2294,7 +2294,7 @@ function nq({
   let {
     numVariables
   } = n$(e);
-  let [d, c] = _$$fp(bE);
+  let [d, c] = useAtomValueAndSetter(bE);
   let u = _$$i_();
   let p = ON();
   useEffect(() => {
@@ -2593,7 +2593,7 @@ function nY({
       }
       let o = {
         id: "" === t.name ? "ALL_VARIABLES" : t.name.slice(0, -1),
-        name: "" === t.name ? _$$t2("dev_handoff.variables.table_all_vars") : n,
+        name: "" === t.name ? getI18nString("dev_handoff.variables.table_all_vars") : n,
         variableCount: a.length,
         variables: a,
         children: i
@@ -2602,7 +2602,7 @@ function nY({
       return o;
     }(groups[0]) : {
       id: "",
-      name: _$$t2("dev_handoff.variables.table_all_vars"),
+      name: getI18nString("dev_handoff.variables.table_all_vars"),
       variableCount: 0,
       variables: []
     }, [groups])],
@@ -2615,7 +2615,7 @@ function nY({
     }
   });
   let d = useMemo(() => groups.map(e => e.name), [groups]);
-  let [c, u] = _$$fp(bE);
+  let [c, u] = useAtomValueAndSetter(bE);
   let p = ON();
   let h = _$$tS();
   let [f, g] = useSessionStorageSync(`dev_mode_variables_sidebar_collapsed_groups__${h}`, {});
@@ -2646,11 +2646,11 @@ function nY({
     },
     children: [jsxs(nb, {
       children: [jsx(nj, {
-        children: _$$t2("dev_handoff.variables.table_column_visibility")
+        children: getI18nString("dev_handoff.variables.table_column_visibility")
       }), jsx(nj, {
-        children: _$$t2("dev_handoff.variables.table_column_name")
+        children: getI18nString("dev_handoff.variables.table_column_name")
       }), jsx(nj, {
-        children: _$$t2("dev_handoff.variables.table_column_variable_count")
+        children: getI18nString("dev_handoff.variables.table_column_variable_count")
       })]
     }), jsx(nN, {
       children: ({
@@ -2673,7 +2673,7 @@ function nY({
             offIcon: jsx(_$$k3, {}),
             checked: e.collapsed,
             onChange: e.collapse,
-            "aria-label": _$$t2("dev_handoff.variables.table_groups_expand_aria_label")
+            "aria-label": getI18nString("dev_handoff.variables.table_groups_expand_aria_label")
           }) : null
         }), jsx(nI, {
           column: 1,
@@ -2731,7 +2731,7 @@ function nZ({
   } = useMemo(() => {
     let n = e.split("/");
     let a = n.pop() ?? "";
-    let i = h ? _$$t2("dev_handoff.variables.table_all_vars") : a;
+    let i = h ? getI18nString("dev_handoff.variables.table_all_vars") : a;
     let o = n.length;
     let l = h ? _$$eb : e;
     let s = c.includes(l);
@@ -2763,7 +2763,7 @@ function nZ({
       recordingKey: generateRecordingKey("dev_handoff.variables_table.sidebar_row", s),
       children: [r && jsx(_$$E, {
         onClick: t => d(e, t),
-        "aria-label": isCollapsed ? _$$t2("dev_handoff.variables.table_groups_expand_aria_label") : _$$t2("dev_handoff.variables.table_groups_collapse_aria_label"),
+        "aria-label": isCollapsed ? getI18nString("dev_handoff.variables.table_groups_expand_aria_label") : getI18nString("dev_handoff.variables.table_groups_collapse_aria_label"),
         className: ek()(nz, "variables_side_panel--rowCaret--MC8Fl"),
         children: isCollapsed ? jsx(_$$k3, {}) : jsx(_$$O2, {})
       }), jsxs("div", {
@@ -2797,7 +2797,7 @@ function n$(e) {
   };
 }
 function a_() {
-  let e = md(mp);
+  let e = useAtomWithSubscription(mp);
   let t = m0();
   let n = _$$aV();
   let {
@@ -2831,18 +2831,18 @@ function a_() {
   return jsx(_$$rq, {
     arrowPosition: F_.BOTTOM,
     clickOutsideToHide: !0,
-    description: _$$tx("dev_handoff.eyedropper.onboarding_body", {
+    description: renderI18nText("dev_handoff.eyedropper.onboarding_body", {
       shortcutText: h
     }),
     isShowing,
     media: jsx(_$$y2, {
       src: buildUploadUrl("0b9e6e49a3c90f0d872b021c82a55b9d0bf71927"),
-      alt: _$$t2("dev_handoff.eyedropper.onboarding_image_alt"),
+      alt: getI18nString("dev_handoff.eyedropper.onboarding_image_alt"),
       aspectRatio: 1843 / 1037
     }),
     onClose: complete,
     targetKey: _$$K,
-    title: _$$tx("dev_handoff.eyedropper.onboarding_title"),
+    title: renderI18nText("dev_handoff.eyedropper.onboarding_title"),
     trackingContextName: "Eyedropper Tool In Dev Mode Onboarding",
     width: 240
   });
@@ -2892,10 +2892,10 @@ function im() {
     className: a$,
     children: [jsx("h1", {
       className: a9,
-      children: _$$tx("dev_handoff.configuration_wizard.code_language_step.title")
+      children: renderI18nText("dev_handoff.configuration_wizard.code_language_step.title")
     }), jsx("h2", {
       className: ie,
-      children: _$$tx("dev_handoff.configuration_wizard.code_language_step.description")
+      children: renderI18nText("dev_handoff.configuration_wizard.code_language_step.description")
     }), jsx(i_, {
       selectedOption: s,
       onSelect: e => {
@@ -2939,37 +2939,37 @@ function i_({
 }) {
   let n = isGovCluster() ? [{
     key: _$$uz,
-    title: _$$t2("dev_handoff.code.lang_css"),
+    title: getI18nString("dev_handoff.code.lang_css"),
     subheader: null,
     svgSrc: _$$A0
   }, {
     key: _$$p,
-    title: _$$t2("dev_handoff.configuration_wizard.code_language_step.option_ios"),
+    title: getI18nString("dev_handoff.configuration_wizard.code_language_step.option_ios"),
     subheader: null,
     svgSrc: _$$A8
   }, {
     key: LK,
-    title: _$$t2("dev_handoff.configuration_wizard.code_language_step.option_android"),
+    title: getI18nString("dev_handoff.configuration_wizard.code_language_step.option_android"),
     subheader: null,
     svgSrc: _$$A7
   }] : [{
     key: _$$uz,
-    title: _$$t2("dev_handoff.code.lang_css"),
+    title: getI18nString("dev_handoff.code.lang_css"),
     subheader: null,
     svgSrc: _$$A0
   }, {
     key: _$$p,
-    title: _$$t2("dev_handoff.configuration_wizard.code_language_step.option_ios"),
+    title: getI18nString("dev_handoff.configuration_wizard.code_language_step.option_ios"),
     subheader: null,
     svgSrc: _$$A8
   }, {
     key: LK,
-    title: _$$t2("dev_handoff.configuration_wizard.code_language_step.option_android"),
+    title: getI18nString("dev_handoff.configuration_wizard.code_language_step.option_android"),
     subheader: null,
     svgSrc: _$$A7
   }, {
     key: ix,
-    title: _$$t2("dev_handoff.configuration_wizard.code_language_step.option_other"),
+    title: getI18nString("dev_handoff.configuration_wizard.code_language_step.option_other"),
     subheader: null,
     svgSrc: _$$A9
   }];
@@ -2977,7 +2977,7 @@ function i_({
     className: it,
     children: [jsx("div", {
       className: ia,
-      children: _$$tx("dev_handoff.configuration_wizard.code_language_step.what_platform")
+      children: renderI18nText("dev_handoff.configuration_wizard.code_language_step.what_platform")
     }), jsx(_$$b3, {
       value: String(t),
       onChange: e,
@@ -3025,22 +3025,22 @@ function iy({
 }) {
   let o = useMemo(() => e === _$$p ? [{
     key: !1,
-    title: _$$t2("dev_handoff.code.lang_swiftui")
+    title: getI18nString("dev_handoff.code.lang_swiftui")
   }, {
     key: !0,
-    title: _$$t2("dev_handoff.code.lang_uikit")
+    title: getI18nString("dev_handoff.code.lang_uikit")
   }] : [{
     key: !1,
-    title: _$$t2("dev_handoff.code.lang_compose")
+    title: getI18nString("dev_handoff.code.lang_compose")
   }, {
     key: !0,
-    title: _$$t2("dev_handoff.code.lang_android_xml")
+    title: getI18nString("dev_handoff.code.lang_android_xml")
   }], [e]);
   return jsxs("div", {
     className: it,
     children: [jsx("div", {
       className: ia,
-      children: _$$tx("dev_handoff.configuration_wizard.code_language_step.what_framework")
+      children: renderI18nText("dev_handoff.configuration_wizard.code_language_step.what_framework")
     }), jsx(_$$b3, {
       value: String(t),
       onChange: e => {
@@ -3096,7 +3096,7 @@ function ij() {
     className: it,
     children: [jsx("div", {
       className: ia,
-      children: _$$tx("dev_handoff.configuration_wizard.code_language_step.what_units")
+      children: renderI18nText("dev_handoff.configuration_wizard.code_language_step.what_units")
     }), jsx(_$$b3, {
       value: String(n),
       onChange: e => s(parseInt(e)),
@@ -3121,7 +3121,7 @@ function ij() {
     }), n === _$$tK.SCALED && jsxs(Fragment, {
       children: [jsx("div", {
         className: "configuration_wizard--optionHeadingWithPadding--MnGm9 configuration_wizard--optionHeading--9e-1V text--fontPos12Whyte---tkNx text--_fontBaseWhyte--efAjI",
-        children: _$$tx("dev_handoff.alternative_units.inspection_scale_factor")
+        children: renderI18nText("dev_handoff.alternative_units.inspection_scale_factor")
       }), u ? jsx(Rg, {
         scaleFactor: c,
         onChange: d,
@@ -3195,17 +3195,17 @@ function iN() {
       className: "configuration_wizard--customCodegenPromoWrapper--steEn",
       children: [jsx("div", {
         className: "configuration_wizard--customCodegenPromoTitle--31anH text--fontPos12--YsUAh text--_fontBase--QdLsd",
-        children: _$$tx("dev_handoff.configuration_wizard.code_language_step.custom_codegen_promo_title")
+        children: renderI18nText("dev_handoff.configuration_wizard.code_language_step.custom_codegen_promo_title")
       }), jsx("div", {
         className: "configuration_wizard--customCodegenPromoBody--EsEFB text--fontPos11--2LvXf text--_fontBase--QdLsd",
-        children: _$$tx("dev_handoff.configuration_wizard.code_language_step.custom_codegen_promo_body")
+        children: renderI18nText("dev_handoff.configuration_wizard.code_language_step.custom_codegen_promo_body")
       })]
     }), jsx("div", {
       className: "configuration_wizard--customCodegenPromoLink--0l-Sa",
       children: jsxs(_$$N2, {
         newTab: !0,
         href: "https://www.figma.com/plugin-docs/api/figma-codegen/",
-        children: [_$$tx("dev_handoff.configuration_wizard.code_language_step.custom_codegen_promo_link"), jsx(_$$S2, {
+        children: [renderI18nText("dev_handoff.configuration_wizard.code_language_step.custom_codegen_promo_link"), jsx(_$$S2, {
           style: {
             "--color-icon": "var(--color-icon-brand)"
           }
@@ -3232,10 +3232,10 @@ function ik({
     className: "configuration_wizard--otherLanguagesContainer--2J1b5",
     children: [jsx("h1", {
       className: "configuration_wizard--otherLanguagesListHeading--M2BwY text--fontPos12Whyte---tkNx text--_fontBaseWhyte--efAjI",
-      children: _$$tx("dev_handoff.configuration_wizard.code_language_step.other_title")
+      children: renderI18nText("dev_handoff.configuration_wizard.code_language_step.other_title")
     }), jsx("h2", {
       className: "configuration_wizard--otherLanguagesListDescription--jeS2m text--fontPos12Whyte---tkNx text--_fontBaseWhyte--efAjI",
-      children: _$$tx("dev_handoff.configuration_wizard.code_language_step.other_description")
+      children: renderI18nText("dev_handoff.configuration_wizard.code_language_step.other_description")
     }), jsxs("div", {
       className: il,
       children: [jsx("div", {
@@ -3274,10 +3274,10 @@ function iI({
     children: [jsx(_$$B, {
       svg: _$$A6,
       className: ir
-    }), _$$tx("community.plugins.selected")]
+    }), renderI18nText("community.plugins.selected")]
   }) : jsx("div", {
     className: is,
-    children: _$$tx("community.plugins.select")
+    children: renderI18nText("community.plugins.select")
   });
   return jsx(Cg, {
     plugin: e,
@@ -3302,10 +3302,10 @@ function iC() {
     className: a$,
     children: [jsx("h1", {
       className: a9,
-      children: _$$tx("dev_handoff.configuration_wizard.inspect_plugins_step.title")
+      children: renderI18nText("dev_handoff.configuration_wizard.inspect_plugins_step.title")
     }), jsx("h2", {
       className: ie,
-      children: _$$tx("dev_handoff.configuration_wizard.inspect_plugins_step.description")
+      children: renderI18nText("dev_handoff.configuration_wizard.inspect_plugins_step.description")
     }), jsxs("div", {
       className: il,
       children: [jsx("div", {
@@ -3344,10 +3344,10 @@ function iT({
     children: [jsx(_$$B, {
       svg: _$$A6,
       className: ir
-    }), _$$tx("community.plugins.pinned")]
+    }), renderI18nText("community.plugins.pinned")]
   }) : jsx("div", {
     className: is,
-    children: _$$tx("community.plugins.pin")
+    children: renderI18nText("community.plugins.pin")
   });
   return jsx(Cg, {
     plugin: e,
@@ -3362,10 +3362,10 @@ function iO() {
     className: a$,
     children: [jsx("h1", {
       className: a9,
-      children: _$$tx("dev_handoff.configuration_wizard.install_extensions_step.title")
+      children: renderI18nText("dev_handoff.configuration_wizard.install_extensions_step.title")
     }), jsx("h2", {
       className: ie,
-      children: _$$tx("dev_handoff.configuration_wizard.install_extensions_step.description")
+      children: renderI18nText("dev_handoff.configuration_wizard.install_extensions_step.description")
     }), jsxs("div", {
       className: a2,
       children: [jsxs("div", {
@@ -3375,10 +3375,10 @@ function iO() {
           alt: ""
         }), jsx("div", {
           className: a8,
-          children: _$$tx("dev_handoff.configuration_wizard.install_extensions_step.figma_for_vscode")
+          children: renderI18nText("dev_handoff.configuration_wizard.install_extensions_step.figma_for_vscode")
         }), jsx("div", {
           className: a7,
-          children: _$$tx("dev_handoff.configuration_wizard.install_extensions_step.figma_for_vscode_description")
+          children: renderI18nText("dev_handoff.configuration_wizard.install_extensions_step.figma_for_vscode_description")
         }), jsx($n, {
           variant: "primary",
           onClick: () => {
@@ -3387,7 +3387,7 @@ function iO() {
               rawInput: "https://marketplace.visualstudio.com/items?itemName=figma.figma-vscode-extension"
             }));
           },
-          children: _$$tx("dev_handoff.configuration_wizard.install_extensions_step.figma_for_vscode_install")
+          children: renderI18nText("dev_handoff.configuration_wizard.install_extensions_step.figma_for_vscode_install")
         })]
       }), jsxs("div", {
         className: a3,
@@ -3396,10 +3396,10 @@ function iO() {
           alt: ""
         }), jsx("div", {
           className: a8,
-          children: _$$tx("dev_handoff.configuration_wizard.install_extensions_step.figma_for_messaging")
+          children: renderI18nText("dev_handoff.configuration_wizard.install_extensions_step.figma_for_messaging")
         }), jsx("div", {
           className: a7,
-          children: _$$tx("dev_handoff.configuration_wizard.install_extensions_step.figma_for_messaging_description")
+          children: renderI18nText("dev_handoff.configuration_wizard.install_extensions_step.figma_for_messaging_description")
         }), jsx(iM, {})]
       })]
     })]
@@ -3412,14 +3412,14 @@ function iM({}) {
   let l = useRef(null);
   let s = n?.type === t;
   let r = [{
-    displayText: _$$t2("dev_handoff.configuration_wizard.install_extensions_step.figma_for_messaging_install.figma_for_slack"),
+    displayText: getI18nString("dev_handoff.configuration_wizard.install_extensions_step.figma_for_messaging_install.figma_for_slack"),
     callback: () => {
       e(RK({
         rawInput: "https://figma.slack.com/apps/A01N2QYSA81-figma-and-figjam?tab=more_info"
       }));
     }
   }, {
-    displayText: _$$t2("dev_handoff.configuration_wizard.install_extensions_step.figma_for_messaging_install.figma_for_teams"),
+    displayText: getI18nString("dev_handoff.configuration_wizard.install_extensions_step.figma_for_messaging_install.figma_for_teams"),
     callback: () => {
       e(RK({
         rawInput: "https://appsource.microsoft.com/en-us/product/office/WA200004521?exp=ubp8"
@@ -3438,7 +3438,7 @@ function iM({}) {
         },
         children: jsxs("span", {
           className: "configuration_wizard--installButton--PPj7O",
-          children: [_$$tx("dev_handoff.configuration_wizard.install_extensions_step.figma_for_messaging_install"), jsx(_$$B, {
+          children: [renderI18nText("dev_handoff.configuration_wizard.install_extensions_step.figma_for_messaging_install"), jsx(_$$B, {
             svg: _$$A10,
             className: "configuration_wizard--chevronDown--P7ECL"
           })]
@@ -3461,25 +3461,25 @@ function iF() {
   let t = _$$am();
   let n = [{
     theme: "system",
-    title: _$$t2("fullscreen_actions.theme.system_theme"),
+    title: getI18nString("fullscreen_actions.theme.system_theme"),
     ModeSvg: iH
   }, {
     theme: "light",
-    title: _$$t2("fullscreen_actions.theme.light"),
+    title: getI18nString("fullscreen_actions.theme.light"),
     ModeSvg: iz
   }, {
     theme: "dark",
-    title: _$$t2("fullscreen_actions.theme.dark"),
+    title: getI18nString("fullscreen_actions.theme.dark"),
     ModeSvg: iV
   }];
   return jsxs("div", {
     className: a$,
     children: [jsx("h1", {
       className: a9,
-      children: _$$tx("dev_handoff.configuration_wizard.theme_step.title")
+      children: renderI18nText("dev_handoff.configuration_wizard.theme_step.title")
     }), jsx("h2", {
       className: ie,
-      children: _$$tx("dev_handoff.configuration_wizard.theme_step.description")
+      children: renderI18nText("dev_handoff.configuration_wizard.theme_step.description")
     }), jsx(_$$bL, {
       value: t,
       onChange: t => e(Qh({
@@ -3488,7 +3488,7 @@ function iF() {
       })),
       className: a2,
       legend: jsx(_$$q2, {
-        children: _$$tx("dev_handoff.configuration_wizard.theme_step.title")
+        children: renderI18nText("dev_handoff.configuration_wizard.theme_step.title")
       }),
       children: n.map(({
         theme: e,
@@ -4444,14 +4444,14 @@ function iU() {
   let n = getHasProvisionalAccess(FProductAccessType.DEV_MODE);
   return e && n ? jsx("h2", {
     className: "configuration_wizard--gracePeriodWelcome--16eIy text--fontPos13--xW8hS text--_fontBase--QdLsd",
-    children: _$$tx("dev_handoff.configuration_wizard.welcome_step.description_one_click")
+    children: renderI18nText("dev_handoff.configuration_wizard.welcome_step.description_one_click")
   }) : jsxs(Fragment, {
     children: [jsx("h1", {
       className: a9,
-      children: _$$tx("dev_handoff.configuration_wizard.welcome_step.title")
+      children: renderI18nText("dev_handoff.configuration_wizard.welcome_step.title")
     }), jsx("h2", {
       className: ie,
-      children: _$$tx("dev_handoff.configuration_wizard.welcome_step.description")
+      children: renderI18nText("dev_handoff.configuration_wizard.welcome_step.description")
     })]
   });
 }
@@ -4480,7 +4480,7 @@ let iJ = {
 };
 let iQ = isGovCluster() ? [1, 2] : [1, 2, 3, 4];
 function iq() {
-  let e = md(aR);
+  let e = useAtomWithSubscription(aR);
   let t = useDispatch();
   let {
     isShowing,
@@ -4570,17 +4570,17 @@ function iZ({
             stepName: iJ[n]
           });
         },
-        "aria-label": _$$t2("general.close"),
+        "aria-label": getI18nString("general.close"),
         children: jsx(_$$A5, {})
       })
     }), jsxs("div", {
       className: "configuration_wizard--sidebar--g-2b8",
       children: [jsx("h1", {
         className: "configuration_wizard--sidebarHeading--xnYnE text--fontPos32WhyteInktrap--BG9sC text--_fontBaseWhyteInktrap--YiiGP",
-        children: _$$tx("dev_handoff.configuration_wizard.title")
+        children: renderI18nText("dev_handoff.configuration_wizard.title")
       }), jsx("h2", {
         className: "configuration_wizard--sidebarSubheading--ta8gQ text--fontPos12Whyte---tkNx text--_fontBaseWhyte--efAjI",
-        children: _$$tx("dev_handoff.configuration_wizard.subtitle")
+        children: renderI18nText("dev_handoff.configuration_wizard.subtitle")
       }), jsx("div", {
         className: a1
       }), jsx(i$, {
@@ -4600,7 +4600,7 @@ function iZ({
             }), jsx($n, {
               onClick: u,
               variant: "primary",
-              children: _$$tx(`dev_handoff.configuration_wizard.${iJ[n]}.next_text`)
+              children: renderI18nText(`dev_handoff.configuration_wizard.${iJ[n]}.next_text`)
             })]
           })
         }) : f ? jsxs("div", {
@@ -4610,7 +4610,7 @@ function iZ({
           }), jsx($n, {
             variant: "secondary",
             onClick: p,
-            children: _$$tx("general.back")
+            children: renderI18nText("general.back")
           }), jsx($n, {
             variant: "primary",
             onClick: function () {
@@ -4620,7 +4620,7 @@ function iZ({
                 stepName: iJ[n]
               });
             },
-            children: _$$tx("general.done")
+            children: renderI18nText("general.done")
           })]
         }) : jsxs("div", {
           className: a0,
@@ -4629,11 +4629,11 @@ function iZ({
           }), jsx($n, {
             variant: "secondary",
             onClick: p,
-            children: _$$tx("general.back")
+            children: renderI18nText("general.back")
           }), jsx($n, {
             variant: "primary",
             onClick: u,
-            children: _$$tx(`dev_handoff.configuration_wizard.${iJ[n]}.next_text`)
+            children: renderI18nText(`dev_handoff.configuration_wizard.${iJ[n]}.next_text`)
           })]
         })
       })]
@@ -4652,7 +4652,7 @@ function i$({
     },
     className: ek()("configuration_wizard--stepPicker--Ffab-", n && "configuration_wizard--disabledStepPicker--Ib2IX"),
     legend: jsx(_$$q2, {
-      children: _$$tx("dev_handoff.configuration_wizard.step_picker_legend")
+      children: renderI18nText("dev_handoff.configuration_wizard.step_picker_legend")
     }),
     htmlAttributes: {
       disabled: n
@@ -4666,7 +4666,7 @@ function i$({
         children: `0${e}`
       }), jsx("div", {
         className: "configuration_wizard--stepPickerOptionText--KmSjp text--fontPos12Whyte---tkNx text--_fontBaseWhyte--efAjI",
-        children: _$$tx(`dev_handoff.configuration_wizard.${iJ[e]}.picker_title`)
+        children: renderI18nText(`dev_handoff.configuration_wizard.${iJ[e]}.picker_title`)
       })]
     }, e))
   });
@@ -4748,7 +4748,7 @@ function oe(e) {
     })]
   });
 }
-let ok = _$$eU({});
+let ok = atom({});
 function oA() {
   return !!useSelector(e => e.mirror.appModel.activeCanvasEditModeType === m1T.DEV_HANDOFF_HISTORY && e.versionHistory.activeId && "current_version" !== e.versionHistory.activeId);
 }
@@ -4791,7 +4791,7 @@ function oR({
     }) : null, c && jsx("div", {
       className: "asset_documentation_panel--showMoreButtonContainer--ZkHWJ",
       children: jsx(_$$d4, {
-        label: _$$t2("dev_handoff.docs.show_full"),
+        label: getI18nString("dev_handoff.docs.show_full"),
         onClick: () => d(!1)
       })
     })]
@@ -4817,9 +4817,9 @@ let oZ = class {
         link: t,
         linkPreviewJson: n
       });else if (n?.type === "AUTH_REQUIRED") {
-        let n = zl.get(ok);
+        let n = atomStoreManager.get(ok);
         let a = n[e.plugin_id]?.links ?? [];
-        zl.set(ok, n => ({
+        atomStoreManager.set(ok, n => ({
           ...n,
           [e.plugin_id]: {
             plugin: e,
@@ -4883,7 +4883,7 @@ function o0(e, t) {
   }
   if (P8(t.plugin_id)) {
     if (o1(e) && e.match(/selectedIssue=[A-Z]+-[0-9]+/)) return !0;
-    o1(e) && e.match(/[A-Z]+-[0-9]+/) && _$$sx("Jira Issue Url Not Matched", {
+    o1(e) && e.match(/[A-Z]+-[0-9]+/) && trackEventAnalytics("Jira Issue Url Not Matched", {
       url: e
     });
   }
@@ -4912,7 +4912,7 @@ function o5(e) {
 }
 function o3(e) {
   let t = o5(e);
-  let n = md(ok);
+  let n = useAtomWithSubscription(ok);
   if (!t || !t.manifest.capabilities?.includes("linkpreview")) return null;
   if (n[t.plugin_id]?.links.some(t => t.linkUrl === e)) return;
   let a = async ({
@@ -4976,7 +4976,7 @@ function o8({
       link: e
     }) => {
       let i = _$$hw();
-      i?.plugin_id !== t.plugin_id && (await _$$d5.instance.maybeTerminatePlugin(a), await _$$yQ());
+      i?.plugin_id !== t.plugin_id && (await _$$d5.instance.maybeTerminatePlugin(a), await waitForAnimationFrame());
       let o = _$$D3();
       let s = t.manifest.editorType?.includes(FW.DEV) ? "open-dev-resource" : "open-related-link";
       let r = {
@@ -5019,7 +5019,7 @@ function o8({
       callback: i
     };
   }(t.linkUrl);
-  let A = g ? _$$t2("dev_handoff.developer_related_links.main_component_tooltip") : _$$t2("dev_handoff.developer_related_links.additional_options");
+  let A = g ? getI18nString("dev_handoff.developer_related_links.main_component_tooltip") : getI18nString("dev_handoff.developer_related_links.additional_options");
   let C = jsx("div", {
     ref: dropdownTargetRef,
     children: jsx(_$$K2, {
@@ -5037,33 +5037,33 @@ function o8({
     })
   });
   let T = [{
-    displayText: _$$t2("dev_handoff.developer_related_links.copy_link"),
+    displayText: getI18nString("dev_handoff.developer_related_links.copy_link"),
     callback: () => v()
   }];
   k && T.unshift({
-    displayText: _$$t2("dev_handoff.developer_related_links.open_in_new_tab"),
+    displayText: getI18nString("dev_handoff.developer_related_links.open_in_new_tab"),
     callback: () => {
       G();
     }
   });
   g && _ && T.unshift({
-    displayText: _$$t2("dev_handoff.developer_related_links.go_to_main_component"),
+    displayText: getI18nString("dev_handoff.developer_related_links.go_to_main_component"),
     callback: () => {
       _();
     }
   });
   t.isNested && T.push({
-    displayText: _$$t2("dev_handoff.developer_related_links.select_layer"),
+    displayText: getI18nString("dev_handoff.developer_related_links.select_layer"),
     callback: () => {
       w3z.selectAndFocusOnNode(t.nodeId, !0);
     }
   });
   T.push({
-    displayText: _$$t2("dev_handoff.developer_related_links.edit_link"),
+    displayText: getI18nString("dev_handoff.developer_related_links.edit_link"),
     callback: () => s(t),
     disabled: !e
   }, {
-    displayText: _$$t2("dev_handoff.developer_related_links.delete_link"),
+    displayText: getI18nString("dev_handoff.developer_related_links.delete_link"),
     callback: () => n(t.id, t.linkUrl),
     disabled: !e
   });
@@ -5255,9 +5255,9 @@ function lk({
   }, [e, t, c, s.data]);
   return !e || u || c && (!s.data?.link || s.data?.type === "community") ? null : jsx(_$$K2, {
     onClick: p,
-    "aria-label": e.isState ? _$$t2("design_systems.playground.open_variant_in_library") : _$$t2("design_systems.playground.open_component_in_library"),
+    "aria-label": e.isState ? getI18nString("design_systems.playground.open_variant_in_library") : getI18nString("design_systems.playground.open_component_in_library"),
     htmlAttributes: {
-      "data-tooltip": e.isState ? _$$t2("design_systems.playground.open_variant_in_library") : _$$t2("design_systems.playground.open_component_in_library"),
+      "data-tooltip": e.isState ? getI18nString("design_systems.playground.open_variant_in_library") : getI18nString("design_systems.playground.open_component_in_library"),
       "data-tooltip-type": Ib.TEXT
     },
     children: jsx(_$$E6, {})
@@ -5282,7 +5282,7 @@ let lD = memo(({
 }) => {
   let n;
   useEffect(() => {
-    e && zl.set(_$$J6, [e]);
+    e && atomStoreManager.set(figmaItemsAtom, [e]);
   }, [e]);
   let s = useDispatch();
   let d = useSelector(AF);
@@ -5296,7 +5296,7 @@ let lD = memo(({
     ...t,
     onClose: () => {
       x();
-      _$$sx("Playground closed");
+      trackEventAnalytics("Playground closed");
       t.onClose();
     }
   });
@@ -5318,7 +5318,7 @@ let lD = memo(({
     let n = useRef(t());
     let [a, o] = useState(n.current);
     let [l, s] = useState(0);
-    let [d, c] = _$$fp(_$$d6);
+    let [d, c] = useAtomValueAndSetter(_$$d6);
     let [u, p] = useState(!0);
     let h = useCallback(() => {
       let e = t();
@@ -5352,9 +5352,9 @@ let lD = memo(({
     g?.refetchAndResetScene();
   }, [g]);
   let C = useCallback(e => {
-    let t = _$$n7(e, _, v);
-    let n = zl.get(_$$J6);
-    zl.set(_$$J6, [...n, t]);
+    let t = findComponentGuidOrPublishId(e, _, v);
+    let n = atomStoreManager.get(figmaItemsAtom);
+    atomStoreManager.set(figmaItemsAtom, [...n, t]);
     glU.setPlaygroundSceneFromGuid(t ?? "");
   }, [v, _]);
   if (!g || !d) return jsx(lO, {
@@ -5379,17 +5379,17 @@ let lD = memo(({
     manager: m,
     theme
   });
-  let B = zl.get(_$$J6);
+  let B = atomStoreManager.get(figmaItemsAtom);
   B.length > 1 && (n = jsx(_$$K2, {
     onClick: () => {
       let e = B[B.length - 2];
       glU.setPlaygroundSceneFromGuid(e);
       let t = B.slice(0, -1);
-      zl.set(_$$J6, t);
+      atomStoreManager.set(figmaItemsAtom, t);
     },
-    "aria-label": _$$t2("dev_handoff.playground.select_parent_instance"),
+    "aria-label": getI18nString("dev_handoff.playground.select_parent_instance"),
     htmlAttributes: {
-      "data-tooltip": _$$t2("dev_handoff.playground.select_parent_instance"),
+      "data-tooltip": getI18nString("dev_handoff.playground.select_parent_instance"),
       "data-tooltip-type": Ib.TEXT
     },
     children: jsx(_$$E5, {})
@@ -5402,7 +5402,7 @@ let lD = memo(({
       children: jsxs(_$$vo, {
         children: [jsx(Y9, {
           children: jsx(_$$hE, {
-            children: _$$tx("design_systems.playground.component_playground")
+            children: renderI18nText("design_systems.playground.component_playground")
           })
         }), jsx(_$$nB, {
           children: jsxs("div", {
@@ -5415,17 +5415,17 @@ let lD = memo(({
                 className: lS,
                 width: thumbnailData.width,
                 height: thumbnailData.height,
-                alt: _$$t2("design_systems.playground.thumbnail_alt"),
+                alt: getI18nString("design_systems.playground.thumbnail_alt"),
                 "data-testid": "playground-thumbnail"
               }), jsx(_$$J, {
                 mode: theme,
                 children: jsx("div", {
                   className: "playground_modal--themeButton---BLzd",
                   children: jsx(_$$Me, {
-                    "aria-label": _$$t2("design_systems.playground.change_background"),
+                    "aria-label": getI18nString("design_systems.playground.change_background"),
                     onClick: invertTheme,
                     htmlAttributes: {
-                      "data-tooltip": _$$t2("design_systems.playground.change_background"),
+                      "data-tooltip": getI18nString("design_systems.playground.change_background"),
                       "data-tooltip-type": Ib.TEXT
                     },
                     trackingProperties: {
@@ -5451,11 +5451,11 @@ let lD = memo(({
                   className: "playground_modal--propsContainerHeaderButtons--MPFZ-",
                   children: ["INSTANCE" === d.type && jsx(lN, {}), jsx(_$$K2, {
                     onClick: E,
-                    "aria-label": _$$t2("design_systems.playground.reset_properties"),
+                    "aria-label": getI18nString("design_systems.playground.reset_properties"),
                     disabled: !g.hasChangesToReset,
                     recordingKey: "resetPlaygroundProps",
                     htmlAttributes: {
-                      "data-tooltip": _$$t2("design_systems.playground.reset_properties"),
+                      "data-tooltip": getI18nString("design_systems.playground.reset_properties"),
                       "data-tooltip-type": Ib.TEXT
                     },
                     children: jsx(_$$m2, {})
@@ -5467,9 +5467,9 @@ let lD = memo(({
                   orientation: "vertical",
                   iconSrc: _$$A13,
                   variant: "dev",
-                  title: _$$t2("design_systems.playground.banner_header"),
+                  title: getI18nString("design_systems.playground.banner_header"),
                   onClose: I,
-                  children: _$$tx("design_systems.playground.banner_content")
+                  children: renderI18nText("design_systems.playground.banner_content")
                 })
               }), jsxs(_$$P2, {
                 children: [jsxs(q0.Provider, {
@@ -5520,7 +5520,7 @@ function lO({
       children: jsxs(_$$vo, {
         children: [jsx(Y9, {
           children: jsx(_$$hE, {
-            children: _$$tx("design_systems.playground.component_playground")
+            children: renderI18nText("design_systems.playground.component_playground")
           })
         }), jsx(_$$nB, {
           children: jsxs("div", {
@@ -5634,7 +5634,7 @@ function lK(e) {
   }[e.type];
   let u = jsx(c, {
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": _$$t2("design_systems.component_properties.property_icon_tooltip", {
+    "data-tooltip": getI18nString("design_systems.component_properties.property_icon_tooltip", {
       propertyType: _$$xb(e.type === J0O.NONE ? J0O.VARIANT : e.type)
     })
   });
@@ -5688,7 +5688,7 @@ function lX() {
         guid: t?.guid
       }
     }));
-    _$$sx("Playground opened");
+    trackEventAnalytics("Playground opened");
   }, [e, t?.guid]);
   return jsx("div", {
     className: "component_props_list--playgroundButtonContainer--q6-lJ",
@@ -5697,7 +5697,7 @@ function lX() {
       variant: "secondary",
       onClick: n,
       recordingKey: "openInPlayground",
-      children: _$$tx("dev_handoff.playground.explore_component_behavior")
+      children: renderI18nText("dev_handoff.playground.explore_component_behavior")
     })
   });
 }
@@ -5777,7 +5777,7 @@ function lY({
   appendLabel: t
 }) {
   let n = Gw(e.uri);
-  let i = n ? Zr(n) : _$$t2("dev_handoff.docs.links_default");
+  let i = n ? Zr(n) : getI18nString("dev_handoff.docs.links_default");
   let o = {
     id: e.uri,
     nodeId: "",
@@ -5792,7 +5792,7 @@ function lY({
   return jsx(o8, {
     link: o,
     isEditable: !1,
-    hintInMenu: _$$t2("dev_handoff.developer_related_links.cant_edit_component_doc_link"),
+    hintInMenu: getI18nString("dev_handoff.developer_related_links.cant_edit_component_doc_link"),
     onOpenDeleteModal: _$$lQ,
     onOpenEditModal: _$$lQ,
     appendLabel: t
@@ -5844,7 +5844,7 @@ function l8({
     if (!_$$G(e) || !_$$H2(e)) {
       if (e = "http://" + e, !FB(e) || !_$$G(e)) {
         r(_$$F.enqueue({
-          message: _$$t2("dev_handoff.developer_related_links.invalid_link"),
+          message: getI18nString("dev_handoff.developer_related_links.invalid_link"),
           error: !0,
           timeoutOverride: 2e3
         }));
@@ -5854,7 +5854,7 @@ function l8({
     }
     if (n.includes(e)) {
       r(_$$F.enqueue({
-        message: _$$t2("dev_handoff.developer_related_links.duplicate_link_error"),
+        message: getI18nString("dev_handoff.developer_related_links.duplicate_link_error"),
         error: !0,
         timeoutOverride: 2e3
       }));
@@ -5893,7 +5893,7 @@ function l8({
     } catch (e) {
       console.error(e);
       r(_$$F.enqueue({
-        message: _$$t2("dev_handoff.developer_related_links.link_error", {
+        message: getI18nString("dev_handoff.developer_related_links.link_error", {
           errorMessage: e.message
         }),
         error: !0,
@@ -5943,7 +5943,7 @@ function l8({
       onKeyUp,
       onMouseLeave,
       onMouseUp,
-      placeholder: _$$t2("dev_handoff.developer_related_links.link_placeholder"),
+      placeholder: getI18nString("dev_handoff.developer_related_links.link_placeholder"),
       recordingKey: "devRelatedLinkUrlInput",
       value: d
     })]
@@ -5969,7 +5969,7 @@ function so(e) {
     if (!n.success) return null;
     return n.data;
   } catch (t) {
-    $D(_$$e.DEVELOPER_TOOLS, t, {
+    reportError(_$$e.DEVELOPER_TOOLS, t, {
       extra: {
         previewJson: e
       }
@@ -6017,11 +6017,11 @@ let sd = _$$Ju(function (e) {
   };
   return jsx(yX, {
     destructive: !0,
-    confirmationTitle: _$$tx("dev_handoff.developer_related_links.delete_link"),
-    confirmText: _$$tx("dev_handoff.developer_related_links.delete_link"),
+    confirmationTitle: renderI18nText("dev_handoff.developer_related_links.delete_link"),
+    confirmText: renderI18nText("dev_handoff.developer_related_links.delete_link"),
     onConfirm: r,
     children: jsx("p", {
-      children: _$$tx("dev_handoff.developer_related_links.delete_link_text_body")
+      children: renderI18nText("dev_handoff.developer_related_links.delete_link_text_body")
     })
   });
 }, "DeveloperRelatedLinksDeleteModal");
@@ -6078,7 +6078,7 @@ let sf = _$$Ju(function ({
     let n = d;
     if ((!_$$G(n) || !_$$H2(n)) && (n = "http://" + n, !_$$G(n))) {
       v(_$$F.enqueue({
-        message: _$$t2("dev_handoff.developer_related_links.invalid_link"),
+        message: getI18nString("dev_handoff.developer_related_links.invalid_link"),
         error: !0,
         timeoutOverride: 2e3
       }));
@@ -6131,14 +6131,14 @@ let sf = _$$Ju(function ({
     children: jsxs(_$$vo, {
       children: [jsx(Y9, {
         children: jsx(_$$hE, {
-          children: _$$tx("dev_handoff.developer_related_links.edit_link")
+          children: renderI18nText("dev_handoff.developer_related_links.edit_link")
         })
       }), jsxs(_$$nB, {
         children: [jsxs("div", {
           className: sp,
           children: [jsx("p", {
             className: sh,
-            children: _$$tx("dev_handoff.developer_related_links.link")
+            children: renderI18nText("dev_handoff.developer_related_links.link")
           }), jsx(_$$L2, {
             ref: _inputRef,
             autoCorrect: "off",
@@ -6157,7 +6157,7 @@ let sf = _$$Ju(function ({
           className: sp,
           children: [jsx("p", {
             className: sh,
-            children: _$$tx("dev_handoff.developer_related_links.name")
+            children: renderI18nText("dev_handoff.developer_related_links.name")
           }), jsxs("div", {
             className: "developer_related_links_edit_modal--inputContainer--jplkF",
             children: [jsx("div", {
@@ -6191,19 +6191,19 @@ let sf = _$$Ju(function ({
           children: [jsx($n, {
             variant: "secondary",
             onClick: () => v(Ce()),
-            children: _$$tx("dev_handoff.developer_related_links.cancel")
+            children: renderI18nText("dev_handoff.developer_related_links.cancel")
           }), jsx($n, {
             onClick: O,
             disabled: M,
             type: "submit",
-            children: _$$tx("dev_handoff.developer_related_links.edit_link")
+            children: renderI18nText("dev_handoff.developer_related_links.edit_link")
           })]
         })
       })]
     })
   });
 }, "DeveloperRelatedLinksEditModal");
-let sg = _$$eU(!1);
+let sg = atom(!1);
 function sx({
   link: e,
   isVariant: t
@@ -6219,14 +6219,14 @@ function sx({
     onOpenEditModal: _$$lQ
   });
 }
-let sm = _$$eU(!1);
+let sm = atom(!1);
 function s_() {
   let e = Nf() ?? "";
   let t = _$$eY();
   let n = _$$lU();
   let a = useSelector(e => e.mirror.appModel.currentPage);
   let l = t.get(n ?? a);
-  let [s, d] = _$$fp(sm);
+  let [s, d] = useAtomValueAndSetter(sm);
   let c = _$$U2();
   return useCallback(() => {
     l?.isAlive && (d(!0), c("Dev Handoff Related Links Click Plus Icon", {
@@ -6275,7 +6275,7 @@ function sv({
   return jsxs(Fragment, {
     children: [visibleItems.map(e => "documentation" === e.type ? jsx(lY, {
       link: e,
-      appendLabel: _$$t2("dev_handoff.docs.documentation_link_label")
+      appendLabel: getI18nString("dev_handoff.docs.documentation_link_label")
     }, e.uri) : "inherited" === e.type ? jsx(sx, {
       link: e,
       isVariant: !1
@@ -6351,9 +6351,9 @@ function sy({
   let U = backingSymbol?.guid;
   L && U && !W && (B = v.filter(e => e.nodeId === U) ?? [], F = y);
   L && backingStateGroup && !W && (z = v.filter(e => e.nodeId === backingStateGroup.guid) ?? [], V = y);
-  let [K, X] = _$$fp(sm);
+  let [K, X] = useAtomValueAndSetter(sm);
   let J = s_();
-  let [Q, q] = _$$fp(sg);
+  let [Q, q] = useAtomValueAndSetter(sg);
   useEffect(() => {
     Q && (J(), q(!1));
   }, [Q, J, q]);
@@ -6393,7 +6393,7 @@ function sy({
   }(Z, f);
   let ee = j.length > 0 || links.length > 0 || K || B.length > 0 || z.length > 0 || !x && Z && Z.size > 0 || $ && $.size > 0;
   let et = "loaded" === R.status && "loaded" === y && "loaded" === F && "loaded" === V;
-  let en = _$$t2("dev_handoff.developer_related_links.links");
+  let en = getI18nString("dev_handoff.developer_related_links.links");
   return jsx(VZ, {
     title: en,
     recordingKey: "developerLinks",
@@ -6405,11 +6405,11 @@ function sy({
       }), et && Y && !N && jsx("span", {
         className: "developer_related_links_panel--addButton--0Fv7K draggable_list--addButton--D0q--",
         children: jsx(_$$K2, {
-          "aria-label": _$$t2("dev_handoff.developer_related_links.add_link_button"),
+          "aria-label": getI18nString("dev_handoff.developer_related_links.add_link_button"),
           onClick: J,
           recordingKey: "addDevRelatedLink",
           htmlAttributes: {
-            "data-tooltip": _$$t2("dev_handoff.developer_related_links.add_link_button"),
+            "data-tooltip": getI18nString("dev_handoff.developer_related_links.add_link_button"),
             "data-tooltip-type": Ib.TEXT
           },
           children: jsx(_$$x, {})
@@ -6468,7 +6468,7 @@ function sy({
 function sb({
   links: e
 }) {
-  let [t, n] = _$$fp(ok);
+  let [t, n] = useAtomValueAndSetter(ok);
   let o = useMemo(() => {
     let n = new Set(e.map(e => e.linkUrl));
     return Object.values(t).filter(e => !!e && e.links.some(e => n.has(e.linkUrl)));
@@ -6513,7 +6513,7 @@ function sb({
       left: 16
     },
     children: Array.from(o).map((e, t) => jsx(_$$E4, {
-      children: _$$tx("dev_handoff.related_links.plugin.auth_required", {
+      children: renderI18nText("dev_handoff.related_links.plugin.auth_required", {
         button: jsx("button", {
           className: _$$s.colorTextBrand.bgTransparent.$,
           onClick: () => l({
@@ -6521,7 +6521,7 @@ function sb({
             plugin: e.plugin
           }),
           children: jsx(_$$E4, {
-            children: _$$tx("dev_handoff.related_links.plugin.connect_to", {
+            children: renderI18nText("dev_handoff.related_links.plugin.connect_to", {
               pluginName: e.plugin.name
             })
           })
@@ -6578,12 +6578,12 @@ function sO() {
       "component_panel--instanceNavigationButton--4ANaC": h.current
     }),
     children: jsx(_$$K2, {
-      "aria-label": j ? _$$t2("design_systems.instance_panel.view_library_in_community") : _$$t2("dev_handoff.instance_navigation.go_to_main_component"),
+      "aria-label": j ? getI18nString("design_systems.instance_panel.view_library_in_community") : getI18nString("dev_handoff.instance_navigation.go_to_main_component"),
       onClick: b,
       disabled: w,
       recordingKey: "devHandoffNavigateInstanceButton",
       htmlAttributes: {
-        "data-tooltip": j ? _$$t2("design_systems.instance_panel.view_library_in_community") : _$$t2("dev_handoff.instance_navigation.go_to_main_component"),
+        "data-tooltip": j ? getI18nString("design_systems.instance_panel.view_library_in_community") : getI18nString("dev_handoff.instance_navigation.go_to_main_component"),
         "data-tooltip-type": Ib.TEXT
       },
       children: j ? jsx(_$$c6, {}) : m ? jsx(_$$E6, {}) : jsx(_$$K3, {})
@@ -6603,7 +6603,7 @@ function sB() {
   } = lq();
   let t = useMemo(() => description ? $J(description) : void 0, [description]);
   return jsx(VZ, {
-    title: _$$t2("inspect_panel.component_information"),
+    title: getI18nString("inspect_panel.component_information"),
     recordingKey: "componentPanel",
     collapsiblePanelKey: "info",
     collapsedHeaders: t ? jsx(_$$G2, {
@@ -6623,13 +6623,13 @@ let sW = ["color", "border", "text", "effect", "layout", "shape", "style"];
 let sU = _$$Ju(function () {
   return jsx(yX, {
     destructive: !0,
-    confirmationTitle: _$$tx("inspect_panel.detached_component.remove_attachment"),
-    confirmText: _$$tx("dev_handoff.detached_component.remove_attachment_confirm"),
+    confirmationTitle: renderI18nText("inspect_panel.detached_component.remove_attachment"),
+    confirmText: renderI18nText("dev_handoff.detached_component.remove_attachment_confirm"),
     onConfirm: () => {
       VU.get("remove-detached-symbol-id", "menu")();
     },
     children: jsx("p", {
-      children: _$$tx("dev_handoff.detached_component.remove_attachment_text_body")
+      children: renderI18nText("dev_handoff.detached_component.remove_attachment_text_body")
     })
   });
 }, "RemoveDetachmentStatusModal");
@@ -6681,19 +6681,19 @@ function s1({
     toggleDropdown
   } = _$$B3("DEV_HANDOFF_COMPARE_CHANGES_DROPDOWN");
   let A = useMemo(() => ({
-    displayText: _$$t2("dev_handoff.compare_changes.entrypoint.compare_versions"),
+    displayText: getI18nString("dev_handoff.compare_changes.entrypoint.compare_versions"),
     disabled: n || !c || !o,
     callback: c ? p : _$$lQ,
     recordingKey: "compareChanges.entrypoint.dropdown.compareVersions"
   }), [o, n, c, p]);
   let I = useMemo(() => l ? {
-    displayText: _$$t2("dev_handoff.compare_changes.entrypoint.compare_main_component"),
+    displayText: getI18nString("dev_handoff.compare_changes.entrypoint.compare_main_component"),
     disabled: n || !c,
     callback: c ? h : _$$lQ,
     recordingKey: "compareChanges.entrypoint.dropdown.compareDetachedComponent"
   } : null, [l, n, c, h]);
   let E = useMemo(() => s || g ? {
-    displayText: _$$t2("dev_handoff.compare_changes.entrypoint.compare_main_component"),
+    displayText: getI18nString("dev_handoff.compare_changes.entrypoint.compare_main_component"),
     disabled: !s || n || !c,
     callback: c ? v : _$$lQ,
     recordingKey: "compareChanges.entrypoint.dropdown.compareOverrides"
@@ -6748,7 +6748,7 @@ function s1({
       "header--layerCompareLinkTextDisabled----eEQ": n
     }),
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": _$$t2("dev_handoff.compare_changes.entrypoint.multiselect_comparison_hint"),
+    "data-tooltip": getI18nString("dev_handoff.compare_changes.entrypoint.multiselect_comparison_hint"),
     "data-testid": "compare-changes-entry-without-dropdown",
     "data-onboarding-key": Ov,
     children: t
@@ -6766,14 +6766,14 @@ function s2() {
   return jsx($n, {
     variant: "secondary",
     onClick: () => {
-      e && (_$$sx("Diff Modal Compare Changes Clicked", {
+      e && (trackEventAnalytics("Diff Modal Compare Changes Clicked", {
         userId: t,
         fileKey: i,
         nodeId: s,
         otherNodeId: r,
         entrypoint: "lego_layer",
         origin: "cc_nodes"
-      }), _$$sn.reset("dev_handoff.view_history", s), _$$sn.start("dev_handoff.view_history", {
+      }), globalPerfTimer.reset("dev_handoff.view_history", s), globalPerfTimer.start("dev_handoff.view_history", {
         key: s
       }), l(_$$to({
         type: ku,
@@ -6787,7 +6787,7 @@ function s2() {
     recordingKey: "compareChanges.entrypoint.nodes",
     children: jsx("span", {
       className: tQ,
-      children: _$$tx("inspect_panel.history.compare_changes_selected_items")
+      children: renderI18nText("inspect_panel.history.compare_changes_selected_items")
     })
   });
 }
@@ -6822,9 +6822,9 @@ function s3() {
   return jsxs(_$$bL2, {
     manager,
     children: [jsx(_$$d3, {
-      "aria-label": _$$t2("dev_handoff.layer_options"),
+      "aria-label": getI18nString("dev_handoff.layer_options"),
       htmlAttributes: {
-        "data-tooltip": _$$t2("dev_handoff.layer_options"),
+        "data-tooltip": getI18nString("dev_handoff.layer_options"),
         "data-tooltip-type": Ib.TEXT
       },
       recordingKey: "headerDropdownTrigger",
@@ -6836,21 +6836,21 @@ function s3() {
           e && t && (window.location.href = `vscode://figma.figma-vscode-extension/open/${e.key}/${e.name}/${t}`);
         },
         disabled: r,
-        children: _$$tx("dev_handoff.inspect_panel.open_in_vs_code.link")
+        children: renderI18nText("dev_handoff.inspect_panel.open_in_vs_code.link")
       }), jsx(wv, {}), jsx(q7, {
         onClick: s,
         recordingKey: "addDevRelatedLink",
         children: n ? jsxs("div", {
           className: "header--relatedLinkComponentMenuHint--Baq-o",
-          children: [_$$tx("dev_handoff.developer_related_links.add_link_button"), jsx(ME, {
-            children: _$$tx("dev_handoff.developer_related_links.component_inherited_links_desc")
+          children: [renderI18nText("dev_handoff.developer_related_links.add_link_button"), jsx(ME, {
+            children: renderI18nText("dev_handoff.developer_related_links.component_inherited_links_desc")
           })]
-        }) : _$$tx("dev_handoff.developer_related_links.add_link_button")
+        }) : renderI18nText("dev_handoff.developer_related_links.add_link_button")
       }), l && jsxs(Fragment, {
         children: [jsx(wv, {}), jsx(q7, {
           onClick: h,
           disabled: d,
-          children: _$$tx("dev_handoff.detached_component.unlink_from_main_component")
+          children: renderI18nText("dev_handoff.detached_component.unlink_from_main_component")
         })]
       })]
     })]
@@ -6888,7 +6888,7 @@ function s7({
 function s8() {
   let e = NM();
   return e ? jsx(VZ, {
-    title: _$$t2("inspect_panel.property.selected", {
+    title: getI18nString("inspect_panel.property.selected", {
       numberOfItems: e.length
     }),
     recordingKey: "layerName",
@@ -6922,64 +6922,64 @@ function s6() {
     let o = Array.from(i).sort(sH).map(e => {
       switch (e) {
         case "color":
-          return _$$t2("dev_handoff.overrides.color");
+          return getI18nString("dev_handoff.overrides.color");
         case "border":
-          return _$$t2("dev_handoff.overrides.border");
+          return getI18nString("dev_handoff.overrides.border");
         case "text":
-          return _$$t2("dev_handoff.overrides.text");
+          return getI18nString("dev_handoff.overrides.text");
         case "effect":
-          return _$$t2("dev_handoff.overrides.effect");
+          return getI18nString("dev_handoff.overrides.effect");
         case "layout":
-          return _$$t2("dev_handoff.overrides.layout");
+          return getI18nString("dev_handoff.overrides.layout");
         case "shape":
-          return _$$t2("dev_handoff.overrides.shape");
+          return getI18nString("dev_handoff.overrides.shape");
         case "style":
-          return _$$t2("dev_handoff.overrides.style");
+          return getI18nString("dev_handoff.overrides.style");
       }
     }).filter(_$$t4);
-    let l = n ? _$$t2("dev_handoff.overrides.instance") : _$$t2("dev_handoff.overrides.layer");
+    let l = n ? getI18nString("dev_handoff.overrides.instance") : getI18nString("dev_handoff.overrides.layer");
     switch (o.length) {
       case 1:
-        return _$$t2("dev_handoff.overrides.hint_one", {
+        return getI18nString("dev_handoff.overrides.hint_one", {
           property: o[0],
           layerType: l
         });
       case 2:
-        e = _$$t2("dev_handoff.overrides.properties2", {
+        e = getI18nString("dev_handoff.overrides.properties2", {
           prop1: o[0],
           prop2: o[1]
         });
         break;
       case 3:
-        e = _$$t2("dev_handoff.overrides.properties3", {
+        e = getI18nString("dev_handoff.overrides.properties3", {
           prop1: o[0],
           prop2: o[1],
           prop3: o[2]
         });
         break;
       default:
-        e = _$$t2("dev_handoff.overrides.properties_more", {
+        e = getI18nString("dev_handoff.overrides.properties_more", {
           prop1: o[0],
           prop2: o[1],
           prop3: o[2],
           count: o.length - 3
         });
     }
-    return _$$t2("dev_handoff.overrides.hint", {
+    return getI18nString("dev_handoff.overrides.hint", {
       layerType: l,
       properties: e
     });
   }();
   let d = !!n?.lastEditedAt && (!l || l && !!n?.createdAt);
-  let c = d ? l ? _$$t2("dev_handoff.nodes_panel.created", {
+  let c = d ? l ? getI18nString("dev_handoff.nodes_panel.created", {
     at: _$$A12(n?.createdAt).fromNow()
-  }) : _$$t2("dev_handoff.nodes_panel.edited", {
+  }) : getI18nString("dev_handoff.nodes_panel.edited", {
     at: _$$A12(n?.lastEditedAt).fromNow()
   }) : "-";
   let u = _$$sD(c);
   if (!e || !s) return null;
   let p = d && !l;
-  let h = t && _$$t2("dev_handoff.inspect_panel.detached_layer_info") || null;
+  let h = t && getI18nString("dev_handoff.inspect_panel.detached_layer_info") || null;
   let f = !!r;
   let g = r || h;
   let x = t || !l || f;
@@ -7004,7 +7004,7 @@ function s6() {
         })]
       }), x && jsx(s1, {
         frameId: e,
-        label: _$$t2("inspect_panel.history.compare_changes"),
+        label: getI18nString("inspect_panel.history.compare_changes"),
         compareVersions: !l,
         compareDetachedComponent: t,
         compareOverrides: f
@@ -7047,61 +7047,61 @@ function s9({
       if (n || !e || "loaded" === e.status) return a;
     }();
     if (!type) return null;
-    if (t && "SYMBOL" !== type && "INSTANCE" !== type) return _$$t2("inspect_panel.node_type.detached_component");
+    if (t && "SYMBOL" !== type && "INSTANCE" !== type) return getI18nString("inspect_panel.node_type.detached_component");
     if ("BOOLEAN_OPERATION" === type) switch (booleanOperation) {
       case "UNION":
-        return _$$t2("inspect_panel.node_type.union");
+        return getI18nString("inspect_panel.node_type.union");
       case "INTERSECT":
-        return _$$t2("inspect_panel.node_type.intersect");
+        return getI18nString("inspect_panel.node_type.intersect");
       case "SUBTRACT":
-        return _$$t2("inspect_panel.node_type.subtract");
+        return getI18nString("inspect_panel.node_type.subtract");
       case "XOR":
-        return _$$t2("inspect_panel.node_type.exclude");
+        return getI18nString("inspect_panel.node_type.exclude");
     }
     switch (type) {
       case "VECTOR":
-        return _$$t2("inspect_panel.node_type.vector");
+        return getI18nString("inspect_panel.node_type.vector");
       case "STAR":
-        return _$$t2("inspect_panel.node_type.star");
+        return getI18nString("inspect_panel.node_type.star");
       case "LINE":
-        return _$$t2("inspect_panel.node_type.line");
+        return getI18nString("inspect_panel.node_type.line");
       case "ELLIPSE":
-        return _$$t2("inspect_panel.node_type.ellipse");
+        return getI18nString("inspect_panel.node_type.ellipse");
       case "RECTANGLE":
       case "ROUNDED_RECTANGLE":
-        return _$$t2("inspect_panel.node_type.rectangle");
+        return getI18nString("inspect_panel.node_type.rectangle");
       case "REGULAR_POLYGON":
-        return _$$t2("inspect_panel.node_type.polygon");
+        return getI18nString("inspect_panel.node_type.polygon");
       case "TEXT":
-        return _$$t2("inspect_panel.node_type.text");
+        return getI18nString("inspect_panel.node_type.text");
       case "SLICE":
-        return _$$t2("inspect_panel.node_type.slice");
+        return getI18nString("inspect_panel.node_type.slice");
       case "GROUP":
       case "FRAME":
-        if (isComponentSet) return _$$t2("inspect_panel.node_type.main_component_set");
-        if (isAutoLayout) return _$$t2("inspect_panel.node_type.frame_auto_layout");
-        if (resizeToFit) return _$$t2("inspect_panel.node_type.group");
-        return _$$t2("inspect_panel.node_type.frame");
+        if (isComponentSet) return getI18nString("inspect_panel.node_type.main_component_set");
+        if (isAutoLayout) return getI18nString("inspect_panel.node_type.frame_auto_layout");
+        if (resizeToFit) return getI18nString("inspect_panel.node_type.group");
+        return getI18nString("inspect_panel.node_type.frame");
       case "SYMBOL":
-        return isVariant ? _$$t2("inspect_panel.node_type.main_variant") : _$$t2("inspect_panel.node_type.main_component");
+        return isVariant ? getI18nString("inspect_panel.node_type.main_variant") : getI18nString("inspect_panel.node_type.main_component");
       case "INSTANCE":
-        if (d) return _$$t2("inspect_panel.node_type.instance_with_attribution", {
+        if (d) return getI18nString("inspect_panel.node_type.instance_with_attribution", {
           libraryName: d
         });
-        return _$$t2("inspect_panel.node_type.instance");
+        return getI18nString("inspect_panel.node_type.instance");
       case "STICKY":
       case "SHAPE_WITH_TEXT":
       case "CONNECTOR":
       case "STAMP":
-        return _$$t2("inspect_panel.node_type.figjam");
+        return getI18nString("inspect_panel.node_type.figjam");
       case "SECTION":
-        return _$$t2("inspect_panel.node_type.section");
+        return getI18nString("inspect_panel.node_type.section");
       case "WIDGET":
-        return _$$t2("inspect_panel.node_type.widget");
+        return getI18nString("inspect_panel.node_type.widget");
       case "CANVAS":
-        return _$$t2("inspect_panel.node_type.page");
+        return getI18nString("inspect_panel.node_type.page");
       case "TABLE":
-        return _$$t2("inspect_panel.node_type.table");
+        return getI18nString("inspect_panel.node_type.table");
     }
     return null;
   }();
@@ -7117,14 +7117,14 @@ function s9({
       isSymbol: n?.type === "SYMBOL" || n?.type === "INSTANCE" || n?.isStateGroup
     };
   }, t);
-  let u = _$$R(e => e.mirror.appModel.activeCanvasEditModeType);
+  let u = selectWithShallowEqual(e => e.mirror.appModel.activeCanvasEditModeType);
   if (!t) return null;
   if (isReadyForDev) return jsxs(Fragment, {
     children: [jsx(_$$O4, {
       className: tK
     }), jsx("span", {
       className: tX,
-      children: _$$tx("dev_handoff.status.ready_for_dev")
+      children: renderI18nText("dev_handoff.status.ready_for_dev")
     })]
   });
   if (isCompleted) return jsxs(Fragment, {
@@ -7132,11 +7132,11 @@ function s9({
       className: tK
     }), jsx("span", {
       className: tX,
-      children: _$$tx("dev_handoff.status.completed")
+      children: renderI18nText("dev_handoff.status.completed")
     })]
   });
   let p = isSymbol || n;
-  let h = n && !isSymbol ? _$$t2("inspect_panel.node_type_tooltip.detached_component") : void 0;
+  let h = n && !isSymbol ? getI18nString("inspect_panel.node_type_tooltip.detached_component") : void 0;
   return jsxs(Fragment, {
     children: [jsx(Bf, {
       className: p ? tU : tG,
@@ -7168,18 +7168,18 @@ function re() {
   }, e);
   let i = Cj(name);
   if (!e) return null;
-  let o = name || _$$t2("fullscreen.layer_panel.layer");
+  let o = name || getI18nString("fullscreen.layer_panel.layer");
   return jsx(_$$E, {
     className: ek()(tV, {
       [tW]: !!name
     }),
     actionOnPointerDown: !0,
     onClick: i,
-    "aria-label": _$$t2("dev_handoff.inspect_panel.copy_layer_name_aria", {
+    "aria-label": getI18nString("dev_handoff.inspect_panel.copy_layer_name_aria", {
       layerName: o
     }),
     htmlAttributes: {
-      "data-tooltip": _$$t2("dev_handoff.inspect_panel.copy_layer_name_aria", {
+      "data-tooltip": getI18nString("dev_handoff.inspect_panel.copy_layer_name_aria", {
         layerName: o
       }),
       "data-tooltip-type": Ib.TEXT
@@ -7196,18 +7196,18 @@ function rt() {
   let n = Fk((e, t) => e.get(t)?.name?.trim(), t);
   let i = Cj(n);
   if (e) return null;
-  let o = n || _$$t2("inspect_panel.node_type.page");
+  let o = n || getI18nString("inspect_panel.node_type.page");
   return jsx(_$$E, {
     className: ek()(tV, {
       [tW]: !!n
     }),
     actionOnPointerDown: !0,
     onClick: i,
-    "aria-label": _$$t2("dev_handoff.inspect_panel.copy_page_name_aria", {
+    "aria-label": getI18nString("dev_handoff.inspect_panel.copy_page_name_aria", {
       pageName: o
     }),
     htmlAttributes: {
-      "data-tooltip": _$$t2("dev_handoff.inspect_panel.copy_page_name_aria", {
+      "data-tooltip": getI18nString("dev_handoff.inspect_panel.copy_page_name_aria", {
         pageName: o
       }),
       "data-tooltip-type": Ib.TEXT
@@ -7220,7 +7220,7 @@ function rt() {
 }
 function rn() {
   let e = _$$dh();
-  let t = _$$R(e => e.mirror.appModel.activeCanvasEditModeType);
+  let t = selectWithShallowEqual(e => e.mirror.appModel.activeCanvasEditModeType);
   return jsx(Bf, {
     className: tG,
     guid: e,
@@ -7244,11 +7244,11 @@ function ra() {
         className: "header--linkIconContainer--nZZXq",
         children: jsx(_$$r4, {})
       }),
-      "aria-label": _$$t2("dev_handoff.link.copy_aria_label", {
+      "aria-label": getI18nString("dev_handoff.link.copy_aria_label", {
         link: t
       }),
       htmlAttributes: {
-        "data-tooltip": _$$t2("dev_handoff.link.copy_tooltip"),
+        "data-tooltip": getI18nString("dev_handoff.link.copy_tooltip"),
         "data-tooltip-type": Ib.TEXT
       },
       children: t
@@ -7305,7 +7305,7 @@ function ri(e) {
           className: tM,
           children: [jsx(rn, {}), jsx("span", {
             className: tX,
-            children: _$$tx("inspect_panel.node_type.page")
+            children: renderI18nText("inspect_panel.node_type.page")
           })]
         })
       }), jsx(sy, {
@@ -7330,7 +7330,7 @@ function ru(e, t, n) {
 function rp(e) {
   return !!e && e.isAlive && "INSTANCE" !== e.type && !vY(w3z?.getAssetInfo(e.guid), !0);
 }
-let rh = _$$eU([]);
+let rh = atom([]);
 function rf({
   inspectableRootNodeId: e,
   page: t,
@@ -7343,7 +7343,7 @@ function rf({
   let p = NM();
   let h = e || t;
   let [f, g] = useState(() => 0 === glU.nodeStatusesOnPage(t).length || s);
-  let [x, m] = _$$fp(rh);
+  let [x, m] = useAtomValueAndSetter(rh);
   useEffect(() => {
     g(0 === glU.nodeStatusesOnPage(t).length);
   }, [t]);
@@ -7482,7 +7482,7 @@ function rg({
   collapseAllLayers: i
 }) {
   let o = [{
-    displayText: _$$t2("dev_handoff.layers.collapse_all_layers"),
+    displayText: getI18nString("dev_handoff.layers.collapse_all_layers"),
     callback: () => i()
   }];
   let l = `devHandoffNodesPanel.caret.${t ? "forcedExpanded" : e ? "expanded" : "collapsed"}`;
@@ -7502,7 +7502,7 @@ function rg({
           })
         }), jsx("div", {
           className: "dev_handoff_layers_panel--layersTitle--sU99L ellipsis--ellipsis--Tjyfa",
-          children: _$$tx("dev_handoff.tag.layers")
+          children: renderI18nText("dev_handoff.tag.layers")
         })]
       })
     }), (e || t) && jsx(_$$U3, {
@@ -7513,7 +7513,7 @@ function rg({
 let ry = parsePxNumber(LDP);
 let rb = parsePxNumber(Rv9);
 let rj = parsePxNumber(tUy);
-let rw = _$$eU([]);
+let rw = atom([]);
 function rN(e) {
   let {
     guid,
@@ -7602,10 +7602,10 @@ let rk = memo(function (e) {
   let [c, u] = useState(!1);
   let p = function (e) {
     _$$uQ();
-    let t = _$$R(e => !_$$M3(e));
+    let t = selectWithShallowEqual(e => !_$$M3(e));
     return n => Uc(n && t ? e : "");
   }(guid);
-  let h = md(_$$d7);
+  let h = useAtomWithSubscription(_$$d7);
   let f = rA(guid);
   let g = E1();
   let _ = _$$ei(guid);
@@ -7687,7 +7687,7 @@ let rk = memo(function (e) {
       children: C && jsx("img", {
         src: C.src,
         className: ek()("dev_handoff_nodes_panel--thumbnailImg--yRcCn", k && "dev_handoff_nodes_panel--thumbnailImgLong--5eP8l", I && "dev_handoff_nodes_panel--thumbnailImgTall--iJO4k"),
-        alt: _$$t2("dev_handoff.nodes_panel.thumbnail_alt_text")
+        alt: getI18nString("dev_handoff.nodes_panel.thumbnail_alt_text")
       })
     }), jsx(_$$E2, {
       children: "\xa0"
@@ -7707,12 +7707,12 @@ let rk = memo(function (e) {
             className: "dev_handoff_nodes_panel--editedTimestamp--nShNo",
             children: _?.createdAt && (v === Uy.RECENTLY_CREATED || _.createdAt === _.lastEditedAt) ? jsx("span", {
               className: sJ,
-              children: _$$tx("dev_handoff.nodes_panel.created", {
+              children: renderI18nText("dev_handoff.nodes_panel.created", {
                 at: b
               })
             }) : jsx("span", {
               className: sJ,
-              children: _$$tx("dev_handoff.nodes_panel.edited", {
+              children: renderI18nText("dev_handoff.nodes_panel.edited", {
                 at: b
               })
             })
@@ -7741,7 +7741,7 @@ let rA = e => $y((e, t) => {
     name: i,
     width: n.size.x,
     height: n.size.y,
-    type: n.isStateGroup ? _$$t2("inspect_panel.node_type.main_component_set") : n.isState ? _$$t2("inspect_panel.node_type.main_variant") : "SYMBOL" === n.type ? _$$t2("inspect_panel.node_type.main_component") : "INSTANCE" === n.type ? _$$t2("inspect_panel.node_type.instance") : void 0,
+    type: n.isStateGroup ? getI18nString("inspect_panel.node_type.main_component_set") : n.isState ? getI18nString("inspect_panel.node_type.main_variant") : "SYMBOL" === n.type ? getI18nString("inspect_panel.node_type.main_component") : "INSTANCE" === n.type ? getI18nString("inspect_panel.node_type.instance") : void 0,
     isSymbol: n.isStateGroup || "SYMBOL" === n.type || "INSTANCE" === n.type
   };
 }, e);
@@ -7753,11 +7753,11 @@ function rI({
 }) {
   let l = useRef(null);
   let s = e.length > 0;
-  let [d, c] = _$$fp(rw);
+  let [d, c] = useAtomValueAndSetter(rw);
   let u = function () {
     let {
       currentPage
-    } = _$$R(e => ({
+    } = selectWithShallowEqual(e => ({
       currentPage: e.mirror.appModel.currentPage
     }));
     let t = Fk((e, t) => e.get(t)?.backgroundColor, currentPage);
@@ -7824,7 +7824,7 @@ function rI({
     style: {
       padding: 0
     },
-    children: _$$tx("dev_handoff.tag.ready_for_development")
+    children: renderI18nText("dev_handoff.tag.ready_for_development")
   });
   useEffect(() => {
     let e = y.findIndex(e => "node" === e.type && n === e.nodeId);
@@ -7836,7 +7836,7 @@ function rI({
   return jsxs(Fragment, {
     children: [jsx(_$$E, {
       className: ek()(RE, "dev_handoff_nodes_panel--focusVisible--KtjCp"),
-      "aria-label": _$$t2("dev_handoff.tag.ready_for_development"),
+      "aria-label": getI18nString("dev_handoff.tag.ready_for_development"),
       onClick: () => h(e => !e),
       children: jsxs("div", {
         className: Pz,
@@ -7917,7 +7917,7 @@ function rE() {
     variant: "secondary",
     iconPrefix: jsx(_$$A11, {}),
     onClick: () => Y5.triggerAction("add-selection-ready-status"),
-    children: _$$tx("fullscreen_actions.ready-status-add")
+    children: renderI18nText("fullscreen_actions.ready-status-add")
   }) : null;
 }
 function rC() {
@@ -7929,7 +7929,7 @@ function rC() {
       className: sq
     }), jsx("div", {
       className: sY,
-      children: _$$tx("dev_handoff.tag.ready_for_development.content_view_only")
+      children: renderI18nText("dev_handoff.tag.ready_for_development.content_view_only")
     })]
   }) : jsx("div", {
     className: sQ,
@@ -7938,7 +7938,7 @@ function rC() {
         className: sq
       }), jsx("div", {
         className: sY,
-        children: _$$tx("dev_handoff.status.ready_for_development.content")
+        children: renderI18nText("dev_handoff.status.ready_for_development.content")
       })]
     })
   });
@@ -7991,7 +7991,7 @@ function rP({
   let s = J2(Ez5.devHandoffState().readySectionItems);
   let {
     currentPage
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     currentPage: e.mirror.appModel.currentPage
   }));
   let {
@@ -8022,8 +8022,8 @@ let rL = memo(() => {
   } = rT(e, _$$uQ());
   let r = useSelector(e => Object.keys(e.mirror.sceneGraphSelection).length > 0);
   _$$h(() => {
-    let e = _$$sn.tryStop("switch_to_inspect_mode.left_panel_tti");
-    e && _$$sx("switch_to_inspect_mode.left_panel_tti", {
+    let e = globalPerfTimer.tryStop("switch_to_inspect_mode.left_panel_tti");
+    e && trackEventAnalytics("switch_to_inspect_mode.left_panel_tti", {
       elapsedMs: e,
       isNodeSelected: r
     }, {
@@ -8043,7 +8043,7 @@ function rO() {
     className: _$$s.flex.flexRow.m16.$,
     children: jsx("div", {
       className: _$$s.font11.$,
-      children: _$$tx("fullscreen.properties_panel.this_file_s_editor_has_disabled_exporting_copying_and_sharing.seat_rename")
+      children: renderI18nText("fullscreen.properties_panel.this_file_s_editor_has_disabled_exporting_copying_and_sharing.seat_rename")
     })
   });
 }
@@ -8053,7 +8053,7 @@ function rX() {
     currentPluginView
   } = function () {
     let e = Xr(_$$hO);
-    let [t, n] = _$$fp(HT);
+    let [t, n] = useAtomValueAndSetter(HT);
     let a = AY(HT);
     let o = useCallback(() => {
       e(t);
@@ -8106,7 +8106,7 @@ function rJ() {
   let e = useSelector(e => e.mirror.appModel.currentTool === _$$ec.tool);
   let t = _$$h2();
   let n = UX();
-  let s = md(_$$d8);
+  let s = useAtomWithSubscription(_$$d8);
   let d = "LOADING" === s;
   let c = "RUNNING" === s;
   let u = _$$ut(_$$tw(), _gJ.PRIMARY) === _gJ.PLUGIN && !e;
@@ -8149,7 +8149,7 @@ let rQ = memo(function (e) {
   });
 });
 function rq() {
-  let e = md(be);
+  let e = useAtomWithSubscription(be);
   return e ? jsx(_$$Y2, {
     direction: "vertical",
     verticalAlignItems: "center",
@@ -8167,7 +8167,7 @@ function rq() {
         children: jsx(_$$E4, {
           fontSize: 12,
           color: "secondary",
-          children: _$$tx("dev_handoff.loading_plugin", {
+          children: renderI18nText("dev_handoff.loading_plugin", {
             pluginName: e?.name
           })
         })
@@ -8210,7 +8210,7 @@ let r3 = {
 function r4({
   plugin: e
 }) {
-  let t = md(vT);
+  let t = useAtomWithSubscription(vT);
   return jsx("div", {
     children: jsxs(_$$Y2, {
       width: "fill-parent",
@@ -8238,7 +8238,7 @@ function r4({
           })]
         })
       }), jsx(_$$K2, {
-        "aria-label": _$$t2("dev_handoff.plugin_panel.close_plugin"),
+        "aria-label": getI18nString("dev_handoff.plugin_panel.close_plugin"),
         onClick: () => {
           (function (e) {
             switch (e) {
@@ -8284,7 +8284,7 @@ function r8(e) {
       manager: e.tabProps.manager,
       children: jsx(_$$t5.Tab, {
         ...e.tabProps,
-        children: _$$t2("dev_handoff.tab.comment")
+        children: getI18nString("dev_handoff.tab.comment")
       })
     })
   });
@@ -8302,14 +8302,14 @@ function r6(e) {
         manager: tabManager,
         children: [jsx(_$$t5.Tab, {
           ...tabPropsMap[r5[_gJ.PRIMARY]],
-          children: _$$t2("dev_handoff.tab.inspect")
+          children: getI18nString("dev_handoff.tab.inspect")
         }), jsx(_$$t5.Tab, {
           ...tabPropsMap[r5[_gJ.STRING_MANAGEMENT]],
           onboardingKey: _$$iA.STRINGS_TAB,
-          children: _$$t2("dev_handoff.tab.string_management")
+          children: getI18nString("dev_handoff.tab.string_management")
         }), jsx(_$$t5.Tab, {
           ...tabPropsMap[r5[_gJ.PLUGIN]],
-          children: _$$t2("dev_handoff.tab.plugins")
+          children: getI18nString("dev_handoff.tab.plugins")
         })]
       })
     }), jsxs("div", {
@@ -8327,12 +8327,12 @@ function r6(e) {
   });
 }
 function r9(e) {
-  let t = md(be);
+  let t = useAtomWithSubscription(be);
   let n = _$$ut(_$$tw(), _gJ.PRIMARY);
   let {
     commentsActive,
     versionHistoryActive
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     commentsActive: e.mirror.appModel.currentTool === _$$ec.tool,
     versionHistoryActive: e.mirror.appModel.activeCanvasEditModeType === m1T.DEV_HANDOFF_HISTORY
   }));
@@ -8353,7 +8353,7 @@ function r9(e) {
 function de(e) {
   let t = useSelector(e => e.mirror.appModel.showUi);
   let n = _$$lz();
-  let [l, d] = _$$fp(XI);
+  let [l, d] = useAtomValueAndSetter(XI);
   let c = J2(UK().renderRulers);
   let u = !!_$$hA();
   let p = _$$T();
@@ -8429,7 +8429,7 @@ function dp({
 }) {
   return "first-party" !== v4().type ? null : jsx(df, {
     plugin: e,
-    buttonText: _$$t2("dev_handoff.inspect_panel.close_plugin")
+    buttonText: getI18nString("dev_handoff.inspect_panel.close_plugin")
   });
 }
 function dh({
@@ -8437,7 +8437,7 @@ function dh({
 }) {
   return "first-party" === v4().type ? null : jsx(df, {
     plugin: e,
-    buttonText: _$$t2("dev_handoff.inspect_panel.generate_code")
+    buttonText: getI18nString("dev_handoff.inspect_panel.generate_code")
   });
 }
 function df({
@@ -8472,7 +8472,7 @@ function df({
           })
         }), jsx(_$$E4, {
           fontFamily: "primary",
-          children: _$$tx("fullscreen.plugins.background", {
+          children: renderI18nText("fullscreen.plugins.background", {
             plugin: jsx(_$$E4, {
               fontWeight: "bold",
               children: e.name
@@ -8513,8 +8513,8 @@ function dw({
     id: qZ.CSS,
     type: "first-party"
   } : g, [g]);
-  let m = md(GR);
-  let _ = md(vT);
+  let m = useAtomWithSubscription(GR);
+  let _ = useAtomWithSubscription(vT);
   return h ? m && "codegen" !== _ && "first-party" !== x.type ? jsx(dh, {
     plugin: m
   }) : jsx(dN, {
@@ -8537,7 +8537,7 @@ function dw({
     className: dv,
     children: jsx(_$$cV, {
       children: jsx(_$$Q2, {
-        children: _$$tx("fullscreen.properties_panel.this_file_s_editor_has_disabled_exporting_copying_and_sharing.seat_rename")
+        children: renderI18nText("fullscreen.properties_panel.this_file_s_editor_has_disabled_exporting_copying_and_sharing.seat_rename")
       })
     })
   });
@@ -8640,12 +8640,12 @@ function dN({
     "data-testid": "dev-handoff-code-update-prompt",
     children: jsxs(_$$cV, {
       children: [jsx(_$$Q2, {
-        title: _$$tx("dev_handoff.code.update_prompt_title"),
-        children: _$$tx("dev_handoff.code.update_prompt")
+        title: renderI18nText("dev_handoff.code.update_prompt_title"),
+        children: renderI18nText("dev_handoff.code.update_prompt")
       }), jsx($n, {
         variant: "secondary",
         onClick: S,
-        children: _$$tx("dev_handoff.code.update_prompt_action")
+        children: renderI18nText("dev_handoff.code.update_prompt_action")
       })]
     })
   });
@@ -8654,15 +8654,15 @@ function dN({
     "data-testid": "codegen-error-message",
     children: jsxs(_$$cV, {
       children: [jsx(_$$Q2, {
-        title: _$$tx("inspect_panel.code.error", {
-          plugin: j.name ?? _$$t2("inspect_panel.code.error_this_plugin")
+        title: renderI18nText("inspect_panel.code.error", {
+          plugin: j.name ?? getI18nString("inspect_panel.code.error_this_plugin")
         }),
-        children: _$$tx("inspect_panel.code.error_details")
+        children: renderI18nText("inspect_panel.code.error_details")
       }), jsx(_$$N3, {
         newTab: !0,
         trusted: !0,
         href: _$$ab(j.plugin_id),
-        children: _$$tx("inspect_panel.code.error_link")
+        children: renderI18nText("inspect_panel.code.error_link")
       })]
     })
   }) : null : L ? jsx("div", {
@@ -8702,8 +8702,8 @@ let dC = "interactive-inspection-onboarding-key";
 let dT = Fu("dev_mode_has_seen_interactive_inspection_onboarding");
 let dS = Fu("dev_mode_has_seen_focus_view_onboarding");
 let dP = {
-  title: _$$tx("dev_handoff.focus_view.interactive_onboarding_title"),
-  description: _$$tx("dev_handoff.focus_view.interactive_onboarding_description"),
+  title: renderI18nText("dev_handoff.focus_view.interactive_onboarding_title"),
+  description: renderI18nText("dev_handoff.focus_view.interactive_onboarding_description"),
   trackingContextName: "Dev Mode Interactive Inspection Onboarding",
   targetKey: dC,
   disableHighlight: !0
@@ -8730,8 +8730,8 @@ function dR() {
   return !!_$$s7() && (n || t);
 }
 function dD() {
-  let e = md(dT);
-  let t = md(dS);
+  let e = useAtomWithSubscription(dT);
+  let t = useAtomWithSubscription(dS);
   let n = dR();
   let {
     show,
@@ -8754,7 +8754,7 @@ function dD() {
     emphasized: !1,
     onClose: d,
     primaryCta: {
-      label: _$$tx("general.got_it"),
+      label: renderI18nText("general.got_it"),
       type: "button",
       onClick: d,
       ctaTrackingDescriptor: _$$c2.GOT_IT
@@ -8784,36 +8784,36 @@ function dH() {
     o ? l() : complete();
   }, [o, complete, l]);
   let r = useMemo(() => ({
-    label: _$$tx("dev_handoff.workflows.focus_view.onboarding.secondary_cta_label"),
+    label: renderI18nText("dev_handoff.workflows.focus_view.onboarding.secondary_cta_label"),
     type: "button",
     onClick: s,
     ctaTrackingDescriptor: _$$c2.CANCEL
   }), [s]);
   let d = useMemo(() => ({
-    label: _$$tx("dev_handoff.workflows.focus_view.onboarding.last_primary_cta_label"),
+    label: renderI18nText("dev_handoff.workflows.focus_view.onboarding.last_primary_cta_label"),
     type: "button",
     onClick: l,
     ctaTrackingDescriptor: _$$c2.GOT_IT
   }), [l]);
   let c = [{
-    title: _$$tx("dev_handoff.workflows.focus_view.onboarding.viewing.title"),
-    description: _$$tx("dev_handoff.workflows.focus_view.onboarding.viewing.description"),
+    title: renderI18nText("dev_handoff.workflows.focus_view.onboarding.viewing.title"),
+    description: renderI18nText("dev_handoff.workflows.focus_view.onboarding.viewing.description"),
     trackingContextName: `${dM} Viewing`,
     targetKey: dB,
     emphasized: !0,
     secondaryCta: r,
     disableHighlight: !0
   }, {
-    title: _$$tx("dev_handoff.workflows.focus_view.onboarding.completed.title"),
-    description: _$$tx("dev_handoff.workflows.focus_view.onboarding.completed.description"),
+    title: renderI18nText("dev_handoff.workflows.focus_view.onboarding.completed.title"),
+    description: renderI18nText("dev_handoff.workflows.focus_view.onboarding.completed.description"),
     trackingContextName: `${dM} Completed`,
     targetKey: dF,
     emphasized: !0,
     secondaryCta: r,
     disableHighlight: !0
   }, {
-    title: _$$tx("dev_handoff.workflows.focus_view.onboarding.versions.title"),
-    description: _$$tx("dev_handoff.workflows.focus_view.onboarding.versions.description"),
+    title: renderI18nText("dev_handoff.workflows.focus_view.onboarding.versions.title"),
+    description: renderI18nText("dev_handoff.workflows.focus_view.onboarding.versions.description"),
     trackingContextName: `${dM} Versions`,
     targetKey: dz,
     emphasized: !0,
@@ -8822,12 +8822,12 @@ function dH() {
     onStepShow: () => wr(),
     disableHighlight: !0
   }, {
-    title: _$$tx("dev_handoff.workflows.focus_view.onboarding.back.title"),
-    description: _$$tx("dev_handoff.workflows.focus_view.onboarding.back.description"),
+    title: renderI18nText("dev_handoff.workflows.focus_view.onboarding.back.title"),
+    description: renderI18nText("dev_handoff.workflows.focus_view.onboarding.back.description"),
     trackingContextName: `${dM} Back`,
     targetKey: dV,
     emphasized: !0,
-    primaryCtaLabel: o ? void 0 : _$$tx("dev_handoff.workflows.focus_view.onboarding.last_primary_cta_label"),
+    primaryCtaLabel: o ? void 0 : renderI18nText("dev_handoff.workflows.focus_view.onboarding.last_primary_cta_label"),
     secondaryCta: o ? r : void 0,
     disableHighlight: !0
   }, o ? {
@@ -8854,7 +8854,7 @@ function d2({
   let i = Ak(e.timestamp);
   return jsx("h3", {
     className: d0,
-    children: t ? _$$tx("dev_handoff.workflows.focus_view.activity.activity_row_with_latest", {
+    children: t ? renderI18nText("dev_handoff.workflows.focus_view.activity.activity_row_with_latest", {
       versionText: n,
       activityTime: jsx("span", {
         className: d1,
@@ -8862,9 +8862,9 @@ function d2({
       }),
       latest: jsx("span", {
         className: d1,
-        children: _$$tx("dev_handoff.workflows.focus_view.activity.activity_row_latest_part")
+        children: renderI18nText("dev_handoff.workflows.focus_view.activity.activity_row_latest_part")
       })
-    }) : _$$tx("dev_handoff.workflows.focus_view.activity.activity_row", {
+    }) : renderI18nText("dev_handoff.workflows.focus_view.activity.activity_row", {
       versionText: n,
       activityTime: jsx("span", {
         className: d1,
@@ -8876,11 +8876,11 @@ function d2({
 function d5(e) {
   switch (e.metadata?.status) {
     case FBuildStatusType.BUILD:
-      return _$$t2("dev_handoff.workflows.focus_view.activity_status_ready");
+      return getI18nString("dev_handoff.workflows.focus_view.activity_status_ready");
     case FBuildStatusType.COMPLETED:
-      return _$$t2("dev_handoff.workflows.focus_view.activity_status_completed");
+      return getI18nString("dev_handoff.workflows.focus_view.activity_status_completed");
     case FBuildStatusType.NONE:
-      return _$$t2("dev_handoff.workflows.focus_view.activity_status_removed");
+      return getI18nString("dev_handoff.workflows.focus_view.activity_status_removed");
     default:
       return null;
   }
@@ -8956,14 +8956,14 @@ function d9({
         className: d0,
         children: [jsx("span", {
           className: "dev_handoff_activity_panel--latestVersion--ukUVR",
-          children: f ? _$$tx("dev_handoff.workflows.focus_view.activity.latest") : _$$tx("collaboration.feedback.current_version")
+          children: f ? renderI18nText("dev_handoff.workflows.focus_view.activity.latest") : renderI18nText("collaboration.feedback.current_version")
         }), !!t && jsx("span", {
           className: d1,
           children: h
         })]
       }), s && d && jsx("div", {
         className: "dev_handoff_activity_panel--viewDiffButtonEdited--j3Wzx",
-        children: _$$tx("dev_handoff.workflows.focus_view.activity.compare_previous")
+        children: renderI18nText("dev_handoff.workflows.focus_view.activity.compare_previous")
       })]
     }),
     editorType: FFileType.DESIGN,
@@ -8998,7 +8998,7 @@ function ct() {
   let n = jh(e ?? void 0);
   let i = d7();
   let o = d6();
-  let s = md(_$$pc);
+  let s = useAtomWithSubscription(_$$pc);
   if ("loading" === t || t && 0 === t.length && s) return jsx("div", {
     "data-onboarding-key": dz,
     className: "dev_handoff_activity_panel--loading--kM0Yf",
@@ -9011,7 +9011,7 @@ function ct() {
   let c = t[0];
   let u = !!d?.editInfo?.lastEditedAt && c.timestamp.getTime() < 1e3 * d.editInfo.lastEditedAt;
   return jsx(VZ, {
-    title: _$$t2("dev_handoff.workflows.focus_view.activity.versions"),
+    title: getI18nString("dev_handoff.workflows.focus_view.activity.versions"),
     recordingKey: "activityLog",
     headerOnboardingKey: dz,
     collapsiblePanelKey: "activity_log",
@@ -9052,7 +9052,7 @@ function cn({
   let t = Ak(e);
   return jsx(_$$E7, {
     variant: "inactiveOutline",
-    children: _$$t2("dev_handoff.workflows.focus_view.activity.collapsed", {
+    children: getI18nString("dev_handoff.workflows.focus_view.activity.collapsed", {
       activityTime: t
     })
   });
@@ -9070,7 +9070,7 @@ function ca({
   let h = useSelector(e => e.versionHistory);
   let f = e.version?.id ?? void 0;
   let g = d7();
-  let x = md(wg);
+  let x = useAtomWithSubscription(wg);
   let m = _$$U2();
   let _ = g && s || f === h.activeId;
   let v = function (e, t, n) {
@@ -9125,24 +9125,24 @@ function ca({
     manager,
     children: [jsx(_$$K2, {
       ...getTriggerProps(),
-      "aria-label": _$$t2("collaboration.feedback.more_options"),
+      "aria-label": getI18nString("collaboration.feedback.more_options"),
       children: jsx(_$$J5, {})
     }), jsxs(mc, {
       children: [!s && (_ ? jsx(q7, {
         onClick: b,
-        children: _$$tx("dev_handoff.workflows.focus_view.back_to_current")
+        children: renderI18nText("dev_handoff.workflows.focus_view.back_to_current")
       }) : jsx(q7, {
         onClick: () => v(_, "dropdown_option"),
-        children: _$$tx("dev_handoff.workflows.focus_view.inspect_version")
+        children: renderI18nText("dev_handoff.workflows.focus_view.inspect_version")
       })), (!s || j) && jsx(q7, {
         onClick: y,
-        children: s ? _$$tx("dev_handoff.workflows.focus_view.compare_previous_menu_item") : _$$tx("dev_handoff.workflows.focus_view.compare_latest")
+        children: s ? renderI18nText("dev_handoff.workflows.focus_view.compare_previous_menu_item") : renderI18nText("dev_handoff.workflows.focus_view.compare_latest")
       }), jsx(q7, {
         onClick: () => {
           m("Dev Mode Activity Copy Link To Version");
           _$$S3(u, p, f);
         },
-        children: _$$tx("dev_handoff.workflows.focus_view.copy_link_to_version")
+        children: renderI18nText("dev_handoff.workflows.focus_view.copy_link_to_version")
       }), x && jsx(q7, {
         onClick: () => {
           if (!x) return;
@@ -9156,7 +9156,7 @@ function ca({
             }
           }));
         },
-        children: _$$tx("collaboration.feedback.context_menu.edit_version_info")
+        children: renderI18nText("collaboration.feedback.context_menu.edit_version_info")
       })]
     })]
   }) : null;
@@ -9179,7 +9179,7 @@ function ca({
     onSelect: w ? () => v(_, "row") : void 0,
     rowBodyFooter: s && j ? jsx("div", {
       className: "dev_handoff_activity_panel--viewDiffButtonReady--mGQg4",
-      children: _$$tx("dev_handoff.workflows.focus_view.activity.compare_previous")
+      children: renderI18nText("dev_handoff.workflows.focus_view.activity.compare_previous")
     }) : void 0,
     user: e.user.name || "",
     userUrl: e.user.imgUrl,
@@ -9190,7 +9190,7 @@ function ca({
 function cr() {
   let {
     selectionProperties
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     selectionProperties: e.mirror.selectionProperties
   }));
   let t = _$$nl();
@@ -9203,7 +9203,7 @@ function cr() {
     allSavedPlugins: i.plugins,
     collapsible: !0,
     dispatch: s,
-    editorType: _$$nT.DevHandoff,
+    editorType: FEditorType.DevHandoff,
     isDevHandoff: !0,
     localPlugins: t,
     numSelected: selectionProperties.numSelected ?? 0,
@@ -9212,7 +9212,7 @@ function cr() {
     pluginRelaunchData: selectionProperties.pluginRelaunchData,
     publishedPlugins: n,
     recordingKey: "devHandoffPluginPanel",
-    title: _$$t2("dev_handoff.plugin_panel.title")
+    title: getI18nString("dev_handoff.plugin_panel.title")
   }, "plugin");
 }
 let cc = _$$Ju(function (e) {
@@ -9251,19 +9251,19 @@ function cf() {
       area: _$$e.DEVELOPER_TOOLS
     },
     children: jsx(VZ, {
-      title: _$$t2("variables.authoring_modal.title"),
+      title: getI18nString("variables.authoring_modal.title"),
       recordingKey: "fullVarsTable",
       collapsiblePanelKey: "variables",
       children: jsxs("div", {
         className: "variables_table_entry_point--innerPanelContainer--fMHQK text--fontPos11--2LvXf text--_fontBase--QdLsd",
-        children: [_$$tx("variables.inspection_panel_entry_point.description"), jsx(IK, {
+        children: [renderI18nText("variables.inspection_panel_entry_point.description"), jsx(IK, {
           variant: "secondary",
           onClick: e,
           recordingKey: n,
-          "aria-label": _$$t2("variables.local_variables_panel.open_variables_button_tooltip"),
+          "aria-label": getI18nString("variables.local_variables_panel.open_variables_button_tooltip"),
           children: jsxs("div", {
             className: "variables_table_entry_point--buttonInnerWrapper--Jgybm",
-            children: [jsx(cu, {}), _$$tx("variables.inspection_panel_entry_point.button")]
+            children: [jsx(cu, {}), renderI18nText("variables.inspection_panel_entry_point.button")]
           })
         })]
       })
@@ -9320,13 +9320,13 @@ let c1 = "asset_panel--dot--dR7Yw";
 let c2 = "asset_panel--sourceName--uwyAu ellipsis--ellipsis--Tjyfa";
 let c5 = 4 * parsePxNumber(devHandoffAssetPreviewMaxWidth);
 let c3 = 4 * parsePxNumber(devHandoffAssetPreviewMaxHeight);
-let c4 = E3("asset_panel_export_list", {
+let c4 = createLocalStorageAtom("asset_panel_export_list", {
   [PW.ASSET_ICON]: [c8("SVG")],
   [PW.ASSET_ILLUSTRATION]: [c8("SVG")],
   [PW.ASSET_IMAGE]: [c8("PNG")],
   [PW.ASSET_GIF]: void 0
 });
-let c7 = E3("asset_panel_img_include_source", !0);
+let c7 = createLocalStorageAtom("asset_panel_img_include_source", !0);
 function c8(e) {
   let t = jj([]);
   return "JPEG" === e || "PDF" === e ? {
@@ -9366,7 +9366,7 @@ let c9 = memo(({
 }) => {
   let d = _$$nl2();
   let c = _$$tS();
-  let [u, p] = _$$fp(g6);
+  let [u, p] = useAtomValueAndSetter(g6);
   let f = !ua() || u;
   let g = useSelector(e => e.saveAsState);
   let x = J2(UK().showGuids);
@@ -9393,17 +9393,17 @@ let c9 = memo(({
     enabled: !!e.sourceLibraryKey
   });
   let I = function (e, t) {
-    let n = md(c4);
+    let n = useAtomWithSubscription(c4);
     let a = t & ~PW.ASSET_COMPONENT;
     let i = [c8(a & (PW.ASSET_ICON | PW.ASSET_ILLUSTRATION) ? "SVG" : "PNG")];
     return getFeatureFlags().dt_insp_impr_assets ? void 0 === a || a === PW.NOT_ASSET || a === PW.ASSET_VIDEO || a === PW.ASSET_GIF ? [] : n?.[a] || i : i;
   }(0, e.type);
   let C = e.type & (PW.ASSET_ICON | PW.ASSET_ILLUSTRATION) ? "SVG" : "PNG";
   let T = I?.[0]?.imageType;
-  let S = useMemo(() => getFeatureFlags().dt_insp_impr_assets && I?.length && T ? I.every(e => e.imageType === T) ? _$$t2("dev_handoff.assets.files_same_format", {
+  let S = useMemo(() => getFeatureFlags().dt_insp_impr_assets && I?.length && T ? I.every(e => e.imageType === T) ? getI18nString("dev_handoff.assets.files_same_format", {
     count: I.length,
     format: T
-  }) : _$$t2("dev_handoff.assets.files", {
+  }) : getI18nString("dev_handoff.assets.files", {
     count: I.length
   }) : C, [I, T, C]);
   let P = useDispatch();
@@ -9416,7 +9416,7 @@ let c9 = memo(({
     manager: _manager
   } = _$$b4();
   let M = useCallback(async e => {
-    f || (e.stopPropagation(), _$$sx("Asset Panel Export Clicked"), p(!0), await Dc(_$$hV.Export, g, P, "export-assets-handoff", [w], "export-assets-handoff", {
+    f || (e.stopPropagation(), trackEventAnalytics("Asset Panel Export Clicked"), p(!0), await Dc(_$$hV.Export, g, P, "export-assets-handoff", [w], "export-assets-handoff", {
       guids: [w],
       exportSettings: I?.length ? I : [c8(C)]
     }), P(_$$rg()), manager.isOpen && manager.setOpen(!1), p(!1));
@@ -9463,7 +9463,7 @@ let c9 = memo(({
         style: N.backgroundStyle,
         onClick: V,
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t2("inspect_panel.interactions.select_layer"),
+        "data-tooltip": getI18nString("inspect_panel.interactions.select_layer"),
         children: N && jsx(_$$J7, {
           src: N.url,
           style: N.imgStyle
@@ -9488,7 +9488,7 @@ let c9 = memo(({
             svg: _$$A2
           }), jsx("div", {
             className: "asset_panel--componentAssetTypeEllipsis--0gm6v ellipsis--ellipsis--Tjyfa",
-            children: _$$tx("dev_handoff.assets.instance")
+            children: renderI18nText("dev_handoff.assets.instance")
           })]
         })]
       }), jsxs("div", {
@@ -9500,9 +9500,9 @@ let c9 = memo(({
             children: [jsx(_$$l3, {
               disabled: f || getFeatureFlags().dt_insp_impr_assets,
               label: jsx(_$$h3, {
-                children: _$$tx("fullscreen.export.export_file_type")
+                children: renderI18nText("fullscreen.export.export_file_type")
               }),
-              "aria-label": getFeatureFlags().dt_insp_impr_assets ? _$$t2("dev_handoff.assets.modify_hint") : void 0
+              "aria-label": getFeatureFlags().dt_insp_impr_assets ? getI18nString("dev_handoff.assets.modify_hint") : void 0
             }), jsxs(_$$mc, {
               children: [jsx(_$$c$2, {
                 value: "PNG",
@@ -9523,9 +9523,9 @@ let c9 = memo(({
             children: $ ? jsxs(_$$bL2, {
               manager,
               children: [jsxs(_$$E, {
-                "aria-label": f ? _$$t2("fullscreen.properties_panel.export_disabled") : _$$t2("fullscreen.export.export"),
+                "aria-label": f ? getI18nString("fullscreen.properties_panel.export_disabled") : getI18nString("fullscreen.export.export"),
                 htmlAttributes: {
-                  "data-tooltip": f ? _$$t2("fullscreen.properties_panel.export_disabled") : _$$t2("fullscreen.export.export"),
+                  "data-tooltip": f ? getI18nString("fullscreen.properties_panel.export_disabled") : getI18nString("fullscreen.export.export"),
                   "data-tooltip-type": Ib.TEXT
                 },
                 disabled: f,
@@ -9541,7 +9541,7 @@ let c9 = memo(({
                   onClick: M,
                   recordingKey: "asset-export-layer",
                   children: jsxs("div", {
-                    children: [_$$t2("fullscreen.export.layer_export"), jsx(ME, {
+                    children: [getI18nString("fullscreen.export.layer_export"), jsx(ME, {
                       children: jsxs("div", {
                         className: c0,
                         children: [jsx($R, {
@@ -9562,10 +9562,10 @@ let c9 = memo(({
               })]
             }) : jsx(_$$K2, {
               onClick: M,
-              "aria-label": f ? _$$t2("fullscreen.properties_panel.export_disabled") : _$$t2("fullscreen.export.export"),
+              "aria-label": f ? getI18nString("fullscreen.properties_panel.export_disabled") : getI18nString("fullscreen.export.export"),
               disabled: f,
               htmlAttributes: {
-                "data-tooltip": f ? _$$t2("fullscreen.properties_panel.export_disabled") : _$$t2("fullscreen.export.export"),
+                "data-tooltip": f ? getI18nString("fullscreen.properties_panel.export_disabled") : getI18nString("fullscreen.export.export"),
                 "data-tooltip-type": Ib.TEXT
               },
               recordingKey: `export-${assetId}`,
@@ -9579,7 +9579,7 @@ let c9 = memo(({
             children: [jsx(_$$l3, {
               disabled: !0,
               label: jsx(_$$h3, {
-                children: _$$tx("fullscreen.export.export_file_type")
+                children: renderI18nText("fullscreen.export.export_file_type")
               })
             }), jsx(_$$mc, {
               children: jsx(_$$c$2, {
@@ -9588,19 +9588,19 @@ let c9 = memo(({
               })
             })]
           }), f ? jsx(_$$K2, {
-            "aria-label": _$$t2("fullscreen.properties_panel.export_disabled"),
+            "aria-label": getI18nString("fullscreen.properties_panel.export_disabled"),
             disabled: !0,
             htmlAttributes: {
-              "data-tooltip": _$$t2("fullscreen.properties_panel.export_disabled"),
+              "data-tooltip": getI18nString("fullscreen.properties_panel.export_disabled"),
               "data-tooltip-type": Ib.TEXT
             },
             children: jsx(_$$b7, {})
           }) : t.length > 1 ? jsxs(_$$bL2, {
             manager: _manager,
             children: [jsxs(_$$E, {
-              "aria-label": _$$t2("fullscreen.export.export"),
+              "aria-label": getI18nString("fullscreen.export.export"),
               htmlAttributes: {
-                "data-tooltip": _$$t2("fullscreen.export.export"),
+                "data-tooltip": getI18nString("fullscreen.export.export"),
                 "data-tooltip-type": Ib.TEXT
               },
               className: c$,
@@ -9618,9 +9618,9 @@ let c9 = memo(({
           })]
         }), U && (!getFeatureFlags().dt_insp_impr_assets || n) && jsx(_$$K2, {
           onClick: F,
-          "aria-label": et ? _$$t2("design_systems.instance_panel.view_library_in_community") : ee ? _$$t2("dev_handoff.library.view") : _$$t2("design_systems.instance_panel.go_to_main_component"),
+          "aria-label": et ? getI18nString("design_systems.instance_panel.view_library_in_community") : ee ? getI18nString("dev_handoff.library.view") : getI18nString("design_systems.instance_panel.go_to_main_component"),
           htmlAttributes: {
-            "data-tooltip": et ? _$$t2("design_systems.instance_panel.view_library_in_community") : ee ? _$$t2("dev_handoff.library.view") : _$$t2("design_systems.instance_panel.go_to_main_component"),
+            "data-tooltip": et ? getI18nString("design_systems.instance_panel.view_library_in_community") : ee ? getI18nString("dev_handoff.library.view") : getI18nString("design_systems.instance_panel.go_to_main_component"),
             "data-tooltip-type": Ib.TEXT
           },
           children: et ? jsx(_$$c6, {}) : ee ? jsx(_$$l4, {}) : jsx(_$$K3, {})
@@ -9672,7 +9672,7 @@ function ue({
     htmlAttributes: d,
     recordingKey: "asset-export-source",
     children: jsxs("div", {
-      children: [_$$t2("fullscreen.export.source"), jsx(ME, {
+      children: [getI18nString("fullscreen.export.source"), jsx(ME, {
         children: jsxs("div", {
           className: c0,
           children: [jsx(yP, {
@@ -9754,7 +9754,7 @@ function ui({
 }
 function uo() {
   let e = useSelector(e => e.mirror.selectionProperties.assetsDeprecated);
-  let t = Object.values(md(_$$O6));
+  let t = Object.values(useAtomWithSubscription(_$$O6));
   let n = useMemo(() => {
     let e = {};
     for (let n of t) if ("video" !== n.type && "gif" !== n.type && n.guids) for (let t of n.guids) {
@@ -9787,7 +9787,7 @@ function uo() {
   });
   return 0 === visibleItems.length ? null : jsxs(VZ, {
     hideHeader: z4.getIsExtension(),
-    title: _$$t2("dev_handoff.assets"),
+    title: getI18nString("dev_handoff.assets"),
     recordingKey: "assets",
     collapsiblePanelKey: "assets",
     collapsedHeaders: jsx(ui, {
@@ -9808,15 +9808,15 @@ function uo() {
 function ul(e) {
   switch (e) {
     case PW.ASSET_ICON:
-      return _$$t2("dev_handoff.assets.icons_download");
+      return getI18nString("dev_handoff.assets.icons_download");
     case PW.ASSET_ILLUSTRATION:
-      return _$$t2("dev_handoff.assets.illustrations_download");
+      return getI18nString("dev_handoff.assets.illustrations_download");
     case PW.ASSET_IMAGE:
-      return _$$t2("dev_handoff.assets.images_download");
+      return getI18nString("dev_handoff.assets.images_download");
     case PW.ASSET_GIF:
-      return _$$t2("dev_handoff.assets.gifs_download");
+      return getI18nString("dev_handoff.assets.gifs_download");
     default:
-      return _$$t2("fullscreen.export.export");
+      return getI18nString("fullscreen.export.export");
   }
 }
 function us({
@@ -9824,14 +9824,14 @@ function us({
   assets: t,
   mediaByGuid: n
 }) {
-  let [a, s] = _$$fp(g6);
+  let [a, s] = useAtomValueAndSetter(g6);
   let [d, c] = useState(!1);
   let p = !ua() || a || d;
   let f = q5();
   let g = useSelector(e => e.saveAsState);
   let x = useDispatch();
-  let m = md(c4)[e];
-  let _ = md(c7);
+  let m = useAtomWithSubscription(c4)[e];
+  let _ = useAtomWithSubscription(c7);
   let v = _$$uQ();
   let b = _$$dh();
   let j = v ?? b;
@@ -9851,12 +9851,12 @@ function us({
       n.stopPropagation();
       c(!0);
       s(!0);
-      _$$sx("Asset Panel Export Clicked");
+      trackEventAnalytics("Asset Panel Export Clicked");
       let y = o.length * (m?.length ?? 0);
       x(_$$F.enqueue({
-        message: r ? _$$t2("dev_handoff.assets.preparing_time", {
+        message: r ? getI18nString("dev_handoff.assets.preparing_time", {
           count: (v ? y : 0) + k.length
-        }) : _$$t2("dev_handoff.assets.preparing", {
+        }) : getI18nString("dev_handoff.assets.preparing", {
           count: y
         }),
         icon: zX.SPINNER,
@@ -9894,9 +9894,9 @@ function us({
           withSourceImages: t && !!n
         }), x(_$$rg()));
       } catch (e) {
-        $D(_$$e.DEVELOPER_TOOLS, e);
+        reportError(_$$e.DEVELOPER_TOOLS, e);
         r && k.length > 1 && !b && x(_$$F.enqueue({
-          message: _$$t2("dev_handoff.assets.too_many_image_sources"),
+          message: getI18nString("dev_handoff.assets.too_many_image_sources"),
           icon: zX.EXCLAMATION,
           timeoutOverride: 1 / 0,
           error: !0
@@ -9929,10 +9929,10 @@ function ur({
     assets: t,
     mediaByGuid: n
   });
-  let c = md(g6);
+  let c = useAtomWithSubscription(g6);
   let u = !ua() || c || isLocalExporting;
   let p = ul(e);
-  let h = useMemo(() => u ? _$$t2("fullscreen.properties_panel.export_disabled") : tooManyMediaToExport ? _$$t2("dev_handoff.assets.too_many_image_sources_disabled") : nothingToExport ? _$$t2("dev_handoff.assets.nothing_to_export") : void 0, [tooManyMediaToExport, nothingToExport, u]);
+  let h = useMemo(() => u ? getI18nString("fullscreen.properties_panel.export_disabled") : tooManyMediaToExport ? getI18nString("dev_handoff.assets.too_many_image_sources_disabled") : nothingToExport ? getI18nString("dev_handoff.assets.nothing_to_export") : void 0, [tooManyMediaToExport, nothingToExport, u]);
   return jsx(_$$K2, {
     onClick: onExportAll,
     "aria-label": h ?? p,
@@ -9950,13 +9950,13 @@ function ur({
 function ud(e) {
   switch (e) {
     case PW.ASSET_ICON:
-      return _$$t2("dev_handoff.assets.icons_open_settings");
+      return getI18nString("dev_handoff.assets.icons_open_settings");
     case PW.ASSET_ILLUSTRATION:
-      return _$$t2("dev_handoff.assets.illustrations_open_settings");
+      return getI18nString("dev_handoff.assets.illustrations_open_settings");
     case PW.ASSET_IMAGE:
-      return _$$t2("dev_handoff.assets.images_open_settings");
+      return getI18nString("dev_handoff.assets.images_open_settings");
     default:
-      return _$$t2("general.open");
+      return getI18nString("general.open");
   }
 }
 function uc({
@@ -9964,8 +9964,8 @@ function uc({
   rowRef: t,
   onClose: n
 }) {
-  let [s, d] = _$$fp(c4);
-  let [c, u] = _$$fp(c7);
+  let [s, d] = useAtomValueAndSetter(c4);
+  let [c, u] = useAtomValueAndSetter(c7);
   let p = useDispatch();
   let h = Um();
   let f = Xo();
@@ -9995,13 +9995,13 @@ function uc({
   let b = function (e) {
     switch (e) {
       case PW.ASSET_ICON:
-        return _$$t2("dev_handoff.assets.icons_settings");
+        return getI18nString("dev_handoff.assets.icons_settings");
       case PW.ASSET_ILLUSTRATION:
-        return _$$t2("dev_handoff.assets.illustrations_settings");
+        return getI18nString("dev_handoff.assets.illustrations_settings");
       case PW.ASSET_IMAGE:
-        return _$$t2("dev_handoff.assets.images_settings");
+        return getI18nString("dev_handoff.assets.images_settings");
       default:
-        return _$$t2("general.settings");
+        return getI18nString("general.settings");
     }
   }(e);
   return jsx(_$$bL4, {
@@ -10035,7 +10035,7 @@ function uc({
             checked: c,
             onChange: u,
             label: jsx(_$$J8, {
-              children: _$$tx("dev_handoff.assets.images_include_source")
+              children: renderI18nText("dev_handoff.assets.images_include_source")
             })
           })
         })]
@@ -10052,12 +10052,12 @@ function uu({
   let s = ud(e);
   return e === PW.ASSET_GIF ? null : jsxs(Fragment, {
     children: [jsx(_$$d3, {
-      "aria-label": n ? _$$t2("fullscreen.properties_panel.export_disabled") : s,
+      "aria-label": n ? getI18nString("fullscreen.properties_panel.export_disabled") : s,
       "aria-expanded": o,
       onClick: () => l(e => !e),
       disabled: n,
       htmlAttributes: {
-        "data-tooltip": n ? _$$t2("fullscreen.properties_panel.export_disabled") : s,
+        "data-tooltip": n ? getI18nString("fullscreen.properties_panel.export_disabled") : s,
         "data-tooltip-type": Ib.TEXT
       },
       recordingKey: `assets_download_open_settings_${uh(e)}`,
@@ -10079,7 +10079,7 @@ function up({
     getTriggerProps,
     manager
   } = _$$b4();
-  let d = md(g6);
+  let d = useAtomWithSubscription(g6);
   let [c, u] = useState(!1);
   let {
     onExportAll,
@@ -10095,15 +10095,15 @@ function up({
   let m = function (e) {
     switch (e) {
       case PW.ASSET_ICON:
-        return _$$t2("dev_handoff.assets.icons_download_menu");
+        return getI18nString("dev_handoff.assets.icons_download_menu");
       case PW.ASSET_ILLUSTRATION:
-        return _$$t2("dev_handoff.assets.illustrations_download_menu");
+        return getI18nString("dev_handoff.assets.illustrations_download_menu");
       case PW.ASSET_IMAGE:
-        return _$$t2("dev_handoff.assets.images_download_menu");
+        return getI18nString("dev_handoff.assets.images_download_menu");
       case PW.ASSET_GIF:
-        return _$$t2("dev_handoff.assets.gifs_download_menu");
+        return getI18nString("dev_handoff.assets.gifs_download_menu");
       default:
-        return _$$t2("dev_handoff.assets");
+        return getI18nString("dev_handoff.assets");
     }
   }(e);
   let _ = ud(e);
@@ -10112,9 +10112,9 @@ function up({
     children: [jsxs(_$$bL2, {
       manager,
       children: [jsx(_$$K2, {
-        "aria-label": x ? _$$t2("fullscreen.properties_panel.export_disabled") : m,
+        "aria-label": x ? getI18nString("fullscreen.properties_panel.export_disabled") : m,
         htmlAttributes: {
-          "data-tooltip": x ? _$$t2("fullscreen.properties_panel.export_disabled") : m,
+          "data-tooltip": x ? getI18nString("fullscreen.properties_panel.export_disabled") : m,
           "data-tooltip-type": Ib.TEXT
         },
         disabled: x,
@@ -10127,9 +10127,9 @@ function up({
           children: jsxs("div", {
             className: "asset_panel--downloadAllMenuItem--8NlXq",
             children: [v, tooManyMediaToExport ? jsx(ME, {
-              children: _$$tx("dev_handoff.assets.too_many_image_sources_disabled")
+              children: renderI18nText("dev_handoff.assets.too_many_image_sources_disabled")
             }) : nothingToExport ? jsx(ME, {
-              children: _$$tx("dev_handoff.assets.nothing_to_export")
+              children: renderI18nText("dev_handoff.assets.nothing_to_export")
             }) : null]
           })
         }), e !== PW.ASSET_GIF && jsx(q7, {
@@ -10182,17 +10182,17 @@ function uf({
     title: function (e) {
       switch (e) {
         case PW.ASSET_ICON:
-          return _$$t2("dev_handoff.assets.icons");
+          return getI18nString("dev_handoff.assets.icons");
         case PW.ASSET_ILLUSTRATION:
-          return _$$t2("dev_handoff.assets.illustrations");
+          return getI18nString("dev_handoff.assets.illustrations");
         case PW.ASSET_IMAGE:
-          return _$$t2("dev_handoff.assets.images");
+          return getI18nString("dev_handoff.assets.images");
         case PW.ASSET_GIF:
-          return _$$t2("dev_handoff.assets.gifs");
+          return getI18nString("dev_handoff.assets.gifs");
         case PW.ASSET_VIDEO:
-          return _$$t2("dev_handoff.assets.videos");
+          return getI18nString("dev_handoff.assets.videos");
         default:
-          return _$$t2("dev_handoff.assets");
+          return getI18nString("dev_handoff.assets");
       }
     }(n),
     recordingKey: uh(n),
@@ -10246,8 +10246,8 @@ function ux() {
   let e = Gt("assets");
   let t = function () {
     let e = _$$tS() ?? "";
-    let t = md(_$$O6);
-    let [n, a] = _$$fp(Qm);
+    let t = useAtomWithSubscription(_$$O6);
+    let [n, a] = useAtomValueAndSetter(Qm);
     useEffect(() => {
       if (!t) return;
       let i = new Set(Object.keys(n));
@@ -10289,7 +10289,7 @@ function ux() {
   return 0 === totalAssets && 0 === totalComponents ? null : jsxs(Fragment, {
     children: [totalAssets > 0 && jsxs(VZ, {
       hideHeader: z4.getIsExtension(),
-      title: _$$t2("dev_handoff.assets"),
+      title: getI18nString("dev_handoff.assets"),
       recordingKey: "assets",
       collapsiblePanelKey: "assets",
       collapsedHeaders: jsx(ui, {
@@ -10316,7 +10316,7 @@ function ux() {
       })]
     }), getFeatureFlags().dt_nested_components && totalComponents > 0 && jsx(VZ, {
       hideHeader: z4.getIsExtension(),
-      title: _$$t2("dev_handoff.assets.nested_components"),
+      title: getI18nString("dev_handoff.assets.nested_components"),
       recordingKey: "nested_components",
       collapsiblePanelKey: "nested_components",
       collapsedHeaders: jsx(ui, {
@@ -10392,21 +10392,21 @@ function uS({
       children: jsx(_$$E7, {
         variant: "defaultOutline",
         size: "md",
-        children: _$$tx("dev_handoff.component_browser.alpha")
+        children: renderI18nText("dev_handoff.component_browser.alpha")
       })
     }), 0 === e && jsx("div", {
       className: "component_browser_in_context_mapping_section--noComponentsTag--ancRM",
       children: jsx(_$$E7, {
         variant: "defaultOutline",
         size: "md",
-        children: _$$tx("dev_handoff.component_browser.in_context_no_components")
+        children: renderI18nText("dev_handoff.component_browser.in_context_no_components")
       })
     })]
   });
 }
 function uP() {
   let e = _$$hC();
-  let t = md(mO);
+  let t = useAtomWithSubscription(mO);
   let n = _$$oA2();
   let {
     assetKeys,
@@ -10470,7 +10470,7 @@ function uP() {
   let m = t?.loadingStatus === "loading";
   return !t || m ? jsx(Fragment, {
     children: jsx(VZ, {
-      title: _$$t2("dev_handoff.component_browser.in_context_section_title"),
+      title: getI18nString("dev_handoff.component_browser.in_context_section_title"),
       recordingKey: "in_context_code_connect",
       collapsiblePanelKey: "in_context_code_connect",
       children: jsx("div", {
@@ -10485,7 +10485,7 @@ function uP() {
     })
   }) : jsx(Fragment, {
     children: jsx(VZ, {
-      title: _$$t2("dev_handoff.component_browser.in_context_section_title"),
+      title: getI18nString("dev_handoff.component_browser.in_context_section_title"),
       recordingKey: "in_context_code_connect",
       collapsiblePanelKey: 0 === numComponents ? void 0 : "in_context_code_connect",
       titleAccessory: jsx(uS, {
@@ -10496,18 +10496,18 @@ function uP() {
         className: uE,
         children: [jsx("div", {
           className: "component_browser_in_context_mapping_section--description--Mbn4i",
-          children: _$$tx("dev_handoff.component_browser.in_context_section_description", {
+          children: renderI18nText("dev_handoff.component_browser.in_context_section_description", {
             value: jsx(_$$N2, {
               newTab: !0,
               href: "https://docs.google.com/document/d/1IsJTLpqR1rRQfphfbotvWoYbtoaZExKpggeANRFmRI8/edit?tab=t.0#heading=h.t2s4u45z7gm6",
-              children: _$$tx("dev_handoff.component_browser.in_context_section_learn_more")
+              children: renderI18nText("dev_handoff.component_browser.in_context_section_learn_more")
             })
           })
         }), jsx("div", {
           className: "component_browser_in_context_mapping_section--selectionTypeText---cgl8",
-          children: noSelection ? 0 === numComponents ? _$$tx("dev_handoff.component_browser.in_context_section_page_no_components") : _$$tx("dev_handoff.component_browser.in_context_section_page_num_components", {
+          children: noSelection ? 0 === numComponents ? renderI18nText("dev_handoff.component_browser.in_context_section_page_no_components") : renderI18nText("dev_handoff.component_browser.in_context_section_page_num_components", {
             num_components: numComponents
-          }) : 0 === numComponents ? _$$tx("dev_handoff.component_browser.in_context_section_selection_no_components") : _$$tx("dev_handoff.component_browser.in_context_section_selection_num_components", {
+          }) : 0 === numComponents ? renderI18nText("dev_handoff.component_browser.in_context_section_selection_no_components") : renderI18nText("dev_handoff.component_browser.in_context_section_selection_num_components", {
             num_components: numComponents
           })
         }), jsxs("div", {
@@ -10517,7 +10517,7 @@ function uP() {
             children: [jsx("span", {
               className: `${uT} component_browser_in_context_mapping_section--mappedIconContainer--Q5Cgz`,
               children: jsx(_$$W3, {})
-            }), _$$tx("dev_handoff.component_browser.in_context_section_percent_components_mapped", {
+            }), renderI18nText("dev_handoff.component_browser.in_context_section_percent_components_mapped", {
               num_components: connectedPercentage
             })]
           }), jsxs("div", {
@@ -10525,7 +10525,7 @@ function uP() {
             children: [jsx("span", {
               className: `${uT} component_browser_in_context_mapping_section--canNotBeMappedIconContainer--VInHT`,
               children: jsx(_$$M5, {})
-            }), _$$tx("dev_handoff.component_browser.in_context_section_percent_components_can_t_be_mapped", {
+            }), renderI18nText("dev_handoff.component_browser.in_context_section_percent_components_can_t_be_mapped", {
               num_components: ignoredPercentage
             })]
           }), jsxs("div", {
@@ -10533,14 +10533,14 @@ function uP() {
             children: [jsx("span", {
               className: `${uT} component_browser_in_context_mapping_section--notMappedIconContainer--K7iv2`,
               children: jsx(_$$w2, {})
-            }), _$$tx("dev_handoff.component_browser.in_context_section_percent_components_need_to_be_mapped", {
+            }), renderI18nText("dev_handoff.component_browser.in_context_section_percent_components_need_to_be_mapped", {
               num_components: notConnectedPercentage
             })]
           }), jsx(uA, {
             componentCounts: d,
             panelRef: g,
             entrypoint: "inspect_panel",
-            children: totalConnected === numComponents ? _$$t2("dev_handoff.component_browser.in_context_section_view_connections_button") : _$$t2("dev_handoff.component_browser.in_context_section_connect_button")
+            children: totalConnected === numComponents ? getI18nString("dev_handoff.component_browser.in_context_section_view_connections_button") : getI18nString("dev_handoff.component_browser.in_context_section_connect_button")
           })]
         })]
       })
@@ -10723,11 +10723,11 @@ function uW({
   let w = `calc((100% - ${m}px) / 2)`;
   let N = i > 1 ? jsx("div", {
     className: "typography_preview--label--pJ-5L typography_preview--labelBase--mlEgn ellipsis--ellipsis--Tjyfa text--fontPos11--2LvXf text--_fontBase--QdLsd",
-    children: _$$tx("dev_handoff.typography_preview_multiple_styles")
+    children: renderI18nText("dev_handoff.typography_preview_multiple_styles")
   }) : styleName ? jsx(_$$E, {
     className: "typography_preview--styleName--tA801 typography_preview--labelBase--mlEgn ellipsis--ellipsis--Tjyfa text--fontPos11--2LvXf text--_fontBase--QdLsd",
     onClick: h,
-    "aria-label": _$$t2("inspect_panel.code.style"),
+    "aria-label": getI18nString("inspect_panel.code.style"),
     htmlAttributes: {
       "data-tooltip-type": Ib.TEXT,
       "data-tooltip": styleDescription,
@@ -10756,12 +10756,12 @@ function uW({
           children: [jsx(_$$E, {
             className: uF,
             onClick: p,
-            "aria-label": s ? _$$t2("inspect_panel.code.font_size_value", {
+            "aria-label": s ? getI18nString("inspect_panel.code.font_size_value", {
               value: s
-            }) : _$$t2("inspect_panel.code.font_size"),
+            }) : getI18nString("inspect_panel.code.font_size"),
             htmlAttributes: {
               "data-tooltip-type": Ib.TEXT,
-              "data-tooltip": _$$t2("inspect_panel.code.font_size"),
+              "data-tooltip": getI18nString("inspect_panel.code.font_size"),
               "data-tooltip-show-above": !0
             },
             children: s
@@ -10794,10 +10794,10 @@ function uW({
         },
         src: e.url,
         onLoad: e.onImageLoaded,
-        "aria-label": t ? _$$t2("dev_handoff.typography_preview_aria_label", {
+        "aria-label": t ? getI18nString("dev_handoff.typography_preview_aria_label", {
           fontFamily: t.family,
           fontStyle: t.style
-        }) : _$$t2("dev_handoff.typography_preview_empty_aria_label"),
+        }) : getI18nString("dev_handoff.typography_preview_empty_aria_label"),
         "data-tooltip-type": Ib.TEXT,
         "data-tooltip": t ? `${t.family} ${t.style}` : void 0,
         "data-tooltip-show-above": !0
@@ -10808,12 +10808,12 @@ function uW({
           children: [jsx(_$$E, {
             className: uF,
             onClick: u,
-            "aria-label": l ? _$$t2("inspect_panel.typography.line_height_value", {
+            "aria-label": l ? getI18nString("inspect_panel.typography.line_height_value", {
               value: l
-            }) : _$$t2("inspect_panel.typography.line_height"),
+            }) : getI18nString("inspect_panel.typography.line_height"),
             htmlAttributes: {
               "data-tooltip-type": Ib.TEXT,
-              "data-tooltip": _$$t2("inspect_panel.typography.line_height"),
+              "data-tooltip": getI18nString("inspect_panel.typography.line_height"),
               "data-tooltip-show-above": !0
             },
             children: l
@@ -10841,7 +10841,7 @@ function uU({
 }) {
   let t = e?.family;
   let n = e?.style ?? "";
-  let i = t && !vXe.fontIsLoaded(t, n) && t ? _$$t2("dev_handoff.typography_preview_missing_font", {
+  let i = t && !vXe.fontIsLoaded(t, n) && t ? getI18nString("dev_handoff.typography_preview_missing_font", {
     fontFamily: t,
     fontStyle: n
   }) : void 0;
@@ -10850,7 +10850,7 @@ function uU({
     children: jsx("span", {
       "data-tooltip-type": Ib.TEXT,
       "data-tooltip": i,
-      children: _$$tx("dev_handoff.typography_preview_not_available")
+      children: renderI18nText("dev_handoff.typography_preview_not_available")
     })
   });
 }
@@ -10891,7 +10891,7 @@ function uQ({
 let u8 = _$$r2("dev_mode_mcp_has_seen_mcp_enable_button_callout");
 function u6() {
   let e = _$$pT();
-  let t = md(u8);
+  let t = useAtomWithSubscription(u8);
   let {
     show,
     isShowing,
@@ -10911,18 +10911,18 @@ function u6() {
   return jsx(_$$rq, {
     arrowPadding: 16,
     arrowPosition: _$$F_.RIGHT_BODY,
-    description: _$$tx("dev_handoff.mcp.upsell_description"),
+    description: renderI18nText("dev_handoff.mcp.upsell_description"),
     isShowing,
     onClose: complete,
     primaryCta: {
-      label: _$$tx("dev_handoff.mcp.upsell_confirmation"),
+      label: renderI18nText("dev_handoff.mcp.upsell_confirmation"),
       type: "button",
       ctaTrackingDescriptor: _$$c2.GOT_IT,
       onClick: complete
     },
     shouldDisableAnimation: !0,
     targetKey: "enable-mcp-button",
-    title: _$$tx("dev_handoff.mcp.upsell_title"),
+    title: renderI18nText("dev_handoff.mcp.upsell_title"),
     trackingContextName: "McpEnableUpsell"
   });
 }
@@ -10977,10 +10977,10 @@ function po() {
   let e = $k();
   let t = J2(UK().enableCodegenMcpServer);
   let n = _$$gP("dt_mcp_eligible_for_new_ui_date").get("date", null);
-  let i = md(_$$mp);
+  let i = useAtomWithSubscription(_$$mp);
   let o = !!n && !!i && new Date(n) <= new Date(i);
-  return !getFeatureFlags().dt_my_cool_plugin || e ? null : y3() ? _$$eD?.hasFeature("addCodegenMCPStartupBinding") ? t ? jsx(VZ, {
-    title: _$$t2("dev_handoff.mcp.panel_title"),
+  return !getFeatureFlags().dt_my_cool_plugin || e ? null : hasDesktopAPI() ? desktopAPIInstance?.hasFeature("addCodegenMCPStartupBinding") ? t ? jsx(VZ, {
+    title: getI18nString("dev_handoff.mcp.panel_title"),
     recordingKey: "mcp",
     collapsiblePanelKey: "mcp",
     collapsedHeaders: jsx(ps, {}),
@@ -11000,7 +11000,7 @@ function pl() {
     Y5.triggerAction("toggle-enable-codegen-mcp-server");
   }, []);
   return jsxs(VZ, {
-    title: _$$t2("dev_handoff.mcp.panel_title"),
+    title: getI18nString("dev_handoff.mcp.panel_title"),
     recordingKey: "disabledMcp",
     collapsiblePanelKey: "mcp",
     collapsedHeaders: jsx(ps, {}),
@@ -11009,18 +11009,18 @@ function pl() {
       className: "mcp_panel--newUserContainer--w34Q3",
       children: [jsx("div", {
         className: pa,
-        children: _$$t2("dev_handoff.mcp.new_user_banner_description")
+        children: getI18nString("dev_handoff.mcp.new_user_banner_description")
       }), jsx(IK, {
         variant: "secondary",
         onClick: e,
         recordingKey: "newUserEnableMcp",
-        "aria-label": _$$t2("dev_handoff.mcp.enable_button"),
+        "aria-label": getI18nString("dev_handoff.mcp.enable_button"),
         htmlAttributes: {
           "data-onboarding-key": "enable-mcp-button"
         },
         children: jsxs("div", {
           className: "mcp_panel--newUserButtonContainer--F96sM",
-          children: [jsx(u9, {}), _$$tx("dev_handoff.mcp.enable_button")]
+          children: [jsx(u9, {}), renderI18nText("dev_handoff.mcp.enable_button")]
         })
       })]
     })]
@@ -11031,24 +11031,24 @@ function ps() {
   return jsx(_$$E7, {
     variant: e ? "successOutline" : "inactiveOutline",
     size: "md",
-    children: e ? _$$t2("dev_handoff.mcp.enabled") : _$$t2("dev_handoff.mcp.disabled")
+    children: e ? getI18nString("dev_handoff.mcp.enabled") : getI18nString("dev_handoff.mcp.disabled")
   });
 }
 function pr() {
   return jsx(VZ, {
-    title: _$$t2("dev_handoff.mcp.panel_title"),
+    title: getI18nString("dev_handoff.mcp.panel_title"),
     recordingKey: "mcp",
     collapsiblePanelKey: "mcp",
     defaultCollapsed: !0,
     children: jsx("div", {
       className: pe,
       children: jsx("p", {
-        children: _$$tx("dev_handoff.mcp.requires_desktop_app_2", {
+        children: renderI18nText("dev_handoff.mcp.requires_desktop_app_2", {
           learnMoreLink: jsx(_$$N2, {
             trusted: !0,
             newTab: !0,
             href: pi,
-            children: _$$tx("dev_handoff.mcp.learn_more")
+            children: renderI18nText("dev_handoff.mcp.learn_more")
           })
         })
       })
@@ -11057,14 +11057,14 @@ function pr() {
 }
 function pd() {
   let e = "internal-path-for-image-writes-to-disk";
-  let [t, n] = _$$fp(_$$f5);
-  let i = md(_$$pe);
+  let [t, n] = useAtomValueAndSetter(_$$f5);
+  let i = useAtomWithSubscription(_$$pe);
   return As() && getFeatureFlags().dt_my_cool_plugin_internal && "write-to-disk" === i ? jsxs("div", {
     className: pt,
     children: [jsx(_$$J8, {
       className: pn,
       htmlFor: e,
-      children: _$$tx("dev_handoff.mcp.image_source.write_to_disk_path")
+      children: renderI18nText("dev_handoff.mcp.image_source.write_to_disk_path")
     }), jsx(_$$p5, {
       id: e,
       value: t,
@@ -11074,16 +11074,16 @@ function pd() {
 }
 function pc() {
   let e = "image-source";
-  let [t, n] = _$$fp(_$$pe);
-  let [i, o] = _$$fp(Pq);
-  let l = md(Kx);
-  return _$$eD?.hasFeature("addMcpImageSupport") && "xml" !== l ? jsxs(Fragment, {
+  let [t, n] = useAtomValueAndSetter(_$$pe);
+  let [i, o] = useAtomValueAndSetter(Pq);
+  let l = useAtomWithSubscription(Kx);
+  return desktopAPIInstance?.hasFeature("addMcpImageSupport") && "xml" !== l ? jsxs(Fragment, {
     children: [jsxs("div", {
       className: pt,
       children: [jsx(_$$J8, {
         className: pn,
         htmlFor: e,
-        children: _$$tx("dev_handoff.mcp.image_source")
+        children: renderI18nText("dev_handoff.mcp.image_source")
       }), jsxs(_$$bL3, {
         value: t,
         onChange: e => n(e),
@@ -11092,23 +11092,23 @@ function pc() {
         }), jsxs(_$$mc, {
           children: [jsx(_$$c$2, {
             value: "local",
-            children: _$$tx("dev_handoff.mcp.image_source.local")
+            children: renderI18nText("dev_handoff.mcp.image_source.local")
           }), jsx(_$$c$2, {
             value: "placeholder-svg",
-            children: _$$tx("dev_handoff.mcp.image_source.placeholder")
+            children: renderI18nText("dev_handoff.mcp.image_source.placeholder")
           }), As() && jsx(_$$c$2, {
             value: "write-to-disk",
-            children: _$$tx("dev_handoff.mcp.image_source.write_to_disk")
+            children: renderI18nText("dev_handoff.mcp.image_source.write_to_disk")
           })]
         })]
       })]
-    }), "write-to-disk" === zl.get(_$$pe) && jsx("div", {
+    }), "write-to-disk" === atomStoreManager.get(_$$pe) && jsx("div", {
       className: pt,
       children: jsx(_$$S5, {
         checked: !i,
         onChange: () => o(e => !e),
         label: jsx(_$$J8, {
-          children: _$$t2("fullscreen_actions.mcp-allow-overwriting-files")
+          children: getI18nString("fullscreen_actions.mcp-allow-overwriting-files")
         })
       })
     })]
@@ -11126,16 +11126,16 @@ function pu() {
         dev_mode_mcp_has_dismissed_client_setup_banner: !0
       })),
       children: jsx(_$$Q2, {
-        title: _$$t2("dev_handoff.mcp.find_instructions_title"),
+        title: getI18nString("dev_handoff.mcp.find_instructions_title"),
         children: jsx("span", {
           className: pa,
-          children: _$$tx("dev_handoff.mcp.find_instructions_sub_title", {
+          children: renderI18nText("dev_handoff.mcp.find_instructions_sub_title", {
             hereWithHyperlink: jsx(_$$_, {
               trusted: !0,
               newTab: !0,
               href: pi,
               className: "mcp_panel--bannerLink--hSoWc",
-              children: _$$tx("dev_handoff.mcp.find_instructions_sub_title_here")
+              children: renderI18nText("dev_handoff.mcp.find_instructions_sub_title_here")
             })
           })
         })
@@ -11149,9 +11149,9 @@ function pp() {
     className: pt,
     children: [jsx(_$$J8, {
       className: pn,
-      children: _$$tx("dev_handoff.mcp.status")
+      children: renderI18nText("dev_handoff.mcp.status")
     }), jsxs("div", {
-      "data-tooltip": _$$t2("dev_handoff.mcp.to_disable_tooltip"),
+      "data-tooltip": getI18nString("dev_handoff.mcp.to_disable_tooltip"),
       "data-tooltip-type": Ib.TEXT,
       className: "mcp_panel--statusDisplay--SL0ss",
       children: [jsx("div", {
@@ -11160,7 +11160,7 @@ function pp() {
           backgroundColor: e ? "var(--color-icon-handoff)" : "var(--color-icon-tertiary)"
         }
       }), jsx("span", {
-        children: e ? _$$t2("dev_handoff.mcp.enabled") : _$$t2("dev_handoff.mcp.disabled")
+        children: e ? getI18nString("dev_handoff.mcp.enabled") : getI18nString("dev_handoff.mcp.disabled")
       })]
     })]
   });
@@ -11172,7 +11172,7 @@ function ph() {
     href: "https://form.asana.com/?k=jMdFq_1SBUOyh8_k3q76QA&d=10497086658021",
     "data-tooltip-show-above": !0,
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": _$$t2("dev_handoff.mcp.beta_feedback_tooltip"),
+    "data-tooltip": getI18nString("dev_handoff.mcp.beta_feedback_tooltip"),
     onClick: e => e.stopPropagation(),
     children: jsxs("div", {
       className: "mcp_panel--betaFeedbackButton--RzKNW",
@@ -11180,7 +11180,7 @@ function ph() {
         className: "mcp_panel--betaFeedbackIcon--KyMbo",
         children: jsx(_$$S2, {})
       }), jsx("span", {
-        children: _$$tx("dev_handoff.mcp.beta_feedback")
+        children: renderI18nText("dev_handoff.mcp.beta_feedback")
       })]
     })
   });
@@ -11190,19 +11190,19 @@ function pf() {
     getTriggerProps,
     manager
   } = _$$b4();
-  let [n, o] = _$$fp(_$$tz);
-  let [l, d] = _$$fp(SV);
-  let [c, u] = _$$fp(_$$lk2);
-  let [p, h] = _$$fp(Kx);
-  let [f, g] = _$$fp(_$$pe);
-  let [x, m] = _$$fp(Pq);
+  let [n, o] = useAtomValueAndSetter(_$$tz);
+  let [l, d] = useAtomValueAndSetter(SV);
+  let [c, u] = useAtomValueAndSetter(_$$lk2);
+  let [p, h] = useAtomValueAndSetter(Kx);
+  let [f, g] = useAtomValueAndSetter(_$$pe);
+  let [x, m] = useAtomValueAndSetter(Pq);
   let _ = Fc();
   let v = getFeatureFlags();
   let y = J2(UK().enableCodegenMcpServer);
   let b = [{
     visible: !0,
     element: jsx(_$$hE2, {
-      children: _$$tx("dev_handoff.mcp.settings")
+      children: renderI18nText("dev_handoff.mcp.settings")
     })
   }, {
     visible: !!v.dt_my_cool_plugin_d2r_tailwind_option,
@@ -11210,42 +11210,42 @@ function pf() {
       disabled: "design_to_react" !== p,
       checked: "design_to_react" === p && c,
       onChange: u,
-      children: _$$tx("fullscreen_actions.mcp-use-tailwind")
+      children: renderI18nText("fullscreen_actions.mcp-use-tailwind")
     })
   }, {
     visible: _,
     element: jsx(H_, {
       checked: n,
       onChange: o,
-      children: _$$tx("fullscreen_actions.mcp-enable-code-connect")
+      children: renderI18nText("fullscreen_actions.mcp-enable-code-connect")
     })
   }, {
     visible: !!(v.dt_my_cool_plugin_codebase_suggestions && _),
     element: jsx(H_, {
       checked: l,
       onChange: d,
-      children: _$$tx("fullscreen_actions.mcp-enable-codebase-suggestions")
+      children: renderI18nText("fullscreen_actions.mcp-enable-codebase-suggestions")
     })
   }, {
     visible: !!v.dt_my_cool_plugin_xml,
     element: jsx(H_, {
       checked: "xml" === p,
       onChange: () => h("xml" === p ? "design_to_react" : "xml"),
-      children: _$$tx("fullscreen_actions.mcp-xml-code")
+      children: renderI18nText("fullscreen_actions.mcp-xml-code")
     })
   }, {
     visible: !!v.dt_my_cool_plugin_internal,
     element: jsx(H_, {
       checked: "jsx" === p,
       onChange: () => h("jsx" === p ? "design_to_react" : "jsx"),
-      children: _$$tx("fullscreen_actions.mcp-jsx-code")
+      children: renderI18nText("fullscreen_actions.mcp-jsx-code")
     })
   }, {
-    visible: !!(_$$eD?.hasFeature("addMcpImageSupport") && "xml" !== p && "write-to-disk" === f),
+    visible: !!(desktopAPIInstance?.hasFeature("addMcpImageSupport") && "xml" !== p && "write-to-disk" === f),
     element: jsx(H_, {
       checked: !x,
       onChange: () => m(e => !e),
-      children: _$$t2("fullscreen_actions.mcp-allow-overwriting-files")
+      children: getI18nString("fullscreen_actions.mcp-allow-overwriting-files")
     })
   }, {
     visible: !0,
@@ -11256,14 +11256,14 @@ function pf() {
       onClick: () => {
         Y5.triggerAction("toggle-enable-codegen-mcp-server");
       },
-      children: y ? _$$t2("dev_handoff.mcp.disable_option") : _$$t2("dev_handoff.mcp.enable_button")
+      children: y ? getI18nString("dev_handoff.mcp.disable_option") : getI18nString("dev_handoff.mcp.enable_button")
     })
   }].filter(e => e.visible);
   return 0 === b.length ? null : jsxs(_$$bL2, {
     manager,
     children: [jsx(_$$K2, {
       ...getTriggerProps(),
-      "aria-label": _$$t2("dev_handoff.mcp.configure"),
+      "aria-label": getI18nString("dev_handoff.mcp.configure"),
       children: jsx(_$$J5, {})
     }), jsx(mc, {
       children: b.map((e, t) => jsx(_$$Fragment, {
@@ -11287,7 +11287,7 @@ function px() {
     children: jsx(_$$E7, {
       variant: "inactiveOutline",
       size: "md",
-      children: _$$t2("dev_handoff.mcp.beta")
+      children: getI18nString("dev_handoff.mcp.beta")
     })
   });
 }
@@ -11302,7 +11302,7 @@ function pv({
   children: e
 }) {
   return jsx(VZ, {
-    title: _$$t2("dev_handoff.layer_properties"),
+    title: getI18nString("dev_handoff.layer_properties"),
     collapsiblePanelKey: "code",
     recordingKey: "code_panel",
     collapsedHeaders: jsx(_$$E8, {}),
@@ -11318,7 +11318,7 @@ function py() {
       data: {}
     })),
     variant: "secondary",
-    children: _$$tx("dev_handoff.mc.open_cta")
+    children: renderI18nText("dev_handoff.mc.open_cta")
   }) : null;
 }
 function pb() {
@@ -11339,7 +11339,7 @@ function pj(e) {
   let h = useRef(null);
   let f = _$$eY();
   let g = z4.getIsExtension();
-  let x = md(be);
+  let x = useAtomWithSubscription(be);
   let m = mr(l ?? "", f);
   return jsx(_$$t5.TabPanel, {
     ...e.tabProps,
@@ -11512,7 +11512,7 @@ function pA({
       children: jsx($n, {
         variant: "link",
         onClick: pN,
-        children: _$$tx("dev_handoff.version_history.view_all_versions")
+        children: renderI18nText("dev_handoff.version_history.view_all_versions")
       })
     })]
   }) : null;
@@ -11534,7 +11534,7 @@ let pL = memo(function () {
     commentsActive,
     isNodeSelected,
     versionHistoryActive
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     commentsActive: e.mirror.appModel.currentTool === _$$ec.tool,
     isNodeSelected: Object.keys(e.mirror.sceneGraphSelection).length > 0,
     versionHistoryActive: e.mirror.appModel.activeCanvasEditModeType === m1T.DEV_HANDOFF_HISTORY
@@ -11553,7 +11553,7 @@ let pL = memo(function () {
   let [f, g, _] = _$$t5.useManagedTabs(h, r5[c] ?? r5[_gJ.PRIMARY], e => {
     let t = r3[e];
     if (null == t) {
-      $D(_$$e.DEVELOPER_TOOLS, Error(`DevHandoffRightPanel: Unknown tabId '${e}' passed to onSetTab`));
+      reportError(_$$e.DEVELOPER_TOOLS, Error(`DevHandoffRightPanel: Unknown tabId '${e}' passed to onSetTab`));
       return;
     }
     _$$ax(t);
@@ -11601,7 +11601,7 @@ let pL = memo(function () {
   return jsx(_$$x3, {
     children: jsx(_$$m3, {
       role: "region",
-      "aria-label": _$$t2("dev_handoff.right_panel.accessible_label"),
+      "aria-label": getI18nString("dev_handoff.right_panel.accessible_label"),
       children: A
     })
   });
@@ -11761,17 +11761,17 @@ function pW({
           }
         }));
       },
-      title: _$$t2("dev_handoff.breadcrumbs.hidden_nodes", {
+      title: getI18nString("dev_handoff.breadcrumbs.hidden_nodes", {
         count: c.length
       }),
-      children: _$$t2("dev_handoff.breadcrumbs.ellipsis")
+      children: getI18nString("dev_handoff.breadcrumbs.ellipsis")
     })]
   });
 }
 let pG = memo(() => {
   let {
     selectedNodeID
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     selectedNodeID: Object.keys(e.mirror.sceneGraphSelection)[0]
   }));
   let t = J2(Ez5.devHandoffState().currentNodeId);
@@ -11825,23 +11825,23 @@ function p0() {
   let r = _$$Zr("zoom-in");
   let d = Math.round(100 * J2(_$$d0().activeCanvasCurrentZoom)).toString();
   let c = [{
-    displayText: _$$t2("dev_handoff.vscode.zoom_control.zoom_options_actual_size"),
+    displayText: getI18nString("dev_handoff.vscode.zoom_control.zoom_options_actual_size"),
     callback: () => glU.setCanvasZoomScale(1)
   }, {
-    displayText: _$$t2("dev_handoff.vscode.zoom_control.zoom_options_fit_to_screen"),
+    displayText: getI18nString("dev_handoff.vscode.zoom_control.zoom_options_fit_to_screen"),
     callback: () => w3z.setFocusZoomLevel(i1K.FIT_TO_SCREEN)
   }, {
-    displayText: _$$t2("dev_handoff.vscode.zoom_control.zoom_options_fit_to_width"),
+    displayText: getI18nString("dev_handoff.vscode.zoom_control.zoom_options_fit_to_width"),
     callback: () => w3z.setFocusZoomLevel(i1K.FIT_TO_WIDTH)
   }, {
-    displayText: _$$t2("dev_handoff.vscode.zoom_control.zoom_options_fill_screen"),
+    displayText: getI18nString("dev_handoff.vscode.zoom_control.zoom_options_fill_screen"),
     callback: () => w3z.setFocusZoomLevel(i1K.FILL_SCREEN)
   }];
   let u = [{
-    displayText: _$$t2("fullscreen_actions.zoom-reset"),
+    displayText: getI18nString("fullscreen_actions.zoom-reset"),
     callback: () => glU.setCanvasZoomScale(1)
   }, {
-    displayText: _$$t2("fullscreen_actions.zoom-to-fit"),
+    displayText: getI18nString("fullscreen_actions.zoom-to-fit"),
     callback: () => Y5.triggerAction("zoom-to-fit", {
       source: "zoom-menu"
     })
@@ -11862,10 +11862,10 @@ function p0() {
         source: "vscode-zoom-menu"
       }),
       disabled: !o,
-      "aria-label": _$$t2("dev_handoff.vscode.zoom_control.zoom_out_button"),
+      "aria-label": getI18nString("dev_handoff.vscode.zoom_control.zoom_out_button"),
       htmlAttributes: {
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t2("dev_handoff.vscode.zoom_control.zoom_out_button")
+        "data-tooltip": getI18nString("dev_handoff.vscode.zoom_control.zoom_out_button")
       },
       children: jsx(_$$O7, {
         className: ek()({
@@ -11889,10 +11889,10 @@ function p0() {
         source: "vscode-zoom-menu"
       }),
       disabled: !r,
-      "aria-label": _$$t2("dev_handoff.vscode.zoom_control.zoom_in_button"),
+      "aria-label": getI18nString("dev_handoff.vscode.zoom_control.zoom_in_button"),
       htmlAttributes: {
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t2("dev_handoff.vscode.zoom_control.zoom_in_button")
+        "data-tooltip": getI18nString("dev_handoff.vscode.zoom_control.zoom_in_button")
       },
       children: jsx(_$$e8, {
         className: ek()({
@@ -11939,7 +11939,7 @@ function p4({
           e && (c(e), n(!0));
         }
       },
-      "data-tooltip": _$$t2("dev_handoff.tag.layers"),
+      "data-tooltip": getI18nString("dev_handoff.tag.layers"),
       "data-tooltip-type": Ib.TEXT,
       "data-tooltip-show-above": !0,
       children: jsx(_$$B, {
@@ -11990,11 +11990,11 @@ function hc({
     switch (styleType) {
       case "FILL":
       case "STROKE":
-        return _$$t2("dev_handoff.selection_colors.style_details");
+        return getI18nString("dev_handoff.selection_colors.style_details");
       case "EFFECT":
-        return _$$t2("dev_handoff.selection_effect_style_details");
+        return getI18nString("dev_handoff.selection_effect_style_details");
       case "TEXT":
-        return _$$t2("dev_handoff.selection_text_style_details");
+        return getI18nString("dev_handoff.selection_text_style_details");
     }
   }, [styleType]);
   useEffect(() => {
@@ -12078,7 +12078,7 @@ function hu({
             isDeleted
           }), jsx(_$$K2, {
             onClick: r,
-            "aria-label": _$$t2("dev_handoff.styles.details_button_close_aria_label"),
+            "aria-label": getI18nString("dev_handoff.styles.details_button_close_aria_label"),
             children: jsx(_$$L6, {})
           })]
         }) : jsx(hp, {
@@ -12112,7 +12112,7 @@ function hp({
     ...o
   } = _$$X(e);
   let l = t ? {
-    "data-tooltip": _$$t2("variables.variable_was_deleted"),
+    "data-tooltip": getI18nString("variables.variable_was_deleted"),
     "data-tooltip-type": Ib.TEXT
   } : void 0;
   return e ? jsxs(_$$E, {
@@ -12147,7 +12147,7 @@ function hh({
     containerClassName: hr,
     link: i.data,
     isLocal: t,
-    localFallback: _$$t2("dev_handoff.variables.details_local"),
+    localFallback: getI18nString("dev_handoff.variables.details_local"),
     dataTestId: "style_details_library",
     recordingKey: "style_name"
   }) : jsx(_$$J9, {
@@ -12185,7 +12185,7 @@ function hf({
       hideHints: !0,
       sectionClassName: "style_details_modal--styleCodeSection--e75tR",
       localCodeLanguage: codeLanguageApi.codeLanguage,
-      emptyStateMessage: _$$t2("dev_handoff.code.unsupported", {
+      emptyStateMessage: getI18nString("dev_handoff.code.unsupported", {
         language: l.format(codeLanguageApi.codeLanguage)
       }),
       dataTestId: "style_details_code",
@@ -12303,7 +12303,7 @@ function hT(e) {
       }), jsx("button", {
         className: "inspect_tabs--settingLink--YT0SJ",
         onClick: e.onClick,
-        children: _$$tx("dev_handoff.inspect_panel.open_setting")
+        children: renderI18nText("dev_handoff.inspect_panel.open_setting")
       })]
     }), jsx("div", {
       className: "inspect_tabs--settingDescription--Fxbgh",
@@ -12454,8 +12454,8 @@ function hM() {
         src: buildUploadUrl("90580516d4d39519d44b86a2e591f4e576475013"),
         onDragStart: e => e.preventDefault()
       }), jsx(hT, {
-        label: _$$t2("dev_handoff.inspect_panel.property_suggestions.title"),
-        description: _$$t2("dev_handoff.inspect_panel.property_suggestions.body"),
+        label: getI18nString("dev_handoff.inspect_panel.property_suggestions.title"),
+        description: getI18nString("dev_handoff.inspect_panel.property_suggestions.body"),
         onClick: KQ
       })]
     }), jsxs("div", {
@@ -12466,8 +12466,8 @@ function hM() {
         src: buildUploadUrl("4b9430b030179277555a6fe2114ceffc0f49ed61"),
         onDragStart: e => e.preventDefault()
       }), jsx(hT, {
-        label: _$$t2("dev_handoff.inspect_panel.block_suggestions.title"),
-        description: _$$t2("dev_handoff.inspect_panel.block_suggestions.body"),
+        label: getI18nString("dev_handoff.inspect_panel.block_suggestions.title"),
+        description: getI18nString("dev_handoff.inspect_panel.block_suggestions.body"),
         onClick: _$$lk
       })]
     })]
@@ -12516,7 +12516,7 @@ function hV({
   let t = useDispatch();
   let n = Um();
   let s = useRef(null);
-  let [d, c] = _$$fp(sg);
+  let [d, c] = useAtomValueAndSetter(sg);
   let u = _$$U2();
   let p = Nf() ?? "";
   let h = _$$eY().get(p);
@@ -12533,10 +12533,10 @@ function hV({
         },
         "aria-expanded": g,
         htmlAttributes: {
-          "data-tooltip": _$$t2("dev_handoff.add_dev_resource"),
+          "data-tooltip": getI18nString("dev_handoff.add_dev_resource"),
           "data-tooltip-type": Ib.TEXT
         },
-        "aria-label": _$$t2("dev_handoff.add_dev_resource"),
+        "aria-label": getI18nString("dev_handoff.add_dev_resource"),
         children: jsx(_$$B, {
           svg: _$$A23
         })
@@ -12576,7 +12576,7 @@ function hH() {
   let t = LS();
   let n = NM();
   let s = _$$ro();
-  let d = md(be);
+  let d = useAtomWithSubscription(be);
   !function (e) {
     let t = useDispatch();
     useEffect(() => {
@@ -12589,39 +12589,39 @@ function hH() {
   }([e, _$$uQ()]);
   let c = n ? [{
     id: _gJ.ASSETS,
-    title: _$$t2("dev_handoff.assets"),
+    title: getI18nString("dev_handoff.assets"),
     Component: hF,
     recordingKey: "extensionAssetsTab"
   }] : [{
     id: _gJ.PRIMARY,
-    title: _$$t2("inspect_panel.code.code"),
+    title: getI18nString("inspect_panel.code.code"),
     Component: hO,
     recordingKey: "extensionCodeTab"
   }];
   t && (c.push({
     id: _gJ.PROPERTIES,
-    title: _$$t2("fullscreen.properties_panel.properties"),
+    title: getI18nString("fullscreen.properties_panel.properties"),
     Component: hB,
     recordingKey: "extensionPropertiesTab"
   }), s && c.push({
     id: _gJ.COMPONENT,
-    title: _$$t2("dev_handoff.inspect_panel.component"),
+    title: getI18nString("dev_handoff.inspect_panel.component"),
     Component: hz,
     recordingKey: "extensionComponentTab"
   }), c.push({
     id: _gJ.DEV_RESOURCES,
-    title: _$$t2("dev_handoff.developer_related_links"),
+    title: getI18nString("dev_handoff.developer_related_links"),
     Component: sy,
     recordingKey: "extensionRelatedLinksTab"
   }), c.push({
     id: _gJ.ASSETS,
-    title: _$$t2("dev_handoff.assets"),
+    title: getI18nString("dev_handoff.assets"),
     Component: hF,
     recordingKey: "extensionAssetsTab"
   }));
   c.push({
     id: _gJ.PLUGIN,
-    title: _$$t2("dev_handoff.tab.plugins"),
+    title: getI18nString("dev_handoff.tab.plugins"),
     Component: rJ,
     recordingKey: "extensionPluginsTab"
   });
@@ -12650,9 +12650,9 @@ function hH() {
         children: [d && jsx(_$$K2, {
           htmlAttributes: {
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t2("dev_handoff.inspect_panel.close_plugin")
+            "data-tooltip": getI18nString("dev_handoff.inspect_panel.close_plugin")
           },
-          "aria-label": _$$t2("dev_handoff.inspect_panel.close_plugin"),
+          "aria-label": getI18nString("dev_handoff.inspect_panel.close_plugin"),
           onClick: () => {
             wY();
           },
@@ -12675,7 +12675,7 @@ let hK = () => 0.75 * window.innerHeight;
 let hX = parsePxNumber(Qhc);
 function hJ() {
   let [e, t] = useLocalStorageSync("extension_bottom_panel_expanded", !0);
-  let [n, o] = _$$fp(_$$g4);
+  let [n, o] = useAtomValueAndSetter(_$$g4);
   let [d, c] = useState(!1);
   let u = _$$uQ();
   let p = J2(Ez5.devHandoffState().focusMode);
@@ -12737,7 +12737,7 @@ function hJ() {
           children: jsx(_$$B, {
             "data-tooltip-type": Ib.TEXT,
             "data-tooltip-show-above": !0,
-            "data-tooltip": e ? _$$t2("dev_handoff.vscode.inspect_panel.hide_inspect_tooltip") : _$$t2("dev_handoff.vscode.inspect_panel.show_inspect_tooltip"),
+            "data-tooltip": e ? getI18nString("dev_handoff.vscode.inspect_panel.hide_inspect_tooltip") : getI18nString("dev_handoff.vscode.inspect_panel.show_inspect_tooltip"),
             svg: e ? _$$A25 : _$$A24,
             autosize: !0
           })
@@ -12767,7 +12767,7 @@ function h9() {
   let h = inspectableRootNodeId || p;
   let f = Xr(rh);
   let g = [{
-    displayText: _$$t2("dev_handoff.layers.collapse_all_layers"),
+    displayText: getI18nString("dev_handoff.layers.collapse_all_layers"),
     callback: () => f([h])
   }];
   let x = J2(Ez5.devHandoffState().automaticIconDetection);
@@ -12776,7 +12776,7 @@ function h9() {
   return 0 !== t.length && n ? jsx(_$$P3, {
     title: t.length > 1 ? jsx("div", {
       className: h6,
-      children: _$$tx("dev_handoff.workflows.focus_view.multiple_layers_selected", {
+      children: renderI18nText("dev_handoff.workflows.focus_view.multiple_layers_selected", {
         count: t.length
       })
     }) : jsxs("div", {
@@ -12881,7 +12881,7 @@ let fs = memo(function (e) {
     key: e.dimension,
     setValue
   });
-  let u = isSection ? _$$t2("dev_handoff.workflows.focus_view.resizing_disabled_section") : isComponentSet ? _$$t2("dev_handoff.workflows.focus_view.resizing_disabled_component_set") : hasHug ? _$$t2("dev_handoff.focus_view.resize_disabled_hugged_element") : "";
+  let u = isSection ? getI18nString("dev_handoff.workflows.focus_view.resizing_disabled_section") : isComponentSet ? getI18nString("dev_handoff.workflows.focus_view.resizing_disabled_component_set") : hasHug ? getI18nString("dev_handoff.focus_view.resize_disabled_hugged_element") : "";
   return jsx(_$$E9, {
     name: `focus_view_${e.dimension}_input`,
     children: jsx($j, {
@@ -12901,7 +12901,7 @@ let fs = memo(function (e) {
       tooltipForScreenReadersOnly: !1,
       children: jsx("span", {
         className: `focus_view_size_input--sizeContrainedLabel--uOo68 ${QK} svg`,
-        children: "width" === e.dimension ? _$$t2("fullscreen.properties_panel.transform_panel.w") : _$$t2("fullscreen.properties_panel.transform_panel.h")
+        children: "width" === e.dimension ? getI18nString("fullscreen.properties_panel.transform_panel.w") : getI18nString("fullscreen.properties_panel.transform_panel.h")
       })
     })
   });
@@ -12930,7 +12930,7 @@ function fp() {
   } = function () {
     let e = Tv();
     let t = useSelector(e => e.mirror.appModel.hoveredNode);
-    let [n, a] = _$$fp(_$$hn);
+    let [n, a] = useAtomValueAndSetter(_$$hn);
     let l = useCallback(() => {
       a(_$$xX.STARTED);
     }, [a]);
@@ -12977,7 +12977,7 @@ function fp() {
         onModalDidClose: doneChangingFocusNodeForInteractiveInspection,
         displayModeDropdown: !0
       }), jsx(_$$f, {
-        "aria-label": _$$t2("dev_handoff.workflows.focus_view.reset_button_tooltip"),
+        "aria-label": getI18nString("dev_handoff.workflows.focus_view.reset_button_tooltip"),
         onChange: () => {
           w3z?.resetFocusViewInteractiveInspection();
           e("dev_mode.focus_view.reset_changes", {
@@ -13013,15 +13013,15 @@ function fh() {
   let f = _$$U("focus_view_show_on_page");
   let g = TQ(p?.toEditorType);
   let x = [{
-    displayText: _$$t2("dev_handoff.workflows.focus_view.show_canvas"),
+    displayText: getI18nString("dev_handoff.workflows.focus_view.show_canvas"),
     recordingKey: "dev_handoff.focus.show_on_page",
     callback: function () {
-      "editorType" in h && h.editorType === _$$nT.Design && f("design");
+      "editorType" in h && h.editorType === FEditorType.Design && f("design");
       t.activeId && t.activeId !== V_ && e(Eg());
       g("Dev Mode Focus View Go To Canvas Clicked", c);
     }
   }, {
-    displayText: _$$t2("dev_handoff.workflows.focus_view.copy_link"),
+    displayText: getI18nString("dev_handoff.workflows.focus_view.copy_link"),
     recordingKey: "dev_handoff.focus.copy_link",
     callback: () => {
       e(_$$lW({
@@ -13044,10 +13044,10 @@ function fh() {
         "aria-expanded": isDropdownShown,
         recordingKey: "dev_handoff.focus.options",
         onClick: toggleDropdown,
-        "aria-label": _$$t2("dev_handoff.workflows.more_actions_tooltip"),
+        "aria-label": getI18nString("dev_handoff.workflows.more_actions_tooltip"),
         htmlAttributes: {
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": _$$t2("dev_handoff.workflows.more_actions_tooltip")
+          "data-tooltip": getI18nString("dev_handoff.workflows.more_actions_tooltip")
         },
         children: jsx(_$$J5, {})
       })
@@ -13078,8 +13078,8 @@ function ff() {
   let f = _$$U2();
   let x = _$$U("focus_view_back");
   let v = _$$ut(_$$aY(), FAf.DESIGN);
-  let [, y] = _$$fp(_o);
-  let [b] = _$$fp(wz);
+  let [, y] = useAtomValueAndSetter(_o);
+  let [b] = useAtomValueAndSetter(wz);
   let j = xo();
   let N = useSelector(e => $A(e.selectedView) ? {
     ...e.selectedView,
@@ -13089,7 +13089,7 @@ function ff() {
     devModeFocusId: void 0
   } : e.selectedView);
   let k = useSelector(e => Np(e, N));
-  let I = N.showOverview ? _$$t2("dev_handoff.workflows.focus_view.back_to_rfd_tooltip") : _$$t2("dev_handoff.workflows.focus_view.back_to_page_tooltip");
+  let I = N.showOverview ? getI18nString("dev_handoff.workflows.focus_view.back_to_rfd_tooltip") : getI18nString("dev_handoff.workflows.focus_view.back_to_page_tooltip");
   if (_$$h(() => {
     n && w3z.focusOnNode(n, !1);
     v === FAf.PROTOTYPE && NT(FAf.DESIGN);
@@ -13126,12 +13126,12 @@ function ff() {
           "data-onboarding-key": dV,
           onClick: function (t) {
             t.preventDefault();
-            let n = "editorType" in N && N.editorType === _$$nT.Design;
+            let n = "editorType" in N && N.editorType === FEditorType.Design;
             !("showOverview" in N && N.showOverview) && n && x("design");
             e(_$$sf(N));
             p.activeId && p.activeId !== V_ && e(Eg());
             let a = "unknown";
-            "fullscreen" === N.view && (a = N.showOverview ? "overview" : N.editorType === _$$nT.Design ? "design_canvas" : "dev_mode_canvas");
+            "fullscreen" === N.view && (a = N.showOverview ? "overview" : N.editorType === FEditorType.Design ? "design_canvas" : "dev_mode_canvas");
             y("focus_close_clicked");
             f("Dev Mode Focus View Close Clicked", {
               target: a
@@ -13209,7 +13209,7 @@ export function $$fg0() {
       _$$sr.enrollUserInStatusChange({
         fileKey: u
       })?.then(e => {
-        let t = zl.get(_$$D2);
+        let t = atomStoreManager.get(_$$D2);
         e.data?.meta?.newEnrollment && !t && d(jK({
           userId: s?.id ?? "",
           fileKey: u
@@ -13261,7 +13261,7 @@ let f_ = memo(function () {
   useEffect(() => {
     _$$px().prepareVmIfNeeded();
   }, []);
-  _$$W4(1700);
+  useSetupInteractionTimeout(1700);
   !function () {
     let e = _$$D();
     let t = _$$f2("dev_mode_notified_of_approved_org_request");

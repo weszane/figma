@@ -1,8 +1,8 @@
 import { useCallback, useMemo } from "react";
 import { useSelector } from "../vendor/514228";
 import { w3z } from "../figma_app/763686";
-import { sx } from "../905/449184";
-import { sn } from "../905/542194";
+import { trackEventAnalytics } from "../905/449184";
+import { globalPerfTimer } from "../905/542194";
 import { ty, HD } from "../figma_app/191804";
 import { DP } from "../905/640017";
 import { NY } from "../figma_app/646357";
@@ -23,10 +23,10 @@ export function $$m1(e, t) {
   return useCallback(() => {
     let r = m && ("light" === m || "dark" === m) ? m : "dark";
     if (!e) return g && !ty(g) ? HD(g) ? "dark" : "light" : r;
-    sn.start("dev_mode_calculate_component_color");
+    globalPerfTimer.start("dev_mode_calculate_component_color");
     let n = t ? w3z.getApproximatePlaygroundNodeColor() : w3z.getApproximateNodeColor(e);
-    let i = sn.stop("dev_mode_calculate_component_color");
-    i && sx("dev_mode_calculate_component_color", {
+    let i = globalPerfTimer.stop("dev_mode_calculate_component_color");
+    i && trackEventAnalytics("dev_mode_calculate_component_color", {
       elapsedMs: i
     }, {
       forwardToDatadog: !0

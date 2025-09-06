@@ -16,7 +16,7 @@ import { t as _$$t } from "../905/150656";
 import b from "../vendor/116389";
 import { Ex, vj, zE } from "../figma_app/919079";
 import { $z, rb, e6 } from "../figma_app/617427";
-import { t as _$$t2, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { B as _$$B } from "../905/261906";
 import { RR } from "../figma_app/307841";
 import { tI } from "../figma_app/599327";
@@ -87,7 +87,7 @@ function M(e) {
       ...e.trackingProperties,
       trackingDescriptor: _$$c.MANAGE_SEATS
     },
-    children: _$$t2("admin_settings.seat_counts.manage_button_label")
+    children: getI18nString("admin_settings.seat_counts.manage_button_label")
   });
 }
 function P(e) {
@@ -98,7 +98,7 @@ function P(e) {
       ...e.trackingProperties,
       trackingDescriptor: _$$c.ADD_SEATS
     },
-    children: _$$t2("admin_settings.seat_counts.add_seats_label")
+    children: getI18nString("admin_settings.seat_counts.add_seats_label")
   });
 }
 function U(e) {
@@ -145,7 +145,7 @@ function q(e) {
             size: vj.LARGE,
             color: zE.BRAND,
             subtle: !0,
-            text: _$$t2("admin_settings.seat_counts.available_seats", {
+            text: getI18nString("admin_settings.seat_counts.available_seats", {
               quantity: available.toLocaleString()
             })
           }), jsx(Ex, {
@@ -180,7 +180,7 @@ function $(e) {
           "aria-hidden": !0,
           children: [jsx("span", {
             className: "xt0psk2 xb3r6kr xlyipyv xuxw1ft",
-            children: _$$t2("admin_settings.seat_counts.total_paid_seats")
+            children: getI18nString("admin_settings.seat_counts.total_paid_seats")
           }), jsx(Ex, {
             size: vj.LARGE,
             color: zE.DEFAULT,
@@ -191,7 +191,7 @@ function $(e) {
           })]
         }), jsx(_$$E, {
           as: "span",
-          children: _$$t2("admin_settings.seat_counts.total_paid_seats_sr_only", {
+          children: getI18nString("admin_settings.seat_counts.total_paid_seats_sr_only", {
             quantity: r
           })
         })]
@@ -243,7 +243,7 @@ function G(e) {
         children: a.map(e => createElement(_$$t.Tab, {
           ..._[e],
           key: e
-        }, _$$t2(`admin_settings.billing.seat_counts.by_billing_interval.${e}`)))
+        }, getI18nString(`admin_settings.billing.seat_counts.by_billing_interval.${e}`)))
       })
     }), a.map(t => createElement(_$$t.TabPanel, {
       ...u[t],
@@ -294,7 +294,7 @@ function X() {
     variant: "brand",
     "data-testid": "account-credit-banner",
     children: jsx(_$$Q, {
-      title: _$$t2("org_admin_settings.billing_banner_figjam.you_have_a_credit_amount", {
+      title: getI18nString("org_admin_settings.billing_banner_figjam.you_have_a_credit_amount", {
         accountCredit: t.formatMoney(e.amount, {
           showCents: !0
         })
@@ -395,11 +395,11 @@ function em(e) {
   let _ = useMemo(() => {
     switch (c) {
       case FPlanNameType.PRO:
-        return _$$t2("admin_settings.plan_information_widget_card.heading.pro");
+        return getI18nString("admin_settings.plan_information_widget_card.heading.pro");
       case FPlanNameType.ORG:
-        return _$$t2("admin_settings.plan_information_widget_card.heading.org");
+        return getI18nString("admin_settings.plan_information_widget_card.heading.org");
       case FPlanNameType.ENTERPRISE:
-        return _$$t2("admin_settings.plan_information_widget_card.heading.enterprise");
+        return getI18nString("admin_settings.plan_information_widget_card.heading.enterprise");
       default:
         return null;
     }
@@ -419,7 +419,7 @@ function em(e) {
     trackingProperties: {
       trackingDescriptor: _$$c.VIEW_PLANS
     },
-    children: _$$t2("admin_settings.plan_information_widget_card.cta.view_plans")
+    children: getI18nString("admin_settings.plan_information_widget_card.cta.view_plans")
   }) : jsx(pW, {
     variant: "secondary",
     newTab: !0,
@@ -427,10 +427,10 @@ function em(e) {
     trackingProperties: {
       trackingDescriptor: _$$c.LEARN_MORE
     },
-    children: _$$t2("admin_settings.plan_information_widget_card.cta.learn_more")
+    children: getI18nString("admin_settings.plan_information_widget_card.cta.learn_more")
   }), [t, c, o?.id]);
   let m = useMemo(() => {
-    let e = _$$t2("admin_settings.plan_information_widget_card.seat_terms.heading");
+    let e = getI18nString("admin_settings.plan_information_widget_card.seat_terms.heading");
     let s = jsx(rb, {
       onClick: () => {
         adjustAnnualSeatsAction?.id !== _$$m.TRIAL_READ_ONLY && adjustAnnualSeatsAction?.perform({
@@ -440,53 +440,53 @@ function em(e) {
       trackingProperties: {
         trackingDescriptor: _$$c.CONVERT_MONTHLY_TO_ANNUAL
       },
-      children: _$$t2("admin_settings.plan_information_widget_card.seat_terms.adding_seats_to_annual_plan_link")
+      children: getI18nString("admin_settings.plan_information_widget_card.seat_terms.adding_seats_to_annual_plan_link")
     });
     switch (c) {
       case FPlanNameType.PRO:
         if (isAnnualProPlan) return {
           heading: e,
           content: jsxs("span", {
-            children: [tx("admin_settings.plan_information_widget_card.seat_terms.annual_content_line_1"), jsx("br", {}), jsx("br", {}), tx("admin_settings.plan_information_widget_card.seat_terms.annual_content_line_2", {
+            children: [renderI18nText("admin_settings.plan_information_widget_card.seat_terms.annual_content_line_1"), jsx("br", {}), jsx("br", {}), renderI18nText("admin_settings.plan_information_widget_card.seat_terms.annual_content_line_2", {
               adding_seats_to_annual_plan_link: s
             })]
           })
         };
         return {
           heading: e,
-          content: d ? _$$t2("admin_settings.plan_information_widget_card.seat_terms.monthly_content") : _$$t2("admin_settings.plan_information_widget_card.seat_terms.monthly_content_legacy")
+          content: d ? getI18nString("admin_settings.plan_information_widget_card.seat_terms.monthly_content") : getI18nString("admin_settings.plan_information_widget_card.seat_terms.monthly_content_legacy")
         };
       case FPlanNameType.ORG:
       case FPlanNameType.ENTERPRISE:
         if (isELA) return {
           heading: e,
-          content: _$$t2("admin_settings.plan_information_widget_card.seat_terms.ela_content_line")
+          content: getI18nString("admin_settings.plan_information_widget_card.seat_terms.ela_content_line")
         };
         return {
           heading: e,
-          content: d ? _$$t2("admin_settings.plan_information_widget_card.seat_terms.org_content_line") : _$$t2("admin_settings.plan_information_widget_card.seat_terms.org_content_line_legacy")
+          content: d ? getI18nString("admin_settings.plan_information_widget_card.seat_terms.org_content_line") : getI18nString("admin_settings.plan_information_widget_card.seat_terms.org_content_line_legacy")
         };
       default:
         return null;
     }
   }, [c, isAnnualProPlan, adjustAnnualSeatsAction, t, d, isELA]);
   let p = useMemo(() => {
-    let e = _$$t2("admin_settings.plan_information_widget_card.available_seats.heading");
+    let e = getI18nString("admin_settings.plan_information_widget_card.available_seats.heading");
     switch (c) {
       case FPlanNameType.PRO:
         if (isAnnualProPlan) return {
           heading: e,
-          content: _$$t2("admin_settings.plan_information_widget_card.available_seats.content_annual")
+          content: getI18nString("admin_settings.plan_information_widget_card.available_seats.content_annual")
         };
         return {
           heading: e,
-          content: _$$t2("admin_settings.plan_information_widget_card.available_seats.content_monthly")
+          content: getI18nString("admin_settings.plan_information_widget_card.available_seats.content_monthly")
         };
       case FPlanNameType.ORG:
       case FPlanNameType.ENTERPRISE:
         return {
           heading: e,
-          content: _$$t2("admin_settings.plan_information_widget_card.available_seats.content_org")
+          content: getI18nString("admin_settings.plan_information_widget_card.available_seats.content_org")
         };
       default:
         return null;
@@ -585,15 +585,15 @@ function ew(e) {
 function ek(e) {
   let t = _$$k2();
   let a = Pd(t);
-  let i = useCallback((t, a) => e.planType === FOrganizationLevelType.TEAM ? _$$t2("admin_settings.plan_subscription_card.amount_due_with_date", {
+  let i = useCallback((t, a) => e.planType === FOrganizationLevelType.TEAM ? getI18nString("admin_settings.plan_subscription_card.amount_due_with_date", {
     amount: a,
     dueAt: Z4(t)
-  }) : _$$t2("admin_settings.plan_subscription_card.amount_issued_with_date", {
+  }) : getI18nString("admin_settings.plan_subscription_card.amount_issued_with_date", {
     amount: a,
     issuedAt: tB(t)
   }), [e.planType]);
   let r = useMemo(() => !!e.upcomingAnnualInvoice && yn(tB(e.upcomingAnnualInvoice)), [e.upcomingAnnualInvoice]);
-  let l = useMemo(() => e.upcomingAnnualInvoice?.org_invoice_details?.billing_period_is_stub || e.upcomingAnnualInvoice?.org_invoice_details?.multiyear_contract_id || e.latestAnnualInvoice?.org_invoice_details?.billing_period_is_stub || e.latestAnnualInvoice?.org_invoice_details?.multiyear_contract_id ? _$$t2("admin_settings.plan_subscription_card.plan_subscription") : _$$t2("admin_settings.plan_subscription_card.annual_subscription"), [e.latestAnnualInvoice?.org_invoice_details?.billing_period_is_stub, e.latestAnnualInvoice?.org_invoice_details?.multiyear_contract_id, e.upcomingAnnualInvoice?.org_invoice_details?.billing_period_is_stub, e.upcomingAnnualInvoice?.org_invoice_details?.multiyear_contract_id]);
+  let l = useMemo(() => e.upcomingAnnualInvoice?.org_invoice_details?.billing_period_is_stub || e.upcomingAnnualInvoice?.org_invoice_details?.multiyear_contract_id || e.latestAnnualInvoice?.org_invoice_details?.billing_period_is_stub || e.latestAnnualInvoice?.org_invoice_details?.multiyear_contract_id ? getI18nString("admin_settings.plan_subscription_card.plan_subscription") : getI18nString("admin_settings.plan_subscription_card.annual_subscription"), [e.latestAnnualInvoice?.org_invoice_details?.billing_period_is_stub, e.latestAnnualInvoice?.org_invoice_details?.multiyear_contract_id, e.upcomingAnnualInvoice?.org_invoice_details?.billing_period_is_stub, e.upcomingAnnualInvoice?.org_invoice_details?.multiyear_contract_id]);
   let o = useMemo(() => {
     if (!e.latestAnnualInvoice || e.planStarting) return null;
     let t = new vr(e.latestAnnualInvoice.currency).formatMoney(e.latestAnnualInvoice.total, {
@@ -602,14 +602,14 @@ function ek(e) {
     });
     if (e.latestAnnualInvoice.state === qH.PAID) {
       let a = W8(e.latestAnnualInvoice);
-      return a ? _$$t2("admin_settings.plan_subscription_card.amount_paid_with_date", {
+      return a ? getI18nString("admin_settings.plan_subscription_card.amount_paid_with_date", {
         amount: t,
         paidAt: a
-      }) : _$$t2("admin_settings.plan_subscription_card.amount_paid", {
+      }) : getI18nString("admin_settings.plan_subscription_card.amount_paid", {
         amount: t
       });
     }
-    return _$$t2("admin_settings.plan_subscription_card.amount_due_with_date", {
+    return getI18nString("admin_settings.plan_subscription_card.amount_due_with_date", {
       amount: t,
       dueAt: Z4(e.latestAnnualInvoice)
     });
@@ -622,28 +622,28 @@ function ek(e) {
         currencySign: "accounting"
       });
       if (e.planStarting) return i(e.upcomingAnnualInvoice, a);
-      if (r) return e.upcomingRenewalWillPause ? _$$t2("admin_settings.plan_subscription_card.upcoming_renewal_will_pause", {
+      if (r) return e.upcomingRenewalWillPause ? getI18nString("admin_settings.plan_subscription_card.upcoming_renewal_will_pause", {
         pauseAt: t
-      }) : _$$t2("admin_settings.plan_subscription_card.amount_renewing_with_date", {
+      }) : getI18nString("admin_settings.plan_subscription_card.amount_renewing_with_date", {
         amount: a,
         renewalAt: t
       });
-      if (e.shouldAutoRenew) return _$$t2("admin_settings.plan_subscription_card.next_renewal_date", {
+      if (e.shouldAutoRenew) return getI18nString("admin_settings.plan_subscription_card.next_renewal_date", {
         renewalAt: t
       });
     }
-    return e.willCancelAt ? _$$t2("admin_settings.plan_subscription_card.ending_date", {
+    return e.willCancelAt ? getI18nString("admin_settings.plan_subscription_card.ending_date", {
       endingAt: e.willCancelAt
-    }) : e.latestAnnualInvoice ? e.shouldAutoRenew ? _$$t2("admin_settings.plan_subscription_card.next_renewal_date", {
+    }) : e.latestAnnualInvoice ? e.shouldAutoRenew ? getI18nString("admin_settings.plan_subscription_card.next_renewal_date", {
       renewalAt: _$$A(e.latestAnnualInvoice.period_ends_at).toDate()
-    }) : _$$t2("admin_settings.plan_subscription_card.date_range", {
+    }) : getI18nString("admin_settings.plan_subscription_card.date_range", {
       startsAt: _$$A(e.latestAnnualInvoice.period_starts_at).toDate(),
       endsAt: _$$A(e.latestAnnualInvoice.period_ends_at).toDate()
-    }) : _$$t2("admin_settings.plan_subscription_card.no_invoices");
+    }) : getI18nString("admin_settings.plan_subscription_card.no_invoices");
   }, [e.upcomingAnnualInvoice, e.willCancelAt, e.latestAnnualInvoice, e.planStarting, e.upcomingRenewalWillPause, e.shouldAutoRenew, r, i]);
   let c = useMemo(() => {
     if (e.upcomingAnnualInvoice) {
-      if (e.planStarting) return _$$t2("admin_settings.plan_subscription_card.starting_date", {
+      if (e.planStarting) return getI18nString("admin_settings.plan_subscription_card.starting_date", {
         startingAt: tB(e.upcomingAnnualInvoice)
       });
       if (e.planType === FOrganizationLevelType.ORG && e.upcomingAnnualInvoice.billing_mechanics === fA.LEGACY) {
@@ -657,7 +657,7 @@ function ek(e) {
           trackingProperties: {
             trackingDescriptor: _$$c.PREVIEW_RENEWAL
           },
-          children: _$$t2("admin_settings.plan_subscription_card.preview")
+          children: getI18nString("admin_settings.plan_subscription_card.preview")
         });
       }
       if (r) return e.upcomingRenewalWillPause && t ? jsx(pW, {
@@ -668,7 +668,7 @@ function ek(e) {
         },
         trusted: !0,
         newTab: !0,
-        children: _$$t2("admin_settings.plan_subscription_card.contact_support")
+        children: getI18nString("admin_settings.plan_subscription_card.contact_support")
       }) : e.adjustRenewalSeats && !e.renewalConfirmed ? jsx($z, {
         variant: "primary",
         onClick: e.adjustRenewalSeats,
@@ -676,7 +676,7 @@ function ek(e) {
           trackingDescriptor: _$$c.REVIEW_RENEWAL
         },
         "data-testid": "plan-subscription-review-renewal",
-        children: _$$t2("admin_settings.plan_subscription_card.review")
+        children: getI18nString("admin_settings.plan_subscription_card.review")
       }) : null;
     }
     return o;
@@ -690,19 +690,19 @@ function ek(e) {
     let c = e.manageAnnualSeats && {
       onClick: e.manageAnnualSeats,
       ctaTrackingDescriptor: _$$c.ANNUAL_SEATS,
-      ariaLabel: _$$t2("admin_settings.plan_subscription_card.annual_seats_aria_label")
+      ariaLabel: getI18nString("admin_settings.plan_subscription_card.annual_seats_aria_label")
     };
     if (e.planStarting && e.upcomingAnnualInvoice) return {
       id: s,
       icon: i,
-      text: _$$t2("admin_settings.plan_subscription_card.x_annual_seats", {
+      text: getI18nString("admin_settings.plan_subscription_card.x_annual_seats", {
         quantity: _$$e4(e.upcomingAnnualInvoice)
       })
     };
     if (r && e.upcomingAnnualInvoice) return {
       id: s,
       icon: i,
-      text: _$$t2("admin_settings.plan_subscription_card.x_renewing_annual_seats", {
+      text: getI18nString("admin_settings.plan_subscription_card.x_renewing_annual_seats", {
         quantity: _$$e4(e.upcomingAnnualInvoice)
       })
     };
@@ -711,9 +711,9 @@ function ek(e) {
       return {
         id: s,
         icon: i,
-        text: e.upcomingAnnualInvoice ? _$$t2("admin_settings.plan_subscription_card.x_renewing_annual_seats", {
+        text: e.upcomingAnnualInvoice ? getI18nString("admin_settings.plan_subscription_card.x_renewing_annual_seats", {
           quantity: t
-        }) : _$$t2("admin_settings.plan_subscription_card.x_annual_seats", {
+        }) : getI18nString("admin_settings.plan_subscription_card.x_annual_seats", {
           quantity: t
         })
       };
@@ -721,19 +721,19 @@ function ek(e) {
     return e.isELA ? {
       id: s,
       icon: i,
-      text: _$$t2("admin_settings.plan_subscription_card.x_annual_seats", {
+      text: getI18nString("admin_settings.plan_subscription_card.x_annual_seats", {
         quantity: l
       }),
       clickable: c
     } : {
       id: s,
       icon: i,
-      text: _$$t2("admin_settings.plan_subscription_card.x_annual_seats", {
+      text: getI18nString("admin_settings.plan_subscription_card.x_annual_seats", {
         quantity: d
       }),
       badge: o > 0 ? jsx(_$$E2, {
         variant: "brandOutline",
-        children: _$$t2("admin_settings.plan_subscription_card.x_available", {
+        children: getI18nString("admin_settings.plan_subscription_card.x_available", {
           quantity: o
         })
       }) : null,
@@ -750,16 +750,16 @@ function ek(e) {
 }
 function eI(e) {
   let t = _$$k2();
-  let a = useMemo(() => e.planType === FOrganizationLevelType.TEAM ? _$$t2("admin_settings.upcoming_invoice_card.heading.next_monthly_invoice") : _$$t2("admin_settings.upcoming_invoice_card.heading.next_quarterly_invoice"), [e.planType]);
+  let a = useMemo(() => e.planType === FOrganizationLevelType.TEAM ? getI18nString("admin_settings.upcoming_invoice_card.heading.next_monthly_invoice") : getI18nString("admin_settings.upcoming_invoice_card.heading.next_quarterly_invoice"), [e.planType]);
   let i = useMemo(() => new vr(e.upcomingInvoice?.currency || e.planCurrency || _$$S2.USD), [e.upcomingInvoice, e.planCurrency]);
   let r = i.formatMoney(e.upcomingInvoice?.total || 0, {
     showCents: !0,
     currencySign: "accounting"
   });
-  let l = useMemo(() => e.upcomingInvoice ? e.planType === FOrganizationLevelType.TEAM ? _$$t2("admin_settings.upcoming_invoice_card.amount_due_with_date", {
+  let l = useMemo(() => e.upcomingInvoice ? e.planType === FOrganizationLevelType.TEAM ? getI18nString("admin_settings.upcoming_invoice_card.amount_due_with_date", {
     amount: r,
     dueAt: Z4(e.upcomingInvoice)
-  }) : _$$t2("admin_settings.upcoming_invoice_card.subheading.will_be_issued", {
+  }) : getI18nString("admin_settings.upcoming_invoice_card.subheading.will_be_issued", {
     issuedAt: tB(e.upcomingInvoice)
   }) : r, [e.planType, e.upcomingInvoice, r]);
   let o = e.previewInvoice;
@@ -770,7 +770,7 @@ function eI(e) {
       trackingProperties: {
         trackingDescriptor: _$$c.VIEW_ALL
       },
-      children: _$$t2("admin_settings.upcoming_invoice_card.view_all_button_label")
+      children: getI18nString("admin_settings.upcoming_invoice_card.view_all_button_label")
     });
     {
       let t = e.upcomingInvoice.id;
@@ -782,7 +782,7 @@ function eI(e) {
         trackingProperties: {
           trackingDescriptor: _$$c.VIEW_INVOICE
         },
-        children: _$$t2("admin_settings.upcoming_invoice_card.preview_button_label")
+        children: getI18nString("admin_settings.upcoming_invoice_card.preview_button_label")
       });
     }
   }, [o, e.viewAllInvoices, e.upcomingInvoice]);
@@ -790,7 +790,7 @@ function eI(e) {
     let a = {
       id: "no-new-seats",
       icon: jsx(_$$U, {}),
-      text: _$$t2("admin_settings.upcoming_invoice_card.line_no_new_charges")
+      text: getI18nString("admin_settings.upcoming_invoice_card.line_no_new_charges")
     };
     if (!e.upcomingInvoice) return [a];
     let s = _$$e4(e.upcomingInvoice);
@@ -801,12 +801,12 @@ function eI(e) {
     let c = t && 0 !== s && e.manageMonthlySeats && e.planType === FOrganizationLevelType.TEAM && {
       onClick: e.manageMonthlySeats,
       ctaTrackingDescriptor: _$$c.MONTHLY_SEATS,
-      ariaLabel: _$$t2("admin_settings.upcoming_invoice_card.manage_monthly_seats_aria_label")
+      ariaLabel: getI18nString("admin_settings.upcoming_invoice_card.manage_monthly_seats_aria_label")
     };
     let _ = e.planType === FOrganizationLevelType.TEAM ? {
       id: "monthly_seats",
       icon: jsx(_$$U, {}),
-      text: _$$t2("admin_settings.upcoming_invoice_card.line_monthly_seats", {
+      text: getI18nString("admin_settings.upcoming_invoice_card.line_monthly_seats", {
         quantity: s,
         amount: i.formatMoney(r, {
           showCents: !0,
@@ -818,7 +818,7 @@ function eI(e) {
     let u = 0 !== l && e.planType === FOrganizationLevelType.TEAM ? {
       id: "seat_adjustments",
       icon: jsx(_$$S, {}),
-      text: _$$t2("admin_settings.upcoming_invoice_card.line_one_time_charges", {
+      text: getI18nString("admin_settings.upcoming_invoice_card.line_one_time_charges", {
         amount: i.formatMoney(l, {
           showCents: !0,
           currencySign: "accounting"
@@ -828,7 +828,7 @@ function eI(e) {
     let m = 0 !== o && e.planType === FOrganizationLevelType.ORG ? {
       id: "org_adjustments",
       icon: jsx(_$$S, {}),
-      text: _$$t2("admin_settings.upcoming_invoice_card.line_charges", {
+      text: getI18nString("admin_settings.upcoming_invoice_card.line_charges", {
         amount: i.formatMoney(o, {
           showCents: !0,
           currencySign: "accounting"
@@ -838,7 +838,7 @@ function eI(e) {
     let p = 0 !== d && e.planType === FOrganizationLevelType.ORG ? {
       id: "org_credits",
       icon: jsx(_$$s2, {}),
-      text: _$$t2("admin_settings.upcoming_invoice_card.line_credits", {
+      text: getI18nString("admin_settings.upcoming_invoice_card.line_credits", {
         amount: i.formatMoney(d, {
           showCents: !0,
           currencySign: "accounting"
@@ -859,14 +859,14 @@ function eD() {
   return {
     key: "no_new_charges",
     icon: jsx(_$$U, {}),
-    copy: _$$t2("plan_invoices.cost_breakdown.no_new_charges")
+    copy: getI18nString("plan_invoices.cost_breakdown.no_new_charges")
   };
 }
 function eM(e) {
   return {
     key: "issued_at",
     icon: jsx(_$$v, {}),
-    copy: _$$t2("plan_invoices.invoice_date_with_value", {
+    copy: getI18nString("plan_invoices.invoice_date_with_value", {
       date: tB(e)
     })
   };
@@ -928,7 +928,7 @@ function eF(e) {
       e.viewAllInvoices();
     },
     variant: "secondary",
-    children: _$$t2("plan_invoices.view_all")
+    children: getI18nString("plan_invoices.view_all")
   });
 }
 function eq(e) {
@@ -940,7 +940,7 @@ function eq(e) {
     trackingProperties: {
       trackingDescriptor: _$$c.VIEW_INVOICE
     },
-    children: _$$t2("plan_invoices.view_button_label")
+    children: getI18nString("plan_invoices.view_button_label")
   });
 }
 function e$(e) {
@@ -950,7 +950,7 @@ function e$(e) {
     return {
       key: "charges",
       icon: jsx(_$$S, {}),
-      copy: _$$t2("plan_invoices.invoice_preview.charges_amount", {
+      copy: getI18nString("plan_invoices.invoice_preview.charges_amount", {
         amount: t.formatMoney(iy(e), {
           showCents: !0,
           currencySign: "accounting"
@@ -963,7 +963,7 @@ function e$(e) {
     return 0 !== a && {
       key: "credits",
       icon: jsx(_$$s2, {}),
-      copy: _$$t2("plan_invoices.invoice_preview.credits_amount", {
+      copy: getI18nString("plan_invoices.invoice_preview.credits_amount", {
         amount: t.formatMoney(a, {
           showCents: !0,
           currencySign: "accounting"
@@ -977,7 +977,7 @@ function e$(e) {
     return (0 !== a || 0 !== s) && {
       key: "seat_adjustments",
       icon: jsx(_$$S, {}),
-      copy: _$$t2("plan_invoices.invoice_preview.seat_adjustments_amount", {
+      copy: getI18nString("plan_invoices.invoice_preview.seat_adjustments_amount", {
         amount: t.formatMoney(a, {
           showCents: !0,
           currencySign: "accounting"
@@ -994,9 +994,9 @@ function e$(e) {
     return {
       key: "seats",
       icon: jsx(_$$w, {}),
-      copy: a ? _$$t2("plan_invoices.invoice_preview.renewing_monthly_seats_amount", {
+      copy: a ? getI18nString("plan_invoices.invoice_preview.renewing_monthly_seats_amount", {
         amount: s
-      }) : _$$t2("plan_invoices.invoice_preview.renewing_seats_amount", {
+      }) : getI18nString("plan_invoices.invoice_preview.renewing_seats_amount", {
         amount: s
       })
     };
@@ -1019,14 +1019,14 @@ function eB(e) {
     invoice: e.invoice,
     viewInvoice: e.viewInvoice
   }) : jsx(eU, {
-    title: _$$t2("plan_invoices.invoice_preview.empty_heading"),
+    title: getI18nString("plan_invoices.invoice_preview.empty_heading"),
     button: jsx(eF, {
       viewAllInvoices: e.viewAllInvoices
     }),
     lines: [{
       key: "no_upcoming_invoices",
       icon: jsx(_$$v, {}),
-      copy: _$$t2("plan_invoices.invoice_preview.no_upcoming_invoices")
+      copy: getI18nString("plan_invoices.invoice_preview.no_upcoming_invoices")
     }, eD()]
   });
 }
@@ -1044,11 +1044,11 @@ function ez(e) {
     variant: i ? "warn" : "danger",
     "data-testid": "plan-canceled-banner",
     children: [jsx(_$$Q, {
-      title: i ? _$$t2("plan_invoices.plan_canceled.title_v2", {
+      title: i ? getI18nString("plan_invoices.plan_canceled.title_v2", {
         planName: a?.name ?? "",
         expiresAt: e.expiresAt
-      }) : _$$t2("plan_invoices.plan_canceled.title"),
-      children: i ? null : _$$t2("plan_invoices.plan_canceled.subtitle", {
+      }) : getI18nString("plan_invoices.plan_canceled.title"),
+      children: i ? null : getI18nString("plan_invoices.plan_canceled.subtitle", {
         expiresAt: e.expiresAt
       })
     }), jsx(eG, {
@@ -1058,7 +1058,7 @@ function ez(e) {
         orgId: a?.type === FOrganizationLevelType.ORG ? a.key.parentId : void 0,
         teamId: a?.type === FOrganizationLevelType.TEAM ? a.key.parentId : void 0
       },
-      children: i ? _$$t2("plan_invoices.reactivate_button_label_v2") : _$$t2("plan_invoices.reactivate_button_label")
+      children: i ? getI18nString("plan_invoices.reactivate_button_label_v2") : getI18nString("plan_invoices.reactivate_button_label")
     })]
   });
 }
@@ -1097,7 +1097,7 @@ function e3(e) {
             }
           }));
         },
-        children: _$$t2("org_admin_details.billing_banner.details.upcoming_invoice.button.billing_groups")
+        children: getI18nString("org_admin_details.billing_banner.details.upcoming_invoice.button.billing_groups")
       })
     }] : [{
       key: "manage_seats",
@@ -1112,7 +1112,7 @@ function e3(e) {
             }
           }));
         },
-        children: _$$t2("org_admin_details.billing_banner.details.upcoming_invoice.button.manage_seats")
+        children: getI18nString("org_admin_details.billing_banner.details.upcoming_invoice.button.manage_seats")
       })
     }, {
       key: "true_up_review",
@@ -1126,7 +1126,7 @@ function e3(e) {
             }
           }));
         },
-        children: _$$t2("org_admin_details.billing_banner.details.upcoming_invoice.button.review_and_finalize_invoice")
+        children: getI18nString("org_admin_details.billing_banner.details.upcoming_invoice.button.review_and_finalize_invoice")
       })
     }] : [], [e.invoice, e.orgHasAutomaticUpcomingInvoice, e.planId, e.trueUpState, t, a]);
   }({
@@ -1140,26 +1140,26 @@ function e3(e) {
     orgHasAutomaticUpcomingInvoice: e.orgHasAutomaticUpcomingInvoice,
     isLicenseGroupsActive: d,
     invoice: e.invoice
-  }).trueUpState === fx.REVIEW && TV(t.invoice, !!t.orgHasAutomaticUpcomingInvoice) ? t.isLicenseGroupsActive ? _$$t2("org_admin_details.billing_banner.upcoming_invoice.subtitle.true_up.billing_groups.seat_rename") : _$$t2("plan_invoices.review_invoice.subtitle") : null;
+  }).trueUpState === fx.REVIEW && TV(t.invoice, !!t.orgHasAutomaticUpcomingInvoice) ? t.isLicenseGroupsActive ? getI18nString("org_admin_details.billing_banner.upcoming_invoice.subtitle.true_up.billing_groups.seat_rename") : getI18nString("plan_invoices.review_invoice.subtitle") : null;
   let u = function (e) {
     let t = _k(e.invoice);
     let a = tB(e.invoice);
-    if (e.trueUpState === fx.LOCKED) return _$$t2("plan_invoices.locked_invoice.title", {
+    if (e.trueUpState === fx.LOCKED) return getI18nString("plan_invoices.locked_invoice.title", {
       date: a
     });
     if (e.trueUpState !== fx.REVIEW) return returnSecond(e.trueUpState, "");
     {
       let n = !!e.orgHasAutomaticUpcomingInvoice;
       let s = TV(e.invoice, n);
-      return t || n ? s ? t ? _$$t2("plan_invoices.review_invoice.title_trueup", {
+      return t || n ? s ? t ? getI18nString("plan_invoices.review_invoice.title_trueup", {
         date: a
-      }) : _$$t2("plan_invoices.review_invoice.title_renewal", {
+      }) : getI18nString("plan_invoices.review_invoice.title_renewal", {
         date: a
-      }) : t ? _$$t2("plan_invoices.review_invoice.title_trueup_non_actionable", {
+      }) : t ? getI18nString("plan_invoices.review_invoice.title_trueup_non_actionable", {
         date: a
-      }) : _$$t2("plan_invoices.review_invoice.title_renewal_non_actionable", {
+      }) : getI18nString("plan_invoices.review_invoice.title_renewal_non_actionable", {
         date: a
-      }) : _$$t2("plan_invoices.review_invoice.title_renewal_non_automatic", {
+      }) : getI18nString("plan_invoices.review_invoice.title_renewal_non_automatic", {
         date: a
       });
     }

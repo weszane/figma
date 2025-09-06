@@ -4,14 +4,14 @@ import { useDispatch } from "../vendor/514228";
 import { N as _$$N } from "../905/438674";
 import { $n } from "../905/521428";
 import { kul } from "../figma_app/763686";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { k as _$$k } from "../905/651849";
 import { Ay } from "../905/612521";
 import { h as _$$h } from "../905/207101";
 import { Point } from "../905/736624";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { zX } from "../905/576487";
 import { sf } from "../905/929976";
@@ -21,7 +21,7 @@ import { Ce } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { HJ } from "../905/760074";
 import { oJ } from "../905/346794";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { PW, Kn } from "../905/535806";
 import { e0 } from "../905/696396";
 import { Ju, ZU } from "../905/102752";
@@ -72,7 +72,7 @@ let L = e => {
   e.mergeParams.direction === Kn.TO_SOURCE ? e.dispatch(sf({
     view: "fullscreen",
     fileKey: e.mergeParams.branchKey,
-    editorType: nT.Design,
+    editorType: FEditorType.Design,
     mergeParams: {
       ...e.mergeParams,
       mergeOnFileOpen: !1
@@ -84,17 +84,17 @@ let F = (e, t, i) => {
   let r;
   let a = ["pending", "success"];
   let s = t === Kn.TO_SOURCE ? "merge" : "update";
-  let [o, l] = a.map(e => _$$t(`collaboration.branching.merge_error.confirm_${s}_${e}`));
-  let [d, c] = a.map(e => _$$t(`collaboration.branching.merge_error.cancel_${s}_${e}`));
-  let [p, m] = a.map(e => _$$t(`collaboration.branching.merge_error.cancel_previous_${s}_${e}`));
+  let [o, l] = a.map(e => getI18nString(`collaboration.branching.merge_error.confirm_${s}_${e}`));
+  let [d, c] = a.map(e => getI18nString(`collaboration.branching.merge_error.cancel_${s}_${e}`));
+  let [p, m] = a.map(e => getI18nString(`collaboration.branching.merge_error.cancel_previous_${s}_${e}`));
   switch (e) {
     case 0:
-      n = tx(`collaboration.branching.merge_error.review_and_confirm_${s}_description`);
+      n = renderI18nText(`collaboration.branching.merge_error.review_and_confirm_${s}_description`);
       return {
-        title: tx("collaboration.branching.merge_error.review_and_confirm"),
+        title: renderI18nText("collaboration.branching.merge_error.review_and_confirm"),
         description: n,
-        primaryButtonText: tx("collaboration.branching.merge_error.confirm"),
-        secondaryButtonText: tx("collaboration.branching.merge_error.cancel"),
+        primaryButtonText: renderI18nText("collaboration.branching.merge_error.confirm"),
+        secondaryButtonText: renderI18nText("collaboration.branching.merge_error.cancel"),
         primaryAction: async e => {
           await O(e, o, l);
         },
@@ -104,10 +104,10 @@ let F = (e, t, i) => {
       };
     case 1:
       return {
-        title: tx(`collaboration.branching.merge_error.could_not_start_${s}`),
-        description: n = tx(`collaboration.branching.merge_error.could_not_start_${s}_description`),
-        primaryButtonText: tx("collaboration.branching.merge_error.retry_merge"),
-        secondaryButtonText: tx("collaboration.branching.merge_error.cancel"),
+        title: renderI18nText(`collaboration.branching.merge_error.could_not_start_${s}`),
+        description: n = renderI18nText(`collaboration.branching.merge_error.could_not_start_${s}_description`),
+        primaryButtonText: renderI18nText("collaboration.branching.merge_error.retry_merge"),
+        secondaryButtonText: renderI18nText("collaboration.branching.merge_error.cancel"),
         primaryAction: e => {
           L(e);
         },
@@ -127,31 +127,31 @@ let F = (e, t, i) => {
       };
     case 2:
       return {
-        title: tx(`collaboration.branching.merge_error.could_not_start_${s}`),
-        description: n = tx("collaboration.branching.merge_error.branch_archived_description"),
-        primaryButtonText: tx("base_notifications.dismiss"),
+        title: renderI18nText(`collaboration.branching.merge_error.could_not_start_${s}`),
+        description: n = renderI18nText("collaboration.branching.merge_error.branch_archived_description"),
+        primaryButtonText: renderI18nText("base_notifications.dismiss"),
         primaryAction: () => {}
       };
     case 3:
       return {
-        title: tx(`collaboration.branching.merge_error.could_not_start_${s}`),
-        description: n = tx("collaboration.branching.merge_error.branch_already_updated_description"),
-        primaryButtonText: tx("collaboration.branching.merge_error.reload"),
+        title: renderI18nText(`collaboration.branching.merge_error.could_not_start_${s}`),
+        description: n = renderI18nText("collaboration.branching.merge_error.branch_already_updated_description"),
+        primaryButtonText: renderI18nText("collaboration.branching.merge_error.reload"),
         primaryAction: () => {
           Ay.reload("Branch point changed");
         }
       };
     case 4:
       return {
-        title: tx("collaboration.branching.merge_error.merge_in_progress"),
-        description: n = tx("collaboration.branching.merge_error.merge_in_progress_description"),
-        primaryButtonText: tx("collaboration.branching.merge_error.retry_merge"),
+        title: renderI18nText("collaboration.branching.merge_error.merge_in_progress"),
+        description: n = renderI18nText("collaboration.branching.merge_error.merge_in_progress_description"),
+        primaryButtonText: renderI18nText("collaboration.branching.merge_error.retry_merge"),
         primaryAction: async e => {
           await D(e, p, m);
           L(e);
         },
         secondaryLinkButton: {
-          text: tx("collaboration.branching.merge_error.contact_support"),
+          text: renderI18nText("collaboration.branching.merge_error.contact_support"),
           href: "https://help.figma.com/hc/requests/new"
         }
       };
@@ -167,7 +167,7 @@ function M(e) {
   } = i;
   let h = useDispatch();
   _$$h(() => {
-    sx("Merge Error Modal Shown", {
+    trackEventAnalytics("Merge Error Modal Shown", {
       view: $$P1[e.view],
       branchKey: e.mergeParams.branchKey,
       sourceKey: e.mergeParams.sourceKey,

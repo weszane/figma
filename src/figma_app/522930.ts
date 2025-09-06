@@ -4,7 +4,7 @@ import { useDispatch } from "../vendor/514228";
 import { localStorageRef } from "../905/657224";
 import { s as _$$s } from "../cssbuilder/589278";
 import { pW } from "../905/160095";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { V } from "../905/965990";
 import { b as _$$b } from "../905/985254";
 import { A } from "../905/563377";
@@ -33,13 +33,13 @@ export function $$E0({
       })
     }), jsx("div", {
       className: _$$s.font13.fontSemiBold.$,
-      children: tx("whiteboard.inserts.custom_templates_header")
+      children: renderI18nText("whiteboard.inserts.custom_templates_header")
     }), jsx("div", {
-      children: tx("whiteboard.inserts.custom_templates_description")
+      children: renderI18nText("whiteboard.inserts.custom_templates_description")
     }), jsx(pW, {
       newTab: !0,
       href: A,
-      children: tx("whiteboard.inserts.learn_more")
+      children: renderI18nText("whiteboard.inserts.learn_more")
     })]
   });
 }
@@ -85,18 +85,18 @@ function b({
       className: _$$s.flex.flexColumn.justifyBetween.$,
       children: [jsx("div", {
         className: _$$s.font13.fontSemiBold.pb8.$,
-        children: tx("whiteboard.inserts.custom_templates_header")
+        children: renderI18nText("whiteboard.inserts.custom_templates_header")
       }), jsx("div", {
-        children: tx("whiteboard.inserts.custom_templates_description")
+        children: renderI18nText("whiteboard.inserts.custom_templates_description")
       }), jsxs("div", {
         className: _$$s.flex.gap8.pt16.$,
         children: [jsx(pW, {
           newTab: !0,
           href: A,
-          children: tx("whiteboard.inserts.learn_more")
+          children: renderI18nText("whiteboard.inserts.learn_more")
         }), jsx(V, {
           onClick: r,
-          children: tx("whiteboard.inserts.dismiss")
+          children: renderI18nText("whiteboard.inserts.dismiss")
         })]
       })]
     })]

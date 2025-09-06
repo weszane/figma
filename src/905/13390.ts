@@ -1,13 +1,13 @@
 import { useId, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 import { jsx } from 'react/jsx-runtime';
-import { $D } from '../905/11';
+import { reportError } from '../905/11';
 import { U as _$$U } from '../905/18613';
 import { HZ } from '../905/34809';
 import { tl as _$$tl } from '../905/70982';
 import { an, y$ } from '../905/81009';
 import { b as _$$b, d as _$$d } from '../905/91820';
-import { R as _$$R } from '../905/103090';
+import { selectWithShallowEqual } from '../905/103090';
 import { h as _$$h, O as _$$O } from '../905/142086';
 import { to as _$$to } from '../905/156213';
 import { e as _$$e3 } from '../905/157975';
@@ -15,7 +15,7 @@ import { ServiceCategories as _$$e } from '../905/165054';
 import { Fh, Mw, U1 } from '../905/191601';
 import { J as _$$J, q as _$$q } from '../905/202542';
 import { F as _$$F } from '../905/300562';
-import { t as _$$t } from '../905/303541';
+import { getI18nString } from '../905/303541';
 import { TA } from '../905/372672';
 import { iC } from '../905/466026';
 import { NQ } from '../905/508367';
@@ -41,7 +41,7 @@ import { fileEntityDataMapper } from '../905/943101';
 import { nk } from '../figma_app/2023';
 import { S as _$$S } from '../figma_app/11182';
 import { R$ } from '../figma_app/12796';
-import { md, Xr } from '../figma_app/27355';
+import { useAtomWithSubscription, Xr } from '../figma_app/27355';
 import { S as _$$S2 } from '../figma_app/78808';
 import { yN } from '../figma_app/88484';
 import { GI } from '../figma_app/147337';
@@ -70,7 +70,7 @@ import { V1 } from '../figma_app/834392';
 import { dm, gp, OL } from '../figma_app/840917';
 import { rC, we } from '../figma_app/861982';
 import { D6 } from '../figma_app/863319';
-import { eD } from '../figma_app/876459';
+import { desktopAPIInstance } from '../figma_app/876459';
 import { Fb, iN, qP, X7 } from '../figma_app/909778';
 import { ai } from '../figma_app/915202';
 import { g4 as _$$g, b4, n_ } from '../figma_app/937413';
@@ -139,7 +139,7 @@ export function $$ek0(e) {
     fileKeysByRepoId,
     isOnDeleted,
     attributionContextKey
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     dropdownShown: e.dropdownShown,
     openFileFolderId: e.openFile?.folderId,
     selectedView: e.selectedView,
@@ -279,7 +279,7 @@ export function $$ek0(e) {
     }));
   };
   let e7 = e => {
-    if (t0 !== _$$q.UPGRADE_NOT_NEEDED && getUpgradePathway(e) !== _$$J.AUTO_PATHWAY) return hasPendingRequest(e) ? _$$t('upgrades.request_sent') : _$$t('upgrades.request');
+    if (t0 !== _$$q.UPGRADE_NOT_NEEDED && getUpgradePathway(e) !== _$$J.AUTO_PATHWAY) return hasPendingRequest(e) ? getI18nString('upgrades.request_sent') : getI18nString('upgrades.request');
   };
   let e8 = e => !!hasPendingRequest(e) && t0 === _$$q.CANNOT_UPGRADE;
   let e9 = e => {
@@ -377,7 +377,7 @@ export function $$ek0(e) {
       offlineFilesByKey
     } = Mw(e.selectedTiles, e.permsByFileKey, e.permsByRepoId);
     if (deletableCount < selectedCount) {
-      let e = _$$t('tile.dropdown.no_permission_to_trash_error');
+      let e = getI18nString('tile.dropdown.no_permission_to_trash_error');
       i(_$$s.error(e));
       return;
     }
@@ -392,7 +392,7 @@ export function $$ek0(e) {
     let t = m8(ty, e.permsByFileKey);
     let n = gX(tv, e.permsByRepoId);
     if (t.length + n.length < ty.length + tv.length) {
-      i(_$$s.error(_$$t('flash.dont_have_permission_permanently_delete_files')));
+      i(_$$s.error(getI18nString('flash.dont_have_permission_permanently_delete_files')));
       return;
     }
     i(Fh({
@@ -404,7 +404,7 @@ export function $$ek0(e) {
     let t = g4(ty, e.permsByFileKey);
     let n = _H(tv, e.permsByRepoId);
     if (t.length + n.length === 0) {
-      i(_$$s.error(_$$t('tile.dropdown.no_permission_to_restore_error')));
+      i(_$$s.error(getI18nString('tile.dropdown.no_permission_to_restore_error')));
       return;
     }
     i(b4({
@@ -415,7 +415,7 @@ export function $$ek0(e) {
   let tc = (t, n) => {
     let r = tS.length + tP.length;
     if (r === 0) {
-      i(_$$s.error(_$$t('tile.dropdown.no_permission_to_restore_error')));
+      i(_$$s.error(getI18nString('tile.dropdown.no_permission_to_restore_error')));
       return;
     }
     if (r === 1) {
@@ -462,7 +462,7 @@ export function $$ek0(e) {
       key: e
     }));
     for (let e of (r.length > 0 && yN(r.map(e => e.key)).catch(e => {
-      i(_$$s.error(_$$t('file_browser.file_browser_actions.recently_viewed_error', {
+      i(_$$s.error(getI18nString('file_browser.file_browser_actions.recently_viewed_error', {
         numFiles: n.length
       })));
       return e;
@@ -520,13 +520,13 @@ export function $$ek0(e) {
   let tf = (e, t, i, n) => {
     let r = e.is_favorited && t.some(e => e.id === i?.id);
     return {
-      displayText: e.is_favorited ? `${_$$t('favorited_resources.indicate_section_prefix')}: ${i?.name || _$$t('sidebar.starred')}` : _$$t('favorited_resources.add_to_sidebar'),
+      displayText: e.is_favorited ? `${getI18nString('favorited_resources.indicate_section_prefix')}: ${i?.name || getI18nString('sidebar.starred')}` : getI18nString('favorited_resources.add_to_sidebar'),
       children: t.map(({
         id: e,
         name: t
       }) => ({
         recordingKey: 'FAVORITE_FILE.CUSTOM',
-        displayText: t === '' ? _$$t('sidebar.starred') : t,
+        displayText: t === '' ? getI18nString('sidebar.starred') : t,
         isChecked: i?.id === e,
         alwaysShowCheckMarkOffset: r,
         callback: () => n(e)
@@ -661,7 +661,7 @@ export function $$ek0(e) {
   let t8 = e.selectedTiles.filter(e => e.type === nb.FILE).map(e => e.file).some(e => e.editorType === FFileType.FIGMAKE) && t6.requiresUpgrade && !tU;
   let t9 = _$$D('TileActionDropdown');
   let ie = Kd(t9).unwrapOr(!1);
-  let it = md(V1);
+  let it = useAtomWithSubscription(V1);
   let ii = dropdownShown?.data;
   if (!ii) return null;
   let ir = t1 + t2 + t4;
@@ -686,19 +686,19 @@ export function $$ek0(e) {
   let i_ = tI.length + tL.length;
   i_ < ir && (ig = !1);
   let iA = '';
-  io || (iA = _$$t('tile.dropdown.multiple_file_suffix', {
+  io || (iA = getI18nString('tile.dropdown.multiple_file_suffix', {
     totalSelected: ir
   }));
   let iy = '';
-  il || (iy = _$$t('tile.dropdown.multiple_file_suffix', {
+  il || (iy = getI18nString('tile.dropdown.multiple_file_suffix', {
     totalSelected: ia
   }));
   let ib = ((t, n) => {
     let r = D6(currentUserOrgId);
-    let a = r ? _$$t('favorited_resources.remove_from_sidebar') : _$$t('tile.favoriting.remove_from_favorites');
+    let a = r ? getI18nString('favorited_resources.remove_from_sidebar') : getI18nString('tile.favoriting.remove_from_favorites');
     return {
       [eC.COPY_LINK]: e => ({
-        displayText: _$$t('tile.dropdown.copy_link'),
+        displayText: getI18nString('tile.dropdown.copy_link'),
         callback: () => e9(e)
       }),
       [eC.DELETE]: (e, i, n) => {
@@ -708,7 +708,7 @@ export function $$ek0(e) {
           r = !SA(t, e.repo);
         }
         return {
-          displayText: r ? _$$t('tile.dropdown.move_file_and_branches_to_trash') : t === 1 ? _$$t('tile.dropdown.trash_single_tile') : _$$t('tile.dropdown.trash_file', {
+          displayText: r ? getI18nString('tile.dropdown.move_file_and_branches_to_trash') : t === 1 ? getI18nString('tile.dropdown.trash_single_tile') : getI18nString('tile.dropdown.trash_file', {
             objText: i
           }),
           callback: to,
@@ -716,46 +716,46 @@ export function $$ek0(e) {
         };
       },
       [eC.DUPLICATE]: (e, i) => ({
-        displayText: t === 1 ? _$$t('tile.dropdown.duplicate_single_tile') : _$$t('tile.dropdown.duplicate', {
+        displayText: t === 1 ? getI18nString('tile.dropdown.duplicate_single_tile') : getI18nString('tile.dropdown.duplicate', {
           objText: e
         }),
         callback: ta,
         disabled: i
       }),
       [eC.DUPLICATE_TO_DRAFTS]: (e, t) => ({
-        displayText: n === 1 ? _$$t('tile.dropdown.duplicate_to_draft_single_file_or_repo') : _$$t('tile.dropdown.duplicate_to_draft', {
+        displayText: n === 1 ? getI18nString('tile.dropdown.duplicate_to_draft_single_file_or_repo') : getI18nString('tile.dropdown.duplicate_to_draft', {
           objText: e
         }),
         callback: tu,
         disabled: t
       }),
       [eC.OPEN]: () => ({
-        displayText: _$$t('tile.dropdown.open'),
+        displayText: getI18nString('tile.dropdown.open'),
         callback: (t, i, n, r) => {
           e.openTile(r);
         }
       }),
       [eC.OPEN_NEW_TAB]: e => ({
-        displayText: _$$t('tile.dropdown.open_new_tab'),
+        displayText: getI18nString('tile.dropdown.open_new_tab'),
         callback: () => eJ(e)
       }),
       [eC.PIN_FILE_TO_FOLDER]: e => ({
-        displayText: _$$t('tile.dropdown.pin_to_project'),
+        displayText: getI18nString('tile.dropdown.pin_to_project'),
         callback: () => e0(e)
       }),
       [eC.PIN_REPO_TO_FOLDER]: e => ({
-        displayText: _$$t('tile.dropdown.pin_to_project'),
+        displayText: getI18nString('tile.dropdown.pin_to_project'),
         callback: () => e1(e)
       }),
       [eC.PIN_FILE_TO_WORKSPACE]: t => {
         let i = !!e.loadedQueries.fileWorkspacePinActions && e.loadedQueries.fileWorkspacePinActions.workspaceHasMaxPins;
         return {
-          displayText: _$$t('tile.dropdown.pin_to_workspace'),
+          displayText: getI18nString('tile.dropdown.pin_to_workspace'),
           callback: () => e$(t, i)
         };
       },
       [eC.REMOVE_FROM_RECENTS]: (e, t) => ({
-        displayText: _$$t('tile.dropdown.remove_from_recent_pluralized', {
+        displayText: getI18nString('tile.dropdown.remove_from_recent_pluralized', {
           numFiles: e
         }),
         callback: tp,
@@ -765,18 +765,18 @@ export function $$ek0(e) {
         switch (e.type) {
           case nb.FILE:
             return {
-              displayText: _$$t('tile.dropdown.rename'),
+              displayText: getI18nString('tile.dropdown.rename'),
               callback: () => tt(e.file)
             };
           case nb.REPO:
             let t = mr(e.repo, e.branches, selectedBranchKeyByRepoId);
             return {
-              displayText: SA(t, e.repo) ? _$$t('tile.dropdown.rename') : _$$t('tile.dropdown.rename_file'),
+              displayText: SA(t, e.repo) ? getI18nString('tile.dropdown.rename') : getI18nString('tile.dropdown.rename_file'),
               callback: () => ti(e.repo)
             };
           case nb.OFFLINE_FILE:
             return {
-              displayText: _$$t('tile.dropdown.rename'),
+              displayText: getI18nString('tile.dropdown.rename'),
               callback: () => tn(e.file)
             };
           default:
@@ -784,7 +784,7 @@ export function $$ek0(e) {
         }
       },
       [eC.MOVE_FILE]: (e, t, i) => ({
-        displayText: e === 1 ? _$$t('tile.dropdown.move_file') : _$$t('tile.dropdown.move_object', {
+        displayText: e === 1 ? getI18nString('tile.dropdown.move_file') : getI18nString('tile.dropdown.move_object', {
           objText: t
         }),
         callback: () => tA(tH, tW, e),
@@ -796,7 +796,7 @@ export function $$ek0(e) {
         switch (e.type) {
           case nb.FILE:
             return {
-              displayText: _$$t('fullscreen_actions.toggle-version-history'),
+              displayText: getI18nString('fullscreen_actions.toggle-version-history'),
               callback: () => {
                 tr(e.file);
               }
@@ -804,7 +804,7 @@ export function $$ek0(e) {
           case nb.REPO:
             let t = mr(e.repo, e.branches, selectedBranchKeyByRepoId);
             return {
-              displayText: _$$t('fullscreen_actions.toggle-version-history'),
+              displayText: getI18nString('fullscreen_actions.toggle-version-history'),
               callback: () => {
                 tr(t);
               }
@@ -822,7 +822,7 @@ export function $$ek0(e) {
             case nb.REPO:
               return mr(e.repo, e.branches, selectedBranchKeyByRepoId);
             default:
-              $D(_$$e.WAYFINDING, new Error('Invalid tile type when rendering DropdownActionOptions.SHARE'), {
+              reportError(_$$e.WAYFINDING, new Error('Invalid tile type when rendering DropdownActionOptions.SHARE'), {
                 extra: {
                   'tile.type': e.type,
                   'numFilesSelected': t1,
@@ -836,7 +836,7 @@ export function $$ek0(e) {
         let i = Tf.getEditorType(e);
         let n = wR(i);
         return {
-          displayText: _$$t('tile.dropdown.share'),
+          displayText: getI18nString('tile.dropdown.share'),
           callback: () => {
             t && e6(t);
           },
@@ -849,12 +849,12 @@ export function $$ek0(e) {
         switch (e.type) {
           case nb.FILE:
             return {
-              displayText: _$$t('tile.dropdown.show_in_project'),
+              displayText: getI18nString('tile.dropdown.show_in_project'),
               callback: () => eX(e)
             };
           case nb.REPO:
             return {
-              displayText: _$$t('tile.dropdown.show_in_project'),
+              displayText: getI18nString('tile.dropdown.show_in_project'),
               callback: () => eQ(e)
             };
           default:
@@ -862,35 +862,35 @@ export function $$ek0(e) {
         }
       },
       [eC.UNPIN_FILE_FROM_FOLDER]: e => ({
-        displayText: _$$t('tile.dropdown.remove_project_pin'),
+        displayText: getI18nString('tile.dropdown.remove_project_pin'),
         callback: () => e2(e)
       }),
       [eC.UNPIN_REPO_FROM_FOLDER]: e => ({
-        displayText: _$$t('tile.dropdown.remove_project_pin'),
+        displayText: getI18nString('tile.dropdown.remove_project_pin'),
         callback: () => e5(e)
       }),
       [eC.UNPIN_FILE_FROM_WORKSPACE]: e => ({
-        displayText: _$$t('tile.dropdown.remove_workspace_pin'),
+        displayText: getI18nString('tile.dropdown.remove_workspace_pin'),
         callback: () => e4(e)
       }),
       [eC.EDIT_WORKSPACE_PIN]: e => ({
-        displayText: _$$t('tile.dropdown.edit_workspace_pin'),
+        displayText: getI18nString('tile.dropdown.edit_workspace_pin'),
         callback: () => e3(e)
       }),
       [eC.CREATE_BRANCH]: e => ({
-        displayText: _$$t('tile.dropdown.create_new_branch'),
+        displayText: getI18nString('tile.dropdown.create_new_branch'),
         callback: tm,
         disabled: e
       }),
       [eC.DELETE_FOREVER]: (e, t) => ({
-        displayText: _$$t('tile.dropdown.delete_forever', {
+        displayText: getI18nString('tile.dropdown.delete_forever', {
           objectText: e
         }),
         callback: tl,
         disabled: t
       }),
       [eC.RESTORE]: (e, t, i) => ({
-        displayText: _$$t('tile.dropdown.restore', {
+        displayText: getI18nString('tile.dropdown.restore', {
           objectText: e,
           numFiles: i
         }),
@@ -898,7 +898,7 @@ export function $$ek0(e) {
         disabled: t
       }),
       [eC.RESTORE_TO]: (e, t, i) => ({
-        displayText: _$$t('tile.dropdown.restore_to', {
+        displayText: getI18nString('tile.dropdown.restore_to', {
           objectText: e,
           numFiles: i
         }),
@@ -914,12 +914,12 @@ export function $$ek0(e) {
         }, i, favoriteSidebarSection, e => {
           th(t, e, favoriteSidebarSection?.id !== e);
         }) : {
-          displayText: _$$t('tile.favoriting.add_to_favorites'),
+          displayText: getI18nString('tile.favoriting.add_to_favorites'),
           callback: () => th(t, void 0, !0)
         };
       },
       [eC.FAVORITE_PROTOTYPE]: e => ({
-        displayText: _$$t('tile.favoriting.add_to_favorites'),
+        displayText: getI18nString('tile.favoriting.add_to_favorites'),
         callback: () => tg(e, !0)
       }),
       [eC.FAVORITE_REPO]: (t, i, n) => {
@@ -929,7 +929,7 @@ export function $$ek0(e) {
         return r && n != null ? tf(t, n, favoriteSidebarSection, e => {
           t_(t, i, e, favoriteSidebarSection?.id !== e);
         }) : {
-          displayText: _$$t('tile.favoriting.add_to_favorites'),
+          displayText: getI18nString('tile.favoriting.add_to_favorites'),
           callback: () => t_(t, i, void 0, !0)
         };
       },
@@ -975,7 +975,7 @@ export function $$ek0(e) {
         });
       },
       [eC.FILE_ANALYTICS]: e => ({
-        displayText: _$$t('fullscreen.filename_view.file_analytics'),
+        displayText: getI18nString('fullscreen.filename_view.file_analytics'),
         callback: () => ts(e)
       })
     };
@@ -1005,7 +1005,7 @@ export function $$ek0(e) {
       [eC.DUPLICATE]: () => !!(e.tileActions.duplicate && g),
       [eC.DUPLICATE_TO_DRAFTS]: () => !!(e.tileActions.duplicateToDrafts && g),
       [eC.OPEN]: () => !!(e.tileActions.open && u),
-      [eC.OPEN_NEW_TAB]: () => !!(e.tileActions.openNewTab && u && !eD && !ce()),
+      [eC.OPEN_NEW_TAB]: () => !!(e.tileActions.openNewTab && u && !desktopAPIInstance && !ce()),
       [eC.PIN_FILE_TO_FOLDER]: () => {
         let t = tH?.canPin;
         return !!(e.tileActions.pinToFolder && !d && t1 === 1 && v && t);

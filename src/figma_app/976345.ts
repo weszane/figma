@@ -1,13 +1,13 @@
 import { getFeatureFlags } from "../905/601108";
-import { fm } from "../905/236856";
-import { sx } from "../905/449184";
+import { delay } from "../905/236856";
+import { trackEventAnalytics } from "../905/449184";
 import { dR } from "../905/508367";
-import { eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { Ay } from "../905/612521";
 import { P as _$$P } from "../905/724705";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { q_ } from "../figma_app/997907";
 import { nF } from "../905/350402";
@@ -16,7 +16,7 @@ import { Ce } from "../905/156213";
 import { e5, Mk } from "../figma_app/297957";
 import { uE, k1 } from "../figma_app/314264";
 import { d9 } from "../figma_app/740025";
-import { ck } from "../figma_app/469876";
+import { isIntegrationContext } from "../figma_app/469876";
 import { T as _$$T } from "../905/858738";
 import { M4 } from "../905/713695";
 import { N as _$$N } from "../905/696711";
@@ -50,7 +50,7 @@ let $$j18 = nF(e => {
     e.dispatch(os(t.data.meta));
     e.dispatch($$U23(t.data.meta));
   }).catch(t => {
-    let r = t.data?.message || _$$t("file_browser.file_browser_actions.error_on_data_update");
+    let r = t.data?.message || getI18nString("file_browser.file_browser_actions.error_on_data_update");
     e.dispatch(F.enqueue({
       error: !0,
       message: r
@@ -71,13 +71,13 @@ let $$B11 = nF((e, t) => {
     currentTeamId: t.workspace.teamId || null
   }, n);
   let a = !d9(r.selectedView) && d9(n);
-  if (eD && a) {
-    eD.openCommunity(i, t.workspace.userId);
+  if (desktopAPIInstance && a) {
+    desktopAPIInstance.openCommunity(i, t.workspace.userId);
     return;
   }
   function d() {
     let e = d9(r.selectedView) && !d9(n);
-    eD && e && Ay.redirect(dR(Np({
+    desktopAPIInstance && e && Ay.redirect(dR(Np({
       ...r,
       currentUserOrgId: t.workspace.orgId,
       currentTeamId: t.workspace.teamId || null
@@ -111,7 +111,7 @@ let $$B11 = nF((e, t) => {
     teamId: r.currentTeamId
   });
   (t.workspace.orgId && !i.includes(t.workspace.orgId) || t.workspace.teamId && !i.includes(t.workspace.teamId) || d9(n) && !t.workspace.orgId && r.currentUserOrgId) && Y9(t.workspace.userId, d9(n), t.workspace.orgId, void 0, t.workspace.teamId);
-  ck() ? _$$m({
+  isIntegrationContext() ? _$$m({
     action: "reloadPage",
     payload: {
       fuid: t.workspace.userId
@@ -130,14 +130,14 @@ let $$G26 = nF(e => {
     let n = `/app_auth/${r}/grant`;
     let i = e.getState().authedUsers.orderedIds;
     i.length > 0 && (n += `?authed_ids=${i.join(",")}`);
-    eD?.startAppAuth(n);
+    desktopAPIInstance?.startAppAuth(n);
     e.dispatch(F.enqueue({
-      message: _$$t("file_browser.file_browser_actions.desktop_go_to_your_browser")
+      message: getI18nString("file_browser.file_browser_actions.desktop_go_to_your_browser")
     }));
   }).catch(t => {
     console.error(t);
     e.dispatch(F.enqueue({
-      message: _$$t("file_browser.error_try_again"),
+      message: getI18nString("file_browser.error_try_again"),
       error: !0
     }));
   });
@@ -175,7 +175,7 @@ export function $$Y14() {
 let $$$7 = nF((e, {
   index: t
 }) => {
-  sx("Recent File Clicked", {
+  trackEventAnalytics("Recent File Clicked", {
     index: t
   }, {
     forwardToDatadog: !0
@@ -302,7 +302,7 @@ let $$et3 = nF((e, {
 let er = ["fullscreen", "prototype"];
 let en = [...gu, "desktopNewTab"];
 export function $$ei12(e, t) {
-  if (er.includes(e.view)); else if (en.includes(e.view)) return !0; else if (t && t.includes(e.view)) return !0;
+  if (er.includes(e.view)) ;else if (en.includes(e.view)) return !0;else if (t && t.includes(e.view)) return !0;
   return !1;
 }
 let ea = null;
@@ -317,7 +317,7 @@ export function $$el20() {
 }
 export var $$ed6 = (e => (e[e.DEFAULT = 2e3] = "DEFAULT", e[e.NONE = 0] = "NONE", e))($$ed6 || {});
 let $$ec2 = nF(async (e, t) => {
-  await fm(t.delay);
+  await delay(t.delay);
   $$ei12(e.getState().selectedView, t.additionalViewsToReload) ? Ay.reload(t.reason, t.metadata) : ea = {
     reason: t.reason,
     metadata: t.metadata,
@@ -334,11 +334,11 @@ let $$eu1 = nF((e, t) => {
   })) : e.dispatch($$ec2(t));
 });
 let ep = nF(async (e, t) => {
-  await fm(t.delay);
+  await delay(t.delay);
   Ay.redirect("/");
 });
 let $$e_0 = nF((e, t) => {
-  e.dispatch(_$$s.flash(_$$t("org_settings.mfa_for_members.member_flash")));
+  e.dispatch(_$$s.flash(getI18nString("org_settings.mfa_for_members.member_flash")));
   e.dispatch(ep(t));
 });
 export const C7 = $$e_0;
@@ -367,4 +367,4 @@ export const p5 = $$Q22;
 export const q0 = $$U23;
 export const qj = $$F24;
 export const rg = $$eo25;
-export const rq = $$G26; 
+export const rq = $$G26;

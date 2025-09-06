@@ -1,25 +1,80 @@
-import { Pj as _$$Pj, B5 as _$$B, S9 as _$$S, OX as _$$OX, bt as _$$bt } from "../905/111321";
-import { debugState } from "../905/407919";
-function a() {
-  return debugState;
+import type { PrimitiveAtom } from 'jotai'
+import { attachReducer, createActionAndReducer, createAtomWithRedux, createReduxSubscriptionAtom, setupReduxAtom } from '../905/111321'
+import { debugState } from '../905/407919'
+
+/**
+ * Returns the debug state.
+ * Original name: a
+ */
+function getDebugState() {
+  return debugState
 }
-export function $$s2(...e) {
-  return _$$Pj(a, ...e);
+
+type SetupReduxAtomArgs<T> = [
+  atomValue: PrimitiveAtom<T>,
+  actionType: string,
+  initialState?: T,
+]
+
+/**
+ * Sets up a Redux atom with the debug state.
+ * Original name: $$s2
+ * @param args - Arguments for setupReduxAtom
+ * @returns The result of setupReduxAtom
+ */
+export function setupReduxAtomWithState<T>(...args: SetupReduxAtomArgs<T>) {
+  return setupReduxAtom(getDebugState, ...args)
 }
-export function $$o0(...e) {
-  return _$$B(...e);
+
+type CreateAtomWithReduxArgs<T> = [
+  actionType: string,
+  initialValue: T,
+]
+/**
+ * Creates an action and reducer.
+ * Original name: $$o0
+ * @param args - Arguments for createActionAndReducer
+ * @returns The result of createActionAndReducer
+ */
+export function createActionAndReducerWrapper<T>(...args: CreateAtomWithReduxArgs<T>) {
+  return createActionAndReducer(...args)
 }
-export function $$l3(...e) {
-  return _$$S(...e);
+
+/**
+ * Attaches a reducer.
+ * Original name: $$l3
+ * @param args - Arguments for attachReducer
+ * @returns The result of attachReducer
+ */
+export function attachReducerWrapper(...args: [atom: any, reducer: (state: any, action: any) => any]) {
+  return attachReducer(...args)
 }
-export function $$d1(...e) {
-  return _$$OX(a, ...e);
+
+/**
+ * Creates an atom with Redux using the debug state.
+ * Original name: $$d1
+ * @param args - Arguments for createAtomWithRedux
+ * @returns The result of createAtomWithRedux
+ */
+export function createAtomWithReduxWithState(...args: [actionType: string, initialValue: any]) {
+  return createAtomWithRedux(getDebugState, ...args)
 }
-export function $$c4(e, t) {
-  return _$$bt(a, e, t);
+
+/**
+ * Creates a Redux subscription atom with the debug state.
+ * Original name: $$c4
+ * @param e - First argument
+ * @param t - Second argument
+ * @returns The result of createReduxSubscriptionAtom
+ */
+export function createReduxSubscriptionAtomWithState<T, S>(e: (state: S) => T, t: { notifyImmediate?: boolean } = {}) {
+  return createReduxSubscriptionAtom(getDebugState, e, t)
 }
-export const B5 = $$o0;
-export const OX = $$d1;
-export const Pj = $$s2;
-export const S9 = $$l3;
-export const bt = $$c4;
+
+// Aliases for backward compatibility or external use
+// Original names: B5 = $$o0, OX = $$d1, Pj = $$s2, S9 = $$l3, bt = $$c4
+export const B5 = createActionAndReducerWrapper
+export const OX = createAtomWithReduxWithState
+export const Pj = setupReduxAtomWithState
+export const S9 = attachReducerWrapper
+export const bt = createReduxSubscriptionAtomWithState

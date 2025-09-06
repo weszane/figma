@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { forwardRef, useRef, useId, useImperativeHandle } from "react";
 import { S } from "../905/274480";
 import { J } from "../905/270045";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { A } from "../905/567946";
 export let $$d0 = forwardRef(function ({}, e) {
   let t = useRef(null);
@@ -14,13 +14,13 @@ export let $$d0 = forwardRef(function ({}, e) {
     }
   }), []);
   return jsx(A, {
-    label: _$$t("community.publishing.prompt_visibility_checkbox.row_label"),
-    subLabel: _$$t("community.publishing.prompt_visibility_checkbox.description"),
+    label: getI18nString("community.publishing.prompt_visibility_checkbox.row_label"),
+    subLabel: getI18nString("community.publishing.prompt_visibility_checkbox.description"),
     subLabelId: d,
     children: jsx(S, {
       ref: t,
       label: jsx(J, {
-        children: tx("community.publishing.prompt_visibility_checkbox.label")
+        children: renderI18nText("community.publishing.prompt_visibility_checkbox.label")
       }),
       "aria-describedby": d,
       checked: !0,

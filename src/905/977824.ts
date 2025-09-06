@@ -1,7 +1,7 @@
 import { c2 } from "../905/382883";
 import { z7E, h3O } from "../figma_app/763686";
-import { sx } from "../905/449184";
-import { sn, Vq } from "../905/542194";
+import { trackEventAnalytics } from "../905/449184";
+import { globalPerfTimer, distributionAnalytics } from "../905/542194";
 import { debugState } from "../905/407919";
 import { N, B } from "../905/284094";
 import { mu } from "../figma_app/308685";
@@ -145,13 +145,13 @@ class p {
       eventName,
       sendToDataDogEveryMs
     } = m.CURSOR_CHAT;
-    sn.start(`${eventName}_${e}_${t}`);
+    globalPerfTimer.start(`${eventName}_${e}_${t}`);
     null === this._cursorChatLoggerTimerID && (this._cursorChatLoggerTimerID = setTimeout(() => {
-      let e = Vq.analyticsProperties(eventName);
-      sx(eventName, e, {
+      let e = distributionAnalytics.analyticsProperties(eventName);
+      trackEventAnalytics(eventName, e, {
         forwardToDatadog: !0
       });
-      Vq.reset(eventName);
+      distributionAnalytics.reset(eventName);
       this._cursorChatLoggerTimerID = null;
     }, sendToDataDogEveryMs));
     e in n && this.setInfoBySessionId({
@@ -278,7 +278,7 @@ let m = {
 };
 export function $$h1() {
   Object.entries(m).forEach(([e, t]) => {
-    Vq.create(t.eventName, t.bins);
+    distributionAnalytics.create(t.eventName, t.bins);
   });
   $$n0 = new p();
 }

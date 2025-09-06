@@ -1,7 +1,7 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { NC } from "../905/17179";
 import { Q } from "../905/150006";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { XHR } from "../905/910117";
 import { nF } from "../905/350402";
 let $$d5 = NC("RECENT_PROTOTYPE_UNMARK_VIEWED");
@@ -26,7 +26,7 @@ let $$u6 = nF((e, t) => {
     page_id: t.pageId
   }).then(i => {
     if (!i.data.meta) {
-      $D(_$$e.FRONTEND_PLATFORM, Error("prototype/view response missing data.meta"), {
+      reportError(_$$e.FRONTEND_PLATFORM, Error("prototype/view response missing data.meta"), {
         extra: {
           fileKey: t.fileKey,
           pageId: t.pageId,
@@ -39,7 +39,7 @@ let $$u6 = nF((e, t) => {
     e.dispatch($$h2({
       prototype: i.data.meta
     }));
-  }).catch(() => { });
+  }).catch(() => {});
 });
 let $$p12 = NC("PROTOTYPE_RESET_RECENTS");
 let m = NC("RECENT_PROTOTYPE_DELETE");
@@ -75,4 +75,4 @@ export const sM = $$w13;
 export const tl = $$c14;
 export const uh = $$y15;
 export const xY = $$C16;
-export const y3 = $$g17; 
+export const y3 = $$g17;

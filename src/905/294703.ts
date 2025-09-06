@@ -1,9 +1,9 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo, Fragment as _$$Fragment } from "react";
 import { c2 } from "../905/382883";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { r as _$$r } from "../905/520829";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { jM, CZ, L8 } from "../905/124270";
 import { GX } from "../905/171315";
 import { y as _$$y } from "../905/713563";
@@ -39,7 +39,7 @@ function N({
   onContextMenuCallback: o
 }) {
   let l = useDispatch();
-  let d = md(Q8);
+  let d = useAtomWithSubscription(Q8);
   let c = uF(e.model);
   let u = _$$G(c, a, e);
   let m = useCallback(t => {
@@ -87,10 +87,10 @@ function P({
     enabled: !!e.model.team_id
   });
   let i = data?.team?.name || "";
-  let r = i ? tx("search.preview_item.in_team", {
+  let r = i ? renderI18nText("search.preview_item.in_team", {
     teamName: i
   }) : null;
-  let a = tx("search.preview_item.num_files_in_project", {
+  let a = renderI18nText("search.preview_item.num_files_in_project", {
     fileCount: e.file_count
   });
   return jsx(_$$a, {
@@ -106,7 +106,7 @@ function D({
   onContextMenuCallback: o
 }) {
   let l = useDispatch();
-  let d = md(Q);
+  let d = useAtomWithSubscription(Q);
   let c = Xx(e.model);
   let u = _$$G(c, a, e);
   let m = useCallback(t => {
@@ -146,10 +146,10 @@ function L({
   teamResult: e
 }) {
   let t = useSelector(t => t.teams[e.model.id]);
-  let i = tx("search.preview_item.num_members_in_team", {
+  let i = renderI18nText("search.preview_item.num_members_in_team", {
     memberCount: e.member_count
   });
-  let r = t ? tx("search.preview_item.num_projects_in_team", {
+  let r = t ? renderI18nText("search.preview_item.num_projects_in_team", {
     projectCount: t.projects ?? 0
   }) : null;
   return jsx(_$$a, {
@@ -165,7 +165,7 @@ function $$j({
   onContextMenuCallback: o
 }) {
   let d = useDispatch();
-  let c = md(Q);
+  let c = useAtomWithSubscription(Q);
   let u = useSelector(e => e.currentUserOrgId || void 0);
   let m = useSelector(e => e.orgById);
   let h = hl(a.model, u);
@@ -202,7 +202,7 @@ function $$j({
     })]
   });
   return jsx(cr, {
-    breadcrumbElement: a.last_active_at ? tx("search.preview_item.active_from_now", {
+    breadcrumbElement: a.last_active_at ? renderI18nText("search.preview_item.active_from_now", {
       relativeTimeString: jsx(h1, {
         date: a.last_active_at,
         style: "narrow"
@@ -225,8 +225,8 @@ function V({
   path: i,
   showResultsForModelType: a
 }) {
-  let o = md(Q8);
-  let c = md(jM);
+  let o = useAtomWithSubscription(Q8);
+  let c = useAtomWithSubscription(jM);
   let u = a && c ? Xr(c) : null;
   let p = useCallback(t => {
     t.preventDefault();
@@ -264,15 +264,15 @@ function V({
   let h = useMemo(() => {
     switch (u) {
       case uH.FILES:
-        return _$$t("search.facet_preview_section.see_more_files");
+        return getI18nString("search.facet_preview_section.see_more_files");
       case uH.PROJECTS:
-        return _$$t("search.facet_preview_section.see_more_projects");
+        return getI18nString("search.facet_preview_section.see_more_projects");
       case uH.TEAMS:
-        return _$$t("search.facet_preview_section.see_more_teams");
+        return getI18nString("search.facet_preview_section.see_more_teams");
       case uH.USERS:
-        return _$$t("search.facet_preview_section.see_more_users");
+        return getI18nString("search.facet_preview_section.see_more_users");
       default:
-        return _$$t("search.preview_section.see_all_results");
+        return getI18nString("search.preview_section.see_all_results");
     }
   }, [u]);
   return jsx("div", {
@@ -295,12 +295,12 @@ export function $$z0({
   id: e,
   path: t
 }) {
-  let i = md(jM);
-  let b = md(ih);
-  let v = md(CZ);
-  let I = md(Yj);
-  let E = md(ic);
-  let x = md(Q);
+  let i = useAtomWithSubscription(jM);
+  let b = useAtomWithSubscription(ih);
+  let v = useAtomWithSubscription(CZ);
+  let I = useAtomWithSubscription(Yj);
+  let E = useAtomWithSubscription(ic);
+  let x = useAtomWithSubscription(Q);
   let S = Xr(i);
   let w = function () {
     let e = useDispatch();
@@ -311,7 +311,7 @@ export function $$z0({
       parameters: n
     });
     let a = useSelector(e => e.loadingState[r]);
-    let l = md(L8);
+    let l = useAtomWithSubscription(L8);
     a === _$$r.SUCCESS && t.queryId !== t.lastAckedQueryId && (t.parameters.query.length > 0 || l.length > 0) && (e(ej({
       lastAckedQueryId: t.queryId
     })), e(w2({
@@ -321,7 +321,7 @@ export function $$z0({
     })), vj.Session.trackClientResult(t, i));
     return a;
   }();
-  let C = md(sC);
+  let C = useAtomWithSubscription(sC);
   let T = _$$y("file_browser", C, !0);
   let k = useMemo(() => !w || w === _$$r.LOADING || !c2(b, v), [v, w, b]);
   let R = useMemo(() => {
@@ -334,7 +334,7 @@ export function $$z0({
   }, [I, E]);
   return GX(x) ? jsx("div", {
     className: G,
-    children: tx("search.error.max_query_length_exceeded")
+    children: renderI18nText("search.error.max_query_length_exceeded")
   }) : k ? jsx(_$$e, {
     numRows: 7
   }) : R ? jsxs(Fragment, {
@@ -345,9 +345,9 @@ export function $$z0({
         children: [hf(S), "\xa0", jsx("span", {
           children: x
         })]
-      }) : tx("search.empty_state.no_file_project_team_or_people_results", {
+      }) : renderI18nText("search.empty_state.no_file_project_team_or_people_results", {
         searchQuery: x
-      }) : tx("search.zero_state.empty_state")
+      }) : renderI18nText("search.zero_state.empty_state")
     }), jsx(V, {
       id: e,
       path: t,

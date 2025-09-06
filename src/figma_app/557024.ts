@@ -13,7 +13,7 @@ import { Rs } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t2, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { l as _$$l } from "../905/618243";
 import { Ce } from "../905/156213";
 import { fu } from "../figma_app/831799";
@@ -70,7 +70,7 @@ export function $$M0(e) {
     } = t.data;
     return (t.data.repo?.files || []).filter(e => repo && !Ns(e, repo)).map(e => ({
       ...e,
-      name: e._name || _$$t2("fullscreen.filename_view.title_placeholder")
+      name: e._name || getI18nString("fullscreen.filename_view.title_placeholder")
     }));
   }, [t, e]);
   let n = useMemo(() => {
@@ -129,17 +129,17 @@ function F() {
     switch (w.activeTab) {
       case "active":
         return {
-          emptyStateText: tx("collaboration.branching_modal.tab_active_empty_state"),
+          emptyStateText: renderI18nText("collaboration.branching_modal.tab_active_empty_state"),
           selectedBranches: "loaded" === U.status ? U.data.activeBranches : []
         };
       case "yours":
         return {
-          emptyStateText: tx("collaboration.branching_modal.tab_yours_empty_state"),
+          emptyStateText: renderI18nText("collaboration.branching_modal.tab_yours_empty_state"),
           selectedBranches: "loaded" === U.status ? U.data.ownBranches : []
         };
       case "archived":
         return {
-          emptyStateText: tx("collaboration.branching_modal.tab_archived_empty_state"),
+          emptyStateText: renderI18nText("collaboration.branching_modal.tab_archived_empty_state"),
           selectedBranches: "loaded" === U.status ? U.data.archivedBranches : []
         };
       default:
@@ -189,7 +189,7 @@ function F() {
       children: jsxs(vo, {
         children: [jsx(Y9, {
           children: jsx(hE, {
-            children: tx("collaboration.branching_modal.title")
+            children: renderI18nText("collaboration.branching_modal.title")
           })
         }), jsxs(nB, {
           padding: 0,
@@ -199,16 +199,16 @@ function F() {
               manager: w,
               children: [jsx(_$$t.Tab, {
                 ...m.active,
-                children: tx("collaboration.branching_modal.tab_active")
+                children: renderI18nText("collaboration.branching_modal.tab_active")
               }), jsx(_$$t.Tab, {
                 ...m.yours,
-                children: tx("collaboration.branching_modal.tab_yours")
+                children: renderI18nText("collaboration.branching_modal.tab_yours")
               }), jsx(_$$t.Tab, {
                 ...m.archived,
-                children: tx("collaboration.branching_modal.tab_archived")
+                children: renderI18nText("collaboration.branching_modal.tab_archived")
               }), W && jsx(jk, {
                 children: jsx(_$$K, {
-                  "aria-label": _$$t2("collaboration.branching_modal.create_branch_tooltip"),
+                  "aria-label": getI18nString("collaboration.branching_modal.create_branch_tooltip"),
                   onClick: () => {
                     k && e(_$$l({
                       trackingContextName: e0.FILE_BROWSER,
@@ -218,7 +218,7 @@ function F() {
                   },
                   htmlAttributes: {
                     "data-tooltip-type": Ib.TEXT,
-                    "data-tooltip": _$$t2("collaboration.branching_modal.create_branch_tooltip")
+                    "data-tooltip": getI18nString("collaboration.branching_modal.create_branch_tooltip")
                   },
                   children: jsx(_$$e, {})
                 })

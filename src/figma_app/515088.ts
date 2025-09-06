@@ -1,3 +1,3 @@
-import { eU } from "../figma_app/27355";
-export let $$n0 = eU({});
+import { atom } from "jotai";
+export let $$n0 = atom({});
 export const Y = $$n0;

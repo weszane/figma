@@ -10,9 +10,9 @@ import { R as _$$R } from "../905/256203";
 import { A as _$$A } from "../905/251970";
 import { S as _$$S } from "../5132/724052";
 import { getFeatureFlags } from "../905/601108";
-import { sx } from "../905/449184";
-import { eD } from "../figma_app/876459";
-import { R as _$$R2 } from "../905/103090";
+import { trackEventAnalytics } from "../905/449184";
+import { desktopAPIInstance } from "../figma_app/876459";
+import { selectWithShallowEqual } from "../905/103090";
 import { p as _$$p } from "../figma_app/288654";
 import { Us, Ph } from "../figma_app/637027";
 import { w4, Y8 } from "../905/445814";
@@ -20,7 +20,7 @@ import { kt } from "../figma_app/858013";
 import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { sx as _$$sx } from "../905/941192";
 import { h as _$$h, O as _$$O } from "../905/142086";
 import { Ce, to } from "../905/156213";
@@ -41,7 +41,7 @@ import { Y5, mO, kI, NU } from "../905/163189";
 import { ZN } from "../figma_app/630077";
 import { DV } from "../905/739964";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { uf, yA } from "../905/769";
 import { M4 } from "../905/713695";
 import { PdfConfirmationModal } from "../0c62c2fd/653470";
@@ -61,10 +61,10 @@ function q(e) {
   let x = M4.Folder.useValue(h).data;
   let [v, T] = useState(uf.IMPORTING_FILES);
   $$el6(v === uf.IMPORTING_FILES || v === uf.ATTACHING_BRANCH);
-  let I = x?.name || _$$t("file_browser.tool_bar.drafts");
-  let N = v === uf.SUCCESS ? _$$t("file_browser.file_import_view.imported_to_folder", {
+  let I = x?.name || getI18nString("file_browser.tool_bar.drafts");
+  let N = v === uf.SUCCESS ? getI18nString("file_browser.file_import_view.imported_to_folder", {
     folderName: I
-  }) : _$$t("file_browser.file_import_view.import_to_folder", {
+  }) : getI18nString("file_browser.file_import_view.import_to_folder", {
     folderName: I
   });
   let {
@@ -87,16 +87,16 @@ function q(e) {
           imageBacked: !0,
           testId: "loadingSpinner"
         });
-        i = tx("file_browser.file_import_view.repo.attaching_branch");
+        i = renderI18nText("file_browser.file_import_view.repo.attaching_branch");
         o = jsx("span", {
           className: _$$s.textBodyMedium.$,
-          children: tx("file_browser.file_import_view.to_continue_working", {
+          children: renderI18nText("file_browser.file_import_view.to_continue_working", {
             openANewTabLink: jsx(Us, {
               href: window.location.href,
               target: "_blank",
               trusted: !0,
               "data-testid": "openANewTabLink",
-              children: tx("file_browser.file_import_view.open_a_new_tab_link")
+              children: renderI18nText("file_browser.file_import_view.open_a_new_tab_link")
             })
           })
         });
@@ -104,12 +104,12 @@ function q(e) {
       case uf.SUCCESS:
         s = l.statusIcon;
         i = l.statusMessage;
-        t.importedFiles === t.totalFiles && (i = tx("file_browser.file_import_view.repo.success"));
+        t.importedFiles === t.totalFiles && (i = renderI18nText("file_browser.file_import_view.repo.success"));
         o = l.statusMessageSecondary;
         break;
       case uf.ERROR:
         s = jsx(_$$R, {});
-        i = tx("file_browser.file_import_view.repo.error");
+        i = renderI18nText("file_browser.file_import_view.repo.error");
         break;
       default:
         throwTypeError(e);
@@ -118,9 +118,9 @@ function q(e) {
       statusIcon: s,
       statusMessage: i,
       statusMessageSecondary: o
-    } : ($D(_$$e.SCENEGRAPH_AND_SYNC, Error("Missing status in repo import")), {
+    } : (reportError(_$$e.SCENEGRAPH_AND_SYNC, Error("Missing status in repo import")), {
       statusIcon: jsx(_$$R, {}),
-      statusMessage: tx("file_browser.file_import_view.repo.error"),
+      statusMessage: renderI18nText("file_browser.file_import_view.repo.error"),
       statusMessageSecondary: null
     });
   }(v, p, I);
@@ -194,7 +194,7 @@ export function $$Z0() {
   let e = useDispatch();
   let {
     fileImport
-  } = _$$R2(e => ({
+  } = selectWithShallowEqual(e => ({
     fileImport: e.fileImport
   }));
   let r = () => {
@@ -211,7 +211,7 @@ export function $$Z0() {
     switch (fileImport.step) {
       case Y5.CONFIRM_PDF_IMPORT:
         return jsx(PdfConfirmationModal, {
-          fileImportDescription: tx("file_browser.file_import_view.select_pdf_source_description", {
+          fileImportDescription: renderI18nText("file_browser.file_import_view.select_pdf_source_description", {
             pdfCount: $$es3(fileImport).pdfCount
           }),
           onConfirm: t => {
@@ -266,10 +266,10 @@ export function $$ee2({
   let b = Gi(h);
   let v = _$$K(_);
   $$el6(!g);
-  let y = h?.name || _$$t("file_browser.tool_bar.drafts");
-  let j = g ? _$$t("file_browser.file_import_view.imported_to_folder", {
+  let y = h?.name || getI18nString("file_browser.tool_bar.drafts");
+  let j = g ? getI18nString("file_browser.file_import_view.imported_to_folder", {
     folderName: y
-  }) : _$$t("file_browser.file_import_view.import_to_folder", {
+  }) : getI18nString("file_browser.file_import_view.import_to_folder", {
     folderName: y
   });
   let {
@@ -379,7 +379,7 @@ export function $$et4({
     htmlAttributes: {
       "data-testid": "cancelButton"
     },
-    children: tx("file_browser.file_import_view.cancel")
+    children: renderI18nText("file_browser.file_import_view.cancel")
   }, "cancelButton")];
   if (t.failedOnFileLimit) return [jsx($z, {
     variant: "primary",
@@ -402,7 +402,7 @@ export function $$et4({
     htmlAttributes: {
       "data-testid": "nextButton"
     },
-    children: tx("file_browser.file_import_view.next")
+    children: renderI18nText("file_browser.file_import_view.next")
   }, "nextButton")];
   let m = [(u = o ? "secondary" : "primary", jsx($z, {
     variant: u,
@@ -410,7 +410,7 @@ export function $$et4({
     htmlAttributes: {
       "data-testid": "doneButton"
     },
-    children: tx("file_browser.file_import_view.done")
+    children: renderI18nText("file_browser.file_import_view.done")
   }, "doneButton"))];
   o && m.push(function ({
     onMoveToProject: e,
@@ -422,7 +422,7 @@ export function $$et4({
       variant: "primary",
       onClick: () => {
         e();
-        sx("file_import.move_to_project.button_clicked", {
+        trackEventAnalytics("file_import.move_to_project.button_clicked", {
           numFiles: r.importedFiles
         });
         1 === t.length && t[0] ? _$$h(t[0], null, s, void 0, void 0, void 0, !0) : _$$O(t, [], s, !0);
@@ -430,7 +430,7 @@ export function $$et4({
       htmlAttributes: {
         "data-testid": "moveToProjectButton"
       },
-      children: tx("file_browser.file_import_view.move_to_project")
+      children: renderI18nText("file_browser.file_import_view.move_to_project")
     }, "moveToProjectButton");
   }({
     onMoveToProject: l,
@@ -446,7 +446,7 @@ export function $$er5(e, t, r) {
   let n = null;
   e ? t.importedFiles === t.totalFiles ? (i = jsx("div", {
     className: _$$s.fontSemiBold.inline.$,
-    children: tx("file_browser.file_import_view.file_import_all_succeeded", {
+    children: renderI18nText("file_browser.file_import_view.file_import_all_succeeded", {
       totalFiles: t.totalFiles,
       folder: r
     })
@@ -454,28 +454,28 @@ export function $$er5(e, t, r) {
     "data-testid": "checkIcon"
   })) : (i = jsx("div", {
     className: _$$s.fontSemiBold.inline.$,
-    children: tx("file_browser.file_import_view.file_import_progress_to_folder", {
+    children: renderI18nText("file_browser.file_import_view.file_import_progress_to_folder", {
       importedFiles: t.importedFiles,
       totalFiles: t.totalFiles,
       folder: r
     })
   }), s = jsx(_$$R, {
     "data-testid": "warningIcon"
-  }), t.canceledFiles > 0 && (n = tx("file_browser.file_import_view.file_import_cancel"))) : (s = jsx(kt, {
+  }), t.canceledFiles > 0 && (n = renderI18nText("file_browser.file_import_view.file_import_cancel"))) : (s = jsx(kt, {
     imageBacked: !0,
     testId: "loadingSpinner"
-  }), i = tx("file_browser.file_import_view.file_import_progress", {
+  }), i = renderI18nText("file_browser.file_import_view.file_import_progress", {
     processedFiles: t.processedFiles,
     totalFiles: t.totalFiles
   }), n = jsx("span", {
     className: _$$s.textBodyMedium.$,
-    children: tx("file_browser.file_import_view.to_continue_working", {
+    children: renderI18nText("file_browser.file_import_view.to_continue_working", {
       openANewTabLink: jsx(Us, {
         href: window.location.href,
         target: "_blank",
         trusted: !0,
         "data-testid": "openANewTabLink",
-        children: tx("file_browser.file_import_view.open_a_new_tab_link")
+        children: renderI18nText("file_browser.file_import_view.open_a_new_tab_link")
       })
     })
   }));
@@ -546,7 +546,7 @@ export function $$ei1(e) {
     file
   } = e;
   let r = null;
-  file.status === mO.CANCELED ? r = tx("file_browser.file_import_view.file_row_import_cancel") : file.message && (r = Array.isArray(file.message) ? file.message.map((e, t) => jsx("div", {
+  file.status === mO.CANCELED ? r = renderI18nText("file_browser.file_import_view.file_row_import_cancel") : file.message && (r = Array.isArray(file.message) ? file.message.map((e, t) => jsx("div", {
     children: e
   }, t)) : file.message);
   return jsx(eo, {
@@ -642,9 +642,9 @@ export function $$el6(e) {
   let t = useCallback(e => {
     e.preventDefault();
   }, []);
-  useEffect(() => (e && (window.addEventListener("beforeunload", t), eD?.setIsImporting(!0)), () => {
+  useEffect(() => (e && (window.addEventListener("beforeunload", t), desktopAPIInstance?.setIsImporting(!0)), () => {
     window.removeEventListener("beforeunload", t);
-    eD?.setIsImporting(!1);
+    desktopAPIInstance?.setIsImporting(!1);
   }), [e, t]);
 }
 export const FileImportModal = $$Z0;

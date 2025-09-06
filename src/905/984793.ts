@@ -3,7 +3,7 @@ import { forwardRef, useRef, useCallback, useMemo } from "react";
 import { qE } from "../figma_app/492908";
 import { i as _$$i } from "../905/97346";
 import { getFeatureFlags } from "../905/601108";
-import { Xr, fp } from "../figma_app/27355";
+import { Xr, useAtomValueAndSetter } from "../figma_app/27355";
 import d from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
 import { Zu, $y, Jy } from "../905/708651";
@@ -77,7 +77,7 @@ function b() {
   }];
 }
 export function $$v0() {
-  let [e, t] = fp(X);
+  let [e, t] = useAtomValueAndSetter(X);
   let i = useRef(0);
   let [d, c] = b();
   let [, p] = _$$i({
@@ -112,7 +112,7 @@ export function $$v0() {
 export function $$I1({
   modeID: e
 }) {
-  let [t, i] = fp(X);
+  let [t, i] = useAtomValueAndSetter(X);
   let d = useRef(0);
   let [c, p] = b();
   let [, m] = _$$i({

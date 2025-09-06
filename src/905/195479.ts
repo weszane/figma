@@ -9,7 +9,7 @@ import { j } from "../905/813868";
 import { U } from "../905/424668";
 import { M } from "../905/994901";
 import { KJ, LU } from "../figma_app/916560";
-import { nl } from "../figma_app/257275";
+import { isInteractionPathCheck } from "../figma_app/897289";
 async function m(e, t) {
   let {
     widgetNodeID,
@@ -175,7 +175,7 @@ export function $$w0(e, t, i) {
     a = e;
   }
   let s = a.map(e => function (e) {
-    if (nl() && e.includes("figmainteractiontest")) {
+    if (isInteractionPathCheck() && e.includes("figmainteractiontest")) {
       let e = {
         pluginID: "TEST_PASTE_URL_TO_WIDGET",
         widgetName: "TestWidget"
@@ -241,8 +241,8 @@ export function $$w0(e, t, i) {
     urls: a
   }) => {
     let s = function (e, t, i, r, a) {
-      let s = isLocalCluster() && !nl();
-      let o = nl() && !i.includes("paste_with_version_check");
+      let s = isLocalCluster() && !isInteractionPathCheck();
+      let o = isInteractionPathCheck() && !i.includes("paste_with_version_check");
       if (s || o) {
         let {
           widgetNodeID

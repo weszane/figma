@@ -14,8 +14,8 @@ import { ud } from "../figma_app/681697";
 import { useCallback } from "react";
 import { lQ } from "../905/934246";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { $D } from "../905/11";
-import { t as _$$t } from "../905/303541";
+import { reportError } from "../905/11";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { tc } from "../905/15667";
 import { E as _$$E } from "../figma_app/61705";
@@ -161,14 +161,14 @@ export function $$R0({
               }) {
                 let o = Ci(t);
                 if (!o) {
-                  $D(_$$e.MONETIZATION_UPGRADES, Error("Editor type has no corresponding license type for file creation upgrade flow"), {
+                  reportError(_$$e.MONETIZATION_UPGRADES, Error("Editor type has no corresponding license type for file creation upgrade flow"), {
                     extra: {
                       editorType: t,
                       fileCreationOptionState: r
                     }
                   });
                   n(F.enqueue({
-                    message: _$$t("general.an_error_occurred"),
+                    message: getI18nString("general.an_error_occurred"),
                     error: !0
                   }));
                   return;

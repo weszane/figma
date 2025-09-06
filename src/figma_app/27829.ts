@@ -1,8 +1,8 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useLayoutEffect } from "react";
-import { eU, md } from "../figma_app/27355";
+import { atom, useAtomWithSubscription } from "../figma_app/27355";
 import { M } from "../905/28866";
-import { Lg } from "../figma_app/257275";
+import { getFalseValue } from "../figma_app/897289";
 export function $$l1(e) {
   d(document.getElementById(e));
 }
@@ -12,7 +12,7 @@ function d(e) {
 export function $$c2(e, t, r) {
   let a = document.getElementById(e);
   if (!a) {
-    Lg() || console.warn("Expected to find DOM element to snapshot:  " + e);
+    getFalseValue() || console.warn("Expected to find DOM element to snapshot:  " + e);
     return () => null;
   }
   let s = a.cloneNode(!0);
@@ -22,7 +22,7 @@ export function $$c2(e, t, r) {
     l = null;
   };
   let c = r;
-  return function() {
+  return function () {
     let e = useRef(null);
     useLayoutEffect(() => {
       e.current && (e.current.appendChild(s), c?.(s), c = null);
@@ -73,21 +73,21 @@ class u {
   }
 }
 export function $$p0(e, t) {
-  let r = eU("pending");
+  let r = atom("pending");
   r.debugLabel = `${t}:LoadingPageStatus`;
   let o = new u(t => {
     e.set(r, t);
   });
   return {
     addDependency: o.add,
-    useIsLoading: function() {
-      return "pending" === md(r);
+    useIsLoading: function () {
+      return "pending" === useAtomWithSubscription(r);
     },
-    LoadablePage: function(e, t, l) {
+    LoadablePage: function (e, t, l) {
       let d = !1;
       function c(s) {
         d || (d = !0, o.add("LoadablePage", "resolved"));
-        let c = "pending" !== md(r);
+        let c = "pending" !== useAtomWithSubscription(r);
         useLayoutEffect(() => {
           l?.();
         }, []);
@@ -104,4 +104,4 @@ export function $$p0(e, t) {
 }
 export const QH = $$p0;
 export const Ze = $$l1;
-export const h8 = $$c2; 
+export const h8 = $$c2;

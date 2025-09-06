@@ -1,19 +1,19 @@
 import n, { glU, NLJ } from "../figma_app/763686";
 import { EP, x7 } from "../905/871411";
 import a, { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
-import { f as _$$f } from "../905/842794";
-import { yQ } from "../905/236856";
+import { atomStoreManager } from "../figma_app/27355";
+import { handleOptimistTransaction } from "../905/842794";
+import { waitForAnimationFrame } from "../905/236856";
 import { NC } from "../905/17179";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { L4, I as _$$I, cs, Rc, H3, Kx, B2, _Z } from "../figma_app/819288";
 import { uD, $f, Kh } from "../905/403166";
 import { WB } from "../905/761735";
-import { kF, us } from "../905/11";
-import { Lo } from "../905/714362";
+import { setSentryTag, captureMessage } from "../905/11";
+import { logInfo } from "../905/714362";
 import { XHR } from "../905/910117";
 import { s as _$$s, Q } from "../905/573154";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
 import { F as _$$F } from "../905/302958";
 import { nF } from "../905/350402";
@@ -44,7 +44,7 @@ export async function $$U4(e, t, r, n, i) {
       forceMention: t,
       onCommentValidationFailure: void 0
     }));
-  }).catch(() => { });
+  }).catch(() => {});
 }
 export async function $$B31(e, t, r, n, i, a, s, o) {
   return await G(a.messageMeta, t, r, n, i).then(r => {
@@ -101,7 +101,7 @@ let $$V16 = nF((e, t) => {
     comment
   } = t;
   receiptsAPI.markAsUnread(comment.id).catch(t => {
-    let r = _$$t("comments.an_error_occurred_while_marking_a_comment_as_unread");
+    let r = getI18nString("comments.an_error_occurred_while_marking_a_comment_as_unread");
     try {
       t = JSON.parse(t);
       e.dispatch(_$$s.error(J(t, r)));
@@ -116,7 +116,7 @@ let $$H2 = nF((e, t) => {
     thread
   } = t;
   receiptsAPI.markAsRead(thread.comments.map(e => e.id)).catch(t => {
-    let r = _$$t("comments.an_error_occurred_while_marking_a_comment_as_read");
+    let r = getI18nString("comments.an_error_occurred_while_marking_a_comment_as_read");
     try {
       t = JSON.parse(t);
       e.dispatch(_$$s.error(J(t, r)));
@@ -131,7 +131,7 @@ let $$z21 = nF((e, t) => {
     canvasMentionReceiptsAPI
   } = t;
   commentReceiptsAPI.markAllAsRead().catch(t => {
-    let r = _$$t("comments.an_error_occurred_while_marking_a_comment_as_read");
+    let r = getI18nString("comments.an_error_occurred_while_marking_a_comment_as_read");
     try {
       t = JSON.parse(t);
       e.dispatch(_$$s.error(J(t, r)));
@@ -140,7 +140,7 @@ let $$z21 = nF((e, t) => {
     }
   });
   canvasMentionReceiptsAPI.markAllAsRead().catch(t => {
-    let r = _$$t("whiteboard.an_error_occurred_while_marking_a_canvas_mention_as_read");
+    let r = getI18nString("whiteboard.an_error_occurred_while_marking_a_canvas_mention_as_read");
     try {
       t = JSON.parse(t);
       e.dispatch(_$$s.error(J(t, r)));
@@ -156,7 +156,7 @@ nF((e, t) => {
     emoji
   } = t;
   let a = reactionsApi.removeReaction(id, emoji);
-  let s = _$$t("comments.an_error_occurred_while_removing_a_comment_reaction");
+  let s = getI18nString("comments.an_error_occurred_while_removing_a_comment_reaction");
   e.dispatch(Q({
     promise: a,
     fallbackError: s
@@ -174,7 +174,7 @@ nF((e, t) => {
     selectedView: r.selectedView.view,
     quickReply: !1
   });
-  let o = _$$t("comments.an_error_occurred_while_adding_a_comment_reaction");
+  let o = getI18nString("comments.an_error_occurred_while_adding_a_comment_reaction");
   e.dispatch(Q({
     promise: s,
     fallbackError: o
@@ -195,7 +195,7 @@ let $$W58 = nF((e, t) => {
     selectedView: a.selectedView.view,
     quickReply: t.quickReply
   });
-  let o = _$$t("comments.an_error_occurred_while_toggling_a_comment_reaction");
+  let o = getI18nString("comments.an_error_occurred_while_toggling_a_comment_reaction");
   e.dispatch(Q({
     promise: s,
     fallbackError: o
@@ -213,7 +213,7 @@ let $$K10 = nF((e, t) => {
     parent_id
   } = n;
   let d = XHR.del(`/api/file/${key}/comments/${id}`);
-  let u = _$$t("comments.an_error_occurred_while_deleting_this_comment");
+  let u = getI18nString("comments.an_error_occurred_while_deleting_this_comment");
   e.dispatch(Q({
     promise: d,
     fallbackError: u
@@ -228,11 +228,11 @@ let $$K10 = nF((e, t) => {
       [id]: null
     }
   }, d);
-  sx("Livegraph Optimistic Comment Update", {
+  trackEventAnalytics("Livegraph Optimistic Comment Update", {
     flow: "setDeleted",
     isOptimistic: !!uuid
   });
-  _$$f(r, e.dispatch, $$ez57({
+  handleOptimistTransaction(r, e.dispatch, $$ez57({
     comment: {
       id,
       parent_id
@@ -248,9 +248,9 @@ let $$Y34 = nF((e, {
   resolved: i
 }) => {
   let o = e.getState();
-  if (i && o.comments.activeThread?.id === r && !o.comments.showResolved && e.dispatch($$ea23()), i && zl.set(_$$R, !1), getFeatureFlags().comments_undo_resolve && i) {
+  if (i && o.comments.activeThread?.id === r && !o.comments.showResolved && e.dispatch($$ea23()), i && atomStoreManager.set(_$$R, !1), getFeatureFlags().comments_undo_resolve && i) {
     let i = {
-      text: _$$t("comments.undo"),
+      text: getI18nString("comments.undo"),
       action: () => {
         e.dispatch($$Y34({
           thread: {
@@ -263,15 +263,15 @@ let $$Y34 = nF((e, {
       }
     };
     e.dispatch(_$$F.enqueue({
-      message: _$$t("comments.comment_resolved"),
+      message: getI18nString("comments.comment_resolved"),
       type: "comment-resolved",
       button: i,
-      onDismiss: () => { }
+      onDismiss: () => {}
     }));
   }
   _$$O.remove(r);
   let l = i ? "true" : "false";
-  let d = i ? _$$t("comments.an_error_occurred_while_resolving_this_comment") : _$$t("comments.an_error_occurred_while_unresolving_this_comment");
+  let d = i ? getI18nString("comments.an_error_occurred_while_resolving_this_comment") : getI18nString("comments.an_error_occurred_while_unresolving_this_comment");
   if (n && L4(r)) {
     let r = WB().getIdFromUuid("Comment", n).then(r => {
       let n = XHR.put(`/api/file/${t}/comments/${r}`, {
@@ -291,7 +291,7 @@ let $$Y34 = nF((e, {
         }
       }
     }, r);
-    sx("Livegraph Optimistic Comment Update", {
+    trackEventAnalytics("Livegraph Optimistic Comment Update", {
       flow: "setResolvedUsingGetIdFromUUID",
       isOptimistic: !0
     });
@@ -317,7 +317,7 @@ let $$Y34 = nF((e, {
         }
       }
     }, a);
-    sx("Livegraph Optimistic Comment Update", {
+    trackEventAnalytics("Livegraph Optimistic Comment Update", {
       flow: "setResolved",
       isOptimistic: !!n
     });
@@ -334,16 +334,16 @@ let $$$33 = nF((e, {
   let a;
   n && L4(r) ? (a = WB().getIdFromUuid("Comment", n).then(e => XHR.put(`/api/file/${t}/comments/${e}`, {
     client_meta: i
-  })), sx("Livegraph Optimistic Comment Update", {
+  })), trackEventAnalytics("Livegraph Optimistic Comment Update", {
     flow: "setClientMetaWithGetIdFromUUID",
     isOptimistic: !0
   })) : (a = XHR.put(`/api/file/${t}/comments/${r}`, {
     client_meta: i
-  }), sx("Livegraph Optimistic Comment Update", {
+  }), trackEventAnalytics("Livegraph Optimistic Comment Update", {
     flow: "setClientMeta",
     isOptimistic: !!n
   }));
-  let s = _$$t("comments.an_error_occurred_while_moving_this_comment");
+  let s = getI18nString("comments.an_error_occurred_while_moving_this_comment");
   e.dispatch(Q({
     promise: a,
     fallbackError: s
@@ -409,7 +409,7 @@ let $$q27 = nF((e, t) => {
       messageMeta: t.messageMeta
     });
   });
-  let a = _$$t("comments.an_error_occurred_while_editing_this_comment");
+  let a = getI18nString("comments.an_error_occurred_while_editing_this_comment");
   e.dispatch(Q({
     promise: i,
     fallbackError: a
@@ -431,7 +431,7 @@ let $$q27 = nF((e, t) => {
         messageMetaStylized: o
       }
     }
-  }, i), sx("Livegraph Optimistic Comment Update", {
+  }, i), trackEventAnalytics("Livegraph Optimistic Comment Update", {
     flow: "updateCommentContent",
     isOptimistic: !!s
   }), t.attachmentUpdates) {
@@ -466,7 +466,7 @@ let $$J3 = nF(async (e, t) => {
   a.client_meta?.page_id && "communityHub" === s.selectedView.view && (d !== s.selectedView.commentThreadId && e.dispatch(sf({
     ...s.selectedView,
     commentThreadId: d
-  })), s.selectedView.commentThreadId && sx("Comment Thread Read", {
+  })), s.selectedView.commentThreadId && trackEventAnalytics("Comment Thread Read", {
     commentThreadId: d,
     threadType: "community_preview"
   }));
@@ -478,7 +478,7 @@ let $$J3 = nF(async (e, t) => {
   t.thread.comments.some(e => e.isUnread) && t.receiptsAPI && !t.thread.isPendingFromSinatra && !t.thread.isCanvasMention && (e.dispatch($$H2({
     receiptsAPI: t.receiptsAPI,
     thread: t.thread
-  })), sx("Comment Thread Read", {
+  })), trackEventAnalytics("Comment Thread Read", {
     commentThreadId: d
   }));
   "fullscreen" === s.selectedView.view && glU.setActiveCommentAnchorData({
@@ -509,7 +509,7 @@ let $$Z38 = nF((e, t) => {
   let g = r.mirror?.appModel?.currentPage;
   let f = !1;
   h && (f = g !== h, m.push(setCurrentPageIdAsync(h).then(async () => {
-    f && (await yQ());
+    f && (await waitForAnimationFrame());
   })));
   let E = r.mirror.appModel.currentTool === NLJ.COMMENTS;
   if (!isOrphanedComment && config.repositionViewportOnCommentSelection) {
@@ -523,7 +523,7 @@ let $$Z38 = nF((e, t) => {
 });
 let $$Q29 = nF((e, t) => {
   let r = e.getState();
-  r.comments.activeThread?.id === t.thread.id ? e.dispatch($$ea23()) : (t.skipDeactivatingExistingActiveComment || e.dispatch($$ea23()), H3(r.comments) && (e.dispatch($$J3(t)), zl.set(_$$m, null)));
+  r.comments.activeThread?.id === t.thread.id ? e.dispatch($$ea23()) : (t.skipDeactivatingExistingActiveComment || e.dispatch($$ea23()), H3(r.comments) && (e.dispatch($$J3(t)), atomStoreManager.set(_$$m, null)));
 });
 let $$ee45 = NC("COMMENTS_STOP_EDITING");
 let $$et32 = NC("COMMENTS_SUBMIT_REPLY");
@@ -566,7 +566,7 @@ let $$er40 = nF((e, t) => {
       message: data.message.warning_message
     })), data.message && data.message.is_new_file_follower) {
       let t = commentsConfiguration.showNotificationSettings ? {
-        text: _$$t("comments.manage"),
+        text: getI18nString("comments.manage"),
         action: () => {
           let t = e.getState();
           e.dispatch($$ea23());
@@ -578,10 +578,10 @@ let $$er40 = nF((e, t) => {
         }
       } : void 0;
       e.dispatch(_$$F.enqueue({
-        message: _$$t("comments.you_will_be_notified_about_replies"),
+        message: getI18nString("comments.you_will_be_notified_about_replies"),
         type: "comments-opted-in",
         button: t,
-        onDismiss: () => { }
+        onDismiss: () => {}
       }));
     }
     let o = data.meta;
@@ -605,7 +605,7 @@ let $$er40 = nF((e, t) => {
   }).catch(r => {
     let n = r.data?.reason?.failure_info;
     if (r.data?.reason?.reason !== "comment_validation_failure" || void 0 === n || !t.onCommentValidationFailure || t.forceMention || t.forceWithInvite) {
-      let n = J(r, _$$t("comments.an_error_occurred"));
+      let n = J(r, getI18nString("comments.an_error_occurred"));
       e.dispatch(_$$s.error(n));
       e.dispatch($$eO47({
         threadId: t.threadId,
@@ -631,7 +631,7 @@ let $$er40 = nF((e, t) => {
 });
 let $$en39 = NC("COMMENTS_SUBMIT_NEW_COMMENT");
 let $$ei26 = nF((e, t) => {
-  sx("New comment starting dispatched action", {
+  trackEventAnalytics("New comment starting dispatched action", {
     uuid: t.uuid
   });
   let r = e.getState();
@@ -658,7 +658,7 @@ let $$ei26 = nF((e, t) => {
     messageMeta,
     attachments
   } = o;
-  sx("New comment creating promise", {
+  trackEventAnalytics("New comment creating promise", {
     uuid: t.uuid
   });
   let [I, S] = t.commentsWriteApi.create({
@@ -690,13 +690,13 @@ let $$ei26 = nF((e, t) => {
           resetStatusOnly: !0
         }));
         let t = {
-          text: _$$t("comments.view"),
+          text: getI18nString("comments.view"),
           action(t, r) {
             if (e.getState().comments.activeThread?.id === hm && e.getState().comments.newComment.messageMeta.length > 0) {
               e.dispatch(eA());
               e.dispatch(_$$F.update({
                 id: r,
-                message: _$$t("comments.finish_or_clear_your_active_comment_then_hit_view")
+                message: getI18nString("comments.finish_or_clear_your_active_comment_then_hit_view")
               }));
               return !1;
             }
@@ -707,8 +707,8 @@ let $$ei26 = nF((e, t) => {
         e.dispatch(_$$F.enqueue({
           type: `comment-creation-failure: ${S}`,
           error: !1,
-          message: _$$t("comments.oops_one_of_your_comments_never_posted"),
-          onDismiss: () => { },
+          message: getI18nString("comments.oops_one_of_your_comments_never_posted"),
+          onDismiss: () => {},
           button: t,
           timeoutOverride: 1 / 0
         }));
@@ -724,7 +724,7 @@ let $$ei26 = nF((e, t) => {
   }));
   e.dispatch($$en39(t));
   return I.then(p => {
-    if (sx("New comment promise resolved", {
+    if (trackEventAnalytics("New comment promise resolved", {
       uuid: t.uuid
     }), !p) return;
     let {
@@ -736,7 +736,7 @@ let $$ei26 = nF((e, t) => {
       message: data.message.warning_message
     })), data.message && data.message.is_new_file_follower) {
       let r = t.commentsConfiguration.showNotificationSettings ? {
-        text: _$$t("comments.manage"),
+        text: getI18nString("comments.manage"),
         action: () => {
           let t = e.getState();
           e.dispatch($$ea23({
@@ -750,14 +750,14 @@ let $$ei26 = nF((e, t) => {
         }
       } : void 0;
       e.dispatch(_$$F.enqueue({
-        message: _$$t("comments.you_will_be_notified_about_replies"),
+        message: getI18nString("comments.you_will_be_notified_about_replies"),
         type: "comments-opted-in",
         button: r,
-        onDismiss: () => { }
+        onDismiss: () => {}
       }));
     }
     let g = data.meta;
-    zl.set(WE, g.id);
+    atomStoreManager.set(WE, g.id);
     let f = e.getState().comments.newComment !== o;
     e.dispatch($$ew1({
       resetStatusOnly: f
@@ -789,12 +789,12 @@ let $$ei26 = nF((e, t) => {
       resetStatusOnly: !0
     })), !(r?.data?.status >= 400 && r?.data?.status < 500 && r?.data?.message)) return e.dispatch(_$$F.enqueue({
       type: `comment-creation-failure: ${S}`,
-      message: _$$t("comments.couldn_t_post_your_comment"),
+      message: getI18nString("comments.couldn_t_post_your_comment"),
       error: !0,
       button: {
-        text: _$$t("comments.retry"),
+        text: getI18nString("comments.retry"),
         action() {
-          sx("New comment dispatching retry submission", {
+          trackEventAnalytics("New comment dispatching retry submission", {
             uuid: t.uuid
           });
           e.dispatch($$ei26({
@@ -842,7 +842,7 @@ let $$ea23 = nF((e, t) => {
   }), "communityHub" === r.selectedView.view && e.dispatch(sf({
     ...r.selectedView,
     commentThreadId: void 0
-  })), zl.set(_$$R, !1), e.dispatch($$eK30()), e.dispatch($$eY36()), e.dispatch($$ew1({
+  })), atomStoreManager.set(_$$R, !1), e.dispatch($$eK30()), e.dispatch($$eY36()), e.dispatch($$ew1({
     resetStatusOnly: !1
   })), r.tooltip && e.dispatch(jD()), !0);
 });
@@ -891,7 +891,7 @@ let $$eg8 = NC("COMMENTS_SET_ACTIVE");
 let $$ef17 = nF(e => {
   let t = e.getState();
   let r = t.selectedView;
-  "subView" in r && ("hubFile" === r.subView || "plugin" === r.subView) && sx("at_mention_search_started", {
+  "subView" in r && ("hubFile" === r.subView || "plugin" === r.subView) && trackEventAnalytics("at_mention_search_started", {
     comment_type: t.comments.activeThread?.id ? "community_pinned" : "community_general",
     profile_id: t.user?.community_profile_id,
     resource_id: "hubFile" === r.subView ? r.hubFileId : r.publishedPluginId,
@@ -910,14 +910,14 @@ let eS = nF((e, t) => {
   if (i && i.discardAttempts === B2) {
     let e = _Z(i.reply.messageMeta);
     let t = Kx(i.reply.messageMeta);
-    Lo("Comment discard active thread attempt", "comment info", {
+    logInfo("Comment discard active thread attempt", "comment info", {
       threadId: n,
       messageLength: e.length,
       isMessageDiscardable: t
     });
-    kF("isMessageDiscardable", String(t));
-    kF("messageType", "reply");
-    us("User attempted to close comments more than max attempt times");
+    setSentryTag("isMessageDiscardable", String(t));
+    setSentryTag("messageType", "reply");
+    captureMessage("User attempted to close comments more than max attempt times");
   }
   e.dispatch($$eI49(t));
 });
@@ -927,13 +927,13 @@ let eA = nF(e => {
   if (t.discardAttempt === B2) {
     let e = _Z(t.messageMeta);
     let r = Kx(t.messageMeta);
-    Lo("Comment discard new comment attempt", "comment info", {
+    logInfo("Comment discard new comment attempt", "comment info", {
       messageLength: e.length,
       isMessageDiscardable: r
     });
-    kF("isMessageDiscardable", String(r));
-    kF("messageType", "new");
-    us("User attempted to close comments more than max attempt times");
+    setSentryTag("isMessageDiscardable", String(r));
+    setSentryTag("messageType", "new");
+    captureMessage("User attempted to close comments more than max attempt times");
   }
   e.dispatch($$ev55());
 });
@@ -966,7 +966,7 @@ let eW = nF((e, t) => {
     if (comment.parent_id) {
       let e = n.comments.threads[comment.parent_id];
       if (e && e.state === EB.BUSY) {
-        let n = !function(e, t) {
+        let n = !function (e, t) {
           if (!e) return !t;
           if (!t) return !e;
           if (e.length !== t.length) return !1;
@@ -1055,4 +1055,4 @@ export const wg = $$e_54;
 export const xH = $$ev55;
 export const y3 = $$eV56;
 export const yH = $$ez57;
-export const z$ = $$W58; 
+export const z$ = $$W58;

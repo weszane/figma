@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 export function $$a1({
   disabled: e,
   libraryIdentifier: t,
@@ -7,7 +7,7 @@ export function $$a1({
   viewFile: a
 }) {
   return useCallback(() => {
-    !e && t && (a(t), sx("Library File Expanded", {
+    !e && t && (a(t), trackEventAnalytics("Library File Expanded", {
       fileName: i
     }));
   }, [e, a, t, i]);
@@ -19,7 +19,7 @@ export function $$s0({
   viewFile: a
 }) {
   return useCallback(() => {
-    !e && t && (a(t), sx("Library File Expanded", {
+    !e && t && (a(t), trackEventAnalytics("Library File Expanded", {
       fileName: i
     }));
   }, [e, a, t, i]);

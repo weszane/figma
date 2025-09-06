@@ -1,5 +1,5 @@
 import { NC } from "../905/17179";
-import { xi } from "../905/714362";
+import { logWarning } from "../905/714362";
 import { P, o as _$$o } from "../905/717906";
 import { nF } from "../905/350402";
 import { Cx, x2, of } from "../figma_app/714946";
@@ -36,7 +36,7 @@ let $$h3 = nF((e, t) => {
       key: s
     }));
   }).catch(t => {
-    xi("plugin allowlist", "Unable to fetch the plugin allowlist", {
+    logWarning("plugin allowlist", "Unable to fetch the plugin allowlist", {
       message: t.message
     });
     e.dispatch(of({
@@ -70,7 +70,7 @@ let $$g6 = nF(async (e, t) => {
       key: s
     }));
   } catch (t) {
-    xi("widget allowlist", "Unable to fetch the widget allowlist", {
+    logWarning("widget allowlist", "Unable to fetch the widget allowlist", {
       message: t.message
     });
     e.dispatch(of({
@@ -89,4 +89,4 @@ export const Vl = $$h3;
 export const XV = $$_4;
 export const Yw = $$y5;
 export const mV = $$g6;
-export const oO = $$m7; 
+export const oO = $$m7;

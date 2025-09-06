@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { $n } from "../905/521428";
 import { x } from "../905/211326";
 import { B } from "../905/714743";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { X } from "../figma_app/91315";
 import { hv } from "../905/952832";
 import { Ro, CH, z6 } from "../figma_app/805373";
@@ -48,7 +48,7 @@ let _ = (e, t = {}) => function (r) {
       children: jsx($n, {
         variant: "ghost",
         onClick: _,
-        children: tx("avatar_editor.edit")
+        children: renderI18nText("avatar_editor.edit")
       })
     })]
   }) : jsxs("div", {

@@ -1,9 +1,9 @@
 import { useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
-import { md } from "../figma_app/27355";
-import { sx } from "../905/449184";
-import { x1 } from "../905/714362";
-import { t as _$$t } from "../905/303541";
+import { useAtomWithSubscription } from "../figma_app/27355";
+import { trackEventAnalytics } from "../905/449184";
+import { logError } from "../905/714362";
+import { getI18nString } from "../905/303541";
 import { to } from "../905/156213";
 import { F } from "../905/224";
 import { t as _$$t2 } from "../figma_app/579169";
@@ -28,14 +28,14 @@ function b(e) {
   }
 }
 export function $$v1(e) {
-  let t = md(fm);
+  let t = useAtomWithSubscription(fm);
   let i = $A(t);
   let s = function (e, t) {
     let i = useDispatch();
-    let s = md(Hu);
+    let s = useAtomWithSubscription(Hu);
     return useCallback(() => {
       if (e === V_.ENTERPRISE) {
-        x1("designSystems", "attempting to show modes upsell modal to enterprise user");
+        logError("designSystems", "attempting to show modes upsell modal to enterprise user");
         return;
       }
       let n = {
@@ -63,13 +63,13 @@ export function $$v1(e) {
       e(to({
         type: Y,
         data: {
-          titleText: _$$t("upsell.move_file_modes.upsell_title"),
-          bodyText: _$$t("upsell.move_file_modes.upsell_subtitle")
+          titleText: getI18nString("upsell.move_file_modes.upsell_title"),
+          bodyText: getI18nString("upsell.move_file_modes.upsell_subtitle")
         }
       }));
     }, [e]);
   }();
-  let v = md(_$$t2).data ?? !1;
+  let v = useAtomWithSubscription(_$$t2).data ?? !1;
   return {
     modeLimit: i,
     canShowCTA: useCallback(e => t !== V_.ENTERPRISE && e < $A(V_.ENTERPRISE), [t]),
@@ -78,19 +78,19 @@ export function $$v1(e) {
   };
 }
 export function $$I0() {
-  let e = md(fm);
-  let t = md(_$$t2).data ?? !1;
+  let e = useAtomWithSubscription(fm);
+  let t = useAtomWithSubscription(_$$t2).data ?? !1;
   let i = function () {
     let e = useDispatch();
     return useCallback(() => {
       e(to({
         type: Y,
         data: {
-          titleText: _$$t("upsell.move_file_prototyping.upsell_title"),
-          bodyText: _$$t("upsell.move_file_prototyping.upsell_subtitle")
+          titleText: getI18nString("upsell.move_file_prototyping.upsell_title"),
+          bodyText: getI18nString("upsell.move_file_prototyping.upsell_subtitle")
         }
       }));
-      sx("prototype.move_to_folder_modal_shown");
+      trackEventAnalytics("prototype.move_to_folder_modal_shown");
     }, [e]);
   }();
   return {

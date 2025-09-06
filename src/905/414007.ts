@@ -1,5 +1,5 @@
 import { getCookieValue, getStorage } from "../905/657224";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 export let $$a2 = "ajs_anonymous_id";
 class s {
   get(e) {
@@ -20,8 +20,8 @@ class s {
       o += ` domain=.${e.slice(e.length - 2, e.length).join(".")};`;
     }
     let l = "https:" === location.protocol;
-    let [d, c] = `${Ay.osversion}`.split(".");
-    if (!(i?.sameSite === "none" && Ay.safari && 13 > +Ay.version && Ay.mac && 11 > +d && 15 > +c)) {
+    let [d, c] = `${BrowserInfo.osversion}`.split(".");
+    if (!(i?.sameSite === "none" && BrowserInfo.safari && 13 > +BrowserInfo.version && BrowserInfo.mac && 11 > +d && 15 > +c)) {
       let e = i?.sameSite || "lax";
       l || "none" !== e || (e = "lax");
       o += ` samesite=${e};`;

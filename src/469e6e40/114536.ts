@@ -19,7 +19,7 @@ import { b as _$$b } from "../905/946806";
 import { a as _$$a } from "../905/964520";
 import { Ph } from "../figma_app/637027";
 import { ny } from "../figma_app/819458";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { E as _$$E } from "../905/984674";
 import { to } from "../905/156213";
 import { Pc } from "../905/372672";
@@ -72,7 +72,7 @@ function D() {
     className: _$$s.colorTextBrand.cursorPointer.$,
     href: "https://help.figma.com/hc/articles/360045953273",
     children: jsx(_$$E, {
-      children: tx("general.learn_more")
+      children: renderI18nText("general.learn_more")
     })
   });
 }
@@ -90,26 +90,26 @@ let F = Ju(function (e) {
         org_id: e.orgId
       });
       a(_$$F.enqueue({
-        message: _$$t("domain_management.domain_capture_modal.success_message")
+        message: getI18nString("domain_management.domain_capture_modal.success_message")
       }));
       e.onClose();
     } catch (e) {
       e.data?.reason && 422 === e.status ? "domains_unverified" === e.data.reason ? a(_$$F.enqueue({
-        message: _$$t("domain_management.domain_capture.some_domains_unverified"),
+        message: getI18nString("domain_management.domain_capture.some_domains_unverified"),
         error: !0,
         onDismiss: lQ
       })) : "domain_in_use" === e.data.reason ? a(_$$F.enqueue({
-        message: _$$t("domain_management.domain_capture.domain_in_use", {
+        message: getI18nString("domain_management.domain_capture.domain_in_use", {
           orgName: u || ""
         }),
         error: !0,
         onDismiss: lQ
       })) : a(_$$F.enqueue({
-        message: _$$t("domain_management.domain_capture.error_enabling"),
+        message: getI18nString("domain_management.domain_capture.error_enabling"),
         error: !0,
         onDismiss: lQ
       })) : a(_$$F.enqueue({
-        message: _$$t("domain_management.domain_capture.error_enabling"),
+        message: getI18nString("domain_management.domain_capture.error_enabling"),
         error: !0,
         onDismiss: lQ
       }));
@@ -123,7 +123,7 @@ let F = Ju(function (e) {
       children: [jsx(Y9, {
         children: jsx(hE, {
           children: jsx(_$$E, {
-            children: tx("domain_management.domain_capture_modal.title")
+            children: renderI18nText("domain_management.domain_capture_modal.title")
           })
         })
       }), jsxs(nB, {
@@ -141,9 +141,9 @@ let F = Ju(function (e) {
               direction: "vertical",
               children: [jsx(_$$E, {
                 fontWeight: "bold",
-                children: tx("domain_management.domain_capture_modal.body_title")
+                children: renderI18nText("domain_management.domain_capture_modal.body_title")
               }), jsx(_$$E, {
-                children: tx("domain_management.domain_capture_modal.body", {
+                children: renderI18nText("domain_management.domain_capture_modal.body", {
                   orgName: e.orgName,
                   learnMoreLink: jsx(D, {})
                 })
@@ -161,14 +161,14 @@ let F = Ju(function (e) {
             onClick: e.onClose,
             variant: "secondary",
             children: jsx(_$$E, {
-              children: tx("domain_management.domain_capture_modal.cancel_button")
+              children: renderI18nText("domain_management.domain_capture_modal.cancel_button")
             })
           }), jsx($n, {
             disabled: !r || o,
             onClick: m,
             variant: "primary",
             children: jsx(_$$E, {
-              children: tx("domain_management.domain_capture_modal.save_button")
+              children: renderI18nText("domain_management.domain_capture_modal.save_button")
             })
           })]
         })
@@ -208,41 +208,41 @@ function $(e) {
           spacing: 4,
           children: [jsx(_$$E, {
             color: "default",
-            children: tx("domain_management.domain_capture.enabled_label")
+            children: renderI18nText("domain_management.domain_capture.enabled_label")
           }), jsx(_$$E, {
             color: "success",
-            children: tx("domain_management.domain_capture.enabled_status")
+            children: renderI18nText("domain_management.domain_capture.enabled_status")
           })]
         }) : jsx(_$$E, {
           color: "default",
-          children: tx("domain_management.domain_capture.label")
+          children: renderI18nText("domain_management.domain_capture.label")
         }), "loaded" === e.loadingStatus && jsx("span", {
           className: _$$s.alignLeft.$,
           children: e.enabled ? jsx(_$$E, {
             color: "secondary",
-            children: tx("domain_management.domain_capture.domain_capture_enabled_body", {
+            children: renderI18nText("domain_management.domain_capture.domain_capture_enabled_body", {
               learnMoreLink: jsx(D, {})
             })
           }) : e.allDomainsVerified ? jsxs(_$$E, {
             color: "secondary",
-            children: [tx("domain_management.domain_capture.all_domains_verified_body", {
+            children: [renderI18nText("domain_management.domain_capture.all_domains_verified_body", {
               learnMoreLink: jsx(D, {})
             }), " "]
           }) : jsx(_$$E, {
             color: "secondary",
-            children: tx("domain_management.domain_capture.some_domains_verified_body", {
+            children: renderI18nText("domain_management.domain_capture.some_domains_verified_body", {
               learnMoreLink: jsx(D, {})
             })
           })
         })]
       }), e.enabled && jsx("div", {
         className: "org_domain_management_page_view--contactSupport---Trie",
-        "data-tooltip": _$$t("domain_management.domain_capture.support_email"),
+        "data-tooltip": getI18nString("domain_management.domain_capture.support_email"),
         "data-tooltip-type": Ib.TEXT,
         "data-tooltip-show-above": !0,
         "data-tooltip-width": 152,
         children: jsx(Ph, {
-          trackingEventName: _$$t("domain_management.domain_capture.disable_domain_capture"),
+          trackingEventName: getI18nString("domain_management.domain_capture.disable_domain_capture"),
           onClick: () => {
             ny({
               name: s.name,
@@ -251,7 +251,7 @@ function $(e) {
               ticketForms: ["account"],
               fields: [{
                 id: "subject",
-                value: _$$t("domain_management.domain_capture.disable_domain_capture")
+                value: getI18nString("domain_management.domain_capture.disable_domain_capture")
               }, {
                 id: 0x8e810a50a97,
                 value: ""
@@ -260,7 +260,7 @@ function $(e) {
             });
           },
           trusted: !0,
-          children: tx("settings_tab.contact_support")
+          children: renderI18nText("settings_tab.contact_support")
         })
       }), !e.enabled && jsxs(_$$Y, {
         direction: "horizontal",
@@ -269,12 +269,12 @@ function $(e) {
         spacing: 0,
         children: [jsx(_$$E, {
           color: e.allDomainsVerified ? "default" : "secondary",
-          children: tx("settings_tab.disabled")
+          children: renderI18nText("settings_tab.disabled")
         }), t && jsx(_$$b, {
           style: {
             "--color-icon": "var(--color-icon-secondary)"
           },
-          "data-tooltip": _$$t("domain_management.domain_capture.info_tooltip_text"),
+          "data-tooltip": getI18nString("domain_management.domain_capture.info_tooltip_text"),
           "data-tooltip-type": Ib.TEXT,
           "data-tooltip-width": 152,
           "data-tooltip-show-immediately": !0
@@ -317,7 +317,7 @@ function V(e) {
           }).catch(() => {
             t(_$$F.enqueue({
               type: "copy-dns-token-failed",
-              message: _$$t("domain_management.dns_token.failed_to_copy"),
+              message: getI18nString("domain_management.dns_token.failed_to_copy"),
               error: !0,
               onDismiss: lQ
             }));
@@ -334,7 +334,7 @@ function V(e) {
           }), jsx(_$$E, {
             fontWeight: "regular",
             color: "brand",
-            children: r ? tx("domain_management.dns_token.copied") : tx("domain_management.dns_token.copy")
+            children: r ? renderI18nText("domain_management.dns_token.copied") : renderI18nText("domain_management.dns_token.copy")
           })]
         })
       })]
@@ -360,7 +360,7 @@ let Y = Ju(function (e) {
       children: [jsx(Y9, {
         children: jsx(hE, {
           children: jsx(_$$E, {
-            children: tx("VERIFY" === e.actionType ? "domain_management.error_modal.header_verifying" : "domain_management.error_modal.header_adding", {
+            children: renderI18nText("VERIFY" === e.actionType ? "domain_management.error_modal.header_verifying" : "domain_management.error_modal.header_adding", {
               domainCount: e.failedDomains.length
             })
           })
@@ -378,20 +378,20 @@ let Y = Ju(function (e) {
               switch (e.actionType) {
                 case "ADD":
                 default:
-                  return tx("domain_management.error_modal.body_adding", {
+                  return renderI18nText("domain_management.error_modal.body_adding", {
                     domainCount: e.failedDomains.length
                   });
                 case "VERIFY":
-                  return tx("domain_management.error_modal.body_verifying", {
+                  return renderI18nText("domain_management.error_modal.body_verifying", {
                     domainCount: e.failedDomains.length
                   });
                 case "DOMAIN_CAPTURE":
                 case "DOMAIN_CAPTURED_DOMAINS":
-                  return tx("domain_management.error_modal.body_domain_capture", {
+                  return renderI18nText("domain_management.error_modal.body_domain_capture", {
                     domainCount: e.failedDomains.length
                   });
                 case "RESOURCE_CONNECTED_DOMAINS":
-                  return tx("domain_management.error_modal.body_resource_connected_domains", {
+                  return renderI18nText("domain_management.error_modal.body_resource_connected_domains", {
                     domainCount: e.failedDomains.length
                   });
               }
@@ -406,7 +406,7 @@ let Y = Ju(function (e) {
             onClick: e.onClose,
             variant: "secondary",
             children: jsx(_$$E, {
-              children: tx("domain_management.error_modal.got_it_button")
+              children: renderI18nText("domain_management.error_modal.got_it_button")
             })
           })
         })
@@ -421,9 +421,9 @@ function J(e, t, a, n) {
     let r = t.length;
     let l = t.join(",");
     0 !== r && (s(_$$F.enqueue({
-      message: a ? _$$t("domain_management.verifying_domains", {
+      message: a ? getI18nString("domain_management.verifying_domains", {
         domainCount: r
-      }) : _$$t("domain_management.adding_domains", {
+      }) : getI18nString("domain_management.adding_domains", {
         domainCount: r
       }),
       type: "self-serve-domain-management",
@@ -448,9 +448,9 @@ function J(e, t, a, n) {
       } = e;
       let o = invalid_domains.concat(unverified_domains).concat(resource_connected_domains || []).sort();
       0 === o.length ? s(_$$F.enqueue({
-        message: a ? _$$t("domain_management.successfully_verified_domains", {
+        message: a ? getI18nString("domain_management.successfully_verified_domains", {
           domainCount: r
-        }) : _$$t("domain_management.successfully_added_domains", {
+        }) : getI18nString("domain_management.successfully_added_domains", {
           domainCount: r
         })
       })) : unverified_domains.length > 0 ? s(to({
@@ -519,7 +519,7 @@ let Q = Ju(function (e) {
       children: [jsx(Y9, {
         children: jsx(hE, {
           children: jsx(_$$E, {
-            children: tx("domain_management.add_domain_modal.title")
+            children: renderI18nText("domain_management.add_domain_modal.title")
           })
         })
       }), jsxs(nB, {
@@ -533,7 +533,7 @@ let Q = Ju(function (e) {
           children: [e.domainsRequireVerification ? jsx(et, {
             dnsToken: e.dnsToken
           }) : jsx(_$$E, {
-            children: tx("domain_management.add_domain_modal.body_text")
+            children: renderI18nText("domain_management.add_domain_modal.body_text")
           }), jsx("div", {
             className: _$$s.wFull.$,
             children: jsx(_$$e2, {
@@ -553,12 +553,12 @@ let Q = Ju(function (e) {
                   errorMessage: t
                 });
               },
-              placeholderText: _$$t("domain_management.add_domain_modal.input_placeholder_text"),
+              placeholderText: getI18nString("domain_management.add_domain_modal.input_placeholder_text"),
               tokenClassName: "org_domain_management_page_view--removeHardcodedHeight--PF-ox",
               validateToken: e => null === e.match(Z) ? {
                 state: _$$d.ERROR,
                 content: e,
-                errorMessage: _$$t("domain_management.error_domain_is_invalid")
+                errorMessage: getI18nString("domain_management.error_domain_is_invalid")
               } : {
                 state: _$$d.OK,
                 content: e
@@ -572,7 +572,7 @@ let Q = Ju(function (e) {
             onClick: e.onClose,
             variant: "secondary",
             children: jsx(_$$E, {
-              children: tx("domain_management.modals_shared.cancel_button")
+              children: renderI18nText("domain_management.modals_shared.cancel_button")
             })
           }), jsx($n, {
             disabled: 0 === d.tokens.length || m,
@@ -582,7 +582,7 @@ let Q = Ju(function (e) {
             },
             variant: "primary",
             children: jsx(_$$E, {
-              children: e.domainsRequireVerification ? tx("domain_management.add_domain_modal.confirm_button_dc_enabled") : tx("domain_management.add_domain_modal.confirm_button")
+              children: e.domainsRequireVerification ? renderI18nText("domain_management.add_domain_modal.confirm_button_dc_enabled") : renderI18nText("domain_management.add_domain_modal.confirm_button")
             })
           })]
         })
@@ -607,9 +607,9 @@ function et(e) {
       direction: "vertical",
       children: [jsx(_$$E, {
         fontWeight: "bold",
-        children: tx("domain_management.modals_shared.update_dns_record_header")
+        children: renderI18nText("domain_management.modals_shared.update_dns_record_header")
       }), jsx(_$$E, {
-        children: tx("domain_management.add_domain_modal.update_dns_record_sub_text", {
+        children: renderI18nText("domain_management.add_domain_modal.update_dns_record_sub_text", {
           learnMoreLink: jsx(D, {})
         })
       })]
@@ -619,9 +619,9 @@ function et(e) {
       direction: "vertical",
       children: [jsx(_$$E, {
         fontWeight: "bold",
-        children: tx("domain_management.add_domain_modal.next_add_domains_header")
+        children: renderI18nText("domain_management.add_domain_modal.next_add_domains_header")
       }), jsx(_$$E, {
-        children: tx("domain_management.add_domain_modal.next_add_domains_sub_text")
+        children: renderI18nText("domain_management.add_domain_modal.next_add_domains_sub_text")
       })]
     })]
   });
@@ -648,7 +648,7 @@ function ea(e) {
       direction: "horizontal",
       children: [jsx(_$$E, {
         fontSize: 24,
-        children: tx("domain_management.domain", {
+        children: renderI18nText("domain_management.domain", {
           domainCount: 2
         })
       }), jsx($n, {
@@ -656,7 +656,7 @@ function ea(e) {
         variant: "primary",
         iconPrefix: jsx(_$$J, {}),
         children: jsx(_$$E, {
-          children: tx("domain_management.domain", {
+          children: renderI18nText("domain_management.domain", {
             domainCount: 1
           })
         })
@@ -697,7 +697,7 @@ function ek({
     return a;
   }(_$$oA(_.data?.unclaimedDomainUsers) ?? null, o);
   let f = [{
-    name: _$$t("domain_insights.unclaimed_users.columns.name"),
+    name: getI18nString("domain_insights.unclaimed_users.columns.name"),
     className: "domain_flyout--avatarColumn--q8Rns domain_flyout--column---t1PD admin_settings_page--membersColumn--E3seT table--column--974RA",
     cellComponent: ({
       handle: e,
@@ -706,10 +706,10 @@ function ek({
       id: s,
       status: i
     }) => {
-      let r = e || t || _$$t("domain_insights.unclaimed_users.no_name");
+      let r = e || t || getI18nString("domain_insights.unclaimed_users.no_name");
       let l = "removed" === i ? {
         color: zE.DEFAULT,
-        text: _$$t("domain_insights.unclaimed_users.removed")
+        text: getI18nString("domain_insights.unclaimed_users.removed")
       } : void 0;
       return jsx(az, {
         entity: {
@@ -736,7 +736,7 @@ function ek({
     onChange: e => j(Bk(e)),
     query: r,
     clearSearch: () => l(""),
-    placeholder: _$$t("domain_insights.unclaimed_users.search.placeholder"),
+    placeholder: getI18nString("domain_insights.unclaimed_users.search.placeholder"),
     maxInputLength: MI
   });
   return jsxs(Fragment, {
@@ -749,7 +749,7 @@ function ek({
         let s = () => {
           d(new Set([...o, ...a]));
           c(_$$F.enqueue({
-            message: _$$t("domain_insights.unclaimed_users.adding_users", {
+            message: getI18nString("domain_insights.unclaimed_users.adding_users", {
               userCount: a.length
             }),
             type: "domain-insights"
@@ -757,7 +757,7 @@ function ek({
         };
         return jsx(Fragment, {
           children: jsx(IU, {
-            label: _$$t("domain_insights.unclaimed_users.add_users", {
+            label: getI18nString("domain_insights.unclaimed_users.add_users", {
               count: e.length
             }),
             onClick: () => {
@@ -777,7 +777,7 @@ function ek({
         verticalAlignItems: "center",
         horizontalAlignItems: "center",
         children: jsx(_$$E, {
-          children: tx("domain_insights.unclaimed_users.no_unclaimed_users")
+          children: renderI18nText("domain_insights.unclaimed_users.no_unclaimed_users")
         })
       }),
       getItemKey: e => e.id,
@@ -786,7 +786,7 @@ function ek({
       isLoading: (!u || p || b) && !a,
       itemTypeContext: {
         itemType: "org_domain",
-        getSelectedCountString: e => _$$t("domain_insights.unclaimed_users.selected_user_count", {
+        getSelectedCountString: e => getI18nString("domain_insights.unclaimed_users.selected_user_count", {
           numSelected: e
         })
       },
@@ -825,7 +825,7 @@ function eE({
     },
     className: _$$s.bgNone.colorTextBrand.cursorPointer.$,
     children: jsx(_$$E, {
-      children: tx("domain_insights.unclaimed_users.enable_domain_capture")
+      children: renderI18nText("domain_insights.unclaimed_users.enable_domain_capture")
     })
   });
 }
@@ -840,7 +840,7 @@ function eC({
       className: _$$s.textBodyMedium.p16.$,
       children: jsx(_$$E, {
         color: "default",
-        children: tx("domain_insights.unclaimed_users.description")
+        children: renderI18nText("domain_insights.unclaimed_users.description")
       })
     }), !a && jsxs("div", {
       className: _$$s.bRadius4.colorBgBrandTertiary.pb12.pt8.pl8.ml16.mr16.$,
@@ -854,7 +854,7 @@ function eC({
           className: _$$s.pt4.$,
           children: jsx(_$$E, {
             color: "default",
-            children: tx("domain_insights.unclaimed_users.domain_capture_notice", {
+            children: renderI18nText("domain_insights.unclaimed_users.domain_capture_notice", {
               enableDomainCaptureLink: jsx(eE, {
                 orgId: e,
                 orgName: t
@@ -875,13 +875,13 @@ function eC({
           }), jsx(_$$E, {
             color: "default",
             fontWeight: "bold",
-            children: tx("domain_insights.unclaimed_users.verify_domains_note")
+            children: renderI18nText("domain_insights.unclaimed_users.verify_domains_note")
           })]
         }), jsx("span", {
           className: _$$s.ml32.mr16.$,
           children: jsx(_$$E, {
             color: "default",
-            children: tx("domain_insights.unclaimed_users.verify_domains_note_body")
+            children: renderI18nText("domain_insights.unclaimed_users.verify_domains_note_body")
           })
         })]
       })]
@@ -911,7 +911,7 @@ let eS = {
     return jsxs(_$$m.Contents, {
       children: [jsx(_$$m.Header, {
         children: jsx(_$$m.Title, {
-          children: _$$t("domain_insights.manage_unclaimed_domain_users")
+          children: getI18nString("domain_insights.manage_unclaimed_domain_users")
         })
       }), jsx(eC, {
         orgId: e.orgId,
@@ -938,18 +938,18 @@ let eO = Ju(function (e) {
         domain_ids: e.domainIds
       });
       t(_$$F.enqueue({
-        message: _$$t("domain_management.remove_domain_modal.confirmation_message", {
+        message: getI18nString("domain_management.remove_domain_modal.confirmation_message", {
           domainCount: e.domainIds.length
         })
       }));
       e.onClose();
     } catch (e) {
       400 === e.status ? t(_$$F.enqueue({
-        message: _$$t("domain_management.remove_domain_modal.attempted_domain_removal"),
+        message: getI18nString("domain_management.remove_domain_modal.attempted_domain_removal"),
         error: !0,
         onDismiss: lQ
       })) : t(_$$F.enqueue({
-        message: _$$t("domain_management.remove_domain_modal.error_removing_domain"),
+        message: getI18nString("domain_management.remove_domain_modal.error_removing_domain"),
         error: !0,
         onDismiss: lQ
       }));
@@ -970,7 +970,7 @@ let eO = Ju(function (e) {
         children: jsx(hE, {
           children: jsx(_$$E, {
             fontWeight: "bold",
-            children: tx("domain_management.remove_domain_modal.modal_body_title", {
+            children: renderI18nText("domain_management.remove_domain_modal.modal_body_title", {
               domainCount: e.domainIds.length
             })
           })
@@ -984,15 +984,15 @@ let eO = Ju(function (e) {
           direction: "vertical",
           spacing: 0,
           children: e.mfaRequired === CT.GUESTS || e.mfaRequired === CT.ALL_USERS ? jsx(_$$E, {
-            children: _.length > 0 ? tx("domain_management.remove_domain_modal.body_text_with_mfa_with_warning", {
+            children: _.length > 0 ? renderI18nText("domain_management.remove_domain_modal.body_text_with_mfa_with_warning", {
               domainCount: e.domainIds.length
-            }) : tx("domain_management.remove_domain_modal.modal_body_text_with_mfa", {
+            }) : renderI18nText("domain_management.remove_domain_modal.modal_body_text_with_mfa", {
               domainCount: e.domainIds.length
             })
           }) : jsx(_$$E, {
-            children: _.length > 0 ? tx("domain_management.remove_domain_modal.body_text_with_warning", {
+            children: _.length > 0 ? renderI18nText("domain_management.remove_domain_modal.body_text_with_warning", {
               domainCount: e.domainIds.length
-            }) : tx("domain_management.remove_domain_modal.modal_body_text", {
+            }) : renderI18nText("domain_management.remove_domain_modal.modal_body_text", {
               domainCount: e.domainIds.length
             })
           })
@@ -1007,7 +1007,7 @@ let eO = Ju(function (e) {
             className: q,
             children: _.map(e => jsx("li", {
               children: jsx(_$$E, {
-                children: tx("domain_management.remove_domain_modal.org_admin_info", {
+                children: renderI18nText("domain_management.remove_domain_modal.org_admin_info", {
                   name: e.user?.name,
                   email: e.user?.email
                 })
@@ -1021,14 +1021,14 @@ let eO = Ju(function (e) {
             onClick: e.onClose,
             variant: "secondary",
             children: jsx(_$$E, {
-              children: tx("domain_management.remove_domain_modal.cancel_button")
+              children: renderI18nText("domain_management.remove_domain_modal.cancel_button")
             })
           }), jsx($n, {
             disabled: a || c,
             onClick: o,
             variant: "destructive",
             children: jsx(_$$E, {
-              children: tx("domain_management.remove_domain_modal.remove_button")
+              children: renderI18nText("domain_management.remove_domain_modal.remove_button")
             })
           })]
         })
@@ -1050,7 +1050,7 @@ let eL = Ju(function (e) {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: tx("domain_management.verify_domain")
+          children: renderI18nText("domain_management.verify_domain")
         })
       }), jsxs(nB, {
         children: [jsx(hK, {
@@ -1065,8 +1065,8 @@ let eL = Ju(function (e) {
             spacing: 0,
             children: [jsx(_$$E, {
               fontWeight: "bold",
-              children: tx("domain_management.modals_shared.update_dns_record_header")
-            }), tx("domain_management.verify_domain_modal.body", {
+              children: renderI18nText("domain_management.modals_shared.update_dns_record_header")
+            }), renderI18nText("domain_management.verify_domain_modal.body", {
               learnMoreLink: jsx(D, {})
             })]
           }), jsx(V, {
@@ -1076,7 +1076,7 @@ let eL = Ju(function (e) {
             spacing: 8,
             children: [jsx(_$$E, {
               color: "secondary",
-              children: tx("domain_management.domain", {
+              children: renderI18nText("domain_management.domain", {
                 domainCount: e.domains.length
               })
             }), jsx(H, {
@@ -1091,7 +1091,7 @@ let eL = Ju(function (e) {
           children: [jsx($n, {
             onClick: e.onClose,
             variant: "secondary",
-            children: tx("domain_management.modals_shared.cancel_button")
+            children: renderI18nText("domain_management.modals_shared.cancel_button")
           }), jsx($n, {
             onClick: () => {
               a();
@@ -1099,7 +1099,7 @@ let eL = Ju(function (e) {
               e.onClose();
             },
             variant: "primary",
-            children: tx("domain_management.verify_domain_modal.confirm_button")
+            children: renderI18nText("domain_management.verify_domain_modal.confirm_button")
           })]
         })
       })]
@@ -1196,7 +1196,7 @@ function eU() {
     verticalAlignItems: "center",
     horizontalAlignItems: "center",
     children: jsx(_$$E, {
-      children: tx("domain_management.error_fetching_domains")
+      children: renderI18nText("domain_management.error_fetching_domains")
     })
   });
 }
@@ -1223,7 +1223,7 @@ function eF({
       },
       variant: "primary",
       disabled: !!t.verifiedAt,
-      children: tx("domain_management.verify_domain_pluralizable", {
+      children: renderI18nText("domain_management.verify_domain_pluralizable", {
         domainCount: 1
       })
     })
@@ -1250,14 +1250,14 @@ function eq({
     Dk(t.domain).then(() => {
       l(_$$F.enqueue({
         type: "copy-org-domain",
-        message: _$$t("domain_management.copy_domains.success", {
+        message: getI18nString("domain_management.copy_domains.success", {
           domainCount: 1
         })
       }));
     }).catch(() => {
       l(_$$F.enqueue({
         type: "copy-org-domain-failed",
-        message: _$$t("domain_management.copy_domains.failed_to_copy"),
+        message: getI18nString("domain_management.copy_domains.failed_to_copy"),
         error: !0,
         onDismiss: lQ
       }));
@@ -1266,28 +1266,28 @@ function eq({
   return jsxs(zx, {
     children: [t.verifiedAt && jsx(_$$p, {
       onClick: () => r(t.id),
-      children: _$$t("domain_management.manage_domains.label")
+      children: getI18nString("domain_management.manage_domains.label")
     }), jsx(_$$p, {
       onClick: d,
-      children: _$$t("domain_management.copy_domains.label", {
+      children: getI18nString("domain_management.copy_domains.label", {
         domainCount: 1
       })
     }), jsx(wv, {}), jsx(_$$p, {
       onClick: o,
-      children: _$$t("domain_management.remove_domain")
+      children: getI18nString("domain_management.remove_domain")
     })]
   });
 }
 function e$(e) {
   let t = [{
-    name: _$$t("domain_management.column_header.name"),
+    name: getI18nString("domain_management.column_header.name"),
     className: _$$s.flex1.$,
     cellComponent: e => jsx(_$$E, {
       children: e.domain
     }),
     getSortValue: e => e.domain
   }, {
-    name: _$$t("domain_management.column_header.status"),
+    name: getI18nString("domain_management.column_header.status"),
     className: _$$s.flex1.$,
     cellComponent: t => function (e, t, a, s, i) {
       let r = e.verifiedAt ? jsx(_$$x, {
@@ -1300,7 +1300,7 @@ function e$(e) {
         }
       });
       let l = e.verifiedAt ? jsx(_$$E, {
-        children: tx("domain_management.domain_verified")
+        children: renderI18nText("domain_management.domain_verified")
       }) : jsx("button", {
         className: el()("org_domain_management_page_view--unverifiedHover--9SaqO", _$$s.colorTextTertiary.bgTransparent.$),
         onClick: n => {
@@ -1315,7 +1315,7 @@ function e$(e) {
             }
           }));
         },
-        children: tx("domain_management.domain_unverified")
+        children: renderI18nText("domain_management.domain_unverified")
       });
       return jsxs(_$$Y, {
         direction: "horizontal",
@@ -1329,11 +1329,11 @@ function e$(e) {
     }(t, e.orgId, e.dnsToken, e.dispatch, e.onVerify),
     getSortValue: e => e.verifiedAt ? "Verified" : "Unverified"
   }, {
-    name: _$$t("domain_management.column_header.unclaimed_users"),
+    name: getI18nString("domain_management.column_header.unclaimed_users"),
     nameElement: function () {
       let e = jsx(_$$E, {
         color: "default",
-        children: _$$t("domain_management.column_header.unclaimed_users")
+        children: getI18nString("domain_management.column_header.unclaimed_users")
       });
       return jsxs(_$$Y, {
         direction: "horizontal",
@@ -1342,7 +1342,7 @@ function e$(e) {
         children: [e, jsx("span", {
           className: _$$s.ml2.$,
           children: jsx(_$$b, {
-            "data-tooltip": _$$t("domain_management.column_header.unclaimed_users_tooltip"),
+            "data-tooltip": getI18nString("domain_management.column_header.unclaimed_users_tooltip"),
             "data-tooltip-type": Ib.TEXT,
             "data-tooltip-width": 152,
             "data-tooltip-show-immediately": !0
@@ -1352,7 +1352,7 @@ function e$(e) {
     }(),
     className: _$$s.flex1.$,
     cellComponent: e => e.verifiedAt ? void 0 !== e.unclaimedUserCount ? jsx(_$$E, {
-      children: tx("domain_management.unclaimed_user_count", {
+      children: renderI18nText("domain_management.unclaimed_user_count", {
         userCount: e.unclaimedUserCount ?? 0
       })
     }) : jsx(Wi, {
@@ -1360,7 +1360,7 @@ function e$(e) {
       animationType: JR.SHIMMER
     }) : jsx(_$$E, {
       color: "tertiary",
-      children: tx("domain_management.requires_verification")
+      children: renderI18nText("domain_management.requires_verification")
     })
   }];
   let a = [...(e.orgDomains.some(e => !e.verifiedAt) ? [{
@@ -1383,7 +1383,7 @@ function e$(e) {
     })
   }, VU];
   let [i, r, l] = _$$z2({
-    columnName: _$$t("domain_management.column_header.name"),
+    columnName: getI18nString("domain_management.column_header.name"),
     isReversed: !1
   }, e.orgDomains, t);
   let o = useCallback(() => {
@@ -1404,7 +1404,7 @@ function e$(e) {
       return jsxs(Fragment, {
         children: [l.length > 0 && jsx(IU, {
           disabled: 0 === l.length,
-          label: _$$t("domain_management.verify_domain_pluralizable", {
+          label: getI18nString("domain_management.verify_domain_pluralizable", {
             domainCount: e.length
           }),
           onClick: () => {
@@ -1419,7 +1419,7 @@ function e$(e) {
             }));
           }
         }), jsx(IU, {
-          label: _$$t("domain_management.copy_domains.label", {
+          label: getI18nString("domain_management.copy_domains.label", {
             domainCount: e.length
           }),
           onClick: () => {
@@ -1428,21 +1428,21 @@ function e$(e) {
             }) => e).join("; ")).then(() => {
               s(_$$F.enqueue({
                 type: "copy-org-domain",
-                message: _$$t("domain_management.copy_domains.success", {
+                message: getI18nString("domain_management.copy_domains.success", {
                   domainCount: e.length
                 })
               }));
             }).catch(() => {
               s(_$$F.enqueue({
                 type: "copy-org-domain-failed",
-                message: _$$t("domain_management.copy_domains.failed_to_copy"),
+                message: getI18nString("domain_management.copy_domains.failed_to_copy"),
                 error: !0,
                 onDismiss: lQ
               }));
             });
           }
         }), jsx(IU, {
-          label: _$$t("domain_management.remove_domain"),
+          label: getI18nString("domain_management.remove_domain"),
           onClick: () => {
             s(to({
               type: eO,
@@ -1467,7 +1467,7 @@ function e$(e) {
       verticalAlignItems: "center",
       horizontalAlignItems: "center",
       children: jsx(_$$E, {
-        children: tx("domain_management.you_have_no_domains")
+        children: renderI18nText("domain_management.you_have_no_domains")
       })
     }),
     getItemKey: e => e.id,
@@ -1478,7 +1478,7 @@ function e$(e) {
     isLoading: "loading" === e.loadingStatus,
     itemTypeContext: {
       itemType: "org_domain",
-      getSelectedCountString: e => _$$t("multi_select_list.selected_count_domain", {
+      getSelectedCountString: e => getI18nString("multi_select_list.selected_count_domain", {
         numSelected: e
       })
     },

@@ -15,7 +15,7 @@ import { hC } from "../figma_app/901889";
 import { buildUploadUrl } from "../figma_app/169182";
 import { n_ } from "../figma_app/566371";
 import { oW } from "../905/675859";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { v as _$$v, L as _$$L } from "../1250/232926";
 import { OG } from "../1250/340571";
@@ -177,7 +177,7 @@ function W({
     children: [jsx("div", {
       className: "github_settings_modal--closeButton--alk3G",
       children: jsx(K, {
-        "aria-label": _$$t("dev_handoff.component_browser_onboarding.close"),
+        "aria-label": getI18nString("dev_handoff.component_browser_onboarding.close"),
         onClick: t,
         children: jsx(_$$A, {})
       })
@@ -193,10 +193,10 @@ function W({
         children: jsx(Cs, {
           variant: "brand",
           children: jsx(Q, {
-            title: _$$t("dev_handoff.component_browser_onboarding.github_repo_limit_banner_title", {
+            title: getI18nString("dev_handoff.component_browser_onboarding.github_repo_limit_banner_title", {
               repo_max_count: 100
             }),
-            children: _$$t("dev_handoff.component_browser_onboarding.github_repo_limit_banner_body")
+            children: getI18nString("dev_handoff.component_browser_onboarding.github_repo_limit_banner_body")
           })
         })
       })]
@@ -212,12 +212,12 @@ function z({
   onSelected: s
 }) {
   let l = useMemo(() => i?.selectedRepositories ?? [], [i?.selectedRepositories]);
-  let [d, u] = useState(l.length > 0 ? l[0]?.id : _$$t("dev_handoff.component_browser_onboarding.github_select_repository"));
+  let [d, u] = useState(l.length > 0 ? l[0]?.id : getI18nString("dev_handoff.component_browser_onboarding.github_select_repository"));
   let m = n_(XU);
   let f = useMemo(() => {
     let e = i?.availableRepositories.find(e => e.id === d)?.name;
     let t = l[0]?.name;
-    return e ?? t ?? _$$t("dev_handoff.component_browser_onboarding.github_select_repository");
+    return e ?? t ?? getI18nString("dev_handoff.component_browser_onboarding.github_select_repository");
   }, [i?.availableRepositories, d, l]);
   let h = async () => {
     await m.mutate({
@@ -231,11 +231,11 @@ function z({
       className: R,
       children: [jsx(oW, {
         src: t,
-        alt: _$$t("dev_handoff.component_browser_onboarding.connected_projects_icon"),
+        alt: getI18nString("dev_handoff.component_browser_onboarding.connected_projects_icon"),
         className: M
       }), jsx("span", {
         className: P,
-        children: tx("dev_handoff.component_browser_onboarding.github_repository_selection", {
+        children: renderI18nText("dev_handoff.component_browser_onboarding.github_repository_selection", {
           library_name: e ?? ""
         })
       })]
@@ -248,7 +248,7 @@ function z({
           children: jsx(_$$g, {})
         }), jsx("span", {
           className: D,
-          children: _$$t("dev_handoff.component_browser_onboarding.github_can_revoke_access")
+          children: getI18nString("dev_handoff.component_browser_onboarding.github_can_revoke_access")
         })]
       }), jsxs("div", {
         className: L,
@@ -257,7 +257,7 @@ function z({
           children: jsx(_$$g, {})
         }), jsx("span", {
           className: D,
-          children: _$$t("dev_handoff.component_browser_onboarding.github_issues_access")
+          children: getI18nString("dev_handoff.component_browser_onboarding.github_issues_access")
         })]
       }), jsxs("div", {
         className: L,
@@ -266,7 +266,7 @@ function z({
           children: jsx(_$$g, {})
         }), jsx("span", {
           className: D,
-          children: _$$t("dev_handoff.component_browser_onboarding.github_code_and_metadata_access")
+          children: getI18nString("dev_handoff.component_browser_onboarding.github_code_and_metadata_access")
         })]
       })]
     }), jsxs("div", {
@@ -276,7 +276,7 @@ function z({
         value: d,
         children: [jsx(DZ, {
           id: "github-repo-select",
-          placeholder: _$$t("dev_handoff.component_browser_onboarding.github_select_repository"),
+          placeholder: getI18nString("dev_handoff.component_browser_onboarding.github_select_repository"),
           width: "fill",
           size: "lg",
           children: jsx("span", {
@@ -293,11 +293,11 @@ function z({
         variant: "primary",
         disabled: !d || m.isLoading,
         onClick: h,
-        children: getFeatureFlags().dt_component_browser_inline_suggestions ? _$$t("dev_handoff.component_browser_onboarding.continue_button") : _$$t("dev_handoff.component_browser_onboarding.github_connect_repository")
+        children: getFeatureFlags().dt_component_browser_inline_suggestions ? getI18nString("dev_handoff.component_browser_onboarding.continue_button") : getI18nString("dev_handoff.component_browser_onboarding.github_connect_repository")
       }), jsx($n, {
         variant: "link",
         onClick: o,
-        children: _$$t("dev_handoff.component_browser_onboarding.cancel")
+        children: getI18nString("dev_handoff.component_browser_onboarding.cancel")
       })]
     })]
   });
@@ -316,11 +316,11 @@ function $({
       className: R,
       children: [jsx(oW, {
         src: t,
-        alt: _$$t("dev_handoff.component_browser_onboarding.connected_projects_icon"),
+        alt: getI18nString("dev_handoff.component_browser_onboarding.connected_projects_icon"),
         className: M
       }), jsx("span", {
         className: P,
-        children: tx("dev_handoff.component_browser_onboarding.github_connection_success", {
+        children: renderI18nText("dev_handoff.component_browser_onboarding.github_connection_success", {
           library_name: e,
           repository_name: s?.name ?? "GitHub"
         })
@@ -334,7 +334,7 @@ function $({
           children: jsx(_$$g, {})
         }), jsx("span", {
           className: D,
-          children: _$$t("dev_handoff.component_browser_onboarding.github_can_revoke_access")
+          children: getI18nString("dev_handoff.component_browser_onboarding.github_can_revoke_access")
         })]
       }), jsxs("div", {
         className: L,
@@ -343,7 +343,7 @@ function $({
           children: jsx(_$$g, {})
         }), jsx("span", {
           className: D,
-          children: _$$t("dev_handoff.component_browser_onboarding.github_issues_access")
+          children: getI18nString("dev_handoff.component_browser_onboarding.github_issues_access")
         })]
       }), jsxs("div", {
         className: L,
@@ -352,7 +352,7 @@ function $({
           children: jsx(_$$g, {})
         }), jsx("span", {
           className: D,
-          children: _$$t("dev_handoff.component_browser_onboarding.github_code_and_metadata_access")
+          children: getI18nString("dev_handoff.component_browser_onboarding.github_code_and_metadata_access")
         })]
       })]
     }), jsx("div", {
@@ -366,7 +366,7 @@ function $({
           });
           i?.();
         },
-        children: getFeatureFlags().dt_component_browser_inline_suggestions ? _$$t("dev_handoff.component_browser_onboarding.continue_button") : _$$t("dev_handoff.component_browser_onboarding.github_start_mapping")
+        children: getFeatureFlags().dt_component_browser_inline_suggestions ? getI18nString("dev_handoff.component_browser_onboarding.continue_button") : getI18nString("dev_handoff.component_browser_onboarding.github_start_mapping")
       })
     })]
   });
@@ -396,7 +396,7 @@ function q({
   }))), [n, directories]);
   useEffect(() => {
     errors && errors.length > 0 && b(_$$F.enqueue({
-      message: _$$t("dev_handoff.component_browser_onboarding.directory_selection_error"),
+      message: getI18nString("dev_handoff.component_browser_onboarding.directory_selection_error"),
       error: !0
     }));
   }, [errors, b]);
@@ -429,17 +429,17 @@ function q({
     className: "github_settings_modal--directoryContainer--wfm-O",
     children: [jsx("h2", {
       className: P,
-      children: _$$t("dev_handoff.component_browser_onboarding.directory_selection_title")
+      children: getI18nString("dev_handoff.component_browser_onboarding.directory_selection_title")
     }), jsxs("div", {
       className: "github_settings_modal--directoryContent--xSLYY",
       children: [jsx("p", {
         className: "github_settings_modal--directoryDescriptionText--KpVRN",
-        children: _$$t("dev_handoff.component_browser_onboarding.directory_selection_description")
+        children: getI18nString("dev_handoff.component_browser_onboarding.directory_selection_description")
       }), jsxs("div", {
         className: "github_settings_modal--directoryInputSection--rOgbV",
         children: [jsx("p", {
           className: "github_settings_modal--directoryInputLabel---6nZE",
-          children: _$$t("dev_handoff.component_browser_onboarding.directory_selection_input_label")
+          children: getI18nString("dev_handoff.component_browser_onboarding.directory_selection_input_label")
         }), isLoading ? jsx("div", {
           className: "github_settings_modal--directorySpinnerWrapper--yT0nj",
           children: jsx(_$$k, {})
@@ -454,7 +454,7 @@ function q({
           variant: "primary",
           disabled: isLoading || s || !x,
           onClick: k,
-          children: directories.length > 0 ? _$$t("dev_handoff.component_browser_onboarding.directory_selection_update") : _$$t("dev_handoff.component_browser_onboarding.directory_selection_connect")
+          children: directories.length > 0 ? getI18nString("dev_handoff.component_browser_onboarding.directory_selection_update") : getI18nString("dev_handoff.component_browser_onboarding.directory_selection_connect")
         }), jsx(Pw, {
           variant: "secondary",
           onClick: () => {
@@ -462,7 +462,7 @@ function q({
             e();
           },
           disabled: s,
-          children: _$$t("dev_handoff.component_browser_onboarding.directory_selection_skip")
+          children: getI18nString("dev_handoff.component_browser_onboarding.directory_selection_skip")
         })]
       })]
     })]

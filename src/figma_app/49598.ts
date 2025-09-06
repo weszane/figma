@@ -3,23 +3,23 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { Ez5, X3B, bOM } from "../figma_app/763686";
 import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { c as _$$c, r as _$$r } from "../905/676456";
 import { NC } from "../905/17179";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { dR } from "../905/508367";
 import { Ay } from "../905/612521";
 import { x as _$$x } from "../figma_app/256637";
 import { getInitialOptions } from "../figma_app/169182";
 import { WB } from "../905/761735";
 import { Jl } from "../figma_app/566371";
-import { rr } from "../figma_app/778880";
-import { $D } from "../905/11";
-import { x1 } from "../905/714362";
+import { isMobileUA } from "../figma_app/778880";
+import { reportError } from "../905/11";
+import { logError } from "../905/714362";
 import { XHR } from "../905/910117";
 import { Ts } from "../905/194276";
 import { s as _$$s } from "../905/573154";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { J as _$$J } from "../905/231762";
 import { F as _$$F } from "../905/302958";
 import { wr } from "../figma_app/387599";
@@ -70,8 +70,8 @@ let $$eg5 = NC("PUT_FIG_FILE_DUPLICATE_FROM_HUB_FILE");
 let ef = NC("DEL_FIG_FILE_DUPLICATE_FROM_HUB_FILE");
 let $$eE12 = NC("HUB_FILE_PUT_HUB_FILE_REMIX");
 let ey = e => {
-  let t = _$$t("community.actions.log_in_or_create_an_account_to_duplicate_this_file");
-  if (rr) {
+  let t = getI18nString("community.actions.log_in_or_create_an_account_to_duplicate_this_file");
+  if (isMobileUA) {
     window.location.href = "/login";
     return;
   }
@@ -107,7 +107,7 @@ let $$eb16 = nF((e, t, {
     data: r
   }) => {
     let i = r.meta;
-    sx(M5.HUB_FILE_DUPLICATED, {
+    trackEventAnalytics(M5.HUB_FILE_DUPLICATED, {
       hubFileId: t.hubFileId,
       figFileKey: i.key,
       searchSessionId: wr(n)
@@ -122,13 +122,13 @@ let $$eb16 = nF((e, t, {
       [pt.KEY]: pt.VALUE,
       fuid: t.workspace.userId
     });
-    Ay.redirect(a, rr ? void 0 : "_blank");
+    Ay.redirect(a, isMobileUA ? void 0 : "_blank");
     e.dispatch(oB());
   }).catch(t => {
     e.dispatch(_$$F.enqueue({
       error: !0,
-      message: _$$t("community.actions.failed_to_duplicate_file_error", {
-        error: _$$J(t, _$$t("community.actions.try_again_or_contact_support_figma_com"))
+      message: getI18nString("community.actions.failed_to_duplicate_file_error", {
+        error: _$$J(t, getI18nString("community.actions.try_again_or_contact_support_figma_com"))
       })
     }));
   });
@@ -195,16 +195,16 @@ let $$eT18 = nF((e, t) => {
       allowDefaulting: !1
     });
     let s = _$$to(i, a);
-    Ay.redirect(s, t.openInNewTab && !rr ? "_blank" : void 0);
+    Ay.redirect(s, t.openInNewTab && !isMobileUA ? "_blank" : void 0);
   }).catch(n => {
     let i = {
       error: !0,
-      message: _$$t("community.actions.failed_to_create_a_new_file_from_hub_file_name", {
+      message: getI18nString("community.actions.failed_to_create_a_new_file_from_hub_file_name", {
         hubFileName: t.hubFileName
       })
     };
     canRetry && (i.button = {
-      text: _$$t("community.actions.retry"),
+      text: getI18nString("community.actions.retry"),
       action: () => e.dispatch($$eT18({
         ...t,
         canRetry: !1
@@ -299,7 +299,7 @@ let $$eS17 = nF(async (e, {
   }).catch(e => {
     console.error(e);
   }).$$finally(() => {
-    zl.set(_$$x, !0);
+    atomStoreManager.set(_$$x, !0);
   }));
 });
 let $$ev22 = d6("HUB_FILE");
@@ -320,7 +320,7 @@ let $$ew13 = nF((e, t) => {
       Dl(e.dispatch);
       return;
     }
-    zl.set(UM, {
+    atomStoreManager.set(UM, {
       state: F4.PUBLISH_HUB_FILE_INITIATED
     });
   }
@@ -345,7 +345,7 @@ let $$ew13 = nF((e, t) => {
     status: {
       code: aP.SUCCESS
     }
-  })), t.suggestedCategory && sx("community_category_suggestion", {
+  })), t.suggestedCategory && trackEventAnalytics("community_category_suggestion", {
     resourceType: "hub_file",
     resourceId: r.id,
     categoryId: r.category_id,
@@ -379,11 +379,11 @@ let $$ew13 = nF((e, t) => {
           onPublishError
         }));
       });
-    } else zl.set(UM, {
+    } else atomStoreManager.set(UM, {
       state: F4.PUBLISH_HUB_FILE_COMPLETED
     });
   }).catch(r => {
-    n && zl.set(UM, {
+    n && atomStoreManager.set(UM, {
       state: F4.PUBLISH_HUB_FILE_ERRORED
     });
     e.dispatch(_$$F.enqueue({
@@ -426,17 +426,17 @@ async function eO(e, t) {
     carouselMedia,
     customCarouselThumbnail
   } = t;
-  if (authorOrgId && authorTeamId) throw Error(_$$t("community.actions.attempting_to_set_both_author_org_id_and_author_team_id_while_publishing"));
-  if (viewerMode === FTemplateCategoryType.PROTOTYPE && X3B.firstPagePrototypeStatus() !== bOM.VALID) throw Error(_$$t("community.actions.attempting_to_publish_an_invalid_prototype_as_a_prototype"));
+  if (authorOrgId && authorTeamId) throw Error(getI18nString("community.actions.attempting_to_set_both_author_org_id_and_author_team_id_while_publishing"));
+  if (viewerMode === FTemplateCategoryType.PROTOTYPE && X3B.firstPagePrototypeStatus() !== bOM.VALID) throw Error(getI18nString("community.actions.attempting_to_publish_an_invalid_prototype_as_a_prototype"));
   let O = await _$$m2(fileKey, "Published to Community hub", description, e.dispatch).then(e => e.id).catch(e => {
-    $D(_$$e.COMMUNITY, e);
-    return Error(e.data?.message || _$$t("community.actions.could_not_connect_to_the_server"));
+    reportError(_$$e.COMMUNITY, e);
+    return Error(e.data?.message || getI18nString("community.actions.could_not_connect_to_the_server"));
   });
   try {
     r = await R1(thumbnailBuffer, carouselMedia || [], O);
   } catch (e) {
-    $D(_$$e.COMMUNITY, e);
-    return Error(_$$t("community.actions.error_uploading_images_e"));
+    reportError(_$$e.COMMUNITY, e);
+    return Error(getI18nString("community.actions.error_uploading_images_e"));
   }
   let R = Z2(r?.carousel_images || [], customCarouselThumbnail);
   let L = {
@@ -472,8 +472,8 @@ async function eO(e, t) {
       profileCreated: e.data.meta.profile_created
     };
   } catch (e) {
-    $D(_$$e.COMMUNITY, e);
-    return Error(_$$J(e, _$$t("community.actions.could_not_publish_hub_file", {
+    reportError(_$$e.COMMUNITY, e);
+    return Error(_$$J(e, getI18nString("community.actions.could_not_publish_hub_file", {
       error: e.message
     })));
   }
@@ -506,9 +506,9 @@ let $$eR4 = nF(async (e, {
   try {
     i = await R1(thumbnailBuffer, carouselMedia || [], void 0, hubFileId);
   } catch (t) {
-    $D(_$$e.COMMUNITY, t);
+    reportError(_$$e.COMMUNITY, t);
     e.dispatch(_$$F.enqueue({
-      message: _$$t("community.actions.error_uploading_images_publish_update_from_editor"),
+      message: getI18nString("community.actions.error_uploading_images_publish_update_from_editor"),
       type: "hub-file-updated-error",
       error: !0
     }));
@@ -540,7 +540,7 @@ let $$eR4 = nF(async (e, {
       hubFiles: [t],
       src: "updateHubFile"
     }));
-    suggestedCategory && sx("community_category_suggestion", {
+    suggestedCategory && trackEventAnalytics("community_category_suggestion", {
       resourceType: "hub_file",
       resourceId: t.id,
       categoryId: t.category_id,
@@ -550,9 +550,9 @@ let $$eR4 = nF(async (e, {
     });
     r?.(t);
   } catch (r) {
-    let t = _$$J(r, _$$t("community.actions.an_error_occurred_while_updating_please_refresh_and_try_again"));
+    let t = _$$J(r, getI18nString("community.actions.an_error_occurred_while_updating_please_refresh_and_try_again"));
     e.dispatch(_$$s.error(t));
-    $D(_$$e.COMMUNITY, r);
+    reportError(_$$e.COMMUNITY, r);
     return Error(`Error updating file ${r}`);
   }
 });
@@ -563,7 +563,7 @@ let eL = async e => {
     console.warn("No file key available for figmake hub file, cannot unpublish site");
     return;
   }
-  sx("sites_unpublish_started", {
+  trackEventAnalytics("sites_unpublish_started", {
     fileKey: t,
     productType: "sites"
   });
@@ -590,7 +590,7 @@ let $$eP10 = nF((e, {
     r && Ay.redirect(r);
     i?.();
   }).catch(e => {
-    $D(_$$e.COMMUNITY, e);
+    reportError(_$$e.COMMUNITY, e);
     console.error(Error(`Error unpublishing file ${e}`));
     a?.();
   });
@@ -610,8 +610,8 @@ let $$eD23 = MM("OPTIMISTIC_DUPLICATE_HUB_FILE", (e, {
     s = dR(s, {
       [pt.KEY]: pt.VALUE
     });
-    Ay.redirect(s, rr ? void 0 : "_blank");
-    sx(M5.HUB_FILE_DUPLICATED, {
+    Ay.redirect(s, isMobileUA ? void 0 : "_blank");
+    trackEventAnalytics(M5.HUB_FILE_DUPLICATED, {
       hubFileId: t,
       figFileKey: a.key,
       viewContext: r,
@@ -620,7 +620,7 @@ let $$eD23 = MM("OPTIMISTIC_DUPLICATE_HUB_FILE", (e, {
   }).catch(t => {
     e.dispatch(_$$r(n));
     e.dispatch(_$$F.enqueue({
-      message: _$$t("community.actions.unable_to_duplicate", {
+      message: getI18nString("community.actions.unable_to_duplicate", {
         error: _$$J(t, t.data.message)
       }),
       type: "HUB_FILE_DUPLICATE_FAILED",
@@ -651,7 +651,7 @@ let $$eM24 = nF((e, {
   _$$N2(n, e, r);
   n.catch(t => {
     e.dispatch(_$$F.enqueue({
-      message: _$$t("community.actions.unable_to_like_this_file_error", {
+      message: getI18nString("community.actions.unable_to_like_this_file_error", {
         error: _$$J(t, t.data?.message)
       }),
       type: "HUB_FILE_LIKE_FAILED",
@@ -699,7 +699,7 @@ let $$ej6 = nF((e, {
   _$$N2(i, e, n);
   i.catch(t => {
     e.dispatch(_$$F.enqueue({
-      message: _$$t("community.actions.unable_to_unlike_this_file_error", {
+      message: getI18nString("community.actions.unable_to_unlike_this_file_error", {
         error: _$$J(t, t.data.message)
       }),
       type: "HUB_FILE_UNLIKE_FAILED",
@@ -723,7 +723,7 @@ let $$eG14 = nF(async (e, {
 }) => {
   let r = e.getState();
   let n = r.user?.id;
-  n && (sx(M5.SLIDE_TEMPLATE_USED, {
+  n && (trackEventAnalytics(M5.SLIDE_TEMPLATE_USED, {
     hubFileId: t
   }), eB[n]?.includes(t) || (await _$$C.updateSlideTemplateCommunityUsageCount({
     hubFileId: t
@@ -731,7 +731,7 @@ let $$eG14 = nF(async (e, {
     eB[n] || (eB[n] = []);
     eB[n].includes(t) || eB[n].push(t);
   }).catch(e => {
-    x1("Error updating Community Slide Template usage count", e, {
+    logError("Error updating Community Slide Template usage count", e, {
       hubFileId: t
     }, {
       reportAsSentryError: !0
@@ -739,9 +739,9 @@ let $$eG14 = nF(async (e, {
   })));
 });
 let $$eV19 = nF((e, t) => {
-  (t === G4.FULLSCREEN || t === G4.FULLSCREEN_WITH_COMMENTS) && (sx("Context Viewed", {
+  (t === G4.FULLSCREEN || t === G4.FULLSCREEN_WITH_COMMENTS) && (trackEventAnalytics("Context Viewed", {
     name: "hub-file-canvas-enter-fullscreen"
-  }), t === G4.FULLSCREEN_WITH_COMMENTS && sx("CTA Clicked", {
+  }), t === G4.FULLSCREEN_WITH_COMMENTS && trackEventAnalytics("CTA Clicked", {
     name: "community_hub_preview_comments_viewed"
   }));
   let r = {
@@ -773,4 +773,4 @@ export const ts = $$eI20;
 export const vr = $$eU21;
 export const wO = $$ev22;
 export const yh = $$eD23;
-export const zm = $$eM24; 
+export const zm = $$eM24;

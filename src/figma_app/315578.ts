@@ -7,9 +7,9 @@ import { J } from "../905/125993";
 import { D } from "../905/716990";
 import { glU } from "../figma_app/763686";
 import { Pt } from "../figma_app/806412";
-import { nl } from "../figma_app/257275";
+import { isInteractionPathCheck } from "../figma_app/897289";
 import { tH } from "../905/751457";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Fj } from "../figma_app/793429";
 import { sf } from "../905/929976";
 import { AS, $O } from "../905/156213";
@@ -34,13 +34,13 @@ function x({
       area: _$$e.DEVELOPER_TOOLS
     },
     children: jsx(_$$E, {
-      "aria-label": _$$t("dev_handoff.variables.details_button_aria_label"),
+      "aria-label": getI18nString("dev_handoff.variables.details_button_aria_label"),
       onClick: t,
       className: e ? Zh : g_,
       "aria-pressed": e,
       recordingKey: r,
       htmlAttributes: {
-        "data-tooltip": _$$t("dev_handoff.variables.details_button_aria_label"),
+        "data-tooltip": getI18nString("dev_handoff.variables.details_button_aria_label"),
         "data-tooltip-type": Ib.TEXT
       },
       children: jsx(J, {})
@@ -62,7 +62,7 @@ function N({
       area: _$$e.DEVELOPER_TOOLS
     },
     children: jsx(_$$E, {
-      "aria-label": _$$t("dev_handoff.code_panel.suggested_vars_tooltip", {
+      "aria-label": getI18nString("dev_handoff.code_panel.suggested_vars_tooltip", {
         count: a
       }),
       onClick: r,
@@ -70,7 +70,7 @@ function N({
       "aria-pressed": e,
       recordingKey: i,
       htmlAttributes: {
-        "data-tooltip": _$$t("dev_handoff.code_panel.suggested_vars_tooltip", {
+        "data-tooltip": getI18nString("dev_handoff.code_panel.suggested_vars_tooltip", {
           count: a
         }),
         "data-tooltip-type": Ib.TEXT
@@ -92,13 +92,13 @@ function C({
       area: _$$e.DEVELOPER_TOOLS
     },
     children: jsx(_$$E, {
-      "aria-label": _$$t("dev_handoff.styles.details_button_aria_label"),
+      "aria-label": getI18nString("dev_handoff.styles.details_button_aria_label"),
       onClick: t,
       className: e ? Zh : g_,
       "aria-pressed": e,
       recordingKey: r,
       htmlAttributes: {
-        "data-tooltip": _$$t("dev_handoff.styles.details_button_aria_label"),
+        "data-tooltip": getI18nString("dev_handoff.styles.details_button_aria_label"),
         "data-tooltip-type": Ib.TEXT
       },
       children: jsx(J, {})
@@ -273,7 +273,7 @@ export function $$L1({
     };
   }(l, r, s, o, d);
   if (P()) return jsx(O, {});
-  if (e && (_ || isDetailModalShownForRow || nl())) return jsx("div", {
+  if (e && (_ || isDetailModalShownForRow || isInteractionPathCheck())) return jsx("div", {
     className: _o,
     children: jsx(x, {
       onClick: toggleDetailModal,
@@ -281,7 +281,7 @@ export function $$L1({
       recordingKey: Pt(h, `details_entry.${e}`)
     })
   });
-  if (s && o && (_ || isStyleDetailModalShownForRow || nl())) return jsx("div", {
+  if (s && o && (_ || isStyleDetailModalShownForRow || isInteractionPathCheck())) return jsx("div", {
     className: _o,
     children: jsx(C, {
       onClick: toggleStyleDetailModal,
@@ -290,7 +290,7 @@ export function $$L1({
     })
   });
   let k = !!t && t.ids.length > 0;
-  return !_$$T() && !e && k && (_ || isMatchingVarsModalShownForRow || nl()) ? jsx("div", {
+  return !_$$T() && !e && k && (_ || isMatchingVarsModalShownForRow || isInteractionPathCheck()) ? jsx("div", {
     className: _o,
     children: jsx(N, {
       onClick: toggleMatchingVarsModal,

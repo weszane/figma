@@ -1,6 +1,6 @@
 import { useMemo, useCallback } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { g as _$$g } from "../905/880308";
 import { Zn } from "../figma_app/933328";
 import { Lo, Ce, to } from "../905/156213";
@@ -25,7 +25,7 @@ export function $$_0({
   let I = useMemo(() => "editor" === t && A?.type === cX || "figjam" === t && A?.type === Vg.type, [A?.type, t]);
   let E = useCallback(() => {
     let n = _$$g();
-    sx("toggle_library_modal", {
+    trackEventAnalytics("toggle_library_modal", {
       action: I ? "close" : "open",
       entrypoint: e,
       libraryModalSessionId: v ? n : void 0,

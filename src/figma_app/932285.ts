@@ -3,10 +3,10 @@ import { useState, useEffect, createElement, useRef } from "react";
 import { generateRecordingKey } from "../figma_app/878298";
 import s from "classnames";
 import { UE, DA } from "../figma_app/191804";
-import { R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { GG } from "../905/511649";
 import { g as _$$g } from "../905/880308";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/989956";
 import { z5 } from "../905/713722";
 import { F as _$$F2 } from "../905/258517";
@@ -59,7 +59,7 @@ export function $$O0({
   swatchStyle: w,
   shouldRenderCirclesWithContentBoxSizing: O
 }) {
-  let L = R(e => e.mirror.selectionProperties.whiteboardNumSelectedByType);
+  let L = selectWithShallowEqual(e => e.mirror.selectionProperties.whiteboardNumSelectedByType);
   let P = {
     name: "figjam_node_color_change",
     properties: {
@@ -186,7 +186,7 @@ export function $$R2({
     showOpacity: null != N,
     target: jsx($n, {
       active: "light" === g ? "LOUD" : "NORMAL",
-      ariaLabel: _$$t("whiteboard.inline_menu.color_selector_label", {
+      ariaLabel: getI18nString("whiteboard.inline_menu.color_selector_label", {
         currentColor: V_(e.option, _).toLocaleLowerCase()
       }),
       buttonChildrenStyle: z?.buttonChildrenSize,
@@ -196,7 +196,7 @@ export function $$R2({
       onClick: () => K(!W),
       recordingKey: generateRecordingKey(s, "colorSelectorButton"),
       role: "combobox",
-      tooltip: u || V_(e.option, _, _$$t("whiteboard.inline_menu.color")),
+      tooltip: u || V_(e.option, _, getI18nString("whiteboard.inline_menu.color")),
       children: jsx(cd, {
         size: m,
         value: e.option,
@@ -255,7 +255,7 @@ export function $$L1({
     id: e,
     ...(t ? {} : {
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": _$$t("whiteboard.colors.custom"),
+      "data-tooltip": getI18nString("whiteboard.colors.custom"),
       "data-tooltip-show-above": !0
     }),
     className: o()(_$$s, {
@@ -264,7 +264,7 @@ export function $$L1({
     key: "custom-color",
     role: "option",
     tabIndex: -1,
-    "aria-label": _$$t("whiteboard.colors.custom"),
+    "aria-label": getI18nString("whiteboard.colors.custom"),
     recordingKey: d,
     onPointerUp: s
   }, jsx(cd, {
@@ -285,7 +285,7 @@ export function $$L1({
     onPointerUp: s,
     role: "option",
     tabIndex: -1,
-    "aria-label": _$$t("whiteboard.colors.custom"),
+    "aria-label": getI18nString("whiteboard.colors.custom"),
     className: o()(_$$s, {
       [_$$H]: l
     }),
@@ -417,7 +417,7 @@ function P({
       active: o ? "light" === k ? "LOUD" : "NORMAL" : "NONE",
       ariaActiveDescendant: l,
       ariaControls: ee.current,
-      ariaLabel: _$$t("whiteboard.inline_menu.color_selector_label", {
+      ariaLabel: getI18nString("whiteboard.inline_menu.color_selector_label", {
         currentColor: V_(e.option, O).toLocaleLowerCase()
       }),
       buttonChildrenStyle: J?.buttonChildrenSize,
@@ -431,7 +431,7 @@ function P({
       recordingKey: generateRecordingKey(s, "colorSelectorButton"),
       role: "combobox",
       testId: "WhiteboardColorSelectorButton",
-      tooltip: S || V_(e.option, O, _$$t("whiteboard.inline_menu.color")),
+      tooltip: S || V_(e.option, O, getI18nString("whiteboard.inline_menu.color")),
       children: jsx(cd, {
         size: R,
         value: e.option,

@@ -1,4 +1,4 @@
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { u2 } from "../figma_app/761118";
 import { td } from "../figma_app/827216";
 export class $$s0 {
@@ -32,7 +32,7 @@ export class $$s0 {
       this.clearState();
       return;
     }
-    if (zl.get(u2) !== td.GROUPING_COMPLETE) {
+    if (atomStoreManager.get(u2) !== td.GROUPING_COMPLETE) {
       this.debounceTimeoutId = setTimeout(() => {
         this.processAccumulatedChanges();
       }, 100);

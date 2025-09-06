@@ -1,5 +1,5 @@
 import { Ifi, YEY, Z6A } from "../figma_app/763686";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
 import { ds } from "../figma_app/314264";
 import { CN } from "../905/81982";
@@ -74,7 +74,7 @@ export let $$_0 = new class {
       annotationTextContent: a
     }), t.layerTypes) {
       let e = [];
-      t.layerTypes.forEach((t) => {
+      t.layerTypes.forEach(t => {
         e.push({
           type: t
         });
@@ -142,7 +142,7 @@ export let $$_0 = new class {
       (e.name || e.textContent) && a.push(e);
     }
     t.length && this.searchLibrary.updateEntries("guid", r, a);
-    t.length > 0 && sx("canvas_search_index_update", {
+    t.length > 0 && trackEventAnalytics("canvas_search_index_update", {
       timeElapsedMs: Math.round(performance.now() - e),
       numberOfNodes: t.length
     });

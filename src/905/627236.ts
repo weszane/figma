@@ -22,7 +22,7 @@ import { r as _$$r } from "../905/786998";
 import { tH, H4 } from "../905/751457";
 import { z as _$$z } from "../905/284530";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { Y as _$$Y } from "../905/830372";
 import { Pf } from "../905/590952";
 import { E as _$$E2 } from "../905/984674";
@@ -56,7 +56,7 @@ let Y = {
 };
 function q() {
   return jsx(_$$N2, {
-    hiddenTitle: tx("billing_modals.add_seats.hidden_title"),
+    hiddenTitle: renderI18nText("billing_modals.add_seats.hidden_title"),
     estimatedWidth: 480,
     estimatedHeight: 500,
     height: K
@@ -67,7 +67,7 @@ function $() {
     href: "https://help.figma.com/hc/articles/360041061034-Manage-billing-on-the-Professional-plan",
     trusted: !0,
     newTab: !0,
-    children: tx("general.learn_more")
+    children: renderI18nText("general.learn_more")
   });
 }
 export function $$Z0(e) {
@@ -115,7 +115,7 @@ function X(e) {
   });
   let [X, J] = _$$a(N_.dict(e => 0));
   let [ee, et] = useState(!1);
-  let ei = _$$t("billing_modals.add_seats.header");
+  let ei = getI18nString("billing_modals.add_seats.header");
   let en = v()(Object.values(X));
   let er = 0 === en || ee;
   let ea = function (e) {
@@ -169,7 +169,7 @@ function X(e) {
     id: "cost",
     name: jsx("span", {
       className: _$$s.textBodyMedium.colorTextSecondary.$,
-      children: _$$t("billing_modals.team_add_seats.table.header.projected_cost")
+      children: getI18nString("billing_modals.team_add_seats.table.header.projected_cost")
     }),
     textAlign: "right",
     cellComponent: e => jsx(_$$E2, {
@@ -185,7 +185,7 @@ function X(e) {
       children: [el > 0 && jsx(_$$E, {
         variant: "successFilled",
         "data-testid": "projected-cost-savings",
-        children: tx("billing_modals.team_add_seats.badge.savings", {
+        children: renderI18nText("billing_modals.team_add_seats.badge.savings", {
           amount: w.formatMoney(el, {
             showCents: !1
           })
@@ -243,8 +243,8 @@ function X(e) {
             children: ei
           }), jsx("div", {
             ...Ay.props(W ? Y.modalDescriptionWithProjectedCost : Y.modalDescriptionLegacy),
-            children: es ? tx("billing_modals.add_seats.description_convert_monthly_seats") : jsxs(Fragment, {
-              children: [tx("billing_modals.add_seats.description"), " ", jsx($, {})]
+            children: es ? renderI18nText("billing_modals.add_seats.description_convert_monthly_seats") : jsxs(Fragment, {
+              children: [renderI18nText("billing_modals.add_seats.description"), " ", jsx($, {})]
             })
           })]
         }), jsx(_$$C, {
@@ -258,7 +258,7 @@ function X(e) {
             name: jsx(_$$E2, {
               color: "secondary",
               truncate: !0,
-              children: _$$t("billing_modals.renewal.table.header.seat_type")
+              children: getI18nString("billing_modals.renewal.table.header.seat_type")
             }),
             textAlign: "left",
             gridColumnWidth: "auto",
@@ -268,13 +268,13 @@ function X(e) {
               seatType: e,
               showMonthlyAnnualPriceComparison: !0
             }),
-            getAggregate: () => es ? tx("billing_modals.team_add_seats.projected_costs") : tx("billing_modals.team_add_seats.table.header.total"),
+            getAggregate: () => es ? renderI18nText("billing_modals.team_add_seats.projected_costs") : renderI18nText("billing_modals.team_add_seats.table.header.total"),
             aggregateColumnSpan: 2
           }, {
             id: "monthly",
             name: jsx("span", {
               className: _$$s.textBodyMedium.colorTextSecondary.$,
-              children: _$$t("billing_modals.team_add_seats.table.header.monthly")
+              children: getI18nString("billing_modals.team_add_seats.table.header.monthly")
             }),
             textAlign: "right",
             cellComponent: e => jsx(_$$E2, {
@@ -287,7 +287,7 @@ function X(e) {
             id: "annual",
             name: jsx("span", {
               className: _$$s.textBodyMedium.colorTextSecondary.$,
-              children: _$$t("billing_modals.team_add_seats.table.header.annual")
+              children: getI18nString("billing_modals.team_add_seats.table.header.annual")
             }),
             textAlign: "center",
             cellComponent: e => jsx("div", {
@@ -316,11 +316,11 @@ function X(e) {
           children: [jsx($n, {
             variant: "secondary",
             onClick: e.onClose,
-            children: _$$t("general.cancel")
+            children: getI18nString("general.cancel")
           }), jsx($n, {
             type: "submit",
             disabled: er,
-            children: tx("billing_modals.team_add_seats.cta")
+            children: renderI18nText("billing_modals.team_add_seats.cta")
           })]
         })
       })]
@@ -328,9 +328,9 @@ function X(e) {
   });
 }
 function Q(e) {
-  let t = e.monthlyRenewalDate ? tx("billing_modals.team_add_seats.footer.banner.these_changes_will_appear_on_your_x_invoice", {
+  let t = e.monthlyRenewalDate ? renderI18nText("billing_modals.team_add_seats.footer.banner.these_changes_will_appear_on_your_x_invoice", {
     date: e.monthlyRenewalDate
-  }) : tx("billing_modals.team_add_seats.footer.banner.these_changes_will_appear_on_your_next_invoice");
+  }) : renderI18nText("billing_modals.team_add_seats.footer.banner.these_changes_will_appear_on_your_next_invoice");
   return e.shouldShowEstimatedCost ? e.totalAdditionalAnnualSeatCount <= 0 ? null : jsx(Yy, {
     icon: jsx(_$$S, {}),
     children: jsx(_$$Q, {
@@ -345,7 +345,7 @@ function Q(e) {
     orientation: "vertical",
     iconSrc: _$$A,
     dataTestId: "team-add-seats-disclaimer",
-    children: tx("billing_modals.team_add_seats.disclaimer_banner.add_annual_seats")
+    children: renderI18nText("billing_modals.team_add_seats.disclaimer_banner.add_annual_seats")
   });
 }
 export const T = $$Z0;

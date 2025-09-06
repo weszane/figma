@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import i from "classnames";
-import { sx } from "../905/449184";
-import { t as _$$t } from "../905/303541";
+import { trackEventAnalytics } from "../905/449184";
+import { getI18nString } from "../905/303541";
 import { A5 } from "../figma_app/209680";
 import { Jm } from "../figma_app/387599";
 import { CO } from "../5430/297093";
@@ -17,7 +17,7 @@ export function $$p0({
 }) {
   let o = CO(r);
   return o.length <= 1 ? null : jsx(A5, {
-    name: _$$t("community.landing_page.dropdown_filter__resource_type"),
+    name: getI18nString("community.landing_page.dropdown_filter__resource_type"),
     onUpdate: ([t]) => {
       e(t);
     },
@@ -37,7 +37,7 @@ export function $$h1({
   let _ = Jm();
   return jsx(_$$n, {
     context: e,
-    defaultOption: n ? _$$t("community.view_bar.all_resources") : _$$t("community.view_bar.files"),
+    defaultOption: n ? getI18nString("community.view_bar.all_resources") : getI18nString("community.view_bar.files"),
     selectedOption: t,
     options: l,
     searchParamUpdate: e => ({
@@ -47,7 +47,7 @@ export function $$h1({
       }).editorType
     }),
     onOptionSelect: (e, t) => {
-      sx("resource_type_filter_changed", {
+      trackEventAnalytics("resource_type_filter_changed", {
         resource_type: e,
         from: t,
         search_session_id: _

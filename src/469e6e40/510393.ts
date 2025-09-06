@@ -9,7 +9,7 @@ import { ks } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
 import { s as _$$s2 } from "../905/573154";
 import { $z } from "../figma_app/617427";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
 import { d as _$$d } from "../905/44199";
@@ -47,19 +47,19 @@ let $$w0 = Ju(function (e) {
       children: jsxs(vo, {
         children: [jsx(Y9, {
           children: jsx(hE, {
-            children: _$$t(e.isOrg ? "payments.org_change_billing_contact" : "payments.pro_change_billing_contact")
+            children: getI18nString(e.isOrg ? "payments.org_change_billing_contact" : "payments.pro_change_billing_contact")
           })
         }), jsxs(nB, {
           children: [jsx("div", {
             className: _$$s.colorTextSecondary.mb8.font11.$,
-            children: tx(e.isOrg ? "payments.org_enter_an_email_address" : "payments.pro_enter_an_email_address")
+            children: renderI18nText(e.isOrg ? "payments.org_enter_an_email_address" : "payments.pro_enter_an_email_address")
           }), e.isOrg ? jsx(P, {
             autocomplete: v,
             onChange: w,
             validateToken: y,
             TokenComponent: j,
             autoFocus: !1,
-            placeholder: _$$t("payments.change_billing_contact_placeholder")
+            placeholder: getI18nString("payments.change_billing_contact_placeholder")
           }) : jsx(ks, {
             value: a,
             onChange: e => d(e.target.value)
@@ -72,17 +72,17 @@ let $$w0 = Ju(function (e) {
               trackingProperties: {
                 trackingDescriptor: _$$c.CANCEL
               },
-              children: tx("payments.cancel")
+              children: renderI18nText("payments.cancel")
             }), jsx($z, {
               type: "submit",
               onClick: () => {
                 if (e.isOrg && C()) {
-                  k(_$$s2.error(_$$t("payments.invalid_billing_contact_error"), 5e3));
+                  k(_$$s2.error(getI18nString("payments.invalid_billing_contact_error"), 5e3));
                   return;
                 }
                 let t = e.isOrg ? E() : a;
                 if (!t) {
-                  k(_$$s2.error(_$$t("payments.missing_billing_contact_error"), 5e3));
+                  k(_$$s2.error(getI18nString("payments.missing_billing_contact_error"), 5e3));
                   return;
                 }
                 e.onSubmit(t).then(e.onClose).catch(e => {
@@ -92,7 +92,7 @@ let $$w0 = Ju(function (e) {
               trackingProperties: {
                 trackingDescriptor: _$$c.SAVE
               },
-              children: tx("payments.save")
+              children: renderI18nText("payments.save")
             })]
           })
         })]

@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { o as _$$o } from "../905/821217";
 import { h as _$$h } from "../905/207101";
 import { buildUploadUrl } from "../figma_app/169182";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { c as _$$c } from "../905/370443";
 import { e as _$$e } from "../905/621515";
 import { N } from "../figma_app/268271";
@@ -58,19 +58,19 @@ export function $$k0({
     let s;
     switch (e) {
       case iX.NEW_COMMENT:
-        t = tx("browser_notifications.onboarding_overlay.title.replies");
+        t = renderI18nText("browser_notifications.onboarding_overlay.title.replies");
         a = qH;
         n = UU;
         s = F_.BOTTOM;
         break;
       case iX.COMMENT_REPLY:
-        t = tx("browser_notifications.onboarding_overlay.title.replies");
+        t = renderI18nText("browser_notifications.onboarding_overlay.title.replies");
         a = qH;
         n = ym;
         s = F_.TOP_RIGHT;
         break;
       default:
-        t = tx("browser_notifications.onboarding_overlay.title.activity");
+        t = renderI18nText("browser_notifications.onboarding_overlay.title.activity");
         a = vH;
         n = fD;
         s = F_.TOP_RIGHT;
@@ -84,19 +84,19 @@ export function $$k0({
   }(e);
   let I = {
     clickOutsideToHide: !0,
-    description: tx("browser_notifications.onboarding_overlay.description"),
+    description: renderI18nText("browser_notifications.onboarding_overlay.description"),
     disableHighlight: !0,
     forceUI3Theme: !0,
     isShowing,
     media: jsx(_$$y, {
-      alt: _$$t("browser_notifications.onboarding_overlay.media.alt"),
+      alt: getI18nString("browser_notifications.onboarding_overlay.media.alt"),
       aspectRatio: mk,
       src: buildUploadUrl(mediaPath)
     }),
     onClose: complete,
     primaryCta: {
       ctaTrackingDescriptor: _$$c.NEXT,
-      label: tx("browser_notifications.onboarding_overlay.primary_cta"),
+      label: renderI18nText("browser_notifications.onboarding_overlay.primary_cta"),
       onClick: () => {
         k();
         complete();
@@ -105,7 +105,7 @@ export function $$k0({
     },
     secondaryCta: {
       ctaTrackingDescriptor: _$$c.CLOSE,
-      label: tx("browser_notifications.onboarding_overlay.secondary_cta"),
+      label: renderI18nText("browser_notifications.onboarding_overlay.secondary_cta"),
       onClick: complete,
       type: "button"
     },

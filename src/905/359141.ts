@@ -6,15 +6,15 @@ import { s as _$$s } from "../905/587936";
 import { fA, m9 } from "../905/542608";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
-import { fp, md, eU as _$$eU, Iz, Xr } from "../figma_app/27355";
-import { az, sx } from "../905/449184";
+import { useAtomValueAndSetter, useAtomWithSubscription, atom, createRemovableAtomFamily, Xr } from "../figma_app/27355";
+import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { h as _$$h } from "../905/207101";
-import { jk } from "../905/609396";
+import { PerfTimer } from "../905/609396";
 import { rt } from "../figma_app/615482";
 import { zm, sz, er as _$$er, Tp } from "../905/753512";
 import { S as _$$S } from "../905/612212";
 import { $n, IK } from "../905/521428";
-import { tx as _$$tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { AS, to as _$$to } from "../905/156213";
 import { Px, Pq, b1, Qj, mG, ry, _5, W as _$$W, eS as _$$eS2 } from "../905/825399";
 import { H as _$$H, S as _$$S2 } from "../905/348433";
@@ -99,7 +99,7 @@ import { f as _$$f } from "../905/405189";
 import { Q as _$$Q3 } from "../905/616985";
 import { i as _$$i2 } from "../figma_app/709177";
 import { _6 } from "../figma_app/386952";
-import { nT as _$$nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { Z as _$$Z } from "../905/279476";
 import { m as _$$m } from "../905/701558";
 import { $z as _$$$z } from "../figma_app/617427";
@@ -113,10 +113,10 @@ import { ServiceCategories as _$$e2 } from "../905/165054";
 import { i as _$$i3 } from "../905/718764";
 import { glU, h3O, _em } from "../figma_app/763686";
 import iC from "../vendor/3757";
-import { sn } from "../905/542194";
+import { globalPerfTimer } from "../905/542194";
 import { $ as _$$$2 } from "../905/455748";
 import { rf, Pt as _$$Pt } from "../figma_app/806412";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { nt as _$$nt } from "../figma_app/858013";
 import { J as _$$J2 } from "../905/445197";
 import { q as _$$q } from "../905/807667";
@@ -163,18 +163,18 @@ import { lo } from "../figma_app/297733";
 import { E1 } from "../figma_app/757606";
 import { Qk } from "../figma_app/188908";
 import { M3 } from "../figma_app/119475";
-let _ = new jk("performance.ds_eco.load_time", {});
+let _ = new PerfTimer("performance.ds_eco.load_time", {});
 let A = rt(!1);
 function y(e) {
   let t = useSelector(e => e.openFile);
-  let [i, n] = fp(A);
+  let [i, n] = useAtomValueAndSetter(A);
   let {
     hasSwitchedTabs,
     tabManager
   } = zm();
   return useCallback(() => {
     let r = _.getElapsedTime();
-    r && !hasSwitchedTabs && (az.trackDefinedEvent("library_modal.load_time", {
+    r && !hasSwitchedTabs && (analyticsEventManager.trackDefinedEvent("library_modal.load_time", {
       elapsedMs: r,
       fileKey: t?.key,
       teamId: t?.teamId ?? void 0,
@@ -206,21 +206,21 @@ function x() {
     className: "library_modal_error_fallback--errorFallbackBody--fAJiY",
     children: [jsx("h2", {
       className: "library_modal_error_fallback--errorHeading--H2QH6",
-      children: _$$tx("design_systems.libraries_modal.error_header")
+      children: renderI18nText("design_systems.libraries_modal.error_header")
     }), jsx("p", {
       className: "library_modal_error_fallback--errorBody--eE4Rc",
-      children: _$$tx("design_systems.libraries_modal.error_body")
+      children: renderI18nText("design_systems.libraries_modal.error_body")
     }), jsx($n, {
       variant: "secondary",
       onClick: i,
-      children: _$$tx("design_systems.libraries_modal.reload")
+      children: renderI18nText("design_systems.libraries_modal.reload")
     })]
   });
 }
 function S() {
   return jsx("div", {
     className: "library_modal_header--header--oKBY-",
-    children: _$$tx("design_systems.libraries_modal.manage_libraries")
+    children: renderI18nText("design_systems.libraries_modal.manage_libraries")
   });
 }
 function ea({
@@ -251,7 +251,7 @@ function ea({
       onBack: t,
       rightElement: l ? jsx("span", {
         className: _$$s2.textBodyMedium.colorTextSecondary.$,
-        children: _$$tx("design_systems.libraries_modal.current_file")
+        children: renderI18nText("design_systems.libraries_modal.current_file")
       }) : jsx(eo, {
         library: e,
         positionForLogging: a,
@@ -329,8 +329,8 @@ function eo({
     return useMemo(() => {
       let r;
       if (t || !e || e === Qh.COMMUNITY) return null;
-      if (e === Qh.USER) return _$$t("design_systems.libraries_modal.added_via_draft_defaults");
-      if (e === Qh.FILE) return _$$t("design_systems.libraries_modal.added_by_file_editor");
+      if (e === Qh.USER) return getI18nString("design_systems.libraries_modal.added_via_draft_defaults");
+      if (e === Qh.FILE) return getI18nString("design_systems.libraries_modal.added_by_file_editor");
       if (e === Qh.TEAM) {
         if (!i) return null;
         r = i.name;
@@ -342,7 +342,7 @@ function eo({
         if (!e) return null;
         r = e.name;
       }
-      return r ? _$$t("design_systems.libraries_modal.added_by_admin", {
+      return r ? getI18nString("design_systems.libraries_modal.added_by_admin", {
         groupName: r
       }) : null;
     }, [n, i, o, e, workspaces.data, t]);
@@ -546,7 +546,7 @@ function eB({
       library_file_key,
       library_key
     } = T();
-    az.trackDefinedEvent("library_modal.library_clicked", {
+    analyticsEventManager.trackDefinedEvent("library_modal.library_clicked", {
       ...F,
       added,
       approved,
@@ -639,7 +639,7 @@ function eB({
         width: d
       },
       children: jsx(Ex, {
-        text: _$$tx("design_systems.libraries_modal.added"),
+        text: renderI18nText("design_systems.libraries_modal.added"),
         color: zE.DEFAULT,
         className: "library_card--addedBadge--r21-V"
       })
@@ -675,10 +675,10 @@ function eV({
         onBlur: i,
         "data-testid": "library-card-add-button"
       },
-      "aria-label": _$$t("design_systems.libraries_modal.add_to_file_aria_label", {
+      "aria-label": getI18nString("design_systems.libraries_modal.add_to_file_aria_label", {
         libraryName: a
       }),
-      children: _$$tx("design_systems.libraries_modal.add_to_file")
+      children: renderI18nText("design_systems.libraries_modal.add_to_file")
     })
   });
 }
@@ -783,7 +783,7 @@ function eW({
   let l = _$$W2.usePath();
   let d = useCallback((e, t, n) => {
     let r = eS()(a.map(([, e]) => e.slice(0, 3).length));
-    az.trackDefinedEvent("library_modal.team_see_more_clicked", {
+    analyticsEventManager.trackDefinedEvent("library_modal.team_see_more_clicked", {
       ...s,
       libraryTeamId: n,
       path: _$$W2.buildPathString(l),
@@ -831,7 +831,7 @@ function eK({
       "data-testid": "team-libraries-header",
       children: [jsx(_$$h2, {
         className: _$$s2.textBodyMedium.$,
-        text: t ? t.name : _$$t("design_systems.libraries_modal.draft_libraries"),
+        text: t ? t.name : getI18nString("design_systems.libraries_modal.draft_libraries"),
         as: "h3"
       }), s && jsx(_$$E, {
         className: "team_libraries_rows--seeMore--Bv-Bz",
@@ -840,7 +840,7 @@ function eK({
         htmlAttributes: {
           "data-testid": "library-modal-see-more"
         },
-        children: _$$tx("design_systems.libraries_modal.see_more")
+        children: renderI18nText("design_systems.libraries_modal.see_more")
       })]
     }), jsx("div", {
       className: _$$s2.flex.$,
@@ -892,7 +892,7 @@ function eZ({
   });
   return jsx(_$$d2, {
     label: jsx(_$$J, {
-      children: _$$t("design_systems.libraries_modal.show_libraries_in_this_file")
+      children: getI18nString("design_systems.libraries_modal.show_libraries_in_this_file")
     }),
     checked: e,
     onChange: t,
@@ -927,7 +927,7 @@ function eQ({
     } = zm();
     let l = _$$W2.useFileMetadata();
     let d = useCallback(() => {
-      az.trackDefinedEvent("library_modal.filtered", {
+      analyticsEventManager.trackDefinedEvent("library_modal.filtered", {
         filter_by: t ? "none" : "subscribed",
         tab: tabManager.activeTab,
         libraryModalSessionId: sessionId,
@@ -967,7 +967,7 @@ function eQ({
       title: t,
       workspace: s,
       onBack: e,
-      backAriaLabel: _$$t("design_systems.libraries_modal.back_to_teams")
+      backAriaLabel: getI18nString("design_systems.libraries_modal.back_to_teams")
     }), jsx(_$$$, {
       className: _$$s2.flexGrow1.$,
       innerClassName: _$$s2.px16.pb16.$,
@@ -1002,8 +1002,8 @@ function eJ({
 }
 function e0() {
   return jsx(eJ, {
-    title: _$$t("design_systems.libraries_modal.no_organization_libraries"),
-    subtitle: _$$t("design_systems.libraries_modal.no_organization_libraries_subtitle")
+    title: getI18nString("design_systems.libraries_modal.no_organization_libraries"),
+    subtitle: getI18nString("design_systems.libraries_modal.no_organization_libraries_subtitle")
   });
 }
 let e1 = "library_modal_ent_view--workspaceCard--f-qmb";
@@ -1085,7 +1085,7 @@ function e2() {
   }, []);
   let C = useMemo(() => m ? {
     id: _w,
-    name: _$$t("design_systems.libraries_modal.draft_libraries"),
+    name: getI18nString("design_systems.libraries_modal.draft_libraries"),
     libraries: draftLibraries
   } : E ? _ ? otherLibraries.find(e => e.id === E) ?? null : u ? u.teams.find(e => e.id === E) ?? null : null : null, [E, u, draftLibraries, m, _, otherLibraries]);
   let [T, k] = useState(void 0);
@@ -1108,7 +1108,7 @@ function e2() {
     let o = workspaces.length;
     draftLibraries.length > 0 && o++;
     otherLibraries.length > 0 && o++;
-    az.trackDefinedEvent("library_modal.workspace_clicked", {
+    analyticsEventManager.trackDefinedEvent("library_modal.workspace_clicked", {
       ...L,
       libraryModalSessionId: sessionId,
       path: _$$W2.buildPathString(e),
@@ -1140,7 +1140,7 @@ function e2() {
         onBack: P,
         onSeeMoreClick: O
       }) : _ ? jsx(e6, {
-        title: _$$t("design_systems.libraries_modal.other_libraries"),
+        title: getI18nString("design_systems.libraries_modal.other_libraries"),
         teamsWithLibraries: otherLibraries,
         onBack: v,
         onSeeMoreClick: O
@@ -1217,7 +1217,7 @@ function e4({
   return jsxs(Fragment, {
     children: [jsx("h2", {
       className: _$$s2.textBodyLargeStrong.$,
-      children: _$$tx("design_systems.libraries_modal.your_workspace")
+      children: renderI18nText("design_systems.libraries_modal.your_workspace")
     }), jsx("div", {
       className: _$$s2.grid.gap8.$,
       style: {
@@ -1243,7 +1243,7 @@ function e3({
   return jsxs(Fragment, {
     children: [jsx("h2", {
       className: _$$s2.textBodyMedium.$,
-      children: _$$tx("design_systems.libraries_modal.orgs_workspaces", {
+      children: renderI18nText("design_systems.libraries_modal.orgs_workspaces", {
         orgName: a.name
       })
     }), jsxs("div", {
@@ -1258,13 +1258,13 @@ function e3({
         column: i % 3
       }, e.id)), i && jsx(e8, {
         icon: jsx(_$$p, {}),
-        title: _$$t("design_systems.libraries_modal.draft_libraries"),
+        title: getI18nString("design_systems.libraries_modal.draft_libraries"),
         onClick: () => t("drafts", s),
         kbPath: [m3.TabBodySection.Body, m3.WorkspacesSection.AllWorkspaces, Math.floor(s / 3)],
         column: s % 3
       }), r && jsx(e8, {
         icon: jsx(eh, {}),
-        title: _$$t("design_systems.libraries_modal.other_libraries"),
+        title: getI18nString("design_systems.libraries_modal.other_libraries"),
         onClick: () => t("other", o),
         kbPath: [m3.TabBodySection.Body, m3.WorkspacesSection.AllWorkspaces, Math.floor(o / 3)],
         column: o % 3
@@ -1528,7 +1528,7 @@ function tl({
   let [d, c] = useState(null);
   let u = useMemo(() => d === _w ? {
     id: _w,
-    name: _$$t("design_systems.libraries_modal.draft_libraries"),
+    name: getI18nString("design_systems.libraries_modal.draft_libraries"),
     libraries: draftLibraries
   } : d ? teamsWithLibraries.find(e => e.id === d) : null, [d, draftLibraries, teamsWithLibraries]);
   let p = useMemo(() => {
@@ -1620,10 +1620,10 @@ function td({
       }) : jsxs(Fragment, {
         children: [jsx("h2", {
           className: _$$s2.textBodyLargeStrong.$,
-          children: a ? _$$tx("design_systems.libraries_modal.team_libraries") : _$$tx("design_systems.libraries_modal.all_teams_in_your_organization")
+          children: a ? renderI18nText("design_systems.libraries_modal.team_libraries") : renderI18nText("design_systems.libraries_modal.all_teams_in_your_organization")
         }), jsx("div", {
           className: _$$s2.textBodyMedium.colorTextSecondary.$,
-          children: a ? _$$tx("design_systems.libraries_modal.team_libraries_description") : _$$tx("design_systems.libraries_modal.team_libraries_description_org")
+          children: a ? renderI18nText("design_systems.libraries_modal.team_libraries_description") : renderI18nText("design_systems.libraries_modal.team_libraries_description_org")
         })]
       })
     }), jsx(_$$$, {
@@ -1651,7 +1651,7 @@ function tc() {
         afterFileMove: lQ
       }
     }));
-    az.trackDefinedEvent("library_modal.starter_cta_clicked", {
+    analyticsEventManager.trackDefinedEvent("library_modal.starter_cta_clicked", {
       fileKey: i?.key,
       teamId: t?.id,
       entryPoint: "all_teams_tab",
@@ -1660,11 +1660,11 @@ function tc() {
   }, [e, i, t, sessionId]);
   let o = jsx($n, {
     onClick: s,
-    children: _$$tx("design_systems.libraries_modal.upgrade")
+    children: renderI18nText("design_systems.libraries_modal.upgrade")
   });
   return jsx(eJ, {
-    title: _$$t("design_systems.libraries_modal.no_team_libraries"),
-    subtitle: _$$t("design_systems.libraries_modal.teams_tab_empty_starter"),
+    title: getI18nString("design_systems.libraries_modal.no_team_libraries"),
+    subtitle: getI18nString("design_systems.libraries_modal.teams_tab_empty_starter"),
     cta: o
   });
 }
@@ -1673,11 +1673,11 @@ function tu() {
     variant: "secondary",
     href: "https://help.figma.com/hc/articles/360039484194",
     newTab: !0,
-    children: _$$tx("design_systems.libraries_modal.learn_more")
+    children: renderI18nText("design_systems.libraries_modal.learn_more")
   });
   return jsx(eJ, {
-    title: _$$t("design_systems.libraries_modal.no_team_libraries"),
-    subtitle: _$$t("design_systems.libraries_modal.teams_tab_empty"),
+    title: getI18nString("design_systems.libraries_modal.no_team_libraries"),
+    subtitle: getI18nString("design_systems.libraries_modal.teams_tab_empty"),
     cta: e
   });
 }
@@ -1733,23 +1733,23 @@ function tE({
   let d = useMemo(() => {
     let n = [];
     return "loaded" !== e.status ? [] : (e.data.connectedProjectLibraries.length > 0 && n.push({
-      header: _$$t("design_systems.libraries_modal.connected_project_libraries"),
+      header: getI18nString("design_systems.libraries_modal.connected_project_libraries"),
       libraries: e.data.connectedProjectLibraries,
       nameForLogging: "connected_project_recommended"
     }), t && e.data.orgLibraries.length > 0 && n.push({
-      header: _$$t("design_systems.libraries_modal.recommended_by", {
+      header: getI18nString("design_systems.libraries_modal.recommended_by", {
         name: t.name
       }),
       libraries: e.data.orgLibraries,
       nameForLogging: "org_recommended"
     }), l && e.data.workspaceLibraries.length > 0 && n.push({
-      header: _$$t("design_systems.libraries_modal.recommended_by", {
+      header: getI18nString("design_systems.libraries_modal.recommended_by", {
         name: l.name
       }),
       libraries: e.data.workspaceLibraries,
       nameForLogging: "workspace_recommended"
     }), i && e.data.teamLibraries.length > 0 && n.push({
-      header: t ? _$$t("design_systems.libraries_modal.recommended_by", {
+      header: t ? getI18nString("design_systems.libraries_modal.recommended_by", {
         name: i.name
       }) : null,
       libraries: e.data.teamLibraries,
@@ -1776,11 +1776,11 @@ function tx() {
   return jsxs("div", {
     className: _$$s2.flex.flexColumn.gap4.textBodyLargeStrong.px16.$,
     children: [jsx(_$$h2, {
-      text: _$$t("design_systems.libraries_modal.recommended_libraries"),
+      text: getI18nString("design_systems.libraries_modal.recommended_libraries"),
       as: "h3"
     }), jsx("span", {
       className: _$$s2.colorTextSecondary.textBodyMedium.$,
-      children: _$$tx("design_systems.libraries_modal.your_admins_suggest")
+      children: renderI18nText("design_systems.libraries_modal.your_admins_suggest")
     })]
   });
 }
@@ -1869,15 +1869,15 @@ function tC() {
   let {
     hasEntAccess
   } = mG();
-  let t = hasEntAccess ? _$$t("design_systems.libraries_modal.no_recommended_libraries_ent_text") : _$$t("design_systems.libraries_modal.no_recommended_libraries_pro_org_text");
+  let t = hasEntAccess ? getI18nString("design_systems.libraries_modal.no_recommended_libraries_ent_text") : getI18nString("design_systems.libraries_modal.no_recommended_libraries_pro_org_text");
   let i = jsx(_$$N.Button, {
     variant: "secondary",
     href: hasEntAccess ? "https://help.figma.com/hc/articles/21310245473815" : "https://help.figma.com/hc/articles/360039234953",
     newTab: !0,
-    children: _$$tx("design_systems.libraries_modal.learn_more")
+    children: renderI18nText("design_systems.libraries_modal.learn_more")
   });
   return jsx(eJ, {
-    title: _$$t("design_systems.libraries_modal.no_recommended_libraries"),
+    title: getI18nString("design_systems.libraries_modal.no_recommended_libraries"),
     subtitle: t,
     cta: i
   });
@@ -1898,11 +1898,11 @@ function tO({
     column: 1
   });
   return jsx($n, {
-    "aria-label": _$$t("figmake.design_system_imports.library_extraction_button.text"),
+    "aria-label": getI18nString("figmake.design_system_imports.library_extraction_button.text"),
     variant: "secondary",
     onClick: i,
     ref: setKeyboardNavigationElement,
-    children: _$$t("figmake.design_system_imports.library_extraction_button.text")
+    children: getI18nString("figmake.design_system_imports.library_extraction_button.text")
   });
 }
 function tM({
@@ -1911,7 +1911,7 @@ function tM({
 }) {
   let i = function () {
     let e = _$$Xm();
-    let t = md(y6(e));
+    let t = useAtomWithSubscription(y6(e));
     let i = t.productComponents.modified.wellFormed.length;
     let n = t.styles.modified.wellFormed.length;
     return t.variableSets.modified.wellFormed.length + n + i + t.pageThumbnails.modified.length;
@@ -1921,7 +1921,7 @@ function tM({
     children: [jsx(_$$G, {
       text: e.name
     }), t && jsx(Ex, {
-      text: 0 === i ? _$$t("design_systems.libraries_modal.no_changes") : _$$t("design_systems.libraries_modal.x_changes", {
+      text: 0 === i ? getI18nString("design_systems.libraries_modal.no_changes") : getI18nString("design_systems.libraries_modal.x_changes", {
         numChanges: i
       }),
       color: i > 0 ? zE.BRAND : zE.TERTIARY,
@@ -1930,10 +1930,10 @@ function tM({
   });
 }
 function tB() {
-  let e = md(p9);
+  let e = useAtomWithSubscription(p9);
   return {
     publishProgress: useSelector(e => e.library.publishProgress),
-    isPublished: md(qN),
+    isPublished: useAtomWithSubscription(qN),
     isPublishingModalEnabled: e
   };
 }
@@ -1950,7 +1950,7 @@ function tz({
   let l = tH();
   let d = !isPublishingModalEnabled || Kz(e);
   let c = useMemo(() => isPublishingModalEnabled || isPublished ? {} : {
-    "data-tooltip": _$$t("design_systems.libraries_modal.publishing_disabled_tooltip"),
+    "data-tooltip": getI18nString("design_systems.libraries_modal.publishing_disabled_tooltip"),
     "data-tooltip-type": Ib.TEXT
   }, [isPublishingModalEnabled, isPublished]);
   let {
@@ -1963,15 +1963,15 @@ function tz({
   return publishProgress.state !== Qx.NONE ? jsx(IK, {
     variant: "secondary",
     disabled: !0,
-    children: publishProgress.publishType === M$.UNPUBLISH ? _$$tx("design_systems.libraries_modal.unpublishing") : _$$tx("design_systems.libraries_modal.publishing")
+    children: publishProgress.publishType === M$.UNPUBLISH ? renderI18nText("design_systems.libraries_modal.unpublishing") : renderI18nText("design_systems.libraries_modal.publishing")
   }) : jsx(IK, {
-    "aria-label": _$$t("design_systems.libraries_modal.publish_this_file"),
+    "aria-label": getI18nString("design_systems.libraries_modal.publish_this_file"),
     variant: "primary",
     disabled: d,
     onClick: l,
     ref: setKeyboardNavigationElement,
     htmlAttributes: c,
-    children: _$$tx("design_systems.libraries_modal.publish")
+    children: renderI18nText("design_systems.libraries_modal.publish")
   });
 }
 let tH = () => {
@@ -2030,7 +2030,7 @@ function tW({
         if (e && ZA(e)) {
           Nf(e) && !e.library_file_key && (e.library_file_key = t);
           return () => {
-            az.trackDefinedEvent("library_modal.library_clicked", {
+            analyticsEventManager.trackDefinedEvent("library_modal.library_clicked", {
               ...a,
               libraryKey: e.library_key,
               libraryFileKey: t ?? void 0,
@@ -2057,7 +2057,7 @@ function tW({
       openFile: e,
       isPublishedLibrary: !!o
     }),
-    subheader: e.team?.name ?? _$$t("fullscreen.filename_view.drafts"),
+    subheader: e.team?.name ?? getI18nString("fullscreen.filename_view.drafts"),
     thumbnailUrl: url ?? null,
     coverThumbnail: shouldCover,
     secondaryCallToAction: i && u ? jsx(tO, {
@@ -2101,7 +2101,7 @@ function tY({
       library_file_key,
       library_key
     } = d();
-    az.trackDefinedEvent("library_modal.library_clicked", {
+    analyticsEventManager.trackDefinedEvent("library_modal.library_clicked", {
       ...o,
       added,
       approved,
@@ -2202,9 +2202,9 @@ function tX() {
           className: "library_modal_search_tab--searchBody--r2twU",
           children: [jsx("h3", {
             className: "library_modal_search_tab--searchHeader---K7CJ",
-            children: !i && a ? _$$tx("design_systems.libraries_modal.no_results_for", {
+            children: !i && a ? renderI18nText("design_systems.libraries_modal.no_results_for", {
               query: debouncedSearchQuery
-            }) : _$$tx("design_systems.libraries_modal.displaying_results_for", {
+            }) : renderI18nText("design_systems.libraries_modal.displaying_results_for", {
               searchQuery: debouncedSearchQuery
             })
           }), jsx(_$$W2.PositionDataProvider, {
@@ -2230,12 +2230,12 @@ function t5() {
   return jsxs(Fragment, {
     children: [jsx("h3", {
       className: t2,
-      children: _$$tx("design_systems.libraries_modal.libraries_added_to_this_file")
+      children: renderI18nText("design_systems.libraries_modal.libraries_added_to_this_file")
     }), jsxs("div", {
       className: "library_modal_this_file_empty_state--emptyStateWrapper--GEG6p",
       children: [jsx(t4, {}), jsx("div", {
         className: "library_modal_this_file_empty_state--emptyStateText--E-q9E",
-        children: _$$tx("design_systems.libraries_modal.you_don_t_have_any_libraries_added")
+        children: renderI18nText("design_systems.libraries_modal.you_don_t_have_any_libraries_added")
       }), jsx(t3, {})]
     })]
   });
@@ -2301,11 +2301,11 @@ function t3() {
   return hasProAccess ? jsx($n, {
     variant: "secondary",
     onClick: i,
-    children: _$$tx("design_systems.libraries_modal.view_recommended_libraries")
+    children: renderI18nText("design_systems.libraries_modal.view_recommended_libraries")
   }) : jsx($n, {
     variant: "secondary",
     onClick: a,
-    children: _$$tx("design_systems.libraries_modal.view_team_libraries")
+    children: renderI18nText("design_systems.libraries_modal.view_team_libraries")
   });
 }
 function t9() {
@@ -2316,12 +2316,12 @@ function t9() {
       children: jsx(_$$Z, {})
     }), jsx("div", {
       className: "library_modal_branch_banner--description--RuYOD",
-      children: _$$tx("design_systems.libraries_modal.merge_into_main_file_to_publish")
+      children: renderI18nText("design_systems.libraries_modal.merge_into_main_file_to_publish")
     }), jsx(_$$N.Button, {
       variant: "secondary",
       newTab: !0,
       href: "https://help.figma.com/hc/articles/5691189138839",
-      children: _$$tx("design_systems.libraries_modal.learn_more")
+      children: renderI18nText("design_systems.libraries_modal.learn_more")
     })]
   });
 }
@@ -2358,7 +2358,7 @@ function id() {
           afterFileMove: a
         }
       }));
-      az.trackDefinedEvent("library_modal.starter_cta_clicked", {
+      analyticsEventManager.trackDefinedEvent("library_modal.starter_cta_clicked", {
         fileKey: n?.key,
         teamId: n?.teamId ?? "",
         libraryModalSessionId: sessionId,
@@ -2378,7 +2378,7 @@ function id() {
   } = zm();
   let o = t || !i;
   _$$h(() => {
-    az.trackDefinedEvent("library_modal.publish_upsell_banner_shown", {
+    analyticsEventManager.trackDefinedEvent("library_modal.publish_upsell_banner_shown", {
       fileKey: a?.key,
       teamId: a?.teamId ?? "",
       libraryModalSessionId: sessionId
@@ -2389,14 +2389,14 @@ function id() {
       className: "library_publish_upsell_banner--bannerBody--TT2V3",
       children: [jsx("div", {
         className: "library_publish_upsell_banner--bannerHeader--IkzbP",
-        children: _$$tx("design_systems.libraries_modal.publish_components_as_a_library")
+        children: renderI18nText("design_systems.libraries_modal.publish_components_as_a_library")
       }), jsx("div", {
         className: "library_publish_upsell_banner--bannerDescription--viHA8",
         children: o ? jsx(ic, {}) : jsx(iu, {})
       }), o && jsx($n, {
         variant: "primary",
         onClick: e,
-        children: _$$tx("design_systems.libraries_modal.publish_this_file")
+        children: renderI18nText("design_systems.libraries_modal.publish_this_file")
       })]
     })]
   });
@@ -2417,7 +2417,7 @@ function ic() {
           openCheckoutInNewTab: !0
         }
       }));
-      az.trackDefinedEvent("library_modal.starter_cta_clicked", {
+      analyticsEventManager.trackDefinedEvent("library_modal.starter_cta_clicked", {
         fileKey: t?.key,
         teamId: t?.teamId ?? "",
         entryPoint: "this_file_banner_link",
@@ -2425,7 +2425,7 @@ function ic() {
       });
     }, [e, t, sessionId]);
   }();
-  return _$$tx("design_systems.libraries_modal.share_components_on_new_plan", {
+  return renderI18nText("design_systems.libraries_modal.share_components_on_new_plan", {
     upgradePlanText: jsx(_$$$z, {
       variant: "link",
       onClick: e,
@@ -2434,12 +2434,12 @@ function ic() {
         upsellSource: _$$b.LIBRARY_MODAL_UPSELL,
         canUserAccessProFeature: !1
       },
-      children: _$$tx("design_systems.libraries_modal.upgrade_to_professional_plan")
+      children: renderI18nText("design_systems.libraries_modal.upgrade_to_professional_plan")
     })
   });
 }
 function iu() {
-  return _$$tx("design_systems.libraries_modal.sharing_assets_with_your_team", {
+  return renderI18nText("design_systems.libraries_modal.sharing_assets_with_your_team", {
     learnMoreLink: jsx(Ph, {
       href: "/pricing",
       newTab: !0,
@@ -2449,7 +2449,7 @@ function iu() {
         upsellSource: _$$b.LIBRARY_MODAL_UPSELL,
         canUserAccessProFeature: !1
       },
-      children: _$$tx("design_systems.libraries_modal.learn_more")
+      children: renderI18nText("design_systems.libraries_modal.learn_more")
     })
   });
 }
@@ -2460,11 +2460,11 @@ function ip() {
   } = mG();
   let i = t$();
   let r = _6();
-  let a = "fullscreen" === r.view && r.editorType !== _$$nT.Slides && r.editorType !== _$$nT.Cooper;
+  let a = "fullscreen" === r.view && r.editorType !== FEditorType.Slides && r.editorType !== FEditorType.Cooper;
   return e && a ? hasProAccess ? jsxs(Fragment, {
     children: [jsx("h3", {
       className: "library_modal_this_file_tab--thisFileHeaderTop--bgW4I library_modal_this_file_tab--thisFileHeader--CyxnU",
-      children: _$$tx("design_systems.libraries_modal.assets_created_in_this_file")
+      children: renderI18nText("design_systems.libraries_modal.assets_created_in_this_file")
     }), jsx(tW, {
       openFile: e,
       kbPath: [m3.InThisFileSection.CreatedInThisFile],
@@ -2476,7 +2476,7 @@ function im() {
   return jsxs(Fragment, {
     children: [jsx("h3", {
       className: t2,
-      children: _$$tx("design_systems.libraries_modal.libraries_added_to_this_file")
+      children: renderI18nText("design_systems.libraries_modal.libraries_added_to_this_file")
     }), y1(2).map(e => jsx(_$$Q2, {}, e))]
   });
 }
@@ -2486,7 +2486,7 @@ function ih({
   return e.data?.length === 0 ? null : "loading" === e.status ? jsx(im, {}) : e.data?.length === 0 ? null : jsxs(Fragment, {
     children: [jsx("h3", {
       className: t2,
-      children: _$$tx("design_systems.libraries_modal.libraries_added_to_this_file")
+      children: renderI18nText("design_systems.libraries_modal.libraries_added_to_this_file")
     }), e.data?.map((e, t) => jsx(tY, {
       publishedLibrary: e,
       kbPath: [m3.InThisFileSection.AddedToThisFile, t]
@@ -2516,7 +2516,7 @@ function ig({
       variant: "secondary",
       onClick: onClickWithFocus,
       ref: setKeyboardNavigationElement,
-      children: _$$tx("design_systems.libraries_modal.view_missing_libraries")
+      children: renderI18nText("design_systems.libraries_modal.view_missing_libraries")
     })
   }) : null;
 }
@@ -2524,7 +2524,7 @@ function i_() {
   return jsxs(Fragment, {
     children: [jsx("h3", {
       className: t2,
-      children: _$$tx("design_systems.libraries_modal.used_in_this_file_header")
+      children: renderI18nText("design_systems.libraries_modal.used_in_this_file_header")
     }), jsx(_$$Q2, {})]
   });
 }
@@ -2534,7 +2534,7 @@ function iA({
   return "loaded" !== e.status ? jsx(i_, {}) : 0 === e.data.length ? null : jsxs(Fragment, {
     children: [jsx("h3", {
       className: t2,
-      children: _$$tx("design_systems.libraries_modal.used_in_this_file_header")
+      children: renderI18nText("design_systems.libraries_modal.used_in_this_file_header")
     }), e.data.map((e, t) => jsx(tY, {
       publishedLibrary: e,
       kbPath: [m3.InThisFileSection.UsedInThisFile, t]
@@ -2591,7 +2591,7 @@ function ib() {
   });
   let p = "loaded" === subscribedLibraries.status && "loaded" === usedInThisFile.status && "loaded" === missingLibraryKeys.status && 0 === subscribedLibraries.data.length && 0 === usedInThisFile.data.length && 0 === missingLibraryKeys.data.length;
   let m = useMemo(() => [subscribedLibraries, usedInThisFile, missingLibraryKeys].some(e => "loading" === e.status), [missingLibraryKeys, subscribedLibraries, usedInThisFile]);
-  let h = md($c);
+  let h = useAtomWithSubscription($c);
   let {
     isPublishingModalEnabled
   } = tB();
@@ -2671,10 +2671,10 @@ function iv() {
         children: [jsxs("div", {
           className: _$$s2.flex.flexColumn.gap4.textBodyLargeStrong.px16.$,
           children: [jsx("h2", {
-            children: _$$tx("design_systems.libraries_modal.ui_kits")
+            children: renderI18nText("design_systems.libraries_modal.ui_kits")
           }), jsx("span", {
             className: _$$s2.colorTextSecondary.textBodyMedium.$,
-            children: _$$tx("design_systems.libraries_modal.ui_kits_description")
+            children: renderI18nText("design_systems.libraries_modal.ui_kits_description")
           })]
         }), jsx(_$$$, {
           innerClassName: _$$s2.px16.pb16.$,
@@ -2698,9 +2698,9 @@ function iI() {
   });
 }
 var iT = iC;
-let iz = _$$eU(null);
+let iz = atom(null);
 var iW = iH;
-let iJ = Iz(e => _$$eU(t => {
+let iJ = createRemovableAtomFamily(e => atom(t => {
   let i = t(mO(e));
   let n = t(n1);
   let r = t(_$$tn);
@@ -2709,7 +2709,7 @@ let iJ = Iz(e => _$$eU(t => {
   return i.map(e => ({
     ...e,
     movedFromFileName: s[e.key] ? void 0 : function (e, t, i, n) {
-      if (e.localIdsToUpdate.some(e => i.includes(e))) return _$$t("design_systems.updates.this_file");
+      if (e.localIdsToUpdate.some(e => i.includes(e))) return getI18nString("design_systems.updates.this_file");
       for (let i of e.oldSubscribedKeysToUpdate) if (t[i] && n.includes(i)) return t[i];
     }(e, n, r, a)
   }));
@@ -2721,7 +2721,7 @@ function i0(e, t, i, n) {
     localIdsToUpdate,
     oldSubscribedKeysToUpdate
   } of t) {
-    if (localIdsToUpdate.find(e => glU.doesSymbolHaveInstances(e))) return _$$t("design_systems.updates.this_file");
+    if (localIdsToUpdate.find(e => glU.doesSymbolHaveInstances(e))) return getI18nString("design_systems.updates.this_file");
     a = a.concat(oldSubscribedKeysToUpdate);
   }
   if (0 !== a.length) for (let t of a) {
@@ -2802,14 +2802,14 @@ function np({
         }), movedFromFileName && jsx("span", {
           className: nu,
           children: jsx(_$$R, {
-            text: _$$t("design_systems.updates.moved_from", {
+            text: getI18nString("design_systems.updates.moved_from", {
               movedFromFileName
             })
           })
         }), p !== aD.CURRENT && !!numOutdatedInstances && jsx("span", {
           className: nu,
           children: jsx(_$$R, {
-            text: _$$t("design_systems.updates.num_outdated_instances", {
+            text: getI18nString("design_systems.updates.num_outdated_instances", {
               numOutdatedInstances
             })
           })
@@ -2823,7 +2823,7 @@ function np({
       kbArgs,
       elementRef: ref,
       children: jsx(_$$E, {
-        "aria-label": _$$t("design_systems.updates.review_updates"),
+        "aria-label": getI18nString("design_systems.updates.review_updates"),
         className: "updates_list_item--clickableRow--z5oBO",
         onClick: () => toggleReviewUpdatesModal(p || void 0),
         ref,
@@ -2840,7 +2840,7 @@ function np({
             i.stopPropagation();
             t(e);
           },
-          children: _$$tx("design_systems.updates.update")
+          children: renderI18nText("design_systems.updates.update")
         })
       })
     })]
@@ -2907,7 +2907,7 @@ function nh({
       className: "updates_checkpoint--updatesMetadata--ad326",
       children: [jsxs("div", {
         className: "updates_checkpoint--updatesByLine--RkQyX",
-        children: [_$$tx("design_systems.updates.updates_from", {
+        children: [renderI18nText("design_systems.updates.updates_from", {
           fileName: f
         }), e.isOpenFile && jsx("div", {
           className: "updates_checkpoint--helpIcon3--aYJ5e",
@@ -2926,18 +2926,18 @@ function nh({
         children: "loading" === h.status ? jsx(Wi, {
           animationType: JR.LIGHT_SHIMMER,
           className: _$$s2.h16.w150.$
-        }) : (c = e.publishDate, g && c ? _$$tx("design_systems.updates.publishedByHandle", {
+        }) : (c = e.publishDate, g && c ? renderI18nText("design_systems.updates.publishedByHandle", {
           publishUserHandle: g,
           relativeTimeStr: jsx(h1, {
             date: c
           })
-        }) : c ? _$$tx("design_systems.updates.published", {
+        }) : c ? renderI18nText("design_systems.updates.published", {
           relativeTimeStr: jsx(h1, {
             date: c
           })
-        }) : g ? _$$tx("design_systems.updates.publishedByHandleNoTimestamp", {
+        }) : g ? renderI18nText("design_systems.updates.publishedByHandleNoTimestamp", {
           publishUserHandle: g
-        }) : _$$tx("design_systems.updates.publishedNoTimestamp"))
+        }) : renderI18nText("design_systems.updates.publishedNoTimestamp"))
       }), null != e.description && "" !== e.description && jsx("div", {
         className: "updates_checkpoint--updatesDescription--TJrG7",
         children: e.description
@@ -2984,20 +2984,20 @@ function ny({
   SR();
   let c = _$$er();
   let h = function () {
-    let [e, t] = fp(iz);
+    let [e, t] = useAtomValueAndSetter(iz);
     let i = useDispatch();
     let {
       componentUpdateKeys,
       stateGroupUpdateKeys,
       styleUpdateKeys,
       variableSetKeys
-    } = md(_$$t_);
+    } = useAtomWithSubscription(_$$t_);
     let {
       componentUpdatesForAllPages,
       styleUpdatesForAllPages,
       variableSetUpdatesForAllPages,
       libraryAssetUpdatesForAllPages
-    } = md(S9);
+    } = useAtomWithSubscription(S9);
     let g = useMemo(() => new Set([...componentUpdatesForAllPages.map(e => `${e.component_key}/${e.content_hash}`), ...styleUpdatesForAllPages.map(e => `${e.key}/${e.content_hash}`), ...variableSetUpdatesForAllPages.map(e => `${e.key}/${e.version}`), ...libraryAssetUpdatesForAllPages.map(e => `${Av(e)}/${Dg(e)}`)]), [componentUpdatesForAllPages, styleUpdatesForAllPages, variableSetUpdatesForAllPages, libraryAssetUpdatesForAllPages]);
     let f = useMemo(() => libraryAssetUpdatesForAllPages.map(e => {
       let t = VJ(e);
@@ -3052,7 +3052,7 @@ function ny({
           refs: g,
           metadata: e
         }), n && i(_$$F.enqueue({
-          message: _$$t("design_systems.updates.couldn_t_load_update_descriptions_please_try_again_later"),
+          message: getI18nString("design_systems.updates.couldn_t_load_update_descriptions_please_try_again_later"),
           type: "updates_error",
           error: !0
         })));
@@ -3062,12 +3062,12 @@ function ny({
   }();
   let g = Xr(wy);
   let _ = useSelector(_$$c2);
-  let A = md(yV);
+  let A = useAtomWithSubscription(yV);
   let y = A?.parentOrgId?.toString();
   let b = _.file_team_id?.toString();
   let E = useContext(Jc) ?? aD.ALL;
   let x = pk(E);
-  let S = !md(x);
+  let S = !useAtomWithSubscription(x);
   let w = _$$eS(E);
   let {
     updateComponent,
@@ -3083,7 +3083,7 @@ function ny({
   let V = E === aD.ALL;
   let [G, z] = useState(!1);
   let [W, K] = useState(null);
-  _$$h(() => (sx("updates_modal_opened", {
+  _$$h(() => (trackEventAnalytics("updates_modal_opened", {
     fileKey: U || "null",
     usingFullscreenData: V,
     isIncremental: h3O?.isIncrementalSession(),
@@ -3091,10 +3091,10 @@ function ny({
     isSgShimFFEnabled: !0,
     entrypoint: o,
     switchedTabs: l
-  }), sn.start("updates_modal_load"), g(!0), V && _$$q(_em.LIBRARY_UPDATES).then(() => {
-    let e = sn.get("updates_modal_load")?.getElapsedTime();
+  }), globalPerfTimer.start("updates_modal_load"), g(!0), V && _$$q(_em.LIBRARY_UPDATES).then(() => {
+    let e = globalPerfTimer.get("updates_modal_load")?.getElapsedTime();
     e && K(e);
-    sn.resume("updates_modal_load");
+    globalPerfTimer.resume("updates_modal_load");
     _$$J2(() => {
       glU.expandInstancesWithStyleOverrides();
       glU.onFrame();
@@ -3114,8 +3114,8 @@ function ny({
   });
   useEffect(() => {
     if (Y && !G) {
-      let e = sn.tryStop("updates_modal_load");
-      e && sx("updates_modal_loaded", {
+      let e = globalPerfTimer.tryStop("updates_modal_load");
+      e && trackEventAnalytics("updates_modal_loaded", {
         fileKey: U || "null",
         waitForAllPagesTime: W,
         fullLoadTime: e,
@@ -3144,11 +3144,11 @@ function ny({
     className: nf,
     children: [jsx("div", {
       className: n_,
-      children: _$$tx("design_systems.updates.no_updates_available")
+      children: renderI18nText("design_systems.updates.no_updates_available")
     }), jsx("div", {
       className: nA,
       children: jsx("div", {
-        children: _$$tx("design_systems.updates.updates_to_components_or_styles", {
+        children: renderI18nText("design_systems.updates.updates_to_components_or_styles", {
           lineBreak: jsx("br", {})
         })
       })
@@ -3157,11 +3157,11 @@ function ny({
     className: nf,
     children: [jsx("div", {
       className: n_,
-      children: _$$tx("design_systems.updates.no_updates_available_page")
+      children: renderI18nText("design_systems.updates.no_updates_available_page")
     }), jsx("div", {
       className: nA,
       children: jsx("div", {
-        children: _$$tx("design_systems.updates.maybe_updates_other_pages")
+        children: renderI18nText("design_systems.updates.maybe_updates_other_pages")
       })
     }), jsx("div", {
       className: "updates--viewAllButton--RpxHV",
@@ -3175,7 +3175,7 @@ function ny({
             Z();
           },
           ref,
-          children: _$$tx("design_systems.updates.show_all_updates")
+          children: renderI18nText("design_systems.updates.show_all_updates")
         })
       }) : jsx($n, {
         onClick: e => {
@@ -3183,12 +3183,12 @@ function ny({
           Z();
         },
         variant: "secondary",
-        children: _$$tx("design_systems.updates.view_all_pages")
+        children: renderI18nText("design_systems.updates.view_all_pages")
       })
     })]
   }) : null, [S, Y, c, E, Z, kbArgs, ref]);
   let Q = useCallback(e => {
-    az.trackDefinedEvent("library_preferences_modal.updates_modal_tab_changed", {
+    analyticsEventManager.trackDefinedEvent("library_preferences_modal.updates_modal_tab_changed", {
       tab: e ? "all" : "current",
       fileKey: U,
       fileParentOrgId: y,
@@ -3244,7 +3244,7 @@ function ny({
         kbArgs: _kbArgs,
         children: jsx(_$$d2, {
           label: jsx(_$$J, {
-            children: _$$tx("design_systems.updates.show_updates_for_all_pages")
+            children: renderI18nText("design_systems.updates.show_updates_for_all_pages")
           }),
           checked: E === aD.ALL,
           onChange: Q,
@@ -3257,7 +3257,7 @@ function ny({
         onClick: et,
         recordingKey: _$$Pt(a, "updateAll"),
         variant: "primary",
-        children: _$$tx("design_systems.updates.update_all")
+        children: renderI18nText("design_systems.updates.update_all")
       })]
     })]
   });
@@ -3285,10 +3285,10 @@ function nb({
   let m = useMemo(() => {
     var i;
     i = p ?? aD.ALL;
-    return _$$eU(n => {
+    return atom(n => {
       let r = n(function (e, t) {
         let i = Yy(t);
-        return _$$eU(t => {
+        return atom(t => {
           let n = t(qp);
           return t(i).map(t => ({
             ...t,
@@ -3298,7 +3298,7 @@ function nb({
       }(t, i));
       let a = n(function (e, t) {
         let i = Bw(t);
-        return _$$eU(t => {
+        return atom(t => {
           let n = t(qp);
           return t(i).map(t => ({
             ...t,
@@ -3354,8 +3354,8 @@ function nb({
     });
   }, [t, e, p]);
   let h = pk(p ?? aD.ALL);
-  let g = md(h);
-  let f = md(m);
+  let g = useAtomWithSubscription(h);
+  let f = useAtomWithSubscription(m);
   let _ = useCallback(() => {
     let e = f.reduce((e, t) => e + t.components.length, 0);
     let t = f.reduce((e, t) => e + t.stateGroups.length, 0);
@@ -3372,9 +3372,9 @@ function nb({
   }, [c, f]);
   return (_$$W2.useLogPageView({
     metadata: _
-  }), g && iT()(f)) ? ($D(_$$e2.DESIGN_SYSTEMS_EDITOR, Error("Library updates list is empty but shouldn't be")), jsx("div", {
+  }), g && iT()(f)) ? (reportError(_$$e2.DESIGN_SYSTEMS_EDITOR, Error("Library updates list is empty but shouldn't be")), jsx("div", {
     className: nf,
-    children: _$$tx("design_systems.updates.couldn_t_load_update_descriptions_error", {
+    children: renderI18nText("design_systems.updates.couldn_t_load_update_descriptions_error", {
       lineBreak: jsx("br", {})
     })
   })) : jsx(Fragment, {
@@ -3415,7 +3415,7 @@ function nv() {
       className: "updates--loadingSpinnerContainer---E3qg",
       children: [jsx(_$$nt, {}), jsx("div", {
         className: "updates--loadingText--Fk9e3",
-        children: _$$tx("design_systems.updates.updates_taking_longer_than_expected")
+        children: renderI18nText("design_systems.updates.updates_taking_longer_than_expected")
       })]
     })]
   });
@@ -3603,7 +3603,7 @@ function nV() {
         switch (i) {
           case "thisFile":
             return createElement(nU, {
-              tabName: _$$tx("design_systems.libraries_modal.this_file"),
+              tabName: renderI18nText("design_systems.libraries_modal.this_file"),
               icon: jsx(_$$l, {}),
               ...tabPropsMap.thisFile,
               kbIdx: a,
@@ -3612,18 +3612,18 @@ function nV() {
           case "updates":
             return jsxs(_$$Fragment, {
               children: [jsx(nU, {
-                tabName: _$$tx("design_systems.libraries_modal.updates"),
+                tabName: renderI18nText("design_systems.libraries_modal.updates"),
                 icon: jsx(_$$o, {}),
                 ...tabPropsMap.updates,
                 kbIdx: a
               }), jsx(nB, {}), jsx("h3", {
                 className: "library_modal_tab_strip--tabSectionHeader--tomFn",
-                children: _$$tx("design_systems.libraries_modal.browse_libraries")
+                children: renderI18nText("design_systems.libraries_modal.browse_libraries")
               })]
             }, "updates");
           case "recommended":
             return createElement(nU, {
-              tabName: _$$tx("design_systems.libraries_modal.recommended"),
+              tabName: renderI18nText("design_systems.libraries_modal.recommended"),
               icon: jsx(_$$c3, {}),
               ...tabPropsMap.recommended,
               kbIdx: a,
@@ -3631,7 +3631,7 @@ function nV() {
             });
           case "teams":
             return createElement(nU, {
-              tabName: t ? _$$tx("design_systems.libraries_modal.your_teams") : _$$tx("design_systems.libraries_modal.teams"),
+              tabName: t ? renderI18nText("design_systems.libraries_modal.your_teams") : renderI18nText("design_systems.libraries_modal.teams"),
               icon: jsx(_$$w, {}),
               ...tabPropsMap.teams,
               kbIdx: a,
@@ -3639,7 +3639,7 @@ function nV() {
             });
           case "org":
             return createElement(nU, {
-              tabName: _$$tx("design_systems.libraries_modal.your_organization"),
+              tabName: renderI18nText("design_systems.libraries_modal.your_organization"),
               icon: jsx(_$$Y2, {}),
               ...tabPropsMap.org,
               kbIdx: a,
@@ -3647,7 +3647,7 @@ function nV() {
             });
           case "uiKits":
             return createElement(nU, {
-              tabName: _$$tx("design_systems.libraries_modal.ui_kits"),
+              tabName: renderI18nText("design_systems.libraries_modal.ui_kits"),
               icon: jsx(_$$U2, {}),
               ...tabPropsMap.uiKits,
               kbIdx: a,

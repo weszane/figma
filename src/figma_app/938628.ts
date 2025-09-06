@@ -7,16 +7,16 @@ import { q as _$$q } from "../905/932270";
 import { Egt, glU, hJs, mKm, V$M, X3B, _0v, Z64, rXF, tS9, Qa7, Ez5, ibQ } from "../figma_app/763686";
 import { l7, nc } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
-import { md, fp, E3 } from "../figma_app/27355";
+import { useAtomWithSubscription, useAtomValueAndSetter, createLocalStorageAtom } from "../figma_app/27355";
 import g from "classnames";
-import { sx, az } from "../905/449184";
+import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { am } from "../figma_app/901889";
-import { m as _$$m } from "../905/717445";
+import { getFilteredFeatureFlags } from "../905/717445";
 import { Pt } from "../figma_app/806412";
 import { E as _$$E } from "../905/277716";
 import { k as _$$k2 } from "../905/582200";
 import { B as _$$B } from "../905/714743";
-import { t as _$$t, tx as _$$tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { cJ } from "../figma_app/976749";
 import { Y5 } from "../figma_app/455680";
 import { sT } from "../figma_app/740163";
@@ -34,7 +34,7 @@ import { Tv, I9 } from "../figma_app/151869";
 import { Fk } from "../figma_app/167249";
 import { zk } from "../figma_app/198712";
 import { fn, DE, sY } from "../figma_app/811257";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { getSingletonSceneGraph } from "../905/700578";
 import { A as _$$A } from "../svg/33649";
 import { A as _$$A2 } from "../svg/541014";
@@ -87,9 +87,9 @@ import { v as _$$v } from "../figma_app/45501";
 import { C as _$$C } from "../figma_app/630916";
 import { G as _$$G } from "../figma_app/80900";
 import { N as _$$N2 } from "../905/995635";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { t as _$$t3 } from "../905/331623";
-import { Gq } from "../figma_app/363242";
+import { getI18nState } from "../figma_app/363242";
 import { isNullish } from "../figma_app/95419";
 import { Q as _$$Q3 } from "../figma_app/67145";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -185,7 +185,7 @@ function z() {
   return e.isNonEditableInstanceSublayerSelected || e.nodesAreAllInsideStacks && "AUTO" === e.stackPositioning || !1;
 }
 function W() {
-  return _$$R(e => {
+  return selectWithShallowEqual(e => {
     let t = e.mirror.selectionProperties;
     return {
       openFileKey: e.openFile?.key,
@@ -216,21 +216,21 @@ class X {
   format(e) {
     switch (e) {
       case "MIN":
-        return this.isHorizontal ? _$$t("fullscreen.properties_panel.constraints_panel.select.left") : _$$t("fullscreen.properties_panel.constraints_panel.select.top");
+        return this.isHorizontal ? getI18nString("fullscreen.properties_panel.constraints_panel.select.left") : getI18nString("fullscreen.properties_panel.constraints_panel.select.top");
       case "MAX":
-        return this.isHorizontal ? _$$t("fullscreen.properties_panel.constraints_panel.select.right") : _$$t("fullscreen.properties_panel.constraints_panel.select.bottom");
+        return this.isHorizontal ? getI18nString("fullscreen.properties_panel.constraints_panel.select.right") : getI18nString("fullscreen.properties_panel.constraints_panel.select.bottom");
       case "STRETCH":
-        return this.isHorizontal ? this.hasUI3V2Constraints ? _$$t("fullscreen.properties_panel.constraints_panel.select.left_plus_right") : _$$t("fullscreen.properties_panel.constraints_panel.select.left_and_right") : this.hasUI3V2Constraints ? _$$t("fullscreen.properties_panel.constraints_panel.select.top_plus_bottom") : _$$t("fullscreen.properties_panel.constraints_panel.select.top_and_bottom");
+        return this.isHorizontal ? this.hasUI3V2Constraints ? getI18nString("fullscreen.properties_panel.constraints_panel.select.left_plus_right") : getI18nString("fullscreen.properties_panel.constraints_panel.select.left_and_right") : this.hasUI3V2Constraints ? getI18nString("fullscreen.properties_panel.constraints_panel.select.top_plus_bottom") : getI18nString("fullscreen.properties_panel.constraints_panel.select.top_and_bottom");
       case "CENTER":
-        return _$$t("fullscreen.properties_panel.constraints_panel.select.center");
+        return getI18nString("fullscreen.properties_panel.constraints_panel.select.center");
       case "SCALE":
-        return _$$t("fullscreen.properties_panel.constraints_panel.select.scale");
+        return getI18nString("fullscreen.properties_panel.constraints_panel.select.scale");
       default:
         return "";
     }
   }
   getUI3DropdownOverride(e) {
-    if ("STRETCH" === e) return this.isHorizontal ? _$$t("fullscreen.properties_panel.constraints_panel.select.left_and_right_truncated") : _$$t("fullscreen.properties_panel.constraints_panel.select.top_and_bottom_truncated");
+    if ("STRETCH" === e) return this.isHorizontal ? getI18nString("fullscreen.properties_panel.constraints_panel.select.left_and_right_truncated") : getI18nString("fullscreen.properties_panel.constraints_panel.select.top_and_bottom_truncated");
   }
 }
 function q(e, t, r) {
@@ -308,7 +308,7 @@ function Q(e) {
   let h = Fk(e => e.getDirectlySelectedNodes().map(e => e.guid));
   let m = Fk(e => new Set(e.getDirectlySelectedNodes().map(e => e?.parentGuid)));
   let g = t => {
-    u.isNonEditableInstanceSublayerSelected || (sx("Constraint Changed", {
+    u.isNonEditableInstanceSublayerSelected || (trackEventAnalytics("Constraint Changed", {
       fileKey: e.openFileKey,
       source: "panel",
       nodeIds: h.slice(0, 50),
@@ -363,12 +363,12 @@ function Q(e) {
   let L = (e, t) => {
     let r = "MIN" === e || "STRETCH" === e;
     let n = "MAX" === e || "STRETCH" === e;
-    return "CENTER" === e ? _$$t("fullscreen.properties_panel.transform_panel.c") : r && !n ? "horizontal" === t ? _$$t("fullscreen.properties_panel.transform_panel.l") : _$$t("fullscreen.properties_panel.transform_panel.t") : n && !r ? "horizontal" === t ? _$$t("fullscreen.properties_panel.transform_panel.r") : _$$t("fullscreen.properties_panel.transform_panel.b") : "horizontal" === t ? _$$t("fullscreen.properties_panel.transform_panel.x") : _$$t("fullscreen.properties_panel.transform_panel.y");
+    return "CENTER" === e ? getI18nString("fullscreen.properties_panel.transform_panel.c") : r && !n ? "horizontal" === t ? getI18nString("fullscreen.properties_panel.transform_panel.l") : getI18nString("fullscreen.properties_panel.transform_panel.t") : n && !r ? "horizontal" === t ? getI18nString("fullscreen.properties_panel.transform_panel.r") : getI18nString("fullscreen.properties_panel.transform_panel.b") : "horizontal" === t ? getI18nString("fullscreen.properties_panel.transform_panel.x") : getI18nString("fullscreen.properties_panel.transform_panel.y");
   };
   let P = (e, t) => {
     let r = "MIN" === e || "STRETCH" === e;
     let n = "MAX" === e || "STRETCH" === e;
-    return r && !n ? "horizontal" === t ? _$$t("fullscreen.properties_panel.transform_panel.left") : _$$t("fullscreen.properties_panel.transform_panel.top") : n && !r ? "horizontal" === t ? _$$t("fullscreen.properties_panel.transform_panel.right") : _$$t("fullscreen.properties_panel.transform_panel.bottom") : "horizontal" === t ? _$$t("fullscreen.properties_panel.transform_panel.horizontal_constraints") : _$$t("fullscreen.properties_panel.transform_panel.vertical_constraints");
+    return r && !n ? "horizontal" === t ? getI18nString("fullscreen.properties_panel.transform_panel.left") : getI18nString("fullscreen.properties_panel.transform_panel.top") : n && !r ? "horizontal" === t ? getI18nString("fullscreen.properties_panel.transform_panel.right") : getI18nString("fullscreen.properties_panel.transform_panel.bottom") : "horizontal" === t ? getI18nString("fullscreen.properties_panel.transform_panel.horizontal_constraints") : getI18nString("fullscreen.properties_panel.transform_panel.vertical_constraints");
   };
   let D = jsx($$, {
     bigNudgeAmount,
@@ -411,7 +411,7 @@ function Q(e) {
   return jsx(fn, {
     dataTestId: "x-y-inputs-row-for-collapsed-constraints",
     ref: e.rowRef,
-    leftLabel: _$$tx("properties.label.position"),
+    leftLabel: renderI18nText("properties.label.position"),
     leftInput: D,
     rightLabel: null,
     rightInput: k,
@@ -459,7 +459,7 @@ function ea({
 }
 let eo = new class {
   format(e) {
-    if ("AUTO" === e) return _$$t("fullscreen.auto");
+    if ("AUTO" === e) return getI18nString("fullscreen.auto");
   }
 }();
 function el(e) {
@@ -497,7 +497,7 @@ function el(e) {
     className: "constraint_select--hideMeasurementNode--Of14C",
     children: measurementNode
   });
-  let p = "HORIZONTAL" === e.axis ? _$$t("fullscreen.properties_panel.constraints_panel.constraints.horizontal.tooltip") : _$$t("fullscreen.properties_panel.constraints_panel.constraints.vertical.tooltip");
+  let p = "HORIZONTAL" === e.axis ? getI18nString("fullscreen.properties_panel.constraints_panel.constraints.horizontal.tooltip") : getI18nString("fullscreen.properties_panel.constraints_panel.constraints.vertical.tooltip");
   let _ = jsx("div", {
     className: "constraint_select--selectText--IcqbB",
     ref: s,
@@ -1110,7 +1110,7 @@ function eA(e) {
     return !!E7(t);
   };
   let P = t => {
-    u.isNonEditableInstanceSublayerSelected || (sx("Constraint Changed", {
+    u.isNonEditableInstanceSublayerSelected || (trackEventAnalytics("Constraint Changed", {
       fileKey: e.openFileKey,
       source: "panel",
       nodeIds: h.slice(0, 50),
@@ -1126,7 +1126,7 @@ function eA(e) {
     bigNudgeAmount,
     childrenAtEnd: !0,
     className: "MIN" === u.verticalConstraint || "STRETCH" === u.verticalConstraint ? eS : ev,
-    "data-tooltip": _$$t("sites.panel.position_panel.top"),
+    "data-tooltip": getI18nString("sites.panel.position_panel.top"),
     "data-tooltip-type": Ib.TEXT,
     dispatch: t,
     inputClassName: eI,
@@ -1151,7 +1151,7 @@ function eA(e) {
     bigNudgeAmount,
     childrenAtEnd: !0,
     className: "MAX" === u.verticalConstraint || "STRETCH" === u.verticalConstraint ? eS : ev,
-    "data-tooltip": _$$t("sites.panel.position_panel.bottom"),
+    "data-tooltip": getI18nString("sites.panel.position_panel.bottom"),
     "data-tooltip-type": Ib.TEXT,
     dispatch: t,
     inputClassName: eI,
@@ -1176,7 +1176,7 @@ function eA(e) {
     bigNudgeAmount,
     childrenAtEnd: !0,
     className: "MIN" === u.horizontalConstraint || "STRETCH" === u.horizontalConstraint ? eS : ev,
-    "data-tooltip": _$$t("sites.panel.position_panel.left"),
+    "data-tooltip": getI18nString("sites.panel.position_panel.left"),
     "data-tooltip-type": Ib.TEXT,
     dispatch: t,
     inputClassName: eI,
@@ -1201,7 +1201,7 @@ function eA(e) {
     bigNudgeAmount,
     childrenAtEnd: !0,
     className: "MAX" === u.horizontalConstraint || "STRETCH" === u.horizontalConstraint ? eS : ev,
-    "data-tooltip": _$$t("sites.panel.position_panel.right"),
+    "data-tooltip": getI18nString("sites.panel.position_panel.right"),
     "data-tooltip-type": Ib.TEXT,
     dispatch: t,
     inputClassName: eI,
@@ -1268,7 +1268,7 @@ function ex(e) {
   return jsxs("div", {
     className: "x78zum5 xdt5ytf x1jnr06f",
     children: [jsx(DE, {
-      label: _$$t("fullscreen.properties_panel.constraints_panel.constraints"),
+      label: getI18nString("fullscreen.properties_panel.constraints_panel.constraints"),
       input: jsx(eA, {
         openFileKey: e.openFileKey,
         recordingKey: e.recordingKey
@@ -1313,7 +1313,7 @@ let eF = [{
   groupName: g1.archivedPresets,
   presets: sE.archivedPresets
 }];
-let ej = e => gl(e) ? _$$t("fullscreen.mixed") : e === V$M.FRAME ? _$$t("viewer.options_menu.frame") : e === V$M.GROUP ? _$$t("viewer.options_menu.group") : e === V$M.SECTION ? _$$t("viewer.options_menu.section") : e;
+let ej = e => gl(e) ? getI18nString("fullscreen.mixed") : e === V$M.FRAME ? getI18nString("viewer.options_menu.frame") : e === V$M.GROUP ? getI18nString("viewer.options_menu.group") : e === V$M.SECTION ? getI18nString("viewer.options_menu.section") : e;
 let eU = () => {
   Y5.triggerActionInUserEditScope("replace-selected-frame-with-section");
 };
@@ -1381,7 +1381,7 @@ function eH(e) {
     children: jsxs(_$$bL2, {
       manager,
       children: [jsxs(_$$E2, {
-        "aria-label": _$$t("presets.selection_trigger_with_selected", {
+        "aria-label": getI18nString("presets.selection_trigger_with_selected", {
           selected: ej(isMixedOverride ? oV : x)
         }),
         className: f()(mJ, triggerClassName),
@@ -1403,7 +1403,7 @@ function eH(e) {
             }), jsx(wv, {})]
           }), jsxs(z6, {
             title: jsx(_$$r2, {
-              children: _$$t("presets.group_titles.layout_options")
+              children: getI18nString("presets.group_titles.layout_options")
             }),
             onChange: R,
             value: x?.toString(),
@@ -1514,8 +1514,8 @@ let tl = createContext(void 0);
 function td({
   children: e
 }) {
-  let t = md(Fy);
-  let r = md(mp);
+  let t = useAtomWithSubscription(Fy);
+  let r = useAtomWithSubscription(mp);
   let {
     show,
     isShowing,
@@ -1527,7 +1527,7 @@ function td({
   !function (e) {
     let t = kl("aspectRatioLockToggled");
     let r = useSelector(e => e.mirror.selectionProperties.fillPaints);
-    let n = md(Vk);
+    let n = useAtomWithSubscription(Vk);
     let s = useRef(null);
     let o = useCallback(() => {
       s.current && clearTimeout(s.current);
@@ -1575,7 +1575,7 @@ function tc() {
   return jsx(_$$rq, {
     arrowPadding: 4,
     arrowPosition: F_.RIGHT_BODY,
-    description: _$$tx("fullscreen.aspect_ratio_lock_onboarding.body"),
+    description: renderI18nText("fullscreen.aspect_ratio_lock_onboarding.body"),
     isShowing: isModalShown,
     media: jsx(_$$y, {
       src: buildUploadUrl("88fb870fdeb521c4f90560d92c52830f5043c807"),
@@ -1586,14 +1586,14 @@ function tc() {
     onTargetLost: closeModal,
     pointToLeftEdge: !0,
     primaryCta: {
-      label: _$$tx("general.got_it"),
+      label: renderI18nText("general.got_it"),
       type: "button",
       onClick: closeModal,
       variantOverride: "primary",
       ctaTrackingDescriptor: _$$c.GOT_IT
     },
     secondaryCta: {
-      label: _$$tx("general.learn_more"),
+      label: renderI18nText("general.learn_more"),
       type: "link",
       href: "https://help.figma.com/hc/articles/5731482952599#suggest",
       ctaTrackingDescriptor: _$$c.LEARN_MORE
@@ -1601,7 +1601,7 @@ function tc() {
     targetKey: to,
     title: jsx("p", {
       "data-testid": "arl-onboarding-title",
-      children: _$$tx("fullscreen.aspect_ratio_lock_onboarding.header")
+      children: renderI18nText("fullscreen.aspect_ratio_lock_onboarding.header")
     }),
     trackingContextName: "Aspect Ratio Lock Onboarding Overlay"
   });
@@ -1609,7 +1609,7 @@ function tc() {
 function tp(e) {
   let [t, r] = lJ("aspectRatioLockToggled");
   let i = _$$h2();
-  let a = _$$t(t ? "fullscreen.properties_panel.transform_panel.aspect_ratio_unlock" : "fullscreen.properties_panel.transform_panel.aspect_ratio_lock");
+  let a = getI18nString(t ? "fullscreen.properties_panel.transform_panel.aspect_ratio_unlock" : "fullscreen.properties_panel.transform_panel.aspect_ratio_lock");
   let s = {
     "data-testid": "aspect-ratio-lock-toggle",
     "data-tooltip": a,
@@ -1630,7 +1630,7 @@ function tp(e) {
         mixed: t === oV,
         offIcon: jsx(e2, {}),
         onChange: e => {
-          getFeatureFlags().ce_properties_panel_tracking && sx("editor-transform-panel-change", {
+          getFeatureFlags().ce_properties_panel_tracking && trackEventAnalytics("editor-transform-panel-change", {
             key: "aspectRatioLockToggled",
             value: e
           });
@@ -1729,22 +1729,22 @@ function tz({
     variableField: "HEIGHT",
     minMaxOptions: [zn, jw],
     strings: {
-      dimAbbrev: _$$t("fullscreen.properties_panel.transform_panel.h"),
+      dimAbbrev: getI18nString("fullscreen.properties_panel.transform_panel.h"),
       dim: {
-        fixed: _$$t("fullscreen.properties_panel.transform_panel.height"),
-        resizing: _$$t("fullscreen.properties_panel.section_autoLayout.tooltip_verticalResizing")
+        fixed: getI18nString("fullscreen.properties_panel.transform_panel.height"),
+        resizing: getI18nString("fullscreen.properties_panel.section_autoLayout.tooltip_verticalResizing")
       },
       dimWithMinMax: {
-        fixed: _$$t("fullscreen.properties_panel.transform_panel.height_min_max"),
-        resizing: _$$t("fullscreen.properties_panel.section_autoLayout.tooltip_verticalResizingMinMaxH")
+        fixed: getI18nString("fullscreen.properties_panel.transform_panel.height_min_max"),
+        resizing: getI18nString("fullscreen.properties_panel.section_autoLayout.tooltip_verticalResizingMinMaxH")
       },
       dimWithMin: {
-        fixed: _$$t("fullscreen.properties_panel.transform_panel.height_min"),
-        resizing: _$$t("fullscreen.properties_panel.section_autoLayout.tooltip_verticalResizingMinH")
+        fixed: getI18nString("fullscreen.properties_panel.transform_panel.height_min"),
+        resizing: getI18nString("fullscreen.properties_panel.section_autoLayout.tooltip_verticalResizingMinH")
       },
       dimWithMax: {
-        fixed: _$$t("fullscreen.properties_panel.transform_panel.height_max"),
-        resizing: _$$t("fullscreen.properties_panel.section_autoLayout.tooltip_verticalResizingMaxH")
+        fixed: getI18nString("fullscreen.properties_panel.transform_panel.height_max"),
+        resizing: getI18nString("fullscreen.properties_panel.section_autoLayout.tooltip_verticalResizingMaxH")
       }
     },
     scrubbableInputClass: sC
@@ -1778,22 +1778,22 @@ function tW({
     variableField: "WIDTH",
     minMaxOptions: [mw, QG],
     strings: {
-      dimAbbrev: _$$t("fullscreen.properties_panel.transform_panel.w"),
+      dimAbbrev: getI18nString("fullscreen.properties_panel.transform_panel.w"),
       dim: {
-        fixed: _$$t("fullscreen.properties_panel.transform_panel.width"),
-        resizing: _$$t("fullscreen.properties_panel.section_autoLayout.tooltip_horizontalResizing")
+        fixed: getI18nString("fullscreen.properties_panel.transform_panel.width"),
+        resizing: getI18nString("fullscreen.properties_panel.section_autoLayout.tooltip_horizontalResizing")
       },
       dimWithMinMax: {
-        fixed: _$$t("fullscreen.properties_panel.transform_panel.width_min_max"),
-        resizing: _$$t("fullscreen.properties_panel.section_autoLayout.tooltip_horizontalResizingMinMaxW")
+        fixed: getI18nString("fullscreen.properties_panel.transform_panel.width_min_max"),
+        resizing: getI18nString("fullscreen.properties_panel.section_autoLayout.tooltip_horizontalResizingMinMaxW")
       },
       dimWithMin: {
-        fixed: _$$t("fullscreen.properties_panel.transform_panel.width_min"),
-        resizing: _$$t("fullscreen.properties_panel.section_autoLayout.tooltip_horizontalResizingMinW")
+        fixed: getI18nString("fullscreen.properties_panel.transform_panel.width_min"),
+        resizing: getI18nString("fullscreen.properties_panel.section_autoLayout.tooltip_horizontalResizingMinW")
       },
       dimWithMax: {
-        fixed: _$$t("fullscreen.properties_panel.transform_panel.width_max"),
-        resizing: _$$t("fullscreen.properties_panel.section_autoLayout.tooltip_horizontalResizingMaxW")
+        fixed: getI18nString("fullscreen.properties_panel.transform_panel.width_max"),
+        resizing: getI18nString("fullscreen.properties_panel.section_autoLayout.tooltip_horizontalResizingMaxW")
       }
     },
     scrubbableInputClass: BP
@@ -1817,10 +1817,10 @@ function tY() {
 }
 function t$() {
   return {
-    [_$$t("fullscreen.properties_panel.constraints_resizing_panel.hug")]: mKm.HUG_CONTENT,
-    [_$$t("fullscreen.properties_panel.constraints_resizing_panel.hug_contents")]: mKm.HUG_CONTENT,
-    [_$$t("fullscreen.properties_panel.constraints_resizing_panel.fill_container")]: mKm.FILL_CONTAINER,
-    [_$$t("fullscreen.properties_panel.constraints_resizing_panel.fill")]: mKm.FILL_CONTAINER
+    [getI18nString("fullscreen.properties_panel.constraints_resizing_panel.hug")]: mKm.HUG_CONTENT,
+    [getI18nString("fullscreen.properties_panel.constraints_resizing_panel.hug_contents")]: mKm.HUG_CONTENT,
+    [getI18nString("fullscreen.properties_panel.constraints_resizing_panel.fill_container")]: mKm.FILL_CONTAINER,
+    [getI18nString("fullscreen.properties_panel.constraints_resizing_panel.fill")]: mKm.FILL_CONTAINER
   };
 }
 let tX = "dimension_input--dropdownIcon--IaH6E";
@@ -1899,11 +1899,11 @@ function t2({
     options: useMemo(() => null == t ? [] : function (e, t) {
       switch (e) {
         case mKm.HUG_CONTENT:
-          return [_$$t("fullscreen.properties_panel.constraints_resizing_panel.hug"), _$$t("fullscreen.properties_panel.stack_panel.al.hug_with_value", {
+          return [getI18nString("fullscreen.properties_panel.constraints_resizing_panel.hug"), getI18nString("fullscreen.properties_panel.stack_panel.al.hug_with_value", {
             value: t
           })];
         case mKm.FILL_CONTAINER:
-          return [_$$t("fullscreen.properties_panel.constraints_resizing_panel.fill"), _$$t("fullscreen.properties_panel.stack_panel.al.fill_with_value", {
+          return [getI18nString("fullscreen.properties_panel.constraints_resizing_panel.fill"), getI18nString("fullscreen.properties_panel.stack_panel.al.fill_with_value", {
             value: t
           })];
       }
@@ -2032,9 +2032,9 @@ function t5({
       children: function (e) {
         switch (e) {
           case mKm.HUG_CONTENT:
-            return _$$t("fullscreen.properties_panel.constraints_resizing_panel.hug");
+            return getI18nString("fullscreen.properties_panel.constraints_resizing_panel.hug");
           case mKm.FILL_CONTAINER:
-            return _$$t("fullscreen.properties_panel.constraints_resizing_panel.fill");
+            return getI18nString("fullscreen.properties_panel.constraints_resizing_panel.fill");
         }
       }(stackSize ?? mKm.HUG_CONTENT)
     }), jsx("div", {
@@ -2242,7 +2242,7 @@ function re(e) {
         let d = t6(f, _axis, size);
         let _ = disabled || m && (o || l && s) || d;
         let h = tJ[_key][size];
-        let g = "no-fill-component" === disabledReason ? _$$t("fullscreen.properties_panel.stack_panel.sizing_disabled.no_fill_component") : d ? _$$t("fullscreen.properties_panel.stack_panel.sizing_disabled.select_all_fill") : void 0;
+        let g = "no-fill-component" === disabledReason ? getI18nString("fullscreen.properties_panel.stack_panel.sizing_disabled.no_fill_component") : d ? getI18nString("fullscreen.properties_panel.stack_panel.sizing_disabled.select_all_fill") : void 0;
         r.push(jsx(_$$c$2, {
           disabled: _,
           additionalStylesClassName: wO,
@@ -2288,8 +2288,8 @@ function re(e) {
     setValue
   });
   let L = jQ(key, e.onEvaluateExpressionError);
-  let [P, D] = fp(Kl);
-  let [k, F] = fp(Md);
+  let [P, D] = useAtomValueAndSetter(Kl);
+  let [k, F] = useAtomValueAndSetter(Md);
   let j = P[key].min || P[key].max;
   let B = wf(key);
   let V = Fp();
@@ -2476,7 +2476,7 @@ function rd(e) {
     let r = mKm[t.size];
     let i = t.size === mKm.FILL_CONTAINER && d;
     let a = t.disabled || i;
-    let s = "no-fill-component" === t.disabledReason ? _$$t("fullscreen.properties_panel.stack_panel.sizing_disabled.no_fill_component") : i ? _$$t("fullscreen.properties_panel.stack_panel.sizing_disabled.select_all_fill") : void 0;
+    let s = "no-fill-component" === t.disabledReason ? getI18nString("fullscreen.properties_panel.stack_panel.sizing_disabled.no_fill_component") : i ? getI18nString("fullscreen.properties_panel.stack_panel.sizing_disabled.select_all_fill") : void 0;
     return jsx(_$$c$2, {
       value: t.size,
       recordingKey: Pt(e.recordingKey, "select", r),
@@ -2486,14 +2486,14 @@ function rd(e) {
       dataTestId: `${r}-${_0v[e.axis]}`
     }, t.size);
   });
-  let V = Gq()?.getPrimaryLocale(!0);
+  let V = getI18nState()?.getPrimaryLocale(!0);
   let H = c ? 173 : V === languageCodes.EN ? 150 : 210;
   let z = e.axis === _0v.X ? jsx("span", {
     className: `${QK} svg`,
-    children: _$$tx("fullscreen.properties_panel.transform_panel.w")
+    children: renderI18nText("fullscreen.properties_panel.transform_panel.w")
   }) : jsx("span", {
     className: `${QK} svg`,
-    children: _$$tx("fullscreen.properties_panel.transform_panel.h")
+    children: renderI18nText("fullscreen.properties_panel.transform_panel.h")
   });
   let W = L ? `${x}` : void 0;
   let {
@@ -2505,7 +2505,7 @@ function rd(e) {
   };
   return jsxs(Fragment, {
     children: [jsx(l6, {
-      ariaLabel: _$$t("fullscreen.properties_panel.stack_panel.advanced_layout"),
+      ariaLabel: getI18nString("fullscreen.properties_panel.stack_panel.advanced_layout"),
       chevronClassName: "stack_sizing_select_v5--stackLayoutSizeChevron--xh9BG",
       className: e.className,
       disabled: B,
@@ -2543,7 +2543,7 @@ function rd(e) {
       onOptionFocus: (t, r) => e.onHover(t ?? null, r),
       property: e.size,
       recordingKey: Pt(e, "select"),
-      tooltip: e.axis === _0v.X ? _$$t("fullscreen.properties_panel.constraints_resizing_panel.horizontal_resizing") : _$$t("fullscreen.properties_panel.constraints_resizing_panel.vertical_resizing"),
+      tooltip: e.axis === _0v.X ? getI18nString("fullscreen.properties_panel.constraints_resizing_panel.horizontal_resizing") : getI18nString("fullscreen.properties_panel.constraints_resizing_panel.vertical_resizing"),
       truncation: "none",
       children: G
     }), jsx("div", {
@@ -2581,11 +2581,11 @@ class ru {
       text: function (e, t) {
         switch (t) {
           case mKm.FIXED:
-            return e === _0v.X ? _$$t("fullscreen.properties_panel.constraints_resizing_panel.fixed_width") : _$$t("fullscreen.properties_panel.constraints_resizing_panel.fixed_height");
+            return e === _0v.X ? getI18nString("fullscreen.properties_panel.constraints_resizing_panel.fixed_width") : getI18nString("fullscreen.properties_panel.constraints_resizing_panel.fixed_height");
           case mKm.HUG_CONTENT:
-            return _$$t("fullscreen.properties_panel.constraints_resizing_panel.hug_contents");
+            return getI18nString("fullscreen.properties_panel.constraints_resizing_panel.hug_contents");
           case mKm.FILL_CONTAINER:
-            return _$$t("fullscreen.properties_panel.constraints_resizing_panel.fill_container");
+            return getI18nString("fullscreen.properties_panel.constraints_resizing_panel.fill_container");
         }
       }(this.axis, e) || "",
       svg: t,
@@ -2604,9 +2604,9 @@ class rp {
         case mKm.FIXED:
           return r_(t, 2);
         case mKm.HUG_CONTENT:
-          return _$$t("fullscreen.properties_panel.constraints_resizing_panel.hug");
+          return getI18nString("fullscreen.properties_panel.constraints_resizing_panel.hug");
         case mKm.FILL_CONTAINER:
-          return _$$t("fullscreen.properties_panel.constraints_resizing_panel.fill");
+          return getI18nString("fullscreen.properties_panel.constraints_resizing_panel.fill");
       }
     }(e, this.fixedSize);
   }
@@ -2619,15 +2619,15 @@ class rp {
       text: function (e, t, r) {
         switch (t) {
           case mKm.FIXED:
-            return e === _0v.X ? _$$t("fullscreen.properties_panel.stack_panel.al.fixed.width", {
+            return e === _0v.X ? getI18nString("fullscreen.properties_panel.stack_panel.al.fixed.width", {
               value: r_(r)
-            }) : _$$t("fullscreen.properties_panel.stack_panel.al.fixed.height", {
+            }) : getI18nString("fullscreen.properties_panel.stack_panel.al.fixed.height", {
               value: r_(r)
             });
           case mKm.HUG_CONTENT:
-            return _$$t("fullscreen.properties_panel.constraints_resizing_panel.hug_contents");
+            return getI18nString("fullscreen.properties_panel.constraints_resizing_panel.hug_contents");
           case mKm.FILL_CONTAINER:
-            return _$$t("fullscreen.properties_panel.constraints_resizing_panel.fill_container");
+            return getI18nString("fullscreen.properties_panel.constraints_resizing_panel.fill_container");
         }
       }(this.axis, e, this.fixedSize) || "",
       svg: t,
@@ -2636,16 +2636,16 @@ class rp {
   }
 }
 function r_(e, t = 0) {
-  return gl(e) ? _$$t("fullscreen.mixed") : e ? String(parseFloat(e.toFixed(e % 1 == 0 ? 0 : t))) : (x1("UI3 merged autolayout picker StackSizingSelect", "undefined fixedSize of instance sublayer"), "");
+  return gl(e) ? getI18nString("fullscreen.mixed") : e ? String(parseFloat(e.toFixed(e % 1 == 0 ? 0 : t))) : (logError("UI3 merged autolayout picker StackSizingSelect", "undefined fixedSize of instance sublayer"), "");
 }
 function rh(e) {
   switch (e) {
     case mKm.FIXED:
-      return _$$t("fullscreen.properties_panel.constraints_resizing_panel.fixed");
+      return getI18nString("fullscreen.properties_panel.constraints_resizing_panel.fixed");
     case mKm.HUG_CONTENT:
-      return _$$t("fullscreen.properties_panel.constraints_resizing_panel.hug");
+      return getI18nString("fullscreen.properties_panel.constraints_resizing_panel.hug");
     case mKm.FILL_CONTAINER:
-      return _$$t("fullscreen.properties_panel.constraints_resizing_panel.fill");
+      return getI18nString("fullscreen.properties_panel.constraints_resizing_panel.fill");
   }
 }
 function rm(e) {
@@ -2653,7 +2653,7 @@ function rm(e) {
   let r = kl("stackVerticalSize");
   let i = aj();
   if (null == t || null == r) return null;
-  let a = _$$tx("properties.label.resizing");
+  let a = renderI18nText("properties.label.resizing");
   let s = jsx(rd, {
     id: "stack-sizing-width",
     className: oH,
@@ -2902,12 +2902,12 @@ function rF(e) {
   if (!(t && !r)) return null;
   let h = {
     disabled: !!l,
-    "data-tooltip": _$$t("properties.tooltip.ignore_auto_layout"),
+    "data-tooltip": getI18nString("properties.tooltip.ignore_auto_layout"),
     "data-tooltip-type": Ib.TEXT,
     recordingKey: Pt(e, "absolutePosition")
   };
   return jsx(_$$f, {
-    "aria-label": _$$t("properties.tooltip.ignore_auto_layout"),
+    "aria-label": getI18nString("properties.tooltip.ignore_auto_layout"),
     checked: "ABSOLUTE" === i,
     disabled: h.disabled,
     htmlAttributes: {
@@ -2959,11 +2959,11 @@ function rz(e) {
       value: t,
       disabled: e.disabled,
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": _$$t("properties.tooltip.xposition"),
+      "data-tooltip": getI18nString("properties.tooltip.xposition"),
       recordingKey: Pt(e.recordingKey, "xInput"),
       children: jsx("span", {
         className: `${QK} svg`,
-        children: _$$tx("fullscreen.properties_panel.transform_panel.x")
+        children: renderI18nText("fullscreen.properties_panel.transform_panel.x")
       })
     })
   });
@@ -2988,7 +2988,7 @@ function rW(e) {
   return jsx(_$$E, {
     name: "x_input",
     children: jsx(_$$N3, {
-      "aria-label": _$$t("properties.tooltip.xposition"),
+      "aria-label": getI18nString("properties.tooltip.xposition"),
       formatter: l,
       value: t,
       onChange: (e, {
@@ -2997,7 +2997,7 @@ function rW(e) {
       disabled: e.disabled || null == t,
       icon: jsx("span", {
         className: HO,
-        children: _$$tx("fullscreen.properties_panel.transform_panel.x")
+        children: renderI18nText("fullscreen.properties_panel.transform_panel.x")
       }),
       recordingKey: Pt(e.recordingKey, "xInput")
     })
@@ -3025,11 +3025,11 @@ function r$(e) {
       value: t,
       disabled: e.disabled,
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": _$$t("properties.tooltip.yposition"),
+      "data-tooltip": getI18nString("properties.tooltip.yposition"),
       recordingKey: Pt(e.recordingKey, "yInput"),
       children: jsx("span", {
         className: `${QK} svg`,
-        children: _$$tx("fullscreen.properties_panel.transform_panel.y")
+        children: renderI18nText("fullscreen.properties_panel.transform_panel.y")
       })
     })
   });
@@ -3054,7 +3054,7 @@ function rX(e) {
   return jsx(_$$E, {
     name: "y_input",
     children: jsx(_$$N3, {
-      "aria-label": _$$t("properties.tooltip.yposition"),
+      "aria-label": getI18nString("properties.tooltip.yposition"),
       formatter: l,
       value: t,
       onChange: (e, {
@@ -3063,7 +3063,7 @@ function rX(e) {
       disabled: e.disabled || null == t,
       icon: jsx("span", {
         className: HO,
-        children: _$$tx("fullscreen.properties_panel.transform_panel.y")
+        children: renderI18nText("fullscreen.properties_panel.transform_panel.y")
       }),
       recordingKey: Pt(e.recordingKey, "yInput")
     })
@@ -3123,7 +3123,7 @@ export let $$r24 = memo(function (e) {
         className: e.topPadding ? DL : void 0,
         ...E,
         children: [!b.mergeLayerHeaderWithTransformPanel && jsx(_$$r4, {
-          titleTx: _$$tx("fullscreen.appearance_panel.position"),
+          titleTx: renderI18nText("fullscreen.appearance_panel.position"),
           icon: jsx(rF, {
             recordingKey: e.recordingKey
           })
@@ -3173,7 +3173,7 @@ export function $$r51(e) {
     canBecomeGroup: !!d,
     canBecomeSection: !!c,
     dispatch: T,
-    dropdownOverride: y ? _$$t("fullscreen.mixed") : void 0,
+    dropdownOverride: y ? getI18nString("fullscreen.mixed") : void 0,
     dropdownShown: b,
     height: r,
     id: e.id,
@@ -3192,7 +3192,7 @@ export function $$r51(e) {
   });
 }
 function r3() {
-  return tL() ? _$$tx("properties.label.resizing") : _$$tx("properties.label.dimensions");
+  return tL() ? renderI18nText("properties.label.resizing") : renderI18nText("properties.label.dimensions");
 }
 export function $$r48(e) {
   let t = kl("nodesAreAllInsideStacks");
@@ -3209,7 +3209,7 @@ export function $$r48(e) {
     let r = Fk(e => e.getDirectlySelectedNodes().map(e => e.guid));
     let n = Fk(e => new Set(e.getDirectlySelectedNodes().map(e => e?.parentGuid)));
     return (i, a = !1) => {
-      t.isNonEditableInstanceSublayerSelected || (sx("Constraint Changed", {
+      t.isNonEditableInstanceSublayerSelected || (trackEventAnalytics("Constraint Changed", {
         fileKey: e,
         source: a ? "dropdown" : "panel",
         nodeIds: r.slice(0, 50),
@@ -3218,7 +3218,7 @@ export function $$r48(e) {
       }), Y5.updateSelectionProperties(i));
     };
   }(e.openFileKey);
-  let [g, f] = fp(useMemo(() => E3("has_user_expanded_ui3_constraints_ui", !1), []));
+  let [g, f] = useAtomValueAndSetter(useMemo(() => createLocalStorageAtom("has_user_expanded_ui3_constraints_ui", !1), []));
   let y = eh("HORIZONTAL", l);
   let b = eh("VERTICAL", l);
   let S = jsx(el, {
@@ -3256,7 +3256,7 @@ export function $$r48(e) {
       recordingKey: Pt(e, "constraintSelector")
     })
   });
-  let w = _$$tx("properties.label.position");
+  let w = renderI18nText("properties.label.position");
   let R = jsx(rH, {
     disabled: p,
     recordingKey: e.recordingKey
@@ -3269,10 +3269,10 @@ export function $$r48(e) {
     "aria-expanded": g,
     recordingKey: Pt(e, "constraintsButton"),
     onClick: () => f(!g),
-    "aria-label": _$$t("fullscreen.properties_panel.constraints_panel.constraints"),
+    "aria-label": getI18nString("fullscreen.properties_panel.constraints_panel.constraints"),
     htmlAttributes: {
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": _$$t("fullscreen.properties_panel.constraints_panel.constraints")
+      "data-tooltip": getI18nString("fullscreen.properties_panel.constraints_panel.constraints")
     },
     children: jsx(rf, {})
   }) : null;
@@ -3311,7 +3311,7 @@ export function $$r48(e) {
       topLeftInput: S,
       bottomLeftInput: v,
       rightInput: C,
-      leftLabel: _$$t("fullscreen.properties_panel.constraints_panel.constraints"),
+      leftLabel: getI18nString("fullscreen.properties_panel.constraints_panel.constraints"),
       rightLabel: null,
       topIcon: null,
       bottomIcon: null
@@ -3319,8 +3319,8 @@ export function $$r48(e) {
   });
 }
 export function $$r87(e) {
-  let [t, r] = fp(Kl);
-  let [a, s] = fp(Md);
+  let [t, r] = useAtomValueAndSetter(Kl);
+  let [a, s] = useAtomValueAndSetter(Md);
   let o = AY();
   let l = Fp();
   let d = am();
@@ -3407,12 +3407,12 @@ export function $$r62(e) {
   let u = useDispatch();
   let p = I9();
   let _ = () => {
-    p && (p.every(e => "STAR" === e.type) ? az.trackDefinedEvent("illustration.web_star_count", {}) : p.every(e => "REGULAR_POLYGON" === e.type) && az.trackDefinedEvent("illustration.web_polygon_count", {}));
+    p && (p.every(e => "STAR" === e.type) ? analyticsEventManager.trackDefinedEvent("illustration.web_star_count", {}) : p.every(e => "REGULAR_POLYGON" === e.type) && analyticsEventManager.trackDefinedEvent("illustration.web_polygon_count", {}));
   };
   let h = () => {
-    az.trackDefinedEvent("illustration.web_star_ratio", {});
+    analyticsEventManager.trackDefinedEvent("illustration.web_star_ratio", {});
   };
-  let m = _$$P(_$$t("fullscreen.properties_panel.transform_panel.count"));
+  let m = _$$P(getI18nString("fullscreen.properties_panel.transform_panel.count"));
   let g = e.countShown && jsxs(Ht, {
     bigNudgeAmount: 10,
     className: BP,
@@ -3442,7 +3442,7 @@ export function $$r62(e) {
       svg: _$$A12
     })]
   });
-  let f = _$$P(_$$t("fullscreen.properties_panel.transform_panel.ratio"));
+  let f = _$$P(getI18nString("fullscreen.properties_panel.transform_panel.ratio"));
   let y = e.starInnerScaleShown && jsx(w2, {
     bigNudgeAmount,
     className: sC,
@@ -3468,13 +3468,13 @@ export function $$r62(e) {
     })
   });
   return y ? jsx(fn, {
-    leftLabel: _$$tx("properties.label.count"),
+    leftLabel: renderI18nText("properties.label.count"),
     leftInput: g,
-    rightLabel: _$$tx("fullscreen.properties_panel.transform_panel.ratio"),
+    rightLabel: renderI18nText("fullscreen.properties_panel.transform_panel.ratio"),
     rightInput: y,
     icon: null
   }) : jsx(fn, {
-    leftLabel: _$$tx("properties.label.count"),
+    leftLabel: renderI18nText("properties.label.count"),
     leftInput: g,
     rightLabel: null,
     rightInput: null,
@@ -3493,14 +3493,14 @@ export let $$r70 = memo(function (e) {
   } = Xs();
   let _ = useDispatch();
   return jsx(DE, {
-    label: _$$tx("properties.label.arc"),
+    label: renderI18nText("properties.label.arc"),
     icon: null,
     input: jsxs("div", {
       className: Xq,
       children: [jsx(Zp, {
         bigNudgeAmount,
         className: fm,
-        "data-tooltip": _$$t("fullscreen.properties_panel.transform_panel.start"),
+        "data-tooltip": getI18nString("fullscreen.properties_panel.transform_panel.start"),
         "data-tooltip-type": Ib.TEXT,
         disabled: e.arcDataDisabled,
         dispatch: _,
@@ -3519,7 +3519,7 @@ export let $$r70 = memo(function (e) {
       }), jsx(w2, {
         bigNudgeAmount,
         className: _$$t2,
-        "data-tooltip": _$$t("fullscreen.properties_panel.transform_panel.sweep"),
+        "data-tooltip": getI18nString("fullscreen.properties_panel.transform_panel.sweep"),
         "data-tooltip-type": Ib.TEXT,
         dispatch: _,
         inputClassName: PK,
@@ -3535,7 +3535,7 @@ export let $$r70 = memo(function (e) {
       }), jsx(w2, {
         bigNudgeAmount,
         className: _$$eC,
-        "data-tooltip": _$$t("fullscreen.properties_panel.transform_panel.ratio"),
+        "data-tooltip": getI18nString("fullscreen.properties_panel.transform_panel.ratio"),
         "data-tooltip-type": Ib.TEXT,
         dispatch: _,
         inputClassName: PK,
@@ -3570,7 +3570,7 @@ export function $$r96(e) {
       recordingKey: Pt(e, "mirroring")
     }),
     icon: null,
-    label: _$$t("fullscreen.properties_panel.section_vector.label_mirroring")
+    label: getI18nString("fullscreen.properties_panel.section_vector.label_mirroring")
   });
   let c = useContext(_$$Q);
   let u = c.showIllustrationSliderInputs ? jsx(_$$U, {
@@ -3587,10 +3587,10 @@ export function $$r96(e) {
     children: c.showIllustrationSliderInputs ? jsx(DE, {
       input: u,
       icon: null,
-      label: _$$t("fullscreen.properties_panel.transform_panel.corner_radius")
+      label: getI18nString("fullscreen.properties_panel.transform_panel.corner_radius")
     }) : jsx(fn, {
       leftInput: u,
-      leftLabel: _$$t("fullscreen.properties_panel.transform_panel.corner_radius"),
+      leftLabel: getI18nString("fullscreen.properties_panel.transform_panel.corner_radius"),
       rightInput: null,
       rightLabel: null,
       icon: null
@@ -3648,7 +3648,7 @@ function nr(e) {
     inputClassName: hF,
     value: e.x,
     ...i,
-    "data-tooltip": _$$t("fullscreen.properties_panel.transform_panel.x"),
+    "data-tooltip": getI18nString("fullscreen.properties_panel.transform_panel.x"),
     "data-tooltip-type": Ib.TEXT,
     dispatch: e.dispatch,
     mixedMathCallback: nc.user("apply-mixed-method-for-vector-network", e => {
@@ -3665,7 +3665,7 @@ function nr(e) {
     tooltipForScreenReadersOnly: !0,
     children: jsx("span", {
       className: QK,
-      children: _$$tx("fullscreen.properties_panel.transform_panel.x")
+      children: renderI18nText("fullscreen.properties_panel.transform_panel.x")
     })
   });
   let s = jsx(gq, {
@@ -3673,7 +3673,7 @@ function nr(e) {
     inputClassName: hF,
     value: e.y,
     ...i,
-    "data-tooltip": _$$t("fullscreen.properties_panel.transform_panel.x"),
+    "data-tooltip": getI18nString("fullscreen.properties_panel.transform_panel.x"),
     "data-tooltip-type": Ib.TEXT,
     dispatch: e.dispatch,
     mixedMathCallback: nc.user("apply-mixed-method-for-vector-network", e => {
@@ -3690,7 +3690,7 @@ function nr(e) {
     tooltipForScreenReadersOnly: !0,
     children: jsx("span", {
       className: QK,
-      children: _$$tx("fullscreen.properties_panel.transform_panel.y")
+      children: renderI18nText("fullscreen.properties_panel.transform_panel.y")
     })
   });
   let o = jsx($$ns3, {
@@ -3712,7 +3712,7 @@ function nr(e) {
     dispatch: e.dispatch,
     recordingKey: Pt(e, "cornerRadiusInput"),
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": _$$t("fullscreen.properties_panel.transform_panel.corner_radius"),
+    "data-tooltip": getI18nString("fullscreen.properties_panel.transform_panel.corner_radius"),
     children: jsx(_$$B, {
       className: QK,
       svg: _$$A11
@@ -3723,21 +3723,21 @@ function nr(e) {
     children: jsxs(Zk, {
       children: [jsx(fI, {
         children: jsx(_$$Q2, {
-          children: _$$tx("fullscreen.properties_panel.transform_panel.vector")
+          children: renderI18nText("fullscreen.properties_panel.transform_panel.vector")
         })
       }), e.isUI3 ? jsxs(Fragment, {
         children: [jsx(fn, {
-          leftLabel: _$$tx("fullscreen.properties_panel.section_vector.label_position"),
+          leftLabel: renderI18nText("fullscreen.properties_panel.section_vector.label_position"),
           leftInput: a,
           rightLabel: null,
           rightInput: s,
           icon: null
         }), jsx(DE, {
-          label: _$$tx("fullscreen.properties_panel.section_vector.label_mirroring"),
+          label: renderI18nText("fullscreen.properties_panel.section_vector.label_mirroring"),
           input: o,
           icon: null
         }), jsx(fn, {
-          leftLabel: _$$tx("fullscreen.properties_panel.section_vector.label_radius"),
+          leftLabel: renderI18nText("fullscreen.properties_panel.section_vector.label_radius"),
           leftInput: l,
           rightLabel: null,
           rightInput: null,
@@ -3761,11 +3761,11 @@ let na = {
   format: e => {
     switch (e) {
       case "NONE":
-        return _$$t("fullscreen.properties_panel.transform_panel.no_mirroring");
+        return getI18nString("fullscreen.properties_panel.transform_panel.no_mirroring");
       case "ANGLE":
-        return _$$t("fullscreen.properties_panel.transform_panel.mirror_angle");
+        return getI18nString("fullscreen.properties_panel.transform_panel.mirror_angle");
       case "ANGLE_AND_LENGTH":
-        return _$$t("fullscreen.properties_panel.transform_panel.mirror_angle_and_length");
+        return getI18nString("fullscreen.properties_panel.transform_panel.mirror_angle_and_length");
     }
   }
 };
@@ -3777,28 +3777,28 @@ export function $$ns3(e) {
       handleMirroring: e
     });
   };
-  return _$$m().ce_il_root ? jsxs(bL, {
+  return getFilteredFeatureFlags().ce_il_root ? jsxs(bL, {
     value: gl(e.handleMirroring) ? void 0 : e.handleMirroring,
     onChange: i,
     recordingKey: e.recordingKey,
     legend: jsx(_$$q, {
-      children: _$$t("fullscreen.properties_panel.section_vector.label_mirroring")
+      children: getI18nString("fullscreen.properties_panel.section_vector.label_mirroring")
     }),
     children: [jsx(c$, {
-      "aria-label": _$$t("fullscreen.properties_panel.transform_panel.no_mirroring"),
+      "aria-label": getI18nString("fullscreen.properties_panel.transform_panel.no_mirroring"),
       icon: jsx(d, {}),
       value: "NONE"
     }), jsx(c$, {
-      "aria-label": _$$t("fullscreen.properties_panel.transform_panel.mirror_angle"),
+      "aria-label": getI18nString("fullscreen.properties_panel.transform_panel.mirror_angle"),
       icon: jsx(c, {}),
       value: "ANGLE"
     }), jsx(c$, {
-      "aria-label": _$$t("fullscreen.properties_panel.transform_panel.mirror_angle_and_length"),
+      "aria-label": getI18nString("fullscreen.properties_panel.transform_panel.mirror_angle_and_length"),
       icon: jsx(u, {}),
       value: "ANGLE_AND_LENGTH"
     })]
   }) : jsxs(nn, {
-    ariaLabel: _$$t("fullscreen.properties_panel.transform_panel.mirror_select.aria_label"),
+    ariaLabel: getI18nString("fullscreen.properties_panel.transform_panel.mirror_select.aria_label"),
     chevronClassName: _$$r,
     className: GC,
     dispatch: t,

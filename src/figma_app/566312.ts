@@ -1,9 +1,9 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { k } from "../905/443820";
 import a from "classnames";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { $$ } from "../figma_app/637027";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Td } from "../905/595131";
 var s = a;
 export function $$u0({
@@ -13,11 +13,11 @@ export function $$u0({
   insertTemplate: a
 }) {
   let u = Td();
-  let p = u ? _$$t("browse_templates_modal.add_template.disabled") : "";
+  let p = u ? getI18nString("browse_templates_modal.add_template.disabled") : "";
   return jsxs($$, {
     className: s()("insert_template_cta--button--InTLP", r && "insert_template_cta--buttonOpaque--oEwuq"),
-    onClick: Ay.isIpad ? void 0 : a,
-    onPointerDown: Ay.isIpad ? a : void 0,
+    onClick: BrowserInfo.isIpad ? void 0 : a,
+    onPointerDown: BrowserInfo.isIpad ? a : void 0,
     disabled: t || u,
     "data-not-draggable": !0,
     title: p,

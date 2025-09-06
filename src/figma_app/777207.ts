@@ -1,6 +1,6 @@
 import { Y } from "../905/806400";
 import { l as _$$l } from "../905/716947";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { parsePxNumber } from "../figma_app/783094";
 import { f } from "../figma_app/436731";
 import { r9 } from "../figma_app/646357";
@@ -99,15 +99,15 @@ export function $$f6({
   };
 }
 export function $$E0(e, t) {
-  return e.find((e) => e.resourceType === Y.Workspace && e.resourceId === t);
+  return e.find(e => e.resourceType === Y.Workspace && e.resourceId === t);
 }
 export function $$y3(e, t) {
-  if (t) return e.find((e) => e.resourceType === Y.Org && e.resourceId === t);
+  if (t) return e.find(e => e.resourceType === Y.Org && e.resourceId === t);
 }
 export function $$b5(e) {
   if (!e) return !1;
-  let t = zl.get(bJ).has(e);
-  let r = zl.get(S0).has(e);
+  let t = atomStoreManager.get(bJ).has(e);
+  let r = atomStoreManager.get(S0).has(e);
   return t || r;
 }
 export function $$T1({

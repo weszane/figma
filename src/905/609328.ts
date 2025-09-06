@@ -7,7 +7,7 @@ import { l7 } from "../905/189185";
 import { fn, sH } from "../905/871411";
 import { Pt } from "../figma_app/806412";
 import { ms, c$ } from "../figma_app/236327";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { j7, oB } from "../905/929976";
 import { sw, rk } from "../figma_app/914957";
 import { EF, Oo, eE } from "../905/709171";
@@ -109,11 +109,11 @@ export function $$E2({
           dsStyle: e,
           position: t
         }),
-        children: tx("design_systems.styles.edit_style")
+        children: renderI18nText("design_systems.styles.edit_style")
       }), jsx(c$, {
         recordingKey: Pt(i, "deleteStyle"),
         onClick: () => l7.user("delete-style", () => deleteStyle(e)),
-        children: tx("design_systems.styles.delete_styles", {
+        children: renderI18nText("design_systems.styles.delete_styles", {
           numStyles: 1
         })
       })]
@@ -121,7 +121,7 @@ export function $$E2({
       href: h,
       target: "_blank",
       recordingKey: Pt(i, "goToStyleDefinition"),
-      children: tx("design_systems.styles.go_to_style_definition")
+      children: renderI18nText("design_systems.styles.go_to_style_definition")
     })
   }) : null;
 }

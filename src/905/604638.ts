@@ -1,9 +1,9 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useEffect } from "react";
 import { useDispatch } from "../vendor/514228";
-import { zl } from "../figma_app/27355";
-import { R } from "../905/103090";
-import { Ay } from "../figma_app/778880";
+import { atomStoreManager } from "../figma_app/27355";
+import { selectWithShallowEqual } from "../905/103090";
+import { BrowserInfo } from "../figma_app/778880";
 import { uA, aH, cZ } from "../figma_app/806412";
 import { S } from "../figma_app/552746";
 import { x } from "../figma_app/859253";
@@ -29,7 +29,7 @@ class E extends uA {
     };
     this.dropdownShowing = () => this.props.reduxState && this.props.reduxState.dropdownShown;
     this.hideDropdown = () => {
-      this.props.reduxState && this.dropdownShowing() && zl.get(a8) !== h0.PLAYING && this.dropdownShowing()?.type !== x && this.props.dispatch(oB());
+      this.props.reduxState && this.dropdownShowing() && atomStoreManager.get(a8) !== h0.PLAYING && this.dropdownShowing()?.type !== x && this.props.dispatch(oB());
     };
     this.hideDropdownsIfShowing = e => {
       if (this.hideTooltips(e), !this.dropdownShowing()) return aH;
@@ -49,7 +49,7 @@ class E extends uA {
       this.hideDropdownsIfShowing(e);
     });
     this.onContextMenu = e => {
-      e.ctrlKey && Ay.mac && Ay.safari && (this.dontHideOnClick = !0);
+      e.ctrlKey && BrowserInfo.mac && BrowserInfo.safari && (this.dontHideOnClick = !0);
     };
     this.onDocumentKeyDown = e => {
       27 === e.keyCode && (this.hideDropdown(), this.hideTooltips(e));
@@ -59,7 +59,7 @@ class E extends uA {
     };
   }
   componentDidMount() {
-    let e = !!Ay.safari;
+    let e = !!BrowserInfo.safari;
     super.componentDidMount();
     window.addEventListener("blur", this.hideDropdownsIfShowing);
     document.addEventListener("keydown", this.onDocumentKeyDown);
@@ -94,7 +94,7 @@ export function $$x0({
   containerRef: i
 }) {
   let s = useDispatch();
-  let l = R(e => ({
+  let l = selectWithShallowEqual(e => ({
     tooltip: e.tooltip,
     dropdownShown: e.dropdownShown,
     selectedView: {

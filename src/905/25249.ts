@@ -12,15 +12,15 @@ import { $n } from "../905/521428";
 import { bL } from "../905/38914";
 import { L as _$$L } from "../905/857916";
 import { r as _$$r } from "../905/857502";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { xf } from "../figma_app/416935";
 import { Rs } from "../figma_app/288654";
 import { oY } from "../905/485103";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { useSprigWithSampling } from "../905/99656";
 import { qc } from "../figma_app/858013";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { cL } from "../905/748726";
 import { um } from "../905/14223";
 import { le } from "../figma_app/11182";
@@ -51,7 +51,7 @@ import { E as _$$E } from "../905/632989";
 import { EJ } from "../figma_app/930338";
 import { B as _$$B } from "../905/714743";
 import { z6 } from "../figma_app/805373";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { h as _$$h } from "../905/207101";
 import { e as _$$e3 } from "../905/621515";
 import { r1 } from "../figma_app/545877";
@@ -86,7 +86,7 @@ let eu = "seen_sharing_clarity_project_modal_overlay";
 let ep = r1(eu);
 let em = "sc_project_creation_team_access_onboarding_key";
 function eh() {
-  let e = md(ep);
+  let e = useAtomWithSubscription(ep);
   let {
     show,
     isShowing,
@@ -103,14 +103,14 @@ function eh() {
   return jsx(_$$rq, {
     arrowPosition: F_.LEFT_TITLE,
     description: jsx("p", {
-      children: tx("rcs.sharing_clarity.project_creation_team_access_description")
+      children: renderI18nText("rcs.sharing_clarity.project_creation_team_access_description")
     }),
     disableHighlight: !0,
     emphasized: !0,
     isShowing,
     onClose: complete,
     targetKey: em,
-    title: tx("rcs.sharing_clarity.project_creation_team_access_title"),
+    title: renderI18nText("rcs.sharing_clarity.project_creation_team_access_title"),
     trackingContextName: "Sharing Clarity Project Creation Team Access Onboarding",
     userFlagOnShow: eu,
     zIndex: _$$R.MODAL
@@ -122,7 +122,7 @@ let ex = "sc_project_modal_team_access_onboarding_key";
 let eS = r1(eI);
 let ew = rn("sc_project_modal_onboarding", _$$R2(BWk));
 function eC() {
-  let e = md(eS);
+  let e = useAtomWithSubscription(eS);
   let {
     show,
     uniqueId,
@@ -143,22 +143,22 @@ function eC() {
     show();
   });
   let d = {
-    label: tx("rcs.sharing_clarity.learn_more"),
+    label: renderI18nText("rcs.sharing_clarity.learn_more"),
     type: "link",
     href: "https://help.figma.com/hc/articles/360038006494-Create-a-new-project",
     ctaTrackingDescriptor: _$$c.LEARN_MORE
   };
   let c = [{
-    title: tx("rcs.sharing_clarity.project_permissions_modal_step_1_title"),
-    description: tx("rcs.sharing_clarity.project_permissions_modal_step_1_description"),
+    title: renderI18nText("rcs.sharing_clarity.project_permissions_modal_step_1_title"),
+    description: renderI18nText("rcs.sharing_clarity.project_permissions_modal_step_1_description"),
     trackingContextName: "Sharing Clarity Project Modal Onboarding",
     targetKey: eE,
     emphasized: !0,
     zIndex: _$$R.MODAL,
     secondaryCta: d
   }, {
-    title: tx("rcs.sharing_clarity.project_permissions_modal_step_2_title"),
-    description: tx("rcs.sharing_clarity.project_permissions_modal_step_2_description"),
+    title: renderI18nText("rcs.sharing_clarity.project_permissions_modal_step_2_title"),
+    description: renderI18nText("rcs.sharing_clarity.project_permissions_modal_step_2_description"),
     trackingContextName: "Sharing Clarity Project Modal Team Access Onboarding",
     targetKey: ex,
     emphasized: !0,
@@ -240,12 +240,12 @@ function eL(e) {
           children: [e.audienceAccessRow && e.sharingAudienceControl ? jsx("div", {
             children: ET(e.sharingAudienceControl, e.org, e.workspace, !1, folder.name)
           }) : (() => {
-            let e = team ? team.name : _$$t("folder_permissions_modal.project_name_s_team", {
+            let e = team ? team.name : getI18nString("folder_permissions_modal.project_name_s_team", {
               projectName: EJ(folder.name, 30)
             });
             return jsx("span", {
               className: team && folder.is_invite_only ? mL : void 0,
-              children: tx("permissions.anyone_in_container_name", {
+              children: renderI18nText("permissions.anyone_in_container_name", {
                 containerName: e
               })
             });
@@ -260,29 +260,29 @@ function eL(e) {
             });
             if (!s) {
               if (o) return jsx(Fragment, {});
-              if (team) return tx("folder_access_row.num_people", {
+              if (team) return renderI18nText("folder_access_row.num_people", {
                 num: e.teamRoles.length.toString()
               });
               if (l) return jsx("div", {
                 className: j7,
-                children: tx("permissions.level_name.can_access")
+                children: renderI18nText("permissions.level_name.can_access")
               });
               if (d) return jsx("div", {
                 className: j7,
-                children: tx("permissions.level_name.can_view")
+                children: renderI18nText("permissions.level_name.can_view")
               });
             }
             return o ? jsx("a", {
               className: KU,
               children: jsx("div", {
                 "data-onboarding-key": m,
-                children: tx("folder_access_row.give_access")
+                children: renderI18nText("folder_access_row.give_access")
               })
             }) : jsx(Fragment, {
               children: jsxs("div", {
                 className: j7,
                 "data-onboarding-key": m,
-                children: [tx("folder_access_row.num_people", {
+                children: [renderI18nText("folder_access_row.num_people", {
                   num: e.teamRoles.length.toString()
                 }), jsx(_$$B, {
                   svg: _$$A2,
@@ -310,9 +310,9 @@ function ez(e) {
     children: [jsx("div", {
       className: _$$s.colorTextSecondary.$,
       "data-testid": "team-access-settings-description",
-      children: e.teamAccess === FTeamAccessPermissionType.TEAM_ACCESS_EDIT ? tx("folder_share_settings.the_following_people_have_access_team", {
+      children: e.teamAccess === FTeamAccessPermissionType.TEAM_ACCESS_EDIT ? renderI18nText("folder_share_settings.the_following_people_have_access_team", {
         teamName: e.teamName
-      }) : tx("folder_share_settings.the_following_people_have_access_team_view_only", {
+      }) : renderI18nText("folder_share_settings.the_following_people_have_access_team_view_only", {
         teamName: e.teamName
       })
     }), jsx("div", {
@@ -346,7 +346,7 @@ function eH(e) {
   return jsxs(Fragment, {
     children: [jsx("div", {
       className: bV,
-      children: _$$t("folder_permissions_modal.what_team_members_can_do_project", {
+      children: getI18nString("folder_permissions_modal.what_team_members_can_do_project", {
         teamName: e.teamName
       })
     }), jsxs(_$$z, {
@@ -358,31 +358,31 @@ function eH(e) {
         className: hO,
         children: jsx("p", {
           className: tb,
-          children: tx("file_browser.folder_settings.team_access_same_as_team")
+          children: renderI18nText("file_browser.folder_settings.team_access_same_as_team")
         })
       }, "edit"), jsx("p", {
         className: w3,
-        children: tx("file_browser.folder_settings.team_access_same_as_team_subtitle")
+        children: renderI18nText("file_browser.folder_settings.team_access_same_as_team_subtitle")
       }), jsx(_$$Z2, {
         value: FTeamAccessPermissionType.TEAM_ACCESS_VIEW,
         className: hO,
         children: jsx("p", {
           className: tb,
-          children: tx("file_browser.folder_settings.team_access_view_only")
+          children: renderI18nText("file_browser.folder_settings.team_access_view_only")
         })
       }, "view-only"), jsx("p", {
         className: w3,
-        children: tx("file_browser.folder_settings.team_access_view_only_subtitle")
+        children: renderI18nText("file_browser.folder_settings.team_access_view_only_subtitle")
       }), jsx(_$$Z2, {
         value: FTeamAccessPermissionType.TEAM_ACCESS_DISABLED,
         className: hO,
         children: jsx("p", {
           className: tb,
-          children: tx("file_browser.folder_settings.team_access_disable")
+          children: renderI18nText("file_browser.folder_settings.team_access_disable")
         })
       }, "team-access-disabled"), jsx("p", {
         className: w3,
-        children: tx("file_browser.folder_settings.team_access_disabled_subtitle")
+        children: renderI18nText("file_browser.folder_settings.team_access_disabled_subtitle")
       })]
     })]
   });
@@ -426,7 +426,7 @@ export let $$eK0 = Ju(function (e) {
     let t = em.data?.project?.roles?.length ?? 0;
     let i = "unknown";
     i = t <= 100 ? "small" : t <= 300 ? "medium" : "large";
-    sx("share_modal_latency", {
+    trackEventAnalytics("share_modal_latency", {
       latency_ms: e,
       modal_type: "project",
       is_outlier: e > 1e3,
@@ -608,7 +608,7 @@ export let $$eK0 = Ju(function (e) {
     if (e0) {
       if (planPublicInfo?.tier === FPlanNameType.STARTER) {
         if (!team) {
-          $D(_$$e.WORKFLOW, Error("Cannot read team when user tries to update team access for starter team"));
+          reportError(_$$e.WORKFLOW, Error("Cannot read team when user tries to update team access for starter team"));
           return;
         }
         e0 === FTeamAccessPermissionType.TEAM_ACCESS_VIEW ? ep(to({
@@ -638,7 +638,7 @@ export let $$eK0 = Ju(function (e) {
       ed(2);
     }
   };
-  let ti = team?.name ?? _$$t("folder_permissions_modal.project_name_s_team", {
+  let ti = team?.name ?? getI18nString("folder_permissions_modal.project_name_s_team", {
     projectName: en.name
   });
   let tn = (e, t) => {
@@ -688,18 +688,18 @@ export let $$eK0 = Ju(function (e) {
                   iconPrefix: !ec && jsx(_$$r, {
                     className: Sc
                   }),
-                  children: ec ? tx("file_permissions_modal.link_copied") : tx("file_permissions_modal.copy_folder_link")
+                  children: ec ? renderI18nText("file_permissions_modal.link_copied") : renderI18nText("file_permissions_modal.copy_folder_link")
                 });
-                return tn(_$$t("folder_permissions_modal.share_this_project"), {
+                return tn(getI18nString("folder_permissions_modal.share_this_project"), {
                   goBackAction: void 0,
                   rightSideActions: e
                 });
               case 1:
-                return tn(_$$t("team_view.team_permissions_modal.share_settings"), {
+                return tn(getI18nString("team_view.team_permissions_modal.share_settings"), {
                   goBackAction: eq
                 });
               case 3:
-                return tn(_$$t("file_browser.folder_settings.change_team_access_team_name", {
+                return tn(getI18nString("file_browser.folder_settings.change_team_access_team_name", {
                   teamName: ti
                 }), {
                   goBackAction: eK
@@ -709,9 +709,9 @@ export let $$eK0 = Ju(function (e) {
                 let i = jsx($n, {
                   variant: "link",
                   onClick: () => ed(3),
-                  children: tx("file_browser.folder_settings.change_team_access")
+                  children: renderI18nText("file_browser.folder_settings.change_team_access")
                 });
-                return tn(_$$t("file_browser.folder_settings.change_team_access_title", {
+                return tn(getI18nString("file_browser.folder_settings.change_team_access_title", {
                   teamName: team?.name ?? ""
                 }), {
                   goBackAction: eq,
@@ -738,7 +738,7 @@ export let $$eK0 = Ju(function (e) {
                       variant: "brand",
                       icon: jsx(_$$L, {}),
                       children: jsx(_$$Q, {
-                        children: tx("folder_permissions_modal.this_is_a_connected_project_banner", {
+                        children: renderI18nText("folder_permissions_modal.this_is_a_connected_project_banner", {
                           hostPlanName: jsx("span", {
                             className: _$$s.fontSemiBold.$,
                             children: resourceConnection.hostPlanName
@@ -750,7 +750,7 @@ export let $$eK0 = Ju(function (e) {
                           connectedProjectLink: jsx(_$$N, {
                             href: "https://help.figma.com/hc/articles/30124855491863-Guide-to-connected-projects",
                             newTab: !0,
-                            children: _$$t("resource_connection.connected_project_link")
+                            children: getI18nString("resource_connection.connected_project_link")
                           })
                         })
                       })
@@ -761,7 +761,7 @@ export let $$eK0 = Ju(function (e) {
                       SearchResultComponent: o6,
                       TokenComponent: gy,
                       autocomplete: Q,
-                      buttonText: _$$t("folder_permissions_modal.send_invite"),
+                      buttonText: getI18nString("folder_permissions_modal.send_invite"),
                       dispatch: ep,
                       dropdownKey: "permissions-invite-dropdown",
                       dropdownShown: ee,
@@ -776,7 +776,7 @@ export let $$eK0 = Ju(function (e) {
                       onInviteLevelChange: eN,
                       onSubmit: eB,
                       options: e,
-                      placeholderText: _$$t("team_creation.add_a_name_or_email"),
+                      placeholderText: getI18nString("team_creation.add_a_name_or_email"),
                       searchResultToken: eP,
                       shouldAutoFocus: !0,
                       validateToken: eO,
@@ -797,7 +797,7 @@ export let $$eK0 = Ju(function (e) {
                     className: d3,
                     children: [jsx("div", {
                       className: KZ,
-                      children: _$$t("file_permissions_modal.who_has_access")
+                      children: getI18nString("file_permissions_modal.who_has_access")
                     }), en && en.team_id && jsx(eL, {
                       team: team || null,
                       folder: en,
@@ -817,7 +817,7 @@ export let $$eK0 = Ju(function (e) {
               className: l2,
               children: [jsx("div", {
                 className: bV,
-                children: _$$t("project_creation.who_has_access")
+                children: getI18nString("project_creation.who_has_access")
               }), er && jsx(YU, {
                 resourceType: FResourceCategoryType.FOLDER,
                 value: eQ,
@@ -829,13 +829,13 @@ export let $$eK0 = Ju(function (e) {
               }), eQ !== _9.INVITE_ONLY && jsxs(Fragment, {
                 children: [jsx("div", {
                   className: bV,
-                  children: _$$t("folder_permissions_modal.what_they_can_do")
+                  children: getI18nString("folder_permissions_modal.what_they_can_do")
                 }), jsx(Iz, {
                   selectedPermissionsLevel: e2,
                   setSelectedPermissionsLevel: e5
                 }), jsx("div", {
                   className: VA,
-                  children: e2 === J4.VIEW ? _$$t("project_creation.can_view_and_comment") : _$$t("project_creation.can_create_and_edit_files")
+                  children: e2 === J4.VIEW ? getI18nString("project_creation.can_view_and_comment") : getI18nString("project_creation.can_create_and_edit_files")
                 })]
               })]
             }),
@@ -861,7 +861,7 @@ export let $$eK0 = Ju(function (e) {
             children: [jsx($n, {
               onClick: eq,
               variant: "secondary",
-              children: tx("project_creation.cancel")
+              children: renderI18nText("project_creation.cancel")
             }), jsx($n, {
               onClick: () => {
                 if (e0 !== teamAccess) {
@@ -876,7 +876,7 @@ export let $$eK0 = Ju(function (e) {
                 ed(0);
               },
               variant: "primary",
-              children: tx("team_view.team_permissions_modal.save")
+              children: renderI18nText("team_view.team_permissions_modal.save")
             })]
           })
         })]

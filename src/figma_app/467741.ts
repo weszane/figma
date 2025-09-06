@@ -1,5 +1,5 @@
 import { useDispatch } from "../vendor/514228";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { qR } from "../figma_app/696043";
 import { RH, gU, Kq, lD } from "../figma_app/147952";
 import { _i } from "../figma_app/120210";
@@ -21,7 +21,7 @@ export function $$g0(e) {
     let a = U_();
     let o = TA();
     if (!e.types.has(Ag.USER_SAVED) && !JT(e)) return {
-      displayText: _$$t("community.saves.save"),
+      displayText: getI18nString("community.saves.save"),
       callback: () => {
         if (save(), a && o) {
           let {
@@ -77,7 +77,7 @@ function y(e) {
   if (!(e.types.has(Ag.RECENT) || e.types.has(Ag.USER_SAVED) || e.types.has(Ag.LOCAL))) return;
   let p = !!(ZQ(extension) && e.publishedExtension);
   return {
-    displayText: p ? _$$t("universal_insert.remove_local_version") : _$$t("universal_insert.remove"),
+    displayText: p ? getI18nString("universal_insert.remove_local_version") : getI18nString("universal_insert.remove"),
     callback: () => {
       !(types.has(Ag.LOCAL) && ZQ(extension) && (t(qR(extension.localFileId)), p)) && (types.has(Ag.RECENT) && r && t((k0(extension) ? Kq : lD)({
         storeInRecentsKey: r,

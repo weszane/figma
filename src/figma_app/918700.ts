@@ -3,7 +3,7 @@ import { useCallback, useRef, useEffect } from "react";
 import { useDispatch } from "../vendor/514228";
 import { useHandleMouseEvent, useSetupPlayback } from "../figma_app/878298";
 import o from "classnames";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Uz } from "../905/63728";
 import { h as _$$h } from "../905/772711";
 import { M } from "../905/807529";
@@ -11,7 +11,7 @@ import { i0 } from "../905/17223";
 import { qM, vd, tM } from "../figma_app/637027";
 import { kt } from "../figma_app/858013";
 import { i as _$$i, C as _$$C } from "../905/64217";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { In } from "../905/672640";
 import { Lo, Ce } from "../905/156213";
 import { Dm } from "../figma_app/8833";
@@ -150,7 +150,7 @@ export function $$A0(e) {
   let p = useCallback(e => {
     popStack ? t(Lo()) : t(Ce());
     onHide && onHide();
-    sx("Modal Close", {
+    trackEventAnalytics("Modal Close", {
       source: e,
       trackingContext: name,
       fileKey: c,
@@ -223,7 +223,7 @@ export function $$N2(e) {
       children: [!e.hideConfirmationTitle && jsx("div", {
         className: e.titleClass ?? DD,
         children: jsxs("h2", {
-          children: [" ", e.confirmationTitle ?? tx("modal.are_you_sure")]
+          children: [" ", e.confirmationTitle ?? renderI18nText("modal.are_you_sure")]
         })
       }), e.children ? e.children : jsx("div", {
         className: jE,
@@ -236,7 +236,7 @@ export function $$N2(e) {
         }), !e.hideCancel && jsx(tM, {
           onClick: L,
           autoFocus: !!o && r,
-          children: e.cancelText ?? tx("modal.cancel")
+          children: e.cancelText ?? renderI18nText("modal.cancel")
         }), e.isLoading ? jsxs(P, {
           dataTestId: "confirmation-modal-confirm-action-button",
           tabIndex: 0,

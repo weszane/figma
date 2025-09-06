@@ -1,15 +1,15 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { Bq, sortByPropertyWithOptions } from "../figma_app/656233";
+import { flatten, sortByPropertyWithOptions } from "../figma_app/656233";
 import { assertNotNullish, isNotNullish } from "../figma_app/95419";
 import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
-import { eU, md, Xr } from "../figma_app/27355";
+import { atom, useAtomWithSubscription, Xr } from "../figma_app/27355";
 import { k9 } from "../905/19536";
 import u from "../vendor/260986";
 import { Rs, ap } from "../figma_app/288654";
 import { gB, oA } from "../905/723791";
-import { nl } from "../figma_app/257275";
+import { isInteractionPathCheck } from "../figma_app/897289";
 import { yy } from "../figma_app/543529";
 import { n1 } from "../figma_app/657017";
 import { LP } from "../905/760074";
@@ -23,7 +23,7 @@ import { X$, EV } from "../figma_app/465071";
 var p = u;
 var $$x1 = (e => (e.COMMUNITY = "community", e.ORGANIZATION = "organization", e.WORKSPACE = "workspace", e.TEAM = "team", e.FILE = "file", e.USER = "user", e))($$x1 || {});
 let N = createContext(null);
-let $$C4 = eU(void 0);
+let $$C4 = atom(void 0);
 export function $$w6() {
   let {
     subscription,
@@ -33,7 +33,7 @@ export function $$w6() {
     ensureSubscription();
   }, [ensureSubscription]);
   let r = useMemo(() => gB([]), []);
-  return nl() ? r : subscription;
+  return isInteractionPathCheck() ? r : subscription;
 }
 export function $$O8() {
   let e = $$w6();
@@ -98,7 +98,7 @@ export function $$D0({
   let t = q5();
   let r = !!t?.teamId;
   let a = T9(t?.project);
-  md(fy7.Query({
+  useAtomWithSubscription(fy7.Query({
     group: M()
   }));
   Nn();
@@ -311,7 +311,7 @@ export function $$M5(e, t, r, n, i, o) {
       let t = e?.teamId;
       return t ? e?.currentUser?.orgAwareTeamRoles?.filter(e => e.team?.id === t).map(e => e.team?.libraryTeamSubscriptions).filter(isNotNullish) : e?.currentUser?.orgAwareTeamRoles?.map(e => e.team?.libraryTeamSubscriptions).filter(isNotNullish);
     }(l)?.map(e => e.filter(e => n || !e.communityLibrary).filter(B).map(e => $$F2(e, "team"))) ?? [];
-    f.push(...Bq(e));
+    f.push(...flatten(e));
   }
   let y = p()(f.filter(isNotNullish), e => e.libraryKey).filter(e => !LP(l, e.libraryKey));
   sortByPropertyWithOptions(y, "name");

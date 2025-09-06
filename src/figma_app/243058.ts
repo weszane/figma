@@ -1,82 +1,87 @@
-import { $y, cI, I0, iF, iV, Kj, kY, M4, sS, UG, Uw, VP } from '../905/859698';
-import { AD, dI, fn, Hr, sH } from '../905/871411';
-import { debug } from '../figma_app/465776';
+import { $y, cI, I0, iF, iV, Kj, kY, M4, sS, UG, Uw, VP } from '../905/859698'
+import { AD, dI, fn, Hr, sH } from '../905/871411'
+import { debug } from '../figma_app/465776'
+
 function y(e, t) {
   function r(t, r) {
-    return t.startsWith(e) ? r(t.slice(e.length)) : null;
+    return t.startsWith(e) ? r(t.slice(e.length)) : null
   }
   function n(e) {
-    return t.fromString(e);
+    return t.fromString(e)
   }
   function i(e) {
-    return r(e, e => n(e) ? null : sH(e));
+    return r(e, e => n(e) ? null : sH(e))
   }
   function a(e) {
-    return r(e, e => n(e));
+    return r(e, e => n(e))
   }
   function s(t) {
-    return e + dI(t);
+    return e + dI(t)
   }
   function o(r) {
-    return e + t.toString(r);
+    return e + t.toString(r)
   }
   return {
     toString(e) {
-      return e;
+      return e
     },
     toKiwi(e) {
-      return r(e, e => {
-        let t = n(e);
+      return r(e, (e) => {
+        let t = n(e)
         if (t) {
           return {
-            assetRef: t
-          };
+            assetRef: t,
+          }
         }
-        let r = sH(e);
+        let r = sH(e)
         if (r) {
           return {
-            guid: r
-          };
+            guid: r,
+          }
         }
       }) ?? {
-        guid: Hr
-      };
+        guid: Hr,
+      }
     },
     toGuidObjIfLocal: i,
     toGuidStrIfLocal(e) {
-      return r(e, e => n(e) ? null : e);
+      return r(e, e => n(e) ? null : e)
     },
     toRefIfSubscribed: a,
     fromString(e) {
-      return r(e, t => sH(t) || n(t) ? e : null);
+      return r(e, t => sH(t) || n(t) ? e : null)
     },
     fromLocalNodeIdObj: s,
     fromLocalNodeIdStr(t) {
-      return sH(t) ? e + t : null;
+      return sH(t) ? e + t : null
     },
     fromRef: o,
     fromKiwi(e) {
-      if (!e) return null;
+      if (!e)
+        return null
       let {
         guid,
-        assetRef
-      } = e;
-      if (guid && !assetRef) return s(guid);
+        assetRef,
+      } = e
+      if (guid && !assetRef)
+        return s(guid)
       if (!guid && assetRef) {
-        let e = t.fromKiwi(assetRef);
-        if (e) return o(e);
+        let e = t.fromKiwi(assetRef)
+        if (e)
+          return o(e)
       }
-      return null;
+      return null
     },
     isValid(e) {
-      let r = i(e);
-      if (r) return fn(r);
-      let n = a(e);
-      return !!n && t.isValid(n);
-    }
-  };
+      let r = i(e)
+      if (r)
+        return fn(r)
+      let n = a(e)
+      return !!n && t.isValid(n)
+    },
+  }
 }
-let tnode0 = y('CodeLibraryId:', sS);
+let tnode0 = y('CodeLibraryId:', sS)
 export const $$n8 = {
   INVALID: tnode0.fromLocalNodeIdStr(AD),
   toString: tnode0.toString,
@@ -89,9 +94,9 @@ export const $$n8 = {
   fromLocalNodeIdStr: tnode0.fromLocalNodeIdStr,
   fromRef: tnode0.fromRef,
   fromKiwi: tnode0.fromKiwi,
-  isValid: tnode0.isValid
-};
-let tnode1 = y('CodeFileId:', VP);
+  isValid: tnode0.isValid,
+}
+let tnode1 = y('CodeFileId:', VP)
 export const $$i3 = {
   INVALID: tnode1.fromLocalNodeIdStr(AD),
   toString: tnode1.toString,
@@ -104,9 +109,9 @@ export const $$i3 = {
   fromLocalNodeIdStr: tnode1.fromLocalNodeIdStr,
   fromRef: tnode1.fromRef,
   fromKiwi: tnode1.fromKiwi,
-  isValid: tnode1.isValid
-};
-let tnode2 = y('CodeComponentId:', kY);
+  isValid: tnode1.isValid,
+}
+let tnode2 = y('CodeComponentId:', kY)
 export const $$a6 = {
   INVALID: tnode2.fromLocalNodeIdStr(AD),
   toString: tnode2.toString,
@@ -119,9 +124,9 @@ export const $$a6 = {
   fromLocalNodeIdStr: tnode2.fromLocalNodeIdStr,
   fromRef: tnode2.fromRef,
   fromKiwi: tnode2.fromKiwi,
-  isValid: tnode2.isValid
-};
-let tnode3 = y('ManagedStringId:', iF);
+  isValid: tnode2.isValid,
+}
+let tnode3 = y('ManagedStringId:', iF)
 export const $$s10 = {
   INVALID: tnode3.fromLocalNodeIdStr(AD),
   toString: tnode3.toString,
@@ -134,9 +139,9 @@ export const $$s10 = {
   fromLocalNodeIdStr: tnode3.fromLocalNodeIdStr,
   fromRef: tnode3.fromRef,
   fromKiwi: tnode3.fromKiwi,
-  isValid: tnode3.isValid
-};
-let tnode4 = y('ResponsiveSetId:', I0);
+  isValid: tnode3.isValid,
+}
+let tnode4 = y('ResponsiveSetId:', I0)
 export const $$o7 = {
   INVALID: tnode4.fromLocalNodeIdStr(AD),
   toString: tnode4.toString,
@@ -149,9 +154,9 @@ export const $$o7 = {
   fromLocalNodeIdStr: tnode4.fromLocalNodeIdStr,
   fromRef: tnode4.fromRef,
   fromKiwi: tnode4.fromKiwi,
-  isValid: tnode4.isValid
-};
-let tnode5 = y('SymbolId:', Uw);
+  isValid: tnode4.isValid,
+}
+let tnode5 = y('SymbolId:', Uw)
 export const $$l4 = {
   INVALID: tnode5.fromLocalNodeIdStr(AD),
   toString: tnode5.toString,
@@ -164,9 +169,9 @@ export const $$l4 = {
   fromLocalNodeIdStr: tnode5.fromLocalNodeIdStr,
   fromRef: tnode5.fromRef,
   fromKiwi: tnode5.fromKiwi,
-  isValid: tnode5.isValid
-};
-let tnode6 = y('StateGroupId:', Kj);
+  isValid: tnode5.isValid,
+}
+let tnode6 = y('StateGroupId:', Kj)
 export const $$d0 = {
   INVALID: tnode6.fromLocalNodeIdStr(AD),
   toString: tnode6.toString,
@@ -179,9 +184,9 @@ export const $$d0 = {
   fromLocalNodeIdStr: tnode6.fromLocalNodeIdStr,
   fromRef: tnode6.fromRef,
   fromKiwi: tnode6.fromKiwi,
-  isValid: tnode6.isValid
-};
-let tnode7 = y('StyleId:', $y);
+  isValid: tnode6.isValid,
+}
+let tnode7 = y('StyleId:', $y)
 export const $$c2 = {
   INVALID: tnode7.fromLocalNodeIdStr(AD),
   toString: tnode7.toString,
@@ -196,10 +201,10 @@ export const $$c2 = {
   fromKiwi: tnode7.fromKiwi,
   isValid: tnode7.isValid,
   fromBindingsObj(t) {
-    return t.guid && t.guid !== AD ? e.fromLocalNodeIdStr(t.guid) : e.fromRef(t.ref);
-  }
-};
-let tnode8 = y('VariableID:', M4);
+    return t.guid && t.guid !== AD ? e.fromLocalNodeIdStr(t.guid) : e.fromRef(t.ref)
+  },
+}
+let tnode8 = y('VariableID:', M4)
 export const $$u11 = {
   INVALID: tnode8.fromLocalNodeIdStr(AD),
   toString: tnode8.toString,
@@ -212,9 +217,9 @@ export const $$u11 = {
   fromLocalNodeIdStr: tnode8.fromLocalNodeIdStr,
   fromRef: tnode8.fromRef,
   fromKiwi: tnode8.fromKiwi,
-  isValid: tnode8.isValid
-};
-let tnode9 = y('VariableOverrideId:', cI);
+  isValid: tnode8.isValid,
+}
+let tnode9 = y('VariableOverrideId:', cI)
 export const $$p1 = {
   INVALID: tnode9.fromLocalNodeIdStr(AD),
   toString: tnode9.toString,
@@ -227,39 +232,39 @@ export const $$p1 = {
   fromLocalNodeIdStr: tnode9.fromLocalNodeIdStr,
   fromRef: tnode9.fromRef,
   fromKiwi: tnode9.fromKiwi,
-  isValid: tnode9.isValid
-};
-let tnode10 = 'VariableSetID:';
-let rnode11 = y('VariableCollectionId:', iV);
-let nnode12 = y(tnode10, iV);
+  isValid: tnode9.isValid,
+}
+let tnode10 = 'VariableSetID:'
+let rnode11 = y('VariableCollectionId:', iV)
+let nnode12 = y(tnode10, iV)
 function inode13({
   current: e,
-  deprecated: r
+  deprecated: r,
 }) {
-  return n => n.startsWith(tnode10) ? r(n) : e(n);
+  return n => n.startsWith(tnode10) ? r(n) : e(n)
 }
 export const $$_9 = {
   INVALID: rnode11.fromLocalNodeIdStr(AD),
   toString: rnode11.toString,
   toKiwi: inode13({
     current: rnode11.toKiwi,
-    deprecated: nnode12.toKiwi
+    deprecated: nnode12.toKiwi,
   }),
   toGuidObjIfLocal: inode13({
     current: rnode11.toGuidObjIfLocal,
-    deprecated: nnode12.toGuidObjIfLocal
+    deprecated: nnode12.toGuidObjIfLocal,
   }),
   toGuidStrIfLocal: inode13({
     current: rnode11.toGuidStrIfLocal,
-    deprecated: nnode12.toGuidStrIfLocal
+    deprecated: nnode12.toGuidStrIfLocal,
   }),
   toRefIfSubscribed: inode13({
     current: rnode11.toRefIfSubscribed,
-    deprecated: nnode12.toRefIfSubscribed
+    deprecated: nnode12.toRefIfSubscribed,
   }),
   fromString: inode13({
     current: rnode11.fromString,
-    deprecated: nnode12.fromString
+    deprecated: nnode12.fromString,
   }),
   fromLocalNodeIdObj: rnode11.fromLocalNodeIdObj,
   fromLocalNodeIdStr: rnode11.fromLocalNodeIdStr,
@@ -267,10 +272,10 @@ export const $$_9 = {
   fromKiwi: rnode11.fromKiwi,
   isValid: inode13({
     current: rnode11.isValid,
-    deprecated: nnode12.isValid
-  })
-};
-let tnode14 = y('ModuleId:', UG);
+    deprecated: nnode12.isValid,
+  }),
+}
+let tnode14 = y('ModuleId:', UG)
 export const h = {
   INVALID: tnode14.fromLocalNodeIdStr(AD),
   toString: tnode14.toString,
@@ -283,93 +288,97 @@ export const h = {
   fromLocalNodeIdStr: tnode14.fromLocalNodeIdStr,
   fromRef: tnode14.fromRef,
   fromKiwi: tnode14.fromKiwi,
-  isValid: tnode14.isValid
-};
+  isValid: tnode14.isValid,
+}
 export const $$m5 = {
-  fromKiwi: e => {
+  fromKiwi: (e) => {
     if (e.guid) {
       return {
         type: 'guid',
-        guid: dI(e.guid)
-      };
+        guid: dI(e.guid),
+      }
     }
     if (e.stateGroupId) {
-      let t = $$d0.fromKiwi(e.stateGroupId);
+      let t = $$d0.fromKiwi(e.stateGroupId)
       if (t) {
         return {
           type: 'stateGroup',
-          stateGroupId: t
-        };
+          stateGroupId: t,
+        }
       }
     }
     if (e.symbolId) {
-      let t = $$l4.fromKiwi(e.symbolId);
+      let t = $$l4.fromKiwi(e.symbolId)
       if (t) {
         return {
           type: 'symbol',
-          symbolId: t
-        };
+          symbolId: t,
+        }
       }
     }
-    debug(!1, 'Unhandled CanvasNodeId type');
+    debug(!1, 'Unhandled CanvasNodeId type')
   },
-  toGuidStrIfLocal: e => {
+  toGuidStrIfLocal: (e) => {
     switch (e.type) {
       case 'guid':
-        return e.guid;
+        return e.guid
       case 'symbol':
-        return $$l4.toGuidStrIfLocal(e.symbolId);
+        return $$l4.toGuidStrIfLocal(e.symbolId)
       case 'stateGroup':
-        return $$d0.toGuidStrIfLocal(e.stateGroupId);
+        return $$d0.toGuidStrIfLocal(e.stateGroupId)
     }
   },
-  toRefIfSubscribed: e => {
+  toRefIfSubscribed: (e) => {
     switch (e.type) {
       case 'guid':
-        return null;
+        return null
       case 'symbol':
-        return $$l4.toRefIfSubscribed(e.symbolId);
+        return $$l4.toRefIfSubscribed(e.symbolId)
       case 'stateGroup':
-        return $$d0.toRefIfSubscribed(e.stateGroupId);
+        return $$d0.toRefIfSubscribed(e.stateGroupId)
     }
   },
-  toString: e => {
+  toString: (e) => {
     switch (e.type) {
       case 'guid':
-        return e.guid;
+        return e.guid
       case 'symbol':
-        return $$l4.toString(e.symbolId);
+        return $$l4.toString(e.symbolId)
       case 'stateGroup':
-        return $$d0.toString(e.stateGroupId);
+        return $$d0.toString(e.stateGroupId)
     }
   },
-  fromString: e => {
-    let t = $$l4.fromString(e);
+  fromString: (e) => {
+    let t = $$l4.fromString(e)
     if (t) {
       return {
         type: 'symbol',
-        symbolId: t
-      };
+        symbolId: t,
+      }
     }
-    let r = $$d0.fromString(e);
-    return r ? {
-      type: 'stateGroup',
-      stateGroupId: r
-    } : sH(e) ? {
-      type: 'guid',
-      guid: e
-    } : null;
-  }
-};
-export const GU = $$d0;
-export const Kw = $$p1;
-export const PK = $$c2;
-export const Tq = $$i3;
-export const Ws = $$l4;
-export const YB = $$m5;
-export const _H = $$a6;
-export const cd = $$o7;
-export const eJ = $$n8;
-export const gr = $$_9;
-export const oW = $$s10;
-export const sD = $$u11;
+    let r = $$d0.fromString(e)
+    return r
+      ? {
+          type: 'stateGroup',
+          stateGroupId: r,
+        }
+      : sH(e)
+        ? {
+            type: 'guid',
+            guid: e,
+          }
+        : null
+  },
+}
+export const GU = $$d0
+export const Kw = $$p1
+export const PK = $$c2
+export const Tq = $$i3
+export const Ws = $$l4
+export const YB = $$m5
+export const _H = $$a6
+export const cd = $$o7
+export const eJ = $$n8
+export const gr = $$_9
+export const oW = $$s10
+export const sD = $$u11

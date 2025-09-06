@@ -7,9 +7,9 @@ import { getFeatureFlags } from "../905/601108";
 import { Xf } from "../figma_app/153916";
 import { A } from "../905/920142";
 import { getInitialOptions } from "../figma_app/169182";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { pW } from "../905/160095";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { k as _$$k } from "../figma_app/618031";
 import { fu } from "../figma_app/831799";
 import { G6, Yh, wd, j2, hs } from "../figma_app/84966";
@@ -28,7 +28,7 @@ function v({
   let b = A(e);
   if (!x) return null;
   if (!e || !b.isValid()) {
-    g || $D(_$$e.MONETIZATION_UPGRADES, Error(`Contract Start have invalid date: ${e}`), {
+    g || reportError(_$$e.MONETIZATION_UPGRADES, Error(`Contract Start have invalid date: ${e}`), {
       extra: a
     });
     return null;
@@ -36,13 +36,13 @@ function v({
   let v = getInitialOptions().analyze_data_flow_v2_until;
   let f = v ? A(v) : null;
   let j = getFeatureFlags().contract_start_banner_renewal_copy && f && f.add(30, "days").isAfter(b) && d;
-  let y = j ? _$$t("admin_settings.contract_start_banner.renewal_close_to_ga.title", {
+  let y = j ? getI18nString("admin_settings.contract_start_banner.renewal_close_to_ga.title", {
     planName: t,
     nextContractStartDate: b.toDate()
-  }) : _$$t("admin_settings.contract_start_banner.banner_title_new");
-  let w = j ? _$$t(`admin_settings.contract_start_banner.renewal_close_to_ga.subtitle.${s}`, {
+  }) : getI18nString("admin_settings.contract_start_banner.banner_title_new");
+  let w = j ? getI18nString(`admin_settings.contract_start_banner.renewal_close_to_ga.subtitle.${s}`, {
     billingRemodelGaDate: f.toDate()
-  }) : _$$t("admin_settings.contract_start_banner.banner_subtitle", {
+  }) : getI18nString("admin_settings.contract_start_banner.banner_subtitle", {
     planName: t,
     nextContractStartDate: b.toDate()
   });
@@ -59,7 +59,7 @@ function v({
         variant: "secondary",
         trusted: !0,
         newTab: !0,
-        children: tx("general.learn_more")
+        children: renderI18nText("general.learn_more")
       })]
     })
   });

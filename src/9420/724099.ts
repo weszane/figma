@@ -2,14 +2,14 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { S as _$$S } from "../905/274480";
 import { J as _$$J } from "../905/270045";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { h as _$$h } from "../905/207101";
 import { Lf } from "../figma_app/637027";
 import { _ as _$$_, S as _$$S2 } from "../figma_app/490799";
 import { kt } from "../figma_app/858013";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { wn, dl, Ix } from "../9420/795870";
 import { E as _$$E } from "../905/712094";
@@ -65,13 +65,13 @@ export function $$N0({
     r();
   }));
   useEffect(() => {
-    M && az.trackDefinedEvent("monetization_upgrades.checkout_payment_error", {
+    M && analyticsEventManager.trackDefinedEvent("monetization_upgrades.checkout_payment_error", {
       ...X,
       message: M.message
     });
   }, [M]);
   useEffect(() => {
-    G && az.trackDefinedEvent("monetization_upgrades.checkout_payment_error", {
+    G && analyticsEventManager.trackDefinedEvent("monetization_upgrades.checkout_payment_error", {
       ...X,
       message: G
     });
@@ -115,8 +115,8 @@ export function $$N0({
       children: [$ && A && jsx(Lf, {
         value: C || "",
         htmlName: "name_on_card",
-        label: _$$t("pro_cart.payment.name_on_payment_method_label"),
-        placeholder: _$$t("pro_cart.payment.name_on_payment_method"),
+        label: getI18nString("pro_cart.payment.name_on_payment_method_label"),
+        placeholder: getI18nString("pro_cart.payment.name_on_payment_method"),
         onChange: e => {
           A(e.target.value.trim());
         },
@@ -142,7 +142,7 @@ export function $$N0({
         variant: "regional"
       }), O === lB.SEPA && jsx("p", {
         className: "stripe_payment_and_address--mandateText--hH8C3",
-        children: tx("pro_cart.payment.sepa_direct_debit_mandate")
+        children: renderI18nText("pro_cart.payment.sepa_direct_debit_mandate")
       }), K && jsx("div", {
         className: R,
         style: sx.$$if(Q, {
@@ -153,7 +153,7 @@ export function $$N0({
           label: jsx(_$$J, {
             children: jsx("span", {
               className: _$$s.font13.$,
-              children: tx("checkout.i_have_a_different_legal_name")
+              children: renderI18nText("checkout.i_have_a_different_legal_name")
             })
           }),
           checked: Q,
@@ -176,7 +176,7 @@ export function $$N0({
           label: jsx(_$$J, {
             children: jsx("span", {
               className: _$$s.font13.$,
-              children: tx("checkout.i_have_a_different_shipping_address")
+              children: renderI18nText("checkout.i_have_a_different_shipping_address")
             })
           }),
           checked: H,

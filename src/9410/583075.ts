@@ -1,6 +1,6 @@
 import { useDispatch } from "../vendor/514228";
 import { nQ7, FAf, NLJ, glU } from "../figma_app/763686";
-import { Xr, zl } from "../figma_app/27355";
+import { Xr, atomStoreManager } from "../figma_app/27355";
 import { useSprigWithSampling } from "../905/99656";
 import { Kh } from "../figma_app/370763";
 import { oB } from "../905/929976";
@@ -33,7 +33,7 @@ export function $$g0({
   } = useSprigWithSampling();
   return r => {
     (i || r !== nQ7.DESIGN) && (t(), function (e) {
-      let t = zl.get(Kh);
+      let t = atomStoreManager.get(Kh);
       e === nQ7.DESIGN && (NT(FAf.DESIGN), t === NLJ.COMMENTS && glU?.triggerAction("set-tool-default", null));
     }(r), r === nQ7.DESIGN ? glU?.triggerAction("enter-slides-design-mode", null) : glU?.triggerAction("enter-slides-mode", null), e && r === nQ7.DESIGN ? (Cu({
       trackingContext: "slides_toggle_back_to_slides",

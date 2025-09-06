@@ -4,7 +4,7 @@ import { xk } from "@stylexjs/stylex";
 import { Xf } from "../figma_app/153916";
 import { kt } from "../figma_app/858013";
 import { $z } from "../figma_app/617427";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { qf } from "../4452/780544";
 import { u as _$$u } from "../905/16237";
 import { S as _$$S, d as _$$d } from "../4452/304860";
@@ -35,7 +35,7 @@ export function $$b2() {
     trackingProperties: {
       trackingDescriptor: _$$c.VIEW_HISTORY
     },
-    children: _$$t("admin_dashboard.requests.view_history")
+    children: getI18nString("admin_dashboard.requests.view_history")
   });
 }
 export function $$y0({
@@ -69,7 +69,7 @@ function j() {
       trackingDescriptor: _$$c.APPROVAL_SETTINGS
     },
     trackingOptions: i,
-    children: tx("admin_dashboard.requests.approval_settings")
+    children: renderI18nText("admin_dashboard.requests.approval_settings")
   });
 }
 function I({
@@ -99,7 +99,7 @@ function I({
       trackingDescriptor: _$$c.APPROVAL_SETTINGS
     },
     trackingOptions: p,
-    children: tx("admin_dashboard.requests.approval_settings")
+    children: renderI18nText("admin_dashboard.requests.approval_settings")
   });
 }
 export function $$E1({

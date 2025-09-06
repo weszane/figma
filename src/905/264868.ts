@@ -1,15 +1,15 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef, useState, useRef, useEffect, useCallback } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { eU, Xr } from "../figma_app/27355";
+import { atom, Xr } from "../figma_app/27355";
 import o from "classnames";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { V } from "../figma_app/385855";
 import { s as _$$s } from "../cssbuilder/589278";
 import { E as _$$E, N as _$$N } from "../905/139531";
 import { xn, rR } from "../905/708693";
 var l = o;
-let $$h1 = eU(new Set());
+let $$h1 = atom(new Set());
 let $$g0 = forwardRef(({
   thumbnailUrl: e,
   additionalThumbnailUrls: t,
@@ -38,13 +38,13 @@ let $$g0 = forwardRef(({
   let N = R.length;
   let P = R[v];
   useEffect(() => {
-    T || Promise.all(t.map((e) => _$$N(e))).then(() => {
+    T || Promise.all(t.map(e => _$$N(e))).then(() => {
       k(!0);
-    }).catch((e) => {
-      x1(_$$e.SEARCH, "[fb-scrubber] Error: Could not pre-load fragment thumbnails", e);
+    }).catch(e => {
+      logError(_$$e.SEARCH, "[fb-scrubber] Error: Could not pre-load fragment thumbnails", e);
     });
   }, [T, t]);
-  let O = useCallback((e) => {
+  let O = useCallback(e => {
     let t = C.current;
     if (!t) return;
     let i = t.getBoundingClientRect();
@@ -73,12 +73,12 @@ let $$g0 = forwardRef(({
     return () => {
       t.unobserve(e);
     };
-  }, [A, t, T, F]), useEffect(() => (M ? L((t) => new Set(t).add(e)) : L((t) => {
+  }, [A, t, T, F]), useEffect(() => (M ? L(t => new Set(t).add(e)) : L(t => {
     let i = new Set(t);
     i.$$delete(e);
     return i;
   }), () => {
-    L((t) => {
+    L(t => {
       let i = new Set(t);
       i.$$delete(e);
       return i;
@@ -108,7 +108,7 @@ let $$g0 = forwardRef(({
       })]
     })
   }) : jsx("div", {
-    onMouseEnter: f ? (e) => {
+    onMouseEnter: f ? e => {
       e.target.style.transition = "opacity 0.2s ease-in-out";
       e.target.style.opacity = "0.5";
       setTimeout(() => {
@@ -126,4 +126,4 @@ let $$g0 = forwardRef(({
   });
 });
 export const _ = $$g0;
-export const i = $$h1; 
+export const i = $$h1;

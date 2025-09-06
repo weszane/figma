@@ -3,7 +3,7 @@ import { forwardRef, useMemo, useState, useRef, useImperativeHandle, useCallback
 import { o as _$$o } from "../905/821217";
 import s from "classnames";
 import { $M } from "../figma_app/930338";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { U } from "../905/331038";
 import { w as _$$w } from "../905/113805";
 import { Lz } from "../905/497882";
@@ -20,7 +20,7 @@ export function $$A2(e, t = []) {
         let {
           maxTags
         } = e.data;
-        return _$$t(t.length > 0 ? "community.publishing.you_can_add_up_to_n_custom_tags_error" : "community.publishing.select_up_to_n_tags_error", {
+        return getI18nString(t.length > 0 ? "community.publishing.you_can_add_up_to_n_custom_tags_error" : "community.publishing.select_up_to_n_tags_error", {
           maxTagsPerResource: maxTags
         });
       }
@@ -30,7 +30,7 @@ export function $$A2(e, t = []) {
           duplicateTagIndices,
           allTags
         } = e.data;
-        return _$$t("community.publishing.tag_is_repeated_more_than_once", {
+        return getI18nString("community.publishing.tag_is_repeated_more_than_once", {
           tag: allTags[duplicateTagIndices[0]]
         });
       }
@@ -129,7 +129,7 @@ let $$y0 = forwardRef(function ({
           let i = t.tokens.map(e => e.content.text);
           e.setValue?.(i);
         },
-        placeholder: _$$t(t.length > 0 ? "community.publishing.add_up_to_n_more_tags" : "community.publishing.add_up_to_n_tags", {
+        placeholder: getI18nString(t.length > 0 ? "community.publishing.add_up_to_n_more_tags" : "community.publishing.add_up_to_n_tags", {
           maxTagsPerResource: eL
         }),
         unselectSearchResultOnPointerOut: !0,
@@ -152,7 +152,7 @@ let $$b1 = forwardRef(function ({
   let l = _$$w(e, !t);
   let p = U(l, $$A2);
   return jsx(a, {
-    label: _$$t("community.publishing.tags"),
+    label: getI18nString("community.publishing.tags"),
     error: p,
     children: jsx($$y0, {
       ref: o,
@@ -184,7 +184,7 @@ function I({
         children: e.searchedPrefix
       }), e.text.slice(e.searchedPrefix.length)]
     }), jsx("div", {
-      children: tx("community.publishing.number_of_resources", {
+      children: renderI18nText("community.publishing.number_of_resources", {
         num: $M(e.count)
       })
     })]

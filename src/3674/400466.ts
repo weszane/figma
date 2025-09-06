@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import i, { memo, useCallback, useMemo, useEffect, useRef, useState, forwardRef } from "react";
 import { rXF, L5V, w3z, SES, Ez5, RN1, Bll, _gJ, NLJ } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { Xr, eU as _$$eU, md, Iz, mg, fp, zl } from "../figma_app/27355";
+import { Xr, atom, useAtomWithSubscription, createRemovableAtomFamily, mg, useAtomValueAndSetter, atomStoreManager } from "../figma_app/27355";
 import { eY as _$$eY, dH } from "../figma_app/722362";
 import { J2 } from "../figma_app/84367";
 import { p as _$$p } from "../figma_app/372802";
@@ -33,8 +33,8 @@ import { NW, E_ } from "../figma_app/355754";
 import { NB } from "../figma_app/682945";
 import { XR, uA, FQ, yu, mi, AP, h9, Lw, cD } from "../figma_app/781512";
 import { y as _$$y } from "../905/661502";
-import { R as _$$R } from "../905/103090";
-import { tx as _$$tx, t as _$$t2 } from "../905/303541";
+import { selectWithShallowEqual } from "../905/103090";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { S as _$$S } from "../figma_app/78808";
 import { VU } from "../905/625959";
 import { q5 } from "../figma_app/516028";
@@ -270,7 +270,7 @@ function eF({
     containerClassName: eN,
     text: t.name,
     disableHover: !0
-  }) : rO(e?.stackPrimaryAlignItems) ? _$$tx("dev_handoff.annotations.auto") : jsx(Fragment, {
+  }) : rO(e?.stackPrimaryAlignItems) ? renderI18nText("dev_handoff.annotations.auto") : jsx(Fragment, {
     children: o
   });
 }
@@ -311,7 +311,7 @@ function eV({
   }));
   let r = s[0]?.variableId;
   for (let e of s) if (e.variableId !== r) {
-    if (n) return _$$tx("fullscreen.mixed");
+    if (n) return renderI18nText("fullscreen.mixed");
     return jsx(eT, {
       variableContainerClassName: eN,
       valueProps: {
@@ -325,7 +325,7 @@ function eV({
   }) : jsx(eT, {
     variableContainerClassName: eN,
     valueProps: s[0]
-  }) : e.some(t => t !== e[0]) ? n ? _$$tx("fullscreen.mixed") : jsx(eT, {
+  }) : e.some(t => t !== e[0]) ? n ? renderI18nText("fullscreen.mixed") : jsx(eT, {
     variableContainerClassName: eN,
     valueProps: {
       format: "pixels",
@@ -404,14 +404,14 @@ function eW({
 function eG({
   nodeFields: e
 }) {
-  if ("WRAP" === e.stackWrap) return _$$tx("fullscreen.properties_panel.stack_panel.wrap");
+  if ("WRAP" === e.stackWrap) return renderI18nText("fullscreen.properties_panel.stack_panel.wrap");
   switch (e.stackMode) {
     case "HORIZONTAL":
-      return _$$tx("dev_handoff.annotations.autolayout_horizontal");
+      return renderI18nText("dev_handoff.annotations.autolayout_horizontal");
     case "VERTICAL":
-      return _$$tx("dev_handoff.annotations.autolayout_vertical");
+      return renderI18nText("dev_handoff.annotations.autolayout_vertical");
     case "GRID":
-      return _$$tx("inspect_panel.properties.flow.grid");
+      return renderI18nText("inspect_panel.properties.flow.grid");
     default:
       return null;
   }
@@ -424,48 +424,48 @@ function eU({
     case "MIN":
       switch (e.stackCounterAlignItems) {
         case "MIN":
-          return _$$tx("dev_handoff.annotations.alignment.top_left");
+          return renderI18nText("dev_handoff.annotations.alignment.top_left");
         case "CENTER":
-          return _$$tx("dev_handoff.annotations.alignment.left");
+          return renderI18nText("dev_handoff.annotations.alignment.left");
         case "MAX":
-          return _$$tx("dev_handoff.annotations.alignment.bottom_left");
+          return renderI18nText("dev_handoff.annotations.alignment.bottom_left");
         case "BASELINE":
-          return _$$tx("dev_handoff.annotations.alignment.baseline_left");
+          return renderI18nText("dev_handoff.annotations.alignment.baseline_left");
       }
     case "CENTER":
     case "SPACE_BETWEEN":
     case "SPACE_EVENLY":
       switch (e.stackCounterAlignItems) {
         case "MIN":
-          return _$$tx("dev_handoff.annotations.alignment.top_center");
+          return renderI18nText("dev_handoff.annotations.alignment.top_center");
         case "CENTER":
-          return _$$tx("dev_handoff.annotations.alignment.center");
+          return renderI18nText("dev_handoff.annotations.alignment.center");
         case "MAX":
-          return _$$tx("dev_handoff.annotations.alignment.bottom_center");
+          return renderI18nText("dev_handoff.annotations.alignment.bottom_center");
         case "BASELINE":
-          return _$$tx("dev_handoff.annotations.alignment.baseline_center");
+          return renderI18nText("dev_handoff.annotations.alignment.baseline_center");
       }
     case "MAX":
       switch (e.stackCounterAlignItems) {
         case "MIN":
-          return _$$tx("dev_handoff.annotations.alignment.top_right");
+          return renderI18nText("dev_handoff.annotations.alignment.top_right");
         case "CENTER":
-          return _$$tx("dev_handoff.annotations.alignment.right");
+          return renderI18nText("dev_handoff.annotations.alignment.right");
         case "MAX":
-          return _$$tx("dev_handoff.annotations.alignment.bottom_right");
+          return renderI18nText("dev_handoff.annotations.alignment.bottom_right");
         case "BASELINE":
-          return _$$tx("dev_handoff.annotations.alignment.baseline_right");
+          return renderI18nText("dev_handoff.annotations.alignment.baseline_right");
       }
   }
   switch (e.stackPrimaryAlignItems) {
     case "MIN":
       switch (e.stackCounterAlignItems) {
         case "MIN":
-          return _$$tx("dev_handoff.annotations.alignment.top_left");
+          return renderI18nText("dev_handoff.annotations.alignment.top_left");
         case "CENTER":
-          return _$$tx("dev_handoff.annotations.alignment.top_center");
+          return renderI18nText("dev_handoff.annotations.alignment.top_center");
         case "MAX":
-          return _$$tx("dev_handoff.annotations.alignment.top_right");
+          return renderI18nText("dev_handoff.annotations.alignment.top_right");
         case "BASELINE":
           return null;
       }
@@ -474,22 +474,22 @@ function eU({
     case "SPACE_EVENLY":
       switch (e.stackCounterAlignItems) {
         case "MIN":
-          return _$$tx("dev_handoff.annotations.alignment.left");
+          return renderI18nText("dev_handoff.annotations.alignment.left");
         case "CENTER":
-          return _$$tx("dev_handoff.annotations.alignment.center");
+          return renderI18nText("dev_handoff.annotations.alignment.center");
         case "MAX":
-          return _$$tx("dev_handoff.annotations.alignment.right");
+          return renderI18nText("dev_handoff.annotations.alignment.right");
         case "BASELINE":
           return null;
       }
     case "MAX":
       switch (e.stackCounterAlignItems) {
         case "MIN":
-          return _$$tx("dev_handoff.annotations.alignment.bottom_left");
+          return renderI18nText("dev_handoff.annotations.alignment.bottom_left");
         case "CENTER":
-          return _$$tx("dev_handoff.annotations.alignment.bottom_center");
+          return renderI18nText("dev_handoff.annotations.alignment.bottom_center");
         case "MAX":
-          return _$$tx("dev_handoff.annotations.alignment.bottom_right");
+          return renderI18nText("dev_handoff.annotations.alignment.bottom_right");
         case "BASELINE":
           return null;
       }
@@ -554,17 +554,17 @@ function e0(e, t, n) {
         return t ? t.name : l;
       }
     case "GRADIENT_LINEAR":
-      return e$(_$$t2("dev_handoff.selection_colors.gradient_linear"), opacity);
+      return e$(getI18nString("dev_handoff.selection_colors.gradient_linear"), opacity);
     case "GRADIENT_ANGULAR":
-      return e$(_$$t2("dev_handoff.selection_colors.gradient_angular"), opacity);
+      return e$(getI18nString("dev_handoff.selection_colors.gradient_angular"), opacity);
     case "GRADIENT_DIAMOND":
-      return e$(_$$t2("dev_handoff.selection_colors.gradient_diamond"), opacity);
+      return e$(getI18nString("dev_handoff.selection_colors.gradient_diamond"), opacity);
     case "GRADIENT_RADIAL":
-      return e$(_$$t2("dev_handoff.selection_colors.gradient_radial"), opacity);
+      return e$(getI18nString("dev_handoff.selection_colors.gradient_radial"), opacity);
     case "IMAGE":
-      return e$(_$$t2("dev_handoff.annotations.image"), opacity);
+      return e$(getI18nString("dev_handoff.annotations.image"), opacity);
     case "VIDEO":
-      return e$(_$$t2("dev_handoff.annotations.video"), opacity);
+      return e$(getI18nString("dev_handoff.annotations.video"), opacity);
     default:
       return null;
   }
@@ -580,7 +580,7 @@ function e1({
   let s = eZ(t, "FILL");
   return 0 === e.length ? null : s ? jsx(Fragment, {
     children: s.name
-  }) : e.length > 1 ? _$$tx("dev_handoff.annotations.multiple") : jsx(Fragment, {
+  }) : e.length > 1 ? renderI18nText("dev_handoff.annotations.multiple") : jsx(Fragment, {
     children: e0(e[0], l, o)
   });
 }
@@ -669,7 +669,7 @@ function te({
   if (n) return jsx(Fragment, {
     children: n.name
   });
-  if (e.length > 1) return _$$tx("dev_handoff.annotations.multiple");
+  if (e.length > 1) return renderI18nText("dev_handoff.annotations.multiple");
   let i = e[0];
   return i ? jsx(tt, {
     effect: i
@@ -680,19 +680,19 @@ function tt({
 }) {
   switch (e.type) {
     case "DROP_SHADOW":
-      return _$$tx("dev_handoff.annotations.shadow");
+      return renderI18nText("dev_handoff.annotations.shadow");
     case "BACKGROUND_BLUR":
-      return _$$tx("fullscreen.properties_panel.effects.background_blur");
+      return renderI18nText("fullscreen.properties_panel.effects.background_blur");
     case "FOREGROUND_BLUR":
-      return _$$tx("fullscreen.properties_panel.effects.layer_blur");
+      return renderI18nText("fullscreen.properties_panel.effects.layer_blur");
     case "INNER_SHADOW":
-      return _$$tx("fullscreen.properties_panel.effects.inner_shadow");
+      return renderI18nText("fullscreen.properties_panel.effects.inner_shadow");
     case "GRAIN":
-      return _$$tx("fullscreen.properties_panel.effects.texture");
+      return renderI18nText("fullscreen.properties_panel.effects.texture");
     case "NOISE":
-      return _$$tx("fullscreen.properties_panel.effects.noise");
+      return renderI18nText("fullscreen.properties_panel.effects.noise");
     case "GLASS":
-      return _$$tx("fullscreen.properties_panel.effects.glass");
+      return renderI18nText("fullscreen.properties_panel.effects.glass");
     case "REPEAT":
     case "SYMMETRY":
     case void 0:
@@ -831,13 +831,13 @@ function ts({
 let td = e => {
   switch (e) {
     case "RIGHT":
-      return _$$t2("inspect_panel.typography.align_right");
+      return getI18nString("inspect_panel.typography.align_right");
     case "CENTER":
-      return _$$t2("inspect_panel.typography.align_center");
+      return getI18nString("inspect_panel.typography.align_center");
     case "JUSTIFIED":
-      return _$$t2("inspect_panel.typography.align_justified");
+      return getI18nString("inspect_panel.typography.align_justified");
     case "LEFT":
-      return _$$t2("dev_handoff.annotations.align_left");
+      return getI18nString("dev_handoff.annotations.align_left");
   }
 };
 function tc() {
@@ -868,9 +868,9 @@ function th({
   let s = qM(o, l, tp, {
     isTextProperty: !0
   });
-  return "mixed" === e ? _$$tx("fullscreen.mixed") : i && n ? jsx(Fragment, {
+  return "mixed" === e ? renderI18nText("fullscreen.mixed") : i && n ? jsx(Fragment, {
     children: i.name
-  }) : "PERCENT" === e.units && 100 === e.value ? _$$tx("dev_handoff.annotations.auto") : "RAW" === e.units ? jsx(eT, {
+  }) : "PERCENT" === e.units && 100 === e.value ? renderI18nText("dev_handoff.annotations.auto") : "RAW" === e.units ? jsx(eT, {
     variableContainerClassName: eN,
     valueProps: {
       format: "fig_number",
@@ -894,7 +894,7 @@ function tf({
   isPreview: n
 }) {
   let i = _$$u(t?.id);
-  return "mixed" === e ? _$$tx("fullscreen.mixed") : i && n ? jsx(Fragment, {
+  return "mixed" === e ? renderI18nText("fullscreen.mixed") : i && n ? jsx(Fragment, {
     children: i.name
   }) : jsx(eT, {
     variableContainerClassName: eN,
@@ -910,7 +910,7 @@ function tg({
   isPreview: n
 }) {
   let i = _$$u(t?.id);
-  return "mixed" === e ? _$$tx("fullscreen.mixed") : (i && i.resolvedType !== rXF.FLOAT && (i = null), i && n) ? jsx(Fragment, {
+  return "mixed" === e ? renderI18nText("fullscreen.mixed") : (i && i.resolvedType !== rXF.FLOAT && (i = null), i && n) ? jsx(Fragment, {
     children: i.name
   }) : jsx(eT, {
     variableContainerClassName: eN,
@@ -921,7 +921,7 @@ function tg({
   });
 }
 let tk = new Map([[L5V.HEIGHT, {
-  label: () => _$$t2("fullscreen.properties_panel.transform_panel.height"),
+  label: () => getI18nString("fullscreen.properties_panel.transform_panel.height"),
   category: "dimension",
   Icon: () => jsx(eO, {
     svg: _$$A8
@@ -945,7 +945,7 @@ let tk = new Map([[L5V.HEIGHT, {
   }) : null,
   index: 0
 }], [L5V.MIN_HEIGHT, {
-  label: () => _$$t2("fullscreen.properties_panel.stack_panel.minmax.min_height_tt"),
+  label: () => getI18nString("fullscreen.properties_panel.stack_panel.minmax.min_height_tt"),
   category: "dimension",
   Icon: () => jsx(eO, {
     svg: _$$A8
@@ -969,7 +969,7 @@ let tk = new Map([[L5V.HEIGHT, {
   }) : null,
   index: 0
 }], [L5V.MAX_HEIGHT, {
-  label: () => _$$t2("fullscreen.properties_panel.stack_panel.minmax.max_height_tt"),
+  label: () => getI18nString("fullscreen.properties_panel.stack_panel.minmax.max_height_tt"),
   category: "dimension",
   Icon: () => jsx(eO, {
     svg: _$$A8
@@ -993,7 +993,7 @@ let tk = new Map([[L5V.HEIGHT, {
   }) : null,
   index: 0
 }], [L5V.WIDTH, {
-  label: () => _$$t2("fullscreen.properties_panel.transform_panel.width"),
+  label: () => getI18nString("fullscreen.properties_panel.transform_panel.width"),
   category: "dimension",
   Icon: () => jsx(eO, {
     svg: _$$A0
@@ -1017,7 +1017,7 @@ let tk = new Map([[L5V.HEIGHT, {
   }) : null,
   index: 0
 }], [L5V.MIN_WIDTH, {
-  label: () => _$$t2("fullscreen.properties_panel.stack_panel.minmax.min_width_tt"),
+  label: () => getI18nString("fullscreen.properties_panel.stack_panel.minmax.min_width_tt"),
   category: "dimension",
   Icon: () => jsx(eO, {
     svg: _$$A0
@@ -1041,7 +1041,7 @@ let tk = new Map([[L5V.HEIGHT, {
   }) : null,
   index: 0
 }], [L5V.MAX_WIDTH, {
-  label: () => _$$t2("fullscreen.properties_panel.stack_panel.minmax.max_width_tt"),
+  label: () => getI18nString("fullscreen.properties_panel.stack_panel.minmax.max_width_tt"),
   category: "dimension",
   Icon: () => jsx(eO, {
     svg: _$$A0
@@ -1065,7 +1065,7 @@ let tk = new Map([[L5V.HEIGHT, {
   }) : null,
   index: 0
 }], [L5V.CORNER_RADIUS, {
-  label: () => _$$t2("fullscreen.properties_panel.transform_panel.corner_radius"),
+  label: () => getI18nString("fullscreen.properties_panel.transform_panel.corner_radius"),
   category: "dimension",
   Icon: () => jsx(eO, {
     svg: _$$A5
@@ -1093,7 +1093,7 @@ let tk = new Map([[L5V.HEIGHT, {
   }) : null,
   index: 0
 }], [L5V.STACK_MODE, {
-  label: () => _$$t2("dev_handoff.annotations.autolayout_mode"),
+  label: () => getI18nString("dev_handoff.annotations.autolayout_mode"),
   category: "stack",
   Icon: ({
     nodeId: e
@@ -1116,7 +1116,7 @@ let tk = new Map([[L5V.HEIGHT, {
   }) : null,
   index: 0
 }], [L5V.STACK_ALIGNMENT, {
-  label: () => _$$t2("dev_handoff.annotations.alignment"),
+  label: () => getI18nString("dev_handoff.annotations.alignment"),
   category: "stack",
   Icon: ({
     nodeId: e
@@ -1152,7 +1152,7 @@ let tk = new Map([[L5V.HEIGHT, {
   }) : null,
   index: 0
 }], [L5V.STACK_SPACING, {
-  label: () => _$$t2("inspect_panel.properties.gap"),
+  label: () => getI18nString("inspect_panel.properties.gap"),
   category: "stack",
   Icon: ({
     nodeId: e
@@ -1180,7 +1180,7 @@ let tk = new Map([[L5V.HEIGHT, {
   }),
   index: 0
 }], [L5V.GRID_COLUMN_COUNT, {
-  label: () => _$$t2("inspect_panel.properties.grid.columns"),
+  label: () => getI18nString("inspect_panel.properties.grid.columns"),
   category: "stack",
   Icon: () => jsx(q, {
     "data-testid": "Icon24AlColumnsSmall",
@@ -1202,7 +1202,7 @@ let tk = new Map([[L5V.HEIGHT, {
   }),
   index: 0
 }], [L5V.GRID_ROW_COUNT, {
-  label: () => _$$t2("inspect_panel.properties.grid.rows"),
+  label: () => getI18nString("inspect_panel.properties.grid.rows"),
   category: "stack",
   Icon: () => jsx(Y, {
     "data-testid": "Icon24AlRowsSmall",
@@ -1224,7 +1224,7 @@ let tk = new Map([[L5V.HEIGHT, {
   }),
   index: 0
 }], [L5V.GRID_COLUMN_GAP, {
-  label: () => _$$t2("inspect_panel.properties.grid.column_gap"),
+  label: () => getI18nString("inspect_panel.properties.grid.column_gap"),
   category: "stack",
   Icon: ({
     nodeId: e
@@ -1252,7 +1252,7 @@ let tk = new Map([[L5V.HEIGHT, {
   }),
   index: 0
 }], [L5V.GRID_ROW_GAP, {
-  label: () => _$$t2("inspect_panel.properties.grid.row_gap"),
+  label: () => getI18nString("inspect_panel.properties.grid.row_gap"),
   category: "stack",
   Icon: ({
     nodeId: e
@@ -1280,7 +1280,7 @@ let tk = new Map([[L5V.HEIGHT, {
   }),
   index: 0
 }], [L5V.GRID_COLUMN_ANCHOR_INDEX, {
-  label: () => _$$t2("inspect_panel.properties.grid.column_start"),
+  label: () => getI18nString("inspect_panel.properties.grid.column_start"),
   category: "stack",
   Icon: () => jsx(q, {
     "data-testid": "Icon24AlColumnsSmall",
@@ -1302,7 +1302,7 @@ let tk = new Map([[L5V.HEIGHT, {
   }),
   index: 0
 }], [L5V.GRID_ROW_ANCHOR_INDEX, {
-  label: () => _$$t2("inspect_panel.properties.grid.row_start"),
+  label: () => getI18nString("inspect_panel.properties.grid.row_start"),
   category: "stack",
   Icon: () => jsx(Y, {
     "data-testid": "Icon24AlRowsSmall",
@@ -1324,7 +1324,7 @@ let tk = new Map([[L5V.HEIGHT, {
   }),
   index: 0
 }], [L5V.GRID_COLUMN_SPAN, {
-  label: () => _$$t2("inspect_panel.properties.grid.horizontal_span"),
+  label: () => getI18nString("inspect_panel.properties.grid.horizontal_span"),
   category: "stack",
   Icon: () => jsx(_$$o, {
     "data-testid": "Icon24ArrowRightSmall",
@@ -1346,7 +1346,7 @@ let tk = new Map([[L5V.HEIGHT, {
   }),
   index: 0
 }], [L5V.GRID_ROW_SPAN, {
-  label: () => _$$t2("inspect_panel.properties.grid.vertical_span"),
+  label: () => getI18nString("inspect_panel.properties.grid.vertical_span"),
   category: "stack",
   Icon: () => jsx(_$$W, {
     "data-testid": "Icon24ArrowDownSmall",
@@ -1368,7 +1368,7 @@ let tk = new Map([[L5V.HEIGHT, {
   }),
   index: 0
 }], [L5V.STACK_PADDING, {
-  label: () => _$$t2("inspect_panel.properties.padding"),
+  label: () => getI18nString("inspect_panel.properties.padding"),
   category: "stack",
   Icon: () => jsx(eO, {
     svg: _$$A9
@@ -1396,7 +1396,7 @@ let tk = new Map([[L5V.HEIGHT, {
   }) : null,
   index: 0
 }], [L5V.TEXT_STYLE, {
-  label: () => _$$t2("dev_handoff.annotations.text_style"),
+  label: () => getI18nString("dev_handoff.annotations.text_style"),
   category: "text",
   Icon: tc,
   extractNodeFields: e => ({
@@ -1416,7 +1416,7 @@ let tk = new Map([[L5V.HEIGHT, {
   }) : null,
   index: 0
 }], [L5V.FONT_FAMILY, {
-  label: () => _$$t2("inspect_panel.typography.font"),
+  label: () => getI18nString("inspect_panel.typography.font"),
   category: "text",
   Icon: tc,
   extractNodeFields: e => e ? {
@@ -1438,7 +1438,7 @@ let tk = new Map([[L5V.HEIGHT, {
   }) : null,
   index: 0
 }], [L5V.FONT_STYLE, {
-  label: () => _$$t2("inspect_panel.code.font_style"),
+  label: () => getI18nString("inspect_panel.code.font_style"),
   category: "text",
   Icon: tc,
   extractNodeFields: e => ({
@@ -1456,7 +1456,7 @@ let tk = new Map([[L5V.HEIGHT, {
   }),
   index: 0
 }], [L5V.FONT_SIZE, {
-  label: () => _$$t2("dev_handoff.annotations.font_size"),
+  label: () => getI18nString("dev_handoff.annotations.font_size"),
   category: "text",
   Icon: tc,
   extractNodeFields: e => e ? {
@@ -1480,7 +1480,7 @@ let tk = new Map([[L5V.HEIGHT, {
   }) : null,
   index: 0
 }], [L5V.LINE_HEIGHT, {
-  label: () => _$$t2("fullscreen.type_panel.line_height"),
+  label: () => getI18nString("fullscreen.type_panel.line_height"),
   category: "text",
   Icon: tc,
   extractNodeFields: e => e ? {
@@ -1502,7 +1502,7 @@ let tk = new Map([[L5V.HEIGHT, {
   }) : null,
   index: 0
 }], [L5V.LETTER_SPACING, {
-  label: () => _$$t2("fullscreen.type_panel.letter_spacing"),
+  label: () => getI18nString("fullscreen.type_panel.letter_spacing"),
   category: "text",
   Icon: tc,
   extractNodeFields: e => e ? {
@@ -1526,7 +1526,7 @@ let tk = new Map([[L5V.HEIGHT, {
   }) : null,
   index: 0
 }], [L5V.TEXT_ALIGN_HORIZONTAL, {
-  label: () => _$$t2("dev_handoff.annotations.text_align"),
+  label: () => getI18nString("dev_handoff.annotations.text_align"),
   category: "text",
   Icon: tc,
   extractNodeFields: e => ({
@@ -1544,7 +1544,7 @@ let tk = new Map([[L5V.HEIGHT, {
   }) : null,
   index: 0
 }], [L5V.FONT_WEIGHT, {
-  label: () => _$$t2("inspect_panel.typography.weight"),
+  label: () => getI18nString("inspect_panel.typography.weight"),
   category: "text",
   Icon: tc,
   extractNodeFields: e => e ? {
@@ -1566,7 +1566,7 @@ let tk = new Map([[L5V.HEIGHT, {
   }) : null,
   index: 0
 }], [L5V.FILL, {
-  label: () => _$$t2("fullscreen.properties_panel.fill.fill"),
+  label: () => getI18nString("fullscreen.properties_panel.fill.fill"),
   category: "paint",
   Icon: ({
     nodeId: e
@@ -1597,7 +1597,7 @@ let tk = new Map([[L5V.HEIGHT, {
   }) : null,
   index: 0
 }], [L5V.STROKE, {
-  label: () => _$$t2("fullscreen.properties_panel.fill.stroke"),
+  label: () => getI18nString("fullscreen.properties_panel.fill.stroke"),
   category: "paint",
   Icon: ({
     nodeId: e
@@ -1629,7 +1629,7 @@ let tk = new Map([[L5V.HEIGHT, {
   }) : null,
   index: 0
 }], [L5V.STROKE_WIDTH, {
-  label: () => _$$t2("fullscreen.properties_panel.borders.stroke_width"),
+  label: () => getI18nString("fullscreen.properties_panel.borders.stroke_width"),
   category: "paint",
   Icon: () => jsx(eO, {
     svg: _$$A1
@@ -1660,7 +1660,7 @@ let tk = new Map([[L5V.HEIGHT, {
   }) : null,
   index: 0
 }], [L5V.EFFECT, {
-  label: () => _$$t2("inspect_panel.code.effect"),
+  label: () => getI18nString("inspect_panel.code.effect"),
   category: "paint",
   Icon: function () {
     return jsx(eO, {
@@ -1685,7 +1685,7 @@ let tk = new Map([[L5V.HEIGHT, {
   }) : null,
   index: 0
 }], [L5V.OPACITY, {
-  label: () => _$$t2("fullscreen.scrubbable.opacity"),
+  label: () => getI18nString("fullscreen.scrubbable.opacity"),
   category: "paint",
   Icon: () => jsx(eO, {
     svg: _$$A10
@@ -1707,7 +1707,7 @@ let tk = new Map([[L5V.HEIGHT, {
   }) : null,
   index: 0
 }], [L5V.COMPONENT, {
-  label: () => _$$t2("dev_handoff.annotations.component"),
+  label: () => getI18nString("dev_handoff.annotations.component"),
   category: "component",
   Icon: () => jsx(eO, {
     svg: _$$A4
@@ -1826,7 +1826,7 @@ function tL({
   let s = qM(l, "number" == typeof e ? e : void 0, tP, {
     isTextProperty: i
   });
-  return null === e ? null : "mixed" === e ? _$$tx("fullscreen.mixed") : o && n ? jsx(Fragment, {
+  return null === e ? null : "mixed" === e ? renderI18nText("fullscreen.mixed") : o && n ? jsx(Fragment, {
     children: o.name
   }) : jsx(eT, {
     variableContainerClassName: eN,
@@ -1847,7 +1847,7 @@ function tR({
   let s = qM(l, "mixed" === e ? void 0 : e.value, tP, {
     isTextProperty: i
   });
-  return "mixed" === e ? _$$tx("fullscreen.mixed") : o && n ? jsx(Fragment, {
+  return "mixed" === e ? renderI18nText("fullscreen.mixed") : o && n ? jsx(Fragment, {
     children: o.name
   }) : "PIXELS" === e.units ? jsx(eT, {
     variableContainerClassName: eN,
@@ -1906,12 +1906,12 @@ function tB(e) {
   let r = useDispatch();
   let c = tO();
   let u = useMemo(() => w3z.isReadOnly(SES.ANNOTATIONS), []);
-  let h = _$$R(e => e.mirror.appModel.keyboardShortcuts);
+  let h = selectWithShallowEqual(e => e.mirror.appModel.keyboardShortcuts);
   let f = XR();
   let g = _$$am();
   let x = J2(Ez5.uiState().filterAnnotationCategoryId);
   let m = {
-    displayText: _$$t2("dev_handoff.annotations.hide_annotations"),
+    displayText: getI18nString("dev_handoff.annotations.hide_annotations"),
     shortcut: c1(h, "toggle-show-annotations"),
     callback: () => {
       VU.get("toggle-show-annotations", "context-menu")();
@@ -1919,7 +1919,7 @@ function tB(e) {
     recordingKey: "hideAnnotations"
   };
   let _ = [{
-    displayText: _$$t2("dev_handoff.annotations.copy_link"),
+    displayText: getI18nString("dev_handoff.annotations.copy_link"),
     callback: () => {
       if (null === s) return;
       let e = jN({
@@ -1931,21 +1931,21 @@ function tB(e) {
         fileKey: s.key,
         url: e,
         source: _$$d.ANNOTATION_CONTEXT_MENU,
-        visualBellMessageOverride: _$$t2("dev_handoff.annotations.copied_link_to_clipboard")
+        visualBellMessageOverride: getI18nString("dev_handoff.annotations.copied_link_to_clipboard")
       }));
     },
     recordingKey: "copy"
   }, ...(u ? [] : [{
-    displayText: _$$t2("dev_handoff.annotations.delete"),
+    displayText: getI18nString("dev_handoff.annotations.delete"),
     callback: () => {
       c(nodeId, annotationIndex);
     },
     recordingKey: "delete"
   }]), ...(f.length > 0 ? [_$$w, {
-    displayText: _$$t2("dev_handoff.annotations.filter_by"),
+    displayText: getI18nString("dev_handoff.annotations.filter_by"),
     recordingKey: "filterBy",
     children: [{
-      displayText: _$$t2("fullscreen_actions.show-all-annotation-categories"),
+      displayText: getI18nString("fullscreen_actions.show-all-annotation-categories"),
       callback: () => {
         g("filter_annotation_category", {
           categoryLabel: "all",
@@ -2111,14 +2111,14 @@ function nk({
         }),
         recordingKey: Pt(e, "colorSelectTrigger"),
         ...getTriggerProps({}),
-        "aria-label": r ? _$$t2("dev_handoff.annotations.categories_edit_window.category_color_selector.aria_label", {
+        "aria-label": r ? getI18nString("dev_handoff.annotations.categories_edit_window.category_color_selector.aria_label", {
           color: r.label()
-        }) : _$$t2("dev_handoff.annotations.categories_edit_window.category_color_tooltip"),
+        }) : getI18nString("dev_handoff.annotations.categories_edit_window.category_color_tooltip"),
         htmlAttributes: {
           ...getContextMenuTriggerProps(),
           "data-tooltip-type": "text",
           "data-tooltip-show-above": !0,
-          "data-tooltip": _$$t2("dev_handoff.annotations.categories_edit_window.category_color_tooltip")
+          "data-tooltip": getI18nString("dev_handoff.annotations.categories_edit_window.category_color_tooltip")
         },
         children: jsxs("div", {
           className: "annotation_categories_edit_window--triggerContainer--ksQQB",
@@ -2157,16 +2157,16 @@ function nk({
         className: "annotation_categories_edit_window--labelInput--vtlaI",
         onChange: k,
         recordingKey: Pt(e, "labelInput"),
-        placeholder: _$$t2("dev_handoff.annotations.categories_edit_window.category_label_placeholder")
+        placeholder: getI18nString("dev_handoff.annotations.categories_edit_window.category_label_placeholder")
       })
     }), jsxs("div", {
       className: "annotation_categories_edit_window--removeButtonContainer--PPynD",
       children: [jsx(_$$K, {
-        "aria-label": _$$t2("dev_handoff.annotations.categories_edit_window.remove_category_button_label", {
+        "aria-label": getI18nString("dev_handoff.annotations.categories_edit_window.remove_category_button_label", {
           category: s ?? ""
         }),
         htmlAttributes: {
-          "data-tooltip": _$$t2("dev_handoff.annotations.categories_edit_window.remove_category_button"),
+          "data-tooltip": getI18nString("dev_handoff.annotations.categories_edit_window.remove_category_button"),
           "data-tooltip-type": "text"
         },
         recordingKey: Pt(e, "removeButton"),
@@ -2183,17 +2183,17 @@ function nk({
         }), jsxs(vo, {
           children: [jsx(Y9, {
             children: jsx(hE, {
-              children: _$$t2("dev_handoff.annotations.categories_edit_window.remove_category_dialog_title")
+              children: getI18nString("dev_handoff.annotations.categories_edit_window.remove_category_dialog_title")
             })
           }), jsx(_$$nB, {
-            children: _$$t2("dev_handoff.annotations.categories_edit_window.remove_category_dialog_body")
+            children: getI18nString("dev_handoff.annotations.categories_edit_window.remove_category_dialog_body")
           }), jsx(wi, {
             children: jsxs(jk, {
               children: [jsx($n, {
                 variant: "secondary",
                 recordingKey: Pt(e, "removeCategoryCancel"),
                 onClick: () => L(!1),
-                children: _$$t2("general.cancel")
+                children: getI18nString("general.cancel")
               }), jsx($n, {
                 variant: "destructive",
                 recordingKey: Pt(e, "removeCategoryConfirm"),
@@ -2201,7 +2201,7 @@ function nk({
                   g(l);
                   L(!1);
                 },
-                children: _$$t2("general.delete")
+                children: getI18nString("general.delete")
               })]
             })
           })]
@@ -2241,16 +2241,16 @@ let nA = Ju(function (e) {
       for (let n of e) if (t.add(`${n.preset}-${n.custom?.label}-${n.custom?.color}`), n.preset === Bll.NONE && null != n.custom) {
         if (null == n.custom.label || 0 === n.custom.label.trim().length) return {
           type: 0,
-          message: _$$t2("dev_handoff.annotations.category_custom.invalid_label")
+          message: getI18nString("dev_handoff.annotations.category_custom.invalid_label")
         };
         if (null == n.custom.color) return {
           type: 1,
-          message: _$$t2("dev_handoff.annotations.category_custom.invalid_color")
+          message: getI18nString("dev_handoff.annotations.category_custom.invalid_color")
         };
       }
       return t.size !== e.length ? {
         type: 2,
-        message: _$$t2("dev_handoff.annotations.categories_edit_window.duplicate_categories_message")
+        message: getI18nString("dev_handoff.annotations.categories_edit_window.duplicate_categories_message")
       } : null;
     }(u.map(e => h[e]).filter(isNotNullish)));
   }, [h, u]);
@@ -2404,11 +2404,11 @@ let nA = Ju(function (e) {
     children: jsxs(vo, {
       children: [jsxs(Y9, {
         children: [jsx(hE, {
-          children: _$$tx("dev_handoff.annotations.categories_edit_window.title")
+          children: renderI18nText("dev_handoff.annotations.categories_edit_window.title")
         }), jsx(jk, {
           children: jsx(_$$K, {
             recordingKey: Pt(recordingKey, "addCategory"),
-            "aria-label": _$$t2("dev_handoff.annotations.categories_edit_window.add_category_button"),
+            "aria-label": getI18nString("dev_handoff.annotations.categories_edit_window.add_category_button"),
             onClick: M,
             children: jsx(_$$x, {})
           })
@@ -2446,7 +2446,7 @@ let nA = Ju(function (e) {
           })
         }) : jsx("div", {
           className: "annotation_categories_edit_window--noCategoriesMessage--haAE-",
-          children: _$$tx("dev_handoff.annotations.categories_edit_window.no_categories_message")
+          children: renderI18nText("dev_handoff.annotations.categories_edit_window.no_categories_message")
         })
       }), jsx(wi, {
         children: jsxs(jk, {
@@ -2454,7 +2454,7 @@ let nA = Ju(function (e) {
             variant: "secondary",
             onClick: W,
             recordingKey: Pt(recordingKey, "cancel"),
-            children: _$$tx("general.cancel")
+            children: renderI18nText("general.cancel")
           }), jsx($n, {
             onClick: G,
             disabled: !!y,
@@ -2463,7 +2463,7 @@ let nA = Ju(function (e) {
               "data-tooltip-type": "text",
               "data-tooltip": y.message
             } : {},
-            children: _$$tx("general.done")
+            children: renderI18nText("general.done")
           })]
         })
       })]
@@ -2472,8 +2472,8 @@ let nA = Ju(function (e) {
 });
 var nE = (e => (e[e.MANUAL = 0] = "MANUAL", e[e.CODEBASE_SUGGESTIONS = 1] = "CODEBASE_SUGGESTIONS", e[e.MANAGED_STRING = 2] = "MANAGED_STRING", e))(nE || {});
 var nC = (e => (e[e.ALIGNED = 0] = "ALIGNED", e[e.ABOVE = 1] = "ABOVE", e[e.BELOW = 2] = "BELOW", e))(nC || {});
-let nR = _$$eU(new Map());
-_$$eU(null, (e, t, {
+let nR = atom(new Map());
+atom(null, (e, t, {
   nodeId: n,
   suggestions: a
 }) => {
@@ -2523,7 +2523,7 @@ function nB({
 let nF = {
   type: nE.CODEBASE_SUGGESTIONS,
   useSharedHooksContext: () => function () {
-    let e = md(nR);
+    let e = useAtomWithSubscription(nR);
     let t = _$$eY();
     if (!getFeatureFlags().dt_ccv2_on_canvas) return nD;
     let n = new Map();
@@ -2587,7 +2587,7 @@ let nF = {
     }) : null;
   }
 };
-let nU = Iz(e => mg(_$$eU(t => {
+let nU = createRemovableAtomFamily(e => mg(atom(t => {
   if (!e) return null;
   let n = t(Mk[PW.MANAGED_STRING].local);
   let a = t(Mk[PW.MANAGED_STRING].subscribed);
@@ -2641,7 +2641,7 @@ let nK = {
   }) {
     let n = uQ() === e.nodeId;
     let i = function (e) {
-      let t = md(nU(e));
+      let t = useAtomWithSubscription(nU(e));
       return t?.managedStringData.key;
     }(e.meta.managedStringId);
     return i ? jsx(nX, {
@@ -2673,7 +2673,7 @@ function nX({
       className: A()(eC, "annotation--managedStringLabel--fWb5O"),
       children: i
     }), jsx(nJ, {
-      "aria-label": _$$t2("inspect_panel.copy"),
+      "aria-label": getI18nString("inspect_panel.copy"),
       onClick: () => {
         s("string_management.annotations.copy_key", {
           stringKey: i,
@@ -2681,7 +2681,7 @@ function nX({
         });
         navigator.clipboard.writeText(i).then(() => {
           l(_$$F.enqueue({
-            message: _$$t2("string_translation_management.copied_to_clipboard", {
+            message: getI18nString("string_translation_management.copied_to_clipboard", {
               stringKey: i
             })
           }));
@@ -2689,7 +2689,7 @@ function nX({
       },
       htmlAttributes: {
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t2("general.back")
+        "data-tooltip": getI18nString("general.back")
       },
       children: jsx(_$$O2, {})
     })]
@@ -2813,7 +2813,7 @@ function n$({
   let F = data?.annotationId === t;
   let [z] = _$$A16(P, 60);
   let V = M || F || (w ? P && (z || j) : P);
-  let H = md(_$$m);
+  let H = useAtomWithSubscription(_$$m);
   let W = _$$wA((e, t) => {
     let n = e.get(t);
     return n ? {
@@ -3192,7 +3192,7 @@ function n5({
       fileKey: e_.key,
       url: t,
       source: _$$d.ANNOTATION_CONTEXT_MENU,
-      visualBellMessageOverride: _$$t2("dev_handoff.annotations.copied_link_to_clipboard")
+      visualBellMessageOverride: getI18nString("dev_handoff.annotations.copied_link_to_clipboard")
     }));
   }, [m, e_, e, w]);
   let ey = useMemo(() => ({
@@ -3203,7 +3203,7 @@ function n5({
         className: A()(eA, "annotation--noCategoryColor--fYEUj")
       })
     }),
-    displayText: _$$t2("dev_handoff.annotations.no_category_option_label"),
+    displayText: getI18nString("dev_handoff.annotations.no_category_option_label"),
     displayTextClassName: eI,
     isChecked: null === u,
     callback: () => Z(null),
@@ -3211,7 +3211,7 @@ function n5({
   }), [u, Z]);
   let eb = useMemo(() => ({
     name: "edit-categories",
-    displayText: _$$t2("dev_handoff.annotations.edit_categories_option_label"),
+    displayText: getI18nString("dev_handoff.annotations.edit_categories_option_label"),
     callback: eg,
     recordingKey: Pt("category-option", "edit-categories")
   }), [eg]);
@@ -3240,7 +3240,7 @@ function n5({
   }, eb] : [eb])], [ey, es, u, Z, eb]);
   let ew = useMemo(() => [...(0 === availableProperties.length ? [{
     name: "no-properties",
-    displayText: _$$t2("dev_handoff.annotations.all_properties_added"),
+    displayText: getI18nString("dev_handoff.annotations.all_properties_added"),
     displayTextClassName: eI,
     disabled: !0
   }] : []), ...availableProperties.reduce((t, n, i, o) => (t.push({
@@ -3271,7 +3271,7 @@ function n5({
       mainAxis: 4
     }
   });
-  let eT = md(n1);
+  let eT = useAtomWithSubscription(n1);
   let [eS, eP] = useState(!1);
   let eL = b && !eS;
   useEffect(() => {
@@ -3285,10 +3285,10 @@ function n5({
   let eO = jsxs(_$$bL, {
     manager,
     children: [jsx(_$$d2, {
-      "aria-label": _$$t2("dev_handoff.annotations.more_actions"),
+      "aria-label": getI18nString("dev_handoff.annotations.more_actions"),
       recordingKey: "createAnnotationMoreActions",
       htmlAttributes: {
-        "data-tooltip": _$$t2("dev_handoff.annotations.more_actions"),
+        "data-tooltip": getI18nString("dev_handoff.annotations.more_actions"),
         "data-tooltip-type": Ib.TEXT
       },
       ...getTriggerProps({}),
@@ -3297,22 +3297,22 @@ function n5({
       children: [jsxs(YJ, {
         children: [jsx(_$$q, {
           onClick: ev,
-          children: _$$t2("dev_handoff.annotations.copy_link")
+          children: getI18nString("dev_handoff.annotations.copy_link")
         }), jsx(_$$q, {
           onClick: () => {
             D(e, x);
           },
-          children: _$$t2("dev_handoff.annotations.delete")
+          children: getI18nString("dev_handoff.annotations.delete")
         })]
       }), eL && jsxs("div", {
         className: "annotation--visibilityDisclaimer--oQFzZ text--fontNeg11--StdFq text--_fontBase--QdLsd text--_negText--j9g-L",
         children: [jsx("p", {
-          children: _$$t2("dev_handoff.annotations.visibility_disclaimer")
+          children: getI18nString("dev_handoff.annotations.visibility_disclaimer")
         }), jsx(_$$N, {
           href: "https://help.figma.com/hc/articles/20774752502935-Add-measurements-and-annotate-designs-in-Dev-Mode",
           newTab: !0,
           onClick: eR,
-          children: _$$t2("dev_handoff.annotations.visibility_learn_more")
+          children: getI18nString("dev_handoff.annotations.visibility_learn_more")
         })]
       })]
     })]
@@ -3348,12 +3348,12 @@ function n5({
                 ("Enter" === e.code || "Space" === e.code) && el(e);
               },
               "data-tooltip-type": Ib.TEXT,
-              "data-tooltip": _$$t2("dev_handoff.annotations.category_selector_tooltip"),
+              "data-tooltip": getI18nString("dev_handoff.annotations.category_selector_tooltip"),
               recordingKey: "createAnnotationCategorySelectorButton",
               "aria-expanded": isDropdownShown,
               children: [jsx("span", {
                 className: "annotation--categorySelectorButtonLabel--xGX7w annotation--_ellipsis--8F1VE",
-                children: er ? uA(er) : _$$t2("dev_handoff.annotations.no_category_option_label")
+                children: er ? uA(er) : getI18nString("dev_handoff.annotations.no_category_option_label")
               }), jsx(_$$B, {
                 className: "annotation--caret--noLOu",
                 svg: _$$A14
@@ -3362,7 +3362,7 @@ function n5({
           }), jsxs("div", {
             className: "annotation--headerRowRight--5h3Tr",
             children: [eO, jsx(_$$K, {
-              "aria-label": _$$t2("general.close"),
+              "aria-label": getI18nString("general.close"),
               recordingKey: "closeAnnotationDialog",
               onClick: eN,
               children: jsx(_$$A11, {})
@@ -3391,7 +3391,7 @@ function n5({
                   className: A()("annotation_lexical_editor--placeholder--pPwLm", {
                     "annotation_lexical_editor--withCategory--bUCqy": !!er
                   }),
-                  children: _$$t2("dev_handoff.annotations.add_annotation")
+                  children: getI18nString("dev_handoff.annotations.add_annotation")
                 }),
                 anchorElemOverride: ed.current,
                 plugins: [jsx(t2, {
@@ -3417,14 +3417,14 @@ function n5({
                 ee(!1);
                 _toggleDropdown();
               },
-              "aria-label": _$$t2("dev_handoff.annotations.pin_properties_tooltip"),
+              "aria-label": getI18nString("dev_handoff.annotations.pin_properties_tooltip"),
               "data-tooltip-type": Ib.TEXT,
-              "data-tooltip": _$$t2("dev_handoff.annotations.pin_properties_tooltip"),
+              "data-tooltip": getI18nString("dev_handoff.annotations.pin_properties_tooltip"),
               recordingKey: "createAnnotationPinPropertyButton",
               children: [jsx(_$$B, {
                 className: "annotation--pinPropertyButtonIcon--dgnI0",
                 svg: _$$A17
-              }), _$$tx("dev_handoff.annotations.pin_properties_label")]
+              }), renderI18nText("dev_handoff.annotations.pin_properties_label")]
             })
           })]
         })]
@@ -3496,16 +3496,16 @@ function n4({
         }),
         children: canHaveValue ? jsx(i, {
           nodeFields
-        }) : _$$tx("dev_handoff.annotations.no_value")
+        }) : renderI18nText("dev_handoff.annotations.no_value")
       }), jsx("span", {
         className: "annotation--selectedPropertyDelete--DMdrA",
         children: jsx(_$$K, {
           recordingKey: `removeAnnotation${n.type}`,
           htmlAttributes: {
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t2("dev_handoff.annotations.remove_property")
+            "data-tooltip": getI18nString("dev_handoff.annotations.remove_property")
           },
-          "aria-label": _$$t2("dev_handoff.annotations.remove_property"),
+          "aria-label": getI18nString("dev_handoff.annotations.remove_property"),
           onClick: _$$nc.user("remove-annotation", () => {
             t(n.type);
           }),
@@ -3619,7 +3619,7 @@ let aa = memo(function ({
   let x = uQ();
   let m = dH();
   let v = x === nodeId;
-  let [b, j] = fp(_$$m);
+  let [b, j] = useAtomValueAndSetter(_$$m);
   let w = useRef(null);
   let N = NW();
   let k = tO();
@@ -3803,7 +3803,7 @@ let ao = memo(function ({
       "data-testid": `annotationPropertyValue-${e.type.toString()}`,
       children: t ? jsx(o, {
         nodeFields: n
-      }) : _$$tx("dev_handoff.annotations.no_value")
+      }) : renderI18nText("dev_handoff.annotations.no_value")
     })]
   });
 });
@@ -3949,7 +3949,7 @@ function aj() {
   let g = useSelector(e => e.dropdownShown);
   let x = g?.type === tM;
   let m = Xr(_$$f);
-  let [y, b] = fp(_$$m);
+  let [y, b] = useAtomValueAndSetter(_$$m);
   let k = _$$DP();
   useEffect(() => {
     t || b(null);
@@ -3968,7 +3968,7 @@ function aj() {
   } = function (e, t) {
     let n = uQ();
     let a = LO();
-    let c = md(_$$m);
+    let c = useAtomWithSubscription(_$$m);
     let p = NW();
     let f = J2(Ez5.uiState().filterAnnotationCategoryId);
     let g = Fk((e, t) => kh(e, t || "")?.guid || t || void 0, n);
@@ -3981,7 +3981,7 @@ function aj() {
       let t = dH();
       let n = J2(Ez5.annotationObserver().annotationInfoByTlf);
       let a = v([...n.keys()]);
-      let i = md(_$$m);
+      let i = useAtomWithSubscription(_$$m);
       let l = uQ();
       let c = XR();
       let p = _$$eY();
@@ -4466,7 +4466,7 @@ function aw() {
 export function $$aN0() {
   let e = iW();
   return (useEffect(() => {
-    !e && (zl.set(_$$m, null), Ez5 && Ez5.editorState().focusedAnnotationId.set(null));
+    !e && (atomStoreManager.set(_$$m, null), Ez5 && Ez5.editorState().focusedAnnotationId.set(null));
   }, [e]), e) ? jsx(aw, {}) : null;
 }
 export const b = $$aN0;

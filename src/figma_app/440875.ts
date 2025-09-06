@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { isNotNullish, isNullish } from "../figma_app/95419";
 import { h3O } from "../figma_app/763686";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { ZC } from "../figma_app/39751";
-import { o4, Q1, wg } from "../figma_app/778880";
+import { getIsMobile, isInFigmaMobile, isIpadDevice } from "../figma_app/778880";
 import { Dv, Fj, jI } from "../905/763714";
-import { nl } from "../figma_app/257275";
+import { isInteractionPathCheck } from "../figma_app/897289";
 import { hk } from "../figma_app/632319";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { e as _$$e } from "../905/383776";
 import { hA, l7, ZO } from "../figma_app/88239";
@@ -25,9 +25,9 @@ var $$x2 = (e => (e.INITIAL = "initial", e.NEXT = "next", e))($$x2 || {});
 let $$N10 = nF((e, t) => {
   let r = e.getState().multiplayer.allUsers.find(e => e.sessionID === t.presenterSessionID);
   let n = r?.name ?? "";
-  let i = r ? _$$t("collaboration.spotlight.visual_bell.user_left_the_spotlight", {
+  let i = r ? getI18nString("collaboration.spotlight.visual_bell.user_left_the_spotlight", {
     userName: n
-  }) : _$$t("collaboration.spotlight.visual_bell.the_presenter_left_the_spotlight");
+  }) : getI18nString("collaboration.spotlight.visual_bell.the_presenter_left_the_spotlight");
   e.dispatch(F.enqueue({
     message: i,
     type: "presentation_stopped_alert"
@@ -69,15 +69,15 @@ export function $$R12(e) {
   } = e;
   let c = useDispatch();
   let _ = z3();
-  let h = md(Dv);
+  let h = useAtomWithSubscription(Dv);
   let [m, g] = useState("initial");
   let f = ZC(presenterSessionID);
   let E = observingSessionID === presenterSessionID;
   let y = sessionID === presenterSessionID || h;
   let b = w(f, presenterSessionID, observingSessionID, sessionID);
-  let I = md(Fj);
-  let S = nl() ? 0 : I;
-  let x = md(jI);
+  let I = useAtomWithSubscription(Fj);
+  let S = isInteractionPathCheck() ? 0 : I;
+  let x = useAtomWithSubscription(jI);
   let [R, L] = useState(null);
   useEffect(() => {
     let e = null;
@@ -202,7 +202,7 @@ export function $$j6({
 }
 export function $$U3() {
   let e = Oc();
-  return !(o4() && Q1() && !wg() || z4?.getIsExtension()) && !e;
+  return !(getIsMobile() && isInFigmaMobile() && !isIpadDevice() || z4?.getIsExtension()) && !e;
 }
 export function $$B1() {
   let e = Oc();

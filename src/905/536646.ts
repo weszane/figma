@@ -3,7 +3,7 @@ import { forwardRef, useRef, useImperativeHandle } from "react";
 import { S } from "../905/274480";
 import { J } from "../905/270045";
 import { N } from "../905/438674";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Zc, Lz } from "../905/497882";
 import { A } from "../905/567946";
 export let $$u0 = forwardRef(function ({
@@ -17,17 +17,17 @@ export let $$u0 = forwardRef(function ({
   }), []), !Zc(e)) return jsx(Fragment, {});
   let u = Lz(e, void 0);
   return jsx(A, {
-    label: _$$t("community.publishing.community_terms_of_service"),
+    label: getI18nString("community.publishing.community_terms_of_service"),
     required: !0,
     children: jsx(S, {
       ref: i,
       label: jsx(J, {
-        children: tx("community.publishing.i_agree_to_the_terms_of_service", {
+        children: renderI18nText("community.publishing.i_agree_to_the_terms_of_service", {
           termsOfService: jsx(N, {
             href: "https://www.figma.com/tos/",
             newTab: !0,
             trusted: !0,
-            children: tx("community.publishing.community_terms_of_service")
+            children: renderI18nText("community.publishing.community_terms_of_service")
           })
         })
       }),

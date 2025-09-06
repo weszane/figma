@@ -4,7 +4,7 @@ import { createPortal } from "../vendor/944059";
 import { E as _$$E } from "../905/632989";
 import { NLJ, glU, V5h, VTL, rcl } from "../figma_app/763686";
 import { l7 } from "../905/189185";
-import { md, fp } from "../figma_app/27355";
+import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import c from "classnames";
 import { wp, SK } from "../905/125333";
 import { B } from "../905/714743";
@@ -37,9 +37,9 @@ export function $$L0({
   let j = useMemo(() => X5.get(i), [i]);
   let S = useMemo(() => F_.get(i), [i]);
   let L = useMemo(() => I.format(i), [i]);
-  let A = md(wp);
-  let O = md(SK).connectorToolLineStyle;
-  let [k, R] = fp(Hf);
+  let A = useAtomWithSubscription(wp);
+  let O = useAtomWithSubscription(SK).connectorToolLineStyle;
+  let [k, R] = useAtomValueAndSetter(Hf);
   let M = useCallback(() => {
     ko({
       event: fT.SelectedShape,

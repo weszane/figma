@@ -4,11 +4,11 @@ import { K } from "../905/443068";
 import { A as _$$A } from "../905/251970";
 import o from "classnames";
 import { A as _$$A2 } from "../vendor/850789";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { Pt } from "../figma_app/806412";
 import { IW } from "../figma_app/563413";
 import { B as _$$B } from "../905/714743";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { A as _$$A3 } from "../1291/23528";
 import { LR } from "../figma_app/120210";
 import { Rt, Vq } from "../figma_app/979658";
@@ -32,8 +32,8 @@ export function $$k3() {
     setPreviewResource
   } = cX();
   return e ? jsx(_$$t2, {
-    text: _$$t("whiteboard.inserts.faces_title"),
-    description: _$$t("whiteboard.inserts.faces_description"),
+    text: getI18nString("whiteboard.inserts.faces_title"),
+    description: getI18nString("whiteboard.inserts.faces_description"),
     onClick: () => setPreviewResource({
       id: "FACE_STAMPS",
       type: Rt.ORG_FACE_STAMPS
@@ -72,7 +72,7 @@ export function $$L2(e) {
       selectTextOnMount: !0,
       className: "face_stamps--searchBar--vDblE",
       query: x,
-      placeholder: _$$t("whiteboard.inserts.faces_search_placeholder"),
+      placeholder: getI18nString("whiteboard.inserts.faces_search_placeholder"),
       clearSearch: () => _(""),
       onChange: _,
       isKeyDownHandled: f,
@@ -97,12 +97,12 @@ export function $$L2(e) {
       }) : jsxs(Fragment, {
         children: [jsx($$F4, {
           maxRows: 1,
-          title: _$$t("whiteboard.inserts.recents_header"),
+          title: getI18nString("whiteboard.inserts.recents_header"),
           users: S.slice(0, j)
         }), jsx($$F4, {
           maxRows: b.length > 0 ? 2 : 3,
           isLoading: h,
-          title: _$$t("whiteboard.inserts.suggested_header"),
+          title: getI18nString("whiteboard.inserts.suggested_header"),
           users: S.slice(j)
         })]
       })
@@ -195,18 +195,18 @@ export function $$z0({
       children: [jsx(_$$B, {
         svg: _$$A4,
         className: Gv,
-        onClick: Ay.isIpad ? void 0 : u,
-        onPointerDown: Ay.isIpad ? u : void 0,
+        onClick: BrowserInfo.isIpad ? void 0 : u,
+        onPointerDown: BrowserInfo.isIpad ? u : void 0,
         "data-not-draggable": !0,
         "data-does-not-dismiss-modal": !0
       }), jsxs("div", {
         className: "face_stamps--titleContainer--0IWlF",
         children: [jsx("span", {
           className: "face_stamps--titlePrimary--J3DrZ text--fontPos13--xW8hS text--_fontBase--QdLsd",
-          children: tx("whiteboard.inserts.faces_title")
+          children: renderI18nText("whiteboard.inserts.faces_title")
         }), jsx("span", {
           className: "face_stamps--titleSecondary--95nwF text--fontPos11--2LvXf text--_fontBase--QdLsd",
-          children: tx("whiteboard.inserts.faces_description")
+          children: renderI18nText("whiteboard.inserts.faces_description")
         })]
       })]
     }), jsx("div", {
@@ -215,7 +215,7 @@ export function $$z0({
         setPinned: t
       }) : jsx(K, {
         onClick: l,
-        "aria-label": _$$t("general.close"),
+        "aria-label": getI18nString("general.close"),
         children: jsx(_$$A, {})
       })
     })]

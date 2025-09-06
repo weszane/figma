@@ -2,7 +2,7 @@ import { jXp } from "../figma_app/763686";
 import { rj, V1, T_, D7 } from "../905/946258";
 import { getFeatureFlags } from "../905/601108";
 import s from "../vendor/946678";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { If } from "../905/714538";
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
@@ -10,10 +10,10 @@ import { useDispatch } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { h as _$$h } from "../905/207101";
 import { $z } from "../figma_app/617427";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { to } from "../905/156213";
 import { b as _$$b } from "../905/985254";
 import { pi } from "../figma_app/314264";
@@ -86,8 +86,8 @@ let T = {
         5/20/2021`]
       });
     },
-    header: tx("community.eula.sf_pro_license_agreement"),
-    subtext: tx("community.eula.subext.sf_pro_license_agreement")
+    header: renderI18nText("community.eula.sf_pro_license_agreement"),
+    subtext: renderI18nText("community.eula.subext.sf_pro_license_agreement")
   },
   [d.SF_COMPACT]: {
     content: function () {
@@ -152,8 +152,8 @@ let T = {
         05/20/2021`]
       });
     },
-    header: tx("community.eula.sf_compact_license_agreement"),
-    subtext: tx("community.eula.subtext.sf_compact_license_agreement")
+    header: renderI18nText("community.eula.sf_compact_license_agreement"),
+    subtext: renderI18nText("community.eula.subtext.sf_compact_license_agreement")
   }
 };
 let k = Ju(function (e) {
@@ -177,7 +177,7 @@ let k = Ju(function (e) {
     let n = iZ();
     let r = q5();
     _$$h(() => {
-      az.trackDefinedEvent("preset_libraries.apple_font_eula_displayed", {
+      analyticsEventManager.trackDefinedEvent("preset_libraries.apple_font_eula_displayed", {
         trigger: e,
         eulaConfig: t.eula,
         userId: n?.id ?? void 0,
@@ -190,7 +190,7 @@ let k = Ju(function (e) {
     });
   }(trigger, eulaConfig, asyncModal);
   let k = useCallback(e => {
-    az.trackDefinedEvent("preset_libraries.apple_font_eula_clicked", {
+    analyticsEventManager.trackDefinedEvent("preset_libraries.apple_font_eula_clicked", {
       actionType: e,
       trigger,
       eulaConfig: eulaConfig.eula,
@@ -231,7 +231,7 @@ let k = Ju(function (e) {
       }), jsxs(wi, {
         children: [void 0 !== eulasToShow && void 0 !== eulaShown && eulasToShow > 1 && jsx("div", {
           "data-testid": "eula-counts",
-          children: tx("community.eula.i_of_count", {
+          children: renderI18nText("community.eula.i_of_count", {
             i: eulaShown,
             count: eulasToShow
           })
@@ -246,7 +246,7 @@ let k = Ju(function (e) {
               onClose();
             },
             variant: "secondary",
-            children: tx("community.eula.disagree")
+            children: renderI18nText("community.eula.disagree")
           }), jsx($z, {
             onClick: () => {
               t(_$$b({
@@ -257,14 +257,14 @@ let k = Ju(function (e) {
               e.onClose();
             },
             variant: "primary",
-            children: tx("community.eula.agree")
+            children: renderI18nText("community.eula.agree")
           })]
         })]
       })]
     })
   });
 }, "APPLE_FONT_EULA_MODAL_TYPE", ZU.YES);
-let R = new Set([nT.Design, nT.Whiteboard, nT.Slides, nT.Cooper]);
+let R = new Set([FEditorType.Design, FEditorType.Whiteboard, FEditorType.Slides, FEditorType.Cooper]);
 let N = new Set([rj, V1, T_, D7]);
 let $$P0 = {
   [d.SF_PRO]: {

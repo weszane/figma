@@ -16,21 +16,21 @@ import { s as _$$s } from "../905/403855";
 import { IPu, kul, h3O } from "../figma_app/763686";
 import { bV } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
-import { zl, md } from "../figma_app/27355";
+import { atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
 import { oA } from "../905/663269";
-import { sx, az } from "../905/449184";
+import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { FJ } from "../905/508367";
 import { A as _$$A } from "../905/920142";
-import { GN, eD as _$$eD, aw } from "../figma_app/876459";
-import { Pi } from "../figma_app/369803";
+import { getDeprecationDate, desktopAPIInstance, OpenTarget } from "../figma_app/876459";
+import { shouldShowDeprecationBannerAtom } from "../figma_app/369803";
 import { Ay } from "../905/612521";
 import { R as _$$R } from "../7021/67076";
-import { Ay as _$$Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { GU, cn, zR } from "../figma_app/141320";
 import { N_, CY, tM as _$$tM } from "../figma_app/637027";
 import { s as _$$s2 } from "../cssbuilder/589278";
 import { $z, e6 as _$$e, c as _$$c } from "../figma_app/617427";
-import { t as _$$t, tx as _$$tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { sx as _$$sx } from "../905/941192";
 import { V as _$$V } from "../905/355181";
 import { lQ } from "../905/934246";
@@ -67,7 +67,7 @@ import { filterNotNullish } from "../figma_app/656233";
 import { sf } from "../905/929976";
 import { Ti } from "../figma_app/658324";
 import { cD, ol } from "../figma_app/598018";
-import { Iv } from "../905/548208";
+import { DashboardSections } from "../905/548208";
 import { Ib } from "../905/129884";
 import { R as _$$R2 } from "../figma_app/522082";
 import { h as _$$h } from "../905/142086";
@@ -158,7 +158,7 @@ function ek({
   if (0 === t.length) return null;
   let r = {
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": _$$t("billing.open_invoice_reminder.button_tooltip"),
+    "data-tooltip": getI18nString("billing.open_invoice_reminder.button_tooltip"),
     "data-tooltip-show-immediately": !0
   };
   return jsx($z, {
@@ -166,12 +166,12 @@ function ek({
       t.length > 1 ? n(sf({
         view: "teamAdminConsole",
         teamId: e.id,
-        teamAdminConsoleViewTab: Iv.BILLING
+        teamAdminConsoleViewTab: DashboardSections.BILLING
       })) : FJ(t[0], "_blank", "noopener");
     },
     variant: "secondary",
     htmlAttributes: r,
-    children: _$$t("team_view.locked_proteam_admin_invoice_reminder_banner.cta", {
+    children: getI18nString("team_view.locked_proteam_admin_invoice_reminder_banner.cta", {
       invoiceCount: t.length
     })
   });
@@ -182,8 +182,8 @@ function eE(e) {
     planId: e.team.id,
     planType: FOrganizationLevelType.TEAM
   });
-  let a = t ? _$$tx("team_view.locked_proteam_admin_invoice_reminder_banner.title") : _$$tx("team_view.pastdue_proteam_admin_invoice_reminder_banner.title");
-  let r = t ? _$$tx("team_view.locked_proteam_admin_invoice_reminder_banner.subtitle") : _$$tx("team_view.pastdue_proteam_admin_invoice_reminder_banner.subtitle");
+  let a = t ? renderI18nText("team_view.locked_proteam_admin_invoice_reminder_banner.title") : renderI18nText("team_view.pastdue_proteam_admin_invoice_reminder_banner.title");
+  let r = t ? renderI18nText("team_view.locked_proteam_admin_invoice_reminder_banner.subtitle") : renderI18nText("team_view.pastdue_proteam_admin_invoice_reminder_banner.subtitle");
   let i = filterNotNullish(n.data?.map(e => e.hosted_invoice_url) ?? []);
   return jsx(fu, {
     name: "team_admin_open_invoice_reminder_banner",
@@ -228,10 +228,10 @@ function th() {
     onClick: () => openCooperPublishFlow("editor-pre-publish-banner"),
     trackingProperties: {
       trackingDescriptor: _$$c2.PUBLISH_TEMPLATE,
-      buttonContext: _$$t("slides.templates.banner.publish_template_button"),
+      buttonContext: getI18nString("slides.templates.banner.publish_template_button"),
       productType: FFileType.COOPER
     },
-    children: _$$tx("slides.templates.banner.publish_template_button")
+    children: renderI18nText("slides.templates.banner.publish_template_button")
   });
 }
 function tb() {
@@ -240,10 +240,10 @@ function tb() {
     onClick: () => FJ(qv, "_blank"),
     trackingProperties: {
       trackingDescriptor: _$$c2.SHOW_ME_HOW,
-      buttonContext: _$$t("cooper.templates.show_me_how"),
+      buttonContext: getI18nString("cooper.templates.show_me_how"),
       productType: FFileType.COOPER
     },
-    children: _$$tx("cooper.templates.show_me_how")
+    children: renderI18nText("cooper.templates.show_me_how")
   });
 }
 let tx = {
@@ -267,11 +267,11 @@ function tk({
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: t ? _$$t("multiplayer_upgrade_modal.content_saving") : _$$t("multiplayer_upgrade_modal.content_reloading")
+          children: t ? getI18nString("multiplayer_upgrade_modal.content_saving") : getI18nString("multiplayer_upgrade_modal.content_reloading")
         })
       }), n || jsx(Fragment, {
         children: jsx(nB, {
-          children: _$$t("multiplayer_upgrade_modal.content_offline")
+          children: getI18nString("multiplayer_upgrade_modal.content_offline")
         })
       }), jsx(wi, {
         children: jsx(jk, {
@@ -353,18 +353,18 @@ let tF = {
     } = tO;
     let a = _$$R("day");
     let r = new Date(deprecatedOn);
-    if (r > new Date(a.getTime() + 24192e5) || !_$$Ay.isUnsupportedBrowser(n)) return null;
-    let i = r > a ? _$$t("banner.browser_deprecation.description", {
+    if (r > new Date(a.getTime() + 24192e5) || !BrowserInfo.isUnsupportedBrowser(n)) return null;
+    let i = r > a ? getI18nString("banner.browser_deprecation.description", {
       deprecationDate: r
-    }) : _$$t("banner.browser_deprecation.description_now");
+    }) : getI18nString("banner.browser_deprecation.description_now");
     let o = {
       dismissible: !0,
       bannerType: x1.WARN,
       icon: _$$A6,
-      mainText: _$$t("banner.browser_deprecation.title"),
+      mainText: getI18nString("banner.browser_deprecation.title"),
       description: i,
       button: {
-        buttonText: _$$t("banner.browser_deprecation.learn_more"),
+        buttonText: getI18nString("banner.browser_deprecation.learn_more"),
         onClick: () => Ay.redirect("https://help.figma.com/hc/articles/360039827194-Figma-browser-requirements", "_blank")
       }
     };
@@ -393,8 +393,8 @@ let tB = {
         dismissible: !1,
         bannerType: x1.WARN,
         icon: _$$A6,
-        mainText: _$$t("banner.cooper.old_file.title"),
-        description: _$$t("banner.cooper.old_file.description")
+        mainText: getI18nString("banner.cooper.old_file.title"),
+        description: getI18nString("banner.cooper.old_file.description")
       };
       return jsx(_$$f2, {
         ...e,
@@ -430,22 +430,22 @@ let tU = {
 let tG = {
   bannerId: om.DesktopDeprecationBanner,
   Banner: function (e) {
-    let t = GN();
-    if (null == t || zl.get(Pi)) return null;
-    let n = _$$t("banner.desktop_app_deprecation.description", {
+    let t = getDeprecationDate();
+    if (null == t || atomStoreManager.get(shouldShowDeprecationBannerAtom)) return null;
+    let n = getI18nString("banner.desktop_app_deprecation.description", {
       deprecationDate: t.toDate()
     });
     let a = {
       dismissible: !0,
       bannerType: x1.WARN,
       icon: _$$A6,
-      mainText: _$$t("banner.desktop_app_deprecation.title"),
+      mainText: getI18nString("banner.desktop_app_deprecation.title"),
       description: n,
       button: {
-        buttonText: _$$t("banner.desktop_app_deprecation.learn_more"),
+        buttonText: getI18nString("banner.desktop_app_deprecation.learn_more"),
         onClick: () => Ay.unsafeRedirect("https://figma.com/downloads", "_blank")
       },
-      dismissedAtom: Pi
+      dismissedAtom: shouldShowDeprecationBannerAtom
     };
     return jsx(_$$f2, {
       ...e,
@@ -466,7 +466,7 @@ let tW = {
         description: "This file is in an Education team. To keep editing this file after 00/00, verify that you're a student or educator.",
         button: {
           buttonText: "Verify status",
-          onClick: () => Ay.redirect("/education/apply", _$$Ay.isIpadNative ? void 0 : "_blank")
+          onClick: () => Ay.redirect("/education/apply", BrowserInfo.isIpadNative ? void 0 : "_blank")
         }
       };
       return jsx(_$$f2, {
@@ -491,7 +491,7 @@ let tz = {
     let _ = r && r.subscription === FPaymentHealthStatusType.PAST_DUE;
     let u = {
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": _$$t("billing.open_invoice_reminder.button_tooltip"),
+      "data-tooltip": getI18nString("billing.open_invoice_reminder.button_tooltip"),
       "data-tooltip-show-immediately": !0
     };
     if (_ && !d) {
@@ -499,8 +499,8 @@ let tz = {
         bannerType: x1.WARN_SOFT,
         icon: jsx(_$$Z, {}),
         iconSize: "medium",
-        mainText: o ? _$$t("banner.pro_team_past_due_revamp.title") : _$$t("banner.pro_team_past_due_revamp.title_viewer"),
-        description: o ? _$$t("banner.pro_team_past_due_revamp.subtitle.can_admin") : _$$t("banner.pro_team_past_due_revamp.subtitle.no_admin"),
+        mainText: o ? getI18nString("banner.pro_team_past_due_revamp.title") : getI18nString("banner.pro_team_past_due_revamp.title_viewer"),
+        description: o ? getI18nString("banner.pro_team_past_due_revamp.subtitle.can_admin") : getI18nString("banner.pro_team_past_due_revamp.subtitle.no_admin"),
         button: o ? {
           type: MA.CUSTOM,
           element: jsx($n, {
@@ -508,12 +508,12 @@ let tz = {
               t?.(sf({
                 view: "teamAdminConsole",
                 teamId: r.id,
-                teamAdminConsoleViewTab: Iv.BILLING
+                teamAdminConsoleViewTab: DashboardSections.BILLING
               }));
             },
             variant: "secondary",
             htmlAttributes: u,
-            children: _$$t("banner.pro_team_past_due_revamp.cta")
+            children: getI18nString("banner.pro_team_past_due_revamp.cta")
           })
         } : void 0,
         dismissible: !1
@@ -545,12 +545,12 @@ let t$ = {
       let r = {
         bannerType: x1.WARN,
         icon: _$$A6,
-        mainText: _$$tx("external_collaboration_restricted.banner.title"),
-        description: _$$tx("external_collaboration_restricted.banner.restriction_description", {
+        mainText: renderI18nText("external_collaboration_restricted.banner.title"),
+        description: renderI18nText("external_collaboration_restricted.banner.restriction_description", {
           organizationName: d
         }),
         button: a ? void 0 : {
-          buttonText: _$$t("external_collaboration_restricted.banner.export_file"),
+          buttonText: getI18nString("external_collaboration_restricted.banner.export_file"),
           onClick: () => {
             n?.editorType === "design" ? t(u1({
               id: C9
@@ -595,7 +595,7 @@ let tq = {
     let s = r && r.subscription === FPaymentHealthStatusType.GRACE_PERIOD;
     let l = {
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": _$$t("billing.open_invoice_reminder.button_tooltip"),
+      "data-tooltip": getI18nString("billing.open_invoice_reminder.button_tooltip"),
       "data-tooltip-show-immediately": !0
     };
     if (s && o) {
@@ -603,8 +603,8 @@ let tq = {
         bannerType: x1.WARN_SOFT,
         icon: jsx(_$$Z, {}),
         iconSize: "medium",
-        mainText: _$$t("banner.pro_team_charge_failed_revamp.title"),
-        description: _$$t("banner.pro_team_charge_failed_revamp.subtitle.can_admin"),
+        mainText: getI18nString("banner.pro_team_charge_failed_revamp.title"),
+        description: getI18nString("banner.pro_team_charge_failed_revamp.subtitle.can_admin"),
         button: {
           type: MA.CUSTOM,
           element: jsx($n, {
@@ -612,12 +612,12 @@ let tq = {
               t?.(sf({
                 view: "teamAdminConsole",
                 teamId: r.id,
-                teamAdminConsoleViewTab: Iv.BILLING
+                teamAdminConsoleViewTab: DashboardSections.BILLING
               }));
             },
             variant: "secondary",
             htmlAttributes: l,
-            children: _$$t("banner.pro_team_past_due_revamp.cta")
+            children: getI18nString("banner.pro_team_past_due_revamp.cta")
           })
         },
         dismissible: !1
@@ -641,29 +641,29 @@ let tV = {
     let s = n && canAdminTeam(n, o);
     if (r && r.subscription === FPaymentHealthStatusType.NO_MONTHLY_SUB_EDITOR_COUNT_EXCEEDED) {
       let a = s ? jsx("span", {
-        children: _$$tx("banner.pro_team_no_monthly_sub.over_limit_as_admin.seat_rename", {
+        children: renderI18nText("banner.pro_team_no_monthly_sub.over_limit_as_admin.seat_rename", {
           contactSupportLink: jsx("a", {
             href: `mailto:${getSupportEmail()}`,
-            children: _$$tx("banner.pro_team_no_monthly_sub.contact_support")
+            children: renderI18nText("banner.pro_team_no_monthly_sub.contact_support")
           })
         })
       }) : jsx("span", {
-        children: _$$tx("banner.pro_team_no_monthly_sub.over_team_limit_without_admin.seat_rename", {
+        children: renderI18nText("banner.pro_team_no_monthly_sub.over_team_limit_without_admin.seat_rename", {
           teamName: r.name
         })
       });
       let o = {
         bannerType: x1.WARN,
         icon: _$$A6,
-        mainText: _$$t("banner.pro_team_no_monthly_sub.locked"),
+        mainText: getI18nString("banner.pro_team_no_monthly_sub.locked"),
         description: a,
         button: s ? {
-          buttonText: _$$t("banner.pro_team_no_monthly_sub.manage_plan"),
+          buttonText: getI18nString("banner.pro_team_no_monthly_sub.manage_plan"),
           onClick: () => {
             t?.(sf({
               view: "teamAdminConsole",
               teamId: n,
-              teamAdminConsoleViewTab: Iv.SETTINGS
+              teamAdminConsoleViewTab: DashboardSections.SETTINGS
             }));
           }
         } : void 0
@@ -698,7 +698,7 @@ let tH = {
       let a;
       let r;
       let o;
-      m ? (o = x1.WARN_SOFT, a = u ? _$$tx("banner.pro_trial_expiry.locked_description", {
+      m ? (o = x1.WARN_SOFT, a = u ? renderI18nText("banner.pro_trial_expiry.locked_description", {
         lowerUsageLink: jsx("button", {
           onClick: e => {
             e.preventDefault();
@@ -709,7 +709,7 @@ let tH = {
               }
             }));
           },
-          children: _$$tx("banner.pro_trial_expiry.lower_usage")
+          children: renderI18nText("banner.pro_trial_expiry.lower_usage")
         }),
         upgradeLink: jsx(_$$$z, {
           onClick: e => {
@@ -720,12 +720,12 @@ let tH = {
               selectedView: n.selectedView
             }));
           },
-          children: _$$tx("banner.pro_trial_expiry.upgrade")
+          children: renderI18nText("banner.pro_trial_expiry.upgrade")
         })
-      }) : _$$tx("banner.pro_trial_expiry.locked_description_for_viewer_on_team", {
+      }) : renderI18nText("banner.pro_trial_expiry.locked_description_for_viewer_on_team", {
         teamName: i.name
       }), r = {
-        buttonText: _$$t("banner.pro_trial_expiry.move_this_file_cta"),
+        buttonText: getI18nString("banner.pro_trial_expiry.move_this_file_cta"),
         onClick: () => _$$h({
           key: n.key,
           name: n.name,
@@ -734,10 +734,10 @@ let tH = {
           editor_type: n.editorType,
           parent_org_id: n.parentOrgId
         }, null, t)
-      }) : (o = x1.INFO, a = _$$tx("banner.pro_trial_expiry.expiry_description", {
+      }) : (o = x1.INFO, a = renderI18nText("banner.pro_trial_expiry.expiry_description", {
         teamName: i.name
       }), r = {
-        buttonText: _$$t("banner.pro_trial_upgrade_cta.upgrade_to_professional"),
+        buttonText: getI18nString("banner.pro_trial_upgrade_cta.upgrade_to_professional"),
         onClick: () => {
           let e = d.getState();
           t(WX({
@@ -749,7 +749,7 @@ let tH = {
       let s = {
         bannerType: o,
         icon: _$$A6,
-        mainText: _$$t("banner.pro_trial_expiry.title"),
+        mainText: getI18nString("banner.pro_trial_expiry.title"),
         dismissible: !m,
         onDismiss: m ? void 0 : () => {
           t(bE({
@@ -791,12 +791,12 @@ let tK = {
       let i = !!n && p && !a;
       if (i && !u) {
         let a = !!r.stripe_customer_id;
-        let i = d ? _$$t("locked_team.banner.this_board_is_part_of_a_locked_team") : _$$t("locked_team.banner.this_file_is_part_of_a_locked_team");
+        let i = d ? getI18nString("locked_team.banner.this_board_is_part_of_a_locked_team") : getI18nString("locked_team.banner.this_file_is_part_of_a_locked_team");
         let o = jsx("div", {
           style: _$$sx.add({
             marginLeft: "-32px"
           }).$,
-          children: _$$tx(l ? "locked_team.banner.all_of_this_teams_work_is_currently_view_only_dev_mode" : "locked_team.banner.all_of_this_teams_work_is_currently_view_only", {
+          children: renderI18nText(l ? "locked_team.banner.all_of_this_teams_work_is_currently_view_only_dev_mode" : "locked_team.banner.all_of_this_teams_work_is_currently_view_only", {
             learnMoreLink: m ? jsx(Fragment, {
               children: jsx("a", {
                 href: "#",
@@ -810,12 +810,12 @@ let tK = {
                     }
                   }));
                 },
-                children: _$$tx("locked_team.banner.learn_more")
+                children: renderI18nText("locked_team.banner.learn_more")
               })
             }) : jsx(Fragment, {})
           })
         });
-        let s = a ? _$$t("locked_team.banner.reactivate_professional") : _$$t("locked_team.banner.upgrade_to_professional");
+        let s = a ? getI18nString("locked_team.banner.reactivate_professional") : getI18nString("locked_team.banner.upgrade_to_professional");
         let u = {
           bannerType: x1.WARN_SOFT,
           icon: jsx(_$$s, {}),
@@ -843,10 +843,10 @@ let tK = {
         a = m ? jsxs("span", {
           children: [jsxs("b", {
             style: _$$sx.fontSemiBold.$,
-            children: [_$$tx("banner.free_limit_locked.team_locked_over_starter_limits", {
+            children: [renderI18nText("banner.free_limit_locked.team_locked_over_starter_limits", {
               teamName: r.name
             }), " "]
-          }), _$$tx("banner.free_limit_locked.upgrade_team_or_lower_usage", {
+          }), renderI18nText("banner.free_limit_locked.upgrade_team_or_lower_usage", {
             teamName: r.name,
             learnMoreLink: jsx(Fragment, {
               children: jsx("a", {
@@ -860,25 +860,25 @@ let tK = {
                     }
                   }));
                 },
-                children: _$$tx("banner.free_limit_locked.learn_more")
+                children: renderI18nText("banner.free_limit_locked.learn_more")
               })
             })
           })]
         }) : jsxs("span", {
           children: [jsx("b", {
             style: _$$sx.fontSemiBold.$,
-            children: _$$tx("banner.free_limit_locked.team_locked_over_starter_limits", {
+            children: renderI18nText("banner.free_limit_locked.team_locked_over_starter_limits", {
               teamName: r.name
             })
-          }), " ", _$$tx("banner.free_limit_locked.ask_your_team_admin_for_details")]
+          }), " ", renderI18nText("banner.free_limit_locked.ask_your_team_admin_for_details")]
         });
         let i = {
           bannerType: x1.WARN,
           icon: _$$A6,
-          mainText: _$$t("banner.free_limit_locked.locked"),
+          mainText: getI18nString("banner.free_limit_locked.locked"),
           description: a,
           button: m ? {
-            buttonText: _$$t("banner.free_limit_locked.upgrade_now"),
+            buttonText: getI18nString("banner.free_limit_locked.upgrade_now"),
             onClick: () => {
               let e = _.getState();
               t(WX({
@@ -908,20 +908,20 @@ let tY = {
     let i = null;
     let o = null;
     if (i = n && oA(t?.isAbandonedDraftFile), o = oA(t?.canMove) ? jsxs(Fragment, {
-      children: [_$$tx("banner.orphaned_projects.move_to_project"), " ", jsx(N_, {
+      children: [renderI18nText("banner.orphaned_projects.move_to_project"), " ", jsx(N_, {
         trusted: !0,
         target: "_blank",
         className: _$$s2.inline.ml4.$,
         href: "https://help.figma.com/hc/articles/4420549259799",
-        children: _$$tx("general.learn_more")
+        children: renderI18nText("general.learn_more")
       })]
-    }) : _$$t("banner.orphaned_projects.move_to_project.member", {
+    }) : getI18nString("banner.orphaned_projects.move_to_project.member", {
       orgName: r?.name ?? ""
     }), i && t) {
       let t = {
         bannerType: x1.WARN,
         icon: _$$A6,
-        mainText: _$$t("banner.orphaned_projects.file_in_an_abandoned_project"),
+        mainText: getI18nString("banner.orphaned_projects.file_in_an_abandoned_project"),
         description: o
       };
       return jsx(_$$f2, {
@@ -942,21 +942,21 @@ let tQ = {
     let r = ol();
     if (r && !n && a) {
       let n = oA(t?.canMove) ? jsxs(Fragment, {
-        children: [_$$tx("banner.orphaned_projects.move_to_project.team"), " ", jsx(N_, {
+        children: [renderI18nText("banner.orphaned_projects.move_to_project.team"), " ", jsx(N_, {
           trusted: !0,
           target: "_blank",
           className: _$$s2.inline.ml4.$,
           href: "https://help.figma.com/hc/articles/4420549259799",
-          children: _$$tx("general.learn_more")
+          children: renderI18nText("general.learn_more")
         })]
-      }) : _$$t("banner.orphaned_projects.move_to_project.team_member", {
+      }) : getI18nString("banner.orphaned_projects.move_to_project.team_member", {
         teamName: r.name ?? ""
       });
       if (t) {
         let t = {
           bannerType: x1.WARN,
           icon: _$$A6,
-          mainText: _$$t("banner.orphaned_projects.file_in_an_abandoned_project"),
+          mainText: getI18nString("banner.orphaned_projects.file_in_an_abandoned_project"),
           description: n
         };
         return jsx(_$$f2, {
@@ -982,17 +982,17 @@ let tZ = {
       let t = {
         bannerType: x1.WARN,
         icon: _$$A6,
-        mainText: _$$t("banner.personal_projects.locked"),
+        mainText: getI18nString("banner.personal_projects.locked"),
         description: jsx(Fragment, {
-          children: _$$tx("banner.personal_projects.deprecation_message", {
+          children: renderI18nText("banner.personal_projects.deprecation_message", {
             learnMoreLink: jsx("a", {
               href: "/pricing-faq#what-changes-for-me",
-              children: _$$tx("banner.personal_projects.learn_more")
+              children: renderI18nText("banner.personal_projects.learn_more")
             })
           })
         }),
         button: {
-          buttonText: _$$t("banner.personal_projects.back_to_files"),
+          buttonText: getI18nString("banner.personal_projects.back_to_files"),
           onClick: () => o?.(sf({
             view: "recentsAndSharing"
           }))
@@ -1021,13 +1021,13 @@ let tX = {
       let t = {
         bannerType: x1.WARN,
         icon: _$$A6,
-        mainText: _$$t("banner.edu_grace_period.verification_required"),
-        description: _$$t("banner.edu_grace_period.editing_restricted_on_file", {
+        mainText: getI18nString("banner.edu_grace_period.verification_required"),
+        description: getI18nString("banner.edu_grace_period.editing_restricted_on_file", {
           teamName: r.name
         }),
         button: {
-          buttonText: _$$t("banner.edu_grace_period.verify_status_button"),
-          onClick: () => Ay.redirect("/education/apply", _$$Ay.isIpadNative ? void 0 : "_blank")
+          buttonText: getI18nString("banner.edu_grace_period.verify_status_button"),
+          onClick: () => Ay.redirect("/education/apply", BrowserInfo.isIpadNative ? void 0 : "_blank")
         }
       };
       return jsx(_$$f2, {
@@ -1055,15 +1055,15 @@ let tJ = {
         let t = {
           bannerType: x1.INFO,
           icon: _$$A5,
-          mainText: _$$t("banner.edu_grace_period.verification_required"),
-          description: _$$t("banner.edu_grace_period.grace_period_team_reminder", {
+          mainText: getI18nString("banner.edu_grace_period.verification_required"),
+          description: getI18nString("banner.edu_grace_period.grace_period_team_reminder", {
             teamName: r.name,
             endDate: s
           }),
           dismissible: !0,
           button: {
-            buttonText: _$$t("banner.edu_grace_period.verify_status_button"),
-            onClick: () => Ay.redirect("/education/apply", _$$Ay.isIpadNative ? void 0 : "_blank")
+            buttonText: getI18nString("banner.edu_grace_period.verify_status_button"),
+            onClick: () => Ay.redirect("/education/apply", BrowserInfo.isIpadNative ? void 0 : "_blank")
           }
         };
         return jsx(_$$f2, {
@@ -1078,30 +1078,30 @@ let tJ = {
 };
 function t0(e) {
   let t;
-  if (!e) return _$$t("banner.multiplayer_session_upgrade.page_out_of_date");
+  if (!e) return getI18nString("banner.multiplayer_session_upgrade.page_out_of_date");
   switch (e) {
     case FFileType.DESIGN:
-      t = _$$t("general.figma_design");
+      t = getI18nString("general.figma_design");
       break;
     case FFileType.WHITEBOARD:
-      t = _$$t("general.figjam");
+      t = getI18nString("general.figjam");
       break;
     case FFileType.SLIDES:
-      t = _$$t("general.figma_slides");
+      t = getI18nString("general.figma_slides");
       break;
     case FFileType.SITES:
-      t = _$$t("general.figma_sites");
+      t = getI18nString("general.figma_sites");
       break;
     case FFileType.COOPER:
-      t = _$$t("general.figma_buzz");
+      t = getI18nString("general.figma_buzz");
       break;
     case FFileType.FIGMAKE:
-      t = _$$t("general.figma_rev");
+      t = getI18nString("general.figma_rev");
       break;
     default:
       throwTypeError(e);
   }
-  return _$$t("banner.multiplayer_session_upgrade.with_editor_type", {
+  return getI18nString("banner.multiplayer_session_upgrade.with_editor_type", {
     editorType: t
   });
 }
@@ -1122,12 +1122,12 @@ let t1 = {
       let a = {
         bannerType: x1.INFO,
         icon: _$$A6,
-        mainText: getFeatureFlags().force_client_reloads_fullscreen_banner_string ? t0(o) : _$$t("banner.multiplayer_session_upgrade.page_out_of_date"),
-        description: n ? _$$t("banner.multiplayer_session_upgrade.out_of_date.editor") : _$$t("banner.multiplayer_session_upgrade.out_of_date.viewer"),
+        mainText: getFeatureFlags().force_client_reloads_fullscreen_banner_string ? t0(o) : getI18nString("banner.multiplayer_session_upgrade.page_out_of_date"),
+        description: n ? getI18nString("banner.multiplayer_session_upgrade.out_of_date.editor") : getI18nString("banner.multiplayer_session_upgrade.out_of_date.viewer"),
         button: {
-          buttonText: n ? _$$t("banner.multiplayer_session_upgrade.save_and_reload") : _$$t("banner.multiplayer_session_upgrade.reload"),
+          buttonText: n ? getI18nString("banner.multiplayer_session_upgrade.save_and_reload") : getI18nString("banner.multiplayer_session_upgrade.reload"),
           onClick: () => {
-            sx("Upgrade Banner Clicked");
+            trackEventAnalytics("Upgrade Banner Clicked");
             h3O.startUpgrade();
             d(!0);
           }
@@ -1153,11 +1153,11 @@ let t5 = {
   Banner: function (e) {
     let [t, n] = useState(!1);
     let [i, o] = useState(!1);
-    let l = md(_$$T2);
+    let l = useAtomWithSubscription(_$$T2);
     let d = useSelector(e => !!e.saveStatus?.hasUnsavedChanges);
     let u = q5()?.editorType;
     if (useEffect(() => {
-      l && !i && (az.trackDefinedEvent("scenegraph_and_sync.force_client_reload_banner.shown", {}), o(!0));
+      l && !i && (analyticsEventManager.trackDefinedEvent("scenegraph_and_sync.force_client_reload_banner.shown", {}), o(!0));
     }, [l, i]), useEffect(() => {
       t && !d && Ay.reload("force client reload banner", {
         isForceClientReloadBanner: !0
@@ -1166,12 +1166,12 @@ let t5 = {
       let a = {
         bannerType: x1.INFO,
         icon: _$$A6,
-        mainText: getFeatureFlags().force_client_reloads_fullscreen_banner_string ? t0(u) : _$$t("banner.multiplayer_session_upgrade.page_out_of_date"),
+        mainText: getFeatureFlags().force_client_reloads_fullscreen_banner_string ? t0(u) : getI18nString("banner.multiplayer_session_upgrade.page_out_of_date"),
         button: {
-          buttonText: _$$t("banner.multiplayer_session_upgrade.reload"),
+          buttonText: getI18nString("banner.multiplayer_session_upgrade.reload"),
           onClick: () => {
             n(!0);
-            az.trackDefinedEvent("scenegraph_and_sync.force_client_reload_banner.clicked", {});
+            analyticsEventManager.trackDefinedEvent("scenegraph_and_sync.force_client_reload_banner.clicked", {});
           },
           disabled: t
         }
@@ -1201,16 +1201,16 @@ let t4 = {
       let o = {
         bannerType: x1.INFO,
         icon: _$$A5,
-        mainText: i > 1 ? _$$t("figjam_try.drafts_banner_title_more_time", {
+        mainText: i > 1 ? getI18nString("figjam_try.drafts_banner_title_more_time", {
           num_hours: i
-        }) : _$$t("figjam_try.drafts_banner_title_1_hour_or_less"),
-        description: _$$t("figjam_try.drafts_banner_description"),
+        }) : getI18nString("figjam_try.drafts_banner_title_1_hour_or_less"),
+        description: getI18nString("figjam_try.drafts_banner_description"),
         onDismiss: () => t?.(_$$b3({
           dismissed_figjam_try_drafts_banner: !0
         })),
         dismissible: !0,
         button: {
-          buttonText: _$$t("figjam_try.move_file"),
+          buttonText: getI18nString("figjam_try.move_file"),
           onClick: () => _$$h({
             key: n.key,
             name: n.name,
@@ -1279,22 +1279,22 @@ let t2 = {
     let d = _$$f("dismissed_figjam_try_claim_banner");
     let u = _$$R("minute");
     let m = i?.key;
-    if (!i?.isTryFile || _$$Ay.isMeetDevice || !l || !o?.enabled || !m || d) return null;
+    if (!i?.isTryFile || BrowserInfo.isMeetDevice || !l || !o?.enabled || !m || d) return null;
     let p = _$$A(u);
     let g = Math.ceil(_$$A(o.until).diff(p, "hours", !0));
     let f = {
       bannerType: x1.INFO,
       icon: _$$A5,
-      mainText: g > 1 ? _$$t("figjam_try_v2.timer_hours_left", {
+      mainText: g > 1 ? getI18nString("figjam_try_v2.timer_hours_left", {
         hoursLeft: g
-      }) : _$$t("figjam_try.claim_banner_title_1_hour_or_less"),
-      description: _$$t("figjam_try_v2.logged_in.after_that_this_board_will_be_deleted"),
+      }) : getI18nString("figjam_try.claim_banner_title_1_hour_or_less"),
+      description: getI18nString("figjam_try_v2.logged_in.after_that_this_board_will_be_deleted"),
       onDismiss: () => t?.(_$$b3({
         dismissed_figjam_try_claim_banner: !0
       })),
       dismissible: !0,
       button: {
-        buttonText: _$$t("figjam_try_v2.claim_file_logged_in"),
+        buttonText: getI18nString("figjam_try_v2.claim_file_logged_in"),
         onClick: () => onClaim()
       }
     };
@@ -1314,7 +1314,7 @@ let t3 = {
       status
     } = useSelector(e => e.downtime);
     if (!payload || !getFeatureFlags().display_downtime_banner) return null;
-    let o = _$$tx("downtime_banner.warning.description", {
+    let o = renderI18nText("downtime_banner.warning.description", {
       minLengthMinutes: payload.minLengthMinutes,
       maxLengthMinutes: payload.maxLengthMinutes,
       startTime: payload.downtimeStartDate,
@@ -1322,18 +1322,18 @@ let t3 = {
         target: "_blank",
         href: payload.helpcenterUrl,
         trusted: !0,
-        children: _$$t("downtime_banner.ongoing_and_warning.learn_more_link")
+        children: getI18nString("downtime_banner.ongoing_and_warning.learn_more_link")
       })
     });
     let s = jsx("p", {
-      children: _$$tx("downtime_banner.ongoing.description", {
+      children: renderI18nText("downtime_banner.ongoing.description", {
         minLengthMinutes: payload.minLengthMinutes,
         maxLengthMinutes: payload.maxLengthMinutes,
         helpcenterLink: jsx(CY, {
           target: "_blank",
           href: payload.helpcenterUrl,
           trusted: !0,
-          children: _$$t("downtime_banner.ongoing_and_warning.learn_more_link")
+          children: getI18nString("downtime_banner.ongoing_and_warning.learn_more_link")
         })
       })
     });
@@ -1347,7 +1347,7 @@ let t3 = {
       bannerType: x1.WARN,
       icon: _$$A6,
       dismissible: !1,
-      mainText: _$$t("downtime_banner.ongoing.scheduled_maintenance_will_begin_in_minutes", {
+      mainText: getI18nString("downtime_banner.ongoing.scheduled_maintenance_will_begin_in_minutes", {
         minutes: l()
       }),
       description: o
@@ -1355,13 +1355,13 @@ let t3 = {
       bannerType: x1.WARN,
       icon: _$$A6,
       dismissible: !1,
-      mainText: _$$t("downtime_banner.ongoing.scheduled_maintenance_in_progress_header"),
+      mainText: getI18nString("downtime_banner.ongoing.scheduled_maintenance_in_progress_header"),
       description: s
     } : status === _$$A2.Imminent && (d = {
       bannerType: x1.WARN,
       icon: _$$A6,
       dismissible: !1,
-      mainText: _$$t("downtime_banner.ongoing.scheduled_maintenance_will_begin_in_minutes", {
+      mainText: getI18nString("downtime_banner.ongoing.scheduled_maintenance_will_begin_in_minutes", {
         minutes: l()
       }),
       description: o
@@ -1375,12 +1375,12 @@ let t3 = {
 function t6({
   hubFile: e
 }) {
-  return _$$_(e) ? _$$tx("banner.freemium_preview.this_is_just_a_preview") : _$$tx("banner.freemium_preview.get_the_full_file_on_community");
+  return _$$_(e) ? renderI18nText("banner.freemium_preview.this_is_just_a_preview") : renderI18nText("banner.freemium_preview.get_the_full_file_on_community");
 }
 function t8({
   hubFile: e
 }) {
-  return _$$_(e) ? _$$tx("banner.freemium_preview.you_purchased_this_file_already") : _$$tx("banner.freemium_preview.this_is_just_a_preview_of_the_file_you_can_buy_on_community");
+  return _$$_(e) ? renderI18nText("banner.freemium_preview.you_purchased_this_file_already") : renderI18nText("banner.freemium_preview.this_is_just_a_preview_of_the_file_you_can_buy_on_community");
 }
 function t9({
   hubFile: e
@@ -1393,7 +1393,7 @@ function t9({
       trackingProperties: {
         trackingDescriptor: t ? _$$c2.OPEN_IN_COMMUNITY : _$$c2.BUY_THE_RESOURCE
       },
-      children: t ? _$$tx("banner.freemium_preview.open_in_community") : _$$tx("banner.freemium_preview.buy_the_resource")
+      children: t ? renderI18nText("banner.freemium_preview.open_in_community") : renderI18nText("banner.freemium_preview.buy_the_resource")
     })
   });
 }
@@ -1433,8 +1433,8 @@ let ne = {
       let t = {
         bannerType: x1.WARN,
         dismissible: !1,
-        mainText: _$$tx("banner.file_creation_failure.title"),
-        description: _$$tx("banner.file_creation_failure.description")
+        mainText: renderI18nText("banner.file_creation_failure.title"),
+        description: renderI18nText("banner.file_creation_failure.description")
       };
       return jsx(_$$f2, {
         ...e,
@@ -1466,7 +1466,7 @@ let nt = {
     let v = null != r && y(r.fileKey);
     if (!d || n || !l || !r || u || null === _) return null;
     let w = _ && x === kN.CAN_PUBLISH;
-    let T = g ? _$$t("slides.templates.banner.new_deck_button") : _$$t("whiteboard.delightful_toolbar.custom_template_banner.new_file_button");
+    let T = g ? getI18nString("slides.templates.banner.new_deck_button") : getI18nString("whiteboard.delightful_toolbar.custom_template_banner.new_file_button");
     let j = v ? {
       type: MA.CUSTOM,
       element: jsx("div", {
@@ -1511,8 +1511,8 @@ let nt = {
           dismissible: !1,
           bannerType: x1.INFO,
           icon: _$$A4,
-          mainText: _$$t("templates.banner.republish.primary_text"),
-          description: _$$t("templates.banner.republish.secondary_text_not_owner"),
+          mainText: getI18nString("templates.banner.republish.primary_text"),
+          description: getI18nString("templates.banner.republish.secondary_text_not_owner"),
           button: j
         }
       });
@@ -1522,7 +1522,7 @@ let nt = {
           YM(t, r.fileKey, m, "editor-republish-banner");
         },
         trackingDescriptor: _$$c2.PUBLISH_CHANGES,
-        buttonText: _$$t("templates.banner.republish.republish_action")
+        buttonText: getI18nString("templates.banner.republish.republish_action")
       };
       return jsx(_$$f2, {
         ...e,
@@ -1530,23 +1530,23 @@ let nt = {
           dismissible: !1,
           bannerType: x1.INFO,
           icon: _$$A4,
-          mainText: _$$t("templates.banner.republish.primary_text"),
-          description: _$$t("templates.banner.republish.secondary_text"),
+          mainText: getI18nString("templates.banner.republish.primary_text"),
+          description: getI18nString("templates.banner.republish.secondary_text"),
           button: n
         }
       });
     }
-    let k = r.publishedByUser?.handle && (b ? g ? _$$tx("slides.templates.banner.republish.you") : _$$tx("templates.banner.made_by_you") : _$$tx("templates.banner.republish.made_by_publisher_name", {
+    let k = r.publishedByUser?.handle && (b ? g ? renderI18nText("slides.templates.banner.republish.you") : renderI18nText("templates.banner.made_by_you") : renderI18nText("templates.banner.republish.made_by_publisher_name", {
       publisherName: r.publishedByUser.handle
     }));
-    let E = k ? g ? _$$tx("slides.templates.banner.republish.made_this", {
+    let E = k ? g ? renderI18nText("slides.templates.banner.republish.made_this", {
       madeByPublisherName: k
-    }) : _$$tx("templates.banner.republish.you_re_viewing_a_template_made_by_publisher_name", {
+    }) : renderI18nText("templates.banner.republish.you_re_viewing_a_template_made_by_publisher_name", {
       madeByPublisherName: jsx("span", {
         className: _$$s2.fontNormal.$,
         children: k
       })
-    }) : _$$t("templates.banner.republish.you_re_viewing_a_template");
+    }) : getI18nString("templates.banner.republish.you_re_viewing_a_template");
     return jsx(_$$f2, {
       ...e,
       bannerContent: {
@@ -1557,7 +1557,7 @@ let nt = {
         }),
         iconSize: "medium",
         mainText: E,
-        description: g ? _$$t("slides.templates.banner.republish.templates_can_be_used_to_create_a_new_slide_deck") : void 0,
+        description: g ? getI18nString("slides.templates.banner.republish.templates_can_be_used_to_create_a_new_slide_deck") : void 0,
         button: j
       }
     });
@@ -1578,7 +1578,7 @@ let nn = {
     let {
       openSlidesPublishFlow
     } = _$$X();
-    let d = md(Hk);
+    let d = useAtomWithSubscription(Hk);
     if (useEffect(() => {
       d && !isCurrentFileDraftTemplate() && setUserDraftTemplateKeyForCurrentFile();
     }, [isCurrentFileDraftTemplate, d, setUserDraftTemplateKeyForCurrentFile]), !a?.editorType || n || t || 0 === Object.keys(draftTemplateKeys).length || !isCurrentFileDraftTemplate() && !d) return null;
@@ -1587,7 +1587,7 @@ let nn = {
       type: MA.STRUCTURED,
       onClick: () => openSlidesPublishFlow("editor-pre-publish-banner"),
       trackingDescriptor: _$$c2.PUBLISH_TEMPLATE,
-      buttonText: _$$t("slides.templates.banner.publish_template_button")
+      buttonText: getI18nString("slides.templates.banner.publish_template_button")
     } : {
       type: MA.CUSTOM,
       element: jsxs("div", {
@@ -1604,8 +1604,8 @@ let nn = {
           ..._$$Ay2.props(u ? tx.slidesTemplateIcon : tx.cooperTemplateIcon)
         }),
         iconSize: "medium",
-        mainText: _$$t("slides.templates.banner.making_a_template"),
-        description: _$$t("slides.templates.banner.publish_when_youre_done"),
+        mainText: getI18nString("slides.templates.banner.making_a_template"),
+        description: getI18nString("slides.templates.banner.publish_when_youre_done"),
         button: m
       }
     });
@@ -1625,7 +1625,7 @@ let na = {
     let o = {
       bannerType: x1.WARN,
       dismissible: !1,
-      mainText: _$$tx("banner.org_downgrade.reminder.title", {
+      mainText: renderI18nText("banner.org_downgrade.reminder.title", {
         orgName: n?.name || "",
         downgradeDate: i
       }),
@@ -1637,7 +1637,7 @@ let na = {
             FJ("https://help.figma.com/hc/requests/new?ticket_form_id=9707134248215", "_blank");
           },
           variant: "inverse",
-          children: _$$tx("banner.org_downgrade.reminder.contact_support")
+          children: renderI18nText("banner.org_downgrade.reminder.contact_support")
         })
       }
     };
@@ -1684,14 +1684,14 @@ let nr = {
     let b = 30 >= _$$A(g).diff(h, "day");
     if (!g || !p.data) return null;
     let x = jsxs("span", {
-      children: [s && _$$tx("seat_billing_terms.banner.urgent.main_text_v2"), !s && (b ? _$$tx("seat_billing_terms.banner.urgent.main_text") : _$$tx("seat_billing_terms.banner.info.main_text", {
+      children: [s && renderI18nText("seat_billing_terms.banner.urgent.main_text_v2"), !s && (b ? renderI18nText("seat_billing_terms.banner.urgent.main_text") : renderI18nText("seat_billing_terms.banner.info.main_text", {
         renewalDate: g.toDate()
       }))]
     });
     let y = jsxs("span", {
-      children: [s && _$$tx("seat_billing_terms.banner.urgent.description_v2", {
+      children: [s && renderI18nText("seat_billing_terms.banner.urgent.description_v2", {
         renewalDate: g.toDate()
-      }), !s && (b ? _$$tx("seat_billing_terms.banner.urgent.description") : _$$tx("seat_billing_terms.banner.info.description"))]
+      }), !s && (b ? renderI18nText("seat_billing_terms.banner.urgent.description") : renderI18nText("seat_billing_terms.banner.info.description"))]
     });
     return jsx(fu, {
       name: "Seat Billing Terms Reminder Banner",
@@ -1716,7 +1716,7 @@ let nr = {
             icon: b ? jsx(_$$Z, {}) : jsx(_$$b, {}),
             iconSize: "medium",
             button: {
-              buttonText: _$$tx("seat_billing_terms.banner.review_and_accept"),
+              buttonText: renderI18nText("seat_billing_terms.banner.review_and_accept"),
               onClick: () => {
                 e(_$$to({
                   type: _$$w(),
@@ -1730,7 +1730,7 @@ let nr = {
                       planType: FOrganizationLevelType.ORG
                     }).then(() => {
                       e(_$$F.enqueue({
-                        message: _$$t("seat_billing_terms.modal.success")
+                        message: getI18nString("seat_billing_terms.modal.success")
                       }));
                     }),
                     prices: p.data
@@ -1774,12 +1774,12 @@ let no = {
         let e = await _$$S.copyFile(r.key);
         if (e.data.meta) {
           let t = e.data.meta;
-          if (_$$eD) {
-            _$$eD.openFile({
+          if (desktopAPIInstance) {
+            desktopAPIInstance.openFile({
               fileKey: t.key,
               title: t.name,
               fileEditorType: "dev_handoff",
-              target: aw.FOCAL_TAB,
+              target: OpenTarget.FOCAL_TAB,
               isBranch: !1,
               isLibrary: !1,
               isTeamTemplate: !1,
@@ -1791,7 +1791,7 @@ let no = {
             file: t,
             isDevHandoff: !0
           }), "_blank");
-        } else t(_$$s3.error(_$$t("file_browser.file_browser_actions.file_copy_error")));
+        } else t(_$$s3.error(getI18nString("file_browser.file_browser_actions.file_copy_error")));
       } : null;
     }();
     let [o, l] = useState(!1);
@@ -1808,7 +1808,7 @@ let no = {
         planId: u,
         planType: d
       },
-      children: _$$t("dev_handoff.demo_file.request_access")
+      children: getI18nString("dev_handoff.demo_file.request_access")
     });
     return jsx(_$$f2, {
       ...e,
@@ -1821,7 +1821,7 @@ let no = {
         iconSize: "medium",
         mainText: jsx("span", {
           className: "xemv814",
-          children: _$$t("dev_handoff.demo_file.get_dev_mode_to_simplify")
+          children: getI18nString("dev_handoff.demo_file.get_dev_mode_to_simplify")
         }),
         button: {
           type: MA.CUSTOM,
@@ -1855,12 +1855,12 @@ let ns = {
     } = {
       warning: {
         variant: "warn",
-        buttonText: _$$tx("order_form_billing_terms.button_text.warn"),
+        buttonText: renderI18nText("order_form_billing_terms.button_text.warn"),
         onDismiss: () => o(!0)
       },
       error: {
         variant: "danger",
-        buttonText: _$$tx("order_form_billing_terms.button_text.warn"),
+        buttonText: renderI18nText("order_form_billing_terms.button_text.warn"),
         onDismiss: void 0
       }
     }[warningType];
@@ -1881,9 +1881,9 @@ let ns = {
           onDismiss,
           "data-testid": "near-renewal-warning-banner",
           children: [jsx(_$$Q, {
-            title: _$$tx("order_form_billing_terms.headline_banner_text.danger"),
+            title: renderI18nText("order_form_billing_terms.headline_banner_text.danger"),
             children: jsx("p", {
-              children: _$$tx("order_form_billing_terms.description_banner_text.warn", {
+              children: renderI18nText("order_form_billing_terms.description_banner_text.warn", {
                 renewalDate: renewalDate.toDate()
               })
             })
@@ -1897,10 +1897,10 @@ let ns = {
                 locale: t?.locale,
                 fields: [{
                   id: 0x53d2eb6d8d,
-                  value: _$$t("order_form_billing_terms.billing_contact_subject")
+                  value: getI18nString("order_form_billing_terms.billing_contact_subject")
                 }, {
                   id: 0x53d2eb6da1,
-                  value: _$$t("order_form_billing_terms.billing_contact_description")
+                  value: getI18nString("order_form_billing_terms.billing_contact_description")
                 }, {
                   id: 0x8d435084517,
                   value: "b_something_else"
@@ -1926,8 +1926,8 @@ let nl = {
   Banner: function () {
     let e = iZ();
     let t = sZ();
-    let n = md(_$$b2(t?.id ?? null));
-    let a = md(eg);
+    let n = useAtomWithSubscription(_$$b2(t?.id ?? null));
+    let a = useAtomWithSubscription(eg);
     let i = getFeatureFlags().terms_of_service_may_2025_update;
     let o = !!t?.created_at && dl({
       date: new Date(t?.created_at)
@@ -1963,8 +1963,8 @@ let nl = {
       adminSettingsLink: a
     }) {
       if (!e || !t || !a || !t.isValid()) return "";
-      let r = encodeURIComponent(_$$t("non_admin_billing_terms.email_subject"));
-      let i = encodeURIComponent(_$$t("non_admin_billing_terms.email_body", {
+      let r = encodeURIComponent(getI18nString("non_admin_billing_terms.email_subject"));
+      let i = encodeURIComponent(getI18nString("non_admin_billing_terms.email_body", {
         renewalDate: t.toDate(),
         admin_link: a,
         userName: n || ""
@@ -1987,7 +1987,7 @@ let nl = {
       children: jsxs(Cs, {
         variant: "warn",
         onDismiss: () => {
-          sx("CTA Clicked", {
+          trackEventAnalytics("CTA Clicked", {
             name: "Non Admin Billing Terms Reminder Banner dismissed",
             currentOrgId: t.id,
             userId: e?.id,
@@ -1998,14 +1998,14 @@ let nl = {
           });
         },
         children: [jsx(_$$Q, {
-          children: _$$tx("non_admin_billing_terms.banner_description", {
+          children: renderI18nText("non_admin_billing_terms.banner_description", {
             name: t.name,
             renewalDate: w.toDate()
           })
         }), E && jsx(pW, {
           href: E,
           variant: "secondary",
-          children: _$$tx("non_admin_billing_terms.contact_admin_button")
+          children: renderI18nText("non_admin_billing_terms.contact_admin_button")
         })]
       })
     }) : null;
@@ -2026,18 +2026,18 @@ let nd = {
     let l = o === Agb.STARTER || o === Agb.STUDENT;
     let d = _$$y(t?.teamId ?? "", _$$b4.STARTER_VIEW_ONLY_BANNER);
     if (!(isEligible && n && l)) return null;
-    let _ = o === Agb.STUDENT ? _$$tx("banner.student_view_only") : _$$tx("banner.starter_view_only.not_available");
+    let _ = o === Agb.STUDENT ? renderI18nText("banner.student_view_only") : renderI18nText("banner.starter_view_only.not_available");
     let m = {
       bannerType: x1.FPL_BRAND,
       icon: _$$A6,
       mainText: _,
-      description: _$$tx("banner.starter_view_only.upgrade_to_pro"),
+      description: renderI18nText("banner.starter_view_only.upgrade_to_pro"),
       button: canEditTeam ? {
         type: MA.CUSTOM,
         element: jsx(_$$e, {
           onClick: d,
           style: _$$sx.mr8.colorTextBrand.$,
-          children: _$$tx("banner.starter_view_only.upgrade_button")
+          children: renderI18nText("banner.starter_view_only.upgrade_button")
         })
       } : void 0
     };
@@ -2073,7 +2073,7 @@ let nc = {
           }), " ", "or #feat-slots for more info."]
         }),
         button: {
-          buttonText: _$$t("banner.multiplayer_session_upgrade.reload"),
+          buttonText: getI18nString("banner.multiplayer_session_upgrade.reload"),
           onClick: () => {
             n(!0);
           },

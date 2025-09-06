@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "../vendor/514228";
 import { Ay } from "../905/612521";
 import { Ph, Kz, vd } from "../figma_app/637027";
 import { kt } from "../figma_app/858013";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { S as _$$S } from "../905/339549";
 import { V8, $c, Wy, Um } from "../figma_app/681712";
 import { sx } from "../figma_app/307841";
@@ -29,38 +29,38 @@ function y(e) {
   let a = e.canSeeBillingAddressExp && e.shippingAddress && !$V(e.shippingAddress);
   return jsxs("div", {
     children: [jsx(S, {
-      subtitle: tx(e.canSeeBillingAddressExp ? "org_self_serve.review_step.details" : "org_self_serve.review_step.organization_details")
+      subtitle: renderI18nText(e.canSeeBillingAddressExp ? "org_self_serve.review_step.details" : "org_self_serve.review_step.organization_details")
     }), jsx(T, {
-      header: tx(e.canSeeBillingAddressExp ? "org_self_serve.review_step.company_legal_name" : "org_self_serve.review_step.company_name"),
+      header: renderI18nText(e.canSeeBillingAddressExp ? "org_self_serve.review_step.company_legal_name" : "org_self_serve.review_step.company_name"),
       value: e.legalName
     }), jsx(T, {
-      header: tx(e.canSeeBillingAddressExp ? "org_self_serve.review_step.display_name" : "org_self_serve.review_step.company_display_name"),
+      header: renderI18nText(e.canSeeBillingAddressExp ? "org_self_serve.review_step.display_name" : "org_self_serve.review_step.company_display_name"),
       value: e.displayName
     }), !e.canSeeBillingAddressExp && jsx(T, {
-      header: tx("org_self_serve.review_step.domain"),
+      header: renderI18nText("org_self_serve.review_step.domain"),
       value: e.domain
     }), !e.canSeeBillingAddressExp && e.totalTeams > 0 && jsx(T, {
-      header: tx("org_self_serve.review_step.teams"),
+      header: renderI18nText("org_self_serve.review_step.teams"),
       value: e.totalTeams.toString()
     }), e.canSeeBillingAddressExp && jsx(T, {
-      header: tx("org_self_serve.review_step.billing_email"),
+      header: renderI18nText("org_self_serve.review_step.billing_email"),
       value: e.userEmail
     }), e.canSeeBillingAddressExp && jsx(Ph, {
       onClick: e.navigateToEditOrganizationDetails,
       trackingEventName: "Edit organization details - checkout flow",
       trusted: !0,
-      children: tx("org_self_serve.review_step.edit_organization")
+      children: renderI18nText("org_self_serve.review_step.edit_organization")
     }), t && jsx(T, {
-      header: tx("org_self_serve.review_step.billing_address"),
+      header: renderI18nText("org_self_serve.review_step.billing_address"),
       value: N(e.billingAddress)
     }), a && jsx(T, {
-      header: tx("org_self_serve.review_step.shipping_address"),
+      header: renderI18nText("org_self_serve.review_step.shipping_address"),
       value: N(e.shippingAddress)
     }), e.canSeeBillingAddressExp && jsx(Ph, {
       onClick: e.navigateToEditPaymentDetails,
       trackingEventName: "Edit payment details - checkout flow",
       trusted: !0,
-      children: tx("org_self_serve.review_step.edit_payment")
+      children: renderI18nText("org_self_serve.review_step.edit_payment")
     })]
   });
 }
@@ -71,18 +71,18 @@ function j(e) {
   let l = e.canSeeBillingAddressExp && e.shippingAddress && !$V(e.shippingAddress);
   return jsxs("div", {
     children: [jsx(S, {
-      subtitle: tx("pro_cart.review.details")
+      subtitle: renderI18nText("pro_cart.review.details")
     }), jsx(T, {
-      header: tx("pro_cart.review.team_name"),
+      header: renderI18nText("pro_cart.review.team_name"),
       value: e.displayName
     }), jsx(T, {
-      header: tx("pro_cart.review.company_name"),
+      header: renderI18nText("pro_cart.review.company_name"),
       value: e.legalName
     }), r && jsx(T, {
-      header: tx("pro_cart.review.billing_address"),
+      header: renderI18nText("pro_cart.review.billing_address"),
       value: N(e.billingAddress)
     }), l && jsx(T, {
-      header: tx("pro_cart.review.shipping_address"),
+      header: renderI18nText("pro_cart.review.shipping_address"),
       value: N(e.shippingAddress)
     }), jsx(Ph, {
       onClick: e.canSeeBillingAddressExp ? () => {
@@ -94,7 +94,7 @@ function j(e) {
         t(to({
           type: L,
           data: {
-            modalTitle: _$$t("pro_cart.review.edit_details_modal_header"),
+            modalTitle: getI18nString("pro_cart.review.edit_details_modal_header"),
             displayName: e.displayName,
             legalName: e.legalName,
             updateNameImmediately: !1,
@@ -104,7 +104,7 @@ function j(e) {
       },
       trackingEventName: "Edit team details - checkout flow",
       trusted: !0,
-      children: tx(e.canSeeBillingAddressExp ? "pro_cart.review.edit_details" : "pro_cart.review.edit_all_details")
+      children: renderI18nText(e.canSeeBillingAddressExp ? "pro_cart.review.edit_details" : "pro_cart.review.edit_all_details")
     })]
   });
 }
@@ -195,7 +195,7 @@ export function $$E0(e) {
       children: [jsx("div", {
         className: TV,
         "data-testid": "review-step-upgrade-title",
-        children: tx(E ? "edu.checkout_team_name" : S ? x.billingPeriod === tY.ANNUAL ? "pro_cart.review.exp_sticker_shock.upgrade_team_name_to_a_professional_team_yearly" : "pro_cart.review.exp_sticker_shock.upgrade_team_name_to_a_professional_team_monthly" : "pro_cart.review.upgrade_team_name_to_a_professional_team", {
+        children: renderI18nText(E ? "edu.checkout_team_name" : S ? x.billingPeriod === tY.ANNUAL ? "pro_cart.review.exp_sticker_shock.upgrade_team_name_to_a_professional_team_yearly" : "pro_cart.review.exp_sticker_shock.upgrade_team_name_to_a_professional_team_monthly" : "pro_cart.review.upgrade_team_name_to_a_professional_team", {
           teamName: j
         })
       }), (!P || !I) && jsx($c, {
@@ -210,7 +210,7 @@ export function $$E0(e) {
         multiple: 2
       }), y.taxes && !!e.billingAddress && jsxs(Fragment, {
         children: [jsx(Wy, {
-          mainText: tx("pro_cart.info.subtotal"),
+          mainText: renderI18nText("pro_cart.info.subtotal"),
           priceText: p.formatMoney(A ? 0 : y.taxes.sub_total || 0, {
             showCents: !0
           }),
@@ -218,11 +218,11 @@ export function $$E0(e) {
         }), jsx(Kz, {
           multiple: 1.5
         }), jsx(Wy, {
-          mainText: tx("pro_cart.review.tax"),
+          mainText: renderI18nText("pro_cart.review.tax"),
           priceText: p.formatMoney(y.taxes?.tax_total || 0, {
             showCents: !0
           }),
-          subText: tx("pro_cart.review.tax_percent", {
+          subText: renderI18nText("pro_cart.review.tax_percent", {
             taxPercent: y.taxes.lines[0]?.tax_percent || 0
           }),
           "data-testid": "tax-summary"
@@ -231,12 +231,12 @@ export function $$E0(e) {
         })]
       }), jsx(Wy, {
         "data-testid": "confirm-total-summary",
-        mainText: E ? tx("pro_cart.review.total") : tx("pro_cart.review.total_due_today"),
+        mainText: E ? renderI18nText("pro_cart.review.total") : renderI18nText("pro_cart.review.total_due_today"),
         priceText: p.formatMoney(L, {
           showCents: !0,
           showFullFormat: _Z()
         }),
-        subText: A ? tx("pro_cart.review.you_will_not_be_charged_during_the_free_period", {
+        subText: A ? renderI18nText("pro_cart.review.you_will_not_be_charged_during_the_free_period", {
           days: y.promo.promo_value
         }) : void 0
       }), jsx(Kz, {

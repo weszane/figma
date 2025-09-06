@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useLayoutEffect } from "react";
 import a from "classnames";
 import { c2 } from "../figma_app/243213";
-import { us } from "../905/11";
+import { captureMessage } from "../905/11";
 var s = a;
 let d = "dropdown--dropdown--IX0tU text--fontPos14--OL9Hp text--_fontBase--QdLsd";
 let c = "dropdown--dropdownContents--BqcL5";
@@ -236,7 +236,7 @@ export function $$I2({
 }) {
   let c = h(t, a);
   let u = t[0].find(e => e.key === c[0])?.label;
-  u || (us("SelectDropdown: current value removed"), r([t[0][0].key]), u = t[0][0].label);
+  u || (captureMessage("SelectDropdown: current value removed"), r([t[0][0].key]), u = t[0][0].label);
   return jsx($$f0, {
     className: s()(o || "dropdown--selectDropdown--Lqj6J dropdown--dropdown--IX0tU text--fontPos14--OL9Hp text--_fontBase--QdLsd"),
     preview: jsxs(Fragment, {

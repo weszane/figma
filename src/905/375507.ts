@@ -8,13 +8,13 @@ import { S as _$$S } from "../905/274480";
 import { h as _$$h, J as _$$J } from "../905/270045";
 import { $n } from "../905/521428";
 import { e as _$$e } from "../905/149844";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { ot } from "../905/165290";
 import { Ax, Jt } from "../figma_app/616261";
 import { uA } from "../figma_app/806412";
 import { Yx } from "../figma_app/930338";
 import { $z } from "../figma_app/617427";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { k as _$$k } from "../905/443820";
 import { getFeatureFlags } from "../905/601108";
 import { xx } from "../figma_app/815945";
@@ -101,13 +101,13 @@ function H(e) {
       });
     }
     e.push({
-      name: _$$t("resources_tab.shared_fonts_table.font"),
+      name: getI18nString("resources_tab.shared_fonts_table.font"),
       className: "shared_fonts_table--fontColumn--jxMk- shared_fonts_table--column--F0oIs table--column--974RA",
       getSortValue: e => e.sortValue,
       cellComponent: e => {
         if (e.isVariableFont) {
           let t = e.fontInfo.variationInstances?.map(e => e.name).join(", ") || "";
-          let i = _$$t("resources_tab.shared_fonts_table.list_of_styles", {
+          let i = getI18nString("resources_tab.shared_fonts_table.list_of_styles", {
             numberOfStyles: e.fontInfo.variationInstances?.length || 0,
             instancesString: t
           });
@@ -119,7 +119,7 @@ function H(e) {
               }), jsx("span", {
                 className: "shared_fonts_table--variableFontBadge--rKy2g",
                 children: jsx(Ex, {
-                  text: _$$t("resources_tab.shared_fonts_table.variable_font_badge"),
+                  text: getI18nString("resources_tab.shared_fonts_table.variable_font_badge"),
                   color: zE.INVERT
                 })
               })]
@@ -137,14 +137,14 @@ function H(e) {
       }
     });
     e.push({
-      name: _$$t("resources_tab.shared_fonts_table.version"),
+      name: getI18nString("resources_tab.shared_fonts_table.version"),
       className: "shared_fonts_table--versionColumn--jXx5l shared_fonts_table--column--F0oIs table--column--974RA",
       cellComponent: e => e.fontInfo.version ? jsx(Fragment, {
         children: e.fontInfo.version
       }) : jsx(r, {})
     });
     e.push({
-      name: _$$t("resources_tab.shared_fonts_table.sample"),
+      name: getI18nString("resources_tab.shared_fonts_table.sample"),
       className: "shared_fonts_table--sampleColumn--FrtoU shared_fonts_table--column--F0oIs table--column--974RA",
       cellComponent: e => jsx("img", {
         className: "shared_fonts_table--sample--l1Fio",
@@ -174,7 +174,7 @@ function H(e) {
             style: dropdownShown.data.position,
             children: jsx(c$, {
               onClick: () => h([e.fontInfo]),
-              children: tx("resources_tab.shared_fonts_table.delete_font")
+              children: renderI18nText("resources_tab.shared_fonts_table.delete_font")
             })
           })]
         });
@@ -204,7 +204,7 @@ function H(e) {
     variant: "primary",
     icon: "plus-32",
     onClick: onUploadClick,
-    children: tx("resources_tab.shared_fonts_table.add_font")
+    children: renderI18nText("resources_tab.shared_fonts_table.add_font")
   });
   return jsxs(Fragment, {
     children: [!getFeatureFlags().ff_a11y_page_tab_fix && jsxs(Fragment, {
@@ -224,28 +224,28 @@ function H(e) {
         let t = e.map(e => e.fontInfo);
         return jsx(IU, {
           onClick: () => h(t),
-          label: _$$t("resources_tab.shared_fonts_table.bulk_delete_fonts", {
+          label: getI18nString("resources_tab.shared_fonts_table.bulk_delete_fonts", {
             selectedFontsCount: e.length
           })
         });
       },
       columns: f,
       emptyContent: jsx(_$$p, {
-        children: query ? tx("resources_tab.shared_fonts_table.no_fonts_match_your_search_query", {
+        children: query ? renderI18nText("resources_tab.shared_fonts_table.no_fonts_match_your_search_query", {
           uploadFontsLink: jsx(_$$N, {
             onClick: onUploadClick,
             trusted: !0,
             className: _$$s.ml4.$,
-            children: tx("resources_tab.shared_fonts_table.embedded_upload_fonts_link")
+            children: renderI18nText("resources_tab.shared_fonts_table.embedded_upload_fonts_link")
           })
         }) : jsxs(_$$Y, {
           spacing: 4,
           children: [jsx("span", {
-            children: tx("resources_tab.shared_fonts_table.no_shared_fonts_yet")
+            children: renderI18nText("resources_tab.shared_fonts_table.no_shared_fonts_yet")
           }), jsx(_$$N, {
             onClick: onUploadClick,
             trusted: !0,
-            children: tx("resources_tab.shared_fonts_table.upload_fonts_link")
+            children: renderI18nText("resources_tab.shared_fonts_table.upload_fonts_link")
           })]
         })
       }),
@@ -253,7 +253,7 @@ function H(e) {
       hasNewScrollContext: !0,
       itemTypeContext: {
         itemType: "font",
-        getSelectedCountString: e => _$$t("multi_select_list.selected_count_font", {
+        getSelectedCountString: e => getI18nString("multi_select_list.selected_count_font", {
           numSelected: e
         })
       },
@@ -268,7 +268,7 @@ function H(e) {
           clearSearch: () => {
             setQuery("");
           },
-          placeholder: _$$t("resources_tab.shared_fonts_table.search_fonts_placeholder_text_with_ellipsis")
+          placeholder: getI18nString("resources_tab.shared_fonts_table.search_fonts_placeholder_text_with_ellipsis")
         })
       })
     })]
@@ -415,15 +415,15 @@ function el(e) {
   }
   return jsxs("div", {
     className: "shared_fonts_collision--container--jaZWs",
-    children: [s ? i ? tx("design_systems.shared_fonts.replace_warning_new_variable_font_all_collsions_variable", {
+    children: [s ? i ? renderI18nText("design_systems.shared_fonts.replace_warning_new_variable_font_all_collsions_variable", {
       numCollisions: t.length
-    }) : r ? tx("design_systems.shared_fonts.replace_warning_new_variable_font_all_collisions_non_variable", {
+    }) : r ? renderI18nText("design_systems.shared_fonts.replace_warning_new_variable_font_all_collisions_non_variable", {
       numCollisions: t.length
-    }) : tx("design_systems.shared_fonts.replace_warning_new_variable_font", {
+    }) : renderI18nText("design_systems.shared_fonts.replace_warning_new_variable_font", {
       numCollisions: t.length
-    }) : r ? tx("design_systems.shared_fonts.replace_warning", {
+    }) : r ? renderI18nText("design_systems.shared_fonts.replace_warning", {
       numCollisions: t.length
-    }) : tx("design_systems.shared_fonts.replace_warning_not_all_collsions_variable", {
+    }) : renderI18nText("design_systems.shared_fonts.replace_warning_not_all_collsions_variable", {
       numCollisions: t.length
     }), jsxs("div", {
       className: "shared_fonts_collision--table--PopGY",
@@ -431,18 +431,18 @@ function el(e) {
         className: X,
         children: [jsx("div", {
           className: ee,
-          children: tx("design_systems.shared_fonts.existing_fonts")
+          children: renderI18nText("design_systems.shared_fonts.existing_fonts")
         }), jsx("div", {
           className: ee,
-          children: tx("design_systems.shared_fonts.new_font")
+          children: renderI18nText("design_systems.shared_fonts.new_font")
         })]
       }), l.map((e, t) => jsx(er, {
         data: e
       }, t))]
     }), 0 !== d.length && jsxs(ea, {
-      children: [tx("design_systems.shared_fonts.some_of_the_existing_styles_will_become_unavailable"), " ", d.map(e => `${a.family} ${e}`).join(", ")]
+      children: [renderI18nText("design_systems.shared_fonts.some_of_the_existing_styles_will_become_unavailable"), " ", d.map(e => `${a.family} ${e}`).join(", ")]
     }), c && jsx(ea, {
-      children: tx("design_systems.shared_fonts.replace_variable_font_error")
+      children: renderI18nText("design_systems.shared_fonts.replace_variable_font_error")
     })]
   });
 }
@@ -532,10 +532,10 @@ function eR(e) {
         className: eS,
         children: [jsx(A3, {
           className: ew,
-          children: tx("design_systems.shared_fonts.error_table_header_file")
+          children: renderI18nText("design_systems.shared_fonts.error_table_header_file")
         }), jsx(A3, {
           className: eC,
-          children: tx("design_systems.shared_fonts.error_table_header_error")
+          children: renderI18nText("design_systems.shared_fonts.error_table_header_error")
         })]
       }), sharedFonts.unsuccessfulUploads.map(e => jsxs(Hj, {
         className: ex,
@@ -553,7 +553,7 @@ function eR(e) {
       className: "shared_fonts_modal_content--errorActionContainer--aZAOx shared_fonts_modal_content--footer--LgL5o",
       children: jsx($n, {
         onClick: onDismissUploadErrors,
-        children: tx("design_systems.shared_fonts.dismiss_errors")
+        children: renderI18nText("design_systems.shared_fonts.dismiss_errors")
       })
     })]
   });
@@ -592,28 +592,28 @@ function eR(e) {
           className: eI,
           children: j && jsx(_$$S, {
             label: jsx(_$$h, {
-              children: tx("design_systems.shared_fonts.checkbox_select_all_fonts")
+              children: renderI18nText("design_systems.shared_fonts.checkbox_select_all_fonts")
             }),
             checked: Object.keys(sharedFonts.fontsToDelete).length > 0,
             onChange: toggleCheckAllFontIDs
           })
         }), jsx(A3, {
           className: eE,
-          children: tx("design_systems.shared_fonts.font")
+          children: renderI18nText("design_systems.shared_fonts.font")
         }), jsx(A3, {
           className: ev,
-          children: tx("design_systems.shared_fonts.version")
+          children: renderI18nText("design_systems.shared_fonts.version")
         }), jsx(A3, {
           className: ev,
-          children: tx("design_systems.shared_fonts.sample")
+          children: renderI18nText("design_systems.shared_fonts.sample")
         }), jsx(A3, {
           className: eI,
           children: j && jsx(_$$K2, {
-            "aria-label": _$$t("design_systems.shared_fonts.upload_new_shared_font"),
+            "aria-label": getI18nString("design_systems.shared_fonts.upload_new_shared_font"),
             onClick: onUploadClick,
             htmlAttributes: {
               "data-tooltip-type": Ib.TEXT,
-              "data-tooltip": _$$t("design_systems.shared_fonts.upload_new_shared_font")
+              "data-tooltip": getI18nString("design_systems.shared_fonts.upload_new_shared_font")
             },
             children: jsx(_$$e, {})
           })
@@ -625,7 +625,7 @@ function eR(e) {
         orgFonts && Object.keys(orgFonts).forEach(e => {
           i += Object.keys(orgFonts[e]).length;
         });
-        "team" === resourceType ? j ? e = _$$t("design_systems.shared_fonts.upload_fonts_you_own_to_share_with_your_team") : (e = _$$t("design_systems.shared_fonts.no_fonts_have_been_uploaded_to_this_team"), t = _$$t("design_systems.shared_fonts.only_team_admins_have_permission_to_upload_fonts")) : j ? e = _$$t("design_systems.shared_fonts.upload_fonts_you_own_to_share_with_your_organization") : (e = _$$t("design_systems.shared_fonts.no_fonts_have_been_uploaded_to_this_organization"), t = _$$t("design_systems.shared_fonts.only_organization_admins_have_permission_to_upload_fonts"));
+        "team" === resourceType ? j ? e = getI18nString("design_systems.shared_fonts.upload_fonts_you_own_to_share_with_your_team") : (e = getI18nString("design_systems.shared_fonts.no_fonts_have_been_uploaded_to_this_team"), t = getI18nString("design_systems.shared_fonts.only_team_admins_have_permission_to_upload_fonts")) : j ? e = getI18nString("design_systems.shared_fonts.upload_fonts_you_own_to_share_with_your_organization") : (e = getI18nString("design_systems.shared_fonts.no_fonts_have_been_uploaded_to_this_organization"), t = getI18nString("design_systems.shared_fonts.only_organization_admins_have_permission_to_upload_fonts"));
         let r = "team" === resourceType && i > 0;
         return jsxs("div", {
           className: "shared_fonts_modal_content--nullContainer--Z5Kga",
@@ -638,11 +638,11 @@ function eR(e) {
               children: t
             }), org && r && jsx("div", {
               className: j ? "shared_fonts_modal_content--orgNullMessageAdmin--gKbAY" : "shared_fonts_modal_content--orgNullMessage--8FdUD shared_fonts_modal_content--orgNullMessageAdmin--gKbAY",
-              children: tx("design_systems.shared_fonts.view_shared_fonts_from_organization", {
+              children: renderI18nText("design_systems.shared_fonts.view_shared_fonts_from_organization", {
                 action: jsx($n, {
                   variant: "link",
                   onClick: onViewOrgFontsClick,
-                  children: tx("design_systems.shared_fonts.view_shared_fonts_from_organization_action", {
+                  children: renderI18nText("design_systems.shared_fonts.view_shared_fonts_from_organization_action", {
                     numOrgFonts: i
                   })
                 }),
@@ -651,7 +651,7 @@ function eR(e) {
             })]
           }), j && jsx($n, {
             onClick: onUploadClick,
-            children: tx("design_systems.shared_fonts.upload_fonts")
+            children: renderI18nText("design_systems.shared_fonts.upload_fonts")
           })]
         });
       })() : jsxs(Fragment, {
@@ -683,7 +683,7 @@ function eR(e) {
             }, e);
           }), G.length > 0 && G, 0 === G.length && query && jsx("div", {
             className: "shared_fonts_modal_content--noSearchResultsInfo--K25Iw",
-            children: tx("design_systems.shared_fonts.no_results_for_query", {
+            children: renderI18nText("design_systems.shared_fonts.no_results_for_query", {
               query
             })
           })]
@@ -695,13 +695,13 @@ function eR(e) {
             return jsxs("div", {
               className: eT,
               children: [jsx("span", {
-                children: tx("design_systems.shared_fonts.num_fonts_selected", {
+                children: renderI18nText("design_systems.shared_fonts.num_fonts_selected", {
                   numFontsSelected: e
                 })
               }), jsx($n, {
                 variant: "secondary",
                 onClick: onShowDeleteFontsModal,
-                children: tx("design_systems.shared_fonts.delete")
+                children: renderI18nText("design_systems.shared_fonts.delete")
               })]
             }, "shared-fonts-delete-footer");
           })() : (() => {
@@ -714,11 +714,11 @@ function eR(e) {
               e = jsx("div", {
                 children: jsx("div", {
                   className: "shared_fonts_modal_content--uploadFooterMessage--fYOc9",
-                  children: tx("design_systems.shared_fonts.upload_footer_message", {
+                  children: renderI18nText("design_systems.shared_fonts.upload_footer_message", {
                     linkText: jsx($n, {
                       variant: "link",
                       onClick: onViewOrgFontsClick,
-                      children: tx("design_systems.shared_fonts.upload_footer_message_link", {
+                      children: renderI18nText("design_systems.shared_fonts.upload_footer_message_link", {
                         numFonts: t
                       })
                     }),
@@ -729,7 +729,7 @@ function eR(e) {
             }
             let t = j ? jsx($n, {
               onClick: onUploadClick,
-              children: tx("design_systems.shared_fonts.upload_fonts")
+              children: renderI18nText("design_systems.shared_fonts.upload_fonts")
             }) : null;
             return t || e ? jsxs("div", {
               className: eT,
@@ -747,7 +747,7 @@ function eR(e) {
       return 0 === uploadsLaunched ? null : uploadsLaunched - successfulUploads.length - unsuccessfulUploads.length > 0 ? jsx("div", {
         className: "shared_fonts_modal_content--progress--lTEJk shared_fonts_modal_content--footer--LgL5o",
         children: jsx("span", {
-          children: tx("design_systems.shared_fonts.upload_progress", {
+          children: renderI18nText("design_systems.shared_fonts.upload_progress", {
             current: successfulUploads.length + unsuccessfulUploads.length + 1,
             total: uploadsLaunched
           })
@@ -755,7 +755,7 @@ function eR(e) {
       }) : 0 === unsuccessfulUploads.length ? null : jsxs("div", {
         className: "shared_fonts_modal_content--progressFailure--UbA63 shared_fonts_modal_content--progress--lTEJk shared_fonts_modal_content--footer--LgL5o",
         children: [jsx("span", {
-          children: tx("design_systems.shared_fonts.import_complete_with_error_count", {
+          children: renderI18nText("design_systems.shared_fonts.import_complete_with_error_count", {
             numErrors: unsuccessfulUploads.length
           })
         }), jsx("div", {
@@ -764,13 +764,13 @@ function eR(e) {
             children: [jsx($n, {
               onClick: onReviewUploadErrors,
               variant: "secondary",
-              children: tx("design_systems.shared_fonts.import_complete_with_errors_review", {
+              children: renderI18nText("design_systems.shared_fonts.import_complete_with_errors_review", {
                 numErrors: unsuccessfulUploads.length
               })
             }), jsx($n, {
               onClick: onClearFontUploadResults,
               variant: "secondary",
-              children: tx("design_systems.shared_fonts.import_complete_with_errors_ok")
+              children: renderI18nText("design_systems.shared_fonts.import_complete_with_errors_ok")
             })]
           })
         })]
@@ -798,19 +798,19 @@ class eN extends PureComponent {
     return e.variationInstances ? jsxs("div", {
       className: "shared_fonts_modal_content--variableFontNameColumn--E70jY",
       children: [jsxs("div", {
-        children: [tx("design_systems.shared_fonts.font_family_and_style", {
+        children: [renderI18nText("design_systems.shared_fonts.font_family_and_style", {
           fontFamily: e.family,
           fontStyle: e.style
         }), jsx("span", {
           className: "shared_fonts_modal_content--variableFontBadge---whIx",
           children: jsx(Ex, {
-            text: _$$t("design_systems.shared_fonts.variable"),
+            text: getI18nString("design_systems.shared_fonts.variable"),
             color: zE.INVERT
           })
         })]
       }), jsx("div", {
         children: jsx(_$$R, {
-          text: _$$t("design_systems.shared_fonts.list_of_variations_for_font", {
+          text: getI18nString("design_systems.shared_fonts.list_of_variations_for_font", {
             numVariations: e.variationInstances.length,
             listOfVariations: Yx(e.variationInstances.map(e => e.name))
           }),
@@ -835,7 +835,7 @@ class eN extends PureComponent {
           eventListeners: ["onClick"],
           children: jsx(_$$S, {
             label: jsx(_$$h, {
-              children: tx("design_systems.shared_fonts.checkbox_select_font")
+              children: renderI18nText("design_systems.shared_fonts.checkbox_select_font")
             }),
             checked: this.props.isChecked,
             onChange: (e, {
@@ -860,7 +860,7 @@ class eN extends PureComponent {
         className: eI,
         children: this.props.isOverridden && jsx("div", {
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": _$$t("design_systems.shared_fonts.this_font_style_was_uploaded_to_your_organization_any_new_text_objects_will_use_the_organization_font"),
+          "data-tooltip": getI18nString("design_systems.shared_fonts.this_font_style_was_uploaded_to_your_organization_any_new_text_objects_will_use_the_organization_font"),
           children: jsx(_$$B, {
             svg: _$$A4
           })
@@ -1015,13 +1015,13 @@ let eM = class e extends uA {
       })));
     };
     this.renderUploadModal = () => jsx(_$$l, {
-      checkboxText: _$$t("design_systems.shared_fonts.i_own_the_fonts_i_am_uploading_or_have_the_right_to_distribute_copies_to_others_and_to_authorize_the_use_of_copies_with_figma"),
-      buttonText: _$$t("design_systems.shared_fonts.upload"),
+      checkboxText: getI18nString("design_systems.shared_fonts.i_own_the_fonts_i_am_uploading_or_have_the_right_to_distribute_copies_to_others_and_to_authorize_the_use_of_copies_with_figma"),
+      buttonText: getI18nString("design_systems.shared_fonts.upload"),
       onConfirm: this.onUploadConfirm,
       onHide: this.resetUpload,
       hideCancelButton: !1,
       dispatch: this.props.dispatch,
-      title: _$$t("design_systems.shared_fonts.uploading_n_fonts", {
+      title: getI18nString("design_systems.shared_fonts.uploading_n_fonts", {
         numFonts: this.files.length
       })
     });
@@ -1046,7 +1046,7 @@ let eM = class e extends uA {
       variant: "primary",
       iconPrefix: jsx(_$$e, {}),
       onClick: this.onUploadClick,
-      children: tx("resources_tab.shared_fonts_table.add_font")
+      children: renderI18nText("resources_tab.shared_fonts_table.add_font")
     }));
   }
   componentDidUpdate(e) {
@@ -1179,7 +1179,7 @@ let eU = Ju(function (e) {
   let I = useDispatch();
   let E = useCallback(() => {
     (_ ? v.collisions : [v.collisions[0]]).forEach(() => {
-      sx("shared_fonts_skip_collision");
+      trackEventAnalytics("shared_fonts_skip_collision");
       I(_$$X.dismissFontCollision());
     });
     onCollisionResolved();
@@ -1195,7 +1195,7 @@ let eU = Ju(function (e) {
         resourceId,
         overwrite: !0
       }));
-      sx("shared_fonts_skip_collision");
+      trackEventAnalytics("shared_fonts_skip_collision");
       I(_$$X.dismissFontCollision());
     });
     onCollisionResolved();
@@ -1207,7 +1207,7 @@ let eU = Ju(function (e) {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: tx("design_systems.shared_fonts.replacing_fonts_modal_title")
+          children: renderI18nText("design_systems.shared_fonts.replacing_fonts_modal_title")
         })
       }), jsx(nB, {
         children: jsx(el, {
@@ -1221,7 +1221,7 @@ let eU = Ju(function (e) {
             className: eD,
             children: jsx(_$$S, {
               label: jsx(_$$J, {
-                children: tx("design_systems.shared_fonts.apply_to_all_remaining_uploads", {
+                children: renderI18nText("design_systems.shared_fonts.apply_to_all_remaining_uploads", {
                   numRemainingUploads: v.collisions.length - 1
                 })
               }),
@@ -1234,10 +1234,10 @@ let eU = Ju(function (e) {
           children: [jsx($n, {
             variant: "secondary",
             onClick: E,
-            children: tx("design_systems.shared_fonts.don_t_replace")
+            children: renderI18nText("design_systems.shared_fonts.don_t_replace")
           }), jsx($n, {
             onClick: x,
-            children: tx("design_systems.shared_fonts.replace")
+            children: renderI18nText("design_systems.shared_fonts.replace")
           })]
         })]
       })]
@@ -1266,28 +1266,28 @@ let eB = Ju(function (e) {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: tx("design_systems.shared_fonts.team_fonts_will_be_overridden")
+          children: renderI18nText("design_systems.shared_fonts.team_fonts_will_be_overridden")
         })
       }), jsxs(nB, {
         children: [jsx("div", {
           className: eO,
-          children: tx("design_systems.shared_fonts.team_fonts_override_warning_1", {
+          children: renderI18nText("design_systems.shared_fonts.team_fonts_override_warning_1", {
             fontFamily: p.font.family,
             fontStyle: p.font.style,
             listOfTeams: Yx(g)
           })
         }), jsx("div", {
           className: eO,
-          children: tx("design_systems.shared_fonts.team_fonts_override_warning_2")
+          children: renderI18nText("design_systems.shared_fonts.team_fonts_override_warning_2")
         }), jsx("div", {
           className: eO,
-          children: tx("design_systems.shared_fonts.team_fonts_override_warning_3")
+          children: renderI18nText("design_systems.shared_fonts.team_fonts_override_warning_3")
         })]
       }), jsx(wi, {
         children: jsx(jk, {
           children: jsx($n, {
             onClick: h,
-            children: tx("design_systems.shared_fonts.okay")
+            children: renderI18nText("design_systems.shared_fonts.okay")
           })
         })
       })]
@@ -1311,10 +1311,10 @@ let eV = Ju(function (e) {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: tx("design_systems.shared_fonts.confirm_delete")
+          children: renderI18nText("design_systems.shared_fonts.confirm_delete")
         })
       }), jsx(nB, {
-        children: tx("design_systems.shared_fonts.are_you_sure_you_want_to_delete", {
+        children: renderI18nText("design_systems.shared_fonts.are_you_sure_you_want_to_delete", {
           numFonts: d
         })
       }), jsx(wi, {
@@ -1322,10 +1322,10 @@ let eV = Ju(function (e) {
           children: [jsx($n, {
             variant: "secondary",
             onClick: p,
-            children: tx("design_systems.shared_fonts.cancel")
+            children: renderI18nText("design_systems.shared_fonts.cancel")
           }), jsx($n, {
             onClick: c,
-            children: tx("design_systems.shared_fonts.confirm")
+            children: renderI18nText("design_systems.shared_fonts.confirm")
           })]
         })
       })]
@@ -1352,7 +1352,7 @@ let eG = Ju(function (e) {
   let E = useDispatch();
   let x = useCallback(() => {
     (A ? I.collisions : [I.collisions[0]]).forEach(() => {
-      sx("shared_fonts_skip_collision");
+      trackEventAnalytics("shared_fonts_skip_collision");
       E(_$$X.dismissFontCollision());
     });
     onCollisionResolved();
@@ -1368,7 +1368,7 @@ let eG = Ju(function (e) {
         resourceId,
         overwrite: !0
       }));
-      sx("shared_fonts_skip_collision");
+      trackEventAnalytics("shared_fonts_skip_collision");
       E(_$$X.dismissFontCollision());
     });
     onCollisionResolved();
@@ -1380,24 +1380,24 @@ let eG = Ju(function (e) {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: tx("design_systems.shared_fonts.you_already_have_a_font_with_this_name")
+          children: renderI18nText("design_systems.shared_fonts.you_already_have_a_font_with_this_name")
         })
       }), jsxs(nB, {
         children: [jsxs(Hj, {
           className: "shared_fonts--existingRow--DA9eV shared_fonts--collisionRow--pNU7g shared_fonts--row--qJMqt multi_select_list--row--nfio-",
           children: [jsx("div", {
             className: eL,
-            children: existing.version ? tx("design_systems.shared_fonts.family_info_with_version", {
+            children: existing.version ? renderI18nText("design_systems.shared_fonts.family_info_with_version", {
               fontFamily: existing.family,
               fontStyle: existing.style,
               fontVersion: existing.version
-            }) : tx("design_systems.shared_fonts.family_info_without_version", {
+            }) : renderI18nText("design_systems.shared_fonts.family_info_without_version", {
               fontFamily: existing.family,
               fontStyle: existing.style
             })
           }), jsx("div", {
             className: eF,
-            children: existing.updatedAt && tx("design_systems.shared_fonts.updated_at_date", {
+            children: existing.updatedAt && renderI18nText("design_systems.shared_fonts.updated_at_date", {
               updatedAt: new Date(existing.updatedAt)
             })
           })]
@@ -1405,17 +1405,17 @@ let eG = Ju(function (e) {
           className: "shared_fonts--collisionRow--pNU7g shared_fonts--row--qJMqt multi_select_list--row--nfio-",
           children: [jsx("div", {
             className: eL,
-            children: collision.uploaded.version ? tx("design_systems.shared_fonts.family_info_with_version", {
+            children: collision.uploaded.version ? renderI18nText("design_systems.shared_fonts.family_info_with_version", {
               fontFamily: existing.family,
               fontStyle: existing.style,
               fontVersion: ot(collision.uploaded.version)
-            }) : tx("design_systems.shared_fonts.family_info_without_version", {
+            }) : renderI18nText("design_systems.shared_fonts.family_info_without_version", {
               fontFamily: existing.family,
               fontStyle: existing.style
             })
           }), jsx("div", {
             className: eF,
-            children: tx("design_systems.shared_fonts.just_now")
+            children: renderI18nText("design_systems.shared_fonts.just_now")
           })]
         }), I.collisions.length > 1 && jsx("div", {
           className: "shared_fonts--applyAll--44Pm2",
@@ -1423,7 +1423,7 @@ let eG = Ju(function (e) {
             className: eD,
             children: jsx(_$$S, {
               label: jsx(_$$J, {
-                children: tx("design_systems.shared_fonts.apply_to_all_remaining_uploads", {
+                children: renderI18nText("design_systems.shared_fonts.apply_to_all_remaining_uploads", {
                   numRemainingUploads: I.collisions.length
                 })
               }),
@@ -1437,10 +1437,10 @@ let eG = Ju(function (e) {
           children: [jsx($n, {
             variant: "secondary",
             onClick: x,
-            children: tx("design_systems.shared_fonts.don_t_replace")
+            children: renderI18nText("design_systems.shared_fonts.don_t_replace")
           }), jsx($n, {
             onClick: S,
-            children: tx("design_systems.shared_fonts.replace")
+            children: renderI18nText("design_systems.shared_fonts.replace")
           })]
         })
       })]

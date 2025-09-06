@@ -1,9 +1,9 @@
 import { useCallback, useEffect } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { fp } from "../figma_app/27355";
+import { useAtomValueAndSetter } from "../figma_app/27355";
 import { getLocalStorage, useStorageEventSync } from "../905/657224";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { D } from "../905/417423";
 import { h as _$$h } from "../905/706725";
 import { tS } from "../figma_app/516028";
@@ -85,11 +85,11 @@ async function f(e, t, i) {
     i(s);
   } catch (e) {
     i([]);
-    $D(_$$e.ML_PLATFORM, Error("Recent fragments error: " + e.message));
+    reportError(_$$e.ML_PLATFORM, Error("Recent fragments error: " + e.message));
   }
 }
 export function $$_1(e = !1) {
-  let [t, i] = fp(_$$h.recentFragmentsAtom);
+  let [t, i] = useAtomValueAndSetter(_$$h.recentFragmentsAtom);
   let r = TA();
   let a = tS();
   let l = useCallback(() => {

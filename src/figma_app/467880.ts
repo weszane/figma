@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef, useEffect } from "react";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { e3 } from "../figma_app/191804";
 import { j } from "../figma_app/469468";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -74,14 +74,14 @@ function y() {
 }
 export function $$b1(e) {
   let t = j();
-  let r = XC(md(a8));
+  let r = XC(useAtomWithSubscription(a8));
   let i = !_$$f("cursor_bot_v2_has_greeted_with_wave") && !e.manualControl;
-  let s = md(jr);
-  let l = md(Sf);
-  let m = md(nG);
-  let E = md(Ds);
-  let y = md(iB);
-  let b = md(H7) === zu.RIGHT;
+  let s = useAtomWithSubscription(jr);
+  let l = useAtomWithSubscription(Sf);
+  let m = useAtomWithSubscription(nG);
+  let E = useAtomWithSubscription(Ds);
+  let y = useAtomWithSubscription(iB);
+  let b = useAtomWithSubscription(H7) === zu.RIGHT;
   let I = {
     display: "block",
     willChange: "transform",

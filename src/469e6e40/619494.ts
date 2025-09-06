@@ -7,7 +7,7 @@ import { k } from "../905/443820";
 import { Dk } from "../figma_app/623293";
 import { getSupportEmail } from "../figma_app/169182";
 import { T } from "../figma_app/257703";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { F } from "../905/302958";
 import { mW } from "../469e6e40/182832";
 import { to, Lo } from "../905/156213";
@@ -33,7 +33,7 @@ function j(e) {
     Dk(e).then(() => {
       t(F.enqueue({
         type: a,
-        message: _$$t("org_settings.sso.copied")
+        message: getI18nString("org_settings.sso.copied")
       }));
     });
   }, [t]);
@@ -41,7 +41,7 @@ function j(e) {
     let t = e.orgDomains.map(e => e.domain);
     return jsx("p", {
       className: wz,
-      children: tx("org_settings.sso.domain_requirement", {
+      children: renderI18nText("org_settings.sso.domain_requirement", {
         domains: jsx(T, {
           formatType: "disjunction",
           children: t.map(e => jsx("span", {
@@ -51,7 +51,7 @@ function j(e) {
         }),
         contactSupport: jsx(N, {
           href: `mailto:${getSupportEmail()}`,
-          children: tx("org_settings.sso.contact_support")
+          children: renderI18nText("org_settings.sso.contact_support")
         })
       })
     });
@@ -65,18 +65,18 @@ function j(e) {
       children: jsx($n, {
         variant: "link",
         onClick: () => o(t.id, "saml_tenant_id_copied_to_clipboard"),
-        children: tx("org_settings.sso.copy")
+        children: renderI18nText("org_settings.sso.copy")
       })
     });
     let s = [{
-      rowName: _$$t("org_settings.sso.tenant_id"),
+      rowName: getI18nString("org_settings.sso.tenant_id"),
       value: t.id,
       action: a
     }, {
-      rowName: _$$t("org_settings.sso.sp_entity_id"),
+      rowName: getI18nString("org_settings.sso.sp_entity_id"),
       value: t.sp_entity_id
     }, {
-      rowName: _$$t("org_settings.sso.sp_acs_url"),
+      rowName: getI18nString("org_settings.sso.sp_acs_url"),
       value: t.sp_acs_target_url
     }];
     return jsx("table", {
@@ -103,27 +103,27 @@ function j(e) {
   }, [j, a, e.org]);
   let w = useCallback(() => {
     let t = {
-      okta: _$$t("org_settings.sso.okta"),
-      azure: _$$t("org_settings.sso.azure"),
-      onelogin: _$$t("org_settings.sso.one_login"),
-      other: _$$t("org_settings.sso.other")
+      okta: getI18nString("org_settings.sso.okta"),
+      azure: getI18nString("org_settings.sso.azure"),
+      onelogin: getI18nString("org_settings.sso.one_login"),
+      other: getI18nString("org_settings.sso.other")
     };
-    let a = _$$t("org_settings.sso.not_configured");
+    let a = getI18nString("org_settings.sso.not_configured");
     let s = e.orgSamlConfig.idp_name;
     let i = [{
-      rowName: _$$t("org_settings.sso.idp"),
+      rowName: getI18nString("org_settings.sso.idp"),
       value: s && t[s] || s
     }, {
-      rowName: _$$t("org_settings.sso.idp_entity_id"),
+      rowName: getI18nString("org_settings.sso.idp_entity_id"),
       value: e.orgSamlConfig.idp_entity_id
     }, {
-      rowName: _$$t("org_settings.sso.idp_sso_url"),
+      rowName: getI18nString("org_settings.sso.idp_sso_url"),
       value: e.orgSamlConfig.idp_sso_target_url
     }];
     return jsxs("div", {
       children: [jsx("p", {
         className: FK,
-        children: tx("org_settings.sso.your_configuration_details")
+        children: renderI18nText("org_settings.sso.your_configuration_details")
       }), jsx("table", {
         className: tp,
         children: jsx("tbody", {
@@ -141,11 +141,11 @@ function j(e) {
   return jsxs(Fragment, {
     children: [jsx("p", {
       className: wz,
-      children: tx("org_settings.sso.saml_sso_description", {
+      children: renderI18nText("org_settings.sso.saml_sso_description", {
         helpArticle: jsx(N, {
           href: "https://help.figma.com/hc/articles/360040532333",
           newTab: !0,
-          children: tx("org_settings.sso.help_article")
+          children: renderI18nText("org_settings.sso.help_article")
         })
       })
     }), jsxs("div", {
@@ -161,7 +161,7 @@ export let $$y0 = Ju(function (e) {
   let d = !s || 0 == r.length;
   let c = () => t(Lo());
   return jsx(OJ, {
-    title: _$$t("org_settings.sso.saml_sso"),
+    title: getI18nString("org_settings.sso.saml_sso"),
     onClose: c,
     maxWidth: 536,
     minWidth: 536,
@@ -189,10 +189,10 @@ export let $$y0 = Ju(function (e) {
                 }
               }));
             },
-            children: tx("org_settings.sso.edit_configuration")
+            children: renderI18nText("org_settings.sso.edit_configuration")
           }), jsx($n, {
             onClick: c,
-            children: tx("org_settings.sso.done")
+            children: renderI18nText("org_settings.sso.done")
           })]
         })]
       })]

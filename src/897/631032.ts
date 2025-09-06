@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useRef, useState, useLayoutEffect, useEffect, useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
 import { rf, Pt } from "../figma_app/806412";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { n as _$$n } from "../897/929006";
 import { cJ } from "../figma_app/976749";
 import { _P } from "../figma_app/2590";
@@ -663,7 +663,7 @@ export let $$Y0 = memo(function (e) {
     let r = jsx($j, {
       bigNudgeAmount: 10,
       className: N,
-      "data-tooltip": _$$t("proto.easing_editor.spring_stiffness"),
+      "data-tooltip": getI18nString("proto.easing_editor.spring_stiffness"),
       "data-tooltip-type": Ib.TEXT,
       dispatch: t,
       id: "easing-editor-spring-stiffness-input",
@@ -680,7 +680,7 @@ export let $$Y0 = memo(function (e) {
       value: n[hD.STIFFNESS]
     });
     return jsx(_$$A, {
-      label: _$$t("proto.easing_editor.spring_stiffness"),
+      label: getI18nString("proto.easing_editor.spring_stiffness"),
       input: r
     });
   };
@@ -688,7 +688,7 @@ export let $$Y0 = memo(function (e) {
     let r = jsx($j, {
       bigNudgeAmount: 10,
       className: N,
-      "data-tooltip": _$$t("proto.easing_editor.spring_damping"),
+      "data-tooltip": getI18nString("proto.easing_editor.spring_damping"),
       "data-tooltip-type": Ib.TEXT,
       dispatch: t,
       id: "easing-editor-spring-damping-input",
@@ -705,7 +705,7 @@ export let $$Y0 = memo(function (e) {
       value: n[hD.DAMPING]
     });
     return jsx(_$$A, {
-      label: _$$t("proto.easing_editor.spring_damping"),
+      label: getI18nString("proto.easing_editor.spring_damping"),
       input: r
     });
   };
@@ -713,7 +713,7 @@ export let $$Y0 = memo(function (e) {
     let r = jsx($j, {
       bigNudgeAmount: 10,
       className: N,
-      "data-tooltip": _$$t("proto.easing_editor.spring_mass"),
+      "data-tooltip": getI18nString("proto.easing_editor.spring_mass"),
       "data-tooltip-type": Ib.TEXT,
       dispatch: t,
       id: "easing-editor-spring-mass-input",
@@ -730,7 +730,7 @@ export let $$Y0 = memo(function (e) {
       value: n[hD.MASS]
     });
     return jsx(_$$A, {
-      label: _$$t("proto.easing_editor.spring_mass"),
+      label: getI18nString("proto.easing_editor.spring_mass"),
       input: r
     });
   };
@@ -743,7 +743,7 @@ export let $$Y0 = memo(function (e) {
       recordingKey: Pt(e, "cubicBezierFunctionInput")
     });
     return jsx(_$$A, {
-      label: _$$t("proto.easing_behavior.bezier"),
+      label: getI18nString("proto.easing_behavior.bezier"),
       input: n
     });
   };

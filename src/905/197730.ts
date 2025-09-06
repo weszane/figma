@@ -1,4 +1,4 @@
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { pS, hl, fN, Bt, MQ, Ah, Pg, kE, hW, rK } from "../905/588985";
 import { Gs, VZ, TH, Gw, rA, Bt as _$$Bt, Ib, o1 } from "../905/481915";
 import { FW } from "../figma_app/155287";
@@ -64,7 +64,7 @@ function g(e) {
   let t = {
     name: h(e),
     version: "1.0.0",
-    description: _$$t("community.plugin_development.your_figma_plugin"),
+    description: getI18nString("community.plugin_development.your_figma_plugin"),
     main: "code.js",
     scripts: wL({
       isWidget: !1,

@@ -2,14 +2,14 @@ import { b5, Fo, Uz, wQ } from '../905/63728';
 import { eb, IL, No, pP, xC } from '../905/392533';
 import { debugState } from '../905/407919';
 import { y as _$$y } from '../905/409121';
-import { sx } from '../905/449184';
+import { trackEventAnalytics } from '../905/449184';
 import { decodeBase64, encodeBase64 } from '../905/561685';
 import { getFeatureFlags } from '../905/601108';
-import { xi } from '../905/714362';
+import { logWarning } from '../905/714362';
 import { F2 } from '../905/826900';
 import { EM } from '../905/955878';
-import { zl } from '../figma_app/27355';
-import { nT } from '../figma_app/53721';
+import { atomStoreManager } from '../figma_app/27355';
+import { FEditorType } from '../figma_app/53721';
 import { s0 } from '../figma_app/115923';
 import { hH, Q_, qG } from '../figma_app/119420';
 import { H as _$$H } from '../figma_app/358450';
@@ -21,9 +21,9 @@ import { gP } from '../figma_app/594947';
 import { I2 } from '../figma_app/603466';
 import { wo } from '../figma_app/753501';
 import { aTn, Bx4, FDn, glU, gmH, Nfd, NLJ, sdu, YVF, zyC } from '../figma_app/763686';
-import { rr } from '../figma_app/778880';
+import { isMobileUA } from '../figma_app/778880';
 import { ty } from '../figma_app/844818';
-import { eD } from '../figma_app/876459';
+import { desktopAPIInstance } from '../figma_app/876459';
 import { BI, nB } from '../figma_app/896988';
 import { hX } from '../figma_app/930338';
 import { Wh, Yx } from '../figma_app/985200';
@@ -518,7 +518,7 @@ class W {
         this.cppAPI.keyboardEvent(Bx4.KEY_PRESS, t, e.which, this.modifierKeys(e), e.repeat, e.code, ed(), v7()) && (this.lastKeydownEventAccepted = !0, e.preventDefault());
       }
     }));
-    window.PointerEvent || sx('No PointerEvent available');
+    window.PointerEvent || trackEventAnalytics('No PointerEvent available');
     let i = 0;
     let n = 0;
     let s = 0;
@@ -575,7 +575,7 @@ class W {
     } else if (_$$y.isIpad()) {
       this.setupLowLevelPointerEvents();
     } else {
-      let t = window.PointerEvent && getFeatureFlags().ce_il_pressure_sensitivity && !rr;
+      let t = window.PointerEvent && getFeatureFlags().ce_il_pressure_sensitivity && !isMobileUA;
       let i = new L();
       let n = () => {
         let e = window.FigmaMobile;
@@ -968,7 +968,7 @@ class W {
     };
   }
   reportTouchStart() {
-    this.hasReportedTouchStart || (this.hasReportedTouchStart = !0, sx('Editor Canvas Touch'));
+    this.hasReportedTouchStart || (this.hasReportedTouchStart = !0, trackEventAnalytics('Editor Canvas Touch'));
   }
   focusView(e, t) {
     this.lastViewHandleWithFocus = e;
@@ -1161,7 +1161,7 @@ class W {
     }
     if (e && (e.getAttribute('data-fullscreen-intercept') || e.getAttribute('data-fullscreen-intercept-dangerously-include-tab'))) {
       if (this.lastViewHandleWithFocus) return this.lastViewHandleWithFocus;
-      xi('viewHandleFromElement', 'No cached view handle on intercept element, passing null.');
+      logWarning('viewHandleFromElement', 'No cached view handle on intercept element, passing null.');
     }
     return null;
   }
@@ -1234,7 +1234,7 @@ class W {
     };
     function t() {
       let e = debugState.getState().selectedView;
-      return e.view === 'fullscreen' && e.editorType === nT.Sites && zl.get(s0) === Nfd.CODE;
+      return e.view === 'fullscreen' && e.editorType === FEditorType.Sites && atomStoreManager.get(s0) === Nfd.CODE;
     }
     document.body.addEventListener('copy', G(i => {
       t() || e(i, zyC.COPY);
@@ -1246,12 +1246,12 @@ class W {
       if (!t()) {
         if (YE()) {
           if (!(tj(i) || gk(i))) return;
-          if (zl.get(qG)) {
+          if (atomStoreManager.get(qG)) {
             hH(FDn.MAXIMUM_ATTACHMENTS_EXCEEDED);
             return;
           }
           {
-            zl.set(Q_);
+            atomStoreManager.set(Q_);
             let e = gk(i) && i.clipboardData?.getData('text/html');
             getFeatureFlags().bake_large_paste_warning && e && e.length > gP('make_large_paste_threshold').get('sizeBytes', 25e4) && hH(FDn.INSERTED_NODES_TOO_LARGE);
           }
@@ -1331,7 +1331,7 @@ class W {
           r || this.importEntries(e, t);
         } else if (e.dataTransfer?.files) {
           if (!Y5.fileArrayToString) {
-            xi('FileDrop', 'Unable to import files, fileArrayToString is not defined');
+            logWarning('FileDrop', 'Unable to import files, fileArrayToString is not defined');
             return;
           }
           this.cppAPI.dropEvent(this.viewHandleFromElement(e.target), e.pageX, e.pageY, this.modifierKeys(e), Y5.fileArrayToString(e.dataTransfer.files));
@@ -1346,7 +1346,7 @@ class W {
       r.file(r => {
         if (i.push(r), i.length === t.length) {
           if (!Y5.fileArrayToString) {
-            xi('FileDrop', 'Unable to import file entries, fileArrayToString is not defined');
+            logWarning('FileDrop', 'Unable to import file entries, fileArrayToString is not defined');
             return;
           }
           n.cppAPI.dropEvent(n.viewHandleFromElement(e.target), e.pageX, e.pageY, n.modifierKeys(e), Y5.fileArrayToString(i));
@@ -1399,7 +1399,7 @@ function ee(e) {
 }
 function et(e) {
   let t = _$$y.isMac() ? e.metaKey : e.ctrlKey;
-  let i = !(eD && eD.getVersion() > 0);
+  let i = !(desktopAPIInstance && desktopAPIInstance.getVersion() > 0);
   return t && i && e.key === 'o';
 }
 function ei(e) {
@@ -1597,7 +1597,7 @@ export let $$eu0 = new class {
       }
       if (e.length > 0) {
         if (!Y5.fileArrayToString) {
-          xi('Clipboard', 'Unable to read files to clipboard. fileArrayToString is not defined');
+          logWarning('Clipboard', 'Unable to read files to clipboard. fileArrayToString is not defined');
           return null;
         }
         return Y5.fileArrayToString(e);

@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { memo, useState, useEffect, useMemo, useRef } from "react";
 import { useDispatch } from "../vendor/514228";
 import { A as _$$A } from "../vendor/850789";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { zK } from "../figma_app/913823";
 import { cr } from "../905/879323";
 import { ts, zo, gR } from "../figma_app/120210";
@@ -18,7 +18,7 @@ import { Ib, Rz } from "../1291/846441";
 import { C as _$$C } from "../1291/839924";
 import { Ez5, NLJ } from "../figma_app/763686";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Dy } from "../figma_app/925970";
 import { B as _$$B } from "../1291/448960";
 import { b as _$$b2 } from "../figma_app/300024";
@@ -69,7 +69,7 @@ function C({
       children: [jsx(_$$B.SearchBar, {
         searchQuery: t,
         setSearchQuery: l,
-        searchPlaceholder: _$$t("design_systems.assets_panel.search"),
+        searchPlaceholder: getI18nString("design_systems.assets_panel.search"),
         topBarStyle: _$$s.flex.itemsCenter.p8.$,
         shouldHideTabs: !0,
         onFocus: () => m(Dy({
@@ -119,7 +119,7 @@ function P() {
   return jsxs("div", {
     children: [jsx("h2", {
       className: "slides_overflow_inserts--sectionTitle--Gvcmn ellipsis--ellipsis--Tjyfa text--fontPos13--xW8hS text--_fontBase--QdLsd",
-      children: _$$t("slides.inserts_menu.other_tools")
+      children: getI18nString("slides.inserts_menu.other_tools")
     }), jsxs("div", {
       className: "slides_overflow_inserts--buttonContainer--rZ5n4",
       children: [jsx(z, {
@@ -129,7 +129,7 @@ function P() {
           e(KE());
         },
         recordingKey: "table-insert-button",
-        children: _$$t("fullscreen_actions.set-tool-table")
+        children: getI18nString("fullscreen_actions.set-tool-table")
       }), jsx(z, {
         iconPrefix: jsx(_$$I, {}),
         onClick: () => {
@@ -137,7 +137,7 @@ function P() {
           e(KE());
         },
         recordingKey: "codeBlockInsertButton",
-        children: _$$t("fullscreen_actions.set-tool-code-block")
+        children: getI18nString("fullscreen_actions.set-tool-code-block")
       }), jsx(z, {
         iconPrefix: jsx(L, {}),
         onClick: () => {
@@ -145,7 +145,7 @@ function P() {
           e(KE());
         },
         recordingKey: "slide-number-insert-button",
-        children: _$$t("fullscreen_actions.set-tool-slide-number")
+        children: getI18nString("fullscreen_actions.set-tool-slide-number")
       })]
     })]
   });
@@ -186,7 +186,7 @@ export function $$F0() {
     fileVersion,
     loadingState,
     universalInsertModal
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     fileVersion: e.fileVersion,
     loadingState: e.loadingState,
     universalInsertModal: e.universalInsertModal

@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import { b } from "../905/690073";
+import { EventEmitter } from "../905/690073";
 import { getFeatureFlags } from "../905/601108";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { N } from "../905/284094";
 import { hg, bi } from "../figma_app/425489";
-let d = new b("variableEventEmitter");
+let d = new EventEmitter("variableEventEmitter");
 let c = new class {
   constructor() {
     if (this.variableModeToDebugValue = new N({}), this.isInitialized = new N(!1), !getFeatureFlags().prototype_variable_debug_view) return;
@@ -29,7 +29,7 @@ let c = new class {
   }
 }();
 export function $$u1() {
-  let e = md(hg).modalStatus === bi.OPEN;
+  let e = useAtomWithSubscription(hg).modalStatus === bi.OPEN;
   let t = c.isInitialized.use();
   return getFeatureFlags().prototype_variable_debug_view && e && t;
 }

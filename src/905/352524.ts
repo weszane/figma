@@ -9,13 +9,13 @@ import { b as _$$b } from "../905/946806";
 import { v8u, ZRE, EUU, Ez5, glU } from "../figma_app/763686";
 import { Pt, of } from "../figma_app/806412";
 import { n as _$$n } from "../figma_app/339971";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { rg } from "../figma_app/401069";
 import { Ce } from "../905/156213";
 import { J2 } from "../figma_app/84367";
 import { Ju } from "../905/102752";
 import { throwTypeError } from "../figma_app/465776";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { Ho, JI, GU, t_, dB, Kj } from "../905/416496";
 import { J as _$$J } from "../905/270045";
 import { bL as _$$bL, DZ, mc, c$ } from "../905/493196";
@@ -48,11 +48,11 @@ function E(e) {
 function x(e) {
   switch (e) {
     case ZRE.SOLID:
-      return _$$t("whiteboard.figjam_export.solid");
+      return getI18nString("whiteboard.figjam_export.solid");
     case ZRE.TRANSPARENT:
-      return _$$t("whiteboard.figjam_export.transparent");
+      return getI18nString("whiteboard.figjam_export.transparent");
     case ZRE.GRID:
-      return _$$t("whiteboard.figjam_export.grid");
+      return getI18nString("whiteboard.figjam_export.grid");
     default:
       throwTypeError(e);
   }
@@ -60,9 +60,9 @@ function x(e) {
 function S(e) {
   switch (e) {
     case EUU.TABLE:
-      return _$$t("whiteboard.figjam_export.table");
+      return getI18nString("whiteboard.figjam_export.table");
     case EUU.STICKY:
-      return _$$t("whiteboard.figjam_export.sticky");
+      return getI18nString("whiteboard.figjam_export.sticky");
     default:
       throwTypeError(e);
   }
@@ -70,9 +70,9 @@ function S(e) {
 function w(e) {
   switch (e) {
     case "selection":
-      return _$$t("whiteboard.figjam_export.selection_only");
+      return getI18nString("whiteboard.figjam_export.selection_only");
     case "file":
-      return _$$t("whiteboard.figjam_export.entire_file");
+      return getI18nString("whiteboard.figjam_export.entire_file");
     default:
       throwTypeError(e);
   }
@@ -125,7 +125,7 @@ function j(e) {
     children: [jsx(_$$J, {
       htmlFor: l,
       className: D,
-      children: tx("whiteboard.figjam_export.export_area")
+      children: renderI18nText("whiteboard.figjam_export.export_area")
     }), !o && jsx(_$$J, {
       className: L,
       children: w("file")
@@ -159,14 +159,14 @@ function z(e) {
   let o = C(fileType);
   let l = o.length > 1;
   let d = o[0];
-  let c = d ? x(d) : _$$t("whiteboard.figjam_export.no_background");
+  let c = d ? x(d) : getI18nString("whiteboard.figjam_export.no_background");
   let u = useId();
   return jsxs("div", {
     className: O,
     children: [jsx(_$$J, {
       htmlFor: u,
       className: D,
-      children: tx("whiteboard.figjam_export.background")
+      children: renderI18nText("whiteboard.figjam_export.background")
     }), !l && jsx(_$$J, {
       className: L,
       children: c
@@ -237,7 +237,7 @@ function W(e) {
     children: [jsx(_$$J, {
       htmlFor: l,
       className: D,
-      children: tx("whiteboard.figjam_export.content_type")
+      children: renderI18nText("whiteboard.figjam_export.content_type")
     }), jsxs(_$$bL, {
       value: S(contentType),
       onChange: e => {
@@ -272,21 +272,21 @@ function $(e) {
     className: "figjam_export_pickers--row--iT7Hm",
     children: [jsx(_$$J, {
       className: D,
-      children: tx("whiteboard.figjam_export.file_type")
+      children: renderI18nText("whiteboard.figjam_export.file_type")
     }), jsx(_$$b2, {
       legend: jsx(_$$q, {
-        children: tx("whiteboard.figjam_export.file_type")
+        children: renderI18nText("whiteboard.figjam_export.file_type")
       }),
       value: s,
       onChange: e => onChangeFileType(I[e]),
       recordingKey: Pt(recordingKey, "exportFileTypeRadioGroup"),
-      children: (Ay.isIpadNative ? [v8u.PNG, v8u.JPEG, v8u.PDF] : [v8u.PNG, v8u.JPEG, v8u.PDF, v8u.CSV]).map(e => {
+      children: (BrowserInfo.isIpadNative ? [v8u.PNG, v8u.JPEG, v8u.PDF] : [v8u.PNG, v8u.JPEG, v8u.PDF, v8u.CSV]).map(e => {
         let t = E(e);
         let i = disabledFileTypes.includes(e) ? {
           readonly: !0,
           htmlAttributes: {
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t("whiteboard.figjam_export.csv_disabled")
+            "data-tooltip": getI18nString("whiteboard.figjam_export.csv_disabled")
           }
         } : {};
         return jsx(_$$c, {
@@ -322,7 +322,7 @@ function X(e) {
     children: [jsx(_$$J, {
       htmlFor: d,
       className: D,
-      children: tx("fullscreen.properties_panel.export_settings_quality")
+      children: renderI18nText("fullscreen.properties_panel.export_settings_quality")
     }), jsxs(_$$bL, {
       value: SD.format(c),
       onChange: e => {
@@ -367,7 +367,7 @@ let J = memo(function (e) {
   let G = of(Q, "submit", () => {
     V(!0);
     b(_$$n.set({
-      message: _$$t("whiteboard.figjam_export.exporting"),
+      message: getI18nString("whiteboard.figjam_export.exporting"),
       showLoadingSpinner: !0,
       callback: () => {
         Ez5.editorPreferences().exportSelectionSettings.set({
@@ -390,7 +390,7 @@ let J = memo(function (e) {
       onSubmit: G,
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: tx("whiteboard.figjam_export.export")
+          children: renderI18nText("whiteboard.figjam_export.export")
         })
       }), jsxs(nB, {
         children: [jsx($, {
@@ -438,13 +438,13 @@ let J = memo(function (e) {
           }
         }(w, M, pickerInfo) && jsxs("div", {
           className: "figjam_export_pickers--exportWarning--KzT0q",
-          children: [jsx(_$$b, {}), tx("whiteboard.figjam_export.exporting_may_take_a_minute_or_two")]
+          children: [jsx(_$$b, {}), renderI18nText("whiteboard.figjam_export.exporting_may_take_a_minute_or_two")]
         }), jsx(jk, {
           children: jsx($n, {
             variant: "primary",
             type: "submit",
             disabled: B,
-            children: tx("whiteboard.figjam_export.export")
+            children: renderI18nText("whiteboard.figjam_export.export")
           })
         })]
       })]

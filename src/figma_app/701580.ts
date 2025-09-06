@@ -2,13 +2,13 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
-import { Im } from "../figma_app/493477";
+import { isEmptyObject } from "../figma_app/493477";
 import { Y9, Wk } from "../figma_app/272243";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { J as _$$J } from "../905/614223";
 import _ from "classnames";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { j6, fu } from "../figma_app/831799";
 import { _ as _$$_ } from "../905/793009";
 import { Gi, tS, wv } from "../figma_app/622574";
@@ -92,12 +92,12 @@ function B({
   return jsxs("div", {
     className: pz,
     children: [jsx(G, {
-      text: _$$t("browse_templates_modal.all_templates"),
+      text: getI18nString("browse_templates_modal.all_templates"),
       onClick: () => t(void 0),
       isSelected: !e
     }), p && jsx(Fragment, {
       children: jsx(G, {
-        text: _$$t("browse_templates_modal.header_name_templates", {
+        text: getI18nString("browse_templates_modal.header_name_templates", {
           entityName: p.name || ""
         }),
         onClick: () => f(j),
@@ -127,7 +127,7 @@ function B({
             name: "Templates Modal Browse More"
           }, "cta_clicked");
         },
-        children: tx("browse_templates_modal_sidebar.see_more_in_community")
+        children: renderI18nText("browse_templates_modal_sidebar.see_more_in_community")
       })]
     })]
   });
@@ -210,7 +210,7 @@ function W(e) {
     })]
   }) : teamTemplates?.length ? jsx(K, {
     category: j,
-    categoryTitle: _$$t("browse_templates_modal.header_name_templates", {
+    categoryTitle: getI18nString("browse_templates_modal.header_name_templates", {
       entityName: n.name
     }),
     templates: teamTemplates,
@@ -232,7 +232,7 @@ function K(e) {
       }), t && jsx($n, {
         variant: "link",
         onClick: () => t(e.category),
-        children: tx("browse_templates_modal.see_all")
+        children: renderI18nText("browse_templates_modal.see_all")
       })]
     }), jsx(Y, {
       templates: e.templates,
@@ -375,12 +375,12 @@ function en(e) {
             children: jsx(_$$N, {
               href: `/community/file/${e.templateId}`,
               newTab: !0,
-              children: tx("browse_templates_modal.see_more_details_in_community")
+              children: renderI18nText("browse_templates_modal.see_more_details_in_community")
             })
           })]
         }), jsx("div", {
           className: "browse_templates_modal_resource_preview--moreTemplatesHeader--Kz1a1 text--fontPos13--xW8hS text--_fontBase--QdLsd",
-          children: tx("browse_templates_modal.more_templates_like_this")
+          children: renderI18nText("browse_templates_modal.more_templates_like_this")
         }), jsx("div", {
           className: "browse_templates_modal_resource_preview--moreTemplatesGrid--LqGIO",
           children: d.slice(0, 6).map(t => jsx(Pr, {
@@ -464,14 +464,14 @@ function eo({
       href: g,
       newTab: !0,
       variant: "secondary",
-      children: tx("browse_templates_modal.browse_more_in_community")
+      children: renderI18nText("browse_templates_modal.browse_more_in_community")
     })
   });
 }
 function eu(e) {
   return jsx(Y9, {
     children: e.previewTemplateId ? jsx(_$$K, {
-      "aria-label": _$$t("general.back"),
+      "aria-label": getI18nString("general.back"),
       onClick: e.goBack,
       children: jsx(_$$C, {})
     }) : jsx(IW, {
@@ -479,7 +479,7 @@ function eu(e) {
       clearSearch: () => e.setSearchQuery(""),
       onChange: e.setSearchQuery,
       className: ON,
-      placeholder: _$$t("browse_templates_modal.search_templates"),
+      placeholder: getI18nString("browse_templates_modal.search_templates"),
       focusOnMount: !0
     })
   });
@@ -518,14 +518,14 @@ function em(e) {
   };
   let P = Gi();
   let D = {};
-  _categoryIds.reduce((e, t) => (e[t] = _$$t("browse_templates_modal_sidebar.get_started"), e), D);
+  _categoryIds.reduce((e, t) => (e[t] = getI18nString("browse_templates_modal_sidebar.get_started"), e), D);
   let k = {
     ...categoryTitles,
     ...D
   };
   let [M, U] = useState();
   let [G, V] = useState();
-  let H = Im(L);
+  let H = isEmptyObject(L);
   let W = M && Object.values(L).find(e => e.includes(M)) || [];
   let {
     insertTemplate,

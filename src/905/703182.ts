@@ -1,4 +1,4 @@
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 export let $$r0 = new class {
   constructor() {
     this._loadID = null;
@@ -13,7 +13,7 @@ export let $$r0 = new class {
     this.reportAbandon = () => {
       if (this.reportedAbandon) return;
       let e = Math.round(performance.now()) - this.versionHistoryLoadStart;
-      sx("Version History Abandon", {
+      trackEventAnalytics("Version History Abandon", {
         loadID: this.loadID(),
         fileKey: this.fileKey,
         pageId: this.pageId,
@@ -58,7 +58,7 @@ export let $$r0 = new class {
   report(e, t, i) {
     this.reportedLoad || e !== this.fileKey || (this.reportedLoad = !0, setTimeout(() => {
       this.uninstallListeners();
-      sx("Version History Load Time", {
+      trackEventAnalytics("Version History Load Time", {
         loadID: this.loadID(),
         fileKey: e,
         productType: t,

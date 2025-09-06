@@ -1,7 +1,7 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { lazy, forwardRef, Suspense, Component } from "react";
-import { d4 } from "../905/607410";
-import { sx } from "../905/449184";
+import { addErrorStack } from "../905/607410";
+import { trackEventAnalytics } from "../905/449184";
 import { Z } from "../905/815905";
 let $$l0 = {
   NONE: Symbol("NONE")
@@ -29,7 +29,7 @@ export function $$c1(e, t) {
         }
         for (; l >= 0;) try {
           let t = await n();
-          a || (a = !0, sx("react_lazy_load", {
+          a || (a = !0, trackEventAnalytics("react_lazy_load", {
             duration: performance.now() - o,
             component: e
           }));
@@ -39,7 +39,7 @@ export function $$c1(e, t) {
           --l >= 0 && (await new Promise(e => setTimeout(e, d[l])));
         }
         let c = t.mapErrorToResponseCode(r);
-        sx("react_lazy_load_failed", {
+        trackEventAnalytics("react_lazy_load_failed", {
           lazyComponentName: e,
           error: r.message,
           stack: r.stack,
@@ -94,7 +94,7 @@ export function $$u2(e, t, i) {
   let A = !1;
   let y = i?.componentName;
   let b = () => {
-    _ || (_ = !0, sx("Dynamic Component Loaded", {
+    _ || (_ = !0, trackEventAnalytics("Dynamic Component Loaded", {
       duration: g ? performance.now() - g : void 0,
       preloadDuration: p ? performance.now() - p : void 0,
       component: y || "unknown",
@@ -116,7 +116,7 @@ ${Error().stack}`;
         };
       }
       for (g = performance.now(); r >= 0;) try {
-        d4(v);
+        addErrorStack(v);
         let e = await i();
         b();
         return e;
@@ -125,7 +125,7 @@ ${Error().stack}`;
         r >= 0 && (await new Promise(e => setTimeout(e, o[r])));
       }
       let l = e.mapErrorToResponseCode(n);
-      sx("react_lazy_load_failed", {
+      trackEventAnalytics("react_lazy_load_failed", {
         lazyComponentName: y || "unknown",
         error: n.message,
         stack: n.stack,

@@ -7,7 +7,7 @@ import { ks, tM, vd } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
 import { s as _$$s2 } from "../905/573154";
 import { R } from "../c5e2cae0/276031";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { J } from "../905/231762";
 import { Ce } from "../905/156213";
 import { yy } from "../figma_app/482142";
@@ -56,7 +56,7 @@ let j = memo(function (e) {
           updatedLegalName: S
         }));
       } catch (s) {
-        let a = e.canSeeBillingAddressExp ? _$$t("update_company_details_modal.update_display_name.error") : _$$t("update_company_details_modal.update_team_name.error");
+        let a = e.canSeeBillingAddressExp ? getI18nString("update_company_details_modal.update_display_name.error") : getI18nString("update_company_details_modal.update_team_name.error");
         t(_$$s2.error(J(s) || a));
         return s;
       } else t(yy({
@@ -82,8 +82,8 @@ let j = memo(function (e) {
           className: _$$s.colorTextSecondary.$,
           children: [jsx("strong", {
             className: _$$s.block.colorText.$,
-            children: tx("pro_cart.review.edit_details.team_name_label")
-          }), tx("pro_cart.review.edit_details.team_name_description")]
+            children: renderI18nText("pro_cart.review.edit_details.team_name_label")
+          }), renderI18nText("pro_cart.review.edit_details.team_name_description")]
         }), jsx(ks, {
           value: f,
           id: "teamName",
@@ -100,8 +100,8 @@ let j = memo(function (e) {
           className: _$$s.colorTextSecondary.$,
           children: [jsx("strong", {
             className: _$$s.block.colorText.$,
-            children: tx("pro_cart.review.edit_details.company_name_label")
-          }), tx("pro_cart.review.edit_details.company_name_description")]
+            children: renderI18nText("pro_cart.review.edit_details.company_name_label")
+          }), renderI18nText("pro_cart.review.edit_details.company_name_description")]
         }), jsx(ks, {
           value: S,
           id: "legalName",
@@ -116,12 +116,12 @@ let j = memo(function (e) {
         children: [jsx(tM, {
           onClick: C,
           disabled: isLoading,
-          children: tx("pro_cart.review.edit_details.cancel")
+          children: renderI18nText("pro_cart.review.edit_details.cancel")
         }), jsx(vd, {
           className: pL,
           disabled: isLoading,
           type: "submit",
-          children: tx("pro_cart.review.edit_details.save")
+          children: renderI18nText("pro_cart.review.edit_details.save")
         })]
       })]
     })

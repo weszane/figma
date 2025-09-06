@@ -12,7 +12,7 @@ import { kt } from "../figma_app/858013";
 import { s as _$$s } from "../cssbuilder/589278";
 import { s as _$$s2 } from "../905/573154";
 import { $z } from "../figma_app/617427";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { Y as _$$Y } from "../905/830372";
 import { E as _$$E } from "../905/984674";
 import { c as _$$c } from "../905/370443";
@@ -126,7 +126,7 @@ function $$q(e) {
         fontWeight: "regular",
         color: "" !== autocomplete.errorMessage ? "danger" : "default",
         fontSize: 11,
-        children: tx("new_editor_notifications_modal.error_message_for_empty_admins")
+        children: renderI18nText("new_editor_notifications_modal.error_message_for_empty_admins")
       })
     }) : null]
   }) : jsx(Wi, {
@@ -137,18 +137,18 @@ function $(e) {
   switch (e) {
     case X4.DAILY:
       return {
-        label: tx("new_editor_notifications_modal.daily"),
-        description: tx("new_editor_notifications_modal.daily_description")
+        label: renderI18nText("new_editor_notifications_modal.daily"),
+        description: renderI18nText("new_editor_notifications_modal.daily_description")
       };
     case X4.WEEKLY:
       return {
-        label: tx("new_editor_notifications_modal.weekly"),
-        description: tx("new_editor_notifications_modal.weekly_description")
+        label: renderI18nText("new_editor_notifications_modal.weekly"),
+        description: renderI18nText("new_editor_notifications_modal.weekly_description")
       };
     case X4.MONTHLY:
       return {
-        label: tx("new_editor_notifications_modal.monthly"),
-        description: tx("new_editor_notifications_modal.monthly_description")
+        label: renderI18nText("new_editor_notifications_modal.monthly"),
+        description: renderI18nText("new_editor_notifications_modal.monthly_description")
       };
   }
 }
@@ -231,7 +231,7 @@ let $$z0 = Ju(function ({
       children: jsx(_$$E, {
         fontWeight: "medium",
         fontSize: 11,
-        children: tx("new_editor_notifications_modal.how_often_would_you_like_receive_emails")
+        children: renderI18nText("new_editor_notifications_modal.how_often_would_you_like_receive_emails")
       })
     }), jsx(_$$Y, {
       direction: "vertical",
@@ -259,14 +259,14 @@ let $$z0 = Ju(function ({
         children: [jsx(_$$E, {
           fontWeight: "medium",
           fontSize: 11,
-          children: tx("new_editor_notifications_modal.who_should_get_them")
+          children: renderI18nText("new_editor_notifications_modal.who_should_get_them")
         }), jsx(hK, {
           height: 1
         }), jsx(_$$E, {
           fontWeight: "regular",
           color: "secondary",
           fontSize: 11,
-          children: tx("new_editor_notifications_modal.we_recommend_only_adding")
+          children: renderI18nText("new_editor_notifications_modal.we_recommend_only_adding")
         })]
       }), jsx(_$$z, {
         value: P,
@@ -303,9 +303,9 @@ let $$z0 = Ju(function ({
                   children: function (e) {
                     switch (e) {
                       case UI.ALL_ADMINS:
-                        return tx("new_editor_notifications_modal.all_admins");
+                        return renderI18nText("new_editor_notifications_modal.all_admins");
                       case UI.SPECIFIC_ADMINS:
-                        return tx("new_editor_notifications_modal.specific_admins");
+                        return renderI18nText("new_editor_notifications_modal.specific_admins");
                     }
                   }(a)
                 }), a === UI.SPECIFIC_ADMINS && P === UI.SPECIFIC_ADMINS && jsx($$q, {
@@ -355,7 +355,7 @@ let $$z0 = Ju(function ({
               recipients: n
             });
             W(!1);
-            N(_$$s2.flash(_$$t("new_editor_notifications_modal.confirmation_v2")));
+            N(_$$s2.flash(getI18nString("new_editor_notifications_modal.confirmation_v2")));
             a.onClose();
           } catch {
             W(!1);
@@ -364,7 +364,7 @@ let $$z0 = Ju(function ({
         },
         children: [jsx(Y9, {
           children: jsx(hE, {
-            children: _$$t("new_editor_notifications_modal.header")
+            children: getI18nString("new_editor_notifications_modal.header")
           })
         }), jsx(nB, {
           children: jsxs(_$$Y, {
@@ -375,7 +375,7 @@ let $$z0 = Ju(function ({
               bottom: 8
             },
             children: [jsx(_$$E, {
-              children: tx("new_editor_notifications_modal.get_emailed_when_members_upgrade_from_free_to_paid")
+              children: renderI18nText("new_editor_notifications_modal.get_emailed_when_members_upgrade_from_free_to_paid")
             }), J]
           })
         }), jsx(wi, {
@@ -386,14 +386,14 @@ let $$z0 = Ju(function ({
               trackingProperties: {
                 trackingDescriptor: _$$c.CANCEL
               },
-              children: _$$t("general.cancel")
+              children: getI18nString("general.cancel")
             }), jsx($z, {
               type: "submit",
               disabled: V || "loaded" !== T.status || "" !== F.inputValue,
               trackingProperties: {
                 trackingDescriptor: _$$c.SAVE
               },
-              children: _$$t("general.save")
+              children: getI18nString("general.save")
             })]
           })
         })]

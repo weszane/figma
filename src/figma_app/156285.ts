@@ -4,12 +4,12 @@ import { plo, Vzr, rrT, glU } from "../figma_app/763686";
 import { AD, dI, Hr, sH } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { eU, Iz, md, zl, fp, Xr } from "../figma_app/27355";
+import { atom, createRemovableAtomFamily, useAtomWithSubscription, atomStoreManager, useAtomValueAndSetter, Xr } from "../figma_app/27355";
 import c from "../vendor/805353";
 import p from "../vendor/128080";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { debugState } from "../905/407919";
-import { m as _$$m } from "../905/717445";
+import { getFilteredFeatureFlags } from "../905/717445";
 import { buildUploadUrl } from "../figma_app/169182";
 import { GI, Vi } from "../905/125333";
 import { Dc } from "../figma_app/314264";
@@ -22,16 +22,16 @@ import { iM } from "../figma_app/405546";
 var u = c;
 var _ = p;
 let x = "Current";
-let $$N11 = eU([]);
-let C = eU({});
-let w = Iz(e => eU(t => t(C)[e] ?? void 0, (t, r, n) => {
+let $$N11 = atom([]);
+let C = atom({});
+let w = createRemovableAtomFamily(e => atom(t => t(C)[e] ?? void 0, (t, r, n) => {
   r(C, t => ({
     ...t,
     [e]: n
   }));
 }));
-let $$O5 = eU({});
-let R = Iz(e => eU(t => t($$O5)[e] ?? void 0, (t, r, n) => {
+let $$O5 = atom({});
+let R = createRemovableAtomFamily(e => atom(t => t($$O5)[e] ?? void 0, (t, r, n) => {
   r($$O5, t => ({
     ...t,
     [e]: n
@@ -39,7 +39,7 @@ let R = Iz(e => eU(t => t($$O5)[e] ?? void 0, (t, r, n) => {
 }));
 export function $$L8(e) {
   let t = w(e);
-  return md(t);
+  return useAtomWithSubscription(t);
 }
 export let $$P4 = {
   guid: AD,
@@ -68,7 +68,7 @@ let k = e => {
     ...e,
     upSample: 2
   });
-  t && zl.set(w(e.previewName), t);
+  t && atomStoreManager.set(w(e.previewName), t);
 };
 let M = e => {
   if (!Vzr) return;
@@ -82,7 +82,7 @@ let M = e => {
     ...e,
     upSample: 2
   });
-  s && zl.set(R(previewName), {
+  s && atomStoreManager.set(R(previewName), {
     name: previewName,
     imageUrl: s,
     config,
@@ -93,7 +93,7 @@ let M = e => {
 export function $$F1() {
   return wA(e => {
     let t = e.getInternalCanvas();
-    return t && _$$m().ce_il_strokes ? t.childrenNodes.filter(e => "BRUSH" === e.type && (e.brushType !== plo.SCATTER || _$$m().ce_il_scatter)).map(e => {
+    return t && getFilteredFeatureFlags().ce_il_strokes ? t.childrenNodes.filter(e => "BRUSH" === e.type && (e.brushType !== plo.SCATTER || getFilteredFeatureFlags().ce_il_scatter)).map(e => {
       let t = {
         guid: e.guid,
         name: e.name,
@@ -120,14 +120,14 @@ export function $$j3() {
 }
 export function $$U10(e) {
   let t = $$F1();
-  let r = md(e);
+  let r = useAtomWithSubscription(e);
   let n = t.find(e => e.guid && e.guid === dI(r.strokeBrushGuid));
   return n ? n.type : null;
 }
 let B = getFeatureFlags().ce_il_pencil_stroke_presets ? function () {
-  let [e, t] = fp($$O5);
+  let [e, t] = useAtomValueAndSetter($$O5);
   let r = e[x]?.config;
-  let i = md(GI)?.dynamicStrokeSettings;
+  let i = useAtomWithSubscription(GI)?.dynamicStrokeSettings;
   let a = useMemo(() => u()(t, 500, {
     trailing: !0
   }), [t]);
@@ -158,10 +158,10 @@ let B = getFeatureFlags().ce_il_pencil_stroke_presets ? function () {
     });
   }, [i, r, a]);
 } : lQ;
-let $$G6 = Wh(() => eU(null));
+let $$G6 = Wh(() => atom(null));
 export function $$V9() {
-  let [e, t] = fp(Vi);
-  let r = md($$G6);
+  let [e, t] = useAtomValueAndSetter(Vi);
+  let r = useAtomWithSubscription($$G6);
   useEffect(() => {
     r && (void 0 === e.strokeBrushGuid || e.strokeBrushGuid === Hr) && t(e => ({
       ...e,
@@ -177,8 +177,8 @@ export function $$V9() {
 }
 export function $$H2() {
   let e = Fk(e => !!e.getInternalCanvas());
-  let [t, r] = fp($$N11);
-  let [i, c] = fp($$G6);
+  let [t, r] = useAtomValueAndSetter($$N11);
+  let [i, c] = useAtomValueAndSetter($$G6);
   let u = $$F1();
   let p = useMemo(() => u.filter(e => !e.isSoftDeleted && t.includes(e.guid) && e.guid !== AD), [t, u]);
   let _ = Xr(Vi);
@@ -190,7 +190,7 @@ export function $$H2() {
     }
   }, [i, p, c]);
   useEffect(() => {
-    if (!_$$m().ce_il_strokes || !e || p.length) return;
+    if (!getFilteredFeatureFlags().ce_il_strokes || !e || p.length) return;
     let t = [{
       type: plo.STRETCH,
       resourceString: "a3480b63cd4ac2a8976c8a48aaa5b88a88810ce3"
@@ -221,7 +221,7 @@ export function $$H2() {
     let [i] = iM(Vi, "strokeBrushGuid");
     let l = HE(i);
     useEffect(() => {
-      if (!_$$m().ce_il_strokes || !glU) return;
+      if (!getFilteredFeatureFlags().ce_il_strokes || !glU) return;
       let e = glU.generatePreviewNodesForDrawStrokes();
       t.getInternalCanvas() && ["pencils", "brushes"].forEach(r => {
         let n = e[r];
@@ -236,7 +236,7 @@ export function $$H2() {
           }(n);
           if (!o) return;
           let c = a(o);
-          if (zl.get(c)) return;
+          if (atomStoreManager.get(c)) return;
           let u = {
             guid: n.guid,
             previewName: o,
@@ -254,7 +254,7 @@ export function $$H2() {
   })();
 }
 export function $$z7(e, t) {
-  az.trackDefinedEvent("illustration.set_brush", {
+  analyticsEventManager.trackDefinedEvent("illustration.set_brush", {
     brushGuid: e?.guid || "-1:-1",
     brushName: e?.name || "",
     numNodes: t.length,

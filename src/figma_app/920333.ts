@@ -3,9 +3,9 @@ import { useRef, useEffect, useMemo, createContext, useContext, useCallback } fr
 import { useSelector, useDispatch } from "../vendor/514228";
 import { isNotNullish, assertNotNullish } from "../figma_app/95419";
 import { t as _$$t } from "../905/150656";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { parsePxInt } from "../figma_app/783094";
-import { R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { Point } from "../905/736624";
 import { WJ } from "../figma_app/808294";
 import { zK } from "../figma_app/913823";
@@ -51,7 +51,7 @@ export function $$k4() {
     fileVersion,
     loadingState,
     library
-  } = R(e => ({
+  } = selectWithShallowEqual(e => ({
     fileVersion: e.fileVersion,
     sceneGraphSelection: e.mirror.sceneGraphSelection,
     loadingState: e.loadingState,
@@ -67,7 +67,7 @@ export function $$k4() {
   useEffect(() => {
     u && e(zK());
   }, [e, u]);
-  let p = md(qp);
+  let p = useAtomWithSubscription(qp);
   let m = $1({
     library,
     fileDataByLibraryKey: p
@@ -133,7 +133,7 @@ export function $$U6({
   });
   let {
     hubFiles
-  } = R(e => ({
+  } = selectWithShallowEqual(e => ({
     hubFiles: e.hubFiles,
     initialTab: e.universalInsertModal.initialTab
   }));

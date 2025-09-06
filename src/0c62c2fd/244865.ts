@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
 import { h as _$$h } from "../905/207101";
 import { buildUploadUrl } from "../figma_app/169182";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { S } from "../0c62c2fd/596856";
 import { $ } from "../figma_app/61705";
 import { Np } from "../figma_app/297957";
@@ -16,7 +16,7 @@ import { rq } from "../905/425180";
 import { CBZ, qiY, TUm } from "../figma_app/6204";
 import { O } from "../0c62c2fd/621155";
 import { getFeatureFlags } from "../905/601108";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { resourceUtils } from "../905/989992";
 import { A as _$$A } from "../905/920142";
 import { r1 } from "../figma_app/545877";
@@ -29,9 +29,9 @@ export function $$C0({
   let t = function () {
     let e = _$$E();
     let t = getFeatureFlags().marketing_promo_modal_figmake_launch;
-    let r = md(eC(CBZ.lifecycle));
-    let a = md(N);
-    let s = md(eC(qiY.lifecycle));
+    let r = useAtomWithSubscription(eC(CBZ.lifecycle));
+    let a = useAtomWithSubscription(N);
+    let s = useAtomWithSubscription(eC(qiY.lifecycle));
     return resourceUtils.all([e, r, a, s]).transform(([e, r, a, s]) => {
       if (t) {
         if (!r.lifecycleState || 0 === r.lifecycleState.count) return !1;
@@ -73,7 +73,7 @@ export function $$C0({
   }, [A, complete]);
   return jsx(rq, {
     clickOutsideToHide: !0,
-    description: tx("file_browser.make_file_creation_promos.description"),
+    description: renderI18nText("file_browser.make_file_creation_promos.description"),
     disableHighlight: !1,
     forceEditorTheme: "seascape",
     isShowing,
@@ -83,13 +83,13 @@ export function $$C0({
     }),
     onClose: complete,
     primaryCta: {
-      label: tx("file_browser.make_file_creation_promos.cta"),
+      label: renderI18nText("file_browser.make_file_creation_promos.cta"),
       type: "button",
       onClick: R,
       ctaTrackingDescriptor: _$$c.TRY_FIGMA_MAKE
     },
     targetKey: O,
-    title: tx("file_browser.make_file_creation_promos.title"),
+    title: renderI18nText("file_browser.make_file_creation_promos.title"),
     trackingContextName: "Figma Make File Creation Tooltip"
   });
 }

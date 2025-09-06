@@ -1,6 +1,6 @@
 import { useRef, useCallback } from "react";
-import { eU, Xr } from "../figma_app/27355";
-export let $$a0 = eU(null);
+import { atom, Xr } from "../figma_app/27355";
+export let $$a0 = atom(null);
 export function $$s1() {
   let e = Xr($$a0);
   let t = useRef(null);

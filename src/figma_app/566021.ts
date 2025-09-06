@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { glU, iCO, Egt } from "../figma_app/763686";
 import { c1, Pt } from "../figma_app/806412";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { Tg } from "../figma_app/967154";
 import { i$ } from "../figma_app/150804";
 import { useMemo, useState, useRef, useCallback, useId } from "react";
@@ -12,7 +12,7 @@ import { At } from "../905/973142";
 import { c2 } from "../905/382883";
 import { isNotNullish } from "../figma_app/95419";
 import { l7 } from "../905/189185";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { F4 } from "../figma_app/889655";
 import { Lg, od } from "../figma_app/505098";
 import { gl } from "../905/216495";
@@ -93,12 +93,12 @@ function v(e) {
     children: [jsx("div", {
       id: l,
       className: isViewOnly ? "component_description_input--labelViewOnly--b6HSj component_description_input--label--MNLD-" : "component_description_input--label--MNLD-",
-      children: tx("design_systems.component_panel.description")
+      children: renderI18nText("design_systems.component_panel.description")
     }), jsx(_$$u, {
       namespace: isViewOnly ? "component-description-lexical-editor-read-only" : "component-description-lexical-editor",
       description: s,
       isViewOnly,
-      placeholder: a ? _$$t("design_systems.component_panel.description_mixed") : _$$t("design_systems.component_panel.description_placeholder"),
+      placeholder: a ? getI18nString("design_systems.component_panel.description_mixed") : getI18nString("design_systems.component_panel.description_placeholder"),
       onSave: d,
       ariaLabelledBy: l,
       recordingKey: e.recordingKey
@@ -106,7 +106,7 @@ function v(e) {
   });
 }
 function A(e) {
-  return gl(e) ? _$$t("design_systems.component_panel.description_mixed") : e;
+  return gl(e) ? getI18nString("design_systems.component_panel.description_mixed") : e;
 }
 let O = /^\w+:/;
 function R(e) {
@@ -153,7 +153,7 @@ function R(e) {
     children: [jsx("div", {
       id: b,
       className: "documentation_link_input--label--ATBu1",
-      children: tx("design_systems.component_panel.link")
+      children: renderI18nText("design_systems.component_panel.link")
     }), jsx(fI, {
       className: "documentation_link_input--row--Ph7Ip component_controls_picker--inputRow--piRyG sf_pro--uiFontWithSFProFallback--m-p9V",
       children: jsx(_$$L, {
@@ -167,7 +167,7 @@ function R(e) {
         onKeyUp,
         onMouseLeave,
         onMouseUp,
-        placeholder: _$$t("design_systems.component_panel.link_to_documentation"),
+        placeholder: getI18nString("design_systems.component_panel.link_to_documentation"),
         recordingKey: y("componentSymbolLinks"),
         value: T || ""
       }, "symbol-link")
@@ -195,7 +195,7 @@ function k({
     className: "component_link_display--wrapper--CLPXG",
     children: [jsx("div", {
       className: "component_link_display--header--fts8b",
-      children: tx("design_systems.component_panel.link")
+      children: renderI18nText("design_systems.component_panel.link")
     }), t.uri && _$$G(t.uri) ? jsx(_$$N, {
       trusted: !1,
       href: t.uri,
@@ -214,19 +214,19 @@ function B() {
     children: jsxs(_$$S, {
       checked: e,
       label: jsx(_$$J, {
-        children: _$$t("design_systems.component_panel.simplify_instances")
+        children: getI18nString("design_systems.component_panel.simplify_instances")
       }),
       onChange: () => l7.user("simplify-instance-panels", () => glU.setSimplifyInstancePanels(!e)),
       recordingKey: "simplifyInstancePanelsCheckbox",
       htmlAttributes: {
         "data-testid": "simplify-instance-panels-checkbox"
       },
-      children: [tx("design_systems.component_panel.simplify_instances_help_text"), jsxs(Fragment, {
+      children: [renderI18nText("design_systems.component_panel.simplify_instances_help_text"), jsxs(Fragment, {
         children: ["\xa0", jsx(_$$N, {
           href: "https://help.figma.com/hc/articles/5579474826519-Explore-component-properties#simplified",
           newTab: !0,
           trusted: !0,
-          children: tx("general.learn_more")
+          children: renderI18nText("general.learn_more")
         })]
       })]
     })
@@ -251,7 +251,7 @@ function G(e) {
       componentKeys,
       updatedNodeIds
     } = V(h);
-    sx("component description updated", {
+    trackEventAnalytics("component description updated", {
       updatedNodeIds,
       componentKeys,
       isRichText: !0,
@@ -264,7 +264,7 @@ function G(e) {
       componentKeys,
       updatedNodeIds
     } = V(h);
-    sx("component links updated", {
+    trackEventAnalytics("component links updated", {
       updatedNodeIds,
       componentKeys
     });
@@ -309,14 +309,14 @@ function X({
     let e = r?.id === uA;
     let t = _P(u?.uri);
     let n = d?.map(e => r?.id === Wv ? Egt.getAssetKeyForPublish(e) : r?.id === uA ? Egt.getAssetKeyForPublish(k4([e], s) ?? "") : "").filter(isNotNullish).map(e => e.toString());
-    sx("Component documentation modal opened", {
+    trackEventAnalytics("Component documentation modal opened", {
       hostname: t,
       selectedNodeIds: d,
       componentKeys: n,
       isInstance: e
     });
   });
-  let _ = r?.id === uA ? _$$t("design_systems.component_panel.component_documentation") : _$$t("design_systems.component_panel.component_controls");
+  let _ = r?.id === uA ? getI18nString("design_systems.component_panel.component_documentation") : getI18nString("design_systems.component_panel.component_controls");
   return jsx(Ao, {
     autoflowHeight: !0,
     headerSize: "small",
@@ -338,11 +338,11 @@ let ee = {
 };
 let et = {
   component_set: {
-    displayName: () => _$$t("design_systems.component_panel.component_set"),
+    displayName: () => getI18nString("design_systems.component_panel.component_set"),
     icon: _$$A
   },
   selected_variant: {
-    displayName: () => _$$t("design_systems.component_panel.selected_variant"),
+    displayName: () => getI18nString("design_systems.component_panel.selected_variant"),
     icon: _$$A2
   }
 };
@@ -407,7 +407,7 @@ export function $$en0(e) {
           text: containingStateGroupDescription
         }), jsx("p", {
           className: "component_controls_picker--header--ELquL",
-          children: tx("design_systems.component_panel.current_variant")
+          children: renderI18nText("design_systems.component_panel.current_variant")
         })]
       }) : void 0,
       menuType: "selection",

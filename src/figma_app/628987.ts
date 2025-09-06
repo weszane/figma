@@ -8,21 +8,21 @@ import { E as _$$E } from "../905/632989";
 import { U as _$$U } from "../905/708285";
 import { Ez5, nQ7 } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { eU, fp } from "../figma_app/27355";
+import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import h from "classnames";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { parsePxNumber } from "../figma_app/783094";
 import { K4, P6 } from "../905/535224";
 import { h as _$$h } from "../905/207101";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { buildStaticUrl } from "../figma_app/169182";
 import { Pt } from "../figma_app/806412";
 import { D8 } from "../905/511649";
-import { nl } from "../figma_app/257275";
+import { isInteractionPathCheck } from "../figma_app/897289";
 import { E as _$$E2 } from "../905/277716";
 import { XHR } from "../905/910117";
 import { B as _$$B } from "../905/714743";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { to } from "../figma_app/828186";
 import { XE, Uv, u1 } from "../figma_app/91703";
 import { to as _$$to } from "../905/156213";
@@ -61,14 +61,14 @@ let el = !1;
 class ed extends a3 {}
 class ec extends c$ {}
 export function $$eu1() {
-  let e = _$$R(e => Cy(e.mirror));
+  let e = selectWithShallowEqual(e => Cy(e.mirror));
   let t = useRef(e);
   e.length > 0 && !c2(t.current, e) && (t.current = e);
   return t;
 }
-let ep = eU(void 0);
+let ep = atom(void 0);
 export function $$e_0() {
-  let [e, t] = fp(ep);
+  let [e, t] = useAtomValueAndSetter(ep);
   _$$h(() => {
     r();
   });
@@ -178,7 +178,7 @@ export function $$em2({
         initialY: e.y,
         modal: !0
       }));
-      sx("font picker opened", {
+      trackEventAnalytics("font picker opened", {
         pageId: eL,
         nodeIds: eP.current
       });
@@ -200,7 +200,7 @@ export function $$em2({
     recordingKey: Pt(r, e),
     children: e
   }, `font-name-${e}`));
-  let eH = !nl() || ef?.id === eo || eN;
+  let eH = !isInteractionPathCheck() || ef?.id === eo || eN;
   return jsxs(Fragment, {
     children: [function () {
       let i;
@@ -213,7 +213,7 @@ export function $$em2({
               variable: t,
               isInStyleModal: !!es,
               invalid: eV,
-              tooltip: eV ? _$$t("variables.binding_ui.missing_font_family", {
+              tooltip: eV ? getI18nString("variables.binding_ui.missing_font_family", {
                 fontFamily: eG
               }) : void 0
             })
@@ -224,9 +224,9 @@ export function $$em2({
           children: jsx(_$$K, {
             ref: eF,
             onClick: _,
-            "aria-label": _$$t("variables.binding_ui.detach_variable_tooltip"),
+            "aria-label": getI18nString("variables.binding_ui.detach_variable_tooltip"),
             htmlAttributes: {
-              "data-tooltip": _$$t("variables.binding_ui.detach_variable_tooltip"),
+              "data-tooltip": getI18nString("variables.binding_ui.detach_variable_tooltip"),
               "data-tooltip-type": Ib.TEXT
             },
             children: jsx(_$$U, {})
@@ -241,7 +241,7 @@ export function $$em2({
         });
       }
       let a = ef?.id === eo;
-      let o = eG || (ep ?? _$$t("fullscreen.mixed"));
+      let o = eG || (ep ?? getI18nString("fullscreen.mixed"));
       let u = jsx(_$$E2, {
         name: "open_font_picker_button",
         children: jsxs(_$$E, {
@@ -250,7 +250,7 @@ export function $$em2({
           "aria-controls": eo,
           "aria-expanded": a,
           "aria-haspopup": "dialog",
-          "aria-label": _$$t("fullscreen.type_panel.font_family"),
+          "aria-label": getI18nString("fullscreen.type_panel.font_family"),
           className: m()({
             [nO]: !0,
             [wH]: a,
@@ -278,7 +278,7 @@ export function $$em2({
         })
       });
       if (b) i = jsx(ed, {
-        ariaLabel: _$$t("fullscreen.type_panel.font_family"),
+        ariaLabel: getI18nString("fullscreen.type_panel.font_family"),
         className: UU,
         disabled: y,
         dispatch: eg,
@@ -289,12 +289,12 @@ export function $$em2({
         id: F,
         onChange: s,
         onMouseDown: eM,
-        placeholder: eV && h ? ep ?? _$$t("fullscreen.type_panel.type_or_choose") : void 0,
+        placeholder: eV && h ? ep ?? getI18nString("fullscreen.type_panel.type_or_choose") : void 0,
         property: e,
         recordingKey: r,
-        willShowDropdown: () => (getFeatureFlags().ce_properties_panel_tracking && sx("editor-type-panel-dropdown-show", {
+        willShowDropdown: () => (getFeatureFlags().ce_properties_panel_tracking && trackEventAnalytics("editor-type-panel-dropdown-show", {
           key: "fontFamily"
-        }), getFeatureFlags().ce_font_picker_metrics && sx("font picker opened", {
+        }), getFeatureFlags().ce_font_picker_metrics && trackEventAnalytics("font picker opened", {
           pageId: eL,
           nodeIds: eP.current
         }), Promise.resolve()),

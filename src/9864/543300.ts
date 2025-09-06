@@ -1,10 +1,10 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useEffect, useMemo, useState, forwardRef, useRef, createRef } from "react";
 import { useDispatch, useSelector, useStore } from "../vendor/514228";
-import { Xr, fp, md, eU as _$$eU } from "../figma_app/27355";
+import { Xr, useAtomValueAndSetter, useAtomWithSubscription, atom } from "../figma_app/27355";
 import a from "classnames";
 import { Rs } from "../figma_app/288654";
-import { C8 } from "../figma_app/778880";
+import { getIsAndroidOrIphoneNotFigmaMobile } from "../figma_app/778880";
 import { cn } from "../figma_app/141320";
 import { MS } from "../figma_app/797994";
 import { _X, Pw } from "../figma_app/121751";
@@ -22,9 +22,9 @@ import { pu, XL, ug, Pp, Ig, zH, td as _$$td, nH } from "../7037/430062";
 import { Oc } from "../figma_app/552876";
 import { ServiceCategories as _$$e } from "../905/165054";
 import R from "../vendor/128080";
-import { sx, az } from "../905/449184";
+import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { R as _$$R } from "../905/165069";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { fr } from "../figma_app/297957";
 import { eS as _$$eS } from "../figma_app/33126";
 import { $B } from "../figma_app/545877";
@@ -35,7 +35,7 @@ import { h as _$$h2 } from "../905/772711";
 import { TA, iZ } from "../905/372672";
 import { k as _$$k } from "../905/93362";
 import { shuffle } from "../figma_app/656233";
-import { t as _$$t, tx as _$$tx, dS, jL } from "../905/303541";
+import { getI18nString, renderI18nText, getLocalizedPath, loadI18nLocale } from "../905/303541";
 import { CR } from "../7021/854265";
 import { g as _$$g } from "../7037/183814";
 import { oC, F$, OO, zy, Io, u_ } from "../7021/95197";
@@ -44,14 +44,14 @@ import { Kz, ks } from "../figma_app/637027";
 import { VD } from "../905/550523";
 import { languageCodes, defaultLanguage } from "../905/816253";
 import { getFeatureFlags } from "../905/601108";
-import { eD as _$$eD, y3 } from "../figma_app/876459";
+import { desktopAPIInstance, hasDesktopAPI } from "../figma_app/876459";
 import { xf } from "../figma_app/416935";
 import { Ay } from "../905/612521";
 import { isGovCluster, buildUploadUrl, getInitialOptions } from "../figma_app/169182";
 import { oJ } from "../905/63728";
 import { Wz } from "../figma_app/211694";
 import { e6 as _$$e2, c as _$$c } from "../figma_app/617427";
-import { Gq } from "../figma_app/363242";
+import { getI18nState } from "../figma_app/363242";
 import { F as _$$F } from "../905/302958";
 import { u as _$$u } from "../905/16237";
 import { tc as _$$tc } from "../905/15667";
@@ -78,7 +78,7 @@ import { xA } from "../905/766303";
 import { dq } from "../905/845253";
 import { FC } from "../figma_app/212807";
 import { M4 } from "../905/713695";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { ai, f6 } from "../figma_app/915202";
 import { B as _$$B } from "../905/524020";
 import { i as _$$i2 } from "../905/46262";
@@ -138,7 +138,7 @@ import { hS, bL } from "../905/437088";
 import { bL as _$$bL } from "../905/38914";
 import { Wk } from "../figma_app/272243";
 import { wY } from "../figma_app/708845";
-import { Xo } from "../905/528121";
+import { getI18nResourceKey } from "../905/528121";
 import { b as _$$b3, bL as _$$bL2, mc, q7 } from "../figma_app/860955";
 import { r as _$$r3 } from "../905/571562";
 import { J as _$$J4 } from "../905/341359";
@@ -223,10 +223,10 @@ function S({
   });
 }
 function N() {
-  let [e, r] = fp(S0);
-  let t = md(bk);
-  let [i] = md(PG);
-  let [s] = md(ZE);
+  let [e, r] = useAtomValueAndSetter(S0);
+  let t = useAtomWithSubscription(bk);
+  let [i] = useAtomWithSubscription(PG);
+  let [s] = useAtomWithSubscription(ZE);
   let o = Oc();
   let l = Xr(xO);
   let a = Xr(VQ);
@@ -258,16 +258,16 @@ var I = R;
 function z(e) {
   switch (e) {
     case "k12":
-      return _$$t("user_onboarding_signals.v1.answer.k12");
+      return getI18nString("user_onboarding_signals.v1.answer.k12");
     case "bootcamp_or_online_course":
-      return _$$t("user_onboarding_signals.v2.answer.online_course_bootcamp");
+      return getI18nString("user_onboarding_signals.v2.answer.online_course_bootcamp");
     case "higher_education":
-      return _$$t("user_onboarding_signals.v2.answer.college_university");
+      return getI18nString("user_onboarding_signals.v2.answer.college_university");
     case "other":
-      return _$$t("user_onboarding_signals.v2.answer.something_else");
+      return getI18nString("user_onboarding_signals.v2.answer.something_else");
   }
 }
-let Y = _$$eU(() => {
+let Y = atom(() => {
   let e = shuffle(["higher_education", "bootcamp_or_online_course"]);
   e.push("other");
   return {
@@ -276,7 +276,7 @@ let Y = _$$eU(() => {
     getOptionDisplay: z
   };
 });
-let K = _$$eU(() => {
+let K = atom(() => {
   let e = shuffle(["k12", "higher_education", "bootcamp_or_online_course"]);
   e.push("other");
   return {
@@ -293,12 +293,12 @@ function Q({
       questionKey,
       options,
       getOptionDisplay
-    } = md(Y);
+    } = useAtomWithSubscription(Y);
     return {
       questionKey,
       options,
-      questionTitle: _$$t("new_user_experience.user_onboarding_signals.question.what_type_or_level_of_school"),
-      questionSubtitle: _$$t("new_user_experience.user_onboarding_signals.description.pick_the_one_that_feels_closest_to_your_situation"),
+      questionTitle: getI18nString("new_user_experience.user_onboarding_signals.question.what_type_or_level_of_school"),
+      questionSubtitle: getI18nString("new_user_experience.user_onboarding_signals.description.pick_the_one_that_feels_closest_to_your_situation"),
       getOptionDisplay
     };
   }();
@@ -307,12 +307,12 @@ function Q({
       questionKey,
       options,
       getOptionDisplay
-    } = md(K);
+    } = useAtomWithSubscription(K);
     return {
       questionKey,
       options,
-      questionTitle: _$$t("new_user_experience.user_onboarding_signals.question.what_type_or_level_of_school"),
-      questionSubtitle: _$$t("new_user_experience.user_onboarding_signals.description.pick_the_one_that_feels_closest_to_your_situation"),
+      questionTitle: getI18nString("new_user_experience.user_onboarding_signals.question.what_type_or_level_of_school"),
+      questionSubtitle: getI18nString("new_user_experience.user_onboarding_signals.description.pick_the_one_that_feels_closest_to_your_situation"),
       getOptionDisplay
     };
   }();
@@ -320,15 +320,15 @@ function Q({
 }
 function J() {
   let e = TA();
-  let r = md(_$$r);
-  let t = md(ZE);
-  let i = md(qV);
-  let s = md(X9);
-  let l = md(bT);
-  let a = md(Nz);
-  let d = md(PG);
-  let c = md(xO);
-  let u = md(VQ);
+  let r = useAtomWithSubscription(_$$r);
+  let t = useAtomWithSubscription(ZE);
+  let i = useAtomWithSubscription(qV);
+  let s = useAtomWithSubscription(X9);
+  let l = useAtomWithSubscription(bT);
+  let a = useAtomWithSubscription(Nz);
+  let d = useAtomWithSubscription(PG);
+  let c = useAtomWithSubscription(xO);
+  let u = useAtomWithSubscription(VQ);
   let [x] = d;
   let {
     questionKey
@@ -375,9 +375,9 @@ function J() {
   return g;
 }
 function es() {
-  let [e, r] = fp(qV);
-  let t = md(ZE);
-  let i = md(nt);
+  let [e, r] = useAtomValueAndSetter(qV);
+  let t = useAtomWithSubscription(ZE);
+  let i = useAtomWithSubscription(nt);
   useEffect(() => {
     e.size > 0 && (!i || e.has("k12") && t.has("student")) && r(new Set());
   }, [e, i, r, t]);
@@ -387,7 +387,7 @@ function ey() {
   let r = useSelector(e => e.selectedView);
   let t = useSelector(e => null !== e.user && cn(e.user));
   let i = t => {
-    _$$eD ? e(sf({
+    desktopAPIInstance ? e(sf({
       view: "teamUpgrade",
       teamFlowType: SC.UPGRADE_EXISTING_TEAM,
       teamId: t.id,
@@ -402,7 +402,7 @@ function ey() {
     }));
   };
   let s = () => {
-    _$$eD ? e(sf({
+    desktopAPIInstance ? e(sf({
       view: "orgSelfServe",
       upsellSource: _$$b2.TEAM_WELCOME,
       entryPoint: TN.NUX
@@ -413,7 +413,7 @@ function ey() {
     }));
   };
   let o = r => {
-    if (_$$eD) e(Vm({
+    if (desktopAPIInstance) e(Vm({
       teamId: r.id
     }));else {
       let e = `/files/team/${r.id}/edu-review/${r.id}`;
@@ -610,25 +610,25 @@ function eJ(e) {
   let r = useDispatch();
   let t = TA();
   let i = !!_$$f("not_gen_0");
-  let a = md(S0);
-  let d = md($l);
-  let u = md(aV);
-  let x = md(uN);
-  let h = md(ZE);
-  let _ = md(qV);
-  let m = md(Nz);
-  let E = md(X9);
-  let j = md(bT);
-  let C = md(PG);
-  let L = md(xO);
-  let v = md(VQ);
-  let w = md(Q7);
-  let S = md(BG);
-  let O = md(_$$eL);
-  let N = md(kd);
-  let T = md(SL);
-  let R = "default" !== md(ni);
-  let I = md(YX);
+  let a = useAtomWithSubscription(S0);
+  let d = useAtomWithSubscription($l);
+  let u = useAtomWithSubscription(aV);
+  let x = useAtomWithSubscription(uN);
+  let h = useAtomWithSubscription(ZE);
+  let _ = useAtomWithSubscription(qV);
+  let m = useAtomWithSubscription(Nz);
+  let E = useAtomWithSubscription(X9);
+  let j = useAtomWithSubscription(bT);
+  let C = useAtomWithSubscription(PG);
+  let L = useAtomWithSubscription(xO);
+  let v = useAtomWithSubscription(VQ);
+  let w = useAtomWithSubscription(Q7);
+  let S = useAtomWithSubscription(BG);
+  let O = useAtomWithSubscription(_$$eL);
+  let N = useAtomWithSubscription(kd);
+  let T = useAtomWithSubscription(SL);
+  let R = "default" !== useAtomWithSubscription(ni);
+  let I = useAtomWithSubscription(YX);
   let P = _$$u();
   let A = function (e) {
     let {
@@ -658,7 +658,7 @@ function eJ(e) {
             return {
               folderId: await s(FFileType.WHITEBOARD),
               eventName: "team_onboarding_figjam_created",
-              fileName: _$$t("rcs.product_and_template_picker.new_user_whiteboard_filename")
+              fileName: getI18nString("rcs.product_and_template_picker.new_user_whiteboard_filename")
             };
         }
       })();
@@ -703,7 +703,7 @@ function eJ(e) {
   let [D, V] = useState(!1);
   let Z = function () {
     var e;
-    let r = md(fj);
+    let r = useAtomWithSubscription(fj);
     let t = q5();
     let {
       handleUpgrade
@@ -749,7 +749,7 @@ function eJ(e) {
     return getFeatureFlags().starting_points_modal && !i && e;
   };
   let U = () => {
-    let e = Gq()?.getPrimaryLocale(!1);
+    let e = getI18nState()?.getPrimaryLocale(!1);
     return !!e && (e === languageCodes.EN || e === languageCodes.JA);
   };
   let z = function ({
@@ -796,7 +796,7 @@ function eJ(e) {
         }));
         l = e?.[0];
       } catch (r) {
-        sx("Figma Basics not loaded via LiveStore", {
+        trackEventAnalytics("Figma Basics not loaded via LiveStore", {
           error: r.message,
           source: e
         });
@@ -806,7 +806,7 @@ function eJ(e) {
       })) : r.dispatch(sf({
         view: "fullscreen",
         fileKey: l.key,
-        editorType: nT.Design
+        editorType: FEditorType.Design
       })) : a();
     }, [e, r, s, n, t, i]);
   }({
@@ -816,13 +816,13 @@ function eJ(e) {
   let K = () => {
     if (e.currentQuestion === pu.INVITE_COLLABORATORS && d?.length) {
       let e = d.filter(e => e.trim().length > 0);
-      if (e.length && !e.some(e => !xf(e))) return _$$t("rcs.team_welcome.send_invites");
-    } else if (Y()) return _$$t("new_user_experience.finish");
-    return _$$t("new_user_experience.button.continue");
+      if (e.length && !e.some(e => !xf(e))) return getI18nString("rcs.team_welcome.send_invites");
+    } else if (Y()) return getI18nString("new_user_experience.finish");
+    return getI18nString("new_user_experience.button.continue");
   };
   let Q = i => {
     try {
-      t && i && (sx("NUX Dynamic Preview", {
+      t && i && (trackEventAnalytics("NUX Dynamic Preview", {
         eventSubtype: "set_user_name_success",
         signupSource: e.signupSource
       }), r(yJ({
@@ -833,7 +833,7 @@ function eJ(e) {
         userInitiated: !0
       })));
     } catch (r) {
-      sx("NUX Dynamic Preview", {
+      trackEventAnalytics("NUX Dynamic Preview", {
         eventSubtype: "set_user_name_error",
         error: r.toString(),
         signupSource: e.signupSource
@@ -856,14 +856,14 @@ function eJ(e) {
     let o = "nux_selection";
     "something_else" === i && O && (s = O, o = "nux_custom");
     try {
-      t && s && (sx("NUX Dynamic Preview", {
+      t && s && (trackEventAnalytics("NUX Dynamic Preview", {
         eventSubtype: "set_job_title_success",
         signupSource: e.signupSource,
         jobTitle: s
       }, {
         forwardToDatadog: !0,
         ...P
-      }), az.trackDefinedEvent("activation.job_title_changed", {
+      }), analyticsEventManager.trackDefinedEvent("activation.job_title_changed", {
         newJobTitle: s,
         source: o,
         jobTitleSeenList: T?.toString()
@@ -876,7 +876,7 @@ function eJ(e) {
         userInitiated: !0
       })));
     } catch (r) {
-      sx("NUX Dynamic Preview", {
+      trackEventAnalytics("NUX Dynamic Preview", {
         eventSubtype: "set_job_title_error",
         error: r.toString(),
         signupSource: e.signupSource,
@@ -893,7 +893,7 @@ function eJ(e) {
     let i = d.filter(e => e.trim().length > 0);
     if (!(i.length < 1)) {
       if (i.some(e => !xf(e))) {
-        sx("NUX Dynamic Preview", {
+        trackEventAnalytics("NUX Dynamic Preview", {
           eventSubtype: "malformed_invite_input",
           malformedInput: d.toString(),
           signupSource: e.signupSource
@@ -908,13 +908,13 @@ function eJ(e) {
         teamId: e.team.id,
         onSuccess: () => {
           r(_$$F.enqueue({
-            message: _$$t("rcs.team_welcome.invite_sent", {
+            message: getI18nString("rcs.team_welcome.invite_sent", {
               numInvites: i.length
             })
           }));
         }
       }));
-      sx("NUX Dynamic Preview", {
+      trackEventAnalytics("NUX Dynamic Preview", {
         eventSubtype: "invite_sent",
         numInvites: i.length,
         signupSource: e.signupSource
@@ -962,7 +962,7 @@ function eJ(e) {
   let ev = () => eC || eL;
   let ew = async r => {
     let t = !1;
-    if (Y() && sx("NUX Last Step", {
+    if (Y() && trackEventAnalytics("NUX Last Step", {
       isGen1: i,
       nuxType: "nux_dynamic_preview"
     }), e.currentQuestion === pu.NAME_SELF) {
@@ -974,7 +974,7 @@ function eJ(e) {
       ee(e);
     } else if (e.currentQuestion === pu.INVITE_COLLABORATORS) et();else if (ev()) e.formatAndSubmitSignalCollectionResponses();else if (e.currentQuestion === pu.CHOOSE_PLAN && (u === VN.PROFESSIONAL || u === VN.ORG)) {
       let r = u === VN.ORG;
-      sx("NUX Last Step", {
+      trackEventAnalytics("NUX Last Step", {
         departedNuxFlow: !0,
         departedForOrgUpgrade: r,
         departedForTeamUpgrade: !r,
@@ -989,7 +989,7 @@ function eJ(e) {
     if (Y()) {
       t || e.dismissModal();
       let i = oJ(r);
-      R && (y3() || i || e.currentQuestion !== pu.CHOOSE_PRODUCT) && Ay.reload("NUX completion refresh");
+      R && (hasDesktopAPI() || i || e.currentQuestion !== pu.CHOOSE_PRODUCT) && Ay.reload("NUX completion refresh");
     } else e.onNextQuestion();
   };
   return I ? jsx(_$$c, {
@@ -1029,7 +1029,7 @@ let e3 = forwardRef(function (e, r) {
   });
 });
 function e9() {
-  let [e, r] = fp(_D);
+  let [e, r] = useAtomValueAndSetter(_D);
   e || r(!0);
   useEffect(() => () => r(!1), [r]);
 }
@@ -1119,9 +1119,9 @@ function rp() {
 }
 function rf() {
   return {
-    starter: [_$$tx("nux.starter.feature.three_files"), _$$tx("nux.starter.feature.basic")],
-    pro: [_$$tx("nux.pro.feature.unlimited_files"), _$$tx("nux.pro.feature.prototyping"), _$$tx("nux.pro.feature.design_library"), _$$tx("nux.pro.feature.handoff")],
-    org: [_$$tx("nux.org.feature.unlimited_teams"), _$$tx("nux.org.feature.branching"), _$$tx("nux.org.feature.security"), _$$tx("nux.org.feature.scim"), _$$tx("nux.org.feature.customizations")]
+    starter: [renderI18nText("nux.starter.feature.three_files"), renderI18nText("nux.starter.feature.basic")],
+    pro: [renderI18nText("nux.pro.feature.unlimited_files"), renderI18nText("nux.pro.feature.prototyping"), renderI18nText("nux.pro.feature.design_library"), renderI18nText("nux.pro.feature.handoff")],
+    org: [renderI18nText("nux.org.feature.unlimited_teams"), renderI18nText("nux.org.feature.branching"), renderI18nText("nux.org.feature.security"), renderI18nText("nux.org.feature.scim"), renderI18nText("nux.org.feature.customizations")]
   };
 }
 function rg({
@@ -1163,7 +1163,7 @@ function rg({
           })
         }), "\xa0", jsx("div", {
           className: On,
-          children: _$$tx("new_user_experience.choose_plan_card.professional.title.description.seat_rename")
+          children: renderI18nText("new_user_experience.choose_plan_card.professional.title.description.seat_rename")
         })]
       });
     })()]
@@ -1208,13 +1208,13 @@ function rm({
             children: function (e) {
               switch (e) {
                 case ud.EXPERT:
-                  return _$$t("nux.campfire.full_seat");
+                  return getI18nString("nux.campfire.full_seat");
                 case ud.DEVELOPER:
-                  return _$$t("nux.campfire.dev_seat");
+                  return getI18nString("nux.campfire.dev_seat");
                 case ud.COLLABORATOR:
-                  return _$$t("nux.campfire.collab_seat");
+                  return getI18nString("nux.campfire.collab_seat");
                 case ud.CONTENT:
-                  return _$$t("nux.campfire.content_seat");
+                  return getI18nString("nux.campfire.content_seat");
                 default:
                   throwTypeError(e);
               }
@@ -1235,7 +1235,7 @@ function rE({
   return jsx("p", {
     className: _$$s.textBodySmall.$,
     "data-testid": "choose-plan-seat-price",
-    children: _$$tx("nux.price_per_month", {
+    children: renderI18nText("nux.price_per_month", {
       price: jsx("span", {
         className: _$$s.textBodyMediumStrong.$,
         children: r.formatMoney(e)
@@ -1251,7 +1251,7 @@ function rb({
     className: _$$s.flex.flexColumn.gap4.$,
     children: [r && jsx("p", {
       className: _$$s.textBodyMediumStrong.$,
-      children: _$$tx("nux.org.feature.everything_on_pro")
+      children: renderI18nText("nux.org.feature.everything_on_pro")
     }), e.map((e, r) => jsxs("div", {
       className: _$$s.flex.$,
       children: [jsx(_$$l, {
@@ -1275,11 +1275,11 @@ function rj({
   return jsxs("div", {
     className: r.choosePlanCardFeatures,
     children: [jsxs("div", {
-      children: [" ", _$$tx("new_user_experience.choose_plan_card.free.project")]
+      children: [" ", renderI18nText("new_user_experience.choose_plan_card.free.project")]
     }), jsxs("div", {
-      children: [" ", _$$tx("new_user_experience.choose_plan_card.free.pages")]
+      children: [" ", renderI18nText("new_user_experience.choose_plan_card.free.pages")]
     }), jsxs("div", {
-      children: [" ", _$$tx("new_user_experience.choose_plan_card.free.version_history")]
+      children: [" ", renderI18nText("new_user_experience.choose_plan_card.free.version_history")]
     })]
   });
 }
@@ -1292,17 +1292,17 @@ function rC({
   return jsxs("div", {
     className: r.choosePlanCardFeatures,
     children: [jsxs("div", {
-      children: [" ", _$$t("new_user_experience.choose_plan_card.professional.projects"), " "]
+      children: [" ", getI18nString("new_user_experience.choose_plan_card.professional.projects"), " "]
     }), jsxs("div", {
-      children: [" ", _$$t("new_user_experience.choose_plan_card.professional.files"), " "]
+      children: [" ", getI18nString("new_user_experience.choose_plan_card.professional.files"), " "]
     }), jsxs("div", {
-      children: [" ", _$$t("new_user_experience.choose_plan_card.professional.pages"), " "]
+      children: [" ", getI18nString("new_user_experience.choose_plan_card.professional.pages"), " "]
     }), jsxs("div", {
-      children: [" ", _$$t("new_user_experience.choose_plan_card.professional.version_history"), " "]
+      children: [" ", getI18nString("new_user_experience.choose_plan_card.professional.version_history"), " "]
     }), jsxs("div", {
-      children: [" ", _$$t("new_user_experience.choose_plan_card.professional.permissions"), " "]
+      children: [" ", getI18nString("new_user_experience.choose_plan_card.professional.permissions"), " "]
     }), jsxs("div", {
-      children: [" ", _$$t("new_user_experience.choose_plan_card.professional.libraries"), " "]
+      children: [" ", getI18nString("new_user_experience.choose_plan_card.professional.libraries"), " "]
     })]
   });
 }
@@ -1317,21 +1317,21 @@ function rL({
     className: r.choosePlanCardFeatures,
     children: [jsx("div", {
       className: r.everythingInTeamsPlus,
-      children: _$$tx("new_user_experience.choose_plan_card.org.everything_in_teams_plus")
+      children: renderI18nText("new_user_experience.choose_plan_card.org.everything_in_teams_plus")
     }), jsx(Kz, {
       multiple: 2
     }), jsxs("div", {
-      children: [" ", _$$tx("new_user_experience.choose_plan_card.org.unlimited_teams"), " "]
+      children: [" ", renderI18nText("new_user_experience.choose_plan_card.org.unlimited_teams"), " "]
     }), jsxs("div", {
-      children: [" ", _$$tx("new_user_experience.choose_plan_card.org.single_sign_on"), " "]
+      children: [" ", renderI18nText("new_user_experience.choose_plan_card.org.single_sign_on"), " "]
     }), jsxs("div", {
-      children: [" ", _$$tx("new_user_experience.choose_plan_card.org.libraries"), " "]
+      children: [" ", renderI18nText("new_user_experience.choose_plan_card.org.libraries"), " "]
     }), jsxs("div", {
-      children: [" ", _$$tx("new_user_experience.choose_plan_card.org.design_system_analytics"), " "]
+      children: [" ", renderI18nText("new_user_experience.choose_plan_card.org.design_system_analytics"), " "]
     }), jsxs("div", {
-      children: [" ", _$$tx("new_user_experience.choose_plan_card.org.branching_and_merging"), " "]
+      children: [" ", renderI18nText("new_user_experience.choose_plan_card.org.branching_and_merging"), " "]
     }), jsxs("div", {
-      children: [" ", _$$tx("new_user_experience.choose_plan_card.org.admin_and_billing"), " "]
+      children: [" ", renderI18nText("new_user_experience.choose_plan_card.org.admin_and_billing"), " "]
     })]
   });
 }
@@ -1359,17 +1359,17 @@ function rw(e) {
     case "starter":
       return {
         dataTestId: "starter-plan-button",
-        copy: _$$t("plan_details.start_for_free")
+        copy: getI18nString("plan_details.start_for_free")
       };
     case "pro":
       return {
         dataTestId: "professional-plan-button",
-        copy: _$$t("plan_details.choose_professional")
+        copy: getI18nString("plan_details.choose_professional")
       };
     case "org":
       return {
         dataTestId: "organization-plan-button",
-        copy: _$$t("plan_details.choose_organization")
+        copy: getI18nString("plan_details.choose_organization")
       };
   }
 }
@@ -1612,12 +1612,12 @@ function rI({
 }) {
   let r = _$$sx();
   let t = _$$u();
-  let [i, o] = fp(aV);
+  let [i, o] = useAtomValueAndSetter(aV);
   let l = i === VN.STARTER;
   let a = i === VN.PROFESSIONAL;
   let c = i === VN.ORG;
-  let u = md(pr);
-  let x = md(nt);
+  let u = useAtomWithSubscription(pr);
+  let x = useAtomWithSubscription(nt);
   let {
     proPrices,
     orgPrices,
@@ -1627,20 +1627,20 @@ function rI({
   let f = jsx(rg, {
     isFree: u,
     price: proPrices[ud.DESIGN],
-    title: _$$t("new_user_experience.choose_plan_card.professional.title.Figma")
+    title: getI18nString("new_user_experience.choose_plan_card.professional.title.Figma")
   });
   let g = jsx(rg, {
     isFree: u,
     price: proPrices[ud.FIGJAM],
-    title: _$$t("new_user_experience.choose_plan_card.professional.title.Figjam")
+    title: getI18nString("new_user_experience.choose_plan_card.professional.title.Figjam")
   });
   let m = jsx(rg, {
     price: orgPrices[ud.DESIGN],
-    title: _$$t("new_user_experience.choose_plan_card.org.title.Figma")
+    title: getI18nString("new_user_experience.choose_plan_card.org.title.Figma")
   });
   let E = jsx(rg, {
     price: orgPrices[ud.FIGJAM],
-    title: _$$t("new_user_experience.choose_plan_card.professional.title.Figjam")
+    title: getI18nString("new_user_experience.choose_plan_card.professional.title.Figjam")
   });
   function b() {
     return jsx(Fragment, {
@@ -1649,12 +1649,12 @@ function rI({
           multiple: 5
         }), jsx("div", {
           className: m$,
-          children: _$$tx("new_user_experience.choose_plan_card.org.education_cta_with_verified_link", {
+          children: renderI18nText("new_user_experience.choose_plan_card.org.education_cta_with_verified_link", {
             verifiedLink: jsx(Ph, {
               href: "/education/apply",
               trusted: !0,
               newTab: !0,
-              children: _$$tx("new_user_experience.choose_plan_card.org.education_cta_verified")
+              children: renderI18nText("new_user_experience.choose_plan_card.org.education_cta_verified")
             })
           })
         })]
@@ -1662,7 +1662,7 @@ function rI({
     });
   }
   function j(e) {
-    showLoading && e !== VN.STARTER || (sx("NUX Dynamic Preview", {
+    showLoading && e !== VN.STARTER || (trackEventAnalytics("NUX Dynamic Preview", {
       eventSubtype: `selected_plan_${e}`
     }, t), o(e));
   }
@@ -1677,7 +1677,7 @@ function rI({
     className: Vz,
     children: [jsx("h1", {
       className: yo,
-      children: _$$tx("new_user_experience.choose_plan.title")
+      children: renderI18nText("new_user_experience.choose_plan.title")
     }), jsx(Kz, {
       multiple: 4
     }), jsxs("div", {
@@ -1685,23 +1685,23 @@ function rI({
       children: [jsx(rN, {
         type: "fullscreen",
         plan: "starter",
-        title: _$$t("new_user_experience.choose_plan_card.starter"),
+        title: getI18nString("new_user_experience.choose_plan_card.starter"),
         planTestId: rh.STARTER_OPTION,
         isSelected: l,
         onPlanSelect: () => j(VN.STARTER),
         PlanCardSubHeader: () => jsx("div", {
           className: kr,
-          children: e ? _$$tx("plan_details.for_teams_trying_figjam") : _$$tx("new_user_experience.choose_plan_card.starter.description")
+          children: e ? renderI18nText("plan_details.for_teams_trying_figjam") : renderI18nText("new_user_experience.choose_plan_card.starter.description")
         }),
         PlanCardPrices: () => jsxs(Fragment, {
           children: [jsxs("div", {
             className: Jg,
             children: [jsx("div", {
               className: d()(QM, _7),
-              children: _$$tx("new_user_experience.choose_plan_card.starter.title")
+              children: renderI18nText("new_user_experience.choose_plan_card.starter.title")
             }), jsx("div", {
               className: w9,
-              children: _$$tx("new_user_experience.choose_plan_card.starter.title.completion")
+              children: renderI18nText("new_user_experience.choose_plan_card.starter.title.completion")
             })]
           }), jsx(Kz, {
             multiple: 3
@@ -1713,10 +1713,10 @@ function rI({
         isSelected: a,
         onPlanSelect: () => j(VN.PROFESSIONAL),
         planTestId: rh.PRO_OPTION,
-        title: _$$t("new_user_experience.choose_plan_card.professional"),
+        title: getI18nString("new_user_experience.choose_plan_card.professional"),
         PlanCardSubHeader: () => jsx("div", {
           className: kr,
-          children: u ? _$$tx("edu.free_to_use_in_classrooms") : _$$tx("new_user_experience.choose_plan_card.professional.description")
+          children: u ? renderI18nText("edu.free_to_use_in_classrooms") : renderI18nText("new_user_experience.choose_plan_card.professional.description")
         }),
         PlanCardPrices: () => jsxs(Fragment, {
           children: [e ? g : f, e ? f : g]
@@ -1728,10 +1728,10 @@ function rI({
         isSelected: c,
         onPlanSelect: () => j(VN.ORG),
         planTestId: rh.ORG_OPTION,
-        title: _$$t("new_user_experience.choose_plan_card.org"),
+        title: getI18nString("new_user_experience.choose_plan_card.org"),
         PlanCardSubHeader: () => jsx("div", {
           className: kr,
-          children: _$$tx("new_user_experience.choose_plan_card.org.description")
+          children: renderI18nText("new_user_experience.choose_plan_card.org.description")
         }),
         PlanCardPrices: () => jsxs(Fragment, {
           children: [e ? E : m, e ? m : E]
@@ -1763,7 +1763,7 @@ function rP({
   let c = rf();
   let u = _$$u();
   function x(e) {
-    showLoading && e !== VN.STARTER || (sx("NUX Dynamic Preview", {
+    showLoading && e !== VN.STARTER || (trackEventAnalytics("NUX Dynamic Preview", {
       eventSubtype: `selected_plan_${e}`
     }, u), l(e));
   }
@@ -1771,7 +1771,7 @@ function rP({
     className: "x78zum5 xdt5ytf x13w0ytc x19bbpc0",
     children: [jsx("h1", {
       className: yo,
-      children: _$$tx("new_user_experience.choose_plan.title")
+      children: renderI18nText("new_user_experience.choose_plan.title")
     }), jsx(Kz, {
       multiple: 5
     }), jsxs("div", {
@@ -1779,18 +1779,18 @@ function rP({
       children: [jsx(rT, {
         PlanCardPrices: () => jsx("p", {
           ...xk(rR.textBodyMedium),
-          children: _$$tx("nux.campfire.starter.free_price")
+          children: renderI18nText("nux.campfire.starter.free_price")
         }),
         PlanFeatures: () => jsx(rb, {
           features: c.starter
         }),
         cardPlacement: "left",
-        description: _$$t("nux.campfire.starter.description"),
+        description: getI18nString("nux.campfire.starter.description"),
         isSelected: e,
         onPlanSelect: () => x(VN.STARTER),
         plan: "starter",
         planTestId: rh.STARTER_OPTION,
-        title: _$$t("new_user_experience.choose_plan_card.starter"),
+        title: getI18nString("new_user_experience.choose_plan_card.starter"),
         type: "fullscreen"
       }), jsx(rM, {
         highlighted: e || r
@@ -1805,12 +1805,12 @@ function rP({
         PlanFeatures: () => jsx(rb, {
           features: c.pro
         }),
-        description: _$$t("nux.campfire.pro.description"),
+        description: getI18nString("nux.campfire.pro.description"),
         isSelected: r,
         onPlanSelect: () => x(VN.PROFESSIONAL),
         plan: "pro",
         planTestId: rh.PRO_OPTION,
-        title: _$$t("new_user_experience.choose_plan_card.professional"),
+        title: getI18nString("new_user_experience.choose_plan_card.professional"),
         type: "fullscreen"
       }), jsx(rM, {
         highlighted: r || t
@@ -1823,12 +1823,12 @@ function rP({
           isOrg: !0
         }),
         cardPlacement: "right",
-        description: _$$t("nux.campfire.org.description"),
+        description: getI18nString("nux.campfire.org.description"),
         isSelected: t,
         onPlanSelect: () => x(VN.ORG),
         plan: "org",
         planTestId: rh.ORG_OPTION,
-        title: _$$t("new_user_experience.choose_plan_card.org"),
+        title: getI18nString("new_user_experience.choose_plan_card.org"),
         type: "fullscreen"
       })]
     })]
@@ -1840,12 +1840,12 @@ function rA() {
       multiple: 2
     }), jsx("p", {
       ...xk(rR.textBodySmall),
-      children: _$$tx("nux.edu.free_for_verified", {
+      children: renderI18nText("nux.edu.free_for_verified", {
         verifiedLink: jsx(Ph, {
           href: "/education/apply",
           trusted: !0,
           newTab: !0,
-          children: _$$tx("new_user_experience.choose_plan_card.org.education_cta_verified")
+          children: renderI18nText("new_user_experience.choose_plan_card.org.education_cta_verified")
         })
       })
     })]
@@ -1860,14 +1860,14 @@ function rB({
     trackingProperties: r,
     shouldClickPrimaryCta: t
   }) => {
-    sx("NUX Last Step", r);
+    trackEventAnalytics("NUX Last Step", r);
     t && e();
   };
   let s = ({
     isPro: e,
     isOrg: s
   } = {}) => {
-    sx("NUX Dynamic Preview", {
+    trackEventAnalytics("NUX Dynamic Preview", {
       eventSubtype: `selected_plan_${function ({
         isPro: e,
         isOrg: r
@@ -1904,7 +1904,7 @@ function rB({
   };
 }
 function rH() {
-  return md(nt) ? jsxs(Fragment, {
+  return useAtomWithSubscription(nt) ? jsxs(Fragment, {
     children: [jsx(Kz, {
       multiple: 2
     }), jsxs("div", {
@@ -1921,11 +1921,11 @@ function rH() {
         }
       }), jsx("div", {
         className: _$$PG,
-        children: _$$tx("edu.free_for_verified_students_and_educators_verify_status", {
+        children: renderI18nText("edu.free_for_verified_students_and_educators_verify_status", {
           verify_status: jsx(_$$N, {
             newTab: !0,
             href: "/education/apply",
-            children: _$$t("edu.verify_your_status")
+            children: getI18nString("edu.verify_your_status")
           })
         })
       })]
@@ -1952,7 +1952,7 @@ function rV(e) {
     className: PJ,
     children: [jsx("h1", {
       className: xx,
-      children: _$$t("new_user_experience.choose_plan.title")
+      children: getI18nString("new_user_experience.choose_plan.title")
     }), jsx(Kz, {
       multiple: 4
     }), jsxs("div", {
@@ -1960,52 +1960,52 @@ function rV(e) {
       children: [jsx(rN, {
         type: "mobile",
         plan: "starter",
-        title: _$$t("new_user_experience.choose_plan_card.starter"),
+        title: getI18nString("new_user_experience.choose_plan_card.starter"),
         planTestId: rh.STARTER_OPTION,
         onPlanSelect: onStarterClick,
         PlanCardPrices: () => jsxs("div", {
           className: Jg,
           children: [jsx("div", {
             className: d()(OA, _7),
-            children: _$$t("new_user_experience.choose_plan_card.starter.title")
+            children: getI18nString("new_user_experience.choose_plan_card.starter.title")
           }), jsx("div", {
             className: _$$ih,
-            children: _$$t("new_user_experience.choose_plan_card.starter.title.completion")
+            children: getI18nString("new_user_experience.choose_plan_card.starter.title.completion")
           })]
         })
       }), jsx(rN, {
         type: "mobile",
         plan: "pro",
-        title: _$$t("new_user_experience.choose_plan_card.professional"),
+        title: getI18nString("new_user_experience.choose_plan_card.professional"),
         planTestId: rh.PRO_OPTION,
         onPlanSelect: onProClick,
         PlanCardPrices: () => jsxs(Fragment, {
           children: [jsx(rg, {
             isMobileViewport: !0,
             price: proPrices[ud.DESIGN],
-            title: _$$t("new_user_experience.choose_plan_card.org.title.Figma")
+            title: getI18nString("new_user_experience.choose_plan_card.org.title.Figma")
           }), jsx(rg, {
             isMobileViewport: !0,
             price: proPrices[ud.FIGJAM],
-            title: _$$t("new_user_experience.choose_plan_card.professional.title.Figjam")
+            title: getI18nString("new_user_experience.choose_plan_card.professional.title.Figjam")
           })]
         }),
         EduVerificationBadge: () => jsx(rH, {})
       }), jsx(rN, {
         type: "mobile",
         plan: "org",
-        title: _$$t("new_user_experience.choose_plan_card.org"),
+        title: getI18nString("new_user_experience.choose_plan_card.org"),
         planTestId: rh.ORG_OPTION,
         onPlanSelect: onOrgClick,
         PlanCardPrices: () => jsxs(Fragment, {
           children: [jsx(rg, {
             isMobileViewport: !0,
             price: orgPrices[ud.DESIGN],
-            title: _$$t("new_user_experience.choose_plan_card.org.title.Figma")
+            title: getI18nString("new_user_experience.choose_plan_card.org.title.Figma")
           }), jsx(rg, {
             isMobileViewport: !0,
             price: orgPrices[ud.FIGJAM],
-            title: _$$t("new_user_experience.choose_plan_card.professional.title.Figjam")
+            title: getI18nString("new_user_experience.choose_plan_card.professional.title.Figjam")
           })]
         })
       })]
@@ -2035,7 +2035,7 @@ function rG(e) {
     className: "x78zum5 xdt5ytf xl56j7k x6s0dn4 xh8yej3",
     children: [jsx("h1", {
       className: "x1akne3o xkh2ocl x1pvqxga x6xwguf x1cpheol x14fbwjk x1w2vvpw x2b8uid",
-      children: _$$t("new_user_experience.choose_plan.title")
+      children: getI18nString("new_user_experience.choose_plan.title")
     }), jsx(Kz, {
       multiple: 4
     }), jsxs("div", {
@@ -2043,19 +2043,19 @@ function rG(e) {
       children: [jsx(rT, {
         type: "mobile",
         plan: "starter",
-        title: _$$t("new_user_experience.choose_plan_card.starter"),
-        description: _$$t("nux.campfire.starter.description"),
+        title: getI18nString("new_user_experience.choose_plan_card.starter"),
+        description: getI18nString("nux.campfire.starter.description"),
         planTestId: rh.STARTER_OPTION,
         onPlanSelect: onStarterClick,
-        PlanCardPrices: () => _$$tx("nux.campfire.starter.free_price"),
+        PlanCardPrices: () => renderI18nText("nux.campfire.starter.free_price"),
         PlanFeatures: () => jsx(rb, {
           features: o.starter
         })
       }), jsx(rZ, {}), jsx(rT, {
         type: "mobile",
         plan: "pro",
-        title: _$$t("new_user_experience.choose_plan_card.professional"),
-        description: _$$t("nux.campfire.pro.description"),
+        title: getI18nString("new_user_experience.choose_plan_card.professional"),
+        description: getI18nString("nux.campfire.pro.description"),
         planTestId: rh.PRO_OPTION,
         onPlanSelect: onProClick,
         PlanCardPrices: () => jsx(rm, {
@@ -2068,8 +2068,8 @@ function rG(e) {
       }), jsx(rZ, {}), jsx(rT, {
         type: "mobile",
         plan: "org",
-        title: _$$t("new_user_experience.choose_plan_card.org"),
-        description: _$$t("nux.campfire.org.description"),
+        title: getI18nString("new_user_experience.choose_plan_card.org"),
+        description: getI18nString("nux.campfire.org.description"),
         planTestId: rh.ORG_OPTION,
         onPlanSelect: onOrgClick,
         PlanCardPrices: () => jsx(rm, {
@@ -2115,12 +2115,12 @@ function r5({
   let d = a ? r6[t] : r3[t];
   let c = buildUploadUrl(d);
   let u = {
-    [FProductAccessType.DESIGN]: _$$t("seat_selection_in_nux.design_prototype_and_build_your"),
-    [FProductAccessType.DEV_MODE]: _$$t("seat_selection_in_nux.copy_code_track_changes_and"),
-    [FProductAccessType.WHITEBOARD]: _$$t("seat_selection_in_nux.whiteboard_brainstorm_and_diagram_with"),
-    [FProductAccessType.SLIDES]: _$$t("seat_selection_in_nux.create_beautiful_effective_presentations"),
-    [FProductAccessType.FIGMAKE]: _$$t("seat_selection_in_nux.prompt_your_way_to_a"),
-    [FProductAccessType.SITES]: _$$t("seat_selection_in_nux.design_and_publish_responsive_websites")
+    [FProductAccessType.DESIGN]: getI18nString("seat_selection_in_nux.design_prototype_and_build_your"),
+    [FProductAccessType.DEV_MODE]: getI18nString("seat_selection_in_nux.copy_code_track_changes_and"),
+    [FProductAccessType.WHITEBOARD]: getI18nString("seat_selection_in_nux.whiteboard_brainstorm_and_diagram_with"),
+    [FProductAccessType.SLIDES]: getI18nString("seat_selection_in_nux.create_beautiful_effective_presentations"),
+    [FProductAccessType.FIGMAKE]: getI18nString("seat_selection_in_nux.prompt_your_way_to_a"),
+    [FProductAccessType.SITES]: getI18nString("seat_selection_in_nux.design_and_publish_responsive_websites")
   };
   return jsx(NJ, {
     arrowPosition: F_.RIGHT_BODY,
@@ -2147,7 +2147,7 @@ function r5({
           className: r2,
           children: jsx("img", {
             src: c,
-            alt: _$$t("seat_selection_in_nux.tooltip_image_alt_text", {
+            alt: getI18nString("seat_selection_in_nux.tooltip_image_alt_text", {
               productKey: t
             })
           })
@@ -2157,7 +2157,7 @@ function r5({
           className: r2,
           children: jsx("img", {
             src: c,
-            alt: _$$t("seat_selection_in_nux.tooltip_image_alt_text", {
+            alt: getI18nString("seat_selection_in_nux.tooltip_image_alt_text", {
               productKey: t
             })
           })
@@ -2206,7 +2206,7 @@ function r4({
       className: "choose_seat_card--chooseSeatCardWrapper--rLQHw",
       children: [!!u && jsx("div", {
         className: "choose_seat_card--selectedCardChooseRecommended--hUTNk",
-        children: _$$tx("seat_selection_in_nux.recommended")
+        children: renderI18nText("seat_selection_in_nux.recommended")
       }), jsxs("button", {
         className: d()({
           "choose_seat_card--chooseSeatCardFullscreen--sLJcz": !0,
@@ -2273,7 +2273,7 @@ function r4({
                 children: e.name
               }), e.beta && jsx(_$$E, {
                 variant: "defaultOutline",
-                children: _$$t("general.beta")
+                children: getI18nString("general.beta")
               }), jsx(r5, {
                 isVisible: e.enabled && _ === r,
                 targetKey: `feature-${a}-${i}-${r}`,
@@ -2303,39 +2303,39 @@ function r7({
 }) {
   return [{
     enabled: !!e,
-    name: _$$t("general.figjam"),
+    name: getI18nString("general.figjam"),
     productKey: FProductAccessType.WHITEBOARD
   }, {
     enabled: !!r,
-    name: _$$t("general.figma_slides"),
+    name: getI18nString("general.figma_slides"),
     productKey: FProductAccessType.SLIDES
   }, {
     enabled: !!t,
-    name: _$$t("general.dev_mode"),
+    name: getI18nString("general.dev_mode"),
     productKey: FProductAccessType.DEV_MODE
   }, ...(getFeatureFlags().nux_seat_choice_additional_products ? [{
     enabled: !!i,
-    name: _$$t("general.figma_sites"),
+    name: getI18nString("general.figma_sites"),
     productKey: FProductAccessType.SITES,
     beta: i
   }, {
     enabled: !!s,
-    name: _$$t("general.figma_rev"),
+    name: getI18nString("general.figma_rev"),
     productKey: FProductAccessType.FIGMAKE
   }] : []), {
     enabled: !!o,
-    name: _$$t("general.figma_design"),
+    name: getI18nString("general.figma_design"),
     productKey: FProductAccessType.DESIGN
   }];
 }
 function te() {
-  let [e, r] = fp(fj);
+  let [e, r] = useAtomValueAndSetter(fj);
   let t = Xr(JA);
   let i = e === Gu.VIEW;
   let l = e === ud.COLLABORATOR;
   let a = e === ud.DEVELOPER;
   let d = e === ud.EXPERT;
-  let [c] = md(ZE);
+  let [c] = useAtomWithSubscription(ZE);
   let [u, x] = useState({});
   let h = q5();
   let {
@@ -2365,7 +2365,7 @@ function te() {
   }, [getUpgradePathway, t]);
   let g = _$$u();
   function m(e) {
-    sx("NUX Dynamic Preview", {
+    trackEventAnalytics("NUX Dynamic Preview", {
       eventSubtype: `selected_seat_${e}`
     }, g);
     r(e);
@@ -2377,7 +2377,7 @@ function te() {
   E && C++;
   b && C++;
   j && C++;
-  getIsUpgradeHandlerLoading() || !(C < 3) || r9 || (r9 = !0, $D(_$$e.ACTIVATION, Error("Unexpectedly low number of seat options: " + C), {
+  getIsUpgradeHandlerLoading() || !(C < 3) || r9 || (r9 = !0, reportError(_$$e.ACTIVATION, Error("Unexpectedly low number of seat options: " + C), {
     extra: {
       canUpgradeCollaborator: E,
       canUpgradeDeveloper: b,
@@ -2389,7 +2389,7 @@ function te() {
     className: Vz,
     children: [jsx("h1", {
       className: yo,
-      children: _$$tx("seat_selection_in_nux.which_seat_would_you_like")
+      children: renderI18nText("seat_selection_in_nux.which_seat_would_you_like")
     }), jsx(Kz, {
       multiple: L ? 6 : 3
     }), jsx("div", {
@@ -2397,30 +2397,30 @@ function te() {
       children: jsxs("div", {
         ..._$$Ay2.props(tr.cardGrid, L && tr.cardGridRecommended),
         children: [jsx(r4, {
-          title: _$$t("seat_selection_in_nux.view"),
+          title: getI18nString("seat_selection_in_nux.view"),
           seatTestId: r8.VIEW_OPTION,
           isSelected: i,
           onSeatSelect: () => m(Gu.VIEW),
-          subtitle: _$$t("seat_selection_in_nux.view_and_comment_access_only"),
+          subtitle: getI18nString("seat_selection_in_nux.view_and_comment_access_only"),
           Icon: _$$e4,
           features: r7({})
         }), E && jsx(r4, {
-          title: _$$t("seat_selection_in_nux.collab"),
+          title: getI18nString("seat_selection_in_nux.collab"),
           seatTestId: r8.COLLABORATOR_OPTION,
           isSelected: l,
           onSeatSelect: () => m(ud.COLLABORATOR),
-          subtitle: _$$t("seat_selection_in_nux.for_brainstorming_diagramming_and_presenting"),
+          subtitle: getI18nString("seat_selection_in_nux.for_brainstorming_diagramming_and_presenting"),
           Icon: _$$M2,
           mode: "whiteboard",
           features: r7({
             figjamEnabled: !0
           })
         }), b && jsx(r4, {
-          title: _$$t("seat_selection_in_nux.dev"),
+          title: getI18nString("seat_selection_in_nux.dev"),
           seatTestId: r8.DEVELOPER_OPTION,
           isSelected: a,
           onSeatSelect: () => m(ud.DEVELOPER),
-          subtitle: _$$t("seat_selection_in_nux.everything_on_collab_plus_products"),
+          subtitle: getI18nString("seat_selection_in_nux.everything_on_collab_plus_products"),
           Icon: _$$u2,
           isRecommended: "developer" === c,
           mode: "dev-handoff",
@@ -2430,11 +2430,11 @@ function te() {
             devModeEnabled: !0
           })
         }), j && jsx(r4, {
-          title: _$$t("seat_selection_in_nux.full"),
+          title: getI18nString("seat_selection_in_nux.full"),
           seatTestId: r8.EXPERT_OPTION,
           isSelected: d,
           onSeatSelect: () => m(ud.EXPERT),
-          subtitle: _$$t("seat_selection_in_nux.full_access_to_all_figma"),
+          subtitle: getI18nString("seat_selection_in_nux.full_access_to_all_figma"),
           Icon: _$$K,
           mode: "design",
           isRecommended: "designer" === c,
@@ -2472,33 +2472,33 @@ let tr = {
 let tt = e => {
   switch (e) {
     case "developer":
-      return _$$t("new_user_experience.prev_question_text.quick_question.quick_question_before_you_start_building");
+      return getI18nString("new_user_experience.prev_question_text.quick_question.quick_question_before_you_start_building");
     case "designer":
-      return _$$t("new_user_experience.prev_question_text.quick_question.quick_question_before_you_start_riffing");
+      return getI18nString("new_user_experience.prev_question_text.quick_question.quick_question_before_you_start_riffing");
     case "product_manager":
-      return _$$t("new_user_experience.prev_question_text.quick_question.quick_question_before_you_start_collaborating");
+      return getI18nString("new_user_experience.prev_question_text.quick_question.quick_question_before_you_start_collaborating");
     case "research":
-      return _$$t("new_user_experience.prev_question_text.quick_question.quick_question_before_you_start_analyzing");
+      return getI18nString("new_user_experience.prev_question_text.quick_question.quick_question_before_you_start_analyzing");
     case "marketer":
-      return _$$t("new_user_experience.prev_question_text.quick_question.quick_question_before_you_start_pitching");
+      return getI18nString("new_user_experience.prev_question_text.quick_question.quick_question_before_you_start_pitching");
     default:
-      return _$$t("new_user_experience.prev_question_text.quick_question.quick_question_before_you_jump_in");
+      return getI18nString("new_user_experience.prev_question_text.quick_question.quick_question_before_you_jump_in");
   }
 };
 function ti() {
-  let e = md(Q7);
-  let [r] = md(ZE);
-  let t = md(Xw);
+  let e = useAtomWithSubscription(Q7);
+  let [r] = useAtomWithSubscription(ZE);
+  let t = useAtomWithSubscription(Xw);
   let i = R6();
   switch (t) {
     case void 0:
-      if (i?.name) return _$$t("new_user_experience.prev_question_text.before_you_join", {
+      if (i?.name) return getI18nString("new_user_experience.prev_question_text.before_you_join", {
         resourceName: i.name
       });
       return "";
     case pu.NAME_SELF:
       if (!e) return "";
-      return _$$t("new_user_experience.prev_question_text.hello_name", {
+      return getI18nString("new_user_experience.prev_question_text.hello_name", {
         userName: e
       });
     case pu.WHAT_DO_YOU_DO:
@@ -2515,9 +2515,9 @@ function ts({
   ...i
 }) {
   let o = ti();
-  let l = md($B);
-  let a = C8();
-  if (md(YX)) return jsxs("div", {
+  let l = useAtomWithSubscription($B);
+  let a = getIsAndroidOrIphoneNotFigmaMobile();
+  if (useAtomWithSubscription(YX)) return jsxs("div", {
     className: "x78zum5 xdt5ytf",
     children: [jsx("div", {
       className: "x1akne3o xkh2ocl xclx6tv x1vzchgk x1j61x8r x123g5w4 xt5tia6 x19pvhnb",
@@ -2578,20 +2578,20 @@ function tl() {
   } = {
     questionKey: "have_used_figma_products_before_v1",
     options: new Set(["yes_many_times", "yes_a_few_times", "no_first_time"]),
-    questionTitle: _$$t("user_onboarding_signals.v2.question.have_you_used_figma_products_before"),
-    questionSubtitle: _$$t("user_onboarding_signals.v2.description.select_just_one"),
+    questionTitle: getI18nString("user_onboarding_signals.v2.question.have_you_used_figma_products_before"),
+    questionSubtitle: getI18nString("user_onboarding_signals.v2.description.select_just_one"),
     getOptionDisplay: e => {
       switch (e) {
         case "yes_many_times":
-          return _$$t("user_onboarding_signals.v2.answer.yes_many_times");
+          return getI18nString("user_onboarding_signals.v2.answer.yes_many_times");
         case "yes_a_few_times":
-          return _$$t("user_onboarding_signals.v2.answer.yes_a_few_times");
+          return getI18nString("user_onboarding_signals.v2.answer.yes_a_few_times");
         case "no_first_time":
-          return _$$t("user_onboarding_signals.v2.answer.no_its_my_first_time");
+          return getI18nString("user_onboarding_signals.v2.answer.no_its_my_first_time");
       }
     }
   };
-  let [l, a] = fp(X9);
+  let [l, a] = useAtomValueAndSetter(X9);
   return jsx(ts, {
     questionKey,
     questionTitle,
@@ -2616,20 +2616,20 @@ function tn() {
   } = {
     questionKey: "have_you_used_digital_whiteboards_before_v1",
     options: new Set(["no_first_time", "yes_a_few_times", "yes_many_times"]),
-    questionTitle: _$$t("user_onboarding_signals_figjam.v2.question.have_you_used_digital_whiteboards_before"),
-    questionSubtitle: _$$t("user_onboarding_signals.v2.description.select_just_one"),
+    questionTitle: getI18nString("user_onboarding_signals_figjam.v2.question.have_you_used_digital_whiteboards_before"),
+    questionSubtitle: getI18nString("user_onboarding_signals.v2.description.select_just_one"),
     getOptionDisplay: e => {
       switch (e) {
         case "no_first_time":
-          return _$$t("user_onboarding_signals.v2.answer.no_its_my_first_time");
+          return getI18nString("user_onboarding_signals.v2.answer.no_its_my_first_time");
         case "yes_a_few_times":
-          return _$$t("user_onboarding_signals.v2.answer.yes_a_few_times");
+          return getI18nString("user_onboarding_signals.v2.answer.yes_a_few_times");
         case "yes_many_times":
-          return _$$t("user_onboarding_signals.v2.answer.yes_many_times");
+          return getI18nString("user_onboarding_signals.v2.answer.yes_many_times");
       }
     }
   };
-  let [l, a] = fp(bT);
+  let [l, a] = useAtomValueAndSetter(bT);
   return jsx(ts, {
     questionKey,
     questionTitle,
@@ -2644,7 +2644,7 @@ function tn() {
     })
   });
 }
-let ta = _$$eU(() => {
+let ta = atom(() => {
   let e = shuffle(["work", "school", "personal_project", "learning_design"]);
   e.push("something_else");
   return {
@@ -2653,15 +2653,15 @@ let ta = _$$eU(() => {
     getOptionDisplay: e => {
       switch (e) {
         case "work":
-          return _$$t("user_onboarding_signals.v2.answer.work");
+          return getI18nString("user_onboarding_signals.v2.answer.work");
         case "school":
-          return _$$t("user_onboarding_signals.v2.answer.school");
+          return getI18nString("user_onboarding_signals.v2.answer.school");
         case "personal_project":
-          return _$$t("user_onboarding_signals.v2.answer.personal_project");
+          return getI18nString("user_onboarding_signals.v2.answer.personal_project");
         case "learning_design":
-          return _$$t("user_onboarding_signals.v2.answer.learning_design");
+          return getI18nString("user_onboarding_signals.v2.answer.learning_design");
         case "something_else":
-          return _$$t("user_onboarding_signals.v2.answer.something_else");
+          return getI18nString("user_onboarding_signals.v2.answer.something_else");
       }
     }
   };
@@ -2678,16 +2678,16 @@ function td() {
       questionKey: _questionKey2,
       options: _options,
       getOptionDisplay: _getOptionDisplay
-    } = md(ta);
+    } = useAtomWithSubscription(ta);
     return {
       questionKey: _questionKey2,
       options: _options,
-      questionTitle: _$$t("new_user_experience.user_onboarding_signals.question.how_do_you_plan_to_use_figma"),
-      questionSubtitle: _$$t("new_user_experience.user_onboarding_signals.question.how_do_you_plan_to_use_figma.description"),
+      questionTitle: getI18nString("new_user_experience.user_onboarding_signals.question.how_do_you_plan_to_use_figma"),
+      questionSubtitle: getI18nString("new_user_experience.user_onboarding_signals.question.how_do_you_plan_to_use_figma.description"),
       getOptionDisplay: _getOptionDisplay
     };
   }();
-  let [l, a] = fp(PG);
+  let [l, a] = useAtomValueAndSetter(PG);
   return jsx(ts, {
     questionKey,
     questionTitle,
@@ -2712,24 +2712,24 @@ function tc() {
   } = {
     questionKey: "how_many_people_work_at_organization_v1",
     options: new Set(["just_me", "2-100", "101-500", "501-5000", "over_5000"]),
-    questionTitle: _$$t("new_user_experience.user_onboarding_signals.question.how_many_people_work_at_your_organization"),
-    questionSubtitle: _$$t("new_user_experience.user_onboarding_signals.description.give_use_your_best_guesstimate"),
+    questionTitle: getI18nString("new_user_experience.user_onboarding_signals.question.how_many_people_work_at_your_organization"),
+    questionSubtitle: getI18nString("new_user_experience.user_onboarding_signals.description.give_use_your_best_guesstimate"),
     getOptionDisplay: e => {
       switch (e) {
         case "just_me":
-          return _$$t("user_onboarding_signals.v2.answer.just_me");
+          return getI18nString("user_onboarding_signals.v2.answer.just_me");
         case "2-100":
-          return _$$t("user_onboarding_signals.v2.answer.2_100");
+          return getI18nString("user_onboarding_signals.v2.answer.2_100");
         case "101-500":
-          return _$$t("user_onboarding_signals.v2.answer.101_500");
+          return getI18nString("user_onboarding_signals.v2.answer.101_500");
         case "501-5000":
-          return _$$t("user_onboarding_signals.v2.answer.501_5000");
+          return getI18nString("user_onboarding_signals.v2.answer.501_5000");
         case "over_5000":
-          return _$$t("user_onboarding_signals.v2.answer.over_5000");
+          return getI18nString("user_onboarding_signals.v2.answer.over_5000");
       }
     }
   };
-  let [l, a] = fp(VQ);
+  let [l, a] = useAtomValueAndSetter(VQ);
   return jsx(ts, {
     questionKey,
     questionTitle,
@@ -2768,13 +2768,13 @@ function tm(e) {
     className: `team_welcome--copyLinkText--NZlNM ${e.adtlClassName}`,
     children: [jsx(_$$B2, {
       svg: _$$A4
-    }), _$$tx("rcs.team_welcome.copy_to_invite")]
+    }), renderI18nText("rcs.team_welcome.copy_to_invite")]
   });
 }
 function tE(e) {
   let [r, t] = useState([""]);
-  let [i, l] = fp($l);
-  let a = C8();
+  let [i, l] = useAtomValueAndSetter($l);
+  let a = getIsAndroidOrIphoneNotFigmaMobile();
   let c = w5(e.team) ? _$$e3.VIEWER : _$$e3.EDITOR;
   let x = _$$f4(() => e.team ? wZ(e.team.id, c) : Promise.resolve(null), [e.team, c]);
   let h = (e, t) => {
@@ -2788,7 +2788,7 @@ function tE(e) {
   };
   let _ = e => {
     let s = [...r];
-    s[e] = i[e] && !xf(i[e].trim()) ? _$$t("rcs.team_welcome.not_a_valid_address") : "";
+    s[e] = i[e] && !xf(i[e].trim()) ? getI18nString("rcs.team_welcome.not_a_valid_address") : "";
     t(s);
   };
   let p = a ? {
@@ -2810,10 +2810,10 @@ function tE(e) {
     className: p.questionForm,
     children: [jsx("h1", {
       className: p.questionTitle,
-      children: _$$t("new_user_experience.invite_your_collaborators.v2.title")
+      children: getI18nString("new_user_experience.invite_your_collaborators.v2.title")
     }), jsx("div", {
       className: p.questionSubtitle,
-      children: _$$t("new_user_experience.invite_your_collaborators.v2.description")
+      children: getI18nString("new_user_experience.invite_your_collaborators.v2.description")
     }), jsx(Kz, {
       multiple: a ? 4 : 6
     }), jsxs("div", {
@@ -2823,7 +2823,7 @@ function tE(e) {
         children: i.map((e, t) => jsx(F0, {
           "aria-describedby": r[t] ? `email-error-${t}` : void 0,
           "aria-invalid": !!r[t],
-          "aria-label": _$$t("rcs.team_welcome.collaborator_email_input_label", {
+          "aria-label": getI18nString("rcs.team_welcome.collaborator_email_input_label", {
             index: t + 1
           }),
           autoFocus: !a && 0 === t,
@@ -2858,14 +2858,14 @@ function tC() {
     questionSubtitle,
     getOptionDisplay
   } = CR();
-  let [a, c] = fp(ZE);
-  let [x, h] = fp(_$$eL);
+  let [a, c] = useAtomValueAndSetter(ZE);
+  let [x, h] = useAtomValueAndSetter(_$$eL);
   let _ = Xr(SL);
   let p = Array.from(options);
   useEffect(() => {
     _(p);
   }, [_, p]);
-  let f = C8();
+  let f = getIsAndroidOrIphoneNotFigmaMobile();
   return jsx(ts, {
     questionKey,
     questionTitle,
@@ -2891,7 +2891,7 @@ function tC() {
             [tj]: f
           }),
           dataTestId: "custom_job_title_input",
-          placeholder: _$$t("user_onboarding_signals.v1.answer.other.placeholder"),
+          placeholder: getI18nString("user_onboarding_signals.v1.answer.other.placeholder"),
           value: x,
           onChange: e => h(e.currentTarget.value)
         }) : void 0
@@ -2900,7 +2900,7 @@ function tC() {
   });
 }
 function tL() {
-  let [e] = md(PG);
+  let [e] = useAtomWithSubscription(PG);
   let {
     questionKey,
     options,
@@ -2910,15 +2910,15 @@ function tL() {
   } = CR(e);
   let c = Oc();
   let x = N();
-  let [h, _] = fp(ZE);
-  let [p, f] = fp(_$$eL);
-  let g = md(YX);
+  let [h, _] = useAtomValueAndSetter(ZE);
+  let [p, f] = useAtomValueAndSetter(_$$eL);
+  let g = useAtomWithSubscription(YX);
   let m = Xr(SL);
   let E = Array.from(options);
   useEffect(() => {
     m(E);
   }, [m, E]);
-  let b = C8();
+  let b = getIsAndroidOrIphoneNotFigmaMobile();
   let C = "school" !== e && h.has("something_else");
   return jsx(ts, {
     questionKey,
@@ -2948,7 +2948,7 @@ function tL() {
             [tj]: b
           }),
           dataTestId: "custom_job_title_input",
-          placeholder: _$$t("user_onboarding_signals.v1.answer.other.placeholder"),
+          placeholder: getI18nString("user_onboarding_signals.v1.answer.other.placeholder"),
           value: p,
           onChange: e => f(e.currentTarget.value)
         }) : void 0,
@@ -3014,7 +3014,7 @@ function tR(e) {
   var r;
   r = getInitialOptions().iso_code ?? "";
   let t = tS.has(r);
-  let [i, l] = fp(BG);
+  let [i, l] = useAtomValueAndSetter(BG);
   let a = Xr(kd);
   let [d] = useState(!!_$$f("tos_accepted"));
   let c = !!getInitialOptions().tos_agreement_required && !d;
@@ -3024,11 +3024,11 @@ function tR(e) {
   useEffect(() => {
     t && l(!0);
   }, [t, l]);
-  let u = _$$t("auth.sign-up.auto-marketing-email-opt-in-additional-terms");
-  let x = _$$t("auth.marketing.subscribe-to-figma-tips-and-updates-with-indicator", {
+  let u = getI18nString("auth.sign-up.auto-marketing-email-opt-in-additional-terms");
+  let x = getI18nString("auth.marketing.subscribe-to-figma-tips-and-updates-with-indicator", {
     indicator: ""
   });
-  let h = _$$t("auth.marketing.subscribe-to-figma-tips-and-updates-terms-with-indicator", {
+  let h = getI18nString("auth.marketing.subscribe-to-figma-tips-and-updates-terms-with-indicator", {
     indicator: ""
   });
   if (e.isModalNux) return jsxs(Fragment, {
@@ -3055,12 +3055,12 @@ function tR(e) {
   });
   let _ = jsx("span", {
     ..._$$Ay2.props(tT.standardDisclaimer),
-    children: _$$tx("new_user_experience.what_is_your_name.tos_agreement", {
+    children: renderI18nText("new_user_experience.what_is_your_name.tos_agreement", {
       tos_link: jsx(_$$_, {
         href: "/legal/tos",
         newTab: !0,
         className: "x1quhyk7 x1bvjpef",
-        children: _$$t("new_user_experience.what_is_your_name.tos_link")
+        children: getI18nString("new_user_experience.what_is_your_name.tos_link")
       })
     })
   });
@@ -3098,13 +3098,13 @@ function tR(e) {
 }
 function tI() {
   let e = useRef(null);
-  let [r, t] = fp(Q7);
+  let [r, t] = useAtomValueAndSetter(Q7);
   let i = iZ();
   let l = i ? i.email.split("@")[0] : "";
   let a = ti();
-  let d = md($B);
-  let c = md(YX);
-  let x = C8();
+  let d = useAtomWithSubscription($B);
+  let c = useAtomWithSubscription(YX);
+  let x = getIsAndroidOrIphoneNotFigmaMobile();
   let h = x ? {
     questionForm: PJ,
     previousQuestionText: _$$rv,
@@ -3116,8 +3116,8 @@ function tI() {
     questionTitle: HN,
     questionSubtitle: $r
   };
-  let _ = _$$t("new_user_experience.what_is_your_name.v2.title");
-  let p = _$$t("new_user_experience.what_is_your_name.v2.description");
+  let _ = getI18nString("new_user_experience.what_is_your_name.v2.title");
+  let p = getI18nString("new_user_experience.what_is_your_name.v2.description");
   return c ? jsx(tM, {
     questionTitle: _,
     questionSubtitle: p
@@ -3136,7 +3136,7 @@ function tI() {
       multiple: x ? 4 : 6
     }), jsx(F0, {
       ref: e,
-      "aria-label": _$$t("new_user_experience.what_is_your_name.v2.title.label"),
+      "aria-label": getI18nString("new_user_experience.what_is_your_name.v2.title.label"),
       autoCorrect: "off",
       autoFocus: !0,
       className: Pm,
@@ -3158,7 +3158,7 @@ function tM({
   questionSubtitle: r
 }) {
   let t = useRef(null);
-  let [i, l] = fp(Q7);
+  let [i, l] = useAtomValueAndSetter(Q7);
   let a = iZ();
   let d = a ? a.email.split("@")[0] : "";
   return jsxs("div", {
@@ -3173,7 +3173,7 @@ function tM({
       multiple: 3
     }), jsx(F0, {
       ref: t,
-      "aria-label": _$$t("new_user_experience.what_is_your_name.v2.title.label"),
+      "aria-label": getI18nString("new_user_experience.what_is_your_name.v2.title.label"),
       autoCorrect: "off",
       autoFocus: !0,
       className: _t,
@@ -3208,7 +3208,7 @@ let tP = {
   }
 };
 function tA() {
-  let e = md(_$$r);
+  let e = useAtomWithSubscription(_$$r);
   let {
     questionKey,
     options,
@@ -3218,9 +3218,9 @@ function tA() {
   } = Q({
     isStudent: e
   });
-  let a = md(YX);
-  let [d, c] = fp(qV);
-  let x = C8();
+  let a = useAtomWithSubscription(YX);
+  let [d, c] = useAtomValueAndSetter(qV);
+  let x = getIsAndroidOrIphoneNotFigmaMobile();
   return jsx(ts, {
     questionKey,
     questionTitle,
@@ -3236,11 +3236,11 @@ function tA() {
       }), e ? jsx("div", {
         className: a ? void 0 : _$$s.font12.bRadius5.colorBgSecondary.p12.mt20.$$if(x, _$$s.alignCenter).$,
         ..._$$Ay2.props(a && tP.disclaimerContainer),
-        children: _$$tx("new_user_experience.user_onboarding_signals.disclaimer.old_enough_to_consent.v2", {
+        children: renderI18nText("new_user_experience.user_onboarding_signals.disclaimer.old_enough_to_consent.v2", {
           tos: jsx(_$$N, {
-            href: dS("/legal/tos/"),
+            href: getLocalizedPath("/legal/tos/"),
             newTab: !0,
-            children: _$$tx("new_user_experience.user_onboarding_signals.disclaimer.old_enough_to_consent.v2.tos")
+            children: renderI18nText("new_user_experience.user_onboarding_signals.disclaimer.old_enough_to_consent.v2.tos")
           })
         })
       }) : null]
@@ -3257,24 +3257,24 @@ function tF() {
   } = {
     questionKey: "what_will_you_use_figjam_for_v1",
     options: new Set(["brainstorms", "meetings", "diagramming", "projects", "learning"]),
-    questionTitle: _$$t("user_onboarding_signals_figjam.v2.question.what_will_you_use_figjam_for"),
-    questionSubtitle: _$$t("new_user_experience.user_onboarding_signals.description.select_everything_that_applies"),
+    questionTitle: getI18nString("user_onboarding_signals_figjam.v2.question.what_will_you_use_figjam_for"),
+    questionSubtitle: getI18nString("new_user_experience.user_onboarding_signals.description.select_everything_that_applies"),
     getOptionDisplay: e => {
       switch (e) {
         case "brainstorms":
-          return _$$t("user_onboarding_signals_figjam.v2.answer.brainstorms");
+          return getI18nString("user_onboarding_signals_figjam.v2.answer.brainstorms");
         case "meetings":
-          return _$$t("user_onboarding_signals_figjam.v2.answer.meetings");
+          return getI18nString("user_onboarding_signals_figjam.v2.answer.meetings");
         case "diagramming":
-          return _$$t("user_onboarding_signals_figjam.v2.answer.diagramming");
+          return getI18nString("user_onboarding_signals_figjam.v2.answer.diagramming");
         case "projects":
-          return _$$t("user_onboarding_signals_figjam.v2.answer.projects");
+          return getI18nString("user_onboarding_signals_figjam.v2.answer.projects");
         case "learning":
-          return _$$t("user_onboarding_signals_figjam.v2.answer.learning");
+          return getI18nString("user_onboarding_signals_figjam.v2.answer.learning");
       }
     }
   };
-  let [l, a] = fp(Nz);
+  let [l, a] = useAtomValueAndSetter(Nz);
   return jsx(ts, {
     questionKey,
     questionTitle,
@@ -3289,7 +3289,7 @@ function tF() {
     })
   });
 }
-let tB = _$$eU(() => {
+let tB = atom(() => {
   let e = shuffle(["company", "agency", "freelance"]);
   e.push("something_else");
   return {
@@ -3298,13 +3298,13 @@ let tB = _$$eU(() => {
     getOptionDisplay: e => {
       switch (e) {
         case "company":
-          return _$$t("user_onboarding_signals.v2.answer.company");
+          return getI18nString("user_onboarding_signals.v2.answer.company");
         case "freelance":
-          return _$$t("user_onboarding_signals.v2.answer.freelance");
+          return getI18nString("user_onboarding_signals.v2.answer.freelance");
         case "agency":
-          return _$$t("user_onboarding_signals.v2.answer.agency");
+          return getI18nString("user_onboarding_signals.v2.answer.agency");
         case "something_else":
-          return _$$t("user_onboarding_signals.v2.answer.something_else");
+          return getI18nString("user_onboarding_signals.v2.answer.something_else");
       }
     }
   };
@@ -3321,16 +3321,16 @@ function tD() {
       questionKey: _questionKey3,
       options: _options2,
       getOptionDisplay: _getOptionDisplay2
-    } = md(tB);
+    } = useAtomWithSubscription(tB);
     return {
       questionKey: _questionKey3,
       options: _options2,
-      questionTitle: _$$t("new_user_experience.user_onboarding_signals.question.where_or_how_do_you_work"),
-      questionSubtitle: _$$t("new_user_experience.user_onboarding_signals.description.pick_the_one_that_feels_closest_to_your_situation"),
+      questionTitle: getI18nString("new_user_experience.user_onboarding_signals.question.where_or_how_do_you_work"),
+      questionSubtitle: getI18nString("new_user_experience.user_onboarding_signals.description.pick_the_one_that_feels_closest_to_your_situation"),
       getOptionDisplay: _getOptionDisplay2
     };
   }();
-  let [l, a] = fp(xO);
+  let [l, a] = useAtomValueAndSetter(xO);
   return jsx(ts, {
     questionKey,
     questionTitle,
@@ -3428,13 +3428,13 @@ function tG(e) {
     "data-testid": OO,
     onClick: e.onBackButtonClick,
     className: "nux_dynamic_preview_mobile_top_bar_back_button--backButton--cwWpz",
-    "aria-label": _$$t("new_user_experience.button.back"),
+    "aria-label": getI18nString("new_user_experience.button.back"),
     RUMEnabled: !0,
     children: [jsx(_$$C, {
       className: "nux_dynamic_preview_mobile_top_bar_back_button--backButtonIcon--VNHHs"
     }), jsx("span", {
       className: "nux_dynamic_preview_mobile_top_bar_back_button--backButtonText--4C44V",
-      children: _$$tx("new_user_experience.button.back")
+      children: renderI18nText("new_user_experience.button.back")
     })]
   });
 }
@@ -3442,7 +3442,7 @@ function tW(e) {
   let r = Xr(ZE);
   let t = Xr(X9);
   let i = Xr(Q7);
-  let o = md(ni);
+  let o = useAtomWithSubscription(ni);
   let l = () => e.currentQuestion === pu.HAVE_USED_FIGMA_PRODUCTS_BEFORE;
   let a = () => {
     switch (e.currentQuestion) {
@@ -3472,13 +3472,13 @@ function tW(e) {
       trackingDescriptor: _$$c2.SKIP
     },
     "data-testid": F$.skipBtn,
-    children: _$$t("new_user_experience.button.skip")
+    children: getI18nString("new_user_experience.button.skip")
   });
 }
 function tU(e) {
-  let r = md(S0);
-  let t = md(bk);
-  let i = md(uN);
+  let r = useAtomWithSubscription(S0);
+  let t = useAtomWithSubscription(bk);
+  let i = useAtomWithSubscription(uN);
   let o = t ? r.indexOf(t) + 1 : 0;
   let l = r.length;
   let a = e.isMobileViewport ? 120 : 128;
@@ -3499,7 +3499,7 @@ function tU(e) {
         width: `${c}px`
       }
     }), jsx(_$$E2, {
-      children: _$$tx("nux.progress_indicator.steps", {
+      children: renderI18nText("nux.progress_indicator.steps", {
         currentStep: o + 1,
         totalSteps: l
       })
@@ -3737,7 +3737,7 @@ function t7({
   team: r
 }) {
   let [t, i] = useState(() => {
-    let e = Gq();
+    let e = getI18nState();
     return e?.getPrimaryLocale(!1) || defaultLanguage;
   });
   let {
@@ -3754,7 +3754,7 @@ function t7({
   let _ = [languageCodes.EN, ...Object.keys(h)];
   let p = useRef(manager.isOpen);
   useEffect(() => {
-    !p.current && manager.isOpen && az.trackDefinedEvent("i18n.nux_language_dropdown_opened", {
+    !p.current && manager.isOpen && analyticsEventManager.trackDefinedEvent("i18n.nux_language_dropdown_opened", {
       current_locale: t
     });
     p.current = manager.isOpen;
@@ -3771,7 +3771,7 @@ function t7({
     e(!0);
     try {
       if (s === t) return;
-      await jL(s);
+      await loadI18nLocale(s);
       c && (await _$$k.putUser({
         user: {
           id: c,
@@ -3782,7 +3782,7 @@ function t7({
         if (u && r && x) {
           await _$$$.updateDisplayName({
             teamId: r.id,
-            updatedDisplayName: _$$t("default_team.web.team_name", {
+            updatedDisplayName: getI18nString("default_team.web.team_name", {
               userHandle: u.handle
             })
           });
@@ -3794,20 +3794,20 @@ function t7({
           let t = e[0];
           await _$$W.updateFolderName({
             folderId: t,
-            name: _$$t("default_team_folder.web.folder_name")
+            name: getI18nString("default_team_folder.web.folder_name")
           });
         }
       } catch (e) {
-        $D(_$$e.GROWTH_PLATFORM, e);
+        reportError(_$$e.GROWTH_PLATFORM, e);
       }
-      az.trackDefinedEvent("i18n.nux_language_changed", {
+      analyticsEventManager.trackDefinedEvent("i18n.nux_language_changed", {
         from_locale: t,
         to_locale: s
       });
       i(s);
       d(s);
     } catch (e) {
-      $D(_$$e.GROWTH_PLATFORM, e);
+      reportError(_$$e.GROWTH_PLATFORM, e);
     } finally {
       e(!1);
     }
@@ -3835,7 +3835,7 @@ function t7({
               "data-layer": "Language Text",
               className: "LanguageText",
               ...xk(t8.languageText),
-              children: Xo(t)
+              children: getI18nResourceKey(t)
             }), jsx("div", {
               "data-layer": "icon.24.chevron.down",
               className: "Icon24ChevronDown",
@@ -3851,7 +3851,7 @@ function t7({
               children: [jsx("div", {
                 ...xk(t8.menuItemCheckIcon),
                 children: e === t && jsx(_$$l, {})
-              }), Xo(e)]
+              }), getI18nResourceKey(e)]
             })
           }, e))
         })]
@@ -4154,12 +4154,12 @@ let io = {
 };
 function il(e) {
   let r = J();
-  let t = md(fj);
-  let i = md(JC);
+  let t = useAtomWithSubscription(fj);
+  let i = useAtomWithSubscription(JC);
   let o = T5("NuxDynamicPreviewBottomBar").unwrapOr(null);
   let l = o?.name;
-  let a = md(YX);
-  let d = md(bk) === pu.WHICH_SEAT_WOULD_YOU_LIKE;
+  let a = useAtomWithSubscription(YX);
+  let d = useAtomWithSubscription(bk) === pu.WHICH_SEAT_WOULD_YOU_LIKE;
   return jsxs("div", {
     className: a ? void 0 : pR,
     ..._$$Ay2.props(a && io.bottomBar),
@@ -4175,9 +4175,9 @@ function il(e) {
         formatAndSubmitSignalCollectionResponses: r
       }), d && !!t && t !== Gu.VIEW && jsx("div", {
         className: mx,
-        children: i ? _$$t("seat_selection_in_nux.well_update_your_set", {
+        children: i ? getI18nString("seat_selection_in_nux.well_update_your_set", {
           orgOrTeamName: l || ""
-        }) : _$$t("seat_selection_in_nux.well_send_your_request_to", {
+        }) : getI18nString("seat_selection_in_nux.well_send_your_request_to", {
           orgOrTeamName: l || ""
         })
       }), jsx(eJ, {
@@ -4220,8 +4220,8 @@ function ic(e) {
     currentQuestion,
     team
   } = e;
-  let i = md(_D);
-  let o = md(YX);
+  let i = useAtomWithSubscription(_D);
+  let o = useAtomWithSubscription(YX);
   let l = _$$u();
   es();
   return jsx(fu, {
@@ -4274,7 +4274,7 @@ function i_({
     className: "x10l6tqk x1ypdohk x1peatla x1fu8urw x1xmnb5e x2b8uid x1lliihq xdvhukp x1axw3p3",
     onClick: e,
     "data-testid": OO,
-    "aria-label": _$$t("new_user_experience.button.back"),
+    "aria-label": getI18nString("new_user_experience.button.back"),
     RUMEnabled: !0,
     children: jsx(_$$B2, {
       svg: _$$A5,
@@ -4286,7 +4286,7 @@ function i_({
 function ip(e) {
   let [r, t] = useState(!1);
   let i = e.question.value;
-  let l = md(_D);
+  let l = useAtomWithSubscription(_D);
   let a = useRef(null);
   let c = useRef(null);
   let {
@@ -4463,25 +4463,25 @@ function iE({
   dismissModal: a,
   entryPoint: d
 }) {
-  let c = md(pr);
-  let [u, x] = fp(bk);
-  let [h, _] = fp(Xw);
-  let p = md(ni);
+  let c = useAtomWithSubscription(pr);
+  let [u, x] = useAtomValueAndSetter(bk);
+  let [h, _] = useAtomValueAndSetter(Xw);
+  let p = useAtomWithSubscription(ni);
   let f = Oc();
   let g = N();
-  let m = md(S0);
+  let m = useAtomWithSubscription(S0);
   let E = function ({
     hasFigJamIntent: e,
     team: r,
     signupSource: t,
     isMobileViewport: s
   }) {
-    let l = md(_$$eS);
-    let a = md($B);
+    let l = useAtomWithSubscription(_$$eS);
+    let a = useAtomWithSubscription($B);
     let d = _6();
     let c = null !== U2(d);
-    let [u, x] = fp(S0);
-    let [h, _] = fp(bk);
+    let [u, x] = useAtomValueAndSetter(S0);
+    let [h, _] = useAtomValueAndSetter(bk);
     let p = fr();
     let f = Oc();
     let g = useMemo(() => {
@@ -4490,7 +4490,7 @@ function iE({
       return i;
     }, [l.status, l.data, a.status, a.data, f, e, t, c, r, s, p]);
     useEffect(() => {
-      h ? h === g[0] ? (x(g), i = [...g]) : I()(g, i) || $D(_$$e.ACTIVATION, Error("NUX steps have unexpectedly changed in the middle of NUX"), {
+      h ? h === g[0] ? (x(g), i = [...g]) : I()(g, i) || reportError(_$$e.ACTIVATION, Error("NUX steps have unexpectedly changed in the middle of NUX"), {
         extra: {
           currentQuestion: h,
           currentSteps: u,
@@ -4502,7 +4502,7 @@ function iE({
       }) : _(g[0]);
     }, [h, u, _, x, g]);
     _$$R(() => {
-      sx("NUX First Step", {
+      trackEventAnalytics("NUX First Step", {
         nuxType: "nux_dynamic_preview",
         isGen1: !!a.data,
         question: h
@@ -4597,7 +4597,7 @@ let ib = "nux_dynamic_preview_overlay--mobile--beL6j";
 export function $$ij0(e) {
   let r = Xr(pr);
   let t = L(e.onOverlayClose);
-  let i = C8();
+  let i = getIsAndroidOrIphoneNotFigmaMobile();
   let a = useSelector(e => MS(e.userFlags));
   let m = useSelector(e => e.currentTeamId);
   let E = Rs(yQw(_X(Pw.GROUP_7) && m ? {

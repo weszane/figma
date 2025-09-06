@@ -4,7 +4,7 @@ import { q } from "../905/820062";
 import o from "classnames";
 import { h1 } from "../905/986103";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { H8 } from "../905/590952";
 import { E } from "../905/984674";
@@ -64,7 +64,7 @@ let y = ["37.5%", "12.5%", "50%", "75%", "25%"];
           showTooltipWhenTruncated: !0,
           children: jsx("span", {
             className: _$$s.pre.$,
-            children: tx(n ? "fragment_search.last.edited_time_without_separator" : "fragment_search.last.edited_time_with_separator", {
+            children: renderI18nText(n ? "fragment_search.last.edited_time_without_separator" : "fragment_search.last.edited_time_with_separator", {
               time: jsx(h1, {
                 date: t
               })
@@ -86,7 +86,7 @@ let y = ["37.5%", "12.5%", "50%", "75%", "25%"];
       children: [jsx(E, {
         truncate: !0,
         showTooltipWhenTruncated: !0,
-        children: tx("community.community_author", {
+        children: renderI18nText("community.community_author", {
           author: e
         })
       }), jsx(_$$E, {

@@ -2,7 +2,7 @@ import { defaultLanguage } from "../905/816253";
 import { throwTypeError } from "../figma_app/465776";
 import { M7s } from "../figma_app/763686";
 import { $$default } from "../vendor/73080";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { Kg } from "../905/71";
 export let $$n1;
 function c(e) {
@@ -32,7 +32,7 @@ class u {
           parsedPlaceholder: f
         });
         if (!Kg(n)) {
-          x1("renderPlaceholderImpl", "Result is not a string", {
+          logError("renderPlaceholderImpl", "Result is not a string", {
             formatType: e,
             formatPattern: t,
             value: i,

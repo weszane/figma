@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useMemo, useRef } from "react";
 import { P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { IT } from "../905/713695";
 import { e0 } from "../905/696396";
 import { l as _$$l, n as _$$n } from "../905/402643";
@@ -87,26 +87,26 @@ function I({
       type: "style",
       style: t
     },
-    description: t.description ?? _$$t("design_systems.libraries_modal.n_a")
+    description: t.description ?? getI18nString("design_systems.libraries_modal.n_a")
   }, {
     type: V.STAT,
-    header: _$$t("design_systems.libraries_modal.total"),
+    header: getI18nString("design_systems.libraries_modal.total"),
     count: i.data?.summary.total_usages ?? null,
-    word: _$$t("design_systems.libraries_modal.plural.instance", {
+    word: getI18nString("design_systems.libraries_modal.plural.instance", {
       instanceCount: i.data?.summary.total_usages ?? 0
     })
   }, {
     type: V.STAT,
-    header: _$$t("design_systems.libraries_modal.used_by"),
+    header: getI18nString("design_systems.libraries_modal.used_by"),
     count: i.data?.summary.total_teams ?? null,
-    word: _$$t("design_systems.libraries_modal.plural.team", {
+    word: getI18nString("design_systems.libraries_modal.plural.team", {
       teamCount: i.data?.summary.total_teams ?? 0
     })
   }, {
     type: V.STAT,
-    header: _$$t("design_systems.libraries_modal.used_in"),
+    header: getI18nString("design_systems.libraries_modal.used_in"),
     count: i.data?.summary.total_files ?? null,
-    word: _$$t("design_systems.libraries_modal.plural.file", {
+    word: getI18nString("design_systems.libraries_modal.plural.file", {
       fileCount: i.data?.summary.total_files ?? 0
     })
   }];

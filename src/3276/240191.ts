@@ -1,17 +1,17 @@
-import { eU } from "../figma_app/27355";
+import { atom } from "../figma_app/27355";
 import { p9 } from "../figma_app/864723";
 import { yV } from "../figma_app/516028";
-import { bt } from "../905/270322";
+import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { Z1 } from "../905/401885";
 import { r1 } from "../figma_app/545877";
-let d = bt(e => e.multiplayer.allUsers);
-eU(e => {
+let d = createReduxSubscriptionAtomWithState(e => e.multiplayer.allUsers);
+atom(e => {
   let t = e(p9);
   let n = e(d);
   if (t && 0 !== n.length) return n.filter(e => e.userID !== t.id);
 });
-let c = bt(e => e.multiplayer.deviceNameFilter);
-let $$m2 = eU(e => {
+let c = createReduxSubscriptionAtomWithState(e => e.multiplayer.deviceNameFilter);
+let $$m2 = atom(e => {
   let t = e(d);
   let n = e(c);
   return null != e(yV) && null != n && new Set(t.filter(e => e.deviceName === n).map(e => e.userID)).size > 1;
@@ -27,12 +27,12 @@ let $$p1 = Z1(u, (e, t) => {
   for (let e of a) e.joinedAtS >= i && s.add(e.userID);
   return !(s.size < 5) && !e;
 });
-let h = bt(e => {
+let h = createReduxSubscriptionAtomWithState(e => {
   let t = "fullscreen" === e.selectedView.view && !e.mirror.appModel.showUi;
   let n = "prototype" === e.selectedView.view && e.selectedView.hideUI;
   return t || n;
 });
-let $$f0 = bt(e => {
+let $$f0 = createReduxSubscriptionAtomWithState(e => {
   let t = "fullscreen" === e.selectedView.view && e.mirror.appModel.showUi;
   let n = "prototype" === e.selectedView.view && !e.selectedView.hideUI;
   return t || n;

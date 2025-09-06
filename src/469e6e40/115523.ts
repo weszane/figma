@@ -26,7 +26,7 @@ import { d as _$$d } from "../c5e2cae0/368426";
 import { Q as _$$Q } from "../905/553231";
 import I from "classnames";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t2, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { v as _$$v } from "../4452/562448";
 import { B as _$$B } from "../4452/541264";
 import { d as _$$d2 } from "../4452/230712";
@@ -88,11 +88,11 @@ let Q = e => {
 let Z = e => {
   switch (e) {
     case eP.PENDING:
-      return _$$t2("connected_projects_table.status.pending");
+      return getI18nString("connected_projects_table.status.pending");
     case eP.DISCONNECTED:
-      return _$$t2("connected_projects_table.status.disconnected");
+      return getI18nString("connected_projects_table.status.disconnected");
     case eP.ACTIVE:
-      return _$$t2("connected_projects_table.status.active");
+      return getI18nString("connected_projects_table.status.active");
   }
 };
 function ee(e) {
@@ -169,9 +169,9 @@ function ey(e) {
     className: V,
     children: [jsx("div", {
       className: _$$s.colorTextSecondary.$,
-      children: isHostPlanAdmin ? tx("resource_connection.connected_by") : tx("resource_connection.approved_by")
+      children: isHostPlanAdmin ? renderI18nText("resource_connection.connected_by") : renderI18nText("resource_connection.approved_by")
     }), jsx("div", {
-      children: tx("resource_connection.connected_by_info", {
+      children: renderI18nText("resource_connection.connected_by_info", {
         inviter: j?.connectedBy,
         timeStamp: E(j?.connectedByTimestamp)
       })
@@ -184,7 +184,7 @@ function ey(e) {
       className: _$$s.flex.flexColumn.$,
       children: [jsx("div", {
         className: H,
-        children: _$$t2("resource_connection.num_people", {
+        children: getI18nString("resource_connection.num_people", {
           count: totalResourceConnectedUsers
         })
       }), jsxs("div", {
@@ -244,14 +244,14 @@ function ey(e) {
         className: _$$s.flex.flexColumn.$,
         children: [jsx("div", {
           className: H,
-          children: _$$t2("resource_connection.manage_modal.libraries")
+          children: getI18nString("resource_connection.manage_modal.libraries")
         }), jsx("div", {
           className: T()(Y, {
             [J]: !e.numLibrariesEnabledResult.data
           }),
-          children: e.numLibrariesEnabledResult.data ? _$$t2("resource_connection.n_libraries_in_connected_project", {
+          children: e.numLibrariesEnabledResult.data ? getI18nString("resource_connection.n_libraries_in_connected_project", {
             count: e.numLibrariesEnabledResult.data
-          }) : _$$t2("resource_connection.manage_modal.allow_external_teams_to_use_libraries")
+          }) : getI18nString("resource_connection.manage_modal.allow_external_teams_to_use_libraries")
         })]
       }), jsx("span", {
         className: W,
@@ -263,7 +263,7 @@ function ey(e) {
       className: V,
       children: [jsx("div", {
         className: _$$s.colorTextSecondary.$,
-        children: tx("resource_connection.last_activity")
+        children: renderI18nText("resource_connection.last_activity")
       }), jsx("div", {
         children: jsx(h1, {
           date: projectLastModifiedAt
@@ -291,7 +291,7 @@ function ey(e) {
             }
           }));
         },
-        children: tx("resource_connection.manage_modal.deactivate")
+        children: renderI18nText("resource_connection.manage_modal.deactivate")
       })
     })]
   });
@@ -300,9 +300,9 @@ function ey(e) {
       className: V,
       children: [jsx("div", {
         className: _$$s.colorTextSecondary.$,
-        children: tx("resource_connection.invite_sent")
+        children: renderI18nText("resource_connection.invite_sent")
       }), jsx("div", {
-        children: tx("resource_connection.invite_sent_info", {
+        children: renderI18nText("resource_connection.invite_sent_info", {
           inviter: y?.inviteSentBy,
           timeStamp: E(y?.inviteSentByTimestamp)
         })
@@ -324,24 +324,24 @@ function ey(e) {
             }
           }));
         },
-        children: tx("resource_connection.pending_modal.revoke_invite")
+        children: renderI18nText("resource_connection.pending_modal.revoke_invite")
       })
     })]
   });
   let L = jsxs(Fragment, {
     children: [w, S, w, disconnectedAt && jsxs("div", {
       className: _$$s.colorTextSecondary.py12.$,
-      children: [_$$t2("resource_connection.disconnected_info", {
+      children: [getI18nString("resource_connection.disconnected_info", {
         connectedPlanName: connectingPlan.name,
         disconnectedAt: E(disconnectedAt),
         disconnectedBy: disconnectedByName ?? ""
       }), isHostPlanAdmin && jsxs(Fragment, {
-        children: [" ", assetTransferRequest ? assetTransferRequest.sourceUser?.name ? _$$t2("resource_connection.admin_sent_a_copy", {
+        children: [" ", assetTransferRequest ? assetTransferRequest.sourceUser?.name ? getI18nString("resource_connection.admin_sent_a_copy", {
           adminName: assetTransferRequest.sourceUser?.name ?? "",
           connectedPlanName: connectingPlan.name
-        }) : _$$t2("resource_connection.admin_sent_a_copy_no_admin_name", {
+        }) : getI18nString("resource_connection.admin_sent_a_copy_no_admin_name", {
           connectedPlanName: connectingPlan.name
-        }) : tx("resource_connection.you_can_send_a_copy", {
+        }) : renderI18nText("resource_connection.you_can_send_a_copy", {
           shareACopyButton: jsx($n, {
             variant: "link",
             onClick: () => {
@@ -355,7 +355,7 @@ function ey(e) {
                 }
               }));
             },
-            children: _$$t2("resource_connection.disconnect_success_modal.share_a_copy")
+            children: getI18nString("resource_connection.disconnect_success_modal.share_a_copy")
           }),
           connectedPlanName: connectingPlan.name
         })]
@@ -381,12 +381,12 @@ function ey(e) {
       className: _$$s.flex.flexColumn.$,
       children: [jsx("div", {
         className: H,
-        children: tx("file_browser.folder_settings_modal.description")
+        children: renderI18nText("file_browser.folder_settings_modal.description")
       }), jsx("div", {
         className: T()(Y, {
           [J]: !D
         }),
-        children: D ? projectDescription : tx("file_browser.folder_settings_modal.add_description")
+        children: D ? projectDescription : renderI18nText("file_browser.folder_settings_modal.add_description")
       })]
     }), jsx("span", {
       className: W,
@@ -399,7 +399,7 @@ function ey(e) {
     className: _$$s.flex.flexColumn.my6.mb16.$,
     children: [jsx("div", {
       className: H,
-      children: tx("file_browser.folder_settings_modal.description")
+      children: renderI18nText("file_browser.folder_settings_modal.description")
     }), jsx("div", {
       className: Y,
       children: projectDescription
@@ -411,7 +411,7 @@ function ey(e) {
       children: isHostPlanAdmin ? P : U
     }), jsx("div", {
       className: _$$s.textBodyMediumStrong.pb4.$,
-      children: _$$t2("resource_connection.teams")
+      children: getI18nString("resource_connection.teams")
     }), jsxs("div", {
       className: T()(z, _$$s.pb4.$),
       children: [jsx(nl, {
@@ -425,12 +425,12 @@ function ey(e) {
         }), jsxs("span", {
           children: [status === eP.ACTIVE && jsxs("span", {
             className: _$$s.textBodyMedium.colorTextSecondary.$,
-            children: [_$$t2("resource_connection.num_members", {
+            children: [getI18nString("resource_connection.num_members", {
               count: f
             }), " \xb7\xa0"]
           }), jsx(_$$N, {
             href: "https://help.figma.com/hc/articles/30124855491863-Guide-to-connected-projects#h_01JMJDKJFD8C3M4MDEVKBHAFEQ",
-            children: _$$t2("resource_connection.host")
+            children: getI18nString("resource_connection.host")
           })]
         })]
       })]
@@ -446,7 +446,7 @@ function ey(e) {
           children: connectingPlan.name
         }), status === eP.ACTIVE && jsx("div", {
           className: _$$s.textBodyMedium.colorTextSecondary.$,
-          children: _$$t2("resource_connection.num_members", {
+          children: getI18nString("resource_connection.num_members", {
             count: v
           })
         })]
@@ -494,10 +494,10 @@ function eO(e) {
   let f = isHostPlanAdmin ? x?.filter(e => e?.planId === hostPlan.id).length || 0 : totalResourceConnectedUsers ? Number(totalResourceConnectedUsers) - v : 0;
   let j = [hostPlan.id, connectingPlan.id, eR];
   let y = {
-    ALL: _$$t2("resource_connection.people.all_teams"),
+    ALL: getI18nString("resource_connection.people.all_teams"),
     [hostPlan.id]: hostPlan.name,
     [connectingPlan.id]: connectingPlan.name,
-    [eR]: _$$t2("resource_connection.people.other_guests")
+    [eR]: getI18nString("resource_connection.people.other_guests")
   };
   if ("loading" === e.resourceConnectedUsersResult.status) return null;
   let w = jsxs("div", {
@@ -519,7 +519,7 @@ function eO(e) {
             e.target instanceof HTMLInputElement && m(e.target.value);
           },
           onMouseDown: e => e.stopPropagation(),
-          placeholder: _$$t2("resource_connection.people.search_people"),
+          placeholder: getI18nString("resource_connection.people.search_people"),
           value: u ?? "",
           spellCheck: "false"
         }), !!u && jsx("div", {
@@ -528,7 +528,7 @@ function eO(e) {
             onClick: () => {
               m("");
             },
-            "aria-label": _$$t2("search.search_bar.clear"),
+            "aria-label": getI18nString("search.search_bar.clear"),
             children: jsx(In, {
               icon: "x-16",
               fill: "secondary"
@@ -571,7 +571,7 @@ function eO(e) {
       className: "connected_projects_flyout--peopleFlyoutBody--PBwlb",
       children: [jsx("div", {
         className: "connected_projects_flyout--description--yNN6h",
-        children: isHostPlanAdmin ? tx("resource_connection.people.manage_peoples_access_on_the_project_page", {
+        children: isHostPlanAdmin ? renderI18nText("resource_connection.people.manage_peoples_access_on_the_project_page", {
           projectPageLink: jsx(_$$E, {
             className: "connected_projects_flyout--projectLink--spvwE",
             onClick: () => {
@@ -580,16 +580,16 @@ function eO(e) {
                 folderId: resourceId
               }));
             },
-            children: tx("resource_connection.people.project_page")
+            children: renderI18nText("resource_connection.people.project_page")
           })
-        }) : v ? tx("resource_connection.people.there_are_x_people_in_project_name", {
+        }) : v ? renderI18nText("resource_connection.people.there_are_x_people_in_project_name", {
           numPeople: Number(totalResourceConnectedUsers) || 0,
           projectName: resourceName,
           numHostPeople: f,
           hostPlanName: hostPlan.name,
           numConnectedPeople: v,
           connectedPlanName: connectingPlan.name
-        }) : tx("resource_connection.people.there_are_x_people_in_project_name_none_from_connected_plan", {
+        }) : renderI18nText("resource_connection.people.there_are_x_people_in_project_name_none_from_connected_plan", {
           numPeople: Number(totalResourceConnectedUsers) || 0,
           projectName: resourceName,
           numHostPeople: f,
@@ -623,7 +623,7 @@ function eO(e) {
                 className: "connected_projects_flyout--name--AyFlx",
                 children: [e.user.name && EJ(e.user.name, 40), " ", d.id === e.user.id && jsx("span", {
                   className: "connected_projects_flyout--you--MfCZP",
-                  children: tx("avatar.tooltip.you")
+                  children: renderI18nText("avatar.tooltip.you")
                 })]
               }), jsx("div", {
                 className: "connected_projects_flyout--email--Kix6Y",
@@ -634,7 +634,7 @@ function eO(e) {
             className: "connected_projects_flyout--level--UUwpu",
             children: e.isFileRole ? jsx("span", {
               className: "connected_projects_flyout--fileLevelAccess--VCER8",
-              children: _$$t2("resource_connection.people.file_level_access")
+              children: getI18nString("resource_connection.people.file_level_access")
             }) : e.level && C1(e.level)
           })]
         });
@@ -713,7 +713,7 @@ let eM = {
                     folderId: resourceId
                   }));
                 },
-                children: _$$t2("resource_connection.view_project")
+                children: getI18nString("resource_connection.view_project")
               })]
             })]
           }), jsx(_$$m.HiddenTitle, {
@@ -727,10 +727,10 @@ let eM = {
                 manager: m,
                 children: [jsx(_$$t3.Tab, {
                   ..._.overview,
-                  children: _$$t2("resource_connection.overview")
+                  children: getI18nString("resource_connection.overview")
                 }), jsx(_$$t3.Tab, {
                   ..._.people,
-                  children: _$$t2("resource_connection.people")
+                  children: getI18nString("resource_connection.people")
                 })]
               })
             })]
@@ -907,7 +907,7 @@ function eU(e) {
     },
     children: [q, jsx(Cj, {
       columns: [{
-        name: _$$t2("connected_projects_table.project"),
+        name: getI18nString("connected_projects_table.project"),
         className: "connected_projects_table--projectNameColumn--KUW-P connected_projects_table--column--MWjlO table--column--974RA",
         cellComponent: e => jsx("div", {
           className: T()(_$$s.mr32.$, G, f(e)),
@@ -917,7 +917,7 @@ function eU(e) {
           })
         })
       }, {
-        name: _$$t2("connected_projects_table.host_plan"),
+        name: getI18nString("connected_projects_table.host_plan"),
         className: "connected_projects_table--hostPlanColumn--USRkS connected_projects_table--column--MWjlO table--column--974RA",
         cellComponent: e => jsxs("div", {
           className: T()(B, f(e)),
@@ -930,7 +930,7 @@ function eU(e) {
           })]
         })
       }, {
-        name: _$$t2("connected_projects_table.connected_plan"),
+        name: getI18nString("connected_projects_table.connected_plan"),
         className: "connected_projects_table--connectingPlanColumn--XRuPz connected_projects_table--column--MWjlO table--column--974RA",
         cellComponent: e => jsxs("div", {
           className: T()(B, f(e)),
@@ -943,7 +943,7 @@ function eU(e) {
           })]
         })
       }, {
-        name: _$$t2("connected_projects_table.status"),
+        name: getI18nString("connected_projects_table.status"),
         className: "connected_projects_table--statusColumn--VJDqd connected_projects_table--column--MWjlO table--column--974RA",
         cellComponent: e => jsx("div", {
           className: f(e),
@@ -957,7 +957,7 @@ function eU(e) {
       isLoading: !resourceConnectionsLgResult,
       itemTypeContext: {
         itemType: "folder",
-        getSelectedCountString: e => _$$t2("multi_select_list.selected_count_folder", {
+        getSelectedCountString: e => getI18nString("multi_select_list.selected_count_folder", {
           numSelected: e
         })
       },
@@ -974,7 +974,7 @@ function eU(e) {
           className: "connected_projects_table--iconColumnContainer--lbzmx",
           children: v(e) ? jsx($n, {
             onClick: () => x(e),
-            children: tx("connected_projects_table.review_request")
+            children: renderI18nText("connected_projects_table.review_request")
           }) : jsx(jT, {})
         })
       }],
@@ -995,7 +995,7 @@ function eU(e) {
         iconPrefix: _ ? jsx(_$$d, {}) : jsx(_$$Q, {}),
         variant: "ghost",
         onClick: () => u(!_),
-        children: _ ? _$$t2("connected_projects_table.hide_inactive_projects") : _$$t2("connected_projects_table.show_previous_connections")
+        children: _ ? getI18nString("connected_projects_table.hide_inactive_projects") : getI18nString("connected_projects_table.show_previous_connections")
       })
     }), jsx(eF, {
       highlightedItem,

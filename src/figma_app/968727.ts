@@ -1,5 +1,5 @@
 import { Point } from "../905/736624";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { $ } from "../905/383708";
 import { F } from "../905/302958";
 import { nF } from "../905/350402";
@@ -67,7 +67,7 @@ let $$f0 = nF(async (e, t) => {
     insertAsChildOfCanvas: !1
   })) : e.dispatch(F.enqueue({
     type: "insert_component_error",
-    message: _$$t("design_systems.subscriptions.this_component_is_not_available"),
+    message: getI18nString("design_systems.subscriptions.this_component_is_not_available"),
     error: !0
   }));
 });

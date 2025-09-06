@@ -20,7 +20,7 @@ import { lv } from "../figma_app/204891";
 import { V as _$$V } from "../figma_app/385855";
 import { y as _$$y } from "../905/171275";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Y as _$$Y, M as _$$M } from "../905/830372";
 import { p as _$$p } from "../905/597320";
 import { V3 } from "../figma_app/976345";
@@ -29,7 +29,7 @@ import { fu } from "../figma_app/831799";
 import { vmp, NI1 } from "../figma_app/43951";
 import { J7, SN } from "../figma_app/650409";
 import { O as _$$O } from "../905/833838";
-import { Iv } from "../905/548208";
+import { DashboardSections } from "../905/548208";
 import { e0 } from "../905/696396";
 import { Cj } from "../905/270084";
 import { zx, VU } from "../4452/650793";
@@ -136,22 +136,22 @@ function V(e) {
     children: [d ? jsxs(Fragment, {
       children: [jsx(_$$p2, {
         onClick: m,
-        children: _$$t("abandoned_drafts_table.copy_to_drafts")
+        children: getI18nString("abandoned_drafts_table.copy_to_drafts")
       }), jsx(_$$p2, {
         onClick: p,
-        children: _$$t("abandoned_drafts_table.restore")
+        children: getI18nString("abandoned_drafts_table.restore")
       })]
     }) : jsxs(Fragment, {
       children: [jsx(_$$p2, {
         onClick: c,
-        children: _$$t("abandoned_drafts_table.open")
+        children: getI18nString("abandoned_drafts_table.open")
       }), jsx(_$$p2, {
         onClick: _,
-        children: _$$t("abandoned_drafts_table.move")
+        children: getI18nString("abandoned_drafts_table.move")
       })]
     }), jsx(wv, {}), jsx(_$$p2, {
       onClick: u,
-      children: _$$t("project_menu.permanently_delete")
+      children: getI18nString("project_menu.permanently_delete")
     })]
   });
 }
@@ -170,7 +170,7 @@ function H({
         }));
       },
       disabled: 1 !== e.length || a,
-      label: _$$t("abandoned_drafts_table.open")
+      label: getI18nString("abandoned_drafts_table.open")
     }), jsx(IU, {
       onClick: () => {
         let a = e.filter(e => !e.repo).map(e => G(e));
@@ -178,7 +178,7 @@ function H({
         _$$O2(a, n, t);
       },
       disabled: a,
-      label: _$$t("abandoned_drafts_table.move")
+      label: getI18nString("abandoned_drafts_table.move")
     }), a && jsxs(Fragment, {
       children: [jsx(IU, {
         onClick: () => {
@@ -187,7 +187,7 @@ function H({
           }));
         },
         disabled: 1 !== e.length || !s,
-        label: _$$t("abandoned_drafts_table.copy_to_drafts")
+        label: getI18nString("abandoned_drafts_table.copy_to_drafts")
       }), jsx(IU, {
         onClick: () => {
           let a = e.filter(e => !e.repo).map(e => e.key);
@@ -198,7 +198,7 @@ function H({
           }));
         },
         disabled: !s,
-        label: _$$t("abandoned_drafts_table.restore")
+        label: getI18nString("abandoned_drafts_table.restore")
       })]
     }), jsx(IU, {
       onClick: () => {
@@ -209,7 +209,7 @@ function H({
           repoIds: n
         }));
       },
-      label: _$$t("project_menu.permanently_delete")
+      label: getI18nString("project_menu.permanently_delete")
     })]
   });
 }
@@ -246,7 +246,7 @@ function ee(e) {
   ("errors" === p.status || "errors" === U.status) && (e.planType === _$$O.TEAM ? t(sf({
     view: "teamAdminConsole",
     teamId: e.planId,
-    teamAdminConsoleViewTab: Iv.DRAFTS
+    teamAdminConsoleViewTab: DashboardSections.DRAFTS
   })) : t(sf({
     view: "orgAdminSettings",
     orgAdminSettingsViewTab: J7.CONTENT,
@@ -276,7 +276,7 @@ function ee(e) {
         files: e
       }),
       columns: [{
-        name: _$$t("abandoned_drafts_table.file_name"),
+        name: getI18nString("abandoned_drafts_table.file_name"),
         className: "abandoned_draft_files_table--fileNameColumn--wRvXv abandoned_draft_files_table--column--DMRf- table--column--974RA",
         sorting_key: K,
         getSortValue: e => e.name,
@@ -294,11 +294,11 @@ function ee(e) {
             children: e.name
           }), e.trashedAt && jsx(Ex, {
             color: zE.DEFAULT,
-            text: _$$t("abandoned_drafts_table.trashed")
+            text: getI18nString("abandoned_drafts_table.trashed")
           })]
         })
       }, {
-        name: _$$t("abandoned_drafts_table.modified_at"),
+        name: getI18nString("abandoned_drafts_table.modified_at"),
         className: "abandoned_draft_files_table--modifiedAtColumn--GOXML abandoned_draft_files_table--column--DMRf- table--column--974RA",
         sorting_key: X,
         getSortValue: e => e.touchedAt,
@@ -306,7 +306,7 @@ function ee(e) {
           date: e.touchedAt
         })
       }, {
-        name: _$$t("abandoned_drafts_table.created_at"),
+        name: getI18nString("abandoned_drafts_table.created_at"),
         className: "abandoned_draft_files_table--createdAtColumn--z6vBs abandoned_draft_files_table--column--DMRf- table--column--974RA",
         sorting_key: Q,
         getSortValue: e => e.createdAt.toDateString(),
@@ -321,7 +321,7 @@ function ee(e) {
           verticalAlignItems: "center",
           children: jsx("div", {
             className: "abandoned_draft_files_table--emptyTextHeader--m6pOW",
-            children: tx("abandoned_drafts_table.no_drafts")
+            children: renderI18nText("abandoned_drafts_table.no_drafts")
           })
         })
       }),
@@ -332,7 +332,7 @@ function ee(e) {
       isRowClickable: G,
       itemTypeContext: {
         itemType: "file",
-        getSelectedCountString: e => _$$t("multi_select_list.selected_count_file", {
+        getSelectedCountString: e => getI18nString("multi_select_list.selected_count_file", {
           numSelected: e
         })
       },
@@ -362,14 +362,14 @@ function ee(e) {
           onChange: o,
           query: l,
           clearSearch: () => o(""),
-          placeholder: _$$t("abandoned_drafts_table.files.search.placeholder")
+          placeholder: getI18nString("abandoned_drafts_table.files.search.placeholder")
         }), jsx(_$$M, {}), jsx(_$$S, {
           checked: d,
           onChange: () => {
             _(!d);
           },
           label: jsx(_$$J, {
-            children: tx("abandoned_drafts_table.files.show_trashed_files")
+            children: renderI18nText("abandoned_drafts_table.files.show_trashed_files")
           })
         })]
       }),

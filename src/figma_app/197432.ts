@@ -1,8 +1,8 @@
 import { h3O } from "../figma_app/763686";
-import { eU, zl } from "../figma_app/27355";
-import { eD } from "../figma_app/876459";
+import { atom, atomStoreManager } from "../figma_app/27355";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { Ay } from "../905/612521";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { A7 } from "../905/87821";
 import { _ } from "../905/401345";
 let n;
@@ -11,8 +11,8 @@ export function $$u2() {
   let e = document.getElementById("fullscreen-root");
   e?.remove();
 }
-let p = eU(new Set());
-let $$_0 = eU(null, (e, t, r, n) => {
+let p = atom(new Set());
+let $$_0 = atom(null, (e, t, r, n) => {
   let i = e(p);
   n ? i.add(r) : i.$$delete(r);
   t(p, new Set(i));
@@ -26,13 +26,13 @@ export function $$h1(e, t) {
     wasInUnclaimedTryFile,
     previousFileKey
   } = e;
-  let f = zl.get(p).size > 0;
+  let f = atomStoreManager.get(p).size > 0;
   if (null == openFile) {
-    wasInWorkshop || ($$u2(), zl.get(_) || (eD && eD.hasFeature("webErrorPageType") && previousFileKey ? eD.reportFatalError(previousFileKey, {
+    wasInWorkshop || ($$u2(), atomStoreManager.get(_) || (desktopAPIInstance && desktopAPIInstance.hasFeature("webErrorPageType") && previousFileKey ? desktopAPIInstance.reportFatalError(previousFileKey, {
       type: "web",
-      title: _$$t("403.file_permissions_error.title"),
-      description: _$$t("404.file_no_access.title")
-    }) : A7(_$$t("404.file_no_access.title"), t)));
+      title: getI18nString("403.file_permissions_error.title"),
+      description: getI18nString("404.file_no_access.title")
+    }) : A7(getI18nString("404.file_no_access.title"), t)));
     return;
   }
   let E = wasInUnclaimedTryFile && !openFile.isTryFile;
@@ -47,8 +47,8 @@ export function $$h1(e, t) {
   };
   if (y && f && openFile.canEdit) {
     console.warn("prevented refresh due to delay hook");
-    n || (n = zl.sub(p, () => {
-      0 === zl.get(p).size && b();
+    n || (n = atomStoreManager.sub(p, () => {
+      0 === atomStoreManager.get(p).size && b();
     }));
     return;
   }

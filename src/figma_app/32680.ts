@@ -7,7 +7,7 @@ import { oA } from "../905/723791";
 import { Jn } from "../905/17223";
 import { s as _$$s2 } from "../cssbuilder/589278";
 import { Ih } from "../figma_app/617427";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { Y } from "../905/830372";
 import { Lo } from "../905/156213";
@@ -50,37 +50,37 @@ function x(e) {
     });
   };
   if (I ? D(oA(y.data.team?.teamFileCounts?.totalFileCount) ?? 0, WW, "global_file_count") : (D(R, WW, "design_file_count"), D(L, WW, "whiteboard_file_count"), D(P, WW, "slides_file_count")), D(C, Wf, "total_project_count"), C <= Wf && (D(w, _$$h, "view_only_project_count"), D(O, PX, "invite_only_project_count")), 0 === x.length) return null;
-  let k = m ? tx("locked_team.card.title") : tx("locked_team.card.title_viewer");
-  let M = m ? S ? tx("locked_team.card.editor_previously_paid_description") : tx("locked_team.card.editor_previously_on_trial_description") : tx("locked_team.card.view_only_description");
-  let F = m ? S ? tx("locked_team.card.editor_previously_paid_cta") : tx("locked_team.card.editor_previously_on_trial_cta") : null;
+  let k = m ? renderI18nText("locked_team.card.title") : renderI18nText("locked_team.card.title_viewer");
+  let M = m ? S ? renderI18nText("locked_team.card.editor_previously_paid_description") : renderI18nText("locked_team.card.editor_previously_on_trial_description") : renderI18nText("locked_team.card.view_only_description");
+  let F = m ? S ? renderI18nText("locked_team.card.editor_previously_paid_cta") : renderI18nText("locked_team.card.editor_previously_on_trial_cta") : null;
   let j = e => {
     switch (e.limitExceededType) {
       case "design_file_count":
-        return tx("locked_team.card.move_figma_design_files", {
+        return renderI18nText("locked_team.card.move_figma_design_files", {
           numDesignFiles: e.limitExceededCount
         });
       case "whiteboard_file_count":
-        return tx("locked_team.card.move_figjam_boards", {
+        return renderI18nText("locked_team.card.move_figjam_boards", {
           numFigjamFiles: e.limitExceededCount
         });
       case "slides_file_count":
-        return tx("locked_team.card.move_figma_slides_files", {
+        return renderI18nText("locked_team.card.move_figma_slides_files", {
           numSlidesFiles: e.limitExceededCount
         });
       case "global_file_count":
-        return tx("locked_team.card.move_files", {
+        return renderI18nText("locked_team.card.move_files", {
           numFiles: e.limitExceededCount
         });
       case "total_project_count":
-        return tx("locked_team.card.move_projects", {
+        return renderI18nText("locked_team.card.move_projects", {
           numProjects: e.limitExceededCount
         });
       case "view_only_project_count":
-        return tx("locked_team.card.change_permissions_from_view_only", {
+        return renderI18nText("locked_team.card.change_permissions_from_view_only", {
           numViewOnlyProjects: e.limitExceededCount
         });
       case "invite_only_project_count":
-        return tx("locked_team.card.change_permissions_from_invite_only", {
+        return renderI18nText("locked_team.card.change_permissions_from_invite_only", {
           numInviteOnlyProjects: e.limitExceededCount
         });
       default:

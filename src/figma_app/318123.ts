@@ -1,9 +1,9 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { VIy } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { eU } from "../figma_app/27355";
+import { atom } from "../figma_app/27355";
 import { debugState } from "../905/407919";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { fF } from "../905/471229";
 import { y8 } from "../figma_app/459490";
 import { b as _$$b } from "../905/985254";
@@ -15,7 +15,7 @@ import { J } from "../905/915227";
 import { kS } from "../figma_app/864723";
 import { As, ze } from "../figma_app/516028";
 import { Wh } from "../figma_app/615482";
-import { bt } from "../905/270322";
+import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { l5 } from "../figma_app/728657";
 import { fD } from "../figma_app/816671";
 import { P } from "../905/184837";
@@ -30,67 +30,67 @@ import { E$, ez } from "../figma_app/835718";
 var $$L12 = (e => (e.NONE = "none", e.TOP_BAR = "top-bar", e.NEW_FILE = "new-file", e))($$L12 || {});
 let $$P11 = "used_figjam_ai_generate";
 let $$D7 = "used_figjam_ai_generate_modal_v2";
-let k = eU(!1);
-let $$M13 = eU(null, (e, t) => {
+let k = atom(!1);
+let $$M13 = atom(null, (e, t) => {
   t(k, !0);
   t($$X20, void 0);
 });
-let $$F19 = eU(null, (e, t) => {
+let $$F19 = atom(null, (e, t) => {
   t(V);
   t(k, !1);
 });
-let $$j17 = eU(!1);
-let U = eU(null, (e, t) => {
+let $$j17 = atom(!1);
+let U = atom(null, (e, t) => {
   t(V);
   t($$j17, !0);
 });
-let B = bt(() => Uy() && !getFeatureFlags().figjam_generate_handbrake && !y8({
+let B = createReduxSubscriptionAtomWithState(() => Uy() && !getFeatureFlags().figjam_generate_handbrake && !y8({
   isDisabledForViewers: !0
 }));
-let $$G22 = eU(e => e(B) ? e(k) ? "top-bar" : e(P) !== iH.TRUE || e($$j17) || e(l5) !== fD.NONE ? "none" : "new-file" : "none");
-let V = eU(null, (e, t) => {
+let $$G22 = atom(e => e(B) ? e(k) ? "top-bar" : e(P) !== iH.TRUE || e($$j17) || e(l5) !== fD.NONE ? "none" : "new-file" : "none");
+let V = atom(null, (e, t) => {
   t(K);
   t($$X20, void 0);
 });
-let $$H3 = eU(null, (e, t) => {
+let $$H3 = atom(null, (e, t) => {
   let r = e($$G22);
   "top-bar" === r ? t($$F19) : "new-file" === r && t(U);
 });
-let $$z9 = eU(null, (e, t) => {
+let $$z9 = atom(null, (e, t) => {
   e(ei).abort();
   t(ei, new AbortController());
   t($$ee14, {
     status: _$$c.NONE
   });
 });
-let $$W0 = eU(null, (e, t) => {
+let $$W0 = atom(null, (e, t) => {
   t(V);
   t($$j17, !1);
   t(k, !1);
 });
-let K = eU(null, (e, t) => {
+let K = atom(null, (e, t) => {
   t($$z9);
   t($$J5, void 0);
   t($$Z16, Xi());
   t($$Q10, VIy.BASIC);
 });
-let $$Y21 = Wh(() => eU(!1));
-let $$$1 = eU("");
-let $$X20 = eU(void 0);
-let $$q6 = eU("");
-let $$J5 = eU(void 0);
-let $$Z16 = eU(Xi());
-let $$Q10 = eU(VIy.BASIC);
-let $$ee14 = eU({
+let $$Y21 = Wh(() => atom(!1));
+let $$$1 = atom("");
+let $$X20 = atom(void 0);
+let $$q6 = atom("");
+let $$J5 = atom(void 0);
+let $$Z16 = atom(Xi());
+let $$Q10 = atom(VIy.BASIC);
+let $$ee14 = atom({
   status: _$$c.NONE
 });
-let $$et4 = eU(null);
-let $$er18 = Wh(() => eU(!1));
-let $$en8 = eU(null, (e, t, r) => {
+let $$et4 = atom(null);
+let $$er18 = Wh(() => atom(!1));
+let $$en8 = atom(null, (e, t, r) => {
   t($$er18, r);
 });
-let ei = eU(new AbortController());
-let ea = eU(null, async (e, t, {
+let ei = atom(new AbortController());
+let ea = atom(null, async (e, t, {
   fileKey: r,
   prompt: i,
   stage: s,
@@ -102,7 +102,7 @@ let ea = eU(null, async (e, t, {
   pageNodeId: S
 }) => {
   let v;
-  if (null === r && $D(_$$e.AI_PRODUCTIVITY, Error("No file key provided for FigJam AI Generate request")), !i) return {
+  if (null === r && reportError(_$$e.AI_PRODUCTIVITY, Error("No file key provided for FigJam AI Generate request")), !i) return {
     status: _$$c.NONE
   };
   t(Mg, e => e + 1);
@@ -145,7 +145,7 @@ let ea = eU(null, async (e, t, {
     };
     h5(r, 0, 1, i, "inappropriate", s, T, c, y, b);
     fK(r, e.message);
-    e.reportToSentry && $D(_$$e.AI_PRODUCTIVITY, a);
+    e.reportToSentry && reportError(_$$e.AI_PRODUCTIVITY, a);
     t($$ee14, v);
     return v;
   }
@@ -198,14 +198,14 @@ let ea = eU(null, async (e, t, {
         errorMessage: t.message,
         trace: e.trace
       };
-      t.reportToSentry && $D(_$$e.AI_PRODUCTIVITY, e);
+      t.reportToSentry && reportError(_$$e.AI_PRODUCTIVITY, e);
       fK(r, t.message);
     }
   }
   t($$ee14, v);
   return v;
 });
-let $$es15 = eU(null, (e, t, {
+let $$es15 = atom(null, (e, t, {
   prompt: r,
   stage: i,
   useCaseCategory: a,
@@ -217,7 +217,7 @@ let $$es15 = eU(null, (e, t, {
 }) => {
   let p = e(ze);
   if (null === p || 0 === p.length) {
-    $D(_$$e.AI_PRODUCTIVITY, Error("No file key found for loaded file to use for FigJam AI Generate request"));
+    reportError(_$$e.AI_PRODUCTIVITY, Error("No file key found for loaded file to use for FigJam AI Generate request"));
     return;
   }
   t(ea, {
@@ -232,7 +232,7 @@ let $$es15 = eU(null, (e, t, {
     pageNodeId: u
   });
 });
-let $$eo2 = eU(null, (e, t, {
+let $$eo2 = atom(null, (e, t, {
   fileKey: r,
   prompt: n,
   stage: i,

@@ -1,7 +1,7 @@
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { localStorageRef } from "../905/657224";
-import { M4 } from "../905/609396";
-import { x1 } from "../905/714362";
+import { Timer } from "../905/609396";
+import { logError } from "../905/714362";
 import { yp, Ph, ly } from "../905/138461";
 let o = "ping-request:";
 let l = "ping-response:";
@@ -22,7 +22,7 @@ export async function $$p3(e) {
     if (!n) return Promise.reject("Local storage not available");
     let d = o + e;
     let c = l + e;
-    let u = new M4();
+    let u = new Timer();
     let p = !1;
     let m = e => {};
     let h = new Promise(e => {
@@ -34,7 +34,7 @@ export async function $$p3(e) {
       window.removeEventListener("storage", f);
     };
     let f = e => {
-      e.storageArea === n && null !== e.newValue && e.key === c && (u.stop(), g(), p ? x1("storage", "ping: responded after timeout interval") : m(!0));
+      e.storageArea === n && null !== e.newValue && e.key === c && (u.stop(), g(), p ? logError("storage", "ping: responded after timeout interval") : m(!0));
     };
     n.removeItem(d);
     n.removeItem(c);
@@ -88,7 +88,7 @@ export async function $$h0(e) {
       release: () => (e.unregister(), Promise.resolve())
     };
   }
-  i || sx("autosave_acquiring_lock_failed", {
+  i || trackEventAnalytics("autosave_acquiring_lock_failed", {
     lockName: t,
     sessionID: e.sessionID,
     webLocksAvailable: yp

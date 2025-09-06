@@ -7,7 +7,7 @@ import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
 import { Uz } from "../905/63728";
 import { ks } from "../figma_app/637027";
-import { t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { E as _$$E } from "../905/984674";
 import { Lo } from "../905/156213";
 export function $$g0(e) {
@@ -31,7 +31,7 @@ function h(e) {
   } = e;
   let y = useDispatch();
   let [j, I] = useState(initialName);
-  let E = title ?? t("resource_rename_modal.title", {
+  let E = title ?? getI18nString("resource_rename_modal.title", {
     initialName
   });
   let S = hS(e);
@@ -66,7 +66,7 @@ function h(e) {
           className: "resource_rename_modal--lengthCount--n2dbN",
           children: jsx(_$$E, {
             color: "secondary",
-            children: tx("resource_rename_modal.lengthCount", {
+            children: renderI18nText("resource_rename_modal.lengthCount", {
               currentLength: j.length,
               maxLength
             })
@@ -77,7 +77,7 @@ function h(e) {
           children: [jsx($n, {
             onClick: T,
             variant: "secondary",
-            children: tx("resource_rename_modal.cancel")
+            children: renderI18nText("resource_rename_modal.cancel")
           }), jsx($n, {
             variant: "primary",
             disabled: A(),

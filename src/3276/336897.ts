@@ -11,7 +11,7 @@ import { parsePxNumber } from "../figma_app/783094";
 import { Av } from "../905/149328";
 import { c$ } from "../figma_app/236327";
 import { h1 } from "../905/986103";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { H8 } from "../905/590952";
 import { oB } from "../905/929976";
 import { jD } from "../905/765855";
@@ -109,9 +109,9 @@ function V(e) {
   let Y = () => {
     let e = X();
     return "current_user" === e ? jsxs("span", {
-      children: [" ", tx("collaboration.voice.you_lower_cased")]
+      children: [" ", renderI18nText("collaboration.voice.you_lower_cased")]
     }) : "file_creator" === e ? jsxs("span", {
-      children: [" ", getFeatureFlags().multiplayer_avatar_show_creator_label ? tx("collaboration.voice.creator") : tx("collaboration.voice.owner")]
+      children: [" ", getFeatureFlags().multiplayer_avatar_show_creator_label ? renderI18nText("collaboration.voice.creator") : renderI18nText("collaboration.voice.owner")]
     }) : "";
   };
   let J = () => G ? jsx("span", {
@@ -140,9 +140,9 @@ function V(e) {
       className: G7,
       children: jsx(_$$u, {
         className: Xg,
-        "aria-label": _$$t("fullscreen.toolbar.multiplayer.more_options"),
+        "aria-label": getI18nString("fullscreen.toolbar.multiplayer.more_options"),
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("fullscreen.toolbar.multiplayer.more_options"),
+        "data-tooltip": getI18nString("fullscreen.toolbar.multiplayer.more_options"),
         ...getTriggerProps(),
         children: jsx(_$$J, {})
       })
@@ -169,7 +169,7 @@ function V(e) {
               children: [user.name, Y()]
             }), containsCursor && jsx("span", {
               className: FH,
-              children: L ? tx("collaboration.voice.click_to_unfollow") : tx("collaboration.voice.click_to_follow")
+              children: L ? renderI18nText("collaboration.voice.click_to_unfollow") : renderI18nText("collaboration.voice.click_to_follow")
             })]
           })
         }), volumeIcon && jsx("span", {
@@ -189,7 +189,7 @@ function V(e) {
               isBackgroundTransparent: !1,
               selected: q,
               "data-tooltip-type": Ib.TEXT,
-              "data-tooltip": _$$t("fullscreen.toolbar.multiplayer.more_options"),
+              "data-tooltip": getI18nString("fullscreen.toolbar.multiplayer.more_options"),
               className: u()(hv, {
                 [VQ]: q
               }),
@@ -236,9 +236,9 @@ function V(e) {
     children: [jsx(O6, {
       onClick,
       className: L8,
-      "aria-label": L ? _$$t("collaboration.voice.click_to_unfollow_user", {
+      "aria-label": L ? getI18nString("collaboration.voice.click_to_unfollow_user", {
         username: user.name
-      }) : _$$t("collaboration.voice.click_to_follow_user", {
+      }) : getI18nString("collaboration.voice.click_to_follow_user", {
         username: user.name
       })
     }, user.userID), jsxs(fI, {
@@ -262,7 +262,7 @@ function V(e) {
                 children: [user.name, Y()]
               }), jsx("span", {
                 className: zO,
-                children: L ? tx("collaboration.voice.click_to_unfollow") : tx("collaboration.voice.click_to_follow")
+                children: L ? renderI18nText("collaboration.voice.click_to_unfollow") : renderI18nText("collaboration.voice.click_to_follow")
               })]
             })
           }), volumeIcon && jsx("span", {
@@ -320,9 +320,9 @@ function q(e) {
         className: XF,
         onClick,
         "data-tooltip-proxy-element-id": n,
-        "aria-label": c ? _$$t("fullscreen.toolbar.multiplayer.unfollow_name", {
+        "aria-label": c ? getI18nString("fullscreen.toolbar.multiplayer.unfollow_name", {
           name: user.name
-        }) : _$$t("fullscreen.toolbar.multiplayer.follow_a_name", {
+        }) : getI18nString("fullscreen.toolbar.multiplayer.follow_a_name", {
           name: user.name
         }),
         "data-fullscreen-intercept": !0

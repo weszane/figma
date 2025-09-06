@@ -4,9 +4,9 @@ import { ai } from "../figma_app/487970";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useCallback, useRef, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { fp } from "../figma_app/27355";
+import { useAtomValueAndSetter } from "../figma_app/27355";
 import a from "classnames";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { R as _$$R } from "../5430/129716";
 import { Cc } from "../5430/664984";
 import { Qo, qD, _m } from "../figma_app/471982";
@@ -29,7 +29,7 @@ import { Ay } from "../905/612521";
 import { WB } from "../905/761735";
 import { Rs } from "../figma_app/288654";
 import { oA, tT } from "../905/723791";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { g as _$$g } from "../905/880308";
 import { XHR } from "../905/910117";
 import { qB } from "../905/862321";
@@ -69,9 +69,9 @@ function L({
 }) {
   return jsx(_$$E, {
     variant: "defaultOutline",
-    children: e ? tx("community.plugins.private_for_plugin_org_name", {
+    children: e ? renderI18nText("community.plugins.private_for_plugin_org_name", {
       orgName: e
-    }) : tx("community.plugins.private_for_your_organization")
+    }) : renderI18nText("community.plugins.private_for_your_organization")
   });
 }
 let I = ai;
@@ -109,7 +109,7 @@ function et(e, t, r, s) {
       loggedIn: !!n.user,
       orgId: s
     }), ee), !n.user) {
-      $D(_$$e.COMMUNITY, Error("[Community Saves] Attempted unsave without currentUser"));
+      reportError(_$$e.COMMUNITY, Error("[Community Saves] Attempted unsave without currentUser"));
       return;
     }
     if (_$$U(e)) {
@@ -129,11 +129,11 @@ function et(e, t, r, s) {
         }, t);
         t.then(() => {
           r(_$$F.enqueue({
-            message: _$$t("community.saves.file_saved_for_your_profile"),
+            message: getI18nString("community.saves.file_saved_for_your_profile"),
             type: "resource-save"
           }));
         }).catch(e => {
-          $D(_$$e.COMMUNITY, e);
+          reportError(_$$e.COMMUNITY, e);
         });
       };
       if (!n.authedActiveCommunityProfile?.public_at) {
@@ -172,13 +172,13 @@ function er(e, t, r, s, i) {
       loggedIn: !!a.user,
       orgId: s
     }), ee), !a.user) {
-      $D(_$$e.COMMUNITY, Error("[Community Saves] Attempted unsave without currentUser"));
+      reportError(_$$e.COMMUNITY, Error("[Community Saves] Attempted unsave without currentUser"));
       return;
     }
     if (rZ(e)) {
       let t = $9(e);
       if (!t) {
-        $D(_$$e.COMMUNITY, Error("Extension type resource is missing plugin and widget content"), {
+        reportError(_$$e.COMMUNITY, Error("Extension type resource is missing plugin and widget content"), {
           extra: {
             resourceId: e.id
           }
@@ -235,7 +235,7 @@ function es({
 }) {
   let o = oi();
   if (!e.authedActiveCommunityProfile) {
-    $D(_$$e.COMMUNITY, Error("Attempted to save resource without an active community profile"));
+    reportError(_$$e.COMMUNITY, Error("Attempted to save resource without an active community profile"));
     return;
   }
   let a = _$$a.saveResource({
@@ -255,24 +255,24 @@ function es({
       }
     }
   }, a);
-  let d = o ? _$$t("community.saves.added_to_your_saves") : _$$t("community.saves.resource_saved_for_your_profile");
+  let d = o ? getI18nString("community.saves.added_to_your_saves") : getI18nString("community.saves.resource_saved_for_your_profile");
   a.then(() => {
     t(_$$F.enqueue({
-      message: i ? _$$t("community.saves.resource_saved_for_everyone_at", {
+      message: i ? getI18nString("community.saves.resource_saved_for_everyone_at", {
         orgName: n || "your org"
       }) : d,
       type: "resource-save",
       button: o && s ? {
-        text: _$$t("community.saves.go_there"),
+        text: getI18nString("community.saves.go_there"),
         action: () => {
           Ay.push(s);
         }
       } : void 0
     }));
   }).catch(e => {
-    $D(_$$e.COMMUNITY, e);
+    reportError(_$$e.COMMUNITY, e);
     t(_$$F.enqueue({
-      message: _$$t("community.actions.unable_to_save_resource"),
+      message: getI18nString("community.actions.unable_to_save_resource"),
       type: "RESOURCE_SAVE_FAILED",
       error: !0
     }));
@@ -282,7 +282,7 @@ function ei(e, t, r, s) {
   return function (r, i) {
     let n = i();
     if (!n.user) {
-      $D(_$$e.COMMUNITY, Error("[Community Saves] Attempted save without currentUser"));
+      reportError(_$$e.COMMUNITY, Error("[Community Saves] Attempted save without currentUser"));
       return;
     }
     (Cu(eo({
@@ -295,11 +295,11 @@ function ei(e, t, r, s) {
       orgId: s
     }), ee), _$$U(e)) ? XHR.del(`/api/hub_file/${e.id}/save`).then(() => {
       r(_$$F.enqueue({
-        message: _$$t("community.saves.file_removed_from_your_profile"),
+        message: getI18nString("community.saves.file_removed_from_your_profile"),
         type: "resource-save"
       }));
     }).catch(e => {
-      $D(_$$e.COMMUNITY, e);
+      reportError(_$$e.COMMUNITY, e);
     }) : r(s1({
       id: e.id,
       resourceType: Vm(e),
@@ -314,7 +314,7 @@ function en(e, t, r, s) {
     let o = n();
     let a = oi();
     if (!o.user || !o.authedActiveCommunityProfile) {
-      $D(_$$e.COMMUNITY, Error("[Community Saves] Attempted to remove save without currentUser"));
+      reportError(_$$e.COMMUNITY, Error("[Community Saves] Attempted to remove save without currentUser"));
       return;
     }
     if (Cu(eo({
@@ -328,7 +328,7 @@ function en(e, t, r, s) {
     }), ee), rZ(e)) {
       let t = $9(e);
       if (!t) {
-        $D(_$$e.COMMUNITY, Error("Extension type resource is missing plugin and widget content"), {
+        reportError(_$$e.COMMUNITY, Error("Extension type resource is missing plugin and widget content"), {
           extra: {
             resourceId: e.id
           }
@@ -354,16 +354,16 @@ function en(e, t, r, s) {
           [n]: null
         }
       }, t);
-      let l = a ? _$$t("community.saves.removed_from_saves") : _$$t("community.saves.resource_removed_from_your_profile");
+      let l = a ? getI18nString("community.saves.removed_from_saves") : getI18nString("community.saves.resource_removed_from_your_profile");
       t.then(() => {
         i(_$$F.enqueue({
-          message: r ? _$$t("community.saves.resource_removed_for_everyone_at", {
+          message: r ? getI18nString("community.saves.resource_removed_for_everyone_at", {
             orgName: s || "your org"
           }) : l,
           type: "resource-unsave"
         }));
       }).catch(e => {
-        $D(_$$e.COMMUNITY, e);
+        reportError(_$$e.COMMUNITY, e);
       });
     }
   };
@@ -571,7 +571,7 @@ function ev({
     viewContext: r
   });
   let _ = {
-    displayText: isTeamOrOrgProfileActive ? _$$t("community.likes.switch_profile_to_like") : _$$t("community.like"),
+    displayText: isTeamOrOrgProfileActive ? getI18nString("community.likes.switch_profile_to_like") : getI18nString("community.like"),
     icon: jsx("div", {
       className: ef,
       style: {
@@ -624,7 +624,7 @@ function ev({
   let j = [];
   if (0 !== Object.values(b).length && g0(e)) {
     j.push({
-      displayText: _$$t("community.saves.save_for_yourself"),
+      displayText: getI18nString("community.saves.save_for_yourself"),
       icon: jsx("div", {
         className: ef,
         children: isResourceSavedForUser ? jsx(ex, {}) : jsx(eh, {})
@@ -636,7 +636,7 @@ function ev({
       className: ey
     });
     let e = Object.values(b).map(e => ({
-      displayText: _$$t("community.saves.save_for", {
+      displayText: getI18nString("community.saves.save_for", {
         orgName: e.name
       }),
       icon: jsx("div", {
@@ -651,7 +651,7 @@ function ev({
     }));
     j.push(...e);
   } else j.push({
-    displayText: _$$t("community.saves.save"),
+    displayText: getI18nString("community.saves.save"),
     "data-onboarding-key": "save-button",
     icon: jsx("div", {
       className: ef,
@@ -765,8 +765,8 @@ function eL({
       "data-onboarding-key": "save-button",
       "data-tooltip-type": Ib.TEXT,
       ref: f,
-      "data-tooltip": b ? _$$t("community.saves.remove_from_saves") : _$$t("community.saves.save"),
-      "aria-label": b ? _$$t("community.saves.remove_from_saves") : _$$t("community.saves.save"),
+      "data-tooltip": b ? getI18nString("community.saves.remove_from_saves") : getI18nString("community.saves.save"),
+      "aria-label": b ? getI18nString("community.saves.remove_from_saves") : getI18nString("community.saves.save"),
       children: [jsx("div", {
         className: g,
         children: b ? jsx(ex, {
@@ -775,7 +775,7 @@ function eL({
           fill: v
         })
       }), "containText" === o && jsx("div", {
-        children: tx(b ? "community.saves.remove_from_saves" : "community.saves.save_for_later")
+        children: renderI18nText(b ? "community.saves.remove_from_saves" : "community.saves.save_for_later")
       })]
     }), d && jsx(eT, {
       resource: e,
@@ -803,14 +803,14 @@ function eT({
   let _ = useSelector(e => Tm(e));
   if (!g0(e)) return null;
   let p = [{
-    displayText: _$$t("community.saves.save_this_resource_for_yourself"),
+    displayText: getI18nString("community.saves.save_this_resource_for_yourself"),
     isChecked: isResourceSavedForUser,
     callback: () => {
       onUserSaveActionClick();
     }
   }];
   let x = Object.values(_).map(e => ({
-    displayText: _$$t("community.saves.save_for_everyone_at", {
+    displayText: getI18nString("community.saves.save_for_everyone_at", {
       orgName: e.name
     }),
     isChecked: savesByOrgId[e.id],
@@ -1144,7 +1144,7 @@ function eV({
   hasCommentsEnabled: e,
   commentCount: t
 }) {
-  let [r, n] = fp(_$$R);
+  let [r, n] = useAtomValueAndSetter(_$$R);
   useEffect(() => {
     let e = () => {
       let e = document.getElementById($O.CommentsView);
@@ -1184,7 +1184,7 @@ function eV({
         className: l()(_$$qY, {
           [kO]: r === $O.DescriptionView
         }),
-        children: _$$t("community.resource_page.about")
+        children: getI18nString("community.resource_page.about")
       })
     }), e && jsx("button", {
       onClick: e => a(e, $O.CommentsView),
@@ -1192,7 +1192,7 @@ function eV({
         className: l()(_$$qY, {
           [kO]: r === $O.CommentsView
         }),
-        children: tx("community.resource_page.comments", {
+        children: renderI18nText("community.resource_page.comments", {
           numComments: jsx("span", {
             className: l()(p9, {
               [sB]: r === $O.CommentsView

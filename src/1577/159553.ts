@@ -7,14 +7,14 @@ import { k as _$$k } from "../905/443820";
 import { E as _$$E } from "../905/632989";
 import { getFeatureFlags } from "../905/601108";
 import _ from "classnames";
-import { S8, eD as _$$eD } from "../figma_app/876459";
+import { bellFeedAPIInstance, desktopAPIInstance } from "../figma_app/876459";
 import { ek as _$$ek, zv } from "../figma_app/640683";
 import { Ay } from "../905/612521";
 import { F as _$$F } from "../905/680873";
 import { ZC } from "../figma_app/39751";
 import { XHR } from "../905/910117";
 import { P as _$$P } from "../905/347284";
-import { t as _$$t2, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { F as _$$F2 } from "../905/302958";
 import { UN } from "../figma_app/976345";
 import { oB, sf } from "../905/929976";
@@ -40,7 +40,7 @@ import { UF } from "../905/403166";
 import { buildUploadUrl } from "../figma_app/169182";
 import { h1, Ak } from "../905/986103";
 import { s as _$$s2 } from "../905/573154";
-import { Gq } from "../figma_app/363242";
+import { getI18nState } from "../figma_app/363242";
 import { Pf } from "../905/590952";
 import { A as _$$A } from "../905/639174";
 import { Ro } from "../figma_app/805373";
@@ -48,8 +48,8 @@ import { H as _$$H2 } from "../905/209153";
 import { H as _$$H3 } from "../1577/640070";
 import { UC, zr, AS } from "../figma_app/50271";
 import { throwTypeError } from "../figma_app/465776";
-import { sx, az } from "../905/449184";
-import { x1 } from "../905/714362";
+import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
+import { logError } from "../905/714362";
 import { p as _$$p } from "../figma_app/941287";
 import { lQ } from "../905/934246";
 import { i as _$$i } from "../905/718764";
@@ -219,7 +219,7 @@ function ef(e) {
       }));
       block.hide_after_action ? callbacks.hideNotification() : (callbacks.followLinkIfPossible(), n && callbacks.updateNotification(n.notification_id, n));
     } catch (a) {
-      let e = a.message || ("resolve" === block.notification_action ? _$$t2("user_notification.an_error_occurred_while_clicking_this_notification") : _$$t2("user_notification.an_error_occurred_while_removing_this_notification"));
+      let e = a.message || ("resolve" === block.notification_action ? getI18nString("user_notification.an_error_occurred_while_clicking_this_notification") : getI18nString("user_notification.an_error_occurred_while_removing_this_notification"));
       t(_$$s2.error(e));
     } finally {
       setIsDisabled(!1);
@@ -382,7 +382,7 @@ function ex(e) {
             htmlAttributes: {
               "data-testid": "quick-reply-chevron"
             },
-            "aria-label": _$$t2("user_notifications.open_quickreply"),
+            "aria-label": getI18nString("user_notifications.open_quickreply"),
             children: jsx(_$$a2, {})
           })
         })
@@ -394,7 +394,7 @@ function ek(e) {
   let {
     notification
   } = e;
-  let i = _$$t2("user_notifications.unread_notifcation_sr");
+  let i = getI18nString("user_notifications.unread_notifcation_sr");
   return jsxs("div", {
     className: m()("block_kit_row--rowTop--4zNja", ei),
     id: `notification-${notification.notification_id}`,
@@ -489,7 +489,7 @@ function ej(e) {
       month: "short",
       day: "numeric"
     };
-    o = new Intl.DateTimeFormat(Gq().getPrimaryLocale(!1), i).format(e);
+    o = new Intl.DateTimeFormat(getI18nState().getPrimaryLocale(!1), i).format(e);
   }
   return jsx("div", {
     className: "block_kit_row--timestamp--FiNtf",
@@ -507,19 +507,19 @@ function eC(e, t) {
 }
 var eN = (e => (e.NEW = "new", e.TODAY = "today", e.YESTERDAY = "yesterday", e.LAST_WEEK = "last_week", e.OLDER = "older", e))(eN || {});
 let eA = {
-  new: tx("user_notifications.new"),
-  today: tx("user_notifications.today"),
-  yesterday: tx("user_notifications.yesterday"),
-  last_week: tx("user_notifications.last_7_days"),
-  older: tx("user_notifications.older")
+  new: renderI18nText("user_notifications.new"),
+  today: renderI18nText("user_notifications.today"),
+  yesterday: renderI18nText("user_notifications.yesterday"),
+  last_week: renderI18nText("user_notifications.last_7_days"),
+  older: renderI18nText("user_notifications.older")
 };
 function eT(e) {
   return e.preferred_attachments.length > 0 && "ActionableAttachment" === e.preferred_attachments[0]._block_type;
 }
 var eP = (e => (e.ACTIONABLE = "actionable", e.ACTIONED = "actioned", e))(eP || {});
 let eI = {
-  actionable: tx("user_notifications.pending"),
-  actioned: tx("user_notifications.done")
+  actionable: renderI18nText("user_notifications.pending"),
+  actioned: renderI18nText("user_notifications.done")
 };
 function eM(e) {
   let t = e.preferred_attachments.find(e => _$$p.BlockKit.Block.ATTACHMENT_TYPES.has(e._block_type));
@@ -562,7 +562,7 @@ function eL(e) {
           is_unread: !1
         });
       } catch (e) {
-        x1("Error marking notification as read", e);
+        logError("Error marking notification as read", e);
       } else C("resolve", i).then(({
         data: t
       }) => {
@@ -577,7 +577,7 @@ function eL(e) {
     onMouseMove(e);
   };
   let g = async t => {
-    sx("file_browser_notification_clicked", {
+    trackEventAnalytics("file_browser_notification_clicked", {
       notification_id: x.notification_id,
       notification_type: x.notification_type,
       actionable: "ActionableAttachment" === i._block_type,
@@ -598,7 +598,7 @@ function eL(e) {
         is_unread: !1
       });
     } catch (e) {
-      a(_$$s2.error(_$$t2("user_notification.an_error_occurred_while_clicking_this_notification")));
+      a(_$$s2.error(getI18nString("user_notification.an_error_occurred_while_clicking_this_notification")));
     } else C("resolve").then(({
       data: t
     }) => {
@@ -607,7 +607,7 @@ function eL(e) {
         e.updateNotificationCallback(i.notification_id, i);
       }
     }, e => {
-      a(_$$s2.error(_$$t2("user_notification.an_error_occurred_while_clicking_this_notification")));
+      a(_$$s2.error(getI18nString("user_notification.an_error_occurred_while_clicking_this_notification")));
     });
   };
   let j = e => {
@@ -623,7 +623,7 @@ function eL(e) {
     currentView: t
   });
   let N = (t, i = c) => {
-    switch (az.trackDefinedEvent("notification.file_browser_notification_actioned", {
+    switch (analyticsEventManager.trackDefinedEvent("notification.file_browser_notification_actioned", {
       notification_id: x.notification_id,
       notification_type: x.notification_type,
       notification_action: t,
@@ -859,7 +859,7 @@ export function $$eY4(e, t) {
         w(e.meta);
       }).catch(e => {
         i(_$$F2.enqueue({
-          message: _$$t2("user_notification.an_error_occurred_while_fetching_your_community_notifications"),
+          message: getI18nString("user_notification.an_error_occurred_while_fetching_your_community_notifications"),
           type: "user-notification",
           error: !0
         }));
@@ -874,7 +874,7 @@ export function $$eY4(e, t) {
         w(e.meta);
       }).catch(e => {
         i(_$$F2.enqueue({
-          message: _$$t2("user_notification.an_error_occurred_while_fetching_your_notifications"),
+          message: getI18nString("user_notification.an_error_occurred_while_fetching_your_notifications"),
           type: "user-notification",
           error: !0
         }));
@@ -900,17 +900,17 @@ export function $$eY4(e, t) {
     markAllAsReadFn: () => {
       (e ? XHR.post("/api/user_notifications/community/mark_read", {
         currentView: u,
-        source: S8 ? "desktopbell" : "web"
+        source: bellFeedAPIInstance ? "desktopbell" : "web"
       }) : XHR.post("/api/user_notifications/mark_read/plan", {
         current_plan_id: t,
         currentView: u,
         is_plan_org: c,
-        source: S8 ? "desktopbell" : "web"
+        source: bellFeedAPIInstance ? "desktopbell" : "web"
       })).then(() => {
         m(new Map(Array.from(_, ([e, t]) => (t.is_unread = !1, [e, t]))));
       }).catch(() => {
         i(_$$F2.enqueue({
-          message: _$$t2("user_notification.an_error_occurred_marking_all_as_read"),
+          message: getI18nString("user_notification.an_error_occurred_marking_all_as_read"),
           type: "user-notification",
           error: !0
         }));
@@ -1078,19 +1078,19 @@ function eW(e, t) {
       }
       d(oB());
       let r = !!_ && _.key === zv(n.pathname);
-      if (!_$$eD && r) d(_$$H({
+      if (!desktopAPIInstance && r) d(_$$H({
         params: n.searchParams.toString(),
         hash: n.hash
-      }));else if (t.deeplink.use_unsafe) Ay.unsafeRedirect(n.href, _$$eD ? void 0 : "_blank");else if (e.inDesktopTray) Ay.redirect(n.href);else try {
+      }));else if (t.deeplink.use_unsafe) Ay.unsafeRedirect(n.href, desktopAPIInstance ? void 0 : "_blank");else if (e.inDesktopTray) Ay.redirect(n.href);else try {
         let e = vU(s.getState(), o);
         if ("teamFeed" === e.view) {
-          m && t.plan?.id.toString() === m.id ? d(sf(e)) : Ay.redirect(n.href, _$$eD ? void 0 : "_blank");
+          m && t.plan?.id.toString() === m.id ? d(sf(e)) : Ay.redirect(n.href, desktopAPIInstance ? void 0 : "_blank");
           return;
         }
-        Ay.redirect(n.href, _$$eD ? void 0 : "_blank");
+        Ay.redirect(n.href, desktopAPIInstance ? void 0 : "_blank");
         return;
       } catch {
-        Ay.redirect(n.href, _$$eD ? void 0 : "_blank");
+        Ay.redirect(n.href, desktopAPIInstance ? void 0 : "_blank");
       }
     }, [d, _, e.currentPlanFilter, e.inDesktopTray, u, s, m]);
     if (e.isFetchingNotifications) return jsx("div", {
@@ -1099,7 +1099,7 @@ function eW(e, t) {
     });
     if (0 === e.notifications.length) return jsx("div", {
       className: "user_notifications_dropdown--emptyRow--4UwYl",
-      children: tx("user_notifications.dropdown.no_notifications")
+      children: renderI18nText("user_notifications.dropdown.no_notifications")
     });
     {
       var g;
@@ -1160,14 +1160,14 @@ function eW(e, t) {
         let t = e.reduce((e, t) => e + Number(t.is_unread), 0);
         return jsx("div", {
           className: "user_notifications_dropdown--unread--e14XU",
-          children: _$$t2("user_notifications.unread_count", {
+          children: getI18nString("user_notifications.unread_count", {
             unreadCount: t
           })
         });
       }(e.notifications), eW(e.isFetchingNotifications, e.notifications) && jsx(_$$E, {
         onClick: e.markAllAsReadFn,
         className: e$,
-        children: tx("user_notifications.dropdown.mark_all_as_read")
+        children: renderI18nText("user_notifications.dropdown.mark_all_as_read")
       })]
     }) : null;
   };
@@ -1180,7 +1180,7 @@ function eW(e, t) {
       className: "user_notifications_dropdown--header--aOhWS",
       children: [e.inCommunity ? jsx("div", {
         className: "user_notifications_dropdown--orgName--vbTxV ellipsis--ellipsis--Tjyfa text--fontPos11--2LvXf text--_fontBase--QdLsd",
-        children: _$$t2("user_notification.community_notifications")
+        children: getI18nString("user_notification.community_notifications")
       }) : jsx(Fragment, {
         children: jsx(_$$j, {
           currentPlanFilter: e.selectedPlan === td ? _$$a : e.selectedPlan,
@@ -1195,12 +1195,12 @@ function eW(e, t) {
       manager: e.tabManager,
       children: [jsx(_$$t.Tab, {
         ...e.tabPropsMap.all,
-        children: _$$t2("user_notification.all")
+        children: getI18nString("user_notification.all")
       }), jsx(_$$t.Tab, {
         ...e.tabPropsMap.priority,
         children: function (e) {
           let t = e.reduce((e, t) => e + Number(eT(t)), 0);
-          return 0 === t ? _$$t2("user_notifications.requests_empty") : _$$t2("user_notifications.requests_toggle_count", {
+          return 0 === t ? getI18nString("user_notifications.requests_empty") : getI18nString("user_notifications.requests_toggle_count", {
             actionableCount: t
           });
         }(e.notifications)
@@ -1208,7 +1208,7 @@ function eW(e, t) {
         ...e.tabPropsMap.unread,
         children: function (e) {
           let t = e.reduce((e, t) => e + Number(t.is_unread), 0);
-          return 0 === t ? _$$t2("user_notifications.unread_empty") : _$$t2("user_notifications.unread_toggle_count", {
+          return 0 === t ? getI18nString("user_notifications.unread_empty") : getI18nString("user_notifications.unread_toggle_count", {
             unreadCount: t
           });
         }(e.notifications)
@@ -1219,7 +1219,7 @@ function eW(e, t) {
       children: [t, eW(e.isFetchingNotifications, e.notifications) && jsx(_$$E, {
         onClick: e.markAllAsReadFn,
         className: e$,
-        children: tx("user_notifications.dropdown.mark_all_as_read")
+        children: renderI18nText("user_notifications.dropdown.mark_all_as_read")
       })]
     });
   };

@@ -1,12 +1,12 @@
 import { Qa7 } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { eU, zl } from "../figma_app/27355";
-import { sx } from "../905/449184";
+import { atom, atomStoreManager } from "../figma_app/27355";
+import { trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { YQ } from "../905/502364";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { ds } from "../figma_app/314264";
 import { z } from "../905/207214";
@@ -15,9 +15,9 @@ import { Rm } from "../905/449579";
 import { n4 } from "../905/259345";
 import { D as _$$D } from "../905/629114";
 export let $$n5;
-let $$b0 = eU(new Set());
-let $$T1 = eU(new Set());
-let $$I2 = eU("");
+let $$b0 = atom(new Set());
+let $$T1 = atom(new Set());
+let $$I2 = atom("");
 let $$S4 = "would-have-used-msal-onboarding-event";
 function v(e) {
   let t = e => {
@@ -56,10 +56,10 @@ class N {
       rootNode && i.push(rootNode);
       newNodes.forEach(e => n.push(e));
     }
-    zl.set($$b0, new Set(n.map(({
+    atomStoreManager.set($$b0, new Set(n.map(({
       id: e
     }) => e)));
-    zl.set($$T1, new Set(i.map(({
+    atomStoreManager.set($$T1, new Set(i.map(({
       id: e
     }) => e)));
     z(i, n);
@@ -91,10 +91,10 @@ class N {
       let y = (r = await N7(u, n, t)) ? v([r]) : 0;
       if (o = y - h, debugState.dispatch(F.enqueue({
         type: "msal-frames-created",
-        message: _$$t("fullscreen.properties_panel.stack_panel.msal_crated_frames_count", {
+        message: getI18nString("fullscreen.properties_panel.stack_panel.msal_crated_frames_count", {
           count: o
         })
-      })), getFeatureFlags().ce_al_track_msal_duration && sx("autolayout_auto_segment_selection", {
+      })), getFeatureFlags().ce_al_track_msal_duration && trackEventAnalytics("autolayout_auto_segment_selection", {
         duration_ms: performance.now() - c,
         selectionSizeBeforeMSAL: h,
         selectionSizeAfterMSAL: y
@@ -157,7 +157,7 @@ class N {
         };
       }
     } catch (r) {
-      x1("auto-layout", "Error running AAL segmentation", {
+      logError("auto-layout", "Error running AAL segmentation", {
         e: r
       });
       let t = debugState.dispatch;
@@ -166,13 +166,13 @@ class N {
         nodeIds: e
       }), t(F.enqueue({
         type: "msal-failure-graph-resolution",
-        message: _$$t("fullscreen.visual_bell.try_again_msal")
+        message: getI18nString("fullscreen.visual_bell.try_again_msal")
       }))) : (n.commitUndo(), n.triggerUndo(), ds("msal_error_couldnt_suggest_auto_layout", debugState.getState().openFile?.key, debugState.getState(), {
         error: r,
         nodeIds: e
       }), t(F.enqueue({
         type: "msal-failure-other",
-        message: _$$t("fullscreen.visual_bell.could_not_suggest_auto_layout")
+        message: getI18nString("fullscreen.visual_bell.could_not_suggest_auto_layout")
       })));
     }
     return {
@@ -195,7 +195,7 @@ class N {
     cx(e, t);
   }
   trackShouldShowMSALOnboarding(e) {
-    zl.set($$I2, e);
+    atomStoreManager.set($$I2, e);
     YQ({
       id: $$S4
     });
@@ -204,13 +204,13 @@ class N {
     let t = _$$D();
     let r = await vk(e, t);
     let n = debugState.dispatch;
-    let i = r > 0 ? _$$t("fullscreen_actions.destroy-all-auto-layout-result-visual-bell-toast", {
+    let i = r > 0 ? getI18nString("fullscreen_actions.destroy-all-auto-layout-result-visual-bell-toast", {
       numAutoLayoutsRemoved: r
-    }) : _$$t("fullscreen_actions.destroy-all-auto-layout-result-visual-bell-toast-zero");
+    }) : getI18nString("fullscreen_actions.destroy-all-auto-layout-result-visual-bell-toast-zero");
     n(F.enqueue({
       message: i
     }));
-    sx("action_destroy_all_auto_layout", {
+    trackEventAnalytics("action_destroy_all_auto_layout", {
       numAutoLayoutsRemoved: r
     });
     t.commitUndo();

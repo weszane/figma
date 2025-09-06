@@ -2,7 +2,7 @@ import { NC } from '../905/17179';
 import { d as _$$d } from '../905/91820';
 import { to } from '../905/156213';
 import { F } from '../905/302958';
-import { t as _$$t } from '../905/303541';
+import { getI18nString } from '../905/303541';
 import { n as _$$n } from '../905/347702';
 import { nF } from '../905/350402';
 import { OpenTarget } from '../905/380844';
@@ -12,7 +12,7 @@ import { getFeatureFlags } from '../905/601108';
 import { Ay } from '../905/612521';
 import { to as _$$to } from '../905/612685';
 import { serializeQuery } from '../905/634134';
-import { x1 } from '../905/714362';
+import { logError } from '../905/714362';
 import { o as _$$o } from '../905/721794';
 import { oA } from '../905/723791';
 import { Xm } from '../905/760074';
@@ -22,7 +22,7 @@ import { XHR } from '../905/910117';
 import { debounce } from '../905/915765';
 import { zCd } from '../figma_app/43951';
 import { isDevEnvironment } from '../figma_app/169182';
-import { PN } from '../figma_app/257275';
+import { isInteractionOrEvalMode } from '../figma_app/897289';
 import { ds } from '../figma_app/314264';
 import { Lb } from '../figma_app/323326';
 import { Ns, TP, yT } from '../figma_app/349248';
@@ -31,7 +31,7 @@ import { d6 } from '../figma_app/687776';
 import { Ez5 } from '../figma_app/763686';
 import { S as _$$S } from '../figma_app/787550';
 import { Ul } from '../figma_app/841351';
-import { eD } from '../figma_app/876459';
+import { desktopAPIInstance } from '../figma_app/876459';
 export let $$F21 = {
   key: 'showDiagramOnboarding',
   value: '1'
@@ -52,7 +52,7 @@ let $$B18 = nF((e, t) => {
     t.onSuccess?.();
   }).catch(r => {
     if (t.onError?.(), e.dispatch(F.enqueue({
-      message: _$$t('file_permissions.generic_error'),
+      message: getI18nString('file_permissions.generic_error'),
       error: !0
     })), isDevEnvironment()) {
       throw r;
@@ -84,7 +84,7 @@ let $$V11 = nF(async (e, t) => {
   t.versionId && (i.version_id = t.versionId);
   e.dispatch(F.enqueue({
     type: 'file_duplicating',
-    message: _$$t('visual_bell.duplicating')
+    message: getI18nString('visual_bell.duplicating')
   }));
   XHR.post(`/api/multiplayer/${a.key}/copy?${serializeQuery(i)}`).then(i => {
     e.dispatch(F.dequeue({}));
@@ -96,8 +96,8 @@ let $$V11 = nF(async (e, t) => {
         duplicatedContainingFolderId: s.folder_id,
         duplicatedFileTeamId: s.team_id,
         source: t.source
-      }), t.checkOssSalesExperiment && Lb(s.key), eD) {
-        eD.openFile({
+      }), t.checkOssSalesExperiment && Lb(s.key), desktopAPIInstance) {
+        desktopAPIInstance.openFile({
           fileKey: s.key,
           title: s.name,
           fileEditorType: s.editor_type,
@@ -113,7 +113,7 @@ let $$V11 = nF(async (e, t) => {
     }
   }).catch(() => {
     e.dispatch(F.dequeue({}));
-    e.dispatch(_$$s2.error(_$$t('file_browser.file_browser_actions.file_copy_error')));
+    e.dispatch(_$$s2.error(getI18nString('file_browser.file_browser_actions.file_copy_error')));
   });
 });
 let $$H14 = nF((e, t) => {
@@ -135,9 +135,9 @@ let $$W7 = nF(async (e, t, {
   let n = await r.fetchFile(t.fileKey);
   let i = XHR.post(`/api/files/${t.fileKey}/workshop`).then(() => {
     e.dispatch(F.enqueue({
-      message: _$$t('whiteboard.open_sessions.open_session_started_notification'),
+      message: getI18nString('whiteboard.open_sessions.open_session_started_notification'),
       button: {
-        text: _$$t('whiteboard.open_sessions.open_session_started_notification_copy_link'),
+        text: getI18nString('whiteboard.open_sessions.open_session_started_notification_copy_link'),
         action: () => {
           e.dispatch($$Z8({
             fileKey: t.fileKey,
@@ -149,7 +149,7 @@ let $$W7 = nF(async (e, t, {
     }));
   }).catch(() => {
     e.dispatch(F.enqueue({
-      message: _$$t('whiteboard.open_sessions.open_session_start_failed_notification'),
+      message: getI18nString('whiteboard.open_sessions.open_session_start_failed_notification'),
       error: !0
     }));
   });
@@ -185,20 +185,20 @@ let $$K2 = nF(async (e, t) => {
       versionHistory: e.getState().versionHistory
     }));
   }).catch(e => {
-    x1('recent files', 'Error marking file view / retrieving last seen times', {
+    logError('recent files', 'Error marking file view / retrieving last seen times', {
       error: e
     });
   });
 });
 let $$Y0 = nF((e, t) => {
   $$U1(t.file_key, t.thumbnail_guid).then(() => {
-    let r = getFeatureFlags().dse_library_pg_thumbnails ? t.thumbnail_guid ? _$$t('file_browser.file_browser_actions.file_thumbnail_set') : _$$t('file_browser.file_browser_actions.default_file_thumbnail_restored') : t.thumbnail_guid ? _$$t('file_browser.file_browser_actions.thumbnail_set') : _$$t('file_browser.file_browser_actions.default_thumbnail_restored');
+    let r = getFeatureFlags().dse_library_pg_thumbnails ? t.thumbnail_guid ? getI18nString('file_browser.file_browser_actions.file_thumbnail_set') : getI18nString('file_browser.file_browser_actions.default_file_thumbnail_restored') : t.thumbnail_guid ? getI18nString('file_browser.file_browser_actions.thumbnail_set') : getI18nString('file_browser.file_browser_actions.default_thumbnail_restored');
     e.dispatch(F.enqueue({
       message: r
     }));
   }).catch(() => {
     e.dispatch(F.enqueue({
-      message: _$$t('file_browser.error_try_again'),
+      message: getI18nString('file_browser.error_try_again'),
       error: !0
     }));
   });
@@ -226,10 +226,10 @@ let $$q12 = nF((e, t) => {
     ds('Embed Code Copied', t.fileKey, e.getState());
     e.dispatch(F.enqueue({
       type: 'embeded_code_copied_to_clipboard',
-      message: _$$t('file_browser.file_browser_actions.embed_code_copied')
+      message: getI18nString('file_browser.file_browser_actions.embed_code_copied')
     }));
   }).catch(() => {
-    e.dispatch(_$$s2.error(_$$t('file_browser.file_browser_actions.embed_code_copy_error')));
+    e.dispatch(_$$s2.error(getI18nString('file_browser.file_browser_actions.embed_code_copy_error')));
   });
 });
 function J(e, t) {
@@ -243,7 +243,7 @@ function J(e, t) {
     ...i
   } : {
     type: n,
-    message: t.visualBellMessageOverride ?? _$$t('copy_to_clipboard.link_copied_to_clipboard'),
+    message: t.visualBellMessageOverride ?? getI18nString('copy_to_clipboard.link_copied_to_clipboard'),
     button: t.visualBellButton,
     ...i
   };
@@ -269,7 +269,7 @@ let $$Z8 = _$$n(nF((e, t) => {
     });
     t.skipVisualBell || J(e, t);
   }).catch(() => {
-    t.showVisualBellOnErrorForInteractionTests && PN() ? J(e, t) : e.dispatch(to({
+    t.showVisualBellOnErrorForInteractionTests && isInteractionOrEvalMode() ? J(e, t) : e.dispatch(to({
       type: _$$o,
       data: {
         link: n

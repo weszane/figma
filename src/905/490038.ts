@@ -1,7 +1,8 @@
-import type { Atom, WritableAtom } from 'jotai'
+import type { Atom, PrimitiveAtom, WritableAtom } from 'jotai'
 import type { Store } from 'jotai/vanilla/store'
 import type { Unsubscribe } from 'redux'
-import { createStore } from 'jotai'
+import { atom, createStore } from 'jotai'
+
 
 /**
  * AtomStoreManager manages atom state, subscriptions, and test resets.
@@ -30,7 +31,7 @@ class AtomStoreManager {
    * @param atom The writable atom to set.
    * @param args Additional arguments for setting.
    */
-  set(atom: WritableAtom<unknown, unknown[], unknown>, ...args: unknown[]): void {
+  set<T = any>(atom: PrimitiveAtom<T> | WritableAtom<T, T[], void>, ...args: any[]): void {
     this.jotaiAtomStore.set(atom, ...args)
   }
 

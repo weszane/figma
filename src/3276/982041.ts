@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 export function $$i0({
   count: e
 }) {
@@ -11,7 +11,7 @@ export function $$i0({
       display: "flex",
       justifyContent: "center"
     },
-    children: tx("collaboration.spotlight.bell.presenter.follower_count", {
+    children: renderI18nText("collaboration.spotlight.bell.presenter.follower_count", {
       followerCount: e
     })
   });

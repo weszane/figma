@@ -10,17 +10,17 @@ import { e as _$$e2 } from "../905/149844";
 import { rXF, Pdb, VD3, e0R, vRS, t2E, Vzr, NLJ, rrT, Z_n, j0r, OmW } from "../figma_app/763686";
 import { sH, dI } from "../905/805904";
 import { getFeatureFlags } from "../905/601108";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import f from "classnames";
 import { hC } from "../figma_app/901889";
 import { C as _$$C } from "../905/108595";
 import { ZC } from "../figma_app/39751";
 import { M as _$$M } from "../figma_app/648761";
-import { m as _$$m } from "../905/717445";
+import { getFilteredFeatureFlags } from "../905/717445";
 import { Pt, rf, qP } from "../figma_app/806412";
 import { k as _$$k2 } from "../905/582200";
 import { tH as _$$tH } from "../905/751457";
-import { tx as _$$tx, t as _$$t2 } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { ZI } from "../figma_app/328825";
 import { h as _$$h } from "../905/78925";
 import { XE } from "../figma_app/91703";
@@ -145,7 +145,7 @@ function ey({
 }) {
   let t = cJ();
   let i = getFeatureFlags().sts_video;
-  let r = md(eA);
+  let r = useAtomWithSubscription(eA);
   let {
     show,
     isShowing,
@@ -165,7 +165,7 @@ function ey({
   });
   return jsx(rq, {
     arrowPosition: F_.BOTTOM,
-    description: _$$tx("fullscreen.properties_panel.video_fill_callout.description"),
+    description: renderI18nText("fullscreen.properties_panel.video_fill_callout.description"),
     isShowing,
     media: jsx(_$$w, {
       src: buildUploadUrl("3c264d9568a9593189da6d47438d382f94a70d95"),
@@ -173,7 +173,7 @@ function ey({
     }),
     onClose: complete,
     primaryCta: {
-      label: _$$tx("fullscreen.properties_panel.video_fill_callout.primary_cta"),
+      label: renderI18nText("fullscreen.properties_panel.video_fill_callout.primary_cta"),
       type: "button",
       onClick: () => {
         e();
@@ -183,7 +183,7 @@ function ey({
       dataTestId: "video-fill-callout-primary-cta"
     },
     secondaryCta: {
-      label: _$$tx("general.learn_more"),
+      label: renderI18nText("general.learn_more"),
       type: "button",
       onClick: () => {
         FJ("https://help.figma.com/hc/articles/33666207487767", "_blank");
@@ -194,7 +194,7 @@ function ey({
     },
     targetKey: eg,
     testId: "video-feature-callout",
-    title: _$$tx("fullscreen.properties_panel.video_fill_callout.title"),
+    title: renderI18nText("fullscreen.properties_panel.video_fill_callout.title"),
     trackingContextName: "video_fill_callout",
     userFlagOnShow: e_
   });
@@ -207,15 +207,15 @@ let ex = {
   format: e => {
     switch (e) {
       case "SOLID":
-        return _$$t2("fullscreen.properties_panel.solid");
+        return getI18nString("fullscreen.properties_panel.solid");
       case "GRADIENT_LINEAR":
-        return _$$t2("fullscreen.properties_panel.gradient");
+        return getI18nString("fullscreen.properties_panel.gradient");
       case "PATTERN":
-        return _$$t2("fullscreen.properties_panel.pattern");
+        return getI18nString("fullscreen.properties_panel.pattern");
       case "IMAGE":
-        return _$$t2("fullscreen.properties_panel.image");
+        return getI18nString("fullscreen.properties_panel.image");
       case "VIDEO":
-        return _$$t2("fullscreen.properties_panel.video");
+        return getI18nString("fullscreen.properties_panel.video");
     }
   }
 };
@@ -279,7 +279,7 @@ function eC({
           case "GRADIENT_LINEAR":
             return !0;
           case "PATTERN":
-            return !!(!r && _$$m().ce_il_pattern);
+            return !!(!r && getFilteredFeatureFlags().ce_il_pattern);
           case "IMAGE":
           case "VIDEO":
             return !t;
@@ -310,7 +310,7 @@ function eT({
   hidePatternPaints: a,
   recordingKey: s
 }) {
-  let o = !!(!a && _$$m().ce_il_pattern);
+  let o = !!(!a && getFilteredFeatureFlags().ce_il_pattern);
   return jsxs("div", {
     className: eb,
     children: [jsx(_$$p, {
@@ -323,21 +323,21 @@ function eT({
       paintType: "SOLID",
       recordingKey: Pt(s, "solid"),
       icon: jsx(_$$H, {}),
-      tooltip: _$$t2("fullscreen.properties_panel.solid")
+      tooltip: getI18nString("fullscreen.properties_panel.solid")
     }), jsx(ek, {
       isSelected: bn(e),
       onChange: t,
       paintType: "GRADIENT_LINEAR",
       recordingKey: Pt(s, "gradientLinear"),
       icon: jsx(_$$z, {}),
-      tooltip: _$$t2("fullscreen.properties_panel.gradient")
+      tooltip: getI18nString("fullscreen.properties_panel.gradient")
     }), o && jsx(ek, {
       isSelected: "PATTERN" === e,
       onChange: t,
       paintType: "PATTERN",
       recordingKey: Pt(s, "pattern"),
       icon: jsx(_$$L, {}),
-      tooltip: _$$t2("fullscreen.properties_panel.pattern"),
+      tooltip: getI18nString("fullscreen.properties_panel.pattern"),
       disabled: r && "PATTERN" !== e
     }), !i && jsx(ek, {
       isSelected: "IMAGE" === e,
@@ -345,14 +345,14 @@ function eT({
       paintType: "IMAGE",
       recordingKey: Pt(s, "image"),
       icon: jsx(_$$Z, {}),
-      tooltip: _$$t2("fullscreen.properties_panel.image")
+      tooltip: getI18nString("fullscreen.properties_panel.image")
     }), !i && jsx(ek, {
       isSelected: "VIDEO" === e,
       onChange: t,
       paintType: "VIDEO",
       recordingKey: Pt(s, "video"),
       icon: jsx(_$$k3, {}),
-      tooltip: _$$t2("fullscreen.properties_panel.video"),
+      tooltip: getI18nString("fullscreen.properties_panel.video"),
       onboardingKey: eg
     })]
   });
@@ -568,9 +568,9 @@ function e6({
     format: e => {
       switch (e) {
         case EU:
-          return _$$t2("fullscreen.properties_panel.current_page_colors");
+          return getI18nString("fullscreen.properties_panel.current_page_colors");
         case KV:
-          return _$$t2("fullscreen.properties_panel.local_assets");
+          return getI18nString("fullscreen.properties_panel.local_assets");
         default:
           {
             let t = i.find(t => t.fileKey === e);
@@ -601,12 +601,12 @@ function e6({
       label: jsx(_$$h3, {
         children: u.format(t)
       }),
-      "aria-label": _$$t2("fullscreen.properties_panel.library_swatch_select.aria_label")
+      "aria-label": getI18nString("fullscreen.properties_panel.library_swatch_select.aria_label")
     }), jsxs(mc, {
       children: [g, p && jsx(wv, {}), f]
     })]
   }) : jsxs(l6, {
-    ariaLabel: _$$t2("fullscreen.properties_panel.library_swatch_select.aria_label"),
+    ariaLabel: getI18nString("fullscreen.properties_panel.library_swatch_select.aria_label"),
     formatter: u,
     id: "color-picker-swatch-set-select-id",
     property: t,
@@ -798,7 +798,7 @@ function ty(e) {
   let t = useDispatch();
   let i = new ZB(() => e.paint);
   return jsx(t_, {
-    ariaLabel: _$$t2("fullscreen.properties_panel.color_picker.paint_type.aria_label"),
+    ariaLabel: getI18nString("fullscreen.properties_panel.color_picker.paint_type.aria_label"),
     className: "type_select--typeSelect--URjN7",
     dispatch: t,
     dropdownClassName: "type_select--typeSelectDropdown--1qAZ9",
@@ -958,7 +958,7 @@ function tR({
           "gradient_stop_list--positionNewUI--bUNK-": C
         }),
         children: jsx(w2, {
-          "data-tooltip": _$$t2("fullscreen.properties_panel.gradient_picker.stop_position"),
+          "data-tooltip": getI18nString("fullscreen.properties_panel.gradient_picker.stop_position"),
           "data-tooltip-type": Ib.TEXT,
           decimals: 0,
           dispatch: x,
@@ -993,10 +993,10 @@ function tR({
         className: "gradient_stop_list--actions--seaVY",
         children: h > 1 && jsx(_$$K, {
           onClick: T,
-          "aria-label": _$$t2("fullscreen.properties_panel.gradient_picker.delete_stop"),
+          "aria-label": getI18nString("fullscreen.properties_panel.gradient_picker.delete_stop"),
           htmlAttributes: {
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t2("fullscreen.properties_panel.gradient_picker.delete_stop"),
+            "data-tooltip": getI18nString("fullscreen.properties_panel.gradient_picker.delete_stop"),
             onMouseDown: dG,
             onBlur: () => A(!1),
             onFocus: () => A(!0),
@@ -1149,9 +1149,9 @@ function tN({
   let Y = jsx(_$$K, {
     actionOnPointerDown: !0,
     onClick: t2E.rotateGradient90Degrees,
-    "aria-label": _$$t2("fullscreen.properties_panel.gradient_picker.rotate_90"),
+    "aria-label": getI18nString("fullscreen.properties_panel.gradient_picker.rotate_90"),
     htmlAttributes: {
-      "data-tooltip": _$$t2("fullscreen.properties_panel.gradient_picker.rotate_90"),
+      "data-tooltip": getI18nString("fullscreen.properties_panel.gradient_picker.rotate_90"),
       "data-tooltip-type": Ib.TEXT
     },
     children: jsx(_$$R, {})
@@ -1207,7 +1207,7 @@ function tN({
           }),
           children: [jsx("div", {
             className: "gradient_editor--stopsHeaderLabel--fzmGs",
-            children: _$$t2("fullscreen.properties_panel.gradient_picker.stops")
+            children: getI18nString("fullscreen.properties_panel.gradient_picker.stops")
           }), jsx("div", {
             className: _()("gradient_editor--stopsHeaderAddButton--1MI-j", {
               "gradient_editor--stopsHeaderAddButtonNewUI--mNdDo": W
@@ -1215,9 +1215,9 @@ function tN({
             children: jsx(_$$K, {
               actionOnPointerDown: !0,
               onClick: M,
-              "aria-label": _$$t2("fullscreen.properties_panel.gradient_picker.add_stop"),
+              "aria-label": getI18nString("fullscreen.properties_panel.gradient_picker.add_stop"),
               htmlAttributes: {
-                "data-tooltip": _$$t2("fullscreen.properties_panel.gradient_picker.add_stop"),
+                "data-tooltip": getI18nString("fullscreen.properties_panel.gradient_picker.add_stop"),
                 "data-tooltip-type": Ib.TEXT
               },
               children: jsx(_$$e2, {})
@@ -1287,10 +1287,10 @@ function tz(e) {
   return jsxs(Fragment, {
     children: [jsxs(Id, {
       children: [jsx(cS, {
-        label: _$$tx("properties_panel.noise.noise_type"),
+        label: renderI18nText("properties_panel.noise.noise_type"),
         input: jsxs(_$$bL2, {
           legend: jsx(_$$q, {
-            children: _$$tx("properties_panel.noise.noise_type")
+            children: renderI18nText("properties_panel.noise.noise_type")
           }),
           value: e.paint.noiseType,
           onChange: function (t) {
@@ -1315,7 +1315,7 @@ function tz(e) {
               })]
             }),
             value: "DUOTONE",
-            "aria-label": _$$t2("properties_panel.noise.noise_type.duotone")
+            "aria-label": getI18nString("properties_panel.noise.noise_type.duotone")
           }), jsx(_$$c$3, {
             icon: jsx("div", {
               style: {
@@ -1330,13 +1330,13 @@ function tz(e) {
               })
             }),
             value: "MONOTONE",
-            "aria-label": _$$t2("properties_panel.noise.noise_type.monotone")
+            "aria-label": getI18nString("properties_panel.noise.noise_type.monotone")
           }), jsx(_$$c$3, {
             icon: jsx("div", {
               className: "noise_settings_modal--multitoneIcon--BgMU2 noise_settings_modal--noiseTypeIcon--nYOhR chit--chit--WdWdx"
             }),
             value: "MULTITONE",
-            "aria-label": _$$t2("properties_panel.noise.noise_type.multitone")
+            "aria-label": getI18nString("properties_panel.noise.noise_type.multitone")
           })]
         })
       }), ("DUOTONE" === e.paint.noiseType || "MONOTONE" === e.paint.noiseType) && jsx(cS, {
@@ -1360,9 +1360,9 @@ function tz(e) {
           })]
         })
       }), jsx(cS, {
-        label: _$$tx("properties_panel.noise.opacity"),
+        label: renderI18nText("properties_panel.noise.opacity"),
         input: jsx(w2, {
-          "data-tooltip": _$$t2("properties_panel.noise.opacity"),
+          "data-tooltip": getI18nString("properties_panel.noise.opacity"),
           "data-tooltip-type": Ib.TEXT,
           dispatch: e.dispatch,
           onValueChange: function (t) {
@@ -1376,9 +1376,9 @@ function tz(e) {
           max: 1
         })
       }), jsx(cS, {
-        label: _$$tx("properties_panel.noise.noise_size"),
+        label: renderI18nText("properties_panel.noise.noise_size"),
         input: jsx(gq, {
-          "data-tooltip": _$$t2("properties_panel.noise.noise_size"),
+          "data-tooltip": getI18nString("properties_panel.noise.noise_size"),
           "data-tooltip-type": Ib.TEXT,
           dispatch: e.dispatch,
           onValueChange: function (t) {
@@ -1397,9 +1397,9 @@ function tz(e) {
           max: 100
         })
       }), jsx(cS, {
-        label: _$$tx("properties_panel.noise.density"),
+        label: renderI18nText("properties_panel.noise.density"),
         input: jsx(w2, {
-          "data-tooltip": _$$t2("properties_panel.noise.density"),
+          "data-tooltip": getI18nString("properties_panel.noise.density"),
           "data-tooltip-type": Ib.TEXT,
           dispatch: e.dispatch,
           onValueChange: function (t) {
@@ -1535,7 +1535,7 @@ function t9(e) {
             iconPrefix: jsx(_$$o, {}),
             variant: s === NLJ.PATTERN_SOURCE_SELECTOR ? "primary" : "secondary",
             recordingKey: Pt(e.recordingKey, "selectSource"),
-            children: _$$tx("properties_panel.pattern.select_source")
+            children: renderI18nText("properties_panel.pattern.select_source")
           })
         })
       })]
@@ -1552,17 +1552,17 @@ function t9(e) {
           children: u.name
         })]
       }), jsx(_$$K, {
-        "aria-label": _$$t2("properties_panel.pattern.go_to_source"),
+        "aria-label": getI18nString("properties_panel.pattern.go_to_source"),
         onClick: y,
         children: jsx(_$$A3, {})
       })]
     }), jsx("div", {
       className: "pattern_settings_modal--divider--cuS8M"
     }), jsx(cS, {
-      label: _$$tx("properties_panel.pattern.tile_type"),
+      label: renderI18nText("properties_panel.pattern.tile_type"),
       input: jsxs(_$$bL2, {
         legend: jsx(_$$q, {
-          children: _$$tx("properties_panel.pattern.tile_type")
+          children: renderI18nText("properties_panel.pattern.tile_type")
         }),
         value: "RECTANGULAR" === e.paint.patternTileType ? "RECTANGULAR" : "HEXAGONAL",
         onChange: function (t) {
@@ -1574,18 +1574,18 @@ function t9(e) {
         children: [jsx(_$$c$3, {
           icon: jsx(tY, {}),
           value: "RECTANGULAR",
-          "aria-label": _$$t2("properties_panel.pattern.rectangular")
+          "aria-label": getI18nString("properties_panel.pattern.rectangular")
         }), jsx(_$$c$3, {
           icon: "VERTICAL_HEXAGONAL" === e.paint.patternTileType ? jsx(tq, {}) : jsx(t$, {}),
           value: "HEXAGONAL",
-          "aria-label": _$$t2("properties_panel.pattern.hexagonal")
+          "aria-label": getI18nString("properties_panel.pattern.hexagonal")
         })]
       })
     }), "RECTANGULAR" !== e.paint.patternTileType && jsx(cS, {
-      label: _$$tx("properties_panel.pattern.direction"),
+      label: renderI18nText("properties_panel.pattern.direction"),
       input: jsxs(_$$bL2, {
         legend: jsx(_$$q, {
-          children: _$$tx("properties_panel.pattern.tile_type")
+          children: renderI18nText("properties_panel.pattern.tile_type")
         }),
         value: "VERTICAL_HEXAGONAL" === e.paint.patternTileType ? "VERTICAL" : "HORIZONTAL",
         onChange: function (t) {
@@ -1597,18 +1597,18 @@ function t9(e) {
         children: [jsx(_$$c$3, {
           icon: jsx(_$$o2, {}),
           value: "HORIZONTAL",
-          "aria-label": _$$t2("properties_panel.pattern.horizontal")
+          "aria-label": getI18nString("properties_panel.pattern.horizontal")
         }), jsx(_$$c$3, {
           icon: jsx(_$$W, {}),
           value: "VERTICAL",
-          "aria-label": _$$t2("properties_panel.pattern.vertical")
+          "aria-label": getI18nString("properties_panel.pattern.vertical")
         })]
       })
     }), jsx(cS, {
-      label: _$$tx("properties_panel.pattern.scale"),
+      label: renderI18nText("properties_panel.pattern.scale"),
       input: jsx(w2, {
         bigNudgeAmount: 10,
-        "data-tooltip": _$$t2("properties_panel.pattern.scale"),
+        "data-tooltip": getI18nString("properties_panel.pattern.scale"),
         "data-tooltip-type": Ib.TEXT,
         dispatch: e.dispatch,
         inputClassName: WC,
@@ -1629,10 +1629,10 @@ function t9(e) {
         })
       })
     }), jsx(cS, {
-      label: _$$tx("properties_panel.pattern.spacing"),
+      label: renderI18nText("properties_panel.pattern.spacing"),
       input: jsx(w2, {
         bigNudgeAmount: 10,
-        "data-tooltip": _$$t2("properties_panel.pattern.spacing"),
+        "data-tooltip": getI18nString("properties_panel.pattern.spacing"),
         "data-tooltip-type": Ib.TEXT,
         dispatch: e.dispatch,
         inputClassName: WC,
@@ -1654,14 +1654,14 @@ function t9(e) {
         value: e.paint.patternSpacing.x,
         children: jsx("span", {
           className: t8,
-          children: _$$tx("fullscreen.properties_panel.transform_panel.x")
+          children: renderI18nText("fullscreen.properties_panel.transform_panel.x")
         })
       })
     }), jsx(cS, {
       label: null,
       input: jsx(w2, {
         bigNudgeAmount: 10,
-        "data-tooltip": _$$t2("properties_panel.pattern.spacing"),
+        "data-tooltip": getI18nString("properties_panel.pattern.spacing"),
         "data-tooltip-type": Ib.TEXT,
         dispatch: e.dispatch,
         inputClassName: WC,
@@ -1694,11 +1694,11 @@ function t9(e) {
         value: i ? void 0 : e.paint.patternSpacing.y,
         children: jsx("span", {
           className: t8,
-          children: _$$tx("fullscreen.properties_panel.transform_panel.y")
+          children: renderI18nText("fullscreen.properties_panel.transform_panel.y")
         })
       })
     }), jsx(Zo, {
-      label: _$$tx("properties_panel.pattern.alignment"),
+      label: renderI18nText("properties_panel.pattern.alignment"),
       input: jsx(_$$V, {
         anchorPoint: JX(e.paint),
         onAnchorPointChange: function (t) {
@@ -1722,7 +1722,7 @@ function t9(e) {
           className: "pattern_settings_modal--infoIcon--g1dQX"
         }), jsx("div", {
           className: "pattern_settings_modal--effectsText--j0ZPF",
-          children: _$$t2("properties_panel.pattern.effects_error")
+          children: getI18nString("properties_panel.pattern.effects_error")
         })]
       })]
     })]
@@ -1742,21 +1742,21 @@ function it({
 }) {
   return jsxs(Y9, {
     children: [jsx(r1, {
-      children: _$$tx("fullscreen.color_picker")
+      children: renderI18nText("fullscreen.color_picker")
     }), jsxs(qj, {
       manager: i,
       children: [jsx(_$$t.Tab, {
         ...r.custom_color,
         recordingKey: Pt(t, "viewTabs.customColor"),
-        children: _$$tx("fullscreen.properties_panel.color_picker.custom")
+        children: renderI18nText("fullscreen.properties_panel.color_picker.custom")
       }), jsx(_$$t.Tab, {
         ...r.library,
         recordingKey: Pt(t, "viewTabs.library"),
-        children: _$$tx("fullscreen.properties_panel.color_picker.libraries")
+        children: renderI18nText("fullscreen.properties_panel.color_picker.libraries")
       }), r.cms && jsx(_$$t.Tab, {
         ...r.cms,
         recordingKey: Pt(t, "viewTabs.dakota"),
-        children: _$$tx("variables.binding_ui.variable_dakota_tab_name")
+        children: renderI18nText("variables.binding_ui.variable_dakota_tab_name")
       })]
     }), e && jsx(jk, {
       children: jsx("div", {
@@ -1881,15 +1881,15 @@ export let $$ii1 = forwardRef(function ({
   }, [A, ec]);
   let eT = new Set([j0r.ALL_SCOPES]);
   let ek = sO();
-  let eR = md(TN).length > 0;
+  let eR = useAtomWithSubscription(TN).length > 0;
   let eN = es ? void 0 : jsx(it, {
     recordingKey: O,
     rightButtons: !J && jsx(_$$K, {
-      "aria-label": _$$t2("variables.binding_ui.create_style_or_variable_button_tooltip"),
+      "aria-label": getI18nString("variables.binding_ui.create_style_or_variable_button_tooltip"),
       recordingKey: Pt(O, "createVariable"),
       onClick: ew,
       htmlAttributes: {
-        "data-tooltip": _$$t2("variables.binding_ui.create_style_or_variable_button_tooltip"),
+        "data-tooltip": getI18nString("variables.binding_ui.create_style_or_variable_button_tooltip"),
         "data-tooltip-type": Ib.TEXT
       },
       disabled: ek && !eR,
@@ -2165,12 +2165,12 @@ function ia({
       paintId: t,
       recordingKey: Pt(d, "imageSettings"),
       updateStillImageAndSelectionPropertiesForGIF: w
-    }) : null, _$$m().ce_il_pattern && ee && jsx(t9, {
+    }) : null, getFilteredFeatureFlags().ce_il_pattern && ee && jsx(t9, {
       paint: ee,
       dispatch: F,
       onChange: g,
       recordingKey: Pt(d, "patternSettings")
-    }), _$$m().ce_il_noise && et && jsx(tz, {
+    }), getFilteredFeatureFlags().ce_il_noise && et && jsx(tz, {
       paint: et,
       dispatch: F,
       onChange: g
@@ -2277,11 +2277,11 @@ export function $$io0({
         children: [jsx(it, {
           rightButtons: function () {
             if (b) return jsx(_$$K, {
-              "aria-label": _$$t2("variables.binding_ui.create_variable_button_tooltip"),
+              "aria-label": getI18nString("variables.binding_ui.create_variable_button_tooltip"),
               recordingKey: Pt(h, "createVariable"),
               onClick: K,
               htmlAttributes: {
-                "data-tooltip": _$$t2("variables.binding_ui.create_variable_button_tooltip"),
+                "data-tooltip": getI18nString("variables.binding_ui.create_variable_button_tooltip"),
                 "data-tooltip-type": Ib.TEXT
               },
               children: jsx(_$$e2, {})

@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { hV } from "../figma_app/387100";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { useLocalStorageSync } from "../905/657224";
 import { debugState } from "../905/407919";
 import { subscribeAndAwaitData } from "../905/553831";
@@ -24,7 +24,7 @@ export function $$b0() {
   let e = debugState.getState();
   let t = "fullscreen" === e.selectedView.view ? e.selectedView.fileKey : null;
   let r = eY();
-  let y = md(_S);
+  let y = useAtomWithSubscription(_S);
   let b = v4();
   let T = yT(b.id);
   let [I] = useLocalStorageSync("code-connect-selected-language-storage-key", T);

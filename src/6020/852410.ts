@@ -8,13 +8,13 @@ import { A as _$$A } from "../905/24328";
 import { r as _$$r } from "../905/857502";
 import { X3B, glU, rrT } from "../figma_app/763686";
 import { l7 } from "../905/189185";
-import { fp } from "../figma_app/27355";
+import { useAtomValueAndSetter } from "../figma_app/27355";
 import m from "classnames";
 import { Pt } from "../figma_app/806412";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { k as _$$k } from "../905/582200";
 import { k as _$$k2 } from "../6020/640789";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { lW } from "../figma_app/11182";
 import { K as _$$K2 } from "../905/987240";
 import { m0 } from "../figma_app/976749";
@@ -117,10 +117,10 @@ function F({
             t = i.nodeID;
             return void glU.selectInstances(t, !X3B.isNodeVisibleInViewport(t));
           },
-          "aria-label": _$$t("proto.flows_panel.select_frame"),
+          "aria-label": getI18nString("proto.flows_panel.select_frame"),
           htmlAttributes: {
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t("proto.flows_panel.select_frame")
+            "data-tooltip": getI18nString("proto.flows_panel.select_frame")
           },
           children: jsx(_$$A, {})
         }), jsx(V, {
@@ -140,10 +140,10 @@ function F({
               stringToCopy: `${g}${o}`
             }));
           }(i.nodeID),
-          "aria-label": _$$t("proto.flows_panel.copy_link"),
+          "aria-label": getI18nString("proto.flows_panel.copy_link"),
           htmlAttributes: {
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t("proto.flows_panel.copy_link")
+            "data-tooltip": getI18nString("proto.flows_panel.copy_link")
           },
           children: jsx(_$$r, {})
         }), jsx(V, {
@@ -156,10 +156,10 @@ function F({
               source: "properties_panel"
             }));
           },
-          "aria-label": _$$t("proto.flows_panel.preview"),
+          "aria-label": getI18nString("proto.flows_panel.preview"),
           htmlAttributes: {
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t("proto.flows_panel.preview")
+            "data-tooltip": getI18nString("proto.flows_panel.preview")
           },
           children: jsx(c, {})
         })]
@@ -186,12 +186,12 @@ export let $$L0 = function (t) {
     collapsedInspectionPanelAtom,
     collapseEnabled
   } = QZ("prototype_flows");
-  let [K, B] = fp(collapsedInspectionPanelAtom);
+  let [K, B] = useAtomValueAndSetter(collapsedInspectionPanelAtom);
   let V = useCallback(() => {
     B(!K);
   }, [B, K]);
   if (useEffect(() => {
-    s || x1("prototyping", "No file available in flows panel", {
+    s || logError("prototyping", "No file available in flows panel", {
       fileKey: o
     });
   }, [s, o]), !e || c && 0 === (R = R.filter(t => d.get(t.nodeID)?.visible)).length) return null;
@@ -273,7 +273,7 @@ export let $$L0 = function (t) {
         stylePickerShown: {
           isShown: !1
         },
-        title: _$$t("proto.flows"),
+        title: getI18nString("proto.flows"),
         toggleVisibleFlows: t => {
           collapseEnabled && t.stopPropagation();
           VU.get("toggle-prototyping-info", "panel")(t);

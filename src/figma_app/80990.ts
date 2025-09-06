@@ -5,10 +5,10 @@ import { Hc } from "../905/805904";
 import { Hc as _$$Hc, sH, dI } from "../905/537777";
 import { q as _$$q } from "../905/196201";
 import { xx } from "../figma_app/815945";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { H0, X9 } from "../figma_app/191804";
 import { w } from "../905/5147";
-import { xi } from "../905/714362";
+import { logWarning } from "../905/714362";
 import { XHR, getRequest } from "../905/910117";
 import { ke } from "../905/309735";
 import { lQ, Kb, No } from "../905/405710";
@@ -193,7 +193,7 @@ function q(e) {
   return t >= 400 && t < 500;
 }
 let J = e => {
-  let t = function(e, t) {
+  let t = function (e, t) {
     let r = e && e.data && e.data.message;
     return "string" == typeof r && r.length > 0 ? r : t;
   }(e, "please try again later");
@@ -218,7 +218,7 @@ async function ee(e, t, r) {
     let n;
     try {
       n = await $$ei1.getCanvas({
-        canvas_url: function(e, t) {
+        canvas_url: function (e, t) {
           switch (e.type) {
             case PW.COMPONENT:
               return e.canvas_url + "&fv=" + t.toString();
@@ -244,7 +244,7 @@ async function ee(e, t, r) {
       };
     }
     return {
-      resultType: l7.system("upsert-asset-from-log", () => function(e, t, r) {
+      resultType: l7.system("upsert-asset-from-log", () => function (e, t, r) {
         let n;
         let a;
         switch (e.type) {
@@ -339,7 +339,7 @@ export async function $$et2(e, t, r, n) {
       s += bytesAdded ?? 0;
       transientError && (i = transientError);
     }
-    if (sx("publishing_buffer_fetch", {
+    if (trackEventAnalytics("publishing_buffer_fetch", {
       latency: Date.now() - a,
       num_versions_fetched: d.length + u.length,
       num_success: o.success,
@@ -408,7 +408,7 @@ export async function $$er17(e, t, r, n) {
       s += bytesAdded ?? 0;
       transientError && (i = transientError);
     }
-    if (sx("variable_publishing_buffer_fetch", {
+    if (trackEventAnalytics("variable_publishing_buffer_fetch", {
       latency: Date.now() - a,
       num_versions_fetched: d.length + u.length,
       num_success: o.success,
@@ -469,7 +469,7 @@ let en = class e {
         }) => {
           t = new TextDecoder("utf-8").decode(n);
           r = i;
-          let a = function(e) {
+          let a = function (e) {
             let t = {};
             for (let r of Object.keys(e)) {
               let n = sH(r);
@@ -481,7 +481,7 @@ let en = class e {
           return a;
         }).catch(n => {
           console.warn("Team library cache error on get() with status", X(n), "with error", n);
-          xi("teamLibraryItemSeceneGraphCache", "unable to get variable set thumbnails", {
+          logWarning("teamLibraryItemSeceneGraphCache", "unable to get variable set thumbnails", {
             decodedData: t,
             thumbnailUrl: e,
             requestStatus: r
@@ -519,7 +519,7 @@ export function $$ea26(e, t = null) {
 export function $$es24(e) {
   let t = null;
   e.every(e => {
-    if (null === t) t = e.library_key; else if (t !== e.library_key) {
+    if (null === t) t = e.library_key;else if (t !== e.library_key) {
       t = null;
       return !1;
     }
@@ -553,4 +553,4 @@ export const r8 = $$I22;
 export const u0 = $$S23;
 export const uj = $$es24;
 export const y3 = $$M25;
-export const zR = $$ea26; 
+export const zR = $$ea26;

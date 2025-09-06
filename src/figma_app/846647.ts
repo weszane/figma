@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useState } from "react";
 import { useDispatch } from "../vendor/514228";
 import { h } from "../905/207101";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { b as _$$b } from "../905/985254";
 import { Z } from "../905/104740";
 import { VF } from "../figma_app/989514";
@@ -32,7 +32,7 @@ export function $$m1(e) {
     dismissModal: e.onClose,
     disableHighlight: !0,
     targetKey: $$h0,
-    title: e.title || tx("tooltips_plus_onboarding.text_formatting.title"),
+    title: e.title || renderI18nText("tooltips_plus_onboarding.text_formatting.title"),
     trackingContextName: "Tooltips+ Text Formatting Step",
     lowerLeftText: e.lowerLeftText,
     onSecondaryCtaClick: e.onSecondaryCtaClick,
@@ -48,7 +48,7 @@ export function $$m1(e) {
     collapseToTopRight: e.fromCursorBot,
     trackingContextName: "Cursor Bot Text Formatting Step" + (e.isFollowUp ? " (Reactive Follow Up)" : "")
   };
-  let b = tx("tooltips_plus_onboarding.text_formatting_ui3.description");
+  let b = renderI18nText("tooltips_plus_onboarding.text_formatting_ui3.description");
   return jsx(f, {
     ...(e.fromCursorBot ? y : E),
     children: e.bodyText || b

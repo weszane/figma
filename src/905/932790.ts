@@ -7,13 +7,13 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { biQ } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
-import { eU, zl } from "../figma_app/27355";
+import { atom, atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
-import { M4 } from "../905/609396";
-import { $D } from "../905/11";
+import { Timer } from "../905/609396";
+import { reportError } from "../905/11";
 import { ds } from "../figma_app/314264";
 import { IL, Lg, SA, YK, Aq } from "../905/843553";
-import { Lo } from "../905/714362";
+import { logInfo } from "../905/714362";
 import { Ay, c6 } from "../figma_app/432652";
 import { Ay as _$$Ay } from "../figma_app/948389";
 import { Zr } from "../figma_app/462456";
@@ -28,8 +28,8 @@ import { A as _$$A } from "../905/929620";
 import { Vm, ks } from "../figma_app/838407";
 import { xS } from "../figma_app/757114";
 var S = (e => (e[e.IN_PROGRESS = 0] = "IN_PROGRESS", e[e.CANCELLED = 1] = "CANCELLED", e))(S || {});
-let w = eU(new Map());
-let C = eU(null, (e, t, i, n, r) => {
+let w = atom(new Map());
+let C = atom(null, (e, t, i, n, r) => {
   let a = new Map(e(w));
   a.set(i, {
     status: 0,
@@ -38,12 +38,12 @@ let C = eU(null, (e, t, i, n, r) => {
   });
   t(w, a);
 });
-let T = eU(null, (e, t, i) => {
+let T = atom(null, (e, t, i) => {
   let n = new Map(e(w));
   n.$$delete(i);
   t(w, n);
 });
-eU(null, (e, t) => {
+atom(null, (e, t) => {
   let i = e(w);
   let n = new Map(i);
   for (let [e, t] of i.entries()) 0 === t.status && n.set(e, {
@@ -63,14 +63,14 @@ async function R(e, t, i, n, a, s, o, d, c, u) {
     ..._$$Ay(),
     clientLifecycleId: i
   };
-  let T = new M4();
+  let T = new Timer();
   T.start();
   let k = await Ay.design.generateTextContentFromExamples({
     v: 0,
     data: s
   }, C);
   for await (let i of (u.timeOfCortexRequest = T.getElapsedTime(), new c6(k))) {
-    let s = zl.get(w).get(n);
+    let s = atomStoreManager.get(w).get(n);
     if (!s || s.requestId !== a || s.status === S.CANCELLED || t.signal && t.signal.aborted) return !1;
     if (i.result) {
       if (f < e.length) {
@@ -85,7 +85,7 @@ async function R(e, t, i, n, a, s, o, d, c, u) {
           e.node && e.node.isAlive && c(e.node.guid);
         });
         commitId && (m = commitId);
-        status !== Sy.SUCCESS || commitId || $D(_$$e.AI_PRODUCTIVITY, Error("Content fill missing commit id after successful text replacement"), {
+        status !== Sy.SUCCESS || commitId || reportError(_$$e.AI_PRODUCTIVITY, Error("Content fill missing commit id after successful text replacement"), {
           extra: {
             replaceableNodes: e,
             commitId,
@@ -140,7 +140,7 @@ async function N(e, t, i, n, a, s, o, d = !1) {
     forceCacheMiss: !0
   };
   void 0 !== o && (E.userPrompt = o);
-  d && Lo("text-generation", "request-params", {
+  d && logInfo("text-generation", "request-params", {
     requestData: E
   });
   let {
@@ -149,7 +149,7 @@ async function N(e, t, i, n, a, s, o, d = !1) {
   } = function (e) {
     let t = e.join(",");
     let i = ++k;
-    zl.set(C, t, new Set(e), i);
+    atomStoreManager.set(C, t, new Set(e), i);
     return {
       hashKey: t,
       requestId: i
@@ -165,7 +165,7 @@ async function N(e, t, i, n, a, s, o, d = !1) {
     c.numReplaced = O.numReplaced;
     return c;
   } catch (i) {
-    $D(_$$e.AI_PRODUCTIVITY, i, {
+    reportError(_$$e.AI_PRODUCTIVITY, i, {
       extra: {
         replaceableNodesLength: t.length,
         exampleNodesLength: e.length
@@ -180,8 +180,8 @@ async function N(e, t, i, n, a, s, o, d = !1) {
     i.trace = O.trace;
     return i;
   } finally {
-    let e = zl.get(w).get(hashKey);
-    e && e.requestId === requestId && (zl.set(T, hashKey), clearAllLoadingStates());
+    let e = atomStoreManager.get(w).get(hashKey);
+    e && e.requestId === requestId && (atomStoreManager.set(T, hashKey), clearAllLoadingStates());
   }
 }
 async function U(e, t, i, n, s, o, c, u, p) {
@@ -200,7 +200,7 @@ async function U(e, t, i, n, s, o, c, u, p) {
     let y = LI(e, i, h, t, u);
     if (!y) {
       let e = new SA("Can't regenerate text - no selected nodes");
-      $D(_$$e.AI_PRODUCTIVITY, e);
+      reportError(_$$e.AI_PRODUCTIVITY, e);
       return e;
     }
     if (!y.continuationNodes.length) throw new SA("Can't regenerate text - no replaceable nodes", {
@@ -215,7 +215,7 @@ async function U(e, t, i, n, s, o, c, u, p) {
     }
     if (0 === b.numReplaced && m > 1) {
       let e = new YK("Failed to replace text content in all rows");
-      $D(_$$e.AI_PRODUCTIVITY, e, {
+      reportError(_$$e.AI_PRODUCTIVITY, e, {
         extra: {
           attempts: m
         }
@@ -226,7 +226,7 @@ async function U(e, t, i, n, s, o, c, u, p) {
   }
   if (m > 4) {
     let e = new YK("Failed to replace text content in all rows after maximum retries");
-    $D(_$$e.AI_PRODUCTIVITY, e, {
+    reportError(_$$e.AI_PRODUCTIVITY, e, {
       extra: {
         attempts: m,
         max_attempts: 4
@@ -244,7 +244,7 @@ export let $$B0 = async ({
   params: t,
   clientLifecycleId: i
 }) => {
-  let l = new M4();
+  let l = new Timer();
   l.start();
   let {
     guids,
@@ -252,7 +252,7 @@ export let $$B0 = async ({
     source,
     userPrompt
   } = t;
-  let v = zl.get(dd);
+  let v = atomStoreManager.get(dd);
   if (numExampleRows < 0) throw new SA("numExampleRows must be zero or higher");
   if ("DUPLICATE_SESSION_TOAST" === source && guids.length <= 1) throw new Aq("No additional duplicate nodes found");
   let I = (biQ?.getActiveNodeIds() ?? []).map(e => getSingletonSceneGraph().get(e)).filter(e => !!e);

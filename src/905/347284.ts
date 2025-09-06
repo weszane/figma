@@ -3,12 +3,12 @@ import { xx } from "../figma_app/815945";
 import { cZ } from "../figma_app/272902";
 import s from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { uA, cZ as _$$cZ } from "../figma_app/806412";
 import { ZR, s4 } from "../figma_app/8833";
 import { scrollBarXHeight, trackPadding, scrollBarYWidth } from "../figma_app/786175";
 var o = s;
-var m = ((e) => (e.VERTICAL = "vertical", e.HORIZONTAL = "horizontal", e))(m || {});
+var m = (e => (e.VERTICAL = "vertical", e.HORIZONTAL = "horizontal", e))(m || {});
 export class $$h0 extends uA {
   constructor() {
     super(...arguments);
@@ -49,10 +49,10 @@ export class $$h0 extends uA {
       scrollbarLeft: 0,
       scrollbarWidth: 0
     };
-    this.scrollTo = (e) => {
+    this.scrollTo = e => {
       this.scrollContainer && (this.scrollContainer.scrollTop = e);
     };
-    this.scrollToLeft = (e) => {
+    this.scrollToLeft = e => {
       this.scrollContainer && (this.wasImperativelyScrolled = !0, this.scrollContainer.scrollLeft = e);
     };
     this.scrollToTop = () => {
@@ -69,14 +69,14 @@ export class $$h0 extends uA {
     this.getScrollContainerTop = xx(() => this.scrollContainer.getBoundingClientRect().top);
     this.getScrollContainerBottom = xx(() => this.scrollContainer.getBoundingClientRect().bottom);
     this.getTrackHeight = () => this.trackHeight;
-    this.setClipContainer = (e) => {
+    this.setClipContainer = e => {
       e && (this.clipContainer = e);
     };
-    this.setScrollContainer = (e) => {
+    this.setScrollContainer = e => {
       this.outerResizeObserver.disconnect();
       e && (this.scrollContainer = e, cZ(this.props.scrollContainerRef, e), this.props.initialScrollTop && (this.scrollContainer.scrollTop = this.props.initialScrollTop), this.outerResizeObserver.observe(e), this.recomputeScrollbar("vertical"), this.recomputeScrollbar("horizontal"));
     };
-    this.setScrollContent = (e) => {
+    this.setScrollContent = e => {
       this.resizeObserver.disconnect();
       e && (this.scrollContent = e, this.props.scrollContentRef && (this.props.scrollContentRef.current = e), this.resizeObserver.observe(e));
     };
@@ -94,7 +94,7 @@ export class $$h0 extends uA {
       this.lastContentHeight = this.scrollContent.offsetHeight;
       this.props.enableOverscroll && !(this.scrollTop >= e) && this.state.overscrollHeight > this.scrollContent.clientHeight && this.updateOverscrollMinHeight();
     };
-    this.recomputeScrollbar = (e) => {
+    this.recomputeScrollbar = e => {
       if ("horizontal" === e && !this.props.horizontalScrollBarEnabled) return;
       if (!this.scrollingTimeout) {
         if ("vertical" === e) {
@@ -156,7 +156,7 @@ export class $$h0 extends uA {
         canScrollX: d
       }));
     };
-    this.isDraggingScrollbar = (e) => "vertical" === e ? null != this.state.startDragScrollTop && null != this.state.startDragY : "horizontal" === e && null != this.state.startDragScrollLeft && null != this.state.startDragX;
+    this.isDraggingScrollbar = e => "vertical" === e ? null != this.state.startDragScrollTop && null != this.state.startDragY : "horizontal" === e && null != this.state.startDragScrollLeft && null != this.state.startDragX;
     this.onScrollBarMouseDown = (e, t) => {
       e.stopPropagation();
       e.preventDefault();
@@ -202,7 +202,7 @@ export class $$h0 extends uA {
     };
     this.onTrackMouseWheel = (e, t) => {
       let i;
-      ((e) => {
+      (e => {
         e[e.DOM_DELTA_PIXEL = 0] = "DOM_DELTA_PIXEL";
         e[e.DOM_DELTA_LINE = 1] = "DOM_DELTA_LINE";
         e[e.DOM_DELTA_PAGE = 2] = "DOM_DELTA_PAGE";
@@ -212,10 +212,10 @@ export class $$h0 extends uA {
       0 === e.deltaMode ? r = n : 1 === e.deltaMode ? r = 10 * n : 2 === e.deltaMode && (r = 100 * n);
       "vertical" === t ? this.scrollContainer.scrollTop += r : "horizontal" === t && (this.scrollContainer.scrollLeft += r);
     };
-    this.onMouseMove = (e) => {
-      this.isDraggingScrollbar("vertical") ? (this.nextClientY = e.clientY, Ay.safari ? null == this.nextFrameRequestedY && (this.nextFrameRequestedY = requestAnimationFrame(() => {
+    this.onMouseMove = e => {
+      this.isDraggingScrollbar("vertical") ? (this.nextClientY = e.clientY, BrowserInfo.safari ? null == this.nextFrameRequestedY && (this.nextFrameRequestedY = requestAnimationFrame(() => {
         this.scrollByNextClient("vertical");
-      })) : this.scrollByNextClient("vertical")) : this.isDraggingScrollbar("horizontal") && (this.nextClientX = e.clientX, Ay.safari ? null == this.nextFrameRequestedX && (this.nextFrameRequestedX = requestAnimationFrame(() => {
+      })) : this.scrollByNextClient("vertical")) : this.isDraggingScrollbar("horizontal") && (this.nextClientX = e.clientX, BrowserInfo.safari ? null == this.nextFrameRequestedX && (this.nextFrameRequestedX = requestAnimationFrame(() => {
         this.scrollByNextClient("horizontal");
       })) : this.scrollByNextClient("horizontal"));
     };
@@ -223,7 +223,7 @@ export class $$h0 extends uA {
     this.nextClientX = 0;
     this.nextFrameRequestedY = null;
     this.nextFrameRequestedX = null;
-    this.scrollByNextClient = (e) => {
+    this.scrollByNextClient = e => {
       let {
         trackSize,
         scrollSize,
@@ -264,7 +264,7 @@ export class $$h0 extends uA {
         startDragX: void 0
       });
     };
-    this.onMouseDown = _$$cZ(this, "mousedown", (e) => {
+    this.onMouseDown = _$$cZ(this, "mousedown", e => {
       this.props.onMouseDown(e);
     });
   }
@@ -338,10 +338,10 @@ export class $$h0 extends uA {
         }) : o()("scroll_container--trackX--hi0Cm scroll_container--_baseTrack--2eCvb", {
           "scroll_container--trackBorderX--YtWKS": !this.props.disableScrollbarBorder
         }),
-        onMouseDown: (e) => {
+        onMouseDown: e => {
           this.onTrackMouseDown(e, "horizontal");
         },
-        onWheel: (e) => {
+        onWheel: e => {
           this.onTrackMouseWheel(e, "horizontal");
         },
         children: jsx("div", {
@@ -350,7 +350,7 @@ export class $$h0 extends uA {
             transform: `translate3d(${this.state.scrollbarLeft}px, 0px, 0)`,
             width: this.state.scrollbarWidth
           },
-          onMouseDown: (e) => {
+          onMouseDown: e => {
             this.onScrollBarMouseDown(e, "horizontal");
           }
         })
@@ -389,10 +389,10 @@ export class $$h0 extends uA {
           "scroll_container--trackBorderY--Rwpf0": !this.props.disableScrollbarBorder,
           "scroll_container--trackYWithTrackXPresent--fT3ux": i
         }),
-        onMouseDown: (e) => {
+        onMouseDown: e => {
           this.onTrackMouseDown(e, "vertical");
         },
-        onWheel: (e) => {
+        onWheel: e => {
           this.onTrackMouseWheel(e, "vertical");
         },
         children: jsx("div", {
@@ -401,7 +401,7 @@ export class $$h0 extends uA {
             transform: `translate3d(0px, ${this.state.scrollbarTop}px, 0)`,
             height: this.state.scrollbarHeight
           },
-          onMouseDown: (e) => {
+          onMouseDown: e => {
             this.onScrollBarMouseDown(e, "vertical");
           }
         })

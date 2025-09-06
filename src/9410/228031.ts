@@ -12,7 +12,7 @@ import { m1T } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { Pt } from "../figma_app/806412";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { VC, uE } from "../figma_app/565242";
 import { G as _$$G } from "../905/707993";
 import { J6, qs, fn, WI } from "../figma_app/986594";
@@ -24,7 +24,7 @@ import { c$, sK } from "../905/794875";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { c$ as _$$c$, bL, l9, mc } from "../905/493196";
 import { h as _$$h } from "../905/270045";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { B as _$$B } from "../905/714743";
 import { Vp } from "../figma_app/649254";
 import { Ad } from "../figma_app/811257";
@@ -69,7 +69,7 @@ function F({
   let c = useMemo(() => null == l || 0 === d.length ? new Map() : new Map(d.map(e => {
     let t = e.id;
     let i = e.fields.find(e => e.fieldSchemaId === l)?.value;
-    return null == i || 0 === i.length ? ($D(_$$e.CMS, Error("item slug is null or empty when computing CMS item page link options"), {
+    return null == i || 0 === i.length ? (reportError(_$$e.CMS, Error("item slug is null or empty when computing CMS item page link options"), {
       extra: {
         itemId: t,
         itemSlug: i
@@ -81,7 +81,7 @@ function F({
     var t;
     return jsx(_$$c$, {
       value: e.id,
-      children: (t = e.id, c.get(t) || ($D(_$$e.CMS, Error("invalid slug name when formatting a CMS item page link"), {
+      children: (t = e.id, c.get(t) || (reportError(_$$e.CMS, Error("invalid slug name when formatting a CMS item page link"), {
         extra: {
           itemId: t
         }
@@ -92,7 +92,7 @@ function F({
     value: s,
     onChange: e => {
       if (null == e) {
-        $D(_$$e.CMS, Error("item id is null when setting CMS item page link (slug selector)"));
+        reportError(_$$e.CMS, Error("item id is null when setting CMS item page link (slug selector)"));
         return;
       }
       i({
@@ -108,7 +108,7 @@ function F({
       children: jsx(l9, {
         width: "fill",
         label: jsx(_$$h, {
-          children: tx("sites.panel.link_panel.cms_item")
+          children: renderI18nText("sites.panel.link_panel.cms_item")
         }),
         disabled: 0 === d.length
       })
@@ -288,10 +288,10 @@ export function $$q0({
     C && J.current && (J.current.focus(), J.current.select());
   }, [C, J]);
   let q = useMemo(() => ({
-    format: e => gl(e) ? _$$t("fullscreen.mixed") : e?.type === "header" ? e.name : u3(e, O, cmsItemPages),
+    format: e => gl(e) ? getI18nString("fullscreen.mixed") : e?.type === "header" ? e.name : u3(e, O, cmsItemPages),
     parse: e => {
       if (!e) return null;
-      let i = e === _$$t("sites.panel.home") ? "/" : e;
+      let i = e === getI18nString("sites.panel.home") ? "/" : e;
       let r = O.find(e => e.name === i);
       if (r) return {
         type: "internal",
@@ -351,7 +351,7 @@ export function $$q0({
         e?.type !== "header" && i(e);
       },
       openBelowTarget: !0,
-      placeholder: _$$t("sites.panel.search_responsive_sets"),
+      placeholder: getI18nString("sites.panel.search_responsive_sets"),
       property: t,
       recordingKey: N,
       children: [cmsLinkOptions.length > 0 && [jsx(G, {
@@ -360,7 +360,7 @@ export function $$q0({
         dataTestId: "sites.link_combo_box.cms_header",
         value: {
           type: "header",
-          name: collectionName ?? _$$t("sites.panel.link_panel.cms_header")
+          name: collectionName ?? getI18nString("sites.panel.link_panel.cms_header")
         },
         recordingKey: Pt(N, "option.cms_header")
       }, "cms-header"), ...cmsLinkOptions, jsx(sK, {}, "cms-webpages-divider"), jsx(G, {
@@ -370,7 +370,7 @@ export function $$q0({
         recordingKey: Pt(N, "option.webpages_header"),
         value: {
           type: "header",
-          name: _$$t("sites.panel.link_panel.webpages_header")
+          name: getI18nString("sites.panel.link_panel.webpages_header")
         }
       }, "webpages-header")], O.map(e => jsx(G, {
         icon: "/" === e.name ? jsx(_$$I, {}) : jsx(_$$g, {}),

@@ -1,8 +1,8 @@
 import n from "../vendor/241899";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { k0 } from "../figma_app/623293";
 import { getInitialOptions } from "../figma_app/169182";
-import { Gq } from "../figma_app/363242";
+import { getI18nState } from "../figma_app/363242";
 import { z } from "../905/239603";
 import { vh, YV } from "../figma_app/181241";
 import { D } from "../905/347702";
@@ -53,7 +53,7 @@ export function $$y5() {
       cors: !1
     }).then(() => {
       e(A = Stripe(h, {
-        locale: Gq().getPrimaryLocale(!1)
+        locale: getI18nState().getPrimaryLocale(!1)
       }));
     }).catch(t) : t("No Stripe api key");
   });
@@ -86,7 +86,7 @@ let $$I2 = D(async (e, t, i) => {
   let o = s();
   let l = !1;
   let d = setInterval(() => {
-    o !== s() && (sx("Stripe Authentication Modal"), clearInterval(d), l = !0);
+    o !== s() && (trackEventAnalytics("Stripe Authentication Modal"), clearInterval(d), l = !0);
   }, 1e3);
   let c = await n.confirmCardSetup(client_secret, {
     payment_method: {
@@ -96,12 +96,12 @@ let $$I2 = D(async (e, t, i) => {
     }
   });
   if (clearInterval(d), c.error) {
-    sx("Payment Confirmation Error", {
+    trackEventAnalytics("Payment Confirmation Error", {
       error_message: c.error.message
     });
     return c.error;
   }
-  sx("Payment Confirmation Success");
+  trackEventAnalytics("Payment Confirmation Success");
   c.setupIntent.is3DS = l;
   return c.setupIntent;
 });
@@ -111,4 +111,4 @@ export const To = $$I2;
 export const zY = $$b3;
 export const Ey = $$v4;
 export const eV = $$y5;
-export const pV = $$f6; 
+export const pV = $$f6;

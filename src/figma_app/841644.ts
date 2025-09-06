@@ -9,7 +9,7 @@ import c from "classnames";
 import { Pt, rf } from "../figma_app/806412";
 import { D8 } from "../905/511649";
 import { B } from "../905/714743";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { i as _$$i } from "../figma_app/85949";
 import { SG } from "../figma_app/852050";
 import { BK } from "../905/848862";
@@ -273,13 +273,13 @@ function O({
   recordingKey: t
 }) {
   return jsx(K, {
-    "aria-label": _$$t("variables.authoring_modal.table.clear_override"),
+    "aria-label": getI18nString("variables.authoring_modal.table.clear_override"),
     actionOnPointerDown: !0,
     onClick: e,
     recordingKey: t,
     htmlAttributes: {
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": _$$t("variables.authoring_modal.table.clear_override")
+      "data-tooltip": getI18nString("variables.authoring_modal.table.clear_override")
     },
     children: jsx(_$$m, {})
   }, "clearOverrideButton");
@@ -294,20 +294,20 @@ function R({
     className: u()(AM, Ab),
     htmlAttributes: {
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": _$$t("variables.binding_ui.detach_variable_tooltip")
+      "data-tooltip": getI18nString("variables.binding_ui.detach_variable_tooltip")
     },
-    "aria-label": _$$t("variables.binding_ui.detach_variable_tooltip"),
+    "aria-label": getI18nString("variables.binding_ui.detach_variable_tooltip"),
     onClick: t,
     children: jsx(_$$o, {})
   }) : jsx(_$$E, {
     className: UU,
     htmlAttributes: {
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": _$$t("fullscreen.properties_panel.apply_variable"),
+      "data-tooltip": getI18nString("fullscreen.properties_panel.apply_variable"),
       "data-test-id": Pt("variable-control-icon", i ?? ""),
       tabIndex: -1
     },
-    "aria-label": _$$t("fullscreen.properties_panel.apply_variable"),
+    "aria-label": getI18nString("fullscreen.properties_panel.apply_variable"),
     onClick: r,
     recordingKey: Pt(i, "comboBoxButton"),
     children: jsx(B, {

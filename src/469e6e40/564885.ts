@@ -10,12 +10,12 @@ import { k as _$$k } from "../905/443820";
 import { getFeatureFlags } from "../905/601108";
 import { h1 } from "../905/986103";
 import { s as _$$s } from "../905/573154";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { E } from "../905/984674";
 import { sf } from "../905/929976";
 import { wR } from "../figma_app/765689";
 import { FFileType } from "../figma_app/191312";
-import { wN } from "../figma_app/53721";
+import { mapFileTypeToEditorType } from "../figma_app/53721";
 import { O } from "../905/833838";
 import { E as _$$E } from "../figma_app/126651";
 import { Ib } from "../905/129884";
@@ -29,13 +29,13 @@ export let $$E0 = Ju(function (e) {
   let x = function (e, t) {
     switch (e) {
       case "edit":
-        return t ? _$$t("members_tab.last_edit_modal.title_with_name", {
+        return t ? getI18nString("members_tab.last_edit_modal.title_with_name", {
           publicName: t
-        }) : _$$t("members_tab.last_edit_modal.title_generic");
+        }) : getI18nString("members_tab.last_edit_modal.title_generic");
       case "all":
-        return t ? _$$t("team_view.pro_member_modal.title_with_username", {
+        return t ? getI18nString("team_view.pro_member_modal.title_with_username", {
           username: t
-        }) : _$$t("team_view.pro_member_modal.title_without_username");
+        }) : getI18nString("team_view.pro_member_modal.title_without_username");
       default:
         return e;
     }
@@ -49,7 +49,7 @@ export let $$E0 = Ju(function (e) {
     })).then(e => {
       u(e.data.meta);
     }).catch(e => {
-      a(_$$s.error(e.data?.message || _$$t("team_view.pro_member_modal.error_on_activity_retrieval_fallback_message")));
+      a(_$$s.error(e.data?.message || getI18nString("team_view.pro_member_modal.error_on_activity_retrieval_fallback_message")));
     }).$$finally(() => h(!1));
   }, [a, e.planType, e.planUserId, e.planId]);
   let v = useMemo(() => [{
@@ -94,7 +94,7 @@ export let $$E0 = Ju(function (e) {
             className: "xrvj5dj x1ku5rj1 x5yr21d",
             children: jsx(_$$k, {})
           }) : j ? jsx("div", {
-            children: tx("members_tab.last_edit_modal.no_activity")
+            children: renderI18nText("members_tab.last_edit_modal.no_activity")
           }) : jsxs("table", {
             className: "x1bamp8i x1mwwwfo xi4r6k5 xh8yej3",
             children: [jsx("thead", {
@@ -103,15 +103,15 @@ export let $$E0 = Ju(function (e) {
                 children: [jsx("th", {
                   className: "x1nn34kk xkezfkh",
                   scope: "col",
-                  children: tx("members_tab.last_edit_modal.product_column_header")
+                  children: renderI18nText("members_tab.last_edit_modal.product_column_header")
                 }), jsx("th", {
                   className: "x1nn34kk xkezfkh",
                   scope: "col",
-                  children: tx("members_tab.last_edit_modal.file_column_header")
+                  children: renderI18nText("members_tab.last_edit_modal.file_column_header")
                 }), jsx("th", {
                   className: "x1nn34kk xkezfkh",
                   scope: "col",
-                  children: "edit" === e.activityType ? tx("members_tab.last_edit_modal.last_edit_column_header") : _$$t("team_view.pro_member_modal.edit_table_last_active_header")
+                  children: "edit" === e.activityType ? renderI18nText("members_tab.last_edit_modal.last_edit_column_header") : getI18nString("team_view.pro_member_modal.edit_table_last_active_header")
                 })]
               })
             }), jsx("tbody", {
@@ -150,7 +150,7 @@ function S(e) {
               e.activity && e.activity.file_key && (t(sf({
                 view: "fullscreen",
                 fileKey: e.activity.file_key,
-                editorType: wN(e.editorType)
+                editorType: mapFileTypeToEditorType(e.editorType)
               })), e.onClose());
             },
             children: e.activity.file_name
@@ -160,14 +160,14 @@ function S(e) {
         });
         {
           let t = `file_tooltip_inaccessible_${e.editorType}`;
-          let a = _$$t("members_tab.last_edit_modal.inaccessible_text");
+          let a = getI18nString("members_tab.last_edit_modal.inaccessible_text");
           return jsx("div", {
             "data-tooltip-proxy-element-id": t,
             children: jsx("div", {
               id: t,
               "data-tooltip-type": Ib.TEXT,
               "data-tooltip": a,
-              children: _$$t("general.private_file")
+              children: getI18nString("general.private_file")
             })
           });
         }

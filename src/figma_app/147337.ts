@@ -3,7 +3,7 @@ import { useSelector, shallowEqual, useDispatch } from "../vendor/514228";
 import { resourceUtils } from "../905/989992";
 import { p as _$$p, Rs } from "../figma_app/288654";
 import { s as _$$s } from "../905/573154";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { a as _$$a } from "../905/999566";
 import { to } from "../905/156213";
 import { nb } from "../figma_app/543100";
@@ -111,7 +111,7 @@ export function $$b2(e) {
   let t = useDispatch();
   return useCallback((r, n) => {
     if (n) {
-      t(_$$s.error(_$$t("file_browser.pinning.add_pin_error_max_pins", {
+      t(_$$s.error(getI18nString("file_browser.pinning.add_pin_error_max_pins", {
         maxNumWorkspacePins: $$T1
       })));
       return;

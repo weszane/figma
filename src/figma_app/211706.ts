@@ -7,7 +7,7 @@ import { O } from "../905/969533";
 import { k } from "../905/44647";
 import { P } from "../905/347284";
 import { G } from "../905/750789";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { uE } from "../figma_app/314264";
 import { q5 } from "../figma_app/516028";
 import { x } from "../figma_app/584132";
@@ -56,7 +56,7 @@ export function $$y2({
   let c = jsx(G, {
     text: e
   });
-  return (t && tx("design_systems.assets_panel.num_results_parenthesis", {
+  return (t && renderI18nText("design_systems.assets_panel.num_results_parenthesis", {
     numResults: t
   }), i) ? jsxs(E, {
     className: g,

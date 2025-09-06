@@ -3,7 +3,7 @@ import { useSelector } from "../vendor/514228";
 import { RR } from "../figma_app/338442";
 import { rXF, glU, Z_n, m1T, Ez5 } from "../figma_app/763686";
 import { l7 } from "../905/189185";
-import { R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { hS } from "../905/216495";
 import { u as _$$u } from "../figma_app/852050";
 import { J2 } from "../figma_app/84367";
@@ -37,7 +37,7 @@ export function $$T4(e) {
     mapVariableIdToTypedValue: eT,
     metadata: e
   }, void 0, function () {
-    let e = R(e => Sh(e));
+    let e = selectWithShallowEqual(e => Sh(e));
     let t = !Yc(RR.VISIBLE, e);
     let r = useCallback(e => {
       l7.user("add-prop-ref", () => glU.addComponentPropRef(RR.VISIBLE, e.value.explicitDefId));

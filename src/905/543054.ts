@@ -1,10 +1,10 @@
 import { ServiceCategories as _$$e } from "../905/165054";
-import { eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { debugState } from "../905/407919";
-import { Ay } from "../figma_app/778880";
-import { $D } from "../905/11";
-import { Lo } from "../905/714362";
-import { nl } from "../figma_app/257275";
+import { BrowserInfo } from "../figma_app/778880";
+import { reportError } from "../905/11";
+import { logInfo } from "../905/714362";
+import { isInteractionPathCheck } from "../figma_app/897289";
 import { vh } from "../figma_app/181241";
 import { Rq, wp } from "../905/283918";
 import { V } from "../905/666831";
@@ -23,14 +23,14 @@ let p = new class {
   }
 }();
 export async function $$A7() {
-  if (nl()) return [];
+  if (isInteractionPathCheck()) return [];
   try {
     let e = await p.getSpellCheckWords();
     if (200 === e.status) {
       let {
         words
       } = e.data.meta;
-      return words.map((e) => e.word);
+      return words.map(e => e.word);
     }
   } catch (e) {}
   return [];
@@ -38,13 +38,13 @@ export async function $$A7() {
 export async function $$y2() {
   try {
     let e = await fetch(SB);
-    return (await e.text()).split("\n").filter((e) => e.length > 0);
+    return (await e.text()).split("\n").filter(e => e.length > 0);
   } catch (e) {}
   return [];
 }
 export function $$b6() {
   try {
-    return B(debugState.getState().user?.name || "").filter((e) => e.text.length > 0).map((e) => e.text);
+    return B(debugState.getState().user?.name || "").filter(e => e.text.length > 0).map(e => e.text);
   } catch (e) {}
   return [];
 }
@@ -68,16 +68,16 @@ let v = new class {
   }
   async populateSupportedLanguages(e) {
     let t = [];
-    let i = Ay.mac ? [hz] : [];
+    let i = BrowserInfo.mac ? [hz] : [];
     switch (e) {
       case QC.DESKTOP:
         {
-          if (!eD) {
-            $D(_$$e.DESKTOP, Error("desktopApp is not defined, this should not happen as desktop spellcheck has already been initialized"));
+          if (!desktopAPIInstance) {
+            reportError(_$$e.DESKTOP, Error("desktopApp is not defined, this should not happen as desktop spellcheck has already been initialized"));
             return;
           }
-          let n = await eD.spellingGetLanguages();
-          if (Lo("populateSupportedLanguages", "desktopLanguages", {
+          let n = await desktopAPIInstance.spellingGetLanguages();
+          if (logInfo("populateSupportedLanguages", "desktopLanguages", {
             type: typeof n,
             isArray: Array.isArray(n),
             isNull: null === n,
@@ -117,7 +117,7 @@ export function $$x3(e) {
   return i && v.supportsLanguage(i) ? i : v.getSupportedLanguages()[0] ?? "en-US";
 }
 export async function $$S4() {
-  n || (n = (await V()) ? QC.DESKTOP : !nl() && (await wp()) ? QC.AGENT : QC.HUNSPELL);
+  n || (n = (await V()) ? QC.DESKTOP : !isInteractionPathCheck() && (await wp()) ? QC.AGENT : QC.HUNSPELL);
   return n;
 }
 export function $$w5() {

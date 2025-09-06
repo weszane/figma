@@ -13,7 +13,7 @@ import { w4 } from "../905/445814";
 import { kt } from "../figma_app/858013";
 import { e as _$$e } from "../905/457828";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { l as _$$l } from "../905/767868";
 import { C as _$$C } from "../905/226458";
@@ -22,7 +22,7 @@ import { fA } from "../figma_app/543100";
 import { _6 } from "../figma_app/386952";
 import { V0, dN } from "../figma_app/858344";
 import { lQ } from "../905/934246";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import C from "classnames";
 import { dN as _$$dN } from "../vendor/291472";
 import { P as _$$P } from "../905/347284";
@@ -75,7 +75,7 @@ function B({
   textAreaClassName: l
 }) {
   let d = useDispatch();
-  let c = zl.get(ph);
+  let c = atomStoreManager.get(ph);
   let [u, m] = useState(!1);
   let p = useRef(null);
   let f = useCallback(e => {
@@ -196,7 +196,7 @@ export function $$U0({
           })]
         })]
       }), jsx(B, {
-        placeholder: _$$t("file_browser.pinning.pin_modal.description_textarea_placeholder"),
+        placeholder: getI18nString("file_browser.pinning.pin_modal.description_textarea_placeholder"),
         text: E,
         onChange: I,
         onSubmit: O,
@@ -228,7 +228,7 @@ export function $$U0({
           children: [jsx($n, {
             variant: "secondary",
             onClick: T,
-            children: tx("modal.cancel")
+            children: renderI18nText("modal.cancel")
           }), N ? jsx($n, {
             disabled: !0,
             children: jsx(kt, {
@@ -251,7 +251,7 @@ export function $$W1(e, t) {
   return useCallback(s => {
     let i;
     ("workspace" !== a.view || a.subView !== V0.DIRECTORY) && (i = {
-      text: _$$t("file_browser.pinning.pin_modal.confirmation_bell.view_workspace"),
+      text: getI18nString("file_browser.pinning.pin_modal.confirmation_bell.view_workspace"),
       action: () => {
         r(sf({
           view: "workspace",

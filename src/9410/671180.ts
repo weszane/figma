@@ -8,9 +8,9 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { A as _$$A } from "../vendor/90566";
 import { rI } from "../905/485103";
-import { J6 } from "../905/602906";
-import { $D, NU } from "../905/11";
-import { ED } from "../905/714362";
+import { observabilityClient } from "../905/602906";
+import { reportError, NU } from "../905/11";
+import { logDebug } from "../905/714362";
 import { f as _$$f } from "../9410/885134";
 import { OJ, Ms, D9, fE, RY, oT } from "../figma_app/566517";
 import { pK } from "../9410/215872";
@@ -26,7 +26,7 @@ export function $$C0(e) {
       shareJSX: !!getFeatureFlags().first_draft_share_jsx,
       useAllComponents: !!getFeatureFlags().first_draft_publish_all_components,
       onError: (e, t) => {
-        $D(_$$e.AI_GENERATION, e, t);
+        reportError(_$$e.AI_GENERATION, e, t);
       }
     }
   });
@@ -66,7 +66,7 @@ async function v(e, t, i = {}) {
     let e = {
       elements: p.length
     };
-    $D(_$$e.AI_GENERATION, t, e);
+    reportError(_$$e.AI_GENERATION, t, e);
     return {};
   }
   let {
@@ -103,7 +103,7 @@ export function $$E1({
   let k = useRef(new sw(E || "generate", rI));
   let N = useRef(null);
   useEffect(() => {
-    N.current = J6.startUserFlow({
+    N.current = observabilityClient.startUserFlow({
       name: "first_draft_generate",
       team: _$$e.AI_GENERATION
     });
@@ -127,11 +127,11 @@ export function $$E1({
             ...e,
             jsxStr: t.jsxStr
           };
-          ED("first-draft", "Inserting Streamed JSX Updates", e, {
+          logDebug("first-draft", "Inserting Streamed JSX Updates", e, {
             createSentryBreadcrumb: !0,
             logToConsole: NU.NEVER
           });
-          ED("first-draft", "Inserting Streamed JSX Updates", n, {
+          logDebug("first-draft", "Inserting Streamed JSX Updates", n, {
             createSentryBreadcrumb: !1
           });
           T.current.doneTextLayerIds = T.current.doneTextLayerIds || new Set();
@@ -191,7 +191,7 @@ export function $$E1({
           T.current.expandedJsx = expandedJsx;
           T.current.queuedEffects = T.current.queuedEffects || {};
         } catch (e) {
-          $D(_$$e.AI_GENERATION, e instanceof Error ? e : Error(e));
+          reportError(_$$e.AI_GENERATION, e instanceof Error ? e : Error(e));
           w.current && !getSingletonSceneGraph().get(w.current) && (w.current = null, T.current.jsxStr = void 0, T.current.jsxJSON = void 0, T.current.expandedJsx = void 0);
         }
         try {
@@ -215,11 +215,11 @@ export function $$E1({
             e?.(w.current);
           }
         } catch (e) {
-          $D(_$$e.AI_GENERATION, e instanceof Error ? e : Error(e));
+          reportError(_$$e.AI_GENERATION, e instanceof Error ? e : Error(e));
         }
       })();
       await T.current.donePromise;
-      T.current.insertAgainWhenDone && (ED("first-draft", "Re-Inserting JSX Updates (Immediate)", {
+      T.current.insertAgainWhenDone && (logDebug("first-draft", "Re-Inserting JSX Updates (Immediate)", {
         jsxStrLength: T.current.lastArgs?.jsxStr?.length,
         options: {
           parentNodeId: T.current.lastArgs?.options.parentNodeId,
@@ -243,7 +243,7 @@ export function $$E1({
       }
       let e = T.current.queuedEffects ?? {};
       (await Promise.allSettled(Array.from(Object.values(e)))).forEach(e => {
-        "rejected" !== e.status || e.reason instanceof G1 && 500 > Iu(e.reason) || $D(_$$e.AI_GENERATION, e.reason);
+        "rejected" !== e.status || e.reason instanceof G1 && 500 > Iu(e.reason) || reportError(_$$e.AI_GENERATION, e.reason);
       });
     });
   }, [O]);

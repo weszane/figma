@@ -8,7 +8,7 @@ import { D8 } from "../905/511649";
 import { Point } from "../905/736624";
 import { B } from "../905/714743";
 import { t as _$$t } from "../905/331623";
-import { t as _$$t2 } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { jS, Pv } from "../905/619652";
 import { Ib } from "../905/129884";
 import { Cz } from "../figma_app/153399";
@@ -149,7 +149,7 @@ export function $$D2({
   return jsx(D8, {
     ...(i ? {} : {
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": _$$t2("whiteboard.colors.custom"),
+      "data-tooltip": getI18nString("whiteboard.colors.custom"),
       "data-tooltip-show-above": !0
     }),
     className: l()({
@@ -273,7 +273,7 @@ let $$F3 = forwardRef(({
     onMouseEnter: d,
     onMouseLeave: c,
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": _$$t2("whiteboard.delightful_toolbar.custom_upload"),
+    "data-tooltip": getI18nString("whiteboard.delightful_toolbar.custom_upload"),
     "data-tooltip-show-above": !0,
     children: [jsx($$M4, {
       value: E,

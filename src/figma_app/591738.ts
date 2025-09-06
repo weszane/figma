@@ -1,10 +1,10 @@
 import { useCallback } from "react";
 import { getFeatureFlags } from "../905/601108";
-import { eU, md } from "../figma_app/27355";
-import { eD } from "../figma_app/876459";
+import { atom, useAtomWithSubscription } from "../figma_app/27355";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { jm } from "../figma_app/416935";
 import { isDevEnvironment } from "../figma_app/169182";
-import { nW } from "../figma_app/778880";
+import { isAndroidOrIphoneNotFigmaMobile } from "../figma_app/778880";
 import { I7 } from "../figma_app/594947";
 import { dq } from "../905/845253";
 import { FFileType } from "../figma_app/191312";
@@ -35,15 +35,15 @@ export function $$y8() {
   let {
     getConfig
   } = I7("exp_in_file_notif_bell");
-  return () => !eD && !nW && getConfig().get("has_editor_bell", !1);
+  return () => !desktopAPIInstance && !isAndroidOrIphoneNotFigmaMobile && getConfig().get("has_editor_bell", !1);
 }
 export function $$b2() {
   return getFeatureFlags().google_federated_cm ?? !1;
 }
 export var $$T6 = (e => (e.DEFAULT = "default", e.PZ_THEN_PRODUCT = "pz_then_product", e.PRODUCT_THEN_PZ = "product_then_pz", e))($$T6 || {});
-export let $$I0 = eU(null);
+export let $$I0 = atom(null);
 export function $$S4() {
-  let e = md($$I0);
+  let e = useAtomWithSubscription($$I0);
   return "product_then_pz" === e || "pz_then_product" === e;
 }
 export function $$v5() {

@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useEffect, useState, useCallback, useRef } from "react";
 import { useDispatch, useStore, useSelector } from "../vendor/514228";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { b as _$$b } from "../905/985254";
 import { E as _$$E } from "../905/453826";
 import { e as _$$e } from "../905/621515";
@@ -12,7 +12,7 @@ import { f as _$$f } from "../905/940356";
 import { Lh, D8, WO } from "../figma_app/242339";
 import { N as _$$N } from "../figma_app/268271";
 import { WD4 } from "../figma_app/6204";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { uM } from "../905/738636";
 import { c as _$$c } from "../905/370443";
 import { xA } from "../905/766303";
@@ -48,7 +48,7 @@ function R(e) {
     dismissModal: e.onClose,
     disableHighlight: !0,
     targetKey: "tool-type-onboarding",
-    title: tx("tooltips_plus_onboarding.text_step.title"),
+    title: renderI18nText("tooltips_plus_onboarding.text_step.title"),
     trackingContextName: "Tooltips+ Text Step",
     lowerLeftText: jsx(uY, {
       currentStepNum: e.currentStepNum,
@@ -61,28 +61,28 @@ function R(e) {
     },
     onSecondaryCtaClick: e.onPrevious,
     pointsTo: "toolbar",
-    children: tx("tooltips_plus_onboarding.text_step.description")
+    children: renderI18nText("tooltips_plus_onboarding.text_step.description")
   });
 }
 function k(e) {
   let t = useDispatch();
-  let r = tx("tooltips_plus_onboarding.ui_kits_ending_step.title");
-  let s = tx("tooltips_plus_onboarding.ui_kits_ending_step.description");
+  let r = renderI18nText("tooltips_plus_onboarding.ui_kits_ending_step.title");
+  let s = renderI18nText("tooltips_plus_onboarding.ui_kits_ending_step.description");
   let o = "UI Kits";
-  e.forStartingPoints && (r = tx("starting_points_onboarding.assets_step.title"), s = tx("starting_points_onboarding.assets_step.description", {
+  e.forStartingPoints && (r = renderI18nText("starting_points_onboarding.assets_step.title"), s = renderI18nText("starting_points_onboarding.assets_step.description", {
     strongAssets: jsx("strong", {
       style: {
         display: "contents"
       },
-      children: tx("design_systems.assets_panel.assets")
+      children: renderI18nText("design_systems.assets_panel.assets")
     })
   }));
-  oe() && (r = tx("tooltips_plus_onboarding.assets_ending_step.title"), s = tx("tooltips_plus_onboarding.assets_ending_step.description", {
+  oe() && (r = renderI18nText("tooltips_plus_onboarding.assets_ending_step.title"), s = renderI18nText("tooltips_plus_onboarding.assets_ending_step.description", {
     strongAssets: jsx("strong", {
       style: {
         display: "contents"
       },
-      children: tx("design_systems.assets_panel.assets")
+      children: renderI18nText("design_systems.assets_panel.assets")
     })
   }), o = "Assets");
   useEffect(() => {
@@ -173,7 +173,7 @@ function j({
     currentStepNum: 5,
     totalNumSteps: j,
     primaryCtaProps: {
-      ctaText: tx("tooltips_plus_onboarding.done"),
+      ctaText: renderI18nText("tooltips_plus_onboarding.done"),
       ctaTrackingDescriptor: _$$c.DONE
     }
   }) : jsx(_$$J, {
@@ -229,10 +229,10 @@ function j({
 }
 function z(e) {
   let t = useDispatch();
-  let r = te()() ? tx("tooltips_plus_onboarding.ui_kits_and_icon_packs_step.title") : tx("tooltips_plus_onboarding.ui_kits_step.title");
-  let s = tx("tooltips_plus_onboarding.ui_kits_step.description");
+  let r = te()() ? renderI18nText("tooltips_plus_onboarding.ui_kits_and_icon_packs_step.title") : renderI18nText("tooltips_plus_onboarding.ui_kits_step.title");
+  let s = renderI18nText("tooltips_plus_onboarding.ui_kits_step.description");
   let o = "UI Kits";
-  oe() && (r = tx("tooltips_plus_onboarding.assets_step.title"), s = tx("tooltips_plus_onboarding.assets_step.description"), o = "Assets");
+  oe() && (r = renderI18nText("tooltips_plus_onboarding.assets_step.title"), s = renderI18nText("tooltips_plus_onboarding.assets_step.description"), o = "Assets");
   useEffect(() => {
     t(FP({
       tab: xae.ASSETS
@@ -361,7 +361,7 @@ function K({
           totalNumSteps: x,
           useLoadingBar: !0,
           primaryCtaProps: {
-            ctaText: tx("tooltips_plus_onboarding.done"),
+            ctaText: renderI18nText("tooltips_plus_onboarding.done"),
             ctaTrackingDescriptor: _$$c.DONE
           }
         });else return jsx(iF, {
@@ -412,10 +412,10 @@ function X(e) {
     onPrimaryCtaClick: e.onNext,
     pointsTo: "leftPanel",
     targetKey: s.current ? s.current.guid : _$$B,
-    title: tx("starting_points_onboarding.edit_text_step.title"),
+    title: renderI18nText("starting_points_onboarding.edit_text_step.title"),
     trackingContextName: "Starting Points Tooltips Edit Text Step",
     visible: t,
-    children: tx("starting_points_onboarding.edit_text_step.description")
+    children: renderI18nText("starting_points_onboarding.edit_text_step.description")
   });
 }
 function q(e) {
@@ -432,9 +432,9 @@ function q(e) {
     onSecondaryCtaClick: e.onPrevious,
     pointsTo: "designPanel",
     targetKey: t,
-    title: tx("starting_points_onboarding.fills_step.title"),
+    title: renderI18nText("starting_points_onboarding.fills_step.title"),
     trackingContextName: "Starting Points Fills Step",
-    children: tx("starting_points_onboarding.fills_step.description")
+    children: renderI18nText("starting_points_onboarding.fills_step.description")
   });
 }
 function Z(e) {
@@ -462,9 +462,9 @@ function Z(e) {
     onSecondaryCtaClick: e.onPrevious,
     pointsTo: "designPanel",
     targetKey: "design-panel-container",
-    title: tx("starting_points_onboarding.properties_step.title"),
+    title: renderI18nText("starting_points_onboarding.properties_step.title"),
     trackingContextName: "Starting Points Properties Step",
-    children: tx("starting_points_onboarding.properties_step.description")
+    children: renderI18nText("starting_points_onboarding.properties_step.description")
   }) : null;
 }
 function et(e) {
@@ -480,9 +480,9 @@ function et(e) {
     pointsTo: "toolbar",
     shouldCenterArrow: EL.BEST_EFFORT,
     targetKey: aE,
-    title: tx("starting_points_onboarding.toolbar_step.title"),
+    title: renderI18nText("starting_points_onboarding.toolbar_step.title"),
     trackingContextName: "Tooltips+ Text Step",
-    children: tx("starting_points_onboarding.toolbar_step.description", {
+    children: renderI18nText("starting_points_onboarding.toolbar_step.description", {
       actionsSvg: jsx("span", {
         style: {
           display: "inline-block",
@@ -492,7 +492,7 @@ function et(e) {
         children: jsx(_$$e3, {})
       }),
       strongActions: jsx("strong", {
-        children: tx("qa.extensions.tooltip_actions")
+        children: renderI18nText("qa.extensions.tooltip_actions")
       })
     })
   });
@@ -548,7 +548,7 @@ function en({
       currentStepNum: 5,
       totalNumSteps: 5,
       primaryCtaProps: {
-        ctaText: tx("tooltips_plus_onboarding.done"),
+        ctaText: renderI18nText("tooltips_plus_onboarding.done"),
         ctaTrackingDescriptor: _$$c.DONE
       },
       forStartingPoints: !0
@@ -586,8 +586,8 @@ export function $$ea1() {
   let e = useDispatch();
   let t = iZ();
   let r = q5()?.canEditCanvas;
-  let f = md(NT);
-  let E = md(g5);
+  let f = useAtomWithSubscription(NT);
+  let E = useAtomWithSubscription(g5);
   let {
     isShowing,
     complete,

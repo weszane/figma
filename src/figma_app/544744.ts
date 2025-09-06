@@ -1,4 +1,4 @@
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { N } from "../figma_app/59312";
 import { aV } from "../figma_app/722362";
 import { Td } from "../905/595131";
@@ -15,14 +15,14 @@ export function $$c2(e = {}) {
   return r || n && !isEnabledForViewers || o && !isEnabledForViewers;
 }
 export function $$u1() {
-  let e = md(oh);
+  let e = useAtomWithSubscription(oh);
   let t = "open" === e.state ? e.tool : void 0;
   let r = sT();
   return !!t || r;
 }
 export function $$p0() {
   let e = Td();
-  let t = md(gT);
+  let t = useAtomWithSubscription(gT);
   return !e && !t;
 }
 export const $y = $$p0;

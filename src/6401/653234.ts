@@ -12,7 +12,7 @@ import j from "classnames";
 import { L as _$$L } from "../905/408237";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Qx, Uu } from "../figma_app/8833";
 import { p as _$$p } from "../905/167135";
 import { iZ } from "../905/372672";
@@ -22,7 +22,7 @@ import { aF } from "../441/443466";
 import { A as _$$A } from "../b2835def/807151";
 import { gD, wL, lu, DR, E$ } from "../441/430710";
 import { Ay } from "../905/612521";
-import { uG } from "../figma_app/778880";
+import { isMobilePlatformNotFigmaMobile } from "../figma_app/778880";
 import { hk } from "../figma_app/632319";
 import { Y as _$$Y } from "../905/246212";
 import { oW } from "../905/675859";
@@ -36,7 +36,7 @@ import { e as _$$e } from "../905/149844";
 import { s as _$$s2 } from "../905/573154";
 import { ServiceCategories as _$$e2 } from "../905/165054";
 import { KJ } from "../figma_app/916560";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { kt } from "../figma_app/858013";
 import { r as _$$r } from "../905/955316";
 import { UD } from "../figma_app/624361";
@@ -184,7 +184,7 @@ function T({
   return jsx(_$$L, {
     className: b()(E, Qx, Uu),
     type: "text",
-    placeholder: _$$t("slides.flapp.alignment.prompt_placeholder"),
+    placeholder: getI18nString("slides.flapp.alignment.prompt_placeholder"),
     value: t,
     onChange: e => {
       l(e.target.value);
@@ -200,7 +200,7 @@ function L({
 }) {
   return jsx("p", {
     className: E,
-    children: e || _$$t("slides.flapp.alignment.prompt_placeholder")
+    children: e || getI18nString("slides.flapp.alignment.prompt_placeholder")
   });
 }
 function B({
@@ -337,13 +337,13 @@ function M() {
     className: "alignment_scale--scaleLabelContainer--HF5-I",
     children: [jsx("div", {
       className: "alignment_scale--stronglyDisagreeLabel--1Yzc0 alignment_scale--_labelBase--enfVZ text--fontPos14--OL9Hp text--_fontBase--QdLsd",
-      children: tx("slides.flapp.alignment.strongly_disagree_label")
+      children: renderI18nText("slides.flapp.alignment.strongly_disagree_label")
     }), jsx("div", {
       className: "alignment_scale--neutralLabel--qqm5f alignment_scale--_labelBase--enfVZ text--fontPos14--OL9Hp text--_fontBase--QdLsd",
-      children: tx("slides.flapp.alignment.neutral_label")
+      children: renderI18nText("slides.flapp.alignment.neutral_label")
     }), jsx("div", {
       className: "alignment_scale--stronglyAgreeLabel--Dhs7h alignment_scale--_labelBase--enfVZ text--fontPos14--OL9Hp text--_fontBase--QdLsd",
-      children: tx("slides.flapp.alignment.strongly_agree_label")
+      children: renderI18nText("slides.flapp.alignment.strongly_agree_label")
     })]
   });
 }
@@ -354,11 +354,11 @@ function A({
   let l;
   let s = e;
   t && (s = [t, ...e.filter(e => e.userId !== t.userId)]);
-  l = 0 === s.length ? _$$t("slides.flapp.results.no_votes_yet") : 1 === s.length ? t ? _$$t("slides.flapp.results.single_self_vote") : _$$t("slides.flapp.results.single_other_vote", {
+  l = 0 === s.length ? getI18nString("slides.flapp.results.no_votes_yet") : 1 === s.length ? t ? getI18nString("slides.flapp.results.single_self_vote") : getI18nString("slides.flapp.results.single_other_vote", {
     person: s[0].name
-  }) : t ? _$$t("slides.flapp.results.multiple_votes_including_user", {
+  }) : t ? getI18nString("slides.flapp.results.multiple_votes_including_user", {
     totalVotes: s.length - 1
-  }) : _$$t("slides.flapp.results.multiple_other_votes", {
+  }) : getI18nString("slides.flapp.results.multiple_other_votes", {
     totalVotes: s.length
   });
   return jsxs("div", {
@@ -417,7 +417,7 @@ function Q({
       onClick: l,
       recordingKey: e,
       children: [t ? jsx(_$$l, {}) : jsx(_$$f, {}), jsx("p", {
-        children: t ? _$$t("slides.flapp.results.results_shown") : _$$t("slides.flapp.results.results_hidden")
+        children: t ? getI18nString("slides.flapp.results.results_shown") : getI18nString("slides.flapp.results.results_hidden")
       })]
     })]
   });
@@ -473,7 +473,7 @@ function H({
       isViewer: !0,
       nodeId: t,
       onClick: () => {
-        e.url && l && Ay.redirect(e.url, uG ? void 0 : "_blank");
+        e.url && l && Ay.redirect(e.url, isMobilePlatformNotFigmaMobile ? void 0 : "_blank");
       }
     })
   });
@@ -496,10 +496,10 @@ function et({
   } = p();
   return jsx(_$$Y, {
     id: f(nodeId, "facepile-prompt-input"),
-    "aria-label": _$$t("slides.flapp.facepile.input_label"),
+    "aria-label": getI18nString("slides.flapp.facepile.input_label"),
     className: b()(Qx, Uu),
     type: "text",
-    placeholder: _$$t("slides.flapp.facepile.prompt_placeholder"),
+    placeholder: getI18nString("slides.flapp.facepile.prompt_placeholder"),
     value: e,
     onChange: e => {
       t(e);
@@ -516,7 +516,7 @@ function el({
   prompt: e
 }) {
   return jsx("h1", {
-    children: e || _$$t("slides.flapp.facepile.prompt_placeholder")
+    children: e || getI18nString("slides.flapp.facepile.prompt_placeholder")
   });
 }
 function ea({
@@ -554,11 +554,11 @@ function ea({
       stamps,
       currentUserStamped
     } = e;
-    return 0 === stamps.length ? t ? _$$t("slides.flapp.facepile.description_click_to_stamp") : _$$t("slides.flapp.results.no_stamps_yet") : 1 === stamps.length ? currentUserStamped ? _$$t("slides.flapp.results.single_self_stamp") : _$$t("slides.flapp.results.single_other_stamp", {
+    return 0 === stamps.length ? t ? getI18nString("slides.flapp.facepile.description_click_to_stamp") : getI18nString("slides.flapp.results.no_stamps_yet") : 1 === stamps.length ? currentUserStamped ? getI18nString("slides.flapp.results.single_self_stamp") : getI18nString("slides.flapp.results.single_other_stamp", {
       person: stamps[0].name
-    }) : currentUserStamped ? _$$t("slides.flapp.results.multiple_stamps_including_user", {
+    }) : currentUserStamped ? getI18nString("slides.flapp.results.multiple_stamps_including_user", {
       totalStamps: stamps.length - 1
-    }) : _$$t("slides.flapp.results.multiple_other_stamps", {
+    }) : getI18nString("slides.flapp.results.multiple_other_stamps", {
       totalStamps: stamps.length
     });
   }(r, isViewer);
@@ -606,7 +606,7 @@ function es({
       let t = n && s && e.userId === s.id;
       let l = {
         text: e.name,
-        subtext: t ? _$$t("slides.flapp.facepile.tooltip.click_to_remove") : void 0
+        subtext: t ? getI18nString("slides.flapp.facepile.tooltip.click_to_remove") : void 0
       };
       return jsx(en, {
         stamp: e,
@@ -633,10 +633,10 @@ function en({
 }) {
   return jsx(_$$E, {
     onClick: l,
-    "aria-label": t?.subtext ? _$$t("slides.flapp.facepile.stamp_with_action", {
+    "aria-label": t?.subtext ? getI18nString("slides.flapp.facepile.stamp_with_action", {
       name: e.name,
       action: t.subtext
-    }) : _$$t("slides.flapp.facepile.stamp_by_user", {
+    }) : getI18nString("slides.flapp.facepile.stamp_by_user", {
       name: e.name
     }),
     htmlAttributes: {
@@ -680,7 +680,7 @@ function er({
   return jsxs(_$$E, {
     className: b()("facepile--emptyStampContainer--dAbYv facepile--_fixedStampBase--icx6v facepile--_stampBase--eCNDB", e ? "facepile--displayPreviewOnHover--qPtfX" : ""),
     onClick: t,
-    "aria-label": _$$t("slides.flapp.facepile.add_stamp_button"),
+    "aria-label": getI18nString("slides.flapp.facepile.add_stamp_button"),
     disabled: l,
     children: [jsx(_$$B, {
       className: "facepile--emptyStamp--KiqZH",
@@ -770,7 +770,7 @@ function ek({
   let u = iZ();
   let m = nc.system("slides-update-poll-votes", e => {
     if (!u) {
-      c(_$$s2.error(_$$t("slides.flapp.poll.vote_failure")));
+      c(_$$s2.error(getI18nString("slides.flapp.poll.vote_failure")));
       return;
     }
     let t = {
@@ -795,7 +795,7 @@ function ek({
       onClick: () => {
         m(o);
       },
-      "aria-label": _$$t("slides.flapp.poll.vote_for_option", {
+      "aria-label": getI18nString("slides.flapp.poll.vote_for_option", {
         option: e
       }),
       htmlAttributes: {
@@ -876,7 +876,7 @@ function eF({
           id: r,
           className: b()(eP, Qx, Uu),
           value: e,
-          placeholder: _$$t("slides.flapp.poll.option_placeholder"),
+          placeholder: getI18nString("slides.flapp.poll.option_placeholder"),
           onChange: x,
           htmlAttributes: {
             onPaste: v,
@@ -910,7 +910,7 @@ function eU({
       className: eN,
       onClick: t,
       recordingKey: Pt(e, "addOption"),
-      "aria-label": _$$t("slides.flapp.poll.add_option"),
+      "aria-label": getI18nString("slides.flapp.poll.add_option"),
       children: jsx(_$$e, {})
     })
   });
@@ -927,7 +927,7 @@ function eD({
   resultsShown: e,
   setResultsShown: t
 }) {
-  let l = e ? _$$t("slides.flapp.results.results_shown") : _$$t("slides.flapp.results.results_hidden");
+  let l = e ? getI18nString("slides.flapp.results.results_shown") : getI18nString("slides.flapp.results.results_hidden");
   return jsx(WW, {
     "aria-label": l,
     htmlAttributes: {
@@ -947,13 +947,13 @@ function eT({
   firstVoteByTimestamp: l
 }) {
   let s;
-  s = 0 === e ? _$$t("slides.flapp.results.no_votes_yet") : 1 === e ? t ? _$$t("slides.flapp.results.single_self_vote") : l ? _$$t("slides.flapp.results.single_other_vote", {
+  s = 0 === e ? getI18nString("slides.flapp.results.no_votes_yet") : 1 === e ? t ? getI18nString("slides.flapp.results.single_self_vote") : l ? getI18nString("slides.flapp.results.single_other_vote", {
     person: l.name
-  }) : _$$t("slides.flapp.results.multiple_other_votes", {
+  }) : getI18nString("slides.flapp.results.multiple_other_votes", {
     totalVotes: e
-  }) : t ? _$$t("slides.flapp.results.multiple_votes_including_user", {
+  }) : t ? getI18nString("slides.flapp.results.multiple_votes_including_user", {
     totalVotes: e - 1
-  }) : _$$t("slides.flapp.results.multiple_other_votes", {
+  }) : getI18nString("slides.flapp.results.multiple_other_votes", {
     totalVotes: e
   });
   return jsx("p", {
@@ -1120,7 +1120,7 @@ function eB() {
     id: f(nodeId, "questionInput"),
     className: b()(ej, Qx, Uu),
     value: n,
-    placeholder: _$$t("slides.flapp.poll.question_placeholder"),
+    placeholder: getI18nString("slides.flapp.poll.question_placeholder"),
     onChange: i,
     htmlAttributes: {
       onPaste: e => r(e)
@@ -1162,7 +1162,7 @@ async function eR(e) {
       thumbnailUrl: l.thumbnailUrl
     };
   } catch (e) {
-    x1(_$$e2.SLIDES, "Failed to get youtube embed", e);
+    logError(_$$e2.SLIDES, "Failed to get youtube embed", e);
   }
 }
 function eq({

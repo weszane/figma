@@ -6,8 +6,8 @@ import { bL } from "../905/911410";
 import { vo, Y9, nB } from "../figma_app/272243";
 import { J as _$$J } from "../905/799737";
 import { getFeatureFlags } from "../905/601108";
-import { zl, Xr, md } from "../figma_app/27355";
-import { az } from "../905/449184";
+import { atomStoreManager, Xr, useAtomWithSubscription } from "../figma_app/27355";
+import { analyticsEventManager } from "../905/449184";
 import { parsePxNumber } from "../figma_app/783094";
 import { NX } from "../figma_app/243213";
 import { h as _$$h } from "../905/207101";
@@ -15,7 +15,7 @@ import { Uz } from "../905/63728";
 import { Point } from "../905/736624";
 import { c2, Nt, yn, lv } from "../figma_app/119475";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { Y as _$$Y } from "../905/830372";
 import { vq } from "../905/8732";
 import { FU, b$, Bs } from "../figma_app/933328";
@@ -144,7 +144,7 @@ function H(e) {
     if (t) {
       if (s.seatTypeLicenseTypes?.includes(FProductAccessType.DESIGN)) return !0;
     } else if (s.designPaidStatus === FPlanAccessType.FULL) return !0;
-    return !!r || zl.get(TG).has(e);
+    return !!r || atomStoreManager.get(TG).has(e);
   }), [s, l, a, d, t, h, e]);
 }
 let ex = "asset_file_path--path---PrgD text--fontPos11--2LvXf text--_fontBase--QdLsd";
@@ -306,7 +306,7 @@ function ez({
     }) : null]
   }) : s ? jsx("div", {
     className: "asset_updated_details--updatedAt--eam-d",
-    children: tx("design_systems.assets_panel.updated_at", {
+    children: renderI18nText("design_systems.assets_panel.updated_at", {
       updatedAt: jsx(h1, {
         date: s
       })
@@ -356,7 +356,7 @@ function e0({
     }), u && jsx("button", {
       className: "truncated_component_description--showMore--brfX6",
       onClick: c,
-      children: i ? tx("design_systems.assets_panel.show_more") : tx("design_systems.assets_panel.show_less")
+      children: i ? renderI18nText("design_systems.assets_panel.show_more") : renderI18nText("design_systems.assets_panel.show_less")
     })]
   });
 }
@@ -398,7 +398,7 @@ function e4({
       setShouldHideError: a
     };
   }, [t, l, a]);
-  let C = tx("design_systems.assets_panel.insert_instance");
+  let C = renderI18nText("design_systems.assets_panel.insert_instance");
   return jsxs("div", {
     className: "component_flyout_body--bodyWrapper--CoGX-",
     children: [p && !d && jsx("div", {
@@ -408,7 +408,7 @@ function e4({
         iconSrc: _$$A2,
         onClose: () => u(!0),
         variant: "design",
-        children: tx("design_systems.assets_panel.update_banner")
+        children: renderI18nText("design_systems.assets_panel.update_banner")
       })
     }), jsxs("div", {
       className: "component_flyout_body--headerFileNameWrapper--MH4jz component_flyout_body--_bodyPadding--KrB6p",
@@ -420,7 +420,7 @@ function e4({
         children: m
       }), !!h && h > 1 && jsx("div", {
         className: "component_flyout_body--numVariants--nureW",
-        children: tx("design_systems.assets_panel.variant_count", {
+        children: renderI18nText("design_systems.assets_panel.variant_count", {
           numVariants: h
         })
       })]
@@ -499,16 +499,16 @@ function e5({
       children: [jsx(_$$B, {
         className: "component_flyout_body--headerIcon--FHdrw",
         svg: _$$A
-      }), tx("design_systems.assets_panel.playground_label")]
+      }), renderI18nText("design_systems.assets_panel.playground_label")]
     }), getFeatureFlags().dse_fpl_wave_1 ? jsx("span", {
       className: "component_flyout_body--resetButtonContainer--fCSjD",
       children: jsx(_$$K, {
-        "aria-label": _$$t("design_systems.playground.reset_properties"),
+        "aria-label": getI18nString("design_systems.playground.reset_properties"),
         onClick: t,
         disabled: !e.hasChangesToReset,
         recordingKey: "resetPlaygroundProps",
         htmlAttributes: {
-          "data-tooltip": _$$t("design_systems.playground.reset_properties"),
+          "data-tooltip": getI18nString("design_systems.playground.reset_properties"),
           "data-tooltip-type": Ib.TEXT
         },
         children: jsx(_$$N, {})
@@ -517,7 +517,7 @@ function e5({
       className: "component_flyout_body--resetButton--wVXDQ",
       svg: _$$A3,
       onClick: t,
-      "data-tooltip": _$$t("design_systems.playground.reset_properties"),
+      "data-tooltip": getI18nString("design_systems.playground.reset_properties"),
       "data-tooltip-type": Ib.TEXT,
       disabled: !e.hasChangesToReset,
       recordingKey: "resetPlaygroundProps"
@@ -568,7 +568,7 @@ function ts({
     children: [e && t?.thumbnailData && h ? jsx("img", {
       className: tt,
       src: t.thumbnailData.src,
-      alt: _$$t("design_systems.playground.thumbnail_alt"),
+      alt: getI18nString("design_systems.playground.thumbnail_alt"),
       draggable: !1
     }) : jsx(_$$M2, {
       className: tt,
@@ -667,7 +667,7 @@ export function $$tu1({
   let F = useRef(null);
   let B = Xr(_$$T);
   let K = H(e.library_key);
-  let Q = md(TG);
+  let Q = useAtomWithSubscription(TG);
   let ea = _$$H2(e.library_key);
   let eo = _9(e.library_key, "asset_panel_visual_assets_flyout_insert");
   let {
@@ -687,7 +687,7 @@ export function $$tu1({
   let ex = _$$k2();
   let ey = tM(O ?? "assets-panel");
   _$$h(() => {
-    az.trackDefinedEvent("assets_panel.flyout_opened", {
+    analyticsEventManager.trackDefinedEvent("assets_panel.flyout_opened", {
       assetKey: _$$V(e),
       assetType: _$$q(e.type),
       assetLibraryKey: e.library_key,
@@ -774,14 +774,14 @@ export function $$tu1({
         editorType: eu?.editorType
       })
     };
-    az.trackDefinedEvent("assets_panel.flyout_insert", {
+    analyticsEventManager.trackDefinedEvent("assets_panel.flyout_insert", {
       ...i,
       libraryType: ej,
       searchSessionId: t ?? void 0,
       searchQuery: s,
       sectionPosition: h
     });
-    O !== _$$tM ? az.trackDefinedEvent("asset_search.result_inserted", {
+    O !== _$$tM ? analyticsEventManager.trackDefinedEvent("asset_search.result_inserted", {
       ...i,
       libraryType: ej,
       position: h,
@@ -851,7 +851,7 @@ export function $$tu1({
   var eN = jsxs("div", {
     className: _$$s.minW0.flex1.$,
     children: [jsx("h1", {
-      children: _$$t("design_systems.assets_panel.details")
+      children: getI18nString("design_systems.assets_panel.details")
     }), jsxs(_$$Y, {
       spacing: 0,
       direction: "horizontal",

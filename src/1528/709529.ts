@@ -1,6 +1,6 @@
 import { Wh } from "../figma_app/615482";
-import { eU } from "../figma_app/27355";
-export let $$l0 = Wh(() => eU({
+import { atom } from "../figma_app/27355";
+export let $$l0 = Wh(() => atom({
   mp4Configs: [],
   imageConfigs: [],
   pdfConfigs: [],

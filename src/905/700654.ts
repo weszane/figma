@@ -140,6 +140,7 @@ export class NoOpVm extends PluginWrapper {
     return unwrapHandle(this, handle) instanceof Uint8Array;
   }
 
+  // eslint-disable-next-line ts/no-unsafe-function-type
   isFunction(handle: unknown): handle is Function {
     return typeof unwrapHandle(this, handle) === "function";
   }
@@ -310,7 +311,7 @@ export class NoOpVm extends PluginWrapper {
     return Object.keys(unwrapHandle(this, handle));
   }
 
-  getProp<T = any>(objHandle: INoOpVm<object>, prop: string): INoOpVm<T> {
+  getProp<T = any>(objHandle: INoOpVm<any>, prop: string): INoOpVm<T> {
     const obj = unwrapHandle(this, objHandle);
     try {
       return wrapHandle(this, obj[prop]);

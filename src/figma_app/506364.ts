@@ -1,6 +1,6 @@
 import { q } from "../905/196201";
-import { sx } from "../905/449184";
-import { eD } from "../figma_app/876459";
+import { trackEventAnalytics } from "../905/449184";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { debugState } from "../905/407919";
 import { Dc } from "../figma_app/314264";
 import { Y5 } from "../figma_app/455680";
@@ -27,7 +27,7 @@ let g = new class {
     console.log(`[spell-check] using implementation: ${this._current?.name}. Current language: ${t}. Supported languages: ${l}`);
     let d = debugState.getState().selectedView;
     let c = Dc(d.editorType);
-    sx("Spell Check Ready", {
+    trackEventAnalytics("Spell Check Ready", {
       productType: c,
       language: t,
       implementationName: this._current?.name,
@@ -55,7 +55,7 @@ let g = new class {
     }
   }
   async getSuggestionsForWord(e) {
-    return this._suggestionsCache.has(e) ? Promise.resolve(this._suggestionsCache.get(e) || []) : (await this.current).getSuggestionsForWord(e).then((t) => (this._suggestionsCache.set(e, t), t));
+    return this._suggestionsCache.has(e) ? Promise.resolve(this._suggestionsCache.get(e) || []) : (await this.current).getSuggestionsForWord(e).then(t => (this._suggestionsCache.set(e, t), t));
   }
   async spellCheckText(e) {
     return (await this.current).spellCheckText(e);
@@ -71,11 +71,11 @@ let g = new class {
     return function (e, t) {
       if (e) return !0;
       try {
-        let e = t.map((e) => (e || "").toLowerCase()).map((e) => e.split("-")[0]);
+        let e = t.map(e => (e || "").toLowerCase()).map(e => e.split("-")[0]);
         if (!(e.includes("en") || e.includes("ru"))) return !1;
       } catch (e) {}
       return !0;
-    }(!!eD, e);
+    }(!!desktopAPIInstance, e);
   }
   reset() {
     this._current = void 0;

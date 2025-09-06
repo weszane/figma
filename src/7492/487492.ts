@@ -8,14 +8,14 @@ import { s as _$$s } from "../905/403855";
 import { J as _$$J } from "../905/125993";
 import { l7 } from "../905/189185";
 import g from "classnames";
-import { eD as _$$eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { $J } from "../905/491152";
 import { $$ } from "../figma_app/637027";
 import { M3 } from "../figma_app/119475";
 import { B as _$$B } from "../905/714743";
 import { t as _$$t } from "../905/331623";
 import { s as _$$s2 } from "../cssbuilder/589278";
-import { t as _$$t2, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { Y as _$$Y } from "../905/830372";
 import { Ex } from "../905/69098";
@@ -77,9 +77,9 @@ function em(e) {
     return jsx(_$$s, {
       className: Sx,
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": t ? _$$t2("community.plugins.private_for_plugin_org_name", {
+      "data-tooltip": t ? getI18nString("community.plugins.private_for_plugin_org_name", {
         orgName: t
-      }) : _$$t2("community.plugins.private_for_plugin_org")
+      }) : getI18nString("community.plugins.private_for_plugin_org")
     });
   }
   return jsx(Fragment, {});
@@ -503,7 +503,7 @@ function eN(e) {
   let B = jsx(Ex, {
     height: "16",
     children: jsx("span", {
-      children: tx("universal_insert.development")
+      children: renderI18nText("universal_insert.development")
     })
   });
   return jsxs(Fragment, {
@@ -631,7 +631,7 @@ function eP(e) {
           children: t
         }), isPluginSetToAutoRun && jsx(Ex, {
           height: "16",
-          children: _$$t2("universal_insert.auto_run")
+          children: getI18nString("universal_insert.auto_run")
         }), e.inReview && jsx(_$$L, {
           height: "16"
         }), !!e.secondaryIcon && e.secondaryIcon, J && !D && jsx("div", {
@@ -655,10 +655,10 @@ function eP(e) {
       children: $
     }), e.onOptionsClick && jsx(_$$K, {
       onClick: e.onOptionsClick,
-      "aria-label": _$$t2("universal_insert.more_options"),
+      "aria-label": getI18nString("universal_insert.more_options"),
       htmlAttributes: {
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t2("universal_insert.more_options")
+        "data-tooltip": getI18nString("universal_insert.more_options")
       },
       children: jsx(_$$J, {})
     }), e.primaryCTAButton && jsx("div", {
@@ -765,7 +765,7 @@ function eA(e) {
   let p = Ud(e.widgetId);
   let I = useRef(null);
   let m = WK(e.widgetId);
-  let x = _$$eD && !!p && !m;
+  let x = desktopAPIInstance && !!p && !m;
   let j = !!m || x;
   let h = Um();
   let w = useRef(null);
@@ -1070,10 +1070,10 @@ let eM = memo(function (e) {
         children: e.subheader
       })]
     }), e.onOptionsClick && jsx(_$$K, {
-      "aria-label": _$$t2("universal_insert.more_options"),
+      "aria-label": getI18nString("universal_insert.more_options"),
       htmlAttributes: {
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t2("universal_insert.more_options")
+        "data-tooltip": getI18nString("universal_insert.more_options")
       },
       onClick: e.onOptionsClick,
       children: jsx(_$$J, {})
@@ -1175,7 +1175,7 @@ export function $$ez5(e) {
   let _ = e.usePrimaryButtonStyles ? jsxs($$, {
     onClick: w,
     className: lI,
-    children: [tx("universal_insert.run"), g && jsx(_$$B, {
+    children: [renderI18nText("universal_insert.run"), g && jsx(_$$B, {
       svg: _$$A2,
       className: sI
     })]
@@ -1183,7 +1183,7 @@ export function $$ez5(e) {
     className: lO,
     onClick: w,
     ref: e.buttonRef,
-    children: [tx("universal_insert.run"), g && jsx(_$$B, {
+    children: [renderI18nText("universal_insert.run"), g && jsx(_$$B, {
       svg: _$$A2,
       className: zZ
     })]
@@ -1222,7 +1222,7 @@ export function $$eH1(e) {
   let t = ZT()[e.widgetId];
   let r = WK(e.widgetId);
   let d = Ud(e.widgetId);
-  let a = _$$eD && !!d && !r;
+  let a = desktopAPIInstance && !!d && !r;
   let o = !!r || a;
   let u = Um();
   let g = u?.type === cH && u.data.widgetId === e.widgetId;
@@ -1259,7 +1259,7 @@ export function $$eH1(e) {
   let w = jsxs($$, {
     onClick: h,
     className: lI,
-    children: [tx("universal_insert.add"), o && jsx(_$$B, {
+    children: [renderI18nText("universal_insert.add"), o && jsx(_$$B, {
       svg: _$$A2,
       className: sI
     })]

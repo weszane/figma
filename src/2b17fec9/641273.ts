@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from "../vendor/514228";
 import { NLJ, W8Y } from "../figma_app/763686";
 import o from "classnames";
 import { buildUploadUrl } from "../figma_app/169182";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { B } from "../905/714743";
 import { L as _$$L } from "../figma_app/819472";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { Ho } from "../figma_app/308685";
 import { H1 } from "../figma_app/124493";
 import { CB } from "../figma_app/442259";
@@ -104,7 +104,7 @@ function M({
   hasRemainingVotes: a
 }) {
   let [s, o] = useState(!1);
-  let d = a && !Ay.isIpad;
+  let d = a && !BrowserInfo.isIpad;
   D({
     shouldOpenWheelOnHover: d,
     isHovered: s
@@ -112,15 +112,15 @@ function M({
   let p = a ? rf : he;
   return jsx("button", {
     className: l()(tS, p),
-    onMouseEnter: () => !Ay.isIpad && o(!0),
-    onMouseLeave: () => !Ay.isIpad && o(!1),
+    onMouseEnter: () => !BrowserInfo.isIpad && o(!0),
+    onMouseLeave: () => !BrowserInfo.isIpad && o(!1),
     onClick: () => {
       d || (a ? e() : t());
     },
     tabIndex: -1,
     children: a ? jsx("span", {
       className: _V,
-      children: tx("voting.delightful_toolbar.votes_remaining", {
+      children: renderI18nText("voting.delightful_toolbar.votes_remaining", {
         numVotes: i
       })
     }) : jsxs(Fragment, {
@@ -129,7 +129,7 @@ function M({
         svg: _$$A
       }), jsx("span", {
         className: _V,
-        children: tx("voting.delightful_toolbar.no_votes_remaining")
+        children: renderI18nText("voting.delightful_toolbar.no_votes_remaining")
       })]
     })
   });
@@ -160,7 +160,7 @@ function P({
     isHidden: u,
     wheelRef: o
   });
-  let h = i && !Ay.isIpad;
+  let h = i && !BrowserInfo.isIpad;
   D({
     shouldOpenWheelOnHover: h,
     isHovered: a
@@ -213,8 +213,8 @@ function P({
         [tq]: p,
         [FP]: !i
       }),
-      onMouseEnter: () => !Ay.isIpad && s(!0),
-      onMouseLeave: () => !Ay.isIpad && s(!1),
+      onMouseEnter: () => !BrowserInfo.isIpad && s(!0),
+      onMouseLeave: () => !BrowserInfo.isIpad && s(!1),
       onClick: () => !h && e(),
       style: {
         backgroundImage: `url(${buildUploadUrl("c497ee1c6afcaf44b866a46227b40c8ad62dd143")})`

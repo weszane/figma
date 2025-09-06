@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { g as _$$g } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { E as _$$E } from "../905/984674";
 import { V as _$$V } from "../905/453937";
 import { e as _$$e } from "../905/311297";
@@ -73,7 +73,7 @@ function b(e) {
   }) : jsxs(_$$E, {
     fontSize: e.fontSize,
     truncate: !0,
-    children: [r, "\xa0", a && _$$t("file_browser.folder.trashed_folder")]
+    children: [r, "\xa0", a && getI18nString("file_browser.folder.trashed_folder")]
   }) : jsx(_$$E, {
     fontSize: e.fontSize,
     truncate: !0,
@@ -176,7 +176,7 @@ let L = e => ({
   headerCellClassName: _$$s.wHalf.$,
   renderHeaderCell: () => jsx(_$$E, {
     truncate: !0,
-    children: tx("file_browser.file_list_view.header_name_column")
+    children: renderI18nText("file_browser.file_list_view.header_name_column")
   }),
   renderRowCell: t => jsx(N, {
     tile: t,
@@ -187,7 +187,7 @@ let F = {
   field: C0.TOUCHED_AT,
   renderHeaderCell: () => jsx(_$$E, {
     truncate: !0,
-    children: tx("file_browser.file_list_view.header_last_modified_column")
+    children: renderI18nText("file_browser.file_list_view.header_last_modified_column")
   }),
   renderRowCell: e => jsx($$D1, {
     truncate: !0,
@@ -201,7 +201,7 @@ let M = {
   field: C0.TRASHED_AT,
   renderHeaderCell: () => jsx(_$$E, {
     truncate: !0,
-    children: tx("file_browser.file_list_view.header_trashed_at_column")
+    children: renderI18nText("file_browser.file_list_view.header_trashed_at_column")
   }),
   renderRowCell: e => jsx($$D1, {
     truncate: !0,
@@ -214,7 +214,7 @@ let M = {
 let j = {
   renderHeaderCell: () => jsx(_$$E, {
     truncate: !0,
-    children: tx("file_browser.file_list_view.header_previous_location_column")
+    children: renderI18nText("file_browser.file_list_view.header_previous_location_column")
   }),
   renderRowCell: e => jsx($$D1, {
     children: jsx(b, {
@@ -227,7 +227,7 @@ let U = {
   field: C0.CREATED_AT,
   renderHeaderCell: () => jsx(_$$E, {
     truncate: !0,
-    children: tx("file_browser.file_list_view.header_created_column")
+    children: renderI18nText("file_browser.file_list_view.header_created_column")
   }),
   renderRowCell: e => jsx($$D1, {
     truncate: !0,
@@ -241,7 +241,7 @@ let B = {
   field: C0.SHARED_AT,
   renderHeaderCell: () => jsx(_$$E, {
     truncate: !0,
-    children: tx("file_browser.file_list_view.header_shared_at_column")
+    children: renderI18nText("file_browser.file_list_view.header_shared_at_column")
   }),
   renderRowCell: e => jsx($$D1, {
     truncate: !0,
@@ -261,7 +261,7 @@ let V = {
 let G = {
   renderHeaderCell: () => jsx(_$$E, {
     truncate: !0,
-    children: tx("file_browser.file_list_view.header_owner_column")
+    children: renderI18nText("file_browser.file_list_view.header_owner_column")
   }),
   renderRowCell: e => jsx(_, {
     tile: e
@@ -284,7 +284,7 @@ export let $$W3 = {
   columns: [L(), {
     renderHeaderCell: () => jsx(_$$E, {
       truncate: !0,
-      children: tx("file_browser.file_list_view.header_shared_by_column")
+      children: renderI18nText("file_browser.file_list_view.header_shared_by_column")
     }),
     renderRowCell: e => jsx(E, {
       tile: e

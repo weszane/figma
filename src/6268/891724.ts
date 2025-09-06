@@ -3,7 +3,7 @@ import { c$, bL, l9, mc } from "../905/493196";
 import { h } from "../905/270045";
 import { J } from "../905/614223";
 import { getFeatureFlags } from "../905/601108";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { W } from "../6658/358099";
 import { sD } from "../1250/807901";
 function _({
@@ -44,7 +44,7 @@ export function $$p0({
     onChange: e => n(e),
     children: [jsx(l9, {
       label: jsx(h, {
-        children: _$$t("dev_handoff.component_browser.filter")
+        children: getI18nString("dev_handoff.component_browser.filter")
       }),
       children: jsxs("div", {
         className: "component_browser_filters--trigger--tf4CK",

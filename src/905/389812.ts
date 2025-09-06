@@ -2,13 +2,13 @@ import { jsx } from "react/jsx-runtime";
 import { f } from "../905/167712";
 import { C } from "../905/47358";
 import { a as _$$a } from "../905/29104";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 export function $$l0({
   isChatVisible: e,
   setIsChatVisible: t,
   disabled: i
 }) {
-  let l = _$$a() ? _$$t("sites.panel.chat_tooltip") : _$$t("sites.panel.chat_tooltip.ai");
+  let l = _$$a() ? getI18nString("sites.panel.chat_tooltip") : getI18nString("sites.panel.chat_tooltip.ai");
   return jsx(f, {
     onChange: () => t(!e),
     "aria-label": l,

@@ -1,9 +1,9 @@
 import { jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import s from "classnames";
 import { YQ } from "../905/502364";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { D } from "../905/12032";
 import { X, Y } from "../figma_app/916469";
 import { iN } from "../figma_app/634656";
@@ -39,7 +39,7 @@ export function $$f1({
   optimizeForCompactSize: p,
   overflowChildren: h
 }) {
-  let m = md(D);
+  let m = useAtomWithSubscription(D);
   useEffect(() => {
     e && m && !_$$l.has(m) && YQ({
       id: X,
@@ -145,7 +145,7 @@ export function $$T0({
       selectionState: r ? "unselected" : "selected_custom",
       background: "light",
       paletteType: "base",
-      tooltip: _$$t("whiteboard.colors.custom")
+      tooltip: getI18nString("whiteboard.colors.custom")
     }, "custom-color") : jsx(ZI, {
       swatchStyle: {
         boxShadow: "0px 0px 0px 1px rgba(0, 0, 0, 0.2) inset"

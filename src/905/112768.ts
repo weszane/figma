@@ -4,7 +4,7 @@ import { $ } from "../905/411599";
 import { X } from "../905/647103";
 import { ruz, Egt, glU } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { B } from "../905/969273";
 import { sZ } from "../figma_app/948389";
 import { KH } from "../figma_app/722362";
@@ -26,10 +26,10 @@ export function $$x1({
     action: JT.REMOVE_BACKGROUND,
     actionCallback: J,
     actionIcon: jsx($, {}),
-    actionLabel: _$$t("fullscreen_actions.remove_background"),
+    actionLabel: getI18nString("fullscreen_actions.remove_background"),
     getErrorViewCustomMessage: $$w,
     source: e,
-    runningText: _$$t("image_ai.background_remove.processing")
+    runningText: getI18nString("image_ai.background_remove.processing")
   });
 }
 export function $$S0({
@@ -39,18 +39,18 @@ export function $$S0({
     action: JT.UPSCALE_IMAGE,
     actionCallback: r6,
     actionIcon: jsx(X, {}),
-    actionLabel: _$$t("fullscreen.properties_panel.ai_image_tools.upscale_image"),
+    actionLabel: getI18nString("fullscreen.properties_panel.ai_image_tools.upscale_image"),
     getErrorViewButtons: T,
     getErrorViewCustomMessage: C,
-    runningText: _$$t("image_ai.upscale_image.processing"),
+    runningText: getI18nString("image_ai.upscale_image.processing"),
     source: e
   });
 }
 function $$w(e) {
-  if (getFeatureFlags().aip_batch_image_modify && (e instanceof fk || sZ(e) === B.GENERIC)) return _$$t("image_ai.background_remove.failed");
+  if (getFeatureFlags().aip_batch_image_modify && (e instanceof fk || sZ(e) === B.GENERIC)) return getI18nString("image_ai.background_remove.failed");
 }
 function C(e) {
-  return e instanceof jM ? _$$t("image_ai.upscale_image.image_too_large_error") : e instanceof zs ? _$$t("image_ai.upscale_image.image_too_small_error") : e instanceof PE ? _$$t("image_ai.upscale_image.image_already_max_upscaled_error") : e instanceof fk || sZ(e) === B.GENERIC ? getFeatureFlags().aip_batch_image_modify ? _$$t("image_ai.upscale_image.failed") : _$$t("image_ai.upscale_image.image_error") : void 0;
+  return e instanceof jM ? getI18nString("image_ai.upscale_image.image_too_large_error") : e instanceof zs ? getI18nString("image_ai.upscale_image.image_too_small_error") : e instanceof PE ? getI18nString("image_ai.upscale_image.image_already_max_upscaled_error") : e instanceof fk || sZ(e) === B.GENERIC ? getFeatureFlags().aip_batch_image_modify ? getI18nString("image_ai.upscale_image.failed") : getI18nString("image_ai.upscale_image.image_error") : void 0;
 }
 function T(e, t) {
   return e instanceof PE ? [{
@@ -91,9 +91,9 @@ function k({
   let k = gg(state);
   let R = useCallback(() => {
     let e = ruz?.getNodeImagePairsForEdit().length ?? 0;
-    return getFeatureFlags().aip_batch_image_modify ? e > 25 ? tx("image_ai.image_modification.max_images", {
+    return getFeatureFlags().aip_batch_image_modify ? e > 25 ? renderI18nText("image_ai.image_modification.max_images", {
       max: 25
-    }) : tx("image_ai.image_modification.instruction") : e > 1 ? tx("image_ai.background_remove.only_one_image") : tx("image_ai.background_remove.instruction");
+    }) : renderI18nText("image_ai.image_modification.instruction") : e > 1 ? renderI18nText("image_ai.background_remove.only_one_image") : renderI18nText("image_ai.background_remove.instruction");
   }, []);
   if (state === qy.INITIAL) return jsx(_$$A, {
     action: e,
@@ -109,7 +109,7 @@ function k({
       url: LC
     },
     getCustomDisabledTextFromSelectedNodes: R,
-    children: tx("image_ai.image_modification.instruction")
+    children: renderI18nText("image_ai.image_modification.instruction")
   });
   if (state === qy.RUNNING) return jsx(F, {
     aiTrackingContext,
@@ -140,7 +140,7 @@ function k({
           className: "x78zum5 x8439ig",
           children: [s, jsx("span", {
             className: "x1n0bwc9 x1ys4hos",
-            children: _$$t("image_ai.image_modification.error_counter", {
+            children: getI18nString("image_ai.image_modification.error_counter", {
               count: t.length,
               total: e.length
             })
@@ -172,7 +172,7 @@ function k({
       aiTrackingContext,
       customMessage: jsx("div", {
         className: "x78zum5 x8439ig",
-        children: _$$t("image_ai.image_modification.would_exceed_meter_error", {
+        children: getI18nString("image_ai.image_modification.would_exceed_meter_error", {
           remaining: error.remaining
         })
       })

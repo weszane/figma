@@ -1,7 +1,7 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getInitialOptions } from "../figma_app/169182";
 import { oA } from "../905/723791";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { dA } from "../905/513035";
 import { TA, Zx } from "../figma_app/217457";
 import { FUserRoleType, FCostCenterType, FPlanFeatureType, FProductAccessType, FResourceTargetType } from "../figma_app/191312";
@@ -197,7 +197,7 @@ function $$f(e) {
   try {
     return QT.parse(e);
   } catch {
-    $D(_$$e.IAM, Error(`IdpUser has invalid seat type: ${e}`));
+    reportError(_$$e.IAM, Error(`IdpUser has invalid seat type: ${e}`));
   }
   return null;
 }

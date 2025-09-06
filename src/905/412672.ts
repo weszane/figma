@@ -1,5 +1,5 @@
 import { getSingletonSceneGraph } from "../905/700578";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { g } from "../905/880308";
 import { hf } from "../figma_app/210234";
 import { eU } from "../figma_app/908460";
@@ -126,7 +126,7 @@ export class $$u0 {
       this.moveGroupKeyToTopOfStack(e.groupKey);
       return t;
     }
-    let i = zl.get(VG).get(e.groupKey);
+    let i = atomStoreManager.get(VG).get(e.groupKey);
     if (i?.status === "loaded" && i?.fix) {
       let t = Promise.resolve(i.fix);
       this._groupKeyToFixPromiseMap.set(e.groupKey, t);
@@ -161,7 +161,7 @@ export class $$u0 {
         return;
       }
       let e = this._fixRequestStack.pop();
-      e && (zl.get(VA).has(e.violation.violationId) ? (i++, this.processFixRequest(e)) : e.reject(Error("Violation is no longer active")));
+      e && (atomStoreManager.get(VA).has(e.violation.violationId) ? (i++, this.processFixRequest(e)) : e.reject(Error("Violation is no longer active")));
     }
     this.maybeStopProcessingInterval();
   }
@@ -183,12 +183,12 @@ export class $$u0 {
     }
   }
   updateFixesCache(e, t, i) {
-    let n = new Map(zl.get(VG));
+    let n = new Map(atomStoreManager.get(VG));
     n.set(e, {
       fix: t,
       status: i
     });
-    zl.set(VG, n);
+    atomStoreManager.set(VG, n);
   }
   async getFixForViolation(e) {
     let {
@@ -200,7 +200,7 @@ export class $$u0 {
     if (!o) throw Error("Rule not found for violation");
     let l = getSingletonSceneGraph().get(guid);
     if (!l) throw Error("Node not found for violation");
-    let d = zl.get(VG).get(groupKey);
+    let d = atomStoreManager.get(VG).get(groupKey);
     if (d?.status === "loaded" && d?.fix) return d.fix;
     let u = await o.getFix(l, e.detectionContext, hf());
     if (!u || !u.valid) throw Error("Fix should not be undefined or invalid");

@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { PureComponent } from "react";
 import { N as _$$N } from "../905/852320";
 import { Pt } from "../figma_app/806412";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { SU } from "../figma_app/451499";
 import { E7 } from "../905/216495";
 import { MK } from "../figma_app/844696";
@@ -15,7 +15,7 @@ export class $$f1 extends PureComponent {
   render() {
     let e = this.props.includePassThrough ? j4 : r5;
     return jsx(g, {
-      ariaLabel: t("fullscreen.properties_panel.color_picker.blend_mode_select.tooltip.blend_mode"),
+      ariaLabel: getI18nString("fullscreen.properties_panel.color_picker.blend_mode_select.tooltip.blend_mode"),
       chevronClassName: this.props.chevronClassName,
       className: this.props.className,
       dispatch: this.props.dispatch,

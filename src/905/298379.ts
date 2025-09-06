@@ -3,7 +3,7 @@ import { A } from "../905/389851";
 import { g } from "../905/125190";
 import { z } from "../905/252950";
 import { getFeatureFlags } from "../905/601108";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { FBuildStatusType } from "../figma_app/191312";
 import { hx, lA } from "../905/447412";
 export function $$u1({
@@ -14,9 +14,9 @@ export function $$u1({
   let r = function (e) {
     switch (e) {
       case FBuildStatusType.BUILD:
-        return tx("dev_handoff.status.ready_for_dev");
+        return renderI18nText("dev_handoff.status.ready_for_dev");
       case FBuildStatusType.COMPLETED:
-        return tx("dev_handoff.status.completed");
+        return renderI18nText("dev_handoff.status.completed");
       default:
         return null;
     }

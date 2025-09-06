@@ -6,7 +6,7 @@ import { A } from "../905/920142";
 import { getInitialOptions } from "../figma_app/169182";
 import { cn } from "../figma_app/141320";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { fu, tf } from "../figma_app/831799";
 import { M4, IT } from "../905/713695";
@@ -57,7 +57,7 @@ function y({
   }(!0);
   let T = getInitialOptions().analyze_data_flow_v2_until;
   let N = cn(v) && t ? y?.edu_info.replace(/\[BILLING_REMODEL_GA_DATE\]/g, A(T).format("MMMM D, YYYY")) : y?.info.replace(/\[NEXT_RENEWAL_DATE\]/g, j(e));
-  let b = _$$t("checkout.banner.price_change", {
+  let b = getI18nString("checkout.banner.price_change", {
     date: j(e)
   });
   return jsx(fu, {
@@ -78,7 +78,7 @@ function y({
         })]
       }), jsx(S, {
         onClick: () => FJ("https://help.figma.com/hc/articles/27468498501527", "_blank"),
-        children: tx("campfire_banner.learn_more")
+        children: renderI18nText("campfire_banner.learn_more")
       })]
     })
   });

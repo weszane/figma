@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { lV } from "../figma_app/617606";
 import { E } from "../1156/735202";
-import { b as _$$b } from "../905/690073";
+import { EventEmitter } from "../905/690073";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { Fullscreen } from "../figma_app/13528";
 import { ChatMessageType } from "../figma_app/175377";
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { getInitialOptions } from "../figma_app/169182";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { v as _$$v } from "../905/479136";
 import { em } from "../figma_app/297957";
 import { q5 } from "../figma_app/516028";
@@ -19,7 +19,7 @@ import { O } from "../1156/531541";
 import { z9 } from "../1156/354790";
 import { ry } from "../figma_app/408883";
 import { O as _$$O } from "../905/273186";
-export let $$C2 = new _$$b("EmptyStateChatMessageEmitter");
+export let $$C2 = new EventEmitter("EmptyStateChatMessageEmitter");
 export async function $$E1(e, t, n, r) {
   if (!n || !r || !Fullscreen) return;
   let a = await _$$v();
@@ -60,10 +60,10 @@ export async function $$E1(e, t, n, r) {
       t && (t.hasSystemEdited = !0);
     },
     setCodeLastEditedBy: e => {
-      zl.set(Nm(e), "assistant");
+      atomStoreManager.set(Nm(e), "assistant");
     },
     createCodeSnapshot: O,
-    reportErrorToSentry: e => $D(_$$e.AI_FOR_PRODUCTION, e),
+    reportErrorToSentry: e => reportError(_$$e.AI_FOR_PRODUCTION, e),
     regenerateAttributions: z9
   });
 }

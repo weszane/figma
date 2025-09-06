@@ -1,8 +1,8 @@
 import { useState, useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { A as _$$A } from "../vendor/850789";
-import { sx } from "../905/449184";
-import { R as _$$R } from "../905/103090";
+import { trackEventAnalytics } from "../905/449184";
+import { selectWithShallowEqual } from "../905/103090";
 import { getInitialOptions } from "../figma_app/169182";
 import { k as _$$k } from "../905/22009";
 import { yQ, nl, I5, SG } from "../figma_app/844435";
@@ -111,7 +111,7 @@ export function $$z0() {
   let {
     shelves,
     hubFiles
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     shelves: e.communityHub.shelves[cS.FIGJAM_TEMPLATES_PICKER],
     hubFiles: e.hubFiles,
     initialTab: e.universalInsertModal.initialTab
@@ -192,7 +192,7 @@ export function $$z0() {
     (a === _$$p.WIDGETS || a === _$$p.ALL) && ("" === s.trim() ? (ey([]), eT([]), eS([]), ew([]), setLastWidgetSearchQuery(null)) : (eT(A.search(s).map(e => e.localFileId)), widgetServerSideSearch(s, eS, ew, ey)));
     (a === _$$p.STICKERS_AND_COMPONENTS || a === _$$p.ALL) && setQuery(s);
     (a === _$$p.MORE || a === _$$p.ALL) && ec(B.search(s).map(e => e.component));
-    sx("search_query_result", {
+    trackEventAnalytics("search_query_result", {
       query: s,
       selectedTab: a,
       entry_point: "figjam",

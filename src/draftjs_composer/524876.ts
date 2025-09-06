@@ -8,20 +8,20 @@ import { N as _$$N } from "../905/7587";
 import { A as _$$A } from "../905/744692";
 import { s as _$$s } from "../905/551945";
 import { getFeatureFlags } from "../905/601108";
-import { Xr, md } from "../figma_app/27355";
+import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import h from "classnames";
 import { dN } from "../vendor/291472";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { E as _$$E } from "../905/508367";
 import { q as _$$q, I as _$$I } from "../figma_app/819288";
 import { h as _$$h } from "../905/207101";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { qW } from "../905/623179";
 import { Pt, qP } from "../figma_app/806412";
 import { Point } from "../905/736624";
 import { Y as _$$Y } from "../905/506207";
 import { n as _$$n } from "../draftjs_composer/589474";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { RI, We, uz, i4 } from "../figma_app/770088";
 import { b as _$$b } from "../905/985254";
@@ -96,7 +96,7 @@ function J(e) {
     onClick: e.focusComposer,
     children: attachments.map(t => jsx(_$$v, {
       thumbnailUrl: t.thumbnailUrl,
-      altText: _$$t("comments.attachment_thumbnail_alt_text_default"),
+      altText: getI18nString("comments.attachment_thumbnail_alt_text_default"),
       onClick: i,
       isUploading: t.isUploading,
       onDelete: () => e.onDelete(t)
@@ -105,7 +105,7 @@ function J(e) {
 }
 let es = [];
 export function $$er0(e) {
-  let t = _$$t("comments.submit");
+  let t = getI18nString("comments.submit");
   return jsx(_$$K, {
     recordingKey: Pt(e, "submit"),
     disabled: e.disabled,
@@ -123,16 +123,16 @@ export function $$er0(e) {
 let el = e => {
   switch (e.type) {
     case Wn.MAX_UPLOADS_EXCEEDED:
-      return _$$t("comments.upload_error.media_file_maximum", e.params);
+      return getI18nString("comments.upload_error.media_file_maximum", e.params);
     case Wn.MAX_IMAGE_SIZE_EXCEEDED:
     case Wn.MAX_VIDEO_SIZE_EXCEEDED:
-      return _$$t("comments.upload_error.media_file_size_limit_MB", e.params);
+      return getI18nString("comments.upload_error.media_file_size_limit_MB", e.params);
     case Wn.INVALID_FILE_TYPE:
-      return _$$t("comments.upload_error.media_file_types");
+      return getI18nString("comments.upload_error.media_file_types");
     case Wn.DUPLICATE_FILE_UPLOAD:
-      return _$$t("comments.upload_error.already_uploaded_items", e.params);
+      return getI18nString("comments.upload_error.already_uploaded_items", e.params);
     case Wn.FAILED_TO_UPLOAD:
-      return _$$t("comments.upload_error.failed_to_upload", e.params);
+      return getI18nString("comments.upload_error.failed_to_upload", e.params);
     default:
       throwTypeError(e);
   }
@@ -168,10 +168,10 @@ export function $$em1(e) {
   let ej = HW();
   let ew = useSelector(e => e.comments.activeDragTarget);
   let eR = _$$y();
-  let ek = md(_$$H);
+  let ek = useAtomWithSubscription(_$$H);
   let eO = _$$eR(e.threadId) && eR({
     isDraftFile: !eC,
-    isMobile: Ay.isMobileBrowser,
+    isMobile: BrowserInfo.isMobileBrowser,
     showExpAtMentionInvite: !!getFeatureFlags().show_at_mention_invited_users,
     isFigmaDesign: eT === FFileType.DESIGN,
     inOrg: !!ef
@@ -249,7 +249,7 @@ export function $$em1(e) {
   });
   let eq = async () => {
     e.dispatch(We(await fG("", e.mentionables, eT === FFileType.DESIGN)));
-    sx("Comment Composer At Mention Clicked", {
+    trackEventAnalytics("Comment Composer At Mention Clicked", {
       userId: e.user.id,
       fileKey: e.fileKey,
       parentCommentId: e.threadId
@@ -276,7 +276,7 @@ export function $$em1(e) {
   }, [deleteAttachment, e$]);
   let e2 = useCallback((e, t) => {
     if (e instanceof qW) {
-      MZ(dispatch, _$$t("check_network_compatibility.error_bell.comment_attachments.message"));
+      MZ(dispatch, getI18nString("check_network_compatibility.error_bell.comment_attachments.message"));
       return;
     }
     dispatch(_$$F.enqueue({
@@ -301,7 +301,7 @@ export function $$em1(e) {
     let t = e.current?.files || null;
     if (null === t || 0 === t.length) return;
     let n = Array.from(t);
-    sx("Comment Attachments Selected", {
+    trackEventAnalytics("Comment Attachments Selected", {
       count: n.length,
       fileTypes: Array.from(n.reduce((e, t) => (e.add(t.type), e), new Set()))
     });
@@ -324,7 +324,7 @@ export function $$em1(e) {
     onTargetDrop: e => {
       if (e.files.length > 0) {
         let t = Array.from(e.files);
-        sx("Comment Attachments Dropped", {
+        trackEventAnalytics("Comment Attachments Dropped", {
           count: t.length,
           fileTypes: Array.from(t.reduce((e, t) => (e.add(t.type), e), new Set()))
         });
@@ -374,7 +374,7 @@ export function $$em1(e) {
             let t = e.map(e => new File([e], "", {
               type: e.type
             }));
-            sx("Comment Attachments Pasted", {
+            trackEventAnalytics("Comment Attachments Pasted", {
               count: t.length,
               fileTypes: Array.from(t.reduce((e, t) => (e.add(t.type), e), new Set()))
             });
@@ -430,7 +430,7 @@ export function $$em1(e) {
         className: xu,
         children: [_$$Y2 && jsx(_$$K, {
           onClick: t => {
-            sx("Emoji Picker Opened");
+            trackEventAnalytics("Emoji Picker Opened");
             let n = h.current?.getBoundingClientRect();
             n && e.dispatch(RI({
               visible: !0,
@@ -449,8 +449,8 @@ export function $$em1(e) {
           },
           ref: h,
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": _$$t("comments.add_emoji"),
-          "aria-label": _$$t("comments.add_emoji"),
+          "data-tooltip": getI18nString("comments.add_emoji"),
+          "aria-label": getI18nString("comments.add_emoji"),
           htmlAttributes: {
             "data-testid": "emoji-picker-button"
           },
@@ -460,20 +460,20 @@ export function $$em1(e) {
         }), jsx(_$$K, {
           onClick: eq,
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": _$$t("comments.add_mention"),
-          "aria-label": _$$t("comments.add_mention"),
+          "data-tooltip": getI18nString("comments.add_mention"),
+          "aria-label": getI18nString("comments.add_mention"),
           disabled: e6,
           recordingKey: "mentionButton",
           children: jsx(d, {})
         }), eW && jsx(_$$n, {
-          svgAltText: _$$t("comments.upload_images"),
+          svgAltText: getI18nString("comments.upload_images"),
           isDisabled: eG.length >= xS,
           acceptedFileTypes: xp.join(","),
           inputRef: eJ,
           inputId: `fileUploadIconInput-${e.recordingKey}`,
           onFileInputChange: e5,
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": _$$t("comments.upload_images"),
+          "data-tooltip": getI18nString("comments.upload_images"),
           children: jsx("span", {
             "aria-hidden": !0,
             children: jsx(_$$s, {})
@@ -484,7 +484,7 @@ export function $$em1(e) {
         children: [jsx($n, {
           variant: "secondary",
           onClick: eP,
-          children: tx("comments.cancel")
+          children: renderI18nText("comments.cancel")
         }), jsx($n, {
           variant: "primary",
           onClick: eN,

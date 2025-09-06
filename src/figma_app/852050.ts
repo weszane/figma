@@ -6,12 +6,12 @@ import { CWU, w3z } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { md, eU, fp, Pj } from "../figma_app/27355";
+import { useAtomWithSubscription, atom, useAtomValueAndSetter, Pj } from "../figma_app/27355";
 import { wm, k9 } from "../905/19536";
 import { resourceUtils } from "../905/989992";
 import h from "../vendor/656470";
 import g from "../vendor/990460";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { wJ, $Q } from "../figma_app/630951";
 import { iw, cM, kX, C$, q0 } from "../905/261982";
 import { tS } from "../figma_app/516028";
@@ -29,25 +29,25 @@ import { Y5 } from "../figma_app/455680";
 var m = h;
 var f = g;
 export function $$P32(e) {
-  let t = md(Gc);
+  let t = useAtomWithSubscription(Gc);
   return eE(e ? t[e] ?? [] : []);
 }
 export function $$D12(e) {
   let t = $$P32(e);
   let r = function (e) {
-    let t = md(L9);
+    let t = useAtomWithSubscription(L9);
     return eE(e ? t[e] ?? [] : []);
   }(e);
   return t.length > 0 ? t : r;
 }
 export function $$k39(e) {
-  return md(Fx(e));
+  return useAtomWithSubscription(Fx(e));
 }
 export function $$M31(e) {
-  return md(XC(e));
+  return useAtomWithSubscription(XC(e));
 }
 export function $$F25() {
-  return md(qy);
+  return useAtomWithSubscription(qy);
 }
 export function $$j11() {
   $$B9();
@@ -55,32 +55,32 @@ export function $$j11() {
   $$G23();
   $$V8();
   $$H26();
-  md(jt);
+  useAtomWithSubscription(jt);
 }
 export function $$U40() {
   var e;
-  e = eE(md(TD));
+  e = eE(useAtomWithSubscription(TD));
   let t = useMemo(() => Ot() ? e : e.filter(e => !GI(e)), [e]);
   return iw(t);
 }
 export function $$B9() {
-  return eE(md(uk));
+  return eE(useAtomWithSubscription(uk));
 }
 export function $$G23() {
-  return md(xA);
+  return useAtomWithSubscription(xA);
 }
 export function $$V8() {
-  return md(bO);
+  return useAtomWithSubscription(bO);
 }
 export function $$H26() {
-  return md(LC);
+  return useAtomWithSubscription(LC);
 }
 export function $$z22(e) {
-  return md(ZG(e));
+  return useAtomWithSubscription(ZG(e));
 }
 export function $$W3(e) {
-  let t = useMemo(() => e ? Eo(e) : eU(null), [e]);
-  let r = md(t);
+  let t = useMemo(() => e ? Eo(e) : atom(null), [e]);
+  let r = useAtomWithSubscription(t);
   if (r) return r;
   if (!e) return;
   let i = CWU.getSubscribedVariableSetInfo(e);
@@ -88,26 +88,26 @@ export function $$W3(e) {
 }
 export function $$K27(e) {
   let t = useMemo(() => JB(e), [e]);
-  return md(t) ?? null;
+  return useAtomWithSubscription(t) ?? null;
 }
 export function $$Y16() {
   let e = useMemo(() => Tg(), []);
-  return md(e);
+  return useAtomWithSubscription(e);
 }
 export function $$$14(e, t) {
   return $$J35(e)?.modeValues?.[t] ?? void 0;
 }
 export function $$X38(e) {
   let t = wm(() => e, [e]);
-  let r = useMemo(() => eU(e => t.map(t => isNotNullish(t) ? e(Cg)[t] ?? null : null)), [t]);
-  return md(r);
+  let r = useMemo(() => atom(e => t.map(t => isNotNullish(t) ? e(Cg)[t] ?? null : null)), [t]);
+  return useAtomWithSubscription(r);
 }
 export function $$q34(e) {
   return $$J35(e)?.name || (e ? CWU.getVariableNameInStyleSelection(e) ?? void 0 : void 0);
 }
 export function $$J35(e) {
-  let t = useMemo(() => e ? Ev(e) : eU(null), [e]);
-  let r = md(t);
+  let t = useMemo(() => e ? Ev(e) : atom(null), [e]);
+  let r = useAtomWithSubscription(t);
   if (r) return r;
   if (!e) return null;
   let i = CWU.getSubscribedVariableInfo(e);
@@ -115,7 +115,7 @@ export function $$J35(e) {
 }
 export function $$Z18(e, t) {
   let r = wm(() => e, [e]);
-  let i = useMemo(() => eU(e => r.map(r => {
+  let i = useMemo(() => atom(e => r.map(r => {
     if (!r) return null;
     let n = e(Ev(r));
     if (n) return n;
@@ -125,11 +125,11 @@ export function $$Z18(e, t) {
     }
     return null;
   })), [t, r]);
-  return md(i);
+  return useAtomWithSubscription(i);
 }
 export function $$Q30(e, t) {
   let r = wm(() => e, [e]);
-  let i = useMemo(() => eU(e => {
+  let i = useMemo(() => atom(e => {
     let n = {};
     r.forEach(r => {
       if (!r) return;
@@ -142,11 +142,11 @@ export function $$Q30(e, t) {
     });
     return n;
   }), [r, t]);
-  return md(i);
+  return useAtomWithSubscription(i);
 }
 export function $$ee0(e, t) {
-  let r = useMemo(() => e ? BJ(e, t ?? {}) : eU(null), [e, t]);
-  return md(r);
+  let r = useMemo(() => e ? BJ(e, t ?? {}) : atom(null), [e, t]);
+  return useAtomWithSubscription(r);
 }
 export function $$et33(e, t) {
   let r = $$ee0(e, t);
@@ -166,8 +166,8 @@ export function $$en5(e) {
 }
 export function $$ei1() {
   let e = tS();
-  let t = useMemo(() => e ? cp(e) : eU(null), [e]);
-  let r = md(t);
+  let t = useMemo(() => e ? cp(e) : atom(null), [e]);
+  let r = useAtomWithSubscription(t);
   return useMemo(() => {
     let e = r && resourceUtils.from(r);
     return cM({
@@ -178,7 +178,7 @@ export function $$ei1() {
 }
 export function $$ea37(e) {
   let t = useMemo(() => Oj(e), [e]);
-  let r = md(t);
+  let r = useAtomWithSubscription(t);
   return k9(() => {
     let e = {};
     for (let t of Object.values(r)) if ("loaded" === t.status) for (let r of t.data.variableCollection?.variables ?? []) e[_$$ey(r.key)] = r;
@@ -186,11 +186,11 @@ export function $$ea37(e) {
   }, [r]);
 }
 export function $$es21(e) {
-  let t = useMemo(() => !e || wJ(e) ? eU(null) : cp(e), [e]);
+  let t = useMemo(() => !e || wJ(e) ? atom(null) : cp(e), [e]);
   let r = $Q(e);
   let i = Ri(r);
-  let a = md(t);
-  let s = md(i);
+  let a = useAtomWithSubscription(t);
+  let s = useAtomWithSubscription(i);
   let o = je();
   let l = !!o.data?.find(t => t.fileKey === e);
   return wm(() => {
@@ -209,8 +209,8 @@ export function $$es21(e) {
 }
 export function $$eo17() {
   let e = tS();
-  let t = useMemo(() => e ? cp(e) : eU(null), [e]);
-  let r = md(t);
+  let t = useMemo(() => e ? cp(e) : atom(null), [e]);
+  let r = useAtomWithSubscription(t);
   return useMemo(() => {
     let e = r && resourceUtils.from(r);
     return kX({
@@ -220,11 +220,11 @@ export function $$eo17() {
   }, [r]);
 }
 export function $$el36(e) {
-  let t = useMemo(() => !e || wJ(e) ? eU(null) : cp(e), [e]);
+  let t = useMemo(() => !e || wJ(e) ? atom(null) : cp(e), [e]);
   let r = $Q(e);
   let i = Ri(r);
-  let a = md(t);
-  let s = md(i);
+  let a = useAtomWithSubscription(t);
+  let s = useAtomWithSubscription(i);
   let o = je();
   let l = o.data?.find(t => t.fileKey === e);
   return wm(() => {
@@ -257,7 +257,7 @@ let ec = _$$n((e = {}) => {
   let r = je();
   let i = wm(() => r.data?.map(e => e.fileKey) ?? [], [r.data]);
   let a = useMemo(() => t ? Jo(i) : H2(i), [t, i]);
-  let s = md(a);
+  let s = useAtomWithSubscription(a);
   return wm(() => {
     let e = resourceUtils.all(Object.values(s));
     return "loaded" !== e.status ? e : resourceUtils.loaded({
@@ -273,7 +273,7 @@ let eu = _$$n((e = {}) => {
   let r = je();
   let i = wm(() => r.data?.map(e => e.libraryKey) ?? [], [r.data]);
   let a = useMemo(() => t ? Jo(i) : wh(i), [t, i]);
-  let s = md(a);
+  let s = useAtomWithSubscription(a);
   return wm(() => {
     let e = resourceUtils.all(Object.values(s));
     return "loaded" !== e.status ? e : resourceUtils.loaded({
@@ -281,14 +281,14 @@ let eu = _$$n((e = {}) => {
     });
   }, [s]);
 });
-let $$ep15 = eU(null);
+let $$ep15 = atom(null);
 export function $$e_4({
   enabled: e = !0
 }) {
   let t = ey({
     enabled: e
   });
-  let [r, i] = fp($$ep15);
+  let [r, i] = useAtomValueAndSetter($$ep15);
   useEffect(() => {
     (null === r || r.status !== t.status) && i(t);
   }, [t, i, r]);
@@ -316,22 +316,22 @@ let em = _$$n(e => {
       r.forEach(t => {
         e[t] = resourceUtils.disabled();
       });
-      return eU(e);
+      return atom(e);
     }
     return Yt(r);
   }, [a, r]);
-  let o = md(s);
+  let o = useAtomWithSubscription(s);
   let l = useMemo(() => {
     if (a) {
       let e = {};
       i.forEach(t => {
         e[t] = resourceUtils.disabled();
       });
-      return eU(e);
+      return atom(e);
     }
     return hz(i);
   }, [a, i]);
-  let d = md(l);
+  let d = useAtomWithSubscription(l);
   return wm(() => {
     let e = resourceUtils.all(Object.values({
       ...o,
@@ -363,7 +363,7 @@ let eg = _$$n(e => {
   let r = je();
   let i = wm(() => r.data?.map(e => e.libraryKey) ?? [], [r.data]);
   let a = useMemo(() => t ? Jo(i) : Ho(i), [t, i]);
-  let s = md(a);
+  let s = useAtomWithSubscription(a);
   return wm(() => {
     let e = resourceUtils.all(Object.values(s));
     return "loaded" !== e.status ? e.transform(() => ({
@@ -428,21 +428,21 @@ export function $$ev24() {
   function r(e, t, n, i, s = zk.YES, o = "set-variable-override-for-mode") {
     let c = gr.fromString(e);
     if (!c) {
-      x1("variables", "Failed to set variable override. Invalid variable set id.", {
+      logError("variables", "Failed to set variable override. Invalid variable set id.", {
         variableSetId: e
       });
       return;
     }
     let u = getSingletonSceneGraph().getVariableCollectionNode(c);
     if (!u) {
-      x1("variables", "Failed to set variable override. Variable collection node not found.", {
+      logError("variables", "Failed to set variable override. Variable collection node not found.", {
         variableCollectionId: c
       });
       return;
     }
     let p = i ? pr(i) : null;
     if (f()(p)) {
-      x1("variables", "Failed to set variable override. Invalid variable value.", {
+      logError("variables", "Failed to set variable override. Invalid variable value.", {
         newValue: i
       });
       return;
@@ -456,7 +456,7 @@ export function $$ev24() {
   function i(e, t, r) {
     l7.user("clear-variable-override-alias", () => {
       let n = gr.fromString(r);
-      return n ? CWU?.detachVariableValueForMode(e, t, n) : (x1("variables", "Failed to clear variable override alias. Invalid variable set id.", {
+      return n ? CWU?.detachVariableValueForMode(e, t, n) : (logError("variables", "Failed to clear variable override alias. Invalid variable set id.", {
         variableSetId: r
       }), !1);
     }) && Y5.triggerAction("commit");
@@ -468,20 +468,20 @@ export function $$ev24() {
       let d = e.get(ZG(n));
       let c = e.get(hy(i));
       if (!d) {
-        x1("variables", "Failed to set variable value or override for mode. Variable set not found.", {
+        logError("variables", "Failed to set variable value or override for mode. Variable set not found.", {
           variableSetId: n
         });
         return;
       }
       if (!c) {
-        x1("variables", "Failed to set variable value or override for mode. Variable not found.", {
+        logError("variables", "Failed to set variable value or override for mode. Variable not found.", {
           variableId: i
         });
         return;
       }
       if (GI(d) && !CS(c, n)) r(n, i, a, s, o, l);else {
         if (null === s) {
-          x1("variables", "Failed to set variable value for mode. Variable value is null.", {
+          logError("variables", "Failed to set variable value for mode. Variable value is null.", {
             variableId: i,
             modeId: a
           });
@@ -497,19 +497,19 @@ export function $$ev24() {
       let d = e.get(hy(t));
       let c = e.get(A6(s))?.[t];
       if (!l) {
-        x1("variables", "Failed to clear variable or variable override alias. Variable set not found.", {
+        logError("variables", "Failed to clear variable or variable override alias. Variable set not found.", {
           variableSetId: s
         });
         return;
       }
       if (!d) {
-        x1("variables", "Failed to clear variable or variable override alias. Variable not found.", {
+        logError("variables", "Failed to clear variable or variable override alias. Variable not found.", {
           variableId: t
         });
         return;
       }
       if (!e.get(ZG(d.variableSetId))) {
-        x1("variables", "Failed to clear variable or variable override alias. Owner variable set not found.", {
+        logError("variables", "Failed to clear variable or variable override alias. Owner variable set not found.", {
           variableId: t
         });
         return;
@@ -521,7 +521,7 @@ export function $$ev24() {
         }
         let e = CWU?.getVariableResolvedValue(t, new Map([[cn(l), a]]));
         if (!e) {
-          x1("variables", "Failed to resolve alias value for variable in collection ", {
+          logError("variables", "Failed to resolve alias value for variable in collection ", {
             variableId: t,
             modeId: a,
             variableSetId: s
@@ -530,7 +530,7 @@ export function $$ev24() {
         }
         r(s, t, a, e);
       }
-      x1("variables", "Failed to clear variable or variable override alias. Variable is not resident of set nor is the variable set an extension.", {
+      logError("variables", "Failed to clear variable or variable override alias. Variable is not resident of set nor is the variable set an extension.", {
         variableId: t,
         variableSetId: s
       });
@@ -538,7 +538,7 @@ export function $$ev24() {
   };
 }
 export function $$eA28() {
-  let e = md(Zc);
+  let e = useAtomWithSubscription(Zc);
   return useMemo(() => {
     let t = {};
     for (let r of Object.values(e)) {

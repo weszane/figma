@@ -2,7 +2,7 @@ import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { Y as _$$Y } from "../905/830372";
 import { useMemo, useCallback, useState, memo, useRef, useEffect } from "react";
 import { h as _$$h } from "../905/207101";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { tg, KB, lR } from "../4452/780544";
 import { g as _$$g } from "../4452/983384";
 import { e as _$$e } from "../905/621515";
@@ -34,7 +34,7 @@ import { FC } from "../figma_app/212807";
 import { sZ } from "../905/845253";
 import { _6 } from "../figma_app/386952";
 import { oh } from "../905/18797";
-import { GN, RM } from "../905/441038";
+import { UserRole, GroupType } from "../905/441038";
 import { V0, m2 } from "../figma_app/858344";
 import { z6 } from "../figma_app/805373";
 import { lQ } from "../905/934246";
@@ -50,7 +50,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { YQ } from "../905/502364";
 import { o as _$$o } from "../469e6e40/744116";
 import { Ii } from "../figma_app/425283";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { c as _$$c } from "../905/370443";
 import { r1 } from "../figma_app/545877";
 import { rq } from "../905/425180";
@@ -60,9 +60,9 @@ import { Oe } from "../905/34809";
 import { Mn, e9 } from "../4452/961065";
 import { m$ } from "../figma_app/240735";
 import { Be } from "../figma_app/920435";
-import { D as _$$D } from "../905/384551";
+import { FRequestsStr } from "../905/384551";
 import { J7 } from "../figma_app/650409";
-import { Iv } from "../905/548208";
+import { DashboardSections } from "../905/548208";
 import { K as _$$K } from "../905/443068";
 import { t as _$$t2 } from "../905/117577";
 import { Wi } from "../figma_app/162641";
@@ -86,22 +86,22 @@ function g(e) {
   return jsx(WZ, {
     isShowing,
     steps: [{
-      title: tx("admin_settings.sidebar.onboarding.welcome_to_admin", {
+      title: renderI18nText("admin_settings.sidebar.onboarding.welcome_to_admin", {
         planName: a.data
       }),
-      description: tx("admin_settings.sidebar.onboarding.you_can_now_manage_admin_settings_separately"),
+      description: renderI18nText("admin_settings.sidebar.onboarding.you_can_now_manage_admin_settings_separately"),
       arrowPosition: F_.LEFT_TITLE,
       emphasized: !0,
       trackingContextName: `${tg} First tooltip`,
       targetKey: KB,
       disableHighlight: !0
     }, {
-      title: tx("admin_settings.sidebar.onboarding.quickly_get_back_to_your_files"),
-      description: tx("admin_settings.sidebar.onboarding.when_youre_done_with_admin_tasks"),
+      title: renderI18nText("admin_settings.sidebar.onboarding.quickly_get_back_to_your_files"),
+      description: renderI18nText("admin_settings.sidebar.onboarding.when_youre_done_with_admin_tasks"),
       emphasized: !0,
       trackingContextName: `${tg} Second tooltip`,
       targetKey: lR,
-      primaryCtaLabel: tx("general.got_it")
+      primaryCtaLabel: renderI18nText("general.got_it")
     }],
     onComplete: complete
   });
@@ -153,7 +153,7 @@ function ev(e) {
     return [{
       icon: jsx(_$$_, {}),
       id: 2,
-      text: tx("org_admin_tab.people"),
+      text: renderI18nText("org_admin_tab.people"),
       selectViewArgs: {
         view: s,
         orgAdminSettingsViewTab: J7.MEMBERS
@@ -162,7 +162,7 @@ function ev(e) {
     }, {
       icon: jsx(_$$S, {}),
       id: 3,
-      text: tx("org_admin_tab.billing"),
+      text: renderI18nText("org_admin_tab.billing"),
       selectViewArgs: {
         view: s,
         orgAdminSettingsViewTab: J7.BILLING
@@ -173,7 +173,7 @@ function ev(e) {
     }, {
       icon: jsx(_$$e2, {}),
       id: 4,
-      text: tx("org_admin_tab.content"),
+      text: renderI18nText("org_admin_tab.content"),
       selectViewArgs: {
         view: s,
         orgAdminSettingsViewTab: J7.CONTENT
@@ -182,7 +182,7 @@ function ev(e) {
     }, {
       icon: jsx(_$$l, {}),
       id: 7,
-      text: tx("org_admin_tab.resources"),
+      text: renderI18nText("org_admin_tab.resources"),
       selectViewArgs: {
         view: s,
         orgAdminSettingsViewTab: J7.RESOURCES
@@ -191,7 +191,7 @@ function ev(e) {
     }, {
       icon: jsx(_$$d, {}),
       id: 8,
-      text: tx("org_admin_tab.activity"),
+      text: renderI18nText("org_admin_tab.activity"),
       selectViewArgs: {
         view: s,
         orgAdminSettingsViewTab: J7.ACTIVITY
@@ -200,7 +200,7 @@ function ev(e) {
     }, {
       icon: jsx(_$$A, {}),
       id: 9,
-      text: tx("org_admin_tab.settings"),
+      text: renderI18nText("org_admin_tab.settings"),
       selectViewArgs: {
         view: s,
         orgAdminSettingsViewTab: J7.SETTINGS
@@ -216,7 +216,7 @@ function ev(e) {
 function ef(e) {
   let t = useDispatch();
   let a = "orgAdminSettings" === e.selectedView.view && e.selectedView.orgAdminSettingsViewTab === J7.DASHBOARD;
-  let s = "billingGroupDashboard" === e.selectedView.view && e.selectedView.selectedTab === _$$D.REQUESTS;
+  let s = "billingGroupDashboard" === e.selectedView.view && e.selectedView.selectedTab === FRequestsStr.REQUESTS;
   let i = a || s;
   return jsx(SidebarRow, {
     icon: jsx(ex, {
@@ -235,7 +235,7 @@ function ef(e) {
       } else {
         t(sf({
           view: "billingGroupDashboard",
-          selectedTab: _$$D.REQUESTS
+          selectedTab: FRequestsStr.REQUESTS
         }));
         t(Oe({
           clickedResourceType: "licenseGroupAdminSettings"
@@ -244,7 +244,7 @@ function ef(e) {
     },
     text: jsx(_$$E2, {
       truncate: !0,
-      children: tx("org_admin_tab.dashboard")
+      children: renderI18nText("org_admin_tab.dashboard")
     }),
     isSelected: i,
     badge: jsx(Mn, {
@@ -258,7 +258,7 @@ function ef(e) {
 }
 let ej = {
   [Rb]: function () {
-    let e = md(eo);
+    let e = useAtomWithSubscription(eo);
     let {
       show,
       isShowing,
@@ -275,18 +275,18 @@ let ej = {
     return jsx(rq, {
       arrowPosition: F_.LEFT_TITLE,
       clickOutsideToHide: !0,
-      description: tx("team_admin.onboarding.manage_unassigned_drafts.team_description"),
+      description: renderI18nText("team_admin.onboarding.manage_unassigned_drafts.team_description"),
       isShowing,
       onClose: complete,
       primaryCta: {
-        label: tx("general.got_it"),
+        label: renderI18nText("general.got_it"),
         type: "button",
         onClick: complete,
         ctaTrackingDescriptor: _$$c.DONE
       },
       shouldCenterArrow: EL.FALLBACK,
       targetKey: Rb,
-      title: tx("team_admin.onboarding.manage_unassigned_drafts.title"),
+      title: renderI18nText("team_admin.onboarding.manage_unassigned_drafts.title"),
       trackingContextName: qW,
       userFlagOnShow: el
     });
@@ -337,7 +337,7 @@ function eC() {
       view: "recentsAndSharing"
     }));
   }, [e]);
-  let a = _$$t("admin_settings.sidebar.back_to_files");
+  let a = getI18nString("admin_settings.sidebar.back_to_files");
   return jsx("span", {
     "data-onboarding-key": lR,
     children: jsx(_$$K, {
@@ -358,7 +358,7 @@ function eS() {
     className: "x78zum5 x1q0g3np xrupf6j xemv814 xkezfkh x6s0dn4 x1nfngrj xuxw1ft",
     "data-testid": "admin-sidebar-plan-information",
     "data-onboarding-key": KB,
-    children: [jsx(eC, {}), t ? tx("admin_settings.sidebar.plan_name", {
+    children: [jsx(eC, {}), t ? renderI18nText("admin_settings.sidebar.plan_name", {
       planName: jsx("span", {
         title: t,
         className: "xb3r6kr xuxw1ft xlyipyv",
@@ -397,7 +397,7 @@ function eI(e) {
         })
       }), jsx(_$$E2, {
         color: "secondary",
-        children: t ? _$$t("sidebar.see_less") : _$$t("sidebar.see_all")
+        children: t ? getI18nString("sidebar.see_less") : getI18nString("sidebar.see_all")
       })]
     })]
   });
@@ -425,8 +425,8 @@ function eT(e) {
     t(sf({
       view: "licenseGroup",
       licenseGroupId: e,
-      subView: GN.ADMIN,
-      selectedTab: RM.MEMBERS
+      subView: UserRole.ADMIN,
+      selectedTab: GroupType.MEMBERS
     }));
   }, [t]);
   let r = useCallback(e => jsx(SidebarRow, {
@@ -445,10 +445,10 @@ function eT(e) {
   }, e.id), [s, a]);
   return jsx(eI, {
     renderFn: r,
-    label: e.renderLabel ? tx("admin_dashboard.requests.billing_groups") : null,
+    label: e.renderLabel ? renderI18nText("admin_dashboard.requests.billing_groups") : null,
     rows: e.licenseGroups,
-    seeMoreAriaLabel: _$$t("sidebar.see_all_billing_groups_aria_label"),
-    seeLessAriaLabel: _$$t("sidebar.see_less_billing_groups_aria_label")
+    seeMoreAriaLabel: getI18nString("sidebar.see_all_billing_groups_aria_label"),
+    seeLessAriaLabel: getI18nString("sidebar.see_less_billing_groups_aria_label")
   });
 }
 function eA(e) {
@@ -479,10 +479,10 @@ function eA(e) {
   }, e.id), [s, a]);
   return jsx(eI, {
     renderFn: r,
-    label: e.renderLabel ? tx("sidebar.workspaces") : null,
+    label: e.renderLabel ? renderI18nText("sidebar.workspaces") : null,
     rows: e.workspaces,
-    seeMoreAriaLabel: _$$t("sidebar.see_all_workspaces_aria_label"),
-    seeLessAriaLabel: _$$t("sidebar.see_less_workspaces_aria_label")
+    seeMoreAriaLabel: getI18nString("sidebar.see_all_workspaces_aria_label"),
+    seeLessAriaLabel: getI18nString("sidebar.see_less_workspaces_aria_label")
   });
 }
 let eR = ["fb-width-60", "fb-width-70", "fb-width-80", "fb-width-100", "fb-width-105", "fb-width-120"];
@@ -588,13 +588,13 @@ function eD(e) {
     return [{
       icon: jsx(_$$U, {}),
       id: 1,
-      text: tx("org_admin_tab.dashboard"),
+      text: renderI18nText("org_admin_tab.dashboard"),
       disabled: !t,
       selectViewArgs: {
         view: s,
         teamId: e,
         isProTeam: t,
-        teamAdminConsoleViewTab: Iv.DASHBOARD
+        teamAdminConsoleViewTab: DashboardSections.DASHBOARD
       },
       badge: t ? jsx(e9, {
         planType: ps.TEAM,
@@ -605,13 +605,13 @@ function eD(e) {
     }, {
       icon: jsx(_$$_, {}),
       id: 2,
-      text: tx("org_admin_tab.people"),
+      text: renderI18nText("org_admin_tab.people"),
       onboardingKey: ZW,
       selectViewArgs: {
         view: s,
         isProTeam: t,
         teamId: e,
-        teamAdminConsoleViewTab: Iv.MEMBERS
+        teamAdminConsoleViewTab: DashboardSections.MEMBERS
       },
       preNavAction: () => {
         a(m$({
@@ -621,10 +621,10 @@ function eD(e) {
     }, {
       icon: jsx(_$$S, {}),
       id: 3,
-      text: tx("org_admin_tab.billing"),
+      text: renderI18nText("org_admin_tab.billing"),
       selectViewArgs: {
         view: s,
-        teamAdminConsoleViewTab: Iv.BILLING,
+        teamAdminConsoleViewTab: DashboardSections.BILLING,
         teamId: e,
         isProTeam: t
       },
@@ -637,35 +637,35 @@ function eD(e) {
     }, {
       icon: jsx(_$$e2, {}),
       id: 4,
-      text: tx("org_admin_tab.abandoned_drafts"),
+      text: renderI18nText("org_admin_tab.abandoned_drafts"),
       onboardingKey: Rb,
       selectViewArgs: {
         view: s,
         isProTeam: t,
-        teamAdminConsoleViewTab: Iv.DRAFTS,
+        teamAdminConsoleViewTab: DashboardSections.DRAFTS,
         teamId: e
       },
       disabled: t
     }, {
       icon: jsx(_$$e2, {}),
       id: 4,
-      text: tx("org_admin_tab.content"),
+      text: renderI18nText("org_admin_tab.content"),
       selectViewArgs: {
         view: s,
         isProTeam: t,
-        teamAdminConsoleViewTab: Iv.CONTENT,
+        teamAdminConsoleViewTab: DashboardSections.CONTENT,
         teamId: e
       },
       disabled: !t
     }, {
       icon: jsx(_$$A, {}),
       id: 5,
-      text: tx("org_admin_tab.settings"),
+      text: renderI18nText("org_admin_tab.settings"),
       onboardingKey: _$$eC,
       selectViewArgs: {
         view: s,
         isProTeam: t,
-        teamAdminConsoleViewTab: Iv.SETTINGS,
+        teamAdminConsoleViewTab: DashboardSections.SETTINGS,
         teamId: e
       },
       preNavAction: () => a(Be({

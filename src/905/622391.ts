@@ -1,7 +1,7 @@
 import { debugState } from "../905/407919";
 import { getInitialOptions } from "../figma_app/169182";
-import { xi } from "../905/714362";
-import { nl } from "../figma_app/257275";
+import { logWarning } from "../905/714362";
+import { isInteractionPathCheck } from "../figma_app/897289";
 import { tn } from "../figma_app/473493";
 import { np as _$$np } from "../figma_app/544649";
 import { s as _$$s } from "../905/506024";
@@ -10,7 +10,7 @@ import { n as _$$n } from "../905/347702";
 export function $$p6() {
   let e = debugState.getState();
   let t = _$$s(e);
-  t || e.selectedView || xi("plugins", "selectedView is invalid");
+  t || e.selectedView || logWarning("plugins", "selectedView is invalid");
   return t;
 }
 export function $$m3() {
@@ -22,7 +22,7 @@ export function $$h1() {
   return cb(e);
 }
 export function $$g7() {
-  if (getInitialOptions().e2e_traffic || nl()) return !0;
+  if (getInitialOptions().e2e_traffic || isInteractionPathCheck()) return !0;
   let e = debugState.getState();
   return Eh(e) && cb(e);
 }

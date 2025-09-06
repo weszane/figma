@@ -3,7 +3,7 @@ import { useState, useCallback, useEffect } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { throwError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { sx, az } from "../905/449184";
+import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { xf } from "../figma_app/416935";
 import { Ay } from "../905/612521";
 import { h as _$$h } from "../905/207101";
@@ -17,7 +17,7 @@ import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { s as _$$s } from "../cssbuilder/589278";
 import { s as _$$s2 } from "../905/573154";
 import { Ph } from "../905/160095";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { sx as _$$sx } from "../905/941192";
 import { Vh } from "../figma_app/692987";
 import { s$, ZY, GL, vm } from "../figma_app/361035";
@@ -99,12 +99,12 @@ function D({
   return jsxs(Fragment, {
     children: [jsx("h1", {
       className: Fb,
-      children: tx("pro_cart.add_collaborators.add_collaborators_to_your_team")
+      children: renderI18nText("pro_cart.add_collaborators.add_collaborators_to_your_team")
     }), jsx(Kz, {
       multiple: .5
     }), jsx("h2", {
       className: b0,
-      children: tx("pro_cart.add_collaborators.well_add_them_to_your_team")
+      children: renderI18nText("pro_cart.add_collaborators.well_add_them_to_your_team")
     }), jsx(Kz, {
       multiple: 4
     }), jsxs("div", {
@@ -114,14 +114,14 @@ function D({
       children: [t.map((e, t) => jsx(il, {
         value: e,
         onChange: e => l(e.target.value, t),
-        placeholder: _$$t("pro_cart.add_collaborators.email")
+        placeholder: getI18nString("pro_cart.add_collaborators.email")
       }, `collaborator-email-input-${t}`)), jsx(Us, {
         onClick: () => {
           a([...t, ""]);
         },
         trusted: !0,
         style: _$$sx.alignLeft.font14.fontMedium.$,
-        children: tx("pro_cart.add_collaborators.add_another")
+        children: renderI18nText("pro_cart.add_collaborators.add_another")
       })]
     }), jsxs("div", {
       style: _$$sx.flex.flexColumn.itemsCenter.mlAuto.mrAuto.mt24.gap24.fontMedium.font14.$,
@@ -132,12 +132,12 @@ function D({
           width: "110px"
         }).$,
         onClick: r,
-        children: tx("pro_cart.add_collaborators.sent_invites")
+        children: renderI18nText("pro_cart.add_collaborators.sent_invites")
       }), jsx(_$$Ph, {
         trusted: !0,
         onClick: i,
         style: _$$sx.colorTextSecondary.alignCenter.$,
-        children: tx("pro_cart.add_collaborators.skip_for_now")
+        children: renderI18nText("pro_cart.add_collaborators.skip_for_now")
       })]
     })]
   });
@@ -190,11 +190,11 @@ function eD(e) {
     children: t.map(e => {
       let t = function (e) {
         if (e.type === lB.CARD) return function (e) {
-          let t = e.display_brand in e$ ? e$[e.display_brand] : _$$t("checkout.other");
+          let t = e.display_brand in e$ ? e$[e.display_brand] : getI18nString("checkout.other");
           return `${t} \u2022\u2022\u2022\u2022 ${e.last4}`;
         }(e.object);
         if (e.type === lB.SEPA) return function (e) {
-          let t = e.country ? e.country.toUpperCase() : _$$t("checkout.other");
+          let t = e.country ? e.country.toUpperCase() : getI18nString("checkout.other");
           return `SEPA ${t} \u2022\u2022\u2022\u2022 ${e.last4}`;
         }(e.object);
         throw Error(`Unknown payment method type: ${e.type}`);
@@ -264,7 +264,7 @@ function eL(e) {
   let r = jsx(_$$J, {
     children: jsx("span", {
       className: _$$s.font13.$,
-      children: _$$t("checkout.use_saved_payment_method")
+      children: getI18nString("checkout.use_saved_payment_method")
     })
   });
   return jsx("div", {
@@ -292,7 +292,7 @@ function eV(e) {
   } = useSelector(e => e.payment);
   let c = !!error && null === errorCode;
   return jsxs(_$$x, {
-    title: _$$t("checkout.payment_details"),
+    title: getI18nString("checkout.payment_details"),
     children: [paymentMethods.length > 0 && jsxs("div", {
       className: _$$s.alignLeft.$,
       children: [jsx(eL, {
@@ -665,13 +665,13 @@ function eY(e) {
     R === tn.PAYMENT_AND_ADDRESS && td && th();
   });
   useEffect(() => {
-    R === tn.CONFIRM_PAY && !tc && eD && sx("pro_cart_selections_undefined_on_review_step", {
+    R === tn.CONFIRM_PAY && !tc && eD && trackEventAnalytics("pro_cart_selections_undefined_on_review_step", {
       teamId: eP,
       userId: l
     });
   }, [eD, tc, R, l, eP]);
   useEffect(() => {
-    R === tn.CONFIRM_PAY && eB && !eD && sx("monetization_upgrades.hydrated_pro_cart_selections", {
+    R === tn.CONFIRM_PAY && eB && !eD && trackEventAnalytics("monetization_upgrades.hydrated_pro_cart_selections", {
       teamId: eP,
       loadingPaidEditors: tc
     });
@@ -685,7 +685,7 @@ function eY(e) {
     }));
   }, [to, e.selectedView.isEduTeam, tE]);
   useEffect(() => {
-    e.selectedView.teamFlowType === SC.CREATE_AND_UPGRADE && (tb || cannotCreateTeamReason === z4.TEAM_CREATION_CONTROL) && (Ay.redirect("/"), to(_$$s2.error(_$$t("team_creation.missing_team_creation_controls"))));
+    e.selectedView.teamFlowType === SC.CREATE_AND_UPGRADE && (tb || cannotCreateTeamReason === z4.TEAM_CREATION_CONTROL) && (Ay.redirect("/"), to(_$$s2.error(getI18nString("team_creation.missing_team_creation_controls"))));
   }, [e.selectedView.teamFlowType, tb, cannotCreateTeamReason, to]);
   let tA = x.currencyToSwitch;
   useEffect(() => {
@@ -712,9 +712,9 @@ function eY(e) {
       ignoreCurrentPlan,
       billingPeriod: eA
     })));
-    R === tn.ADD_COLLABORATORS && (tP.length ? to(_$$s2.error(_$$t("pro_cart.add_collaborators.error.email_is_invalid", {
+    R === tn.ADD_COLLABORATORS && (tP.length ? to(_$$s2.error(getI18nString("pro_cart.add_collaborators.error.email_is_invalid", {
       string: tP[0]
-    }))) : tM ? to(_$$s2.error(_$$t("team_view.team_permissions_modal.youre_not_able_to_send_an_invite_to_yourself"))) : to(sf({
+    }))) : tM ? to(_$$s2.error(getI18nString("team_view.team_permissions_modal.youre_not_able_to_send_an_invite_to_yourself"))) : to(sf({
       ...e.selectedView,
       paymentStep: i,
       ignoreCurrentPlan,
@@ -885,7 +885,7 @@ function eY(e) {
             className: _$$s.mxAuto.alignLeft.mb16.$,
             children: jsx(_$$_, {
               color: _$$S.INFORMATION,
-              text: _$$t("pro_cart.review.extra_validation")
+              text: getI18nString("pro_cart.review.extra_validation")
             })
           }), tc || eD ? jsx(_$$f, {}) : jsx(_$$j, {
             billingAddress,
@@ -1001,7 +1001,7 @@ function eY(e) {
             shippingAddress,
             taxPercent: x.taxes?.tax_percent,
             tier: Ju.PRO,
-            title: _$$t("checkout.upgrade_to_a_professional_plan"),
+            title: getI18nString("checkout.upgrade_to_a_professional_plan"),
             userEmail: a?.email || ""
           })]
         }) : jsxs("div", {
@@ -1045,7 +1045,7 @@ function eY(e) {
             vatGstId
           }), [tn.CHOOSE_PLAN, tn.PAYMENT_AND_ADDRESS].includes(R) && jsx(_$$z, {
             billingInterval: e$,
-            buttonText: R === tn.PAYMENT_AND_ADDRESS ? _$$t("pro_cart.sidebar.next_review") : _$$t("pro_cart.sidebar.next_payment_information"),
+            buttonText: R === tn.PAYMENT_AND_ADDRESS ? getI18nString("pro_cart.sidebar.next_review") : getI18nString("pro_cart.sidebar.next_payment_information"),
             canEnforcePaidSeatMinimum: R === tn.CHOOSE_PLAN,
             countByBillableProductKey: eL,
             currency: eC,
@@ -1053,7 +1053,7 @@ function eY(e) {
             isLoading: x.submitPending,
             onClickNext: tR,
             onSwitchBillingInterval: e => {
-              az.trackDefinedEvent("monetization_upgrades.checkout_change_renewal_term", {
+              analyticsEventManager.trackDefinedEvent("monetization_upgrades.checkout_change_renewal_term", {
                 teamId: eP ?? void 0,
                 renewalTerm: e
               });
@@ -1063,7 +1063,7 @@ function eY(e) {
             },
             onSwitchCurrency: eE,
             tier: Ju.PRO,
-            title: _$$t("checkout.your_professional_plan"),
+            title: getI18nString("checkout.your_professional_plan"),
             trackingProperties: {
               selectedUserSeatTypes: Tj(x.cartSelections?.selectedUserSeatTypes),
               countBySeatType: gS(eL),
@@ -1099,7 +1099,7 @@ function eZ({
     },
     newTab: !0,
     trusted: !0,
-    children: tx("checkout.learn_more_about_seats")
+    children: renderI18nText("checkout.learn_more_about_seats")
   });
   return jsxs("div", {
     className: _$$s.mb32.$,
@@ -1107,32 +1107,32 @@ function eZ({
     children: [jsx("h2", {
       className: _$$s.font15.lh24.fontMedium.$,
       children: function (e, t, a) {
-        switch (t = t || _$$t("checkout.select_seats_header.your_team"), e) {
+        switch (t = t || getI18nString("checkout.select_seats_header.your_team"), e) {
           case tn.PLAN_COMPARISON:
-            return tx("pro_cart.choose_plan.choose_a_plan_for_your_new_team");
+            return renderI18nText("pro_cart.choose_plan.choose_a_plan_for_your_new_team");
           case tn.CHOOSE_PLAN:
-            if (a) return tx("checkout.select_seats_header_exp", {
+            if (a) return renderI18nText("checkout.select_seats_header_exp", {
               teamName: t
             });
-            return tx("checkout.select_seats_header", {
+            return renderI18nText("checkout.select_seats_header", {
               teamName: t
             });
           case tn.PAYMENT_AND_ADDRESS:
-            return tx("checkout.enter_your_payment_details");
+            return renderI18nText("checkout.enter_your_payment_details");
           case tn.CONFIRM_PAY:
-            return tx("checkout.everything_look_good");
+            return renderI18nText("checkout.everything_look_good");
           default:
             throwError(e);
         }
       }(e, t, r())
     }), e === tn.CHOOSE_PLAN && jsx("p", {
       className: _$$s.colorTextSecondary.font13.mt8.$,
-      children: tx("checkout.select_seats_table.seat_types_have_been_suggested", {
+      children: renderI18nText("checkout.select_seats_table.seat_types_have_been_suggested", {
         learnMoreAboutSeatsLink: i
       })
     }), e === tn.CONFIRM_PAY && jsx("p", {
       className: _$$s.colorTextSecondary.font13.mt8.$,
-      children: tx("checkout.confirm_your_plan_seats_and_payment_details_then_you_re_all_set")
+      children: renderI18nText("checkout.confirm_your_plan_seats_and_payment_details_then_you_re_all_set")
     }), UR() && jsx(_$$W, {
       billingPeriod: JV(a) ?? void 0,
       isCampfireCart: !0

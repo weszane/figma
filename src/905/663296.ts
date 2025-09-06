@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import r from "classnames";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { k$ } from "../figma_app/975811";
 import { A as _$$A } from "../905/794518";
 import { Q7 } from "../905/203369";
@@ -16,7 +16,7 @@ export function $$p0({
 }) {
   let m = [wi];
   return jsxs(_$$A, {
-    label: _$$t("community.seller.price"),
+    label: getI18nString("community.seller.price"),
     error: i,
     required: r,
     disabled: p,
@@ -26,7 +26,7 @@ export function $$p0({
       }),
       children: [jsx("div", {
         className: c$,
-        children: tx("community.seller.currency_symbol")
+        children: renderI18nText("community.seller.currency_symbol")
       }), jsx(Q7, {
         placeholder: "0",
         property: e,
@@ -43,7 +43,7 @@ export function $$p0({
         className: a()(...m, {
           [r9]: p
         }),
-        children: tx("community.seller.usd")
+        children: renderI18nText("community.seller.usd")
       })]
     }), !i && jsx("div", {
       className: vT,

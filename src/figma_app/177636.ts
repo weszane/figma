@@ -1,6 +1,6 @@
 import { useMemo, useCallback } from "react";
 import { l as _$$l } from "../905/716947";
-import { eU, md } from "../figma_app/27355";
+import { atom, useAtomWithSubscription } from "../figma_app/27355";
 import { z } from "../905/239603";
 import { unwrap } from "../vendor/812047";
 import { oA as _$$oA } from "../905/663269";
@@ -9,7 +9,7 @@ import { En } from "../figma_app/566371";
 import { w0 } from "../figma_app/594947";
 import { ZJ } from "../3973/697935";
 import { Uv } from "../3973/473379";
-import { Lg, nl } from "../figma_app/257275";
+import { Lg, isInteractionPathCheck } from "../figma_app/897289";
 import { u8 } from "../figma_app/976749";
 import { U } from "../905/506188";
 import { kH } from "../905/309735";
@@ -17,7 +17,7 @@ import { FComponentType } from "../figma_app/191312";
 import { Bu2, iQA } from "../figma_app/43951";
 import { Qp } from "../figma_app/349248";
 import { NR } from "../905/722604";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { G } from "../figma_app/923271";
 import { n as _$$n } from "../905/347702";
 import { Pv, GZ, Yl } from "../figma_app/10098";
@@ -36,9 +36,9 @@ let C = z.object({
   })
 });
 let w = [];
-let O = eU(async e => {
-  let t = e(u8) === nT.Sites;
-  let r = !!(Lg() || nl()) || e(ZJ).status === Uv.COMPLETED;
+let O = atom(async e => {
+  let t = e(u8) === FEditorType.Sites;
+  let r = !!(Lg() || isInteractionPathCheck()) || e(ZJ).status === Uv.COMPLETED;
   if (!t || !r) return {
     libraryKeys: w,
     cmsConfig: null,
@@ -77,7 +77,7 @@ let $$D2 = _$$n(() => {
   let {
     libraryKeys,
     enabled
-  } = md($$P0);
+  } = useAtomWithSubscription($$P0);
   let r = libraryKeys.map(e => Bu2.Query({
     libraryKey: e,
     assetType: FComponentType.RESPONSIVE_SET
@@ -90,7 +90,7 @@ export function $$k4() {
   let e = $$D2();
   let {
     enabled
-  } = md($$P0);
+  } = useAtomWithSubscription($$P0);
   let r = useMemo(() => {
     let r = {
       libraries: [],
@@ -130,7 +130,7 @@ export function $$M5(e) {
 export function $$F6() {
   let {
     publishedFromSiteFile
-  } = md($$P0);
+  } = useAtomWithSubscription($$P0);
   let t = $$D2();
   let r = [];
   for (let e of t) {
@@ -182,19 +182,19 @@ function j(e) {
 export function $$U8() {
   let {
     cmsConfig
-  } = md($$P0);
+  } = useAtomWithSubscription($$P0);
   return cmsConfig;
 }
 export function $$B3() {
   let {
     cmsConfig
-  } = md($$P0);
+  } = useAtomWithSubscription($$P0);
   return useCallback(t => cmsConfig?.libraryKey === t, [cmsConfig]);
 }
 export function $$G1() {
   let {
     sortedPrefixes
-  } = md($$P0);
+  } = useAtomWithSubscription($$P0);
   return useMemo(() => {
     if (void 0 !== sortedPrefixes && 0 !== sortedPrefixes.length) return (t, r) => {
       let n = NR(kH(t.name)).toLocaleLowerCase();

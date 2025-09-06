@@ -2,11 +2,11 @@ import { useState, useRef, useCallback, useEffect, useMemo } from "react";
 import { useDispatch } from "../vendor/514228";
 import { vF } from "../vendor/150583";
 import { getFeatureFlags } from "../905/601108";
-import { Xr, md } from "../figma_app/27355";
+import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { hC } from "../figma_app/901889";
 import { gY, IT } from "../figma_app/566371";
 import { useSprigWithSampling } from "../905/99656";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { zX } from "../905/576487";
 import { a as _$$a } from "../6658/303587";
@@ -133,9 +133,9 @@ export function $$E2({
         codeConnectId
       }).then(() => {
         let n = "connected" !== row.component.code_connect_info.v1.state;
-        let r = n ? _$$t("dev_handoff.component_browser.removed_ignore_message", {
+        let r = n ? getI18nString("dev_handoff.component_browser.removed_ignore_message", {
           componentName: row.component.name
-        }) : _$$t("dev_handoff.component_browser.disconnected_message", {
+        }) : getI18nString("dev_handoff.component_browser.disconnected_message", {
           componentName: row.component.name
         });
         let s = _$$I(row.component);
@@ -285,7 +285,7 @@ export function $$E2({
         return n;
       });
       A(_$$F.enqueue({
-        message: _$$t("dev_handoff.component_browser.connected_message", {
+        message: getI18nString("dev_handoff.component_browser.connected_message", {
           componentName: row.component.name
         }),
         type: "Connected component"
@@ -404,7 +404,7 @@ export function $$E2({
         return n;
       });
       A(_$$F.enqueue({
-        message: _$$t("dev_handoff.component_browser.updated_message", {
+        message: getI18nString("dev_handoff.component_browser.updated_message", {
           componentName: row.component.name
         })
       }));
@@ -694,20 +694,20 @@ export function $$E2({
           });
         } catch (e) {
           A(_$$F.enqueue({
-            message: ignore ? _$$t("dev_handoff.component_browser.bulk_mapping.selected_components_bell.error_undo_ignored") : _$$t("dev_handoff.component_browser.bulk_mapping.selected_components_bell.error_undo_connected"),
+            message: ignore ? getI18nString("dev_handoff.component_browser.bulk_mapping.selected_components_bell.error_undo_ignored") : getI18nString("dev_handoff.component_browser.bulk_mapping.selected_components_bell.error_undo_connected"),
             error: !0
           }));
         }
       };
       A(_$$F.enqueue({
-        message: ignore ? _$$t("dev_handoff.component_browser.bulk_mapping.selected_components_bell.confirmation_ignored", {
+        message: ignore ? getI18nString("dev_handoff.component_browser.bulk_mapping.selected_components_bell.confirmation_ignored", {
           count: success_count
-        }) : _$$t("dev_handoff.component_browser.bulk_mapping.selected_components_bell.confirmation_connected", {
+        }) : getI18nString("dev_handoff.component_browser.bulk_mapping.selected_components_bell.confirmation_connected", {
           count: success_count
         }),
         icon: zX.CHECK_WITH_CIRCLE,
         button: {
-          text: _$$t("general.undo"),
+          text: getI18nString("general.undo"),
           action: () => {
             i();
           }
@@ -731,7 +731,7 @@ export function $$E2({
         return n;
       });
       A(_$$F.enqueue({
-        message: ignore ? _$$t("dev_handoff.component_browser.bulk_mapping.selected_components_bell.error_ignored") : _$$t("dev_handoff.component_browser.bulk_mapping.selected_components_bell.error_connected"),
+        message: ignore ? getI18nString("dev_handoff.component_browser.bulk_mapping.selected_components_bell.error_ignored") : getI18nString("dev_handoff.component_browser.bulk_mapping.selected_components_bell.error_connected"),
         error: !0
       }));
     });
@@ -809,7 +809,7 @@ export function $$E2({
         entrypoint: e.trackingProps.entrypoint
       });
       A(_$$F.enqueue({
-        message: _$$t("dev_handoff.component_browser.ignored_message", {
+        message: getI18nString("dev_handoff.component_browser.ignored_message", {
           componentName: row.component.name
         }),
         type: "Ignored component"
@@ -1034,7 +1034,7 @@ export function $$E2({
             return n;
           });
           A(_$$F.enqueue({
-            message: _$$t("dev_handoff.component_browser.connected_message", {
+            message: getI18nString("dev_handoff.component_browser.connected_message", {
               componentName: row.component.name
             }),
             type: "Connected component"
@@ -1095,7 +1095,7 @@ export function $$S3({
   let v = useMemo(() => i.findIndex(n => _$$I(n.component) === e), [i, e]);
   let C = useMemo(() => i[v] ?? null, [i, v]);
   let w = bV();
-  let I = md(_$$a);
+  let I = useAtomWithSubscription(_$$a);
   let {
     suggestions,
     searchSessionId,

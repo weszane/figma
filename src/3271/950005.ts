@@ -4,7 +4,7 @@ import { useDispatch } from "../vendor/514228";
 import { N_, u4 } from "../figma_app/637027";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { oB, j7 } from "../905/929976";
 import { y } from "../905/850671";
 import { Um } from "../905/848862";
@@ -93,19 +93,19 @@ export function $$v0({
       children: e ? jsx(m, {}) : jsx(_, {})
     }), jsx("span", {
       className: _$$s.font11.fontNormal.colorTextSecondary.mb4.$,
-      children: e ? tx("community.plugins.no_widgets_created_yet") : tx("community.plugins.no_plugins_created_yet")
+      children: e ? renderI18nText("community.plugins.no_widgets_created_yet") : renderI18nText("community.plugins.no_plugins_created_yet")
     }), e ? jsx(N_, {
       href,
       onClick,
       className: _$$s.font11.fontNormal.noUnderline.inline.$,
       trusted: !0,
-      children: tx("community.plugins.learn_more_about_widget_development")
+      children: renderI18nText("community.plugins.learn_more_about_widget_development")
     }) : jsx(N_, {
       href: _href,
       onClick: _onClick,
       className: _$$s.font11.fontNormal.noUnderline.inline.$,
       trusted: !0,
-      children: tx("community.plugins.learn_more_about_plugin_development")
+      children: renderI18nText("community.plugins.learn_more_about_plugin_development")
     }), jsx(u4, {
       defaultClass: "empty_development_view--buttonWithBorder--zk4QX text--fontPos11--2LvXf text--_fontBase--QdLsd",
       onClick: C,
@@ -116,7 +116,7 @@ export function $$v0({
           svg: _$$A
         }), jsx("div", {
           className: "empty_development_view--buttonContentDisplayText--bCttl",
-          children: tx("community.plugins.new")
+          children: renderI18nText("community.plugins.new")
         }), jsx("div", {
           ref: f,
           children: jsx(B, {

@@ -7,10 +7,10 @@ import { c as _$$c } from "../905/90943";
 import { x as _$$x } from "../905/764527";
 import { l7 } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
-import { eU, fp, Xr, md } from "../figma_app/27355";
+import { atom, useAtomValueAndSetter, Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { Uz } from "../905/63728";
 import { q8 } from "../figma_app/459490";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { A } from "../905/482208";
 import { Y5 } from "../figma_app/455680";
 import { Zr } from "../figma_app/678782";
@@ -39,13 +39,13 @@ let $$O3 = {
   cluster_by_stamp_type: !1,
   open_cluster_by_more_menu: !1
 };
-let $$L7 = eU(!1);
-let $$R13 = eU(null);
-let $$D12 = eU(!1);
-let $$M10 = eU(!1);
+let $$L7 = atom(!1);
+let $$R13 = atom(null);
+let $$D12 = atom(!1);
+let $$M10 = atom(!1);
 export function $$P9() {
   let e = $$F5();
-  let [t, i] = fp($$M10);
+  let [t, i] = useAtomValueAndSetter($$M10);
   let r = Xr($$D12);
   return useCallback(() => {
     e();
@@ -54,8 +54,8 @@ export function $$P9() {
   }, [e, i, r]);
 }
 export function $$F5() {
-  let [e, t] = fp($$R13);
-  let [i, r] = fp($$L7);
+  let [e, t] = useAtomValueAndSetter($$R13);
+  let [i, r] = useAtomValueAndSetter($$L7);
   return useCallback(() => {
     t(null);
     r(!1);
@@ -92,10 +92,10 @@ export function $$G11() {
   n && i.push({
     type: "summarize",
     disabled: !a || t,
-    displayText: _$$t("whiteboard.inline_menu.ai_quick_actions_summarize_button"),
+    displayText: getI18nString("whiteboard.inline_menu.ai_quick_actions_summarize_button"),
     svgSrc: _$$A,
     fplIcon: jsx(O, {}),
-    disabledTooltipText: _$$t("whiteboard.inline_menu.ai_quick_actions_summarize_disabled_tooltip", {
+    disabledTooltipText: getI18nString("whiteboard.inline_menu.ai_quick_actions_summarize_disabled_tooltip", {
       minSelectedStickies: 2
     }),
     tooltipOverrides: t ? E : void 0,
@@ -126,10 +126,10 @@ export function $$G11() {
   c && i.push({
     type: "create_figma_slides_outline",
     disabled: t,
-    displayText: _$$t("whiteboard.inline_menu.ai_quick_actions_create_slides_outline"),
+    displayText: getI18nString("whiteboard.inline_menu.ai_quick_actions_create_slides_outline"),
     svgSrc: _$$A2,
     fplIcon: jsx(_$$x, {}),
-    disabledTooltipText: _$$t("whiteboard.inline_menu.ai_quick_actions_create_slides_outline_disabled_tooltip", {
+    disabledTooltipText: getI18nString("whiteboard.inline_menu.ai_quick_actions_create_slides_outline_disabled_tooltip", {
       minSelectedStickies: 2
     }),
     tooltipOverrides: t ? E : void 0,
@@ -144,7 +144,7 @@ export function $$K6() {
     if (e) return [];
     let i = !!getFeatureFlags().figjam_synthesize_handbrake;
     let r = [];
-    let n = _$$t("whiteboard.inline_menu.ai_quick_actions_sort_stickies_disabled_tooltip", {
+    let n = getI18nString("whiteboard.inline_menu.ai_quick_actions_sort_stickies_disabled_tooltip", {
       minSelectedStickies: 2
     });
     let a = {
@@ -154,7 +154,7 @@ export function $$K6() {
     r.push({
       type: "cluster_by_topic",
       disabled: !t || i,
-      displayText: _$$t("whiteboard.inline_menu.ai_quick_actions_sort_stickies_by_topic_2"),
+      displayText: getI18nString("whiteboard.inline_menu.ai_quick_actions_sort_stickies_by_topic_2"),
       disabledTooltipText: n,
       tooltipOverrides: i ? a : void 0,
       isInClusterSubmenu: !0
@@ -162,7 +162,7 @@ export function $$K6() {
     return r;
   }(), ...function () {
     let e = v1();
-    let t = _$$t("whiteboard.inline_menu.ai_quick_actions_sort_stickies_disabled_tooltip", {
+    let t = getI18nString("whiteboard.inline_menu.ai_quick_actions_sort_stickies_disabled_tooltip", {
       minSelectedStickies: 2
     });
     let i = [];
@@ -170,28 +170,28 @@ export function $$K6() {
       type: "cluster_by_color",
       disabled: !e,
       isInClusterSubmenu: !0,
-      displayText: _$$t("whiteboard.inline_menu.ai_quick_actions_sort_stickies_by_color_2"),
+      displayText: getI18nString("whiteboard.inline_menu.ai_quick_actions_sort_stickies_by_color_2"),
       disabledTooltipText: t
     });
     i.push({
       type: "cluster_by_author",
       disabled: !e,
       isInClusterSubmenu: !0,
-      displayText: _$$t("whiteboard.inline_menu.ai_quick_actions_sort_stickies_by_author_2"),
+      displayText: getI18nString("whiteboard.inline_menu.ai_quick_actions_sort_stickies_by_author_2"),
       disabledTooltipText: t
     });
     i.push({
       type: "cluster_by_stamp_count",
       disabled: !e,
       isInClusterSubmenu: !0,
-      displayText: _$$t("whiteboard.inline_menu.ai_quick_actions_sort_stickies_by_stamp_count_2"),
+      displayText: getI18nString("whiteboard.inline_menu.ai_quick_actions_sort_stickies_by_stamp_count_2"),
       disabledTooltipText: t
     });
     i.push({
       type: "cluster_by_stamp_type",
       disabled: !e,
       isInClusterSubmenu: !0,
-      displayText: _$$t("whiteboard.inline_menu.ai_quick_actions_sort_stickies_by_stamp_type_2"),
+      displayText: getI18nString("whiteboard.inline_menu.ai_quick_actions_sort_stickies_by_stamp_type_2"),
       disabledTooltipText: t
     });
     return i;
@@ -201,7 +201,7 @@ export function $$H0() {
   return !!$$G11().find(e => e?.type === "summarize" || e?.type === "cluster_by_topic" || e?.type === "open_cluster_by_more_menu");
 }
 export function $$z4() {
-  let e = md(_$$f2).positionRelativeToSelection;
+  let e = useAtomWithSubscription(_$$f2).positionRelativeToSelection;
   let {
     summarizeCanvasSelection
   } = ss(e, void 0, "INLINE_TOOLBAR");
@@ -269,9 +269,9 @@ export function $$z4() {
   };
 }
 export function $$V14() {
-  let [e, t] = fp($$L7);
-  let [i, r] = fp($$R13);
-  let [n, a] = fp($$D12);
+  let [e, t] = useAtomValueAndSetter($$L7);
+  let [i, r] = useAtomValueAndSetter($$R13);
+  let [n, a] = useAtomValueAndSetter($$D12);
   let s = $$K6();
   let o = $$z4();
   return (a, l) => {

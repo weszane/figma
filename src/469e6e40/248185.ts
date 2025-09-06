@@ -5,7 +5,7 @@ import { Y, M } from "../905/830372";
 import { sf } from "../905/929976";
 import { _6 } from "../figma_app/386952";
 import { throwTypeError } from "../figma_app/465776";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { V0, rj, m2 } from "../figma_app/858344";
 import { f, r as _$$r } from "../905/136283";
 export function $$$$m0({
@@ -43,13 +43,13 @@ export function $$$$m0({
         tabName: function (e) {
           switch (e) {
             case m2.TEAMS:
-              return _$$t("workspace_admin_tab.teams");
+              return getI18nString("workspace_admin_tab.teams");
             case m2.MEMBERS:
-              return _$$t("workspace_admin_tab.members");
+              return getI18nString("workspace_admin_tab.members");
             case m2.LIBRARIES:
-              return _$$t("workspace_admin_tab.libraries");
+              return getI18nString("workspace_admin_tab.libraries");
             case m2.SETTINGS:
-              return _$$t("workspace_admin_tab.settings");
+              return getI18nString("workspace_admin_tab.settings");
             default:
               throwTypeError(e);
           }

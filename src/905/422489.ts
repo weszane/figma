@@ -3,7 +3,7 @@ import { miS, qmM, gSS, QOV } from "../figma_app/763686";
 import { r as _$$r } from "../905/249071";
 import { M } from "../905/512402";
 import { getSingletonSceneGraph } from "../905/700578";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { j } from "../905/881708";
 import { HF } from "../figma_app/682945";
 import { Ro, xT, Dv } from "../905/962457";
@@ -546,7 +546,7 @@ let m = class e extends j {
     this.state.element === xT.APPEND && i.renderAppendButton(t, this.state.tableAxis, this.state.mouse);
   }
   shouldRenderAllInactiveElements() {
-    return Ay.isIpad;
+    return BrowserInfo.isIpad;
   }
   render(e, t) {
     let i = this._getOrUpdateTableUI(e);

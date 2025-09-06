@@ -7,14 +7,14 @@ import { Ez5, FAf, lyf, glU, nQ7, NLJ, rcl } from "../figma_app/763686";
 import { n3, IA } from "../905/859698";
 import { dI, fn } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
-import { fp, Xr } from "../figma_app/27355";
+import { useAtomValueAndSetter, Xr } from "../figma_app/27355";
 import { G as _$$G } from "../figma_app/318030";
 import m from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
 import { Uz } from "../905/63728";
 import { k as _$$k2 } from "../905/582200";
 import { V as _$$V } from "../905/506207";
-import { Gq } from "../figma_app/363242";
+import { getI18nState } from "../figma_app/363242";
 import { CA } from "../figma_app/327588";
 import { to } from "../figma_app/828186";
 import { e as _$$e } from "../1528/93111";
@@ -44,7 +44,7 @@ import { iP } from "../figma_app/803054";
 import { s4 } from "../figma_app/276332";
 import { of, Pt, rf } from "../figma_app/806412";
 import { Point } from "../905/736624";
-import { t as _$$t2, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { eE as _$$eE } from "../905/709171";
 import { aY, NT } from "../figma_app/741237";
 import { IW, Gj } from "../figma_app/646357";
@@ -69,7 +69,7 @@ import { Fk } from "../figma_app/167249";
 import { N as _$$N } from "../905/438674";
 import { b as _$$b2 } from "../905/217163";
 import { Zk, fI } from "../figma_app/626177";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { S as _$$S } from "../figma_app/552746";
 import { vq } from "../905/8732";
 import { ft } from "../figma_app/753501";
@@ -84,14 +84,14 @@ import { cJ } from "../905/561485";
 import { G$ } from "../figma_app/159296";
 import { GY, _w } from "../642/435480";
 import { t as _$$t3 } from "../905/150656";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { WN } from "../figma_app/638601";
 import { U as _$$U } from "../905/492359";
 import { D as _$$D } from "../642/26273";
 import { D9 } from "../figma_app/433401";
 import { H as _$$H } from "../figma_app/378458";
-import { m as _$$m } from "../905/717445";
-import { nT } from "../figma_app/53721";
+import { getFilteredFeatureFlags } from "../905/717445";
+import { FEditorType } from "../figma_app/53721";
 import { lY } from "../figma_app/779965";
 import { v2 } from "../1528/88743";
 import { bo } from "../figma_app/447445";
@@ -150,17 +150,17 @@ function ef({
   let N = e => {
     switch (e) {
       case "FILL":
-        return _$$t2("design_systems.create_style.color");
+        return getI18nString("design_systems.create_style.color");
       case "TEXT":
-        return _$$t2("design_systems.create_style.text");
+        return getI18nString("design_systems.create_style.text");
       case "EFFECT":
-        return _$$t2("design_systems.create_style.effect");
+        return getI18nString("design_systems.create_style.effect");
       case "EXPORT":
-        return _$$t2("design_systems.create_style.export");
+        return getI18nString("design_systems.create_style.export");
       case "GRID":
-        return _$$t2("design_systems.create_style.guide");
+        return getI18nString("design_systems.create_style.guide");
       default:
-        return _$$t2("design_systems.create_style.create_new_style_generic");
+        return getI18nString("design_systems.create_style.create_new_style_generic");
     }
   };
   if (!p.styleType) return null;
@@ -179,7 +179,7 @@ function ef({
       type: p.styleType
     }), !styleRef && jsx("div", {
       className: "create_style_modal--errorMessage--8ZpFE",
-      children: tx("design_systems.create_style.an_error_occurred_while_creating_the_style")
+      children: renderI18nText("design_systems.create_style.an_error_occurred_while_creating_the_style")
     }), jsxs(AutoLayout, {
       horizontalAlignItems: f.current ? void 0 : "end",
       verticalAlignItems: "center",
@@ -189,11 +189,11 @@ function ef({
         variant: "link",
         onClick: () => y(!x),
         recordingKey: Pt("createStyleModal", "moreOptions"),
-        children: x ? tx("design_systems.create_style.hide_options") : tx("design_systems.create_style.show_more_options")
+        children: x ? renderI18nText("design_systems.create_style.hide_options") : renderI18nText("design_systems.create_style.show_more_options")
       }), getFeatureFlags().ce_tv_fpl_create_style_modal ? jsx($n, {
         onClick: w,
         disabled: !T || !styleRef,
-        children: tx("design_systems.create_style.create_style")
+        children: renderI18nText("design_systems.create_style.create_style")
       }) : jsx($$, {
         style: {
           justifySelf: "right"
@@ -201,7 +201,7 @@ function ef({
         onClick: w,
         disabled: !T || !styleRef,
         tabIndex: 0,
-        children: tx("design_systems.create_style.create_style")
+        children: renderI18nText("design_systems.create_style.create_style")
       })]
     })]
   });
@@ -298,7 +298,7 @@ function ev({
             newTab: !0,
             href: l,
             trusted: !0,
-            children: tx("fullscreen.properties_panel.go_to_style_definition_to_edit")
+            children: renderI18nText("fullscreen.properties_panel.go_to_style_definition_to_edit")
           })
         })
       })
@@ -346,27 +346,27 @@ function eS({
       title: function (e, t) {
         if (t) switch (e) {
           case "FILL":
-            return _$$t2("design_systems.styles.view_color_style");
+            return getI18nString("design_systems.styles.view_color_style");
           case "TEXT":
-            return _$$t2("design_systems.styles.view_text_style");
+            return getI18nString("design_systems.styles.view_text_style");
           case "EFFECT":
-            return _$$t2("design_systems.styles.view_effect_style");
+            return getI18nString("design_systems.styles.view_effect_style");
           case "GRID":
-            return _$$t2("design_systems.styles.view_guide_style");
+            return getI18nString("design_systems.styles.view_guide_style");
           default:
-            return _$$t2("design_systems.styles.view_style");
+            return getI18nString("design_systems.styles.view_style");
         }
         switch (e) {
           case "FILL":
-            return _$$t2("design_systems.styles.edit_color_style");
+            return getI18nString("design_systems.styles.edit_color_style");
           case "TEXT":
-            return _$$t2("design_systems.styles.edit_text_style");
+            return getI18nString("design_systems.styles.edit_text_style");
           case "EFFECT":
-            return _$$t2("design_systems.styles.edit_effect_style");
+            return getI18nString("design_systems.styles.edit_effect_style");
           case "GRID":
-            return _$$t2("design_systems.styles.edit_guide_style");
+            return getI18nString("design_systems.styles.edit_guide_style");
           default:
-            return _$$t2("design_systems.styles.edit_style");
+            return getI18nString("design_systems.styles.edit_style");
         }
       }(g, _),
       headerSize: "small",
@@ -440,7 +440,7 @@ function eK({
   let h = p8("topLevelMode");
   let m = Um();
   let f = Xo();
-  let [x, y] = fp(_$$j);
+  let [x, y] = useAtomValueAndSetter(_$$j);
   let _ = cJ();
   let b = !!(m || f?.modal);
   let C = rf(l, "mousedown", () => {
@@ -464,7 +464,7 @@ function eK({
     topLevelMode: lyf[h],
     shouldRenderInspectTab: E
   };
-  0 === Children.toArray(t).length && x1("PropertiesPanel", "Rendering empty properties panel", d);
+  0 === Children.toArray(t).length && logError("PropertiesPanel", "Rendering empty properties panel", d);
   let M = _$$k3();
   let P = S && !(u && !v) && !w;
   let L = jsx(_$$S.div, {
@@ -497,77 +497,77 @@ eK.displayName = "PropertiesPanel";
 function eq(e, t) {
   return {
     [FAf.DESIGN]: {
-      label: _$$t2("fullscreen.properties_panel.design"),
+      label: getI18nString("fullscreen.properties_panel.design"),
       tab: FAf.DESIGN,
       className: Mf,
       recordingKey: "designTab",
       analyticsName: "design"
     },
     [FAf.PROTOTYPE]: {
-      label: t ? _$$t2("fullscreen.properties_panel.interactive") : _$$t2("fullscreen.properties_panel.prototype"),
+      label: t ? getI18nString("fullscreen.properties_panel.interactive") : getI18nString("fullscreen.properties_panel.prototype"),
       tab: FAf.PROTOTYPE,
       className: Mf,
       recordingKey: t ? "interactionsTab" : "prototypeTab",
       analyticsName: t ? "interactions" : "prototype"
     },
     [FAf.INSPECT]: {
-      label: _$$t2("fullscreen.properties_panel.properties"),
+      label: getI18nString("fullscreen.properties_panel.properties"),
       tab: FAf.INSPECT,
       className: Mf,
       recordingKey: "inspectTab",
       analyticsName: "inspect"
     },
     [FAf.COMMENT]: {
-      label: _$$t2("fullscreen.properties_panel.comments"),
+      label: getI18nString("fullscreen.properties_panel.comments"),
       tab: FAf.COMMENT,
       className: Mf,
       recordingKey: "commentTab",
       analyticsName: "comment"
     },
     [FAf.EXPORT]: {
-      label: _$$t2("fullscreen.properties_panel.export"),
+      label: getI18nString("fullscreen.properties_panel.export"),
       tab: FAf.EXPORT,
       className: Mf,
       recordingKey: "exportTab",
       analyticsName: "export"
     },
     [FAf.SLIDE]: {
-      label: _$$t2("fullscreen.properties_panel.design"),
+      label: getI18nString("fullscreen.properties_panel.design"),
       tab: FAf.SLIDE,
       className: Mf,
       recordingKey: "designTab",
       analyticsName: "design"
     },
     [FAf.SLIDE_ANIMATION]: {
-      label: _$$t2("slides.properties_panel.animate"),
+      label: getI18nString("slides.properties_panel.animate"),
       tab: FAf.SLIDE_ANIMATION,
       className: Mf,
       recordingKey: "animateTab",
       analyticsName: "animate"
     },
     [FAf.SITE]: {
-      label: _$$t2("fullscreen.properties_panel.design"),
+      label: getI18nString("fullscreen.properties_panel.design"),
       tab: FAf.SITE,
       className: Mf,
       recordingKey: "sitesTab",
       analyticsName: "sites"
     },
     [FAf.DAKOTA]: {
-      label: _$$t2("dakota.properties_panel.dakota_panel.tab_title"),
+      label: getI18nString("dakota.properties_panel.dakota_panel.tab_title"),
       tab: FAf.DAKOTA,
       className: Mf,
       recordingKey: "dakotaTab",
       analyticsName: "dakota"
     },
     [FAf.ILLUSTRATION]: {
-      label: _$$t2("fullscreen.properties_panel.draw"),
+      label: getI18nString("fullscreen.properties_panel.draw"),
       tab: FAf.ILLUSTRATION,
       className: Mf,
       recordingKey: "illustrationTab",
       analyticsName: "illustration"
     },
     [FAf.COOPER]: {
-      label: _$$t2("fullscreen.properties_panel.design"),
+      label: getI18nString("fullscreen.properties_panel.design"),
       tab: FAf.COOPER,
       className: Mf,
       recordingKey: "designTab",
@@ -593,7 +593,7 @@ function eJ({
   let x = useSelector(e => {
     var t;
     t = e.selectedView;
-    return !!_$$m().ce_il_root && "fullscreen" === t.view && t.editorType === nT.Illustration;
+    return !!getFilteredFeatureFlags().ce_il_root && "fullscreen" === t.view && t.editorType === FEditorType.Illustration;
   });
   let y = KH();
   let _ = useMemo(() => Object.keys(y), [y]);
@@ -663,7 +663,7 @@ function eZ({
   let [d,, c] = _$$t3.useManagedTabs(l, a?.tab.toString() ?? "", e => {
     let t = parseInt(e);
     let r = eq(t, u).analyticsName;
-    if (sx("properties-panel-select-tab", {
+    if (trackEventAnalytics("properties-panel-select-tab", {
       tab: r
     }), p === NLJ.SCALE && t === FAf.PROTOTYPE && Y5.triggerAction("set-tool-default"), t === FAf.INSPECT && s) {
       n(rcl.ENTER_INSPECT_MODE);
@@ -954,7 +954,7 @@ let e7 = 500;
 let e9 = function (e) {
   let t = parsePxNumber(e) + 1;
   if (!getFeatureFlags().ui3p_locale_aware_properties_panel) return t;
-  let s = Gq().getPrimaryLocale(!0);
+  let s = getI18nState().getPrimaryLocale(!0);
   for (let e of SupportedLocales) if (s === e) return Math.min(Math.ceil(t * e8[e]), e7);
   return t;
 }(uj0);

@@ -5,10 +5,10 @@ import { c2 } from "../905/382883";
 import { g as _$$g } from "../905/125190";
 import { xae } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { md } from "../figma_app/27355";
-import { sx, az } from "../905/449184";
-import { R as _$$R } from "../905/103090";
-import { t as _$$t } from "../905/303541";
+import { useAtomWithSubscription } from "../figma_app/27355";
+import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
+import { selectWithShallowEqual } from "../905/103090";
+import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { X as _$$X } from "../905/376628";
 import { FP } from "../figma_app/91703";
@@ -37,11 +37,11 @@ function F() {
   };
 }
 export function $$M3(e, t) {
-  let i = md(zK).data;
-  let n = md(Lr(e)).data;
-  let a = md(XM).data;
-  let s = md(pD(e)).data;
-  let o = md(GO).data;
+  let i = useAtomWithSubscription(zK).data;
+  let n = useAtomWithSubscription(Lr(e)).data;
+  let a = useAtomWithSubscription(XM).data;
+  let s = useAtomWithSubscription(pD(e)).data;
+  let o = useAtomWithSubscription(GO).data;
   let l = Nn();
   return useCallback(r => {
     if (e) return n?.[r] ? {
@@ -110,8 +110,8 @@ function j({
       existingSubscription: a
     }));
     let s = t ? "Enabled" : "Disabled";
-    sx("Team Library File " + s);
-    az.trackDefinedMetric("library_preferences_modal.library_subscription_toggle", {
+    trackEventAnalytics("Team Library File " + s);
+    analyticsEventManager.trackDefinedMetric("library_preferences_modal.library_subscription_toggle", {
       designSubscribed: t,
       figjamSubscribed: i,
       slidesSubscribed: n,
@@ -138,7 +138,7 @@ function j({
       userInitiated: !0,
       existingSubscription: o
     }));
-    az.trackDefinedMetric("library_preferences_modal.library_subscription_toggle", {
+    analyticsEventManager.trackDefinedMetric("library_preferences_modal.library_subscription_toggle", {
       designSubscribed: t,
       figjamSubscribed: d,
       slidesSubscribed: c,
@@ -157,7 +157,7 @@ function j({
         userInitiated: !0,
         fileSubscribedLibraryKeys: n
       })), t) {
-        sx("Library File Enabled", {
+        trackEventAnalytics("Library File Enabled", {
           fileKey: r.key,
           fileTeamId: r.team_id,
           fileOrgId: r.parent_org_id,
@@ -171,7 +171,7 @@ function j({
         $N(e.library.publishedByLibraryKey.components, t).length > 0 && e.dispatch(FP({
           tab: xae.ASSETS
         }));
-      } else sx("Library File Disabled", {
+      } else trackEventAnalytics("Library File Disabled", {
         fileKey: r.key,
         fileTeamId: r.team_id,
         fileOrgId: r.parent_org_id,
@@ -195,7 +195,7 @@ export function $$U2({
   let {
     library,
     openFile
-  } = _$$R(H);
+  } = selectWithShallowEqual(H);
   let g = M();
   let f = _$$B(t).data ?? "";
   let _ = useMemo(() => ({
@@ -216,7 +216,7 @@ export function $$U2({
   let [b, v] = useState(!1);
   let I = useCallback(() => {
     i && d(_$$F.enqueue({
-      message: _$$t("design_systems.libraries_modal.contact_a_team_admin")
+      message: getI18nString("design_systems.libraries_modal.contact_a_team_admin")
     }));
   }, [d, i]);
   let C = F();
@@ -247,10 +247,10 @@ export function $$U2({
     let e = U(t);
     return void 0 === e ? !!L(t) : !!e.design;
   }, [t, L, U]);
-  let V = B ? b ? _$$t("design_systems.libraries_modal.remove") : _$$t("design_systems.libraries_modal.added") : _$$t("design_systems.libraries_modal.add_to_file");
-  let G = B ? b ? _$$t("design_systems.libraries_modal.remove_aria_label", {
+  let V = B ? b ? getI18nString("design_systems.libraries_modal.remove") : getI18nString("design_systems.libraries_modal.added") : getI18nString("design_systems.libraries_modal.add_to_file");
+  let G = B ? b ? getI18nString("design_systems.libraries_modal.remove_aria_label", {
     libraryName: f
-  }) : "" : _$$t("design_systems.libraries_modal.add_to_file_aria_label", {
+  }) : "" : getI18nString("design_systems.libraries_modal.add_to_file_aria_label", {
     libraryName: f
   });
   let z = function (e, t, i) {
@@ -329,7 +329,7 @@ export function $$V1({
     library,
     dropdownShown,
     openFile
-  } = _$$R(H);
+  } = selectWithShallowEqual(H);
   let x = $$M3(o, l);
   let S = useMemo(() => x(i), [x, i]);
   let C = useMemo(() => void 0 === S ? [B.Off] : function (e) {
@@ -430,20 +430,20 @@ export function $$V1({
   });
 }
 let G = (e, t) => e ? {
-  format: e => e.designSubscribed ? _$$t("design_systems.libraries_modal.on") : _$$t("design_systems.libraries_modal.off")
+  format: e => e.designSubscribed ? getI18nString("design_systems.libraries_modal.on") : getI18nString("design_systems.libraries_modal.off")
 } : {
-  format: e => e.designSubscribed && e.figjamSubscribed && e.slidesSubscribed && (!t || e.buzzSubscribed) ? _$$t("design_systems.libraries_modal.all_files") : e.designSubscribed ? _$$t("design_systems.libraries_modal.design") : e.figjamSubscribed ? _$$t("design_systems.libraries_modal.fig_jam") : e.slidesSubscribed ? _$$t("design_systems.libraries_modal.slides") : t && e.buzzSubscribed ? _$$t("design_systems.libraries_modal.buzz") : _$$t("design_systems.libraries_modal.off")
+  format: e => e.designSubscribed && e.figjamSubscribed && e.slidesSubscribed && (!t || e.buzzSubscribed) ? getI18nString("design_systems.libraries_modal.all_files") : e.designSubscribed ? getI18nString("design_systems.libraries_modal.design") : e.figjamSubscribed ? getI18nString("design_systems.libraries_modal.fig_jam") : e.slidesSubscribed ? getI18nString("design_systems.libraries_modal.slides") : t && e.buzzSubscribed ? getI18nString("design_systems.libraries_modal.buzz") : getI18nString("design_systems.libraries_modal.off")
 };
 let z = (e, t) => {
   if (!e) return {
     format: e => {
-      if (e.design && e.figjam && e.slides && (!t || e.buzz)) return _$$t("design_systems.libraries_modal.all_files");
-      if (!e.design && !e.figjam && !e.slides && (!t || !e.buzz)) return _$$t("design_systems.libraries_modal.off");
+      if (e.design && e.figjam && e.slides && (!t || e.buzz)) return getI18nString("design_systems.libraries_modal.all_files");
+      if (!e.design && !e.figjam && !e.slides && (!t || !e.buzz)) return getI18nString("design_systems.libraries_modal.off");
       let i = [];
-      e.design && i.push(_$$t("design_systems.libraries_modal.design"));
-      e.figjam && i.push(_$$t("design_systems.libraries_modal.fig_jam"));
-      e.slides && i.push(_$$t("design_systems.libraries_modal.slides"));
-      t && e.buzz && i.push(_$$t("design_systems.libraries_modal.buzz"));
+      e.design && i.push(getI18nString("design_systems.libraries_modal.design"));
+      e.figjam && i.push(getI18nString("design_systems.libraries_modal.fig_jam"));
+      e.slides && i.push(getI18nString("design_systems.libraries_modal.slides"));
+      t && e.buzz && i.push(getI18nString("design_systems.libraries_modal.buzz"));
       return i.join(", ");
     }
   };

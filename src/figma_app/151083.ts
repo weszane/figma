@@ -3,14 +3,14 @@ import { useMemo, useRef, useCallback } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { glU, YnC } from "../figma_app/763686";
 import { l7 } from "../905/189185";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { wm } from "../905/19536";
 import c from "../vendor/128080";
-import { az } from "../905/449184";
-import { R as _$$R } from "../905/103090";
+import { analyticsEventManager } from "../905/449184";
+import { selectWithShallowEqual } from "../905/103090";
 import { Pt } from "../figma_app/806412";
 import { c$, wv } from "../figma_app/236327";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { oB, j7 } from "../905/929976";
 import { to } from "../905/156213";
 import { p9 } from "../figma_app/864723";
@@ -49,7 +49,7 @@ export function $$H1(e) {
   let {
     appModel,
     detachInstanceShortcut
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     appModel: e.mirror.appModel,
     detachInstanceShortcut: c1(e.mirror.appModel.keyboardShortcuts, "detach-instance")
   }));
@@ -76,14 +76,14 @@ export function $$H1(e) {
     }), "SYMBOL_AS_STATE" === restoreType && e.push({
       type: "option",
       value: "restore-symbol-or-state-group",
-      displayText: _$$t("design_systems.instance_panel.restore_variant"),
+      displayText: getI18nString("design_systems.instance_panel.restore_variant"),
       callback: () => {
         Y5.triggerActionInUserEditScope("restore-symbol-or-state-group");
       }
     }), onlyInstances && e.push({
       type: "option",
       value: "detach-instance",
-      displayText: _$$t("fullscreen_actions.detach-instance"),
+      displayText: getI18nString("fullscreen_actions.detach-instance"),
       shortcut: detachInstanceShortcut,
       callback: () => {
         l7.user("detach-instances", () => glU.detachInstances(instanceAndSublayerGUIDs, !0));
@@ -93,7 +93,7 @@ export function $$H1(e) {
     }), e.push({
       type: "option",
       value: "push-changes-to-main",
-      displayText: _$$t("fullscreen_actions.push-changes-to-main"),
+      displayText: getI18nString("fullscreen_actions.push-changes-to-main"),
       callback: () => {
         Y5.triggerActionInUserEditScope("push-changes-to-main");
       }
@@ -108,31 +108,31 @@ export function $$H1(e) {
           displayText: function (e) {
             switch (e) {
               case YnC.OVERRIDES_FOR_LAYER_AND_SUBLAYERS:
-                return _$$t("design_systems.instance_panel.reset_all_changes");
+                return getI18nString("design_systems.instance_panel.reset_all_changes");
               case YnC.EXPORTS:
-                return _$$t("design_systems.instance_panel.reset_exports");
+                return getI18nString("design_systems.instance_panel.reset_exports");
               case YnC.EFFECTS:
-                return _$$t("design_systems.instance_panel.reset_effects");
+                return getI18nString("design_systems.instance_panel.reset_effects");
               case YnC.LAYER:
-                return _$$t("design_systems.instance_panel.reset_others");
+                return getI18nString("design_systems.instance_panel.reset_others");
               case YnC.VISIBLE:
-                return _$$t("design_systems.instance_panel.reset_visibility");
+                return getI18nString("design_systems.instance_panel.reset_visibility");
               case YnC.NAME:
-                return _$$t("design_systems.instance_panel.reset_name");
+                return getI18nString("design_systems.instance_panel.reset_name");
               case YnC.FILL:
-                return _$$t("design_systems.instance_panel.reset_fill");
+                return getI18nString("design_systems.instance_panel.reset_fill");
               case YnC.STROKE:
-                return _$$t("design_systems.instance_panel.reset_stroke");
+                return getI18nString("design_systems.instance_panel.reset_stroke");
               case YnC.TEXT:
-                return _$$t("design_systems.instance_panel.reset_text");
+                return getI18nString("design_systems.instance_panel.reset_text");
               case YnC.TEXT_STYLE:
-                return _$$t("design_systems.instance_panel.reset_text_style");
+                return getI18nString("design_systems.instance_panel.reset_text_style");
               case YnC.SIZE:
-                return _$$t("design_systems.instance_panel.reset_size");
+                return getI18nString("design_systems.instance_panel.reset_size");
               case YnC.PROTOTYPE_INTERACTIONS:
-                return _$$t("design_systems.instance_panel.reset_interactions");
+                return getI18nString("design_systems.instance_panel.reset_interactions");
               case YnC.OVERLAY:
-                return _$$t("design_systems.instance_panel.reset_overlay");
+                return getI18nString("design_systems.instance_panel.reset_overlay");
               case YnC.NUM_VALUES:
             }
             return "";
@@ -146,7 +146,7 @@ export function $$H1(e) {
         e.push({
           type: "option",
           value: "reset-component-prop-assignment",
-          displayText: _$$t("design_systems.instance_panel.reset_property_assignment", {
+          displayText: getI18nString("design_systems.instance_panel.reset_property_assignment", {
             assignmentName: n.name
           }),
           callback: () => {
@@ -161,7 +161,7 @@ export function $$H1(e) {
       e.push({
         type: "option",
         value: YnC.OVERRIDES_FOR_LAYER_AND_SUBLAYERS,
-        displayText: _$$t("design_systems.instance_panel.no_changes_to_reset"),
+        displayText: getI18nString("design_systems.instance_panel.no_changes_to_reset"),
         callback: () => {},
         disabled: !0
       });
@@ -183,14 +183,14 @@ export function $$H1(e) {
         onMouseDown: V,
         svg: _$$A,
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("design_systems.instance_panel.update_available"),
+        "data-tooltip": getI18nString("design_systems.instance_panel.update_available"),
         recordingKey: O
       }) : jsx(YW, {
         onClick: toggleDropdown,
         selected: dropdownShown,
         onMouseDown: V,
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("design_systems.instance_panel.instance_options"),
+        "data-tooltip": getI18nString("design_systems.instance_panel.instance_options"),
         svg: _$$A2,
         recordingKey: O,
         disabled: 0 === v.length
@@ -228,8 +228,8 @@ function W() {
     file_key,
     file_team_id
   } = useSelector(_$$c);
-  let r = md(yV);
-  let n = md(p9);
+  let r = useAtomWithSubscription(yV);
+  let n = useAtomWithSubscription(p9);
   return useMemo(() => ({
     fileKey: file_key,
     fileParentOrgId: r?.parentOrgId?.toString(),
@@ -286,16 +286,16 @@ export function $$Y3(e) {
     needsUpdate && (e.push({
       type: "option",
       value: "update-selected-instance",
-      displayText: _$$t("design_systems.instance_panel.update_selected", {
+      displayText: getI18nString("design_systems.instance_panel.update_selected", {
         numSelectedInstancesToUpdate
       }),
       callback: () => updateIndividualInstances(componentInstanceUpdateInfo, stateInstanceUpdateInfo)
     }), u && e.push({
       type: "option",
       value: "review-instance-update",
-      displayText: _$$t("design_systems.instance_panel.review_update"),
+      displayText: getI18nString("design_systems.instance_panel.review_update"),
       callback: () => {
-        az.trackDefinedEvent("design_systems_analytics.instance_review_update_click", h);
+        analyticsEventManager.trackDefinedEvent("design_systems_analytics.instance_review_update_click", h);
         _();
       }
     }));
@@ -313,7 +313,7 @@ export function $$$2(e) {
       data: {
         guids: e
       }
-    })), az.trackDefinedEvent("design_systems_analytics.instance_update_available_button_click", n));
+    })), analyticsEventManager.trackDefinedEvent("design_systems_analytics.instance_update_available_button_click", n));
   }, [r, t, e, n]);
   return useMemo(() => ({
     dropdownShown: r,

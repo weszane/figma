@@ -1,5 +1,5 @@
-import { eU } from "../figma_app/27355";
-let $$n1 = eU({
+import { atom } from "../figma_app/27355";
+let $$n1 = atom({
   seen_fj_upsell_draft_modal_1: {
     fileKey: void 0,
     sessionId: 0
@@ -25,15 +25,15 @@ let $$n1 = eU({
     sessionId: 0
   }
 });
-let a = eU({
+let a = atom({
   showing: !1,
   userFlag: null
 });
-let s = eU(e => e(a), (e, t, i) => {
+let s = atom(e => e(a), (e, t, i) => {
   t(a, i);
 });
-let $$o0 = eU(e => e(s));
-let $$l2 = eU(null, (e, t, {
+let $$o0 = atom(e => e(s));
+let $$l2 = atom(null, (e, t, {
   showing: i,
   userFlag: r = null
 }) => {

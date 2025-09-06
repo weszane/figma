@@ -2,7 +2,7 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
 import { E as _$$E } from "../905/632989";
 import { RYP } from "../figma_app/763686";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/989956";
 import { TI } from "../905/713722";
 import { DP, yM } from "../905/640017";
@@ -63,7 +63,7 @@ export let $$f1 = forwardRef(function ({
 });
 export function $$$$E0(e) {
   let t = TI.format(e);
-  return _$$t("fullscreen.accessibility.chit_solid", {
+  return getI18nString("fullscreen.accessibility.chit_solid", {
     hexValue: t
   });
 }

@@ -1,8 +1,8 @@
 import { jsx } from "react/jsx-runtime";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { $n } from "../905/521428";
-import { sx } from "../905/449184";
-import { t as _$$t, tx } from "../905/303541";
+import { trackEventAnalytics } from "../905/449184";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { to } from "../905/156213";
 import { WX } from "../figma_app/350203";
 import { Tm } from "../figma_app/740025";
@@ -23,11 +23,11 @@ export function $$h0() {
         "data-tooltip-type": "text",
         "data-tooltip-show-immediately": !0,
         "data-tooltip-tip-align-right": !0,
-        "data-tooltip": _$$t("navbar.navbar.disabled_publish_button_label"),
+        "data-tooltip": getI18nString("navbar.navbar.disabled_publish_button_label"),
         disabled: !0
       }),
       onClick: () => {
-        sx("community_publish_modal", {
+        trackEventAnalytics("community_publish_modal", {
           user: t.id,
           step: WX.OPENED
         });
@@ -39,7 +39,7 @@ export function $$h0() {
         }));
       },
       variant: x,
-      children: tx("navbar.navbar.publish_button_label")
+      children: renderI18nText("navbar.navbar.publish_button_label")
     })
   });
 }

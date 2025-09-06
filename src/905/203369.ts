@@ -4,10 +4,10 @@ import { cZ } from "../figma_app/272902";
 import s from "classnames";
 import { Uz, sC, xH } from "../905/63728";
 import { By } from "../905/777187";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { aH } from "../figma_app/806412";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { _L, mb, ql } from "../905/668764";
 import { LS } from "../figma_app/975811";
 import { jr, W0 } from "../figma_app/896988";
@@ -173,7 +173,7 @@ export class $$I3 extends PureComponent {
   }
   componentDidMount() {
     let e = this.inputRef.current;
-    this.props.autoFocus && (e.select(), Ay.safari && e.focus());
+    this.props.autoFocus && (e.select(), BrowserInfo.safari && e.focus());
   }
   getSnapshotBeforeUpdate(e, t) {
     if (e.property === this.props.property) return !1;
@@ -216,7 +216,7 @@ export class $$I3 extends PureComponent {
     return W0.YES;
   }
   valueForRender() {
-    return null !== this.state.editingValue ? this.state.editingValue : hS(this.props.property) ? null == this.props.property ? "" : this.props.formatter.format(this.props.property) : t("fullscreen.mixed");
+    return null !== this.state.editingValue ? this.state.editingValue : hS(this.props.property) ? null == this.props.property ? "" : this.props.formatter.format(this.props.property) : getI18nString("fullscreen.mixed");
   }
   renderVariablePill() {
     if (!this.shouldHandleVariables()) return null;
@@ -243,7 +243,7 @@ export class $$I3 extends PureComponent {
         },
         "aria-description": this.props.ariaDescription,
         "aria-label": this.props.ariaLabel,
-        autoFocus: !Ay.safari && this.props.autoFocus,
+        autoFocus: !BrowserInfo.safari && this.props.autoFocus,
         className: o()({
           [_$$s.ellipsis.$]: this.props.ellipsis
         }, this.props.className),

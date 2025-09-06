@@ -1,9 +1,9 @@
 import { H } from "react-dom";
-import { Z } from "../vendor/39153";
+import { addBreadcrumb } from "../vendor/39153";
 export function $$a0(e = "react-page") {
   let t = document.getElementById(e);
   if (!t) {
-    Z({
+    addBreadcrumb({
       category: "react-root",
       message: "Failed to find root node",
       data: {

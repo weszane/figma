@@ -2,7 +2,7 @@ import { to } from "../905/156213";
 import { F } from "../905/224";
 import { FViewPermissionType, FPermissionLevelType } from "../figma_app/191312";
 import { Bi } from "../905/652992";
-import { oD } from "../figma_app/53721";
+import { mapEditorTypeToFileType } from "../figma_app/53721";
 import { DV } from "../905/739964";
 export function $$d1(e) {
   let t = {
@@ -19,7 +19,7 @@ export function $$c0(e, t, r) {
     type: DV,
     data: {
       team: r,
-      editorType: oD(t),
+      editorType: mapEditorTypeToFileType(t),
       resource: Bi.PASSWORD_PROTECTION,
       currentPlan: F.Plan.STARTER,
       upsellPlan: F.Plan.PRO

@@ -4,7 +4,7 @@ import { c2 } from "../905/382883";
 import { N } from "../905/438674";
 import { Yx } from "../figma_app/930338";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { tI } from "../figma_app/599327";
 import { Ce } from "../905/156213";
@@ -16,7 +16,7 @@ import { o0 } from "../469e6e40/616503";
 import { MX, cI } from "../figma_app/684446";
 import { vr } from "../figma_app/514043";
 import { xS } from "../figma_app/193867";
-import { GN, RM } from "../905/441038";
+import { UserRole, GroupType } from "../905/441038";
 import { Ju } from "../905/102752";
 import { l as _$$l } from "../figma_app/121794";
 function k(e) {
@@ -30,8 +30,8 @@ function k(e) {
     },
     children: jsx(_$$l, {
       dispatch: t,
-      checkboxText: _$$t("members_table.true_up.freeze_invoice_checkbox_text"),
-      buttonText: _$$t("members_table.true_up.freeze_invoice_button_text"),
+      checkboxText: getI18nString("members_table.true_up.freeze_invoice_checkbox_text"),
+      buttonText: getI18nString("members_table.true_up.freeze_invoice_button_text"),
       onConfirm: () => {
         t(Z({
           licenseQuantities: e.addedQuantities,
@@ -39,14 +39,14 @@ function k(e) {
         }));
         t(Ce());
       },
-      title: _$$t("members_table.true_up.freeze_invoice_checkbox_title"),
+      title: getI18nString("members_table.true_up.freeze_invoice_checkbox_title"),
       disableClickOutsideToHide: !0,
       children: jsxs("div", {
         className: _$$s.lh16.font11.$,
         children: [a && jsxs(Fragment, {
           children: [jsx("p", {
             className: _$$s.mb8.$,
-            children: tx("members_table.true_up.freeze_invoice_billing_group_info")
+            children: renderI18nText("members_table.true_up.freeze_invoice_billing_group_info")
           }), jsx("div", {
             className: _$$s.maxH300.overflowAuto.$,
             children: jsx("ul", {
@@ -97,8 +97,8 @@ export let $$E0 = Ju(function (e) {
     }) => {
       t[a] = xS(e, {
         view: "licenseGroup",
-        subView: GN.ADMIN,
-        selectedTab: RM.MEMBERS,
+        subView: UserRole.ADMIN,
+        selectedTab: GroupType.MEMBERS,
         licenseGroupId: a
       });
     });
@@ -109,7 +109,7 @@ export let $$E0 = Ju(function (e) {
     orgId: e.orgId,
     groupsToReview: m,
     addedQuantities: y,
-    copy: _$$t("org_admin_settings.billing.freeze_invoice_modal.copy", {
+    copy: getI18nString("org_admin_settings.billing.freeze_invoice_modal.copy", {
       date: u,
       amount: l.formatMoney(e.invoice.subtotal, {
         showCents: !1
@@ -119,7 +119,7 @@ export let $$E0 = Ju(function (e) {
     details: jsxs(Fragment, {
       children: [jsx("p", {
         className: _$$s.mt16.mb8.$,
-        children: r ? _$$t("org_admin_settings.billing.freeze_invoice_modal.details_heading.true_up") : _$$t("org_admin_settings.billing.freeze_invoice_modal.details_heading.annual")
+        children: r ? getI18nString("org_admin_settings.billing.freeze_invoice_modal.details_heading.true_up") : getI18nString("org_admin_settings.billing.freeze_invoice_modal.details_heading.annual")
       }), jsx("ul", {
         className: _$$s.ml16.$,
         children: a.sort(AG).map(e => {
@@ -129,10 +129,10 @@ export let $$E0 = Ju(function (e) {
             style: sx.add({
               listStyleType: "disc"
             }).$,
-            children: r ? _$$t("plan_invoices.new_seats_quantity", {
+            children: r ? getI18nString("plan_invoices.new_seats_quantity", {
               quantity: a,
               seatType: t
-            }) : _$$t("plan_invoices.seats_quantity", {
+            }) : getI18nString("plan_invoices.seats_quantity", {
               quantity: a,
               seatType: t
             })

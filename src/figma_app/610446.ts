@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { randomPick, shuffle } from "../figma_app/656233";
 import { getFeatureFlags } from "../905/601108";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 function o() {
   return jsxs("svg", {
     width: "32",
@@ -524,98 +524,98 @@ export function $$F16(e) {
   switch (e) {
     case "weekly_sync":
       return [{
-        title: _$$t("whiteboard.ai_modal.suggestion.icebreaker"),
-        prompt: _$$t("whiteboard.ai_modal.suggestion.icebreaker.prompt")
+        title: getI18nString("whiteboard.ai_modal.suggestion.icebreaker"),
+        prompt: getI18nString("whiteboard.ai_modal.suggestion.icebreaker.prompt")
       }, {
-        title: _$$t("whiteboard.ai_modal.suggestion.agenda"),
-        prompt: _$$t("whiteboard.ai_modal.suggestion.agenda.prompt")
+        title: getI18nString("whiteboard.ai_modal.suggestion.agenda"),
+        prompt: getI18nString("whiteboard.ai_modal.suggestion.agenda.prompt")
       }, {
-        title: _$$t("whiteboard.ai_modal.suggestion.updates"),
-        prompt: _$$t("whiteboard.ai_modal.suggestion.updates.prompt")
+        title: getI18nString("whiteboard.ai_modal.suggestion.updates"),
+        prompt: getI18nString("whiteboard.ai_modal.suggestion.updates.prompt")
       }, {
-        title: _$$t("whiteboard.ai_modal.suggestion.next_steps"),
-        prompt: _$$t("whiteboard.ai_modal.suggestion.next_steps.prompt")
+        title: getI18nString("whiteboard.ai_modal.suggestion.next_steps"),
+        prompt: getI18nString("whiteboard.ai_modal.suggestion.next_steps.prompt")
       }];
     case "plan":
       return [{
-        title: _$$t("whiteboard.ai_modal.suggestion.goals"),
-        prompt: _$$t("whiteboard.ai_modal.suggestion.goals.prompt")
+        title: getI18nString("whiteboard.ai_modal.suggestion.goals"),
+        prompt: getI18nString("whiteboard.ai_modal.suggestion.goals.prompt")
       }, {
-        title: _$$t("whiteboard.ai_modal.suggestion.project_list"),
-        prompt: _$$t("whiteboard.ai_modal.suggestion.plan_project_list.prompt")
+        title: getI18nString("whiteboard.ai_modal.suggestion.project_list"),
+        prompt: getI18nString("whiteboard.ai_modal.suggestion.plan_project_list.prompt")
       }, {
-        title: _$$t("whiteboard.ai_modal.suggestion.next_steps"),
-        prompt: _$$t("whiteboard.ai_modal.suggestion.next_steps.prompt")
+        title: getI18nString("whiteboard.ai_modal.suggestion.next_steps"),
+        prompt: getI18nString("whiteboard.ai_modal.suggestion.next_steps.prompt")
       }];
     case "brainstorm":
       return [{
-        title: _$$t("whiteboard.ai_modal.suggestion.icebreaker"),
-        prompt: _$$t("whiteboard.ai_modal.suggestion.icebreaker.prompt")
+        title: getI18nString("whiteboard.ai_modal.suggestion.icebreaker"),
+        prompt: getI18nString("whiteboard.ai_modal.suggestion.icebreaker.prompt")
       }, {
-        title: _$$t("whiteboard.ai_modal.suggestion.goals"),
-        prompt: _$$t("whiteboard.ai_modal.suggestion.goals.prompt")
+        title: getI18nString("whiteboard.ai_modal.suggestion.goals"),
+        prompt: getI18nString("whiteboard.ai_modal.suggestion.goals.prompt")
       }, {
-        title: _$$t("whiteboard.ai_modal.suggestion.research"),
-        prompt: _$$t("whiteboard.ai_modal.suggestion.research.prompt")
+        title: getI18nString("whiteboard.ai_modal.suggestion.research"),
+        prompt: getI18nString("whiteboard.ai_modal.suggestion.research.prompt")
       }, {
-        title: _$$t("whiteboard.ai_modal.suggestion.next_steps"),
-        prompt: _$$t("whiteboard.ai_modal.suggestion.next_steps.prompt")
+        title: getI18nString("whiteboard.ai_modal.suggestion.next_steps"),
+        prompt: getI18nString("whiteboard.ai_modal.suggestion.next_steps.prompt")
       }];
     case "team_retro":
       return [{
-        title: _$$t("whiteboard.ai_modal.suggestion.agenda"),
-        prompt: _$$t("whiteboard.ai_modal.suggestion.agenda.prompt")
+        title: getI18nString("whiteboard.ai_modal.suggestion.agenda"),
+        prompt: getI18nString("whiteboard.ai_modal.suggestion.agenda.prompt")
       }, {
-        title: _$$t("whiteboard.ai_modal.suggestion.icebreaker"),
-        prompt: _$$t("whiteboard.ai_modal.suggestion.icebreaker.prompt")
+        title: getI18nString("whiteboard.ai_modal.suggestion.icebreaker"),
+        prompt: getI18nString("whiteboard.ai_modal.suggestion.icebreaker.prompt")
       }, {
-        title: _$$t("whiteboard.ai_modal.suggestion.next_steps"),
-        prompt: _$$t("whiteboard.ai_modal.suggestion.next_steps.prompt")
+        title: getI18nString("whiteboard.ai_modal.suggestion.next_steps"),
+        prompt: getI18nString("whiteboard.ai_modal.suggestion.next_steps.prompt")
       }];
     case "1:1":
       return [{
-        title: _$$t("whiteboard.ai_modal.suggestion.agenda"),
-        prompt: _$$t("whiteboard.ai_modal.suggestion.agenda.prompt")
+        title: getI18nString("whiteboard.ai_modal.suggestion.agenda"),
+        prompt: getI18nString("whiteboard.ai_modal.suggestion.agenda.prompt")
       }, {
-        title: _$$t("whiteboard.ai_modal.suggestion.updates"),
-        prompt: _$$t("whiteboard.ai_modal.suggestion.updates.prompt")
+        title: getI18nString("whiteboard.ai_modal.suggestion.updates"),
+        prompt: getI18nString("whiteboard.ai_modal.suggestion.updates.prompt")
       }, {
-        title: _$$t("whiteboard.ai_modal.suggestion.calendar"),
-        prompt: _$$t("whiteboard.ai_modal.suggestion.calendar.prompt")
+        title: getI18nString("whiteboard.ai_modal.suggestion.calendar"),
+        prompt: getI18nString("whiteboard.ai_modal.suggestion.calendar.prompt")
       }];
     case "gantt_chart":
       return [{
-        title: _$$t("whiteboard.ai_modal.suggestion.date_range"),
-        prompt: _$$t("whiteboard.ai_modal.suggestion.date_range.prompt")
+        title: getI18nString("whiteboard.ai_modal.suggestion.date_range"),
+        prompt: getI18nString("whiteboard.ai_modal.suggestion.date_range.prompt")
       }, {
-        title: _$$t("whiteboard.ai_modal.suggestion.project_list"),
-        prompt: _$$t("whiteboard.ai_modal.suggestion.project_list.prompt")
+        title: getI18nString("whiteboard.ai_modal.suggestion.project_list"),
+        prompt: getI18nString("whiteboard.ai_modal.suggestion.project_list.prompt")
       }, {
-        title: _$$t("whiteboard.ai_modal.suggestion.milestones"),
-        prompt: _$$t("whiteboard.ai_modal.suggestion.milestones.prompt")
+        title: getI18nString("whiteboard.ai_modal.suggestion.milestones"),
+        prompt: getI18nString("whiteboard.ai_modal.suggestion.milestones.prompt")
       }];
     case "flow_chart":
       return [{
-        title: _$$t("whiteboard.ai_modal.suggestion.decision_tree"),
-        prompt: _$$t("whiteboard.ai_modal.suggestion.decision_tree.prompt")
+        title: getI18nString("whiteboard.ai_modal.suggestion.decision_tree"),
+        prompt: getI18nString("whiteboard.ai_modal.suggestion.decision_tree.prompt")
       }];
     case "org_chart":
       return [{
-        title: _$$t("whiteboard.ai_modal.suggestion.levels"),
-        prompt: _$$t("whiteboard.ai_modal.suggestion.levels.prompt")
+        title: getI18nString("whiteboard.ai_modal.suggestion.levels"),
+        prompt: getI18nString("whiteboard.ai_modal.suggestion.levels.prompt")
       }, {
-        title: _$$t("whiteboard.ai_modal.suggestion.people"),
-        prompt: _$$t("whiteboard.ai_modal.suggestion.people.prompt")
+        title: getI18nString("whiteboard.ai_modal.suggestion.people"),
+        prompt: getI18nString("whiteboard.ai_modal.suggestion.people.prompt")
       }];
     case "mind_map":
       return [{
-        title: _$$t("whiteboard.ai_modal.suggestion.explore_topics"),
-        prompt: _$$t("whiteboard.ai_modal.suggestion.explore_topics.prompt")
+        title: getI18nString("whiteboard.ai_modal.suggestion.explore_topics"),
+        prompt: getI18nString("whiteboard.ai_modal.suggestion.explore_topics.prompt")
       }];
     case "timeline":
       return [{
-        title: _$$t("whiteboard.ai_modal.suggestion.milestones"),
-        prompt: _$$t("whiteboard.ai_modal.suggestion.milestones.prompt")
+        title: getI18nString("whiteboard.ai_modal.suggestion.milestones"),
+        prompt: getI18nString("whiteboard.ai_modal.suggestion.milestones.prompt")
       }];
     default:
       return [];
@@ -625,54 +625,54 @@ let j = (e, t) => e ? t : [];
 export function $$U14(e, t) {
   if (t) return $$F16(t).filter(t => !e.includes(t.prompt));
   let r = [{
-    title: _$$t("whiteboard.ai_modal.usecase.flow_chart"),
-    prompt: _$$t("whiteboard.ai_modal.usecase.flow_chart.prompt"),
-    keywords: [_$$t("whiteboard.ai_modal.pill.keyword.diagram"), _$$t("whiteboard.ai_modal.pill.keyword.diagrams"), _$$t("whiteboard.ai_modal.pill.keyword.flow"), _$$t("whiteboard.ai_modal.pill.keyword.chart"), _$$t("whiteboard.ai_modal.pill.keyword.flowchart"), _$$t("whiteboard.ai_modal.pill.keyword.userflow"), _$$t("whiteboard.ai_modal.pill.keyword.userjourney"), _$$t("whiteboard.ai_modal.pill.keyword.journey"), _$$t("whiteboard.ai_modal.pill.keyword.process"), _$$t("whiteboard.ai_modal.usecase.flow_chart")],
+    title: getI18nString("whiteboard.ai_modal.usecase.flow_chart"),
+    prompt: getI18nString("whiteboard.ai_modal.usecase.flow_chart.prompt"),
+    keywords: [getI18nString("whiteboard.ai_modal.pill.keyword.diagram"), getI18nString("whiteboard.ai_modal.pill.keyword.diagrams"), getI18nString("whiteboard.ai_modal.pill.keyword.flow"), getI18nString("whiteboard.ai_modal.pill.keyword.chart"), getI18nString("whiteboard.ai_modal.pill.keyword.flowchart"), getI18nString("whiteboard.ai_modal.pill.keyword.userflow"), getI18nString("whiteboard.ai_modal.pill.keyword.userjourney"), getI18nString("whiteboard.ai_modal.pill.keyword.journey"), getI18nString("whiteboard.ai_modal.pill.keyword.process"), getI18nString("whiteboard.ai_modal.usecase.flow_chart")],
     categoryKey: "flow_chart"
   }, ...j($$Z8(), [{
-    title: _$$t("whiteboard.ai_modal.usecase.mind_map"),
-    prompt: _$$t("whiteboard.ai_modal.usecase.mind_map.prompt"),
-    keywords: [_$$t("whiteboard.ai_modal.pill.keyword.options"), _$$t("whiteboard.ai_modal.pill.keyword.ideas"), _$$t("whiteboard.ai_modal.usecase.mind_map"), _$$t("whiteboard.ai_modal.usecase.brainstorm")],
+    title: getI18nString("whiteboard.ai_modal.usecase.mind_map"),
+    prompt: getI18nString("whiteboard.ai_modal.usecase.mind_map.prompt"),
+    keywords: [getI18nString("whiteboard.ai_modal.pill.keyword.options"), getI18nString("whiteboard.ai_modal.pill.keyword.ideas"), getI18nString("whiteboard.ai_modal.usecase.mind_map"), getI18nString("whiteboard.ai_modal.usecase.brainstorm")],
     categoryKey: "mind_map"
   }]), {
-    title: _$$t("whiteboard.ai_modal.usecase.brainstorm"),
-    prompt: _$$t("whiteboard.ai_modal.usecase.brainstorm.prompt"),
-    keywords: [_$$t("whiteboard.ai_modal.usecase.brainstorm")],
+    title: getI18nString("whiteboard.ai_modal.usecase.brainstorm"),
+    prompt: getI18nString("whiteboard.ai_modal.usecase.brainstorm.prompt"),
+    keywords: [getI18nString("whiteboard.ai_modal.usecase.brainstorm")],
     categoryKey: "brainstorm"
   }, ...j(!!getFeatureFlags().figjam_text_to_visual_timeline, [{
-    title: _$$t("whiteboard.ai_modal.usecase.timeline"),
-    prompt: _$$t("whiteboard.ai_modal.usecase.timeline.prompt"),
-    keywords: [_$$t("whiteboard.ai_modal.pill.keyword.schedule"), _$$t("whiteboard.ai_modal.usecase.timeline")],
+    title: getI18nString("whiteboard.ai_modal.usecase.timeline"),
+    prompt: getI18nString("whiteboard.ai_modal.usecase.timeline.prompt"),
+    keywords: [getI18nString("whiteboard.ai_modal.pill.keyword.schedule"), getI18nString("whiteboard.ai_modal.usecase.timeline")],
     categoryKey: "timeline"
   }]), {
-    title: _$$t("whiteboard.ai_modal.usecase.gantt_chart"),
-    prompt: _$$t("whiteboard.ai_modal.usecase.gantt_chart.prompt"),
-    keywords: [_$$t("whiteboard.ai_modal.pill.keyword.diagram"), _$$t("whiteboard.ai_modal.pill.keyword.diagrams"), _$$t("whiteboard.ai_modal.pill.keyword.gantt"), _$$t("whiteboard.ai_modal.pill.keyword.chart"), _$$t("whiteboard.ai_modal.pill.keyword.schedule"), _$$t("whiteboard.ai_modal.usecase.gantt_chart")],
+    title: getI18nString("whiteboard.ai_modal.usecase.gantt_chart"),
+    prompt: getI18nString("whiteboard.ai_modal.usecase.gantt_chart.prompt"),
+    keywords: [getI18nString("whiteboard.ai_modal.pill.keyword.diagram"), getI18nString("whiteboard.ai_modal.pill.keyword.diagrams"), getI18nString("whiteboard.ai_modal.pill.keyword.gantt"), getI18nString("whiteboard.ai_modal.pill.keyword.chart"), getI18nString("whiteboard.ai_modal.pill.keyword.schedule"), getI18nString("whiteboard.ai_modal.usecase.gantt_chart")],
     categoryKey: "gantt_chart"
   }, {
-    title: _$$t("whiteboard.ai_modal.usecase.org_chart"),
-    prompt: _$$t("whiteboard.ai_modal.usecase.org_chart.prompt"),
-    keywords: [_$$t("whiteboard.ai_modal.pill.keyword.diagram"), _$$t("whiteboard.ai_modal.pill.keyword.diagrams"), _$$t("whiteboard.ai_modal.pill.keyword.org"), _$$t("whiteboard.ai_modal.pill.keyword.chart"), _$$t("whiteboard.ai_modal.usecase.org_chart")],
+    title: getI18nString("whiteboard.ai_modal.usecase.org_chart"),
+    prompt: getI18nString("whiteboard.ai_modal.usecase.org_chart.prompt"),
+    keywords: [getI18nString("whiteboard.ai_modal.pill.keyword.diagram"), getI18nString("whiteboard.ai_modal.pill.keyword.diagrams"), getI18nString("whiteboard.ai_modal.pill.keyword.org"), getI18nString("whiteboard.ai_modal.pill.keyword.chart"), getI18nString("whiteboard.ai_modal.usecase.org_chart")],
     categoryKey: "org_chart"
   }, {
-    title: _$$t("whiteboard.ai_modal.usecase.plan"),
-    prompt: _$$t("whiteboard.ai_modal.usecase.plan.prompt"),
-    keywords: [_$$t("whiteboard.ai_modal.usecase.plan")],
+    title: getI18nString("whiteboard.ai_modal.usecase.plan"),
+    prompt: getI18nString("whiteboard.ai_modal.usecase.plan.prompt"),
+    keywords: [getI18nString("whiteboard.ai_modal.usecase.plan")],
     categoryKey: "plan"
   }, {
-    title: _$$t("whiteboard.ai_modal.usecase.1:1"),
-    prompt: _$$t("whiteboard.ai_modal.usecase.1:1.prompt"),
-    keywords: [_$$t("whiteboard.ai_modal.pill.keyword.meeting"), _$$t("whiteboard.ai_modal.pill.keyword.meetings"), _$$t("whiteboard.ai_modal.pill.keyword.1:1s"), _$$t("whiteboard.ai_modal.usecase.1:1")],
+    title: getI18nString("whiteboard.ai_modal.usecase.1:1"),
+    prompt: getI18nString("whiteboard.ai_modal.usecase.1:1.prompt"),
+    keywords: [getI18nString("whiteboard.ai_modal.pill.keyword.meeting"), getI18nString("whiteboard.ai_modal.pill.keyword.meetings"), getI18nString("whiteboard.ai_modal.pill.keyword.1:1s"), getI18nString("whiteboard.ai_modal.usecase.1:1")],
     categoryKey: "1:1"
   }, {
-    title: _$$t("whiteboard.ai_modal.usecase.weekly_sync"),
-    prompt: _$$t("whiteboard.ai_modal.usecase.weekly_sync.prompt"),
-    keywords: [_$$t("whiteboard.ai_modal.pill.keyword.meeting"), _$$t("whiteboard.ai_modal.pill.keyword.meetings"), _$$t("whiteboard.ai_modal.pill.keyword.weekly"), _$$t("whiteboard.ai_modal.pill.keyword.sync"), _$$t("whiteboard.ai_modal.usecase.weekly_sync")],
+    title: getI18nString("whiteboard.ai_modal.usecase.weekly_sync"),
+    prompt: getI18nString("whiteboard.ai_modal.usecase.weekly_sync.prompt"),
+    keywords: [getI18nString("whiteboard.ai_modal.pill.keyword.meeting"), getI18nString("whiteboard.ai_modal.pill.keyword.meetings"), getI18nString("whiteboard.ai_modal.pill.keyword.weekly"), getI18nString("whiteboard.ai_modal.pill.keyword.sync"), getI18nString("whiteboard.ai_modal.usecase.weekly_sync")],
     categoryKey: "weekly_sync"
   }, {
-    title: _$$t("whiteboard.ai_modal.usecase.team_retro"),
-    prompt: _$$t("whiteboard.ai_modal.usecase.team_retro.prompt"),
-    keywords: [_$$t("whiteboard.ai_modal.pill.keyword.meeting"), _$$t("whiteboard.ai_modal.pill.keyword.meetings"), _$$t("whiteboard.ai_modal.pill.keyword.team"), _$$t("whiteboard.ai_modal.pill.keyword.retro"), _$$t("whiteboard.ai_modal.pill.keyword.retrospective"), _$$t("whiteboard.ai_modal.pill.keyword.team_retro"), _$$t("whiteboard.ai_modal.usecase.team_retro")],
+    title: getI18nString("whiteboard.ai_modal.usecase.team_retro"),
+    prompt: getI18nString("whiteboard.ai_modal.usecase.team_retro.prompt"),
+    keywords: [getI18nString("whiteboard.ai_modal.pill.keyword.meeting"), getI18nString("whiteboard.ai_modal.pill.keyword.meetings"), getI18nString("whiteboard.ai_modal.pill.keyword.team"), getI18nString("whiteboard.ai_modal.pill.keyword.retro"), getI18nString("whiteboard.ai_modal.pill.keyword.retrospective"), getI18nString("whiteboard.ai_modal.pill.keyword.team_retro"), getI18nString("whiteboard.ai_modal.usecase.team_retro")],
     categoryKey: "team_retro"
   }];
   if (0 === e.length) return r;
@@ -698,68 +698,68 @@ export function $$G15(e) {
 function V() {
   return {
     brainstorm: [{
-      title: _$$t("whiteboard.ai_modal.suggestion_v2.brainstorm"),
-      subtitle: _$$t("whiteboard.ai_modal.suggestion_v2.brainstorm.subtitle_1"),
+      title: getI18nString("whiteboard.ai_modal.suggestion_v2.brainstorm"),
+      subtitle: getI18nString("whiteboard.ai_modal.suggestion_v2.brainstorm.subtitle_1"),
       useCaseCategory: "brainstorm"
     }, {
-      title: _$$t("whiteboard.ai_modal.suggestion_v2.brainstorm"),
-      subtitle: _$$t("whiteboard.ai_modal.suggestion_v2.brainstorm.subtitle_2"),
+      title: getI18nString("whiteboard.ai_modal.suggestion_v2.brainstorm"),
+      subtitle: getI18nString("whiteboard.ai_modal.suggestion_v2.brainstorm.subtitle_2"),
       useCaseCategory: "brainstorm"
     }, {
-      title: _$$t("whiteboard.ai_modal.suggestion_v2.brainstorm"),
-      subtitle: _$$t("whiteboard.ai_modal.suggestion_v2.brainstorm.subtitle_3"),
+      title: getI18nString("whiteboard.ai_modal.suggestion_v2.brainstorm"),
+      subtitle: getI18nString("whiteboard.ai_modal.suggestion_v2.brainstorm.subtitle_3"),
       useCaseCategory: "brainstorm"
     }],
     weekly_sync: [{
-      title: _$$t("whiteboard.ai_modal.suggestion_v2.weekly_sync"),
-      subtitle: _$$t("whiteboard.ai_modal.suggestion_v2.weekly_sync.subtitle_1"),
+      title: getI18nString("whiteboard.ai_modal.suggestion_v2.weekly_sync"),
+      subtitle: getI18nString("whiteboard.ai_modal.suggestion_v2.weekly_sync.subtitle_1"),
       useCaseCategory: "weekly_sync"
     }, {
-      title: _$$t("whiteboard.ai_modal.suggestion_v2.weekly_sync"),
-      subtitle: _$$t("whiteboard.ai_modal.suggestion_v2.weekly_sync.subtitle_2"),
+      title: getI18nString("whiteboard.ai_modal.suggestion_v2.weekly_sync"),
+      subtitle: getI18nString("whiteboard.ai_modal.suggestion_v2.weekly_sync.subtitle_2"),
       useCaseCategory: "weekly_sync"
     }, {
-      title: _$$t("whiteboard.ai_modal.suggestion_v2.weekly_sync"),
-      subtitle: _$$t("whiteboard.ai_modal.suggestion_v2.weekly_sync.subtitle_3"),
+      title: getI18nString("whiteboard.ai_modal.suggestion_v2.weekly_sync"),
+      subtitle: getI18nString("whiteboard.ai_modal.suggestion_v2.weekly_sync.subtitle_3"),
       useCaseCategory: "weekly_sync"
     }],
     plan: [{
-      title: _$$t("whiteboard.ai_modal.suggestion_v2.plan"),
-      subtitle: _$$t("whiteboard.ai_modal.suggestion_v2.plan.subtitle_1"),
+      title: getI18nString("whiteboard.ai_modal.suggestion_v2.plan"),
+      subtitle: getI18nString("whiteboard.ai_modal.suggestion_v2.plan.subtitle_1"),
       useCaseCategory: "plan"
     }, {
-      title: _$$t("whiteboard.ai_modal.suggestion_v2.plan"),
-      subtitle: _$$t("whiteboard.ai_modal.suggestion_v2.plan.subtitle_2"),
+      title: getI18nString("whiteboard.ai_modal.suggestion_v2.plan"),
+      subtitle: getI18nString("whiteboard.ai_modal.suggestion_v2.plan.subtitle_2"),
       useCaseCategory: "plan"
     }, {
-      title: _$$t("whiteboard.ai_modal.suggestion_v2.plan"),
-      subtitle: _$$t("whiteboard.ai_modal.suggestion_v2.plan.subtitle_3"),
+      title: getI18nString("whiteboard.ai_modal.suggestion_v2.plan"),
+      subtitle: getI18nString("whiteboard.ai_modal.suggestion_v2.plan.subtitle_3"),
       useCaseCategory: "plan"
     }],
     one_on_one: [{
-      title: _$$t("whiteboard.ai_modal.suggestion_v2.1:1"),
-      subtitle: _$$t("whiteboard.ai_modal.suggestion_v2.1:1.subtitle_1"),
+      title: getI18nString("whiteboard.ai_modal.suggestion_v2.1:1"),
+      subtitle: getI18nString("whiteboard.ai_modal.suggestion_v2.1:1.subtitle_1"),
       useCaseCategory: "1:1"
     }, {
-      title: _$$t("whiteboard.ai_modal.suggestion_v2.1:1"),
-      subtitle: _$$t("whiteboard.ai_modal.suggestion_v2.1:1.subtitle_2"),
+      title: getI18nString("whiteboard.ai_modal.suggestion_v2.1:1"),
+      subtitle: getI18nString("whiteboard.ai_modal.suggestion_v2.1:1.subtitle_2"),
       useCaseCategory: "1:1"
     }, {
-      title: _$$t("whiteboard.ai_modal.suggestion_v2.1:1"),
-      subtitle: _$$t("whiteboard.ai_modal.suggestion_v2.1:1.subtitle_3"),
+      title: getI18nString("whiteboard.ai_modal.suggestion_v2.1:1"),
+      subtitle: getI18nString("whiteboard.ai_modal.suggestion_v2.1:1.subtitle_3"),
       useCaseCategory: "1:1"
     }],
     team_retro: [{
-      title: _$$t("whiteboard.ai_modal.suggestion_v2.team_retro"),
-      subtitle: _$$t("whiteboard.ai_modal.suggestion_v2.team_retro.subtitle_1"),
+      title: getI18nString("whiteboard.ai_modal.suggestion_v2.team_retro"),
+      subtitle: getI18nString("whiteboard.ai_modal.suggestion_v2.team_retro.subtitle_1"),
       useCaseCategory: "team_retro"
     }, {
-      title: _$$t("whiteboard.ai_modal.suggestion_v2.team_retro"),
-      subtitle: _$$t("whiteboard.ai_modal.suggestion_v2.team_retro.subtitle_2"),
+      title: getI18nString("whiteboard.ai_modal.suggestion_v2.team_retro"),
+      subtitle: getI18nString("whiteboard.ai_modal.suggestion_v2.team_retro.subtitle_2"),
       useCaseCategory: "team_retro"
     }, {
-      title: _$$t("whiteboard.ai_modal.suggestion_v2.team_retro"),
-      subtitle: _$$t("whiteboard.ai_modal.suggestion_v2.team_retro.subtitle_3"),
+      title: getI18nString("whiteboard.ai_modal.suggestion_v2.team_retro"),
+      subtitle: getI18nString("whiteboard.ai_modal.suggestion_v2.team_retro.subtitle_3"),
       useCaseCategory: "team_retro"
     }]
   };
@@ -767,55 +767,55 @@ function V() {
 function H() {
   return {
     flowchart: [{
-      title: _$$t("whiteboard.ai_modal.suggestion_v2.flowchart"),
-      subtitle: _$$t("whiteboard.ai_modal.suggestion_v2.flowchart.subtitle_1"),
+      title: getI18nString("whiteboard.ai_modal.suggestion_v2.flowchart"),
+      subtitle: getI18nString("whiteboard.ai_modal.suggestion_v2.flowchart.subtitle_1"),
       useCaseCategory: "flow_chart"
     }, {
-      title: _$$t("whiteboard.ai_modal.suggestion_v2.flowchart"),
-      subtitle: _$$t("whiteboard.ai_modal.suggestion_v2.flowchart.subtitle_2"),
+      title: getI18nString("whiteboard.ai_modal.suggestion_v2.flowchart"),
+      subtitle: getI18nString("whiteboard.ai_modal.suggestion_v2.flowchart.subtitle_2"),
       useCaseCategory: "flow_chart"
     }],
     gantt: [{
-      title: _$$t("whiteboard.ai_modal.suggestion_v2.gantt"),
-      subtitle: _$$t("whiteboard.ai_modal.suggestion_v2.gantt.subtitle_1"),
+      title: getI18nString("whiteboard.ai_modal.suggestion_v2.gantt"),
+      subtitle: getI18nString("whiteboard.ai_modal.suggestion_v2.gantt.subtitle_1"),
       useCaseCategory: "gantt_chart"
     }, {
-      title: _$$t("whiteboard.ai_modal.suggestion_v2.gantt"),
-      subtitle: _$$t("whiteboard.ai_modal.suggestion_v2.gantt.subtitle_2"),
+      title: getI18nString("whiteboard.ai_modal.suggestion_v2.gantt"),
+      subtitle: getI18nString("whiteboard.ai_modal.suggestion_v2.gantt.subtitle_2"),
       useCaseCategory: "gantt_chart"
     }],
     orgchart: [{
-      title: _$$t("whiteboard.ai_modal.suggestion_v2.orgchart"),
-      subtitle: _$$t("whiteboard.ai_modal.suggestion_v2.orgchart.subtitle_2"),
+      title: getI18nString("whiteboard.ai_modal.suggestion_v2.orgchart"),
+      subtitle: getI18nString("whiteboard.ai_modal.suggestion_v2.orgchart.subtitle_2"),
       useCaseCategory: "org_chart"
     }],
     ...j($$Z8(), {
       mindmap: [{
-        title: _$$t("whiteboard.ai_modal.suggestion_v2.mind_map"),
-        subtitle: _$$t("whiteboard.ai_modal.suggestion_v2.mind_map.subtitle_1"),
+        title: getI18nString("whiteboard.ai_modal.suggestion_v2.mind_map"),
+        subtitle: getI18nString("whiteboard.ai_modal.suggestion_v2.mind_map.subtitle_1"),
         useCaseCategory: "mind_map"
       }, {
-        title: _$$t("whiteboard.ai_modal.suggestion_v2.mind_map"),
-        subtitle: _$$t("whiteboard.ai_modal.suggestion_v2.mind_map.subtitle_2"),
+        title: getI18nString("whiteboard.ai_modal.suggestion_v2.mind_map"),
+        subtitle: getI18nString("whiteboard.ai_modal.suggestion_v2.mind_map.subtitle_2"),
         useCaseCategory: "mind_map"
       }, {
-        title: _$$t("whiteboard.ai_modal.suggestion_v2.mind_map"),
-        subtitle: _$$t("whiteboard.ai_modal.suggestion_v2.mind_map.subtitle_3"),
+        title: getI18nString("whiteboard.ai_modal.suggestion_v2.mind_map"),
+        subtitle: getI18nString("whiteboard.ai_modal.suggestion_v2.mind_map.subtitle_3"),
         useCaseCategory: "mind_map"
       }]
     }),
     ...j(!!getFeatureFlags().figjam_text_to_visual_timeline, {
       timeline: [{
-        title: _$$t("whiteboard.ai_modal.suggestion_v2.timeline"),
-        subtitle: _$$t("whiteboard.ai_modal.suggestion_v2.timeline.subtitle_1"),
+        title: getI18nString("whiteboard.ai_modal.suggestion_v2.timeline"),
+        subtitle: getI18nString("whiteboard.ai_modal.suggestion_v2.timeline.subtitle_1"),
         useCaseCategory: "timeline"
       }, {
-        title: _$$t("whiteboard.ai_modal.suggestion_v2.timeline"),
-        subtitle: _$$t("whiteboard.ai_modal.suggestion_v2.timeline.subtitle_2"),
+        title: getI18nString("whiteboard.ai_modal.suggestion_v2.timeline"),
+        subtitle: getI18nString("whiteboard.ai_modal.suggestion_v2.timeline.subtitle_2"),
         useCaseCategory: "timeline"
       }, {
-        title: _$$t("whiteboard.ai_modal.suggestion_v2.timeline"),
-        subtitle: _$$t("whiteboard.ai_modal.suggestion_v2.timeline.subtitle_3"),
+        title: getI18nString("whiteboard.ai_modal.suggestion_v2.timeline"),
+        subtitle: getI18nString("whiteboard.ai_modal.suggestion_v2.timeline.subtitle_3"),
         useCaseCategory: "timeline"
       }]
     })
@@ -891,13 +891,13 @@ export function $$K17(e) {
   }
 }
 export function $$Y10(e, t, r = !0) {
-  return r ? `${e} ${t}${_$$t("whiteboard.ai_modal.prompt_builder.period")}` : `${e} ${t}`;
+  return r ? `${e} ${t}${getI18nString("whiteboard.ai_modal.prompt_builder.period")}` : `${e} ${t}`;
 }
 export function $$$22(e) {
   let t = e.trim();
-  let r = _$$t("whiteboard.ai_modal.prompt_builder.period");
+  let r = getI18nString("whiteboard.ai_modal.prompt_builder.period");
   let n = [r, ",", "!", "?"].some(e => e === t.charAt(t.length - 1)) ? "" : r;
-  return `${t}${n} ${_$$t("whiteboard.ai_modal.prompt_builder.add")}`;
+  return `${t}${n} ${getI18nString("whiteboard.ai_modal.prompt_builder.add")}`;
 }
 export function $$X21(e, t) {
   var r;
@@ -905,29 +905,29 @@ export function $$X21(e, t) {
   if (void 0 !== t && e === function (e) {
     switch (e) {
       case "weekly_sync":
-        return _$$t("whiteboard.ai_modal.usecase.weekly_sync.prompt");
+        return getI18nString("whiteboard.ai_modal.usecase.weekly_sync.prompt");
       case "brainstorm":
-        return _$$t("whiteboard.ai_modal.usecase.brainstorm.prompt");
+        return getI18nString("whiteboard.ai_modal.usecase.brainstorm.prompt");
       case "flow_chart":
-        return _$$t("whiteboard.ai_modal.usecase.flow_chart.prompt");
+        return getI18nString("whiteboard.ai_modal.usecase.flow_chart.prompt");
       case "gantt_chart":
-        return _$$t("whiteboard.ai_modal.usecase.gantt_chart.prompt");
+        return getI18nString("whiteboard.ai_modal.usecase.gantt_chart.prompt");
       case "org_chart":
-        return _$$t("whiteboard.ai_modal.usecase.org_chart.prompt");
+        return getI18nString("whiteboard.ai_modal.usecase.org_chart.prompt");
       case "1:1":
-        return _$$t("whiteboard.ai_modal.usecase.1:1.prompt");
+        return getI18nString("whiteboard.ai_modal.usecase.1:1.prompt");
       case "plan":
-        return _$$t("whiteboard.ai_modal.usecase.plan.prompt");
+        return getI18nString("whiteboard.ai_modal.usecase.plan.prompt");
       case "team_retro":
-        return _$$t("whiteboard.ai_modal.usecase.team_retro.prompt");
+        return getI18nString("whiteboard.ai_modal.usecase.team_retro.prompt");
       case "mind_map":
-        return _$$t("whiteboard.ai_modal.usecase.mind_map.prompt");
+        return getI18nString("whiteboard.ai_modal.usecase.mind_map.prompt");
       case "timeline":
-        return _$$t("whiteboard.ai_modal.usecase.timeline.prompt");
+        return getI18nString("whiteboard.ai_modal.usecase.timeline.prompt");
     }
   }(t)) return !0;
   for (let t of Object.values($$Q11())) if (e === $$ee9(t)) return !0;
-  return e.endsWith(`${_$$t("whiteboard.ai_modal.prompt_builder.period")} `) && (r = e.trim(), [$$Y10(_$$t("whiteboard.ai_modal.suggestion_v2.brainstorm"), _$$t("whiteboard.ai_modal.suggestion_v2.brainstorm.subtitle_1")), $$Y10(_$$t("whiteboard.ai_modal.suggestion_v2.brainstorm"), _$$t("whiteboard.ai_modal.suggestion_v2.brainstorm.subtitle_2")), $$Y10(_$$t("whiteboard.ai_modal.suggestion_v2.brainstorm"), _$$t("whiteboard.ai_modal.suggestion_v2.brainstorm.subtitle_3")), $$Y10(_$$t("whiteboard.ai_modal.suggestion_v2.weekly_sync"), _$$t("whiteboard.ai_modal.suggestion_v2.weekly_sync.subtitle_1")), $$Y10(_$$t("whiteboard.ai_modal.suggestion_v2.weekly_sync"), _$$t("whiteboard.ai_modal.suggestion_v2.weekly_sync.subtitle_2")), $$Y10(_$$t("whiteboard.ai_modal.suggestion_v2.weekly_sync"), _$$t("whiteboard.ai_modal.suggestion_v2.weekly_sync.subtitle_3")), $$Y10(_$$t("whiteboard.ai_modal.suggestion_v2.plan"), _$$t("whiteboard.ai_modal.suggestion_v2.plan.subtitle_1")), $$Y10(_$$t("whiteboard.ai_modal.suggestion_v2.plan"), _$$t("whiteboard.ai_modal.suggestion_v2.plan.subtitle_2")), $$Y10(_$$t("whiteboard.ai_modal.suggestion_v2.plan"), _$$t("whiteboard.ai_modal.suggestion_v2.plan.subtitle_3")), $$Y10(_$$t("whiteboard.ai_modal.suggestion_v2.1:1"), _$$t("whiteboard.ai_modal.suggestion_v2.1:1.subtitle_1")), $$Y10(_$$t("whiteboard.ai_modal.suggestion_v2.1:1"), _$$t("whiteboard.ai_modal.suggestion_v2.1:1.subtitle_2")), $$Y10(_$$t("whiteboard.ai_modal.suggestion_v2.1:1"), _$$t("whiteboard.ai_modal.suggestion_v2.1:1.subtitle_3")), $$Y10(_$$t("whiteboard.ai_modal.suggestion_v2.team_retro"), _$$t("whiteboard.ai_modal.suggestion_v2.team_retro.subtitle_1")), $$Y10(_$$t("whiteboard.ai_modal.suggestion_v2.team_retro"), _$$t("whiteboard.ai_modal.suggestion_v2.team_retro.subtitle_2")), $$Y10(_$$t("whiteboard.ai_modal.suggestion_v2.team_retro"), _$$t("whiteboard.ai_modal.suggestion_v2.team_retro.subtitle_3")), $$Y10(_$$t("whiteboard.ai_modal.suggestion_v2.flowchart"), _$$t("whiteboard.ai_modal.suggestion_v2.flowchart.subtitle_1")), $$Y10(_$$t("whiteboard.ai_modal.suggestion_v2.flowchart"), _$$t("whiteboard.ai_modal.suggestion_v2.flowchart.subtitle_2")), $$Y10(_$$t("whiteboard.ai_modal.suggestion_v2.gantt"), _$$t("whiteboard.ai_modal.suggestion_v2.gantt.subtitle_1")), $$Y10(_$$t("whiteboard.ai_modal.suggestion_v2.gantt"), _$$t("whiteboard.ai_modal.suggestion_v2.gantt.subtitle_2")), $$Y10(_$$t("whiteboard.ai_modal.suggestion_v2.orgchart"), _$$t("whiteboard.ai_modal.suggestion_v2.orgchart.subtitle_2")), ...j($$Z8(), [$$Y10(_$$t("whiteboard.ai_modal.suggestion_v2.mind_map"), _$$t("whiteboard.ai_modal.suggestion_v2.mind_map.subtitle_1")), $$Y10(_$$t("whiteboard.ai_modal.suggestion_v2.mind_map"), _$$t("whiteboard.ai_modal.suggestion_v2.mind_map.subtitle_2")), $$Y10(_$$t("whiteboard.ai_modal.suggestion_v2.mind_map"), _$$t("whiteboard.ai_modal.suggestion_v2.mind_map.subtitle_3"))]), ...j(!!getFeatureFlags().figjam_text_to_visual_timeline, [$$Y10(_$$t("whiteboard.ai_modal.suggestion_v2.timeline"), _$$t("whiteboard.ai_modal.suggestion_v2.timeline.subtitle_1")), $$Y10(_$$t("whiteboard.ai_modal.suggestion_v2.timeline"), _$$t("whiteboard.ai_modal.suggestion_v2.timeline.subtitle_2")), $$Y10(_$$t("whiteboard.ai_modal.suggestion_v2.timeline"), _$$t("whiteboard.ai_modal.suggestion_v2.timeline.subtitle_3"))])].includes(r)) && !e.startsWith(_$$t("whiteboard.ai_modal.suggestion_v2.mind_map"));
+  return e.endsWith(`${getI18nString("whiteboard.ai_modal.prompt_builder.period")} `) && (r = e.trim(), [$$Y10(getI18nString("whiteboard.ai_modal.suggestion_v2.brainstorm"), getI18nString("whiteboard.ai_modal.suggestion_v2.brainstorm.subtitle_1")), $$Y10(getI18nString("whiteboard.ai_modal.suggestion_v2.brainstorm"), getI18nString("whiteboard.ai_modal.suggestion_v2.brainstorm.subtitle_2")), $$Y10(getI18nString("whiteboard.ai_modal.suggestion_v2.brainstorm"), getI18nString("whiteboard.ai_modal.suggestion_v2.brainstorm.subtitle_3")), $$Y10(getI18nString("whiteboard.ai_modal.suggestion_v2.weekly_sync"), getI18nString("whiteboard.ai_modal.suggestion_v2.weekly_sync.subtitle_1")), $$Y10(getI18nString("whiteboard.ai_modal.suggestion_v2.weekly_sync"), getI18nString("whiteboard.ai_modal.suggestion_v2.weekly_sync.subtitle_2")), $$Y10(getI18nString("whiteboard.ai_modal.suggestion_v2.weekly_sync"), getI18nString("whiteboard.ai_modal.suggestion_v2.weekly_sync.subtitle_3")), $$Y10(getI18nString("whiteboard.ai_modal.suggestion_v2.plan"), getI18nString("whiteboard.ai_modal.suggestion_v2.plan.subtitle_1")), $$Y10(getI18nString("whiteboard.ai_modal.suggestion_v2.plan"), getI18nString("whiteboard.ai_modal.suggestion_v2.plan.subtitle_2")), $$Y10(getI18nString("whiteboard.ai_modal.suggestion_v2.plan"), getI18nString("whiteboard.ai_modal.suggestion_v2.plan.subtitle_3")), $$Y10(getI18nString("whiteboard.ai_modal.suggestion_v2.1:1"), getI18nString("whiteboard.ai_modal.suggestion_v2.1:1.subtitle_1")), $$Y10(getI18nString("whiteboard.ai_modal.suggestion_v2.1:1"), getI18nString("whiteboard.ai_modal.suggestion_v2.1:1.subtitle_2")), $$Y10(getI18nString("whiteboard.ai_modal.suggestion_v2.1:1"), getI18nString("whiteboard.ai_modal.suggestion_v2.1:1.subtitle_3")), $$Y10(getI18nString("whiteboard.ai_modal.suggestion_v2.team_retro"), getI18nString("whiteboard.ai_modal.suggestion_v2.team_retro.subtitle_1")), $$Y10(getI18nString("whiteboard.ai_modal.suggestion_v2.team_retro"), getI18nString("whiteboard.ai_modal.suggestion_v2.team_retro.subtitle_2")), $$Y10(getI18nString("whiteboard.ai_modal.suggestion_v2.team_retro"), getI18nString("whiteboard.ai_modal.suggestion_v2.team_retro.subtitle_3")), $$Y10(getI18nString("whiteboard.ai_modal.suggestion_v2.flowchart"), getI18nString("whiteboard.ai_modal.suggestion_v2.flowchart.subtitle_1")), $$Y10(getI18nString("whiteboard.ai_modal.suggestion_v2.flowchart"), getI18nString("whiteboard.ai_modal.suggestion_v2.flowchart.subtitle_2")), $$Y10(getI18nString("whiteboard.ai_modal.suggestion_v2.gantt"), getI18nString("whiteboard.ai_modal.suggestion_v2.gantt.subtitle_1")), $$Y10(getI18nString("whiteboard.ai_modal.suggestion_v2.gantt"), getI18nString("whiteboard.ai_modal.suggestion_v2.gantt.subtitle_2")), $$Y10(getI18nString("whiteboard.ai_modal.suggestion_v2.orgchart"), getI18nString("whiteboard.ai_modal.suggestion_v2.orgchart.subtitle_2")), ...j($$Z8(), [$$Y10(getI18nString("whiteboard.ai_modal.suggestion_v2.mind_map"), getI18nString("whiteboard.ai_modal.suggestion_v2.mind_map.subtitle_1")), $$Y10(getI18nString("whiteboard.ai_modal.suggestion_v2.mind_map"), getI18nString("whiteboard.ai_modal.suggestion_v2.mind_map.subtitle_2")), $$Y10(getI18nString("whiteboard.ai_modal.suggestion_v2.mind_map"), getI18nString("whiteboard.ai_modal.suggestion_v2.mind_map.subtitle_3"))]), ...j(!!getFeatureFlags().figjam_text_to_visual_timeline, [$$Y10(getI18nString("whiteboard.ai_modal.suggestion_v2.timeline"), getI18nString("whiteboard.ai_modal.suggestion_v2.timeline.subtitle_1")), $$Y10(getI18nString("whiteboard.ai_modal.suggestion_v2.timeline"), getI18nString("whiteboard.ai_modal.suggestion_v2.timeline.subtitle_2")), $$Y10(getI18nString("whiteboard.ai_modal.suggestion_v2.timeline"), getI18nString("whiteboard.ai_modal.suggestion_v2.timeline.subtitle_3"))])].includes(r)) && !e.startsWith(getI18nString("whiteboard.ai_modal.suggestion_v2.mind_map"));
 }
 export function $$q20() {
   return !!getFeatureFlags().figjam_text_to_visual;
@@ -942,10 +942,10 @@ export function $$Q11() {
   return {
     "Mind map - Road trip": {
       suggestion: [{
-        text: _$$t("whiteboard.community_prompt.suggestion.mind_map"),
+        text: getI18nString("whiteboard.community_prompt.suggestion.mind_map"),
         bold: !0
       }, {
-        text: _$$t("whiteboard.community_prompt.suggestion.mind_map.subtitle_1"),
+        text: getI18nString("whiteboard.community_prompt.suggestion.mind_map.subtitle_1"),
         bold: !1
       }],
       category: "mind_map",
@@ -953,10 +953,10 @@ export function $$Q11() {
     },
     "Timeline - Product": {
       suggestion: [{
-        text: _$$t("whiteboard.community_prompt.suggestion.timeline"),
+        text: getI18nString("whiteboard.community_prompt.suggestion.timeline"),
         bold: !0
       }, {
-        text: _$$t("whiteboard.community_prompt.suggestion.timeline.subtitle_2"),
+        text: getI18nString("whiteboard.community_prompt.suggestion.timeline.subtitle_2"),
         bold: !1
       }],
       category: "timeline",
@@ -964,10 +964,10 @@ export function $$Q11() {
     },
     "Gantt chart - Research": {
       suggestion: [{
-        text: _$$t("whiteboard.community_prompt.suggestion.gantt_chart"),
+        text: getI18nString("whiteboard.community_prompt.suggestion.gantt_chart"),
         bold: !0
       }, {
-        text: _$$t("whiteboard.community_prompt.suggestion.gantt_chart.subtitle_1"),
+        text: getI18nString("whiteboard.community_prompt.suggestion.gantt_chart.subtitle_1"),
         bold: !1
       }],
       category: "gantt_chart",
@@ -975,10 +975,10 @@ export function $$Q11() {
     },
     "Team retro - Eng": {
       suggestion: [{
-        text: _$$t("whiteboard.community_prompt.suggestion.team_retro"),
+        text: getI18nString("whiteboard.community_prompt.suggestion.team_retro"),
         bold: !0
       }, {
-        text: _$$t("whiteboard.community_prompt.suggestion.team_retro.subtitle_1"),
+        text: getI18nString("whiteboard.community_prompt.suggestion.team_retro.subtitle_1"),
         bold: !1
       }],
       category: "team_retro",
@@ -986,10 +986,10 @@ export function $$Q11() {
     },
     "Timeline - Wedding": {
       suggestion: [{
-        text: _$$t("whiteboard.community_prompt.suggestion.timeline"),
+        text: getI18nString("whiteboard.community_prompt.suggestion.timeline"),
         bold: !0
       }, {
-        text: _$$t("whiteboard.community_prompt.suggestion.timeline.subtitle_1"),
+        text: getI18nString("whiteboard.community_prompt.suggestion.timeline.subtitle_1"),
         bold: !1
       }],
       category: "timeline",
@@ -997,10 +997,10 @@ export function $$Q11() {
     },
     "1:1 - Manager": {
       suggestion: [{
-        text: _$$t("whiteboard.community_prompt.suggestion.1:1"),
+        text: getI18nString("whiteboard.community_prompt.suggestion.1:1"),
         bold: !0
       }, {
-        text: _$$t("whiteboard.community_prompt.suggestion.1:1.subtitle_1"),
+        text: getI18nString("whiteboard.community_prompt.suggestion.1:1.subtitle_1"),
         bold: !1
       }],
       category: "1:1",
@@ -1008,10 +1008,10 @@ export function $$Q11() {
     },
     "Org chart - Project": {
       suggestion: [{
-        text: _$$t("whiteboard.community_prompt.suggestion.org_chart"),
+        text: getI18nString("whiteboard.community_prompt.suggestion.org_chart"),
         bold: !0
       }, {
-        text: _$$t("whiteboard.community_prompt.suggestion.org_chart.subtitle_1"),
+        text: getI18nString("whiteboard.community_prompt.suggestion.org_chart.subtitle_1"),
         bold: !1
       }],
       category: "org_chart",
@@ -1019,10 +1019,10 @@ export function $$Q11() {
     },
     "User flow": {
       suggestion: [{
-        text: _$$t("whiteboard.community_prompt.suggestion.user_flow"),
+        text: getI18nString("whiteboard.community_prompt.suggestion.user_flow"),
         bold: !0
       }, {
-        text: _$$t("whiteboard.community_prompt.suggestion.user_flow.subtitle_1"),
+        text: getI18nString("whiteboard.community_prompt.suggestion.user_flow.subtitle_1"),
         bold: !1
       }],
       category: "flow_chart",
@@ -1030,13 +1030,13 @@ export function $$Q11() {
     },
     Brainstorm: {
       suggestion: [{
-        text: _$$t("whiteboard.community_prompt.suggestion.brainstorm.subtitle_1.part_1"),
+        text: getI18nString("whiteboard.community_prompt.suggestion.brainstorm.subtitle_1.part_1"),
         bold: !1
       }, {
-        text: _$$t("whiteboard.community_prompt.suggestion.brainstorm.subtitle_1.part_2"),
+        text: getI18nString("whiteboard.community_prompt.suggestion.brainstorm.subtitle_1.part_2"),
         bold: !0
       }, {
-        text: _$$t("whiteboard.community_prompt.suggestion.brainstorm.subtitle_1.part_3"),
+        text: getI18nString("whiteboard.community_prompt.suggestion.brainstorm.subtitle_1.part_3"),
         bold: !1
       }],
       category: "brainstorm",
@@ -1044,10 +1044,10 @@ export function $$Q11() {
     },
     "Weekly sync": {
       suggestion: [{
-        text: _$$t("whiteboard.community_prompt.suggestion.weekly_sync"),
+        text: getI18nString("whiteboard.community_prompt.suggestion.weekly_sync"),
         bold: !0
       }, {
-        text: _$$t("whiteboard.community_prompt.suggestion.weekly_sync.subtitle_1"),
+        text: getI18nString("whiteboard.community_prompt.suggestion.weekly_sync.subtitle_1"),
         bold: !1
       }],
       category: "weekly_sync",
@@ -1055,10 +1055,10 @@ export function $$Q11() {
     },
     "Process flow": {
       suggestion: [{
-        text: _$$t("whiteboard.community_prompt.suggestion.process_flow"),
+        text: getI18nString("whiteboard.community_prompt.suggestion.process_flow"),
         bold: !0
       }, {
-        text: _$$t("whiteboard.community_prompt.suggestion.process_flow.subtitle_1"),
+        text: getI18nString("whiteboard.community_prompt.suggestion.process_flow.subtitle_1"),
         bold: !1
       }],
       category: "flow_chart",
@@ -1066,10 +1066,10 @@ export function $$Q11() {
     },
     "Family tree": {
       suggestion: [{
-        text: _$$t("whiteboard.community_prompt.suggestion.family_tree"),
+        text: getI18nString("whiteboard.community_prompt.suggestion.family_tree"),
         bold: !0
       }, {
-        text: _$$t("whiteboard.community_prompt.suggestion.family_tree.subtitle_1"),
+        text: getI18nString("whiteboard.community_prompt.suggestion.family_tree.subtitle_1"),
         bold: !1
       }],
       category: "org_chart",

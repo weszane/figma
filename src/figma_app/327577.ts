@@ -1,8 +1,8 @@
 import { debounce } from "../905/915765";
 import { NC } from "../905/17179";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { ce } from "../figma_app/347146";
-import { eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { Ay } from "../905/612521";
 import { S as _$$S } from "../905/539306";
 import { sf } from "../905/929976";
@@ -14,7 +14,7 @@ import { ge } from "../figma_app/349248";
 import { getPermissionsStateMemoized, canMemberOrg } from "../figma_app/642025";
 import { xS } from "../figma_app/193867";
 import { w2 } from "../905/187165";
-import { wN } from "../figma_app/53721";
+import { mapFileTypeToEditorType } from "../figma_app/53721";
 import { ai, f6 } from "../figma_app/915202";
 import { uH, Rx } from "../figma_app/162807";
 import { vj } from "../905/574958";
@@ -33,7 +33,7 @@ let x = nF((e, {
       viewport: t
     }));
     let n = ZG()?.fileKey || selectedView.fileKey;
-    n && eD?.updateViewport(n, t);
+    n && desktopAPIInstance?.updateViewport(n, t);
   }
 });
 let $$N6 = nF(e => {
@@ -79,14 +79,14 @@ let $$R0 = nF((e, t) => {
   e.dispatch(sf({
     view: "fullscreen",
     fileKey: i.key,
-    editorType: wN(i.editor_type ?? FFileType.DESIGN)
+    editorType: mapFileTypeToEditorType(i.editor_type ?? FFileType.DESIGN)
   }));
 });
 let $$L2 = nF(async (e, t, {
   liveStore: r
 }) => {
   let n = await r.fetchFile(t.fileKey);
-  sx("Desktop New Tab Open Recent", {
+  trackEventAnalytics("Desktop New Tab Open Recent", {
     itemType: "prototype",
     fileKey: n.key
   });
@@ -101,14 +101,14 @@ let $$P1 = nF(async (e, t, {
   liveStore: r
 }) => {
   let n = await r.fetchFile(t.fileKey);
-  sx("Desktop New Tab Open Recent", {
+  trackEventAnalytics("Desktop New Tab Open Recent", {
     itemType: "file",
     fileKey: n.key
   });
   e.dispatch(sf({
     view: "fullscreen",
     fileKey: n.key,
-    editorType: wN(n.editor_type ?? FFileType.DESIGN)
+    editorType: mapFileTypeToEditorType(n.editor_type ?? FFileType.DESIGN)
   }));
 });
 let $$D10 = nF((e, t) => {

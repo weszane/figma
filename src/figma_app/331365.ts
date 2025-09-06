@@ -1,7 +1,7 @@
 import { throwTypeError } from "../figma_app/465776";
 import { c2 } from "../905/382883";
-import { eU, zl } from "../figma_app/27355";
-import { az } from "../905/449184";
+import { atom, atomStoreManager } from "../figma_app/27355";
+import { analyticsEventManager } from "../905/449184";
 import { Y3 } from "../figma_app/346422";
 import { $5 } from "../figma_app/504321";
 import { D } from "../905/382895";
@@ -11,9 +11,9 @@ export class $$u1 {
     this.openCodeWindowForNode = e;
     this.setCurrentHighlightedCode = t;
     this._unsubscribes = [];
-    this.selectedElementIdAtom = eU(e => e(this._latestInspectedElementUIEventAtom)?.selectedElement?.figmaFiberId ?? null);
-    this.selectedElementInfoAtom = eU(e => e(this._latestInspectedElementUIEventAtom)?.selectedElement ?? null);
-    this.selectedElementComputedStylesWithLocalEdits = eU(e => {
+    this.selectedElementIdAtom = atom(e => e(this._latestInspectedElementUIEventAtom)?.selectedElement?.figmaFiberId ?? null);
+    this.selectedElementInfoAtom = atom(e => e(this._latestInspectedElementUIEventAtom)?.selectedElement ?? null);
+    this.selectedElementComputedStylesWithLocalEdits = atom(e => {
       let t = e(this.selectedElementInfoAtom);
       if (!t) return {};
       let r = e(this._editedStylesAtom)[t.figmaFiberId];
@@ -23,23 +23,23 @@ export class $$u1 {
       } : t.computedStyles;
     });
     this.selectedElementsClassToStyles = new Map();
-    this.hasPopoverOpenAtom = eU(!1);
+    this.hasPopoverOpenAtom = atom(!1);
     this._bundledSourceCode = null;
     this.sourceCodeOffsetRemapper = new E();
     this.codeFileNodeIdsWithRecentlyAddedImageAssetImports = new Set();
-    this._directManipulationEnabledAtom = eU(!1);
-    this._latestInspectedElementUIEventAtom = eU(null);
-    this._editingSnippetAtom = eU({
+    this._directManipulationEnabledAtom = atom(!1);
+    this._latestInspectedElementUIEventAtom = atom(null);
+    this._editingSnippetAtom = atom({
       snippet: null,
       isLoading: !0
     });
-    this._editedStylesAtom = eU({});
+    this._editedStylesAtom = atom({});
     this.flowAnalytics = null;
     this.selectedElementAnalytics = null;
-    this._unsubscribes.push(zl.sub(this.selectedElementIdAtom, () => {
+    this._unsubscribes.push(atomStoreManager.sub(this.selectedElementIdAtom, () => {
       this.selectedElementIdChanged();
     }));
-    this._unsubscribes.push(zl.sub(this._directManipulationEnabledAtom, () => {
+    this._unsubscribes.push(atomStoreManager.sub(this._directManipulationEnabledAtom, () => {
       this.enabledChanged();
     }));
   }
@@ -51,7 +51,7 @@ export class $$u1 {
     return this._directManipulationEnabledAtom;
   }
   directManipulationEnabled() {
-    return zl.get(this._directManipulationEnabledAtom);
+    return atomStoreManager.get(this._directManipulationEnabledAtom);
   }
   get latestInspectedElementUIEvent() {
     return this._latestInspectedElementUIEventAtom;
@@ -67,18 +67,18 @@ export class $$u1 {
   }
   async getCachedOrFetchCodeSnippets(e) {
     if (e) {
-      let e = zl.get(this._editingSnippetAtom)?.snippet;
+      let e = atomStoreManager.get(this._editingSnippetAtom)?.snippet;
       if (e) return [e];
     }
     let t = await this.fetchNewCodeSnippets();
     return t ? [t] : null;
   }
   async fetchNewCodeSnippets() {
-    let e = zl.get(this.selectedElementInfoAtom);
-    let t = zl.get(this.latestInspectedElementUIEvent)?.codeBuildId;
+    let e = atomStoreManager.get(this.selectedElementInfoAtom);
+    let t = atomStoreManager.get(this.latestInspectedElementUIEvent)?.codeBuildId;
     let r = this._bundledSourceCode;
     if (!e || !t || !r) {
-      zl.set(this._editingSnippetAtom, {
+      atomStoreManager.set(this._editingSnippetAtom, {
         snippet: null,
         isLoading: !1
       });
@@ -88,7 +88,7 @@ export class $$u1 {
     for (let i of e.elementAndParentSources) {
       let e = this.sourceCodeOffsetRemapper.translateBundledSourceCodeToCurrentCodeFileOffsets(i, t, r);
       if (!e) {
-        zl.set(this._editingSnippetAtom, {
+        atomStoreManager.set(this._editingSnippetAtom, {
           snippet: null,
           isLoading: !1
         });
@@ -96,14 +96,14 @@ export class $$u1 {
       }
       n.push(e);
     }
-    zl.set(this._editingSnippetAtom, e => ({
+    atomStoreManager.set(this._editingSnippetAtom, e => ({
       ...e,
       isLoading: !0
     }));
     let i = await Y3(n);
-    let s = zl.get(this.selectedElementInfoAtom);
+    let s = atomStoreManager.get(this.selectedElementInfoAtom);
     if ((s?.figmaFiberId ?? null) !== e.figmaFiberId) return null;
-    if (zl.set(this._editingSnippetAtom, {
+    if (atomStoreManager.set(this._editingSnippetAtom, {
       snippet: i,
       isLoading: !1
     }), s && this.selectedElementAnalytics) {
@@ -114,16 +114,16 @@ export class $$u1 {
     return i;
   }
   addLocalComputedStyleEditToSelectedNodes(e) {
-    let t = zl.get(this.selectedElementIdAtom);
-    t && zl.set(this._editedStylesAtom, r => {
+    let t = atomStoreManager.get(this.selectedElementIdAtom);
+    t && atomStoreManager.set(this._editedStylesAtom, r => {
       let n = structuredClone(r);
       for (let r of (n[t] = {}, e)) for (let e of r.cssRules) for (let r of e.propertiesExpandedFromShorthand.length > 0 ? e.propertiesExpandedFromShorthand : [e.property]) n[t][r] = e.computedStylesValue;
       return n;
     });
   }
   clearLocalComputedStyleEditForSelectedNodes(e) {
-    let t = zl.get(this.selectedElementIdAtom);
-    t && zl.set(this._editedStylesAtom, r => {
+    let t = atomStoreManager.get(this.selectedElementIdAtom);
+    t && atomStoreManager.set(this._editedStylesAtom, r => {
       let n = structuredClone(r);
       let i = n[t];
       if (!i) return r;
@@ -136,17 +136,17 @@ export class $$u1 {
   }
   processEvent(e, t) {
     if (this._bundledSourceCode = t, "elementChanged" === e.type) {
-      if (zl.set(this._directManipulationEnabledAtom, !0), zl.set(this._latestInspectedElementUIEventAtom, t => this.memoizeEventPieces(e, t)), e.selectedElement) for (let t of e.selectedElement.classToStyles) this.selectedElementsClassToStyles.set(t.className, t);
-    } else "enabledChanged" === e.type ? (zl.set(this._directManipulationEnabledAtom, e.enabled), e.enabled || zl.set(this._latestInspectedElementUIEventAtom, null)) : throwTypeError(e);
+      if (atomStoreManager.set(this._directManipulationEnabledAtom, !0), atomStoreManager.set(this._latestInspectedElementUIEventAtom, t => this.memoizeEventPieces(e, t)), e.selectedElement) for (let t of e.selectedElement.classToStyles) this.selectedElementsClassToStyles.set(t.className, t);
+    } else "enabledChanged" === e.type ? (atomStoreManager.set(this._directManipulationEnabledAtom, e.enabled), e.enabled || atomStoreManager.set(this._latestInspectedElementUIEventAtom, null)) : throwTypeError(e);
   }
   selectedElementIdChanged() {
-    let e = zl.get(this.selectedElementIdAtom);
+    let e = atomStoreManager.get(this.selectedElementIdAtom);
     let t = null !== e;
-    if (this.selectedElementsClassToStyles.clear(), zl.set(this._editingSnippetAtom, {
+    if (this.selectedElementsClassToStyles.clear(), atomStoreManager.set(this._editingSnippetAtom, {
       snippet: null,
       isLoading: t
     }), t && this.fetchNewCodeSnippets(), this.selectedElementAnalytics && (this.fireAnalyticsEventSelectionEnded(this.selectedElementAnalytics, this.getOrCreateFlowAnalytics()), this.selectedElementAnalytics = null), e) {
-      let t = zl.get(this.selectedElementInfoAtom);
+      let t = atomStoreManager.get(this.selectedElementInfoAtom);
       t && (this.selectedElementAnalytics = {
         elementId: e,
         elementIdForAnalytics: `${e}_${this.getOrCreateFlowAnalytics().flowId}`,
@@ -161,10 +161,10 @@ export class $$u1 {
     }
   }
   enabledChanged() {
-    this.directManipulationEnabled() ? this.getOrCreateFlowAnalytics() : (this.flowAnalytics && (this.selectedElementAnalytics && (this.fireAnalyticsEventSelectionEnded(this.selectedElementAnalytics, this.flowAnalytics), this.selectedElementAnalytics = null), this.fireAnalyticsEventFlowFinished(this.flowAnalytics), this.flowAnalytics = null), zl.set(this._editedStylesAtom, {}));
+    this.directManipulationEnabled() ? this.getOrCreateFlowAnalytics() : (this.flowAnalytics && (this.selectedElementAnalytics && (this.fireAnalyticsEventSelectionEnded(this.selectedElementAnalytics, this.flowAnalytics), this.selectedElementAnalytics = null), this.fireAnalyticsEventFlowFinished(this.flowAnalytics), this.flowAnalytics = null), atomStoreManager.set(this._editedStylesAtom, {}));
   }
   fireAnalyticsEventSelectionEnded(e, t) {
-    az.trackDefinedEvent("sites.point_and_edit.selection_ended", {
+    analyticsEventManager.trackDefinedEvent("sites.point_and_edit.selection_ended", {
       flowId: t.flowId,
       elementId: e.elementIdForAnalytics,
       elementTagName: e.elementTagName,
@@ -183,7 +183,7 @@ export class $$u1 {
     let {
       flowId
     } = this.getOrCreateFlowAnalytics();
-    az.trackDefinedEvent("sites.point_and_edit.property_edited", {
+    analyticsEventManager.trackDefinedEvent("sites.point_and_edit.property_edited", {
       flowId,
       elementId: e.elementIdForAnalytics,
       elementTagName: e.elementId,
@@ -191,7 +191,7 @@ export class $$u1 {
     });
   }
   fireAnalyticsEventFlowFinished(e) {
-    az.trackDefinedEvent("sites.point_and_edit.flow_finished", {
+    analyticsEventManager.trackDefinedEvent("sites.point_and_edit.flow_finished", {
       flowId: e.flowId,
       numberOfSelectedElements: e.numberOfSelectedElements,
       numberOfPropertyEdits: e.numberOfPropertyEdits,
@@ -214,7 +214,7 @@ export class $$u1 {
     this.getOrCreateFlowAnalytics().numberOfGoToSourceClicks++;
   }
   goToSource() {
-    let e = zl.get(this.editingSnippetAtom);
+    let e = atomStoreManager.get(this.editingSnippetAtom);
     let t = e?.snippet;
     t && (this.updateAnalyticsRecordGoToSourceClick(), D(t, this.openCodeWindowForNode, this.setCurrentHighlightedCode));
   }

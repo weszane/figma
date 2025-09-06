@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { am } from "../figma_app/430563";
 import { q5 } from "../figma_app/516028";
 import { t$ } from "../figma_app/646357";
@@ -31,7 +31,7 @@ export function $$p0(e, t) {
   }, [m, e, h, g, p, f]);
   return {
     subscribe: useCallback(() => {
-      h && i && (_(!0), sx("Library File Enabled", {
+      h && i && (_(!0), trackEventAnalytics("Library File Enabled", {
         ...t?.(),
         fileKey: h.key,
         fileTeamId: h.teamId,
@@ -43,7 +43,7 @@ export function $$p0(e, t) {
       }));
     }, [h, _, t, i]),
     unsubscribe: useCallback(() => {
-      h && i && (_(!1), sx("Library File Disabled", {
+      h && i && (_(!1), trackEventAnalytics("Library File Disabled", {
         ...t?.(),
         fileKey: h.key,
         fileTeamId: h.teamId,

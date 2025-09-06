@@ -10,7 +10,7 @@ import { getFeatureFlags } from "../905/601108";
 import { tH, H4 } from "../905/751457";
 import { $z } from "../figma_app/617427";
 import { o as _$$o } from "../905/160095";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
 import { F as _$$F } from "../905/302958";
 import { Y as _$$Y } from "../905/830372";
@@ -69,7 +69,7 @@ export let $$O0 = Ju(function ({
       i();
     }
   });
-  let Y = useMemo(() => F ? null : G ? tx("admin_auto_upgrade_confirmation_modal.body.proration_mechanics") : tx("admin_auto_upgrade_confirmation_modal.body.legacy_mechanics"), [F, G]);
+  let Y = useMemo(() => F ? null : G ? renderI18nText("admin_auto_upgrade_confirmation_modal.body.proration_mechanics") : renderI18nText("admin_auto_upgrade_confirmation_modal.body.legacy_mechanics"), [F, G]);
   if (!V) return null;
   let q = k0(e);
   let $ = jsx(_$$o, {
@@ -82,7 +82,7 @@ export let $$O0 = Ju(function ({
       trackingContext: e0.ADMIN_AUTO_UPGRADE_CONFIRMATION_MODAL,
       trackingDescriptor: _$$c.OTHER_PRODUCTS
     },
-    children: _$$t("admin_auto_upgrade_confirmation_modal.body.other_products")
+    children: getI18nString("admin_auto_upgrade_confirmation_modal.body.other_products")
   });
   let Z = So(e, L, $, M);
   return jsx(tH, {
@@ -93,7 +93,7 @@ export let $$O0 = Ju(function ({
     },
     onError: () => {
       U(_$$F.enqueue({
-        message: _$$t("admin_auto_upgrade_confirmation_modal.error"),
+        message: getI18nString("admin_auto_upgrade_confirmation_modal.error"),
         error: !0
       }));
     },
@@ -135,7 +135,7 @@ export let $$O0 = Ju(function ({
                     trackingDescriptor: _$$c.UPGRADE
                   },
                   trackingOptions: B,
-                  children: tx("auto_upgrade_confirmation_modal.cta_text")
+                  children: renderI18nText("auto_upgrade_confirmation_modal.cta_text")
                 })
               })
             })]

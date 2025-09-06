@@ -1,13 +1,13 @@
 import { useMemo, useCallback } from "react";
-import { Iz, eU, md, Xr } from "../figma_app/27355";
-let a = Iz(() => eU(null));
-let s = Iz(() => eU(new Set()));
+import { createRemovableAtomFamily, atom, useAtomWithSubscription, Xr } from "../figma_app/27355";
+let a = createRemovableAtomFamily(() => atom(null));
+let s = createRemovableAtomFamily(() => atom(new Set()));
 export function $$o1(e) {
-  let t = md(a(e));
+  let t = useAtomWithSubscription(a(e));
   return useMemo(() => t, [t]);
 }
 export function $$l3(e) {
-  return md(s(e));
+  return useAtomWithSubscription(s(e));
 }
 export function $$d0(e) {
   let t = Xr(a(e));

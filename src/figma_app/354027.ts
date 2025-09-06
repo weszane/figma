@@ -1,11 +1,11 @@
 import { shallowEqual } from "../vendor/514228";
 import { throwTypeError, assert, assertNotNullish } from "../figma_app/465776";
 import { XQq, xOL } from "../figma_app/763686";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { L_ } from "../figma_app/349969";
 import { Y5 } from "../figma_app/455680";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { uF } from "../905/748636";
 import { $W, is, BX } from "../figma_app/170018";
 let $$_11 = 16;
@@ -15,7 +15,7 @@ let $$g1 = 104;
 let $$f3 = 20;
 export var $$E8 = (e => (e[e.DEVICE = 0] = "DEVICE", e[e.WEBSITE = 1] = "WEBSITE", e[e.SMALL = 2] = "SMALL", e))($$E8 || {});
 export function $$y12(e) {
-  return "fullscreen" === e.selectedView.view && (e.selectedView.editorType === nT.Design || e.selectedView.editorType === nT.DevHandoff || e.selectedView.editorType === nT.Slides || e.selectedView.editorType === nT.Illustration);
+  return "fullscreen" === e.selectedView.view && (e.selectedView.editorType === FEditorType.Design || e.selectedView.editorType === FEditorType.DevHandoff || e.selectedView.editorType === FEditorType.Slides || e.selectedView.editorType === FEditorType.Illustration);
 }
 let b = 16 / 9;
 let T = (e, t) => {
@@ -225,9 +225,9 @@ export function $$w4(e, t, r) {
   let n = Y5.getViewportInfo();
   e.x > .9 * n.width && t(F.enqueue({
     type: "inline-preview-resize-to-actual-size",
-    message: _$$t("inline_preview.resize_to_actual_size_visual_bell"),
+    message: getI18nString("inline_preview.resize_to_actual_size_visual_bell"),
     button: {
-      text: _$$t("bindings.revert"),
+      text: getI18nString("bindings.revert"),
       editScope: "inline-preview-resize-revert",
       action: r
     },

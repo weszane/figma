@@ -1,10 +1,10 @@
 import { useMemo } from "react";
 import { getSingletonSceneGraph } from "../905/700578";
-import { md, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, Xr } from "../figma_app/27355";
 import s from "../vendor/805353";
 import { TW } from "../905/958097";
 import { g } from "../905/880308";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { rb, Ov, uw, aW, iO, rg, jV, Ue } from "../figma_app/965653";
 import { jD } from "../figma_app/407414";
 var o = s;
@@ -25,7 +25,7 @@ export function $$g0({
     libraryVariableSetIdToSet,
     localVariables,
     libraryVariables
-  } = md(rb({
+  } = useAtomWithSubscription(rb({
     type: s,
     scopes: o
   }));
@@ -55,7 +55,7 @@ export function $$g0({
     return i.length > 0 ? [{
       id: g(),
       type: "LIST_HIERARCHY_PATH",
-      label: _$$t("design_linter.preview.suggested")
+      label: getI18nString("design_linter.preview.suggested")
     }, ...i, {
       id: g(),
       type: "LIST_SEPARATOR"
@@ -131,7 +131,7 @@ export function $$f6({
   let {
     listItems,
     allStyles
-  } = md(Ov);
+  } = useAtomWithSubscription(Ov);
   let s = useMemo(() => {
     let e = {};
     for (let t of allStyles) e[t.node_id] = t;
@@ -162,7 +162,7 @@ export function $$f6({
       listItems: [{
         id: g(),
         type: "LIST_HIERARCHY_PATH",
-        label: _$$t("design_linter.preview.suggested")
+        label: getI18nString("design_linter.preview.suggested")
       }, ...a, {
         id: g(),
         type: "LIST_SEPARATOR"

@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
 import { useDispatch } from "../vendor/514228";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { te } from "../figma_app/275462";
 import { b as _$$b } from "../905/985254";
 import { c as _$$c } from "../905/370443";
@@ -52,19 +52,19 @@ export function $$j0() {
   return jsx(rq, {
     arrowPosition: F_.LEFT_TITLE,
     clickOutsideToHide: !0,
-    description: tx("rcs.visual_assets.drag_visual_assets_description"),
+    description: renderI18nText("rcs.visual_assets.drag_visual_assets_description"),
     disableHighlight: !0,
     isShowing,
     onClose: complete,
     pointToLeftEdge: !0,
     primaryCta: {
-      label: tx("onboarding_pointers.got_it"),
+      label: renderI18nText("onboarding_pointers.got_it"),
       type: "button",
       onClick: complete,
       ctaTrackingDescriptor: _$$c.GOT_IT
     },
     targetKey: ko,
-    title: tx("rcs.visual_assets.drag_visual_assets_title"),
+    title: renderI18nText("rcs.visual_assets.drag_visual_assets_title"),
     trackingContextName: "Visual Assets Search Tooltip",
     userFlagOnShow: fc
   });

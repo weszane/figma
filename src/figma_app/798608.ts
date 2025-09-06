@@ -1,5 +1,5 @@
 import { Ez5, Nfd } from "../figma_app/763686";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { parsePxNumber } from "../figma_app/783094";
 import { Point } from "../905/736624";
 import { _ } from "../figma_app/658134";
@@ -11,7 +11,7 @@ let $$p0 = 8;
 let $$_2 = 12;
 export function $$h1() {
   let e = GQ() + _;
-  let t = md(s0);
+  let t = useAtomWithSubscription(s0);
   let r = J2(Ez5.editorPreferences().renderRulers) && t === Nfd.FILE;
   let h = parsePxNumber(y9S);
   return [new Point((r ? h : 0) + $$p0 + e, (r ? h : 0) + $$_2), {

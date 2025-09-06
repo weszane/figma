@@ -2,9 +2,9 @@ import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { bOM, X3B } from "../figma_app/763686";
 import { fn, sH } from "../905/871411";
-import { zl } from "../figma_app/27355";
-import { xO } from "../905/11";
-import { t as _$$t } from "../905/303541";
+import { atomStoreManager } from "../figma_app/27355";
+import { reportNullOrUndefined } from "../905/11";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { s4 } from "../figma_app/88239";
 import { nF } from "../905/350402";
@@ -25,7 +25,7 @@ export let $$y0 = nF((e, {
   openShareModal: E
 }) => {
   let x = e.getState();
-  xO(_$$e.PROTOTYPING, x.mirror.appModel);
+  reportNullOrUndefined(_$$e.PROTOTYPING, x.mirror.appModel);
   let S = s6(x);
   let w = "" !== i ? bOM.VALID : X3B.currentPagePrototypeStatus();
   if (w !== bOM.VALID) {
@@ -37,10 +37,10 @@ export let $$y0 = nF((e, {
       }
     })), w) {
       case bOM.NO_FRAMES:
-        t = v ? _$$t("proto.status_messages.a_presentation_needs_to_have_at_least_one_slide") : _$$t("proto.status_messages.a_prototype_needs_to_have_at_least_one_frame");
+        t = v ? getI18nString("proto.status_messages.a_presentation_needs_to_have_at_least_one_slide") : getI18nString("proto.status_messages.a_prototype_needs_to_have_at_least_one_frame");
         break;
       case bOM.INVALID_START_NODE:
-        t = _$$t("proto.status_messages.a_prototype_with_connections_needs_a_valid_top_level_frame_as_the_origin");
+        t = getI18nString("proto.status_messages.a_prototype_with_connections_needs_a_valid_top_level_frame_as_the_origin");
         break;
       default:
         throwTypeError(w);
@@ -58,7 +58,7 @@ export let $$y0 = nF((e, {
       e && (t = e);
     }
     fn(sH(t)) || (t = _$$s());
-    zl.set(hg, {
+    atomStoreManager.set(hg, {
       type: "OPEN_INLINE_PREVIEW",
       payload: {
         onOpen: t => {

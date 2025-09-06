@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx, t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { E } from "../905/984674";
 import { X2, Lt } from "../figma_app/808294";
 import { PM, zF } from "../figma_app/45218";
@@ -22,7 +22,7 @@ function p({
     "data-tooltip-show-immediately": !0,
     children: [jsx(E, {
       fontSize: 11,
-      children: tx("community.buyer.in_app_purchases")
+      children: renderI18nText("community.buyer.in_app_purchases")
     }), jsx(B, {
       svg: A,
       className: _$$s.colorIconSecondary.$
@@ -31,7 +31,7 @@ function p({
     "data-testid": "freemium-text",
     children: jsx(E, {
       fontSize: 11,
-      children: tx("community.buyer.in_app_purchases")
+      children: renderI18nText("community.buyer.in_app_purchases")
     })
   });
 }
@@ -42,7 +42,7 @@ function _({
     "data-testid": "free-trial-text",
     children: jsx(E, {
       fontSize: 11,
-      children: tx("community.resource.free_trial_days", {
+      children: renderI18nText("community.resource.free_trial_days", {
         days: e.monetized_resource_metadata.trial_length_in_days
       })
     })
@@ -54,13 +54,13 @@ function h({
   return e ? jsxs("div", {
     "data-testid": "off-platform-text",
     className: _$$s.flex.itemsCenter.gap4.$,
-    "data-tooltip": t("community.detail_view.resource_outside_of_figma"),
+    "data-tooltip": getI18nString("community.detail_view.resource_outside_of_figma"),
     "data-tooltip-type": Ib.TEXT,
     "data-tooltip-show-below": !0,
     "data-tooltip-show-immediately": !0,
     children: [jsx(E, {
       fontSize: 11,
-      children: tx("community.detail_view.third_party_badge.off_platform")
+      children: renderI18nText("community.detail_view.third_party_badge.off_platform")
     }), jsx(B, {
       svg: A,
       className: _$$s.colorIconSecondary.$
@@ -69,7 +69,7 @@ function h({
     "data-testid": "off-platform-text",
     children: jsx(E, {
       fontSize: 11,
-      children: tx("community.detail_view.third_party_badge.off_platform")
+      children: renderI18nText("community.detail_view.third_party_badge.off_platform")
     })
   });
 }

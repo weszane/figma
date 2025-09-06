@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { md, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, Xr } from "../figma_app/27355";
 import { hO, Hl, G4 } from "../figma_app/545293";
 import { CZ, l4 } from "../905/124270";
 import { jN } from "../905/171315";
@@ -13,8 +13,8 @@ import { vj } from "../905/574958";
 import { QB, bN } from "../figma_app/707808";
 import { S } from "../905/417453";
 export function $$_1(e, t, i) {
-  let r = md(Hv);
-  let s = md(CZ);
+  let r = useAtomWithSubscription(Hv);
+  let s = useAtomWithSubscription(CZ);
   let l = $$A0(e, t, i);
   return useCallback((e, t, i, n) => {
     l(e, r, s, t, i, n);
@@ -27,8 +27,8 @@ export function $$A0(e, t, i) {
   let y = Xr(l4(WY.RESOURCE));
   let b = useSelector(e => e.search.sessionId);
   let v = useSelector(e => e.selectedView);
-  let I = md(hO.currentSearchAtom);
-  let E = md(hO.sortByAtom);
+  let I = useAtomWithSubscription(hO.currentSearchAtom);
+  let E = useAtomWithSubscription(hO.sortByAtom);
   return useCallback((n, r, a, o, f, _, x = !1) => {
     if (d(oB()), "fragment_search_modal" === e) {
       if (!I) throw Error("currentFragmentSearch not set");

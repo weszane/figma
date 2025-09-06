@@ -16,7 +16,7 @@ import { $ } from "../vendor/909072";
 import { getFeatureFlags } from "../905/601108";
 import y from "classnames";
 import { zN } from "../905/182598";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { cL, T as _$$T, mH } from "../figma_app/9619";
 import { D as _$$D3, _ as _$$_ } from "../905/122084";
 import { D as _$$D4 } from "../905/819578";
@@ -70,7 +70,7 @@ export function $$L0({
       nodes: cL,
       onError: t => {
         console.error(t);
-        $D(_$$e.EXTENSIBILITY, t, {
+        reportError(_$$e.EXTENSIBILITY, t, {
           extra: {
             htmlString: e
           }
@@ -83,7 +83,7 @@ export function $$L0({
     namespace: b,
     onError(r) {
       console.error(r);
-      $D(_$$e.EXTENSIBILITY, r, {
+      reportError(_$$e.EXTENSIBILITY, r, {
         extra: {
           namespace: b,
           editorInput: "lexical" === t ? e || R : B,

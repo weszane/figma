@@ -1,7 +1,7 @@
 import { RYP } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { B3 } from "../905/709095";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { L, K } from "../905/958077";
 import { l as _$$l } from "../figma_app/773170";
 export let $$d0 = new class {
@@ -21,7 +21,7 @@ export let $$d0 = new class {
           _$$l.setCanvasColorProfile(RYP.DISPLAY_P3);
           break;
         default:
-          x1("color management", "unsupported color space", {
+          logError("color management", "unsupported color space", {
             targetColorSpace: t
           });
       }

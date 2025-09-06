@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo, useState, useEffect } from "react";
 import { E as _$$E } from "../905/53857";
-import { fp } from "../figma_app/27355";
+import { useAtomValueAndSetter } from "../figma_app/27355";
 import { Y } from "../figma_app/515088";
 import { z7, V7 } from "../figma_app/845611";
 if (443 == require.j) {}
@@ -18,7 +18,7 @@ export function $$d0({
   showBillingGroupAdminRequests: g,
   isOrgAdmin: h
 }) {
-  let [x, f] = fp(Y);
+  let [x, f] = useAtomValueAndSetter(Y);
   let v = m || g;
   let b = v ? [d, c, u].toString() : [d, c].toString();
   let y = useMemo(() => JSON.stringify(v ? {

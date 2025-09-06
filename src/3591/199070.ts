@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useDispatch } from "../vendor/514228";
 import { R } from "../3591/975641";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { E } from "../905/984674";
 import { JZ } from "../figma_app/696043";
 import { Pt } from "../figma_app/33586";
@@ -71,7 +71,7 @@ function h({
         }));
       },
       children: jsx(E, {
-        children: tx("universal_insert.locate_local_version_text")
+        children: renderI18nText("universal_insert.locate_local_version_text")
       })
     })
   });

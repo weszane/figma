@@ -7,8 +7,8 @@ import { kh } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { debugState } from "../905/407919";
-import { $D } from "../905/11";
-import { ED } from "../905/714362";
+import { reportError } from "../905/11";
+import { logDebug } from "../905/714362";
 import { hW } from "../figma_app/594947";
 import { Y5 } from "../figma_app/455680";
 import { QZ } from "../figma_app/62612";
@@ -153,7 +153,7 @@ export let $$C1 = async ({
     }));
     return b;
   } catch (e) {
-    e instanceof FI && (ED("Magic Link", JSON.stringify(e.looseNodeInfo)), $D(_$$e.PROTOTYPING, Error(e.toString())));
+    e instanceof FI && (logDebug("Magic Link", JSON.stringify(e.looseNodeInfo)), reportError(_$$e.PROTOTYPING, Error(e.toString())));
     T(Zh({
       name: "prototype.ai_magic_link_completed",
       params: {

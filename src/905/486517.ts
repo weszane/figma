@@ -3,7 +3,7 @@ import { T } from "../905/745591";
 import a from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
 import { uA, Pt } from "../figma_app/806412";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { Hx } from "../figma_app/530167";
 import { Qd } from "../905/380385";
 import { Ro } from "../figma_app/805373";
@@ -27,12 +27,12 @@ class $$E extends uA {
   constructor(e) {
     super(e);
     this.pointerMoved = !1;
-    this.onMentionTypeaheadClick = (e) => {
+    this.onMentionTypeaheadClick = e => {
       this.props.onInsert();
       this.props.setTypeahead(null);
       "profile_handle" in this.props.typeahead.mentions[e] && this.props.dispatch(Hx(this.props.typeahead.mentions[e]));
     };
-    this.placeMention = (e) => {
+    this.placeMention = e => {
       this.props.setTypeahead({
         ...this.props.typeahead,
         index: e
@@ -45,7 +45,7 @@ class $$E extends uA {
         let t = r ?? e.name;
         a = jsx("div", {
           className: b,
-          children: tx("comments.name_and_you", {
+          children: renderI18nText("comments.name_and_you", {
             name: t || ""
           })
         });
@@ -58,7 +58,7 @@ class $$E extends uA {
         children: e.name || r || ""
       });
       let s = null;
-      s = "profile_handle" in e ? `@${e.profile_handle}` : e.id.startsWith("invite-") ? _$$t("comments.invited") : e.email;
+      s = "profile_handle" in e ? `@${e.profile_handle}` : e.id.startsWith("invite-") ? getI18nString("comments.invited") : e.email;
       let o = this.props.getAdditionalMetadata?.(e);
       return jsxs(Hn, {
         className: this.props.isCommunityMentions ? "mentions_typeahead--communityMentionsTypeaheadRow--eL1iz mentions_typeahead--mentionsTypeaheadRow--2EwXX text--fontPos12--YsUAh text--_fontBase--QdLsd" : "mentions_typeahead--mentionsTypeaheadRow--2EwXX",
@@ -108,24 +108,24 @@ class $$E extends uA {
   render() {
     let e = () => this.pointerMoved = !0;
     let t = f6(this.props);
-    if (this.props.typeahead.mentions.some((e) => e.id.startsWith("invite-"))) {
-      let i = this.props.typeahead.mentions.filter((e) => e.id.startsWith("invite-"));
+    if (this.props.typeahead.mentions.some(e => e.id.startsWith("invite-"))) {
+      let i = this.props.typeahead.mentions.filter(e => e.id.startsWith("invite-"));
       let r = this.generateTypeaheadItems(i);
-      let a = this.props.typeahead.mentions.filter((e) => !e.id.startsWith("invite-"));
+      let a = this.props.typeahead.mentions.filter(e => !e.id.startsWith("invite-"));
       let o = this.generateTypeaheadItems(a, r.length);
       let l = jsx("div", {
         className: y,
         style: {
           padding: 6
         },
-        children: tx("comments.invited")
+        children: renderI18nText("comments.invited")
       }, "mentions-typeahead-top-padding-div");
       let c = jsx("div", {
         className: y,
         style: {
           padding: 6
         },
-        children: tx("comments.with_access")
+        children: renderI18nText("comments.with_access")
       }, "mentions-typeahead-bottom-padding-div");
       let p = [];
       r.length > 0 && (p.push(l), p.push(...r));
@@ -169,7 +169,7 @@ class $$E extends uA {
             maxWidth: this.props.width - v
           },
           className: "mentions_typeahead--noMatchesFoundSearchTerm--smkuY",
-          children: [tx("comments.at_mention"), this.props.typeahead.search]
+          children: [renderI18nText("comments.at_mention"), this.props.typeahead.search]
         });
         let t = jsx(T, {
           role: "alert",
@@ -180,7 +180,7 @@ class $$E extends uA {
               style: {
                 maxWidth: this.props.width
               },
-              children: tx("comments.no_users_matched_your_search", {
+              children: renderI18nText("comments.no_users_matched_your_search", {
                 searchQuery: e
               })
             })
@@ -189,7 +189,7 @@ class $$E extends uA {
         l = this.props.isUI3 ? [t] : [a, t, o];
       }
       return jsx(xD, {
-        ariaLabel: _$$t("comments.at_mention_listbox_label"),
+        ariaLabel: getI18nString("comments.at_mention_listbox_label"),
         className: s()({
           [f]: this.props.isCommunityMentions,
           [g]: !this.props.isCommunityMentions,

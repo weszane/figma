@@ -7,8 +7,8 @@ import { ny } from "../figma_app/819458";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { e6 } from "../figma_app/617427";
-import { tx } from "../905/303541";
-import { Gq } from "../figma_app/363242";
+import { renderI18nText } from "../905/303541";
+import { getI18nState } from "../figma_app/363242";
 import { q } from "../905/749058";
 import { UX } from "../figma_app/481749";
 import { Ib } from "../905/129884";
@@ -114,7 +114,7 @@ export function $$w0(e) {
       children: jsx(Ph, {
         trackingEventName: e.label,
         onClick: () => {
-          let t = Gq()?.getPrimaryLocale(!1);
+          let t = getI18nState()?.getPrimaryLocale(!1);
           ny({
             name: e.user.name,
             email: e.user.email
@@ -132,7 +132,7 @@ export function $$w0(e) {
           });
         },
         trusted: !0,
-        children: e.contactSupportCopy ?? tx("settings_tab.contact_support")
+        children: e.contactSupportCopy ?? renderI18nText("settings_tab.contact_support")
       })
     })]
   });

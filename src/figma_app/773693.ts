@@ -3,11 +3,11 @@ import { useDispatch } from "../vendor/514228";
 import { glU, $mk, wzW } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { am } from "../figma_app/901889";
-import { jk } from "../905/609396";
+import { PerfTimer } from "../905/609396";
 import { fF } from "../905/471229";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { zX } from "../905/576487";
 import { Ay } from "../figma_app/432652";
@@ -20,11 +20,11 @@ import { ep, SU } from "../figma_app/101849";
 let I = "ai_expand_mindmap";
 var $$S = (e => (e.LOADING = "ai-expand-mindmap-loading", e.SUCCESS = "ai-expand-mindmap-success", e))($$S || {});
 export function $$v0() {
-  let e = md(_s);
-  let t = md(As);
-  let r = md(ze);
-  let S = md(kS);
-  let v = md(J);
+  let e = useAtomWithSubscription(_s);
+  let t = useAtomWithSubscription(As);
+  let r = useAtomWithSubscription(ze);
+  let S = useAtomWithSubscription(kS);
+  let v = useAtomWithSubscription(J);
   let A = um();
   let x = am();
   let N = useDispatch();
@@ -37,7 +37,7 @@ export function $$v0() {
     fileSeq: v?.toString() || null
   };
   let w = useCallback(() => N(F.enqueue({
-    message: _$$t("whiteboard.ai_expand_mindmap.generic_error")
+    message: getI18nString("whiteboard.ai_expand_mindmap.generic_error")
   })), [N]);
   let O = e => {
     for (let t of e) l7.user("expand-figjam-ai-mindmap", () => {
@@ -58,7 +58,7 @@ export function $$v0() {
       matchType: "ai-expand-mindmap-success"
     }));
     N(F.enqueue({
-      message: _$$t("whiteboard.ai_modal.streaming"),
+      message: getI18nString("whiteboard.ai_modal.streaming"),
       icon: zX.SPINNER,
       type: "ai-expand-mindmap-loading",
       timeoutOverride: 1 / 0
@@ -74,12 +74,12 @@ export function $$v0() {
       let i = l7.user("expand-figjam-ai-mindmap", () => $mk?.expandWithFigjamAiMindmapNodes(n, e) ?? []);
       let o = t.stop();
       i.length ? (N(F.enqueue({
-        message: _$$t("whiteboard.ai_expand_mindmap.generation_success"),
+        message: getI18nString("whiteboard.ai_expand_mindmap.generation_success"),
         type: "ai-expand-mindmap-success",
         button: {
-          text: _$$t("whiteboard.ai_expand_mindmap.retry"),
+          text: getI18nString("whiteboard.ai_expand_mindmap.retry"),
           action: () => {
-            let t = new jk(I, {});
+            let t = new PerfTimer(I, {});
             t.start();
             R(e, t, i);
             return !1;
@@ -114,7 +114,7 @@ export function $$v0() {
   };
   return {
     expandSelectedMindmapNode: () => {
-      let e = new jk(I, {});
+      let e = new PerfTimer(I, {});
       e.start();
       let t = wzW?.getSingleSelectedDiagramNodeId() ?? "";
       let r = function (e, t) {

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { CY } from "../figma_app/637027";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { E } from "../905/984674";
 import { A as _$$A } from "../6828/364616";
@@ -26,8 +26,8 @@ export function $$g0({
     reasoning
   } = function (e, t) {
     if (!e) return {
-      label: _$$t("community.detail_view.unknown_network_access"),
-      description: t ? _$$t("community.detail_view.unspecified_widget_network_access") : _$$t("community.detail_view.unspecified_plugin_network_access"),
+      label: getI18nString("community.detail_view.unknown_network_access"),
+      description: t ? getI18nString("community.detail_view.unspecified_widget_network_access") : getI18nString("community.detail_view.unspecified_plugin_network_access"),
       domains: [],
       reasoning: null
     };
@@ -35,18 +35,18 @@ export function $$g0({
       allowedDomains
     } = e;
     return 1 === allowedDomains.length && "none" === allowedDomains[0] ? {
-      label: _$$t("community.detail_view.no_network_access"),
-      description: t ? _$$t("community.detail_view.no_widget_network_access") : _$$t("community.detail_view.no_plugin_network_access"),
+      label: getI18nString("community.detail_view.no_network_access"),
+      description: t ? getI18nString("community.detail_view.no_widget_network_access") : getI18nString("community.detail_view.no_plugin_network_access"),
       domains: [],
       reasoning: null
     } : allowedDomains.includes("*") ? {
-      label: _$$t("community.detail_view.unrestricted_network_access"),
-      description: t ? _$$t("community.detail_view.unrestricted_widget_network_access") : _$$t("community.detail_view.unrestricted_plugin_network_access"),
+      label: getI18nString("community.detail_view.unrestricted_network_access"),
+      description: t ? getI18nString("community.detail_view.unrestricted_widget_network_access") : getI18nString("community.detail_view.unrestricted_plugin_network_access"),
       domains: [],
       reasoning: e.reasoning ?? null
     } : {
-      label: _$$t("community.detail_view.restricted_network_access"),
-      description: t ? _$$t("community.detail_view.restricted_widget_network_access") : _$$t("community.detail_view.restricted_plugin_network_access"),
+      label: getI18nString("community.detail_view.restricted_network_access"),
+      description: t ? getI18nString("community.detail_view.restricted_widget_network_access") : getI18nString("community.detail_view.restricted_plugin_network_access"),
       domains: allowedDomains,
       reasoning: e.reasoning ?? null
     };
@@ -95,7 +95,7 @@ export function $$g0({
       }), null != reasoning && jsxs("div", {
         children: [jsx(E, {
           fontSize: 11,
-          children: tx("community_detail_view.creators_note")
+          children: renderI18nText("community_detail_view.creators_note")
         }), jsx(E, {
           fontSize: 11,
           children: reasoning
@@ -106,7 +106,7 @@ export function $$g0({
         target: "_blank",
         children: jsx(E, {
           fontSize: 11,
-          children: tx("community_detail_view.learn_more_network_access")
+          children: renderI18nText("community_detail_view.learn_more_network_access")
         })
       })]
     })]

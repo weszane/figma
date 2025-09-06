@@ -2,9 +2,9 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { AD } from "../905/871411";
 import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
-import { md, zl } from "../figma_app/27355";
+import { useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import { IT } from "../figma_app/566371";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { fd } from "../figma_app/255679";
 import { gl } from "../905/216495";
 import { tS, _S } from "../figma_app/516028";
@@ -61,7 +61,7 @@ export function $$b3(e) {
       }), {});
     }
   } catch (e) {
-    "Component set for node has existing errors" !== e.message && $D(_$$e.DEVELOPER_TOOLS, e);
+    "Component set for node has existing errors" !== e.message && reportError(_$$e.DEVELOPER_TOOLS, e);
   }
   return {};
 }
@@ -136,7 +136,7 @@ export function $$S2(e, t, r) {
 export function $$v8(e, t) {
   let r = t.get(e);
   let n = tS();
-  let i = md(_S);
+  let i = useAtomWithSubscription(_S);
   let [d] = IT(J_J({
     key: n ?? ""
   }));
@@ -145,7 +145,7 @@ export function $$v8(e, t) {
     backingLibraryKey
   } = $$S2(e, t, i);
   let g = fd(_$$l(backingLibraryKey ?? ""));
-  let f = zl.get(zV);
+  let f = atomStoreManager.get(zV);
   let E = d.data?.file?.status === "loaded" && !d.data.file?.data?.hasPermission && !g;
   let [y] = IT(yUR({
     libraryKey: backingLibraryKey ?? "",
@@ -189,7 +189,7 @@ export function $$x11({
   try {
     l = JSON.parse(o.figmadoc);
   } catch (e) {
-    $D(_$$e.DEVELOPER_TOOLS, e, {
+    reportError(_$$e.DEVELOPER_TOOLS, e, {
       extra: {
         figmadoc: o.figmadoc
       }
@@ -238,11 +238,11 @@ export function $$N5(e, t, r, i) {
   let u;
   let h = t.get(e);
   let g = tS();
-  let f = md(_S);
+  let f = useAtomWithSubscription(_S);
   let [E] = IT(J_J({
     key: g ?? ""
   }));
-  let y = zl.get(zV);
+  let y = atomStoreManager.get(zV);
   let {
     backingNodeId,
     backingLibraryKey
@@ -251,7 +251,7 @@ export function $$N5(e, t, r, i) {
   let x = $$L6(e, t, g, !!i, f);
   let N = !!backingLibraryKey && function (e, t, r) {
     if (!e || !t) return !1;
-    let n = zl.get(zV);
+    let n = atomStoreManager.get(zV);
     if (!n || !n.docsById || !n.docsById[`key-${e},${t}`]) return !1;
     for (let e of r) if (!n.docsById[`key-${e}`]) return !1;
     return !0;
@@ -336,7 +336,7 @@ export function $$N5(e, t, r, i) {
   try {
     F = JSON.parse(M.figmadoc);
   } catch (e) {
-    $D(_$$e.DEVELOPER_TOOLS, e, {
+    reportError(_$$e.DEVELOPER_TOOLS, e, {
       extra: {
         figmadoc: M.figmadoc
       }

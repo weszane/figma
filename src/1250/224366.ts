@@ -4,7 +4,7 @@ import { w3z, glU } from "../figma_app/763686";
 import { U } from "../figma_app/901889";
 import { sf } from "../905/929976";
 import { _6 } from "../figma_app/386952";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { n0 } from "../figma_app/32128";
 import { VS } from "../1250/506456";
 import { _$, Ep } from "../figma_app/379850";
@@ -26,7 +26,7 @@ export function $$p2(e, t) {
   let n = _6();
   return "fullscreen" === n.view ? {
     ...n,
-    editorType: nT.DevHandoff,
+    editorType: FEditorType.DevHandoff,
     focusViewBackNavigation: {
       toEditorType: n.editorType,
       toOverview: !0
@@ -65,7 +65,7 @@ export function $$h1(e) {
     o && (await u(o));
     n(sf(t));
     let l = "unknown";
-    "fullscreen" === t.view && (w3z.addToSelectionNoAnimation([r]), glU.panToNode(r, !1), l = t.editorType === nT.Design ? "design_canvas" : "dev_mode_canvas");
+    "fullscreen" === t.view && (w3z.addToSelectionNoAnimation([r]), glU.panToNode(r, !1), l = t.editorType === FEditorType.Design ? "design_canvas" : "dev_mode_canvas");
     a(e, {
       target: l,
       nodeId: r

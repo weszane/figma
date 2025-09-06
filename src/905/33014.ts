@@ -4,7 +4,7 @@ import { k as _$$k } from "../905/651849";
 import { Lf } from "../figma_app/637027";
 import { N } from "../905/551536";
 import { B } from "../905/714743";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { h3 } from "../figma_app/831799";
 import { _R } from "../figma_app/314264";
 import { W4, Wg, FB, UA, sf } from "../figma_app/152745";
@@ -32,7 +32,7 @@ export function $$A0({
   canSeeBillingAddressExp: u,
   isBillingAddress: A
 }) {
-  let I = _$$t("pro_cart.payment.state");
+  let I = getI18nString("pro_cart.payment.state");
   let {
     city,
     region,
@@ -42,15 +42,15 @@ export function $$A0({
       case "US":
         return {
           city: {
-            label: _$$t("pro_cart.payment.city"),
+            label: getI18nString("pro_cart.payment.city"),
             trackingFieldName: "US City"
           },
           region: {
-            options: [[_$$t("pro_cart.payment.state"), _$$t("pro_cart.payment.state")], ...W4],
+            options: [[getI18nString("pro_cart.payment.state"), getI18nString("pro_cart.payment.state")], ...W4],
             trackingFieldName: "US State"
           },
           postalCode: {
-            label: _$$t("pro_cart.payment.zip_code"),
+            label: getI18nString("pro_cart.payment.zip_code"),
             trackingFieldName: "US Postal Code",
             maxLength: 5
           }
@@ -58,15 +58,15 @@ export function $$A0({
       case "CA":
         return {
           city: {
-            label: _$$t("pro_cart.payment.city"),
+            label: getI18nString("pro_cart.payment.city"),
             trackingFieldName: "Intl City"
           },
           region: {
-            options: [[_$$t("pro_cart.payment.province"), _$$t("pro_cart.payment.province")], ...Wg],
+            options: [[getI18nString("pro_cart.payment.province"), getI18nString("pro_cart.payment.province")], ...Wg],
             trackingFieldName: "Intl Region"
           },
           postalCode: {
-            label: _$$t("pro_cart.payment.postal_code"),
+            label: getI18nString("pro_cart.payment.postal_code"),
             trackingFieldName: "Intl City",
             maxLength: 7
           }
@@ -74,15 +74,15 @@ export function $$A0({
       case "IN":
         return {
           city: {
-            label: _$$t("pro_cart.payment.city"),
+            label: getI18nString("pro_cart.payment.city"),
             trackingFieldName: "Intl City"
           },
           region: {
-            options: [[_$$t("pro_cart.payment.state"), _$$t("pro_cart.payment.state")], ...FB],
+            options: [[getI18nString("pro_cart.payment.state"), getI18nString("pro_cart.payment.state")], ...FB],
             trackingFieldName: "Intl Region"
           },
           postalCode: {
-            label: _$$t("pro_cart.payment.postal_code"),
+            label: getI18nString("pro_cart.payment.postal_code"),
             trackingFieldName: "Intl Postal Code",
             maxLength: 6
           }
@@ -90,15 +90,15 @@ export function $$A0({
       default:
         return {
           city: {
-            label: _$$t("pro_cart.payment.city_town_or_village"),
+            label: getI18nString("pro_cart.payment.city_town_or_village"),
             trackingFieldName: "Intl City"
           },
           region: {
-            label: _$$t("pro_cart.payment.province_or_region"),
+            label: getI18nString("pro_cart.payment.province_or_region"),
             trackingFieldName: "Intl Region"
           },
           postalCode: {
-            label: _$$t("pro_cart.payment.postal_code"),
+            label: getI18nString("pro_cart.payment.postal_code"),
             trackingFieldName: "Intl City",
             maxLength: 11
           }
@@ -135,8 +135,8 @@ export function $$A0({
   };
   let T = r ?? UA;
   let k = f.has(e.country);
-  let R = _$$t("pro_cart.payment.street_address");
-  u && (R = A ? _$$t("pro_cart.payment.billing_address") : _$$t("pro_cart.payment.shipping_address"));
+  let R = getI18nString("pro_cart.payment.street_address");
+  u && (R = A ? getI18nString("pro_cart.payment.billing_address") : getI18nString("pro_cart.payment.shipping_address"));
   return jsxs("div", {
     id: "address-form-container",
     className: kL,
@@ -144,7 +144,7 @@ export function $$A0({
       autoCompleteName: "shipping address-line1",
       dataTestId: "stripe-address-1",
       htmlName: "line1",
-      label: _$$t("pro_cart.payment.street_address_label"),
+      label: getI18nString("pro_cart.payment.street_address_label"),
       maxLength: 255,
       onBlur: C,
       onChange: w,
@@ -154,8 +154,8 @@ export function $$A0({
     }), jsx(Lf, {
       value: e.line2 || "",
       htmlName: "line2",
-      label: _$$t("pro_cart.payment.street_address_line_2_label"),
-      placeholder: _$$t("pro_cart.payment.street_address_line_2"),
+      label: getI18nString("pro_cart.payment.street_address_line_2_label"),
+      placeholder: getI18nString("pro_cart.payment.street_address_line_2"),
       onChange: w,
       onBlur: C,
       autoCompleteName: "shipping address-line2",
@@ -176,7 +176,7 @@ export function $$A0({
           disabled: i,
           children: [jsx("option", {
             value: "US",
-            children: _$$t("payments.united_states")
+            children: getI18nString("payments.united_states")
           }), T.filter(e => !("US" === e[1] || sf.includes(e[1]))).map(e => jsx("option", {
             value: e[1],
             children: e[0]
@@ -191,7 +191,7 @@ export function $$A0({
       href: a,
       target: "_blank",
       trusted: !0,
-      children: tx("pro_cart.payment.dont_see_your_country")
+      children: renderI18nText("pro_cart.payment.dont_see_your_country")
     }), jsxs("div", {
       className: VG,
       children: [jsx(y, {

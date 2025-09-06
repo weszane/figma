@@ -1,12 +1,12 @@
 import { jsx } from "react/jsx-runtime";
 import { useEffect, useMemo, useCallback, Component } from "react";
 import { connect, useDispatch } from "../vendor/514228";
-import { rr, Ay } from "../figma_app/778880";
-import { t as _$$t } from "../905/303541";
+import { isMobileUA, BrowserInfo } from "../figma_app/778880";
+import { getI18nString } from "../905/303541";
 import { d9 } from "../figma_app/740025";
 import { W } from "../figma_app/4979";
-import { md } from "../figma_app/27355";
-import { az } from "../905/449184";
+import { useAtomWithSubscription } from "../figma_app/27355";
+import { analyticsEventManager } from "../905/449184";
 import { getInitialOptions } from "../figma_app/169182";
 import { Uz } from "../905/63728";
 import { useSprigWithSampling } from "../905/99656";
@@ -27,7 +27,7 @@ let E = connect((e, t) => ({
   currentOrgId: e.currentUserOrgId
 }))(function (e) {
   useEffect(() => {
-    az.trackDefinedEvent("search_experience.dead_code", {
+    analyticsEventManager.trackDefinedEvent("search_experience.dead_code", {
       userId: getInitialOptions().user_data?.id,
       codeLocation: "search/views/search_bar.tsx"
     });
@@ -43,7 +43,7 @@ let E = connect((e, t) => ({
     Sprig
   } = useSprigWithSampling();
   let E = _$$y(e.entryPoint, e.searchScope);
-  let x = md(BA);
+  let x = useAtomWithSubscription(BA);
   let S = useCallback(() => {
     if (i(W0({
       entryPoint: e.entryPoint
@@ -67,7 +67,7 @@ let E = connect((e, t) => ({
     "file_browser" === e.entryPoint && Sprig("track", R);
     i.preventDefault();
     E(t, x, !0, !0);
-    document.activeElement && rr && document.activeElement.blur();
+    document.activeElement && isMobileUA && document.activeElement.blur();
   }, [e.entryPoint, E, t, x, Sprig]);
   let k = useCallback(() => {
     onQueryChanged("");
@@ -97,7 +97,7 @@ let E = connect((e, t) => ({
       isFocused: e.isFocused,
       onSubmit: T
     }) : e.isLoggedIn ? e.useSidebarStyles ? jsx(Qv, {
-      className: Ay.mobile ? G1 : void 0,
+      className: BrowserInfo.mobile ? G1 : void 0,
       clearSearch: k,
       focusOnMount: x,
       hideXIcon: !1,
@@ -109,7 +109,7 @@ let E = connect((e, t) => ({
       placeholder: e.placeholder,
       query: t
     }) : e.useBrowseIANavBarStyles ? jsx(Cp, {
-      className: Ay.mobile ? G1 : void 0,
+      className: BrowserInfo.mobile ? G1 : void 0,
       clearSearch: k,
       focusOnMount: x,
       hideXIcon: !1,
@@ -121,7 +121,7 @@ let E = connect((e, t) => ({
       placeholder: e.placeholder,
       query: t
     }) : jsx(IW, {
-      className: Ay.mobile ? G1 : void 0,
+      className: BrowserInfo.mobile ? G1 : void 0,
       clearSearch: k,
       focusOnMount: x,
       hideXIcon: !1,
@@ -133,7 +133,7 @@ let E = connect((e, t) => ({
       placeholder: e.placeholder,
       query: t
     }) : jsx(o_, {
-      className: Ay.mobile ? G1 : void 0,
+      className: BrowserInfo.mobile ? G1 : void 0,
       clearSearch: k,
       focusOnMount: x,
       isFocused: e.isFocused,
@@ -154,7 +154,7 @@ class x extends Component {
     };
   }
   render() {
-    let e = "community" === this.props.searchScope ? _$$t("search.empty_state.search_placeholder_figma_community") : _$$t("search.empty_state.search_placeholder");
+    let e = "community" === this.props.searchScope ? getI18nString("search.empty_state.search_placeholder_figma_community") : getI18nString("search.empty_state.search_placeholder");
     let t = jsx("div", {
       className: "search_page_mobile_top_bar--searchBar--MTr-v",
       children: jsx(E, {
@@ -167,7 +167,7 @@ class x extends Component {
         placeholder: e
       })
     });
-    return Ay.mobile ? jsx("div", {
+    return BrowserInfo.mobile ? jsx("div", {
       className: "search_page_mobile_top_bar--mobileToolBarSpacerContainer--ma1sf",
       children: t
     }) : jsx(W, {

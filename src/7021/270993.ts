@@ -1,4 +1,4 @@
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { Eh } from "../figma_app/617654";
 import { u } from "../905/774364";
@@ -15,7 +15,7 @@ let $$d1 = nF(async (e, t) => {
   }).then(a => {
     let n;
     let o = t.workspace.name;
-    o && (n = _$$t("workspace.you_joined_the_workspace", {
+    o && (n = getI18nString("workspace.you_joined_the_workspace", {
       groupName: o
     }), e.dispatch(_$$F.enqueue({
       type: "self-assign-workspace",
@@ -28,7 +28,7 @@ let $$d1 = nF(async (e, t) => {
   }).catch(t => {
     e.dispatch(_$$F.enqueue({
       type: "self-assign-workspace",
-      message: t.data?.message || _$$t("workspace.an_error_occurred_while_submitting_your_workspace_selection"),
+      message: t.data?.message || getI18nString("workspace.an_error_occurred_while_submitting_your_workspace_selection"),
       error: !0
     }));
   });
@@ -48,15 +48,15 @@ let $$c0 = nF(async (e, t) => {
     }));
     e.dispatch(_$$F.enqueue({
       type: "workspace-default-teams-set",
-      message: _$$t("workspace.succesfully_updated_default_teams")
+      message: getI18nString("workspace.succesfully_updated_default_teams")
     }));
   } catch (t) {
     e.dispatch(_$$F.enqueue({
       type: "workspace-default-teams-set",
-      message: t.data?.message || _$$t("workspace.failed_to_update_default_teams_please_try_again"),
+      message: t.data?.message || getI18nString("workspace.failed_to_update_default_teams_please_try_again"),
       error: !0
     }));
   }
 });
 export const F = $$c0;
-export const x = $$d1; 
+export const x = $$d1;

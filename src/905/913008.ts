@@ -1,10 +1,10 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { HTr } from "../figma_app/763686";
-import { zl } from "../figma_app/27355";
-import { sx } from "../905/449184";
+import { atomStoreManager } from "../figma_app/27355";
+import { trackEventAnalytics } from "../905/449184";
 import { fF } from "../905/194389";
-import { kF, $D, DZ } from "../905/11";
-import { Lo } from "../905/714362";
+import { setSentryTag, reportError, SeverityLevel } from "../905/11";
+import { logInfo } from "../905/714362";
 import { to } from "../905/156213";
 import { bY } from "../figma_app/298277";
 import { yV } from "../figma_app/516028";
@@ -18,7 +18,7 @@ export let $$f0 = new class {
   }
   fullscreenCrashed(e, t) {
     if ("ok" !== this._fullscreenCrashState) {
-      Lo("crash", "crash already reported", {
+      logInfo("crash", "crash already reported", {
         "new crash": e,
         "original crash": this._fullscreenCrashState
       });
@@ -26,30 +26,30 @@ export let $$f0 = new class {
     }
     if (t) {
       let t;
-      Lo("crash", "updating crash state", {
+      logInfo("crash", "updating crash state", {
         crash: e
       });
       this._preventEnteringCpp = !0;
       this._fullscreenCrashState = e;
-      zl.set(_$$h, e);
+      atomStoreManager.set(_$$h, e);
       let i = window.FigmaMobile;
       i?.dismissMediaLoadingToast && i.dismissMediaLoadingToast();
       "oom" === e.type && i?.handleAllocationFailure && i.handleAllocationFailure(HTr.WASM_FAILURE);
       let o = bY();
-      kF("fullscreen_status", "has_crashed");
+      setSentryTag("fullscreen_status", "has_crashed");
       try {
-        let e = zl.get(yV);
+        let e = atomStoreManager.get(yV);
         t = e?.editorType;
       } catch (e) {
-        $D(_$$e.CLIENT_PLATFORM, e, {
+        reportError(_$$e.CLIENT_PLATFORM, e, {
           tags: {
-            severity: DZ.Minor
+            severity: SeverityLevel.Minor
           }
         });
       }
-      sx("Fullscreen Hard Crash", {
+      trackEventAnalytics("Fullscreen Hard Crash", {
         crashType: e.type,
-        isMergeModalOpen: zl.get(qm),
+        isMergeModalOpen: atomStoreManager.get(qm),
         editorType: t,
         ...o
       }, {
@@ -67,13 +67,13 @@ export let $$f0 = new class {
     "bindings" === t && window.dispatchEvent(new ErrorEvent("bindingserror", {
       error: e
     }));
-    kF("fullscreen_status", "crash");
-    let i = $D(_$$e.UNOWNED, e, {
+    setSentryTag("fullscreen_status", "crash");
+    let i = reportError(_$$e.UNOWNED, e, {
       tags: {
-        severity: DZ.Critical
+        severity: SeverityLevel.Critical
       }
     });
-    kF("fullscreen_status", "has_crashed");
+    setSentryTag("fullscreen_status", "has_crashed");
     let r = "oom" === t ? "oom" : fF(e) ? "stack-overflow" : "other";
     this.fullscreenCrashed({
       type: r,

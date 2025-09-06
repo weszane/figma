@@ -2,22 +2,22 @@ import _require from "../2824/40443";
 import { l7 } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { eU, zl } from "../figma_app/27355";
+import { atom, atomStoreManager } from "../figma_app/27355";
 import o from "lodash-es/snakeCase";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { debugState } from "../905/407919";
-import { M4 } from "../905/609396";
+import { Timer } from "../905/609396";
 import { F } from "../905/302958";
 import { ze } from "../figma_app/516028";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { B9, Py } from "../figma_app/346422";
 import { hB } from "../figma_app/609511";
 import { O } from "../905/207358";
 var l = o;
-let A = eU(!1);
+let A = atom(!1);
 export async function $$y0(e, t, n, r) {
   if (!getFeatureFlags().sites && !getFeatureFlags().bake) throw Error("HTML Serializer not available");
-  let o = new M4();
+  let o = new Timer();
   o.start();
   try {
     let u = new Map();
@@ -43,7 +43,7 @@ export async function $$y0(e, t, n, r) {
       let t = await hB({
         compactDOM: !0,
         assets: u,
-        isMcpGeneration: zl.get(A)
+        isMcpGeneration: atomStoreManager.get(A)
       });
       return await t.serializeHTML(e.guid);
     }, {
@@ -94,10 +94,10 @@ export async function $$y0(e, t, n, r) {
     let w = o.getElapsedTime();
     o.stop();
     let C = debugState.getState().selectedView;
-    az.trackDefinedEvent("design_to_react.code_generation_time", {
-      selectedFileKey: zl.get(ze) ?? void 0,
+    analyticsEventManager.trackDefinedEvent("design_to_react.code_generation_time", {
+      selectedFileKey: atomStoreManager.get(ze) ?? void 0,
       selectedNodeId: e.guid,
-      isFigmake: "editorType" in C && C.editorType === nT.Figmake,
+      isFigmake: "editorType" in C && C.editorType === FEditorType.Figmake,
       elapsedTimeMs: w,
       raisedError: !1,
       ...stats
@@ -107,10 +107,10 @@ export async function $$y0(e, t, n, r) {
     let t = o.getElapsedTime();
     o.stop();
     let i = debugState.getState().selectedView;
-    az.trackDefinedEvent("design_to_react.code_generation_time", {
-      selectedFileKey: zl.get(ze) ?? void 0,
+    analyticsEventManager.trackDefinedEvent("design_to_react.code_generation_time", {
+      selectedFileKey: atomStoreManager.get(ze) ?? void 0,
       selectedNodeId: e.guid,
-      isFigmake: "editorType" in i && i.editorType === nT.Figmake,
+      isFigmake: "editorType" in i && i.editorType === FEditorType.Figmake,
       elapsedTimeMs: t,
       raisedError: !0
     });

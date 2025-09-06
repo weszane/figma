@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { getFeatureFlags } from "../905/601108";
-import { eU, md } from "../figma_app/27355";
+import { atom, useAtomWithSubscription } from "../figma_app/27355";
 import { getInitialOptions } from "../figma_app/169182";
 import { D } from "../905/33172";
-export let $$l1 = eU(!1);
+export let $$l1 = atom(!1);
 function d(e, t = !1) {
   if (!getFeatureFlags().dt_code_connect_js_iframe || !e) return;
   t && console.log("Code Connect Debug: iframe JS to be evaluated:", {
@@ -35,7 +35,7 @@ export function $$u0(e, t = !1) {
 }
 export function $$p2(e) {
   let [t, r] = useState();
-  let i = md($$l1);
+  let i = useAtomWithSubscription($$l1);
   useEffect(() => {
     let t = d(e, i);
     if (!t) {

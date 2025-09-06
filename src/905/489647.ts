@@ -2,8 +2,8 @@ import { createElement } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import { glU, _gJ } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
-import { sx } from "../905/449184";
+import { atomStoreManager } from "../figma_app/27355";
+import { trackEventAnalytics } from "../905/449184";
 import { YQ } from "../905/502364";
 import { Lk, x as _$$x } from "../figma_app/639711";
 import { dX } from "../905/294543";
@@ -22,7 +22,7 @@ import { R as _$$R } from "../figma_app/612938";
 import { qW } from "../905/327571";
 import { Rt } from "../figma_app/979658";
 import { bD } from "../figma_app/45218";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { FW } from "../figma_app/155287";
 import { YR } from "../905/622391";
 import { zM } from "../figma_app/89917";
@@ -47,7 +47,7 @@ export let $$j0 = nF(async (e, t) => {
     fileKey,
     tryPluginParams
   } = t;
-  sx("extension_tried_in_fullscreen", {
+  trackEventAnalytics("extension_tried_in_fullscreen", {
     tryPluginId,
     tryPluginName,
     tryPluginVersionId,
@@ -93,12 +93,12 @@ export let $$j0 = nF(async (e, t) => {
     });
     return;
   }
-  switch (isPlaygroundFile && fullscreenEditorType !== nT.DevHandoff && YQ({
+  switch (isPlaygroundFile && fullscreenEditorType !== FEditorType.DevHandoff && YQ({
     id: zM
-  }), fullscreenEditorType === nT.DevHandoff && $ && $.manifest.editorType?.includes(FW.FIGMA) && YQ({
+  }), fullscreenEditorType === FEditorType.DevHandoff && $ && $.manifest.editorType?.includes(FW.FIGMA) && YQ({
     id: zM
   }), fullscreenEditorType) {
-    case nT.Whiteboard:
+    case FEditorType.Whiteboard:
       glU?.triggerAction("clear-tool", {
         source: fK
       });
@@ -112,7 +112,7 @@ export let $$j0 = nF(async (e, t) => {
         source: q
       });
       return;
-    case nT.Design:
+    case FEditorType.Design:
       glU?.triggerAction("clear-tool", {
         source: fK
       });
@@ -136,7 +136,7 @@ export let $$j0 = nF(async (e, t) => {
         }
       }));
       return;
-    case nT.DevHandoff:
+    case FEditorType.DevHandoff:
       if ($ && _V($)) {
         let t = $n($);
         e.dispatch(dX({
@@ -156,7 +156,7 @@ export let $$j0 = nF(async (e, t) => {
         });
       }
       return;
-    case nT.Slides:
+    case FEditorType.Slides:
       $I({
         moduleToOpen: {
           type: "custom",
@@ -171,8 +171,8 @@ export let $$j0 = nF(async (e, t) => {
         }
       });
       return;
-    case nT.Cooper:
-      getFeatureFlags().buzz_plugins && (zl.set(Lk, _$$x.PLUGINS), _$$s({
+    case FEditorType.Cooper:
+      getFeatureFlags().buzz_plugins && (atomStoreManager.set(Lk, _$$x.PLUGINS), _$$s({
         ...Y,
         initialFdResourceTab: _$$s2.PLUGIN,
         fdPreviewResource: {
@@ -182,9 +182,9 @@ export let $$j0 = nF(async (e, t) => {
         source: q
       }));
       return;
-    case nT.Illustration:
-    case nT.Sites:
-    case nT.Figmake:
+    case FEditorType.Illustration:
+    case FEditorType.Sites:
+    case FEditorType.Figmake:
       break;
     default:
       throwTypeError(fullscreenEditorType);

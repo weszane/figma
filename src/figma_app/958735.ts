@@ -4,69 +4,69 @@ import { throttle } from "../905/915765";
 import { QOV, kul, Ez5 } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { tg } from "../figma_app/933328";
-import { B5 } from "../905/270322";
+import { createActionAndReducerWrapper } from "../905/270322";
 import { KQ } from "../figma_app/646357";
 import { lu } from "../figma_app/84367";
 let {
   action,
   reducer
-} = B5("SYNC_PUBLISHABLE_SYMBOLS", []);
+} = createActionAndReducerWrapper("SYNC_PUBLISHABLE_SYMBOLS", []);
 let {
   action: _action,
   reducer: _reducer
-} = B5("SYNC_PUBLISHABLE_STATE_GROUPS", []);
+} = createActionAndReducerWrapper("SYNC_PUBLISHABLE_STATE_GROUPS", []);
 let {
   action: _action2,
   reducer: _reducer2
-} = B5("SYNC_PUBLISHABLE_STYLES", []);
+} = createActionAndReducerWrapper("SYNC_PUBLISHABLE_STYLES", []);
 let {
   action: _action3,
   reducer: _reducer3
-} = B5("SYNC_PUBLISHABLE_MODULES", []);
+} = createActionAndReducerWrapper("SYNC_PUBLISHABLE_MODULES", []);
 let {
   action: _action4,
   reducer: _reducer4
-} = B5("SYNC_SUBSCRIBED_SYMBOLS", []);
+} = createActionAndReducerWrapper("SYNC_SUBSCRIBED_SYMBOLS", []);
 let {
   action: _action5,
   reducer: _reducer5
-} = B5("SYNC_SUBSCRIBED_SYMBOLS_ON_CURRENT_PAGE", []);
+} = createActionAndReducerWrapper("SYNC_SUBSCRIBED_SYMBOLS_ON_CURRENT_PAGE", []);
 let {
   action: _action6,
   reducer: _reducer6
-} = B5("SYNC_SUBSCRIBED_STATE_GROUPS", []);
+} = createActionAndReducerWrapper("SYNC_SUBSCRIBED_STATE_GROUPS", []);
 let {
   action: _action7,
   reducer: _reducer7
-} = B5("SYNC_SUBSCRIBED_STATE_GROUPS_ON_CURRENT_PAGE", []);
+} = createActionAndReducerWrapper("SYNC_SUBSCRIBED_STATE_GROUPS_ON_CURRENT_PAGE", []);
 let {
   action: _action8,
   reducer: _reducer8
-} = B5("SYNC_DIRECTLY_SUBSCRIBED_STYLES", []);
+} = createActionAndReducerWrapper("SYNC_DIRECTLY_SUBSCRIBED_STYLES", []);
 let {
   action: _action9,
   reducer: _reducer9
-} = B5("SYNC_DIRECTLY_SUBSCRIBED_STYLES_ON_CURRENT_PAGE", []);
+} = createActionAndReducerWrapper("SYNC_DIRECTLY_SUBSCRIBED_STYLES_ON_CURRENT_PAGE", []);
 let {
   action: _action0,
   reducer: _reducer0
-} = B5("SYNC_INDIRECTLY_SUBSCRIBED_STYLES", []);
+} = createActionAndReducerWrapper("SYNC_INDIRECTLY_SUBSCRIBED_STYLES", []);
 let {
   action: _action1,
   reducer: _reducer1
-} = B5("SYNC_LOCAL_SYMBOLS_THAT_HAVE_USAGES", []);
+} = createActionAndReducerWrapper("SYNC_LOCAL_SYMBOLS_THAT_HAVE_USAGES", []);
 let {
   action: _action10,
   reducer: _reducer10
-} = B5("SYNC_LOCAL_SYMBOLS_THAT_HAVE_USAGES_ON_CURRENT_PAGE", []);
+} = createActionAndReducerWrapper("SYNC_LOCAL_SYMBOLS_THAT_HAVE_USAGES_ON_CURRENT_PAGE", []);
 let {
   action: _action11,
   reducer: _reducer11
-} = B5("SYNC_LOCAL_STYLES_THAT_HAVE_USAGES", []);
+} = createActionAndReducerWrapper("SYNC_LOCAL_STYLES_THAT_HAVE_USAGES", []);
 let {
   action: _action12,
   reducer: _reducer12
-} = B5("SYNC_LOCAL_STYLES_THAT_HAVE_USAGES_ON_CURRENT_PAGE", []);
+} = createActionAndReducerWrapper("SYNC_LOCAL_STYLES_THAT_HAVE_USAGES_ON_CURRENT_PAGE", []);
 export function $$V11() {
   let e = getFeatureFlags().dse_module_publish;
   let t = useStore();

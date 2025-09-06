@@ -1,7 +1,7 @@
 import { WB } from "../905/761735";
 import { Q } from "../905/150006";
 import { XHR } from "../905/910117";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { nF } from "../905/350402";
 import { Q$ } from "../figma_app/934707";
 import { J } from "../figma_app/941287";
@@ -30,7 +30,7 @@ export let $$_0 = nF((e, t) => {
   }
   return Q({
     requestPromise: XHR.put("/api/user_notifications_bell/community/clear"),
-    fallbackError: _$$t("user_notification.an_error_occurred_marking_all_as_read"),
+    fallbackError: getI18nString("user_notification.an_error_occurred_marking_all_as_read"),
     store: e,
     next: e.dispatch,
     action: Q$(t)

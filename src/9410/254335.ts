@@ -7,7 +7,7 @@ import { _YF } from "../figma_app/763686";
 import { Pt } from "../figma_app/806412";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { lg } from "../figma_app/976749";
 import { Te } from "../1250/12342";
 import { rE } from "../figma_app/186343";
@@ -31,12 +31,12 @@ export function $$v0({
   let S = rE();
   if (!w) return null;
   let j = [{
-    displayText: _$$t("fullscreen.pages_panel.page_dropdown_new"),
+    displayText: getI18nString("fullscreen.pages_panel.page_dropdown_new"),
     optionHeight: 24,
     editorType: null,
     disabled: !0
   }, {
-    displayText: _$$t("fullscreen.pages_panel.design_page"),
+    displayText: getI18nString("fullscreen.pages_panel.design_page"),
     optionHeight: 24,
     editorType: FFileType.DESIGN,
     icon: jsx("div", {
@@ -45,7 +45,7 @@ export function $$v0({
     }),
     callback: () => S(_YF.DESIGN)
   }, {
-    displayText: _$$t("fullscreen.pages_panel.figjam_page"),
+    displayText: getI18nString("fullscreen.pages_panel.figjam_page"),
     optionHeight: 24,
     editorType: FFileType.WHITEBOARD,
     icon: jsx("div", {
@@ -56,7 +56,7 @@ export function $$v0({
     }),
     callback: () => S(_YF.WHITEBOARD)
   }, {
-    displayText: _$$t("fullscreen.pages_panel.slide_deck"),
+    displayText: getI18nString("fullscreen.pages_panel.slide_deck"),
     optionHeight: 24,
     editorType: FFileType.SLIDES,
     icon: jsx("div", {
@@ -82,7 +82,7 @@ export function $$v0({
       className: "new_page_dropdown--newPageButton--sYJsl",
       recordingKey: Pt(e, "newPageDropdown"),
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": _$$t("fullscreen.pages_panel.add_new_page"),
+      "data-tooltip": getI18nString("fullscreen.pages_panel.add_new_page"),
       "data-tooltip-show-above": !0,
       onMouseDown: toggleDropdown,
       children: jsxs("div", {

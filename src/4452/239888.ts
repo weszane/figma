@@ -12,7 +12,7 @@ import { buildUploadUrl } from "../figma_app/169182";
 import { Rs } from "../figma_app/288654";
 import { oW } from "../905/675859";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { wR } from "../905/346715";
 import { B } from "../905/900597";
 import { to } from "../905/156213";
@@ -40,7 +40,7 @@ export function $$w0() {
   });
   let C = jsx(_$$N, {
     href: "https://help.figma.com/hc/articles/30124855491863-Guide-to-connected-projects",
-    children: tx("resource_connection.request_modal.learn_more")
+    children: renderI18nText("resource_connection.request_modal.learn_more")
   });
   let k = Rs(sMZ, {
     name: "seen_connected_projects_org_member_banner"
@@ -61,7 +61,7 @@ export function $$w0() {
         }));
       },
       children: jsx(Q, {
-        children: tx("resource_connection.connected_projects_tab.connected_projects_help_you_collaborate", {
+        children: renderI18nText("resource_connection.connected_projects_tab.connected_projects_help_you_collaborate", {
           learnMore: C
         })
       })
@@ -74,7 +74,7 @@ export function $$w0() {
       children: jsxs(Fragment, {
         children: [jsx("div", {
           className: _$$s.textBodyLarge.$,
-          children: tx("resource_connection.admin_ui.create_a_connected_project_to_collaborate_with_external_teams_without_being_charged_for_their_seats", {
+          children: renderI18nText("resource_connection.admin_ui.create_a_connected_project_to_collaborate_with_external_teams_without_being_charged_for_their_seats", {
             learnMore: C
           })
         }), jsxs("div", {
@@ -82,16 +82,16 @@ export function $$w0() {
           children: [jsx("div", {
             children: jsx($n, {
               onClick: R,
-              children: _$$t("resource_connection.admin_ui.connect_project")
+              children: getI18nString("resource_connection.admin_ui.connect_project")
             })
           }), jsx("div", {
             className: _$$s.colorTextSecondary.$,
-            children: a && w && N ? a.unlimitedConnectionsEnabled || a.testingOnlyUnlimitedConnectionsEnabled ? tx("resource_connection.admin_ui.unlimited_connections", {
+            children: a && w && N ? a.unlimitedConnectionsEnabled || a.testingOnlyUnlimitedConnectionsEnabled ? renderI18nText("resource_connection.admin_ui.unlimited_connections", {
               numConnections: N
-            }) : _$$b2[w] - N > 0 ? tx("resource_connection.admin_ui.using_num_of_connections", {
+            }) : _$$b2[w] - N > 0 ? renderI18nText("resource_connection.admin_ui.using_num_of_connections", {
               numConnections: N,
               maxConnections: _$$b2[w]
-            }) : tx("resource_connection.admin_ui.maxed_out_connections", {
+            }) : renderI18nText("resource_connection.admin_ui.maxed_out_connections", {
               maxConnections: _$$b2[w],
               planTier: _$$A(w)
             }) : null

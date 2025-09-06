@@ -1,7 +1,7 @@
 import { useState, useEffect, useLayoutEffect, useMemo, useCallback } from "react";
 import { useSelector } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { Yx } from "../3276/926297";
 import { aV } from "../figma_app/722362";
 import { TA } from "../905/372672";
@@ -100,7 +100,7 @@ function P(e) {
   try {
     return new Set(JSON.parse(localStorage.getItem(e) ?? "[]"));
   } catch (t) {
-    $D(_$$e.MONETIZATION_EXPANSION, Error(`Failed to parse read file requests from storage: ${t}`));
+    reportError(_$$e.MONETIZATION_EXPANSION, Error(`Failed to parse read file requests from storage: ${t}`));
     localStorage.removeItem(e);
     return null;
   }

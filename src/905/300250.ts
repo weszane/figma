@@ -1,12 +1,12 @@
 import { sYL, BtE, FAf, h3O, kul, H$z, dPJ } from "../figma_app/763686";
-import { yQ } from "../905/236856";
+import { waitForAnimationFrame } from "../905/236856";
 import { NC } from "../905/17179";
-import { sx } from "../905/449184";
-import { eD } from "../figma_app/876459";
+import { trackEventAnalytics } from "../905/449184";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { s9 } from "../905/194389";
 import { Ay } from "../905/612521";
 import { XHR, getRequest } from "../905/910117";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { zX } from "../905/576487";
 import { nF } from "../905/350402";
@@ -20,7 +20,7 @@ import { Y5 } from "../figma_app/455680";
 import { NT } from "../figma_app/741237";
 import { De, eN, oJ, mN, lt } from "../905/346794";
 import { Qx, WO } from "../905/491806";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { PW, Kn } from "../905/535806";
 import { my, RK } from "../905/561832";
 async function T(e, t, i) {
@@ -32,14 +32,14 @@ async function T(e, t, i) {
     });
     HJ(e, PW.ON_MERGE, i);
     t(F.enqueue({
-      message: _$$t("collaboration.branching.error_creating_image_usages"),
+      message: getI18nString("collaboration.branching.error_creating_image_usages"),
       error: !0
     }));
     return;
   }
 }
 let k = nF((e, t) => {
-  let i = t?.message || _$$t("collaboration.branching.error_merging");
+  let i = t?.message || getI18nString("collaboration.branching.error_merging");
   e.dispatch(F.enqueue({
     message: i,
     type: "file-merge-submit",
@@ -73,8 +73,8 @@ let $$R3 = nF(async (e, t) => {
   let I = WO(mergeParams);
   if (mergeParams.toCheckpointKey = checkpointDiff.to_checkpoint_key, mergeParams.fromCheckpointKey = checkpointDiff.from_checkpoint_key, mergeParams.branchModalTrackingId = branchModalTrackingId, I !== h) {
     mergeParams.mergeOnFileOpen = !0;
-    eD && (mergeParams.checkpointDiffURL = checkpointDiff.signed_url);
-    eD ? e.dispatch($$N7({
+    desktopAPIInstance && (mergeParams.checkpointDiffURL = checkpointDiff.signed_url);
+    desktopAPIInstance ? e.dispatch($$N7({
       hideModal: !1,
       mergeParams,
       userInitiated: !1,
@@ -83,7 +83,7 @@ let $$R3 = nF(async (e, t) => {
     e.dispatch(sf({
       view: "fullscreen",
       fileKey: mergeParams.direction === Kn.TO_SOURCE ? mergeParams.sourceKey : mergeParams.branchKey,
-      editorType: nT.Design,
+      editorType: FEditorType.Design,
       mergeParams
     }));
   } else {
@@ -128,7 +128,7 @@ let $$R3 = nF(async (e, t) => {
 let $$N7 = nF((e, t) => {
   t.hideModal && e.dispatch(Ce());
   ds().then(() => {
-    sx("Branch Modal Exited", {
+    trackEventAnalytics("Branch Modal Exited", {
       direction: t.mergeParams.direction,
       branch_key: t.mergeParams.branchKey,
       source_key: t.mergeParams.sourceKey,
@@ -147,14 +147,14 @@ let $$N7 = nF((e, t) => {
 });
 let $$P0 = nF(async (e, t) => {
   if (t.mergeParams.mergeOnFileOpen) {
-    if (await yQ(), eN() || (h3O.updateConnectionStateIfNeeded(!0), await oJ(kul.JOINED)), e.dispatch(F.enqueue({
-      message: _$$t("collaboration.branching.merging"),
+    if (await waitForAnimationFrame(), eN() || (h3O.updateConnectionStateIfNeeded(!0), await oJ(kul.JOINED)), e.dispatch(F.enqueue({
+      message: getI18nString("collaboration.branching.merging"),
       icon: zX.SPINNER,
       type: "file-merge-submit"
     })), e.getState().mirror.appModel.isReadOnly) {
       HJ(Error("mergeOnFileOpen: app model is in read only state"), PW.ON_MERGE, t.mergeParams.direction);
       e.dispatch(k({
-        message: _$$t("collaboration.branching.file_is_in_view_only_state_please_current_refresh_tab_and_try_again")
+        message: getI18nString("collaboration.branching.file_is_in_view_only_state_please_current_refresh_tab_and_try_again")
       }));
       return;
     }
@@ -174,7 +174,7 @@ let $$P0 = nF(async (e, t) => {
       } else i = rY.getDiffMigrationVersion(r);
       try {
         let e = rY.getAllGuids(r, t.mergeParams.branchModalTrackingId || 0);
-        sx("Branching Incremental To Source Merge", {
+        trackEventAnalytics("Branching Incremental To Source Merge", {
           isIncremental: h3O.isIncrementalSession(),
           isValidatingIncremental: h3O.isValidatingIncremental(),
           guidCount: e.length,
@@ -191,7 +191,7 @@ let $$P0 = nF(async (e, t) => {
       } catch (e) {
         if (h3O.isValidatingIncremental()) HJ(new s9("Incremental loading validation failed", {
           cause: e
-        }), PW.ON_MERGE, t.mergeParams.direction); else throw e;
+        }), PW.ON_MERGE, t.mergeParams.direction);else throw e;
       }
       await mN();
       gf(r, BtE.STAGE);
@@ -204,7 +204,7 @@ let $$P0 = nF(async (e, t) => {
       await O(o, e.dispatch, t.mergeParams, t.user.id, a);
     } catch (i) {
       i instanceof XA ? (e.dispatch(k({
-        message: _$$t("collaboration.branching.couldn_t_proceed_with_merge_please_accept_updates_from_main_before_merging_your_branch")
+        message: getI18nString("collaboration.branching.couldn_t_proceed_with_merge_please_accept_updates_from_main_before_merging_your_branch")
       })), rY.clearDiffs()) : (e.dispatch(k()), e.dispatch($$N7({
         hideModal: !1,
         mergeParams: t.mergeParams,
@@ -361,4 +361,4 @@ export const S2 = $$R3;
 export const SL = $$j4;
 export const ie = $$D5;
 export const nM = $$L6;
-export const ov = $$N7; 
+export const ov = $$N7;

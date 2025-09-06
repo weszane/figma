@@ -4,11 +4,11 @@ import { useDispatch } from "../vendor/514228";
 import { Egt, glU } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { dI } from "../905/871411";
-import { Xr, zl } from "../figma_app/27355";
+import { Xr, atomStoreManager } from "../figma_app/27355";
 import { h as _$$h } from "../905/207101";
 import { Uz, xH } from "../905/63728";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { cP, Xi, mj } from "../figma_app/451499";
 import { Y5 } from "../figma_app/455680";
 import { av } from "../figma_app/316316";
@@ -51,7 +51,7 @@ export function $$k0({
         Y5.triggerAction("toggle-inline-preview", {
           source: "magic-link"
         });
-        zl.set(hg, {
+        atomStoreManager.set(hg, {
           type: "ENABLE_TARGET_FRAME_FOLLOWING"
         });
       },
@@ -85,7 +85,7 @@ export function $$k0({
       "NAVIGATE_TO" === (e = mj(i)) && i.transitionNodeID && (t = O.format(dI(i.transitionNodeID)));
     }
     if (e) {
-      let i = t ? _$$t("proto.action_navigate_to_layer", {
+      let i = t ? getI18nString("proto.action_navigate_to_layer", {
         layerName: t
       }) : D.format(e);
       return jsx(_$$y, {
@@ -123,7 +123,7 @@ export function $$k0({
               variant: "secondary",
               children: jsx("span", {
                 className: _$$s.textBodyMediumStrong.$,
-                children: tx("magic_link.remove")
+                children: renderI18nText("magic_link.remove")
               })
             })
           })]

@@ -1,6 +1,6 @@
 import { ex } from "../905/524523";
 import { jsxs, jsx } from "react/jsx-runtime";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 export let $$a0 = ex("component_info", function (e) {
   let {
     name,
@@ -20,7 +20,7 @@ export let $$a0 = ex("component_info", function (e) {
       },
       children: fileName
     }), !!numVariants && jsx("div", {
-      children: tx("design_systems.assets_panel.variant_count", {
+      children: renderI18nText("design_systems.assets_panel.variant_count", {
         numVariants
       })
     }), description && jsx("div", {

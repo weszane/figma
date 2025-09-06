@@ -1,6 +1,6 @@
 import { getFeatureFlags } from "../905/601108";
 import { NC } from "../905/17179";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Pq, _Z, Rc, l5, vj } from "../figma_app/819288";
 import { WB } from "../905/761735";
 import { g } from "../905/880308";
@@ -56,7 +56,7 @@ let $$b4 = nF((e, t) => {
     message_meta: t.messageMeta,
     attachment_updates: Gq(t.attachmentUpdates)
   }));
-  sx("Team Feed Comment Edited", {
+  trackEventAnalytics("Team Feed Comment Edited", {
     text: _Z(t.messageMeta)
   });
   let c = Rc(t.messageMeta);
@@ -81,7 +81,7 @@ let $$v6 = nF((e, t) => {
   });
   let u = !!t.messageMeta.find(e => l5(e) === vj.EMOJI);
   let p = !!t.messageMeta.find(e => l5(e) === vj.EDITOR_MENTION);
-  sx("Team Feed Comment Added", {
+  trackEventAnalytics("Team Feed Comment Added", {
     emojiUsed: u,
     mentionUsed: p,
     text: _Z(t.messageMeta),
@@ -131,7 +131,7 @@ let $$x1 = nF((e, t) => {
   let s = e.getState().user;
   if (!s || commentId.startsWith($$R0)) return;
   let l = S(commentUuid, emoji);
-  sx("Team Feed Reaction Added", {
+  trackEventAnalytics("Team Feed Reaction Added", {
     commentId,
     type: emoji
   });
@@ -176,7 +176,7 @@ let $$T2 = nF((e, t) => {
   let s = e.getState().user;
   if (!s) return;
   let l = k(feedPostUuid, emoji);
-  sx("Team Feed Reaction Added", {
+  trackEventAnalytics("Team Feed Reaction Added", {
     postUuid: feedPostUuid,
     type: emoji
   });

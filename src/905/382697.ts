@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { M3 } from "../figma_app/91703";
 import { A5 } from "../figma_app/707808";
 export function $$l0() {
@@ -9,7 +9,7 @@ export function $$l0() {
     e(M3({
       view: t
     }));
-    sx("File Permissions Modal Tab Clicked", {
+    trackEventAnalytics("File Permissions Modal Tab Clicked", {
       tabName: d[t]
     });
   }, [e]);

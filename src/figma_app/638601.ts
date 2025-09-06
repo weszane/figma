@@ -1,13 +1,13 @@
 import { useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
 import { rcl, NLJ } from "../figma_app/763686";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Ay } from "../905/612521";
 import { Ts } from "../905/194276";
 import { to } from "../905/156213";
 import { x } from "../905/749159";
 export function $$u0(e) {
-  sx("show_auth_for_logged_out_file", {
+  trackEventAnalytics("show_auth_for_logged_out_file", {
     actionType: function (e) {
       switch (e) {
         case rcl.SET_TOOL_DEFAULT:

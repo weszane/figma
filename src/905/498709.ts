@@ -1,10 +1,10 @@
 import { useCallback, useEffect } from "react";
-import { eU, zl } from "../figma_app/27355";
-import { o, p } from "../figma_app/516794";
+import { atom, atomStoreManager } from "../figma_app/27355";
+import { createEventEmitter, useEventSubscription } from "../figma_app/516794";
 export function $$s0() {
-  let e = o();
-  let t = o();
-  let i = eU(!1);
+  let e = createEventEmitter();
+  let t = createEventEmitter();
+  let i = atom(!1);
   return {
     useRegisterMenu: s => function ({
       manager: e,
@@ -15,14 +15,14 @@ export function $$s0() {
       let {
         setOpen
       } = e;
-      p(t, useCallback(() => {
+      useEventSubscription(t, useCallback(() => {
         setOpen(!0);
       }, [setOpen]));
-      p(i, useCallback(() => {
+      useEventSubscription(i, useCallback(() => {
         setOpen(!1);
       }, [setOpen]));
       useEffect(() => {
-        zl.set(s, e.isOpen);
+        atomStoreManager.set(s, e.isOpen);
       }, [e.isOpen, s]);
     }({
       manager: s,

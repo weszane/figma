@@ -1,11 +1,11 @@
 import { throwTypeError } from "../figma_app/465776";
 import { l as _$$l } from "../905/716947";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import s from "../vendor/946678";
-import { az, sx } from "../905/449184";
+import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
 import { hW } from "../figma_app/594947";
-import { PN } from "../figma_app/257275";
+import { isInteractionOrEvalMode } from "../figma_app/897289";
 import { Dy, pY } from "../figma_app/925970";
 import { nF } from "../905/350402";
 import { xI, Y1 } from "../905/879323";
@@ -20,7 +20,7 @@ import { qp } from "../905/977779";
 import { X0, A0, WV, Gg, ET } from "../figma_app/646357";
 import { D2 } from "../905/18797";
 import { KH } from "../905/81982";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { PW } from "../figma_app/633080";
 import { Ei } from "../905/574958";
 import { r6 } from "../figma_app/517115";
@@ -97,7 +97,7 @@ let V = new KH({
 let $$G0 = new class extends M {
   constructor() {
     super(...arguments);
-    this.lastUpdatedQuery = PN() ? 0 : Date.now();
+    this.lastUpdatedQuery = isInteractionOrEvalMode() ? 0 : Date.now();
     this.expSearchUnpublishedAssetsEnabled = void 0;
     this.initSources = e => {
       let t = e.getState();
@@ -129,7 +129,7 @@ let $$G0 = new class extends M {
         elapsedTime,
         backgrounded
       } = n();
-      az.trackDefinedEvent("asset_search.compute_local_results_time", {
+      analyticsEventManager.trackDefinedEvent("asset_search.compute_local_results_time", {
         elapsedTime,
         searchSessionId: i ?? "",
         backgrounded
@@ -150,12 +150,12 @@ let $$G0 = new class extends M {
         elapsedTime: _elapsedTime,
         backgrounded: _backgrounded
       } = f();
-      az.trackDefinedEvent("asset_search.compute_results_redux.get_used_product_component_keys_time", {
+      analyticsEventManager.trackDefinedEvent("asset_search.compute_results_redux.get_used_product_component_keys_time", {
         elapsedTime: _elapsedTime,
         backgrounded: _backgrounded,
         searchSessionId: o ?? ""
       });
-      let I = zl.get(lj).length > 0;
+      let I = atomStoreManager.get(lj).length > 0;
       switch (t?.type) {
         case _$$I.LOCAL:
           return this.computeLocalResultsPromise(e, A.openFile?.key, o);
@@ -198,7 +198,7 @@ let $$G0 = new class extends M {
         elapsedTime,
         backgrounded
       } = w();
-      az.trackDefinedEvent("asset_search.compute_results_redux.track_top_k_results_time", {
+      analyticsEventManager.trackDefinedEvent("asset_search.compute_results_redux.track_top_k_results_time", {
         elapsedTime,
         backgrounded,
         searchSessionId: o ?? ""
@@ -209,7 +209,7 @@ let $$G0 = new class extends M {
       let t = B0();
       let i = e.getState();
       let n = Ei();
-      let r = zl.get(qp);
+      let r = atomStoreManager.get(qp);
       let s = i.library.assetsPanelSearch.query;
       let d = i.openFile?.key;
       let u = i.openFile?.teamId;
@@ -233,8 +233,8 @@ let $$G0 = new class extends M {
         return;
       }
       let A = await Ci(!0);
-      let b = XE(i.selectedView) === nT.Design;
-      az.trackDefinedEvent("assets_panel.component_search", {
+      let b = XE(i.selectedView) === FEditorType.Design;
+      analyticsEventManager.trackDefinedEvent("assets_panel.component_search", {
         query: s,
         inDesignEditor: b,
         searchSessionId: i.search.sessionId ?? "",
@@ -268,7 +268,7 @@ let $$G0 = new class extends M {
           query: s,
           queryId: n
         }));
-        null === i.search.sessionId && sx("asset_search.missing_session_id", {
+        null === i.search.sessionId && trackEventAnalytics("asset_search.missing_session_id", {
           previousSessionId: i.search.lastLoadedQuery.sessionId,
           entryPoint: i.library.assetsPanelSearch.entryPoint
         }, {
@@ -285,12 +285,12 @@ let $$G0 = new class extends M {
           searchType: _?.type
         };
         await hW("exp_asset_search_refactor");
-        az.trackDefinedEvent("assets_panel.search_time", {
+        analyticsEventManager.trackDefinedEvent("assets_panel.search_time", {
           ...x,
           ...o,
           searchSessionId: i.search.sessionId ?? ""
         });
-        az.trackDefinedEvent("asset_search.query_result", {
+        analyticsEventManager.trackDefinedEvent("asset_search.query_result", {
           ...x,
           ...o,
           sessionId: i.search.sessionId ?? "",
@@ -307,7 +307,7 @@ let $$G0 = new class extends M {
         queryId: i.search.queryId
       }));
       let [S, C] = o()(E.normalizedSearchResults, e => Oo(e, d));
-      null === i.search.sessionId && sx("asset_search.missing_session_id", {
+      null === i.search.sessionId && trackEventAnalytics("asset_search.missing_session_id", {
         previousSessionId: i.search.lastLoadedQuery.sessionId,
         entryPoint: i.library.assetsPanelSearch.entryPoint
       }, {
@@ -327,21 +327,21 @@ let $$G0 = new class extends M {
       };
       let F = {};
       let M = i.selectedView;
-      if ("fullscreen" === M.view && (M.editorType === nT.Sites || M.editorType === nT.Figmake) && _?.type && [_$$I.ALL, _$$I.SITE_KIT].includes(_?.type)) {
-        let e = zl.get(Sv);
+      if ("fullscreen" === M.view && (M.editorType === FEditorType.Sites || M.editorType === FEditorType.Figmake) && _?.type && [_$$I.ALL, _$$I.SITE_KIT].includes(_?.type)) {
+        let e = atomStoreManager.get(Sv);
         F = {
           siteKitSearchResultsCount: e,
           totalShownResults: x.totalShownResults + e
         };
       }
       await hW("exp_asset_search_refactor");
-      az.trackDefinedEvent("assets_panel.search_time", {
+      analyticsEventManager.trackDefinedEvent("assets_panel.search_time", {
         ...x,
         ...D,
         ...F,
         searchSessionId: i.search.sessionId ?? ""
       });
-      az.trackDefinedEvent("asset_search.query_result", {
+      analyticsEventManager.trackDefinedEvent("asset_search.query_result", {
         ...x,
         ...D,
         ...F,

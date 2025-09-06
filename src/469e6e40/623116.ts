@@ -17,7 +17,7 @@ import { A as _$$A } from "../905/891805";
 import { v as _$$v } from "../469e6e40/843735";
 import { getFeatureFlags } from "../905/601108";
 import { parsePxInt } from "../figma_app/783094";
-import { rr } from "../figma_app/778880";
+import { isMobileUA } from "../figma_app/778880";
 import { XHR } from "../905/910117";
 import { HL, IU, uw, Vq, bv } from "../figma_app/421401";
 import { nR, vd, tB } from "../figma_app/637027";
@@ -26,7 +26,7 @@ import { y2 } from "../figma_app/563413";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { Me, $z } from "../figma_app/617427";
-import { tx as _$$tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
 import { F as _$$F } from "../905/302958";
 import { zX } from "../905/576487";
@@ -34,7 +34,7 @@ import { Y as _$$Y, M as _$$M } from "../905/830372";
 import { E as _$$E } from "../905/984674";
 import { p as _$$p } from "../905/597320";
 import { q as _$$q } from "../905/749058";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { kd, Pc, Jb, E7 } from "../figma_app/425283";
 import { c as _$$c } from "../905/370443";
 import { E as _$$E2 } from "../905/453826";
@@ -72,7 +72,7 @@ import { J7, SN } from "../figma_app/650409";
 import { Fb } from "../figma_app/630077";
 import { Ib } from "../905/129884";
 import { V0, m2 } from "../figma_app/858344";
-import { O as _$$O3 } from "../905/247093";
+import { UNASSIGNED } from "../905/247093";
 import { S as _$$S } from "../4452/747039";
 import { CH, rE } from "../figma_app/805373";
 import { r as _$$r2 } from "../469e6e40/505264";
@@ -97,7 +97,7 @@ import { h as _$$h2 } from "../905/857431";
 import { sf } from "../905/929976";
 import { lT } from "../figma_app/494261";
 import { WC } from "../figma_app/240735";
-import { A$ } from "../905/548208";
+import { NavigationRoutes } from "../905/548208";
 import { $ as _$$$2 } from "../905/442144";
 import { H as _$$H } from "../905/154301";
 import { dW } from "../4452/331328";
@@ -109,7 +109,7 @@ import { noop } from "../905/834956";
 import { hP, cE, $u, ld } from "../figma_app/527041";
 import { A as _$$A3 } from "../6828/493300";
 import t_ from "../vendor/239910";
-import { sx as _$$sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { EK } from "../4452/90195";
 import { td as _$$td } from "../figma_app/930338";
 import { qc } from "../figma_app/858013";
@@ -127,7 +127,7 @@ let X = "seen_org_admin_teams_onboarding";
 let Q = r1(X);
 let Z = rn("org_admin_teams_onboarding", _$$R(Ql8));
 function ee(e) {
-  let t = md(Q);
+  let t = useAtomWithSubscription(Q);
   let {
     isShowing,
     complete,
@@ -151,12 +151,12 @@ function ee(e) {
     userFlagOnShow: X,
     onClose: complete,
     primaryCta: {
-      label: _$$tx("onboarding_pointers.got_it"),
+      label: renderI18nText("onboarding_pointers.got_it"),
       type: "button",
       onClick: complete,
       ctaTrackingDescriptor: _$$c.GOT_IT
     },
-    description: _$$tx("onboarding_pointers.teams_access_onboarding")
+    description: renderI18nText("onboarding_pointers.teams_access_onboarding")
   });
 }
 let eo = "seen_workspace_admin_onboarding";
@@ -167,7 +167,7 @@ function e_() {
   let t = Rs(LPq({
     orgId: e
   }));
-  let a = md(ed);
+  let a = useAtomWithSubscription(ed);
   let {
     show,
     isShowing,
@@ -178,7 +178,7 @@ function e_() {
   }, [a, t]);
   _$$h(() => {
     show({
-      canShow: (e, t) => !rr && !e && !!t.currentUser?.baseOrgUser?.workspaceUsers?.some(e => e.permission === FOrganizationRoleType.ADMIN)
+      canShow: (e, t) => !isMobileUA && !e && !!t.currentUser?.baseOrgUser?.workspaceUsers?.some(e => e.permission === FOrganizationRoleType.ADMIN)
     });
   });
   let o = ["AddTeamsToWorkspace", "CheckUnassignedTeams"];
@@ -208,12 +208,12 @@ function eu(e) {
     case "AddTeamsToWorkspace":
       return jsx(rq, {
         clickOutsideToHide: !0,
-        description: _$$tx("workspace_admin.onboarding.step_one_description"),
+        description: renderI18nText("workspace_admin.onboarding.step_one_description"),
         emphasized: !0,
         isShowing,
         onClose: complete,
         primaryCta: {
-          label: _$$tx("general.next"),
+          label: renderI18nText("general.next"),
           onClick: next,
           type: "button",
           ctaTrackingDescriptor: _$$c.NEXT
@@ -223,19 +223,19 @@ function eu(e) {
           totalNumSteps: 2
         },
         targetKey: Pc,
-        title: _$$tx("workspace_admin.onboarding.step_one_heading"),
+        title: renderI18nText("workspace_admin.onboarding.step_one_heading"),
         trackingContextName: Jb,
         userFlagOnShow: eo
       });
     case "CheckUnassignedTeams":
       return jsx(rq, {
         clickOutsideToHide: !0,
-        description: _$$tx("workspace_admin.onboarding.step_two_description"),
+        description: renderI18nText("workspace_admin.onboarding.step_two_description"),
         emphasized: !0,
         isShowing,
         onClose: complete,
         primaryCta: {
-          label: _$$tx("general.got_it"),
+          label: renderI18nText("general.got_it"),
           onClick: complete,
           type: "button",
           ctaTrackingDescriptor: _$$c.GOT_IT
@@ -245,7 +245,7 @@ function eu(e) {
           totalNumSteps: 2
         },
         targetKey: E7,
-        title: _$$tx("workspace_admin.onboarding.step_two_heading"),
+        title: renderI18nText("workspace_admin.onboarding.step_two_heading"),
         trackingContextName: Jb,
         userFlagOnShow: eo
       });
@@ -284,7 +284,7 @@ let eV = Ju(function ({
     orgAccessFilter: null,
     discoverabilityFilter: null,
     teamMembershipFilter: null,
-    workspaceFilter: _$$O3,
+    workspaceFilter: UNASSIGNED,
     orphanedTeamFilter: b
   }), [b]);
   let {
@@ -316,7 +316,7 @@ let eV = Ju(function ({
   let U = P?.name;
   if (!U) return null;
   let F = [{
-    name: _$$t("teams_table.team_name"),
+    name: getI18nString("teams_table.team_name"),
     className: "add_unassigned_teams_modal--nameColumn--H2d4L members_table--avatarColumn--SoUiA members_table--column--e-buT admin_settings_page--membersColumn--E3seT table--column--974RA",
     sorting_key: Kq.NAME,
     getSortValue: e => e.name,
@@ -339,11 +339,11 @@ let eV = Ju(function ({
           })]
         }), jsx(_$$E, {
           color: "secondary",
-          children: _$$tx("add_unassigned_teams_modal.team_metadata", {
-            memberCountInfo: _$$t("add_unassigned_teams_modal.member_count", {
+          children: renderI18nText("add_unassigned_teams_modal.team_metadata", {
+            memberCountInfo: getI18nString("add_unassigned_teams_modal.member_count", {
               memberCount: e.member_count || 0
             }),
-            projectCountInfo: _$$t("add_unassigned_teams_modal.project_count", {
+            projectCountInfo: getI18nString("add_unassigned_teams_modal.project_count", {
               projectCount: e.projects || 0
             })
           })
@@ -386,7 +386,7 @@ let eV = Ju(function ({
       })]
     })
   }, {
-    name: _$$t("teams_table.owner"),
+    name: getI18nString("teams_table.owner"),
     className: "add_unassigned_teams_modal--ownerColumn--jLx2z",
     sorting_key: Kq.OWNER,
     getSortValue: e => e.owner?.handle ? `a${e.owner.handle}` : `z${e.name}`,
@@ -394,7 +394,7 @@ let eV = Ju(function ({
       width: "fill-parent",
       children: jsx(_$$E, {
         truncate: !0,
-        children: e.owner?.handle || _$$t("add_unassigned_teams_modal.no_owner")
+        children: e.owner?.handle || getI18nString("add_unassigned_teams_modal.no_owner")
       })
     }),
     loadingComponent: jsx("div", {
@@ -416,7 +416,7 @@ let eV = Ju(function ({
     if (0 === s.length) return jsx(_$$$, {
       variant: "primary",
       disabled: !0,
-      children: _$$tx("add_unassigned_teams_modal.assign_teams")
+      children: renderI18nText("add_unassigned_teams_modal.assign_teams")
     });
     let i = N && !allTeamsFetched;
     if (i && status === _$$r.LOADING) return jsx(_$$$, {
@@ -450,7 +450,7 @@ let eV = Ju(function ({
         t?.(r.map(e => e.id));
         q();
       },
-      children: _$$tx("add_unassigned_teams_modal.assign_n_teams", {
+      children: renderI18nText("add_unassigned_teams_modal.assign_n_teams", {
         count: r.length
       })
     });
@@ -458,7 +458,7 @@ let eV = Ju(function ({
   return jsx(fu, {
     name: "Add Unassigned Teams Modal",
     children: jsxs(OJ, {
-      title: _$$t("add_unassigned_teams_modal.title", {
+      title: getI18nString("add_unassigned_teams_modal.title", {
         workspaceName: U
       }),
       maxWidth: 480,
@@ -470,7 +470,7 @@ let eV = Ju(function ({
         height: "hug-contents",
         padding: 16,
         children: jsx(_$$E, {
-          children: _$$tx("add_unassigned_teams_modal.description", {
+          children: renderI18nText("add_unassigned_teams_modal.description", {
             workspaceName: U
           })
         })
@@ -489,7 +489,7 @@ let eV = Ju(function ({
           onChange: x,
           query: u,
           clearSearch: () => h(""),
-          placeholder: _$$t("add_unassigned_teams_modal.search_for_teams")
+          placeholder: getI18nString("add_unassigned_teams_modal.search_for_teams")
         })
       }), jsx(_$$Y, {
         height: "hug-contents",
@@ -498,7 +498,7 @@ let eV = Ju(function ({
           checked: b,
           onChange: f,
           label: jsx(_$$J3, {
-            children: _$$tx("add_unassigned_teams_modal.without_owners")
+            children: renderI18nText("add_unassigned_teams_modal.without_owners")
           })
         })
       }), jsx(Cj, {
@@ -507,7 +507,7 @@ let eV = Ju(function ({
           padding: 38,
           children: jsx(_$$E, {
             color: "secondary",
-            children: _$$tx("add_unassigned_teams_modal.no_teams_found")
+            children: renderI18nText("add_unassigned_teams_modal.no_teams_found")
           })
         }),
         footer: function (e) {
@@ -523,7 +523,7 @@ let eV = Ju(function ({
         isLoading: !allTeamsFetched,
         itemTypeContext: {
           itemType: "team",
-          getSelectedCountString: e => _$$t("multi_select_list.selected_count_team", {
+          getSelectedCountString: e => getI18nString("multi_select_list.selected_count_team", {
             numSelected: e
           })
         },
@@ -603,7 +603,7 @@ function e7(e, t, a, n) {
     onRevokeTeamTransferRequest: e => {
       t && t.get(e) && XHR.del(`/api/asset_transfer/${t.get(e)?.asset_transfer_request_id}`).then(() => n(e), () => {
         s(_$$F.enqueue({
-          message: _$$t("asset_transfers.error_message.something_went_wrong_check_your_connection"),
+          message: getI18nString("asset_transfers.error_message.something_went_wrong_check_your_connection"),
           error: !0
         }));
       });
@@ -612,7 +612,7 @@ function e7(e, t, a, n) {
       s(sf({
         teamId: e,
         view: "team",
-        teamViewTab: A$.MEMBERS
+        teamViewTab: NavigationRoutes.MEMBERS
       }));
       o();
     },
@@ -700,22 +700,22 @@ function ta({
   switch (R) {
     case gO.CLICK_JOIN:
     case gO.CLICK_JOIN_AS_ADMIN:
-      _ = _$$t("teams_table.join");
+      _ = getI18nString("teams_table.join");
       break;
     case gO.CLICK_LEAVE:
-      _ = _$$t("teams_table.leave");
+      _ = getI18nString("teams_table.leave");
       break;
     case gO.CLICK_WITHDRAW:
-      _ = _$$t("teams_table.cancel_join_request");
+      _ = getI18nString("teams_table.cancel_join_request");
       break;
     case gO.BYPASS_REQUEST:
-      _ = _$$t("teams_table.join_team_as_owner");
+      _ = getI18nString("teams_table.join_team_as_owner");
       break;
     case gO.CLICK_REQUEST:
-      _ = _$$t("teams_table.request_to_join");
+      _ = getI18nString("teams_table.request_to_join");
       break;
     default:
-      _ = _$$t("teams_table.join");
+      _ = getI18nString("teams_table.join");
   }
   let O = null === R;
   let L = () => {
@@ -798,7 +798,7 @@ function ta({
         return;
     }
   };
-  let B = e => e ? _$$t("teams_table.this_action_cannot_be_applied_to_all_selected_teams") : void 0;
+  let B = e => e ? getI18nString("teams_table.this_action_cannot_be_applied_to_all_selected_teams") : void 0;
   let G = jsx(IU, {
     disabled: O,
     tooltip: B(O),
@@ -813,7 +813,7 @@ function ta({
     onClick: () => {
       if (C.canDelete) for (let e of t) onDeleteTeam(e);
     },
-    label: _$$t("teams_table.delete")
+    label: getI18nString("teams_table.delete")
   }, "delete");
   let V = new Set(t.map(e => e.workspace_id));
   let W = {
@@ -838,33 +838,33 @@ function ta({
     disabled: !C.canManageTeamAccess,
     tooltip: B(!C.canManageTeamAccess),
     onClick: C.canManageTeamAccess ? () => onOpenAccessSettings(t[0]) : void 0,
-    label: _$$t("teams_table.manage_access_setting")
+    label: getI18nString("teams_table.manage_access_setting")
   }, "change-access-settings");
   Y.push(jsx(IU, {
     disabled: !C.canViewProjects,
     tooltip: B(!C.canViewProjects),
     onClick: C.canViewProjects ? () => onOpenTeam(t[0].id) : void 0,
-    label: _$$t("teams_table.view_projects")
+    label: getI18nString("teams_table.view_projects")
   }, "view-projects"), jsx(IU, {
     disabled: !C.canViewMembers,
     tooltip: B(!C.canViewMembers),
     onClick: C.canViewMembers ? () => onViewTeamMembers(t[0].id) : void 0,
-    label: _$$t("teams_table.view_team_members")
+    label: getI18nString("teams_table.view_team_members")
   }, "view-members"), jsx(IU, {
     disabled: !C.canRename,
     tooltip: B(!C.canRename),
     onClick: C.canRename ? () => onRenameTeam(t[0]) : void 0,
-    label: _$$t("teams_table.rename")
+    label: getI18nString("teams_table.rename")
   }, "rename-team"), J, H, r && r.get(t[0].id) ? jsx(IU, {
     disabled: !C.canTransfer,
     tooltip: B(!C.canTransfer),
     onClick: () => onRevokeTeamTransferRequest(t[0].id),
-    label: _$$t("teams_table.revoke_transfer_request")
+    label: getI18nString("teams_table.revoke_transfer_request")
   }, "revoke-team-transfer") : jsx(IU, {
     disabled: !C.canTransfer,
     tooltip: B(!C.canTransfer),
     onClick: () => onTransferTeam(t[0]),
-    label: _$$t("teams_table.transfer")
+    label: getI18nString("teams_table.transfer")
   }, "transfer-team"), z, G);
   return jsx(Fragment, {
     children: Y
@@ -935,16 +935,16 @@ function tc({
   let z = t?.type === G;
   let V = [];
   y?.canViewTeam && (y?.canViewTeamProjects && V.push({
-    displayText: _$$t("teams_table.view_projects"),
+    displayText: getI18nString("teams_table.view_projects"),
     callback: () => onOpenTeam(r.id)
   }), q && (V.push({
-    displayText: _$$t("teams_table.view_team_members"),
+    displayText: getI18nString("teams_table.view_team_members"),
     callback: () => {
       $();
       p();
     }
   }), V.push({
-    displayText: _$$t("teams_table.view_settings"),
+    displayText: getI18nString("teams_table.view_settings"),
     callback: () => {
       B();
       g();
@@ -955,14 +955,14 @@ function tc({
     separator: !0
   });
   y?.canManageOrgTeam && (V.push({
-    displayText: _$$t("teams_table.rename_team"),
+    displayText: getI18nString("teams_table.rename_team"),
     callback: () => onRenameTeam(r)
   }), V.push({
-    displayText: _$$t("teams_table.manage_access_setting"),
+    displayText: getI18nString("teams_table.manage_access_setting"),
     callback: () => onOpenAccessSettings(r)
   }));
   a.length > 0 && V.push({
-    displayText: _$$t("teams_table.change_workspace"),
+    displayText: getI18nString("teams_table.change_workspace"),
     children: ((e, t) => {
       let n = a.map(a => ({
         displayText: a.name,
@@ -974,7 +974,7 @@ function tc({
         separator: !0
       });
       n.push({
-        displayText: t ? _$$t("members_table.license_group_cell.unassign") : _$$t("license_group.unassigned"),
+        displayText: t ? getI18nString("members_table.license_group_cell.unassign") : getI18nString("license_group.unassigned"),
         isChecked: !t,
         callback: () => onRemoveFromWorkspace(e)
       });
@@ -986,14 +986,14 @@ function tc({
     separator: !0
   });
   j && y?.canManageOrgTeam && (l && l.get(r.id) ? V.push({
-    displayText: _$$t("teams_table.revoke_transfer_request"),
+    displayText: getI18nString("teams_table.revoke_transfer_request"),
     callback: () => onRevokeTeamTransferRequest(r.id)
   }) : V.push({
-    displayText: _$$t("teams_table.transfer_team"),
+    displayText: getI18nString("teams_table.transfer_team"),
     callback: () => onTransferTeam(r)
   }));
   y.canDeleteTeam && V.push({
-    displayText: _$$t("teams_table.delete_team"),
+    displayText: getI18nString("teams_table.delete_team"),
     callback: () => onDeleteTeam(r)
   });
   let W = (e => {
@@ -1002,17 +1002,17 @@ function tc({
       displayText: (() => {
         switch (t) {
           case gO.CLICK_LEAVE:
-            return _$$t("teams_table.leave_team");
+            return getI18nString("teams_table.leave_team");
           case gO.CLICK_WITHDRAW:
-            return _$$t("teams_table.cancel_join_request");
+            return getI18nString("teams_table.cancel_join_request");
           case gO.CLICK_JOIN:
-            return _$$t("teams_table.join_team");
+            return getI18nString("teams_table.join_team");
           case gO.CLICK_JOIN_AS_ADMIN:
-            return _$$t("teams_table.join_team_as_admin");
+            return getI18nString("teams_table.join_team_as_admin");
           case gO.BYPASS_REQUEST:
-            return _$$t("teams_table.join_team_as_owner");
+            return getI18nString("teams_table.join_team_as_owner");
           case gO.CLICK_REQUEST:
-            return _$$t("teams_table.request_to_join");
+            return getI18nString("teams_table.request_to_join");
         }
       })(),
       callback: (() => {
@@ -1095,11 +1095,11 @@ function tC(e) {
         className: e.isSelected ? "default_teams_edit_modal--teamRowDetailsSelected--8ER-5 default_teams_edit_modal--teamRowDetails--TM7BL" : "default_teams_edit_modal--teamRowDetails--TM7BL",
         children: [t.sharing_audience_control === FPermissionLevelType.INVITE_ONLY && t.org_browsable && jsxs(Fragment, {
           children: [jsx("span", {
-            children: _$$t("teams_table.default_workspace_team.invite_only")
+            children: getI18nString("teams_table.default_workspace_team.invite_only")
           }), jsx("span", {
             children: "\xa0\xb7\xa0"
           }), jsx("span", {
-            children: _$$t("teams_table.default_workspace_team.visible")
+            children: getI18nString("teams_table.default_workspace_team.visible")
           }), jsx("span", {
             children: "\xa0\xb7\xa0"
           })]
@@ -1131,7 +1131,7 @@ let tN = Ju(function (e) {
   } = e;
   let a = useDispatch();
   let r = dq();
-  let l = md(EK);
+  let l = useAtomWithSubscription(EK);
   let o = useMemo(() => "loaded" !== l.status ? l : {
     status: "loaded",
     data: tu()(l.data, e => e.id)
@@ -1163,7 +1163,7 @@ let tN = Ju(function (e) {
     });
   }, [b, h, _, o, u]);
   let v = () => {
-    _$$sx("CTA Clicked", {
+    trackEventAnalytics("CTA Clicked", {
       name: "Edit Default Teams Modal Cancel",
       workspaceId,
       orgId: r
@@ -1174,11 +1174,11 @@ let tN = Ju(function (e) {
     className: _$$s.fontSemiBold.$,
     children: c?.name
   });
-  let j = c?.name ? _$$tx("workspace.when_people_join_workspace_name", {
+  let j = c?.name ? renderI18nText("workspace.when_people_join_workspace_name", {
     styledWorkspaceName: f
-  }) : _$$tx("workspace.when_people_join_this_workspace");
+  }) : renderI18nText("workspace.when_people_join_this_workspace");
   return jsx(OJ, {
-    title: _$$t("workspace.edit_default_teams"),
+    title: getI18nString("workspace.edit_default_teams"),
     onClose: v,
     minWidth: 500,
     children: jsxs("div", {
@@ -1235,14 +1235,14 @@ let tN = Ju(function (e) {
         }), jsxs("span", {
           children: [jsx("span", {
             className: _$$s.fontSemiBold.$,
-            children: _$$t("workspace.note")
-          }), _$$t("workspace.new_users_will_join_updated")]
+            children: getI18nString("workspace.note")
+          }), getI18nString("workspace.new_users_will_join_updated")]
         })]
       }), jsxs("div", {
         className: "default_teams_edit_modal--buttonContainer--dyJDe default_teams_edit_modal--flexHorizontalGap8px--BmbPK",
         children: [jsx(nR, {
           onClick: v,
-          children: _$$t("workspace.cancel")
+          children: getI18nString("workspace.cancel")
         }), jsx(fu, {
           name: "Edit Default Teams Modal Submit",
           properties: {
@@ -1265,7 +1265,7 @@ let tN = Ju(function (e) {
               a(Ce());
             },
             disabled: b || !!m.errorMessage,
-            children: _$$t("workspace.save")
+            children: getI18nString("workspace.save")
           })
         })]
       })]
@@ -1275,8 +1275,8 @@ let tN = Ju(function (e) {
 var tA = (e => (e[e.SEARCH = 0] = "SEARCH", e[e.FILTER = 1] = "FILTER", e))(tA || {});
 var tR = (e => (e.MEMBERSHIP = "MEMBERSHIP", e.ACCESS = "ACCESS", e))(tR || {});
 let tO = () => ({
-  [ig.JOINED]: _$$t("teams_table.membership_filter.my_teams_option"),
-  [ig.NOT_JOINED]: _$$t("teams_table.membership_filter.not_my_teams_option")
+  [ig.JOINED]: getI18nString("teams_table.membership_filter.my_teams_option"),
+  [ig.NOT_JOINED]: getI18nString("teams_table.membership_filter.not_my_teams_option")
 });
 function tL(e) {
   var t;
@@ -1321,7 +1321,7 @@ function tL(e) {
   let ec = e => {
     eo(t => new Map(t.set(e, null)));
     en(_$$F.enqueue({
-      message: _$$t("asset_transfers.revoke.transfer_revoked")
+      message: getI18nString("asset_transfers.revoke.transfer_revoked")
     }));
   };
   let {
@@ -1348,7 +1348,7 @@ function tL(e) {
     selectedView: e
   }) => "workspace" === e.view && e.subView === V0.ADMIN ? e.workspaceId : null);
   let eJ = !eH;
-  let eK = !rr && eG;
+  let eK = !isMobileUA && eG;
   let eX = NJ(org.id);
   let eQ = eX.data || [];
   let eZ = {};
@@ -1361,7 +1361,7 @@ function tL(e) {
     onRightActionsChange?.(jsx($n, {
       iconPrefix: jsx(_$$e2, {}),
       onClick: e1,
-      children: _$$tx("resources_tab.approved_plugins.actions.add_plugin")
+      children: renderI18nText("resources_tab.approved_plugins.actions.add_plugin")
     }));
   });
   let e1 = () => {
@@ -1391,21 +1391,21 @@ function tL(e) {
     if (Q) return;
     Z(!0);
     en(_$$F.enqueue({
-      message: _$$t("teams_table.csv_export.preparing_request"),
+      message: getI18nString("teams_table.csv_export.preparing_request"),
       type: "orgTeam.exportCSV",
       icon: zX.SPINNER
     }));
     let t = eY ? `/api/workspace/${eY}/export_teams` : `/api/orgs/${e.org.id}/export_teams`;
     XHR.post(t).then(() => {
       en(_$$F.enqueue({
-        message: _$$t("teams_table.csv_export.generating"),
+        message: getI18nString("teams_table.csv_export.generating"),
         type: "orgTeam.exportCSV",
         icon: zX.CHECK
       }));
       Z(!1);
     }, () => {
       en(_$$F.enqueue({
-        message: _$$t("teams_table.csv_export.error"),
+        message: getI18nString("teams_table.csv_export.error"),
         type: "orgTeam.exportCSV",
         icon: zX.EXCLAMATION,
         error: !0
@@ -1413,7 +1413,7 @@ function tL(e) {
       Z(!1);
     });
   };
-  let e5 = eY && filters.workspaceFilter !== _$$O3;
+  let e5 = eY && filters.workspaceFilter !== UNASSIGNED;
   function e3(e, t) {
     return jsx(tc, {
       areDropdownsDisabled: t,
@@ -1430,7 +1430,7 @@ function tL(e) {
   }
   function e8(e) {
     if (el && el.get(e.id)) {
-      let t = _$$t("file_browser.team_settings.source_user_sent_destination_user_a_request_to_transfer_this_team", {
+      let t = getI18nString("file_browser.team_settings.source_user_sent_destination_user_a_request_to_transfer_this_team", {
         sourceUserEmail: el.get(e.id)?.source_user_email,
         destinationUserEmail: el.get(e.id)?.destination_user_email
       });
@@ -1461,7 +1461,7 @@ function tL(e) {
       disabled: t,
       workspacesCanMoveTo: eQ,
       onChangeWorkspace: t => {
-        t === _$$O3 ? onRemoveFromWorkspace(e) : onAddToWorkspace(e, t, eZ[t]?.name);
+        t === UNASSIGNED ? onRemoveFromWorkspace(e) : onAddToWorkspace(e, t, eZ[t]?.name);
       }
     });
   }
@@ -1473,7 +1473,7 @@ function tL(e) {
       });
     }
     e.push({
-      name: _$$t("teams_table.team_name"),
+      name: getI18nString("teams_table.team_name"),
       className: "paginated_teams_table--teamNameColumn--TacEL paginated_teams_table--column--egVf3 table--column--974RA",
       sorting_key: Kq.NAME,
       getSortValue: e => e.name,
@@ -1489,7 +1489,7 @@ function tL(e) {
       })
     });
     e.push({
-      name: _$$t("teams_table.owner"),
+      name: getI18nString("teams_table.owner"),
       className: "paginated_teams_table--ownerColumn--nbyvF paginated_teams_table--column--egVf3 table--column--974RA",
       sorting_key: Kq.OWNER,
       getSortValue: e => e.owner?.handle ? `a${e.owner.handle}` : `z${e.name}`,
@@ -1500,27 +1500,27 @@ function tL(e) {
       }) : jsx(t, {})
     });
     e.push({
-      name: _$$t("teams_table.projects"),
+      name: getI18nString("teams_table.projects"),
       className: "paginated_teams_table--projectsColumn--yfCnG paginated_teams_table--column--egVf3 table--column--974RA",
       sorting_key: Kq.PROJECTS,
       getSortValue: e => e.projects ?? 0,
       sortNumerically: !0,
-      cellComponent: e => _$$tx("teams_table.project_count", {
+      cellComponent: e => renderI18nText("teams_table.project_count", {
         numProjects: e.projects
       })
     });
     e.push({
-      name: _$$t("teams_table.members"),
+      name: getI18nString("teams_table.members"),
       className: "paginated_teams_table--membersColumn--cYGDk paginated_teams_table--column--egVf3 table--column--974RA",
       sorting_key: Kq.MEMBERS,
       getSortValue: e => "number" == typeof e.member_count ? e.member_count : -1,
       sortNumerically: !0,
-      cellComponent: e => "number" == typeof e.member_count ? _$$tx("teams_table.member_count", {
+      cellComponent: e => "number" == typeof e.member_count ? renderI18nText("teams_table.member_count", {
         numMembers: e.member_count
       }) : jsx(t, {})
     });
     org.bigma_enabled && eQ.length > 0 && e.push({
-      name: _$$t("teams_table.enterprise.workspace"),
+      name: getI18nString("teams_table.enterprise.workspace"),
       sorting_key: Kq.WORKSPACE,
       getSortValue: e => e.workspace_id && eZ[e.workspace_id]?.name || "",
       className: "paginated_teams_table--workspaceColumn--PnQOi paginated_teams_table--column--egVf3 table--column--974RA",
@@ -1544,59 +1544,59 @@ function tL(e) {
   let tn = [{
     type: "orphanedTeamFilter",
     value: "on",
-    display: _$$t("teams_table.teams_without_owners")
+    display: getI18nString("teams_table.teams_without_owners")
   }];
   let ts = [{
     type: "MEMBERSHIP",
-    title: _$$t("admin_filters.section_headers.membership"),
+    title: getI18nString("admin_filters.section_headers.membership"),
     filters: [{
       type: "teamMembershipFilter",
-      label: _$$t("admin_filters.filter_labels.teams"),
+      label: getI18nString("admin_filters.filter_labels.teams"),
       filterComponent: km.SELECT,
       options: [{
-        display: _$$t("admin_filters.generic_value.all"),
+        display: getI18nString("admin_filters.generic_value.all"),
         value: null
       }, {
-        display: _$$t("admin_filters.filter_values.my_teams"),
+        display: getI18nString("admin_filters.filter_values.my_teams"),
         value: ig.JOINED
       }, {
-        display: _$$t("admin_filters.filter_values.not_my_teams"),
+        display: getI18nString("admin_filters.filter_values.not_my_teams"),
         value: ig.NOT_JOINED
       }]
     }, ...(eG ? [{
       type: "workspaceFilter",
-      label: _$$t("admin_filters.filter_labels.workspace"),
+      label: getI18nString("admin_filters.filter_labels.workspace"),
       filterComponent: km.SELECT,
       options: [{
-        display: _$$t("admin_filters.generic_value.all"),
+        display: getI18nString("admin_filters.generic_value.all"),
         value: null
       }, {
-        display: _$$t("license_group.unassigned"),
-        value: _$$O3
+        display: getI18nString("license_group.unassigned"),
+        value: UNASSIGNED
       }, ...eQ.map(e => ({
-        display: eZ[e.id]?.name ?? _$$t("license_group.unassigned"),
+        display: eZ[e.id]?.name ?? getI18nString("license_group.unassigned"),
         value: e.id
       }))]
     }] : []), {
       type: "orphanedTeamFilter",
-      label: _$$t("teams_table.teams_without_owners"),
+      label: getI18nString("teams_table.teams_without_owners"),
       filterComponent: km.CHECKBOX
     }]
   }, {
     type: "ACCESS",
-    title: _$$t("admin_filters.section_headers.access"),
+    title: getI18nString("admin_filters.section_headers.access"),
     filters: [{
       type: "discoverabilityFilter",
-      label: _$$t("admin_filters.filter_labels.discoverability"),
+      label: getI18nString("admin_filters.filter_labels.discoverability"),
       filterComponent: km.SELECT,
       options: [{
-        display: _$$t("admin_filters.generic_value.all"),
+        display: getI18nString("admin_filters.generic_value.all"),
         value: null
       }, {
-        display: _$$t("admin_filters.filter_values.visible"),
+        display: getI18nString("admin_filters.filter_values.visible"),
         value: Fb.ORG_BROWSABLE
       }, {
-        display: _$$t("admin_filters.filter_values.hidden"),
+        display: getI18nString("admin_filters.filter_values.hidden"),
         value: Fb.HIDDEN
       }]
     }]
@@ -1609,15 +1609,15 @@ function tL(e) {
       onClick: e1,
       "data-onboarding-key": Pc,
       children: jsx(_$$E, {
-        children: _$$tx("teams_table.create_team")
+        children: renderI18nText("teams_table.create_team")
       })
     }), eY && jsx($n, {
       onClick: e2,
       children: jsx(_$$E, {
-        children: _$$tx("teams_table.assign_teams")
+        children: renderI18nText("teams_table.assign_teams")
       })
     }), jsx(Me, {
-      "aria-label": _$$t("members_table.csv_export.get_csv"),
+      "aria-label": getI18nString("members_table.csv_export.get_csv"),
       onClick: e4,
       variant: "secondary",
       trackingProperties: {
@@ -1634,11 +1634,11 @@ function tL(e) {
       iconPrefix: jsx(_$$e2, {}),
       onClick: e1,
       "data-onboarding-key": Pc,
-      children: _$$tx("teams_table.team")
+      children: renderI18nText("teams_table.team")
     }), eY && jsx($n, {
       onClick: e2,
       children: jsx(_$$E, {
-        children: _$$tx("teams_table.assign_teams")
+        children: renderI18nText("teams_table.assign_teams")
       })
     }), jsx($z, {
       iconPrefix: jsx(_$$v, {}),
@@ -1646,7 +1646,7 @@ function tL(e) {
       trackingProperties: {
         action: "Export CSV"
       },
-      children: _$$tx("teams_table.csv_export.get_csv")
+      children: renderI18nText("teams_table.csv_export.get_csv")
     })]
   });
   _$$h(() => {
@@ -1702,14 +1702,14 @@ function tL(e) {
       emptyContent: jsx(_$$p, {
         children: (() => {
           let e = jsxs("span", {
-            children: [_$$tx("teams_table.your_organization_does_not_have_any_teams_yet"), " ", jsx($n, {
+            children: [renderI18nText("teams_table.your_organization_does_not_have_any_teams_yet"), " ", jsx($n, {
               variant: "link",
               onClick: e1,
-              children: _$$tx("teams_table.create_one")
+              children: renderI18nText("teams_table.create_one")
             })]
           });
           let t = jsxs("span", {
-            children: [_$$t("teams_table.no_teams_to_show"), " ", jsx($n, {
+            children: [getI18nString("teams_table.no_teams_to_show"), " ", jsx($n, {
               variant: "link",
               onClick: () => {
                 onFilter({
@@ -1720,10 +1720,10 @@ function tL(e) {
                   workspaceFilter: "workspace" === er ? filters.workspaceFilter : null
                 });
               },
-              children: _$$tx("multi_select_list.reset_filters")
+              children: renderI18nText("multi_select_list.reset_filters")
             })]
           });
-          let a = _$$tx("teams_table.no_search_results");
+          let a = renderI18nText("teams_table.no_search_results");
           let s = filters.orgAccessFilter || filters.discoverabilityFilter || filters.teamMembershipFilter || filters.orphanedTeamFilter || filters.workspaceFilter && "workspace" !== er;
           return s && searchQuery ? 0 === lastFilterAction ? a : t : s ? t : searchQuery ? a : e;
         })()
@@ -1735,7 +1735,7 @@ function tL(e) {
       isLoading,
       itemTypeContext: {
         itemType: "team",
-        getSelectedCountString: e => et && (!totalSelectable || status !== _$$r.SUCCESS) ? "" : _$$t("multi_select_list.selected_count_team", {
+        getSelectedCountString: e => et && (!totalSelectable || status !== _$$r.SUCCESS) ? "" : getI18nString("multi_select_list.selected_count_team", {
           numSelected: e
         })
       },
@@ -1760,7 +1760,7 @@ function tL(e) {
                 clearSearch: () => {
                   onSearch("");
                 },
-                placeholder: _$$t("teams_table.search_teams_with_ellipsis")
+                placeholder: getI18nString("teams_table.search_teams_with_ellipsis")
               })
             }), !getFeatureFlags().ff_new_filters_wsbg && jsxs(Fragment, {
               children: [jsx(_$$y, {
@@ -1777,11 +1777,11 @@ function tL(e) {
                 getSelectedDisplayText: e => {
                   switch (e) {
                     case Fb.ORG_BROWSABLE:
-                      return _$$t("teams_table.discoverability_filter.visible");
+                      return getI18nString("teams_table.discoverability_filter.visible");
                     case Fb.HIDDEN:
-                      return _$$t("teams_table.discoverability_filter.hidden");
+                      return getI18nString("teams_table.discoverability_filter.hidden");
                     default:
-                      return _$$t("teams_table.discoverability_filter.all");
+                      return getI18nString("teams_table.discoverability_filter.all");
                   }
                 },
                 getCount: e => e$.org_access[e === Fb.ORG_BROWSABLE ? FAccessLevelType.PRIVATE : FAccessLevelType.SECRET],
@@ -1798,11 +1798,11 @@ function tL(e) {
                 getSelectedDisplayText: e => {
                   switch (e) {
                     case ig.JOINED:
-                      return _$$t("teams_table.membership_filter.my_teams_label");
+                      return getI18nString("teams_table.membership_filter.my_teams_label");
                     case ig.NOT_JOINED:
-                      return _$$t("teams_table.membership_filter.not_my_teams_label");
+                      return getI18nString("teams_table.membership_filter.not_my_teams_label");
                     default:
-                      return _$$t("teams_table.membership_filter.all");
+                      return getI18nString("teams_table.membership_filter.all");
                   }
                 },
                 getCount: e => e$.team_membership[e],
@@ -1823,14 +1823,14 @@ function tL(e) {
                 children: [jsx(tB, {
                   checked: filters.orphanedTeamFilter,
                   onChange: lQ
-                }), _$$tx("teams_table.teams_without_owners")]
+                }), renderI18nText("teams_table.teams_without_owners")]
               })]
             })]
           }), jsxs("div", {
             className: ld,
             children: [!!getFeatureFlags().ff_new_filters_wsbg && jsx(_$$W, {
               analyticsPageName: "teams",
-              ariaLabel: _$$t("admin_filters.trigger_button_aria_label.teams"),
+              ariaLabel: getI18nString("admin_filters.trigger_button_aria_label.teams"),
               currentFilters: (t = e.filters, {
                 workspaceFilter: eG ? t.workspaceFilter : null,
                 orgAccessFilter: t.orgAccessFilter,
@@ -1876,7 +1876,7 @@ function tL(e) {
                   }
                 }));
               },
-              children: _$$tx("teams_table.enterprise.edit_default_teams")
+              children: renderI18nText("teams_table.enterprise.edit_default_teams")
             })]
           })]
         })]

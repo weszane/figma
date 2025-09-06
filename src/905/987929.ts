@@ -1,6 +1,6 @@
 import { K } from "../905/621139";
 import { O4, By } from "../905/777187";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { LS } from "../figma_app/975811";
 import { gl, _W } from "../905/216495";
 import { zk } from "../figma_app/198712";
@@ -11,7 +11,7 @@ export class $$d0 extends K {
     this.allowedUnits = "";
   }
   format(e) {
-    return gl(e) ? t("fullscreen.mixed") : this.formatUnmixed(e);
+    return gl(e) ? getI18nString("fullscreen.mixed") : this.formatUnmixed(e);
   }
   parse(e, t) {
     e = this.normalize(e);

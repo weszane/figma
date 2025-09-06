@@ -6,11 +6,11 @@ import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Rs } from "../figma_app/288654";
 import { zE } from "../905/64735";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { E as _$$E } from "../905/984674";
 import { M9I, KiY } from "../figma_app/43951";
@@ -61,11 +61,11 @@ function w(e) {
   let u = isWidget ? jsx(_$$E, {
     color: "default",
     fontWeight: "medium",
-    children: tx("extension_request_modal.widget_approved", c)
+    children: renderI18nText("extension_request_modal.widget_approved", c)
   }) : jsx(_$$E, {
     color: "default",
     fontWeight: "medium",
-    children: tx("extension_request_modal.plugin_approved", c)
+    children: renderI18nText("extension_request_modal.plugin_approved", c)
   });
   return jsx("div", {
     className: _$$s.mb16.$,
@@ -94,9 +94,9 @@ function T({
     children: fileName
   });
   if (!workspaceName) {
-    let e = t ? tx("extension_request_modal.widget_file_details", {
+    let e = t ? renderI18nText("extension_request_modal.widget_file_details", {
       fileLink: o
-    }) : tx("extension_request_modal.plugin_file_details", {
+    }) : renderI18nText("extension_request_modal.plugin_file_details", {
       fileLink: o
     });
     return jsx("div", {
@@ -112,10 +112,10 @@ function T({
     fontWeight: "semi-bold",
     children: workspaceName
   });
-  let d = t ? tx("extension_request_modal.widget_workspace_details", {
+  let d = t ? renderI18nText("extension_request_modal.widget_workspace_details", {
     fileLink: o,
     workspace: l
-  }) : tx("extension_request_modal.plugin_workspace_details", {
+  }) : renderI18nText("extension_request_modal.plugin_workspace_details", {
     fileLink: o,
     workspace: l
   });
@@ -139,7 +139,7 @@ export let $$k0 = Ju(function ({
   open: x
 }) {
   let S;
-  sx("Open Plugin Request Modal", {
+  trackEventAnalytics("Open Plugin Request Modal", {
     name: "Request Plugin Modal",
     openedFrom: b,
     fullscreenEditorType: I
@@ -157,8 +157,8 @@ export let $$k0 = Ju(function ({
   let [D, L] = useState(void 0);
   let F = s?.workspaceId;
   let M = useDispatch();
-  let j = t ? _$$t("extension_request_modal.request_widget_approval") : _$$t("extension_request_modal.request_plugin_approval");
-  S = R ? t ? _$$t("extension_request_modal.leave_widget_rerequest_note") : _$$t("extension_request_modal.leave_plugin_rerequest_note") : t ? _$$t("extension_request_modal.leave_widget_note") : _$$t("extension_request_modal.leave_plugin_note");
+  let j = t ? getI18nString("extension_request_modal.request_widget_approval") : getI18nString("extension_request_modal.request_plugin_approval");
+  S = R ? t ? getI18nString("extension_request_modal.leave_widget_rerequest_note") : getI18nString("extension_request_modal.leave_plugin_rerequest_note") : t ? getI18nString("extension_request_modal.leave_widget_note") : getI18nString("extension_request_modal.leave_plugin_note");
   let U = hS({
     open: x,
     onClose: E
@@ -199,7 +199,7 @@ export let $$k0 = Ju(function ({
           iconSrc: _$$A2,
           children: [jsxs(_$$E, {
             fontWeight: "semi-bold",
-            children: [t ? _$$t("extension_request_modal.widget_declined_on_string") : _$$t("extension_request_modal.plugin_declined_on_string"), " ", R.updatedAt.toLocaleDateString("en-US", {
+            children: [t ? getI18nString("extension_request_modal.widget_declined_on_string") : getI18nString("extension_request_modal.plugin_declined_on_string"), " ", R.updatedAt.toLocaleDateString("en-US", {
               year: "numeric",
               month: "short",
               day: "numeric"
@@ -221,32 +221,32 @@ export let $$k0 = Ju(function ({
           onChange: e => {
             L(e.target.value);
           },
-          placeholder: _$$t("extension_request_modal.request_placeholder")
+          placeholder: getI18nString("extension_request_modal.request_placeholder")
         })]
       }), jsx(wi, {
         children: jsxs(jk, {
           children: [jsx($n, {
             variant: "secondary",
             onClick: E,
-            children: _$$t("extension_request_modal.cancel")
+            children: getI18nString("extension_request_modal.cancel")
           }), jsx($n, {
             disabled: !D,
             variant: "primary",
             onClick: () => {
               (t ? J.requestWidget : J.requestPlugin)(i, pluginId, D, F).then(() => {
-                let e = t ? _$$t("extension_request_modal.widget_approval_requested") : _$$t("extension_request_modal.plugin_approval_requested");
+                let e = t ? getI18nString("extension_request_modal.widget_approval_requested") : getI18nString("extension_request_modal.plugin_approval_requested");
                 M(_$$F.enqueue({
                   message: e
                 }));
               }).catch(e => {
-                let t = e.message ?? _$$t("extension_request_modal.error_requesting_approval");
+                let t = e.message ?? getI18nString("extension_request_modal.error_requesting_approval");
                 M(_$$F.enqueue({
                   message: t
                 }));
               });
               E();
             },
-            children: _$$t("extension_request_modal.request")
+            children: getI18nString("extension_request_modal.request")
           })]
         })
       })]

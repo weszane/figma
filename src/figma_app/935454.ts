@@ -1,13 +1,13 @@
 import { useRef, useCallback, useEffect } from "react";
 import { Nfd } from "../figma_app/763686";
-import { Xr, fp } from "../figma_app/27355";
+import { Xr, useAtomValueAndSetter } from "../figma_app/27355";
 import { O1, KD } from "../figma_app/317394";
 import { _4 } from "../figma_app/32128";
 import { s0, Nl, bP, $e } from "../figma_app/115923";
 export function $$d0() {
   let e = Xr(s0);
-  let [t, r] = fp(Nl);
-  let [d, c] = fp(bP);
+  let [t, r] = useAtomValueAndSetter(Nl);
+  let [d, c] = useAtomValueAndSetter(bP);
   let u = useRef(null);
   let p = useCallback(() => {
     c(!0);

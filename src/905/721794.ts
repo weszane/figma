@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { Component } from "react";
 import { $$ } from "../figma_app/637027";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { Ce } from "../905/156213";
 import { qK } from "../905/102752";
 import { d_ } from "../figma_app/918700";
@@ -27,7 +27,7 @@ class p extends Component {
       className: yl,
       ...this.props,
       children: [jsx("div", {
-        children: tx("tile.copy_link.action_description")
+        children: renderI18nText("tile.copy_link.action_description")
       }), jsx("input", {
         className: _Z,
         value: e.data.link,
@@ -39,7 +39,7 @@ class p extends Component {
         children: jsx($$, {
           className: pL,
           onClick: this.hideModal,
-          children: tx("tile.copy_link.done")
+          children: renderI18nText("tile.copy_link.done")
         })
       })]
     });

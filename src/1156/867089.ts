@@ -4,15 +4,15 @@ import { t8O } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { l as _$$l } from "../905/716947";
 import { getSingletonSceneGraph } from "../905/700578";
-import { eU, fp } from "../figma_app/27355";
-import { az } from "../905/449184";
+import { atom, useAtomValueAndSetter } from "../figma_app/27355";
+import { analyticsEventManager } from "../905/449184";
 import { tS } from "../figma_app/516028";
 import { Wh } from "../figma_app/615482";
 import { N6 } from "../figma_app/275370";
 import { nc } from "../figma_app/570630";
-let g = Wh(() => eU(null));
-let p = Wh(() => eU(null));
-let f = Wh(() => eU(null));
+let g = Wh(() => atom(null));
+let p = Wh(() => atom(null));
+let f = Wh(() => atom(null));
 let y = {
   library_type: "team",
   library_name: "Unknown",
@@ -59,7 +59,7 @@ export function $$b2(e) {
   }, [allDsImportReadyLibraries, e, allDsImportReadyLibrariesRequestStatus]);
 }
 export function $$j1() {
-  let [e, t] = fp(g);
+  let [e, t] = useAtomValueAndSetter(g);
   let n = tS();
   let l = useCallback(e => {
     if (e.raw_text_styles) {
@@ -90,13 +90,13 @@ export function $$j1() {
       type: "LIBRARY",
       library: e
     });
-    az.trackDefinedEvent("ds_import.library_selected", {
+    analyticsEventManager.trackDefinedEvent("ds_import.library_selected", {
       fileKey: n || "",
       libraryKey: e.library_key
     });
   }, [t, n]);
   let x = useCallback(() => {
-    e?.library && az.trackDefinedEvent("ds_import.library_used_in_generation", {
+    e?.library && analyticsEventManager.trackDefinedEvent("ds_import.library_used_in_generation", {
       fileKey: n || "",
       libraryKey: e.library.library_key
     });
@@ -116,8 +116,8 @@ export function $$j1() {
   };
 }
 export function $$v0() {
-  let [e, t] = fp(p);
-  let [n, i] = fp(f);
+  let [e, t] = useAtomValueAndSetter(p);
+  let [n, i] = useAtomValueAndSetter(f);
   useEffect(() => {
     null === n && (i("loading"), N6().then(e => {
       t(e.data.meta);

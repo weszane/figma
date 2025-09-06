@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { W8Y } from "../figma_app/763686";
-import { eU, Xr, fp, md } from "../figma_app/27355";
+import { atom, Xr, useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import { am } from "../figma_app/901889";
 import { H1 } from "../figma_app/124493";
 import { XM } from "../905/486443";
@@ -10,7 +10,7 @@ import { jo } from "../figma_app/629335";
 import { Qs, sx } from "../905/992395";
 import { D } from "../905/80656";
 import { C3 } from "../figma_app/587765";
-export let $$m4 = Wh(() => eU(!1));
+export let $$m4 = Wh(() => atom(!1));
 var $$g0 = (e => (e.OPEN = "meetings_panel_open", e.CLOSE = "meetings_panel_close", e))($$g0 || {});
 var $$f3 = (e => (e.MEETINGS_TOOLBAR = "meetings_toolbar", e.MEETINGS_MINIMIZED = "meetings_minimized", e.MEETINGS_PANEL = "meetings_panel", e.INSERTS_MENU = "inserts_menu", e.QUICK_ACTIONS = "quick_actions", e.IPAD_MENU = "ipad_menu", e.MAKE_SOMETHING_V2_ONBOARDING = "make_something_v2_onboarding", e))($$f3 || {});
 let E = () => {
@@ -25,7 +25,7 @@ export function $$y2() {
   let e = Xr(Qs);
   let t = E();
   let r = $$b5();
-  let [i, a] = fp($$m4);
+  let [i, a] = useAtomValueAndSetter($$m4);
   return useCallback(n => {
     n && t("meetings_panel_open", n.source);
     i && a(!1);
@@ -53,7 +53,7 @@ export function $$b5() {
   }, [t, e, r, o]);
 }
 export function $$T1() {
-  let e = md(jo);
+  let e = useAtomWithSubscription(jo);
   let t = useSelector(e => e.music);
   let r = C3();
   let n = XM();

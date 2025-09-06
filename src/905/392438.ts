@@ -3,7 +3,7 @@ import { useState, useCallback, useRef, useEffect, useImperativeHandle, useMemo,
 import { lQ } from "../905/934246";
 import s from "classnames";
 import { A as _$$A } from "../vendor/90566";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { N0 } from "../figma_app/416935";
 import { H as _$$H } from "../905/620380";
 import { ZC } from "../figma_app/39751";
@@ -12,7 +12,7 @@ import { S as _$$S } from "../figma_app/552746";
 import { j6 } from "../figma_app/831799";
 import { d as _$$d } from "../905/44199";
 import { B } from "../905/714743";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { A as _$$A2 } from "../svg/545021";
 var o = s;
 let y = "autocomplete_input--autocompleteResults--Y0sCg overflow--overflowYAuto--nfK38 overflow--momentumScroll--qtsu7";
@@ -36,7 +36,7 @@ function v(e) {
         t.stopPropagation();
         e.onDelete(e.index);
       },
-      "aria-label": _$$t("folder_permissions_modal.email_inprogress_invite_remove"),
+      "aria-label": getI18nString("folder_permissions_modal.email_inprogress_invite_remove"),
       children: jsx(B, {
         svg: _$$A2,
         ariaHidden: !0
@@ -141,7 +141,7 @@ export function $$E0({
   let eu = useCallback(e => {
     et(!0);
     ea.current?.focus(e);
-    name && sx("Autocomplete Input Focused", {
+    name && trackEventAnalytics("Autocomplete Input Focused", {
       ...properties,
       trackingContext: name
     });

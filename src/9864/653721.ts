@@ -4,9 +4,9 @@ import { E as _$$E } from "../905/632989";
 import { g as _$$g } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
-import { md, fp } from "../figma_app/27355";
+import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { Kz } from "../figma_app/637027";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { FFileType } from "../figma_app/191312";
 import { pA } from "../7021/724859";
 import { pV } from "../7021/970540";
@@ -109,47 +109,47 @@ let g = {
   }
 };
 export function $$m0() {
-  switch (md(uN)) {
+  switch (useAtomWithSubscription(uN)) {
     case FFileType.DESIGN:
-      return _$$t("new_user_experience.choose_product.description.figma");
+      return getI18nString("new_user_experience.choose_product.description.figma");
     case FFileType.WHITEBOARD:
-      return _$$t("new_user_experience.choose_product.description.figjam");
+      return getI18nString("new_user_experience.choose_product.description.figjam");
     case FFileType.SLIDES:
-      return _$$t("new_user_experience.choose_product.description.slides");
+      return getI18nString("new_user_experience.choose_product.description.slides");
     case FFileType.SITES:
-      return _$$t("new_user_experience.choose_product.description.sites");
+      return getI18nString("new_user_experience.choose_product.description.sites");
     case FFileType.FIGMAKE:
-      return _$$t("new_user_experience.choose_product.description.make");
+      return getI18nString("new_user_experience.choose_product.description.make");
     case FFileType.COOPER:
-      return _$$t("new_user_experience.choose_product.description.create_marketing_assets_and_social");
+      return getI18nString("new_user_experience.choose_product.description.create_marketing_assets_and_social");
     default:
       return null;
   }
 }
 export function $$$$E1() {
-  let [e, r] = fp(uN);
+  let [e, r] = useAtomValueAndSetter(uN);
   let t = $$m0();
   let o = pV(e);
   let l = useMemo(() => [{
-    buttonText: _$$t("new_user_experience.choose_product.title.figma"),
+    buttonText: getI18nString("new_user_experience.choose_product.title.figma"),
     selectedProduct: FFileType.DESIGN
   }, {
-    buttonText: _$$t("new_user_experience.choose_product.title.figjam"),
+    buttonText: getI18nString("new_user_experience.choose_product.title.figjam"),
     selectedProduct: FFileType.WHITEBOARD
   }, {
-    buttonText: _$$t("new_user_experience.choose_product.title.slides"),
+    buttonText: getI18nString("new_user_experience.choose_product.title.slides"),
     selectedProduct: FFileType.SLIDES
   }, !1, getFeatureFlags().bake_starter_limit && {
-    buttonText: _$$t("new_user_experience.choose_product.title.make"),
+    buttonText: getI18nString("new_user_experience.choose_product.title.make"),
     selectedProduct: FFileType.FIGMAKE
   }, {
-    buttonText: _$$t("new_user_experience.choose_product.title.buzz"),
+    buttonText: getI18nString("new_user_experience.choose_product.title.buzz"),
     selectedProduct: FFileType.COOPER
   }].filter(e => !!e), []);
   return jsxs(pA, {
     children: [jsx("h1", {
       className: HN,
-      children: tx("new_user_experience.choose_product.title")
+      children: renderI18nText("new_user_experience.choose_product.title")
     }), jsx(Kz, {
       multiple: 4
     }), jsx("div", {

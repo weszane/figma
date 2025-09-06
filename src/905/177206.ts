@@ -1,6 +1,6 @@
 import { useMemo } from "react";
-import { b$ } from "../figma_app/493477";
-import { sx } from "../905/449184";
+import { mergeNonNull } from "../figma_app/493477";
+import { trackEventAnalytics } from "../905/449184";
 import { sT } from "../figma_app/740163";
 import { R } from "../905/987929";
 let l = /[0-9]+\,[0-9]+/g;
@@ -9,10 +9,10 @@ let d = {
 };
 class c extends R {
   constructor(e = {}) {
-    super(b$(d, e));
+    super(mergeNonNull(d, e));
   }
   parse(e, t) {
-    l.test(e) && sx("editor-parsing-float-input-with-comma", {
+    l.test(e) && trackEventAnalytics("editor-parsing-float-input-with-comma", {
       input: e
     });
     return super.parse(e, t);

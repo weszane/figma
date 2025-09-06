@@ -1,4 +1,4 @@
-import { _ } from "../905/810750";
+import { MultiValueMap } from "../905/810750";
 class r {
   constructor() {
     this.children = new Map();
@@ -74,7 +74,7 @@ export class $$s0 {
     aliases: t = []
   }) {
     this.trie = new a();
-    this.exactMatches = new _();
+    this.exactMatches = new MultiValueMap();
     this.property = e;
     this.aliases = t;
   }

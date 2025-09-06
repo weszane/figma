@@ -15,7 +15,7 @@ import { DP as _$$DP } from "../905/640017";
 import { J } from "../905/273120";
 import { UD, Jm, zr } from "../3674/371829";
 import { W as _$$W } from "../905/200727";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { fu } from "../figma_app/831799";
 import { Y } from "../905/830372";
 import { Pf, H8 } from "../905/590952";
@@ -386,7 +386,7 @@ function H(e) {
   let {
     isShowing,
     totalActiveDevModeUsers
-  } = function() {
+  } = function () {
     let e = X$("useShowDevModeSocialProof").unwrapOr(null);
     let t = D6("useShowDevModeSocialProof").unwrapOr(null);
     let n = e?.tier === FPlanNameType.PRO;
@@ -397,7 +397,7 @@ function H(e) {
       isLoading,
       isSuccess,
       totalActiveDevModeUsers: _totalActiveDevModeUsers
-    } = function() {
+    } = function () {
       let [e, t] = useState(!0);
       let [n, a] = useState(!1);
       let [i, o] = useState(!1);
@@ -449,7 +449,7 @@ function W({
     isLoading,
     isError,
     users
-  } = function(e = 3) {
+  } = function (e = 3) {
     let [t, n] = useState(!0);
     let [a, i] = useState(!1);
     let [o, l] = useState(!1);
@@ -504,7 +504,7 @@ function W({
         maxShow: 3
       }), jsx("span", {
         className: "x1yn0g08",
-        children: tx("dev_handoff.social_proof.how_many_other_people_are_using_dev_mode", {
+        children: renderI18nText("dev_handoff.social_proof.how_many_other_people_are_using_dev_mode", {
           userName: d,
           totalActiveDevModeUsers: e - 1
         })
@@ -566,7 +566,7 @@ export function $$X0({
     preventUserClose: !0,
     recordingKey: "dev-mode-paywall-modal"
   });
-  let m = function() {
+  let m = function () {
     let e = S2();
     let t = px();
     return "loaded" !== e.status || "loaded" !== t.status ? null : {
@@ -617,4 +617,4 @@ export function $$X0({
   });
 }
 export const I = $$X0;
-export const E = $$K1; 
+export const E = $$K1;

@@ -7,8 +7,8 @@
       "DOM"
     ],
     "rootDir": "./src",
-    "module": "NodeNext",
-    "moduleResolution": "nodenext",
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "allowJs": true,
     "checkJs": false,
     "strict": true,

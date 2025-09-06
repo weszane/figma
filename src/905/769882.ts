@@ -1,6 +1,6 @@
 import { useSelector } from "../vendor/514228";
 import { RYP, ywP } from "../figma_app/763686";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { tK, Av } from "../figma_app/622881";
 import { jK } from "../figma_app/829197";
 import { M } from "../905/366117";
@@ -9,7 +9,7 @@ let d = ({
   userColorProfile: t,
   editorType: i
 }) => {
-  if (i === nT.Whiteboard) ;else if (t === M.DISPLAY_P3 && tK(e)) return RYP.DISPLAY_P3;
+  if (i === FEditorType.Whiteboard) ;else if (t === M.DISPLAY_P3 && tK(e)) return RYP.DISPLAY_P3;
   return RYP.SRGB;
 };
 export function $$c0(e) {
@@ -30,7 +30,7 @@ export function $$c0(e) {
         documentColorProfile: t,
         editorType: i
       }) {
-        if (i === nT.Whiteboard) return RYP.SRGB;
+        if (i === FEditorType.Whiteboard) return RYP.SRGB;
         switch (t) {
           case ywP.SRGB:
             break;

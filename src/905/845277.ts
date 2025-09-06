@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { isNotNullish } from "../figma_app/95419";
 import { Egt } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { Y5 } from "../figma_app/455680";
 import { dU } from "../figma_app/459717";
 import { xR, EO, l0 } from "../figma_app/536669";
@@ -69,7 +69,7 @@ export function $$h2(e, t) {
   try {
     return dU(e.characters, i, l, m);
   } catch (t) {
-    x1("accessibility", "Error rendering styled text", {
+    logError("accessibility", "Error rendering styled text", {
       message: t.message,
       lineData: i,
       characterData: l,

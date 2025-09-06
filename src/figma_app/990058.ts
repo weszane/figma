@@ -5,7 +5,7 @@ import { XHR } from "../905/910117";
 import { Ts } from "../905/194276";
 import { qB } from "../905/862321";
 import { s as _$$s } from "../905/573154";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { hG } from "../905/890368";
 import { F } from "../905/302958";
 import { MM, nF } from "../905/350402";
@@ -34,7 +34,7 @@ let $$I8 = MM("ORG_USER_PUT", async (e, t, {
     }));
   } catch (t) {
     e.dispatch(_$$r(r));
-    e.dispatch(_$$s.error(t.data?.message || _$$t("org_user_actions.an_error_occurred")));
+    e.dispatch(_$$s.error(t.data?.message || getI18nString("org_user_actions.an_error_occurred")));
   }
 });
 nF(async (e, t) => {
@@ -59,7 +59,7 @@ nF(async (e, t) => {
       userInitiated: !1
     }));
   } catch (t) {
-    e.dispatch(_$$s.error(t.data?.message || _$$t("org_user_actions.an_error_occurred_closing_onboarding")));
+    e.dispatch(_$$s.error(t.data?.message || getI18nString("org_user_actions.an_error_occurred_closing_onboarding")));
   }
 });
 let $$S0 = nF(async (e, t) => {
@@ -79,17 +79,17 @@ let $$S0 = nF(async (e, t) => {
     }), t.entryPoint) {
       case tc.IN_EDITOR_RESTRICTED_DRAFT:
       case tc.RESTRICTED_DRAFT_SHARED_EMAIL:
-        r = _$$t("org_user_actions.request_sent_well_let_you_know");
+        r = getI18nString("org_user_actions.request_sent_well_let_you_know");
         break;
       case tc.ASK_TO_EDIT_ONE_CLICK:
-        r = _$$t("1_click_expansion.request_sent_well_let_you");
+        r = getI18nString("1_click_expansion.request_sent_well_let_you");
         break;
       case PE.CreateFileProjectView:
       case tc.USER_SETTINGS:
-        r = _$$t("upgrades.request_sent_toast");
+        r = getI18nString("upgrades.request_sent_toast");
         break;
       default:
-        r = _$$t("org_user_actions.upgrade_request_sent");
+        r = getI18nString("org_user_actions.upgrade_request_sent");
     }
     t.suppressVisualBell || e.dispatch(F.enqueue({
       message: r,
@@ -104,7 +104,7 @@ let $$S0 = nF(async (e, t) => {
     })), e.dispatch(to({
       type: x,
       data: {}
-    }))) : e.dispatch(_$$s.error(r.data?.message || _$$t("org_user_actions.an_error_occurred_requesting_account_type")));
+    }))) : e.dispatch(_$$s.error(r.data?.message || getI18nString("org_user_actions.an_error_occurred_requesting_account_type")));
     t.onError?.();
   }
 });
@@ -113,13 +113,13 @@ let $$v1 = nF(async (e, t) => {
     await XHR.del(`/api/org_user/${t.orgId}`);
     e.dispatch(F.enqueue({
       type: "org_guest_leave",
-      message: _$$t("org_user_actions.you_successfully_left_organization", {
+      message: getI18nString("org_user_actions.you_successfully_left_organization", {
         orgName: t.orgName
       })
     }));
   } catch (r) {
     console.error(r);
-    e.dispatch(_$$s.error(r.data?.message || _$$t("org_user_actions.an_error_occurred_leaving_organization", {
+    e.dispatch(_$$s.error(r.data?.message || getI18nString("org_user_actions.an_error_occurred_leaving_organization", {
       orgName: t.orgName
     })));
   }
@@ -164,7 +164,7 @@ let $$A7 = MM("ORG_USER_BATCH_UPDATE_ORG_USERS", async (e, t, {
         reason,
         message
       } = e;
-      return "seat_increase_unauthorized" === reason ? _$$t("modify_plan_user_seat_modal.error.seat_increase_unauthorized") : message ?? _$$t("org_user_actions.an_error_occurred_updating_org_users");
+      return "seat_increase_unauthorized" === reason ? getI18nString("modify_plan_user_seat_modal.error.seat_increase_unauthorized") : message ?? getI18nString("org_user_actions.an_error_occurred_updating_org_users");
     }(a.data);
     e.dispatch(_$$s.error(i));
   }
@@ -174,12 +174,12 @@ let $$N3 = nF(async (e, t) => {
   if (e.dispatch($$x5(t)), t.userInitiated) try {
     await XHR.del(`/api/orgs/${t.orgId}/org_users`, t.params);
     let r = t.params.org_user_ids.length;
-    let n = _$$t("org_user_actions.user_has_been_removed_from_organization", {
+    let n = getI18nString("org_user_actions.user_has_been_removed_from_organization", {
       deletedOrgUserCount: r
     });
     e.dispatch(_$$s.flash(n));
   } catch (t) {
-    e.dispatch(_$$s.error(t.data?.message || _$$t("org_user_actions.an_error_occurred")));
+    e.dispatch(_$$s.error(t.data?.message || getI18nString("org_user_actions.an_error_occurred")));
     return;
   }
 });
@@ -202,7 +202,7 @@ let $$C4 = nF(async (e, {
       orgId: t
     }));
   } catch (t) {
-    e.dispatch(_$$s.error(t.message || _$$t("org_user_actions.an_error_occurred_fetching_org_admins")));
+    e.dispatch(_$$s.error(t.message || getI18nString("org_user_actions.an_error_occurred_fetching_org_admins")));
   }
 }, ({
   orgId: e
@@ -224,7 +224,7 @@ let $$w2 = nF(async (e, t, {
     return r.find(e => e.user_id === t.userId) || null;
   } catch (r) {
     if (404 === r.status && t.allowNoOrgUser) return null;
-    e.dispatch(_$$s.error(r.message || _$$t("org_user_actions.an_error_occurred_fetching_org_users")));
+    e.dispatch(_$$s.error(r.message || getI18nString("org_user_actions.an_error_occurred_fetching_org_users")));
     return null;
   }
 }, e => `ORG_USER_GET_BY_USER_ID_${e.orgId}_${e.userId}`);

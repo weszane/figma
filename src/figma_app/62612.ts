@@ -3,7 +3,7 @@ import { flushSync } from "../vendor/944059";
 import { glU } from "../figma_app/763686";
 import { xx } from "../figma_app/815945";
 import { parsePxNumber } from "../figma_app/783094";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { Point } from "../905/736624";
 import { H } from "../905/561433";
 import { previousViewportRefContext, currentViewportRefContext, defaultViewportState, viewportXContext, frameCountContext, viewportYContext, viewportWidthContext, viewportHeightContext, viewportZoomContext, viewportPanningContext, activeStateContext, viewportOffsetXContext, viewportOffsetYContext, viewportZoomingContext } from "../figma_app/298911";
@@ -66,7 +66,7 @@ export function $$v14(e, t) {
 }
 export function $$A24(e) {
   if (e.height < 0 || e.width < 0 || e.zoomScale <= 0) {
-    x1("Viewport", "invalid values", {
+    logError("Viewport", "invalid values", {
       info: e
     });
     return Error("Invalid Viewport");

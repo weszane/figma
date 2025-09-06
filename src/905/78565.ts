@@ -3,9 +3,9 @@ import { useDispatch } from "../vendor/514228";
 import { $n } from "../905/521428";
 import { K } from "../905/443068";
 import { A as _$$A } from "../905/251970";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { B } from "../905/714743";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { JV } from "../905/879323";
 import { eS, aD } from "../figma_app/646357";
 import { cb, WE } from "../figma_app/745458";
@@ -15,8 +15,8 @@ import { se } from "../figma_app/435826";
 import { A as _$$A2 } from "../5724/965092";
 export function $$A0(e) {
   let t = useDispatch();
-  let i = md(cb);
-  let A = md(WE);
+  let i = useAtomWithSubscription(cb);
+  let A = useAtomWithSubscription(WE);
   let y = eS(aD.ALL);
   let {
     updateAll
@@ -43,10 +43,10 @@ export function $$A0(e) {
               libraryUpdatesBannerDismissed: !0
             }));
           },
-          "aria-label": _$$t("whiteboard.inserts.dismiss_updates"),
+          "aria-label": getI18nString("whiteboard.inserts.dismiss_updates"),
           htmlAttributes: {
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t("whiteboard.inserts.dismiss_updates")
+            "data-tooltip": getI18nString("whiteboard.inserts.dismiss_updates")
           },
           children: jsx(_$$A, {})
         })

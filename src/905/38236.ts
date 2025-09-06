@@ -1,5 +1,5 @@
 import { z8 } from "../figma_app/703447";
-import { eU, zl } from "../figma_app/27355";
+import { atom, atomStoreManager } from "../figma_app/27355";
 let $$a = 0;
 export class $$s0 {
   constructor(e = z8) {
@@ -8,13 +8,13 @@ export class $$s0 {
     this.listeners = [];
     this.refreshListeners = [];
     this.current = e;
-    this.currentAtom = eU(e);
+    this.currentAtom = atom(e);
     this.key = $$a++;
   }
   setCurrent(e) {
     e.canMoveBackward = this.canMoveBackward();
     e.canMoveForward = this.canMoveForward();
-    zl.set(this.currentAtom, e);
+    atomStoreManager.set(this.currentAtom, e);
     this.current = e;
   }
   addPopStateListener(e) {

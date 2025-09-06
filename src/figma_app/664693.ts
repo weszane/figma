@@ -18,7 +18,7 @@ import { Pt } from "../figma_app/806412";
 import { tH, H4 } from "../905/751457";
 import { x as _$$x } from "../905/868466";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t2, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { E as _$$E2 } from "../905/984674";
 import { i6, v2, x$ } from "../905/188715";
 import { C as _$$C2 } from "../905/696698";
@@ -182,12 +182,12 @@ function G(e) {
               children: jsx(_$$K, {
                 recordingKey: Pt(e.recordingKey, "backButton"),
                 onClick: e.onBack,
-                "aria-label": _$$t2("qa.go_back"),
+                "aria-label": getI18nString("qa.go_back"),
                 children: jsx(_$$C, {})
               })
             }), jsx("div", {
               className: _$$s.colorText.textBodyLarge.$,
-              children: tx("first_draft.make_kit.lint.title")
+              children: renderI18nText("first_draft.make_kit.lint.title")
             })]
           })
         })
@@ -206,12 +206,12 @@ function G(e) {
           }) : jsx("div", {
             className: _$$s.wFull.$,
             children: jsx(_$$S, {
-              children: tx("first_draft.make_kit.lint.no_lint_errors_found")
+              children: renderI18nText("first_draft.make_kit.lint.no_lint_errors_found")
             })
           }) : jsx("div", {
             className: _$$s.wFull.$,
             children: jsx(_$$S, {
-              children: tx("first_draft.make_kit.lint.no_kit_found")
+              children: renderI18nText("first_draft.make_kit.lint.no_kit_found")
             })
           })
         })
@@ -226,7 +226,7 @@ function G(e) {
             }],
             onAction: e.onBack,
             recordingKey: Pt(e.recordingKey, "generate"),
-            children: tx("first_draft.make_kit.lint.done")
+            children: renderI18nText("first_draft.make_kit.lint.done")
           })
         })
       })]

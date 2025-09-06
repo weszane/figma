@@ -5,7 +5,7 @@ import { Ex, zE } from "../figma_app/919079";
 import { NU } from "../figma_app/204891";
 import { y } from "../905/171275";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { E } from "../905/984674";
 import { R } from "../905/731725";
 import { CI } from "../figma_app/528509";
@@ -38,8 +38,8 @@ export function $$_0(e) {
         children: CI(e.folder)
       }), e.showViewOnlyLabel && jsx(Ex, {
         color: zE.WARNING_TERTIARY,
-        text: _$$t("locked_team.label.view_only"),
-        dataTooltip: _$$t("locked_team.label.tooltip"),
+        text: getI18nString("locked_team.label.view_only"),
+        dataTooltip: getI18nString("locked_team.label.tooltip"),
         dataTooltipType: Ib.TEXT,
         className: "folder_name_and_preview--viewOnlyLabel--G3IV1"
       })]

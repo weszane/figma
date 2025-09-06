@@ -3,7 +3,7 @@ import { useDispatch } from "../vendor/514228";
 import { T1 } from "../figma_app/153916";
 import { A } from "../905/920142";
 import { h as _$$h } from "../905/207101";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { T as _$$T } from "../1577/951568";
 import { SeatBillingTermsModal } from "../7021/149615";
@@ -94,7 +94,7 @@ export function $$$$k0({
           planType: FOrganizationLevelType.ORG
         }).then(() => {
           t(F.enqueue({
-            message: _$$t("seat_billing_terms.modal.success")
+            message: getI18nString("seat_billing_terms.modal.success")
           }));
         });
         complete();

@@ -1,7 +1,7 @@
 import { glU } from "../figma_app/763686";
 import { DS } from "../figma_app/387100";
 import { debugState } from "../905/407919";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { zX } from "../905/576487";
 import { nF } from "../905/350402";
@@ -21,16 +21,16 @@ let $$g0 = nF((e, t) => {
     instanceGUIDs: Object.keys(i.mirror.sceneGraphSelection)
   }, $$m = !1);
 });
-let $$f1 = nF((e) => {
+let $$f1 = nF(e => {
   let t = e.getState();
   let i = Object.keys(t.mirror.sceneGraphSelection);
-  let n = p && 1 === i.length && (i[0] === p.mainComponentGUID || DS(t.mirror.sceneGraph, i[0]).some((e) => e.guid === p?.mainComponentGUID));
+  let n = p && 1 === i.length && (i[0] === p.mainComponentGUID || DS(t.mirror.sceneGraph, i[0]).some(e => e.guid === p?.mainComponentGUID));
   n && !$$m ? (document.addEventListener("keydown", _), e.dispatch(F.enqueue({
     type: u,
     message: "",
     icon: zX.RETURN_TO_INSTANCE,
     button: {
-      text: _$$t("design_systems.actions.return_to_instance"),
+      text: getI18nString("design_systems.actions.return_to_instance"),
       action: () => {
         A({
           additionalTrackingProperties: {

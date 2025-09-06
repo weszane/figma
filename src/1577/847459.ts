@@ -7,7 +7,7 @@ import { C as _$$C2 } from "../905/520159";
 import { A as _$$A } from "../905/251970";
 import { J } from "../905/125993";
 import { V as _$$V } from "../1577/311426";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { B as _$$B } from "../905/907815";
 import { Rs } from "../figma_app/288654";
 import p, { g as _$$g } from "../905/880308";
@@ -15,7 +15,7 @@ import { oW } from "../905/675859";
 import { qc } from "../figma_app/858013";
 import { P as _$$P } from "../905/347284";
 import { J as _$$J } from "../1577/181415";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { sx as _$$sx } from "../905/941192";
 import { AY, Fm, dB, lV, k7, _v } from "../figma_app/770088";
 import { kR, I_, GH } from "../905/234821";
@@ -61,7 +61,7 @@ let $$U0 = forwardRef((e, t) => {
         children: [jsx("div", {
           className: S,
           children: !e.fileBrowser && jsx(_$$J, {
-            "aria-label": _$$t("quick_reply.navigate_back"),
+            "aria-label": getI18nString("quick_reply.navigate_back"),
             onClick: e.onClose,
             children: jsx(_$$C2, {})
           })
@@ -74,7 +74,7 @@ let $$U0 = forwardRef((e, t) => {
         }), jsx("div", {
           className: S,
           children: e.fileBrowser ? jsx(_$$J, {
-            "aria-label": _$$t("quick_reply.close"),
+            "aria-label": getI18nString("quick_reply.close"),
             onClick: e.onClose,
             children: jsx(_$$A, {})
           }) : jsx("div", {
@@ -82,7 +82,7 @@ let $$U0 = forwardRef((e, t) => {
               display: "none"
             },
             children: jsx(_$$J, {
-              "aria-label": _$$t("quick_reply.more"),
+              "aria-label": getI18nString("quick_reply.more"),
               children: jsx(J, {})
             })
           })
@@ -101,7 +101,7 @@ function H(e) {
     size: "medium"
   }) : "errors" === e.result.status || null == e.result.data.file ? jsx("div", {
     className: "quick_reply_thread_view--errorState--Re4UD",
-    children: _$$t("quick_reply.unable_to_load_thread")
+    children: getI18nString("quick_reply.unable_to_load_thread")
   }) : jsx(z, {
     quickReplyInfo: e.quickReplyInfo,
     result: e.result,
@@ -147,7 +147,7 @@ function z(e) {
   let I = useSelector(e => e.comments.savingCommentUuids);
   let R = useSelector(e => e.comments.lgPendingUuidToServerIdMap);
   if (!N) return jsx("div", {
-    children: _$$t("quick_reply.unable_to_load_thread")
+    children: getI18nString("quick_reply.unable_to_load_thread")
   });
   let E = mobileCommentThread.map(e => G9(user.id, N, e, currentUserCommentReadStatus ?? gj, I, R, e.attachments));
   let D = {
@@ -188,7 +188,7 @@ function z(e) {
           d.commentReceipts && e && (f(AY({
             receiptsAPI: d.commentReceipts,
             thread: D
-          })), sx("Comment Thread Read", {
+          })), trackEventAnalytics("Comment Thread Read", {
             commentThreadId: threadId,
             threadType: "file_browser_quick_reply"
           }));
@@ -211,7 +211,7 @@ function z(e) {
         }), jsx("div", {
           className: "quick_reply_thread_view--openFileButton--RBtVz",
           children: jsx(_$$J, {
-            "aria-label": _$$t("quick_reply.open_file"),
+            "aria-label": getI18nString("quick_reply.open_file"),
             onClick: () => {
               let e = quickReplyInfo.deeplink ?? `/file/${fileKey}?fuid=${user.id}&#${threadId}`;
               window.location.href = e;
@@ -387,13 +387,13 @@ function V(e) {
           uuid: _$$g()
         });
       },
-      placeholderText: _$$t("comments.reply"),
+      placeholderText: getI18nString("comments.reply"),
       recordingKey: Dw.quickReply,
       replyContainerRef: V,
       setHyperlinkEditorRef: z,
       setHyperlinkLocation: U,
       setIsEditorFocused: lQ,
-      submitText: _$$t("comments.reply"),
+      submitText: getI18nString("comments.reply"),
       threadId,
       threadPosition: null,
       typeahead: m,

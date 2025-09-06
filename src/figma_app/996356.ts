@@ -1,7 +1,7 @@
 import { NC } from "../905/17179";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { nF } from "../905/350402";
 import { Lo } from "../905/156213";
@@ -32,17 +32,17 @@ let $$c1 = nF((e, t) => {
       creating: !1
     }));
     e.dispatch(Lo());
-    let i = _$$t("org_invite.invite_resent");
+    let i = getI18nString("org_invite.invite_resent");
     if (!isResentInvite) {
       let e = emails.length - r.length;
-      i = r.length > 0 ? 0 === e ? _$$t("org_invite.new_members_message", {
+      i = r.length > 0 ? 0 === e ? getI18nString("org_invite.new_members_message", {
         numInvites: r.length
-      }) : 1 === e ? _$$t("org_invite.new_members_and_one_existing_member_message", {
+      }) : 1 === e ? getI18nString("org_invite.new_members_and_one_existing_member_message", {
         numInvites: r.length
-      }) : _$$t("org_invite.new_members_and_multiple_existing_members_message", {
+      }) : getI18nString("org_invite.new_members_and_multiple_existing_members_message", {
         numInvites: r.length,
         numExisting: e
-      }) : _$$t("org_invite.existing_members_message", {
+      }) : getI18nString("org_invite.existing_members_message", {
         numExisting: e
       });
     }
@@ -50,7 +50,7 @@ let $$c1 = nF((e, t) => {
       message: i
     }));
   }).catch(t => {
-    let r = t.data?.message || _$$t("org_invite.org_invite_creation_error");
+    let r = t.data?.message || getI18nString("org_invite.org_invite_creation_error");
     e.dispatch($$p3({
       creating: !1
     }));
@@ -71,11 +71,11 @@ let $$u0 = nF((e, t) => {
     e.dispatch($$_4({
       org_invite_id: idpUser.id
     }));
-    e.dispatch(_$$s.flash(_$$t("org_invite.org_invite_deletion_success", {
+    e.dispatch(_$$s.flash(getI18nString("org_invite.org_invite_deletion_success", {
       email: idpUser.email
     })));
   }).catch(t => {
-    let r = t.data?.message || _$$t("org_invite.org_invite_deletion_error");
+    let r = t.data?.message || getI18nString("org_invite.org_invite_deletion_error");
     e.dispatch(_$$s.flash(r));
   });
 });
@@ -86,4 +86,4 @@ export const Fb = $$u0;
 export const MB = $$c1;
 export const hZ = $$h2;
 export const wc = $$p3;
-export const yH = $$_4; 
+export const yH = $$_4;

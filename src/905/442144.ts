@@ -10,7 +10,7 @@ import { bL as _$$bL, l9, mc, c$ } from "../905/493196";
 import { h as _$$h } from "../905/270045";
 import { ks } from "../905/773401";
 import { i, C as _$$C } from "../905/64217";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { H8 } from "../905/590952";
 import { Lo } from "../905/156213";
 import { aJ, kN, QC } from "../figma_app/494261";
@@ -51,7 +51,7 @@ export let $$b0 = Ju(function (e) {
   let k = useCallback(e => {
     w(e.currentTarget.value);
   }, [w]);
-  let R = E === e6.EDITOR ? _$$t("file_browser.request_access_modal.request_edit_access") : _$$t("file_browser.request_access_modal.request_view_access");
+  let R = E === e6.EDITOR ? getI18nString("file_browser.request_access_modal.request_edit_access") : getI18nString("file_browser.request_access_modal.request_view_access");
   let N = jsx("span", {
     className: "request_access_modal--teamName--9ZkLe",
     children: team.name
@@ -63,15 +63,15 @@ export let $$b0 = Ju(function (e) {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: C === aJ ? tx("file_browser.request_access_modal.request_to_join_team") : tx("file_browser.team.request_to_edit_team")
+          children: C === aJ ? renderI18nText("file_browser.request_access_modal.request_to_join_team") : renderI18nText("file_browser.team.request_to_edit_team")
         })
       }), jsxs(nB, {
         children: [jsx("div", {
           "data-testid": "subtitle",
           className: "request_access_modal--subtitle--7AzpO",
-          children: C === aJ ? tx("file_browser.request_access_modal.send_a_request_to_join_team", {
+          children: C === aJ ? renderI18nText("file_browser.request_access_modal.send_a_request_to_join_team", {
             teamName: N
-          }) : tx("file_browser.team.send_a_request_to_edit_team", {
+          }) : renderI18nText("file_browser.team.send_a_request_to_edit_team", {
             teamName: N
           })
         }), jsx(v, {
@@ -93,7 +93,7 @@ export let $$b0 = Ju(function (e) {
               maxLength: 500,
               name: "message",
               value: S,
-              placeholder: _$$t("file_browser.request_access_modal.request_access_reason_placeholder"),
+              placeholder: getI18nString("file_browser.request_access_modal.request_access_reason_placeholder"),
               onChange: k
             })
           })
@@ -103,7 +103,7 @@ export let $$b0 = Ju(function (e) {
           children: [jsx($n, {
             onClick: g,
             variant: "secondary",
-            children: tx("general.cancel")
+            children: renderI18nText("general.cancel")
           }), jsx($n, {
             "data-testid": "submitButton",
             onClick: T,
@@ -128,7 +128,7 @@ function v({
     }), jsx("div", {
       "data-testid": "userName",
       className: "request_access_modal--userName--ne-vy",
-      children: tx("file_browser.request_access_modal.you", {
+      children: renderI18nText("file_browser.request_access_modal.you", {
         username: r.name
       })
     }), jsxs(_$$bL, {
@@ -138,16 +138,16 @@ function v({
       },
       children: [jsx(l9, {
         label: jsx(_$$h, {
-          children: _$$t("file_browser.settings.access")
+          children: getI18nString("file_browser.settings.access")
         }),
         disabled: !a
       }), jsxs(mc, {
         children: [a && jsx(c$, {
           value: e6.VIEWER.toString(),
-          children: _$$t("file_browser.request_access_modal.can_view")
+          children: getI18nString("file_browser.request_access_modal.can_view")
         }), jsx(c$, {
           value: e6.EDITOR.toString(),
-          children: _$$t("file_browser.request_access_modal.can_edit")
+          children: getI18nString("file_browser.request_access_modal.can_edit")
         })]
       })]
     })]

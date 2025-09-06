@@ -1,57 +1,57 @@
 import { lyf } from "../figma_app/763686";
 import { localStorageRef } from "../905/657224";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 function s(e) {
   return 1 === parseInt(e);
 }
 export let $$o0 = new class {
   constructor() {
     this.defaultShowSidebar = {
-      [nT.Design]: !0,
-      [nT.DevHandoff]: !0,
-      [nT.Whiteboard]: !1,
-      [nT.Slides]: !1,
-      [nT.Sites]: !0,
-      [nT.Cooper]: !0,
-      [nT.Illustration]: !0,
-      [nT.Figmake]: !0
+      [FEditorType.Design]: !0,
+      [FEditorType.DevHandoff]: !0,
+      [FEditorType.Whiteboard]: !1,
+      [FEditorType.Slides]: !1,
+      [FEditorType.Sites]: !0,
+      [FEditorType.Cooper]: !0,
+      [FEditorType.Illustration]: !0,
+      [FEditorType.Figmake]: !0
     };
     this.defaultPropertiesPanelSplitPosition = {
-      [nT.Design]: 241,
-      [nT.DevHandoff]: 321,
-      [nT.Whiteboard]: 241,
-      [nT.Slides]: 241,
-      [nT.Sites]: 241,
-      [nT.Cooper]: 241,
-      [nT.Illustration]: 241,
-      [nT.Figmake]: 241
+      [FEditorType.Design]: 241,
+      [FEditorType.DevHandoff]: 321,
+      [FEditorType.Whiteboard]: 241,
+      [FEditorType.Slides]: 241,
+      [FEditorType.Sites]: 241,
+      [FEditorType.Cooper]: 241,
+      [FEditorType.Illustration]: 241,
+      [FEditorType.Figmake]: 241
     };
     this.prefix = "";
-    this.editorType = nT.Design;
+    this.editorType = FEditorType.Design;
     this.loggedIn = !0;
     this.showUi = !0;
   }
   defaultSidebarSplitPosition(e) {
     return {
-      [nT.Design]: 240,
-      [nT.Whiteboard]: 240,
-      [nT.DevHandoff]: 320,
-      [nT.Slides]: 200,
-      [nT.Sites]: 240,
-      [nT.Cooper]: 240,
-      [nT.Illustration]: 240,
-      [nT.Figmake]: 240
+      [FEditorType.Design]: 240,
+      [FEditorType.Whiteboard]: 240,
+      [FEditorType.DevHandoff]: 320,
+      [FEditorType.Slides]: 200,
+      [FEditorType.Sites]: 240,
+      [FEditorType.Cooper]: 240,
+      [FEditorType.Illustration]: 240,
+      [FEditorType.Figmake]: 240
     }[e];
   }
   setEditorType(e) {
     this.editorType = e;
     this.prefix = function (e) {
       switch (e) {
-        case nT.Design:
+        case FEditorType.Design:
           return "";
-        case nT.Whiteboard:
+        case FEditorType.Whiteboard:
           return "whiteboard-";
-        case nT.Slides:
+        case FEditorType.Slides:
           return "piper-";
         default:
           return "";
@@ -73,7 +73,7 @@ export let $$o0 = new class {
     return this.getLocalStorageValue("show-sidebar", s) ?? this.defaultShowSidebar[this.editorType];
   }
   get sidebarSplitPosition() {
-    let e = this.editorType === nT.DevHandoff ? "dev-handoff-sidebar-split-position" : "sidebar-split-position";
+    let e = this.editorType === FEditorType.DevHandoff ? "dev-handoff-sidebar-split-position" : "sidebar-split-position";
     return this.getLocalStorageValue(e, parseFloat) || this.defaultSidebarSplitPosition(this.editorType);
   }
   get propertiesPanelSplitPosition() {

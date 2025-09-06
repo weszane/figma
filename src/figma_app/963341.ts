@@ -1,10 +1,10 @@
 import { useMemo, useCallback } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { E3, eU, fp, md, zl } from "../figma_app/27355";
+import { createLocalStorageAtom, atom, useAtomValueAndSetter, useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import { oA } from "../905/723791";
-import { $D } from "../905/11";
-import { x1 } from "../905/714362";
-import { Lg } from "../figma_app/257275";
+import { reportError } from "../905/11";
+import { logError } from "../905/714362";
+import { getFalseValue } from "../figma_app/897289";
 import { my, u8 } from "../figma_app/976749";
 import { N } from "../905/482239";
 import { TA } from "../905/372672";
@@ -15,7 +15,7 @@ import { l as _$$l } from "../905/131889";
 import { B } from "../905/108119";
 import { n as _$$n } from "../905/548236";
 import { SR, B3 } from "../905/954092";
-let b = E3("frecencyHistory", {
+let b = createLocalStorageAtom("frecencyHistory", {
   numItems: 0,
   userIds: {}
 }, {
@@ -23,7 +23,7 @@ let b = E3("frecencyHistory", {
 }, {
   debounceTime: 1e3
 });
-let T = eU((e) => e(Fr3.Query({})));
+let T = atom(e => e(Fr3.Query({})));
 class I {
   constructor({
     json: e,
@@ -61,7 +61,7 @@ class I {
     });
   }
   prune() {
-    let e = Object.entries(this.userIds).flatMap(([e, t]) => Reflect.ownKeys(t).flatMap((r) => {
+    let e = Object.entries(this.userIds).flatMap(([e, t]) => Reflect.ownKeys(t).flatMap(r => {
       let n = t[r];
       if (!n) return [];
       let {
@@ -125,13 +125,13 @@ class I {
       });
       A = this;
     } catch (e) {
-      x1("error", "Failed to save frecency data", e, {
+      logError("error", "Failed to save frecency data", e, {
         reportAsSentryError: !0
       });
     }
   }
   setMaxEntriesForTesting(e) {
-    Lg() && (this.MAX_ENTRIES = e);
+    getFalseValue() && (this.MAX_ENTRIES = e);
   }
 }
 function S(e, t) {
@@ -143,19 +143,19 @@ function S(e, t) {
       try {
         t = JSON.parse(e);
       } catch (t) {
-        $D(_$$e.AI_FOR_PRODUCTION, Error(`Invalid JSON value for frecency history from DB: ${e}`), {});
+        reportError(_$$e.AI_FOR_PRODUCTION, Error(`Invalid JSON value for frecency history from DB: ${e}`), {});
         return null;
       }
       let r = SR.safeParse(t);
       if (!r.success) {
-        $D(_$$e.AI_FOR_PRODUCTION, Error(`Invalid format for frecency history object from DB: ${e}`), {});
+        reportError(_$$e.AI_FOR_PRODUCTION, Error(`Invalid format for frecency history object from DB: ${e}`), {});
         return null;
       }
       let n = {};
       for (let [e, t] of Object.entries(r.data)) {
         let r = Number(e);
         if (!B3.safeParse(r).success) {
-          $D(_$$e.AI_FOR_PRODUCTION, Error(`Invalid key in frecency history object from DB: ${e}`), {});
+          reportError(_$$e.AI_FOR_PRODUCTION, Error(`Invalid key in frecency history object from DB: ${e}`), {});
           return null;
         }
         n[r] = t;
@@ -170,7 +170,7 @@ function S(e, t) {
   }(r.frecencyHistory, t) : null;
 }
 export function $$v1() {
-  let [e, t] = fp(b);
+  let [e, t] = useAtomValueAndSetter(b);
   let r = TA();
   let i = my();
   let s = useMemo(() => new I({
@@ -185,27 +185,27 @@ export function $$v1() {
       let r = _$$n(e);
       s.addUsage(r, t);
     }, [s]),
-    frecencyByAction: S(md(T), my()) || s.getActions(),
+    frecencyByAction: S(useAtomWithSubscription(T), my()) || s.getActions(),
     frecencyByQuery: s.getQueries()
   };
 }
 let A = null;
 export function $$x2() {
-  let e = zl.get(N).data;
-  let t = zl.get(u8);
+  let e = atomStoreManager.get(N).data;
+  let t = atomStoreManager.get(u8);
   A && A.userId === e && A.fullscreenEditorType === t || (A = new I({
-    json: zl.get(b),
-    setJson: (e) => zl.set(b, e),
+    json: atomStoreManager.get(b),
+    setJson: e => atomStoreManager.set(b, e),
     userId: e,
     fullscreenEditorType: t
   }));
   return {
-    actions: S(zl.get(T), zl.get(u8)) || A.getActions(),
+    actions: S(atomStoreManager.get(T), atomStoreManager.get(u8)) || A.getActions(),
     queries: A.getQueries()
   };
 }
 export function $$N0() {
-  zl.set(b, {
+  atomStoreManager.set(b, {
     numItems: 0,
     userIds: {}
   });

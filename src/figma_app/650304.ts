@@ -9,7 +9,7 @@ import { W8, _B } from "../figma_app/320164";
 import { J } from "../905/931050";
 import { getInitialOptions, isGovCluster } from "../figma_app/169182";
 import { r as _$$r } from "../905/520829";
-import { o4 } from "../figma_app/778880";
+import { getIsMobile } from "../figma_app/778880";
 import { WY, My, Qg } from "../905/194276";
 import { g as _$$g } from "../905/248178";
 import { S$ } from "../figma_app/591738";
@@ -126,7 +126,7 @@ function T({
   return null;
 }
 export function $$I0(e) {
-  return getFeatureFlags()?.google_one_tap_killswitch || isGovCluster() || e.hideOnMobile && o4() ? null : jsx(_$$d, {
+  return getFeatureFlags()?.google_one_tap_killswitch || isGovCluster() || e.hideOnMobile && getIsMobile() ? null : jsx(_$$d, {
     children: jsx(T, {
       ...e
     })

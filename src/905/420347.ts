@@ -1,22 +1,22 @@
 import { useMemo, useRef } from "react";
 import { shallowEqual } from "../vendor/514228";
 import { isNotNullish } from "../figma_app/95419";
-import { Iz, eU, md, zl } from "../figma_app/27355";
+import { createRemovableAtomFamily, atom, useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import { Bq } from "../905/760682";
 import { Z } from "../905/939602";
 import { tS } from "../figma_app/516028";
 import { LH } from "../905/872904";
 import { IT, M4 } from "../905/713695";
 var $$n0;
-let m = Iz(() => eU(null));
-let h = Iz(e => eU(t => e.map(e => t(m(e)))), shallowEqual);
-let $$g3 = eU(null, (e, t, i) => {
+let m = createRemovableAtomFamily(() => atom(null));
+let h = createRemovableAtomFamily(e => atom(t => e.map(e => t(m(e)))), shallowEqual);
+let $$g3 = atom(null, (e, t, i) => {
   i.filter(isNotNullish).forEach(e => {
     t(m(e.library_key), e);
   });
 });
 export function $$f1(e, t) {
-  let i = md(h(e)).filter(isNotNullish);
+  let i = useAtomWithSubscription(h(e)).filter(isNotNullish);
   let a = useMemo(() => new Set(i.map(e => e.library_key)), [i]);
   let d = useMemo(() => e.filter(e => !a.has(e)), [e, a]);
   let m = function (e) {
@@ -64,7 +64,7 @@ export function $$_2(e, t) {
       orgId: i
     });
     n.data.meta.forEach(e => {
-      zl.set(m(e.library_key), e);
+      atomStoreManager.set(m(e.library_key), e);
     });
     return n.data.meta;
   },

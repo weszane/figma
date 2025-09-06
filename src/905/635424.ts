@@ -2,9 +2,9 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState } from "react";
 import { useDispatch } from "../vendor/514228";
 import { A as _$$A } from "../905/410311";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { B } from "../905/714743";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { UF, Jd } from "../figma_app/494261";
 import { e6 } from "../905/557142";
 import { aD, zg } from "../905/452667";
@@ -64,7 +64,7 @@ function S(e) {
   return e.isSingleRequest ? jsxs("div", {
     className: A,
     children: [jsx("p", {
-      children: tx("request_row.user_wants_to_request_type", {
+      children: renderI18nText("request_row.user_wants_to_request_type", {
         userHandle: jsx("strong", {
           className: I,
           children: e.handle.length > 25 ? `${e.handle.slice(0, 25)}...` : e.handle
@@ -95,7 +95,7 @@ function w(e) {
     children: [jsx(_$$E, {
       onClick: handleDeny,
       className: "role_request_row--roleRequestButton--lj7fY",
-      children: tx("request_row.deny")
+      children: renderI18nText("request_row.deny")
     }), jsx(vd, {
       trackingProperties: {
         resourceIdOrKey: e.resourceIdOrKey,
@@ -105,7 +105,7 @@ function w(e) {
       },
       trackingEventName: "Request Approved Share Modal",
       onClick: handleApprove,
-      children: tx("request_row.approve")
+      children: renderI18nText("request_row.approve")
     })]
   });
 }
@@ -146,7 +146,7 @@ function k(e) {
   let u = l[0];
   let p = e => {
     e.response = "deny";
-    sx("permission_request_responded", e);
+    trackEventAnalytics("permission_request_responded", e);
     t(UF({
       requestId: e.request_id
     }));
@@ -159,7 +159,7 @@ function k(e) {
       name: i.name ?? "",
       email: i.email ?? ""
     };
-    sx("permission_request_responded", n);
+    trackEventAnalytics("permission_request_responded", n);
     t(Jd({
       requestId: n.request_id,
       level: n.type,
@@ -301,14 +301,14 @@ function L(e) {
     children: [jsx(function () {
       return jsx("p", {
         className: "role_requests--textWrapper--CsNzC",
-        children: tx("role_requests.header_text", {
+        children: renderI18nText("role_requests.header_text", {
           userName: jsx("strong", {
             className: I,
             children: e.firstRoleRequestName
           }),
           othersText: jsx("strong", {
             className: I,
-            children: tx("role_requests.num_pending_requests", {
+            children: renderI18nText("role_requests.num_pending_requests", {
               numRoleRequests: e.numRoleRequests - 1
             })
           }),

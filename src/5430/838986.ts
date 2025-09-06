@@ -2,7 +2,7 @@ import { w as _$$w } from "../5430/495667";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { $M } from "../figma_app/930338";
 import { B } from "../905/714743";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { W, B as _$$B } from "../905/841666";
 import { mk, c8 } from "../figma_app/777551";
 import { Vm, XW } from "../figma_app/427318";
@@ -26,7 +26,7 @@ export function $$m0({
   let C = _$$w(e, !!j, w || null, m || "")();
   let L = jsx("div", {
     className: If,
-    children: tx("community.detail_view.bullet_point")
+    children: renderI18nText("community.detail_view.bullet_point")
   });
   return jsxs("div", {
     className: M1,
@@ -49,7 +49,7 @@ export function $$m0({
         svg: _$$A
       }), jsx("div", {
         className: lp,
-        children: tx("community.detail_view.number_of_users", {
+        children: renderI18nText("community.detail_view.number_of_users", {
           numberOfUsers: $M(mk(e))
         })
       })]

@@ -1,16 +1,16 @@
-import { yu, eU, Iz } from "../figma_app/27355";
+import { setupAtomWithMount, atom, createRemovableAtomFamily } from "../figma_app/27355";
 import { resourceUtils } from "../905/989992";
 import { Jt, MT } from "../figma_app/330108";
-import { bt } from "../905/270322";
+import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { ox } from "../figma_app/88768";
 import { getPermissionsStateMemoized } from "../figma_app/642025";
 import { ZM } from "../figma_app/329496";
-let c = bt(e => {
+let c = createReduxSubscriptionAtomWithState(e => {
   if ("loaded" !== e.orgTeams.status) return resourceUtils.loading();
   let t = e.orgTeams.teams.filter(t => t.org_id === e.currentUserOrgId);
   return resourceUtils.loaded(t);
 });
-let $$u3 = yu(c, ({
+let $$u3 = setupAtomWithMount(c, ({
   target: e
 }) => {
   let t = e.getStore();
@@ -19,16 +19,16 @@ let $$u3 = yu(c, ({
     t.dispatch(MT());
   };
 });
-let m = bt(e => getPermissionsStateMemoized(e));
-let _ = eU(e => {
+let m = createReduxSubscriptionAtomWithState(e => getPermissionsStateMemoized(e));
+let _ = atom(e => {
   let t = e($$u3);
   let a = e(m);
   return t.transform(e => e.filter(e => ox(e, a)));
 });
-let p = eU(e => e(_).transform(e => ZM(e)));
-let $$g2 = Iz(e => eU(t => t(p).transform(t => t[e] ?? 0)));
-let $$h1 = eU(e => e(_).transform(e => e.filter(e => null === e.workspace_id || void 0 === e.workspace_id)));
-let $$x0 = yu(c, ({
+let p = atom(e => e(_).transform(e => ZM(e)));
+let $$g2 = createRemovableAtomFamily(e => atom(t => t(p).transform(t => t[e] ?? 0)));
+let $$h1 = atom(e => e(_).transform(e => e.filter(e => null === e.workspace_id || void 0 === e.workspace_id)));
+let $$x0 = setupAtomWithMount(c, ({
   target: e
 }) => {
   let t = e.getStore();

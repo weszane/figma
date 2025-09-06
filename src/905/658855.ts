@@ -7,11 +7,11 @@ import { x as _$$x } from "../905/587214";
 import { f as _$$f } from "../905/54715";
 import c from "classnames";
 import { _ as _$$_ } from "../vendor/853977";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { kt } from "../figma_app/858013";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { I as _$$I } from "../905/343721";
 import { DM, en } from "../905/759470";
@@ -30,7 +30,7 @@ function N(e, t) {
   let i = {};
   let n = e.filter(e => !i[e.sha1] && (i[e.sha1] = !0, !0));
   n.length !== e.length && t(_$$F.enqueue({
-    message: _$$t("community.publishing.some_media_was_deduplicated"),
+    message: getI18nString("community.publishing.some_media_was_deduplicated"),
     error: !1
   }));
   return n;
@@ -41,12 +41,12 @@ function P(e, t, i) {
     let n = !1;
     for (let t = 0; t < e.length; t++) "video" === e[t].type && ++i > DM && (n = !0, e.splice(t, 1), t--, i--);
     n && t(_$$F.enqueue({
-      message: _$$t("community.publishing.you_can_only_upload_three_videos"),
+      message: getI18nString("community.publishing.you_can_only_upload_three_videos"),
       error: !0
     }));
   }
   e.length > en && (t(_$$F.enqueue({
-    message: i ? _$$t("community.publishing.you_can_only_upload_ten_images_and_videos") : _$$t("community.publishing.you_can_only_upload_ten_images"),
+    message: i ? getI18nString("community.publishing.you_can_only_upload_ten_images_and_videos") : getI18nString("community.publishing.you_can_only_upload_ten_images"),
     error: !1
   })), e = e.slice(0, 10));
   return e;
@@ -66,7 +66,7 @@ async function O(e, t, i, n, r, a, s, o, l, d) {
   }
   let p = [...t, ...u];
   p = P(p = N(p, n), n, r);
-  sx("community_publish_modal", {
+  trackEventAnalytics("community_publish_modal", {
     userId: s,
     orgId: d,
     step: WX.ADD_CAROUSEL_MEDIA,
@@ -118,7 +118,7 @@ function D({
     }
     let n = [...c, ...i];
     n = P(n = N(n, V), V, e);
-    sx("community_publish_modal", {
+    trackEventAnalytics("community_publish_modal", {
       userId: D,
       orgId: L,
       step: WX.ADD_CAROUSEL_MEDIA,
@@ -145,7 +145,7 @@ function D({
     }
     let n = [...c, ...i];
     n = P(n = N(n, V), V, e);
-    sx("community_publish_modal", {
+    trackEventAnalytics("community_publish_modal", {
       userId: D,
       orgId: L,
       step: WX.ADD_CAROUSEL_MEDIA,
@@ -166,8 +166,8 @@ function D({
     let i = () => {
       z.current?.click();
     };
-    let r = e ? tx("community.publishing.upload_at_least_one_image_or_video") : tx("community.publishing.upload_at_least_one_image");
-    t = e ? h ? tx("community.publishing.upload_images_and_videos_to_show_off_your_widget") : tx("community.publishing.upload_images_and_videos_to_show_off_your_plugin") : tx("community.publishing.select_up_to_10_images_of_your_file");
+    let r = e ? renderI18nText("community.publishing.upload_at_least_one_image_or_video") : renderI18nText("community.publishing.upload_at_least_one_image");
+    t = e ? h ? renderI18nText("community.publishing.upload_images_and_videos_to_show_off_your_widget") : renderI18nText("community.publishing.upload_images_and_videos_to_show_off_your_plugin") : renderI18nText("community.publishing.select_up_to_10_images_of_your_file");
     return jsxs(Fragment, {
       children: [jsx("div", {
         className: "publish_resource_card_preview--placeholderHeroIconUI3--hAEcp",
@@ -191,7 +191,7 @@ function D({
           ref: z,
           onChange: l ? lQ : () => O(z, c, w, V, e, R, D, U, B, L),
           multiple: !0
-        }), tx("community.publishing.upload_instructions", {
+        }), renderI18nText("community.publishing.upload_instructions", {
           chooseFileLink: jsx("label", {
             className: _$$s.cursorPointer.colorTextBrand.inlineBlock.$,
             htmlFor: "cover-upload-input",
@@ -200,12 +200,12 @@ function D({
               e.stopPropagation();
               i();
             },
-            children: tx("community.publishing.upload_from_your_computer")
+            children: renderI18nText("community.publishing.upload_from_your_computer")
           })
         })]
       }), jsx("div", {
         className: "publish_resource_card_preview--placeholderHeroText--cJgeG text--fontPos11--2LvXf text--_fontBase--QdLsd",
-        children: tx("community.publishing.upload_instructions_recommended_size")
+        children: renderI18nText("community.publishing.upload_instructions_recommended_size")
       })]
     });
   })();
@@ -298,7 +298,7 @@ function F({
     onClick: () => o(!s),
     role: "button",
     tabIndex: 0,
-    children: [tx("community.publishing.thumbnail"), e && i ? jsx(_$$B, {
+    children: [renderI18nText("community.publishing.thumbnail"), e && i ? jsx(_$$B, {
       svg: _$$A,
       className: "publish_resource_card_preview--ellipses--ZhnQN"
     }) : jsx(_$$I, {
@@ -312,7 +312,7 @@ function F({
       children: jsx("button", {
         onClick: t,
         className: "publish_resource_card_preview--tooltipText---3xSN",
-        children: tx("community.publishing.restore_default_thumbnail")
+        children: renderI18nText("community.publishing.restore_default_thumbnail")
       })
     })]
   });
@@ -320,7 +320,7 @@ function F({
 function M() {
   return jsxs("div", {
     className: "publish_resource_card_preview--nonCurrentThumbnailBadge--1CaIR publish_resource_card_preview--currentThumbnailBadge--TgbcP publish_resource_card_preview--currentThumbnailIcon--SaiqZ text--fontPos9--naThA text--_fontBase--QdLsd",
-    children: [tx("community.publishing.set_as_thumbnail"), jsx(_$$I, {
+    children: [renderI18nText("community.publishing.set_as_thumbnail"), jsx(_$$I, {
       icon: "frame-grey-16-colored",
       fill: "menu"
     })]
@@ -401,7 +401,7 @@ function B({
                 let s = [...i];
                 let o = s.splice(e, 1)[0];
                 nK(o);
-                sx("community_publish_modal", {
+                trackEventAnalytics("community_publish_modal", {
                   userId: t,
                   orgId: n,
                   step: WX.DELETE_CAROUSEL_MEDIA,

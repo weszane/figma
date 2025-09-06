@@ -1,23 +1,23 @@
 import { useRef, useCallback, useMemo, useEffect } from "react";
 import { debounce } from "../905/915765";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { o_, Qd, Vm } from "../figma_app/427318";
 import { j6 } from "../figma_app/831799";
 import { e0 } from "../905/696396";
 if (443 == require.j) {}
-let c = (e) => {
+let c = e => {
   let t;
   t = o_(e) ? Qd(e) : Vm(e);
   return `${e.id}---${t}`;
 };
-let d = (e) => {
+let d = e => {
   let [t, r] = e.split("---");
   return {
     id: t,
     type: r
   };
 };
-var u = ((e) => (e.RESOURCE = "resource", e.TEMPLATE = "template", e.PLUGIN = "plugin", e))(u || {});
+var u = (e => (e.RESOURCE = "resource", e.TEMPLATE = "template", e.PLUGIN = "plugin", e))(u || {});
 export function $$m1({
   debounceWaitInMs: e,
   extraProperties: t
@@ -59,11 +59,11 @@ function h({
   } = j6();
   let m = useRef([]);
   let _ = useRef(new Set());
-  let p = useCallback((e) => {
+  let p = useCallback(e => {
     if (0 === m.current.length) return;
     let s = [];
     let i = [];
-    m.current.forEach((e) => {
+    m.current.forEach(e => {
       let {
         id,
         type
@@ -71,7 +71,7 @@ function h({
       s.push(id);
       i.push(type);
     });
-    sx("community_impressed_resources", {
+    trackEventAnalytics("community_impressed_resources", {
       impressedItems: s.join(),
       impressedItemTypes: i.join(),
       idType: r,
@@ -95,7 +95,7 @@ function h({
     };
   }, [p]);
   return {
-    trackResourceImpression: useCallback((e) => {
+    trackResourceImpression: useCallback(e => {
       let t = c(e);
       _.current.has(t) || (_.current.add(t), m.current.push(t), h());
     }, [h]),

@@ -16,7 +16,7 @@ import { P as _$$P } from "../vendor/348225";
 import { fU } from "../905/492004";
 import { rf } from "../figma_app/806412";
 import { B as _$$B } from "../905/714743";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Ho, wE, sp } from "../figma_app/308685";
 import { Dm } from "../figma_app/8833";
 import { Tc } from "../905/797478";
@@ -160,7 +160,7 @@ function ep(e) {
       "data-tooltip-type": Ib.TEXT,
       "data-tooltip-offset-x": 30,
       "data-tooltip-offset-y": -50,
-      "data-tooltip": !0 === l && "r-chat" === name ? _$$t("fullscreen_actions.disable-cursor-chat") : null
+      "data-tooltip": !0 === l && "r-chat" === name ? getI18nString("fullscreen_actions.disable-cursor-chat") : null
     })
   });
 }
@@ -206,7 +206,7 @@ function e_({
           "data-fullscreen-intercept": !0,
           children: jsx(_$$B, {
             svg: _$$A3,
-            "aria-label": _$$t("fullscreen.reaction_wheel")
+            "aria-label": getI18nString("fullscreen.reaction_wheel")
           })
         }), jsx(_$$r2, {
           ...r.STAMP,
@@ -215,7 +215,7 @@ function e_({
           "data-fullscreen-intercept": !0,
           children: jsx(_$$B, {
             svg: _$$A4,
-            "aria-label": _$$t("fullscreen.stamp_wheel")
+            "aria-label": getI18nString("fullscreen.stamp_wheel")
           })
         })]
       })
@@ -261,7 +261,7 @@ function eh({
           "data-fullscreen-intercept": !0,
           children: jsx(_$$B, {
             svg: _$$A3,
-            "aria-label": _$$t("fullscreen.reaction_wheel")
+            "aria-label": getI18nString("fullscreen.reaction_wheel")
           })
         }), jsx(_$$r2, {
           ...r.STAMP,
@@ -270,7 +270,7 @@ function eh({
           "data-fullscreen-intercept": !0,
           children: jsx(_$$B, {
             svg: _$$A4,
-            "aria-label": _$$t("fullscreen.stamp_wheel")
+            "aria-label": getI18nString("fullscreen.stamp_wheel")
           })
         })]
       })
@@ -813,7 +813,7 @@ function eT() {
     label: e,
     position: r + 1,
     image: t,
-    i18nName: () => _$$t("fullscreen.stamp_wheel.thumbs_up")
+    i18nName: () => getI18nString("fullscreen.stamp_wheel.thumbs_up")
   })) : _$$n, []);
   let a = useMemo(() => hf(e.voteStamp), [e.voteStamp]);
   useEffect(() => {

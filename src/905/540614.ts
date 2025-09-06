@@ -1,6 +1,6 @@
 import { glU } from "../figma_app/763686";
 import { DS } from "../figma_app/387100";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { I2 } from "../905/70369";
 import { nF } from "../905/350402";
@@ -38,9 +38,9 @@ export let $$h1 = nF(e => {
     return !0;
   }(t.mirror.sceneGraph, i) && g(e) : (A(), g(e))) : f(t.mirror.sceneGraph, i) && e.dispatch(F.enqueue({
     type: c,
-    message: _$$t("design_systems.actions.variant_changed"),
+    message: getI18nString("design_systems.actions.variant_changed"),
     button: {
-      text: _$$t("design_systems.actions.return_to_variant"),
+      text: getI18nString("design_systems.actions.return_to_variant"),
       action: A,
       editScope: "return-to-initial-variant"
     }

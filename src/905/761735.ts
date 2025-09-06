@@ -1,35 +1,35 @@
 import { NU } from '../905/11';
 import { ServiceCategories as _$$e } from '../905/165054';
 import { z as _$$z } from '../905/239603';
-import { L as _$$L } from '../905/270963';
+import { datadogRum } from '../905/270963';
 import { oJ as _$$oJ } from '../905/312028';
 import { g as _$$g2 } from '../905/346780';
 import { D as _$$D } from '../905/412108';
 import { observableState } from '../905/441145';
-import { az as _$$az, sx as _$$sx } from '../905/449184';
+import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
 import { Rh as _$$Rh, rI as _$$rI, S3 as _$$S2, BO } from '../905/485103';
 import { createFieldRef } from '../905/552287';
 import { getFeatureFlags } from '../905/601108';
 import { M as _$$M } from '../905/609813';
 import { dZ as _$$dZ2, iO as _$$iO, Sj as _$$Sj, Oh } from '../905/663269';
-import { ZO } from '../905/670985';
+import { measureAsyncDuration } from '../905/670985';
 import { J as _$$J } from '../905/679168';
-import { x1 as _$$x } from '../905/714362';
+import { logError } from '../905/714362';
 import { $W, cy as _$$cy, H as _$$H, h5 as _$$h2, mJ as _$$mJ, mv as _$$mv, pJ as _$$pJ, sG as _$$sG, tt as _$$tt, Mx, zD } from '../905/787926';
 import { Y as _$$Y } from '../905/806400';
 import { C as _$$C } from '../905/807275';
 import { PriorityLevels as _$$aG, createAliasedFieldRef, createParentRef, createSessionRef, createViewRef, makeFieldRefOptional, mergeFieldRefs, NULL_FIELD_REF } from '../905/871467';
 import { g as _$$g } from '../905/880308';
-import { X as _$$X } from '../905/883621';
+import { getEnvironmentInfo } from '../905/883621';
 import { XHR } from '../905/910117';
 import { ConnectionAttemptTypes, FileOperationTypes, PriorityLevels } from '../905/957591';
 import { $kt, apG, DSh, ehp, ib2, w2r, wZi, XRH } from '../figma_app/43951';
 import { getLaunchDarklyFlagsExport } from '../figma_app/169182';
 import { td as _$$td, YV } from '../figma_app/181241';
-import { nl as _$$nl, Lg, PN } from '../figma_app/257275';
+import { isInteractionPathCheck, getFalseValue, isInteractionOrEvalMode } from '../figma_app/897289';
 import { gP as _$$gP } from '../figma_app/594947';
 import { Go1, QKp, TOI } from '../figma_app/822011';
-import { eD as _$$eD, S8 as _$$S, O_ } from '../figma_app/876459';
+import { desktopAPIInstance, bellFeedAPIInstance, getBellFeedAPI } from '../figma_app/876459';
 let n = {};
 require.d(n, {
   AccountTypeRequestStatusFragment: () => Ax,
@@ -92002,7 +92002,7 @@ let Nl = {
   SYNC_TIMEOUT: 'livegraph.web.sync.timeout'
 };
 var Nd = (e => (e[e.fail = 0] = 'fail', e[e.success = 1] = 'success', e))(Nd || {});
-let Nc = getFeatureFlags().datadog_rum_livegraph_events ? _$$L : void 0;
+let Nc = getFeatureFlags().datadog_rum_livegraph_events ? datadogRum : void 0;
 function Nu(e, t, i, n, r) {
   Nc?.addDurationVital(e, {
     description: t.view._name,
@@ -92322,7 +92322,7 @@ class Nm {
               e.result.status === 'loaded' ? this.reportInitialViewMetric(e.view._name, i, 1) : (i.reason = e.result.status, this.reportInitialViewMetric(e.view._name, i, 0));
               let n = r.timer.finish();
               this.initialSubscriptionTimers.$$delete(t);
-              !PN() && getFeatureFlags().instrument_lg_view_loadspans && window.performance?.measure && window.performance.measure(`LG: ${e.view._name}`, {
+              !isInteractionOrEvalMode() && getFeatureFlags().instrument_lg_view_loadspans && window.performance?.measure && window.performance.measure(`LG: ${e.view._name}`, {
                 detail: {
                   args: e.args,
                   backgrounded: String(r.timer.backgrounded),
@@ -92385,13 +92385,13 @@ class Nm {
                   was_offline: String(n),
                   server_version: this.serverVersion
                 });
-                t === '5min' && _$$az.trackDefinedEvent('livegraph.gigastuck_view_client', {
+                t === '5min' && analyticsEventManager.trackDefinedEvent('livegraph.gigastuck_view_client', {
                   view_name: e.view._name,
                   user_id: this.client.userId ?? 'unknown',
                   was_backgrounded: i,
                   was_offline: n,
-                  browser_name: _$$X().browser_name?.toString(),
-                  os_name: _$$X().os_name?.toString(),
+                  browser_name: getEnvironmentInfo().browser_name?.toString(),
+                  os_name: getEnvironmentInfo().os_name?.toString(),
                   server_version: this.serverVersion,
                   outstanding_syncs: this.syncTimers.values.length > 0
                 });
@@ -92649,7 +92649,7 @@ class Nm {
         exist: `${e.exist}`,
         object_name: e.objectName,
         operation: e.operationType
-      }), e.exist || _$$az.trackDefinedEvent('livegraph.optimistic_mutation_resolution_failure', {
+      }), e.exist || analyticsEventManager.trackDefinedEvent('livegraph.optimistic_mutation_resolution_failure', {
         objectName: e.objectName,
         operation: e.operationType,
         optimisticMutations: JSON.stringify(e.optimisticMutations),
@@ -92728,7 +92728,7 @@ class Nm {
         for (let i of e.loadingPaths) {
           for (let e of i) t.add(e);
         }
-        _$$x('livegraph', `An optimistic mutation did not provide sufficient data to generate a complete view result. These views will appear to be dropped: ${e.loadedToLoadingViews.join(', ')}`, {
+        logError('livegraph', `An optimistic mutation did not provide sufficient data to generate a complete view result. These views will appear to be dropped: ${e.loadedToLoadingViews.join(', ')}`, {
           loadedToLoadingViews: e.loadedToLoadingViews,
           loadingPaths: [...t]
         }, {
@@ -92743,7 +92743,7 @@ class Nm {
       });
     };
     this.viewStatsHandler = e => {
-      e.type === 'VIEW.QUERY_STATS' && getFeatureFlags().livegraph_log_view_stats && _$$sx('Livegraph Client View Stats', {
+      e.type === 'VIEW.QUERY_STATS' && getFeatureFlags().livegraph_log_view_stats && trackEventAnalytics('Livegraph Client View Stats', {
         type: e.type,
         nodeType: e.nodeType,
         viewName: e.viewName,
@@ -92757,7 +92757,7 @@ class Nm {
       });
     };
     this.viewTransitionHandler = e => {
-      e.type === 'VIEW.STATE_TRANSITION' && getFeatureFlags().livegraph_log_view_transition && _$$sx('Livegraph Client View Transition', {
+      e.type === 'VIEW.STATE_TRANSITION' && getFeatureFlags().livegraph_log_view_transition && trackEventAnalytics('Livegraph Client View Transition', {
         type: e.type,
         viewName: e.viewName,
         userId: e.userId,
@@ -92780,7 +92780,7 @@ class Nm {
         (this.connectionCount === 1 || i >= 65e3) && (this.reportNumericEvent(No.SUBSCRIPTION_UPDATE_LATENCY_V2, e.latencyMs, {
           object_name: e.objectName,
           server_version: this.serverVersion
-        }), (e.latencyMs > this.slowUpdateLatencyThreshold || e.latencyMs < 0) && Math.random() < this.figmentDebuggingSamplingRate && _$$az.trackDefinedEvent('livegraph.slow_update_latency', {
+        }), (e.latencyMs > this.slowUpdateLatencyThreshold || e.latencyMs < 0) && Math.random() < this.figmentDebuggingSamplingRate && analyticsEventManager.trackDefinedEvent('livegraph.slow_update_latency', {
           objectName: e.objectName,
           latency: e.latencyMs,
           updateAt: e.updatedAt.toISOString(),
@@ -92877,7 +92877,7 @@ class Nm {
       this.reportNumericEvent(No.SESSION_SUCCESS, e, {
         server_version: this.serverVersion
       });
-      e <= 0 && Math.random() < this.figmentDebuggingSamplingRate && _$$az.trackDefinedEvent('livegraph.session_success_report', {
+      e <= 0 && Math.random() < this.figmentDebuggingSamplingRate && analyticsEventManager.trackDefinedEvent('livegraph.session_success_report', {
         successPercentage: e,
         totalViews: i,
         successfulLoadedViewsCount: this.successfulLoadedViewsCount,
@@ -92918,7 +92918,7 @@ class Nm {
       was_offline: String(r),
       load_type: a
     });
-    getFeatureFlags().livegraph_figment_metrics && _$$sx('Livegraph Client Metrics Server Latency', {
+    getFeatureFlags().livegraph_figment_metrics && trackEventAnalytics('Livegraph Client Metrics Server Latency', {
       view_name: e,
       was_backgrounded: n,
       was_offline: r,
@@ -92953,7 +92953,7 @@ class Nm {
       was_offline: String(r),
       load_type: a
     });
-    getFeatureFlags().livegraph_figment_metrics && _$$sx('Livegraph Client Metrics E2E Latency', {
+    getFeatureFlags().livegraph_figment_metrics && trackEventAnalytics('Livegraph Client Metrics E2E Latency', {
       view_name: e,
       server_version: this.serverVersion,
       was_backgrounded: n,
@@ -92975,7 +92975,7 @@ class Nm {
     });
   }
   logSyncEvent(e, t, i) {
-    getFeatureFlags().livegraph_verbose_sync_logging && _$$az.trackDefinedEvent('livegraph.sync_verbose_events', {
+    getFeatureFlags().livegraph_verbose_sync_logging && analyticsEventManager.trackDefinedEvent('livegraph.sync_verbose_events', {
       transactionId: e.toString(),
       name: t,
       data: JSON.stringify(i)
@@ -93252,7 +93252,7 @@ let NC = [wZi, ib2, $kt, w2r, ehp];
 export function $$NT0(e) {
   let t = observableState.get();
   if (t) {
-    if (e === t.userId || _$$nl() || Lg()) return t;
+    if (e === t.userId || isInteractionPathCheck() || getFalseValue()) return t;
     console.warn(`[livegraph] userId changed after livegraph client creation. userId == null, before: ${t.userId == null}, after: ${e == null}`);
     t.close();
   }
@@ -93293,8 +93293,8 @@ export function $$NT0(e) {
       };
     }();
     i.userId !== e && (i.userId = e, i.anonUserId = null, t && (console.warn(`[livegraph] userId changed after early websocket creation. userId == null, before: ${i.userId == null}, after: ${e == null}`), t.close(), t = void 0));
-    let n = O_(8);
-    (_$$eD || _$$S) && (i.clientType = 'desktop', _$$eD ? (i.extras.desktop = JSON.stringify(_$$eD.getInformationalVersion()), _$$eD.hasFeature('addOsVersion') && (i.extras.desktopOS = JSON.stringify(_$$eD.getOSVersion()))) : _$$S && (i.extras.bell = '1', n && (i.extras.desktop = JSON.stringify(n.desktopAppVersion), i.extras.desktopOS = JSON.stringify(n.osVersion))));
+    let n = getBellFeedAPI(8);
+    (desktopAPIInstance || bellFeedAPIInstance) && (i.clientType = 'desktop', desktopAPIInstance ? (i.extras.desktop = JSON.stringify(desktopAPIInstance.getInformationalVersion()), desktopAPIInstance.hasFeature('addOsVersion') && (i.extras.desktopOS = JSON.stringify(desktopAPIInstance.getOSVersion()))) : bellFeedAPIInstance && (i.extras.bell = '1', n && (i.extras.desktop = JSON.stringify(n.desktopAppVersion), i.extras.desktopOS = JSON.stringify(n.osVersion))));
     getFeatureFlags().livegraph_skip_early_conn_preload && (i.preloadedViews = {});
     let r = {
       shouldBubbleUpNonNullableResultErrors: getLaunchDarklyFlagsExport().livegraph_nonNullableResult_errors_bubble_up,
@@ -93302,7 +93302,7 @@ export function $$NT0(e) {
       checkPotentiallyMissingOptimisticMutations: getFeatureFlags().livegraph_check_missing_optimistic_mutations,
       backoffConfig: getLaunchDarklyFlagsExport().livegraph_client_backoff_config,
       shouldSplayLoadedViews: !!getFeatureFlags().livegraph_splay_loaded_views,
-      splayDesktopBellConnConfig: _$$S ? getLaunchDarklyFlagsExport().livegraph_splay_desktop_bell_conn : void 0,
+      splayDesktopBellConnConfig: bellFeedAPIInstance ? getLaunchDarklyFlagsExport().livegraph_splay_desktop_bell_conn : void 0,
       shouldChangeOptimisticMutationRevertOrder: getFeatureFlags().livegraph_change_optimistic_update_order,
       retryErroredViewSubscriptions: _$$gP('livegraph_client_config').get('retry_errored_view_subscriptions', !1),
       subscriptionRetryBackoffConfig: _$$gP('livegraph_client_config').get('subscription_retry_backoff_config', {
@@ -93349,7 +93349,7 @@ export function $$NT0(e) {
     let a = new _$$Sj(RY);
     let s = new _$$iO(RY.views, a);
     let o = t || null;
-    let l = new R5(_$$az);
+    let l = new R5(analyticsEventManager);
     let d = new Oh(a, s, i, e => {
       if (!o || o.readyState === WebSocket.CLOSED || o.readyState === WebSocket.CLOSING) return new WebSocket(e);
       let t = o;
@@ -93419,7 +93419,7 @@ export function $$NT0(e) {
       });
     }
   };
-  ZO('LiveGraph connection', _$$e.WEB_PLATFORM, async () => {
+  measureAsyncDuration('LiveGraph connection', _$$e.WEB_PLATFORM, async () => {
     await observableState.get().connect();
   });
   return observableState.get();

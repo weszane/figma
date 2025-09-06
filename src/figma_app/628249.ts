@@ -1,9 +1,9 @@
-import { R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { gl } from "../905/216495";
 import { A5 } from "../905/275640";
 export function $$s0() {
   let e = A5("fillPaints");
-  return R(t => {
+  return selectWithShallowEqual(t => {
     let r = t.mirror.selectionProperties.fillPaints;
     if (!r || gl(r)) return null;
     let n = r.findIndex(e => "IMAGE" === e.type);

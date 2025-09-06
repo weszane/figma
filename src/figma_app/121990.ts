@@ -5,7 +5,7 @@ import { Q } from "../905/363675";
 import { O } from "../905/969533";
 import { e6 } from "../figma_app/617427";
 import { Ph } from "../905/160095";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { JT } from "../figma_app/847597";
 import { Z } from "../figma_app/903114";
 import { c as _$$c } from "../905/370443";
@@ -17,7 +17,7 @@ export function $$h0({
   let [h, m] = useState(!1);
   let g = jsx("div", {
     className: "x1g2dr8m xiqqdae xkezfkh x14kxzw3 x1giz659",
-    children: _$$t("file_permissions_modal.update_seat_tab.this_may_impact_your_costs")
+    children: getI18nString("file_permissions_modal.update_seat_tab.this_may_impact_your_costs")
   });
   let f = () => m(!h);
   let E = jsx(Ph, {
@@ -27,14 +27,14 @@ export function $$h0({
     trackingProperties: {
       trackingDescriptor: _$$c.LEARN_MORE
     },
-    children: _$$t("file_permissions_modal.update_seat_tab.learn_more")
+    children: getI18nString("file_permissions_modal.update_seat_tab.learn_more")
   });
-  let y = r ? tx("file_permissions_modal.update_seat_tab.if_there_is_an_available_seat_proration_enabled", {
+  let y = r ? renderI18nText("file_permissions_modal.update_seat_tab.if_there_is_an_available_seat_proration_enabled", {
     userString: t,
     seatType: JT(e),
     priceString: r,
     learnMoreLink: E
-  }) : tx("file_permissions_modal.update_seat_tab.if_there_is_an_available_seat_proration_not_enabled", {
+  }) : renderI18nText("file_permissions_modal.update_seat_tab.if_there_is_an_available_seat_proration_not_enabled", {
     userString: t,
     seatType: JT(e),
     learnMoreLink: E

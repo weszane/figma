@@ -1,12 +1,12 @@
 import { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { sx, az } from "../905/449184";
+import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { nD } from "../figma_app/416935";
 import { ZC } from "../figma_app/39751";
 import { getPaymentFlowData } from "../figma_app/169182";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { sx as _$$sx } from "../figma_app/307841";
 import { sf } from "../905/929976";
 import { yH } from "../figma_app/714946";
@@ -45,7 +45,7 @@ let $$b2 = D(({
   let O = function () {
     let e = useDispatch();
     return useCallback(t => {
-      sx("Loaded Saved Cart State", {
+      trackEventAnalytics("Loaded Saved Cart State", {
         teamId: t.teamId,
         lastSavedAt: t.updatedAt
       });
@@ -63,7 +63,7 @@ let $$b2 = D(({
           taxes: s.data.meta.estimate
         }));
       } catch (e) {
-        a(_$$s.error(_$$t("payments.errors.estimate_calculation_error")));
+        a(_$$s.error(getI18nString("payments.errors.estimate_calculation_error")));
         a(sf({
           ...y,
           paymentStep: tn.PAYMENT_AND_ADDRESS
@@ -131,7 +131,7 @@ let $$b2 = D(({
             ...i
           });
         } else {
-          "teamUpgrade" === y.view && y.paymentStep === tn.CONFIRM_PAY && y.billingPeriod !== tY.STUDENT && az.trackDefinedEvent("monetization_upgrades.pro_checkout_confirmation_without_payment_flow_data", {
+          "teamUpgrade" === y.view && y.paymentStep === tn.CONFIRM_PAY && y.billingPeriod !== tY.STUDENT && analyticsEventManager.trackDefinedEvent("monetization_upgrades.pro_checkout_confirmation_without_payment_flow_data", {
             isCampfireCart: k,
             teamId: e ?? void 0
           });

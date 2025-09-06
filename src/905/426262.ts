@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { G$ } from "../figma_app/646357";
 export function $$s1({
   numComponents: e,
@@ -23,7 +23,7 @@ export function $$o0({
 }) {
   let i = e + t;
   return jsx("span", {
-    children: 0 === i ? tx("design_systems.libraries_modal.no_components") : tx("design_systems.libraries_modal.plural.num_component", {
+    children: 0 === i ? renderI18nText("design_systems.libraries_modal.no_components") : renderI18nText("design_systems.libraries_modal.plural.num_component", {
       numComponents: i
     })
   });

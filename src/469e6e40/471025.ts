@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { kt } from "../figma_app/858013";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Y } from "../905/830372";
 import { useState } from "react";
 import { fP, mc, i3 } from "../905/691059";
@@ -10,7 +10,7 @@ import { E as _$$E2 } from "../905/172252";
 import { x as _$$x } from "../905/811596";
 import { _ as _$$_ } from "../469e6e40/422718";
 import { A as _$$A } from "../vendor/850789";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { h as _$$h } from "../905/207101";
 import { Ex, vj, zE } from "../figma_app/919079";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -49,7 +49,7 @@ function C(e) {
   });
   return jsxs(Fragment, {
     children: [jsx(_$$E, {
-      "aria-label": _$$t("admin_settings.people_tab.seat_counts.popover_aria_label", {
+      "aria-label": getI18nString("admin_settings.people_tab.seat_counts.popover_aria_label", {
         totalSeats: g,
         seatType: tI(e.seatType)
       }),
@@ -93,7 +93,7 @@ function C(e) {
 }
 function S(e) {
   _$$h(() => {
-    az.trackDefinedEvent("admin.seat_count_viewed", {
+    analyticsEventManager.trackDefinedEvent("admin.seat_count_viewed", {
       seatType: e.seatType
     });
   });
@@ -108,7 +108,7 @@ function S(e) {
     seatType: e.seatType,
     seatCount: e.seatCount
   }, "no_interval_seat_count")];
-  let a = `${_$$t("admin_settings.people_tab.seat_counts.total_seats", {
+  let a = `${getI18nString("admin_settings.people_tab.seat_counts.total_seats", {
     seatType: tI(e.seatType)
   })}: ${e.totalSeats.toLocaleString()}`;
   return jsx("div", {
@@ -127,7 +127,7 @@ function S(e) {
         children: [jsx("span", {
           children: jsx(_$$E3, {
             color: "default",
-            children: _$$t("admin_settings.people_tab.seat_counts.total_seats", {
+            children: getI18nString("admin_settings.people_tab.seat_counts.total_seats", {
               seatType: tI(e.seatType)
             })
           })
@@ -141,7 +141,7 @@ function S(e) {
         style: E,
         children: jsx(_$$E3, {
           color: "secondary",
-          children: _$$t("admin_settings.people_tab.seat_counts.in_this_billing_group")
+          children: getI18nString("admin_settings.people_tab.seat_counts.in_this_billing_group")
         })
       }), e.seatType !== Gu.VIEW && !e.forLicenseGroup && !e.isELA && t]
     })
@@ -153,19 +153,19 @@ function N(e) {
       style: E,
       children: jsx(_$$E3, {
         color: "secondary",
-        children: e.billingInterval === FBillingPeriodType.MONTH ? _$$t("admin_settings.people_tab.seat_counts.billing_interval.month") : _$$t("admin_settings.people_tab.seat_counts.billing_interval.annual")
+        children: e.billingInterval === FBillingPeriodType.MONTH ? getI18nString("admin_settings.people_tab.seat_counts.billing_interval.month") : getI18nString("admin_settings.people_tab.seat_counts.billing_interval.annual")
       })
     }), jsx(I, {
       type: "assigned",
       icon: _$$x,
       count: e.seatCount.assigned,
-      labelKey: _$$t("admin_settings.people_tab.seat_counts.assigned_seats"),
+      labelKey: getI18nString("admin_settings.people_tab.seat_counts.assigned_seats"),
       billingInterval: e.billingInterval
     }), jsx(I, {
       type: "available",
       icon: _$$_,
       count: e.seatCount.available,
-      labelKey: _$$t("admin_settings.people_tab.seat_counts.available_seats"),
+      labelKey: getI18nString("admin_settings.people_tab.seat_counts.available_seats"),
       billingInterval: e.billingInterval
     })]
   });
@@ -251,7 +251,7 @@ function M(e) {
   }
   if ("disabled" === e.seatCounts.status) return null;
   if ("errors" === e.seatCounts.status) return jsx("div", {
-    children: tx("shared_fonts.upload_error_modal.error")
+    children: renderI18nText("shared_fonts.upload_error_modal.error")
   });
   let a = e.seatCounts.data;
   return jsx(Y, {

@@ -1,21 +1,21 @@
 import { useCallback } from "react";
-import { eU, zl, fp } from "../figma_app/27355";
+import { atom, atomStoreManager, useAtomValueAndSetter } from "../figma_app/27355";
 import { Wh } from "../figma_app/615482";
-let a = Wh(() => eU([]));
-let l = Wh(() => eU(new Map()));
+let a = Wh(() => atom([]));
+let l = Wh(() => atom(new Map()));
 export function $$o3() {
-  let e = zl.get(l);
-  zl.set(a, Array.from(e.values()));
+  let e = atomStoreManager.get(l);
+  atomStoreManager.set(a, Array.from(e.values()));
 }
 export function $$c0() {
-  zl.set(l, new Map());
+  atomStoreManager.set(l, new Map());
 }
 export function $$d1() {
-  zl.set(a, []);
+  atomStoreManager.set(a, []);
 }
 export function $$u2() {
-  let [e, t] = fp(l);
-  let [n, s] = fp(a);
+  let [e, t] = useAtomValueAndSetter(l);
+  let [n, s] = useAtomValueAndSetter(a);
   let o = useCallback(() => {
     s([]);
   }, [s]);

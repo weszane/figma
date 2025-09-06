@@ -10,7 +10,7 @@ import { Q as _$$Q } from "../905/363675";
 import { K as _$$K } from "../905/443068";
 import { oA } from "../905/663269";
 import { A as _$$A } from "../vendor/850789";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Rs } from "../figma_app/288654";
 import { r as _$$r } from "../905/520829";
 import { oY } from "../905/485103";
@@ -22,7 +22,7 @@ import { L as _$$L } from "../905/408237";
 import { qc, kt } from "../figma_app/858013";
 import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { In } from "../905/672640";
 import { E as _$$E } from "../905/984674";
@@ -112,7 +112,7 @@ function eA(e) {
   });
   let u = "loaded" === c.status ? {
     id: c.data.currentUser?.baseOrgUser?.draftsProject?.id || "",
-    name: _$$t("file_browser.file_move.drafts"),
+    name: getI18nString("file_browser.file_move.drafts"),
     canEdit: !!c.data.currentUser?.baseOrgUser?.draftsProject?.canEdit
   } : null;
   let p = u && jsx(_$$o, {
@@ -158,13 +158,13 @@ function eA(e) {
   let A = !isOrgContext;
   let y = A && "loaded" === g.status ? jsx(_$$o, {
     folderId: _,
-    folderName: _$$t("file_browser.file_move.drafts"),
+    folderName: getI18nString("file_browser.file_move.drafts"),
     teamName: selectedTeam?.name || "",
     checked: !!selectedFolder && selectedFolder.id === _,
     onSelect: () => {
       setSelectedFolder({
         id: _,
-        name: _$$t("file_browser.file_move.drafts"),
+        name: getI18nString("file_browser.file_move.drafts"),
         source: Q.ALL
       });
     },
@@ -174,7 +174,7 @@ function eA(e) {
   let b = "loaded" === g.status ? _$$oA(g.data.team?.allActiveProjects) : void 0;
   let v = "loaded" === g.status ? b && 0 === b.length ? jsxs("div", {
     className: Ub,
-    children: [tx("file_browser.file_move.no_projects_in_this_team"), jsx("div", {
+    children: [renderI18nText("file_browser.file_move.no_projects_in_this_team"), jsx("div", {
       className: _$$s.colorTextSecondary.$
     })]
   }) : b?.map(e => jsx(_$$o, {
@@ -233,7 +233,7 @@ function ey(e) {
   return jsxs("div", {
     children: [jsx("div", {
       className: _$$s.p8.ml8.colorTextSecondary.$,
-      children: e.sectionName || _$$t("sidebar.starred")
+      children: e.sectionName || getI18nString("sidebar.starred")
     }), r.map(t => {
       if ("folder" === t.resourceType) {
         let i = t.resource.project;
@@ -301,7 +301,7 @@ function eb(e) {
   let d = "loaded" === l.status ? _$$oA(l.data.team?.allActiveProjects) : void 0;
   let c = "loaded" === l.status ? d && 0 === d.length ? jsxs("div", {
     className: Ub,
-    children: [tx("file_browser.file_move.no_projects_in_this_team"), jsx("div", {
+    children: [renderI18nText("file_browser.file_move.no_projects_in_this_team"), jsx("div", {
       className: _$$s.colorTextSecondary.$
     })]
   }) : d?.map(t => jsx(_$$o, {
@@ -326,7 +326,7 @@ function eb(e) {
   });
   return 0 === i.length ? jsx("div", {
     className: Al,
-    children: tx("file_browser.file_move.no_projects_yet")
+    children: renderI18nText("file_browser.file_move.no_projects_yet")
   }) : jsxs("div", {
     children: [!o && jsx(_$$P, {
       width: 400,
@@ -378,7 +378,7 @@ function eC(e) {
     children: [jsx(_$$B2, {
       svg: _$$A2,
       className: Xv
-    }), tx("file_browser.file_move.new_team")]
+    }), renderI18nText("file_browser.file_move.new_team")]
   });
 }
 let eT = Ju(function (e) {
@@ -409,7 +409,7 @@ let eT = Ju(function (e) {
   return jsx(OJ, {
     title: jsx("div", {
       className: _$$s.alignCenter.flex.ml8.$,
-      children: tx("file_browser.file_move.create_team")
+      children: renderI18nText("file_browser.file_move.create_team")
     }),
     onClose: r,
     maxWidth: 480,
@@ -419,7 +419,7 @@ let eT = Ju(function (e) {
       className: rx,
       children: [jsx("div", {
         className: bV,
-        children: _$$t("team_creation.team_name_label")
+        children: getI18nString("team_creation.team_name_label")
       }), jsx(ks, {
         className: _Z,
         onChange: e => n(e.target.value),
@@ -428,16 +428,16 @@ let eT = Ju(function (e) {
         required: !0,
         maxLength: qg,
         minLength: 1,
-        placeholder: _$$t("team_creation.writer_s_guild_placeholder")
+        placeholder: getI18nString("team_creation.writer_s_guild_placeholder")
       }), jsxs("div", {
         className: Uo,
         children: [jsx(nR, {
           onClick: r,
-          children: tx("project_creation.cancel")
+          children: renderI18nText("project_creation.cancel")
         }), jsx($$, {
           disabled: !i,
           onClick: c,
-          children: tx("team_creation.create_team")
+          children: renderI18nText("team_creation.create_team")
         })]
       })]
     })
@@ -446,23 +446,23 @@ let eT = Ju(function (e) {
 let ek = (e, t) => {
   switch (e) {
     case FProductAccessType.DESIGN:
-      return tx("upgrades.drafts_move.request_body_design_plan_name", {
+      return renderI18nText("upgrades.drafts_move.request_body_design_plan_name", {
         planName: t
       });
     case FProductAccessType.WHITEBOARD:
-      return tx("upgrades.drafts_move.request_body_figjam_plan_name", {
+      return renderI18nText("upgrades.drafts_move.request_body_figjam_plan_name", {
         planName: t
       });
     case FProductAccessType.SLIDES:
-      return tx("upgrades.drafts_move.request_body_slides_plan_name", {
+      return renderI18nText("upgrades.drafts_move.request_body_slides_plan_name", {
         planName: t
       });
     case FProductAccessType.SITES:
-      return tx("upgrades.drafts_move.request_body_sites_plan_name", {
+      return renderI18nText("upgrades.drafts_move.request_body_sites_plan_name", {
         planName: t
       });
     case FProductAccessType.FIGMAKE:
-      return tx("upgrades.drafts_move.request_body_figmake_plan_name", {
+      return renderI18nText("upgrades.drafts_move.request_body_figmake_plan_name", {
         planName: t
       });
     case FProductAccessType.DEV_MODE:
@@ -547,7 +547,7 @@ let eR = Ju(function (e) {
     children: jsx(qc, {})
   }) : 0 === eJ.length ? jsx("div", {
     className: Al,
-    children: tx("file_browser.file_move.no_suggestions_yet_try_moving_your_files", {
+    children: renderI18nText("file_browser.file_move.no_suggestions_yet_try_moving_your_files", {
       lineBreak: jsx(Fragment, {
         children: jsx("br", {})
       })
@@ -559,7 +559,7 @@ let eR = Ju(function (e) {
       className: Er,
       children: eJ.map(e => jsx(_$$o, {
         folderId: e.id || "",
-        folderName: e.name || _$$t("file_browser.file_move.drafts"),
+        folderName: e.name || getI18nString("file_browser.file_move.drafts"),
         teamName: e.team_name || "",
         checked: !!eS && eS.id === e.id,
         onSelect: () => {
@@ -645,7 +645,7 @@ let eR = Ju(function (e) {
   }, [td, e5, tc]);
   let tp = filterNotNullish(Object.values(Q).map(e => jsx(_$$r2, {
     tab: e,
-    tabName: _$$t(`file_browser.file_move.tab_name_${e.toLowerCase()}`),
+    tabName: getI18nString(`file_browser.file_move.tab_name_${e.toLowerCase()}`),
     onClick: () => {
       eO(e);
       eL(X.BASE_TAB);
@@ -702,17 +702,17 @@ let eR = Ju(function (e) {
     };
     eY(!1);
     eI ? t(_$$F.enqueue({
-      message: _$$t("visual_bell.files_restored_to_folder", {
+      message: getI18nString("visual_bell.files_restored_to_folder", {
         fileCount: i
       }),
       button: {
-        text: _$$t("visual_bell.show_in_toast", {
+        text: getI18nString("visual_bell.show_in_toast", {
           destination: e
         }),
         action: r
       }
     })) : (t(_$$F.enqueue({
-      message: _$$t("visual_bell.files_moved_to_folder", {
+      message: getI18nString("visual_bell.files_moved_to_folder", {
         fileCount: i,
         folderName: e
       })
@@ -724,12 +724,12 @@ let eR = Ju(function (e) {
   let tP = useCallback(() => {
     if (!tg || tg.id !== eS?.id) {
       t(_$$F.enqueue({
-        message: _$$t("visual_bell.error_finding_destination_folder"),
+        message: getI18nString("visual_bell.error_finding_destination_folder"),
         error: !0
       }));
       return;
     }
-    let e = tg.name || _$$t("file_browser.file_move.drafts");
+    let e = tg.name || getI18nString("file_browser.file_move.drafts");
     t(_$$z({
       files,
       repos,
@@ -748,7 +748,7 @@ let eR = Ju(function (e) {
       restoreFiles: eI,
       draftsMoveData: tA || null
     }));
-    sx("file_move_modal_v2_submit", {
+    trackEventAnalytics("file_move_modal_v2_submit", {
       folderId: tg.id,
       source: eS?.source,
       fileKeys: files.map(e => e.key),
@@ -765,7 +765,7 @@ let eR = Ju(function (e) {
   let tL = files.length > 0 ? e.files[0].name : repos.length > 0 ? e.repos[0].name : "";
   let tF = 1 === tD ? tL : `${tD} files`;
   oY(null !== eJ, e => {
-    sx("file_move_modal_v2_latency", {
+    trackEventAnalytics("file_move_modal_v2_latency", {
       latency_ms: e
     }, {
       forwardToDatadog: !0
@@ -782,9 +782,9 @@ let eR = Ju(function (e) {
           className: _$$s.alignCenter.flex.ml8.maxW350.$,
           children: [jsx("span", {
             className: _$$s.ellipsis.noWrap.overflowHidden.$,
-            children: eI ? tx("file_browser.file_move.modal_header_restore_file", {
+            children: eI ? renderI18nText("file_browser.file_move.modal_header_restore_file", {
               fileName: tF
-            }) : tx("file_browser.file_move.modal_header_move_file", {
+            }) : renderI18nText("file_browser.file_move.modal_header_move_file", {
               fileName: tF
             })
           }), tl && jsx(Ex, {
@@ -792,7 +792,7 @@ let eR = Ju(function (e) {
             text: to,
             className: _$$s.ml6.mr0.noWrap.flex.$,
             dataTooltipType: Ib.TEXT,
-            dataTooltip: _$$t("file_browser.file_move.files_can_only_be_moved_within_the_same_organization"),
+            dataTooltip: getI18nString("file_browser.file_move.files_can_only_be_moved_within_the_same_organization"),
             dataTooltipShowBelow: !0
           })]
         }),
@@ -804,7 +804,7 @@ let eR = Ju(function (e) {
         children: [eS?.isConnectedProject && jsx($y, {
           variant: "default",
           children: jsx(_$$Q, {
-            children: _$$t("resource_connection.when_you_move_files_everyone_in_the_connected_project_can_access_them")
+            children: getI18nString("resource_connection.when_you_move_files_everyone_in_the_connected_project_can_access_them")
           })
         }), bannerToDisplay && jsx("div", {
           className: _$$s.mt8.mx8.mb4.$,
@@ -819,9 +819,9 @@ let eR = Ju(function (e) {
               text: jsxs(Fragment, {
                 children: [jsx("p", {
                   className: _$$s.fontSemiBold.$,
-                  children: tx("file_browser.file_move.file_belongs_to_trashed_project_banner_title")
+                  children: renderI18nText("file_browser.file_move.file_belongs_to_trashed_project_banner_title")
                 }), jsx("p", {
-                  children: tx("file_browser.file_move.file_belongs_to_trashed_project_banner_text")
+                  children: renderI18nText("file_browser.file_move.file_belongs_to_trashed_project_banner_text")
                 })]
               })
             })
@@ -839,15 +839,15 @@ let eR = Ju(function (e) {
               autoFocus: !0,
               onChange: eX,
               onMouseDown: e => e.stopPropagation(),
-              placeholder: _$$t("file_browser.file_move.search_placeholder"),
+              placeholder: getI18nString("file_browser.file_move.search_placeholder"),
               value: ej ?? "",
               spellCheck: "false",
-              "aria-label": _$$t("file_browser.file_move.search_placeholder")
+              "aria-label": getI18nString("file_browser.file_move.search_placeholder")
             }), !!ej && jsx("div", {
               className: mt,
               children: jsx(_$$K, {
                 onClick: eQ,
-                "aria-label": _$$t("search.search_bar.clear"),
+                "aria-label": getI18nString("search.search_bar.clear"),
                 children: jsx(In, {
                   icon: "x-16",
                   fill: "secondary"
@@ -933,7 +933,7 @@ let eR = Ju(function (e) {
             }) : jsxs("div", {
               children: [eH && 0 === eH.length && jsxs("div", {
                 className: Al,
-                children: [tx("file_browser.file_move.no_project_or_team_results_matching_query"), jsx("br", {}), jsx("span", {
+                children: [renderI18nText("file_browser.file_move.no_project_or_team_results_matching_query"), jsx("br", {}), jsx("span", {
                   className: _$$s.fontBold.ml2.$,
                   children: ej || ""
                 })]
@@ -980,7 +980,7 @@ let eR = Ju(function (e) {
             case LU.ADMIN_SELF_UPGRADE:
               let l = Uw(licenseType, to);
               if (!l) break;
-              let d = n ? tx("upgrades.drafts_move.admin_self_upgrade_body.proration_billing_mechanics") : tx("upgrades.drafts_move.admin_self_upgrade_body.legacy_billing_mechanics");
+              let d = n ? renderI18nText("upgrades.drafts_move.admin_self_upgrade_body.proration_billing_mechanics") : renderI18nText("upgrades.drafts_move.admin_self_upgrade_body.legacy_billing_mechanics");
               r = l.header;
               s = jsxs(Fragment, {
                 children: [l.body, " ", d]
@@ -1003,25 +1003,25 @@ let eR = Ju(function (e) {
                     getIsEligibleForProvisionalAccess
                   })({});
                 },
-                children: tx("fullscreen.toolbar_banner.provisional_access.curf.cta")
+                children: renderI18nText("fullscreen.toolbar_banner.provisional_access.curf.cta")
               }));
               break;
             case LU.REQUESTED:
-              r = tx("upgrades.drafts_move.request_sent_header");
-              s = tx("upgrades.drafts_move.request_sent_body");
+              r = renderI18nText("upgrades.drafts_move.request_sent_header");
+              s = renderI18nText("upgrades.drafts_move.request_sent_body");
               break;
             case LU.CAN_AUTO_UPGRADE:
-              r = tx("upgrades.drafts_move.auto_upgrade_header");
-              s = tx("upgrades.drafts_move.auto_upgrade_body", {
+              r = renderI18nText("upgrades.drafts_move.auto_upgrade_header");
+              s = renderI18nText("upgrades.drafts_move.auto_upgrade_body", {
                 planName: destinationPlan?.name
               });
               break;
             case LU.CANNOT_UPGRADE_DISABLE:
-              r = tx("upgrades.drafts_move.cannot_upgrade_header");
-              s = tx("upgrades.drafts_move.cannot_upgrade_body");
+              r = renderI18nText("upgrades.drafts_move.cannot_upgrade_header");
+              s = renderI18nText("upgrades.drafts_move.cannot_upgrade_body");
               break;
             case LU.REQUEST:
-              r = tx("upgrades.drafts_move.request_header");
+              r = renderI18nText("upgrades.drafts_move.request_header");
               s = ek(licenseType, destinationPlan?.name || "");
               let c = () => {
                 destinationPlanUser?.id && destinationPlan.key && destinationPlan.key.type === FOrganizationLevelType.ORG ? shouldShowCurf ? fm({
@@ -1057,7 +1057,7 @@ let eR = Ju(function (e) {
                 onClick: () => {
                   c();
                 },
-                children: shouldShowCurf ? tx("fullscreen.toolbar_banner.provisional_access.curf.cta") : tx("upgrades.request_access")
+                children: shouldShowCurf ? renderI18nText("fullscreen.toolbar_banner.provisional_access.curf.cta") : renderI18nText("upgrades.request_access")
               });
           }
           return null === s ? null : jsx("div", {
@@ -1081,7 +1081,7 @@ let eR = Ju(function (e) {
             padding: 8,
             color: _$$S.WARNING,
             text: jsx("p", {
-              children: tx("file_browser.file_move.sites_unpublished_on_file_move_warning")
+              children: renderI18nText("file_browser.file_move.sites_unpublished_on_file_move_warning")
             })
           })
         }) : null), jsxs("div", {
@@ -1090,7 +1090,7 @@ let eR = Ju(function (e) {
             onTeamCreate: tO
           }), jsx(nR, {
             onClick: tk,
-            children: tx("modal.cancel")
+            children: renderI18nText("modal.cancel")
           }), jsx(vd, {
             disabled: tj,
             onClick: tP,
@@ -1100,9 +1100,9 @@ let eR = Ju(function (e) {
                 shouldMatchTextColor: !0
               }), jsx("div", {
                 className: _$$s.ml6.$,
-                children: tx("file_browser.file_move.moving")
+                children: renderI18nText("file_browser.file_move.moving")
               })]
-            }) : eI ? tx("file_browser.file_move.restore") : tx("file_browser.file_move.move")
+            }) : eI ? renderI18nText("file_browser.file_move.restore") : renderI18nText("file_browser.file_move.move")
           })]
         })]
       })
@@ -1119,10 +1119,10 @@ let eU = Ju(function (e) {
   });
   if ("loading" === n.status) return jsx(qc, {});
   if ("errors" === n.status) return null;
-  let r = n.data?.file?.folderOwnerRole?.user?.handle ?? _$$t("file_browser.file_move.another_user");
-  let l = e.inDrafts ? _$$t("file_browser.file_move.users_drafts", {
+  let r = n.data?.file?.folderOwnerRole?.user?.handle ?? getI18nString("file_browser.file_move.another_user");
+  let l = e.inDrafts ? getI18nString("file_browser.file_move.users_drafts", {
     userHandle: r
-  }) : n.data?.file?.project?.path ?? _$$t("file_browser.file_move.users_folder", {
+  }) : n.data?.file?.project?.path ?? getI18nString("file_browser.file_move.users_folder", {
     userHandle: r
   });
   let d = jsxs("div", {
@@ -1130,7 +1130,7 @@ let eU = Ju(function (e) {
     children: [e.inDrafts ? jsx(_$$A3, {}) : jsx(_$$x, {}), l]
   });
   return jsxs(OJ, {
-    title: _$$t("file_browser.file_move.modal_header_move_file", {
+    title: getI18nString("file_browser.file_move.modal_header_move_file", {
       fileName: e.fileName
     }),
     onClose: i,
@@ -1138,12 +1138,12 @@ let eU = Ju(function (e) {
       className: IS,
       children: [jsx("div", {
         className: _$$s.flex.columnGap4.$,
-        children: tx("file_browser.file_move.current_location_project_name", {
+        children: renderI18nText("file_browser.file_move.current_location_project_name", {
           projectName: d
         })
       }), jsx("div", {
-        children: e.inDrafts ? _$$t("file_browser.file_move.you_cant_move_files_that_are_in_others_drafts") : jsxs(Fragment, {
-          children: [tx("file_browser.file_move.you_need_edit_access_to_project_name_to_move_this_file", {
+        children: e.inDrafts ? getI18nString("file_browser.file_move.you_cant_move_files_that_are_in_others_drafts") : jsxs(Fragment, {
+          children: [renderI18nText("file_browser.file_move.you_need_edit_access_to_project_name_to_move_this_file", {
             projectName: jsx("span", {
               className: _$$s.fontMedium.$,
               children: l
@@ -1152,7 +1152,7 @@ let eU = Ju(function (e) {
             href: "https://help.figma.com/hc/articles/360038511573",
             target: "_blank",
             trusted: !0,
-            children: _$$t("general.learn_more")
+            children: getI18nString("general.learn_more")
           })]
         })
       })]
@@ -1160,7 +1160,7 @@ let eU = Ju(function (e) {
       className: qr,
       children: jsx($$, {
         onClick: i,
-        children: _$$t("file_browser.file_move.done")
+        children: getI18nString("file_browser.file_move.done")
       })
     })]
   });

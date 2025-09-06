@@ -4,7 +4,7 @@ import { useDispatch } from "../vendor/514228";
 import { glU } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { h as _$$h } from "../905/207101";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { b as _$$b } from "../905/985254";
 import { Z as _$$Z } from "../905/104740";
 import { VF, uY } from "../figma_app/989514";
@@ -61,7 +61,7 @@ export function $$E0({
     dismissModal: y,
     disableHighlight: !0,
     targetKey: W,
-    title: v || tx("tooltips_plus_onboarding.change_properties_in_the_design_panel"),
+    title: v || renderI18nText("tooltips_plus_onboarding.change_properties_in_the_design_panel"),
     trackingContextName: "Tooltips+ Design Panel Step (No Figma Basics)",
     lowerLeftText: S || M,
     onSecondaryCtaClick: t,
@@ -79,7 +79,7 @@ export function $$E0({
   };
   return jsx(k, {
     ...(N ? j : F),
-    children: A || tx("tooltips_plus_onboarding.next_take_some_time_to_adjust_your_frames_size")
+    children: A || renderI18nText("tooltips_plus_onboarding.next_take_some_time_to_adjust_your_frames_size")
   });
 }
 export const Z = $$E0;

@@ -5,9 +5,9 @@ import { IK } from "../905/521428";
 import { l7 } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import d from "classnames";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { Pt } from "../figma_app/806412";
-import { tx, t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { u1, Uv, XE } from "../figma_app/91703";
 import { sw } from "../figma_app/914957";
 import { Y5 } from "../figma_app/455680";
@@ -184,7 +184,7 @@ function Y({
   let {
     sceneGraphSelection,
     library
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     sceneGraphSelection: e.mirror.sceneGraphSelection,
     library: e.library
   }));
@@ -205,7 +205,7 @@ function Y({
         Y5.triggerActionInUserEditScope("restore-symbol-or-state-group");
       },
       recordingKey: Pt(e, "restoreComponentButton"),
-      children: tx("design_systems.instance_panel.restore_component")
+      children: renderI18nText("design_systems.instance_panel.restore_component")
     });
     return jsx("div", {
       className: Ki,
@@ -213,11 +213,11 @@ function Y({
     });
   }
   return "DELETED_LOCAL_STATE" === stateResetType || "DELETED_SUBSCRIBED_STATE" === stateResetType ? jsxs(aV, {
-    title: t("design_systems.instance_panel.missing_variant_title"),
+    title: getI18nString("design_systems.instance_panel.missing_variant_title"),
     appendedClassName: $s,
     children: [jsx("div", {
       className: AQ,
-      children: tx("design_systems.instance_panel.the_selected_variant_is_missing_in_the_component")
+      children: renderI18nText("design_systems.instance_panel.the_selected_variant_is_missing_in_the_component")
     }), jsx("div", {
       className: ns,
       children: jsx(IK, {
@@ -240,7 +240,7 @@ function Y({
             });
           }
         },
-        children: tx("design_systems.instance_panel.reset_to_default")
+        children: renderI18nText("design_systems.instance_panel.reset_to_default")
       })
     })]
   }) : null;

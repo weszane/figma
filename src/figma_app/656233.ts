@@ -520,3 +520,4 @@ export const lu = arraysEqual
 export const my = sortByDateProperty
 export const qg = findNearest
 export const v7 = sortByWithOptions
+export const Bq = flatten

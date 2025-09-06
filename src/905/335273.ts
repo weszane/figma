@@ -1,5 +1,5 @@
 import { useRef, useEffect, useCallback } from "react";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { g } from "../905/880308";
 export function $$s0(e, t, i = !1) {
   let o = useRef(null);
@@ -31,7 +31,7 @@ export function $$s0(e, t, i = !1) {
         if (null == o.current) return;
         o.current = null;
       }
-      sx(e, {
+      trackEventAnalytics(e, {
         eventName: n,
         traceId: l.current,
         source: t,

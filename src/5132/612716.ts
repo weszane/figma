@@ -8,7 +8,7 @@ import { mI } from "../figma_app/566371";
 import { s_ } from "../905/17223";
 import { tH } from "../905/751457";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { Y, M as _$$M } from "../905/830372";
 import { V } from "../905/355181";
 import { E as _$$E } from "../905/984674";
@@ -118,7 +118,7 @@ function E() {
           color: "design",
           fontSize: 11,
           fontWeight: "semi-bold",
-          children: tx("help_widget.collective_upsells.fullscreen.price_title.figma_design")
+          children: renderI18nText("help_widget.collective_upsells.fullscreen.price_title.figma_design")
         }), jsx(_$$E, {
           fontWeight: "semi-bold",
           fontSize: 18,
@@ -133,7 +133,7 @@ function E() {
           color: "figjam",
           fontSize: 11,
           fontWeight: "semi-bold",
-          children: tx("help_widget.collective_upsells.fullscreen.price_title.figjam")
+          children: renderI18nText("help_widget.collective_upsells.fullscreen.price_title.figjam")
         }), jsx(_$$E, {
           fontWeight: "semi-bold",
           fontSize: 18,
@@ -145,7 +145,7 @@ function E() {
       children: jsx(_$$E, {
         color: "secondary",
         fontSize: 11,
-        children: tx("help_widget.collective_upsells.fullscreen.price.disclaimer.seat_rename")
+        children: renderI18nText("help_widget.collective_upsells.fullscreen.price.disclaimer.seat_rename")
       })
     })]
   });

@@ -6,10 +6,10 @@ import { $n } from "../905/521428";
 import { S as _$$S } from "../905/711470";
 import { L as _$$L } from "../905/704296";
 import { xk } from "@stylexjs/stylex";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { Wi, JR } from "../figma_app/162641";
 import { e6, hH } from "../figma_app/617427";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Y } from "../905/830372";
 import { E as _$$E } from "../905/984674";
 import { e as _$$e } from "../figma_app/522702";
@@ -65,12 +65,12 @@ function y(e) {
         let n = j(t, a);
         e.onApply(n);
       },
-      children: _$$t("people_table_filters.button_text.clear")
+      children: getI18nString("people_table_filters.button_text.clear")
     }), s.map(([t, a]) => {
       let s = e.allFilters.find(e => e.type === t);
       return jsx(_$$v, {
         hasCloseButton: !0,
-        "aria-label": _$$t("people_table_filters.clear_active_filter_button_aria_label", {
+        "aria-label": getI18nString("people_table_filters.clear_active_filter_button_aria_label", {
           filterType: r(t)
         }),
         onClick: () => o(t),
@@ -94,7 +94,7 @@ function w({
 }) {
   return jsx("div", {
     className: "x78zum5 x1q0g3np x6s0dn4",
-    children: tx("people_table_filters.active_filter_badge", {
+    children: renderI18nText("people_table_filters.active_filter_badge", {
       filterType: jsx("span", {
         className: "xv1l7n4",
         children: e
@@ -453,7 +453,7 @@ function $(e) {
     direction: "vertical",
     width: "hug-contents",
     children: e.suggestedFilters.map(e => jsx(e6, {
-      "aria-label": _$$t("people_table_filters.add_suggested_filter_button_aria_label", {
+      "aria-label": getI18nString("people_table_filters.add_suggested_filter_button_aria_label", {
         suggestedFilter: e.display
       }),
       onClick: () => t(e.type, e.value),
@@ -614,7 +614,7 @@ function G({
   let k = useCallback(() => {
     let t = Object.fromEntries(Object.entries(filterValues).filter(([e, t]) => t.current !== t.$$default).map(([e, t]) => [e, t.current]));
     e(filterValues);
-    o && az.trackDefinedEvent("admin.filters_applied", {
+    o && analyticsEventManager.trackDefinedEvent("admin.filters_applied", {
       pageName: o,
       filters: JSON.stringify(t)
     });
@@ -629,11 +629,11 @@ function G({
       children: [jsx(_$$E, {
         fontWeight: "medium",
         fontSize: 11,
-        children: _$$t("people_table_filters.popover_header")
+        children: getI18nString("people_table_filters.popover_header")
       }), jsx("span", {
         ...xk(F.headerSpacing),
         children: jsx(K, {
-          "aria-label": _$$t("people_table_filters.close_button_aria_label"),
+          "aria-label": getI18nString("people_table_filters.close_button_aria_label"),
           onClick: u,
           children: jsx(_$$L, {})
         })
@@ -652,13 +652,13 @@ function G({
       children: [!E && jsx($n, {
         variant: "link",
         onClick: resetFilters,
-        children: _$$t("people_table_filters.button_text.clear_all")
+        children: getI18nString("people_table_filters.button_text.clear_all")
       }), jsx("span", {
         ...xk(F.footerSpacing),
         children: jsx($n, {
           variant: "primary",
           onClick: k,
-          children: _$$t("people_table_filters.button_text.apply")
+          children: getI18nString("people_table_filters.button_text.apply")
         })
       })]
     })]

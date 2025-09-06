@@ -2,8 +2,8 @@ import { useState, useCallback, useLayoutEffect, useMemo } from "react";
 import { useSelector } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { tKW } from "../figma_app/763686";
-import { sx } from "../905/449184";
-import { t as _$$t } from "../905/303541";
+import { trackEventAnalytics } from "../905/449184";
+import { getI18nString } from "../905/303541";
 import { v4, AC, Pt } from "../figma_app/655139";
 import { S8, uz } from "../905/359509";
 import { ZA, zq } from "../905/515076";
@@ -21,7 +21,7 @@ export function $$g0() {
   let y = ZA(f, A);
   let b = useCallback(e => {
     i(e);
-    sx("dev_mode.compare_changes.change_inspection_mode", {
+    trackEventAnalytics("dev_mode.compare_changes.change_inspection_mode", {
       mode: e
     });
   }, []);
@@ -39,10 +39,10 @@ export function $$g0() {
     if (!y) return e;
     let t = S?.unit || tKW.PIXEL;
     e.push({
-      displayText: _$$t("dev_handoff.alternative_units.dimension_unit"),
+      displayText: getI18nString("dev_handoff.alternative_units.dimension_unit"),
       header: !0
     }, ...zq.map(e => {
-      let i = e === tKW.PIXEL ? _$$t("dev_handoff.alternative_units.pixel_unit") : x;
+      let i = e === tKW.PIXEL ? getI18nString("dev_handoff.alternative_units.pixel_unit") : x;
       return {
         name: e.toString(),
         displayText: i,

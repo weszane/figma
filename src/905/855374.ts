@@ -26,10 +26,10 @@ import { J as _$$J, h as _$$h } from "../905/270045";
 import { y0x, rXF, Z_n, CWU, j0r, kR6 } from "../figma_app/763686";
 import k from "classnames";
 import { parsePxNumber, parsePxInt } from "../figma_app/783094";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { Point } from "../905/736624";
 import { P as _$$P2 } from "../905/347284";
-import { tx as _$$tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { Y as _$$Y } from "../905/830372";
 import { JU, ks } from "../figma_app/626177";
 import { d as _$$d } from "../905/976845";
@@ -67,7 +67,7 @@ import { Ez } from "../figma_app/766708";
 import { rN as _$$rN, Pf, Lo as _$$Lo, cv, om, Qo, B9, GC, ky, ZR, nm, x9 as _$$x, yh, Pw, hF, Wx, Od, F$, US, qQ } from "../905/782020";
 import { wp, jv } from "../905/886545";
 import { createPortal } from "../vendor/944059";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { VZ } from "../905/959568";
 import { Gx } from "../figma_app/260445";
 import { He, ED, kL, ok, qr } from "../905/24780";
@@ -107,7 +107,7 @@ import { E as _$$E2 } from "../905/53857";
 import { b as _$$b2, bL as _$$bL, mc, q7 as _$$q2, wv as _$$wv, hE, r1 as _$$r, Q$, YJ } from "../figma_app/860955";
 import { Ay } from "@stylexjs/stylex";
 import { P as _$$P4 } from "../905/537307";
-import { md, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, Xr } from "../figma_app/27355";
 import { Ay as _$$Ay } from "../figma_app/272902";
 import { m as _$$m2 } from "../905/871166";
 import { i as _$$i2 } from "../905/415810";
@@ -312,9 +312,9 @@ function J({
       }),
       children: [jsx(JU, {
         className: X,
-        children: _$$tx("variables.edit_modal.input_label.token_name")
+        children: renderI18nText("variables.edit_modal.input_label.token_name")
       }), l && jsx(_$$d, {
-        "aria-label": _$$t("variables.edit_modal.add_code_syntax"),
+        "aria-label": getI18nString("variables.edit_modal.add_code_syntax"),
         ref: m,
         "aria-expanded": s,
         disabled: Object.keys(e).length >= _$$tq.length,
@@ -322,7 +322,7 @@ function J({
         recordingKey: Pt(o, "createToken"),
         htmlAttributes: {
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": _$$t("variables.edit_modal.add_code_syntax")
+          "data-tooltip": getI18nString("variables.edit_modal.add_code_syntax")
         },
         children: jsx(_$$e, {})
       })]
@@ -417,12 +417,12 @@ function ee({
           }
         }), _ && jsx(_$$K, {
           type: "button",
-          "aria-label": _$$t("variables.edit_modal.remove_code_syntax"),
+          "aria-label": getI18nString("variables.edit_modal.remove_code_syntax"),
           recordingKey: Pt(s, "removeButton"),
           onClick: _,
           htmlAttributes: {
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t("variables.edit_modal.remove_code_syntax")
+            "data-tooltip": getI18nString("variables.edit_modal.remove_code_syntax")
           },
           children: jsx(_$$O, {})
         })]
@@ -556,17 +556,17 @@ function ed(e) {
     children: [t, y && !e.isInaccessible && jsxs("span", {
       className: "variables_modal_mode_value--iconVisibleOnHover--5Plc4",
       children: [e.variableOverride && e.variableOverride.overrideValues?.[modeID] && e.clearVariableOverride && jsx(_$$K, {
-        "aria-label": _$$t("variables.authoring_modal.table.clear_override"),
+        "aria-label": getI18nString("variables.authoring_modal.table.clear_override"),
         actionOnPointerDown: !0,
         onClick: e.clearVariableOverride,
         recordingKey: Pt(e.recordingKey, "clearOverrideButton"),
         htmlAttributes: {
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": _$$t("variables.authoring_modal.table.clear_override")
+          "data-tooltip": getI18nString("variables.authoring_modal.table.clear_override")
         },
         children: jsx(_$$m, {})
       }), b && jsx(_$$K, {
-        "aria-label": _$$t("variables.authoring_modal.table.detach_alias"),
+        "aria-label": getI18nString("variables.authoring_modal.table.detach_alias"),
         actionOnPointerDown: !0,
         onClick: () => {
           e.detachAlias && e.detachAlias(e.variable.node_id, e.modeID, e.variableSetId);
@@ -574,7 +574,7 @@ function ed(e) {
         recordingKey: Pt(e.recordingKey, "detachVariableButton"),
         htmlAttributes: {
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": _$$t("variables.authoring_modal.table.detach_alias")
+          "data-tooltip": getI18nString("variables.authoring_modal.table.detach_alias")
         },
         children: jsx(_$$U2, {})
       })]
@@ -657,17 +657,17 @@ function ep(e) {
     children: jsxs(vo, {
       children: [jsxs(Y9, {
         children: [jsx(r1, {
-          children: _$$tx("variables.edit_modal.title")
+          children: renderI18nText("variables.edit_modal.title")
         }), jsxs(t.TabStrip, {
           manager: y,
           children: [jsx(t.Tab, {
             ..._.details,
             recordingKey: Pt(e.recordingKey, "tabs", "details"),
-            children: _$$tx("variables.edit_modal.tabs.details")
+            children: renderI18nText("variables.edit_modal.tabs.details")
           }), jsx(t.Tab, {
             ..._.scoping,
             recordingKey: Pt(e.recordingKey, "tabs", "scoping"),
-            children: _$$tx("variables.edit_modal.tabs.scoping")
+            children: renderI18nText("variables.edit_modal.tabs.scoping")
           })]
         })]
       }), jsx(nB, {
@@ -741,7 +741,7 @@ function em(e) {
         children: [jsx(JU, {
           className: X,
           htmlFor: "name",
-          children: _$$tx("variables.edit_modal.input_label.name")
+          children: renderI18nText("variables.edit_modal.input_label.name")
         }), jsx("div", {
           className: Q,
           children: jsx(_$$b, {
@@ -751,7 +751,7 @@ function em(e) {
             onSubmit: e => onSubmitRenameVar?.(variable.node_id, e) ?? !1,
             onFinish: lQ,
             originalValue: variable.name,
-            placeholder: _$$t("variables.edit_modal.input_placeholder.name"),
+            placeholder: getI18nString("variables.edit_modal.input_placeholder.name"),
             recordingKey: Pt(e.recordingKey, "nameInput")
           })
         })]
@@ -760,7 +760,7 @@ function em(e) {
         children: [jsx(JU, {
           className: X,
           htmlFor: "description",
-          children: _$$tx("variables.edit_modal.input_label.description")
+          children: renderI18nText("variables.edit_modal.input_label.description")
         }), jsx("div", {
           className: Q,
           children: jsx(_$$b, {
@@ -771,7 +771,7 @@ function em(e) {
             onFinish: lQ,
             onSubmit: e => setVariableDescription?.(variable, e) ?? !1,
             originalValue: variable.description ?? "",
-            placeholder: _$$t("variables.edit_modal.input_label.description_placeholder"),
+            placeholder: getI18nString("variables.edit_modal.input_label.description_placeholder"),
             recordingKey: Pt(e.recordingKey, "descriptionInput"),
             type: _$$$.FORM
           })
@@ -813,7 +813,7 @@ function em(e) {
         },
         recordingKey: Pt(e.recordingKey, "hideFromPublishing.checkBox"),
         label: jsx(_$$J, {
-          children: _$$t("variables.edit_modal.hide_from_publishing")
+          children: getI18nString("variables.edit_modal.hide_from_publishing")
         })
       })
     })]
@@ -845,7 +845,7 @@ function eh({
         onChange: () => i?.(e, !(o ?? !0)),
         recordingKey: Pt(s, "hideFromPublishing.checkBox"),
         label: jsx(_$$J, {
-          children: _$$t("variables.edit_modal.hide_from_publishing")
+          children: getI18nString("variables.edit_modal.hide_from_publishing")
         })
       })
     })]
@@ -864,7 +864,7 @@ function eg(e) {
     className: Z,
     children: [jsx("div", {
       className: "edit_variable_modal--sectionTitle--AymF1",
-      children: _$$tx("variables.edit_modal.mode_section_header", {
+      children: renderI18nText("variables.edit_modal.mode_section_header", {
         count: variableSetModes.length
       })
     }), variableSetModes.map((r, o) => {
@@ -1012,13 +1012,13 @@ function eA(e) {
   } = e;
   switch (variableType) {
     case rXF.COLOR:
-      t = _$$tx("variables.scopes.color_scoping_header");
+      t = renderI18nText("variables.scopes.color_scoping_header");
       break;
     case rXF.FLOAT:
-      t = _$$tx("variables.scopes.number_scoping_header");
+      t = renderI18nText("variables.scopes.number_scoping_header");
       break;
     case rXF.STRING:
-      t = _$$tx("variables.scopes.string_scoping_header");
+      t = renderI18nText("variables.scopes.string_scoping_header");
       break;
     case rXF.BOOLEAN:
     case rXF.MAP:
@@ -1029,7 +1029,7 @@ function eA(e) {
     case rXF.LINK:
     case rXF.JS_RUNTIME_ALIAS:
     case rXF.SLOT_CONTENT_ID:
-      x1("variables", "Unsupported variable type");
+      logError("variables", "Unsupported variable type");
       return null;
     default:
       throwTypeError(variableType);
@@ -1098,7 +1098,7 @@ function eZ(e) {
   }, [e]), !!e.onDeleteVariables);
   let l = useRef(e.contextMenuData.cellElement);
   let d = _$$rN(useCallback(t => {
-    sx(e.contextMenuData.selectedVariableRows.length > 1 ? "multi_edit_variable_modal_opened" : "edit_variable_modal_opened");
+    trackEventAnalytics(e.contextMenuData.selectedVariableRows.length > 1 ? "multi_edit_variable_modal_opened" : "edit_variable_modal_opened");
     t.stopPropagation();
     let n = VZ(l.current, parsePxNumber($));
     e.toggleEditVariableModal(i.map(e => e.node_id), new Point(n.x, n.y));
@@ -1172,15 +1172,15 @@ function eZ(e) {
     children: [f && jsx(c$, {
       onClick: f,
       recordingKey: Pt(e.recordingKey, "ungroupOption"),
-      children: _$$t("variables.authoring_modal.group_context_menu.ungroup")
+      children: getI18nString("variables.authoring_modal.group_context_menu.ungroup")
     }), g && !A() && jsx(c$, {
       onClick: g,
       recordingKey: Pt(e.recordingKey, "duplicateGroupOption"),
-      children: e.contextMenuData.groupNames.length > 1 ? _$$t("variables.authoring_modal.group_context_menu.duplicate_groups") : _$$t("variables.authoring_modal.group_context_menu.duplicate_group")
+      children: e.contextMenuData.groupNames.length > 1 ? getI18nString("variables.authoring_modal.group_context_menu.duplicate_groups") : getI18nString("variables.authoring_modal.group_context_menu.duplicate_group")
     }), _ && jsx(c$, {
       onClick: _,
       recordingKey: Pt(e.recordingKey, "deleteGroupOption"),
-      children: e.contextMenuData.groupNames.length > 1 ? _$$t("variables.authoring_modal.group_context_menu.delete_groups") : _$$t("variables.authoring_modal.group_context_menu.delete_group")
+      children: e.contextMenuData.groupNames.length > 1 ? getI18nString("variables.authoring_modal.group_context_menu.delete_groups") : getI18nString("variables.authoring_modal.group_context_menu.delete_group")
     })]
   });
   let v = e.contextMenuData.modeID && 1 === e.contextMenuData.selectedVariableRows.length && e.contextMenuData.selectedVariableRows[0];
@@ -1199,42 +1199,42 @@ function eZ(e) {
       "data-testid": "copy-variables-menuopt",
       onClick: u,
       recordingKey: Pt(e.recordingKey, "copyVariablesOption"),
-      children: _$$t("fullscreen_actions.copy")
+      children: getI18nString("fullscreen_actions.copy")
     }), m && jsx(c$, {
       "data-testid": "paste-variables-menuopt",
       onClick: m,
       recordingKey: Pt(e.recordingKey, "pasteVariablesOption"),
-      children: _$$t("fullscreen_actions.paste")
+      children: getI18nString("fullscreen_actions.paste")
     }), u || m ? jsx(wv, {}) : null, s && jsx(c$, {
       onClick: s,
       recordingKey: Pt(e.recordingKey, "createGroupOption"),
-      children: _$$t("variables.authoring_modal.context_menu.create_group")
+      children: getI18nString("variables.authoring_modal.context_menu.create_group")
     }), d && (1 === e.contextMenuData.selectedVariableRows.length && jsx(c$, {
       "data-testid": "edit-variable-menuopt",
       onClick: d,
       recordingKey: Pt(e.recordingKey, "editVariableOption"),
-      children: _$$t("variables.authoring_modal.context_menu.edit", {
+      children: getI18nString("variables.authoring_modal.context_menu.edit", {
         count: e.contextMenuData.selectedVariableRows.length
       })
     }) || e.contextMenuData.selectedVariableRows.length > 1 && jsx(c$, {
       "data-testid": "edit-variables-menuopt",
       onClick: d,
       recordingKey: Pt(e.recordingKey, "editVariablesOption"),
-      children: _$$t("variables.authoring_modal.context_menu.edit", {
+      children: getI18nString("variables.authoring_modal.context_menu.edit", {
         count: e.contextMenuData.selectedVariableRows.length
       })
     })), c && jsx(c$, {
       "data-testid": "duplicate-variables-menuopt",
       onClick: c,
       recordingKey: Pt(e.recordingKey, "duplicateVariablesOption"),
-      children: _$$t("variables.authoring_modal.context_menu.duplicate", {
+      children: getI18nString("variables.authoring_modal.context_menu.duplicate", {
         count: e.contextMenuData.selectedVariableRows.length
       })
     }), h && jsxs(Fragment, {
       children: [jsx(wv, {}), jsx(c$, {
         onClick: h,
         recordingKey: Pt(e.recordingKey, "deleteVariableOption"),
-        children: e.contextMenuData.selectedVariableRows.length > 1 ? _$$t("variables.authoring_modal.context_menu.delete_multiple") : _$$t("variables.authoring_modal.context_menu.delete")
+        children: e.contextMenuData.selectedVariableRows.length > 1 ? getI18nString("variables.authoring_modal.context_menu.delete_multiple") : getI18nString("variables.authoring_modal.context_menu.delete")
       })]
     })]
   });
@@ -1272,16 +1272,16 @@ function eX(e) {
     children: o && e.detachAlias ? jsx(c$, {
       recordingKey: Pt(e.recordingKey, "clearAliasOption"),
       onClick: h,
-      children: _$$t("variables.authoring_modal.context_menu.clear_alias")
+      children: getI18nString("variables.authoring_modal.context_menu.clear_alias")
     }) : jsxs(Fragment, {
       children: [jsx(c$, {
         onClick: u,
         recordingKey: Pt(e.recordingKey, "createAliasOption"),
-        children: _$$t("variables.authoring_modal.context_menu.create_alias")
+        children: getI18nString("variables.authoring_modal.context_menu.create_alias")
       }), getFeatureFlags().ds_reactive_variables && jsx(c$, {
         onClick: m,
         recordingKey: Pt(e.recordingKey, "createExpressionOption"),
-        children: _$$t("variables.authoring_modal.context_menu.create_expression")
+        children: getI18nString("variables.authoring_modal.context_menu.create_expression")
       })]
     })
   });
@@ -1327,7 +1327,7 @@ function tp({
 }) {
   return jsx(_$$f, {
     recordingKey: Pt("variablesModal", "toggleSidebar"),
-    "aria-label": _$$t("variables.authoring_modal.toggle_sidebar"),
+    "aria-label": getI18nString("variables.authoring_modal.toggle_sidebar"),
     onIcon: jsx(_$$C, {}),
     offIcon: jsx(_$$O3, {}),
     checked: e,
@@ -1369,7 +1369,7 @@ function tx({
   let I = jsx("div", {
     className: "variables_sets_reorder_modal--sortButtonContainer----th1",
     children: jsx(_$$K, {
-      "aria-label": _$$t("variables.authoring_modal.reorder_collections_modal.sort_button"),
+      "aria-label": getI18nString("variables.authoring_modal.reorder_collections_modal.sort_button"),
       onClick: f,
       children: jsx(_$$S2, {})
     })
@@ -1385,7 +1385,7 @@ function tx({
     onResize: v,
     preventClickEventBubbling: !0,
     tabIndex: 0,
-    title: _$$t("variables.authoring_modal.reorder_collections_modal.title"),
+    title: getI18nString("variables.authoring_modal.reorder_collections_modal.title"),
     children: jsx(_$$P2, {
       ref: s,
       className: `variables_sets_reorder_modal--scrollContainer---4uwN ${o ? "variables_sets_reorder_modal--cursorGrabbing--In4QI" : ""}`,
@@ -1537,30 +1537,30 @@ function tk({
   return (y && S.push(jsx(c$, {
     className: tw,
     onClick: y,
-    children: _$$t("variables.authoring_modal.overflow_dropdown.rename_collection")
+    children: getI18nString("variables.authoring_modal.overflow_dropdown.rename_collection")
   }, "rename")), E && S.push(jsx(c$, {
     className: tw,
     onClick: E,
-    children: _$$t("variables.authoring_modal.overflow_dropdown.delete_collection")
+    children: getI18nString("variables.authoring_modal.overflow_dropdown.delete_collection")
   }, "delete")), (_ || A) && (S.length > 0 && S.push(jsx(wv, {}, "separator")), _ && S.push(jsx(c$, {
     className: tw,
     onClick: _,
-    children: _$$t("variables.authoring_modal.overflow_dropdown.create_collection")
+    children: getI18nString("variables.authoring_modal.overflow_dropdown.create_collection")
   }, "create-root")), A && S.push(jsx(c$, {
     className: tw,
     onClick: A,
-    children: _$$t("variables.authoring_modal.overflow_dropdown.create_extended_collection")
+    children: getI18nString("variables.authoring_modal.overflow_dropdown.create_extended_collection")
   }, "create-extension")), h.length > 1 && I && (S.push(jsx(wv, {}, "separator")), S.push(jsx(c$, {
     className: tw,
     onClick: I,
-    children: _$$t("variables.authoring_modal.overflow_dropdown.reorder_collections")
+    children: getI18nString("variables.authoring_modal.overflow_dropdown.reorder_collections")
   }, "reorder")))), 0 === S.length) ? null : jsxs(Fragment, {
     children: [jsx("div", {
       ref: x,
       children: jsx(_$$d, {
-        "aria-label": _$$t("variables.authoring_modal.more_variable_set_options_tooltip"),
+        "aria-label": getI18nString("variables.authoring_modal.more_variable_set_options_tooltip"),
         htmlAttributes: {
-          "data-tooltip": _$$t("variables.authoring_modal.more_variable_set_options_tooltip"),
+          "data-tooltip": getI18nString("variables.authoring_modal.more_variable_set_options_tooltip"),
           "data-tooltip-type": Ib.TEXT
         },
         recordingKey: Pt(d, "moreOptionsButton"),
@@ -1603,15 +1603,15 @@ function tP({
     children: [GI(e) && jsx(_$$B2, {
       svg: _$$A,
       className: "variables_modal_set_header--extendedSetIcon--wnidP",
-      "data-tooltip": u ? _$$t("variables.authoring_modal.extended_collection.extension_based_off_library_tooltip", {
+      "data-tooltip": u ? getI18nString("variables.authoring_modal.extended_collection.extension_based_off_library_tooltip", {
         libraryName: u,
-        collectionName: c?.name ?? _$$t("variables.authoring_modal.extended_collection.missing_base_collection_name")
-      }) : _$$t("variables.authoring_modal.extended_collection.extension_based_off_local_tooltip", {
-        collectionName: c?.name ?? _$$t("variables.authoring_modal.extended_collection.missing_base_collection_name")
+        collectionName: c?.name ?? getI18nString("variables.authoring_modal.extended_collection.missing_base_collection_name")
+      }) : getI18nString("variables.authoring_modal.extended_collection.extension_based_off_local_tooltip", {
+        collectionName: c?.name ?? getI18nString("variables.authoring_modal.extended_collection.missing_base_collection_name")
       }),
       "data-tooltip-type": Ib.TEXT
     }), m ? jsx(tR, {
-      ariaLabel: _$$t("variables.binding_ui.variable_set"),
+      ariaLabel: getI18nString("variables.binding_ui.variable_set"),
       className: "variables_modal_set_header--picker--JfS-D",
       dataTestId: "variable-set-select",
       dispatch: o,
@@ -1666,24 +1666,24 @@ function tM({
       children: [jsxs(_$$q2, {
         disabled: !0,
         onClick: lQ,
-        children: [jsx(tF, {}), _$$tx("variables.authoring_modal.sidebar.context_menu.copy_link_to_collection")]
+        children: [jsx(tF, {}), renderI18nText("variables.authoring_modal.sidebar.context_menu.copy_link_to_collection")]
       }), jsxs(_$$q2, {
         disabled: !0,
         onClick: lQ,
-        children: [jsx(tF, {}), _$$tx("variables.authoring_modal.sidebar.context_menu.go_to_collection")]
+        children: [jsx(tF, {}), renderI18nText("variables.authoring_modal.sidebar.context_menu.go_to_collection")]
       }), jsx(_$$wv, {}), jsxs(_$$q2, {
         disabled: !0,
         onClick: lQ,
-        children: [jsx(tF, {}), _$$tx("variables.authoring_modal.sidebar.context_menu.duplicate_collection")]
+        children: [jsx(tF, {}), renderI18nText("variables.authoring_modal.sidebar.context_menu.duplicate_collection")]
       }), jsx(_$$q2, {
         onClick: () => {
           i?.(e.node_id);
         },
-        children: _$$tx("variables.authoring_modal.sidebar.context_menu.extend_collection")
+        children: renderI18nText("variables.authoring_modal.sidebar.context_menu.extend_collection")
       }), jsx(_$$wv, {}), jsxs(_$$q2, {
         disabled: !0,
         onClick: lQ,
-        children: [jsx(tF, {}), _$$tx("variables.authoring_modal.sidebar.context_menu.export_modes")]
+        children: [jsx(tF, {}), renderI18nText("variables.authoring_modal.sidebar.context_menu.export_modes")]
       })]
     })]
   });
@@ -1699,13 +1699,13 @@ function tj({
   let s = r.data?.libraryVariableSets ?? [];
   let o = yp();
   return a ? jsx("div", {
-    children: _$$tx("variables.authoring_modal.sidebar.loading")
+    children: renderI18nText("variables.authoring_modal.sidebar.loading")
   }) : jsxs(Fragment, {
     children: [jsxs("div", {
       className: "x1n5zjp5",
       children: [jsx("div", {
         className: "x78zum5 x6s0dn4 x1tzdv60 x10w6t97 x87ps6o xk50ysn",
-        children: _$$tx("variables.authoring_modal.sidebar.library_collections")
+        children: renderI18nText("variables.authoring_modal.sidebar.library_collections")
       }), s.map(e => jsx(tM, {
         libraryVariableSet: e,
         onChangeVariableSet: t,
@@ -1715,7 +1715,7 @@ function tj({
       className: "x1n5zjp5",
       children: [jsx("div", {
         className: "x78zum5 x6s0dn4 x1tzdv60 x10w6t97 x87ps6o xk50ysn",
-        children: _$$tx("variables.authoring_modal.sidebar.local_collections")
+        children: renderI18nText("variables.authoring_modal.sidebar.local_collections")
       }), o.map(i => jsx("div", {
         ...Ay.props(tU.row, e.node_id === i.node_id && tU.selected),
         onClick: () => t(i.node_id),
@@ -1777,7 +1777,7 @@ let t$ = forwardRef(function ({
   draggingModeID: C
 }, T) {
   let k = useRef(null);
-  let P = md(_$$X).isResizing;
+  let P = useAtomWithSubscription(_$$X).isResizing;
   let D = !!s && !P && !S && s5(g);
   let {
     position
@@ -1866,7 +1866,7 @@ let t$ = forwardRef(function ({
             "variables_modal_table_item--editing--LGvvx": K
           }),
           children: jsx(_$$d, {
-            "aria-label": _$$t("variables.authoring_modal.edit_variable_button_tooltip"),
+            "aria-label": getI18nString("variables.authoring_modal.edit_variable_button_tooltip"),
             onClick: e => {
               e.stopPropagation();
               Y();
@@ -1875,7 +1875,7 @@ let t$ = forwardRef(function ({
             recordingKey: Pt(e, "editVariableModalIcon"),
             ref: W,
             htmlAttributes: {
-              "data-tooltip": _$$t("variables.authoring_modal.edit_variable_button_tooltip"),
+              "data-tooltip": getI18nString("variables.authoring_modal.edit_variable_button_tooltip"),
               "data-tooltip-type": Ib.TEXT,
               "data-test-id": Pt(e, "editVariableModalIcon")
             },
@@ -2088,7 +2088,7 @@ function t2({
   let f = useRef(null);
   let _ = "" === e.name;
   let A = useMemo(() => GC(e).length, [e]);
-  let b = _ ? _$$t("variables.authoring_modal.table.all_variables") : ky(e.name);
+  let b = _ ? getI18nString("variables.authoring_modal.table.all_variables") : ky(e.name);
   let v = _ ? 0 : e.name.split("/").length - 2;
   let [I, E] = useState(!1);
   let {
@@ -2141,7 +2141,7 @@ function t2({
         onClick: a,
         recordingKey: Pt(h, "groupCaret"),
         ref: f,
-        "aria-label": t ? _$$t("variables.visual_bell.expand_variable_group") : _$$t("variables.visual_bell.collapse_variable_group"),
+        "aria-label": t ? getI18nString("variables.visual_bell.expand_variable_group") : getI18nString("variables.visual_bell.collapse_variable_group"),
         "aria-controls": e.subgroups.map(e => t3(e.name)).join(","),
         "aria-expanded": !t,
         children: t ? jsx(_$$k3, {}) : jsx(_$$O2, {})
@@ -2187,7 +2187,7 @@ function t5({
   });
 }
 function t4(e, t) {
-  return t.map(i => isNullish(e[i]) ? (x1("variables", "Unable to find group name for index", {
+  return t.map(i => isNullish(e[i]) ? (logError("variables", "Unable to find group name for index", {
     groups: e,
     indices: t
   }), "(missing)") : e[i].name);
@@ -2284,7 +2284,7 @@ function ie({
   let B = useDispatch();
   let {
     isResizing
-  } = md(_$$X);
+  } = useAtomWithSubscription(_$$X);
   let G = useCallback(t => {
     if (isResizing || e) {
       t.preventDefault();
@@ -2379,34 +2379,34 @@ function ie({
     hide();
   }, [hide, y, i, R]), !!y);
   let el = !d && !c;
-  let ed = d && s === nm ? _$$t("variables.create_modal.value_label") : s;
+  let ed = d && s === nm ? getI18nString("variables.create_modal.value_label") : s;
   let ec = [];
   data && !data.onlyAllowDeletion && (Q && ec.push(jsx(c$, {
     onClick: Q,
     disabled: v && !E,
     recordingKey: Pt(b, "duplicate"),
-    children: _$$t("variables.authoring_modal.mode_context_menu.duplicate_mode")
+    children: getI18nString("variables.authoring_modal.mode_context_menu.duplicate_mode")
   }, "duplicate")), !e && el && eo && ec.push(jsx(c$, {
     onClick: eo,
     recordingKey: Pt(b, "setAsDefault"),
-    children: _$$t("variables.authoring_modal.mode_context_menu.set_as_default")
+    children: getI18nString("variables.authoring_modal.mode_context_menu.set_as_default")
   }, "setAsDefault")), !e && et && w.indexOf(i) > 0 && ec.push(jsx(c$, {
     onClick: et,
     recordingKey: Pt(b, "moveLeft"),
-    children: _$$t("variables.authoring_modal.mode_context_menu.move_left")
+    children: getI18nString("variables.authoring_modal.mode_context_menu.move_left")
   }, "moveLeft")), !e && en && -1 !== w.indexOf(i) && w.indexOf(i) < w.length - 1 && ec.push(jsx(c$, {
     onClick: en,
     recordingKey: Pt(b, "moveRight"),
-    children: _$$t("variables.authoring_modal.mode_context_menu.move_right")
+    children: getI18nString("variables.authoring_modal.mode_context_menu.move_right")
   }, "moveRight")), !d && ea && ec.push(jsx(c$, {
     onClick: ea,
     recordingKey: Pt(b, "startRenaming"),
-    children: _$$t("variables.authoring_modal.mode_context_menu.rename_mode")
+    children: getI18nString("variables.authoring_modal.mode_context_menu.rename_mode")
   }, "rename")));
   t && ee && (ec.length > 0 && ec.push(jsx(wv, {}, "separator1")), ec.push(jsx(c$, {
     onClick: ee,
     recordingKey: Pt(b, "delete"),
-    children: _$$t("variables.authoring_modal.mode_context_menu.delete_mode")
+    children: getI18nString("variables.authoring_modal.mode_context_menu.delete_mode")
   })));
   let eu = debugState.getState();
   let ep = eu.openFile?.key;
@@ -2563,7 +2563,7 @@ function it({
   useEffect(() => {
     X.current.node_id === w.node_id && X.current.defaultModeID !== w.defaultModeID && (Q(_$$F.enqueue({
       type: "default-mode-changed",
-      message: _$$t("variables.authoring_modal.default_mode_changed")
+      message: getI18nString("variables.authoring_modal.default_mode_changed")
     })), X.current = w);
   }, [Q, w]);
   let {
@@ -2681,7 +2681,7 @@ function it({
         className: "variablesModalTableHeader",
         "data-testid": "variables-modal-header",
         children: [jsxs(Ar, {
-          children: [_$$t("variables.authoring_modal.table.name_header"), jsx(uM, {})]
+          children: [getI18nString("variables.authoring_modal.table.name_header"), jsx(uM, {})]
         }), w.modes.map((e, t) => jsx(ie, {
           atModeLimit: w.modes.length >= modeLimit,
           canDelete: w.modes.length > 1,
@@ -2754,17 +2754,17 @@ function it({
             className: "variables_modal_table--newModeButton--HXURD",
             children: jsx(_$$K, {
               disabled: en,
-              "aria-label": en ? _$$t("variables.authoring_modal.reached_hard_mode_limit", {
+              "aria-label": en ? getI18nString("variables.authoring_modal.reached_hard_mode_limit", {
                 modeLimit
-              }) : _$$t("variables.authoring_modal.new_mode_tooltip"),
+              }) : getI18nString("variables.authoring_modal.new_mode_tooltip"),
               onClick: () => {
                 ei ? canShowCTA(w.modes.length) && showCTA() : i();
               },
               recordingKey: Pt(y, "createMode"),
               htmlAttributes: {
-                "data-tooltip": en ? _$$t("variables.authoring_modal.reached_hard_mode_limit", {
+                "data-tooltip": en ? getI18nString("variables.authoring_modal.reached_hard_mode_limit", {
                   modeLimit
-                }) : _$$t("variables.authoring_modal.new_mode_tooltip"),
+                }) : getI18nString("variables.authoring_modal.new_mode_tooltip"),
                 "data-tooltip-type": Ib.TEXT
               },
               children: jsx(_$$e, {})
@@ -2831,19 +2831,19 @@ function id({
     recordingKey: i,
     iconPrefix: jsx(_$$x2, {}),
     disabled: l,
-    "aria-label": l ? _$$t("variables.authoring_modal.reached_hard_mode_limit", {
+    "aria-label": l ? getI18nString("variables.authoring_modal.reached_hard_mode_limit", {
       modeLimit: s
-    }) : _$$t("variables.authoring_modal.new_mode_tooltip"),
+    }) : getI18nString("variables.authoring_modal.new_mode_tooltip"),
     onClick: () => {
       o ? a(e.modes.length) && r() : t();
     },
     htmlAttributes: {
-      "data-tooltip": l ? _$$t("variables.authoring_modal.reached_hard_mode_limit", {
+      "data-tooltip": l ? getI18nString("variables.authoring_modal.reached_hard_mode_limit", {
         modeLimit: s
-      }) : _$$t("variables.authoring_modal.new_mode_tooltip"),
+      }) : getI18nString("variables.authoring_modal.new_mode_tooltip"),
       "data-tooltip-type": Ib.TEXT
     },
-    children: _$$tx("variables.authoring_modal.action_bar.new_mode")
+    children: renderI18nText("variables.authoring_modal.action_bar.new_mode")
   }) : null;
 }
 function ic({
@@ -2861,7 +2861,7 @@ function ic({
       ref: t,
       variant: "primary",
       iconPrefix: jsx(_$$x2, {}),
-      children: _$$t("variables.authoring_modal.action_bar.new_variable")
+      children: getI18nString("variables.authoring_modal.action_bar.new_variable")
     })),
     recordingKey: "variablesModal",
     groups: i,
@@ -2945,9 +2945,9 @@ function iI({
     }), jsxs(mc, {
       children: [jsx(iv, {}), jsx(ix, {
         title: o ? jsx(hE, {
-          children: _$$t("variables.authoring_modal.filters.type")
+          children: getI18nString("variables.authoring_modal.filters.type")
         }) : jsx(_$$r, {
-          children: _$$t("variables.authoring_modal.filters.type")
+          children: getI18nString("variables.authoring_modal.filters.type")
         }),
         filterState: t,
         toggleTypeFilter: i
@@ -2965,7 +2965,7 @@ function iE({
   return jsx("div", {
     ...Ay.props(iT.filterButtonWrapper, e && iT.filterButtonWrapper_Active),
     children: jsx(_$$d, {
-      "aria-label": _$$t("variables.authoring_modal.search.filters"),
+      "aria-label": getI18nString("variables.authoring_modal.search.filters"),
       ...t,
       children: e ? jsx(_$$S3, {}) : jsx(_$$S2, {})
     })
@@ -3021,7 +3021,7 @@ function iw({
   }, e));
   return jsx(z6, {
     title: jsx(hE, {
-      children: _$$t("variables.authoring_modal.filters.extended_collection_filter")
+      children: getI18nString("variables.authoring_modal.filters.extended_collection_filter")
     }),
     onChange: t,
     value: e.filters.collectionFilter,
@@ -3098,7 +3098,7 @@ let iD = forwardRef((e, t) => {
   let A = {
     width: `${qE(g, 175, 500)}px`
   };
-  let y = e.placeholder ?? _$$t("general.search");
+  let y = e.placeholder ?? getI18nString("general.search");
   return jsxs(Fragment, {
     children: [jsxs("div", {
       ...Ay.props(iF.inputWrapper, isFocused && iF.inputWrapperFocused),
@@ -3227,11 +3227,11 @@ function iM({
   return jsx("div", {
     className: "x6s0dn4 x78zum5 x193iq5w",
     children: jsxs(_$$e2, {
-      "aria-label": _$$t("variables.authoring_modal.search.button_group"),
+      "aria-label": getI18nString("variables.authoring_modal.search.button_group"),
       children: [jsx(iD, {
         focusOnMount: !1,
         query: t.query,
-        placeholder: _$$t("variables.authoring_modal.filters.placeholder"),
+        placeholder: getI18nString("variables.authoring_modal.filters.placeholder"),
         clearSearch: l,
         onChange: a
       }), jsx(iI, {
@@ -3248,7 +3248,7 @@ function ij() {
     className: "variables_debug_preview_badge--variablePreviewBadge--ODs1j",
     children: [jsx("div", {
       className: "variables_debug_preview_badge--variablePreviewDot--zmx2J"
-    }), _$$tx("proto.variable_debugger.live_preview_indicator")]
+    }), renderI18nText("proto.variable_debugger.live_preview_indicator")]
   });
 }
 function iU({
@@ -3332,7 +3332,7 @@ function iU({
       })]
     }) : jsx("div", {
       className: "xet2fuk x1s688f x1j6dyjg xs83m0k x1sf2cm4 xuxw1ft xktpd3l xb3r6kr xlyipyv x87ps6o",
-      children: _$$tx("variables.authoring_modal.title")
+      children: renderI18nText("variables.authoring_modal.title")
     }), C && jsx("div", {
       className: ED,
       children: jsx(ij, {})
@@ -3343,7 +3343,7 @@ function iU({
         className: "xet2fuk xl010v5",
         children: jsx(_$$f, {
           recordingKey: Pt("variablesModal", "expandModal"),
-          "aria-label": x ? _$$t("variables.authoring_modal.toggle_fullscreen_mode_minimize") : _$$t("variables.authoring_modal.toggle_fullscreen_mode_expand"),
+          "aria-label": x ? getI18nString("variables.authoring_modal.toggle_fullscreen_mode_minimize") : getI18nString("variables.authoring_modal.toggle_fullscreen_mode_expand"),
           onIcon: jsx(_$$O4, {}),
           offIcon: jsx(_$$p, {}),
           checked: !x,
@@ -3471,7 +3471,7 @@ function i2({
     let t = useSelector(_$$c);
     let [i, n] = useState(!1);
     useEffect(() => {
-      i || (n(!0), sx("ds_variables_modal_opened", {
+      i || (n(!0), trackEventAnalytics("ds_variables_modal_opened", {
         ...t,
         view_type: e ? "expanded" : "minimized"
       }));
@@ -3777,7 +3777,7 @@ export let $$i50 = Ju(function () {
     let B = jv();
     let V = mm();
     return useMemo(() => {
-      let e = ez(() => (e, t) => l7.user("rename-variable", () => CWU.renameVariable(e, rh(t))) ? (Y5.triggerAction("commit"), !0) : (x1("variables", "Failed to rename variable", {
+      let e = ez(() => (e, t) => l7.user("rename-variable", () => CWU.renameVariable(e, rh(t))) ? (Y5.triggerAction("commit"), !0) : (logError("variables", "Failed to rename variable", {
         variableID: e
       }), !1), j, eV, _);
       let r = ez(() => V.setVariableValueForMode, j, eB, _);
@@ -3808,7 +3808,7 @@ export let $$i50 = Ju(function () {
       let y = ez(() => (e, t) => {
         let i = !0;
         e.forEach(e => {
-          (i = i && l7.user("toggle-publishable", () => CWU.setVariableIsPublishable(e.node_id, t))) || x1("variables", "Failed to mark variable as publishable", {
+          (i = i && l7.user("toggle-publishable", () => CWU.setVariableIsPublishable(e.node_id, t))) || logError("variables", "Failed to mark variable as publishable", {
             variableId: e.node_id
           });
         });
@@ -3982,7 +3982,7 @@ export let $$i50 = Ju(function () {
           }, j, eV, _),
           createGroup: ez(() => (e, t) => (t.forEach(t => {
             if (!l7.user("create-variable-group", () => CWU.renameVariable(t.node_id, US(t.name, e)))) {
-              x1("variables", "Failed to rename variable", {
+              logError("variables", "Failed to rename variable", {
                 variableID: t.node_id
               });
               return !1;
@@ -4057,7 +4057,7 @@ export let $$i50 = Ju(function () {
             let i = (x.length > 0 ? x[x.length - 1] : e[e.length - 1]?.node_id) ?? null;
             let n = A?.node_id;
             if (!n) {
-              x1("pasteClipboardVariables", "Failed to paste variables, could not find variableCollectionIDStr", {
+              logError("pasteClipboardVariables", "Failed to paste variables, could not find variableCollectionIDStr", {
                 currentVariableSetId: u?.node_id
               });
               return;
@@ -4086,7 +4086,7 @@ export let $$i50 = Ju(function () {
             t && (await Yf(t));
             return l7.user("create-variable-set-extension", () => B?.(n, e)) ?? "";
           }, j, eB, _) : null,
-          renameVariableSet: ez(() => (e, t) => l7.user("rename-variable-set", () => CWU.editVariableSetName(e, t)) ? (Y5.triggerAction("commit"), !0) : (x1("variables", "Failed to rename variable set", {
+          renameVariableSet: ez(() => (e, t) => l7.user("rename-variable-set", () => CWU.editVariableSetName(e, t)) ? (Y5.triggerAction("commit"), !0) : (logError("variables", "Failed to rename variable set", {
             variableSetID: e
           }), !1), j, eB, _),
           deleteVariableSet: ez(() => e => {

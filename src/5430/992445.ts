@@ -4,7 +4,7 @@ import { getFeatureFlags } from "../905/601108";
 import { r } from "../905/620668";
 import { FFileType, FProductAccessType } from "../figma_app/191312";
 import { GX } from "../figma_app/300692";
-import { nT, wN } from "../figma_app/53721";
+import { FEditorType, mapFileTypeToEditorType } from "../figma_app/53721";
 import { Pe, FW } from "../figma_app/155287";
 let u = r();
 export function $$m0(e, t, r, s) {
@@ -12,29 +12,29 @@ export function $$m0(e, t, r, s) {
     let s = e.manifest.editorType;
     if (e.playground_fig_file?.editor_type) {
       let t = e.playground_fig_file?.editor_type;
-      return t === FFileType.DESIGN && Pe(s) ? nT.DevHandoff : wN(t);
+      return t === FFileType.DESIGN && Pe(s) ? FEditorType.DevHandoff : mapFileTypeToEditorType(t);
     }
-    let i = u ? wN(u) : null;
-    return i && s?.includes(GX(i)) ? i : Pe(s) ? nT.DevHandoff : s?.includes(FW.FIGMA) ? nT.Design : s?.includes(FW.SLIDES) ? nT.Slides : s?.includes(FW.BUZZ) ? nT.Cooper : s?.includes(FW.FIGMA) && s?.includes(FW.FIGJAM) ? (t ? nT.Design : r) ?? wN(u) : s?.includes(FW.FIGJAM) ? nT.Whiteboard : nT.Design;
+    let i = u ? mapFileTypeToEditorType(u) : null;
+    return i && s?.includes(GX(i)) ? i : Pe(s) ? FEditorType.DevHandoff : s?.includes(FW.FIGMA) ? FEditorType.Design : s?.includes(FW.SLIDES) ? FEditorType.Slides : s?.includes(FW.BUZZ) ? FEditorType.Cooper : s?.includes(FW.FIGMA) && s?.includes(FW.FIGJAM) ? (t ? FEditorType.Design : r) ?? mapFileTypeToEditorType(u) : s?.includes(FW.FIGJAM) ? FEditorType.Whiteboard : FEditorType.Design;
   }(r, t?.figjamDisabledAt != null, s);
   let o = r.manifest.editorType ?? [];
   if (r.playground_fig_file?.editor_type) {
     let t = r.playground_fig_file?.editor_type;
     switch (t) {
       case FFileType.DESIGN:
-        if (Pe(o) && e?.licenseTypes?.includes(FProductAccessType.DEV_MODE)) return nT.DevHandoff;
-        if (o.includes(FW.FIGMA) && e?.licenseTypes?.includes(FProductAccessType.DESIGN)) return nT.Design;
+        if (Pe(o) && e?.licenseTypes?.includes(FProductAccessType.DEV_MODE)) return FEditorType.DevHandoff;
+        if (o.includes(FW.FIGMA) && e?.licenseTypes?.includes(FProductAccessType.DESIGN)) return FEditorType.Design;
         break;
       case FFileType.WHITEBOARD:
-        if (o.includes(FW.FIGJAM) && e?.licenseTypes?.includes(FProductAccessType.WHITEBOARD)) return nT.Whiteboard;
+        if (o.includes(FW.FIGJAM) && e?.licenseTypes?.includes(FProductAccessType.WHITEBOARD)) return FEditorType.Whiteboard;
         break;
       case FFileType.SLIDES:
-        if (o.includes(FW.SLIDES) && e?.licenseTypes?.includes(FProductAccessType.SLIDES)) return nT.Slides;
+        if (o.includes(FW.SLIDES) && e?.licenseTypes?.includes(FProductAccessType.SLIDES)) return FEditorType.Slides;
         break;
       case FFileType.SITES:
         break;
       case FFileType.COOPER:
-        if (o.includes(FW.BUZZ) && e?.licenseTypes?.includes(FProductAccessType.COOPER)) return nT.Cooper;
+        if (o.includes(FW.BUZZ) && e?.licenseTypes?.includes(FProductAccessType.COOPER)) return FEditorType.Cooper;
         break;
       case FFileType.FIGMAKE:
         break;
@@ -42,8 +42,8 @@ export function $$m0(e, t, r, s) {
         throwTypeError(t);
     }
   }
-  let m = u ? wN(u) : null;
-  return m && o?.includes(GX(m)) ? m : Pe(o) && e?.licenseTypes?.includes(FProductAccessType.DEV_MODE) ? nT.DevHandoff : o?.includes(FW.FIGMA) && e?.licenseTypes?.includes(FProductAccessType.DESIGN) ? nT.Design : o?.includes(FW.SLIDES) && e?.licenseTypes?.includes(FProductAccessType.SLIDES) ? nT.Slides : o?.includes(FW.FIGJAM) && e?.licenseTypes?.includes(FProductAccessType.WHITEBOARD) ? nT.Whiteboard : o?.includes(FW.BUZZ) && e?.licenseTypes?.includes(FProductAccessType.COOPER) ? nT.Cooper : s ?? wN(u);
+  let m = u ? mapFileTypeToEditorType(u) : null;
+  return m && o?.includes(GX(m)) ? m : Pe(o) && e?.licenseTypes?.includes(FProductAccessType.DEV_MODE) ? FEditorType.DevHandoff : o?.includes(FW.FIGMA) && e?.licenseTypes?.includes(FProductAccessType.DESIGN) ? FEditorType.Design : o?.includes(FW.SLIDES) && e?.licenseTypes?.includes(FProductAccessType.SLIDES) ? FEditorType.Slides : o?.includes(FW.FIGJAM) && e?.licenseTypes?.includes(FProductAccessType.WHITEBOARD) ? FEditorType.Whiteboard : o?.includes(FW.BUZZ) && e?.licenseTypes?.includes(FProductAccessType.COOPER) ? FEditorType.Cooper : s ?? mapFileTypeToEditorType(u);
 }
 export function $$_1(e, t, r, i) {
   return useMemo(() => $$m0(e, t, r, i), [r, e, t, i]);

@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useEffect, useCallback, forwardRef, memo, useContext, useMemo } from "react";
 import { lQ } from "../905/934246";
 import { getFeatureFlags } from "../905/601108";
-import { um, md, fp, Xr, eU as _$$eU } from "../figma_app/27355";
+import { um, useAtomWithSubscription, useAtomValueAndSetter, Xr, atom } from "../figma_app/27355";
 import { wY } from "../figma_app/708845";
 import { tH as _$$tH, H4 } from "../905/751457";
 import { F as _$$F } from "../figma_app/832508";
@@ -12,7 +12,7 @@ import { X as _$$X } from "../905/350405";
 import { sg, kF } from "../figma_app/48566";
 import { f as _$$f } from "../figma_app/109947";
 import { P4 } from "../905/18800";
-import { tx as _$$tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { fu } from "../figma_app/831799";
 import { xn } from "../figma_app/644079";
 import { XM } from "../905/486443";
@@ -87,7 +87,7 @@ import { bL, c$ } from "../905/575478";
 import { q as _$$q } from "../905/932270";
 import { XS as _$$XS, BB, nU } from "../9410/999133";
 import { nj, B9 } from "../905/125019";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Point } from "../905/736624";
 import { o as _$$o } from "../9410/935965";
 import { Y5 } from "../figma_app/455680";
@@ -112,7 +112,7 @@ import { CB } from "../figma_app/442259";
 import { hr } from "../9410/960980";
 import { L as _$$L2 } from "../905/453756";
 import { g as _$$g3 } from "../905/125190";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { lO } from "../9410/28761";
 import { q8 } from "../figma_app/459490";
 import { I as _$$I } from "../figma_app/827540";
@@ -161,7 +161,7 @@ let Q = um({
   }
 });
 function ee(e = lQ, t = !0) {
-  let i = md(Q);
+  let i = useAtomWithSubscription(Q);
   let [n, s] = useState({
     isHovered: !1,
     hoverTarget: null
@@ -245,7 +245,7 @@ let en = forwardRef((e, t) => {
     onboardingKey,
     ...v
   } = e;
-  let [C, T] = fp(Q);
+  let [C, T] = useAtomValueAndSetter(Q);
   let E = _$$J;
   let S = C.draggedTool === toolType;
   let w = ariaLabel || v["data-tooltip"];
@@ -359,7 +359,7 @@ let ef = memo(function ({
   shapeStrokeStyleType: g,
   disabled: j
 }) {
-  let [b, y] = fp(Q);
+  let [b, y] = useAtomValueAndSetter(Q);
   let v = useDispatch();
   let [C, T] = useState(!1);
   let [E, S] = useState(!1);
@@ -638,15 +638,15 @@ let ew = memo(function ({
 }) {
   let {
     draggedTool
-  } = md(Q);
+  } = useAtomWithSubscription(Q);
   let {
     activeSecondaryToolbeltId
   } = LH();
   let c = Jc.get(e);
   let u = c === Yt();
-  let p = md(_$$ez);
+  let p = useAtomWithSubscription(_$$ez);
   let h = _$$F2.format(p);
-  let m = md(U9);
+  let m = useAtomWithSubscription(U9);
   let f = Qd().get(c);
   let _ = useCallback(() => {
     f && i(c);
@@ -723,7 +723,7 @@ let eN = memo(function ({
 }) {
   let {
     draggedTool
-  } = md(Q);
+  } = useAtomWithSubscription(Q);
   return jsx(eI, {
     zIndex: "connector" === draggedTool ? eT : eC + 1,
     width: e.width,
@@ -748,7 +748,7 @@ let eA = memo(function ({
 }) {
   let {
     draggedTool
-  } = md(Q);
+  } = useAtomWithSubscription(Q);
   let s = `shape-${e.toLowerCase()}`;
   return jsx(eI, {
     zIndex: draggedTool === s ? eT : eC + 1,
@@ -775,13 +775,13 @@ function eO({
 }) {
   let {
     draggedTool
-  } = md(Q);
+  } = useAtomWithSubscription(Q);
   let {
     activeSecondaryToolbeltId
   } = LH();
   let l = Uo();
-  let d = md(SK).connectorToolLineStyle;
-  let c = md(wp);
+  let d = useAtomWithSubscription(SK).connectorToolLineStyle;
+  let c = useAtomWithSubscription(wp);
   let u = _$$F2.format(c);
   let p = useCallback(() => {
     t(eE[d].tool);
@@ -837,7 +837,7 @@ function eM(e) {
   } = LH();
   let {
     draggedTool
-  } = md(Q);
+  } = useAtomWithSubscription(Q);
   let f = !!draggedTool || e.secondaryToolbeltId === activeSecondaryToolbeltId;
   return jsx(_$$E, {
     "aria-disabled": u,
@@ -1005,7 +1005,7 @@ function eX() {
     onClick: () => e(),
     variant: "secondary",
     recordingKey: Pt(d6, "MORESHAPES"),
-    children: _$$tx("whiteboard.shapes.more_shapes")
+    children: renderI18nText("whiteboard.shapes.more_shapes")
   });
 }
 function e0({
@@ -1033,9 +1033,9 @@ function e0({
   });
 }
 function e1() {
-  let e = md(_$$ez);
+  let e = useAtomWithSubscription(_$$ez);
   let t = function (e) {
-    let t = md(SK);
+    let t = useAtomWithSubscription(SK);
     let i = Xr(_$$ez);
     let {
       shapeWithTextType
@@ -1053,7 +1053,7 @@ function e1() {
   }(fK);
   let [i, a] = useState(!1);
   return jsx(ZE, {
-    ariaLabel: _$$t("whiteboard.inline_menu.color_list_box"),
+    ariaLabel: getI18nString("whiteboard.inline_menu.color_list_box"),
     buttonBackground: "light",
     buttonCaretType: "down",
     buttonClassName: "shape_tool_color_selector--colorSelectorButton--cWibX",
@@ -1083,12 +1083,12 @@ function e1() {
   });
 }
 function e2() {
-  let e = md(U9);
+  let e = useAtomWithSubscription(U9);
   let t = DP();
   let i = vz();
   let a = useMemo(() => getFeatureFlags().ad_curved_connectors ? ["ELBOWED", "CURVED", "STRAIGHT", "STRAIGHT_NO_ENDPOINTS"] : ["ELBOWED", "STRAIGHT", "STRAIGHT_NO_ENDPOINTS"], []);
   return jsxs(_$$a2, {
-    ariaLabel: _$$t("whiteboard.delightful_toolbar.shapes_and_connectors_label"),
+    ariaLabel: getI18nString("whiteboard.delightful_toolbar.shapes_and_connectors_label"),
     children: [jsx(e1, {}), jsx(_$$X, {
       extended: !0
     }), jsxs(Lz, {
@@ -1220,7 +1220,7 @@ function ts({
   let m = useCallback(e => {
     a(H0(e));
   }, [a]);
-  let f = md(Qv);
+  let f = useAtomWithSubscription(Qv);
   let _ = !!f;
   let x = i ? _$$F2.format(i) : null;
   return jsxs(Fragment, {
@@ -1316,7 +1316,7 @@ function tl({
     isExpanded: i,
     activeStyle: l ? gy.RainbowActive : gy.PurpleActive,
     onClick: () => r(!i),
-    tooltipText: _$$t("whiteboard.colors.custom"),
+    tooltipText: getI18nString("whiteboard.colors.custom"),
     disabled: a,
     recordingKey: Pt(s, "customColorButton"),
     "data-testid": o["data-testid"],
@@ -1365,16 +1365,16 @@ let tc = memo(function ({
   });
 });
 function tC() {
-  let e = md(GI);
+  let e = useAtomWithSubscription(GI);
   return e.paints?.[0]?.color;
 }
 function tT() {
-  let e = md(IZ);
+  let e = useAtomWithSubscription(IZ);
   return e.paints?.[0]?.color;
 }
 function tE(e) {
-  let t = md(GI);
-  let i = md(IZ);
+  let t = useAtomWithSubscription(GI);
+  let i = useAtomWithSubscription(IZ);
   if (!e || !BG(e)) return null;
   switch (e) {
     case NLJ.VECTOR_PENCIL:
@@ -1392,7 +1392,7 @@ function tE(e) {
 function tS() {
   let {
     washiTapePaint
-  } = md(SK);
+  } = useAtomWithSubscription(SK);
   return washiTapePaint?.image?.hash && nj(washiTapePaint.image.hash);
 }
 function tw() {
@@ -1408,14 +1408,14 @@ function tI() {
   });
   glU?.uploadPaintImage("NORMAL", 1);
 }
-let tL = _$$eU(null);
+let tL = atom(null);
 function tN() {
   let e = tw();
   let {
     washiTapePaint
-  } = md(SK);
+  } = useAtomWithSubscription(SK);
   let i = washiTapePaint?.image?.hash;
-  let [n, a] = fp(tL);
+  let [n, a] = useAtomValueAndSetter(tL);
   let s = n?.paintHex;
   useEffect(() => {
     if (!e || !i) return;
@@ -1444,7 +1444,7 @@ function tA() {
     canEditColor,
     canApplyCustomColor
   } = function () {
-    let e = md(_$$XS);
+    let e = useAtomWithSubscription(_$$XS);
     let t = tC();
     let i = tT();
     switch (e) {
@@ -1452,7 +1452,7 @@ function tA() {
         return {
           currentDrawingTool: e,
           currentColor: t ?? null,
-          colorSetLegend: _$$t("whiteboard.delightful_toolbar.marker.color_selector.legend"),
+          colorSetLegend: getI18nString("whiteboard.delightful_toolbar.marker.color_selector.legend"),
           canApplyCustomColor: !0,
           canEditColor: !0
         };
@@ -1460,7 +1460,7 @@ function tA() {
         return {
           currentDrawingTool: e,
           currentColor: i ?? null,
-          colorSetLegend: _$$t("whiteboard.delightful_toolbar.highlighter.color_selector.legend"),
+          colorSetLegend: getI18nString("whiteboard.delightful_toolbar.highlighter.color_selector.legend"),
           canApplyCustomColor: !1,
           canEditColor: !0
         };
@@ -1486,9 +1486,9 @@ function tA() {
     }
   }();
   let l = function () {
-    let e = md(_$$XS);
-    let [t, i] = fp(GI);
-    let [n, a] = fp(IZ);
+    let e = useAtomWithSubscription(_$$XS);
+    let [t, i] = useAtomValueAndSetter(GI);
+    let [n, a] = useAtomValueAndSetter(IZ);
     return useCallback(r => {
       let s = [{
         type: "SOLID",
@@ -1536,11 +1536,11 @@ function tA() {
   });
 }
 function tO() {
-  let e = tE(md(_$$XS));
+  let e = tE(useAtomWithSubscription(_$$XS));
   let t = function () {
-    let e = md(_$$XS);
-    let [t, i] = fp(GI);
-    let [n, a] = fp(IZ);
+    let e = useAtomWithSubscription(_$$XS);
+    let [t, i] = useAtomValueAndSetter(GI);
+    let [n, a] = useAtomValueAndSetter(IZ);
     return useCallback(r => {
       switch (e) {
         case NLJ.HIGHLIGHTER:
@@ -1562,14 +1562,14 @@ function tO() {
         default:
           throwTypeError(e);
       }
-      sx("Drawing Tool Change Thickness", {
+      trackEventAnalytics("Drawing Tool Change Thickness", {
         thickness: r,
         tool: e ? NLJ[e] : ""
       });
     }, [e, t, n, i, a]);
   }();
   let i = function () {
-    let e = md(_$$XS);
+    let e = useAtomWithSubscription(_$$XS);
     switch (e) {
       case NLJ.VECTOR_PENCIL:
       case NLJ.HIGHLIGHTER:
@@ -1587,7 +1587,7 @@ function tO() {
       buttonType: Vz.Toggle,
       isActive: "THIN" === e,
       onClick: () => t("THIN"),
-      tooltipText: _$$t("whiteboard.delightful_toolbar.thin"),
+      tooltipText: getI18nString("whiteboard.delightful_toolbar.thin"),
       disabled: !i,
       recordingKey: Pt(_$$t2, "sizeSelect.thin"),
       children: jsx(tR, {
@@ -1597,7 +1597,7 @@ function tO() {
       buttonType: Vz.Toggle,
       isActive: "THICK" === e,
       onClick: () => t("THICK"),
-      tooltipText: _$$t("whiteboard.delightful_toolbar.thick"),
+      tooltipText: getI18nString("whiteboard.delightful_toolbar.thick"),
       disabled: !i,
       recordingKey: Pt(_$$t2, "sizeSelect.thick"),
       children: jsx(tM, {
@@ -3556,8 +3556,8 @@ function tJ() {
       buttonType: Vz.Toggle,
       isActive: i,
       onClick: tI,
-      "aria-label": _$$t("whiteboard.washi_tapes.custom_aria_label"),
-      tooltipText: _$$t("whiteboard.washi_tapes.custom_aria_label"),
+      "aria-label": getI18nString("whiteboard.washi_tapes.custom_aria_label"),
+      tooltipText: getI18nString("whiteboard.washi_tapes.custom_aria_label"),
       children: i ? jsx(tQ, {}) : jsx(_$$e, {})
     })]
   });
@@ -3572,22 +3572,22 @@ let t0 = "whiteboard_toolbelt--disabled--fxdYS";
 let t1 = {
   [NLJ.VECTOR_PENCIL]: {
     toolId: NLJ.VECTOR_PENCIL,
-    getText: () => _$$t("fullscreen_actions.set-tool-marker"),
+    getText: () => getI18nString("fullscreen_actions.set-tool-marker"),
     recordingKey: hj.PENCIL
   },
   [NLJ.HIGHLIGHTER]: {
     toolId: NLJ.HIGHLIGHTER,
-    getText: () => _$$t("fullscreen_actions.set-tool-highlighter"),
+    getText: () => getI18nString("fullscreen_actions.set-tool-highlighter"),
     recordingKey: hj.HIGHLIGHER
   },
   [NLJ.WASHI_TAPE]: {
     toolId: NLJ.WASHI_TAPE,
-    getText: () => _$$t("fullscreen_actions.set-tool-washi-tape"),
+    getText: () => getI18nString("fullscreen_actions.set-tool-washi-tape"),
     recordingKey: hj.WASHI_TAPE
   },
   [NLJ.ERASER]: {
     toolId: NLJ.ERASER,
-    getText: () => _$$t("fullscreen_actions.set-tool-eraser"),
+    getText: () => getI18nString("fullscreen_actions.set-tool-eraser"),
     recordingKey: hj.ERASER
   }
 };
@@ -3595,12 +3595,12 @@ function t2({
   disabled: e
 }) {
   let t = function () {
-    let e = md(_$$B);
-    let t = md(BB) && e === cxo.PENCIL_TOOL;
-    return !!md(_$$XS) || t;
+    let e = useAtomWithSubscription(_$$B);
+    let t = useAtomWithSubscription(BB) && e === cxo.PENCIL_TOOL;
+    return !!useAtomWithSubscription(_$$XS) || t;
   }();
   let i = function () {
-    let e = md(_$$XS) ?? void 0;
+    let e = useAtomWithSubscription(_$$XS) ?? void 0;
     let t = PD(e);
     return e || t || gf;
   }();
@@ -3610,7 +3610,7 @@ function t2({
     handleToolAction
   } = _$$W();
   !function () {
-    let e = md(_$$o);
+    let e = useAtomWithSubscription(_$$o);
     let t = tS();
     useEffect(() => {
       Qc(_$$B2);
@@ -3680,7 +3680,7 @@ function t6() {
     handleToolAction
   } = _$$W();
   return jsxs(_$$a2, {
-    ariaLabel: _$$t("whiteboard.delightful_toolbar.drawing_tools_label"),
+    ariaLabel: getI18nString("whiteboard.delightful_toolbar.drawing_tools_label"),
     children: [t5.map(i => jsx(t9, {
       toolId: i,
       isActive: activeToolId === i,
@@ -3768,18 +3768,18 @@ function t8({
 }
 function t7() {
   return jsx(_$$a2, {
-    ariaLabel: _$$t("whiteboard.delightful_toolbar.sticky_options_label"),
+    ariaLabel: getI18nString("whiteboard.delightful_toolbar.sticky_options_label"),
     children: jsx(ie, {})
   });
 }
 function ie() {
-  let [e, t] = fp(qL);
+  let [e, t] = useAtomValueAndSetter(qL);
   let i = useCallback(e => {
     e && t(e);
   }, [t]);
   return jsx(ts, {
     toolId: NLJ.STICKY,
-    legend: _$$tx("whiteboard.delightful_toolbar.sticky.color_selector.legend"),
+    legend: renderI18nText("whiteboard.delightful_toolbar.sticky.color_selector.legend"),
     color: e,
     onColorChange: i,
     recordingKey: Mg,
@@ -3810,7 +3810,7 @@ function io({
       children: jsx(_$$y, {
         onClick: r,
         isActive: i,
-        tooltipText: _$$t("fullscreen_actions.browse-all-resources-dlt"),
+        tooltipText: getI18nString("fullscreen_actions.browse-all-resources-dlt"),
         tooltipShortcut: t(zK.INSERTS_MENU),
         onboardingKey: yl,
         recordingKey: Pt(I1, hj.INSERTS),
@@ -3916,7 +3916,7 @@ function iT({
         "stamps--peekingVotingWheelShowHide--trcMp": d,
         "stamps--peekingVotingWheelDoneVoting--sJEXl": !i
       }),
-      "aria-label": _$$t("voting.voting_wheel"),
+      "aria-label": getI18nString("voting.voting_wheel"),
       htmlAttributes: {
         onMouseEnter: () => pZ() && s(!0),
         onMouseLeave: () => pZ() && s(!1)
@@ -3937,7 +3937,7 @@ function iw({
   hasRemainingVotes: a
 }) {
   let [s, o] = useState(!1);
-  let l = a && !Ay.isIpad;
+  let l = a && !BrowserInfo.isIpad;
   ig({
     shouldOpenWheelOnHover: l,
     isHovered: s
@@ -3950,13 +3950,13 @@ function iw({
         onMouseEnter: () => pZ() && o(!0),
         onMouseLeave: () => pZ() && o(!1)
       },
-      "aria-label": _$$t("voting.remaining_votes"),
+      "aria-label": getI18nString("voting.remaining_votes"),
       onClick: () => {
         l || (a ? e() : t());
       },
       children: a ? jsx("span", {
         className: ij,
-        children: _$$tx("voting.delightful_toolbar.votes_remaining", {
+        children: renderI18nText("voting.delightful_toolbar.votes_remaining", {
           numVotes: i
         })
       }) : jsxs(Fragment, {
@@ -3964,7 +3964,7 @@ function iw({
           className: "stamps--checkIcon--XCqm2"
         }), jsx("span", {
           className: ij,
-          children: _$$tx("voting.delightful_toolbar.no_votes_remaining")
+          children: renderI18nText("voting.delightful_toolbar.no_votes_remaining")
         })]
       })
     })
@@ -3982,7 +3982,7 @@ function iL({
   let l = _$$iT();
   let d = function (e) {
     let t = XM();
-    let i = md(nf);
+    let i = useAtomWithSubscription(nf);
     let n = ej();
     let r = _$$L(e);
     return t && !(i || n || r);
@@ -4067,7 +4067,7 @@ function ik({
   let a = XM();
   let {
     numVisibleTools
-  } = md(Kj);
+  } = useAtomWithSubscription(Kj);
   let d = _$$$R(numVisibleTools);
   let c = Xr(n6);
   useEffect(() => {
@@ -4110,18 +4110,18 @@ function iD({
   toolbarIconScale: e,
   disabled: t
 }) {
-  let i = md(nU);
+  let i = useAtomWithSubscription(nU);
   let [s, l] = useState(!1);
   let [d, c] = useState(!1);
   let [u, p] = useState(_$$k2.DEFAULT);
   let h = 240 / (rX * e);
   let m = function () {
-    let e = md(qL);
+    let e = useAtomWithSubscription(qL);
     let t = zS(e, "sticky");
     let i = _$$F2.format(e);
     return t ? MV(t, i) : "rgba(230, 230, 230, 1)";
   }();
-  let f = md(Q);
+  let f = useAtomWithSubscription(Q);
   let _ = function () {
     let {
       activeSecondaryToolbeltId
@@ -4274,9 +4274,9 @@ function iF({
       e && n(e.current);
       t && s(t.current);
     }, [e, n, t, s]);
-  }(t, md(_$$f));
+  }(t, useAtomWithSubscription(_$$f));
   let i = xn();
-  let s = md(P4);
+  let s = useAtomWithSubscription(P4);
   let d = useMemo(() => ({
     marginBottom: i + s
   }), [i, s]);
@@ -4298,7 +4298,7 @@ function iH({
     children: jsx(_$$x, {
       children: jsx(_$$m, {
         role: "region",
-        "aria-label": _$$t("fullscreen_actions.toolbar_label"),
+        "aria-label": getI18nString("fullscreen_actions.toolbar_label"),
         children: e
       })
     })
@@ -4310,7 +4310,7 @@ function iB() {
     editModeType
   } = e;
   let i = _$$z(editModeType);
-  let a = md(hV);
+  let a = useAtomWithSubscription(hV);
   let {
     activeBannerType
   } = Dm();
@@ -4340,7 +4340,7 @@ function iB() {
       activeSecondaryToolbeltId,
       setActiveSecondaryToolbeltId
     } = LH();
-    let n = md(_$$f);
+    let n = useAtomWithSubscription(_$$f);
     useEffect(() => {
       let t = t => {
         !_$$L(activeToolId) && !eg(activeToolId) && n?.current && t.target instanceof Element && !n.current.contains(t.target) && setActiveSecondaryToolbeltId(null);

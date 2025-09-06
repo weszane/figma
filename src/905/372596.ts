@@ -1,5 +1,5 @@
 import { hV } from "../figma_app/387100";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { Ay } from "../905/931912";
 import { G } from "../figma_app/714966";
@@ -44,20 +44,20 @@ export function $$h1({
     nodesWithAnnotations: 0
   };
   let d = new Map();
-  hV(t, (e) => {
+  hV(t, e => {
     let t;
     if (!e.visible) {
       l.numHiddenNodes += 1;
       return;
     }
-    if (e.annotations && e.annotations.length > 0 && (l.nodesWithAnnotations += 1), "SYMBOL" === e.type ? l.numComponents += 1 : "INSTANCE" === e.type && (l.numInstances += 1), e.isStateGroup && (l.isComponentSet = !0), "FRAME" === e.type && (["HORIZONTAL", "VERTICAL"].includes(e.stackMode) && (l.framesWithAutoLayout += 1), "GRID" === e.stackMode && (l.framesWithGridLayout += 1)), "FRAME" === e.type && ["HORIZONTAL", "VERTICAL"].includes(e.stackMode) && (l.framesWithAutoLayout += 1), e.boundVariables && _$$a(e, i).forEach((e) => {
+    if (e.annotations && e.annotations.length > 0 && (l.nodesWithAnnotations += 1), "SYMBOL" === e.type ? l.numComponents += 1 : "INSTANCE" === e.type && (l.numInstances += 1), e.isStateGroup && (l.isComponentSet = !0), "FRAME" === e.type && (["HORIZONTAL", "VERTICAL"].includes(e.stackMode) && (l.framesWithAutoLayout += 1), "GRID" === e.stackMode && (l.framesWithGridLayout += 1)), "FRAME" === e.type && ["HORIZONTAL", "VERTICAL"].includes(e.stackMode) && (l.framesWithAutoLayout += 1), e.boundVariables && _$$a(e, i).forEach(e => {
       e && null !== e.value && d.set(e.codeSyntaxName || e.name, e.type);
     }), e.childrenNodes && (l.numChildren += e.childrenNodes.length), e.id in o) {
       let t = o[e.id];
       t && (l.nodesWithCodeConnect += 1, t.snippet && (l.nodesWithCodeConnectSnippet += 1), "figmadoc" === t.version && (l.nodesWithCodeConnectV1 += 1), "component_browser" === t.version && (l.nodesWithCodeConnectLibrary += 1));
     }
     t = 0;
-    e.effects && e.effects.length > 0 && (t = e.effects.filter((e) => e.visible).length);
+    e.effects && e.effects.length > 0 && (t = e.effects.filter(e => e.visible).length);
     let {
       effectStylesUsed
     } = {
@@ -81,7 +81,7 @@ export function $$h1({
   });
 }
 export function $$g0(e) {
-  let t = zl.get(EA);
+  let t = atomStoreManager.get(EA);
   $z({
     canUseCookieForAnalytics: t,
     geofence: {}

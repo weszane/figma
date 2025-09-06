@@ -1,5 +1,5 @@
 import { XHR } from "../905/910117";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
 import { L_, Nr, HZ as _$$HZ } from "../905/890368";
 import { F } from "../905/302958";
@@ -27,7 +27,7 @@ let $$h1 = nF((e, {
     e.dispatch(F.enqueue({
       error: !1,
       type: "profile-merge-update",
-      message: _$$t("community.actions.your_profile_s_primary_email_was_set_to_email", {
+      message: getI18nString("community.actions.your_profile_s_primary_email_was_set_to_email", {
         email: t
       })
     }));
@@ -60,7 +60,7 @@ let $$g0 = nF((e, {
     e.dispatch(F.enqueue({
       error: !1,
       type: "profile-merge-update",
-      message: _$$t("community.actions.email_was_removed_from_your_profile", {
+      message: getI18nString("community.actions.email_was_removed_from_your_profile", {
         email: t
       })
     }));
@@ -93,7 +93,7 @@ let $$f5 = nF((e, {
     e.dispatch($$u3(t.meta));
     e.dispatch(F.enqueue({
       type: "profile-merge-update",
-      message: _$$t("community.actions.new_profile_connection_added")
+      message: getI18nString("community.actions.new_profile_connection_added")
     }));
     e.dispatch(hm());
   }).catch(t => {
@@ -101,7 +101,7 @@ let $$f5 = nF((e, {
     i && e.dispatch(F.enqueue({
       error: !0,
       type: "profile-merge-update",
-      message: _$$t("community.actions.failed_to_merge_msg", {
+      message: getI18nString("community.actions.failed_to_merge_msg", {
         msg: i
       })
     }));
@@ -114,4 +114,4 @@ export const Gu = $$h1;
 export const HZ = $$m2;
 export const Oo = $$u3;
 export const cr = $$p4;
-export const n7 = $$f5; 
+export const n7 = $$f5;

@@ -2,9 +2,9 @@ import { useMemo, useCallback } from "react";
 import { filterNotNullish } from "../figma_app/656233";
 import { K } from "../905/807535";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { x } from "../905/23221";
-import { t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { FProductType, FProductAccessType, FPlanNameType } from "../figma_app/191312";
 import { X$ } from "../figma_app/465071";
 import { j4 } from "../905/814802";
@@ -116,7 +116,7 @@ export function $$P7(e) {
   return t ? {
     key: t,
     license_types: e.licenseTypes
-  } : ($D(_$$e.BILLING_EXPERIENCE, Error(`convertLgSeatTypeProduct encountered unexpected seat type key: ${e.key}`)), null);
+  } : (reportError(_$$e.BILLING_EXPERIENCE, Error(`convertLgSeatTypeProduct encountered unexpected seat type key: ${e.key}`)), null);
 }
 export function $$D11(e) {
   let {
@@ -127,7 +127,7 @@ export function $$D11(e) {
     overridePlanTier,
     visibility: "seat_description"
   });
-  return useCallback(e => e === Gu.VIEW ? t("modify_plan_user_seat_modal.products_for_seat.view") : _$$a(i(e), listFormatType), [listFormatType, i]);
+  return useCallback(e => e === Gu.VIEW ? getI18nString("modify_plan_user_seat_modal.products_for_seat.view") : _$$a(i(e), listFormatType), [listFormatType, i]);
 }
 export function $$k6(e, t) {
   let r = $$D11(t);
@@ -137,22 +137,22 @@ export function $$M8(e, t) {
   switch (F2(e)) {
     case _$$ud.EXPERT:
       return {
-        header: tx("upgrades.drafts_move.admin_self_upgrade_header.full_seat"),
-        body: tx("upgrades.drafts_move.admin_self_upgrade_body.full_seat", {
+        header: renderI18nText("upgrades.drafts_move.admin_self_upgrade_header.full_seat"),
+        body: renderI18nText("upgrades.drafts_move.admin_self_upgrade_body.full_seat", {
           planName: t
         })
       };
     case _$$ud.DEVELOPER:
       return {
-        header: tx("upgrades.drafts_move.admin_self_upgrade_header.dev_seat"),
-        body: tx("upgrades.drafts_move.admin_self_upgrade_body.dev_seat", {
+        header: renderI18nText("upgrades.drafts_move.admin_self_upgrade_header.dev_seat"),
+        body: renderI18nText("upgrades.drafts_move.admin_self_upgrade_body.dev_seat", {
           planName: t
         })
       };
     case _$$ud.COLLABORATOR:
       return {
-        header: tx("upgrades.drafts_move.admin_self_upgrade_header.collab_seat"),
-        body: tx("upgrades.drafts_move.admin_self_upgrade_body.collab_seat", {
+        header: renderI18nText("upgrades.drafts_move.admin_self_upgrade_header.collab_seat"),
+        body: renderI18nText("upgrades.drafts_move.admin_self_upgrade_body.collab_seat", {
           planName: t
         })
       };

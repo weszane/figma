@@ -2,15 +2,15 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { s as _$$s } from "../905/573154";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { j as _$$j } from "../5430/272190";
 import { to } from "../905/156213";
 import { b as _$$b } from "../905/985254";
 import { _6 } from "../figma_app/386952";
 import { iZ } from "../905/372672";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { P5 } from "../figma_app/175992";
 import { WE, BY, Q7 } from "../figma_app/625596";
 import { C as _$$C } from "../figma_app/198698";
@@ -71,22 +71,22 @@ export function $$E0(e) {
         target: "_blank",
         href: "https://help.figma.com/hc/articles/12067637274519-About-selling-Community-resources",
         trusted: !0,
-        children: _$$t("general.learn_more")
+        children: getI18nString("general.learn_more")
       });
       return {
         id: om.communityM10nApprovalBanner,
         bannerType: x1.INFO,
-        mainText: getFeatureFlags().cmty_expand_extension_m10n ? _$$t("community.seller.sell_on_community_v2") : _$$t("community.seller.good_news"),
+        mainText: getFeatureFlags().cmty_expand_extension_m10n ? getI18nString("community.seller.sell_on_community_v2") : getI18nString("community.seller.good_news"),
         icon: _$$A2,
         button: r ? {
           buttonText: jsx(I, {
             isLoading: e,
-            text: _$$t("community.seller.set_up_stripe")
+            text: getI18nString("community.seller.set_up_stripe")
           }),
           onClick: t,
           className: mj
         } : void 0,
-        description: tx("community.seller.you_may_be_eligible_with_link", {
+        description: renderI18nText("community.seller.you_may_be_eligible_with_link", {
           learnMoreLink: i
         }),
         dismissible: !!r,
@@ -101,7 +101,7 @@ export function $$E0(e) {
           data: {
             setupStripeCallback: e => {
               w(!1);
-              e || E(_$$s.error(_$$t("community.seller.unable_to_launch_stripe_onboarding_please_check_your_details")));
+              e || E(_$$s.error(getI18nString("community.seller.unable_to_launch_stripe_onboarding_please_check_your_details")));
             }
           }
         }));
@@ -122,13 +122,13 @@ export function $$E0(e) {
         button: r ? {
           buttonText: jsx(I, {
             isLoading: t,
-            text: _$$t("community.seller.finish_set_up")
+            text: getI18nString("community.seller.finish_set_up")
           }),
           onClick: e,
           className: mj
         } : void 0,
-        mainText: _$$t("community.seller.finish_stripe_setup"),
-        description: _$$t("community.seller.few_steps_left_stripe"),
+        mainText: getI18nString("community.seller.finish_stripe_setup"),
+        description: getI18nString("community.seller.few_steps_left_stripe"),
         dismissible: !!r,
         positionStatic: !0
       };
@@ -158,13 +158,13 @@ export function $$E0(e) {
         button: r ? {
           buttonText: jsx(I, {
             isLoading: t,
-            text: _$$t("community.seller.visit_stripe")
+            text: getI18nString("community.seller.visit_stripe")
           }),
           onClick: e,
           className: mj
         } : void 0,
-        mainText: _$$t("community.seller.stripe_needs_your_attention"),
-        description: _$$t("community.seller.you_can_resolve"),
+        mainText: getI18nString("community.seller.stripe_needs_your_attention"),
+        description: getI18nString("community.seller.you_can_resolve"),
         dismissible: !!r,
         positionStatic: !0
       };
@@ -187,11 +187,11 @@ export function $$E0(e) {
   return S[userFlag] && !O ? jsx(Fragment, {}) : jsx(_$$C, {
     containerClassName: O ? hL : void 0,
     content: bannerContent,
-    editorType: nT.Design,
+    editorType: FEditorType.Design,
     onDismiss: () => {
       U();
       P(!0);
-      sx("cmty_m10n_banner_dismissed", {
+      trackEventAnalytics("cmty_m10n_banner_dismissed", {
         userFlag
       });
     }

@@ -1,6 +1,6 @@
 import { Sm, j6 } from "../905/859698";
 import { PWo, IXA } from "../figma_app/763686";
-import { eU, FZ } from "../figma_app/27355";
+import { atom, setupCustomAtom } from "../figma_app/27355";
 import { Y5 } from "../figma_app/455680";
 import { Wh } from "../figma_app/615482";
 import { e as _$$e } from "../905/566074";
@@ -17,8 +17,8 @@ let $$p1 = {
   [PW.CODE_COMPONENT]: {
     subscribed: function (e) {
       let t = u[e].idl;
-      let r = Wh(() => eU({}));
-      let n = FZ(r, (t, r) => {
+      let r = Wh(() => atom({}));
+      let n = setupCustomAtom(r, (t, r) => {
         if ("changed" in r) {
           if (!_$$e(e)) return t;
           let n = r.changed;

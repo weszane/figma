@@ -9,7 +9,7 @@ import { useHandleInputEvent } from "../figma_app/878298";
 import { Ok, ux, NY, uW, xj } from "../figma_app/851625";
 import { Bx } from "../figma_app/191804";
 import { f as _$$f } from "../905/931050";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { Uz } from "../905/63728";
 import { r as _$$r } from "../905/520829";
 import { uP, nh } from "../figma_app/933328";
@@ -218,7 +218,7 @@ export function $$j2(e) {
     let l = useDispatch();
     let d = useSelector(e => e.theme.visibleTheme);
     let c = Bx(d);
-    let g = _$$R(e => sS(e) || "");
+    let g = selectWithShallowEqual(e => sS(e) || "");
     let y = Oo(e, g);
     let b = useMemo(() => {
       if (null == t || "" === t) return Ok();

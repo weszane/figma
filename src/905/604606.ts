@@ -9,7 +9,7 @@ import { O } from "../905/599243";
 import { E } from "../905/500201";
 import { G } from "../905/865520";
 import { rXF } from "../figma_app/763686";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { A as _$$A } from "../svg/82167";
 import { A as _$$A2 } from "../svg/575532";
 import { A as _$$A3 } from "../svg/884504";
@@ -36,28 +36,28 @@ export function $$E1(e, t) {
     case rXF.STRING:
     case "STRING":
       return {
-        name: _$$t("variables.type.string"),
+        name: getI18nString("variables.type.string"),
         iconUI2: _$$A7,
         IconUI3: t ? a : _$$p
       };
     case rXF.BOOLEAN:
     case "BOOLEAN":
       return {
-        name: _$$t("variables.type.boolean"),
+        name: getI18nString("variables.type.boolean"),
         iconUI2: _$$A,
         IconUI3: t ? X : $
       };
     case rXF.FLOAT:
     case "FLOAT":
       return {
-        name: _$$t("variables.type.number"),
+        name: getI18nString("variables.type.number"),
         iconUI2: _$$A5,
         IconUI3: t ? _$$c : O
       };
     case rXF.COLOR:
     case "COLOR":
       return {
-        name: _$$t("variables.type.color"),
+        name: getI18nString("variables.type.color"),
         iconUI2: _$$A3,
         IconUI3: t ? E : G
       };
@@ -65,7 +65,7 @@ export function $$E1(e, t) {
     case "MAP":
       console.error("Unexpected variable type shown: MAP");
       return {
-        name: _$$t("variables.type.map"),
+        name: getI18nString("variables.type.map"),
         iconUI2: _$$A,
         IconUI3: X
       };
@@ -73,7 +73,7 @@ export function $$E1(e, t) {
     case "SYMBOL_ID":
       console.error("Unexpected variable type shown: SYMBOL_ID");
       return {
-        name: _$$t("variables.type.symbolid"),
+        name: getI18nString("variables.type.symbolid"),
         iconUI2: _$$A,
         IconUI3: X
       };
@@ -81,7 +81,7 @@ export function $$E1(e, t) {
     case "FONT_STYLE":
       console.error("Unexpected variable type shown: FONT_STYLE");
       return {
-        name: _$$t("variables.type.font_style"),
+        name: getI18nString("variables.type.font_style"),
         iconUI2: _$$A,
         IconUI3: X
       };
@@ -89,7 +89,7 @@ export function $$E1(e, t) {
     case "TEXT_DATA":
       console.error("Unexpected variable type shown: TEXT_DATA");
       return {
-        name: _$$t("variables.type.text_data"),
+        name: getI18nString("variables.type.text_data"),
         iconUI2: _$$A7,
         IconUI3: a
       };
@@ -97,7 +97,7 @@ export function $$E1(e, t) {
     case "IMAGE":
       console.error("Unexpected variable type shown: IMAGE");
       return {
-        name: _$$t("variables.type.map"),
+        name: getI18nString("variables.type.map"),
         iconUI2: _$$A,
         IconUI3: X
       };
@@ -105,7 +105,7 @@ export function $$E1(e, t) {
     case "LINK":
       console.error("Unexpected variable type shown: LINK");
       return {
-        name: _$$t("variables.type.map"),
+        name: getI18nString("variables.type.map"),
         iconUI2: _$$A,
         IconUI3: X
       };
@@ -113,7 +113,7 @@ export function $$E1(e, t) {
     case "JS_RUNTIME_ALIAS":
       console.error("Unexpected variable type shown: JS_RUNTIME_ALIAS");
       return {
-        name: _$$t("variables.type.map"),
+        name: getI18nString("variables.type.map"),
         iconUI2: _$$A,
         IconUI3: X
       };
@@ -121,7 +121,7 @@ export function $$E1(e, t) {
     case rXF.SLOT_CONTENT_ID:
       console.error("Unexpected variable type shown: SLOT_CONTENT_ID");
       return {
-        name: _$$t("variables.type.map"),
+        name: getI18nString("variables.type.map"),
         iconUI2: _$$A,
         IconUI3: X
       };

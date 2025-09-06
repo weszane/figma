@@ -6,7 +6,7 @@ import { wY } from "../figma_app/708845";
 import { Pt } from "../figma_app/806412";
 import { E as _$$E } from "../905/277716";
 import { k as _$$k } from "../905/582200";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { A as _$$A } from "../905/482208";
 import { Y5 } from "../figma_app/455680";
 import { _W } from "../905/216495";
@@ -167,7 +167,7 @@ export function $$Y0(e) {
   let t = BK("FULLSCREEN_DISTRIBUTE_DROPDOWN");
   let r = useRef(null);
   yU(e.actions);
-  let a = _$$t("fullscreen.properties_panel.tooltip_moreActions");
+  let a = getI18nString("fullscreen.properties_panel.tooltip_moreActions");
   return jsxs(Fragment, {
     children: [jsx(_$$E, {
       name: "toggle_align_options_button",

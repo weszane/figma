@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
-import { fp } from "../figma_app/27355";
+import { useAtomValueAndSetter } from "../figma_app/27355";
 import { j7 } from "../905/929976";
 import { SA, d2 } from "../figma_app/8833";
 import { Pe } from "../figma_app/32128";
@@ -27,7 +27,7 @@ export function $$u1({
   shouldShowDuplicateOption: t = !0
 }) {
   let i = useDispatch();
-  let [c, u] = fp(cE);
+  let [c, u] = useAtomValueAndSetter(cE);
   return useCallback(({
     nodeId: r,
     clientX: n,

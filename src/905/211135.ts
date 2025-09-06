@@ -5,7 +5,7 @@ import { vo, Y9, hE, nB, wi } from "../figma_app/272243";
 import { $n } from "../905/521428";
 import { bL } from "../905/38914";
 import { h as _$$h } from "../905/207101";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { Lo } from "../905/156213";
 import { Yu, sp } from "../905/355291";
 import { Ve, MV } from "../905/264101";
@@ -36,12 +36,12 @@ export let $$y0 = Ju(function (e) {
     children: pS(f) ? jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: tx("auth.two-factor-setup.two_factor_recovery_codes")
+          children: renderI18nText("auth.two-factor-setup.two_factor_recovery_codes")
         })
       }), jsx(nB, {
         children: (() => {
           if (!f.backup_codes) return jsx("div", {
-            children: tx("auth.two-factor-setup.please_wait")
+            children: renderI18nText("auth.two-factor-setup.please_wait")
           });
           {
             let e = f.backup_codes.map(e => jsx("div", {
@@ -49,7 +49,7 @@ export let $$y0 = Ju(function (e) {
               children: e
             }, e));
             return jsxs("div", {
-              children: [tx("auth.two-factor-setup.recovery-code-explanation"), jsx("div", {
+              children: [renderI18nText("auth.two-factor-setup.recovery-code-explanation"), jsx("div", {
                 className: F4,
                 children: e
               })]
@@ -64,7 +64,7 @@ export let $$y0 = Ju(function (e) {
             onClick: () => {
               b(MV());
             },
-            children: tx("auth.two-factor-setup.regenerate_codes")
+            children: renderI18nText("auth.two-factor-setup.regenerate_codes")
           }), jsxs("div", {
             className: G6,
             children: [jsx($n, {
@@ -73,13 +73,13 @@ export let $$y0 = Ju(function (e) {
                 e.preventDefault();
                 b(Lo());
               },
-              children: tx("auth.two-factor-setup.close")
+              children: renderI18nText("auth.two-factor-setup.close")
             }), jsx($n, {
               onClick: () => {
                 b(Lo());
                 b(Yu());
               },
-              children: tx("auth.two-factor-setup.sms_settings")
+              children: renderI18nText("auth.two-factor-setup.sms_settings")
             })]
           })]
         })
@@ -87,7 +87,7 @@ export let $$y0 = Ju(function (e) {
     }) : jsx(_$$_, {
       twoFactorAuth: y,
       fplModal: !0,
-      title: tx("auth.two-factor-setup.two_factor_recovery_codes")
+      title: renderI18nText("auth.two-factor-setup.two_factor_recovery_codes")
     })
   }) : null;
 }, sp);

@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { Rs } from "../figma_app/288654";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { dq } from "../905/845253";
 import { bUn } from "../figma_app/43951";
 import { wM } from "../figma_app/329496";
@@ -11,7 +11,7 @@ import { e as _$$e } from "../905/916195";
 import { g as _$$g } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { s as _$$s } from "../cssbuilder/589278";
 import { T5, H3 } from "../figma_app/465071";
 import { cD } from "../figma_app/598018";
@@ -80,7 +80,7 @@ function x({
   let m = cD();
   let x = useMemo(() => SF(e, l), [e, l]);
   let S = useCallback(() => {
-    sx("CTA Clicked", {
+    trackEventAnalytics("CTA Clicked", {
       name: "Library Preference Modal Change filter",
       orgId: o,
       teamId: m,
@@ -97,13 +97,13 @@ function x({
       children: x
     }), jsx("div", {
       className: "x78zum5 x1iyjqo2 x1akne3o",
-      children: _$$t("design_systems.libraries_modal.plural.num_library", {
+      children: getI18nString("design_systems.libraries_modal.plural.num_library", {
         count: t
       })
     }), jsx(gZ, {
       className: "x78zum5 x1useyqa xdt5ytf x6s0dn4 x1ja3g5x x1epfdc",
       children: jsx(_$$E, {
-        "aria-label": _$$t("design_systems.libraries_modal.plural.view_libraries_within", {
+        "aria-label": getI18nString("design_systems.libraries_modal.plural.view_libraries_within", {
           count: t,
           filterDisplayName: x
         }),
@@ -121,7 +121,7 @@ function x({
         children: x
       })
     }), jsx(yz, {
-      children: _$$t("design_systems.libraries_modal.plural.num_library", {
+      children: getI18nString("design_systems.libraries_modal.plural.num_library", {
         count: t
       })
     }), jsx(w, {})]
@@ -156,7 +156,7 @@ export function $$w0({
     className: "subscription_list_workspace_rows--teamSectionsWrapper--WPYUg",
     children: [jsx("div", {
       className: "subscription_list_workspace_rows--header--ry-qO",
-      children: tx("design_systems.libraries_modal.workspaces")
+      children: renderI18nText("design_systems.libraries_modal.workspaces")
     }), d && draftLibrariesCount > 0 && jsx(x, {
       filter: {
         type: "drafts"

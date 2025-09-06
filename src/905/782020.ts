@@ -1,6 +1,6 @@
 import { throwTypeError } from "../figma_app/465776";
 import { CWU, Z_n } from "../figma_app/763686";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import s from "../vendor/626715";
 import { Ez } from "../figma_app/766708";
 import { rh } from "../905/309735";
@@ -144,11 +144,11 @@ export function $$D20(e, t) {
   return t ? e : null;
 }
 export function $$L21() {
-  let e = md(X);
+  let e = useAtomWithSubscription(X);
   return e.nameColumnWidth ? `${e.nameColumnWidth}px` : U3;
 }
 export function $$F22(e) {
-  let t = md(X);
+  let t = useAtomWithSubscription(X);
   return Array.from({
     length: e.length + 1
   }, (i, n) => {

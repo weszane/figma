@@ -1,4 +1,4 @@
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { p as _$$p } from "../905/762622";
 import { o7 } from "../905/331019";
 import { U } from "../figma_app/477548";
@@ -94,7 +94,7 @@ export async function $$m0(e, t, i, r, a, s, o, l, c) {
   });
   let m = await p.library.search(e.inputValue);
   if (null == m) {
-    sx("contacts_search.invite_search_error", {
+    trackEventAnalytics("contacts_search.invite_search_error", {
       invite_level: l.inviteLevel,
       source: l.source,
       input_value_is_empty: !e.inputValue,
@@ -131,7 +131,7 @@ export async function $$h1(e, t, i, a, s, d, c, p) {
   });
   let h = await m.search(e.inputValue);
   if (null == h) {
-    sx("contacts_search.invite_search_error", {
+    trackEventAnalytics("contacts_search.invite_search_error", {
       invite_level: d.inviteLevel,
       source: d.source,
       input_value_is_empty: !e.inputValue,

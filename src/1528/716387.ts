@@ -15,12 +15,12 @@ import { k as _$$k } from "../905/888808";
 import { Lov, EW4, YEY, dNx, Ifi, h3O, xal } from "../figma_app/763686";
 import { AD, Xy } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
-import { eU as _$$eU, Xr, md } from "../figma_app/27355";
+import { atom, Xr, useAtomWithSubscription } from "../figma_app/27355";
 import I from "classnames";
 import { $ as _$$$ } from "../905/455748";
 import { Fo, Uz, vN, xH, Te } from "../905/63728";
 import { yZ } from "../905/407352";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { Pt } from "../figma_app/806412";
 import { D8, GG } from "../905/511649";
 import { w as _$$w } from "../905/835474";
@@ -31,7 +31,7 @@ import { b as _$$b } from "../figma_app/556971";
 import { dW } from "../figma_app/858013";
 import { P as _$$P } from "../905/347284";
 import { B as _$$B } from "../905/714743";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { to } from "../figma_app/828186";
 import { V2, DI } from "../figma_app/712525";
@@ -74,7 +74,7 @@ import { A as _$$A6 } from "../svg/279162";
 var N = I;
 var et = (e => (e[e.NONE = 0] = "NONE", e[e.TOP = 1] = "TOP", e[e.MIDDLE = 2] = "MIDDLE", e[e.BOTTOM = 3] = "BOTTOM", e[e.ALL = 4] = "ALL", e))(et || {});
 var en = (e => (e[e.NONE = 0] = "NONE", e[e.SINGLE = 1] = "SINGLE", e[e.MULTI = 2] = "MULTI", e))(en || {});
-let el = _$$eU(!1);
+let el = atom(!1);
 let er = memo(function (e) {
   let t = Xr(el);
   let n = useDispatch();
@@ -95,7 +95,7 @@ let er = memo(function (e) {
       children: [jsxs(_$$E, {
         recordingKey: "figma_design_search_page_scope_dropdown",
         className: Vz,
-        "aria-label": _$$t("canvas_search.scope_dropdown_aria_label", {
+        "aria-label": getI18nString("canvas_search.scope_dropdown_aria_label", {
           scope: u
         }),
         "data-testid": "figma-design-search-scope-dropdown",
@@ -141,9 +141,9 @@ function ei({
 let es = e => {
   switch (e) {
     case Lov.ACTIVE_PAGE:
-      return _$$t("canvas_search.this_page");
+      return getI18nString("canvas_search.this_page");
     case Lov.ALL_PAGES:
-      return _$$t("canvas_search.all_pages");
+      return getI18nString("canvas_search.all_pages");
   }
 };
 function eh({
@@ -160,7 +160,7 @@ function eh({
   let c = useMemo(() => mapFilter(t, e => s[e] ? jsx(_$$v, {
     hasCloseButton: !0,
     onClose: () => d(e),
-    "aria-label": _$$t("canvas_search.filter.remove_filter", {
+    "aria-label": getI18nString("canvas_search.filter.remove_filter", {
       filter: p9(e)
     }),
     recordingKey: Pt(n, kM[e], "remove"),
@@ -241,7 +241,7 @@ function eg({
     children: [p9(e), jsx(_$$E, {
       className: _0,
       onClick: t,
-      "aria-label": _$$t("canvas_search.filter.remove"),
+      "aria-label": getI18nString("canvas_search.filter.remove"),
       "aria-describedby": p9(e),
       recordingKey: Pt(n, kM[e], "remove"),
       children: jsx(_$$f, {})
@@ -297,11 +297,11 @@ function eR(e, t, n, a) {
     switch (c ? Fo(l) && !l.shiftKey ? a(en.SINGLE) : l.shiftKey ? a(en.MULTI) : a(en.NONE) : a(en.NONE), l.keyCode) {
       case Uz.P:
       case Uz.UP_ARROW:
-        (l.keyCode !== Uz.P || Ay.mac && vN(l, xH.CONTROL)) && (e(OP.PREV, "keyboard"), l.stopPropagation(), l.preventDefault());
+        (l.keyCode !== Uz.P || BrowserInfo.mac && vN(l, xH.CONTROL)) && (e(OP.PREV, "keyboard"), l.stopPropagation(), l.preventDefault());
         break;
       case Uz.N:
       case Uz.DOWN_ARROW:
-        (l.keyCode !== Uz.N || Ay.mac && vN(l, xH.CONTROL)) && (e(OP.NEXT, "keyboard"), l.stopPropagation(), l.preventDefault());
+        (l.keyCode !== Uz.N || BrowserInfo.mac && vN(l, xH.CONTROL)) && (e(OP.NEXT, "keyboard"), l.stopPropagation(), l.preventDefault());
         break;
       case Uz.ENTER:
         if (YEY && Fo(l)) {
@@ -326,11 +326,11 @@ function eR(e, t, n, a) {
 function eD(e) {
   return useCallback(t => {
     if (t.keyCode === Uz.SHIFT) {
-      (!Ay.mac || t.metaKey) && (Ay.mac || t.ctrlKey) || e(en.NONE);
+      (!BrowserInfo.mac || t.metaKey) && (BrowserInfo.mac || t.ctrlKey) || e(en.NONE);
       return;
     }
-    let n = Ay.mac && "Meta" === t.key;
-    let a = !Ay.mac && t.keyCode === Uz.CTRL;
+    let n = BrowserInfo.mac && "Meta" === t.key;
+    let a = !BrowserInfo.mac && t.keyCode === Uz.CTRL;
     (n || a) && !t.shiftKey && e(en.NONE);
   }, [e]);
 }
@@ -373,10 +373,10 @@ export let $$eF0 = memo(function ({
   let L = useRef(null);
   let R = to();
   let j = _$$Z("canvas_search_navigate");
-  let w = md(Wy);
-  let P = md(ml);
+  let w = useAtomWithSubscription(Wy);
+  let P = useAtomWithSubscription(ml);
   let M = useContext(EA);
-  let z = md(el);
+  let z = useAtomWithSubscription(el);
   let [U, V] = useState(null);
   let [$, W] = useState(en.NONE);
   let [q, Z] = useState(!1);
@@ -477,11 +477,11 @@ export let $$eF0 = memo(function ({
               exit();
               er(e);
             },
-            "aria-label": _$$t("canvas_search.close"),
+            "aria-label": getI18nString("canvas_search.close"),
             recordingKey: "figma_design_search.close",
             htmlAttributes: {
               "data-tooltip-type": Ib.TEXT,
-              "data-tooltip": _$$t("canvas_search.close")
+              "data-tooltip": getI18nString("canvas_search.close")
             },
             children: jsx(_$$A, {})
           })]
@@ -551,11 +551,11 @@ function eM({
   let M = useRef(null);
   let B = useSelector(e => e.canvasSearch.scope);
   let U = YEY.hasDirtyPrimaryInstances();
-  let K = md(Fk);
-  let V = md(Ch);
-  let W = md(Wy);
-  let Y = md(ml);
-  let q = md(hw);
+  let K = useAtomWithSubscription(Fk);
+  let V = useAtomWithSubscription(Ch);
+  let W = useAtomWithSubscription(Wy);
+  let Y = useAtomWithSubscription(ml);
+  let q = useAtomWithSubscription(hw);
   let Z = useContext(EA);
   let J = !m;
   let Q = null == n;
@@ -862,12 +862,12 @@ function eM({
           onClick: t => {
             e(OP.PREV, "button");
           },
-          "aria-label": _$$t("canvas_search.previous"),
+          "aria-label": getI18nString("canvas_search.previous"),
           recordingKey: "figma_design_search.previous",
           disabled: K.total <= 1,
           htmlAttributes: {
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t("canvas_search.previous"),
+            "data-tooltip": getI18nString("canvas_search.previous"),
             "data-tooltip-shortcut-key": "canvas-search-prev"
           },
           children: jsx(_$$l, {})
@@ -875,12 +875,12 @@ function eM({
           onClick: t => {
             e(OP.NEXT, "button");
           },
-          "aria-label": _$$t("canvas_search.next"),
+          "aria-label": getI18nString("canvas_search.next"),
           recordingKey: "figma_design_search.next",
           disabled: K.total <= 1,
           htmlAttributes: {
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t("canvas_search.next"),
+            "data-tooltip": getI18nString("canvas_search.next"),
             "data-tooltip-shortcut-key": "canvas-search-next"
           },
           children: jsx(_$$k, {})
@@ -954,10 +954,10 @@ function eM({
         onClick: () => {
           D(V2(Lov.ALL_PAGES));
         },
-        children: tx("canvas_search.results_other_pages")
+        children: renderI18nText("canvas_search.results_other_pages")
       }), f && B === Lov.ALL_PAGES && jsx("div", {
         className: du,
-        children: tx("canvas_search.results_unavailable_offline")
+        children: renderI18nText("canvas_search.results_unavailable_offline")
       })]
     })]
   });
@@ -972,7 +972,7 @@ function eB({
   let s = to();
   let o = useSelector(e => e.mirror.appModel.pagesList);
   let d = "";
-  d = 0 === e ? lH(o) || !n ? l ? _$$t("canvas_search.no_results_in_this_deck") : i ? _$$t("canvas_search.no_results_on_site") : s ? _$$t("canvas_search.no_results_in_buzz_file") : _$$t("canvas_search.no_results_on_page") : t ? _$$t("canvas_search.no_results") : _$$t("canvas_search.no_results_in_file") : _$$t("canvas_search.results_count", {
+  d = 0 === e ? lH(o) || !n ? l ? getI18nString("canvas_search.no_results_in_this_deck") : i ? getI18nString("canvas_search.no_results_on_site") : s ? getI18nString("canvas_search.no_results_in_buzz_file") : getI18nString("canvas_search.no_results_on_page") : t ? getI18nString("canvas_search.no_results") : getI18nString("canvas_search.no_results_in_file") : getI18nString("canvas_search.results_count", {
     total: e
   });
   let c = (!l && !i && !s || getFeatureFlags().interop_pages) && (e > 0 || t || lH(o) || !n);
@@ -1000,7 +1000,7 @@ function ez({
   numResults: l
 }) {
   let r = eY().get(e);
-  let i = e === Xy ? _$$t("fullscreen.canvas_search.pages") : r.name;
+  let i = e === Xy ? getI18nString("fullscreen.canvas_search.pages") : r.name;
   return jsxs(GG, {
     className: kQ,
     onClick: () => n(!t),
@@ -1075,8 +1075,8 @@ function eG({
     onClick: t => {
       R ? D(_$$F.enqueue({
         type: "offline-page-switch",
-        message: _$$t("fullscreen.pages_panel.unavailable_offline")
-      })) : (l.current?.focus(), p || !i || (Ay.mac ? t.metaKey : t.ctrlKey) || e.textMatch.matchType === Ifi.PAGE_MATCH ? c(t) : m || YEY.setOverlayVisible(!0));
+        message: getI18nString("fullscreen.pages_panel.unavailable_offline")
+      })) : (l.current?.focus(), p || !i || (BrowserInfo.mac ? t.metaKey : t.ctrlKey) || e.textMatch.matchType === Ifi.PAGE_MATCH ? c(t) : m || YEY.setOverlayVisible(!0));
       t.preventDefault();
       t.stopPropagation();
     },
@@ -1115,7 +1115,7 @@ function eG({
     }), R && jsx("div", {
       className: QF,
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": _$$t("fullscreen.pages_panel.unavailable_offline"),
+      "data-tooltip": getI18nString("fullscreen.pages_panel.unavailable_offline"),
       "data-onboarding-key": "page-unavailable-offline",
       children: jsx(_$$B, {
         className: VQ,
@@ -1217,14 +1217,14 @@ function eH({
   return jsxs(Fragment, {
     children: [r ? "\u2026" : "", o, t ? jsxs(Fragment, {
       children: [jsx(_$$E2, {
-        children: tx("canvas_search.original_replace_value")
+        children: renderI18nText("canvas_search.original_replace_value")
       }), jsx("span", {
         className: of,
         children: jsx("s", {
           children: d
         })
       }), jsx(_$$E2, {
-        children: tx("canvas_search.updated_replace_value")
+        children: renderI18nText("canvas_search.updated_replace_value")
       }), jsx("b", {
         children: t
       })]

@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { rcl, glU } from "../figma_app/763686";
-import { md, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, Xr } from "../figma_app/27355";
 import { buildUploadUrl } from "../figma_app/169182";
 import { SK, ez } from "../905/125333";
 import { Jc, Qd } from "../figma_app/27927";
@@ -109,7 +109,7 @@ let $$G5 = ["SQUARE", "ELLIPSE", "DIAMOND", "TRIANGLE_UP", "TRIANGLE_DOWN", "ROU
 let $$K1 = ["SQUARE", "ELLIPSE", "DIAMOND", "TRIANGLE_UP", "TRIANGLE_DOWN", "ROUNDED_RECTANGLE", "PARALLELOGRAM_RIGHT", "PARALLELOGRAM_LEFT"];
 let $$W0 = [...$$G5, "PREDEFINED_PROCESS", "DOCUMENT_SINGLE", "DOCUMENT_MULTIPLE", "MANUAL_INPUT", "HEXAGON", "PARALLELOGRAM_RIGHT", "PARALLELOGRAM_LEFT", "ENG_DATABASE", "ENG_QUEUE", "INTERNAL_STORAGE", "TRAPEZOID", "SUMMING_JUNCTION", "OR", "SHIELD", "ENG_FOLDER", "ENG_FILE", "PENTAGON", "OCTAGON", "PLUS", "ARROW_LEFT", "ARROW_RIGHT", "STAR", "SPEECH_BUBBLE"];
 export function $$z2(e) {
-  let t = md(SK);
+  let t = useAtomWithSubscription(SK);
   let i = Xr(ez);
   let {
     shapeWithTextType

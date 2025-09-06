@@ -10,7 +10,7 @@ import { B } from "../905/950875";
 import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
 import { hC } from "../figma_app/901889";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { z } from "../6268/891724";
 import { OG, kt, FS } from "../1250/340571";
 import { iE } from "../1200/67174";
@@ -126,7 +126,7 @@ export function $$A1({
     className: gn,
     children: [jsx(J, {
       className: DD,
-      children: _$$t("dev_handoff.component_browser.title")
+      children: getI18nString("dev_handoff.component_browser.title")
     }), jsx(z, {
       componentCounts: e,
       dropdownFilter: n,
@@ -140,7 +140,7 @@ export function $$B0({
   return jsx("div", {
     className: gn,
     children: jsx(K, {
-      "aria-label": _$$t("dev_handoff.component_browser.close_component_browser"),
+      "aria-label": getI18nString("dev_handoff.component_browser.close_component_browser"),
       onClick: () => e(null),
       children: jsx(t, {})
     })
@@ -162,7 +162,7 @@ function E({
     children: [jsxs("div", {
       className: KB,
       children: [jsx(_$$N, {}), jsx("span", {
-        children: _$$t("dev_handoff.component_browser.possible_matches", {
+        children: getI18nString("dev_handoff.component_browser.possible_matches", {
           count: n.length
         })
       })]
@@ -181,18 +181,18 @@ function E({
           });
           ("suggestionsAvailable" === i || "notConnected" === i) && r("connected");
         },
-        children: _$$t("dev_handoff.component_browser.confirm_all_matches")
+        children: getI18nString("dev_handoff.component_browser.confirm_all_matches")
       })
     })]
   }) : "github" === _ ? jsxs(wi, {
     children: [jsxs("div", {
       className: I7,
-      children: [jsx(B, {}), _$$t("dev_handoff.component_browser.github_footer_cta")]
+      children: [jsx(B, {}), getI18nString("dev_handoff.component_browser.github_footer_cta")]
     }), jsx(jk, {
       children: jsx($n, {
         variant: "primary",
         onClick: () => g(),
-        children: _$$t("dev_handoff.component_browser.settings.connect_github")
+        children: getI18nString("dev_handoff.component_browser.settings.connect_github")
       })
     })]
   }) : null;

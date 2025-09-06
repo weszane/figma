@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { zB } from "../figma_app/482728";
 export function $$l0({
   exportControlsSetting: e
@@ -12,11 +12,11 @@ export function $$l0({
       children: function (e) {
         switch (e) {
           case zB.BANNED:
-            return t("org_settings.workspace_controls.banned");
+            return getI18nString("org_settings.workspace_controls.banned");
           case zB.MEMBERS_ONLY:
-            return t("org_settings.workspace_controls.members_only");
+            return getI18nString("org_settings.workspace_controls.members_only");
           default:
-            return t("org_settings.workspace_controls.allowed");
+            return getI18nString("org_settings.workspace_controls.allowed");
         }
       }(e)
     })

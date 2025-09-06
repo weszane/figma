@@ -5,7 +5,7 @@ import { CortexErrorV2, ClientContentLengthLimitExceededError, ProviderContentLe
 import { getFeatureFlags } from "../905/601108";
 import { j } from "../figma_app/602140";
 import { Ay } from "../905/612521";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { D } from "../905/347702";
 var $$_1 = (e => (e.SUMMARIZE = "sticky-summarization-error", e.CLUSTER = "sticky-cluster-error", e.GENERATE = "generate-error", e))($$_1 || {});
@@ -22,13 +22,13 @@ export function $$g3() {
     if (n) switch (n.type) {
       case "reload":
         i = {
-          text: _$$t("whiteboard.ai.reload"),
+          text: getI18nString("whiteboard.ai.reload"),
           action: () => Ay.reload("Resolving an error encountered in FigJam AI")
         };
         break;
       case "trace":
         getFeatureFlags().cortex_execution_tracing && (i = {
-          text: _$$t("whiteboard.ai_modal.share_trace"),
+          text: getI18nString("whiteboard.ai_modal.share_trace"),
           action() {
             j(JSON.stringify(n.trace, null, 2), "trace.json");
           }
@@ -45,38 +45,38 @@ export function $$g3() {
 export let $$f0 = D((e, t) => {
   let r = {
     "sticky-summarization-error": {
-      content_length_limit_exceeded: _$$t("whiteboard.ai_summary.content_length_limit_exceeded_error"),
-      figjam_summarize_out_of_date: _$$t("whiteboard.ai_summary.out_of_date_error"),
-      rate_limit_exceeded: _$$t("whiteboard.ai_summary.rate_limit_exceeded_error"),
-      ai_opt_out_error: _$$t("whiteboard.ai.ai_opt_out_error"),
-      generic: _$$t("whiteboard.ai_summary.generic_error"),
-      service_issue: _$$t("whiteboard.ai.service_issue_error"),
-      unsafe_or_harmful_content: _$$t("whiteboard.ai.inappropriate_input_error"),
-      offline: _$$t("whiteboard.ai.offline_error"),
-      unauthorized: _$$t("whiteboard.ai_summary.generic_error"),
-      not_implemented: _$$t("ai.error.not_implemented")
+      content_length_limit_exceeded: getI18nString("whiteboard.ai_summary.content_length_limit_exceeded_error"),
+      figjam_summarize_out_of_date: getI18nString("whiteboard.ai_summary.out_of_date_error"),
+      rate_limit_exceeded: getI18nString("whiteboard.ai_summary.rate_limit_exceeded_error"),
+      ai_opt_out_error: getI18nString("whiteboard.ai.ai_opt_out_error"),
+      generic: getI18nString("whiteboard.ai_summary.generic_error"),
+      service_issue: getI18nString("whiteboard.ai.service_issue_error"),
+      unsafe_or_harmful_content: getI18nString("whiteboard.ai.inappropriate_input_error"),
+      offline: getI18nString("whiteboard.ai.offline_error"),
+      unauthorized: getI18nString("whiteboard.ai_summary.generic_error"),
+      not_implemented: getI18nString("ai.error.not_implemented")
     },
     "sticky-cluster-error": {
-      content_length_limit_exceeded: _$$t("whiteboard.ai_cluster.content_length_limit_exceeded_error"),
-      rate_limit_exceeded: _$$t("whiteboard.ai_cluster.rate_limit_exceeded_error"),
-      ai_opt_out_error: _$$t("whiteboard.ai.ai_opt_out_error"),
-      generic: _$$t("whiteboard.ai_cluster.generic_error"),
-      service_issue: _$$t("whiteboard.ai.service_issue_error"),
-      unsafe_or_harmful_content: _$$t("whiteboard.ai.inappropriate_input_error"),
-      offline: _$$t("whiteboard.ai.offline_error"),
-      unauthorized: _$$t("whiteboard.ai_cluster.generic_error"),
-      not_implemented: _$$t("ai.error.not_implemented")
+      content_length_limit_exceeded: getI18nString("whiteboard.ai_cluster.content_length_limit_exceeded_error"),
+      rate_limit_exceeded: getI18nString("whiteboard.ai_cluster.rate_limit_exceeded_error"),
+      ai_opt_out_error: getI18nString("whiteboard.ai.ai_opt_out_error"),
+      generic: getI18nString("whiteboard.ai_cluster.generic_error"),
+      service_issue: getI18nString("whiteboard.ai.service_issue_error"),
+      unsafe_or_harmful_content: getI18nString("whiteboard.ai.inappropriate_input_error"),
+      offline: getI18nString("whiteboard.ai.offline_error"),
+      unauthorized: getI18nString("whiteboard.ai_cluster.generic_error"),
+      not_implemented: getI18nString("ai.error.not_implemented")
     },
     "generate-error": {
-      content_length_limit_exceeded: _$$t("whiteboard.ai_generate.content_length_limit_exceeded_error"),
-      rate_limit_exceeded: _$$t("whiteboard.ai_generate.rate_limit_error"),
-      ai_opt_out_error: _$$t("whiteboard.ai.ai_opt_out_error"),
-      generic: _$$t("whiteboard.ai_generate.unknown_error"),
-      service_issue: _$$t("whiteboard.ai.service_issue_error"),
-      unsafe_or_harmful_content: _$$t("whiteboard.ai.inappropriate_input_error"),
-      offline: _$$t("whiteboard.ai.offline_error"),
-      unauthorized: _$$t("whiteboard.ai_generate.unknown_error"),
-      not_implemented: _$$t("ai.error.not_implemented")
+      content_length_limit_exceeded: getI18nString("whiteboard.ai_generate.content_length_limit_exceeded_error"),
+      rate_limit_exceeded: getI18nString("whiteboard.ai_generate.rate_limit_error"),
+      ai_opt_out_error: getI18nString("whiteboard.ai.ai_opt_out_error"),
+      generic: getI18nString("whiteboard.ai_generate.unknown_error"),
+      service_issue: getI18nString("whiteboard.ai.service_issue_error"),
+      unsafe_or_harmful_content: getI18nString("whiteboard.ai.inappropriate_input_error"),
+      offline: getI18nString("whiteboard.ai.offline_error"),
+      unauthorized: getI18nString("whiteboard.ai_generate.unknown_error"),
+      not_implemented: getI18nString("ai.error.not_implemented")
     }
   };
   let n = "generic";

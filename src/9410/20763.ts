@@ -5,15 +5,15 @@ import { $n } from "../905/521428";
 import { o as _$$o } from "../905/89370";
 import { YEY, rpt, Lov } from "../figma_app/763686";
 import { nc } from "../905/189185";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import u from "classnames";
-import { sn } from "../905/542194";
+import { globalPerfTimer } from "../905/542194";
 import { am } from "../figma_app/901889";
 import { Uz, Fo } from "../905/63728";
 import { Pt } from "../figma_app/806412";
 import { Fk } from "../905/125333";
 import { b as _$$b } from "../figma_app/556971";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { lg } from "../figma_app/976749";
 import { jr, W0 } from "../figma_app/896988";
@@ -37,7 +37,7 @@ export function $$I0({
   let L = useSelector(e => e.canvasSearch.scope);
   let {
     total
-  } = md(Fk);
+  } = useAtomWithSubscription(Fk);
   let D = "whiteboard" === lg();
   let [M, P] = useState(!1);
   let F = _$$b();
@@ -77,7 +77,7 @@ export function $$I0({
     });
   });
   let H = nc.user("canvas-search-replace-all", () => {
-    sn.start("canvas_search_replace_all");
+    globalPerfTimer.start("canvas_search_replace_all");
     let {
       numReplaced,
       timeMs
@@ -86,7 +86,7 @@ export function $$I0({
     }, rpt.ALL);
     numReplaced > 0 && (P(!0), N(_$$F.enqueue({
       type: "canvas-search-replace-all",
-      message: _$$t(D ? "canvas_search.replace_all_message_figjam" : L === Lov.ACTIVE_PAGE ? "canvas_search.replace_all_message" : "canvas_search.replace_all_message_all_pages", {
+      message: getI18nString(D ? "canvas_search.replace_all_message_figjam" : L === Lov.ACTIVE_PAGE ? "canvas_search.replace_all_message" : "canvas_search.replace_all_message_all_pages", {
         count: numReplaced
       })
     })));
@@ -96,7 +96,7 @@ export function $$I0({
       numReplaced,
       replacementIncludesOriginal: t.toLocaleLowerCase().includes(e.toLocaleLowerCase())
     });
-    sn.tryStop("canvas_search_replace_all");
+    globalPerfTimer.tryStop("canvas_search_replace_all");
   });
   let z = jsxs(Fragment, {
     children: [!D && jsx("div", {
@@ -106,7 +106,7 @@ export function $$I0({
       children: jsx(_$$o, {})
     }), jsx(_$$H, {
       value: t,
-      placeholder: _$$t("canvas_search.replace_placeholder"),
+      placeholder: getI18nString("canvas_search.replace_placeholder"),
       recordingKey: Pt(I, "replace_input"),
       onChange: i,
       onFocus: e => {
@@ -131,18 +131,18 @@ export function $$I0({
         variant: "secondary",
         disabled: G,
         htmlAttributes: {
-          "data-tooltip": _$$t("canvas_search.replace_one"),
+          "data-tooltip": getI18nString("canvas_search.replace_one"),
           "data-tooltip-type": Ib.TEXT
         },
         onClick: () => K("button"),
         recordingKey: Pt(I, "replace_one"),
-        children: tx("canvas_search.replace_one")
+        children: renderI18nText("canvas_search.replace_one")
       }), jsx($n, {
         disabled: G,
         variant: "secondary",
         onClick: H,
         recordingKey: Pt(I, "replace_all"),
-        children: tx("canvas_search.replace_all")
+        children: renderI18nText("canvas_search.replace_all")
       })]
     })]
   });

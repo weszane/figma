@@ -1,4 +1,4 @@
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { EA, cQ, Zu } from "../905/18800";
 let a = {
   product_locale: "functional"
@@ -6,11 +6,11 @@ let a = {
 export function $$s0(e) {
   switch (a[e]) {
     case "analytics":
-      return zl.get(EA);
+      return atomStoreManager.get(EA);
     case "marketing":
-      return zl.get(cQ);
+      return atomStoreManager.get(cQ);
     case "functional":
-      return zl.get(Zu);
+      return atomStoreManager.get(Zu);
     case "essential":
       return !0;
   }

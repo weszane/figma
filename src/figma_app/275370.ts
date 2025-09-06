@@ -1,4 +1,4 @@
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { g } from "../905/880308";
 import { vh } from "../figma_app/181241";
@@ -11,8 +11,8 @@ export async function $$c0({
   components_list: r,
   key: i
 }) {
-  let a = zl.get(ze) ?? void 0;
-  let s = zl.get(_S) ?? void 0;
+  let a = atomStoreManager.get(ze) ?? void 0;
+  let s = atomStoreManager.get(_S) ?? void 0;
   if (!a || !s) throw Error("Missing file_key or library_key");
   if (!t && !r) throw Error("Need atleast a blob or component_list to be uploaded");
   await XHR.post("/api/make/create_ds_import", {
@@ -25,8 +25,8 @@ export async function $$c0({
   });
 }
 export async function $$u1() {
-  let e = zl.get(ze) ?? void 0;
-  let t = zl.get(_S) ?? void 0;
+  let e = atomStoreManager.get(ze) ?? void 0;
+  let t = atomStoreManager.get(_S) ?? void 0;
   if (!e || !t) throw Error("Missing file_key or library_key");
   return (await XHR.post("/api/recommend/components", {
     subscribed_library_keys: [t],

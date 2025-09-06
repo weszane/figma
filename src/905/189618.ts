@@ -3,7 +3,7 @@ import { useState, useRef, useCallback, useLayoutEffect, useEffect } from "react
 import { shallowEqual } from "../vendor/514228";
 import s from "classnames";
 import { wY } from "../figma_app/708845";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 var o = s;
 let c = {
   trackWidth: 0,
@@ -67,7 +67,7 @@ let g = ({
   let A = useCallback(t => {
     let i = t.clientX;
     let n = e.current;
-    n && (Ay.safari ? null === p && g(requestAnimationFrame(() => {
+    n && (BrowserInfo.safari ? null === p && g(requestAnimationFrame(() => {
       h(i, n, a, _);
       g(null);
     })) : h(i, n, a, _), _());

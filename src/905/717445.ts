@@ -1,8 +1,20 @@
 import type { FeatureFlags } from '../../types/global'
 import { getFeatureFlags } from '../905/601108'
 
-export function $$r0(): FeatureFlags {
-  let e = getFeatureFlags()
-  return e.ce_il_lina ? {} as FeatureFlags : e
+/**
+ * Returns the current feature flags, or an empty FeatureFlags object if the 'ce_il_lina' flag is enabled.
+ * Original function name: $$r0
+ */
+export function getFilteredFeatureFlags(): FeatureFlags {
+  const flags = getFeatureFlags();
+  if (flags.ce_il_lina) {
+    return {} as FeatureFlags;
+  }
+  return flags;
 }
-export const m = $$r0
+
+/**
+ * Alias for getFilteredFeatureFlags.
+ * Original export name: m
+ */
+export const m = getFilteredFeatureFlags;

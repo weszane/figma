@@ -1,6 +1,23 @@
-var $$n0 = (e => (e.ADMIN = "admin", e))($$n0 || {});
-var $$r1 = (e => (e.MEMBERS = "members", e))($$r1 || {});
-export let $$a2 = ["members"];
-export const GN = $$n0;
-export const RM = $$r1;
-export const Uu = $$a2;
+/**
+ * UserRole enum (original: $$n0)
+ */
+export enum UserRole {
+  ADMIN = "admin"
+}
+
+/**
+ * GroupType enum (original: $$r1)
+ */
+export enum GroupType {
+  MEMBERS = "members"
+}
+
+/**
+ * DefaultGroups array (original: $$a2)
+ */
+export const DefaultGroups: GroupType[] = [GroupType.MEMBERS];
+
+// Refactored exports to match new names
+export const GN = UserRole;
+export const RM = GroupType;
+export const Uu = DefaultGroups;

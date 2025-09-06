@@ -6,7 +6,7 @@ import { xf } from "../figma_app/416935";
 import { Rs } from "../figma_app/288654";
 import { CY } from "../figma_app/637027";
 import { T as _$$T } from "../figma_app/257703";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { cL } from "../905/748726";
 import { to, Lo } from "../905/156213";
 import { MB } from "../figma_app/996356";
@@ -56,12 +56,12 @@ export function $$U3({
     className: o.groupNameClassName,
     children: e
   }) : e => e, [o?.groupNameClassName]);
-  let y = useMemo(() => R && A ? tx("org_invite.email_input_description.billing_group_and_workspace_disclaimer", {
+  let y = useMemo(() => R && A ? renderI18nText("org_invite.email_input_description.billing_group_and_workspace_disclaimer", {
     billingGroupName: M(R.name),
     workspaceName: M(A.name)
-  }) : R ? tx("org_invite.email_input_description.billing_group_disclaimer", {
+  }) : R ? renderI18nText("org_invite.email_input_description.billing_group_disclaimer", {
     billingGroupName: M(R.name)
-  }) : A ? tx("org_invite.email_input_description.workspace_disclaimer", {
+  }) : A ? renderI18nText("org_invite.email_input_description.workspace_disclaimer", {
     workspaceName: M(A.name)
   }) : null, [R, A, M]);
   let D = n => {
@@ -77,11 +77,11 @@ export function $$U3({
   let G = !E.invite_whitelist_member_allowlist_enabled || "orgAdminSettings" === l;
   let P = S(E, O.view);
   let F = useMemo(() => {
-    if (P) return tx("org_invite.email_input_description.guest_invite_allow_list", {
+    if (P) return renderI18nText("org_invite.email_input_description.guest_invite_allow_list", {
       orgName: E.name
     });
     let e = T.map(e => `@${e.domain}`);
-    if (I) return tx("org_invite.email_input_description.multiple_domains.expanded", {
+    if (I) return renderI18nText("org_invite.email_input_description.multiple_domains.expanded", {
       orgName: E.name,
       domainList: jsx(_$$T, {
         children: e.map(e => jsx("span", {
@@ -91,16 +91,16 @@ export function $$U3({
     });
     let i = e[0];
     let t = e.length - 1;
-    return 0 === t ? tx("org_invite.email_input_description.single_domain", {
+    return 0 === t ? renderI18nText("org_invite.email_input_description.single_domain", {
       domain: i,
       orgName: E.name
-    }) : tx("org_invite.email_input_description.multiple_domains.with_expand_link", {
+    }) : renderI18nText("org_invite.email_input_description.multiple_domains.with_expand_link", {
       orgName: E.name,
       domain: i,
       expandLink: jsx(CY, {
         onClick: () => U(!0),
         trusted: !0,
-        children: tx("org_invite.email_input_description.multiple_domains.expand_link", {
+        children: renderI18nText("org_invite.email_input_description.multiple_domains.expand_link", {
           remainingDomainCount: t
         })
       })
@@ -142,9 +142,9 @@ export function $$U3({
   };
 }
 function L(e, i) {
-  return i ? _$$t("org_invite.invite_users", {
+  return i ? getI18nString("org_invite.invite_users", {
     orgName: e.name
-  }) : _$$t("org_invite.invite_members", {
+  }) : getI18nString("org_invite.invite_members", {
     orgName: e.name
   });
 }
@@ -176,7 +176,7 @@ export function $$M2({
       TokenComponent: $$I0,
       autocomplete: _,
       buttonClassName: o,
-      buttonText: _$$t("org_invite.invite_button"),
+      buttonText: getI18nString("org_invite.invite_button"),
       dispatch: t,
       dropdownShown: null,
       inviteLevel: FPlanFeatureType.STARTER,
@@ -219,8 +219,8 @@ let $$y1 = Ju(function ({
 }, "ORG_INVITE_MODAL");
 let C = Ju(function (e) {
   return jsx(yX, {
-    confirmationTitle: _$$t("org_invite.pending_guest_confirmation.title"),
-    confirmText: _$$t("org_invite.pending_guest_confirmation.button"),
+    confirmationTitle: getI18nString("org_invite.pending_guest_confirmation.title"),
+    confirmText: getI18nString("org_invite.pending_guest_confirmation.button"),
     disableClickOutsideToHide: !0,
     onConfirm: e.onConfirm,
     popStack: !0,
@@ -228,7 +228,7 @@ let C = Ju(function (e) {
     children: jsx("div", {
       className: jE,
       children: jsxs(Fragment, {
-        children: [tx("org_invite.pending_guest_confirmation.description", {
+        children: [renderI18nText("org_invite.pending_guest_confirmation.description", {
           numEmails: e.emails.length,
           emailList: jsx(_$$T, {
             className: "org_invite_modal--orgGuestEmails--JpKT2",
@@ -239,7 +239,7 @@ let C = Ju(function (e) {
           target: "_blank",
           rel: "noopener",
           href: "https://help.figma.com/hc/articles/4420557314967-Members-versus-guests",
-          children: [" ", tx("org_invite.pending_guest_confirmation.learn_more_link")]
+          children: [" ", renderI18nText("org_invite.pending_guest_confirmation.learn_more_link")]
         })]
       })
     })

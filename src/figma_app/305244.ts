@@ -2,10 +2,10 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { cgc, h3O } from "../figma_app/763686";
 import { ReduxSceneGraph, getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
-import { $D } from "../905/11";
-import { Lo, xi } from "../905/714362";
+import { reportError } from "../905/11";
+import { logInfo, logWarning } from "../905/714362";
 import { ds } from "../figma_app/314264";
 import { II } from "../905/687477";
 import { xK } from "../905/125218";
@@ -77,7 +77,7 @@ export let $$A0 = {
       } of (h = t, g = 0, r)) xK.logWsMsg(key, nBytes, ts);
       f();
       let e = p.length;
-      for (let [t, r] of p.entries()) if (Lo("multiplayer", "Replaying websocket message", {
+      for (let [t, r] of p.entries()) if (logInfo("multiplayer", "Replaying websocket message", {
         i: t,
         total: e,
         len: r.byteLength
@@ -93,17 +93,17 @@ export let $$A0 = {
         isReconnect: !!ReduxSceneGraph && -1 !== getSingletonSceneGraph().scene,
         isIncremental: h3O?.isIncrementalSession()
       }), null !== t) {
-        if (!b(t.url, e) && (xi("multiplayer", "Preconnect URL doesn't match URL", {
+        if (!b(t.url, e) && (logWarning("multiplayer", "Preconnect URL doesn't match URL", {
           preconnectUrl: t.url,
           url: e
-        }), getFeatureFlags().report_preconnect_mismatch && $D(_$$e.SCENEGRAPH_AND_SYNC, Error("Multiplayer preconnect URL mismatch"))), t.readyState !== WebSocket.CONNECTING && t.readyState !== WebSocket.OPEN) {
+        }), getFeatureFlags().report_preconnect_mismatch && reportError(_$$e.SCENEGRAPH_AND_SYNC, Error("Multiplayer preconnect URL mismatch"))), t.readyState !== WebSocket.CONNECTING && t.readyState !== WebSocket.OPEN) {
           let e = null;
           t.readyState === WebSocket.CLOSED ? e = "closed" : t.readyState === WebSocket.CLOSING && (e = "closing");
-          xi("multiplayer", "readyState is bad, skipping preconnect optimization", {
+          logWarning("multiplayer", "readyState is bad, skipping preconnect optimization", {
             readyState: e
           });
         }
-        sx("preconnect_url_mismatch", {
+        trackEventAnalytics("preconnect_url_mismatch", {
           preconnectUrl: t.url,
           url: e,
           readyState: t.readyState
@@ -128,7 +128,7 @@ export let $$A0 = {
           shortened_url: !0
         };
         ds("multiplayer_connect_truncate_ws_url", E?.openFile?.key, E, n);
-        Lo("multiplayer", "Truncating websocket url to force full loading", n);
+        logInfo("multiplayer", "Truncating websocket url to force full loading", n);
       }
       (h = new WebSocket(e)).binaryType = "arraybuffer";
       h.onopen = () => {
@@ -138,7 +138,7 @@ export let $$A0 = {
         ds("multiplayer_connect_ws_open", E?.openFile?.key, E, {
           connectAttemptId: m
         });
-        Lo("multiplayer", "Websocket opened");
+        logInfo("multiplayer", "Websocket opened");
       };
     }
     h.onmessage = e => {
@@ -157,7 +157,7 @@ export let $$A0 = {
         consecutiveInitFailureCount: g,
         online: navigator.onLine
       });
-      Lo("multiplayer", "Websocket error", {
+      logInfo("multiplayer", "Websocket error", {
         online: navigator.onLine,
         consecutiveInitFailureCount: g
       });

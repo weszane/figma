@@ -2,12 +2,12 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { Pw } from "../905/521428";
 import n from "classnames";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { UG } from "../905/414007";
 import { buildUploadUrl } from "../figma_app/169182";
-import { aR } from "../figma_app/778880";
+import { isIOSUA } from "../figma_app/778880";
 import { pW } from "../905/160095";
-import { t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
 var o = n;
@@ -19,7 +19,7 @@ export function $$v0(e) {
   let {
     isCompact
   } = e;
-  let r = aR ? "https://apps.apple.com/us/app/figma-mirror/id1152747299#" : "https://play.google.com/store/apps/details?id=com.figma.mirror";
+  let r = isIOSUA ? "https://apps.apple.com/us/app/figma-mirror/id1152747299#" : "https://play.google.com/store/apps/details?id=com.figma.mirror";
   let n = UG();
   let g = !isCompact && !!e.renderBlockingPrompt;
   let [v, j] = useState(!g);
@@ -28,7 +28,7 @@ export function $$v0(e) {
     null === n.get(b) && (j(!1), E(!1));
   }, [n, g]);
   let I = () => {
-    g || (j(!0), sx("mobile_web_mobile_app_download_prompt_dismissed", {
+    g || (j(!0), trackEventAnalytics("mobile_web_mobile_app_download_prompt_dismissed", {
       userId: e.userIdForTracking
     }), setTimeout(() => {
       E(!0);
@@ -71,14 +71,14 @@ export function $$v0(e) {
           children: [jsx("img", {
             className: x,
             src: buildUploadUrl("249f0f055b922ecef6bffc592a8420e7e6eddcea"),
-            alt: t("file_browser.mobile_prompt.app_image_alt")
+            alt: getI18nString("file_browser.mobile_prompt.app_image_alt")
           }), jsxs("div", {
             children: [jsx("h3", {
               className: h,
-              children: tx("file_browser.mobile_prompt.app_title")
+              children: renderI18nText("file_browser.mobile_prompt.app_title")
             }), jsx("p", {
               className: "mobile_download_prompt--mobilePromptOptionDescription--APlZp text--fontPos11--2LvXf text--_fontBase--QdLsd",
-              children: g ? tx("file_browser.mobile_prompt.app_description_new") : tx("file_browser.mobile_prompt.app_description")
+              children: g ? renderI18nText("file_browser.mobile_prompt.app_description_new") : renderI18nText("file_browser.mobile_prompt.app_description")
             })]
           }), jsx(pW, {
             size: "lg",
@@ -89,21 +89,21 @@ export function $$v0(e) {
             },
             width: "fill",
             href: r,
-            children: tx("file_browser.mobile_prompt.app_action")
+            children: renderI18nText("file_browser.mobile_prompt.app_action")
           }), !g && jsxs(Fragment, {
             children: [jsx("img", {
               className: x,
               src: buildUploadUrl("741698fed49afa5e8f3becdd906e66d32c8e7fae"),
-              alt: t("file_browser.mobile_prompt.browser_image_alt")
+              alt: getI18nString("file_browser.mobile_prompt.browser_image_alt")
             }), jsx("div", {
               children: jsx("h3", {
                 className: h,
-                children: tx("file_browser.mobile_prompt.browser_title")
+                children: renderI18nText("file_browser.mobile_prompt.browser_title")
               })
             }), jsx(Pw, {
               onClick: I,
               variant: "secondary",
-              children: tx("file_browser.mobile_prompt.browser_action")
+              children: renderI18nText("file_browser.mobile_prompt.browser_action")
             })]
           })]
         })]
@@ -116,15 +116,15 @@ function y(e) {
     children: [jsx("img", {
       className: "mobile_download_prompt--mobilePromptImage--U2Yqj",
       src: buildUploadUrl("5f1dc37f397dbddf711d3d950bee5dd46c07fc72"),
-      alt: t("file_browser.mobile_prompt.image_alt")
+      alt: getI18nString("file_browser.mobile_prompt.image_alt")
     }), jsxs("div", {
       className: "mobile_download_prompt--mobilePromptTitleContainer--o8VIK",
       children: [jsx("h2", {
         className: g,
-        children: e.renderBlockingPrompt ? tx("file_browser.mobile_prompt.modal_title_blocking") : tx("file_browser.mobile_prompt.modal_title")
+        children: e.renderBlockingPrompt ? renderI18nText("file_browser.mobile_prompt.modal_title_blocking") : renderI18nText("file_browser.mobile_prompt.modal_title")
       }), jsx("p", {
         className: "mobile_download_prompt--mobilePromptSubTitle--GFR67 text--fontPos13--xW8hS text--_fontBase--QdLsd",
-        children: e.renderBlockingPrompt ? tx("file_browser.mobile_prompt.modal_body_blocking") : tx("file_browser.mobile_prompt.modal_body")
+        children: e.renderBlockingPrompt ? renderI18nText("file_browser.mobile_prompt.modal_body_blocking") : renderI18nText("file_browser.mobile_prompt.modal_body")
       })]
     })]
   });
@@ -133,7 +133,7 @@ function w() {
   return jsx(Fragment, {
     children: jsx("h2", {
       className: g,
-      children: tx("file_browser.mobile_prompt.modal_title_compact")
+      children: renderI18nText("file_browser.mobile_prompt.modal_title_compact")
     })
   });
 }

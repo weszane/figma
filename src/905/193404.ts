@@ -4,14 +4,14 @@ import { sortByPropertyWithOptions, sortByProperty, sortByDateProperty } from ".
 import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { e as _$$e } from "../905/916195";
-import { fp, E3 } from "../figma_app/27355";
+import { useAtomValueAndSetter, createLocalStorageAtom } from "../figma_app/27355";
 import u from "classnames";
 import { w as _$$w } from "../905/835474";
 import { oW } from "../905/675859";
 import { h1 } from "../905/986103";
 import { o as _$$o } from "../905/605383";
 import { Ph } from "../905/160095";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { jN } from "../905/612685";
 import { LT } from "../figma_app/646357";
 import { FFileType } from "../figma_app/191312";
@@ -66,11 +66,11 @@ function F({
       sortPreferences,
       setSortPreferences
     } = function (e) {
-      let [t, i] = fp(X);
-      let [n, a] = fp(Q);
-      let [s, o] = fp(J);
-      let [l, d] = fp(ee);
-      let [u, p] = fp(et);
+      let [t, i] = useAtomValueAndSetter(X);
+      let [n, a] = useAtomValueAndSetter(Q);
+      let [s, o] = useAtomValueAndSetter(J);
+      let [l, d] = useAtomValueAndSetter(ee);
+      let [u, p] = useAtomValueAndSetter(et);
       let [m, h] = useMemo(() => {
         switch (e) {
           case _$$l.PRODUCT_COMPONENTS:
@@ -272,12 +272,12 @@ export function $$M2({
   let i = useMemo(() => {
     switch (e) {
       case _$$l.PRODUCT_COMPONENTS:
-        return t ? _$$t("design_systems.libraries_modal.all_variants") : _$$t("design_systems.libraries_modal.component_statistics");
+        return t ? getI18nString("design_systems.libraries_modal.all_variants") : getI18nString("design_systems.libraries_modal.component_statistics");
       case _$$l.STYLES:
-        return _$$t("design_systems.libraries_modal.style_statistics");
+        return getI18nString("design_systems.libraries_modal.style_statistics");
       case _$$l.VARIABLES:
       case _$$l.VARIABLE_MODES:
-        return _$$t("design_systems.libraries_modal.usage_statistics");
+        return getI18nString("design_systems.libraries_modal.usage_statistics");
       case _$$l.FILES:
         return null;
       default:
@@ -350,7 +350,7 @@ export function $$B0({
   let o = !s;
   let l = useMemo(() => {
     let e = [{
-      header: s ? _$$t("design_systems.libraries_modal.variant_name") : _$$t("design_systems.libraries_modal.component_name"),
+      header: s ? getI18nString("design_systems.libraries_modal.variant_name") : getI18nString("design_systems.libraries_modal.component_name"),
       sortBy: "alpha",
       headerClassName: C,
       valueClassName: C,
@@ -362,16 +362,16 @@ export function $$B0({
       })
     }];
     s || e.push({
-      header: _$$t("design_systems.libraries_modal.total_variants"),
+      header: getI18nString("design_systems.libraries_modal.total_variants"),
       sortBy: "num_states",
       headerClassName: R,
       valueClassName: N,
       valueRenderFn: ({
         stat: e
-      }) => e.type === PW.STATE_GROUP ? e.num_states : _$$t("design_systems.libraries_modal.n_a")
+      }) => e.type === PW.STATE_GROUP ? e.num_states : getI18nString("design_systems.libraries_modal.n_a")
     });
     e.push({
-      header: _$$t("design_systems.libraries_modal.total_instances"),
+      header: getI18nString("design_systems.libraries_modal.total_instances"),
       sortBy: "num_existing_instances",
       headerClassName: R,
       valueClassName: N,
@@ -380,7 +380,7 @@ export function $$B0({
       }) => e.num_existing_instances.toLocaleString()
     });
     e.push({
-      header: _$$t("design_systems.libraries_modal.inserts_last_duration", {
+      header: getI18nString("design_systems.libraries_modal.inserts_last_duration", {
         duration: LT(t)
       }),
       sortBy: "num_insertions",
@@ -391,7 +391,7 @@ export function $$B0({
       }) => e.num_insertions.toLocaleString()
     });
     e.push({
-      header: _$$t("design_systems.libraries_modal.detaches_last_duration", {
+      header: getI18nString("design_systems.libraries_modal.detaches_last_duration", {
         duration: LT(t)
       }),
       sortBy: "num_detachments",
@@ -409,7 +409,7 @@ export function $$B0({
     columns: l,
     defaultSortBy: "num_existing_instances",
     defaultSortIsDescending: !0,
-    emptyStateText: _$$t("design_systems.libraries_modal.dsa_empty_components"),
+    emptyStateText: getI18nString("design_systems.libraries_modal.dsa_empty_components"),
     getListKey: d,
     getStatKey: c,
     onRowClick: i,
@@ -425,13 +425,13 @@ export function $$V3({
   onScrollTo: a
 }) {
   let s = useMemo(() => [{
-    header: _$$t("design_systems.libraries_modal.style_name"),
+    header: getI18nString("design_systems.libraries_modal.style_name"),
     sortBy: "alpha",
     headerClassName: C,
     valueClassName: C,
     valueRenderFn: Y
   }, {
-    header: _$$t("design_systems.libraries_modal.total_instances"),
+    header: getI18nString("design_systems.libraries_modal.total_instances"),
     sortBy: "num_existing_instances",
     headerClassName: R,
     valueClassName: N,
@@ -439,7 +439,7 @@ export function $$V3({
       stat: e
     }) => e.num_existing_instances.toLocaleString()
   }, {
-    header: _$$t("design_systems.libraries_modal.inserts_last_duration", {
+    header: getI18nString("design_systems.libraries_modal.inserts_last_duration", {
       duration: LT(t)
     }),
     sortBy: "num_insertions",
@@ -449,7 +449,7 @@ export function $$V3({
       stat: e
     }) => e.num_insertions.toLocaleString()
   }, {
-    header: _$$t("design_systems.libraries_modal.detaches_last_duration", {
+    header: getI18nString("design_systems.libraries_modal.detaches_last_duration", {
       duration: LT(t)
     }),
     sortBy: "num_detachments",
@@ -470,7 +470,7 @@ export function $$V3({
     getStatKey: l,
     defaultSortBy: "num_existing_instances",
     defaultSortIsDescending: !0,
-    emptyStateText: _$$t("design_systems.libraries_modal.dsa_empty_styles")
+    emptyStateText: getI18nString("design_systems.libraries_modal.dsa_empty_styles")
   });
 }
 export function $$G5({
@@ -480,13 +480,13 @@ export function $$G5({
   onScrollTo: a
 }) {
   let s = useMemo(() => [{
-    header: _$$t("design_systems.libraries_modal.variable_name"),
+    header: getI18nString("design_systems.libraries_modal.variable_name"),
     sortBy: "alpha",
     headerClassName: C,
     valueClassName: C,
     valueRenderFn: q
   }, {
-    header: _$$t("design_systems.libraries_modal.collection"),
+    header: getI18nString("design_systems.libraries_modal.collection"),
     sortBy: "collection_name",
     headerClassName: R,
     valueClassName: N,
@@ -494,7 +494,7 @@ export function $$G5({
       stat: e
     }) => e.collectionName
   }, {
-    header: _$$t("design_systems.libraries_modal.total_instances"),
+    header: getI18nString("design_systems.libraries_modal.total_instances"),
     sortBy: "num_existing_instances",
     headerClassName: R,
     valueClassName: N,
@@ -502,7 +502,7 @@ export function $$G5({
       stat: e
     }) => e.num_existing_instances.toLocaleString()
   }, {
-    header: _$$t("design_systems.libraries_modal.inserts_last_duration", {
+    header: getI18nString("design_systems.libraries_modal.inserts_last_duration", {
       duration: LT(t)
     }),
     sortBy: "num_insertions",
@@ -512,7 +512,7 @@ export function $$G5({
       stat: e
     }) => e.num_insertions.toLocaleString()
   }, {
-    header: _$$t("design_systems.libraries_modal.detaches_last_duration", {
+    header: getI18nString("design_systems.libraries_modal.detaches_last_duration", {
       duration: LT(t)
     }),
     sortBy: "num_detachments",
@@ -533,7 +533,7 @@ export function $$G5({
     getStatKey: l,
     defaultSortBy: "num_existing_instances",
     defaultSortIsDescending: !0,
-    emptyStateText: _$$t("design_systems.libraries_modal.dsa_empty_variables")
+    emptyStateText: getI18nString("design_systems.libraries_modal.dsa_empty_variables")
   });
 }
 export function $$z4({
@@ -541,13 +541,13 @@ export function $$z4({
   onScrollTo: t
 }) {
   let i = useMemo(() => [{
-    header: _$$t("design_systems.libraries_modal.mode_name"),
+    header: getI18nString("design_systems.libraries_modal.mode_name"),
     sortBy: "alpha",
     headerClassName: C,
     valueClassName: C,
     valueRenderFn: $
   }, {
-    header: _$$t("design_systems.libraries_modal.collection"),
+    header: getI18nString("design_systems.libraries_modal.collection"),
     sortBy: "collection_name",
     headerClassName: R,
     valueClassName: N,
@@ -555,7 +555,7 @@ export function $$z4({
       stat: e
     }) => e.collectionName
   }, {
-    header: _$$t("design_systems.libraries_modal.total_instances"),
+    header: getI18nString("design_systems.libraries_modal.total_instances"),
     sortBy: "num_existing_instances",
     headerClassName: R,
     valueClassName: N,
@@ -580,7 +580,7 @@ export function $$H1({
   onScrollTo: t
 }) {
   let i = useMemo(() => [{
-    header: _$$t("design_systems.libraries_modal.file_name"),
+    header: getI18nString("design_systems.libraries_modal.file_name"),
     sortBy: "alpha",
     headerClassName: P,
     valueClassName: P,
@@ -603,7 +603,7 @@ export function $$H1({
       children: e.fileName
     })
   }, {
-    header: _$$t("design_systems.libraries_modal.team"),
+    header: getI18nString("design_systems.libraries_modal.team"),
     sortBy: "teamNames",
     headerClassName: O,
     valueClassName: O,
@@ -611,7 +611,7 @@ export function $$H1({
       stat: e
     }) => e.teamName
   }, {
-    header: _$$t("design_systems.libraries_modal.instances_all_time"),
+    header: getI18nString("design_systems.libraries_modal.instances_all_time"),
     sortBy: "instances",
     headerClassName: D,
     valueClassName: L,
@@ -619,7 +619,7 @@ export function $$H1({
       stat: e
     }) => e.numInstances.toLocaleString()
   }, {
-    header: _$$t("design_systems.libraries_modal.last_modified"),
+    header: getI18nString("design_systems.libraries_modal.last_modified"),
     sortBy: "lastModified",
     headerClassName: D,
     valueClassName: L,
@@ -732,11 +732,11 @@ let Z = {
   [_$$l.VARIABLE_MODES]: "subscriptionFileViewVariableModeStats:state",
   [_$$l.FILES]: "subscriptionFileViewFileStats:state"
 };
-let X = E3(Z[_$$l.PRODUCT_COMPONENTS], null);
-let Q = E3(Z[_$$l.STYLES], null);
-let J = E3(Z[_$$l.VARIABLES], null);
-let ee = E3(Z[_$$l.VARIABLE_MODES], null);
-let et = E3(Z[_$$l.FILES], null);
+let X = createLocalStorageAtom(Z[_$$l.PRODUCT_COMPONENTS], null);
+let Q = createLocalStorageAtom(Z[_$$l.STYLES], null);
+let J = createLocalStorageAtom(Z[_$$l.VARIABLES], null);
+let ee = createLocalStorageAtom(Z[_$$l.VARIABLE_MODES], null);
+let et = createLocalStorageAtom(Z[_$$l.FILES], null);
 export const Dd = $$B0;
 export const KZ = $$H1;
 export const Yu = $$M2;

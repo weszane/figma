@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback, useLayoutEffect, useMemo, useContext } from "react";
-import { eU } from "../figma_app/27355";
+import { atom } from "../figma_app/27355";
 import { F } from "../905/680873";
 import { ZC } from "../figma_app/39751";
 import { l as _$$l } from "../905/745972";
@@ -99,6 +99,6 @@ export function $$m1({
     return Math.max(1.5 * fr, Math.min(r, t - (e.current?.getBoundingClientRect().top ?? 175) - (1.5 * topLevelObjectRowHeight + (uF + ym))));
   }, [e, t, topLevelObjectRowHeight]);
 }
-Wh(() => eU(null));
+Wh(() => atom(null));
 export const k3 = $$h0;
 export const q0 = $$m1;

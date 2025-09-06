@@ -3,7 +3,7 @@ import { Fragment } from "react";
 import { $M } from "../figma_app/930338";
 import { Wi } from "../figma_app/162641";
 import { x } from "../905/211326";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { V } from "../905/697254";
 import { zi, iL } from "../905/824449";
 import { B } from "../905/714743";
@@ -66,7 +66,7 @@ function _({
     }), null != e.description && jsxs("div", {
       children: [jsx("div", {
         className: h,
-        children: tx("design_systems.libraries_modal.description")
+        children: renderI18nText("design_systems.libraries_modal.description")
       }), jsx("div", {
         className: "overview_stats_view--componentDescription--lR6ir text--fontPos14--OL9Hp text--_fontBase--QdLsd",
         children: e.description

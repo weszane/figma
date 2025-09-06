@@ -5,10 +5,10 @@ import { Z6A, OQN, r6o } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { f as _$$f } from "../905/24905";
 import { Yx } from "../figma_app/930338";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { XE } from "../figma_app/976749";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { rs } from "../figma_app/440994";
 import { IA, vS, nC } from "../905/748956";
 export let $$n0;
@@ -41,9 +41,9 @@ class T {
       buildString: ({
         targetNodeType: e,
         isStamp: t
-      }) => t ? _$$t("fullscreen.accessibility.stamp_attached_announcement", {
+      }) => t ? getI18nString("fullscreen.accessibility.stamp_attached_announcement", {
         hostType: this.getNodeTypeName(e)
-      }) : _$$t("fullscreen.accessibility.node_created_announcement", {
+      }) : getI18nString("fullscreen.accessibility.node_created_announcement", {
         node_type: this.getNodeTypeName(e)
       })
     });
@@ -57,7 +57,7 @@ class T {
       coalesce: b,
       buildString: ({
         targetNodeType: e
-      }) => _$$t("fullscreen.accessibility.node_deleted_announcement", {
+      }) => getI18nString("fullscreen.accessibility.node_deleted_announcement", {
         node_type: this.getNodeTypeName(e)
       })
     });
@@ -67,7 +67,7 @@ class T {
       changeType: "node_deleted_single",
       value: {},
       coalesce: b,
-      buildString: ({}) => _$$t("fullscreen.accessibility.multiple_node_deleted_announcement")
+      buildString: ({}) => getI18nString("fullscreen.accessibility.multiple_node_deleted_announcement")
     });
   }
   announceTextSelection(e) {
@@ -79,7 +79,7 @@ class T {
       coalesce: I,
       buildString: ({
         targetNodeType: e
-      }) => _$$t("fullscreen.accessibility.next_text_node_announcement", {
+      }) => getI18nString("fullscreen.accessibility.next_text_node_announcement", {
         nodeType: this.getNodeTypeName(e)
       })
     });
@@ -96,7 +96,7 @@ class T {
       }) => {
         let t = XE(this.store.getState().selectedView);
         if (e !== Z6A.STAMP) {
-          if (e === Z6A.NONE) return _$$t("fullscreen.accessibility.tool_unselected");
+          if (e === Z6A.NONE) return getI18nString("fullscreen.accessibility.tool_unselected");
           {
             let r = this.getNodeTypeName(e);
             return !function (e, t) {
@@ -110,23 +110,23 @@ class T {
                   return !1;
               }
               switch (t) {
-                case nT.Whiteboard:
+                case FEditorType.Whiteboard:
                   return getFeatureFlags().fpl_figjam_keyboard_controls;
-                case nT.Design:
+                case FEditorType.Design:
                   return getFeatureFlags().fpl_canvas_keyboard_controls;
-                case nT.DevHandoff:
+                case FEditorType.DevHandoff:
                   return getFeatureFlags().fpl_devmode_keyboard_controls;
-                case nT.Slides:
+                case FEditorType.Slides:
                   return getFeatureFlags().fpl_slides_keyboard_controls;
-                case nT.Sites:
+                case FEditorType.Sites:
                   return getFeatureFlags().fpl_sites_keyboard_controls;
-                case nT.Illustration:
+                case FEditorType.Illustration:
                   return getFeatureFlags().fpl_buzz_keyboard_controls;
               }
               return !1;
-            }(e, t) ? _$$t("fullscreen.accessibility.tool_selected", {
+            }(e, t) ? getI18nString("fullscreen.accessibility.tool_selected", {
               nodeType: r
-            }) : _$$t("fullscreen.accessibility.tool_selected_keyboard_accessible", {
+            }) : getI18nString("fullscreen.accessibility.tool_selected_keyboard_accessible", {
               nodeType: r
             });
           }
@@ -173,11 +173,11 @@ class T {
       buildString: ({
         numSelectedNodes: e,
         delta: t
-      }) => _$$t("fullscreen.accessibility.selection_box_changed", {
-        selectionString: _$$t("fullscreen.accessibility.num_items_selected", {
+      }) => getI18nString("fullscreen.accessibility.selection_box_changed", {
+        selectionString: getI18nString("fullscreen.accessibility.num_items_selected", {
           num_selected: e
         }),
-        adjustmentString: IA(t, _$$t("fullscreen.accessibility_dom.pseudonode_name_selection-box")) || ""
+        adjustmentString: IA(t, getI18nString("fullscreen.accessibility_dom.pseudonode_name_selection-box")) || ""
       })
     });
   }
@@ -192,11 +192,11 @@ class T {
       buildString: ({
         numSelectedNodes: e,
         delta: t
-      }) => _$$t("fullscreen.accessibility.selection_box_changed", {
-        selectionString: _$$t("fullscreen.accessibility.num_items_selected", {
+      }) => getI18nString("fullscreen.accessibility.selection_box_changed", {
+        selectionString: getI18nString("fullscreen.accessibility.num_items_selected", {
           num_selected: e
         }),
-        adjustmentString: vS(t, _$$t("fullscreen.accessibility_dom.pseudonode_name_selection-box")) || ""
+        adjustmentString: vS(t, getI18nString("fullscreen.accessibility_dom.pseudonode_name_selection-box")) || ""
       })
     });
   }
@@ -216,23 +216,23 @@ class T {
           x,
           y
         } = e;
-        let i = [nC(x, () => _$$t("fullscreen.accessibility.viewport_pan.distance_right", {
+        let i = [nC(x, () => getI18nString("fullscreen.accessibility.viewport_pan.distance_right", {
           distance: Math.abs(x)
-        }), () => _$$t("fullscreen.accessibility.viewport_pan.distance_left", {
+        }), () => getI18nString("fullscreen.accessibility.viewport_pan.distance_left", {
           distance: Math.abs(x)
-        })), nC(y, () => _$$t("fullscreen.accessibility.viewport_pan.distance_down", {
+        })), nC(y, () => getI18nString("fullscreen.accessibility.viewport_pan.distance_down", {
           distance: Math.abs(y)
-        }), () => _$$t("fullscreen.accessibility.viewport_pan.distance_up", {
+        }), () => getI18nString("fullscreen.accessibility.viewport_pan.distance_up", {
           distance: Math.abs(y)
         }))].filter(isNotNullish);
         if (0 === i.length) return;
         let s = Yx(i, "unit");
-        return t ? t.containerNodeName ? _$$t("fullscreen.accessibility.panned_insert_in_container", {
+        return t ? t.containerNodeName ? getI18nString("fullscreen.accessibility.panned_insert_in_container", {
           containerName: t.containerNodeName,
           amount: s
-        }) : _$$t("fullscreen.accessibility.panned_insert_at_crosshair", {
+        }) : getI18nString("fullscreen.accessibility.panned_insert_at_crosshair", {
           amount: s
-        }) : _$$t("fullscreen.accessibility.viewport_pan.action", {
+        }) : getI18nString("fullscreen.accessibility.viewport_pan.action", {
           amount: s
         });
       }
@@ -249,7 +249,7 @@ class T {
       buildString: ({
         tableCellRow: e,
         tableCellCol: t
-      }) => _$$t("fullscreen.accessibility.next_table_cell_announcement", {
+      }) => getI18nString("fullscreen.accessibility.next_table_cell_announcement", {
         r: e,
         c: t
       })
@@ -269,9 +269,9 @@ class T {
       buildString: ({
         previousZoom: e,
         currentZoom: t
-      }) => nC(Math.log(t / e), () => _$$t("fullscreen.accessibility.zoom_in", {
+      }) => nC(Math.log(t / e), () => getI18nString("fullscreen.accessibility.zoom_in", {
         zoomLevel: Math.round(100 * t)
-      }), () => _$$t("fullscreen.accessibility.zoom_out", {
+      }), () => getI18nString("fullscreen.accessibility.zoom_out", {
         zoomLevel: Math.round(100 * t)
       })) || ""
     });
@@ -290,19 +290,19 @@ class T {
       }) => {
         switch (e) {
           case OQN.UNION:
-            return _$$t("fullscreen.accessibility_dom.boolean_operation.union", {
+            return getI18nString("fullscreen.accessibility_dom.boolean_operation.union", {
               numNodes: t
             });
           case OQN.INTERSECT:
-            return _$$t("fullscreen.accessibility_dom.boolean_operation.intersect", {
+            return getI18nString("fullscreen.accessibility_dom.boolean_operation.intersect", {
               numNodes: t
             });
           case OQN.SUBTRACT:
-            return _$$t("fullscreen.accessibility_dom.boolean_operation.subtract", {
+            return getI18nString("fullscreen.accessibility_dom.boolean_operation.subtract", {
               numNodes: t
             });
           case OQN.XOR:
-            return _$$t("fullscreen.accessibility_dom.boolean_operation.xor", {
+            return getI18nString("fullscreen.accessibility_dom.boolean_operation.xor", {
               numNodes: t
             });
         }
@@ -342,8 +342,8 @@ class T {
     }));
   }
   showKeyboardSelectionModeChangedToast(e) {
-    let t = e === r6o.BOX ? _$$t("fullscreen.accessibility.keyboard_box_selection_activated") : _$$t("fullscreen.accessibility.keyboard_pick_selection_activated");
-    let r = e === r6o.BOX ? _$$t("fullscreen.accessibility.keyboard_box_selection.context") : _$$t("fullscreen.accessibility.keyboard_pick_selection.context");
+    let t = e === r6o.BOX ? getI18nString("fullscreen.accessibility.keyboard_box_selection_activated") : getI18nString("fullscreen.accessibility.keyboard_pick_selection_activated");
+    let r = e === r6o.BOX ? getI18nString("fullscreen.accessibility.keyboard_box_selection.context") : getI18nString("fullscreen.accessibility.keyboard_pick_selection.context");
     this.store.dispatch(F.enqueue({
       type: `${$$E3}-keyboard-selection-mode-changed`,
       message: t,

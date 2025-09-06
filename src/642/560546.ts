@@ -9,7 +9,7 @@ import { Point } from "../905/736624";
 import { e as _$$e, v as _$$v } from "../642/135773";
 import { o as _$$o2 } from "../905/96108";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { u1, XE } from "../figma_app/91703";
 import { TI } from "../905/713722";
 import { Y5 } from "../figma_app/455680";
@@ -66,7 +66,7 @@ function O({
     children: [jsx(D, {
       onClick: p,
       recordingKey: Pt(o, "chit"),
-      "aria-label": _$$t("slides.properties_panel.color_picker.open.aria_label"),
+      "aria-label": getI18nString("slides.properties_panel.color_picker.open.aria_label"),
       children: a
     }), jsx(So, {
       focusableRef: u,
@@ -211,7 +211,7 @@ function B({
     let t = e?.colorVar?.value?.alias;
     return t ? dI(t) : null;
   })();
-  let M = () => gl(e) || gl(i) ? _$$t("fullscreen.mixed") : i || (j ? _$$t("slides.properties_panel.color_picker.multiple") : w ? _$$t("slides.properties_panel.fill.fill_type_gradient") : TI.format(I[0]));
+  let M = () => gl(e) || gl(i) ? getI18nString("fullscreen.mixed") : i || (j ? getI18nString("slides.properties_panel.color_picker.multiple") : w ? getI18nString("slides.properties_panel.fill.fill_type_gradient") : TI.format(I[0]));
   let A = useMemo(() => j ? jsx(a, {}) : N ? jsx(zi, {
     dsStyle: N,
     disableTooltip: !0
@@ -240,7 +240,7 @@ function B({
         isOpen: u,
         onClick: P,
         recordingKey: C,
-        "aria-label": _$$t("slides.properties_panel.color_picker.open.aria_label"),
+        "aria-label": getI18nString("slides.properties_panel.color_picker.open.aria_label"),
         children: jsxs("span", {
           className: _$$s.pl4.inlineFlex.gap6.overflowHidden.$,
           children: [A, !i && E ? jsx(K, {

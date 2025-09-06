@@ -7,7 +7,7 @@ import { rXF } from "../figma_app/763686";
 import { U } from "../figma_app/901889";
 import { Pt } from "../figma_app/806412";
 import { MM, wv } from "../figma_app/236327";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { oB, j7 } from "../905/929976";
 import { sT } from "../figma_app/740163";
 import { gl, hS } from "../905/216495";
@@ -93,8 +93,8 @@ function P({
       e.preventDefault();
     },
     "data-tooltip-type": Ib.TEXT,
-    "aria-label": _$$t("fullscreen.properties_panel.borders.border_per_side"),
-    "data-tooltip": _$$t("fullscreen.properties_panel.borders.border_per_side"),
+    "aria-label": getI18nString("fullscreen.properties_panel.borders.border_per_side"),
+    "data-tooltip": getI18nString("fullscreen.properties_panel.borders.border_per_side"),
     dataTestId: `stroke-button-${gl(a) ? "mixed" : a.join(",")}`,
     recordingKey: Pt(r, "borderSide")
   };
@@ -250,7 +250,7 @@ function L({
     children: jsx($j, {
       bigNudgeAmount,
       className: e,
-      "data-tooltip": _$$t("fullscreen.properties_panel.borders.stroke_width"),
+      "data-tooltip": getI18nString("fullscreen.properties_panel.borders.stroke_width"),
       "data-tooltip-type": Ib.TEXT,
       dataTestId: d,
       dispatch: _,

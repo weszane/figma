@@ -2,7 +2,7 @@ import { assert } from "../figma_app/465776";
 import { Ez5, dBj } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { zl, eU } from "../figma_app/27355";
+import { atomStoreManager, atom } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { lB, $$if } from "../figma_app/97020";
 import { ds } from "../figma_app/314264";
@@ -11,32 +11,32 @@ import { sF } from "../figma_app/357655";
 import { a as _$$a } from "../905/38236";
 import { K } from "../figma_app/695131";
 export function $$m7() {
-  return null !== zl.get($$x6);
+  return null !== atomStoreManager.get($$x6);
 }
 export function $$g10(e) {
-  zl.set($$x6, null);
-  getFeatureFlags().sts_sprig_targeted_feedback && e && zl.get(K) && e("track", "sites_responsive_set_edit");
+  atomStoreManager.set($$x6, null);
+  getFeatureFlags().sts_sprig_targeted_feedback && e && atomStoreManager.get(K) && e("track", "sites_responsive_set_edit");
 }
-let f = Wh(() => eU(null));
-let $$E5 = eU(!1);
+let f = Wh(() => atom(null));
+let $$E5 = atom(!1);
 export var $$y0 = (e => (e[e.Modal = 0] = "Modal", e[e.Iframe = 1] = "Iframe", e[e.None = 2] = "None", e))($$y0 || {});
-let b = Wh(() => eU(0));
-let $$T9 = eU(null, (e, t, r) => {
+let b = Wh(() => atom(0));
+let $$T9 = atom(null, (e, t, r) => {
   if (2 === e(b) && 2 !== r && e($$E5)) {
     let t = e(f);
     assert(!!t, "sitePreviewState should not be null");
     t.history.refresh();
-    zl.set($$E5, !1);
+    atomStoreManager.set($$E5, !1);
   }
   t(b, r);
 });
 function I() {
   return Ez5?.prototypingEditorState().prototypeViewMode.getCopy() === dBj.PRESENT ? "fullscreen" : "modal";
 }
-let $$S2 = Wh(() => eU(I()));
-let $$v3 = Wh(() => eU(0));
-let $$A1 = Wh(() => eU(null));
-let $$x6 = eU(e => e(f), (e, t, r) => {
+let $$S2 = Wh(() => atom(I()));
+let $$v3 = Wh(() => atom(0));
+let $$A1 = Wh(() => atom(null));
+let $$x6 = atom(e => e(f), (e, t, r) => {
   var i;
   let s;
   let o = e(f);
@@ -69,7 +69,7 @@ let $$x6 = eU(e => e(f), (e, t, r) => {
   });
   null === i && C(null);
 });
-let $$N4 = eU(e => {
+let $$N4 = atom(e => {
   let t = e(f)?.history;
   if (t) return sF(e(t.currentAtom).url).id;
 });

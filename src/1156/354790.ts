@@ -1,8 +1,8 @@
-import { $D } from '../905/11';
+import { reportError } from '../905/11';
 import { ServiceCategories as _$$e2 } from '../905/165054';
 import { Hq, l7 } from '../905/189185';
 import { O as _$$O } from '../905/273186';
-import { t as _$$t } from '../905/303541';
+import { getI18nString } from '../905/303541';
 import { noop, throwIf } from '../905/419236';
 import { getFeatureFlags } from '../905/601108';
 import { X$ } from '../905/612685';
@@ -18,7 +18,7 @@ import { E as _$$E } from '../1156/735202';
 import { xD } from '../1156/751255';
 import { r as _$$r } from '../1156/791040';
 import { n as _$$n } from '../1156/930733';
-import { eU, zl } from '../figma_app/27355';
+import { atom, atomStoreManager } from '../figma_app/27355';
 import { gG } from '../figma_app/97696';
 import { WH } from '../figma_app/119420';
 import { getInitialOptions, isDevEnvironment } from '../figma_app/169182';
@@ -45,8 +45,8 @@ import { nU } from '../figma_app/779249';
 import { QK } from '../figma_app/883638';
 import { Ay as _$$Ay2 } from '../figma_app/948389';
 import { TT } from '../figma_app/952035';
-let W = Wh(() => eU(''));
-let V = Wh(() => eU(''));
+let W = Wh(() => atom(''));
+let V = Wh(() => atom(''));
 class Z {
   constructor() {
     this.targetContentX = 0;
@@ -258,7 +258,7 @@ async function et({
     nodeIdGenerator: () => (throwIf(void 0 !== glU, 'Fullscreen must be defined'), glU.generateUniqueID()),
     initializeWithAssistantMessage: !0,
     excludeRedundantCodeFromMessageHistory: !!getFeatureFlags().bake_exclude_code_tag_web,
-    reportToSentry: (e, t) => $D(_$$e2.MAKE, e, t)
+    reportToSentry: (e, t) => reportError(_$$e2.MAKE, e, t)
   });
   YZ({
     node: t.guid,
@@ -269,7 +269,7 @@ async function et({
   let $ = [];
   let P = {};
   let U = new AbortController();
-  zl.set(Z3(t.guid), U);
+  atomStoreManager.set(Z3(t.guid), U);
   let G = new Promise(e => {
     U && U.signal.addEventListener('abort', e);
   });
@@ -311,7 +311,7 @@ async function et({
     if (throwIf(n, 'Stream function must be defined'), (e === lV.CODE_IN_SITES || e === lV.FIGMAKE_IN_DESIGN) && codeChatRequest.chats.length > 0) {
       let e = codeChatRequest.chats[codeChatRequest.chats.length - 1];
       if (e?.role === 'user') {
-        let t = zl.get(f3);
+        let t = atomStoreManager.get(f3);
         if (t && t.iframe?.isConnected ? await Promise.race([L6({
           userMessage: e,
           getSitesPreviewPageSnapshot: ({
@@ -359,7 +359,7 @@ async function et({
         e.reset && (t[l] = '');
         let d = (t[l] || '') + e.code;
         t[l] = d;
-        zl.set(_$$l(a.guid), {
+        atomStoreManager.set(_$$l(a.guid), {
           type: 'code',
           fullFilePath: l
         });
@@ -392,26 +392,26 @@ async function et({
         newlyCreatedCodeFiles: $,
         featureType: e,
         chatMessagesNode: t
-      }) : n.type === 'chat-compression' ? yZ(t, n) : n.type === 'plan' && n.title && zl.set(_$$n, n.title);
+      }) : n.type === 'chat-compression' ? yZ(t, n) : n.type === 'plan' && n.title && atomStoreManager.set(_$$n, n.title);
       q.processResponseDelta(n);
       (function (e, t, n, r) {
         let i = t.guid;
         let s = _$$l(i);
         if (e.type === 'code') {
           let t = e.file;
-          zl.set(s, {
+          atomStoreManager.set(s, {
             type: 'code',
             fullFilePath: t
           });
         } else if (e.type === 'toolCall') {
-          e.toolName !== 'multi_edit_tool' && zl.set(s, e);
+          e.toolName !== 'multi_edit_tool' && atomStoreManager.set(s, e);
         } else if (e.type === 'toolCallDelta') {
           let e = r.getCurrentToolCall();
-          e && zl.set(s, {
+          e && atomStoreManager.set(s, {
             ...e
           });
         } else {
-          e.type === 'message' || e.type === 'summary' ? zl.set(s, null) : e.type === 'plan' ? (zl.set(s, null), e.title && zl.set(_$$n, e.title)) : e.type === 'editedFiles' && zl.set(s, {
+          e.type === 'message' || e.type === 'summary' ? atomStoreManager.set(s, null) : e.type === 'plan' ? (atomStoreManager.set(s, null), e.title && atomStoreManager.set(_$$n, e.title)) : e.type === 'editedFiles' && atomStoreManager.set(s, {
             type: 'editedFiles',
             files: e.files
           });
@@ -441,10 +441,10 @@ async function et({
       if (value && (B ? B.queue(value) : u(value)), done) break;
     }
   } catch (n) {
-    n instanceof G1 || n instanceof CortexErrorV2 ? zl.set(QK(t?.guid || ''), {
+    n instanceof G1 || n instanceof CortexErrorV2 ? atomStoreManager.set(QK(t?.guid || ''), {
       error: n,
       cortexClientGeneratedRequestUuid: _
-    }) : zl.set(QK(t?.guid || ''), {
+    }) : atomStoreManager.set(QK(t?.guid || ''), {
       error: n
     });
     Ho(n, e, a5.SEND_MESSAGE);
@@ -511,10 +511,10 @@ export async function $$en0({
         t && (t.hasSystemEdited = !0);
       },
       setCodeLastEditedBy: e => {
-        zl.set(Nm(e), 'assistant');
+        atomStoreManager.set(Nm(e), 'assistant');
       },
       createCodeSnapshot: _$$O2,
-      reportErrorToSentry: e => $D(_$$e2.AI_FOR_PRODUCTION, e),
+      reportErrorToSentry: e => reportError(_$$e2.AI_FOR_PRODUCTION, e),
       regenerateAttributions: $$er2
     });
     e.type === K$p.USER_MESSAGE && gG(H5(e.textContent)) && px();
@@ -522,7 +522,7 @@ export async function $$en0({
   wi(n.guid, {
     switchToPreview: !0
   });
-  zl.set(o0(n.guid), !1);
+  atomStoreManager.set(o0(n.guid), !1);
 }
 export function $$er2(e) {
   let t = getSingletonSceneGraph();
@@ -534,15 +534,15 @@ export function $$er2(e) {
     } = MK(e.textContent);
     return imports && imports.length !== 0 ? imports.map(e => e.type === 'node' && e.communityAttribution ? e.communityAttribution : null).filter(e => !!e) : null;
   }).filter(e => !!e).flat().filter((e, t, n) => t === n.findIndex(t => t.hubFileId === e.hubFileId));
-  let a = zl.get(nM);
+  let a = atomStoreManager.get(nM);
   let l = _$$W(a, NJ, _$$e);
   Hq.system('update-attributions', () => {
     if (!l) {
       let e = glU?.createNewCodeFile(SE, '', null, !1);
       if (!e || !(l = t.get(e))) return;
     }
-    let e = _$$t('figmake.chat.unsplash_attribution.attribution_comment');
-    let r = [_$$t('figmake.chat.shadcn_attribution.attribution_comment'), e, ...n.map(e => e ? _$$t('figmake.chat.community_attribution.attribution_comment', {
+    let e = getI18nString('figmake.chat.unsplash_attribution.attribution_comment');
+    let r = [getI18nString('figmake.chat.shadcn_attribution.attribution_comment'), e, ...n.map(e => e ? getI18nString('figmake.chat.community_attribution.attribution_comment', {
       creatorName: e.creatorName,
       hubFileName: e.hubFileName,
       hubFileLink: `${getInitialOptions().figma_url}${X$(e.hubFileId)}`,
@@ -586,7 +586,7 @@ export async function $$ei1({
       let o = n.chatMessages || [];
       if (o.length === 0) return;
       let c = eB(o) || function () {
-        let e = zl.get(yV);
+        let e = atomStoreManager.get(yV);
         return e?.name;
       }();
       let d = xD(e, t, void 0, c);
@@ -661,7 +661,7 @@ export async function $$ei1({
   }
 }
 function es() {
-  return zl.get(ze);
+  return atomStoreManager.get(ze);
 }
 async function ea() {
   let e = es();
@@ -683,13 +683,13 @@ async function ea() {
   i?.projectId && i?.publicAnonKey && i?.makeNamespace && function (e, t, n) {
     let r = getSingletonSceneGraph();
     if (!r.getInternalCanvas()) return;
-    let i = zl.get(nM);
+    let i = atomStoreManager.get(nM);
     let a = _$$W(i, NJ, `/${o3}`);
     let l = _$$W(i, NJ, `/${Or}`);
     let o = _$$W(i, NJ, `/${ww}`);
     Hq.system('create-supabase-starter-files', () => {
       if (l) {
-        (zl.get(W) !== e || zl.get(V) !== t) && (l.sourceCode = OP(e, t));
+        (atomStoreManager.get(W) !== e || atomStoreManager.get(V) !== t) && (l.sourceCode = OP(e, t));
       } else {
         let n = glU?.createNewCodeFile(Or, '', null, !1);
         if (!n) return;
@@ -712,8 +712,8 @@ async function ea() {
         t.sourceCode = mE(n);
       }
       Y5.commit();
-      zl.set(W, e);
-      zl.set(V, t);
+      atomStoreManager.set(W, e);
+      atomStoreManager.set(V, t);
     });
   }(i.projectId, i.publicAnonKey, i.makeNamespace);
   _$$r();

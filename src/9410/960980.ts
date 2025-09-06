@@ -2,8 +2,8 @@ import { useState, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { W8Y } from "../figma_app/763686";
 import { Xr } from "../figma_app/27355";
-import { wg, o4 } from "../figma_app/778880";
-import { t as _$$t } from "../905/303541";
+import { isIpadDevice, getIsMobile } from "../figma_app/778880";
+import { getI18nString } from "../905/303541";
 import { to } from "../905/156213";
 import { DG as _$$DG } from "../figma_app/789";
 import { F } from "../905/224";
@@ -19,12 +19,12 @@ import { qU } from "../figma_app/913518";
 import { D } from "../905/80656";
 import { jz, C3 } from "../figma_app/587765";
 export function $$E2(e) {
-  let t = _$$t("voting.modal.voting_setup_responsive_placeholder_prompt", {
+  let t = getI18nString("voting.modal.voting_setup_responsive_placeholder_prompt", {
     numVotes: e.userVoteLimit
   });
   return e.title || t;
 }
-let T = () => !(wg() || o4());
+let T = () => !(isIpadDevice() || getIsMobile());
 export function $$w4() {
   let e = jz();
   return !!(e?.length && e?.length > 0);

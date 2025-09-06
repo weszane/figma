@@ -3,9 +3,9 @@ import { forwardRef, useMemo } from "react";
 import { oU, aH } from "../figma_app/273493";
 import { NLJ, xbm, DV9 } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { md, zl } from "../figma_app/27355";
+import { useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import d from "classnames";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { lC, U9 } from "../905/125333";
 import { s as _$$s } from "../cssbuilder/589278";
 import { F } from "../905/989956";
@@ -325,7 +325,7 @@ function A({
   children: t,
   isBeingDraggedForPlacement: r
 }) {
-  let i = Ay.safari && r;
+  let i = BrowserInfo.safari && r;
   return jsx("svg", {
     fill: "none",
     height: 144 * e,
@@ -343,8 +343,8 @@ let N = 2 / 38;
 let C = .5 / 38;
 let w = 8 / 38;
 function O() {
-  let e = md(lC);
-  let t = md(U9);
+  let e = useAtomWithSubscription(lC);
+  let t = useAtomWithSubscription(U9);
   return useMemo(() => R(e, t), [t, e]);
 }
 let R = (e, t) => t === xbm.NONE ? "#000000" : F.format(e);
@@ -382,7 +382,7 @@ function k(e, t) {
     isDragging
   } = t;
   return t ? {
-    stroke: getFeatureFlags().figjam_track_stroke_color ? R(zl.get(lC), zl.get(U9)) : L(e),
+    stroke: getFeatureFlags().figjam_track_stroke_color ? R(atomStoreManager.get(lC), atomStoreManager.get(U9)) : L(e),
     strokeWidth: function (e, t, r = !1) {
       return r && (e === xbm.SOLID || e === xbm.DASHED) ? 4 * t : 0;
     }(styleType, svgToCanvasScale, isDragging),

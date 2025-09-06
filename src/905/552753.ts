@@ -6,7 +6,7 @@ import { A as _$$A } from "../905/744692";
 import o from "classnames";
 import { UF } from "../905/403166";
 import { td, Yx } from "../figma_app/930338";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { dN } from "../vendor/291472";
 import { Ib } from "../905/129884";
 var l = o;
@@ -124,10 +124,10 @@ let v = forwardRef(function (e, t) {
   }
   return jsxs(E, {
     ref: t,
-    "aria-label": e.reaction.selected ? _$$t("comments.reaction_selected_descriptive_aria_label_text", {
+    "aria-label": e.reaction.selected ? getI18nString("comments.reaction_selected_descriptive_aria_label_text", {
       num_users: i,
       icon: JSON.stringify(c.emojiUnicodeList)
-    }) : _$$t("comments.reaction_unselected_descriptive_aria_label_text", {
+    }) : getI18nString("comments.reaction_unselected_descriptive_aria_label_text", {
       num_users: i,
       icon: JSON.stringify(c.emojiUnicodeList)
     }),
@@ -157,9 +157,9 @@ export function $$I0(e) {
   return jsx(E, {
     className: t,
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": _$$t("comments.add_reaction"),
+    "data-tooltip": getI18nString("comments.add_reaction"),
     onClick: e.onClick,
-    "aria-label": _$$t("comments.add_reaction"),
+    "aria-label": getI18nString("comments.add_reaction"),
     htmlAttributes: {
       "data-testid": "add-reaction-button"
     },
@@ -222,7 +222,7 @@ export function $$E1(e) {
           g(!0);
         },
         "data-testid": "show-more-reactions-button",
-        children: tx("comments.num_hidden_more", {
+        children: renderI18nText("comments.num_hidden_more", {
           numHidden: A
         })
       })

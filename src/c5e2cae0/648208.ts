@@ -4,9 +4,9 @@ import { isNullish } from "../figma_app/95419";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { w as _$$w } from "../c5e2cae0/59973";
 import { mI } from "../figma_app/566371";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
 import { E as _$$E } from "../905/984674";
 import { up, Vh, kV, N9 } from "../figma_app/692987";
@@ -71,7 +71,7 @@ export function $$E0({
     fontWeight: "medium",
     color: "tertiary",
     fontSize: 11,
-    children: tx("checkout.review_in_tax_disclaimer")
+    children: renderI18nText("checkout.review_in_tax_disclaimer")
   });
   let F = t === NW.YEAR;
   return jsx(fu, {
@@ -107,7 +107,7 @@ export function $$E0({
         "data-testid": "purchase-summary-subtotal",
         children: [jsx("h3", {
           className: _$$s.fontMedium.$$if(r, _$$s.font13.lh24).$,
-          children: tx("checkout.subtotal")
+          children: renderI18nText("checkout.subtotal")
         }), jsx("p", {
           className: _$$s.$$if(r, _$$s.font13.lh24).$,
           children: k({
@@ -120,7 +120,7 @@ export function $$E0({
         fontWeight: "regular",
         color: "tertiary",
         fontSize: 11,
-        children: tx("checkout.tax_disclaimer_revised", {
+        children: renderI18nText("checkout.tax_disclaimer_revised", {
           checkoutStep: z
         })
       }), r && jsxs("div", {
@@ -131,10 +131,10 @@ export function $$E0({
             className: _$$s.flexColumn.$,
             children: [jsx("h3", {
               className: _$$s.font13.lh24.$,
-              children: tx("checkout.purchase_summary.tax")
+              children: renderI18nText("checkout.purchase_summary.tax")
             }), jsx("h3", {
               className: _$$s.colorTextSecondary.font13.lh24.$,
-              children: tx("pro_cart.review.tax_percent", {
+              children: renderI18nText("pro_cart.review.tax_percent", {
                 taxPercent: R
               })
             })]
@@ -151,7 +151,7 @@ export function $$E0({
           "data-testid": "purchase-summary-total-due",
           children: [jsx("h3", {
             className: _$$s.fontMedium.font13.lh24.$,
-            children: tx("checkout.purchase_summary.total_due_today")
+            children: renderI18nText("checkout.purchase_summary.total_due_today")
           }), jsx("p", {
             className: _$$s.font13.lh24.$,
             children: k({
@@ -187,17 +187,17 @@ function A({
   hasPriceAsterisk: u
 }) {
   if (!dA(e)) {
-    $D(_$$e.MONETIZATION_UPGRADES, Error(`Received invalid billable product key ${e}`));
+    reportError(_$$e.MONETIZATION_UPGRADES, Error(`Received invalid billable product key ${e}`));
     return null;
   }
   let p = d[e];
   if (isNullish(p)) {
-    $D(_$$e.BILLING_EXPERIENCE, Error(`Received null payment price on purchase summaryfor ${e}`));
+    reportError(_$$e.BILLING_EXPERIENCE, Error(`Received null payment price on purchase summaryfor ${e}`));
     return null;
   }
   let h = _[e];
   if (isNullish(h)) {
-    $D(_$$e.BILLING_EXPERIENCE, Error(`Received null line item price on purchase summary for ${e}`));
+    reportError(_$$e.BILLING_EXPERIENCE, Error(`Received null line item price on purchase summary for ${e}`));
     return null;
   }
   let g = new vr(a);
@@ -205,7 +205,7 @@ function A({
     showCents: n
   });
   let v = _$$s.font13.lh24;
-  let y = _$$t("checkout.price_per_month", {
+  let y = getI18nString("checkout.price_per_month", {
     price: g.formatMoney(h)
   });
   return jsxs("div", {
@@ -214,13 +214,13 @@ function A({
     children: [jsxs("div", {
       children: [jsx("h3", {
         className: _$$s.$$if(n, v).$,
-        children: tx("checkout.purchase_summary.cart_line_item", {
+        children: renderI18nText("checkout.purchase_summary.cart_line_item", {
           quantity: t,
           productLabel: tI(e)
         })
       }), jsx("p", {
         className: _$$s.colorTextSecondary.$$if(n, v).$,
-        children: tx(r ? "checkout.product_cost_breakdown_annually" : "checkout.product_cost_breakdown_monthly", {
+        children: renderI18nText(r ? "checkout.product_cost_breakdown_annually" : "checkout.product_cost_breakdown_monthly", {
           price: y,
           quantity: t
         })
@@ -242,9 +242,9 @@ function I({
 }) {
   switch (e) {
     case Ju.ORG:
-      return tx("checkout.purchase_summary.plan_renewal_org");
+      return renderI18nText("checkout.purchase_summary.plan_renewal_org");
     case Ju.PRO:
-      return t ? tx("checkout.purchase_summary.plan_renewal_pro_annual") : tx("checkout.purchase_summary.plan_renewal_pro_monthly");
+      return t ? renderI18nText("checkout.purchase_summary.plan_renewal_pro_annual") : renderI18nText("checkout.purchase_summary.plan_renewal_pro_monthly");
     default:
       throwError(e);
   }
@@ -255,12 +255,12 @@ function k({
   isCartReviewSummary: a,
   hasPriceAsterisk: s
 }) {
-  let r = a ? e : t ? _$$t("checkout.price_per_year", {
+  let r = a ? e : t ? getI18nString("checkout.price_per_year", {
     price: e
-  }) : _$$t("checkout.price_per_month", {
+  }) : getI18nString("checkout.price_per_month", {
     price: e
   });
-  return s ? _$$t("checkout.purchase_summary.asterisked_price", {
+  return s ? getI18nString("checkout.purchase_summary.asterisked_price", {
     price: r
   }) : r;
 }

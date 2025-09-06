@@ -5,10 +5,10 @@ import { N } from "../905/438674";
 import { $n } from "../905/521428";
 import { J } from "../905/614223";
 import { getFeatureFlags } from "../905/601108";
-import { sx } from "../905/449184";
-import { $D, DZ } from "../905/11";
-import { t as _$$t, tx } from "../905/303541";
-import { Gq } from "../figma_app/363242";
+import { trackEventAnalytics } from "../905/449184";
+import { reportError, SeverityLevel } from "../905/11";
+import { getI18nString, renderI18nText } from "../905/303541";
+import { getI18nState } from "../figma_app/363242";
 let n;
 let g = Symbol("Default");
 let $$f1 = {
@@ -55,21 +55,21 @@ let y = class e extends Component {
     } catch (e) {}
     let n = this.props.fallback === $$f1.DEFAULT_FULL_PAGE;
     let r = A(t);
-    let a = $D(this.props.team || _$$e.UNOWNED, t, {
+    let a = reportError(this.props.team || _$$e.UNOWNED, t, {
       tags: {
         react: !0,
         errorBoundary: this.props.boundaryKey,
         ...this.props.sentryTags,
-        ...(n || this.props.severity === DZ.Critical ? {
-          severity: DZ.Critical
+        ...(n || this.props.severity === SeverityLevel.Critical ? {
+          severity: SeverityLevel.Critical
         } : {})
       }
     });
-    n && !e.reportedHardCrash && (e.reportedHardCrash = !0, r ? sx("js_extension_dom_crash", {
+    n && !e.reportedHardCrash && (e.reportedHardCrash = !0, r ? trackEventAnalytics("js_extension_dom_crash", {
       errorBoundary: this.props.boundaryKey
     }, {
       forwardToDatadog: !0
-    }) : sx("js_hard_crash", {
+    }) : trackEventAnalytics("js_hard_crash", {
       errorBoundary: this.props.boundaryKey,
       errorMessage: t?.message
     }, {
@@ -111,8 +111,8 @@ export function $$I2(e) {
   }, []);
   let i = useMemo(() => {
     try {
-      let e = Gq(!1);
-      return e?.initialized && !!_$$t("general.root_error_boundary_title");
+      let e = getI18nState(!1);
+      return e?.initialized && !!getI18nString("general.root_error_boundary_title");
     } catch (e) {
       return !1;
     }
@@ -126,14 +126,14 @@ export function $$I2(e) {
         className: "error_boundary--errorBoundaryCenterContent--ItmDw",
         children: [jsx("h1", {
           className: "error_boundary--errorBoundaryTitle--zgx1h text--fontPos22--4H4Fc text--_fontBase--QdLsd",
-          children: i ? tx("general.root_error_boundary_title") : v.title
+          children: i ? renderI18nText("general.root_error_boundary_title") : v.title
         }), jsx("div", {
           className: "error_boundary--errorBoundaryDescription--iC-21 text--fontPos15--IR8IB text--_fontBase--QdLsd",
-          children: n ? i ? tx("general.root_error_boundary_google_translate_description") : v.googleTranslateDescription : i ? tx("general.root_error_boundary_description", {
+          children: n ? i ? renderI18nText("general.root_error_boundary_google_translate_description") : v.googleTranslateDescription : i ? renderI18nText("general.root_error_boundary_description", {
             status_page: jsx(N, {
               trusted: !0,
               href: "https://status.figma.com",
-              children: tx("general.root_error_boundary_status_page")
+              children: renderI18nText("general.root_error_boundary_status_page")
             })
           }) : jsxs(Fragment, {
             children: [jsx("span", {
@@ -151,7 +151,7 @@ export function $$I2(e) {
           children: jsx($n, {
             variant: "primary",
             onClick: () => location.reload(),
-            children: i ? tx("general.root_error_boundary_refresh") : v.reload
+            children: i ? renderI18nText("general.root_error_boundary_refresh") : v.reload
           })
         }), e.sentryId && jsxs("div", {
           className: "error_boundary--errorBoundaryErrorId--Xso5v text--fontPos11--2LvXf text--_fontBase--QdLsd",

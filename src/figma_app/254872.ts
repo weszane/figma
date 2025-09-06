@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { O } from "../905/969533";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { s as _$$s } from "../cssbuilder/589278";
 import { sx } from "../905/941192";
 import { oB, j7 } from "../905/929976";
@@ -37,7 +37,7 @@ export function $$I2({
     var t;
     Im(a, "quick-actions", e.menuAction);
     d(e, !0);
-    ("run-installed-plugin" !== (t = e.menuAction).type && "run-local-plugin" !== t.type ? ($D(_$$e.AI_FOR_PRODUCTION, Error("shouldSubmenuCloseQuickActions expected 'run-installed-plugin' or 'run-local-plugin'")), 1) : t.parameterOnly && t.parameterEntry) || close();
+    ("run-installed-plugin" !== (t = e.menuAction).type && "run-local-plugin" !== t.type ? (reportError(_$$e.AI_FOR_PRODUCTION, Error("shouldSubmenuCloseQuickActions expected 'run-installed-plugin' or 'run-local-plugin'")), 1) : t.parameterOnly && t.parameterEntry) || close();
   }));
   return jsx(ms, {
     parentRect: r?.data.targetRect,

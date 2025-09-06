@@ -6,9 +6,9 @@ import { $ } from "../905/137257";
 import { m as _$$m } from "../905/375522";
 import { V } from "../905/921027";
 import { Ez5, mrc } from "../figma_app/763686";
-import { R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { Pt } from "../figma_app/806412";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { vx } from "../figma_app/175258";
 import { Y5 } from "../figma_app/455680";
 import { kl } from "../905/275640";
@@ -19,7 +19,7 @@ export function $$b1() {
   let {
     textAutoResize,
     missingFont
-  } = R(e => ({
+  } = selectWithShallowEqual(e => ({
     textAutoResize: e.mirror.selectionProperties.textAutoResize,
     missingFont: e.mirror.selectionProperties.missingFont
   }));
@@ -49,7 +49,7 @@ export function $$T2({
   return jsx(DE, {
     input: o,
     icon: null,
-    label: _$$t("fullscreeen.type_panel.resizing")
+    label: getI18nString("fullscreeen.type_panel.resizing")
   });
 }
 export function $$I0(e) {
@@ -59,19 +59,19 @@ export function $$I0(e) {
     readonly: e.disabled,
     recordingKey: Pt(e, "autoResize"),
     legend: jsx(q, {
-      children: _$$t("fullscreeen.type_panel.resizing")
+      children: getI18nString("fullscreeen.type_panel.resizing")
     }),
     children: [jsx(c$, {
       value: "WIDTH_AND_HEIGHT",
-      "aria-label": _$$t("fullscreen.type_panel.auto_width"),
+      "aria-label": getI18nString("fullscreen.type_panel.auto_width"),
       icon: jsx($, {})
     }), jsx(c$, {
       value: "HEIGHT",
-      "aria-label": _$$t("fullscreen.type_panel.auto_height"),
+      "aria-label": getI18nString("fullscreen.type_panel.auto_height"),
       icon: jsx(_$$m, {})
     }), jsx(c$, {
       value: "NONE",
-      "aria-label": _$$t("fullscreen.type_panel.fixed_size"),
+      "aria-label": getI18nString("fullscreen.type_panel.fixed_size"),
       icon: jsx(V, {})
     })]
   });

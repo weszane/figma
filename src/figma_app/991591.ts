@@ -1,6 +1,6 @@
 import { n as _$$n } from "../905/347702";
 import { useEffect } from "react";
-import { zl, eU, Xr } from "../figma_app/27355";
+import { atomStoreManager, atom, Xr } from "../figma_app/27355";
 import { tT } from "../905/663269";
 import { Rs } from "../figma_app/288654";
 import { q8, dZ } from "../figma_app/459490";
@@ -34,7 +34,7 @@ export function $$m1() {
   let e = T5("useIsAiEnabledAtOrgOrTeamLevel").unwrapOr(null);
   return !e || !!e.aiFeaturesEnabled;
 }
-let g = _$$n(() => zl.get(y));
+let g = _$$n(() => atomStoreManager.get(y));
 export function $$f3() {
   let e = g();
   return {
@@ -43,7 +43,7 @@ export function $$f3() {
   };
 }
 var E = (e => (e.LOADING = "loading", e.HAS_PERMISSION = "has_permission", e.NO_PERMISSION = "no_permission", e))(E || {});
-let y = eU("loading");
+let y = atom("loading");
 export function $$b2(e) {
   let t = Xr(y);
   let r = sZ();

@@ -2,11 +2,11 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { l as _$$l } from "../905/509505";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Jn } from "../905/17223";
 import { tH, H4 } from "../905/751457";
 import { Us } from "../figma_app/637027";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { V as _$$V } from "../905/223767";
 import { to } from "../905/156213";
 import { b as _$$b } from "../905/985254";
@@ -23,7 +23,7 @@ export function $$_0() {
   let b = jsx(Us, {
     className: "library_upsell_banner--blueLink--bt6GX blue_link--blueLink--9rlnd",
     onClick: function () {
-      sx("library_upsell_badge_clicked", {
+      trackEventAnalytics("library_upsell_badge_clicked", {
         fileKey: t?.key,
         teamId: _,
         userId: s
@@ -42,7 +42,7 @@ export function $$_0() {
     },
     trusted: !0,
     role: "button",
-    children: tx("design_systems.assets_panel.library_upsell_upgrade")
+    children: renderI18nText("design_systems.assets_panel.library_upsell_upgrade")
   });
   return jsx(tH, {
     boundaryKey: "LibraryUpsellBanner",
@@ -63,7 +63,7 @@ export function $$_0() {
           children: [jsx(Jn, {
             className: "library_upsell_banner--closeButton--U1sPN",
             onClick: function () {
-              sx("library_upsell_badge_dismissed", {
+              trackEventAnalytics("library_upsell_badge_dismissed", {
                 fileKey: t?.key,
                 teamId: _,
                 userId: s
@@ -79,10 +79,10 @@ export function $$_0() {
               children: jsx(_$$l, {})
             }), jsx("p", {
               className: "library_upsell_banner--bannerTitle--AN3mP",
-              children: tx("design_systems.assets_panel.library_upsell_header")
+              children: renderI18nText("design_systems.assets_panel.library_upsell_header")
             }), jsx("p", {
               className: "library_upsell_banner--bannerBody--GSg3l",
-              children: tx("design_systems.assets_panel.library_upsell_body", {
+              children: renderI18nText("design_systems.assets_panel.library_upsell_body", {
                 upgradeToProfessionalPlanLink: b
               })
             })]

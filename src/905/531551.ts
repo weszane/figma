@@ -1,4 +1,4 @@
-import { Bq } from "../figma_app/656233";
+import { flatten } from "../figma_app/656233";
 import { RR } from "../figma_app/338442";
 import { Fullscreen, PageSelectionType } from "../figma_app/13528";
 import { ComponentPropType } from "../figma_app/175377";
@@ -47,7 +47,7 @@ let d = (e, t, i) => {
         throw Error(`Unsupported prop def type: ${e}`);
     }
   }(t.type);
-  return Bq(e.map(e => Fullscreen?.getInstanceSublayersControlledByDirectPropAssignment(e, t.explicitDefID, o)?.map(e => i.guidFromDeveloperFriendlyId(e)) ?? []));
+  return flatten(e.map(e => Fullscreen?.getInstanceSublayersControlledByDirectPropAssignment(e, t.explicitDefID, o)?.map(e => i.guidFromDeveloperFriendlyId(e)) ?? []));
 };
 let $$c2 = (e, t) => {
   let i = (e, n, r = !0) => {

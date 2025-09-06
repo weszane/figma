@@ -5,11 +5,11 @@ import { $n } from "../905/521428";
 import { K } from "../905/443068";
 import { y as _$$y } from "../905/37128";
 import { getFeatureFlags } from "../905/601108";
-import { eU, zl, fp } from "../figma_app/27355";
-import { sx } from "../905/449184";
+import { atom, atomStoreManager, useAtomValueAndSetter } from "../figma_app/27355";
+import { trackEventAnalytics } from "../905/449184";
 import { of, Pt } from "../figma_app/806412";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { to, Ce } from "../905/156213";
 import { JT } from "../figma_app/632248";
 import { uZ, i9 } from "../905/487011";
@@ -59,7 +59,7 @@ let T = Ju(function (e) {
     "Enter" === e.key && Fo(e) && !e.altKey && !e.shiftKey && (e.preventDefault(), e.stopPropagation(), u());
   }, [u]);
   return jsx(Ao, {
-    title: _$$t("qa.additional_feedback"),
+    title: getI18nString("qa.additional_feedback"),
     initialWidth: 320,
     dragHeaderOnly: !0,
     onClose,
@@ -72,10 +72,10 @@ let T = Ju(function (e) {
       onSubmit: p,
       children: [jsx(J, {
         className: C,
-        children: tx("qa.how_was_your_experience")
+        children: renderI18nText("qa.how_was_your_experience")
       }), jsx(ks, {
         className: "feedback_modal--textInput---aNOT feedback_modal--textArea--8FsjK",
-        placeholder: _$$t("qa.submit_feedback_placeholder"),
+        placeholder: getI18nString("qa.submit_feedback_placeholder"),
         type: "textarea",
         autoFocus: !0,
         value: l,
@@ -85,13 +85,13 @@ let T = Ju(function (e) {
         maxLength: 1e3
       }), jsx(J, {
         className: [C, "feedback_modal--secondary--llXoR"].join(" "),
-        children: tx("qa.we_use_this_to_improve")
+        children: renderI18nText("qa.we_use_this_to_improve")
       }), jsx(_$$B, {
         justify: "end",
         children: jsx($n, {
           type: "submit",
           disabled: !l.length,
-          children: _$$t("qa.submit_feedback")
+          children: getI18nString("qa.submit_feedback")
         })
       })]
     })
@@ -101,12 +101,12 @@ let $$k = "feedback_view--feedbackButton--oPE56";
 let R = "feedback_view--feedbackButtonWrapper--Zp7L1";
 let N = [JT.FIRST_DRAFT, JT.FIRST_DRAFT_MAKE_CHANGES];
 let P = "actionsFeedbackButton";
-let O = eU({
+let O = atom({
   selectedFeedback: null,
   shouldShowAdditionalFeedback: !1
 });
 export function $$D1() {
-  zl.set(O, {
+  atomStoreManager.set(O, {
     selectedFeedback: null,
     shouldShowAdditionalFeedback: !1
   });
@@ -122,7 +122,7 @@ export function $$L0({
   thumbsUpLabel: x,
   thumbsDownLabel: S
 }) {
-  let [w, C] = fp(O);
+  let [w, C] = useAtomValueAndSetter(O);
   let D = I && E ? I : w;
   let L = useCallback(e => {
     let t = e(D);
@@ -139,7 +139,7 @@ export function $$L0({
       feedback: "positive" === t ? Cb.POSITIVE : Cb.NEGATIVE
     });
     i && i(s7.THUMB_RATING, t);
-    N.includes(e.action) && sx("First Draft: Feedback", {
+    N.includes(e.action) && trackEventAnalytics("First Draft: Feedback", {
       clientLifecycleId: e.clientLifecycleId,
       file_key: e.file_key,
       intent: t
@@ -191,11 +191,11 @@ export function $$L0({
             },
             recordingKey: Pt(P, "additionalFeedback"),
             disabled: B,
-            children: tx("qa.additional_feedback")
+            children: renderI18nText("qa.additional_feedback")
           })
         }) : jsx("span", {
           className: U,
-          children: D.selectedFeedback ? _$$t("qa.feeback_thank_you") : t || _$$t("qa.rate_output")
+          children: D.selectedFeedback ? getI18nString("qa.feeback_thank_you") : t || getI18nString("qa.rate_output")
         })
       }), jsx("div", {
         className: _$$s.minH24.$,
@@ -205,7 +205,7 @@ export function $$L0({
             className: R,
             children: jsx(K, {
               recordingKey: Pt(P, "thumbsUp"),
-              "aria-label": x ?? _$$t("qa.thumbs_up"),
+              "aria-label": x ?? getI18nString("qa.thumbs_up"),
               onClick: () => j("positive"),
               children: jsx(_$$y, {
                 className: $$k
@@ -215,7 +215,7 @@ export function $$L0({
             className: R,
             children: jsx(K, {
               recordingKey: Pt(P, "thumbsDown"),
-              "aria-label": S ?? _$$t("qa.thumbs_down"),
+              "aria-label": S ?? getI18nString("qa.thumbs_down"),
               onClick: () => j("negative"),
               children: jsx(d, {
                 className: $$k

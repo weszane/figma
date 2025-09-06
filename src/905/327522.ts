@@ -1,6 +1,6 @@
-import { x1, xi } from "../905/714362";
+import { logError, logWarning } from "../905/714362";
 export function $$r2(e, t) {
-  x1("Autosave", e, t, {
+  logError("Autosave", e, t, {
     reportAsSentryError: !0
   });
 }
@@ -30,7 +30,7 @@ export async function $$l1() {
       quotaBytes: quota
     };
   } catch (e) {
-    xi("Autosave", "Failed to get storage usage", {
+    logWarning("Autosave", "Failed to get storage usage", {
       message: e?.message
     });
     return Promise.resolve({

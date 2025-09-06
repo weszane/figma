@@ -8,7 +8,7 @@ import { Pt } from "../figma_app/806412";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { yT } from "../figma_app/332598";
 import { X } from "../figma_app/953068";
 import { n2 } from "../figma_app/137317";
@@ -16,7 +16,7 @@ import { _r } from "../figma_app/451499";
 import { eY } from "../figma_app/722362";
 import { lE } from "../905/945781";
 import { Pp } from "../vendor/330821";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { K } from "../905/918348";
 import { uz } from "../905/359509";
 import { j5 } from "../figma_app/711907";
@@ -44,11 +44,11 @@ export function $$P1(e) {
     }), changedKeys.map(e => jsx(j, {
       name: d(oldValueMap[e]?.displayName || newValueMap[e]?.displayName),
       basis: {
-        value: oldValueMap[e]?.displayValue || _$$t("collaboration.branching_node_treatments.value.empty_dash"),
+        value: oldValueMap[e]?.displayValue || getI18nString("collaboration.branching_node_treatments.value.empty_dash"),
         onClick: () => WD(oldValueMap[e]?.displayValue, o)
       },
       change: {
-        value: newValueMap[e]?.displayValue || _$$t("collaboration.branching_node_treatments.value.empty_dash"),
+        value: newValueMap[e]?.displayValue || getI18nString("collaboration.branching_node_treatments.value.empty_dash"),
         onClick: () => WD(newValueMap[e]?.displayValue, o)
       }
     }, e))]
@@ -69,7 +69,7 @@ export function $$O2({
   let A = m?.type === "TEXT" || g?.type === "TEXT";
   let b = !t || t === AD;
   let v = !e || e === AD;
-  let I = b ? _$$t("dev_handoff.compare_changes.banner.added_layer") : _$$t("dev_handoff.compare_changes.banner.removed_layer");
+  let I = b ? getI18nString("dev_handoff.compare_changes.banner.added_layer") : getI18nString("dev_handoff.compare_changes.banner.removed_layer");
   let {
     inspectionMode,
     setInspectionMode,
@@ -235,7 +235,7 @@ let L = memo(({
       }(e.changed, e.basis));
       let a = r.some(e => e.lines.some(e => void 0 !== e.diff));
       let s = Math.trunc(performance.now() - i);
-      sx("dev_mode.compare_changes.diffing", {
+      trackEventAnalytics("dev_mode.compare_changes.diffing", {
         type: "code",
         durationMs: s
       }, {
@@ -280,13 +280,13 @@ let L = memo(({
         color: _$$S.PLAIN,
         text: jsxs(Fragment, {
           children: [jsx("p", {
-            children: _$$t("dev_handoff.compare_changes.banner.no_changes")
+            children: getI18nString("dev_handoff.compare_changes.banner.no_changes")
           }), jsx("div", {
             className: "compare_changes_right_panel--bannerLink--pPJYo",
             onClick: p,
             role: "button",
             tabIndex: 0,
-            children: _$$t("dev_handoff.compare_changes.banner.no_changes_link")
+            children: getI18nString("dev_handoff.compare_changes.banner.no_changes_link")
           })]
         })
       })
@@ -318,7 +318,7 @@ function F({
     })
   });
 }
-let M = e => e?.valueOf() === _$$t("collaboration.branching_node_treatments.value.empty_dash");
+let M = e => e?.valueOf() === getI18nString("collaboration.branching_node_treatments.value.empty_dash");
 function j({
   basis: e,
   change: t,

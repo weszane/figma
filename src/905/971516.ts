@@ -1,5 +1,5 @@
 import { ServiceCategories as _$$e } from "../905/165054";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { N } from "../905/64868";
 import { R } from "../905/927840";
 import { t as _$$t } from "../905/367656";
@@ -21,7 +21,7 @@ export class $$c0 {
     return !1;
   }
   get border() {
-    return this.readValue("border", (e) => {
+    return this.readValue("border", e => {
       let t;
       "RECTANGLE" === e.type ? t = new N(e, this.nodeCache, this.boundVariables, this.inferredVariables) : "LINE" === e.type ? t = new N({
         strokes: [],
@@ -35,18 +35,18 @@ export class $$c0 {
         topRightRadius: 0,
         bottomLeftRadius: 0,
         dashPattern: []
-      }, this.nodeCache, this.boundVariables, this.inferredVariables) : "ELLIPSE" === e.type ? t = new N(new Ux(e), this.nodeCache, this.boundVariables, this.inferredVariables) : $D(_$$e.DEVELOPER_TOOLS, Error(`Unexpected node type for border: ${e?.type}`));
+      }, this.nodeCache, this.boundVariables, this.inferredVariables) : "ELLIPSE" === e.type ? t = new N(new Ux(e), this.nodeCache, this.boundVariables, this.inferredVariables) : reportError(_$$e.DEVELOPER_TOOLS, Error(`Unexpected node type for border: ${e?.type}`));
       return t;
     });
   }
   get fills() {
-    return this.readValue("fills", (e) => {
+    return this.readValue("fills", e => {
       let t;
-      return "symbol" == typeof e?.fills ? [] : ("RECTANGLE" === e.type ? t = e?.fills?.filter((e) => e.visible ?? !0) ?? [] : "LINE" === e.type ? t = e?.strokes?.filter((e) => e.visible ?? !0) ?? [] : "ELLIPSE" === e.type ? t = e?.fills?.filter((e) => e.visible ?? !0) ?? [] : $D(_$$e.DEVELOPER_TOOLS, Error(`Unexpected node type for fill: ${e?.type}`)), t);
+      return "symbol" == typeof e?.fills ? [] : ("RECTANGLE" === e.type ? t = e?.fills?.filter(e => e.visible ?? !0) ?? [] : "LINE" === e.type ? t = e?.strokes?.filter(e => e.visible ?? !0) ?? [] : "ELLIPSE" === e.type ? t = e?.fills?.filter(e => e.visible ?? !0) ?? [] : reportError(_$$e.DEVELOPER_TOOLS, Error(`Unexpected node type for fill: ${e?.type}`)), t);
     });
   }
   get layout() {
-    return this.readValue("layout", (e) => {
+    return this.readValue("layout", e => {
       let t;
       if ("RECTANGLE" === e.type) t = new _$$t(e, this.nodeCache);else if ("LINE" === e.type) {
         let i = 0;
@@ -72,37 +72,37 @@ export class $$c0 {
     });
   }
   get gridLayout() {
-    return this.readValue("gridLayout", (e) => new R(e));
+    return this.readValue("gridLayout", e => new R(e));
   }
   get fillStyle() {
-    return this.readValue("fillStyle", (e) => fl(e, this.nodeCache.stylesResolver));
+    return this.readValue("fillStyle", e => fl(e, this.nodeCache.stylesResolver));
   }
   get strokeStyle() {
-    return this.readValue("strokeStyle", (e) => wI(e, this.nodeCache.stylesResolver));
+    return this.readValue("strokeStyle", e => wI(e, this.nodeCache.stylesResolver));
   }
   get effectStyle() {
-    return this.readValue("effectStyle", (e) => $r(e, this.nodeCache.stylesResolver));
+    return this.readValue("effectStyle", e => $r(e, this.nodeCache.stylesResolver));
   }
   get id() {
-    return this.readValue("id", (e) => e.id);
+    return this.readValue("id", e => e.id);
   }
   get name() {
-    return this.readValue("name", (e) => e.name);
+    return this.readValue("name", e => e.name);
   }
   get effects() {
-    return this.readValue("effects", (e) => e.effects.filter((e) => e.visible ?? !0));
+    return this.readValue("effects", e => e.effects.filter(e => e.visible ?? !0));
   }
   get opacity() {
-    return this.readValue("opacity", (e) => e.opacity);
+    return this.readValue("opacity", e => e.opacity);
   }
   get blendMode() {
-    return this.readValue("blendMode", (e) => e.blendMode);
+    return this.readValue("blendMode", e => e.blendMode);
   }
   get boundVariables() {
-    return this.readValue("boundVariables", (e) => e.boundVariables);
+    return this.readValue("boundVariables", e => e.boundVariables);
   }
   get inferredVariables() {
-    return this.readValue("inferredVariables", (e) => e.availableInferredVariables);
+    return this.readValue("inferredVariables", e => e.availableInferredVariables);
   }
   getVariableValue(e) {
     return ut(this.boundVariables, this.inferredVariables, e, this.nodeCache.variableResolver);

@@ -14,7 +14,7 @@ import { Jf, fF, Bu, oN, _Y, OL } from "../905/999278";
 import { _ as _$$_ } from "../figma_app/496441";
 import { E as _$$E } from "../905/632989";
 import { B } from "../905/714743";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { ln, bl, Ae } from "../figma_app/12182";
 import { A as _$$A } from "../svg/690738";
 function I({
@@ -29,7 +29,7 @@ function I({
       return jsxs(Fragment, {
         children: [jsxs("span", {
           className: ln,
-          children: [_$$t("hyperlink.prefix.open"), " "]
+          children: [getI18nString("hyperlink.prefix.open"), " "]
         }), jsx("div", {
           className: bl,
           children: i
@@ -42,7 +42,7 @@ function I({
       return jsx(Fragment, {
         children: jsxs("span", {
           className: ln,
-          children: [_$$t("hyperlink.prefix.open"), " ", e]
+          children: [getI18nString("hyperlink.prefix.open"), " ", e]
         })
       });
     }
@@ -62,7 +62,7 @@ function I({
       }), jsx(_$$E, {
         onClick: t,
         className: "x18tqr4w xet2fuk x11ajrs9 x6xwguf xt0e3qv x19y5rnk x1kax57l xezivpi",
-        children: tx("hyperlink.edit")
+        children: renderI18nText("hyperlink.edit")
       })]
     })
   });

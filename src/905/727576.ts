@@ -1,9 +1,9 @@
-import { eU } from "../figma_app/27355";
-import { tx } from "../905/303541";
-let $$a0 = eU(void 0);
-let $$s1 = eU(!1);
-let $$o2 = eU(tx("magic_link.running"));
-let $$l3 = eU(!1);
+import { atom } from "../figma_app/27355";
+import { renderI18nText } from "../905/303541";
+let $$a0 = atom(void 0);
+let $$s1 = atom(!1);
+let $$o2 = atom(renderI18nText("magic_link.running"));
+let $$l3 = atom(!1);
 export const Gh = $$a0;
 export const d_ = $$s1;
 export const pD = $$o2;

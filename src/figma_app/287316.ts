@@ -7,13 +7,13 @@ import { nj } from "../905/125019";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { NLJ, glU, Ez5, Bko } from "../figma_app/763686";
 import { nc } from "../905/189185";
-import { zl, md } from "../figma_app/27355";
+import { atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
 import _ from "../vendor/73823";
 import { A as _$$A } from "../vendor/90566";
 import { h as _$$h } from "../905/207101";
 import { ZC } from "../figma_app/39751";
 import { F as _$$F } from "../figma_app/954027";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { Vs, H9 } from "../figma_app/930338";
 import { GI, IZ, SK } from "../905/125333";
 import { KE, En, jx } from "../905/116101";
@@ -41,7 +41,7 @@ import { jR, Sb } from "../figma_app/728075";
 import { bE, LK, T5, xp, MC, FC, zD, p6, U9, X4, k as _$$k, E5, tj } from "../figma_app/340893";
 import { I as _$$I } from "../figma_app/688563";
 import { buildUploadUrl } from "../figma_app/169182";
-import { t as _$$t2 } from "../905/303541";
+import { getI18nString } from "../905/303541";
 var h = _;
 let z = window.devicePixelRatio;
 function W({
@@ -1112,14 +1112,14 @@ function ec(e) {
               rowMaxSize: 4,
               pages: p6
             },
-            overflowTitle: _$$t2("mobile_toolbars.shape"),
+            overflowTitle: getI18nString("mobile_toolbars.shape"),
             overflowIconImageURL: buildUploadUrl("0be9510a23488137a678f01ac5cd896772a80296"),
             webWantsSourceRect: !1,
             flashesOnPress: !1
           }, {
             identifier: "STICKY",
             iconImageURL: buildUploadUrl("b6b1bc0a50bc77eb596d759b04f361f562e728c7"),
-            overflowTitle: _$$t2("fullscreen_actions.set-tool-sticky"),
+            overflowTitle: getI18nString("fullscreen_actions.set-tool-sticky"),
             overflowIconImageURL: buildUploadUrl("7a2d4171ef94d6eaea103c1c9bffdb06b8ec8287"),
             webWantsSourceRect: !1,
             flashesOnPress: !1
@@ -1127,28 +1127,28 @@ function ec(e) {
             identifier: "TYPE",
             iconImageURL: buildUploadUrl("51937510898a125b0ca175f5d7d02c605c48ed2d"),
             renderIconInColor: !0,
-            overflowTitle: _$$t2("fullscreen_actions.set-tool-type"),
+            overflowTitle: getI18nString("fullscreen_actions.set-tool-type"),
             overflowIconImageURL: buildUploadUrl("c074b4868bc9231628c7b9e6a1614a754143175c"),
             webWantsSourceRect: !1,
             flashesOnPress: !1
           }, {
             identifier: "TABLE",
             iconImageURL: buildUploadUrl("22b12dc561adb16ad97d99c02d49345f9def11ee"),
-            overflowTitle: _$$t2("fullscreen_actions.set-tool-table"),
+            overflowTitle: getI18nString("fullscreen_actions.set-tool-table"),
             overflowIconImageURL: buildUploadUrl("eca2a1f86871da1c1d3cdb81c1a8b23c47aea144"),
             webWantsSourceRect: !1,
             flashesOnPress: !1
           }, {
             identifier: "SECTION",
             iconImageURL: buildUploadUrl("24fff4c1aaa1d8b2a6770272e9125f6eb3a3beba"),
-            overflowTitle: _$$t2("fullscreen_actions.set-tool-section"),
+            overflowTitle: getI18nString("fullscreen_actions.set-tool-section"),
             overflowIconImageURL: buildUploadUrl("a78ea67aa20314d68d6d39ac98cec99151cd7be1"),
             webWantsSourceRect: !1,
             flashesOnPress: !1
           }, {
             identifier: "STAMP",
             iconImageURL: buildUploadUrl("3616f0c148716b9d60607811623d629f4305e662"),
-            overflowTitle: _$$t2("fullscreen_actions.set-tool-stamp"),
+            overflowTitle: getI18nString("fullscreen_actions.set-tool-stamp"),
             overflowIconImageURL: buildUploadUrl("8529d36b4879c096a333662e64ea2ea1bab4613f"),
             webWantsSourceRect: !0,
             flashesOnPress: !1
@@ -1166,7 +1166,7 @@ function ec(e) {
                 items: et
               }]
             },
-            overflowTitle: _$$t2("mobile_toolbars.connector"),
+            overflowTitle: getI18nString("mobile_toolbars.connector"),
             overflowIconImageURL: buildUploadUrl("a85d1067323794696bcb38964add37587a0f3518"),
             webWantsSourceRect: !1,
             flashesOnPress: !1
@@ -1175,7 +1175,7 @@ function ec(e) {
             iconImageURL: buildUploadUrl("e2bdbb0b1823d382e51f72211ac291757a6b5c7d"),
             highlightedIconImageURL: buildUploadUrl("5b71e7229996334b6afb133d26f10b4f3bc3279e"),
             selectedIconImageURL: buildUploadUrl("ca5002d6c2b8fb319fa945819ebaf3a5eb703900"),
-            overflowTitle: _$$t2("mobile_toolbars.universal_insert"),
+            overflowTitle: getI18nString("mobile_toolbars.universal_insert"),
             overflowIconImageURL: buildUploadUrl("d8e8e439b0de3f0790a248cf1de5c58dd1e7eab0"),
             webWantsSourceRect: !0,
             flashesOnPress: !1,
@@ -1342,14 +1342,14 @@ function ec(e) {
               position: pf.hoveringAboveBar,
               pages: p6
             },
-            overflowTitle: _$$t2("mobile_toolbars.shape"),
+            overflowTitle: getI18nString("mobile_toolbars.shape"),
             overflowIconImageURL: buildUploadUrl("0be9510a23488137a678f01ac5cd896772a80296"),
             webWantsSourceRect: !1,
             flashesOnPress: !1
           }, {
             identifier: "STICKY",
             iconImageURL: buildUploadUrl("b6b1bc0a50bc77eb596d759b04f361f562e728c7"),
-            overflowTitle: _$$t2("fullscreen_actions.set-tool-sticky"),
+            overflowTitle: getI18nString("fullscreen_actions.set-tool-sticky"),
             overflowIconImageURL: buildUploadUrl("7a2d4171ef94d6eaea103c1c9bffdb06b8ec8287"),
             webWantsSourceRect: !1,
             flashesOnPress: !1
@@ -1357,28 +1357,28 @@ function ec(e) {
             identifier: "TYPE",
             iconImageURL: buildUploadUrl("51937510898a125b0ca175f5d7d02c605c48ed2d"),
             renderIconInColor: !0,
-            overflowTitle: _$$t2("fullscreen_actions.set-tool-type"),
+            overflowTitle: getI18nString("fullscreen_actions.set-tool-type"),
             overflowIconImageURL: buildUploadUrl("c074b4868bc9231628c7b9e6a1614a754143175c"),
             webWantsSourceRect: !1,
             flashesOnPress: !1
           }, {
             identifier: "TABLE",
             iconImageURL: buildUploadUrl("22b12dc561adb16ad97d99c02d49345f9def11ee"),
-            overflowTitle: _$$t2("fullscreen_actions.set-tool-table"),
+            overflowTitle: getI18nString("fullscreen_actions.set-tool-table"),
             overflowIconImageURL: buildUploadUrl("eca2a1f86871da1c1d3cdb81c1a8b23c47aea144"),
             webWantsSourceRect: !1,
             flashesOnPress: !1
           }, {
             identifier: "SECTION",
             iconImageURL: buildUploadUrl("24fff4c1aaa1d8b2a6770272e9125f6eb3a3beba"),
-            overflowTitle: _$$t2("fullscreen_actions.set-tool-section"),
+            overflowTitle: getI18nString("fullscreen_actions.set-tool-section"),
             overflowIconImageURL: buildUploadUrl("a78ea67aa20314d68d6d39ac98cec99151cd7be1"),
             webWantsSourceRect: !1,
             flashesOnPress: !1
           }, {
             identifier: "STAMP",
             iconImageURL: buildUploadUrl("3616f0c148716b9d60607811623d629f4305e662"),
-            overflowTitle: _$$t2("fullscreen_actions.set-tool-stamp"),
+            overflowTitle: getI18nString("fullscreen_actions.set-tool-stamp"),
             overflowIconImageURL: buildUploadUrl("8529d36b4879c096a333662e64ea2ea1bab4613f"),
             webWantsSourceRect: !0,
             flashesOnPress: !1
@@ -1404,7 +1404,7 @@ function ec(e) {
                 }]
               }]
             },
-            overflowTitle: _$$t2("mobile_toolbars.connector"),
+            overflowTitle: getI18nString("mobile_toolbars.connector"),
             overflowIconImageURL: buildUploadUrl("a85d1067323794696bcb38964add37587a0f3518"),
             webWantsSourceRect: !1,
             flashesOnPress: !1
@@ -1413,7 +1413,7 @@ function ec(e) {
             iconImageURL: buildUploadUrl("e2bdbb0b1823d382e51f72211ac291757a6b5c7d"),
             highlightedIconImageURL: buildUploadUrl("5b71e7229996334b6afb133d26f10b4f3bc3279e"),
             selectedIconImageURL: buildUploadUrl("ca5002d6c2b8fb319fa945819ebaf3a5eb703900"),
-            overflowTitle: _$$t2("mobile_toolbars.universal_insert"),
+            overflowTitle: getI18nString("mobile_toolbars.universal_insert"),
             overflowIconImageURL: buildUploadUrl("d8e8e439b0de3f0790a248cf1de5c58dd1e7eab0"),
             webWantsSourceRect: !0,
             flashesOnPress: !1,
@@ -1437,10 +1437,10 @@ function eu(e, t) {
       type: "SOLID",
       color: t
     }];
-    return e === GI ? zl.set(GI, e => ({
+    return e === GI ? atomStoreManager.set(GI, e => ({
       ...e,
       paints: r
-    })) : zl.set(IZ, e => ({
+    })) : atomStoreManager.set(IZ, e => ({
       ...e,
       paints: r
     }));
@@ -1473,7 +1473,7 @@ let e_ = () => {
   let e = useSelector(e => e.mirror?.appModel.isReadOnly);
   let {
     washiTapePaint
-  } = md(SK);
+  } = useAtomWithSubscription(SK);
   let r = washiTapePaint?.image?.hash && nj(washiTapePaint?.image?.hash);
   useEffect(() => {
     e || r || Iw(M8(_$$B[0]));
@@ -1497,7 +1497,7 @@ export function $$em6() {
         let t = setTimeout(() => {
           window.FigmaMobile.nativeToolbarSupportedVersions = void 0;
           n._native_toolbar_confirm_configuration = () => {};
-          $D(_$$e.FIGJAM, Error(`Native toolbar did not confirm configuration before timeout, version ${e}`));
+          reportError(_$$e.FIGJAM, Error(`Native toolbar did not confirm configuration before timeout, version ${e}`));
         }, 2e3);
         n._native_toolbar_confirm_configuration = () => {
           clearTimeout(t);
@@ -1531,7 +1531,7 @@ export function $$em6() {
     }, n._native_toolbar_set_slider_value = (e, t) => {
       switch (t) {
         case "PRIMARY_PENCIL_OPACITY":
-          zl.set(GI, t => ({
+          atomStoreManager.set(GI, t => ({
             ...t,
             strokeOpacity: e
           }));
@@ -1566,14 +1566,14 @@ export function $$em6() {
       switch (U9.includes(e) ? t = "SHAPE_NAME" : X4.includes(e) ? t = "STROKE_WIDTH" : _$$k.includes(e) && (t = "HIGHLIGHTER_WIDTH"), t) {
         case "STROKE_WIDTH":
           let r = E5.get(e);
-          r && zl.set(GI, e => ({
+          r && atomStoreManager.set(GI, e => ({
             ...e,
             strokeWeight: r
           }));
           break;
         case "HIGHLIGHTER_WIDTH":
           let n = tj.get(e);
-          n && zl.set(IZ, e => ({
+          n && atomStoreManager.set(IZ, e => ({
             ...e,
             strokeWeight: n
           }));
@@ -1697,7 +1697,7 @@ export function $$eE0() {
   });
   let b = ut(Ez5?.editorState().selectionEmpty, !0);
   let N = useMemo(() => LK("PENCIL"), []);
-  let L = md(GI);
+  let L = useAtomWithSubscription(GI);
   useEffect(() => {
     let t = L.paints?.[0]?.color;
     if (t) {
@@ -1715,7 +1715,7 @@ export function $$eE0() {
     }
   }, [e, L, N]);
   let F = useMemo(() => LK("HIGHLIGHTER"), []);
-  let j = md(IZ);
+  let j = useAtomWithSubscription(IZ);
   useEffect(() => {
     let t = j.paints?.[0]?.color;
     t && eg(jsx(K, {
@@ -1724,7 +1724,7 @@ export function $$eE0() {
       r && e?.nativeToolbarUpdateToolSettings?.("HIGHLIGHTER", ep(F, t, r));
     }).catch(console.error);
   }, [e, j, F]);
-  let U = md(SK);
+  let U = useAtomWithSubscription(SK);
   let B = U.washiTapePaint?.image;
   useEffect(() => {
     let t = B?.hash;

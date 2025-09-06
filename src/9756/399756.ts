@@ -8,9 +8,9 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { j as _$$j } from "../figma_app/602140";
 import { Uz, xH } from "../905/63728";
-import { xi } from "../905/714362";
+import { logWarning } from "../905/714362";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { Y } from "../905/830372";
 import { Ay } from "../figma_app/432652";
@@ -115,7 +115,7 @@ export function $$y0() {
   let y = useRef(!0);
   let D = useCallback(async () => {
     if (state === qy.RUNNING) {
-      xi("first-draft-fine-tune", "handleSubmit called while already running");
+      logWarning("first-draft-fine-tune", "handleSubmit called while already running");
       return;
     }
     let r = await start({
@@ -181,7 +181,7 @@ export function $$y0() {
         },
         aiTrackingContext,
         secondaryMessage: void 0,
-        children: tx("first_draft.running")
+        children: renderI18nText("first_draft.running")
       });
     default:
       return jsx(Fragment, {});

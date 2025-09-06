@@ -8,7 +8,7 @@ import { J } from "../905/614223";
 import { buildUploadUrl } from "../figma_app/169182";
 import { e6 } from "../figma_app/617427";
 import { o as _$$o } from "../905/160095";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { WX } from "../figma_app/482142";
 import { fu } from "../figma_app/831799";
 import { TN } from "../figma_app/831101";
@@ -24,8 +24,8 @@ export function $$T1(e) {
     team,
     onClose
   } = e;
-  let T = [tx("sites.starter_modal.feature.responsive_breakpoints"), tx("sites.starter_modal.feature.templates"), tx("sites.starter_modal.feature.preset_interactions", {
-    moreLink: tx("sites.starter_modal.feature.custom.learn_more_link")
+  let T = [renderI18nText("sites.starter_modal.feature.responsive_breakpoints"), renderI18nText("sites.starter_modal.feature.templates"), renderI18nText("sites.starter_modal.feature.preset_interactions", {
+    moreLink: renderI18nText("sites.starter_modal.feature.custom.learn_more_link")
   })];
   return jsx(bL, {
     manager: r,
@@ -46,7 +46,7 @@ export function $$T1(e) {
             className: "x78zum5 xdt5ytf x17d4w8g",
             children: [jsx("p", {
               className: "x122x9cr xwsyq91 xk50ysn xcgk4ki",
-              children: tx("sites.starter_modal.title")
+              children: renderI18nText("sites.starter_modal.title")
             }), T.map((e, t) => jsxs("div", {
               className: "x4z9k3i xo1l8bm x1o2sk6j x78zum5",
               children: [jsx(_$$g, {
@@ -70,17 +70,17 @@ export function $$T1(e) {
                 onClose();
               },
               className: "x78zum5 xl56j7k x6s0dn4 x1vqgdyp x19y5rnk x4z9k3i x1o2sk6j xu5wzci x1tk3asg xk50ysn",
-              children: tx("sites.starter_modal.upgrade")
+              children: renderI18nText("sites.starter_modal.upgrade")
             }), jsx(_$$o, {
               href: "https://help.figma.com/hc/articles/31230436657815",
               newTab: !0,
               className: "x78zum5 xl56j7k x6s0dn4 x1vqgdyp x19y5rnk x4z9k3i x1o2sk6j xv2f06h xt0e3qv x1akne3o",
-              children: tx("sites.starter_modal.learn_more")
+              children: renderI18nText("sites.starter_modal.learn_more")
             })]
           }), jsx("div", {
             className: "x1j6dyjg x1d3mw78 x1n0bwc9 xamitd3 x2b8uid xafpxmx x1yuz8eb xwya9rg",
             children: jsx("p", {
-              children: tx("sites.starter_modal.footer")
+              children: renderI18nText("sites.starter_modal.footer")
             })
           })]
         })

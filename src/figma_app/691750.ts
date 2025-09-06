@@ -10,7 +10,7 @@ import { E as _$$E2 } from "../905/235326";
 import { glU } from "../figma_app/763686";
 import _ from "classnames";
 import { Pt } from "../figma_app/806412";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { gl } from "../905/216495";
 import { dT } from "../figma_app/889655";
 import { Ib } from "../905/129884";
@@ -37,11 +37,11 @@ export function $$A0(e) {
     tooltip
   } = useMemo(() => {
     if (N) return {
-      text: _$$t("design_systems.instance_panel.from_this_file"),
+      text: getI18nString("design_systems.instance_panel.from_this_file"),
       icon: jsx(_$$y, {
         className: v
       }),
-      tooltip: _$$t("design_systems.instance_panel.go_to_main_component")
+      tooltip: getI18nString("design_systems.instance_panel.go_to_main_component")
     };
     if (!x) return {};
     if (xA(x)) return {
@@ -49,7 +49,7 @@ export function $$A0(e) {
       icon: jsx(U, {
         className: v
       }),
-      tooltip: _$$t("design_systems.instance_panel.view_library_in_community")
+      tooltip: getI18nString("design_systems.instance_panel.view_library_in_community")
     };
     {
       let e = _F(x);
@@ -60,7 +60,7 @@ export function $$A0(e) {
         }) : jsx(_$$l, {
           className: v
         }),
-        tooltip: _$$t("design_systems.instance_panel.go_to_main_component_nin_library")
+        tooltip: getI18nString("design_systems.instance_panel.go_to_main_component_nin_library")
       };
     }
   }, [x, N]);

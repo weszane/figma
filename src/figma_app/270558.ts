@@ -5,7 +5,7 @@ import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, nB } from "../figma_app/272243";
 import { $n } from "../905/521428";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { M } from "../905/456042";
 import { Ce } from "../905/156213";
 import { fu } from "../figma_app/831799";
@@ -55,7 +55,7 @@ export let $$f0 = Ju(function (e) {
           }), jsx($n, {
             variant: "ghost",
             onClick: r,
-            children: tx("community.try.pick_workspace.cancel")
+            children: renderI18nText("community.try.pick_workspace.cancel")
           })]
         })
       })

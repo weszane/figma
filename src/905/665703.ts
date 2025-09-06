@@ -1,5 +1,5 @@
 import { ServiceCategories as _$$e } from "../905/165054";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { vh, Rq, td } from "../figma_app/181241";
 import { z } from "../905/239603";
 import { M4 } from "../905/713695";
@@ -7,7 +7,7 @@ import { nn } from "../figma_app/45218";
 export let $$d0 = new class {
   constructor() {
     this.CommunityShelvesSchemaValidator = vh();
-    this.getCommunityShelfById = (e) => this.CommunityShelvesSchemaValidator.validate(async ({
+    this.getCommunityShelfById = e => this.CommunityShelvesSchemaValidator.validate(async ({
       xr: t
     }) => await t.get(`/api/community_shelves/id/${e.categoryId}`));
     this.CommunityShelfV2SchemaValidator = Rq("CommunityShelfV2SchemaValidator", z.array(nn), null, !0);
@@ -39,7 +39,7 @@ export let $$d0 = new class {
             prevPage: i.data.pagination.prevPage
           };
         } catch (e) {
-          $D(_$$e.COMMUNITY, e);
+          reportError(_$$e.COMMUNITY, e);
           return e;
         }
       }

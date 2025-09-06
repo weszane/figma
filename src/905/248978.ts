@@ -1,7 +1,7 @@
 import { ex } from "../905/524523";
 import { jsxs, jsx } from "react/jsx-runtime";
 import { s } from "../cssbuilder/589278";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 export let $$s0 = ex("style_info", function (e) {
   let {
     styleName,
@@ -21,7 +21,7 @@ export let $$s0 = ex("style_info", function (e) {
       style: {
         fontStyle: "italic"
       },
-      children: tx("design_systems.styles.style_name_tooltip", {
+      children: renderI18nText("design_systems.styles.style_name_tooltip", {
         fileName: styleFileName
       })
     })]

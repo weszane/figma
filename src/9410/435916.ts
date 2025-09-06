@@ -4,11 +4,11 @@ import { useDispatch, useSelector } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { m7W, glU } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import c from "classnames";
 import { h as _$$h } from "../905/207101";
-import { Xb, aR } from "../figma_app/778880";
-import { tx } from "../905/303541";
+import { isAnyMobile, isIOSUA } from "../figma_app/778880";
+import { renderI18nText } from "../905/303541";
 import { b as _$$b } from "../905/985254";
 import { e as _$$e } from "../905/621515";
 import { A as _$$A } from "../905/956262";
@@ -22,7 +22,7 @@ import { U as _$$U } from "../905/455766";
 import { d as _$$d } from "../905/14910";
 import { w as _$$w, tX } from "../figma_app/728657";
 import { Td } from "../905/595131";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { oB, ho, j7 } from "../905/929976";
 import { q as _$$q } from "../905/924253";
 import { Um } from "../905/848862";
@@ -38,7 +38,7 @@ function M({
   targetKey: t = oi.ZOOM
 }) {
   let i = useDispatch();
-  let s = _$$R(({
+  let s = selectWithShallowEqual(({
     mirror: {
       appModel: e
     }
@@ -87,8 +87,8 @@ function M({
     onClose: u,
     targetKey: t,
     emphasized: !0,
-    title: tx("mouse_controls_modal.new_user.title"),
-    description: tx("mouse_controls_modal.new_user.description"),
+    title: renderI18nText("mouse_controls_modal.new_user.title"),
+    description: renderI18nText("mouse_controls_modal.new_user.description"),
     arrowPosition: F_.LEFT_TITLE
   });
 }
@@ -495,13 +495,13 @@ function Y(e) {
     trackingContext: "FigJam New User Zoom Banner",
     content: jsx("div", {
       className: z,
-      children: tx("rcs.figjam_zoom.to_zoom_pinch_your_trackpad_or_hold_and_scroll", {
+      children: renderI18nText("rcs.figjam_zoom.to_zoom_pinch_your_trackpad_or_hold_and_scroll", {
         boldTextPinch: jsxs(Fragment, {
           children: [jsx("span", {
             className: u()("figjam_pan_zoom_onboarding--zoomIcon--efDh8", H),
             children: jsx(B, {})
           }), jsx(W, {
-            children: tx("rcs.figjam_zoom.to_zoom_pinch_your_trackpad_or_hold_and_scroll_bold_text_pinch")
+            children: renderI18nText("rcs.figjam_zoom.to_zoom_pinch_your_trackpad_or_hold_and_scroll_bold_text_pinch")
           })]
         }),
         boldTextScroll: jsxs(Fragment, {
@@ -509,7 +509,7 @@ function Y(e) {
             className: H,
             children: jsx(U, {})
           }), jsx(W, {
-            children: tx("rcs.figjam_zoom.to_zoom_pinch_your_trackpad_or_hold_and_scroll_bold_text_scroll")
+            children: renderI18nText("rcs.figjam_zoom.to_zoom_pinch_your_trackpad_or_hold_and_scroll_bold_text_scroll")
           })]
         })
       })
@@ -552,13 +552,13 @@ function J(e) {
     trackingContext: "FigJam New User Pan Banner",
     content: jsx("div", {
       className: z,
-      children: tx("rcs.figjam_pan.move_instructions", {
+      children: renderI18nText("rcs.figjam_pan.move_instructions", {
         boldTextSwipe: jsxs(Fragment, {
           children: [jsx("span", {
             className: H,
             children: jsx(K, {})
           }), jsx(W, {
-            children: tx("rcs.figjam_pan.move_instructions_bold_text_swipe")
+            children: renderI18nText("rcs.figjam_pan.move_instructions_bold_text_swipe")
           })]
         }),
         boldTextRightClick: jsxs(Fragment, {
@@ -566,7 +566,7 @@ function J(e) {
             className: H,
             children: jsx(G, {})
           }), jsx(W, {
-            children: tx("rcs.figjam_pan.hold_right_click")
+            children: renderI18nText("rcs.figjam_pan.hold_right_click")
           })]
         })
       })
@@ -583,7 +583,7 @@ function q({
   return jsx("button", {
     onClick: e,
     className: "figjam_pan_zoom_onboarding--changePreferencesButton--0z5Xs text--fontPos11--2LvXf text--_fontBase--QdLsd",
-    children: tx("rcs.figjam_pan_zoom_change_prefs")
+    children: renderI18nText("rcs.figjam_pan_zoom_change_prefs")
   });
 }
 export function $$$$X0() {
@@ -620,13 +620,13 @@ let ee = [function (e) {
   }) : null;
 }];
 function et() {
-  let e = md(Z);
-  let t = md(Q);
-  let i = md($);
-  let a = md(Fy);
-  let o = md(g5);
-  let l = md(NT);
-  let c = md(_$$w);
+  let e = useAtomWithSubscription(Z);
+  let t = useAtomWithSubscription(Q);
+  let i = useAtomWithSubscription($);
+  let a = useAtomWithSubscription(Fy);
+  let o = useAtomWithSubscription(g5);
+  let l = useAtomWithSubscription(NT);
+  let c = useAtomWithSubscription(_$$w);
   let [u, p] = useState(!1);
   let m = _$$A({
     numSteps: ee.length,
@@ -645,7 +645,7 @@ function et() {
     let t = m.currentStep === ee.length - 1;
     isShowing || !e || t || show({
       canShow: (e, t, i, r, n, a) => {
-        let s = !Xb && !aR;
+        let s = !isAnyMobile && !isIOSUA;
         let o = _$$d({
           emailValidatedAt: n,
           jobTitle: a

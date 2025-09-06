@@ -1,4 +1,4 @@
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 export class $$r0 {
   pathToSelectedView(e, t, i, n) {
     return 2 === t.length && "try-figjam" === t[1] ? {
@@ -12,7 +12,7 @@ export class $$r0 {
     return "figjamTry" === e.view != ("figjamTry" === t.view);
   }
   selectedViewName(e) {
-    return "figjamTry" !== e.view ? null : t("view_selectors.file_browser.try_figjam.try_fig_jam");
+    return "figjamTry" !== e.view ? null : getI18nString("view_selectors.file_browser.try_figjam.try_fig_jam");
   }
 }
 export const u = $$r0;

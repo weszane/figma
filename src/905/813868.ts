@@ -1,9 +1,9 @@
 import { glU } from "../figma_app/763686";
 import { getSceneGraphInstance } from "../905/830071";
 import { getFeatureFlags } from "../905/601108";
-import { nl } from "../figma_app/257275";
+import { isInteractionPathCheck } from "../figma_app/897289";
 import { Point } from "../905/736624";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Q7 } from "../905/15667";
 import { b as _$$b } from "../905/985254";
 import { Y5 } from "../figma_app/455680";
@@ -32,7 +32,7 @@ export function $$I0({
   isOnInternalCanvas: R
 }) {
   if (!o8()) {
-    fR(_$$t("widgets.cannot_insert_widget_while_logged_out"));
+    fR(getI18nString("widgets.cannot_insert_widget_while_logged_out"));
     return {
       widgetNodeID: void 0,
       widgetRunPromise: void 0
@@ -64,7 +64,7 @@ export function $$I0({
   });
   z.startInteraction(e, "insert");
   let P = glU.createWidget(e, t, i ?? "", w ?? "", k ?? null, R ?? null);
-  if (!nl() && T && function (e, t) {
+  if (!isInteractionPathCheck() && T && function (e, t) {
     let i = getSceneGraphInstance().get(e);
     if (i) {
       if (!t) {

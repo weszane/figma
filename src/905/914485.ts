@@ -3,7 +3,7 @@ import { useCallback, useMemo, useEffect } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { Wn } from "../figma_app/88484";
 import { IT } from "../figma_app/566371";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { S as _$$S } from "../905/417453";
 import { Q0, kq } from "../905/994947";
 import { MAl } from "../figma_app/43951";
@@ -11,7 +11,7 @@ import { YN } from "../figma_app/349248";
 import { uH, Or, MU } from "../figma_app/162807";
 import { e as _$$e } from "../905/404280";
 import { H } from "../905/315077";
-import { Xr, md } from "../figma_app/27355";
+import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { Ay } from "../905/612521";
 import { B } from "../905/714743";
 import { In } from "../905/672640";
@@ -32,8 +32,8 @@ function T({
   let o = useDispatch();
   let l = _6();
   let c = Xr(Q8);
-  let u = md(sC);
-  let p = md(R9);
+  let u = useAtomWithSubscription(sC);
+  let p = useAtomWithSubscription(R9);
   let h = useSelector(e => e.currentUserOrgId || null);
   let g = useSelector(e => e.search.sessionId);
   let T = _$$S(h)?.searches;
@@ -104,7 +104,7 @@ export function $$k0({
   return "loaded" === y.status && "loaded" === f.status ? jsxs(Fragment, {
     children: [_.length + b.length > 0 && jsx("div", {
       className: "faceted_search_preview_recents--header--JjcIl",
-      children: tx("search.preview_section.recent")
+      children: renderI18nText("search.preview_section.recent")
     }), _.map((i, r) => {
       let a = `${e}-recent-search-${r}`;
       return jsx(T, {

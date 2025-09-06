@@ -1,5 +1,5 @@
 import { useRef, useCallback } from "react";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { Point } from "../905/736624";
 import { BI } from "../figma_app/546509";
 export function $$o0(e) {
@@ -28,7 +28,7 @@ export function $$o0(e) {
     u();
   }, [c, p]);
   return e => {
-    "mouse" !== e.pointerType && (o?.shouldOptimizeForIpadApp || Ay.isMeetDevice) && function (e) {
+    "mouse" !== e.pointerType && (o?.shouldOptimizeForIpadApp || BrowserInfo.isMeetDevice) && function (e) {
       let t = e.target;
       for (; t && "body" !== t.tagName.toLowerCase();) {
         let e = getComputedStyle(t).overflowY;

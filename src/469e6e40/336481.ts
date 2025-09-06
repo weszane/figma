@@ -5,7 +5,7 @@ import { s as _$$s } from "../905/403855";
 import { zN } from "../figma_app/416935";
 import { Ay } from "../figma_app/930338";
 import { B } from "../905/714743";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Y } from "../905/830372";
 import { B as _$$B } from "../905/261906";
 import { JT } from "../figma_app/847597";
@@ -61,10 +61,10 @@ export function $$x1({
   return t ? jsx($$h2, {
     label: a,
     variant: "lock-grey",
-    tooltipText: _$$t("members_table.role_idp_tooltip.seat_rename")
+    tooltipText: getI18nString("members_table.role_idp_tooltip.seat_rename")
   }) : jsx("span", {
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": _$$t("admin_settings.people_tab.seat_invite_pending_tooltip"),
+    "data-tooltip": getI18nString("admin_settings.people_tab.seat_invite_pending_tooltip"),
     children: a
   });
 }

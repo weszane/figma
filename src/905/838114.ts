@@ -1,5 +1,5 @@
 import { serializeQuery } from "../905/634134";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 export class $$a0 {
   pathToSelectedView(e, t, i, n) {
     return 2 === t.length && "desktop_new_tab" === t[1] ? {
@@ -18,7 +18,7 @@ export class $$a0 {
     return "desktopNewTab" === e.view != ("desktopNewTab" === t.view);
   }
   selectedViewName(e) {
-    return "desktopNewTab" !== e.view ? null : t("desktop_new_tab.tab_title");
+    return "desktopNewTab" !== e.view ? null : getI18nString("desktop_new_tab.tab_title");
   }
 }
 export const i = $$a0;

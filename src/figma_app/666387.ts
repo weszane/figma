@@ -4,7 +4,7 @@ import { G as _$$G } from "../905/865520";
 import { generateRecordingKey } from "../figma_app/878298";
 import o from "classnames";
 import { IT } from "../figma_app/566371";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { eB } from "../905/765855";
 import { DQ, Pw } from "../figma_app/121751";
 import { A as _$$A } from "../905/654645";
@@ -22,7 +22,7 @@ import { useState, useRef } from "react";
 import { K } from "../905/443068";
 import { e as _$$e } from "../905/149844";
 import { P as _$$P } from "../905/537307";
-import { fp } from "../figma_app/27355";
+import { useAtomValueAndSetter } from "../figma_app/27355";
 import { P as _$$P2 } from "../905/347284";
 import { $O } from "../905/156213";
 import { fu } from "../figma_app/831799";
@@ -45,13 +45,13 @@ function H({
 }) {
   let a = cD();
   let s = useSelector(e => _$$_(a, e));
-  let [o, d] = fp(Ze);
+  let [o, d] = useAtomValueAndSetter(Ze);
   let [u, p] = useState(!1);
   let _ = Z9();
   let h = useRef(null);
   let m = {
     uuid: fJ,
-    name: _$$t("whiteboard.color_palettes.figjam_colors"),
+    name: getI18nString("whiteboard.color_palettes.figjam_colors"),
     baseColors: TS(r).map(e => z5.format(e))
   };
   if (!e) return jsx("div", {});
@@ -149,9 +149,9 @@ function W(e) {
       "color_palette_picker--header--m9FBq": !0,
       "color_palette_picker--header_bottomBorder--PRGsS": e.showBottomBorder
     }),
-    children: [e.teamName ? tx("whiteboard.color_palettes.color_palette_picker.team_palettes", {
+    children: [e.teamName ? renderI18nText("whiteboard.color_palettes.color_palette_picker.team_palettes", {
       teamName: e.teamName
-    }) : _$$t("whiteboard.color_palettes.color_palette_picker.team_palettes_no_name"), a && jsxs("div", {
+    }) : getI18nString("whiteboard.color_palettes.color_palette_picker.team_palettes_no_name"), a && jsxs("div", {
       className: "color_palette_picker--header__rightHand--z-7ux",
       children: [jsx(K, {
         onClick: () => {
@@ -162,10 +162,10 @@ function W(e) {
             }
           }));
         },
-        "aria-label": _$$t("whiteboard.color_palettes.dropdown.new_palette"),
+        "aria-label": getI18nString("whiteboard.color_palettes.dropdown.new_palette"),
         htmlAttributes: {
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": _$$t("whiteboard.color_palettes.dropdown.new_palette"),
+          "data-tooltip": getI18nString("whiteboard.color_palettes.dropdown.new_palette"),
           "data-tooltip-show-above": !0,
           "data-testid": "create-color-palette-button"
         },
@@ -182,10 +182,10 @@ function W(e) {
             }
           }));
         },
-        "aria-label": _$$t("whiteboard.color_palettes.dropdown.manage_palettes"),
+        "aria-label": getI18nString("whiteboard.color_palettes.dropdown.manage_palettes"),
         htmlAttributes: {
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": _$$t("whiteboard.color_palettes.dropdown.manage_palettes"),
+          "data-tooltip": getI18nString("whiteboard.color_palettes.dropdown.manage_palettes"),
           "data-tooltip-show-above": !0,
           "data-testid": "manage-color-palettes-button"
         },
@@ -278,7 +278,7 @@ function Y({
         t && d(eB({
           target: {
             kind: Ui.TEXT,
-            text: _$$t("whiteboard.color_palettes.tooltip.move_to_team")
+            text: getI18nString("whiteboard.color_palettes.tooltip.move_to_team")
           },
           targetRect: t.getBoundingClientRect(),
           position: Zj.ABOVE
@@ -295,7 +295,7 @@ function Y({
       recordingKey: generateRecordingKey(o, "colorPalettesPickerCaret"),
       tabIndex: -1,
       testId: "color-palettes-picker-button",
-      tooltip: t ? _$$t("whiteboard.color_palettes.tooltip.move_to_team") : void 0
+      tooltip: t ? getI18nString("whiteboard.color_palettes.tooltip.move_to_team") : void 0
     })
   }, "caret");
 }
@@ -317,9 +317,9 @@ function $({
       e && (isColorPalettePickerOpen ? closeColorPalettePicker(!0) : openColorPalettePicker());
     },
     disabled: t || r,
-    "aria-label": _$$t("whiteboard.color_palettes.dropdown.manage_palettes"),
+    "aria-label": getI18nString("whiteboard.color_palettes.dropdown.manage_palettes"),
     showTooltipWhenDisabled: !0,
-    tooltipText: r ? _$$t("whiteboard.color_palettes.tooltip.move_to_team") : _$$t("whiteboard.color_palettes.dropdown.manage_palettes"),
+    tooltipText: r ? getI18nString("whiteboard.color_palettes.tooltip.move_to_team") : getI18nString("whiteboard.color_palettes.dropdown.manage_palettes"),
     "data-testid": "color-palettes-picker-button",
     recordingKey: generateRecordingKey(i, "colorPalettesToolbeltButton"),
     children: jsx(_$$G, {})

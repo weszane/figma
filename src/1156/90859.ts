@@ -6,9 +6,9 @@ import { g as _$$g } from "../905/687265";
 import { K$p } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { Ay } from "@stylexjs/stylex";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { B } from "../905/714743";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { yV } from "../figma_app/516028";
 import { wW } from "../figma_app/656450";
 import { F as _$$F } from "../1156/295005";
@@ -88,7 +88,7 @@ function C({
       className: "x78zum5 x6s0dn4 x167g77z x1ypdohk x87ps6o x1qughib x1n0bwc9",
       onClick: () => c(!o),
       children: [jsx("span", {
-        children: _$$t("figmake.edits.edited_files", {
+        children: getI18nString("figmake.edits.edited_files", {
           fileCount: e.length
         })
       }), jsx("span", {
@@ -120,12 +120,12 @@ function E({
       className: "x1jnr06f x78zum5 x6s0dn4",
       children: [e.addedLines > 0 && jsx("span", {
         className: "xq6u9c4",
-        children: _$$t("figmake.edits.lines_added", {
+        children: getI18nString("figmake.edits.lines_added", {
           count: e.addedLines
         })
       }), e.removedLines > 0 && jsx("span", {
         className: "x172n1ly",
-        children: _$$t("figmake.edits.lines_removed", {
+        children: getI18nString("figmake.edits.lines_removed", {
           count: e.removedLines
         })
       }), i && jsx(_$$E, {
@@ -186,7 +186,7 @@ export function $$T5({
     className: "x78zum5 xdt5ytf xou54vl",
     children: [jsx("div", {
       ...Ay.props(defaultTypographyStyle),
-      children: _$$t("figmake.chat.restoring_a_previous_version")
+      children: getI18nString("figmake.chat.restoring_a_previous_version")
     }), _]
   });
 }
@@ -211,7 +211,7 @@ export function $$I4({
     codeSnapshot
   } = g;
   let _ = codeSnapshot?.codeSnapshotKey;
-  let b = u && _$$t("figmake.chat.edited_version", {
+  let b = u && getI18nString("figmake.chat.edited_version", {
     versionTitle: u
   });
   let {
@@ -236,7 +236,7 @@ export function $$I4({
     className: "x78zum5 xdt5ytf xou54vl",
     children: [jsx("div", {
       ...Ay.props(defaultTypographyStyle),
-      children: _$$t("figmake.edits.manual_edit_message")
+      children: getI18nString("figmake.edits.manual_edit_message")
     }), jsx(C, {
       changes: changedFiles,
       startExpanded: !0,
@@ -262,10 +262,10 @@ export function $$z3({
   } = n;
   let f = getSingletonSceneGraph().get(e);
   let y = _$$E2(f);
-  let _ = md(yV);
+  let _ = useAtomWithSubscription(yV);
   if (error || !hasBaseline || 0 === changedFiles.length) return null;
   let b = (y ? eB(y) : void 0) || _?.name;
-  let v = b && _$$t("figmake.chat.edited_version", {
+  let v = b && getI18nString("figmake.chat.edited_version", {
     versionTitle: b
   });
   let k = async () => {};
@@ -282,7 +282,7 @@ export function $$z3({
     className: "x78zum5 xdt5ytf xou54vl",
     children: [jsx("div", {
       ...Ay.props(defaultTypographyStyle),
-      children: _$$t("figmake.edits.manual_edit_message")
+      children: getI18nString("figmake.edits.manual_edit_message")
     }), jsx(C, {
       changes: changedFiles,
       startExpanded: !0,
@@ -297,7 +297,7 @@ export function $$M1() {
     className: "x78zum5 xdt5ytf xou54vl",
     children: [jsx("p", {
       ...Ay.props(A.textBodyLarge),
-      children: _$$t("figmake.duplicated_file_system_message")
+      children: getI18nString("figmake.duplicated_file_system_message")
     }), jsx(F, {})]
   });
 }
@@ -311,7 +311,7 @@ export function $$R0({
   let i = user?.handle;
   if (!e?.timestamp) return null;
   let s = new Date(e.timestamp);
-  let a = _$$t("figmake.chat_management.messages.chat_history_cleared_timestamp", {
+  let a = getI18nString("figmake.chat_management.messages.chat_history_cleared_timestamp", {
     time: s.toLocaleTimeString([], {
       hour: "2-digit",
       minute: "2-digit"
@@ -326,9 +326,9 @@ export function $$R0({
     className: "x78zum5 xdt5ytf xou54vl",
     children: jsx("div", {
       className: "x1n0bwc9 x1k4tb9n",
-      children: _$$t("figmake.chat_management.messages.chat_history_cleared", {
+      children: getI18nString("figmake.chat_management.messages.chat_history_cleared", {
         timestamp: a
-      }) + (i ? _$$t("figmake.chat_management.messages.chat_history_cleared_user", {
+      }) + (i ? getI18nString("figmake.chat_management.messages.chat_history_cleared_user", {
         username: i
       }) : "")
     })
@@ -349,7 +349,7 @@ function F() {
         })
       }), jsx("p", {
         ...Ay.props(A.textBodyLargeStrong),
-        children: _$$t("figmake.supabase.duplicated_file.cta")
+        children: getI18nString("figmake.supabase.duplicated_file.cta")
       })]
     })
   });

@@ -4,7 +4,7 @@ import { isNotNullish } from "../figma_app/95419";
 import { ey, yG } from "../905/859698";
 import { Ez5, CWU } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { eU, FZ, Iz } from "../figma_app/27355";
+import { atom, setupCustomAtom, createRemovableAtomFamily } from "../figma_app/27355";
 import { resourceUtils } from "../905/989992";
 import u from "../vendor/223926";
 import _ from "../vendor/239910";
@@ -13,14 +13,14 @@ import f from "../vendor/149674";
 import { BV, eS, a5, Ew } from "../905/888985";
 import { he } from "../905/157003";
 import { Ez } from "../figma_app/766708";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { JB as _$$JB } from "../figma_app/657017";
 import { lR, ku, p9, nT } from "../figma_app/255679";
 import { Y5 } from "../figma_app/455680";
 import { Vr, _n, j2, uE, RW, Lk, xb, kL } from "../figma_app/345195";
 import { Wh } from "../figma_app/615482";
 import { SG } from "../905/508457";
-import { OX, S9, Pj } from "../905/270322";
+import { createAtomWithReduxWithState, attachReducerWrapper, setupReduxAtomWithState } from "../905/270322";
 import { o9k, BbB, eHy, cmY, Ipg, jXq } from "../figma_app/43951";
 import { Rn, Dt, kz, ZI, GI, Vk, Hr } from "../figma_app/633080";
 import { TG } from "../905/72677";
@@ -29,24 +29,24 @@ var h = _;
 var g = m;
 var E = f;
 let P = SG(() => Ez5.libraryAssets().fileLevelVariableSetsSubscribed);
-let D = eU(e => e(P).map(Rn));
+let D = atom(e => e(P).map(Rn));
 let k = SG(() => Ez5.libraryAssets().fileLevelVariableSetsLocal);
-let M = eU(e => e(k).map(Dt));
+let M = atom(e => e(k).map(Dt));
 let F = SG(() => Ez5.libraryAssets().fileLevelVariablesSubscribed);
 let j = SG(() => Ez5.libraryAssets().fileLevelVariablesLocal);
-let U = eU(e => e(j).map(kz));
-let B = eU(e => e(F).map(ZI));
-eU(e => ({
+let U = atom(e => e(j).map(kz));
+let B = atom(e => e(F).map(ZI));
+atom(e => ({
   ...h()(e(M), e => e.keyForPublish),
   ...h()(e(D), e => e.key)
 }));
-eU(e => ({
+atom(e => ({
   ...h()(e(U), e => e.keyForPublish),
   ...h()(e(B), e => e.key)
 }));
 let $$G26 = (() => {
-  let e = OX({}, "SYNC_ATOM_VARIABLE_SETS_BY_ID");
-  let t = FZ(e, (e, t) => {
+  let e = createAtomWithReduxWithState({}, "SYNC_ATOM_VARIABLE_SETS_BY_ID");
+  let t = setupCustomAtom(e, (e, t) => {
     if (t) {
       if ("added" in t) {
         let r = h()(t.added.map(Dt), e => e.node_id);
@@ -79,16 +79,16 @@ let $$G26 = (() => {
       e(null);
     };
   };
-  return S9(t, e.reducer);
+  return attachReducerWrapper(t, e.reducer);
 })();
-let $$V20 = eU(e => ({
+let $$V20 = atom(e => ({
   ...e($$G26),
   ...e($$ec29)
 }));
-let $$H19 = Iz(e => eU(t => t($$G26)[e]));
-Iz(e => eU(t => t($$ec29)[e]));
-let $$z3 = Iz(e => eU(t => t($$V20)[e]));
-let $$W17 = Iz(e => Wh(() => eU(t => {
+let $$H19 = createRemovableAtomFamily(e => atom(t => t($$G26)[e]));
+createRemovableAtomFamily(e => atom(t => t($$ec29)[e]));
+let $$z3 = createRemovableAtomFamily(e => atom(t => t($$V20)[e]));
+let $$W17 = createRemovableAtomFamily(e => Wh(() => atom(t => {
   let r = t($$z3(e));
   if (!r || !getFeatureFlags().ds_extended_collections) return {};
   let n = t(eg);
@@ -102,7 +102,7 @@ let $$W17 = Iz(e => Wh(() => eU(t => {
         resolvedType: t.resolvedType,
         modeValues: Object.fromEntries(r.modes.map(e => {
           if (!e.parentModeId) {
-            x1("Mode in extended collection has no parent mode set", "variableTableDataForVariableSetAtom", {
+            logError("Mode in extended collection has no parent mode set", "variableTableDataForVariableSetAtom", {
               mode: e,
               variable: t,
               variableSet: r
@@ -112,7 +112,7 @@ let $$W17 = Iz(e => Wh(() => eU(t => {
             return null;
           }
           let n = t.modeValues[e.parentModeId];
-          return n ? [e.id, n] : (x1("Parent mode value not found in backing variable collection", "variableTableDataForVariableSetAtom", {
+          return n ? [e.id, n] : (logError("Parent mode value not found in backing variable collection", "variableTableDataForVariableSetAtom", {
             parentModeId: e.parentModeId,
             variable: t,
             variableSet: r
@@ -126,7 +126,7 @@ let $$W17 = Iz(e => Wh(() => eU(t => {
     Object.values(i).forEach(t => {
       let n = s[t.overriddenVariableID];
       if (!n) {
-        x1("Variable not found in backingVariableSet", "variableTableDataForVariableSetAtom", {
+        logError("Variable not found in backingVariableSet", "variableTableDataForVariableSetAtom", {
           overriddenVariableID: t.overriddenVariableID,
           extensionVariableSetID: e,
           backingVariableSetID: r.backingVariableSetId,
@@ -137,7 +137,7 @@ let $$W17 = Iz(e => Wh(() => eU(t => {
         return;
       }
       if (!t.overrideValues) {
-        x1("VariableOverride has no overrideValues", "variableTableDataForVariableSetAtom", {
+        logError("VariableOverride has no overrideValues", "variableTableDataForVariableSetAtom", {
           override: t,
           extensionVariableSetID: e
         }, {
@@ -168,20 +168,20 @@ let $$W17 = Iz(e => Wh(() => eU(t => {
     }, {}) : {};
   }
 })));
-Iz(e => BV(t => r => r(t({
+createRemovableAtomFamily(e => BV(t => r => r(t({
   fileKey: e
 }))));
-let $$K7 = Iz(e => eU(t => {
+let $$K7 = createRemovableAtomFamily(e => atom(t => {
   let r = {};
   for (let n of e) r[n] = t(o9k.Query({
     fileKey: n
   }));
   return r;
 }), arraysEqual);
-let $$Y28 = Iz(e => eU(t => g()(h()(e), e => t(BbB.Query({
+let $$Y28 = createRemovableAtomFamily(e => atom(t => g()(h()(e), e => t(BbB.Query({
   libraryKey: e
 })))), arraysEqual);
-let $$$22 = Iz(e => eS(t => r => r(t({
+let $$$22 = createRemovableAtomFamily(e => eS(t => r => r(t({
   fileKey: e
 }))));
 export function $$X14(e) {
@@ -189,24 +189,24 @@ export function $$X14(e) {
     hubFileId: e
   } : null);
 }
-let $$q13 = Iz(e => eU(t => {
+let $$q13 = createRemovableAtomFamily(e => atom(t => {
   let r = {};
   for (let n of e) r[n] = t(he(cmY)({
     variableCollectionKey: n
   }));
   return r;
 }), arraysEqual);
-let $$J8 = Iz(e => eU(t => g()(h()(e), e => t(Ipg.Query({
+let $$J8 = createRemovableAtomFamily(e => atom(t => g()(h()(e), e => t(Ipg.Query({
   libraryKey: e
 })))), arraysEqual);
-let $$Z18 = Iz(e => eU(t => {
+let $$Z18 = createRemovableAtomFamily(e => atom(t => {
   let r = {};
   for (let n of e) r[n] = t(jXq.Query({
     fileKey: n
   }));
   return r;
 }), arraysEqual);
-let $$Q24 = Iz(e => eU(t => {
+let $$Q24 = createRemovableAtomFamily(e => atom(t => {
   let r = {};
   for (let n of e) r[n] = t(eHy.Query({
     hubFileId: n
@@ -215,9 +215,9 @@ let $$Q24 = Iz(e => eU(t => {
 }), arraysEqual);
 export function $$ee10(e) {
   let t = g()(h()(e), () => resourceUtils.disabled());
-  return eU(t);
+  return atom(t);
 }
-let et = eU(e => {
+let et = atom(e => {
   let t = e($$ef21);
   let r = e(TG);
   let n = Object.values(t).filter(e => !lR(e, r)).map(e => e.key).sort();
@@ -225,7 +225,7 @@ let et = eU(e => {
     key: e
   })))).reduce((e, t) => (e[ey(t.args.key)] = t.result, e), {});
 });
-let er = eU(e => {
+let er = atom(e => {
   let t = e($$ef21);
   let r = e(TG);
   let n = (e(_$$JB) ? Object.values(t).filter(e => lR(e, r)) : []).map(e => e.key).sort().map(e => ({
@@ -243,12 +243,12 @@ let er = eU(e => {
     };
   }, {});
 });
-let en = eU(e => ({
+let en = atom(e => ({
   ...e(et),
   ...e(er)
 }), lQ);
-let $$ei12 = Pj(en, "SYNC_ATOM_USED_LIBRARY_VARIABLES_BY_KEY", {});
-let ea = eU(e => {
+let $$ei12 = setupReduxAtomWithState(en, "SYNC_ATOM_USED_LIBRARY_VARIABLES_BY_KEY", {});
+let ea = atom(e => {
   let t = [...new Set(Object.values(e(et)).map(e => e.data?.variable?.variableCollection.key).filter(isNotNullish))];
   let r = e($$ec29);
   let n = Object.keys(r);
@@ -260,7 +260,7 @@ let ea = eU(e => {
     key: e
   })))).reduce((e, t) => (e[yG(t.args.key)] = t.result, e), {});
 }, lQ);
-let es = eU(e => {
+let es = atom(e => {
   let t = [...new Set(Object.values(e(er)).map(e => e.data?.variable?.variableCollection.key).filter(isNotNullish))].sort().map(e => ({
     key: e
   }));
@@ -276,19 +276,19 @@ let es = eU(e => {
     };
   }, {});
 });
-let eo = eU(e => ({
+let eo = atom(e => ({
   ...e(ea),
   ...e(es)
 }), lQ);
-let $$el25 = Pj(eo, "SYNC_ATOM_USED_LIBRARY_VARIABLE_SETS_BY_KEY", {});
-eU(e => {
+let $$el25 = setupReduxAtomWithState(eo, "SYNC_ATOM_USED_LIBRARY_VARIABLE_SETS_BY_KEY", {});
+atom(e => {
   let t = Object.keys(e($$G26));
   if (0 !== t.length) return t[0];
 });
-let $$ed15 = eU(e => Object.values(e($$G26)));
+let $$ed15 = atom(e => Object.values(e($$G26)));
 let $$ec29 = (() => {
-  let e = OX({}, "SYNC_ATOM_SUBSCRIBED_VARIABLE_SETS_BY_ID");
-  let t = FZ(e, (e, t) => {
+  let e = createAtomWithReduxWithState({}, "SYNC_ATOM_SUBSCRIBED_VARIABLE_SETS_BY_ID");
+  let t = setupCustomAtom(e, (e, t) => {
     if (t) {
       if ("added" in t) {
         let r = h()(t.added.map(Rn), e => e.node_id);
@@ -321,14 +321,14 @@ let $$ec29 = (() => {
       e(null);
     };
   };
-  return S9(t, e.reducer);
+  return attachReducerWrapper(t, e.reducer);
 })();
 let $$eu2 = (() => {
-  let e = OX({}, "SYNC_ATOM_LOCAL_VARIABLES_BY_ID");
-  let t = FZ(e, (e, t) => {
+  let e = createAtomWithReduxWithState({}, "SYNC_ATOM_LOCAL_VARIABLES_BY_ID");
+  let t = setupCustomAtom(e, (e, t) => {
     if (t) {
       if ("added" in t) {
-        t.added && "map" in t.added || x1("variableChange is malformed, expected added to be an array", "variableChange", {
+        t.added && "map" in t.added || logError("variableChange is malformed, expected added to be an array", "variableChange", {
           variableChange: t
         }, {
           reportAsSentryError: !0
@@ -360,13 +360,13 @@ let $$eu2 = (() => {
       e(null);
     };
   };
-  return S9(t, e.reducer);
+  return attachReducerWrapper(t, e.reducer);
 })();
-let $$ep23 = Iz(e => eU(t => t($$eu2)[e] ?? null));
-let $$e_27 = eU(e => Object.keys(e($$eu2)).map(t => e($$ep23(t))).sort((e, t) => -Ez(e.sortPosition, t?.sortPosition)));
-let $$eh6 = eU(e => p()(e($$e_27), e => e.variableSetId));
-let $$em11 = eU(e => p()(e($$ef21), e => e.variableSetId));
-let eg = eU(e => {
+let $$ep23 = createRemovableAtomFamily(e => atom(t => t($$eu2)[e] ?? null));
+let $$e_27 = atom(e => Object.keys(e($$eu2)).map(t => e($$ep23(t))).sort((e, t) => -Ez(e.sortPosition, t?.sortPosition)));
+let $$eh6 = atom(e => p()(e($$e_27), e => e.variableSetId));
+let $$em11 = atom(e => p()(e($$ef21), e => e.variableSetId));
+let eg = atom(e => {
   let t = e($$eh6);
   let r = e($$em11);
   return {
@@ -375,8 +375,8 @@ let eg = eU(e => {
   };
 });
 let $$ef21 = (() => {
-  let e = OX({}, "SYNC_ATOM_SUBSCRIBED_VARIABLES_BY_ID");
-  let t = FZ(e, (e, t) => {
+  let e = createAtomWithReduxWithState({}, "SYNC_ATOM_SUBSCRIBED_VARIABLES_BY_ID");
+  let t = setupCustomAtom(e, (e, t) => {
     if (t) {
       if ("added" in t) return {
         ...e,
@@ -401,15 +401,15 @@ let $$ef21 = (() => {
       e(null);
     };
   };
-  return S9(t, e.reducer);
+  return attachReducerWrapper(t, e.reducer);
 })();
-Iz(e => eU(t => t($$ef21)[e] ?? null));
-export let $$eE4 = Iz(e => eU(t => t($$eu2)[e] ?? t($$ef21)[e] ?? null));
+createRemovableAtomFamily(e => atom(t => t($$ef21)[e] ?? null));
+export let $$eE4 = createRemovableAtomFamily(e => atom(t => t($$eu2)[e] ?? t($$ef21)[e] ?? null));
 export function $$ey1(e, t) {
   let r = Y5.isReady();
   let n = new Map(Object.entries(t));
   let i = r && e ? CWU.getVariableResolvedValue(e, n) : null;
-  let a = eU(i);
+  let a = atom(i);
   e && (a.onMount = t => {
     r || Y5.onReady().then(() => {
       t(CWU.getVariableResolvedValue(e, n));
@@ -427,7 +427,7 @@ export function $$ey1(e, t) {
 export function $$eb9(e) {
   let t = Y5.isReady();
   let r = t && e ? CWU.getExplicitModeNames(e) : null;
-  let n = eU(r);
+  let n = atom(r);
   e && (n.onMount = r => {
     t || Y5.onReady().then(() => {
       r(CWU.getExplicitModeNames(e));
@@ -443,8 +443,8 @@ export function $$eb9(e) {
   return n;
 }
 let eT = (() => {
-  let e = eU({});
-  let t = FZ(e, (e, t) => {
+  let e = atom({});
+  let t = setupCustomAtom(e, (e, t) => {
     if (t) {
       if ("added" in t) return {
         ...e,
@@ -476,8 +476,8 @@ let eT = (() => {
   return t;
 })();
 let eI = (() => {
-  let e = eU({});
-  let t = FZ(e, (e, t) => {
+  let e = atom({});
+  let t = setupCustomAtom(e, (e, t) => {
     if (t) {
       if ("added" in t) return {
         ...e,
@@ -507,15 +507,15 @@ let eI = (() => {
   };
   return t;
 })();
-let $$eS0 = Iz(e => eU(t => {
+let $$eS0 = createRemovableAtomFamily(e => atom(t => {
   let r = Object.values(t(eT)).filter(t => t.variableSetId === e);
   return h()(r, e => e.overriddenVariableID);
 }));
-let ev = Iz(e => eU(t => {
+let ev = createRemovableAtomFamily(e => atom(t => {
   let r = Object.values(t(eI)).filter(t => t.variableSetId === e);
   return h()(r, e => e.overriddenVariableID);
 }));
-let $$eA5 = Iz(e => eU(t => {
+let $$eA5 = createRemovableAtomFamily(e => atom(t => {
   let r = t($$eS0(e));
   let n = t(ev(e));
   let i = {
@@ -527,7 +527,7 @@ let $$eA5 = Iz(e => eU(t => {
 export function $$ex16() {
   let e = Y5.isReady();
   let t = e ? CWU.getPageLevelModes() : null;
-  let r = eU(t);
+  let r = atom(t);
   r.onMount = t => (e || Y5.onReady().then(() => {
     t(CWU.getPageLevelModes());
   }), () => {

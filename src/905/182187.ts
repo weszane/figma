@@ -1,7 +1,7 @@
 import { MM } from "../905/350402";
 import { r as _$$r, c } from "../905/676456";
 import { XHR } from "../905/910117";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
 import { F } from "../905/302958";
 export let $$l0 = MM("REPO_RESTORE", (e, {
@@ -26,17 +26,17 @@ export let $$l0 = MM("REPO_RESTORE", (e, {
           userInitiated: !1
         }));
         e.dispatch(F.enqueue({
-          message: J(i, i.data?.message || _$$t("collaboration.branching.an_error_occurred_while_restoring_these_files")),
+          message: J(i, i.data?.message || getI18nString("collaboration.branching.an_error_occurred_while_restoring_these_files")),
           error: !0
         }));
       } catch (t) {
         e.dispatch(F.enqueue({
-          message: _$$t("collaboration.branching.an_error_occurred_while_restoring_these_files"),
+          message: getI18nString("collaboration.branching.an_error_occurred_while_restoring_these_files"),
           error: !0
         }));
       }
     } else {
-      let t = _$$t("collaboration.branching.files_restored");
+      let t = getI18nString("collaboration.branching.files_restored");
       e.dispatch(c(d));
       e.dispatch(F.enqueue({
         message: t
@@ -45,9 +45,9 @@ export let $$l0 = MM("REPO_RESTORE", (e, {
   }).catch(t => {
     e.dispatch(_$$r(d));
     e.dispatch(F.enqueue({
-      message: J(t, t.data?.message || _$$t("collaboration.branching.an_error_occurred_while_restoring_these_files")),
+      message: J(t, t.data?.message || getI18nString("collaboration.branching.an_error_occurred_while_restoring_these_files")),
       error: !0
     }));
   });
 });
-export const i = $$l0; 
+export const i = $$l0;

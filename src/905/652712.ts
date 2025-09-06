@@ -5,7 +5,7 @@ import { $n } from "../905/521428";
 import { l as _$$l } from "../905/479687";
 import { J } from "../905/129695";
 import d from "classnames";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { U } from "../905/331038";
 import { w as _$$w } from "../905/113805";
 import { Lz, Zc } from "../905/497882";
@@ -19,7 +19,7 @@ export function $$y1(e) {
     let {
       maxTags
     } = e.data;
-    return _$$t("community.publishing.select_up_to_n_tags_error", {
+    return getI18nString("community.publishing.select_up_to_n_tags_error", {
       maxTagsPerResource: maxTags
     });
   }
@@ -111,17 +111,17 @@ let $$v0 = forwardRef(function ({
   }), [x]);
   return jsxs(Fragment, {
     children: [jsx(a, {
-      label: _$$t("community.publishing.recommended_tags"),
-      subLabel: validV2Tags.length > jI ? _$$t("community.publishing.select_up_to_n_tags_to_help_people_discover_your_resource", {
+      label: getI18nString("community.publishing.recommended_tags"),
+      subLabel: validV2Tags.length > jI ? getI18nString("community.publishing.select_up_to_n_tags_to_help_people_discover_your_resource", {
         maxTagsPerResource: jI
-      }) : _$$t("community.publishing.select_tags_to_help_people_discover_your_resource"),
+      }) : getI18nString("community.publishing.select_tags_to_help_people_discover_your_resource"),
       error: x,
       afterErrorContent: !C && jsx($n, {
         variant: "link",
         onClick: () => {
           T(!0);
         },
-        children: _$$t("community.publishing.add_custom_tags")
+        children: getI18nString("community.publishing.add_custom_tags")
       }),
       children: jsx(b, {
         ref: k,
@@ -130,7 +130,7 @@ let $$v0 = forwardRef(function ({
         onTouched: t.tagsV2.onTouched
       })
     }), C && jsx(a, {
-      label: _$$t("community.publishing.custom_tags"),
+      label: getI18nString("community.publishing.custom_tags"),
       error: I,
       children: jsx(Hs, {
         ref: R,

@@ -5,13 +5,13 @@ import { useDispatch } from "../vendor/514228";
 import { glU } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { dI } from "../905/871411";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { parsePxInt } from "../figma_app/783094";
 import { Uz } from "../905/63728";
 import { Pt, of, v_, aH } from "../figma_app/806412";
 import { P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { Y } from "../905/830372";
 import { ay } from "../905/879323";
 import { J_ } from "../figma_app/80990";
@@ -83,7 +83,7 @@ function w({
     l7.user("rename-style", () => glU?.renameNode(dI(L), J_(n)));
     Y5.triggerAction("commit");
     F();
-    sx("Style Renamed", {
+    trackEventAnalytics("Style Renamed", {
       styleType: e.styleType
     });
   });
@@ -109,7 +109,7 @@ function w({
     className: _$$s.flex.flexColumn.gap8.pl16.pr16.pt8.pb8.bb1.bSolid.colorBorder.$,
     children: [jsx(JU, {
       disabled: I,
-      children: tx("design_systems.create_style.name")
+      children: renderI18nText("design_systems.create_style.name")
     }), I ? jsx(Y, {
       padding: {
         vertical: parsePxInt(dGl)

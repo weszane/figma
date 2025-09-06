@@ -7,8 +7,8 @@ import { getFeatureFlags } from "../905/601108";
 import { y6 } from "../figma_app/681951";
 import { tH, H4 } from "../905/751457";
 import { Cc, qE } from "../figma_app/492908";
-import { R as _$$R } from "../905/103090";
-import { t, tx } from "../905/303541";
+import { selectWithShallowEqual } from "../905/103090";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { v4 } from "../figma_app/655139";
 import { uQ } from "../figma_app/311375";
 import { qM } from "../figma_app/120227";
@@ -30,7 +30,7 @@ import { T as _$$T } from "../905/858738";
 import { aV, p8 } from "../figma_app/722362";
 import { W as _$$W } from "../441/503702";
 import { Lk } from "../figma_app/122682";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { A as _$$A } from "../9410/188255";
 import { fu } from "../figma_app/831799";
 import { e as _$$e2 } from "../905/621515";
@@ -38,7 +38,7 @@ import { iZ, TA } from "../905/372672";
 import { QF } from "../figma_app/502247";
 import { N as _$$N } from "../figma_app/268271";
 import { Ypw } from "../figma_app/6204";
-import { md, fp, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, useAtomValueAndSetter, Xr } from "../figma_app/27355";
 import { PY, go, Px, Bl, kO, HO, aN } from "../figma_app/57551";
 import { h as _$$h } from "../905/207101";
 import { buildUploadUrl } from "../figma_app/169182";
@@ -78,7 +78,7 @@ import { _q, PA } from "../figma_app/957070";
 let k = "dev_handoff_canvas_pill--dimension--WEwpp";
 let j = "dev_handoff_canvas_pill--size--9ZpSZ";
 function N(e) {
-  return e === mKm.HUG_CONTENT ? t("inspect_panel.properties.hug") : e === mKm.FILL_CONTAINER ? "100%" : e === mKm.FIXED ? t("inspect_panel.properties.fixed") : "";
+  return e === mKm.HUG_CONTENT ? getI18nString("inspect_panel.properties.hug") : e === mKm.FILL_CONTAINER ? "100%" : e === mKm.FIXED ? getI18nString("inspect_panel.properties.fixed") : "";
 }
 function I(e) {
   return Fk((e, t) => {
@@ -185,7 +185,7 @@ function O(e) {
       className: "dev_handoff_canvas_pill--sizeInfo--pKiuc text--fontPos11--2LvXf text--_fontBase--QdLsd",
       children: [jsx("span", {
         className: k,
-        children: tx("fullscreen.properties_panel.transform_panel.w")
+        children: renderI18nText("fullscreen.properties_panel.transform_panel.w")
       }), jsx("span", {
         children: t.horizontalSizeMode
       }), jsx("span", {
@@ -194,7 +194,7 @@ function O(e) {
         children: value
       }), jsx("span", {}), jsx("span", {
         className: k,
-        children: tx("fullscreen.properties_panel.transform_panel.h")
+        children: renderI18nText("fullscreen.properties_panel.transform_panel.h")
       }), jsx("span", {
         children: t.verticalSizeMode
       }), jsx("span", {
@@ -209,7 +209,7 @@ function w() {
   let {
     hoveredNode,
     selection
-  } = _$$R(e => {
+  } = selectWithShallowEqual(e => {
     let t = Object.keys(e.mirror.sceneGraphSelection)[0];
     let n = e.mirror.appModel.hoveredNode;
     return {
@@ -387,7 +387,7 @@ function ef(e) {
       }), a(!0));
     });
   }), s) ? jsx(rq, {
-    description: tx("dev_mode_demo_file.tour.annotations_description"),
+    description: renderI18nText("dev_mode_demo_file.tour.annotations_description"),
     emphasized: !0,
     fixedPosition: !0,
     isShowing: n,
@@ -399,7 +399,7 @@ function ef(e) {
     }),
     onClose: e.onClose,
     primaryCta: {
-      label: tx("dev_mode_demo_file.tour.next_button"),
+      label: renderI18nText("dev_mode_demo_file.tour.next_button"),
       ctaTrackingDescriptor: _$$c.NEXT,
       type: "button",
       onClick: e.onPrimaryCtaClick,
@@ -408,7 +408,7 @@ function ef(e) {
       customVariantStyles: eg.primaryButton
     },
     secondaryCta: {
-      label: tx("dev_mode_demo_file.tour.back_button"),
+      label: renderI18nText("dev_mode_demo_file.tour.back_button"),
       ctaTrackingDescriptor: _$$c.BACK,
       type: "button",
       onClick: e.onSecondaryCtaClick,
@@ -420,7 +420,7 @@ function ef(e) {
       stepNum: 3,
       totalNumSteps: PY
     },
-    title: tx("dev_mode_demo_file.tour.annotations_title"),
+    title: renderI18nText("dev_mode_demo_file.tour.annotations_title"),
     trackingContextName: "Dev Mode Demo File Tour Annotations Tooltip",
     zIndex: _$$R2.UNSET
   }) : null;
@@ -456,7 +456,7 @@ function e_(e) {
   });
   return jsx(rq, {
     arrowPosition: F_.RIGHT_BODY,
-    description: tx("dev_mode_demo_file.tour.code_connect_description"),
+    description: renderI18nText("dev_mode_demo_file.tour.code_connect_description"),
     disableHighlight: !0,
     emphasized: !0,
     isShowing: n,
@@ -470,7 +470,7 @@ function e_(e) {
     pointToLeftEdge: !0,
     pointToTopEdge: !0,
     primaryCta: {
-      label: tx("dev_mode_demo_file.tour.done_button"),
+      label: renderI18nText("dev_mode_demo_file.tour.done_button"),
       ctaTrackingDescriptor: _$$c.DONE,
       type: "button",
       onClick: e.onPrimaryCtaClick,
@@ -479,7 +479,7 @@ function e_(e) {
       customVariantStyles: eg.primaryButton
     },
     secondaryCta: {
-      label: tx("dev_mode_demo_file.tour.back_button"),
+      label: renderI18nText("dev_mode_demo_file.tour.back_button"),
       ctaTrackingDescriptor: _$$c.BACK,
       type: "button",
       onClick: e.onSecondaryCtaClick
@@ -490,14 +490,14 @@ function e_(e) {
       totalNumSteps: PY
     },
     targetKey: uI,
-    title: tx("dev_mode_demo_file.tour.code_connect_title"),
+    title: renderI18nText("dev_mode_demo_file.tour.code_connect_title"),
     trackingContextName: "Dev Mode Demo File Tour Code Connect Tooltip"
   });
 }
 function eC(e) {
   var t;
   let [n, a] = useState(!1);
-  let d = md(go);
+  let d = useAtomWithSubscription(go);
   let s = useSelector(e => e.mirror.sceneGraph);
   let u = _$$Z();
   t = s;
@@ -519,7 +519,7 @@ function eC(e) {
   });
   return jsx(rq, {
     arrowPosition: F_.RIGHT_BODY,
-    description: tx("dev_mode_demo_file.tour.compare_changes_description"),
+    description: renderI18nText("dev_mode_demo_file.tour.compare_changes_description"),
     disableHighlight: d,
     emphasized: !0,
     isShowing: n,
@@ -531,7 +531,7 @@ function eC(e) {
     onClose: e.onClose,
     onTargetLost: e.onClose,
     primaryCta: {
-      label: tx("dev_mode_demo_file.tour.next_button"),
+      label: renderI18nText("dev_mode_demo_file.tour.next_button"),
       ctaTrackingDescriptor: _$$c.NEXT,
       type: "button",
       onClick: e.onPrimaryCtaClick,
@@ -540,7 +540,7 @@ function eC(e) {
       customVariantStyles: eg.primaryButton
     },
     secondaryCta: {
-      label: tx("dev_mode_demo_file.tour.back_button"),
+      label: renderI18nText("dev_mode_demo_file.tour.back_button"),
       ctaTrackingDescriptor: _$$c.BACK,
       type: "button",
       onClick: e.onSecondaryCtaClick,
@@ -553,13 +553,13 @@ function eC(e) {
       totalNumSteps: PY
     },
     targetKey: Ov,
-    title: tx("dev_mode_demo_file.tour.compare_changes_title"),
+    title: renderI18nText("dev_mode_demo_file.tour.compare_changes_title"),
     trackingContextName: "Dev Mode Demo File Tour Compare Changes Tooltip"
   });
 }
 function eT(e) {
   return jsx(_$$X, {
-    description: tx("dev_mode_demo_file.tour.intro_description"),
+    description: renderI18nText("dev_mode_demo_file.tour.intro_description"),
     emphasized: !0,
     hideCloseButton: !0,
     isShowing: !0,
@@ -571,7 +571,7 @@ function eT(e) {
     onClose: e.onClose,
     position: _$$Q.BOTTOM_RIGHT,
     primaryCta: {
-      label: tx("dev_mode_demo_file.tour.start_button"),
+      label: renderI18nText("dev_mode_demo_file.tour.start_button"),
       ctaTrackingDescriptor: _$$c.TRY_IT_OUT,
       type: "button",
       onClick: e.onPrimaryCtaClick,
@@ -580,7 +580,7 @@ function eT(e) {
       customVariantStyles: eg.primaryButton
     },
     secondaryCta: {
-      label: tx("dev_mode_demo_file.tour.not_now_button"),
+      label: renderI18nText("dev_mode_demo_file.tour.not_now_button"),
       ctaTrackingDescriptor: _$$c.NOT_NOW,
       type: "button",
       onClick: e.onClose,
@@ -588,14 +588,14 @@ function eT(e) {
       variantOverride: "custom",
       customVariantStyles: eg.secondaryButton
     },
-    title: tx("dev_mode_demo_file.tour.intro_title"),
+    title: renderI18nText("dev_mode_demo_file.tour.intro_title"),
     trackingContextName: "Dev Mode Demo File Tour Intro Tooltip",
     width: 250
   });
 }
 function ek(e) {
   return jsx(rq, {
-    description: tx("dev_mode_demo_file.tour.outro_description"),
+    description: renderI18nText("dev_mode_demo_file.tour.outro_description"),
     emphasized: !0,
     targetKey: gh,
     isShowing: !0,
@@ -644,7 +644,7 @@ function ej(e) {
       }), a(!0));
     });
   }), s) ? jsx(rq, {
-    description: tx("dev_mode_demo_file.tour.statuses_description"),
+    description: renderI18nText("dev_mode_demo_file.tour.statuses_description"),
     emphasized: !0,
     fixedPosition: !0,
     isShowing: n,
@@ -656,7 +656,7 @@ function ej(e) {
     }),
     onClose: e.onClose,
     primaryCta: {
-      label: tx("dev_mode_demo_file.tour.next_button"),
+      label: renderI18nText("dev_mode_demo_file.tour.next_button"),
       ctaTrackingDescriptor: _$$c.NEXT,
       type: "button",
       onClick: e.onPrimaryCtaClick,
@@ -668,7 +668,7 @@ function ej(e) {
       stepNum: 1,
       totalNumSteps: PY
     },
-    title: tx("dev_mode_demo_file.tour.statuses_title"),
+    title: renderI18nText("dev_mode_demo_file.tour.statuses_title"),
     trackingContextName: "Dev Mode Demo File Tour Statuses Tooltip",
     zIndex: _$$R2.UNSET
   }) : null;
@@ -676,9 +676,9 @@ function ej(e) {
 function eN({
   testDelayMs: e
 }) {
-  let [t, n] = fp(Px);
-  let [r, a] = fp(Bl);
-  let [l, d] = fp(kO);
+  let [t, n] = useAtomValueAndSetter(Px);
+  let [r, a] = useAtomValueAndSetter(Bl);
+  let [l, d] = useAtomValueAndSetter(kO);
   let s = Xr(HO);
   let u = aV();
   let [c, m] = useState(!1);
@@ -831,7 +831,7 @@ let eX = memo(({
           children: !m && !x && !p && jsx(_$$w, {})
         }), e && jsx(X5, {})]
       }), jsx(_$$A, {
-        editorType: nT.DevHandoff,
+        editorType: FEditorType.DevHandoff,
         openFile: v
       }), jsx(_$$l, {})]
     }), h && jsx(_$$K, {

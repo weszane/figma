@@ -2,8 +2,8 @@ import { useMemo, useCallback } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { phr } from "../figma_app/763686";
 import { dI } from "../905/805904";
-import { md } from "../figma_app/27355";
-import { t as _$$t } from "../905/303541";
+import { useAtomWithSubscription } from "../figma_app/27355";
+import { getI18nString } from "../905/303541";
 import { v4, xv as _$$xv } from "../figma_app/655139";
 import { uz } from "../905/359509";
 import { t as _$$t2 } from "../905/241707";
@@ -87,7 +87,7 @@ export function $$F0(e) {
   let r = v4();
   let n = _$$u(e ?? void 0);
   let i = m0();
-  let a = md(_$$v);
+  let a = useAtomWithSubscription(_$$v);
   if (!n) return;
   if (!i || !a) return n.name;
   let s = t && "first-party" === r.type ? r.id : uz;
@@ -97,8 +97,8 @@ export function $$j12(e) {
   let t = m0();
   let r = v4();
   let n = sQ();
-  let i = md(_$$v);
-  if (e) return t && (i || n) ? _$$xv(e, r.id) ?? e.name ?? _$$t("variables.missing_name") : e.name;
+  let i = useAtomWithSubscription(_$$v);
+  if (e) return t && (i || n) ? _$$xv(e, r.id) ?? e.name ?? getI18nString("variables.missing_name") : e.name;
 }
 (e => {
   let t = {

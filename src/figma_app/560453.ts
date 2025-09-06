@@ -9,16 +9,16 @@ import { k as _$$k } from "../905/792988";
 import { q as _$$q } from "../905/820062";
 import { N as _$$N } from "../905/865305";
 import { c as _$$c } from "../905/486270";
-import { md, fp, Xr, zl } from "../figma_app/27355";
+import { useAtomWithSubscription, useAtomValueAndSetter, Xr, atomStoreManager } from "../figma_app/27355";
 import m from "classnames";
 import f from "../vendor/524488";
-import { sx, az } from "../905/449184";
+import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { parsePxNumber } from "../figma_app/783094";
 import { h as _$$h } from "../905/207101";
 import { EJ } from "../figma_app/930338";
 import { g as _$$g } from "../905/880308";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t2, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { q4 } from "../905/294085";
 import { hO, cN, d3, G4, G1 } from "../figma_app/545293";
 import { fi } from "../figma_app/913823";
@@ -71,15 +71,15 @@ export function $$ef1({
 }) {
   let {
     currentSearch
-  } = md(WP);
+  } = useAtomWithSubscription(WP);
   let r = _$$V();
   let s = _$$eH();
-  let o = md(hO.currentSearchAtom);
-  let l = md(hO.currentCommunitySearchAtom);
+  let o = useAtomWithSubscription(hO.currentSearchAtom);
+  let l = useAtomWithSubscription(hO.currentCommunitySearchAtom);
   let {
     push
   } = cq();
-  let f = md(dd);
+  let f = useAtomWithSubscription(dd);
   let b = oh(fi);
   let I = g5($A.Design).productComponents;
   let {
@@ -89,7 +89,7 @@ export function $$ef1({
     let [r] = t;
     if (r.isIntersecting) {
       let t = e ? l : o;
-      sx("Fragments scrolled into view", {
+      trackEventAnalytics("Fragments scrolled into view", {
         ...d3(G4.ACTIONS_ASSETS_TAB, f, t ? t.searchId : "", t ? t.input : null, !1, null, e)
       });
     }
@@ -121,10 +121,10 @@ export function $$ef1({
     librariesForConnectedProject
   } = _$$g2();
   let et = tS();
-  let er = md(Rt);
+  let er = useAtomWithSubscription(Rt);
   let ei = useSelector(_$$l);
-  let ea = md(Sh);
-  let ep = md(Lk);
+  let ea = useAtomWithSubscription(Sh);
+  let ep = useAtomWithSubscription(Lk);
   let e_ = !ea && 0 === libraries.length && 0 === presets.length && 0 === librariesForConnectedProject.length;
   let em = useMemo(() => N2(!0, !0), []);
   let {
@@ -139,7 +139,7 @@ export function $$ef1({
     onToggleLibraryModal();
   }, [close, onToggleLibraryModal]);
   let ey = {
-    title: _$$t2("assets_in_actions.browse_libraries_button"),
+    title: getI18nString("assets_in_actions.browse_libraries_button"),
     onAction: () => {
       ef();
     },
@@ -149,7 +149,7 @@ export function $$ef1({
   let eT = useMemo(() => currentSearch?.result.status === "loaded" && (!r || o?.result.status === "loaded") && (!s || l?.result.status === "loaded"), [currentSearch?.result.status, o?.result.status, l?.result.status, r, s]);
   let eI = useMemo(() => [...(currentSearch?.result.data || []), ...(o?.result.data || []), ...(l?.result.data || [])], [currentSearch?.result.data, o?.result.data, l?.result.data]);
   let eS = currentSearch?.input.type === "input-text" ? currentSearch.input.query : "";
-  let ev = md(Q8);
+  let ev = useAtomWithSubscription(Q8);
   let eA = 0 === ev.length;
   let ex = !currentSearch && !b && (!I.length || kK());
   let [eN, eC] = useState(!1);
@@ -178,7 +178,7 @@ export function $$ef1({
     });
   }, [eI.length, ei, et, eb, eT, ep, f, eS, er, r, eF, eA]);
   _$$h(() => {
-    az.trackDefinedEvent("asset_search.actions_search_panel_open", {
+    analyticsEventManager.trackDefinedEvent("asset_search.actions_search_panel_open", {
       session_id: f || "",
       search_id: currentSearch?.queryId || "",
       entryPoint: currentSearch?.input.type === "input-text" ? G4.ACTIONS_ASSETS_TAB : G4.ACTIONS_VISUAL_SEARCH_VIEW,
@@ -192,7 +192,7 @@ export function $$ef1({
   if (iC({
     activeTab: Jc.ASSETS,
     isLoading: r && o?.result.status === "loading" || s && l?.result.status === "loading",
-    passthroughErrorMessage: ej ? _$$t2("assets_in_actions.error.description") : null,
+    passthroughErrorMessage: ej ? getI18nString("assets_in_actions.error.description") : null,
     query: ev,
     resultsCount: eI.length
   }), e_ && !s) return jsx("div", {
@@ -219,8 +219,8 @@ export function $$ef1({
             variant: "danger",
             children: jsx(_$$r, {})
           }), jsx(_$$N2.Text, {
-            title: _$$t2("assets_in_actions.error.title"),
-            subtitle: _$$t2("assets_in_actions.error.description")
+            title: getI18nString("assets_in_actions.error.title"),
+            subtitle: getI18nString("assets_in_actions.error.description")
           })]
         })
       })
@@ -238,7 +238,7 @@ export function $$ef1({
           children: jsx("span", {
             className: _$$s.textBodyMedium.colorTextSecondary.$,
             "data-testid": "assets-tab-no-results",
-            children: tx("assets_in_actions.no_results.title", {
+            children: renderI18nText("assets_in_actions.no_results.title", {
               query: E()(e, {
                 length: 24
               })
@@ -255,7 +255,7 @@ export function $$ef1({
     }) : jsx(z6, {
       initialSearchTagType: qG.DESIGNS
     });
-    sx("Fragment search see more", {
+    trackEventAnalytics("Fragment search see more", {
       ...d3(G4.ACTIONS_ASSETS_TAB, f, t ? t.searchId : "", t ? t.input : null, !1, void 0, e)
     });
     push({
@@ -275,12 +275,12 @@ export function $$ef1({
       children: [jsx(_$$O, {
         onLoadStateChange: ew,
         header: {
-          title: _$$t2("assets_in_actions.assets_section.title"),
+          title: getI18nString("assets_in_actions.assets_section.title"),
           icon: s ? jsx(_$$k, {}) : void 0,
           seeMore: eV ? ey : {
-            title: _$$t2("assets_in_actions.see_more_button"),
+            title: getI18nString("assets_in_actions.see_more_button"),
             onAction: () => {
-              az.trackDefinedEvent("asset_search.see_more", {
+              analyticsEventManager.trackDefinedEvent("asset_search.see_more", {
                 session_id: f || "",
                 search_id: currentSearch?.queryId || "",
                 entryPoint: currentSearch?.input.type === "input-text" ? G4.ACTIONS_ASSETS_TAB : G4.ACTIONS_VISUAL_SEARCH_VIEW,
@@ -311,10 +311,10 @@ export function $$ef1({
         focusHandle: e,
         forceLoadingState: eN,
         header: {
-          title: _$$t2("assets_in_actions.fragments_section.title"),
+          title: getI18nString("assets_in_actions.fragments_section.title"),
           icon: s ? jsx(_$$q, {}) : jsx(_$$N, {}),
           seeMore: {
-            title: _$$t2("assets_in_actions.see_more_button"),
+            title: getI18nString("assets_in_actions.see_more_button"),
             onAction: eG,
             recordingKey: "assetsTab.fragmentsSeeMore"
           }
@@ -333,10 +333,10 @@ export function $$ef1({
         focusHandle: e,
         forceLoadingState: eR,
         header: {
-          title: _$$t2("assets_in_actions.community_section.title"),
+          title: getI18nString("assets_in_actions.community_section.title"),
           icon: jsx(_$$c, {}),
           seeMore: {
-            title: _$$t2("assets_in_actions.see_more_button"),
+            title: getI18nString("assets_in_actions.see_more_button"),
             onAction: () => eG(!0),
             recordingKey: "assetsTab.communitySeeMore"
           }
@@ -363,10 +363,10 @@ export function $$eE0({
   let m = useRef(null);
   let {
     currentSearch
-  } = md(WP);
-  let f = md(hO.currentSearchAtom);
-  let E = md(hO.currentCommunitySearchAtom);
-  let [C, w] = fp(Q8);
+  } = useAtomWithSubscription(WP);
+  let f = useAtomWithSubscription(hO.currentSearchAtom);
+  let E = useAtomWithSubscription(hO.currentCommunitySearchAtom);
+  let [C, w] = useAtomValueAndSetter(Q8);
   let R = Xr(Rt);
   let {
     recentFragments
@@ -383,7 +383,7 @@ export function $$eE0({
     presets,
     librariesForConnectedProject
   } = _$$g2();
-  let eE = !md(Sh) && 0 === libraries.length && 0 === presets.length && 0 === librariesForConnectedProject.length;
+  let eE = !useAtomWithSubscription(Sh) && 0 === libraries.length && 0 === presets.length && 0 === librariesForConnectedProject.length;
   let {
     debouncedAssetSearch,
     clearAssetSearchAndCancelDebounce,
@@ -411,10 +411,10 @@ export function $$eE0({
     entryPoint: G4.ACTIONS_ASSETS_TAB_DETAIL,
     isCommunity: !0
   });
-  let [eR, eL] = fp(B1);
+  let [eR, eL] = useAtomValueAndSetter(B1);
   let eP = Nv(currentSearch?.input.type === "input-text");
   let eD = useCallback(e => {
-    az.trackDefinedEvent("asset_search.misc_feature_usage", {
+    analyticsEventManager.trackDefinedEvent("asset_search.misc_feature_usage", {
       aiResultsEnabled: eP,
       entryPoint: "actions-assets-tab",
       featureSlug: "library-filter-usage"
@@ -433,11 +433,11 @@ export function $$eE0({
     defaultActive: r
   });
   _$$h(() => () => {
-    zl.set(q4);
+    atomStoreManager.set(q4);
     eL({
       type: _$$I.ALL
     });
-    mX(zl.get(Q8), lQ, d, c, ek, G4.ACTIONS_ASSETS_TAB_DETAIL);
+    mX(atomStoreManager.get(Q8), lQ, d, c, ek, G4.ACTIONS_ASSETS_TAB_DETAIL);
   });
   let eB = g5($A.Design).productComponents.length;
   let eG = recentFragments ? recentFragments.length : 0;
@@ -447,8 +447,8 @@ export function $$eE0({
     numRecentItems: t,
     isEmptySearchQuery: r
   }) {
-    let n = md(dd);
-    let s = md(Rt);
+    let n = useAtomWithSubscription(dd);
+    let s = useAtomWithSubscription(Rt);
     let o = useSelector(_$$l);
     let {
       query,
@@ -458,8 +458,8 @@ export function $$eE0({
     } = function (e) {
       let {
         currentSearch
-      } = md(WP);
-      let r = md(hO.currentSearchAtom);
+      } = useAtomWithSubscription(WP);
+      let r = useAtomWithSubscription(hO.currentSearchAtom);
       return e === xA.COMPONENTS ? {
         query: currentSearch?.input.type === "input-text" ? currentSearch.input.query : "",
         queryId: currentSearch?.queryId,
@@ -535,15 +535,15 @@ export function $$eE0({
     children: [jsx(oz, {
       tabId: xA.COMPONENTS,
       onAction: () => eH(xA.COMPONENTS),
-      children: tx("assets_in_actions.detail_view.components_tab.title")
+      children: renderI18nText("assets_in_actions.detail_view.components_tab.title")
     }), d && jsx(oz, {
       tabId: xA.FRAGMENTS,
       onAction: () => eH(xA.FRAGMENTS),
-      children: tx("assets_in_actions.detail_view.fragments_tab.title")
+      children: renderI18nText("assets_in_actions.detail_view.fragments_tab.title")
     }), c && jsx(oz, {
       tabId: xA.COMMUNITY,
       onAction: () => eH(xA.COMMUNITY),
-      children: tx("assets_in_actions.detail_view.community_tab.title")
+      children: renderI18nText("assets_in_actions.detail_view.community_tab.title")
     })]
   });
   let eK = currentSearch?.queryId;
@@ -557,16 +557,16 @@ export function $$eE0({
       }
     }), jsx("span", {
       className: _$$s.ml8.textBodyMedium.$,
-      children: _ ? tx("assets_in_actions.fragments.fragment_search_sugggestion", {
+      children: _ ? renderI18nText("assets_in_actions.fragments.fragment_search_sugggestion", {
         boldText: jsx("span", {
           className: _$$s.textBodyMediumStrong.$,
-          children: tx("assets_in_actions.fragments.fragment_search_sugggestion_bold_text")
+          children: renderI18nText("assets_in_actions.fragments.fragment_search_sugggestion_bold_text")
         }),
         orgText: EJ(_, 20)
-      }) : tx("assets_in_actions.fragments_section.empty_state.text")
+      }) : renderI18nText("assets_in_actions.fragments_section.empty_state.text")
     }), jsx("span", {
       className: _$$s.mlAuto.textBodyMediumStrong.colorTextBrand.$,
-      children: tx("assets_in_actions.fragments.fragment_search_sugggestion_hint")
+      children: renderI18nText("assets_in_actions.fragments.fragment_search_sugggestion_hint")
     })]
   }) : void 0;
   let eq = currentSearch && !eE;

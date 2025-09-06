@@ -1,6 +1,6 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { l7 } from "../905/189185";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 let s = "syncedState";
 let o = `${s}:`;
 let l = "syncedMap";
@@ -23,7 +23,7 @@ export function $$u1(e, t) {
     }
     return r;
   } catch (e) {
-    $D(_$$e.EXTENSIBILITY, Error(`Invalid syncedState for widgetID=${t.widgetId}: ${e}`));
+    reportError(_$$e.EXTENSIBILITY, Error(`Invalid syncedState for widgetID=${t.widgetId}: ${e}`));
   }
   return {};
 }
@@ -33,16 +33,16 @@ export function $$p8(e, t, i) {
       ...$$u1("current", e),
       ...t
     };
-    Object.keys(i).forEach((t) => {
+    Object.keys(i).forEach(t => {
       $$h4(e, t, i[t]);
     });
   }
-  i && Object.keys(i).length > 0 && Object.keys(i).forEach((t) => {
-    Object.keys($$A6("current", e, t)).forEach((i) => {
+  i && Object.keys(i).length > 0 && Object.keys(i).forEach(t => {
+    Object.keys($$A6("current", e, t)).forEach(i => {
       $$b10(e, t, i);
     });
     let n = i[t];
-    Object.keys(n).forEach((i) => {
+    Object.keys(n).forEach(i => {
       $$y2(e, t, i, n[i]);
     });
   });
@@ -72,7 +72,7 @@ export function $$_7(e, t) {
     }
     return r;
   } catch (e) {
-    $D(_$$e.EXTENSIBILITY, Error(`Invalid syncedMap values for widgetID=${t.widgetId}: ${e}`));
+    reportError(_$$e.EXTENSIBILITY, Error(`Invalid syncedMap values for widgetID=${t.widgetId}: ${e}`));
   }
   return {};
 }
@@ -88,7 +88,7 @@ export function $$A6(e, t, i) {
     }
     return d;
   } catch (e) {
-    $D(_$$e.EXTENSIBILITY, Error(`Invalid syncedMap for widgetID=${t?.widgetId}, name=${i}`));
+    reportError(_$$e.EXTENSIBILITY, Error(`Invalid syncedMap for widgetID=${t?.widgetId}, name=${i}`));
   }
   return {};
 }

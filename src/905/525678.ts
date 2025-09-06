@@ -3,15 +3,15 @@ import { filterNotNullish } from "../figma_app/656233";
 import { debug } from "../figma_app/465776";
 import { GI, Si } from "../figma_app/387100";
 import { getFeatureFlags } from "../905/601108";
-import { y3 } from "../figma_app/876459";
-import { cX, j9, uF, wg } from "../figma_app/778880";
-import { nl } from "../figma_app/257275";
+import { hasDesktopAPI } from "../figma_app/876459";
+import { getIsMac, getIsLinux, getIsWindows, isIpadDevice } from "../figma_app/778880";
+import { isInteractionPathCheck } from "../figma_app/897289";
 import { _o, k$, gN, id, Dz, TV, WJ, f4 } from "../figma_app/847915";
 import { A as _$$A } from "../905/482208";
 import { VU } from "../905/625959";
 import { Y5 } from "../figma_app/455680";
 import { ck } from "../905/87821";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { Yh, c1 } from "../figma_app/357047";
 import { K3 } from "../figma_app/678300";
 import { $A } from "../905/782918";
@@ -21,16 +21,16 @@ export function $$v0(e, t) {
   if (e.flags) {
     if (e.flags.indexOf("!ship") > -1) return !1;
     if (e.flags.indexOf("!desktop") > -1) {
-      if (y3()) return !1;
-    } else if (e.flags.indexOf("desktop") > -1 && !y3()) return !1;
+      if (hasDesktopAPI()) return !1;
+    } else if (e.flags.indexOf("desktop") > -1 && !hasDesktopAPI()) return !1;
     if (e.flags.indexOf("recovery") > -1) {
       if (!t.selectedView.isRecoveryMode) return !1;
     } else if (e.flags.indexOf("!recovery") > -1 && t.selectedView.isRecoveryMode) return !1;
-    let i = !t.isReadOnly && !$A(t.selectedView) || nl();
+    let i = !t.isReadOnly && !$A(t.selectedView) || isInteractionPathCheck();
     if (e.flags.indexOf("!edit") > -1) {
       if (i) return !1;
     } else if (e.flags.indexOf("edit") > -1 && !i) return !1;
-    if (e.flags.indexOf("!dev_handoff") > -1 && t.selectedView.editorType === nT.DevHandoff || e.flags.indexOf("!limited_dev_mode") > -1 && t.isLimitedDevMode || e.flags.indexOf("!slides") > -1 && t.selectedView.editorType === nT.Slides || e.flags.indexOf("!sites") > -1 && t.selectedView.editorType === nT.Sites || e.flags.indexOf("!figmake") > -1 && t.selectedView.editorType === nT.Figmake || e.flags.indexOf("!cooper") > -1 && t.selectedView.editorType === nT.Cooper || e.flags.indexOf("!illustration") > -1 && t.selectedView.editorType === nT.Illustration || e.flags.indexOf("view_restricted") > -1 && Y5.isCopyExportRestricted()) return !1;
+    if (e.flags.indexOf("!dev_handoff") > -1 && t.selectedView.editorType === FEditorType.DevHandoff || e.flags.indexOf("!limited_dev_mode") > -1 && t.isLimitedDevMode || e.flags.indexOf("!slides") > -1 && t.selectedView.editorType === FEditorType.Slides || e.flags.indexOf("!sites") > -1 && t.selectedView.editorType === FEditorType.Sites || e.flags.indexOf("!figmake") > -1 && t.selectedView.editorType === FEditorType.Figmake || e.flags.indexOf("!cooper") > -1 && t.selectedView.editorType === FEditorType.Cooper || e.flags.indexOf("!illustration") > -1 && t.selectedView.editorType === FEditorType.Illustration || e.flags.indexOf("view_restricted") > -1 && Y5.isCopyExportRestricted()) return !1;
     let n = e.flags.includes("design");
     let r = e.flags.includes("whiteboard");
     let a = e.flags.includes("dev_handoff");
@@ -40,28 +40,28 @@ export function $$v0(e, t) {
     let u = e.flags.includes("figmake");
     let p = e.flags.includes("illustration");
     if (n || r || a || p || s || o || d || u) switch (t.selectedView.editorType) {
-      case nT.Figmake:
+      case FEditorType.Figmake:
         if (!u) return !1;
         break;
-      case nT.Sites:
+      case FEditorType.Sites:
         if (!o) return !1;
         break;
-      case nT.Illustration:
+      case FEditorType.Illustration:
         if (!n && !p) return !1;
         break;
-      case nT.Design:
+      case FEditorType.Design:
         if (!n) return !1;
         break;
-      case nT.Whiteboard:
+      case FEditorType.Whiteboard:
         if (!r) return !1;
         break;
-      case nT.DevHandoff:
+      case FEditorType.DevHandoff:
         if (!a) return !1;
         break;
-      case nT.Cooper:
+      case FEditorType.Cooper:
         if (!d) return !1;
         break;
-      case nT.Slides:
+      case FEditorType.Slides:
         if (!s) return !1;
     }
     if (e.flags.indexOf("!desktop_os_menu") > -1 && t.isDesktopMenu || e.flags.indexOf("desktop_os_menu") > -1 && !t.isDesktopMenu) return !1;
@@ -70,9 +70,9 @@ export function $$v0(e, t) {
   }
   return !!(k$(e) || gN(e)) || !(null != e.platforms && !function (e) {
     for (let t of e) {
-      if ("mac" === t && cX() || "linux" === t && j9()) return !0;
-      if ("windows" === t && uF()) return !0;
-      if ("!ipad" === t && !wg()) return !0;
+      if ("mac" === t && getIsMac() || "linux" === t && getIsLinux()) return !0;
+      if ("windows" === t && getIsWindows()) return !0;
+      if ("!ipad" === t && !isIpadDevice()) return !0;
     }
     return !1;
   }(e.platforms) || e.featureFlags && !e.featureFlags.every(e => getFeatureFlags()[e]) || e.notFeatureFlags && e.notFeatureFlags.some(e => getFeatureFlags()[e]));

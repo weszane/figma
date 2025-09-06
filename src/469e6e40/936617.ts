@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { useSelector } from "../vendor/514228";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { uQ } from "../figma_app/311375";
 import { M } from "../469e6e40/302359";
 import { V } from "../469e6e40/782251";
@@ -37,7 +37,7 @@ function x({
         count: t.totalItems
       },
       children: jsxs(VZ, {
-        title: _$$t("dev_handoff.selection_effect_styles"),
+        title: getI18nString("dev_handoff.selection_effect_styles"),
         recordingKey: "devModeSelectionEffectStyles",
         isSubsection: e,
         noPadding: e,
@@ -53,7 +53,7 @@ function x({
         count: a.totalItems
       },
       children: jsxs(VZ, {
-        title: _$$t("dev_handoff.selection_text_styles"),
+        title: getI18nString("dev_handoff.selection_text_styles"),
         recordingKey: "devModeSelectionTextStyles",
         isSubsection: e,
         noPadding: e,
@@ -121,7 +121,7 @@ export function $$S1() {
     children: [jsx(J, {
       isSubsection: !0
     }), jsxs(VZ, {
-      title: _$$t("inspect_panel.colors.title"),
+      title: getI18nString("inspect_panel.colors.title"),
       additionalHeaders: jsx(Af, {}),
       recordingKey: "colors",
       noBorder: !0,

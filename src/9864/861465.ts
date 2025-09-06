@@ -1,10 +1,10 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import s from "classnames";
-import { C8 } from "../figma_app/778880";
+import { getIsAndroidOrIphoneNotFigmaMobile } from "../figma_app/778880";
 import { b } from "../905/22449";
 import { c as _$$c } from "../905/34525";
 import { xk } from "@stylexjs/stylex";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { YX } from "../905/98947";
 import { h6, P2, F5, eP, wO, iy } from "../7021/762792";
 var o = s;
@@ -53,7 +53,7 @@ let h = {
   }
 };
 function _(e) {
-  let r = md(YX);
+  let r = useAtomWithSubscription(YX);
   let t = r => !!(e.isSingleSelect && e.selectedOptions?.size > 0) && !e.selectedOptions?.has(r);
   return jsxs(b, {
     "data-testid": "signal-option-container",
@@ -88,7 +88,7 @@ function _(e) {
   });
 }
 export function $$f0(e) {
-  let r = C8();
+  let r = getIsAndroidOrIphoneNotFigmaMobile();
   return jsx(_, {
     answerButtonClassName: o()(r ? h6 : P2, e.answerButtonClassName),
     answerButtonDimmedClassName: F5,

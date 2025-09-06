@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "../vendor/514228";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { Tc } from "../905/797478";
 import { CB } from "../figma_app/442259";
 import { l as _$$l } from "../905/831968";
@@ -66,7 +66,7 @@ export function $$m2() {
   return useSelector(e => "WHEEL" === e.multiplayerEmoji.type && ["REACTION1", "REACTION2", "STAMP1", "STAMP2"].includes(e.multiplayerEmoji.wheelType));
 }
 export function $$g6() {
-  return !Ay.isIpad;
+  return !BrowserInfo.isIpad;
 }
 export const $R = $$u0;
 export const X = $$p1;

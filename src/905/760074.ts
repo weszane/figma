@@ -1,12 +1,12 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { WB } from "../905/761735";
-import { Bc, kF, $D } from "../905/11";
-import { x1 } from "../905/714362";
+import { setDatadogTags, setSentryTag, reportError } from "../905/11";
+import { logError } from "../905/714362";
 import { sy } from "../figma_app/930338";
 import { XHR } from "../905/910117";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { nX } from "../905/617744";
 import { FFileType } from "../figma_app/191312";
 import { PW } from "../905/535806";
@@ -27,7 +27,7 @@ export function $$b9(e, t) {
   return $$_6(e) && e.sourceLibraryKey === t;
 }
 export function $$v11(e) {
-  return $$f13(e) ? _$$t("file_info_row.branch") : _$$t("file_info_row.file");
+  return $$f13(e) ? getI18nString("file_info_row.branch") : getI18nString("file_info_row.file");
 }
 export function $$I12(e, t) {
   return e.key === t.default_file_key;
@@ -141,7 +141,7 @@ export async function $$U5(e) {
     } catch (t) {
       return {
         status: "error",
-        message: _$$t("collaboration.branching.error_restoring_branches", {
+        message: getI18nString("collaboration.branching.error_restoring_branches", {
           branchCount: e.length
         })
       };
@@ -161,7 +161,7 @@ export async function $$U5(e) {
     } catch (t) {
       return {
         status: "error",
-        message: _$$t("collaboration.branching.error_restoring_branches", {
+        message: getI18nString("collaboration.branching.error_restoring_branches", {
           branchCount: e.length
         })
       };
@@ -179,21 +179,21 @@ function V(e, t) {
   };
 }
 export function $$G16(e, t) {
-  Bc(V(e, t));
+  setDatadogTags(V(e, t));
 }
 export function $$z23() {
-  Object.keys(V(PW.UNHANDLED, null)).forEach(e => kF(e, void 0));
+  Object.keys(V(PW.UNHANDLED, null)).forEach(e => setSentryTag(e, void 0));
 }
 export function $$H4(e, t, i, r) {
-  x1("branching", e.message, r);
-  $D(_$$e.SCENEGRAPH_AND_SYNC, e, {
+  logError("branching", e.message, r);
+  reportError(_$$e.SCENEGRAPH_AND_SYNC, e, {
     tags: V(t, i)
   });
 }
 export function $$W14(e, t) {
-  let i = zl.get(nX);
-  x1("branching", e.message, t);
-  $D(_$$e.SCENEGRAPH_AND_SYNC, e, {
+  let i = atomStoreManager.get(nX);
+  logError("branching", e.message, t);
+  reportError(_$$e.SCENEGRAPH_AND_SYNC, e, {
     tags: V(PW.MODAL, i)
   });
 }

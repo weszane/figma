@@ -8,7 +8,7 @@ import d from "classnames";
 import { Point } from "../905/736624";
 import { oW } from "../905/675859";
 import { n as _$$n } from "../905/734251";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F9 } from "../figma_app/147952";
 import { Y5 } from "../figma_app/455680";
 import { Z } from "../3276/966473";
@@ -163,7 +163,7 @@ function N(e) {
         [Jy]: e.dragging,
         [dG]: e.mini
       }),
-      alt: t("whiteboard.face_stamps.aria_label", {
+      alt: getI18nString("whiteboard.face_stamps.aria_label", {
         userName: e.username
       })
     })

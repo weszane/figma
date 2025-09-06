@@ -13,11 +13,11 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import f from "classnames";
 import { A as _$$A } from "../vendor/850789";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { debugState } from "../905/407919";
 import { oW } from "../905/675859";
 import { Qp } from "../figma_app/162641";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { DP } from "../905/640017";
 import { Dc } from "../figma_app/314264";
 import { gl, hS } from "../905/216495";
@@ -137,7 +137,7 @@ function V(e) {
     }),
     children: jsx(oW, {
       src: e.imageUrl,
-      alt: _$$t("fullscreen.properties_panel.width_profile.custom.alt_label"),
+      alt: getI18nString("fullscreen.properties_panel.width_profile.custom.alt_label"),
       className: "stroke_width_profile_control--customProfile--M0j9K"
     })
   });
@@ -208,7 +208,7 @@ export function $$G1(e) {
       if (!t || "CUSTOM" === t || "MIXED" === t) return;
       let n = Dc(debugState.getState().selectedView.editorType);
       let r = U[t];
-      (i === zk.YES || i === zk.YES_FORCE_TRACKING_AS_EDIT) && az.trackDefinedEvent("illustration.web_variable_width_stroke_profile_changed", {
+      (i === zk.YES || i === zk.YES_FORCE_TRACKING_AS_EDIT) && analyticsEventManager.trackDefinedEvent("illustration.web_variable_width_stroke_profile_changed", {
         source: e.source,
         controlPointCount: r.controlPoints.length,
         productType: n,
@@ -232,10 +232,10 @@ export function $$G1(e) {
       updatePreview(e);
     }
   }, 50);
-  let ee = useMemo(() => Z ? _$$t("fullscreen.mixed") : X ? getFeatureFlags().ce_il_vws_custom_preview ? M ? jsx(V, {
+  let ee = useMemo(() => Z ? getI18nString("fullscreen.mixed") : X ? getFeatureFlags().ce_il_vws_custom_preview ? M ? jsx(V, {
     imageUrl: M,
     darkBackground: L
-  }) : jsx(Qp, {}) : _$$t("fullscreen.properties_panel.width_profile.custom") : jsx(B, {
+  }) : jsx(Qp, {}) : getI18nString("fullscreen.properties_panel.width_profile.custom") : jsx(B, {
     roundEndcaps: "ROUND" === v,
     profileClassNames: U[_].classNames,
     darkBackground: L,
@@ -253,7 +253,7 @@ export function $$G1(e) {
       disabled: t,
       width: "fill",
       label: jsx(_$$h, {
-        children: tx("fullscreen.properties_panel.width_profile.label")
+        children: renderI18nText("fullscreen.properties_panel.width_profile.label")
       }),
       htmlAttributes: {
         "data-tooltip": t ? i : void 0,
@@ -265,7 +265,7 @@ export function $$G1(e) {
         children: jsx(c$, {
           value: "MIXED",
           disabled: !0,
-          children: tx("fullscreen.mixed")
+          children: renderI18nText("fullscreen.mixed")
         }, "MIXED")
       }), ...H, X && jsxs(Fragment, {
         children: [jsx(wv, {}), jsx(c$, {
@@ -273,12 +273,12 @@ export function $$G1(e) {
           children: getFeatureFlags().ce_il_vws_custom_preview ? M ? jsx(V, {
             imageUrl: M,
             darkBackground: !0
-          }) : jsx(Qp, {}) : tx("fullscreen.properties_panel.width_profile.custom")
+          }) : jsx(Qp, {}) : renderI18nText("fullscreen.properties_panel.width_profile.custom")
         }, "CUSTOM")]
       }), getFeatureFlags().ce_il_vws_custom_preview && z && jsxs(Fragment, {
         children: [jsx(wv, {}), jsx(c$, {
           value: "EDIT",
-          children: tx("fullscreen.properties_panel.width_profile.edit")
+          children: renderI18nText("fullscreen.properties_panel.width_profile.edit")
         }, "EDIT")]
       })]
     })]
@@ -295,7 +295,7 @@ export function $$H0(e) {
   let [i, r] = lJ("variableWidthPoints");
   return jsx(K, {
     recordingKey: e.recordingKey,
-    "aria-label": _$$t("fullscreen.properties_panel.width_profile.flip_horizonal"),
+    "aria-label": getI18nString("fullscreen.properties_panel.width_profile.flip_horizonal"),
     disabled: t || gl(i) || !i || function (e) {
       let t = z(e);
       return c2(e, t);

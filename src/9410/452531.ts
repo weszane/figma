@@ -4,7 +4,7 @@ import { WY } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getInitialOptions } from "../figma_app/169182";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { c as _$$c } from "../905/370443";
 import { $z } from "../figma_app/831799";
 import { Lh, D8 } from "../figma_app/242339";
@@ -181,7 +181,7 @@ export function $$y0(e, t) {
         props: i
       });
       return jsx(P, {
-        bodyText: _$$t("cursor_bot.use_the_design_panel_to_turn_basic_text_into_titles"),
+        bodyText: getI18nString("cursor_bot.use_the_design_panel_to_turn_basic_text_into_titles"),
         fromCursorBot: !0,
         getNodeToSelect: t ? () => WY(e => "TEXT" === e.type && (e.name === $j || "Grown in Tracy, CA" === e.name), getSingletonSceneGraph()) : () => n?.type === "TEXT" ? n : WY(e => "TEXT" === e.type, getSingletonSceneGraph()),
         isFollowUp: i.isFollowUp,
@@ -191,7 +191,7 @@ export function $$y0(e, t) {
           trackingProperties: {
             ctaTrackingDescriptor: _$$c.BACK
           },
-          children: tx("cursor_bot.back")
+          children: renderI18nText("cursor_bot.back")
         }) : void 0,
         onClose: i.onClickClose,
         onPrimaryCtaClick,
@@ -199,7 +199,7 @@ export function $$y0(e, t) {
         primaryCtaProps,
         secondaryCtaProps,
         skip: i.skip,
-        title: t ? _$$t("cursor_bot.pick_the_perfect_font") : _$$t("cursor_bot.and_pick_the_perfect_font")
+        title: t ? getI18nString("cursor_bot.pick_the_perfect_font") : getI18nString("cursor_bot.and_pick_the_perfect_font")
       });
     }
   };

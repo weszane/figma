@@ -12,13 +12,13 @@ import { t as _$$t } from "../905/947268";
 import { Z as _$$Z } from "../905/498136";
 import { l as _$$l2 } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { k9, zN } from "../905/19536";
 import y from "classnames";
-import { az, sx } from "../905/449184";
+import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { parsePxInt } from "../figma_app/783094";
 import { h as _$$h } from "../905/455748";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { Uz } from "../905/63728";
 import { j as _$$j } from "../905/918929";
 import { Pt } from "../figma_app/806412";
@@ -27,7 +27,7 @@ import { Point } from "../905/736624";
 import { xd, uO, qy } from "../905/972515";
 import { Zl, iN, Z4, YU, ez as _$$ez, TQ } from "../905/211621";
 import { s as _$$s2 } from "../cssbuilder/589278";
-import { t as _$$t2, tx as _$$tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { j7, oB } from "../905/929976";
 import { U8, fG } from "../figma_app/91703";
 import { vq, qX } from "../905/8732";
@@ -180,14 +180,14 @@ function eW(e) {
     sceneGraphSelection,
     isListView,
     loadingState
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     library: e.library,
     dropdownShown: e.dropdownShown,
     sceneGraphSelection: e.mirror.sceneGraphSelection,
     isListView: e.instanceSwapPickerListLayout,
     loadingState: e.loadingState
   }));
-  let e2 = md(qp);
+  let e2 = useAtomWithSubscription(qp);
   let e5 = useSelector(e => e.universalInsertModal.showing);
   let e3 = openFile.key;
   let e4 = _G();
@@ -276,7 +276,7 @@ function eW(e) {
     let a = xd(i.map(e => e.item), e => e.name, e => e.library_key + e.node_id);
     if (eY) {
       let n = tf(a).length;
-      az.trackDefinedEvent("instance_swap_picker.search", {
+      analyticsEventManager.trackDefinedEvent("instance_swap_picker.search", {
         ...tg,
         sessionId,
         searchSessionId: t,
@@ -289,7 +289,7 @@ function eW(e) {
         libraryKey: tc.type === iN.FILE ? tc.libraryKey : void 0,
         isPreferredValues: pickerType === Zl.PREFERRED_VALUES_PICKER
       });
-    } else sx("Component Insert Search", {
+    } else trackEventAnalytics("Component Insert Search", {
       searchSessionId: t,
       query: e,
       queryId: r,
@@ -404,7 +404,7 @@ function eW(e) {
       [validDropdownSelection.libraryKey]: e
     }), tx({
       [validDropdownSelection.libraryKey]: e
-    }), eY && az.trackDefinedEvent("instance_swap_picker.navigate", {
+    }), eY && analyticsEventManager.trackDefinedEvent("instance_swap_picker.navigate", {
       ...tg,
       sessionId,
       direction: t,
@@ -439,20 +439,20 @@ function eW(e) {
       type: iN.FILE,
       libraryKey: t.libraryKey
     };
-    az.trackDefinedEvent("asset_search.misc_feature_usage", {
+    analyticsEventManager.trackDefinedEvent("asset_search.misc_feature_usage", {
       aiResultsEnabled: tm,
       entryPoint: "instance-swap",
       featureSlug: "library-filter-usage"
     });
     tu(r);
     e.searchBarRef?.current && e.searchBarRef.current.focus();
-    eY ? az.trackDefinedEvent("instance_swap_picker.library_switch", {
+    eY ? analyticsEventManager.trackDefinedEvent("instance_swap_picker.library_switch", {
       ...tg,
       sessionId,
       dropdownType: Z4(r, e4),
       libraryKey: r.type === iN.FILE ? r.libraryKey : void 0,
       isPreferredValues: pickerType === Zl.PREFERRED_VALUES_PICKER
-    }) : sx("Component Insert Library Switch", {
+    }) : trackEventAnalytics("Component Insert Library Switch", {
       isSearching
     });
   }, [tm, e.searchBarRef, eY, tg, sessionId, e4, pickerType, isSearching]);
@@ -461,7 +461,7 @@ function eW(e) {
   let tB = tc.type === iN.FILE ? tc.libraryKey : void 0;
   let tG = Fl();
   let tV = useMemo(() => ({
-    format: t => t.type === iN.RECENT ? isSearching ? _$$t2("design_systems.instance_swap_picker.all_libraries") : e.pickerType === Zl.RESOURCE_INSERT_MODAL ? _$$t2("universal_insert.recents") : _$$t2("design_systems.instance_swap_picker.recently_used") : t.type === iN.PREFERRED ? _$$t2("design_systems.instance_swap_picker.preferred") : t.type === iN.FILE ? t.libraryKey === e4 ? _$$t2("design_systems.instance_swap_picker.created_in_this_file") : libraryMetadataMap[t.libraryKey]?.name ?? "" : "",
+    format: t => t.type === iN.RECENT ? isSearching ? getI18nString("design_systems.instance_swap_picker.all_libraries") : e.pickerType === Zl.RESOURCE_INSERT_MODAL ? getI18nString("universal_insert.recents") : getI18nString("design_systems.instance_swap_picker.recently_used") : t.type === iN.PREFERRED ? getI18nString("design_systems.instance_swap_picker.preferred") : t.type === iN.FILE ? t.libraryKey === e4 ? getI18nString("design_systems.instance_swap_picker.created_in_this_file") : libraryMetadataMap[t.libraryKey]?.name ?? "" : "",
     isEqual: (e, t) => e.type === t.type && (e.type !== iN.FILE || t.type !== iN.FILE || e.libraryKey === t.libraryKey)
   }), [isSearching, e.pickerType, e4, libraryMetadataMap]);
   let tH = useCallback(() => {
@@ -573,12 +573,12 @@ function eW(e) {
         newInstanceNodeId: i.node_id,
         newInstanceComponentKey: e(i)
       };
-      az.trackDefinedEvent("instance_swap_picker.insert_instance", {
+      analyticsEventManager.trackDefinedEvent("instance_swap_picker.insert_instance", {
         ...p,
         ...n,
         ...a
       });
-      az.trackDefinedEvent("asset_search.result_inserted", {
+      analyticsEventManager.trackDefinedEvent("asset_search.result_inserted", {
         ...c,
         assetType: p.type,
         entryPoint: "instance-swap",
@@ -590,11 +590,11 @@ function eW(e) {
       });
     } else if (pickerType === Zl.PREFERRED_VALUES_PICKER) {
       let e = tz(r);
-      sx("Preferred Values Picker Toggle Component", {
+      trackEventAnalytics("Preferred Values Picker Toggle Component", {
         ...p,
         action: e ? "deselect" : "select"
       });
-    } else sx("Component Insert Panel Insert Instance", {
+    } else trackEventAnalytics("Component Insert Panel Insert Instance", {
       type: r.item.type === PW.COMPONENT ? "component" : "state_group",
       fromSearch: n,
       altKey: s,
@@ -609,7 +609,7 @@ function eW(e) {
   let tZ = fc();
   let tQ = jsxs(Fragment, {
     children: [jsx(_$$p, {
-      ariaLabel: _$$t2("design_systems.instance_panel.swap_instance"),
+      ariaLabel: getI18nString("design_systems.instance_panel.swap_instance"),
       className: pickerType === Zl.RESOURCE_INSERT_MODAL ? kc : Kv,
       dataTestId: "instance-swap-picker-library-select",
       dispatch: e8,
@@ -743,7 +743,7 @@ function eW(e) {
     tu({
       type: iN.RECENT
     });
-    eY && az.trackDefinedEvent("instance_swap_picker.search_all_libraries_from_empty", {
+    eY && analyticsEventManager.trackDefinedEvent("instance_swap_picker.search_all_libraries_from_empty", {
       ...tg,
       sessionId,
       query: e.query,
@@ -762,7 +762,7 @@ function eW(e) {
     },
     children: [jsx("div", {
       className: eY ? qv : void 0,
-      children: _$$tx("design_systems.instance_swap_picker.no_components")
+      children: renderI18nText("design_systems.instance_swap_picker.no_components")
     }), jsx("div", {
       className: _$$s2.mt8.$$if(!eY, _$$s2.flex.itemsCenter.justifyCenter.mt12).$,
       children: jsx($n, {
@@ -771,13 +771,13 @@ function eW(e) {
         iconPrefix: jsx(_$$l, {
           className: _$$s2.mr2.$
         }),
-        children: _$$tx("design_systems.instance_swap_picker.browse_libraries")
+        children: renderI18nText("design_systems.instance_swap_picker.browse_libraries")
       })
     })]
   });
   let t4 = useMemo(() => e9 ? publishedLibraryItemsByLibraryKey[e9] ?? null : null, [e9, publishedLibraryItemsByLibraryKey]);
   let t8 = function (e, t, r, n) {
-    let a = md(qp);
+    let a = useAtomWithSubscription(qp);
     let s = k9(() => t ? new Set(t.map(e => Av(e))) : [], [t]);
     let o = k9(() => {
       Object.keys(a);
@@ -829,15 +829,15 @@ function eW(e) {
     rootDrilldownItems: validRootDrilldownItems,
     scrollContainerHeight,
     searchBarPlaceholderText: (() => {
-      if (tc.type === iN.PREFERRED) return _$$t2("design_systems.instance_swap_picker.search_preferred");
-      if (tc.type === iN.RECENT) return _$$t2("design_systems.instance_swap_picker.search_all_libraries");
+      if (tc.type === iN.PREFERRED) return getI18nString("design_systems.instance_swap_picker.search_preferred");
+      if (tc.type === iN.RECENT) return getI18nString("design_systems.instance_swap_picker.search_all_libraries");
       if (null != tc.libraryKey && libraryMetadataMap[tc.libraryKey]) {
         let e = libraryMetadataMap[tc.libraryKey]?.name ?? "";
-        return _$$t2("design_systems.instance_swap_picker.search_filename", {
+        return getI18nString("design_systems.instance_swap_picker.search_filename", {
           filename: e
         });
       }
-      return _$$t2("design_systems.instance_swap_picker.search");
+      return getI18nString("design_systems.instance_swap_picker.search");
     })(),
     searchBarRef: e.searchBarRef,
     searchDebounceTime: e.searchDebounceTime,
@@ -876,7 +876,7 @@ export function $$eK1(e) {
   let {
     instanceSwapPickerShown,
     loadingState
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     instanceSwapPickerShown: e.instanceSwapPickerShown,
     loadingState: e.loadingState
   }));
@@ -942,7 +942,7 @@ export function $$eY2(e) {
   let {
     instanceSwapPickerShown,
     dropdownShown
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     instanceSwapPickerShown: e.instanceSwapPickerShown,
     dropdownShown: e.dropdownShown
   }));
@@ -963,7 +963,7 @@ export function $$eY2(e) {
   }, [_, instanceSwapPickerShown]);
   let [b, I] = useState(0);
   let S = useCallback(() => {
-    sx(`${c ? "Instance Swap Picker" : "Component Insert"} Total Searches`, {
+    trackEventAnalytics(`${c ? "Instance Swap Picker" : "Component Insert"} Total Searches`, {
       numSearches: b
     });
     _(vq());
@@ -1060,17 +1060,17 @@ export function $$e$0({
       isListLayout: !c
     }));
     r?.current && r.current.focus();
-    e ? d(!c) : sx(`${t ? "Preferred Values Picker" : "Component Insert"} View Toggle`, {
+    e ? d(!c) : trackEventAnalytics(`${t ? "Preferred Values Picker" : "Component Insert"} View Toggle`, {
       viewMode: c ? "grid" : "list"
     });
   }, [l, p, c, r, e, d, t]);
   return jsx(_$$K, {
-    "aria-label": c ? _$$t2("design_systems.instance_swap_picker.show_as_grid") : _$$t2("design_systems.instance_swap_picker.show_as_list"),
+    "aria-label": c ? getI18nString("design_systems.instance_swap_picker.show_as_grid") : getI18nString("design_systems.instance_swap_picker.show_as_list"),
     onClick: m,
     recordingKey: Pt("toggleGridViewButton", t ? "preferredValues" : "instanceSwapPicker"),
     htmlAttributes: {
       onMouseDown: dG,
-      "data-tooltip": c ? _$$t2("design_systems.instance_swap_picker.show_as_grid") : _$$t2("design_systems.instance_swap_picker.show_as_list"),
+      "data-tooltip": c ? getI18nString("design_systems.instance_swap_picker.show_as_grid") : getI18nString("design_systems.instance_swap_picker.show_as_list"),
       "data-tooltip-type": Ib.TEXT
     },
     children: c ? jsx(_$$t, {}) : jsx(_$$Z, {})
@@ -1081,7 +1081,7 @@ function eX({
   type: t
 }) {
   if (t === iN.RECENT) return null;
-  let r = _$$tx("design_systems.instance_swap_picker.search_all_libraries");
+  let r = renderI18nText("design_systems.instance_swap_picker.search_all_libraries");
   return jsx($n, {
     onClick: e,
     variant: "secondary",

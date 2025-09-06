@@ -8,7 +8,7 @@ import { o6, Pt } from "../figma_app/806412";
 import { Kz } from "../figma_app/637027";
 import { t as _$$t } from "../905/331623";
 import { Me } from "../figma_app/617427";
-import { t as _$$t2 } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { b as _$$b } from "../905/985254";
 import { c as _$$c } from "../905/370443";
 import { $A } from "../905/782918";
@@ -70,7 +70,7 @@ class T extends o6 {
             className: zD,
             children: jsx(Me, {
               onClick: this.onDismiss,
-              "aria-label": _$$t2("fullscreen.properties_panel.hint_panel.close"),
+              "aria-label": getI18nString("fullscreen.properties_panel.hint_panel.close"),
               recordingKey: Pt(this.props.recordingKey, "x"),
               trackingProperties: {
                 trackingDescriptor: _$$c.CLOSE_BUTTON,

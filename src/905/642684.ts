@@ -1,12 +1,12 @@
 import { isDevEnvironment } from "../figma_app/169182";
-import { nl, b_ } from "../figma_app/257275";
+import { isInteractionPathCheck, isDebugMode } from "../figma_app/897289";
 let $$a2 = console.error;
 let s = ["log", "error", "assert", "info", "warn", "clear"];
 let o = {};
 for (let e of s) o[e] = console[e];
 let l = 0;
 export function $$d1() {
-  if (!(nl() || b_ || isDevEnvironment())) {
+  if (!(isInteractionPathCheck() || isDebugMode || isDevEnvironment())) {
     if (0 === l) {
       console.clear();
       console.log("------- Clearing and silencing console.log from Figma -------");
@@ -20,7 +20,7 @@ export function $$d1() {
   }
 }
 export function $$c0() {
-  if (!nl() && !b_ && 0 == --l) {
+  if (!isInteractionPathCheck() && !isDebugMode && 0 == --l) {
     try {
       for (let e of s) console[e] = o[e];
     } catch (e) {

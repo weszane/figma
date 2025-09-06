@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { MoD, FDn, glU, Ez5 } from "../figma_app/763686";
 import { l7, Hq } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
-import { zl } from "../figma_app/27355";
-import { az } from "../905/449184";
+import { atomStoreManager } from "../figma_app/27355";
+import { analyticsEventManager } from "../905/449184";
 import { ZC } from "../figma_app/39751";
 import { Jr } from "../figma_app/624361";
 import { eY } from "../figma_app/722362";
@@ -19,7 +19,7 @@ async function f(e, t) {
     if (1 !== t.length) throw Error("Expected exactly one code layer to be created");
     n = t[0];
   }), n) await Jr().loadAllImagesUnder(n, MoD.ALL, "rev-image-paste");else {
-    let n = zl.get(Ah).find(t => ak(t, e.guid));
+    let n = atomStoreManager.get(Ah).find(t => ak(t, e.guid));
     t(t => t.filter(t => !ak(t, e.guid)));
     Hq.system("figmake", () => {
       let t = getSingletonSceneGraph().get(e.guid);
@@ -62,9 +62,9 @@ export async function $$y0(e, t, n, r, a) {
         n(t => t.map(t => ak(t, e.guid) ? i : t));
       }
     }(c, u, n);
-    az.trackDefinedEvent("ai_for_production.chat_attachment_added", {
+    analyticsEventManager.trackDefinedEvent("ai_for_production.chat_attachment_added", {
       attachmentType: d,
-      fileKey: zl.get(yV)?.key ?? void 0
+      fileKey: atomStoreManager.get(yV)?.key ?? void 0
     });
   } catch (t) {
     n(t => t.map(t => ak(t, e) ? {

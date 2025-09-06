@@ -5,12 +5,12 @@ import { getFeatureFlags } from "../905/601108";
 import { A as _$$A } from "../vendor/90566";
 import { parsePxNumber } from "../figma_app/783094";
 import { Ay } from "../905/612521";
-import { x1, xi } from "../905/714362";
+import { logError, logWarning } from "../905/714362";
 import { XHR } from "../905/910117";
 import { Ex, zE } from "../figma_app/919079";
 import { kt, qc, nt } from "../figma_app/858013";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { J as _$$J } from "../905/231762";
 import { F as _$$F } from "../905/302958";
 import { Cg, qD } from "../figma_app/471982";
@@ -97,7 +97,7 @@ function j({
       }), jsx("button", {
         className: Be,
         onClick: () => d(!0),
-        children: tx("general.edit")
+        children: renderI18nText("general.edit")
       })]
     })]
   });
@@ -109,12 +109,12 @@ function q({
   resource: e,
   promo_code: t
 }) {
-  return t ? Uv(e.monetized_resource_metadata) ? -1 === t.duration ? tx("community.buyer.sub_percent_off__forever", {
+  return t ? Uv(e.monetized_resource_metadata) ? -1 === t.duration ? renderI18nText("community.buyer.sub_percent_off__forever", {
     percent_off: t.percent_off
-  }) : tx("community.buyer.sub_percent_off", {
+  }) : renderI18nText("community.buyer.sub_percent_off", {
     percent_off: t.percent_off,
     duration: t.duration
-  }) : tx("community.buyer.otp_percent_off", {
+  }) : renderI18nText("community.buyer.otp_percent_off", {
     percent_off: t.percent_off
   }) : null;
 }
@@ -155,7 +155,7 @@ function Z({
           h("invalid");
         });
       },
-      children: tx("community.buyer.apply")
+      children: renderI18nText("community.buyer.apply")
     });
     let t = () => {
       d("");
@@ -200,7 +200,7 @@ function Z({
         className: "checkout_promo_code_input--promoCodeInput--aypdF basic_form--labeledInputGroup--aeD6L",
         disabled: t,
         htmlName: "promo_code",
-        label: _$$t("community.buyer.promo_code"),
+        label: getI18nString("community.buyer.promo_code"),
         maxLength: 8,
         onChange: e => {
           8 === e.target.value.length ? o("possibly_valid") : o("too_short");
@@ -226,7 +226,7 @@ function Z({
           "checkout_promo_code_input--promoCodeError--Mw--L text--fontPos11--2LvXf text--_fontBase--QdLsd": !0,
           "checkout_promo_code_input--promoCodeError__visible--HBI59": "invalid" === s
         }),
-        children: tx("community.buyer.enter_valid_promo_code")
+        children: renderI18nText("community.buyer.enter_valid_promo_code")
       })]
     })
   });
@@ -240,14 +240,14 @@ function X(e) {
       fullWidth: !0,
       children: e.isLoading ? jsx(qc, {
         shouldMatchTextColor: !0
-      }) : tx("community.buyer.complete_purchase")
+      }) : renderI18nText("community.buyer.complete_purchase")
     }), jsx("span", {
-      children: tx("community.buyer.by_purchasing_you_agree_to_the_terms_of_service", {
+      children: renderI18nText("community.buyer.by_purchasing_you_agree_to_the_terms_of_service", {
         termsOfServiceLink: jsx(CY, {
           href: "https://www.figma.com/tos/",
           target: "_blank",
           trusted: !0,
-          children: tx("general.terms_of_service")
+          children: renderI18nText("general.terms_of_service")
         })
       })
     })]
@@ -291,32 +291,32 @@ function J(e) {
   };
   let I = void 0 !== priceInCents ? up(priceInCents, !0) : jsx("div", {
     className: nv,
-    children: _$$t("community.buyer.tbd")
+    children: getI18nString("community.buyer.tbd")
   });
   let E = void 0 !== newTotalAmount ? up(newTotalAmount, !0) : jsx("div", {
     className: nv,
-    children: _$$t("community.buyer.tbd")
+    children: getI18nString("community.buyer.tbd")
   });
-  isSubscription && priceInCents && (t = subscriptionInterval === fN.MONTHLY ? tx("community.buyer.price_x_month", {
+  isSubscription && priceInCents && (t = subscriptionInterval === fN.MONTHLY ? renderI18nText("community.buyer.price_x_month", {
     priceString: up(priceInCents)
-  }) : tx("community.buyer.price_x_year", {
+  }) : renderI18nText("community.buyer.price_x_year", {
     priceString: up(priceInCents, !0)
   }));
   return jsxs("div", {
     className: _$$s.flex.flexColumn.itemsStart.gap12.$,
     children: [jsx(ee, {
-      header: tx("community.buyer.subtotal"),
+      header: renderI18nText("community.buyer.subtotal"),
       subheader: t,
       price: I
     }), jsx(ee, {
       header: function (e) {
         switch (e) {
           case CO:
-            return tx("community.buyer.sales_tax");
+            return renderI18nText("community.buyer.sales_tax");
           case UW:
-            return tx("community.buyer.jct");
+            return renderI18nText("community.buyer.jct");
           default:
-            return tx("community.buyer.vat_gst");
+            return renderI18nText("community.buyer.vat_gst");
         }
       }(countryCode),
       price: taxCalculationError ? jsx("span", {
@@ -324,14 +324,14 @@ function J(e) {
         children: taxCalculationError
       }) : hasCalculatedTax ? up(taxAmountInCents, !0) : jsx("span", {
         className: nv,
-        children: tx("community.buyer.to_be_calculated")
+        children: renderI18nText("community.buyer.to_be_calculated")
       })
     }), promoCodeAmountString && jsx(ee, {
       adtlClassName: us,
-      header: tx("community.buyer.promo_code"),
+      header: renderI18nText("community.buyer.promo_code"),
       price: up(promoCodeAmountString, !0)
     }), _ && jsx(ee, {
-      header: tx("community.buyer.to_be_charged_on_date", {
+      header: renderI18nText("community.buyer.to_be_charged_on_date", {
         date: A
       }),
       price: promoCode ? E : up(y, !0)
@@ -339,7 +339,7 @@ function J(e) {
       className: Wz
     }), jsx(ee, {
       header: jsx("strong", {
-        children: _ ? tx("community.buyer.total_due_today") : tx("community.buyer.total")
+        children: _ ? renderI18nText("community.buyer.total_due_today") : renderI18nText("community.buyer.total")
       }),
       price: _ ? up(0) : E,
       showUSDLabel: !0
@@ -363,7 +363,7 @@ function ee(e) {
     }), jsxs("div", {
       className: lA,
       children: [e.price, e.showUSDLabel && jsxs(Fragment, {
-        children: ["\xa0", tx("community.seller.usd")]
+        children: ["\xa0", renderI18nText("community.seller.usd")]
       })]
     })]
   });
@@ -399,7 +399,7 @@ function em(e) {
 }
 function eh(e) {
   let t = jsx("div", {
-    children: tx("community.buyer.ending_in", {
+    children: renderI18nText("community.buyer.ending_in", {
       last4: jsx("strong", {
         children: e.paymentMethod.last4
       })
@@ -417,7 +417,7 @@ function eh(e) {
     className: _$$s.flex.gap12.alignCenter.$,
     children: [jsx("div", {
       className: IC,
-      children: tx("community.buyer.exp", {
+      children: renderI18nText("community.buyer.exp", {
         expMonth: e.paymentMethod.exp_month.toLocaleString("en", {
           minimumIntegerDigits: 2
         }),
@@ -434,7 +434,7 @@ function eh(e) {
           [t$]: e.isRemoveLoading,
           [r9]: e.disabled
         }),
-        children: tx("general.remove")
+        children: renderI18nText("general.remove")
       }), jsx(kt, {
         className: B()(w1, {
           [xc]: e.isRemoveLoading
@@ -486,7 +486,7 @@ function eg(e) {
       legend: jsx(_$$s2, {
         children: jsx("span", {
           className: _$$s.fontSemiBold.$,
-          children: tx("community.buyer.payment_details")
+          children: renderI18nText("community.buyer.payment_details")
         })
       }),
       children: [e.paymentMethods.map((t, i) => jsxs("div", {
@@ -508,7 +508,7 @@ function eg(e) {
         value: "",
         readonly: e.disabled || void 0,
         label: jsx(_$$J2, {
-          children: tx("community.buyer.add_new_card")
+          children: renderI18nText("community.buyer.add_new_card")
         })
       })]
     }), t && jsxs(Fragment, {
@@ -528,7 +528,7 @@ function eg(e) {
         vatId: e.vatId
       }), jsx(_$$S, {
         label: jsx(_$$J2, {
-          children: _$$t("community.buyer.save_my_payment_info")
+          children: getI18nString("community.buyer.save_my_payment_info")
         }),
         checked: e.savePaymentInfo,
         onChange: e.onSetSavePaymentInfo,
@@ -551,7 +551,7 @@ function ef({
       legend: jsx(_$$s2, {
         children: jsx("span", {
           className: _$$s.fontSemiBold.$,
-          children: tx("community.buyer.billing")
+          children: renderI18nText("community.buyer.billing")
         })
       }),
       children: jsxs("div", {
@@ -559,15 +559,15 @@ function ef({
         children: [jsx(_$$c, {
           value: fN.MONTHLY,
           label: jsx(_$$J2, {
-            children: tx("community.buyer.monthly")
+            children: renderI18nText("community.buyer.monthly")
           })
         }), jsx(_$$c, {
           value: fN.ANNUALLY,
           label: jsxs(_$$J2, {
             className: _$$s.flex.flexRow.itemsCenter.$,
-            children: [tx("community.buyer.yearly"), jsx("div", {
+            children: [renderI18nText("community.buyer.yearly"), jsx("div", {
               className: C_,
-              children: tx("community.buyer.save_percent", {
+              children: renderI18nText("community.buyer.save_percent", {
                 discountPercentage: e
               })
             })]
@@ -627,7 +627,7 @@ function ex({
   return jsx(ew, {
     image: jsx(eI, {}),
     resourceName: e.name,
-    authorName: t?.name || _$$t("community.buyer.you"),
+    authorName: t?.name || getI18nString("community.buyer.you"),
     subtitle: jsx(eC, {})
   });
 }
@@ -650,13 +650,13 @@ function eS({
       let n = t === fN.MONTHLY;
       let r = n ? up(e.monetized_resource_metadata.price) : up(e.monetized_resource_metadata.annual_price || 0, !0);
       let a = e?.community_resource_payment && e.community_resource_payment.subscription_expires_at;
-      l = i > 0 && !a ? tx(n ? "community.buyer.free_trial_then_price_month" : "community.buyer.free_trial_then_price_year", {
+      l = i > 0 && !a ? renderI18nText(n ? "community.buyer.free_trial_then_price_month" : "community.buyer.free_trial_then_price_year", {
         freeTrialDays: i,
         priceString: r
-      }) : tx(n ? "community.buyer.price_per_month_subscription" : "community.buyer.price_per_year_subscription", {
+      }) : renderI18nText(n ? "community.buyer.price_per_month_subscription" : "community.buyer.price_per_year_subscription", {
         priceString: r
       });
-    } else l = tx("community.buyer.price_one_time_payment", {
+    } else l = renderI18nText("community.buyer.price_one_time_payment", {
       priceString: bV(e.monetized_resource_metadata)
     });
   } else l = jsx(eC, {});
@@ -674,7 +674,7 @@ function ew(e) {
       children: e.image
     }), jsx("div", {
       className: JS,
-      children: tx("community.publishing.resource_by_author", {
+      children: renderI18nText("community.publishing.resource_by_author", {
         resourceName: e.resourceName,
         authorName: e.authorName
       })
@@ -687,7 +687,7 @@ function ew(e) {
 function eC() {
   return jsx("span", {
     className: Mt,
-    children: tx("community.buyer.price_and_payment_cadence_will_appear_here")
+    children: renderI18nText("community.buyer.price_and_payment_cadence_will_appear_here")
   });
 }
 function eR(e) {
@@ -758,7 +758,7 @@ export let $$eN0 = Ju(function (e) {
     B(_$$F.clearAll());
     B(_$$F.enqueue({
       type: e,
-      message: t || _$$t("community.buyer.sorry_there_was_an_error_processing_your_request_refresh_and_try_again"),
+      message: t || getI18nString("community.buyer.sorry_there_was_an_error_processing_your_request_refresh_and_try_again"),
       error: !0
     }));
   }, [B]);
@@ -775,10 +775,10 @@ export let $$eN0 = Ju(function (e) {
         matchType: "fetch-payment-methods-error"
       }));
     }).catch(e => {
-      x1("checkout", "error fetching payment methods", eD(e), {
+      logError("checkout", "error fetching payment methods", eD(e), {
         reportAsSentryError: !0
       });
-      eL("fetch-payment-methods-error", _$$t("community.buyer.couldnt_fetch_existing_payment_method"));
+      eL("fetch-payment-methods-error", getI18nString("community.buyer.couldnt_fetch_existing_payment_method"));
     }).$$finally(() => {
       eI(!1);
     }), _$$C.getCommunityUserTaxInfo({
@@ -790,7 +790,7 @@ export let $$eN0 = Ju(function (e) {
       e.meta.shipping_address && K(e.meta.shipping_address);
       e.meta.tax_id_verification_status && et(e.meta.tax_id_verification_status);
     }).catch(e => {
-      x1("checkout", "error fetching user tax info", eD(e), {
+      logError("checkout", "error fetching user tax info", eD(e), {
         reportAsSentryError: !0
       });
     }).$$finally(() => {
@@ -819,7 +819,7 @@ export let $$eN0 = Ju(function (e) {
         matchType: "tax-calcuation-error"
       }));
     }).catch(e => {
-      xi("checkout", "error calculating taxes", eD({
+      logWarning("checkout", "error calculating taxes", eD({
         message: e.data.message,
         statusCode: e.data.status
       }, {
@@ -862,18 +862,18 @@ export let $$eN0 = Ju(function (e) {
       B(_$$F.clearAll());
       B(Ce());
       B(_$$F.enqueue({
-        message: _$$t("community.buyer.purchase_complete"),
+        message: getI18nString("community.buyer.purchase_complete"),
         error: !1
       }));
       onSuccess?.();
     } catch (e) {
       onCancel?.();
-      x1("checkout", "error completing purchase", eD(e, {
+      logError("checkout", "error completing purchase", eD(e, {
         promo_code: ew?.promo_code
       }), {
         reportAsSentryError: !0
       });
-      e.message ? eL("purchasing-error", e.message) : eL("purchasing-error", _$$t("community.buyer.couldnt_complete_purchase"));
+      e.message ? eL("purchasing-error", e.message) : eL("purchasing-error", getI18nString("community.buyer.couldnt_complete_purchase"));
     } finally {
       t?.();
     }
@@ -888,7 +888,7 @@ export let $$eN0 = Ju(function (e) {
     }
     if (B(_$$F.clearAll()), B(_$$F.enqueue({
       type: "loading-purchase",
-      message: _$$t("community.buyer.hold_tight_while_we_process_your_payment")
+      message: getI18nString("community.buyer.hold_tight_while_we_process_your_payment")
     })), ek(!0), e_) {
       eV(e_, () => ek(!1), Y);
       return;
@@ -900,22 +900,22 @@ export let $$eN0 = Ju(function (e) {
     try {
       e = await Ey(V);
     } catch (e) {
-      x1("checkout", "stripe token fetch error", eD(e), {
+      logError("checkout", "stripe token fetch error", eD(e), {
         reportAsSentryError: !0
       });
-      eL("stripe-token-error", _$$t("community.buyer.couldnt_process_payment_through_stripe"));
+      eL("stripe-token-error", getI18nString("community.buyer.couldnt_process_payment_through_stripe"));
       ek(!1);
       return;
     }
     let n = e?.token?.id;
     if (void 0 === n) {
-      x1("checkout", "stripe token error", eD({
+      logError("checkout", "stripe token error", eD({
         message: e?.error?.message || "stripe token error"
       }), {
         reportAsSentryError: !0
       });
-      eL("stripe-token-error", _$$t("community.buyer.error_stripe", {
-        message: e?.error?.message || _$$t("community.buyer.sorry_there_was_an_error_processing_your_request_refresh_and_try_again")
+      eL("stripe-token-error", getI18nString("community.buyer.error_stripe", {
+        message: e?.error?.message || getI18nString("community.buyer.sorry_there_was_an_error_processing_your_request_refresh_and_try_again")
       }));
       ek(!1);
       return;
@@ -924,7 +924,7 @@ export let $$eN0 = Ju(function (e) {
       i = await To(n, t + eM);
     } catch (e) {
       onCancel?.();
-      x1("checkout", "error confirming payment", eD(e), {
+      logError("checkout", "error confirming payment", eD(e), {
         reportAsSentryError: !0
       });
       eL("payment-processing-error", e?.message);
@@ -933,7 +933,7 @@ export let $$eN0 = Ju(function (e) {
     }
     let r = i?.payment_method;
     if (void 0 === r) {
-      x1("checkout", "error processing payment", eD({
+      logError("checkout", "error processing payment", eD({
         message: "payment method is undefined"
       }), {
         reportAsSentryError: !0
@@ -947,7 +947,7 @@ export let $$eN0 = Ju(function (e) {
   let ez = useCallback(() => {
     eT ? B(_$$F.enqueue({
       type: "close-during-purchase",
-      message: _$$t("community.buyer.please_remain_on_the_page"),
+      message: getI18nString("community.buyer.please_remain_on_the_page"),
       error: !0,
       timeoutOverride: 2e3
     })) : (B(_$$F.clearAll()), B(Ce()), onCancel?.(), new URLSearchParams(Ay.location.search).has(Tb) && B(sf({
@@ -976,10 +976,10 @@ export let $$eN0 = Ju(function (e) {
           matchType: "remove-card-error"
         }));
       }).catch(e => {
-        x1("checkout", "error removing card", eD(e), {
+        logError("checkout", "error removing card", eD(e), {
           reportAsSentryError: !0
         });
-        eL("remove-card-error", _$$t("community.buyer.couldnt_remove_existing_payment_method"));
+        eL("remove-card-error", getI18nString("community.buyer.couldnt_remove_existing_payment_method"));
       }).$$finally(() => {
         eb(!1);
       });
@@ -1033,13 +1033,13 @@ export let $$eN0 = Ju(function (e) {
         title: jsxs("div", {
           children: [function (e, t) {
             let i = e ? qD(e)?.name : t ? t.manifest.name : void 0;
-            return "undefined" !== i && e && F && F.is_subscription ? tx("community.buyer.subscribe_to_resource_name", {
+            return "undefined" !== i && e && F && F.is_subscription ? renderI18nText("community.buyer.subscribe_to_resource_name", {
               resourceName: i
-            }) : tx("community.buyer.purchase_resource_name", {
+            }) : renderI18nText("community.buyer.purchase_resource_name", {
               resourceName: i
             });
           }(e.resource, e.localResource), (e.localResource || D) && jsx(Ex, {
-            text: e.localResource ? tx("community.buyer.development") : tx("community.plugins.in_review"),
+            text: e.localResource ? renderI18nText("community.buyer.development") : renderI18nText("community.plugins.in_review"),
             color: zE.WARNING,
             className: Ph
           })]

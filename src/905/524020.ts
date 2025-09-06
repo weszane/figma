@@ -1,8 +1,8 @@
-import { R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { FC } from "../figma_app/212807";
 export function $$a0() {
   let e = FC();
-  let t = R(e => ({
+  let t = selectWithShallowEqual(e => ({
     selectedView: e.selectedView,
     currentOrgId: e.currentUserOrgId,
     orgById: e.orgById,

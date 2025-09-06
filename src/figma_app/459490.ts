@@ -1,7 +1,7 @@
 import { n as _$$n } from "../905/347702";
 import { useSelector } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { gP } from "../figma_app/594947";
 import { Z } from "../905/296690";
@@ -20,9 +20,9 @@ export function $$h4({
 }) {
   let t = debugState.getState();
   return !!zg(t.selectedView) || !t.user || $$_2({
-    currentOrg: zl.get(Z),
-    currentTeam: zl.get(Me),
-    isViewer: zl.get(hS),
+    currentOrg: atomStoreManager.get(Z),
+    currentTeam: atomStoreManager.get(Me),
+    isViewer: atomStoreManager.get(hS),
     isDisabledForViewers: e
   });
 }

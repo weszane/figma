@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { OF } from "../figma_app/562352";
 import { k } from "../905/651849";
 import { m as _$$m, y as _$$y } from "../9410/643761";
-import { PN } from "../figma_app/257275";
+import { PN } from "../figma_app/897289";
 import { Fe, uz } from "../905/284552";
 import { Y5 } from "../figma_app/455680";
 import { qc, _X } from "../figma_app/62612";

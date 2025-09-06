@@ -11,19 +11,19 @@ import { I as _$$I } from "../905/763478";
 import { rXF, Z_n } from "../figma_app/763686";
 import { Te } from "../vendor/813803";
 import { getFeatureFlags } from "../905/601108";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { Ay } from "../figma_app/272902";
 import E from "classnames";
 import { conditionalFeatureFlag } from "../figma_app/169182";
 import { Pt } from "../figma_app/806412";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { M3 } from "../figma_app/119475";
 import { B as _$$B } from "../905/714743";
 import { G as _$$G } from "../905/750789";
 import { i as _$$i } from "../905/186077";
 import { s as _$$s } from "../cssbuilder/589278";
 import { S as _$$S } from "../figma_app/552746";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { to } from "../figma_app/828186";
 import { _j, Dh } from "../figma_app/843119";
 import { dG } from "../figma_app/753501";
@@ -358,7 +358,7 @@ function ec({
   let d = sZ();
   let p = Oe(d);
   let _ = fV(libraryKey);
-  let h = md(V9);
+  let h = useAtomWithSubscription(V9);
   let f = libraryKey ? h[libraryKey]?.hubFileId ?? null : null;
   let E = useCallback(() => {
     r(e);
@@ -612,10 +612,10 @@ export function $$eh0({
     value: t ? null : jsx("div", {
       className: Em,
       children: jsx(_$$d, {
-        "aria-label": _$$t("design_systems.styles.edit_style"),
+        "aria-label": getI18nString("design_systems.styles.edit_style"),
         recordingKey: Pt(d, "editStyleButton"),
         htmlAttributes: {
-          "data-tooltip": _$$t("design_systems.styles.edit_style"),
+          "data-tooltip": getI18nString("design_systems.styles.edit_style"),
           "data-tooltip-type": Ib.TEXT,
           onMouseDown: dG
         },
@@ -782,7 +782,7 @@ function ef({
       variableThumbnailIconType: sW.NONE
     });
   } catch (t) {
-    $D(_$$e.CMS, Error("could not parse CMS image field value for VariableListCMSFieldItem thumbnail"), {
+    reportError(_$$e.CMS, Error("could not parse CMS image field value for VariableListCMSFieldItem thumbnail"), {
       extra: {
         cmsItemFieldId: e.itemField.id,
         collectionFieldSchemaId: e.value.id

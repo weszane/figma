@@ -1,13 +1,13 @@
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 export class $$r0 {
   constructor(e, t, i) {
     this.codeFileGuid = e;
     this.atom = t;
     this.editorView = i;
-    this.unsubscribe = zl.sub(t, () => {
+    this.unsubscribe = atomStoreManager.sub(t, () => {
       this.checkForAtomEvent();
     });
-    zl.get(t) && setTimeout(() => {
+    atomStoreManager.get(t) && setTimeout(() => {
       this.checkForAtomEvent();
     }, 0);
   }
@@ -15,14 +15,14 @@ export class $$r0 {
     this.unsubscribe();
   }
   checkForAtomEvent() {
-    let e = zl.get(this.atom);
+    let e = atomStoreManager.get(this.atom);
     if (e?.codeFileGuid !== this.codeFileGuid) return;
     let {
       fromCharIndex,
       toCharIndex
     } = e;
     this.goToRange(fromCharIndex, toCharIndex);
-    zl.set(this.atom, null);
+    atomStoreManager.set(this.atom, null);
   }
   goToLineAndColumn(e, t) {
     let i = this.editorView.state.doc;

@@ -6,12 +6,12 @@ import { $n, WW } from "../905/521428";
 import { K as _$$K2 } from "../905/851274";
 import { O as _$$O } from "../905/969533";
 import { hzD, rcl } from "../figma_app/763686";
-import { zl, fp, md, eU, Xr } from "../figma_app/27355";
+import { atomStoreManager, useAtomValueAndSetter, useAtomWithSubscription, atom, Xr } from "../figma_app/27355";
 import { Pt } from "../figma_app/806412";
 import { B4 } from "../figma_app/385215";
 import { WN } from "../figma_app/638601";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { H8 } from "../905/590952";
 import { to, HH } from "../figma_app/828186";
 import { Ay } from "@stylexjs/stylex";
@@ -56,7 +56,7 @@ import { xo } from "../figma_app/473493";
 import { HW } from "../figma_app/976749";
 import { DG } from "../figma_app/789";
 import { k as _$$k4 } from "../figma_app/564183";
-import { ck } from "../figma_app/469876";
+import { isIntegrationContext } from "../figma_app/469876";
 import { dR } from "../figma_app/440875";
 import { iZ } from "../905/372672";
 import { t as _$$t2 } from "../figma_app/501766";
@@ -88,25 +88,25 @@ class $ {
       let {
         status,
         currentTimeMs
-      } = zl.get(hg).timelinePlayerState;
+      } = atomStoreManager.get(hg).timelinePlayerState;
       (this._status !== status || this._currentTimeMs !== currentTimeMs) && ("stopped" !== this._status || 0 !== this._currentTimeMs || this._canPlayTriggered || (this._canPlayListeners.forEach(e => e(new Event("canplay"))), this._canPlayTriggered = !0), (this._status !== status || this._currentTimeMs !== currentTimeMs) && this._timeUpdateListeners.forEach(e => e(new Event("timeupdate"))), "playing" !== this._status && "playing" === status && this._playingListeners.forEach(e => e(new Event("playing"))), "ended" !== this._status && "ended" === status && this._endedListeners.forEach(e => e(new Event("ended"))), this._status = status, this._currentTimeMs = currentTimeMs);
     };
-    this._unsubscribe = zl.sub(hg, this.onAtomUpdate);
+    this._unsubscribe = atomStoreManager.sub(hg, this.onAtomUpdate);
   }
   setVolumeByNodeId(e) {
     this._videoVolumeByNodeId = e;
   }
   isPlaying() {
-    return "playing" === zl.get(hg).timelinePlayerState.status;
+    return "playing" === atomStoreManager.get(hg).timelinePlayerState.status;
   }
   isPaused() {
-    return "paused" === zl.get(hg).timelinePlayerState.status;
+    return "paused" === atomStoreManager.get(hg).timelinePlayerState.status;
   }
   hasEnded() {
-    return "ended" === zl.get(hg).timelinePlayerState.status;
+    return "ended" === atomStoreManager.get(hg).timelinePlayerState.status;
   }
   getVideoState() {
-    let e = zl.get(hg).timelinePlayerState.status;
+    let e = atomStoreManager.get(hg).timelinePlayerState.status;
     switch (e) {
       case "playing":
         return "playing";
@@ -121,18 +121,18 @@ class $ {
     }
   }
   currentTime() {
-    return zl.get(hg).timelinePlayerState.currentTimeMs / 1e3;
+    return atomStoreManager.get(hg).timelinePlayerState.currentTimeMs / 1e3;
   }
   totalTime() {
-    return zl.get(hg).timelinePlayerState.totalTimeMs / 1e3;
+    return atomStoreManager.get(hg).timelinePlayerState.totalTimeMs / 1e3;
   }
   togglePlay() {
-    let e = zl.get(hg).timelinePlayerState.status;
+    let e = atomStoreManager.get(hg).timelinePlayerState.status;
     switch (e) {
       case "stopped":
       case "paused":
       case "ended":
-        zl.set(hg, {
+        atomStoreManager.set(hg, {
           type: "TIMELINE_PLAYER_PLAY",
           payload: {
             videoVolumeByNodeId: this._videoVolumeByNodeId
@@ -140,7 +140,7 @@ class $ {
         });
         break;
       case "playing":
-        zl.set(hg, {
+        atomStoreManager.set(hg, {
           type: "TIMELINE_PLAYER_PAUSE"
         });
         break;
@@ -267,7 +267,7 @@ function Q({
     className: "x13vifvy x78zum5 x6s0dn4 xl56j7k x1n5zjp5 xf7z5ut",
     children: jsx("h3", {
       ...Ay.props(ee.exportCarouselHeader),
-      children: _$$t("buzz.toolbar.export_modal.frame_number", {
+      children: getI18nString("buzz.toolbar.export_modal.frame_number", {
         current: e + 1,
         total: t
       })
@@ -450,10 +450,10 @@ function ec({
     className: "xafpxmx x78zum5 xdt5ytf xg2d0mh xv2w18j x1wsuqlk xehsoiq",
     children: [jsx("span", {
       className: "xkezfkh",
-      children: _$$t("cooper.toolbar.export_modal.file_type")
+      children: getI18nString("cooper.toolbar.export_modal.file_type")
     }), o ? m : h, o ? jsx(_$$S, {
       label: jsx(_$$J2, {
-        children: _$$t("buzz.toolbar.export_modal.include_audio")
+        children: getI18nString("buzz.toolbar.export_modal.include_audio")
       }),
       checked: s.includeAudio ?? !0,
       onChange: t => {
@@ -465,25 +465,25 @@ function ec({
       children: [!u && !d && jsxs(Fragment, {
         children: [jsx("span", {
           className: "xkezfkh",
-          children: _$$t("cooper.toolbar.export_modal.size")
+          children: getI18nString("cooper.toolbar.export_modal.size")
         }), _]
       }), !p && !d && jsxs(Fragment, {
         children: [jsx("span", {
           className: "xkezfkh",
-          children: _$$t("cooper.toolbar.export_modal.quality")
+          children: getI18nString("cooper.toolbar.export_modal.quality")
         }), x]
       }), jsx("span", {
         className: "xkezfkh",
-        children: _$$t("cooper.toolbar.export_modal.color_profile")
+        children: getI18nString("cooper.toolbar.export_modal.color_profile")
       }), jsx("span", {
         className: "x1ef8nbk",
         children: g
       }), d && jsx("span", {
         className: "x1n0bwc9 x1ah0xmj",
-        children: _$$t("cooper.toolbar.export_modal.color_profile_warning")
+        children: getI18nString("cooper.toolbar.export_modal.color_profile_warning")
       }), getFeatureFlags().buzz_print_export && d && jsx(_$$S, {
         label: jsx(_$$J2, {
-          children: _$$t("cooper.toolbar.export_modal.show_print_marks")
+          children: getI18nString("cooper.toolbar.export_modal.show_print_marks")
         }),
         checked: s?.shouldAddPrintMarks ?? !1,
         onChange: t => {
@@ -511,7 +511,7 @@ function eu({
       exporting: a,
       currentPresentedNode: r,
       buzzInlinePreviewStatus: i
-    }, s] = fp(_$$e.stateAtom);
+    }, s] = useAtomValueAndSetter(_$$e.stateAtom);
     let o = t9(e ? [e] : []);
     useEffect(() => {
       i === u7.LOAD_FORBIDDEN && s({
@@ -614,7 +614,7 @@ function eu({
   let h = "ready" === inlinePreviewStatus;
   let m = function () {
     let [e, t] = useState(null);
-    let [n] = fp(oe);
+    let [n] = useAtomValueAndSetter(oe);
     let a = useMemo(() => K()(n, e => e.currentVolume), [n]);
     _$$h(() => {
       let e = new $();
@@ -646,7 +646,7 @@ function eu({
         className: "x1n2onr6 xecqa5w x98rzlu x78zum5 xdt5ytf xl56j7k x6s0dn4 x1gkjlqi x1v8gsql xspf3my",
         children: void 0 === s ? jsx("div", {
           className: "xdmton0 x1ybc05g x1g82q5y x2b8uid xxymvpz x1n0bwc9",
-          children: _$$t("cooper.toolbar.export_modal.no_assets_selected")
+          children: getI18nString("cooper.toolbar.export_modal.no_assets_selected")
         }) : jsx(Fragment, {
           children: jsx(ZH, {
             children: ({
@@ -694,7 +694,7 @@ let ep = Ju(function (e) {
   let o = function () {
     let [{
       currentPresentedNode: e
-    }] = fp(_$$e.stateAtom);
+    }] = useAtomValueAndSetter(_$$e.stateAtom);
     return !!e;
   }();
   let [d, p] = useState({});
@@ -739,7 +739,7 @@ let ep = Ju(function (e) {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$t("cooper.toolbar.export_modal.export_title")
+          children: getI18nString("cooper.toolbar.export_modal.export_title")
         })
       }), jsx(nB, {
         padding: 0,
@@ -777,7 +777,7 @@ let ep = Ju(function (e) {
                 }
               });
               let l = e.length + t.length + a.length;
-              zl.set(_$$o, {
+              atomStoreManager.set(_$$o, {
                 mp4Configs: e,
                 imageConfigs: t,
                 pdfConfigs: a,
@@ -788,7 +788,7 @@ let ep = Ju(function (e) {
               n(AS());
             },
             disabled: 0 === h.length || _ && !o,
-            children: _$$t("buzz.toolbar.export_modal.export_button_text", {
+            children: getI18nString("buzz.toolbar.export_modal.export_button_text", {
               assetCount: m
             })
           })
@@ -800,7 +800,7 @@ let ep = Ju(function (e) {
 function em() {
   let e = useDispatch();
   let t = q5();
-  let n = md(_$$o);
+  let n = useAtomWithSubscription(_$$o);
   let i = !!t && Pe(t);
   let o = useCallback(() => getFeatureFlags().buzz_video_export || getFeatureFlags().buzz_print_export ? ep : _$$Y, []);
   return jsx("div", {
@@ -811,11 +811,11 @@ function em() {
       onClick: () => e(_$$to({
         type: o()
       })),
-      children: _$$t("fullscreen.toolbar.cooper.export")
+      children: getI18nString("fullscreen.toolbar.cooper.export")
     })
   });
 }
-export let $$eP1 = eU(0);
+export let $$eP1 = atom(0);
 function eF(e) {
   let {
     isRightPanelCollapsed
@@ -831,7 +831,7 @@ function eF(e) {
   let S = B4();
   let T = N ? null : e.openFile;
   let L = DG(T?.key || "").enabled;
-  let R = ck();
+  let R = isIntegrationContext();
   let D = useRef(null);
   let O = Xr($$eP1);
   let j = _$$k4();
@@ -885,11 +885,11 @@ function eF(e) {
           }), j && !I && !A && jsxs("div", {
             className: _$$s.flex.flexRow.$,
             children: [jsx(_$$K, {
-              "aria-label": _$$t("fullscreen_actions.present-as-prototype"),
+              "aria-label": getI18nString("fullscreen_actions.present-as-prototype"),
               onClick: () => F(rcl.PRESENT_AS_PROTOTYPE),
               children: jsx(_$$K2, {})
             }), jsx(_$$K, {
-              "aria-label": _$$t("fullscreen.flyout.prototype_view"),
+              "aria-label": getI18nString("fullscreen.flyout.prototype_view"),
               onClick: () => F(rcl.PRESENT_AS_PROTOTYPE),
               children: jsx(_$$O, {})
             })]
@@ -901,7 +901,7 @@ function eF(e) {
             children: jsx(WW, {
               variant: "secondary",
               onClick: () => F("SHARE_BUTTON"),
-              children: _$$t("fullscreen.toolbar.multiplayer.share")
+              children: getI18nString("fullscreen.toolbar.multiplayer.share")
             })
           }), T && !j && jsx(_$$w, {
             user: e.user,
@@ -925,7 +925,7 @@ export function $$eM0({
     openFile: t,
     dropdownShown: l,
     user: n,
-    isIntegration: ck()
+    isIntegration: isIntegrationContext()
   });
 }
 export const v2 = $$eM0;

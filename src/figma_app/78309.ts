@@ -11,18 +11,18 @@ import { k as _$$k } from "../905/888808";
 import { Ad, Vm } from "../figma_app/273493";
 import { nc } from "../905/189185";
 import { aI } from "../905/871411";
-import { fp } from "../figma_app/27355";
+import { useAtomValueAndSetter } from "../figma_app/27355";
 import { useHandleMouseEvent } from "../figma_app/878298";
 import E from "classnames";
 import { UE } from "../figma_app/191804";
 import { buildUploadUrl } from "../figma_app/169182";
 import { Pt } from "../figma_app/806412";
-import { nl } from "../figma_app/257275";
+import { isInteractionPathCheck } from "../figma_app/897289";
 import { E as _$$E2 } from "../905/277716";
 import { k as _$$k2 } from "../905/582200";
 import { Point } from "../905/736624";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { XE } from "../figma_app/91703";
 import { kX } from "../figma_app/8833";
 import { F as _$$F } from "../905/989956";
@@ -67,7 +67,7 @@ export function $$W0({
       b();
     } else console.error("colorsWrapperRef.current is null");
   }, [T, b]);
-  let [S, v] = fp(E_);
+  let [S, v] = useAtomValueAndSetter(E_);
   useEffect(() => () => {
     v(null);
   }, [v]);
@@ -101,7 +101,7 @@ export function $$W0({
       children: jsxs(vo, {
         children: [jsx(Y9, {
           children: jsx(hE, {
-            children: _$$t("slides.properties_panel.fill")
+            children: getI18nString("slides.properties_panel.fill")
           })
         }), jsx(nB, {
           padding: 0,
@@ -160,7 +160,7 @@ function K({
   let d = s1();
   let u = UZ(d);
   let p = lK(d);
-  let [f, E] = fp(E_);
+  let [f, E] = useAtomValueAndSetter(E_);
   let y = !!f;
   let T = k1(d);
   let S = nc.user("slides-add-theme-color", () => {
@@ -214,7 +214,7 @@ function K({
     });
   };
   return jsx(X, {
-    title: _$$t("slides.properties_panel.color_picker.theme_colors"),
+    title: getI18nString("slides.properties_panel.color_picker.theme_colors"),
     rightControl: jsx(Y, {
       onClick: S,
       recordingKey: Pt(o, "addThemeColor")
@@ -258,12 +258,12 @@ function Y({
   let r = s1();
   let i = kO(r);
   return jsx(_$$K, {
-    "aria-label": _$$t("slides.properties_panel.color_picker.add_template_color_tooltip"),
+    "aria-label": getI18nString("slides.properties_panel.color_picker.add_template_color_tooltip"),
     onClick: e,
     recordingKey: t,
     htmlAttributes: {
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": _$$t("slides.properties_panel.color_picker.add_template_color_tooltip")
+      "data-tooltip": getI18nString("slides.properties_panel.color_picker.add_template_color_tooltip")
     },
     disabled: i,
     children: jsx(_$$e, {})
@@ -309,7 +309,7 @@ function $({
     }
   }, [l, e, t, m]);
   return jsxs(X, {
-    title: _$$t("slides.properties_panel.color_picker.document_colors"),
+    title: getI18nString("slides.properties_panel.color_picker.document_colors"),
     removeBottomPadding: E,
     children: [jsx(_$$E2, {
       name: "slides_add_custom_color",
@@ -318,10 +318,10 @@ function $({
         children: jsx(_$$E, {
           htmlAttributes: {
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t("slides.properties_panel.color_picker.add_color_aria_label")
+            "data-tooltip": getI18nString("slides.properties_panel.color_picker.add_color_aria_label")
           },
           className: _$$s.w24.h24.$,
-          "aria-label": _$$t("slides.properties_panel.color_picker.add_color_aria_label"),
+          "aria-label": getI18nString("slides.properties_panel.color_picker.add_color_aria_label"),
           onClick: a,
           recordingKey: Pt(o, "addColor"),
           children: jsx("img", {
@@ -402,10 +402,10 @@ export function $$q2({
     children: [l && c && p && jsx(_$$E, {
       className: y()(Lq, {
         [Sn]: u,
-        [Qo]: nl()
+        [Qo]: isInteractionPathCheck()
       }),
       onClick: e => {
-        if (nl()) p();else {
+        if (isInteractionPathCheck()) p();else {
           let t = e.currentTarget.getBoundingClientRect();
           let r = t.width / 2;
           let n = t.left + r;

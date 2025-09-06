@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useMemo, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { nl } from "../905/590952";
 import { In } from "../905/672640";
 import { kg } from "../figma_app/976345";
@@ -93,7 +93,7 @@ export function $$O2(e) {
   }, [i, e.team]);
   let X = "search" === M.view;
   let Q = e.team.org_id && F[e.team.org_id] || e.team.id && L[e.team.id];
-  let J = tx("team_tile.members_count", {
+  let J = renderI18nText("team_tile.members_count", {
     numMembers: U
   });
   let ee = jsxs("div", {
@@ -103,7 +103,7 @@ export function $$O2(e) {
       entityName: Q.name,
       imgUrl: Q.img_url
     }), G && jsxs(Fragment, {
-      children: [tx("team_list.org_join_status_joined"), jsx("span", {
+      children: [renderI18nText("team_list.org_join_status_joined"), jsx("span", {
         children: "\xa0\xb7\xa0"
       })]
     }), jsx("span", {
@@ -153,8 +153,8 @@ export function $$O2(e) {
       })
     })]
   });
-  e.team.org_access === FAccessLevelType.PRIVATE ? t = _$$t("file_browser.team_header.closed_team_header") : e.team.org_access === FAccessLevelType.SECRET && (t = _$$t("file_browser.team_header.secret_team_header"));
-  let er = e.team.org_access === FAccessLevelType.PRIVATE ? _$$t("file_browser.team_header.closed_team_subtitle") : e.team.org_access === FAccessLevelType.SECRET ? _$$t("file_browser.team_header.secret_team_subtitle") : void 0;
+  e.team.org_access === FAccessLevelType.PRIVATE ? t = getI18nString("file_browser.team_header.closed_team_header") : e.team.org_access === FAccessLevelType.SECRET && (t = getI18nString("file_browser.team_header.secret_team_header"));
+  let er = e.team.org_access === FAccessLevelType.PRIVATE ? getI18nString("file_browser.team_header.closed_team_subtitle") : e.team.org_access === FAccessLevelType.SECRET ? getI18nString("file_browser.team_header.secret_team_subtitle") : void 0;
   let ea = e.team.org_access === FAccessLevelType.PRIVATE || e.team.org_access === FAccessLevelType.SECRET ? jsx("div", {
     className: _$$s.mr4.$,
     style: {

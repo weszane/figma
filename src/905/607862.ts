@@ -5,7 +5,7 @@ import { qE } from "../figma_app/492908";
 import { lQ } from "../905/934246";
 import { xk } from "@stylexjs/stylex";
 import { Te } from "../vendor/813803";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { Yh, TN, Kr, ud } from "../905/334566";
 import { S as _$$S } from "../figma_app/552746";
 import { H as _$$H } from "../905/734998";
@@ -383,7 +383,7 @@ export function $$I0(e) {
     }
   };
   let J = useCallback(t => i => {
-    if (i.stopPropagation(), (2 === i.detail || Ay.mobile || Ay.tablet || e.forceSingleClick) && handleOpenItem) handleOpenItem(items[t], i, t);else {
+    if (i.stopPropagation(), (2 === i.detail || BrowserInfo.mobile || BrowserInfo.tablet || e.forceSingleClick) && handleOpenItem) handleOpenItem(items[t], i, t);else {
       let e = Y(t, i);
       if (e.size && !e.has(t)) {
         let i = t + 1;

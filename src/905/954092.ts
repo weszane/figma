@@ -1,11 +1,11 @@
 import { z } from "../905/239603";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 let a = z.object({
   timestamps: z.array(z.number()),
   count: z.number()
 });
 z.record(a);
-let s = z.nativeEnum(nT);
+let s = z.nativeEnum(FEditorType);
 let $$o0 = z.union([s, z.literal("none")]);
 let $$l1 = z.record(z.object({
   actions: z.record(z.object({

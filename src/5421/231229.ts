@@ -4,7 +4,7 @@ import { E as _$$E } from "../905/172252";
 import { G } from "../905/289770";
 import { P } from "../vendor/348225";
 import { N as _$$N } from "../vendor/930821";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 let c = {
   ENTER_TO_LOOP: 600,
   LAYOUT_STEP: 600,
@@ -492,7 +492,7 @@ function y({
     }, 350);
     return () => clearInterval(e);
   }, []);
-  let a = e => "fixingErrors" === e ? _$$t("figmake.thinking_state.fixing_errors") : "expand" === e || "icon" === e || "code" === e ? _$$t("figmake.thinking_state.label_3") : "codeExit" === e || "fallingIcons" === e || "fallingIconsExit" === e ? _$$t("figmake.thinking_state.label_2") : _$$t("figmake.thinking_state.label_1");
+  let a = e => "fixingErrors" === e ? getI18nString("figmake.thinking_state.fixing_errors") : "expand" === e || "icon" === e || "code" === e ? getI18nString("figmake.thinking_state.label_3") : "codeExit" === e || "fallingIcons" === e || "fallingIconsExit" === e ? getI18nString("figmake.thinking_state.label_2") : getI18nString("figmake.thinking_state.label_1");
   let c = useMemo(() => a(e), [e]);
   return jsxs("div", {
     className: "xqui205 xemv814 xno9bf3 x1betce5 x1n0bwc9 x1kpxq89 x78zum5 xl56j7k x87ps6o",

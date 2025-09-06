@@ -3,11 +3,11 @@ import { useMemo, useCallback, useRef } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { $n } from "../905/521428";
 import o from "classnames";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { Yx } from "../figma_app/930338";
 import { NG } from "../figma_app/709893";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { to } from "../905/156213";
 import { Jl } from "../figma_app/80990";
 import { w5 } from "../figma_app/345997";
@@ -16,8 +16,8 @@ import { Ib } from "../905/129884";
 import { ND } from "../figma_app/76115";
 import { J } from "../905/270045";
 import { getFeatureFlags } from "../905/601108";
-import { md } from "../figma_app/27355";
-import { az } from "../905/449184";
+import { useAtomWithSubscription } from "../figma_app/27355";
+import { analyticsEventManager } from "../905/449184";
 import { h as _$$h } from "../905/207101";
 import { sb } from "../figma_app/519839";
 import { JT } from "../figma_app/173838";
@@ -38,7 +38,7 @@ var l = o;
 function O() {
   return jsx(_$$T, {
     noMargin: !0,
-    text: tx("design_systems.internal_community_unpublish_warning")
+    text: renderI18nText("design_systems.internal_community_unpublish_warning")
   });
 }
 let F = "confirm_unpublish_modal--modalContent--gX17Y modal--modalContent--P643j";
@@ -47,11 +47,11 @@ let M = Ju(function ({
 }) {
   let t = useDispatch();
   let i = q5();
-  let r = md(pz);
-  let s = md(_$$t2);
+  let r = useAtomWithSubscription(pz);
+  let s = useAtomWithSubscription(_$$t2);
   let o = JT();
   _$$h(() => {
-    az.trackDefinedEvent("design_systems_modals.unpublish_modal_opened", {
+    analyticsEventManager.trackDefinedEvent("design_systems_modals.unpublish_modal_opened", {
       libraryModalSessionId: e,
       orgId: i?.parentOrgId ?? void 0,
       fileKey: i?.key,
@@ -66,21 +66,21 @@ let M = Ju(function ({
       localAssetsWithDenormalizedPublishInfo: s.data ?? {},
       hubFileId: getFeatureFlags().cmty_lib_admin_publish && r === _$$o.HUBFILE && o ? o.id : void 0
     })),
-    confirmText: _$$t("design_systems.libraries_modal.remove_library"),
-    confirmationTitle: _$$t("design_systems.libraries_modal.remove_library_modal_title"),
+    confirmText: getI18nString("design_systems.libraries_modal.remove_library"),
+    confirmationTitle: getI18nString("design_systems.libraries_modal.remove_library_modal_title"),
     children: getFeatureFlags().cmty_lib_admin_publish && o ? jsxs("div", {
       className: F,
       children: [jsx("div", {
         className: _$$s.mb8.$,
-        children: tx("design_systems.libraries_modal.this_action_will_remove_all_of_the_components_in_this_file_from_the_library")
+        children: renderI18nText("design_systems.libraries_modal.this_action_will_remove_all_of_the_components_in_this_file_from_the_library")
       }), jsx(_$$U, {
         label: jsx(J, {
-          children: tx("design_systems.internal_community_library_unpublish")
+          children: renderI18nText("design_systems.internal_community_library_unpublish")
         })
       }), r === _$$o.HUBFILE && jsx(O, {})]
     }) : jsx("div", {
       className: F,
-      children: tx("design_systems.libraries_modal.this_action_will_remove_all_of_the_components_in_this_file_from_the_library")
+      children: renderI18nText("design_systems.libraries_modal.this_action_will_remove_all_of_the_components_in_this_file_from_the_library")
     })
   });
 }, "ConfirmUnpublishModal");
@@ -96,7 +96,7 @@ export function $$W0(e) {
     localStyles,
     localComponents,
     localStateGroups
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     teams: e.teams,
     localStyles: cM(e),
     localComponents: MH(e),
@@ -118,18 +118,18 @@ export function $$W0(e) {
   }, [T, sessionId]);
   let R = function (e, t) {
     let i;
-    let n = _$$t("design_systems.libraries_modal.plural.num_component", {
+    let n = getI18nString("design_systems.libraries_modal.plural.num_component", {
       numComponents: e
     });
-    let r = _$$t("design_systems.libraries_modal.plural.num_style", {
+    let r = getI18nString("design_systems.libraries_modal.plural.num_style", {
       numStyles: t
     });
     if (e > 0 && t > 0) i = Yx([n, r], "unit");else if (e > 0) i = n;else {
       if (!(t > 0)) return "";
       i = r;
     }
-    let a = _$$t("design_systems.libraries_modal.used_in_this_file");
-    return _$$t("design_systems.libraries_modal.num_assets_used_in_this_file", {
+    let a = getI18nString("design_systems.libraries_modal.used_in_this_file");
+    return getI18nString("design_systems.libraries_modal.num_assets_used_in_this_file", {
       assetsCountString: i,
       usedInThisFileString: a
     });
@@ -161,14 +161,14 @@ export function $$W0(e) {
         variant: "secondary",
         kbPath: [m3.TabBodySection.Footer],
         kbColumn: 2,
-        children: tx("design_systems.libraries_modal.swap_library")
+        children: renderI18nText("design_systems.libraries_modal.swap_library")
       }) : jsx("div", {
         className: H,
         children: jsx($n, {
           variant: "secondary",
           recordingKey: "subscriptionFileView.swapLibrary",
           onClick: e.onRemapLibraryClick,
-          children: tx("design_systems.libraries_modal.swap_library")
+          children: renderI18nText("design_systems.libraries_modal.swap_library")
         })
       })]
     })]
@@ -178,14 +178,14 @@ export function $$W0(e) {
     let r = S.numUpdates;
     let a = e.editingFile.team_id && teams[e.editingFile.team_id] || null;
     w5(a) && (r += w.numUpdates + C.numUpdates);
-    let l = (D = r) > 0 ? tx("design_systems.libraries_modal.current_file_has_x_changes", {
+    let l = (D = r) > 0 ? renderI18nText("design_systems.libraries_modal.current_file_has_x_changes", {
       numChangesText: jsx("div", {
         className: _$$s.fontSemiBold.$,
-        children: tx("design_systems.libraries_modal.x_changes", {
+        children: renderI18nText("design_systems.libraries_modal.x_changes", {
           numChanges: D
         })
       })
-    }) : _$$t("design_systems.libraries_modal.current_file_is_published");
+    }) : getI18nString("design_systems.libraries_modal.current_file_is_published");
     return jsxs("div", {
       className: O,
       children: [jsx("div", {
@@ -199,14 +199,14 @@ export function $$W0(e) {
           variant: "secondary",
           kbPath: [m3.TabBodySection.Footer],
           kbColumn: 1,
-          children: tx("design_systems.libraries_modal.unpublish")
+          children: renderI18nText("design_systems.libraries_modal.unpublish")
         }) : jsx("div", {
           className: H,
           children: jsx($n, {
             variant: "secondary",
             disabled: E,
             onClick: k,
-            children: tx("design_systems.libraries_modal.unpublish")
+            children: renderI18nText("design_systems.libraries_modal.unpublish")
           })
         }), jsx("div", {
           className: H,
@@ -215,12 +215,12 @@ export function $$W0(e) {
             publishedState: jsx($n, {
               variant: "primary",
               disabled: !0,
-              children: tx("design_systems.libraries_modal.publish_changes")
+              children: renderI18nText("design_systems.libraries_modal.publish_changes")
             }),
             emptyState: jsx($n, {
               variant: "primary",
               disabled: !0,
-              children: tx("design_systems.libraries_modal.publish_changes")
+              children: renderI18nText("design_systems.libraries_modal.publish_changes")
             }),
             libraryModalSessionId: sessionId
           })

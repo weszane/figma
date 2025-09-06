@@ -7,7 +7,7 @@ import { J } from "../905/614223";
 import { getFeatureFlags } from "../905/601108";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx, t as _$$t, YD } from "../905/303541";
+import { renderI18nText, getI18nString, getI18nStringAlias } from "../905/303541";
 import { fu } from "../figma_app/831799";
 import { q5 } from "../figma_app/516028";
 import { _ as _$$_ } from "../905/919117";
@@ -65,14 +65,14 @@ export function $$I2(e, t) {
     } = e;
     switch (id) {
       case XU.FILE_MOVE_FOLDER_BELL_ID:
-        return tx("visual_bell.file_move_folder", {
+        return renderI18nText("visual_bell.file_move_folder", {
           folderName: jsx("span", {
             className: _$$s.fontSemiBold.$,
             children: params.text
           })
         });
       case XU.SITES_PUBLISH_SUCCESS_BELL_ID:
-        return tx("sites.toolbar.publish_modal.published_your_site_is_live_at", {
+        return renderI18nText("sites.toolbar.publish_modal.published_your_site_is_live_at", {
           domain: jsx("div", {
             style: {
               display: "inline-block"
@@ -89,7 +89,7 @@ export function $$I2(e, t) {
           })
         });
       case XU.FIGMAKE_PUBLISH_SUCCESS_BELL_ID:
-        return tx("figmake.publish.published_your_site_is_live_at", {
+        return renderI18nText("figmake.publish.published_your_site_is_live_at", {
           domain: jsx("div", {
             style: {
               display: "inline-block"
@@ -121,12 +121,12 @@ export function $$I2(e, t) {
             case 1:
               return e[0];
             case 2:
-              return getFeatureFlags().ce_localize_al_visual_bells ? _$$t("visual_bell.list_of_two_objects", {
+              return getFeatureFlags().ce_localize_al_visual_bells ? getI18nString("visual_bell.list_of_two_objects", {
                 object1: e[0],
                 object2: e[1]
               }) : `${e[0]} and ${e[1]}`;
             case 3:
-              return getFeatureFlags().ce_localize_al_visual_bells ? _$$t("visual_bell.list_of_three_objects", {
+              return getFeatureFlags().ce_localize_al_visual_bells ? getI18nString("visual_bell.list_of_three_objects", {
                 object1: e[0],
                 object2: e[1],
                 object3: e[2]
@@ -134,7 +134,7 @@ export function $$I2(e, t) {
             default:
               {
                 let t = e.length - 3;
-                return getFeatureFlags().ce_localize_al_visual_bells ? _$$t("visual_bell.list_of_more_than_three_objects", {
+                return getFeatureFlags().ce_localize_al_visual_bells ? getI18nString("visual_bell.list_of_more_than_three_objects", {
                   object1: e[0],
                   object2: e[1],
                   object3: e[2],
@@ -143,7 +143,7 @@ export function $$I2(e, t) {
               }
           }
         }(t);
-        i = getFeatureFlags().ce_localize_al_visual_bells ? YD(i, {
+        i = getFeatureFlags().ce_localize_al_visual_bells ? getI18nStringAlias(i, {
           nodes: e
         }) : i.replace("{{nodes}}", e);
       }
@@ -160,11 +160,11 @@ function E(e) {
       fileKey: t?.key,
       teamId: t?.teamId
     },
-    children: tx("rcs.upsell_libraries.click_in_toolbar_to_turn_into_component", {
+    children: renderI18nText("rcs.upsell_libraries.click_in_toolbar_to_turn_into_component", {
       svg: jsx(B, {
         svg: _$$A,
         className: "upsell_libraries_visual_bell--createComponentSVG--dmDjt",
-        title: _$$t("rcs.upsell_libraries.upsell_libraries.create_component_icon_title"),
+        title: getI18nString("rcs.upsell_libraries.upsell_libraries.create_component_icon_title"),
         role: "img"
       })
     })
@@ -176,12 +176,12 @@ function x() {
     className: _$$s.flex.itemsCenter.gap4.mr32.selectNone.$,
     children: [jsx("span", {
       className: _$$s.textBodyMediumStrong.$,
-      children: tx("design_linter.copy_selection_toast.main_text")
+      children: renderI18nText("design_linter.copy_selection_toast.main_text")
     }), jsx("span", {
       className: _$$s.textBodyMedium.$,
-      children: tx("design_linter.copy_selection_toast.sub_text")
+      children: renderI18nText("design_linter.copy_selection_toast.sub_text")
     }), jsx(_$$E, {
-      children: tx("general.beta")
+      children: renderI18nText("general.beta")
     })]
   });
 }
@@ -217,7 +217,7 @@ function T({
     className: _$$s.w350.flex.flexRow.justifyBetween.itemsCenter.$,
     children: [jsx("p", {
       className: _$$s.textBodyMediumStrong.alignCenter.$,
-      children: tx("slides.present_summary.visual_bells.complete")
+      children: renderI18nText("slides.present_summary.visual_bells.complete")
     }), jsx(z, {
       aiTrackingContext: e
     }, "feedbackButtons")]

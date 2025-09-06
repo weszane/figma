@@ -3,7 +3,7 @@ import { useDispatch } from "../vendor/514228";
 import { A } from "../905/920142";
 import { Ay } from "../905/612521";
 import { Ts } from "../905/194276";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { to } from "../905/156213";
 import { q5 } from "../figma_app/516028";
 import { _6 } from "../figma_app/386952";
@@ -16,7 +16,7 @@ export function $$_1(e) {
     origin: i,
     formState: a
   }) => {
-    let c = e || ("DUPLICATE" === r.landingState && t ? _$$t("footer_banner.log_in_or_create_an_account_to_get_a_copy_of_file_name", {
+    let c = e || ("DUPLICATE" === r.landingState && t ? getI18nString("footer_banner.log_in_or_create_an_account_to_get_a_copy_of_file_name", {
       fileName: t
     }) : "");
     n(Ts({
@@ -37,11 +37,11 @@ function h(e) {
   let r = Math.max(0, Math.ceil(A(e).diff(t, "minutes", !0)));
   if (r >= 60) {
     let e = Math.ceil(r / 60);
-    return _$$t("figjam_try_v2.timer_hours_left", {
+    return getI18nString("figjam_try_v2.timer_hours_left", {
       hoursLeft: e
     });
   }
-  return _$$t("figjam_try_v2.timer_minutes_left", {
+  return getI18nString("figjam_try_v2.timer_minutes_left", {
     minutesLeft: r
   });
 }

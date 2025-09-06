@@ -1,6 +1,6 @@
 import { Ez5, NVY } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { kG } from "../figma_app/327588";
 import { _q, bA } from "../905/668764";
 import { m0 } from "../figma_app/976749";
@@ -52,53 +52,53 @@ export function $$v9() {
 let A = [{
   getObservable: () => $$h5().activeCanvasPixelPreview,
   getMessage: e => ({
-    message: e ? t("visual_bell.pixel_preview_enabled", {
+    message: e ? getI18nString("visual_bell.pixel_preview_enabled", {
       scaling: _$$d().activeCanvasRetinaMode.getCopy() ? "2x" : "1x"
-    }) : t("visual_bell.pixel_preview_disabled")
+    }) : getI18nString("visual_bell.pixel_preview_disabled")
   })
 }, {
   getObservable: () => $$h5().renderGrid,
   getMessage: e => ({
-    message: e ? t("visual_bell.render_grid_visible") : t("visual_bell.render_grid_hidden")
+    message: e ? getI18nString("visual_bell.render_grid_visible") : getI18nString("visual_bell.render_grid_hidden")
   })
 }, {
   getObservable: () => $$h5().snapToPixelGrid,
   getMessage: e => ({
-    message: e ? t("visual_bell.snap_to_pixel_grid_enabled") : t("visual_bell.snap_to_pixel_grid_disabled")
+    message: e ? getI18nString("visual_bell.snap_to_pixel_grid_enabled") : getI18nString("visual_bell.snap_to_pixel_grid_disabled")
   })
 }, {
   getObservable: () => $$h5().showMasks,
   getMessage: e => ({
-    message: e ? t("visual_bell.show_masks_visible") : t("visual_bell.show_masks_hidden")
+    message: e ? getI18nString("visual_bell.show_masks_visible") : getI18nString("visual_bell.show_masks_hidden")
   })
 }, {
   getObservable: () => getFeatureFlags().figjam_snap_to_dot_grid_reset ? $$h5().snapToDotGridStagingReset : $$h5().snapToDotGrid,
   getMessage: e => ({
-    message: e ? t("visual_bell.snap_to_dot_grid_enabled") : t("visual_bell.snap_to_dot_grid_disabled")
+    message: e ? getI18nString("visual_bell.snap_to_dot_grid_enabled") : getI18nString("visual_bell.snap_to_dot_grid_disabled")
   })
 }, {
   getObservable: () => $$h5().snapToGeometry,
   getMessage: e => ({
-    message: e ? t("visual_bell.snap_to_geometry_enabled") : t("visual_bell.snap_to_geometry_disabled")
+    message: e ? getI18nString("visual_bell.snap_to_geometry_enabled") : getI18nString("visual_bell.snap_to_geometry_disabled")
   })
 }, {
   getObservable: () => $$h5().snapToObjects,
   getMessage: e => ({
-    message: e ? t("visual_bell.snap_to_objects_enabled") : t("visual_bell.snap_to_objects_disabled")
+    message: e ? getI18nString("visual_bell.snap_to_objects_enabled") : getI18nString("visual_bell.snap_to_objects_disabled")
   })
 }, {
   getObservable: () => $$h5().showFrameGrids,
   getMessage: e => jH() ? (Gk(), {
-    message: t("visual_bell.show_frame_guides_visible"),
+    message: getI18nString("visual_bell.show_frame_guides_visible"),
     button: {
-      text: t("visual_bell.show_frame_grids_hide_button"),
+      text: getI18nString("visual_bell.show_frame_grids_hide_button"),
       action: e => {
         e.stopPropagation();
         Ez5.editorPreferences().showFrameGrids.set(!1);
       }
     }
   }) : {
-    message: e ? t("visual_bell.show_frame_guides_visible") : t("visual_bell.show_frame_guides_hidden")
+    message: e ? getI18nString("visual_bell.show_frame_guides_visible") : getI18nString("visual_bell.show_frame_guides_hidden")
   }
 }];
 export function $$x7() {

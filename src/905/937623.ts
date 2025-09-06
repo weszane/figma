@@ -2,7 +2,7 @@ import _require from "../draftjs_composer/524876";
 import { jsx } from "react/jsx-runtime";
 import r from "classnames";
 import { kf } from "../905/992467";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { Gm, bQ } from "../905/149906";
 var a = r;
 export let $$d0 = kf("lazy_thread_comment_composer", {
@@ -21,7 +21,7 @@ export function $$c1(e) {
       [bQ]: "thread" === type
     }),
     children: jsx("span", {
-      children: tx("comments.failed_to_load")
+      children: renderI18nText("comments.failed_to_load")
     })
   });
 }

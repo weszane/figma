@@ -1,273 +1,419 @@
-import { jsx, Fragment } from "react/jsx-runtime";
-import { memo, Fragment as _$$Fragment } from "react";
-import { languageCodes, defaultLanguage, anotherSubset } from "../905/816253";
-import { Bq } from "../figma_app/656233";
-import { ServiceCategories as _$$e } from "../905/165054";
-import { getFeatureFlags } from "../905/601108";
-import { fm } from "../905/236856";
-import { az, sx } from "../905/449184";
-import { eD } from "../figma_app/876459";
-import { isDevEnvironment, getLocaleFallbacks, getInitialOptions } from "../figma_app/169182";
-import { $D } from "../905/11";
-import { x1 } from "../905/714362";
-import { ZO } from "../905/670985";
-import { X } from "../905/414972";
-import { D as _$$D } from "../905/347702";
-import { Gq, Cq } from "../figma_app/363242";
-let y = _$$D((e, t) => Gq().getContent(e, t));
-export function $$b6(e, ...[t]) {
-  return jsx($$v4, {
-    id: e,
-    options: t
-  });
-}
-export let $$v4 = memo(function({
-  id: e,
-  options: t
-}) {
-  let i = Bq(y(e, t));
-  if (!i || 0 === i.length) return null;
-  let a = i.map((e, t) => jsx(_$$Fragment, {
-    children: e
-  }, t));
-  if (!getFeatureFlags().i18n_wrapper_element) return jsx(Fragment, {
-    children: a
-  });
-  {
-    let t = isDevEnvironment() ? {
-      "data-tx-id": e
-    } : {};
-    getFeatureFlags().datadog_rum_action_ids && (t["data-dd-action-name"] = e);
-    return jsx("i18n-text", {
-      ...t,
-      children: a
-    });
+import { memo } from 'react'
+import { Fragment, jsx } from 'react/jsx-runtime'
+import { reportError } from '../905/11'
+import { ServiceCategories as _$$e } from '../905/165054'
+import { delay } from '../905/236856'
+import { performanceMetricsTracker } from '../905/414972'
+import { analyticsEventManager, trackEventAnalytics } from '../905/449184'
+import { getFeatureFlags } from '../905/601108'
+import { measureAsyncDuration } from '../905/670985'
+import { logError } from '../905/714362'
+import { anotherSubset, defaultLanguage, languageCodes } from '../905/816253'
+import { getInitialOptions, getLocaleFallbacks, isDevEnvironment } from '../figma_app/169182'
+import { getI18nState, initializeI18nState } from '../figma_app/363242'
+import { flatten } from '../figma_app/656233'
+import { desktopAPIInstance } from '../figma_app/876459'
+
+/**
+ * Returns i18n content for a given id and options.
+ * @param id - The content id
+ * @param options - Options for content retrieval
+ * @returns The content array
+ * (original: y)
+ */
+const getI18nContent = (id: string, options?: any) => getI18nState().getContent(id, options)
+
+
+/**
+ * Memoized i18n text component.
+ * @param props - Component props
+ * @returns JSX.Element | null
+ * (original: $$v4)
+ */
+export const I18nTextComponent = memo(({ id, options }: { id: string, options?: any }) => {
+  const content = flatten(getI18nContent(id, options))
+  if (!content || content.length === 0)
+    return null
+
+  const children = content.map((item, idx) => jsx(Fragment, { children: item }, idx))
+
+  if (!getFeatureFlags().i18n_wrapper_element) {
+    return jsx(Fragment, { children })
   }
-});
-export function $$I5(e, ...[t]) {
-  return Bq(y(e, t)).join("");
+
+  const attrs: Record<string, string> = isDevEnvironment()
+    ? { 'data-tx-id': id }
+    : {}
+
+  if (getFeatureFlags().datadog_rum_action_ids) {
+    attrs['data-dd-action-name'] = id
+  }
+
+  return jsx('i18n-text', { ...attrs, children })
+})
+
+/**
+ * Renders i18n text as a React component.
+ * @param id - The content id
+ * @param options - Options for content retrieval
+ * @returns JSX.Element
+ * (original: $$b6)
+ */
+export function renderI18nText(id: string, ...[options]: any[]) {
+  return jsx(I18nTextComponent, {
+    id,
+    options,
+  })
 }
-export function $$E0(e, t) {
-  return $$I5(e, t);
+
+
+/**
+ * Flattens i18n content and joins as string.
+ * @param id - The content id
+ * @param options - Options for content retrieval
+ * @returns string
+ * (original: $$I5)
+ */
+export function getI18nString(id: string, ...[options]: any[]) {
+  return flatten(getI18nContent(id, options)).join('')
 }
-export function $$x1(e, t) {
-  return Gq().getTranslatedDynamicContent(e, t);
+
+/**
+ * Alias for getI18nString.
+ * @param id - The content id
+ * @param options - Options for content retrieval
+ * @returns string
+ * (original: $$E0)
+ */
+export function getI18nStringAlias(id: string, options?: any) {
+  return getI18nString(id, options)
 }
-let S = _$$D(async e => {
-  let t = document.getElementById("web" === e ? "dictionaryUrl" : "web_english" === e ? "englishDictionaryUrl" : "dbDictionaryUrl")?.getAttribute("href");
-  if (t) return await w(t, e);
-});
-let w = _$$D(C);
-async function C(e, t) {
-  let i;
-  let n;
-  let r = 0;
-  let a = !1;
-  let s = await T(async () => {
-    let t;
-    let n;
-    r += 1;
-    let s = {
-      cache: a ? "reload" : "default"
-    };
+
+/**
+ * Gets translated dynamic content.
+ * @param id - The content id
+ * @param options - Options for content retrieval
+ * @returns any
+ * (original: $$x1)
+ */
+export function getTranslatedDynamicContent(id: string, options?: any) {
+  return getI18nState().getTranslatedDynamicContent(id, options)
+}
+
+/**
+ * Fetches dictionary by environment.
+ * @param env - Environment string
+ * @returns Promise<any>
+ * (original: S)
+ */
+async function fetchDictionaryByEnv(env: string) {
+  const elementId
+    = env === 'web'
+      ? 'dictionaryUrl'
+      : env === 'web_english'
+        ? 'englishDictionaryUrl'
+        : 'dbDictionaryUrl'
+  const url = document.getElementById(elementId)?.getAttribute('href')
+  if (url)
+    return await fetchDictionary(url, env)
+}
+
+/**
+ * Fetches and parses dictionary JSON.
+ * @param url - Dictionary URL
+ * @param env - Environment string
+ * @returns Promise<any>
+ * (original: C)
+ */
+async function fetchDictionary(url: string, env: string) {
+  let failureCause: string | undefined
+  let responseText: string | undefined
+  let retries = 0
+  let reloadCache = false
+
+  const result = await retryAsync(async () => {
+    retries += 1
+    const fetchOptions: RequestInit = { cache: reloadCache ? 'reload' : 'default' }
+    let response: Response
     try {
-      t = await fetch(e, s);
-    } catch (t) {
-      let e = t instanceof Error ? t.message : "Unknown error";
-      i = "network_error";
-      return Error(`Unable to fetch dictionary: ${e}`);
+      response = await fetch(url, fetchOptions)
     }
-    if (!t.ok) {
-      i = 403 === t.status ? "forbidden" : t.status >= 500 ? "internal_error" : "unknown";
-      return Error(`Unable to fetch dictionary: ${t.statusText}`);
+    catch (err) {
+      failureCause = 'network_error'
+      return new Error(`Unable to fetch dictionary: ${err instanceof Error ? err.message : 'Unknown error'}`)
+    }
+    if (!response.ok) {
+      failureCause
+        = response.status === 403
+          ? 'forbidden'
+          : response.status >= 500
+            ? 'internal_error'
+            : 'unknown'
+      return new Error(`Unable to fetch dictionary: ${response.statusText}`)
     }
     try {
-      n = await t.text();
-      return JSON.parse(n);
-    } catch (t) {
-      if (null != n && t instanceof SyntaxError) {
-        a = !0;
-        let r = n.length;
-        let s = r < 200 ? n : `${n.substring(0, 100)} [...] ${n.substring(r - 100)}`;
-        x1("i18n helpers", "Error parsing dictionary JSON", {
-          error: t,
-          dictUrl: e,
-          responseTextLength: r,
-          jsonString: s
-        });
-        i = "invalid_dict";
-      } else i = "unknown";
-      throw t;
+      responseText = await response.text()
+      return JSON.parse(responseText)
     }
-  });
-  let o = r - 1;
-  switch (o) {
-    case 0:
-    case 1:
-    case 2:
-      n = `${o}`;
-      break;
-    default:
-      n = "3+";
+    catch (err) {
+      if (responseText != null && err instanceof SyntaxError) {
+        reloadCache = true
+        const len = responseText.length
+        const snippet = len < 200
+          ? responseText
+          : `${responseText.substring(0, 100)} [...] ${responseText.substring(len - 100)}`
+        logError('i18n helpers', 'Error parsing dictionary JSON', {
+          error: err,
+          dictUrl: url,
+          responseTextLength: len,
+          jsonString: snippet,
+        })
+        failureCause = 'invalid_dict'
+      }
+      else {
+        failureCause = 'unknown'
+      }
+      throw err
+    }
+  })
+
+  const retryCount = retries - 1
+  const retryLabel = retryCount < 3 ? `${retryCount}` : '3+'
+
+  analyticsEventManager.trackDefinedMetric('i18n.dictionary_loaded', {
+    failure_cause: failureCause,
+    project: env,
+    retries: retryLabel,
+    success: result.success,
+  })
+
+  if (result.success)
+    return result.value
+  throw result.error
+}
+
+/**
+ * Retries an async function with backoff.
+ * @param fn - Async function to retry
+ * @param options - Retry options
+ * @returns Promise<{success: boolean, value?: any, error?: any}>
+ * (original: T)
+ */
+async function retryAsync<T>(
+  fn: () => Promise<T>,
+  options: { maxRetries?: number, retryBackoffs?: number[] } = {},
+): Promise<{ success: boolean, value?: T, error?: any }> {
+  let lastError
+  const maxRetries = options.maxRetries ?? 3
+  const backoffs = options.retryBackoffs ?? [0, 100, 200]
+  for (let attempt = maxRetries; attempt > 0; attempt--) {
+    try {
+      const backoff = backoffs[attempt - 1]
+      if (backoff != null && backoff > 0)
+        await delay(backoff)
+      const value = await fn()
+      return { success: true, value }
+    }
+    catch (err) {
+      lastError ??= err
+    }
   }
-  if (az.trackDefinedMetric("i18n.dictionary_loaded", {
-    failure_cause: i,
-    project: t,
-    retries: n,
-    success: s.success
-  }), s.success) return s.value;
-  throw s.error;
+  return { success: false, error: lastError }
 }
-async function T(e, t = {}) {
-  let i;
-  let n = t.maxRetries ?? 3;
-  let r = t.retryBackoffs ?? [0, 100, 200];
-  for (let t = n; t > 0; t -= 1) try {
-    let i = r[t - 1];
-    null != i && i > 0 && (await fm(i));
-    let n = await e();
-    return {
-      success: !0,
-      value: n
-    };
-  } catch (e) {
-    i ??= e;
-  }
-  return {
-    success: !1,
-    error: i
-  };
+
+/**
+ * Checks if the user agent is a known bot.
+ * @returns boolean
+ * (original: k)
+ */
+function isKnownBot(): boolean {
+  const ua = navigator.userAgent
+  return ['PetalBot', 'Naver', 'lin.ee'].some(bot => ua.includes(bot))
 }
-function k() {
-  let e = navigator.userAgent;
-  for (let t of ["PetalBot", "Naver", "lin.ee"]) if (e.includes(t)) return !0;
-  return !1;
-}
-let R = _$$D(async () => {
+
+/**
+ * Checks robots.txt fetch status.
+ * @returns Promise<boolean>
+ * (original: R)
+ */
+async function checkRobotsTxt(): Promise<boolean> {
   try {
-    await fetch("/robots.txt", {
-      cache: "no-store",
-      method: "GET"
-    });
-    return !1;
-  } catch {
-    return !0;
+    await fetch('/robots.txt', { cache: 'no-store', method: 'GET' })
+    return false
   }
-});
-export async function $$N7(e = !1, t = null) {
-  let i;
-  let n;
-  let r;
-  L();
-  let a = t ?? getLocaleFallbacks();
-  X.i18nLocale = a[0];
+  catch {
+    return true
+  }
+}
+
+/**
+ * Loads i18n state and dictionaries.
+ * @param fetchDb - Whether to fetch DB dictionary
+ * @param localeFallbacks - Locale fallbacks
+ * @returns Promise<string | unknown>
+ * (original: $$N7)
+ */
+export async function loadI18nState(fetchDb = false, localeFallbacks: string[] | null = null) {
+  let webDict, englishDict, dbDict
+  registerI18nTextElement()
+  const fallbacks = localeFallbacks ?? getLocaleFallbacks()
+  performanceMetricsTracker.i18nLocale = fallbacks[0]
   try {
-    let [t, a, s] = await Promise.all([ZO("fetchI18nPreloadDict", _$$e.GROWTH_PLATFORM, async () => {
-      i = await S("web");
-    }).then(e => e.duration).catch(async e => {
-      (await R()) || $D(_$$e.GROWTH_PLATFORM, e);
-    }), ZO("fetchEnglishPreloadDict", _$$e.GROWTH_PLATFORM, async () => {
-      try {
-        n = await S("web_english");
-      } catch (i) {
-        if (k()) return;
-        let e = "unknown";
-        let t = document.getElementById("englishDictionaryUrl")?.getAttribute("href");
-        if (t) {
-          let i = t.split("/");
-          e = i[i.length - 1];
+    const [webMs, englishMs, dbMs] = await Promise.all([
+      measureAsyncDuration('fetchI18nPreloadDict', _$$e.GROWTH_PLATFORM, async () => {
+        webDict = await fetchDictionaryByEnv('web')
+      }).then(res => res.duration).catch(async (err) => {
+        if (!(await checkRobotsTxt()))
+          reportError(_$$e.GROWTH_PLATFORM, err)
+      }),
+      measureAsyncDuration('fetchEnglishPreloadDict', _$$e.GROWTH_PLATFORM, async () => {
+        try {
+          englishDict = await fetchDictionaryByEnv('web_english')
         }
-        sx("english_entry_dict_failure", {
-          message: "string" == typeof i ? i : i instanceof Error ? i.message : "Unknown",
-          dictionary: e
-        });
-        return i;
-      }
-    }).then(e => e.duration), e ? ZO("fetchI18nDbString", _$$e.GROWTH_PLATFORM, async () => {
-      r = await S("db");
-    }).then(e => e.duration) : 0]);
-    t && (X.i18nFetchPreloadedDictMs = Math.round(t));
-    X.i18nFetchPreloadedEnglishDictMs = Math.round(a);
-    X.i18nFetchPreloadedDbDictMs = Math.round(s);
-  } catch (e) {
-    console.warn(e);
-    i = void 0;
-    r = void 0;
-    return e;
+        catch (err) {
+          if (isKnownBot())
+            return
+          let dictName = 'unknown'
+          const url = document.getElementById('englishDictionaryUrl')?.getAttribute('href')
+          if (url) {
+            const parts = url.split('/')
+            dictName = parts[parts.length - 1]
+          }
+          trackEventAnalytics('english_entry_dict_failure', {
+            message: typeof err === 'string' ? err : err instanceof Error ? err.message : 'Unknown',
+            dictionary: dictName,
+          })
+          return err
+        }
+      }).then(res => res.duration),
+      fetchDb
+        ? measureAsyncDuration('fetchI18nDbString', _$$e.GROWTH_PLATFORM, async () => {
+            dbDict = await fetchDictionaryByEnv('db')
+          }).then(res => res.duration)
+        : 0,
+    ])
+    if (webMs)
+      performanceMetricsTracker.i18nFetchPreloadedDictMs = Math.round(webMs)
+    performanceMetricsTracker.i18nFetchPreloadedEnglishDictMs = Math.round(englishMs)
+    performanceMetricsTracker.i18nFetchPreloadedDbDictMs = Math.round(dbMs)
   }
-  Cq(a, void 0, i, r, n);
-  return a[0];
+  catch (err) {
+    console.warn(err)
+    webDict = undefined
+    dbDict = undefined
+    return err
+  }
+  initializeI18nState(fallbacks, undefined, webDict, dbDict, englishDict)
+  return fallbacks[0]
 }
-export async function $$P3(e) {
-  let t;
-  let i;
-  let n;
-  let r;
-  let s;
-  L();
-  let l = getInitialOptions().dictionary_url_by_locale;
-  if (l && l[e]) {
-    let t = l[e];
-    r = t["figma-web"];
-    s = t["figma-db"];
+
+/**
+ * Loads i18n state for a specific locale.
+ * @param locale - Locale code
+ * @returns Promise<void | unknown>
+ * (original: $$P3)
+ */
+export async function loadI18nLocale(locale: string) {
+  let webDict, englishDict, dbDict, dbUrl, webUrl
+  registerI18nTextElement()
+  const dictUrls = getInitialOptions().dictionary_url_by_locale
+  if (dictUrls && dictUrls[locale]) {
+    const urls = dictUrls[locale]
+    webUrl = urls['figma-web']
+    dbUrl = urls['figma-db']
   }
   try {
-    let [l, d, u] = await Promise.all([ZO("fetchI18nLocaleDict", _$$e.GROWTH_PLATFORM, async () => {
-      if (e !== languageCodes.EN) {
-        if (r) t = await w(r, "web"); else throw Error(`No web dictionary URL found for locale: ${e}`);
-      }
-    }).then(e => e.duration).catch(async e => {
-      (await R()) || $D(_$$e.GROWTH_PLATFORM, e);
-    }), ZO("fetchEnglishPreloadDict", _$$e.GROWTH_PLATFORM, async () => {
-      try {
-        i = await S("web_english");
-      } catch (i) {
-        if (k()) return;
-        let e = "unknown";
-        let t = document.getElementById("englishDictionaryUrl")?.getAttribute("href");
-        if (t) {
-          let i = t.split("/");
-          e = i[i.length - 1];
+    const [webMs, englishMs, dbMs] = await Promise.all([
+      measureAsyncDuration('fetchI18nLocaleDict', _$$e.GROWTH_PLATFORM, async () => {
+        if (locale !== languageCodes.EN) {
+          if (webUrl)
+            webDict = await fetchDictionary(webUrl, 'web')
+          else throw new Error(`No web dictionary URL found for locale: ${locale}`)
         }
-        sx("english_entry_dict_failure", {
-          message: "string" == typeof i ? i : i instanceof Error ? i.message : "Unknown",
-          dictionary: e
-        });
-        return i;
-      }
-    }).then(e => e.duration), ZO("fetchI18nDbString", _$$e.GROWTH_PLATFORM, async () => {
-      s && (n = await w(s, "db"));
-    }).then(e => e.duration)]);
-    l && (X.i18nNonPreloadedFetchDictMs = Math.round(l));
-    X.i18nFetchPreloadedEnglishDictMs = Math.round(d);
-    X.i18nNonPreloadedFetchDbDictMs = Math.round(u);
-  } catch (e) {
-    console.warn(e);
-    t = void 0;
-    n = void 0;
-    return e;
+      }).then(res => res.duration).catch(async (err) => {
+        if (!(await checkRobotsTxt()))
+          reportError(_$$e.GROWTH_PLATFORM, err)
+      }),
+      measureAsyncDuration('fetchEnglishPreloadDict', _$$e.GROWTH_PLATFORM, async () => {
+        try {
+          englishDict = await fetchDictionaryByEnv('web_english')
+        }
+        catch (err) {
+          if (isKnownBot())
+            return
+          let dictName = 'unknown'
+          const url = document.getElementById('englishDictionaryUrl')?.getAttribute('href')
+          if (url) {
+            const parts = url.split('/')
+            dictName = parts[parts.length - 1]
+          }
+          trackEventAnalytics('english_entry_dict_failure', {
+            message: typeof err === 'string' ? err : err instanceof Error ? err.message : 'Unknown',
+            dictionary: dictName,
+          })
+          return err
+        }
+      }).then(res => res.duration),
+      measureAsyncDuration('fetchI18nDbString', _$$e.GROWTH_PLATFORM, async () => {
+        if (dbUrl)
+          dbDict = await fetchDictionary(dbUrl, 'db')
+      }).then(res => res.duration),
+    ])
+    if (webMs)
+      performanceMetricsTracker.i18nNonPreloadedFetchDictMs = Math.round(webMs)
+    performanceMetricsTracker.i18nFetchPreloadedEnglishDictMs = Math.round(englishMs)
+    performanceMetricsTracker.i18nNonPreloadedFetchDbDictMs = Math.round(dbMs)
   }
-  e === languageCodes.EN && (t = i);
-  document.documentElement.lang = e;
-  eD && eD.setLocales([e, defaultLanguage]);
-  Cq([e, defaultLanguage], anotherSubset.concat(), t, n, i);
+  catch (err) {
+    console.warn(err)
+    webDict = undefined
+    dbDict = undefined
+    return err
+  }
+  if (locale === languageCodes.EN)
+    webDict = englishDict
+  document.documentElement.lang = locale
+  desktopAPIInstance?.setLocales([locale, defaultLanguage])
+  initializeI18nState([locale, defaultLanguage], anotherSubset.concat(), webDict, dbDict, englishDict)
 }
-export function $$O2(e, t = Gq().getPrimaryLocale(!1)) {
-  return t === languageCodes.EN ? e : `/${t}${e}`;
+
+/**
+ * Returns a localized path.
+ * @param path - The path
+ * @param locale - Locale code
+ * @returns string
+ * (original: $$O2)
+ */
+export function getLocalizedPath(path: string, locale: string = getI18nState().getPrimaryLocale(false)) {
+  return locale === languageCodes.EN ? path : `/${locale}${path}`
 }
-class D extends HTMLElement {
+
+/**
+ * Custom element for i18n text.
+ * (original: D)
+ */
+class I18nTextElement extends HTMLElement {
   constructor() {
-    super();
+    super()
   }
 }
-function L() {
-  window.customElements.get("i18n-text") || window.customElements.define("i18n-text", D, {});
+
+/**
+ * Registers the i18n-text custom element if not already registered.
+ * (original: L)
+ */
+function registerI18nTextElement() {
+  if (!window.customElements.get('i18n-text')) {
+    window.customElements.define('i18n-text', I18nTextElement, {})
+  }
 }
-export const YD = $$E0;
-export const Yd = $$x1;
-export const dS = $$O2;
-export const jL = $$P3;
-export const qD = $$v4;
-export const t = $$I5;
-export const tx = $$b6;
-export const yF = $$N7; 
+
+// Exported aliases for compatibility
+export const YD = getI18nStringAlias
+export const Yd = getTranslatedDynamicContent
+export const dS = getLocalizedPath
+export const jL = loadI18nLocale
+export const qD = I18nTextComponent
+export const t = getI18nString
+export const tx = renderI18nText
+export const yF = loadI18nState

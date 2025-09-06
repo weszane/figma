@@ -4,7 +4,7 @@ import { K } from "../905/443068";
 import { C } from "../905/520159";
 import { h as _$$h } from "../figma_app/58251";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { P } from "../figma_app/582341";
 import { X$, H3 } from "../figma_app/465071";
 import { Nf } from "../figma_app/633080";
@@ -40,7 +40,7 @@ export function $$_0({
     } : void 0,
     children: [u && jsx(K, {
       onClick: onClickWithFocus,
-      "aria-label": _$$t("design_systems.libraries_modal.back"),
+      "aria-label": getI18nString("design_systems.libraries_modal.back"),
       ref: setKeyboardNavigationElement,
       htmlAttributes: {
         "data-testid": "library-modal-back-button"

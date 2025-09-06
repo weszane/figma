@@ -1,6 +1,6 @@
 import { NC } from "../905/17179";
 import { getInitialOptions } from "../figma_app/169182";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
 import { nF } from "../905/350402";
 import { x } from "../905/962579";
@@ -48,7 +48,7 @@ let $$m0 = nF((e, t) => {
       }, i.message);
       e.dispatch($$n1.error(t));
     } catch (i) {
-      e.dispatch($$n1.error(t.fallbackError || _$$t("general.an_error_occurred_while_performing_that_action")));
+      e.dispatch($$n1.error(t.fallbackError || getI18nString("general.an_error_occurred_while_performing_that_action")));
     }
   });
 });
@@ -62,7 +62,7 @@ let $$m0 = nF((e, t) => {
     let i = getInitialOptions().flash;
     i && (i.error ? t.dispatch(e.error(u(i.error), e.TIMEOUT_SERVER_SIDE)) : i.warn ? t.dispatch(e.flash(u(i.warn), e.TIMEOUT_SERVER_SIDE)) : i.success && t.dispatch(e.flash(u(i.success), e.TIMEOUT_SERVER_SIDE)));
   });
-  e.flash = function(e, t) {
+  e.flash = function (e, t) {
     return p({
       message: e,
       status: x.DEFAULT,
@@ -70,7 +70,7 @@ let $$m0 = nF((e, t) => {
       id: c++
     });
   };
-  e.error = function(e, t) {
+  e.error = function (e, t) {
     return p({
       message: e,
       status: x.ERROR,
@@ -80,4 +80,4 @@ let $$m0 = nF((e, t) => {
   };
 })($$n1 || ($$n1 = {}));
 export const Q = $$m0;
-export const s = $$n1; 
+export const s = $$n1;

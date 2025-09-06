@@ -3,8 +3,8 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { dI, sH, fn } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { $D } from "../905/11";
-import { t as _$$t } from "../905/303541";
+import { reportError } from "../905/11";
+import { getI18nString } from "../905/303541";
 import { se, _j } from "../figma_app/843119";
 import { E7 } from "../905/216495";
 import { xT } from "../figma_app/841415";
@@ -13,19 +13,19 @@ export function $$_7(e, t, r) {
   let i = getSingletonSceneGraph();
   switch (e?.type) {
     case "internal":
-      return (n = t.find(t => t.guid === e.id)?.name || (e.id ? i?.get(e.id)?.name : void 0)) ? "/" === n ? _$$t("sites.panel.home") : n : "";
+      return (n = t.find(t => t.guid === e.id)?.name || (e.id ? i?.get(e.id)?.name : void 0)) ? "/" === n ? getI18nString("sites.panel.home") : n : "";
     case "url":
       return e.url;
     case "cms_link_field_alias":
       return e.fieldName;
     case "internal_cms_item_page":
-      return (n = r.find(t => t.guid === e.id)?.name) ? ("/" === n ? _$$t("sites.panel.home") : n) + "/slug" : "";
+      return (n = r.find(t => t.guid === e.id)?.name) ? ("/" === n ? getI18nString("sites.panel.home") : n) + "/slug" : "";
     case "internal_cms_item_page_item":
-      return (n = r.find(t => t.guid === e.id)?.name) ? ("/" === n ? _$$t("sites.panel.home") : n) + "/\u2026" : "";
+      return (n = r.find(t => t.guid === e.id)?.name) ? ("/" === n ? getI18nString("sites.panel.home") : n) + "/\u2026" : "";
     case "back":
-      return _$$t("sites.panel.link_panel.back");
+      return getI18nString("sites.panel.link_panel.back");
     case "anchor_link":
-      return _$$t("sites.panel.link_panel.anchor_link");
+      return getI18nString("sites.panel.link_panel.anchor_link");
     default:
       return "";
   }
@@ -55,7 +55,7 @@ export function $$h6(e) {
       };
     }
   } catch (e) {
-    $D(_$$e.CMS, Error("could not convert Fig.Hyperlink to Link"), {
+    reportError(_$$e.CMS, Error("could not convert Fig.Hyperlink to Link"), {
       extra: {
         error: e.message
       }
@@ -83,7 +83,7 @@ export function $$m0(e) {
       }
     } : {
       guid: t
-    } : ($D(_$$e.CMS, Error("Invalid node GUID for link"), {
+    } : (reportError(_$$e.CMS, Error("Invalid node GUID for link"), {
       extra: {
         link: e
       }
@@ -115,7 +115,7 @@ export function $$f3(e, t, r, n, s) {
       openInNewTab: s
     } : null;
     if (d) return d;
-    $D(_$$e.CMS, Error("could not create a valid CMS Link from CMSAlias and provided args"), {
+    reportError(_$$e.CMS, Error("could not create a valid CMS Link from CMSAlias and provided args"), {
       extra: {
         cmsAlias: e,
         cmsTarget: t,

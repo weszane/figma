@@ -1,12 +1,12 @@
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { fp, md } from "../figma_app/27355";
+import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import { Ay } from "../905/612521";
 import { U as _$$U } from "../figma_app/901889";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { Ts } from "../905/194276";
 import { qB } from "../905/862321";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { V as _$$V } from "../905/223767";
 import { _I } from "../figma_app/473493";
@@ -24,7 +24,7 @@ import { h4 } from "../figma_app/421473";
 import { ol, H7 } from "../figma_app/598018";
 import { wH } from "../figma_app/680166";
 import { b as _$$b } from "../905/165519";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { TN } from "../figma_app/831101";
 import { q, J as _$$J } from "../905/202542";
 import { x as _$$x } from "../905/749159";
@@ -51,7 +51,7 @@ export function $$z0({
     let y = _$$U();
     let C = useDispatch();
     let L = _$$J2();
-    let [R, O] = fp(_$$t);
+    let [R, O] = useAtomValueAndSetter(_$$t);
     let B = useCallback(() => {
       L && O(_$$c2.UPGRADING);
     }, [L, O]);
@@ -125,12 +125,12 @@ export function $$z0({
   }, [t, n, O, e]);
   let J = function (e) {
     let t = !!hA();
-    let n = md(_$$R2);
+    let n = useAtomWithSubscription(_$$R2);
     let l = _$$U2("blocking_modal");
     let s = useDispatch();
-    let d = _$$R(e => ({
+    let d = selectWithShallowEqual(e => ({
       ...e.selectedView,
-      editorType: nT.Design,
+      editorType: FEditorType.Design,
       showOverview: !0,
       focusViewBackNavigation: void 0,
       devModeFocusId: void 0
@@ -142,26 +142,26 @@ export function $$z0({
       s(sf(d));
     }, [d, s]);
     return e ? {
-      label: tx("dev_handoff.paywall.blocking_modal.button.not_now"),
+      label: renderI18nText("dev_handoff.paywall.blocking_modal.button.not_now"),
       onClick: e,
       trackingDescriptor: _$$c.NOT_NOW
     } : t ? {
-      label: tx("dev_handoff.paywall.blocking_modal.button.back_to_summary"),
+      label: renderI18nText("dev_handoff.paywall.blocking_modal.button.back_to_summary"),
       onClick: p,
       trackingDescriptor: _$$c.BACK_TO_SUMMARY
     } : n ? {
-      label: tx("dev_handoff.paywall.blocking_modal.button.not_now"),
+      label: renderI18nText("dev_handoff.paywall.blocking_modal.button.not_now"),
       onClick: c,
       trackingDescriptor: _$$c.NOT_NOW
     } : {
-      label: tx("dev_handoff.paywall.blocking_modal.button.back_to_design"),
+      label: renderI18nText("dev_handoff.paywall.blocking_modal.button.back_to_design"),
       onClick: c,
       trackingDescriptor: _$$c.BACK_TO_DESIGN
     };
   }(t);
   return K ? {
     primaryButtonProps: {
-      label: W ? tx("auto_upgrade_confirmation.dev_mode.cta_text") : tx("dev_handoff.paywall.blocking_modal.button.request_access"),
+      label: W ? renderI18nText("auto_upgrade_confirmation.dev_mode.cta_text") : renderI18nText("dev_handoff.paywall.blocking_modal.button.request_access"),
       onClick: X,
       trackingDescriptor: W ? _$$c.GET_DEV_MODE : _$$c.REQUEST_ACCESS
     },
@@ -171,14 +171,14 @@ export function $$z0({
     secondaryButtonProps: void 0
   } : {
     primaryButtonProps: {
-      label: tx("dev_handoff.paywall.blocking_modal.button.learn_more"),
+      label: renderI18nText("dev_handoff.paywall.blocking_modal.button.learn_more"),
       onClick: V,
       trackingDescriptor: _$$c.LEARN_MORE
     },
     secondaryButtonProps: J
   } : {
     primaryButtonProps: {
-      label: U ? tx("dev_handoff.paywall.blocking_modal.button.locked.reactivate") : tx("payments_modal.upgrade_to_professional"),
+      label: U ? renderI18nText("dev_handoff.paywall.blocking_modal.button.locked.reactivate") : renderI18nText("payments_modal.upgrade_to_professional"),
       onClick: X,
       trackingDescriptor: U ? _$$c.REACTIVATE_YOUR_PROFESSIONAL_PLAN : _$$c.UPGRADE_TO_PROFESSIONAL
     },

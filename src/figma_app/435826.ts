@@ -3,15 +3,15 @@ import { useDispatch, useSelector } from "../vendor/514228";
 import { ServiceCategories } from "../905/165054";
 import { ey } from "../905/859698";
 import { BXd, CWU, glU } from "../figma_app/763686";
-import { md, fp } from "../figma_app/27355";
-import { az } from "../905/449184";
+import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
+import { analyticsEventManager } from "../905/449184";
 import { U as _$$U } from "../figma_app/901889";
 import { h as _$$h } from "../905/207101";
 import { ZC } from "../figma_app/39751";
-import { jk } from "../905/609396";
-import { $D } from "../905/11";
-import { x1 } from "../905/714362";
-import { t as _$$t } from "../905/303541";
+import { PerfTimer } from "../905/609396";
+import { reportError } from "../905/11";
+import { logError } from "../905/714362";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { yA, rX, As, t5, _K, f$, Qn } from "../figma_app/933328";
 import { ni, kX, V2 } from "../905/63598";
@@ -31,7 +31,7 @@ import { PW } from "../figma_app/633080";
 import { AX, r6 } from "../905/542608";
 import { sz } from "../905/753512";
 function k() {
-  $D(ServiceCategories.SCENEGRAPH_AND_SYNC, Error("Query for library consumers aborted during reconnect"));
+  reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, Error("Query for library consumers aborted during reconnect"));
 }
 export async function $$M1(e) {
   let t = Ak();
@@ -121,14 +121,14 @@ export async function $$B0(e, t) {
 export function $$G6(e, t = aD.ALL, r) {
   let a = useDispatch();
   let u = bA(t);
-  let p = md(yV);
+  let p = useAtomWithSubscription(yV);
   let {
     scopedComponentUpdates,
     scopedStateGroupUpdates,
     scopedStyleUpdates,
     scopedVariableSetUpdates,
     scopedLibraryAssetUpdates
-  } = md(u);
+  } = useAtomWithSubscription(u);
   let B = useSelector(_$$c);
   let V = B.file_key;
   let H = p?.parentOrgId?.toString();
@@ -200,7 +200,7 @@ export function $$G6(e, t = aD.ALL, r) {
             t && (n.size > 0 || !n.has(t.version)) && e.push(`VariableID:${r}/${t.version}`);
           }
           t.libraryVariableIdsForUpdate = e;
-        } else x1("variables", "Expected variableSet to be an UpdateRootVariableSet");
+        } else logError("variables", "Expected variableSet to be an UpdateRootVariableSet");
       }
     }
     let r = CWU?.getSubscribedVariableSetsInfo();
@@ -231,7 +231,7 @@ export function $$G6(e, t = aD.ALL, r) {
   }, [et]);
   let en = useCallback((e, t) => {
     J([e], t);
-    az.trackDefinedEvent("design_systems_analytics.ds_asset_updated", {
+    analyticsEventManager.trackDefinedEvent("design_systems_analytics.ds_asset_updated", {
       fileKey: V,
       fileParentOrgId: H,
       fileTeamId: z,
@@ -243,7 +243,7 @@ export function $$G6(e, t = aD.ALL, r) {
   }, [r, V, H, z, $, W, J, sessionId]);
   let ei = useCallback((e, t) => {
     Z([e], t);
-    az.trackDefinedEvent("design_systems_analytics.ds_asset_updated", {
+    analyticsEventManager.trackDefinedEvent("design_systems_analytics.ds_asset_updated", {
       fileKey: V,
       fileParentOrgId: H,
       fileTeamId: z,
@@ -255,7 +255,7 @@ export function $$G6(e, t = aD.ALL, r) {
   }, [r, V, H, z, $, W, Z, sessionId]);
   let ea = useCallback(e => {
     Q([e]);
-    az.trackDefinedEvent("design_systems_analytics.ds_asset_updated", {
+    analyticsEventManager.trackDefinedEvent("design_systems_analytics.ds_asset_updated", {
       fileKey: V,
       fileParentOrgId: H,
       fileTeamId: z,
@@ -267,7 +267,7 @@ export function $$G6(e, t = aD.ALL, r) {
   }, [r, V, H, z, $, W, Q, sessionId]);
   let es = useCallback(async e => {
     let t = await ee([e]);
-    az.trackDefinedEvent("design_systems_analytics.ds_asset_updated", {
+    analyticsEventManager.trackDefinedEvent("design_systems_analytics.ds_asset_updated", {
       fileKey: V,
       fileParentOrgId: H,
       fileTeamId: z,
@@ -278,7 +278,7 @@ export function $$G6(e, t = aD.ALL, r) {
     });
     t && a(F.enqueue({
       type: "default-mode-changed",
-      message: _$$t("variables.authoring_modal.default_mode_changed")
+      message: getI18nString("variables.authoring_modal.default_mode_changed")
     }));
   }, [ee, V, H, z, sessionId, W, $, r, a]);
   let eo = _$$U();
@@ -292,7 +292,7 @@ export function $$G6(e, t = aD.ALL, r) {
       eo("library.update_all.attempt", {}, {
         forwardToDatadog: !0
       });
-      let e = new jk("updateAll", {});
+      let e = new PerfTimer("updateAll", {});
       e.start();
       try {
         let t = scopedComponentUpdates.length + scopedStateGroupUpdates.length + scopedStyleUpdates.length + scopedVariableSetUpdates.length;
@@ -300,7 +300,7 @@ export function $$G6(e, t = aD.ALL, r) {
           total: t
         }));
         a(Ce());
-        az.trackDefinedEvent("design_systems_analytics.ds_asset_updated", {
+        analyticsEventManager.trackDefinedEvent("design_systems_analytics.ds_asset_updated", {
           fileKey: V,
           fileParentOrgId: H,
           fileTeamId: z,
@@ -320,7 +320,7 @@ export function $$G6(e, t = aD.ALL, r) {
         a(kX());
         n && a(F.enqueue({
           type: "default-mode-changed",
-          message: _$$t("variables.authoring_modal.default_mode_changed")
+          message: getI18nString("variables.authoring_modal.default_mode_changed")
         }));
         let i = e.stop();
         eo("library.update_all.success", {
@@ -370,10 +370,10 @@ export function $$z2({
 }) {
   let i = TA() ?? void 0;
   let a = q5();
-  let [s, o] = fp(H);
+  let [s, o] = useAtomValueAndSetter(H);
   let c = ZC(e);
   let _ = useCallback(e => {
-    az.trackDefinedEvent("design_systems_analytics.update_notification_displayed", {
+    analyticsEventManager.trackDefinedEvent("design_systems_analytics.update_notification_displayed", {
       userId: i,
       fileKey: a?.key,
       fileParentOrgId: a?.parentOrgId ?? void 0,
@@ -392,7 +392,7 @@ export function $$z2({
     r || start(1e3);
   });
   useEffect(() => {
-    !r && s && e !== c && (e ? _(!1) : az.trackDefinedEvent("design_systems_analytics.update_notification_undisplayed", {
+    !r && s && e !== c && (e ? _(!1) : analyticsEventManager.trackDefinedEvent("design_systems_analytics.update_notification_undisplayed", {
       userId: i,
       fileKey: a?.key,
       fileParentOrgId: a?.parentOrgId ?? void 0,

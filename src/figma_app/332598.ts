@@ -6,13 +6,13 @@ import { filterNotNullish } from "../figma_app/656233";
 import { K } from "../905/443068";
 import { E as _$$E } from "../905/172252";
 import { X } from "../905/736922";
-import { eU, fp } from "../figma_app/27355";
+import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import p from "classnames";
 import { rf, Pt } from "../figma_app/806412";
 import { Z } from "../905/189618";
 import { d as _$$d } from "../905/86829";
 import { Me } from "../figma_app/617427";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { M as _$$M } from "../905/830372";
 import { k as _$$k } from "../905/963262";
 import { v4 } from "../figma_app/655139";
@@ -30,7 +30,7 @@ import { IG, GM } from "../905/236606";
 import { y as _$$y } from "../905/913030";
 import { x4, BJ, L6, pG, wY, BA, eT, n8, vN, rq, R0, r9, Zh, Tw, S7, aW, jW, JM, fH, Cq, zB, p4, I$, Lo, ZP, _X, is, Eu, xP, fT, jJ, cH } from "../905/464604";
 var _ = p;
-let k = eU(!1);
+let k = atom(!1);
 let M = e => e.filter(e => !e.excludeFromCopy);
 function F(e, t = {}) {
   return e.replace(Z4, "").replace(M$, "").replace(NT, "").replace(Q6, "").replace(G6, "").replace(P1, "").replace(_$$k, e => {
@@ -47,7 +47,7 @@ function j(e, t = {}) {
 export function $$U1({
   source: e,
   title: t,
-  tooltip: r = _$$t("inspect_panel.copy"),
+  tooltip: r = getI18nString("inspect_panel.copy"),
   selectedAll: a,
   additionalTrackingProperties: s,
   onMouseEnter: o,
@@ -97,10 +97,10 @@ export function $$B5({
   isCopyingAll: s = !1,
   additionalTrackingProperties: o
 }) {
-  let l = a ?? _$$t("inspect_panel.copy_section_default_sectionname");
-  let d = t ? _$$t("inspect_panel.copy_section_with_shift", {
+  let l = a ?? getI18nString("inspect_panel.copy_section_default_sectionname");
+  let d = t ? getI18nString("inspect_panel.copy_section_with_shift", {
     sectionName: l
-  }) : _$$t("inspect_panel.copy_section", {
+  }) : getI18nString("inspect_panel.copy_section", {
     sectionName: l
   });
   return jsx($$U1, {
@@ -147,7 +147,7 @@ export function $$G4(e) {
   }(section, onInstancePillClick);
   let [G, Y] = useState(collapseLongSections);
   let [$, X] = useState(!1);
-  let [q, J] = fp(k);
+  let [q, J] = useAtomValueAndSetter(k);
   let Z = copyAllActionEnabled && q;
   useEffect(() => {
     Y(collapseLongSections);
@@ -210,21 +210,21 @@ export function $$G4(e) {
   let ec = function (e) {
     switch (e) {
       case "Modifier":
-        return _$$t("inspect_panel.code.modifier");
+        return getI18nString("inspect_panel.code.modifier");
       case "Code":
-        return _$$t("inspect_panel.code.code");
+        return getI18nString("inspect_panel.code.code");
       case "Style":
-        return _$$t("inspect_panel.code.style");
+        return getI18nString("inspect_panel.code.style");
       case "Variables":
-        return _$$t("inspect_panel.code.variables");
+        return getI18nString("inspect_panel.code.variables");
       case "Layout":
-        return _$$t("inspect_panel.properties.layout");
+        return getI18nString("inspect_panel.properties.layout");
       case "Position":
-        return _$$t("inspect_panel.code.position");
+        return getI18nString("inspect_panel.code.position");
       case "Other":
-        return _$$t("inspect_panel.code.other");
+        return getI18nString("inspect_panel.code.other");
       case "Typography":
-        return _$$t("inspect_panel.typography.title");
+        return getI18nString("inspect_panel.typography.title");
       default:
         return e;
     }
@@ -351,9 +351,9 @@ function H({
       "data-testid": `${e.name}${i}`,
       onClick: l,
       children: [h && jsxs(_$$E, {
-        children: [o.diff === j5.ADDED && _$$t("dev_handoff.compare_changes.code_line.added_line", {
+        children: [o.diff === j5.ADDED && getI18nString("dev_handoff.compare_changes.code_line.added_line", {
           line: p
-        }), o.diff === j5.REMOVED && _$$t("dev_handoff.compare_changes.code_line.removed_line", {
+        }), o.diff === j5.REMOVED && getI18nString("dev_handoff.compare_changes.code_line.removed_line", {
           line: p
         })]
       }), jsx("span", {
@@ -490,7 +490,7 @@ export function $$K2({
         }), o && jsx("div", {
           className: cH,
           children: jsx(_$$d, {
-            label: _$$t("dev_handoff.code.show_more", {
+            label: getI18nString("dev_handoff.code.show_more", {
               count: l
             }),
             onClick: d

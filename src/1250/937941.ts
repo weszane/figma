@@ -1,9 +1,9 @@
 import { useDispatch } from "../vendor/514228";
 import { K } from "../905/807535";
 import { getFeatureFlags } from "../905/601108";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { R } from "../905/165069";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { tc } from "../905/15667";
 import { QL, EM } from "../905/609392";
@@ -49,7 +49,7 @@ export function $$y0() {
   let P = y && C && !M;
   R(() => {
     if (!P || !e) {
-      y && k && az.trackDefinedEvent("monetization_expansion.deeplink_request_flow_invalid", {
+      y && k && analyticsEventManager.trackDefinedEvent("monetization_expansion.deeplink_request_flow_invalid", {
         upgradeType: C ? k : "invalid",
         entryPoint: I,
         licenseType: e || "undefined",
@@ -60,7 +60,7 @@ export function $$y0() {
       return;
     }
     let a = getUpgradeEligibility(e);
-    if (az.trackDefinedEvent("monetization_expansion.deeplink_request_flow", {
+    if (analyticsEventManager.trackDefinedEvent("monetization_expansion.deeplink_request_flow", {
       upgradeType: k,
       entryPoint: I,
       licenseType: e,
@@ -76,7 +76,7 @@ export function $$y0() {
           upgradeRequestId
         } = qm(a);
         requestCanBeNudged ? nudgeUpgradeRequest(upgradeRequestId) : t(F.enqueue({
-          message: _$$t("team_user.actions.request_sent_well_let_you_know")
+          message: getI18nString("team_user.actions.request_sent_well_let_you_know")
         }));
       }
       return;

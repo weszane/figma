@@ -3,12 +3,12 @@ import { Z } from '../905/116724';
 import { s as _$$s } from '../905/139639';
 import { l7 } from '../905/189185';
 import { F as _$$F2 } from '../905/302958';
-import { t as _$$t } from '../905/303541';
-import { sx } from '../905/449184';
+import { getI18nString } from '../905/303541';
+import { trackEventAnalytics } from '../905/449184';
 import { YQ } from '../905/502364';
 import { F as _$$F } from '../905/680873';
 import { getSingletonSceneGraph } from '../905/700578';
-import { eU, fp, Iz } from '../figma_app/27355';
+import { atom, useAtomValueAndSetter, createRemovableAtomFamily } from '../figma_app/27355';
 import { ZC } from '../figma_app/39751';
 import { ut } from '../figma_app/84367';
 import { L3 } from '../figma_app/385215';
@@ -106,7 +106,7 @@ export function $$z2() {
     let r = getSingletonSceneGraph().get(e);
     if (r?.isResponsiveSetOrWebpage && r.parentNode?.defaultResponsiveSetId === e) {
       _(_$$F2.enqueue({
-        message: _$$t('sites.panel.pages_panel.cant_rename_default_responsive_set')
+        message: getI18nString('sites.panel.pages_panel.cant_rename_default_responsive_set')
       }));
       return;
     }
@@ -150,13 +150,13 @@ export function $$z2() {
     stopRenamingNode: S
   }), [e, I, S]);
 }
-let W = Iz(e => Wh(() => eU(e)));
+let W = createRemovableAtomFamily(e => Wh(() => atom(e)));
 export function $$K15() {
-  let [e, t] = fp(W(!0));
+  let [e, t] = useAtomValueAndSetter(W(!0));
   let r = _$$F(e);
   let i = useCallback(() => {
     let e = !r.current;
-    sx('objects_panel_open_toggle', {
+    trackEventAnalytics('objects_panel_open_toggle', {
       isLayersOpen: e
     });
     t(e);

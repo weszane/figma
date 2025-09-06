@@ -7,9 +7,9 @@ import { j0r, rrT, glU, plo } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { AD, sH, Hr } from "../905/871411";
 import { s4 } from "../figma_app/276332";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import _ from "classnames";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { Point } from "../905/736624";
 import { Y as _$$Y } from "../905/506207";
 import { u1, XE } from "../figma_app/91703";
@@ -22,7 +22,7 @@ import { J } from "../905/225412";
 import { ku } from "../905/149223";
 import { WH } from "../figma_app/836943";
 import { w1 } from "../figma_app/405546";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { sT } from "../figma_app/740163";
 import { fE } from "../figma_app/359164";
 import { EX } from "../figma_app/709323";
@@ -49,7 +49,7 @@ function R({
 }) {
   let {
     styleId = null
-  } = md(t);
+  } = useAtomWithSubscription(t);
   let [a, _] = w1(t, "paints");
   let R = rrT.STROKE_PRESET;
   let L = useDispatch();
@@ -64,7 +64,7 @@ function R({
   let {
     dropdownShown,
     pickerShown
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     dropdownShown: e.dropdownShown,
     pickerShown: e.pickerShown
   }));
@@ -191,9 +191,9 @@ function j({
     max: _$$N
   });
   return jsx(EX, {
-    ariaLabel: _$$t("fullscreen.properties_panel.fill.stroke_width"),
+    ariaLabel: getI18nString("fullscreen.properties_panel.fill.stroke_width"),
     bigStep: bigNudgeAmount,
-    dataTooltip: _$$t("fullscreen.properties_panel.fill.stroke_width"),
+    dataTooltip: getI18nString("fullscreen.properties_panel.fill.stroke_width"),
     inputMax: fE,
     min: 1,
     onValueChange: r,

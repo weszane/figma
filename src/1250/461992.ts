@@ -1,6 +1,6 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { IT } from "../figma_app/566371";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { N } from "../7222/898730";
 import { e as _$$e2 } from "../figma_app/324237";
 import { vt } from "../figma_app/306946";
@@ -46,7 +46,7 @@ export function $$p4({
     hasNextPage: h ?? !1,
     isFetchingNextPage: b,
     fetchNextPage: x
-  } : ($D(_$$e.COMMUNITY, Error("useInternalResources: teamId and orgId cannot both be undefined"), {
+  } : (reportError(_$$e.COMMUNITY, Error("useInternalResources: teamId and orgId cannot both be undefined"), {
     extra: {
       resourceTypes: t,
       caller: d

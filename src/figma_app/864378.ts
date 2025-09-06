@@ -1,6 +1,6 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { nF } from "../905/350402";
 import { $I } from "../905/879323";
 import { KQ } from "../figma_app/646357";
@@ -11,7 +11,7 @@ let $$c0 = nF(e => {
 let $$u2 = nF((e, t) => {
   e.dispatch($I(t));
   e.getState().openFile && e.dispatch($$c0());
-  !t.libraryKey && getFeatureFlags().dse_lk_realtime_audit && $D(_$$e.DESIGN_SYSTEMS_ECOSYSTEM, Error("putProductComponents called without a libraryKey"), {
+  !t.libraryKey && getFeatureFlags().dse_lk_realtime_audit && reportError(_$$e.DESIGN_SYSTEMS_ECOSYSTEM, Error("putProductComponents called without a libraryKey"), {
     tags: {
       libraryFileKey: t.fileKey,
       openFileKey: e.getState().openFile?.key,

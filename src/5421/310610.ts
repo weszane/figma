@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { AD, lV } from "../figma_app/617606";
 import { K$p } from "../figma_app/763686";
-import { fp, md } from "../figma_app/27355";
+import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import { ly } from "../905/138461";
 import { tS } from "../figma_app/516028";
 import { iZ } from "../905/372672";
@@ -25,11 +25,11 @@ export function $$f0({
   useEffect(() => {
     exchange && !f && _(!0);
   }, [exchange, f]);
-  let [v, I] = fp(o0(e?.guid || ""));
-  let C = md(Nm(e?.guid || ""));
+  let [v, I] = useAtomValueAndSetter(o0(e?.guid || ""));
+  let C = useAtomWithSubscription(Nm(e?.guid || ""));
   let E = _$$E(e);
-  let j = md(Xl);
-  let N = md(p7);
+  let j = useAtomWithSubscription(Xl);
+  let N = useAtomWithSubscription(p7);
   let T = iZ();
   let S = tS();
   let A = useMemo(() => E ? EY(E) : null, [E]);

@@ -4,8 +4,8 @@ import { r as _$$r } from "../905/249071";
 import { M } from "../905/512402";
 import o, { AD } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
-import { zl } from "../figma_app/27355";
-import { nl } from "../figma_app/257275";
+import { atomStoreManager } from "../figma_app/27355";
+import { isInteractionPathCheck } from "../figma_app/897289";
 import { BT } from "../905/618447";
 import { x7, Mu, b, js, vJ } from "../905/435079";
 import { $j, xC, iZ, Ds } from "../figma_app/3776";
@@ -30,7 +30,7 @@ let g = class e extends j {
       return;
     }
     let t = this._getRowStateFromCoord(e);
-    if ("HANDLE_HOVERED" === this._state.mouse && Ez5?.canvasViewState().temporarilyHoveredNodes.set(this._state.rowGUIDs), "ROW_HOVERED" !== t.mouse || nl()) {
+    if ("HANDLE_HOVERED" === this._state.mouse && Ez5?.canvasViewState().temporarilyHoveredNodes.set(this._state.rowGUIDs), "ROW_HOVERED" !== t.mouse || isInteractionPathCheck()) {
       this._timeout && (clearTimeout(this._timeout), this._timeout = null);
       this._state = t;
     } else {
@@ -74,7 +74,7 @@ let g = class e extends j {
     Ez5.canvasGrid().isDraggingChildren.set(!0);
     let t = M.fromVectorD(e.viewportSpaceMouse());
     let i = (t.y - this._state.mouseDownY) / e.viewport().canvasScale();
-    let n = zl.get(BT);
+    let n = atomStoreManager.get(BT);
     for (let e = 0; e < n.length; e++) $j({
       row: e,
       y: 0,
@@ -116,7 +116,7 @@ let g = class e extends j {
   handleMouseUp(e) {
     Ez5?.canvasGrid().isDraggingChildren.set(!1);
     ("HANDLE_DRAGGED" === this._state.mouse || "HEADER_DRAGGED" === this._state.mouse) && (e.accept(this), this._state.currentRowIndex !== this._state.targetRowIndex && Ez5?.canvasGrid().moveRow(this._state.currentRowIndex, this._state.targetRowIndex));
-    let t = zl.get(BT);
+    let t = atomStoreManager.get(BT);
     for (let e = 0; e < t.length; e++) $j({
       row: e,
       isStateGroupRowAllowed: this.isStateGroupRowAllowed()
@@ -130,7 +130,7 @@ let g = class e extends j {
     let i = [];
     let n = Ez5?.onCanvasNameEditorMode() === nzw.CANVAS_GRID_ROW_NAME;
     if (this.isRowHeaderSelectable()) {
-      let a = zl.get(BT);
+      let a = atomStoreManager.get(BT);
       for (let s = 0; s < a.length; s++) if (Ez5?.canvasGrid().isRowSelected(s) && !n) {
         i.push(s);
         let n = Ez5?.canvasGrid().getRowGUID(s) ?? AD;

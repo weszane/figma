@@ -1,8 +1,8 @@
-import { eU } from "../figma_app/27355";
-let $$r0 = eU(null);
-let $$a4 = eU([]);
-let $$s3 = eU(!1);
-let $$o5 = eU(!1);
+import { atom } from "../figma_app/27355";
+let $$r0 = atom(null);
+let $$a4 = atom([]);
+let $$s3 = atom(!1);
+let $$o5 = atom(!1);
 let $$l1 = "guidelines.md";
 let $$d2 = "global.css";
 export const Om = $$r0;

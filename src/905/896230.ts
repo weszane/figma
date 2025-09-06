@@ -2,15 +2,15 @@ import { x as _$$x } from "../905/89282";
 import { K } from "../905/591700";
 import { uCV } from "../figma_app/763686";
 import { EU, tz, Rx, rb, CJ, WF, Lz, eZ, jw, TC, tg, nn, A2, V3, qQ, w4, tO, dJ, d1, yy, pG, RU, yR, lM, c2, di, Vm, Ag, sG, d_, p6, rf, k0, IW, l5, ZD, RN, LY, mk, Fe, uH, Z3, vv, qV, b_, Bj, be, wm, Gh, aO, $C, xJ, Ud, Iz, A1, _L, rm, qP, W3, M0, a5, S_, uG, gQ, Bz } from "../figma_app/548577";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { debugState } from "../905/407919";
 import { iw } from "../figma_app/582563";
-import { Cp } from "../905/11";
-import { fj } from "../905/714362";
-import { t as _$$t } from "../905/303541";
+import { captureException } from "../905/11";
+import { logCustom } from "../905/714362";
+import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { Iu } from "../figma_app/141088";
-import { b as _$$b } from "../905/690073";
+import { EventEmitter } from "../905/690073";
 import { y as _$$y } from "../905/913008";
 import { N as _$$N } from "../905/718123";
 import { X } from "../905/91006";
@@ -41,8 +41,8 @@ class f extends EU {
     this.session = {
       user: null
     };
-    this.fromFullscreen = new _$$b("");
-    this.viewport = new _$$b("");
+    this.fromFullscreen = new EventEmitter("");
+    this.viewport = new EventEmitter("");
   }
   saveUseNumbersForOpacityPreference(e) {
     throw Error("Method not implemented.");
@@ -235,13 +235,13 @@ class z extends Rx {
     _$$r2.end(e);
   }
   slogFromFullscreen(e, t, i, n, r, a, s) {
-    return fj(e, t, i, n, r, a, s);
+    return logCustom(e, t, i, n, r, a, s);
   }
   trackDefinedEventFromFullscreen(e, t) {
-    az.trackDefinedFullscreenEvent(e, _$$r(t));
+    analyticsEventManager.trackDefinedFullscreenEvent(e, _$$r(t));
   }
   resetDefinedAnalyticsForDocument() {
-    az.resetDefinedAnalyticsForDocument();
+    analyticsEventManager.resetDefinedAnalyticsForDocument();
   }
 }
 class H extends f {
@@ -253,7 +253,7 @@ class W extends Q {
   allocationFailed(e, t, i, n, r, a) {
     this._receivedFailedAllocation || (this._receivedFailedAllocation = !0, _$$r2.reportOOM(a), debugState?.dispatch(_$$F.enqueue({
       get message() {
-        return _$$t("proto.lib.device_low_memory");
+        return getI18nString("proto.lib.device_low_memory");
       }
     })));
   }
@@ -355,7 +355,7 @@ export let $$K0 = {
   ScenegraphStringManagementBindings: () => Bm,
   SlotsBindingsWeb: () => new gQ(),
   jsHelpers: {
-    reportError: Cp,
+    reportError: captureException,
     preventEnteringCpp: () => _$$y.preventEnteringCpp(),
     fatalCppError(e, t) {
       _$$y.fatalCppError(e, t);

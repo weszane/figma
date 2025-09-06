@@ -5,9 +5,9 @@ import { $n } from "../905/521428";
 import { Z_n, rXF, J0O, CWU } from "../figma_app/763686";
 import { WI } from "../905/929949";
 import { parsePxNumber } from "../figma_app/783094";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { Pt, of } from "../figma_app/806412";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { Y as _$$Y } from "../905/830372";
 import { kl } from "../905/275640";
 import { Um } from "../905/848862";
@@ -51,7 +51,7 @@ function D({
   let c = useDetachedVariableValue(i.varValue);
   return jsxs(Fragment, {
     children: [jsx(VariableFormRow, {
-      label: tx("variables.create_modal.name_label"),
+      label: renderI18nText("variables.create_modal.name_label"),
       labelFor: "create-component-prop-name-input",
       input: jsx(_$$L, {
         ref: s,
@@ -71,7 +71,7 @@ function D({
         value: i.propName
       })
     }), jsx(VariableFormRow, {
-      label: tx("variables.create_modal.value_label"),
+      label: renderI18nText("variables.create_modal.value_label"),
       labelFor: I3,
       input: jsx("div", {
         className: hF,
@@ -88,12 +88,12 @@ function D({
             recordingKey: Pt(e, "variableValueInput")
           }), c && jsx(K, {
             type: "button",
-            "aria-label": _$$t("variables.authoring_modal.table.detach_alias"),
+            "aria-label": getI18nString("variables.authoring_modal.table.detach_alias"),
             onClick: () => l(c),
             recordingKey: Pt(e, "detachVariableButton"),
             htmlAttributes: {
               "data-tooltip-type": Ib.TEXT,
-              "data-tooltip": _$$t("variables.authoring_modal.table.detach_alias")
+              "data-tooltip": getI18nString("variables.authoring_modal.table.detach_alias")
             },
             children: jsx(_$$U, {})
           })]
@@ -189,7 +189,7 @@ function U({
   let [N, P] = useState("Property");
   let M = useCallback(() => "Property" === N, [N]);
   let j = WB(i);
-  let U = _$$R(e => vS(e, j, g));
+  let U = selectWithShallowEqual(e => vS(e, j, g));
   let V = function (e) {
     let t = useSelector(Sh);
     let i = useSelector(e => {
@@ -227,7 +227,7 @@ function U({
   return jsx(Ao, {
     title: jsx("h1", {
       className: h$,
-      children: T ? tx("design_systems.component_properties.create_property") : tx("variables.create_modal.component_property_or_variable_title")
+      children: T ? renderI18nText("design_systems.component_properties.create_property") : renderI18nText("variables.create_modal.component_property_or_variable_title")
     }),
     initialPosition: e,
     initialWidth: _$$i,
@@ -248,7 +248,7 @@ function U({
           },
           height: "hug-contents",
           children: [!T && jsx(VariableFormRow, {
-            label: tx("variables.create.title"),
+            label: renderI18nText("variables.create.title"),
             labelId: R,
             input: jsx("div", {
               className: hF,
@@ -280,10 +280,10 @@ function U({
           disabled: !Y,
           recordingKey: Pt(A, "createButton"),
           htmlAttributes: {
-            "data-tooltip": _$$t("variables.create_modal.invalid_variable_name"),
+            "data-tooltip": getI18nString("variables.create_modal.invalid_variable_name"),
             "data-tooltip-type": Y ? void 0 : Ib.TEXT
           },
-          children: M() ? tx("variables.create_modal.create_component_property") : tx("variables.create_modal.create_file_variable")
+          children: M() ? renderI18nText("variables.create_modal.create_component_property") : renderI18nText("variables.create_modal.create_file_variable")
         })
       })]
     })

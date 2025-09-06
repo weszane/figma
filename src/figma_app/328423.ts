@@ -4,8 +4,8 @@ import { a as _$$a } from "../905/558168";
 import { $ } from "../905/945083";
 import { w } from "../905/879280";
 import { t } from "../905/54003";
-import { R } from "../905/103090";
-import { t as _$$t } from "../905/303541";
+import { selectWithShallowEqual } from "../905/103090";
+import { getI18nString } from "../905/303541";
 import { Y5 } from "../figma_app/455680";
 import { hS } from "../905/216495";
 import { zk } from "../figma_app/198712";
@@ -15,22 +15,22 @@ let g = {
   0: {
     icon: jsx(_$$a, {}),
     variableField: "RECTANGLE_TOP_LEFT_CORNER_RADIUS",
-    getTooltip: () => _$$t("fullscreen.properties_panel.transform_panel.top_left_corner_radius")
+    getTooltip: () => getI18nString("fullscreen.properties_panel.transform_panel.top_left_corner_radius")
   },
   2: {
     icon: jsx($, {}),
     variableField: "RECTANGLE_TOP_RIGHT_CORNER_RADIUS",
-    getTooltip: () => _$$t("fullscreen.properties_panel.transform_panel.top_right_corner_radius")
+    getTooltip: () => getI18nString("fullscreen.properties_panel.transform_panel.top_right_corner_radius")
   },
   1: {
     icon: jsx(w, {}),
     variableField: "RECTANGLE_BOTTOM_LEFT_CORNER_RADIUS",
-    getTooltip: () => _$$t("fullscreen.properties_panel.transform_panel.bottom_left_corner_radius")
+    getTooltip: () => getI18nString("fullscreen.properties_panel.transform_panel.bottom_left_corner_radius")
   },
   3: {
     icon: jsx(t, {}),
     variableField: "RECTANGLE_BOTTOM_RIGHT_CORNER_RADIUS",
-    getTooltip: () => _$$t("fullscreen.properties_panel.transform_panel.bottom_right_corner_radius")
+    getTooltip: () => getI18nString("fullscreen.properties_panel.transform_panel.bottom_right_corner_radius")
   }
 };
 export function $$f10(e) {
@@ -66,7 +66,7 @@ function I(e) {
   };
 }
 export function $$S0() {
-  let e = R(e => {
+  let e = selectWithShallowEqual(e => {
     let t = e.mirror.selectionProperties;
     return {
       angle: t.angle,

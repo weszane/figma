@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector } from "../vendor/514228";
 import { h3O } from "../figma_app/763686";
-import { eU, zl, md, fp } from "../figma_app/27355";
+import { atom, atomStoreManager, useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { R9 } from "../905/977824";
 import { KP, Ww } from "../figma_app/440875";
 import { iZ } from "../905/372672";
@@ -10,7 +10,7 @@ import { H, q } from "../905/457575";
 import { jx, Ic } from "../figma_app/198516";
 let $$_5 = H("");
 let $$h3 = q();
-let m = Wh(() => eU({}));
+let m = Wh(() => atom({}));
 export function $$g2(e) {
   if (0 === e.messages.length && !e.isTyping && 0 === e.fileUpdates.length) {
     $$f7(e.node, {
@@ -18,14 +18,14 @@ export function $$g2(e) {
     });
     return;
   }
-  zl.set(m, t => ({
+  atomStoreManager.set(m, t => ({
     ...t,
     [e.node]: e
   }));
   h3O?.setNodeChatExchange(e.node, e);
 }
 export function $$f7(e, t) {
-  zl.set(m, t => {
+  atomStoreManager.set(m, t => {
     let r = {
       ...t
     };
@@ -33,10 +33,10 @@ export function $$f7(e, t) {
     return r;
   });
   h3O?.clearNodeChatExchange(e);
-  t.switchToPreview && zl.set(jx, Ic.PREVIEW);
+  t.switchToPreview && atomStoreManager.set(jx, Ic.PREVIEW);
 }
 export function $$E1(e) {
-  if (e) return zl.get(m)[e];
+  if (e) return atomStoreManager.get(m)[e];
 }
 export function $$y6(e) {
   let t = KP();
@@ -59,7 +59,7 @@ export function $$y6(e) {
   }
   return c;
 }
-let b = Wh(() => eU({}));
+let b = Wh(() => atom({}));
 export function $$T0(e) {
   let t;
   let r;
@@ -73,8 +73,8 @@ export function $$T0(e) {
       allUsers: e
     }
   }) => e);
-  let _ = md(m);
-  let [h, g] = fp(b);
+  let _ = useAtomWithSubscription(m);
+  let [h, g] = useAtomValueAndSetter(b);
   let f = c[a];
   let E = Ww();
   if (u && f && e) {
@@ -110,7 +110,7 @@ export function $$T0(e) {
     user: r
   };
 }
-export let $$I4 = eU(null);
+export let $$I4 = atom(null);
 export const $W = $$T0;
 export const A5 = $$E1;
 export const YZ = $$g2;

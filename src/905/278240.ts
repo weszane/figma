@@ -6,10 +6,10 @@ import { glU, rXF, j0r } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { dI } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Pt } from "../figma_app/806412";
 import { B as _$$B } from "../905/714743";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Oe } from "../figma_app/933328";
 import { Lk } from "../figma_app/975811";
 import { Y5 } from "../figma_app/455680";
@@ -121,7 +121,7 @@ function j({
         l7.user("editVariantFontSizeForTextStyleNode", () => glU.editVariantFontSizeForTextStyleNode(dI(P), j, e));
         return;
       }
-      getFeatureFlags().ce_properties_panel_tracking && sx("editor_type_panel_change", {
+      getFeatureFlags().ce_properties_panel_tracking && trackEventAnalytics("editor_type_panel_change", {
         key: "fontSize"
       });
       let i = {
@@ -148,7 +148,7 @@ function j({
       svg: _require
     }),
     value: -1,
-    tooltip: _$$t("fullscreen.properties_panel.apply_variable"),
+    tooltip: getI18nString("fullscreen.properties_panel.apply_variable"),
     tooltipType: Ib.TEXT
   }, "apply-variable"));
   return jsx(Fragment, {
@@ -162,10 +162,10 @@ function j({
           chevron: _$$t2
         },
         children: jsx(vD, {
-          ariaLabel: _$$t("fullscreen.type_panel.font_size"),
+          ariaLabel: getI18nString("fullscreen.type_panel.font_size"),
           bigNudgeAmount,
           className: Ej,
-          "data-tooltip": _$$t("fullscreen.type_panel.font_size"),
+          "data-tooltip": getI18nString("fullscreen.type_panel.font_size"),
           "data-tooltip-type": Ib.TEXT,
           disabled: g,
           dispatch: G,
@@ -188,7 +188,7 @@ function j({
           smallNudgeAmount,
           tooltipForScreenReadersOnly: !0,
           value: t,
-          willShowDropdown: () => (Y5.commit(), getFeatureFlags().ce_properties_panel_tracking && sx("editor-type-panel-dropdown-show", {
+          willShowDropdown: () => (Y5.commit(), getFeatureFlags().ce_properties_panel_tracking && trackEventAnalytics("editor-type-panel-dropdown-show", {
             key: "fontSize"
           }), Promise.resolve()),
           children: $

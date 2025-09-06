@@ -1,30 +1,30 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useRef, useEffect } from "react";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { K2 } from "../7021/970540";
 let n = "sticky_note--stickyNoteAnimateIn--AiFPv";
 let a = e => {
   switch (e) {
     case "developer":
-      return t("new_user_experience.what_do_you_do.sticky_note.developer");
+      return getI18nString("new_user_experience.what_do_you_do.sticky_note.developer");
     case "designer":
-      return t("new_user_experience.what_do_you_do.cursor_chat.designer");
+      return getI18nString("new_user_experience.what_do_you_do.cursor_chat.designer");
     case "product_manager":
-      return t("new_user_experience.what_do_you_do.cursor_chat.product_manager");
+      return getI18nString("new_user_experience.what_do_you_do.cursor_chat.product_manager");
     case "research":
-      return t("new_user_experience.what_do_you_do.cursor_chat.user_researcher");
+      return getI18nString("new_user_experience.what_do_you_do.cursor_chat.user_researcher");
     case "marketer":
-      return t("new_user_experience.what_do_you_do.cursor_chat.marketer");
+      return getI18nString("new_user_experience.what_do_you_do.cursor_chat.marketer");
     case "student":
-      return t("new_user_experience.what_do_you_do.sticky_note.student");
+      return getI18nString("new_user_experience.what_do_you_do.sticky_note.student");
     case "educator":
-      return t("new_user_experience.what_do_you_do.sticky_note.educator");
+      return getI18nString("new_user_experience.what_do_you_do.sticky_note.educator");
     case "ux_writing":
-      return t("new_user_experience.what_do_you_do.sticky_note.ux_writing");
+      return getI18nString("new_user_experience.what_do_you_do.sticky_note.ux_writing");
     case "data_analytics":
-      return t("new_user_experience.what_do_you_do.sticky_note.data_analytics");
+      return getI18nString("new_user_experience.what_do_you_do.sticky_note.data_analytics");
     default:
-      return t("new_user_experience.what_do_you_do.sticky_note.other");
+      return getI18nString("new_user_experience.what_do_you_do.sticky_note.other");
   }
 };
 export function $$d0({

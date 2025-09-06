@@ -1,5 +1,5 @@
 import { c2 } from "../905/382883";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { Av, L2 } from "../figma_app/542202";
 import { u2, m7, VA, F9, XC } from "../figma_app/761118";
 import { td } from "../figma_app/827216";
@@ -19,29 +19,29 @@ export class $$l0 {
     return this.abortController;
   }
   getStatus() {
-    return zl.get(u2);
+    return atomStoreManager.get(u2);
   }
   setStatus(e) {
     let t = this.getStatus();
-    zl.set(u2, e);
+    atomStoreManager.set(u2, e);
     (function (e) {
       let t = performance.now();
-      let i = zl.get(Av);
-      let n = [...zl.get(L2)];
+      let i = atomStoreManager.get(Av);
+      let n = [...atomStoreManager.get(L2)];
       i && n.push({
         status: e,
         duration: t - i
       });
-      zl.set(L2, n);
-      zl.set(Av, t);
+      atomStoreManager.set(L2, n);
+      atomStoreManager.set(Av, t);
     })(t);
   }
   isLinterDetecting() {
     return this.getStatus() === td.DETECTING;
   }
   addNewViolations(e) {
-    let t = new Map(zl.get(m7));
-    let i = new Set(zl.get(VA));
+    let t = new Map(atomStoreManager.get(m7));
+    let i = new Set(atomStoreManager.get(VA));
     for (let n of e) {
       let e = t.get(n.guid)?.get(n.ruleId);
       if (e) e.push(n);else {
@@ -51,22 +51,22 @@ export class $$l0 {
       }
       i.add(n.violationId);
     }
-    zl.set(m7, t);
-    zl.set(VA, i);
+    atomStoreManager.set(m7, t);
+    atomStoreManager.set(VA, i);
   }
   isViolationIgnored(e) {
-    return zl.get(F9).has(e.violationId);
+    return atomStoreManager.get(F9).has(e.violationId);
   }
   isViolationActive(e) {
-    return zl.get(VA).has(e.violationId);
+    return atomStoreManager.get(VA).has(e.violationId);
   }
   isViolationFixed(e) {
-    return zl.get(XC).has(e.violationId);
+    return atomStoreManager.get(XC).has(e.violationId);
   }
   processFixedViolations(e) {
-    let t = new Map(zl.get(m7));
-    let i = new Set(zl.get(VA));
-    let n = new Set(zl.get(XC));
+    let t = new Map(atomStoreManager.get(m7));
+    let i = new Set(atomStoreManager.get(VA));
+    let n = new Set(atomStoreManager.get(XC));
     let a = [];
     for (let r of e) {
       let {
@@ -90,16 +90,16 @@ export class $$l0 {
         }) ? t.set(guid, new Map(l)) : (t.$$delete(guid), a.push(guid));
       }
     }
-    zl.set(XC, n);
-    zl.set(VA, i);
-    zl.set(m7, t);
+    atomStoreManager.set(XC, n);
+    atomStoreManager.set(VA, i);
+    atomStoreManager.set(m7, t);
     return a;
   }
   processObservedViolations(e, t, i) {
-    let n = zl.get(m7);
-    let a = zl.get(VA);
-    let o = zl.get(XC);
-    let l = zl.get(F9);
+    let n = atomStoreManager.get(m7);
+    let a = atomStoreManager.get(VA);
+    let o = atomStoreManager.get(XC);
+    let l = atomStoreManager.get(F9);
     let d = new Set(t);
     let c = this._createEmptyDiff();
     for (let [t, i] of this._groupViolationsByGuidAndRuleId(e).entries()) {
@@ -164,10 +164,10 @@ export class $$l0 {
       r.has(ruleId) || r.set(ruleId, []);
       r.get(ruleId).push(t);
     }
-    zl.set(m7, o);
-    zl.set(VA, l);
-    zl.set(XC, d);
-    zl.set(F9, c);
+    atomStoreManager.set(m7, o);
+    atomStoreManager.set(VA, l);
+    atomStoreManager.set(XC, d);
+    atomStoreManager.set(F9, c);
   }
   _groupViolationsByGuidAndRuleId(e) {
     return e.reduce((e, t) => {
@@ -255,9 +255,9 @@ export class $$l0 {
     return i;
   }
   ignoreViolationsForGuidsWithGroupKey(e, t) {
-    let i = zl.get(m7);
-    let n = new Set(zl.get(F9));
-    let a = new Set(zl.get(VA));
+    let i = atomStoreManager.get(m7);
+    let n = new Set(atomStoreManager.get(F9));
+    let a = new Set(atomStoreManager.get(VA));
     let o = [];
     for (let r of e) {
       let e = i.get(r);
@@ -266,14 +266,14 @@ export class $$l0 {
       for (let i of e.values()) for (let e of i) e.groupKey === t ? (a.$$delete(e.violationId), n.add(e.violationId)) : a.has(e.violationId) && (s = !1);
       s && o.push(r);
     }
-    zl.set(F9, n);
-    zl.set(VA, a);
+    atomStoreManager.set(F9, n);
+    atomStoreManager.set(VA, a);
     return o;
   }
   ignoreViolationIds(e) {
-    let t = new Set(zl.get(F9));
-    let i = new Set(zl.get(VA));
-    let n = new Map(zl.get(m7));
+    let t = new Set(atomStoreManager.get(F9));
+    let i = new Set(atomStoreManager.get(VA));
+    let n = new Map(atomStoreManager.get(m7));
     let a = [];
     for (let r of e) for (let [e, s] of (t.add(r), i.$$delete(r), n.entries())) {
       for (let [e, t] of s.entries()) {
@@ -282,16 +282,16 @@ export class $$l0 {
       }
       0 === s.size && (n.$$delete(e), a.push(e));
     }
-    zl.set(F9, t);
-    zl.set(VA, i);
-    zl.set(m7, n);
+    atomStoreManager.set(F9, t);
+    atomStoreManager.set(VA, i);
+    atomStoreManager.set(m7, n);
     return a;
   }
   resetViolationsState() {
-    zl.set(m7, new Map());
-    zl.set(VA, new Set());
-    zl.set(XC, new Set());
-    zl.set(F9, new Set());
+    atomStoreManager.set(m7, new Map());
+    atomStoreManager.set(VA, new Set());
+    atomStoreManager.set(XC, new Set());
+    atomStoreManager.set(F9, new Set());
   }
 }
 export const p = $$l0;

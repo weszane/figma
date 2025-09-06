@@ -1,4 +1,4 @@
-import { E2, eU } from "../figma_app/27355";
+import { createValidatedLocalStorageAtom, atom } from "../figma_app/27355";
 import { z } from "../905/239603";
 import a from "../vendor/240820";
 import { kS } from "../figma_app/864723";
@@ -7,12 +7,12 @@ export function $$l0(e, t, i, a = {
   maxNumRecentlyUsed: 20,
   transform: s()
 }) {
-  let d = E2(e, [], z.array(i.and(z.object({
+  let d = createValidatedLocalStorageAtom(e, [], z.array(i.and(z.object({
     lastAddedAtUserId: z.record(z.string(), z.number())
   }))), {
     subscribeToChanges: !0
   });
-  return eU(e => {
+  return atom(e => {
     let t = e(kS);
     return t ? e(d).filter(e => !!e.lastAddedAtUserId[t]) : [];
   }, (e, i, n) => {

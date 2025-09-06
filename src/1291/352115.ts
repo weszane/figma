@@ -16,7 +16,7 @@ import { S as _$$S } from "../1291/885929";
 import { bL, gZ } from "../905/598775";
 import { $n } from "../905/521428";
 import { getFeatureFlags } from "../905/601108";
-import { tx, t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { Gi, wv } from "../figma_app/622574";
 import { FFileType } from "../figma_app/191312";
 import { cX, mk } from "../figma_app/920333";
@@ -36,7 +36,7 @@ function C() {
       className: H6,
       children: [jsx("div", {
         className: bV,
-        children: tx("whiteboard.inserts.org_name_templates", {
+        children: renderI18nText("whiteboard.inserts.org_name_templates", {
           orgName: e.name
         })
       }), jsx(gZ, {
@@ -45,13 +45,13 @@ function C() {
           onClick: () => {
             setSelectedCategory({
               id: e?.type === "team" ? e.entity.id : "",
-              title: t("whiteboard.inserts.org_name_templates", {
+              title: getI18nString("whiteboard.inserts.org_name_templates", {
                 orgName: e.name
               }),
               resourceType: Rt.TEAM_TEMPLATES
             });
           },
-          children: tx("whiteboard.inserts.see_all")
+          children: renderI18nText("whiteboard.inserts.see_all")
         })
       })]
     }) : jsxs("button", {
@@ -59,7 +59,7 @@ function C() {
       onClick: () => {
         setSelectedCategory({
           id: e?.type === "team" ? e.entity.id : "",
-          title: t("whiteboard.inserts.org_name_templates", {
+          title: getI18nString("whiteboard.inserts.org_name_templates", {
             orgName: e.name
           }),
           resourceType: Rt.TEAM_TEMPLATES
@@ -67,12 +67,12 @@ function C() {
       },
       children: [jsx("div", {
         className: bV,
-        children: tx("whiteboard.inserts.org_name_templates", {
+        children: renderI18nText("whiteboard.inserts.org_name_templates", {
           orgName: e.name
         })
       }), jsx("div", {
         className: jy,
-        children: tx("whiteboard.inserts.see_all")
+        children: renderI18nText("whiteboard.inserts.see_all")
       })]
     }), jsx(_$$g, {
       templates: teamTemplates,
@@ -91,7 +91,7 @@ function $() {
         className: a0,
         children: jsx("div", {
           className: bV,
-          children: tx("whiteboard.inserts.recents")
+          children: renderI18nText("whiteboard.inserts.recents")
         })
       }), jsx(_$$g, {
         templates: t,

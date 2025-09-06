@@ -1,5 +1,5 @@
 import { getFeatureFlags } from "../905/601108";
-import { zl, md, eU } from "../figma_app/27355";
+import { atomStoreManager, useAtomWithSubscription, atom } from "../figma_app/27355";
 import { sessionStorageRef, localStorageRef } from "../905/657224";
 import { Ay } from "../905/612521";
 import { b as _$$b } from "../905/985254";
@@ -8,7 +8,7 @@ import { imP } from "../figma_app/43951";
 import { YP } from "../figma_app/193867";
 import { e as _$$e } from "../905/859735";
 import { GZ } from "../905/508367";
-import { eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { debugState } from "../905/407919";
 import { getInitialOptions } from "../figma_app/169182";
 let g = (() => {
@@ -20,7 +20,7 @@ let g = (() => {
   return Ay.location.pathname;
 })();
 export function $$f2() {
-  return !GZ() && !eD && !!((getInitialOptions().editing_file || getInitialOptions().link_password_input) && E(y) || E(b));
+  return !GZ() && !desktopAPIInstance && !!((getInitialOptions().editing_file || getInitialOptions().link_password_input) && E(y) || E(b));
 }
 function E(e) {
   return e(g) && e(Ay.location.pathname);
@@ -42,7 +42,7 @@ function b(e) {
 let T = "autoOpenInDesktopApp";
 let I = "openInDesktopAppMenuModal";
 export function $$S5() {
-  return getFeatureFlags().desktop_use_db_auto_open_pref ? zl.get(C) : localStorageRef ? localStorageRef[T] : void 0;
+  return getFeatureFlags().desktop_use_db_auto_open_pref ? atomStoreManager.get(C) : localStorageRef ? localStorageRef[T] : void 0;
 }
 export function $$v3(e) {
   localStorageRef && (localStorageRef[T] = e);
@@ -60,9 +60,9 @@ export function $$x1(e) {
   localStorageRef && (localStorageRef[I] = e);
 }
 export function $$N4() {
-  return md(C);
+  return useAtomWithSubscription(C);
 }
-let C = eU(e => {
+let C = atom(e => {
   let t = e(imP.Query({}));
   let r = getInitialOptions().user_data?.auto_open_in_desktop;
   "loaded" === t.status && t.data?.currentUser?.userPreferences?.status === "loaded" && (r = t.data.currentUser.userPreferences.data?.preferences.auto_open_in_desktop);

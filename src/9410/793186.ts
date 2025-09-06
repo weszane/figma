@@ -33,8 +33,8 @@ import { N as _$$N } from "../905/995635";
 import { J as _$$J } from "../905/614223";
 import { getFeatureFlags } from "../905/601108";
 import M from "classnames";
-import { R as _$$R } from "../905/103090";
-import { tx, t as _$$t } from "../905/303541";
+import { selectWithShallowEqual } from "../905/103090";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { E7, gl } from "../905/216495";
 import { lJ, kl } from "../905/275640";
 import { lg } from "../figma_app/164212";
@@ -55,7 +55,7 @@ import { xv, uQ } from "../figma_app/151869";
 import { s as _$$s } from "../905/780421";
 import { g as _$$g } from "../figma_app/240060";
 import { Ay } from "../figma_app/838407";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Ay as _$$Ay } from "../905/612521";
 import { fu } from "../figma_app/831799";
 import { L as _$$L } from "../905/657783";
@@ -307,7 +307,7 @@ function et() {
     width,
     initialText,
     shouldOpenDropdown
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     axis: e.mirror.appModel.onCanvasNameEditorInfo.axis,
     width: e.mirror.selectionProperties.width,
     initialText: e.mirror.appModel.onCanvasNameEditorInfo.initialText,
@@ -482,11 +482,11 @@ function er(e) {
 function en(e) {
   switch (e.gridTrackSizingType) {
     case sAE.FIXED:
-      return e.axis === _0v.X ? tx("fullscreen.on_canvas_editor.grid_track_size.fixed_width") : tx("fullscreen.on_canvas_editor.grid_track_size.fixed_height");
+      return e.axis === _0v.X ? renderI18nText("fullscreen.on_canvas_editor.grid_track_size.fixed_width") : renderI18nText("fullscreen.on_canvas_editor.grid_track_size.fixed_height");
     case sAE.HUG:
-      return tx("fullscreen.on_canvas_editor.grid_track_size.hug");
+      return renderI18nText("fullscreen.on_canvas_editor.grid_track_size.hug");
     case sAE.FLEX:
-      return e.axis === _0v.X ? tx("fullscreen.on_canvas_editor.grid_track_size.fill_column") : tx("fullscreen.on_canvas_editor.grid_track_size.fill_row");
+      return e.axis === _0v.X ? renderI18nText("fullscreen.on_canvas_editor.grid_track_size.fill_column") : renderI18nText("fullscreen.on_canvas_editor.grid_track_size.fill_row");
   }
 }
 function eh() {
@@ -751,10 +751,10 @@ function ek(e) {
       userEmail: t?.email
     },
     children: jsx(yX, {
-      confirmationTitle: _$$t("fullscreen.starter_team_edit_modal.open_this_link"),
+      confirmationTitle: getI18nString("fullscreen.starter_team_edit_modal.open_this_link"),
       confirmText: "Continue",
       onConfirm: () => {
-        sx("Starter File Edit Modal Confirm Clicked", {
+        trackEventAnalytics("Starter File Edit Modal Confirm Clicked", {
           fileKey: e.fileKey
         });
         _$$L.createStarterTeamFileRole({
@@ -767,14 +767,14 @@ function ek(e) {
       hideCancel: !1,
       hideClose: !0,
       onCancel: () => {
-        sx("Starter File Edit Modal Cancel Clicked", {
+        trackEventAnalytics("Starter File Edit Modal Cancel Clicked", {
           fileKey: e.fileKey
         });
         _$$Ay.redirect("/files/recents-and-sharing");
       },
       children: jsx("div", {
         className: jE,
-        children: tx("fullscreen.starter_team_edit_modal.when_you_open_this_link_your_email_may_be_visible", {
+        children: renderI18nText("fullscreen.starter_team_edit_modal.when_you_open_this_link_your_email_may_be_visible", {
           email: t?.email
         })
       })
@@ -789,10 +789,10 @@ let eA = Ju(function (e) {
     hide: lQ,
     children: [jsx("div", {
       className: DD,
-      children: tx("file_migration.updating.title")
+      children: renderI18nText("file_migration.updating.title")
     }), jsx("div", {
       className: jE,
-      children: tx("file_migration.updating.message")
+      children: renderI18nText("file_migration.updating.message")
     })]
   });
 }, "FileMigrationWarningModal");

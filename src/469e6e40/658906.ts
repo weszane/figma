@@ -1,29 +1,29 @@
 import { jsx } from "react/jsx-runtime";
 import { E } from "../905/53857";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Jv, qH, fx } from "../figma_app/934005";
 import { Dc } from "../469e6e40/616503";
 if (443 == require.j) {}
 export function $$o0(e, t) {
   if (Jv(e, t)) return {
     variant: "dangerOutline",
-    children: _$$t("plan_invoices.status_overdue")
+    children: getI18nString("plan_invoices.status_overdue")
   };
   switch (e.state) {
     case qH.PENDING:
       return {
         variant: "defaultOutline",
-        children: Dc(e) === fx.LOCKED ? _$$t("plan_invoices.status_locked") : _$$t("plan_invoices.status_pending")
+        children: Dc(e) === fx.LOCKED ? getI18nString("plan_invoices.status_locked") : getI18nString("plan_invoices.status_pending")
       };
     case qH.PAID:
       return {
         variant: "successOutline",
-        children: _$$t("plan_invoices.status_paid")
+        children: getI18nString("plan_invoices.status_paid")
       };
     case qH.OPEN:
       return {
         variant: "brandOutline",
-        children: _$$t("plan_invoices.status_open")
+        children: getI18nString("plan_invoices.status_open")
       };
     default:
       e.state;

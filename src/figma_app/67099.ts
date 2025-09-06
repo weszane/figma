@@ -1,4 +1,4 @@
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { il, dN } from "../vendor/291472";
 import { oQ } from "../905/772425";
 import { ph, KG, kh } from "../905/50769";
@@ -15,20 +15,20 @@ class d {
   }
   setEmojiTypeaheadQuery(e) {
     let t = e && e.length > 1 ? oQ(e) : null;
-    zl.set(ph, t);
+    atomStoreManager.set(ph, t);
   }
   clearEmojiTypeaheadQuery() {
-    zl.set(ph, null);
+    atomStoreManager.set(ph, null);
   }
   isShowingEmojiTypeaheadResults() {
-    let e = zl.get(ph);
+    let e = atomStoreManager.get(ph);
     return !!e?.emojis?.length;
   }
   setEmojiTypeaheadImageSet(e) {
-    zl.set(KG, e);
+    atomStoreManager.set(KG, e);
   }
   setEmojiTypeaheadTargetRect(e, t, r) {
-    zl.set(kh, {
+    atomStoreManager.set(kh, {
       x: e,
       y: t,
       height: r,

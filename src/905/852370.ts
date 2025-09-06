@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "../vendor/514228";
 import { Ez5 } from "../figma_app/763686";
 import { AD } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
-import { sx } from "../905/449184";
-import { sn } from "../905/542194";
+import { trackEventAnalytics } from "../905/449184";
+import { globalPerfTimer } from "../905/542194";
 import { g as _$$g } from "../905/880308";
 import { WJ } from "../figma_app/379850";
 import { hA } from "../figma_app/88239";
@@ -192,14 +192,14 @@ export function $$D0(e, t) {
       return;
     }
     let n = _$$g();
-    sn.start(`comment_creation_${n}`);
-    sx("New comment Creating UUID", {
+    globalPerfTimer.start(`comment_creation_${n}`);
+    trackEventAnalytics("New comment Creating UUID", {
       uuid: n
     });
     let r = i.anchorPosition;
     if (!r) return;
     let u = e.getCommentDestinationForCanvasPosition(r, t, !0);
-    u && (sx("New comment dispatching submission", {
+    u && (trackEventAnalytics("New comment dispatching submission", {
       uuid: n
     }), a(_$$_B({
       destination: u,

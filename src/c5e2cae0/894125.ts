@@ -1,10 +1,10 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { clearPaymentFlowData } from "../figma_app/169182";
 import { On } from "../9420/975542";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { _l } from "../figma_app/976345";
 import { sf } from "../905/929976";
 import { c as _$$c } from "../905/370443";
@@ -26,7 +26,7 @@ function j(e) {
     },
     onClick: e.onClick,
     dataTestId: "upgrade-breadcrumb-menu-cancel",
-    children: tx("pro_cart.breadcrumbs.cancel")
+    children: renderI18nText("pro_cart.breadcrumbs.cancel")
   });
 }
 var S = (e => (e[e.PLAN_COMPARISON = 0] = "PLAN_COMPARISON", e[e.CREATE_TEAM = 1] = "CREATE_TEAM", e[e.ADD_COLLABORATORS = 2] = "ADD_COLLABORATORS", e[e.ADJUST_EDITORS = 3] = "ADJUST_EDITORS", e[e.SET_EDITORS = 4] = "SET_EDITORS", e[e.PAYMENT_AND_ADDRESS = 5] = "PAYMENT_AND_ADDRESS", e[e.CONFIRM_PAY = 6] = "CONFIRM_PAY", e))(S || {});
@@ -58,37 +58,37 @@ function T(e, t, a, s) {
       case 0:
         return {
           step: tn.PLAN_COMPARISON,
-          text: _$$t("pro_cart.breadcrumbs.choose_plan")
+          text: getI18nString("pro_cart.breadcrumbs.choose_plan")
         };
       case 1:
         return {
           step: tn.CREATE_TEAM,
-          text: _$$t("pro_cart.breadcrumbs.create_team")
+          text: getI18nString("pro_cart.breadcrumbs.create_team")
         };
       case 2:
         return {
           step: tn.ADD_COLLABORATORS,
-          text: _$$t("pro_cart.breadcrumbs.add_team_members")
+          text: getI18nString("pro_cart.breadcrumbs.add_team_members")
         };
       case 3:
         return {
           step: tn.CHOOSE_PLAN,
-          text: _$$t("pro_cart.breadcrumbs.adjust_editors.seat_rename")
+          text: getI18nString("pro_cart.breadcrumbs.adjust_editors.seat_rename")
         };
       case 4:
         return {
           step: tn.CHOOSE_PLAN,
-          text: _$$t("pro_cart.breadcrumbs.set_editors.seat_rename")
+          text: getI18nString("pro_cart.breadcrumbs.set_editors.seat_rename")
         };
       case 5:
         return {
           step: tn.PAYMENT_AND_ADDRESS,
-          text: _$$t("pro_cart.breadcrumbs.payment_information")
+          text: getI18nString("pro_cart.breadcrumbs.payment_information")
         };
       case 6:
         return {
           step: tn.CONFIRM_PAY,
-          text: _$$t("pro_cart.breadcrumbs.review")
+          text: getI18nString("pro_cart.breadcrumbs.review")
         };
     }
   }(e));
@@ -144,7 +144,7 @@ export function $$b1(e) {
       canClick: n < b,
       lightText: !0,
       onClick: () => {
-        az.trackDefinedEvent("monetization_upgrades.checkout_breadcrumb_navigation", {
+        analyticsEventManager.trackDefinedEvent("monetization_upgrades.checkout_breadcrumb_navigation", {
           fromStep: paymentStep,
           toStep: r.step,
           tier: Ju.PRO,

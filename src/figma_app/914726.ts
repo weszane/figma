@@ -2,26 +2,26 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { useSelector } from "../vendor/514228";
 import s from "classnames";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { m0 } from "../figma_app/976749";
 import { We, xe } from "../figma_app/481857";
 import { VZ, x0 } from "../figma_app/727192";
 import { rh, _p, QG, NJ, zp, wy, KY, zG, fY, cK, kI } from "../figma_app/826998";
 var o = s;
 let _ = e => {
-  if ("CAP_HEIGHT" === e) return _$$t("inspect_panel.typography.cap_height");
+  if ("CAP_HEIGHT" === e) return getI18nString("inspect_panel.typography.cap_height");
 };
 let h = e => {
-  if (e) return _$$t("inspect_panel.typography.hanging_punctuation");
+  if (e) return getI18nString("inspect_panel.typography.hanging_punctuation");
 };
 let m = e => {
   switch (e) {
     case "RIGHT":
-      return _$$t("inspect_panel.typography.align_right");
+      return getI18nString("inspect_panel.typography.align_right");
     case "CENTER":
-      return _$$t("inspect_panel.typography.align_center");
+      return getI18nString("inspect_panel.typography.align_center");
     case "JUSTIFIED":
-      return _$$t("inspect_panel.typography.align_justified");
+      return getI18nString("inspect_panel.typography.align_justified");
     default:
       return;
   }
@@ -41,9 +41,9 @@ let g = e => {
 let f = e => {
   switch (e) {
     case "CENTER":
-      return _$$t("inspect_panel.typography.align_middle");
+      return getI18nString("inspect_panel.typography.align_middle");
     case "BOTTOM":
-      return _$$t("inspect_panel.typography.align_bottom");
+      return getI18nString("inspect_panel.typography.align_bottom");
     default:
       return;
   }
@@ -61,9 +61,9 @@ let E = e => {
 let y = e => {
   switch (e) {
     case "SUPER":
-      return _$$t("inspect_panel.typography.position_super");
+      return getI18nString("inspect_panel.typography.position_super");
     case "SUB":
-      return _$$t("inspect_panel.typography.position_sub");
+      return getI18nString("inspect_panel.typography.position_sub");
     default:
       return;
   }
@@ -81,9 +81,9 @@ let b = e => {
 let T = e => {
   switch (e) {
     case "LINING":
-      return _$$t("inspect_panel.typography.numeric.figure_lining");
+      return getI18nString("inspect_panel.typography.numeric.figure_lining");
     case "OLDSTYLE":
-      return _$$t("inspect_panel.typography.numeric.figure_oldstyle");
+      return getI18nString("inspect_panel.typography.numeric.figure_oldstyle");
     default:
       return;
   }
@@ -101,9 +101,9 @@ let I = e => {
 let S = e => {
   switch (e) {
     case "PROPORTIONAL":
-      return _$$t("inspect_panel.typography.numeric.spacing_proportional");
+      return getI18nString("inspect_panel.typography.numeric.spacing_proportional");
     case "TABULAR":
-      return _$$t("inspect_panel.typography.numeric.spacing_tabular");
+      return getI18nString("inspect_panel.typography.numeric.spacing_tabular");
     default:
       return;
   }
@@ -121,9 +121,9 @@ let v = e => {
 let A = e => {
   switch (e) {
     case "DIAGONAL":
-      return _$$t("inspect_panel.typography.numeric.fraction_diagonal");
+      return getI18nString("inspect_panel.typography.numeric.fraction_diagonal");
     case "STACKED":
-      return _$$t("inspect_panel.typography.numeric.fraction_stacked");
+      return getI18nString("inspect_panel.typography.numeric.fraction_stacked");
     default:
       return;
   }
@@ -139,7 +139,7 @@ let x = e => {
   }
 };
 let N = (e = [], t = []) => {
-  if (e.includes("ZERO") && !t.includes("ZERO")) return _$$t("inspect_panel.typography.numeric.zero_slashed");
+  if (e.includes("ZERO") && !t.includes("ZERO")) return getI18nString("inspect_panel.typography.numeric.zero_slashed");
 };
 let C = (e = [], t = []) => {
   if (e.includes("ZERO") && !t.includes("ZERO")) return "slashed-zero";
@@ -147,19 +147,19 @@ let C = (e = [], t = []) => {
 let w = (e, t) => {
   if (e && "ORIGINAL" !== e) switch (e) {
     case "UPPER":
-      return _$$t("inspect_panel.typography.type_settings.case_upper");
+      return getI18nString("inspect_panel.typography.type_settings.case_upper");
     case "LOWER":
-      return _$$t("inspect_panel.typography.type_settings.case_lower");
+      return getI18nString("inspect_panel.typography.type_settings.case_lower");
     case "TITLE":
-      return _$$t("inspect_panel.typography.type_settings.case_title");
+      return getI18nString("inspect_panel.typography.type_settings.case_title");
     case "SMALL_CAPS":
-      return _$$t("inspect_panel.typography.type_settings.case_small");
+      return getI18nString("inspect_panel.typography.type_settings.case_small");
     case "SMALL_CAPS_FORCED":
-      return _$$t("inspect_panel.typography.type_settings.case_small_forced");
+      return getI18nString("inspect_panel.typography.type_settings.case_small_forced");
     default:
       return;
   }
-  return "SMALL" === t ? _$$t("inspect_panel.typography.type_settings.case_small") : "ALL_SMALL" === t ? _$$t("inspect_panel.typography.type_settings.case_small_forced") : void 0;
+  return "SMALL" === t ? getI18nString("inspect_panel.typography.type_settings.case_small") : "ALL_SMALL" === t ? getI18nString("inspect_panel.typography.type_settings.case_small_forced") : void 0;
 };
 let O = (e, t) => {
   if ("SMALL" === t || "ALL_SMALL" === t) return "font-variant";
@@ -194,9 +194,9 @@ let $$R = (e, t) => {
 let L = e => {
   switch (e) {
     case "STRIKETHROUGH":
-      return _$$t("inspect_panel.typography.strikethrough");
+      return getI18nString("inspect_panel.typography.strikethrough");
     case "UNDERLINE":
-      return _$$t("inspect_panel.typography.underline");
+      return getI18nString("inspect_panel.typography.underline");
     default:
       return;
   }
@@ -215,11 +215,11 @@ let P = e => {
 let D = e => {
   switch (e) {
     case "SOLID":
-      return _$$t("inspect_panel.typography.solid");
+      return getI18nString("inspect_panel.typography.solid");
     case "DOTTED":
-      return _$$t("inspect_panel.typography.dotted");
+      return getI18nString("inspect_panel.typography.dotted");
     case "WAVY":
-      return _$$t("inspect_panel.typography.wavy");
+      return getI18nString("inspect_panel.typography.wavy");
     default:
       return;
   }
@@ -238,7 +238,7 @@ let k = e => {
   }
 };
 let M = e => {
-  if (e) return _$$t("variables.values.boolean.true");
+  if (e) return getI18nString("variables.values.boolean.true");
 };
 function F(e, t, r) {
   return n => n?.getStyledTextSegments([e], t, r)?.[0]?.[e] ?? void 0;
@@ -256,7 +256,7 @@ function $$U({
   let s = rh(e, i);
   let o = rh(e, a);
   return jsx(_p, {
-    name: _$$t("inspect_panel.typography.type_settings.case"),
+    name: getI18nString("inspect_panel.typography.type_settings.case"),
     copyName: O(s, o),
     value: w(s, o),
     copyValue: $$R(s, o)
@@ -270,7 +270,7 @@ function B({
   let i = rh(e, F("toggledOnOTFeatures", t, r));
   let a = rh(e, F("toggledOffOTFeatures", t, r));
   return jsx(_p, {
-    name: _$$t("inspect_panel.typography.numeric.zero"),
+    name: getI18nString("inspect_panel.typography.numeric.zero"),
     copyName: "font-variant-numeric-zero",
     value: N(i, a),
     copyValue: C(i, a)
@@ -284,10 +284,10 @@ function G({
   let i = rh(e, F("textDecoration", t, r));
   return i && "NONE" !== i ? jsxs(Fragment, {
     children: ["UNDERLINE" === i && jsx(QG, {
-      label: _$$t("inspect_panel.typography.text_decoration")
+      label: getI18nString("inspect_panel.typography.text_decoration")
     }), jsx(NJ, {
       subPropertyRow: "UNDERLINE" === i,
-      name: "UNDERLINE" === i ? _$$t("inspect_panel.typography.decoration") : _$$t("inspect_panel.typography.text_decoration"),
+      name: "UNDERLINE" === i ? getI18nString("inspect_panel.typography.decoration") : getI18nString("inspect_panel.typography.text_decoration"),
       copyName: "text-decoration",
       nodeId: e,
       scenePropertyAccessor: F("textDecoration", t, r),
@@ -296,7 +296,7 @@ function G({
     }), "UNDERLINE" === i && jsxs(Fragment, {
       children: [jsx(NJ, {
         subPropertyRow: !0,
-        name: _$$t("inspect_panel.typography_text_decoration_style"),
+        name: getI18nString("inspect_panel.typography_text_decoration_style"),
         copyName: "text-decoration-style",
         nodeId: e,
         scenePropertyAccessor: F("textDecorationStyle", t, r),
@@ -304,21 +304,21 @@ function G({
         copyValueFormatter: k
       }), jsx(zp, {
         subPropertyRow: !0,
-        name: _$$t("inspect_panel.typography.text_decoration_offset"),
+        name: getI18nString("inspect_panel.typography.text_decoration_offset"),
         copyName: "text-decoration-offset",
         nodeId: e,
         scenePropertyAccessor: F("textDecorationOffset", t, r),
         isTextProperty: !0
       }), jsx(zp, {
         subPropertyRow: !0,
-        name: _$$t("inspect_panel.typography.text_decoration_thickness"),
+        name: getI18nString("inspect_panel.typography.text_decoration_thickness"),
         copyName: "text-decoration-thickness",
         nodeId: e,
         scenePropertyAccessor: F("textDecorationThickness", t, r),
         isTextProperty: !0
       }), jsx(wy, {
         subPropertyRow: !0,
-        name: _$$t("inspect_panel.typography.text_decoration_skip_ink"),
+        name: getI18nString("inspect_panel.typography.text_decoration_skip_ink"),
         copyName: "text-decoration-skip-ink",
         nodeId: e,
         scenePropertyAccessor: F("textDecorationSkipInk", t, r),
@@ -338,7 +338,7 @@ export function $$V1({
 }) {
   return jsxs(Fragment, {
     children: [jsx(KY, {
-      name: _$$t("inspect_panel.typography.font"),
+      name: getI18nString("inspect_panel.typography.font"),
       copyName: "font-family",
       nodeId: e,
       scenePropertyAccessor: e => e?.getStyledTextSegments(["fontName"], t, r)?.[0]?.fontName?.family,
@@ -347,7 +347,7 @@ export function $$V1({
       disableSuggestions: a,
       disableDetailModalEntry: s
     }), jsx(zG, {
-      name: _$$t("inspect_panel.typography.weight"),
+      name: getI18nString("inspect_panel.typography.weight"),
       copyName: "font-weight",
       nodeId: e,
       scenePropertyAccessor: F("fontWeight", t, r),
@@ -356,12 +356,12 @@ export function $$V1({
       disableSuggestions: a,
       disableDetailModalEntry: s
     }), jsx(NJ, {
-      name: _$$t("inspect_panel.typography.style"),
+      name: getI18nString("inspect_panel.typography.style"),
       copyName: "font-style",
       nodeId: e,
       scenePropertyAccessor: F("fontStyle", t, r)
     }), jsx(fY, {
-      name: _$$t("inspect_panel.typography.size"),
+      name: getI18nString("inspect_panel.typography.size"),
       copyName: "font-size",
       nodeId: e,
       scenePropertyAccessor: F("fontSize", t, r),
@@ -371,12 +371,12 @@ export function $$V1({
       disableSuggestions: a,
       disableDetailModalEntry: s
     }), jsx(NJ, {
-      name: _$$t("inspect_panel.typography.leading_trim"),
+      name: getI18nString("inspect_panel.typography.leading_trim"),
       copyName: "leading-trim",
       scenePropertyAccessor: j("leadingTrim"),
       valueFormatter: _
     }), jsx(cK, {
-      name: _$$t("inspect_panel.typography.line_height"),
+      name: getI18nString("inspect_panel.typography.line_height"),
       copyName: "line-height",
       nodeId: e,
       scenePropertyAccessor: F("lineHeight", t, r),
@@ -386,7 +386,7 @@ export function $$V1({
       disableSuggestions: a,
       disableDetailModalEntry: s
     }), jsx(fY, {
-      name: _$$t("inspect_panel.typography.paragraph_spacing"),
+      name: getI18nString("inspect_panel.typography.paragraph_spacing"),
       nodeId: e,
       scenePropertyAccessor: F("paragraphSpacing", t, r),
       variableField: "PARAGRAPH_SPACING",
@@ -395,7 +395,7 @@ export function $$V1({
       disableSuggestions: a,
       disableDetailModalEntry: s
     }), jsx(fY, {
-      name: _$$t("inspect_panel.typography.paragraph_indent"),
+      name: getI18nString("inspect_panel.typography.paragraph_indent"),
       copyName: "text-indent",
       nodeId: e,
       scenePropertyAccessor: F("paragraphIndent", t, r),
@@ -405,12 +405,12 @@ export function $$V1({
       disableSuggestions: a,
       disableDetailModalEntry: s
     }), jsx(kI, {
-      name: _$$t("inspect_panel.typography.list_spacing"),
+      name: getI18nString("inspect_panel.typography.list_spacing"),
       nodeId: e,
       scenePropertyAccessor: F("listSpacing", t, r),
       isTextProperty: !0
     }), jsx(cK, {
-      name: _$$t("inspect_panel.typography.letter"),
+      name: getI18nString("inspect_panel.typography.letter"),
       copyName: "letter-spacing",
       nodeId: e,
       scenePropertyAccessor: F("letterSpacing", t, r),
@@ -420,13 +420,13 @@ export function $$V1({
       disableSuggestions: a,
       disableDetailModalEntry: s
     }), jsx(NJ, {
-      name: _$$t("inspect_panel.typography.align"),
+      name: getI18nString("inspect_panel.typography.align"),
       copyName: "text-align",
       scenePropertyAccessor: j("textAlignHorizontal"),
       valueFormatter: m,
       copyValueFormatter: g
     }), jsx(NJ, {
-      name: _$$t("inspect_panel.typography.align_vertical"),
+      name: getI18nString("inspect_panel.typography.align_vertical"),
       copyName: "vertical-align",
       scenePropertyAccessor: j("textAlignVertical"),
       valueFormatter: f,
@@ -436,28 +436,28 @@ export function $$V1({
       start: t,
       end: r
     }), jsx(NJ, {
-      name: _$$t("inspect_panel.typography.position"),
+      name: getI18nString("inspect_panel.typography.position"),
       copyName: "position",
       nodeId: e,
       scenePropertyAccessor: F("fontVariantPosition", t, r),
       valueFormatter: y,
       copyValueFormatter: b
     }), jsx(NJ, {
-      name: _$$t("inspect_panel.typography.numeric.figure"),
+      name: getI18nString("inspect_panel.typography.numeric.figure"),
       copyName: "font-variant-numeric-figure",
       nodeId: e,
       scenePropertyAccessor: F("fontVariantNumericFigure", t, r),
       valueFormatter: T,
       copyValueFormatter: I
     }), jsx(NJ, {
-      name: _$$t("inspect_panel.typography.numeric.spacing"),
+      name: getI18nString("inspect_panel.typography.numeric.spacing"),
       copyName: "font-variant-numeric-spacing",
       nodeId: e,
       scenePropertyAccessor: F("fontVariantNumericSpacing", t, r),
       valueFormatter: S,
       copyValueFormatter: v
     }), jsx(NJ, {
-      name: _$$t("inspect_panel.typography.numeric.fraction"),
+      name: getI18nString("inspect_panel.typography.numeric.fraction"),
       copyName: "font-variant-numeric-fraction",
       nodeId: e,
       scenePropertyAccessor: F("fontVariantNumericFraction", t, r),
@@ -472,19 +472,19 @@ export function $$V1({
       start: t,
       end: r
     }), jsx(wy, {
-      name: _$$t("inspect_panel.typography.punctuation"),
+      name: getI18nString("inspect_panel.typography.punctuation"),
       scenePropertyAccessor: j("hangingPunctuation"),
       valueFormatter: h
     }), jsx(wy, {
-      name: _$$t("inspect_panel.typography.hanging_list"),
+      name: getI18nString("inspect_panel.typography.hanging_list"),
       scenePropertyAccessor: j("hangingList"),
       valueFormatter: h
     }), jsx(kI, {
-      name: _$$t("inspect_panel.typography.optical_size"),
+      name: getI18nString("inspect_panel.typography.optical_size"),
       scenePropertyAccessor: F("opticalSize", t, r),
       isTextProperty: !0
     }), jsx(NJ, {
-      name: _$$t("inspect_panel.typography.variation"),
+      name: getI18nString("inspect_panel.typography.variation"),
       scenePropertyAccessor: F("fontVariationsDescription", t, r)
     })]
   });
@@ -510,7 +510,7 @@ function H(e, {
   } = e;
   let b = 0 === e.index;
   let T = e.index === t - 1;
-  let I = substring?.trim() || _$$t("inspect_panel.typography.span_whitespace");
+  let I = substring?.trim() || getI18nString("inspect_panel.typography.span_whitespace");
   return jsx(VZ, {
     copyAllValue: copyAll,
     disableCopyAll: !hasCopyAllContent,
@@ -520,15 +520,15 @@ function H(e, {
     recordingKey: b ? "typography" : `typography${e.index}`,
     snugTitle: h,
     thinTitle: !!h || !b,
-    title: b ? _$$t("inspect_panel.typography.title") : substring ? _$$t("inspect_panel.typography.span_contents", {
+    title: b ? getI18nString("inspect_panel.typography.title") : substring ? getI18nString("inspect_panel.typography.span_contents", {
       contents: I
-    }) : _$$t("inspect_panel.typography.span"),
+    }) : getI18nString("inspect_panel.typography.span"),
     children: jsxs(xe.Provider, {
       value: {
         setCopyValue
       },
       children: [b && r, jsx(_p, {
-        name: _$$t("inspect_panel.typography.name"),
+        name: getI18nString("inspect_panel.typography.name"),
         value: isStyleSoftDeleted ? void 0 : styleName,
         disableDetailModalEntry: !0
       }), jsx($$V1, {
@@ -570,7 +570,7 @@ export function $$z0({
         numFonts: d.fonts.length,
         extraHeader: d.incompleteResults ? jsx("div", {
           className: "typography_inspection_panel--warningRow---NOm6",
-          children: tx("inspect_panel.typography.too_many_selected", {
+          children: renderI18nText("inspect_panel.typography.too_many_selected", {
             numSelected: s
           })
         }) : null,

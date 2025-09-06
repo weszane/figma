@@ -1,16 +1,16 @@
 import { useState, useMemo, useCallback, useEffect } from "react";
 import { getFeatureFlags } from "../905/601108";
-import { eU, Xr, md } from "../figma_app/27355";
+import { atom, Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { Wh } from "../figma_app/615482";
 import { e as _$$e } from "../figma_app/601186";
 import { j } from "../figma_app/64343";
-let d = Wh(() => eU(new Map()));
+let d = Wh(() => atom(new Map()));
 export function $$c0(e) {
   let [t, r] = useState(null);
   let s = j();
   let c = useMemo(() => new Set(s), [s]);
   let u = Xr(d);
-  let p = md(d);
+  let p = useAtomWithSubscription(d);
   let _ = !e.isLoading;
   let h = _ && !!e.lastSuccessfulPublishedResponsiveSetGuids;
   let m = _$$e();

@@ -15,7 +15,7 @@ import { y as _$$y } from "../905/624404";
 import { l as _$$l2 } from "../905/489485";
 import { x } from "../905/402740";
 import { A as _$$A2 } from "../905/891805";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { gl } from "../905/216495";
 var $$I4 = (e => (e.ALL = "All", e.TOP = "Top", e.BOTTOM = "Bottom", e.LEFT = "Left", e.RIGHT = "Right", e.CUSTOM = "Custom", e.MIXED = "Mixed", e))($$I4 || {});
 var $$S3 = (e => (e.TOP = "Top", e.BOTTOM = "Bottom", e.LEFT = "Left", e.RIGHT = "Right", e))($$S3 || {});
@@ -39,19 +39,19 @@ let v = {
 export function $$A1(e) {
   switch (e) {
     case "Mixed":
-      return t("fullscreen.properties_panel.borders.mixed");
+      return getI18nString("fullscreen.properties_panel.borders.mixed");
     case "All":
-      return t("fullscreen.properties_panel.borders.all");
+      return getI18nString("fullscreen.properties_panel.borders.all");
     case "Top":
-      return t("fullscreen.properties_panel.borders.top");
+      return getI18nString("fullscreen.properties_panel.borders.top");
     case "Bottom":
-      return t("fullscreen.properties_panel.borders.bottom");
+      return getI18nString("fullscreen.properties_panel.borders.bottom");
     case "Left":
-      return t("fullscreen.properties_panel.borders.left");
+      return getI18nString("fullscreen.properties_panel.borders.left");
     case "Right":
-      return t("fullscreen.properties_panel.borders.right");
+      return getI18nString("fullscreen.properties_panel.borders.right");
     case "Custom":
-      return t("fullscreen.properties_panel.borders.custom");
+      return getI18nString("fullscreen.properties_panel.borders.custom");
     default:
       return "";
   }

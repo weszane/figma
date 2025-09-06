@@ -6,7 +6,7 @@ import { k as _$$k } from "../905/443820";
 import { getFeatureFlags } from "../905/601108";
 import d from "classnames";
 import { ce } from "../figma_app/347146";
-import { eD as _$$eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { wY } from "../figma_app/708845";
 import { R as _$$R } from "../7021/67076";
 import { Rs } from "../figma_app/288654";
@@ -23,10 +23,10 @@ import { FOrganizationLevelType, FUserRoleType } from "../figma_app/191312";
 import { EEx, HpJ, sMZ } from "../figma_app/43951";
 import { px, S2, Um } from "../figma_app/465071";
 import { J7, G_, SN } from "../figma_app/650409";
-import { Iv, F9 } from "../905/548208";
+import { DashboardSections, MemberSections } from "../905/548208";
 import { e0 as _$$e2 } from "../905/696396";
 import { Wi } from "../figma_app/162641";
-import { tx as _$$tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { Y as _$$Y } from "../905/830372";
 import { OL as _$$OL } from "../figma_app/421473";
 import { ck } from "../905/952832";
@@ -50,7 +50,7 @@ import { $z, Me } from "../figma_app/617427";
 import { hY } from "../figma_app/80683";
 import { c as _$$c } from "../905/370443";
 import { lQ } from "../905/934246";
-import { md, fp } from "../figma_app/27355";
+import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { oA, tT } from "../905/663269";
 import { R as _$$R2 } from "../905/165069";
 import { useSprigWithSampling } from "../905/99656";
@@ -87,7 +87,7 @@ import { Zx } from "../figma_app/217457";
 import { q as _$$q } from "../4452/876838";
 import { QL, EM } from "../905/609392";
 import { TA } from "../905/372672";
-import { D as _$$D } from "../905/384551";
+import { FRequestsStr } from "../905/384551";
 import { O as _$$O } from "../905/833838";
 import { Sm } from "../figma_app/482728";
 import { w as _$$w2 } from "../905/281010";
@@ -141,9 +141,9 @@ function U({
       size: 32
     }), jsx("div", {
       className: _$$s.textHeadingLarge.$,
-      children: t?.name ? _$$tx("admin_dashboard.title_with_plan", {
+      children: t?.name ? renderI18nText("admin_dashboard.title_with_plan", {
         planName: t.name
-      }) : _$$tx("admin_dashboard.title_without_plan")
+      }) : renderI18nText("admin_dashboard.title_without_plan")
     })]
   });
 }
@@ -158,7 +158,7 @@ function J(e) {
         initialHighlightedInvoiceId: e.planInvoiceId
       }));
     },
-    children: _$$t("admin_dashboard.billing_notice.view_invoice_label")
+    children: getI18nString("admin_dashboard.billing_notice.view_invoice_label")
   });
 }
 function K() {
@@ -171,7 +171,7 @@ function K() {
         orgAdminSettingsViewSecondaryTab: G_.OVERVIEW
       }));
     },
-    children: _$$t("admin_dashboard.billing_notice.view_billing_label")
+    children: getI18nString("admin_dashboard.billing_notice.view_billing_label")
   });
 }
 function X(e) {
@@ -181,65 +181,65 @@ function X(e) {
   let s = null;
   switch (e.dashboardBillingNotice.id) {
     case fq.ORG_OPEN_INVOICE:
-      t = _$$t("admin_dashboard.billing_notice.org_open_invoice_title", {
+      t = getI18nString("admin_dashboard.billing_notice.org_open_invoice_title", {
         pastDueAt: e.dashboardBillingNotice.data.pastDueAt
       });
-      a = _$$t("admin_dashboard.billing_notice.make_payment_soon_subtitle");
+      a = getI18nString("admin_dashboard.billing_notice.make_payment_soon_subtitle");
       s = jsx(J, {
         planInvoiceId: e.dashboardBillingNotice.data.planInvoiceId
       });
       break;
     case fq.ORG_PAST_DUE_INVOICE:
-      t = _$$t("admin_dashboard.billing_notice.org_past_due_invoice_title", {
+      t = getI18nString("admin_dashboard.billing_notice.org_past_due_invoice_title", {
         pastDueAt: e.dashboardBillingNotice.data.pastDueAt
       });
-      a = _$$t("admin_dashboard.billing_notice.make_payment_soon_subtitle");
+      a = getI18nString("admin_dashboard.billing_notice.make_payment_soon_subtitle");
       s = jsx(J, {
         planInvoiceId: e.dashboardBillingNotice.data.planInvoiceId
       });
       break;
     case fq.ORG_UPCOMING_TRUE_UP_LOCKED:
-      t = _$$t("billing_status.locked", {
+      t = getI18nString("billing_status.locked", {
         dueDate: e.dashboardBillingNotice.data.issuedAt
       });
       s = jsx(K, {});
       break;
     case fq.ORG_UPCOMING_TRUE_UP_REVIEW:
-      t = _$$t("billing_status.review.org_admin", {
+      t = getI18nString("billing_status.review.org_admin", {
         dueDate: e.dashboardBillingNotice.data.issuedAt
       });
       s = jsx(K, {});
       break;
     case fq.ORG_UPCOMING_RENEWAL_NON_AUTOMATIC:
-      t = _$$t("billing_status.review.renewal", {
+      t = getI18nString("billing_status.review.renewal", {
         renewalDate: e.dashboardBillingNotice.data.periodStartAt
       });
-      a = _$$t("admin_dashboard.billing_notice.contact_account_manager_subtitle");
+      a = getI18nString("admin_dashboard.billing_notice.contact_account_manager_subtitle");
       s = jsx(K, {});
       break;
     case fq.ORG_UPCOMING_ADDITIVE_INVOICE:
-      t = _$$t("admin_dashboard.billing_notice.quarterly_invoice_title", {
+      t = getI18nString("admin_dashboard.billing_notice.quarterly_invoice_title", {
         issuedAt: e.dashboardBillingNotice.data.issuedAt
       });
       s = jsx(K, {});
       break;
     case fq.ORG_UPCOMING_INVOICE:
-      t = _$$t("billing_status.default", {
+      t = getI18nString("billing_status.default", {
         dueDate: e.dashboardBillingNotice.data.issuedAt
       });
       s = jsx(K, {});
       break;
     case fq.BILLING_GROUP_UPCOMING_TRUE_UP:
-      t = _$$t("license_group_admin.billing_dashboard.billing_banner.review_and_confirm");
+      t = getI18nString("license_group_admin.billing_dashboard.billing_banner.review_and_confirm");
       a = jsx(_$$Q2, {
         billingGroupsToBeReviewed: e.dashboardBillingNotice.data.groupsToReview
       });
       break;
     case fq.BILLING_GROUP_UPCOMING_RENEWAL:
-      t = _$$t("license_group_admin.billing_dashboard.billing_banner.upcoming_renewal.title", {
+      t = getI18nString("license_group_admin.billing_dashboard.billing_banner.upcoming_renewal.title", {
         renewalDate: e.dashboardBillingNotice.data.periodStartAt
       });
-      a = _$$t("license_group_admin.billing_dashboard.billing_banner.upcoming_renewal.subtitle");
+      a = getI18nString("license_group_admin.billing_dashboard.billing_banner.upcoming_renewal.subtitle");
       break;
     default:
       e.dashboardBillingNotice;
@@ -368,7 +368,7 @@ function eu({
   }
   let p = [{
     seatIcon: jsx(_$$U, {}),
-    seatLabel: _$$t("admin_dashboard.seat_counts_overview_card.assigned_seats"),
+    seatLabel: getI18nString("admin_dashboard.seat_counts_overview_card.assigned_seats"),
     seatCount: r,
     dataTestId: "assigned-seats-count"
   }, {
@@ -377,12 +377,12 @@ function eu({
         "--color-icon-tertiary": "var(--color-icon)"
       }
     }),
-    seatLabel: _$$t("admin_dashboard.seat_counts_overview_card.available_seats"),
-    seatCount: a ? _$$t("general.unlimited") : l,
+    seatLabel: getI18nString("admin_dashboard.seat_counts_overview_card.available_seats"),
+    seatCount: a ? getI18nString("general.unlimited") : l,
     dataTestId: "available-seats-count"
   }, {
     seatIcon: jsx(_$$_, {}),
-    seatLabel: _$$t("admin_dashboard.seat_counts_overview_card.view_seats"),
+    seatLabel: getI18nString("admin_dashboard.seat_counts_overview_card.view_seats"),
     seatCount: o,
     dataTestId: "view-seats-count"
   }];
@@ -401,7 +401,7 @@ function eu({
           className: _$$s.textHeadingSmall.$,
           children: jsx(eo, {
             label: jsx("div", {
-              children: _$$t("admin_dashboard.seat_counts_overview_card.total_seats")
+              children: getI18nString("admin_dashboard.seat_counts_overview_card.total_seats")
             }),
             count: !u && jsx(Ex, {
               dataTestId: "total-seats-count-badge-value",
@@ -421,14 +421,14 @@ function eu({
               trackingDescriptor: _$$c.ADD_SEATS
             },
             trackingOptions: g,
-            children: _$$t("admin_dashboard.seat_counts_overview_card.add_seats")
+            children: getI18nString("admin_dashboard.seat_counts_overview_card.add_seats")
           }), jsx($z, {
             onClick: i,
             trackingProperties: {
               trackingDescriptor: _$$c.MANAGE_SEATS
             },
             trackingOptions: g,
-            children: _$$t("admin_dashboard.seat_counts_overview_card.manage")
+            children: getI18nString("admin_dashboard.seat_counts_overview_card.manage")
           })]
         })]
       }), jsx("div", {
@@ -456,7 +456,7 @@ function eO({
   let a = px();
   let s = Um(a).unwrapOr(!1);
   let i = r1("seen_admin_dashboard_onboarding");
-  let r = md(i);
+  let r = useAtomWithSubscription(i);
   let {
     show,
     isShowing,
@@ -472,22 +472,22 @@ function eO({
   });
   return jsx(rq, {
     clickOutsideToHide: !0,
-    description: s ? _$$tx("admin_dashboard.onboarding_overlay.description", {
+    description: s ? renderI18nText("admin_dashboard.onboarding_overlay.description", {
       planName: oA(t.data?.name)
-    }) : _$$tx("license_group_admin.onboarding.admin_dashboard_onboarding_overlay_description", {
+    }) : renderI18nText("license_group_admin.onboarding.admin_dashboard_onboarding_overlay_description", {
       numOfBillingGroupsManaged: e
     }),
     emphasized: !0,
     isShowing,
     onClose: complete,
     primaryCta: {
-      label: _$$tx("general.got_it"),
+      label: renderI18nText("general.got_it"),
       onClick: complete,
       type: "button",
       ctaTrackingDescriptor: _$$c.GOT_IT
     },
     targetKey: LX,
-    title: _$$tx("admin_dashboard.onboarding_overlay.title"),
+    title: renderI18nText("admin_dashboard.onboarding_overlay.title"),
     trackingContextName: "",
     userFlagOnShow: "seen_admin_dashboard_onboarding"
   });
@@ -542,14 +542,14 @@ function ts({
       "data-testid": "seat-requests-mini-view-row-seat-request",
       children: [jsx("div", {
         className: _$$s.font11.lh16.$,
-        children: _$$tx("admin_dashboard.requests.requested_a_seat", {
+        children: renderI18nText("admin_dashboard.requests.requested_a_seat", {
           name: jsx("span", {
             className: _$$s.fontBold.$,
             children: e.name ?? ""
           }),
           boldedSeat: jsx("span", {
             className: _$$s.fontBold.$,
-            children: _$$tx("admin_dashboard.requests.product_seat", {
+            children: renderI18nText("admin_dashboard.requests.product_seat", {
               billableProductKey: tI(e.billableProductKey)
             })
           })
@@ -567,11 +567,11 @@ function ts({
           className: "seat_requests_table_mini_view--guestBadge--sjqEB",
           children: jsxs(_$$E2, {
             variant: "defaultOutline",
-            children: [" ", _$$tx("admin_dashboard.requests.badge.guest")]
+            children: [" ", renderI18nText("admin_dashboard.requests.badge.guest")]
           })
         }), jsx(ta, {}), e.lastNudgedAt ? jsx("div", {
           className: "seat_requests_table_mini_view--reminder--SVXyk",
-          children: _$$tx("admin_dashboard.requests.reminder_sent", {
+          children: renderI18nText("admin_dashboard.requests.reminder_sent", {
             time: jsx(h1, {
               date: e.updatedAt
             })
@@ -593,8 +593,8 @@ function ti({
   isELA: r,
   isProrationBillingEnabled: l
 }) {
-  let o = md(aN);
-  let d = md(V4);
+  let o = useAtomWithSubscription(aN);
+  let d = useAtomWithSubscription(V4);
   let c = _$$u();
   return jsxs("div", {
     className: _$$s.flex.gap8.$,
@@ -613,11 +613,11 @@ function ti({
       trackingOptions: c,
       disabled: !!o || d.has(e),
       children: jsx(Zu, {
-        text: _$$t("admin_dashboard.requests.approve"),
+        text: getI18nString("admin_dashboard.requests.approve"),
         showSpinner: "approving" === o && d.has(e)
       })
     }), jsx(Me, {
-      "aria-label": _$$t("admin_dashboard.requests.details.title"),
+      "aria-label": getI18nString("admin_dashboard.requests.details.title"),
       onClick: a,
       htmlAttributes: {
         "data-testid": "seat-requests-mini-view-row-more-details"
@@ -685,7 +685,7 @@ let td = (e, t, a) => {
 let tc = e => {
   e(sf({
     view: "billingGroupDashboard",
-    selectedTab: _$$D.ALL_REQUESTS
+    selectedTab: FRequestsStr.ALL_REQUESTS
   }));
 };
 function t_({
@@ -710,7 +710,7 @@ function t_({
         trackingDescriptor: t && s ? _$$c.ALL_REQUESTS : _$$c.VIEW_ALL
       },
       trackingOptions: l,
-      children: t && s ? _$$tx("admin_dashboard.requests.all_requests") : _$$tx("admin_dashboard.requests.view_all")
+      children: t && s ? renderI18nText("admin_dashboard.requests.all_requests") : renderI18nText("admin_dashboard.requests.view_all")
     }), jsx(eO, {
       numOfBillingGroupsManaged: a
     })]
@@ -739,7 +739,7 @@ function tu({
     Sprig
   } = useSprigWithSampling();
   let [f, j] = useState(!1);
-  let [y, E] = fp(aN);
+  let [y, E] = useAtomValueAndSetter(aN);
   let S = useSelector(({
     selectedView: e
   }) => e);
@@ -751,8 +751,8 @@ function tu({
     dispatchProcessingError,
     dispatchGenericError
   } = _$$s2();
-  let [M, P] = fp(_$$Y2);
-  let [U, F] = fp(V4);
+  let [M, P] = useAtomValueAndSetter(_$$Y2);
+  let [U, F] = useAtomValueAndSetter(V4);
   let [q, $] = useState(new Set());
   let [B, z] = useState(new Set());
   let [V, W] = useState(null);
@@ -1108,7 +1108,7 @@ function tu({
   }) => {
     E(a ? "approving_all" : e ? "approving" : "declining");
     a && e5 && p(_$$F.enqueue({
-      message: _$$t("admin_dashboard.requests.selected_count_approving", {
+      message: getI18nString("admin_dashboard.requests.selected_count_approving", {
         numSelected: e5
       }),
       type: tl,
@@ -1218,7 +1218,7 @@ function tu({
             children: [jsx("div", {
               className: _$$s.fontMedium.font13.colorText.$,
               children: jsx(eo, {
-                label: Z.length > 0 ? _$$tx("admin_dashboard.managed_org_requests.title") : _$$tx("admin_dashboard.requests.seat_title"),
+                label: Z.length > 0 ? renderI18nText("admin_dashboard.managed_org_requests.title") : renderI18nText("admin_dashboard.requests.seat_title"),
                 count: jsx(_$$E, {
                   isOrgAdmin: !!t,
                   managedRequests: !0,
@@ -1274,7 +1274,7 @@ function tu({
                 trackingOptions: tw,
                 disabled: !!y,
                 children: jsx(Zu, {
-                  text: _$$t("admin_dashboard.requests.approve_all"),
+                  text: getI18nString("admin_dashboard.requests.approve_all"),
                   showSpinner: "approving_all" === y
                 })
               })]
@@ -1306,7 +1306,7 @@ function tu({
               dataTestId: "approval-settings-banner",
               color: _$$S.PLAIN,
               padding: 8,
-              text: et ? _$$t("admin_dashboard.mini_view.approval_settings_banner.message_org") : _$$t("admin_dashboard.mini_view.approval_settings_banner.message_team")
+              text: et ? getI18nString("admin_dashboard.mini_view.approval_settings_banner.message_org") : getI18nString("admin_dashboard.mini_view.approval_settings_banner.message_team")
             })
           })]
         }), jsx("div", {
@@ -1321,27 +1321,27 @@ function tu({
               className: "seat_requests_table_mini_view--emptyView--hliFK",
               children: [jsx("div", {
                 className: _$$s.fontMedium.$,
-                children: tj ? _$$tx("admin_dashboard.requests.no_requests_for_you_right_now") : _$$tx("admin_dashboard.requests.no_requests_to_approve")
+                children: tj ? renderI18nText("admin_dashboard.requests.no_requests_for_you_right_now") : renderI18nText("admin_dashboard.requests.no_requests_to_approve")
               }), jsx("div", {
                 style: sx.add({
                   maxWidth: "64%"
                 }).$,
-                children: tj ? eR === Sm.ALL_USERS ? _$$t("admin_dashboard.requests.empty_state.curf_all_users") : eR === Sm.MEMBERS ? ty ? _$$t("admin_dashboard.requests.empty_state.curf_members.billing_group_admin") : _$$t("admin_dashboard.requests.empty_state.curf_members.admin") : void 0 : eA && Z.length > 0 && eC && eC?.length > 0 ? eS.data.org && eS.data.org.name ? _$$tx("admin_dashboard.requests.your_org_name_has_seat_request_that_need_review", {
+                children: tj ? eR === Sm.ALL_USERS ? getI18nString("admin_dashboard.requests.empty_state.curf_all_users") : eR === Sm.MEMBERS ? ty ? getI18nString("admin_dashboard.requests.empty_state.curf_members.billing_group_admin") : getI18nString("admin_dashboard.requests.empty_state.curf_members.admin") : void 0 : eA && Z.length > 0 && eC && eC?.length > 0 ? eS.data.org && eS.data.org.name ? renderI18nText("admin_dashboard.requests.your_org_name_has_seat_request_that_need_review", {
                   orgName: eS.data.org.name,
                   numOrgRequests: eC?.length,
                   reviewRequestLink: jsx(CY, {
                     trusted: !0,
                     onClick: tv,
-                    children: _$$tx("admin_dashboard.requests.review_requests")
+                    children: renderI18nText("admin_dashboard.requests.review_requests")
                   })
-                }) : _$$tx("admin_dashboard.requests.your_organization_has_seat_request_that_need_review", {
+                }) : renderI18nText("admin_dashboard.requests.your_organization_has_seat_request_that_need_review", {
                   numOrgRequests: eC?.length,
                   reviewRequestLink: jsx(CY, {
                     trusted: !0,
                     onClick: tv,
-                    children: _$$tx("admin_dashboard.requests.review_requests")
+                    children: renderI18nText("admin_dashboard.requests.review_requests")
                   })
-                }) : _$$tx("admin_dashboard.requests.when_a_seat_request_needs_to_be_reviewed")
+                }) : renderI18nText("admin_dashboard.requests.when_a_seat_request_needs_to_be_reviewed")
               })]
             }) : e9.map((t, a) => jsx(tr, {
               plan: e,
@@ -1364,7 +1364,7 @@ function tm({
   isOnlyBillingGroupAdmin: t
 }) {
   let a;
-  a = t ? e === Sm.ALL_USERS ? _$$t("admin_dashboard.mini_view.configured_upgrade_request_banner.billing_group_admin.all_users") : _$$t("admin_dashboard.mini_view.configured_upgrade_request_banner.billing_group_admin.members") : e === Sm.ALL_USERS ? _$$t("admin_dashboard.mini_view.configured_upgrade_request_banner.admin.all_users_setting") : _$$t("admin_dashboard.mini_view.configured_upgrade_request_banner.admin.members_only_setting");
+  a = t ? e === Sm.ALL_USERS ? getI18nString("admin_dashboard.mini_view.configured_upgrade_request_banner.billing_group_admin.all_users") : getI18nString("admin_dashboard.mini_view.configured_upgrade_request_banner.billing_group_admin.members") : e === Sm.ALL_USERS ? getI18nString("admin_dashboard.mini_view.configured_upgrade_request_banner.admin.all_users_setting") : getI18nString("admin_dashboard.mini_view.configured_upgrade_request_banner.admin.members_only_setting");
   return jsx(fu, {
     name: _$$e2.CURF_PENDING_REQUESTS_BANNER,
     children: jsx("div", {
@@ -1391,7 +1391,7 @@ export function $$tg0({
   let l = _$$u();
   let d = useRef(null);
   let [A, O] = useState(0);
-  let L = !!_$$eD || ce();
+  let L = !!desktopAPIInstance || ce();
   wY(d, () => {
     O(d.current?.clientWidth ?? 0);
   });
@@ -1444,8 +1444,8 @@ export function $$tg0({
                 q?.key.type === FOrganizationLevelType.TEAM ? a(sf({
                   view: "teamAdminConsole",
                   teamId: q?.key.parentId ?? "",
-                  teamAdminConsoleViewTab: Iv.CONTENT,
-                  teamAdminConsoleViewSecondaryTab: F9.CONNECTED_PROJECTS
+                  teamAdminConsoleViewTab: DashboardSections.CONTENT,
+                  teamAdminConsoleViewSecondaryTab: MemberSections.CONNECTED_PROJECTS
                 })) : a(sf({
                   view: "orgAdminSettings",
                   orgAdminSettingsViewTab: J7.CONTENT,
@@ -1487,7 +1487,7 @@ export function $$tg0({
                   })), a(sf({
                     view: "teamAdminConsole",
                     teamId: q.key.parentId ?? "",
-                    teamAdminConsoleViewTab: Iv.MEMBERS
+                    teamAdminConsoleViewTab: DashboardSections.MEMBERS
                   }))) : a(sf({
                     view: "orgAdminSettings",
                     orgAdminSettingsViewTab: J7.MEMBERS

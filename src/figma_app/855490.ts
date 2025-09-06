@@ -1,11 +1,11 @@
 import { nF } from "../905/350402";
 import { NC } from "../905/17179";
 import { R7 } from "../905/508367";
-import { eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 nF(e => {
   let t = e.getState().appWindow.inFullScreenMode;
-  if (eD) {
-    eD.setFullScreen(!t);
+  if (desktopAPIInstance) {
+    desktopAPIInstance.setFullScreen(!t);
     return;
   }
   R7.fullscreen && (t ? R7.getFullscreenElement() ? R7.exitFullscreenFunc() : e.dispatch($$o0()) : R7.requestFullscreenFunc.call(document.documentElement));
@@ -13,7 +13,7 @@ nF(e => {
 let $$s1 = NC("WINDOW_DID_ENTER_FULL_SCREEN");
 let $$o0 = NC("WINDOW_DID_EXIT_FULL_SCREEN");
 export function $$l2(e) {
-  R7.fullscreen && !eD && (document.addEventListener(R7.fullscreenChangeEventName, function () {
+  R7.fullscreen && !desktopAPIInstance && (document.addEventListener(R7.fullscreenChangeEventName, function () {
     let t = e.getState();
     R7.getFullscreenElement() && !t.appWindow.inFullScreenMode ? e.dispatch($$s1()) : t.appWindow.inFullScreenMode && e.dispatch($$o0());
   }), document.addEventListener(R7.fullscreenErrorEventName, function (t) {

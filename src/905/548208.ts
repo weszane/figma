@@ -1,8 +1,48 @@
-var $$n0 = (e => (e.HOME = "", e.MEMBERS = "members", e.SETTINGS = "settings", e.PROFILE = "profile", e.BILLING = "billing", e))($$n0 || {});
-var $$r2 = (e => (e.DASHBOARD = "dashboard", e.MEMBERS = "members", e.DRAFTS = "drafts", e.BILLING = "billing", e.SETTINGS = "settings", e.CONTENT = "content", e))($$r2 || {});
-var $$a1 = (e => (e.ABANDONED_DRAFTS = "abandoned-drafts", e.CONNECTED_PROJECTS = "connected-projects", e))($$a1 || {});
-var $$s3 = (e => (e.OVERVIEW = "overview", e.INVOICES = "invoices", e))($$s3 || {});
-export const A$ = $$n0;
-export const F9 = $$a1;
-export const Iv = $$r2;
-export const pu = $$s3;
+/**
+ * Enum for navigation routes in the app.
+ * Original variable: $$n0
+ */
+export enum NavigationRoutes {
+  HOME = "",
+  MEMBERS = "members",
+  SETTINGS = "settings",
+  PROFILE = "profile",
+  BILLING = "billing",
+}
+
+/**
+ * Enum for dashboard sections.
+ * Original variable: $$r2
+ */
+export enum DashboardSections {
+  DASHBOARD = "dashboard",
+  MEMBERS = "members",
+  DRAFTS = "drafts",
+  BILLING = "billing",
+  SETTINGS = "settings",
+  CONTENT = "content",
+}
+
+/**
+ * Enum for member-related sections.
+ * Original variable: $$a1
+ */
+export enum MemberSections {
+  ABANDONED_DRAFTS = "abandoned-drafts",
+  CONNECTED_PROJECTS = "connected-projects",
+}
+
+/**
+ * Enum for billing-related sections.
+ * Original variable: $$s3
+ */
+export enum BillingSections {
+  OVERVIEW = "overview",
+  INVOICES = "invoices",
+}
+
+// Refactored exports with original export names for traceability
+export const A$ = NavigationRoutes;
+export const F9 = MemberSections;
+export const Iv = DashboardSections;
+export const pu = BillingSections;

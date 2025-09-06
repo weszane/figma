@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "../vendor/514228";
 import { d as _$$d } from "../905/976845";
 import { J as _$$J } from "../905/125993";
 import u from "classnames";
-import { Ay, rr } from "../figma_app/778880";
+import { BrowserInfo, isMobileUA } from "../figma_app/778880";
 import { $J } from "../905/491152";
 import { s_ } from "../905/17223";
 import { c$, wv, ms } from "../figma_app/236327";
@@ -13,7 +13,7 @@ import { R as _$$R } from "../3591/975641";
 import { B as _$$B } from "../905/714743";
 import { t as _$$t } from "../905/331623";
 import { o as _$$o } from "../905/96108";
-import { t as _$$t2, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { L as _$$L } from "../3591/956338";
 import { AC, G8 } from "../figma_app/777551";
 import { JZ, qR } from "../figma_app/696043";
@@ -60,19 +60,19 @@ var c = u;
 function ea(e) {
   switch (e) {
     case "plugins-menu-dev-create-new":
-      return _$$t2("fullscreen.plugins_menu.new_plugin");
+      return getI18nString("fullscreen.plugins_menu.new_plugin");
     case "widgets-menu-dev-create-new":
-      return _$$t2("fullscreen.plugins_menu.new_widget");
+      return getI18nString("fullscreen.plugins_menu.new_widget");
     case "widgets-menu-dev-import-from-manifest":
-      return _$$t2("fullscreen.plugins_menu.import_widget_from_manifest");
+      return getI18nString("fullscreen.plugins_menu.import_widget_from_manifest");
     case "plugins-menu-dev-import-from-manifest":
-      return _$$t2("fullscreen.plugins_menu.import_plugin_from_manifest");
+      return getI18nString("fullscreen.plugins_menu.import_plugin_from_manifest");
     case "plugins-menu-open-directory-mac":
-      return _$$t2("fullscreen.plugins_menu.open_directory_mac");
+      return getI18nString("fullscreen.plugins_menu.open_directory_mac");
     case "plugins-menu-open-directory-win":
-      return _$$t2("fullscreen.plugins_menu.open_directory_win");
+      return getI18nString("fullscreen.plugins_menu.open_directory_win");
     case "plugins-menu-open-directory-vscode":
-      return _$$t2("fullscreen.plugins_menu.open_directory_vscode");
+      return getI18nString("fullscreen.plugins_menu.open_directory_vscode");
     default:
       return "";
   }
@@ -182,20 +182,20 @@ let eu = class e extends PureComponent {
     let e = jsxs(Fragment, {
       children: [jsx(c$, {
         onClick: this.onPublish,
-        children: tx("community.plugins.publish_new_version")
+        children: renderI18nText("community.plugins.publish_new_version")
       }), jsx(c$, {
         onClick: this.onRevealLocally,
         children: ea(YQ())
       }), jsx(wv, {}), jsx(c$, {
         onClick: this.onDelete,
-        children: tx("community.permissions_modal_publish_tab.footer.remove")
+        children: renderI18nText("community.permissions_modal_publish_tab.footer.remove")
       })]
     });
     let {
       name,
       error
     } = this.props.plugin;
-    let n = this.isWidget ? _$$t2("community.plugins.widget") : _$$t2("community.plugins.plugin");
+    let n = this.isWidget ? getI18nString("community.plugins.widget") : getI18nString("community.plugins.plugin");
     return jsxs("div", {
       className: bp,
       children: [jsxs("div", {
@@ -240,7 +240,7 @@ let eu = class e extends PureComponent {
           })]
         }), error && jsx(_$$B, {
           className: rs,
-          svg: Ay.mac ? _$$A7 : _$$A8
+          svg: BrowserInfo.mac ? _$$A7 : _$$A8
         })]
       }), jsx(YW, {
         svg: _$$A3,
@@ -249,7 +249,7 @@ let eu = class e extends PureComponent {
         onClick: this.onDotsClick,
         ref: this.dotsIconRef,
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t2("community.plugins.options"),
+        "data-tooltip": getI18nString("community.plugins.options"),
         selected: this.shouldShowPointingDropdown()
       }), this.shouldShowContextMenu() && jsx(ms, {
         className: Gm,
@@ -266,7 +266,7 @@ let eu = class e extends PureComponent {
         children: e
       }), this.state.shouldShowErrorModal && jsxs(d_, {
         size: "small",
-        title: _$$t2("community.plugins.plugin_or_widget_issue", {
+        title: getI18nString("community.plugins.plugin_or_widget_issue", {
           resourceType: n
         }),
         children: [jsx(s_, {
@@ -278,7 +278,7 @@ let eu = class e extends PureComponent {
           className: H1,
           children: jsx($$, {
             onClick: this.hideError,
-            children: tx("general.done")
+            children: renderI18nText("general.done")
           })
         })]
       })]
@@ -313,7 +313,7 @@ function eg(e) {
           children: e.title
         }), e.titleSuffix]
       }), jsx("div", {
-        className: rr ? uN : UB,
+        className: isMobileUA ? uN : UB,
         children: "string" == typeof e.subTitle ? $J(e.subTitle) : e.subTitle
       })]
     }), jsx("div", {
@@ -324,9 +324,9 @@ function eg(e) {
         "aria-expanded": e.isSelected,
         htmlAttributes: {
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": _$$t2("community.plugins.options")
+          "data-tooltip": getI18nString("community.plugins.options")
         },
-        "aria-label": _$$t2("community.plugins.options"),
+        "aria-label": getI18nString("community.plugins.options"),
         disabled: e.disabled,
         children: jsx(_$$J, {})
       })
@@ -392,16 +392,16 @@ function eg(e) {
         svg: _$$A9,
         className: kQ,
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": i ? _$$t2("community.plugins.private_for_plugin_org_name", {
+        "data-tooltip": i ? getI18nString("community.plugins.private_for_plugin_org_name", {
           orgName: i
-        }) : _$$t2("community.plugins.private_for_plugin_org")
+        }) : getI18nString("community.plugins.private_for_plugin_org")
       });
     }
     if (e.roles.is_public) return jsx(_$$B, {
       className: Ac,
       svg: _$$A10,
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": _$$t2("community.plugins.published_to_community")
+      "data-tooltip": getI18nString("community.plugins.published_to_community")
     });
   }
   e.Tile = function (e) {

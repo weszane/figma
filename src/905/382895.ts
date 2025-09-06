@@ -1,5 +1,5 @@
 import { getSingletonSceneGraph } from "../905/700578";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { $v } from "../figma_app/259678";
 export function $$s0(e, t, i) {
   let {
@@ -22,7 +22,7 @@ export function $$s0(e, t, i) {
       toCharIndex: componentEndIndex
     });
   } catch (e) {
-    x1("Failed to go to source:", e);
+    logError("Failed to go to source:", e);
   }
 }
 export const D = $$s0;

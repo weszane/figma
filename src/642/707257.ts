@@ -5,7 +5,7 @@ import { bL, l9, mc, c$, wv } from "../905/493196";
 import { h as _$$h } from "../905/270045";
 import { Pt } from "../figma_app/806412";
 import { k } from "../905/582200";
-import { tx, t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { Y5 } from "../figma_app/455680";
 import { gl } from "../905/216495";
 import { zk } from "../figma_app/198712";
@@ -24,7 +24,7 @@ export function $$y0(e) {
       children: [jsx(fI, {
         children: jsx(Q, {
           id: s,
-          children: tx("fullscreen.mask_panel.mask")
+          children: renderI18nText("fullscreen.mask_panel.mask")
         })
       }), jsx(Ad, {
         input: jsx(j, {
@@ -45,35 +45,35 @@ function _(e, t = zk.YES) {
 }
 let b = "Mixed";
 let C = {
-  format: (e) => {
+  format: e => {
     switch (e) {
       case "ALPHA":
-        return t("fullscreen.mask_panel.alpha");
+        return getI18nString("fullscreen.mask_panel.alpha");
       case "OUTLINE":
-        return t("fullscreen.mask_panel.vector");
+        return getI18nString("fullscreen.mask_panel.vector");
       case "LUMINANCE":
-        return t("fullscreen.mask_panel.luminance");
+        return getI18nString("fullscreen.mask_panel.luminance");
       case "Mixed":
-        return t("fullscreen.mixed");
+        return getI18nString("fullscreen.mixed");
     }
   },
-  formatExtended: (e) => {
+  formatExtended: e => {
     switch (e) {
       case "ALPHA":
         return {
-          text: t("fullscreen.mask_panel.alpha_extended")
+          text: getI18nString("fullscreen.mask_panel.alpha_extended")
         };
       case "OUTLINE":
         return {
-          text: t("fullscreen.mask_panel.vector_extended")
+          text: getI18nString("fullscreen.mask_panel.vector_extended")
         };
       case "LUMINANCE":
         return {
-          text: t("fullscreen.mask_panel.luminance_extended")
+          text: getI18nString("fullscreen.mask_panel.luminance_extended")
         };
       case "Mixed":
         return {
-          text: t("fullscreen.mixed")
+          text: getI18nString("fullscreen.mixed")
         };
     }
   }
@@ -94,7 +94,7 @@ function j({
   });
   let h = gl(e) || gl(valueBeforePreview);
   let m = h ? b : valueBeforePreview ?? e;
-  let g = debounce((e) => {
+  let g = debounce(e => {
     if (e !== b) {
       if (!e && valueBeforePreview && !gl(valueBeforePreview)) {
         updatePreview(valueBeforePreview);
@@ -105,18 +105,18 @@ function j({
   }, 50);
   return jsxs(bL, {
     value: m,
-    onChange: (e) => {
+    onChange: e => {
       e !== b && onSubmit(e);
     },
     onSelectionChange: g,
-    onOpenChange: (e) => {
+    onOpenChange: e => {
       valueBeforePreview && !e && clearPreview();
     },
     recordingKey: Pt(t, "maskType"),
     children: [jsx(l9, {
       width: "fill",
       label: jsx(_$$h, {
-        children: tx("fullscreen.mask_panel.mask")
+        children: renderI18nText("fullscreen.mask_panel.mask")
       }),
       children: C.format(m)
     }), jsxs(mc, {
@@ -124,7 +124,7 @@ function j({
         children: [jsx(c$, {
           value: b,
           disabled: !0,
-          children: tx("fullscreen.mixed")
+          children: renderI18nText("fullscreen.mixed")
         }), jsx(wv, {})]
       }), jsx(c$, {
         value: "ALPHA",

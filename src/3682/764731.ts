@@ -8,8 +8,8 @@ import { AM, eo as _$$eo, qr } from "../figma_app/637336";
 import { W5, bF } from "../figma_app/120294";
 import { $E, w as _$$w, bU, GA } from "../figma_app/120529";
 import u from "classnames";
-import { XN, Ay } from "../figma_app/778880";
-import { t as _$$t, tx } from "../905/303541";
+import { isIpadDevice, BrowserInfo } from "../figma_app/778880";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { aV } from "../figma_app/722362";
 import { w$ } from "../9410/635666";
 import { N as _$$N } from "../3682/343085";
@@ -44,8 +44,8 @@ import { A as _$$A2 } from "../svg/789982";
 import { A as _$$A3 } from "../svg/918452";
 import { Y as _$$Y } from "../9410/440393";
 import { g as _$$g } from "../905/757007";
-import { eD as _$$eD } from "../figma_app/876459";
-import { Im } from "../figma_app/493477";
+import { desktopAPIInstance } from "../figma_app/876459";
+import { isEmptyObject } from "../figma_app/493477";
 import { e as _$$e } from "../905/483726";
 import { td as _$$td } from "../figma_app/930338";
 import { P as _$$P } from "../905/347284";
@@ -61,7 +61,7 @@ import { v as _$$v } from "../905/442517";
 import { P as _$$P2 } from "../3276/355202";
 import { L as _$$L2 } from "../905/473569";
 import { wm } from "../905/19536";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { parsePxNumber } from "../figma_app/783094";
 import { Jn } from "../905/17223";
 import { kt } from "../figma_app/858013";
@@ -86,9 +86,9 @@ function j(e) {
   let n = aV();
   let l = iZ();
   useEffect(() => {
-    !XN && l?.id && !userIdsInCall.has(l.id) && w$(i);
+    !isIpadDevice && l?.id && !userIdsInCall.has(l.id) && w$(i);
   }, [i, l?.id, userIdsInCall]);
-  let c = !n && !XN;
+  let c = !n && !isIpadDevice;
   return (_$$N({
     isVisible: c
   }), c) ? jsx("div", {
@@ -108,10 +108,10 @@ function j(e) {
           }), jsx(_$$K, {
             fileKey: e.fileKey,
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t("collaboration.voice.join_conversation"),
+            "data-tooltip": getI18nString("collaboration.voice.join_conversation"),
             isJoinWidget: !0,
             "data-onboarding-key": "audio-nux-key",
-            children: tx("collaboration.voice.join")
+            children: renderI18nText("collaboration.voice.join")
           })]
         })
       })
@@ -151,19 +151,19 @@ function et({
 let ea = () => ({
   small: {
     style: "captions_dialog--smallText--aUeBx",
-    label: _$$t("collaboration.voice.small")
+    label: getI18nString("collaboration.voice.small")
   },
   medium: {
     style: "captions_dialog--mediumText--ODxEN",
-    label: _$$t("collaboration.voice.medium")
+    label: getI18nString("collaboration.voice.medium")
   },
   large: {
     style: "captions_dialog--largeText---t1d2",
-    label: _$$t("collaboration.voice.large")
+    label: getI18nString("collaboration.voice.large")
   },
   x_large: {
     style: "captions_dialog--xlargeText--C60DA",
-    label: _$$t("collaboration.voice.x_large")
+    label: getI18nString("collaboration.voice.x_large")
   }
 });
 let eo = Date.now();
@@ -231,7 +231,7 @@ function es({
         behavior: "smooth"
       }),
       className: `captions_dialog--scrollToBottomButton--SeU-4 ${p ? "captions_dialog--showScrollToBottomButton--Lc7Iy" : ""}`,
-      children: tx("collaboration.voice.new_transcripts")
+      children: renderI18nText("collaboration.voice.new_transcripts")
     }), jsxs("div", {
       className: "captions_dialog--header--SA3Wv",
       onClick: () => h(!m),
@@ -240,9 +240,9 @@ function es({
         svg: _$$A2
       }), jsx("span", {
         className: "captions_dialog--label---1DXk",
-        children: tx("collaboration.voice.closed_captions")
+        children: renderI18nText("collaboration.voice.closed_captions")
       }), jsx(Ex, {
-        text: _$$t("collaboration.voice.beta"),
+        text: getI18nString("collaboration.voice.beta"),
         className: "captions_dialog--betaTag--qFyxq",
         color: zE.BRAND
       }), jsx(K0, {
@@ -256,7 +256,7 @@ function es({
           }));
         },
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("collaboration.voice.text_size")
+        "data-tooltip": getI18nString("collaboration.voice.text_size")
       }), b.current && T && jsx(_$$j, {
         dispatch: f,
         items: Object.keys(t).map(e => ({
@@ -282,7 +282,7 @@ function es({
 let ed = [$E.WARNING_RECV_AUDIO_DECODE_FAILED, $E.WARNING_SEND_AUDIO_BITRATE_TOO_LOW, $E.WARNING_AUDIO_OUTPUT_LEVEL_TOO_LOW, $E.WARNING_AUDIO_INPUT_LEVEL_TOO_LOW];
 function e_(e) {
   let t;
-  if (Im(e.activeWarnings)) return null;
+  if (isEmptyObject(e.activeWarnings)) return null;
   for (let a of ed) if (e.activeWarnings[a]) {
     t = e.activeWarnings[a];
     break;
@@ -302,12 +302,12 @@ function e_(e) {
 function eu(e) {
   switch (e) {
     case $E.WARNING_AUDIO_INPUT_LEVEL_TOO_LOW:
-      return _$$t("collaboration.voice.audio_input_too_low_warning");
+      return getI18nString("collaboration.voice.audio_input_too_low_warning");
     case $E.WARNING_AUDIO_OUTPUT_LEVEL_TOO_LOW:
-      return _$$t("collaboration.voice.speaker_volume_too_low_warning");
+      return getI18nString("collaboration.voice.speaker_volume_too_low_warning");
     case $E.WARNING_SEND_AUDIO_BITRATE_TOO_LOW:
     case $E.WARNING_RECV_AUDIO_DECODE_FAILED:
-      return _$$t("collaboration.voice.poor_connection_warning");
+      return getI18nString("collaboration.voice.poor_connection_warning");
     default:
       return null;
   }
@@ -351,35 +351,35 @@ function ep(e) {
     switch (v.current = callEvent, callEvent) {
       case $E.CONNECTED:
         h({
-          msg: _$$t("collaboration.voice.connected"),
+          msg: getI18nString("collaboration.voice.connected"),
           type: _$$w.SUCCESS,
           icon: jsx(_$$g, {})
         });
         break;
       case $E.CONNECTED_WITH_MIC_DISABLED:
         h({
-          msg: _$$t("collaboration.voice.connected_check_your_microphone_permissions_to_start_chatting"),
+          msg: getI18nString("collaboration.voice.connected_check_your_microphone_permissions_to_start_chatting"),
           allowMultiLine: !0,
           type: _$$w.SUCCESS
         });
         break;
       case $E.CONNECTING:
         h({
-          msg: _$$t("collaboration.voice.connecting"),
+          msg: getI18nString("collaboration.voice.connecting"),
           type: _$$w.PENDING,
           persist: !0
         });
         break;
       case $E.ERROR:
         h({
-          msg: _$$t("collaboration.voice.something_went_wrong_try_again"),
+          msg: getI18nString("collaboration.voice.something_went_wrong_try_again"),
           type: _$$w.ERROR,
           persist: !0
         });
         break;
       case $E.CALL_INACTIVE:
         h({
-          msg: _$$t("collaboration.voice.things_got_quiet_for_awhile_so_we_ended_the_conversation"),
+          msg: getI18nString("collaboration.voice.things_got_quiet_for_awhile_so_we_ended_the_conversation"),
           type: _$$w.PENDING,
           persist: !1,
           allowMultiLine: !0
@@ -387,7 +387,7 @@ function ep(e) {
         break;
       case $E.TOKEN_WILL_EXPIRE:
         h({
-          msg: _$$t("collaboration.voice.it_s_been_quiet_for_a_while_so_we_ll_end_the_conversation_in_20_seconds_n_click_to_stay_on"),
+          msg: getI18nString("collaboration.voice.it_s_been_quiet_for_a_while_so_we_ll_end_the_conversation_in_20_seconds_n_click_to_stay_on"),
           type: _$$w.MESSAGE,
           persist: !0,
           onClick,
@@ -396,7 +396,7 @@ function ep(e) {
         break;
       case $E.TOKEN_EXPIRED:
         h({
-          msg: _$$t("collaboration.voice.audio_has_timed_out_click_to_rejoin"),
+          msg: getI18nString("collaboration.voice.audio_has_timed_out_click_to_rejoin"),
           type: _$$w.ERROR,
           persist: !0,
           onClick
@@ -405,20 +405,20 @@ function ep(e) {
       case $E.USER_JOINED:
         h({
           truncatedPrefix: g,
-          msg: _$$t("collaboration.voice.joined"),
+          msg: getI18nString("collaboration.voice.joined"),
           type: _$$w.MESSAGE
         });
         break;
       case $E.USER_LEFT:
         h({
           truncatedPrefix: g,
-          msg: _$$t("collaboration.voice.left"),
+          msg: getI18nString("collaboration.voice.left"),
           type: _$$w.MESSAGE
         });
         break;
       case $E.ERROR_MICROPHONE_PERMISSIONS_DENIED:
-        let e = _$$t("collaboration.voice.enable_mic_access_in_your_browser_to_join");
-        _$$eD && (e = _$$t("collaboration.voice.enable_mic_access_for_the_figma_app_to_join"));
+        let e = getI18nString("collaboration.voice.enable_mic_access_in_your_browser_to_join");
+        desktopAPIInstance && (e = getI18nString("collaboration.voice.enable_mic_access_for_the_figma_app_to_join"));
         h({
           msg: e,
           type: _$$w.ERROR,
@@ -427,19 +427,19 @@ function ep(e) {
         break;
       case $E.WARNING_MICROPHONE_LEVELS_HIGH_AND_MUTED:
         h({
-          msg: _$$t("collaboration.voice.want_to_unmute_click_the_mic"),
+          msg: getI18nString("collaboration.voice.want_to_unmute_click_the_mic"),
           type: _$$w.PENDING
         });
         break;
       case $E.ERROR_ON_LEAVE:
         h({
-          msg: _$$t("collaboration.voice.couldn_t_leave_please_try_again"),
+          msg: getI18nString("collaboration.voice.couldn_t_leave_please_try_again"),
           type: _$$w.ERROR
         });
         break;
       case $E.SYSTEM_INCOMPATIBLE:
         h({
-          msg: _$$t("collaboration.voice.figma_audio_won_t_work_on_your_device_learn_why"),
+          msg: getI18nString("collaboration.voice.figma_audio_won_t_work_on_your_device_learn_why"),
           type: _$$w.ERROR,
           persist: !0,
           allowMultiLine: !0,
@@ -450,7 +450,7 @@ function ep(e) {
       case $E.RECONNECTING:
         p.current = setTimeout(() => {
           v.current === $E.RECONNECTING && (h({
-            msg: _$$t("collaboration.voice.attempting_to_reconnect"),
+            msg: getI18nString("collaboration.voice.attempting_to_reconnect"),
             type: _$$w.PENDING,
             persist: !0
           }), p.current = void 0);
@@ -788,7 +788,7 @@ function e9(e, t, a, o, n, l, r) {
       (h.length !== e.length || e.some(e => !(e.deviceId in a))) && p(e);
     } catch {
       r || c(_$$F.enqueue({
-        message: _$$t("collaboration.voice.error_fetching_devices"),
+        message: getI18nString("collaboration.voice.error_fetching_devices"),
         error: !0,
         type: "voice-device-error"
       }));
@@ -796,7 +796,7 @@ function e9(e, t, a, o, n, l, r) {
   }, [h, c, t, r]);
   let I = useCallback(async () => {
     try {
-      if (l && !Ay.chrome) return;
+      if (l && !BrowserInfo.chrome) return;
       let t = await e();
       t.deviceId !== d?.deviceId && _(t);
     } catch {}
@@ -807,7 +807,7 @@ function e9(e, t, a, o, n, l, r) {
       await a(e);
     } catch {
       c(_$$F.enqueue({
-        message: _$$t("collaboration.voice.error_selecting_device"),
+        message: getI18nString("collaboration.voice.error_selecting_device"),
         error: !0,
         type: "voice-device-error"
       }));
@@ -884,7 +884,7 @@ function e6(e) {
     }),
     property: currentMicrophone || {
       deviceId: "not_found",
-      label: _$$t("collaboration.voice.microphone_not_found"),
+      label: getI18nString("collaboration.voice.microphone_not_found"),
       groupId: "not_found",
       kind: "audioinput",
       toJSON: () => null
@@ -914,7 +914,7 @@ function e6(e) {
     }),
     property: currentPlaybackDevice || {
       deviceId: "not_found",
-      label: _$$t("collaboration.voice.playback_device_not_found"),
+      label: getI18nString("collaboration.voice.playback_device_not_found"),
       groupId: "not_found",
       kind: "audiooutput",
       toJSON: () => null
@@ -940,7 +940,7 @@ function e6(e) {
       onClick: e => e.stopPropagation(),
       children: [jsxs("div", {
         className: "device_controls--header---h3P-",
-        children: [_$$t("collaboration.voice.audio_settings"), jsx(Jn, {
+        children: [getI18nString("collaboration.voice.audio_settings"), jsx(Jn, {
           onClick: () => _(oB())
         })]
       }), jsxs("div", {
@@ -950,14 +950,14 @@ function e6(e) {
           children: [jsx("span", {
             className: e0,
             id: u,
-            children: tx("collaboration.voice.microphone")
+            children: renderI18nText("collaboration.voice.microphone")
           }), w]
-        }), Ay.chrome && jsxs(fI, {
+        }), BrowserInfo.chrome && jsxs(fI, {
           className: eZ,
           children: [jsx("span", {
             className: e0,
             id: p,
-            children: tx("collaboration.voice.speakers")
+            children: renderI18nText("collaboration.voice.speakers")
           }), x]
         })]
       })]
@@ -970,13 +970,13 @@ function te() {
   let a = useDispatch();
   let n = useId();
   let l = jsx(eB, {});
-  let r = tx("collaboration.voice.closed_captioning");
+  let r = renderI18nText("collaboration.voice.closed_captioning");
   let c = jsx(Ex, {
-    text: _$$t("collaboration.voice.beta"),
+    text: getI18nString("collaboration.voice.beta"),
     className: "device_controls--betaTag---VTFI",
     color: zE.BRAND
   });
-  t && Mw(e) && (r = tx("collaboration.voice.setting_up_closed_captions_install_progress", {
+  t && Mw(e) && (r = renderI18nText("collaboration.voice.setting_up_closed_captions_install_progress", {
     installProgress: e
   }), l = jsx(kt, {
     className: "device_controls--captionsLoadingSpinner--ivdGQ"
@@ -994,7 +994,7 @@ function te() {
         event: t
       }) => {
         t.stopPropagation();
-        sx("voice_captions_toggle", {
+        trackEventAnalytics("voice_captions_toggle", {
           value: e,
           source: "voice_widget"
         });
@@ -1017,7 +1017,7 @@ function tt() {
         svg: _$$A2
       }), jsx("span", {
         className: "device_controls--controlLabelFullOpacity--1nEqI device_controls--controlLabel--Yp1lV",
-        children: tx("collaboration.voice.learn_how_to_turn_on_closed_captioning")
+        children: renderI18nText("collaboration.voice.learn_how_to_turn_on_closed_captioning")
       })]
     })
   });
@@ -1291,10 +1291,10 @@ remote: ${s}`);
               disabled: call.microphonePermissionDenied
             }), jsx(_$$d, {
               "aria-expanded": en,
-              "aria-label": _$$t("collaboration.voice.settings"),
+              "aria-label": getI18nString("collaboration.voice.settings"),
               ref: ec,
               "data-tooltip-type": Ib.TEXT,
-              "data-tooltip": _$$t("collaboration.voice.settings"),
+              "data-tooltip": getI18nString("collaboration.voice.settings"),
               onClick: () => {
                 eO();
               },
@@ -1312,7 +1312,7 @@ remote: ${s}`);
                 onMouseEnter: () => B(!0),
                 onMouseLeave: () => B(!1)
               },
-              children: el || eE ? tx("collaboration.voice.leave") : tx("collaboration.voice.join")
+              children: el || eE ? renderI18nText("collaboration.voice.leave") : renderI18nText("collaboration.voice.join")
             })]
           }), el && jsx(eP, {
             fileKey,

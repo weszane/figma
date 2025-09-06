@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { fM, Uj, mG } from "../figma_app/15924";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
@@ -52,20 +52,20 @@ let v = Ju(function (e) {
               className: Rj,
               children: [jsx("div", {
                 className: RR,
-                children: tx("community.detail_view.redirect_to_third_party_service")
+                children: renderI18nText("community.detail_view.redirect_to_third_party_service")
               }), jsx("div", {
                 className: jJ,
-                children: tx("community.detail_view.you_ll_pay_to_use_this_resource_outside_of_figma")
+                children: renderI18nText("community.detail_view.you_ll_pay_to_use_this_resource_outside_of_figma")
               }), jsx(_$$_, {
                 href: e.thirdPartyM10nUrl || "#",
                 newTab: !0,
                 className: b_,
                 children: jsx("span", {
                   className: _s,
-                  children: tx("community.detail_view.continue_to_external_service", {
+                  children: renderI18nText("community.detail_view.continue_to_external_service", {
                     externalService: function (e) {
                       for (let [t, n] of Object.entries(w)) if (e?.includes(t)) return n;
-                      return tx("community.detail_view.external_site");
+                      return renderI18nText("community.detail_view.external_site");
                     }(e.thirdPartyM10nUrl)
                   })
                 })
@@ -74,7 +74,7 @@ let v = Ju(function (e) {
                 onClick: n,
                 children: jsx("span", {
                   className: Y1,
-                  children: tx("community.detail_view.go_back")
+                  children: renderI18nText("community.detail_view.go_back")
                 })
               })]
             })
@@ -103,7 +103,7 @@ export function $$P0({
   let f = !1;
   if (cs(_) && !zF(e)) {
     f = !0;
-    u = _$$t("community.buyer.cannot_make_purchase_on_behalf_of_team_or_org");
+    u = getI18nString("community.buyer.cannot_make_purchase_on_behalf_of_team_or_org");
   } else {
     let t = G({
       authedActiveCommunityProfile: _,
@@ -114,10 +114,10 @@ export function $$P0({
         usersCanPurchase,
         publishers
       } = V4(t, e);
-      0 === usersCanPurchase.length && 0 !== publishers.length && (f = !0, u = _$$t("community.buyer.no_you_cannot_buy_your_own_resource"));
+      0 === usersCanPurchase.length && 0 !== publishers.length && (f = !0, u = getI18nString("community.buyer.no_you_cannot_buy_your_own_resource"));
     }
-    Pg(e) && (f = !0, u = _$$t("community.resource.delisted_title"));
-    lT(e) && (f = !0, u = _$$t("community.resource.admin_blocked_resource_banner.this_resource_is_blocked"));
+    Pg(e) && (f = !0, u = getI18nString("community.resource.delisted_title"));
+    lT(e) && (f = !0, u = getI18nString("community.resource.admin_blocked_resource_banner.this_resource_is_blocked"));
   }
   let j = () => {
     x(to({

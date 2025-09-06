@@ -1,7 +1,7 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { localStorageRef } from "../905/657224";
-import { sx } from "../905/449184";
-import { $D } from "../905/11";
+import { trackEventAnalytics } from "../905/449184";
+import { reportError } from "../905/11";
 import { MZ } from "../figma_app/925970";
 import { qB } from "../905/124270";
 import { k1 } from "../figma_app/314264";
@@ -20,7 +20,7 @@ export function $$_3() {
     if (!t || !t.id || new Date(t.expires).getTime() < Date.now()) return null;
     return t;
   } catch (e) {
-    $D(_$$e.SEARCH, e);
+    reportError(_$$e.SEARCH, e);
     return null;
   }
 }
@@ -92,7 +92,7 @@ function I(e, t) {
     categorySpecificTrackClick(e, t) {
       if (e === uH.FILES) {
         let e = this.info.result.model;
-        sx("Open File Click", {
+        trackEventAnalytics("Open File Click", {
           fileKey: e.key,
           fileRepoId: e.file_repo_id,
           uiSelectedView: "search"
@@ -132,7 +132,7 @@ function I(e, t) {
         a = plan.plan_type === O.ORG ? t.parent_org_id === plan.plan_id : t.team_id === plan.plan_id;
       }
       let y = e === uH.FILES && "preview_thumbnail_urls" in result.model ? result.model.preview_thumbnail_urls ?? [] : [];
-      sx("search_result_clicked", {
+      trackEventAnalytics("search_result_clicked", {
         session_id: this.state.lastLoadedQuery.sessionId,
         query_id: this.state.lastLoadedQuery.queryId,
         position: position + 1,
@@ -206,7 +206,7 @@ function I(e, t) {
         case Rr.ALL_TYPES_STREAMING:
           t = n[e.parameters.searchModelType]?.metrics.roundTripTime;
       }
-      void 0 !== t && sx("search_time_to_load", {
+      void 0 !== t && trackEventAnalytics("search_time_to_load", {
         sessionId: e.sessionId,
         queryId: e.queryId,
         searchModelType: i,
@@ -220,7 +220,7 @@ function I(e, t) {
         sessionId,
         isRetained
       } = b(t.entryPoint);
-      sx("search_selected", {
+      trackEventAnalytics("search_selected", {
         session_id: sessionId,
         entry_point: t.entryPoint
       });
@@ -237,7 +237,7 @@ function I(e, t) {
         sessionId,
         isRetained
       } = b(t.entryPoint);
-      sx("search_start", {
+      trackEventAnalytics("search_start", {
         session_id: sessionId,
         entry_point: t.entryPoint,
         plan_filter_id: e.parameters.planFilter,
@@ -257,26 +257,26 @@ function I(e, t) {
       };
     };
     e.enterSearchView = function (e, t) {
-      sx("search_enter_search_view", {
+      trackEventAnalytics("search_enter_search_view", {
         session_id: e.sessionId,
         entry_point: t
       });
     };
     e.enterSearchViewViaEnter = function (e, t) {
-      sx("search_enter_search_view_via_enter", {
+      trackEventAnalytics("search_enter_search_view_via_enter", {
         session_id: e.sessionId,
         entry_point: t
       });
     };
     e.searchModalExit = function (e) {
-      sx("search_modal_exit", {
+      trackEventAnalytics("search_modal_exit", {
         session_id: e
       });
     };
     e.trackSearchQueryTyped = function (e, t, i) {
       let n = $$v2(t);
       let r = I(t, n);
-      sx("search_query_typed", {
+      trackEventAnalytics("search_query_typed", {
         session_id: e,
         query: i,
         entry_point: n,
@@ -287,16 +287,16 @@ function I(e, t) {
       let i = {};
       e && (i.search_model_type = e);
       t && (i.search_scope = t);
-      sx("search_model_or_scope_change", i);
+      trackEventAnalytics("search_model_or_scope_change", i);
     };
     e.trackWorkspaceFilterChange = function (e, t) {
-      sx("search_workspace_filter_change", {
+      trackEventAnalytics("search_workspace_filter_change", {
         workspace_filter: t,
         session_id: e.sessionId
       });
     };
     e.trackLicenseGroupFilterDropdownClick = function (e, t) {
-      sx("search_license_group_dropdown_click", {
+      trackEventAnalytics("search_license_group_dropdown_click", {
         session_id: e.sessionId,
         click_type: t
       });
@@ -342,36 +342,36 @@ function I(e, t) {
         ...c,
         ...m
       };
-      o || sx("search_tracking_error", {
+      o || trackEventAnalytics("search_tracking_error", {
         event_name: "search_query_result",
         entry_point: r,
         incomplete_field: "response"
       });
-      e.sessionId || sx("search_tracking_error", {
+      e.sessionId || trackEventAnalytics("search_tracking_error", {
         event_name: "search_query_result",
         entry_point: r,
         incomplete_field: "sessionId"
       });
-      e.queryId || sx("search_tracking_error", {
+      e.queryId || trackEventAnalytics("search_tracking_error", {
         event_name: "search_query_result",
         entry_point: r,
         incomplete_field: "queryId"
       });
-      sx("search_query_result", h);
+      trackEventAnalytics("search_query_result", h);
     };
     e.trackSeeMore = function (e, t) {
       if (!e.sessionId) {
         console.error("Cannot log query results w/o a sessionId");
         return;
       }
-      sx("search_see_more", {
+      trackEventAnalytics("search_see_more", {
         session_id: e.sessionId,
         query_id: e.queryId,
         category: t ?? "all"
       });
     };
     e.trackEnd = function (e) {
-      return e.sessionId ? (sx("search_end", {
+      return e.sessionId ? (trackEventAnalytics("search_end", {
         session_id: e.sessionId,
         queryCount: e.queryCount
       }), function (e) {
@@ -388,11 +388,11 @@ function I(e, t) {
     e[e.FILE = 1] = "FILE";
   })(e.RecentType || (e.RecentType = {}));
   (e.Recents || (e.Recents = {})).trackRecentsClick = function (e, t, i, n) {
-    1 === n ? sx("search_recent_file_clicked", {
+    1 === n ? trackEventAnalytics("search_recent_file_clicked", {
       session_id: e,
       position: t + 1,
       key: i
-    }) : 0 === n && sx("search_recent_search_clicked", {
+    }) : 0 === n && trackEventAnalytics("search_recent_search_clicked", {
       session_id: e,
       position: t + 1
     });

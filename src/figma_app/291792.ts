@@ -9,13 +9,13 @@ import { l as _$$l } from "../905/241412";
 import { W as _$$W } from "../5132/887999";
 import { t as _$$t } from "../5132/435788";
 import { getFeatureFlags } from "../905/601108";
-import { md } from "../figma_app/27355";
-import { NP } from "../905/449184";
+import { useAtomWithSubscription } from "../figma_app/27355";
+import { trackFullScreenAnalytics } from "../905/449184";
 import { ce } from "../figma_app/347146";
-import { eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { nt } from "../figma_app/687776";
 import { h as _$$h } from "../figma_app/334471";
-import { t as _$$t2 } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { zE } from "../905/738636";
 import { n6 } from "../905/234821";
 import { p as _$$p } from "../905/36308";
@@ -24,7 +24,7 @@ import { $n, gW } from "../905/930279";
 import { Y5 } from "../figma_app/455680";
 import { f as _$$f } from "../figma_app/990299";
 import { ck } from "../905/87821";
-import { MP } from "../figma_app/469876";
+import { isZoomIntegration } from "../figma_app/469876";
 import { m as _$$m } from "../905/575846";
 import { TY } from "../figma_app/701001";
 import { Zr } from "../figma_app/678782";
@@ -56,7 +56,7 @@ export function $$J1({
   });
   let a = useSelector(e => e.userStateLoaded);
   let s = useMemo(() => ({
-    shouldShowBackToFiles: (!ck() || MP() && !!getFeatureFlags().integ_zoom_allow_file_switching) && !eD && !ce(),
+    shouldShowBackToFiles: (!ck() || isZoomIntegration() && !!getFeatureFlags().integ_zoom_allow_file_switching) && !desktopAPIInstance && !ce(),
     isDisabled: !a
   }), [a]);
   let o = c4();
@@ -81,7 +81,7 @@ export function $$J1({
 }
 export function $$Z2() {
   let e = function () {
-    let e = md(eE);
+    let e = useAtomWithSubscription(eE);
     let t = TY();
     let r = _$$d();
     let a = q5();
@@ -150,7 +150,7 @@ function Q({
       return e.sort((e, r) => e.editorType === t ? -1 : r.editorType === t ? 1 : 0);
     }, [t, A, k]);
     let U = useCallback(t => {
-      NP(t, _$$r({
+      trackFullScreenAnalytics(t, _$$r({
         source: e === f6.EDITOR_MENU ? "menu" : "quick-actions"
       }));
     }, [e]);
@@ -185,7 +185,7 @@ function Q({
       }) => e === FFileType.DESIGN);
       return e ? {
         name: "new-from-sketch",
-        displayText: _$$t2("fullscreen_actions.new-from-sketch"),
+        displayText: getI18nString("fullscreen_actions.new-from-sketch"),
         callback: () => {
           U("action_new_from_sketch");
           Y5.dispatchIfSaved(_$$f());
@@ -207,7 +207,7 @@ function Q({
           case FFileType.DESIGN:
             return {
               name: "new-design",
-              displayText: H && t !== FFileType.DESIGN ? _$$t2("fullscreen_actions.creation_submenu.new-design") : _$$t2("fullscreen_actions.new-design"),
+              displayText: H && t !== FFileType.DESIGN ? getI18nString("fullscreen_actions.creation_submenu.new-design") : getI18nString("fullscreen_actions.new-design"),
               callback: G({
                 editorType: FFileType.DESIGN,
                 trackingEventName: "action_new_design"
@@ -219,7 +219,7 @@ function Q({
           case FFileType.WHITEBOARD:
             return {
               name: "new-whiteboard",
-              displayText: H && t !== FFileType.WHITEBOARD ? _$$t2("fullscreen_actions.creation_submenu.new-whiteboard") : _$$t2("fullscreen_actions.new-whiteboard"),
+              displayText: H && t !== FFileType.WHITEBOARD ? getI18nString("fullscreen_actions.creation_submenu.new-whiteboard") : getI18nString("fullscreen_actions.new-whiteboard"),
               searchSynonyms: ["figjam"],
               callback: G({
                 editorType: FFileType.WHITEBOARD,
@@ -232,7 +232,7 @@ function Q({
           case FFileType.SITES:
             return {
               name: "new-site",
-              displayText: H && t !== FFileType.SITES ? _$$t2("fullscreen_actions.creation_submenu.new-site") : _$$t2("fullscreen_actions.new-site"),
+              displayText: H && t !== FFileType.SITES ? getI18nString("fullscreen_actions.creation_submenu.new-site") : getI18nString("fullscreen_actions.new-site"),
               searchSynonyms: ["sites", "website"],
               callback: G({
                 editorType: FFileType.SITES,
@@ -245,7 +245,7 @@ function Q({
           case FFileType.SLIDES:
             return {
               name: "new-slides",
-              displayText: H && t !== FFileType.SLIDES ? _$$t2("fullscreen_actions.creation_submenu.new-slides") : _$$t2("fullscreen_actions.new-slides"),
+              displayText: H && t !== FFileType.SLIDES ? getI18nString("fullscreen_actions.creation_submenu.new-slides") : getI18nString("fullscreen_actions.new-slides"),
               searchSynonyms: ["slides"],
               callback: G({
                 editorType: FFileType.SLIDES,
@@ -258,7 +258,7 @@ function Q({
           case FFileType.COOPER:
             return {
               name: "new-buzz",
-              displayText: H && t !== FFileType.COOPER ? _$$t2("fullscreen_actions.creation_submenu.new-buzz") : _$$t2("fullscreen_actions.new-buzz"),
+              displayText: H && t !== FFileType.COOPER ? getI18nString("fullscreen_actions.creation_submenu.new-buzz") : getI18nString("fullscreen_actions.new-buzz"),
               callback: G({
                 editorType: FFileType.COOPER,
                 trackingEventName: "action_new_buzz"
@@ -270,7 +270,7 @@ function Q({
           case FFileType.FIGMAKE:
             return {
               name: "new-rev",
-              displayText: H && t !== FFileType.FIGMAKE ? _$$t2("fullscreen_actions.creation_submenu.new-rev") : _$$t2("fullscreen_actions.new-rev"),
+              displayText: H && t !== FFileType.FIGMAKE ? getI18nString("fullscreen_actions.creation_submenu.new-rev") : getI18nString("fullscreen_actions.new-rev"),
               callback: G({
                 editorType: FFileType.FIGMAKE,
                 trackingEventName: "action_new_rev"
@@ -329,7 +329,7 @@ function ee() {
   }), [e, t]);
 }
 function et() {
-  let e = md(p9);
+  let e = useAtomWithSubscription(p9);
   return useMemo(() => ({
     isPublishingModalDisabled: !e
   }), [e]);

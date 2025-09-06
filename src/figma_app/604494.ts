@@ -1,27 +1,27 @@
 import { useCallback } from "react";
-import { tx, eU, Iz, AY } from "../figma_app/27355";
+import { tx, atom, createRemovableAtomFamily, AY } from "../figma_app/27355";
 import { g } from "../905/880308";
 import { Jc } from "../905/946805";
 let $$o1 = tx({});
 let $$l10 = tx(null);
 let $$d8 = tx("");
-let $$c9 = eU(g());
-let $$u7 = eU({
+let $$c9 = atom(g());
+let $$u7 = atom({
   loaded: !1,
   extensions: []
 });
 let $$p6 = tx(Jc.ALL);
 let $$_13 = tx(null);
-let $$h4 = eU(null);
+let $$h4 = atom(null);
 let $$m11 = tx([]);
-let $$g16 = Iz(e => eU(t => {
+let $$g16 = createRemovableAtomFamily(e => atom(t => {
   let [r] = t($$m11);
   return r?.name === e;
 }));
-let $$f0 = eU(!1);
-let $$E18 = eU(null);
-let $$y14 = eU(0);
-let $$b12 = eU(!1);
+let $$f0 = atom(!1);
+let $$E18 = atom(null);
+let $$y14 = atom(0);
+let $$b12 = atom(!1);
 export function $$T5() {
   let e = AY($$l10);
   return useCallback(() => {
@@ -46,8 +46,8 @@ export function $$S15() {
     e();
   }, [e]);
 }
-let $$v3 = eU(null);
-let $$A2 = eU(null);
+let $$v3 = atom(null);
+let $$A2 = atom(null);
 export const Bu = $$f0;
 export const Bw = $$o1;
 export const DZ = $$A2;

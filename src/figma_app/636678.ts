@@ -9,8 +9,8 @@ import { glU } from "../figma_app/763686";
 import { RR } from "../figma_app/338442";
 import { l7 } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
-import { md } from "../figma_app/27355";
-import { t as _$$t } from "../905/303541";
+import { useAtomWithSubscription } from "../figma_app/27355";
+import { getI18nString } from "../905/303541";
 import { u1, XE } from "../figma_app/91703";
 import { VU } from "../905/625959";
 import { Xo } from "../figma_app/482495";
@@ -35,7 +35,7 @@ export function $$w0(e) {
       }), [t]);
       let a = useMemo(() => {
         let e = eM(RR.SLOT_CONTENT_ID).defaultType;
-        return _$$t("design_systems.component_properties.apply_component_property", {
+        return getI18nString("design_systems.component_properties.apply_component_property", {
           propType: xb(e).toLocaleLowerCase()
         });
       }, []);
@@ -77,7 +77,7 @@ export function $$w0(e) {
       let s = useDispatch();
       let l = Xo();
       let d = l?.id === aR;
-      let c = md(_$$A2);
+      let c = useAtomWithSubscription(_$$A2);
       let u = r ?? c;
       let p = useCallback(() => {
         let t = u?.current ? cn(u.current, wh) : {};
@@ -98,7 +98,7 @@ export function $$w0(e) {
         customActionType: Wg.DIALOG_TRIGGER_BUTTON,
         onClick: f,
         icon: jsx(_$$A, {}),
-        getTitle: () => _$$t("fullscreen.properties_panel.section_slot.edit_slot_property"),
+        getTitle: () => getI18nString("fullscreen.properties_panel.section_slot.edit_slot_property"),
         recordingKey: "ui3_toolbar_edit_slot_property",
         isSelected: d
       }), [f, d]);
@@ -133,7 +133,7 @@ export function $$w0(e) {
             });
           },
           icon: jsx(_$$N, {}),
-          getTitle: () => _$$t("fullscreen.properties_panel.section_slot.reset_slot_assignment"),
+          getTitle: () => getI18nString("fullscreen.properties_panel.section_slot.reset_slot_assignment"),
           recordingKey: "toolResetSlotAssignment"
         };
       }, [t, r, e]);
@@ -166,7 +166,7 @@ function O({
         VU.get("empty-slot-contents", "toolbar")?.();
       },
       icon: t ? jsx(_$$_, {}) : jsx(_$$N, {}),
-      getTitle: () => t ? _$$t("fullscreen.properties_panel.section_slot.empty_slot_contents") : _$$t("fullscreen.properties_panel.section_slot.reset_slot"),
+      getTitle: () => t ? getI18nString("fullscreen.properties_panel.section_slot.empty_slot_contents") : getI18nString("fullscreen.properties_panel.section_slot.reset_slot"),
       recordingKey: "toolEmptySlotContents"
     };
   }, [r, e, t]);

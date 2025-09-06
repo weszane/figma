@@ -4,7 +4,7 @@ import { tKW } from "../figma_app/763686";
 import s from "../vendor/3757";
 import { debugState } from "../905/407919";
 import { U } from "../figma_app/901889";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { v4, AC, QN } from "../figma_app/655139";
 import { MT, uz, LK, NU, p as _$$p, Ap } from "../905/359509";
 import { D8, ZA, GL, zZ, dW } from "../905/515076";
@@ -119,15 +119,15 @@ export function $$L1(e, t) {
 export function $$P11(e) {
   switch (e) {
     case uz:
-      return t("dev_handoff.alternative_units.rem_unit");
+      return getI18nString("dev_handoff.alternative_units.rem_unit");
     case LK:
     case NU:
-      return t("dev_handoff.alternative_units.dp_unit");
+      return getI18nString("dev_handoff.alternative_units.dp_unit");
     case _$$p:
     case Ap:
-      return t("dev_handoff.alternative_units.pt_unit");
+      return getI18nString("dev_handoff.alternative_units.pt_unit");
     default:
-      return t("dev_handoff.alternative_units.rem_unit");
+      return getI18nString("dev_handoff.alternative_units.rem_unit");
   }
 }
 export function $$D18(e) {

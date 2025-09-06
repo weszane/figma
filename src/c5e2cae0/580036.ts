@@ -7,7 +7,7 @@ import { q } from "../905/932270";
 import { J } from "../905/270045";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { A as _$$A } from "../5885/54359";
 import { D as _$$D } from "../905/251759";
@@ -75,7 +75,7 @@ export function $$b0({
           className: _$$s.flex.justifyBetween.itemsCenter.pb16.bb1.bSolid.colorBorder.$,
           "data-testid": "cart-sidebar-currency-switcher",
           children: [jsx("p", {
-            children: tx("checkout.sidebar.currency_label")
+            children: renderI18nText("checkout.sidebar.currency_label")
           }), jsx(_$$D, {
             currency: c,
             dropdownShown: D,
@@ -94,7 +94,7 @@ export function $$b0({
           "data-testid": "cart-sidebar-billing-interval",
           children: jsxs(_$$b, {
             legend: jsx(q, {
-              children: tx("checkout.sidebar.switch_your_billing_interval")
+              children: renderI18nText("checkout.sidebar.switch_your_billing_interval")
             }),
             value: i,
             onChange: e => I(e),
@@ -102,18 +102,18 @@ export function $$b0({
               value: NW.YEAR,
               label: jsxs(J, {
                 className: _$$s.flex.itemsCenter.gap16.$,
-                children: [tx("checkout.sidebar.annual"), " ", jsx("b", {
+                children: [renderI18nText("checkout.sidebar.annual"), " ", jsx("b", {
                   className: _$$s.colorTextSuccess.fontSemiBold.colorBgSuccessTertiary.bRadius2.px4.block.$,
                   style: sx.add({
                     fontSize: "10px"
                   }).$,
-                  children: tx("checkout.sidebar.save_up_to_20")
+                  children: renderI18nText("checkout.sidebar.save_up_to_20")
                 })]
               })
             }), jsx(_$$c, {
               value: NW.MONTH,
               label: jsx(J, {
-                children: tx("checkout.sidebar.monthly")
+                children: renderI18nText("checkout.sidebar.monthly")
               })
             })]
           })
@@ -129,7 +129,7 @@ export function $$b0({
         })]
       }) : jsx("p", {
         className: _$$s.colorTextSecondary.$,
-        children: tx("checkout.sidebar.cannot_calculate_subtotal")
+        children: renderI18nText("checkout.sidebar.cannot_calculate_subtotal")
       })
     }), jsxs("div", {
       style: sx.add({
@@ -164,7 +164,7 @@ function C() {
         style: sx.lh14.add({
           fontSize: "9px"
         }).$,
-        children: tx("checkout.sidebar.paid_seat_minimum_banner")
+        children: renderI18nText("checkout.sidebar.paid_seat_minimum_banner")
       })
     })
   });

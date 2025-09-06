@@ -10,7 +10,7 @@ import { Hd, Qe, qM, tr, vE, Wo, xe } from "../905/791403";
 import { J } from "../905/223510";
 import { getSingletonSceneGraph } from "../905/700578";
 import { B as _$$B2 } from "../905/94678";
-import { b as _$$b } from "../905/690073";
+import { EventEmitter } from "../905/690073";
 import { z } from "../vendor/835909";
 export let $$i4 = {
   topLevelComponentProps: !0,
@@ -860,7 +860,7 @@ export class $$$1 {
       lastStreamByteReceivedAtOffset: -1,
       imageDurations: []
     };
-    this.imageProgressEmitter = new _$$b("imageProgressEmitter");
+    this.imageProgressEmitter = new EventEmitter("imageProgressEmitter");
     this.reportMetrics = t;
   }
 }

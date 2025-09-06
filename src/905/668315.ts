@@ -5,7 +5,7 @@ import { h as _$$h } from "../905/207101";
 import { s_ } from "../905/17223";
 import { kt } from "../figma_app/858013";
 import { P } from "../905/347284";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { yJ } from "../figma_app/78808";
 import { Lo } from "../905/156213";
 import { _z, ky } from "../905/977218";
@@ -96,18 +96,18 @@ export let $$E0 = Ju(function (e) {
       className: qr,
       children: [jsx("div", {
         className: PJ,
-        children: e.isWidget ? _$$t("community.publishing.playground_file_for_widget") : _$$t("community.publishing.playground_file_for_plugin")
+        children: e.isWidget ? getI18nString("community.publishing.playground_file_for_widget") : getI18nString("community.publishing.playground_file_for_plugin")
       }), jsxs("div", {
         className: GC,
         children: [jsx(M4, {
           onClick: _,
-          children: _$$t("general.cancel")
+          children: getI18nString("general.cancel")
         }), jsx(UC, {
           disabled: !x,
           onClick: () => {
             x && (e.onAddCallback(fileEntityDataMapper.toSinatra(x)), t(Lo()), S(null));
           },
-          children: _$$t("community.publishing.playground_file_add_button")
+          children: getI18nString("community.publishing.playground_file_add_button")
         })]
       })]
     })]

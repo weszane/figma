@@ -6,7 +6,7 @@ import { AD } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import d from "../vendor/128080";
 import { Py, H3 } from "../905/403166";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { WJ } from "../figma_app/379850";
 import { hA } from "../figma_app/88239";
 import { nL, U3, RO } from "../figma_app/770088";
@@ -26,11 +26,11 @@ var c = d;
 let C = new Set([]);
 export function $$w0(e) {
   return {
-    creationDate: t("comments.sort_by_date"),
-    recent: t("comments.sort_by_last_action"),
-    unread: t("comments.sort_by_unread"),
-    slide: t("comments.sort_by_slide"),
-    asset: t("comments.sort_by_asset")
+    creationDate: getI18nString("comments.sort_by_date"),
+    recent: getI18nString("comments.sort_by_last_action"),
+    unread: getI18nString("comments.sort_by_unread"),
+    slide: getI18nString("comments.sort_by_slide"),
+    asset: getI18nString("comments.sort_by_asset")
   }[e];
 }
 let O = (e, t) => Date.parse(t.comments[0].created_at) - Date.parse(e.comments[0].created_at);
@@ -48,13 +48,13 @@ let L = {
 };
 export function $$P1(e) {
   return {
-    resolved: t("comments.show_resolved_comments"),
-    yours: t("comments.only_your_threads"),
-    currentPage: t("comments.only_current_page"),
-    currentSlide: t("comments.only_current_slide"),
-    currentAsset: t("comments.only_current_asset"),
-    currentTest: t("litmus.comments.only_current_test"),
-    currentBuild: t("litmus.comments.only_current_build")
+    resolved: getI18nString("comments.show_resolved_comments"),
+    yours: getI18nString("comments.only_your_threads"),
+    currentPage: getI18nString("comments.only_current_page"),
+    currentSlide: getI18nString("comments.only_current_slide"),
+    currentAsset: getI18nString("comments.only_current_asset"),
+    currentTest: getI18nString("litmus.comments.only_current_test"),
+    currentBuild: getI18nString("litmus.comments.only_current_build")
   }[e];
 }
 let D = e => !e.comments[0].resolved_at;
@@ -71,8 +71,8 @@ let F = {
 };
 export function $$j2(e) {
   return {
-    commentsOnly: t("comments.only_comments"),
-    postsOnly: t("comments.only_posts")
+    commentsOnly: getI18nString("comments.only_comments"),
+    postsOnly: getI18nString("comments.only_posts")
   }[e];
 }
 export let $$U6 = {

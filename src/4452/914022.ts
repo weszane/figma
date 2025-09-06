@@ -8,7 +8,7 @@ import { getFeatureFlags } from "../905/601108";
 import { _ as _$$_, S } from "../figma_app/490799";
 import { P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { fu } from "../figma_app/831799";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { Eh } from "../figma_app/617654";
@@ -50,7 +50,7 @@ function I(e) {
       I(e.meta);
     });
   }, [e.planType, e.planId, e.resourceType, e.resourceIdOrKey, t]);
-  let E = e.planName ?? _$$t("general.fallback_team_name");
+  let E = e.planName ?? getI18nString("general.fallback_team_name");
   return jsx(fu, {
     name: "Asset Transfer Admin List Modal",
     children: jsx(bL, {
@@ -59,7 +59,7 @@ function I(e) {
       children: jsxs(vo, {
         children: [jsx(Y9, {
           children: jsx(hE, {
-            children: tx("asset_transfers.editor_admin_list_modal.admins_at_entity", {
+            children: renderI18nText("asset_transfers.editor_admin_list_modal.admins_at_entity", {
               entity: E
             })
           })
@@ -67,7 +67,7 @@ function I(e) {
           scrolling: "none",
           children: [jsx(_$$_, {
             color: S.INFORMATION,
-            text: s ? tx("asset_transfers.editor_admin_list_modal.any_of_these_admins_can_transfer_this_project_to_an_external_organization") : tx("asset_transfers.editor_admin_list_modal.any_of_these_admins_can_transfer_this_team_to_an_external_organization")
+            text: s ? renderI18nText("asset_transfers.editor_admin_list_modal.any_of_these_admins_can_transfer_this_project_to_an_external_organization") : renderI18nText("asset_transfers.editor_admin_list_modal.any_of_these_admins_can_transfer_this_team_to_an_external_organization")
           }), jsx(P, {
             className: "asset_transfer_admin_list_modal--scrollContainer--IG5YS",
             children: jsx("div", {

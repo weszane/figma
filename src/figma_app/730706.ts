@@ -3,9 +3,9 @@ import { useCallback, useEffect } from "react";
 import { useDispatch } from "../vendor/514228";
 import { s as _$$s } from "../figma_app/478542";
 import { getFeatureFlags } from "../905/601108";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { ZC } from "../figma_app/39751";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Em, ow } from "../figma_app/976749";
 import { YH } from "../figma_app/604494";
 import { ZU, Wg } from "../figma_app/986347";
@@ -36,7 +36,7 @@ function b() {
     let t = I();
     let r = Ne();
     let n = useCallback(() => o$(e), [e]);
-    let s = md(YH).length > 0;
+    let s = useAtomWithSubscription(YH).length > 0;
     let o = ZC(s);
     let c = s && !o;
     useEffect(() => {
@@ -54,7 +54,7 @@ function b() {
     }),
     icon: jsx(_$$s, {}),
     isSelected: e,
-    getTitle: () => _$$t("slides.properties_panel.rewrite_text.adjust_tone"),
+    getTitle: () => getI18nString("slides.properties_panel.rewrite_text.adjust_tone"),
     recordingKey: "slidesRewriteText"
   };
 }
@@ -69,7 +69,7 @@ export function $$T2() {
   }) : null;
 }
 function I() {
-  return md(Tm);
+  return useAtomWithSubscription(Tm);
 }
 export const VE = $$y0;
 export const X9 = $$E1;

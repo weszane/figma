@@ -9,7 +9,7 @@ import { nR, vd } from "../figma_app/637027";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { P as _$$P } from "../905/347284";
 import { B as _$$B } from "../905/714743";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { f as _$$f } from "../0c62c2fd/277163";
 import { Ce, to } from "../905/156213";
 import { fu } from "../figma_app/831799";
@@ -20,7 +20,7 @@ import { AbW } from "../figma_app/43951";
 import { Bp } from "../figma_app/349248";
 import { b as _$$b } from "../905/165519";
 import { bL } from "../figma_app/630077";
-import { O as _$$O } from "../905/247093";
+import { UNASSIGNED } from "../905/247093";
 import { e0 } from "../905/696396";
 import { OJ } from "../905/519092";
 import { Uc } from "../4452/915131";
@@ -88,7 +88,7 @@ export function $$M0(e) {
   let Q = useCallback(e => {
     if (!A) return;
     let t = {
-      workspaceId: e ?? _$$O,
+      workspaceId: e ?? UNASSIGNED,
       onSubmitReturnToPrevView: !1
     };
     n(to({
@@ -118,7 +118,7 @@ export function $$M0(e) {
     name: e0.FILE_MOVE_MODAL,
     properties: z,
     children: jsx(OJ, {
-      title: _$$t("file_browser.folder_move.modal_header", {
+      title: getI18nString("file_browser.folder_move.modal_header", {
         folderName: D.name
       }),
       fixedTop: !0,
@@ -149,7 +149,7 @@ export function $$M0(e) {
               if (null === e) {
                 if (K.length > 0) return jsxs(_$$Fragment, {
                   children: [jsx(B, {
-                    headerName: _$$t("sidebar.workspaces.other_teams"),
+                    headerName: getI18nString("sidebar.workspaces.other_teams"),
                     onCreateNewTeamClick: Q,
                     workspaceId: null
                   }), null != r && r.team?.workspace?.id == null && ee(r), Z(K)]
@@ -185,12 +185,12 @@ export function $$M0(e) {
                   svg: _$$A3
                 })
               }), jsxs("div", {
-                children: [tx("file_browser.folder_move.move_project_no_edit_access_warning"), jsxs("div", {
+                children: [renderI18nText("file_browser.folder_move.move_project_no_edit_access_warning"), jsxs("div", {
                   className: "folder_move--warningCTALink--f74xo",
                   onClick: X,
                   role: "link",
                   tabIndex: 0,
-                  children: [tx("file_browser.folder_move.view_team"), jsx("div", {
+                  children: [renderI18nText("file_browser.folder_move.view_team"), jsx("div", {
                     className: "folder_move--arrowRightIcon--xIk7X",
                     children: jsx(_$$B, {
                       svg: _$$A
@@ -204,13 +204,13 @@ export function $$M0(e) {
             children: jsx(_$$_, {
               dataTestId: "project-move-site-unpublish-banner",
               color: _$$S.ERROR,
-              text: _$$t("file_browser.file_move.sites_unpublished_on_project_move_warning")
+              text: getI18nString("file_browser.file_move.sites_unpublished_on_project_move_warning")
             })
           }), jsxs("div", {
             className: "folder_move--footer--jcEsZ file_move--footer--pBClJ",
             children: [jsx(nR, {
               onClick: J,
-              children: tx("modal.cancel")
+              children: renderI18nText("modal.cancel")
             }), jsx(vd, {
               onClick: () => {
                 null != M && D ? n(Nr({
@@ -220,7 +220,7 @@ export function $$M0(e) {
                 })) : J();
               },
               disabled: void 0 === M || !$ || !!er,
-              children: tx("file_browser.folder_move.move_project")
+              children: renderI18nText("file_browser.folder_move.move_project")
             })]
           })]
         })]
@@ -237,9 +237,9 @@ function B(e) {
     children: [jsx("div", {
       children: e.headerName
     }), t && jsx(_$$f, {
-      data_tooltip: _$$t("file_browser.inline_team_creation.button_text"),
+      data_tooltip: getI18nString("file_browser.inline_team_creation.button_text"),
       data_onboarding_key: "new-team-button",
-      innerText: _$$t("file_browser.inline_team_creation.button_text"),
+      innerText: getI18nString("file_browser.inline_team_creation.button_text"),
       onClick: () => {
         e.onCreateNewTeamClick(e.workspaceId);
       }

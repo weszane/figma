@@ -4,7 +4,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { XJn, NfO } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { debugState } from "../905/407919";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { getRequest, XHRError, XHR } from "../905/910117";
 import { U2 } from "../figma_app/193867";
 import { n as _$$n } from "../905/347702";
@@ -26,7 +26,7 @@ export function $$m0(e) {
 async function f(e, t, i) {
   if (t?.type === "LOCAL") throw Error("Can only insert library components");
   if (!i) {
-    $D(_$$e.AI_GENERATION, Error("[First Draft] Attempted to insert component without kitContents"));
+    reportError(_$$e.AI_GENERATION, Error("[First Draft] Attempted to insert component without kitContents"));
     return {
       status: "error"
     };

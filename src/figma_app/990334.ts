@@ -2,32 +2,32 @@ import { useRef, useEffect } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { eU, md } from "../figma_app/27355";
-import { az } from "../905/449184";
+import { atom, useAtomWithSubscription } from "../figma_app/27355";
+import { analyticsEventManager } from "../905/449184";
 import { ZC } from "../figma_app/39751";
 import { getInitialOptions } from "../figma_app/169182";
 import { F } from "../905/422355";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { w0 } from "../figma_app/594947";
-import { PN } from "../figma_app/257275";
+import { isInteractionOrEvalMode } from "../figma_app/897289";
 import { OE } from "../figma_app/164212";
 import { RB } from "../figma_app/626952";
 import { PE } from "../figma_app/251115";
 import { Vg } from "../figma_app/460003";
 import { f as _$$f } from "../figma_app/443973";
 import { V2, p3 } from "../figma_app/578955";
-let $$T2 = eU(null);
-let $$I0 = eU(void 0);
+let $$T2 = atom(null);
+let $$I0 = atom(void 0);
 export function $$S1() {
-  let e = md($$T2);
-  let t = md($$I0);
+  let e = useAtomWithSubscription($$T2);
+  let t = useAtomWithSubscription($$I0);
   let r = useRef(new Map());
   let S = useRef(0);
   let v = getSingletonSceneGraph();
   let A = useRef(3e5);
   let x = useRef(0);
   !async function () {
-    if (!PN() && !getInitialOptions().e2e_traffic) {
+    if (!isInteractionOrEvalMode() && !getInitialOptions().e2e_traffic) {
       let e = await w0("autosuggest_prop_shadow_reads");
       A.current = e.get("delayForComparisonMs", 3e5);
       x.current = e.get("proportionLogged", 0);
@@ -49,7 +49,7 @@ export function $$S1() {
   try {
     P = L?.type === "INSTANCE" ? L.componentProperties() : null;
   } catch (e) {
-    $D(_$$e.SEARCH_EXPERIENCE, e);
+    reportError(_$$e.SEARCH_EXPERIENCE, e);
   }
   let D = ZC(e);
   useEffect(() => {
@@ -60,7 +60,7 @@ export function $$S1() {
       try {
         s = n?.type === "INSTANCE" ? n?.componentProperties() : null;
       } catch (e) {
-        $D(_$$e.SEARCH_EXPERIENCE, e);
+        reportError(_$$e.SEARCH_EXPERIENCE, e);
       }
       if (a && s) {
         let e = {
@@ -97,7 +97,7 @@ export function $$S1() {
             "TEXT" === u || "VARIANT" === u ? (e[u]++, a === t ? (r[u]++, null !== l && (a === l ? c[u]++ : d[u]++)) : null !== l && (a === l ? i[u]++ : o[u]++)) : p++;
           }
         });
-        az.trackDefinedEvent("auto_suggest.props_shadow_read", {
+        analyticsEventManager.trackDefinedEvent("auto_suggest.props_shadow_read", {
           textAccuracy: r.TEXT / e.TEXT,
           textCANCount: i.TEXT,
           textCNNCount: o.TEXT,

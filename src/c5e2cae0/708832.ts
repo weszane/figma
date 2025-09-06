@@ -3,12 +3,12 @@ import { useState, useCallback, Component } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { throwError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { az, sx } from "../905/449184";
+import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { zN, qe } from "../figma_app/416935";
 import { Ay } from "../905/612521";
 import { h as _$$h } from "../905/207101";
 import { mI } from "../figma_app/566371";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { XHR } from "../905/910117";
 import { tH, H4 } from "../905/751457";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
@@ -16,7 +16,7 @@ import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { s as _$$s2 } from "../905/573154";
 import { Ph } from "../905/160095";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { J as _$$J } from "../905/231762";
 import { sx as _$$sx } from "../905/941192";
 import { Gu } from "../905/513035";
@@ -102,7 +102,7 @@ let $ = tf(function (e) {
   return jsx("div", {
     className: Nd,
     onClick: e.onClick,
-    children: tx("org_self_serve.headers.cancel")
+    children: renderI18nText("org_self_serve.headers.cancel")
   });
 });
 function U(e) {
@@ -112,21 +112,21 @@ function U(e) {
   if (e.newTeamProps) {
     let s = {
       step: X1.ChoosePlan,
-      name: _$$t("org_self_serve.headers.choose_plan")
+      name: getI18nString("org_self_serve.headers.choose_plan")
     };
     let r = {
       step: X1.CreateTeam,
-      name: _$$t("org_self_serve.headers.create_team")
+      name: getI18nString("org_self_serve.headers.create_team")
     };
     switch (e.newTeamProps?.teamFlowType) {
       case SC.CREATE:
         t.push({
           step: X1.PseudoCreateTeam,
-          name: _$$t("org_self_serve.headers.create_team")
+          name: getI18nString("org_self_serve.headers.create_team")
         });
         t.push({
           step: X1.AddCollaborators,
-          name: _$$t("org_self_serve.headers.add_team_members")
+          name: getI18nString("org_self_serve.headers.add_team_members")
         });
         t.push(s);
         break;
@@ -141,22 +141,22 @@ function U(e) {
   }
   e.canSeeTeamAndSeatSelectionSteps && (t.push({
     step: X1.TeamSelect,
-    name: _$$t("org_self_serve.headers.teams_to_upgrade")
+    name: getI18nString("org_self_serve.headers.teams_to_upgrade")
   }), e.isCampfireCart && t.push({
     step: X1.SeatSelect,
-    name: _$$t("checkout.choose_seats")
+    name: getI18nString("checkout.choose_seats")
   }), a = a ?? X1.TeamSelect);
   e.isCampfireCart ? a = a ?? X1.Payment : (t.push({
     step: X1.Details,
-    name: _$$t("org_self_serve.headers.organization_details")
+    name: getI18nString("org_self_serve.headers.organization_details")
   }), a = a ?? X1.Details);
   t.push({
     step: X1.Payment,
-    name: _$$t("org_self_serve.headers.payment")
+    name: getI18nString("org_self_serve.headers.payment")
   });
   t.push({
     step: X1.Review,
-    name: _$$t("org_self_serve.headers.review")
+    name: getI18nString("org_self_serve.headers.review")
   });
   t[t.findIndex(e => e.step === a)].step = X1.Initial;
   let r = 0;
@@ -176,7 +176,7 @@ function U(e) {
         number: a + 1,
         text: t.name,
         onClick: () => {
-          az.trackDefinedEvent("monetization_upgrades.checkout_breadcrumb_navigation", {
+          analyticsEventManager.trackDefinedEvent("monetization_upgrades.checkout_breadcrumb_navigation", {
             fromStep: e.currentStep,
             toStep: t.step,
             tier: Ju.ORG,
@@ -257,7 +257,7 @@ function eb({
           children: e.name
         }), jsx("span", {
           className: _$$s.block.font11.colorTextSecondary.ellipsis.$,
-          children: tx("checkout.org_select_teams_member_count", {
+          children: renderI18nText("checkout.org_select_teams_member_count", {
             count: e.numMembers
           })
         })]
@@ -273,18 +273,18 @@ function eC({
   onChangeFormInput: t
 }) {
   return jsx(_$$x, {
-    title: _$$t("checkout.organization_details"),
+    title: getI18nString("checkout.organization_details"),
     children: jsxs("div", {
       className: _$$s.font13.$,
       children: [jsx(Lf, {
         htmlName: "legal_org_name",
-        label: _$$t("org_self_serve.details_step.legal_company_name"),
+        label: getI18nString("org_self_serve.details_step.legal_company_name"),
         value: e.legalOrgName,
         onChange: t
       }), jsx(Lf, {
         htmlName: "org_name",
-        label: _$$t("org_self_serve.details_step.company_display_name"),
-        placeholder: _$$t("org_self_serve.details_step.company_display_name__different_from_company_name_sub_text"),
+        label: getI18nString("org_self_serve.details_step.company_display_name"),
+        placeholder: getI18nString("org_self_serve.details_step.company_display_name__different_from_company_name_sub_text"),
         value: e.orgName,
         onChange: t
       })]
@@ -396,7 +396,7 @@ export class $$eM2 extends Component {
       }));
     };
     this.trackError = e => {
-      az.trackDefinedEvent("monetization_upgrades.checkout_payment_error", {
+      analyticsEventManager.trackDefinedEvent("monetization_upgrades.checkout_payment_error", {
         message: e,
         paymentFlow: wn.ORG_UPGRADE,
         paymentMethodType: lB.CARD,
@@ -448,13 +448,13 @@ export class $$eM2 extends Component {
         case X1.CreateTeam:
         case X1.PseudoCreateTeam:
         case X1.AddCollaborators:
-          return _$$t("org_self_serve.create_team_step.next_select_team");
+          return getI18nString("org_self_serve.create_team_step.next_select_team");
         case X1.TeamSelect:
-          return _$$t("checkout.org_self_serve.next_select_seats");
+          return getI18nString("checkout.org_self_serve.next_select_seats");
         case X1.SeatSelect:
-          return _$$t("org_self_serve.payment_step.next_payment");
+          return getI18nString("org_self_serve.payment_step.next_payment");
         case X1.Payment:
-          return _$$t("org_self_serve.review_step.next_review");
+          return getI18nString("org_self_serve.review_step.next_review");
         case X1.Review:
         case X1.Confirmation:
           return "";
@@ -484,7 +484,7 @@ export class $$eM2 extends Component {
     this.getIsNextButtonLoading = () => this.state.loading || this.state.apiPending;
     this.onTeamToggle = e => {
       let t = !this.state.selectedTeamIds.has(e);
-      az.trackDefinedEvent("monetization_upgrades.checkout_change_team_selection", {
+      analyticsEventManager.trackDefinedEvent("monetization_upgrades.checkout_change_team_selection", {
         teamId: e,
         selectedTeam: t
       });
@@ -607,11 +607,11 @@ export class $$eM2 extends Component {
             svg: _$$A,
             className: $y
           }), jsx("p", {
-            children: tx("org_self_serve.purchase_summary.have_questions", {
+            children: renderI18nText("org_self_serve.purchase_summary.have_questions", {
               contactSales: jsx("span", {
                 className: uD,
                 onClick: this.contactSales,
-                children: tx("org_self_serve.purchase_summary.contact_our_sales_team")
+                children: renderI18nText("org_self_serve.purchase_summary.contact_our_sales_team")
               })
             })
           })]
@@ -628,7 +628,7 @@ export class $$eM2 extends Component {
           });
         },
         tier: Ju.ORG,
-        title: _$$t("checkout.your_organization_plan"),
+        title: getI18nString("checkout.your_organization_plan"),
         trackingProperties: {
           selectedTeamIds: gu(Array.from(this.state.selectedTeamIds)),
           selectedUserSeatTypes: Tj(this.state.selectedUserSeatTypes),
@@ -680,7 +680,7 @@ export class $$eM2 extends Component {
       this.props.dispatch(sf({
         view: "recentsAndSharing"
       }));
-      this.props.dispatch(_$$s2.error(t || _$$t("org_self_serve.confirmation_step.sorry_there_was_an_error_processing_your_request_refresh_and_try_again")));
+      this.props.dispatch(_$$s2.error(t || getI18nString("org_self_serve.confirmation_step.sorry_there_was_an_error_processing_your_request_refresh_and_try_again")));
       this.setState({
         loading: !1
       });
@@ -774,7 +774,7 @@ export class $$eM2 extends Component {
     let a = this.state.vatId;
     let s = this.state.regionalVatId;
     if (null === t) {
-      let e = _$$t("org_self_serve.payment_step.sorry_please_wait");
+      let e = getI18nString("org_self_serve.payment_step.sorry_please_wait");
       this.trackError(e);
       this.setState({
         paymentError: e
@@ -785,7 +785,7 @@ export class $$eM2 extends Component {
       apiPending: !0
     }), a && !(await _$$V(a, e.country, () => {}, this.onVatValidationFail))) return;
     if (this.props.canSeeBillingAddressExp && !this.state.nameOnPaymentMethod) {
-      let e = _$$t("org_self_serve.payment_step.name_on_payment_method_is_required");
+      let e = getI18nString("org_self_serve.payment_step.name_on_payment_method_is_required");
       this.trackError(e);
       this.setState({
         apiPending: !1,
@@ -839,7 +839,7 @@ export class $$eM2 extends Component {
         }), () => this.setStep(X1.Review));
       });
       {
-        let e = t.error?.message || _$$t("org_self_serve.payment_step.there_was_an_error_processing_your_payment_please_try_again");
+        let e = t.error?.message || getI18nString("org_self_serve.payment_step.there_was_an_error_processing_your_payment_please_try_again");
         this.trackError(e);
         this.setState({
           apiPending: !1,
@@ -875,7 +875,7 @@ export class $$eM2 extends Component {
     this.setState({
       apiPending: !0
     });
-    XHR.post("/api/orgs", s).catch(s => (this.props.dispatch(_$$s2.error(_$$J(s, s.data?.message || _$$t("org_self_serve.review_step.sorry_there_was_an_error_please_try_again")))), $D(_$$e.BILLING_EXPERIENCE, Error(`[Billing] Org checkout API failed: ${s.data?.message}`), {
+    XHR.post("/api/orgs", s).catch(s => (this.props.dispatch(_$$s2.error(_$$J(s, s.data?.message || getI18nString("org_self_serve.review_step.sorry_there_was_an_error_please_try_again")))), reportError(_$$e.BILLING_EXPERIENCE, Error(`[Billing] Org checkout API failed: ${s.data?.message}`), {
       extra: {
         eligibleTeamsByTeamId: this.state.eligibleTeamsByTeamId,
         eligibleUsersByUserId: this.state.eligibleUsersByUserId,
@@ -900,7 +900,7 @@ export class $$eM2 extends Component {
         teamId: e.data.meta.new_team.id
       }));
       this.state.newTeamName && e.data.meta.new_team && Al(this.props.user.id);
-      sx("Self Serve Org Purchased (GTM)");
+      trackEventAnalytics("Self Serve Org Purchased (GTM)");
       uE("Self Serve Org Purchased", {
         user: this.props.user
       }, {
@@ -943,7 +943,7 @@ export class $$eM2 extends Component {
         shippingAddress: this.state.shippingAddress,
         taxPercent: this.state.taxRate,
         tier: Ju.ORG,
-        title: _$$t("checkout.upgrade_to_an_organization_plan"),
+        title: getI18nString("checkout.upgrade_to_an_organization_plan"),
         userEmail: this.state.orgDetails.actorEmail
       });
     } else e = t === X1.Confirmation ? jsx(_$$_2, {
@@ -986,7 +986,7 @@ export class $$eM2 extends Component {
             Object.values(e).filter(e => e.teamIds.some(e => a.includes(e))).forEach(e => {
               let r = e.teamIds;
               let i = a.filter(e => r.includes(e)).map(e => t[e]);
-              let l = 1 === i.length ? i[0].name : _$$t("checkout.multiple_teams_label");
+              let l = 1 === i.length ? i[0].name : getI18nString("checkout.multiple_teams_label");
               s.push({
                 id: e.id,
                 handle: e.handle,
@@ -1022,7 +1022,7 @@ export class $$eM2 extends Component {
           }), jsx("div", {
             className: _$$s.pt24.$,
             children: jsxs(_$$x, {
-              title: _$$t("checkout.payment_details"),
+              title: getI18nString("checkout.payment_details"),
               children: [this.state.paymentError && jsx("div", {
                 className: _$$s.mb20.$,
                 children: jsx(_$$_, {
@@ -1149,13 +1149,13 @@ export function $$eO0({
   let t = function (e) {
     switch (e) {
       case X1.TeamSelect:
-        return _$$t("checkout.org_self_serve.select_teams_title");
+        return getI18nString("checkout.org_self_serve.select_teams_title");
       case X1.SeatSelect:
-        return _$$t("checkout.org_self_serve.select_seats_header");
+        return getI18nString("checkout.org_self_serve.select_seats_header");
       case X1.Payment:
-        return _$$t("checkout.enter_your_payment_details");
+        return getI18nString("checkout.enter_your_payment_details");
       case X1.Review:
-        return _$$t("checkout.everything_look_good");
+        return getI18nString("checkout.everything_look_good");
       default:
         return null;
     }
@@ -1168,17 +1168,17 @@ export function $$eO0({
       },
       newTab: !0,
       trusted: !0,
-      children: tx("checkout.learn_more_about_seats")
+      children: renderI18nText("checkout.learn_more_about_seats")
     });
     switch (e) {
       case X1.TeamSelect:
-        return _$$t("checkout.org_self_serve.select_teams_subtitle");
+        return getI18nString("checkout.org_self_serve.select_teams_subtitle");
       case X1.SeatSelect:
-        return tx("checkout.select_seats_table.seat_types_have_been_suggested", {
+        return renderI18nText("checkout.select_seats_table.seat_types_have_been_suggested", {
           learnMoreAboutSeatsLink: t
         });
       case X1.Review:
-        return _$$t("checkout.confirm_your_plan_seats_and_payment_details_then_you_re_all_set");
+        return getI18nString("checkout.confirm_your_plan_seats_and_payment_details_then_you_re_all_set");
       default:
         return null;
     }

@@ -1,9 +1,9 @@
 import { Wh } from "../figma_app/615482";
 import { useEffect } from "react";
-import { eU, zl } from "../figma_app/27355";
-import { az } from "../905/449184";
+import { atom, atomStoreManager } from "../figma_app/27355";
+import { analyticsEventManager } from "../905/449184";
 import { g } from "../905/880308";
-export let $$o1 = Wh(() => eU({
+export let $$o1 = Wh(() => atom({
   impressionId: null,
   source: null
 }));
@@ -15,12 +15,12 @@ export function $$l0() {
       impressionId,
       source,
       hasSearchTerm
-    } = zl.get($$o1);
-    (impressionId !== e || source !== t || !1 !== hasSearchTerm) && (zl.set($$o1, {
+    } = atomStoreManager.get($$o1);
+    (impressionId !== e || source !== t || !1 !== hasSearchTerm) && (atomStoreManager.set($$o1, {
       impressionId: e,
       source: t,
       hasSearchTerm: !1
-    }), az.trackDefinedMetric("suggested_actions.entry_point_impressions", {
+    }), analyticsEventManager.trackDefinedMetric("suggested_actions.entry_point_impressions", {
       impressionId: e,
       source: "COPY_SELECTION_TOAST",
       hasSearchTerm: !1

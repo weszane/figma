@@ -1,5 +1,5 @@
-import { Iz } from "../figma_app/27355";
-import { bt } from "../905/270322";
+import { createRemovableAtomFamily } from "../figma_app/27355";
+import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { FUserRoleType } from "../figma_app/191312";
 import { Tej, s5h } from "../figma_app/43951";
 import { N } from "../905/482239";
@@ -17,15 +17,15 @@ let $$c0 = Z1($$d5, e => {
   });
   return r;
 });
-let $$u3 = bt(e => e.currentUserOrgId);
+let $$u3 = createReduxSubscriptionAtomWithState(e => e.currentUserOrgId);
 let $$p2 = J9([$$c0], ([e], t) => {
   let r = t($$u3);
   return null != r ? e[r] : null;
 });
-let $$_1 = Iz(e => Z1(s5h.Query({
+let $$_1 = createRemovableAtomFamily(e => Z1(s5h.Query({
   orgId: e
 }), e => !!e.org?.workspaces?.length && !!e.org?.bigmaEnabledAt));
-let h = bt(e => e.orgById);
+let h = createReduxSubscriptionAtomWithState(e => e.orgById);
 let $$m6 = J9([$$p2, $$d5, N], ([e, t, r], n) => {
   if (!e) return !1;
   let i = n(h)[e.id];

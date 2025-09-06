@@ -1,5 +1,5 @@
 import { ServiceCategories as _$$e } from "../905/165054";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { Dq } from "../905/316062";
 import { j9 } from "../figma_app/162807";
 import { C0, rR } from "../figma_app/756995";
@@ -33,7 +33,7 @@ export function $$l0(e) {
       return rR.OTHER;
     default:
       let t = Error(`Uncaught sort key: ${e}`);
-      $D(_$$e.WAYFINDING, t);
+      reportError(_$$e.WAYFINDING, t);
       return rR.OTHER;
   }
 }

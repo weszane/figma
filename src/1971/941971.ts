@@ -6,10 +6,10 @@ import { J as _$$J } from "../905/270045";
 import { $n } from "../905/521428";
 import { Egt, biQ, XJn, mKm, oVz } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { x1, xi } from "../905/714362";
+import { logError, logWarning } from "../905/714362";
 import { g as _$$g } from "../905/880308";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { Y as _$$Y } from "../905/830372";
 import { E as _$$E } from "../905/984674";
@@ -23,7 +23,7 @@ import { eb, Kf, BW, JF } from "../figma_app/257655";
 import { Z as _$$Z } from "../905/279476";
 import { e as _$$e } from "../905/149844";
 import { getSingletonSceneGraph } from "../905/700578";
-import { zl, md } from "../figma_app/27355";
+import { atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { n as _$$n } from "../draftjs_composer/589474";
 import { GH } from "../905/234821";
@@ -38,7 +38,7 @@ import { Gh, Xs } from "../figma_app/707567";
 import { m as _$$m } from "../figma_app/175364";
 import { l7 } from "../905/189185";
 import B from "../vendor/267721";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { H9 } from "../figma_app/930338";
 import { Ay } from "../figma_app/432652";
 import { J as _$$J2 } from "../905/915227";
@@ -66,7 +66,7 @@ function H(e, t, a) {
       } = W(e.node);
       !function (e, t, a) {
         if (!e) return;
-        let l = zl.get(ze);
+        let l = atomStoreManager.get(ze);
         if (!l) return;
         let i = e.data?.file?.comments.find(e => e.clientMeta?.nodeId === t.guid && e.clientMeta?.nodeOffset?.x === 0 && e.clientMeta?.nodeOffset?.y === 0);
         let n = getSingletonSceneGraph().getCurrentPage().guid;
@@ -177,10 +177,10 @@ function et(e, t, a) {
         symbolKey: symbolId,
         symbolVersion: version
       }));
-      sx("FirstDraftIpConflictBuildingBlockEval", {
+      trackEventAnalytics("FirstDraftIpConflictBuildingBlockEval", {
         runGuid: o,
         section: e,
-        fileKey: zl.get(ze) || "",
+        fileKey: atomStoreManager.get(ze) || "",
         buildingBlockScores: l.map(e => JSON.stringify(e))
       });
     } else if ("Examples" === e) {
@@ -188,10 +188,10 @@ function et(e, t, a) {
         score: e.result.conflictScore,
         exampleName: e.node.name
       }));
-      sx("FirstDraftIpConflictExamplesEval", {
+      trackEventAnalytics("FirstDraftIpConflictExamplesEval", {
         runGuid: o,
         section: e,
-        fileKey: zl.get(ze) || "",
+        fileKey: atomStoreManager.get(ze) || "",
         exampleScores: t.map(e => JSON.stringify(e))
       });
     }
@@ -226,9 +226,9 @@ async function el(e, t) {
         }, {
           orgId: null,
           teamId: null,
-          fileKey: zl.get(ze) || null,
-          userId: zl.get(kS) || null,
-          fileSeq: zl.get(_$$J2)?.toString() || null,
+          fileKey: atomStoreManager.get(ze) || null,
+          userId: atomStoreManager.get(kS) || null,
+          fileSeq: atomStoreManager.get(_$$J2)?.toString() || null,
           trackingSessionId: null,
           clientLifecycleId: ""
         });
@@ -403,7 +403,7 @@ function ec({
   let [K, k] = useState(!1);
   let [E, N] = useState(null);
   let [A, R] = useState(null);
-  let _ = md(Xh(void 0));
+  let _ = useAtomWithSubscription(Xh(void 0));
   let [J, $] = useState(!1);
   let B = GH();
   useEffect(() => {
@@ -470,7 +470,7 @@ function ec({
         e && (await Q(e, a, B));
       }
     } catch (e) {
-      x1("first-draft", "Error running evals", {
+      logError("first-draft", "Error running evals", {
         error: e
       });
       a(_$$F.enqueue({
@@ -855,7 +855,7 @@ async function ep({
     }));
     return m;
   } catch (e) {
-    x1("first-draft", "Error running evals", {
+    logError("first-draft", "Error running evals", {
       error: e
     });
     debugState.dispatch(_$$F.enqueue({
@@ -1032,7 +1032,7 @@ export function $$eb0() {
     let l = allUsableKitEntries.filter(e => "LOCAL" === e.dsKitKey.type);
     return (e.length > 0 ? [{
       type: "header",
-      text: t("first_draft.made_by_figma")
+      text: getI18nString("first_draft.made_by_figma")
     }].concat(e.map(e => ({
       type: "checkableOption",
       value: {
@@ -1052,7 +1052,7 @@ export function $$eb0() {
       text: e.name
     }))) : []).concat(l.length > 0 ? [{
       type: "header",
-      text: t("first_draft.current_file")
+      text: getI18nString("first_draft.current_file")
     }].concat(l.map(e => ({
       type: "checkableOption",
       value: {
@@ -1133,12 +1133,12 @@ function eI({
   });
   let N = useCallback(async () => {
     if (!e) {
-      xi("first-draft", "insert called without a selected kit");
+      logWarning("first-draft", "insert called without a selected kit");
       return;
     }
     let t = ew(e);
     if (!t) {
-      xi("first-draft", "insert called without a valid dsKit");
+      logWarning("first-draft", "insert called without a valid dsKit");
       return;
     }
     await _submitPromptMocked({
@@ -1153,12 +1153,12 @@ function eI({
   }, [m, _submitPromptMocked, e, d]);
   let T = useCallback(async t => {
     if (!e) {
-      xi("first-draft", "insert called without a selected kit");
+      logWarning("first-draft", "insert called without a selected kit");
       return;
     }
     let a = ew(e);
     if (!a) {
-      xi("first-draft", "insert called without a valid dsKit");
+      logWarning("first-draft", "insert called without a valid dsKit");
       return;
     }
     await submitPromptMocked({

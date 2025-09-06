@@ -2,18 +2,18 @@ import { Wh } from "../figma_app/615482";
 import { useEffect } from "react";
 import { shallowEqual } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { eU, fp } from "../figma_app/27355";
-import { sx } from "../905/449184";
+import { atom, useAtomValueAndSetter } from "../figma_app/27355";
+import { trackEventAnalytics } from "../905/449184";
 import { U } from "../figma_app/901889";
 import { h } from "../905/207101";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { _I } from "../figma_app/473493";
 let n;
-let _ = Wh(() => eU(!1), {
+let _ = Wh(() => atom(!1), {
   preserveValue: !1
 });
-let $$h1 = eU("");
-let $$m4 = eU("");
+let $$h1 = atom("");
+let $$m4 = atom("");
 var $$g3 = (e => (e.ALL = "ALL", e.RECENTLY_VIEWED = "RECENTLY_VIEWED", e.BUILD = "BUILD", e.COMPLETED = "COMPLETED", e))($$g3 || {});
 var $$f0 = (e => (e.RECENT = "RECENT", e.PAGE = "PAGE", e.ALPHABETICAL = "ALPHABETICAL", e))($$f0 || {});
 export function $$E2(e, t, r) {
@@ -41,19 +41,19 @@ export function $$E2(e, t, r) {
         forwardToDatadog: !0
       }), n = d);
     } catch (e) {
-      $D(_$$e.DEVELOPER_TOOLS, e);
+      reportError(_$$e.DEVELOPER_TOOLS, e);
     }
   }, [e, r, t, l, o]);
 }
 export function $$y5(e, t, r) {
-  let [n, a] = fp(_);
+  let [n, a] = useAtomValueAndSetter(_);
   let c = U();
   useEffect(() => {
     if (!n) try {
       if (e.length > 0 && t && !t.loading) {
         if (t.hasError || !t.usersById) {
           a(!0);
-          sx("dev_mode.overview.avatars.error", {}, {
+          trackEventAnalytics("dev_mode.overview.avatars.error", {}, {
             forwardToDatadog: !0
           });
         } else if (Object.keys(t.usersById).length === e.length) {
@@ -75,7 +75,7 @@ export function $$y5(e, t, r) {
       }
     } catch (e) {
       a(!0);
-      $D(_$$e.DEVELOPER_TOOLS, e);
+      reportError(_$$e.DEVELOPER_TOOLS, e);
     }
   }, [n, r, a, c, e.length, t]);
 }

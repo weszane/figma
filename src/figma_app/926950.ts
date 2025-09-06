@@ -6,7 +6,7 @@ import { J as _$$J } from "../905/270045";
 import { S as _$$S } from "../905/274480";
 import { $n } from "../905/521428";
 import { getFeatureFlags } from "../905/601108";
-import { eU, fp, Xr } from "../figma_app/27355";
+import { atom, useAtomValueAndSetter, Xr } from "../figma_app/27355";
 import p from "classnames";
 import { Tf } from "../905/280919";
 import { h as _$$h } from "../905/207101";
@@ -22,7 +22,7 @@ import { ks, e2 } from "../figma_app/637027";
 import { l as _$$l3, U as _$$U } from "../905/30301";
 import { P as _$$P } from "../905/347284";
 import { B as _$$B } from "../905/714743";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { zX } from "../905/576487";
 import { lW } from "../figma_app/11182";
@@ -31,7 +31,7 @@ import { b as _$$b } from "../905/985254";
 import { Um } from "../905/848862";
 import { _6 } from "../figma_app/386952";
 import { f as _$$f } from "../905/940356";
-import { Bu } from "../figma_app/53721";
+import { mapEditorTypeToStringWithObfuscated } from "../figma_app/53721";
 import { o as _$$o } from "../905/240151";
 import { Ju } from "../905/102752";
 import { v as _$$v } from "../905/596134";
@@ -46,7 +46,7 @@ import { A as _$$A4 } from "../1617/230645";
 import { A as _$$A5 } from "../1617/794786";
 import { A as _$$A6 } from "../svg/237029";
 var _ = p;
-let $$J2 = eU(!1);
+let $$J2 = atom(!1);
 let Z = e => e.map(e => {
   let t = e.name.match(/((.*)\s+-\s+)?(.*)/);
   return {
@@ -65,7 +65,7 @@ let Z = e => e.map(e => {
 }, new Map());
 let Q = e => {
   let t = e.match(/app\.asana\.com\/\d\/\d+\/(\d+)/);
-  if (!t || t.length < 2) throw Error(_$$t("bug_reporter.error_invalid_asana_url"));
+  if (!t || t.length < 2) throw Error(getI18nString("bug_reporter.error_invalid_asana_url"));
   return t[1];
 };
 function ee(e) {
@@ -78,13 +78,13 @@ let er = {
   gid: "",
   name: "Pick an option"
 };
-let en = eU(!0);
-let ei = eU("");
-let ea = eU("");
-let es = eU("");
-let eo = eU(er);
-let el = eU(er);
-let ed = eU(!1);
+let en = atom(!0);
+let ei = atom("");
+let ea = atom("");
+let es = atom("");
+let eo = atom(er);
+let el = atom(er);
+let ed = atom(!1);
 function ec(e) {
   let [t, r] = useState([]);
   let [o, l] = useState(new Map());
@@ -107,10 +107,10 @@ function ec(e) {
   }, [d]);
   return jsx(eu, {
     ...e,
-    descriptionLabel: _$$t("bug_reporter.modal.description"),
-    descriptionPlaceholder: _$$t("bug_reporter.modal.description_placeholder"),
+    descriptionLabel: getI18nString("bug_reporter.modal.description"),
+    descriptionPlaceholder: getI18nString("bug_reporter.modal.description_placeholder"),
     endpoint: "/api/bug_reports",
-    modalTitle: _$$t("help_widget.menu.report_issue"),
+    modalTitle: getI18nString("help_widget.menu.report_issue"),
     onError: e => {
       d(_$$F.enqueue({
         message: `${e}. Couldn't submit report. Try again or use /bug in Slack.`,
@@ -120,15 +120,15 @@ function ec(e) {
     productAreaGroups: o,
     recordingKey: "bugReporter",
     severityOptions: t,
-    shareFileLabel: _$$t("bug_reporter.modal.include_filekey"),
+    shareFileLabel: getI18nString("bug_reporter.modal.include_filekey"),
     showTitle: !0,
-    submitButtonText: _$$t("bug_reporter.modal.submit"),
-    successMessage: tx("bug_reporter.urgent_bug_info", {
+    submitButtonText: getI18nString("bug_reporter.modal.submit"),
+    successMessage: renderI18nText("bug_reporter.urgent_bug_info", {
       notifyTheRelevantOncall: jsx(_$$N, {
         newTab: !0,
         href: "https://go/find-oncall",
         trusted: !0,
-        children: tx("bug_reporter.notify_oncall")
+        children: renderI18nText("bug_reporter.notify_oncall")
       })
     }),
     supportsTaskUpdates: !0
@@ -158,13 +158,13 @@ function eu({
     windowInnerHeight
   } = _$$l();
   let G = _$$v();
-  let [H, W] = fp(ei);
+  let [H, W] = useAtomValueAndSetter(ei);
   let K = Xr(ea);
   let Y = Xr(es);
   let $ = Xr(eo);
   let X = Xr(el);
   let q = Xr(ed);
-  let [Z, ec] = fp(en);
+  let [Z, ec] = useAtomValueAndSetter(en);
   let [eu, e_] = useState(!1);
   let [em, eg] = useState(!1);
   let ef = useRef("");
@@ -270,14 +270,14 @@ function eu({
     eT.current = r;
     D(_$$F.enqueue({
       type: "bug-reporter-submitting",
-      message: _$$t("bug_reporter.submitting_visual_bell"),
+      message: getI18nString("bug_reporter.submitting_visual_bell"),
       timeoutType: "exact",
       timeoutOverride: 4e3,
       icon: zX.SPINNER
     }));
     D(_$$F.enqueue({
       type: "bug-reporter-submitting-long",
-      message: _$$t("bug_reporter.long_submitting_visual_bell"),
+      message: getI18nString("bug_reporter.long_submitting_visual_bell"),
       delay: 4e3,
       icon: zX.SPINNER
     }));
@@ -293,7 +293,7 @@ function eu({
       num_people_in_file: x,
       datadog_rum_session_id: Tf.sessionId ? `http://go/dd/rum/session/${Tf.sessionId}` : void 0
     };
-    "fullscreen" === R.view ? (u.editor_type = Bu(R.editorType), a && (u.file_key = R.fileKey, u.url = window.location.href)) : u.url = window.location.href;
+    "fullscreen" === R.view ? (u.editor_type = mapEditorTypeToStringWithObfuscated(R.editorType), a && (u.file_key = R.fileKey, u.url = window.location.href)) : u.url = window.location.href;
     let p = {
       title: l ? e : void 0,
       severity: n.gid,
@@ -411,12 +411,12 @@ function ep(e) {
   let {
     windowInnerHeight
   } = _$$l();
-  let [E, T] = fp(ei);
-  let [I, O] = fp(ea);
-  let [R, L] = fp(es);
-  let [P, k] = fp(eo);
-  let [M, F] = fp(el);
-  let [j, U] = fp(ed);
+  let [E, T] = useAtomValueAndSetter(ei);
+  let [I, O] = useAtomValueAndSetter(ea);
+  let [R, L] = useAtomValueAndSetter(es);
+  let [P, k] = useAtomValueAndSetter(eo);
+  let [M, F] = useAtomValueAndSetter(el);
+  let [j, U] = useAtomValueAndSetter(ed);
   let [B, K] = useState(!0);
   let [Y, X] = useState(!1);
   let [q, J] = useState(!1);
@@ -531,7 +531,7 @@ function ep(e) {
       className: $1,
       children: [jsx(_$$B, {
         svg: _$$A
-      }), tx("bug_reporter.drop_attachments")]
+      }), renderI18nText("bug_reporter.drop_attachments")]
     }), jsx(_$$P, {
       maxHeight: ep,
       hideScrollbar: Y,
@@ -548,10 +548,10 @@ function ep(e) {
           className: uu,
           children: [jsx(_$$J, {
             className: y8,
-            children: tx("bug_reporter.asana_hint")
+            children: renderI18nText("bug_reporter.asana_hint")
           }), jsx(ks, {
             className: _Z,
-            placeholder: _$$t("bug_reporter.modal.asana_link_placeholder"),
+            placeholder: getI18nString("bug_reporter.modal.asana_link_placeholder"),
             value: E,
             onChange: ef,
             onPaste: e => {
@@ -567,10 +567,10 @@ function ep(e) {
         }), e.showTitle && jsxs("div", {
           children: [jsx(_$$J, {
             className: Pf,
-            children: tx("bug_reporter.modal.title")
+            children: renderI18nText("bug_reporter.modal.title")
           }), jsx(ks, {
             className: _Z,
-            placeholder: _$$t("bug_reporter.modal.title_placeholder"),
+            placeholder: getI18nString("bug_reporter.modal.title_placeholder"),
             autoFocus: !0,
             onKeyDown: e => eC(e, "title"),
             value: I,
@@ -583,7 +583,7 @@ function ep(e) {
               id: ec
             },
             className: Pf,
-            children: tx("bug_reporter.modal.severity")
+            children: renderI18nText("bug_reporter.modal.severity")
           }), jsxs(l6, {
             ariaLabelledBy: ec,
             id: "bug_reporter_select_severity",
@@ -597,7 +597,7 @@ function ep(e) {
             },
             children: [0 === e.severityOptions.length && jsx(c$, {
               disabled: !0,
-              children: tx("bug_reporter.modal.loading")
+              children: renderI18nText("bug_reporter.modal.loading")
             }, "loading"), e.severityOptions.map(e => jsx(c$, {
               value: e,
               children: e.name
@@ -609,10 +609,10 @@ function ep(e) {
               id: eu
             },
             className: Pf,
-            children: tx("bug_reporter.modal.product_area")
+            children: renderI18nText("bug_reporter.modal.product_area")
           }), jsx(ks, {
             className: _Z,
-            placeholder: _$$t("bug_reporter.modal.search_filter_placeholder"),
+            placeholder: getI18nString("bug_reporter.modal.search_filter_placeholder"),
             autoFocus: !0,
             onKeyDown: e => eC(e, "productAreaSearch"),
             value: eO,
@@ -639,7 +639,7 @@ function ep(e) {
               if (0 === e.productAreaGroups.size) return jsx(c$, {
                 value: null,
                 disabled: !0,
-                children: tx("bug_reporter.modal.loading")
+                children: renderI18nText("bug_reporter.modal.loading")
               }, "loading");
               let r = [];
               e.productAreaGroups.forEach((e, i) => {
@@ -678,7 +678,7 @@ function ep(e) {
         }), jsxs("div", {
           children: [jsx(_$$J, {
             className: Pf,
-            children: tx("bug_reporter.modal.images_and_videos")
+            children: renderI18nText("bug_reporter.modal.images_and_videos")
           }), jsx(e_, {
             attachmentFiles: Z,
             setAttachmentFiles: ee,
@@ -688,12 +688,12 @@ function ep(e) {
           children: jsxs(Fragment, {
             children: [jsx(_$$J, {
               className: Pf,
-              children: tx("bug_reporter.profiler.title")
+              children: renderI18nText("bug_reporter.profiler.title")
             }), jsx(_$$J2, {
               onProfilingFinish: e => {
                 en(e);
               }
-            }), et && tx("bug_reporter.profiler.profile_attached")]
+            }), et && renderI18nText("bug_reporter.profiler.profile_attached")]
           })
         }), "fullscreen" === e.selectedView.view && jsx(_$$S, {
           checked: B,
@@ -709,7 +709,7 @@ function ep(e) {
                   svg: _$$A4
                 }), jsx("div", {
                   className: dX,
-                  children: tx("bug_reporter.modal.include_filekey_info")
+                  children: renderI18nText("bug_reporter.modal.include_filekey_info")
                 })]
               })]
             })
@@ -719,7 +719,7 @@ function ep(e) {
           children: [jsx($n, {
             variant: "secondary",
             onClick: e.onClose,
-            children: tx("bug_reporter.modal.cancel")
+            children: renderI18nText("bug_reporter.modal.cancel")
           }), jsx($n, {
             variant: "primary",
             type: "submit",
@@ -799,7 +799,7 @@ function eh(e) {
     className: yl,
     children: [jsx("div", {
       className: lM,
-      children: tx("bug_reporter.success_message")
+      children: renderI18nText("bug_reporter.success_message")
     }), jsxs("div", {
       className: U3,
       children: [jsxs("div", {
@@ -811,7 +811,7 @@ function eh(e) {
           onClick: r,
           href: e.taskUrl,
           trusted: !0,
-          children: tx("bug_reporter.asana_link")
+          children: renderI18nText("bug_reporter.asana_link")
         })]
       }), jsxs("div", {
         className: AX,
@@ -824,7 +824,7 @@ function eh(e) {
               stringToCopy: e.taskUrl
             }));
           },
-          children: tx("bug_reporter.copy_link")
+          children: renderI18nText("bug_reporter.copy_link")
         })]
       })]
     }), e.isNewReport && jsx("div", {
@@ -833,7 +833,7 @@ function eh(e) {
       children: jsx(_$$N.Button, {
         href: e.slackUrl,
         newTab: !0,
-        children: tx("bug_reporter.open_slack_discussion")
+        children: renderI18nText("bug_reporter.open_slack_discussion")
       })
     }), e.submissionErrorMessages.length > 0 && e.submissionErrorMessages.map(e => jsx("p", {
       children: e.toString()
@@ -846,18 +846,18 @@ let $$em0 = Ju(e => jsx(ec, {
 }), "BugReporterModal");
 let $$eg1 = Ju(e => jsx(eu, {
   ...e,
-  descriptionLabel: _$$t("bug_reporter.modal.description_label_performance"),
-  descriptionPlaceholder: _$$t("bug_reporter.modal.description_placeholder_performance"),
+  descriptionLabel: getI18nString("bug_reporter.modal.description_label_performance"),
+  descriptionPlaceholder: getI18nString("bug_reporter.modal.description_placeholder_performance"),
   endpoint: "/api/perf_reports",
-  modalTitle: _$$t("help_widget.menu.report_performance_issue"),
+  modalTitle: getI18nString("help_widget.menu.report_performance_issue"),
   onSubmit: () => {
     Tf.optUserIntoDebugFlow();
   },
   recordingKey: "perfReporter",
-  shareFileLabel: _$$t("bug_reporter.modal.include_filekey_performance"),
+  shareFileLabel: getI18nString("bug_reporter.modal.include_filekey_performance"),
   showTitle: !1,
-  submitButtonText: _$$t("bug_reporter.modal.submit_performance"),
-  successMessage: tx("bug_reporter.success_perf_follow_along", {
+  submitButtonText: getI18nString("bug_reporter.modal.submit_performance"),
+  successMessage: renderI18nText("bug_reporter.success_perf_follow_along", {
     slackChannel: jsx(_$$N, {
       newTab: !0,
       href: "https://go/slack-performance-reports",

@@ -1,12 +1,12 @@
 import { useCallback } from "react";
 import { getFeatureFlags } from "../905/601108";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { I7 } from "../figma_app/594947";
 import { UQ } from "../figma_app/864723";
 import { FFileType } from "../figma_app/191312";
 var d = (e => (e.ASSET_PANEL_ONLY = "asset_panel_only", e.ASSET_PANEL_AND_TOOLBAR = "asset_panel_and_toolbar", e))(d || {});
 export function $$c4() {
-  let e = md(UQ);
+  let e = useAtomWithSubscription(UQ);
   return useCallback(() => null, [e]);
 }
 export function $$u9() {

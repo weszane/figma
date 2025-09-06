@@ -3,7 +3,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { htN, ZEs } from "../figma_app/763686";
 import { fn as _$$fn, sH } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { c$ } from "../figma_app/618433";
 import { w1 } from "../figma_app/649254";
 import { e as _$$e2 } from "../905/810361";
@@ -63,7 +63,7 @@ export function $$v8(e) {
 }
 export function $$A5(e) {
   let t = getSingletonSceneGraph();
-  return t.get(e)?.getDakotaSelectorCollectionId() || ($D(_$$e.CMS, Error("CMS selector doesn't have a collection ID"), {
+  return t.get(e)?.getDakotaSelectorCollectionId() || (reportError(_$$e.CMS, Error("CMS selector doesn't have a collection ID"), {
     extra: {
       nodeId: e
     }

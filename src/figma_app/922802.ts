@@ -1,10 +1,10 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { Component } from "react";
 import { E } from "../905/632989";
-import { eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { k } from "../figma_app/620913";
 import { B } from "../905/714743";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { A } from "../svg/254926";
 export class $$u0 extends Component {
   render() {
@@ -18,19 +18,19 @@ export class $$u0 extends Component {
           children: [this.props.staticLogo && jsx(B, {
             svg: A,
             autosize: !0
-          }), !this.props.staticLogo && (eD ? jsx(E, {
+          }), !this.props.staticLogo && (desktopAPIInstance ? jsx(E, {
             className: "interstitial_page--figmaButton--ZLWpF",
             onClick: () => {
               k();
             },
             children: jsx(B, {
-              "aria-label": t("auth.figma_logo.label"),
+              "aria-label": getI18nString("auth.figma_logo.label"),
               svg: A
             })
           }) : jsx("a", {
             href: "/",
             children: jsx(B, {
-              "aria-label": t("auth.figma_logo.label"),
+              "aria-label": getI18nString("auth.figma_logo.label"),
               svg: A,
               autosize: !0
             })

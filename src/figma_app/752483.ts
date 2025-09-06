@@ -1,14 +1,14 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { l as _$$l } from "../905/296640";
 import { debugState } from "../905/407919";
 import { Uz } from "../905/63728";
 import { s_ } from "../905/17223";
 import { $$, ks, nR, CY } from "../figma_app/637027";
 import { B as _$$B } from "../905/714743";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { QF } from "../figma_app/696043";
 import { Qi } from "../figma_app/559491";
@@ -20,7 +20,7 @@ import { pS } from "../905/588985";
 import { T as _$$T, ou } from "../figma_app/300692";
 import { Bs, d_, cj } from "../905/197730";
 import { bD } from "../figma_app/45218";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { FW } from "../figma_app/155287";
 import { Ib } from "../905/129884";
 import { Ju } from "../905/102752";
@@ -58,32 +58,32 @@ function G({
     children: [e === bD.PLUGIN ? jsx(z, {
       isSelected: a.includes(FW.FIGMA) && a.includes(FW.FIGJAM) && a.includes(FW.SLIDES),
       image: jsx(_$$A.editorTypes.multiProduct, {}),
-      titleText: _$$t("community.plugin_development.plugin_creation_editor_option_multi_product"),
-      descriptionText: _$$t("community.plugin_development.plugin_creation_editor_option_multi_product_description"),
+      titleText: getI18nString("community.plugin_development.plugin_creation_editor_option_multi_product"),
+      descriptionText: getI18nString("community.plugin_development.plugin_creation_editor_option_multi_product_description"),
       onSelect: () => s([FW.FIGMA, FW.FIGJAM, FW.SLIDES])
     }) : jsx(z, {
       isSelected: a.includes(FW.FIGMA) && a.includes(FW.FIGJAM),
       image: jsx(_$$A.editorTypes.multiProduct, {}),
-      titleText: _$$t(e === bD.WIDGET ? "community.plugin_development.widget_creation_editor_option_figma_design_and_figjam" : "community.plugin_development.plugin_creation_editor_option_figma_design_and_figjam"),
-      descriptionText: _$$t(e === bD.WIDGET ? "community.plugin_development.widget_creation_editor_option_figma_design_and_figjam_description" : "community.plugin_development.plugin_creation_editor_option_figma_design_and_figjam_description"),
+      titleText: getI18nString(e === bD.WIDGET ? "community.plugin_development.widget_creation_editor_option_figma_design_and_figjam" : "community.plugin_development.plugin_creation_editor_option_figma_design_and_figjam"),
+      descriptionText: getI18nString(e === bD.WIDGET ? "community.plugin_development.widget_creation_editor_option_figma_design_and_figjam_description" : "community.plugin_development.plugin_creation_editor_option_figma_design_and_figjam_description"),
       onSelect: () => s([FW.FIGMA, FW.FIGJAM])
     }), t && jsx(z, {
       isSelected: a.includes(FW.FIGMA) && 1 === a.length,
       image: jsx(_$$A.editorTypes.figmaDesign, {}),
-      titleText: _$$t(e === bD.WIDGET ? "community.plugin_development.widget_creation_editor_option_figma_design" : "community.plugin_development.plugin_creation_editor_option_figma_design"),
-      descriptionText: _$$t(e === bD.WIDGET ? "community.plugin_development.widget_creation_editor_option_figma_design_description" : "community.plugin_development.plugin_creation_editor_option_figma_design_description"),
+      titleText: getI18nString(e === bD.WIDGET ? "community.plugin_development.widget_creation_editor_option_figma_design" : "community.plugin_development.plugin_creation_editor_option_figma_design"),
+      descriptionText: getI18nString(e === bD.WIDGET ? "community.plugin_development.widget_creation_editor_option_figma_design_description" : "community.plugin_development.plugin_creation_editor_option_figma_design_description"),
       onSelect: () => s([FW.FIGMA])
     }), r && jsx(z, {
       isSelected: a.includes(FW.FIGJAM) && 1 === a.length,
       image: jsx(_$$A.editorTypes.figJam, {}),
-      titleText: _$$t(e === bD.WIDGET ? "community.plugin_development.widget_creation_editor_option_figjam" : "community.plugin_development.plugin_creation_editor_option_figjam"),
-      descriptionText: _$$t(e === bD.WIDGET ? "community.plugin_development.widget_creation_editor_option_figjam_description" : "community.plugin_development.plugin_creation_editor_option_figjam_description"),
+      titleText: getI18nString(e === bD.WIDGET ? "community.plugin_development.widget_creation_editor_option_figjam" : "community.plugin_development.plugin_creation_editor_option_figjam"),
+      descriptionText: getI18nString(e === bD.WIDGET ? "community.plugin_development.widget_creation_editor_option_figjam_description" : "community.plugin_development.plugin_creation_editor_option_figjam_description"),
       onSelect: () => s([FW.FIGJAM])
     }), i && jsx(z, {
       isSelected: a.includes(FW.SLIDES) && 1 === a.length,
       image: jsx(_$$A.editorTypes.slides, {}),
-      titleText: _$$t("community.plugin_development.plugin_creation_editor_option_slides"),
-      descriptionText: _$$t("community.plugin_development.plugin_creation_editor_option_slides_description"),
+      titleText: getI18nString("community.plugin_development.plugin_creation_editor_option_slides"),
+      descriptionText: getI18nString("community.plugin_development.plugin_creation_editor_option_slides_description"),
       onSelect: () => s([FW.SLIDES])
     })]
   });
@@ -99,34 +99,34 @@ function V({
         isSelected: "tab" === e,
         onSelect: () => t("tab"),
         image: jsx(_$$A.templates.tab, {}),
-        titleText: _$$t("community.plugin_development.plugin_creation_template_option_tab"),
-        descriptionText: _$$t("community.plugin_development.plugin_creation_template_option_tab_description")
+        titleText: getI18nString("community.plugin_development.plugin_creation_template_option_tab"),
+        descriptionText: getI18nString("community.plugin_development.plugin_creation_template_option_tab_description")
       }), jsx(z, {
         isSelected: "codegen" === e,
         onSelect: () => t("codegen"),
         image: jsx(_$$A.templates.codegen, {}),
-        titleText: _$$t("community.plugin_development.plugin_creation_template_option_codegen"),
-        descriptionText: _$$t("community.plugin_development.plugin_creation_template_option_codegen_description")
+        titleText: getI18nString("community.plugin_development.plugin_creation_template_option_codegen"),
+        descriptionText: getI18nString("community.plugin_development.plugin_creation_template_option_codegen_description")
       })]
     }) : jsxs(Fragment, {
       children: [jsx(z, {
         isSelected: "empty" === e,
         onSelect: () => t("empty"),
         image: jsx(_$$A.templates.empty, {}),
-        titleText: _$$t("community.plugin_development.plugin_creation_template_option_default"),
-        descriptionText: _$$t("community.plugin_development.plugin_creation_template_option_default_description")
+        titleText: getI18nString("community.plugin_development.plugin_creation_template_option_default"),
+        descriptionText: getI18nString("community.plugin_development.plugin_creation_template_option_default_description")
       }), jsx(z, {
         isSelected: "runOnce" === e,
         onSelect: () => t("runOnce"),
         image: jsx(_$$A.templates.runOnce, {}),
-        titleText: _$$t("community.plugin_development.plugin_creation_template_option_run_once"),
-        descriptionText: _$$t("community.plugin_development.plugin_creation_template_option_run_once_description")
+        titleText: getI18nString("community.plugin_development.plugin_creation_template_option_run_once"),
+        descriptionText: getI18nString("community.plugin_development.plugin_creation_template_option_run_once_description")
       }), jsx(z, {
         isSelected: "withUI" === e,
         onSelect: () => t("withUI"),
         image: jsx(_$$A.templates.withUI, {}),
-        titleText: _$$t("community.plugin_development.plugin_creation_template_option_with_ui"),
-        descriptionText: _$$t("community.plugin_development.plugin_creation_template_option_with_ui_description")
+        titleText: getI18nString("community.plugin_development.plugin_creation_template_option_with_ui"),
+        descriptionText: getI18nString("community.plugin_development.plugin_creation_template_option_with_ui_description")
       })]
     })
   });
@@ -139,14 +139,14 @@ function H({
     children: [jsx(z, {
       isSelected: "empty" === e,
       image: jsx(_$$A.widgetOptions.empty, {}),
-      titleText: _$$t("community.plugin_development.widget_creation_option_default"),
-      descriptionText: _$$t("community.plugin_development.widget_creation_option_default_description"),
+      titleText: getI18nString("community.plugin_development.widget_creation_option_default"),
+      descriptionText: getI18nString("community.plugin_development.widget_creation_option_default_description"),
       onSelect: () => t("empty")
     }), jsx(z, {
       isSelected: "simple" === e,
       image: jsx(_$$A.widgetOptions.simple, {}),
-      titleText: _$$t("community.plugin_development.widget_creation_option_simple"),
-      descriptionText: _$$t("community.plugin_development.widget_creation_option_simple_description"),
+      titleText: getI18nString("community.plugin_development.widget_creation_option_simple"),
+      descriptionText: getI18nString("community.plugin_development.widget_creation_option_simple_description"),
       onSelect: () => t("simple")
     }), jsx(z, {
       isSelected: "with_iframe" === e,
@@ -155,9 +155,9 @@ function H({
         style: {
           letterSpacing: "-0.5px"
         },
-        children: _$$t("community.plugin_development.widget_creation_option_with_iframe")
+        children: getI18nString("community.plugin_development.widget_creation_option_with_iframe")
       }),
-      descriptionText: _$$t("community.plugin_development.widget_creation_option_with_iframe_description"),
+      descriptionText: getI18nString("community.plugin_development.widget_creation_option_with_iframe_description"),
       onSelect: () => t("with_iframe")
     })]
   });
@@ -214,7 +214,7 @@ export let $$W0 = Ju(function ({
   }) => {
     if ("" === ee()) {
       t(_$$F.enqueue({
-        message: _$$t("community.plugin_development.please_add_some_alphanumeric_text_to_your_resource_name"),
+        message: getI18nString("community.plugin_development.please_add_some_alphanumeric_text_to_your_resource_name"),
         error: !0
       }));
       return null;
@@ -223,7 +223,7 @@ export let $$W0 = Ju(function ({
     try {
       let i = await (Bs() ? j.writeNewExtensionDirectoryToDisk(n) : j.writeNewExtensionToDisk(ee(), n.files));
       if (i) {
-        sx(`Added New ${e}`, {
+        trackEventAnalytics(`Added New ${e}`, {
           how: "created",
           [e + "Id"]: r,
           version: pS,
@@ -240,7 +240,7 @@ export let $$W0 = Ju(function ({
       console.error(e);
     }
     t(_$$F.enqueue({
-      message: _$$t("community.plugin_development.unable_to_write_resource_to_disk"),
+      message: getI18nString("community.plugin_development.unable_to_write_resource_to_disk"),
       error: !0
     }));
     return null;
@@ -261,7 +261,7 @@ export let $$W0 = Ju(function ({
       r = n.id;
     } catch (e) {
       t(_$$F.enqueue({
-        message: _$$t("community.plugin_development.unable_to_generate_resource_id"),
+        message: getI18nString("community.plugin_development.unable_to_generate_resource_id"),
         error: !0
       }));
       return;
@@ -290,9 +290,9 @@ export let $$W0 = Ju(function ({
   };
   let ea = useSelector(e => "fullscreen" === e.selectedView.view);
   let es = E3();
-  let eo = es === nT.Design || es === nT.DevHandoff;
-  let el = es === nT.Whiteboard;
-  let ed = es === nT.Slides;
+  let eo = es === FEditorType.Design || es === FEditorType.DevHandoff;
+  let el = es === FEditorType.Whiteboard;
+  let ed = es === FEditorType.Slides;
   let ec = !ea || eo;
   let eu = !ea || el;
   let ep = !ea || ed;
@@ -305,20 +305,20 @@ export let $$W0 = Ju(function ({
       onClick: er,
       disabled: "" === b,
       children: jsx("span", {
-        "data-tooltip": e === bD.PLUGIN ? _$$t("community.plugin_development.you_must_provide_a_name_for_your_plugin") : _$$t("community.plugin_development.you_must_provide_a_name_for_your_widget"),
+        "data-tooltip": e === bD.PLUGIN ? getI18nString("community.plugin_development.you_must_provide_a_name_for_your_plugin") : getI18nString("community.plugin_development.you_must_provide_a_name_for_your_widget"),
         "data-tooltip-type": "" === b ? Ib.TEXT : null,
-        children: tx("community.plugin_development.save_as")
+        children: renderI18nText("community.plugin_development.save_as")
       })
     })
   });
   let em = jsxs("div", {
     children: [jsx("div", {
       className: aP,
-      children: tx("community.general.name")
+      children: renderI18nText("community.general.name")
     }), jsx(ks, {
       autoFocus: !0,
       className: $O,
-      "data-tooltip": e === bD.PLUGIN ? _$$t("community.plugin_development.you_must_provide_a_name_for_your_plugin") : _$$t("community.plugin_development.you_must_provide_a_name_for_your_widget"),
+      "data-tooltip": e === bD.PLUGIN ? getI18nString("community.plugin_development.you_must_provide_a_name_for_your_plugin") : getI18nString("community.plugin_development.you_must_provide_a_name_for_your_widget"),
       "data-tooltip-ignore-mouse": !0,
       "data-tooltip-key": "plugin-new-development-modal",
       "data-tooltip-show-immediately": !0,
@@ -327,7 +327,7 @@ export let $$W0 = Ju(function ({
         e.currentTarget.value && Z && Q(!1);
         C(e.currentTarget.value);
       },
-      placeholder: e === bD.PLUGIN ? _$$t("community.plugin_development.plugin_name") : _$$t("community.plugin_development.widget_name"),
+      placeholder: e === bD.PLUGIN ? getI18nString("community.plugin_development.plugin_name") : getI18nString("community.plugin_development.widget_name"),
       value: b
     }), jsx($v, {
       visible: Z,
@@ -348,7 +348,7 @@ export let $$W0 = Ju(function ({
         }), jsx("div", {
           className: gn,
           children: jsx("div", {
-            children: e === bD.PLUGIN ? _$$t("community.plugin_development.create_plugin") : _$$t("community.plugin_development.create_widget")
+            children: e === bD.PLUGIN ? getI18nString("community.plugin_development.create_plugin") : getI18nString("community.plugin_development.create_widget")
           })
         }), jsxs("div", {
           className: Bb,
@@ -370,7 +370,7 @@ export let $$W0 = Ju(function ({
             children: jsx($$, {
               className: x6,
               onClick: () => W("choose_template_step"),
-              children: tx("general.next")
+              children: renderI18nText("general.next")
             })
           })
         })]
@@ -389,7 +389,7 @@ export let $$W0 = Ju(function ({
         }), jsx("div", {
           className: gn,
           children: jsx("div", {
-            children: e === bD.PLUGIN ? tx("community.plugin_development.create_plugin") : tx("community.plugin_development.create_widget")
+            children: e === bD.PLUGIN ? renderI18nText("community.plugin_development.create_plugin") : renderI18nText("community.plugin_development.create_widget")
           })
         }), jsxs("div", {
           className: Bb,
@@ -413,7 +413,7 @@ export let $$W0 = Ju(function ({
               children: [jsx(_$$B, {
                 svg: _$$A2,
                 className: Fn
-              }), tx("general.back")]
+              }), renderI18nText("general.back")]
             }), eh]
           })
         })]
@@ -423,12 +423,12 @@ export let $$W0 = Ju(function ({
     let r = jsx(CY, {
       href: `https://www.figma.com/${e}-docs/`,
       trusted: !0,
-      children: tx("community.plugin_development.setup_guide")
+      children: renderI18nText("community.plugin_development.setup_guide")
     });
     let i = jsx(CY, {
       href: "https://discord.gg/xzQhe2Vcvx",
       trusted: !0,
-      children: tx("community.plugin_development.join_our_discord")
+      children: renderI18nText("community.plugin_development.join_our_discord")
     });
     return jsxs(_$$d_, {
       className: Tp,
@@ -440,21 +440,21 @@ export let $$W0 = Ju(function ({
         className: WG,
         children: [jsx("div", {
           className: GK,
-          children: e === bD.PLUGIN ? _$$t("community.plugin_development.new_plugin_created") : _$$t("community.plugin_development.new_widget_created")
+          children: e === bD.PLUGIN ? getI18nString("community.plugin_development.new_plugin_created") : getI18nString("community.plugin_development.new_widget_created")
         }), jsxs("div", {
           className: Bb,
           children: [jsx("span", {
             className: Cb,
-            children: e === bD.PLUGIN ? tx("community.plugin_development.follow_our_setup_guide_plugin", {
+            children: e === bD.PLUGIN ? renderI18nText("community.plugin_development.follow_our_setup_guide_plugin", {
               setupGuideLink: r
-            }) : tx("community.plugin_development.follow_our_setup_guide_widget", {
+            }) : renderI18nText("community.plugin_development.follow_our_setup_guide_widget", {
               setupGuideLink: r
             })
           }), jsx("div", {
             className: dH,
-            children: e === bD.PLUGIN ? tx("community.plugin_development.connect_with_other_plugin_developers", {
+            children: e === bD.PLUGIN ? renderI18nText("community.plugin_development.connect_with_other_plugin_developers", {
               joinOurDiscordLink: i
-            }) : tx("community.plugin_development.connect_with_other_widget_developers", {
+            }) : renderI18nText("community.plugin_development.connect_with_other_widget_developers", {
               joinOurDiscordLink: i
             })
           })]
@@ -464,11 +464,11 @@ export let $$W0 = Ju(function ({
             className: hG,
             children: [jsx(nR, {
               onClick: ei,
-              children: tx("community.plugin_development.open_folder")
+              children: renderI18nText("community.plugin_development.open_folder")
             }), jsx($$, {
               className: x6,
               onClick: en,
-              children: tx("general.done")
+              children: renderI18nText("general.done")
             })]
           })
         })]

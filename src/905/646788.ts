@@ -13,7 +13,7 @@ import { FPublicationStatusType, FFileType, FPlanNameType, FOrganizationLevelTyp
 import { M4 } from "../905/713695";
 import { w5, n0 as _$$n } from "../figma_app/345997";
 import { wH, fm, KI } from "../figma_app/680166";
-import { nT as _$$nT, wN, co, oD, Bu } from "../figma_app/53721";
+import { FEditorType, mapFileTypeToEditorType, isSlidesOrWhiteboardOrDesignOrIllustration, mapEditorTypeToFileType, mapEditorTypeToStringWithObfuscated } from "../figma_app/53721";
 import { A5 } from "../figma_app/707808";
 import { q as _$$q, J as _$$J } from "../905/202542";
 import { Ju } from "../905/102752";
@@ -21,7 +21,7 @@ import { mK } from "../figma_app/197286";
 import { i as _$$i } from "../905/46262";
 import { MM, jS } from "../905/136701";
 import { i as _$$i2 } from "../905/718764";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { OJ } from "../905/519092";
 import { getFeatureFlags } from "../905/601108";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -29,12 +29,12 @@ import { sR as _$$sR, gq, KZ } from "../905/932881";
 import { k as _$$k2 } from "../905/443820";
 import { m as _$$m } from "../905/701558";
 import { Y as _$$Y } from "../905/185567";
-import { eU as _$$eU, md, Xr, zl, fp } from "../figma_app/27355";
+import { atom, useAtomWithSubscription, Xr, atomStoreManager, useAtomValueAndSetter } from "../figma_app/27355";
 import { Qw } from "../905/989992";
 import { tT as _$$tT } from "../905/663269";
 import { conditionalFeatureFlag, getInitialOptions, isStagingCluster, buildUploadUrl, isDevEnvironment, getSupportEmail } from "../figma_app/169182";
 import { Rs } from "../figma_app/288654";
-import { t as _$$t, tx as _$$tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Su, aP as _$$aP, QU, DU, bF } from "../figma_app/275462";
 import { W as _$$W } from "../905/336482";
 import { JT } from "../figma_app/173838";
@@ -50,7 +50,7 @@ import { r as _$$r } from "../905/857502";
 import { b as _$$b, d as _$$d } from "../905/91820";
 import { iO as _$$iO, s5, t9 as _$$t2, yI } from "../905/915142";
 import { dR } from "../905/508367";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { e as _$$e } from "../905/383776";
 import { A8 } from "../figma_app/617506";
 import { S as _$$S, Yn, Rh, rA as _$$rA, og } from "../figma_app/78808";
@@ -85,7 +85,7 @@ import { bL } from "../905/38914";
 import { vo, Y9, hE, nB as _$$nB, wi, jk } from "../figma_app/272243";
 import { hS } from "../905/437088";
 import { KM, Ku } from "../figma_app/877449";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { B as _$$B } from "../905/714743";
 import { Ib } from "../905/129884";
 import { Qy } from "../figma_app/146384";
@@ -145,7 +145,7 @@ import { B as _$$B2 } from "../905/950875";
 import { A as _$$A5 } from "../905/920142";
 import { b as _$$b3 } from "../905/966382";
 import { U as _$$U } from "../figma_app/901889";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { ks, nR as _$$nR, $$, tM as _$$tM, vd, s6, Ph as _$$Ph, qM } from "../figma_app/637027";
 import { Y as _$$Y2 } from "../905/830372";
 import { E as _$$E3 } from "../905/984674";
@@ -252,7 +252,7 @@ import { L as _$$L5 } from "../905/657783";
 import { Y as _$$Y3 } from "../905/26051";
 import { c as _$$c2 } from "../905/425573";
 import { rq as _$$rq } from "../905/425180";
-import { Im } from "../figma_app/493477";
+import { isEmptyObject } from "../figma_app/493477";
 import { P as _$$P } from "../905/842406";
 import { hw } from "../905/727738";
 import { a as _$$a4 } from "../905/699981";
@@ -284,7 +284,7 @@ import { _P } from "../figma_app/2590";
 import { F as _$$F4 } from "../905/680873";
 import { useSprigWithSampling } from "../905/99656";
 function T(e) {
-  let t = Ay.isIpadNative;
+  let t = BrowserInfo.isIpadNative;
   return jsx(_$$i2, {
     children: jsx(OJ, {
       bottomSection: e.bottomSection,
@@ -330,7 +330,7 @@ function en({
   let i = q5();
   let r = i?.publishedHubFile?.publishingStatus === FPublicationStatusType.APPROVED_PUBLIC && i.publishedHubFile || null;
   let a = r ? jsx(_$$m, {}) : jsx(_$$Y, {});
-  let s = r ? _$$t("file_permissions_modal.share_as.publish.published") : _$$t("file_permissions_modal.share_as.publish");
+  let s = r ? getI18nString("file_permissions_modal.share_as.publish.published") : getI18nString("file_permissions_modal.share_as.publish");
   return jsx(fu, {
     name: "Publish Community Row",
     children: jsx(_$$sR, {
@@ -364,7 +364,7 @@ function eA({
   let m = ZO();
   let g = NZ();
   let f = A8();
-  let _ = _$$R(e => "prototype" === e.selectedView.view ? {
+  let _ = selectWithShallowEqual(e => "prototype" === e.selectedView.view ? {
     scalingInfo: e.selectedView.scalingInfo,
     showHotspots: e.selectedView.showHotspots,
     showProtoSidebar: e.selectedView.showProtoSidebar
@@ -439,7 +439,7 @@ function ev(e) {
   let o = jsx(_$$r, {});
   return jsx(_$$sR, {
     icon: o,
-    text: _$$t("file_permissions_modal.copy_link_to_editor"),
+    text: getI18nString("file_permissions_modal.copy_link_to_editor"),
     onClick: () => {
       s(_$$wN);
       e.onClick();
@@ -448,7 +448,7 @@ function ev(e) {
         s(XR);
       }, 4e3);
     },
-    actionMessage: t ? _$$t("file_permissions_modal.link_copied") : null,
+    actionMessage: t ? getI18nString("file_permissions_modal.link_copied") : null,
     actionMessageClassName: a,
     dataOnboardingKey: "copy-editor-link-row"
   });
@@ -458,7 +458,7 @@ function ek(e) {
   let [a, s] = useState(_$$wN);
   return jsx(_$$sR, {
     icon: jsx(_$$A, {}),
-    text: _$$t("file_permissions_modal.share_as.copy_dev_mode_link"),
+    text: getI18nString("file_permissions_modal.share_as.copy_dev_mode_link"),
     onClick: () => {
       s(_$$wN);
       e.onClick();
@@ -467,7 +467,7 @@ function ek(e) {
         s(XR);
       }, 4e3);
     },
-    actionMessage: t ? _$$t("file_permissions_modal.link_copied") : null,
+    actionMessage: t ? getI18nString("file_permissions_modal.link_copied") : null,
     actionMessageClassName: a
   });
 }
@@ -476,7 +476,7 @@ function eL({
 }) {
   return jsx(_$$sR, {
     icon: jsx(_$$X, {}),
-    text: _$$t("file_permissions_modal.share_as.embed"),
+    text: getI18nString("file_permissions_modal.share_as.embed"),
     onClick: e,
     expandCaret: !0
   });
@@ -521,7 +521,7 @@ function eM({
   return jsxs("div", {
     className: "embed--embedTabWrapper--ETzIt",
     children: [d ? jsx(_$$T, {
-      "aria-label": _$$t("permissions.embed.copy_public_embed_code"),
+      "aria-label": getI18nString("permissions.embed.copy_public_embed_code"),
       autoFocus: !0,
       htmlAttributes: {
         onFocus: c
@@ -531,7 +531,7 @@ function eM({
       spellCheck: !1,
       value: eF(s)
     }) : jsx("textarea", {
-      "aria-label": _$$t("permissions.embed.copy_public_embed_code"),
+      "aria-label": getI18nString("permissions.embed.copy_public_embed_code"),
       readOnly: !0,
       onFocus: c,
       className: "embed--embedCode--Lk7bc",
@@ -544,7 +544,7 @@ function eM({
         className: "embed--embedMessageContainer--jfVsO",
         children: jsx("span", {
           className: "embed--embedMessage--kTko7",
-          children: _$$tx("permissions.embed.embed_page_name_in_your_webpage", {
+          children: renderI18nText("permissions.embed.embed_page_name_in_your_webpage", {
             pageName: jsx("span", {
               className: "embed--embedMessagePageName--LYE4z",
               children: EJ(l, 30)
@@ -556,10 +556,10 @@ function eM({
         children: [jsx($n, {
           variant: "secondary",
           onClick: o,
-          children: _$$t("permissions.embed.cancel_embed")
+          children: getI18nString("permissions.embed.cancel_embed")
         }), jsx($n, {
           onClick: u,
-          children: _$$t("permissions.embed.copy_embed_code")
+          children: getI18nString("permissions.embed.copy_embed_code")
         })]
       })]
     })]
@@ -632,24 +632,24 @@ let eX = Ju(function (e) {
       fileKey
     }));
   }, [s, fileKey, c]);
-  let p = hasPasswordSet ? _$$tx("whiteboard.open_sessions.share_modal_start_session_with_link_and_password", {
+  let p = hasPasswordSet ? renderI18nText("whiteboard.open_sessions.share_modal_start_session_with_link_and_password", {
     audience: jsx("span", {
       className: _$$s.fontSemiBold.$,
-      children: _$$tx("whiteboard.open_sessions.share_modal_start_session_anyone_with_link_and_password")
+      children: renderI18nText("whiteboard.open_sessions.share_modal_start_session_anyone_with_link_and_password")
     })
-  }) : _$$tx("whiteboard.open_sessions.share_modal_start_session_with_link");
-  let h = _$$tx("whiteboard.open_sessions.share_modal_how_to_end_session", {
+  }) : renderI18nText("whiteboard.open_sessions.share_modal_start_session_with_link");
+  let h = renderI18nText("whiteboard.open_sessions.share_modal_how_to_end_session", {
     share: jsx("span", {
       className: _$$s.fontSemiBold.$,
-      children: _$$tx("whiteboard.open_sessions.share_modal_start_session_share")
+      children: renderI18nText("whiteboard.open_sessions.share_modal_start_session_share")
     }),
     end_now: jsx("span", {
       className: _$$s.fontSemiBold.$,
-      children: _$$tx("whiteboard.open_sessions.share_modal_start_session_end_now")
+      children: renderI18nText("whiteboard.open_sessions.share_modal_start_session_end_now")
     })
   });
   return jsx(eZ, {
-    title: _$$t("whiteboard.open_sessions.start_open_session"),
+    title: getI18nString("whiteboard.open_sessions.start_open_session"),
     content: jsxs("div", {
       className: _$$s.flex.flexColumn.gap16.$,
       children: [jsx("p", {
@@ -658,8 +658,8 @@ let eX = Ju(function (e) {
         children: h
       })]
     }),
-    submitText: _$$t("whiteboard.open_sessions.open_sessions_start"),
-    cancelText: _$$t("whiteboard.open_sessions.open_sessions_cancel"),
+    submitText: getI18nString("whiteboard.open_sessions.open_sessions_start"),
+    cancelText: getI18nString("whiteboard.open_sessions.open_sessions_cancel"),
     onClose: o,
     onSubmit: u,
     manager: l
@@ -688,10 +688,10 @@ let eQ = Ju(function (e) {
     }));
   }, [i, fileKey, d]);
   return jsx(eZ, {
-    title: _$$t("whiteboard.open_sessions.end_open_session_modal_title"),
-    content: _$$tx("whiteboard.open_sessions.end_open_session_modal_description"),
-    submitText: _$$t("whiteboard.open_sessions.end_now"),
-    cancelText: _$$t("whiteboard.open_sessions.open_sessions_cancel"),
+    title: getI18nString("whiteboard.open_sessions.end_open_session_modal_title"),
+    content: renderI18nText("whiteboard.open_sessions.end_open_session_modal_description"),
+    submitText: getI18nString("whiteboard.open_sessions.end_now"),
+    cancelText: getI18nString("whiteboard.open_sessions.open_sessions_cancel"),
     onClose: s,
     onSubmit: c,
     manager: o
@@ -739,13 +739,13 @@ function eJ({
   if (c.enabled) {
     let e = Math.floor(Math.floor(c.until.valueOf() - new Date().valueOf()) / 6e4);
     let t = Math.floor(e / 60);
-    i = _$$tx("whiteboard.open_sessions.remaining_duration", {
+    i = renderI18nText("whiteboard.open_sessions.remaining_duration", {
       remainingHours: t,
       remainingMinutes: e - 60 * t
     });
-  } else i = _$$tx("whiteboard.open_sessions.start_open_session");
+  } else i = renderI18nText("whiteboard.open_sessions.start_open_session");
   let p = "";
-  return (p = c.enabled ? d ? _$$t("whiteboard.open_sessions.share_modal_during_the_session_with_link_and_password") : _$$t("whiteboard.open_sessions.share_modal_during_the_session") : d ? _$$t("whiteboard.open_sessions.share_modal_anyone_with_link_and_password_can_edit") : _$$t("whiteboard.open_sessions.share_modal_anyone_can_edit"), c.enabled || t.canEdit) ? jsxs("div", {
+  return (p = c.enabled ? d ? getI18nString("whiteboard.open_sessions.share_modal_during_the_session_with_link_and_password") : getI18nString("whiteboard.open_sessions.share_modal_during_the_session") : d ? getI18nString("whiteboard.open_sessions.share_modal_anyone_with_link_and_password_can_edit") : getI18nString("whiteboard.open_sessions.share_modal_anyone_can_edit"), c.enabled || t.canEdit) ? jsxs("div", {
     className: "file_workshop_row--workshopRow--sfnsf",
     "data-onboarding-key": "file-workshop-row",
     children: [jsx("div", {
@@ -764,14 +764,14 @@ function eJ({
       children: t.canEdit ? c.enabled ? jsx($n, {
         onClick: u,
         variant: "destructiveSecondary",
-        children: _$$tx("whiteboard.open_sessions.end_now")
+        children: renderI18nText("whiteboard.open_sessions.end_now")
       }) : jsx($n, {
         onClick: u,
         htmlAttributes: {
           "data-onboarding-key": "file-workshop-button"
         },
         variant: "secondary",
-        children: _$$tx("whiteboard.open_sessions.start")
+        children: renderI18nText("whiteboard.open_sessions.start")
       }) : null
     })]
   }) : null;
@@ -792,9 +792,9 @@ let e1 = memo(function (e) {
   });
 });
 let tt = "google_device_screenshare_modal--description--z5lBL text--fontPos11--2LvXf text--_fontBase--QdLsd";
-let ti = _$$eU(!1);
+let ti = atom(!1);
 function tn(e) {
-  let t = md(ti);
+  let t = useAtomWithSubscription(ti);
   let i = DG(e);
   return getFeatureFlags().figjam_3p_hardware_integration && (t || i.enabled);
 }
@@ -861,7 +861,7 @@ let to = Ju(function (e) {
       children: jsxs(vo, {
         children: [jsx(Y9, {
           children: jsx(hE, {
-            children: _$$t("file_permissions_modal.google_screencast_modal.title")
+            children: getI18nString("file_permissions_modal.google_screencast_modal.title")
           })
         }), f ? jsxs(Fragment, {
           children: [jsxs(_$$nB, {
@@ -874,23 +874,23 @@ let to = Ju(function (e) {
                 className: "google_device_screenshare_modal--screenshareCodeRight--sw85z",
                 children: [jsx("p", {
                   className: "google_device_screenshare_modal--subtitle--KJKUp text--fontPos11--2LvXf text--_fontBase--QdLsd",
-                  children: _$$tx("file_permissions_modal.share_as.google_device.enter_code")
+                  children: renderI18nText("file_permissions_modal.share_as.google_device.enter_code")
                 }), jsxs("div", {
                   className: _$$s.maxW400.$,
                   children: [jsx("p", {
                     className: tt,
-                    children: _$$tx("file_permissions_modal.share_as.google_device.screenshare_code.description", {
+                    children: renderI18nText("file_permissions_modal.share_as.google_device.screenshare_code.description", {
                       location: jsx("span", {
                         className: _$$s.fontBold.inline.$,
-                        children: _$$tx("file_permissions_modal.share_as.google_device.screenshare_code.location")
+                        children: renderI18nText("file_permissions_modal.share_as.google_device.screenshare_code.location")
                       })
                     })
                   }), jsx("p", {
                     className: tt,
-                    children: _$$tx("file_permissions_modal.share_as.google_device.screenshare_code.description_unique_code", {
+                    children: renderI18nText("file_permissions_modal.share_as.google_device.screenshare_code.description_unique_code", {
                       reset: jsx("span", {
                         className: _$$s.fontBold.inline.$,
-                        children: _$$tx("file_permissions_modal.share_as.google_device.reset_code")
+                        children: renderI18nText("file_permissions_modal.share_as.google_device.reset_code")
                       })
                     })
                   })]
@@ -910,7 +910,7 @@ let to = Ju(function (e) {
                   }), jsx($z, {
                     variant: "secondary",
                     onClick: g.refetch,
-                    children: _$$tx("file_permissions_modal.share_as.google_device.reset_code")
+                    children: renderI18nText("file_permissions_modal.share_as.google_device.reset_code")
                   })]
                 })]
               })]
@@ -920,7 +920,7 @@ let to = Ju(function (e) {
           }), jsx(wi, {
             children: jsx("div", {
               className: _$$s.inline.$,
-              children: _$$tx("file_permissions_modal.share_as.google_device.open_session_countdown", {
+              children: renderI18nText("file_permissions_modal.share_as.google_device.open_session_countdown", {
                 remainingHours: i?.remainingHours,
                 remainingMinutes: i?.remainingMinutes,
                 end_now: jsx($z, {
@@ -931,10 +931,10 @@ let to = Ju(function (e) {
                     }));
                     s(AS());
                     s(_$$F2.enqueue({
-                      message: _$$t("file_permissions_modal.share_as.google_device.open_session_ended")
+                      message: getI18nString("file_permissions_modal.share_as.google_device.open_session_ended")
                     }));
                   },
-                  children: _$$tx("file_permissions_modal.share_as.google_device.end_now")
+                  children: renderI18nText("file_permissions_modal.share_as.google_device.end_now")
                 })
               })
             })
@@ -944,18 +944,18 @@ let to = Ju(function (e) {
             scrolling: "none",
             children: jsx("div", {
               className: _$$s.colorTextSecondary.$,
-              children: _$$tx("file_permissions_modal.screenshare_to_google_device.error_generating_code")
+              children: renderI18nText("file_permissions_modal.screenshare_to_google_device.error_generating_code")
             })
           }), jsx(wi, {
             children: jsxs(jk, {
               children: [jsx($n, {
                 variant: "secondary",
                 onClick: p,
-                children: _$$tx("general.cancel")
+                children: renderI18nText("general.cancel")
               }), jsx($z, {
                 variant: "primary",
                 onClick: g.refetch,
-                children: _$$tx("file_permissions_modal.share_as.google_device.reset_code")
+                children: renderI18nText("file_permissions_modal.share_as.google_device.reset_code")
               })]
             })
           })]
@@ -999,16 +999,16 @@ function tu({
     let t = null;
     switch (i) {
       case Q9.ORG_DISABLED:
-        t = _$$t("file_permissions_modal.screenshare_to_google_device.open_sessions_disabled");
+        t = getI18nString("file_permissions_modal.screenshare_to_google_device.open_sessions_disabled");
         break;
       case Q9.TEAM_NOT_PRO:
-        t = _$$t("file_permissions_modal.screenshare_to_google_device.only_pro_teams");
+        t = getI18nString("file_permissions_modal.screenshare_to_google_device.only_pro_teams");
         break;
       case Q9.CANNOT_EDIT_FILE:
-        t = _$$t("file_permissions_modal.screenshare_to_google_device.only_admins");
+        t = getI18nString("file_permissions_modal.screenshare_to_google_device.only_admins");
         break;
       case Q9.ERROR:
-        t = _$$t("file_permissions_modal.screenshare_to_google_device.generic_error");
+        t = getI18nString("file_permissions_modal.screenshare_to_google_device.generic_error");
     }
     return jsx(fu, {
       name: td,
@@ -1021,10 +1021,10 @@ function tu({
         className: G2,
         children: [e, jsx("div", {
           className: Ke,
-          children: _$$tx("file_permissions_modal.screenshare_to_google_device")
+          children: renderI18nText("file_permissions_modal.screenshare_to_google_device")
         }), jsx("div", {
           className: _$$s.flex.alignRight.$,
-          "aria-label": _$$t("file_permissions_modal.screenshare_to_google_device.aria_label"),
+          "aria-label": getI18nString("file_permissions_modal.screenshare_to_google_device.aria_label"),
           children: jsx(_$$B, {
             className: _$$s.colorIconSecondary.p6.$,
             svg: _$$A2,
@@ -1059,7 +1059,7 @@ function tu({
     enabled: r,
     children: jsx(_$$sR, {
       icon: s,
-      text: _$$t("file_permissions_modal.screenshare_to_google_device"),
+      text: getI18nString("file_permissions_modal.screenshare_to_google_device"),
       onClick: e,
       expandCaret: !0
     })
@@ -1084,13 +1084,13 @@ let tm = memo(function (e) {
 function tf(e) {
   let t = jsx("span", {
     className: "nudge_to_move_row--nudgeToMoveButton--OZ7Pg",
-    children: _$$tx("file_permissions_modal.share_as.move_to_project")
+    children: renderI18nText("file_permissions_modal.share_as.move_to_project")
   });
   return jsx("div", {
     className: "nudge_to_move_row--nudgeToMoveRow--ICWyQ",
     children: jsx(_$$sR, {
       icon: jsx(tm, {}),
-      text: _$$t("file_permissions_modal.share_as.nudge_to_move_text"),
+      text: getI18nString("file_permissions_modal.share_as.nudge_to_move_text"),
       onClick: e.onClick,
       rightSideElement: t
     })
@@ -1113,7 +1113,7 @@ let tj = "sc_file_modal_step_3_onboarding_key";
 let tU = _$$r2(tL);
 let tB = _$$rn("sc_file_modal_onboarding", _$$R2(GCV));
 function tV(e) {
-  let t = md(tU);
+  let t = useAtomWithSubscription(tU);
   let {
     show,
     uniqueId,
@@ -1133,16 +1133,16 @@ function tV(e) {
   _$$E(uniqueId, "Reset Onboarding", () => {
     show();
   });
-  let c = e.canViewFolder ? _$$tx("rcs.sharing_clarity.file_permissions_modal_step_2_description") : _$$tx("rcs.sharing_clarity.file_permissions_modal_step_2_description_no_folder");
+  let c = e.canViewFolder ? renderI18nText("rcs.sharing_clarity.file_permissions_modal_step_2_description") : renderI18nText("rcs.sharing_clarity.file_permissions_modal_step_2_description_no_folder");
   let u = [{
-    title: _$$tx("rcs.sharing_clarity.file_permissions_modal_step_1_title"),
-    description: _$$tx("rcs.sharing_clarity.file_permissions_modal_step_1_description"),
+    title: renderI18nText("rcs.sharing_clarity.file_permissions_modal_step_1_title"),
+    description: renderI18nText("rcs.sharing_clarity.file_permissions_modal_step_1_description"),
     trackingContextName: "Sharing Clarity File Modal Onboarding Step 1",
     targetKey: tF,
     emphasized: !0,
     zIndex: _$$R3.MODAL
   }, {
-    title: _$$tx("rcs.sharing_clarity.file_permissions_modal_step_2_title"),
+    title: renderI18nText("rcs.sharing_clarity.file_permissions_modal_step_2_title"),
     description: c,
     trackingContextName: "Sharing Clarity File Modal Onboarding Step 2",
     targetKey: tM,
@@ -1150,8 +1150,8 @@ function tV(e) {
     zIndex: _$$R3.MODAL
   }];
   e.showPrototypeStep && u.push({
-    title: _$$tx("rcs.sharing_clarity.file_permissions_modal_step_3_title"),
-    description: _$$tx("rcs.sharing_clarity.file_permissions_modal_step_3_description"),
+    title: renderI18nText("rcs.sharing_clarity.file_permissions_modal_step_3_title"),
+    description: renderI18nText("rcs.sharing_clarity.file_permissions_modal_step_3_description"),
     trackingContextName: "Sharing Clarity File Modal Onboarding Step 3",
     targetKey: tj,
     emphasized: !0,
@@ -1180,15 +1180,15 @@ let tW = Ju(function (e) {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$t("confirm_prototype_share_modal.your_entire_file_will_be_shared")
+          children: getI18nString("confirm_prototype_share_modal.your_entire_file_will_be_shared")
         })
       }), jsxs(_$$nB, {
         children: [jsx("div", {
           className: "confirm_prototype_share_modal--modalTopSection--glopl",
-          children: _$$t("confirm_prototype_share_modal.sharing_this_link_will_give_others_direct_access_to_your_prototype")
+          children: getI18nString("confirm_prototype_share_modal.sharing_this_link_will_give_others_direct_access_to_your_prototype")
         }), jsxs("div", {
           className: "confirm_prototype_share_modal--modalBottomSection--N9yAg",
-          children: [_$$t("confirm_prototype_share_modal.to_be_able_to_share_your_prototypes_separately_from_your_design_files"), " ", jsx(_$$N2, {
+          children: [getI18nString("confirm_prototype_share_modal.to_be_able_to_share_your_prototypes_separately_from_your_design_files"), " ", jsx(_$$N2, {
             href: "#",
             onClick: () => {
               e.team && e.editorType && i(_$$to({
@@ -1202,7 +1202,7 @@ let tW = Ju(function (e) {
                 }
               }));
             },
-            children: _$$t("confirm_prototype_share_modal.upgrade_your_plan")
+            children: getI18nString("confirm_prototype_share_modal.upgrade_your_plan")
           })]
         })]
       }), jsxs(wi, {
@@ -1210,7 +1210,7 @@ let tW = Ju(function (e) {
           checked: l,
           onChange: e => d(e),
           label: jsx(_$$J2, {
-            children: _$$t("confirm_prototype_share_modal.dont_show_again")
+            children: getI18nString("confirm_prototype_share_modal.dont_show_again")
           })
         }), jsx(jk, {
           children: jsx($n, {
@@ -1225,7 +1225,7 @@ let tW = Ju(function (e) {
                 e.onClose();
               }, 1500);
             },
-            children: s ? _$$t("confirm_prototype_share_modal.link_copied") : _$$t("confirm_prototype_share_modal.copy_prototype_link")
+            children: s ? getI18nString("confirm_prototype_share_modal.link_copied") : getI18nString("confirm_prototype_share_modal.copy_prototype_link")
           })
         })]
       })]
@@ -1245,7 +1245,7 @@ function tK(e) {
     "data-tooltip-max-width": 300,
     "data-tooltip-offset-y": -8,
     "data-tooltip-show-above": !0,
-    "data-tooltip-subtext": _$$t("file_permissions_modal.share_as.will_open_in_new_tab"),
+    "data-tooltip-subtext": getI18nString("file_permissions_modal.share_as.will_open_in_new_tab"),
     "data-tooltip-timeout-delay": 50,
     "data-tooltip-type": Ib.TEXT,
     onClick: t => {
@@ -1254,7 +1254,7 @@ function tK(e) {
         startingPointNodeId: e.nodeID,
         shouldOpenAtStartingPoint: !0,
         source: "file_share_modal",
-        isSlides: e.editorType === _$$nT.Slides,
+        isSlides: e.editorType === FEditorType.Slides,
         shouldOpenInNewTab: !0,
         openShareModal: !0
       }));
@@ -1266,7 +1266,7 @@ function tK(e) {
   });
   return jsx(_$$sR, {
     icon: d,
-    text: t ? _$$t("file_permissions_modal.share_as.link_copied") : e.copyLinkString,
+    text: t ? getI18nString("file_permissions_modal.share_as.link_copied") : e.copyLinkString,
     onClick: () => {
       l() ? s(_$$to({
         type: tW,
@@ -1286,7 +1286,7 @@ function tK(e) {
         i(!1);
       }, 4e3));
     },
-    rightSideElement: e.editorType !== _$$nT.Slides ? c : void 0,
+    rightSideElement: e.editorType !== FEditorType.Slides ? c : void 0,
     rightClassName: W2
   });
 }
@@ -1308,7 +1308,7 @@ function tX({
   }, [t, e]);
   return jsx(_$$sR, {
     icon: i,
-    text: _$$t("fullscreen_actions.create-slides-outline-from-figjam"),
+    text: getI18nString("fullscreen_actions.create-slides-outline-from-figjam"),
     onClick: s,
     expandCaret: !0
   });
@@ -1334,14 +1334,14 @@ function t9({
   let t = J3();
   let i = _$$iq();
   let n = X();
-  return e.canEdit && i && !n && !getInitialOptions().integration_host && !Ay.isIpadNative && JU(t);
+  return e.canEdit && i && !n && !getInitialOptions().integration_host && !BrowserInfo.isIpadNative && JU(t);
 }
 function ie(e) {
   let t = kD();
   let i = dq();
   let r = cD();
   let a = t ? jsx(tQ, {}) : jsx(_$$n2, {});
-  let s = t ? _$$t("file_permissions_modal.share_as.publish_template.published") : _$$t("file_permissions_modal.share_as.publish_template");
+  let s = t ? getI18nString("file_permissions_modal.share_as.publish_template.published") : getI18nString("file_permissions_modal.share_as.publish_template");
   return jsx(fu, {
     name: "Publish Template Row",
     properties: {
@@ -1430,7 +1430,7 @@ function is({
   let v = function () {
     let e = l7();
     let t = _$$o();
-    return Ay.isIpadNative || e ? null : jsx(eL, {
+    return BrowserInfo.isIpadNative || e ? null : jsx(eL, {
       onClick: () => t(A5.EMBED_CODE)
     });
   }();
@@ -1457,7 +1457,7 @@ function is({
         return null != t && t.status === _$$tT.Loaded && t.data.result;
       }).data ?? !1;
     }(e.key, e.editor_type);
-    let p = md(_$$td);
+    let p = useAtomWithSubscription(_$$td);
     let m = JT();
     let g = Hz({
       figFileKey: e.key
@@ -1477,7 +1477,7 @@ function is({
           return !0;
       }
     })();
-    return e.canEdit && r && !a && !getInitialOptions().integration_host && !Ay.isIpadNative && A ? jsx(en, {
+    return e.canEdit && r && !a && !getInitialOptions().integration_host && !BrowserInfo.isIpadNative && A ? jsx(en, {
       onClick: async () => {
         (await g.doSetup()) && s(A5.PUBLISH_COMMUNITY);
       },
@@ -1539,7 +1539,7 @@ function is({
       file: e,
       repo: t
     });
-    return !i || e.editor_type !== FFileType.DESIGN || r || Ay.isIpadNative ? null : jsx(ek, {
+    return !i || e.editor_type !== FFileType.DESIGN || r || BrowserInfo.isIpadNative ? null : jsx(ek, {
       onClick: () => a({
         linkQueryMode: _$$iO.DEV_MODE,
         skipVisualBell: !0,
@@ -1578,10 +1578,10 @@ function is({
         shouldLinkToPrototype: !0
       }),
       fileKey: e.key,
-      editorType: _$$nT.Design,
+      editorType: FEditorType.Design,
       nodeID: i,
-      permissionsTooltipString: _$$t("file_permissions_modal.share_as.open_prototype_settings"),
-      copyLinkString: _$$t("file_permissions_modal.share_as.copy_prototype_link"),
+      permissionsTooltipString: getI18nString("file_permissions_modal.share_as.open_prototype_settings"),
+      copyLinkString: getI18nString("file_permissions_modal.share_as.copy_prototype_link"),
       file: e,
       planTier: r,
       team: a
@@ -1612,10 +1612,10 @@ function is({
         shouldLinkToPrototype: !0
       }),
       fileKey: e.key,
-      editorType: _$$nT.Slides,
+      editorType: FEditorType.Slides,
       nodeID: i,
-      permissionsTooltipString: _$$t("file_permissions_modal.share_as.open_presentation_settings"),
-      copyLinkString: _$$t("file_permissions_modal.share_as.copy_presentation_link"),
+      permissionsTooltipString: getI18nString("file_permissions_modal.share_as.open_presentation_settings"),
+      copyLinkString: getI18nString("file_permissions_modal.share_as.copy_presentation_link"),
       file: e,
       planTier: r,
       team: a
@@ -1640,7 +1640,7 @@ function is({
     let u = _$$o();
     let p = tn(o);
     let m = useCallback(() => {
-      sx("google_device_screenshare_button_clicked", {
+      trackEventAnalytics("google_device_screenshare_button_clicked", {
         fileKey: o
       });
       getFeatureFlags().figjam_3p_hardware_integration && c && l === FFileType.WHITEBOARD && p ? d(_$$to({
@@ -1712,7 +1712,7 @@ function is({
     }, [l]);
     return (KV(Qej.SHARE_MODAL, !!o), o) ? jsx(_$$sR, {
       icon: jsx(_$$c, {}),
-      text: _$$t("fullscreen_actions.quick_actions.detect-violations"),
+      text: getI18nString("fullscreen_actions.quick_actions.detect-violations"),
       onClick: d
     }) : null;
   }({
@@ -1724,7 +1724,7 @@ function is({
     return e.file.isDraftFileLG && e.file.canMove && (e.org || i && w5(e.team)) ? jsx(tf, {
       onClick: () => {
         _$$h(e.file, e.repo, t);
-        sx("nudge_to_move_clicked", {
+        trackEventAnalytics("nudge_to_move_clicked", {
           file_key: e.file.key,
           team_id: e.team?.id,
           org_id: e.org?.id
@@ -1780,7 +1780,7 @@ function is({
   }), Q, E, I, v].filter(ec);
   let eb = [];
   let eT = e.editor_type === FFileType.DESIGN && !_;
-  eT ? eb = eu : e.editor_type === FFileType.WHITEBOARD && !Ay.isIpadNative && P ? eb = eA : e.editor_type === FFileType.WHITEBOARD ? eb = ep : e.editor_type === FFileType.SLIDES ? eb = eg : e.editor_type === FFileType.COOPER ? eb = e_ : e.editor_type === FFileType.SITES ? eb = ef : e.editor_type === FFileType.FIGMAKE ? eb = em : _ && (eb = eh);
+  eT ? eb = eu : e.editor_type === FFileType.WHITEBOARD && !BrowserInfo.isIpadNative && P ? eb = eA : e.editor_type === FFileType.WHITEBOARD ? eb = ep : e.editor_type === FFileType.SLIDES ? eb = eg : e.editor_type === FFileType.COOPER ? eb = e_ : e.editor_type === FFileType.SITES ? eb = ef : e.editor_type === FFileType.FIGMAKE ? eb = em : _ && (eb = eh);
   let eR = null;
   return (eb.length > 4 && (eR = eb.splice(3)), getFeatureFlags().aip_flower_garden_share && ee && eT && eb.push(ee), 0 === eb.length) ? null : jsxs("div", {
     className: fS,
@@ -1866,7 +1866,7 @@ function im(e) {
       children: jsxs("div", {
         className: d3,
         children: [jsx("div", {
-          children: _$$t("file_permissions_modal.external_teams_in_connected_projects.description")
+          children: getI18nString("file_permissions_modal.external_teams_in_connected_projects.description")
         }), jsx("div", {
           className: _$$s.py8.$,
           children: jsxs(_$$bL, {
@@ -1879,7 +1879,7 @@ function im(e) {
             }), jsxs(mc, {
               children: [jsx(c$, {
                 value: t,
-                children: _$$t("file_permissions_modal.connected_project.all_collaborators")
+                children: getI18nString("file_permissions_modal.connected_project.all_collaborators")
               }), jsx(c$, {
                 value: i,
                 children: d
@@ -1890,13 +1890,13 @@ function im(e) {
                 })
               }), jsx(c$, {
                 value: a,
-                children: _$$t("file_permissions_modal.connected_project.all_external_teams")
+                children: getI18nString("file_permissions_modal.connected_project.all_external_teams")
               }), Object.keys(c).map(e => jsx(c$, {
                 value: e,
                 children: e
               }, e)), jsx(c$, {
                 value: s,
-                children: _$$t("file_permissions_modal.connected_project.other_guests")
+                children: getI18nString("file_permissions_modal.connected_project.other_guests")
               })]
             })]
           })
@@ -1927,7 +1927,7 @@ function iA(e) {
     folder
   } = e;
   if (folder.team_access === FTeamAccessPermissionType.TEAM_ACCESS_DISABLED) return jsx(Fragment, {});
-  let r = team.canRead ? team.name : _$$t("file_permissions_modal.file_name_s_team", {
+  let r = team.canRead ? team.name : getI18nString("file_permissions_modal.file_name_s_team", {
     fileName: e.fileName
   });
   let a = jsx(_$$n3, {
@@ -1951,7 +1951,7 @@ function iA(e) {
         children: r
       }, `name-${team.id}`), jsx("span", {
         className: _$$s.colorTextSecondary.$,
-        children: folder.team_access === FTeamAccessPermissionType.TEAM_ACCESS_VIEW ? _$$t("permissions.level_name.can_view") : _$$t("permissions.level_name.can_access")
+        children: folder.team_access === FTeamAccessPermissionType.TEAM_ACCESS_VIEW ? getI18nString("permissions.level_name.can_view") : getI18nString("permissions.level_name.can_access")
       })]
     })]
   });
@@ -1961,7 +1961,7 @@ function iy(e) {
   return jsxs(iu, {
     children: [jsx("div", {
       className: _$$s.colorTextSecondary.$,
-      children: _$$tx(t ? "folder_share_settings.the_following_people_have_access_remove_their_access_at_any_time" : "folder_share_settings.the_following_people_have_access", {
+      children: renderI18nText(t ? "folder_share_settings.the_following_people_have_access_remove_their_access_at_any_time" : "folder_share_settings.the_following_people_have_access", {
         projectName: e.folder.name
       })
     }), jsx("div", {
@@ -2010,17 +2010,17 @@ function iM({
     checked: t && !o,
     onChange: () => i(!t),
     label: jsx(_$$J2, {
-      children: _$$t("permissions_modal.file_share_settings.viewers_can_copy_save_export")
+      children: getI18nString("permissions_modal.file_share_settings.viewers_can_copy_save_export")
     }),
     children: l ? jsx(_$$E3, {
       color: "secondary",
-      children: _$$tx("permissions_modal.file_share_settings.this_setting_applies_to_members_viewers")
+      children: renderI18nText("permissions_modal.file_share_settings.this_setting_applies_to_members_viewers")
     }) : jsx(_$$E3, {
       color: o ? "disabled" : "secondary",
-      children: _$$tx("permissions_modal.file_share_settings.this_setting_applies_to_anyone_with_view_access", {
+      children: renderI18nText("permissions_modal.file_share_settings.this_setting_applies_to_anyone_with_view_access", {
         strongCanView: jsx("span", {
           className: "xk50ysn",
-          children: _$$t("permissions_modal.file_share_settings.can_view")
+          children: getI18nString("permissions_modal.file_share_settings.can_view")
         })
       })
     }),
@@ -2029,7 +2029,7 @@ function iM({
   return o ? jsx("div", {
     className: "x78zum5 x6s0dn4 x167g77z",
     children: jsx(m_, {
-      preview: _$$t("permissions_modal.file_share_settings.viewers_cannot_export_hover"),
+      preview: getI18nString("permissions_modal.file_share_settings.viewers_cannot_export_hover"),
       children: jsx(_$$S2, {
         ...d
       })
@@ -2073,25 +2073,25 @@ function i$(e) {
       className: e.inputClassName,
       value: e.password || "",
       onChange: t => e.onChange(t.target.value),
-      placeholder: _$$t("file_access_row.passwords.add_a_password"),
+      placeholder: getI18nString("file_access_row.passwords.add_a_password"),
       ref: e.inputRef,
       "data-testid": "link-autogen-password-input"
     }), e.password && e.password.length > 0 && jsx("div", {
       className: N8,
       children: jsx(_$$K3, {
-        "aria-label": _$$t("permissions.link_autogen_password_copy"),
+        "aria-label": getI18nString("permissions.link_autogen_password_copy"),
         onClick: () => {
-          e.password && (Dk(e.password), sx("file_password_copied", {
+          e.password && (Dk(e.password), trackEventAnalytics("file_password_copied", {
             user: e.userId,
             file_key: e.fileKey
           }), t(_$$F2.enqueue({
-            message: _$$t("file_access_row.passwords.copied"),
+            message: getI18nString("file_access_row.passwords.copied"),
             icon: zX.CHECK,
             type: "success"
           })));
         },
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("permissions.link_autogen_password_copy"),
+        "data-tooltip": getI18nString("permissions.link_autogen_password_copy"),
         children: jsx(_$$a, {})
       })
     })]
@@ -2103,15 +2103,15 @@ let i2 = "link_expiration_row--rightLabelStyle--MOIdv";
 function i5(e, t, i) {
   switch (e) {
     case Dp.TWENTY_SEC:
-      return _$$t("file_access_row.expiration.testing");
+      return getI18nString("file_access_row.expiration.testing");
     case Dp.CURRENT:
       return t && i ? yJ(t, i) : "";
     case Dp.DAY:
-      return _$$t("permissions_modal.file_share_settings.one_day");
+      return getI18nString("permissions_modal.file_share_settings.one_day");
     case Dp.WEEK:
-      return _$$t("permissions_modal.file_share_settings.one_week");
+      return getI18nString("permissions_modal.file_share_settings.one_week");
     case Dp.CUSTOM:
-      return _$$t("permissions_modal.file_share_settings.custom_time");
+      return getI18nString("permissions_modal.file_share_settings.custom_time");
     default:
       return throwTypeError(e);
   }
@@ -2158,17 +2158,17 @@ function i7(e) {
   let [l, d] = useState(i6(o, a, cH(i)));
   let c = useCallback(() => {
     if (!l) {
-      e.setErrorMessage(_$$t("file_access_row.expiration.invalid_options"));
+      e.setErrorMessage(getI18nString("file_access_row.expiration.invalid_options"));
       return !1;
     }
     let t = _$$U2(W7(a), hP(l));
     let i = e.currentTimestamp.clone().add(1, "year");
     let n = e.orgMaxExpiration && t.isAfter(e.orgMaxExpiration) && e.orgMaxExpirationInHrs;
     let r = t.isAfter(i);
-    if (t.isBefore(e.currentTimestamp)) e.setErrorMessage(_$$t("file_access_row.expiration.past_date"));else if (n) {
+    if (t.isBefore(e.currentTimestamp)) e.setErrorMessage(getI18nString("file_access_row.expiration.past_date"));else if (n) {
       let t = _$$nM(e.orgMaxExpirationInHrs);
       e.setErrorMessage(t);
-    } else r ? e.setErrorMessage(_$$t("file_access_row.expiration.past_max")) : e.setErrorMessage(null);
+    } else r ? e.setErrorMessage(getI18nString("file_access_row.expiration.past_max")) : e.setErrorMessage(null);
   }, [a, l, e]);
   let u = useCallback((e, i) => {
     if (!e || !i) return;
@@ -2191,7 +2191,7 @@ function i7(e) {
         color: "secondary",
         truncate: "line-clamp",
         lineClamp: 3,
-        children: _$$tx("file_access_row.expiration.org_enforcement_message_v2", {
+        children: renderI18nText("file_access_row.expiration.org_enforcement_message_v2", {
           time: _$$M(e.orgMaxExpiration),
           orgName: e.org?.name
         })
@@ -2265,13 +2265,13 @@ function i7(e) {
             e.setErrorMessage(null);
           },
           className: x7,
-          children: _$$tx("file_access_row.expiration.cancel")
+          children: renderI18nText("file_access_row.expiration.cancel")
         }), jsx($$, {
           className: e.displayState === i0.EDIT_EXP ? B5 : void 0,
           onClick: () => u(a, l),
           disabled: !!e.errorMessage || e.disableSetExpiration,
           dataTestId: "custom-expiration-save",
-          children: _$$tx(e.displayState === i0.EDIT_PWD_AND_EXP ? "file_access_row.expiration.set_link_access" : "file_access_row.expiration.set")
+          children: renderI18nText(e.displayState === i0.EDIT_PWD_AND_EXP ? "file_access_row.expiration.set_link_access" : "file_access_row.expiration.set")
         })]
       })]
     }), e.errorMessage && !m && jsx("div", {
@@ -2294,10 +2294,10 @@ function i8(e) {
     for (let i = 1; i <= e; i++) t.push({
       type: "option",
       key: i.toString(),
-      selectedLabel: _$$t("file_access_row.expiration.custom_expiration_options_for_org_enforcement_24hrs_label", {
+      selectedLabel: getI18nString("file_access_row.expiration.custom_expiration_options_for_org_enforcement_24hrs_label", {
         num: i
       }),
-      text: _$$t("file_access_row.expiration.custom_expiration_options_for_org_enforcement_24hrs", {
+      text: getI18nString("file_access_row.expiration.custom_expiration_options_for_org_enforcement_24hrs", {
         num: i
       })
     });
@@ -2338,13 +2338,13 @@ function i8(e) {
       children: [jsx(_$$nR, {
         className: x7,
         onClick: e.onCancelRequiredExpiration,
-        children: _$$tx("file_access_row.expiration.cancel")
+        children: renderI18nText("file_access_row.expiration.cancel")
       }), jsx($$, {
         className: e.displayState === i0.EDIT_EXP ? B5 : void 0,
         onClick: () => s(t),
         disabled: e.disableSetExpiration,
         dataTestId: "custom-expiration-save",
-        children: _$$tx(a ? "file_access_row.expiration.set_link_access" : "file_access_row.expiration.set")
+        children: renderI18nText(a ? "file_access_row.expiration.set_link_access" : "file_access_row.expiration.set")
       })]
     })]
   });
@@ -2367,11 +2367,11 @@ function i9(e) {
     })
   });
 }
-let ne = (e, t) => e === FPermissionLevelType.ORG_EDIT && t ? _$$t("permissions_modal.file_share_settings.anyone_in_container_can_edit", {
+let ne = (e, t) => e === FPermissionLevelType.ORG_EDIT && t ? getI18nString("permissions_modal.file_share_settings.anyone_in_container_can_edit", {
   containerName: t.name
-}) : (e === FPermissionLevelType.ORG_VIEW || e === FViewPermissionType.ORG_VIEW) && t ? _$$t("permissions_modal.file_share_settings.anyone_in_container_can_view", {
+}) : (e === FPermissionLevelType.ORG_VIEW || e === FViewPermissionType.ORG_VIEW) && t ? getI18nString("permissions_modal.file_share_settings.anyone_in_container_can_view", {
   containerName: t.name
-}) : _$$t("permissions_modal.file_share_settings.only_invited_people");
+}) : getI18nString("permissions_modal.file_share_settings.only_invited_people");
 function nt(e) {
   let t = useDispatch();
   let i = Um();
@@ -2386,7 +2386,7 @@ function nt(e) {
     children: jsxs(_$$Y2, {
       direction: "vertical",
       children: [jsxs(l6, {
-        ariaLabel: _$$t("permissions_modal.link_expirations_select.aria_label"),
+        ariaLabel: getI18nString("permissions_modal.link_expirations_select.aria_label"),
         className: "link_expiration_row--dropdownSelector--xvELk select--selectInputExpanded--Lz6m4",
         disabled: e.isBranch || !e.canChangeExpiration,
         dispatch: t,
@@ -2449,14 +2449,14 @@ function nt(e) {
         ...e
       }), e.expiresAt && e.prevPrivateLinkAccess && jsx("div", {
         className: "link_expiration_row--expirationSubtitle--N0f5P text--fontPos11--2LvXf text--_fontBase--QdLsd",
-        children: e.orgMaxExpirationInHrs && e.org ? _$$tx("permissions_modal.file_share_settings.org_requires_access_to_end", {
+        children: e.orgMaxExpirationInHrs && e.org ? renderI18nText("permissions_modal.file_share_settings.org_requires_access_to_end", {
           orgName: e.org.name,
           date: _$$M(d, !0),
           prevLinkAccess: jsx("span", {
             className: i1,
             children: ne(e.prevPrivateLinkAccess, e.org)
           })
-        }) : _$$tx("permissions_modal.file_share_settings.expires_on_date", {
+        }) : renderI18nText("permissions_modal.file_share_settings.expires_on_date", {
           date: _$$M(c, !0),
           prevLinkAccess: jsx("span", {
             className: i1,
@@ -2481,12 +2481,12 @@ class nn extends PureComponent {
     let l = passwordSetAt ? jsx(_$$h4, {
       date: passwordSetAt.toUTCString()
     }) : "";
-    e = wasPasswordSetByCurrentUser ? _$$tx("permissions.link_password_set_by_current_user", {
+    e = wasPasswordSetByCurrentUser ? renderI18nText("permissions.link_password_set_by_current_user", {
       relativePasswordSetAt: l
-    }) : passwordSetByUser ? _$$tx("permissions.link_password_set_by_another_user", {
+    }) : passwordSetByUser ? renderI18nText("permissions.link_password_set_by_another_user", {
       userHandle: passwordSetByUser.handle,
       relativePasswordSetAt: l
-    }) : _$$tx("permissions.link_password_set_without_user", {
+    }) : renderI18nText("permissions.link_password_set_without_user", {
       relativePasswordSetAt: l
     });
     return jsxs("p", {
@@ -2496,7 +2496,7 @@ class nn extends PureComponent {
         variant: "ghost",
         onClick: disabled ? void 0 : onReset,
         disabled,
-        children: _$$tx("permissions.link_password_reset")
+        children: renderI18nText("permissions.link_password_reset")
       })]
     });
   }
@@ -2519,7 +2519,7 @@ function na({
   let b = _$$o();
   let v = HW();
   let I = _$$iZ();
-  let E = wN(e.editor_type);
+  let E = mapFileTypeToEditorType(e.editor_type);
   let x = t ? t.canEdit : e.hasEditRole;
   let S = !!(i && i.bigma_enabled);
   let w = Xm(e);
@@ -2639,7 +2639,7 @@ function na({
     let t;
     let i = _$$d2(mainFileLinkExpirationConfig);
     (v && null !== R.protoLinkAccess ? p8[R.protoLinkAccess].shareAudience : fb[R.linkAccess].shareAudience) === U && i && !Z && (t = null);
-    let n = Z && Z !== i && E !== _$$nT.Whiteboard;
+    let n = Z && Z !== i && E !== FEditorType.Whiteboard;
     let r = "edit" === el && U === _9.ANYONE ? em : null;
     let a = "unprotected" !== el && U === _9.ANYONE;
     let s = fb[R.linkAccess].shareAudience !== _9.ANYONE && {
@@ -2665,7 +2665,7 @@ function na({
   let e_ = () => {
     em && p(lW({
       stringToCopy: em,
-      successText: _$$t("permissions_modal.file_share_settings.password_copied_to_clipboard")
+      successText: getI18nString("permissions_modal.file_share_settings.password_copied_to_clipboard")
     }));
   };
   let eA = e => {
@@ -2689,9 +2689,9 @@ function na({
   let ev = x && !(v && fb[R.linkAccess].shareAudience === _9.ANYONE);
   let eI = !(en !== U || er !== G || (R.discoverable || !1) !== K || (!viewer_export_restricted || R.linkAccess === FPermissionLevelType.EDIT) !== Q || (v && R.protoPasswordEnabled || R.filePasswordEnabled) && "unprotected" === el || "edit" === el || et !== Z) || !x || Cy(d) && !em && "edit" === el && U === _9.ANYONE || Bg(d) && U === _9.ANYONE;
   let eE = C || i;
-  let ex = E !== _$$nT.Whiteboard && S;
-  let ew = Bg(d) || E === _$$nT.Whiteboard && Q3(d);
-  let eC = E === _$$nT.Slides && !!o && !i && !C;
+  let ex = E !== FEditorType.Whiteboard && S;
+  let ew = Bg(d) || E === FEditorType.Whiteboard && Q3(d);
+  let eC = E === FEditorType.Slides && !!o && !i && !C;
   let [eT, ek] = useState(!1);
   let eR = useRef(null);
   useLayoutEffect(() => {
@@ -2722,10 +2722,10 @@ function na({
       className: _$$QU,
       children: [v && jsx("div", {
         className: VA,
-        children: E === _$$nT.Slides ? _$$t("permissions_modal.file_share_settings.any_changes_here_will_only_affect_presentation") : _$$t("permissions_modal.file_share_settings.any_changes_here_will_only_affect_prototype")
+        children: E === FEditorType.Slides ? getI18nString("permissions_modal.file_share_settings.any_changes_here_will_only_affect_presentation") : getI18nString("permissions_modal.file_share_settings.any_changes_here_will_only_affect_prototype")
       }), jsx("div", {
         className: bV,
-        children: _$$t("folder_permissions_modal.who_can_access")
+        children: getI18nString("folder_permissions_modal.who_can_access")
       }), jsx(YU, {
         resourceType: FResourceCategoryType.FILE,
         value: U,
@@ -2748,7 +2748,7 @@ function na({
       }), U !== _9.INVITE_ONLY && !v && jsxs(Fragment, {
         children: [jsx("div", {
           className: bV,
-          children: _$$t("folder_permissions_modal.what_can_they_do")
+          children: getI18nString("folder_permissions_modal.what_can_they_do")
         }), jsx(Iz, {
           selectedPermissionsLevel: G,
           setSelectedPermissionsLevel: eg,
@@ -2756,14 +2756,14 @@ function na({
           disableEdit: !(G === J4.EDIT || (i ? !(i.invite_whitelist_guest_invite_setting === Gv.BANNED && U === _9.ANYONE) : !!Oi(o || null, isDraftFileLG)))
         }), jsx("div", {
           className: VA,
-          children: G === J4.VIEW ? _$$t("permissions_modal.file_share_settings.can_view_and_comment_on_this_file") : _$$t("permissions_modal.file_share_settings.can_edit_this_file")
+          children: G === J4.VIEW ? getI18nString("permissions_modal.file_share_settings.can_view_and_comment_on_this_file") : getI18nString("permissions_modal.file_share_settings.can_edit_this_file")
         })]
       }), U === _9.ANYONE && !eC && jsx("div", {
         className: _$$ts
       }), U === _9.ANYONE && !eC && jsxs(Fragment, {
         children: [jsx("div", {
           className: bV,
-          children: _$$t("permissions_modal.file_share_settings.additional_security")
+          children: getI18nString("permissions_modal.file_share_settings.additional_security")
         }), jsxs("div", {
           className: Fk,
           children: [jsxs("div", {
@@ -2772,13 +2772,13 @@ function na({
               checked: "unprotected" !== el,
               onChange: ec,
               label: jsx(_$$J2, {
-                children: _$$t("permissions_modal.file_share_settings.password_required")
+                children: getI18nString("permissions_modal.file_share_settings.password_required")
               }),
               disabled: !ev || Cy(d)
             }), "edit" === el && jsxs("button", {
               className: _$$tl2,
               onClick: () => {
-                sx("file_password_generated", {
+                trackEventAnalytics("file_password_generated", {
                   user: I?.id,
                   file_key: key
                 });
@@ -2791,7 +2791,7 @@ function na({
               children: [jsx(_$$_, {
                 className: eT ? Ph : ""
               }), jsx("span", {
-                children: _$$t("file_access_row.passwords.generate")
+                children: getI18nString("file_access_row.passwords.generate")
               })]
             })]
           }), "view" === el && jsx(nn, {
@@ -2818,7 +2818,7 @@ function na({
               (!Q3(d) || e) && (q ? X(null) : q || X(eb().toDate()), $(!q));
             },
             label: jsx(_$$J2, {
-              children: q ? _$$t("permissions_modal.file_share_settings.link_expires_in") : _$$t("permissions_modal.file_share_settings.link_expiration")
+              children: q ? getI18nString("permissions_modal.file_share_settings.link_expires_in") : getI18nString("permissions_modal.file_share_settings.link_expiration")
             }),
             disabled: Q3(d) || !eo
           }), q && ex && i && jsx(nt, {
@@ -2843,14 +2843,14 @@ function na({
           className: _$$ts
         }), jsx("h3", {
           className: bV,
-          children: _$$t("permissions_modal.file_share_settings.advanced")
+          children: getI18nString("permissions_modal.file_share_settings.advanced")
         }), jsxs("div", {
           className: Fk,
           children: [U === _9.ORG && jsx(_$$S2, {
             checked: K,
             onChange: () => Y(!K),
             label: jsx(_$$J2, {
-              children: _$$t("permissions_modal.file_share_settings.discoverable_via_search")
+              children: getI18nString("permissions_modal.file_share_settings.discoverable_via_search")
             }),
             disabled: !x
           }), eE && jsx(iM, {
@@ -2869,12 +2869,12 @@ function na({
         className: _$$ix,
         children: [jsx(_$$tM, {
           onClick: _,
-          children: _$$tx("project_creation.cancel")
+          children: renderI18nText("project_creation.cancel")
         }), jsx(vd, {
           onClick: () => {
-            if (v && E !== _$$nT.Slides && T) {
-              if (!co(E)) {
-                $D(_$$e3.MONETIZATION_UPGRADES, Error("Paywall: Wrong editor type for pro feature"), {
+            if (v && E !== FEditorType.Slides && T) {
+              if (!isSlidesOrWhiteboardOrDesignOrIllustration(E)) {
+                reportError(_$$e3.MONETIZATION_UPGRADES, Error("Paywall: Wrong editor type for pro feature"), {
                   extra: {
                     editorType: E,
                     teamId: o?.id,
@@ -2895,9 +2895,9 @@ function na({
               }));
               return;
             }
-            if ("unprotected" === el || !o || i || C || E === _$$nT.Slides || _$$$(p, E, o), !em && "edit" === el && U === _9.ANYONE) {
+            if ("unprotected" === el || !o || i || C || E === FEditorType.Slides || _$$$(p, E, o), !em && "edit" === el && U === _9.ANYONE) {
               p(_$$F2.enqueue({
-                message: _$$t("permissions_modal.file_share_settings.please_enter_a_password"),
+                message: getI18nString("permissions_modal.file_share_settings.please_enter_a_password"),
                 error: !0
               }));
               return;
@@ -2936,7 +2936,7 @@ function na({
             _();
           },
           disabled: eI,
-          children: _$$tx("team_view.team_permissions_modal.save")
+          children: renderI18nText("team_view.team_permissions_modal.save")
         })]
       })
     })]
@@ -2948,11 +2948,11 @@ function ns(e) {
   let r = e.libraryInfo?.publishScopeType === FContainerType.WORKSPACE;
   if (t && (i || r) && !e.selectedOrgDiscoverable) {
     let t = null;
-    i ? t = _$$tx("file_permissions_modal.library_warning_banner.everyone_at_org", {
+    i ? t = renderI18nText("file_permissions_modal.library_warning_banner.everyone_at_org", {
       orgName: e.org?.name
-    }) : r && (t = e.workspace?.canView ? _$$tx("file_permissions_modal.library_warning_banner.everyone_at_workspace", {
+    }) : r && (t = e.workspace?.canView ? renderI18nText("file_permissions_modal.library_warning_banner.everyone_at_workspace", {
       workspaceName: e.workspace?.name
-    }) : _$$tx("file_permissions_modal.library_warning_banner.everyone_at_this_file_s_workspace"));
+    }) : renderI18nText("file_permissions_modal.library_warning_banner.everyone_at_this_file_s_workspace"));
     return jsxs(_$$Y2, {
       padding: {
         left: 4,
@@ -2970,14 +2970,14 @@ function ns(e) {
           className: _$$s.flexShrink0.$
         })
       }), jsx("div", {
-        children: _$$tx("file_permissions_modal.library_warning_banner.share_settings_will_change_library_publish_audience", {
+        children: renderI18nText("file_permissions_modal.library_warning_banner.share_settings_will_change_library_publish_audience", {
           originalShareAudience: jsx(_$$E3, {
             fontWeight: "semi-bold",
             children: t
           }),
           newShareAudience: jsx(_$$E3, {
             fontWeight: "semi-bold",
-            children: _$$tx("file_permissions_modal.library_warning_banner.everyone_at_team", {
+            children: renderI18nText("file_permissions_modal.library_warning_banner.everyone_at_team", {
               teamName: e.team?.name
             })
           })
@@ -2986,13 +2986,13 @@ function ns(e) {
     });
   }
   if (!e.isDraftFile || e.isPrototype) {
-    let t = e.folder ? _$$tx("permissions_modal.file_share_settings.these_settings_won't_apply_to", {
-      numPeople: _$$t("permissions_modal.file_share_settings.num_people", {
+    let t = e.folder ? renderI18nText("permissions_modal.file_share_settings.these_settings_won't_apply_to", {
+      numPeople: getI18nString("permissions_modal.file_share_settings.num_people", {
         num: e.numRoles
       }),
       projectName: e.folder.name
-    }) : _$$tx("permissions_modal.file_share_settings.these_settings_won't_apply_to_no_project", {
-      numPeople: _$$t("permissions_modal.file_share_settings.num_people", {
+    }) : renderI18nText("permissions_modal.file_share_settings.these_settings_won't_apply_to_no_project", {
+      numPeople: getI18nString("permissions_modal.file_share_settings.num_people", {
         num: e.numRoles
       }),
       fileName: e.fileName
@@ -3003,7 +3003,7 @@ function ns(e) {
       children: [jsx("div", {
         className: _$$G,
         children: jsx(_$$B2, {})
-      }), e.isPrototype ? e.editorType === _$$nT.Slides ? _$$tx("permissions_modal.file_share_settings.these_settings_won't_apply_to_presentation") : _$$tx("permissions_modal.file_share_settings.these_settings_won't_apply_to_prototype") : t]
+      }), e.isPrototype ? e.editorType === FEditorType.Slides ? renderI18nText("permissions_modal.file_share_settings.these_settings_won't_apply_to_presentation") : renderI18nText("permissions_modal.file_share_settings.these_settings_won't_apply_to_prototype") : t]
     });
   }
   return null;
@@ -3017,13 +3017,13 @@ function nc(e) {
       className: _$$s.flex.flexColumn.$,
       children: [jsx("img", {
         src: tp,
-        alt: _$$t("file_permissions_modal.google_confirmation_modal.image_alt_text"),
+        alt: getI18nString("file_permissions_modal.google_confirmation_modal.image_alt_text"),
         className: _$$s.wFull.$
       }), jsxs("div", {
         className: _$$s.p16.$,
         children: [jsx("div", {
           className: _$$s.colorTextSecondary.pb8.$,
-          children: _$$tx("file_permissions_modal.google_confirmation_modal.subtext", {
+          children: renderI18nText("file_permissions_modal.google_confirmation_modal.subtext", {
             link: jsx(L0, {
               target: "_blank",
               rel: "noopener",
@@ -3033,14 +3033,14 @@ function nc(e) {
                 cursor: "pointer",
                 userSelect: "auto"
               }).$,
-              children: _$$tx("file_permissions_modal.google_confirmation_modal.here")
+              children: renderI18nText("file_permissions_modal.google_confirmation_modal.here")
             })
           })
         }), jsx($y, {
           variant: "brand",
           children: jsx(_$$Q, {
-            title: _$$tx("file_permissions_modal.google_confirmation_modal.subtitle"),
-            children: _$$tx("file_permissions_modal.google_confirmation_modal.description")
+            title: renderI18nText("file_permissions_modal.google_confirmation_modal.subtitle"),
+            children: renderI18nText("file_permissions_modal.google_confirmation_modal.description")
           })
         }), jsx("div", {
           className: _$$s.flex.justifyEnd.pt16.$,
@@ -3050,7 +3050,7 @@ function nc(e) {
               t(Lo());
               e.onSubmit();
             },
-            children: _$$tx("file_permissions_modal.google_confirmation_modal.confirm_text")
+            children: renderI18nText("file_permissions_modal.google_confirmation_modal.confirm_text")
           })
         })]
       })]
@@ -3079,22 +3079,22 @@ function nk({
         if (0 === e.length) return null;
         switch (e.length) {
           case 1:
-            return _$$t("community.access_needed_to_publish_in_org_modal.org_admins.one_admin", {
+            return getI18nString("community.access_needed_to_publish_in_org_modal.org_admins.one_admin", {
               orgAdminName: e[0].name
             });
           case 2:
-            return _$$t("community.access_needed_to_publish_in_org_modal.org_admins.two_admins", {
+            return getI18nString("community.access_needed_to_publish_in_org_modal.org_admins.two_admins", {
               orgAdmin1Name: e[0].name,
               orgAdmin2Name: e[1].name
             });
           case 3:
-            return _$$t("community.access_needed_to_publish_in_org_modal.org_admins.three_admins", {
+            return getI18nString("community.access_needed_to_publish_in_org_modal.org_admins.three_admins", {
               orgAdmin1Name: e[0].name,
               orgAdmin2Name: e[1].name,
               orgAdmin3Name: e[2].name
             });
           default:
-            return _$$t("community.access_needed_to_publish_in_org_modal.org_admins.more_than_three_admins", {
+            return getI18nString("community.access_needed_to_publish_in_org_modal.org_admins.more_than_three_admins", {
               orgAdmin1Name: e[0].name,
               orgAdmin2Name: e[1].name,
               otherAdminsCount: e.length - 2
@@ -3123,12 +3123,12 @@ let nR = Ju(function () {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$t("community.access_needed_to_publish_in_org_modal.title")
+          children: getI18nString("community.access_needed_to_publish_in_org_modal.title")
         })
       }), jsx(_$$nB, {
         children: jsxs("div", {
           className: "x78zum5 xdt5ytf xou54vl",
-          children: [_$$tx("community.access_needed_to_publish_in_org_modal.body"), jsx(nk, {
+          children: [renderI18nText("community.access_needed_to_publish_in_org_modal.body"), jsx(nk, {
             users: s.data
           })]
         })
@@ -3138,7 +3138,7 @@ let nR = Ju(function () {
             variant: "secondary",
             href: _$$M2,
             newTab: !0,
-            children: _$$t("general.learn_more")
+            children: getI18nString("general.learn_more")
           })
         })
       })]
@@ -3169,20 +3169,20 @@ let nN = Ju(function () {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$t("community.sites_publish_required_modal.title")
+          children: getI18nString("community.sites_publish_required_modal.title")
         })
       }), jsx(_$$nB, {
-        children: _$$t("community.sites_publish_required_modal.body")
+        children: getI18nString("community.sites_publish_required_modal.body")
       }), jsx(wi, {
         children: jsxs(jk, {
           children: [jsx($n, {
             variant: "secondary",
             onClick: i,
-            children: _$$t("general.cancel")
+            children: getI18nString("general.cancel")
           }), jsx($n, {
             variant: "primary",
             onClick: s,
-            children: _$$t("community.sites_publish_required_modal.publish_button")
+            children: getI18nString("community.sites_publish_required_modal.publish_button")
           })]
         })
       })]
@@ -3209,7 +3209,7 @@ let n2 = Ju(function ({
   } = useMemo(() => cX(e) ? {
     beforeUnpublishHubFile: async () => {
       p(_$$o2.HUBFILE);
-      zl.set(UM, {
+      atomStoreManager.set(UM, {
         state: F4.UNPUBLISH_HUB_FILE_INITIATED
       });
       Ez5?.canvasGrid().updateSourceLibraryKey(_$$l(""));
@@ -3227,7 +3227,7 @@ let n2 = Ju(function ({
     },
     onUnpublishHubFileError: () => {
       U7(u);
-      zl.set(UM, {
+      atomStoreManager.set(UM, {
         state: F4.UNPUBLISH_TEMPLATE_ERRORED
       });
     }
@@ -3258,7 +3258,7 @@ let n2 = Ju(function ({
       confirmationTitle: t,
       content: i,
       confirmText: s,
-      cancelText: _$$t("general.cancel"),
+      cancelText: getI18nString("general.cancel"),
       hideCancel: m,
       onConfirm: async () => {
         g(!0);
@@ -3562,7 +3562,7 @@ function re({
   if (!e) return;
   r?.();
   let a = () => {
-    sx("publish_details_view_open", {
+    trackEventAnalytics("publish_details_view_open", {
       fileKey: e.key,
       userId: t.id,
       teamId: e.teamId,
@@ -3615,9 +3615,9 @@ class rt extends Component {
       let e = this.isPaid();
       let t = this.props.editingHubFile && AC(this.props.editingHubFile);
       let i = e && !t;
-      let n = i ? _$$t("community.hub_files.delist_file_from_community_hub") : this.isSlidesFile() ? _$$t("community.hub_files.unpublish_template") : _$$t("community.hub_files.remove_file_from_community_hub");
-      let r = i ? _$$t("community.resource.delisting_this_resource_will_prevent_people_from_discovering_or_purchasing_this_resource") : this.isSlidesFile() ? _$$t("community.hub_files.unpublish_template_description") : _$$t("community.hub_files.unpublishing_this_file_will_remove_it_from_the_community_hub_and_prevent_people_from_finding_and_using_this_file");
-      let a = i ? _$$t("community.resource.delist") : _$$t("community.resource.unpublish");
+      let n = i ? getI18nString("community.hub_files.delist_file_from_community_hub") : this.isSlidesFile() ? getI18nString("community.hub_files.unpublish_template") : getI18nString("community.hub_files.remove_file_from_community_hub");
+      let r = i ? getI18nString("community.resource.delisting_this_resource_will_prevent_people_from_discovering_or_purchasing_this_resource") : this.isSlidesFile() ? getI18nString("community.hub_files.unpublish_template_description") : getI18nString("community.hub_files.unpublishing_this_file_will_remove_it_from_the_community_hub_and_prevent_people_from_finding_and_using_this_file");
+      let a = i ? getI18nString("community.resource.delist") : getI18nString("community.resource.unpublish");
       this.props.dispatch(_$$to({
         type: n2,
         data: {
@@ -3661,7 +3661,7 @@ class rt extends Component {
     let r = this.props.isCommunityBlocked;
     let a = this.props.editingHubFile && this.props.editingHubFile.verification_status === FUserVerificationStatusType.BLOCKED;
     let s = HF(this.props.editingHubFile) ? _$$a2(this.props.editingHubFile).created_at : null;
-    let o = HF(this.props.editingHubFile) && s ? _$$t("community.permissions_modal_publish_tab.footer.published_at_timestamp", {
+    let o = HF(this.props.editingHubFile) && s ? getI18nString("community.permissions_modal_publish_tab.footer.published_at_timestamp", {
       publish_date: new Date(s)
     }) : "\u2013";
     let l = this.props.user.sharing_restricted;
@@ -3680,8 +3680,8 @@ class rt extends Component {
         }), jsx("span", {
           className: mq,
           children: a ? jsx(Fragment, {
-            children: _$$tx("community.permissions_modal_publish_tab.footer.your_file_has_not_been_published")
-          }) : _$$tx("community.permissions_modal_publish_tab.footer.publish_user_sharing_restricted", {
+            children: renderI18nText("community.permissions_modal_publish_tab.footer.your_file_has_not_been_published")
+          }) : renderI18nText("community.permissions_modal_publish_tab.footer.publish_user_sharing_restricted", {
             supportSharingRestrictedEmail: jsx(_$$N2, {
               href: `mailto:${e}`,
               newTab: !0,
@@ -3695,14 +3695,14 @@ class rt extends Component {
             children: jsx($n, {
               variant: "destructiveSecondary",
               onClick: this.showUnpublishModal,
-              children: _$$t("community.permissions_modal_publish_tab.footer.remove")
+              children: getI18nString("community.permissions_modal_publish_tab.footer.remove")
             })
           }), jsx("a", {
             target: "_blank",
             href: "https://help.figma.com/hc/articles/360038510573-Figma-Community-Guidelines",
             children: jsx($n, {
               variant: "primary",
-              children: _$$t("community.permissions_modal_publish_tab.footer.learn_more")
+              children: getI18nString("community.permissions_modal_publish_tab.footer.learn_more")
             })
           })]
         }) : jsx("div", {
@@ -3710,7 +3710,7 @@ class rt extends Component {
             variant: "primary",
             disabled: !0,
             "data-testid": "community-publish-button",
-            children: _$$t("community.resource.publish")
+            children: getI18nString("community.resource.publish")
           })
         })]
       });
@@ -3725,13 +3725,13 @@ class rt extends Component {
         })
       }), jsx("span", {
         className: mq,
-        children: _$$tx("community.permissions_modal_publish_tab.footer.cannot_publish_default_file")
+        children: renderI18nText("community.permissions_modal_publish_tab.footer.cannot_publish_default_file")
       }), jsx("div", {
         children: jsx($n, {
           variant: "primary",
           disabled: !0,
           "data-testid": "community-publish-button",
-          children: _$$tx("community.resource.publish")
+          children: renderI18nText("community.resource.publish")
         })
       })]
     }) : this.remixPublishingBlocked() ? jsxs("div", {
@@ -3744,13 +3744,13 @@ class rt extends Component {
         })
       }), jsx("span", {
         className: mq,
-        children: _$$tx("community.permissions_modal_publish_tab.footer.cannot_publish_remix")
+        children: renderI18nText("community.permissions_modal_publish_tab.footer.cannot_publish_remix")
       }), jsx("div", {
         children: jsx($n, {
           variant: "primary",
           disabled: !0,
           "data-testid": "community-publish-button",
-          children: _$$tx("community.resource.publish")
+          children: renderI18nText("community.resource.publish")
         })
       })]
     }) : this.isRemixedFromPaidFile() ? jsxs("div", {
@@ -3763,16 +3763,16 @@ class rt extends Component {
         })
       }), jsx("span", {
         className: mq,
-        children: _$$tx("community.permissions_modal_publish_tab.footer.cannot_publish_remix_from_paid_file")
+        children: renderI18nText("community.permissions_modal_publish_tab.footer.cannot_publish_remix_from_paid_file")
       }), jsx("div", {
         children: jsx($n, {
           variant: "primary",
           disabled: !0,
           "data-testid": "community-publish-button",
-          children: _$$tx("community.resource.publish")
+          children: renderI18nText("community.resource.publish")
         })
       })]
-    }) : (e = this.props.editingHubFile && Pg(this.props.editingHubFile) ? _$$t("community.resource.delisted") : i ? _$$t("community.permissions_modal_publish_tab.footer.submitted") : _$$t("community.permissions_modal_publish_tab.footer.last_published"), t = this.isPaid() && !i ? _$$t("community.resource.delist") : _$$t("community.resource.unpublish"), jsx("div", {
+    }) : (e = this.props.editingHubFile && Pg(this.props.editingHubFile) ? getI18nString("community.resource.delisted") : i ? getI18nString("community.permissions_modal_publish_tab.footer.submitted") : getI18nString("community.permissions_modal_publish_tab.footer.last_published"), t = this.isPaid() && !i ? getI18nString("community.resource.delist") : getI18nString("community.resource.unpublish"), jsx("div", {
       className: HO,
       children: HF(this.props.editingHubFile) && !this.props.canPublishError ? jsxs(Fragment, {
         children: [jsxs("div", {
@@ -3790,7 +3790,7 @@ class rt extends Component {
               href: this.props.hubFileHref,
               onClick: this.onHubFileClick,
               trusted: !0,
-              children: this.props.editingHubFile && AC(this.props.editingHubFile) ? _$$tx("community.permissions_modal_publish_tab.footer.view_private_community_page") : _$$tx("community.permissions_modal_publish_tab.footer.view_community_page")
+              children: this.props.editingHubFile && AC(this.props.editingHubFile) ? renderI18nText("community.permissions_modal_publish_tab.footer.view_private_community_page") : renderI18nText("community.permissions_modal_publish_tab.footer.view_community_page")
             })]
           })]
         }), jsxs("div", {
@@ -3803,17 +3803,17 @@ class rt extends Component {
             variant: "primary",
             disabled: this.props.disablePublish,
             onClick: this.publish,
-            children: this.isPaid() ? _$$t("community.permissions_modal_publish_tab.footer.make_changes") : _$$t("community.permissions_modal_publish_tab.footer.publish_update")
+            children: this.isPaid() ? getI18nString("community.permissions_modal_publish_tab.footer.make_changes") : getI18nString("community.permissions_modal_publish_tab.footer.publish_update")
           })]
         })]
       }) : jsxs(Fragment, {
         children: [jsxs("p", {
           className: mq,
-          children: [this.props.canPublishError ? this.props.canPublishError : u ? _$$t("community.permissions_modal_publish_tab.footer.publish_slides_file") : this.props.remixedFrom ? _$$t("community.permissions_modal_publish_tab.footer.publish_remix") : _$$t("community.permissions_modal_publish_tab.footer.publish_file_version_no_remix"), jsxs(_$$N2, {
+          children: [this.props.canPublishError ? this.props.canPublishError : u ? getI18nString("community.permissions_modal_publish_tab.footer.publish_slides_file") : this.props.remixedFrom ? getI18nString("community.permissions_modal_publish_tab.footer.publish_remix") : getI18nString("community.permissions_modal_publish_tab.footer.publish_file_version_no_remix"), jsxs(_$$N2, {
             href: this.props.canPublishError ? _$$M2 : u ? "https://help.figma.com/hc/articles/25923960876567" : this.props.remixedFrom ? "https://help.figma.com/hc/articles/360038510693-Guide-to-Figma-Community#Remixes" : "https://help.figma.com/hc/articles/360040035974--Publish-a-File-to-the-Community",
             newTab: !0,
             trusted: !0,
-            children: ["\xa0", _$$t("general.learn_more")]
+            children: ["\xa0", getI18nString("general.learn_more")]
           })]
         }), jsx(fu, {
           name: "Community Publish Button",
@@ -3821,7 +3821,7 @@ class rt extends Component {
             disabled: !!this.props.canPublishError || !this.state.thumbnail || !!this.props.disablePublish,
             onClick: this.publish,
             "data-testid": "community-publish-button",
-            children: _$$t("community.resource.publish")
+            children: getI18nString("community.resource.publish")
           })
         })]
       })
@@ -3838,7 +3838,7 @@ class rt extends Component {
         children: t.name
       }), jsxs("div", {
         className: hC,
-        children: [" ", _$$tx("community.hub_files.by_author", {
+        children: [" ", renderI18nText("community.hub_files.by_author", {
           author: jsx("strong", {
             children: VH(e)
           })
@@ -3865,7 +3865,7 @@ class rt extends Component {
         className: N1,
         children: [jsx("div", {
           className: TK,
-          children: _$$tx("community.publishing.publish_to_the_figma_community", {
+          children: renderI18nText("community.publishing.publish_to_the_figma_community", {
             lineBreak: jsx("br", {})
           })
         }), jsx(n7, {})]
@@ -3921,7 +3921,7 @@ class rt extends Component {
         children: jsxs(Fragment, {
           children: [jsx("div", {
             className: TK,
-            children: _$$tx("community.publishing.publish_to_the_figma_community", {
+            children: renderI18nText("community.publishing.publish_to_the_figma_community", {
               lineBreak: jsx("br", {})
             })
           }), jsx(n8, {})]
@@ -3933,12 +3933,12 @@ class rt extends Component {
         children: this.props.remixedFrom ? jsxs(Fragment, {
           children: [jsx("div", {
             className: UB,
-            children: _$$tx("community.publishing.publish_your_remix_of")
+            children: renderI18nText("community.publishing.publish_your_remix_of")
           }), jsx(n9, {}), this.renderRemixedFrom(this.props.remixedFrom)]
         }) : jsxs(Fragment, {
           children: [jsx("div", {
             className: TK,
-            children: _$$tx("community.publishing.publish_to_the_figma_community", {
+            children: renderI18nText("community.publishing.publish_to_the_figma_community", {
               lineBreak: jsx("br", {})
             })
           }), jsx(n7, {})]
@@ -4090,7 +4090,7 @@ function rc({
       onClick: o,
       disabled: s,
       "aria-describedby": l,
-      children: a ? _$$tx("community.publishing.update") : _$$tx("community.publishing.publish")
+      children: a ? renderI18nText("community.publishing.update") : renderI18nText("community.publishing.publish")
     })]
   });
 }
@@ -4129,7 +4129,7 @@ function rg({
         direction: "horizontal",
         horizontalAlignItems: "space-between",
         children: [jsx("div", {
-          children: _$$tx("templates.detail.published_time", {
+          children: renderI18nText("templates.detail.published_time", {
             time: jsx(_$$h4, {
               date: t.updatedAt
             })
@@ -4138,13 +4138,13 @@ function rg({
           className: "publish_tab--publishedTemplateButtons--BXhdu",
           children: [jsx(s6, {
             onClick: yz(o, t.fileKey),
-            children: _$$tx("templates.detail.unpublish_button")
+            children: renderI18nText("templates.detail.unpublish_button")
           }), jsx(vd, {
             innerText: "Publish",
             onClick: () => {
               i && YM(o, t.fileKey, s, "published-template-details");
             },
-            children: _$$tx("templates.detail.publish_button")
+            children: renderI18nText("templates.detail.publish_button")
           })]
         })]
       })]
@@ -4251,7 +4251,7 @@ function rb() {
         onClick: async () => {
           if (S) {
             if (!g) {
-              sx("publish_details_view_open", {
+              trackEventAnalytics("publish_details_view_open", {
                 fileKey: b,
                 userId: t?.id,
                 teamId: e?.teamId,
@@ -4278,9 +4278,9 @@ let rv = memo(e => {
     publishTemplateStatus,
     org
   } = e;
-  return publishedTemplate && JU(publishTemplateStatus) ? _$$tx("publishing.templates.menu.title.published_to_org_name", {
+  return publishedTemplate && JU(publishTemplateStatus) ? renderI18nText("publishing.templates.menu.title.published_to_org_name", {
     orgName: org?.name
-  }) : _$$tx("publishing.templates.menu.title.unpublished");
+  }) : renderI18nText("publishing.templates.menu.title.unpublished");
 });
 let rI = memo(e => {
   let {
@@ -4291,32 +4291,32 @@ let rI = memo(e => {
     href: _$$A6,
     target: "_blank",
     className: rd,
-    children: _$$tx("publishing.templates.menu.description.disabled.link")
+    children: renderI18nText("publishing.templates.menu.description.disabled.link")
   });
   switch (publishTemplateStatus) {
     case kN.CANNOT_PUBLISH:
-      return _$$tx("publishing.templates.menu.description.disabled_edit_permissions", {
+      return renderI18nText("publishing.templates.menu.description.disabled_edit_permissions", {
         link: r
       });
     case kN.FILE_IN_DRAFTS_CANNOT_MOVE:
-      return _$$tx("publishing.templates.menu.description.disabled_delete_permissions", {
+      return renderI18nText("publishing.templates.menu.description.disabled_delete_permissions", {
         link: r
       });
     case kN.DISABLED_IN_SETTINGS:
-      return _$$tx("publishing.templates.menu.description.disabled", {
+      return renderI18nText("publishing.templates.menu.description.disabled", {
         link: r
       });
     default:
       assert(JU(publishTemplateStatus));
   }
-  if (!publishedTemplate) return _$$tx("publishing.templates.menu.description.unpublished");
+  if (!publishedTemplate) return renderI18nText("publishing.templates.menu.description.unpublished");
   let a = publishedTemplate.publishedByUser?.name;
-  return a ? _$$tx("publishing.templates.menu.description.published.v2", {
+  return a ? renderI18nText("publishing.templates.menu.description.published.v2", {
     time: jsx(_$$h4, {
       date: publishedTemplate.updatedAt
     }),
     name: a
-  }) : _$$tx("publishing.templates.menu.description.published_no_name", {
+  }) : renderI18nText("publishing.templates.menu.description.published_no_name", {
     time: jsx(_$$h4, {
       date: publishedTemplate.updatedAt
     })
@@ -4328,7 +4328,7 @@ let rE = memo(e => {
     communityPublishEnabled,
     isHubFileRemixed
   } = e;
-  return publishedHubFile && communityPublishEnabled ? _$$tx("publishing.community.menu.title.published") : isHubFileRemixed ? _$$tx("publishing.community.menu.title.unpublished_remix") : _$$tx("publishing.community.menu.title.unpublished");
+  return publishedHubFile && communityPublishEnabled ? renderI18nText("publishing.community.menu.title.published") : isHubFileRemixed ? renderI18nText("publishing.community.menu.title.unpublished_remix") : renderI18nText("publishing.community.menu.title.unpublished");
 });
 let rx = memo(e => {
   let {
@@ -4337,17 +4337,17 @@ let rx = memo(e => {
     isStarterFile,
     isHubFileRemixed
   } = e;
-  if (!communityPublishEnabled) return isStarterFile ? _$$tx("publishing.community.menu.description.disabled_starter_file") : isHubFileRemixed ? _$$tx("community.permissions_modal_publish_tab.footer.cannot_publish_remix") : _$$tx("publishing.community.menu.description.disabled", {
+  if (!communityPublishEnabled) return isStarterFile ? renderI18nText("publishing.community.menu.description.disabled_starter_file") : isHubFileRemixed ? renderI18nText("community.permissions_modal_publish_tab.footer.cannot_publish_remix") : renderI18nText("publishing.community.menu.description.disabled", {
     link: jsx("a", {
       href: "https://help.figma.com/hc/articles/360041423614--Who-can-publish-Files-and-Plugins-to-the-Community-#organization",
       target: "_blank",
       className: rd,
-      children: _$$tx("publishing.templates.menu.description.disabled.link")
+      children: renderI18nText("publishing.templates.menu.description.disabled.link")
     })
   });
-  if (!publishedHubFile || !publishedHubFile.publishingStatusUpdatedAt) return _$$tx("publishing.community.menu.description.unpublished_no_remix");
+  if (!publishedHubFile || !publishedHubFile.publishingStatusUpdatedAt) return renderI18nText("publishing.community.menu.description.unpublished_no_remix");
   let s = publishedHubFile.publishedByUser?.name;
-  return _$$tx("publishing.templates.menu.description.published.v2", {
+  return renderI18nText("publishing.templates.menu.description.published.v2", {
     time: jsx(_$$h4, {
       date: publishedHubFile.publishingStatusUpdatedAt
     }),
@@ -4484,7 +4484,7 @@ function rD({
       variant: "brand",
       icon: jsx(_$$L4, {}),
       children: jsx(_$$Q, {
-        children: _$$tx("resource_connection.file_is_in_a_connected_project", {
+        children: renderI18nText("resource_connection.file_is_in_a_connected_project", {
           hostPlanName: jsx("span", {
             className: Cr,
             children: e.hostPlanName
@@ -4496,7 +4496,7 @@ function rD({
           connectedProjectLink: jsx(_$$N2, {
             href: "https://help.figma.com/hc/articles/30124855491863-Guide-to-connected-projects",
             newTab: !0,
-            children: _$$t("resource_connection.connected_project_link")
+            children: getI18nString("resource_connection.connected_project_link")
           })
         })
       })
@@ -4540,7 +4540,7 @@ function rM({
         folderId: null
       })({});
     },
-    children: _$$tx("fullscreen.toolbar_banner.provisional_access.curf.cta")
+    children: renderI18nText("fullscreen.toolbar_banner.provisional_access.curf.cta")
   });
   return jsx(fu, {
     name: "Draft Share Provisional Awareness Banner",
@@ -4565,7 +4565,7 @@ function rG(e) {
   let t = useDispatch();
   let i = !!useSelector(e => e.userFlags).dismissed_move_draft_to_project_interstitial_modal;
   let r = jsx("p", {
-    children: _$$tx("drafts_move_banner.to_add_editors_first_move_this_file_from_drafts_into_a_project.seat_rename")
+    children: renderI18nText("drafts_move_banner.to_add_editors_first_move_this_file_from_drafts_into_a_project.seat_rename")
   });
   return jsx(fu, {
     name: "Drafts Move Banner",
@@ -4588,7 +4588,7 @@ function rG(e) {
           }));
         },
         trusted: !0,
-        children: _$$tx("drafts_move_banner.move_file")
+        children: renderI18nText("drafts_move_banner.move_file")
       })]
     })
   });
@@ -4601,9 +4601,9 @@ function rq(e) {
       svg: _$$A14
     }), jsx("div", {
       className: UU,
-      children: e.planType === _$$O2.ORG ? _$$tx("file_permissions_modal.org_admin", {
+      children: e.planType === _$$O2.ORG ? renderI18nText("file_permissions_modal.org_admin", {
         orgName: e.planName
-      }) : _$$tx("file_permissions_modal.team_admin", {
+      }) : renderI18nText("file_permissions_modal.team_admin", {
         teamName: e.planName
       })
     })]
@@ -4617,11 +4617,11 @@ function rZ(e) {
     children: jsx(_$$sR, {
       icon: jsx(_$$w, {}),
       text: jsx("div", {
-        children: _$$tx("file_permissions_modal.external_teams_in_connected_projects")
+        children: renderI18nText("file_permissions_modal.external_teams_in_connected_projects")
       }),
       onClick: () => t(A5.CONNECTED_PROJECT_USERS),
       rightSideElement: jsx("div", {
-        children: _$$tx("folder_access_row.num_people", {
+        children: renderI18nText("folder_access_row.num_people", {
           num: i
         })
       }),
@@ -4635,7 +4635,7 @@ let r1 = Ju(function (e) {
     t(Lo());
   };
   return jsxs(OJ, {
-    title: _$$t("file_permissions.enable_folder_access.give_access_to_the_folder", {
+    title: getI18nString("file_permissions.enable_folder_access.give_access_to_the_folder", {
       folderName: e.folder.name
     }),
     headerSize: "small",
@@ -4646,23 +4646,23 @@ let r1 = Ju(function (e) {
     truncateTitleText: !0,
     children: [jsx("p", {
       className: _$$s.p16.$,
-      children: e.folder.team_access === FTeamAccessPermissionType.TEAM_ACCESS_DISABLED ? _$$tx("file_permissions.enable_folder_access.youll_invite_all_members_of_folder_without_team_access", {
+      children: e.folder.team_access === FTeamAccessPermissionType.TEAM_ACCESS_DISABLED ? renderI18nText("file_permissions.enable_folder_access.youll_invite_all_members_of_folder_without_team_access", {
         folderNameBolded: jsx("span", {
           className: _$$s.fontBold.$,
-          children: _$$tx("file_permissions.enable_folder_access.folder_name", {
+          children: renderI18nText("file_permissions.enable_folder_access.folder_name", {
             folderName: e.folder.name
           })
         })
-      }) : _$$tx("file_permissions.enable_folder_access.youll_invite_all_members_of_folder_with_team_access", {
+      }) : renderI18nText("file_permissions.enable_folder_access.youll_invite_all_members_of_folder_with_team_access", {
         teamNameBolded: jsx("span", {
           className: _$$s.fontBold.$,
-          children: _$$tx("file_permissions.enable_folder_access.team_name", {
+          children: renderI18nText("file_permissions.enable_folder_access.team_name", {
             teamName: e.team.name
           })
         }),
         folderNameBolded: jsx("span", {
           className: _$$s.fontBold.$,
-          children: _$$tx("file_permissions.enable_folder_access.folder_name", {
+          children: renderI18nText("file_permissions.enable_folder_access.folder_name", {
             folderName: e.folder.name
           })
         })
@@ -4671,13 +4671,13 @@ let r1 = Ju(function (e) {
       className: E_,
       children: [jsx(_$$tM, {
         onClick: i,
-        children: _$$tx("file_permissions.enable_folder_access.cancel")
+        children: renderI18nText("file_permissions.enable_folder_access.cancel")
       }), jsx(_$$vd, {
         onClick: () => {
           e.onSave();
           i();
         },
-        children: _$$tx("file_permissions.enable_folder_access.give_access")
+        children: renderI18nText("file_permissions.enable_folder_access.give_access")
       })]
     })]
   });
@@ -4688,7 +4688,7 @@ let r2 = Ju(function (e) {
     t(Lo());
   };
   return jsxs(OJ, {
-    title: _$$t("file_permissions.disable_folder_access.remove_folder_names_access", {
+    title: getI18nString("file_permissions.disable_folder_access.remove_folder_names_access", {
       folderName: e.folder.name
     }),
     headerSize: "small",
@@ -4699,10 +4699,10 @@ let r2 = Ju(function (e) {
     truncateTitleText: !0,
     children: [jsx("p", {
       className: _$$s.p16.$,
-      children: _$$tx("file_permissions.disable_folder_access.keep_in_mind_that_member_of_the_folder_name_project_may_lose_access", {
+      children: renderI18nText("file_permissions.disable_folder_access.keep_in_mind_that_member_of_the_folder_name_project_may_lose_access", {
         folderNameBolded: jsx("span", {
           className: _$$s.fontBold.$,
-          children: _$$tx("file_permissions.disable_folder_access.folder_name", {
+          children: renderI18nText("file_permissions.disable_folder_access.folder_name", {
             folderName: e.folder.name
           })
         })
@@ -4711,13 +4711,13 @@ let r2 = Ju(function (e) {
       className: E_,
       children: [jsx(_$$tM, {
         onClick: i,
-        children: _$$tx("file_permissions.disable_folder_access.cancel")
+        children: renderI18nText("file_permissions.disable_folder_access.cancel")
       }), jsx(qM, {
         onClick: () => {
           e.onSave();
           i();
         },
-        children: _$$tx("file_permissions.disable_folder_access.remove")
+        children: renderI18nText("file_permissions.disable_folder_access.remove")
       })]
     })]
   });
@@ -4735,7 +4735,7 @@ function r5(e) {
   let o = r ? jsxs("div", {
     className: j7,
     "data-testid": "file-share-audience-settings",
-    children: [_$$tx("folder_access_row.num_people", {
+    children: [renderI18nText("folder_access_row.num_people", {
       num: e.numMembers.toString()
     }), jsx(_$$R5, {})]
   }) : s5() && e.hasEditRole && jsx("div", {
@@ -4756,7 +4756,7 @@ function r5(e) {
           }
         }));
       },
-      children: _$$tx("file_permissions_modal.give_them_access")
+      children: renderI18nText("file_permissions_modal.give_them_access")
     })
   });
   let l = !(e.isBranch || e.isPrototype) && e.hasEditRole;
@@ -4779,9 +4779,9 @@ function r5(e) {
         children: [jsx("div", {
           className: r ? qj : _$$ec,
           "data-onboarding-key": l && tM,
-          children: e.canViewFolder ? _$$tx("folder_access_row.anyone_in_project_name", {
+          children: e.canViewFolder ? renderI18nText("folder_access_row.anyone_in_project_name", {
             projectName: e.folderName
-          }) : _$$tx("file_permissions_modal.file_name_s_project", {
+          }) : renderI18nText("file_permissions_modal.file_name_s_project", {
             fileName: e.fileName
           })
         }), o]
@@ -4795,7 +4795,7 @@ let r7 = "seen_sharing_clarity_branch_modal_overlay";
 let r8 = _$$r2(r7);
 let r9 = "sc_branch_modal_onboarding_key";
 function ae() {
-  let e = md(r8);
+  let e = useAtomWithSubscription(r8);
   let {
     show,
     isShowing,
@@ -4811,9 +4811,9 @@ function ae() {
   });
   return jsx(_$$rq, {
     isShowing,
-    title: _$$tx("rcs.sharing_clarity.branch_modal.title"),
+    title: renderI18nText("rcs.sharing_clarity.branch_modal.title"),
     description: jsx("p", {
-      children: _$$tx("rcs.sharing_clarity.branch_modal.body_text")
+      children: renderI18nText("rcs.sharing_clarity.branch_modal.body_text")
     }),
     trackingContextName: "Sharing Clarity Branch Modal Onboarding",
     userFlagOnShow: r7,
@@ -4827,7 +4827,7 @@ let at = "seen_sharing_clarity_file_audience_overlay";
 let ai = _$$r2(at);
 let an = "sc_file_audience_onboarding_key";
 function ar() {
-  let e = md(ai);
+  let e = useAtomWithSubscription(ai);
   let {
     show,
     isShowing,
@@ -4843,9 +4843,9 @@ function ar() {
   });
   return jsx(_$$rq, {
     isShowing,
-    title: _$$tx("rcs.sharing_clarity.file_permissions_modal_step_1_title"),
+    title: renderI18nText("rcs.sharing_clarity.file_permissions_modal_step_1_title"),
     description: jsx("p", {
-      children: _$$tx("rcs.sharing_clarity.file_permissions_modal_step_1_description")
+      children: renderI18nText("rcs.sharing_clarity.file_permissions_modal_step_1_description")
     }),
     trackingContextName: "Sharing Clarity File Audience Onboarding",
     userFlagOnShow: at,
@@ -4859,7 +4859,7 @@ let aa = "seen_sharing_clarity_prototype_modal_overlay";
 let as = _$$r2(aa);
 let ao = "sc_prototype_modal_onboarding_key";
 function al() {
-  let e = md(as);
+  let e = useAtomWithSubscription(as);
   let {
     show,
     isShowing,
@@ -4875,9 +4875,9 @@ function al() {
   });
   return jsx(_$$rq, {
     isShowing,
-    title: _$$tx("rcs.sharing_clarity.prototype_modal.title"),
+    title: renderI18nText("rcs.sharing_clarity.prototype_modal.title"),
     description: jsx("p", {
-      children: _$$tx("rcs.sharing_clarity.prototype_modal.body_text")
+      children: renderI18nText("rcs.sharing_clarity.prototype_modal.body_text")
     }),
     trackingContextName: "Sharing Clarity Prototype Modal Onboarding",
     userFlagOnShow: aa,
@@ -4919,10 +4919,10 @@ function ad(e) {
             "data-onboarding-key": a && e.hasEditRole && s,
             children: [ET(lG(e.sharingAudience, e.audienceAccessLevel), e.org, null, e.passwordEnabled), (() => {
               let t = [];
-              e.isPrototype && !e.isBranch && t.push(_$$t("file_audience_row.editors_from_the_main_file_can_also_access"));
+              e.isPrototype && !e.isBranch && t.push(getI18nString("file_audience_row.editors_from_the_main_file_can_also_access"));
               let i = e.sharingAudience !== _9.ANYONE;
               let r = e.sharingAudience === _9.ANYONE && e.audienceAccessLevel === J4.VIEW;
-              if (e.isBranch && i && t.push(_$$t("file_audience_row.viewers_and_editors_from_the_main_file_can_also_access")), e.isBranch && r && t.push(_$$t("file_audience_row.editors_from_the_main_file_can_also_access")), e.expiresAt && e.sharingAudience === _9.ANYONE) {
+              if (e.isBranch && i && t.push(getI18nString("file_audience_row.viewers_and_editors_from_the_main_file_can_also_access")), e.isBranch && r && t.push(getI18nString("file_audience_row.editors_from_the_main_file_can_also_access")), e.expiresAt && e.sharingAudience === _9.ANYONE) {
                 let {
                   num,
                   unit
@@ -4930,34 +4930,34 @@ function ad(e) {
                 let r = null;
                 switch (unit) {
                   case "minute":
-                    r = _$$t("permissions_modal.file_share_settings.more_minutes", {
+                    r = getI18nString("permissions_modal.file_share_settings.more_minutes", {
                       num
                     });
                     break;
                   case "hour":
-                    r = _$$t("permissions_modal.file_share_settings.more_hours", {
+                    r = getI18nString("permissions_modal.file_share_settings.more_hours", {
                       num
                     });
                     break;
                   case "day":
-                    r = _$$t("permissions_modal.file_share_settings.more_days", {
+                    r = getI18nString("permissions_modal.file_share_settings.more_days", {
                       num
                     });
                     break;
                   case "week":
-                    r = _$$t("permissions_modal.file_share_settings.more_weeks", {
+                    r = getI18nString("permissions_modal.file_share_settings.more_weeks", {
                       num
                     });
                     break;
                   case "month":
-                    r = _$$t("permissions_modal.file_share_settings.more_months", {
+                    r = getI18nString("permissions_modal.file_share_settings.more_months", {
                       num
                     });
                     break;
                   default:
                     throwTypeError(unit);
                 }
-                t.push(_$$t("permissions_modal.file_share_settings.only_public_for", {
+                t.push(getI18nString("permissions_modal.file_share_settings.only_public_for", {
                   durationText: r
                 }));
               }
@@ -4972,7 +4972,7 @@ function ad(e) {
             "data-onboarding-key": l && (o ? an : tF),
             children: [mi(lG(e.sharingAudience, e.audienceAccessLevel)), !r && jsx(_$$R5, {}), e.isBranch && jsx("div", {
               "data-tooltip-type": Ib.TEXT,
-              "data-tooltip": _$$t("file_audience_row.settings_are_managed_in_the_main_file"),
+              "data-tooltip": getI18nString("file_audience_row.settings_are_managed_in_the_main_file"),
               "data-tooltip-timeout-delay": 50,
               "data-tooltip-max-width": 300,
               "data-tooltip-show-above": !0,
@@ -5102,14 +5102,14 @@ function aA(e) {
       } = e;
       let r = seenState.user;
       let a = r.name || r.handle;
-      return r && r.id === currentUser.id ? _$$tx("role_row.you", {
+      return r && r.id === currentUser.id ? renderI18nText("role_row.you", {
         name: jsx("b", {
           className: _$$to2,
           children: a
         }),
         you: jsx("span", {
           className: vQ,
-          children: _$$tx("role_row.you_label_lowercase")
+          children: renderI18nText("role_row.you_label_lowercase")
         })
       }) : jsx(Fragment, {
         children: a
@@ -5207,7 +5207,7 @@ function ab({
       });
       return e;
     }, [i]);
-    return useMemo(() => !t || Im(t) || !n ? [] : Object.values(t).filter(e => !a.has(e.user_id)).sort((e, t) => new Date(e.viewed_on) < new Date(t.viewed_on) ? -1 : 1), [n, t, a]);
+    return useMemo(() => !t || isEmptyObject(t) || !n ? [] : Object.values(t).filter(e => !a.has(e.user_id)).sort((e, t) => new Date(e.viewed_on) < new Date(t.viewed_on) ? -1 : 1), [n, t, a]);
   }({
     file: e,
     fileSeenStatesByUserId: d,
@@ -5295,7 +5295,7 @@ function aI() {
     style: {
       paddingLeft: "var(--spacer-2)"
     },
-    children: _$$t("file_permissions_modal.who_has_access")
+    children: getI18nString("file_permissions_modal.who_has_access")
   });
 }
 let aw = {
@@ -5413,7 +5413,7 @@ function aq({
       let l = _$$Z(r);
       if (i && l.filter(e => !H_(i.org_domains?.domains || [], e)).length > 0) {
         n(_$$F2.enqueue({
-          message: _$$t("file_permissions_modal.external_sharing_unavailable", {
+          message: getI18nString("file_permissions_modal.external_sharing_unavailable", {
             planName: i.name
           }),
           error: !0
@@ -5431,7 +5431,7 @@ function aq({
         let t = e.meta;
         n(cL());
         t.filter(e => !e.errored).length > 0 && n(_$$F2.enqueue({
-          message: _$$t("file_permissions_modal.link_has_been_sent")
+          message: getI18nString("file_permissions_modal.link_has_been_sent")
         }));
         t && Ef(t, resourceType, resourceIdOrKey, n, void 0, i ? i.name : void 0);
       }, e => {
@@ -5451,7 +5451,7 @@ function aq({
     inviteLevel: _$$e4.NONE,
     file: e,
     org: i,
-    buttonText: _$$t("file_permissions_modal.send"),
+    buttonText: getI18nString("file_permissions_modal.send"),
     dropdownShown: null,
     onSubmit: o
   });
@@ -5503,7 +5503,7 @@ function a$({
       let o = HW();
       let l = X();
       let d = useDispatch();
-      let [c, u] = fp(_$$H2);
+      let [c, u] = useAtomValueAndSetter(_$$H2);
       let p = _$$P().usersByEmail;
       let g = Pc();
       let f = o || s === _$$e4.VIEW_PROTOTYPES;
@@ -5573,9 +5573,9 @@ function a$({
         team: s
       });
       if (p && a && !y()) {
-        let t = wN(e.editor_type);
-        if (!co(t)) {
-          $D(_$$e3.MONETIZATION_UPGRADES, Error("Paywall: Wrong editor type for pro feature"), {
+        let t = mapFileTypeToEditorType(e.editor_type);
+        if (!isSlidesOrWhiteboardOrDesignOrIllustration(t)) {
+          reportError(_$$e3.MONETIZATION_UPGRADES, Error("Paywall: Wrong editor type for pro feature"), {
             extra: {
               editorType: t,
               teamId: s?.id,
@@ -5639,7 +5639,7 @@ function a$({
     org: i,
     fileRoles: d,
     inviteLevel,
-    buttonText: _$$t("file_permissions_modal.send_invite"),
+    buttonText: getI18nString("file_permissions_modal.send_invite"),
     dropdownShown: u,
     onSubmit: _,
     dropdownProps: y ? {
@@ -5709,7 +5709,7 @@ function aZ({
         inviteLevel: o,
         onHideModal: s,
         onSubmit: c,
-        placeholderText: _$$t("team_creation.add_a_name_or_email"),
+        placeholderText: getI18nString("team_creation.add_a_name_or_email"),
         searchResultToken: getFeatureFlags().user_groups ? b : y,
         shouldAutoFocus: A,
         tokenClassName: o === _$$e4.VIEW_PROTOTYPES ? Ed : void 0,
@@ -5847,7 +5847,7 @@ function a2({
   return jsx(Cs, {
     variant: "warn",
     children: jsxs(_$$Q, {
-      children: [_$$t("prototype_sharing_banner.to_share_prototypes_only_youll_need_to"), jsx(_$$N4, {
+      children: [getI18nString("prototype_sharing_banner.to_share_prototypes_only_youll_need_to"), jsx(_$$N4, {
         href: "#",
         onClick: n => {
           n.preventDefault();
@@ -5862,7 +5862,7 @@ function a2({
             }
           }));
         },
-        children: _$$t("prototype_sharing_banner.upgrade_your_plan")
+        children: getI18nString("prototype_sharing_banner.upgrade_your_plan")
       }), " "]
     })
   });
@@ -6029,7 +6029,7 @@ function a6({
     iconPrefix: !s && jsx(_$$r, {
       className: Sc
     }),
-    children: s ? _$$tx("file_permissions_modal.link_copied") : l?.requestToShareLink ? _$$tx("file_permissions_modal.share_link") : e !== _$$nT.Slides || i ? _$$tx("file_permissions_modal.copy_file_link") : _$$tx("file_permissions_modal.copy_audience_link")
+    children: s ? renderI18nText("file_permissions_modal.link_copied") : l?.requestToShareLink ? renderI18nText("file_permissions_modal.share_link") : e !== FEditorType.Slides || i ? renderI18nText("file_permissions_modal.copy_file_link") : renderI18nText("file_permissions_modal.copy_audience_link")
   });
 }
 function a8({
@@ -6050,7 +6050,7 @@ function a8({
       return jsx(_$$w2, {
         title: jsx("div", {
           className: Bd,
-          children: _$$t("file_permissions_modal.folder_name", {
+          children: getI18nString("file_permissions_modal.folder_name", {
             folderName: t?.name || ""
           })
         }),
@@ -6087,33 +6087,33 @@ function a9({
     file: e,
     repo: t
   });
-  let s = wN(e.editor_type);
+  let s = mapFileTypeToEditorType(e.editor_type);
   let o = X();
   let l = _$$iq();
   let d = function ({
     file: e,
     repo: t
   }) {
-    let i = wN(e.editor_type);
+    let i = mapFileTypeToEditorType(e.editor_type);
     let n = _$$iq();
     let a = HW();
     let s = X();
     let o = wD();
     let l = o?.id;
     let d = useMemo(() => !!l && !!Egt && Egt.nodeIsPage(l), [l]);
-    if (i === _$$nT.Slides) {
-      if (n) return _$$t("file_permissions_modal.share_these_slides");
-      if (a) return _$$t("viewer.menu_bar.share_presentation");
+    if (i === FEditorType.Slides) {
+      if (n) return getI18nString("file_permissions_modal.share_these_slides");
+      if (a) return getI18nString("viewer.menu_bar.share_presentation");
     }
-    if (i === _$$nT.Figmake) return _$$t("file_permissions_modal.share_this_file");
-    if (i === _$$nT.Cooper) return _$$t("file_permissions_modal.share_these_assets");
+    if (i === FEditorType.Figmake) return getI18nString("file_permissions_modal.share_this_file");
+    if (i === FEditorType.Cooper) return getI18nString("file_permissions_modal.share_these_assets");
     if (o?.id && !d) {
       let e = o.name;
-      return e ? _$$t("file_permissions_modal.share_to_selection_selection_name", {
+      return e ? getI18nString("file_permissions_modal.share_to_selection_selection_name", {
         selectionName: e
-      }) : _$$t("file_permissions_modal.share_to_selection_no_name");
+      }) : getI18nString("file_permissions_modal.share_to_selection_no_name");
     }
-    return s ? _$$t("file_permissions_modal.share_in_dev_mode") : t && Xm(e) ? _$$t("file_permissions_modal.share_this_branch") : a ? _$$t("file_permissions_modal.share_this_prototype") : i === _$$nT.Whiteboard ? _$$t("file_permissions_modal.share_this_board") : _$$t("file_permissions_modal.share_this_file");
+    return s ? getI18nString("file_permissions_modal.share_in_dev_mode") : t && Xm(e) ? getI18nString("file_permissions_modal.share_this_branch") : a ? getI18nString("file_permissions_modal.share_this_prototype") : i === FEditorType.Whiteboard ? getI18nString("file_permissions_modal.share_this_board") : getI18nString("file_permissions_modal.share_this_file");
   }({
     file: e,
     repo: t
@@ -6169,7 +6169,7 @@ function se({
         }));
         i();
       },
-      children: _$$tx("file_permissions.disable_folder_access.remove_access")
+      children: renderI18nText("file_permissions.disable_folder_access.remove_access")
     })
   });
 }
@@ -6189,27 +6189,27 @@ function st({
         file: i
       });
     case A5.EMBED_CODE:
-      return _$$tx("permissions.embed.copy_public_embed_code");
+      return renderI18nText("permissions.embed.copy_public_embed_code");
     case A5.SHARE_SETTINGS:
-      return _$$tx("file_permissions_modal.share_as.share_settings");
+      return renderI18nText("file_permissions_modal.share_as.share_settings");
     case A5.SHARE_GOOGLE_DEVICE_DISCLAIMER:
-      return _$$tx("file_permissions_modal.share_as.google_device");
+      return renderI18nText("file_permissions_modal.share_as.google_device");
     case A5.SHARE_TO_GOOGLE_CLASSROOM:
-      return _$$tx("file_permissions_modal.google_classroom_modal.title");
+      return renderI18nText("file_permissions_modal.google_classroom_modal.title");
     case A5.CONNECTED_PROJECT_USERS:
-      return _$$tx("file_permissions_modal.external_teams_in_connected_projects");
+      return renderI18nText("file_permissions_modal.external_teams_in_connected_projects");
     case A5.UPDATE_SEAT:
-      return _$$tx("file_permissions_modal.update_seat_tab.title");
+      return renderI18nText("file_permissions_modal.update_seat_tab.title");
     default:
       throwTypeError(e);
   }
 }
 function si() {
   let e = q5();
-  return e?.publishedHubFile?.publishingStatus === FPublicationStatusType.APPROVED_PUBLIC && e.publishedHubFile ? _$$tx("publishing.community.header") : _$$tx("file_permissions_modal.tab.publish");
+  return e?.publishedHubFile?.publishingStatus === FPublicationStatusType.APPROVED_PUBLIC && e.publishedHubFile ? renderI18nText("publishing.community.header") : renderI18nText("file_permissions_modal.tab.publish");
 }
 function sn() {
-  return kD() ? _$$tx("publishing.templates.header") : _$$tx("file_permissions_modal.tab.publish");
+  return kD() ? renderI18nText("publishing.templates.header") : renderI18nText("file_permissions_modal.tab.publish");
 }
 function sr({
   fileRoles: e,
@@ -6219,7 +6219,7 @@ function sr({
     allFileRoles: e,
     file: t
   }).length;
-  return _$$tx("file_permissions_modal.collaborators_sub_tab_title", {
+  return renderI18nText("file_permissions_modal.collaborators_sub_tab_title", {
     num_collaborators: i
   });
 }
@@ -6296,7 +6296,7 @@ function su({
     let [h, g] = useState(m);
     let _ = useCallback(t => {
       if (!p.includes(t)) {
-        $D(_$$e3.WORKFLOW, Error("Invalid invite level selected"), {
+        reportError(_$$e3.WORKFLOW, Error("Invalid invite level selected"), {
           extra: {
             level: t,
             inviteLevelOptions: p,
@@ -6418,7 +6418,7 @@ function sp({
     folderId: file.folder_id,
     fileInBrowser: {
       key: file.key,
-      editorType: oD(editorType)
+      editorType: mapEditorTypeToFileType(editorType)
     }
   });
   let J = _$$l2({
@@ -6429,7 +6429,7 @@ function sp({
     teamUser: K
   });
   let ee = getIsUpgradeHandlerLoading();
-  let et = wR(oD(editorType));
+  let et = wR(mapEditorTypeToFileType(editorType));
   let ei = getUpgradeEligibility(et, !J);
   let en = getUpgradePathway(et);
   let [er, ea] = useState(!1);
@@ -6466,7 +6466,7 @@ function sp({
       resourceType: FResourceCategoryType.FILE,
       resourceId: file.key,
       fileTeamId: file.team_id,
-      productType: Bu(editorType),
+      productType: mapEditorTypeToStringWithObfuscated(editorType),
       modalSource: o,
       canUserAccessProFeature: w5(team)
     },
@@ -6538,7 +6538,7 @@ export let $$sm0 = Ju(function ({
       "loaded" === e.status && null === e.data.file && t(Ce());
     }, [e, t]);
   }(c), s = !!d && "loaded" === c.status, oY(s, e => {
-    sx("share_modal_latency", {
+    trackEventAnalytics("share_modal_latency", {
       latency_ms: e,
       modal_type: "file",
       is_outlier: e > 500

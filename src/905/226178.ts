@@ -1,14 +1,14 @@
 import { jsx } from "react/jsx-runtime";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Ib } from "../905/129884";
 import { A } from "../1617/217521";
 export function $$d0() {
   return jsx("div", {
     className: _$$s.bRadiusFull.flex.itemsCenter.maxWFull.borderBox.colorBgBrand.$,
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": t("tile.file_tile.unsynced_changes"),
+    "data-tooltip": getI18nString("tile.file_tile.unsynced_changes"),
     "data-tooltip-timeout-delay": 50,
     children: jsx(B, {
       className: _$$s.colorIconOnbrand.$,

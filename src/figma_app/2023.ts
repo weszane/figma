@@ -3,12 +3,12 @@ import { oA } from "../905/663269";
 import a from "../vendor/961736";
 import { A } from "../905/920142";
 import { sy } from "../figma_app/930338";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Zx } from "../figma_app/217457";
 import { fileEntityDataMapper } from "../905/943101";
 import { FTeamAccessPermissionType, FPlanFeatureType, FPermissionLevelType } from "../figma_app/191312";
 import { Um, Nl, aU, WP, Xs, vy, uk } from "../figma_app/349248";
-import { wN } from "../figma_app/53721";
+import { mapFileTypeToEditorType } from "../figma_app/53721";
 import { v } from "../figma_app/995722";
 import { zb } from "../905/862913";
 import { VA } from "../figma_app/528509";
@@ -56,7 +56,7 @@ function b(e) {
     fileSeenStatesByUserId: {},
     currentUser: null,
     sharedContainerSetting: null,
-    editorType: wN(e.editor_type),
+    editorType: mapFileTypeToEditorType(e.editor_type),
     numProjectTeamMembersWithAccess: 0,
     planTier: null,
     planRecordId: null
@@ -283,7 +283,7 @@ export function $$v5(e, t) {
       id: r.org.id,
       bigma_enabled: !!r.org?.bigmaEnabledAt
     } : null, r.org?.orgSharedSetting ?? e.data.org?.orgSharedSetting, r.team?.workspaceSharedSetting),
-    editorType: wN(s.editor_type),
+    editorType: mapFileTypeToEditorType(s.editor_type),
     numProjectTeamMembersWithAccess: c.size,
     activeProjectConnection: r.activeProjectResourceConnections?.[0],
     planTier: r.planPublicInfo?.tier || null,
@@ -319,19 +319,19 @@ export function $$C1(e, t) {
     } = v(e);
     switch (audience) {
       case "inherit":
-        return _$$t("file_access_row.only_people_invited_to_this_noun", {
-          noun: _$$t("file_info_row.file")
+        return getI18nString("file_access_row.only_people_invited_to_this_noun", {
+          noun: getI18nString("file_info_row.file")
         });
       case "public":
-        return _$$t("file_access_row.anyone_with_the_link");
+        return getI18nString("file_access_row.anyone_with_the_link");
       case "public-password":
-        return _$$t("file_access_row.anyone_with_the_link_and_password");
+        return getI18nString("file_access_row.anyone_with_the_link_and_password");
       case "org":
-        return _$$t("file_access_row.anyone_at_org_name_with_the_link", {
+        return getI18nString("file_access_row.anyone_at_org_name_with_the_link", {
           orgName: t.name
         });
       case "org-browsable":
-        return _$$t("file_access_row.anyone_at_org_name", {
+        return getI18nString("file_access_row.anyone_at_org_name", {
           orgName: t.name
         });
       default:
@@ -343,14 +343,14 @@ export function $$C1(e, t) {
       audience,
       level
     } = v(e);
-    if ("inherit" === audience) return _$$t("file_access_row.can_access");
+    if ("inherit" === audience) return getI18nString("file_access_row.can_access");
     switch (level) {
       case "view":
-        return _$$t("file_access_row.can_view");
+        return getI18nString("file_access_row.can_view");
       case "edit":
-        return _$$t("file_access_row.can_edit");
+        return getI18nString("file_access_row.can_edit");
       case "proto-view-only":
-        return _$$t("file_access_row.can_view_prototypes");
+        return getI18nString("file_access_row.can_view_prototypes");
       default:
         throwTypeError(level);
     }

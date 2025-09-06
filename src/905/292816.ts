@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { isNullish, isNotNullish } from "../figma_app/95419";
 import { b } from "../figma_app/246400";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { Y } from "../905/830372";
 import { U1 } from "../figma_app/681712";
@@ -12,7 +12,7 @@ import { i as _$$i } from "../figma_app/127401";
 import { O } from "../figma_app/710329";
 import { OL } from "../figma_app/421473";
 function f(e, t) {
-  return _$$t("general.price_per_month", {
+  return getI18nString("general.price_per_month", {
     priceString: t.formatMoney(e, {
       showCents: !1
     })
@@ -53,19 +53,19 @@ function _(e) {
       children: [jsxs(Y, {
         horizontalAlignItems: "space-between",
         children: [jsx("div", {
-          children: _$$t("billing_modals.seat_type_popover.monthly_rate")
+          children: getI18nString("billing_modals.seat_type_popover.monthly_rate")
         }), jsx("div", {
           children: t.monthlyPrice
         })]
       }), jsxs(Y, {
         horizontalAlignItems: "space-between",
         children: [jsx("div", {
-          children: tx("billing_modals.seat_type_popover.annual_rate_percent_off", {
+          children: renderI18nText("billing_modals.seat_type_popover.annual_rate_percent_off", {
             percentOff: jsx("span", {
               style: sx.add({
                 color: "var(--color-multiplayergreen)"
               }).$,
-              children: _$$t("billing_modals.seat_type_popover.percent_off_in_parens", {
+              children: getI18nString("billing_modals.seat_type_popover.percent_off_in_parens", {
                 percentNum: t.percentDiff
               })
             })

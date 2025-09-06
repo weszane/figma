@@ -1,8 +1,8 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { Xr, md } from "../figma_app/27355";
+import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { B } from "../905/714743";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { z5, a6, jM, J, P_ } from "../905/124270";
 import { jN, nX, Aj, S2 } from "../905/171315";
 import { cr, CO } from "../905/703676";
@@ -20,10 +20,10 @@ export function $$y0({
   setFacetValue: i
 }) {
   let y = Xr(z5);
-  let b = md(a6);
-  let v = md(jM);
-  let I = md(J);
-  let E = md(P_);
+  let b = useAtomWithSubscription(a6);
+  let v = useAtomWithSubscription(jM);
+  let I = useAtomWithSubscription(J);
+  let E = useAtomWithSubscription(P_);
   let x = _$$n();
   let S = k();
   let w = useCallback((e, t) => {
@@ -48,7 +48,7 @@ export function $$y0({
         className: Kk
       }),
       sideElementAlwaysVisible: !0,
-      text: Aj(b) ? _$$t("search.preview_section.all_files") : _$$t("search.preview_section.all_resources")
+      text: Aj(b) ? getI18nString("search.preview_section.all_files") : getI18nString("search.preview_section.all_resources")
     }), b.map((i, r) => {
       if (i === $L.SITES && !oz() || i === $L.BUZZ && !HH() || i === $L.MAKE && !aI() || i === $L.ALL_FILES || i === $L.PLUGINS || i === $L.WIDGETS) return null;
       let a = `${e}-resource-option-${r}`;

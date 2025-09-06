@@ -3,7 +3,7 @@ import { PureComponent, useRef, useCallback, memo, forwardRef } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { debounce } from "../905/915765";
 import { lQ } from "../905/934246";
-import { o as _$$o } from "../figma_app/493477";
+import { getFirstKey } from "../figma_app/493477";
 import { S as _$$S } from "../905/274480";
 import { J as _$$J, h as _$$h } from "../905/270045";
 import { bL, l9, mc, c$ } from "../905/493196";
@@ -16,16 +16,16 @@ import { O as _$$O2 } from "../905/969533";
 import { k as _$$k } from "../905/44647";
 import { uQ6, rrT } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { xx } from "../figma_app/815945";
 import S from "classnames";
-import { sx, az } from "../905/449184";
+import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { Pt, c1 } from "../figma_app/806412";
 import { E as _$$E } from "../905/277716";
 import { k as _$$k3 } from "../905/582200";
 import { Point } from "../905/736624";
 import { ph } from "../figma_app/709893";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { rg } from "../figma_app/401069";
 import { u1, XE } from "../figma_app/91703";
 import { sw } from "../figma_app/914957";
@@ -138,7 +138,7 @@ let ex = class e extends PureComponent {
       let r = $$eS5(t);
       this.onExportChange(t.concat([r]));
       this.props.onAddClick?.() && e.stopPropagation();
-      sx("editor-export-panel-add", {
+      trackEventAnalytics("editor-export-panel-add", {
         selectionIsCanvas: 0 === this.props.numSelected
       });
     };
@@ -155,8 +155,8 @@ let ex = class e extends PureComponent {
       });
     };
     this.onClickExport = async () => {
-      if (sx("Export Panel Export Clicked"), 0 === this.props.numSelected) {
-        sx("Export Picker Opened", {
+      if (trackEventAnalytics("Export Panel Export Clicked"), 0 === this.props.numSelected) {
+        trackEventAnalytics("Export Picker Opened", {
           from: "export-panel"
         });
         this.props.dispatch(u1({
@@ -167,7 +167,7 @@ let ex = class e extends PureComponent {
         let e = _W(this.props.exportSettings, []);
         let t = e.filter(e => !0 === e.useBicubicSampler);
         let r = e.filter(e => !1 === e.useBicubicSampler);
-        az.trackDefinedEvent("rendering_and_animation.exported_export_setting_bicubic", {
+        analyticsEventManager.trackDefinedEvent("rendering_and_animation.exported_export_setting_bicubic", {
           bicubicCount: t.length,
           nearestNeighborCount: r.length
         });
@@ -181,7 +181,7 @@ let ex = class e extends PureComponent {
     this.autoRenameFrameOnExport = async () => {
       this.props.isSelectionRenamable && (this.setState({
         isRenameLayersRunning: !0
-      }), zl.set(zF, Tr(uQ6.EXPORT_FRAME)), B3(JT.AUTO_RENAME_LAYERS), await Ag(JT.AUTO_RENAME_LAYERS, Ay, {
+      }), atomStoreManager.set(zF, Tr(uQ6.EXPORT_FRAME)), B3(JT.AUTO_RENAME_LAYERS), await Ag(JT.AUTO_RENAME_LAYERS, Ay, {
         source: uQ6.EXPORT_FRAME,
         overwriteNames: !1,
         ignoreDescendants: !0
@@ -195,18 +195,18 @@ let ex = class e extends PureComponent {
       if (0 === this.props.numSelected || null == this.props.numSelected) {
         let {
           title
-        } = vk("CANVAS", "", this.props.openFile?.name || _$$t("fullscreen.fullscreen_view_selector.untitled"), []);
-        e = _$$t("fullscreen.properties_panel.export_title", {
+        } = vk("CANVAS", "", this.props.openFile?.name || getI18nString("fullscreen.fullscreen_view_selector.untitled"), []);
+        e = getI18nString("fullscreen.properties_panel.export_title", {
           title
         });
       } else if (1 === this.props.numSelected) {
         let {
           title
         } = vk("RECTANGLE", this.props.singleNodeName, "", []);
-        e = this.props.standalone ? _$$t("fullscreen.properties_panel.export") : _$$t("fullscreen.properties_panel.export_title", {
+        e = this.props.standalone ? getI18nString("fullscreen.properties_panel.export") : getI18nString("fullscreen.properties_panel.export_title", {
           title
         });
-      } else e = _$$t("fullscreen.properties_panel.export_this_props_num_selected_layers", {
+      } else e = getI18nString("fullscreen.properties_panel.export_this_props_num_selected_layers", {
         numSelected: this.props.numSelected
       });
       return jsx(_$$z, {
@@ -214,7 +214,7 @@ let ex = class e extends PureComponent {
         recordingKey: Pt(this.props, "export"),
         disabled: !!this.state.isRenameLayersRunning,
         children: jsx(ph, {
-          text: this.state.isRenameLayersRunning ? _$$t("fullscreen.properties_panel.export_generating_name") : e,
+          text: this.state.isRenameLayersRunning ? getI18nString("fullscreen.properties_panel.export_generating_name") : e,
           tooltipPropsWhenTruncated: {
             "data-tooltip-type": Ib.TEXT,
             "data-tooltip": e
@@ -281,11 +281,11 @@ let ex = class e extends PureComponent {
             className: dK,
             children: [jsx(_$$s2, {
               className: WO
-            }), tx("fullscreen.properties_panel.export_disabled")]
+            }), renderI18nText("fullscreen.properties_panel.export_disabled")]
           }), jsx(JU, {
             className: SO,
             children: jsx("span", {
-              children: tx("fullscreen.properties_panel.this_file_s_editor_has_disabled_exporting_copying_and_sharing.seat_rename")
+              children: renderI18nText("fullscreen.properties_panel.this_file_s_editor_has_disabled_exporting_copying_and_sharing.seat_rename")
             })
           })]
         }) : jsxs(Fragment, {
@@ -326,7 +326,7 @@ let ex = class e extends PureComponent {
                 label: jsx(_$$J, {
                   children: jsxs("div", {
                     className: oB,
-                    children: [tx("auto_rename_layers.rename_layers", {
+                    children: [renderI18nText("auto_rename_layers.rename_layers", {
                       numLayers: this.props.numSelected
                     }), jsx(_$$y, {
                       helpUrlVariant: JT.AUTO_RENAME_LAYERS
@@ -364,7 +364,7 @@ function eC(e) {
       selection: selectionHandler,
       onChange: e.onChange,
       addProperty: e.addProperty,
-      overrideAddPropertyTooltip: _$$t("fullscreen.properties_panel.section_exports.tooltip_addExportSettings"),
+      overrideAddPropertyTooltip: getI18nString("fullscreen.properties_panel.section_exports.tooltip_addExportSettings"),
       isStylesPickerShown: !!e.pickerShown,
       showRemoveButton: !1,
       recordingKey: e.recordingKey,
@@ -432,7 +432,7 @@ export function $$ew3(e) {
       onChange: e.onChange,
       onHeaderClick: e.onHeaderClick,
       openFile: e.openFile,
-      overrideAddPropertyTooltip: _$$t("fullscreen.properties_panel.section_exports.tooltip_addExportSettings"),
+      overrideAddPropertyTooltip: getI18nString("fullscreen.properties_panel.section_exports.tooltip_addExportSettings"),
       pickerShown: e.pickerShown,
       propertyList: e.propertyList,
       recordingKey: e.recordingKey,
@@ -443,7 +443,7 @@ export function $$ew3(e) {
       stylePickerShown: {
         isShown: !1
       },
-      title: e.title || _$$t("fullscreen.properties_panel.export")
+      title: e.title || getI18nString("fullscreen.properties_panel.export")
     })
   });
 }
@@ -525,7 +525,7 @@ let eF = forwardRef(function ({
   let j = {
     onClick: T,
     onMouseDown: dG,
-    "data-tooltip": _$$t("fullscreen.export_panel.export_settings"),
+    "data-tooltip": getI18nString("fullscreen.export_panel.export_settings"),
     "data-tooltip-type": Ib.TEXT
   };
   let U = L("settings");
@@ -541,7 +541,7 @@ let eF = forwardRef(function ({
           chevron: _$$t2
         },
         children: jsx(eO, {
-          ariaLabel: _$$t("fullscreen.properties_panel.export_settings.constraints.aria_label"),
+          ariaLabel: getI18nString("fullscreen.properties_panel.export_settings.constraints.aria_label"),
           className: v()(QU, AL),
           disabled: "SVG" === t.imageType || "PDF" === t.imageType,
           dispatch: P,
@@ -572,7 +572,7 @@ let eF = forwardRef(function ({
         ref: G,
         width: "fill",
         label: jsx(_$$h, {
-          children: _$$t("fullscreen.properties_panel.export_settings_image_file_type")
+          children: getI18nString("fullscreen.properties_panel.export_settings_image_file_type")
         })
       }), jsxs(mc, {
         children: [jsx(c$, {
@@ -590,7 +590,7 @@ let eF = forwardRef(function ({
         })]
       })]
     }) : jsxs(eL, {
-      ariaLabel: _$$t("fullscreen.properties_panel.export_settings_image_file_type"),
+      ariaLabel: getI18nString("fullscreen.properties_panel.export_settings_image_file_type"),
       chevronClassName: tc,
       className: wm,
       dispatch: P,
@@ -624,7 +624,7 @@ let eF = forwardRef(function ({
       className: uX,
       children: jsx(_$$d, {
         "aria-expanded": !!I,
-        "aria-label": _$$t("fullscreen.export_panel.export_settings"),
+        "aria-label": getI18nString("fullscreen.export_panel.export_settings"),
         recordingKey: U,
         htmlAttributes: {
           ...j,
@@ -638,11 +638,11 @@ let eF = forwardRef(function ({
     name: "remove_export_button",
     children: jsx(_$$K, {
       onClick: y,
-      "aria-label": _$$t("fullscreen.properties_panel.tooltip_remove"),
+      "aria-label": getI18nString("fullscreen.properties_panel.tooltip_remove"),
       recordingKey: L("removeButton"),
       htmlAttributes: {
         onMouseDown: dG,
-        "data-tooltip": _$$t("fullscreen.properties_panel.tooltip_remove"),
+        "data-tooltip": getI18nString("fullscreen.properties_panel.tooltip_remove"),
         "data-tooltip-type": Ib.TEXT
       },
       children: jsx(_$$O, {})
@@ -849,7 +849,7 @@ class eG extends PureComponent {
       return;
     }
     let s = 0 === a;
-    let o = s ? this.props.currentPage : _$$o(i);
+    let o = s ? this.props.currentPage : getFirstKey(i);
     (o !== this.state.previewGUID || n) && (this.setState({
       thumbnail: null,
       previewGUID: o,
@@ -873,7 +873,7 @@ class eG extends PureComponent {
           className: q4,
           children: [this.state.previewShown ? jsx(_$$O2, {}) : jsx(_$$k, {}), jsx(JU, {
             className: Pf,
-            children: tx("fullscreen.properties_panel.preview")
+            children: renderI18nText("fullscreen.properties_panel.preview")
           })]
         })
       }), this.state.previewShown && this.state.thumbnail && jsx(eB, {

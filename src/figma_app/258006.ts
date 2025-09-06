@@ -4,7 +4,7 @@ import { Gw, FB } from "../vendor/149334";
 import { buildUploadUrl } from "../figma_app/169182";
 import { Kf, Jk } from "../figma_app/99826";
 import { B } from "../905/714743";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { IT, M4 } from "../905/713695";
 import { $ } from "../905/479092";
 import { A } from "../5724/75936";
@@ -26,13 +26,13 @@ export function $$g1({
   });
   let u = e && FB(e);
   return u?.toLowerCase() === "jira.com" || u?.toLowerCase() === "atlassian.net" ? jsx("img", {
-    alt: _$$t("design_systems.component_panel.favicon_alt", {
+    alt: getI18nString("design_systems.component_panel.favicon_alt", {
       hostName: Kf(e)
     }),
     className: p,
     src: h
   }) : u?.toLowerCase() === "chromatic.com" ? jsx("img", {
-    alt: _$$t("design_systems.component_panel.favicon_alt", {
+    alt: getI18nString("design_systems.component_panel.favicon_alt", {
       hostName: Kf(e)
     }),
     className: p,
@@ -40,7 +40,7 @@ export function $$g1({
   }) : "loading" === t.status ? jsx("div", {
     className: "link_favicon--faviconLoadingPlaceholder--uJ-Kf"
   }) : r ? jsx("img", {
-    alt: _$$t("design_systems.component_panel.favicon_alt", {
+    alt: getI18nString("design_systems.component_panel.favicon_alt", {
       hostName: Kf(e)
     }),
     className: p,

@@ -1,11 +1,11 @@
 import { useState, useRef, useEffect } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { k } from "../905/651849";
 import { getInitialOptions, buildStaticUrl } from "../figma_app/169182";
-import { $D, V5 } from "../905/11";
+import { reportError, normalizeError } from "../905/11";
 import { XHR } from "../905/910117";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { J as _$$J } from "../905/231762";
 import { EB, $V } from "../figma_app/831101";
 import { lX, dT } from "../9420/394825";
@@ -260,7 +260,7 @@ let $$P3 = _$$D(e => {
   async function K() {
     let r = await O(e.setupIntentParams);
     U(r.clientSecret);
-    sx("setup_intent_creation_attempted", Z(), {
+    trackEventAnalytics("setup_intent_creation_attempted", Z(), {
       forwardToDatadog: !0
     });
     return r;
@@ -278,13 +278,13 @@ let $$P3 = _$$D(e => {
       t.paymentMethods && e.setPaymentMethods && e.setPaymentMethods(t.paymentMethods);
       return a;
     } catch (e) {
-      sx("setup_intent_creation_failed", Z(), {
+      trackEventAnalytics("setup_intent_creation_failed", Z(), {
         forwardToDatadog: !0
       });
       W({
         error: e,
         code: "uninitialized-stripe-elements-error",
-        message: _$$t("payments.errors.error_loading_payment_form")
+        message: getI18nString("payments.errors.error_loading_payment_form")
       });
     }
   }
@@ -298,9 +298,9 @@ let $$P3 = _$$D(e => {
       code: r,
       message: t
     });
-    "currency-validation-error" === r || h(e) || f(e) || S(e) || $D(_$$e.BILLING_EXPERIENCE, Error(`[Billing] ${"string" == typeof e ? e : e.code ?? "StripeError"}`), r => {
+    "currency-validation-error" === r || h(e) || f(e) || S(e) || reportError(_$$e.BILLING_EXPERIENCE, Error(`[Billing] ${"string" == typeof e ? e : e.code ?? "StripeError"}`), r => {
       let t = "object" == typeof e ? {
-        stripe_error_details: V5(pV(e)),
+        stripe_error_details: normalizeError(pV(e)),
         ...a
       } : a;
       r.setExtras(t);
@@ -320,7 +320,7 @@ let $$P3 = _$$D(e => {
     if (e.canSeeBillingAddressExp && !F) {
       P({
         code: "name-on-payment-method-required",
-        message: _$$t("payments.errors.name_on_payment_method_required")
+        message: getI18nString("payments.errors.name_on_payment_method_required")
       });
       return !0;
     }
@@ -371,7 +371,7 @@ let $$P3 = _$$D(e => {
         W({
           error: "Currency/Address Mismatch",
           code: "currency-validation-error",
-          message: _$$t("payments.errors.currency_mismatch_with_country_error", {
+          message: getI18nString("payments.errors.currency_mismatch_with_country_error", {
             selected_currency: e.currency.toUpperCase()
           }),
           extra: {
@@ -392,7 +392,7 @@ let $$P3 = _$$D(e => {
         W({
           error: `Currency & IP address mismatch error: ${JSON.stringify(e.customerInfo)}, country: ${address.country}, currency: ${LN()}`,
           code: "currency-validation-error",
-          message: _$$t("payments.errors.currency_ip_mismatch_error")
+          message: getI18nString("payments.errors.currency_ip_mismatch_error")
         });
         return !0;
       }
@@ -401,7 +401,7 @@ let $$P3 = _$$D(e => {
         W({
           error: "Currency/Address Mismatch",
           code: "currency-validation-error",
-          message: _$$t("payments.errors.currency_mismatch_error", {
+          message: getI18nString("payments.errors.currency_mismatch_error", {
             selected_currency: e.currency.toUpperCase()
           }),
           extra: {
@@ -415,7 +415,7 @@ let $$P3 = _$$D(e => {
         W({
           error: `Currency & IP address mismatch error: ${JSON.stringify(e.customerInfo)}, country: ${address.country}, currency: ${LN()}`,
           code: "currency-validation-error",
-          message: _$$t("payments.errors.currency_ip_mismatch_error")
+          message: getI18nString("payments.errors.currency_ip_mismatch_error")
         });
         return !0;
       }
@@ -435,13 +435,13 @@ let $$P3 = _$$D(e => {
         W({
           error: "Failed to get stripe elements",
           code: "uninitialized-stripe-elements-error",
-          message: _$$t("payments.errors.error_loading_payment_form")
+          message: getI18nString("payments.errors.error_loading_payment_form")
         });
         return;
       }
       let t = r.getElement("payment") ?? r.create("payment", z);
       t.on("ready", r => {
-        sx("Payment Form Loaded", {
+        trackEventAnalytics("Payment Form Loaded", {
           ...Z(),
           paymentMethod: Q ?? lB.CARD,
           availableCurrencies: B9()
@@ -451,7 +451,7 @@ let $$P3 = _$$D(e => {
       });
       t.on("change", r => {
         let t = r.value?.type;
-        sx("Choose Payment Method Type", {
+        trackEventAnalytics("Choose Payment Method Type", {
           ...Z(),
           paymentMethod: t
         });
@@ -470,7 +470,7 @@ let $$P3 = _$$D(e => {
         W({
           error: "Cannot save payment without Stripe elements",
           code: "confirm-setup-error",
-          message: _$$t("payments.errors.confirm_setup_error")
+          message: getI18nString("payments.errors.confirm_setup_error")
         });
         return;
       }
@@ -480,7 +480,7 @@ let $$P3 = _$$D(e => {
       let a = t();
       let n = setInterval(() => {
         let r = !1;
-        if (a !== t() && (sx("Stripe Authentication Modal"), clearInterval(n), r = !0), Y) {
+        if (a !== t() && (trackEventAnalytics("Stripe Authentication Modal"), clearInterval(n), r = !0), Y) {
           let t = lX({
             teamId: e.customerInfo.teamId,
             userId: Y.id
@@ -494,7 +494,7 @@ let $$P3 = _$$D(e => {
           }
         }
       }, 1e3);
-      sx("Add payment method", {
+      trackEventAnalytics("Add payment method", {
         ...Z(),
         paymentMethod: Q
       }, {
@@ -544,7 +544,7 @@ let $$P3 = _$$D(e => {
         }
       });
       if (clearInterval(n), error) {
-        let e = _$$t("payments.errors.confirm_setup_error");
+        let e = getI18nString("payments.errors.confirm_setup_error");
         W({
           error,
           code: "confirm-setup-error",
@@ -557,7 +557,7 @@ let $$P3 = _$$D(e => {
       type: t
     }) => {
       let a;
-      let n = _$$t("payments.errors.saved_payment_error");
+      let n = getI18nString("payments.errors.saved_payment_error");
       if (!B) {
         W({
           error: "Setup intent secret is not set",
@@ -592,7 +592,7 @@ let $$P3 = _$$D(e => {
         });
         return;
       }
-      sx("confirm_setup_with_saved_payment_method", {
+      trackEventAnalytics("confirm_setup_with_saved_payment_method", {
         ...Z(),
         savedPaymentMethodId: r
       }, {

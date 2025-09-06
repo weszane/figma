@@ -3,7 +3,7 @@ import { useDispatch } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { Rs } from "../figma_app/288654";
 import { oA } from "../905/723791";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { d as _$$d } from "../4452/230712";
 import { to } from "../905/156213";
@@ -15,11 +15,11 @@ if (443 == require.j) {}
 let g = e => {
   switch (e) {
     case FAccessRequestStatusType.APPROVED:
-      return t("resource_connection.visual_bell.already_approved");
+      return getI18nString("resource_connection.visual_bell.already_approved");
     case FAccessRequestStatusType.DENIED:
-      return t("resource_connection.visual_bell.already_denied");
+      return getI18nString("resource_connection.visual_bell.already_denied");
     case FAccessRequestStatusType.REVOKED:
-      return t("resource_connection.visual_bell.already_revoked");
+      return getI18nString("resource_connection.visual_bell.already_revoked");
     case FAccessRequestStatusType.PENDING:
       return;
     default:

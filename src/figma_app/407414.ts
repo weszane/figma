@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import { Qej } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
-import { eU, zl, md, fp } from "../figma_app/27355";
-import { az } from "../905/449184";
+import { atom, atomStoreManager, useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
+import { analyticsEventManager } from "../905/449184";
 import { rJ, I, ZM, rT, KV, zZ, L2 } from "../figma_app/542202";
 import { eA } from "../905/695660";
 import { C } from "../905/887158";
@@ -16,8 +16,8 @@ import { b as _$$b } from "../905/919117";
 import { NM } from "../figma_app/99772";
 import { ac } from "../figma_app/210234";
 import { QU } from "../figma_app/257614";
-let $$T14 = Wh(() => eU(void 0));
-let $$I21 = Wh(() => eU(null));
+let $$T14 = Wh(() => atom(void 0));
+let $$I21 = Wh(() => atom(null));
 export function $$S8({
   impressionId: e,
   source: t,
@@ -28,28 +28,28 @@ export function $$S8({
     impressionId,
     source,
     hasSearchTerm
-  } = zl.get(_$$b);
-  (impressionId !== e || source !== n || hasSearchTerm !== r) && (zl.set(_$$b, {
+  } = atomStoreManager.get(_$$b);
+  (impressionId !== e || source !== n || hasSearchTerm !== r) && (atomStoreManager.set(_$$b, {
     impressionId: e,
     source: n,
     hasSearchTerm: r
-  }), az.trackDefinedMetric("suggested_actions.entry_point_impressions", {
+  }), analyticsEventManager.trackDefinedMetric("suggested_actions.entry_point_impressions", {
     impressionId: e,
     source: n,
     hasSearchTerm: r
   }));
 }
 function v() {
-  return zl.get(NM) ?? void 0;
+  return atomStoreManager.get(NM) ?? void 0;
 }
 export function $$A23(e, t) {
   let r = ZC(e);
-  let i = md($$T14);
+  let i = useAtomWithSubscription($$T14);
   let [{
     impressionId: a
-  }, s] = fp(_$$b);
+  }, s] = useAtomValueAndSetter(_$$b);
   useEffect(() => {
-    e && !r && (az.trackDefinedMetric("suggested_actions.opened", {
+    e && !r && (analyticsEventManager.trackDefinedMetric("suggested_actions.opened", {
       sessionId: i,
       impressionId: a ?? "",
       source: Q(t)
@@ -60,24 +60,24 @@ export function $$A23(e, t) {
   }, [a, r, i, s, e, t]);
 }
 export function $$x19(e) {
-  let t = zl.get($$T14);
-  az.trackDefinedMetric("suggested_actions.closed", {
+  let t = atomStoreManager.get($$T14);
+  analyticsEventManager.trackDefinedMetric("suggested_actions.closed", {
     sessionId: t,
     source: e
   });
 }
 export function $$N9(e) {
-  let t = md($$T14);
+  let t = useAtomWithSubscription($$T14);
   _$$h(() => {
-    az.trackDefinedMetric("suggested_actions.library_selector.opened", {
+    analyticsEventManager.trackDefinedMetric("suggested_actions.library_selector.opened", {
       sessionId: t,
       isUpdateView: e
     });
   });
 }
 export function $$C13(e, t, r) {
-  let n = zl.get($$T14);
-  az.trackDefinedMetric("suggested_actions.library_selector.completed", {
+  let n = atomStoreManager.get($$T14);
+  analyticsEventManager.trackDefinedMetric("suggested_actions.library_selector.completed", {
     sessionId: n,
     isUpdateView: e,
     numLibrariesShown: t,
@@ -85,46 +85,46 @@ export function $$C13(e, t, r) {
   });
 }
 export function $$w18() {
-  let e = md($$T14);
+  let e = useAtomWithSubscription($$T14);
   _$$h(() => {
-    az.trackDefinedMetric("suggested_actions.suggestions_modal.opened", {
+    analyticsEventManager.trackDefinedMetric("suggested_actions.suggestions_modal.opened", {
       sessionId: e
     });
   });
 }
 export function $$O11(e, t) {
-  let r = zl.get($$T14);
-  az.trackDefinedMetric("suggested_actions.too_many_layers_selected_error", {
+  let r = atomStoreManager.get($$T14);
+  analyticsEventManager.trackDefinedMetric("suggested_actions.too_many_layers_selected_error", {
     sessionId: r,
     numLayersSelected: e,
     maxLayersAllowed: t
   });
 }
 export function $$R6() {
-  let e = zl.get($$T14);
-  let t = zl.get(rJ) ?? -1;
-  az.trackDefinedMetric("suggested_actions.initial_dependencies_loaded", {
+  let e = atomStoreManager.get($$T14);
+  let t = atomStoreManager.get(rJ) ?? -1;
+  analyticsEventManager.trackDefinedMetric("suggested_actions.initial_dependencies_loaded", {
     sessionId: e,
     libraryAssetsLoadedTimeMs: t
   });
 }
 export function $$L34(e) {
-  let t = zl.get($$T14);
-  let r = zl.get(I);
-  az.trackDefinedMetric("suggested_actions.violation_detection.started", {
+  let t = atomStoreManager.get($$T14);
+  let r = atomStoreManager.get(I);
+  analyticsEventManager.trackDefinedMetric("suggested_actions.violation_detection.started", {
     sessionId: t,
     numNodes: e,
     requestMode: r
   });
 }
 export function $$P10(e) {
-  let t = zl.get($$T14);
-  let r = zl.get(I);
-  let n = zl.get(ZM) ?? -1;
+  let t = atomStoreManager.get($$T14);
+  let r = atomStoreManager.get(I);
+  let n = atomStoreManager.get(ZM) ?? -1;
   let i = -1 === n ? -1 : n / e.length;
-  let a = zl.get(rT) ?? void 0;
-  let s = zl.get(KV) ?? void 0;
-  let c = zl.get(zZ) ?? void 0;
+  let a = atomStoreManager.get(rT) ?? void 0;
+  let s = atomStoreManager.get(KV) ?? void 0;
+  let c = atomStoreManager.get(zZ) ?? void 0;
   let u = new Map();
   for (let t of e) {
     let {
@@ -133,7 +133,7 @@ export function $$P10(e) {
     let r = u.get(ruleId) ?? 0;
     u.set(ruleId, r + 1);
   }
-  az.trackDefinedMetric("suggested_actions.violation_detection.completed", {
+  analyticsEventManager.trackDefinedMetric("suggested_actions.violation_detection.completed", {
     sessionId: t,
     requestMode: r,
     numViolations: e.length,
@@ -146,9 +146,9 @@ export function $$P10(e) {
   });
 }
 export function $$D33() {
-  let e = zl.get($$T14);
-  let t = zl.get(I);
-  az.trackDefinedMetric("suggested_actions.visual_grouping.started", {
+  let e = atomStoreManager.get($$T14);
+  let t = atomStoreManager.get(I);
+  analyticsEventManager.trackDefinedMetric("suggested_actions.visual_grouping.started", {
     sessionId: e,
     requestMode: t
   });
@@ -163,11 +163,11 @@ export function $$k29(e) {
   });
   let i = e.groupIdToGroup.size;
   let a = e.violatingNodeIdToGroupIdSet.size;
-  let s = zl.get(L2);
+  let s = atomStoreManager.get(L2);
   let c = s.find(e => e.status === td.GROUPING_PENDING)?.duration ?? -1;
-  let u = zl.get($$T14);
-  let _ = zl.get(I);
-  az.trackDefinedMetric("suggested_actions.visual_grouping.completed", {
+  let u = atomStoreManager.get($$T14);
+  let _ = atomStoreManager.get(I);
+  analyticsEventManager.trackDefinedMetric("suggested_actions.visual_grouping.completed", {
     sessionId: u,
     requestMode: _,
     numGroups: i,
@@ -180,9 +180,9 @@ export function $$k29(e) {
   });
 }
 export function $$M15(e) {
-  let t = zl.get($$T14);
-  let r = zl.get(I);
-  az.trackDefinedMetric("suggested_actions.initial_detection_and_grouping_completed", {
+  let t = atomStoreManager.get($$T14);
+  let r = atomStoreManager.get(I);
+  analyticsEventManager.trackDefinedMetric("suggested_actions.initial_detection_and_grouping_completed", {
     sessionId: t,
     requestMode: r,
     detectionAndGroupingTimeMs: e
@@ -190,9 +190,9 @@ export function $$M15(e) {
 }
 export function $$F2(e, t, r, n) {
   let i = v();
-  let a = zl.get($$T14);
+  let a = atomStoreManager.get($$T14);
   let s = ee(n);
-  az.trackDefinedMetric("suggested_actions.apply_suggestions.success", {
+  analyticsEventManager.trackDefinedMetric("suggested_actions.apply_suggestions.success", {
     sessionId: a,
     numViolationsFixed: e,
     numRowsFixed: t,
@@ -203,9 +203,9 @@ export function $$F2(e, t, r, n) {
 }
 export function $$j30(e, t) {
   let r = v();
-  let n = zl.get($$T14);
+  let n = atomStoreManager.get($$T14);
   let i = ee(t);
-  az.trackDefinedMetric("suggested_actions.apply_suggestions_row.success", {
+  analyticsEventManager.trackDefinedMetric("suggested_actions.apply_suggestions_row.success", {
     sessionId: n,
     numViolationsFixed: e,
     ruleForLogging: i,
@@ -214,17 +214,17 @@ export function $$j30(e, t) {
 }
 export function $$U20() {
   let e = v();
-  let t = zl.get($$T14);
-  az.trackDefinedMetric("suggested_actions.apply_suggestions.error", {
+  let t = atomStoreManager.get($$T14);
+  analyticsEventManager.trackDefinedMetric("suggested_actions.apply_suggestions.error", {
     sessionId: t,
     selectedGroupId: e
   });
 }
 export function $$B17(e) {
   let t = v();
-  let r = zl.get($$T14);
+  let r = atomStoreManager.get($$T14);
   let n = ee(e);
-  az.trackDefinedMetric("suggested_actions.apply_suggestions_row.error", {
+  analyticsEventManager.trackDefinedMetric("suggested_actions.apply_suggestions_row.error", {
     sessionId: r,
     selectedGroupId: t,
     ruleForLogging: n
@@ -232,9 +232,9 @@ export function $$B17(e) {
 }
 export function $$G25(e, t, r, n) {
   let i = v();
-  let a = zl.get($$T14);
+  let a = atomStoreManager.get($$T14);
   let s = ee(n);
-  az.trackDefinedMetric("suggested_actions.ignore_suggestions.success", {
+  analyticsEventManager.trackDefinedMetric("suggested_actions.ignore_suggestions.success", {
     sessionId: a,
     numIgnoredRows: e,
     numViolationsIgnored: t,
@@ -245,17 +245,17 @@ export function $$G25(e, t, r, n) {
 }
 export function $$V3() {
   let e = v();
-  let t = zl.get($$T14);
-  az.trackDefinedMetric("suggested_actions.ignore_suggestions.error", {
+  let t = atomStoreManager.get($$T14);
+  analyticsEventManager.trackDefinedMetric("suggested_actions.ignore_suggestions.error", {
     sessionId: t,
     selectedGroupId: e
   });
 }
 export function $$H22(e, t) {
   let r = v();
-  let n = zl.get($$T14);
+  let n = atomStoreManager.get($$T14);
   let i = ee(t);
-  az.trackDefinedMetric("suggested_actions.ignore_suggestion_row", {
+  analyticsEventManager.trackDefinedMetric("suggested_actions.ignore_suggestion_row", {
     sessionId: n,
     numViolationsIgnored: e,
     ruleForLogging: i,
@@ -264,8 +264,8 @@ export function $$H22(e, t) {
 }
 export function $$z27() {
   let e = v();
-  let t = zl.get($$T14);
-  az.trackDefinedMetric("suggested_actions.refresh_linter", {
+  let t = atomStoreManager.get($$T14);
+  analyticsEventManager.trackDefinedMetric("suggested_actions.refresh_linter", {
     sessionId: t,
     selectedGroupId: e
   });
@@ -273,7 +273,7 @@ export function $$z27() {
 export function $$W5(e, t) {
   return setTimeout(() => function (e, t) {
     let r = e.rootNodeIdToViolatingNodeIdSet.size;
-    let n = Object.entries(zl.get(QU).suggestionBlocks).sort(([e], [t]) => e.localeCompare(t));
+    let n = Object.entries(atomStoreManager.get(QU).suggestionBlocks).sort(([e], [t]) => e.localeCompare(t));
     let i = 0;
     let a = 0;
     let d = new Map();
@@ -292,8 +292,8 @@ export function $$W5(e, t) {
     h && eA(h, () => {
       u++;
     });
-    let m = zl.get($$T14);
-    az.trackDefinedMetric("NEXT" === t ? "suggested_actions.next_group_selected" : "suggested_actions.group_selected", {
+    let m = atomStoreManager.get($$T14);
+    analyticsEventManager.trackDefinedMetric("NEXT" === t ? "suggested_actions.next_group_selected" : "suggested_actions.group_selected", {
       sessionId: m,
       selectedGroupId: e.id,
       groupSize: r,
@@ -306,8 +306,8 @@ export function $$W5(e, t) {
   }(e, t), 0);
 }
 export function $$K7(e, t, r) {
-  let n = zl.get($$T14);
-  az.trackDefinedMetric("suggested_actions.group_suggestions_loaded", {
+  let n = atomStoreManager.get($$T14);
+  analyticsEventManager.trackDefinedMetric("suggested_actions.group_suggestions_loaded", {
     sessionId: n,
     selectedGroupId: e,
     numSuggestions: t,
@@ -315,25 +315,25 @@ export function $$K7(e, t, r) {
   });
 }
 export function $$Y35(e, t) {
-  let r = zl.get($$T14);
-  az.trackDefinedMetric("suggested_actions.group_suggestions_completed", {
+  let r = atomStoreManager.get($$T14);
+  analyticsEventManager.trackDefinedMetric("suggested_actions.group_suggestions_completed", {
     sessionId: r,
     selectedGroupId: e,
     timeToCompleteMs: t
   });
 }
 export function $$$1(e) {
-  let t = zl.get($$T14);
-  az.trackDefinedMetric("suggested_actions.completed", {
+  let t = atomStoreManager.get($$T14);
+  analyticsEventManager.trackDefinedMetric("suggested_actions.completed", {
     sessionId: t,
     timeToCompleteMs: e
   });
 }
 export function $$X24(e, t, r, n, i) {
-  let a = zl.get($$T14);
+  let a = atomStoreManager.get($$T14);
   let s = v();
   let d = ee(i);
-  az.trackDefinedMetric("suggested_actions.variable_rule.suggestions_generated", {
+  analyticsEventManager.trackDefinedMetric("suggested_actions.variable_rule.suggestions_generated", {
     sessionId: a,
     suggestionId: e,
     selectedGroupId: s,
@@ -350,10 +350,10 @@ export function $$q4({
   variableSetId: n,
   ruleId: i
 }) {
-  let a = zl.get($$T14);
+  let a = atomStoreManager.get($$T14);
   let s = v();
   let d = ee(i);
-  az.trackDefinedMetric("suggested_actions.variable_rule.inserted", {
+  analyticsEventManager.trackDefinedMetric("suggested_actions.variable_rule.inserted", {
     suggestionId: e,
     sessionId: a,
     selectedGroupId: s,
@@ -364,10 +364,10 @@ export function $$q4({
   });
 }
 export function $$J32(e, t, r) {
-  let n = zl.get($$T14);
+  let n = atomStoreManager.get($$T14);
   let i = v();
   let a = ee(r);
-  az.trackDefinedMetric("suggested_actions.style_rule.suggestions_generated", {
+  analyticsEventManager.trackDefinedMetric("suggested_actions.style_rule.suggestions_generated", {
     sessionId: n,
     suggestionId: e,
     selectedGroupId: i,
@@ -376,10 +376,10 @@ export function $$J32(e, t, r) {
   });
 }
 export function $$Z16(e, t, r) {
-  let n = zl.get($$T14);
+  let n = atomStoreManager.get($$T14);
   let i = v();
   let a = ee(r);
-  az.trackDefinedMetric("suggested_actions.style_rule.inserted", {
+  analyticsEventManager.trackDefinedMetric("suggested_actions.style_rule.inserted", {
     suggestionId: e,
     sessionId: n,
     selectedGroupId: i,
@@ -412,8 +412,8 @@ export function $$et26({
   numRowsFixed: t,
   numBlocksFixed: r
 }) {
-  az.trackDefinedMetric("suggested_actions.apply_group_suggestions.success", {
-    sessionId: zl.get($$T14),
+  analyticsEventManager.trackDefinedMetric("suggested_actions.apply_group_suggestions.success", {
+    sessionId: atomStoreManager.get($$T14),
     numViolationsFixed: e,
     numRowsFixed: t,
     numBlocksFixed: r,
@@ -421,14 +421,14 @@ export function $$et26({
   });
 }
 export function $$er12() {
-  az.trackDefinedMetric("suggested_actions.apply_group_suggestions.error", {
-    sessionId: zl.get($$T14),
+  analyticsEventManager.trackDefinedMetric("suggested_actions.apply_group_suggestions.error", {
+    sessionId: atomStoreManager.get($$T14),
     selectedGroupId: v()
   });
 }
 export function $$en31() {
-  az.trackDefinedMetric("suggested_actions.apply_group_suggestions.block_error", {
-    sessionId: zl.get($$T14),
+  analyticsEventManager.trackDefinedMetric("suggested_actions.apply_group_suggestions.block_error", {
+    sessionId: atomStoreManager.get($$T14),
     selectedGroupId: v()
   });
 }
@@ -438,13 +438,13 @@ export function $$ei0({
   hasOptionSelected: r,
   numSuggestionsShown: n
 }) {
-  let i = zl.get($$T14);
-  i && ("" === t ? az.trackDefinedMetric("suggested_actions.flyout.opened", {
+  let i = atomStoreManager.get($$T14);
+  i && ("" === t ? analyticsEventManager.trackDefinedMetric("suggested_actions.flyout.opened", {
     sessionId: i,
     type: e,
     hasOptionSelected: r,
     numSuggestionsShown: n
-  }) : az.trackDefinedMetric("suggested_actions.flyout.searched", {
+  }) : analyticsEventManager.trackDefinedMetric("suggested_actions.flyout.searched", {
     sessionId: i,
     type: e,
     searchTermLength: t.length,
@@ -452,17 +452,17 @@ export function $$ei0({
   }));
 }
 export function $$ea28() {
-  let e = zl.get(aW);
-  let t = zl.get($$I21) ?? {
+  let e = atomStoreManager.get(aW);
+  let t = atomStoreManager.get($$I21) ?? {
     selectedNewOption: !1,
     hadSearchTerm: !1
   };
-  let r = zl.get($$T14);
-  r && e && (az.trackDefinedMetric("suggested_actions.flyout.closed", {
+  let r = atomStoreManager.get($$T14);
+  r && e && (analyticsEventManager.trackDefinedMetric("suggested_actions.flyout.closed", {
     sessionId: r,
     selectedNewOption: t.selectedNewOption,
     hadSearchTerm: t.hadSearchTerm
-  }), zl.set($$I21, null));
+  }), atomStoreManager.set($$I21, null));
 }
 export const A5 = $$ei0;
 export const A9 = $$$1;

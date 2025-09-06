@@ -2,11 +2,11 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useRef, useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
 import { h as _$$h } from "../905/994594";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Ay } from "../905/612521";
 import { Uz } from "../905/63728";
 import { B } from "../905/714743";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Dy, ky, Je } from "../figma_app/925970";
 import { x0 } from "../5430/908946";
 import { W as _$$W } from "../5430/53744";
@@ -52,7 +52,7 @@ export function $$b0({
     });
   }, [setSelectedIdx]);
   let W = I && (R || t || e);
-  let G = W ? "" : j ?? _$$t("community.search.search_community");
+  let G = W ? "" : j ?? getI18nString("community.search.search_community");
   let $ = S ? jsx(_$$h, {
     className: L
   }) : jsx(B, {
@@ -101,7 +101,7 @@ export function $$b0({
             r("");
             setResources({});
             N(ky());
-            sx("search_result_clicked", {
+            trackEventAnalytics("search_result_clicked", {
               query: e,
               resourceType: renderedOrder[renderedSelectedIdx]?.type,
               scope: "community",

@@ -10,7 +10,7 @@ import { Rs } from "../figma_app/288654";
 import { qc } from "../figma_app/858013";
 import { $z } from "../figma_app/617427";
 import { pW } from "../905/160095";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { R as _$$R } from "../905/304671";
 import { h as _$$h } from "../905/142086";
 import { to, Ce } from "../905/156213";
@@ -171,14 +171,14 @@ function z(e) {
   let s = q5();
   let c = useSelector(e => s ? up(s, e.repos) : null);
   if (!s) return jsx(Fragment, {});
-  let u = tx("upsell.move_file_publish.move_file_to_team_to_publish");
-  let p = tx("upsell.move_file_publish.move_file_to_pro_team_to_publish");
-  let f = tx("upsell.move_file_publish.move_file_to_project_to_publish");
-  let I = _$$t("upsell.move_file_publish.move_to_team_to_publish_library_assets");
-  let E = _$$t("upsell.move_file_publish.move_to_project_to_publish_library_assets");
+  let u = renderI18nText("upsell.move_file_publish.move_file_to_team_to_publish");
+  let p = renderI18nText("upsell.move_file_publish.move_file_to_pro_team_to_publish");
+  let f = renderI18nText("upsell.move_file_publish.move_file_to_project_to_publish");
+  let I = getI18nString("upsell.move_file_publish.move_to_team_to_publish_library_assets");
+  let E = getI18nString("upsell.move_file_publish.move_to_project_to_publish_library_assets");
   let x = p;
   e.isFileInOrg ? x = u : e.isFileInTeamWithProFeatures && (x = f);
-  let S = e.isFileInTeamWithProFeatures ? tx("upsell.move_file_publish.move_to_project") : tx("upsell.move_file_publish.move_to_team");
+  let S = e.isFileInTeamWithProFeatures ? renderI18nText("upsell.move_file_publish.move_to_project") : renderI18nText("upsell.move_file_publish.move_to_team");
   return jsx(fu, {
     name: "MoveFilePublishUpsell",
     children: jsx(bL, {
@@ -199,7 +199,7 @@ function z(e) {
                 trackingDescriptor: _$$c.CANCEL
               },
               variant: "secondary",
-              children: tx("upsell.shared.cancel")
+              children: renderI18nText("upsell.shared.cancel")
             }), jsx(pW, {
               href: "#",
               onClick: () => {

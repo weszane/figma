@@ -4,13 +4,13 @@ import { xae, Lxv, FDn } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { eU, zl } from "../figma_app/27355";
+import { atom, atomStoreManager } from "../figma_app/27355";
 import p from "lodash-es/camelCase";
 import h from "../vendor/77708";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { debugState } from "../905/407919";
-import { M4 } from "../905/609396";
-import { PN, nl } from "../figma_app/257275";
+import { Timer } from "../905/609396";
+import { PN, isInteractionPathCheck } from "../figma_app/897289";
 import { FP } from "../figma_app/91703";
 import { me } from "../figma_app/223206";
 import { Y5 } from "../figma_app/455680";
@@ -23,7 +23,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { H as _$$H } from "../figma_app/414056";
 import { iD, kv } from "../figma_app/259678";
 import { r as _$$r2 } from "../905/571838";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { hi } from "../figma_app/114522";
 import { f as _$$f } from "../figma_app/695131";
 import { NC, Ah, _5 } from "../figma_app/119420";
@@ -101,18 +101,18 @@ function F({
     children: [jsx(_$$r2, {}), "window" === e ? jsxs(Fragment, {
       children: [jsx("div", {
         className: D,
-        children: t ?? tx("sites.code_component.error_overlay_title")
+        children: t ?? renderI18nText("sites.code_component.error_overlay_title")
       }), jsx("div", {
         className: k,
-        children: tx("sites.code_component.error_overlay_subtitle_window")
+        children: renderI18nText("sites.code_component.error_overlay_subtitle_window")
       })]
     }) : jsxs(Fragment, {
       children: [jsxs("div", {
         className: D,
-        children: ["stale" === r && tx("sites.code_component.error_overlay_title_stale"), "error" === r && tx("sites.code_component.error_overlay_title"), "soft_deleted" === r && tx("sites.code_component.error_overlay_title_soft_deleted")]
+        children: ["stale" === r && renderI18nText("sites.code_component.error_overlay_title_stale"), "error" === r && renderI18nText("sites.code_component.error_overlay_title"), "soft_deleted" === r && renderI18nText("sites.code_component.error_overlay_title_soft_deleted")]
       }), jsxs("div", {
         className: k,
-        children: ["stale" === r && tx("sites.code_component.error_overlay_subtitle_canvas_stale"), "error" === r && tx("sites.code_component.error_overlay_subtitle_canvas")]
+        children: ["stale" === r && renderI18nText("sites.code_component.error_overlay_subtitle_canvas_stale"), "error" === r && renderI18nText("sites.code_component.error_overlay_subtitle_canvas")]
       })]
     })]
   });
@@ -128,10 +128,10 @@ let Q = (e, t) => {
   t(ee, new Set());
   t(_$$S, n);
 };
-let ee = eU(new Set());
+let ee = atom(new Set());
 let et = $()(Q, 30);
 let er = $()(Q, 3e3);
-let en = eU(null, (e, t, r) => {
+let en = atom(null, (e, t, r) => {
   let n = e(ee);
   for (let e of r) n.add(e);
   t(ee, new Set(n));
@@ -188,7 +188,7 @@ export let $$eu0 = new class {
     }));
   }
   updateDirtyResponsiveSets(e) {
-    zl.set(en, [...e]);
+    atomStoreManager.set(en, [...e]);
   }
   setLeftPanelTabToCode() {
     debugState.dispatch(FP({
@@ -196,14 +196,14 @@ export let $$eu0 = new class {
     }));
   }
   setCodeWindowPanelToChat() {
-    zl.set(hi, "chat");
+    atomStoreManager.set(hi, "chat");
   }
   markNodeAsDesignToReact(e, t) {
     this._designToReactNodes.set(e, t);
   }
   markCodeNodesDirty(e) {
     if (!debugState.getState().openFile?.canEdit) return;
-    let t = new M4();
+    let t = new Timer();
     t.start();
     let r = 0;
     let n = 0;
@@ -230,15 +230,15 @@ export let $$eu0 = new class {
         let o = this._designToReactNodes.has(i);
         let d = i;
         let c = !0;
-        if (o && (s = this._designToReactNodes.get(i), this._designToReactNodes.$$delete(i)), o && az.trackDefinedEvent("design_to_react.design_to_react_code_generated", {
-          selectedFileKey: zl.get(ze) ?? void 0,
+        if (o && (s = this._designToReactNodes.get(i), this._designToReactNodes.$$delete(i)), o && analyticsEventManager.trackDefinedEvent("design_to_react.design_to_react_code_generated", {
+          selectedFileKey: atomStoreManager.get(ze) ?? void 0,
           selectedNodeId: s,
           codeInstanceGuid: d,
           isFigmake: ec()
         }), a) {
           let i;
           n++;
-          let a = new M4();
+          let a = new Timer();
           a.start();
           this.performCodeNodeSnapshot(e, l).then(e => {
             i = e;
@@ -253,23 +253,23 @@ export let $$eu0 = new class {
             if (a.stop(), 0 === r) {
               let e = t.getElapsedTime();
               t.stop();
-              az.trackDefinedEvent("sites.code_snapshot_time", {
-                selectedFileKey: zl.get(ze) ?? void 0,
+              analyticsEventManager.trackDefinedEvent("sites.code_snapshot_time", {
+                selectedFileKey: atomStoreManager.get(ze) ?? void 0,
                 isFigmake: ec(),
                 elapsedTimeMs: e,
                 numSnapshotsAttempted: n
               });
             }
-            az.trackDefinedEvent("sites.individual_code_snapshot_time", {
-              selectedFileKey: zl.get(ze) ?? void 0,
+            analyticsEventManager.trackDefinedEvent("sites.individual_code_snapshot_time", {
+              selectedFileKey: atomStoreManager.get(ze) ?? void 0,
               selectedNodeIdDesignToReact: s,
               codeInstanceGuid: d,
               isFigmake: ec(),
               elapsedTimeMs: e,
               snapshotResult: i
             });
-            o && az.trackDefinedEvent("design_to_react.design_to_react_code_validity", {
-              selectedFileKey: zl.get(ze) ?? void 0,
+            o && analyticsEventManager.trackDefinedEvent("design_to_react.design_to_react_code_validity", {
+              selectedFileKey: atomStoreManager.get(ze) ?? void 0,
               selectedNodeId: s,
               codeInstanceGuid: d,
               isFigmake: ec(),
@@ -284,13 +284,13 @@ export let $$eu0 = new class {
     }
   }
   setAutoDeploySupabase() {
-    zl.set(GV, !0);
+    atomStoreManager.set(GV, !0);
   }
   showSupabaseDeployNudge() {
-    zl.set(Xl, !0);
+    atomStoreManager.set(Xl, !0);
   }
   async performCodeNodeSnapshot(e, t) {
-    if (nl()) {
+    if (isInteractionPathCheck()) {
       console.log("Skipping performSnapshot during interaction tests");
       return "Skipping for interaction test";
     }
@@ -461,7 +461,7 @@ export let $$eu0 = new class {
     }
   }
   setSprigUserCreatedCodeLayerAtom() {
-    zl.set(_$$f, !0);
+    atomStoreManager.set(_$$f, !0);
   }
   syncNodeSourceCode(e) {
     for (let t of e) this._codeNodeGUIDsWithSourceCodeToSync.add(t);
@@ -486,7 +486,7 @@ export let $$eu0 = new class {
     }, 0));
   }
   shouldHideDefaultSetOnCreation() {
-    return !!zl.get(me);
+    return !!atomStoreManager.get(me);
   }
   getAutomaticCodeFileNameForNodeName(e, t, r = !1) {
     let n = getSingletonSceneGraph();
@@ -573,16 +573,16 @@ export let $$eu0 = new class {
       type: "FIGMA_NODE",
       image: getFeatureFlags().bake_d2r_image ? NC(r.get(e)) : null
     };
-    zl.set(Ah, t => t.map(t => es(t, e) ? {
+    atomStoreManager.set(Ah, t => t.map(t => es(t, e) ? {
       ...i,
       uniqueId: t.uniqueId
     } : t));
   }
   removeAttachment(e) {
-    zl.set(Ah, t => t.filter(t => !es(t, e)));
+    atomStoreManager.set(Ah, t => t.filter(t => !es(t, e)));
   }
   pushAttachmentError(e, t) {
-    zl.set(Ah, r => r.map(r => es(r, e) ? {
+    atomStoreManager.set(Ah, r => r.map(r => es(r, e) ? {
       ...r,
       designToCodeErrors: [...(r?.designToCodeErrors ?? []), t]
     } : r));

@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { vt } from "../figma_app/306946";
 import { q } from "../figma_app/277543";
 import { LE } from "../905/71785";
@@ -21,31 +21,31 @@ export function $$m0({
       case LE.SLIDES:
       case q.SLIDES:
       case FW.SLIDES:
-        return _$$t("community.detail_view.made_for_slides");
+        return getI18nString("community.detail_view.made_for_slides");
       case LE.FIGJAM:
       case FW.FIGJAM:
       case q.WHITEBOARD:
-        return _$$t("community.detail_view.made_for_fig_jam");
+        return getI18nString("community.detail_view.made_for_fig_jam");
       case FW.INSPECT:
       case FW.DEV:
       case q.DEV_HANDOFF:
-        return _$$t("community.detail_view.made_for_dev_mode");
+        return getI18nString("community.detail_view.made_for_dev_mode");
       case LE.FIGMA:
       case FW.FIGMA:
       case q.DESIGN:
-        return _$$t("community.detail_view.made_for_figma_design");
+        return getI18nString("community.detail_view.made_for_figma_design");
       case LE.SITES:
       case q.SITES:
       case FW.SITES:
-        return _$$t("community.detail_view.made_for_sites");
+        return getI18nString("community.detail_view.made_for_sites");
       case LE.FIGMAKE:
       case q.FIGMAKE:
-        return _$$t("community.detail_view.made_for_figmake");
+        return getI18nString("community.detail_view.made_for_figmake");
       case LE.COOPER:
       case q.COOPER:
       case FW.BUZZ:
         if (m === vt.PLUGIN && !getFeatureFlags().buzz_plugins_publishing) return null;
-        return _$$t("community.detail_view.made_for_buzz");
+        return getI18nString("community.detail_view.made_for_buzz");
       default:
         return throwTypeError(h);
     }

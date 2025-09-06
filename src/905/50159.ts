@@ -10,7 +10,7 @@ import { h1, Ak } from "../905/986103";
 import { $E, w4 } from "../905/445814";
 import { NU } from "../figma_app/204891";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { E as _$$E } from "../905/984674";
 import { UN } from "../figma_app/976345";
 import { l as _$$l } from "../905/767868";
@@ -30,7 +30,7 @@ export function $$R1(e) {
   let i = t.data;
   return i4(e.file) ? jsx("span", {
     className: gO,
-    children: tx("tile.file_tile.password_protected")
+    children: renderI18nText("tile.file_tile.password_protected")
   }) : "loaded" !== t.status ? null : jsxs("div", {
     className: m2,
     children: [jsx("span", {
@@ -40,14 +40,14 @@ export function $$R1(e) {
       className: ag,
       children: [e.file.touched_at && !i && jsx("span", {
         className: gO,
-        children: tx("tile.file_tile.edited_time", {
+        children: renderI18nText("tile.file_tile.edited_time", {
           time: jsx(h1, {
             date: e.file.touched_at
           })
         })
       }), e.file.touched_at && i && jsx("span", {
         className: Vj,
-        children: tx("tile.file_tile.edited_time_with_separator", {
+        children: renderI18nText("tile.file_tile.edited_time_with_separator", {
           time: jsx(h1, {
             date: e.file.touched_at
           })
@@ -81,7 +81,7 @@ function N(e) {
         type: i(file),
         size: 24,
         "data-tooltip-type": t ? Ib.TEXT : void 0,
-        "data-tooltip": t ? _$$t("tile.file_tile.published_as_library", {
+        "data-tooltip": t ? getI18nString("tile.file_tile.published_as_library", {
           time: a
         }) : void 0
       })

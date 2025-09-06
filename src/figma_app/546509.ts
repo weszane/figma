@@ -1,4 +1,4 @@
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 export function $$i6() {
   return window.FigmaMobile;
 }
@@ -55,7 +55,7 @@ export function $$T13() {
 }
 export function $$I7(e) {
   let t = window.FigmaMobile;
-  return "prototype" === e.view ? Ay.isMobileBrowser && !e.commentsEnabled : "fullscreen" === e.view && !!t?.shouldOptimizeForIpadApp && !e.commentsEnabled;
+  return "prototype" === e.view ? BrowserInfo.isMobileBrowser && !e.commentsEnabled : "fullscreen" === e.view && !!t?.shouldOptimizeForIpadApp && !e.commentsEnabled;
 }
 export const BI = $$u0;
 export const Ef = $$l1;

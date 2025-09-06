@@ -1,7 +1,7 @@
 import { Z6A, DV9, glU } from "../figma_app/763686";
 import { AD } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 var o = (e => (e.HEART = "heart", e.STAR = "star", e.PLUS_ONE = "+1", e.THUMBS_UP = "thumbs up", e.THUMBS_DOWN = "thumbs down", e.QUESTION = "question", e.PROFILE = "profile", e.DOT = "dot", e.OTHER = "other", e))(o || {});
 let l = {
   heart: {
@@ -199,26 +199,26 @@ export function $$I4() {
       clusterName: function (e) {
         switch (e) {
           case o.HEART:
-            return _$$t("whiteboard.clustering.heart_stamp_cluster");
+            return getI18nString("whiteboard.clustering.heart_stamp_cluster");
           case o.DOT:
-            return _$$t("whiteboard.clustering.dot_stamp_cluster");
+            return getI18nString("whiteboard.clustering.dot_stamp_cluster");
           case o.PLUS_ONE:
-            return _$$t("whiteboard.clustering.plus_one_stamp_cluster");
+            return getI18nString("whiteboard.clustering.plus_one_stamp_cluster");
           case o.PROFILE:
-            return _$$t("whiteboard.clustering.face_stamp_cluster");
+            return getI18nString("whiteboard.clustering.face_stamp_cluster");
           case o.QUESTION:
-            return _$$t("whiteboard.clustering.question_mark_stamp_cluster");
+            return getI18nString("whiteboard.clustering.question_mark_stamp_cluster");
           case o.STAR:
-            return _$$t("whiteboard.clustering.star_stamp_cluster");
+            return getI18nString("whiteboard.clustering.star_stamp_cluster");
           case o.THUMBS_DOWN:
-            return _$$t("whiteboard.clustering.thumbs_down_stamp_cluster");
+            return getI18nString("whiteboard.clustering.thumbs_down_stamp_cluster");
           case o.THUMBS_UP:
-            return _$$t("whiteboard.clustering.thumbs_up_stamp_cluster");
+            return getI18nString("whiteboard.clustering.thumbs_up_stamp_cluster");
           case o.OTHER:
           default:
-            return _$$t("whiteboard.clustering.other_stamp_cluster");
+            return getI18nString("whiteboard.clustering.other_stamp_cluster");
           case null:
-            return _$$t("whiteboard.clustering.no_stamps_cluster");
+            return getI18nString("whiteboard.clustering.no_stamps_cluster");
         }
       }(n.stampType),
       messages: n.stickyThreadGuids,

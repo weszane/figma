@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
 import { getFeatureFlags } from "../905/601108";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { Ts } from "../figma_app/336853";
 import { d as _$$d } from "../905/762622";
 import { CH } from "../figma_app/805373";
@@ -88,7 +88,7 @@ function y(e) {
       })]
     }), t && jsx("p", {
       className: JH,
-      children: e.user.pendingRole ? tx("permissions_modal.autocomplete_permissions.invite_pending") : tx("permissions_modal.autocomplete_permissions.already_added")
+      children: e.user.pendingRole ? renderI18nText("permissions_modal.autocomplete_permissions.invite_pending") : renderI18nText("permissions_modal.autocomplete_permissions.already_added")
     })]
   });
 }
@@ -117,12 +117,12 @@ function b(e) {
               if (1 === e.length) return e[0];
               if (t <= e.length) {
                 let t = e.slice(0, -1);
-                return _$$t("permissions_modal.autocomplete_permissions.user_group_tooltip_less_than_10_members", {
+                return getI18nString("permissions_modal.autocomplete_permissions.user_group_tooltip_less_than_10_members", {
                   firstMembers: t.length > 1 ? t.join(", ") + "," : t[0],
                   lastMember: e[e.length - 1]
                 });
               }
-              return _$$t("permissions_modal.autocomplete_permissions.user_group_tooltip_more_than_10_members", {
+              return getI18nString("permissions_modal.autocomplete_permissions.user_group_tooltip_more_than_10_members", {
                 membersList: e.join(", "),
                 othersCount: t - e.length
               });
@@ -132,7 +132,7 @@ function b(e) {
           "data-tooltip-show-immediately": t,
           "data-tooltip-max-width": "300"
         }),
-        children: tx("permissions_modal.autocomplete_permissions.user_group_num_members", {
+        children: renderI18nText("permissions_modal.autocomplete_permissions.user_group_num_members", {
           count: e.userGroup.member_count
         })
       })]

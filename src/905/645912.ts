@@ -6,11 +6,11 @@ import { CNR, glU, qmM } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { s as _$$s } from "../905/583953";
 import { getSingletonSceneGraph } from "../905/700578";
-import { md } from "../figma_app/27355";
-import { sx } from "../905/449184";
-import { $D } from "../905/11";
+import { useAtomWithSubscription } from "../figma_app/27355";
+import { trackEventAnalytics } from "../905/449184";
+import { reportError } from "../905/11";
 import { Point } from "../905/736624";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { CZ } from "../905/294085";
 import { hO, G4, U2, d3, eQ } from "../figma_app/545293";
@@ -52,15 +52,15 @@ let D = _$$n((e, t, i, n) => {
 });
 export function $$L0(e, t) {
   let i = useDispatch();
-  let d = md(hO.currentSearchAtom);
-  let x = md(hO.currentCommunitySearchAtom);
-  let P = md(CZ);
-  let L = md(hO.sortByAtom);
+  let d = useAtomWithSubscription(hO.currentSearchAtom);
+  let x = useAtomWithSubscription(hO.currentCommunitySearchAtom);
+  let P = useAtomWithSubscription(CZ);
+  let L = useAtomWithSubscription(hO.sortByAtom);
   let F = X();
-  let M = md(dd);
+  let M = useAtomWithSubscription(dd);
   let j = TA();
   let U = dh();
-  let B = md(ze);
+  let B = useAtomWithSubscription(ze);
   let V = Jb();
   let G = _$$m();
   return useCallback(async ({
@@ -115,13 +115,13 @@ export function $$L0(e, t) {
         case "fig-file-fragment":
           f.fragment_file_key = n.file_key;
           f.sort_by = eQ(L);
-          sx("Fragment search result inserted", f, {
+          trackEventAnalytics("Fragment search result inserted", f, {
             forwardToDatadog: !0
           });
           break;
         case "hub-file-fragment":
           f.hub_file_id = n.hub_file_id;
-          sx("Fragment search result inserted", f, {
+          trackEventAnalytics("Fragment search result inserted", f, {
             forwardToDatadog: !0
           });
           break;
@@ -137,9 +137,9 @@ export function $$L0(e, t) {
         searchPosition: v.fragmentPosition
       });
     } catch (e) {
-      $D(_$$e.ML_PLATFORM, Error("Fragment search insert error: " + e.message));
+      reportError(_$$e.ML_PLATFORM, Error("Fragment search insert error: " + e.message));
       i(_$$F.enqueue({
-        message: _$$t("fragment_search.insert_toast_error"),
+        message: getI18nString("fragment_search.insert_toast_error"),
         error: !0
       }));
     }

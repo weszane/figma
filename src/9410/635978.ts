@@ -12,9 +12,9 @@ import h from "classnames";
 import { R7 } from "../905/508367";
 import { am } from "../figma_app/901889";
 import { M as _$$M } from "../figma_app/749682";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { _d } from "../figma_app/795674";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Uu, Dm } from "../figma_app/8833";
 import { Ib } from "../905/129884";
 import { vx, jJ, bb, _v, YC, TN, yG, zR, TJ, z9, BT, qD, sf, Ct, It, tS, xE, CN, Yq, CY, ct, gJ } from "../9410/269644";
@@ -79,7 +79,7 @@ export function $$j1({
   let es = useRef(void 0);
   let eo = useRef(void 0);
   useEffect(() => {
-    let e = (Ay.isIpad ? N : j) || Z || ei || !ea || h || et.current;
+    let e = (BrowserInfo.isIpad ? N : j) || Z || ei || !ea || h || et.current;
     J(e);
     clearTimeout(es?.current);
     e && (es.current = setTimeout(() => {
@@ -169,7 +169,7 @@ export function $$j1({
     children: jsx(_$$k, {
       size: "lg"
     })
-  }) : Ay.isIpad && a ? null : ee ? Y && !v ? eh : null : jsxs(Fragment, {
+  }) : BrowserInfo.isIpad && a ? null : ee ? Y && !v ? eh : null : jsxs(Fragment, {
     children: [H ? null : eh, jsxs("div", {
       className: m()(Uu, _v, !Y && YC),
       ref: Q,
@@ -191,7 +191,7 @@ export function $$j1({
         children: [!R && jsx(I, {
           isMaximized: a,
           toggleFullscreen: function () {
-            a || document.fullscreenElement ? R7.exitFullscreenFunc() : Ay.isIpad ? e && e.webkitEnterFullscreen && e.webkitEnterFullscreen() : t && R7.requestFullscreenFunc.call(t);
+            a || document.fullscreenElement ? R7.exitFullscreenFunc() : BrowserInfo.isIpad ? e && e.webkitEnterFullscreen && e.webkitEnterFullscreen() : t && R7.requestFullscreenFunc.call(t);
           }
         }), jsx(k, {
           rerender: el,
@@ -219,7 +219,7 @@ function I({
       onClick: t,
       className: TJ,
       htmlAttributes: {
-        "data-tooltip": e ? _$$t("whiteboard.video.minimize_tooltip") : _$$t("whiteboard.video.fullscreen_tooltip"),
+        "data-tooltip": e ? getI18nString("whiteboard.video.minimize_tooltip") : getI18nString("whiteboard.video.fullscreen_tooltip"),
         "data-tooltip-type": Ib.TEXT
       },
       children: jsx("span", {
@@ -240,7 +240,7 @@ function k({
   let c = useRef(1);
   let [h, f] = useState(t?.volume || 1);
   let g = t?.muted ?? !1;
-  let _ = o && !Ay.isIpad;
+  let _ = o && !BrowserInfo.isIpad;
   let y = useCallback(() => {
     t && (t.muted ? (t.muted = !1, t.volume = c.current, f(c.current), s()) : (t.volume > 0 && (c.current = t.volume), t.muted = !0, f(0), a()), e());
   }, [e, t, a, s]);
@@ -258,7 +258,7 @@ function k({
       htmlAttributes: {
         onMouseEnter: () => d(!0),
         onMouseLeave: () => d(!1),
-        "data-tooltip": g ? _$$t("whiteboard.video.unmute_tooltip") : _$$t("whiteboard.video.mute_tooltip"),
+        "data-tooltip": g ? getI18nString("whiteboard.video.unmute_tooltip") : getI18nString("whiteboard.video.mute_tooltip"),
         "data-tooltip-type": Ib.TEXT
       },
       children: jsx("span", {
@@ -352,7 +352,7 @@ function A({
   }, [c, l, d, s, u, t]);
   let g = Math.min(e / t * 100, 100);
   let _ = g > 0 ? 8 : 0;
-  Ay.safari && i && (g = 100);
+  BrowserInfo.safari && i && (g = 100);
   return jsx("div", {
     className: It,
     onPointerEnter: () => h(!0),

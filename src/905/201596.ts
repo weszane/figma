@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { Ez5 } from "../figma_app/763686";
 import { Rs } from "../figma_app/288654";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { rH } from "../figma_app/49598";
 import { to } from "../905/156213";
 import { DM } from "../905/889062";
@@ -88,17 +88,17 @@ export function $$k3(e, t, i, n) {
 export function $$R5(e) {
   if (e) switch (e) {
     case "UNKNOWN":
-      return t("general.error");
+      return getI18nString("general.error");
     case "CANNOT_EDIT_FILE":
-      return t("community.publish.hub_file_error.you_do_not_have_edit_permissions");
+      return getI18nString("community.publish.hub_file_error.you_do_not_have_edit_permissions");
     case "IS_DEFAULT_FILE":
-      return t("community.publish.hub_file_error.cannot_publish_default_files");
+      return getI18nString("community.publish.hub_file_error.cannot_publish_default_files");
     case "FILE_REQUIRES_PASSWORD":
-      return t("community.publish.hub_file_error.cannot_publish_password_protected_files");
+      return getI18nString("community.publish.hub_file_error.cannot_publish_password_protected_files");
     case "NO_ALLOWED_AUTHORS":
-      return t("community.permissions_modal_publish_tab.footer.publish_admins_only");
+      return getI18nString("community.permissions_modal_publish_tab.footer.publish_admins_only");
     case "CANNOT_PUBLISH_REMIX":
-      return t("community.publish.hub_file_error.remixes_unavailable_until_first_publish");
+      return getI18nString("community.publish.hub_file_error.remixes_unavailable_until_first_publish");
     default:
       throwTypeError(e);
   }

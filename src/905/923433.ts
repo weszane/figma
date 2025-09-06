@@ -12,7 +12,7 @@ import m from "classnames";
 import { L as _$$L } from "../905/210923";
 import { Pt } from "../figma_app/806412";
 import { Point } from "../905/736624";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { TI } from "../905/713722";
 import { RU, EU } from "../figma_app/740163";
 import { Kd, BQ, u as _$$u, t8 } from "../figma_app/852050";
@@ -93,7 +93,7 @@ export function $$z2(e) {
   let [_, y] = _$$L(e.variableValue, (t, i = zk.NO) => {
     e.onChange(t, i);
   });
-  let v = e.isInaccessible ? _$$t("variables.authoring_modal.table.inaccessible_variable_tooltip") : void 0;
+  let v = e.isInaccessible ? getI18nString("variables.authoring_modal.table.inaccessible_variable_tooltip") : void 0;
   let w = e.isOverridden ? G : _$$Fragment;
   switch (_.type) {
     case Z_n.STRING:
@@ -372,8 +372,8 @@ function W(e) {
       },
       recordingKey: Pt(e.recordingKey, "alias"),
       thumbnailValue: s,
-      tooltipOverride: e.isInaccessible ? _$$t("variables.authoring_modal.table.inaccessible_variable_tooltip") : void 0,
-      value: a?.name ?? _$$t("variables.missing_name"),
+      tooltipOverride: e.isInaccessible ? getI18nString("variables.authoring_modal.table.inaccessible_variable_tooltip") : void 0,
+      value: a?.name ?? getI18nString("variables.missing_name"),
       variableId: a?.node_id,
       variablePillContainerClassName: "variables_modal_value_input--aliasPillContainer--gavRS"
     })

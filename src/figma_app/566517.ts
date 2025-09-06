@@ -5,10 +5,10 @@ import { XJn, NfO, mKm, AZ4, Egt, oVz, juq } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { getSingletonSceneGraph, ReduxSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
-import { $D } from "../905/11";
-import { xi, ED } from "../905/714362";
+import { reportError } from "../905/11";
+import { logWarning, logDebug } from "../905/714362";
 import { XHR } from "../905/910117";
 import { Eo } from "../figma_app/80990";
 import { Ay as _$$Ay } from "../figma_app/432652";
@@ -199,7 +199,7 @@ async function j({
       await l;
     } catch (e) {
       if (e instanceof G1 && 500 > Iu(e)) return;
-      $D(_$$e.AI_GENERATION, e);
+      reportError(_$$e.AI_GENERATION, e);
     }
   }
 }
@@ -225,7 +225,7 @@ async function U({
   for (let n of E.parsedDefs) if ("IMAGE" === n.def.type) {
     let i = n.def.guidByParentComponentId[f.guid];
     if (!i) {
-      xi("first-draft", "Could not find an image guid on the main component", {
+      logWarning("first-draft", "Could not find an image guid on the main component", {
         instanceNodeId: e.guid,
         mainComponentId: f.guid,
         guidByParentComponentId: n.def.guidByParentComponentId
@@ -234,14 +234,14 @@ async function U({
     }
     let a = i === f.guid ? e.guid : uN(e.guid, i);
     if (!a) {
-      xi("first-draft", "No image sublayer found for", {
+      logWarning("first-draft", "No image sublayer found for", {
         guid: e.guid
       });
       continue;
     }
     let l = m.get(a);
     if (!l) {
-      xi("first-draft", "No image node found for", {
+      logWarning("first-draft", "No image node found for", {
         imageNodeId: a
       });
       continue;
@@ -249,13 +249,13 @@ async function U({
     let p = n.rawProp;
     let E = e.getSharedPluginData("jsx", p) ?? "";
     if (!E) {
-      xi("first-draft", "No description found for image", {
+      logWarning("first-draft", "No description found for image", {
         rawProp: p
       });
       continue;
     }
     let b = n.def.tagsByParentComponentId[f.guid];
-    if (ED("first-draft", "Adding image for node in instance", {
+    if (logDebug("first-draft", "Adding image for node in instance", {
       guid: l.guid,
       description: E,
       tags: b
@@ -289,7 +289,7 @@ async function U({
     y.push(I);
   }
   (await Promise.allSettled(y)).forEach(e => {
-    "rejected" !== e.status || e.reason instanceof G1 && 500 > Iu(e.reason) || $D(_$$e.AI_GENERATION, e.reason);
+    "rejected" !== e.status || e.reason instanceof G1 && 500 > Iu(e.reason) || reportError(_$$e.AI_GENERATION, e.reason);
   });
 }
 function B(e) {
@@ -303,7 +303,7 @@ function B(e) {
     if (!a?.mainComponent || !r.symbolId) continue;
     let o = t.get(r.symbolId);
     if (!o) {
-      xi("first_draft", "Could not find component for instance", {
+      logWarning("first_draft", "Could not find component for instance", {
         nodeId: e
       });
       continue;
@@ -322,7 +322,7 @@ function B(e) {
 }
 async function G(e) {
   if (!e.options.dsKitKey) {
-    $D(_$$e.AI_GENERATION, Error("Need to supply a design system kit to replace icons from"), {
+    reportError(_$$e.AI_GENERATION, Error("Need to supply a design system kit to replace icons from"), {
       extra: {
         nodeIds: e.nodeIds,
         dsKit: e.options.dsKitKey
@@ -331,7 +331,7 @@ async function G(e) {
     return;
   }
   let t = getSingletonSceneGraph();
-  let r = zl.get(_S);
+  let r = atomStoreManager.get(_S);
   for (let n of e.nodeIds) {
     let i = t.get(n);
     if (!i || "INSTANCE" !== i.type) continue;
@@ -392,7 +392,7 @@ let V = _$$n(async function ({
     description: r
   })).data.meta;
   if (!key) {
-    $D(_$$e.AI_GENERATION, Error("first-draft: Grouped components: Could not find component for grouped component"), {
+    reportError(_$$e.AI_GENERATION, Error("first-draft: Grouped components: Could not find component for grouped component"), {
       extra: {
         dsKit: e,
         iconDescription: r,
@@ -437,7 +437,7 @@ async function H({
         enableTsArrays: !!getFeatureFlags().first_draft_ts_arrays
       });
     } catch (e) {
-      $D(_$$e.AI_GENERATION, e, {
+      reportError(_$$e.AI_GENERATION, e, {
         extra: {
           nodeId: r.guid
         }
@@ -474,7 +474,7 @@ export async function $$z5({
         options: r
       });
     } catch (e) {
-      xi("first-draft", "Failed to insert icons", {
+      logWarning("first-draft", "Failed to insert icons", {
         e
       });
     }
@@ -505,7 +505,7 @@ export async function $$W1({
     try {
       await Promise.all(r.map(j));
     } catch (e) {
-      xi("first-draft", "Failed to insert images", {
+      logWarning("first-draft", "Failed to insert images", {
         e
       });
     }
@@ -513,7 +513,7 @@ export async function $$W1({
 }
 export function $$K4(e, t, r) {
   if (!getSingletonSceneGraph().get(e)) {
-    $D(_$$e.AI_GENERATION, Error("first-draft: Icons: Could not find containing node with id=containingNodeId"), {
+    reportError(_$$e.AI_GENERATION, Error("first-draft: Icons: Could not find containing node with id=containingNodeId"), {
       extra: {
         containingNodeId: e,
         ...r
@@ -540,7 +540,7 @@ export function $$Y0({
   instrumentationRef: d
 }) {
   if (!getSingletonSceneGraph().get(e)) {
-    $D(_$$e.AI_GENERATION, Error("First Draft: Add Images: Could not find containing node with id=containingNodeId"), {
+    reportError(_$$e.AI_GENERATION, Error("First Draft: Add Images: Could not find containing node with id=containingNodeId"), {
       extra: {
         containingNodeId: e
       }
@@ -564,7 +564,7 @@ export function $$$6({
 }) {
   let t = getSingletonSceneGraph();
   if (!t.get(e)) {
-    $D(_$$e.AI_GENERATION, Error("First Draft: Hide Empty Grid Rows: Could not find containing node with id=containingNodeId"), {
+    reportError(_$$e.AI_GENERATION, Error("First Draft: Hide Empty Grid Rows: Could not find containing node with id=containingNodeId"), {
       extra: {
         containingNodeId: e
       }
@@ -628,7 +628,7 @@ export async function $$q10(e, t, r, n) {
           XJn.detachGeneratedDesignPartial(t, n, r);
         });
       } catch (e) {
-        $D(_$$e.AI_GENERATION, e);
+        reportError(_$$e.AI_GENERATION, e);
       }
     } else l7.ai("first-draft-detach-generation", () => {
       XJn.detachGeneratedDesign(t, r);
@@ -758,13 +758,13 @@ export const tG = function e(t, r) {
       t.stackChildAlignSelf = "STRETCH";
       t.stackHorizontalLayoutSize = mKm.FILL_CONTAINER;
     } catch (e) {
-      $D(_$$e.AI_GENERATION, e);
+      reportError(_$$e.AI_GENERATION, e);
     }
     if (e?.getSharedPluginData("jsx", "type") === "HStack") try {
       t.stackChildAlignSelf = "STRETCH";
       t.stackVerticalLayoutSize = mKm.FILL_CONTAINER;
     } catch (e) {
-      $D(_$$e.AI_GENERATION, e);
+      reportError(_$$e.AI_GENERATION, e);
     }
   }), "FRAME" === t.type) for (let r of (l7.ai("first-draft-auto-fill-parent", () => {
     if ("VStack" === t.getSharedPluginData("jsx", "type")) {
@@ -781,10 +781,10 @@ export const tG = function e(t, r) {
           e.stackChildAlignSelf = "STRETCH";
           e.stackHorizontalLayoutSize = mKm.FILL_CONTAINER;
         } catch (e) {
-          $D(_$$e.AI_GENERATION, e);
+          reportError(_$$e.AI_GENERATION, e);
         }
       } catch (e) {
-        $D(_$$e.AI_GENERATION, e);
+        reportError(_$$e.AI_GENERATION, e);
       }
     }
     if ("HStack" === t.getSharedPluginData("jsx", "type")) {
@@ -797,10 +797,10 @@ export const tG = function e(t, r) {
           e.stackChildAlignSelf = "STRETCH";
           e.stackVerticalLayoutSize = mKm.FILL_CONTAINER;
         } catch (e) {
-          $D(_$$e.AI_GENERATION, e);
+          reportError(_$$e.AI_GENERATION, e);
         }
       } catch (e) {
-        $D(_$$e.AI_GENERATION, e);
+        reportError(_$$e.AI_GENERATION, e);
       }
     }
   }), t.childrenNodes)) e(r, {

@@ -1,8 +1,8 @@
 import { useSelector } from "../vendor/514228";
 import { c2 } from "../905/382883";
 import { xx } from "../figma_app/815945";
-import { sx } from "../905/449184";
-import { t as _$$t, Yd } from "../905/303541";
+import { trackEventAnalytics } from "../905/449184";
+import { getI18nString, getTranslatedDynamicContent } from "../905/303541";
 import { c as _$$c } from "../figma_app/11961";
 import { W_ } from "../figma_app/350203";
 import { G } from "../905/11536";
@@ -11,7 +11,7 @@ import { iZ } from "../905/372672";
 import { FTemplateCategoryType, FPublicationStatusType } from "../figma_app/191312";
 import { hasAdminRoleAccessOnTeam, canAdminOrg, hasOrgAccess, hasAdminRoleAccessOnTeam__DEPRECATED } from "../figma_app/642025";
 import { vt, Ug, bD } from "../figma_app/45218";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { aP } from "../figma_app/10554";
 import { jh } from "../figma_app/35887";
 import { $A } from "../905/862883";
@@ -33,12 +33,12 @@ export function $$S44(e) {
   };
 }
 export function $$v54(e, t) {
-  let r = _$$t("community.profiles.your_handle_text");
-  return e && 0 !== e.length ? e.length > 15 ? _$$t("community.profiles.profile_max_15_characters_in_length", {
+  let r = getI18nString("community.profiles.your_handle_text");
+  return e && 0 !== e.length ? e.length > 15 ? getI18nString("community.profiles.profile_max_15_characters_in_length", {
     errorStringPrefix: r
-  }) : /^[a-zA-Z0-9_]{1,15}$/.test(e) ? null : _$$t("community.profiles.profile_cannot_contain_special_characters", {
+  }) : /^[a-zA-Z0-9_]{1,15}$/.test(e) ? null : getI18nString("community.profiles.profile_cannot_contain_special_characters", {
     errorStringPrefix: r
-  }) : _$$t("community.publishing.profile_handle_cannot_be_empty", {
+  }) : getI18nString("community.publishing.profile_handle_cannot_be_empty", {
     errorStringPrefix: r
   });
 }
@@ -80,16 +80,16 @@ export let $$O37 = xx((e, t, r) => {
   let n;
   let i = t.plugins.fetchedResources;
   switch (e) {
-    case nT.Design:
+    case FEditorType.Design:
       n = $A.Design;
       break;
-    case nT.DevHandoff:
+    case FEditorType.DevHandoff:
       n = $A.Handoff;
       break;
-    case nT.Slides:
+    case FEditorType.Slides:
       n = $A.Slides;
       break;
-    case nT.Cooper:
+    case FEditorType.Cooper:
       n = $A.Cooper;
       break;
     default:
@@ -111,9 +111,9 @@ export function $$R0(e) {
   return $$O37(e.selectedView.editorType, e.recentlyUsed, e.localPlugins);
 }
 export function $$L25(e) {
-  if (!e) throw Error(_$$t("community.publishing.cover_image_not_found"));
-  if (0 > ["image/jpeg", "image/png"].indexOf(e.type)) throw Error(_$$t("community.publishing.cover_image_requirements"));
-  if (e.size > $$B22) throw Error(_$$t("community.publishing.cover_image_exceeds_max_size", {
+  if (!e) throw Error(getI18nString("community.publishing.cover_image_not_found"));
+  if (0 > ["image/jpeg", "image/png"].indexOf(e.type)) throw Error(getI18nString("community.publishing.cover_image_requirements"));
+  if (e.size > $$B22) throw Error(getI18nString("community.publishing.cover_image_exceeds_max_size", {
     maxResourceSize: Math.floor($$B22 / 1e6)
   }));
   return e.size;
@@ -123,16 +123,16 @@ export function $$P23(e, t) {
   return r?.tags || [];
 }
 export function $$$$D52(e) {
-  return Yd(e.i18n_meta?.text, e.text);
+  return getTranslatedDynamicContent(e.i18n_meta?.text, e.text);
 }
 export function $$k1(e) {
   return e.replace(/[\s_-]+/g, " ").trim().toLocaleLowerCase();
 }
 export function $$M58(e) {
-  return e.match(/^[\P{Script_Extensions=Common} _\-0-9]*$/gu) ? e.match(/^[\P{Script_Extensions=Common}0-9](.*[\P{Script_Extensions=Common}0-9])?$/gu) ? e.toLocaleLowerCase() !== e ? _$$t("community.publishing.tags_can_only_contain_lowercase_characters") : e.length > 25 ? _$$t("community.publishing.tags_can_only_have_up_to_25_characters") : e.match(/[ _-]{2,}/) ? _$$t("community.publishing.tags_cannot_have_consecutive_dashes_underscores_or_spaces") : (e.match(/[ _-]/g) || []).length > 2 ? _$$t("community.publishing.tags_cannot_be_longer_than_3_words") : null : _$$t("community.publishing.tags_must_begin_and_end_with_a_letter_or_number") : _$$t("community.publishing.tags_can_only_contain_certain_characters");
+  return e.match(/^[\P{Script_Extensions=Common} _\-0-9]*$/gu) ? e.match(/^[\P{Script_Extensions=Common}0-9](.*[\P{Script_Extensions=Common}0-9])?$/gu) ? e.toLocaleLowerCase() !== e ? getI18nString("community.publishing.tags_can_only_contain_lowercase_characters") : e.length > 25 ? getI18nString("community.publishing.tags_can_only_have_up_to_25_characters") : e.match(/[ _-]{2,}/) ? getI18nString("community.publishing.tags_cannot_have_consecutive_dashes_underscores_or_spaces") : (e.match(/[ _-]/g) || []).length > 2 ? getI18nString("community.publishing.tags_cannot_be_longer_than_3_words") : null : getI18nString("community.publishing.tags_must_begin_and_end_with_a_letter_or_number") : getI18nString("community.publishing.tags_can_only_contain_certain_characters");
 }
 export function $$F16(e) {
-  return e.length > $$Z9 ? _$$t("community.publishing.tagline_must_be_at_most_100_characters_long") : null;
+  return e.length > $$Z9 ? getI18nString("community.publishing.tagline_must_be_at_most_100_characters_long") : null;
 }
 let $$j30 = {
   name: "",
@@ -174,7 +174,7 @@ export function $$ee55(e) {
   return Q(e) === vt.HUB_FILE ? Ug.HUB_FILE : Q(e) === vt.WIDGET ? Ug.WIDGET : Ug.PLUGIN;
 }
 export function $$et12(e) {
-  return e >= $$q24 - 1 ? _$$t("community.publishing.cannot_have_more_than_max_publishers", {
+  return e >= $$q24 - 1 ? getI18nString("community.publishing.cannot_have_more_than_max_publishers", {
     MAX_PUBLISHERS_PER_RESOURCE: $$q24
   }) : null;
 }
@@ -361,7 +361,7 @@ let $$eC60 = {
   }]
 };
 export function $$ew43(e, t) {
-  sx(W_.PROFILE_ADMIN_MENU_OPEN, {
+  trackEventAnalytics(W_.PROFILE_ADMIN_MENU_OPEN, {
     source: e,
     view: t
   });

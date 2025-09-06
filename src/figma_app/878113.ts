@@ -6,13 +6,13 @@ import { glU, zvt } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { zl, fp } from "../figma_app/27355";
+import { atomStoreManager, useAtomValueAndSetter } from "../figma_app/27355";
 import { oy } from "../figma_app/964367";
 import { debugState } from "../905/407919";
-import { M4 } from "../905/609396";
-import { $D, kF } from "../905/11";
+import { Timer } from "../905/609396";
+import { reportError, setSentryTag } from "../905/11";
 import g, { s as _$$s } from "../cssbuilder/589278";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { on, Gc } from "../figma_app/456871";
 import { ds } from "../figma_app/314264";
 import { c6 } from "../figma_app/432652";
@@ -93,7 +93,7 @@ export async function $$M0({
   onTasksUpdate: r
 }) {
   let n;
-  let p = new M4();
+  let p = new Timer();
   p.start();
   let {
     state,
@@ -117,7 +117,7 @@ export async function $$M0({
   } = pP(featureType);
   let W = debugState.getState();
   let K = W.openFile?.key;
-  let Y = zl.get(dd);
+  let Y = atomStoreManager.get(dd);
   let $ = targets.reduce((e, t) => e + t.effectiveText.length, 0);
   let X = {
     numLayers: targets.length,
@@ -170,7 +170,7 @@ export async function $$M0({
   let Q = new Map();
   let ee = [];
   if (featureType === JT.CONTENT_FILL) {
-    let e = new M4();
+    let e = new Timer();
     e.start();
     let t = targets.map(e => e.node);
     let r = await xb(t);
@@ -219,7 +219,7 @@ export async function $$M0({
   let ei = null;
   try {
     let e;
-    let i = new M4();
+    let i = new Timer();
     i.start();
     let a = {
       ...Ay(),
@@ -301,7 +301,7 @@ export async function $$M0({
         t();
         mg(aiTrackingContext);
       });
-    } else $D(_$$e.AI_PRODUCTIVITY, Error("Text tools commit failed unexpectedly"));
+    } else reportError(_$$e.AI_PRODUCTIVITY, Error("Text tools commit failed unexpectedly"));
   } catch (t) {
     clearAllLoadingStates();
     Z = Z.map(e => e.state !== z8.SUCCEEDED ? {
@@ -312,7 +312,7 @@ export async function $$M0({
     r && r(Z);
     let e = t;
     featureType === JT.SLIDES_REWRITE_TEXT && t instanceof G1 && (e = Gx(t));
-    "reportToSentry" in e && !e.reportToSentry || (kF("text_feature_type", X.featureType), $D(_$$e.AI_PRODUCTIVITY, e, {
+    "reportToSentry" in e && !e.reportToSentry || (setSentryTag("text_feature_type", X.featureType), reportError(_$$e.AI_PRODUCTIVITY, e, {
       extra: {
         ...X,
         numberOfNodes: targets.length
@@ -344,9 +344,9 @@ export function $$F1({
     start,
     stop
   } = p;
-  let [, m] = fp(Q8);
-  let [g, f] = fp(F3);
-  let [y, b] = fp(DZ);
+  let [, m] = useAtomValueAndSetter(Q8);
+  let [g, f] = useAtomValueAndSetter(F3);
+  let [y, b] = useAtomValueAndSetter(DZ);
   function T() {
     l7.ai(c, () => {
       if (g) {
@@ -418,9 +418,9 @@ export function $$j5(e, t) {
   } = t;
   let a = i2();
   let s = getSingletonSceneGraph().getCurrentPage()?.directlySelectedNodes;
-  let o = t.instruction ?? tx("ai_text_tools.selection_instruction");
+  let o = t.instruction ?? renderI18nText("ai_text_tools.selection_instruction");
   if (onlyAllowSingular && a && (0 === a.length || a.length > 1 || "TEXT" !== a[0].type)) return o;
-  if (a?.length === 0 && s && s?.length > 0) return tx("fullscreen_actions.ai_content_fill.select_items_in_one_breakpoint");
+  if (a?.length === 0 && s && s?.length > 0) return renderI18nText("fullscreen_actions.ai_content_fill.select_items_in_one_breakpoint");
   let l = Gc(a, {
     allowEmpty: !0,
     excludeLockedNodes: !0
@@ -432,7 +432,7 @@ export function $$j5(e, t) {
     gap: 8,
     children: [jsx("span", {
       className: _$$s.textBodyMediumStrong.$,
-      children: tx("ai_text_tools.select_fewer_characters")
+      children: renderI18nText("ai_text_tools.select_fewer_characters")
     }), jsx("span", {
       className: _$$s.textBodyMedium.colorTextSecondary.$,
       children: `${c.toLocaleString()} / ${4e4.toLocaleString()}`
@@ -440,7 +440,7 @@ export function $$j5(e, t) {
   });
   if (e?.length && a?.length && t.onlyAllowSingleTLF) {
     let t = e[0]?.findContainingTopLevelFrameOrSelf();
-    for (let r of e ?? []) if (t !== r.findContainingTopLevelFrameOrSelf()) return tx("fullscreen_actions.ai_content_fill.select_items_in_same_tlf");
+    for (let r of e ?? []) if (t !== r.findContainingTopLevelFrameOrSelf()) return renderI18nText("fullscreen_actions.ai_content_fill.select_items_in_same_tlf");
   }
   return o;
 }

@@ -1,5 +1,5 @@
 import { useSelector } from "../vendor/514228";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { ow } from "../figma_app/976749";
 import { VF } from "../figma_app/864723";
 import { q } from "../905/924253";
@@ -14,7 +14,7 @@ export function $$$$_0() {
   let r = L();
   let _ = aV();
   let h = iZ();
-  let m = md(VF);
+  let m = useAtomWithSubscription(VF);
   let g = q();
   let f = useSelector(e => e.mirror?.appModel.isReadOnly);
   let E = z();

@@ -4,9 +4,9 @@ import { f as _$$f } from "../905/167712";
 import { _ as _$$_ } from "../905/410717";
 import { j as _$$j } from "../905/519202";
 import { RR } from "../figma_app/338442";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { Pt } from "../figma_app/806412";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Y5 } from "../figma_app/455680";
 import { gl, oV } from "../905/216495";
 import { lJ } from "../905/275640";
@@ -29,7 +29,7 @@ export function $$S0(e) {
   let {
     isDefReferencedBySelection,
     visibilityIsBoundToComponentProp
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     isDefReferencedBySelection: !!s(e, RR.VISIBLE),
     visibilityIsBoundToComponentProp: v(e, Sh(e), RR.VISIBLE)
   }));
@@ -45,7 +45,7 @@ export function $$S0(e) {
   let L = !!consumedVariable && !!P;
   let R = L || visibilityIsBoundToComponentProp || isDefReferencedBySelection;
   let O = !L && !visibilityIsBoundToComponentProp && w.length > 0;
-  let D = T ? _$$t("fullscreen.properties_panel.tooltip_hide") : _$$t("fullscreen.properties_panel.tooltip_show");
+  let D = T ? getI18nString("fullscreen.properties_panel.tooltip_hide") : getI18nString("fullscreen.properties_panel.tooltip_show");
   return jsx("div", {
     className: RK,
     children: jsx(JQ, {

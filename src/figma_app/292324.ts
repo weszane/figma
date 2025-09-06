@@ -1,9 +1,9 @@
 import { useState, useCallback, useEffect } from "react";
 import { useDispatch } from "../vendor/514228";
-import { eU } from "../figma_app/27355";
+import { atom } from "../figma_app/27355";
 import { O5 } from "../figma_app/632319";
 import { mt } from "../figma_app/102712";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { nF } from "../905/350402";
 import { sf } from "../905/929976";
 import { _P } from "../figma_app/2590";
@@ -153,24 +153,24 @@ export function $$A3(e, t) {
 export function $$x1(e, t) {
   switch (e) {
     case "ACTUAL_SIZE":
-      return t ? _$$t("viewer.options_menu.actual_size_100_with_device", {
+      return t ? getI18nString("viewer.options_menu.actual_size_100_with_device", {
         zoomAmount: 100
-      }) : _$$t("viewer.options_menu.actual_size_100", {
+      }) : getI18nString("viewer.options_menu.actual_size_100", {
         zoomAmount: 100
       });
     case "FIT_TO_SCREEN":
-      return t ? _$$t("viewer.options_menu.fit_to_screen_with_device") : _$$t("viewer.options_menu.fit_width_and_height");
+      return t ? getI18nString("viewer.options_menu.fit_to_screen_with_device") : getI18nString("viewer.options_menu.fit_width_and_height");
     case "FIT_WIDTH":
-      return _$$t("viewer.options_menu.fit_width");
+      return getI18nString("viewer.options_menu.fit_width");
     case "FILL_SCREEN":
-      return t ? _$$t("viewer.options_menu.fill_screen_with_device") : _$$t("viewer.options_menu.fill_screen");
+      return t ? getI18nString("viewer.options_menu.fill_screen_with_device") : getI18nString("viewer.options_menu.fill_screen");
     case "RESPONSIVE":
-      return _$$t("viewer.options_menu.responsive");
+      return getI18nString("viewer.options_menu.responsive");
     default:
       return "";
   }
 }
-eU(4);
+atom(4);
 export const Ac = $$v0;
 export const GP = $$x1;
 export const IK = $$E2;

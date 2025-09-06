@@ -742,13 +742,13 @@ export interface PluginRuntimeOptions {
 export interface PluginOptions {
   apiMode: {
     type: string
-    uiHandle: any
-    noOpUI: any
+    uiHandle?: any
+    noOpUI?: any
   }
   incrementalSafeApi: boolean
-  sceneGraph: SceneGraph
+  sceneGraph?: SceneGraph
   stats: any
-  allowIncrementalUnsafeApiCalls: boolean
+  allowIncrementalUnsafeApiCalls?: boolean
   pluginID: string
   pluginVersionID: string
   userID: string
@@ -758,14 +758,14 @@ export interface PluginOptions {
   enableProposedApi: boolean
   enableResponsiveSetHierarchyMutations: boolean
   isPluginExemptFromPluginDataLimits: boolean
-  triggeredFrom: string
+  triggeredFrom?: any
   addShutdownAction: Fn
-  html: string
+  html: any
   titleIconURL: string
   name: string
   command: string
   allowedDomains: string[]
-  code: string
+  code?: string
   isLocal: boolean
   parameterValues?: Record<string, string>
   capabilities: string[]

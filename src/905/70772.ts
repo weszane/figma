@@ -6,7 +6,7 @@ import { H0 } from "../figma_app/191804";
 import { Point } from "../905/736624";
 import { Jn } from "../905/17223";
 import { i as _$$i, C as _$$C } from "../905/64217";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { $ } from "../905/355181";
 import { j7 } from "../905/929976";
@@ -42,7 +42,7 @@ function v(e) {
         onKeyDown: t => {
           "Enter" === t.key && (e.onEnter(), t.preventDefault());
         },
-        placeholder: _$$t("comments.add_description"),
+        placeholder: getI18nString("comments.add_description"),
         autoComplete: "off",
         autoCapitalize: "off",
         ref: inputRef,
@@ -54,14 +54,14 @@ function v(e) {
             className: e.canEdit ? "alt_text_editor--text--GIG6O" : "alt_text_editor--extendedText--s3rKT alt_text_editor--text--GIG6O",
             children: [jsx("span", {
               className: "alt_text_editor--label--dv8rN",
-              children: _$$t("comments.alt_text_label")
+              children: getI18nString("comments.alt_text_label")
             }), text]
           })
         }), e.canEdit && jsx("button", {
           className: "alt_text_editor--button--WSr1m",
           onClick: () => s(!0),
           autoFocus: !0,
-          children: _$$t("comments.edit_alt_text")
+          children: getI18nString("comments.edit_alt_text")
         })]
       })
     })
@@ -147,14 +147,14 @@ export let $$k0 = Ju(function (e) {
       let n = H.current.value.trim();
       (n || e) && onUpdateAltText(n, i).then(e => {
         e && (200 !== e.status ? t(_$$F.enqueue({
-          message: _$$t("comments.failed_to_update_alt_text")
+          message: getI18nString("comments.failed_to_update_alt_text")
         })) : D(e => (e[i] = {
           ...e[i],
           altText: n
         }, e)));
       }).catch(e => {
         t(_$$F.enqueue({
-          message: _$$t("comments.failed_to_update_alt_text")
+          message: getI18nString("comments.failed_to_update_alt_text")
         }));
       });
     }
@@ -175,15 +175,15 @@ export let $$k0 = Ju(function (e) {
             className: "attachment_detail_modal--headerContainer--fMrIM",
             children: [jsx("div", {
               className: "attachment_detail_modal--headerTitle--2r0B0",
-              children: O[i].metadata.file_name ?? _$$t("comments.attachment_default_name", {
+              children: O[i].metadata.file_name ?? getI18nString("comments.attachment_default_name", {
                 fileExtension: O[i].mediaType.split("/")[1]
               })
             }), jsx(Jn, {
               className: "attachment_detail_modal--headerCloseButton--Ueo20",
               recordingKey: "commentMediaDetailModal",
               onClick: G,
-              innerText: _$$t("comments.close"),
-              "aria-label": _$$t("comments.close")
+              innerText: getI18nString("comments.close"),
+              "aria-label": getI18nString("comments.close")
             })]
           }), jsxs("div", {
             className: "attachment_detail_modal--selectedContent--k1QBv",
@@ -197,11 +197,11 @@ export let $$k0 = Ju(function (e) {
             }), !!getFeatureFlags().comments_media_alt_text && (e.canEdit || O[i].altText) && jsx("button", {
               className: O.length > 1 ? "attachment_detail_modal--altTextAboveThumbnails--wloH- attachment_detail_modal--altText--n00JY feed_post_detail_modal--contentOverlayPill--1jsoj" : "attachment_detail_modal--altText--n00JY feed_post_detail_modal--contentOverlayPill--1jsoj",
               "data-tooltip-type": Ib.TEXT,
-              "data-tooltip": k ? void 0 : _$$t("comments.add_description"),
+              "data-tooltip": k ? void 0 : getI18nString("comments.add_description"),
               "data-tooltip-show-above": !0,
               onClick: () => k ? K(O[i].altText) : W(),
               ref: N,
-              children: _$$t("comments.alt_text")
+              children: getI18nString("comments.alt_text")
             })]
           }), O.length > 1 && jsxs("div", {
             className: "attachment_detail_modal--thumbnailSection--C-v-e",
@@ -212,7 +212,7 @@ export let $$k0 = Ju(function (e) {
                 className: "attachment_detail_modal--thumbnailWrapper--1zB3U",
                 children: jsx(_$$M, {
                   thumbnailUrl: e.thumbnailUrl,
-                  altText: e.altText || _$$t("comments.attachment_thumbnail_alt_text_default"),
+                  altText: e.altText || getI18nString("comments.attachment_thumbnail_alt_text_default"),
                   isSelected: t === i,
                   onClick: e => {
                     j(t);

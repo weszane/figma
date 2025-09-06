@@ -4,7 +4,7 @@ import { lQ } from "../905/934246";
 import { Z_n, rXF, rcl } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Jo, If } from "../figma_app/565242";
 import { _j } from "../figma_app/843119";
 import { oj, Hb } from "../figma_app/986594";
@@ -108,7 +108,7 @@ export function $$b0({
   if (!U() || !selectedNodes || 0 === selectedNodes.length) return null;
   let R = null == collection || wv(t);
   if (!k || R) {
-    let e = R ? _$$t("cms_specs.to_update_connections_must_be_in_cms_container") : _$$t("cms_specs.to_update_connections_all_selected");
+    let e = R ? getI18nString("cms_specs.to_update_connections_must_be_in_cms_container") : getI18nString("cms_specs.to_update_connections_all_selected");
     return jsx("div", {
       style: {
         height: "160px",

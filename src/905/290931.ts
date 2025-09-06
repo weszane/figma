@@ -1,7 +1,7 @@
 import { useCallback } from "react";
-import { fp } from "../figma_app/27355";
+import { useAtomValueAndSetter } from "../figma_app/27355";
 export function $$$$a0(e, t) {
-  let [i, a] = fp(e);
+  let [i, a] = useAtomValueAndSetter(e);
   let s = useCallback(e => {
     let n = new Set([t(e).trim()]);
     let r = [e];

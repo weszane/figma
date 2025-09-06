@@ -11,13 +11,13 @@ import { R as _$$R } from "../905/649743";
 import { i as _$$i } from "../905/22844";
 import { t2E, CWU, rrT, m1T, rXF } from "../figma_app/763686";
 import { l7, nc } from "../905/189185";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { C as _$$C } from "../905/108595";
 import { Pt } from "../figma_app/806412";
 import { k as _$$k } from "../905/582200";
 import { L as _$$L } from "../905/408237";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t2, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Y5 } from "../figma_app/455680";
 import { Ep } from "../figma_app/504823";
 import { Ku } from "../figma_app/740163";
@@ -56,9 +56,9 @@ function Y() {
   return jsx(_$$K, {
     actionOnPointerDown: !0,
     onClick: t2E?.rotateGradient90Degrees,
-    "aria-label": _$$t2("fullscreen.properties_panel.gradient_picker.rotate_90"),
+    "aria-label": getI18nString("fullscreen.properties_panel.gradient_picker.rotate_90"),
     htmlAttributes: {
-      "data-tooltip": _$$t2("fullscreen.properties_panel.gradient_picker.rotate_90"),
+      "data-tooltip": getI18nString("fullscreen.properties_panel.gradient_picker.rotate_90"),
       "data-tooltip-type": Ib.TEXT
     },
     children: jsx(_$$R, {})
@@ -72,7 +72,7 @@ function $({
   }), [e]);
   return e ? jsx(_$$K, {
     onClick: t,
-    "aria-label": _$$t2("slides.properties_panel.color_picker.delete_template_color"),
+    "aria-label": getI18nString("slides.properties_panel.color_picker.delete_template_color"),
     children: jsx(_$$i, {})
   }) : null;
 }
@@ -127,7 +127,7 @@ export function $$J0({
   let O = useMemo(() => {
     if (w) return aZ(rrT.FILL, w);
   }, [w]);
-  let R = md(E_);
+  let R = useAtomWithSubscription(E_);
   let L = useMemo(() => new Set(), []);
   let P = useCallback(() => {
     C === m1T.GRADIENT && Y5.triggerAction("leave-edit-mode");
@@ -135,7 +135,7 @@ export function $$J0({
   }, [C, r]);
   let D = "slidesCustomColorPicker";
   let k = bn(e.type);
-  let M = R ? _$$t2("slides.properties_panel.text_style.edit_template_color") : k ? _$$t2("slides.properties_panel.fill.fill_type_gradient") : _$$t2("slides.properties_panel.fill.fill_type_color");
+  let M = R ? getI18nString("slides.properties_panel.text_style.edit_template_color") : k ? getI18nString("slides.properties_panel.fill.fill_type_gradient") : getI18nString("slides.properties_panel.fill.fill_type_color");
   return jsx(_$$k, {
     name: "slides_custom_color_picker",
     children: jsx(bL, {
@@ -157,10 +157,10 @@ export function $$J0({
               manager: A,
               children: [jsx(_$$t.Tab, {
                 ...T.custom_color,
-                children: tx("fullscreen.properties_panel.color_picker.custom")
+                children: renderI18nText("fullscreen.properties_panel.color_picker.custom")
               }), jsx(_$$t.Tab, {
                 ...T.library,
-                children: tx("fullscreen.properties_panel.color_picker.libraries")
+                children: renderI18nText("fullscreen.properties_panel.color_picker.libraries")
               })]
             }), jsx(X, {
               paint: e,
@@ -271,11 +271,11 @@ function Q({
 }) {
   let i = [{
     type: 0,
-    label: _$$t2("slides.properties_panel.color_picker.color_toggle"),
+    label: getI18nString("slides.properties_panel.color_picker.color_toggle"),
     optionRecordingKey: "color"
   }, {
     type: 1,
-    label: _$$t2("slides.properties_panel.color_picker.gradient_toggle"),
+    label: getI18nString("slides.properties_panel.color_picker.gradient_toggle"),
     optionRecordingKey: "gradient"
   }];
   return jsx("div", {
@@ -298,7 +298,7 @@ function Q({
 function ee({
   recordingKey: e
 }) {
-  let t = md(E_);
+  let t = useAtomWithSubscription(E_);
   let r = tZ(t?.varId);
   let [a, s] = useState(r ?? "");
   useEffect(() => {
@@ -312,7 +312,7 @@ function ee({
     className: _$$s.px16.py12.flex.itemsCenter.bt1.bSolid.colorBorder.$,
     children: [jsx("span", {
       className: _$$s.colorTextSecondary.textBodyMedium.w64.$,
-      children: tx("slides.properties_panel.color_picker.rename_color_label")
+      children: renderI18nText("slides.properties_panel.color_picker.rename_color_label")
     }), jsx(_$$L, {
       ref: o,
       className: Kv,
@@ -326,7 +326,7 @@ function ee({
       onKeyDown: e => {
         ("Enter" === e.key || "Escape" === e.key) && o.current?.blur();
       },
-      placeholder: _$$t2("slides.properties_panel.color_picker.rename_color_placeholder"),
+      placeholder: getI18nString("slides.properties_panel.color_picker.rename_color_placeholder"),
       recordingKey: e,
       value: a
     })]

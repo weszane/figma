@@ -1,5 +1,5 @@
 import { assert, throwTypeError } from "../figma_app/465776";
-import { Iz, eU } from "../figma_app/27355";
+import { createRemovableAtomFamily, atom } from "../figma_app/27355";
 import { resourceUtils } from "../905/989992";
 import { oE } from "../905/953718";
 import { A } from "../905/920142";
@@ -38,7 +38,7 @@ function h(e) {
   if (e.localStorageName) return new C5(e);
   throw Error("[Curator]: Lifecycle must have either a user flag name or a local storage name");
 }
-export let $$g2 = Iz(e => e ? h(e).getLifecycleAtom() : eU(m));
+export let $$g2 = createRemovableAtomFamily(e => e ? h(e).getLifecycleAtom() : atom(m));
 export function $$f3(e) {
   h(e).incrementLifecycleCounter();
 }

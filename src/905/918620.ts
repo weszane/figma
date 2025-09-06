@@ -1,7 +1,7 @@
 import { useMemo, useEffect } from "react";
 import { useSelector } from "../vendor/514228";
 import { AD } from "../905/871411";
-import { R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { Rs } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { L8 } from "../905/760074";
@@ -66,7 +66,7 @@ export function $$_2() {
   });
 }
 export function $$A5() {
-  return R(e => {
+  return selectWithShallowEqual(e => {
     let t = s5(e.selectedView);
     if (t && t !== AD) {
       let i = e.mirror?.sceneGraph.get(t);

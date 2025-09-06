@@ -1,6 +1,6 @@
 import { isNotNullish } from "../figma_app/95419";
 import { l as _$$l } from "../905/716947";
-import { eU } from "../figma_app/27355";
+import { atom } from "../figma_app/27355";
 import { oA } from "../905/723791";
 import { Z } from "../905/296690";
 import { yV } from "../figma_app/516028";
@@ -8,7 +8,7 @@ import { gDr, bEy } from "../figma_app/43951";
 import { LM } from "../figma_app/951233";
 import { Oe } from "../figma_app/336853";
 import { Me } from "../figma_app/598018";
-let $$m4 = eU(e => {
+let $$m4 = atom(e => {
   let t = (() => {
     let t = e(Z);
     let i = e(yV);
@@ -26,11 +26,11 @@ let $$m4 = eU(e => {
   }));
   return i.data?.workspace ?? void 0;
 });
-let $$h3 = eU(e => {
+let $$h3 = atom(e => {
   let t = e($$m4);
   return A(t?.approvedLibraries ?? []);
 });
-let $$g2 = eU(e => {
+let $$g2 = atom(e => {
   let t = e(Z);
   if (!t || !Oe(t)) return new Set([]);
   let i = e(bEy.Query({
@@ -38,7 +38,7 @@ let $$g2 = eU(e => {
   }));
   return A(i.data?.org?.approvedLibraries ?? []);
 });
-let $$f0 = eU(e => {
+let $$f0 = atom(e => {
   {
     let t = e(Z);
     let i = e(LM);
@@ -49,7 +49,7 @@ let $$f0 = eU(e => {
     return n.data?.workspace ?? void 0;
   }
 });
-let $$_1 = eU(e => {
+let $$_1 = atom(e => {
   let t = e($$f0);
   return A(t?.approvedLibraries ?? []);
 });

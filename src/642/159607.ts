@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { n as _$$n } from '../905/64411';
 import { getResourceDataOrFallback } from '../905/419236';
 import { l as _$$l } from '../905/716947';
-import { md } from '../figma_app/27355';
+import { useAtomWithSubscription } from '../figma_app/27355';
 import { qd } from '../figma_app/39751';
 import { fy7 } from '../figma_app/43951';
 import { M } from '../figma_app/155411';
@@ -15,7 +15,7 @@ export function $$m0() {
   let s = useSelector(e => e.loadingState);
   let m = n1();
   let g = qd(m);
-  let f = md(fy7.Query({
+  let f = useAtomWithSubscription(fy7.Query({
     group: M()
   }));
   let x = je();

@@ -1,8 +1,8 @@
 import { getFeatureFlags } from "../905/601108";
-import { eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 let $$a0 = {
   getFeatureFlags: () => getFeatureFlags(),
-  desktopAppGetAPIVersion: () => eD ? eD.getVersion() : 0
+  desktopAppGetAPIVersion: () => desktopAPIInstance ? desktopAPIInstance.getVersion() : 0
 };
 let s = {};
 export function $$o2(e, t) {

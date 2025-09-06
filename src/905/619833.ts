@@ -1,5 +1,5 @@
 import { Ju } from "../905/102752";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { h } from "../905/142086";
 import { to } from "../905/156213";
 import { jsx } from "react/jsx-runtime";
@@ -34,9 +34,9 @@ export function $$u0({
   t(to({
     type: d,
     data: {
-      title: _$$t("templates.confirmation.move_from_drafts.title"),
-      content: _$$t("templates.confirmation.move_from_drafts.description"),
-      confirmText: _$$t("templates.confirmation.move_from_drafts.button"),
+      title: getI18nString("templates.confirmation.move_from_drafts.title"),
+      content: getI18nString("templates.confirmation.move_from_drafts.description"),
+      confirmText: getI18nString("templates.confirmation.move_from_drafts.button"),
       destructive: !1,
       onConfirm: i => {
         i.preventDefault();

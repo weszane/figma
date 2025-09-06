@@ -7,13 +7,13 @@ import { A as _$$A } from "../905/891805";
 import { t as _$$t } from "../905/947268";
 import { Z } from "../905/498136";
 import { e as _$$e } from "../905/295932";
-import { eU, fp } from "../figma_app/27355";
+import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { Ay } from "../figma_app/272902";
 import { useStorageEventSync } from "../905/657224";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { Zl } from "../905/211621";
 import { X3, MM } from "../figma_app/236327";
-import { t as _$$t2, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { oB, j7 } from "../905/929976";
 import { fG } from "../figma_app/91703";
@@ -63,7 +63,7 @@ let $$k2 = forwardRef(function ({
         onClick: v,
         "aria-expanded": _,
         ref: Ay(u, c),
-        "aria-label": _$$t2("design_systems.instance_swap_picker.settings"),
+        "aria-label": getI18nString("design_systems.instance_swap_picker.settings"),
         "aria-haspopup": "listbox",
         htmlAttributes: {
           "data-testid": "instance-swapper-settings-button"
@@ -117,7 +117,7 @@ function R({
   let F = useCallback(() => {
     let e = !N;
     O(e);
-    az.trackDefinedEvent("instance_swap_picker.toggle_show_folders", {
+    analyticsEventManager.trackDefinedEvent("instance_swap_picker.toggle_show_folders", {
       sessionId: s,
       showFolders: e,
       ...m,
@@ -154,21 +154,21 @@ function R({
     children: [jsxs(MM, {
       checked: !C,
       onClick: M,
-      children: [jsx(_$$t, {}), tx("design_systems.instance_swap_picker.grid")]
+      children: [jsx(_$$t, {}), renderI18nText("design_systems.instance_swap_picker.grid")]
     }, "grid"), jsxs(MM, {
       checked: C,
       onClick: j,
-      children: [jsx(Z, {}), tx("design_systems.instance_swap_picker.list")]
+      children: [jsx(Z, {}), renderI18nText("design_systems.instance_swap_picker.list")]
     }, "list"), !!t && jsxs(MM, {
       checked: N,
       onClick: U,
-      children: [jsx(_$$e, {}), tx("design_systems.instance_swap_picker.show_subfolders")]
+      children: [jsx(_$$e, {}), renderI18nText("design_systems.instance_swap_picker.show_subfolders")]
     }, "subfolders")]
   });
 }
-let N = eU(!0);
+let N = atom(!0);
 export function $$P0() {
-  let [e, t] = fp(N);
+  let [e, t] = useAtomValueAndSetter(N);
   let i = useCallback(e => "instance-swapper-show-folders" === e.key && null != e.newValue, []);
   let n = useCallback(i => {
     if (i) try {

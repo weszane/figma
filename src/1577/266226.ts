@@ -10,7 +10,7 @@ import { L as _$$L } from "../1577/392861";
 import { i as _$$i } from "../905/22844";
 import { IT } from "../figma_app/566371";
 import { $z } from "../figma_app/617427";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Y } from "../905/830372";
 import { $O } from "../905/156213";
 import { fu } from "../figma_app/831799";
@@ -35,8 +35,8 @@ let I = Ju(function ({
   let t = useDispatch();
   return jsx(yX, {
     size: 300,
-    confirmText: _$$t("whiteboard.color_palettes.modal.delete_color_palette_button"),
-    confirmationTitle: _$$t("whiteboard.color_palettes.modal.delete_color_palette_confirmation_modal_title"),
+    confirmText: getI18nString("whiteboard.color_palettes.modal.delete_color_palette_button"),
+    confirmationTitle: getI18nString("whiteboard.color_palettes.modal.delete_color_palette_confirmation_modal_title"),
     popStack: !0,
     destructive: !0,
     onConfirm: () => {
@@ -44,7 +44,7 @@ let I = Ju(function ({
     },
     children: jsx("div", {
       className: jE,
-      children: tx("whiteboard.color_palettes.modal.delete_color_palette_confirmation_modal_content")
+      children: renderI18nText("whiteboard.color_palettes.modal.delete_color_palette_confirmation_modal_content")
     })
   });
 }, "DeleteColorPaletteConfirmationModal");
@@ -58,11 +58,11 @@ let M = Ju(function ({
   r || console.error("No team name found for team id", o);
   return jsx(yX, {
     size: 360,
-    confirmationTitle: _$$t("whiteboard.color_palettes.make_default_confirmation_modal.title"),
-    confirmText: _$$t("whiteboard.color_palettes.make_default_confirmation_modal.confirm_button"),
-    content: _$$t("whiteboard.color_palettes.make_default_confirmation_modal.description", {
+    confirmationTitle: getI18nString("whiteboard.color_palettes.make_default_confirmation_modal.title"),
+    confirmText: getI18nString("whiteboard.color_palettes.make_default_confirmation_modal.confirm_button"),
+    content: getI18nString("whiteboard.color_palettes.make_default_confirmation_modal.description", {
       teamName: r,
-      paletteName: e || _$$t("whiteboard.color_palettes.make_default_confirmation_modal.this_palette")
+      paletteName: e || getI18nString("whiteboard.color_palettes.make_default_confirmation_modal.this_palette")
     }),
     onConfirm: () => {
       t === fJ ? In(o, i) : dq(o, t, i);
@@ -77,7 +77,7 @@ function L({
 }) {
   let o = useDispatch();
   let r = e.uuid === fJ;
-  let l = e.name || _$$t("whiteboard.color_palettes.unnamed_palette");
+  let l = e.name || getI18nString("whiteboard.color_palettes.unnamed_palette");
   return jsxs(Y, {
     width: "fill-parent",
     direction: "vertical",
@@ -89,7 +89,7 @@ function L({
         children: l
       }), e.isTeamDefault && jsx(_$$E, {
         variant: "brandOutline",
-        children: _$$t("whiteboard.color_palettes.manage_modal.default")
+        children: getI18nString("whiteboard.color_palettes.manage_modal.default")
       })]
     }), jsxs(Y, {
       direction: "horizontal",
@@ -104,7 +104,7 @@ function L({
           paletteType: "base",
           background: "light",
           role: "img",
-          ariaLabel: _$$t("whiteboard.colors.palette.hexadecimal", {
+          ariaLabel: getI18nString("whiteboard.colors.palette.hexadecimal", {
             hex: e
           })
         }, e))
@@ -128,13 +128,13 @@ function L({
                 }
               }));
             },
-            "aria-label": _$$t("whiteboard.color_palettes.modal.edit_named_palette_tooltip", {
+            "aria-label": getI18nString("whiteboard.color_palettes.modal.edit_named_palette_tooltip", {
               palette_name: l
             }),
             htmlAttributes: {
               "data-testid": "edit-color-palette-button-" + e.uuid,
               "data-tooltip-type": Ib.TEXT,
-              "data-tooltip": _$$t("whiteboard.color_palettes.modal.edit_named_palette_tooltip", {
+              "data-tooltip": getI18nString("whiteboard.color_palettes.modal.edit_named_palette_tooltip", {
                 palette_name: l
               })
             },
@@ -148,13 +148,13 @@ function L({
                 }
               }));
             },
-            "aria-label": _$$t("whiteboard.color_palettes.modal.delete_named_palette_tooltip", {
+            "aria-label": getI18nString("whiteboard.color_palettes.modal.delete_named_palette_tooltip", {
               palette_name: l
             }),
             htmlAttributes: {
               "data-testid": "delete-color-palette-button-" + e.uuid,
               "data-tooltip-type": Ib.TEXT,
-              "data-tooltip": _$$t("whiteboard.color_palettes.modal.delete_named_palette_tooltip", {
+              "data-tooltip": getI18nString("whiteboard.color_palettes.modal.delete_named_palette_tooltip", {
                 palette_name: l
               })
             },
@@ -175,7 +175,7 @@ function L({
           htmlAttributes: {
             "data-testid": "make-palette-team-default-button-" + e.uuid
           },
-          children: tx("whiteboard.color_palettes.modal.set_default")
+          children: renderI18nText("whiteboard.color_palettes.modal.set_default")
         })]
       })]
     })]
@@ -210,7 +210,7 @@ export let $$B0 = Ju(function ({
       children: jsxs(vo, {
         children: [jsx(Y9, {
           children: jsx(hE, {
-            children: _$$t("whiteboard.color_palettes.manage_modal.color_palettes")
+            children: getI18nString("whiteboard.color_palettes.manage_modal.color_palettes")
           })
         }), jsxs(nB, {
           padding: 16,
@@ -218,7 +218,7 @@ export let $$B0 = Ju(function ({
             className: "manage_color_palettes_modal--subheader--2Aol7",
             children: [jsx("div", {
               className: "manage_color_palettes_modal--manageText---c1Ro",
-              children: tx("whiteboard.color_palettes.manage_modal.manage_your_teams_color_palettes")
+              children: renderI18nText("whiteboard.color_palettes.manage_modal.manage_your_teams_color_palettes")
             }), jsx($z, {
               variant: "primary",
               onClick: () => {
@@ -232,7 +232,7 @@ export let $$B0 = Ju(function ({
               htmlAttributes: {
                 "data-testid": "create-color-palette-button"
               },
-              children: tx("whiteboard.color_palettes.manage_modal.create_new_palette")
+              children: renderI18nText("whiteboard.color_palettes.manage_modal.create_new_palette")
             })]
           }), jsx("div", {
             className: "manage_color_palettes_modal--paletteRowsOuter--d2OIk",
@@ -241,7 +241,7 @@ export let $$B0 = Ju(function ({
               children: [jsx(L, {
                 palette: {
                   uuid: fJ,
-                  name: _$$t("whiteboard.color_palettes.figjam_colors"),
+                  name: getI18nString("whiteboard.color_palettes.figjam_colors"),
                   baseColors: TS("base").map(e => z5.format(e)),
                   isTeamDefault: y.data.colorPalettesForTeam.every(e => !e.isTeamDefault)
                 },

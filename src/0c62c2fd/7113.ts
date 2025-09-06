@@ -6,7 +6,7 @@ import { kg } from "../figma_app/976345";
 import { sf } from "../905/929976";
 import { dq } from "../905/845253";
 import { V0, dN } from "../figma_app/858344";
-import { O } from "../905/247093";
+import { UNASSIGNED } from "../905/247093";
 if (443 == require.j) {}
 if (443 == require.j) {}
 export function $$m0() {
@@ -17,7 +17,7 @@ export function $$m0() {
       clickedResourceType: "workspace",
       resourceIdOrKey: r ?? void 0
     })), Fo(a) || a.shiftKey) {
-      let t = `/files/${e}/workspace/${r ?? O}/directory/teams`;
+      let t = `/files/${e}/workspace/${r ?? UNASSIGNED}/directory/teams`;
       Ay.redirect(t, "_blank");
       a.preventDefault();
     } else t(sf({

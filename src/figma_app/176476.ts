@@ -3,7 +3,7 @@ import { PureComponent, createRef } from "react";
 import { unmountComponentAtNode } from "../vendor/944059";
 import { H } from "react-dom";
 import { hMR, YOB, CeL, glU, pWM } from "../figma_app/763686";
-import { rH } from "../905/542194";
+import { reactTimerGroup } from "../905/542194";
 import { bG } from "../905/149328";
 import { s as _$$s } from "../905/817498";
 import { sx } from "../905/941192";
@@ -261,7 +261,7 @@ class y extends PureComponent {
       u && u.append(glU.minViewportSharpness());
       let _ = this.sparklines.get("avg-sharpness");
       _ && _.append(glU.avgViewportSharpness());
-      let h = rH.report();
+      let h = reactTimerGroup.report();
       let m = [];
       let g = e => {
         m.push(e.name);

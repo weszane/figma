@@ -6,7 +6,7 @@ import o from "classnames";
 import { oW } from "../905/675859";
 import { Ex, zE } from "../figma_app/919079";
 import { B as _$$B } from "../905/714743";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { E as _$$E2 } from "../905/984674";
 import { Ib } from "../905/129884";
 import { Xx, us, $L, sC } from "../figma_app/136698";
@@ -449,12 +449,12 @@ class eb extends Component {
         onClick: this.props.onLabelClick,
         children: [this.props.text.length > 0 && r, this.props.showIsMe && jsx("span", {
           className: l()("avatar--isMe--LeNkH", t),
-          children: tx("avatar.tooltip.you")
+          children: renderI18nText("avatar.tooltip.you")
         }), this.props.badge && jsx(Ex, {
           ...this.props.badge
         }), this.props.isScimUser && jsx(Ex, {
           color: zE.DEFAULT,
-          text: _$$t("members_table.org_user_name_cell.scim_badge")
+          text: getI18nString("members_table.org_user_name_cell.scim_badge")
         })]
       }), this.props.email && jsx("div", {
         className: this.props.onEmailClick ? "avatar--emailHover--ekuTn" : "",

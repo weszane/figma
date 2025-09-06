@@ -4,7 +4,7 @@ import { glU, NLJ } from "../figma_app/763686";
 import { l7 as _$$l, nc } from "../905/189185";
 import { Pt } from "../figma_app/806412";
 import { n as _$$n } from "../905/734251";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { qC } from "../figma_app/972736";
 import { ES, $O } from "../905/156213";
 import { ay } from "../figma_app/147952";
@@ -83,7 +83,7 @@ let O = Ju(function () {
     onDragEnd: h,
     onDragStart: () => glU.triggerActionInUserEditScope("set-tool-default", null),
     smallArrow: !0,
-    title: _$$t("whiteboard.embeds.insert_embed_modal.title"),
+    title: getI18nString("whiteboard.embeds.insert_embed_modal.title"),
     children: jsx("div", {
       className: hQ,
       "data-testid": "insert-media-modal",
@@ -196,8 +196,8 @@ function B(e) {
 export function $$U8() {
   return jsx(B, {
     resourceType: "Table",
-    text: _$$t("whiteboard.inserts.table_title"),
-    description: _$$t("whiteboard.inserts.table_description"),
+    text: getI18nString("whiteboard.inserts.table_title"),
+    description: getI18nString("whiteboard.inserts.table_description"),
     recordingKey: "table",
     icon: fM()
   });
@@ -205,8 +205,8 @@ export function $$U8() {
 export function $$G9() {
   return jsx(B, {
     resourceType: "Text",
-    text: _$$t("whiteboard.inserts.text_title"),
-    description: _$$t("whiteboard.inserts.text_description"),
+    text: getI18nString("whiteboard.inserts.text_title"),
+    description: getI18nString("whiteboard.inserts.text_description"),
     recordingKey: "text",
     icon: mn()
   });
@@ -214,8 +214,8 @@ export function $$G9() {
 export function $$K7() {
   let e = _$$b();
   return jsx(_$$t2, {
-    text: _$$t("whiteboard.inserts.stamp_title"),
-    description: _$$t("whiteboard.inserts.stamp_description"),
+    text: getI18nString("whiteboard.inserts.stamp_title"),
+    description: getI18nString("whiteboard.inserts.stamp_description"),
     onClick: () => {
       X({
         source: P
@@ -229,8 +229,8 @@ export function $$K7() {
 export function $$H1() {
   let e = _$$b();
   return jsx(_$$t2, {
-    text: _$$t("whiteboard.inserts.comments_title"),
-    description: _$$t("whiteboard.inserts.comments_description"),
+    text: getI18nString("whiteboard.inserts.comments_title"),
+    description: getI18nString("whiteboard.inserts.comments_description"),
     onClick: () => {
       e();
       glU.triggerActionInUserEditScope("set-tool-comments", {
@@ -244,8 +244,8 @@ export function $$H1() {
 export function $$z6() {
   return jsx(B, {
     resourceType: "Section",
-    text: _$$t("whiteboard.inserts.section_title"),
-    description: _$$t("whiteboard.inserts.section_description"),
+    text: getI18nString("whiteboard.inserts.section_title"),
+    description: getI18nString("whiteboard.inserts.section_description"),
     recordingKey: "section",
     icon: mO()
   });
@@ -253,8 +253,8 @@ export function $$z6() {
 export function $$V5() {
   let e = V();
   return jsx(_$$t2, {
-    text: _$$t("whiteboard.inserts.quick_actions_v2"),
-    description: _$$t("whiteboard.inserts.quick_actions_v2_description"),
+    text: getI18nString("whiteboard.inserts.quick_actions_v2"),
+    description: getI18nString("whiteboard.inserts.quick_actions_v2_description"),
     onClick: e,
     iconComponent: jsx(_$$j, {}),
     recordingKey: Pt("inserts", "more", "quick-actions-v2")
@@ -263,8 +263,8 @@ export function $$V5() {
 export function $$W0() {
   return jsx(B, {
     resourceType: "CodeBlock",
-    text: _$$t("whiteboard.inserts.code_block_title"),
-    description: _$$t("whiteboard.inserts.code_block_description"),
+    text: getI18nString("whiteboard.inserts.code_block_title"),
+    description: getI18nString("whiteboard.inserts.code_block_description"),
     recordingKey: "codeBlock",
     icon: NI()
   });
@@ -272,8 +272,8 @@ export function $$W0() {
 export function $$Y4() {
   return jsx(B, {
     resourceType: "MindMap",
-    text: _$$t("whiteboard.inserts.mind_map_title"),
-    description: _$$t("whiteboard.inserts.mind_map_description"),
+    text: getI18nString("whiteboard.inserts.mind_map_title"),
+    description: getI18nString("whiteboard.inserts.mind_map_description"),
     recordingKey: "mindMap",
     icon: V6(),
     editScopeLabel: "insert-mindmap"
@@ -283,8 +283,8 @@ export function $$J10() {
   let e = MR();
   return jsx(B, {
     resourceType: "Timer",
-    text: _$$t("whiteboard.inserts.timer_title"),
-    description: _$$t("whiteboard.inserts.timer_description"),
+    text: getI18nString("whiteboard.inserts.timer_title"),
+    description: getI18nString("whiteboard.inserts.timer_description"),
     recordingKey: "timer",
     icon: YA(),
     onInsert: () => {
@@ -299,8 +299,8 @@ export function $$q2() {
   let t = BI()?.shouldOptimizeForIpadApp;
   return jsx(B, {
     resourceType: "Image",
-    text: _$$t("whiteboard.inserts.media_title"),
-    description: _$$t("whiteboard.inserts.media_description"),
+    text: getI18nString("whiteboard.inserts.media_title"),
+    description: getI18nString("whiteboard.inserts.media_description"),
     recordingKey: "images",
     icon: v8(),
     onInsert: () => {
@@ -319,8 +319,8 @@ export function $$X3() {
   let e = useDispatch();
   return jsx(B, {
     resourceType: "Link",
-    text: _$$t("whiteboard.inserts.links_title"),
-    description: _$$t("whiteboard.inserts.links_description"),
+    text: getI18nString("whiteboard.inserts.links_title"),
+    description: getI18nString("whiteboard.inserts.links_description"),
     recordingKey: "links",
     icon: Bo(),
     onInsert: () => {

@@ -8,9 +8,9 @@ import { glU } from "../figma_app/763686";
 import { Hq } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { fp, zl } from "../figma_app/27355";
-import { az } from "../905/449184";
-import { t as _$$t } from "../905/303541";
+import { useAtomValueAndSetter, atomStoreManager } from "../figma_app/27355";
+import { analyticsEventManager } from "../905/449184";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { Y5 } from "../figma_app/455680";
 import { q5 } from "../figma_app/516028";
@@ -45,21 +45,21 @@ export function $$L0({
   let c = q5();
   let d = c?.key || null;
   let x = useDispatch();
-  let [f, b] = fp(I(t));
+  let [f, b] = useAtomValueAndSetter(I(t));
   let j = _$$A();
   return {
     restoreVersion: useMemo(() => {
       if (d && e && o && t && c?.canEdit) return async () => {
         if (f) {
           x(F.enqueue({
-            message: _$$t("figmake.chat.version_restore_in_progress")
+            message: getI18nString("figmake.chat.version_restore_in_progress")
           }));
           return;
         }
         try {
           b(!0);
           x(F.enqueue({
-            message: _$$t("figmake.chat.a11y_restoring_a_previous_version"),
+            message: getI18nString("figmake.chat.a11y_restoring_a_previous_version"),
             role: "status"
           }));
           let r = getSingletonSceneGraph().get(t);
@@ -75,7 +75,7 @@ export function $$L0({
           j({
             showVisualBells: !1
           });
-          az.trackDefinedEvent("ai_for_production.version_restore_clicked", {
+          analyticsEventManager.trackDefinedEvent("ai_for_production.version_restore_clicked", {
             success: !0,
             codeSnapshotKey: e,
             fileKey: d,
@@ -84,12 +84,12 @@ export function $$L0({
             clientLifecycleId: a
           });
           x(F.enqueue({
-            message: _$$t("figmake.chat.a11y_restoring_version_completed"),
+            message: getI18nString("figmake.chat.a11y_restoring_version_completed"),
             role: "status"
           }));
         } catch (r) {
           let t = r instanceof T ? r.type : "";
-          az.trackDefinedEvent("ai_for_production.version_restore_clicked", {
+          analyticsEventManager.trackDefinedEvent("ai_for_production.version_restore_clicked", {
             success: !1,
             errorType: t,
             errorMessage: r.message,
@@ -100,7 +100,7 @@ export function $$L0({
             clientLifecycleId: a
           });
           x(F.enqueue({
-            message: _$$t("figmake.chat.version_restore_failed"),
+            message: getI18nString("figmake.chat.version_restore_failed"),
             error: !0
           }));
         } finally {
@@ -165,7 +165,7 @@ async function z({
         let {
           codeFile
         } = Ur(w, g, t, r);
-        codeFile && (codeFile.sourceCode = r, zl.set(Nm(i.guid), "assistant"));
+        codeFile && (codeFile.sourceCode = r, atomStoreManager.set(Nm(i.guid), "assistant"));
       }
     } else {
       let e = Object.entries(h);
@@ -175,7 +175,7 @@ async function z({
       let {
         codeFile
       } = Ur(w, g, j[0].codeFileFullPathWithoutScheme, n);
-      codeFile && (codeFile.sourceCode = n, zl.set(Nm(i.guid), "assistant"));
+      codeFile && (codeFile.sourceCode = n, atomStoreManager.set(Nm(i.guid), "assistant"));
     }
     let e = O.get(i.guid);
     e && (e.hasSystemEdited = !0);

@@ -1,10 +1,10 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useMemo, createElement, useState, Component, memo, useCallback, useId, useEffect } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { getInitialOptions } from "../figma_app/169182";
 import { Rs, p as _$$p } from "../figma_app/288654";
-import { Ay as _$$Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { j as _$$j } from "../905/35621";
 import { G as _$$G } from "../905/186289";
 import { resourceUtils } from "../905/989992";
@@ -31,7 +31,7 @@ import { sf } from "../905/929976";
 import { yJ } from "../figma_app/78808";
 import { dq } from "../905/845253";
 import { to } from "../905/612685";
-import { wN } from "../figma_app/53721";
+import { mapFileTypeToEditorType } from "../figma_app/53721";
 import { o as _$$o } from "../905/895626";
 import { az as _$$az, rE } from "../figma_app/805373";
 import { H as _$$H } from "../905/209153";
@@ -78,7 +78,7 @@ import { w as _$$w } from "../905/191841";
 import { lQ } from "../905/934246";
 import eq from "classnames";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { H8, Pf } from "../905/590952";
 import { Ay as _$$Ay2 } from "../905/612521";
 import { A as _$$A } from "../905/351112";
@@ -143,7 +143,7 @@ function z(e, t) {
       i(sf({
         view: "fullscreen",
         fileKey: e.key,
-        editorType: wN(e.editor_type)
+        editorType: mapFileTypeToEditorType(e.editor_type)
       }));
     },
     onClickOwner: () => {
@@ -737,16 +737,16 @@ function e6(e) {
   if (!targetRect) return null;
   let l = [];
   l.push({
-    displayText: t("general.open"),
+    displayText: getI18nString("general.open"),
     callback: (e, i, n, r) => s(user, r)
   });
   l.push({
-    displayText: t("file_browser.open_in_new_tab"),
+    displayText: getI18nString("file_browser.open_in_new_tab"),
     callback: (e, t, i, n) => _$$Ay2.redirect(`${location.origin}` + o, "_blank")
   });
   l.push(_$$w2);
   l.push({
-    displayText: t("file_browser.copy_link"),
+    displayText: getI18nString("file_browser.copy_link"),
     callback: () => {
       r(_$$S({
         url: `${location.origin}` + o
@@ -769,7 +769,7 @@ function e7(e) {
     ...e.model,
     last_active_at: e.last_active_at
   })), [e.results]);
-  let i = _$$Ay.mobile || _$$Ay.tablet;
+  let i = BrowserInfo.mobile || BrowserInfo.tablet;
   let s = useSelector(e => e.orgById);
   let o = e0();
   let {
@@ -826,11 +826,11 @@ function e7(e) {
               imgUrl: t.img_url,
               hideTooltip: !0
             }), t.name]
-          }), e.last_active_at ? tx("search.user_view.last_active", {
+          }), e.last_active_at ? renderI18nText("search.user_view.last_active", {
             relativeTimeString: jsx(h1, {
               date: e.last_active_at
             })
-          }) : tx("search.user_view.not_active_yet")]
+          }) : renderI18nText("search.user_view.not_active_yet")]
         })]
       })]
     });
@@ -865,7 +865,7 @@ function e9(e) {
 }
 function te(e) {
   useEffect(() => {
-    az.trackDefinedEvent("search_experience.dead_code", {
+    analyticsEventManager.trackDefinedEvent("search_experience.dead_code", {
       userId: getInitialOptions().user_data?.id,
       codeLocation: `SearchResult - type: ${e.searchResult.search_model_type} ${e.viewMode}`
     });
@@ -873,7 +873,7 @@ function te(e) {
   let t = {
     showSettingsIcon: !1
   };
-  switch ((_$$Ay.mobile || _$$Ay.tablet) && (t = {
+  switch ((BrowserInfo.mobile || BrowserInfo.tablet) && (t = {
     showSettingsIcon: !0,
     onFileSettingsClick: _$$j
   }), e.searchResult.search_model_type) {

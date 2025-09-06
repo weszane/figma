@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useRef, useState, useMemo } from "react";
 import { useSelector } from "../vendor/514228";
 import { Fo, Uz } from "../905/63728";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { k as _$$k } from "../figma_app/564183";
 import { f4 } from "../figma_app/722362";
 import { q5 } from "../figma_app/516028";
@@ -11,7 +11,7 @@ import { Ae } from "../figma_app/461594";
 import { t as _$$t2 } from "../figma_app/143965";
 import { L as _$$L } from "../905/109200";
 import { S as _$$S } from "../figma_app/9979";
-import { md } from "../vendor/525001";
+import { useAtomValue } from "../vendor/525001";
 import { _I } from "../figma_app/473493";
 import { mp } from "../figma_app/579169";
 import { f as _$$f } from "../905/940356";
@@ -31,7 +31,7 @@ import { d7, s0, Kx, hN, n5, yg } from "../figma_app/261761";
 import { yY, n1, Q5, qR, bN, cx } from "../figma_app/811711";
 import { L as _$$L2 } from "../figma_app/467950";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { D as _$$D } from "../figma_app/451499";
 import { N9, qg } from "../figma_app/385874";
 import { K as _$$K } from "../figma_app/622160";
@@ -40,7 +40,7 @@ import { j_ } from "../figma_app/9619";
 import { C as _$$C } from "../figma_app/686450";
 import { bU } from "../figma_app/967154";
 import { N as _$$N } from "../905/438674";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { _P } from "../figma_app/164212";
 import { pT } from "../figma_app/435995";
 import { z4 } from "../figma_app/95266";
@@ -61,25 +61,25 @@ function A() {
   let r = _I();
   let i = !!_$$f("dev_mode_dismissed_properties_panel_announcement");
   let a = !!_$$f(v);
-  let s = md(mp);
+  let s = useAtomValue(mp);
   let l = uQ();
   let d = "loaded" !== s.status || s.data > S;
   return !l || a || !i || !t || d || r ? null : jsx(_$$u, {
     className: "code_and_measurement_hint--codeAndMeasurementsHint--Y2-IO",
-    hintText: _$$t("inspect_panel.properties.measurements_hint_message"),
+    hintText: getI18nString("inspect_panel.properties.measurements_hint_message"),
     iconComponent: jsx(_$$L, {
       className: I
     }),
     idForTests: "hintCodeAndMeasurements",
-    secondaryHintText: tx("inspect_panel.properties.copy_code_hint_message", {
+    secondaryHintText: renderI18nText("inspect_panel.properties.copy_code_hint_message", {
       menu_path: jsx("strong", {
-        children: tx("inspect_panel.properties.copy_code_hint_menu_path")
+        children: renderI18nText("inspect_panel.properties.copy_code_hint_menu_path")
       })
     }),
     secondaryIconComponent: jsx(_$$S, {
       className: I
     }),
-    title: _$$t("inspect_panel.properties.code_and_measurements_hint_title"),
+    title: getI18nString("inspect_panel.properties.code_and_measurements_hint_title"),
     userFlag: v
   });
 }
@@ -111,7 +111,7 @@ function G({
     type: e.type
   }, e.id), []);
   return 1 !== s || !l || l.length < 1 || d.effects.length < 1 ? null : jsx(VZ, {
-    title: _$$t("inspect_panel.effects.title"),
+    title: getI18nString("inspect_panel.effects.title"),
     recordingKey: "effects",
     additionalHeaders: jsx(Af, {}),
     noBorder: e,
@@ -156,10 +156,10 @@ function H({
 function z(e) {
   let t = useRef(null);
   let r = m0();
-  let a = sD(_$$t("inspect_panel.effects.size"));
-  let s = sD(_$$t("inspect_panel.effects.density"));
-  let l = sD(_$$t("inspect_panel.effects.opacity"));
-  let d = sD(_$$t("inspect_panel.effects.radius"));
+  let a = sD(getI18nString("inspect_panel.effects.size"));
+  let s = sD(getI18nString("inspect_panel.effects.density"));
+  let l = sD(getI18nString("inspect_panel.effects.opacity"));
+  let d = sD(getI18nString("inspect_panel.effects.radius"));
   let c = Ku();
   let u = Kx(e.noiseSize?.x);
   let p = Cm(e.density);
@@ -174,7 +174,7 @@ function z(e) {
       setHovered: g,
       isHovered: m,
       button1: jsx(n5, {
-        label: _$$t("inspect_panel.effects.size"),
+        label: getI18nString("inspect_panel.effects.size"),
         tooltipRef: a,
         onClick: u,
         value: Wf(e.noiseSize?.x),
@@ -183,7 +183,7 @@ function z(e) {
       }),
       button2: jsx(n5, {
         tooltipRef: s,
-        label: _$$t("inspect_panel.effects.density"),
+        label: getI18nString("inspect_panel.effects.density"),
         onClick: p,
         value: B.format(e.density),
         rowRef: t,
@@ -195,7 +195,7 @@ function z(e) {
       isHovered: f,
       button1: jsx(n5, {
         tooltipRef: l,
-        label: _$$t("inspect_panel.effects.opacity"),
+        label: getI18nString("inspect_panel.effects.opacity"),
         onClick: _,
         value: B.format(e.opacity),
         rowRef: t,
@@ -220,7 +220,7 @@ function z(e) {
     setHovered: g,
     isHovered: m,
     button1: jsx(n5, {
-      label: _$$t("inspect_panel.effects.size"),
+      label: getI18nString("inspect_panel.effects.size"),
       tooltipRef: a,
       onClick: u,
       value: Wf(e.noiseSize?.x),
@@ -228,7 +228,7 @@ function z(e) {
       isHovered: m
     }),
     button2: jsx(n5, {
-      label: _$$t("inspect_panel.effects.radius"),
+      label: getI18nString("inspect_panel.effects.radius"),
       tooltipRef: d,
       onClick: h,
       value: Wf(e.radius),
@@ -279,12 +279,12 @@ function Q(e) {
       })]
     }), jsx(_p, {
       className: J,
-      name: _$$t("inspect_panel.images.scale"),
+      name: getI18nString("inspect_panel.images.scale"),
       redact: ["Fill"],
       value: t.format(e.imageScaleMode)
     }), jsx(_p, {
       className: J,
-      name: _$$t("inspect_panel.images.opacity"),
+      name: getI18nString("inspect_panel.images.opacity"),
       format: "percent",
       redact: 1,
       value: e.opacity
@@ -292,7 +292,7 @@ function Q(e) {
       onError: t => {
         let r = TypeError(`Expected string | undefined, got ${typeof t}`);
         console.error(r);
-        $D(_$$e.FIGJAM, r, {
+        reportError(_$$e.FIGJAM, r, {
           extra: {
             type: typeof t,
             value: t,
@@ -313,7 +313,7 @@ function ee() {
   }, qg(e.image)), []);
   let r = useMemo(() => {
     let t = e.every(e => "VIDEO" === e.type);
-    return e.length > 1 ? t ? _$$t("inspect_panel.videos.title_plural") : _$$t("inspect_panel.images.title_plural") : 1 === e.length ? t ? _$$t("inspect_panel.videos.title_singular") : _$$t("inspect_panel.images.title_singular") : void 0;
+    return e.length > 1 ? t ? getI18nString("inspect_panel.videos.title_plural") : getI18nString("inspect_panel.images.title_plural") : 1 === e.length ? t ? getI18nString("inspect_panel.videos.title_singular") : getI18nString("inspect_panel.images.title_singular") : void 0;
   }, [e]);
   return !e || e.length < 1 ? null : jsx(VZ, {
     title: r,
@@ -333,13 +333,13 @@ function ed(e) {
   } = e;
   let s = useCallback(() => {
     let e = _P(uri);
-    sx("Component documentation link clicked", {
+    trackEventAnalytics("Component documentation link clicked", {
       hostname: e
     });
   }, [uri]);
-  let l = useMemo(() => displayName || displayText ? displayText || tx("design_systems.component_panel.view_in_display_name", {
+  let l = useMemo(() => displayName || displayText ? displayText || renderI18nText("design_systems.component_panel.view_in_display_name", {
     displayName
-  }) : tx("design_systems.component_panel.view_documentation"), [displayName, displayText]);
+  }) : renderI18nText("design_systems.component_panel.view_documentation"), [displayName, displayText]);
   return jsx("div", {
     className: pT,
     children: jsx(_$$N.Button, {
@@ -392,7 +392,7 @@ function em() {
   if (0 === links.length && !description) return null;
   let r = j_(description || "");
   return jsx(VZ, {
-    title: _$$t("inspect_panel.components.title"),
+    title: getI18nString("inspect_panel.components.title"),
     recordingKey: "components",
     hideHeader: !0,
     children: jsxs("div", {
@@ -408,7 +408,7 @@ function em() {
       }) : jsx("div", {
         className: "inspect_component_panel--documentationDescriptionDefault--15thq inspect_component_panel--documentationDescription--UcDJ- ellipsis--ellipsisAfter8Lines--WZFi8 ellipsis--_ellipsisAfterNLines--LzI7k text--fontPos11--2LvXf text--_fontBase--QdLsd",
         dir: "auto",
-        children: tx("inspect_panel.components.no_description")
+        children: renderI18nText("inspect_panel.components.no_description")
       }), links.length > 0 && jsx("div", {
         className: "inspect_component_panel--documentationLinks--pi-YI",
         children: links.map(e => jsx(ed, {
@@ -438,7 +438,7 @@ function ef({
     });
   }, [s]);
   return 0 === s.length ? null : jsx(VZ, {
-    title: t || _$$t("inspect_panel.component_props.title"),
+    title: t || getI18nString("inspect_panel.component_props.title"),
     recordingKey: "componentProps",
     copyAllValue: l,
     children: jsx("div", {
@@ -492,14 +492,14 @@ function eC(e) {
   return jsx(_$$K2, {
     onClick: t,
     ...r,
-    "aria-label": _$$t("inspect_panel.interactions.select_layer"),
+    "aria-label": getI18nString("inspect_panel.interactions.select_layer"),
     children: jsx(_$$A, {})
   });
 }
 function ew() {
   let e = eA();
   return e ? jsx(VZ, {
-    title: _$$t("inspect_panel.parent.title"),
+    title: getI18nString("inspect_panel.parent.title"),
     recordingKey: "selection_hierarchy",
     children: jsxs("div", {
       className: "parent_component_panel--parentLayerSummaryContainer--JGy-s",
@@ -516,7 +516,7 @@ function eL() {
   let e = useSelector(e => e.mirror.selectionProperties.nodeText);
   let t = useSelector(e => e.mirror.selectionProperties.numSelectedByType) || {};
   return 1 !== (useSelector(e => e.mirror.selectionProperties.numSelected) || 0) || 1 !== t.TEXT ? null : jsx(VZ, {
-    title: _$$t("inspect_panel.property.content"),
+    title: getI18nString("inspect_panel.property.content"),
     copyAllValue: e,
     recordingKey: "content",
     children: jsx(_p, {

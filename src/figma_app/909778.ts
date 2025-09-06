@@ -7,7 +7,7 @@ import { XJ, f2, ad, Nc, zb, h7 } from "../figma_app/411744";
 import { td } from "../figma_app/181241";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
 import { F } from "../905/302958";
 import { ah } from "../figma_app/637328";
@@ -606,8 +606,8 @@ let K = (e, t, r, n, i) => XHR.put("/api/favorited_resources", {
   is_favorited: r,
   file_key: n
 }).then(() => {
-  let t = i ? _$$t("tile.favoriting.file_removed_from_sidebar") : _$$t("tile.favoriting.file_removed_from_favorites");
-  let n = i ? _$$t("tile.favoriting.file_added_to_sidebar") : _$$t("tile.favoriting.file_added_to_favorites");
+  let t = i ? getI18nString("tile.favoriting.file_removed_from_sidebar") : getI18nString("tile.favoriting.file_removed_from_favorites");
+  let n = i ? getI18nString("tile.favoriting.file_added_to_sidebar") : getI18nString("tile.favoriting.file_added_to_favorites");
   e(F.enqueue({
     message: r ? n : t
   }));
@@ -629,7 +629,7 @@ let Y = (e, t, r, n, a, s, o, l) => XHR.put("/api/favorited_resources", {
   section_id: s
 }).then(() => {
   if (a && e(_$$c(a)), l || t !== FEntityType.FILE) {
-    let t = r ? _$$t("sidebar.item_added_bell_message") : _$$t("sidebar.item_removed_bell_message");
+    let t = r ? getI18nString("sidebar.item_added_bell_message") : getI18nString("sidebar.item_removed_bell_message");
     e(F.enqueue({
       message: t
     }));

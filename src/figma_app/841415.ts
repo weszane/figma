@@ -2,12 +2,12 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useMemo } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import s from "classnames";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { x6 } from "../905/403166";
 import { F } from "../905/241044";
 import { CY } from "../figma_app/637027";
 import { M } from "../905/649795";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { RK } from "../figma_app/815170";
 import { z3 } from "../figma_app/386952";
 import { iZ } from "../905/372672";
@@ -89,7 +89,7 @@ let A = memo(function (e) {
     "data-tooltip-user-img-url": profileImgUrl,
     href: `/${d}`,
     onClick: () => {
-      sx("at_mention_link_clicked", {
+      trackEventAnalytics("at_mention_link_clicked", {
         mentioned_profile_id: profileId,
         profile_id: t,
         comment_id: commentId
@@ -202,7 +202,7 @@ let $$C1 = memo(e => {
     dir: "auto",
     children: [i(messageMeta, commentId, t, r, commentId), showEditedIndicator && jsxs("span", {
       className: oh,
-      children: ["\xa0", tx("comments.edited")]
+      children: ["\xa0", renderI18nText("comments.edited")]
     }, "edited_indicator")]
   });
 });

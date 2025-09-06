@@ -1,6 +1,6 @@
 import { glU, Ez5, CNR } from "../figma_app/763686";
 import { parsePxInt } from "../figma_app/783094";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { XC } from "../905/512783";
 import { QZ, Z0 } from "../figma_app/62612";
 import { rY4, PXB } from "../figma_app/27776";
@@ -51,7 +51,7 @@ let p = (e, t, i) => {
   }
   return null;
 };
-let m = (e) => {
+let m = e => {
   let {
     canvasPosition,
     selectionAnchorCanvasPosition
@@ -60,7 +60,7 @@ let m = (e) => {
   let {
     width,
     height
-  } = XC.getPinSize(new Set(e.comments.map((e) => e.user_id)).size);
+  } = XC.getPinSize(new Set(e.comments.map(e => e.user_id)).size);
   let a = {
     origin: {
       x: canvasPosition.x,
@@ -100,7 +100,7 @@ let h = (e, t, i) => {
       y: r.height
     }
   };
-  if ("fullscreen" === t.view && t.editorType === nT.Whiteboard && i && (s.size.x -= d), "fullscreen" === t.view && t.editorType === nT.Slides && Ez5.singleSlideView().isFocusedNodeViewEnabled()) {
+  if ("fullscreen" === t.view && t.editorType === FEditorType.Whiteboard && i && (s.size.x -= d), "fullscreen" === t.view && t.editorType === FEditorType.Slides && Ez5.singleSlideView().isFocusedNodeViewEnabled()) {
     let e = Ez5.editorPreferences().speakerNotesHeight.getCopy() + (CNR?.dragHandleTotalHeight() ?? 0);
     s.size.y -= e;
   }

@@ -6,7 +6,7 @@ import { getStorage } from "../905/657224";
 import l from "classnames";
 import { w } from "../905/835474";
 import { o as _$$o } from "../905/605383";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { LT } from "../figma_app/646357";
 import { PW } from "../figma_app/633080";
 import { Hj, tD } from "../905/682977";
@@ -43,29 +43,29 @@ export class $$b0 extends PureComponent {
   }
   render() {
     let e = [{
-      header: this.props.showingStateStats ? _$$t("design_systems.libraries_modal.variant_name") : _$$t("design_systems.libraries_modal.component_name"),
+      header: this.props.showingStateStats ? getI18nString("design_systems.libraries_modal.variant_name") : getI18nString("design_systems.libraries_modal.component_name"),
       sortBy: "alpha",
       className: f
     }];
     this.props.showingStateStats || e.push({
-      header: _$$t("design_systems.libraries_modal.total_variants"),
+      header: getI18nString("design_systems.libraries_modal.total_variants"),
       sortBy: "num_states",
       className: $$A
     });
     e.push({
-      header: _$$t("design_systems.libraries_modal.total_instances"),
+      header: getI18nString("design_systems.libraries_modal.total_instances"),
       sortBy: "num_existing_instances",
       className: $$A
     });
     e.push({
-      header: _$$t("design_systems.libraries_modal.inserts_last_duration", {
+      header: getI18nString("design_systems.libraries_modal.inserts_last_duration", {
         duration: LT(this.props.duration)
       }),
       sortBy: "num_insertions",
       className: $$A
     });
     e.push({
-      header: _$$t("design_systems.libraries_modal.detaches_last_duration", {
+      header: getI18nString("design_systems.libraries_modal.detaches_last_duration", {
         duration: LT(this.props.duration)
       }),
       sortBy: "num_detachments",
@@ -95,7 +95,7 @@ export class $$b0 extends PureComponent {
       className: "library_item_stats--statsTable--ThkjJ",
       children: [jsx("div", {
         className: "library_item_stats--libraryAnalyticsHeader--eLsyV library_modal_stats--libraryAnalyticsHeader--9giDS text--fontPos14--OL9Hp text--_fontBase--QdLsd",
-        children: this.props.showingStateStats ? _$$t("design_systems.libraries_modal.all_variants") : _$$t("design_systems.libraries_modal.component_statistics")
+        children: this.props.showingStateStats ? getI18nString("design_systems.libraries_modal.all_variants") : getI18nString("design_systems.libraries_modal.component_statistics")
       }), jsx("div", {
         ref: this.onSortScrollTargetRef
       }), jsxs(Hj, {
@@ -165,7 +165,7 @@ class v extends PureComponent {
         })]
       }), !this.props.showingStateStats && jsx("div", {
         className: y,
-        children: e.type === PW.STATE_GROUP ? e.num_states : _$$t("design_systems.libraries_modal.n_a")
+        children: e.type === PW.STATE_GROUP ? e.num_states : getI18nString("design_systems.libraries_modal.n_a")
       }), jsx("div", {
         className: y,
         children: e.num_existing_instances.toLocaleString()

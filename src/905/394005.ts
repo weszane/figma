@@ -1,7 +1,7 @@
-import { sx } from '../905/449184';
+import { trackEventAnalytics } from '../905/449184';
 import { FJ } from '../905/508367';
 import { Ay } from '../905/612521';
-import { ED, x1 } from '../905/714362';
+import { logDebug, logError } from '../905/714362';
 import { createDeferredPromise } from '../905/874553';
 import { getInitialOptions } from '../figma_app/169182';
 import { throwTypeError } from '../figma_app/465776';
@@ -28,7 +28,7 @@ export class WAFManager {
    * Tracks WAF-related events with analytics
    */
   trackEvent = (eventName, eventData) => {
-    sx(eventName, {
+    trackEventAnalytics(eventName, {
       ...eventData,
       visibilityState: document.visibilityState
     }, {
@@ -44,7 +44,7 @@ export class WAFManager {
     if (!this.pendingWAFVerification || event.data !== 'waf-successful') {
       return;
     }
-    ED('[WAFManager]', 'WAF validation successful', {
+    logDebug('[WAFManager]', 'WAF validation successful', {
       type: this.pendingWAFVerification.type
     });
     if (this.pendingWAFVerification.type === 'captcha') {
@@ -318,12 +318,12 @@ export class WAFManager {
     }
     try {
       await wafIntegration.forceRefreshToken();
-      ED('[WAFManager]', 'AwsWafIntegration.forceRefreshToken succeeded', {}, {
+      logDebug('[WAFManager]', 'AwsWafIntegration.forceRefreshToken succeeded', {}, {
         reportAsSentryError: false
       });
       return 'success';
     } catch (error) {
-      x1('[WAFManager]', 'AwsWafIntegration.forceRefreshToken failed', {
+      logError('[WAFManager]', 'AwsWafIntegration.forceRefreshToken failed', {
         error
       }, {
         reportAsSentryError: true
@@ -337,7 +337,7 @@ export class WAFManager {
    */
   createTimeout(deferred, timeoutMs) {
     const timeoutId = window.setTimeout(() => {
-      x1('[WAFManager]', 'WAF validation timed out.', {}, {
+      logError('[WAFManager]', 'WAF validation timed out.', {}, {
         reportAsSentryError: true
       });
       this.getWafStateFromIframe().then(state => {

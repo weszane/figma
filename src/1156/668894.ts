@@ -5,10 +5,10 @@ import { $n } from "../905/521428";
 import { e } from "../905/149844";
 import { g as _$$g } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
-import { md, fp, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, useAtomValueAndSetter, Xr } from "../figma_app/27355";
 import { IT } from "../figma_app/566371";
 import { h1 } from "../905/986103";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { tS } from "../figma_app/516028";
 import { M4 } from "../905/713695";
 import { R as _$$R } from "../905/943003";
@@ -41,11 +41,11 @@ function q({
   projectIdToPause: t,
   setProjectIdToPause: n
 }) {
-  let i = md(kz);
+  let i = useAtomWithSubscription(kz);
   return jsx(_$$b, {
     legend: jsx("p", {
       ...Ay.props(U.textBodyMediumStrong),
-      children: _$$t("figmake.settings.pause_project.radio.label")
+      children: getI18nString("figmake.settings.pause_project.radio.label")
     }),
     value: t,
     onChange: n,
@@ -69,7 +69,7 @@ function $({
       children: e.name
     }), jsx("p", {
       ...Ay.props(U.textBodyMediumSecondary),
-      children: tx("figmake.settings.pause_project.created", {
+      children: renderI18nText("figmake.settings.pause_project.created", {
         timestamp: jsx(h1, {
           date: e.created_at
         })
@@ -82,7 +82,7 @@ function P({
   projectIdToPause: t
 }) {
   let n = tS();
-  let [i, s] = fp(kz);
+  let [i, s] = useAtomValueAndSetter(kz);
   let l = h5({
     toolCallId: e.toolCallId,
     toolName: e.toolName,
@@ -121,26 +121,26 @@ function P({
   return i ? jsxs(Fragment, {
     children: [jsx("p", {
       ...Ay.props(U.textBodyMediumSecondary),
-      children: _$$t("figmake.supabase.pausing_project.subtitle")
+      children: getI18nString("figmake.supabase.pausing_project.subtitle")
     }), jsx($n, {
       variant: "secondary",
       onClick: () => e.onClose(),
       disabled: !0,
-      children: _$$t("figmake.pause_project_modal.button.cancel")
+      children: getI18nString("figmake.pause_project_modal.button.cancel")
     }), jsx(lV, {
       variant: "destructive",
-      children: _$$t("figmake.pause_project_modal.button.loading")
+      children: getI18nString("figmake.pause_project_modal.button.loading")
     })]
   }) : jsxs(Fragment, {
     children: [jsx($n, {
       variant: "secondary",
       onClick: () => e.onClose(),
-      children: _$$t("figmake.pause_project_modal.button.cancel")
+      children: getI18nString("figmake.pause_project_modal.button.cancel")
     }), jsx($n, {
       variant: "destructive",
       onClick: o,
       disabled: !t,
-      children: _$$t("figmake.pause_project_modal.button.submit")
+      children: getI18nString("figmake.pause_project_modal.button.submit")
     })]
   });
 }
@@ -174,7 +174,7 @@ let G = Ju(function (e) {
     children: jsxs(vo, {
       children: [jsxs(Y9, {
         children: [a && jsx(_$$K, {
-          "aria-label": _$$t("figmake.supabase.pause_project_modal.back"),
+          "aria-label": getI18nString("figmake.supabase.pause_project_modal.back"),
           onClick: () => {
             e.onClose();
             s(to({
@@ -190,18 +190,18 @@ let G = Ju(function (e) {
           },
           children: jsx(_$$C, {})
         }), jsx(hE, {
-          children: _$$t("figmake.pause_project_modal.title")
+          children: getI18nString("figmake.pause_project_modal.title")
         })]
       }), jsx(nB, {
         scrolling: "none",
         children: jsxs("div", {
           className: "x78zum5 xdt5ytf xou54vl",
           children: [jsx("div", {
-            children: tx("figmake.pause_project_modal.body_with_link", {
+            children: renderI18nText("figmake.pause_project_modal.body_with_link", {
               upgradeLink: jsx(_$$N, {
                 href: $X(organization?.id || ""),
                 newTab: !0,
-                children: _$$t("figmake.pause_project_modal.upgrade_link")
+                children: getI18nString("figmake.pause_project_modal.upgrade_link")
               })
             })
           }), jsx(q, {
@@ -262,16 +262,16 @@ let V = Ju(function (e) {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$t("figmake.supabase_cost_warning_modal.title")
+          children: getI18nString("figmake.supabase_cost_warning_modal.title")
         })
       }), jsx(nB, {
         children: jsx("div", {
           children: jsxs("p", {
             ...Ay.props(W.textBodyMedium),
-            children: [_$$t("figmake.supabase_cost_warning_modal.body"), " ", jsx(_$$N, {
+            children: [getI18nString("figmake.supabase_cost_warning_modal.body"), " ", jsx(_$$N, {
               href: Sy,
               newTab: !0,
-              children: _$$t("general.learn_more")
+              children: getI18nString("general.learn_more")
             })]
           })
         })
@@ -281,14 +281,14 @@ let V = Ju(function (e) {
           children: [jsx($n, {
             variant: "secondary",
             onClick: e.onClose,
-            children: _$$t("figmake.supabase.cancel")
+            children: getI18nString("figmake.supabase.cancel")
           }), jsx($n, {
             variant: "destructive",
             onClick: () => {
               e.onClose();
               n();
             },
-            children: _$$t("figmake.supabase_cost_warning_modal.submit")
+            children: getI18nString("figmake.supabase_cost_warning_modal.submit")
           })]
         })
       })]
@@ -379,13 +379,13 @@ export function $$X0({
   let x = existingProjects.filter(e => e.status.toLowerCase() !== TL.REMOVED);
   return jsxs("div", {
     children: [jsx(_$$E, {
-      "aria-label": _$$t("figmake.settings.connect_existing_project.create_project.button"),
+      "aria-label": getI18nString("figmake.settings.connect_existing_project.create_project.button"),
       onClick: u,
       children: jsxs("div", {
         className: "x78zum5 x1q0g3np x6s0dn4 x1v2ro7d",
         children: [jsx(Z, {}), jsx("p", {
           ...Ay.props(Q.textBodyMediumStrong),
-          children: _$$t("figmake.settings.connect_existing_project.create_project.button")
+          children: getI18nString("figmake.settings.connect_existing_project.create_project.button")
         })]
       })
     }), jsx("div", {
@@ -533,7 +533,7 @@ function Y({
             children: "\xb7"
           }), jsx("span", {
             ...Ay.props(Q.textBodyMediumSecondary),
-            children: tx("figmake.settings.pause_project.created", {
+            children: renderI18nText("figmake.settings.pause_project.created", {
               timestamp: jsx(h1, {
                 date: e.created_at
               })
@@ -543,7 +543,7 @@ function Y({
       }), jsx($n, {
         variant: "secondary",
         onClick: b,
-        children: _$$t("figmake.settings.connect_existing_project.project.button")
+        children: getI18nString("figmake.settings.connect_existing_project.project.button")
       })]
     })]
   }, e.id);
@@ -553,10 +553,10 @@ function J({
 }) {
   return e ? jsx("span", {
     ...Ay.props(Q.textBodyMediumSecondaryStrong),
-    children: _$$t("figmake.settings.connect_existing_project.status.project.paused")
+    children: getI18nString("figmake.settings.connect_existing_project.status.project.paused")
   }) : jsx("span", {
     ...Ay.props(Q.textBodyMediumSuccessStrong),
-    children: _$$t("figmake.settings.connect_existing_project.status.project.active")
+    children: getI18nString("figmake.settings.connect_existing_project.status.project.active")
   });
 }
 function Z() {

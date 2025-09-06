@@ -3,7 +3,7 @@ import { PureComponent } from "react";
 import { useDispatch, connect } from "../vendor/514228";
 import { parsePxInt } from "../figma_app/783094";
 import { nR, $$, N_, Ph } from "../figma_app/637027";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { jt } from "../figma_app/395505";
 import { to } from "../905/156213";
 import { R$ } from "../figma_app/86989";
@@ -23,11 +23,11 @@ export function $$v4(e) {
     }), jsx(nR, {
       onClick: e.onClickDecline,
       className: LL,
-      children: tx("community.detail_view.decline")
+      children: renderI18nText("community.detail_view.decline")
     }), jsx($$, {
       onClick: e.onClickAccept,
       className: LL,
-      children: tx("community.detail_view.accept")
+      children: renderI18nText("community.detail_view.accept")
     })]
   });
 }
@@ -36,18 +36,18 @@ class b extends PureComponent {
   constructor() {
     super(...arguments);
     this.getSubjectBodyForResource = () => U(this.props.resource) ? {
-      resourceSubject: _$$t("community.reporting.reporting_an_inappropriate_file"),
-      resourceBody: _$$t("community.reporting.i_want_to_report_this_file_for_violating_the_community_guidelines_resource_url", {
+      resourceSubject: getI18nString("community.reporting.reporting_an_inappropriate_file"),
+      resourceBody: getI18nString("community.reporting.i_want_to_report_this_file_for_violating_the_community_guidelines_resource_url", {
         resourceUrl: cU(this.props.resource.id)
       })
     } : xQ(this.props.resource) ? {
-      resourceSubject: _$$t("community.reporting.reporting_an_inappropriate_widget"),
-      resourceBody: _$$t("community.reporting.i_want_to_report_this_widget_for_violating_the_community_guidelines_resource_url", {
+      resourceSubject: getI18nString("community.reporting.reporting_an_inappropriate_widget"),
+      resourceBody: getI18nString("community.reporting.i_want_to_report_this_widget_for_violating_the_community_guidelines_resource_url", {
         resourceUrl: ox(this.props.resource.id)
       })
     } : {
-      resourceSubject: _$$t("community.reporting.reporting_an_inappropriate_plugin"),
-      resourceBody: _$$t("community.reporting.i_want_to_report_this_plugin_for_violating_the_plugin_guidelines_resource_url", {
+      resourceSubject: getI18nString("community.reporting.reporting_an_inappropriate_plugin"),
+      resourceBody: getI18nString("community.reporting.i_want_to_report_this_plugin_for_violating_the_plugin_guidelines_resource_url", {
         resourceUrl: ab(this.props.resource.id)
       })
     };
@@ -59,15 +59,15 @@ class b extends PureComponent {
     } = this.getSubjectBodyForResource();
     let r = t;
     r = `${r}${this.props.user ? `
-${_$$t("community.reporting.my_figma_user_id_is_user_id", {
+${getI18nString("community.reporting.my_figma_user_id_is_user_id", {
       userId: this.props.user.id
     })}` : ""}
-${_$$t("community.reporting.add_your_description_here")}`;
+${getI18nString("community.reporting.add_your_description_here")}`;
     return jsx(N_, {
       href: `mailto:content-reviews@figma.com?subject=${encodeURIComponent(resourceSubject)}&body=${encodeURIComponent(r)}`,
       className: _$$iZ,
       trusted: !0,
-      children: tx("community.detail_view.report_resource")
+      children: renderI18nText("community.detail_view.report_resource")
     });
   }
 }
@@ -80,7 +80,7 @@ export function $$j3() {
       jt(e);
     },
     trusted: !0,
-    children: tx("community.detail_view.report_resource")
+    children: renderI18nText("community.detail_view.report_resource")
   }) : null;
 }
 export function $$w0(e) {
@@ -104,14 +104,14 @@ export function $$w0(e) {
       }));
     },
     trusted: !0,
-    children: tx("community.buyer.request_refund")
+    children: renderI18nText("community.buyer.request_refund")
   });
 }
 export function $$C1(e) {
   let t = R$(e.resource);
   let r = "Detail View - View Order Details";
-  let i = _$$t("community.buyer.view_order_details");
-  Uv(e.resource.monetized_resource_metadata) && (r = "Detail View - Manage Subscription", i = _$$t("community.buyer.manage_subscription"));
+  let i = getI18nString("community.buyer.view_order_details");
+  Uv(e.resource.monetized_resource_metadata) && (r = "Detail View - Manage Subscription", i = getI18nString("community.buyer.manage_subscription"));
   return jsx(Ph, {
     className: _1,
     onClick: () => t(),
@@ -131,7 +131,7 @@ export function $$T2(e) {
     className: e.className,
     onClick: e.onClick,
     trusted: !0,
-    children: tx("community.detail_view.remove_myself_as_creator")
+    children: renderI18nText("community.detail_view.remove_myself_as_creator")
   });
 }
 export const EV = $$w0;

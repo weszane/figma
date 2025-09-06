@@ -1,10 +1,10 @@
 import { A$ } from "../figma_app/728005";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { subscribeAndAwaitData } from "../905/553831";
 import { IT } from "../figma_app/566371";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { A } from "../905/963262";
 import { qZ } from "../figma_app/451396";
 import { XP } from "../figma_app/655139";
@@ -61,7 +61,7 @@ function v(e, t, r, n = new Set()) {
   };
 }
 export async function $$A2(e, t) {
-  if (!(t === A$ || zl.get(tz))) return [[{}, {}], [{}, {}]];
+  if (!(t === A$ || atomStoreManager.get(tz))) return [[{}, {}], [{}, {}]];
   try {
     let r = performance.now();
     let [n, i] = await x(e);
@@ -72,7 +72,7 @@ export async function $$A2(e, t) {
     }
     return [[n, i], [{}, {}]];
   } catch (e) {
-    $D(_$$e.DEVELOPER_TOOLS, e, {
+    reportError(_$$e.DEVELOPER_TOOLS, e, {
       extra: {
         toolName: t
       }
@@ -81,7 +81,7 @@ export async function $$A2(e, t) {
   }
 }
 async function x(e) {
-  let t = zl.get(rx);
+  let t = atomStoreManager.get(rx);
   if (t) return [t, {}];
   let r = {};
   let n = {};
@@ -123,7 +123,7 @@ async function x(e) {
   return [r, n];
 }
 async function N(e, t) {
-  let r = zl.get(DR);
+  let r = atomStoreManager.get(DR);
   if (r) return [r, {}];
   let n = {};
   let i = {};
@@ -238,7 +238,7 @@ async function O({
       }
     } catch (e) {
       console.error("Error processing instance Code Connect:", e);
-      $D(_$$e.DEVELOPER_TOOLS, e, {
+      reportError(_$$e.DEVELOPER_TOOLS, e, {
         extra: {
           instances: E,
           codeConnectDocRaw: u
@@ -250,7 +250,7 @@ async function O({
       y = JSON.parse(g.figmadoc);
     } catch (e) {
       console.error("Error parsing Code Connect:", e);
-      $D(_$$e.DEVELOPER_TOOLS, e, {
+      reportError(_$$e.DEVELOPER_TOOLS, e, {
         extra: {
           figmadoc: g.figmadoc
         }

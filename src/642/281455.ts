@@ -6,11 +6,11 @@ import { S as _$$S } from "../905/274480";
 import { J } from "../905/270045";
 import { DP } from "../905/158740";
 import { getFeatureFlags } from "../905/601108";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { o6, Z7, Pt } from "../figma_app/806412";
 import { k as _$$k2 } from "../905/582200";
 import { Point } from "../905/736624";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { XE, u1 } from "../figma_app/91703";
 import { sw } from "../figma_app/914957";
 import { k8 } from "../figma_app/8833";
@@ -160,7 +160,7 @@ export function $$G0(e) {
   let z = useMemo(() => hS(backgroundOpacity) && "number" == typeof backgroundOpacity && isNaN(backgroundOpacity) ? 0 : backgroundOpacity, [backgroundOpacity]);
   let W = () => {
     if (e.setDefaultToolOnPickerOpen && Y5.triggerAction("set-tool-default"), e.pickerShown && e.pickerShown.id === k8) k(XE());else {
-      getFeatureFlags().ce_properties_panel_tracking && sx("editor-background-panel-color-picker-show");
+      getFeatureFlags().ce_properties_panel_tracking && trackEventAnalytics("editor-background-panel-color-picker-show");
       let e = t.current ? cn(t.current) : {
         x: 0,
         y: 0
@@ -217,7 +217,7 @@ export function $$G0(e) {
         children: [jsxs(fI, {
           className: "background_panel--panelTitleRow--uNINf",
           children: [jsx(_$$Q, {
-            children: w ? tx("fullscreen.properties_panel.background") : tx("fullscreen.properties_panel.page")
+            children: w ? renderI18nText("fullscreen.properties_panel.background") : renderI18nText("fullscreen.properties_panel.page")
           }), jsx(_$$M, {
             showLibrarySets: !0,
             recordingKey: "pageLevel"
@@ -243,13 +243,13 @@ export function $$G0(e) {
           recordingKey: Pt(e, "exportDisableCheckbox"),
           label: jsx(J, {
             htmlAttributes: {
-              "data-tooltip": _$$t("fullscreen.properties_panel.include_the_canvas_or_group_background_in_exports"),
+              "data-tooltip": getI18nString("fullscreen.properties_panel.include_the_canvas_or_group_background_in_exports"),
               "data-tooltip-type": Ib.TEXT
             },
-            children: tx("fullscreen.properties_panel.show_in_exports")
+            children: renderI18nText("fullscreen.properties_panel.show_in_exports")
           }),
           htmlAttributes: {
-            "data-tooltip": _$$t("fullscreen.properties_panel.include_the_canvas_or_group_background_in_exports"),
+            "data-tooltip": getI18nString("fullscreen.properties_panel.include_the_canvas_or_group_background_in_exports"),
             "data-tooltip-type": Ib.TEXT
           }
         })
@@ -265,8 +265,8 @@ export function $$G0(e) {
           className: "background_panel--checkboxLabel--ITthj",
           htmlFor: "export-background-disabled",
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": _$$t("fullscreen.properties_panel.include_the_canvas_or_group_background_in_exports"),
-          children: tx("fullscreen.properties_panel.show_in_exports")
+          "data-tooltip": getI18nString("fullscreen.properties_panel.include_the_canvas_or_group_background_in_exports"),
+          children: renderI18nText("fullscreen.properties_panel.show_in_exports")
         })]
       }) : void 0, e.pickerShown?.id === k8 && jsx(_$$h, {
         disabledVariableIds: new Set(),

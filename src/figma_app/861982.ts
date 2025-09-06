@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { g8, MJ } from "../figma_app/860955";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { jd } from "../figma_app/106207";
 import { x } from "../905/619833";
 import { vt } from "../905/862883";
@@ -17,7 +17,7 @@ export function $$h3({
   return {
     recordingKey: "publishCustomTemplate",
     name: "publish-template",
-    displayText: _$$t("tile.dropdown.use_in_new_file"),
+    displayText: getI18nString("tile.dropdown.use_in_new_file"),
     callback() {
       e(jd({
         templateIdentifier: {
@@ -45,7 +45,7 @@ export function $$m1({
       }));
     },
     recordingKey: "publishCustomTemplate",
-    children: _$$t("tile.dropdown.use_in_new_file")
+    children: getI18nString("tile.dropdown.use_in_new_file")
   });
 }
 export async function $$g2({
@@ -81,23 +81,23 @@ export function $$f4({
     });
   };
   return r ? {
-    displayText: _$$t("tile.dropdown.manage_template"),
+    displayText: getI18nString("tile.dropdown.manage_template"),
     name: "manage-template",
     children: [{
       recordingKey: "publishCustomTemplate",
       name: "publish-template",
-      displayText: _$$t("tile.dropdown.update_template"),
+      displayText: getI18nString("tile.dropdown.update_template"),
       callback: s
     }, {
       recordingKey: "unpublishCustomTemplate",
       name: "unpublish-template",
-      displayText: _$$t("tile.dropdown.unpublish_template"),
+      displayText: getI18nString("tile.dropdown.unpublish_template"),
       callback: yz(e, t.key)
     }]
   } : {
     recordingKey: "publishCustomTemplate",
     name: "publish-template",
-    displayText: _$$t("tile.dropdown.publish_as_template"),
+    displayText: getI18nString("tile.dropdown.publish_as_template"),
     callback: s,
     "data-onboarding-key": w1
   };
@@ -119,23 +119,23 @@ export function $$E0({
   };
   return r ? jsxs(g8, {
     children: [jsx(Qq, {
-      children: _$$t("tile.dropdown.manage_template")
+      children: getI18nString("tile.dropdown.manage_template")
     }), jsxs(MJ, {
       children: [jsx(Pu, {
         onClick: l,
         recordingKey: "publishCustomTemplate",
-        children: _$$t("tile.dropdown.update_template")
+        children: getI18nString("tile.dropdown.update_template")
       }), jsx(Pu, {
         onClick: yz(e, t.key),
         recordingKey: "unpublishCustomTemplate",
-        children: _$$t("tile.dropdown.unpublish_template")
+        children: getI18nString("tile.dropdown.unpublish_template")
       })]
     })]
   }) : jsx(Pu, {
     onClick: l,
     "data-onboarding-key": w1,
     recordingKey: "publishCustomTemplate",
-    children: _$$t("tile.dropdown.publish_as_template")
+    children: getI18nString("tile.dropdown.publish_as_template")
   });
 }
 export const R5 = $$E0;

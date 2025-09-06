@@ -1,8 +1,8 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
-import { md } from "../figma_app/27355";
-import { az } from "../905/449184";
+import { useAtomWithSubscription } from "../figma_app/27355";
+import { analyticsEventManager } from "../905/449184";
 import { H } from "../905/620380";
 import { h as _$$h } from "../905/207101";
 import { getInitialOptions } from "../figma_app/169182";
@@ -24,7 +24,7 @@ import { Wk, hE } from "../figma_app/272243";
 import { _ as _$$_ } from "../figma_app/496441";
 import { g as _$$g } from "../905/687265";
 import { Ay as _$$Ay } from "@stylexjs/stylex";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Y } from "../905/830372";
 import { V } from "../905/355181";
 import { E as _$$E } from "../905/984674";
@@ -73,17 +73,17 @@ function L({
           children: jsx(_$$E, {
             fontSize: 11,
             fontWeight: "bold",
-            children: _$$t("tos_agreement.modal_title")
+            children: getI18nString("tos_agreement.modal_title")
           })
         })
       }), jsx("div", {
         ..._$$Ay.props(D.body),
-        children: tx("tos_agreement.modal_description", {
+        children: renderI18nText("tos_agreement.modal_description", {
           terms_of_service_link: jsx(_$$_, {
             href: "/legal/tos",
             newTab: !0,
             className: "x1quhyk7 x1bvjpef x1ypdohk",
-            children: tx("tos_agreement.tos_link_text")
+            children: renderI18nText("tos_agreement.tos_link_text")
           })
         })
       }), jsx(Y, {
@@ -99,7 +99,7 @@ function L({
           trackingProperties: {
             trackingDescriptor: _$$c.AGREE
           },
-          children: _$$t("tos_agreement.modal_accept_button")
+          children: getI18nString("tos_agreement.modal_accept_button")
         })
       })]
     })
@@ -108,9 +108,9 @@ function L({
 export function $$F0({
   waitForNux: e = !0
 }) {
-  let t = md(_$$a);
-  let i = md(NT);
-  let I = md(g5);
+  let t = useAtomWithSubscription(_$$a);
+  let i = useAtomWithSubscription(NT);
+  let I = useAtomWithSubscription(g5);
   let {
     show,
     complete,
@@ -132,7 +132,7 @@ export function $$F0({
           emailValidatedAt: t,
           jobTitle: e
         });
-        return k ? (!i || !!n) && !!T : (T && az.trackDefinedEvent("activation.tos_agreement_modal_attempt", {
+        return k ? (!i || !!n) && !!T : (T && analyticsEventManager.trackDefinedEvent("activation.tos_agreement_modal_attempt", {
           nuxOverlayMounted: i,
           nuxCriteriaMet: n
         }), !1);

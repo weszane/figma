@@ -10,7 +10,7 @@ import { rf } from "../figma_app/806412";
 import { ph } from "../figma_app/709893";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Y as _$$Y } from "../905/830372";
 import { d1 } from "../905/766303";
 import { fV } from "../figma_app/236178";
@@ -88,7 +88,7 @@ export function $$O1({
     libraryKey: i,
     showingDefaultSubscriptionsForTeamId: u,
     showingDefaultSubscriptionsForUser: g,
-    label: _$$t("design_systems.libraries_modal.enabled_by_default"),
+    label: getI18nString("design_systems.libraries_modal.enabled_by_default"),
     disabled: !e,
     confirmCalloutShowing: L,
     setConfirmCalloutShowing: F
@@ -96,7 +96,7 @@ export function $$O1({
   let H = null;
   S || u || g || (M ? H = jsx("div", {
     className: "subscription_file_view_header--currentFileLabel--tbNfz ellipsis--ellipsis--Tjyfa",
-    children: tx("design_systems.libraries_modal.current_file")
+    children: renderI18nText("design_systems.libraries_modal.current_file")
   }) : O && (H = jsx(kz, {
     libraryKey: i,
     showingDefaultSubscriptionsForTeamId: u,
@@ -111,7 +111,7 @@ export function $$O1({
     children: jsx(_$$N, {
       href: W,
       newTab: !0,
-      children: tx("design_systems.libraries_modal.open_file")
+      children: renderI18nText("design_systems.libraries_modal.open_file")
     })
   }) : null;
   let Y = useMemo(() => B ? jsx("div", {
@@ -132,14 +132,14 @@ export function $$O1({
   return jsxs("div", {
     className: "subscription_file_view_header--componentOrFileViewHeader_v2--aMnfg",
     children: [jsx(c, {
-      label: _$$t("design_systems.libraries_modal.header_label", {
+      label: getI18nString("design_systems.libraries_modal.header_label", {
         fileName: j
       })
     }), jsx("div", {
       className: "subscription_file_view_header--backButton--0M3NV",
       children: jsx(_$$K, {
         onClick: G,
-        "aria-label": _$$t("design_systems.libraries_modal.back"),
+        "aria-label": getI18nString("design_systems.libraries_modal.back"),
         children: jsx(_$$C, {})
       })
     }), jsxs("div", {
@@ -195,7 +195,7 @@ export function $$L0(e) {
   return jsxs("div", {
     className: "subscription_file_view_header--componentOrFileViewHeader--jxKql",
     children: [jsx(c, {
-      label: _$$t("design_systems.libraries_modal.header_label_missing")
+      label: getI18nString("design_systems.libraries_modal.header_label_missing")
     }), jsx(B, {
       svg: _$$A,
       className: "subscription_file_view_header--backCaret--nwuU8",
@@ -208,7 +208,7 @@ export function $$L0(e) {
       children: [jsx(B, {
         className: "subscription_file_view_header--missingLibrariesIcon--AZ8iW replace_libraries_modal--missingLibrariesIcon--1oNrW",
         svg: _$$A2
-      }), tx("design_systems.libraries_modal.plural.missing_library", {
+      }), renderI18nText("design_systems.libraries_modal.plural.missing_library", {
         missingLibCount: e.numMissingLibraries
       })]
     })]

@@ -5,7 +5,7 @@ import { H as _$$H } from "../905/507464";
 import { j as _$$j } from "../905/206476";
 import { P } from "../905/697522";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Y } from "../905/830372";
 import { V } from "../905/355181";
 import { S as _$$S } from "../905/339549";
@@ -51,7 +51,7 @@ function N(e) {
           },
           children: jsx(_$$S, {
             checked: a,
-            label: _$$t("org_admin_settings.billing.finalize_invoice_modal.checkbox"),
+            label: getI18nString("org_admin_settings.billing.finalize_invoice_modal.checkbox"),
             onChange: () => r(!a)
           })
         })]
@@ -61,12 +61,12 @@ function N(e) {
         children: [jsx(V, {
           variant: "secondary",
           onClick: l,
-          children: tx("org_admin_settings.billing.finalize_invoice_modal.button.cancel")
+          children: renderI18nText("org_admin_settings.billing.finalize_invoice_modal.button.cancel")
         }), jsx(V, {
           variant: "primary",
           disabled: !a,
           onClick: e.onConfirm,
-          children: tx("org_admin_settings.billing.finalize_invoice_modal.button.finalize_invoice")
+          children: renderI18nText("org_admin_settings.billing.finalize_invoice_modal.button.finalize_invoice")
         })]
       })]
     })
@@ -88,12 +88,12 @@ function T({
         color: "default",
         fontWeight: "semi-bold",
         fontSize: 20,
-        children: tx(`org_admin_settings.billing.finalize_invoice_modal.title.${e}`)
+        children: renderI18nText(`org_admin_settings.billing.finalize_invoice_modal.title.${e}`)
       }), jsx(_$$E, {
         color: "default",
         fontSize: 13,
         fontWeight: "regular",
-        children: tx("org_admin_settings.billing.finalize_invoice_modal.subtitle")
+        children: renderI18nText("org_admin_settings.billing.finalize_invoice_modal.subtitle")
       })]
     })
   });
@@ -134,10 +134,10 @@ export let $$A0 = Ju(function (e) {
               })
             }), jsx("span", {
               className: _$$s.selfCenter.$,
-              children: _ ? _$$t("plan_invoices.new_seats_quantity", {
+              children: _ ? getI18nString("plan_invoices.new_seats_quantity", {
                 quantity: a,
                 seatType: i
-              }) : _$$t("plan_invoices.seats_quantity", {
+              }) : getI18nString("plan_invoices.seats_quantity", {
                 quantity: a,
                 seatType: i
               })
@@ -152,7 +152,7 @@ export let $$A0 = Ju(function (e) {
         className: _$$s.textBodyMediumStrong.flex.justifyBetween.gap16.$,
         "data-testid": "invoice-details-total",
         children: [jsx("div", {
-          children: _$$t("org_admin_settings.billing.finalize_invoice_modal.invoice_subtotal")
+          children: getI18nString("org_admin_settings.billing.finalize_invoice_modal.invoice_subtotal")
         }), jsx("div", {
           children: s.formatMoney(e.invoice.subtotal, {
             showCents: !1

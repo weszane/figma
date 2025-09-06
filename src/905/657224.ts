@@ -5,8 +5,8 @@ import { debounce } from '../905/915765'
  * Storage references for session and local storage.
  * Original variable names: $$a0, $$s8
  */
-let sessionStorageRef: Storage | null = null
-let localStorageRef: Storage | null = null
+export let sessionStorageRef: Storage | null = null
+export let localStorageRef: Storage | null = null
 try {
   sessionStorageRef = window.sessionStorage
 } catch {}

@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, useEffect, useRef, PureComponent } from "react";
 import { W } from "../905/187396";
-import { b as _$$b } from "../905/690073";
+import { EventEmitter } from "../905/690073";
 import { parsePxNumber } from "../figma_app/783094";
 import { n } from "../897/929006";
 import { _W, E7, hS, gl } from "../905/216495";
@@ -19,11 +19,11 @@ let I = "transition_preview--screenBorder--Fz-dz transition_preview--screenConta
 let w = "transition_preview--screenBorderNarrow--EB6kk transition_preview--screenContainerNarrow--ugQN- transition_preview--previewFrame--WAa8e transition_preview--_previewItem--o2gce";
 let v = "transition_preview--smartAnimateRowItem--aMXQ8";
 let A = "transition_preview--ui3Container--2qKB0";
-var E = ((e) => (e[e.BLANK = 0] = "BLANK", e[e.ACTIVE = 1] = "ACTIVE", e[e.INACTIVE = 2] = "INACTIVE", e[e.ACTIVE_RESETTABLE = 3] = "ACTIVE_RESETTABLE", e))(E || {});
-var $$g0 = ((e) => (e[e.STATIC = 0] = "STATIC", e[e.ANIMATING = 1] = "ANIMATING", e[e.RETURN_TO_START = 2] = "RETURN_TO_START", e))($$g0 || {});
+var E = (e => (e[e.BLANK = 0] = "BLANK", e[e.ACTIVE = 1] = "ACTIVE", e[e.INACTIVE = 2] = "INACTIVE", e[e.ACTIVE_RESETTABLE = 3] = "ACTIVE_RESETTABLE", e))(E || {});
+var $$g0 = (e => (e[e.STATIC = 0] = "STATIC", e[e.ANIMATING = 1] = "ANIMATING", e[e.RETURN_TO_START = 2] = "RETURN_TO_START", e))($$g0 || {});
 let N = parsePxNumber("40px");
-let $$y3 = new _$$b("activateBezierCustomAnimationPreview");
-let $$f4 = new _$$b("activateSpringCustomAnimationPreview");
+let $$y3 = new EventEmitter("activateBezierCustomAnimationPreview");
+let $$f4 = new EventEmitter("activateSpringCustomAnimationPreview");
 export function $$x1({
   transition: e,
   isNarrowPanel: t
@@ -74,7 +74,7 @@ export function $$x1({
   let [h, m] = useState(t ? 80 : 124);
   let S = useRef(null);
   useEffect(() => {
-    let e = new ResizeObserver((e) => {
+    let e = new ResizeObserver(e => {
       for (let t of e) {
         let {
           width
@@ -113,7 +113,7 @@ export function $$x1({
     })
   });
 }
-var b = ((e) => (e[e.RESET_INSTANT = 0] = "RESET_INSTANT", e[e.RESET_WITH_EASE = 1] = "RESET_WITH_EASE", e[e.PLAY_TO_END = 2] = "PLAY_TO_END", e))(b || {});
+var b = (e => (e[e.RESET_INSTANT = 0] = "RESET_INSTANT", e[e.RESET_WITH_EASE = 1] = "RESET_WITH_EASE", e[e.PLAY_TO_END = 2] = "PLAY_TO_END", e))(b || {});
 let M = class e extends PureComponent {
   constructor(t) {
     super(t);
@@ -173,7 +173,7 @@ let M = class e extends PureComponent {
     this.resetAnimationNew = () => {
       this.setAnimationStateNew(1);
     };
-    this.setAnimationStateNew = (e) => {
+    this.setAnimationStateNew = e => {
       this.executor.reset();
       this.setState({
         status: 0 === e ? 1 : 3,

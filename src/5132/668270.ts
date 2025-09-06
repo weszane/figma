@@ -1,9 +1,9 @@
 import { subscribeAndAwaitData } from "../905/553831";
 import { oA } from "../905/723791";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { _l } from "../figma_app/976345";
 import { jmg } from "../figma_app/43951";
@@ -20,7 +20,7 @@ let $$f0 = nF(async (e, l, {
       fileKey: l.file_key
     })).deviceTryFile);
   } catch (e) {
-    x1("claimFigJamTryFile", "Request failed for fetching LG DeviceTryFileView", e, {
+    logError("claimFigJamTryFile", "Request failed for fetching LG DeviceTryFileView", e, {
       reportAsSentryError: !0
     });
   }
@@ -46,8 +46,8 @@ let $$f0 = nF(async (e, l, {
       currentUserOrgId,
       selectedView
     } = e.getState();
-    let v = _$$t("figjam_try.this_file_has_been_saved_to_drafts");
-    if ("team" === save_location && folder_name && (v = _$$t("figjam_try.this_file_has_been_saved_to_folder_name", {
+    let v = getI18nString("figjam_try.this_file_has_been_saved_to_drafts");
+    if ("team" === save_location && folder_name && (v = getI18nString("figjam_try.this_file_has_been_saved_to_folder_name", {
       folder_name
     })), org_id && org_id !== currentUserOrgId && user) {
       let l = {
@@ -74,7 +74,7 @@ let $$g1 = nF(async (e, {
 }) => {
   try {
     await XHR.put(`/api/try/file/${i}`, {
-      name: _$$t("figjam_try.default_filename", {
+      name: getI18nString("figjam_try.default_filename", {
         userName: l
       })
     });

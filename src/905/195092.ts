@@ -2,7 +2,7 @@ import _require from "../5973/625973";
 import { COMPONENT_PREFIX } from "../figma_app/664063";
 import { AD } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { Ay } from "../figma_app/432652";
 import { Ay as _$$Ay } from "../figma_app/948389";
 var n;
@@ -104,7 +104,7 @@ export async function $$g0(e, t, i, r) {
       };
     }(t, e);
     if (!i.pass) {
-      az.trackDefinedEvent("autosuggest_text.warning", {
+      analyticsEventManager.trackDefinedEvent("autosuggest_text.warning", {
         description: "Basic leak check failed",
         num_existing_chars: g.length,
         num_existing_words: g.split(" ").length,
@@ -125,14 +125,14 @@ export async function $$g0(e, t, i, r) {
       let r = RegExp(`<\\b${t}\\b(\\s+[^>]*)*/?>`, "g");
       return e.replace(/\{CURSOR\}/g, "").replace(/\{BREAK\}/g, "").replace(i, "").replace(n, "").replace(r, "").replace(/{\s*`([^`]*)`\s*}/g, "$1").replace(/\s+/g, " ").replace(/^`|`$/g, "").replace(/'/g, "\u2019").trim();
     }(e);
-    return (i === g && az.trackDefinedEvent("autosuggest_text.suggestion_same_as_existing", {
+    return (i === g && analyticsEventManager.trackDefinedEvent("autosuggest_text.suggestion_same_as_existing", {
       suggestion_length: e.length
     }), _ && (i = (t = i) && _ && t.toLowerCase().startsWith(_.toLowerCase()) ? _ + t.substring(_.length) : t), i === g) ? "" : i;
   }).filter(e => "" !== e);
-  az.trackDefinedMetric("autosuggest_text.serialization_latency", {
+  analyticsEventManager.trackDefinedMetric("autosuggest_text.serialization_latency", {
     serialization_latency_ms: p - d
   });
-  az.trackDefinedMetric("autosuggest_text.token_reduction_exp_info", {
+  analyticsEventManager.trackDefinedMetric("autosuggest_text.token_reduction_exp_info", {
     numSerializedNodes: u.expData.numSerializedNodes,
     maxSerializeNodes: u.expData.maxSerializeNodes,
     maxNodesWithFields: u.expData.maxNodesWithFields

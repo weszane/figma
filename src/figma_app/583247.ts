@@ -2,7 +2,7 @@ import { uN } from "../figma_app/338442";
 import { J0O, uXg } from "../figma_app/763686";
 import { Mz } from "../vendor/925040";
 import { P8 } from "../905/270781";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { gl } from "../905/216495";
 import { g } from "../905/578436";
 import { dK, Sh } from "../figma_app/889655";
@@ -33,7 +33,7 @@ export function $$m0() {
       let r = d[e] || xJ;
       return gl(r) ? {
         name: e,
-        value: _$$t("inspect_panel.property.mixed"),
+        value: getI18nString("inspect_panel.property.mixed"),
         type: t
       } : {
         name: e,
@@ -54,7 +54,7 @@ let $$f4 = (() => {
 })();
 let $$E2 = Mz([$$f4], e => {
   let t = e.map(e => e.name);
-  let r = _$$t("design_systems.component_properties.variant_property_default_name");
+  let r = getI18nString("design_systems.component_properties.variant_property_default_name");
   return g(r, t);
 });
 export function $$y1(e, t) {

@@ -1,6 +1,6 @@
 import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { XW } from "../figma_app/427318";
 import { M4 } from "../905/713695";
 import { H } from "../905/473998";
@@ -52,12 +52,12 @@ let $$h0 = M4.Query({
     })).data.meta;
     if (s.resource && s.private_plugin) {
       let e = Error("Resource and Private Plugin cannot both be present");
-      $D(_$$e.COMMUNITY, e);
+      reportError(_$$e.COMMUNITY, e);
       return e;
     }
     if (!s.resource && !s.private_plugin) {
       let e = Error("Resource or Private Plugin must be present");
-      $D(_$$e.COMMUNITY, e);
+      reportError(_$$e.COMMUNITY, e);
       return e;
     }
     return s.resource ? s.resource : s.private_plugin ? s.private_plugin : void 0;

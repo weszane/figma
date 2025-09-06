@@ -2,14 +2,14 @@ import { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { isNotNullish } from "../figma_app/95419";
 import { m1T } from "../figma_app/763686";
-import { R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { Yx } from "../figma_app/930338";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { e as _$$e } from "../905/810168";
 import { xM, lU } from "../figma_app/539925";
 import { Y5 } from "../figma_app/455680";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { TI } from "../figma_app/407856";
 import { sG } from "../figma_app/440994";
 function f(e) {
@@ -34,10 +34,10 @@ export function $$b3(e) {
       t?.removeEventListener("blur", E);
     };
   }, [e]);
-  let t = R(e => Object.keys(e.mirror.sceneGraphSelection).length);
+  let t = selectWithShallowEqual(e => Object.keys(e.mirror.sceneGraphSelection).length);
   let r = useSelector(e => e.mirror.appModel.activeCanvasEditModeType === m1T.DESIGN_LAYOUT || e.mirror.appModel.activeCanvasEditModeType === m1T.WHITEBOARD_LAYOUT || e.mirror.appModel.activeCanvasEditModeType === m1T.SITES_LAYOUT || e.mirror.appModel.activeCanvasEditModeType === m1T.COMMENTS || e.mirror.appModel.activeCanvasEditModeType === m1T.SLIDE_LAYOUT);
   let h = _$$e();
-  let [b, I] = R(e => {
+  let [b, I] = selectWithShallowEqual(e => {
     let t;
     null != e.mirror.appModel.currentStampToolName && "" !== e.mirror.appModel.currentStampToolName && (t = TI(e.mirror.appModel.currentStampToolName)());
     return [e.mirror.appModel.currentTool, t];
@@ -47,7 +47,7 @@ export function $$b3(e) {
   useEffect(() => {
     if (!r) return;
     let e = null;
-    0 === t && !0 === A.current ? e = _$$t("fullscreen.accessibility.selection_cleared") : t > 1 && (e = _$$t("fullscreen.accessibility.multi_select", {
+    0 === t && !0 === A.current ? e = getI18nString("fullscreen.accessibility.selection_cleared") : t > 1 && (e = getI18nString("fullscreen.accessibility.multi_select", {
       n: t
     }));
     h && e && v(F.enqueue({
@@ -61,7 +61,7 @@ export function $$b3(e) {
   useEffect(() => {
     let r = $$T2();
     if (null == r) return;
-    let n = [S(e), sG(b, I), t > 0 ? _$$t("fullscreen.accessibility.num_items_selected", {
+    let n = [S(e), sG(b, I), t > 0 ? getI18nString("fullscreen.accessibility.num_items_selected", {
       num_selected: t
     }) : null].filter(isNotNullish);
     r.ariaLabel = Yx(n, "unit");
@@ -88,12 +88,12 @@ export function $$I0() {
 }
 function S(e) {
   switch (e) {
-    case nT.Whiteboard:
-      return _$$t("general.figjam");
-    case nT.Slides:
-      return _$$t("general.figma_slides");
+    case FEditorType.Whiteboard:
+      return getI18nString("general.figjam");
+    case FEditorType.Slides:
+      return getI18nString("general.figma_slides");
     default:
-      return _$$t("general.figma_design");
+      return getI18nString("general.figma_design");
   }
 }
 export const $z = $$I0;

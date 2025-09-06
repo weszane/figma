@@ -9,13 +9,13 @@ import { I } from "../905/932503";
 import { J } from "../905/341359";
 import { getFeatureFlags } from "../905/601108";
 import { B as _$$B } from "../905/714743";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { oB } from "../905/929976";
 import { to } from "../905/156213";
 import { Cu } from "../figma_app/314264";
 import { q5 } from "../figma_app/516028";
 import { iZ } from "../905/372672";
-import { P as _$$P } from "../905/338617";
+import { selectTeams } from "../905/338617";
 import { gN } from "../figma_app/273118";
 import { O as _$$O } from "../905/833838";
 import { Ib } from "../905/129884";
@@ -41,7 +41,7 @@ export function $$R1(e) {
   } = _$$b();
   let B = iZ();
   let S = useSelector(e => F ? e.plans : B ? e.authedUsers.byId[B.id]?.plans : null);
-  let O = useSelector(_$$P);
+  let O = useSelector(selectTeams);
   let q = useSelector(e => e.orgById);
   let U = () => {
     R(oB());
@@ -61,11 +61,11 @@ export function $$R1(e) {
     className: N,
     children: [jsx("h1", {
       className: C,
-      children: _$$t("user_notification.all_notifications")
+      children: getI18nString("user_notification.all_notifications")
     }), e.displaySettings && S?.length === 1 && jsx(K, {
-      "aria-label": _$$t("user_notifications.settings"),
+      "aria-label": getI18nString("user_notifications.settings"),
       htmlAttributes: {
-        "data-dropdown-tooltip": _$$t("user_notifications.settings"),
+        "data-dropdown-tooltip": getI18nString("user_notifications.settings"),
         "data-tooltip-type": Ib.TEXT,
         "data-tooltip-show-above": !0
       },
@@ -75,7 +75,7 @@ export function $$R1(e) {
   });
   let H = S.map(e => e.plan_id);
   H.unshift($$I0);
-  let z = (e, t) => e === $$I0 ? _$$t("user_notification.all_notifications") : t[e];
+  let z = (e, t) => e === $$I0 ? getI18nString("user_notification.all_notifications") : t[e];
   let V = S.reduce((e, t) => {
     if (F && "plan_type" in t) {
       let i = "";
@@ -115,7 +115,7 @@ export function $$R1(e) {
       children: jsxs(bL, {
         manager,
         children: [jsxs(_$$E, {
-          "aria-label": _$$t("user_notifications.notif_filter_label", {
+          "aria-label": getI18nString("user_notifications.notif_filter_label", {
             planName: z(currentPlanFilter, V)
           }),
           className: "notifs_plan_filter--dropdownButton--hQgHc",
@@ -134,9 +134,9 @@ export function $$R1(e) {
         })]
       })
     }), e.displaySettings && jsx(K, {
-      "aria-label": _$$t("user_notifications.settings"),
+      "aria-label": getI18nString("user_notifications.settings"),
       htmlAttributes: {
-        "data-dropdown-tooltip": _$$t("user_notifications.settings"),
+        "data-dropdown-tooltip": getI18nString("user_notifications.settings"),
         "data-tooltip-type": Ib.TEXT,
         "data-tooltip-show-above": !0
       },

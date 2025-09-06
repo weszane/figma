@@ -5,7 +5,7 @@ import { e as _$$e } from "../905/149844";
 import l from "classnames";
 import { Pt } from "../figma_app/806412";
 import { e6 } from "../figma_app/617427";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Z6 } from "../figma_app/451499";
 import { av } from "../figma_app/316316";
 import { BK } from "../905/848862";
@@ -85,19 +85,19 @@ export function $$v1(e) {
       isUI3: !0
     }));
   });
-  let V = e.isNestedInConditional ? _$$t("proto.prototype_panel.add_nested_action") : P ? _$$t("sites.panel.add_interaction") : _$$t("proto.prototype_panel.add");
+  let V = e.isNestedInConditional ? getI18nString("proto.prototype_panel.add_nested_action") : P ? getI18nString("sites.panel.add_interaction") : getI18nString("proto.prototype_panel.add");
   return jsxs(Fragment, {
     children: [jsx(e6, {
       ref: I,
       recordingKey: Pt(recordingKey, "createActionDropdown"),
       className: R,
       onClick: A,
-      "aria-label": _$$t("proto.prototype_panel.create_action_button"),
+      "aria-label": getI18nString("proto.prototype_panel.create_action_button"),
       htmlAttributes: {
         "data-tooltip": V,
         "data-tooltip-type": "text"
       },
-      children: e.renderButton ? jsx(_$$e, {}) : tx("fullscreen.properties_panel.click_plus_to_add_new_action")
+      children: e.renderButton ? jsx(_$$e, {}) : renderI18nText("fullscreen.properties_panel.click_plus_to_add_new_action")
     }), showing && I.current && jsx(j, {
       dataTestId: e.dataTestId,
       dispatch: L,

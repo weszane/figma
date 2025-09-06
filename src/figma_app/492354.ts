@@ -1,24 +1,24 @@
 import { aH } from "../figma_app/273493";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { Jq, rN, $R } from "../figma_app/967873";
 import { B } from "../figma_app/397954";
 import { w } from "../figma_app/106955";
 export let $$n0;
 class d {
   getEyedropperContext() {
-    return zl.get(B);
+    return atomStoreManager.get(B);
   }
   updateEditPaletteModalColor(e) {
-    let t = zl.get(Jq);
-    let r = zl.get(rN);
+    let t = atomStoreManager.get(Jq);
+    let r = atomStoreManager.get(rN);
     let n = [...r.slice(0, t), aH(e), ...r.slice(t + 1)];
-    zl.set(rN, n);
+    atomStoreManager.set(rN, n);
   }
   isCustomPaletteApplied() {
-    return !!zl.get($R);
+    return !!atomStoreManager.get($R);
   }
   showSectionPresets() {
-    return zl.get(w);
+    return atomStoreManager.get(w);
   }
 }
 export function $$c1() {

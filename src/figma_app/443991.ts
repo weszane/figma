@@ -4,7 +4,7 @@ import { Q } from "../figma_app/550678";
 import { Point } from "../905/736624";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { nF } from "../905/350402";
 import { yJ } from "../905/395917";
@@ -66,7 +66,7 @@ export async function $$T2(e, t, r) {
       });
     }(n);
     if (!e) {
-      _$$s.error(_$$t("avatar_actions.editor_uploaded.an_error_occurred_while_setting_your_profile_photo"));
+      _$$s.error(getI18nString("avatar_actions.editor_uploaded.an_error_occurred_while_setting_your_profile_photo"));
       return;
     }
     r($$A5({
@@ -77,8 +77,8 @@ export async function $$T2(e, t, r) {
       contentType: "image/jpeg"
     }));
   } catch (e) {
-    r(_$$s.error(_$$t("avatar_actions.editor_uploaded.an_error_occurred_while_setting_your_profile_photo")));
-    console.error(_$$t("avatar_actions.editor_uploaded.an_error_occurred_while_setting_your_profile_photo"), e);
+    r(_$$s.error(getI18nString("avatar_actions.editor_uploaded.an_error_occurred_while_setting_your_profile_photo")));
+    console.error(getI18nString("avatar_actions.editor_uploaded.an_error_occurred_while_setting_your_profile_photo"), e);
   }
 }
 let $$I1 = NC("AVATAR_EDITOR_RESET");
@@ -97,8 +97,8 @@ let S = nF((e, t) => {
     }));
     e.dispatch($$I1());
   }, t => {
-    e.dispatch(_$$s.error(_$$t("avatar_actions.editor_uploaded.an_error_occurred_while_setting_your_profile_photo")));
-    console.error(_$$t("avatar_actions.editor_uploaded.an_error_occurred_while_setting_your_profile_photo"), t);
+    e.dispatch(_$$s.error(getI18nString("avatar_actions.editor_uploaded.an_error_occurred_while_setting_your_profile_photo")));
+    console.error(getI18nString("avatar_actions.editor_uploaded.an_error_occurred_while_setting_your_profile_photo"), t);
     e.dispatch($$I1());
   });else if (t.entityType === ck.TEAM) {
     let r = t.entity.id;
@@ -115,11 +115,11 @@ let S = nF((e, t) => {
       }));
       e.dispatch($$I1());
       e.dispatch(F.enqueue({
-        message: _$$t("avatar_actions.team_icon_updated")
+        message: getI18nString("avatar_actions.team_icon_updated")
       }));
     }, t => {
-      e.dispatch(_$$s.error(_$$t("avatar_actions.an_error_occurred_while_setting_the_team_icon")));
-      console.error(_$$t("avatar_actions.an_error_occurred_while_setting_the_team_icon"));
+      e.dispatch(_$$s.error(getI18nString("avatar_actions.an_error_occurred_while_setting_the_team_icon")));
+      console.error(getI18nString("avatar_actions.an_error_occurred_while_setting_the_team_icon"));
       e.dispatch($$I1());
     });
   } else if (t.entityType === ck.ORG) {
@@ -136,8 +136,8 @@ let S = nF((e, t) => {
       }));
       e.dispatch($$I1());
     }, t => {
-      e.dispatch(_$$s.error(_$$t("avatar_actions.an_error_occurred") + t.data?.message));
-      console.error(_$$t("avatar_actions.an_error_occurred_while_setting_the_organization_icon"), t);
+      e.dispatch(_$$s.error(getI18nString("avatar_actions.an_error_occurred") + t.data?.message));
+      console.error(getI18nString("avatar_actions.an_error_occurred_while_setting_the_organization_icon"), t);
       e.dispatch($$I1());
     });
   } else if (t.entityType === ck.WORKSPACE) {
@@ -148,11 +148,11 @@ let S = nF((e, t) => {
       img_url_500_500: t.largeUrl,
       onfulfilled: () => {
         e.dispatch(F.enqueue({
-          message: _$$t("avatar_actions.workspace_icon_updated")
+          message: getI18nString("avatar_actions.workspace_icon_updated")
         }));
       },
       onrejected: t => {
-        let r = _$$t("avatar_actions.an_error_occurred_while_setting_the_workspace_icon");
+        let r = getI18nString("avatar_actions.an_error_occurred_while_setting_the_workspace_icon");
         e.dispatch(_$$s.error(r));
         console.error(r);
         e.dispatch($$I1());
@@ -172,7 +172,7 @@ let $$A5 = nF((e, t) => {
       largeUrl: i
     }));
   }, () => {
-    e.dispatch(_$$s.error(_$$t("avatar_actions.an_error_occurred_while_uploading_the_image")));
+    e.dispatch(_$$s.error(getI18nString("avatar_actions.an_error_occurred_while_uploading_the_image")));
     e.dispatch($$I1());
   });
   e.dispatch($$v0(t));

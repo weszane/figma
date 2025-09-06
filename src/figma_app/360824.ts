@@ -15,7 +15,7 @@ import { Uz, sN, xH } from "../905/63728";
 import { AF, Pt as _$$Pt } from "../figma_app/806412";
 import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
 import { Dm } from "../figma_app/8833";
 import { ds } from "../figma_app/314264";
@@ -38,7 +38,7 @@ let $$U1 = 96;
 export function $$B7() {
   return jsx("div", {
     className: _$$s.colorBgTertiary.bRadius5.font11.h16.fontMedium.flex.itemsCenter.px4.$,
-    children: tx("whiteboard.ai_modal.hint_tab")
+    children: renderI18nText("whiteboard.ai_modal.hint_tab")
   });
 }
 export function $$G6({
@@ -50,7 +50,7 @@ export function $$G6({
     let t = [];
     e.length > 0 && (t.push({
       type: "header",
-      text: _$$t("first_draft.prompt_history_header")
+      text: getI18nString("first_draft.prompt_history_header")
     }), t.push(...e.map(e => ({
       type: "option",
       value: e,
@@ -61,7 +61,7 @@ export function $$G6({
   return jsx(_$$r2, {
     displayAboveTarget: !0,
     focusContainerOnMount: !0,
-    iconAriaLabel: _$$t("first_draft.prompt_history_label"),
+    iconAriaLabel: getI18nString("first_draft.prompt_history_label"),
     iconSvg: jsx(_$$A, {
       style: {
         marginLeft: -8,
@@ -225,7 +225,7 @@ export function $$H3({
           children: eo && jsx(_$$K, {
             recordingKey: _$$Pt(g, "backButton"),
             onClick: y || pop,
-            "aria-label": _$$t("qa.go_back"),
+            "aria-label": getI18nString("qa.go_back"),
             children: jsx(_$$C, {})
           })
         }), ed && jsxs(Fragment, {
@@ -286,7 +286,7 @@ export function $$H3({
           }), K && jsx(_$$K, {
             recordingKey: _$$Pt(g, "closeButton"),
             onClick: y || pop,
-            "aria-label": _$$t("common.close"),
+            "aria-label": getI18nString("common.close"),
             children: jsx(_$$A2, {
               style: {
                 "--color-icon": "var(--color-icon-secondary)"
@@ -373,7 +373,7 @@ export function $$W4({
             minLength: a,
             onChange: t,
             onFocus: m,
-            placeholder: _$$t("fullscreen_actions.edit_image.placeholder"),
+            placeholder: getI18nString("fullscreen_actions.edit_image.placeholder"),
             recordingKey: r,
             value: e,
             verticalPromptLayout: !1
@@ -398,7 +398,7 @@ export function $$W4({
         },
         disabled: e.trim().length < a,
         recordingKey: generateRecordingKey(r, "enter"),
-        children: tx("fullscreen_actions.edit_image")
+        children: renderI18nText("fullscreen_actions.edit_image")
       })
     })]
   });

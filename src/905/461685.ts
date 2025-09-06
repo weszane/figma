@@ -1,8 +1,8 @@
-import { eU, md } from "../figma_app/27355";
+import { atom, useAtomWithSubscription } from "../figma_app/27355";
 import { resourceUtils } from "../905/989992";
 import { zCd } from "../figma_app/43951";
 import { gq } from "../905/276025";
-let o = eU(e => {
+let o = atom(e => {
   let t = e(gq(!0)).data?.draftsFolderId;
   if (!t) {
     let e = {
@@ -18,6 +18,6 @@ let o = eU(e => {
   })).transform(e => e.project);
 });
 export function $$l0() {
-  return md(o);
+  return useAtomWithSubscription(o);
 }
 export const y = $$l0;

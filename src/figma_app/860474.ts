@@ -2,11 +2,11 @@ import { U } from "../905/807535";
 import { YEY, D1Y, EW4, glU, AjQ } from "../figma_app/763686";
 import { A } from "../vendor/292399";
 import { debugState } from "../905/407919";
-import { o as _$$o } from "../figma_app/516794";
+import { createEventEmitter } from "../figma_app/516794";
 import { At } from "../905/973142";
 import { j_, El } from "../figma_app/9619";
 import { Fk, Ch, Wy, ml, hw, yo } from "../905/125333";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { sV } from "../figma_app/712525";
 import { H1, z, XJ, X0 } from "../figma_app/451700";
@@ -15,12 +15,12 @@ import { uA } from "../figma_app/781512";
 export let $$$$n1;
 export function $$E0(e) {
   $$$$n1 = {
-    FocusEvent: _$$o(),
+    FocusEvent: createEventEmitter(),
     rerunSearch(e, t) {
       H1.search(e).then(({
         resultsByPage: e
       }) => {
-        YEY.setSearchResultsAfterSceneGraphChange(Object.keys(e).map((t) => ({
+        YEY.setSearchResultsAfterSceneGraphChange(Object.keys(e).map(t => ({
           pageId: t,
           results: e[t]
         })), t);
@@ -60,7 +60,7 @@ export function $$E0(e) {
         pageId: t,
         index: r
       });
-      Wy.syncFromFullscreen((e) => {
+      Wy.syncFromFullscreen(e => {
         let t;
         for (let r of (t = n.clearAllPreviousResults ? new Map() : new Map(e), n.addedActiveTextMatches)) (t.get(r.node) ?? t.set(r.node, new Set()).get(r.node)).add(r.matchIndex);
         for (let e of n.removedActiveTextMatches) {
@@ -69,7 +69,7 @@ export function $$E0(e) {
         }
         return t;
       });
-      ml.syncFromFullscreen((e) => {
+      ml.syncFromFullscreen(e => {
         let t;
         if (!n) return new Set();
         for (let r of (t = n.clearAllPreviousResults ? new Set() : new Set(e), n.addedDirectSelection)) t.add(r);
@@ -77,7 +77,7 @@ export function $$E0(e) {
         for (let e of n.addedIndirectSelection) t.$$delete(e);
         return t;
       });
-      hw.syncFromFullscreen((e) => {
+      hw.syncFromFullscreen(e => {
         let t;
         if (!n) return new Set();
         for (let r of (t = n.clearAllPreviousResults ? new Set() : new Set(e), n.addedIndirectSelection)) t.add(r);
@@ -94,7 +94,7 @@ export function $$E0(e) {
       yo.syncFromFullscreen(t);
     },
     updateCategoryCounts(e) {
-      yo.syncFromFullscreen((t) => {
+      yo.syncFromFullscreen(t => {
         let r = {};
         for (let n of U(D1Y)) r[n] = t[n] + e[n];
         return r;
@@ -106,9 +106,9 @@ export function $$E0(e) {
     showMissingFontBell() {
       e.dispatch(F.enqueue({
         type: "canvas-search-missing-fonts",
-        message: t("canvas_search.missing_fonts"),
+        message: getI18nString("canvas_search.missing_fonts"),
         button: {
-          text: t("canvas_search.show_missing_fonts"),
+          text: getI18nString("canvas_search.show_missing_fonts"),
           action: () => {
             glU.findMissingFontsAndShowPopover();
           }
@@ -141,10 +141,10 @@ export function $$E0(e) {
       let t = debugState.getState().mirror.sceneGraph;
       let r = t.get(e);
       let n = t.getRoot();
-      return r && n ? r.annotations.map((e) => {
+      return r && n ? r.annotations.map(e => {
         let t = "";
         if (e.categoryId) {
-          let r = n.annotationCategories?.find((t) => t.id === e.categoryId);
+          let r = n.annotationCategories?.find(t => t.id === e.categoryId);
           r && (t = uA(r) + " ");
         }
         return t + ("lexical" === j_(e.label) ? El(e.label) : At(e.label));

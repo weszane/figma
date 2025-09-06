@@ -1,5 +1,5 @@
-import { Ay } from "../figma_app/778880";
-import { tx } from "../905/303541";
+import { BrowserInfo } from "../figma_app/778880";
+import { renderI18nText } from "../905/303541";
 import { Lk, mp, qm, a7 } from "../figma_app/162807";
 import { XU } from "../figma_app/756995";
 import { s as _$$s } from "../905/77553";
@@ -11,18 +11,18 @@ let $$l0 = {
   mobileListSortKeys: [Lk.NAME],
   sortKeyDescriptions: {
     [XU.GRID]: {
-      [Lk.RELEVANCY]: tx("search.sort_option.relevance"),
-      [Lk.NAME]: tx("search.sort_option.name"),
-      [Lk.TOUCHED_AT]: tx("search.sort_option.touched_at"),
-      [Lk.CREATED_AT]: tx("search.sort_option.created_at"),
-      [Lk.OWNER]: tx("search.sort_option.owner")
+      [Lk.RELEVANCY]: renderI18nText("search.sort_option.relevance"),
+      [Lk.NAME]: renderI18nText("search.sort_option.name"),
+      [Lk.TOUCHED_AT]: renderI18nText("search.sort_option.touched_at"),
+      [Lk.CREATED_AT]: renderI18nText("search.sort_option.created_at"),
+      [Lk.OWNER]: renderI18nText("search.sort_option.owner")
     },
     [XU.LIST]: {
-      [Lk.RELEVANCY]: tx("search.sort_option.relevance"),
-      [Lk.NAME]: tx("search.sort_option.name"),
-      [Lk.TOUCHED_AT]: tx("search.sort_option.touched_at"),
-      [Lk.CREATED_AT]: tx("search.sort_option.created_at"),
-      [Lk.OWNER]: tx("search.sort_option.owner")
+      [Lk.RELEVANCY]: renderI18nText("search.sort_option.relevance"),
+      [Lk.NAME]: renderI18nText("search.sort_option.name"),
+      [Lk.TOUCHED_AT]: renderI18nText("search.sort_option.touched_at"),
+      [Lk.CREATED_AT]: renderI18nText("search.sort_option.created_at"),
+      [Lk.OWNER]: renderI18nText("search.sort_option.owner")
     }
   },
   defaultOptions: {
@@ -34,7 +34,7 @@ let $$l0 = {
   },
   listHeaderClassName: "search_results--row--yQX3r search_results--rowTemplate--z9hsq search_list_row--row--xo6wT text--fontPos13--xW8hS text--_fontBase--QdLsd",
   includeSortDirection: e => -1 === [Lk.RELEVANCY].indexOf(e),
-  settingsSpacer: Ay.tablet || Ay.mobile
+  settingsSpacer: BrowserInfo.tablet || BrowserInfo.mobile
 };
 let $$d1 = {
   viewId: "search-projects",
@@ -44,14 +44,14 @@ let $$d1 = {
   mobileListSortKeys: [mp.NAME],
   sortKeyDescriptions: {
     [XU.GRID]: {
-      [mp.RELEVANCY]: tx("search.sort_option.relevance"),
-      [mp.NAME]: tx("search.sort_option.name"),
-      [mp.CREATED_AT]: tx("search.sort_option.created_at")
+      [mp.RELEVANCY]: renderI18nText("search.sort_option.relevance"),
+      [mp.NAME]: renderI18nText("search.sort_option.name"),
+      [mp.CREATED_AT]: renderI18nText("search.sort_option.created_at")
     },
     [XU.LIST]: {
-      [mp.RELEVANCY]: tx("search.sort_option.relevance"),
-      [mp.NAME]: tx("search.sort_option.name"),
-      [mp.CREATED_AT]: tx("search.sort_option.created_at")
+      [mp.RELEVANCY]: renderI18nText("search.sort_option.relevance"),
+      [mp.NAME]: renderI18nText("search.sort_option.name"),
+      [mp.CREATED_AT]: renderI18nText("search.sort_option.created_at")
     }
   },
   defaultOptions: {
@@ -71,18 +71,18 @@ let $$c2 = {
   mobileListSortKeys: [qm.NAME],
   sortKeyDescriptions: {
     [XU.GRID]: {
-      [qm.RELEVANCY]: tx("search.sort_option.relevance"),
-      [qm.NAME]: tx("search.sort_option.name"),
-      [qm.FILES_LAST_TOUCHED_AT]: tx("search.sort_option.last_updated"),
-      [qm.CREATED_AT]: tx("search.sort_option.created_at"),
-      [qm.MEMBER_COUNT]: tx("search.sort_option.members")
+      [qm.RELEVANCY]: renderI18nText("search.sort_option.relevance"),
+      [qm.NAME]: renderI18nText("search.sort_option.name"),
+      [qm.FILES_LAST_TOUCHED_AT]: renderI18nText("search.sort_option.last_updated"),
+      [qm.CREATED_AT]: renderI18nText("search.sort_option.created_at"),
+      [qm.MEMBER_COUNT]: renderI18nText("search.sort_option.members")
     },
     [XU.LIST]: {
-      [qm.RELEVANCY]: tx("search.sort_option.relevance"),
-      [qm.NAME]: tx("search.sort_option.name"),
-      [qm.FILES_LAST_TOUCHED_AT]: tx("search.sort_option.last_updated"),
-      [qm.CREATED_AT]: tx("search.sort_option.created_at"),
-      [qm.MEMBER_COUNT]: tx("search.sort_option.members")
+      [qm.RELEVANCY]: renderI18nText("search.sort_option.relevance"),
+      [qm.NAME]: renderI18nText("search.sort_option.name"),
+      [qm.FILES_LAST_TOUCHED_AT]: renderI18nText("search.sort_option.last_updated"),
+      [qm.CREATED_AT]: renderI18nText("search.sort_option.created_at"),
+      [qm.MEMBER_COUNT]: renderI18nText("search.sort_option.members")
     }
   },
   defaultOptions: {
@@ -93,7 +93,7 @@ let $$c2 = {
     }
   },
   includeSortDirection: e => -1 === [qm.RELEVANCY].indexOf(e),
-  settingsSpacer: Ay.tablet || Ay.mobile
+  settingsSpacer: BrowserInfo.tablet || BrowserInfo.mobile
 };
 let $$u3 = {
   viewId: "search-users",
@@ -103,14 +103,14 @@ let $$u3 = {
   mobileListSortKeys: [a7.NAME],
   sortKeyDescriptions: {
     [XU.GRID]: {
-      [a7.RELEVANCY]: tx("search.sort_option.relevance"),
-      [a7.NAME]: tx("search.sort_option.name"),
-      [a7.EMAIL]: tx("search.sort_option.email")
+      [a7.RELEVANCY]: renderI18nText("search.sort_option.relevance"),
+      [a7.NAME]: renderI18nText("search.sort_option.name"),
+      [a7.EMAIL]: renderI18nText("search.sort_option.email")
     },
     [XU.LIST]: {
-      [a7.RELEVANCY]: tx("search.sort_option.relevance"),
-      [a7.NAME]: tx("search.sort_option.name"),
-      [a7.EMAIL]: tx("search.sort_option.email")
+      [a7.RELEVANCY]: renderI18nText("search.sort_option.relevance"),
+      [a7.NAME]: renderI18nText("search.sort_option.name"),
+      [a7.EMAIL]: renderI18nText("search.sort_option.email")
     }
   },
   defaultOptions: {
@@ -121,7 +121,7 @@ let $$u3 = {
     }
   },
   includeSortDirection: e => -1 === [a7.RELEVANCY].indexOf(e),
-  settingsSpacer: Ay.tablet || Ay.mobile
+  settingsSpacer: BrowserInfo.tablet || BrowserInfo.mobile
 };
 export const KJ = $$l0;
 export const $T = $$d1;

@@ -5,7 +5,7 @@ import { l7, nc } from "../905/189185";
 import { l as _$$l } from "../905/716947";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { md, Xr, fp } from "../figma_app/27355";
+import { useAtomWithSubscription, Xr, useAtomValueAndSetter } from "../figma_app/27355";
 import { resourceUtils, LOADING_STATUS } from "../905/989992";
 import { useLocalStorageSync } from "../905/657224";
 import E from "../vendor/116389";
@@ -26,7 +26,7 @@ import { IT } from "../905/713695";
 import { Fk } from "../figma_app/167249";
 import { CN } from "../905/81982";
 import { n as _$$n } from "../905/79930";
-import { vD } from "../figma_app/53721";
+import { mapFileTypeToNumericString } from "../figma_app/53721";
 import { Lk, uH } from "../figma_app/162807";
 import { $W } from "../905/144933";
 import { uW } from "../figma_app/409131";
@@ -64,7 +64,7 @@ export function $$G1(e) {
 export function $$F16() {
   let e = $$J7();
   let t = function () {
-    let e = md(bY);
+    let e = useAtomWithSubscription(bY);
     return e.type === Vf.TEMPLATE_PICKER && e.source === _$$E.SLIDES_TEMPLATE;
   }();
   let r = Xr(VZ);
@@ -148,8 +148,8 @@ export function $$z15() {
     let t = e?.template;
     return e && t && !t.unpublishedAt ? _$$l(e.libraryKey) : null;
   }();
-  let [t, r] = fp(bY);
-  let [u, n] = fp(Ei);
+  let [t, r] = useAtomValueAndSetter(bY);
+  let [u, n] = useAtomValueAndSetter(Ei);
   let i = tS() || "";
   let a = useCallback(() => {
     n(!0);
@@ -196,7 +196,7 @@ export function $$Z13() {
   };
 }
 export function $$ee9(e) {
-  let [t, r] = fp(Mt);
+  let [t, r] = useAtomValueAndSetter(Mt);
   let u = t[e] ?? 0;
   return {
     scrollPosition: u,
@@ -213,7 +213,7 @@ export function $$ee9(e) {
   };
 }
 export function $$et12() {
-  let [e, t] = fp(ke);
+  let [e, t] = useAtomValueAndSetter(ke);
   let r = useCallback((e, r) => {
     t(e);
   }, [t]);
@@ -228,7 +228,7 @@ let er = new CN({
   ignoreLocation: !0
 });
 export function $$e_0() {
-  let [e, t] = fp(OR);
+  let [e, t] = useAtomValueAndSetter(OR);
   let r = e.trim();
   let [u] = _$$A(r, 200);
   let l = $$ei14();
@@ -293,7 +293,7 @@ export function $$e_0() {
 }
 export var $$eu3 = (e => (e[e.LOADING = 0] = "LOADING", e[e.NO_RECENT_FILES = 1] = "NO_RECENT_FILES", e[e.NO_QUERY_RESULTS = 2] = "NO_QUERY_RESULTS", e[e.SUCCESS = 3] = "SUCCESS", e))($$eu3 || {});
 export function $$el8(e) {
-  let [t, r] = fp(M0);
+  let [t, r] = useAtomValueAndSetter(M0);
   let u = t.trim();
   let [l] = _$$A(u, 200);
   let n = en(e);
@@ -328,7 +328,7 @@ export function $$el8(e) {
 }
 let en = getFeatureFlags().editor_file_picker_recent_files_standalone_view ? function (e) {
   let [t] = IT(hN$({
-    _editorTypeRaw: vD(e)
+    _editorTypeRaw: mapFileTypeToNumericString(e)
   }));
   let r = useMemo(() => t.transform(e => YN(e.currentUser.recentFiles2ByEditorType)), [t]);
   useEffect(() => {

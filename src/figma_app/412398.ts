@@ -2,8 +2,8 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { XJn, Vzr } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { ET } from "../905/623179";
-import { $D } from "../905/11";
-import { x1 } from "../905/714362";
+import { reportError } from "../905/11";
+import { logError } from "../905/714362";
 import { LQ, vg, pX, tV, au } from "../figma_app/445976";
 import { E8 } from "../figma_app/633080";
 import { Gh } from "../figma_app/707567";
@@ -90,7 +90,7 @@ export async function $$g0(e, t, r, n, s) {
     };
   }(S ? [S] : [], A.data.meta.variable_set_status);
   if (publishSets.length > 0 && !n && !s) {
-    x1("First draft publish", "Skipping kit publish because no theme variables were supplied");
+    logError("First draft publish", "Skipping kit publish because no theme variables were supplied");
     return;
   }
   let M = !0 === getFeatureFlags().first_draft_direct_gen && r.publishType === tf.LIBRARY_PUBLISH && !1 === p && r.isDirectGenCompatible;
@@ -161,7 +161,7 @@ async function f(e) {
     r[t.key] = n;
   }
   let a = (await b.getUploadThumbnailsPresignedPostUrls(Object.keys(r).length)).data.meta.presigned_posts;
-  a.length < Object.keys(r).length ? $D(_$$e.AI_GENERATION, Error("Mismatch between number of thumbnails and presigned URLs")) : await Promise.allSettled(Object.entries(r).map(async ([e, r], i) => {
+  a.length < Object.keys(r).length ? reportError(_$$e.AI_GENERATION, Error("Mismatch between number of thumbnails and presigned URLs")) : await Promise.allSettled(Object.entries(r).map(async ([e, r], i) => {
     let {
       url,
       fields
@@ -170,7 +170,7 @@ async function f(e) {
       let i = await ET(_$$e.AI_GENERATION, "uploadThumbnails", url, fields, r, "application/octet-stream");
       t[e] = i;
     } catch (e) {
-      $D(_$$e.AI_GENERATION, Error("Unable to upload example thumbnail to S3"));
+      reportError(_$$e.AI_GENERATION, Error("Unable to upload example thumbnail to S3"));
     }
   }));
   return t;

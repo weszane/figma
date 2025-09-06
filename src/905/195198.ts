@@ -6,7 +6,7 @@ import { getFeatureFlags } from "../905/601108";
 import { Rs } from "../figma_app/288654";
 import { s_ } from "../905/17223";
 import { $$ } from "../figma_app/637027";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { P as _$$P } from "../905/192768";
 import { to, Lo, ES } from "../905/156213";
 import { yH } from "../figma_app/240735";
@@ -19,14 +19,14 @@ import { hK } from "../figma_app/211706";
 import { Dd } from "../905/519092";
 import { d_ } from "../figma_app/918700";
 import { Do, v0 } from "../figma_app/639088";
-let x = (e, t, i) => e ? t === FAccessLevelType.PUBLIC ? tx("file_browser.team.you_will_lose_access_to_open_team_warning", {
+let x = (e, t, i) => e ? t === FAccessLevelType.PUBLIC ? renderI18nText("file_browser.team.you_will_lose_access_to_open_team_warning", {
   teamName: i
-}) : tx("file_browser.team.you_will_lose_access_to_close_secret_team_warning", {
+}) : renderI18nText("file_browser.team.you_will_lose_access_to_close_secret_team_warning", {
   teamName: i
 }) : jsxs(Fragment, {
-  children: [getFeatureFlags().ext_figma_apps ? tx("file_browser.team.permanently_lose_all_access_to_team_warning_v2") : tx("file_browser.team.permanently_lose_all_access_to_team_warning"), jsx(hK, {
+  children: [getFeatureFlags().ext_figma_apps ? renderI18nText("file_browser.team.permanently_lose_all_access_to_team_warning_v2") : renderI18nText("file_browser.team.permanently_lose_all_access_to_team_warning"), jsx(hK, {
     height: 16
-  }), tx("file_browser.team.move_files_out_of_team")]
+  }), renderI18nText("file_browser.team.move_files_out_of_team")]
 });
 let $$S0 = Ju(function (e) {
   let t = useSelector(e => getPermissionsState(e));
@@ -77,17 +77,17 @@ let $$S0 = Ju(function (e) {
     },
     children: jsxs(d_, {
       size: "small",
-      title: _$$t("file_browser.team.team_leave_warning_title_hold_up"),
+      title: getI18nString("file_browser.team.team_leave_warning_title_hold_up"),
       popStack: !0,
       children: [jsx(s_, {
         dispatch: i
-      }), tx("file_browser.team.you_are_current_team_owner_assign_new_owner_before_leaving", {
+      }), renderI18nText("file_browser.team.you_are_current_team_owner_assign_new_owner_before_leaving", {
         teamName: w?.name
       }), jsx("div", {
         className: v0,
         children: jsx($$, {
           onClick: k,
-          children: tx("general.ok")
+          children: renderI18nText("general.ok")
         })
       })]
     })
@@ -109,11 +109,11 @@ let $$S0 = Ju(function (e) {
       popStack: !0,
       children: [jsx(s_, {
         dispatch: i
-      }), tx("file_browser.team.cannot_leave_secret_team_as_last_team_member"), jsx("br", {}), jsx("br", {}), tx("file_browser.team.change_access_level_or_move_or_delete_resources_to_leave_team"), jsx("div", {
+      }), renderI18nText("file_browser.team.cannot_leave_secret_team_as_last_team_member"), jsx("br", {}), jsx("br", {}), renderI18nText("file_browser.team.change_access_level_or_move_or_delete_resources_to_leave_team"), jsx("div", {
         className: v0,
         children: jsx($$, {
           onClick: k,
-          children: tx("general.ok")
+          children: renderI18nText("general.ok")
         })
       })]
     })
@@ -127,7 +127,7 @@ let $$S0 = Ju(function (e) {
         teamId: e.teamId
       },
       children: jsx(Dd, {
-        title: _$$t("file_browser.team.team_leave_confirmation_title", {
+        title: getI18nString("file_browser.team.team_leave_confirmation_title", {
           teamName: w?.name ?? ""
         }),
         destructive: !0,
@@ -137,7 +137,7 @@ let $$S0 = Ju(function (e) {
           }));
           t ? T() : C();
         },
-        confirmText: _$$t("file_browser.team.leave_confirm"),
+        confirmText: getI18nString("file_browser.team.leave_confirm"),
         children: x(w?.orgId ?? null, w?.orgAccess ?? null, w?.name ?? "")
       })
     });

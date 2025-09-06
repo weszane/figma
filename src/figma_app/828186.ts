@@ -2,9 +2,9 @@ import { useSelector } from "../vendor/514228";
 import { Ez5, nQ7 } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { ut } from "../figma_app/84367";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 export function $$l2(e) {
-  return e?.view === "fullscreen" && e?.editorType === nT.Cooper;
+  return e?.view === "fullscreen" && e?.editorType === FEditorType.Cooper;
 }
 export function $$d3(e) {
   return $$l2(e.selectedView);

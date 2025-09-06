@@ -1,16 +1,16 @@
 import { hMR, glU, Hcu, v4N } from "../figma_app/763686";
-import { eU, yu, um, zl, Hj } from "../figma_app/27355";
+import { atom, setupAtomWithMount, um, atomStoreManager, setupAtomWithInitialValue } from "../figma_app/27355";
 import { Yc } from "../figma_app/527873";
-import { bt } from "../905/270322";
+import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { Lu } from "../figma_app/453508";
 let $$l8 = 75;
 let $$d11 = 60;
 let $$c7 = 90;
 export var $$u4 = (e => (e[e.SAFE = 0] = "SAFE", e[e.WARNING = 1] = "WARNING", e[e.ERROR = 2] = "ERROR", e[e.OOM = 3] = "OOM", e))($$u4 || {});
-let p = eU(null);
-let $$_3 = eU(e => !!e(p));
+let p = atom(null);
+let $$_3 = atom(e => !!e(p));
 export function $$h10(e) {}
-let m = yu(um({
+let m = setupAtomWithMount(um({
   mallocLevelBytes: 0,
   heapMemoryLimit: 1 / 0
 }, () => ({
@@ -23,7 +23,7 @@ let m = yu(um({
   let t = setInterval(e, 5e3);
   return () => clearInterval(t);
 });
-let $$g2 = eU(e => {
+let $$g2 = atom(e => {
   let {
     mallocLevelBytes,
     heapMemoryLimit
@@ -36,17 +36,17 @@ let $$g2 = eU(e => {
   t(m);
 });
 export function $$f1() {
-  zl.set($$g2);
-  return zl.get($$g2);
+  atomStoreManager.set($$g2);
+  return atomStoreManager.get($$g2);
 }
-let E = bt(e => e.modalShown?.type === Lu);
-let y = eU(e => {
+let E = createReduxSubscriptionAtomWithState(e => e.modalShown?.type === Lu);
+let y = atom(e => {
   let t = e($$g2);
   return e(E) ? 3 : t >= $$l8 ? 2 : t >= $$d11 ? 1 : 0;
 }, (e, t) => {
   t($$g2);
 });
-let $$b6 = Hj(y, e => glU.setMemoryWarningLevel(e));
+let $$b6 = setupAtomWithInitialValue(y, e => glU.setMemoryWarningLevel(e));
 export function $$T0(e, t) {
   return Yc() / t * e / hMR.getHeapMemoryLimit();
 }

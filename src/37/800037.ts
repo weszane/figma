@@ -15,7 +15,7 @@ import { qP, Pt } from "../figma_app/806412";
 import { D8 } from "../905/511649";
 import { M3 } from "../figma_app/119475";
 import { B as _$$B } from "../905/714743";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { d as _$$d } from "../905/954754";
 import { o as _$$o } from "../905/609215";
 import { BQ, pN } from "../figma_app/852050";
@@ -32,7 +32,7 @@ import { X as _$$X } from "../905/55424";
 import { lQ } from "../905/934246";
 import { f as _$$f } from "../37/573389";
 import en from "../vendor/73823";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { Id } from "../figma_app/626177";
 import { A as _$$A2 } from "../905/749030";
 import { HZ } from "../figma_app/74668";
@@ -58,7 +58,7 @@ function F({
   useEffect(() => o.registerCommand(UD, f, Ac), [o, f]);
   useEffect(() => o.registerCommand(bb, f, Ac), [o, f]);
   let m = e && t && B9(e.name) || l && l.name;
-  let _ = m ? r && t ? m + ": " + he(t, r) : m : _$$t("proto.expression_builder_entry.missing");
+  let _ = m ? r && t ? m + ": " + he(t, r) : m : getI18nString("proto.expression_builder_entry.missing");
   let g = a ? J2.SELECTED : l ? J2.COMPONENT : J2.DEFAULT;
   let O = BQ(e?.node_id);
   let h = l ? Cq(l) : O;
@@ -90,7 +90,7 @@ class D extends Kp {
     return new D(e.__stablePathToNode, e.__componentProp, e.__key);
   }
   getTextContent() {
-    return this.__componentProp?.name || _$$t("proto.expression_builder_entry.missing");
+    return this.__componentProp?.name || getI18nString("proto.expression_builder_entry.missing");
   }
   decorate() {
     return jsx(F, {
@@ -165,7 +165,7 @@ class B extends Kp {
     return new B(e.__variable, e.__variableCollection, e.__modeID, e.__key);
   }
   getTextContent() {
-    return this.__variable?.name || _$$t("proto.expression_builder_entry.missing");
+    return this.__variable?.name || getI18nString("proto.expression_builder_entry.missing");
   }
   decorate() {
     return jsx(F, {
@@ -542,7 +542,7 @@ function ea(e, t, r) {
   if (n) {
     if (!t || bS(t) || K(t) && !K(e) || H(t) && !H(e) || V(t) && !V(e) || X(t) && !X(e)) n.insertNodes([e]);else if (kF(t)) {
       let n = t.splitText(r[0], r[1]);
-      1 === n.length ? n[0].replace(e) : 2 === n.length ? 0 === r[0] ? n[0].replace(e) : n[1].replace(e) : 3 === n.length ? n[1].replace(e) : x1("expressions", "invalid number of nodes after split to insert variable");
+      1 === n.length ? n[0].replace(e) : 2 === n.length ? 0 === r[0] ? n[0].replace(e) : n[1].replace(e) : 3 === n.length ? n[1].replace(e) : logError("expressions", "invalid number of nodes after split to insert variable");
     } else t.replace(e);
   }
 }
@@ -774,7 +774,7 @@ function eh({
     } else if (RT(e)) {
       let t = e.getNodes();
       1 === t.length && V(t[0]) && t[0].__variable && eF(t[0].__variable) ? l("") : l(null);
-    } else x1("expressions", "somehow hitting a GridSelection or null selection");
+    } else logError("expressions", "somehow hitting a GridSelection or null selection");
     return !1;
   }, [t, n, o, l]);
   useEffect(() => {
@@ -974,7 +974,7 @@ export function $$ev0({
         }
         if ("TOKEN_NODE_FIELD_ALIAS" === e.type) {
           let [t, r, n] = Q6(e.stringValue);
-          return "COMPONENT_PROP_ASSIGNMENTS" === r ? k(t, aA(t, n)) : (x1("component prop vars", "Unsupported node field alias type in expressionTokensToLexicalNodes"), sT(e.stringValue));
+          return "COMPONENT_PROP_ASSIGNMENTS" === r ? k(t, aA(t, n)) : (logError("component prop vars", "Unsupported node field alias type in expressionTokensToLexicalNodes"), sT(e.stringValue));
         }
         return "TOKEN_NUMBER" === e.type ? sT(e.stringValue) : ["TOKEN_STRING", "TOKEN_BOOL"].includes(e.type) ? J(e.stringValue) : Z(e.stringValue);
       });
@@ -999,7 +999,7 @@ export function $$ev0({
         if (0 === values.length) return;
         let i = {
           type: Yc.SECTION_HEADER,
-          name: _$$t("proto.variable_picker.properties", {
+          name: getI18nString("proto.variable_picker.properties", {
             componentName
           })
         };
@@ -1061,7 +1061,7 @@ export function $$ev0({
       let e = el();
       return e.length > 0 && eE.length > 0 ? er.concat(e).concat([{
         type: Yc.SECTION_HEADER,
-        name: _$$t("variables.binding_ui.set_labels.variables_created_in_file")
+        name: getI18nString("variables.binding_ui.set_labels.variables_created_in_file")
       }]).concat(eE) : er.concat(e).concat(eE);
     }
     return er.concat(eE);

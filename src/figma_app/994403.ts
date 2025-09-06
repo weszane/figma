@@ -15,7 +15,7 @@ import { _ as _$$_ } from "../905/154979";
 import { B } from "../905/548640";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { q } from "../figma_app/277543";
 import { LE } from "../905/71785";
 import { FW, Pe } from "../figma_app/155287";
@@ -43,7 +43,7 @@ export function $$k1({
     className: n,
     useOriginalSrcFills_DEPRECATED: !0,
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": _$$t("community.detail_view.universal"),
+    "data-tooltip": getI18nString("community.detail_view.universal"),
     dataTestId: "editor-type-badge-universal"
   });
   if (e.includes(FW.FIGMA) && e.includes(FW.FIGJAM)) return jsx(_$$B, {
@@ -51,7 +51,7 @@ export function $$k1({
     className: n,
     useOriginalSrcFills_DEPRECATED: !0,
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": _$$t("community.detail_view.made_for_figma_design_and_figjam"),
+    "data-tooltip": getI18nString("community.detail_view.made_for_figma_design_and_figjam"),
     dataTestId: "editor-type-badge-figma-figjam"
   });
   if (e.includes(FW.FIGMA) && Pe(e)) return jsx(_$$B, {
@@ -59,7 +59,7 @@ export function $$k1({
     className: n,
     useOriginalSrcFills_DEPRECATED: !0,
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": _$$t("community.detail_view.figma_design_and_dev_mode"),
+    "data-tooltip": getI18nString("community.detail_view.figma_design_and_dev_mode"),
     dataTestId: "editor-type-badge-figma-devmode"
   });
   if (e.includes(FW.FIGJAM) && Pe(e)) return jsx(_$$B, {
@@ -67,7 +67,7 @@ export function $$k1({
     className: n,
     useOriginalSrcFills_DEPRECATED: !0,
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": _$$t("community.detail_view.made_for_fig_jam_and_dev_mode"),
+    "data-tooltip": getI18nString("community.detail_view.made_for_fig_jam_and_dev_mode"),
     dataTestId: "editor-type-badge-figjam-devmode"
   });
   let a = e[0];
@@ -82,7 +82,7 @@ function M(e, t, r) {
         className: t,
         "data-testid": "editor-type-badge-figjam",
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("community.detail_view.made_for_fig_jam"),
+        "data-tooltip": getI18nString("community.detail_view.made_for_fig_jam"),
         children: r ? jsx(j, {}) : jsx(_$$C, {})
       });
     case FW.FIGMA:
@@ -92,7 +92,7 @@ function M(e, t, r) {
         className: t,
         "data-testid": "editor-type-badge-figma",
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("community.detail_view.made_for_figma_design"),
+        "data-tooltip": getI18nString("community.detail_view.made_for_figma_design"),
         children: r ? jsx(H, {}) : jsx(_$$e, {})
       });
     case FW.INSPECT:
@@ -102,7 +102,7 @@ function M(e, t, r) {
         className: t,
         "data-testid": "editor-type-badge-devmode",
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("community.detail_view.dev_mode_only"),
+        "data-tooltip": getI18nString("community.detail_view.dev_mode_only"),
         children: r ? jsx(_$$P, {}) : jsx(_$$o, {})
       });
     case LE.SLIDES:
@@ -112,7 +112,7 @@ function M(e, t, r) {
         className: t,
         "data-testid": "editor-type-badge-slides",
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("community.detail_view.made_for_slides"),
+        "data-tooltip": getI18nString("community.detail_view.made_for_slides"),
         children: r ? jsx(_$$p, {}) : jsx(K, {})
       });
     case q.SITES:
@@ -120,7 +120,7 @@ function M(e, t, r) {
         className: t,
         "data-testid": "editor-type-badge-sites",
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("community.detail_view.made_for_sites"),
+        "data-tooltip": getI18nString("community.detail_view.made_for_sites"),
         children: r ? jsx(_$$v, {}) : jsx(k, {})
       });
     case q.FIGMAKE:
@@ -128,7 +128,7 @@ function M(e, t, r) {
         className: t,
         "data-testid": "editor-type-badge-figmake",
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("community.detail_view.made_for_figmake"),
+        "data-tooltip": getI18nString("community.detail_view.made_for_figmake"),
         children: r ? jsx(_$$N, {}) : jsx(_$$o2, {})
       });
     case FW.BUZZ:
@@ -137,7 +137,7 @@ function M(e, t, r) {
         className: t,
         "data-testid": "editor-type-badge-cooper",
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("community.detail_view.made_for_buzz"),
+        "data-tooltip": getI18nString("community.detail_view.made_for_buzz"),
         children: r ? jsx(_$$_, {}) : jsx(B, {})
       });
     default:
@@ -153,7 +153,7 @@ export function $$F0({
     viewBox: "0 0 16 16",
     fill: "none",
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": _$$t("community.insert_modal.codegen_plugin_icon_tooltip"),
+    "data-tooltip": getI18nString("community.insert_modal.codegen_plugin_icon_tooltip"),
     className: e ? _$$s.w24.h24.colorBorder.$ : void 0,
     children: [jsx("path", {
       d: "M0 4C0 1.79086 1.79086 0 4 0H12C14.2091 0 16 1.79086 16 4V12C16 14.2091 14.2091 16 12 16H4C1.79086 16 0 14.2091 0 12V4Z",

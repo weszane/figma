@@ -1,6 +1,6 @@
 import { WB } from "../905/761735";
 import { XHR } from "../905/910117";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
 import { F } from "../905/302958";
 import { nF } from "../905/350402";
@@ -19,9 +19,9 @@ let $$p1 = nF((e, {
   N(p, e, l);
   p.catch(t => {
     e.dispatch(F.enqueue({
-      message: r === vt.PLUGIN ? _$$t("community.actions.unable_to_like_this_plugin_error", {
+      message: r === vt.PLUGIN ? getI18nString("community.actions.unable_to_like_this_plugin_error", {
         error: J(t, t.data.message)
-      }) : _$$t("community.actions.unable_to_like_this_widget_error", {
+      }) : getI18nString("community.actions.unable_to_like_this_widget_error", {
         error: J(t, t.data.message)
       }),
       type: `${r.toUpperCase()}_LIKE_FAILED`,
@@ -60,9 +60,9 @@ let $$_0 = nF((e, {
   N(p, e, l);
   p.catch(t => {
     e.dispatch(F.enqueue({
-      message: r === vt.PLUGIN ? _$$t("community.actions.unable_to_unlike_this_plugin_error", {
+      message: r === vt.PLUGIN ? getI18nString("community.actions.unable_to_unlike_this_plugin_error", {
         error: t.data.message
-      }) : _$$t("community.actions.unable_to_unlike_this_widget_error", {
+      }) : getI18nString("community.actions.unable_to_unlike_this_widget_error", {
         error: t.data.message
       }),
       type: `${r.toUpperCase()}_UNLIKE_FAILED`,
@@ -76,4 +76,4 @@ let $$_0 = nF((e, {
   }, p);
 });
 export const $ = $$_0;
-export const C = $$p1; 
+export const C = $$p1;

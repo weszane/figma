@@ -1,7 +1,7 @@
 import { glU } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { nF } from "../905/350402";
 import { ds } from "../figma_app/314264";
@@ -102,7 +102,7 @@ export let $$g0 = nF(async (e, {
     });
     e.dispatch(F.enqueue({
       type: "embed_failed",
-      message: _$$t("whiteboard.embed_actions.embed_failed"),
+      message: getI18nString("whiteboard.embed_actions.embed_failed"),
       timeoutOverride: 5e3,
       error: !0
     }));

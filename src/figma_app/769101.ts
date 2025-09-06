@@ -2,7 +2,7 @@ import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useRef, useState, useEffect } from "react";
 import { W as _$$W } from "../905/187396";
 import { Uz, sC, Te } from "../905/63728";
-import { nl } from "../figma_app/257275";
+import { isInteractionPathCheck } from "../figma_app/897289";
 import { g as _$$g } from "../905/880308";
 import { Y5 } from "../figma_app/455680";
 import { f7 } from "../figma_app/896988";
@@ -135,7 +135,7 @@ export function $$E1({
       onClick: () => {
         $(!1);
         B(!U);
-        O && "fontFamilyControl" === O && (nl() ? Q(!0) : (Q(!1), J.reset(), J.scheduleOnce(() => {
+        O && "fontFamilyControl" === O && (isInteractionPathCheck() ? Q(!0) : (Q(!1), J.reset(), J.scheduleOnce(() => {
           Q(!0);
         }, 250)));
       },

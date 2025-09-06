@@ -6,13 +6,13 @@ import { P as _$$P } from "../5430/455826";
 import { tM, vd } from "../figma_app/637027";
 import { kt } from "../figma_app/858013";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Ce } from "../905/156213";
 import { lo, wn, dl } from "../9420/795870";
 import { jL } from "../figma_app/658324";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { Np } from "../figma_app/193867";
-import { Iv } from "../905/548208";
+import { DashboardSections } from "../905/548208";
 import { OJ } from "../905/519092";
 import { S } from "../9420/724099";
 import { $J, Un, KJ, UD, u1 } from "../4452/559083";
@@ -25,11 +25,11 @@ function w({
   isReactivating: w,
   canSeeBillingAddressExp: j
 }) {
-  let T = w ? _$$t("change_payment.success.successfully_reactivated_subscription") : _$$t("change_payment.success.successfully_updated_your_payment_method");
+  let T = w ? getI18nString("change_payment.success.successfully_reactivated_subscription") : getI18nString("change_payment.success.successfully_updated_your_payment_method");
   let E = useSelector(e => Np(e, {
     view: "teamAdminConsole",
     teamId: t.teamId,
-    teamAdminConsoleViewTab: Iv.SETTINGS
+    teamAdminConsoleViewTab: DashboardSections.SETTINGS
   }));
   let {
     createPaymentElement,
@@ -78,7 +78,7 @@ function w({
     M(!1);
   };
   return jsx(OJ, {
-    title: j ? _$$t("change_payment.update_payment_details") : _$$t("change_payment.enter_payment_method"),
+    title: j ? getI18nString("change_payment.update_payment_details") : getI18nString("change_payment.enter_payment_method"),
     onClose: G,
     maxWidth: 465,
     headerSize: "large",
@@ -99,7 +99,7 @@ function w({
             children: jsx("label", {
               htmlFor: "updatePaymentDetails",
               className: _$$s.colorTextSecondary.$,
-              children: tx("change_payment.update_payment_details_description_default")
+              children: renderI18nText("change_payment.update_payment_details_description_default")
             })
           }), jsx(S, {
             billingAddress,
@@ -122,17 +122,17 @@ function w({
             className: u1
           }), jsx(tM, {
             onClick: G,
-            children: tx("change_payment.cancel")
+            children: renderI18nText("change_payment.cancel")
           }), jsx(vd, {
             tabIndex: 0,
             type: "submit",
             disabled: D,
-            children: tx("change_payment.save")
+            children: renderI18nText("change_payment.save")
           })]
         })]
       }), $ && jsx(tM, {
         onClick: G,
-        children: tx("change_payment.close_window")
+        children: renderI18nText("change_payment.close_window")
       })]
     })
   });

@@ -5,7 +5,7 @@ import { parsePxInt } from "../figma_app/783094";
 import { gw, rr, wv, ru } from "../figma_app/236327";
 import { V } from "../figma_app/312987";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { In } from "../905/672640";
 import { jm, fu } from "../figma_app/831799";
 import { K } from "../905/135526";
@@ -38,7 +38,7 @@ export function $$N3(e) {
 }
 export function $$C2(e) {
   let t = e.dropdownShown?.type === e.dropdownType;
-  let r = _$$t("multi_select_list.filter_default");
+  let r = getI18nString("multi_select_list.filter_default");
   let i = null === e.selectedValue ? r : e.getDisplayText(e.selectedValue);
   let a = e.hideDefaultOption ? e.values.length * S : (e.values.length + 1) * S + v;
   return jsxs(V, {
@@ -146,7 +146,7 @@ export function $$R0(e) {
       showingDropdown: i,
       type: A,
       chevronClassName: I,
-      children: tx("members_table.batch_actions_menu.change_billing_group")
+      children: renderI18nText("members_table.batch_actions_menu.change_billing_group")
     })]
   });
 }
@@ -168,7 +168,7 @@ export function $$L1(e) {
       showingDropdown: i,
       type: x,
       chevronClassName: I,
-      children: tx("members_table.batch_actions_menu.change_workspace")
+      children: renderI18nText("members_table.batch_actions_menu.change_workspace")
     })]
   });
 }
@@ -177,8 +177,8 @@ export function $$P4({
 }) {
   return e === FAccessLevelType.PRIVATE || e === FAccessLevelType.SECRET ? jsx("div", {
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": e === FAccessLevelType.PRIVATE ? _$$t("teams_table.closed_team_tooltip_header") : _$$t("teams_table.secret_team_tooltip_header"),
-    "data-tooltip-subtext": e === FAccessLevelType.PRIVATE ? _$$t("teams_table.closed_team_tooltip_subtitle") : _$$t("teams_table.secret_team_tooltip_subtitle"),
+    "data-tooltip": e === FAccessLevelType.PRIVATE ? getI18nString("teams_table.closed_team_tooltip_header") : getI18nString("teams_table.secret_team_tooltip_header"),
+    "data-tooltip-subtext": e === FAccessLevelType.PRIVATE ? getI18nString("teams_table.closed_team_tooltip_subtitle") : getI18nString("teams_table.secret_team_tooltip_subtitle"),
     "data-tooltip-show-above": !0,
     "data-tooltip-timeout-delay": 500,
     "data-tooltip-max-width": 300,

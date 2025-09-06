@@ -13,7 +13,7 @@ import { $n } from "../905/521428";
 import { t as _$$t } from "../905/117577";
 import { Rs } from "../figma_app/288654";
 import { s as _$$s2 } from "../cssbuilder/589278";
-import { t as _$$t2 } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { E as _$$E } from "../905/984674";
 import { WO } from "../469e6e40/418374";
 import { Lo, to } from "../905/156213";
@@ -33,25 +33,25 @@ class C {
     };
   }
   getSuccessMessage(e) {
-    if (e) return "plugin" === this.extensionType ? "allowlist" === e ? _$$t2("settings_tab.enable_plugin_approval_success") : _$$t2("settings_tab.disable_plugin_approval_success") : "allowlist" === e ? _$$t2("settings_tab.widget_admin_approval_enabled") : _$$t2("settings_tab.widget_admin_approval_disabled");
+    if (e) return "plugin" === this.extensionType ? "allowlist" === e ? getI18nString("settings_tab.enable_plugin_approval_success") : getI18nString("settings_tab.disable_plugin_approval_success") : "allowlist" === e ? getI18nString("settings_tab.widget_admin_approval_enabled") : getI18nString("settings_tab.widget_admin_approval_disabled");
   }
   getInitialExtensionAllowed(e) {
     return "plugin" === this.extensionType ? !e.publicPluginsAllowed || e.pluginsWhitelistEnforced ? "allowlist" : "public" : !e.publicPluginsAllowed || e.widgetsWhitelistEnforced ? "allowlist" : "public";
   }
   getSettingsText() {
     let e = {
-      title: _$$t2("resources_tab.approved_plugins.modal.plugin_approval"),
-      permissionsText: _$$t2("resources_tab.approved_plugins.modal.org_members_can_use"),
-      allRadioText: _$$t2("resources_tab.approved_plugins.modal.all_plugins"),
-      approvedRadioText: _$$t2("resources_tab.approved_plugins.modal.approved_plugins_only"),
-      requestCheckboxText: _$$t2("resources_tab.approved_plugins.modal.request_plugins")
+      title: getI18nString("resources_tab.approved_plugins.modal.plugin_approval"),
+      permissionsText: getI18nString("resources_tab.approved_plugins.modal.org_members_can_use"),
+      allRadioText: getI18nString("resources_tab.approved_plugins.modal.all_plugins"),
+      approvedRadioText: getI18nString("resources_tab.approved_plugins.modal.approved_plugins_only"),
+      requestCheckboxText: getI18nString("resources_tab.approved_plugins.modal.request_plugins")
     };
     let t = {
-      title: _$$t2("resources_tab.approved_widgets.modal.widget_approval"),
-      permissionsText: _$$t2("resources_tab.approved_plugins.modal.org_members_can_use"),
-      allRadioText: _$$t2("resources_tab.approved_widgets.modal.all_widgets"),
-      approvedRadioText: _$$t2("resources_tab.approved_widgets.modal.approved_widgets_only"),
-      requestCheckboxText: _$$t2("resources_tab.approved_widgets.modal.request_widgets")
+      title: getI18nString("resources_tab.approved_widgets.modal.widget_approval"),
+      permissionsText: getI18nString("resources_tab.approved_plugins.modal.org_members_can_use"),
+      allRadioText: getI18nString("resources_tab.approved_widgets.modal.all_widgets"),
+      approvedRadioText: getI18nString("resources_tab.approved_widgets.modal.approved_widgets_only"),
+      requestCheckboxText: getI18nString("resources_tab.approved_widgets.modal.request_widgets")
     };
     return "plugin" === this.extensionType ? e : t;
   }
@@ -113,7 +113,7 @@ function N({
   return jsxs("div", {
     className: _$$s2.wFull.flex.itemsCenter.gap4.$,
     children: [jsx(K, {
-      "aria-label": _$$t2("general.go_back"),
+      "aria-label": getI18nString("general.go_back"),
       onClick: e,
       children: jsx(_$$t, {})
     }), jsx(_$$E, {
@@ -171,7 +171,7 @@ export let $$I0 = Ju(function (e) {
           children: [jsx($n, {
             onClick: v,
             variant: "secondary",
-            children: _$$t2("general.cancel")
+            children: getI18nString("general.cancel")
           }), jsx($n, {
             onClick: () => {
               if (d.publicPluginsAllowed) {
@@ -196,7 +196,7 @@ export let $$I0 = Ju(function (e) {
             },
             variant: "primary",
             "data-test-id": "save-button",
-            children: _$$t2("general.save")
+            children: getI18nString("general.save")
           })]
         })
       })]

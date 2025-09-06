@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { K } from "../905/443068";
 import { F } from "../905/427107";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { dG } from "../figma_app/753501";
 import { zk } from "../figma_app/198712";
 import { Ib } from "../905/129884";
@@ -28,10 +28,10 @@ export function $$p0({
       }, zk.YES);
     },
     disabled: e.stops.length < 2,
-    "aria-label": _$$t("fullscreen.properties_panel.flip_gradient"),
+    "aria-label": getI18nString("fullscreen.properties_panel.flip_gradient"),
     htmlAttributes: {
       onMouseDown: dG,
-      "data-tooltip": _$$t("fullscreen.properties_panel.flip_gradient"),
+      "data-tooltip": getI18nString("fullscreen.properties_panel.flip_gradient"),
       "data-tooltip-type": Ib.TEXT
     },
     children: jsx(F, {})

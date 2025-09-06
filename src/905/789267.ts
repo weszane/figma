@@ -9,7 +9,7 @@ import { J } from "../905/614223";
 import { getFeatureFlags } from "../905/601108";
 import { tH, H4 } from "../905/751457";
 import { $z } from "../figma_app/617427";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { Y } from "../905/830372";
 import { RR } from "../figma_app/307841";
@@ -76,7 +76,7 @@ export let $$N0 = Ju(function ({
     },
     onError: () => {
       F(_$$F.enqueue({
-        message: _$$t("request_upgrade.modal.error"),
+        message: getI18nString("request_upgrade.modal.error"),
         error: !0
       }));
     },
@@ -119,7 +119,7 @@ export let $$N0 = Ju(function ({
                     trackingDescriptor: _$$c.UPGRADE
                   },
                   trackingOptions: U,
-                  children: tx("auto_upgrade_confirmation_modal.cta_text")
+                  children: renderI18nText("auto_upgrade_confirmation_modal.cta_text")
                 })
               })
             })]

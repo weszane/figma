@@ -2,10 +2,10 @@ import { jsx } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { k as _$$k } from "../905/443820";
-import { rr } from "../figma_app/778880";
+import { isMobileUA } from "../figma_app/778880";
 import { Ts } from "../905/194276";
 import { $z } from "../figma_app/617427";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { X2, e6 } from "../figma_app/530167";
 import { to } from "../905/156213";
 import { s0, ZO } from "../figma_app/350203";
@@ -36,7 +36,7 @@ export function $$v0({
     k && !VP(w, L) && (GH(w, L) ? (R(!1), D(!O)) : aF(w, L) && (R(!1), v?.()));
   }, [w, L, k, O, v]);
   let F = (e, i) => {
-    if (rr) {
+    if (isMobileUA) {
       window.location.href = "/login";
       return;
     }
@@ -55,11 +55,11 @@ export function $$v0({
   let M = C && N;
   return cs(x) ? jsx($z, {
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": _$$t("community.follow.org_and_team_profiles_cannot_follow_other_profiles"),
+    "data-tooltip": getI18nString("community.follow.org_and_team_profiles_cannot_follow_other_profiles"),
     "data-tooltip-show-immediately": !0,
     disabled: !0,
     variant: "secondary",
-    children: tx("community.follow.follow")
+    children: renderI18nText("community.follow.follow")
   }) : O ? jsx($z, {
     htmlAttributes: {
       onMouseEnter: () => {
@@ -87,13 +87,13 @@ export function $$v0({
       children: jsx(_$$k, {
         size: "sm"
       })
-    }) : M ? _$$t("community.follow.unfollow") : _$$t("community.follow.following")
+    }) : M ? getI18nString("community.follow.unfollow") : getI18nString("community.follow.following")
   }) : jsx($z, {
     onClick: t => {
       if (t.stopPropagation(), !E) {
-        F(e.name ? _$$t("community.follow.follow_profile_name_to_keep_up_with_what_they_publish", {
+        F(e.name ? getI18nString("community.follow.follow_profile_name_to_keep_up_with_what_they_publish", {
           profileName: e.name
-        }) : _$$t("community.follow.follow_this_profile_to_keep_up_with_what_they_publish"), "hub_file_follow_signed_out");
+        }) : getI18nString("community.follow.follow_this_profile_to_keep_up_with_what_they_publish"), "hub_file_follow_signed_out");
         return;
       }
       if (!E.community_profile_id) {
@@ -122,7 +122,7 @@ export function $$v0({
       children: jsx(_$$k, {
         size: "sm"
       })
-    }) : _$$t("community.follow.follow")
+    }) : getI18nString("community.follow.follow")
   });
 }
 export const W = $$v0;

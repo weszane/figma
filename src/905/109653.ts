@@ -7,7 +7,7 @@ import l from "classnames";
 import { P as _$$P } from "../vendor/348225";
 import { N as _$$N } from "../vendor/930821";
 import { H } from "../905/620380";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Lz } from "../905/497882";
 import { AC, Y5 } from "../figma_app/777551";
 import { uX, Rk, Un, MY, I_ } from "../905/759470";
@@ -304,7 +304,7 @@ function D() {
     href: "https://help.figma.com/hc/articles/360040035974-Publish-files-to-the-Community#01H8CZTYDFMDWEK19N8TSNXVVC",
     newTab: !0,
     trusted: !0,
-    children: t("community.publishing.learn_more_about_our_guidelines")
+    children: getI18nString("community.publishing.learn_more_about_our_guidelines")
   });
 }
 let L = {

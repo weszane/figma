@@ -4,11 +4,11 @@ import { useSelector } from "../vendor/514228";
 import { assertNotNullish } from "../figma_app/95419";
 import { K } from "../905/443068";
 import { A } from "../905/251970";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { parsePxInt } from "../figma_app/783094";
 import { $M } from "../figma_app/930338";
 import { Point } from "../905/736624";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { g as _$$g } from "../figma_app/777171";
 import { m0 } from "../figma_app/976749";
 import { z4 } from "../905/37051";
@@ -38,7 +38,7 @@ export function $$M8(e) {
   }();
   let r = m0();
   let n = useSelector(e => e.universalInsertModal.pinned);
-  let s = md(_$$g);
+  let s = useAtomWithSubscription(_$$g);
   if (z4.getIsExtension()) return s - C - e;
   if (r) return window.innerHeight - C - e;
   let o = window.innerHeight - t.y - C - e;
@@ -80,7 +80,7 @@ export function $$B4({
   let i = F() ? jsx(O, {
     setPinned: pinModal
   }) : jsx(K, {
-    "aria-label": _$$t("general.close"),
+    "aria-label": getI18nString("general.close"),
     onClick: closeModal,
     children: jsx(A, {})
   });
@@ -92,13 +92,13 @@ export function $$B4({
 export function $$G16(e) {
   if (!e.community_publishers?.accepted || 0 === e.community_publishers.accepted.length) return "";
   let t = e.community_publishers.accepted[0].name;
-  return 1 === e.community_publishers.accepted.length ? _$$t("community.resource.by_creator", {
+  return 1 === e.community_publishers.accepted.length ? getI18nString("community.resource.by_creator", {
     spaceChar: " ",
     creator: t
-  }) : _$$t("community.resource.by_more_than_2_creators", {
+  }) : getI18nString("community.resource.by_more_than_2_creators", {
     spaceChar: " ",
     creator1: t,
-    others: _$$t("community.resource.by_x_others", {
+    others: getI18nString("community.resource.by_x_others", {
       numPublishers: e.community_publishers.accepted.length - 1
     })
   });
@@ -111,13 +111,13 @@ export function $$V3(e) {
   let n = r.length;
   if (0 === n) return "";
   let i = r[0];
-  return 1 === n ? _$$t("community.resource.by_creator", {
+  return 1 === n ? getI18nString("community.resource.by_creator", {
     spaceChar: " ",
     creator: i
-  }) : _$$t("community.resource.by_more_than_2_creators", {
+  }) : getI18nString("community.resource.by_more_than_2_creators", {
     spaceChar: " ",
     creator1: i,
-    others: _$$t("community.resource.by_x_others", {
+    others: getI18nString("community.resource.by_x_others", {
       numPublishers: n - 1
     })
   });
@@ -125,7 +125,7 @@ export function $$V3(e) {
 export function $$H13(e) {
   let t = $$G16(e);
   let r = e.unique_run_count;
-  let n = _$$t("community.try.people_use_this", {
+  let n = getI18nString("community.try.people_use_this", {
     numPeople: r,
     numPeopleStr: $M(r)
   });

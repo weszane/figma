@@ -3,7 +3,7 @@ import r from "classnames";
 import { useCallback } from "react";
 import { A as _$$A } from "../vendor/90566";
 import { X } from "../figma_app/313269";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { bD } from "../figma_app/45218";
 import { A as _$$A2 } from "../905/794518";
 import { J7 } from "../905/599844";
@@ -53,12 +53,12 @@ export function $$h0({
   error: r
 }) {
   let s = {
-    [bD.PLUGIN]: _$$t("community.publishing.add_your_policy_for_the_usage_of_this.plugin"),
-    [bD.WIDGET]: _$$t("community.publishing.add_your_policy_for_the_usage_of_this.widget"),
-    [bD.HUB_FILE]: _$$t("community.publishing.add_your_policy_for_the_usage_of_this_resource")
+    [bD.PLUGIN]: getI18nString("community.publishing.add_your_policy_for_the_usage_of_this.plugin"),
+    [bD.WIDGET]: getI18nString("community.publishing.add_your_policy_for_the_usage_of_this.widget"),
+    [bD.HUB_FILE]: getI18nString("community.publishing.add_your_policy_for_the_usage_of_this_resource")
   };
   return jsx(_$$A2, {
-    label: _$$t("community.publishing.creator_policy"),
+    label: getI18nString("community.publishing.creator_policy"),
     error: r,
     children: jsx("div", {
       className: a()({
@@ -71,7 +71,7 @@ export function $$h0({
         defaultValue: e,
         onInputChange: t,
         toolbarProps: {
-          "aria-label": _$$t("community.publishing.creator_policy")
+          "aria-label": getI18nString("community.publishing.creator_policy")
         }
       })
     })

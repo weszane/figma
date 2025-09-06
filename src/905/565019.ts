@@ -3,7 +3,7 @@ import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { lQ } from "../905/934246";
 import { R } from "../905/441305";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 export let $$l0 = Ju(function ({
   comment: e,
   onCancel: t,
@@ -26,12 +26,12 @@ export let $$l0 = Ju(function ({
     onCancel: p,
     onConfirm: u,
     onClose: lQ,
-    confirmText: _$$t("general.delete"),
+    confirmText: getI18nString("general.delete"),
     destructive: !0,
     recordingKey: "commentDeleteConfirmModal",
-    title: _$$t("comments.delete_comment"),
+    title: getI18nString("comments.delete_comment"),
     ...c,
-    children: !e || e.parent_id ? _$$t("comments.are_you_sure_you_want_to_delete_this_comment_this_action_cannot_be_undone") : _$$t("comments.delete_confirmation_thread")
+    children: !e || e.parent_id ? getI18nString("comments.are_you_sure_you_want_to_delete_this_comment_this_action_cannot_be_undone") : getI18nString("comments.delete_confirmation_thread")
   });
 }, "confirm-comment-deletion-modal");
 export const E = $$l0;

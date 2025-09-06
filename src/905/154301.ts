@@ -6,7 +6,7 @@ import { Uz } from "../905/63728";
 import { nR, qM } from "../figma_app/637027";
 import { L } from "../905/408237";
 import { nt } from "../figma_app/858013";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { Ce, to, Lo } from "../905/156213";
 import { yH } from "../figma_app/240735";
@@ -62,7 +62,7 @@ export let $$E0 = Ju(function (e) {
         h(team_project_file_count);
         o(!0);
       }).catch(() => {
-        i(_$$s.error(_$$t("flash.team_deletion_file_count_fetching_error")));
+        i(_$$s.error(getI18nString("flash.team_deletion_file_count_fetching_error")));
       });
     }, [n, e, t, i]);
     useEffect(() => {
@@ -82,7 +82,7 @@ export let $$E0 = Ju(function (e) {
         b(has_published_site);
         A(!0);
       }).catch(() => {
-        i(_$$s.error(_$$t("flash.team_deletion_file_count_fetching_error")));
+        i(_$$s.error(getI18nString("flash.team_deletion_file_count_fetching_error")));
       });
     }, [i, g, e]);
     return {
@@ -103,8 +103,8 @@ export let $$E0 = Ju(function (e) {
   if (!e.team.org_id && e.subscriptionStatus) return jsx(fu, {
     name: "Blocked Pro Team Delete Modal",
     children: jsx(Dd, {
-      title: _$$t("team_delete_modal.pro_plan_cancel_modal_header"),
-      confirmText: _$$t("team_delete_modal.proceed_to_cancel"),
+      title: getI18nString("team_delete_modal.pro_plan_cancel_modal_header"),
+      confirmText: getI18nString("team_delete_modal.proceed_to_cancel"),
       onConfirm: () => {
         y(to({
           type: _$$v,
@@ -113,11 +113,11 @@ export let $$E0 = Ju(function (e) {
           }
         }));
       },
-      cancelText: _$$t("team_delete_modal.dismiss"),
+      cancelText: getI18nString("team_delete_modal.dismiss"),
       trackedConfirmationProperties: {
         teamId: e.team.id
       },
-      children: tx("team_delete_modal.cancel_to_delete_team", {
+      children: renderI18nText("team_delete_modal.cancel_to_delete_team", {
         teamName: e.team.name
       })
     })
@@ -132,7 +132,7 @@ export let $$E0 = Ju(function (e) {
       minWidth: 344,
       fixedTop: !0,
       onClose: P,
-      title: _$$t("team_delete_modal.delete_this_props_team_name", {
+      title: getI18nString("team_delete_modal.delete_this_props_team_name", {
         teamName: e.team.name
       }),
       children: jsx("div", {
@@ -154,17 +154,17 @@ export let $$E0 = Ju(function (e) {
       minWidth: 344,
       fixedTop: !0,
       onClose: P,
-      title: _$$t("team_delete_modal.delete_this_props_team_name", {
+      title: getI18nString("team_delete_modal.delete_this_props_team_name", {
         teamName: e.team.name
       }),
       children: jsxs("div", {
         className: kL,
-        children: [w ? tx("team_delete_modal.starter_pro_warning_confirmation_text", {
+        children: [w ? renderI18nText("team_delete_modal.starter_pro_warning_confirmation_text", {
           teamName: jsx("span", {
             className: Vq,
             children: e.team.name
           })
-        }) : tx("team_delete_modal.warning_confirmation_text", {
+        }) : renderI18nText("team_delete_modal.warning_confirmation_text", {
           teamName: jsx("span", {
             className: Vq,
             children: e.team.name
@@ -172,17 +172,17 @@ export let $$E0 = Ju(function (e) {
         }), w && (teamDraftCount > 0 || teamProjectFileCount > 0) && jsxs(Fragment, {
           children: [jsx("span", {
             children: "\xa0"
-          }), tx("team_delete_modal.this_includes"), jsx("div", {
+          }), renderI18nText("team_delete_modal.this_includes"), jsx("div", {
             children: "\xa0"
           }), jsxs("ul", {
             children: [teamDraftCount > 0 && jsxs("li", {
-              children: ["\u2022", " ", tx("team_delete_modal.team_draft_file_count", {
+              children: ["\u2022", " ", renderI18nText("team_delete_modal.team_draft_file_count", {
                 numDrafts: teamDraftCount
               })]
             }), teamProjectFileCount > 0 && jsxs("li", {
-              children: ["\u2022", " ", tx("team_delete_modal.team_project_file_count", {
+              children: ["\u2022", " ", renderI18nText("team_delete_modal.team_project_file_count", {
                 numFiles: teamProjectFileCount,
-                projectCount: tx("team_delete_modal.team_project_count", {
+                projectCount: renderI18nText("team_delete_modal.team_project_count", {
                   numProjects: teamProjectCount
                 })
               })]
@@ -191,21 +191,21 @@ export let $$E0 = Ju(function (e) {
         }), getFeatureFlags().sites && hasPublishedSite && jsxs(Fragment, {
           children: [jsx("div", {
             children: "\xa0"
-          }), tx("team_delete_modal.any_published_websites_will_be_unpublished_and_taken_offline")]
+          }), renderI18nText("team_delete_modal.any_published_websites_will_be_unpublished_and_taken_offline")]
         }), jsxs("div", {
           children: [jsx("div", {
             children: "\xa0"
-          }), tx("team_delete_modal.days_to_undo_deletion", {
+          }), renderI18nText("team_delete_modal.days_to_undo_deletion", {
             numDays: jsx("span", {
               className: Vq,
-              children: tx("team_delete_modal.days_for_team_deletion_undo", {
+              children: renderI18nText("team_delete_modal.days_for_team_deletion_undo", {
                 numDays: 28
               })
             })
           })]
         }), jsx("div", {
           children: "\xa0"
-        }), tx("team_delete_modal.to_confirm_please_enter_the_name_of_the_team"), jsxs("form", {
+        }), renderI18nText("team_delete_modal.to_confirm_please_enter_the_name_of_the_team"), jsxs("form", {
           onSubmit: t => {
             t.preventDefault();
             e.onDeleteTeam && e.onDeleteTeam();
@@ -236,25 +236,25 @@ export let $$E0 = Ju(function (e) {
           }), S && jsxs(Fragment, {
             children: [jsx("div", {
               children: "\xa0"
-            }), tx("team_delete_modal.deleting_last_team_notice", {
+            }), renderI18nText("team_delete_modal.deleting_last_team_notice", {
               notice: jsx("span", {
                 className: Vq,
-                children: tx("team_delete_modal.warning_note")
+                children: renderI18nText("team_delete_modal.warning_note")
               })
             })]
           }), jsxs("div", {
             className: v0,
             children: [jsx(nR, {
               onClick: P,
-              children: tx("general.cancel")
+              children: renderI18nText("general.cancel")
             }), jsx(qM, {
               type: "submit",
               className: pL,
               disabled: O,
               children: jsx("span", {
-                "data-tooltip": _$$t("team_delete_modal.to_confirm_please_enter_the_name_of_the_team"),
+                "data-tooltip": getI18nString("team_delete_modal.to_confirm_please_enter_the_name_of_the_team"),
                 "data-tooltip-type": O ? Ib.TEXT : null,
-                children: tx("team_delete_modal.delete_team")
+                children: renderI18nText("team_delete_modal.delete_team")
               })
             })]
           })]

@@ -1,4 +1,4 @@
-import { f } from "../905/842794";
+import { handleOptimistTransaction } from "../905/842794";
 import { Q as _$$Q } from "../905/573154";
 export function $$a0(e) {
   let {
@@ -12,6 +12,6 @@ export function $$a0(e) {
     promise: requestPromise,
     fallbackError
   }));
-  return f(requestPromise, next, action);
+  return handleOptimistTransaction(requestPromise, next, action);
 }
 export const Q = $$a0;

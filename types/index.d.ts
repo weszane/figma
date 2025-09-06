@@ -12,6 +12,14 @@ declare global {
     figma: any
     FigmaMobile: any
     store: Store
+    drainErrors: any
+    __figmaDesktop: any
+    __figmaDesktopGetPopoutAPI: any
+    bellFeedAPI: any
+    ENTRY_POINT: string
+    DESKTOP_CHANNEL: string
+    DESKTOP_VERSION: string
+    DESKTOP_CLIENT_ID: string
   }
 
   interface globalThis {

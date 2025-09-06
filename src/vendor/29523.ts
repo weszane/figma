@@ -1,81 +1,168 @@
-import { _C } from "../vendor/678925";
-let f = [];
-function r(e, n) {
-  let {
-    buildId,
-    debugFile
-  } = function (e) {
-    let n = WebAssembly.Module.customSections(e, "build_id");
-    let i = null;
-    let t = null;
-    let f = n[0];
-    f && (i = Array.from(new Uint8Array(f)).reduce((e, n) => e + n.toString(16).padStart(2, "0"), ""));
-    let r = WebAssembly.Module.customSections(e, "external_debug_info")[0];
-    if (r) {
-      let e = new Uint8Array(r);
-      t = new TextDecoder("utf-8").decode(e);
-    }
-    return {
-      buildId: i,
-      debugFile: t
-    };
-  }(e);
+import { defineIntegration } from '@sentry/core'
+
+/**
+ * Stores metadata about loaded WASM modules.
+ * Original variable: f
+ */
+const wasmImages: WasmImage[] = []
+
+/**
+ * Type definition for WASM image metadata.
+ */
+interface WasmImage {
+  type: 'wasm'
+  code_id: string | null
+  code_file: string
+  debug_file: string | null
+  debug_id: string
+}
+
+/**
+ * Extracts buildId and debugFile from a WebAssembly.Module.
+ * Original anonymous function inside r
+ * @param module WebAssembly.Module
+ * @returns Object containing buildId and debugFile
+ */
+function extractWasmMetadata(module: WebAssembly.Module): { buildId: string | null, debugFile: string | null } {
+  const buildIdSection = WebAssembly.Module.customSections(module, 'build_id')
+  let buildId: string | null = null
+  let debugFile: string | null = null
+
+  const buildIdData = buildIdSection[0]
+  if (buildIdData) {
+    buildId = Array.from(new Uint8Array(buildIdData))
+      .reduce((acc, byte) => acc + byte.toString(16).padStart(2, '0'), '')
+  }
+
+  const debugInfoSection = WebAssembly.Module.customSections(module, 'external_debug_info')[0]
+  if (debugInfoSection) {
+    const debugInfoBytes = new Uint8Array(debugInfoSection)
+    debugFile = new TextDecoder('utf-8').decode(debugInfoBytes)
+  }
+
+  return { buildId, debugFile }
+}
+
+/**
+ * Finds the index of a WASM image by code_file.
+ * Original function: a
+ * @param codeFile string
+ * @returns index or -1 if not found
+ */
+function findWasmImageIndex(codeFile: string): number {
+  return wasmImages.findIndex(img => img.type === 'wasm' && img.code_file === codeFile)
+}
+
+/**
+ * Registers a WASM module's metadata.
+ * Original function: r
+ * @param module WebAssembly.Module
+ * @param codeFile string
+ */
+function registerWasmImage(module: WebAssembly.Module, codeFile: string): void {
+  const { buildId, debugFile } = extractWasmMetadata(module)
   if (buildId) {
-    let e = a(n);
-    e >= 0 && f.splice(e, 1);
-    let r = null;
-    if (debugFile) try {
-      r = new URL(debugFile, n).href;
-    } catch (e) {}
-    f.push({
-      type: "wasm",
+    const idx = findWasmImageIndex(codeFile)
+    if (idx >= 0)
+      wasmImages.splice(idx, 1)
+
+    let debugFileUrl: string | null = null
+    if (debugFile) {
+      try {
+        debugFileUrl = new URL(debugFile, codeFile).href
+      }
+      catch {
+        // Ignore invalid URLs
+      }
+    }
+
+    wasmImages.push({
+      type: 'wasm',
       code_id: buildId,
-      code_file: n,
-      debug_file: r,
-      debug_id: `${buildId.padEnd(32, "0").slice(0, 32)}0`
-    });
+      code_file: codeFile,
+      debug_file: debugFileUrl,
+      debug_id: `${buildId.padEnd(32, '0').slice(0, 32)}0`,
+    })
   }
 }
-function a(e) {
-  return f.findIndex(n => "wasm" === n.type && n.code_file === e);
-}
-export let $$o0 = _C(() => ({
-  name: "Wasm",
+
+/**
+ * Sentry integration for WASM debug metadata.
+ * Original export: $$o0
+ */
+export const wasmIntegration = defineIntegration(() => ({
+  name: 'Wasm',
+  /**
+   * Sets up WASM streaming hooks to register debug metadata.
+   * Original method: setupOnce
+   */
   setupOnce() {
-    !function () {
-      if ("instantiateStreaming" in WebAssembly) {
-        let e = WebAssembly.instantiateStreaming;
-        WebAssembly.instantiateStreaming = function (n, i) {
-          return Promise.resolve(n).then(n => e(n, i).then(e => (n.url && r(e.module, n.url), e)));
-        };
+    // Patch WebAssembly.instantiateStreaming
+    if ('instantiateStreaming' in WebAssembly) {
+      const originalInstantiateStreaming = WebAssembly.instantiateStreaming
+      WebAssembly.instantiateStreaming = function (source, importObject) {
+        return Promise.resolve(source).then(src =>
+          originalInstantiateStreaming(src, importObject).then((result) => {
+            if (src.url)
+              registerWasmImage(result.module, src.url)
+            return result
+          }),
+        )
       }
-      if ("compileStreaming" in WebAssembly) {
-        let e = WebAssembly.compileStreaming;
-        WebAssembly.compileStreaming = function (n) {
-          return Promise.resolve(n).then(n => e(n).then(e => (n.url && r(e, n.url), e)));
-        };
+    }
+    // Patch WebAssembly.compileStreaming
+    if ('compileStreaming' in WebAssembly) {
+      const originalCompileStreaming = WebAssembly.compileStreaming
+      WebAssembly.compileStreaming = function (source) {
+        return Promise.resolve(source).then(src =>
+          originalCompileStreaming(src).then((module) => {
+            if (src.url)
+              registerWasmImage(module, src.url)
+            return module
+          }),
+        )
       }
-    }();
+    }
   },
-  processEvent(e) {
-    let n = !1;
-    e.exception && e.exception.values && e.exception.values.forEach(e => {
-      var i;
-      let t;
-      e.stacktrace && e.stacktrace.frames && (n = n || (i = e.stacktrace.frames, t = !1, i.forEach(e => {
-        if (!e.filename) return;
-        let n = e.filename.match(/^(.*?):wasm-function\[\d+\]:(0x[a-fA-F0-9]+)$/);
-        if (n) {
-          let i = a(n[1]);
-          e.instruction_addr = n[2];
-          e.filename = n[1];
-          e.platform = "native";
-          i >= 0 && (e.addr_mode = `rel:${i}`, t = !0);
+  /**
+   * Processes Sentry events to inject WASM debug metadata.
+   * Original method: processEvent
+   * @param event SentryEvent
+   * @returns SentryEvent
+   */
+  processEvent(event) {
+    let hasWasmFrame = false
+    if (event.exception?.values) {
+      event.exception.values.forEach((exception) => {
+        let frames = exception.stacktrace?.frames
+        let foundWasm = false
+        if (frames) {
+          frames.forEach((frame) => {
+            if (!frame.filename)
+              return
+            const match = frame.filename.match(/^(.*?):wasm-function\[\d+\]:(0x[a-fA-F0-9]+)$/)
+            if (match) {
+              const idx = findWasmImageIndex(match[1])
+              frame.instruction_addr = match[2]
+              frame.filename = match[1]
+              frame.platform = 'native'
+              if (idx >= 0) {
+                frame.addr_mode = `rel:${idx}`
+                foundWasm = true
+              }
+            }
+          })
+          hasWasmFrame = hasWasmFrame || foundWasm
         }
-      }), t));
-    });
-    n && (e.debug_meta = e.debug_meta || {}, e.debug_meta.images = [...(e.debug_meta.images || []), ...f]);
-    return e;
-  }
-}));
-export const F = $$o0;
+      })
+    }
+    if (hasWasmFrame) {
+      event.debug_meta = event.debug_meta || {}
+      event.debug_meta.images = [...(event.debug_meta.images || []), ...wasmImages]
+    }
+    return event
+  },
+}))
+
+// Refactored export name
+export const F = wasmIntegration

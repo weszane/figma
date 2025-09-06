@@ -1,6 +1,6 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import r from "../vendor/781591";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { widgetErrorTracker } from "../905/250412";
 import { c0 } from "../905/816730";
 import { filterNotNullish } from "../figma_app/656233";
@@ -394,7 +394,7 @@ function Q(e, t, i, r) {
   try {
     a = c0(e, t, i);
   } catch (e) {
-    $D(_$$e.EXTENSIBILITY, Error(`Error running widget prop validation: ${e}`));
+    reportError(_$$e.EXTENSIBILITY, Error(`Error running widget prop validation: ${e}`));
   }
   if (a.length > 0) {
     if (r.isLocalWidget) {

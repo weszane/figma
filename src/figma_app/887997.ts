@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, useMemo, useCallback } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { h as _$$h } from "../905/207101";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { B } from "../905/759157";
 import { A as _$$A } from "../905/351112";
 import { Xt } from "../figma_app/399472";
@@ -31,7 +31,7 @@ export function $$v0() {
     renderPluginDropdownButton: !0
   }) : jsx("div", {
     className: _$$p,
-    children: tx("org_view.private_plugins_will_appear_here")
+    children: renderI18nText("org_view.private_plugins_will_appear_here")
   });
 }
 export function $$A1({

@@ -4,11 +4,11 @@ import { Ez5, Egt, glU, lyf } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { AD } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
-import { fp, eU } from "../figma_app/27355";
+import { useAtomValueAndSetter, atom } from "../figma_app/27355";
 import c from "../vendor/128080";
 import { U } from "../figma_app/901889";
 import { initializeStub } from "../figma_app/757801";
-import { Ns, nl } from "../figma_app/257275";
+import { Ns, isInteractionPathCheck } from "../figma_app/897289";
 import { kG } from "../figma_app/327588";
 import { Y5 } from "../figma_app/455680";
 import { KH, p8 } from "../figma_app/722362";
@@ -50,7 +50,7 @@ export function $$w2({
     useEffect(() => {
       1 === Object.keys(m).length && (u ? x(l) : x(Object.keys(m)[0]));
     }, [l, w, u, m]);
-    let [I, k] = fp(S);
+    let [I, k] = useAtomValueAndSetter(S);
     useEffect(() => () => {
       k("");
     }, [k]);
@@ -214,7 +214,7 @@ export function $$w2({
     };
     return (useEffect(() => {
       "PENDING_CANVAS_GRID_UPDATE" === f.current && b(!1);
-    }, [o, b, f]), nl() && (Wh.reorder = e => {
+    }, [o, b, f]), isInteractionPathCheck() && (Wh.reorder = e => {
       L(e.map(e => t[e]));
     }, Wh.onMouseDown = A), U3("mouseup", () => {
       initializeStub("slide.onMouseUp", {});
@@ -270,9 +270,9 @@ export function $$w2({
     setHoveredItemId: F
   }), [carouselItemsById, carouselItemGuids, toggleCollapsed, expandParent, selectedItemIds, onMouseUpItem, onMouseDownItem, onMouseDown, onMouseMove, onCarouselItemReorder, isDraggingCarouselItems, isClickingCarouselItems, detachedCarouselItemGuids, indentSelectionBy, P, F]);
 }
-let S = eU("");
+let S = atom("");
 export function $$j5() {
-  let [e, t] = fp(S);
+  let [e, t] = useAtomValueAndSetter(S);
   return useCallback(e => {
     t("");
     Ez5.singleSlideView().isFocusedNodeViewEnabled() ? Ez5.singleSlideView().focusNodeInFocusedNodeView(e, !0) : Ez5.singleSlideView().panToNode(e, .6);
@@ -280,7 +280,7 @@ export function $$j5() {
   }, [t]);
 }
 export function $$I4() {
-  let [e, t] = fp(S);
+  let [e, t] = useAtomValueAndSetter(S);
   let i = J2(Ez5.cooperFocusView().focusedNodeId);
   let n = kG();
   return useCallback(e => {

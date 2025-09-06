@@ -1,4 +1,4 @@
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { kG } from "../figma_app/327588";
 import { to } from "../figma_app/828186";
 import { rt } from "../figma_app/615482";
@@ -7,7 +7,7 @@ export let $$l0 = rt("ASSETS");
 export function $$d1() {
   let e = to();
   let t = kG();
-  let r = md($$l0);
+  let r = useAtomWithSubscription($$l0);
   return !!e && (!!t || "ASSETS" !== r);
 }
 export const Lk = $$l0;

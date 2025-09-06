@@ -1,10 +1,10 @@
 import { ServiceCategories as _$$e } from "../905/165054";
-import { Iz, eU, zl } from "../figma_app/27355";
+import { createRemovableAtomFamily, atom, atomStoreManager } from "../figma_app/27355";
 import { getInitialOptions } from "../figma_app/169182";
 import { WB } from "../905/761735";
 import { subscribeAndAwaitData } from "../905/553831";
 import { Rs } from "../figma_app/288654";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { sMZ } from "../figma_app/43951";
 import { H } from "../905/17478";
 class p {
@@ -16,7 +16,7 @@ class p {
       let e;
       let t = getInitialOptions().user_data?.id;
       if (!t) {
-        $D(_$$e.GROWTH_PLATFORM, Error(`Attempted to increment user flag counter ${this.userFlagName} for anonymous user; this is a no-op.`));
+        reportError(_$$e.GROWTH_PLATFORM, Error(`Attempted to increment user flag counter ${this.userFlagName} for anonymous user; this is a no-op.`));
         return;
       }
       this.pendingIncrementCount += 1;
@@ -55,7 +55,7 @@ class p {
     };
     this.reset = async () => {
       if (!getInitialOptions().user_data?.id) {
-        $D(_$$e.GROWTH_PLATFORM, Error(`Attempted to reset user flag counter ${this.userFlagName} for anonymous user; this is a no-op.`));
+        reportError(_$$e.GROWTH_PLATFORM, Error(`Attempted to reset user flag counter ${this.userFlagName} for anonymous user; this is a no-op.`));
         return;
       }
       let e = await subscribeAndAwaitData(sMZ, {
@@ -86,9 +86,9 @@ function _(e, t = 200) {
     return new Promise(e => n.push(e));
   };
 }
-let h = Iz(e => eU(() => new p(e)));
+let h = createRemovableAtomFamily(e => atom(() => new p(e)));
 export function $$m1(e) {
-  return zl.get(h(e)).increment();
+  return atomStoreManager.get(h(e)).increment();
 }
 export function $$g0(e) {
   return Rs(sMZ, {

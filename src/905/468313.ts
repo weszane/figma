@@ -9,7 +9,7 @@ import { Z_n, rcl, rXF, j0r } from "../figma_app/763686";
 import { X } from "../905/606795";
 import { Uz } from "../905/63728";
 import { rf, Pt } from "../figma_app/806412";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { X as _$$X } from "../905/190511";
 import { sD } from "../905/937198";
 import { Y5 } from "../figma_app/455680";
@@ -95,7 +95,7 @@ let M = memo(function ({
       variablePillContainerClassName: "text_content_variable_pill--ui3VariablePillContainer--g-tSy"
     })
   });
-  let G = T ? _$$t("dakota.collection_selector.disconnect_submenu_title") : _$$t("variables.binding_ui.detach_variable_tooltip");
+  let G = T ? getI18nString("dakota.collection_selector.disconnect_submenu_title") : getI18nString("variables.binding_ui.detach_variable_tooltip");
   let z = jsx("span", {
     className: "text_content_variable_pill--detachButton--qEu-Y",
     children: jsx(K, {
@@ -174,7 +174,7 @@ export function $$K0({
           tooltip: function ({
             boundVariable: e
           }) {
-            return t && e?.resolvedType === rXF.STRING ? _$$t("variables.binding_ui.missing_font_style") : null;
+            return t && e?.resolvedType === rXF.STRING ? getI18nString("variables.binding_ui.missing_font_style") : null;
           }({
             boundVariable: s
           }) ?? void 0,
@@ -184,9 +184,9 @@ export function $$K0({
         className: Ds,
         children: jsx(K, {
           onClick: () => clearVariableConsumption(zk.YES),
-          "aria-label": _$$t("variables.binding_ui.detach_variable_tooltip"),
+          "aria-label": getI18nString("variables.binding_ui.detach_variable_tooltip"),
           htmlAttributes: {
-            "data-tooltip": _$$t("variables.binding_ui.detach_variable_tooltip"),
+            "data-tooltip": getI18nString("variables.binding_ui.detach_variable_tooltip"),
             "data-tooltip-type": Ib.TEXT
           },
           children: jsx(_$$U, {})
@@ -196,7 +196,7 @@ export function $$K0({
   }) : null;
 }
 export function $$Y2(e) {
-  let t = _$$t("design_systems.component_properties.text_content");
+  let t = getI18nString("design_systems.component_properties.text_content");
   let i = e.textContentBoundAsset;
   return i?.boundAssetType === "variable" ? jsx(Ig, {
     children: jsx(M, {
@@ -264,7 +264,7 @@ function $({
     let i = e.mirror.sceneGraph.get(t);
     return (i?.type === "TEXT" || i?.type === "CMS_RICH_TEXT") && null !== i.getNearestDakotaCollectionId();
   }));
-  let l = o ? _$$t("dakota.properties_panel.collection_panel.field_binding") : _$$t("proto.apply_assignment_property");
+  let l = o ? getI18nString("dakota.properties_panel.collection_panel.field_binding") : getI18nString("proto.apply_assignment_property");
   if (!s?.guid && !o) return null;
   let d = jsx(Z, {
     value: i,
@@ -339,13 +339,13 @@ export function $$X4({
 }) {
   let s = useContext(_$$p);
   let o = useSelector(e => UT(e) ?? "");
-  let l = gl(o) ? _$$t("fullscreen.mixed") : o;
+  let l = gl(o) ? getI18nString("fullscreen.mixed") : o;
   return jsx(YW, {
     className: gb,
     svg: $$default,
     selected: s?.isShowingBindingUI,
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": _$$t("fullscreen.properties_panel.apply_variable"),
+    "data-tooltip": getI18nString("fullscreen.properties_panel.apply_variable"),
     recordingKey: i,
     onClick: () => {
       let t = e.current;

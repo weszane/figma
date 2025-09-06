@@ -3,11 +3,11 @@ import { useMemo, useState, useRef } from "react";
 import { K } from "../905/443068";
 import { X as _$$X } from "../905/736922";
 import { Z_n, rXF } from "../figma_app/763686";
-import { fp } from "../figma_app/27355";
+import { useAtomValueAndSetter } from "../figma_app/27355";
 import d from "classnames";
 import { pR } from "../vendor/330821";
-import { R } from "../905/103090";
-import { t as _$$t } from "../905/303541";
+import { selectWithShallowEqual } from "../905/103090";
+import { getI18nString } from "../905/303541";
 import { $Q } from "../figma_app/315578";
 import { t8 } from "../figma_app/852050";
 import { uV } from "../figma_app/151869";
@@ -23,7 +23,7 @@ export function $$S0() {
     content,
     numSelected,
     numSelectedByType
-  } = R(e => ({
+  } = selectWithShallowEqual(e => ({
     content: e.mirror.selectionProperties.nodeText,
     numSelected: e.mirror.selectionProperties.numSelected,
     numSelectedByType: e.mirror.selectionProperties.numSelectedByType
@@ -87,7 +87,7 @@ function A({
       children: jsx(K, {
         htmlAttributes: eventHandlers,
         onClick: O,
-        "aria-label": _$$t("inspect_panel.copy"),
+        "aria-label": getI18nString("inspect_panel.copy"),
         children: jsx(_$$X, {})
       })
     })]
@@ -96,8 +96,8 @@ function A({
     collapsedInspectionPanelAtom,
     collapseEnabled
   } = QZ("content");
-  let [M] = fp(collapsedInspectionPanelAtom);
-  let F = _$$t("inspect_panel.property.content_text");
+  let [M] = useAtomValueAndSetter(collapsedInspectionPanelAtom);
+  let F = getI18nString("inspect_panel.property.content_text");
   let j = "string" == typeof e;
   return jsx(VZ, {
     title: F,

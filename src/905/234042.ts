@@ -1,9 +1,9 @@
 import { useCallback } from "react";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { oE } from "../905/977779";
 import { xm } from "../figma_app/255679";
 export function $$o0() {
-  let e = md(oE);
+  let e = useAtomWithSubscription(oE);
   let t = xm();
   return useCallback(i => {
     let n = i.library_key;

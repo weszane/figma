@@ -8,9 +8,9 @@ import { X } from "../905/647103";
 import { V } from "../905/900932";
 import { ruz } from "../figma_app/763686";
 import p from "classnames";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { a as _$$a } from "../905/29104";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { BK } from "../905/848862";
 import { Ib } from "../905/129884";
 import { j } from "../905/834956";
@@ -29,7 +29,7 @@ export function $$C0({
   let i = BK("AI_IMAGE_TOOLS_DROPDOWN");
   let p = useMemo(() => !!(e && ruz?.canEditSelectedImage()), [e]);
   let m = useMemo(() => [{
-    displayText: _$$t("fullscreen.properties_panel.ai_image_tools.remove_background"),
+    displayText: getI18nString("fullscreen.properties_panel.ai_image_tools.remove_background"),
     icon: jsx(T, {
       disabled: !p,
       children: jsx($, {})
@@ -58,7 +58,7 @@ export function $$C0({
       }
     })
   }, {
-    displayText: _$$t("fullscreen.properties_panel.ai_image_tools.upscale_image"),
+    displayText: getI18nString("fullscreen.properties_panel.ai_image_tools.upscale_image"),
     icon: jsx(T, {
       disabled: !p,
       children: jsx(X, {})
@@ -89,8 +89,8 @@ export function $$C0({
   }], [p]);
   let C = useRef(null);
   let k = C.current?.getBoundingClientRect();
-  k || (i.showing && $D(_$$e.AI_PRODUCTIVITY, Error("AiImageTools: dropdownBoundingRect is null")), k = new DOMRect(0, 0, 0, 0));
-  let R = _$$a() ? _$$t("fullscreen.properties_panel.ai_image_tools") : _$$t("fullscreen.properties_panel.ai_image_tools_ga");
+  k || (i.showing && reportError(_$$e.AI_PRODUCTIVITY, Error("AiImageTools: dropdownBoundingRect is null")), k = new DOMRect(0, 0, 0, 0));
+  let R = _$$a() ? getI18nString("fullscreen.properties_panel.ai_image_tools") : getI18nString("fullscreen.properties_panel.ai_image_tools_ga");
   return jsxs(Fragment, {
     children: [jsx(_$$d, {
       "aria-expanded": i.showing,

@@ -8,7 +8,7 @@ import { Ts } from "../905/194276";
 import { qB } from "../905/862321";
 import { ks, vd, Us } from "../figma_app/637027";
 import { B } from "../905/714743";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { S } from "../figma_app/11182";
 import { to, Ce } from "../905/156213";
 import { fu } from "../figma_app/831799";
@@ -49,7 +49,7 @@ function I({
     name: "Share Link Modal",
     children: [jsx("div", {
       className: j,
-      children: tx("figjam_try.share_link_modal.title")
+      children: renderI18nText("figjam_try.share_link_modal.title")
     }), jsx("div", {
       className: j,
       children: jsx(ks, {
@@ -71,7 +71,7 @@ function I({
           children: [jsx(B, {
             svg: A,
             className: "share_link_modal--linkIcon--lwYrP"
-          }), I ? _$$t("figjam_try.link_copied") : _$$t("figjam_try.copy_link")]
+          }), I ? getI18nString("figjam_try.link_copied") : getI18nString("figjam_try.copy_link")]
         })
       })
     }), C && jsxs("div", {
@@ -80,7 +80,7 @@ function I({
         svg: _$$A,
         className: "share_link_modal--teamIcon--1LdNm"
       }), jsxs("span", {
-        children: [tx("figjam_try.share_link_modal.cta_description"), " ", jsx(Us, {
+        children: [renderI18nText("figjam_try.share_link_modal.cta_description"), " ", jsx(Us, {
           role: "button",
           onClick: () => {
             t();
@@ -95,7 +95,7 @@ function I({
             s(to({
               type: _$$x,
               data: {
-                headerText: _$$t("fullscreen.toolbar.create_an_account_to_do_more_with_fig_jam")
+                headerText: getI18nString("fullscreen.toolbar.create_an_account_to_do_more_with_fig_jam")
               }
             }));
           },
@@ -103,7 +103,7 @@ function I({
             buttonContext: "Create account"
           },
           trusted: !0,
-          children: tx("figjam_try.share_link_modal.cta")
+          children: renderI18nText("figjam_try.share_link_modal.cta")
         })]
       })]
     })]

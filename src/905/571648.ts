@@ -1,7 +1,7 @@
 import { useMemo, useCallback } from "react";
 import { useSelector, shallowEqual } from "../vendor/514228";
 import { l as _$$l } from "../905/716947";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { zN } from "../905/19536";
 import { parsePxInt } from "../figma_app/783094";
 import { f as _$$f } from "../905/412913";
@@ -150,7 +150,7 @@ export function $$B3(e, t, i, d, c, u) {
   let f = $$R1(e);
   let A = sO();
   let y = s1();
-  let b = md(Dq);
+  let b = useAtomWithSubscription(Dq);
   let v = u || f;
   let {
     status,

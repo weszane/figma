@@ -1,8 +1,8 @@
 import { debounce } from "../905/915765";
 import { hMR } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { sx } from "../905/449184";
-import { Ay } from "../figma_app/778880";
+import { trackEventAnalytics } from "../905/449184";
+import { BrowserInfo } from "../figma_app/778880";
 import { hk } from "../figma_app/632319";
 import { le } from "../figma_app/527873";
 var $$n1;
@@ -41,7 +41,7 @@ class p {
       ...this.events
     };
     setTimeout(() => {
-      sx("Prototype Lib Loaded", e);
+      trackEventAnalytics("Prototype Lib Loaded", e);
       this.reported = !0;
     });
   }
@@ -49,7 +49,7 @@ class p {
 class _ {
   constructor(e) {
     for (let t of (this.startTimes = {}, this.meta = {}, this.track = debounce(e => {
-      getFeatureFlags().prototype_lib_perf_report && sx("Prototype Lib Function", e);
+      getFeatureFlags().prototype_lib_perf_report && trackEventAnalytics("Prototype Lib Function", e);
     }, 200), ["applyNodeChanges", "getNodeChangesForSwap", "multiplayerMessageSize"])) {
       e[t] = e[t] || [];
       e[t].push(this);
@@ -110,9 +110,9 @@ class _ {
       currentAllocatedBytes: hMR?.getTotalUsedHeapMemory(),
       maxAllocatedBytes: hMR?.getMaxUsedHeapMemory(),
       timeSinceInitialization: r,
-      is64BitBrowser: Ay.is64BitBrowser
+      is64BitBrowser: BrowserInfo.is64BitBrowser
     };
-    sx("Prototype Lib Out Of Memory", n);
+    trackEventAnalytics("Prototype Lib Out Of Memory", n);
   };
 })($$n1 || ($$n1 = {}));
 (e => {

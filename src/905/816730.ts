@@ -1,5 +1,5 @@
 import { throwTypeError } from "../figma_app/465776";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { NoOpVm } from "../905/700654";
 import { N } from "../905/125137";
 function o(e) {
@@ -318,7 +318,7 @@ export function $$h3(e, t, i) {
 export function $$g5(e, t, i) {
   let n;
   if (i ? N.PluginDataEntryEscapeHatchLimitSchema.safeParse(t).success || (n = "This pluginData entry exceeds the grace period limit of 64 MB.") : N.PluginDataEntryNormalLimitSchema.safeParse(t).success || (n = "This pluginData entry exceeds 100 kB per entry limit."), n) {
-    x1("Plugin API", n, {
+    logError("Plugin API", n, {
       pluginId: e,
       isPluginExempt: i,
       ext_enable_plugindata_limit_FF: !0,

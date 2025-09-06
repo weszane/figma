@@ -1,4 +1,4 @@
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { hS } from "../905/216495";
 import { wQ } from "../figma_app/385874";
 import { lJ } from "../905/275640";
@@ -76,27 +76,27 @@ export function $$l1({
         }
         switch (e.type) {
           case "ELLIPSE":
-            return _$$t("fullscreen.properties_panel.layer_header.node_type_ellipse");
+            return getI18nString("fullscreen.properties_panel.layer_header.node_type_ellipse");
           case "LINE":
-            return _$$t("fullscreen.properties_panel.layer_header.node_type_line");
+            return getI18nString("fullscreen.properties_panel.layer_header.node_type_line");
           case "REGULAR_POLYGON":
-            return _$$t("fullscreen.properties_panel.layer_header.node_type_polygon");
+            return getI18nString("fullscreen.properties_panel.layer_header.node_type_polygon");
           case "RECTANGLE":
           case "ROUNDED_RECTANGLE":
-            return _$$t("fullscreen.properties_panel.layer_header.node_type_rectangle");
+            return getI18nString("fullscreen.properties_panel.layer_header.node_type_rectangle");
           case "SECTION":
-            return _$$t("fullscreen.properties_panel.layer_header.node_type_section");
+            return getI18nString("fullscreen.properties_panel.layer_header.node_type_section");
           case "SLICE":
-            return _$$t("fullscreen.properties_panel.layer_header.node_type_slice");
+            return getI18nString("fullscreen.properties_panel.layer_header.node_type_slice");
           case "STAR":
-            return _$$t("fullscreen.properties_panel.layer_header.node_type_star");
+            return getI18nString("fullscreen.properties_panel.layer_header.node_type_star");
           case "TEXT":
-            return _$$t("fullscreen.properties_panel.layer_header.node_type_text");
+            return getI18nString("fullscreen.properties_panel.layer_header.node_type_text");
           case "TEXT_PATH":
-            return _$$t("fullscreen.properties_panel.layer_header.node_type_text_on_a_path");
+            return getI18nString("fullscreen.properties_panel.layer_header.node_type_text_on_a_path");
           case "VECTOR":
-            if (wQ(t) || wQ(r)) return _$$t("fullscreen.properties_panel.layer_header.node_type_arrow");
-            return _$$t("fullscreen.properties_panel.layer_header.node_type_vector_path");
+            if (wQ(t) || wQ(r)) return getI18nString("fullscreen.properties_panel.layer_header.node_type_arrow");
+            return getI18nString("fullscreen.properties_panel.layer_header.node_type_vector_path");
           default:
             return e.name;
         }
@@ -112,7 +112,7 @@ export function $$d0(e) {
   let t = "SHAPE_WITH_TEXT" === e.type && e.immutableFrameShape || e;
   let r = t.hasEnabledAnimatedPaint || t.hasEnabledVideoPaint;
   let i = t.hasEnabledStaticImagePaint;
-  return r ? _$$t("fullscreen.properties_panel.layer_header.node_type_video") : i ? _$$t("fullscreen.properties_panel.layer_header.node_type_image") : void 0;
+  return r ? getI18nString("fullscreen.properties_panel.layer_header.node_type_video") : i ? getI18nString("fullscreen.properties_panel.layer_header.node_type_image") : void 0;
 }
 export const j = $$d0;
 export const u = $$l1;

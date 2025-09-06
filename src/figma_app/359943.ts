@@ -11,12 +11,12 @@ import { l7 } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import h from "classnames";
 import { Pt, o6 } from "../figma_app/806412";
-import { xi } from "../905/714362";
+import { logWarning } from "../905/714362";
 import { E as _$$E2 } from "../905/277716";
 import { k as _$$k2 } from "../905/582200";
 import { ph } from "../figma_app/709893";
 import { B as _$$B } from "../905/714743";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../figma_app/91703";
 import { sE, EZ, fS } from "../figma_app/681244";
 import { Y5 } from "../figma_app/455680";
@@ -33,7 +33,7 @@ import { W as _$$W } from "../5132/887999";
 import { $ as _$$$ } from "../figma_app/61705";
 import { y as _$$y } from "../905/461685";
 import { FFileType } from "../figma_app/191312";
-import { sq } from "../figma_app/53721";
+import { COOPER_STRING } from "../figma_app/53721";
 import { f6 } from "../figma_app/915202";
 import { cV } from "../figma_app/59509";
 import { Q as _$$Q2 } from "../905/363675";
@@ -138,14 +138,14 @@ function ei() {
     isDraftsFolder: !0,
     editorType: FFileType.COOPER,
     newFileFrom: f6.DESIGN_TO_BUZZ_ENTRYPOINT,
-    contextClicked: `frame_presets_banner_${sq}_created`,
+    contextClicked: `frame_presets_banner_${COOPER_STRING}_created`,
     forceOpenNewTab: !0
   });
   return e && t ? jsx($, {
     icon: jsx(_$$W, {}),
-    title: _$$t("frame_presets_entrypoints.buzz.title"),
-    description: _$$t("frame_presets_entrypoints.buzz.description"),
-    ctaLabel: _$$t("frame_presets_entrypoints.buzz.cta"),
+    title: getI18nString("frame_presets_entrypoints.buzz.title"),
+    description: getI18nString("frame_presets_entrypoints.buzz.description"),
+    ctaLabel: getI18nString("frame_presets_entrypoints.buzz.cta"),
     onClick: i,
     userFlag: r,
     trackingContext: {
@@ -167,9 +167,9 @@ function es() {
   });
   return e && r ? jsx($, {
     icon: jsx(_$$J, {}),
-    title: _$$t("frame_presets_entrypoints.sites.title"),
-    description: _$$t("frame_presets_entrypoints.sites.description"),
-    ctaLabel: _$$t("frame_presets_entrypoints.sites.cta"),
+    title: getI18nString("frame_presets_entrypoints.sites.title"),
+    description: getI18nString("frame_presets_entrypoints.sites.description"),
+    ctaLabel: getI18nString("frame_presets_entrypoints.sites.cta"),
     onClick: i,
     userFlag: t,
     trackingContext: {
@@ -191,9 +191,9 @@ function el() {
   });
   return e && r ? jsx($, {
     icon: jsx(_$$l, {}),
-    title: _$$t("frame_presets_entrypoints.slides.title"),
-    description: _$$t("frame_presets_entrypoints.slides.description"),
-    ctaLabel: _$$t("frame_presets_entrypoints.slides.cta"),
+    title: getI18nString("frame_presets_entrypoints.slides.title"),
+    description: getI18nString("frame_presets_entrypoints.slides.description"),
+    ctaLabel: getI18nString("frame_presets_entrypoints.slides.cta"),
     onClick: i,
     userFlag: t,
     trackingContext: {
@@ -203,58 +203,58 @@ function el() {
   }) : null;
 }
 let ep = () => [{
-  name: _$$t("proto.frame_preset_panel.phone"),
+  name: getI18nString("proto.frame_preset_panel.phone"),
   type: EYD.PHONE,
   headerRecordingKey: "phoneToggle",
   listRecordingKey: "phoneRows",
   presetList: sE.phonePresets
 }, {
-  name: _$$t("proto.frame_preset_panel.tablet"),
+  name: getI18nString("proto.frame_preset_panel.tablet"),
   type: EYD.TABLET,
   headerRecordingKey: "tabletToggle",
   listRecordingKey: "tabletRows",
   presetList: sE.tabletPresets
 }, {
-  name: _$$t("proto.frame_preset_panel.desktop"),
+  name: getI18nString("proto.frame_preset_panel.desktop"),
   type: EYD.DESKTOP,
   headerRecordingKey: "desktopToggle",
   listRecordingKey: "desktopRows",
   presetList: sE.desktopPresets,
   children: jsx(es, {})
 }, {
-  name: _$$t("proto.frame_preset_panel.presentation"),
+  name: getI18nString("proto.frame_preset_panel.presentation"),
   type: EYD.PRESENTATION,
   headerRecordingKey: "presentationToggle",
   listRecordingKey: "presentationRows",
   presetList: sE.presentationPresets,
   children: jsx(el, {})
 }, {
-  name: _$$t("proto.frame_preset_panel.watch"),
+  name: getI18nString("proto.frame_preset_panel.watch"),
   type: EYD.WATCH,
   headerRecordingKey: "watchToggle",
   listRecordingKey: "watchRows",
   presetList: sE.watchPresets
 }, {
-  name: _$$t("proto.frame_preset_panel.paper"),
+  name: getI18nString("proto.frame_preset_panel.paper"),
   type: EYD.PAPER,
   headerRecordingKey: "paperToggle",
   listRecordingKey: "paperRows",
   presetList: sE.paperPresets
 }, {
-  name: _$$t("proto.frame_preset_panel.social_media"),
+  name: getI18nString("proto.frame_preset_panel.social_media"),
   type: EYD.SOCIALMEDIA,
   headerRecordingKey: "socialMediaToggle",
   listRecordingKey: "socialMediaRows",
   presetList: sE.socialMediaPresets,
   children: jsx(ei, {})
 }, {
-  name: _$$t("proto.frame_preset_panel.figma_community"),
+  name: getI18nString("proto.frame_preset_panel.figma_community"),
   type: EYD.FIGMA,
   headerRecordingKey: "figmaToggle",
   listRecordingKey: "figmaRows",
   presetList: sE.figmaPresets
 }, {
-  name: _$$t("proto.frame_preset_panel.archive"),
+  name: getI18nString("proto.frame_preset_panel.archive"),
   type: EYD.ARCHIVE,
   headerRecordingKey: "archiveToggle",
   listRecordingKey: "archiveRows",
@@ -267,7 +267,7 @@ export function $$e_2({
   let r = ut(UK().expandedFramePresetType, EYD.NONE);
   let l = useCallback(e => {
     r === e && (e = EYD.NONE);
-    Ez5 ? Ez5.editorPreferences().expandedFramePresetType.set(e) : xi("properties_panel", "failed to update user preference for frame presets types, AppStateTsApi is not available");
+    Ez5 ? Ez5.editorPreferences().expandedFramePresetType.set(e) : logWarning("properties_panel", "failed to update user preference for frame presets types, AppStateTsApi is not available");
   }, [r]);
   let d = useCallback(e => {
     l7.user("select-frame-preset", () => {
@@ -289,7 +289,7 @@ export function $$e_2({
     children: [jsx(fI, {
       className: _$$ed,
       children: jsx(_$$Q, {
-        children: tx("proto.frame_preset_panel.frame")
+        children: renderI18nText("proto.frame_preset_panel.frame")
       })
     }), jsx(YJ, {
       "aria-labelledby": c,
@@ -356,10 +356,10 @@ let em = memo(function ({
       children: [jsx(fI, {
         className: _$$ed,
         children: jsx(_$$Q, {
-          children: tx("proto.frame_preset_panel.frame")
+          children: renderI18nText("proto.frame_preset_panel.frame")
         })
       }), jsx(eg, {
-        name: _$$t("proto.frame_preset_panel.phone"),
+        name: getI18nString("proto.frame_preset_panel.phone"),
         expanded: i === EYD.PHONE,
         onMouseDown: () => t(EYD.PHONE),
         recordingKey: Pt(e, "phoneToggle")
@@ -368,7 +368,7 @@ let em = memo(function ({
         onSelectPreset: r,
         recordingKey: Pt(e, "phoneRows")
       }), jsx(eg, {
-        name: _$$t("proto.frame_preset_panel.tablet"),
+        name: getI18nString("proto.frame_preset_panel.tablet"),
         expanded: i === EYD.TABLET,
         onMouseDown: () => t(EYD.TABLET),
         recordingKey: Pt(e, "framePresetPanel", "tabletToggle")
@@ -377,7 +377,7 @@ let em = memo(function ({
         onSelectPreset: r,
         recordingKey: Pt(e, "tabletRows")
       }), jsx(eg, {
-        name: _$$t("proto.frame_preset_panel.desktop"),
+        name: getI18nString("proto.frame_preset_panel.desktop"),
         expanded: i === EYD.DESKTOP,
         onMouseDown: () => t(EYD.DESKTOP),
         recordingKey: Pt(e, "desktopToggle")
@@ -387,7 +387,7 @@ let em = memo(function ({
         recordingKey: Pt(e, "desktopRows"),
         children: jsx(es, {})
       }), jsx(eg, {
-        name: _$$t("proto.frame_preset_panel.presentation"),
+        name: getI18nString("proto.frame_preset_panel.presentation"),
         expanded: i === EYD.PRESENTATION,
         onMouseDown: () => t(EYD.PRESENTATION),
         recordingKey: Pt(e, "presentationToggle")
@@ -397,7 +397,7 @@ let em = memo(function ({
         recordingKey: Pt(e, "presentationRows"),
         children: jsx(el, {})
       }), jsx(eg, {
-        name: _$$t("proto.frame_preset_panel.watch"),
+        name: getI18nString("proto.frame_preset_panel.watch"),
         expanded: i === EYD.WATCH,
         onMouseDown: () => t(EYD.WATCH),
         recordingKey: Pt(e, "watchToggle")
@@ -406,7 +406,7 @@ let em = memo(function ({
         onSelectPreset: r,
         recordingKey: Pt(e, "watchRows")
       }), jsx(eg, {
-        name: _$$t("proto.frame_preset_panel.paper"),
+        name: getI18nString("proto.frame_preset_panel.paper"),
         expanded: i === EYD.PAPER,
         onMouseDown: () => t(EYD.PAPER),
         recordingKey: Pt(e, "paperToggle")
@@ -415,7 +415,7 @@ let em = memo(function ({
         onSelectPreset: r,
         recordingKey: Pt(e, "paperRows")
       }), jsx(eg, {
-        name: _$$t("proto.frame_preset_panel.social_media"),
+        name: getI18nString("proto.frame_preset_panel.social_media"),
         expanded: i === EYD.SOCIALMEDIA,
         onMouseDown: () => t(EYD.SOCIALMEDIA),
         recordingKey: Pt(e, "socialMediaToggle")
@@ -425,7 +425,7 @@ let em = memo(function ({
         recordingKey: Pt(e, "socialMediaRows"),
         children: jsx(ei, {})
       }), jsx(eg, {
-        name: _$$t("proto.frame_preset_panel.figma_community"),
+        name: getI18nString("proto.frame_preset_panel.figma_community"),
         expanded: i === EYD.FIGMA,
         onMouseDown: () => t(EYD.FIGMA),
         recordingKey: Pt(e, "figmaToggle")
@@ -434,7 +434,7 @@ let em = memo(function ({
         onSelectPreset: r,
         recordingKey: Pt(e, "figmaRows")
       }), jsx(eg, {
-        name: _$$t("proto.frame_preset_panel.archive"),
+        name: getI18nString("proto.frame_preset_panel.archive"),
         expanded: i === EYD.ARCHIVE,
         onMouseDown: () => t(EYD.ARCHIVE),
         recordingKey: Pt(e, "archiveToggle")
@@ -534,7 +534,7 @@ export class $$eE1 extends o6 {
       focusedPreset: void 0
     };
     this.formatter = {
-      format: e => e === V$M.FRAME ? _$$t("viewer.options_menu.frame") : e === V$M.GROUP ? _$$t("viewer.options_menu.group") : e === V$M.SECTION ? _$$t("viewer.options_menu.section") : e,
+      format: e => e === V$M.FRAME ? getI18nString("viewer.options_menu.frame") : e === V$M.GROUP ? getI18nString("viewer.options_menu.group") : e === V$M.SECTION ? getI18nString("viewer.options_menu.section") : e,
       isEqual: (e, t) => e === t
     };
     this.onChange = e => {
@@ -609,7 +609,7 @@ export class $$eE1 extends o6 {
     return jsx(_$$E2, {
       name: "frame_preset_select",
       children: jsxs(l6, {
-        ariaLabel: _$$t("proto.frame_preset_panel.frame"),
+        ariaLabel: getI18nString("proto.frame_preset_panel.frame"),
         chevronClassName: _$$fI,
         className: this.props.selectClassName,
         disabled: a,
@@ -651,11 +651,11 @@ export function $$ey0(e) {
         Y5.triggerActionInUserEditScope("resize-to-fit");
       },
       recordingKey: e.recordingKey,
-      "aria-label": _$$t("fullscreen_actions.resize-to-fit"),
+      "aria-label": getI18nString("fullscreen_actions.resize-to-fit"),
       htmlAttributes: {
         "data-testid": "resize-to-fit-button",
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("fullscreen_actions.resize-to-fit"),
+        "data-tooltip": getI18nString("fullscreen_actions.resize-to-fit"),
         "data-tooltip-shortcut-key": "resize-to-fit"
       },
       children: jsx(_$$F, {})

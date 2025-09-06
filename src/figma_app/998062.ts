@@ -5,7 +5,7 @@ import { K } from "../905/799615";
 import { A as _$$A } from "../905/251970";
 import { Ez5, nQ7 } from "../figma_app/763686";
 import { Pt } from "../figma_app/806412";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { zX, Rw } from "../905/576487";
 import { Y5 } from "../figma_app/455680";
@@ -35,7 +35,7 @@ function N({
   let u = useMemo(() => [o, l], [o, l]);
   return jsxs(Fragment, {
     children: [jsx(_$$d, {
-      "aria-label": _$$t("slides.properties_panel.text_style.more_actions"),
+      "aria-label": getI18nString("slides.properties_panel.text_style.more_actions"),
       ref: a,
       "aria-expanded": s,
       onClick: () => {
@@ -77,12 +77,12 @@ export function $$O0({
   return e ? jsxs("div", {
     className: "x78zum5 xeq5yr9 x6s0dn4 x19y5rnk x8rdmch xrybvsa xg2d0mh xtc4nxu x1n0bwc9",
     children: [jsx("p", {
-      children: _$$t("slides.properties_panel.component_set")
+      children: getI18nString("slides.properties_panel.component_set")
     }), jsx(_$$E, {})]
   }) : jsxs("div", {
     className: "x78zum5 xeq5yr9 x6s0dn4 x19y5rnk x8rdmch xrybvsa xg2d0mh xtc4nxu x1n0bwc9",
     children: [jsx("p", {
-      children: _$$t("slides.properties_panel.main_component")
+      children: getI18nString("slides.properties_panel.main_component")
     }), jsx(K, {})]
   });
 }
@@ -108,7 +108,7 @@ export function $$R1() {
     },
     icon: jsx(_$$A, {}),
     isSelected: !1,
-    getTitle: () => _$$t("fullscreen.properties_panel.stack_panel.remove_auto_layout"),
+    getTitle: () => getI18nString("fullscreen.properties_panel.stack_panel.remove_auto_layout"),
     recordingKey: "autoLayout"
   };
 }

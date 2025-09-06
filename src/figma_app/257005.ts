@@ -9,7 +9,7 @@ import { L } from "../905/408237";
 import { kt } from "../figma_app/858013";
 import { ne } from "../figma_app/563413";
 import { B } from "../905/714743";
-import { t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { r7 } from "../figma_app/471982";
 import { Dy } from "../905/977218";
 import { Q1 } from "../905/201596";
@@ -30,10 +30,10 @@ export function $$O4(e) {
     className: bx,
     children: [jsx("div", {
       className: _$$Uz,
-      children: "FILES" === e.tab ? t("community.universal_posting_modal.resource_empty.files_title") : "PLUGINS" === e.tab ? t("community.universal_posting_modal.resource_empty.plugins_title") : t("community.universal_posting_modal.resource_empty.widgets_title")
+      children: "FILES" === e.tab ? getI18nString("community.universal_posting_modal.resource_empty.files_title") : "PLUGINS" === e.tab ? getI18nString("community.universal_posting_modal.resource_empty.plugins_title") : getI18nString("community.universal_posting_modal.resource_empty.widgets_title")
     }), jsx("div", {
       className: SL,
-      children: "FILES" === e.tab ? t("community.universal_posting_modal.resource_empty.files_subtitle") : "PLUGINS" === e.tab ? t("community.universal_posting_modal.resource_empty.plugins_subtitle") : t("community.universal_posting_modal.resource_empty.widgets_subtitle")
+      children: "FILES" === e.tab ? getI18nString("community.universal_posting_modal.resource_empty.files_subtitle") : "PLUGINS" === e.tab ? getI18nString("community.universal_posting_modal.resource_empty.plugins_subtitle") : getI18nString("community.universal_posting_modal.resource_empty.widgets_subtitle")
     })]
   });
 }
@@ -130,7 +130,7 @@ export function $$P2({
     className: bx,
     children: jsx("div", {
       className: _$$Uz,
-      children: tx("community.universal_posting_modal.recent_editable_files_search.no_files_matching", {
+      children: renderI18nText("community.universal_posting_modal.recent_editable_files_search.no_files_matching", {
         searchQuery: jsx("span", {
           className: ZF,
           children: e
@@ -227,7 +227,7 @@ export function $$D0(e) {
       onKeyDown: onSearchKeyDown,
       onMouseDown,
       onMouseUp,
-      placeholder: e.placeholderText ?? t("community.universal_posting_modal.search_bar.placeholder"),
+      placeholder: e.placeholderText ?? getI18nString("community.universal_posting_modal.search_bar.placeholder"),
       spellCheck: !1,
       value: query
     }), !!query && hasCloseButton && jsx(B, {
@@ -258,7 +258,7 @@ function k(e) {
     currentUser: null,
     isSelected: !disabled && activeFileKey === file.key,
     disabled,
-    tooltipText: disabled ? t("community.publishing.this_file_has_been_published_to_community_as_a_library") : void 0
+    tooltipText: disabled ? getI18nString("community.publishing.this_file_has_been_published_to_community_as_a_library") : void 0
   });
 }
 export const IW = $$D0;

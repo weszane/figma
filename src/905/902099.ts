@@ -1,14 +1,14 @@
 import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { MEW, glU } from "../figma_app/763686";
-import { zl } from "../figma_app/27355";
-import { az } from "../905/449184";
-import { $D } from "../905/11";
-import { t as _$$t } from "../905/303541";
+import { atomStoreManager } from "../figma_app/27355";
+import { analyticsEventManager } from "../905/449184";
+import { reportError } from "../905/11";
+import { getI18nString } from "../905/303541";
 import { Y5 } from "../figma_app/455680";
 import { Jr } from "../figma_app/624361";
 import { U_ } from "../905/327855";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { bT } from "../905/163189";
 import { D } from "../905/758526";
 import { OL } from "../905/615657";
@@ -35,7 +35,7 @@ export function $$A0(e, t, i, r) {
         throwTypeError(e);
     }
   }(e);
-  az.trackDefinedMetric("file_import.pdf_import_completed", {
+  analyticsEventManager.trackDefinedMetric("file_import.pdf_import_completed", {
     state,
     entryPoint: t,
     fileSize: i,
@@ -44,10 +44,10 @@ export function $$A0(e, t, i, r) {
   });
 }
 export async function $$y1(e, t, i, o) {
-  if (zl.get(D)) throw new OL.PdfImportBlocked();
+  if (atomStoreManager.get(D)) throw new OL.PdfImportBlocked();
   let h = new Uint8Array(await i.arrayBuffer());
   Y5.resetLoadedFigFile();
-  await U_(e, nT.Whiteboard);
+  await U_(e, FEditorType.Whiteboard);
   let A = await IY.convertPdf({
     pdfBytes: h,
     pdfType: o
@@ -80,7 +80,7 @@ export async function $$y1(e, t, i, o) {
     }(images);
   } catch (e) {
     I = !0;
-    $D(_$$e.FIGJAM, e);
+    reportError(_$$e.FIGJAM, e);
   }
   let E = glU.getScene();
   images.forEach(e => {
@@ -99,7 +99,7 @@ export async function $$y1(e, t, i, o) {
     },
     images,
     videos: [],
-    warnings: hadImageExtractError || I ? [_$$t("fullscreen.file_import.import_pdf_images_not_imported")] : []
+    warnings: hadImageExtractError || I ? [getI18nString("fullscreen.file_import.import_pdf_images_not_imported")] : []
   };
 }
 export const Ij = $$A0;

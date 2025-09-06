@@ -1,15 +1,15 @@
 import { useSelector } from "../vendor/514228";
-import { bt } from "../905/270322";
+import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { FFileType } from "../figma_app/191312";
-import { oD, nT } from "../figma_app/53721";
+import { mapEditorTypeToFileType, FEditorType } from "../figma_app/53721";
 export function $$o8() {
   return useSelector(e => {
     var t;
-    return (t = e.selectedView) && "fullscreen" === t.view ? oD(t.editorType) : FFileType.DESIGN;
+    return (t = e.selectedView) && "fullscreen" === t.view ? mapEditorTypeToFileType(t.editorType) : FFileType.DESIGN;
   });
 }
 export function $$l5(e) {
-  return e && "fullscreen" === e.view ? e.editorType : nT.Design;
+  return e && "fullscreen" === e.view ? e.editorType : FEditorType.Design;
 }
 export function $$d3() {
   return useSelector(e => "prototype" === e.selectedView.view);
@@ -32,17 +32,17 @@ export function $$h6() {
   return $$o8() === FFileType.SITES;
 }
 export function $$m9() {
-  return $$f0() === nT.DevHandoff;
+  return $$f0() === FEditorType.DevHandoff;
 }
 export function $$g14() {
-  return $$f0() === nT.Illustration;
+  return $$f0() === FEditorType.Illustration;
 }
 export function $$f0() {
   return useSelector($$E12);
 }
 export function $$E12(e) {
   let t = e.selectedView;
-  return "fullscreen" !== t.view ? nT.Design : t.editorType;
+  return "fullscreen" !== t.view ? FEditorType.Design : t.editorType;
 }
 export function $$y10() {
   return useSelector(e => $$b4(e.selectedView));
@@ -50,7 +50,7 @@ export function $$y10() {
 export function $$b4(e) {
   return "fullscreen" !== e.view ? null : e.editorType;
 }
-export let $$T13 = bt(e => $$b4(e.selectedView));
+export let $$T13 = createReduxSubscriptionAtomWithState(e => $$b4(e.selectedView));
 export const E3 = $$f0;
 export const Em = $$_1;
 export const Fn = $$p2;

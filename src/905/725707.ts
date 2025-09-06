@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "../vendor/514228";
 import { N } from "../905/720559";
 import { xk } from "@stylexjs/stylex";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Q } from "../figma_app/104130";
 import { Ib } from "../905/129884";
 import { w2 } from "../figma_app/178475";
@@ -23,11 +23,11 @@ export function $$h0(e) {
       children: jsxs(fI, {
         children: [jsx(JU, {
           className: "x1xdureb x1447hjg",
-          children: _$$t("fullscreen.scrubbable.opacity")
+          children: getI18nString("fullscreen.scrubbable.opacity")
         }), jsx(w2, {
           ...xk(m.input, e.positionOverride),
           inputClassName: WC,
-          "data-tooltip": _$$t("fullscreen.scrubbable.opacity"),
+          "data-tooltip": getI18nString("fullscreen.scrubbable.opacity"),
           "data-tooltip-type": Ib.TEXT,
           dispatch: t,
           onValueChange: (t, i) => e.onChange({

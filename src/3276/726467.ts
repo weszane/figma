@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { A } from "../905/920142";
 import { h as _$$h } from "../905/207101";
 import { E } from "../905/453826";
@@ -14,10 +14,10 @@ import { N } from "../figma_app/268271";
 import { h as _$$h2 } from "../905/284399";
 import { q3 } from "../figma_app/450829";
 import { aI5, ar0 } from "../figma_app/6204";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { FJ } from "../905/508367";
 import { vd, tM } from "../figma_app/637027";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 let $$w = {
   SPOTLIGHT_GUIDE: "https://help.figma.com/hc/articles/5025214483351-Facilitate-meetings-with-spotlight",
   FOLLOW_GUIDE: "https://help.figma.com/hc/articles/360040322673-Follow-collaborators-in-a-file"
@@ -46,20 +46,20 @@ function j(e) {
 function k({
   onDismissModal: e
 }) {
-  let t = tx("collaboration.spotlight.2_0.onboarding_spotlight.description_with_spotlight_arg", {
+  let t = renderI18nText("collaboration.spotlight.2_0.onboarding_spotlight.description_with_spotlight_arg", {
     spotlightMeButtonText: jsx("b", {
-      children: tx("collaboration.spotlight.tooltip.spotlight_me")
+      children: renderI18nText("collaboration.spotlight.tooltip.spotlight_me")
     })
   });
   return jsx(j, {
-    title: tx("collaboration.spotlight.onboarding_spotlight.title"),
+    title: renderI18nText("collaboration.spotlight.onboarding_spotlight.title"),
     content: t,
-    secondaryCTA: tx("collaboration.voice.learn_more"),
+    secondaryCTA: renderI18nText("collaboration.voice.learn_more"),
     secondaryCTAOnClick: () => FJ($$w.SPOTLIGHT_GUIDE, "_blank", "noopener"),
-    primaryCTA: tx("collaboration.spotlight.onboarding.next"),
+    primaryCTA: renderI18nText("collaboration.spotlight.onboarding.next"),
     primaryCTAOnClick: () => {
       e();
-      sx("Context Viewed", {
+      trackEventAnalytics("Context Viewed", {
         name: "should-close-open-spotlight-nux"
       });
     }
@@ -69,11 +69,11 @@ function P({
   onDismissModal: e
 }) {
   return jsx(j, {
-    title: tx("collaboration.spotlight.onboarding_observation.title"),
-    content: tx("collaboration.spotlight.onboarding_observation.description"),
-    secondaryCTA: tx("collaboration.voice.learn_more"),
+    title: renderI18nText("collaboration.spotlight.onboarding_observation.title"),
+    content: renderI18nText("collaboration.spotlight.onboarding_observation.description"),
+    secondaryCTA: renderI18nText("collaboration.voice.learn_more"),
     secondaryCTAOnClick: () => FJ($$w.FOLLOW_GUIDE, "_blank", "noopener"),
-    primaryCTA: tx("collaboration.spotlight.onboarding.done"),
+    primaryCTA: renderI18nText("collaboration.spotlight.onboarding.done"),
     primaryCTAOnClick: () => {
       e();
     }
@@ -82,10 +82,10 @@ function P({
 let I = "seen_synchronous_collaboration_onboarding";
 let T = r1(I);
 export function $$M0() {
-  let e = md(d9);
-  let t = md(PD);
-  let n = md($5);
-  let u = md(T);
+  let e = useAtomWithSubscription(d9);
+  let t = useAtomWithSubscription(PD);
+  let n = useAtomWithSubscription($5);
+  let u = useAtomWithSubscription(T);
   let x = J$();
   let b = A().subtract(7, "day").isBefore(A(x));
   let y = _$$e({

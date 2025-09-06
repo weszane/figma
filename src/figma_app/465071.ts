@@ -2,26 +2,26 @@ import { useState, useEffect, useMemo } from "react";
 import { useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
-import { md } from "../figma_app/27355";
-import { R } from "../905/103090";
+import { useAtomWithSubscription } from "../figma_app/27355";
+import { selectWithShallowEqual } from "../905/103090";
 import { mI } from "../figma_app/566371";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { A5, MF } from "../figma_app/391338";
 import { Z } from "../905/515860";
 import { FPlanNameType, FOrganizationLevelType, FMemberRoleType, FUserTypeClassification } from "../figma_app/191312";
 import { mZ, T_, Ji, zl, gq, KK } from "../905/276025";
 export function $$m7() {
-  return md(mZ(!0));
+  return useAtomWithSubscription(mZ(!0));
 }
 export function $$g6() {
-  return md(T_(!0));
+  return useAtomWithSubscription(T_(!0));
 }
 export function $$f19() {
-  return md(Ji(!0));
+  return useAtomWithSubscription(Ji(!0));
 }
 export function $$E8(e, t) {
-  let r = md(zl(!0));
-  let n = md(mZ(!0));
+  let r = useAtomWithSubscription(zl(!0));
+  let n = useAtomWithSubscription(mZ(!0));
   S(r.transform(e => e?.key), n.transform(e => e?.key), A5.PlanHooks.useCurrentPrivilegedPlan, e, t?.sampleRate);
   return getFeatureFlags().plan_hook_migration && t?.useSidebarOrOpenFile ? n : r;
 }
@@ -32,26 +32,26 @@ export function $$y13({
   let [r] = mI(t);
   if ("loaded" !== r.status) {
     let t = Error("disabled" === r.status ? "Plan fetching disabled" : "Error fetching plan");
-    $D(e, t);
+    reportError(e, t);
     return t;
   }
   let n = r.data;
   if (!n) {
     let t = Error("No Plan found");
-    $D(e, t);
+    reportError(e, t);
     return t;
   }
   return n;
 }
 export function $$b2(e, t) {
-  let r = md(gq(!0));
-  let n = md(Ji(!0));
+  let r = useAtomWithSubscription(gq(!0));
+  let n = useAtomWithSubscription(Ji(!0));
   S(r.transform(e => e.planKey), n.transform(e => e.planKey), A5.PlanHooks.useCurrentPlanUser, e, t?.sampleRate);
   return getFeatureFlags().plan_hook_migration && t?.useSidebarOrOpenFile ? n : r;
 }
 export function $$T12(e, t) {
-  let r = md(KK(!0));
-  let n = md(T_(!0));
+  let r = useAtomWithSubscription(KK(!0));
+  let n = useAtomWithSubscription(T_(!0));
   S(r.transform(e => e?.key), n.transform(e => e?.key), A5.PlanHooks.useCurrentPublicPlan, e, t?.sampleRate);
   return getFeatureFlags().plan_hook_migration && t?.useSidebarOrOpenFile ? n : r;
 }
@@ -60,7 +60,7 @@ function I(e) {
 }
 let S = (e, t, r, a, s = .1) => {
   let o = useSelector(e => e.selectedView?.view === "folder");
-  let d = R(e => ({
+  let d = selectWithShallowEqual(e => ({
     currentUserOrgId: e.currentUserOrgId,
     currentTeamId: e.currentTeamId,
     getTeamIdResult: Z(e),

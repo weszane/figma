@@ -1,8 +1,8 @@
 import { useMemo } from "react";
 import { useSelector } from "../vendor/514228";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { D } from "../905/273829";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { S8, uz, A0, p, Ap, LK, NU, MT } from "../905/359509";
 import { $1, j8, S0, _P } from "../figma_app/844435";
 import { M5 } from "../figma_app/300692";
@@ -29,17 +29,17 @@ export function $$h2(e) {
         case A0:
           return "CssBuilder";
         case uz:
-          return _$$t("dev_handoff.code.lang_css");
+          return getI18nString("dev_handoff.code.lang_css");
         case p:
-          return _$$t("dev_handoff.code.lang_swiftui");
+          return getI18nString("dev_handoff.code.lang_swiftui");
         case Ap:
-          return _$$t("dev_handoff.code.lang_uikit");
+          return getI18nString("dev_handoff.code.lang_uikit");
         case LK:
-          return _$$t("dev_handoff.code.lang_compose");
+          return getI18nString("dev_handoff.code.lang_compose");
         case NU:
-          return _$$t("dev_handoff.code.lang_android_xml");
+          return getI18nString("dev_handoff.code.lang_android_xml");
         case MT:
-          return _$$t("dev_handoff.code.lang_figma");
+          return getI18nString("dev_handoff.code.lang_figma");
       }
       if (e) {
         let i = n?.type === "local-plugin" ? t[n.id] : n?.type === "published-plugin" && e.plugin_id === n?.id ? r[n.id] ?? e : null;
@@ -80,7 +80,7 @@ export function $$f6(e, t) {
   return null;
 }
 export function $$E5() {
-  let e = md(D);
+  let e = useAtomWithSubscription(D);
   let t = useSelector(e => e.mirror.appModel.devHandoffCodeLanguage);
   let r = useSelector(e => e.selectedView);
   let o = t;

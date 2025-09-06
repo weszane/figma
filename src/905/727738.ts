@@ -1,4 +1,4 @@
-import { f as _$$f } from "../905/842794";
+import { handleOptimistTransaction } from "../905/842794";
 import { WB } from "../905/761735";
 import { XHR } from "../905/910117";
 import { Q, s as _$$s } from "../905/573154";
@@ -10,7 +10,7 @@ import { NC } from "../905/17179";
 import { to, AS } from "../905/156213";
 import { jsx } from "react/jsx-runtime";
 import { Component } from "react";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Ju, qK } from "../905/102752";
 import { yX } from "../figma_app/918700";
 import { yH, yJ, bE } from "../905/98702";
@@ -36,11 +36,11 @@ class A extends Component {
     let t;
     let i = this.props.fileSeenState.user;
     let n = this.props.fileName;
-    i.id === this.props.user.id ? (e = _$$t("confirm_remove_role.are_you_sure_you_want_to_leave_file_name_you_may_not_be_able_to_access_this_file_anymore", {
+    i.id === this.props.user.id ? (e = getI18nString("confirm_remove_role.are_you_sure_you_want_to_leave_file_name_you_may_not_be_able_to_access_this_file_anymore", {
       fileName: n
-    }), t = _$$t("confirm_remove_role.leave")) : (e = _$$t("confirm_remove_role.are_you_sure_you_want_to_remove_user_to_remove_handle_they_may_not_be_able_to_access_this_file_anymore", {
+    }), t = getI18nString("confirm_remove_role.leave")) : (e = getI18nString("confirm_remove_role.are_you_sure_you_want_to_remove_user_to_remove_handle_they_may_not_be_able_to_access_this_file_anymore", {
       userHandle: i.handle
-    }), t = _$$t("confirm_remove_role.remove"));
+    }), t = getI18nString("confirm_remove_role.remove"));
     return jsx(yX, {
       content: e,
       confirmText: t,
@@ -59,7 +59,7 @@ let b = nF((e, {
     promise: i,
     fallbackError: "An error occurred while removing this user."
   }));
-  _$$f(i, e.dispatch, I({
+  handleOptimistTransaction(i, e.dispatch, I({
     fileSeenState: t
   }));
   WB().optimisticallyDelete({
@@ -112,31 +112,31 @@ function j(e) {
   let s = M4.File.useValue(a).data;
   switch (n.resource_type) {
     case FResourceCategoryType.FILE:
-      r.id === e.user.id ? (t = _$$t("confirm_remove_role.are_you_sure_you_want_to_leave_file_name_you_may_not_be_able_to_access_this_file_anymore", {
+      r.id === e.user.id ? (t = getI18nString("confirm_remove_role.are_you_sure_you_want_to_leave_file_name_you_may_not_be_able_to_access_this_file_anymore", {
         fileName: s?.name || ""
-      }), i = _$$t("confirm_remove_role.leave")) : (t = _$$t("confirm_remove_role.are_you_sure_you_want_to_remove_user_to_remove_handle_they_may_not_be_able_to_access_this_file_anymore", {
+      }), i = getI18nString("confirm_remove_role.leave")) : (t = getI18nString("confirm_remove_role.are_you_sure_you_want_to_remove_user_to_remove_handle_they_may_not_be_able_to_access_this_file_anymore", {
         userHandle: r.handle
-      }), i = _$$t("confirm_remove_role.remove"));
+      }), i = getI18nString("confirm_remove_role.remove"));
       break;
     case FResourceCategoryType.FILE_REPO:
       {
         let a = e.repos[n.resource_id_or_key];
         let s = oj(a);
-        r.id === e.user.id ? (t = _$$t("confirm_remove_role.are_you_sure_you_want_to_leave_file_name_you_may_not_be_able_to_access_this_file_anymore", {
+        r.id === e.user.id ? (t = getI18nString("confirm_remove_role.are_you_sure_you_want_to_leave_file_name_you_may_not_be_able_to_access_this_file_anymore", {
           fileName: s
-        }), i = _$$t("confirm_remove_role.leave")) : (t = _$$t("confirm_remove_role.are_you_sure_you_want_to_remove_user_to_remove_handle_they_may_not_be_able_to_access_this_main_file_and_the_branches_anymore", {
+        }), i = getI18nString("confirm_remove_role.leave")) : (t = getI18nString("confirm_remove_role.are_you_sure_you_want_to_remove_user_to_remove_handle_they_may_not_be_able_to_access_this_main_file_and_the_branches_anymore", {
           userHandle: r.handle
-        }), i = _$$t("confirm_remove_role.remove"));
+        }), i = getI18nString("confirm_remove_role.remove"));
         break;
       }
     case FResourceCategoryType.FOLDER:
       {
         let a = e.folders[n.resource_id_or_key];
-        r.id === e.user.id ? (t = _$$t("confirm_remove_role.are_you_sure_you_want_to_leave_folder_name_you_may_not_be_able_to_access_files_in_this_project_anymore", {
+        r.id === e.user.id ? (t = getI18nString("confirm_remove_role.are_you_sure_you_want_to_leave_folder_name_you_may_not_be_able_to_access_files_in_this_project_anymore", {
           folderName: a.name
-        }), i = _$$t("confirm_remove_role.leave")) : (t = _$$t("confirm_remove_role.are_you_sure_you_want_to_remove_user_to_remove_handle_they_may_not_be_able_to_access_files_in_this_project_anymore", {
+        }), i = getI18nString("confirm_remove_role.leave")) : (t = getI18nString("confirm_remove_role.are_you_sure_you_want_to_remove_user_to_remove_handle_they_may_not_be_able_to_access_files_in_this_project_anymore", {
           userHandle: r.handle
-        }), i = _$$t("confirm_remove_role.remove"));
+        }), i = getI18nString("confirm_remove_role.remove"));
         break;
       }
     default:
@@ -145,7 +145,7 @@ function j(e) {
   return jsx(_$$R, {
     confirmText: i,
     onConfirm: e.onConfirmRemove,
-    title: _$$t("confirm_remove_role.confirm_title_file"),
+    title: getI18nString("confirm_remove_role.confirm_title_file"),
     onClose: e.onCancel,
     open: !1,
     ...e,
@@ -166,7 +166,7 @@ let G = nF((e, {
     promise: i,
     fallbackError: "An error occurred while removing this user."
   }));
-  _$$f(i, e.dispatch, yH({
+  handleOptimistTransaction(i, e.dispatch, yH({
     role: t
   }));
   let o = ZW(t.resource_type);
@@ -223,7 +223,7 @@ let z = nF((e, {
       }));
     });
   });
-  _$$f(d, e.dispatch, yJ({
+  handleOptimistTransaction(d, e.dispatch, yJ({
     role: t,
     cascade: i
   }));
@@ -292,7 +292,7 @@ let H = nF((e, {
     updated_at: `${new Date()}`,
     team_id: p.team_id
   };
-  _$$f(_, e.dispatch, bE({
+  handleOptimistTransaction(_, e.dispatch, bE({
     role: A
   }));
   ZW(FResourceCategoryType.FILE) && (WB().optimisticallyCreate({

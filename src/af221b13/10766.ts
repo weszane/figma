@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { lQ } from "../905/934246";
 import { c as _$$c } from "../905/320067";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { Xy } from "../figma_app/578832";
 import { cz, i8 } from "../905/14017";
 import { L, I } from "../1577/16430";
@@ -184,7 +184,7 @@ function w({
         publishers: e.community_publishers?.accepted || []
       }), jsxs("div", {
         className: vR,
-        children: [tx("community.cards.by"), jsx(I, {
+        children: [renderI18nText("community.cards.by"), jsx(I, {
           publishers: e.community_publishers?.accepted || [],
           removeByLabel: !0,
           openInNewTab: !0

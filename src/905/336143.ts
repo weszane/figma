@@ -1,6 +1,6 @@
 import { createContext, useState, useMemo, useEffect } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { zN } from "../905/19536";
 import { ZC } from "../figma_app/39751";
 import { qp } from "../905/977779";
@@ -36,7 +36,7 @@ let $$I1 = D(() => {
   }, [g, f, b, v]);
   let x = useSelector(MH);
   let S = useSelector(e => e.fileVersion);
-  let w = md(qp);
+  let w = useAtomWithSubscription(qp);
   let C = K5();
   let T = ZC(x);
   let k = useSelector(_);

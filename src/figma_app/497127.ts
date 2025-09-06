@@ -1,10 +1,10 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { K } from "../905/443068";
 import { C } from "../905/520159";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { a as _$$a } from "../905/925868";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Y } from "../905/830372";
 import { li } from "../figma_app/622574";
 import { FFileType } from "../figma_app/191312";
@@ -41,13 +41,13 @@ export function $$f0({
         right: 24
       },
       children: [y && jsx(K, {
-        "aria-label": _$$t("general.back"),
-        actionOnPointerDown: Ay.isIpad,
+        "aria-label": getI18nString("general.back"),
+        actionOnPointerDown: BrowserInfo.isIpad,
         onClick: y,
         children: jsx(C, {})
       }), jsx("div", {
         className: _$$s.font13.fontMedium.$,
-        children: tx("browse_templates_modal.published_by_current_org_name", {
+        children: renderI18nText("browse_templates_modal.published_by_current_org_name", {
           orgName: t
         })
       })]

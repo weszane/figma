@@ -1,5 +1,5 @@
 import { m1T } from "../figma_app/763686";
-import { R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { uQ } from "../figma_app/311375";
 import { l7 } from "../figma_app/88239";
 import { Ku } from "../figma_app/678782";
@@ -21,7 +21,7 @@ export function $$c0(e) {
       isSymbol: r?.type === "SYMBOL" || r?.isStateGroup || r?.type === "INSTANCE"
     };
   }, r);
-  let c = R(e => e.mirror.appModel.activeCanvasEditModeType);
+  let c = selectWithShallowEqual(e => e.mirror.appModel.activeCanvasEditModeType);
   let u = l7();
   return !!r && (c === m1T.DEV_HANDOFF || c === m1T.DEV_HANDOFF_HISTORY || u) && ("FRAME" === nodeType || isSymbol || "SECTION" === nodeType);
 }

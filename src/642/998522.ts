@@ -1,9 +1,9 @@
 import { jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
 import { useSelector } from "../vendor/514228";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { buildUploadUrl } from "../figma_app/169182";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { c as _$$c } from "../905/370443";
 import { e as _$$e } from "../905/621515";
 import { Fy } from "../figma_app/579169";
@@ -21,10 +21,10 @@ let $$j2 = "ui2-layers-horizontal-scroll-onboarding-key";
 let v = r1("seen_ui3_layers_horizontal_scroll_overlay");
 export function $$S0() {
   let e = aV();
-  let t = md(Fy);
+  let t = useAtomWithSubscription(Fy);
   let s = useSelector(e => e.mirror.appModel.currentPage);
   let p = Fk((e, t) => !zC(e, t), s);
-  let j = md(v);
+  let j = useAtomWithSubscription(v);
   let {
     show,
     isShowing,
@@ -40,7 +40,7 @@ export function $$S0() {
   }, [show, e, p, t]);
   return jsx(rq, {
     arrowPosition: F_.RIGHT_TITLE,
-    description: tx("ui3_layers_horizontal_scroll_overlay.ui3_description"),
+    description: renderI18nText("ui3_layers_horizontal_scroll_overlay.ui3_description"),
     disableHighlight: !0,
     isShowing,
     media: jsx(w, {
@@ -49,13 +49,13 @@ export function $$S0() {
     }),
     onClose: complete,
     primaryCta: {
-      label: tx("general.got_it"),
+      label: renderI18nText("general.got_it"),
       ctaTrackingDescriptor: _$$c.GOT_IT,
       type: "button",
       onClick: complete
     },
     targetKey: $$C1,
-    title: tx("ui3_layers_horizontal_scroll_overlay.ui3_title"),
+    title: renderI18nText("ui3_layers_horizontal_scroll_overlay.ui3_title"),
     trackingContextName: "UI3 Layers Horizontal Scroll Overlay"
   });
 }

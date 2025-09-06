@@ -13,18 +13,18 @@ import { WXh, XpJ, t8O, mrc, m1T, glU, rXF, gdE, rrT } from "../figma_app/763686
 import { l7 } from "../905/189185";
 import { dI } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { xx } from "../figma_app/815945";
 import { localStorageRef } from "../905/657224";
-import { az, sx } from "../905/449184";
-import { eD as _$$eD } from "../figma_app/876459";
-import { R as _$$R } from "../905/103090";
-import { Ay } from "../figma_app/778880";
+import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
+import { desktopAPIInstance } from "../figma_app/876459";
+import { selectWithShallowEqual } from "../905/103090";
+import { BrowserInfo } from "../figma_app/778880";
 import { Pt } from "../figma_app/806412";
 import { E as _$$E } from "../905/277716";
 import { k as _$$k2 } from "../905/582200";
 import { t as _$$t2 } from "../905/331623";
-import { t as _$$t3, tx as _$$tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { XE, u1, Uv } from "../figma_app/91703";
 import { sw } from "../figma_app/914957";
 import { h2, AB, Pr } from "../figma_app/8833";
@@ -316,27 +316,27 @@ class eY extends PureComponent {
         onChange: this.onListStyleChange,
         readonly: this.props.disabled,
         legend: jsx(_$$q, {
-          children: _$$t3("type_settings.list_style")
+          children: getI18nString("type_settings.list_style")
         }),
         recordingKey: this.props.recordingKey,
         children: [jsx(c$, {
           icon: jsx(_$$f, {}),
           value: "PLAIN",
-          "aria-label": _$$t3("fullscreen.type_panel.no_list"),
+          "aria-label": getI18nString("fullscreen.type_panel.no_list"),
           "data-tooltip-show-above": !0,
           onMouseEnter: () => this.props.mouseHoverHandler("PLAIN", "ENTER"),
           onMouseLeave: () => this.props.mouseHoverHandler("PLAIN", "LEAVE")
         }), jsx(c$, {
           icon: jsx(_$$Z, {}),
           value: "UNORDERED_LIST",
-          "aria-label": _$$t3("fullscreen.type_panel.bulleted_list"),
+          "aria-label": getI18nString("fullscreen.type_panel.bulleted_list"),
           "data-tooltip-show-above": !0,
           onMouseEnter: () => this.props.mouseHoverHandler("UNORDERED_LIST", "ENTER"),
           onMouseLeave: () => this.props.mouseHoverHandler("UNORDERED_LIST", "LEAVE")
         }), jsx(c$, {
           icon: jsx(_$$p, {}),
           value: "ORDERED_LIST",
-          "aria-label": _$$t3("fullscreen.type_panel.numbered_list"),
+          "aria-label": getI18nString("fullscreen.type_panel.numbered_list"),
           "data-tooltip-show-above": !0,
           onMouseEnter: () => this.props.mouseHoverHandler("ORDERED_LIST", "ENTER"),
           onMouseLeave: () => this.props.mouseHoverHandler("ORDERED_LIST", "LEAVE")
@@ -470,10 +470,10 @@ let th = "type_settings--lineHeightUpdateInfo--0sHJc";
 let tg = "type_settings--lineHeightUpdateIcon--qysTc";
 let tf = "type_settings--lineHeightUpgradeButtonFpl--2VNtF";
 let t_ = e => {
-  az.trackDefinedEvent("text_and_vector.text_decoration_style_change", {
+  analyticsEventManager.trackDefinedEvent("text_and_vector.text_decoration_style_change", {
     style: e
   });
-  sx("ce_text_decoration_style_change", {
+  trackEventAnalytics("ce_text_decoration_style_change", {
     style: e
   });
   Y5.updateSelectionProperties({
@@ -489,13 +489,13 @@ function tA(e) {
         onChange: t_,
         readonly: e.disabled,
         legend: jsx(_$$q, {
-          children: _$$tx("type_settings.decoration.decoration_style")
+          children: renderI18nText("type_settings.decoration.decoration_style")
         }),
         recordingKey: Pt(e, "textDecorationStyle"),
         children: [jsx(c$, {
           icon: jsx(_$$W, {}),
           value: "SOLID",
-          "aria-label": _$$t3("type_settings.decoration.decoration_style.solid"),
+          "aria-label": getI18nString("type_settings.decoration.decoration_style.solid"),
           htmlAttributes: {
             "data-tooltip-show-above": !0,
             onMouseEnter: () => e.decorationHoverHandler("SOLID", "ENTER"),
@@ -504,7 +504,7 @@ function tA(e) {
         }), jsx(c$, {
           icon: jsx(e3, {}),
           value: "DOTTED",
-          "aria-label": _$$t3("type_settings.decoration.decoration_style.dotted"),
+          "aria-label": getI18nString("type_settings.decoration.decoration_style.dotted"),
           htmlAttributes: {
             "data-tooltip-show-above": !0,
             onMouseEnter: () => e.decorationHoverHandler("DOTTED", "ENTER"),
@@ -513,7 +513,7 @@ function tA(e) {
         }), jsx(c$, {
           icon: jsx(e6, {}),
           value: "WAVY",
-          "aria-label": _$$t3("type_settings.decoration.decoration_style.wavy"),
+          "aria-label": getI18nString("type_settings.decoration.decoration_style.wavy"),
           htmlAttributes: {
             "data-tooltip-show-above": !0,
             onMouseEnter: () => e.decorationHoverHandler("WAVY", "ENTER"),
@@ -526,7 +526,7 @@ function tA(e) {
 }
 let ty = e => {
   let t = "TRUE" === e;
-  az.trackDefinedEvent("text_and_vector.text_decoration_skip_ink_toggled", {
+  analyticsEventManager.trackDefinedEvent("text_and_vector.text_decoration_skip_ink_toggled", {
     skipInk: t
   });
   Y5.updateSelectionProperties({
@@ -544,13 +544,13 @@ function tb(e) {
       },
       value: hS(e.skipInk) && !e.disabled ? e.skipInk ? "TRUE" : "FALSE" : void 0,
       legend: jsx(_$$q, {
-        children: _$$t3("type_settings.decoration.skip_ink")
+        children: getI18nString("type_settings.decoration.skip_ink")
       }),
       readonly: e.disabled,
       recordingKey: Pt(e, "textDecorationSkipInk"),
       children: [jsx(c$, {
         value: "FALSE",
-        "aria-label": _$$t3("type_settings.decoration.skip_ink_off"),
+        "aria-label": getI18nString("type_settings.decoration.skip_ink_off"),
         icon: jsx(e7, {}),
         htmlAttributes: {
           "data-tooltip-show-above": !0,
@@ -559,7 +559,7 @@ function tb(e) {
         }
       }), jsx(c$, {
         value: "TRUE",
-        "aria-label": _$$t3("type_settings.decoration.skip_ink_on"),
+        "aria-label": getI18nString("type_settings.decoration.skip_ink_on"),
         icon: jsx(e8, {}),
         htmlAttributes: {
           "data-tooltip-show-above": !0,
@@ -587,13 +587,13 @@ let tE = function (e) {
       onChange: tI,
       readonly: e.disabled,
       legend: jsx(_$$q, {
-        children: _$$tx("type_settings.decoration")
+        children: renderI18nText("type_settings.decoration")
       }),
       recordingKey: Pt(e, "textDecoration"),
       children: [jsx(c$, {
         icon: jsx(_$$f, {}),
         value: "NONE",
-        "aria-label": _$$t3("type_settings.decoration.none"),
+        "aria-label": getI18nString("type_settings.decoration.none"),
         htmlAttributes: {
           "data-tooltip-show-above": !0,
           onMouseEnter: () => e.decorationHoverHandler("NONE", "ENTER"),
@@ -602,7 +602,7 @@ let tE = function (e) {
       }), jsx(c$, {
         icon: jsx(_$$W, {}),
         value: "UNDERLINE",
-        "aria-label": _$$t3("type_settings.decoration.underline"),
+        "aria-label": getI18nString("type_settings.decoration.underline"),
         htmlAttributes: {
           "data-tooltip-show-above": !0,
           onMouseEnter: () => e.decorationHoverHandler("UNDERLINE", "ENTER"),
@@ -612,7 +612,7 @@ let tE = function (e) {
       }), jsx(c$, {
         icon: jsx(_$$N2, {}),
         value: "STRIKETHROUGH",
-        "aria-label": _$$t3("type_settings.decoration.strikethrough"),
+        "aria-label": getI18nString("type_settings.decoration.strikethrough"),
         htmlAttributes: {
           "data-tooltip-show-above": !0,
           onMouseEnter: () => e.decorationHoverHandler("STRIKETHROUGH", "ENTER"),
@@ -701,7 +701,7 @@ let tN = memo(function (e) {
   }), [e.isEditingStyle]);
   let c = useMemo(() => gl(e.textDecorationFillPaints) ? oV : _W(e.textDecorationFillPaints, []), [e.textDecorationFillPaints]);
   let u = useMemo(() => gl(e.fillPaints) ? oV : _W(e.fillPaints, []), [e.fillPaints]);
-  let p = _$$R(e => e.mirror.selectionPaints.paintsDirectlyOnSingleNode);
+  let p = selectWithShallowEqual(e => e.mirror.selectionPaints.paintsDirectlyOnSingleNode);
   let m = !gl(c) && c.length <= 0;
   let h = useMemo(() => m ? gl(u) ? {
     ...u,
@@ -721,7 +721,7 @@ let tN = memo(function (e) {
   } : c[0], [m, u, c]);
   let g = useMemo(() => m || gl(c) || !c.length ? !gl(u) && u.length ? u[0] : p.length > 0 ? p[0].paint : d : c[0], [m, c, u, p, d]);
   let _ = (e, t, i) => {
-    if (az.trackDefinedEvent("text_and_vector.text_decoration_fill_set", {
+    if (analyticsEventManager.trackDefinedEvent("text_and_vector.text_decoration_fill_set", {
       wasAuto: m,
       toAuto: SX(e.color)
     }), SX(e.color)) {
@@ -871,7 +871,7 @@ function tO(e) {
       children: jsx(JU, {
         disabled: t,
         className: "type_settings--decorationColorTypeLabel--hUX19 type_settings--_centered--QZTO4",
-        children: _$$t3("type_settings.decoration.custom_color")
+        children: getI18nString("type_settings.decoration.custom_color")
       })
     }), jsx("div", {
       className: "type_settings--textDecorationColorPicker--x2B-f",
@@ -893,7 +893,7 @@ function tj({
 }) {
   let [s, o] = useState(null);
   let [l, d] = useState({
-    placeholder: _$$t3("type_settings.preview.preview")
+    placeholder: getI18nString("type_settings.preview.preview")
   });
   let c = useRef(null);
   useEffect(() => {
@@ -911,7 +911,7 @@ function tj({
   useEffect(() => {
     if (e === XpJ.EMPTY || null === s) {
       d({
-        placeholder: _$$t3("type_settings.preview.preview")
+        placeholder: getI18nString("type_settings.preview.preview")
       });
       return;
     }
@@ -920,7 +920,7 @@ function tj({
       let e = `${n.family}_${n.style}_${t ?? i}`;
       let r = tM.get(e) || 0;
       let a = Date.now();
-      a - r > 3e4 && (tM.set(e, a), sx("Type Details Preview Unavailable", {
+      a - r > 3e4 && (tM.set(e, a), trackEventAnalytics("Type Details Preview Unavailable", {
         family: n.family,
         style: n.style,
         feature: t
@@ -963,12 +963,12 @@ let tG = "type_settings_tab_header--drillInRow--l9OdD";
 let tz = "type_settings_tab_header--separator--9hO5J";
 function tH() {
   return getFeatureFlags().ce_tv_fpl_type_settings ? jsx(hE, {
-    children: _$$t3("type_settings.type_settings")
+    children: getI18nString("type_settings.type_settings")
   }) : jsx("div", {
     className: tB,
     children: jsx("div", {
       className: "type_settings_tab_header--typeSettingsTitle--OpoVK header_modal--headerModalTitle--32hFx",
-      children: _$$t3("type_settings.type_settings")
+      children: getI18nString("type_settings.type_settings")
     })
   });
 }
@@ -992,12 +992,12 @@ function tW({
         className: tG,
         children: [jsx("span", {
           className: tV,
-          children: l ? _$$t3("fullscreen.type_settings.basic_tab") : _$$t3("type_settings.type_settings")
+          children: l ? getI18nString("fullscreen.type_settings.basic_tab") : getI18nString("type_settings.type_settings")
         }), jsx("span", {
           className: tz,
           children: "/"
         }), jsx("span", {
-          children: _$$t3("type_settings.decoration.underline")
+          children: getI18nString("type_settings.decoration.underline")
         })]
       })
     })]
@@ -1005,22 +1005,22 @@ function tW({
     className: l ? "type_settings_tab_header--tabsHeader--HybJs type_settings--tabsHeader--AWpX1" : tB,
     children: [jsx(_$$K, {
       htmlAttributes: {
-        "data-tooltip": _$$t3("general.back"),
+        "data-tooltip": getI18nString("general.back"),
         "data-tooltip-type": Ib.TEXT
       },
-      "aria-label": _$$t3("general.back"),
+      "aria-label": getI18nString("general.back"),
       onClick: s,
       children: jsx(_$$C, {})
     }), jsxs("div", {
       className: tG,
       children: [jsx("span", {
         className: tV,
-        children: l ? _$$t3("fullscreen.type_settings.basic_tab") : _$$t3("type_settings.type_settings")
+        children: l ? getI18nString("fullscreen.type_settings.basic_tab") : getI18nString("type_settings.type_settings")
       }), jsx("span", {
         className: tz,
         children: "/"
       }), jsx("span", {
-        children: _$$t3("type_settings.decoration.underline")
+        children: getI18nString("type_settings.decoration.underline")
       })]
     })]
   });
@@ -1132,7 +1132,7 @@ function tQ({
           label: jsx(_$$J2, {
             children: jsx("span", {
               className: _$$s.colorTextSecondary.$,
-              children: _$$tx("type_settings.variable_fonts.set_optical_size_automatically")
+              children: renderI18nText("type_settings.variable_fonts.set_optical_size_automatically")
             })
           })
         })
@@ -1205,7 +1205,7 @@ function t2({
             children: [jsx(_$$B, {
               svg: h ? _$$A4 : _$$A5,
               className: "type_settings--expandCaret--CmM8q"
-            }), _$$tx("type_settings.variable_fonts.additional_axes")]
+            }), renderI18nText("type_settings.variable_fonts.additional_axes")]
           })
         }), h && jsx(Fragment, {
           children: m.map(e => jsx(tQ, {
@@ -1242,7 +1242,7 @@ function t3(e) {
     children: [jsxs(fI, {
       children: [jsx(JU, {
         className: ti,
-        children: _$$tx("type_settings.truncate_text")
+        children: renderI18nText("type_settings.truncate_text")
       }), jsx("span", {
         className: tr,
         children: jsxs(bL, {
@@ -1257,13 +1257,13 @@ function t3(e) {
           },
           readonly: e.disabled,
           legend: jsx(_$$q, {
-            children: _$$t3("type_settings.truncate_text")
+            children: getI18nString("type_settings.truncate_text")
           }),
           recordingKey: Pt(e, "textTruncation"),
           children: [jsx(c$, {
             icon: jsx(_$$f, {}),
             value: "DISABLED",
-            "aria-label": _$$t3("type_settings.no_truncation"),
+            "aria-label": getI18nString("type_settings.no_truncation"),
             htmlAttributes: {
               "data-tooltip-show-above": !0,
               onMouseEnter: () => e.textTruncationHoverHandler("DISABLED", "ENTER"),
@@ -1272,7 +1272,7 @@ function t3(e) {
           }), jsx(c$, {
             icon: jsx(ec, {}),
             value: "ENDING",
-            "aria-label": _$$t3("type_settings.truncation_enabled"),
+            "aria-label": getI18nString("type_settings.truncation_enabled"),
             htmlAttributes: {
               "data-tooltip-show-above": !0,
               onMouseEnter: () => e.textTruncationHoverHandler("ENDING", "ENTER"),
@@ -1284,11 +1284,11 @@ function t3(e) {
     }), u && jsxs(fI, {
       children: [jsx(JU, {
         className: ti,
-        children: _$$t3("type_settings.max_lines")
+        children: getI18nString("type_settings.max_lines")
       }), jsx(Se, {
         bigNudgeAmount,
         className: td,
-        "data-tooltip": _$$t3("type_settings.max_lines"),
+        "data-tooltip": getI18nString("type_settings.max_lines"),
         "data-tooltip-type": Ib.TEXT,
         dispatch: t,
         inputClassName: tc,
@@ -1455,7 +1455,7 @@ function t6(e) {
         shouldCommit: zk.YES
       });
     }
-    sx("OpenType Feature Change", {
+    trackEventAnalytics("OpenType Feature Change", {
       feature: e,
       state: t
     });
@@ -1515,7 +1515,7 @@ function t6(e) {
       },
       children: [jsxs("div", {
         className: th,
-        children: [_$$tx("type_settings.bidi_update_desc"), jsx(_$$B, {
+        children: [renderI18nText("type_settings.bidi_update_desc"), jsx(_$$B, {
           svg: _$$A6,
           "data-tooltip-type": Ib.LOOKUP,
           "data-tooltip": "bidi-update-info",
@@ -1530,7 +1530,7 @@ function t6(e) {
           variant: "secondary",
           onClick: e4,
           recordingKey: Pt(e, "upgrade-text-user-layout-version-bidi"),
-          children: _$$tx("type_settings.update")
+          children: renderI18nText("type_settings.update")
         })
       })]
     })]
@@ -1543,7 +1543,7 @@ function t6(e) {
     },
     children: [jsxs("div", {
       className: th,
-      children: [hS(e.textUserLayoutVersion) ? _$$t3("type_settings.older_text_rendering_method_used") : _$$t3("type_settings.older_text_rendering_method_used_for_part_of_the_selection"), jsx(_$$B, {
+      children: [hS(e.textUserLayoutVersion) ? getI18nString("type_settings.older_text_rendering_method_used") : getI18nString("type_settings.older_text_rendering_method_used_for_part_of_the_selection"), jsx(_$$B, {
         svg: _$$A6,
         "data-tooltip-type": Ib.LOOKUP,
         "data-tooltip": "line-height-update-info",
@@ -1558,7 +1558,7 @@ function t6(e) {
         variant: "secondary",
         onClick: e5,
         recordingKey: Pt(e, "upgrade-text-user-layout-version"),
-        children: _$$tx("type_settings.update")
+        children: renderI18nText("type_settings.update")
       })
     })]
   }) : "downgrade" === e7() ? jsxs(fI, {
@@ -1568,7 +1568,7 @@ function t6(e) {
     },
     children: [jsxs("div", {
       className: "type_settings--lineHeightDowngradeInfo--Ps63T type_settings--lineHeightUpdateInfo--0sHJc",
-      children: [_$$tx("type_settings.new_text_rendering_method_used"), jsx(_$$B, {
+      children: [renderI18nText("type_settings.new_text_rendering_method_used"), jsx(_$$B, {
         svg: _$$A6,
         "data-tooltip-type": Ib.LOOKUP,
         "data-tooltip": "line-height-update-info",
@@ -1583,7 +1583,7 @@ function t6(e) {
         variant: "link",
         onClick: e6,
         recordingKey: Pt(e, "downgrade-text-user-layout-version"),
-        children: _$$tx("type_settings.revert")
+        children: renderI18nText("type_settings.revert")
       })
     })]
   }) : ty() ? tI() : void 0;
@@ -1594,7 +1594,7 @@ function t6(e) {
     },
     children: [jsxs("div", {
       className: th,
-      children: [_$$tx("type_settings.explicit_text_layout_update_desc"), getFeatureFlags().ce_mixed_text_spacing && jsx(_$$B, {
+      children: [renderI18nText("type_settings.explicit_text_layout_update_desc"), getFeatureFlags().ce_mixed_text_spacing && jsx(_$$B, {
         svg: _$$A6,
         "data-tooltip-type": Ib.LOOKUP,
         "data-tooltip": "explicit-text-layout-version-info",
@@ -1611,7 +1611,7 @@ function t6(e) {
           e3(!0);
         },
         recordingKey: Pt(e, "upgrade-text-explicit-user-layout-version"),
-        children: _$$tx("type_settings.update")
+        children: renderI18nText("type_settings.update")
       })
     })]
   });
@@ -1628,7 +1628,7 @@ function t6(e) {
       children: i && e.textAlignHorizontal && jsxs(fI, {
         children: [jsx(JU, {
           className: tt,
-          children: _$$tx("type_settings.alignment")
+          children: renderI18nText("type_settings.alignment")
         }), jsx("span", {
           className: ts,
           children: jsxs(bL, {
@@ -1636,16 +1636,16 @@ function t6(e) {
             onChange: eU,
             recordingKey: e.recordingKey,
             legend: jsx(_$$q, {
-              children: _$$tx("type_settings.alignment")
+              children: renderI18nText("type_settings.alignment")
             }),
             readonly: k,
             children: [jsx(c$, {
               icon: jsx(_$$h, {}),
               value: "LEFT",
-              "aria-label": _$$t3("fullscreen_actions.text-align-left"),
+              "aria-label": getI18nString("fullscreen_actions.text-align-left"),
               htmlAttributes: {
                 "data-tooltip-type": Ib.TEXT,
-                "data-tooltip": _$$t3("fullscreen_actions.text-align-left"),
+                "data-tooltip": getI18nString("fullscreen_actions.text-align-left"),
                 "data-tooltip-shortcut-key": XL.LEFT,
                 "data-tooltip-show-above": !0,
                 onMouseEnter: () => t("LEFT", "ENTER"),
@@ -1654,10 +1654,10 @@ function t6(e) {
             }), jsx(c$, {
               icon: jsx(_$$N, {}),
               value: "CENTER",
-              "aria-label": _$$t3("fullscreen_actions.text-align-center"),
+              "aria-label": getI18nString("fullscreen_actions.text-align-center"),
               htmlAttributes: {
                 "data-tooltip-type": Ib.TEXT,
-                "data-tooltip": _$$t3("fullscreen_actions.text-align-center"),
+                "data-tooltip": getI18nString("fullscreen_actions.text-align-center"),
                 "data-tooltip-shortcut-key": XL.CENTER,
                 "data-tooltip-show-above": !0,
                 onMouseEnter: () => t("CENTER", "ENTER"),
@@ -1666,10 +1666,10 @@ function t6(e) {
             }), jsx(c$, {
               icon: jsx(_$$K2, {}),
               value: "RIGHT",
-              "aria-label": _$$t3("fullscreen_actions.text-align-right"),
+              "aria-label": getI18nString("fullscreen_actions.text-align-right"),
               htmlAttributes: {
                 "data-tooltip-type": Ib.TEXT,
-                "data-tooltip": _$$t3("fullscreen_actions.text-align-right"),
+                "data-tooltip": getI18nString("fullscreen_actions.text-align-right"),
                 "data-tooltip-shortcut-key": XL.RIGHT,
                 "data-tooltip-show-above": !0,
                 onMouseEnter: () => t("RIGHT", "ENTER"),
@@ -1678,10 +1678,10 @@ function t6(e) {
             }), jsx(c$, {
               icon: jsx(_$$h2, {}),
               value: "JUSTIFIED",
-              "aria-label": _$$t3("fullscreen_actions.text-align-justified"),
+              "aria-label": getI18nString("fullscreen_actions.text-align-justified"),
               htmlAttributes: {
                 "data-tooltip-type": Ib.TEXT,
-                "data-tooltip": _$$t3("fullscreen_actions.text-align-justified"),
+                "data-tooltip": getI18nString("fullscreen_actions.text-align-justified"),
                 "data-tooltip-shortcut-key": XL.JUSTIFIED,
                 "data-tooltip-show-above": !0,
                 onMouseEnter: () => t("JUSTIFIED", "ENTER"),
@@ -1713,7 +1713,7 @@ function t6(e) {
       children: t && jsxs(fI, {
         children: [jsx(JU, {
           className: tt,
-          children: _$$tx("type_settings.decoration")
+          children: renderI18nText("type_settings.decoration")
         }), jsx(tE, {
           decorationHoverHandler: tN,
           disabled: k,
@@ -1722,7 +1722,7 @@ function t6(e) {
           drillInChevronShowing: !0,
           onUnderlineDoubleClick: () => {
             A(!0);
-            az.trackDefinedEvent("text_and_vector.text_decoration_menu_opened", {
+            analyticsEventManager.trackDefinedEvent("text_and_vector.text_decoration_menu_opened", {
               source: "Style" === tx ? "text_style" : "type_settings",
               entryPoint: "double_click"
             });
@@ -1731,15 +1731,15 @@ function t6(e) {
           className: "type_settings--textDecorationDrillInButton--cDpb4",
           children: jsx(tS, {
             htmlAttributes: {
-              "data-tooltip": _$$t3("type_settings.decoration.details"),
+              "data-tooltip": getI18nString("type_settings.decoration.details"),
               "data-tooltip-type": Ib.TEXT,
               "data-tooltip-show-above": !0,
               "data-tooltip-offset-x": 4
             },
-            "aria-label": _$$t3("type_settings.decoration.details"),
+            "aria-label": getI18nString("type_settings.decoration.details"),
             onClick: () => {
               A(!0);
-              az.trackDefinedEvent("text_and_vector.text_decoration_menu_opened", {
+              analyticsEventManager.trackDefinedEvent("text_and_vector.text_decoration_menu_opened", {
                 source: "Style" === tx ? "text_style" : "type_settings",
                 entryPoint: "drill_in_button"
               });
@@ -1754,7 +1754,7 @@ function t6(e) {
   let tL = () => {
     if (tw) return jsx(t7, {
       ref: O,
-      label: _$$t3("type_settings.decoration.paragraph_spacing"),
+      label: getI18nString("type_settings.decoration.paragraph_spacing"),
       input: jsx(_X, {
         fields: ["PARAGRAPH_SPACING"],
         resolvedType: rXF.FLOAT,
@@ -1772,7 +1772,7 @@ function t6(e) {
             onValueChange: $,
             value: e.paragraphSpacing,
             disabled: k,
-            dataTooltip: _$$t3("type_settings.decoration.paragraph_spacing"),
+            dataTooltip: getI18nString("type_settings.decoration.paragraph_spacing"),
             recordingKey: Pt(e, "paragraphSpacing"),
             noBorderOnHover: !0,
             hasVariablesEntrypoint: !0
@@ -1788,7 +1788,7 @@ function t6(e) {
       children: [t && jsxs(fI, {
         children: [jsx(JU, {
           className: tt,
-          children: _$$tx("type_settings.list_style")
+          children: renderI18nText("type_settings.list_style")
         }), jsx(eY, {
           className: ta,
           textLineType: e.textLineType,
@@ -1818,18 +1818,18 @@ function t6(e) {
           }
         })]
       }), i && jsx(t7, {
-        label: _$$t3("type_settings.decoration.list_spacing"),
+        label: getI18nString("type_settings.decoration.list_spacing"),
         input: jsx(t8, {
           onValueChange: Q,
           value: e.listSpacing,
           disabled: k,
-          dataTooltip: _$$t3("type_settings.decoration.list_spacing"),
+          dataTooltip: getI18nString("type_settings.decoration.list_spacing"),
           recordingKey: Pt(e, "listSpacing")
         })
       })]
     });
   };
-  let tM = t => e.missingFont || k ? "" : e.leadingTrimDisabled ? _$$t3("type_settings.leading_trim.font_does_not_support_leading_trim") : t;
+  let tM = t => e.missingFont || k ? "" : e.leadingTrimDisabled ? getI18nString("type_settings.leading_trim.font_does_not_support_leading_trim") : t;
   let tU = () => {
     let t = (e, t) => {
       Y(t);
@@ -1839,7 +1839,7 @@ function t6(e) {
       children: tw && jsxs(fI, {
         children: [jsx(JU, {
           className: ti,
-          children: _$$tx("type_settings.leading_trim")
+          children: renderI18nText("type_settings.leading_trim")
         }), jsx("span", {
           className: tr,
           children: jsxs(bL, {
@@ -1847,13 +1847,13 @@ function t6(e) {
             onChange: et,
             readonly: k || e.leadingTrimDisabled,
             legend: jsx(_$$q, {
-              children: _$$tx("type_settings.leading_trim")
+              children: renderI18nText("type_settings.leading_trim")
             }),
             recordingKey: Pt(e, "leadingTrim"),
             children: [jsx(c$, {
               icon: jsx(ef, {}),
               value: "NONE",
-              "aria-label": tM(_$$t3("type_settings.leading_trim.none")),
+              "aria-label": tM(getI18nString("type_settings.leading_trim.none")),
               htmlAttributes: {
                 "data-tooltip-show-above": !0,
                 onMouseEnter: () => t("NONE", "ENTER"),
@@ -1862,7 +1862,7 @@ function t6(e) {
             }), jsx(c$, {
               icon: jsx(e_, {}),
               value: "CAP_HEIGHT",
-              "aria-label": tM(_$$t3("type_settings.leading_trim.cap_height")),
+              "aria-label": tM(getI18nString("type_settings.leading_trim.cap_height")),
               htmlAttributes: {
                 "data-tooltip-show-above": !0,
                 onMouseEnter: () => t("CAP_HEIGHT", "ENTER"),
@@ -1877,7 +1877,7 @@ function t6(e) {
   let tB = () => jsx(Fragment, {
     children: tw && jsx(_$$k4, {
       segmentedControlClassName: tr,
-      label: _$$t3("type_settings.hanging_punctuation"),
+      label: getI18nString("type_settings.hanging_punctuation"),
       labelInactive: !e.isHangingPunctuationApplicableToSelection,
       recordingKey: Pt(e, "hangingPunctuation"),
       property: e.hangingPunctuation,
@@ -1896,7 +1896,7 @@ function t6(e) {
     return jsx(Fragment, {
       children: tw && jsx(_$$k4, {
         segmentedControlClassName: tr,
-        label: _$$t3("type_settings.hanging_lists"),
+        label: getI18nString("type_settings.hanging_lists"),
         labelInactive: !t,
         recordingKey: Pt(e, "hangingList"),
         property: e.hangingList,
@@ -1915,11 +1915,11 @@ function t6(e) {
     children: [jsx(fI, {
       children: jsx(_$$Q, {
         extended: !0,
-        children: _$$t3("type_settings.indentation")
+        children: getI18nString("type_settings.indentation")
       })
     }), tB(), tV(), jsx(t7, {
       ref: L,
-      label: _$$t3("type_settings.decoration.paragraph_indent"),
+      label: getI18nString("type_settings.decoration.paragraph_indent"),
       input: jsx(_X, {
         fields: ["PARAGRAPH_INDENT"],
         resolvedType: rXF.FLOAT,
@@ -1937,7 +1937,7 @@ function t6(e) {
             onValueChange: q,
             value: e.paragraphIndent,
             disabled: k,
-            dataTooltip: _$$t3("type_settings.decoration.paragraph_indent"),
+            dataTooltip: getI18nString("type_settings.decoration.paragraph_indent"),
             recordingKey: Pt(e.recordingKey, "paragraphIndent"),
             noBorderOnHover: !0,
             hasVariablesEntrypoint: !0
@@ -1980,7 +1980,7 @@ function t6(e) {
       children: [jsxs(fI, {
         children: [jsx(JU, {
           className: tt,
-          children: _$$t3("type_settings.decoration")
+          children: getI18nString("type_settings.decoration")
         }), jsx(tE, {
           decorationHoverHandler: tN,
           disabled: k,
@@ -1992,7 +1992,7 @@ function t6(e) {
         children: [jsx(JU, {
           disabled: _,
           className: ti,
-          children: _$$t3("type_settings.decoration.decoration_style")
+          children: getI18nString("type_settings.decoration.decoration_style")
         }), jsx(tA, {
           decorationHoverHandler: (e, t) => {
             Y(t);
@@ -2006,11 +2006,11 @@ function t6(e) {
         children: [jsx(JU, {
           disabled: _,
           className: ti,
-          children: _$$t3("type_settings.decoration.thickness")
+          children: getI18nString("type_settings.decoration.thickness")
         }), jsx(Jl, {
           bigNudgeAmount,
           className: td,
-          "data-tooltip": _$$t3("type_settings.decoration.thickness"),
+          "data-tooltip": getI18nString("type_settings.decoration.thickness"),
           "data-tooltip-type": Ib.TEXT,
           disabled: _,
           dispatch: t,
@@ -2051,11 +2051,11 @@ function t6(e) {
         children: [jsx(JU, {
           disabled: _,
           className: ti,
-          children: _$$t3("type_settings.decoration.offset")
+          children: getI18nString("type_settings.decoration.offset")
         }), jsx(Jl, {
           bigNudgeAmount,
           className: td,
-          "data-tooltip": _$$t3("fullscreen.type_panel.underline_offset"),
+          "data-tooltip": getI18nString("fullscreen.type_panel.underline_offset"),
           "data-tooltip-type": Ib.TEXT,
           disabled: _,
           dispatch: t,
@@ -2096,7 +2096,7 @@ function t6(e) {
         children: [jsx(JU, {
           disabled: _,
           className: ti,
-          children: _$$t3("type_settings.decoration.skip_ink")
+          children: getI18nString("type_settings.decoration.skip_ink")
         }), jsx(tb, {
           decorationHoverHandler: (e, t) => {
             Y(t);
@@ -2153,7 +2153,7 @@ function t6(e) {
     V("SMCP") ? a.push(jsx(c$, {
       value: "SMALL_CAPS",
       icon: jsx(_$$_, {}),
-      "aria-label": _$$t3("type_settings.small_caps"),
+      "aria-label": getI18nString("type_settings.small_caps"),
       htmlAttributes: {
         "data-tooltip-show-above": !0,
         onMouseEnter: () => n("SMALL_CAPS", "ENTER"),
@@ -2163,7 +2163,7 @@ function t6(e) {
       value: "SMALL_CAPS",
       icon: jsx(_$$_, {}),
       readonly: !0,
-      "aria-label": _$$t3("type_settings.font_doesn_t_support_small_caps"),
+      "aria-label": getI18nString("type_settings.font_doesn_t_support_small_caps"),
       htmlAttributes: {
         "data-tooltip-show-above": !0,
         onMouseEnter: () => n("SMALL_CAPS", "ENTER"),
@@ -2173,7 +2173,7 @@ function t6(e) {
     V("C2SC") && a.push(jsx(c$, {
       value: "SMALL_CAPS_FORCED",
       icon: jsx(_$$D, {}),
-      "aria-label": _$$t3("type_settings.forced_small_caps"),
+      "aria-label": getI18nString("type_settings.forced_small_caps"),
       htmlAttributes: {
         "data-tooltip-show-above": !0,
         onMouseEnter: () => n("SMALL_CAPS_FORCED", "ENTER"),
@@ -2184,7 +2184,7 @@ function t6(e) {
       children: jsxs(fI, {
         children: [jsx(JU, {
           className: tt,
-          children: _$$tx("type_settings.case")
+          children: renderI18nText("type_settings.case")
         }), jsx("span", {
           className: V("C2SC") ? "type_settings--typeDetailsControlSixSegments--6VDYd" : to,
           children: jsxs(bL, {
@@ -2192,13 +2192,13 @@ function t6(e) {
             onChange: e => i4(e, i ? "settings-details" : "settings-basic"),
             readonly: k,
             legend: jsx(_$$q, {
-              children: _$$tx("type_settings.case")
+              children: renderI18nText("type_settings.case")
             }),
             recordingKey: Pt(e, "textCase"),
             children: [jsx(c$, {
               value: "ORIGINAL",
               icon: jsx(_$$f, {}),
-              "aria-label": _$$t3("type_settings.case.as_typed"),
+              "aria-label": getI18nString("type_settings.case.as_typed"),
               htmlAttributes: {
                 "data-tooltip-show-above": !0,
                 onMouseEnter: () => n("ORIGINAL", "ENTER"),
@@ -2207,7 +2207,7 @@ function t6(e) {
             }), jsx(c$, {
               value: "UPPER",
               icon: jsx(eb, {}),
-              "aria-label": _$$t3("type_settings.case.uppercase"),
+              "aria-label": getI18nString("type_settings.case.uppercase"),
               htmlAttributes: {
                 "data-tooltip-show-above": !0,
                 onMouseEnter: () => n("UPPER", "ENTER"),
@@ -2216,7 +2216,7 @@ function t6(e) {
             }), jsx(c$, {
               value: "LOWER",
               icon: jsx(_$$L, {}),
-              "aria-label": _$$t3("type_settings.case.lowercase"),
+              "aria-label": getI18nString("type_settings.case.lowercase"),
               htmlAttributes: {
                 "data-tooltip-show-above": !0,
                 onMouseEnter: () => n("LOWER", "ENTER"),
@@ -2225,7 +2225,7 @@ function t6(e) {
             }), jsx(c$, {
               value: "TITLE",
               icon: jsx(_$$U, {}),
-              "aria-label": _$$t3("type_settings.case.title_case"),
+              "aria-label": getI18nString("type_settings.case.title_case"),
               htmlAttributes: {
                 "data-tooltip-show-above": !0,
                 onMouseEnter: () => n("TITLE", "ENTER"),
@@ -2240,7 +2240,7 @@ function t6(e) {
       children: [jsx(fI, {
         children: jsx(_$$Q, {
           extended: !0,
-          children: _$$tx("type_settings.letter_case")
+          children: renderI18nText("type_settings.letter_case")
         })
       }), s, tq("PCAP"), tq("CASE"), tq("CPSP"), tq("TITL"), tq("UNIC"), jsx("div", {
         className: tl
@@ -2327,7 +2327,7 @@ function t6(e) {
     };
     let a = w.supported;
     let s = w.applicable;
-    let o = "FRAC" === t ? _$$t3("type_settings.fractions") : (i ? s : a)[t] || _$$G.OpenTypeFeatureNames[t];
+    let o = "FRAC" === t ? getI18nString("type_settings.fractions") : (i ? s : a)[t] || _$$G.OpenTypeFeatureNames[t];
     let l = "toggleOpenTypeFeature" + ("FRAC" === t ? "Fractions" : t);
     let c = "string" == typeof o && o.length > 25;
     return jsxs(fI, {
@@ -2337,7 +2337,7 @@ function t6(e) {
         children: o
       }) : jsx(UZ, {
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t3("type_settings.not_applicable_for_selected_text"),
+        "data-tooltip": getI18nString("type_settings.not_applicable_for_selected_text"),
         "data-tooltip-timeout-delay": 1200,
         "data-tooltip-show-above": !0,
         className: tn,
@@ -2377,7 +2377,7 @@ function t6(e) {
           children: [jsx(c$, {
             value: "OFF",
             icon: jsx(_$$f, {}),
-            "aria-label": _$$t3("settings_tab.disabled"),
+            "aria-label": getI18nString("settings_tab.disabled"),
             htmlAttributes: {
               "data-tooltip-show-above": !0,
               onMouseEnter: () => n("OFF", "ENTER"),
@@ -2386,7 +2386,7 @@ function t6(e) {
           }), jsx(c$, {
             value: "ON",
             icon: jsx(_$$r, {}),
-            "aria-label": _$$t3("settings_tab.enabled"),
+            "aria-label": getI18nString("settings_tab.enabled"),
             htmlAttributes: {
               "data-tooltip-show-above": !0,
               onMouseEnter: () => n("ON", "ENTER"),
@@ -2405,7 +2405,7 @@ function t6(e) {
     return jsxs(fI, {
       children: [jsx(JU, {
         className: tt,
-        children: _$$tx("type_settings.position")
+        children: renderI18nText("type_settings.position")
       }), jsx("span", {
         className: ta,
         children: jsxs(bL, {
@@ -2413,13 +2413,13 @@ function t6(e) {
           onChange: eH,
           readonly: k,
           legend: jsx(_$$q, {
-            children: _$$tx("type_settings.position")
+            children: renderI18nText("type_settings.position")
           }),
           recordingKey: Pt(e, "numericPosition"),
           children: [jsx(c$, {
             value: "SUB",
             icon: jsx(ex, {}),
-            "aria-label": _$$t3("type_settings.subscript"),
+            "aria-label": getI18nString("type_settings.subscript"),
             htmlAttributes: {
               "data-tooltip-show-above": !0,
               onMouseEnter: () => t("SUB", "ENTER"),
@@ -2428,7 +2428,7 @@ function t6(e) {
           }), jsx(c$, {
             value: "NORMAL",
             icon: jsx(eS, {}),
-            "aria-label": _$$t3("type_settings.normal"),
+            "aria-label": getI18nString("type_settings.normal"),
             htmlAttributes: {
               "data-tooltip-show-above": !0,
               onMouseEnter: () => t("NORMAL", "ENTER"),
@@ -2437,7 +2437,7 @@ function t6(e) {
           }), jsx(c$, {
             value: "SUPER",
             icon: jsx(ew, {}),
-            "aria-label": _$$t3("type_settings.superscript"),
+            "aria-label": getI18nString("type_settings.superscript"),
             htmlAttributes: {
               "data-tooltip-show-above": !0,
               onMouseEnter: () => t("SUPER", "ENTER"),
@@ -2488,7 +2488,7 @@ function t6(e) {
     let p = jsx(c$, {
       value: "LOWER_PROPORTIONAL",
       icon: jsx(eC, {}),
-      "aria-label": _$$t3("type_settings.numeric.proportional_lowercase_old_style"),
+      "aria-label": getI18nString("type_settings.numeric.proportional_lowercase_old_style"),
       htmlAttributes: {
         "data-tooltip-show-above": !0,
         onMouseEnter: () => c("LOWER_PROPORTIONAL", "ENTER"),
@@ -2498,7 +2498,7 @@ function t6(e) {
     let h = jsx(c$, {
       value: "UPPER_PROPORTIONAL",
       icon: jsx(eT, {}),
-      "aria-label": _$$t3("type_settings.numeric.proportional_uppercase_lining"),
+      "aria-label": getI18nString("type_settings.numeric.proportional_uppercase_lining"),
       htmlAttributes: {
         "data-tooltip-show-above": !0,
         onMouseEnter: () => c("UPPER_PROPORTIONAL", "ENTER"),
@@ -2508,7 +2508,7 @@ function t6(e) {
     let g = jsx(c$, {
       value: "UPPER_MONOSPACE",
       icon: jsx(ek, {}),
-      "aria-label": _$$t3("type_settings.numeric.monospace_uppercase_lining"),
+      "aria-label": getI18nString("type_settings.numeric.monospace_uppercase_lining"),
       htmlAttributes: {
         "data-tooltip-show-above": !0,
         onMouseEnter: () => c("UPPER_MONOSPACE", "ENTER"),
@@ -2518,7 +2518,7 @@ function t6(e) {
     let _ = jsx(c$, {
       value: "LOWER_MONOSPACE",
       icon: jsx(eR, {}),
-      "aria-label": _$$t3("type_settings.monospace_lowercase_old_style"),
+      "aria-label": getI18nString("type_settings.monospace_lowercase_old_style"),
       htmlAttributes: {
         "data-tooltip-show-above": !0,
         onMouseEnter: () => c("LOWER_MONOSPACE", "ENTER"),
@@ -2528,7 +2528,7 @@ function t6(e) {
     let A = jsx(c$, {
       value: "ORIGINAL",
       icon: jsx(_$$f, {}),
-      "aria-label": _$$t3("type_settings.numeric.font_default"),
+      "aria-label": getI18nString("type_settings.numeric.font_default"),
       htmlAttributes: {
         "data-tooltip-show-above": !0,
         onMouseEnter: () => c("ORIGINAL", "ENTER"),
@@ -2538,7 +2538,7 @@ function t6(e) {
     let y = jsx(c$, {
       value: "ORIGINAL",
       icon: jsx(eT, {}),
-      "aria-label": _$$t3("type_settings.numeric.proportional_uppercase_lining"),
+      "aria-label": getI18nString("type_settings.numeric.proportional_uppercase_lining"),
       htmlAttributes: {
         "data-tooltip-show-above": !0,
         onMouseEnter: () => c("ORIGINAL", "ENTER"),
@@ -2548,7 +2548,7 @@ function t6(e) {
     let b = jsx(c$, {
       value: "ORIGINAL",
       icon: jsx(ek, {}),
-      "aria-label": _$$t3("type_settings.numeric.monospace_uppercase_lining"),
+      "aria-label": getI18nString("type_settings.numeric.monospace_uppercase_lining"),
       htmlAttributes: {
         "data-tooltip-show-above": !0,
         onMouseEnter: () => c("ORIGINAL", "ENTER"),
@@ -2558,7 +2558,7 @@ function t6(e) {
     let v = jsx(c$, {
       value: "ORIGINAL",
       icon: jsx(eC, {}),
-      "aria-label": _$$t3("type_settings.numeric.proportional_lowercase_old_style"),
+      "aria-label": getI18nString("type_settings.numeric.proportional_lowercase_old_style"),
       htmlAttributes: {
         "data-tooltip-show-above": !0,
         onMouseEnter: () => c("ORIGINAL", "ENTER"),
@@ -2570,19 +2570,19 @@ function t6(e) {
       children: [jsx(fI, {
         children: jsx(_$$Q, {
           extended: !0,
-          children: _$$tx("type_settings.numbers")
+          children: renderI18nText("type_settings.numbers")
         })
       }), i || n || a || s ? jsxs(fI, {
         children: [o ? jsx(JU, {
           className: tt,
-          children: _$$tx("type_settings.numeric.style")
+          children: renderI18nText("type_settings.numeric.style")
         }) : jsx(UZ, {
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": _$$t3("type_settings.not_applicable_for_selected_text"),
+          "data-tooltip": getI18nString("type_settings.not_applicable_for_selected_text"),
           "data-tooltip-timeout-delay": 1200,
           "data-tooltip-show-above": !0,
           className: tt,
-          children: _$$tx("type_settings.numeric.style")
+          children: renderI18nText("type_settings.numeric.style")
         }), jsx("span", {
           className: 2 === t.length ? tr : 3 === t.length ? ta : 4 === t.length ? ts : to,
           children: jsx(bL, {
@@ -2592,7 +2592,7 @@ function t6(e) {
             },
             readonly: k,
             legend: jsx(_$$q, {
-              children: _$$tx("type_settings.numeric.style")
+              children: renderI18nText("type_settings.numeric.style")
             }),
             recordingKey: Pt(e, "numericStyle"),
             children: t
@@ -2613,18 +2613,18 @@ function t6(e) {
     let t = e => {
       switch (e) {
         case "Basics":
-          return _$$t3("fullscreen.type_settings.basic_tab");
+          return getI18nString("fullscreen.type_settings.basic_tab");
         case "Details":
-          return _$$t3("fullscreen.type_settings.details_tab");
+          return getI18nString("fullscreen.type_settings.details_tab");
         case "Variable":
-          return _$$t3("fullscreen.type_settings.variable_tab");
+          return getI18nString("fullscreen.type_settings.variable_tab");
         default:
           return e;
       }
     };
     let i = getFeatureFlags().ce_tv_fpl_type_settings ? jsxs(Fragment, {
       children: [jsx(r1, {
-        children: _$$t3("type_settings.type_settings")
+        children: getI18nString("type_settings.type_settings")
       }), jsx(qj, {
         manager: e.tabManager,
         children: tX().map(i => jsx(_$$t.Tab, {
@@ -2700,7 +2700,7 @@ function t6(e) {
     })
   });
   let t6 = () => jsxs("div", {
-    children: [tw && tG(), tw && tH(ie), tw && tZ(), tw && tY("Letterforms", _$$t3("type_settings.letterforms")), tw && tY("Stylistic sets", _$$t3("type_settings.stylistic_sets")), tw && tY("Character variants", _$$t3("type_settings.character_variants")), tw && tY("Math", _$$t3("type_settings.math")), tw && tY("Horizontal spacing", _$$t3("type_settings.horizontal_spacing")), tw && tY("Writing direction", _$$t3("type_settings.writing_direction")), tw && tY("More features", _$$t3("type_settings.more_features")), tT && e8(), tT && t_()]
+    children: [tw && tG(), tw && tH(ie), tw && tZ(), tw && tY("Letterforms", getI18nString("type_settings.letterforms")), tw && tY("Stylistic sets", getI18nString("type_settings.stylistic_sets")), tw && tY("Character variants", getI18nString("type_settings.character_variants")), tw && tY("Math", getI18nString("type_settings.math")), tw && tY("Horizontal spacing", getI18nString("type_settings.horizontal_spacing")), tw && tY("Writing direction", getI18nString("type_settings.writing_direction")), tw && tY("More features", getI18nString("type_settings.more_features")), tT && e8(), tT && t_()]
   });
   let t9 = () => jsx("div", {
     children: tw && tK()
@@ -2870,7 +2870,7 @@ class ip extends PureComponent {
         onClick: this.onClick,
         recordingKey: Pt(this.props, "bidiSwitcher"),
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t3("fullscreen.type_panel.switch_text_direction"),
+        "data-tooltip": getI18nString("fullscreen.type_panel.switch_text_direction"),
         children: e
       })
     });
@@ -2879,8 +2879,8 @@ class ip extends PureComponent {
 let iE = "font-agent-update-dismissed";
 export function $$ix0(e) {
   let t = useSelector(e => e.mirror.appModel.currentPage);
-  let i = _$$R(e => Cy(e.mirror));
-  let n = "text-panel" === md($i);
+  let i = selectWithShallowEqual(e => Cy(e.mirror));
+  let n = "text-panel" === useAtomWithSubscription($i);
   let a = vK();
   let [o, d, c] = _$$t.useTabs({
     Basics: !0,
@@ -2906,7 +2906,7 @@ class iS extends PureComponent {
     super(e);
     this.context = null;
     this.versionsForStyles = {};
-    this.showFontAgentCTA = Kk() && !_$$eD && (Ay.mac || Ay.windows) && !Ay.isMobileBrowser;
+    this.showFontAgentCTA = Kk() && !desktopAPIInstance && (BrowserInfo.mac || BrowserInfo.windows) && !BrowserInfo.isMobileBrowser;
     this.getTickAxisValues = xx(e => gl(e) ? {} : MK(e, this.props.fonts[e], this.versionsForStyles[e]));
     this.stopPropagation = e => e.stopPropagation();
     this.onMouseDown = e => {
@@ -2957,7 +2957,7 @@ class iS extends PureComponent {
     this.toggleSettingsFromLineHeightRow = () => this.toggleSettings(this.lineHeightRowRef);
     this.toggleSettingsFromStylePicker = () => this.toggleSettings(this.stylePickerRowRef);
     this.onFontFamilyChange = (e, t, i) => {
-      getFeatureFlags().ce_properties_panel_tracking && sx("editor_type_panel_change", {
+      getFeatureFlags().ce_properties_panel_tracking && trackEventAnalytics("editor_type_panel_change", {
         key: "fontFamily"
       });
       debug(!(void 0 === e && void 0 === t), "onFontFamilyChange called without a fontFamily or previewFontFamily");
@@ -2971,7 +2971,7 @@ class iS extends PureComponent {
         versionsForStyles: this.versionsForStyles,
         shouldCommit: i
       });
-      getFeatureFlags().ce_font_picker_metrics && sx("font picker font selected", {
+      getFeatureFlags().ce_font_picker_metrics && trackEventAnalytics("font picker font selected", {
         pageId: this.props.pageId,
         nodeIds: this.props.selectedNodeIds,
         section: "",
@@ -2980,7 +2980,7 @@ class iS extends PureComponent {
       a2("fontFamily");
     };
     this.onFontStyleChange = (e, t, i) => {
-      getFeatureFlags().ce_properties_panel_tracking && sx("editor_type_panel_change", {
+      getFeatureFlags().ce_properties_panel_tracking && trackEventAnalytics("editor_type_panel_change", {
         key: "fontStyle"
       });
       zD({
@@ -2990,7 +2990,7 @@ class iS extends PureComponent {
         lineHeightInContext: a6(this.props),
         showVariableFontSettings: () => {
           this.shownSettings() || this.toggleSettingsFromStylePicker();
-          sx("Variable Font Show Panel", {
+          trackEventAnalytics("Variable Font Show Panel", {
             source: "font-picker"
           });
           this.setActiveTab("Variable");
@@ -3093,13 +3093,13 @@ class iS extends PureComponent {
           onMouseDown: this.stopPropagation,
           recordingKey: Pt(this.props, e + "settings"),
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": _$$t3("fullscreen.type_panel.type_details")
+          "data-tooltip": getI18nString("fullscreen.type_panel.type_details")
         };
         i.push(jsx("span", {
           className: gb,
           children: jsx(_$$d, {
             "aria-expanded": !!this.shownSettings(),
-            "aria-label": _$$t3("fullscreen.type_panel.type_details"),
+            "aria-label": getI18nString("fullscreen.type_panel.type_details"),
             onClick,
             recordingKey,
             htmlAttributes: {
@@ -3135,8 +3135,8 @@ class iS extends PureComponent {
           recordingKey: Pt(this.props, "settings"),
           "data-onboarding-key": "type-panel-settings",
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": _$$t3("fullscreen.type_panel.type_settings"),
-          "aria-label": _$$t3("fullscreen.type_panel.type_settings")
+          "data-tooltip": getI18nString("fullscreen.type_panel.type_settings"),
+          "aria-label": getI18nString("fullscreen.type_panel.type_settings")
         };
         let o = jsx(_$$A, {});
         i.push(jsx(_$$E, {
@@ -3164,10 +3164,10 @@ class iS extends PureComponent {
         className: gb,
         children: jsx(_$$d, {
           "aria-expanded": !1,
-          "aria-label": _$$t3("fullscreen.type_panel.text_on_a_path_flip"),
+          "aria-label": getI18nString("fullscreen.type_panel.text_on_a_path_flip"),
           recordingKey: Pt(this.props, "flipTextPathButton"),
           onClick: () => {
-            getFeatureFlags().ce_properties_panel_tracking && sx("editor_type_panel_change", {
+            getFeatureFlags().ce_properties_panel_tracking && trackEventAnalytics("editor_type_panel_change", {
               key: "textPathStart",
               value: "[flip]"
             });
@@ -3243,9 +3243,9 @@ class iS extends PureComponent {
       t && (JSON.parse(t) > new Date().getTime() ? (e = !0, this.setState({
         fontAgentUpdatePromptDismissed: !0
       })) : localStorageRef?.removeItem(iE));
-      e || sx("action_font_agent_update_prompt_shown", {
+      e || trackEventAnalytics("action_font_agent_update_prompt_shown", {
         name: "Font agent update prompt shown",
-        platform: Ay.mac ? "mac" : "windows",
+        platform: BrowserInfo.mac ? "mac" : "windows",
         localFontAgentVersion: this.props.localFontAgentVersion
       });
     }
@@ -3308,7 +3308,7 @@ class iS extends PureComponent {
                 selectedPropertyType: rrT.NONE,
                 stylePickerListLayout: !0,
                 stylesButtonDataTag: "text-styles",
-                title: "ui3" === this.props.version ? _$$t3("fullscreen.type_panel.typography") : _$$t3("fullscreen.type_panel.text"),
+                title: "ui3" === this.props.version ? getI18nString("fullscreen.type_panel.typography") : getI18nString("fullscreen.type_panel.text"),
                 children: jsx(iw, {
                   bigNudgeAmount: this.props.bigNudgeAmount,
                   dispatch: this.props.dispatch,
@@ -3366,10 +3366,10 @@ class iS extends PureComponent {
             }), this.renderAdvancedTypePicker(this.getIsStyleConsumer()), u && jsx(oE, {
               closeButton: jsx(_$$K, {
                 onClick: this.dismissFontAgentPrompt,
-                "aria-label": _$$t3("general.close"),
+                "aria-label": getI18nString("general.close"),
                 children: jsx(_$$A2, {})
               }),
-              children: _$$tx("fullscreen.type_panel.update_agent_cta", {
+              children: renderI18nText("fullscreen.type_panel.update_agent_cta", {
                 link: jsx("div", {
                   className: kx,
                   children: jsx(L0, {
@@ -3379,9 +3379,9 @@ class iS extends PureComponent {
                     trackingProperties: {
                       action: "action_download_font_agent_update",
                       localFontAgentVersion: this.props.localFontAgentVersion,
-                      platform: Ay.mac ? "mac" : "windows"
+                      platform: BrowserInfo.mac ? "mac" : "windows"
                     },
-                    children: _$$tx("fullscreen.type_panel.update_your_font_installer")
+                    children: renderI18nText("fullscreen.type_panel.update_your_font_installer")
                   })
                 })
               })
@@ -3439,7 +3439,7 @@ class iS extends PureComponent {
       className: _ || b ? "" : Qf,
       children: [jsx(fI, {
         children: jsx(_$$Q, {
-          children: _$$tx("fullscreen.type_panel.properties")
+          children: renderI18nText("fullscreen.type_panel.properties")
         })
       }), jsx(iw, {
         bigNudgeAmount: this.props.bigNudgeAmount,
@@ -3591,7 +3591,7 @@ function iw(e) {
     children: jsx($j, {
       bigNudgeAmount: e.bigNudgeAmount,
       className: hf,
-      "data-tooltip": _$$t3("fullscreen.type_panel.list_spacing"),
+      "data-tooltip": getI18nString("fullscreen.type_panel.list_spacing"),
       "data-tooltip-type": Ib.TEXT,
       disabled: o,
       dispatch: e.dispatch,
@@ -3636,9 +3636,9 @@ function iw(e) {
       })
     }), !e.isSlides && jsx(fn, {
       ref: e.lineHeightRowRef,
-      leftLabel: _$$tx("properties.label.line_height"),
+      leftLabel: renderI18nText("properties.label.line_height"),
       leftInput: y,
-      rightLabel: _$$tx("properties.label.letter_spacing"),
+      rightLabel: renderI18nText("properties.label.letter_spacing"),
       rightInput: v,
       icon: n[0]
     })]

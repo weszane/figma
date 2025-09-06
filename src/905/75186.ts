@@ -8,7 +8,7 @@ import { $n } from "../905/521428";
 import { Ay } from "../905/612521";
 import { getInitialOptions } from "../figma_app/169182";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { E as _$$E } from "../905/984674";
 import { Ju } from "../905/102752";
 import { A7, EL } from "../905/932769";
@@ -45,7 +45,7 @@ let $$A0 = Ju(function (e) {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$t("help_widget.menu.set_commit_sha")
+          children: getI18nString("help_widget.menu.set_commit_sha")
         })
       }), jsxs(nB, {
         htmlAttributes: {
@@ -83,7 +83,7 @@ let $$A0 = Ju(function (e) {
             htmlAttributes: {
               "data-testid": "set-commit-sha-button"
             },
-            children: _$$t("frontend_sha_override_indicator.reload")
+            children: getI18nString("frontend_sha_override_indicator.reload")
           })
         })
       })]

@@ -5,9 +5,9 @@ import { assertNotNullish } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { _Z } from "../figma_app/819288";
 import { Rs } from "../figma_app/288654";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { s as _$$s } from "../905/573154";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { E } from "../905/984674";
 import { Lo } from "../905/156213";
 import { E9 } from "../figma_app/314264";
@@ -23,7 +23,7 @@ export function $$y0({
   onClose: n
 }) {
   let _ = useDispatch();
-  let y = _$$p2(_$$t("file_browser.pinning.pin_modal.confirmation_bell"), "file-browser-workspace-add-pin");
+  let y = _$$p2(getI18nString("file_browser.pinning.pin_modal.confirmation_bell"), "file-browser-workspace-add-pin");
   let j = Rs(wtK, {
     fileKey: e
   });
@@ -38,13 +38,13 @@ export function $$y0({
     file
   } = j.data;
   if (!file) {
-    $D(_$$e.WAYFINDING, Error("AddPinModal unable to lookup file by ID"));
+    reportError(_$$e.WAYFINDING, Error("AddPinModal unable to lookup file by ID"));
     _(Lo());
     return null;
   }
   let I = file.computedWorkspace?.workspace;
   if (!I) {
-    $D(_$$e.WAYFINDING, Error("AddPinModal opened for file with no workspace"));
+    reportError(_$$e.WAYFINDING, Error("AddPinModal opened for file with no workspace"));
     _(Lo());
     return null;
   }
@@ -66,7 +66,7 @@ export function $$y0({
       });
       y(I.id);
     } catch (e) {
-      _(_$$s.error(_$$t("file_browser.pinning.pin_modal.error")));
+      _(_$$s.error(getI18nString("file_browser.pinning.pin_modal.error")));
       return e;
     }
   };
@@ -75,8 +75,8 @@ export function $$y0({
     workspace: I
   }) : null;
   return jsx(_$$N, {
-    title: _$$t("file_browser.pinning.pin_modal.pin_file_to_workspace"),
-    confirmText: _$$t("file_browser.pinning.pin_file"),
+    title: getI18nString("file_browser.pinning.pin_modal.pin_file_to_workspace"),
+    confirmText: getI18nString("file_browser.pinning.pin_file"),
     onSubmit: C,
     file: N,
     initialDescription: null,
@@ -95,11 +95,11 @@ function w({
     orgById: e
   }) => e[r].name);
   return jsx(E, {
-    children: tx("file_browser.pinning.update_permissions.content", {
+    children: renderI18nText("file_browser.pinning.update_permissions.content", {
       workspaceName: t.name,
       permission: jsx(E, {
         fontWeight: "bold",
-        children: tx("file_browser.pinning.update_permissions.content.permission", {
+        children: renderI18nText("file_browser.pinning.update_permissions.content.permission", {
           orgName: s
         })
       })

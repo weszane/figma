@@ -1,6 +1,6 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { iL } from "../figma_app/762706";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { y } from "../905/409121";
 function a(e, t, i) {
   t in e ? Object.defineProperty(e, t, {
@@ -59,13 +59,13 @@ class o {
     if (null === this.glContext) return;
     this.contextLostListener = e;
     let t = this.glContext.canvas;
-    this._currentContextLostCb = (e) => {
+    this._currentContextLostCb = e => {
       this.contextLostListener?.reportContextLost();
       e.preventDefault();
       e.stopImmediatePropagation();
       this.handleContextLost();
     };
-    this._currentContextRestoredCb = (e) => {
+    this._currentContextRestoredCb = e => {
       this.contextLostListener?.reportContextRestored();
       this.contextLostMessageReceived || this.handleContextLost();
       t && t instanceof HTMLCanvasElement && (t.style.background = "white", setTimeout(function () {
@@ -158,7 +158,7 @@ let l = null;
 export function $$u0() {
   var e;
   var t;
-  e = (e) => $D(_$$e.RENDERING_AND_ANIMATION, Error(e));
+  e = e => reportError(_$$e.RENDERING_AND_ANIMATION, Error(e));
   t = y;
   null == l && (l = new s(e, t));
   return l;

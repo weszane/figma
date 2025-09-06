@@ -1,13 +1,13 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useEffect, useLayoutEffect } from "react";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 var s = (e => (e[e.CHECKING_FOR_CHANGES = 0] = "CHECKING_FOR_CHANGES", e[e.APPLYING_UPDATE = 1] = "APPLYING_UPDATE", e[e.PULLING_IT_ALL_TOGETHER = 2] = "PULLING_IT_ALL_TOGETHER", e[e.CHECKING_FOR_CONFLICTS = 3] = "CHECKING_FOR_CONFLICTS", e[e.GENERATING_CHANGED_ITEMS = 4] = "GENERATING_CHANGED_ITEMS", e))(s || {});
 let o = {
-  0: () => tx("collaboration.branching.checking_for_changes"),
-  1: () => tx("collaboration.branching.applying_update"),
-  2: () => tx("collaboration.branching.pulling_it_all_together"),
-  3: () => tx("collaboration.branching.checking_for_conflicts"),
-  4: () => tx("collaboration.branching.generating_changed_items")
+  0: () => renderI18nText("collaboration.branching.checking_for_changes"),
+  1: () => renderI18nText("collaboration.branching.applying_update"),
+  2: () => renderI18nText("collaboration.branching.pulling_it_all_together"),
+  3: () => renderI18nText("collaboration.branching.checking_for_conflicts"),
+  4: () => renderI18nText("collaboration.branching.generating_changed_items")
 };
 export function $$l0(e) {
   let {

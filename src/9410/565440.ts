@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect, useRef } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import { R } from "../9410/46722";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { to } from "../figma_app/828186";
 import { ow } from "../figma_app/976749";
 import { Ay } from "../figma_app/432652";
@@ -82,91 +82,91 @@ export function $$A0() {
   let e = ow();
   let t = [{
     name: "Arabic",
-    label: _$$t("ai_text_tools.translate.language.arabic")
+    label: getI18nString("ai_text_tools.translate.language.arabic")
   }, {
     name: "Chinese (Simplified)",
-    label: _$$t("ai_text_tools.translate.language.chinese_simplified")
+    label: getI18nString("ai_text_tools.translate.language.chinese_simplified")
   }, {
     name: "Chinese (Traditional)",
-    label: _$$t("ai_text_tools.translate.language.chinese_traditional")
+    label: getI18nString("ai_text_tools.translate.language.chinese_traditional")
   }, {
     name: "Dutch",
-    label: _$$t("ai_text_tools.translate.language.dutch")
+    label: getI18nString("ai_text_tools.translate.language.dutch")
   }, {
     name: "English (United Kingdom)",
-    label: _$$t("ai_text_tools.translate.language.english_uk")
+    label: getI18nString("ai_text_tools.translate.language.english_uk")
   }, {
     name: "English (United States)",
-    label: _$$t("ai_text_tools.translate.language.english_us")
+    label: getI18nString("ai_text_tools.translate.language.english_us")
   }, {
     name: "Tagalog",
-    label: _$$t("ai_text_tools.translate.language.tagalog")
+    label: getI18nString("ai_text_tools.translate.language.tagalog")
   }, {
     name: "French",
-    label: _$$t("ai_text_tools.translate.language.french")
+    label: getI18nString("ai_text_tools.translate.language.french")
   }, {
     name: "German",
-    label: _$$t("ai_text_tools.translate.language.german")
+    label: getI18nString("ai_text_tools.translate.language.german")
   }, {
     name: "Hindi",
-    label: _$$t("ai_text_tools.translate.language.hindi")
+    label: getI18nString("ai_text_tools.translate.language.hindi")
   }, {
     name: "Indonesian",
-    label: _$$t("ai_text_tools.translate.language.indonesian")
+    label: getI18nString("ai_text_tools.translate.language.indonesian")
   }, {
     name: "Italian",
-    label: _$$t("ai_text_tools.translate.language.italian")
+    label: getI18nString("ai_text_tools.translate.language.italian")
   }, {
     name: "Japanese",
-    label: _$$t("ai_text_tools.translate.language.japanese")
+    label: getI18nString("ai_text_tools.translate.language.japanese")
   }, {
     name: "Korean",
-    label: _$$t("ai_text_tools.translate.language.korean")
+    label: getI18nString("ai_text_tools.translate.language.korean")
   }, {
     name: "Malay",
-    label: _$$t("ai_text_tools.translate.language.malay")
+    label: getI18nString("ai_text_tools.translate.language.malay")
   }, {
     name: "Polish",
-    label: _$$t("ai_text_tools.translate.language.polish")
+    label: getI18nString("ai_text_tools.translate.language.polish")
   }, {
     name: "Portuguese (Brazil)",
-    label: _$$t("ai_text_tools.translate.language.portuguese_brazil")
+    label: getI18nString("ai_text_tools.translate.language.portuguese_brazil")
   }, {
     name: "Portuguese (Portugal)",
-    label: _$$t("ai_text_tools.translate.language.portuguese_portugal")
+    label: getI18nString("ai_text_tools.translate.language.portuguese_portugal")
   }, {
     name: "Russian",
-    label: _$$t("ai_text_tools.translate.language.russian")
+    label: getI18nString("ai_text_tools.translate.language.russian")
   }, {
     name: "Spanish (Latin America)",
-    label: _$$t("ai_text_tools.translate.language.spanish_latin_america")
+    label: getI18nString("ai_text_tools.translate.language.spanish_latin_america")
   }, {
     name: "Spanish (Spain)",
-    label: _$$t("ai_text_tools.translate.language.spanish_spain")
+    label: getI18nString("ai_text_tools.translate.language.spanish_spain")
   }, {
     name: "Swedish",
-    label: _$$t("ai_text_tools.translate.language.swedish")
+    label: getI18nString("ai_text_tools.translate.language.swedish")
   }, {
     name: "Tamil",
-    label: _$$t("ai_text_tools.translate.language.tamil")
+    label: getI18nString("ai_text_tools.translate.language.tamil")
   }, {
     name: "Thai",
-    label: _$$t("ai_text_tools.translate.language.thai")
+    label: getI18nString("ai_text_tools.translate.language.thai")
   }, {
     name: "Turkish",
-    label: _$$t("ai_text_tools.translate.language.turkish")
+    label: getI18nString("ai_text_tools.translate.language.turkish")
   }, {
     name: "Ukrainian",
-    label: _$$t("ai_text_tools.translate.language.ukrainian")
+    label: getI18nString("ai_text_tools.translate.language.ukrainian")
   }, {
     name: "Urdu",
-    label: _$$t("ai_text_tools.translate.language.urdu")
+    label: getI18nString("ai_text_tools.translate.language.urdu")
   }, {
     name: "Vietnamese",
-    label: _$$t("ai_text_tools.translate.language.vietnamese")
+    label: getI18nString("ai_text_tools.translate.language.vietnamese")
   }];
   e && (t = t.filter(e => !N.includes(e.name)));
-  let i = _$$t("ai_text_tools.translate.running");
+  let i = getI18nString("ai_text_tools.translate.running");
   let v = useRef(null);
   let {
     onRun,
@@ -219,7 +219,7 @@ export function $$A0() {
         case _$$w.SELECTION_LOST:
           return jsx(A, {
             action: JT.TRANSLATE_TEXT,
-            actionLabel: tx("fullscreen_actions.quick_actions.translate-text"),
+            actionLabel: renderI18nText("fullscreen_actions.quick_actions.translate-text"),
             actionIcon: jsx(R, {}),
             onPerform: () => D.confirmInitialSelection(),
             getCustomDisabledTextFromSelectedNodes: e => bu(e, {}),
@@ -228,7 +228,7 @@ export function $$A0() {
               type: "learn_more",
               url: pY
             },
-            children: tx("ai_text_tools.selection_instruction")
+            children: renderI18nText("ai_text_tools.selection_instruction")
           });
         case _$$w.SELECTION_OK:
           return jsx(I, {
@@ -240,7 +240,7 @@ export function $$A0() {
               onRun(t);
               v.current = t;
             },
-            placeholder: _$$t("ai_text_tools.translate.language"),
+            placeholder: getI18nString("ai_text_tools.translate.language"),
             showIcon: !F
           });
       }
@@ -256,10 +256,10 @@ export function $$A0() {
           if (v.current) onRun(v.current);else throw new ay("Last parameters is null");
         }
       }];
-      (error instanceof Vz || sZ(error) === _$$B.CONTENT_LENGTH_LIMIT) && (B = tx("ai.error.content_length_limit"), K = []);
-      error instanceof Jd && (B = tx("ai_text_tools.missing_fonts"), K = []);
+      (error instanceof Vz || sZ(error) === _$$B.CONTENT_LENGTH_LIMIT) && (B = renderI18nText("ai.error.content_length_limit"), K = []);
+      error instanceof Jd && (B = renderI18nText("ai_text_tools.missing_fonts"), K = []);
       sZ(error) === _$$B.UNSAFE_OR_HARMFUL_CONTENT && (K = []);
-      M > 0 && P > 0 && P < M && (G = tx("ai_text_tools.translate.couldnt_count", {
+      M > 0 && P > 0 && P < M && (G = renderI18nText("ai_text_tools.translate.couldnt_count", {
         failed: P,
         total: M
       }));

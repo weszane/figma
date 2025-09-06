@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
-import { Xr, fp } from "../figma_app/27355";
+import { Xr, useAtomValueAndSetter } from "../figma_app/27355";
 import { Rs } from "../figma_app/288654";
 import { Lo, to } from "../905/156213";
 import { m0 } from "../figma_app/976749";
@@ -20,7 +20,7 @@ import { nB, wi, jk, vo, Y9, hE } from "../figma_app/272243";
 import { $n } from "../905/521428";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { E as _$$E } from "../905/984674";
 import { Ju } from "../905/102752";
 var C = (e => (e.STOP_AUTO_RUN_FROM_USER = "stop-auto-run-from-user", e.STOP_AUTO_RUN_FROM_ORG = "stop-auto-run-from-org", e.CONFIRM_REPLACE = "confirm-replace", e.ENABLE_AUTO_RUN = "enable-auto-run", e))(C || {});
@@ -75,14 +75,14 @@ let w = Ju(function ({
           children: jsx(_$$E, {
             color: "default",
             fontWeight: "medium",
-            children: tx("dev_handoff.autorun_confirm_modal.stop_auto_run_desc", g)
+            children: renderI18nText("dev_handoff.autorun_confirm_modal.stop_auto_run_desc", g)
           })
         }), jsx(wi, {
           children: jsxs(jk, {
             children: [jsx($n, {
               variant: "secondary",
               onClick: u,
-              children: _$$t("dev_handoff.autorun_confirm_modal.cancel")
+              children: getI18nString("dev_handoff.autorun_confirm_modal.cancel")
             }), jsx($n, {
               variant: "primary",
               onClick: () => {
@@ -95,7 +95,7 @@ let w = Ju(function ({
                   }
                 }));
               },
-              children: _$$t("dev_handoff.autorun_confirm_modal.stop_auto_run")
+              children: getI18nString("dev_handoff.autorun_confirm_modal.stop_auto_run")
             })]
           })
         })]
@@ -107,21 +107,21 @@ let w = Ju(function ({
           children: jsx(_$$E, {
             color: "default",
             fontWeight: "medium",
-            children: tx("dev_handoff.autorun_confirm_modal.enable_auto_run_desc", f)
+            children: renderI18nText("dev_handoff.autorun_confirm_modal.enable_auto_run_desc", f)
           })
         }), jsx(wi, {
           children: jsxs(jk, {
             children: [jsx($n, {
               variant: "secondary",
               onClick: u,
-              children: _$$t("dev_handoff.autorun_confirm_modal.dont_enable")
+              children: getI18nString("dev_handoff.autorun_confirm_modal.dont_enable")
             }), jsx($n, {
               variant: "primary",
               onClick: () => {
                 _$$s.updateUserAutoRunPluginId(e.pluginID, FInheritanceType.INHERIT);
                 d(Lo());
               },
-              children: _$$t("dev_handoff.autorun_confirm_modal.enable_auto_run")
+              children: getI18nString("dev_handoff.autorun_confirm_modal.enable_auto_run")
             })]
           })
         })]
@@ -133,21 +133,21 @@ let w = Ju(function ({
           children: jsx(_$$E, {
             color: "default",
             fontWeight: "medium",
-            children: tx("dev_handoff.autorun_confirm_modal.confirm_replace", E)
+            children: renderI18nText("dev_handoff.autorun_confirm_modal.confirm_replace", E)
           })
         }), jsx(wi, {
           children: jsxs(jk, {
             children: [jsx($n, {
               variant: "secondary",
               onClick: u,
-              children: _$$t("dev_handoff.autorun_confirm_modal.cancel")
+              children: getI18nString("dev_handoff.autorun_confirm_modal.cancel")
             }), jsx($n, {
               variant: "primary",
               onClick: () => {
                 _$$s.updateUserAutoRunPluginId(e.pluginID, FInheritanceType.OVERRIDE);
                 d(Lo());
               },
-              children: _$$t("dev_handoff.autorun_confirm_modal.replace")
+              children: getI18nString("dev_handoff.autorun_confirm_modal.replace")
             })]
           })
         })]
@@ -159,18 +159,18 @@ let w = Ju(function ({
           children: jsx(_$$E, {
             color: "default",
             fontWeight: "medium",
-            children: tx("dev_handoff.autorun_confirm_modal.stop_auto_run_from_org", f)
+            children: renderI18nText("dev_handoff.autorun_confirm_modal.stop_auto_run_from_org", f)
           })
         }), jsx(wi, {
           children: jsxs(jk, {
             children: [jsx($n, {
               variant: "secondary",
               onClick: u,
-              children: _$$t("dev_handoff.autorun_confirm_modal.cancel")
+              children: getI18nString("dev_handoff.autorun_confirm_modal.cancel")
             }), jsx($n, {
               variant: "primary",
               onClick: c,
-              children: _$$t("dev_handoff.autorun_confirm_modal.stop_auto_run")
+              children: getI18nString("dev_handoff.autorun_confirm_modal.stop_auto_run")
             })]
           })
         })]
@@ -182,13 +182,13 @@ let w = Ju(function ({
   switch (r) {
     case "stop-auto-run-from-user":
     case "stop-auto-run-from-org":
-      o = _$$t("dev_handoff.autorun_confirm_modal.title_stop_auto_run");
+      o = getI18nString("dev_handoff.autorun_confirm_modal.title_stop_auto_run");
       break;
     case "confirm-replace":
-      o = _$$t("dev_handoff.autorun_confirm_modal.title_replace_auto_run");
+      o = getI18nString("dev_handoff.autorun_confirm_modal.title_replace_auto_run");
       break;
     case "enable-auto-run":
-      o = _$$t("dev_handoff.autorun_confirm_modal.title_enable_auto_run", {
+      o = getI18nString("dev_handoff.autorun_confirm_modal.title_enable_auto_run", {
         pluginName: e.orgPluginName
       });
       break;
@@ -367,7 +367,7 @@ export function $$F1() {
   let t = tS();
   let r = YN();
   let n = L();
-  let [i, a] = fp(Lx);
+  let [i, a] = useAtomValueAndSetter(Lx);
   if (!e || i || !n.loaded) return;
   let o = n.plugin;
   if (!o) {

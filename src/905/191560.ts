@@ -1,11 +1,11 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { md, zl, fp, Xr } from "../figma_app/27355";
-import { eD as _$$eD } from "../figma_app/876459";
+import { useAtomWithSubscription, atomStoreManager, useAtomValueAndSetter, Xr } from "../figma_app/27355";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { Ay } from "../905/612521";
 import { h as _$$h } from "../905/207101";
-import { _N, Q1, nW } from "../figma_app/778880";
+import { isFigmaMirrorAndroid, isInFigmaMobile, isAndroidOrIphoneNotFigmaMobile } from "../figma_app/778880";
 import { E as _$$E, Qg, WY, My, Jv, xw, hE, GG, qw, Hh, Re, OZ, kL, I$, KS, AP, ET, $j } from "../905/194276";
 import { nb, _G, Kf } from "../905/164233";
 import { cc, RE, qB, vR, DP, By } from "../905/862321";
@@ -22,7 +22,7 @@ import { A as _$$A } from "../6828/71291";
 import { A as _$$A2 } from "../5724/643251";
 import { A as _$$A3 } from "../5724/332367";
 import { Us } from "../figma_app/637027";
-import { t as _$$t, tx, dS, YD } from "../905/303541";
+import { getI18nString, renderI18nText, getLocalizedPath, getI18nStringAlias } from "../905/303541";
 import { J as _$$J } from "../905/231762";
 import { ZD } from "../905/519092";
 import { N as _$$N } from "../905/438674";
@@ -39,14 +39,14 @@ import { FResourceCategoryType } from "../figma_app/191312";
 import { xf } from "../figma_app/416935";
 import { $n } from "../905/521428";
 import { k as _$$k3 } from "../905/443820";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { a as _$$a } from "../905/10468";
 import { sx as _$$sx } from "../905/941192";
 import { getInitialOptions } from "../figma_app/169182";
 import { VP, GH } from "../905/18797";
 import { lQ } from "../905/934246";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { _ as _$$_ } from "../figma_app/496441";
 import { t as _$$t2 } from "../905/897919";
 import { g as _$$g } from "../905/248178";
@@ -219,7 +219,7 @@ function j(e) {
   let [l, c] = useState(!1);
   let [_, A] = useState(M());
   let y = useRef(null);
-  let I = md(nb);
+  let I = useAtomWithSubscription(nb);
   let E = async () => {
     null === e.auth.postVerificationAction ? await x() : t(e.auth.postVerificationAction);
     o(!1);
@@ -276,17 +276,17 @@ function j(e) {
       isCloseHidden: !0,
       children: [jsx(nt, {}), jsx("h1", {
         className: "verify_human_form--title--iErts",
-        children: _$$t("auth.captcha.captcha_is_loading")
+        children: getI18nString("auth.captcha.captcha_is_loading")
       }), l && jsxs(Fragment, {
         children: [jsx("div", {
           className: "verify_human_form--timeoutText---iomJ",
           "data-testid": "help-text",
-          children: tx("auth.captcha.timed_out_while_loading", {
+          children: renderI18nText("auth.captcha.timed_out_while_loading", {
             helpCenterLink: jsx(Us, {
               href: "https://help.figma.com/hc/articles/30659048904983",
               target: "_blank",
               trusted: !0,
-              children: tx("auth.captcha.timed_out_while_loading.help_center_link_text")
+              children: renderI18nText("auth.captcha.timed_out_while_loading.help_center_link_text")
             })
           })
         }), jsx(k, {
@@ -298,7 +298,7 @@ function j(e) {
           },
           type: "button",
           "data-testid": "reload-captcha-button",
-          children: _$$t("auth.captcha.reload_captcha")
+          children: getI18nString("auth.captcha.reload_captcha")
         })]
       })]
     }) : null, jsx(p8, {
@@ -331,16 +331,16 @@ function H(e) {
   let t = useDispatch();
   let [i, o] = useState(!1);
   let [d, c] = useState(null);
-  let f = md(nb);
+  let f = useAtomWithSubscription(nb);
   let _ = useSelector(e => e.auth.twoFactorPromptedBy);
   let A = I8();
   let y = TA();
   return jsxs(v, {
     ...e,
-    header: e.header || _$$t("auth.two-factor.header"),
+    header: e.header || getI18nString("auth.two-factor.header"),
     onSubmit: () => {
       let i = e.id;
-      let n = zl.get(_G);
+      let n = atomStoreManager.get(_G);
       if (n) W8(n, {
         dispatch: t,
         apiUrl: _B,
@@ -360,7 +360,7 @@ function H(e) {
         Ay.redirect(e.data.meta.redirect);
       }).catch(e => {
         let i = e.data;
-        let n = _$$J(e, i?.message || _$$t("auth.default-error"));
+        let n = _$$J(e, i?.message || getI18nString("auth.default-error"));
         "invalid_session" === i.reason ? Ay.redirect("/") : t(Qg({
           message: n,
           invalidInput: RE.TOTP_KEY
@@ -385,7 +385,7 @@ function H(e) {
       name: RE.TOTP_KEY,
       inputMode: "numeric",
       autoComplete: "one-time-code",
-      placeholder: _$$t("auth.two-factor.authentication-code"),
+      placeholder: getI18nString("auth.two-factor.authentication-code"),
       isInvalid: e.auth.invalidInput === RE.TOTP_KEY,
       showUpdatedInputDesign: !0
     }), jsx("input", {
@@ -414,7 +414,7 @@ function H(e) {
       type: "submit",
       loading: e.auth.loading,
       className: "two_factor--wideButton--4uVoN auth_view--wideButton--Db9su auth_view--fullWidth--ffDfw",
-      children: _$$t("auth.two-factor.log-in")
+      children: getI18nString("auth.two-factor.log-in")
     }), jsx(_$$k, {
       multiple: 2
     }), jsxs("div", {
@@ -428,21 +428,21 @@ function H(e) {
             }));
             o(!0);
           },
-          children: e.auth.hint ? tx("auth.two-factor.resend-sms-code") : tx("auth.two-factor.send-sms-code")
+          children: e.auth.hint ? renderI18nText("auth.two-factor.resend-sms-code") : renderI18nText("auth.two-factor.send-sms-code")
         }), jsx(_$$k, {
           multiple: 2
         })]
       }), jsx(_$$N, {
         href: "#",
         onClick: () => {
-          zl.set(_G, null);
+          atomStoreManager.set(_G, null);
           e.auth.ssoMethod === vR.SAML ? t(_$$E({
             formState: qB.SAML_START
           })) : t(_$$E({
             formState: e.auth.twoFactorPromptedBy
           }));
         },
-        children: _$$t("auth.two-factor.back")
+        children: getI18nString("auth.two-factor.back")
       })]
     })]
   });
@@ -463,7 +463,7 @@ function Q(e) {
   if (!c || !d || !u) return null;
   let m = e?.auth.origin === "start_using_plugins_button_click" ? jsx("div", {
     className: X,
-    children: tx("permissions.join_org.cannot_run_plugins", {
+    children: renderI18nText("permissions.join_org.cannot_run_plugins", {
       orgName: jsx("span", {
         style: {
           fontWeight: 600
@@ -473,7 +473,7 @@ function Q(e) {
     })
   }) : jsx("div", {
     className: X,
-    children: tx("permissions.join_org.cannot_edit_file", {
+    children: renderI18nText("permissions.join_org.cannot_edit_file", {
       orgName: jsx("span", {
         style: {
           fontWeight: 600
@@ -492,14 +492,14 @@ function Q(e) {
     },
     children: jsxs(v, {
       ...e,
-      header: _$$t("permissions.join_org.access_needed"),
+      header: getI18nString("permissions.join_org.access_needed"),
       onSubmit: e.onFormSubmit,
       isLoading: void 0 === p,
       children: [m, jsx(_$$k, {
         multiple: 2
       }), jsx("div", {
         className: X,
-        children: tx("permissions.join_org.ask_an_org_admin", {
+        children: renderI18nText("permissions.join_org.ask_an_org_admin", {
           orgName: p
         })
       }), jsx(_$$k, {
@@ -514,7 +514,7 @@ function Q(e) {
           }).then(() => {
             o(!1);
             t(_$$F.enqueue({
-              message: _$$t("permissions.join_org.request_sent")
+              message: getI18nString("permissions.join_org.request_sent")
             }));
             t(Lo());
           }, e => {
@@ -528,12 +528,12 @@ function Q(e) {
         },
         fullWidth: !1,
         loading: s,
-        children: tx("permissions.join_org.ask_to_be_added")
+        children: renderI18nText("permissions.join_org.ask_to_be_added")
       }), jsx(_$$k, {
         multiple: 4
       }), jsx("div", {
         className: "join_org--modalFooter--1qtlt",
-        children: tx("permissions.join_org.you_are_requesting_to_be_added_as_email", {
+        children: renderI18nText("permissions.join_org.you_are_requesting_to_be_added_as_email", {
           email: d.email
         })
       }), jsx(_$$k, {
@@ -542,7 +542,7 @@ function Q(e) {
         className: "join_org--link--cdSS1",
         children: jsx(_$$N, {
           href: `/switch_user?cont=${encodeURIComponent(i)}`,
-          children: tx("permissions.join_org.switch_accounts")
+          children: renderI18nText("permissions.join_org.switch_accounts")
         })
       })]
     })
@@ -553,7 +553,7 @@ function et(e) {
   let t = useDispatch();
   return jsxs(v, {
     ...e,
-    header: _$$t("auth.password-reset.enter-email-header"),
+    header: getI18nString("auth.password-reset.enter-email-header"),
     onSubmit: () => {
       t(_$$E({
         formState: qB.VERIFY_HUMAN,
@@ -572,7 +572,7 @@ function et(e) {
     }), jsx(k, {
       loading: e.auth.loading,
       disabled: !xf(e.auth.email),
-      children: _$$t("auth.password-reset.reset-password-button")
+      children: getI18nString("auth.password-reset.reset-password-button")
     }), jsx(_$$k, {
       multiple: 2
     }), jsx("div", {
@@ -583,7 +583,7 @@ function et(e) {
         })),
         trusted: !0,
         href: "#",
-        children: _$$t("auth.password-reset.cancel")
+        children: getI18nString("auth.password-reset.cancel")
       })
     })]
   });
@@ -598,7 +598,7 @@ function ei(e) {
     className: i,
     children: [jsx("h1", {
       className: "password_reset--header--GtyGw",
-      children: tx("auth.password-reset.confirmation-text", {
+      children: renderI18nText("auth.password-reset.confirmation-text", {
         email: jsx("span", {
           className: "password_reset--email--IXWPN",
           children: e.auth.email
@@ -612,7 +612,7 @@ function ei(e) {
         })),
         trusted: !0,
         href: "#",
-        children: _$$t("auth.password-reset.back-to-log-in")
+        children: getI18nString("auth.password-reset.back-to-log-in")
       })
     })]
   });
@@ -622,7 +622,7 @@ function en(e) {
   let i = I8();
   return jsxs(v, {
     auth: e.auth,
-    header: _$$t("auth.password-reset.choose-a-new-password"),
+    header: getI18nString("auth.password-reset.choose-a-new-password"),
     id: e.id,
     modal: e.modal,
     noAutofocus: e.noAutofocus,
@@ -635,7 +635,7 @@ function en(e) {
     }), jsx(gK, {
       name: RE.PASSWORD,
       type: "password",
-      placeholder: _$$t("auth.password-reset.placeholder.password"),
+      placeholder: getI18nString("auth.password-reset.placeholder.password"),
       autoCapitalize: "off",
       autoCorrect: "off",
       isInvalid: RE.PASSWORD === e.auth.invalidInput,
@@ -645,7 +645,7 @@ function en(e) {
     }), jsx(gK, {
       name: "password_retype",
       type: "password",
-      placeholder: _$$t("auth.password-reset.placeholder.confirm-password"),
+      placeholder: getI18nString("auth.password-reset.placeholder.confirm-password"),
       autoCapitalize: "off",
       autoCorrect: "off",
       isInvalid: RE.PASSWORD === e.auth.invalidInput,
@@ -654,7 +654,7 @@ function en(e) {
       multiple: 4
     }), jsx(k, {
       loading: e.auth.loading,
-      children: _$$t("auth.password-reset.submit")
+      children: getI18nString("auth.password-reset.submit")
     }), jsx(_$$k, {
       multiple: 4
     }), jsx("div", {
@@ -665,7 +665,7 @@ function en(e) {
         })),
         trusted: !0,
         href: "#",
-        children: _$$t("auth.password-reset.back-to-log-in")
+        children: getI18nString("auth.password-reset.back-to-log-in")
       })
     })]
   });
@@ -682,7 +682,7 @@ let ef = (e, t) => {
   let n = new URLSearchParams();
   e && n.append("signup", "true");
   console.log("Opening: " + i);
-  _$$eD?.startAppAuth(i);
+  desktopAPIInstance?.startAppAuth(i);
 };
 let e_ = (e, t, i, n) => {
   XHR.post("/api/session/app_auth", {
@@ -717,7 +717,7 @@ function ey(e) {
   }, []);
   let l = useCallback(() => {
     o(Qg({
-      message: _$$t("auth.generic-app-auth-error")
+      message: getI18nString("auth.generic-app-auth-error")
     }));
     s(!1);
   }, [o]);
@@ -731,12 +731,12 @@ function ey(e) {
       className: ep,
       children: [jsx("h1", {
         className: ec,
-        children: _$$t("auth.go-to-browser-to-complete-login")
+        children: getI18nString("auth.go-to-browser-to-complete-login")
       }), jsx(_$$k, {
         multiple: 3
       }), jsxs("div", {
         className: y()(em, eh),
-        children: [_$$t("auth.not-seeing-the-browser-tab"), " ", jsx("div", {
+        children: [getI18nString("auth.not-seeing-the-browser-tab"), " ", jsx("div", {
           tabIndex: -1,
           className: eg,
           children: jsx($n.Link, {
@@ -744,7 +744,7 @@ function ey(e) {
               clearTimeout(t.current);
               s(!1);
             },
-            children: _$$t("auth.generic-go-back-and-try-again")
+            children: getI18nString("auth.generic-go-back-and-try-again")
           })
         })]
       })]
@@ -755,7 +755,7 @@ function ey(e) {
       className: ep,
       children: [jsx("h1", {
         className: ec,
-        children: e.header ?? _$$t("auth.welcome-to-figma")
+        children: e.header ?? getI18nString("auth.welcome-to-figma")
       }), jsx(_$$k, {
         multiple: 3
       }), e.auth.error && jsxs(Fragment, {
@@ -779,19 +779,19 @@ function ey(e) {
         onClick: () => {
           e_(!1, e.appType, d, l);
         },
-        children: _$$t("auth.log-in-with-browser")
+        children: getI18nString("auth.log-in-with-browser")
       }), jsx(_$$k, {
         multiple: 4
       }), jsxs("div", {
         className: y()(em, eh),
-        children: [_$$t("auth.no-account"), " ", jsx("div", {
+        children: [getI18nString("auth.no-account"), " ", jsx("div", {
           tabIndex: -1,
           className: eg,
           children: jsx($n.Link, {
             onClick: () => {
               e_(!0, e.appType, d, l);
             },
-            children: _$$t("auth.create-one")
+            children: getI18nString("auth.create-one")
           })
         })]
       })]
@@ -839,7 +839,7 @@ function eb(e) {
       b(e.data.meta.g_secret);
     }).catch(t => {
       console.error(t);
-      sx("AppAuth", {
+      trackEventAnalytics("AppAuth", {
         app_auth_id: e.auth.appAuthId,
         app_auth_status: "grant_failed",
         error_message: t.data?.message || `Failed with status ${t.status}`
@@ -851,7 +851,7 @@ function eb(e) {
     });
   };
   let b = t => {
-    sx("AppAuth", {
+    trackEventAnalytics("AppAuth", {
       app_auth_id: e.auth.appAuthId,
       app_auth_status: "click_to_redeem"
     }, {
@@ -863,7 +863,7 @@ function eb(e) {
     Ay.unsafeRedirect("figma://login");
   };
   let I = () => {
-    sx("AppAuth", {
+    trackEventAnalytics("AppAuth", {
       app_auth_id: e.auth.appAuthId,
       app_auth_status: "signout_try_again"
     }, {
@@ -874,13 +874,13 @@ function eb(e) {
     appAuthAppType
   } = e.auth;
   let S = e.modal ? ed : eu;
-  t = appAuthAppType === DP.MOBILE || appAuthAppType === DP.FIGJAM_MOBILE ? _$$t("auth.mobile-app") : appAuthAppType === DP.MIRROR ? _$$t("auth.mirror-app") : appAuthAppType === DP.MSFT_TEAMS ? _$$t("auth.microsoft-teams") : _$$t("auth.desktop-app");
-  i = appAuthAppType === DP.MOBILE || appAuthAppType === DP.FIGJAM_MOBILE ? _$$t("auth.continue-with-the-specific-app", {
+  t = appAuthAppType === DP.MOBILE || appAuthAppType === DP.FIGJAM_MOBILE ? getI18nString("auth.mobile-app") : appAuthAppType === DP.MIRROR ? getI18nString("auth.mirror-app") : appAuthAppType === DP.MSFT_TEAMS ? getI18nString("auth.microsoft-teams") : getI18nString("auth.desktop-app");
+  i = appAuthAppType === DP.MOBILE || appAuthAppType === DP.FIGJAM_MOBILE ? getI18nString("auth.continue-with-the-specific-app", {
     appDescriptor: t
-  }) : appAuthAppType === DP.VSCODE || appAuthAppType === DP.VSCODE_INSIDERS || appAuthAppType === DP.VSCODE_CURSOR ? _$$t("auth.open-figma-for-vs-code") : _$$t("auth.open-specific-app", {
+  }) : appAuthAppType === DP.VSCODE || appAuthAppType === DP.VSCODE_INSIDERS || appAuthAppType === DP.VSCODE_CURSOR ? getI18nString("auth.open-figma-for-vs-code") : getI18nString("auth.open-specific-app", {
     appDescriptor: t
   });
-  s = appAuthAppType === DP.VSCODE || appAuthAppType === DP.VSCODE_INSIDERS || appAuthAppType === DP.VSCODE_CURSOR ? _$$t("auth.choose-account-to-add-to-figma-for-vs-code") : _$$t("auth.choose-account-to-add-to-specific-app", {
+  s = appAuthAppType === DP.VSCODE || appAuthAppType === DP.VSCODE_INSIDERS || appAuthAppType === DP.VSCODE_CURSOR ? getI18nString("auth.choose-account-to-add-to-figma-for-vs-code") : getI18nString("auth.choose-account-to-add-to-specific-app", {
     appDescriptor: t
   });
   let w = e.auth.appAuthUsers?.length === 1 ? e.auth.appAuthUsers[0] : null;
@@ -890,7 +890,7 @@ function eb(e) {
   if (!c && e.auth.appAuthId && e.auth.appAuthUsers) o = w ? jsxs(Fragment, {
     children: [jsx("h1", {
       className: ec,
-      children: tx("auth.log-in-with-account", {
+      children: renderI18nText("auth.log-in-with-account", {
         email: C
       })
     }), jsx(_$$k, {
@@ -903,7 +903,7 @@ function eb(e) {
       multiple: 4
     }), jsx("div", {
       className: y()(em, eh),
-      children: tx("auth.log-in-with-other-account", {
+      children: renderI18nText("auth.log-in-with-other-account", {
         email: w.email,
         logInLink: jsx("div", {
           tabIndex: -1,
@@ -915,7 +915,7 @@ function eb(e) {
                 formState: qB.SIGN_IN
               }));
             },
-            children: _$$t("auth.log-in-with-other-account-link")
+            children: getI18nString("auth.log-in-with-other-account-link")
           })
         })
       })
@@ -929,10 +929,10 @@ function eb(e) {
   });else {
     let e;
     let i;
-    e = appAuthAppType === DP.MOBILE || appAuthAppType === DP.FIGJAM_MOBILE ? _$$t("auth.generic-go-back-and-try-again") : appAuthAppType === DP.VSCODE || appAuthAppType === DP.VSCODE_INSIDERS || appAuthAppType === DP.VSCODE_CURSOR ? _$$t("auth.open-figma-for-vs-code") : _$$t("auth.open-specific-app", {
+    e = appAuthAppType === DP.MOBILE || appAuthAppType === DP.FIGJAM_MOBILE ? getI18nString("auth.generic-go-back-and-try-again") : appAuthAppType === DP.VSCODE || appAuthAppType === DP.VSCODE_INSIDERS || appAuthAppType === DP.VSCODE_CURSOR ? getI18nString("auth.open-figma-for-vs-code") : getI18nString("auth.open-specific-app", {
       appDescriptor: t
     });
-    i = appAuthAppType === DP.VSCODE || appAuthAppType === DP.VSCODE_INSIDERS || appAuthAppType === DP.VSCODE_CURSOR ? _$$t("auth.try-again-in-figma-for-vs-code") : _$$t("auth.try-again-on-specific-app", {
+    i = appAuthAppType === DP.VSCODE || appAuthAppType === DP.VSCODE_INSIDERS || appAuthAppType === DP.VSCODE_CURSOR ? getI18nString("auth.try-again-in-figma-for-vs-code") : getI18nString("auth.try-again-on-specific-app", {
       appDescriptor: t
     });
     o = jsxs(Fragment, {
@@ -940,7 +940,7 @@ function eb(e) {
         role: "alert",
         children: jsxs("h1", {
           className: ec,
-          children: [_$$t("auth.your-login-session-has-expired"), jsx("br", {}), i]
+          children: [getI18nString("auth.your-login-session-has-expired"), jsx("br", {}), i]
         })
       }), jsx(_$$k, {
         multiple: 3
@@ -970,8 +970,8 @@ function ev(e) {
     Ay.replace("/login", null);
   });
   let i = () => {
-    let e = _$$t("auth.generic-app-auth-error");
-    if (_N() || Q1()) {
+    let e = getI18nString("auth.generic-app-auth-error");
+    if (isFigmaMirrorAndroid() || isInFigmaMobile()) {
       let t = new URLSearchParams();
       t.append("error", e);
       Ay.redirect("/mobile-app?" + t.toString());
@@ -990,8 +990,8 @@ function ev(e) {
     XHR.post("/api/session/app_auth/redeem", {
       g_secret: e.auth.appAuthGSecret
     }).then(() => {
-      _$$eD ? _$$eD.finishAppAuth(e.auth.redirectUrl) : setTimeout(() => {
-        let t = e.auth.redirectUrl || (_N() || Q1() ? "/mobile-app" : null);
+      desktopAPIInstance ? desktopAPIInstance.finishAppAuth(e.auth.redirectUrl) : setTimeout(() => {
+        let t = e.auth.redirectUrl || (isFigmaMirrorAndroid() || isInFigmaMobile() ? "/mobile-app" : null);
         null != t ? (console.log("Opening: " + t), Ay.redirect(t)) : Ay.reload("AppAuthRedeemForm");
       }, 500);
     }).catch(e => {
@@ -1007,7 +1007,7 @@ function ev(e) {
       children: jsxs(Fragment, {
         children: [jsx("div", {
           className: "app_auth--message--WN7nZ auth_form--figmaSans--XXAeN auth_brand--figmaSans--aXdNw",
-          children: _$$t("auth.generic-loading")
+          children: getI18nString("auth.generic-loading")
         }), jsx(_$$k3, {})]
       })
     })
@@ -1032,15 +1032,15 @@ function ex({
     }));
   };
   let c = s.destination_name;
-  let p = c ? o ? tx("auth.account-picker-join-text", {
+  let p = c ? o ? renderI18nText("auth.account-picker-join-text", {
     destination: jsx("strong", {
       children: c
     })
-  }) : tx("auth.account-picker-open-text", {
+  }) : renderI18nText("auth.account-picker-open-text", {
     destination: jsx("strong", {
       children: c
     })
-  }) : tx("auth.account-picker");
+  }) : renderI18nText("auth.account-picker");
   return jsx(_$$a, {
     dispatch: t,
     users: s.authed_users,
@@ -1065,7 +1065,7 @@ function eP(e) {
   return jsxs(v, {
     ...e,
     className: eC,
-    header: _$$t("auth.email-only.header"),
+    header: getI18nString("auth.email-only.header"),
     onSubmit: e.onFormSubmit,
     children: [jsx(ZH, {
       ...e,
@@ -1075,7 +1075,7 @@ function eP(e) {
     }), jsx(k, {
       type: "submit",
       loading: e.auth.loading,
-      children: _$$t("auth.email-only.log-in")
+      children: getI18nString("auth.email-only.log-in")
     })]
   });
 }
@@ -1085,8 +1085,8 @@ function eD() {
     name: "Enable Cookies",
     children: jsx(v, {
       auth: e,
-      header: _$$t("auth.cookies_are_disabled"),
-      subtitle: _$$t("auth.cookies_are_required_to_use_figma"),
+      header: getI18nString("auth.cookies_are_disabled"),
+      subtitle: getI18nString("auth.cookies_are_required_to_use_figma"),
       id: "enable-cookies-form",
       onSubmit: lQ,
       children: jsx(R, {
@@ -1094,7 +1094,7 @@ function eD() {
           trackingDescriptor: _$$c.TRY_AGAIN
         },
         onClick: () => Ay.reload("User clicked try again from enable cookies auth page"),
-        children: tx("auth.try_again")
+        children: renderI18nText("auth.try_again")
       })
     })
   });
@@ -1122,7 +1122,7 @@ function eM({
         })
       }));
     }).catch(e => {
-      $D(_$$e.ACTIVATION, e);
+      reportError(_$$e.ACTIVATION, e);
     });
   }, [t, e, i, s]);
   return jsx("div", {
@@ -1133,7 +1133,7 @@ function eM({
 function ej(e) {
   let t = useDispatch();
   let i = "gov" === window.INITIAL_OPTIONS.cluster_name;
-  let r = i ? _$$t("auth.email-only.header") : _$$t("auth.saml-start.header");
+  let r = i ? getI18nString("auth.email-only.header") : getI18nString("auth.saml-start.header");
   return jsxs(v, {
     ...e,
     header: r,
@@ -1149,7 +1149,7 @@ function ej(e) {
       className: eS,
       loading: e.auth.loading,
       disabled: !xf(e.auth.email),
-      children: _$$t("auth.saml-start.log-in-plain")
+      children: getI18nString("auth.saml-start.log-in-plain")
     }), jsx(_$$k, {
       multiple: 2
     }), jsx("div", {
@@ -1167,16 +1167,16 @@ function ej(e) {
           },
           trusted: !0,
           href: "#",
-          children: _$$t("auth.saml-start.log-in-google-or-password")
+          children: getI18nString("auth.saml-start.log-in-google-or-password")
         })
       })
     })]
   });
 }
 function eB(e) {
-  let t = e.isSignUp ? _$$t("auth.footer-sign-up-switch-form-text") : _$$t("auth.footer-sign-in-switch-form-text");
-  let i = e.isSignUp ? _$$t("auth.footer-sign-up-switch-form-link") : _$$t("auth.footer-sign-in-switch-form-link");
-  let r = _$$t("auth.footer-saml-link");
+  let t = e.isSignUp ? getI18nString("auth.footer-sign-up-switch-form-text") : getI18nString("auth.footer-sign-in-switch-form-text");
+  let i = e.isSignUp ? getI18nString("auth.footer-sign-up-switch-form-link") : getI18nString("auth.footer-sign-in-switch-form-link");
+  let r = getI18nString("auth.footer-saml-link");
   return e.onForgotPassword || e.onSwitchToSaml || e.onChangeFormClick ? jsxs("div", {
     className: ew,
     children: [e.onSwitchToSaml && jsx("div", {
@@ -1194,7 +1194,7 @@ function eB(e) {
         children: jsx(_$$N, {
           onClick: e.onForgotPassword,
           href: "#",
-          children: _$$t("auth.footer-forgot-password")
+          children: getI18nString("auth.footer-forgot-password")
         })
       })]
     }), e.onChangeFormClick && jsxs(Fragment, {
@@ -1228,17 +1228,17 @@ function eG({
     callToActionText: e,
     googleText: t,
     termsOfService: jsx(_$$_, {
-      href: dS("/legal/tos/"),
+      href: getLocalizedPath("/legal/tos/"),
       className: "x1bvjpef x8p8a2l x1ypdohk",
-      children: tx("auth.sign-in.tos-long")
+      children: renderI18nText("auth.sign-in.tos-long")
     }),
     privacyPolicy: jsx(_$$_, {
-      href: dS("/legal/privacy/"),
+      href: getLocalizedPath("/legal/privacy/"),
       className: "x1bvjpef x8p8a2l x1ypdohk",
-      children: tx("auth.sign-in.privacy-policy")
+      children: renderI18nText("auth.sign-in.privacy-policy")
     })
   };
-  let a = i ? tx("auth.terms-and-conditions-2nd-person-google-first", r) : tx("auth.terms-and-conditions-2nd-person-google-only", r);
+  let a = i ? renderI18nText("auth.terms-and-conditions-2nd-person-google-first", r) : renderI18nText("auth.terms-and-conditions-2nd-person-google-only", r);
   return jsx("p", {
     className: "xfifm61 xawzx9p",
     children: a
@@ -1268,7 +1268,7 @@ function ez(e) {
     }));
   };
   let d = auth.invalidInput === RE.EMAIL || auth.invalidInput === RE.PASSWORD;
-  let c = md(Kf);
+  let c = useAtomWithSubscription(Kf);
   let h = I8();
   let f = y()(eR, eT);
   return jsxs(v, {
@@ -1286,7 +1286,7 @@ function ez(e) {
         onClick: e.onGoogleAuth
       }), jsx("p", {
         className: eN,
-        children: _$$t("auth.generic-or")
+        children: getI18nString("auth.generic-or")
       })]
     }), jsx(ZH, {
       showDomainSuggestions: !0,
@@ -1328,7 +1328,7 @@ function ez(e) {
         className: "x78zum5 x6s0dn4 xl56j7k xfifm61",
         children: jsxs("p", {
           children: [jsx("span", {
-            children: _$$t("auth.footer-sign-up-switch-form-text")
+            children: getI18nString("auth.footer-sign-up-switch-form-text")
           }), " ", jsx(_$$_, {
             href: "#",
             onClick: () => {
@@ -1337,7 +1337,7 @@ function ez(e) {
               }));
             },
             className: "x1bvjpef x8p8a2l x1ypdohk",
-            children: _$$t("auth.footer-sign-up-switch-form-link")
+            children: getI18nString("auth.footer-sign-up-switch-form-link")
           })]
         })
       }), jsx(_$$k, {
@@ -1362,7 +1362,7 @@ function ez(e) {
 }
 function eH(e) {
   let t = useDispatch();
-  let [i, r] = fp(Kf);
+  let [i, r] = useAtomValueAndSetter(Kf);
   let o = Xr(nb);
   _$$h(() => () => {
     i && r(!1);
@@ -1392,10 +1392,10 @@ function eH(e) {
         c(e.message, e.errorType);
       });
     },
-    googleText: _$$t("auth.sign-in-google-text"),
-    submitText: _$$t("auth.sign-in-submit-text"),
+    googleText: getI18nString("auth.sign-in-google-text"),
+    submitText: getI18nString("auth.sign-in-submit-text"),
     ...e,
-    header: e.fromLoggedOutDesignFile ? _$$t("auth.sign_in_to_figma") : e.header
+    header: e.fromLoggedOutDesignFile ? getI18nString("auth.sign_in_to_figma") : e.header
   });
 }
 function eX(e) {
@@ -1419,7 +1419,7 @@ function eX(e) {
         onClick: e.onGoogleAuth
       }), jsx("p", {
         className: eN,
-        children: _$$t("auth.generic-or")
+        children: getI18nString("auth.generic-or")
       })]
     }), jsx(ZH, {
       showDomainSuggestions: !0,
@@ -1447,7 +1447,7 @@ function eX(e) {
         children: jsx(_$$_2, {
           fullWidth: !0,
           color: _$$S.INFORMATION,
-          text: YD("auth.error.login_google_sso_required"),
+          text: getI18nStringAlias("auth.error.login_google_sso_required"),
           icon: _$$A4
         })
       })]
@@ -1457,7 +1457,7 @@ function eX(e) {
 function eQ(e) {
   let t = useDispatch();
   let i = Xr(nb);
-  let [o, l] = fp(Kf);
+  let [o, l] = useAtomValueAndSetter(Kf);
   let c = function () {
     let {
       getConfig
@@ -1531,13 +1531,13 @@ function eQ(e) {
     }
   }
   let C = e.header;
-  e.header && (e.header !== _$$t("auth.sign_up_for_figma") || e.fromLoggedOutDesignFile || !g) || (C = _$$t("auth.welcome-to-figma"));
+  e.header && (e.header !== getI18nString("auth.sign_up_for_figma") || e.fromLoggedOutDesignFile || !g) || (C = getI18nString("auth.welcome-to-figma"));
   return f ? jsx(eX, {
     hideGoogleSignup: v,
     showLegalSection: I,
     onGoogleAuth: E,
-    googleText: _$$t("auth.sign-up-google-text"),
-    submitText: _$$t("auth.sign-up-email-continue-text"),
+    googleText: getI18nString("auth.sign-up-google-text"),
+    submitText: getI18nString("auth.sign-up-email-continue-text"),
     ...e,
     header: C,
     onFormSubmit: w,
@@ -1547,8 +1547,8 @@ function eQ(e) {
     showLegalSection: !0,
     hideGoogleSignup: v,
     onGoogleAuth: E,
-    googleText: _$$t("auth.sign-up-google-text"),
-    submitText: _$$t("auth.sign-up-submit-text"),
+    googleText: getI18nString("auth.sign-up-google-text"),
+    submitText: getI18nString("auth.sign-up-submit-text"),
     ...e,
     header: C,
     onFormSubmit: t => {
@@ -1566,21 +1566,21 @@ function eJ(e) {
       message: e
     }));
   };
-  let s = e.auth.ssoMethod === vR.GOOGLE ? _$$t("auth.sso-gate.google") : _$$t("auth.sso-gate.saml-sso");
-  let o = _$$t("auth.sso-gate.header", {
+  let s = e.auth.ssoMethod === vR.GOOGLE ? getI18nString("auth.sso-gate.google") : getI18nString("auth.sso-gate.saml-sso");
+  let o = getI18nString("auth.sso-gate.header", {
     orgName: e.auth.orgName,
     ssoName: s
   });
-  let d = e.auth.existingSession ? _$$t("auth.sso-gate.back-with-session", {
+  let d = e.auth.existingSession ? getI18nString("auth.sso-gate.back-with-session", {
     orgName: e.auth.orgName
-  }) : _$$t("auth.sso-gate.back-without-session");
+  }) : getI18nString("auth.sso-gate.back-without-session");
   return jsxs(v, {
     ...e,
     className: eC,
     header: o,
     onSubmit: null,
     children: [e.auth.ssoMethod === vR.GOOGLE && jsx(P, {
-      text: _$$t("auth.sso-gate.log-in-google"),
+      text: getI18nString("auth.sso-gate.log-in-google"),
       onClick: () => {
         xI(t, e.auth.origin).then(e => "login" === e.type && i(), e => {
           r(e.message);
@@ -1592,7 +1592,7 @@ function eJ(e) {
         t(AP());
       },
       loading: e.auth.loading,
-      children: _$$t("auth.sso-gate.log-in-saml")
+      children: getI18nString("auth.sso-gate.log-in-saml")
     }), jsx(_$$k, {
       multiple: 4
     }), jsx("div", {
@@ -1625,13 +1625,13 @@ function e2(e) {
         Ay.redirect(e.data.meta.redirect);
       }).catch(e => {
         let i = e.data;
-        let n = _$$J(e, i?.message || _$$t("auth.default-error"));
+        let n = _$$J(e, i?.message || getI18nString("auth.default-error"));
         "invalid_session" === i.reason ? Ay.redirect("/") : t(Qg({
           message: n,
           invalidInput: RE.VERIFICATION_CODE
         }));
       }) : t(Qg({
-        message: _$$t("auth.validate-code.enter-code-message"),
+        message: getI18nString("auth.validate-code.enter-code-message"),
         invalidInput: RE.VERIFICATION_CODE
       }));
     },
@@ -1639,15 +1639,15 @@ function e2(e) {
     ...e,
     children: [jsx("div", {
       className: y()("validate_code--header--6nZt- auth_form--header--5WRrG auth_form--headerBase--jhLAT auth_form--figmaSans--XXAeN auth_brand--figmaSans--aXdNw", "validate_code--figmaSansHeader--e8MKV auth_brand--figmaSans--aXdNw"),
-      children: _$$t("auth.validate-code.header")
+      children: getI18nString("auth.validate-code.header")
     }), jsx("div", {
       className: e1,
-      children: _$$t("auth.validate-code.primary-description", {
+      children: getI18nString("auth.validate-code.primary-description", {
         email: e.auth.email
       })
     }), jsx("div", {
       className: e1,
-      children: _$$t("auth.validate-code.secondary-description")
+      children: getI18nString("auth.validate-code.secondary-description")
     }), jsx(_$$k, {
       multiple: 3
     }), jsx(gK, {
@@ -1660,7 +1660,7 @@ function e2(e) {
       onChange: e => {
         s(e.target.value);
       },
-      placeholder: _$$t("auth.two-factor.authentication-code"),
+      placeholder: getI18nString("auth.two-factor.authentication-code"),
       showUpdatedInputDesign: !0,
       value: i
     }), e.auth.invalidInput === RE.VERIFICATION_CODE && e.auth.error && jsx("div", {
@@ -1671,27 +1671,27 @@ function e2(e) {
     }), jsx(k, {
       loading: e.auth.loading,
       disabled: 6 !== i.length,
-      children: _$$t("auth.validate-code.submit-button")
+      children: getI18nString("auth.validate-code.submit-button")
     }), jsx(_$$k, {
       multiple: 2
     }), jsx("div", {
       className: "validate_code--footerRow--CJ4m0",
-      children: tx("auth.validate-code.resend-helper-text", {
+      children: renderI18nText("auth.validate-code.resend-helper-text", {
         cta: jsx(_$$_, {
           href: "#",
           className: "validate_code--link--aOlPI modal--blueLink--9GcJu blue_link--blueLink--9rlnd",
           onClick: () => {
             _$$g("resend_code", e.auth.origin);
             _$$k2.resendCode().then(() => {
-              t(_$$s2.flash(_$$t("auth.validate-code.code-resent-check-email")));
+              t(_$$s2.flash(getI18nString("auth.validate-code.code-resent-check-email")));
             }).catch(e => {
               let i = e.data;
-              let n = _$$J(e, i?.message || _$$t("auth.validate-code.code-resend-error"));
+              let n = _$$J(e, i?.message || getI18nString("auth.validate-code.code-resend-error"));
               "invalid_session" === i.reason && Ay.redirect("/");
               t(_$$s2.error(n));
             });
           },
-          children: _$$t("auth.validate-code.resend-button")
+          children: getI18nString("auth.validate-code.resend-button")
         })
       })
     })]
@@ -1841,7 +1841,7 @@ function te() {
         formState: qB.SIGN_IN
       }));
     },
-    children: tx("auth.magic_link_check_email.go_back")
+    children: renderI18nText("auth.magic_link_check_email.go_back")
   });
   useEffect(() => {
     o && Ay.redirect(s);
@@ -1853,7 +1853,7 @@ function te() {
   let b = e => 7 === e.length && /^\d+$/.test(e);
   let v = async i => {
     if (i.preventDefault(), !b(p)) {
-      e(_$$s2.error(_$$t("auth.error.wrong_code")));
+      e(_$$s2.error(getI18nString("auth.error.wrong_code")));
       return;
     }
     f(!0);
@@ -1864,9 +1864,9 @@ function te() {
       });
     } catch (t) {
       if (t?.data?.i18n?.id) {
-        let i = YD(t.data.i18n.id, t.data.i18n.params || {});
+        let i = getI18nStringAlias(t.data.i18n.id, t.data.i18n.params || {});
         e(_$$s2.error(i));
-      } else e(_$$s2.error(_$$t("auth.default-error")));
+      } else e(_$$s2.error(getI18nString("auth.default-error")));
       f(!1);
       return;
     }
@@ -1883,19 +1883,19 @@ function te() {
       children: jsx(e9, {})
     }), jsx("h1", {
       className: y()(e4, e5),
-      children: tx("auth.magic_link_check_email.check_your_inbox")
+      children: renderI18nText("auth.magic_link_check_email.check_your_inbox")
     }), jsx("p", {
       className: c,
-      children: d ? tx("auth.magic_link_check_email.body_login_v2", {
+      children: d ? renderI18nText("auth.magic_link_check_email.body_login_v2", {
         emailAddress: A
-      }) : tx("auth.magic_link_check_email.body_signup_v2", {
+      }) : renderI18nText("auth.magic_link_check_email.body_signup_v2", {
         emailAddress: A
       })
     }), d ? jsxs("p", {
       className: c,
       children: [jsx(_$$k, {
         multiple: 2
-      }), tx("auth.magic_link_check_email.body_login_with_code")]
+      }), renderI18nText("auth.magic_link_check_email.body_login_with_code")]
     }) : null, d ? jsxs("form", {
       onSubmit: v,
       children: [jsx(_$$k, {
@@ -1908,7 +1908,7 @@ function te() {
         name: RE.TOTP_KEY,
         inputMode: "numeric",
         autoComplete: "one-time-code",
-        placeholder: _$$t("auth.two-factor.authentication-code"),
+        placeholder: getI18nString("auth.two-factor.authentication-code"),
         isInvalid: !b(p),
         showUpdatedInputDesign: !0
       }), jsx(_$$k, {
@@ -1917,7 +1917,7 @@ function te() {
         type: "submit",
         loading: g,
         disabled: !b(p),
-        children: _$$t("auth.two-factor.log-in")
+        children: getI18nString("auth.two-factor.log-in")
       })]
     }) : null, jsx(_$$_, {
       className: _$$s.block.mt24.$,
@@ -1928,7 +1928,7 @@ function te() {
           trackingDescriptor: _$$c.OPEN_GMAIL
         },
         svg: _$$A2,
-        text: _$$t("auth.magic_link_check_email.open_gmail")
+        text: getI18nString("auth.magic_link_check_email.open_gmail")
       })
     }), !t.endsWith("@gmail.com") && jsx(_$$_, {
       className: _$$s.block.mt16.$,
@@ -1939,11 +1939,11 @@ function te() {
           trackingDescriptor: _$$c.OPEN_OUTLOOK
         },
         svg: _$$A5,
-        text: _$$t("auth.magic_link_check_email.open_outlook")
+        text: getI18nString("auth.magic_link_check_email.open_outlook")
       })
     }), jsx("p", {
       className: y()(c, _$$s.mt16.$),
-      children: tx("auth.magic_link_check_email.wrong_address_go_back", {
+      children: renderI18nText("auth.magic_link_check_email.wrong_address_go_back", {
         goBackLink: _
       })
     })]
@@ -2019,7 +2019,7 @@ function ta({
   return jsx(_$$N, {
     href: e() ? "/logout?cont=/login_iframe" : "/logout",
     trusted: !0,
-    children: _$$t("auth.validate-email.log-out-link")
+    children: getI18nString("auth.validate-email.log-out-link")
   });
 }
 function ts() {
@@ -2039,7 +2039,7 @@ function ts() {
       let i = _$$J(t);
       if (i) return e(_$$s2.flash(i));
     }).catch(t => {
-      let i = _$$J(t, _$$t("auth.sign-up.confirmation-email-error"));
+      let i = _$$J(t, getI18nString("auth.sign-up.confirmation-email-error"));
       return e(_$$s2.error(i));
     });
     e(kL());
@@ -2068,7 +2068,7 @@ function ts() {
     };
   }, [i]);
   return jsxs("div", {
-    className: y()(_$$s.flex.flexColumn.$$if(nW, _$$s.p28, _$$s.p36).$, e5),
+    className: y()(_$$s.flex.flexColumn.$$if(isAndroidOrIphoneNotFigmaMobile, _$$s.p28, _$$s.p36).$, e5),
     style: {
       maxWidth: "400px",
       minHeight: "120px"
@@ -2078,18 +2078,18 @@ function ts() {
       children: jsx(tr, {})
     }), jsx("h1", {
       className: y()({
-        "validate_email--mobileHeader--WExIW auth_form--header--5WRrG auth_form--headerBase--jhLAT auth_form--figmaSans--XXAeN auth_brand--figmaSans--aXdNw": nW,
-        [e4]: !nW
+        "validate_email--mobileHeader--WExIW auth_form--header--5WRrG auth_form--headerBase--jhLAT auth_form--figmaSans--XXAeN auth_brand--figmaSans--aXdNw": isAndroidOrIphoneNotFigmaMobile,
+        [e4]: !isAndroidOrIphoneNotFigmaMobile
       }),
-      children: tx("auth.magic_link_check_email.check_your_inbox")
+      children: renderI18nText("auth.magic_link_check_email.check_your_inbox")
     }), jsx("p", {
       className: y()(o, "validate_email--clickTheLink--UXJtg"),
-      children: tx("auth.validate-email.click_the_link", {
+      children: renderI18nText("auth.validate-email.click_the_link", {
         emailAddress: d
       })
-    }), nW && jsx("p", {
+    }), isAndroidOrIphoneNotFigmaMobile && jsx("p", {
       className: y()(o, _$$s.mt16.$, "validate_email--mobileValidateEmailTextWithInnerLink--H4HMt validate_email--validateEmailTextWithInnerLink--lU6fE auth_brand--text--yNin9 auth_brand--innerLink---m7Kv"),
-      children: tx("auth.validate-email.log-out-only", {
+      children: renderI18nText("auth.validate-email.log-out-only", {
         logOutLink: jsx(ta, {
           checkInIframe: () => window.self !== window.top
         })
@@ -2103,7 +2103,7 @@ function ts() {
           trackingDescriptor: _$$c.OPEN_GMAIL
         },
         svg: _$$A2,
-        text: _$$t("auth.magic_link_check_email.open_gmail")
+        text: getI18nString("auth.magic_link_check_email.open_gmail")
       })
     }), !t.endsWith("@gmail.com") && jsx(_$$_, {
       className: _$$s.block.mt16.$,
@@ -2114,26 +2114,26 @@ function ts() {
           trackingDescriptor: _$$c.OPEN_OUTLOOK
         },
         svg: _$$A5,
-        text: _$$t("auth.magic_link_check_email.open_outlook")
+        text: getI18nString("auth.magic_link_check_email.open_outlook")
       })
-    }), nW ? jsx("button", {
+    }), isAndroidOrIphoneNotFigmaMobile ? jsx("button", {
       className: y()(o, e3, _$$s.mt24.$, "validate_email--resendEmailText--iRAOS"),
       onClick: p,
-      children: tx("auth.validate-email.resend-email-text")
+      children: renderI18nText("auth.validate-email.resend-email-text")
     }) : jsxs(Fragment, {
       children: [jsx("p", {
         className: y()(o, e3, _$$s.mt16.$, e7),
-        children: tx("auth.validate-email.resend-email", {
+        children: renderI18nText("auth.validate-email.resend-email", {
           resendEmailLink: jsx(_$$N, {
             onClick: p,
             trusted: !0,
             href: "#",
-            children: _$$t("auth.validate-email.resend-email-link")
+            children: getI18nString("auth.validate-email.resend-email-link")
           })
         })
       }), jsx("p", {
         className: y()(o, e3, _$$s.mt16.$, e7),
-        children: tx("auth.validate-email.log-out-only", {
+        children: renderI18nText("auth.validate-email.log-out-only", {
           logOutLink: jsx(ta, {
             checkInIframe: () => window.self !== window.top
           })
@@ -2258,7 +2258,7 @@ function tl(e) {
   if (e.auth.formState === qB.ACCOUNT_PICKER && e.auth.accountPicker) return jsx(ex, {
     authOrigin: e.auth.origin
   });
-  if (_$$eD) return jsx(ey, {
+  if (desktopAPIInstance) return jsx(ey, {
     appType: DP.DESKTOP,
     ...e
   });
@@ -2279,7 +2279,7 @@ function tl(e) {
       name: "Sign Up",
       children: jsx(eQ, {
         onFormSubmit: r,
-        header: t ? _$$t("community.auth_modal.header") : e.header,
+        header: t ? getI18nString("community.auth_modal.header") : e.header,
         ...e
       })
     });

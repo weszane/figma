@@ -4,7 +4,7 @@ import { forwardRef, memo, useContext, useCallback, useMemo } from "react";
 import { Q as _$$Q } from "../figma_app/104130";
 import { q7, b as _$$b, bL, mc } from "../figma_app/860955";
 import { O as _$$O } from "../905/969533";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Bf } from "../905/937445";
 import { vG, IK } from "../905/210945";
 import { u as _$$u } from "../905/65923";
@@ -15,14 +15,14 @@ import { z as _$$z } from "../905/626016";
 import { L as _$$L } from "../905/858162";
 import { s as _$$s } from "../905/551945";
 import { k as _$$k } from "../905/376839";
-import { m as _$$m } from "../905/717445";
+import { getFilteredFeatureFlags } from "../905/717445";
 import { E as _$$E } from "../905/375716";
 import { Y as _$$Y } from "../905/762765";
 import { m as _$$m2 } from "../905/148147";
 import { t as _$$t2 } from "../905/398894";
 import { NLJ } from "../figma_app/763686";
 import { Hr } from "../905/871411";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { Pt } from "../figma_app/806412";
 import { useSprigWithSampling } from "../905/99656";
 import { rM } from "../figma_app/241541";
@@ -118,31 +118,31 @@ k.displayName = "EntrypointDialogTriggerButton";
 let R = {
   DROP_SHADOW: {
     icon: vG(IK("DROP_SHADOW")),
-    getLabel: () => _$$t("fullscreen.properties_panel.effects.drop_shadow")
+    getLabel: () => getI18nString("fullscreen.properties_panel.effects.drop_shadow")
   },
   INNER_SHADOW: {
     icon: vG(IK("INNER_SHADOW")),
-    getLabel: () => _$$t("fullscreen.properties_panel.effects.inner_shadow")
+    getLabel: () => getI18nString("fullscreen.properties_panel.effects.inner_shadow")
   },
   FOREGROUND_BLUR: {
     icon: vG(IK("FOREGROUND_BLUR")),
-    getLabel: () => _$$t("fullscreen.properties_panel.effects.layer_blur")
+    getLabel: () => getI18nString("fullscreen.properties_panel.effects.layer_blur")
   },
   BACKGROUND_BLUR: {
     icon: vG(IK("BACKGROUND_BLUR")),
-    getLabel: () => _$$t("fullscreen.properties_panel.effects.background_blur")
+    getLabel: () => getI18nString("fullscreen.properties_panel.effects.background_blur")
   },
   GRAIN: {
     icon: vG(IK("GRAIN")),
-    getLabel: () => _$$t("fullscreen.properties_panel.effects.texture")
+    getLabel: () => getI18nString("fullscreen.properties_panel.effects.texture")
   },
   NOISE: {
     icon: vG(IK("NOISE")),
-    getLabel: () => _$$t("fullscreen.properties_panel.effects.noise")
+    getLabel: () => getI18nString("fullscreen.properties_panel.effects.noise")
   },
   GLASS: {
     icon: vG(IK("GLASS")),
-    getLabel: () => _$$t("fullscreen.properties_panel.effects.glass")
+    getLabel: () => getI18nString("fullscreen.properties_panel.effects.glass")
   },
   REPEAT: null,
   SYMMETRY: null
@@ -168,24 +168,24 @@ let N = {
 let j = {
   SOLID: {
     icon: jsx(_$$H, {}),
-    getLabel: () => _$$t("fullscreen.properties_panel.solid")
+    getLabel: () => getI18nString("fullscreen.properties_panel.solid")
   },
   GRADIENT_LINEAR: {
     icon: jsx(_$$z, {}),
-    getLabel: () => _$$t("fullscreen.properties_panel.gradient")
+    getLabel: () => getI18nString("fullscreen.properties_panel.gradient")
   },
   PATTERN: {
     icon: jsx(_$$L, {}),
-    getLabel: () => _$$t("fullscreen.properties_panel.pattern"),
-    isEnabled: () => _$$m().ce_il_pattern ?? !1
+    getLabel: () => getI18nString("fullscreen.properties_panel.pattern"),
+    isEnabled: () => getFilteredFeatureFlags().ce_il_pattern ?? !1
   },
   IMAGE: {
     icon: jsx(_$$s, {}),
-    getLabel: () => _$$t("fullscreen.properties_panel.image")
+    getLabel: () => getI18nString("fullscreen.properties_panel.image")
   },
   VIDEO: {
     icon: jsx(_$$k, {}),
-    getLabel: () => _$$t("fullscreen.properties_panel.video")
+    getLabel: () => getI18nString("fullscreen.properties_panel.video")
   }
 };
 function U() {
@@ -232,15 +232,15 @@ let Y = memo(function (e) {
 let el = {
   Basic: {
     icon: jsx(_$$t2, {}),
-    getLabel: () => _$$t("fullscreen.properties_panel.stroke_settings.basic_stroke")
+    getLabel: () => getI18nString("fullscreen.properties_panel.stroke_settings.basic_stroke")
   },
   Dynamic: {
     icon: jsx(K, {}),
-    getLabel: () => _$$t("fullscreen.properties_panel.stroke_settings.dynamic_stroke")
+    getLabel: () => getI18nString("fullscreen.properties_panel.stroke_settings.dynamic_stroke")
   },
   Brush: {
     icon: jsx(Y, {}),
-    getLabel: () => _$$t("fullscreen.properties_panel.stroke_settings.brush_stroke")
+    getLabel: () => getI18nString("fullscreen.properties_panel.stroke_settings.brush_stroke")
   }
 };
 function ed(e) {
@@ -262,7 +262,7 @@ let $$ec0 = ed(function ({
   return jsxs(bL, {
     manager,
     children: [jsx(k, {
-      "aria-label": _$$t("fullscreen.properties_panel.add"),
+      "aria-label": getI18nString("fullscreen.properties_panel.add"),
       ...getTriggerProps(),
       children: jsx(_$$O, {})
     }), jsx(mc, {
@@ -293,7 +293,7 @@ let $$eu1 = ed(function ({
   return jsxs(bL, {
     manager,
     children: [jsx(k, {
-      "aria-label": _$$t("fullscreen.properties_panel.add"),
+      "aria-label": getI18nString("fullscreen.properties_panel.add"),
       ...getTriggerProps(),
       children: jsx(_$$O, {})
     }), jsx(mc, {
@@ -322,7 +322,7 @@ let $$ep2 = ed(function ({
   return jsxs(bL, {
     manager,
     children: [jsx(k, {
-      "aria-label": _$$t("fullscreen.properties_panel.add"),
+      "aria-label": getI18nString("fullscreen.properties_panel.add"),
       ...getTriggerProps(),
       children: jsx(_$$O, {})
     }), jsx(mc, {
@@ -351,7 +351,7 @@ let $$em4 = ed(function ({
   let {
     Sprig
   } = useSprigWithSampling();
-  let s = md(T6);
+  let s = useAtomWithSubscription(T6);
   let {
     activeToolId,
     activateTool
@@ -390,7 +390,7 @@ let $$em4 = ed(function ({
     Dynamic: () => {
       if (E(), e?.(), p(Hr, zk.NO), b("CENTER", zk.NO), I("MITER", zk.NO), h && hS(h) && h.length > 0) {
         g([], zk.NO);
-        let e = _$$t("visual_bell.dynamic_stroke_vector_network_warning");
+        let e = getI18nString("visual_bell.dynamic_stroke_vector_network_warning");
         Y5.showVisualBellWithUndo("dynamic-stroke-vector-network-warning", e, !1);
       }
       m(Y4, zk.YES);
@@ -411,7 +411,7 @@ let $$em4 = ed(function ({
   return jsxs(bL, {
     manager,
     children: [jsx(k, {
-      "aria-label": _$$t("fullscreen.properties_panel.add"),
+      "aria-label": getI18nString("fullscreen.properties_panel.add"),
       ...getTriggerProps(),
       recordingKey: Pt(i, "triggerButton"),
       children: jsx(_$$O, {})
@@ -443,7 +443,7 @@ let $$eh3 = ed(function ({
   return jsxs(bL, {
     manager,
     children: [jsx(k, {
-      "aria-label": _$$t("fullscreen.properties_panel.add"),
+      "aria-label": getI18nString("fullscreen.properties_panel.add"),
       ...getTriggerProps(),
       children: jsx(_$$O, {})
     }), jsx(mc, {

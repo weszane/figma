@@ -6,14 +6,14 @@ import { getFeatureFlags } from "../905/601108";
 import { k as _$$k2 } from "../905/651849";
 import { xf } from "../figma_app/416935";
 import { debugState } from "../905/407919";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { ZB as _$$ZB } from "../905/491152";
-import { $D } from "../905/11";
-import { Lo } from "../905/714362";
+import { reportError } from "../905/11";
+import { logInfo } from "../905/714362";
 import { YH, gU } from "../figma_app/930338";
-import { nl, Lg } from "../figma_app/257275";
+import { isInteractionPathCheck, Lg } from "../figma_app/897289";
 import { XHR } from "../905/910117";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { N6 } from "../figma_app/471982";
 import { vf, Yp, mZ, F8, Mj, WD } from "../figma_app/808294";
@@ -28,7 +28,7 @@ import { FFileType } from "../figma_app/191312";
 import { Eh } from "../figma_app/12796";
 import { eZ, xp, HB } from "../figma_app/455620";
 import { d as _$$d } from "../905/44199";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { o1, aP } from "../figma_app/10554";
 import { PN } from "../905/54385";
 import { am, FW, Ye, UX, Kd, XS, pR, ho, Av, xg, Dk, Pe, MP, Wt, ZV, Lu, k0, ZQ, bH, f5, Q7, u8 } from "../figma_app/155287";
@@ -79,26 +79,26 @@ function J({
   }(e, r), t && !e) throw Error(`Expected parameters to be defined for "${r}" marked as parameterOnly.`);
 }
 let Z = {
-  [nT.Design]: FW.FIGMA,
-  [nT.DevHandoff]: FW.DEV,
-  [nT.Whiteboard]: FW.FIGJAM,
-  [nT.Slides]: FW.SLIDES,
-  [nT.Sites]: FW.SITES,
-  [nT.Figmake]: FW.SITES,
-  [nT.Cooper]: FW.BUZZ,
-  [nT.Illustration]: FW.FIGMA
+  [FEditorType.Design]: FW.FIGMA,
+  [FEditorType.DevHandoff]: FW.DEV,
+  [FEditorType.Whiteboard]: FW.FIGJAM,
+  [FEditorType.Slides]: FW.SLIDES,
+  [FEditorType.Sites]: FW.SITES,
+  [FEditorType.Figmake]: FW.SITES,
+  [FEditorType.Cooper]: FW.BUZZ,
+  [FEditorType.Illustration]: FW.FIGMA
 };
 export function $$Q12(e) {
   return Z[e];
 }
 let ee = {
-  [FW.FIGMA]: nT.Design,
-  [FW.DEV]: nT.DevHandoff,
-  [FW.INSPECT]: nT.DevHandoff,
-  [FW.FIGJAM]: nT.Whiteboard,
-  [FW.SLIDES]: nT.Slides,
-  [FW.SITES]: nT.Sites,
-  [FW.BUZZ]: nT.Cooper
+  [FW.FIGMA]: FEditorType.Design,
+  [FW.DEV]: FEditorType.DevHandoff,
+  [FW.INSPECT]: FEditorType.DevHandoff,
+  [FW.FIGJAM]: FEditorType.Whiteboard,
+  [FW.SLIDES]: FEditorType.Slides,
+  [FW.SITES]: FEditorType.Sites,
+  [FW.BUZZ]: FEditorType.Cooper
 };
 export function $$et8(e) {
   return ee[e];
@@ -193,22 +193,22 @@ export class $$ep70 {
   }
   static forLocalPlugin(e) {
     let t = e.manifest.permissions || [];
-    if (Lo("ValidatedPluginPermissions", "Validating permissions for local plugin", {
+    if (logInfo("ValidatedPluginPermissions", "Validating permissions for local plugin", {
       pluginID: e.manifest.id,
       requestedPermissions: t
     }), getFeatureFlags().plugins_internal_apis) return new $$ep70(t, "*");
     let r = ec(t);
-    r.length < t.length && $D(_$$e.EXTENSIBILITY, Error("Untrusted local plugin denied internal api permissions"));
+    r.length < t.length && reportError(_$$e.EXTENSIBILITY, Error("Untrusted local plugin denied internal api permissions"));
     return new $$ep70(r, void 0);
   }
   static forInstalledPlugin(e) {
     let t = e.manifest.permissions || [];
-    if (Lo("ValidatedPluginPermissions", "Validating permissions for installed plugin", {
+    if (logInfo("ValidatedPluginPermissions", "Validating permissions for installed plugin", {
       pluginID: e.plugin_id,
       requestedPermissions: t
     }), eZ(e.plugin_id)) return new $$ep70(ec(t, xp(e.plugin_id)), HB(e.plugin_id));
     let r = ec(t);
-    r.length < t.length && $D(_$$e.UNOWNED, Error("Untrusted installed plugin denied internal api permissions"));
+    r.length < t.length && reportError(_$$e.UNOWNED, Error("Untrusted installed plugin denied internal api permissions"));
     return new $$ep70(r, void 0);
   }
 }
@@ -658,21 +658,21 @@ export function $$eG49(e) {
   return t;
 }
 export function $$eV78(e) {
-  return Wl(e, _$$t("community.publishing.extension_icon_image"));
+  return Wl(e, getI18nString("community.publishing.extension_icon_image"));
 }
 export async function $$eH77(e, t, r) {
   $$eV78(e);
   return await eK(e, {
     width: DK,
     height: DK
-  }, t, _$$t("community.publishing.error_icon_image_dimensions"), r);
+  }, t, getI18nString("community.publishing.error_icon_image_dimensions"), r);
 }
 export function $$ez66(e) {
   return Wl(e, "Artwork image");
 }
 export function $$eW63(e) {
   let t = e?.[0];
-  if (!t) throw Error(_$$t("community.publishing.error_file_not_found"));
+  if (!t) throw Error(getI18nString("community.publishing.error_file_not_found"));
   return t;
 }
 async function eK(e, t, r, n, i) {
@@ -820,40 +820,40 @@ export function $$eQ55(e) {
 }
 export function $$e035(e, t, r, n) {
   let i = {};
-  (e.email_validated_at || (i.emailNotVerifiedError = _$$t("community.publishing.please_verify_your_email_address_to_publish")), n || (e.saml_sso_only || e.google_sso_only || e.two_factor_app_enabled || e.phone_number) && (t.code !== aP.FAILURE || t.error !== _$$t("community.publishing.you_must_enable_two_factor_authentication_to_publish"))) ? !n && (e.plugin_publishing_blocked_at || e.community_blocked_at || t.code === aP.FAILURE && t.error === _$$t("community.publishing.you_must_verify_your_account_details_to_publish")) ? i.accountDetailsChangedError = _$$t("community.publishing.we_detected_a_change_to_your_account_details_please_contact_support_figma_com_to_publish_this_plugin") : t.code === aP.FAILURE && t.error && (i.other = t.error) : i.twoFactorAuthDisabledError = r ? _$$t("community.publishing.please_enable_two_factor_authentication_to_publish_this_widget") : _$$t("community.publishing.please_enable_two_factor_authentication_to_publish_this_plugin");
+  (e.email_validated_at || (i.emailNotVerifiedError = getI18nString("community.publishing.please_verify_your_email_address_to_publish")), n || (e.saml_sso_only || e.google_sso_only || e.two_factor_app_enabled || e.phone_number) && (t.code !== aP.FAILURE || t.error !== getI18nString("community.publishing.you_must_enable_two_factor_authentication_to_publish"))) ? !n && (e.plugin_publishing_blocked_at || e.community_blocked_at || t.code === aP.FAILURE && t.error === getI18nString("community.publishing.you_must_verify_your_account_details_to_publish")) ? i.accountDetailsChangedError = getI18nString("community.publishing.we_detected_a_change_to_your_account_details_please_contact_support_figma_com_to_publish_this_plugin") : t.code === aP.FAILURE && t.error && (i.other = t.error) : i.twoFactorAuthDisabledError = r ? getI18nString("community.publishing.please_enable_two_factor_authentication_to_publish_this_widget") : getI18nString("community.publishing.please_enable_two_factor_authentication_to_publish_this_plugin");
   return i;
 }
 export function $$e147(e, t, r, n) {
   if (!e) return {};
   let i = {};
-  0 === _$$Yp(e.name).length && (i.name = _$$t("community.publishing.name_must_not_be_empty"));
-  0 === _$$Yp(e.tagline).length && (i.tagline = _$$t("community.publishing.add_a_tagline"));
-  _$$ZB(e.description) && (i.description = _$$t("community.publishing.add_a_description"));
+  0 === _$$Yp(e.name).length && (i.name = getI18nString("community.publishing.name_must_not_be_empty"));
+  0 === _$$Yp(e.tagline).length && (i.tagline = getI18nString("community.publishing.add_a_tagline"));
+  _$$ZB(e.description) && (i.description = getI18nString("community.publishing.add_a_description"));
   let a = _$$Yp(e.supportContact);
-  if (0 === a.length ? i.supportContact = _$$t("community.publishing.support_contact_must_not_be_empty") : xf(a) || gU(a) || (i.supportContact = _$$t("community.publishing.support_contact_must_be_a_valid_email_or_url")), 0 === _$$Yp(e.iconSrc).length && (i.iconImageError = _$$t("community.publishing.icon_cant_be_empty")), i.carouselMedia = vC(e.carouselMedia), e.categoryId || (i.categoryId = _$$t("community.publishing.category_cant_be_empty")), void 0 === e.price || t.permissions?.includes("payments") || n?.third_party_m10n_status !== PN.FLAGGED || (i.freemiumRequiredForMigrating = _$$t("community.seller.freemium_required_for_migration")), e.playgroundFigFile && t.editorType?.length === 1) {
+  if (0 === a.length ? i.supportContact = getI18nString("community.publishing.support_contact_must_not_be_empty") : xf(a) || gU(a) || (i.supportContact = getI18nString("community.publishing.support_contact_must_be_a_valid_email_or_url")), 0 === _$$Yp(e.iconSrc).length && (i.iconImageError = getI18nString("community.publishing.icon_cant_be_empty")), i.carouselMedia = vC(e.carouselMedia), e.categoryId || (i.categoryId = getI18nString("community.publishing.category_cant_be_empty")), void 0 === e.price || t.permissions?.includes("payments") || n?.third_party_m10n_status !== PN.FLAGGED || (i.freemiumRequiredForMigrating = getI18nString("community.seller.freemium_required_for_migration")), e.playgroundFigFile && t.editorType?.length === 1) {
     let n = t.editorType[0];
     let a = e.playgroundFigFile.editor_type;
     if (n === FW.FIGMA && "design" !== a || n === FW.FIGJAM && "whiteboard" !== a) {
-      let e = n === FW.FIGMA ? _$$t("community.publishing.playground_file.figma") : _$$t("community.publishing.playground_file.figjam");
-      i.playgroundFigFile = r ? _$$t("community.publishing.widget_playground_file_editor_type_error", {
+      let e = n === FW.FIGMA ? getI18nString("community.publishing.playground_file.figma") : getI18nString("community.publishing.playground_file.figjam");
+      i.playgroundFigFile = r ? getI18nString("community.publishing.widget_playground_file_editor_type_error", {
         editorType: e
-      }) : _$$t("community.publishing.plugin_playground_file_editor_type_error", {
+      }) : getI18nString("community.publishing.plugin_playground_file_editor_type_error", {
         editorType: e
       });
     }
   }
-  r && 0 === _$$Yp(e.widgetSnapshotImageSrc).length && (i.widgetSnapshotImageError = _$$t("community.publishing.snapshot_must_not_be_empty"));
+  r && 0 === _$$Yp(e.widgetSnapshotImageSrc).length && (i.widgetSnapshotImageError = getI18nString("community.publishing.snapshot_must_not_be_empty"));
   let s = function (e, t) {
     if (!e.isPaid || e.hasPaymentsApi) return null;
-    if (!e.price) return _$$t("community.publishing.price_is_required_for_paid_resources");
-    if (Yp(e.price)) return e.price < mZ ? _$$t("community.seller.paid_resource_minimum_err") : _$$t("community.seller.paid_resource_maximum_err");
-    if (F8(e.price)) return _$$t("community.seller.prices_must_follow_format");
+    if (!e.price) return getI18nString("community.publishing.price_is_required_for_paid_resources");
+    if (Yp(e.price)) return e.price < mZ ? getI18nString("community.seller.paid_resource_minimum_err") : getI18nString("community.seller.paid_resource_maximum_err");
+    if (F8(e.price)) return getI18nString("community.seller.prices_must_follow_format");
     if (!t || AC(t)) return null;
     let r = t?.monetized_resource_metadata?.price;
-    return e.isSubscription && r && Mj(r / 100, e.price) ? _$$t("community.seller.price_increase_limit") : !t?.monetized_resource_metadata?.can_increase_price && r && WD(r / 100, e.price) ? _$$t("community.seller.price_can_only_be_increased_once_every_thirty_days") : null;
+    return e.isSubscription && r && Mj(r / 100, e.price) ? getI18nString("community.seller.price_increase_limit") : !t?.monetized_resource_metadata?.can_increase_price && r && WD(r / 100, e.price) ? getI18nString("community.seller.price_can_only_be_increased_once_every_thirty_days") : null;
   }(e, n);
   s && (i.price = s);
-  let o = e.isPaid && e.annualDiscount && e.isAnnualDiscountActive ? Number.isInteger(e.annualDiscount) ? null : _$$t("community.seller.discount_must_follow_format") : null;
+  let o = e.isPaid && e.annualDiscount && e.isAnnualDiscountActive ? Number.isInteger(e.annualDiscount) ? null : getI18nString("community.seller.discount_must_follow_format") : null;
   o && (i.annualDiscount = o);
   return i;
 }
@@ -861,13 +861,13 @@ export function $$e20(e) {
   if (!e) return {};
   let t = {};
   let r = _$$Yp(e.name).length;
-  r < 4 ? t.name = _$$t("community.publishing.name_must_be_4_characters_long") : r > 100 && (t.name = _$$t("community.publishing.name_must_be_at_most_100_characters_long"));
-  _$$Yp(e.description).length > 1e4 && (t.description = _$$t("community.publishing.description_must_be_at_most_10000_characters_long"));
-  _$$Yp(e.newVersionReleaseNotes).length > 1e4 && (t.newVersionReleaseNotes = _$$t("community.publishing.release_notes_must_be_at_most_10000_characters_long"));
-  _$$Yp(e.creatorPolicy).length > 1e4 && (t.creatorPolicy = _$$t("community.publishing.creator_policy_must_be_at_most_10000_characters_long"));
+  r < 4 ? t.name = getI18nString("community.publishing.name_must_be_4_characters_long") : r > 100 && (t.name = getI18nString("community.publishing.name_must_be_at_most_100_characters_long"));
+  _$$Yp(e.description).length > 1e4 && (t.description = getI18nString("community.publishing.description_must_be_at_most_10000_characters_long"));
+  _$$Yp(e.newVersionReleaseNotes).length > 1e4 && (t.newVersionReleaseNotes = getI18nString("community.publishing.release_notes_must_be_at_most_10000_characters_long"));
+  _$$Yp(e.creatorPolicy).length > 1e4 && (t.creatorPolicy = getI18nString("community.publishing.creator_policy_must_be_at_most_10000_characters_long"));
   let n = _$$Lg(e.tagline);
   n && (t.tagline = n);
-  _$$Yp(e.supportContact).length > 100 && (t.supportContact = _$$t("community.publishing.support_contact_must_be_at_most_100_characters_long"));
+  _$$Yp(e.supportContact).length > 100 && (t.supportContact = getI18nString("community.publishing.support_contact_must_be_at_most_100_characters_long"));
   e.iconImageError && (t.iconImageError = e.iconImageError);
   e.coverImageError && (t.coverImageError = e.coverImageError);
   return t;
@@ -887,11 +887,11 @@ export function $$e313(e) {
   if (o) {
     if (a) {
       let e = Object.values(localPlugins).filter(e => e.plugin_id === o);
-      e.length > 1 && $$ti54(_$$t("community.publishing.found_multiple_local_widgets_with_the_same_manifest_id"));
+      e.length > 1 && $$ti54(getI18nString("community.publishing.found_multiple_local_widgets_with_the_same_manifest_id"));
       1 === e.length && (t = e[0]);
     } else {
       if (!(t = publishedCanvasWidgetVersions[o]?.[e.widgetVersionId] || publishedWidgets[o] && $$eN75(publishedWidgets[o]))) return;
-      t.id === e.widgetVersionId || nl() || Lg() || $D(_$$e.UNOWNED, Error(`plugin versionId=${t?.id} doesn't match node.widgetVersionId=${e.widgetVersionId}`));
+      t.id === e.widgetVersionId || isInteractionPathCheck() || Lg() || reportError(_$$e.UNOWNED, Error(`plugin versionId=${t?.id} doesn't match node.widgetVersionId=${e.widgetVersionId}`));
     }
     return t;
   }
@@ -921,11 +921,11 @@ export function $$e414(e) {
       canRun: !1,
       message: "Cannot run plugin with invalid editor type"
     };
-    if (editorType === nT.DevHandoff && !$$to20(plugin)) return {
+    if (editorType === FEditorType.DevHandoff && !$$to20(plugin)) return {
       canRun: !1,
       message: "Cannot run non-devmode plugin in dev mode"
     };
-    if (editorType === nT.Slides && !tm(plugin)) return {
+    if (editorType === FEditorType.Slides && !tm(plugin)) return {
       canRun: !1,
       message: "Cannot run non-slides plugin in slides mode"
     };
@@ -1086,18 +1086,18 @@ export function $$t_79(e, t) {
 function th(e, t, r) {
   if (!e) return !0;
   switch (e) {
-    case nT.Whiteboard:
-    case nT.Design:
-    case nT.Illustration:
+    case FEditorType.Whiteboard:
+    case FEditorType.Design:
+    case FEditorType.Illustration:
       return $$es9(Z[e], t.manifest.editorType);
-    case nT.DevHandoff:
+    case FEditorType.DevHandoff:
       return $$to20(t, r);
-    case nT.Slides:
+    case FEditorType.Slides:
       return tm(t);
-    case nT.Cooper:
+    case FEditorType.Cooper:
       return $$tg58(t);
-    case nT.Figmake:
-    case nT.Sites:
+    case FEditorType.Figmake:
+    case FEditorType.Sites:
       return !1;
     default:
       throwTypeError(e);
@@ -1118,7 +1118,7 @@ export function $$tE11(e) {
   return !!tN(e) && $$ty38(debugState.getState().selectedView);
 }
 export function $$ty38(e) {
-  return XE(e) === nT.Cooper;
+  return XE(e) === FEditorType.Cooper;
 }
 export function $$tb45(e) {
   return e?.manifest.editorType?.length === 1 && Pe(e.manifest.editorType);
@@ -1168,7 +1168,7 @@ export function $$tw42(e) {
   return e && t && $$es9(t, e.plugin.manifest.editorType) && ("dev" !== t || $$to20(e.plugin)) && ("slides" !== t || tm(e.plugin)) && !r;
 }
 export function $$tO46() {
-  return _$$T() ? "plugins-menu-open-directory-vscode" : Ay.mac ? "plugins-menu-open-directory-mac" : "plugins-menu-open-directory-win";
+  return _$$T() ? "plugins-menu-open-directory-vscode" : BrowserInfo.mac ? "plugins-menu-open-directory-mac" : "plugins-menu-open-directory-win";
 }
 export const $H = $$e20;
 export const $u = $$tC1;

@@ -1,10 +1,10 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useDispatch } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { D, _ as _$$_ } from "../figma_app/169991";
 import { Fragment as _$$Fragment } from "react";
 import { s_ } from "../905/17223";
@@ -34,13 +34,13 @@ function y({
     dataTestId: "pending-response-banner",
     children: jsx("div", {
       className: _$$s.preWrap.overflowBreakWord.$,
-      children: _$$t("community.detail_view.data_security_modal_pending", {
+      children: getI18nString("community.detail_view.data_security_modal_pending", {
         date: e.updatedAt
       })
     })
   }) : e.status === FRequestStatusType.APPROVED ? jsx("div", {
     className: _$$s.gap4.flex.$,
-    children: t ? tx("community.detail_view.data_security_modal_badge_info_widget") : tx("community.detail_view.data_security_modal_badge_info_plugin")
+    children: t ? renderI18nText("community.detail_view.data_security_modal_badge_info_widget") : renderI18nText("community.detail_view.data_security_modal_badge_info_plugin")
   }) : e.status === FRequestStatusType.REJECTED ? jsx(z, {
     variant: "warning",
     orientation: "horizontal",
@@ -48,7 +48,7 @@ function y({
     dataTestId: "rejected-response-banner",
     children: jsx("div", {
       className: _$$s.preWrap.overflowBreakWord.$,
-      children: _$$t("community.detail_view.data_security_modal_rejected", {
+      children: getI18nString("community.detail_view.data_security_modal_rejected", {
         date: e.updatedAt
       })
     })
@@ -63,16 +63,16 @@ let w = Ju(function ({
     href: "https://help.figma.com/hc/articles/16354660649495",
     target: "_blank",
     trusted: !0,
-    children: tx("community.detail_view.data_security_modal_assessment_link")
+    children: renderI18nText("community.detail_view.data_security_modal_assessment_link")
   });
-  let r = t ? tx("community.detail_view.data_security_modal_explanation_widget", {
+  let r = t ? renderI18nText("community.detail_view.data_security_modal_explanation_widget", {
     assessmentProgramLink: i
-  }) : tx("community.detail_view.data_security_modal_explanation_plugin", {
+  }) : renderI18nText("community.detail_view.data_security_modal_explanation_plugin", {
     assessmentProgramLink: i
   });
   return jsxs(utilityNoop, {
     size: 600,
-    title: _$$t("community.detail_view.data_security"),
+    title: getI18nString("community.detail_view.data_security"),
     children: [jsx(s_, {
       dispatch: a
     }), jsx("div", {
@@ -231,17 +231,17 @@ export function $$L1({
     } = e;
     return status === FRequestStatusType.REJECTED ? "admin_manage" === t ? jsxs("div", {
       className: _$$s.flex.gap4.$,
-      children: [tx("community.badge.extension_security_updated_on", {
+      children: [renderI18nText("community.badge.extension_security_updated_on", {
         date: updatedAt
       }), jsx(B, {
         svg: _$$A2,
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("community.detail_view.data_security_modal_rejected_tooltip"),
+        "data-tooltip": getI18nString("community.detail_view.data_security_modal_rejected_tooltip"),
         className: "extension_security_response--infoIcon--miNLG"
       })]
-    }) : null : status === FRequestStatusType.APPROVED ? tx("community.badge.extension_security_approved") : status === FRequestStatusType.PENDING ? "admin_manage" === t ? tx("community.badge.extension_security_updated_on", {
+    }) : null : status === FRequestStatusType.APPROVED ? renderI18nText("community.badge.extension_security_approved") : status === FRequestStatusType.PENDING ? "admin_manage" === t ? renderI18nText("community.badge.extension_security_updated_on", {
       date: updatedAt
-    }) : tx("community.badge.extension_security_pending") : void throwTypeError(status);
+    }) : renderI18nText("community.badge.extension_security_pending") : void throwTypeError(status);
   }(e, t);
   if (!m) return null;
   let p = e.status === FRequestStatusType.REJECTED ? jsx(D, {
@@ -266,7 +266,7 @@ export function $$L1({
             isWidget: a
           }
         }));
-        sx("Admin Plugin Review Modal", {
+        trackEventAnalytics("Admin Plugin Review Modal", {
           entryPoint: t,
           isWidget: a,
           status: e.status,

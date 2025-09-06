@@ -1,4 +1,4 @@
-import { eU } from "../figma_app/27355";
+import { atom } from "../figma_app/27355";
 import { p } from "../figma_app/952952";
-export let $$a0 = eU(p.WEBSITE);
+export let $$a0 = atom(p.WEBSITE);
 export const j = $$a0;

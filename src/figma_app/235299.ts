@@ -1,5 +1,5 @@
 import { getFeatureFlags } from "../905/601108";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 export function $$a0(e) {
   let {
     msalEnabled,
@@ -12,16 +12,16 @@ export function $$a0(e) {
     flags: ["design", "edit", "slides"],
     children: [{
       action: "run-multi-stack-auto-layout",
-      displayText: _$$t("fullscreen_actions.run-multi-stack-auto-layout")
+      displayText: getI18nString("fullscreen_actions.run-multi-stack-auto-layout")
     }, {
       action: "destroy-all-auto-layout",
-      displayText: _$$t("fullscreen_actions.destroy-all-auto-layout"),
+      displayText: getI18nString("fullscreen_actions.destroy-all-auto-layout"),
       disabledAndForceVisible: !0
     }, {
       separator: !0
     }, {
       action: "resize-to-fit",
-      displayText: _$$t("fullscreen_actions.resize-to-fit"),
+      displayText: getI18nString("fullscreen_actions.resize-to-fit"),
       disabledAndForceVisible: !0
     }]
   } : {
@@ -30,13 +30,13 @@ export function $$a0(e) {
     flags: ["design", "edit", "slides"],
     children: [{
       action: "destroy-all-auto-layout",
-      displayText: _$$t("fullscreen_actions.destroy-all-auto-layout"),
+      displayText: getI18nString("fullscreen_actions.destroy-all-auto-layout"),
       disabledAndForceVisible: !0
     }, {
       separator: !0
     }, {
       action: "resize-to-fit",
-      displayText: _$$t("fullscreen_actions.resize-to-fit"),
+      displayText: getI18nString("fullscreen_actions.resize-to-fit"),
       disabledAndForceVisible: !0
     }]
   } : {};
@@ -46,16 +46,16 @@ export function $$s1() {
     separator: !0
   }, {
     action: "set-selection-hug-horizontal",
-    displayText: _$$t("fullscreen_actions.set-hug-width")
+    displayText: getI18nString("fullscreen_actions.set-hug-width")
   }, {
     action: "set-selection-hug-vertical",
-    displayText: _$$t("fullscreen_actions.set-hug-height")
+    displayText: getI18nString("fullscreen_actions.set-hug-height")
   }, {
     action: "set-selection-fill-horizontal",
-    displayText: _$$t("fullscreen_actions.set-fill-width")
+    displayText: getI18nString("fullscreen_actions.set-fill-width")
   }, {
     action: "set-selection-fill-vertical",
-    displayText: _$$t("fullscreen_actions.set-fill-height")
+    displayText: getI18nString("fullscreen_actions.set-fill-height")
   }] : [];
   return {
     name: "multi-stack-selection-submenu",
@@ -63,15 +63,15 @@ export function $$s1() {
     flags: ["design", "edit", "slides", "sites"],
     children: [{
       action: "run-multi-stack-auto-layout",
-      displayText: _$$t("fullscreen_actions.run-multi-stack-auto-layout")
+      displayText: getI18nString("fullscreen_actions.run-multi-stack-auto-layout")
     }, {
       action: "destroy-all-auto-layout",
-      displayText: _$$t("fullscreen_actions.destroy-all-auto-layout")
+      displayText: getI18nString("fullscreen_actions.destroy-all-auto-layout")
     }, {
       separator: !0
     }, {
       action: "resize-to-fit",
-      displayText: _$$t("fullscreen_actions.resize-to-fit")
+      displayText: getI18nString("fullscreen_actions.resize-to-fit")
     }, ...e]
   };
 }

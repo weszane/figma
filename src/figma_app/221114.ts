@@ -21,21 +21,21 @@ import { m1T, Oin, AWq, Egt } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import v from "classnames";
 import x from "../vendor/805353";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { j as _$$j } from "../905/564614";
 import { Uz } from "../905/63728";
 import { AS, u9 } from "../figma_app/661371";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { $J } from "../905/491152";
 import { uA, cZ, Pt, C0 } from "../figma_app/806412";
-import { $D } from "../905/11";
-import { x1 } from "../905/714362";
+import { reportError } from "../905/11";
+import { logError } from "../905/714362";
 import { Ph } from "../figma_app/637027";
 import { h1 } from "../905/986103";
 import { kt } from "../figma_app/858013";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { E as _$$E2 } from "../905/984674";
 import { V as _$$V } from "../905/223767";
@@ -58,7 +58,7 @@ import { hM } from "../905/851937";
 import { b as _$$b2 } from "../905/165519";
 import { V_, Nb, Eg, vF, _h } from "../figma_app/841351";
 import { Bi } from "../905/652992";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { lF } from "../figma_app/915202";
 import { Ib } from "../905/129884";
 import { AI, pW } from "../905/218608";
@@ -80,33 +80,33 @@ export function $$eN0(e) {
   return e === m1T.HISTORY || e === m1T.COMPARE_CHANGES || e === m1T.DEV_HANDOFF_HISTORY;
 }
 export function $$eC6(e) {
-  return e.label ? e.label : e.participating_users_array && e.participating_users_array[0] ? e.participating_users_array[0] : e.user.handle ? e.user.handle : (x1("version", "Verison history got user without a handle", {
+  return e.label ? e.label : e.participating_users_array && e.participating_users_array[0] ? e.participating_users_array[0] : e.user.handle ? e.user.handle : (logError("version", "Verison history got user without a handle", {
     item: e
-  }), $D(_$$e.SCENEGRAPH_AND_SYNC, Error("Verison history got user without a handle")), "(unknown user)");
+  }), reportError(_$$e.SCENEGRAPH_AND_SYNC, Error("Verison history got user without a handle")), "(unknown user)");
 }
 export function $$ew2(e) {
   switch (e.item.view) {
     case "branch_child_create":
-      return tx("collaboration.feedback.new_branch_created");
+      return renderI18nText("collaboration.feedback.new_branch_created");
     case "branch_child_merge":
-      return tx("collaboration.feedback.branch_merged");
+      return renderI18nText("collaboration.feedback.branch_merged");
     case "branch_child_update":
-      return tx("collaboration.feedback.branch_updated_from_main_file");
+      return renderI18nText("collaboration.feedback.branch_updated_from_main_file");
     case "branch_create":
-      return tx("collaboration.feedback.branch_created");
+      return renderI18nText("collaboration.feedback.branch_created");
     case "branch_merge":
-      return tx("collaboration.feedback.branch_merged_into_main_and_archived");
+      return renderI18nText("collaboration.feedback.branch_merged_into_main_and_archived");
     case "branch_update":
-      return tx("collaboration.feedback.updated_from_main");
+      return renderI18nText("collaboration.feedback.updated_from_main");
     case "branch_archive":
-      return tx("collaboration.feedback.branch_archived");
+      return renderI18nText("collaboration.feedback.branch_archived");
     case "branch_restore":
-      return tx("collaboration.feedback.branch_restored");
+      return renderI18nText("collaboration.feedback.branch_restored");
     case "file_restore":
-      if (e.item.label) return tx("collaboration.feedback.version_restored_label", {
+      if (e.item.label) return renderI18nText("collaboration.feedback.version_restored_label", {
         label: e.item.label
       });
-      return tx("collaboration.feedback.version_restored");
+      return renderI18nText("collaboration.feedback.version_restored");
   }
   return jsx(Fragment, {
     children: $$eC6(e.item)
@@ -146,12 +146,12 @@ export class $$eR4 extends uA {
     });
     this.onClick = N()(e => this._onClick(e), 300);
     this.disabledOnClickHandler = cZ(this, "click", () => {
-      if (sx("CTA Clicked", {
+      if (trackEventAnalytics("CTA Clicked", {
         name: "Disabled Version History",
         teamId: this.props.team?.id
       }), this.props.isStarterTeam) {
         if (!this.props.team) {
-          $D(_$$e.MONETIZATION_UPGRADES, Error("Paywall: no team present"));
+          reportError(_$$e.MONETIZATION_UPGRADES, Error("Paywall: no team present"));
           return;
         }
         this.props.dispatch(to({
@@ -185,7 +185,7 @@ export class $$eR4 extends uA {
       this.props.dispatch(sf({
         view: "fullscreen",
         fileKey: this.props.branchFileKey,
-        editorType: nT.Design
+        editorType: FEditorType.Design
       }));
     });
     this.onCompareClick = cZ(this, "click", e => {
@@ -226,10 +226,10 @@ export class $$eR4 extends uA {
         return t && !t.deleted_at ? jsx(_$$E, {
           className: qC,
           onClick: this.onBranchClick,
-          children: e || (t.name ?? tx("collaboration.feedback.branch"))
+          children: e || (t.name ?? renderI18nText("collaboration.feedback.branch"))
         }) : jsx("span", {
           className: at,
-          children: t?.name ?? tx("collaboration.feedback.branch")
+          children: t?.name ?? renderI18nText("collaboration.feedback.branch")
         });
       }
     };
@@ -273,10 +273,10 @@ export class $$eR4 extends uA {
     (this.props.isActive || this.props.isComparing) && (d = SU + " " + d);
     this.props.onSelect && (d = kD + " " + d);
     let c = this.props.isActive && !a ? Nh : this.state.expandedDescription ? lV : i ? LF : h_;
-    let u = this.state.expandedDescription ? tx("collaboration.feedback.show_less") : tx("collaboration.feedback.show_more");
+    let u = this.state.expandedDescription ? renderI18nText("collaboration.feedback.show_less") : renderI18nText("collaboration.feedback.show_more");
     let p = null;
     let g = Object.keys(this.props.participatingImagesDict ?? {}).length;
-    let f = _$$t("collaboration.feedback.version_editor_count", {
+    let f = getI18nString("collaboration.feedback.version_editor_count", {
       numEditors: g
     });
     if (this.props.participatingImagesDict) {
@@ -287,7 +287,7 @@ export class $$eR4 extends uA {
           children: [(!this.props.first || "current_version" !== this.props.versionId) && $_(t, 15), this.generateEditorName(r, e)]
         }, r)), g > 4 && !this.props.isActive && jsx("div", {
           className: lw,
-          children: tx("collaboration.feedback.num_editors_number_editor_count_more", {
+          children: renderI18nText("collaboration.feedback.num_editors_number_editor_count_more", {
             numEditors: g - 4
           })
         }, "number-additional-editors")]
@@ -322,7 +322,7 @@ export class $$eR4 extends uA {
     if (this.props.isBranchingVersion) switch (this.props.view) {
       case "branch_child_create":
         e = jsx(_$$o, {});
-        y = tx("collaboration.feedback.branch_child_create", {
+        y = renderI18nText("collaboration.feedback.branch_child_create", {
           link: this.generateBranchLink()
         });
         this.props.isPreview && this.props.first && !this.props.hideLine && (E = zj);
@@ -330,13 +330,13 @@ export class $$eR4 extends uA {
         break;
       case "branch_child_merge":
         e = jsx(_$$C, {});
-        y = tx("collaboration.feedback.merged", {
+        y = renderI18nText("collaboration.feedback.merged", {
           link: this.generateBranchLink(this.props.label)
         });
         break;
       case "branch_child_update":
         e = jsx(_$$z, {});
-        y = tx("collaboration.feedback.branch_child_update", {
+        y = renderI18nText("collaboration.feedback.branch_child_update", {
           link: this.generateBranchLink()
         });
         this.props.isPreview && this.props.first && !this.props.hideLine && (E = zj);
@@ -344,30 +344,30 @@ export class $$eR4 extends uA {
         break;
       case "branch_merge":
         e = jsx(_$$C, {});
-        y = tx("collaboration.feedback.branch_merge", {
-          link: this.generateBranchLink(_$$t("collaboration.feedback.main_branch_name"))
+        y = renderI18nText("collaboration.feedback.branch_merge", {
+          link: this.generateBranchLink(getI18nString("collaboration.feedback.main_branch_name"))
         });
         break;
       case "branch_create":
         e = jsx(_$$o, {});
-        y = tx("collaboration.feedback.branch_created");
+        y = renderI18nText("collaboration.feedback.branch_created");
         break;
       case "branch_update":
         e = jsx(_$$o, {});
-        y = tx("collaboration.feedback.branch_updated_from", {
-          link: this.generateBranchLink(_$$t("collaboration.feedback.main_branch_name"))
+        y = renderI18nText("collaboration.feedback.branch_updated_from", {
+          link: this.generateBranchLink(getI18nString("collaboration.feedback.main_branch_name"))
         });
         break;
       case "branch_archive":
         e = jsx(_$$z, {});
-        y = tx("collaboration.feedback.branch_archived");
+        y = renderI18nText("collaboration.feedback.branch_archived");
         break;
       default:
         e = jsx(_$$z, {});
     }
     let T = [];
-    this.props.version?.frameCreated && T.push(this.props.isSection ? tx("collaboration.feedback.compare_changes_modal.section_created") : tx("collaboration.feedback.compare_changes_modal.frame_created"));
-    this.props.version?.lastViewed && T.push(tx("collaboration.feedback.compare_changes_modal.last_viewed_by_you"));
+    this.props.version?.frameCreated && T.push(this.props.isSection ? renderI18nText("collaboration.feedback.compare_changes_modal.section_created") : renderI18nText("collaboration.feedback.compare_changes_modal.frame_created"));
+    this.props.version?.lastViewed && T.push(renderI18nText("collaboration.feedback.compare_changes_modal.last_viewed_by_you"));
     s && !l && this.props.time ? T.push(jsx("div", {
       className: IF,
       children: jsx($$eO1, {
@@ -384,7 +384,7 @@ export class $$eR4 extends uA {
         className: KD
       }), jsx("div", {
         className: _$$$D,
-        children: tx("collaboration.feedback.current_file")
+        children: renderI18nText("collaboration.feedback.current_file")
       })]
     }));
     let I = jsx(Fragment, {
@@ -456,17 +456,17 @@ export class $$eR4 extends uA {
     let C = jsx("button", {
       onClick: this.onCompareClick,
       className: kr,
-      children: tx("collaboration.feedback.compare")
+      children: renderI18nText("collaboration.feedback.compare")
     });
     let w = jsx("button", {
       onClick: this.onCompareCurrentClick,
       className: kr,
-      children: tx("collaboration.feedback.compare")
+      children: renderI18nText("collaboration.feedback.compare")
     });
     let O = jsx("button", {
       onClick: this.props.onDoneComparingClick,
       className: kr,
-      children: tx("collaboration.feedback.done_version_history")
+      children: renderI18nText("collaboration.feedback.done_version_history")
     });
     return l && !this.props.showAutosaves ? null : jsx("li", {
       className: d,
@@ -546,7 +546,7 @@ function eL({
       children: [jsxs(_$$E, {
         ...(r ? {} : getContextMenuTriggerProps()),
         onClick: e,
-        "aria-label": _$$t("collaboration.feedback.view_version_button_label"),
+        "aria-label": getI18nString("collaboration.feedback.view_version_button_label"),
         "aria-pressed": t,
         "data-testid": r ? "version-row-button-current" : "version-row-button",
         className: _$$eP,
@@ -569,9 +569,9 @@ function eP({
   return a ? jsxs(bL, {
     manager,
     children: [jsx(_$$K, {
-      "aria-label": _$$t("collaboration.feedback.more_options"),
+      "aria-label": getI18nString("collaboration.feedback.more_options"),
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": _$$t("collaboration.feedback.more_options"),
+      "data-tooltip": getI18nString("collaboration.feedback.more_options"),
       recordingKey: Pt(e, "versonContext"),
       "data-test-id": "dots-menu-icon-button",
       ...getTriggerProps(),
@@ -598,10 +598,10 @@ function eD({
       className: NM,
       children: [jsx(_$$E2, {
         fontWeight: "semi-bold",
-        children: tx(r ? "upsell.history.need_to_travel_back_in_time" : "upsell.history.everything_else_is_history")
+        children: renderI18nText(r ? "upsell.history.need_to_travel_back_in_time" : "upsell.history.everything_else_is_history")
       }), jsx("div", {
         children: e ? jsx(_$$E2, {
-          children: tx("upsell.history.upsell_upgrade_description", {
+          children: renderI18nText("upsell.history.upsell_upgrade_description", {
             upgradeLink: jsx(Ph, {
               className: s6,
               onClick: t,
@@ -612,12 +612,12 @@ function eD({
               },
               trusted: !0,
               children: jsx(_$$E2, {
-                children: tx("upsell.history.upsell_upgrade")
+                children: renderI18nText("upsell.history.upsell_upgrade")
               })
             })
           })
         }) : jsx(_$$E2, {
-          children: tx("upsell.history.upsell_learn_more_description", {
+          children: renderI18nText("upsell.history.upsell_learn_more_description", {
             upgradeLink: jsx(Ph, {
               className: s6,
               href: "/pricing",
@@ -625,7 +625,7 @@ function eD({
               trackingProperties: {
                 canUserAccessProFeature: !1
               },
-              children: tx("upsell.history.learn_more")
+              children: renderI18nText("upsell.history.learn_more")
             })
           })
         })
@@ -637,7 +637,7 @@ function ek() {
   return jsx(Fragment, {
     children: jsx("span", {
       className: ot,
-      children: Ay.mac ? tx("collaboration.feedback.shortcut_mac") : tx("collaboration.feedback.shortcut")
+      children: BrowserInfo.mac ? renderI18nText("collaboration.feedback.shortcut_mac") : renderI18nText("collaboration.feedback.shortcut")
     })
   });
 }
@@ -705,7 +705,7 @@ class eM extends uA {
         isLoadingVersion: !0,
         loadingVersionId: e.id
       });
-      sx("History Version Savepoint Viewed", {
+      trackEventAnalytics("History Version Savepoint Viewed", {
         savepointId: e.id,
         savedAt: e.touched_at
       });
@@ -716,11 +716,11 @@ class eM extends uA {
         let t = this.getVersionByID(e);
         if (t && !this.props.modalShown) {
           let e;
-          if (null != t.label && t.label.length > 0) e = _$$t("collaboration.feedback.viewing_version", {
+          if (null != t.label && t.label.length > 0) e = getI18nString("collaboration.feedback.viewing_version", {
             label: t.label
           });else {
             let r = xX(t.touched_at);
-            e = _$$t("collaboration.feedback.viewing_version", {
+            e = getI18nString("collaboration.feedback.viewing_version", {
               label: r
             });
           }
@@ -799,7 +799,7 @@ class eM extends uA {
         if (!t) return;
         if (0 === AWq.getChunkChangeCount()) {
           Egt.clearSelection();
-          let e = _$$t("collaboration.feedback.no_visible_changes");
+          let e = getI18nString("collaboration.feedback.no_visible_changes");
           e.length > 56 && (e = e.substring(0, 56) + "\u2026");
           this.props.dispatch(_$$F.dequeue({}));
           this.props.dispatch(_$$F.enqueue({
@@ -808,7 +808,7 @@ class eM extends uA {
           }));
         } else {
           let e = null != t.label && t.label.length > 0 ? t.label : xX(t.touched_at);
-          let r = _$$t("collaboration.feedback.comparing_changes_toast", {
+          let r = getI18nString("collaboration.feedback.comparing_changes_toast", {
             fromVersionLabel: e
           });
           r.length > 56 && (r = r.substring(0, 56) + "\u2026");
@@ -863,7 +863,7 @@ class eM extends uA {
       let e = this.getOpenFile();
       let t = e.teamId && this.props.teams[e.teamId];
       if (!t) {
-        $D(_$$e.MONETIZATION_UPGRADES, Error("Paywall: no team present"));
+        reportError(_$$e.MONETIZATION_UPGRADES, Error("Paywall: no team present"));
         return;
       }
       this.props.dispatch(to({
@@ -1011,7 +1011,7 @@ class eM extends uA {
             }), p ? jsx(_$$r, {}) : jsx(_$$R, {})]
           }), jsx("div", {
             className: aJ,
-            children: tx("collaboration.feedback.autosave_count", {
+            children: renderI18nText("collaboration.feedback.autosave_count", {
               count: _
             })
           })]
@@ -1040,7 +1040,7 @@ class eM extends uA {
   }
   getOpenFile() {
     let e = this.props.openFile;
-    null == e && x1("history", "history view should only be possible to open when we have a file");
+    null == e && logError("history", "history view should only be possible to open when we have a file");
     debug(null != e, "history view should only be possible to open when we have a file");
     return e;
   }
@@ -1048,7 +1048,7 @@ class eM extends uA {
     return this.props.openFile?.canEdit;
   }
   showCompareChanges() {
-    return getFeatureFlags().version_diffing && this.props.selectedView.editorType === nT.Design;
+    return getFeatureFlags().version_diffing && this.props.selectedView.editorType === FEditorType.Design;
   }
   render() {
     let e = this.getOpenFile();
@@ -1071,7 +1071,7 @@ class eM extends uA {
       children: !this.props.versionHistory.loading && u9(this.props.versionHistory) && jsx(_$$E, {
         className: nf,
         onClick: this.loadMore,
-        children: tx("collaboration.feedback.show_older")
+        children: renderI18nText("collaboration.feedback.show_older")
       })
     });
     let p = this.props.versionHistory.docHasChanged && !this.props.versionHistory.loading;
@@ -1115,7 +1115,7 @@ class eM extends uA {
             children: [!this.hasLabeled && !E && !g && jsx("div", {
               className: fy,
               children: jsx("div", {
-                children: tx("collaboration.feedback.press_shortcut_to_add_to_version_history_while_editing", {
+                children: renderI18nText("collaboration.feedback.press_shortcut_to_add_to_version_history_while_editing", {
                   shortcut: jsx(ek, {})
                 })
               })
@@ -1124,7 +1124,7 @@ class eM extends uA {
                 checkpointKey: _.checkpoint_key,
                 description: _.description,
                 dispatch: this.props.dispatch,
-                displayText: tx("collaboration.feedback.get_version_text_linked_version_linked_version", {
+                displayText: renderI18nText("collaboration.feedback.get_version_text_linked_version_linked_version", {
                   versionText: jsx($$ew2, {
                     item: _
                   })
@@ -1156,7 +1156,7 @@ class eM extends uA {
               }), p && jsx($$eR4, {
                 addSavepoint: this.addSavepoint,
                 dispatch: this.props.dispatch,
-                displayText: tx("collaboration.feedback.current_version"),
+                displayText: renderI18nText("collaboration.feedback.current_version"),
                 editorType: e.editorType,
                 first: !0,
                 hideLine: 0 === i.length || !this.state.showAutosaves && 0 === y,
@@ -1204,7 +1204,7 @@ export function $$ej5(e) {
     className: N1,
     children: [jsx("h2", {
       className: qd,
-      children: tx("collaboration.feedback.version_history")
+      children: renderI18nText("collaboration.feedback.version_history")
     }), jsxs("div", {
       className: _$$s.flex.itemsCenter.gap4.$,
       children: [filterOptions && jsx(eU, {
@@ -1216,18 +1216,18 @@ export function $$ej5(e) {
         buttonRef: l
       }), !isViewOnly && jsx(_$$K, {
         onClick: addSavepoint,
-        "aria-label": _$$t("collaboration.feedback.add_to_version_history_tooltip"),
+        "aria-label": getI18nString("collaboration.feedback.add_to_version_history_tooltip"),
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("collaboration.feedback.add_to_version_history_tooltip"),
+        "data-tooltip": getI18nString("collaboration.feedback.add_to_version_history_tooltip"),
         "data-testid": "versions-add-savepoint",
         recordingKey: Pt(e, "plusVersion"),
         ref: l,
         children: jsx(_$$x, {})
       }), jsx(_$$K, {
         onClick: onClose,
-        "aria-label": _$$t("collaboration.feedback.close_tooltip"),
+        "aria-label": getI18nString("collaboration.feedback.close_tooltip"),
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("collaboration.feedback.close_tooltip"),
+        "data-tooltip": getI18nString("collaboration.feedback.close_tooltip"),
         recordingKey: Pt(e, "button-close"),
         ref: l,
         children: jsx(_$$L, {})
@@ -1255,12 +1255,12 @@ function eU(e) {
       className: A()(pq, {
         [vR]: e.showOnlyUserVersionHistory
       }),
-      "aria-label": _$$t("collaboration.feedback.filter_tooltip"),
+      "aria-label": getI18nString("collaboration.feedback.filter_tooltip"),
       children: jsx(_$$S, {})
     }), jsxs(mc, {
       children: [jsxs(z6, {
         title: jsx(r1, {
-          children: _$$t("collaboration.feedback.filter_menu_title")
+          children: getI18nString("collaboration.feedback.filter_menu_title")
         }),
         onChange: t => {
           e.setShowOnlyUserVersionHistory("onlyUser" === t);
@@ -1268,16 +1268,16 @@ function eU(e) {
         value: e.showOnlyUserVersionHistory ? "onlyUser" : "all",
         children: [jsx(CU, {
           value: "all",
-          children: tx("collaboration.feedback.all_filter_text")
+          children: renderI18nText("collaboration.feedback.all_filter_text")
         }), jsx(CU, {
           value: "onlyUser",
           disabled: e.isViewOnly,
-          children: tx("collaboration.feedback.only_yours_filter")
+          children: renderI18nText("collaboration.feedback.only_yours_filter")
         })]
       }), jsx(H_, {
         checked: e.showAutosaves,
         onChange: () => e.setShowAutosaves(!e.showAutosaves),
-        children: tx("collaboration.feedback.show_autosave_versions")
+        children: renderI18nText("collaboration.feedback.show_autosave_versions")
       })]
     })]
   });
@@ -1346,7 +1346,7 @@ function eG({
           children: o ? jsx(_$$r, {}) : jsx(_$$R, {})
         }), jsx("div", {
           className: aJ,
-          children: tx("collaboration.feedback.autosave_count", {
+          children: renderI18nText("collaboration.feedback.autosave_count", {
             count: e.length
           })
         })]

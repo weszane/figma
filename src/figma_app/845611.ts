@@ -8,7 +8,7 @@ import { tT } from "../905/723791";
 import { I7 } from "../figma_app/594947";
 import { kt } from "../figma_app/858013";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Y } from "../905/830372";
 import { Te } from "../figma_app/765689";
 import { FuG } from "../figma_app/43951";
@@ -27,20 +27,20 @@ let $$C17 = "admin_requests_dashboard";
 let $$w14 = "billing_group_admin_requests_dashboard";
 export var $$O11 = (e => (e.NEWEST_FIRST = "NEWEST_FIRST", e.OLDEST_FIRST = "OLDEST_FIRST", e))($$O11 || {});
 let $$R13 = {
-  NEWEST_FIRST: () => t("admin_dashboard.requests.sort.newest_first"),
-  OLDEST_FIRST: () => t("admin_dashboard.requests.sort.oldest_first")
+  NEWEST_FIRST: () => getI18nString("admin_dashboard.requests.sort.newest_first"),
+  OLDEST_FIRST: () => getI18nString("admin_dashboard.requests.sort.oldest_first")
 };
 let L = {
   [Te.DESIGN]: {
-    name: () => t("admin_dashboard.requests.design_seat"),
+    name: () => getI18nString("admin_dashboard.requests.design_seat"),
     icon: jsx(H, {})
   },
   [Te.WHITEBOARD]: {
-    name: () => t("admin_dashboard.requests.figjam_seat"),
+    name: () => getI18nString("admin_dashboard.requests.figjam_seat"),
     icon: jsx(j, {})
   },
   [Te.DEV_MODE]: {
-    name: () => t("admin_dashboard.requests.devmode_seat"),
+    name: () => getI18nString("admin_dashboard.requests.devmode_seat"),
     icon: jsx(P, {})
   }
 };

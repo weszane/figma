@@ -1,13 +1,13 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useState, useCallback, useEffect, useRef, useLayoutEffect } from "react";
 import { useDispatch } from "../vendor/514228";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Rs } from "../figma_app/288654";
 import { useSprigWithSampling } from "../905/99656";
 import { CY, u4 } from "../figma_app/637027";
 import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { Y as _$$Y } from "../905/830372";
 import { $ as _$$$ } from "../905/355181";
@@ -57,7 +57,7 @@ import { I as _$$I } from "../905/343721";
 import { aI, JA, lx } from "../figma_app/558929";
 import { nx } from "../figma_app/12796";
 import { Df } from "../figma_app/300692";
-import { oD } from "../figma_app/53721";
+import { mapEditorTypeToFileType } from "../figma_app/53721";
 import { FW } from "../figma_app/155287";
 import { j7, oB } from "../905/929976";
 import { Um } from "../905/848862";
@@ -73,15 +73,15 @@ let L = Ju(function ({
   return jsx(yX, {
     confirmationTitle: jsx(_$$E, {
       fontWeight: "semi-bold",
-      children: tx("resources_tab.extension_revoke_modal.title", {
+      children: renderI18nText("resources_tab.extension_revoke_modal.title", {
         extensionName: e
       })
     }),
-    confirmText: _$$t("resources_tab.extension_revoke_modal.confirmation_button"),
+    confirmText: getI18nString("resources_tab.extension_revoke_modal.confirmation_button"),
     onConfirm: t,
     popStack: !0,
     children: jsx(_$$E, {
-      children: tx("widget" === s ? "resources_tab.extension_revoke_modal.body.widget" : "resources_tab.extension_revoke_modal.body.plugin", {
+      children: renderI18nText("widget" === s ? "resources_tab.extension_revoke_modal.body.widget" : "resources_tab.extension_revoke_modal.body.plugin", {
         orgName: jsx(_$$E, {
           fontWeight: "semi-bold",
           children: a
@@ -105,20 +105,20 @@ function F(e) {
   a = 1 === requesters.length ? jsx(_$$E, {
     fontSize: 11,
     color: "secondary",
-    children: tx("resources_tab.approved_plugins.modal.requested_by.one", {
+    children: renderI18nText("resources_tab.approved_plugins.modal.requested_by.one", {
       requesterName: requesters[0].name
     })
   }) : 2 === requesters.length ? jsx(_$$E, {
     fontSize: 11,
     color: "secondary",
-    children: tx("resources_tab.approved_plugins.modal.requested_by.two", {
+    children: renderI18nText("resources_tab.approved_plugins.modal.requested_by.two", {
       requesterName1: requesters[0].name,
       requesterName2: requesters[1].name
     })
   }) : jsx(_$$E, {
     fontSize: 11,
     color: "secondary",
-    children: tx("resources_tab.approved_plugins.modal.requested_by.many", {
+    children: renderI18nText("resources_tab.approved_plugins.modal.requested_by.many", {
       requesterName: requesters[0].name,
       numOthers: requesters.length - 1
     })
@@ -217,7 +217,7 @@ function q({
     } catch {
       o(_$$F.enqueue({
         error: !0,
-        message: _$$t("resources_tab.approved_plugins.modal.failed_to_update_plugin_approval")
+        message: getI18nString("resources_tab.approved_plugins.modal.failed_to_update_plugin_approval")
       }));
     }
   };
@@ -240,7 +240,7 @@ function q({
             onClick: a,
             variant: "text"
           }), jsx(_$$E, {
-            children: tx("plugin" === v ? "resources_tab.approved_plugins.modal.approve_plugin" : "resources_tab.approved_plugins.modal.approve_widget")
+            children: renderI18nText("plugin" === v ? "resources_tab.approved_plugins.modal.approve_plugin" : "resources_tab.approved_plugins.modal.approve_widget")
           })]
         }), jsx(kq, {
           onChange: B,
@@ -248,7 +248,7 @@ function q({
           query: $,
           clearSearch: () => B(""),
           hideXIcon: !0,
-          placeholder: _$$t("resources_tab.approved_plugins.modal.search_workspaces"),
+          placeholder: getI18nString("resources_tab.approved_plugins.modal.search_workspaces"),
           smallFont: !0
         })]
       })
@@ -264,7 +264,7 @@ function q({
           dataTestId: "org-allowlist-toggle"
         })
       }), jsx(_$$E, {
-        children: tx("resources_tab.approved_plugins.modal.allow_for_all_files_and_drafts_in_org_workspaces", {
+        children: renderI18nText("resources_tab.approved_plugins.modal.allow_for_all_files_and_drafts_in_org_workspaces", {
           orgName: t.name
         })
       })]
@@ -275,7 +275,7 @@ function q({
         variant: "warning",
         orientation: "vertical",
         iconSrc: _$$A3,
-        children: "plugin" === v ? _$$t("resources_tab.approved_plugins.modal.individual_workspaces_approval_warning") : _$$t("resources_tab.approved_widgets.modal.individual_workspaces_approval_warning")
+        children: "plugin" === v ? getI18nString("resources_tab.approved_plugins.modal.individual_workspaces_approval_warning") : getI18nString("resources_tab.approved_widgets.modal.individual_workspaces_approval_warning")
       })
     }), jsx(_$$P, {
       className: _$$s.flexGrow1.$,
@@ -309,7 +309,7 @@ function q({
         children: [jsx(_$$$, {
           onClick: a,
           children: jsx(_$$E, {
-            children: tx("resources_tab.approved_plugins.modal.cancel")
+            children: renderI18nText("resources_tab.approved_plugins.modal.cancel")
           })
         }), jsx(_$$$, {
           variant: "primary",
@@ -317,7 +317,7 @@ function q({
             let e = () => {
               o(_$$F.enqueue({
                 error: !0,
-                message: _$$t("resources_tab.approved_plugins.modal.failed_to_update_plugin_approval")
+                message: getI18nString("resources_tab.approved_plugins.modal.failed_to_update_plugin_approval")
               }));
             };
             try {
@@ -343,14 +343,14 @@ function q({
           disabled: !W,
           dataTestId: "approve-button",
           children: jsx(_$$E, {
-            children: tx("resources_tab.approved_plugins.modal.approve")
+            children: renderI18nText("resources_tab.approved_plugins.modal.approve")
           })
         })]
       }), "manage" === r && jsxs(Fragment, {
         children: [jsx(_$$$, {
           onClick: a,
           children: jsx(_$$E, {
-            children: tx("resources_tab.approved_plugins.modal.back")
+            children: renderI18nText("resources_tab.approved_plugins.modal.back")
           })
         }), jsx(_$$$, {
           variant: "primary",
@@ -375,7 +375,7 @@ function q({
           dataTestId: "save-changes-button",
           disabled: !V,
           children: jsx(_$$E, {
-            children: tx("resources_tab.approved_plugins.modal.save_changes")
+            children: renderI18nText("resources_tab.approved_plugins.modal.save_changes")
           })
         })]
       })]
@@ -473,7 +473,7 @@ let ee = {
     }
   }
 };
-let et = new Map([["Last Week", tx("resources_tab.extension_usage_data.past_7_days")], ["Last Month", tx("resources_tab.extension_usage_data.past_30_days")], ["Last Year", tx("resources_tab.extension_usage_data.past_year")]]);
+let et = new Map([["Last Week", renderI18nText("resources_tab.extension_usage_data.past_7_days")], ["Last Month", renderI18nText("resources_tab.extension_usage_data.past_30_days")], ["Last Year", renderI18nText("resources_tab.extension_usage_data.past_year")]]);
 function ea({
   users: e,
   showUpsell: t,
@@ -493,7 +493,7 @@ function ea({
           editorType: null
         }
       }));
-      sx("Admin Plugin Review Modal", {
+      trackEventAnalytics("Admin Plugin Review Modal", {
         action: "Upgrade to Enterprise"
       });
     },
@@ -502,17 +502,17 @@ function ea({
     "data-testid": "upgrade-to-enterprise-link",
     children: jsx(_$$E, {
       fontSize: 11,
-      children: tx("resources_tab.extension_usage_data.upgrade_enterprise_link")
+      children: renderI18nText("resources_tab.extension_usage_data.upgrade_enterprise_link")
     })
   });
   let c = "widget" === a ? jsx(_$$E, {
     fontSize: 11,
-    children: tx("resources_tab.extension_usage_data.upgrade_enterprise_widgets", {
+    children: renderI18nText("resources_tab.extension_usage_data.upgrade_enterprise_widgets", {
       upgradeLink: o
     })
   }) : jsx(_$$E, {
     fontSize: 11,
-    children: tx("resources_tab.extension_usage_data.upgrade_enterprise_plugins", {
+    children: renderI18nText("resources_tab.extension_usage_data.upgrade_enterprise_plugins", {
       upgradeLink: o
     })
   });
@@ -545,11 +545,11 @@ function ea({
           }), t && jsx(_$$E, {
             fontSize: 11,
             color: "secondary",
-            children: tx("resources_tab.extension_usage_data.placeholder_runs")
+            children: renderI18nText("resources_tab.extension_usage_data.placeholder_runs")
           }), !t && jsx(_$$E, {
             fontSize: 11,
             color: "secondary",
-            children: tx("resources_tab.extension_usage_data.runs", {
+            children: renderI18nText("resources_tab.extension_usage_data.runs", {
               numberOfRuns: e.n_extension_actions
             })
           })]
@@ -596,11 +596,11 @@ function ei(e) {
   let p = [jsx(c$, {
     onClick: () => o(0),
     recordingKey: "userViewOption",
-    children: tx("resources_tab.extension_usage_data.users")
+    children: renderI18nText("resources_tab.extension_usage_data.users")
   }, 0), jsx(c$, {
     onClick: () => o(1),
     recordingKey: "workspaceViewOption",
-    children: tx("resources_tab.extension_usage_data.workspaces")
+    children: renderI18nText("resources_tab.extension_usage_data.workspaces")
   }, 1)];
   let [g, x] = useState("Last Week");
   let [b, v] = useState(!1);
@@ -648,7 +648,7 @@ function ei(e) {
           defaultClass: "",
           onClick: a ? lQ : () => m(!c),
           dataTestId: "user-workspace-dropdown",
-          children: [0 === l ? tx("resources_tab.extension_usage_data.users") : tx("resources_tab.extension_usage_data.workspaces"), !a && jsx(_$$B, {
+          children: [0 === l ? renderI18nText("resources_tab.extension_usage_data.users") : renderI18nText("resources_tab.extension_usage_data.workspaces"), !a && jsx(_$$B, {
             svg: _$$A4,
             className: _$$s.colorIconSecondary.inlineBlock.pl8.$
           })]
@@ -675,7 +675,7 @@ function ei(e) {
           children: jsx(_$$E, {
             fontSize: 11,
             color: "secondary",
-            children: tx("resources_tab.extension_usage_data.total_runs")
+            children: renderI18nText("resources_tab.extension_usage_data.total_runs")
           })
         })]
       }), jsxs("div", {
@@ -691,7 +691,7 @@ function ei(e) {
           children: jsx(_$$E, {
             fontSize: 11,
             color: "secondary",
-            children: tx("resources_tab.extension_usage_data.users")
+            children: renderI18nText("resources_tab.extension_usage_data.users")
           })
         })]
       }), jsx("div", {
@@ -743,22 +743,22 @@ function ed({
   let b = 0 === t ? _$$s.flex.flexColumn.pb16.$ : _$$s.flex.flexColumn.pb16.pt16.bt1.colorBorder.bSolid.$;
   switch (a) {
     case "approve":
-      l = p ? _$$t("extension_decline_modal.approved_access_workspace", {
+      l = p ? getI18nString("extension_decline_modal.approved_access_workspace", {
         workspace: p
-      }) : _$$t("extension_decline_modal.approved_access_org");
+      }) : getI18nString("extension_decline_modal.approved_access_org");
       break;
     case "decline":
-      l = _$$t("extension_decline_modal.declined_request");
+      l = getI18nString("extension_decline_modal.declined_request");
       break;
     case "revoke":
-      l = p ? _$$t("extension_decline_modal.revoked_access_workspace", {
+      l = p ? getI18nString("extension_decline_modal.revoked_access_workspace", {
         workspace: p
-      }) : _$$t("extension_decline_modal.revoked_access_org");
+      }) : getI18nString("extension_decline_modal.revoked_access_org");
       break;
     case "add":
-      l = p ? _$$t("extension_decline_modal.add_access_workspace", {
+      l = p ? getI18nString("extension_decline_modal.add_access_workspace", {
         workspace: p
-      }) : _$$t("extension_decline_modal.add_access_org");
+      }) : getI18nString("extension_decline_modal.add_access_org");
       break;
     default:
       l = "";
@@ -863,12 +863,12 @@ function eu(e) {
     fontSize: 11,
     fontWeight: "regular",
     color: "success",
-    children: tx("resources_tab.approved_plugins.table.approved_for_all_workspaces")
+    children: renderI18nText("resources_tab.approved_plugins.table.approved_for_all_workspaces")
   }) : numWorkspaces > 0 && (t = jsx(_$$E, {
     fontSize: 11,
     fontWeight: "regular",
     color: "success",
-    children: tx("resources_tab.approved_plugins.table.approved_for_workspace", {
+    children: renderI18nText("resources_tab.approved_plugins.table.approved_for_workspace", {
       numWorkspaces
     })
   })), t) ? jsxs("div", {
@@ -902,12 +902,12 @@ function em(e) {
           fontSize: 11,
           fontWeight: "medium",
           color: "requests" === m ? "default" : "secondary",
-          children: tx("resources_tab.extension_request_sidebar.requests")
+          children: renderI18nText("resources_tab.extension_request_sidebar.requests")
         })
       }), isAllowed && jsx("button", {
         onClick: () => {
           p("usage");
-          sx("Admin Plugin Review Modal", {
+          trackEventAnalytics("Admin Plugin Review Modal", {
             action: "Extension usage tab"
           });
         },
@@ -916,7 +916,7 @@ function em(e) {
           fontSize: 11,
           fontWeight: "medium",
           color: "usage" === m ? "default" : "secondary",
-          children: tx("resources_tab.extension_usage_data.usage")
+          children: renderI18nText("resources_tab.extension_usage_data.usage")
         })
       })]
     }), jsx(eu, {
@@ -959,7 +959,7 @@ function ej({
           plugin: t
         }), "review" === e && jsx(_$$E, {
           color: "secondary",
-          children: tx("resources_tab.approved_plugins.modal.user_count", {
+          children: renderI18nText("resources_tab.approved_plugins.modal.user_count", {
             count: i
           })
         })]
@@ -1005,7 +1005,7 @@ function ey({
     }), a && jsx(CY, {
       trusted: !0,
       onClick: () => l(e => !e),
-      children: r ? _$$t("resources_tab.approved_plugins.modal.show_less") : _$$t("resources_tab.approved_plugins.modal.show_more")
+      children: r ? getI18nString("resources_tab.approved_plugins.modal.show_less") : getI18nString("resources_tab.approved_plugins.modal.show_more")
     })]
   });
 }
@@ -1052,18 +1052,18 @@ function ek({
   let [t, a, ...s] = e;
   return t ? a ? 0 === s.length ? jsx(_$$E, {
     color: "secondary",
-    children: tx("resources_tab.approved_plugins.modal.attribution_two_creators", {
+    children: renderI18nText("resources_tab.approved_plugins.modal.attribution_two_creators", {
       creator1: t.name,
       creator2: a.name
     })
   }) : jsx(_$$E, {
     color: "secondary",
-    children: tx("resources_tab.approved_plugins.modal.attribution_multiple_creators", {
+    children: renderI18nText("resources_tab.approved_plugins.modal.attribution_multiple_creators", {
       creator1: t.name
     })
   }) : jsx(_$$E, {
     color: "secondary",
-    children: tx("resources_tab.approved_plugins.modal.attribution_single_creator", {
+    children: renderI18nText("resources_tab.approved_plugins.modal.attribution_single_creator", {
       creator: t.name
     })
   }) : null;
@@ -1084,7 +1084,7 @@ function eE({
     className: _$$s.flex.flexColumn.gap8.$,
     children: [jsx(_$$E, {
       color: "secondary",
-      children: tx("resources_tab.approved_plugins.modal.security")
+      children: renderI18nText("resources_tab.approved_plugins.modal.security")
     }), jsx(_$$b, {
       securityFormResponse: t,
       entryPoint: a,
@@ -1104,7 +1104,7 @@ function eC({
     className: _$$s.flex.flexColumn.gap8.$,
     children: [jsx(_$$E, {
       color: "secondary",
-      children: tx("resources_tab.approved_plugins.modal.licenses")
+      children: renderI18nText("resources_tab.approved_plugins.modal.licenses")
     }), jsx(_$$x, {
       isMonetizedResource: null != e.monetizedResourceMetadataId,
       isHubFile: !1
@@ -1200,12 +1200,12 @@ function eq(e) {
                 extension: e,
                 fullscreenEditorType: i
               }));
-              sx("Admin Plugin Review Modal", {
+              trackEventAnalytics("Admin Plugin Review Modal", {
                 orgId: t,
                 extensionId: e.id,
                 extensionType: e.isWidget ? "widget" : "plugin",
                 mode: a,
-                editorType: oD(i),
+                editorType: mapEditorTypeToFileType(i),
                 action: "Try it out"
               });
             }
@@ -1228,13 +1228,13 @@ function eq(e) {
       dataTestId: "universal-editor-button",
       disabled: w,
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": w && y ? _$$t("resources_tab.approved_plugins.modal.try_it_out_ecc_tooltip", {
+      "data-tooltip": w && y ? getI18nString("resources_tab.approved_plugins.modal.try_it_out_ecc_tooltip", {
         orgName: y
       }) : void 0,
       children: jsxs("div", {
         className: _$$s.flex.itemsCenter.gap4.$,
         children: [jsx(_$$E, {
-          children: tx("resources_tab.approved_plugins.modal.try_it_out")
+          children: renderI18nText("resources_tab.approved_plugins.modal.try_it_out")
         }), jsx(_$$I, {
           icon: "chevron-down-16"
         })]
@@ -1275,23 +1275,23 @@ function e$(e) {
   return jsx(_$$$, {
     onClick: () => {
       p();
-      sx("Admin Plugin Review Modal", {
+      trackEventAnalytics("Admin Plugin Review Modal", {
         orgId,
         extensionId: extension.id,
         extensionType: extension.isWidget ? "widget" : "plugin",
         mode,
-        editorType: oD(m),
+        editorType: mapEditorTypeToFileType(m),
         action: "Try it out"
       });
     },
     dataTestId: "single-editor-button",
     disabled: b,
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": b && f ? _$$t("resources_tab.approved_plugins.modal.try_it_out_ecc_tooltip", {
+    "data-tooltip": b && f ? getI18nString("resources_tab.approved_plugins.modal.try_it_out_ecc_tooltip", {
       orgName: f
     }) : void 0,
     children: jsx(_$$E, {
-      children: tx("resources_tab.approved_plugins.modal.try_it_out")
+      children: renderI18nText("resources_tab.approved_plugins.modal.try_it_out")
     })
   });
 }
@@ -1322,7 +1322,7 @@ function eB(e) {
       });
     },
     children: jsx(_$$E, {
-      children: tx("resources_tab.approved_plugins.modal.decline")
+      children: renderI18nText("resources_tab.approved_plugins.modal.decline")
     })
   });
 }
@@ -1344,7 +1344,7 @@ function eG(e) {
     variant: "primary",
     onClick: goToEditTab,
     children: jsx(_$$E, {
-      children: tx("resources_tab.approved_plugins.modal.approve\u2026")
+      children: renderI18nText("resources_tab.approved_plugins.modal.approve\u2026")
     })
   }) : jsx(_$$$, {
     variant: "primary",
@@ -1352,7 +1352,7 @@ function eG(e) {
       let e = () => {
         d(_$$F.enqueue({
           error: !0,
-          message: _$$t("resources_tab.approved_plugins.modal.failed_to_update_plugin_approval")
+          message: getI18nString("resources_tab.approved_plugins.modal.failed_to_update_plugin_approval")
         }));
       };
       try {
@@ -1371,9 +1371,9 @@ function eG(e) {
             userId: _
           });
           d(_$$F.enqueue({
-            message: "plugin" === extensionType ? _$$t("resources_tab.approved_plugins.modal.plugin_approved_for", {
+            message: "plugin" === extensionType ? getI18nString("resources_tab.approved_plugins.modal.plugin_approved_for", {
               orgName: org.name
-            }) : _$$t("resources_tab.approved_plugins.modal.widget_approved_for", {
+            }) : getI18nString("resources_tab.approved_plugins.modal.widget_approved_for", {
               orgName: org.name
             })
           }));
@@ -1384,7 +1384,7 @@ function eG(e) {
       d(Lo());
     },
     children: jsx(_$$E, {
-      children: tx("resources_tab.approved_plugins.modal.approve")
+      children: renderI18nText("resources_tab.approved_plugins.modal.approve")
     })
   });
 }
@@ -1406,7 +1406,7 @@ function ez(e) {
     variant: "primary",
     onClick: goToEditTab,
     children: jsx(_$$E, {
-      children: tx("resources_tab.approved_plugins.modal.edit_approvals")
+      children: renderI18nText("resources_tab.approved_plugins.modal.edit_approvals")
     })
   }) : jsx(_$$$, {
     variant: "destructive-secondary",
@@ -1417,9 +1417,9 @@ function ez(e) {
         extensionType
       }).then(() => {
         d(_$$F.enqueue({
-          message: "plugin" === extensionType ? _$$t("resources_tab.approved_plugins.modal.plugin_approval_removed_for", {
+          message: "plugin" === extensionType ? getI18nString("resources_tab.approved_plugins.modal.plugin_approval_removed_for", {
             orgName: org.name
-          }) : _$$t("resources_tab.approved_plugins.modal.widget_approval_removed_for", {
+          }) : getI18nString("resources_tab.approved_plugins.modal.widget_approval_removed_for", {
             orgName: org.name
           })
         }));
@@ -1431,7 +1431,7 @@ function ez(e) {
       d(Lo());
     },
     children: jsx(_$$E, {
-      children: tx("resources_tab.approved_plugins.modal.remove")
+      children: renderI18nText("resources_tab.approved_plugins.modal.remove")
     })
   });
 }
@@ -1469,10 +1469,10 @@ export function $$eV0({
           switch (t) {
             case "overview":
             case "edit":
-              return "plugin" === a ? _$$t("resources_tab.approved_plugins.modal.review_plugin") : _$$t("resources_tab.approved_plugins.modal.review_widget");
+              return "plugin" === a ? getI18nString("resources_tab.approved_plugins.modal.review_plugin") : getI18nString("resources_tab.approved_plugins.modal.review_widget");
           }
         case "manage":
-          return "plugin" === a ? _$$t("resources_tab.approved_plugins.modal.manage_plugin") : _$$t("resources_tab.approved_plugins.modal.manage_widget");
+          return "plugin" === a ? getI18nString("resources_tab.approved_plugins.modal.manage_plugin") : getI18nString("resources_tab.approved_plugins.modal.manage_widget");
       }
     }(m, I, a),
     maxWidth: 640,
@@ -1518,7 +1518,7 @@ export function $$eV0({
             trusted: !0,
             "data-testid": "open-in-community-link",
             onClick: () => {
-              sx("Admin Plugin Review Modal", {
+              trackEventAnalytics("Admin Plugin Review Modal", {
                 orgId: e,
                 extensionId: t,
                 extensionType: a,
@@ -1527,7 +1527,7 @@ export function $$eV0({
               });
             },
             children: jsx(_$$E, {
-              children: tx("resources_tab.approved_plugins.modal.open_in_community")
+              children: renderI18nText("resources_tab.approved_plugins.modal.open_in_community")
             })
           }), "review" === m && jsxs(Fragment, {
             children: [jsx($$eF1, {

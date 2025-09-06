@@ -1,13 +1,13 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
-import { md, fp } from "../figma_app/27355";
+import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { zp } from "../figma_app/740025";
 import { b as _$$b } from "../figma_app/203891";
 import { sX, GR, F$, gc, B8, w5, tC as _$$tC } from "../figma_app/229710";
-import { Im } from "../figma_app/493477";
+import { isEmptyObject } from "../figma_app/493477";
 import { HV5, Egt, _0v, sAE, Z64, ibQ, m1T } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { x1 } from "../905/714362";
-import { Lg, nl, QJ } from "../figma_app/257275";
+import { logError } from "../905/714362";
+import { getFalseValue, isInteractionPathCheck, isEvalViewPathCheck } from "../figma_app/897289";
 import { iZ } from "../905/372672";
 import { VF } from "../figma_app/679183";
 import { nl as _$$nl } from "../figma_app/359943";
@@ -27,7 +27,7 @@ import { O as _$$O } from "../905/487602";
 import { l7 } from "../905/189185";
 import { Ay } from "@stylexjs/stylex";
 import v from "classnames";
-import { t as _$$t, tx as _$$tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { A5, fC, kl, pw, DQ } from "../905/275640";
 import { Fk, wA } from "../figma_app/167249";
 import { Y as _$$Y } from "../a88a4c5a/211633";
@@ -46,7 +46,7 @@ import { Wv } from "../figma_app/711157";
 import { rC, Em } from "../figma_app/385874";
 import { ax, p8, s6 } from "../figma_app/722362";
 import { o3, nt } from "../905/226610";
-import { wN } from "../figma_app/53721";
+import { mapFileTypeToEditorType } from "../figma_app/53721";
 import { BS } from "../642/202922";
 import { Q as _$$Q } from "../9314/475980";
 import { Mw, ON } from "../3276/43946";
@@ -114,7 +114,7 @@ import { G as _$$G, D as _$$D } from "../a88a4c5a/237102";
 import { r as _$$r2 } from "../figma_app/17220";
 import { yc, T0, gv, XS, sE } from "../figma_app/386160";
 import { ServiceCategories as _$$e3 } from "../905/165054";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { i as _$$i2 } from "../905/718764";
 import { Y as _$$Y2 } from "../a88a4c5a/416715";
 var F = v;
@@ -137,7 +137,7 @@ function D() {
         nodeType: "GRID_TRACKS",
         nodeTypeString: "Grid tracks"
       }), jsx(_$$K, {
-        "aria-label": _$$t("common.close"),
+        "aria-label": getI18nString("common.close"),
         onClick: () => {
           n && Egt?.replaceSelection([n], !0);
         },
@@ -145,7 +145,7 @@ function D() {
       })]
     }), jsx(K, {
       axis: "COLUMNS",
-      titleString: _$$t("fullscreen.properties_panel.grid.columns"),
+      titleString: getI18nString("fullscreen.properties_panel.grid.columns"),
       selectedRows: new Set([...e].filter(e => e.axis === _0v.X).map(e => e.index)),
       updateSelectedRows: e => {
         let n = [...e].map(e => ({
@@ -157,7 +157,7 @@ function D() {
       }
     }), jsx(K, {
       axis: "ROWS",
-      titleString: _$$t("fullscreen.properties_panel.grid.rows"),
+      titleString: getI18nString("fullscreen.properties_panel.grid.rows"),
       selectedRows: new Set([...e].filter(e => e.axis === _0v.Y).map(e => e.index)),
       updateSelectedRows: e => {
         let n = [...e].map(e => ({
@@ -188,7 +188,7 @@ function K({
         className: "xiuzu7u xwq5hk xfc7a33 x1j61x8r x8j8v4g x11tzhbd xqp8s7e",
         children: t
       }), jsx(_$$K, {
-        "aria-label": "ROWS" === e ? _$$t("fullscreen.properties_panel.grid.add_row") : _$$t("fullscreen.properties_panel.grid.add_column"),
+        "aria-label": "ROWS" === e ? getI18nString("fullscreen.properties_panel.grid.add_row") : getI18nString("fullscreen.properties_panel.grid.add_column"),
         onClick: () => {
           l7.user("add-grid-track-edit-scope", () => {
             HV5?.addTrackToGrid("ROWS" === e ? _0v.Y : _0v.X);
@@ -226,7 +226,7 @@ function L({
     maximumFractionDigits: 2
   }), []);
   let u = jsx(_$$K, {
-    "aria-label": "ROWS" === n ? _$$t("fullscreen.properties_panel.grid.delete_row") : _$$t("fullscreen.properties_panel.grid.delete_column"),
+    "aria-label": "ROWS" === n ? getI18nString("fullscreen.properties_panel.grid.delete_row") : getI18nString("fullscreen.properties_panel.grid.delete_column"),
     onClick: () => {
       l7.user("delete-grid-track-edit-scope", () => {
         HV5?.deleteGridTrackSelection();
@@ -246,7 +246,7 @@ function L({
       children: jsxs(Fragment, {
         children: [jsx(_$$h, {
           htmlFor: "grid-track-size-input",
-          children: "ROWS" === n ? _$$t("fullscreen.properties_panel.grid.row_height") : _$$t("fullscreen.properties_panel.grid.column_width")
+          children: "ROWS" === n ? getI18nString("fullscreen.properties_panel.grid.row_height") : getI18nString("fullscreen.properties_panel.grid.column_width")
         }), jsx(_$$bL2, {
           children: jsx(D0, {
             id: "grid-track-size-input",
@@ -276,18 +276,18 @@ function L({
         children: [jsx(l9, {
           width: "fill",
           label: jsx(_$$h, {
-            children: _$$t("fullscreen.properties_panel.grid.track_sizing")
+            children: getI18nString("fullscreen.properties_panel.grid.track_sizing")
           })
         }), jsxs(mc, {
           children: [jsx(c$, {
             value: sAE.FIXED.toString(),
-            children: _$$t("fullscreen.properties_panel.constraints_resizing_panel.fixed")
+            children: getI18nString("fullscreen.properties_panel.constraints_resizing_panel.fixed")
           }), jsx(c$, {
             value: sAE.FLEX.toString(),
-            children: _$$t("fullscreen.properties_panel.constraints_resizing_panel.fill")
+            children: getI18nString("fullscreen.properties_panel.constraints_resizing_panel.fill")
           }), jsx(c$, {
             value: sAE.HUG.toString(),
-            children: _$$t("fullscreen.properties_panel.constraints_resizing_panel.hug")
+            children: getI18nString("fullscreen.properties_panel.constraints_resizing_panel.hug")
           })]
         })]
       })
@@ -321,7 +321,7 @@ function q() {
       name: "cooper_asset_size_panel",
       children: jsxs(Zk, {
         children: [jsx(Wv, {
-          titleTx: _$$tx("cooper.properties_panel.asset_size.title")
+          titleTx: renderI18nText("cooper.properties_panel.asset_size.title")
         }), jsx("div", {
           className: "xh8yej3 xnm25rq xyfqnmn x9f619",
           children: jsx(_$$k3, {
@@ -377,7 +377,7 @@ function eD(e) {
   let {
     panelsShown
   } = e;
-  let n = md(eO);
+  let n = useAtomWithSubscription(eO);
   let {
     show,
     isShowing,
@@ -393,21 +393,21 @@ function eD(e) {
   }, [panelsShown, show]);
   let a = {
     type: "button",
-    label: _$$tx("draw.onboarding.dismiss_button"),
+    label: renderI18nText("draw.onboarding.dismiss_button"),
     onClick: complete,
     ctaTrackingDescriptor: _$$c2.GOT_IT
   };
   return jsx(rq, {
     arrowPadding: 4,
     arrowPosition: F_.RIGHT_BODY,
-    description: _$$tx("draw.onboarding.design_followup.description"),
+    description: renderI18nText("draw.onboarding.design_followup.description"),
     disableHighlight: !0,
     isShowing,
     onClose: complete,
     onTargetLost: complete,
     primaryCta: a,
     targetKey: dP,
-    title: _$$tx("draw.onboarding.design_followup.title"),
+    title: renderI18nText("draw.onboarding.design_followup.title"),
     trackingContextName: "draw_onboarding",
     userFlagOnShow: "seen_draw_design_followup_onboarding"
   });
@@ -483,7 +483,7 @@ function tt(e) {
       Y5.triggerActionInUserEditScope("create-state-group-row");
     },
     icon: jsx(_$$b2, {}),
-    children: _$$tx("design_systems.templates.create_template_set")
+    children: renderI18nText("design_systems.templates.create_template_set")
   }, "create-template-set-button");
 }
 function tn(e) {
@@ -500,7 +500,7 @@ function ti(e) {
       Y5.triggerActionInUserEditScope("create-symbol");
     },
     icon: jsx(n, {}),
-    children: _$$tx("design_systems.templates.create_template")
+    children: renderI18nText("design_systems.templates.create_template")
   }, "create-template-button");
 }
 function tr(e) {
@@ -510,7 +510,7 @@ function tr(e) {
       Y5.triggerActionInUserEditScope("create-multiple-symbols");
     },
     icon: jsx(_$$i, {}),
-    children: _$$tx("design_systems.templates.create_multiple_templates")
+    children: renderI18nText("design_systems.templates.create_multiple_templates")
   }, "create-multiple-templates-button");
 }
 function to() {
@@ -521,7 +521,7 @@ function to() {
   }, []);
   return getFeatureFlags().bake_canvas && "design" === t && "RESPONSIVE_SET" === e ? jsx(_$$z, {
     onClick: n,
-    children: _$$t("design_systems.instance_panel.edit_make")
+    children: getI18nString("design_systems.instance_panel.edit_make")
   }) : null;
 }
 function tg(e, t) {
@@ -612,7 +612,7 @@ function tS() {
   } : null, []);
   let t = function () {
     let e = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
-    return useCallback(t => e === m1T.VECTOR && t ? _$$t("fullscreen.properties_panel.layer_header.node_type_vector") : getFeatureFlags().dse_slots && t && t.isSlotReactive ? _$$t("fullscreen.properties_panel.layer_header.slot") : null, [e]);
+    return useCallback(t => e === m1T.VECTOR && t ? getI18nString("fullscreen.properties_panel.layer_header.node_type_vector") : getFeatureFlags().dse_slots && t && t.isSlotReactive ? getI18nString("fullscreen.properties_panel.layer_header.slot") : null, [e]);
   }();
   let {
     nodeType,
@@ -693,7 +693,7 @@ function tb({
   stylePickerShown: f
 }) {
   let I = useDispatch();
-  let E = md(_$$b);
+  let E = useAtomWithSubscription(_$$b);
   let P = qh();
   let w = SQ();
   let C = U4(b);
@@ -909,7 +909,7 @@ function tb({
       children: () => jsx(_$$Q2, {
         allSavedPlugins: e.plugins,
         dispatch: I,
-        editorType: u?.editorType ? wN(u.editorType) : null,
+        editorType: u?.editorType ? mapFileTypeToEditorType(u.editorType) : null,
         localPlugins: a,
         numSelected: _numSelected ?? 0,
         openFileKey: u?.key || null,
@@ -926,8 +926,8 @@ function tb({
 function tT(e) {
   let t = iZ();
   let n = Dj(t);
-  return ((Im(e.shownPanels) || Object.keys(e.shownPanels).every(t => !e.shownPanels[parseInt(t)])) && !window.figmaPerfTesting && !Lg() && !nl() && !QJ() && x1("PropertiesPanel", "Rendering design tab with no shownPropertiesPanels", {
-    isEmpty: Im(e.shownPanels),
+  return ((isEmptyObject(e.shownPanels) || Object.keys(e.shownPanels).every(t => !e.shownPanels[parseInt(t)])) && !window.figmaPerfTesting && !getFalseValue() && !isInteractionPathCheck() && !isEvalViewPathCheck() && logError("PropertiesPanel", "Rendering design tab with no shownPropertiesPanels", {
+    isEmpty: isEmptyObject(e.shownPanels),
     shouldRenderInspectTab: n
   }), e.shownPanels[ibQ.FRAME_PRESETS]) ? jsx(VF, {
     isVisible: !0,
@@ -964,7 +964,7 @@ function tw({
   stylePickerShown: T
 }) {
   let f = useDispatch();
-  let [I, E] = fp(_$$b);
+  let [I, E] = useAtomValueAndSetter(_$$b);
   let P = s6("currentPage", "currentSelectedProperty");
   let w = qh();
   let C = hD();
@@ -1142,7 +1142,7 @@ function tw({
       children: () => jsx(_$$Q2, {
         allSavedPlugins: e.plugins,
         dispatch: f,
-        editorType: u?.editorType ? wN(u.editorType) : null,
+        editorType: u?.editorType ? mapFileTypeToEditorType(u.editorType) : null,
         localPlugins: a,
         numSelected: _numSelected2 ?? 0,
         openFileKey: u?.key || null,
@@ -1155,9 +1155,9 @@ function tw({
   });
 }
 function tC(e) {
-  if (Im(e.shownPanels) || Object.keys(e.shownPanels).every(t => !e.shownPanels[parseInt(t)])) {
+  if (isEmptyObject(e.shownPanels) || Object.keys(e.shownPanels).every(t => !e.shownPanels[parseInt(t)])) {
     let e = Error("Rendering simplified design tab with no shownPropertiesPanels");
-    $D(_$$e3.EDITOR_USABILITY, e);
+    reportError(_$$e3.EDITOR_USABILITY, e);
   }
   return jsx(tw, {
     ...e
@@ -1167,7 +1167,7 @@ export function $$tk0({
   scrollContainer: e,
   ...t
 }) {
-  let n = md(_$$b);
+  let n = useAtomWithSubscription(_$$b);
   let a = zp();
   return n === GR.DEFAULT_EXPANDED ? jsx(tT, {
     ...t,

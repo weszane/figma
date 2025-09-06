@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { K } from "../905/443068";
 import { U } from "../905/708285";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { u as _$$u, BQ } from "../figma_app/852050";
 import { Ib } from "../905/129884";
 import { DE } from "../figma_app/811257";
@@ -22,7 +22,7 @@ export function $$$$m0() {
   return f ? jsx(DE, {
     appendedClassName: "component_bound_vibisility_row--row--Pss97",
     input: jsx(P, {
-      value: g || t("fullscreen.mixed"),
+      value: g || getI18nString("fullscreen.mixed"),
       variableId: s,
       isStandalone: !0,
       classNameOverride: "component_bound_vibisility_row--pillCover--q5iKl",
@@ -38,11 +38,11 @@ export function $$$$m0() {
       className: "component_bound_vibisility_row--detachVisibilityIcon--FcjEN",
       children: jsx(K, {
         onClick: () => clearVariableConsumption(),
-        "aria-label": t("variables.binding_ui.detach_variable_tooltip"),
+        "aria-label": getI18nString("variables.binding_ui.detach_variable_tooltip"),
         recordingKey: "detachVisibilityVariable",
         htmlAttributes: {
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": t("variables.binding_ui.detach_variable_tooltip")
+          "data-tooltip": getI18nString("variables.binding_ui.detach_variable_tooltip")
         },
         children: jsx(U, {})
       })

@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import n from "classnames";
 import { P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { gH } from "../7222/396421";
 import { ag } from "../9410/356923";
 var a = n;
@@ -20,7 +20,7 @@ export function $$u0({
     children: jsx($$m3, {
       children: e.map((t, i) => jsx(ag, {
         module: t,
-        "aria-label": _$$t("slides.templates.template_picker.slide_button.aria_label", {
+        "aria-label": getI18nString("slides.templates.template_picker.slide_button.aria_label", {
           index: i + 1,
           total: e.length
         })

@@ -20,8 +20,8 @@ import { WQ } from "../figma_app/345997";
 import { $Z, vU, Np, Mo } from "../figma_app/193867";
 import { w } from "../figma_app/119601";
 import { YH, _X } from "../figma_app/502247";
-import { oD, wN } from "../figma_app/53721";
-import { A$ } from "../905/548208";
+import { mapEditorTypeToFileType, mapFileTypeToEditorType } from "../figma_app/53721";
+import { NavigationRoutes } from "../905/548208";
 import { o0 } from "../905/844131";
 import { q } from "../905/417890";
 export function $$w1(e, t) {
@@ -43,7 +43,7 @@ let $$P0 = e => t => function (r) {
         fileKey
       } = t;
       let i = e.getState().fileByKey[fileKey];
-      i && !r.payload.fromRealtime && oD(t.editorType) !== i.editor_type && (t.editorType = wN(i.editor_type ?? "design"));
+      i && !r.payload.fromRealtime && mapEditorTypeToFileType(t.editorType) !== i.editor_type && (t.editorType = mapFileTypeToEditorType(i.editor_type ?? "design"));
     }
     if ("abandonedDraftFiles" === t.view || "licenseGroup" === t.view || "orgAdminSettings" === t.view || "orgDomainManagement" === t.view || "orgIdpManagement" === t.view || "seatRequests" === t.view || "teamAdminConsole" === t.view || O(P, t) && (t = {
       view: "resourceUnavailable",
@@ -53,7 +53,7 @@ let $$P0 = e => t => function (r) {
       e && e.pro_team && !WQ(e) && (t = {
         view: "team",
         teamId: t.teamId,
-        teamViewTab: A$.SETTINGS
+        teamViewTab: NavigationRoutes.SETTINGS
       });
     }
     t !== o0 ? e.dispatch(sf(t)) : P.user?.drafts_folder_id ? e.dispatch(sf({

@@ -23,8 +23,8 @@ import { J } from "../905/614223";
 import { nc } from "../905/189185";
 import { Ay } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
-import { az } from "../905/449184";
-import { R as _$$R } from "../905/103090";
+import { analyticsEventManager } from "../905/449184";
+import { selectWithShallowEqual } from "../905/103090";
 import { conditionalFeatureFlag } from "../figma_app/169182";
 import { F as _$$F } from "../905/302958";
 import { zC, hB, OT } from "../905/70369";
@@ -84,7 +84,7 @@ export function $$B0(e) {
   let {
     bell,
     queueDepth
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     bell: e.visualBell[0],
     queueDepth: e.visualBell.length
   }));
@@ -136,7 +136,7 @@ export function $$B0(e) {
     return (useEffect(() => {
       if (e?.delay) {
         let r = setTimeout(() => s(!0), e.delay);
-        t || e.button || az.trackDefinedMetric("fpl.missing_toast_message", {
+        t || e.button || analyticsEventManager.trackDefinedMetric("fpl.missing_toast_message", {
           bellId: e?.id,
           bellType: e.type,
           description: "delay exists but no message was included",
@@ -144,7 +144,7 @@ export function $$B0(e) {
         });
         return () => clearTimeout(r);
       }
-    }, [e, t]), e !== r.current) ? (r.current = e, s(n), t || e?.button || az.trackDefinedMetric("fpl.missing_toast_message", {
+    }, [e, t]), e !== r.current) ? (r.current = e, s(n), t || e?.button || analyticsEventManager.trackDefinedMetric("fpl.missing_toast_message", {
       bellId: e?.id,
       bellType: e?.type,
       description: "Remembered bell current does not match but no message exists",
@@ -196,7 +196,7 @@ export function $$B0(e) {
   let M = !A || !E && !b && !bell?.button;
   let B = getFeatureFlags().fpl_hide_missing_alert ? M : !A;
   useEffect(() => {
-    bell && !B && az.trackDefinedEvent("fpl.visual_bell_shown", {
+    bell && !B && analyticsEventManager.trackDefinedEvent("fpl.visual_bell_shown", {
       bellId: bell.id,
       bellType: bell.type,
       bellMessage: bell.messageComponentKey ? bell.messageComponentKey : bell.i18n ? `VisualBellTxMessageType.${bell.i18n.id}` : bell.message ? bell.message : "[unknown]"

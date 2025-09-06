@@ -1,14 +1,14 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useRef, useEffect, memo } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import o from "classnames";
 import { buildUploadUrl } from "../figma_app/169182";
 import { tH } from "../905/751457";
 import { s as _$$s } from "../cssbuilder/589278";
 import { fC } from "../figma_app/968813";
 import { fG } from "../figma_app/973927";
-import { pb } from "../figma_app/469876";
+import { IntegrationUtils } from "../figma_app/469876";
 import { XM } from "../905/486443";
 import { sZ } from "../905/845253";
 import { TA } from "../905/372672";
@@ -210,7 +210,7 @@ function H({
   let [i, o] = useState(!1);
   let l = useDispatch();
   let d = NT();
-  let c = md(c5);
+  let c = useAtomWithSubscription(c5);
   let u = XM();
   let b = sZ();
   let S = useSelector(e => e.universalInsertModal.showing);
@@ -241,7 +241,7 @@ function H({
       toolType: "universal-insert-collage",
       recordingKey: hx("universal-insert-collage"),
       isSelected: S,
-      className: pb.isGoogleClassroomIntegration() ? vy : qs,
+      className: IntegrationUtils.isGoogleClassroomIntegration() ? vy : qs,
       onClick: A,
       ariaLabel: "browse-all-resources-dlt",
       onboardingKey: yl,

@@ -1,14 +1,14 @@
 import { getFeatureFlags } from "../905/601108";
 import { Up, GZ, dR } from "../905/508367";
-import { eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { Ay } from "../905/612521";
 import { getInitialOptions } from "../figma_app/169182";
-import { Ay as _$$Ay2 } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { XHR } from "../905/910117";
 import { m as _$$m } from "../905/575846";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 async function c(e, t, i, n) {
-  if (_$$Ay2.blink && window.WebAssembly || _$$Ay2.firefox && +_$$Ay2.version >= 56) {
+  if (BrowserInfo.blink && window.WebAssembly || BrowserInfo.firefox && +BrowserInfo.version >= 56) {
     let t = `http://127.0.0.1:${e}`;
     let {
       data
@@ -42,7 +42,7 @@ async function c(e, t, i, n) {
   };
 }
 async function u(e, t, i, n, r) {
-  if (_$$Ay2.blink && window.WebAssembly || _$$Ay2.firefox && +_$$Ay2.version >= 56) {
+  if (BrowserInfo.blink && window.WebAssembly || BrowserInfo.firefox && +BrowserInfo.version >= 56) {
     let t = `http://127.0.0.1:${e}`;
     let {
       data
@@ -78,7 +78,7 @@ async function u(e, t, i, n, r) {
 let h = getInitialOptions().user_data;
 let g = h && h.id;
 export var $$f0 = (e => (e.DESKTOP_INTERSTITIAL = "desktop_interstitial", e.OOM_MODAL = "oom_modal", e.OPEN_IN_DESKTOP_MODAL = "open_in_desktop_modal", e.UNIVERSAL_POSTING_MODAL = "universal_posting_modal", e.COMMUNITY_INTERSTITIAL = "community_interstitial", e.FULLSCREEN_MENU = "fullscreen_menu", e))($$f0 || {});
-let _ = () => _$$Ay2.mac && !_$$Ay2.isIpad || _$$Ay2.windows;
+let _ = () => BrowserInfo.mac && !BrowserInfo.isIpad || BrowserInfo.windows;
 export function $$A4(e, t) {
   return Up() || !_() ? Promise.reject() : c(44950, 44960, `/figma${e}`, t);
 }
@@ -86,7 +86,7 @@ export function $$y3(e, t, i) {
   return GZ() || !_() ? Promise.reject() : u(44950, 44960, `/figma${e}`, t, i);
 }
 export async function $$b1(e) {
-  if (eD) return !1;
+  if (desktopAPIInstance) return !1;
   try {
     let t = new URL(e).origin;
     let {
@@ -97,7 +97,7 @@ export async function $$b1(e) {
   return !1;
 }
 export async function $$v6(e, t) {
-  if (eD) return !1;
+  if (desktopAPIInstance) return !1;
   try {
     let i = getInitialOptions().editing_file?.editor_type;
     if (g) {
@@ -111,7 +111,7 @@ export async function $$v6(e, t) {
       data
     } = await $$A4(`/desktop/open-url?userID=${g}&url=${encodeURIComponent(e)}`);
     if ("boolean" == typeof data.opened) {
-      sx("Open Url In Desktop", {
+      trackEventAnalytics("Open Url In Desktop", {
         opened: data.opened,
         source: t,
         editorType: i
@@ -125,7 +125,7 @@ export function $$I5() {
   $$E8() && Ay.redirect("/settings#fonts");
 }
 export function $$E8() {
-  return !!_() && !eD && !_$$m;
+  return !!_() && !desktopAPIInstance && !_$$m;
 }
 export function $$x2() {
   return $$A4("/version");

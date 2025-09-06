@@ -1,5 +1,5 @@
 import n from "../vendor/656470";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { wD } from "../figma_app/476572";
 import { L } from "../905/950339";
 import { L as _$$L } from "../905/161832";
@@ -26,7 +26,7 @@ export class $$c0 {
   }
   search(e) {
     let t;
-    for (let r of (az.trackDefinedEvent("figmascope.search", {
+    for (let r of (analyticsEventManager.trackDefinedEvent("figmascope.search", {
       used_operators: e.length > 1 || e[0]?.property != null
     }), e)) {
       let e = new Map();

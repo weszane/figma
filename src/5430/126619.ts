@@ -13,7 +13,7 @@ import { XU } from "../figma_app/756995";
 import { w4, y1 } from "../905/445814";
 import { V } from "../figma_app/385855";
 import { q } from "../905/600041";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { i as _$$i } from "../905/977961";
 import { a as _$$a } from "../905/329735";
 import { cz, i8 } from "../905/14017";
@@ -25,7 +25,7 @@ import { on } from "../905/420347";
 import { throwTypeError } from "../figma_app/465776";
 import { F } from "../905/171275";
 import { J } from "../905/341359";
-import { y3 } from "../figma_app/876459";
+import { hasDesktopAPI } from "../figma_app/876459";
 import { F as _$$F } from "../905/302958";
 import { DV, lW } from "../figma_app/471982";
 import { FM, RL, Gq, xb as _$$xb } from "../5430/773914";
@@ -55,7 +55,7 @@ function E({
       librariesIsLoading: "loading" === t.status
     };
   }(a);
-  let E = tx("community.resource_tiles.by_author", {
+  let E = renderI18nText("community.resource_tiles.by_author", {
     author: l
   });
   let S = E;
@@ -64,7 +64,7 @@ function E({
     children: [jsx("span", {
       className: "xb3r6kr xlyipyv",
       children: E
-    }), "\xa0\xb7\xa0", tx("community.resource_tiles.templates_count", {
+    }), "\xa0\xb7\xa0", renderI18nText("community.resource_tiles.templates_count", {
       count: numComponents
     })]
   })) : S = jsxs("div", {
@@ -200,7 +200,7 @@ function M({
   let _ = useCallback(() => {
     lW(c);
     r(_$$F.enqueue({
-      message: _$$t("copy_to_clipboard.link_copied_to_clipboard"),
+      message: getI18nString("copy_to_clipboard.link_copied_to_clipboard"),
       type: "success"
     }));
   }, [c, r]);
@@ -208,18 +208,18 @@ function M({
     children: jsx(bL, {
       manager: e,
       children: jsx(mc, {
-        children: y3() ? jsxs(Fragment, {
+        children: hasDesktopAPI() ? jsxs(Fragment, {
           children: [jsx(q7, {
             onClick: d,
             children: jsx("div", {
               style: {
                 minWidth: 118
               },
-              children: _$$t("tile.dropdown.open")
+              children: getI18nString("tile.dropdown.open")
             })
           }), jsx(q7, {
             onClick: _,
-            children: _$$t("file_browser.copy_link")
+            children: getI18nString("file_browser.copy_link")
           })]
         }) : jsxs(Fragment, {
           children: [jsxs(YJ, {
@@ -229,15 +229,15 @@ function M({
                 style: {
                   minWidth: 118
                 },
-                children: _$$t("tile.dropdown.open")
+                children: getI18nString("tile.dropdown.open")
               })
             }), jsx(q7, {
               onClick: m,
-              children: _$$t("file_browser.open_in_new_tab")
+              children: getI18nString("file_browser.open_in_new_tab")
             })]
           }), jsx(q7, {
             onClick: _,
-            children: _$$t("file_browser.copy_link")
+            children: getI18nString("file_browser.copy_link")
           })]
         })
       })

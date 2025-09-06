@@ -4,34 +4,34 @@ import { Xm } from '../905/723791';
 import { WB } from '../905/761735';
 import { debounce } from '../905/915765';
 import { resourceUtils } from '../905/989992';
-import { eU, Iz, yu, zl } from '../figma_app/27355';
+import { atom, createRemovableAtomFamily, setupAtomWithMount, atomStoreManager } from '../figma_app/27355';
 import { bsh, cmY, jXq, Lom, o9k, QEv, u6n } from '../figma_app/43951';
 function u(e, t) {
   return lw(e, t);
 }
 function p(e, t) {
-  let i = eU(Xm());
-  return void 0 === t ? yu(i, ({
+  let i = atom(Xm());
+  return void 0 === t ? setupAtomWithMount(i, ({
     setSelf: t
   }) => WB().subscribe(e, {}, e => {
     t(e);
-  })) : yu(i, ({
+  })) : setupAtomWithMount(i, ({
     setSelf: i
   }) => WB().subscribe(e, t, e => {
     i(e);
   }));
 }
 function m(e) {
-  return Iz(t => p(e, t), u);
+  return createRemovableAtomFamily(t => p(e, t), u);
 }
 let h = (e, t) => e.length === t.length && e.every((e, i) => u(e, t[i]));
 function g(e) {
-  return Iz(t => function (e, t) {
-    let i = eU(t.map(e => ({
+  return createRemovableAtomFamily(t => function (e, t) {
+    let i = atom(t.map(e => ({
       args: e,
       result: resourceUtils.loading()
     })));
-    return yu(i, ({
+    return setupAtomWithMount(i, ({
       setSelf: i
     }) => {
       let r = new SubscriptionManager(WB(), debounce(() => {
@@ -52,10 +52,10 @@ let $$y8 = m(u6n);
 let $$b1 = g(bsh);
 let $$v5 = g(Lom);
 function I(e, t) {
-  let i = Iz(t => p(e, t), u);
+  let i = createRemovableAtomFamily(t => p(e, t), u);
   let n = t(i);
-  let a = eU((e, t) => n(e, t));
-  let s = eU(e => e(a), () => {});
+  let a = atom((e, t) => n(e, t));
+  let s = atom(e => e(a), () => {});
   s.onMount = () => () => i.removeAll();
   return s;
 }
@@ -74,7 +74,7 @@ export function $$E2(e, t) {
       t(s, o);
       a || d();
     }
-    let d = zl.sub(e, l);
+    let d = atomStoreManager.sub(e, l);
     a && l();
   });
 }

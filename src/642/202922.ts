@@ -12,7 +12,7 @@ import h from "classnames";
 import { Pt, rf } from "../figma_app/806412";
 import { g as _$$g } from "../905/880308";
 import { c$, wv } from "../figma_app/236327";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { oB, j7 } from "../905/929976";
 import { XE, u1 } from "../figma_app/91703";
 import { to } from "../905/156213";
@@ -112,7 +112,7 @@ function ee(e) {
         })
       }, i);
     }), !d && C > 0 && jsx(t8, {
-      label: _$$t("design_systems.component_properties.show_more_nested_instances_rows", {
+      label: getI18nString("design_systems.component_properties.show_more_nested_instances_rows", {
         count: C
       }),
       onClick: () => p(!0)
@@ -143,7 +143,7 @@ function et({
       })
     }), s && !!e.numHidden && jsx("div", {
       className: "bubbled_instances_list--numHidden--fW-Sr",
-      children: tx("design_systems.component_properties.num_hidden", {
+      children: renderI18nText("design_systems.component_properties.num_hidden", {
         num: e.numHidden
       })
     })]
@@ -173,13 +173,13 @@ function es({
     icon: jsx("div", {
       className: "bubbled_instances_list--minusIcon--dY8i-",
       children: jsx(_$$K, {
-        "aria-label": _$$t("design_systems.component_properties.unbubble_instance"),
+        "aria-label": getI18nString("design_systems.component_properties.unbubble_instance"),
         onClick: () => {
           t(e.connectedGUIDs[0]);
         },
         recordingKey: s,
         htmlAttributes: {
-          "data-tooltip": _$$t("design_systems.component_properties.unbubble_instance"),
+          "data-tooltip": getI18nString("design_systems.component_properties.unbubble_instance"),
           "data-tooltip-type": Ib.TEXT,
           onMouseDown: dG
         },
@@ -263,7 +263,7 @@ function eo() {
   let s = useDispatch();
   let n = new Point(t?.initialX, t?.initialY);
   return t?.id !== Dd ? null : jsx(Ao, {
-    title: _$$t("design_systems.component_properties.expose_nested_instances"),
+    title: getI18nString("design_systems.component_properties.expose_nested_instances"),
     initialPosition: n,
     initialWidth: wh,
     headerSize: "small",
@@ -380,7 +380,7 @@ export function $$eg0({
       children: [jsx(c$, {
         disabled: !0,
         className: em,
-        children: tx("design_systems.component_properties.create_property")
+        children: renderI18nText("design_systems.component_properties.create_property")
       }), !en && jsxs(c$, {
         className: eh,
         onClick: et,
@@ -389,7 +389,7 @@ export function $$eg0({
           children: jsx(Fragment, {
             children: jsx(_$$m, {})
           })
-        }), tx("design_systems.component_properties.across_variants")]
+        }), renderI18nText("design_systems.component_properties.across_variants")]
       }), ei.map(e => jsxs(c$, {
         className: eh,
         onClick: () => Q(e),
@@ -401,14 +401,14 @@ export function $$eg0({
         children: [jsx(wv, {}), jsx(c$, {
           disabled: !0,
           className: em,
-          children: tx("design_systems.component_properties.expose_nested_instances")
+          children: renderI18nText("design_systems.component_properties.expose_nested_instances")
         }), jsxs(c$, {
           className: eh,
           onClick: es,
           recordingKey: "openBubbledPropPicker",
           children: [jsx(Nu, {
             children: jsx(_$$M, {})
-          }), _$$t("design_systems.component_properties.choose_instances")]
+          }), getI18nString("design_systems.component_properties.choose_instances")]
         })]
       }), getFeatureFlags().first_draft_suggest_props && jsxs(Fragment, {
         children: [jsx(wv, {}), jsxs(c$, {
@@ -417,7 +417,7 @@ export function $$eg0({
           recordingKey: "suggestProps",
           children: [jsx(Nu, {
             children: jsx(_$$M, {})
-          }), _$$t("first_draft.suggest_properties")]
+          }), getI18nString("first_draft.suggest_properties")]
         })]
       })]
     }), F?.id === Dd && jsx(eo, {}), jsx(e6, {
@@ -430,7 +430,7 @@ export function $$eg0({
     }), K && jsxs(Fragment, {
       children: [jsx("p", {
         className: "props_panel--bubbledInstancesHeading--C26v2",
-        children: _$$t("design_systems.component_properties.bubbled_instances")
+        children: getI18nString("design_systems.component_properties.bubbled_instances")
       }), jsx(ee, {
         recordingKey: e
       })]
@@ -454,7 +454,7 @@ function ef({
     onClick: u,
     onMouseDown: p,
     ref: o,
-    input: tx("design_systems.component_properties.properties"),
+    input: renderI18nText("design_systems.component_properties.properties"),
     label: null,
     appendedClassName: m()(a ? "props_panel--ui3PanelHeaderRowSAP--ws4dj props_panel--ui3PanelHeaderRow--Ab8Jz" : "props_panel--ui3PanelHeaderRow--Ab8Jz", {
       [yf]: !e
@@ -466,9 +466,9 @@ function ef({
         "aria-expanded": e,
         htmlAttributes: {
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": _$$t("design_systems.component_panel.create_component_property")
+          "data-tooltip": getI18nString("design_systems.component_panel.create_component_property")
         },
-        "aria-label": _$$t("design_systems.component_panel.create_component_property"),
+        "aria-label": getI18nString("design_systems.component_panel.create_component_property"),
         children: jsx(_$$e, {})
       })
     }) : void 0

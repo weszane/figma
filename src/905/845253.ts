@@ -1,4 +1,4 @@
-import { bt } from "../905/270322";
+import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { useSelector } from "../vendor/514228";
 export function $$r3(e, t) {
   if (!e) return;
@@ -14,7 +14,7 @@ export function $$a2() {
 export function $$s0() {
   return useSelector(e => e.currentUserOrgId);
 }
-export let $$o1 = bt(({
+export let $$o1 = createReduxSubscriptionAtomWithState(({
   currentUserOrgId: e
 }) => e);
 export const dq = $$s0;

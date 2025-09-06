@@ -1,10 +1,10 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef, useMemo } from "react";
 import { useDispatch } from "../vendor/514228";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { l4 } from "../905/124270";
 import { II, yA } from "../905/171315";
 import { s as _$$s2 } from "../figma_app/576667";
@@ -19,14 +19,14 @@ import { A as _$$A2 } from "../6828/154709";
 let T = e => {
   switch (e) {
     case WY.RESOURCE:
-      return tx("search.preview_section.all_files");
+      return renderI18nText("search.preview_section.all_files");
     case WY.CREATOR:
-      return tx("search.facets.created_by", {
-        creator: _$$t("search.facets.anyone")
+      return renderI18nText("search.facets.created_by", {
+        creator: getI18nString("search.facets.anyone")
       });
     case WY.SPACE:
-      return tx("search.facets.space", {
-        space: _$$t("search.facets.all_spaces")
+      return renderI18nText("search.facets.space", {
+        space: getI18nString("search.facets.all_spaces")
       });
     default:
       return "";
@@ -44,18 +44,18 @@ export function $$I0({
   let x = S || A;
   let N = Um();
   let C = N?.type === e;
-  let w = md(l4(t ?? null));
+  let w = useAtomWithSubscription(l4(t ?? null));
   let O = _$$f();
   let R = _$$A();
   let L = uR.DROPDOWN;
   let P = useMemo(() => {
     switch (t) {
       case WY.RESOURCE:
-        return _$$t("search.facets.filter_by_resource");
+        return getI18nString("search.facets.filter_by_resource");
       case WY.CREATOR:
-        return _$$t("search.facets.filter_by_creator");
+        return getI18nString("search.facets.filter_by_creator");
       case WY.SPACE:
-        return _$$t("search.facets.filter_by_space");
+        return getI18nString("search.facets.filter_by_space");
       default:
         return "Filter";
     }

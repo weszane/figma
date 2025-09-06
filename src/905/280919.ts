@@ -3,18 +3,18 @@ import { localStorageRef } from "../905/657224";
 import a from "../vendor/805353";
 import o from "../vendor/232260";
 import { k as _$$k } from "../905/651849";
-import { p as _$$p } from "../905/709735";
-import { L as _$$L, y as _$$y } from "../905/270963";
+import { entrypointVariant } from "../905/709735";
+import { datadogRum, y as _$$y } from "../905/270963";
 import { Ng, jm } from "../figma_app/416935";
 import { debugState } from "../905/407919";
 import { Ay } from "../905/612521";
 import { getStaticDomain, getInitialOptions } from "../figma_app/169182";
-import { Br } from "../3973/348894";
+import { normalizeUrl } from "../3973/348894";
 import { T as _$$T } from "../905/912096";
-import { Cp, XM } from "../905/11";
+import { captureException, setSentryContext } from "../905/11";
 import { gP } from "../figma_app/594947";
 import { fF } from "../905/471229";
-import { z as _$$z, u as _$$u } from "../905/667887";
+import { isDebugFlowActive, murmurHash } from "../905/667887";
 var s = a;
 var l = o;
 let I = ["api/web_logger", "data:", "/api/figment-proxy/monitor"];
@@ -40,7 +40,7 @@ export function $$k1({
   trackUserInteractions: r,
   alwaysInit: a
 }) {
-  if (!_$$L) return;
+  if (!datadogRum) return;
   let {
     datadog_rum_init,
     datadog_logs_init,
@@ -74,8 +74,8 @@ export function $$k1({
     let n = t.get("fallback", w);
     return "user-employee" === e ? t.get("employee", n) : t.get(i, n);
   }(M);
-  let U = _$$z();
-  if (!(a = a || U) && (!user_data || T(R(user_data.email)) && 100 !== j.rolloutPercent && _$$u(user_data.id, 7) % 100 >= j.rolloutPercent)) return;
+  let U = isDebugFlowActive();
+  if (!(a = a || U) && (!user_data || T(R(user_data.email)) && 100 !== j.rolloutPercent && murmurHash(user_data.id, 7) % 100 >= j.rolloutPercent)) return;
   let B = U || !(Ay.location.pathname.startsWith("/design") || Ay.location.pathname.startsWith("/file/") || Ay.location.pathname.startsWith("/proto") || Ay.location.pathname.startsWith("/deck") || Ay.location.pathname.startsWith("/mirror") || Ay.location.pathname.startsWith("/desktop_new_tab") || Ay.location.pathname.startsWith("/board") || Ay.location.pathname.startsWith("/slides") || Ay.location.pathname.startsWith("/site")) || datadog_rum_fullscreen;
   let V = U ? 100 : function (e, t, i) {
     let {
@@ -104,20 +104,20 @@ export function $$k1({
     onEnableDatadog: ({
       allowResourceTracking: e
     } = {}) => {
-      _$$L.setTrackingConsent("granted");
-      let t = _$$L.getInternalContext()?.session_id;
+      datadogRum.setTrackingConsent("granted");
+      let t = datadogRum.getInternalContext()?.session_id;
       t && L(t);
-      let i = _$$L.getInitConfiguration();
-      e !== i?.trackResources && _$$L.init({
+      let i = datadogRum.getInitConfiguration();
+      e !== i?.trackResources && datadogRum.init({
         ...i,
         trackResources: e
       });
     },
     onDisableDatadog: () => {
-      _$$L.setTrackingConsent("not-granted");
+      datadogRum.setTrackingConsent("not-granted");
     },
     onCircuitBreakerError: () => {
-      _$$L.addError(Error(`${P}: Rate limit exceeded, disabling send events`), {
+      datadogRum.addError(Error(`${P}: Rate limit exceeded, disabling send events`), {
         rumCircuitBreaker: !0,
         rumCiruitBreakerData: {
           maxGlobalSendEventsPerSecond: j.maxGlobalSendEventsPerSecond,
@@ -129,7 +129,7 @@ export function $$k1({
     overallCircuitBreakerRatePerSecond: j.maxGlobalSendEventsPerSecond,
     enableEventWeighting: j.enableEventWeighting ?? !1
   });
-  _$$L.init({
+  datadogRum.init({
     allowedTracingUrls: K,
     applicationId: datadog_rum_application_id,
     clientToken: datadog_rum_client_token,
@@ -167,20 +167,20 @@ export function $$k1({
     allowUntrustedEvents: !T(M),
     beforeSend: (e, t) => $$D0.beforeSend(e, t)
   });
-  _$$L.setGlobalContextProperty("bundler", "webpack");
-  _$$L.setGlobalContextProperty("entrypoint", window.ENTRY_POINT ?? "unknown");
-  _$$L.setGlobalContextProperty("entrypoint_variant", _$$p ?? "unknown");
-  _$$L.setGlobalContextProperty("tracking_session_id", fF());
+  datadogRum.setGlobalContextProperty("bundler", "webpack");
+  datadogRum.setGlobalContextProperty("entrypoint", window.ENTRY_POINT ?? "unknown");
+  datadogRum.setGlobalContextProperty("entrypoint_variant", entrypointVariant ?? "unknown");
+  datadogRum.setGlobalContextProperty("tracking_session_id", fF());
   $$D0.configure({
     applicationId: datadog_rum_application_id
   });
-  let Y = _$$L.getInternalContext()?.session_id;
+  let Y = datadogRum.getInternalContext()?.session_id;
   if (Y && L(Y), user_data) {
     let {
       id,
       locale
     } = user_data;
-    _$$L.setUser({
+    datadogRum.setUser({
       id,
       org_id,
       locale,
@@ -266,13 +266,13 @@ let O = class e {
     this._enableEventWeighting = r ?? !1;
   }
   disableEventSendingUnlessDebugEnabled() {
-    this._isSendEventsEnabled && !_$$z() && (this._onDisableDatadog(), this._isSendEventsEnabled = !1);
+    this._isSendEventsEnabled && !isDebugFlowActive() && (this._onDisableDatadog(), this._isSendEventsEnabled = !1);
   }
   enableEventSending({
     allowResourceTracking: e
   }) {
     e ??= !0;
-    this._overallCircuitBreakerSendsDisabled || this._isSendEventsEnabled || (!e && _$$z() && (e = !0), this._onEnableDatadog({
+    this._overallCircuitBreakerSendsDisabled || this._isSendEventsEnabled || (!e && isDebugFlowActive() && (e = !0), this._onEnableDatadog({
       allowResourceTracking: e
     }), this._isSendEventsEnabled = !0);
   }
@@ -318,12 +318,12 @@ let O = class e {
     try {
       this.modifyContextWithCustomEventProcessing(e, t);
     } catch (e) {
-      Cp(e);
+      captureException(e);
     }
     return !0;
   }
   isDebugLoggingEnabled() {
-    return _$$z();
+    return isDebugFlowActive();
   }
   shouldSendEvent(e, t) {
     if (!getFeatureFlags().datadog_rum_allow_send || !this.isSendEventsEnabled()) return !1;
@@ -331,7 +331,7 @@ let O = class e {
       if (e.error.message.startsWith("[Figment]")) return !1;
     } else if ("resource" === e.type) {
       for (let t of I) if (e.resource.url.includes(t)) return !1;
-      if (!_$$z()) {
+      if (!isDebugFlowActive()) {
         for (let t of E) if (e.resource.url.includes(t)) return !1;
       }
     } else if ("action" === e.type && "click" === e.action.type && (e.action.target?.name ?? "").startsWith("Screenreader support")) return !1;
@@ -346,7 +346,7 @@ let O = class e {
         t.selectedView = e.selectedView;
         t.modalShown = e.modalShown;
         t.dropdownShown = e.dropdownShown;
-        t.sanitizedURL = Br(window.location.href);
+        t.sanitizedURL = normalizeUrl(window.location.href);
         t.timeSinceInitialization = performance.now() - this._initializedAt;
       }
     }
@@ -419,7 +419,7 @@ function L(e) {
   $$D0.configure({
     sessionId: e
   });
-  XM("datadog_rum_link", {
+  setSentryContext("datadog_rum_link", {
     session_link: `https://go/${"gov" === cluster_name ? "dd-gov" : "dd"}/rum/sid/${e}`
   });
 }

@@ -1,8 +1,8 @@
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { md, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, Xr } from "../figma_app/27355";
 import { XHR } from "../905/910117";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { zX } from "../905/576487";
 import { ZS } from "../figma_app/519839";
@@ -13,7 +13,7 @@ import { UV, _9, Md, VW } from "../figma_app/755939";
 import { Bj, _I, sG, Ao } from "../905/686934";
 export function $$f0() {
   let e = useDispatch();
-  let t = md(UV);
+  let t = useAtomWithSubscription(UV);
   let i = Xr(_9);
   let f = Md(t);
   let _ = useSelector(vQ);
@@ -46,7 +46,7 @@ export function $$f0() {
       XHR.del(`/api/templates/file/${t}`).then(() => {
         e(F.enqueue({
           type: Ao,
-          message: _$$t("cooper.templates.unpublished"),
+          message: getI18nString("cooper.templates.unpublished"),
           icon: zX.CHECK
         }));
         e(ZS({
@@ -59,7 +59,7 @@ export function $$f0() {
           type: Ao,
           error: !0,
           icon: zX.EXCLAMATION,
-          message: _$$t("cooper.templates.failed_to_unpublish_template")
+          message: getI18nString("cooper.templates.failed_to_unpublish_template")
         }));
         i({
           state: VW.UNPUBLISH_TEMPLATE_ERRORED

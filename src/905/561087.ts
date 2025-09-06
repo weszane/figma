@@ -1,9 +1,9 @@
 import { c as _$$c, r as _$$r } from "../905/676456";
-import { f } from "../905/842794";
+import { handleOptimistTransaction } from "../905/842794";
 import { NC } from "../905/17179";
 import { Ay } from "../905/612521";
 import { XHR } from "../905/910117";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
 import { F } from "../905/302958";
 import { nF } from "../905/350402";
@@ -36,7 +36,7 @@ let $$_5 = nF(async (e, {
     is_multi_move: u,
     restore_files: p
   });
-  await f(A, e.dispatch, $$f3({
+  await handleOptimistTransaction(A, e.dispatch, $$f3({
     repos: t,
     folderId: i
   })).then(({
@@ -55,7 +55,7 @@ let $$_5 = nF(async (e, {
     }));
   }).catch(t => {
     e.dispatch(F.enqueue({
-      message: J(t, t.data?.message || _$$t("collaboration.branching.an_error_occurred_while_updating_this_file")),
+      message: J(t, t.data?.message || getI18nString("collaboration.branching.an_error_occurred_while_updating_this_file")),
       error: !0
     }));
   });
@@ -65,12 +65,12 @@ let A = (e, t, i, r, a, s = []) => {
     repo_ids: t,
     trash_repos: !i
   }).then(() => {
-    let a = i ? _$$t("collaboration.branching.files_permanently_deleted") : _$$t("collaboration.branching.files_trashed");
+    let a = i ? getI18nString("collaboration.branching.files_permanently_deleted") : getI18nString("collaboration.branching.files_trashed");
     e.dispatch(_$$c(r));
     e.dispatch(F.enqueue({
       message: a,
       button: i ? void 0 : {
-        text: _$$t("collaboration.branching.undo_delete"),
+        text: getI18nString("collaboration.branching.undo_delete"),
         action: () => {
           e.dispatch(b4({
             repoIds: t,
@@ -83,7 +83,7 @@ let A = (e, t, i, r, a, s = []) => {
   }).catch(t => {
     e.dispatch(_$$r(r));
     e.dispatch(F.enqueue({
-      message: J(t, t.data?.message || _$$t("collaboration.branching.an_error_occurred_while_deleting_these_files")),
+      message: J(t, t.data?.message || getI18nString("collaboration.branching.an_error_occurred_while_deleting_these_files")),
       error: !0
     }));
   });
@@ -128,4 +128,4 @@ export const Y4 = $$y1;
 export const YM = $$I2;
 export const aL = $$f3;
 export const hT = $$b4;
-export const mE = $$_5; 
+export const mE = $$_5;

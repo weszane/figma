@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
 import { lQ } from "../905/934246";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { Rs } from "../figma_app/288654";
 import { u as _$$u } from "../905/918498";
 import { b } from "../905/723768";
@@ -19,7 +19,7 @@ export function $$E1(e, t) {
   let l = T5("useConnectedProjectsStarterTeamPaywall").unwrapOr(null);
   return useCallback(() => {
     if (!l || r) return null;
-    l.tier === FPlanNameType.STARTER && l.key.type === FOrganizationLevelType.TEAM ? (az.trackDefinedEvent("workflow.connected_project_invite_starter_team_paywall_hit", {
+    l.tier === FPlanNameType.STARTER && l.key.type === FOrganizationLevelType.TEAM ? (analyticsEventManager.trackDefinedEvent("workflow.connected_project_invite_starter_team_paywall_hit", {
       planId: l.key.type,
       planType: l.key.parentId || void 0,
       planTier: l.tier,
@@ -51,7 +51,7 @@ export function $$y0(e, t, r) {
   let m = "loaded" === h.status ? h.data.plan : null;
   return useCallback(() => {
     if (!m) return lQ;
-    m && m.connectionCount >= b[m.tier] && !m.unlimitedConnectionsEnabled && !m.testingOnlyUnlimitedConnectionsEnabled ? (az.trackDefinedEvent("workflow.connected_projects_maximum_connections_paywall_hit", {
+    m && m.connectionCount >= b[m.tier] && !m.unlimitedConnectionsEnabled && !m.testingOnlyUnlimitedConnectionsEnabled ? (analyticsEventManager.trackDefinedEvent("workflow.connected_projects_maximum_connections_paywall_hit", {
       planId: m.key.parentId || void 0,
       planType: m.key.type,
       planTier: m.tier,

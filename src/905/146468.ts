@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { $n } from "../905/521428";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { fu } from "../figma_app/831799";
 import { _5 } from "../figma_app/181241";
 let c = new class {
@@ -28,7 +28,7 @@ export function $$u0({
   useLabel: t = !1
 }) {
   let i = !!e.sharingGroupId;
-  let d = useMemo(() => t ? i ? _$$t("design_systems.libraries_modal.available_to_external_teams_in_connected_project") : _$$t("design_systems.libraries_modal.unavailable_to_external_teams_in_connected_project") : null, [t, i]);
+  let d = useMemo(() => t ? i ? getI18nString("design_systems.libraries_modal.available_to_external_teams_in_connected_project") : getI18nString("design_systems.libraries_modal.unavailable_to_external_teams_in_connected_project") : null, [t, i]);
   return jsx(fu, {
     name: "Library Subscription Toggle",
     children: jsxs("div", {
@@ -46,7 +46,7 @@ export function $$u0({
             resourceConnectionId: e.resourceConnectionId
           });
         },
-        children: i ? _$$t("design_systems.libraries_modal.add_to_connected_project_toggle.remove") : _$$t("design_systems.libraries_modal.add_to_connected_project_toggle.allow")
+        children: i ? getI18nString("design_systems.libraries_modal.add_to_connected_project_toggle.remove") : getI18nString("design_systems.libraries_modal.add_to_connected_project_toggle.allow")
       })]
     })
   });

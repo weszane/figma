@@ -3,7 +3,7 @@ import { K } from "../905/443068";
 import { A } from "../905/251970";
 import s from "classnames";
 import { $z } from "../figma_app/617427";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { Y, M } from "../905/830372";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
@@ -33,7 +33,7 @@ export function $$E4({
     })
   }) : jsx("span", {
     className: wV,
-    children: tx("rcs.rcs_shared.step_counter", {
+    children: renderI18nText("rcs.rcs_shared.step_counter", {
       currentStepNum: e,
       totalNumSteps: t
     })
@@ -59,14 +59,14 @@ function y(e) {
             ctaTrackingDescriptor: e.secondaryCtaProps?.ctaTrackingDescriptor || _$$c.BACK
           },
           variant: "secondary",
-          children: e.secondaryCtaProps?.ctaText || tx("tooltips_plus_onboarding.back")
+          children: e.secondaryCtaProps?.ctaText || renderI18nText("tooltips_plus_onboarding.back")
         }), e.onPrimaryCtaClick && jsx($z, {
           onClick: e.onPrimaryCtaClick,
           trackingProperties: {
             ctaTrackingDescriptor: e.primaryCtaProps?.ctaTrackingDescriptor || _$$c.NEXT
           },
           variant: "primary",
-          children: e.primaryCtaProps?.ctaText || tx("tooltips_plus_onboarding.next")
+          children: e.primaryCtaProps?.ctaText || renderI18nText("tooltips_plus_onboarding.next")
         })]
       })
     })]
@@ -111,7 +111,7 @@ export function $$b2(e) {
         className: b,
         children: jsx(K, {
           onClick: e.dismissModal,
-          "aria-label": _$$t("general.close"),
+          "aria-label": getI18nString("general.close"),
           htmlAttributes: {
             "data-testid": "close-button"
           },
@@ -141,7 +141,7 @@ export function $$T5(e) {
         className: b,
         children: jsx(K, {
           onClick: e.dismissModal,
-          "aria-label": _$$t("general.close"),
+          "aria-label": getI18nString("general.close"),
           htmlAttributes: {
             "data-testid": "close-button"
           },
@@ -185,7 +185,7 @@ export function $$I1(e) {
         className: b,
         children: jsx(K, {
           onClick: e.dismissModal,
-          "aria-label": _$$t("general.close"),
+          "aria-label": getI18nString("general.close"),
           htmlAttributes: {
             "data-testid": "close-button"
           },

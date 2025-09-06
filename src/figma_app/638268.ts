@@ -7,7 +7,7 @@ import { getFeatureFlags } from "../905/601108";
 import d from "classnames";
 import { A as _$$A } from "../vendor/850789";
 import { rf } from "../figma_app/806412";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Ui } from "../905/709171";
 import { gl } from "../905/216495";
 import { kl } from "../905/275640";
@@ -95,7 +95,7 @@ export let $$O0 = memo(function ({
       "data-tooltip": Q
     } : {
       "data-tooltip-style-description": L ? L.description : void 0,
-      "data-tooltip-style-name": L ? kH(L.name) : _$$t("design_systems.styles.custom"),
+      "data-tooltip-style-name": L ? kH(L.name) : getI18nString("design_systems.styles.custom"),
       "data-tooltip-style-element-type": k,
       "data-tooltip-type": Ib.SPECIAL,
       "data-tooltip": L && L.description || F ? _$$Z : ""
@@ -114,7 +114,7 @@ export let $$O0 = memo(function ({
       }),
       ref: M,
       dir: "auto",
-      children: L ? Pc(L.name) : _$$t("design_systems.styles.custom")
+      children: L ? Pc(L.name) : getI18nString("design_systems.styles.custom")
     }), Y && jsxs("div", {
       className: [gE, p3].join(" "),
       children: ["(", K, ")"]

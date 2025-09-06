@@ -9,7 +9,7 @@ import { l as _$$l } from "../905/803103";
 import { getFeatureFlags } from "../905/601108";
 import { Q } from "../figma_app/67145";
 import { Pt } from "../figma_app/806412";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { ro } from "../figma_app/451499";
 import { dG } from "../figma_app/753501";
 import { E7 } from "../905/216495";
@@ -38,10 +38,10 @@ function N(e) {
       "NORMAL" !== E7(i.property) && (s = DU);
       return t ? jsx(K, {
         onClick: e,
-        "aria-label": _$$t("fullscreen.properties_panel.color_picker.blend_mode_select.tooltip.blend_mode"),
+        "aria-label": getI18nString("fullscreen.properties_panel.color_picker.blend_mode_select.tooltip.blend_mode"),
         htmlAttributes: {
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": _$$t("fullscreen.properties_panel.color_picker.blend_mode_select.tooltip.blend_mode")
+          "data-tooltip": getI18nString("fullscreen.properties_panel.color_picker.blend_mode_select.tooltip.blend_mode")
         },
         disabled: i.disabled,
         children: r
@@ -51,7 +51,7 @@ function N(e) {
         onPointerDown: dG,
         onMouseDown: e,
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("fullscreen.properties_panel.color_picker.blend_mode_select.tooltip.blend_mode"),
+        "data-tooltip": getI18nString("fullscreen.properties_panel.color_picker.blend_mode_select.tooltip.blend_mode"),
         children: r
       });
     }
@@ -96,7 +96,7 @@ let R = memo(function (e) {
   }), [r]);
   return jsxs(Fragment, {
     children: [jsx(N, {
-      ariaLabel: _$$t("fullscreen.properties_panel.color_picker.blend_mode_select.tooltip.blend_mode"),
+      ariaLabel: getI18nString("fullscreen.properties_panel.color_picker.blend_mode_select.tooltip.blend_mode"),
       className: rO,
       disabled: e.disabled,
       dispatch: e.dispatch,
@@ -140,10 +140,10 @@ function P({
       children: [jsx(_$$d, {
         recordingKey: i,
         disabled: t,
-        "aria-label": _$$t("fullscreen.properties_panel.color_picker.blend_mode_select.tooltip.blend_mode"),
+        "aria-label": getI18nString("fullscreen.properties_panel.color_picker.blend_mode_select.tooltip.blend_mode"),
         htmlAttributes: {
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": _$$t("fullscreen.properties_panel.color_picker.blend_mode_select.tooltip.blend_mode")
+          "data-tooltip": getI18nString("fullscreen.properties_panel.color_picker.blend_mode_select.tooltip.blend_mode")
         },
         ...getTriggerProps(),
         children: jsx($$C0, {

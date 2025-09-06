@@ -4,7 +4,7 @@ import { useDispatch } from "../vendor/514228";
 import { s_ } from "../905/17223";
 import { ks, nR, $$ } from "../figma_app/637027";
 import { P } from "../905/347284";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { F } from "../905/302958";
 import { W } from "../5430/573261";
 import { Ce, to } from "../905/156213";
@@ -148,8 +148,8 @@ let $$y0 = Ju(function ({
 }) {
   let a = useDispatch();
   return jsx(yX, {
-    confirmationTitle: _$$t("allowlist_plugins_modals.msa_amendment_modal.title"),
-    confirmText: _$$t("allowlist_plugins_modals.msa_amendment_modal.accept_button"),
+    confirmationTitle: getI18nString("allowlist_plugins_modals.msa_amendment_modal.title"),
+    confirmText: getI18nString("allowlist_plugins_modals.msa_amendment_modal.accept_button"),
     onConfirm: () => {
       a(xF({
         orgId: e.currentUserOrgId
@@ -158,12 +158,12 @@ let $$y0 = Ju(function ({
         payload: {
           plugins_whitelist_enforced: !1
         },
-        successMessage: _$$t("allowlist_plugins_modals.msa_amendment_modal.success_notification")
+        successMessage: getI18nString("allowlist_plugins_modals.msa_amendment_modal.success_notification")
       })) : a(yo({
         payload: {
           widgets_whitelist_enforced: !1
         },
-        successMessage: _$$t("allowlist_widgets_modals.msa_amendment_modal.success_notification")
+        successMessage: getI18nString("allowlist_widgets_modals.msa_amendment_modal.success_notification")
       }));
       a(Ce());
     },
@@ -189,13 +189,13 @@ let $$w1 = Ju(function (e) {
   };
   return jsxs(d_, {
     size: "small",
-    title: _$$t("allowlist_plugins_modals.add_plugin.title"),
+    title: getI18nString("allowlist_plugins_modals.add_plugin.title"),
     onHide: m,
     children: [jsx(s_, {
       dispatch: t
     }), jsx("div", {
       className: x,
-      children: tx("allowlist_plugins_modals.add_plugin.details")
+      children: renderI18nText("allowlist_plugins_modals.add_plugin.details")
     }), jsxs("form", {
       onSubmit: n => {
         n.preventDefault();
@@ -216,7 +216,7 @@ let $$w1 = Ju(function (e) {
         }
         t(F.enqueue({
           error: !0,
-          message: _$$t("allowlist_plugins_modals.add_plugin.invalid_url_notification")
+          message: getI18nString("allowlist_plugins_modals.add_plugin.invalid_url_notification")
         }));
       },
       children: [jsx(ks, {
@@ -230,12 +230,12 @@ let $$w1 = Ju(function (e) {
           onClick: m,
           className: f,
           type: "button",
-          children: tx("general.cancel")
+          children: renderI18nText("general.cancel")
         }), jsx($$, {
           disabled: !ZI(a),
           className: f,
           type: "submit",
-          children: tx("allowlist_plugins_modals.add_plugin.add_button")
+          children: renderI18nText("allowlist_plugins_modals.add_plugin.add_button")
         })]
       })]
     })]
@@ -250,13 +250,13 @@ let $$k2 = Ju(function (e) {
   };
   return jsxs(d_, {
     size: "small",
-    title: _$$t("allowlist_widgets_modals.add_widget.title"),
+    title: getI18nString("allowlist_widgets_modals.add_widget.title"),
     onHide: m,
     children: [jsx(s_, {
       dispatch: t
     }), jsx("div", {
       className: x,
-      children: tx("allowlist_widgets_modals.add_widget.details")
+      children: renderI18nText("allowlist_widgets_modals.add_widget.details")
     }), jsxs("form", {
       onSubmit: n => {
         n.preventDefault();
@@ -277,7 +277,7 @@ let $$k2 = Ju(function (e) {
         }
         t(F.enqueue({
           error: !0,
-          message: _$$t("allowlist_widgets_modals.add_widget.invalid_url_notification")
+          message: getI18nString("allowlist_widgets_modals.add_widget.invalid_url_notification")
         }));
       },
       children: [jsx(ks, {
@@ -291,12 +291,12 @@ let $$k2 = Ju(function (e) {
           onClick: m,
           className: f,
           type: "button",
-          children: tx("general.cancel")
+          children: renderI18nText("general.cancel")
         }), jsx($$, {
           disabled: !yx(a),
           className: f,
           type: "submit",
-          children: tx("allowlist_widgets_modals.add_widget.add_button")
+          children: renderI18nText("allowlist_widgets_modals.add_widget.add_button")
         })]
       })]
     })]

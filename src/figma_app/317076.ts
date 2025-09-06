@@ -4,7 +4,7 @@ import { z } from "../905/239603";
 import { Gw, FB } from "../vendor/149334";
 import { debugState } from "../905/407919";
 import { WB } from "../905/761735";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { Zr } from "../figma_app/930338";
 import { g as _$$g } from "../905/880308";
 import { XHR } from "../905/910117";
@@ -194,7 +194,7 @@ export async function $$x11(e) {
     });
     let n = r?.data?.meta;
     n?.title && (t = decodeURIComponent(n?.title));
-  } catch (e) { } finally {
+  } catch (e) {} finally {
     if (!t) {
       let r = Gw(e);
       t = r ? Zr(r) : "N/A";
@@ -221,11 +221,11 @@ export async function $$C2({
   source: c
 }) {
   let h = "";
-  if (n) h = n; else {
+  if (n) h = n;else {
     let t = FB(e);
-    if (t?.toLowerCase() === "github.com") h = "Github"; else if (t?.toLowerCase() === "jira.com" || t?.toLowerCase() === "atlassian.net") {
+    if (t?.toLowerCase() === "github.com") h = "Github";else if (t?.toLowerCase() === "jira.com" || t?.toLowerCase() === "atlassian.net") {
       h = "Jira";
-      let t = function(e) {
+      let t = function (e) {
         for (let t of M) {
           let r = e.match(t);
           if (r?.[1]) return r[1];
@@ -416,7 +416,7 @@ export async function $$D10({
     }, r);
     await r;
   } catch (r) {
-    $D(_$$e.DEVELOPER_TOOLS, r, {
+    reportError(_$$e.DEVELOPER_TOOLS, r, {
       extra: {
         link: e,
         linkPreviewJson: t
@@ -442,4 +442,4 @@ export const TU = $$I7;
 export const Tz = $$L8;
 export const WV = $$R9;
 export const n7 = $$D10;
-export const yf = $$x11; 
+export const yf = $$x11;

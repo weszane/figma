@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "../vendor/514228";
 import { debounce } from "../905/915765";
 import { getInitialOptions } from "../figma_app/169182";
 import { oJ } from "../905/63728";
-import { Yd, t as _$$t } from "../905/303541";
+import { getTranslatedDynamicContent, getI18nString } from "../905/303541";
 import { sz } from "../figma_app/216696";
 import { rL } from "../figma_app/49598";
 import { j7 } from "../905/929976";
@@ -47,7 +47,7 @@ export function $$A3(e) {
   }), {}), [S]);
   let R = useMemo(() => (S || []).reduce((e, t) => ({
     ...e,
-    [t.id]: Yd(t.i18n_meta.title, t.title)
+    [t.id]: getTranslatedDynamicContent(t.i18n_meta.title, t.title)
   }), {}), [S]);
   let L = useMemo(() => (S || []).map(({
     id: e
@@ -104,8 +104,8 @@ export function $$A3(e) {
     subcategories: useMemo(() => {
       if (!S) return [];
       let e = {
-        activity: _$$t("browse_templates_modal.subcategory.activity"),
-        role: _$$t("browse_templates_modal.subcategory.role")
+        activity: getI18nString("browse_templates_modal.subcategory.activity"),
+        role: getI18nString("browse_templates_modal.subcategory.role")
       };
       let t = [];
       S.forEach(r => {

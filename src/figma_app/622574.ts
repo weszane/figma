@@ -3,9 +3,9 @@ import { useSelector, useStore } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { getFeatureFlags } from "../905/601108";
-import { eU, fp } from "../figma_app/27355";
+import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { A as _$$A } from "../vendor/90566";
-import { R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { Rs } from "../figma_app/288654";
 import { IT } from "../figma_app/566371";
 import { ye, Gi as _$$Gi } from "../figma_app/528509";
@@ -21,7 +21,7 @@ import { ol } from "../figma_app/598018";
 import { ke } from "../figma_app/841351";
 import { n as _$$n } from "../905/79930";
 import { s as _$$s } from "../905/82276";
-import { O as _$$O } from "../905/247093";
+import { UNASSIGNED } from "../905/247093";
 import { q as _$$q } from "../figma_app/446378";
 import { lg } from "../figma_app/976749";
 import { ar } from "../figma_app/741211";
@@ -236,7 +236,7 @@ export function $$z5({
     areWorkspacesEnabled: e,
     editorType: t,
     numTemplatesPerTeam: r,
-    filterByIds: o ? o.map(e => e === _$$O ? "0" : e) : null,
+    filterByIds: o ? o.map(e => e === UNASSIGNED ? "0" : e) : null,
     includeMyTeamsOnly: c,
     revalidateOnMount: i,
     pageSize: 20
@@ -263,9 +263,9 @@ export function $$z5({
       let r = new Set();
       let n = new Set(e.map(e => e.id));
       teamTemplates.forEach(e => {
-        let i = e.workspaceId ?? _$$O;
-        n.has(i) || r.has(i) || (i === _$$O ? t.push({
-          id: _$$O
+        let i = e.workspaceId ?? UNASSIGNED;
+        n.has(i) || r.has(i) || (i === UNASSIGNED ? t.push({
+          id: UNASSIGNED
         }) : e.workspaceId && e.workspaceName && t.push({
           id: e.workspaceId,
           name: e.workspaceName
@@ -513,10 +513,10 @@ let q = M4.Query({
     templateType: r
   }).then(e => e.data.meta.templates) : []
 });
-let J = eU(null);
+let J = atom(null);
 export function $$Z19(e, t = 2, r = !0) {
   let i;
-  let [a, s] = fp(J);
+  let [a, s] = useAtomValueAndSetter(J);
   let d = r && (!a || a.editorType !== e || a.count < t);
   let c = $$P2();
   let u = getFeatureFlags().pro_templates_lg;
@@ -569,14 +569,14 @@ export function $$Z19(e, t = 2, r = !0) {
     numTemplatesForTeam: c?.type === "team" ? templatesByTeam?.totalTemplatesByTeam : void 0
   };
 }
-export let $$Q10 = eU(null);
+export let $$Q10 = atom(null);
 export function $$ee9() {
   let e = $$U12()?.fileVersionId ?? "";
   let t = useStore();
-  let [r, a] = fp($$Q10);
+  let [r, a] = useAtomValueAndSetter($$Q10);
   let s = lg();
-  let o = R(e => s === FFileType.SLIDES ? AC(e) : []);
-  let d = R(e => s === FFileType.COOPER ? tz(e) : []);
+  let o = selectWithShallowEqual(e => s === FFileType.SLIDES ? AC(e) : []);
+  let d = selectWithShallowEqual(e => s === FFileType.COOPER ? tz(e) : []);
   let u = o.length;
   let p = d.length;
   useEffect(() => {

@@ -1,52 +1,51 @@
-import { BEGIN } from 'redux-optimist'
-import { MM as _$$MM, NC, T4 } from '../905/17179'
-import { c as _$$c, r as _$$r } from '../905/676456'
-import { F } from '../905/842794'
-import { Lg } from '../figma_app/257275'
-
+import { BEGIN } from 'redux-optimist';
+import { MM as _$$MM, NC, T4 } from '../905/17179';
+import { c as _$$c, r as _$$r } from '../905/676456';
+import { generateOptimistId } from '../905/842794';
+import { getFalseValue } from '../figma_app/897289';
 export function $$l1(e, t) {
-  let i = T4('THUNK')
-  let l = e => t ? t(e) : i
-  let c = (t) => {
-    let s = l(t)
-    return (l, c, u) => (Lg() && l(d({
+  let i = T4('THUNK');
+  let l = e => t ? t(e) : i;
+  let c = t => {
+    let s = l(t);
+    return (l, c, u) => (getFalseValue() && l(d({
       thunkIdentifier: i,
-      thunkPayload: t,
+      thunkPayload: t
     })), e({
       dispatch: l,
       getState: c,
       optimisticDispatch(e) {
-        let t = F()
+        let t = generateOptimistId();
         l({
           type: e.type,
           payload: e.payload,
           optimist: {
             type: BEGIN,
-            id: t,
-          },
-        })
+            id: t
+          }
+        });
         return {
           optimistId: t,
           revert: () => {
-            l(_$$r(t))
+            l(_$$r(t));
           },
           commit: () => {
-            l(_$$c(t))
-          },
-        }
-      },
+            l(_$$c(t));
+          }
+        };
+      }
     }, t, {
       loadingKey: s,
-      ...u,
-    }))
-  }
-  c.loadingKeyForPayload = l
-  Lg() && (c._uniqueIdentifierForTest_ = i)
-  return c
+      ...u
+    }));
+  };
+  c.loadingKeyForPayload = l;
+  getFalseValue() && (c._uniqueIdentifierForTest_ = i);
+  return c;
 }
-let d = NC('_THUNK_FOR_TEST_')
+let d = NC('_THUNK_FOR_TEST_');
 export function $$c0(e, t, i) {
-  return _$$MM(e, t, i)
+  return _$$MM(e, t, i);
 }
-export const MM = $$c0
-export const nF = $$l1
+export const MM = $$c0;
+export const nF = $$l1;

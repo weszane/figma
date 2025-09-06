@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { nR } from "../figma_app/637027";
 import { P } from "../905/347284";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { c as _$$c } from "../905/370443";
 import { jm } from "../figma_app/831799";
 import { WW } from "../figma_app/345997";
@@ -59,9 +59,9 @@ export function $$u0({
               children: t.name
             }), jsxs("p", {
               className: "org_self_serve--teamEditors--2hBWh text--fontPos11--2LvXf text--_fontBase--QdLsd",
-              children: [!j && p && tx("universal_upgrade.select_team.editor_count.seat_rename", {
+              children: [!j && p && renderI18nText("universal_upgrade.select_team.editor_count.seat_rename", {
                 editors: t.editors
-              }), j && u && tx("universal_upgrade.select_team.files_per_team_figma_files_used", {
+              }), j && u && renderI18nText("universal_upgrade.select_team.files_per_team_figma_files_used", {
                 numFilesUsed: u[r],
                 numFreeFilesAllowed: WW
               })]
@@ -70,7 +70,7 @@ export function $$u0({
         }), jsx(nR, {
           className: J1,
           dataTestId: "select_team.upgrade",
-          children: e ?? tx("universal_upgrade.select_team.upgrade")
+          children: e ?? renderI18nText("universal_upgrade.select_team.upgrade")
         })]
       }, t.id))
     })

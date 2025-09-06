@@ -1,24 +1,24 @@
-import { m } from "../905/717445";
+import { getFilteredFeatureFlags } from "../905/717445";
 import { parseAndNormalizeQuery } from "../905/634134";
 import { sy } from "../figma_app/930338";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { L8, At } from "../905/760074";
 import { Zt } from "../figma_app/617727";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { d8, qi, oU, ZH, gR, H_, Wi, sR, qr } from "../905/366346";
 function u(e) {
-  return !!m().ce_il_root && e?.view === "fullscreen" && e?.editorType === nT.Illustration;
+  return !!getFilteredFeatureFlags().ce_il_root && e?.view === "fullscreen" && e?.editorType === FEditorType.Illustration;
 }
 export class $$p0 {
   pathToSelectedView(e, t, i, a) {
-    if (!m().ce_il_root) return null;
+    if (!getFilteredFeatureFlags().ce_il_root) return null;
     let s = i ? parseAndNormalizeQuery(i) : {};
     let o = t[1];
     if (("design" === o || "file" === o) && ("draw" === s.mode || "draw" === s.m) && "auto" !== s.m) {
       let i = "branch" === t[3] && t[4] ? t[4] : t[2];
       let n = {
         view: "fullscreen",
-        editorType: e?.user ? nT.Illustration : nT.Design,
+        editorType: e?.user ? FEditorType.Illustration : FEditorType.Design,
         fileKey: i
       };
       d8(a, n);
@@ -61,7 +61,7 @@ export class $$p0 {
           i = e ? At(n, e) : n.name;
         }
       }
-      return i ?? _$$t("dev_handoff.dev_handoff_view_selector.untitled");
+      return i ?? getI18nString("dev_handoff.dev_handoff_view_selector.untitled");
     }
     return null;
   }

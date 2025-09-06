@@ -3,7 +3,7 @@ import { useMemo, useCallback, useState, useRef, useEffect } from "react";
 import { useSelector } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { nj } from "../905/125019";
-import { fp } from "../figma_app/27355";
+import { useAtomValueAndSetter } from "../figma_app/27355";
 import { _L } from "../9410/635978";
 import { tJ } from "../figma_app/741237";
 import { tB } from "../figma_app/731583";
@@ -92,7 +92,7 @@ function I({
     let [c, u, p] = J(null);
     let [h, m, f] = J(null);
     let [_, C, T] = J(null);
-    let [E] = fp(oe);
+    let [E] = useAtomValueAndSetter(oe);
     let S = function (e, t, i, n, a, s, o, l) {
       let d = useRef(s);
       let c = useRef(o);
@@ -199,7 +199,7 @@ function I({
   }, [k, R, e, w, I]);
   let P = DD(e);
   let U = ZU(e);
-  let [F, H] = fp(_$$H);
+  let [F, H] = useAtomValueAndSetter(_$$H);
   let {
     isVideoNodeHovered,
     pointerDownOnVideo

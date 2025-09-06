@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { useSelector } from "../vendor/514228";
 import a from "../vendor/77708";
-import { R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { uQ } from "../figma_app/311375";
 import { gl, hS } from "../905/216495";
 import { N9, qg } from "../figma_app/385874";
@@ -148,7 +148,7 @@ export function $$I8(e) {
   });
 }
 export function $$S10() {
-  return R(e => ut(e.mirror.selectionProperties, g));
+  return selectWithShallowEqual(e => ut(e.mirror.selectionProperties, g));
 }
 export function $$v7(e) {
   let t = $$S10();

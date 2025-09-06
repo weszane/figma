@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { IT } from "../figma_app/566371";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { GM } from "../figma_app/275462";
 import { fI, In } from "../figma_app/229259";
 import { q5 } from "../figma_app/516028";
@@ -19,7 +19,7 @@ export function $$f1(e) {
   let o = dq();
   let m = q5();
   useEffect(() => {
-    t && "loaded" === i.status && 0 === i.data.length && $D(_$$e.DESIGN_SYSTEMS_ECOSYSTEM, p, {
+    t && "loaded" === i.status && 0 === i.data.length && reportError(_$$e.DESIGN_SYSTEMS_ECOSYSTEM, p, {
       tags: {
         orgId: o,
         hasOpenFile: !!m
@@ -36,7 +36,7 @@ export function $$_2() {
   let i = dq();
   let u = q5();
   useEffect(() => {
-    e && "loaded" === t.status && 0 === t.data.length && $D(_$$e.COMMUNITY, m, {
+    e && "loaded" === t.status && 0 === t.data.length && reportError(_$$e.COMMUNITY, m, {
       tags: {
         orgId: i,
         hasOpenFile: !!u

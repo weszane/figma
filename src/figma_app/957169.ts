@@ -5,7 +5,7 @@ import { buildUploadUrl } from "../figma_app/169182";
 import { n as _$$n } from "../figma_app/3731";
 import { s as _$$s } from "../cssbuilder/589278";
 import { pW } from "../905/160095";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { H8, Pf } from "../905/590952";
 import { A } from "../905/563377";
 import { ud } from "../905/862913";
@@ -100,13 +100,13 @@ export function $$S0() {
       useCurrentFileAsThumbnail: !0
     }), jsx("div", {
       className: _$$s.p16.font11.$,
-      children: tx("whiteboard.inserts.custom_templates_description")
+      children: renderI18nText("whiteboard.inserts.custom_templates_description")
     }), jsx("div", {
       className: _$$s.flex.justifyEnd.mx16.mb16.$,
       children: jsx(pW, {
         newTab: !0,
         href: A,
-        children: tx("whiteboard.inserts.learn_more")
+        children: renderI18nText("whiteboard.inserts.learn_more")
       })
     })]
   });

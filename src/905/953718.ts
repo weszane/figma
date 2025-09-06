@@ -1,8 +1,8 @@
 import { ServiceCategories as _$$e } from "../905/165054";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { R } from "../905/994802";
-var $$n0 = ((e) => (e.ExistingExperience = "ExistingExperience", e.HigherPriExperience = "HigherPriExperience", e.ExperimentCheckFail = "ExperimentCheckFail", e.RuleFail = "RuleFail", e.LifecycleCheckFail = "LifecycleCheckFail", e))($$n0 || {});
-var $$r1 = ((e) => (e.Overlay = "Overlay", e))($$r1 || {});
+var $$n0 = (e => (e.ExistingExperience = "ExistingExperience", e.HigherPriExperience = "HigherPriExperience", e.ExperimentCheckFail = "ExperimentCheckFail", e.RuleFail = "RuleFail", e.LifecycleCheckFail = "LifecycleCheckFail", e))($$n0 || {});
+var $$r1 = (e => (e.Overlay = "Overlay", e))($$r1 || {});
 export class $$a4 {
   constructor(e, t, i) {
     this.name = e;
@@ -19,7 +19,7 @@ function l(e) {
     t.length || setTimeout(() => {
       let i = t;
       t = [];
-      i.forEach((t) => {
+      i.forEach(t => {
         e(...t);
       });
     }, 0);
@@ -31,7 +31,7 @@ export class $$c3 {
     this.channels = e;
     this.batchNumber = 0;
     this.experienceMap = new Map();
-    this.runExperiencesForChannel = l((e) => {
+    this.runExperiencesForChannel = l(e => {
       R({
         type: "internal",
         name: "run_experiences_for_channel",
@@ -51,7 +51,7 @@ export class $$c3 {
       channelID
     } = e;
     let i = this.channels[channelID];
-    let n = !!i?.queuedExperiences.some((t) => t.id === e.id) || i?.currentExperience?.id === e.id;
+    let n = !!i?.queuedExperiences.some(t => t.id === e.id) || i?.currentExperience?.id === e.id;
     R({
       type: "internal",
       name: "queue_experience",
@@ -73,7 +73,7 @@ export class $$c3 {
       }
     }, "trace");
     let i = this.channels[t.channelID];
-    i?.currentExperience?.id === e ? (i.currentExperience = void 0, this.experienceMap.$$delete(e), this.runExperiencesForChannel(i.id)) : $D(_$$e.GROWTH_PLATFORM, Error(`completeExperience called when experience is not current: ${e}`));
+    i?.currentExperience?.id === e ? (i.currentExperience = void 0, this.experienceMap.$$delete(e), this.runExperiencesForChannel(i.id)) : reportError(_$$e.GROWTH_PLATFORM, Error(`completeExperience called when experience is not current: ${e}`));
   }
   dequeueExperience(e) {
     let t = this.experienceMap.get(e);
@@ -86,7 +86,7 @@ export class $$c3 {
       }
     }, "trace");
     let i = this.channels[t.channelID];
-    i && (i.queuedExperiences.some((t) => t.id === e) && this.experienceMap.$$delete(e), i.queuedExperiences = i.queuedExperiences.filter((t) => t.id !== e));
+    i && (i.queuedExperiences.some(t => t.id === e) && this.experienceMap.$$delete(e), i.queuedExperiences = i.queuedExperiences.filter(t => t.id !== e));
   }
   getExperienceForChannel(e) {
     R({
@@ -142,7 +142,7 @@ export class $$c3 {
     } = e;
     if (currentExperience) {
       let n = [];
-      e.queuedExperiences.forEach((e) => {
+      e.queuedExperiences.forEach(e => {
         e.onBlocked({
           reasonType: t,
           blocker: currentExperience
@@ -164,7 +164,7 @@ export class $$u2 {
     this.showOverlay = l((e, t) => {
       let i = this.overlayMap.get(e);
       if (i && "loading" !== i.queryResult.status) {
-        let n = (i) => {
+        let n = i => {
           this.debugLog("Showing overlay: ", e);
           t(i);
           this.removeOverlay(e, !1);
@@ -214,9 +214,9 @@ export class $$u2 {
   drainQueue() {
     this.debugLog("Draining the queued show calls");
     let e = this.loadMap.getMax();
-    let t = this.showQueue.filter((t) => !e || t.overlay.priority >= e.priority);
-    this.showQueue = this.showQueue.filter((t) => e && t.overlay.priority < e.priority);
-    t.forEach((e) => {
+    let t = this.showQueue.filter(t => !e || t.overlay.priority >= e.priority);
+    this.showQueue = this.showQueue.filter(t => e && t.overlay.priority < e.priority);
+    t.forEach(e => {
       let t = performance.now() - e.startTime;
       e.show({
         queueDuration: t
@@ -236,7 +236,7 @@ export class $$u2 {
     return JSON.parse(JSON.stringify(Array.from(this.loadMap.items.values())));
   }
   getImmutableQueuedOverlays() {
-    return JSON.parse(JSON.stringify(this.showQueue.map((e) => e.overlay)));
+    return JSON.parse(JSON.stringify(this.showQueue.map(e => e.overlay)));
   }
 }
 class p {

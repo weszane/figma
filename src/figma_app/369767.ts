@@ -6,10 +6,10 @@ import { O as _$$O } from "../905/587457";
 import { Nfd } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { fp, Xr } from "../figma_app/27355";
+import { useAtomValueAndSetter, Xr } from "../figma_app/27355";
 import { Pt } from "../figma_app/806412";
 import { J } from "../1577/181415";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { tc } from "../905/15667";
 import { tf, fu } from "../figma_app/831799";
 import { Y5 } from "../figma_app/455680";
@@ -55,7 +55,7 @@ let l = memo(function (e) {
   });
 });
 export function $$P2(e) {
-  let [t, r] = fp(s0);
+  let [t, r] = useAtomValueAndSetter(s0);
   let n = C5();
   let i = q();
   let {
@@ -82,11 +82,11 @@ export function $$D1({
   let r = q5();
   let s = $$P2(t);
   return r?.canEdit ? jsx(K, {
-    "aria-label": _$$t("sites.metadata.modal_button_site"),
+    "aria-label": getI18nString("sites.metadata.modal_button_site"),
     onClick: s,
     recordingKey: Pt(e, "websiteSettingsButton"),
     htmlAttributes: {
-      "data-tooltip": _$$t("sites.metadata.modal_button_site"),
+      "data-tooltip": getI18nString("sites.metadata.modal_button_site"),
       "data-tooltip-type": Ib.TEXT
     },
     children: jsx(_$$I, {})
@@ -108,7 +108,7 @@ export function $$M0({
     entryPoint: tc.SITE_SETTINGS
   });
   let d = getUpgradeEligibility(FProductAccessType.FIGMAKE);
-  let c = _$$t("figmake.metadata.modal_button_site");
+  let c = getI18nString("figmake.metadata.modal_button_site");
   let E = Pt(e, "websiteSettingsButton");
   if (getFeatureFlags().bake_monetization_plan && d === _$$q.CAN_UPGRADE) return jsx(fu, {
     name: "site_settings_button_upgrade_entry_point",

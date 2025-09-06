@@ -10,8 +10,8 @@ import { a as _$$a } from "../905/462280";
 import { j0r, NVY } from "../figma_app/763686";
 import _ from "classnames";
 import { b as _$$b } from "../figma_app/517135";
-import { $D } from "../905/11";
-import { tx, t as _$$t } from "../905/303541";
+import { reportError } from "../905/11";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { v4 } from "../figma_app/655139";
 import { G as _$$G, X as _$$X } from "../figma_app/521331";
 import { Fj } from "../figma_app/793429";
@@ -77,14 +77,14 @@ export function $$Q0(e) {
     disableDetailModalEntry: !0,
     children: jsx("span", {
       className: mL,
-      children: tx("inspect_panel.colors.blend_mode", {
+      children: renderI18nText("inspect_panel.colors.blend_mode", {
         blendMode: Z.format(blendMode)
       })
     })
   }) : jsx(_p, {
     indent: e.indent,
     className: e.className,
-    name: _$$t("inspect_panel.colors.blend"),
+    name: getI18nString("inspect_panel.colors.blend"),
     value: Z.format(blendMode),
     copyName: "mix-blend-mode"
   });
@@ -173,7 +173,7 @@ function et({
       onError: t => {
         let r = TypeError(`Expected string | undefined, got ${typeof t}`);
         console.error(r);
-        $D(_$$e.DEVELOPER_TOOLS, r, {
+        reportError(_$$e.DEVELOPER_TOOLS, r, {
           extra: {
             type: typeof t,
             value: t,
@@ -192,7 +192,7 @@ function er({
   color: t
 }) {
   return e?.subscriptionStatus === "LOCAL" && e?.isSoftDeleted ? jsx(_$$a, {
-    "aria-label": _$$t("variables.variable_was_deleted"),
+    "aria-label": getI18nString("variables.variable_was_deleted"),
     className: Bx
   }) : jsx(_$$P, {
     children: jsx(_$$J, {
@@ -266,7 +266,7 @@ function ei({
       onError: e => {
         let r = TypeError(`Expected string | undefined, got ${typeof e}`);
         console.error(r);
-        $D(_$$e.DEVELOPER_TOOLS, r, {
+        reportError(_$$e.DEVELOPER_TOOLS, r, {
           extra: {
             type: typeof e,
             value: e,
@@ -314,7 +314,7 @@ function ea(e) {
       onError: t => {
         let r = TypeError(`Expected string | undefined, got ${typeof t}`);
         console.error(r);
-        $D(_$$e.DEVELOPER_TOOLS, r, {
+        reportError(_$$e.DEVELOPER_TOOLS, r, {
           extra: {
             type: typeof t,
             value: t,
@@ -464,7 +464,7 @@ function el(e) {
         onMouseLeave: e.onMouseLeave,
         children: [jsx(_$$J, {
           paint
-        }), tx("inspect_panel.colors.gradient", {
+        }), renderI18nText("inspect_panel.colors.gradient", {
           gradientType: typeFormatter(paint.type)
         }), t]
       }), jsx($$Q0, {
@@ -476,7 +476,7 @@ function el(e) {
   }
   return jsx(ea, {
     paint,
-    defaultStyleName: _$$t("inspect_panel.colors.gradient", {
+    defaultStyleName: getI18nString("inspect_panel.colors.gradient", {
       gradientType: typeFormatter(paint.type)
     }),
     isInStyle: e.isInStyle,
@@ -676,7 +676,7 @@ export function $$eE6({
   let _ = Ku();
   let h = T4.useCopyAllColors(p, _);
   return p.length < 1 ? null : jsx(VZ, {
-    title: i ? "TEXT" === s ? _$$t("dev_handoff.inspect_panel.fills.text") : _$$t("dev_handoff.inspect_panel.fills.background") : _$$t("inspect_panel.colors.title"),
+    title: i ? "TEXT" === s ? getI18nString("dev_handoff.inspect_panel.fills.text") : getI18nString("dev_handoff.inspect_panel.fills.background") : getI18nString("inspect_panel.colors.title"),
     additionalHeaders: i ? void 0 : jsx($$eI1, {}),
     copyAllValue: i ? void 0 : h,
     recordingKey: "colors",
@@ -695,7 +695,7 @@ export function $$ey3() {
   let t = Ku();
   let r = T4.useCopyAllColors(e, t);
   return e.length < 1 ? null : jsx(VZ, {
-    title: _$$t("inspect_panel.colors.title"),
+    title: getI18nString("inspect_panel.colors.title"),
     additionalHeaders: jsx($$eI1, {}),
     copyAllValue: r,
     recordingKey: "colors",

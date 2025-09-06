@@ -1,10 +1,10 @@
-import { eD } from "../figma_app/876459";
-import { sx } from "../905/449184";
+import { desktopAPIInstance } from "../figma_app/876459";
+import { trackEventAnalytics } from "../905/449184";
 export function $$$$a0() {
-  eD && (eD.setLoading(!1), eD.showFileBrowser(), console.error("Not signed in, aborting init!"), sx("Desktop Logged Out Page Load"));
+  desktopAPIInstance && (desktopAPIInstance.setLoading(!1), desktopAPIInstance.showFileBrowser(), console.error("Not signed in, aborting init!"), trackEventAnalytics("Desktop Logged Out Page Load"));
 }
 export function $$s1() {
-  eD && (eD.showFileBrowser(), eD.close({
+  desktopAPIInstance && (desktopAPIInstance.showFileBrowser(), desktopAPIInstance.close({
     suppressReopening: !0,
     shouldForceClose: !0
   }));

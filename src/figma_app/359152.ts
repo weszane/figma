@@ -9,7 +9,7 @@ import { rr, Jn, wv, Ve } from "../figma_app/236327";
 import { a as _$$a } from "../905/925868";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Y } from "../905/830372";
 import { qI, GR, L_ } from "../figma_app/622574";
 import { gp } from "../figma_app/973927";
@@ -59,7 +59,7 @@ export function $$L0({
   }) {
     let s = [...t, ...r];
     let o = s.length + (a ? 1 : 0);
-    return 0 === o ? _$$t("browse_templates_modal.none_selected") : o === e ? i ? n ? _$$t("browse_templates_modal.my_teams_only") : _$$t("browse_templates_modal.all_workspaces") : _$$t("browse_templates_modal.all_teams") : 1 === o ? a ? _$$t("browse_templates_modal.other_teams") : s[0].name : _$$t("browse_templates_modal.first_name_count_more", {
+    return 0 === o ? getI18nString("browse_templates_modal.none_selected") : o === e ? i ? n ? getI18nString("browse_templates_modal.my_teams_only") : getI18nString("browse_templates_modal.all_workspaces") : getI18nString("browse_templates_modal.all_teams") : 1 === o ? a ? getI18nString("browse_templates_modal.other_teams") : s[0].name : getI18nString("browse_templates_modal.first_name_count_more", {
       count: o - 1,
       firstName: s[0].name
     });
@@ -106,7 +106,7 @@ export function $$L0({
         myTeamsOnly: !r
       }),
       displayType: Jn.Checkmark,
-      children: tx("browse_templates_modal.my_teams_only")
+      children: renderI18nText("browse_templates_modal.my_teams_only")
     }, "my-teams-only")), E) {
       let e = d.has(_$$s2);
       x.push(jsx(wv, {}, "unassigned-teams-separator"), jsx(rr, {
@@ -117,7 +117,7 @@ export function $$L0({
           });
         },
         displayType: Jn.Checkbox,
-        children: tx("browse_templates_modal.other_teams")
+        children: renderI18nText("browse_templates_modal.other_teams")
       }, "unassigned-teams"));
     }
   } else {
@@ -128,7 +128,7 @@ export function $$L0({
       onClick: () => {
         A(c, y.length < c.length);
       },
-      children: tx("browse_templates_modal.my_teams")
+      children: renderI18nText("browse_templates_modal.my_teams")
     }, "my-teams"));
     x.push(...c.map(e => {
       let t = d.has(e.id);
@@ -150,7 +150,7 @@ export function $$L0({
       onClick: () => {
         A(p, b.length < p.length);
       },
-      children: tx("browse_templates_modal.all_others")
+      children: renderI18nText("browse_templates_modal.all_others")
     }, "other-teams"));
     x.push(...p.map(e => {
       let t = d.has(e.id);
@@ -170,7 +170,7 @@ export function $$L0({
     width: "hug-contents",
     children: [jsx("span", {
       className: _$$s.colorTextSecondary.$,
-      children: tx("browse_templates_modal.published_from")
+      children: renderI18nText("browse_templates_modal.published_from")
     }), jsx(Ve, {
       label: T,
       menuTrackingContextName: e0.TEMPLATES_BROWSE_FILTERS,
@@ -246,7 +246,7 @@ export function $$D1(e) {
         className: jy,
         children: jsx($n.Link, {
           onClick: e.onSeeAllClick,
-          children: tx("whiteboard.inserts.see_all")
+          children: renderI18nText("whiteboard.inserts.see_all")
         })
       })]
     }) : jsxs("div", {
@@ -260,7 +260,7 @@ export function $$D1(e) {
       }), e.onSeeAllClick && jsx("button", {
         className: jy,
         onClick: e.onSeeAllClick,
-        children: tx("whiteboard.inserts.see_all")
+        children: renderI18nText("whiteboard.inserts.see_all")
       })]
     }), jsx("div", {
       className: _$$s.$$if(e.minimalSpacing, _$$s.px0.mb0, _$$s.px24.mb20).$,
@@ -327,7 +327,7 @@ export function $$k3(e) {
       strokeColor: "default",
       children: [jsx("div", {
         className: _$$s.font13.fontMedium.$,
-        children: tx("browse_templates_modal.published_by_current_org_name", {
+        children: renderI18nText("browse_templates_modal.published_by_current_org_name", {
           orgName: r.name
         })
       }), jsx($$L0, {

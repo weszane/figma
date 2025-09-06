@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useCallback } from "react";
 import { _YF } from "../figma_app/822011";
 import { Ez5, zMY } from "../figma_app/763686";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { to, ES } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { dq } from "../905/845253";
@@ -56,17 +56,17 @@ let A = Ju(function ({
       orgId: p
     },
     children: jsx(Dd, {
-      title: _$$t("slides.templates.modal.theme_picker.header"),
+      title: getI18nString("slides.templates.modal.theme_picker.header"),
       minWidth: 320,
       maxWidth: 320,
-      confirmText: _$$t("slides.templates.modal.theme_picker.choose_theme_button"),
+      confirmText: getI18nString("slides.templates.modal.theme_picker.choose_theme_button"),
       onSubmit: () => {
         Ez5?.slideThemeLibBindings().detachThemesForTemplatePublish(f);
         t();
       },
       onCancel: i,
       children: jsxs("div", {
-        children: [tx("slides.templates.modal.theme_picker.body"), jsx(_$$n, {
+        children: [renderI18nText("slides.templates.modal.theme_picker.body"), jsx(_$$n, {
           selectedThemeId: f,
           onChange: _,
           onCreateNewTheme: A,

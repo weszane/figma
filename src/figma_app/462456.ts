@@ -1,4 +1,4 @@
-import { b } from "../905/690073";
+import { EventEmitter } from "../905/690073";
 import { debugState } from "../905/407919";
 import { o as _$$o } from "../905/528513";
 export let $$n2;
@@ -20,12 +20,12 @@ export function $$d0() {
   let e = !1;
   debugState.subscribe(() => {
     let t = _$$o(debugState.getState());
-    t !== e && (t ? (l && l.removeAllListeners(), l = new b("fullscreen-undo-redo-events")) : l && (l.removeAllListeners(), l = null), e = t);
+    t !== e && (t ? (l && l.removeAllListeners(), l = new EventEmitter("fullscreen-undo-redo-events")) : l && (l.removeAllListeners(), l = null), e = t);
   });
 }
 export function $$c1(e, t) {
   if (!l) return () => {};
-  let r = (r) => {
+  let r = r => {
     r.undoneCommitId === e && t();
   };
   l.on("undo", r);

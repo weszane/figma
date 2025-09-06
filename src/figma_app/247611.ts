@@ -1,9 +1,9 @@
-import { b } from "../905/690073";
-export let $$i3 = new b("action");
+import { EventEmitter } from "../905/690073";
+export let $$i3 = new EventEmitter("action");
 export function $$a2(e) {
   $$i3.trigger("action", e);
 }
-export let $$s0 = new b("action");
+export let $$s0 = new EventEmitter("action");
 export function $$o1(e, t) {
   $$s0.trigger("action", [e, t]);
 }

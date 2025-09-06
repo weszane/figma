@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { lQ } from "../905/934246";
 import n from "classnames";
-import { x1, xi } from "../905/714362";
+import { logError, logWarning } from "../905/714362";
 import { oW } from "../905/675859";
 import { YI, $3 } from "../figma_app/427318";
 import { Ek } from "../905/483217";
@@ -40,12 +40,12 @@ export function $$p0({
     alt: n,
     draggable: !1,
     onError: () => {
-      x1("community", "Failed to load hero image on resource detail page", {
+      logError("community", "Failed to load hero image on resource detail page", {
         resourceId: r,
         image: e
       });
     }
-  }) : (xi("community", "Missing hero image on resource detail page", {
+  }) : (logWarning("community", "Missing hero image on resource detail page", {
     resourceId: r
   }), p = jsx(Ek, {}));
   return jsx("div", {
@@ -65,7 +65,7 @@ export function $$h3({
     alt: t,
     draggable: !1,
     onError: () => {
-      x1("community", "Failed to load hero image closeup on resource detail page", {
+      logError("community", "Failed to load hero image closeup on resource detail page", {
         thumbnailUrl: e,
         resourceId: r
       });

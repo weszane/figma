@@ -1,6 +1,6 @@
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { QH, h8, Ze } from "../figma_app/27829";
-let $$a2 = QH(zl, "FileBrowser");
+let $$a2 = QH(atomStoreManager, "FileBrowser");
 let $$s1 = h8("filebrowser-loading-page", e => {
   e.setAttribute("id", "");
   e.classList.remove("hidden");

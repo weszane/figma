@@ -6,7 +6,7 @@ import { k as _$$k } from "../905/727631";
 import { uQ6, glU } from "../figma_app/763686";
 import { Uz, xH } from "../905/63728";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx, t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { B as _$$B } from "../905/969273";
 import { sZ } from "../figma_app/948389";
 import { jX, Ay, NB, BT, tS, eJ } from "../905/281495";
@@ -68,7 +68,7 @@ function P({
             })
           }), jsx("span", {
             className: _$$s.textBodyMediumStrong.colorTextBrand.$,
-            children: tx("auto_rename_layers.missing_n_layer_names", {
+            children: renderI18nText("auto_rename_layers.missing_n_layer_names", {
               n: a
             })
           }), jsx(_$$y2, {
@@ -154,7 +154,7 @@ export function $$D0(e) {
     case qy.INITIAL:
       if (source === uQ6.READY_FOR_DEV) return jsx(P, {
         actionIcon: jsx(_$$_, {}),
-        actionLabel: tx("auto_rename_layers.rename_layers", {
+        actionLabel: renderI18nText("auto_rename_layers.rename_layers", {
           numLayers: e.numRenamableNodesForHandoff
         }),
         onPerform: () => j(!1),
@@ -172,7 +172,7 @@ export function $$D0(e) {
               className: _$$s.flex.itemsCenter.gap4.ml8.$,
               children: jsx("span", {
                 className: _$$s.textBodyMediumStrong.truncate.maxW150.$,
-                children: tx("auto_rename_layers.error.no_nameable_items")
+                children: renderI18nText("auto_rename_layers.error.no_nameable_items")
               })
             }), jsx(_$$r, {
               onAction: G,
@@ -181,7 +181,7 @@ export function $$D0(e) {
                 key: Uz.ESCAPE
               }],
               recordingKey: "cancel-instruction",
-              children: tx("ai.cancel")
+              children: renderI18nText("ai.cancel")
             })]
           })
         });
@@ -194,10 +194,10 @@ export function $$D0(e) {
               className: _$$s.flex.itemsCenter.gap4.ml8.$,
               children: [jsx("span", {
                 className: _$$s.textBodyMediumStrong.truncate.maxW150.$,
-                children: tx("auto_rename_layers.too_many_layers_selected")
+                children: renderI18nText("auto_rename_layers.too_many_layers_selected")
               }), jsx("span", {
                 className: _$$s.textBodyMedium.colorTextSecondary.$,
-                children: tx("auto_rename_layers.too_many_layers_count", {
+                children: renderI18nText("auto_rename_layers.too_many_layers_count", {
                   selected: V,
                   limit: NB
                 })
@@ -209,7 +209,7 @@ export function $$D0(e) {
                 key: Uz.ESCAPE
               }],
               recordingKey: "cancel-instruction",
-              children: tx("ai.cancel")
+              children: renderI18nText("ai.cancel")
             })]
           })
         });
@@ -217,7 +217,7 @@ export function $$D0(e) {
       return jsx(_$$A, {
         action: JT.AUTO_RENAME_LAYERS,
         actionIcon: jsx(_$$_, {}),
-        actionLabel: tx("fullscreen_actions.quick_actions.name-all-layers"),
+        actionLabel: renderI18nText("fullscreen_actions.quick_actions.name-all-layers"),
         onPerform: j,
         aiTrackingContext,
         instructionAction: {
@@ -228,11 +228,11 @@ export function $$D0(e) {
           nodes: e
         }),
         customLayersIcon: jsx(_$$k, {}),
-        children: tx("auto_rename_layers.select_some_layers")
+        children: renderI18nText("auto_rename_layers.select_some_layers")
       });
     case qy.RUNNING:
       return jsx(F, {
-        secondaryMessage: tx("auto_rename_layers.progress", {
+        secondaryMessage: renderI18nText("auto_rename_layers.progress", {
           completed: i.tasks.filter(e => e.state === z8.SUCCEEDED).length,
           total: i.tasks.length
         }),
@@ -241,7 +241,7 @@ export function $$D0(e) {
           close();
         },
         aiTrackingContext,
-        children: tx("auto_rename_layers.running")
+        children: renderI18nText("auto_rename_layers.running")
       });
     case qy.ERROR:
       {
@@ -251,7 +251,7 @@ export function $$D0(e) {
         } = i;
         if (error instanceof BT) return jsx(_$$u, {
           buttons: [{
-            label: t("auto_rename_layers.rename_anyway"),
+            label: getI18nString("auto_rename_layers.rename_anyway"),
             onClick: () => {
               j(!0);
             },
@@ -261,17 +261,17 @@ export function $$D0(e) {
               modifier: [xH.META]
             }]
           }],
-          children: tx("auto_rename_layers.error.no_nameable_items")
+          children: renderI18nText("auto_rename_layers.error.no_nameable_items")
         });
         if (error instanceof tS) return jsx(_$$u, {
-          children: tx("ai.error.no_layers_selected")
+          children: renderI18nText("ai.error.no_layers_selected")
         });
         let r = [{
           type: _$$f.TRY_AGAIN,
           callback: j
         }];
         let a = null;
-        error instanceof eJ && (e = tx("auto_rename_layers.too_many_layers_selected"), a = tx("auto_rename_layers.too_many_layers_count", {
+        error instanceof eJ && (e = renderI18nText("auto_rename_layers.too_many_layers_selected"), a = renderI18nText("auto_rename_layers.too_many_layers_count", {
           selected: error.layerCount,
           limit: NB
         }), r = []);
@@ -304,11 +304,11 @@ export function $$D0(e) {
             ...aiTrackingContext,
             iteration_view_type: $J.DEFAULT_SUCCESS
           },
-          completionString: source === uQ6.READY_FOR_DEV && tx("auto_rename_layers.renamed_n_layers", {
+          completionString: source === uQ6.READY_FOR_DEV && renderI18nText("auto_rename_layers.renamed_n_layers", {
             n: tasks.filter(e => e.state === z8.SUCCEEDED).length
           }),
           targets: i.tasks.map(e => e.taskId),
-          children: e > 0 && tx("auto_rename_layers.could_not_rename_all_layers", {
+          children: e > 0 && renderI18nText("auto_rename_layers.could_not_rename_all_layers", {
             count: e
           })
         });

@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
-import { Ay } from "../figma_app/778880";
-import { tx } from "../905/303541";
+import { BrowserInfo } from "../figma_app/778880";
+import { renderI18nText } from "../905/303541";
 import { XU } from "../figma_app/756995";
 import { TL } from "../figma_app/878651";
 var $$n0;
@@ -15,10 +15,10 @@ var $$n0;
     tabletListSortKeys: ["name"],
     sortKeyDescriptions: {
       [XU.GRID]: {
-        name: tx("search.sort_option.name")
+        name: renderI18nText("search.sort_option.name")
       },
       [XU.LIST]: {
-        name: tx("search.sort_option.name")
+        name: renderI18nText("search.sort_option.name")
       }
     },
     defaultOptions: {
@@ -29,7 +29,7 @@ var $$n0;
       }
     },
     includeSortDirection: e => !1,
-    settingsSpacer: Ay.tablet || Ay.mobile
+    settingsSpacer: BrowserInfo.tablet || BrowserInfo.mobile
   };
   e.renderSearchResult = function (e, t) {
     return jsx(TL, {

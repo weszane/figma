@@ -1,5 +1,5 @@
 import { useEffect, useCallback } from "react";
-import { fp } from "../figma_app/27355";
+import { useAtomValueAndSetter } from "../figma_app/27355";
 import { Fo, Uz as _$$Uz } from "../905/63728";
 import { Y5 } from "../figma_app/455680";
 import { tJ } from "../figma_app/741237";
@@ -47,7 +47,7 @@ export function $$p0({
   }, [t, e, r, o, l, s]);
 }
 export function $$f1(e) {
-  let [t, r] = fp(cE);
+  let [t, r] = useAtomValueAndSetter(cE);
   let i = dh();
   let d = useCallback(() => {
     r(e => e.length ? [] : e);

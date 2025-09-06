@@ -8,7 +8,7 @@ import { _ as _$$_ } from "../vendor/853977";
 import c from "../vendor/116389";
 import { O as _$$O } from "../905/164014";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { p as _$$p } from "../figma_app/882803";
 import { U as _$$U } from "../905/331038";
 import { w as _$$w } from "../905/113805";
@@ -28,7 +28,7 @@ function w(e) {
         let {
           allowVideos
         } = e.data;
-        return allowVideos ? _$$t("community.publishing.upload_at_least_one_image_or_video") : _$$t("community.publishing.upload_at_least_one_image");
+        return allowVideos ? getI18nString("community.publishing.upload_at_least_one_image_or_video") : getI18nString("community.publishing.upload_at_least_one_image");
       }
     case "HAS_TOO_MANY_CAROUSEL_MEDIA":
       {
@@ -36,9 +36,9 @@ function w(e) {
           allowVideos,
           maxNumOfCarouselMedia
         } = e.data;
-        return allowVideos ? _$$t("community.publishing.you_can_only_upload_up_to_n_images_and_videos", {
+        return allowVideos ? getI18nString("community.publishing.you_can_only_upload_up_to_n_images_and_videos", {
           maxMedia: maxNumOfCarouselMedia - 1
-        }) : _$$t("community.publishing.you_can_only_upload_up_to_n_images", {
+        }) : getI18nString("community.publishing.you_can_only_upload_up_to_n_images", {
           maxMedia: maxNumOfCarouselMedia - 1
         });
       }
@@ -47,7 +47,7 @@ function w(e) {
         let {
           maxNumOfVideos
         } = e.data;
-        return _$$t("community.publishing.you_can_only_upload_up_to_n_videos", {
+        return getI18nString("community.publishing.you_can_only_upload_up_to_n_videos", {
           maxVideos: maxNumOfVideos
         });
       }
@@ -112,9 +112,9 @@ export let $$C0 = forwardRef(function ({
     onDragEnd
   } = _$$O();
   return deps.viewerModeField?.currentValue === y4I.PROTOTYPE ? null : jsxs(_$$A, {
-    label: deps.allowVideos ? _$$t("community.publishing.add_up_to_n_images_and_videos_to_your_carousel", {
+    label: deps.allowVideos ? getI18nString("community.publishing.add_up_to_n_images_and_videos_to_your_carousel", {
       maxMedia: en - 1
-    }) : _$$t("community.publishing.add_up_to_n_images_to_your_carousel", {
+    }) : getI18nString("community.publishing.add_up_to_n_images_to_your_carousel", {
       maxMedia: en - 1
     }),
     labelHtmlFor: W,
@@ -125,7 +125,7 @@ export let $$C0 = forwardRef(function ({
       variant: "link",
       onClick: B,
       disabled: j || !addMediaFromInput,
-      children: deps.allowVideos ? _$$t("community.publishing.upload") : _$$t("community.publishing.upload_images")
+      children: deps.allowVideos ? getI18nString("community.publishing.upload") : getI18nString("community.publishing.upload_images")
     }),
     children: [jsx("input", {
       ref: M,
@@ -188,7 +188,7 @@ export let $$C0 = forwardRef(function ({
           children: [jsx("img", {
             src: "video" === e.type ? e.thumbnail_url : e.url,
             loading: "lazy",
-            alt: _$$t("community.publishing.carousel_media_image"),
+            alt: getI18nString("community.publishing.carousel_media_image"),
             draggable: !1
           }), "video" === e.type && jsx("div", {
             className: "carousel_media_uploader--videoThumbnailOverlay--JFyTq",
@@ -196,7 +196,7 @@ export let $$C0 = forwardRef(function ({
           }), deleteMedia && jsx(_$$E, {
             ref: t === q.length - 1 ? z : void 0,
             className: "carousel_media_uploader--deleteMediumButton--1lrRj",
-            "aria-label": _$$t("community.publishing.remove_carousel_media"),
+            "aria-label": getI18nString("community.publishing.remove_carousel_media"),
             onClick: () => {
               i?.();
               deleteMedia?.(e);

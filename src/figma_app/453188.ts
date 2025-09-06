@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { N } from "../905/438674";
 import { c as _$$c } from "../905/486270";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { X$ } from "../905/612685";
 import { Ib } from "../905/129884";
 import { e as _$$e } from "../905/579635";
@@ -38,7 +38,7 @@ export function $$m0({
       input: jsx(N, {
         href: X$(hubFileId),
         htmlAttributes: {
-          "data-tooltip": _$$t("design_systems.instance_panel.open_community_page"),
+          "data-tooltip": getI18nString("design_systems.instance_panel.open_community_page"),
           "data-tooltip-type": Ib.TEXT
         },
         newTab: !0,

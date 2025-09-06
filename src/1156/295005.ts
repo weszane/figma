@@ -8,11 +8,11 @@ import { A as _$$A } from "../905/126947";
 import { H } from "../905/999677";
 import { Ay } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { N as _$$N } from "../vendor/930821";
 import { P } from "../vendor/348225";
 import { N as _$$N2 } from "../1156/461005";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { O as _$$O } from "../figma_app/184628";
 import { Oc } from "../figma_app/552876";
 import { $W } from "../figma_app/325537";
@@ -24,7 +24,7 @@ function k() {
     height: "24",
     viewBox: "0 0 24 24",
     fill: "none",
-    "aria-label": _$$t("figmake.code_chat.live_dot_aria_label"),
+    "aria-label": getI18nString("figmake.code_chat.live_dot_aria_label"),
     children: [jsx("path", {
       d: "M18 12C18 15.3137 15.3137 18 12 18C8.68629 18 6 15.3137 6 12C6 8.68629 8.68629 6 12 6C15.3137 6 18 8.68629 18 12Z",
       fill: "#14AE5C"
@@ -61,7 +61,7 @@ function E({
       let t = _$$N3(e);
       switch (e.toolName) {
         case "view_tool":
-          if (t) return _$$t("figmake.tool_call.viewing", {
+          if (t) return getI18nString("figmake.tool_call.viewing", {
             file: t
           });
           break;
@@ -69,11 +69,11 @@ function E({
         case "fast_apply_tool":
         case "str_replace_editor":
         case "edit_tool":
-          if (t) return _$$t("figmake.tool_call.writing", {
+          if (t) return getI18nString("figmake.tool_call.writing", {
             file: t
           });
       }
-      return _$$t("figmake.chat.working");
+      return getI18nString("figmake.chat.working");
     }(e)
   });
 }
@@ -115,7 +115,7 @@ export function $$w0(e) {
     layerDisplayName,
     type
   } = e;
-  let u = md(_$$l(chatMessagesNodeGuid));
+  let u = useAtomWithSubscription(_$$l(chatMessagesNodeGuid));
   let {
     exchange
   } = $W(chatMessagesNodeGuid);
@@ -146,11 +146,11 @@ export function $$w0(e) {
       children: I
     }), jsx("div", {
       className: "x1yuz8eb",
-      children: _$$t("figmake.chat.artifact.version", {
+      children: getI18nString("figmake.chat.artifact.version", {
         version: T
       })
     })]
-  }) : A ? _$$t("figmake.chat.artifact.latest_version") : _$$t("figmake.chat.artifact.version", {
+  }) : A ? getI18nString("figmake.chat.artifact.latest_version") : getI18nString("figmake.chat.artifact.version", {
     version: T
   }) : null, [type, A, I, T, z]);
   let R = null;
@@ -158,24 +158,24 @@ export function $$w0(e) {
     toolCall: u
   }) : u?.type === "code" ? jsx(S, {
     icon: jsx(_$$A, {}),
-    text: _$$t("figmake.tool_call.writing", {
+    text: getI18nString("figmake.tool_call.writing", {
       file: layerDisplayName ?? u.fullFilePath
     })
   }) : u?.type === "editedFiles" ? jsx(S, {
     icon: jsx(_$$A, {}),
-    text: _$$t("figmake.tool_call.editing", {
+    text: getI18nString("figmake.tool_call.editing", {
       file: u.files.join(", ")
     })
   }) : jsx("div", {
     className: "x78zum5 x1q0g3np x1n0bwc9 x193iq5w x6s0dn4",
     children: jsx(_$$N2, {
-      children: _$$t("figmake.chat.working")
+      children: getI18nString("figmake.chat.working")
     })
   });
   let F = _$$N3(u);
   let O = "progress" === type ? null : L ? jsx(K, {
-    "aria-label": _$$t("figmake.chat.artifact.restore"),
-    "aria-description": _$$t("figmake.chat.artifact.aria_restore_description", {
+    "aria-label": getI18nString("figmake.chat.artifact.restore"),
+    "aria-description": getI18nString("figmake.chat.artifact.aria_restore_description", {
       version: T,
       title: I || ""
     }),

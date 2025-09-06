@@ -1,10 +1,10 @@
-import { eD } from "../figma_app/876459";
-import { Lo } from "../905/714362";
+import { desktopAPIInstance } from "../figma_app/876459";
+import { logInfo } from "../905/714362";
 import { r as _$$r, l } from "../905/927060";
 export async function $$s0() {
-  if (eD) {
-    let e = await eD.spellingGetLanguages();
-    Lo("Desktop app spellcheck support check", "spellingGetLanguages", {
+  if (desktopAPIInstance) {
+    let e = await desktopAPIInstance.spellingGetLanguages();
+    logInfo("Desktop app spellcheck support check", "spellingGetLanguages", {
       type: typeof e,
       isArray: Array.isArray(e),
       isNull: null === e,
@@ -21,13 +21,13 @@ export class $$o1 {
   }
   async initialize(e, t) {
     this.setLanguage(e);
-    await eD.spellingIgnore(t || []);
+    await desktopAPIInstance.spellingIgnore(t || []);
   }
   async getSuggestionsForWord(e) {
-    return await eD.spellingSuggest(e, this.language);
+    return await desktopAPIInstance.spellingSuggest(e, this.language);
   }
   async spellCheckText(e) {
-    let t = await eD.spellingCheckSpelling(e, this.language);
+    let t = await desktopAPIInstance.spellingCheckSpelling(e, this.language);
     return _$$r(e, t);
   }
   async setLanguage(e) {
@@ -35,7 +35,7 @@ export class $$o1 {
     return !0;
   }
   async addWords(e) {
-    await eD.spellingIgnore(e, this.language);
+    await desktopAPIInstance.spellingIgnore(e, this.language);
   }
 }
 export const V = $$s0;

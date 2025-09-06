@@ -3,17 +3,17 @@ import { c2 } from "../905/382883";
 import { rXF, Z_n, y0x, J0O, JTp } from "../figma_app/763686";
 import { dI } from "../905/805904";
 import { YU } from "../figma_app/191804";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { TI } from "../905/713722";
 import { E7 } from "../905/216495";
 export function $$u6(e) {
-  if ("MIXED" === e) return t("fullscreen.mixed");
+  if ("MIXED" === e) return getI18nString("fullscreen.mixed");
   if (!e) return null;
   switch (e.resolvedType) {
     case rXF.FLOAT:
       return String(parseFloat(e.value.toFixed(2)));
     case rXF.BOOLEAN:
-      return e.value ? t("variables.values.boolean.true") : t("variables.values.boolean.false");
+      return e.value ? getI18nString("variables.values.boolean.true") : getI18nString("variables.values.boolean.false");
     case rXF.COLOR:
       return TI.format(e.value);
     case rXF.STRING:

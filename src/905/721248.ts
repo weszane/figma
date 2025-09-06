@@ -9,16 +9,16 @@ import { vo, Y9, hE, nB as _$$nB, wi, jk } from "../figma_app/272243";
 import { N as _$$N } from "../905/438674";
 import { IK, $n } from "../905/521428";
 import { Dje, CWU, sYL, j0r, aTl, Egt, BtE, lyf, kul, rCR } from "../figma_app/763686";
-import { eU as _$$eU, fp, md, Xr } from "../figma_app/27355";
-import { sx, az } from "../905/449184";
+import { atom, useAtomValueAndSetter, useAtomWithSubscription, Xr } from "../figma_app/27355";
+import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { Ay } from "../905/612521";
 import { h as _$$h } from "../905/207101";
 import { getSupportEmail } from "../figma_app/169182";
 import { Rs } from "../figma_app/288654";
-import { kF } from "../905/11";
-import { Lo, x1 } from "../905/714362";
+import { setSentryTag } from "../905/11";
+import { logInfo, logError } from "../905/714362";
 import { Hb, tH as _$$tH } from "../905/751457";
-import { t as _$$t, tx as _$$tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Q as _$$Q } from "../905/463586";
 import { F as _$$F } from "../905/302958";
 import { sf } from "../905/929976";
@@ -36,7 +36,7 @@ import { tB as _$$tB } from "../figma_app/516028";
 import { iZ as _$$iZ } from "../905/372672";
 import { Ej3, Xw7, dDF, _iU } from "../figma_app/43951";
 import { M4 } from "../905/713695";
-import { nT as _$$nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { Kn, Wo, PW } from "../905/535806";
 import { e6 as _$$e } from "../905/557142";
 import { e0 as _$$e2 } from "../905/696396";
@@ -46,7 +46,7 @@ import { t as _$$t2 } from "../905/117577";
 import { a as _$$a } from "../905/964520";
 import { dI, aI } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
-import { yQ } from "../905/236856";
+import { waitForAnimationFrame } from "../905/236856";
 import Q from "../vendor/961736";
 import { l as _$$l } from "../905/728491";
 import { vj } from "../figma_app/919079";
@@ -77,7 +77,7 @@ import { A as _$$A4 } from "../1617/466789";
 import eW from "../vendor/128080";
 import { Zr, _5 as _$$_ } from "../figma_app/930338";
 import { UB } from "../figma_app/249941";
-import { Bq, mapFilter } from "../figma_app/656233";
+import { flatten, mapFilter } from "../figma_app/656233";
 import { l as _$$l2 } from "../905/716947";
 import { QT } from "../figma_app/646357";
 import { U as _$$U } from "../905/506188";
@@ -171,7 +171,7 @@ _$$nF(async (e, t) => {
     }, e);
   } catch (i) {
     e.dispatch(_$$F.enqueue({
-      message: t.closed ? _$$t("collaboration.branching.error_converting_merge_request_to_draft") : _$$t("collaboration.branching.error_submitting_merge_request"),
+      message: t.closed ? getI18nString("collaboration.branching.error_converting_merge_request_to_draft") : getI18nString("collaboration.branching.error_submitting_merge_request"),
       type: "merge-request-close",
       error: !0
     }));
@@ -181,7 +181,7 @@ let ed = _$$nF(async (e, t) => {
   let i = t.approved ? "merge-request-approve" : t.changesRequested ? "merge-request-changes-requested" : "";
   i && e.dispatch(_$$F.enqueue({
     icon: zX.SPINNER,
-    message: _$$t("collaboration.branching.submitting_review"),
+    message: getI18nString("collaboration.branching.submitting_review"),
     type: i
   }));
   try {
@@ -211,7 +211,7 @@ let ed = _$$nF(async (e, t) => {
         }
       }
     }, n);
-    let r = t.approved ? _$$t("collaboration.branching.approved_review") : t.changesRequested ? _$$t("collaboration.branching.suggested_changes_on_review") : "";
+    let r = t.approved ? getI18nString("collaboration.branching.approved_review") : t.changesRequested ? getI18nString("collaboration.branching.suggested_changes_on_review") : "";
     r && i && e.dispatch(_$$F.enqueue({
       icon: zX.CHECK,
       message: r,
@@ -219,7 +219,7 @@ let ed = _$$nF(async (e, t) => {
     }));
   } catch (t) {
     e.dispatch(_$$F.enqueue({
-      message: _$$t("collaboration.branching.error_leaving_review"),
+      message: getI18nString("collaboration.branching.error_leaving_review"),
       type: i,
       error: !0
     }));
@@ -239,7 +239,7 @@ let ec = _$$nF(async (e, t) => {
     }, e);
   } catch (t) {
     e.dispatch(_$$F.enqueue({
-      message: _$$t("collaboration.branching.error_updating_reviewer_comment"),
+      message: getI18nString("collaboration.branching.error_updating_reviewer_comment"),
       type: "merge-request-update-notes",
       error: !0
     }));
@@ -257,7 +257,7 @@ let eu = _$$nF(async (e, t) => {
     }, e);
   } catch (i) {
     e.dispatch(_$$F.enqueue({
-      message: t.isApprove ? _$$t("collaboration.branching.error_approving") : _$$t("collaboration.branching.error_removing_approval"),
+      message: t.isApprove ? getI18nString("collaboration.branching.error_approving") : getI18nString("collaboration.branching.error_removing_approval"),
       type: "merge-request-approve",
       error: !0
     }));
@@ -280,12 +280,12 @@ let ep = _$$nF(async (e, t) => {
     }, i);
     e.dispatch(_$$F.enqueue({
       icon: zX.CHECK,
-      message: _$$t("collaboration.branching.review_requested"),
+      message: getI18nString("collaboration.branching.review_requested"),
       type: "merge-re-request"
     }));
   } catch (t) {
     e.dispatch(_$$F.enqueue({
-      message: _$$t("collaboration.branching.error_re_sending_merge_request"),
+      message: getI18nString("collaboration.branching.error_re_sending_merge_request"),
       type: "merge-request-resend",
       error: !0
     }));
@@ -307,7 +307,7 @@ let em = _$$nF(async (e, t) => {
     }, e);
   } catch (t) {
     e.dispatch(_$$F.enqueue({
-      message: _$$t("collaboration.branching.error_updating_merge_request"),
+      message: getI18nString("collaboration.branching.error_updating_merge_request"),
       type: "merge-request-update",
       error: !0
     }));
@@ -317,7 +317,7 @@ let eh = _$$nF(async (e, t) => {
   let i = e.getState();
   e.dispatch(_$$F.enqueue({
     icon: zX.SPINNER,
-    message: _$$t("collaboration.branching.submitting_request"),
+    message: getI18nString("collaboration.branching.submitting_request"),
     type: "merge-request-submit"
   }));
   try {
@@ -326,12 +326,12 @@ let eh = _$$nF(async (e, t) => {
     } = await eg(t, i.openFile.key);
     e.dispatch(_$$F.enqueue({
       icon: wasCreated ? zX.CHECK : void 0,
-      message: wasCreated ? _$$t("collaboration.branching.request_submitted") : _$$t("collaboration.branching.a_merge_request_is_already_open_for_this_branch"),
+      message: wasCreated ? getI18nString("collaboration.branching.request_submitted") : getI18nString("collaboration.branching.a_merge_request_is_already_open_for_this_branch"),
       type: "merge-request-submit"
     }));
   } catch (i) {
     e.dispatch(_$$F.enqueue({
-      message: t.title ? _$$t("collaboration.branching.error_submitting_merge_request") : _$$t("collaboration.branching.title_missing_from_merge_request"),
+      message: t.title ? getI18nString("collaboration.branching.error_submitting_merge_request") : getI18nString("collaboration.branching.title_missing_from_merge_request"),
       type: "merge-request-submit",
       error: !0
     }));
@@ -363,7 +363,7 @@ function eO({
   let r = e ? "chunk_diff--faintDarkBackground--wOnvP" : "chunk_diff--faintLightBackground--d-LBw";
   if (i) return jsx("div", {
     className: r,
-    children: _$$tx("collaboration.branching_chunk.fallback_no_item")
+    children: renderI18nText("collaboration.branching_chunk.fallback_no_item")
   });
   if (t && $2(t)) {
     let e = s$(t);
@@ -376,7 +376,7 @@ function eO({
   }
   return jsx("div", {
     className: r,
-    children: _$$tx("collaboration.branching_chunk.fallback_missing_preview")
+    children: renderI18nText("collaboration.branching_chunk.fallback_missing_preview")
   });
 }
 function eD({
@@ -468,7 +468,7 @@ let eL = memo(function (e) {
       children: [jsx(eD, {
         className: h,
         style: e.beforeBackgroundColorStyle,
-        title: _$$tx("collaboration.branching_chunk.side_by_side_left_label"),
+        title: renderI18nText("collaboration.branching_chunk.side_by_side_left_label"),
         image: e.beforeImage,
         shouldSkip: e.displayChunk.mainChunk.phase === Dje.CREATED,
         displayNode: e.chunkDetail?.diffBasis?.find($2),
@@ -477,7 +477,7 @@ let eL = memo(function (e) {
       }), jsx(eD, {
         className: "chunk_diff--afterChunk--1K5OP chunk_diff--_chunk--2CSwp",
         style: e.beforeBackgroundColorStyle,
-        title: _$$tx("collaboration.branching_chunk.side_by_side_right_label"),
+        title: renderI18nText("collaboration.branching_chunk.side_by_side_right_label"),
         image: e.afterImage,
         shouldSkip: e.displayChunk.mainChunk.phase === Dje.REMOVED,
         displayNode: e.displayChunk.mainChunk.displayNode,
@@ -528,7 +528,7 @@ function eH(e) {
     case Dje.UPDATED_LIBRARY:
       {
         t.push("chunk_phase--updatedLibrary--pFUV9");
-        let r = _$$t("collaboration.branching_chunk.phase_updated_library");
+        let r = getI18nString("collaboration.branching_chunk.phase_updated_library");
         return jsxs("div", {
           className: t.join(" "),
           children: [jsx(_$$B, {
@@ -547,7 +547,7 @@ function eH(e) {
     case Dje.CREATED:
       {
         t.push("chunk_phase--added--PSD48");
-        let r = _$$t("collaboration.branching_chunk.phase_created");
+        let r = getI18nString("collaboration.branching_chunk.phase_created");
         return jsxs("div", {
           className: t.join(" "),
           children: [jsx(_$$B, {
@@ -566,7 +566,7 @@ function eH(e) {
     case Dje.REMOVED:
       {
         t.push("chunk_phase--removed--WDLhF");
-        let r = _$$t("collaboration.branching_chunk.phase_removed");
+        let r = getI18nString("collaboration.branching_chunk.phase_removed");
         return jsxs("div", {
           className: t.join(" "),
           children: [jsx(_$$B, {
@@ -585,7 +585,7 @@ function eH(e) {
     case Dje.UPDATED:
       {
         t.push("chunk_phase--edited--1KN2v");
-        let r = _$$t("collaboration.branching_chunk.phase_updated");
+        let r = getI18nString("collaboration.branching_chunk.phase_updated");
         return jsxs("div", {
           className: t.join(" "),
           children: [jsx(_$$B, {
@@ -632,7 +632,7 @@ function eQ(e) {
   }) : value && "object" == typeof value ? jsx("div", {
     children: Object.entries(value).map(([e, t]) => jsx("div", {
       className: "chunk_property_changes--objectChangeObjectValue--7kJ9b",
-      children: _$$tx("collaboration.branching_chunk.property_change_node_value_denoter", {
+      children: renderI18nText("collaboration.branching_chunk.property_change_node_value_denoter", {
         propertyName: e,
         propertyValue: jsx(eX, {
           value: t
@@ -656,7 +656,7 @@ function eJ(e) {
         value: prevValue
       })
     }) : null, jsx("div", {
-      children: _$$tx("collaboration.branching_chunk.property_change_changed_value_denoter")
+      children: renderI18nText("collaboration.branching_chunk.property_change_changed_value_denoter")
     }), newValue ? jsx("div", {
       className: "chunk_property_changes--objectChangeElemRight--SKPdA",
       children: jsx(eQ, {
@@ -670,12 +670,12 @@ function e0(e) {
     prevValue,
     newValue
   } = e;
-  return void 0 !== prevValue && void 0 !== newValue ? _$$tx("collaboration.branching_chunk.property_change_edited", {
+  return void 0 !== prevValue && void 0 !== newValue ? renderI18nText("collaboration.branching_chunk.property_change_edited", {
     prevValue: prevValue.toString(),
     newValue: newValue.toString()
-  }) : void 0 !== prevValue ? _$$tx("collaboration.branching_chunk.property_change_removed", {
+  }) : void 0 !== prevValue ? renderI18nText("collaboration.branching_chunk.property_change_removed", {
     prevValue: prevValue.toString()
-  }) : void 0 !== newValue ? _$$tx("collaboration.branching_chunk.property_change_added", {
+  }) : void 0 !== newValue ? renderI18nText("collaboration.branching_chunk.property_change_added", {
     newValue: newValue.toString()
   }) : null;
 }
@@ -702,14 +702,14 @@ function e1(e) {
     }(prevValue, newValue);
     return jsxs("div", {
       children: [removed.length ? jsxs("div", {
-        children: [_$$tx("collaboration.branching_chunk.property_change_node_removed_items"), jsx("div", {
+        children: [renderI18nText("collaboration.branching_chunk.property_change_node_removed_items"), jsx("div", {
           className: e$,
           children: jsx(eQ, {
             value: removed
           })
         })]
       }) : null, added.length ? jsxs("div", {
-        children: [_$$tx("collaboration.branching_chunk.property_change_node_added_items"), jsx("div", {
+        children: [renderI18nText("collaboration.branching_chunk.property_change_node_added_items"), jsx("div", {
           className: e$,
           children: jsx(eQ, {
             value: added
@@ -750,7 +750,7 @@ function e5(e) {
     basis,
     changes
   } = e;
-  if ("REMOVED" === changes.phase) return _$$tx("collaboration.branching_chunk.property_change_node_removed");
+  if ("REMOVED" === changes.phase) return renderI18nText("collaboration.branching_chunk.property_change_node_removed");
   let r = Object.keys(changes).filter(e => !eZ.has(e));
   return jsx(Fragment, {
     children: r.map(e => jsx(e2, {
@@ -808,7 +808,7 @@ function e6(e) {
       className: "chunk_property_changes--chunkPropertyChanges---T6-3 text--fontPos11--2LvXf text--_fontBase--QdLsd",
       children: [jsx("div", {
         className: "chunk_property_changes--mainTitle--W8ykx",
-        children: _$$tx("collaboration.branching_chunk.property_change_non-previewable")
+        children: renderI18nText("collaboration.branching_chunk.property_change_non-previewable")
       }), jsx("div", {
         children: changes.map(e => jsx(e3, {
           changes: e,
@@ -832,14 +832,14 @@ class e7 extends Component {
   }
   componentDidCatch() {}
   render() {
-    return this.state.hasError ? _$$tx("collaboration.branching_chunk.error") : jsx(e6, {
+    return this.state.hasError ? renderI18nText("collaboration.branching_chunk.error") : jsx(e6, {
       changes: this.props.changes,
       basis: this.props.basis
     });
   }
 }
-let tl = _$$tx("collaboration.branching_chunk.tile_preview_node_fallback");
-let td = _$$tx("collaboration.branching_chunk.tile_empty_page_fallback");
+let tl = renderI18nText("collaboration.branching_chunk.tile_preview_node_fallback");
+let td = renderI18nText("collaboration.branching_chunk.tile_empty_page_fallback");
 let tc = memo(function (e) {
   let {
     displayNode,
@@ -1009,12 +1009,12 @@ let tc = memo(function (e) {
         }), (!!e.affectedCount || !!e.variantCount) && jsxs("div", {
           className: `${ek} chunk_tile--bottom---H91S`,
           children: [!!e.variantCount && jsx(Fragment, {
-            children: e.phase === Dje.UPDATED || e.phase === Dje.UPDATED_LIBRARY ? _$$tx("collaboration.branching_chunk.tile_variants_changed", {
+            children: e.phase === Dje.UPDATED || e.phase === Dje.UPDATED_LIBRARY ? renderI18nText("collaboration.branching_chunk.tile_variants_changed", {
               variantCount: e.variantCount
-            }) : _$$tx("collaboration.branching_chunk.tile_variants", {
+            }) : renderI18nText("collaboration.branching_chunk.tile_variants", {
               variantCount: e.variantCount
             })
-          }), !!e.affectedCount && !!e.variantCount && _$$tx("collaboration.branching_chunk.tile_variants_and_affected_items_separator"), !!e.affectedCount && _$$tx("collaboration.branching_chunk.tile_affected_items", {
+          }), !!e.affectedCount && !!e.variantCount && renderI18nText("collaboration.branching_chunk.tile_variants_and_affected_items_separator"), !!e.affectedCount && renderI18nText("collaboration.branching_chunk.tile_affected_items", {
             affectedCount: e.affectedCount
           })]
         })]
@@ -1163,15 +1163,15 @@ let tx = memo(function (e) {
   let y = !0 === getFeatureFlags().branching_system_updates_copy;
   let b = jsx("div", {
     className: tA,
-    children: _$$tx("collaboration.branching_chunk.non_visible_updates_description")
+    children: renderI18nText("collaboration.branching_chunk.non_visible_updates_description")
   });
   let v = jsxs("div", {
     className: tA,
-    children: [_$$tx("collaboration.branching_chunk.section_file_optimization"), jsx(_$$B, {
+    children: [renderI18nText("collaboration.branching_chunk.section_file_optimization"), jsx(_$$B, {
       svg: _$$A6,
       className: ty,
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": _$$t("collaboration.branching_chunk.section_file_optimization_tooltip"),
+      "data-tooltip": getI18nString("collaboration.branching_chunk.section_file_optimization_tooltip"),
       autosize: !0,
       width: "11px"
     })]
@@ -1195,11 +1195,11 @@ let tx = memo(function (e) {
       }), jsxs(UC, {
         children: [(e.systemImprovements || []).includes("file_improvement") && (y ? b : v), (e.systemImprovements || []).includes("interrupted_merge_recovery") && jsxs("div", {
           className: tA,
-          children: [_$$tx("collaboration.branching_chunk.section_system_improvement"), jsx(_$$B, {
+          children: [renderI18nText("collaboration.branching_chunk.section_system_improvement"), jsx(_$$B, {
             svg: _$$A6,
             className: ty,
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t("collaboration.branching_chunk.section_system_improvement_tooltip"),
+            "data-tooltip": getI18nString("collaboration.branching_chunk.section_system_improvement_tooltip"),
             autosize: !0,
             width: "11px"
           })]
@@ -1221,7 +1221,7 @@ let tx = memo(function (e) {
                 onChunkClick,
                 images: e.images
               }) : jsx(t_, {
-                assetName: t.mainChunk.displayNode.name ?? _$$t("variables.variable_collection"),
+                assetName: t.mainChunk.displayNode.name ?? getI18nString("variables.variable_collection"),
                 phase: t.mainChunk.phase,
                 onClick: onChunkClick ? () => onChunkClick(t) : void 0
               })
@@ -1236,7 +1236,7 @@ let tx = memo(function (e) {
             },
             children: (() => {
               let e = Math.min(120, displayGroups.length - l);
-              return _$$tx("collaboration.branching_chunk.section_see_more", {
+              return renderI18nText("collaboration.branching_chunk.section_see_more", {
                 remainingChanges: e
               });
             })()
@@ -1258,10 +1258,10 @@ let tw = memo(function (e) {
   } = e;
   let u = useMemo(() => Object.keys(displayGroupsByLibrary).map(_$$l2), [displayGroupsByLibrary]);
   let p = _$$U(u);
-  let m = e => _$$t("collaboration.branching_chunk.local_style_type", {
+  let m = e => getI18nString("collaboration.branching_chunk.local_style_type", {
     styleType: QT(e)
   });
-  let h = e => p.data?.[e] || _$$t("collaboration.branching_chunk.fallback_missing_library_name");
+  let h = e => p.data?.[e] || getI18nString("collaboration.branching_chunk.fallback_missing_library_name");
   let [g, f] = useState(1);
   let _ = useRef(g);
   let A = useRef(null);
@@ -1310,14 +1310,14 @@ let tw = memo(function (e) {
       }, t)
     };
   });
-  let S = useMemo(() => Bq(Object.values(displayGroupsByVariableSet)), [displayGroupsByVariableSet]);
+  let S = useMemo(() => flatten(Object.values(displayGroupsByVariableSet)), [displayGroupsByVariableSet]);
   let w = S.length ? [{
     key: "variableSets",
     displayGroups: S,
     node: jsx(tx, {
       displayGroups: S,
       displayType: tE.LIST,
-      header: _$$t("variables.variable_collections"),
+      header: getI18nString("variables.variable_collections"),
       images,
       initiallyCollapsed: !1,
       onAllChunksRendered: b,
@@ -1352,7 +1352,7 @@ let tw = memo(function (e) {
     node: jsx(tx, {
       onChangeVisibleGroups: e.onChangeVisibleGroups,
       displayGroups: e.otherChanges,
-      header: _$$t("collaboration.branching_chunk.header_other_changes"),
+      header: getI18nString("collaboration.branching_chunk.header_other_changes"),
       images,
       pageIdToInfo,
       onChunkClick: e.onChunkClick,
@@ -1366,7 +1366,7 @@ let tw = memo(function (e) {
     displayGroups: [],
     node: jsx(tx, {
       displayGroups: [],
-      header: getFeatureFlags().branching_system_updates_copy ? _$$t("collaboration.branching_chunk.non_visible_updates") : "System improvements",
+      header: getFeatureFlags().branching_system_updates_copy ? getI18nString("collaboration.branching_chunk.non_visible_updates") : "System improvements",
       images: {},
       initiallyCollapsed: !1,
       onAllChunksRendered: lQ,
@@ -1402,7 +1402,7 @@ let tk = memo(function (e) {
       onChangeVisibleGroups: setVisibleGroups,
       pageIdToInfo,
       displayGroups: o,
-      header: _$$t("collaboration.branching_to_source.instances_affected", {
+      header: getI18nString("collaboration.branching_to_source.instances_affected", {
         chunkCount: displayGroup.affectedChunks.length
       }),
       images: summaryImages,
@@ -1458,7 +1458,7 @@ function tL({
       children: t
     }), jsx("span", {
       className: w5,
-      children: _$$t("variables.diff.details_title_changed_variables", {
+      children: getI18nString("variables.diff.details_title_changed_variables", {
         numChangedVariables: i
       })
     })]
@@ -1490,7 +1490,7 @@ function tF({
         view: tN.AFFECTED_SUMMARY,
         displayGroup
       }),
-      header: _$$t("collaboration.branching_to_source.affected_items"),
+      header: getI18nString("collaboration.branching_to_source.affected_items"),
       count: displayGroup.affectedChunks.length
     })]
   });
@@ -1545,7 +1545,7 @@ let tU = memo(function (e) {
   } = ju(displayGroup);
   return modifiedVariants.length + unmodifiedVariants.length === 0 ? jsx("div", {
     className: Dn,
-    children: _$$tx("collaboration.branching_to_source.all_variants_were_removed")
+    children: renderI18nText("collaboration.branching_to_source.all_variants_were_removed")
   }) : jsxs("div", {
     className: mK,
     children: [modifiedVariants.length > 0 && summaryImages && jsx(tx, {
@@ -1553,7 +1553,7 @@ let tU = memo(function (e) {
       pageIdToInfo,
       images: summaryImages,
       displayGroups: modifiedVariants,
-      header: _$$t("collaboration.branching_to_source.modified_variants", {
+      header: getI18nString("collaboration.branching_to_source.modified_variants", {
         variantCount: modifiedVariants.length
       }),
       onChunkClick,
@@ -1563,7 +1563,7 @@ let tU = memo(function (e) {
       pageIdToInfo,
       images: summaryImages,
       displayGroups: unmodifiedVariants,
-      header: _$$t("collaboration.branching_to_source.unmodified_variants", {
+      header: getI18nString("collaboration.branching_to_source.unmodified_variants", {
         variantCount: unmodifiedVariants.length
       }),
       initiallyCollapsed: !0
@@ -1584,7 +1584,7 @@ function tK(e) {
         className: tG,
         children: jsx(_$$k2, {})
       }), jsx("div", {
-        children: _$$tx("collaboration.branching_merge_modal.calculating_conflicts")
+        children: renderI18nText("collaboration.branching_merge_modal.calculating_conflicts")
       })]
     }) : jsxs(Fragment, {
       children: [jsx(_$$B, {
@@ -1618,28 +1618,28 @@ function tY(e) {
     case 1:
       return jsx(tK, {
         isLoading,
-        text: _$$t("collaboration.branching_merge_modal.this_branch_has_conflicts_with_the_main_file", {
+        text: getI18nString("collaboration.branching_merge_modal.this_branch_has_conflicts_with_the_main_file", {
           numConflicts
         }),
-        button: l(_$$t("collaboration.branching_merge_modal.resolve_conflicts"))
+        button: l(getI18nString("collaboration.branching_merge_modal.resolve_conflicts"))
       });
     case 3:
       if (isEditorOnRepo) {
-        let e = _$$t("collaboration.branching_merge_modal.updates_from_main_file_must_be_applied_before_merging");
+        let e = getI18nString("collaboration.branching_merge_modal.updates_from_main_file_must_be_applied_before_merging");
         return jsx(tK, {
           isLoading,
           text: e,
-          button: l(_$$t("collaboration.branching_merge_modal.update_from_main_file"))
+          button: l(getI18nString("collaboration.branching_merge_modal.update_from_main_file"))
         });
       }
-      let d = _$$t("collaboration.branching_merge_modal.updates_from_main_file_must_be_applied_before_submitting_a_merge_request");
+      let d = getI18nString("collaboration.branching_merge_modal.updates_from_main_file_must_be_applied_before_submitting_a_merge_request");
       return jsx(tK, {
         isLoading,
         text: d,
-        button: l(_$$t("collaboration.branching_merge_modal.update_from_main_file"))
+        button: l(getI18nString("collaboration.branching_merge_modal.update_from_main_file"))
       });
     case 0:
-      let c = _$$t("collaboration.branching_merge_modal.no_update_and_no_conflicts_from_main");
+      let c = getI18nString("collaboration.branching_merge_modal.no_update_and_no_conflicts_from_main");
       return jsx(tK, {
         isLoading,
         text: c,
@@ -1647,11 +1647,11 @@ function tY(e) {
       });
     case 2:
       let u;
-      let m = _$$t("collaboration.branching_merge_modal.updates_are_available_for_this_branch_but_you_can_merge_without_updating");
+      let m = getI18nString("collaboration.branching_merge_modal.updates_are_available_for_this_branch_but_you_can_merge_without_updating");
       return jsx(tK, {
         isLoading,
         text: m,
-        button: (u = _$$t("collaboration.branching_merge_modal.update_from_main_file"), jsx("div", {
+        button: (u = getI18nString("collaboration.branching_merge_modal.update_from_main_file"), jsx("div", {
           className: tV,
           children: jsx($n, {
             variant: "secondary",
@@ -1663,7 +1663,7 @@ function tY(e) {
     case 4:
       return jsx(tK, {
         isLoading,
-        text: _$$t("collaboration.branching_merge_modal.you_have_unread_comments_on_this_branch", {
+        text: getI18nString("collaboration.branching_merge_modal.you_have_unread_comments_on_this_branch", {
           unreadCommentCount: unreadCommentCount || 0
         }),
         button: jsx(Fragment, {})
@@ -1691,7 +1691,7 @@ function tX(e) {
       let e = "local" === n.type ? n.value.keyForPublish : n.value.key;
       e && i && r.set(yG(e), i);
     }
-    let a = n?.value.name ?? _$$t("variables.missing_name");
+    let a = n?.value.name ?? getI18nString("variables.missing_name");
     let s = CWU.getVariableResolvedValue(e, r);
     t0(t, e, i, {
       name: a,
@@ -1711,7 +1711,7 @@ function tQ({
     let r = {};
     tJ(n, (e, t) => {
       let i = CWU.getLocalVariableInfo(e) ?? CWU.getSubscribedVariableInfo(e);
-      let n = i?.name ?? _$$t("variables.missing_name");
+      let n = i?.name ?? getI18nString("variables.missing_name");
       let a = i && "keyForPublish" in i;
       let s = i && "key" in i;
       let o = a ? i.keyForPublish : s ? i.key : null;
@@ -1722,14 +1722,14 @@ function tQ({
         value: d
       });
     });
-    let a = _$$eU(() => r);
+    let a = atom(() => r);
     return {
-      prev: _$$eU(() => {
+      prev: atom(() => {
         b_();
         let e = {};
         tJ(i, (t, i) => {
           let n = CWU.getLocalVariableInfo(t) ?? CWU.getSubscribedVariableInfo(t);
-          let r = n?.name ?? _$$t("variables.missing_name");
+          let r = n?.name ?? getI18nString("variables.missing_name");
           let a = n && "keyForPublish" in n;
           let s = n && "key" in n;
           let o = a ? n.keyForPublish : s ? n.key : null;
@@ -1806,7 +1806,7 @@ function iA({
     className: id,
     children: [jsx(i_, {
       restrictWidth: !0,
-      children: _$$tx("variables.modes.option.scope")
+      children: renderI18nText("variables.modes.option.scope")
     }), jsx(iR, {
       scopes: e
     })]
@@ -1818,7 +1818,7 @@ function iy({
   return jsxs("div", {
     className: "variables_diff--codeSyntaxRow--474J8 variables_diff--dropdownRow--E6md-",
     children: [jsx(i_, {
-      children: _$$tx("variables.branching.code_syntax")
+      children: renderI18nText("variables.branching.code_syntax")
     }), jsx(ib, {
       codeSyntaxMapEntries: e
     })]
@@ -1853,7 +1853,7 @@ function iv({
   return jsx("div", {
     className: id,
     children: jsx(i_, {
-      children: e ? _$$tx("variables.branching.show_when_publishing") : _$$tx("variables.branching.hide_from_publishing")
+      children: e ? renderI18nText("variables.branching.show_when_publishing") : renderI18nText("variables.branching.hide_from_publishing")
     })
   });
 }
@@ -1871,7 +1871,7 @@ function iI({
       })
     }), i && jsx("div", {
       className: "variables_diff--numHiddenChanges--TwPsQ",
-      children: _$$t("variables.diff.number_of_hidden_changes", {
+      children: getI18nString("variables.diff.number_of_hidden_changes", {
         numHiddenChanges: i
       })
     })]
@@ -1896,7 +1896,7 @@ function iE({
         className: io,
         children: jsx(_$$f, {
           checked: l,
-          "aria-label": _$$t("variables.diff.toggle_variable_details"),
+          "aria-label": getI18nString("variables.diff.toggle_variable_details"),
           onIcon: jsx(_$$r, {}),
           offIcon: jsx(_$$R2, {}),
           onChange: e => d(e)
@@ -2026,10 +2026,10 @@ function ik({
       checked: e,
       onChange: lQ,
       label: jsx(_$$h2, {
-        children: e ? _$$t("variables.values.boolean.true") : _$$t("variables.values.boolean.false")
+        children: e ? getI18nString("variables.values.boolean.true") : getI18nString("variables.values.boolean.false")
       })
     }), jsx("span", {
-      children: e ? _$$t("variables.values.boolean.true") : _$$t("variables.values.boolean.false")
+      children: e ? getI18nString("variables.values.boolean.true") : getI18nString("variables.values.boolean.false")
     })]
   });
 }
@@ -2185,7 +2185,7 @@ function iL({
       children: [jsxs(GC, {
         isHeader: !0,
         children: [jsx(Ar, {
-          children: _$$t("variables.authoring_modal.table.name_header")
+          children: getI18nString("variables.authoring_modal.table.name_header")
         }), a.map(e => jsx(Ar, {
           children: jsx(iS, {
             prev: e.prev?.name,
@@ -2221,12 +2221,12 @@ function iF({
     children: [jsx(Ar, {
       hasPadding: !1,
       children: d > 0 ? jsx(iE, {
-        name: next.name ?? _$$t("variables.missing_name"),
+        name: next.name ?? getI18nString("variables.missing_name"),
         diff: e,
         resolvedType: next.variableResolvedType,
         numHiddenChanges: d
       }) : jsx(ig, {
-        name: next.name ?? _$$t("variables.missing_name"),
+        name: next.name ?? getI18nString("variables.missing_name"),
         phase,
         resolvedType: next.variableResolvedType
       })
@@ -2290,14 +2290,14 @@ let iW = Ju(function (e) {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$tx("collaboration.branching_reviews.finish_your_review")
+          children: renderI18nText("collaboration.branching_reviews.finish_your_review")
         })
       }), jsxs(_$$nB, {
         children: [jsx("form", {
           className: "branching_reviews_modals--radioGroup--eWuSc",
           children: jsxs(_$$b, {
             legend: jsx(_$$q, {
-              children: _$$t("collaboration.branching_reviews.finish_your_review")
+              children: getI18nString("collaboration.branching_reviews.finish_your_review")
             }),
             value: p,
             onChange: e => {
@@ -2306,12 +2306,12 @@ let iW = Ju(function (e) {
             },
             children: [jsx(_$$c, {
               label: jsx(_$$J, {
-                children: _$$tx("collaboration.branching_reviews.approve")
+                children: renderI18nText("collaboration.branching_reviews.approve")
               }),
               value: "approve"
             }), jsx(_$$c, {
               label: jsx(_$$J, {
-                children: _$$tx("collaboration.branching_reviews.suggest_changes")
+                children: renderI18nText("collaboration.branching_reviews.suggest_changes")
               }),
               value: "suggest_changes"
             })]
@@ -2328,11 +2328,11 @@ let iW = Ju(function (e) {
           onKeyUp,
           onMouseLeave,
           onMouseUp,
-          placeholder: (t = e.mergeRequest.owner?.handle, i = e.mergeRequest.reviewers.length > 1, t ? i ? _$$t("collaboration.branching_reviews.leave_a_comment_for_owner_and_other_reviewers", {
+          placeholder: (t = e.mergeRequest.owner?.handle, i = e.mergeRequest.reviewers.length > 1, t ? i ? getI18nString("collaboration.branching_reviews.leave_a_comment_for_owner_and_other_reviewers", {
             ownerHandle: t
-          }) : _$$t("collaboration.branching_reviews.leave_a_comment_for_owner", {
+          }) : getI18nString("collaboration.branching_reviews.leave_a_comment_for_owner", {
             ownerHandle: t
-          }) : _$$t("collaboration.branching_reviews.leave_a_comment")),
+          }) : getI18nString("collaboration.branching_reviews.leave_a_comment")),
           value: o
         })]
       }), jsx(wi, {
@@ -2350,7 +2350,7 @@ let iW = Ju(function (e) {
               s(_$$Lo());
             },
             disabled: !p,
-            children: _$$tx("collaboration.branching_reviews.submit")
+            children: renderI18nText("collaboration.branching_reviews.submit")
           }), " "]
         })
       })]
@@ -2363,14 +2363,14 @@ let iK = Ju(function (e) {
     open: !0,
     onClose: e.onClose ? e.onClose : () => {}
   });
-  let s = _$$t("collaboration.branching_reviews.add_context_optional");
-  let o = e.existingMergeRequest ? _$$t("collaboration.branching_reviews.give_reviewers_more_context_for_your_latest_changes") : _$$t("collaboration.branching_reviews.give_reviewers_more_context_for_your_changes");
+  let s = getI18nString("collaboration.branching_reviews.add_context_optional");
+  let o = e.existingMergeRequest ? getI18nString("collaboration.branching_reviews.give_reviewers_more_context_for_your_latest_changes") : getI18nString("collaboration.branching_reviews.give_reviewers_more_context_for_your_changes");
   return jsx(bL, {
     width: "md",
     manager: a,
     children: jsxs(vo, {
       children: [jsx(Y9, {
-        children: _$$t("collaboration.branching_reviews.request_review")
+        children: getI18nString("collaboration.branching_reviews.request_review")
       }), jsxs(_$$nB, {
         scrolling: "none",
         children: [jsx("div", {
@@ -2394,7 +2394,7 @@ let iK = Ju(function (e) {
             onClick: () => {
               e.onRequestReview(t);
             },
-            children: _$$tx("collaboration.branching_reviews.send_to_reviewers", {
+            children: renderI18nText("collaboration.branching_reviews.send_to_reviewers", {
               numReviewers: e.numReviewers
             })
           })
@@ -2491,7 +2491,7 @@ function nm(e) {
   let t = jsx($n, {
     variant: "secondary",
     onClick: e.onClickAdd,
-    children: _$$tx("collaboration.branching_to_source.add")
+    children: renderI18nText("collaboration.branching_to_source.add")
   });
   return jsx(nc, {
     user: e.user,
@@ -2507,7 +2507,7 @@ function nh(e) {
     className: no,
     children: jsx(_$$K, {
       onClick: e.onClickRemove,
-      "aria-label": _$$t("collaboration.branching_to_source.remove"),
+      "aria-label": getI18nString("collaboration.branching_to_source.remove"),
       children: jsx(_$$B, {
         svg: _$$A3,
         className: "reviewer_row--icon--dxdcf"
@@ -2536,14 +2536,14 @@ function ng(e) {
       manager,
       children: [jsx(_$$K, {
         ...getTriggerProps(),
-        "aria-label": _$$t("collaboration.branching_to_source.more_options_label"),
+        "aria-label": getI18nString("collaboration.branching_to_source.more_options_label"),
         children: jsx(_$$J3, {})
       }), jsx(mc, {
         children: jsx(q7, {
           onClick: () => {
             s(!0);
           },
-          children: e.reviewer.notes ? _$$t("collaboration.branching_to_source.edit_comment") : _$$t("collaboration.branching_to_source.add_comment")
+          children: e.reviewer.notes ? getI18nString("collaboration.branching_to_source.edit_comment") : getI18nString("collaboration.branching_to_source.add_comment")
         })
       })]
     }) : null,
@@ -2551,7 +2551,7 @@ function ng(e) {
     description: e.description,
     editingNotes: a,
     fadedAvatar: e.fadedAvatar,
-    inlineDescription: i ? _$$t("collaboration.branching_to_source.you") : void 0,
+    inlineDescription: i ? getI18nString("collaboration.branching_to_source.you") : void 0,
     mergeRequest: e.mergeRequest,
     onSetEditingNotes: s,
     reviewer: e.reviewer,
@@ -2574,7 +2574,7 @@ function nf(e) {
   let g = () => {
     e.onSetEditingNotes && e.onSetEditingNotes(!1);
   };
-  let f = t ? u === _V.CHANGES_REQUESTED ? _$$t("collaboration.branching_to_source.suggest_changes") : _$$t("collaboration.branching_to_source.add_a_comment") : _$$t("collaboration.branching_to_source.add_context");
+  let f = t ? u === _V.CHANGES_REQUESTED ? getI18nString("collaboration.branching_to_source.suggest_changes") : getI18nString("collaboration.branching_to_source.add_a_comment") : getI18nString("collaboration.branching_to_source.add_context");
   let _ = t ? () => {
     t && e.onSetEditingNotes && e.onSetEditingNotes(!1);
     (!t || e.reviewer && e.mergeRequest?.key) && (!t || l !== e.reviewer?.notes) && c(ec({
@@ -2602,7 +2602,7 @@ function nf(e) {
   });
   let y = jsx("div", {
     className: t ? "reviewer_row--inlineDescription--7CFiG reviewer_row--inlineDescriptionRequestor--xW0v5 text--fontPos11--2LvXf text--_fontBase--QdLsd" : "reviewer_row--inlineDescriptionRequestor--xW0v5 text--fontPos11--2LvXf text--_fontBase--QdLsd",
-    children: t ? e.inlineDescription : _$$t("collaboration.branching_to_source.requested_a_review")
+    children: t ? e.inlineDescription : getI18nString("collaboration.branching_to_source.requested_a_review")
   });
   return jsx("div", {
     className: e.isInDropdown ? "reviewer_row--dropdownContainer--er3ds reviewer_row--container--V5wAE" : "reviewer_row--container--V5wAE",
@@ -2620,7 +2620,7 @@ function nf(e) {
             className: "reviewer_row--textDetails--qLBoJ",
             children: [jsx("div", {
               className: "reviewer_row--title--ccY9Q ellipsis--ellipsis--Tjyfa text--fontPos11--2LvXf text--_fontBase--QdLsd",
-              children: _$$tx("collaboration.branching_to_source.reviewer_description", {
+              children: renderI18nText("collaboration.branching_to_source.reviewer_description", {
                 reviewerName: A,
                 requestFragment: y
               })
@@ -2637,7 +2637,7 @@ function nf(e) {
         className: "reviewer_row--rowBody--GBkBh",
         children: [void 0 !== u && t && h && jsx("div", {
           className: "reviewer_row--outdated--Ciuvu",
-          children: _$$tx("collaboration.branching_to_source.reviewed_older_version_of_branch")
+          children: renderI18nText("collaboration.branching_to_source.reviewed_older_version_of_branch")
         }), void 0 !== u && t && jsx("div", {
           className: "reviewer_row--statusBadge--N4PHD",
           children: jsx($T, {
@@ -2669,10 +2669,10 @@ function nf(e) {
             children: [jsx($n, {
               variant: "secondary",
               onClick: g,
-              children: _$$tx("collaboration.branching_to_source.cancel")
+              children: renderI18nText("collaboration.branching_to_source.cancel")
             }), jsx($n, {
               onClick: _,
-              children: _$$tx("collaboration.branching_to_source.save")
+              children: renderI18nText("collaboration.branching_to_source.save")
             })]
           })]
         }), o && jsx("div", {
@@ -2711,7 +2711,7 @@ function nA(e) {
       e || (h(!1), t ? l(t.mentions) : l([]));
     }).catch(() => {
       g(_$$F.enqueue({
-        message: _$$t("collaboration.branching_to_source.an_error_occurred_fetching_your_contacts"),
+        message: getI18nString("collaboration.branching_to_source.an_error_occurred_fetching_your_contacts"),
         error: !0
       }));
     });
@@ -2792,13 +2792,13 @@ function nA(e) {
             className: ns,
             children: [jsx("div", {
               className: na,
-              children: _$$tx("collaboration.branching_to_source.search_suggested")
+              children: renderI18nText("collaboration.branching_to_source.search_suggested")
             }), T]
           }), k.length > 0 && jsxs("div", {
             className: ns,
             children: [jsx("div", {
               className: na,
-              children: _$$tx("collaboration.branching_to_source.other_team_member")
+              children: renderI18nText("collaboration.branching_to_source.other_team_member")
             }), k]
           })]
         }) : jsx(Fragment, {
@@ -2807,7 +2807,7 @@ function nA(e) {
             children: jsx(qc, {})
           }) : 0 === R.length ? jsx("div", {
             className: nl,
-            children: _$$tx("collaboration.branching_to_source.no_results_matching_query", {
+            children: renderI18nText("collaboration.branching_to_source.no_results_matching_query", {
               query: t
             })
           }) : jsx("div", {
@@ -2911,7 +2911,7 @@ function ny(e) {
         className: "sidebar_details--reviewersHeader--VPeSw sidebar_details--reviewerRequesterHeader--s1rF6",
         children: [jsx("span", {
           className: nr,
-          children: _$$tx("collaboration.branching_to_source.reviewers")
+          children: renderI18nText("collaboration.branching_to_source.reviewers")
         }), g && jsx("div", {
           className: no,
           children: jsx(_$$K, {
@@ -2919,7 +2919,7 @@ function ny(e) {
               e.stopPropagation();
               A(e => !e);
             },
-            "aria-label": _$$t("collaboration.branching_to_source.add_reviewers"),
+            "aria-label": getI18nString("collaboration.branching_to_source.add_reviewers"),
             children: jsx(_$$B, {
               svg: _$$A1,
               className: "sidebar_details--plusIcon--AHH1Y"
@@ -2942,7 +2942,7 @@ function ny(e) {
           canEditReviewers: g,
           canMerge: f,
           suggestionsSize: b.size,
-          sourceFileName: u?.name || _$$t("collaboration.branching_to_source.this_repository")
+          sourceFileName: u?.name || getI18nString("collaboration.branching_to_source.this_repository")
         }), jsx("div", {
           children: Array.from(I.values()).map(e => jsx(_$$Fragment, {
             children: v(e)
@@ -2950,7 +2950,7 @@ function ny(e) {
         }), g && (!e.mergeRequestPersisted || 0 === e.reviewers.length) && b.size > 0 && jsxs(Fragment, {
           children: [jsx("div", {
             className: "sidebar_details--suggestionsHeader--eJMo-",
-            children: _$$tx("collaboration.branching_to_source.suggested")
+            children: renderI18nText("collaboration.branching_to_source.suggested")
           }), Array.from(b.values()).map(e => jsx(nm, {
             user: e,
             description: e.editorContext,
@@ -2964,11 +2964,11 @@ function ny(e) {
 }
 function nb(e) {
   let t = "";
-  t = e.canMerge ? _$$t("collaboration.branching_to_source.add_people_to_approve_or_provide_feedback_on_your_changes_they_ll_get_notified_when_you_add_them") : e.canEditReviewers ? e.suggestionsSize > 0 ? _$$t("collaboration.branching_to_source.no_reviewers_add_suggestions.seat_rename", {
+  t = e.canMerge ? getI18nString("collaboration.branching_to_source.add_people_to_approve_or_provide_feedback_on_your_changes_they_ll_get_notified_when_you_add_them") : e.canEditReviewers ? e.suggestionsSize > 0 ? getI18nString("collaboration.branching_to_source.no_reviewers_add_suggestions.seat_rename", {
     fileName: e.sourceFileName
-  }) : _$$t("collaboration.branching_to_source.no_reviewers_add_no_suggestions.seat_rename", {
+  }) : getI18nString("collaboration.branching_to_source.no_reviewers_add_no_suggestions.seat_rename", {
     fileName: e.sourceFileName
-  }) : _$$t("collaboration.branching_to_source.no_reviewers_added");
+  }) : getI18nString("collaboration.branching_to_source.no_reviewers_added");
   return jsx("div", {
     className: "sidebar_details--emptyState--j3RzZ",
     children: t
@@ -2991,13 +2991,13 @@ function nv(e) {
       className: "sidebar_details--reviewerRequesterHeader--s1rF6",
       children: [jsx("span", {
         className: nr,
-        children: _$$tx("collaboration.branching_to_source.review_request")
+        children: renderI18nText("collaboration.branching_to_source.review_request")
       }), s && jsxs(_$$bL2, {
         manager,
         children: [jsx("div", {
           className: no,
           children: jsx(_$$K, {
-            "aria-label": _$$t("collaboration.branching_to_source.more_options_label"),
+            "aria-label": getI18nString("collaboration.branching_to_source.more_options_label"),
             ...c,
             ref: e => {
               c.ref(e);
@@ -3010,7 +3010,7 @@ function nv(e) {
             onClick: () => {
               i(!0);
             },
-            children: _$$tx("collaboration.branching_to_source.edit_description")
+            children: renderI18nText("collaboration.branching_to_source.edit_description")
           })
         })]
       })]
@@ -3042,29 +3042,29 @@ function nS(e) {
     children: e.branchFile.name
   });
   let s = e.canMerge ? e.mergeDisabled ? jsx("span", {
-    children: _$$tx("collaboration.branching_to_source.conflicts_must_be_resolved_to_merge_this_branch", {
+    children: renderI18nText("collaboration.branching_to_source.conflicts_must_be_resolved_to_merge_this_branch", {
       sourceFileName: i
     })
   }) : jsx("span", {
-    children: _$$tx("collaboration.branching_to_source.you_are_able_to_merge_this_branch_along_with_other_editors_of", {
+    children: renderI18nText("collaboration.branching_to_source.you_are_able_to_merge_this_branch_along_with_other_editors_of", {
       sourceFileName: i
     })
   }) : e.fileMerge && e.fileMerge.mergeResultCheckpointId ? jsx("span", {
-    children: _$$tx("collaboration.branching_to_source.this_branch_was_merged_into", {
+    children: renderI18nText("collaboration.branching_to_source.this_branch_was_merged_into", {
       sourceFileName: i,
       relativeTimestamp: jsx(h1, {
         date: e.fileMerge.updatedAt
       })
     })
   }) : e.isBranchArchived ? jsx("span", {
-    children: _$$tx("collaboration.branching_to_source.branch_was_archived", {
+    children: renderI18nText("collaboration.branching_to_source.branch_was_archived", {
       branchFileName: r,
       relativeTimestamp: e.branchFile.trashed_at ? jsx(h1, {
         date: e.branchFile.trashed_at
       }) : null
     })
   }) : jsx("span", {
-    children: _$$tx("collaboration.branching_to_source.only_editors_of_file_can_merge_this_branch", {
+    children: renderI18nText("collaboration.branching_to_source.only_editors_of_file_can_merge_this_branch", {
       sourceFileName: i
     })
   });
@@ -3093,15 +3093,15 @@ function nS(e) {
     variant: "primary",
     onClick: e.onMerge,
     disabled: e.mergeDisabled,
-    children: _$$tx("collaboration.branching_to_source.merge_branch")
+    children: renderI18nText("collaboration.branching_to_source.merge_branch")
   }) : jsx($n, {
     variant: "secondary",
     onClick: e.onMerge,
     disabled: e.mergeDisabled,
-    children: _$$tx("collaboration.branching_to_source.merge_branch")
+    children: renderI18nText("collaboration.branching_to_source.merge_branch")
   });
   let c = (t, i) => {
-    let r = i ? _$$t("collaboration.branching_to_source.resend_review_request") : _$$t("collaboration.branching_to_source.request_review");
+    let r = i ? getI18nString("collaboration.branching_to_source.resend_review_request") : getI18nString("collaboration.branching_to_source.request_review");
     return t ? jsx($n, {
       variant: "primary",
       onClick: o,
@@ -3115,7 +3115,7 @@ function nS(e) {
     });
   };
   let u = (e, t) => {
-    let i = t ? _$$t("collaboration.branching_to_source.review_again") : _$$t("collaboration.branching_to_source.add_your_review");
+    let i = t ? getI18nString("collaboration.branching_to_source.review_again") : getI18nString("collaboration.branching_to_source.add_your_review");
     return e ? jsx($n, {
       variant: "primary",
       onClick: l,
@@ -3183,7 +3183,7 @@ let nw = memo(function (e) {
       case tN.AFFECTED_DETAIL:
       case tN.DETAIL:
       case tN.VARIANT_DETAIL:
-        sx("View Chunk Detail", {
+        trackEventAnalytics("View Chunk Detail", {
           numDisplayGroups: e.displayGroups?.length ?? 0,
           view: t.view,
           branchModalTrackingId: b,
@@ -3193,7 +3193,7 @@ let nw = memo(function (e) {
       case tN.AFFECTED_SUMMARY:
       case tN.SUMMARY:
       case tN.VARIANT_SUMMARY:
-        sx("View Chunk Summary", {
+        trackEventAnalytics("View Chunk Summary", {
           numDisplayGroups: e.displayGroups?.length ?? 0,
           view: t.view,
           branchModalTrackingId: b,
@@ -3250,7 +3250,7 @@ let nw = memo(function (e) {
   };
   let [M, B] = useState(I?.reviewers ?? []);
   let z = e => {
-    sx("Merge Request Reviewer Assigned", {
+    trackEventAnalytics("Merge Request Reviewer Assigned", {
       reviewNumber: x,
       branchKey: branch.key,
       sourceKey: source.key,
@@ -3259,7 +3259,7 @@ let nw = memo(function (e) {
     });
   };
   let W = e => {
-    sx("Merge Request Reviewer Unassigned", {
+    trackEventAnalytics("Merge Request Reviewer Unassigned", {
       reviewNumber: x,
       branchKey: branch.key,
       sourceKey: source.key,
@@ -3382,7 +3382,7 @@ let nw = memo(function (e) {
               scale: getFeatureFlags().branching_detail_view_zoom ? n ? 4 : 8 : void 0
             });
             let s = new Promise(async e => {
-              for (let e = 0; e < 5; e++) await yQ();
+              for (let e = 0; e < 5; e++) await waitForAnimationFrame();
               b_();
               let t = FD({
                 nodes: r,
@@ -3547,7 +3547,7 @@ let nw = memo(function (e) {
     t(sf({
       view: "fullscreen",
       fileKey: branch.key,
-      editorType: _$$nT.Design,
+      editorType: FEditorType.Design,
       mergeParams: e
     }));
   }, [t, branch]);
@@ -3573,7 +3573,7 @@ let nw = memo(function (e) {
       })]
     }), jsxs("div", {
       className: "to_source_view--sourceText--Oqd53",
-      children: [repo?.name, " \xb7 ", _$$tx("collaboration.branching_to_source.change", {
+      children: [repo?.name, " \xb7 ", renderI18nText("collaboration.branching_to_source.change", {
         numChanges: allDisplayGroups.length
       })]
     }), jsx("div", {
@@ -3607,7 +3607,7 @@ let nw = memo(function (e) {
       children: jsx(_$$nS, {
         children: jsx("div", {
           className: _$$iG,
-          children: _$$tx("collaboration.branching_to_source.no_changes_to_merge")
+          children: renderI18nText("collaboration.branching_to_source.no_changes_to_merge")
         })
       })
     })
@@ -3681,10 +3681,10 @@ let nw = memo(function (e) {
             mergeRequestStatus: ej,
             numReviewers: M.length,
             onMerge: e.onSubmit({
-              pendingMessage: _$$t("collaboration.branching_to_source.merging_branch_name_changes", {
+              pendingMessage: getI18nString("collaboration.branching_to_source.merging_branch_name_changes", {
                 branchName: branch.name
               }),
-              successMessage: _$$t("collaboration.branching_to_source.branch_merged"),
+              successMessage: getI18nString("collaboration.branching_to_source.branch_merged"),
               checkpointDiff: e.checkpointDiff
             }),
             onRequestReview: eB,
@@ -3725,7 +3725,7 @@ let nw = memo(function (e) {
                     children: [jsx("div", {
                       className: j2,
                       children: jsx(_$$K, {
-                        "aria-label": _$$t("collaboration.branching_to_source.back_to_summary_view"),
+                        "aria-label": getI18nString("collaboration.branching_to_source.back_to_summary_view"),
                         onClick: () => {
                           i.view === tN.AFFECTED_DETAIL ? v({
                             view: tN.AFFECTED_SUMMARY,
@@ -3747,7 +3747,7 @@ let nw = memo(function (e) {
                     className: S1,
                     children: [i.view === tN.VARIABLE_SET_DETAIL && jsx("span", {
                       className: w5,
-                      children: _$$t("variables.diff.only_changed_variables_are_shown")
+                      children: getI18nString("variables.diff.only_changed_variables_are_shown")
                     }), jsx(eH, {
                       className: _$$ak,
                       phase: e.mainChunk.phase
@@ -3804,7 +3804,7 @@ let nw = memo(function (e) {
               children: eO ? jsx(e7, {
                 changes: eO.nodeChanges,
                 basis: eO.diffBasis
-              }) : _$$t("collaboration.branching_to_source.placeholder_for_non_previewable_changes")
+              }) : getI18nString("collaboration.branching_to_source.placeholder_for_non_previewable_changes")
             })]
           }), tP(i) && jsx(ak, {
             children: jsxs("div", {
@@ -3812,21 +3812,21 @@ let nw = memo(function (e) {
               children: [jsx("div", {
                 className: ai,
                 children: jsx(_$$K, {
-                  "aria-label": _$$t("collaboration.branching_to_source.view_previous_detail"),
+                  "aria-label": getI18nString("collaboration.branching_to_source.view_previous_detail"),
                   onClick: () => eT(i.displayGroup.index - 1),
                   disabled: 0 === i.displayGroup.index,
                   children: jsx(_$$t2, {})
                 })
               }), jsx("div", {
                 className: lT,
-                children: _$$tx("collaboration.branching_to_source.group_m_of_n", {
+                children: renderI18nText("collaboration.branching_to_source.group_m_of_n", {
                   groupIndex: i.displayGroup.index + 1,
                   numGroups: allDisplayGroups.length
                 })
               }), jsx("div", {
                 className: ai,
                 children: jsx(_$$K, {
-                  "aria-label": _$$t("collaboration.branching_to_source.view_next_detail"),
+                  "aria-label": getI18nString("collaboration.branching_to_source.view_next_detail"),
                   onClick: () => eT(i.displayGroup.index + 1),
                   disabled: i.displayGroup.index === allDisplayGroups.length - 1,
                   children: jsx(_$$a, {})
@@ -3860,7 +3860,7 @@ function nk(e, t) {
   return t?.find(t => dI(t.mainChunk.displayNode.guid) === e);
 }
 var nN = nR;
-let nO = _$$eU("off");
+let nO = atom("off");
 let nF = memo(function (e) {
   let {
     mainPickDisplayGroups,
@@ -3915,7 +3915,7 @@ let nF = memo(function (e) {
     return e;
   }, [didResolveConflicts, M, identicalChunkGUIDs]);
   useEffect(() => {
-    j.length > 0 && sx("System Improvements During Update", {
+    j.length > 0 && trackEventAnalytics("System Improvements During Update", {
       branchKey: e.branchKey,
       sourceKey: e.sourceKey,
       checkpointDiffKey: e.checkpointDiffKey,
@@ -3977,7 +3977,7 @@ let nF = memo(function (e) {
       images: p
     };
   }(mainPickGUIDs, branchPickGUIDs, nonConflictingSourceChunkGUIDs, nonConflictingBranchChunkGUIDs, identicalChunkGUIDs, branchKey, sourceKey, fromCheckpointKey, w);
-  let [B, V] = fp(nO);
+  let [B, V] = useAtomValueAndSetter(nO);
   if (useEffect(() => {
     "loading" === B && ("loaded" === U.status || "error" === U.status) && V("loaded");
   }, [U, B, V]), "error" === U.status) throw U.error;
@@ -3997,26 +3997,26 @@ let nF = memo(function (e) {
             className: "changes_review--reviewChevron--TWKyU",
             width: "10px",
             autosize: !0
-          }), _$$tx("collaboration.branching_from_source.review_changes")]
+          }), renderI18nText("collaboration.branching_from_source.review_changes")]
         }), jsx("div", {
           children: pickedAllFromBranch ? jsxs(Fragment, {
             children: [jsx("p", {
-              children: _$$tx("collaboration.branching_from_source.you_chose_to_keep_all_changes_from_the_branch_for_conflicts")
+              children: renderI18nText("collaboration.branching_from_source.you_chose_to_keep_all_changes_from_the_branch_for_conflicts")
             }), "\xa0", jsx("p", {
-              children: _$$tx("collaboration.branching_from_source.continue_to_apply_non_conflicting_changes", {
+              children: renderI18nText("collaboration.branching_from_source.continue_to_apply_non_conflicting_changes", {
                 changeCount: nonConflictDisplayGroups.length
               })
             })]
           }) : jsx(Fragment, {
-            children: _$$tx("collaboration.branching_from_source.confirm_your_picks_as_well_as_additional_changes_that_may_be_pulled_into_your_file")
+            children: renderI18nText("collaboration.branching_from_source.confirm_your_picks_as_well_as_additional_changes_that_may_be_pulled_into_your_file")
           })
         })]
       }) : jsxs(Fragment, {
         children: [jsx("div", {
           className: "changes_review--reviewChanges--uhXd5",
-          children: _$$tx("collaboration.branching_from_source.review_changes")
+          children: renderI18nText("collaboration.branching_from_source.review_changes")
         }), jsx("div", {
-          children: _$$tx("collaboration.branching_from_source.these_changes_have_been_made_to_the_main_file")
+          children: renderI18nText("collaboration.branching_from_source.these_changes_have_been_made_to_the_main_file")
         })]
       })
     }), jsx("div", {
@@ -4042,7 +4042,7 @@ let nF = memo(function (e) {
         type: "submit",
         onClick: e.applyChanges,
         disabled: viewOnly || T !== aTl.STAGED_BRANCH_TIP,
-        children: _$$tx("collaboration.branching_from_source.apply_changes")
+        children: renderI18nText("collaboration.branching_from_source.apply_changes")
       })
     })]
   });
@@ -4113,7 +4113,7 @@ function nY({
     return null == t ? jsx(nK, {
       children: null
     }, e) : jsx(nK, {
-      children: _$$tx("variables.diff.conflict_collection_name", {
+      children: renderI18nText("variables.diff.conflict_collection_name", {
         collectionName: jsx("strong", {
           children: t
         })
@@ -4126,7 +4126,7 @@ function nY({
   }) {
     let i = mapFilter(t, e => e.name).join(", ");
     return jsx(nK, {
-      children: _$$tx("variables.diff.conflict_modes", {
+      children: renderI18nText("variables.diff.conflict_modes", {
         modeNames: jsx("strong", {
           children: i
         })
@@ -4162,9 +4162,9 @@ function nY({
     className: "variable_collections_conflict_group_diff--chunksInConflict--L-iE9 conflict_group_diff--chunksInConflict--KY8CG",
     children: jsx(nW, {
       choice: i,
-      leftLabel: e?.displayNode.name || _$$t("variables.diff.collection_label_main"),
+      leftLabel: e?.displayNode.name || getI18nString("variables.diff.collection_label_main"),
       leftChildren,
-      rightLabel: t?.displayNode.name || _$$t("variables.diff.collection_label_branch"),
+      rightLabel: t?.displayNode.name || getI18nString("variables.diff.collection_label_branch"),
       rightChildren
     })
   });
@@ -4244,7 +4244,7 @@ function n2({
     return jsxs(n1, {
       children: [jsx("div", {
         className: nX,
-        children: _$$tx("variables.modes.option.scope")
+        children: renderI18nText("variables.modes.option.scope")
       }), jsx(iR, {
         scopes: t
       })]
@@ -4257,7 +4257,7 @@ function n2({
     return jsxs(n1, {
       children: [jsx("div", {
         className: nQ,
-        children: _$$tx("variables.branching.code_syntax")
+        children: renderI18nText("variables.branching.code_syntax")
       }), jsx("div", {
         className: "variables_conflict_group_diff--codeSyntaxValueContainer--H9zD9",
         children: jsx(ib, {
@@ -4276,7 +4276,7 @@ function n2({
       }), jsx(n0, {
         children: jsx("div", {
           className: nQ,
-          children: t ? _$$tx("variables.branching.show_when_publishing") : _$$tx("variables.branching.hide_from_publishing")
+          children: t ? renderI18nText("variables.branching.show_when_publishing") : renderI18nText("variables.branching.hide_from_publishing")
         })
       }, e)]
     });
@@ -4391,7 +4391,7 @@ function ri({
   }
   return jsx("span", {
     className: e ? n9 : re,
-    children: _$$tx("collaboration.branching_from_source.preview_unavailable")
+    children: renderI18nText("collaboration.branching_from_source.preview_unavailable")
   });
 }
 function rn(e) {
@@ -4430,18 +4430,18 @@ function rn(e) {
     children: jsx("span", {
       className: h ? n9 : re,
       children: chunk ? o ? (() => {
-        if (chunk && chunk.displayNode.styleType && "NONE" !== chunk.displayNode.styleType) return _$$tx("collaboration.branching_from_source.this_style_was_removed");
+        if (chunk && chunk.displayNode.styleType && "NONE" !== chunk.displayNode.styleType) return renderI18nText("collaboration.branching_from_source.this_style_was_removed");
         switch (chunk?.displayNode.type) {
           case "CANVAS":
-            return _$$tx("collaboration.branching_from_source.this_page_was_removed");
+            return renderI18nText("collaboration.branching_from_source.this_page_was_removed");
           case "FRAME":
-            return _$$tx("collaboration.branching_from_source.this_frame_was_removed");
+            return renderI18nText("collaboration.branching_from_source.this_frame_was_removed");
           case "SYMBOL":
-            return _$$tx("collaboration.branching_from_source.this_component_was_removed");
+            return renderI18nText("collaboration.branching_from_source.this_component_was_removed");
           default:
-            return _$$tx("collaboration.branching_from_source.this_layer_was_removed");
+            return renderI18nText("collaboration.branching_from_source.this_layer_was_removed");
         }
-      })() : _$$tx("collaboration.branching_from_source.preview_unavailable") : _$$tx("collaboration.branching_from_source.no_item")
+      })() : renderI18nText("collaboration.branching_from_source.preview_unavailable") : renderI18nText("collaboration.branching_from_source.no_item")
     })
   }) : jsxs("div", {
     className: n8,
@@ -4550,7 +4550,7 @@ function rs({
         })
       }), jsx("div", {
         className: ev()(n3, t === Wo.MAIN && n6),
-        children: _$$tx("collaboration.branching_from_source.main")
+        children: renderI18nText("collaboration.branching_from_source.main")
       })]
     }), jsxs("div", {
       className: ev()("conflict_group_diff--diffHeaderRight--9h2Uw conflict_group_diff--diffHeaderItem--TWJfb conflict_resolution--branchHeader--zbjpj conflict_resolution--headerBorder--mFV8I", t === Wo.BRANCH && n5),
@@ -4565,7 +4565,7 @@ function rs({
         })]
       }), jsx("div", {
         className: ev()(n3, t === Wo.BRANCH && n6),
-        children: _$$tx("collaboration.branching_from_source.branch")
+        children: renderI18nText("collaboration.branching_from_source.branch")
       })]
     })]
   });
@@ -4633,7 +4633,7 @@ function rl({
           o(Wo.MAIN);
         },
         "aria-pressed": t === Wo.MAIN,
-        children: _$$tx("collaboration.branching_from_source.keep_main")
+        children: renderI18nText("collaboration.branching_from_source.keep_main")
       })
     }), jsx("div", {
       className: ev()("conflict_group_diff--diffFooterRight--adX-Z conflict_group_diff--diffFooterItem--A5WYQ conflict_resolution--branchFooter--8jDG8", t === Wo.BRANCH && n5),
@@ -4646,7 +4646,7 @@ function rl({
           o(Wo.BRANCH);
         },
         "aria-pressed": t === Wo.BRANCH,
-        children: _$$tx("collaboration.branching_from_source.keep_branch")
+        children: renderI18nText("collaboration.branching_from_source.keep_branch")
       })
     })]
   });
@@ -4701,9 +4701,9 @@ function rg(e) {
   let t = function (e) {
     switch (e) {
       case Wo.BRANCH:
-        return _$$t("collaboration.branching_from_source.branch");
+        return getI18nString("collaboration.branching_from_source.branch");
       case Wo.MAIN:
-        return _$$t("collaboration.branching_from_source.main");
+        return getI18nString("collaboration.branching_from_source.main");
       default:
         return null;
     }
@@ -4746,7 +4746,7 @@ function r_(e) {
     conflictGroup,
     numUniqueItems
   } = e;
-  return numUniqueItems > 1 ? _$$tx("collaboration.branching_from_source.num_unique_items_related_items", {
+  return numUniqueItems > 1 ? renderI18nText("collaboration.branching_from_source.num_unique_items_related_items", {
     numUniqueItems
   }) : jsx(rf, {
     displayNode: conflictGroup.sourceChunks[0]?.displayNode || conflictGroup.branchChunks[0].displayNode
@@ -4796,7 +4796,7 @@ function rb({
   return jsxs("div", {
     className: "conflict_list--sidebarHeader--WOTdH conflict_resolution--sidebarHeader--DW5jM conflict_resolution--sidebarBorder--6T7B7 conflict_resolution--headerBorder--mFV8I",
     children: [jsx("div", {
-      children: _$$tx("collaboration.branching_from_source.num_conflicts", {
+      children: renderI18nText("collaboration.branching_from_source.num_conflicts", {
         conflictCount: e.length,
         pickedCount: s
       })
@@ -4808,19 +4808,19 @@ function rb({
         value: o,
         children: [jsx(l9, {
           label: jsx(_$$h2, {
-            children: _$$tx("collaboration.branching_from_source.resolve_all")
+            children: renderI18nText("collaboration.branching_from_source.resolve_all")
           })
         }), jsxs(_$$mc, {
           children: [jsx(c$, {
             value: "",
             disabled: !0,
-            children: _$$tx("collaboration.branching_from_source.resolve_all")
+            children: renderI18nText("collaboration.branching_from_source.resolve_all")
           }), jsx(c$, {
             value: Wo.MAIN,
-            children: _$$t("collaboration.branching_from_source.pick_main_file")
+            children: getI18nString("collaboration.branching_from_source.pick_main_file")
           }), jsx(c$, {
             value: Wo.BRANCH,
-            children: _$$t("collaboration.branching_from_source.pick_branch")
+            children: getI18nString("collaboration.branching_from_source.pick_branch")
           })]
         })]
       })
@@ -4924,7 +4924,7 @@ function rE(e) {
       children: pageName
     }), conflicted && jsx("div", {
       className: "conflict_list--conflictedTag--2xAC5",
-      children: _$$tx("collaboration.branching_from_source.conflicted")
+      children: renderI18nText("collaboration.branching_from_source.conflicted")
     })]
   });
 }
@@ -5040,7 +5040,7 @@ let rR = memo(function (e) {
     conflictGroups
   } = t;
   let y = ud();
-  let b = md(qp);
+  let b = useAtomWithSubscription(qp);
   let I = useSelector(e => e.mirror.appModel.pagesList);
   let x = useMemo(() => function (e, t, i, n, r, a) {
     let s = {};
@@ -5098,11 +5098,11 @@ let rR = memo(function (e) {
     let u = ["Variables", "Styles", "Multipage"].filter(e => c[e]).map(e => [function (e) {
       switch (e) {
         case "Styles":
-          return _$$t("collaboration.conflict_local_styles");
+          return getI18nString("collaboration.conflict_local_styles");
         case "Variables":
-          return _$$t("collaboration.conflict_local_variables");
+          return getI18nString("collaboration.conflict_local_variables");
         case "Multipage":
-          return _$$t("collaboration.conflict_multipage");
+          return getI18nString("collaboration.conflict_multipage");
       }
     }(e), c[e]]);
     let p = Object.keys(o);
@@ -5185,11 +5185,11 @@ let rR = memo(function (e) {
         try {
           let e = Date.now();
           let t = i.sourceChunks.length;
-          Lo("Branching", "Generating conflict images", {
+          logInfo("Branching", "Generating conflict images", {
             conflictGroup: i.id,
             type: "main"
           });
-          sx("Conflict Image Generation started", {
+          trackEventAnalytics("Conflict Image Generation started", {
             branchModalTrackingId: h,
             numChunks: t,
             conflictGroupId: i.id,
@@ -5205,7 +5205,7 @@ let rR = memo(function (e) {
             id: dI(e.displayNode.guid),
             isStyle: void 0 !== e.displayNode.styleType
           })), r);
-          Lo("Branching", "Generating conflict images", {
+          logInfo("Branching", "Generating conflict images", {
             conflictGroup: i.id,
             type: "branch"
           });
@@ -5224,7 +5224,7 @@ let rR = memo(function (e) {
             mainAliasCache: _aliasVariableCache,
             branchAliasCache: aliasVariableCache
           });
-          sx("Conflict Image Generation finished", {
+          trackEventAnalytics("Conflict Image Generation finished", {
             branchModalTrackingId: h,
             numChunks: t,
             conflictGroupId: i.id,
@@ -5248,7 +5248,7 @@ let rR = memo(function (e) {
     return s;
   }(conflictDetection, picks, M, j, e.branchKey);
   "error" === V.status && B(V.error);
-  let [z, W] = fp(nO);
+  let [z, W] = useAtomValueAndSetter(nO);
   useEffect(() => {
     "loading" === z && "loaded" === V.status && W("loaded");
   }, [z, W, V]);
@@ -5380,11 +5380,11 @@ let rR = memo(function (e) {
           }
         },
         disabled: viewOnly || D,
-        children: _$$tx("collaboration.branching_from_source.confirm_picks")
+        children: renderI18nText("collaboration.branching_from_source.confirm_picks")
       }) : jsx(IK, {
         onClick: e.completeResolution,
         disabled: !e.hasPicksForAll || D,
-        children: _$$tx("collaboration.branching_from_source.next")
+        children: renderI18nText("collaboration.branching_from_source.next")
       })
     })]
   });
@@ -5404,7 +5404,7 @@ let rN = memo(function (e) {
   let A = useMemo(() => _$$tF(displayGroups ?? [], conflictDetection?.conflictGroups || [], conflictDetection?.identicalChunkGUIDs || []), [displayGroups, conflictDetection]);
   let y = getFeatureFlags().branching_and_merging_debug ?? !1;
   useLayoutEffect(() => {
-    modalCloseIntent && conflictDetection && conflictDetection.conflictGroups.length > 0 && !u && sx("Exit Conflict Resolution Early", {
+    modalCloseIntent && conflictDetection && conflictDetection.conflictGroups.length > 0 && !u && trackEventAnalytics("Exit Conflict Resolution Early", {
       branchFileKey: e.branch.key,
       sourceFileKey: e.branch.source_file_key,
       fileRepoId: e.branch.file_repo_id,
@@ -5412,7 +5412,7 @@ let rN = memo(function (e) {
     });
   }, [modalCloseIntent]);
   let b = useContext(ss);
-  let [v, I] = fp(nO);
+  let [v, I] = useAtomValueAndSetter(nO);
   useEffect(() => (I("loading"), () => I("off")), [I]);
   _$$tW({
     isDoneLoading: "loaded" === v,
@@ -5427,7 +5427,7 @@ let rN = memo(function (e) {
     entryPointDirection: e.entryPointDirection || Kn.FROM_SOURCE
   });
   let x = _$$$n();
-  let S = md(_$$eE);
+  let S = useAtomWithSubscription(_$$eE);
   let w = useSelector(e => e.mirror.appModel.topLevelMode);
   let C = useSelector(e => e.mirror.appModel.multiplayerSessionState);
   useEffect(() => {
@@ -5452,7 +5452,7 @@ let rN = memo(function (e) {
       topLevelMode: lyf[w],
       multiplayerSessionState: kul[C],
       conflictCount: conflictDetection.conflictGroups.length
-    }), az.trackDefinedEvent("scenegraph_and_sync.branching.conflict_resolution_blocked", {
+    }), analyticsEventManager.trackDefinedEvent("scenegraph_and_sync.branching.conflict_resolution_blocked", {
       reason: x.updateBranch.reason,
       status: x.updateBranch.status,
       multiplayerSessionState: kul[C],
@@ -5510,8 +5510,8 @@ let rN = memo(function (e) {
           hasNonConflictDisplayGroups: A.length > 0,
           hasPicksForAll: f,
           onSubmit: e.onSubmit({
-            pendingMessage: _$$t("collaboration.branching_from_source.keeping_changes_on_branch"),
-            successMessage: _$$t("collaboration.branching_from_source.changes_kept"),
+            pendingMessage: getI18nString("collaboration.branching_from_source.keeping_changes_on_branch"),
+            successMessage: getI18nString("collaboration.branching_from_source.changes_kept"),
             checkpointDiff,
             conflictResolutionDetails: {
               branchPickGroups: L.length,
@@ -5535,8 +5535,8 @@ let rN = memo(function (e) {
     },
     children: jsx(nF, {
       applyChanges: e.onSubmit({
-        pendingMessage: _$$t("collaboration.branching_from_source.applying_changes_from_main_file"),
-        successMessage: _$$t("collaboration.branching_from_source.changes_applied"),
+        pendingMessage: getI18nString("collaboration.branching_from_source.applying_changes_from_main_file"),
+        successMessage: getI18nString("collaboration.branching_from_source.changes_applied"),
         checkpointDiff,
         conflictResolutionDetails: {
           branchPickGroups: L.length,
@@ -5589,10 +5589,10 @@ function rO({
   let u = useMemo(() => {
     switch (e) {
       case Kn.TO_SOURCE:
-        return _$$tx("collaboration.branching_merge_modal.title_merge_to_source");
+        return renderI18nText("collaboration.branching_merge_modal.title_merge_to_source");
       case Kn.FROM_SOURCE:
-        if (null != t) return _$$tx("collaboration.branching_merge_modal.title_merge_from_source_version");
-        return _$$tx("collaboration.branching_merge_modal.title_merge_from_source");
+        if (null != t) return renderI18nText("collaboration.branching_merge_modal.title_merge_from_source_version");
+        return renderI18nText("collaboration.branching_merge_modal.title_merge_from_source");
     }
   }, [e, t]);
   return jsx(bL, {
@@ -5626,8 +5626,8 @@ function rD(e) {
       branchModalTrackingId: e.branchModalTrackingId,
       error: t.error?.message
     };
-    x1("branching", "Branching Error Modal Shown", i);
-    sx("Branching Error Modal Shown", i, {
+    logError("branching", "Branching Error Modal Shown", i);
+    trackEventAnalytics("Branching Error Modal Shown", i, {
       forwardToDatadog: !0
     });
   });
@@ -5641,14 +5641,14 @@ function rD(e) {
         className: oW,
         children: [jsx("div", {
           className: v2,
-          children: e.mergeDirection === Kn.FROM_SOURCE ? _$$tx("collaboration.branching_merge_modal.unexpected_error_from_source") : _$$tx("collaboration.branching_merge_modal.unexpected_error_to_source")
+          children: e.mergeDirection === Kn.FROM_SOURCE ? renderI18nText("collaboration.branching_merge_modal.unexpected_error_from_source") : renderI18nText("collaboration.branching_merge_modal.unexpected_error_to_source")
         }), jsx("div", {
           className: rU,
-          children: _$$tx("collaboration.branching_merge_modal.for_help_please_contact_figma_support", {
+          children: renderI18nText("collaboration.branching_merge_modal.for_help_please_contact_figma_support", {
             supportEmailLink: jsx(_$$N, {
               href: `mailto:${getSupportEmail()}`,
               newTab: !0,
-              children: _$$tx("collaboration.branching_merge_modal.figma_support")
+              children: renderI18nText("collaboration.branching_merge_modal.figma_support")
             })
           })
         }), jsx("div", {
@@ -5656,7 +5656,7 @@ function rD(e) {
           children: jsx($n, {
             variant: "primary",
             onClick: () => Ay.reload("cannot parse diff"),
-            children: _$$tx("collaboration.branching_merge_modal.refresh_required_action")
+            children: renderI18nText("collaboration.branching_merge_modal.refresh_required_action")
           })
         })]
       })
@@ -5737,7 +5737,7 @@ function rF(e) {
 function rM(e) {
   let t;
   let i = useDispatch();
-  let [s, o] = fp(_$$nX);
+  let [s, o] = useAtomValueAndSetter(_$$nX);
   let l = s ?? e.direction;
   _$$h(() => (o(e.direction), () => o(null)));
   let d = e.direction;
@@ -5769,7 +5769,7 @@ function rM(e) {
   useEffect(() => {
     K && i(sf({
       view: "fullscreen",
-      editorType: _$$nT.Design,
+      editorType: FEditorType.Design,
       fileKey: e.branchKey,
       reviewNumber: K.reviewNumber ?? void 0
     }));
@@ -5781,9 +5781,9 @@ function rM(e) {
     });
   }, [J, c]);
   let ei = Xr(qm);
-  useEffect(() => (ei(!0), kF("bm.isMergeModalOpen", !0), () => {
+  useEffect(() => (ei(!0), setSentryTag("bm.isMergeModalOpen", !0), () => {
     ei(!1);
-    kF("bm.isMergeModalOpen", void 0);
+    setSentryTag("bm.isMergeModalOpen", void 0);
   }), [ei]);
   let en = e.sourceDiffInfo.checkpointDiff || null;
   let er = e.sourceDiffInfo.displayGroups || null;
@@ -5850,10 +5850,10 @@ function rM(e) {
     c.navigationKey && c.navigationKey !== I ? i(sf({
       view: "fullscreen",
       fileKey: c.navigationKey,
-      editorType: _$$nT.Design
+      editorType: FEditorType.Design
     })) : i(sf({
       view: "fullscreen",
-      editorType: _$$nT.Design,
+      editorType: FEditorType.Design,
       fileKey: e.branchKey,
       reviewNumber: void 0
     }));
@@ -5871,7 +5871,7 @@ function rM(e) {
   });
   let ef = M4.useFile(eg?.default_file_key).data;
   if (!eg || !eh || !ef) {
-    x1("branching", "Unable to get file data", {
+    logError("branching", "Unable to get file data", {
       repo: !!eg,
       branch: !!eh,
       source: !!ef
@@ -5914,7 +5914,7 @@ function rM(e) {
     em(e.backFileKey, "user_closed_modal");
   }, [em, e.backFileKey]);
   let ev = rP(eu, ee);
-  let eI = l === Kn.TO_SOURCE ? _$$tx("collaboration.branching_merge_modal.banner_review_conflicts") : _$$tx("collaboration.branching_merge_modal.banner_resolve_conflicts");
+  let eI = l === Kn.TO_SOURCE ? renderI18nText("collaboration.branching_merge_modal.banner_review_conflicts") : renderI18nText("collaboration.branching_merge_modal.banner_resolve_conflicts");
   return jsxs(rO, {
     mergeDirection: l,
     sourceCheckpointKey: e.sourceCheckpointKey,
@@ -5929,7 +5929,7 @@ function rM(e) {
       children: jsx(tK, {
         isLoading: ep,
         text: eI,
-        button: l === Kn.TO_SOURCE ? (t = _$$tx("collaboration.branching_merge_modal.button_review_conflicts"), jsx("div", {
+        button: l === Kn.TO_SOURCE ? (t = renderI18nText("collaboration.branching_merge_modal.button_review_conflicts"), jsx("div", {
           className: tV,
           children: jsx($n, {
             onClick: e_,
@@ -5977,7 +5977,7 @@ function rM(e) {
   });
 }
 export let $$rj0 = Ju(function (e) {
-  _$$h(() => (sx("Branch Modal Opened", {
+  _$$h(() => (trackEventAnalytics("Branch Modal Opened", {
     branchKey: e.branchKey,
     sourceKey: e.sourceKey,
     direction: e.direction,

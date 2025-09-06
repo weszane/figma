@@ -1,4 +1,4 @@
-import { eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { WH, pB, g7 } from "../905/395919";
 export function $$a0(e) {
   let t = {};
@@ -19,7 +19,7 @@ export function $$a0(e) {
 export async function $$s2(e) {
   try {
     let e = null;
-    if (eD && (e = await eD.getKeyboardLayout()), !window.isSecureContext) return {
+    if (desktopAPIInstance && (e = await desktopAPIInstance.getKeyboardLayout()), !window.isSecureContext) return {
       detectedLayouts: [],
       layoutJSON: {},
       desktopLayout: e,

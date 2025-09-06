@@ -8,12 +8,12 @@ import { Ez5, w3z, Pt4 } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { eU, zl, md } from "../figma_app/27355";
+import { atom, atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
 import h from "classnames";
 import { debugState } from "../905/407919";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { B } from "../905/714743";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { O as _$$O } from "../figma_app/140784";
 import { $R } from "../figma_app/883490";
 import { GS } from "../figma_app/314264";
@@ -32,12 +32,12 @@ import { nM, wH, yo, HR, sz, bx, BT, M4, Mh, GE, RK, V3, MS, hR, vN, tD, rq, aw,
 import { A as _$$A } from "../6828/523860";
 import { A as _$$A2 } from "../6828/85206";
 var m = h;
-export let $$F0 = eU(new Map());
+export let $$F0 = atom(new Map());
 function j(e) {
   let {
     isHovered,
     selection
-  } = _$$R(t => ({
+  } = selectWithShallowEqual(t => ({
     isHovered: t.mirror.appModel.hoveredNode === e.guid,
     selection: t.mirror.sceneGraphSelection
   }));
@@ -69,7 +69,7 @@ function j(e) {
       _$$S("html_tree");
       e.didSelectRow(e.guid);
       let n = Object.keys(selection);
-      if (zl.set(_$$m, null), Ez5?.editorState().focusedAnnotationId.set(null), t.metaKey) {
+      if (atomStoreManager.set(_$$m, null), Ez5?.editorState().focusedAnnotationId.set(null), t.metaKey) {
         var i;
         selection[i = e.guid] ? D$([i]) : Dh([i]);
       } else t.shiftKey && n.length > 0 ? GL(n[n.length - 1], e.guid) : w3z.selectAndPanToNode(e.guid);
@@ -137,7 +137,7 @@ export function $$H4({
 function z({
   guid: e
 }) {
-  let t = md($$F0).get(e);
+  let t = useAtomWithSubscription($$F0).get(e);
   if (!t) return null;
   let r = t.state;
   return "added" === r ? jsx("div", {
@@ -193,12 +193,12 @@ function K({
         });
       });
     },
-    "aria-label": _$$t("dev_handoff.layers_panel.locked_tooltip"),
+    "aria-label": getI18nString("dev_handoff.layers_panel.locked_tooltip"),
     className: hz,
     "aria-pressed": i,
     htmlAttributes: {
       "data-testid": `devHandoffLayersRow.lockIcon-${r}`,
-      "data-tooltip": _$$t("dev_handoff.layers_panel.locked_tooltip"),
+      "data-tooltip": getI18nString("dev_handoff.layers_panel.locked_tooltip"),
       "data-tooltip-type": _$$Ib.TEXT,
       "data-tooltip-show-right": !0
     },

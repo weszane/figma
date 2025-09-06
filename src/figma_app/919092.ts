@@ -3,7 +3,7 @@ import { q7 } from "../figma_app/860955";
 import { G } from "../905/289770";
 import { J } from "../905/614223";
 import { xk } from "@stylexjs/stylex";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Ex, zE } from "../figma_app/919079";
 function c({
   text: e,
@@ -51,13 +51,13 @@ export function $$p1(e) {
 let $$_ = e => {
   switch (e) {
     case "REQUEST_UPGRADE":
-      return t("upgrades.request");
+      return getI18nString("upgrades.request");
     case "REQUEST_SENT":
-      return t("upgrades.request_sent");
+      return getI18nString("upgrades.request_sent");
     case "ALPHA":
-      return t("file_browser.creation_buttons.alpha");
+      return getI18nString("file_browser.creation_buttons.alpha");
     case "BETA":
-      return t("file_browser.creation_buttons.beta");
+      return getI18nString("file_browser.creation_buttons.beta");
   }
 };
 let h = {

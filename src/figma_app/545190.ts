@@ -8,7 +8,7 @@ import { glU, uXg, J0O, Z_n, rXF, JTp, CWU, iCO } from "../figma_app/763686";
 import c from "classnames";
 import { rf, v_, fo, Pt } from "../figma_app/806412";
 import { S as _$$S } from "../figma_app/552746";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { eY as _$$eY } from "../figma_app/722362";
 import { V2 } from "../figma_app/578955";
 import { iN } from "../figma_app/760428";
@@ -39,7 +39,7 @@ import { sD } from "../figma_app/243058";
 import { useHandleMouseEvent } from "../figma_app/878298";
 import { parsePxInt } from "../figma_app/783094";
 import { X as _$$X } from "../905/606795";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { Uz } from "../905/63728";
 import { u2, GG } from "../905/511649";
 import { Yx } from "../figma_app/930338";
@@ -82,7 +82,7 @@ import { JV } from "../figma_app/260445";
 import { mY, R1, u3, y$, Px } from "../figma_app/152690";
 import { eF as _$$eF } from "../figma_app/394327";
 import { P as _$$P } from "../figma_app/120873";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { Yi } from "../figma_app/933328";
 import { F$ } from "../figma_app/111825";
 import { ty as _$$ty } from "../figma_app/406976";
@@ -105,7 +105,7 @@ function A({
   productComponentGUID: l
 }) {
   let d = 0 === Object.keys(e || {}).length;
-  let c = useMemo(() => a ? _$$t("design_systems.component_properties.auto_suggest_loading") : d ? _$$t("design_systems.component_properties.auto_suggest_empty") : _$$t("design_systems.component_properties.auto_suggest_apply"), [s, a, d]);
+  let c = useMemo(() => a ? getI18nString("design_systems.component_properties.auto_suggest_loading") : d ? getI18nString("design_systems.component_properties.auto_suggest_empty") : getI18nString("design_systems.component_properties.auto_suggest_apply"), [s, a, d]);
   if (!getFeatureFlags().anticipation_props || !t) return null;
   let u = a || !a && d;
   return jsx("div", {
@@ -169,7 +169,7 @@ function eb({
     state,
     targetRect,
     position
-  } = _$$R(e => e.tooltip);
+  } = selectWithShallowEqual(e => e.tooltip);
   let d = useCallback(e => {
     (" " === e.key || "Enter" === e.key) && e.stopPropagation();
   }, []);
@@ -239,7 +239,7 @@ function ew(e) {
     componentWithPropDefSelected,
     allStates,
     propertySortOrder
-  } = _$$R(e => {
+  } = selectWithShallowEqual(e => {
     let t = Sh(e);
     let r = 1 === t.length ? T(e, t[0]) : [];
     return {
@@ -490,7 +490,7 @@ function eO({
   }, []);
   if (F && !ec || eo || em && !I ? en.push(jsx(_$$d, {
     onClick: Y,
-    "aria-label": _$$t("design_systems.component_properties.edit_property"),
+    "aria-label": getI18nString("design_systems.component_properties.edit_property"),
     recordingKey: "componentPropEditButton",
     "aria-expanded": K,
     htmlAttributes: {
@@ -498,13 +498,13 @@ function eO({
       onMouseDown: eN,
       onContextMenu: eC,
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": _$$t("design_systems.component_properties.edit_property")
+      "data-tooltip": getI18nString("design_systems.component_properties.edit_property")
     },
     children: jsx(_$$A, {})
   }), jsx(_$$K, {
     onClick: $,
     recordingKey: "componentPropDeleteButton",
-    "aria-label": _$$t("design_systems.component_properties.delete_property", {
+    "aria-label": getI18nString("design_systems.component_properties.delete_property", {
       numSelected: 1
     }),
     children: jsx(_$$O2, {})
@@ -534,12 +534,12 @@ function eO({
           });
         }
       }
-      if (v.varValue.resolvedType === rXF.BOOLEAN) return v.varValue.value ? _$$t("design_systems.component_properties.boolean_true") : _$$t("design_systems.component_properties.boolean_false");
+      if (v.varValue.resolvedType === rXF.BOOLEAN) return v.varValue.value ? getI18nString("design_systems.component_properties.boolean_true") : getI18nString("design_systems.component_properties.boolean_false");
       if (v.varValue.resolvedType === rXF.SLOT_CONTENT_ID) return null;
       if (v.varValue.resolvedType !== rXF.SYMBOL_ID) return v.defaultValue;
       {
         let e = wd([v.defaultValue], er);
-        if (e) return gl(e) ? _$$t("design_systems.instance_swap_picker.mixed") : kH(e.name);
+        if (e) return gl(e) ? getI18nString("design_systems.instance_swap_picker.mixed") : kH(e.name);
       }
     }
   }, [v, er, M]);
@@ -588,7 +588,7 @@ function eO({
     }),
     children: [jsx("span", {
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": _$$t("design_systems.component_properties.property_icon_tooltip", {
+      "data-tooltip": getI18nString("design_systems.component_properties.property_icon_tooltip", {
         propertyType: xb(T ?? J0O.VARIANT)
       }),
       children: T ? zn(T) : jsx(_$$y, {})
@@ -740,7 +740,7 @@ function eP({
       children: jsx(eL, {
         onClick: f,
         recordingKey: "deleteProp",
-        children: tx("design_systems.component_properties.delete_property", {
+        children: renderI18nText("design_systems.component_properties.delete_property", {
           numSelected: r.length
         })
       })
@@ -865,7 +865,7 @@ function $$e6(e) {
         if (!t) return null;
         if (t.type === Z_n.EXPRESSION && t.value.expressionFunction === JTp.STRINGIFY && (t = t.value.expressionArguments[0]), t?.type === Z_n.ALIAS) return t.value;
       } catch (e) {
-        x1("variables", "error checking variant binding map", {
+        logError("variables", "error checking variant binding map", {
           message: e.message
         }, {
           reportAsSentryError: !0
@@ -887,7 +887,7 @@ function $$e6(e) {
   }, onExpressionSubmitted);
   function U(e, t) {
     let r = Tj(selectedPropertyValueHistory, e, t);
-    if (t === _$$t("proto.assign_variant")) {
+    if (t === getI18nString("proto.assign_variant")) {
       j(w.current);
       return;
     }
@@ -938,7 +938,7 @@ function $$e6(e) {
   } = (() => {
     if (isBound && z && isNotNullish(X)) {
       let t;
-      isNotNullish(X) && "MIXED" !== X && (V.some(e => e.toLowerCase() === X.value.toString().toLowerCase()) ? G?.toString().toLowerCase() !== X.value.toString().toLowerCase() && (t = _$$t("design_systems.component_properties.invalid_variant_binding_state")) : t = _$$t("design_systems.component_properties.invalid_variant_binding"));
+      isNotNullish(X) && "MIXED" !== X && (V.some(e => e.toLowerCase() === X.value.toString().toLowerCase()) ? G?.toString().toLowerCase() !== X.value.toString().toLowerCase() && (t = getI18nString("design_systems.component_properties.invalid_variant_binding_state")) : t = getI18nString("design_systems.component_properties.invalid_variant_binding"));
       return {
         assignmentValue: onExpressionSubmitted && variableConsumptionMapValue ? jsx(y3, {
           targetVariableData: variableConsumptionMapValue.isMixed ? void 0 : variableConsumptionMapValue,
@@ -961,7 +961,7 @@ function $$e6(e) {
             isStandalone: !0,
             thumbnailValue: "MIXED" === X || t ? void 0 : X,
             tooltipOverride: t,
-            value: gl(G) ? _$$t("design_systems.component_properties.mixed") : z.name,
+            value: gl(G) ? getI18nString("design_systems.component_properties.mixed") : z.name,
             variableId: gl(G) ? void 0 : boundVariableId ?? void 0,
             variablePillContainerClassName: Ro
           })
@@ -970,10 +970,10 @@ function $$e6(e) {
           className: c6,
           children: jsx(_$$K, {
             onClick: H,
-            "aria-label": _$$t("design_systems.component_properties.detach_property"),
+            "aria-label": getI18nString("design_systems.component_properties.detach_property"),
             recordingKey: Pt(e.recordingKey, "detachVariantProp"),
             htmlAttributes: {
-              "data-tooltip": _$$t("design_systems.component_properties.detach_property"),
+              "data-tooltip": getI18nString("design_systems.component_properties.detach_property"),
               "data-tooltip-type": Ib.TEXT
             },
             children: jsx(_$$U, {})
@@ -1001,9 +1001,9 @@ function $$e6(e) {
       }) : null;
       let i = jsx(_$$K2, {
         isPickerShowing: F,
-        onClick: () => U(x.property, _$$t("proto.assign_variant")),
+        onClick: () => U(x.property, getI18nString("proto.assign_variant")),
         recordingKey: Pt(e.recordingKey, "assignVariantProp"),
-        tooltip: _$$t("proto.apply_variant_unified")
+        tooltip: getI18nString("proto.apply_variant_unified")
       });
       return {
         assignmentValue: r,
@@ -1078,7 +1078,7 @@ function e9({
     }),
     children: i ? jsx("p", {
       className: Me,
-      children: gl(t) ? _$$t("design_systems.component_properties.mixed") : t
+      children: gl(t) ? getI18nString("design_systems.component_properties.mixed") : t
     }) : jsx(l6, {
       ariaLabelledBy: c,
       className: ZE,
@@ -1183,7 +1183,7 @@ function td({
     propertyToFocusFullscreen,
     selectedStates,
     selectedStatesPropertyValues
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     dropdownShown: e.dropdownShown,
     allStates: ow(e),
     propertySortOrder: OC(e),
@@ -1245,7 +1245,7 @@ function td({
   let V = !selectedStatesPropertyValues[G];
   let H = !!E.current && E.current.offsetWidth < E.current.scrollWidth;
   let z = S ? jsx(u2, {
-    "aria-label": _$$t("design_systems.component_properties.property_name_edit", {
+    "aria-label": getI18nString("design_systems.component_properties.property_name_edit", {
       propertyName: G
     }),
     className: "variant_prop_authoring_row--selectPropertyNameInput--T02iO variant_prop_authoring_row--selectPropertyName--g8Tfp raw_components--base--T7G0z raw_components--input--JB4Ix raw_components--singleRowHeight--dKM4t raw_components--border--SKh2u",
@@ -1270,7 +1270,7 @@ function td({
     },
     recordingKey: Pt(t, `componentPropRowDefNameInput-${G}`)
   }) : jsx(GG, {
-    "aria-label": _$$t("design_systems.component_properties.property_name_edit", {
+    "aria-label": getI18nString("design_systems.component_properties.property_name_edit", {
       propertyName: G
     }),
     forwardedRef: E,
@@ -1286,7 +1286,7 @@ function td({
   });
   r = Object.keys(P[G] || {}).some(e => P[G][e] === R[G][e]);
   let W = {
-    format: e => e !== ti ? e || xJ : r ? _$$t("design_systems.component_properties.rename_prompt") : _$$t("design_systems.component_properties.add_new_prompt"),
+    format: e => e !== ti ? e || xJ : r ? getI18nString("design_systems.component_properties.rename_prompt") : getI18nString("design_systems.component_properties.add_new_prompt"),
     parse: e => e,
     autocomplete: e => {
       for (let t of k.sort((e, t) => e.length - t.length)) if (t && t.startsWith(e)) return t;
@@ -1298,7 +1298,7 @@ function td({
       inputComponent: tl
     },
     children: [jsxs(ta, {
-      ariaLabel: _$$t("design_systems.component_properties.property_value_edit", {
+      ariaLabel: getI18nString("design_systems.component_properties.property_value_edit", {
         propertyName: G
       }),
       className: V ? "variant_prop_authoring_row--missingPropertyComboBox--9wy-0" : "variant_prop_authoring_row--propertyComboBox--7f6TZ",
@@ -1310,7 +1310,7 @@ function td({
       id: `states-property-select-${G}`,
       onChange: e => {
         l7.user("add-variant-property", () => {
-          e !== ti ? O(G, e) : (O(G, _$$t("design_systems.component_properties.new_value")), x(G));
+          e !== ti ? O(G, e) : (O(G, getI18nString("design_systems.component_properties.new_value")), x(G));
         });
       },
       property: selectedStatesPropertyValues[G] || "",
@@ -1333,7 +1333,7 @@ function td({
       formatOption: W.format
     })]
   });
-  let Y = _$$t("design_systems.component_properties.missing_property");
+  let Y = getI18nString("design_systems.component_properties.missing_property");
   let $ = V ? jsx(eb, {
     "data-tooltip-show-left": !0,
     text: Y
@@ -1443,7 +1443,7 @@ function tp({
       children: jsx(tu, {
         onClick: T,
         recordingKey: "deleteProp",
-        children: tx("design_systems.component_properties.delete_property", {
+        children: renderI18nText("design_systems.component_properties.delete_property", {
           numSelected: r.length
         })
       })
@@ -1634,7 +1634,7 @@ export function $$tE2({
         ...b,
         ...o
       }), numHiddenRows > 0 && !_ && jsx($$tb5, {
-        label: _$$t("design_systems.component_properties.show_more_property_rows", {
+        label: getI18nString("design_systems.component_properties.show_more_property_rows", {
           count: numHiddenRows
         }),
         onClick: () => m(!0)

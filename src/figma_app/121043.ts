@@ -13,14 +13,14 @@ import { V as _$$V2 } from "../905/751103";
 import { m as _$$m2 } from "../905/270214";
 import { h3O, E63, kul, NLJ, glU } from "../figma_app/763686";
 import E from "classnames";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Ay } from "../905/612521";
 import { U as _$$U } from "../figma_app/901889";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { Ym, Dj } from "../figma_app/288654";
 import { parseQuery } from "../905/634134";
 import { o6, cZ, Pt } from "../figma_app/806412";
-import { PN } from "../figma_app/257275";
+import { isInteractionOrEvalMode } from "../figma_app/897289";
 import { g as _$$g } from "../905/880308";
 import { Ts } from "../905/194276";
 import { qB } from "../905/862321";
@@ -32,7 +32,7 @@ import { i as _$$i, L as _$$L } from "../figma_app/942671";
 import { s as _$$s } from "../cssbuilder/589278";
 import { YQ } from "../905/502364";
 import { c as _$$c } from "../figma_app/617427";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { j7, oB } from "../905/929976";
 import { to, ES } from "../905/156213";
 import { n6 } from "../905/234821";
@@ -44,14 +44,14 @@ import { hx } from "../figma_app/290668";
 import { VU } from "../905/625959";
 import { Y5 } from "../figma_app/455680";
 import { d as _$$d } from "../905/758967";
-import { eM } from "../figma_app/469876";
+import { isGoogleMeetIntegration } from "../figma_app/469876";
 import { z4 } from "../905/37051";
 import { LW, bs, GG } from "../figma_app/553940";
 import { Um } from "../905/848862";
 import { q5 } from "../figma_app/516028";
 import { EO } from "../905/691205";
 import { J2 } from "../figma_app/84367";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { Ib } from "../905/129884";
 import { Yh, TY, G as _$$G, pi, IS } from "../figma_app/357047";
 import { x as _$$x } from "../905/749159";
@@ -167,7 +167,7 @@ export function $$ew0(e) {
   if (item && item.isActive) {
     let e = "focus-mode-component-set-toggle" === item.action ? {
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": isActive ? _$$t("fullscreen.focus_mode.toggle_variants.exit") : _$$t("fullscreen.focus_mode.toggle_variants.enter"),
+      "data-tooltip": isActive ? getI18nString("fullscreen.focus_mode.toggle_variants.exit") : getI18nString("fullscreen.focus_mode.toggle_variants.enter"),
       "data-tooltip-submenu-open": !1,
       "data-tooltip-shortcut-key": "focus-mode-component-set-toggle"
     } : null;
@@ -211,7 +211,7 @@ export function $$eO4() {
   return J2(_$$d().showTimeSlicingEditRenderingDot) ? jsx("div", {
     className: e1,
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": _$$t("time_sliced_edit_rendering.active"),
+    "data-tooltip": getI18nString("time_sliced_edit_rendering.active"),
     "data-onboarding-key": "tsmer-status",
     children: jsx(_$$B, {
       className: by,
@@ -231,7 +231,7 @@ export function $$eR10() {
       return;
     }
     function t() {
-      if (PN()) {
+      if (isInteractionOrEvalMode()) {
         r(!1);
         return;
       }
@@ -275,17 +275,17 @@ let eL = e => {
     case E63.NONE:
       return "";
     case E63.DISCONNECTED_AUTOSAVE_DISABLED:
-      return _$$t("unsaved_changes.disconnected.autosave_disabled");
+      return getI18nString("unsaved_changes.disconnected.autosave_disabled");
     case E63.DISCONNECTED_SERVER_ISSUES:
-      return _$$t("unsaved_changes.disconnected.server_issues");
+      return getI18nString("unsaved_changes.disconnected.server_issues");
     case E63.DISCONNECTED_OTHER:
-      return _$$t("unsaved_changes.disconnected.other");
+      return getI18nString("unsaved_changes.disconnected.other");
     case E63.SYNCING_AUTOSAVE_DISABLED:
-      return _$$t("unsaved_changes.syncing.autosave_disabled");
+      return getI18nString("unsaved_changes.syncing.autosave_disabled");
     case E63.SYNCING_SERVER_ISSUES:
-      return _$$t("unsaved_changes.syncing.server_issues");
+      return getI18nString("unsaved_changes.syncing.server_issues");
     case E63.SYNCING_OTHER:
-      return _$$t("unsaved_changes.syncing.other");
+      return getI18nString("unsaved_changes.syncing.other");
     default:
       throw Error(`Unhandled tab close text enum value ${e}`);
   }
@@ -293,11 +293,11 @@ let eL = e => {
 export function $$eP9() {
   let e = useSelector(e => e.mirror.appModel.multiplayerSessionState === kul.JOINED);
   let t = useSelector(e => e.saveStatus?.tabCloseText);
-  let r = Ym() === Dj.CONNECTED || PN();
+  let r = Ym() === Dj.CONNECTED || isInteractionOrEvalMode();
   let s = $$eR10();
   let o = t ? eL(t) : "";
   let l = _$$A2;
-  e && (r ? l = _$$A3 : o = _$$t("unsaved_changes.disconnected.live_updates"));
+  e && (r ? l = _$$A3 : o = getI18nString("unsaved_changes.disconnected.live_updates"));
   let d = l === _$$A2 ? jsx(p, {
     "aria-label": o
   }) : jsx(_$$z, {
@@ -309,7 +309,7 @@ export function $$eP9() {
     useEffect(() => {
       if (t && !l) {
         let t = r === _$$A2 ? "offline" : "unsaved";
-        sx("Show Save Status Icon", {
+        trackEventAnalytics("Show Save Status Icon", {
           tooltipText: e,
           iconName: t,
           multiplayerJoined: n,
@@ -347,7 +347,7 @@ let $$eD3 = memo(function ({
     children: tooltipIconComponent
   }) : null;
 });
-let ek = e => e === _$$ec ? _$$t("fullscreen.accessibility.view_comments") : _$$A(e.action);
+let ek = e => e === _$$ec ? getI18nString("fullscreen.accessibility.view_comments") : _$$A(e.action);
 let $$eM2 = "fullscreen_menu_visible";
 let $$eF1 = "fullscreen_menu_hidden";
 export function $$ej5(e) {
@@ -407,7 +407,7 @@ let $$eU7 = memo(function (e) {
     modalShown,
     user,
     selectedView
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     dropdownShown: e.dropdownShown,
     modalShown: e.modalShown,
     user: e.user,
@@ -425,7 +425,7 @@ let $$eU7 = memo(function (e) {
   }, [dropdownShown]);
   let h = useRef(null);
   let m = _$$b();
-  return eM() ? jsx("div", {
+  return isGoogleMeetIntegration() ? jsx("div", {
     className: Ex,
     children: jsx(_$$m2, {})
   }) : jsxs(_$$i, {
@@ -433,7 +433,7 @@ let $$eU7 = memo(function (e) {
     "aria-controls": s,
     "aria-expanded": TY(dropdownShown),
     "aria-haspopup": "menu",
-    ariaLabel: _$$t("fullscreen_actions.main_menu"),
+    ariaLabel: getI18nString("fullscreen_actions.main_menu"),
     chevronRef: h,
     className: y()(AQ, e.hideToolsClassName, {
       [ET]: TY(dropdownShown)
@@ -449,7 +449,7 @@ let $$eU7 = memo(function (e) {
       let e = t.current;
       if (!user || user.appData && user.appData.loggedOut) {
         if (e) {
-          if ("fullscreen" === selectedView.view && selectedView.editorType === nT.Whiteboard) {
+          if ("fullscreen" === selectedView.view && selectedView.editorType === FEditorType.Whiteboard) {
             r(Ts({
               origin: "logged_out_main_menu_toolbar",
               redirectUrl: Ay.location.pathname,
@@ -458,7 +458,7 @@ let $$eU7 = memo(function (e) {
             r(to({
               type: _$$x,
               data: {
-                headerText: _$$t("fullscreen.toolbar.create_an_account_to_do_more_with_fig_jam")
+                headerText: getI18nString("fullscreen.toolbar.create_an_account_to_do_more_with_fig_jam")
               }
             }));
           } else {
@@ -511,7 +511,7 @@ let $$eB8 = memo(function (e) {
   let t = q5();
   let {
     selectedView
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     selectedView: e.selectedView
   }));
   let i = $D();
@@ -521,12 +521,12 @@ let $$eB8 = memo(function (e) {
     "data-preferred-theme": e.useDarkTheme ? "dark" : void 0,
     children: jsx(_$$c, {
       variant: "secondary",
-      "aria-label": _$$t("fullscreen.toolbar.log_in"),
+      "aria-label": getI18nString("fullscreen.toolbar.log_in"),
       onClick: () => {
         let e = "";
-        "fullscreen" === selectedView.view && "DUPLICATE" === selectedView.landingState ? e = t ? _$$t("fullscreen.toolbar.log_in_or_create_an_account_to_get_a_copy_of", {
+        "fullscreen" === selectedView.view && "DUPLICATE" === selectedView.landingState ? e = t ? getI18nString("fullscreen.toolbar.log_in_or_create_an_account_to_get_a_copy_of", {
           file: t.name
-        }) : _$$t("fullscreen.toolbar.log_in_or_create_an_account") : i && (e = _$$t("fullscreen.toolbar.log_in_to_do_more_with_figjam"));
+        }) : getI18nString("fullscreen.toolbar.log_in_or_create_an_account") : i && (e = getI18nString("fullscreen.toolbar.log_in_to_do_more_with_figjam"));
         let n = parseQuery(Ay.location.search)["node-id"];
         s(Ts({
           origin: "logged_out_footer",
@@ -540,7 +540,7 @@ let $$eB8 = memo(function (e) {
           }
         }));
       },
-      children: _$$t("fullscreen.toolbar.log_in")
+      children: getI18nString("fullscreen.toolbar.log_in")
     })
   });
 });
@@ -556,7 +556,7 @@ function eG(e) {
 memo(function (e) {
   let t = _$$U();
   return jsx(_$$L, {
-    ariaLabel: _$$t("fullscreen.toolbar.missing_fonts"),
+    ariaLabel: getI18nString("fullscreen.toolbar.missing_fonts"),
     svg: _$$A6,
     className: Er,
     onClick: () => {
@@ -565,7 +565,7 @@ memo(function (e) {
     },
     recordingKey: Pt(e, "missingFontsButton"),
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": _$$t("fullscreen.toolbar.missing_fonts")
+    "data-tooltip": getI18nString("fullscreen.toolbar.missing_fonts")
   }, "missing-fonts-button");
 });
 export const rA = $$ew0;

@@ -1,6 +1,6 @@
 import { throwTypeError } from "../figma_app/465776";
-import { eU } from "../figma_app/27355";
-import { bt } from "../905/111321";
+import { atom } from "../figma_app/27355";
+import { createReduxSubscriptionAtom } from "../905/111321";
 import { c as _$$c, r as _$$r } from "../905/676456";
 import { NC, MM } from "../905/17179";
 import { j } from "../905/848904";
@@ -91,14 +91,14 @@ export class $$m0 {
   }
   createAtom(e) {
     let t = !1;
-    let i = bt(this.reduxStore, i => {
+    let i = createReduxSubscriptionAtom(this.reduxStore, i => {
       let n = this.bindings.getInstance(i[this.reduxKey], e);
       void 0 !== n && (t = !0);
       return n;
     }, {
       notifyImmediate: !0
     });
-    return eU(e => e(i) || (t ? ET : F5), (t, i, n) => {
+    return atom(e => e(i) || (t ? ET : F5), (t, i, n) => {
       if ("REMOTE_UPDATE" === n.type) {
         n.value === ET ? this.reduxStore().dispatch(this.bindings.actions.tombstone({
           id: e

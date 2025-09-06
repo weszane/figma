@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, memo, useRef, useCallback, useState } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { rXF, plo, WXh, rrT, ibQ, FAf, lyf, Ez5, NLJ, Oin } from "../figma_app/763686";
-import { tx as _$$tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { AV, Gb } from "../figma_app/933328";
 import { ED } from "../figma_app/504823";
 import { T as _$$T } from "../905/858738";
@@ -11,7 +11,7 @@ import { BI } from "../figma_app/546509";
 import { W as _$$W } from "../441/503702";
 import { ut } from "../figma_app/84367";
 import { Lk } from "../figma_app/122682";
-import { wN, nT } from "../figma_app/53721";
+import { mapFileTypeToEditorType, FEditorType } from "../figma_app/53721";
 import { m as _$$m } from "../905/99004";
 import { qh } from "../figma_app/990334";
 import { A as _$$A } from "../9410/188255";
@@ -38,7 +38,7 @@ import { J as _$$J2 } from "../9410/165619";
 import { s as _$$s } from "../3682/764731";
 import { getFeatureFlags } from "../905/601108";
 import { useSprigWithSampling } from "../905/99656";
-import { sn } from "../905/542194";
+import { globalPerfTimer } from "../905/542194";
 import { h as _$$h } from "../905/207101";
 import { o as _$$o } from "../642/854123";
 import { tZ } from "../figma_app/960196";
@@ -46,11 +46,11 @@ import { L as _$$L } from "../642/269105";
 import { GV, S2, P5 } from "../figma_app/159296";
 import { q as _$$q } from "../573/775640";
 import { j as _$$j } from "../642/671529";
-import { Im } from "../figma_app/493477";
+import { isEmptyObject } from "../figma_app/493477";
 import { i as _$$i } from "../905/718764";
-import { md } from "../figma_app/27355";
-import { x1 } from "../905/714362";
-import { Lg, nl } from "../figma_app/257275";
+import { useAtomWithSubscription } from "../figma_app/27355";
+import { logError } from "../905/714362";
+import { getFalseValue, isInteractionPathCheck } from "../figma_app/897289";
 import { zp } from "../figma_app/740025";
 import { Ku } from "../figma_app/740163";
 import { hS, BI as _$$BI, gl, E7, _W } from "../905/216495";
@@ -165,8 +165,8 @@ function eN(e) {
   };
   let d = [{
     ...o,
-    title: _$$tx("draw.onboarding.properties_panel.effects.title"),
-    description: _$$tx("draw.onboarding.properties_panel.effects.description"),
+    title: renderI18nText("draw.onboarding.properties_panel.effects.title"),
+    description: renderI18nText("draw.onboarding.properties_panel.effects.description"),
     disableHighlight: !0,
     media: jsx(_$$y, {
       src: buildUploadUrl("6bebcf1164457af7594e55da15532cbfaddb693b"),
@@ -182,8 +182,8 @@ function eN(e) {
     whenTargetLost: "complete"
   }, {
     ...o,
-    title: _$$tx("draw.onboarding.properties_panel.transform.title"),
-    description: _$$tx("draw.onboarding.properties_panel.transform.description"),
+    title: renderI18nText("draw.onboarding.properties_panel.transform.title"),
+    description: renderI18nText("draw.onboarding.properties_panel.transform.description"),
     highlightBlue: !0,
     targetKey: m9,
     trackingContextName: eL + " transform",
@@ -225,7 +225,7 @@ let e9 = memo(function (e) {
   return jsxs(Zk, {
     "data-testid": "illustration-appearance-panel",
     children: [jsx(Wv, {
-      titleTx: _$$tx("fullscreen.appearance_panel.appearance"),
+      titleTx: renderI18nText("fullscreen.appearance_panel.appearance"),
       children: jsx(_$$M, {
         showLibrarySets: !1,
         recordingKey: "frameLevel"
@@ -243,8 +243,8 @@ let e9 = memo(function (e) {
         recordingKey: Pt(e, "layerOpacityInputWrapper"),
         resolvedType: rXF.FLOAT,
         children: jsx(AS, {
-          ariaLabel: _$$t("fullscreen.properties_panel.section_appearance.label_opacity"),
-          dataTooltip: _$$t("fullscreen.properties_panel.section_appearance.label_opacity"),
+          ariaLabel: getI18nString("fullscreen.properties_panel.section_appearance.label_opacity"),
+          dataTooltip: getI18nString("fullscreen.properties_panel.section_appearance.label_opacity"),
           disabled: !visible,
           forwardedRef: opacityInputRef,
           fullWidth: !0,
@@ -259,7 +259,7 @@ let e9 = memo(function (e) {
         recordingKey: e.recordingKey,
         disabled: !0
       }),
-      label: _$$tx("fullscreen.properties_panel.section_appearance.label_opacity")
+      label: renderI18nText("fullscreen.properties_panel.section_appearance.label_opacity")
     }), cornerRadiusEnabled && jsx(DE, {
       ref: t,
       input: jsx(_$$C3, {
@@ -267,9 +267,9 @@ let e9 = memo(function (e) {
         useSliderInput: !0
       }),
       icon: cornerControlIconButton,
-      label: _$$tx("fullscreen.properties_panel.transform_panel.corner_radius")
+      label: renderI18nText("fullscreen.properties_panel.transform_panel.corner_radius")
     }), handleMirroring && isVectorEditMode && jsx(DE, {
-      label: _$$tx("fullscreen.properties_panel.section_vector.label_mirroring"),
+      label: renderI18nText("fullscreen.properties_panel.section_vector.label_mirroring"),
       input: jsx(Cs, {
         handleMirroring,
         recordingKey: Pt(e, "mirroring")
@@ -320,13 +320,13 @@ function tS(e) {
     children: [jsx(_$$r2, {
       titleTx: jsx("div", {
         className: tj,
-        children: _$$t("fullscreen.properties_panel.brush")
+        children: getI18nString("fullscreen.properties_panel.brush")
       }),
       icon: jsx(_$$K4, {
         onClick: () => {
           s(Hr);
         },
-        "aria-label": _$$t("fullscreen.properties_panel.remove"),
+        "aria-label": getI18nString("fullscreen.properties_panel.remove"),
         children: jsx(_$$f2, {})
       })
     }), jsx(DE, {
@@ -365,7 +365,7 @@ function tk(e) {
   return jsx(_$$f, {
     onChange: e => setOrientation(e ? "FORWARD" : "REVERSE"),
     checked: "FORWARD" === orientation,
-    "aria-label": _$$t("fullscreen.properties_panel.direction"),
+    "aria-label": getI18nString("fullscreen.properties_panel.direction"),
     onIcon: jsx(_$$W3, {}),
     offIcon: jsx(_$$W3, {})
   });
@@ -406,21 +406,21 @@ function tC(e) {
   return jsxs(Fragment, {
     children: [jsx(tE, {
       config: Vb("gap", e.defaultStyleAtom),
-      label: _$$t("fullscreen.properties_panel.gap"),
+      label: getI18nString("fullscreen.properties_panel.gap"),
       icon: jsx(_$$Y, {}),
       SliderComponent: AS,
       isQuadratic: !0,
       recordingKey: Pt(e, "gap")
     }), jsx(tE, {
       config: Vb("sizeJitter", e.defaultStyleAtom),
-      label: _$$t("fullscreen.properties_panel.size_jitter"),
+      label: getI18nString("fullscreen.properties_panel.size_jitter"),
       icon: jsx(_$$a2, {}),
       SliderComponent: AS,
       isQuadratic: !0,
       recordingKey: Pt(e, "sizeJitter")
     }), jsx(tE, {
       config: Vb("angularJitter", e.defaultStyleAtom),
-      label: _$$t("fullscreen.properties_panel.angular_jitter"),
+      label: getI18nString("fullscreen.properties_panel.angular_jitter"),
       icon: jsx(_$$n2, {}),
       SliderComponent: n4,
       recordingKey: Pt(e, "angularJitter")
@@ -470,7 +470,7 @@ function tR(e) {
     children: [jsx(_$$r2, {
       titleTx: jsx("div", {
         className: tj,
-        children: _$$t("fullscreen.properties_panel.dynamic")
+        children: getI18nString("fullscreen.properties_panel.dynamic")
       }),
       icon: jsx(_$$K4, {
         onClick: () => {
@@ -478,13 +478,13 @@ function tR(e) {
             dynamicStrokeSettings: lF
           });
         },
-        "aria-label": _$$t("fullscreen.properties_panel.remove"),
+        "aria-label": getI18nString("fullscreen.properties_panel.remove"),
         children: jsx(_$$f2, {})
       })
     }), jsx(DE, {
       input: jsx(AS, {
-        ariaLabel: _$$t("fullscreen.properties_panel.interval"),
-        dataTooltip: _$$t("fullscreen.properties_panel.interval"),
+        ariaLabel: getI18nString("fullscreen.properties_panel.interval"),
+        dataTooltip: getI18nString("fullscreen.properties_panel.interval"),
         fullWidth: !0,
         icon: jsx(_$$Y, {}),
         inputMax: max,
@@ -497,11 +497,11 @@ function tR(e) {
         value
       }),
       icon: null,
-      label: _$$t("fullscreen.properties_panel.interval")
+      label: getI18nString("fullscreen.properties_panel.interval")
     }), jsx(DE, {
       input: jsx(AS, {
-        ariaLabel: _$$t("fullscreen.properties_panel.wiggle"),
-        dataTooltip: _$$t("fullscreen.properties_panel.wiggle"),
+        ariaLabel: getI18nString("fullscreen.properties_panel.wiggle"),
+        dataTooltip: getI18nString("fullscreen.properties_panel.wiggle"),
         fullWidth: !0,
         icon: jsx(_$$K5, {}),
         inputMax: _max,
@@ -514,11 +514,11 @@ function tR(e) {
         value: _value
       }),
       icon: null,
-      label: _$$t("fullscreen.properties_panel.wiggle")
+      label: getI18nString("fullscreen.properties_panel.wiggle")
     }), jsx(DE, {
       input: jsx(AS, {
-        ariaLabel: _$$t("fullscreen.properties_panel.smoothen"),
-        dataTooltip: _$$t("fullscreen.properties_panel.smoothen"),
+        ariaLabel: getI18nString("fullscreen.properties_panel.smoothen"),
+        dataTooltip: getI18nString("fullscreen.properties_panel.smoothen"),
         fullWidth: !0,
         icon: jsx(_$$k3, {}),
         inputMax: _max2,
@@ -531,7 +531,7 @@ function tR(e) {
         value: _value2
       }),
       icon: null,
-      label: _$$t("fullscreen.properties_panel.smoothen")
+      label: getI18nString("fullscreen.properties_panel.smoothen")
     })]
   });
 }
@@ -641,7 +641,7 @@ function tP({
   let t = useDispatch();
   let i = iZ();
   let n = Dj(i);
-  let a = md(_$$b2);
+  let a = useAtomWithSubscription(_$$b2);
   let o = _$$qh();
   let d = SQ();
   let u = Ku();
@@ -676,8 +676,8 @@ function tP({
   let F = p8("currentSelectedProperty");
   let V = SJ();
   let D = U4(p);
-  if ((Im(p) || Object.keys(p).every(e => !p[parseInt(e)])) && !window.figmaPerfTesting && !Lg() && !nl() && x1("PropertiesPanel", "Rendering illustration tab with no shownPropertiesPanels", {
-    isEmpty: Im(p),
+  if ((isEmptyObject(p) || Object.keys(p).every(e => !p[parseInt(e)])) && !window.figmaPerfTesting && !getFalseValue() && !isInteractionPathCheck() && logError("PropertiesPanel", "Rendering illustration tab with no shownPropertiesPanels", {
+    isEmpty: isEmptyObject(p),
     shouldRenderInspectTab: n
   }), p[ibQ.FRAME_PRESETS]) return jsx(_$$i, {
     children: jsx(VF, {
@@ -846,7 +846,7 @@ function tP({
       children: () => jsx(_$$Q2, {
         allSavedPlugins: v.plugins,
         dispatch: t,
-        editorType: w?.editorType ? wN(w.editorType) : null,
+        editorType: w?.editorType ? mapFileTypeToEditorType(w.editorType) : null,
         localPlugins: y,
         numSelected: _numSelected ?? 0,
         openFileKey: w?.key || null,
@@ -888,7 +888,7 @@ function tF() {
 }
 let tV = memo(function () {
   _$$h(() => {
-    sn.tryStop("switch_to_illustration_mode.right_panel_tti");
+    globalPerfTimer.tryStop("switch_to_illustration_mode.right_panel_tti");
   });
   return jsxs(_$$o, {
     boundaryKey: "IllustrationPropertiesPanel",
@@ -919,7 +919,7 @@ let tz = memo(({
       if ("fullscreen" === e.selectedView.view) return e.selectedView.editorType;
     });
     useEffect(() => {
-      i === nT.Illustration && (Sprig("track", "enter_draw_editor_sampled_by_user_1_1"), sprigTrackWithSampling("enter_draw_editor_sampled_by_user_50_100", {
+      i === FEditorType.Illustration && (Sprig("track", "enter_draw_editor_sampled_by_user_1_1"), sprigTrackWithSampling("enter_draw_editor_sampled_by_user_50_100", {
         samplingRateDenominator: 100,
         samplingRateNumerator: 50
       }));
@@ -960,7 +960,7 @@ let tz = memo(({
   let Q = BI();
   let W = jsx(_$$m, {
     role: "region",
-    "aria-label": _$$t("fullscreen_actions.left_sidebar_label"),
+    "aria-label": getI18nString("fullscreen_actions.left_sidebar_label"),
     children: jsx(_$$m2, {})
   });
   return jsxs(_$$a, {
@@ -983,7 +983,7 @@ let tz = memo(({
           })
         }), e && jsx(X5, {})]
       }), jsx(_$$A, {
-        editorType: nT.Illustration,
+        editorType: FEditorType.Illustration,
         openFile: q
       }), jsx(_$$l, {
         defaultViewTabsAvailable: !0,

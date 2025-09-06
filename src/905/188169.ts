@@ -1,15 +1,15 @@
 import { useMemo, useCallback, useState, useEffect } from "react";
 import { jXp, t8O } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { eD } from "../figma_app/876459";
-import { x1 } from "../905/714362";
+import { desktopAPIInstance } from "../figma_app/876459";
+import { logError } from "../905/714362";
 import { _D } from "../905/291654";
 import { RE, Wp, x6, Aw, qV, uv, Qr } from "../905/690539";
 import { a as _$$a } from "../905/714538";
 export function $$u0(e) {
   return useMemo(() => {
     let t = e && e >= 22 || !1;
-    return null != eD || t;
+    return null != desktopAPIInstance || t;
   }, [e]);
 }
 export function $$p5(e, t, i, s, u) {
@@ -20,7 +20,7 @@ export function $$p5(e, t, i, s, u) {
       let m;
       let h;
       if (!u) {
-        x1("font picker recent fonts", "font family not found", {
+        logError("font picker recent fonts", "font family not found", {
           family: u
         });
         continue;

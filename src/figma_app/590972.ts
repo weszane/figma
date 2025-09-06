@@ -11,7 +11,7 @@ import { J as _$$J } from "../905/341359";
 import _ from "../vendor/241899";
 import { A as _$$A } from "../vendor/90566";
 import { H as _$$H } from "../905/620380";
-import { t as _$$t2, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { J as _$$J2 } from "../905/231762";
 import { b as _$$b } from "../905/403202";
 import { L as _$$L } from "../905/884941";
@@ -283,19 +283,19 @@ function eO({
         children: [jsx(_$$y, {
           ...er.details,
           index: 1,
-          text: _$$t2("community.publishing.write_a_description"),
+          text: getI18nString("community.publishing.write_a_description"),
           selected: "details" === ea.activeTab,
           hasErrors: "details" === stepWithErrors
         }), jsx(_$$y, {
           ...er.thumbnail,
           index: 2,
-          text: _$$t2("community.publishing.fine_tune_the_preview"),
+          text: getI18nString("community.publishing.fine_tune_the_preview"),
           selected: "thumbnail" === ea.activeTab,
           hasErrors: "thumbnail" === stepWithErrors
         }), jsx(_$$y, {
           ...er.advanced,
           index: 3,
-          text: _$$t2("community.publishing.add_the_final_details"),
+          text: getI18nString("community.publishing.add_the_final_details"),
           selected: "advanced" === ea.activeTab,
           hasErrors: "advanced" === stepWithErrors
         })]
@@ -304,7 +304,7 @@ function eO({
         "aria-hidden": !0,
         children: [jsx("div", {
           className: jc,
-          children: _$$t2("community.publishing.resource_preview")
+          children: getI18nString("community.publishing.resource_preview")
         }), jsx(_$$x, {
           carouselMediaField: e.fieldStates.carouselMedia,
           nameField: e.fieldStates.name,
@@ -349,7 +349,7 @@ function eO({
             }
           })
         }), t && jsx(_$$A7, {
-          label: _$$t2("community.publishing.preview_url"),
+          label: getI18nString("community.publishing.preview_url"),
           children: jsx(_$$N, {
             href: t.fullURL,
             newTab: !0,
@@ -413,11 +413,11 @@ function eO({
     children: [ea.isOnFirstTab ? jsx($n, {
       variant: "secondary",
       onClick: q,
-      children: _$$t2("general.cancel")
+      children: getI18nString("general.cancel")
     }) : !ev && jsx($n, {
       variant: "secondary",
       onClick: ea.selectPreviousTab,
-      children: _$$t2("general.back")
+      children: getI18nString("general.back")
     }), ea.isOnLastTab ? jsx($n, {
       disabled: draftSubmissionResult?.result === "pending" || ev,
       onClick: () => {
@@ -426,13 +426,13 @@ function eO({
       "data-testid": "resource-publishing-make-form-view-submit-button",
       children: draftSubmissionResult?.result === "pending" || ev ? jsx(_$$k, {
         size: "sm"
-      }) : _$$t2("community.publishing.publish")
+      }) : getI18nString("community.publishing.publish")
     }) : jsx($n, {
       onClick: () => {
         checkProgress() && ea.selectNextTab();
       },
       "data-testid": "resource-publishing-make-form-view-next-step-button",
-      children: _$$t2("general.next")
+      children: getI18nString("general.next")
     })]
   }) : jsx(_$$h, {
     holdTimeInMs: 5e3,
@@ -452,13 +452,13 @@ function eO({
           errors: "error" === e.status ? e.errors.map(_$$L) : []
         }, void 0, 2),
         ignoreLineBreaks: !1,
-        successText: _$$t2("community.publishing.debug_info_copied_to_clipboard")
+        successText: getI18nString("community.publishing.debug_info_copied_to_clipboard")
       }));
     },
     children: jsx($n, {
       variant: "secondary",
       onClick: clearDraftSubmissionResult,
-      children: _$$t2("general.go_back")
+      children: getI18nString("general.go_back")
     })
   }) : jsx(ek, {
     publishedHubFile: draftSubmissionResult.data.hubFile,
@@ -466,13 +466,13 @@ function eO({
   });
   let eA = useMemo(() => {
     if (!ev && draftSubmissionResult?.result !== "success") {
-      if (stepWithErrors) return stepWithErrors === ea.activeTab ? _$$t2("community.publishing.please_fill_out_required_fields_and_correct_any_errors") : _$$t2("community.publishing.updates_are_needed_in_another_step");
+      if (stepWithErrors) return stepWithErrors === ea.activeTab ? getI18nString("community.publishing.please_fill_out_required_fields_and_correct_any_errors") : getI18nString("community.publishing.updates_are_needed_in_another_step");
       if ("error" === e.status) {
         let t;
         let r = e.errors.find(e => "submission" === e.type);
         let n = r?.data.rawError;
         (t = _$$l2(r)) || !n || (t = _$$J2(n));
-        return t ?? _$$t2("community.publishing.an_error_occurred_please_try_again");
+        return t ?? getI18nString("community.publishing.an_error_occurred_please_try_again");
       }
     }
   }, [e, draftSubmissionResult?.result, ev, stepWithErrors, ea.activeTab]);
@@ -507,7 +507,7 @@ function eO({
       children: [jsxs(vo, {
         children: [jsx(Y9, {
           children: jsx(hE, {
-            children: tx("community.publishing.publish_your_file_to_community")
+            children: renderI18nText("community.publishing.publish_your_file_to_community")
           })
         }), jsx(nB, {
           padding: 0,
@@ -649,7 +649,7 @@ function eP({
       let r = "error" === e.status ? e.errors.find(e => "submission" === e.type) : void 0;
       let n = r?.data.rawError;
       (t = _$$l2(r)) || !n || (t = _$$J2(n));
-      return t ?? _$$t2("community.publishing.an_error_occurred_please_try_again");
+      return t ?? getI18nString("community.publishing.an_error_occurred_please_try_again");
     }
   }, [e, h?.result, v, s]);
   return jsx(_$$J, {
@@ -660,7 +660,7 @@ function eP({
       children: [jsxs(vo, {
         children: [jsx(Y9, {
           children: jsx(hE, {
-            children: tx("community.publishing.publish_your_file_to_community")
+            children: renderI18nText("community.publishing.publish_your_file_to_community")
           })
         }), jsx(nB, {
           padding: 0,
@@ -747,7 +747,7 @@ function eM({
     newTab: !0,
     trusted: !0,
     "data-testid": "resource-publishing-success-screen-actions-see-in-community-button",
-    children: _$$t2("community.publishing.see_in_community")
+    children: getI18nString("community.publishing.see_in_community")
   });
 }
 function eF({
@@ -758,7 +758,7 @@ function eF({
     newTab: !0,
     trusted: !0,
     "data-testid": "resource-publishing-success-screen-actions-go-to-web-button",
-    children: _$$t2("community.publishing.go_to_web")
+    children: getI18nString("community.publishing.go_to_web")
   }) : null;
 }
 export const M = $$eL0;

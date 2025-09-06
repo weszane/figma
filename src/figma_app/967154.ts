@@ -1,7 +1,7 @@
 import { useMemo, useCallback } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { iCO } from "../figma_app/763686";
-import { R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { oB } from "../905/929976";
 import { XE, u1, Uv } from "../figma_app/91703";
 import { sw } from "../figma_app/914957";
@@ -49,7 +49,7 @@ export function $$y4() {
   }), [r, s]);
 }
 export function $$b6() {
-  return R(e => {
+  return selectWithShallowEqual(e => {
     let t = i$(e);
     let r = od(e);
     return {

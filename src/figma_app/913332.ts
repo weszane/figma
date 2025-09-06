@@ -3,9 +3,9 @@ import { useState } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { _ as _$$_ } from "../905/410717";
 import { c as _$$c } from "../905/425573";
-import { DZ } from "../905/11";
+import { SeverityLevel } from "../905/11";
 import { tH, H4 } from "../905/751457";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { YJ } from "../figma_app/297957";
 import { q5 } from "../figma_app/516028";
 import { kU, Kw, RJ } from "../figma_app/869006";
@@ -26,13 +26,13 @@ function $$f(e) {
   });
   let g = YJ(!!(e.isDesignEditor && p?.type === Kw.PLAN_REQUEST_UPGRADE));
   if (!t) return null;
-  let f = tx("fullscreen.toolbar_banner.you_can_only_view_and_comment_on_this_file");
+  let f = renderI18nText("fullscreen.toolbar_banner.you_can_only_view_and_comment_on_this_file");
   let E = _$$_;
-  g() && (f = tx("1_click_expansion.you_need_a_full_seat"), E = _$$c);
+  g() && (f = renderI18nText("1_click_expansion.you_need_a_full_seat"), E = _$$c);
   return jsx(tH, {
     boundaryKey: "AutoUpgradeConfirmationModal",
     fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
-    severity: DZ.Critical,
+    severity: SeverityLevel.Critical,
     sentryTags: {
       area: _$$e.MONETIZATION_EXPANSION
     },

@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { E } from "../905/984674";
 import { Ct, MA } from "../905/478473";
 import { FFileType } from "../figma_app/191312";
@@ -13,38 +13,38 @@ function p(e) {
     editorType
   } = e;
   if (workspace.isDisabledDueToECC) return jsx(Ct, {
-    tooltipText: t("community.try.externally_restricted")
+    tooltipText: getI18nString("community.try.externally_restricted")
   });
   if (workspace.isPlanLocked) return jsx(Ct, {
-    tooltipText: t("plan_picker.locked_plan_tooltip")
+    tooltipText: getI18nString("plan_picker.locked_plan_tooltip")
   });
   if (!workspace.draftFolderId) return jsx(Ct, {
-    tooltipText: t("plan_picker.limited_access_tooltip")
+    tooltipText: getI18nString("plan_picker.limited_access_tooltip")
   });
   switch (editorType) {
     case FFileType.WHITEBOARD:
       if (workspace.isFigJamDisabled || workspace.isPlanLocked) return jsx(Ct, {
-        tooltipText: t("plan_picker.figjam_not_available_for_this_plan")
+        tooltipText: getI18nString("plan_picker.figjam_not_available_for_this_plan")
       });
       break;
     case FFileType.SLIDES:
       if (workspace.isSlidesDisabled || workspace.isPlanLocked) return jsx(Ct, {
-        tooltipText: t("plan_picker.slides_not_available_for_this_plan")
+        tooltipText: getI18nString("plan_picker.slides_not_available_for_this_plan")
       });
       break;
     case FFileType.SITES:
       if (workspace.isSitesDisabled || workspace.isPlanLocked) return jsx(Ct, {
-        tooltipText: t("plan_picker.sites_not_available_for_this_plan")
+        tooltipText: getI18nString("plan_picker.sites_not_available_for_this_plan")
       });
       break;
     case FFileType.COOPER:
       if (workspace.isCooperDisabled || workspace.isPlanLocked) return jsx(Ct, {
-        tooltipText: t("plan_picker.buzz_not_available_for_this_plan")
+        tooltipText: getI18nString("plan_picker.buzz_not_available_for_this_plan")
       });
       break;
     case FFileType.FIGMAKE:
       if (workspace.isFigmakeDisabled || workspace.isPlanLocked) return jsx(Ct, {
-        tooltipText: t("plan_picker.make_not_available_for_this_plan")
+        tooltipText: getI18nString("plan_picker.make_not_available_for_this_plan")
       });
   }
   return jsx(B, {
@@ -67,23 +67,23 @@ export function $$m0(e) {
         fontWeight: "medium",
         fontSize: 20,
         color: "default",
-        children: tx("plan_picker.figjam_try.title")
+        children: renderI18nText("plan_picker.figjam_try.title")
       }) : jsx(E, {
         fontWeight: "medium",
         fontSize: 20,
         color: "default",
-        children: tx("plan_picker.pick_plan.title")
+        children: renderI18nText("plan_picker.pick_plan.title")
       })
     }), jsx("div", {
       className: _$$s.alignCenter.pt6.$,
       children: "figjamTry" === useCase ? jsx(E, {
         fontSize: 13,
         color: "default",
-        children: tx("plan_picker.figjam_try.description")
+        children: renderI18nText("plan_picker.figjam_try.description")
       }) : jsx(E, {
         fontSize: 13,
         color: "default",
-        children: tx("plan_picker.pick_plan.description")
+        children: renderI18nText("plan_picker.pick_plan.description")
       })
     }), jsx("div", {
       className: sw,

@@ -1,5 +1,5 @@
 import { yT } from "../figma_app/492908";
-import { Lg } from "../figma_app/257275";
+import { getFalseValue } from "../figma_app/897289";
 import { c3 } from "../figma_app/78808";
 import { yJ, bE, HA, yH } from "../figma_app/598926";
 import { ru } from "../905/879323";
@@ -72,7 +72,7 @@ let $$p3 = new H({
     store: e
   }) => "communityHub" !== e.getState().selectedView.view
 });
-let m = Lg() ? new Date("1970-01-01T00:00:00.000Z") : new Date();
+let m = getFalseValue() ? new Date("1970-01-01T00:00:00.000Z") : new Date();
 let $$h1 = new H({
   name: "FolderChannelFoldersShim",
   ...aj,

@@ -1,10 +1,10 @@
 import { useRef, useMemo } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getSingletonSceneGraph } from "../905/700578";
-import { zl, md } from "../figma_app/27355";
-import { sx } from "../905/449184";
+import { atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
+import { trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { g as _$$g } from "../905/880308";
 import { v5 } from "../figma_app/314264";
 import { dd } from "../figma_app/604494";
@@ -13,12 +13,12 @@ import { n as _$$n } from "../905/347702";
 import { j4, G5, Bq, Lv, m0, Ec, hA, f0, Cq, eb, bp, dk } from "../905/278499";
 import { zF } from "../figma_app/297822";
 let _ = _$$n((e, t, i) => {
-  sx(e, t, i);
+  trackEventAnalytics(e, t, i);
 });
 let A = (e, t, i) => {
   let n = ["action", "clientLifecycleId", "file_key", "product_type", "quick_actions_session_id"].filter(e => !i[e] || "invalid" === i[e]);
   n.length > 0 && (e += ` | Invalid or empty fields: ${n.join(", ")}`);
-  $D(_$$e.AI_FOR_PRODUCTION, Error(e), {
+  reportError(_$$e.AI_FOR_PRODUCTION, Error(e), {
     extra: {
       event: t,
       properties: i
@@ -45,7 +45,7 @@ export function $$I4(e) {
   _(Bq, e);
 }
 export function $$E1(e) {
-  sx(Lv, e);
+  trackEventAnalytics(Lv, e);
 }
 export function $$x11(e) {
   _(m0, e);
@@ -70,8 +70,8 @@ function T(e) {
   return t?.depthFromTopLevelFrame;
 }
 export function $$k5(e, t) {
-  let i = zl.get(zF);
-  let n = zl.get(dd);
+  let i = atomStoreManager.get(zF);
+  let n = atomStoreManager.get(dd);
   let r = debugState.getState();
   let a = Object.keys(r.mirror.sceneGraphSelection);
   let o = a.map(T);
@@ -92,8 +92,8 @@ export function $$R6({
   clientLifecycleId: t
 }) {
   let i = useRef(_$$g());
-  let r = md(zF);
-  let a = md(dd);
+  let r = useAtomWithSubscription(zF);
+  let a = useAtomWithSubscription(dd);
   let o = debugState.getState();
   let d = o.openFile?.key ?? null;
   let m = v5(o.selectedView, null);

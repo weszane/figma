@@ -5,7 +5,7 @@ import { vo } from "../figma_app/272243";
 import { $n } from "../905/521428";
 import { Kz } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { In } from "../905/672640";
 import { c as _$$c } from "../905/370443";
@@ -244,7 +244,7 @@ function D(e) {
         className: _$$s.font13.lh24.flex.itemsCenter.pr12.$,
         children: [jsx(In, {
           icon: "chevron-left-32"
-        }), tx("general.back")]
+        }), renderI18nText("general.back")]
       })
     })
   });
@@ -258,7 +258,7 @@ function k(e) {
       onClick: e.onNext,
       children: jsxs("div", {
         className: _$$s.font13.lh24.flex.itemsCenter.pl12.$,
-        children: [tx("general.next"), jsx(In, {
+        children: [renderI18nText("general.next"), jsx(In, {
           icon: "chevron-right-32"
         })]
       })
@@ -274,7 +274,7 @@ function M(e) {
       onClick: e.onDone,
       children: jsx("div", {
         className: _$$s.font13.lh24.flex.itemsCenter.$,
-        children: tx("general.done")
+        children: renderI18nText("general.done")
       })
     })
   });

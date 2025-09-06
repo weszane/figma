@@ -10,7 +10,7 @@ import { $n } from "../905/521428";
 import { C as _$$C } from "../905/520159";
 import { A } from "../905/251970";
 import { DCy } from "../figma_app/763686";
-import { eU, fp } from "../figma_app/27355";
+import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import p from "classnames";
 import { O8 } from "../figma_app/88484";
 import { U as _$$U } from "../figma_app/901889";
@@ -18,7 +18,7 @@ import { Pt } from "../figma_app/806412";
 import { ks } from "../figma_app/637027";
 import { f as _$$f } from "../figma_app/109947";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Dm } from "../figma_app/8833";
 import { Cu } from "../figma_app/314264";
 import { Tc } from "../905/797478";
@@ -30,7 +30,7 @@ import { Y } from "../905/1768";
 var h = p;
 let k = "slides_insert_embed_modal--sectionContainer--r1D85";
 let N = "slides_insert_embed_modal--recentPrototypeThumbnail--2N-ss";
-let $$A3 = eU(-1);
+let $$A3 = atom(-1);
 let $$O1 = "slide-insert-embed-modal-button";
 async function L({
   fileKey: e,
@@ -43,7 +43,7 @@ async function L({
 }
 export function $$R2() {
   let e = _$$U();
-  let [t, i] = fp($$A3);
+  let [t, i] = useAtomValueAndSetter($$A3);
   let a = useRef(null);
   let s = useCallback((e = !1) => {
     e && Y5.triggerAction("set-tool-default", null);
@@ -77,7 +77,7 @@ export function $$R2() {
     d(e);
   }, [s, d]);
   let p = O8();
-  let h = 0 === o ? _$$t("slides.flapp.embed.widget_modal_title") : _$$t("slides.flapp.embed.prototype_modal_title");
+  let h = 0 === o ? getI18nString("slides.flapp.embed.widget_modal_title") : getI18nString("slides.flapp.embed.prototype_modal_title");
   return jsx($$M0, {
     closeWidow: s,
     ref: a,
@@ -99,7 +99,7 @@ export function $$R2() {
 }
 var D = (e => (e[e.LANDING = 0] = "LANDING", e[e.PROTOTYPE = 1] = "PROTOTYPE", e))(D || {});
 export let $$M0 = forwardRef(function (e, t) {
-  let [i] = fp(_$$f);
+  let [i] = useAtomValueAndSetter(_$$f);
   let a = i?.current?.getBoundingClientRect();
   let s = (a?.height ?? 0) > 0;
   let o = useMemo(() => s ? {
@@ -140,13 +140,13 @@ function P({
         className: _$$s.textBodyMediumStrong.flex.itemsCenter.$,
         children: [i ? jsx(_$$K, {
           onClick: n,
-          "aria-label": _$$t("general.back"),
+          "aria-label": getI18nString("general.back"),
           children: jsx(_$$C, {})
         }) : null, jsx("p", {
           children: t
         })]
       }), jsx(_$$K, {
-        "aria-label": _$$t("common.close"),
+        "aria-label": getI18nString("common.close"),
         onClick: s,
         children: jsx(A, {})
       })]
@@ -169,33 +169,33 @@ function F({
     className: "slides_insert_embed_modal--widgetContainer--LvggL",
     children: [jsx("div", {
       className: _$$s.textBodyMedium.colorTextSecondary.pb16.$,
-      children: tx("slides.flapp.embed.widget_modal_description")
+      children: renderI18nText("slides.flapp.embed.widget_modal_description")
     }), jsxs("div", {
       className: "slides_insert_embed_modal--widgetGrid---WhKd",
       children: [jsx(B, {
         thumbnail: _require,
-        title: _$$t("slides.flapp.embed.widget_poll"),
+        title: getI18nString("slides.flapp.embed.widget_poll"),
         onSelected: () => n(() => Y5.triggerActionInUserEditScope("insert-interactive-element-into-active-slide", {
           type: "POLL"
         })),
         recordingKey: Pt(a, "poll")
       }), jsx(B, {
         thumbnail: _require2,
-        title: _$$t("slides.flapp.embed.widget_stamps"),
+        title: getI18nString("slides.flapp.embed.widget_stamps"),
         onSelected: () => n(() => Y5.triggerActionInUserEditScope("insert-interactive-element-into-active-slide", {
           type: "FACEPILE"
         })),
         recordingKey: Pt(a, "facepile")
       }), jsx(B, {
         thumbnail: _require3,
-        title: _$$t("slides.flapp.embed.widget_alignment"),
+        title: getI18nString("slides.flapp.embed.widget_alignment"),
         onSelected: () => n(() => Y5.triggerActionInUserEditScope("insert-interactive-element-into-active-slide", {
           type: "ALIGNMENT"
         })),
         recordingKey: Pt(a, "alignment")
       }), jsx(B, {
         thumbnail: _require4,
-        title: _$$t("slides.flapp.embed.widget_prototype"),
+        title: getI18nString("slides.flapp.embed.widget_prototype"),
         onSelected: t,
         recordingKey: Pt(a, "prototype")
       })]
@@ -242,7 +242,7 @@ function G({
   onClick: t
 }) {
   let i = Ik(e);
-  let n = i || !e ? void 0 : _$$t("slides.flapp.embed.add_button_invalid_link_tooltip");
+  let n = i || !e ? void 0 : getI18nString("slides.flapp.embed.add_button_invalid_link_tooltip");
   return jsx("div", {
     "data-tooltip-type": Ib.TEXT,
     "data-tooltip": n,
@@ -254,7 +254,7 @@ function G({
       onClick: () => {
         e && t(e.trim());
       },
-      children: tx("slides.flapp.embed.add_button_label")
+      children: renderI18nText("slides.flapp.embed.add_button_label")
     })
   });
 }
@@ -266,20 +266,20 @@ function K() {
 function H() {
   return jsx("div", {
     className: h()(_$$s.colorTextSecondary.textBodyMedium.$, k),
-    children: tx("slides.flapp.embed.modal_description")
+    children: renderI18nText("slides.flapp.embed.modal_description")
   });
 }
 function z({
   onAddPrototypeUrlClicked: e
 }) {
   let [t, i] = useState();
-  let a = _$$t("slides.flapp.embed.add_prototype_link_hint", {
+  let a = getI18nString("slides.flapp.embed.add_prototype_link_hint", {
     prototype_link_prefix: qS()
   });
   return jsxs("div", {
     children: [jsx("div", {
       className: _$$s.textBodyMediumStrong.$,
-      children: tx("slides.flapp.embed.add_prototype_link_header")
+      children: renderI18nText("slides.flapp.embed.add_prototype_link_header")
     }), jsxs("div", {
       className: "slides_insert_embed_modal--prototypePasteContainer--PozcZ",
       children: [jsx(ks, {
@@ -313,7 +313,7 @@ function V({
     className: k,
     children: jsxs("div", {
       className: _$$s.textBodyMediumStrong.$,
-      children: [tx("slides.flapp.embed.recent_prototypes_header"), a.map(e => jsx(W, {
+      children: [renderI18nText("slides.flapp.embed.recent_prototypes_header"), a.map(e => jsx(W, {
         thumbnailUrl: e.thumbnail_url,
         title: e.name,
         subtitle: e.fig_file.name,

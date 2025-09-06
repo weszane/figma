@@ -1,5 +1,5 @@
 import { assert } from "../figma_app/465776";
-import { Iz, E2, eU, zl } from "../figma_app/27355";
+import { createRemovableAtomFamily, createValidatedLocalStorageAtom, atom, atomStoreManager } from "../figma_app/27355";
 import { resourceUtils } from "../905/989992";
 import { getLocalStorage, localStorageRef } from "../905/657224";
 import { z } from "../905/239603";
@@ -16,7 +16,7 @@ let p = z.object({
 });
 let m = () => !!getInitialOptions().user_data?.id;
 let h = e => `${c}${e}`;
-let g = Iz(e => E2(h(e), m() && getLocalStorage() ? null : u, p, {
+let g = createRemovableAtomFamily(e => createValidatedLocalStorageAtom(h(e), m() && getLocalStorage() ? null : u, p, {
   subscribeToChanges: !0
 }, {
   parse: e => {
@@ -31,7 +31,7 @@ export class $$f0 {
     this.baseAtom = g(this.lifecycle.localStorageName);
   }
   getLifecycleAtom() {
-    return eU(e => {
+    return atom(e => {
       let t = e(this.baseAtom);
       return resourceUtils.loaded({
         lifecycleState: t,
@@ -40,11 +40,11 @@ export class $$f0 {
     });
   }
   setLifecycleLocalStorageItem(e) {
-    zl.set(this.baseAtom, e);
+    atomStoreManager.set(this.baseAtom, e);
   }
   incrementLifecycleCounter() {
     if (!m()) return;
-    let e = zl.get(this.baseAtom);
+    let e = atomStoreManager.get(this.baseAtom);
     let t = {
       count: e?.count ? e.count + 1 : 1,
       updatedAt: new Date()
@@ -52,7 +52,7 @@ export class $$f0 {
     this.setLifecycleLocalStorageItem(t);
   }
   setUpdatedAt(e) {
-    let t = zl.get(this.baseAtom);
+    let t = atomStoreManager.get(this.baseAtom);
     if (!t) return;
     let i = {
       ...t,

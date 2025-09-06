@@ -1,11 +1,11 @@
 import { zIx } from "../figma_app/763686";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 export function $$a2(e) {
   switch (e) {
     case zIx.BUILD:
-      return _$$t("dev_handoff.status.ready_for_dev");
+      return getI18nString("dev_handoff.status.ready_for_dev");
     case zIx.COMPLETED:
-      return _$$t("dev_handoff.status.completed");
+      return getI18nString("dev_handoff.status.completed");
     case zIx.NONE:
       return null;
   }
@@ -13,10 +13,10 @@ export function $$a2(e) {
 export function $$s1(e, t) {
   switch (e) {
     case zIx.BUILD:
-      if (t === zIx.COMPLETED) return _$$t("dev_handoff.status.mark_status_sentence_part.incomplete");
-      return _$$t("dev_handoff.status.mark_status_sentence_part.ready_for_dev");
+      if (t === zIx.COMPLETED) return getI18nString("dev_handoff.status.mark_status_sentence_part.incomplete");
+      return getI18nString("dev_handoff.status.mark_status_sentence_part.ready_for_dev");
     case zIx.COMPLETED:
-      return _$$t("dev_handoff.status.mark_status_sentence_part.completed");
+      return getI18nString("dev_handoff.status.mark_status_sentence_part.completed");
     case zIx.NONE:
       return null;
   }

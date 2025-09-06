@@ -1,5 +1,5 @@
 import { buildUploadUrl, getInitialOptions, isLocalCluster } from "../figma_app/169182";
-import { nl, Lg } from "../figma_app/257275";
+import { isInteractionPathCheck, Lg } from "../figma_app/897289";
 import { Kd, UX } from "../figma_app/155287";
 let s = "1039957324840667051";
 let o = "1042072203439057981";
@@ -115,17 +115,17 @@ export function $$k1(e) {
 let M = {};
 let F = {};
 export function $$j7(e) {
-  return "prod" === getInitialOptions().cluster_name ? e in v || e in S : "staging" === getInitialOptions().cluster_name ? e in C || e in A : nl() || Lg() ? e in M : !!isLocalCluster();
+  return "prod" === getInitialOptions().cluster_name ? e in v || e in S : "staging" === getInitialOptions().cluster_name ? e in C || e in A : isInteractionPathCheck() || Lg() ? e in M : !!isLocalCluster();
 }
 export function $$U0(e) {
-  return "prod" === getInitialOptions().cluster_name ? e in v ? v[e] : void 0 : "staging" === getInitialOptions().cluster_name ? e in C ? C[e] : void 0 : nl() || Lg() ? e in M ? M[e] : void 0 : isLocalCluster() ? "*" : void 0;
+  return "prod" === getInitialOptions().cluster_name ? e in v ? v[e] : void 0 : "staging" === getInitialOptions().cluster_name ? e in C ? C[e] : void 0 : isInteractionPathCheck() || Lg() ? e in M ? M[e] : void 0 : isLocalCluster() ? "*" : void 0;
 }
 export function $$B9(e) {
   if (!$$j7(e)) throw Error("Untrusted pluginID");
-  return "prod" === getInitialOptions().cluster_name ? new Set(S[e] ?? []) : "staging" === getInitialOptions().cluster_name ? new Set(A[e] ?? []) : nl() || Lg() ? new Set(F[e] ?? []) : isLocalCluster() ? new Set(UX) : new Set();
+  return "prod" === getInitialOptions().cluster_name ? new Set(S[e] ?? []) : "staging" === getInitialOptions().cluster_name ? new Set(A[e] ?? []) : isInteractionPathCheck() || Lg() ? new Set(F[e] ?? []) : isLocalCluster() ? new Set(UX) : new Set();
 }
 export function $$G4() {
-  return "prod" === getInitialOptions().cluster_name ? O : "staging" === getInitialOptions().cluster_name ? w : (nl() || Lg() || isLocalCluster(), new Set());
+  return "prod" === getInitialOptions().cluster_name ? O : "staging" === getInitialOptions().cluster_name ? w : (isInteractionPathCheck() || Lg() || isLocalCluster(), new Set());
 }
 export function $$V6(e, t) {
   let r = e === ("staging" === getInitialOptions().cluster_name ? T : _);
@@ -135,7 +135,7 @@ export function $$H8(e) {
   return "prod" === getInitialOptions().cluster_name ? N[e] : "staging" === getInitialOptions().cluster_name ? x[e] : void 0;
 }
 export function $$z10(e) {
-  return "prod" === getInitialOptions().cluster_name ? D.includes(e) : "staging" === getInitialOptions().cluster_name ? P.includes(e) : !!(nl() || Lg()) || !!isLocalCluster();
+  return "prod" === getInitialOptions().cluster_name ? D.includes(e) : "staging" === getInitialOptions().cluster_name ? P.includes(e) : !!(isInteractionPathCheck() || Lg()) || !!isLocalCluster();
 }
 export function $$W5(e) {
   return "prod" === getInitialOptions().cluster_name ? L[e] : "staging" === getInitialOptions().cluster_name ? R[e] : void 0;

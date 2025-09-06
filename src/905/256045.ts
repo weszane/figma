@@ -1,6 +1,6 @@
 import { glU } from "../figma_app/763686";
 import { debugState } from "../905/407919";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { RK } from "../figma_app/815170";
 import { LI, ci, ic, ZT, Ff, _E, H5, jD, HG, tW, K4, $9, Rr, jU, dK, j3, k$, k1, vK, g$, RN, Ao } from "../905/676397";
 import { getFeatureFlags } from "../905/601108";
@@ -265,7 +265,7 @@ function $$g({
     fontWeight: 500,
     fontFamily: "Inter",
     fill: "#000"
-  }, _$$t("whiteboard.embeds.view_button"))))));
+  }, getI18nString("whiteboard.embeds.view_button"))))));
 }
 export var $$f0 = (e => (e.OPEN = "open", e.CONVERT_TO_TEXT = "convert_to_text", e))($$f0 || {});
 export function $$_1({
@@ -502,7 +502,7 @@ export function $$_1({
             fontWeight: 500,
             fontFamily: "Inter",
             fill: "#000"
-          }, _$$t("whiteboard.embeds.view_button"))))), ((...t) => e.widget.h(_AutoLayout, {
+          }, getI18nString("whiteboard.embeds.view_button"))))), ((...t) => e.widget.h(_AutoLayout, {
             name: "footer-container",
             direction: "horizontal",
             horizontalAlignItems: "start",
@@ -646,14 +646,14 @@ export function $$_1({
       widget.usePropertyMenu([{
         itemType: "action",
         propertyName: "open",
-        tooltip: _$$t("whiteboard.embeds.inline_menu.open_link"),
+        tooltip: getI18nString("whiteboard.embeds.inline_menu.open_link"),
         icon: k1
       }, {
         itemType: "separator"
       }, {
         itemType: "action",
         propertyName: "convert_to_text",
-        tooltip: _$$t("whiteboard.embeds.inline_menu.change_back_to_text"),
+        tooltip: getI18nString("whiteboard.embeds.inline_menu.change_back_to_text"),
         icon: vK
       }], ({
         propertyName: e

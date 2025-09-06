@@ -1,4 +1,4 @@
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { k0 } from "../figma_app/623293";
 import { getInitialOptions, getSupportEmail } from "../figma_app/169182";
 let s = getInitialOptions().zendesk_web_key_public;
@@ -38,7 +38,7 @@ let l = {
     id: 0x53d1c6e546
   }
 };
-let d = function() {
+let d = function () {
   return {
     webWidget: {
       position: {
@@ -119,7 +119,7 @@ export function $$_2() {
       relatedZendeskName: e.properties?.name,
       searchTerm: e.properties?.term
     };
-    sx("zendesk_help_widget", t);
+    trackEventAnalytics("zendesk_help_widget", t);
   }));
 }
 export function $$h3(e, t) {
@@ -129,4 +129,4 @@ export const Fb = $$o0;
 export const L3 = $$u1;
 export const b_ = $$_2;
 export const ny = $$h3;
-export const wB = $$p4; 
+export const wB = $$p4;

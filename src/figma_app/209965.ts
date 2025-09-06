@@ -1,6 +1,6 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getSingletonSceneGraph } from "../905/700578";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { Aq } from "../figma_app/274571";
 export let $$n0;
 class l {
@@ -12,7 +12,7 @@ class l {
     try {
       t = JSON.parse(n);
     } catch (e) {
-      $D(_$$e.AI_PRODUCTIVITY, Error(`Could not parse summary data, error: ${e}`));
+      reportError(_$$e.AI_PRODUCTIVITY, Error(`Could not parse summary data, error: ${e}`));
     }
     return Aq(t, l);
   }

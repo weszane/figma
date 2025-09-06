@@ -2,12 +2,12 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { Ez5, mHF, juq } from "../figma_app/763686";
 import { getSingletonSceneGraph, ReduxSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { fY, Og, jq, v4, VG, qL, m7, qZ } from "../figma_app/761118";
 import { debugState } from "../905/407919";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { w0 } from "../figma_app/594947";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { zX } from "../905/576487";
 import { Y5 } from "../figma_app/455680";
@@ -37,7 +37,7 @@ class L {
     this.linterResponsivenessDebouncer = i;
   }
   initialize() {
-    this.designLinterStateManager.getStatus() === td.UNINITIALIZED && (zl.set(Av, performance.now()), this.designLinterStateManager.setStatus(td.INITIALIZED), w0("aip_flower_garden_node_limit").then(e => this._layerLimit = e.get("nodeLimit", $$O0)), this.linterResponsivenessDebouncer.initialize((e, t) => {
+    this.designLinterStateManager.getStatus() === td.UNINITIALIZED && (atomStoreManager.set(Av, performance.now()), this.designLinterStateManager.setStatus(td.INITIALIZED), w0("aip_flower_garden_node_limit").then(e => this._layerLimit = e.get("nodeLimit", $$O0)), this.linterResponsivenessDebouncer.initialize((e, t) => {
       this.triggerResponsivenessUpdate(e, t);
     }));
   }
@@ -67,7 +67,7 @@ class L {
     };
   }
   getLintingTargetNodes() {
-    let e = zl.get(fY);
+    let e = atomStoreManager.get(fY);
     if (!e) return null;
     let t = getSingletonSceneGraph();
     let r = [];
@@ -87,7 +87,7 @@ class L {
   onGroupingComplete(e) {
     let t = this.designLinterStateManager.getStatus();
     if (t === td.GROUPING_PENDING && (this.designLinterStateManager.setStatus(td.GROUPING_COMPLETE), jf(e), t === td.GROUPING_PENDING)) {
-      let e = zl.get(az);
+      let e = atomStoreManager.get(az);
       let t = e ? performance.now() - e : -1;
       Vs(t);
     }
@@ -100,7 +100,7 @@ class L {
       lintableNodes
     } = this.extractLintableNodes(e);
     if (!t.aborted) {
-      zl.set(yd, lintableNodes.length);
+      atomStoreManager.set(yd, lintableNodes.length);
       try {
         qc(lintableNodes.length);
         this.designLinterStateManager.setStatus(td.DETECTING);
@@ -121,7 +121,7 @@ class L {
       } catch (e) {
         if (e instanceof eU) return;
         this.teardownLinter();
-        $D(_$$e.AI_PRODUCTIVITY, e);
+        reportError(_$$e.AI_PRODUCTIVITY, e);
       }
     }
   }
@@ -158,7 +158,7 @@ class L {
       console.error("Error updating violations:", e);
     } finally {
       let e = this.designLinterStateManager.getStatus();
-      e === td.RESPONDING_TO_CANVAS_CHANGE ? this.designLinterStateManager.setStatus(td.GROUPING_COMPLETE) : $D(_$$e.AI_PRODUCTIVITY, Error("Linter status changed during updateViolationsForNodes"), {
+      e === td.RESPONDING_TO_CANVAS_CHANGE ? this.designLinterStateManager.setStatus(td.GROUPING_COMPLETE) : reportError(_$$e.AI_PRODUCTIVITY, Error("Linter status changed during updateViolationsForNodes"), {
         extra: {
           currentStatus: e
         }
@@ -217,14 +217,14 @@ class L {
       timeoutMs: t,
       abortSignal: e
     }))) return !e.aborted && (this.teardownLinter(), Lt({
-      message: _$$t("design_linter.library_selector.loading_failed_bell"),
+      message: getI18nString("design_linter.library_selector.loading_failed_bell"),
       icon: zX.CLOSE_FILLED,
       type: "libraries loading error",
       timeUntilDequeueMs: 1 / 0
     }), !1);
-    let r = zl.get(az);
+    let r = atomStoreManager.get(az);
     let n = r ? performance.now() - r : void 0;
-    zl.set(rJ, n);
+    atomStoreManager.set(rJ, n);
     LU();
     return !0;
   }
@@ -244,51 +244,51 @@ class L {
   }
   dispatchSuggestionIgnoredBell(e) {
     let t = {
-      text: _$$t("comments.undo"),
+      text: getI18nString("comments.undo"),
       action: () => {
-        zl.set(Og, []);
+        atomStoreManager.set(Og, []);
       }
     };
     Lt({
       button: t,
-      message: _$$t("design_linter.suggestion_ignored"),
+      message: getI18nString("design_linter.suggestion_ignored"),
       type: R,
       onDequeue: () => {
-        zl.get(Og).length > 0 && e();
+        atomStoreManager.get(Og).length > 0 && e();
       }
     });
   }
   resetStateForLibrarySelection() {
     this.clearLinterScene();
-    zl.set(jq, {
+    atomStoreManager.set(jq, {
       status: "invalidated",
       subscribedStylesByFileKey: {},
       localStyles: null,
       allStyles: []
     });
-    zl.set(v4, {
+    atomStoreManager.set(v4, {
       status: "invalidated",
       libraryVariables: [],
       libraryVariableSetIdToSet: {},
       libraryKeys: new Set()
     });
-    zl.set(VG, new Map());
-    zl.set(qL, new Map());
+    atomStoreManager.set(VG, new Map());
+    atomStoreManager.set(qL, new Map());
   }
   validateAndSetupDetection() {
     if (this.isLinterDetecting() || this.designLinterStateManager.getStatus() === td.DETECTION_REQUESTED) return !1;
     this.designLinterStateManager.setStatus(td.DETECTION_REQUESTED);
-    zl.set(az, performance.now());
-    zl.set(L2, []);
+    atomStoreManager.set(az, performance.now());
+    atomStoreManager.set(L2, []);
     let e = this.countNodesInLintingTarget();
     if (!e) throw new F7();
     if (this.isLayerLimitExceeded(e)) throw new yU();
-    zl.set(L2, []);
+    atomStoreManager.set(L2, []);
     this.designLinterStateManager.resetViolationsState();
     this.designLinterFixWorker.teardownFixWorker();
     this.linterResponsivenessDebouncer.clearState();
     this.clearLinterScene();
-    zl.set(d7);
+    atomStoreManager.set(d7);
     return !0;
   }
   propagateAbortSignal() {
@@ -301,7 +301,7 @@ class L {
     let e = this.getDirectlySelectedNodes();
     let t = e.map(e => e.guid);
     mHF?.setLintingTarget(t);
-    zl.set(fY, {
+    atomStoreManager.set(fY, {
       guids: t
     });
     return {
@@ -329,7 +329,7 @@ class L {
     }
   }
   async requestDetection() {
-    zl.set(_$$I, "initial");
+    atomStoreManager.set(_$$I, "initial");
     let {
       selectedNodes
     } = this.setTopLevelLintingTargetNodes();
@@ -338,7 +338,7 @@ class L {
     });
   }
   async refreshDetection() {
-    zl.set(_$$I, "updated");
+    atomStoreManager.set(_$$I, "updated");
     let e = this.getPreviousLintingTarget();
     e && (await this.requestDetectionInternal({
       selectedNodes: e.selectedNodes
@@ -346,7 +346,7 @@ class L {
   }
   markViolationsAsPendingIgnored(e, t) {
     this.clearLinterVisualBells();
-    zl.set(Og, e);
+    atomStoreManager.set(Og, e);
     this.dispatchSuggestionIgnoredBell(t);
   }
   ignoreViolationsForGuidsWithGroupKey(e, t) {
@@ -367,10 +367,10 @@ class L {
     let i = [];
     let a = new Set();
     let s = performance.now();
-    zl.set(ZM, null);
-    zl.set(rT, null);
-    zl.set(KV, null);
-    zl.set(zZ, null);
+    atomStoreManager.set(ZM, null);
+    atomStoreManager.set(rT, null);
+    atomStoreManager.set(KV, null);
+    atomStoreManager.set(zZ, null);
     let l = new Map();
     let d = new Map();
     let c = new Map();
@@ -414,10 +414,10 @@ class L {
         }
         this.addRuleDetectionTimesToMaps(s.id, o, p, l, d, c);
       }
-      zl.set(ZM, performance.now() - s);
-      zl.set(rT, l);
-      zl.set(KV, d);
-      zl.set(zZ, c);
+      atomStoreManager.set(ZM, performance.now() - s);
+      atomStoreManager.set(rT, l);
+      atomStoreManager.set(KV, d);
+      atomStoreManager.set(zZ, c);
     } catch (e) {
       throw Error("Error detecting violations: " + e);
     }
@@ -563,7 +563,7 @@ class L {
   }
   clearLinterScene() {
     mHF?.clearLinterScene();
-    zl.set(qL, new Map());
+    atomStoreManager.set(qL, new Map());
   }
   getLinterStatus() {
     return this.designLinterStateManager.getStatus();
@@ -575,8 +575,8 @@ class L {
   }
   debugLinterState() {
     if (!getFeatureFlags().aip_flower_garden_debug) return;
-    let e = zl.get(m7);
-    let t = zl.get(VG);
+    let e = atomStoreManager.get(m7);
+    let t = atomStoreManager.get(VG);
     navigator.clipboard.writeText(JSON.stringify({
       grouper: this.designLinterGrouper.getDebugInfo(),
       violationsState: Array.from(e.entries()).map(([e, t]) => ({

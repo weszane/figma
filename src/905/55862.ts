@@ -3,11 +3,11 @@ import { useSelector, useDispatch } from "../vendor/514228";
 import { sortByProperty } from "../figma_app/656233";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { l as _$$l } from "../905/716947";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Rs } from "../figma_app/288654";
 import { IT } from "../figma_app/566371";
-import { $D } from "../905/11";
-import { t as _$$t } from "../905/303541";
+import { reportError } from "../905/11";
+import { getI18nString } from "../905/303541";
 import { Qv } from "../905/929976";
 import { n1 } from "../figma_app/657017";
 import { gs } from "../905/760074";
@@ -236,7 +236,7 @@ export function $$L3(e, t = !1) {
         a(Qv(e.data.meta));
       } catch (e) {}
     }
-    YH || !p || g || (sx("file-browser-hydrate", {
+    YH || !p || g || (trackEventAnalytics("file-browser-hydrate", {
       location: "useLIbrariesViewFilterStates"
     }), e());
   });
@@ -267,7 +267,7 @@ export function $$L3(e, t = !1) {
     type: "nonJoinedTeams"
   })), i.length) ? (f && i.push({
     type: "presetLibraries"
-  }), i) : (f && $D(_$$e.DESIGN_SYSTEMS_ECOSYSTEM, O, {
+  }), i) : (f && reportError(_$$e.DESIGN_SYSTEMS_ECOSYSTEM, O, {
     tags: {
       orgId: o?.id,
       hasOpenFile: !!y,
@@ -281,11 +281,11 @@ export function $$L3(e, t = !1) {
 export function $$F1(e, t) {
   switch (e.type) {
     case "currentFile":
-      return _$$t("design_systems.libraries_modal.current_file");
+      return getI18nString("design_systems.libraries_modal.current_file");
     case "joinedTeams":
-      return _$$t("design_systems.libraries_modal.your_teams");
+      return getI18nString("design_systems.libraries_modal.your_teams");
     case "nonJoinedTeams":
-      return _$$t("design_systems.libraries_modal.other_teams");
+      return getI18nString("design_systems.libraries_modal.other_teams");
     case "workspace":
       return e.name;
     case "org":
@@ -295,11 +295,11 @@ export function $$F1(e, t) {
       }
       return t;
     case "drafts":
-      return _$$t("design_systems.libraries_modal.draft_libraries");
+      return getI18nString("design_systems.libraries_modal.draft_libraries");
     case "unassigned":
-      return _$$t("design_systems.libraries_modal.other_libraries");
+      return getI18nString("design_systems.libraries_modal.other_libraries");
     case "presetLibraries":
-      return _$$t("design_systems.libraries_modal.ui_kits");
+      return getI18nString("design_systems.libraries_modal.ui_kits");
     default:
       console.error("invalid filter type in library filter tab component");
       return "";

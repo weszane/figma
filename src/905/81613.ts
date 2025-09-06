@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useId } from "react";
 import a from "classnames";
 import { X } from "../figma_app/313269";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { bD } from "../figma_app/45218";
 import { A as _$$A } from "../905/794518";
 import { I5, J7 } from "../905/599844";
@@ -17,7 +17,7 @@ export function $$p0({
 }) {
   let h = useId();
   return jsx(_$$A, {
-    label: _$$t("community.publishing.description"),
+    label: getI18nString("community.publishing.description"),
     labelId: h,
     error: m,
     required: p,
@@ -34,11 +34,11 @@ export function $$p0({
         placeholder: i || (() => {
           switch (a) {
             case bD.HUB_FILE:
-              return _$$t("community.publishing.describe_your_file");
+              return getI18nString("community.publishing.describe_your_file");
             case bD.PLUGIN:
-              return _$$t("community.publishing.describe_your_plugin");
+              return getI18nString("community.publishing.describe_your_plugin");
             case bD.WIDGET:
-              return _$$t("community.publishing.describe_your_widget");
+              return getI18nString("community.publishing.describe_your_widget");
             default:
               return;
           }

@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { lQ } from "../905/934246";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { jU } from "../figma_app/544879";
 import { j7 } from "../905/929976";
 import { kK } from "../figma_app/863319";
@@ -19,7 +19,7 @@ export function $$c0({
     toggle: lQ,
     buttonRef: m,
     isDropdownShown: h,
-    tooltip: _$$t("favorited_resources.add_to_sidebar")
+    tooltip: getI18nString("favorited_resources.add_to_sidebar")
   };
   let g = e.favorite;
   let f = void 0 !== g;
@@ -48,9 +48,9 @@ export function $$c0({
     },
     buttonRef: m,
     isDropdownShown: h,
-    tooltip: e.favorite ? _$$t("favorited_resources.remove_from_sidebar") : e.hasMaxFavorites ? _$$t("tile.favoriting.max_favorites", {
+    tooltip: e.favorite ? getI18nString("favorited_resources.remove_from_sidebar") : e.hasMaxFavorites ? getI18nString("tile.favoriting.max_favorites", {
       maxFavorites: kK(t)
-    }) : _$$t("favorited_resources.add_to_sidebar")
+    }) : getI18nString("favorited_resources.add_to_sidebar")
   };
 }
 export const _ = $$c0;

@@ -1,8 +1,8 @@
 import { useCallback, useMemo, useRef, useEffect, useState } from "react";
 import { sortByPropertyWithOptions, sortByWithOptions } from "../figma_app/656233";
 import { Et } from "../figma_app/397267";
-import { zl, md, eU } from "../figma_app/27355";
-import { az } from "../905/449184";
+import { atomStoreManager, useAtomWithSubscription, atom } from "../figma_app/27355";
+import { analyticsEventManager } from "../905/449184";
 import { NX, k9 } from "../figma_app/777207";
 import { fd } from "../figma_app/255679";
 import { q5, _G, tS } from "../figma_app/516028";
@@ -25,7 +25,7 @@ export function $$b9() {
         libraryKey,
         ...a
       } = t;
-      az.trackDefinedEvent("assets_panel.navigation", {
+      analyticsEventManager.trackDefinedEvent("assets_panel.navigation", {
         view,
         ...a,
         libraryKey,
@@ -35,8 +35,8 @@ export function $$b9() {
         entrypoint: e,
         componentSuggestionSessionId: r6()
       });
-      let l = zl.get(AS).libraryKeys;
-      libraryKey && l.length > 0 && l.includes(libraryKey) && "Library" === view && ["libraryCard", "settingsMenu"].includes(e) && az.trackDefinedEvent("assets_panel.view_site_kit", {
+      let l = atomStoreManager.get(AS).libraryKeys;
+      libraryKey && l.length > 0 && l.includes(libraryKey) && "Library" === view && ["libraryCard", "settingsMenu"].includes(e) && analyticsEventManager.trackDefinedEvent("assets_panel.view_site_kit", {
         fileKey: r?.key,
         fileTeamId: r?.teamId ?? void 0,
         fileOrgId: r?.parentOrgId ?? void 0,
@@ -65,7 +65,7 @@ export function $$I12({
     visualAssetsType
   } = wV();
   let l = _G();
-  let u = md(lj);
+  let u = useAtomWithSubscription(lj);
   let p = libraryKey && u.includes(libraryKey);
   let _ = fd(libraryKey);
   return useMemo(() => {
@@ -183,11 +183,11 @@ export function $$w3(e, t = 8) {
   let a = useMemo(() => r - (e ?? 0) - t, [t, e, r]);
   if (e) return a;
 }
-export let $$O5 = eU(!1);
+export let $$O5 = atom(!1);
 export function $$R6(e) {
-  zl.set($$O5, !0);
+  atomStoreManager.set($$O5, !0);
   e();
-  setTimeout(() => zl.set($$O5, !1), 0);
+  setTimeout(() => atomStoreManager.set($$O5, !1), 0);
 }
 export function $$L4(e) {
   let t = Nv(!0);
@@ -208,11 +208,11 @@ export function $$L4(e) {
       assetsPanelVersion: r,
       fileKey: i ?? void 0
     };
-    az.trackDefinedEvent("assets_panel.keyboard_insert", {
+    analyticsEventManager.trackDefinedEvent("assets_panel.keyboard_insert", {
       ...e,
       ...h
     });
-    e.source !== tM ? az.trackDefinedEvent("asset_search.result_inserted", {
+    e.source !== tM ? analyticsEventManager.trackDefinedEvent("asset_search.result_inserted", {
       ..._,
       ...h,
       assetType: type,

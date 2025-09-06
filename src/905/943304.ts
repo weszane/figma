@@ -3,7 +3,7 @@ import { isNotNullish } from "../figma_app/95419";
 import { Y } from "../905/185567";
 import { xk } from "@stylexjs/stylex";
 import o from "classnames";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { cz, i8 } from "../905/14017";
 import { Lz } from "../905/497882";
 import { mk } from "../figma_app/777551";
@@ -35,7 +35,7 @@ export function $$g0({
         ...xk(f.thumbnailImage, _),
         src: y,
         loading: "lazy",
-        alt: _$$t("community.publishing.thumbnail_image"),
+        alt: getI18nString("community.publishing.thumbnail_image"),
         draggable: !1
       }) : jsx("div", {
         className: "preview_row--thumbnailPlaceholder--jx9c-",
@@ -68,7 +68,7 @@ export function $$g0({
         }), jsx("div", {
           className: "preview_row--authorNameContainer--rD8Y7 preview_row--baseNameContainer--8zjr8",
           children: I ? jsx("span", {
-            children: _$$t("community.publishing.by_author", {
+            children: getI18nString("community.publishing.by_author", {
               authorName: I
             })
           }) : jsx("div", {

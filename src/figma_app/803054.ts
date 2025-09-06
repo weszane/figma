@@ -3,7 +3,7 @@ import { ibQ, Ez5, nQ7, iCO } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { parsePxNumber } from "../figma_app/783094";
 import { OU } from "../figma_app/175258";
-import { MP } from "../figma_app/469876";
+import { isZoomIntegration } from "../figma_app/469876";
 import { gl, oV, _W } from "../905/216495";
 import { Gt, kl, ER, pw, zj } from "../905/275640";
 import { ax, p8 } from "../figma_app/722362";
@@ -65,7 +65,7 @@ export function $$v8(e, t) {
   }(e, $$I4(e), t);
 }
 export function $$A5(e, t) {
-  return !!e[ibQ.EXPORT_ITEM] && null !== t && !Pe(t) && !MP();
+  return !!e[ibQ.EXPORT_ITEM] && null !== t && !Pe(t) && !isZoomIntegration();
 }
 export function $$x1(e) {
   let t = p8("showUi");

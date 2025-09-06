@@ -12,7 +12,7 @@ import { Us, vd } from "../figma_app/637027";
 import { P as _$$P } from "../905/347284";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s2 } from "../cssbuilder/589278";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
 import { sx as _$$sx } from "../figma_app/307841";
 import { sf } from "../905/929976";
@@ -59,13 +59,13 @@ function X({
     }).$,
     children: [jsx("p", {
       className: _$$s2.textHeadingLarge.$,
-      children: tx("org_upgrade.multi_team.bring_your_teams_together")
+      children: renderI18nText("org_upgrade.multi_team.bring_your_teams_together")
     }), jsx("p", {
       className: _$$s2.textHeadingMedium.$,
       style: sx.add({
         fontWeight: 400
       }).$,
-      children: tx("plan_comparison.campfire.org.description")
+      children: renderI18nText("plan_comparison.campfire.org.description")
     }), jsx(e6, {
       className: "campfire_org_upgrade_multi_team_modal--closeButton--THg83",
       onClick: t,
@@ -79,10 +79,10 @@ function X({
         }), jsxs("div", {
           children: [jsx(Ih, {
             onClick: a,
-            children: tx("plan_comparison.campfire.choose_plan")
+            children: renderI18nText("plan_comparison.campfire.choose_plan")
           }), jsx("div", {
             className: _$$s2.font11.lh16.alignCenter.mt4.$,
-            children: tx("plan_comparison.campfire.or_contact_sales", {
+            children: renderI18nText("plan_comparison.campfire.or_contact_sales", {
               contactSalesLink: jsx("button", {
                 className: _$$s2.colorTextBrand.cursorPointer.$,
                 onClick: () => n(to({
@@ -91,7 +91,7 @@ function X({
                     source: _$$B2.ORG_SELF_SERVE_UPGRADE_MODAL
                   }
                 })),
-                children: tx("plan_comparison.campfire.contact_sales")
+                children: renderI18nText("plan_comparison.campfire.contact_sales")
               })
             })
           })]
@@ -138,13 +138,13 @@ function W({
           children: function (e) {
             switch (e) {
               case ud.EXPERT:
-                return _$$t("nux.campfire.full_seat");
+                return getI18nString("nux.campfire.full_seat");
               case ud.DEVELOPER:
-                return _$$t("nux.campfire.dev_seat");
+                return getI18nString("nux.campfire.dev_seat");
               case ud.COLLABORATOR:
-                return _$$t("nux.campfire.collab_seat");
+                return getI18nString("nux.campfire.collab_seat");
               case ud.CONTENT:
-                return _$$t("nux.campfire.content_seat");
+                return getI18nString("nux.campfire.content_seat");
               default:
                 throwTypeError(e);
             }
@@ -152,7 +152,7 @@ function W({
         })]
       }), jsx("p", {
         className: _$$s2.textBodyMedium.$,
-        children: tx("nux.price_per_month", {
+        children: renderI18nText("nux.price_per_month", {
           price: jsx("span", {
             className: _$$s2.textBodyLargeStrong.$,
             children: i.formatMoney(r.data[e].amount)
@@ -164,9 +164,9 @@ function W({
 }
 function J(e) {
   let t = e.upsellSource === _$$b2.CONNECTED_PROJECTS_MAXIMUM_CONNECTIONS;
-  let a = [t ? tx("plan_comparison.campfire.org.feature.org_connected_projects", {
+  let a = [t ? renderI18nText("plan_comparison.campfire.org.feature.org_connected_projects", {
     orgConnectionsLimit: _$$b[FPlanNameType.ORG]
-  }) : null, tx("plan_comparison.campfire.org.feature.unlimited_teams"), tx("plan_comparison.campfire.org.feature.branching"), tx("plan_comparison.campfire.org.feature.security"), tx("plan_comparison.campfire.org.feature.scim"), tx("plan_comparison.campfire.org.feature.customizations")].filter(Boolean);
+  }) : null, renderI18nText("plan_comparison.campfire.org.feature.unlimited_teams"), renderI18nText("plan_comparison.campfire.org.feature.branching"), renderI18nText("plan_comparison.campfire.org.feature.security"), renderI18nText("plan_comparison.campfire.org.feature.scim"), renderI18nText("plan_comparison.campfire.org.feature.customizations")].filter(Boolean);
   return jsx("div", {
     children: a.map((e, a) => {
       let r = t && 0 === a ? jsx("span", {
@@ -211,7 +211,7 @@ function ea(e) {
     t(Ce());
   };
   let l = _$$sx();
-  let d = useMemo(() => [_$$t("org_upgrade.multi_team.plan_items.shared_design_libraries"), _$$t("org_upgrade.multi_team.plan_items.shared_fonts_and_styles"), _$$t("org_upgrade.multi_team.plan_items.centralized_billing_and_admin_controls"), _$$t("org_upgrade.multi_team.plan_items.single_sign_on_sso_integrations")], []);
+  let d = useMemo(() => [getI18nString("org_upgrade.multi_team.plan_items.shared_design_libraries"), getI18nString("org_upgrade.multi_team.plan_items.shared_fonts_and_styles"), getI18nString("org_upgrade.multi_team.plan_items.centralized_billing_and_admin_controls"), getI18nString("org_upgrade.multi_team.plan_items.single_sign_on_sso_integrations")], []);
   let _ = () => {
     a();
     t(sf({
@@ -271,7 +271,7 @@ function ea(e) {
           alt: ""
         }), jsx("div", {
           className: "org_upgrade_multi_team_modal--teamListOrgName--EKk6-",
-          children: tx("org_upgrade.multi_team.acme_inc")
+          children: renderI18nText("org_upgrade.multi_team.acme_inc")
         }), jsx(_$$B, {
           svg: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path fill="#000" fill-opacity="1" fill-rule="evenodd" stroke="none" d="M12 16.05V9h1v7.05c1.141.232 2 1.24 2 2.45 0 1.21-.859 2.218-2 2.45V23h-1v-2.05c-1.141-.232-2-1.24-2-2.45 0-1.21.859-2.218 2-2.45m2 2.45c0 .828-.672 1.5-1.5 1.5-.828 0-1.5-.672-1.5-1.5 0-.828.672-1.5 1.5-1.5.828 0 1.5.672 1.5 1.5m5 4.5h1v-7.05c1.141-.232 2-1.24 2-2.45 0-1.21-.859-2.218-2-2.45V9h-1v2.05c-1.141.232-2 1.24-2 2.45 0 1.21.859 2.218 2 2.45zm2-9.5c0-.828-.672-1.5-1.5-1.5-.828 0-1.5.672-1.5 1.5 0 .828.672 1.5 1.5 1.5.828 0 1.5-.672 1.5-1.5"/></svg>',
           className: "org_upgrade_multi_team_modal--multiTeamOrgUpgradeAdjustSvg--V4dem"
@@ -312,7 +312,7 @@ function ea(e) {
           className: _$$s2.minW16.$
         }), jsx("p", {
           className: _$$s2.textBodySmallStrong.$,
-          children: tx("org_upgrade.illustration.sign_in_with_sso")
+          children: renderI18nText("org_upgrade.illustration.sign_in_with_sso")
         }), jsx("div", {
           className: _$$s2.absolute.mt32.$,
           style: sx.add({
@@ -347,7 +347,7 @@ function ea(e) {
           style: {
             fontWeight: 600
           },
-          children: tx("org_upgrade.multi_team.bring_your_teams_together_with_the_figma_organization_plan")
+          children: renderI18nText("org_upgrade.multi_team.bring_your_teams_together_with_the_figma_organization_plan")
         }), jsx(Jn, {
           className: "org_upgrade_multi_team_modal--closeButton--x3l-2",
           onClick: a,
@@ -361,17 +361,17 @@ function ea(e) {
           className: "org_upgrade_multi_team_modal--planDetailsLeft--mBwlh",
           children: [jsx("div", {
             className: "org_upgrade_multi_team_modal--billingCadence--WBrj-",
-            children: tx("org_upgrade.multi_team.annual_billing_only")
+            children: renderI18nText("org_upgrade.multi_team.annual_billing_only")
           }), jsxs("div", {
             className: y3,
             children: [jsxs("p", {
               className: Q$,
-              children: [tx("org_upgrade.multi_team.figma"), jsx("div", {
+              children: [renderI18nText("org_upgrade.multi_team.figma"), jsx("div", {
                 className: gt,
                 children: jsx(_$$G, {})
               })]
             }), jsx("div", {
-              children: tx("org_upgrade.multi_team.billing_cost_per_month.seat_rename", {
+              children: renderI18nText("org_upgrade.multi_team.billing_cost_per_month.seat_rename", {
                 monthlyCostInDollars: jsx("span", {
                   className: G8,
                   children: P.formatMoney(B[ud.DESIGN].amount)
@@ -380,8 +380,8 @@ function ea(e) {
             })]
           }), jsxs("div", {
             className: y3,
-            children: [tx("org_upgrade.multi_team.dev_mode"), jsx("div", {
-              children: tx("org_upgrade.multi_team.billing_cost_per_month.seat_rename", {
+            children: [renderI18nText("org_upgrade.multi_team.dev_mode"), jsx("div", {
+              children: renderI18nText("org_upgrade.multi_team.billing_cost_per_month.seat_rename", {
                 monthlyCostInDollars: jsx("span", {
                   className: G8,
                   children: P.formatMoney(B[ud.DEV_MODE].amount)
@@ -390,8 +390,8 @@ function ea(e) {
             })]
           }), jsxs("div", {
             className: y3,
-            children: [tx("org_upgrade.multi_team.fig_jam"), jsx("div", {
-              children: tx("org_upgrade.multi_team.billing_cost_per_month.seat_rename", {
+            children: [renderI18nText("org_upgrade.multi_team.fig_jam"), jsx("div", {
+              children: renderI18nText("org_upgrade.multi_team.billing_cost_per_month.seat_rename", {
                 monthlyCostInDollars: jsx("span", {
                   className: A,
                   children: P.formatMoney(B[ud.FIGJAM].amount)
@@ -412,7 +412,7 @@ function ea(e) {
                   href: "https://www.figma.com/pricing/#cid-57mfNh6t0Xo7z8Q95Ww9ZV",
                   target: "_blank",
                   trusted: !0,
-                  children: tx("org_upgrade.multi_team.see_all_features")
+                  children: renderI18nText("org_upgrade.multi_team.see_all_features")
                 })
               })]
             })
@@ -433,7 +433,7 @@ function ea(e) {
           trackingDescriptor: _$$c.UPGRADE_TO_ORGANIZATION,
           upsellSource: e.upsellSource
         },
-        children: tx("org_upgrade.multi_team.continue")
+        children: renderI18nText("org_upgrade.multi_team.continue")
       }), jsx("div", {
         className: "org_upgrade_multi_team_modal--spaceFiller--f9bwU"
       })]
@@ -493,7 +493,7 @@ export let $$er0 = connect(e => {
     fallback: jsx(_$$K, {}),
     children: jsx(Suspense, {
       fallback: jsx(_$$N, {
-        hiddenTitle: tx("org_upgrade.multi_team.bring_your_teams_together_with_the_figma_organization_plan"),
+        hiddenTitle: renderI18nText("org_upgrade.multi_team.bring_your_teams_together_with_the_figma_organization_plan"),
         estimatedWidth: 500,
         estimatedHeight: 500
       }),

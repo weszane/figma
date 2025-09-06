@@ -4,10 +4,10 @@ import { CortexErrorV2, PayloadTooLargeError, ClientContentLengthLimitExceededEr
 import { l7 } from "../905/189185";
 import { fn, sH } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { ZC } from "../figma_app/39751";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { zX } from "../905/576487";
 import { _0, PI } from "../figma_app/948389";
@@ -50,30 +50,30 @@ class E extends Error {
 export let $$T2 = [b, v, E, G1, CortexErrorV2];
 export function $$w4(e, t) {
   let i = function (e) {
-    if (e instanceof b) return _$$t("slides.speaker_notes.error.switched-slides");
-    if (e instanceof C) return _$$t("slides.speaker_notes.error.switched-to-grid-view");
-    if (e instanceof v) return _$$t("slides.speaker_notes.error.add-more-content");
-    if (e instanceof E) return _$$t("slides.speaker_notes.error.unmodified_slide");
-    if (!(e instanceof G1 || e instanceof CortexErrorV2)) return _$$t("slides.speaker_notes.error.default");
-    if (e instanceof PayloadTooLargeError) return _$$t("slides.speaker_notes.error.payload_too_large");
+    if (e instanceof b) return getI18nString("slides.speaker_notes.error.switched-slides");
+    if (e instanceof C) return getI18nString("slides.speaker_notes.error.switched-to-grid-view");
+    if (e instanceof v) return getI18nString("slides.speaker_notes.error.add-more-content");
+    if (e instanceof E) return getI18nString("slides.speaker_notes.error.unmodified_slide");
+    if (!(e instanceof G1 || e instanceof CortexErrorV2)) return getI18nString("slides.speaker_notes.error.default");
+    if (e instanceof PayloadTooLargeError) return getI18nString("slides.speaker_notes.error.payload_too_large");
     let t = {
-      offline: _$$t("slides.speaker_notes.error.connection"),
-      rate_limit_exceeded: _$$t("slides.speaker_notes.error.rate_limit"),
-      text_tool_no_text: _$$t("slides.speaker_notes.error.add-more-content"),
-      content_length_limit_exceeded: _$$t("slides.speaker_notes.error.token_limit"),
-      payload_too_large: _$$t("slides.speaker_notes.error.payload_too_large"),
-      unsafe_or_harmful_content: _$$t("slides.speaker_notes.error.inappropriate_input"),
-      service_issue: _$$t("slides.speaker_notes.error.openai_down"),
-      ai_opt_out_error: _$$t("slides.speaker_notes.error.opt_out"),
-      unauthorized: _$$t("slides.speaker_notes.error.default"),
-      generic: _$$t("slides.speaker_notes.error.default"),
-      not_implemented: _$$t("ai.error.not_implemented")
+      offline: getI18nString("slides.speaker_notes.error.connection"),
+      rate_limit_exceeded: getI18nString("slides.speaker_notes.error.rate_limit"),
+      text_tool_no_text: getI18nString("slides.speaker_notes.error.add-more-content"),
+      content_length_limit_exceeded: getI18nString("slides.speaker_notes.error.token_limit"),
+      payload_too_large: getI18nString("slides.speaker_notes.error.payload_too_large"),
+      unsafe_or_harmful_content: getI18nString("slides.speaker_notes.error.inappropriate_input"),
+      service_issue: getI18nString("slides.speaker_notes.error.openai_down"),
+      ai_opt_out_error: getI18nString("slides.speaker_notes.error.opt_out"),
+      unauthorized: getI18nString("slides.speaker_notes.error.default"),
+      generic: getI18nString("slides.speaker_notes.error.default"),
+      not_implemented: getI18nString("ai.error.not_implemented")
     };
     if (_0(e)) {
       let t = PI(e);
-      return t ? _$$t("slides.speaker_notes.error.meter_limit", {
+      return t ? getI18nString("slides.speaker_notes.error.meter_limit", {
         resetDate: t
-      }) : _$$t("slides.speaker_notes.error.rate_limit");
+      }) : getI18nString("slides.speaker_notes.error.rate_limit");
     }
     return t[function (e) {
       if (e instanceof CortexErrorV2) {
@@ -104,7 +104,7 @@ export function $$w4(e, t) {
           }
       }
       return "generic";
-    }(e)] || _$$t("slides.speaker_notes.error.default");
+    }(e)] || getI18nString("slides.speaker_notes.error.default");
   }(e);
   let r = function (e) {
     switch (e.type) {
@@ -128,7 +128,7 @@ export function $$w4(e, t) {
     message: i,
     type: "speaker-notes-visual-bell",
     button: r && t ? {
-      text: _$$t("slides.speaker_notes.draft_again"),
+      text: getI18nString("slides.speaker_notes.draft_again"),
       action: () => t()
     } : void 0,
     onDismiss: () => {}
@@ -152,7 +152,7 @@ export function $$I3(e, t) {
 function k(e, t) {
   cT(JT.SLIDES_GENERATE_SPEAKER_NOTES);
   $$w4(e);
-  let i = zl.get(TD);
+  let i = atomStoreManager.get(TD);
   if (t && i) {
     let e = JSON.stringify(i.toJSON());
     l7.ai("generate-slide-speaker-notes", () => {

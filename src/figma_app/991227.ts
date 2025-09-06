@@ -5,7 +5,7 @@ import { NLJ } from "../figma_app/763686";
 import { parsePxInt } from "../figma_app/783094";
 import { buildUploadUrl } from "../figma_app/169182";
 import { oW } from "../905/675859";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { x } from "../figma_app/943271";
 import { K } from "../figma_app/824081";
 import { A } from "../905/638715";
@@ -58,13 +58,13 @@ export function $$T2(e) {
 let I = e => {
   switch (e) {
     case NLJ.SELECT:
-      return t("fake_cursor.select_cursor");
+      return getI18nString("fake_cursor.select_cursor");
     case NLJ.HAND:
-      return t("fake_cursor.hand_cursor");
+      return getI18nString("fake_cursor.hand_cursor");
     case NLJ.DROPPER_COLOR:
-      return t("fake_cursor.eyedropper_cursor");
+      return getI18nString("fake_cursor.eyedropper_cursor");
     default:
-      return t("fake_cursor.cursor");
+      return getI18nString("fake_cursor.cursor");
   }
 };
 export function $$S3({

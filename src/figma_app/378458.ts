@@ -9,12 +9,12 @@ import { getFeatureFlags } from "../905/601108";
 import u from "classnames";
 import { _ as _$$_ } from "../905/569825";
 import { am } from "../figma_app/901889";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { Uz } from "../905/63728";
 import { Pt } from "../figma_app/806412";
 import { wv } from "../figma_app/236327";
 import { L as _$$L } from "../figma_app/942671";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { _I } from "../figma_app/473493";
 import { oB } from "../905/929976";
 import { E3 } from "../figma_app/976749";
@@ -27,7 +27,7 @@ import { RF, oQ, DH } from "../figma_app/701001";
 import { Zr } from "../figma_app/678782";
 import { BK } from "../905/848862";
 import { J2 } from "../figma_app/84367";
-import { nT, oD } from "../figma_app/53721";
+import { FEditorType, mapEditorTypeToFileType } from "../figma_app/53721";
 import { Ib } from "../905/129884";
 import { c1 } from "../figma_app/357047";
 import { q } from "../figma_app/57000";
@@ -53,20 +53,20 @@ function z({
   let p = J2(_$$d().activeCanvasCurrentZoom);
   let _ = J2(UK().activeCanvasPixelPreview);
   let g = J2(_$$d().activeCanvasRetinaMode);
-  let f = _$$R(e => e.mirror.appModel.keyboardShortcuts);
+  let f = selectWithShallowEqual(e => e.mirror.appModel.keyboardShortcuts);
   let E = useSelector(e => !e.mirror.appModel.isReadOnly);
   let y = useSelector(e => !!e.user);
   let b = useSelector(e => $A(e.selectedView));
   let I = _I();
   let v = XR();
   let R = J2(Ez5.uiState().filterAnnotationCategoryId);
-  let D = u === nT.Design;
-  let M = u === nT.Slides;
-  let U = u === nT.Sites;
-  let B = u === nT.Figmake;
-  let H = u === nT.Illustration;
-  let z = "design" === oD(u);
-  let K = "whiteboard" === oD(u);
+  let D = u === FEditorType.Design;
+  let M = u === FEditorType.Slides;
+  let U = u === FEditorType.Sites;
+  let B = u === FEditorType.Figmake;
+  let H = u === FEditorType.Illustration;
+  let z = "design" === mapEditorTypeToFileType(u);
+  let K = "whiteboard" === mapEditorTypeToFileType(u);
   let Y = useSelector(e => e.mirror.appModel.prototypeCanvasUiVisible);
   let $ = J2(Ez5.editorPreferences().showPropertyLabels);
   let X = J2(Ez5.editorPreferences().showFrameGrids);
@@ -419,38 +419,38 @@ export function $$W1({
   let h = useSelector(e => $A(e.selectedView));
   let m = XR();
   let y = useMemo(() => ({
-    ZOOM_IN: _$$t("fullscreen_actions.zoom-in"),
-    ZOOM_OUT: _$$t("fullscreen_actions.zoom-out"),
-    ZOOM_TO_FIT: _$$t("fullscreen_actions.zoom-to-fit"),
-    ZOOM_TO_50: _$$t("fullscreen.toolbar.zoom_menu.zoom_to_50"),
-    ZOOM_TO_100: _$$t("fullscreen_actions.zoom-reset"),
-    ZOOM_TO_200: _$$t("fullscreen.toolbar.zoom_menu.zoom_to_200"),
-    PIXEL_PREVIEW: _$$t("fullscreen.toolbar.zoom_menu.pixel_preview"),
-    PIXEL_GRID: _$$t("fullscreen_actions.toggle-grid"),
-    SNAP_TO_PIXEL_GRID: _$$t("fullscreen_actions.toggle-snapping-to-pixels"),
-    PROTOTYPING: _$$t("fullscreen_actions.toggle-prototyping-information"),
-    SNAP_TO_DOT_GRID: _$$t("fullscreen_actions.toggle-snapping-to-dots"),
-    DOT_GRID: _$$t("fullscreen_actions.toggle-show-dot-grid"),
-    LAYOUT_GRIDS: _$$t("fullscreen_actions.toggle-shown-layout-guides"),
-    MULTIPLAYER_CURSORS: _$$t("fullscreen_actions.toggle-multiplayer-cursors"),
-    PROPERTY_LABELS: _$$t("fullscreen_actions.toggle-show-property-labels"),
-    RULERS: _$$t("fullscreen_actions.toggle-rulers"),
-    SLICES: _$$t("fullscreen_actions.toggle-show-slices"),
-    COMMENTS: _$$t("fullscreen_actions.toggle-show-comments"),
-    SHOW_ANNOTATIONS: !(getFeatureFlags().dt_annotations_always_expand && !h) && m.length > 0 ? _$$t("fullscreen_actions.toggle-show-annotations-v2") : _$$t("fullscreen_actions.toggle-show-annotations"),
-    ALWAYS_EXPAND_ANNOTATIONS: _$$t("fullscreen_actions.toggle-always-expand-annotations"),
-    ANNOTATIONS_MENU: _$$t("fullscreen_actions.annotations-menu"),
-    SHOW_ALL_ANNOTATION_CATEGORIES: _$$t("fullscreen_actions.show-all-annotation-categories"),
+    ZOOM_IN: getI18nString("fullscreen_actions.zoom-in"),
+    ZOOM_OUT: getI18nString("fullscreen_actions.zoom-out"),
+    ZOOM_TO_FIT: getI18nString("fullscreen_actions.zoom-to-fit"),
+    ZOOM_TO_50: getI18nString("fullscreen.toolbar.zoom_menu.zoom_to_50"),
+    ZOOM_TO_100: getI18nString("fullscreen_actions.zoom-reset"),
+    ZOOM_TO_200: getI18nString("fullscreen.toolbar.zoom_menu.zoom_to_200"),
+    PIXEL_PREVIEW: getI18nString("fullscreen.toolbar.zoom_menu.pixel_preview"),
+    PIXEL_GRID: getI18nString("fullscreen_actions.toggle-grid"),
+    SNAP_TO_PIXEL_GRID: getI18nString("fullscreen_actions.toggle-snapping-to-pixels"),
+    PROTOTYPING: getI18nString("fullscreen_actions.toggle-prototyping-information"),
+    SNAP_TO_DOT_GRID: getI18nString("fullscreen_actions.toggle-snapping-to-dots"),
+    DOT_GRID: getI18nString("fullscreen_actions.toggle-show-dot-grid"),
+    LAYOUT_GRIDS: getI18nString("fullscreen_actions.toggle-shown-layout-guides"),
+    MULTIPLAYER_CURSORS: getI18nString("fullscreen_actions.toggle-multiplayer-cursors"),
+    PROPERTY_LABELS: getI18nString("fullscreen_actions.toggle-show-property-labels"),
+    RULERS: getI18nString("fullscreen_actions.toggle-rulers"),
+    SLICES: getI18nString("fullscreen_actions.toggle-show-slices"),
+    COMMENTS: getI18nString("fullscreen_actions.toggle-show-comments"),
+    SHOW_ANNOTATIONS: !(getFeatureFlags().dt_annotations_always_expand && !h) && m.length > 0 ? getI18nString("fullscreen_actions.toggle-show-annotations-v2") : getI18nString("fullscreen_actions.toggle-show-annotations"),
+    ALWAYS_EXPAND_ANNOTATIONS: getI18nString("fullscreen_actions.toggle-always-expand-annotations"),
+    ANNOTATIONS_MENU: getI18nString("fullscreen_actions.annotations-menu"),
+    SHOW_ALL_ANNOTATION_CATEGORIES: getI18nString("fullscreen_actions.show-all-annotation-categories"),
     SHOW_ANNOTATION_CATEGORY: "",
-    OUTLINES: _$$t("fullscreen_actions.toggle-outlines"),
-    OUTLINES_MENU: _$$t("fullscreen_actions.outlines-menu"),
-    OUTLINES_HIDDEN_LAYERS: _$$t("fullscreen_actions.outline-mode-hidden-layers"),
-    OUTLINES_OBJECT_BOUNDS: _$$t("fullscreen_actions.outline-mode-object-bounds"),
-    PIXEL_PREVIEW_DISABLED: _$$t("fullscreen.toolbar.zoom_menu.pixel_preview_disabled"),
-    PIXEL_PREVIEW_1X: _$$t("fullscreen.toolbar.zoom_menu.pixel_preview_1x"),
-    PIXEL_PREVIEW_2X: _$$t("fullscreen.toolbar.zoom_menu.pixel_preview_2x"),
-    SINGLE_PROPERTIES_PANEL: _$$t("fullscreen_actions.single-properties-panel"),
-    SITES_SEMANTIC_LABELS: _$$t("fullscreen_actions.toggle-show-semantic-tags-on-layer-rows")
+    OUTLINES: getI18nString("fullscreen_actions.toggle-outlines"),
+    OUTLINES_MENU: getI18nString("fullscreen_actions.outlines-menu"),
+    OUTLINES_HIDDEN_LAYERS: getI18nString("fullscreen_actions.outline-mode-hidden-layers"),
+    OUTLINES_OBJECT_BOUNDS: getI18nString("fullscreen_actions.outline-mode-object-bounds"),
+    PIXEL_PREVIEW_DISABLED: getI18nString("fullscreen.toolbar.zoom_menu.pixel_preview_disabled"),
+    PIXEL_PREVIEW_1X: getI18nString("fullscreen.toolbar.zoom_menu.pixel_preview_1x"),
+    PIXEL_PREVIEW_2X: getI18nString("fullscreen.toolbar.zoom_menu.pixel_preview_2x"),
+    SINGLE_PROPERTIES_PANEL: getI18nString("fullscreen_actions.single-properties-panel"),
+    SITES_SEMANTIC_LABELS: getI18nString("fullscreen_actions.toggle-show-semantic-tags-on-layer-rows")
   }), [h, m.length]);
   let T = useMemo(() => {
     let e = t => {
@@ -509,7 +509,7 @@ export function $$W1({
       children: jsx(_$$A, {
         className: hF,
         inputId: "zoom-input-menu",
-        hiddenLabelText: _$$t("fullscreen.zoom_menu.zoom_view_options"),
+        hiddenLabelText: getI18nString("fullscreen.zoom_menu.zoom_view_options"),
         placeholderValue: `${Math.round(o)}%`,
         cancel: e => {
           e && e.blur();
@@ -587,11 +587,11 @@ export let $$K0 = memo(function ({
         "aria-controls": $$H,
         "aria-expanded": a.showing,
         "aria-haspopup": "menu",
-        ariaLabel: _$$t("fullscreen.zoom_menu.zoom_view_options.aria_label", {
+        ariaLabel: getI18nString("fullscreen.zoom_menu.zoom_view_options.aria_label", {
           zoomPercentage: Math.round(r)
         }),
         className: g,
-        "data-tooltip": _$$t("fullscreen.zoom_menu.zoom_view_options"),
+        "data-tooltip": getI18nString("fullscreen.zoom_menu.zoom_view_options"),
         "data-tooltip-type": Ib.TEXT,
         enabled: !0,
         isUI3: !0,

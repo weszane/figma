@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { tW, W5, zy, B6 } from "../vendor/130505";
 import { Ay } from "../905/612521";
 import { serializeQuery } from "../905/634134";
-import { us } from "../905/11";
+import { captureMessage } from "../905/11";
 import { iY, p_ } from "../figma_app/598412";
 export function $$d0(e) {}
 export class $$c8 {
@@ -73,7 +73,7 @@ export function $$u4(e) {
 function p(e) {
   W5("localizedPaths" in e ? e.localizedPaths : e.path) || function (e) {
     let t = `Current location does not match the provided CommunityRoute: ${e.displayName ?? e.constructor.name}`;
-    us(t);
+    captureMessage(t);
     console.warn(t, "This could indicate a bug in the route definition or usage.");
   }(e);
 }

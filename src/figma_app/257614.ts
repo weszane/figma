@@ -1,8 +1,8 @@
-import { eU, Iz } from "../figma_app/27355";
+import { atom, createRemovableAtomFamily } from "../figma_app/27355";
 import { C } from "../905/887158";
 import { IZ } from "../figma_app/99772";
 import { pZ, a7, QR, y6 } from "../figma_app/620124";
-let $$o2 = eU(e => {
+let $$o2 = atom(e => {
   let t = e(IZ);
   let r = {};
   let n = 0;
@@ -70,7 +70,7 @@ let $$o2 = eU(e => {
     violationCount: n
   };
 });
-let l = Iz(e => eU(t => {
+let l = createRemovableAtomFamily(e => atom(t => {
   let {
     suggestionBlocks
   } = t($$o2);
@@ -95,7 +95,7 @@ let $$u0 = l([pZ.TEXT_STYLE]);
 let $$p5 = l([pZ.TEXT_BACKGROUND_CONTRAST_AA]);
 let $$_1 = l([pZ.ASSETS_OUTSIDE_SELECTED_LIBRARIES]);
 let $$h7 = l([pZ.EXTENSIBILITY_RULE]);
-let $$m4 = eU(!1);
+let $$m4 = atom(!1);
 export const GM = $$u0;
 export const LG = $$_1;
 export const QU = $$o2;

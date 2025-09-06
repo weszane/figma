@@ -5,10 +5,10 @@ import { throwTypeError } from "../figma_app/465776";
 import { B } from "../905/872019";
 import { _ as _$$_ } from "../905/862468";
 import { X3B, FAf, uQ6 } from "../figma_app/763686";
-import { Xr, md } from "../figma_app/27355";
+import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { Uz, xH } from "../905/63728";
-import { tx, t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { Tv } from "../figma_app/311375";
 import { Y5 } from "../figma_app/455680";
 import { Ay } from "../905/281495";
@@ -61,7 +61,7 @@ function j() {
   }, [state]);
   let T = Xr(d_);
   let C = Xr(pD);
-  let w = md(pD);
+  let w = useAtomWithSubscription(pD);
   let {
     selectedDisplayAmount,
     tlfAmount,
@@ -72,9 +72,9 @@ function j() {
   switch (useEffect(() => {
     if (state === qy.RUNNING && G) {
       tJ(topLevelFrameIds);
-      C(tx("magic_link.running_and_selecting_top_level_frames"));
+      C(renderI18nText("magic_link.running_and_selecting_top_level_frames"));
       let e = setTimeout(() => {
-        C(tx("magic_link.running"));
+        C(renderI18nText("magic_link.running"));
       }, 1e3);
       return () => clearTimeout(e);
     }
@@ -83,7 +83,7 @@ function j() {
       return jsx(_$$A2, {
         action: JT.MAGIC_LINK,
         actionIcon: jsx(B, {}),
-        actionLabel: tx("fullscreen_actions.quick_actions.add-interactions-v2"),
+        actionLabel: renderI18nText("fullscreen_actions.quick_actions.add-interactions-v2"),
         onPerform: () => {
           g.current = null;
           start({});
@@ -91,7 +91,7 @@ function j() {
         getCustomDisabledTextFromSelectedNodes: t => {
           let r;
           let n;
-          tlfAmount > 10 && (r = tx("magic_link.tlf_selection_too_large"), n = "Select 10 or fewer frames");
+          tlfAmount > 10 && (r = renderI18nText("magic_link.tlf_selection_too_large"), n = "Select 10 or fewer frames");
           n && e(Zh({
             name: "prototype.ai_magic_link_action_instruction",
             params: {
@@ -108,7 +108,7 @@ function j() {
           type: "learn_more",
           url: Xy
         },
-        children: tx("magic_link.select_a_few_top_level_frames")
+        children: renderI18nText("magic_link.select_a_few_top_level_frames")
       });
     case qy.RUNNING:
       T(!1);
@@ -144,7 +144,7 @@ function j() {
           }
         }));
         return jsx(_$$u, {
-          children: tx("magic_link.no_interactions_generated_general")
+          children: renderI18nText("magic_link.no_interactions_generated_general")
         });
       }
       if (t.error instanceof _U) {
@@ -155,7 +155,7 @@ function j() {
           }
         }));
         return jsx(_$$u, {
-          children: tx("magic_link.no_interactions_generated_existing_interactions")
+          children: renderI18nText("magic_link.no_interactions_generated_existing_interactions")
         });
       }
       return jsx(_$$E, {
@@ -173,7 +173,7 @@ function U() {
   let e = Tv();
   return jsx(_$$u, {
     buttons: [{
-      label: t("fullscreen.context_menu.auto_rename_layers"),
+      label: getI18nString("fullscreen.context_menu.auto_rename_layers"),
       onClick: () => {
         $I({
           moduleToOpen: {
@@ -202,7 +202,7 @@ function U() {
         modifier: [xH.META]
       }]
     }],
-    children: tx(1 === e.length ? "magic_link.rename_layer_suggestion" : "magic_link.rename_layers_suggestion")
+    children: renderI18nText(1 === e.length ? "magic_link.rename_layer_suggestion" : "magic_link.rename_layers_suggestion")
   });
 }
 export function $$B0(e) {

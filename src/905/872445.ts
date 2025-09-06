@@ -1,12 +1,12 @@
 import { jsx } from "react/jsx-runtime";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { ex } from "../905/524523";
 import { fj } from "../905/736956";
 export let $$o0 = ex("permissions_modal_seat_status", function () {
   return jsx("div", {
     className: fj,
     children: jsx("p", {
-      children: tx("folder_permissions_modal.restricted_warning.admin_needs_to_update_this_seat")
+      children: renderI18nText("folder_permissions_modal.restricted_warning.admin_needs_to_update_this_seat")
     })
   });
 }, e => ({

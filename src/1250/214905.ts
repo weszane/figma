@@ -5,8 +5,8 @@ import { K } from "../905/443068";
 import { e as _$$e } from "../905/149844";
 import { xk } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
-import { o as _$$o, p as _$$p } from "../figma_app/516794";
-import { t as _$$t } from "../905/303541";
+import { createEventEmitter, useEventSubscription } from "../figma_app/516794";
+import { getI18nString } from "../905/303541";
 import { Q } from "../1250/227834";
 import { l as _$$l } from "../1250/135829";
 import { f as _$$f } from "../figma_app/859253";
@@ -15,8 +15,8 @@ if (443 == require.j) {}
 if (443 == require.j) {}
 if (443 == require.j) {}
 if (443 == require.j) {}
-let f = _$$o();
-let h = _$$o();
+let f = createEventEmitter();
+let h = createEventEmitter();
 export function $$b2() {
   f.emit();
 }
@@ -33,8 +33,8 @@ export function $$y0({
   } = b({
     config2025CuratorHacks: getFeatureFlags().fpl_menu_under_curator
   });
-  _$$p(f, useCallback(() => manager.setOpen(!0), [manager]));
-  _$$p(h, useCallback(() => manager.setOpen(!1), [manager]));
+  useEventSubscription(f, useCallback(() => manager.setOpen(!0), [manager]));
+  useEventSubscription(h, useCallback(() => manager.setOpen(!1), [manager]));
   let x = Q({
     newFileFrom: f6.FILE_BROWSER_SIDEBAR_DRAFTS,
     folderId: e,
@@ -46,10 +46,10 @@ export function $$y0({
       manager,
       children: [jsx(K, {
         htmlAttributes: {
-          "data-tooltip": _$$t("sidebar.new_file"),
+          "data-tooltip": getI18nString("sidebar.new_file"),
           "data-onboarding-key": "new-file-icon"
         },
-        "aria-label": _$$t("sidebar.new_file"),
+        "aria-label": getI18nString("sidebar.new_file"),
         ...getTriggerProps(),
         children: jsx(_$$e, {})
       }), jsx(_$$f, {

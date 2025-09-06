@@ -1,4 +1,4 @@
-import { t_, eU, zl, Xr, md, fp } from "../figma_app/27355";
+import { t_, atom, atomStoreManager, Xr, useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { YQ } from "../905/502364";
 import { a as _$$a, D as _$$D2 } from "../905/12032";
@@ -8,7 +8,7 @@ import { y as _$$y, t as _$$t } from "../905/958284";
 import { OC, yF, AN } from "../figma_app/386952";
 import { NT } from "../figma_app/579169";
 import { Fu } from "../figma_app/545877";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { _ as _$$_ } from "../905/170564";
 import { m as _$$m } from "../905/92222";
 import { E1 } from "../905/696065";
@@ -27,28 +27,28 @@ import { ServiceCategories as _$$e2 } from "../905/165054";
 import { wm } from "../905/19536";
 import { resourceUtils } from "../905/989992";
 import G from "../vendor/575087";
-import { sn } from "../905/542194";
+import { globalPerfTimer } from "../905/542194";
 import { y as _$$y2 } from "../figma_app/608914";
 import { h as _$$h2 } from "../905/207101";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { X as _$$X } from "../figma_app/916469";
 import { eC, $1, _Z, Gx } from "../905/539601";
 import { C5 } from "../905/147383";
 import { R as _$$R } from "../905/994802";
 import { E as _$$E } from "../905/453826";
 let l = t_(() => new Z3());
-let _ = new _$$m("PreventModalCollisions", "A rule that prevents overlays from being shown while a modal is displayed", (e, t) => !e.uiState.modalShownType || (t.attributes.allowShowingIfModalPresent ? (sx("curator_collision", {
+let _ = new _$$m("PreventModalCollisions", "A rule that prevents overlays from being shown while a modal is displayed", (e, t) => !e.uiState.modalShownType || (t.attributes.allowShowingIfModalPresent ? (trackEventAnalytics("curator_collision", {
   blocked_overlay_id: _$$y(t.id),
   blocking_modal_type: e.uiState.modalShownType,
   was_allowlisted: !0
-}), !0) : (sx("curator_collision", {
+}), !0) : (trackEventAnalytics("curator_collision", {
   blocked_overlay_id: _$$y(t.id),
   blocking_modal_type: e.uiState.modalShownType
 }), !1)));
 let A = new _$$m("PreventNotificationCollisions", "A rule that prevents overlays from being shown while a notification is displayed", (e, t) => {
   if (null === e.uiState.currentNotificationType) return !0;
   let i = _$$_[e.uiState.currentNotificationType];
-  sx("curator_collision", {
+  trackEventAnalytics("curator_collision", {
     blocked_overlay_id: _$$y(t.id),
     blocking_notif_type: i
   });
@@ -80,7 +80,7 @@ let R = new _$$m("DenyInKillSwitch", "Don't show any overlays that belong to the
   let n = getLaunchDarklyFlagsExport().curator_disallow_overlay_rule;
   return !n || !(n instanceof Array) || !n.includes(i);
 });
-let O = eU(e => {
+let O = atom(e => {
   let t = e(OC);
   let i = e(yF);
   let n = e(AN);
@@ -107,13 +107,13 @@ class D {
     this.queuedExperiences = [];
   }
   getContext() {
-    return zl.get(O);
+    return atomStoreManager.get(O);
   }
   getRules() {
     return [R, k, _$$h, E, b, RI, T, _, A];
   }
 }
-let L = eU(() => new Oi({
+let L = atom(() => new Oi({
   [FQ.Overlay]: new D()
 }));
 window.Curator = {
@@ -121,20 +121,20 @@ window.Curator = {
   enableDebugLogging: () => _$$L("debug"),
   disableLogging: () => _$$L("disabled"),
   getMountedOverlays: function () {
-    return zl.get(_$$a);
+    return atomStoreManager.get(_$$a);
   },
   sendEvent: function (e) {
     YQ(e);
     return !0;
   },
   getExperienceSelectorChannels: function () {
-    return zl.get(L).getImmutableChannels();
+    return atomStoreManager.get(L).getImmutableChannels();
   },
   getLoadingOverlays: function () {
-    return zl.get(l).getImmutableLoadingOverlays();
+    return atomStoreManager.get(l).getImmutableLoadingOverlays();
   },
   getOverlaysBlockedByDataDependencies: function () {
-    return zl.get(l).getImmutableQueuedOverlays();
+    return atomStoreManager.get(l).getImmutableQueuedOverlays();
   },
   resetUserFlags: function (e) {
     let t = e.reduce((e, t) => ({
@@ -150,7 +150,7 @@ window.Curator = {
 var z = G;
 let Q = /__[0-9A-Za-z\-]+$/;
 var ee = (e => (e.Deactivated = "deactivated", e.Unmounted = "unmounted", e.GlobalRequestClose = "global_request_close", e))(ee || {});
-let et = eU(!1);
+let et = atom(!1);
 function ei(e) {
   return "hasData" === e.state ? resourceUtils.loaded(e.data) : "hasError" === e.state ? resourceUtils.error(e.error) : resourceUtils.loading();
 }
@@ -171,7 +171,7 @@ export function $$es0({
     return useMemo(() => {
       if (!i) return t;
       let r = i.priorityMap.get(e);
-      return r ? getFeatureFlags().curator_file_browser_ordering ? r : t : (!n.current && getFeatureFlags().curator_file_browser_ordering && ($D(_$$e2.GROWTH_PLATFORM, Error("[Curator] Overlay not registered with gallery"), {
+      return r ? getFeatureFlags().curator_file_browser_ordering ? r : t : (!n.current && getFeatureFlags().curator_file_browser_ordering && (reportError(_$$e2.GROWTH_PLATFORM, Error("[Curator] Overlay not registered with gallery"), {
         tags: {
           overlayId: e,
           galleryName: i.name
@@ -180,13 +180,13 @@ export function $$es0({
     }, [e, i, t]);
   }(r, t.priority);
   let p = Xr(_$$D2);
-  let m = md(l);
-  let g = md(L);
+  let m = useAtomWithSubscription(l);
+  let g = useAtomWithSubscription(L);
   let f = Xr(_$$a);
-  let _ = md(eC(e.lifecycle));
+  let _ = useAtomWithSubscription(eC(e.lifecycle));
   let A = useRef(_);
   A.current = _;
-  let [y, b] = fp(et);
+  let [y, b] = useAtomValueAndSetter(et);
   let [v, I] = useState(!1);
   let E = useRef(v);
   E.current = v;
@@ -203,7 +203,7 @@ export function $$es0({
       }
       let n = useCallback((t, i) => {
         isDevEnvironment() && console.error(i);
-        sx("curator_dependency_error", {
+        trackEventAnalytics("curator_dependency_error", {
           errorType: t,
           overlay: e
         }, {
@@ -229,7 +229,7 @@ export function $$es0({
     let [a, s] = useState(!1);
     useEffect(() => {
       let e = setTimeout(() => {
-        "loading" === r.status && (s(!0), sx("curator_dependencies_timed_out", {
+        "loading" === r.status && (s(!0), trackEventAnalytics("curator_dependencies_timed_out", {
           overlay: i
         }, {
           forwardToDatadog: !0
@@ -255,7 +255,7 @@ export function $$es0({
     k(t);
     let i = experiment.predicate(t);
     let n = !1;
-    if ("loaded" === C.current.status ? n = experiment.postCheck(...ed(C.current.data)) : "loading" === C.current.status && $D(_$$e2.GROWTH_PLATFORM, Error("[Curator] Experiment postCheck unexpectedly did not have loaded data dependencies"), {
+    if ("loaded" === C.current.status ? n = experiment.postCheck(...ed(C.current.data)) : "loading" === C.current.status && reportError(_$$e2.GROWTH_PLATFORM, Error("[Curator] Experiment postCheck unexpectedly did not have loaded data dependencies"), {
       tags: {
         overlayId: r,
         dependencyStatus: C.current.status
@@ -285,7 +285,7 @@ export function $$es0({
   }, () => {
     if (null != e.lifecycle) {
       if ("loaded" !== A.current.status) {
-        $D(_$$e2.GROWTH_PLATFORM, Error("[Curator] Lifecycle postCheck unexpectedly did not have loaded data dependencies"), {
+        reportError(_$$e2.GROWTH_PLATFORM, Error("[Curator] Lifecycle postCheck unexpectedly did not have loaded data dependencies"), {
           tags: {
             overlayId: r,
             dependencyStatus: C.current.status
@@ -301,13 +301,13 @@ export function $$es0({
   }]);
   let O = function (e, t, i) {
     let n = useRef(0);
-    useLayoutEffect(() => (sn.start(el, {
+    useLayoutEffect(() => (globalPerfTimer.start(el, {
       key: t
     }), () => {
-      sn.$$delete(el, t);
+      globalPerfTimer.$$delete(el, t);
     }), []);
     useLayoutEffect(() => {
-      "loaded" === i ? n.current = sn.tryStop(el, t) ?? 0 : ("errors" === i || "disabled" === i) && sn.$$delete(el, t);
+      "loaded" === i ? n.current = globalPerfTimer.tryStop(el, t) ?? 0 : ("errors" === i || "disabled" === i) && globalPerfTimer.$$delete(el, t);
     }, [i, e, t]);
     return n;
   }(r, a, w.status);
@@ -330,7 +330,7 @@ export function $$es0({
         var i;
         let n = (performance.now() - S.current) / 1e3;
         i = t ?? null;
-        sx("curator_content_hidden", {
+        trackEventAnalytics("curator_content_hidden", {
           overlay_id: r,
           timeShownSec: n,
           completeReason: e,
@@ -390,7 +390,7 @@ export function $$es0({
         I(!0);
         e.lifecycle && _Z(e.lifecycle);
         t?.onShow?.();
-        sx("curator_content_shown", {
+        trackEventAnalytics("curator_content_shown", {
           shown: r,
           overlay_id: r
         }, {
@@ -405,8 +405,8 @@ export function $$es0({
         }, "debug");
         S.current = performance.now();
         p(r);
-        let n = sn.tryStop(er, a);
-        n && (sx(er, {
+        let n = globalPerfTimer.tryStop(er, a);
+        n && (trackEventAnalytics(er, {
           totalShowMs: n,
           dependenciesLoadingMs: O.current,
           queuedMs: D.current,
@@ -434,7 +434,7 @@ export function $$es0({
             }, "debug");
             let s = i.blocker.id.replace(Q, "");
             t?.onBlocked?.(s);
-            sx("curator_content_blocked", {
+            trackEventAnalytics("curator_content_blocked", {
               blocked: r,
               blocking: s,
               overlay_id: r,
@@ -444,7 +444,7 @@ export function $$es0({
             }, {
               forwardToDatadog: !0
             });
-            sn.$$delete(er, a);
+            globalPerfTimer.$$delete(er, a);
             break;
           case oE.ExperimentCheckFail:
             break;
@@ -483,7 +483,7 @@ export function $$es0({
   }, [e.queueOnBlock, e.allowShowingIfModalPresent, e.lifecycle, O, g, u, P, r, p, a]);
   let eu = useCallback(e => {
     if (E.current) return;
-    sn.start(er, {
+    globalPerfTimer.start(er, {
       key: a
     });
     _$$R({
@@ -512,7 +512,7 @@ export function $$es0({
             errors: i.errors
           }
         }, "debug");
-        sn.$$delete(er, a);
+        globalPerfTimer.$$delete(er, a);
         return;
       }
       if ("disabled" === i.status) {
@@ -524,7 +524,7 @@ export function $$es0({
             overlayId: a
           }
         }, "debug");
-        sn.$$delete(er, a);
+        globalPerfTimer.$$delete(er, a);
         return;
       }
       if ("loaded" === i.status) {
@@ -545,7 +545,7 @@ export function $$es0({
               dataDependencies: i.data
             }
           }, "debug");
-          sn.$$delete(er, a);
+          globalPerfTimer.$$delete(er, a);
           return;
         }
         m.showOverlay(t.id, t => {

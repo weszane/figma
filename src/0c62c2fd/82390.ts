@@ -25,7 +25,7 @@ import { L as _$$L } from '../0c62c2fd/860164';
 import { w as _$$w6 } from '../0c62c2fd/912149';
 import { a as _$$a1, R as _$$R7 } from '../0c62c2fd/950366';
 import { I as _$$I, SidebarRow } from '../451de8f0/94979';
-import { $D, DZ } from '../905/11';
+import { reportError, SeverityLevel } from '../905/11';
 import { F as _$$F7 } from '../905/224';
 import { O as _$$O7 } from '../905/6519';
 import { R as _$$R5 } from '../905/11928';
@@ -61,7 +61,7 @@ import { k as _$$k6 } from '../905/93362';
 import { c5 as _$$c6 } from '../905/93909';
 import { W as _$$W } from '../905/95038';
 import { Ju, ZU } from '../905/102752';
-import { R as _$$R6 } from '../905/103090';
+import { selectWithShallowEqual } from '../905/103090';
 import { U as _$$U4 } from '../905/103637';
 import { J as _$$J } from '../905/125993';
 import { F as _$$F3 } from '../905/126561';
@@ -95,25 +95,25 @@ import { V as _$$V4 } from '../905/223767';
 import { AE, Nn } from '../905/225144';
 import { C as _$$C2 } from '../905/226458';
 import { Z as _$$Z3 } from '../905/236383';
-import { fm as _$$fm } from '../905/236856';
+import { delay } from '../905/236856';
 import { C as _$$C3 } from '../905/237873';
 import { z as _$$z7 } from '../905/239603';
 import { F as _$$F6, p as _$$p6 } from '../905/241044';
 import { l as _$$l3 } from '../905/241412';
-import { O as _$$O } from '../905/247093';
+import { UNASSIGNED } from '../905/247093';
 import { A as _$$A } from '../905/251970';
 import { R as _$$R8 } from '../905/256203';
 import { _ as _$$_9 } from '../905/263184';
 import { h as _$$h9 } from '../905/270045';
 import { Cj } from '../905/270084';
-import { bt as _$$bt } from '../905/270322';
+import { createReduxSubscriptionAtomWithState } from '../905/270322';
 import { Tf } from '../905/280919';
 import { G as _$$G3 } from '../905/289770';
 import { $ as _$$$5 } from '../905/293658';
 import { e as _$$e6 } from '../905/295932';
 import { $ as _$$$8 } from '../905/302575';
 import { F as _$$F } from '../905/302958';
-import { t as _$$t, tx as _$$tx, Yd } from '../905/303541';
+import { getI18nString, renderI18nText, getTranslatedDynamicContent } from '../905/303541';
 import { R as _$$R0 } from '../905/304671';
 import { T as _$$T2, v as _$$v2 } from '../905/309844';
 import { C as _$$C5 } from '../905/314082';
@@ -123,7 +123,7 @@ import { y8 } from '../905/327522';
 import { N_ as _$$N_ } from '../905/332483';
 import { a as _$$a12 } from '../905/332662';
 import { S as _$$S8 } from '../905/335273';
-import { P as _$$P6 } from '../905/338617';
+import { selectTeams } from '../905/338617';
 import { J as _$$J5 } from '../905/341359';
 import { wR } from '../905/346715';
 import { Y as _$$Y8 } from '../905/347011';
@@ -133,14 +133,14 @@ import { A as _$$A10 } from '../905/351112';
 import { rq as _$$rq2 } from '../905/351260';
 import { z as _$$z6 } from '../905/353894';
 import { V as _$$V6 } from '../905/355181';
-import { $ as _$$$ } from '../905/361972';
+import { LogLevelStr } from '../905/361972';
 import { Yg } from '../905/362959';
 import { Q as _$$Q2 } from '../905/363675';
 import { c as _$$c3 } from '../905/370443';
 import { iZ as _$$iZ, Pc, TA } from '../905/372672';
 import { S as _$$S1 } from '../905/373189';
 import { $ as _$$$4 } from '../905/379902';
-import { D as _$$D2 } from '../905/384551';
+import { FRequestsStr } from '../905/384551';
 import { b as _$$b7 } from '../905/388233';
 import { F2 } from '../905/389382';
 import { E as _$$E3 } from '../905/391888';
@@ -156,14 +156,14 @@ import { t as _$$t8 } from '../905/433510';
 import { colorToHex } from '../905/436288';
 import { hS as _$$hS } from '../905/437088';
 import { N as _$$N3 } from '../905/438674';
-import { GN, RM, Uu } from '../905/441038';
+import { UserRole, GroupType, DefaultGroups } from '../905/441038';
 import { $ as _$$$7 } from '../905/442144';
 import { W as _$$W6 } from '../905/442612';
 import { K as _$$K } from '../905/443068';
 import { k as _$$k3 } from '../905/443820';
 import { H as _$$H } from '../905/444904';
 import { NN, w4, y1 } from '../905/445814';
-import { az as _$$az2, sx as _$$sx } from '../905/449184';
+import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
 import { e as _$$e1 } from '../905/457828';
 import { dy as _$$dy, rS as _$$rS, Zp as _$$Zp, DG } from '../905/462076';
 import { Q as _$$Q4 } from '../905/463586';
@@ -188,8 +188,8 @@ import { r as _$$r1 } from '../905/520829';
 import { $n, IK, WW } from '../905/521428';
 import { I as _$$I3 } from '../905/531560';
 import { P as _$$P5 } from '../905/537307';
-import { sn as _$$sn } from '../905/542194';
-import { A$, F9, Iv } from '../905/548208';
+import { globalPerfTimer } from '../905/542194';
+import { NavigationRoutes, MemberSections, DashboardSections } from '../905/548208';
 import { e6 as _$$e16 } from '../905/557142';
 import { hT as _$$hT, YM as _$$YM } from '../905/561087';
 import { oz as _$$oz } from '../905/561485';
@@ -202,10 +202,10 @@ import { x as _$$x2 } from '../905/587214';
 import { O as _$$O5 } from '../905/587457';
 import { nl as _$$nl, H8, Pf } from '../905/590952';
 import { getFeatureFlags } from '../905/601108';
-import { J6 } from '../905/602906';
+import { observabilityClient } from '../905/602906';
 import { g as _$$g5 } from '../905/607862';
 import { EM, QL } from '../905/609392';
-import { M4 as _$$M4 } from '../905/609396';
+import { Timer } from '../905/609396';
 import { i as _$$i4 } from '../905/610691';
 import { Ay, Gl } from '../905/612521';
 import { r1 as _$$r3, jN } from '../905/612685';
@@ -424,7 +424,7 @@ import { o8 as _$$o1 } from '../figma_app/12220';
 import { R$, ZP } from '../figma_app/12796';
 import { L as _$$L6 } from '../figma_app/23271';
 import { yJ as _$$yJ3 } from '../figma_app/24841';
-import { eU as _$$eU, fp as _$$fp, md as _$$md, E2, Iz, Xr } from '../figma_app/27355';
+import { atom, useAtomValueAndSetter, useAtomWithSubscription, createValidatedLocalStorageAtom, createRemovableAtomFamily, Xr } from '../figma_app/27355';
 import { ISO, tgj } from '../figma_app/27776';
 import { Jt } from '../figma_app/28323';
 import { o as _$$o7, s as _$$s3 } from '../figma_app/29593';
@@ -435,7 +435,7 @@ import { cS as _$$cS, I0 as _$$I4, iF as _$$iF } from '../figma_app/45218';
 import { b as _$$b6 } from '../figma_app/47801';
 import { rL as _$$rL } from '../figma_app/49598';
 import { c as _$$c8 } from '../figma_app/52714';
-import { nT as _$$nT, oQ as _$$oQ, wN } from '../figma_app/53721';
+import { FEditorType, SITES_STRING, mapFileTypeToEditorType } from '../figma_app/53721';
 import { t as _$$t9 } from '../figma_app/55043';
 import { cV as _$$cV, Cs } from '../figma_app/59509';
 import { $$, nR as _$$nR, vd } from '../figma_app/60079';
@@ -603,7 +603,7 @@ import { daH } from '../figma_app/763686';
 import { _4 as _$$_6 } from '../figma_app/773663';
 import { mk as _$$mk2, yl as _$$yl, K2 } from '../figma_app/777551';
 import { K0 } from '../figma_app/778125';
-import { Ay as _$$Ay, nW as _$$nW, uG as _$$uG, C8 } from '../figma_app/778880';
+import { BrowserInfo, isAndroidOrIphoneNotFigmaMobile, isMobilePlatformNotFigmaMobile, getIsAndroidOrIphoneNotFigmaMobile } from '../figma_app/778880';
 import { parseMsNumber, parsePxInt, parsePxNumber } from '../figma_app/783094';
 import { R as _$$R10 } from '../figma_app/787018';
 import { gY as _$$gY2 } from '../figma_app/797994';
@@ -626,7 +626,7 @@ import { _C as _$$_C, dN as _$$dN, V0 } from '../figma_app/858344';
 import { b as _$$b5, bL as _$$bL, mc as _$$mc2, q7, YJ } from '../figma_app/860955';
 import { ds as _$$ds, gV as _$$gV, sb as _$$sb, t$ as _$$t$, D6, kK, R3, T0, TF } from '../figma_app/863319';
 import { VE } from '../figma_app/869776';
-import { aw as _$$aw, eD as _$$eD } from '../figma_app/876459';
+import { OpenTarget, desktopAPIInstance } from '../figma_app/876459';
 import { cS as _$$cS2, hT as _$$hT2, Ho } from '../figma_app/878651';
 import { C as _$$C4 } from '../figma_app/887997';
 import { v as _$$v3 } from '../figma_app/899624';
@@ -677,7 +677,7 @@ let ev = 'seen_org_admin_moved_unassigned_drafts_onboarding';
 let ey = _$$A3('2024-10-15').startOf('day');
 let ew = _$$r(ev);
 function ej() {
-  let e = _$$md(ew);
+  let e = useAtomWithSubscription(ew);
   let {
     show,
     isShowing,
@@ -697,24 +697,24 @@ function ej() {
   return jsx(_$$rq, {
     arrowPosition: F_.LEFT_TITLE,
     clickOutsideToHide: !0,
-    description: _$$tx('org_admin_onboarding.tooltip.moved_unassigned_drafts.body'),
+    description: renderI18nText('org_admin_onboarding.tooltip.moved_unassigned_drafts.body'),
     isShowing,
     onClose: complete,
     primaryCta: {
-      label: _$$tx('general.got_it'),
+      label: renderI18nText('general.got_it'),
       type: 'button',
       onClick: complete,
       ctaTrackingDescriptor: _$$c3.DONE
     },
     secondaryCta: {
-      label: _$$tx('general.learn_more'),
+      label: renderI18nText('general.learn_more'),
       type: 'link',
       href: 'https://help.figma.com/hc/articles/4420549259799',
       ctaTrackingDescriptor: _$$c3.LEARN_MORE
     },
     shouldCenterArrow: EL.FALLBACK,
     targetKey: _$$sm,
-    title: _$$tx('org_admin_onboarding.tooltip.moved_unassigned_drafts.title'),
+    title: renderI18nText('org_admin_onboarding.tooltip.moved_unassigned_drafts.title'),
     trackingContextName: _$$o2,
     userFlagOnShow: ev
   });
@@ -729,7 +729,7 @@ function eN({
   let n = e === 'drafts' ? a : e.team?.id;
   let o = vt(n);
   let l = jn();
-  return !R$(t, s) && !_$$nW && !(o || l);
+  return !R$(t, s) && !isAndroidOrIphoneNotFigmaMobile && !(o || l);
 }
 function eO() {
   let e = useDispatch();
@@ -747,7 +747,7 @@ function eO() {
     icon: jsx(_$$a2, {}),
     text: jsx(_$$E, {
       truncate: !0,
-      children: _$$tx('sidebar.recents')
+      children: renderI18nText('sidebar.recents')
     }),
     wrapInListItem: !0
   });
@@ -755,7 +755,7 @@ function eO() {
 let eQ = _$$r('seen_connected_projects_admin_settings_overlay');
 let eZ = 'connect_admin_settings_onboarding_key';
 function e0(e) {
-  let t = _$$md(eQ);
+  let t = useAtomWithSubscription(eQ);
   let {
     show,
     isShowing,
@@ -772,13 +772,13 @@ function e0(e) {
   return jsx(_$$rq, {
     arrowPosition: F_.LEFT_TITLE,
     description: jsx('p', {
-      children: _$$tx('resource_connection.onboarding.use_admin_settings_to_see_all_your_connected_projects')
+      children: renderI18nText('resource_connection.onboarding.use_admin_settings_to_see_all_your_connected_projects')
     }),
     emphasized: !0,
     isShowing,
     onClose: complete,
     primaryCta: {
-      label: _$$tx('resource_connection.onboarding.show_me'),
+      label: renderI18nText('resource_connection.onboarding.show_me'),
       type: 'button',
       onClick: () => {
         e.openConnectedProjectsTab();
@@ -815,7 +815,7 @@ function e4(e) {
       'data-onboarding-key': e.dataOnboardingKey,
       'children': jsx(_$$E, {
         truncate: !0,
-        children: _$$tx('sidebar.admin_dashboard')
+        children: renderI18nText('sidebar.admin_dashboard')
       })
     }),
     'isSelected': e.isSelected,
@@ -838,8 +838,8 @@ function e4(e) {
         r?.type === FOrganizationLevelType.TEAM ? t(_$$sf({
           view: 'teamAdminConsole',
           teamId: r?.key.parentId ?? '',
-          teamAdminConsoleViewTab: Iv.CONTENT,
-          teamAdminConsoleViewSecondaryTab: F9.CONNECTED_PROJECTS
+          teamAdminConsoleViewTab: DashboardSections.CONTENT,
+          teamAdminConsoleViewSecondaryTab: MemberSections.CONNECTED_PROJECTS
         })) : t(_$$sf({
           view: 'orgAdminSettings',
           orgAdminSettingsViewTab: J7.CONTENT,
@@ -892,7 +892,7 @@ function tt(e) {
       case 'billingGroupDashboard':
         return !0;
       case 'licenseGroup':
-        return e.subView === GN.ADMIN;
+        return e.subView === UserRole.ADMIN;
       case 'workspace':
         return e.subView === V0.ADMIN;
       default:
@@ -921,12 +921,12 @@ function tt(e) {
       } else {
         _ ? g ? t(_$$sf({
           view: 'billingGroupDashboard',
-          selectedTab: _$$D2.REQUESTS
+          selectedTab: FRequestsStr.REQUESTS
         })) : (t(_$$sf({
           view: 'licenseGroup',
-          subView: GN.ADMIN,
+          subView: UserRole.ADMIN,
           licenseGroupId: e && groupsToReview.length > 0 ? groupsToReview[0].id : m,
-          selectedTab: _$$g(e && groupsToReview.length > 0 ? RM.MEMBERS : Uu[0])
+          selectedTab: _$$g(e && groupsToReview.length > 0 ? GroupType.MEMBERS : DefaultGroups[0])
         })), t(_$$Oe({
           clickedResourceType: 'licenseGroupAdminSettings'
         }))) : f && (t(_$$sf({
@@ -959,7 +959,7 @@ function ta(e) {
     'icon': jsx(_$$t2, {}),
     'text': jsx(_$$E, {
       truncate: !0,
-      children: _$$tx('sidebar.all_projects')
+      children: renderI18nText('sidebar.all_projects')
     }),
     'wrapInListItem': !0
   }) : null;
@@ -978,7 +978,7 @@ function tc(e, t, r, a, s, i) {
   }
   if (n.some(e => e.editor_type === FFileType.FIGMAKE) && !i) {
     e(_$$F.enqueue({
-      message: _$$t('file_browser.file_move.paywall_team_tooltip'),
+      message: getI18nString('file_browser.file_move.paywall_team_tooltip'),
       error: !0
     }));
     return;
@@ -993,7 +993,7 @@ function tc(e, t, r, a, s, i) {
 }
 let tf = _$$r('seen_dtm_deprecation_nav_to_plan_overlay');
 function tg(e) {
-  let t = _$$md(tf);
+  let t = useAtomWithSubscription(tf);
   let {
     show,
     isShowing,
@@ -1007,8 +1007,8 @@ function tg(e) {
       canShow: e => !e
     });
   });
-  let n = _$$tx('file_browser.drafts_to_move.drafts_to_move_files_are_now_here');
-  let o = e.starterTeamCreated ? _$$tx('file_browser.drafts_to_move.if_you_want_you_can_move_these_files') : _$$tx('file_browser.drafts_to_move.the_drafts_to_move_section_has_been_removed_generic');
+  let n = renderI18nText('file_browser.drafts_to_move.drafts_to_move_files_are_now_here');
+  let o = e.starterTeamCreated ? renderI18nText('file_browser.drafts_to_move.if_you_want_you_can_move_these_files') : renderI18nText('file_browser.drafts_to_move.the_drafts_to_move_section_has_been_removed_generic');
   return jsx(_$$rq, {
     arrowPosition: F_.LEFT_TITLE,
     description: jsx('p', {
@@ -1018,7 +1018,7 @@ function tg(e) {
     isShowing,
     onClose: complete,
     primaryCta: {
-      label: _$$tx('file_browser.modal.got_it'),
+      label: renderI18nText('file_browser.modal.got_it'),
       type: 'button',
       onClick: () => {
         complete();
@@ -1026,7 +1026,7 @@ function tg(e) {
       ctaTrackingDescriptor: _$$c3.DONE
     },
     secondaryCta: {
-      label: _$$tx('file_browser.drafts_to_move.viewbar_learn_more_link'),
+      label: renderI18nText('file_browser.drafts_to_move.viewbar_learn_more_link'),
       type: 'link',
       href: 'https://help.figma.com/hc/articles/18409526530967',
       ctaTrackingDescriptor: _$$c3.LEARN_MORE
@@ -1103,7 +1103,7 @@ function tv(e) {
       'icon': jsx(_$$g2, {}),
       'text': jsx(_$$E, {
         truncate: !0,
-        children: _$$tx('sidebar.drafts')
+        children: renderI18nText('sidebar.drafts')
       }),
       'badge': e.shouldHideCreateFileButton ? void 0 : jsx(_$$iM, {
         folderId: e.folder.id,
@@ -1135,18 +1135,18 @@ let tN = Ju(e => {
         sidebarSectionId: e.sectionId
       }));
     },
-    confirmationTitle: _$$t('sidebar.delete_section'),
+    confirmationTitle: getI18nString('sidebar.delete_section'),
     titleClass: 'confirm_section_delete_modal--title--8Haoy text--fontPos11--2LvXf text--_fontBase--QdLsd',
-    confirmText: _$$t('sidebar.delete'),
+    confirmText: getI18nString('sidebar.delete'),
     destructive: !0,
     autoFocusCta: !1,
     children: jsx('p', {
       className: 'confirm_section_delete_modal--content--BToo-',
-      children: _$$tx('sidebar.if_you_delete_section_the_section', {
-        item: e.count > 1 ? _$$t('sidebar.items') : _$$t('sidebar.item'),
+      children: renderI18nText('sidebar.if_you_delete_section_the_section', {
+        item: e.count > 1 ? getI18nString('sidebar.items') : getI18nString('sidebar.item'),
         section: r,
         count: e.count,
-        pronoun: e.count > 1 ? _$$t('sidebar.them') : _$$t('sidebar.it')
+        pronoun: e.count > 1 ? getI18nString('sidebar.them') : getI18nString('sidebar.it')
       })
     })
   });
@@ -1176,10 +1176,10 @@ function tA(e) {
     e.setRenamingSectionId(r.data.customSection.id);
   };
   let o = [{
-    displayText: _$$t('sidebar.rename_section'),
+    displayText: getI18nString('sidebar.rename_section'),
     callback: () => n()
   }, {
-    displayText: _$$t('sidebar.delete_section'),
+    displayText: getI18nString('sidebar.delete_section'),
     callback: () => s()
   }];
   return jsx(noop, {
@@ -1224,11 +1224,11 @@ function tH(e) {
       }));
     },
     className: 'favorited_section--browseOrgLink--BvX0-',
-    children: _$$tx('sidebar.browse_org_custom_sections')
+    children: renderI18nText('sidebar.browse_org_custom_sections')
   });
   return jsxs('div', {
     className: 'favorited_section--customSectionsEmptyStateContent--Z6jKH',
-    children: [_$$tx('sidebar.just_click_the_on_files_projects_and_teams_to_add_and_organize_them_here'), s]
+    children: [renderI18nText('sidebar.just_click_the_on_files_projects_and_teams_to_add_and_organize_them_here'), s]
   });
 }
 function tK(e) {
@@ -1295,18 +1295,18 @@ function rh(e) {
   if (u == null || n == null) return null;
   let _ = n.editorType === FFileType.FIGMAKE && !m;
   let p = u.type === 'favorited-file-context-menu';
-  let f = [...rf(!0, () => _$$t('tile.dropdown.open'), () => {
+  let f = [...rf(!0, () => getI18nString('tile.dropdown.open'), () => {
     DF('open');
     LP(n.key, FEntityType.FILE, e.favoritedFile?.sidebarSectionId ?? void 0, r_, n.editorType ?? void 0);
     Tq(t, n);
-  }), ...rf(!_$$eD && !_$$ce(), () => _$$t('tile.dropdown.open_new_tab'), () => {
+  }), ...rf(!desktopAPIInstance && !_$$ce(), () => getI18nString('tile.dropdown.open_new_tab'), () => {
     _$$nz(jN({
       file: n,
       allowDefaulting: !0
     }), n.key, r, t);
     LP(n.key, FEntityType.FILE, e.favoritedFile?.sidebarSectionId ?? void 0, r_, n.editorType);
     DF('open_in_new_tab');
-  }), ...rg, ...e.organizeFavoriteOptions, ...rg, ...rf(!0, () => _$$t('file_browser.copy_link'), () => {
+  }), ...rg, ...e.organizeFavoriteOptions, ...rg, ...rf(!0, () => getI18nString('file_browser.copy_link'), () => {
     t(_$$S2({
       fileKey: n.key,
       url: jN({
@@ -1317,7 +1317,7 @@ function rh(e) {
       source: _$$d4.FAVORITED_FILE_CONTEXT_MENU
     }));
     t(_$$oB());
-  }), ...rf(!_, () => _$$t('sidebar.share'), () => {
+  }), ...rf(!_, () => getI18nString('sidebar.share'), () => {
     DF('share');
     t(_$$to2({
       type: _$$g_,
@@ -1326,7 +1326,7 @@ function rh(e) {
         source: _$$nk.fileBrowserFavoritedContextMenu
       }
     }));
-  }), ...rf(!0, () => _$$t('tile.dropdown.show_in_project'), () => {
+  }), ...rf(!0, () => getI18nString('tile.dropdown.show_in_project'), () => {
     if (DF('show_in_project'), t(_$$sf({
       view: 'folder',
       folderId: e.folderId
@@ -1367,7 +1367,7 @@ function rx(e) {
   let t = useDispatch();
   let r = useSelector(e => e.dropdownShown);
   if (r == null) return null;
-  let s = [...e.organizeFavoriteOptions, ...rg, ...rf(!0, () => _$$t('file_browser.copy_link_to_team'), () => {
+  let s = [...e.organizeFavoriteOptions, ...rg, ...rf(!0, () => getI18nString('file_browser.copy_link_to_team'), () => {
     let r = bL(e.teamId, e.orgId);
     t(_$$S({
       url: r
@@ -1390,7 +1390,7 @@ function rb(e) {
   let t = useDispatch();
   let r = useSelector(e => e.dropdownShown);
   if (r == null) return null;
-  let s = [...e.organizeFavoriteOptions, ...rg, ...rf(e.orgId !== null, () => _$$t('file_browser.copy_link_to_workspace'), () => {
+  let s = [...e.organizeFavoriteOptions, ...rg, ...rf(e.orgId !== null, () => getI18nString('file_browser.copy_link_to_workspace'), () => {
     if (e.orgId !== null) {
       let r = _$$fO(e.workspaceId, e.orgId);
       t(_$$S({
@@ -1415,7 +1415,7 @@ function rv(e) {
   let t = useDispatch();
   let r = useSelector(e => e.dropdownShown);
   if (r == null) return null;
-  let s = [...e.organizeFavoriteOptions, ...rg, ...rf(!0, () => _$$t('file_browser.copy_link_to_project'), () => {
+  let s = [...e.organizeFavoriteOptions, ...rg, ...rf(!0, () => getI18nString('file_browser.copy_link_to_project'), () => {
     let r = EE(e.projectId, e.orgId);
     t(_$$S({
       url: r
@@ -1438,7 +1438,7 @@ function ry(e) {
   let t = useDispatch();
   let r = useSelector(e => e.dropdownShown);
   if (r == null) return null;
-  let s = [...e.organizeFavoriteOptions, ...rg, ...rf(!0, () => _$$t('file_browser.copy_link'), () => {
+  let s = [...e.organizeFavoriteOptions, ...rg, ...rf(!0, () => getI18nString('file_browser.copy_link'), () => {
     let r = _$$_2(e.prototype.fileKey, e.prototype.file?.name, e.prototype.pageId);
     t(_$$S({
       url: r
@@ -1681,7 +1681,7 @@ function rR(e) {
         children: S
       }) : jsx(_$$E, {
         truncate: !0,
-        children: _$$tx(e.favorite.file?.editorType === 'whiteboard' ? 'sidebar.fig_jam_file' : e.favorite.file?.editorType === 'slides' ? 'sidebar.slides_file' : 'sidebar.design_file')
+        children: renderI18nText(e.favorite.file?.editorType === 'whiteboard' ? 'sidebar.fig_jam_file' : e.favorite.file?.editorType === 'slides' ? 'sidebar.slides_file' : 'sidebar.design_file')
       }),
       wrapInListItem: !1
     }), !f && !g && jsxs('div', {
@@ -2064,7 +2064,7 @@ function rH(e) {
     folderId: e.favorite.resourceType === FEntityType.FOLDER ? e.favorite.resource.project?.id ?? null : null,
     isDraftsMove: !0
   });
-  let g = _$$f2(_$$md(_$$yH));
+  let g = _$$f2(useAtomWithSubscription(_$$yH));
   let [h, x] = useState(!1);
   let b = e.favorite.resourceType;
   let v = _$$_();
@@ -2413,7 +2413,7 @@ function rq(e) {
     let _ = kK(n);
     if (m + o.length > _) {
       t(_$$F.enqueue({
-        message: _$$t('tile.favoriting.max_favorites', {
+        message: getI18nString('tile.favoriting.max_favorites', {
           maxFavorites: _
         })
       }));
@@ -2443,7 +2443,7 @@ function rq(e) {
     g(!1);
   }, []);
   let $ = U()(_$$s.relative.$, 'favorited_section--showsCaret--vjo7-', f || b?.draggedOverSectionId && e.section && !d && b.draggedOverSectionId === e.section.id ? tP : '');
-  let G = e.section?.name === '' || e.section?.name === void 0 ? _$$tx('sidebar.starred') : e.section.name;
+  let G = e.section?.name === '' || e.section?.name === void 0 ? renderI18nText('sidebar.starred') : e.section.name;
   let V = k?.data?.customSection?.id === e.section?.id;
   let H = e.isCreatingNewSection || e.isRenaming;
   let K = U()({
@@ -2451,7 +2451,7 @@ function rq(e) {
     'favorited_section--actionButtonsVisibleOnHover--AOJ8E': !H,
     'favorited_section--actionButtonsVisible--Ey4QI': V && !H
   });
-  let J = e.section?.name === void 0 ? _$$t('sidebar.new_section') : R3(e.section) ? _$$t('sidebar.starred') : e.section.name;
+  let J = e.section?.name === void 0 ? getI18nString('sidebar.new_section') : R3(e.section) ? getI18nString('sidebar.starred') : e.section.name;
   return jsxs(_$$Y, {
     className: $,
     isDragTarget: L,
@@ -2527,7 +2527,7 @@ function rq(e) {
             className: tz,
             children: jsx(_$$d3, {
               'aria-expanded': !!k,
-              'aria-label': _$$t('favorited_resources.settings_tooltip'),
+              'aria-label': getI18nString('favorited_resources.settings_tooltip'),
               'onClick': r => {
                 k ? t(_$$oB()) : S.current && t(j7({
                   type: tk,
@@ -2581,9 +2581,9 @@ function rX(e) {
   return jsx('div', {
     className: tz,
     children: jsx(_$$K, {
-      'aria-label': _$$t('favorited_resources.create_a_new_section_tooltip'),
+      'aria-label': getI18nString('favorited_resources.create_a_new_section_tooltip'),
       'htmlAttributes': {
-        'data-tooltip': _$$t('favorited_resources.create_a_new_section_tooltip'),
+        'data-tooltip': getI18nString('favorited_resources.create_a_new_section_tooltip'),
         'data-tooltip-type': 'text'
       },
       'onClick': t => {
@@ -2730,7 +2730,7 @@ let at = Ju(e => {
   let l = TA();
   let d = useSelector(e => e.teamUserByTeamId);
   let c = useSelector(e => l ? e.authedUsers.byId[l]?.plans?.filter(e => !e.is_org) : null);
-  let u = _$$t('file_browser.planless_favorites.add_favorites_to_modal_title');
+  let u = getI18nString('file_browser.planless_favorites.add_favorites_to_modal_title');
   let m = () => n(Ce());
   let _ = {};
   l && _$$_3(d, l).forEach(e => {
@@ -2770,7 +2770,7 @@ let at = Ju(e => {
         className: 'move_favorites_modal--footer--ERUeX',
         children: [jsx(_$$nR2, {
           onClick: m,
-          children: _$$tx('modal.cancel')
+          children: renderI18nText('modal.cancel')
         }), jsx(_$$vd, {
           disabled: !t,
           onClick: () => {
@@ -2793,7 +2793,7 @@ let at = Ju(e => {
             r && p(i, _[r]);
             m();
           },
-          children: _$$t('modal.confirm')
+          children: getI18nString('modal.confirm')
         })]
       })]
     })
@@ -2888,11 +2888,11 @@ function ai(e) {
           children: [jsx(_$$B, {
             className: U()(_$$s.flex.itemsCenter.p6.mr12.colorIcon.$, 'favorited_section--moveFavoritesContainerHeaderLeftBlockItems--pl1Hf'),
             svg: p ? _$$A5 : _$$A6
-          }), _$$tx('sidebar.move_these_starred_items'), jsx(_$$B, {
+          }), renderI18nText('sidebar.move_these_starred_items'), jsx(_$$B, {
             'svg': _$$A8,
             'className': U()('favorited_section--helpIcon--vfl5Y', _$$s.flex.itemsBaseline.ml4.$),
             'data-tooltip-type': Ib.TEXT,
-            'data-tooltip': _$$t('file_browser.planless_favorites.your_favorited_items_tooltip'),
+            'data-tooltip': getI18nString('file_browser.planless_favorites.your_favorited_items_tooltip'),
             'data-tooltip-timeout-delay': 50,
             'data-tooltip-max-width': 200
           })]
@@ -2915,11 +2915,11 @@ function ai(e) {
                 }
               }));
             },
-            children: _$$tx('file_browser.planless_favorites.add_to_sidebar')
+            children: renderI18nText('file_browser.planless_favorites.add_to_sidebar')
           }), jsx(_$$nR, {
             className: 'favorited_section--unstarAllButton--Rhy3- favorited_section--favoritesToMoveActionButtons--FUt77',
             onClick: g,
-            children: _$$tx('file_browser.planless_favorites.unstar_all')
+            children: renderI18nText('file_browser.planless_favorites.unstar_all')
           })]
         })]
       }) : null]
@@ -2940,13 +2940,13 @@ function an(e) {
     icon: jsx(_$$t2, {}),
     text: jsx(_$$E, {
       truncate: !0,
-      children: _$$tx('sidebar.all_shared_projects')
+      children: renderI18nText('sidebar.all_shared_projects')
     }),
     wrapInListItem: !0
   }) : null;
 }
 function ao(e) {
-  return e ? _$$t('sidebar.browse.all_workspaces') : _$$t('sidebar.browse.all_teams');
+  return e ? getI18nString('sidebar.browse.all_workspaces') : getI18nString('sidebar.browse.all_teams');
 }
 function al() {
   let e = useSelector(e => e.currentUserOrgId);
@@ -2991,7 +2991,7 @@ function ad({
 let am = 'seen_team_admin_moved_unassigned_drafts_onboarding';
 let a_ = _$$r(am);
 function ap() {
-  let e = _$$md(a_);
+  let e = useAtomWithSubscription(a_);
   let {
     show,
     isShowing,
@@ -3008,24 +3008,24 @@ function ap() {
   return jsx(_$$rq, {
     arrowPosition: F_.LEFT_TITLE,
     clickOutsideToHide: !0,
-    description: _$$tx('team_admin.onboarding.unassigned_drafts.description'),
+    description: renderI18nText('team_admin.onboarding.unassigned_drafts.description'),
     isShowing,
     onClose: complete,
     primaryCta: {
-      label: _$$tx('general.got_it'),
+      label: renderI18nText('general.got_it'),
       type: 'button',
       onClick: complete,
       ctaTrackingDescriptor: _$$c3.DONE
     },
     secondaryCta: {
-      label: _$$tx('general.learn_more'),
+      label: renderI18nText('general.learn_more'),
       type: 'link',
       href: 'https://help.figma.com/hc/articles/4420549259799',
       ctaTrackingDescriptor: _$$c3.LEARN_MORE
     },
     shouldCenterArrow: EL.FALLBACK,
     targetKey: af,
-    title: _$$tx('team_admin.onboarding.unassigned_drafts.title'),
+    title: renderI18nText('team_admin.onboarding.unassigned_drafts.title'),
     trackingContextName: _$$o4,
     userFlagOnShow: am
   });
@@ -3065,7 +3065,7 @@ function ag(e) {
           view: 'teamAdminConsole',
           teamId: r,
           isProTeam: c.isProTeam,
-          teamAdminConsoleViewTab: c.isProTeam ? Iv.DASHBOARD : Iv.MEMBERS
+          teamAdminConsoleViewTab: c.isProTeam ? DashboardSections.DASHBOARD : DashboardSections.MEMBERS
         }));
         t(_$$Oe({
           clickedResourceType: 'teamAdminSettings',
@@ -3086,13 +3086,13 @@ function aI({
         className: 'xi4r6k5 x78zum5 xdt5ytf x6s0dn4',
         children: [jsx(_$$t3, {}), jsx('div', {
           ..._$$xk(aN.title),
-          children: _$$t('file_browser.make_file_creation_promos.title')
+          children: getI18nString('file_browser.make_file_creation_promos.title')
         }), jsx('div', {
           className: 'x2b8uid xkdneqi',
-          children: _$$t('file_browser.make_file_creation_promos.description')
+          children: getI18nString('file_browser.make_file_creation_promos.description')
         }), jsx(IK, {
           onClick: e,
-          children: _$$t('file_browser.make_file_creation_promos.cta')
+          children: getI18nString('file_browser.make_file_creation_promos.cta')
         })]
       })
     })
@@ -3114,7 +3114,7 @@ function aC() {
     contextClicked: 'make_sidebar_promo'
   });
   useEffect(() => {
-    _$$sx('Figma Make File Browser Sidebar Promo Viewed');
+    trackEventAnalytics('Figma Make File Browser Sidebar Promo Viewed');
   }, []);
   return jsx(aI, {
     onClickCta: e
@@ -3141,13 +3141,13 @@ function a$(e) {
       children: [e.collapsible && jsx('div', {
         className: 'base_upgrade_section--collapseButton--9v68l',
         children: t ? jsx(aB, {
-          'aria-label': _$$t('base_upgrade_section.expand'),
+          'aria-label': getI18nString('base_upgrade_section.expand'),
           'onClick': () => r(!1),
           'trackingProperties': {
             action: 'expand'
           }
         }) : jsx(aU, {
-          'aria-label': _$$t('base_upgrade_section.collapse'),
+          'aria-label': getI18nString('base_upgrade_section.collapse'),
           'onClick': () => r(!0),
           'trackingProperties': {
             action: 'collapse'
@@ -3195,15 +3195,15 @@ function az(e) {
   let r = e.type;
   let s = jsx('span', {
     className: aG,
-    children: _$$t('edu.sidebar_section.verified')
+    children: getI18nString('edu.sidebar_section.verified')
   });
   return jsx(a$, {
     trackingContext: r === 0 ? 'Edu Upgrade Section' : 'Edu Create Section',
     icon: jsx(_$$o5, {}),
     bodyText: jsxs(Fragment, {
-      children: [s, ' ', r === 0 ? _$$t('edu.sidebar_section.upgrade') : _$$t('edu.sidebar_section.create_team')]
+      children: [s, ' ', r === 0 ? getI18nString('edu.sidebar_section.upgrade') : getI18nString('edu.sidebar_section.create_team')]
     }),
-    ctaText: r === 0 ? _$$t('edu.choose_team') : _$$t('edu.create_free_team'),
+    ctaText: r === 0 ? getI18nString('edu.choose_team') : getI18nString('edu.create_free_team'),
     onClickCTA: r === 0 ? () => {
       t(_$$to2({
         type: _$$q2
@@ -3236,28 +3236,28 @@ function aH({
     }));
   };
   let n = jsx(_$$eM, {
-    onClick: () => Ay.redirect('/education/apply', _$$Ay.isIpadNative ? void 0 : '_blank'),
-    children: _$$tx('edu.sidebar_section.verify_your_education_status')
+    onClick: () => Ay.redirect('/education/apply', BrowserInfo.isIpadNative ? void 0 : '_blank'),
+    children: renderI18nText('edu.sidebar_section.verify_your_education_status')
   });
   return e > 0 ? jsx(a$, {
     trackingContext: 'Universal Upgrade Section Education Plan Countdown',
     countDownDaysLeft: e,
-    titleText: _$$tx('edu.sidebar_section.education_plan_expires_in_days', {
+    titleText: renderI18nText('edu.sidebar_section.education_plan_expires_in_days', {
       daysLeft: e
     }),
-    bodyText: r ? _$$tx('edu.sidebar_section.bootcamp_users_after_that_you_ll_need_to_upgrade_your_team') : _$$tx('edu.sidebar_section.after_that_you_ll_need_to_upgrade_your_team_or_verify', {
+    bodyText: r ? renderI18nText('edu.sidebar_section.bootcamp_users_after_that_you_ll_need_to_upgrade_your_team') : renderI18nText('edu.sidebar_section.after_that_you_ll_need_to_upgrade_your_team_or_verify', {
       verify: n
     }),
-    ctaText: _$$tx('upgrade.upgrade_to_professional'),
+    ctaText: renderI18nText('upgrade.upgrade_to_professional'),
     onClickCTA: s
   }) : jsx(a$, {
     trackingContext: 'Universal Upgrade Section Education Plan Expired',
     icon: jsx(_$$e9, {}),
-    titleText: _$$tx('edu.sidebar_section.education_plan_expired'),
-    bodyText: r ? _$$tx('edu.sidebar_section.bootcamp_users_to_keep_editing_upgrade_your_team') : _$$tx('edu.sidebar_section.to_keep_editing_upgrade_your_team', {
+    titleText: renderI18nText('edu.sidebar_section.education_plan_expired'),
+    bodyText: r ? renderI18nText('edu.sidebar_section.bootcamp_users_to_keep_editing_upgrade_your_team') : renderI18nText('edu.sidebar_section.to_keep_editing_upgrade_your_team', {
       verify: n
     }),
-    ctaText: _$$tx('upgrade.upgrade_to_professional'),
+    ctaText: renderI18nText('upgrade.upgrade_to_professional'),
     onClickCTA: s
   });
 }
@@ -3284,7 +3284,7 @@ function aX(e) {
         teamId: e.team.id
       });
       t(_$$F.enqueue({
-        message: _$$t('view_permissions.request_sent'),
+        message: getI18nString('view_permissions.request_sent'),
         type: 'request-team-membership'
       }));
       _$$uE('limited_team_plan_request_upgrade_clicked', {
@@ -3298,14 +3298,14 @@ function aX(e) {
     }
   };
   return jsx(a$, {
-    bodyText: _$$tx('upgrade.to_get_unlimited_files_must_be_member', {
+    bodyText: renderI18nText('upgrade.to_get_unlimited_files_must_be_member', {
       currentTeamName: e.team.name
     }),
-    ctaText: r ? _$$tx('upgrade.access_requested') : _$$tx('upgrade.request_full_access'),
+    ctaText: r ? renderI18nText('upgrade.access_requested') : renderI18nText('upgrade.request_full_access'),
     ctaTrackingProperties: {},
     demure: 'very',
     disabled: c || r,
-    header: _$$tx('upgrade.limited_access_in_this_team'),
+    header: renderI18nText('upgrade.limited_access_in_this_team'),
     onClickCTA: _,
     onDismiss: () => {
       t(_$$bE({
@@ -3328,13 +3328,13 @@ function a1({
 }) {
   let t = useDispatch();
   let r = useSelector(e => e.userFlags);
-  let s = e === _$$VY.SINGLE_TEAM ? _$$tx('upgrade.access_cross_team_design_libraries_sso_and_more') : _$$tx('upgrade.centralize_your_teams_and_share_design_libraries');
+  let s = e === _$$VY.SINGLE_TEAM ? renderI18nText('upgrade.access_cross_team_design_libraries_sso_and_more') : renderI18nText('upgrade.centralize_your_teams_and_share_design_libraries');
   let n = `${e === _$$VY.SINGLE_TEAM ? 'Single-Team' : 'Multi-Team'} Dismissible Org Upgrade Section`;
   return jsx(a$, {
     trackingContext: n,
     icon: jsx(_$$L, {}),
     bodyText: s,
-    ctaText: _$$tx('upgrade.view_plans'),
+    ctaText: renderI18nText('upgrade.view_plans'),
     onClickCTA: () => {
       e === _$$VY.SINGLE_TEAM && t(_$$to2({
         type: HS,
@@ -3369,9 +3369,9 @@ function a8(e) {
     trackingProperties: {
       trackingDescriptor: _$$c3.WORK_IN_ONE_OF_YOUR_PAID_TEAMS
     },
-    children: _$$tx('upgrade.work_in_one_of_your_paid_teams')
+    children: renderI18nText('upgrade.work_in_one_of_your_paid_teams')
   });
-  let o = _$$tx('upgrade.to_get_unlimited_files_and_features_link_switch_teams_or_upgrade_this_team_s_plan', {
+  let o = renderI18nText('upgrade.to_get_unlimited_files_and_features_link_switch_teams_or_upgrade_this_team_s_plan', {
     linkSwitchTeams: n
   });
   return jsx(a$, {
@@ -3380,9 +3380,9 @@ function a8(e) {
       teamId: e.team.id,
       ...r
     },
-    header: _$$tx('upgrade.this_team_is_on_a_free_plan'),
+    header: renderI18nText('upgrade.this_team_is_on_a_free_plan'),
     bodyText: o,
-    ctaText: _$$tx('upgrade.view_all_plans'),
+    ctaText: renderI18nText('upgrade.view_all_plans'),
     onClickCTA: () => {
       t(_$$to2({
         type: _$$V4,
@@ -3452,21 +3452,21 @@ function si({
   _$$v3(n) ? (h = c, monthlySubscription?.canceled_at && (h += u)) : h = u;
   let x = jsx('h4', {
     className: 'xfifm61 x1s688f x1o2sk6j x1akne3o',
-    children: _$$tx('resubscription_section.header_text')
+    children: renderI18nText('resubscription_section.header_text')
   });
   let b = jsx('a', {
     href: 'https://www.figma.com/pricing',
     style: sn.link,
     target: '_blank',
-    children: _$$tx('resubscription_section.link_so_much_more')
+    children: renderI18nText('resubscription_section.link_so_much_more')
   });
   return jsx(a$, {
-    bodyText: _$$tx('resubscription_section.body_text', {
+    bodyText: renderI18nText('resubscription_section.body_text', {
       linkSoMuchMore: b
     }),
     collapsible: !0,
     ctaDataTestId: 'user-churning-cta',
-    ctaText: _$$tx('resubscription_section.cta_text'),
+    ctaText: renderI18nText('resubscription_section.cta_text'),
     ctaTrackingProperties: {
       trackingDescriptor: paymentMethod ? _$$c3.REACTIVATE_YOUR_PROFESSIONAL_PLAN : _$$c3.UPDATE_PAYMENT
     },
@@ -3496,7 +3496,7 @@ function si({
         canSeeBillingAddressExp: s
       });
     },
-    titleText: _$$tx('resubscription_section.title_text', {
+    titleText: renderI18nText('resubscription_section.title_text', {
       teamName: team.name,
       date: cancellationDate
     }),
@@ -3522,9 +3522,9 @@ function sd({
   let n = t ? jsxs(Fragment, {
     children: [jsx('span', {
       className: aG,
-      children: _$$tx('upgrade.running_out_of_files_in_your_free_team')
-    }), ' ', _$$tx('upgrade.upgrade_to_give_your_ideas_and_designs_room_to_grow_without_limits')]
-  }) : _$$tx('upgrade.ready_to_go_beyond_free_plan_upgrade_for_premium_features');
+      children: renderI18nText('upgrade.running_out_of_files_in_your_free_team')
+    }), ' ', renderI18nText('upgrade.upgrade_to_give_your_ideas_and_designs_room_to_grow_without_limits')]
+  }) : renderI18nText('upgrade.ready_to_go_beyond_free_plan_upgrade_for_premium_features');
   return jsx(a$, {
     trackingContext: 'Universal Upgrade Section',
     trackingProperties: {
@@ -3534,7 +3534,7 @@ function sd({
     },
     icon: jsx(_$$L, {}),
     bodyText: n,
-    ctaText: _$$tx('upgrade.view_plans'),
+    ctaText: renderI18nText('upgrade.view_plans'),
     ctaTrackingProperties: {
       trackingDescriptor: _$$c3.UPGRADE
     },
@@ -3549,11 +3549,11 @@ function sd({
     }
   });
 }
-let sb = _$$eU(e => {
+let sb = atom(e => {
   let t = e(sv);
   return !!t && [FPlanLimitationType.FILES_LIMITED, FPlanLimitationType.FILES_LIMITED_LEGACY, FPlanLimitationType.WHITEBOARD_FILES_LIMITED, FPlanLimitationType.WHITEBOARD_FILES_LIMITED_BETA, FPlanLimitationType.SLIDE_FILES_LIMITED, FPlanLimitationType.SLIDE_FILES_LIMITED_BETA, FPlanLimitationType.GLOBAL_FILES_LIMITED_LEGACY, FPlanLimitationType.GLOBAL_FILES_LIMITED].some(e => t?.restrictions_list?.includes(e));
 });
-let sv = _$$bt(e => {
+let sv = createReduxSubscriptionAtomWithState(e => {
   let t = e.currentTeamId;
   return t ? e.teams[t] : null;
 });
@@ -3678,8 +3678,8 @@ function sj() {
     let e = _$$iZ();
     let t = useSelector(e => e.teams);
     let r = _$$ol();
-    let a = _$$md(sb);
-    let s = _$$md(_$$Lm);
+    let a = useAtomWithSubscription(sb);
+    let s = useAtomWithSubscription(_$$Lm);
     let n = Rs(kQI, {
       id: r?.id ?? ''
     }, {
@@ -3699,7 +3699,7 @@ function sj() {
     let e = useSelector(e => e.userFlags);
     let t = function () {
       let e = FC();
-      let t = _$$R6(e => ({
+      let t = selectWithShallowEqual(e => ({
         orgUsersByOrgId: e.orgUsersByOrgId,
         user: e.user,
         userFlags: e.userFlags,
@@ -3726,7 +3726,7 @@ function sj() {
     let e = _$$iZ();
     let t = useSelector(e => e.teams);
     let r = _$$ol();
-    let a = _$$md(_$$Lm);
+    let a = useAtomWithSubscription(_$$Lm);
     let s = useSelector(e => e.userTeamFlags);
     let n = Rs(kQI, {
       id: r?.id ?? ''
@@ -3757,16 +3757,16 @@ function sj() {
   }();
   return e !== null ? e : n !== null ? n : t !== null ? t : r !== null ? r : a.status === 'loaded' && a.data ? a.data : s !== null ? s : null;
 }
-let sI = _$$eU(!1);
+let sI = atom(!1);
 function sN() {
-  let [e, t] = _$$fp(sI);
-  let r = _$$md(Bb);
+  let [e, t] = useAtomValueAndSetter(sI);
+  let r = useAtomWithSubscription(Bb);
   if (!r) return null;
   let s = async () => {
     t(!0);
     let e = await r.prompt();
     e.outcome === 'dismissed' && t(!1);
-    _$$sx('add_to_chromebook_clicked', {
+    trackEventAnalytics('add_to_chromebook_clicked', {
       installed: e.outcome === 'accepted'
     });
   };
@@ -3781,7 +3781,7 @@ function sN() {
       color: 'default',
       children: jsx('span', {
         ..._$$xk(sC.text),
-        children: _$$tx('file_browser.tool_bar.add_to_chromebook')
+        children: renderI18nText('file_browser.tool_bar.add_to_chromebook')
       })
     })]
   });
@@ -3841,13 +3841,13 @@ function sL() {
           }));
         },
         children: [jsx(_$$Q2, {
-          title: _$$t('community.resource_hub.a_new_place_to_explore_community'),
+          title: getI18nString('community.resource_hub.a_new_place_to_explore_community'),
           children: jsx('div', {
             className: 'x1n0bwc9',
-            children: _$$t('community.resource_hub.introducing_templates_and_tools')
+            children: getI18nString('community.resource_hub.introducing_templates_and_tools')
           })
         }), jsx(_$$E6, {
-          'aria-label': _$$t('community.resource_hub.take_me_there'),
+          'aria-label': getI18nString('community.resource_hub.take_me_there'),
           ..._$$xk(sD.button),
           'onClick': () => {
             Ay.push(new _$$au({
@@ -3857,7 +3857,7 @@ function sL() {
             _$$lz();
           },
           'children': jsx('div', {
-            children: _$$t('community.resource_hub.take_me_there')
+            children: getI18nString('community.resource_hub.take_me_there')
           })
         })]
       })
@@ -3874,7 +3874,7 @@ let sD = {
 function sU() {
   let e = useDispatch();
   let t = () => {
-    _$$sx('community_browser_sidebar_action_clicked');
+    trackEventAnalytics('community_browser_sidebar_action_clicked');
     e(_$$sf({
       view: 'communityHub',
       subView: 'searchAndBrowse',
@@ -3891,7 +3891,7 @@ function sU() {
       t();
     },
     'children': [jsx(_$$J3, {}), jsx(_$$E, {
-      children: _$$tx('sidebar.explore_community')
+      children: renderI18nText('sidebar.explore_community')
     })]
   });
 }
@@ -3901,15 +3901,15 @@ function sW(e) {
   let s = _$$LQ(r);
   let i = function () {
     let e = _$$lH();
-    let t = _$$md(Bb);
-    return !!_$$Ay.chromeos && !!_$$Ay.chrome && !e && !!t;
+    let t = useAtomWithSubscription(Bb);
+    return !!BrowserInfo.chromeos && !!BrowserInfo.chrome && !e && !!t;
   }();
   let n = function () {
     let {
       data
     } = _$$E5();
     let t = getFeatureFlags().make_sidebar_promo;
-    let r = C8();
+    let r = getIsAndroidOrIphoneNotFigmaMobile();
     return !!data && !!t && !r;
   }();
   let d = !isGovCluster() && !n;
@@ -3951,7 +3951,7 @@ function sH(e) {
       className: 'team_feed_page_link--sectionNameCustomSections--dPwog sidebar--sectionNameCustomSections--9e7LZ sidebar--sectionTextCustomSections---1KFn sidebar--sectionContentCustomSections--wI9mZ ellipsis--ellipsis--Tjyfa',
       children: jsxs('div', {
         className: 'team_feed_page_link--sectionNameCustomSectionsLeft--MLMFK',
-        children: [_$$tx('fig_feed.feed'), o && jsx('div', {
+        children: [renderI18nText('fig_feed.feed'), o && jsx('div', {
           className: 'team_feed_page_link--redDot--t6QPY red_dot--baseRedDot--pgZV7'
         })]
       })
@@ -4001,7 +4001,7 @@ function sJ() {
       text: jsx('div', {
         className: _$$s.pr36.$,
         children: jsx(_$$E, {
-          children: _$$tx('file_browser.tool_bar.trash')
+          children: renderI18nText('file_browser.tool_bar.trash')
         })
       }),
       wrapInListItem: !0
@@ -4052,21 +4052,21 @@ function sZ(e) {
       className: 'sidebar--betaAnnouncementHeader--g6Qzz',
       children: [jsx('div', {
         className: 'sidebar--betaAnnouncementHeaderTitle--AyDjm',
-        children: _$$tx('favorited_resources.custom_sections_banner_header')
+        children: renderI18nText('favorited_resources.custom_sections_banner_header')
       }), jsx(_$$K, {
-        'aria-label': _$$t('common.close'),
+        'aria-label': getI18nString('common.close'),
         'onClick': j,
         'children': jsx(_$$A, {})
       })]
     }), jsxs('div', {
       className: 'sidebar--betaAnnouncementBodyContainer--8u60g',
       children: [jsx('p', {
-        children: _$$tx('favorited_resources.custom_sections_banner_body')
+        children: renderI18nText('favorited_resources.custom_sections_banner_body')
       }), jsx('br', {}), jsx('p', {
         children: jsx($z, {
           variant: 'secondary',
           onClick: E,
-          children: _$$tx('favorited_resources.custom_sections_banner_create_new_section_button')
+          children: renderI18nText('favorited_resources.custom_sections_banner_create_new_section_button')
         })
       })]
     })]
@@ -4235,7 +4235,7 @@ function sZ(e) {
               }), k && S && (c ? jsxs(Fragment, {
                 children: [jsx(ad, {
                   hasWorkspaces: e.isOrgWithWorkspaces
-                }), jsx(sJ, {}), S && k && !_$$Ay.mobile && jsxs(Fragment, {
+                }), jsx(sJ, {}), S && k && !BrowserInfo.mobile && jsxs(Fragment, {
                   children: [jsx(tt, {
                     selectedView: u,
                     org: S,
@@ -4367,11 +4367,11 @@ function s2(e) {
     })
   });
 }
-let i_ = _$$eU(void 0);
-let ip = _$$eU(!1);
+let i_ = atom(void 0);
+let ip = atom(!1);
 let ig = H0('#2c2c2c');
 function ih(e) {
-  let t = _$$md(i_);
+  let t = useAtomWithSubscription(i_);
   if (!e || t === 'unset') return;
   let r = (e.colorConfig?.colors ?? [])[0];
   return t ? colorToHex(t) : r;
@@ -4490,7 +4490,7 @@ function iN(e) {
     }, [e]);
   }();
   let _ = _$$n() || r.view === 'litmus';
-  let p = !e.showingFileBrowserLoader && !_ && (!!_$$eD || _$$ce() || e.pageHeaderContent);
+  let p = !e.showingFileBrowserLoader && !_ && (!!desktopAPIInstance || _$$ce() || e.pageHeaderContent);
   useEffect(() => {
     let e = e => {
       e.keyCode === Uz.PERIOD && document.activeElement?.tagName === 'BODY' && getFeatureFlags().internal_only_debug_tools && getFeatureFlags().figment_debugger && _$$Y2();
@@ -4512,8 +4512,8 @@ function iN(e) {
     let n = useRef(null);
     let o = useRef(null);
     let l = useCallback(() => {
-      i.current || (i.current = !0, a.current = J6.createVital(e, {
-        level: _$$$.INFO,
+      i.current || (i.current = !0, a.current = observabilityClient.createVital(e, {
+        level: LogLevelStr.INFO,
         description: 'Logging scroll performance via useScrollPerformanceMonitor',
         context: r,
         trackFps: !0
@@ -4592,7 +4592,7 @@ function iD({
     roles,
     orgId,
     orgName
-  } = _$$R6(e => ({
+  } = selectWithShallowEqual(e => ({
     currentOrgUser: e.orgUsersByOrgId[e.currentUserOrgId]?.[e.user.id],
     teams: e.teams,
     user: e.user,
@@ -4638,20 +4638,20 @@ function iD({
       orgTeamStatus: e.status,
       onCreateTeam: canCreateTeam ? () => {
         let e = {
-          workspaceId: t ?? _$$O
+          workspaceId: t ?? UNASSIGNED
         };
         r(_$$to2({
           type: Uc,
           data: e
         }));
       } : void 0,
-      emptyView: t && !canCreateTeam ? _$$t('team_tile.no_teams.empty_workspace') : void 0
+      emptyView: t && !canCreateTeam ? getI18nString('team_tile.no_teams.empty_workspace') : void 0
     })
   }) : jsx(_$$X2, {
     isLoading: !0
   });
 }
-let iM = _$$eU(() => resourceUtils.loaded([]));
+let iM = atom(() => resourceUtils.loaded([]));
 function iB({
   workspaceId: e,
   onlyJoinedTeams: t
@@ -4660,7 +4660,7 @@ function iB({
   let a = _$$X$('useFilteredOrgTeamsQuery').unwrapOr(null);
   let i = H3(a);
   let n = !canMemberOrg(i ?? null, r);
-  let o = _$$md(n ? iM : EK);
+  let o = useAtomWithSubscription(n ? iM : EK);
   return useMemo(() => o.transform(a => a.filter(a => {
     if (t) return hasViewerRoleAccessOnTeam(a.id, r);
     if (e === null) {
@@ -4675,11 +4675,11 @@ function iU({
   children: e
 }) {
   return jsxs('section', {
-    'aria-label': _$$t('file_browser.teams'),
+    'aria-label': getI18nString('file_browser.teams'),
     'children': [jsx('div', {
       className: _$$s.mx32.textBodyLargeStrong.$,
       children: jsx('div', {
-        children: _$$t('file_browser.teams')
+        children: getI18nString('file_browser.teams')
       })
     }), e]
   });
@@ -4760,7 +4760,7 @@ function iJ({
 }) {
   let t = NV(WL);
   let r = useSelector(e => e.selectedView.view);
-  let s = _$$t('license_group_view.toolbar.new_team_button');
+  let s = getI18nString('license_group_view.toolbar.new_team_button');
   let n = () => {
     t(jd, {
       placement: r
@@ -4769,7 +4769,7 @@ function iJ({
   return e ? jsx('button', {
     'className': U()('button_custom--buttonBase--H2KEL button--buttonBase---72nl', kx(e) ? 'button_custom--buttonColorsForDarkBackground--CiydL' : 'button_custom--buttonColorsForLightBackground--wejKf', 'button_custom--buttonHugContents--Ntibj'),
     'data-tooltip-type': Ib.TEXT,
-    'data-tooltip': _$$t('license_group_view.toolbar.create_team_disabled'),
+    'data-tooltip': getI18nString('license_group_view.toolbar.create_team_disabled'),
     'data-tooltip-show-immediately': !0,
     'onMouseEnter': n,
     'disabled': !0,
@@ -4781,7 +4781,7 @@ function iJ({
     })
   }) : jsx(iY, {
     text: s,
-    tooltipText: _$$t('license_group_view.toolbar.create_team_disabled'),
+    tooltipText: getI18nString('license_group_view.toolbar.create_team_disabled'),
     onMouseEnter: n
   });
 }
@@ -4794,7 +4794,7 @@ function iX(e) {
     r ? t(_$$to2({
       type: Uc,
       data: {
-        workspaceId: e ?? _$$O
+        workspaceId: e ?? UNASSIGNED
       }
     })) : t(Dw({
       previousView: a
@@ -4821,11 +4821,11 @@ function iQ({
     kind: _$$A9.CUSTOM,
     key: iq.NEW_TEAM,
     element: jsx(_$$c2, {
-      'aria-label': _$$t('license_group_view.toolbar.new_team_button_aria_label'),
+      'aria-label': getI18nString('license_group_view.toolbar.new_team_button_aria_label'),
       'variant': 'primary',
       'onClick': n,
       'iconPrefix': jsx(_$$e0, {}),
-      'children': _$$t('license_group_view.toolbar.new_team_button')
+      'children': getI18nString('license_group_view.toolbar.new_team_button')
     })
   } : null;
 }
@@ -4841,7 +4841,7 @@ function iZ() {
   });
   return jsx(_$$r4, {
     header: jsx(iV, {
-      title: _$$t('license_group_view.meta.unassigned_title', {
+      title: getI18nString('license_group_view.meta.unassigned_title', {
         orgName: e.name
       }),
       rightSideActions: t ? [t] : void 0
@@ -4973,29 +4973,29 @@ let np = Ju(({
   let t = useDispatch();
   let r = _$$gY(n_);
   return jsx(_$$c4, {
-    title: _$$t('workspace_view.description_modal.title'),
+    title: getI18nString('workspace_view.description_modal.title'),
     subtitle: jsx('div', {
       className: _$$s.mb16.$,
       children: jsx(_$$E, {
         color: 'secondary',
-        children: _$$tx('workspace_view.description_modal.subtitle', {
+        children: renderI18nText('workspace_view.description_modal.subtitle', {
           allWorkspacesText: jsx('span', {
             className: _$$s.fontSemiBold.$,
-            children: _$$t('sidebar.browse.all_workspaces')
+            children: getI18nString('sidebar.browse.all_workspaces')
           })
         })
       })
     }),
     initialName: e.description ?? '',
-    placeholder: _$$t('workspace_view.description.placeholder'),
-    submitText: _$$t('workspace_view.description.save'),
+    placeholder: getI18nString('workspace_view.description.placeholder'),
+    submitText: getI18nString('workspace_view.description.save'),
     onRename: a => r({
       workspaceId: e.id,
       description: a
     }).then(() => t(_$$F.enqueue({
-      message: _$$t('workspace_view.description_update_updated')
+      message: getI18nString('workspace_view.description_update_updated')
     })), () => {
-      let e = _$$t('workspace_view.description_update_error');
+      let e = getI18nString('workspace_view.description_update_error');
       t(_$$s2.error(e));
       console.error(e);
     })
@@ -5010,7 +5010,7 @@ function nf() {
     a && s.push({
       key: 'admin',
       items: [{
-        displayText: _$$t('workspace_view.toolbar.admin_settings'),
+        displayText: getI18nString('workspace_view.toolbar.admin_settings'),
         onClick: () => {
           e(_$$sf({
             view: 'workspace',
@@ -5027,7 +5027,7 @@ function nf() {
     };
     s.push(i);
     i.items.push({
-      displayText: _$$t('file_browser.copy_link'),
+      displayText: getI18nString('file_browser.copy_link'),
       onClick: () => {
         let t = _$$fO(r.workspace.id, r.org.id);
         e(_$$S({
@@ -5036,7 +5036,7 @@ function nf() {
       }
     });
     r.workspace.canAdmin && i.items.push({
-      displayText: _$$t('license_group_view.toolbar.change_icon'),
+      displayText: getI18nString('license_group_view.toolbar.change_icon'),
       onClick: () => {
         e(_$$X3({
           entity: r.workspace,
@@ -5054,8 +5054,8 @@ function nw({
   onSelectFillOption: t
 }) {
   let r = {
-    solid: _$$t('workspace_view.toolbar.solid'),
-    no_fill: _$$t('workspace_view.toolbar.no_fill')
+    solid: getI18nString('workspace_view.toolbar.solid'),
+    no_fill: getI18nString('workspace_view.toolbar.no_fill')
   };
   return jsx(Ve, {
     className: _$$s.ml8.colorTextMenuSecondary.colorIconMenuSecondary.$,
@@ -5113,7 +5113,7 @@ function nT({
     }
   }((e?.colorConfig?.colors ?? [])[0]);
   let [_, p] = useState(m ? 'solid' : 'no_fill');
-  let [f, g] = _$$fp(i_);
+  let [f, g] = useAtomValueAndSetter(i_);
   useEffect(() => (g(m), () => {
     g(void 0);
   }), []);
@@ -5136,7 +5136,7 @@ function nT({
   return jsxs(Fragment, {
     children: [jsx('div', {
       'role': 'button',
-      'aria-label': _$$t('common.close'),
+      'aria-label': getI18nString('common.close'),
       'tabIndex': 0,
       'className': _$$s.absolute.wFull.hFull.top0.left0.zIndexTertiaryModal.$,
       'onClick': t
@@ -5181,7 +5181,7 @@ function nT({
         onClick: t,
         children: jsx('span', {
           className: _$$s.mr1.colorTextToolbarSecondary.$,
-          children: _$$t('workspace_view.color.toolbar.cancel')
+          children: getI18nString('workspace_view.color.toolbar.cancel')
         })
       }), jsx(_$$$n, {
         className: _$$s.mr8.$,
@@ -5190,10 +5190,10 @@ function nT({
             workspaceId: e.id,
             colors: ix(f) ? [colorToHex(f)] : [],
             onfulfilled: () => r(_$$F.enqueue({
-              message: _$$t('workspace_view.toolbar.workspace_color_updated')
+              message: getI18nString('workspace_view.toolbar.workspace_color_updated')
             })),
             onrejected: () => {
-              let e = _$$t('workspace_view.toolbar.workspace_color_update_error');
+              let e = getI18nString('workspace_view.toolbar.workspace_color_update_error');
               r(_$$s2.error(e));
               console.error(e);
             }
@@ -5202,7 +5202,7 @@ function nT({
         },
         children: jsx('span', {
           className: _$$s.colorTextOnbrand.$,
-          children: _$$t('workspace_view.color.toolbar.save')
+          children: getI18nString('workspace_view.color.toolbar.save')
         })
       })]
     })]
@@ -5220,7 +5220,7 @@ let nR = connect(e => ({
   return jsxs('div', {
     children: [!e.removeHeader && jsx('div', {
       className: _$$s.font13.fontMedium.mb12.$,
-      children: e.label || _$$t('file_browser.team_overview.member_label')
+      children: e.label || getI18nString('file_browser.team_overview.member_label')
     }), e.members.slice(0, s).map(r => {
       let s = r.id === e.currentUserId;
       let i = e.showAdminBadge && e.showAdminBadge(r);
@@ -5232,13 +5232,13 @@ let nR = connect(e => ({
         onClick: e.onMemberClick,
         badge: i ? {
           color: zE.DEFAULT,
-          text: _$$t('file_browser.badge_label.admin')
+          text: getI18nString('file_browser.badge_label.admin')
         } : void 0,
         includeUserEmailAddress: e.shouldIncludeUserEmailAddress,
         children: e.canLeave && s && jsx('span', {
           onClick: t,
           className: 'members_preview--leaveLink--v8vxs text--fontPos13--xW8hS text--_fontBase--QdLsd blue_link--blueLink--9rlnd',
-          children: _$$tx('file_browser.team.leave_confirm')
+          children: renderI18nText('file_browser.team.leave_confirm')
         })
       }, r.id);
     }), r > s && (e.customOverflowRow || jsxs('div', {
@@ -5249,7 +5249,7 @@ let nR = connect(e => ({
         className: 'members_preview--teamIcon--UFW2s'
       }), jsx('div', {
         className: 'members_preview--totalMemberCount--D3Q8a text--fontPos13--xW8hS text--_fontBase--QdLsd',
-        children: _$$tx('file_browser.team_overview.num_others', {
+        children: renderI18nText('file_browser.team_overview.num_others', {
           numMembers: r - s
         })
       })]
@@ -5271,7 +5271,7 @@ function nF(e) {
       hideXIcon: !0,
       hasTransparentBackground: !0,
       iconClassName: 'workspace_members_modal--searchIcon--7DSd4',
-      placeholder: _$$t('workspace_view.members_modal.search_placeholder')
+      placeholder: getI18nString('workspace_view.members_modal.search_placeholder')
     })
   });
 }
@@ -5309,15 +5309,15 @@ let nD = Ju(e => {
     children: jsxs(vo, {
       children: [jsxs(_$$Y3, {
         children: [jsx(_$$r5, {
-          children: _$$t('workspace_view.members_modal.title')
+          children: getI18nString('workspace_view.members_modal.title')
         }), jsxs(_$$t5.TabStrip, {
           manager: l,
           children: [jsx(_$$t5.Tab, {
             ...n.MEMBERS,
-            children: _$$t('workspace_view.members_modal.members')
+            children: getI18nString('workspace_view.members_modal.members')
           }), jsx(_$$t5.Tab, {
             ...n.ADMINS,
-            children: _$$t('workspace_view.members_modal.admins')
+            children: getI18nString('workspace_view.members_modal.admins')
           })]
         })]
       }), jsxs(_$$nB, {
@@ -5334,7 +5334,7 @@ let nD = Ju(e => {
             children: [jsx(_$$t5.TabPanel, {
               ...o.MEMBERS,
               children: d.length === 0 ? jsx(nP, {
-                content: _$$tx('workspace_view.members_modal.no_members', {
+                content: renderI18nText('workspace_view.members_modal.no_members', {
                   workspaceName: e.workspace.name
                 })
               }) : jsx(nM, {
@@ -5345,7 +5345,7 @@ let nD = Ju(e => {
             }), jsx(_$$t5.TabPanel, {
               ...o.ADMINS,
               children: c.length === 0 ? jsx(nP, {
-                content: _$$tx('workspace_view.members_modal.no_admins', {
+                content: renderI18nText('workspace_view.members_modal.no_admins', {
                   workspaceName: e.workspace.name
                 })
               }) : jsx(nM, {
@@ -5388,7 +5388,7 @@ function nM({
     };
   }) || [];
   return l.length === 0 ? jsx(nP, {
-    content: _$$tx('workspace_view.members_modal.no_results', {
+    content: renderI18nText('workspace_view.members_modal.no_results', {
       query: t
     })
   }) : jsx(nR, {
@@ -5411,12 +5411,12 @@ function nB(e) {
   let o = useSelector(e => e.currentUserOrgId);
   let l = useSelector(e => e.avatarEditorState);
   let d = workspace.canAdmin;
-  let [c, u] = _$$fp(ip);
+  let [c, u] = useAtomValueAndSetter(ip);
   let {
     canCreateTeam
   } = LM(org, workspace.id);
   let _ = window.innerWidth <= parsePxInt(tgj);
-  let p = workspace ? workspace.id : _$$O;
+  let p = workspace ? workspace.id : UNASSIGNED;
   let f = ih(workspace);
   let g = function (e) {
     if (e && e !== 'unset') return kx(e) ? 'dark' : 'light';
@@ -5456,11 +5456,11 @@ function nB(e) {
       'iconPrefix': jsx(_$$_4, {}),
       'htmlAttributes': {
         'data-tooltip-type': Ib.TEXT,
-        'data-tooltip': _$$t('file_browser.view_members_with_count', {
+        'data-tooltip': getI18nString('file_browser.view_members_with_count', {
           numMembers: h
         })
       },
-      'aria-label': _$$t('file_browser.view_members_with_count', {
+      'aria-label': getI18nString('file_browser.view_members_with_count', {
         numMembers: h
       }),
       'children': e.isWorkspaceMembersLoading ? jsx(_$$k3, {}) : jsx(Fragment, {
@@ -5479,7 +5479,7 @@ function nB(e) {
   let j = function () {
     let e = nf();
     let t = useDispatch();
-    let [r, a] = _$$fp(ip);
+    let [r, a] = useAtomValueAndSetter(ip);
     return useCallback(r => {
       let s = e(r);
       let i = s[s.length - 1];
@@ -5488,10 +5488,10 @@ function nB(e) {
         items: []
       }, s.push(i));
       r.workspace.canAdmin && (i.items.push({
-        displayText: _$$t('workspace_view.toolbar.change_color'),
+        displayText: getI18nString('workspace_view.toolbar.change_color'),
         onClick: () => a(!0)
       }), i.items.push({
-        displayText: _$$t('workspace_view.description.title'),
+        displayText: getI18nString('workspace_view.description.title'),
         onClick: () => {
           t(_$$to2({
             type: np,
@@ -5510,7 +5510,7 @@ function nB(e) {
   }) : canCreateTeam && _ ? [{
     key: 'mobile-workspace-page-header-menu-items',
     items: [{
-      displayText: _$$t('org_view.new_team'),
+      displayText: getI18nString('org_view.new_team'),
       onClick: b
     }]
   }] : void 0;
@@ -5525,7 +5525,7 @@ function nB(e) {
     element: w
   }), !workspace) {
     return jsx(iV, {
-      title: _$$t('license_group_view.meta.unassigned_title', {
+      title: getI18nString('license_group_view.meta.unassigned_title', {
         orgName: org.name
       }),
       rightSideActions: E
@@ -5535,7 +5535,7 @@ function nB(e) {
     kind: _$$A9.CUSTOM,
     key: iq.DROPDOWN,
     element: jsx(ns, {
-      buttonAriaLabel: _$$t('org_view.page_header_dropdown_label'),
+      buttonAriaLabel: getI18nString('org_view.page_header_dropdown_label'),
       dropdownKey: `workspace-context-${workspace.id}`,
       menuGroups: T
     })
@@ -5563,8 +5563,8 @@ function nB(e) {
         }),
         badge: workspace.orgAccess === FAccessLevelType.SECRET ? jsx('div', {
           'data-tooltip-type': Ib.TEXT,
-          'data-tooltip': _$$t('workspace_table.secret_workspace_lock_tooltip'),
-          'data-tooltip-subtext': _$$t('workspace_table.secret_workspace_lock_tooltip_subtext'),
+          'data-tooltip': getI18nString('workspace_table.secret_workspace_lock_tooltip'),
+          'data-tooltip-subtext': getI18nString('workspace_table.secret_workspace_lock_tooltip_subtext'),
           'data-tooltip-timeout-delay': 500,
           'data-tooltip-max-width': 300,
           'children': jsx(_$$$4, {
@@ -5605,7 +5605,7 @@ function nU(e) {
     className: _$$s.my24.mr8.ml24.$,
     children: [jsx('div', {
       className: 'workspace_page_meta_content--membersHeader--0jaJ3 text--fontPos13--xW8hS text--_fontBase--QdLsd',
-      children: _$$t('workspace_view.sidebar.members')
+      children: getI18nString('workspace_view.sidebar.members')
     }), jsx(nR, {
       removeHeader: !0,
       members: n.map(e => e.baseOrgUser?.user).filter(e => !!e),
@@ -5630,7 +5630,7 @@ function nU(e) {
               }
             }));
           },
-          children: _$$t('workspace_view.sidebar.see_all_members')
+          children: getI18nString('workspace_view.sidebar.see_all_members')
         })
       })
     })]
@@ -5721,7 +5721,7 @@ function nq({
     query: u,
     onSearchChange: m,
     clearSearch: () => m(''),
-    searchPlaceholder: _$$t('file_browser.choose_file_modal.search_for_a_file'),
+    searchPlaceholder: getI18nString('file_browser.choose_file_modal.search_for_a_file'),
     children: l.length === 0 ? jsx('div', {
       className: 'x78zum5 x1q0g3np x195vfkc x6s0dn4 xl56j7k x1n0bwc9 x5yr21d xh8yej3 x1iyjqo2 x2b8uid',
       children: r
@@ -5811,7 +5811,7 @@ function n1({
         children: e.name
       }), t && r && jsx('span', {
         'data-tooltip-type': 'text',
-        'data-tooltip': _$$t('file_browser.pinning.choose_file_to_pin_modal.file_not_workspace_visible.tooltip', {
+        'data-tooltip': getI18nString('file_browser.pinning.choose_file_to_pin_modal.file_not_workspace_visible.tooltip', {
           orgName: r
         }),
         'data-tooltip-show-immediately': !0,
@@ -5925,13 +5925,13 @@ let n2 = Ju(({
   }, []);
   if (h.status !== 'loaded' || f.status !== 'loaded') {
     return jsx(nX, {
-      title: _$$t('file_browser.pinning.pin_modal.pin_file_to_workspace'),
-      confirmText: _$$t('general.next'),
+      title: getI18nString('file_browser.pinning.pin_modal.pin_file_to_workspace'),
+      confirmText: getI18nString('general.next'),
       isDisabled: !0,
       query: l,
       onSearchChange: b,
       clearSearch: _$$lQ,
-      searchPlaceholder: _$$t('file_browser.choose_file_modal.search_for_a_file'),
+      searchPlaceholder: getI18nString('file_browser.choose_file_modal.search_for_a_file'),
       children: jsx('div', {
         className: U()(_$$s.flex.itemsCenter.justifyCenter.wFull.hFull.flexGrow1.$),
         children: jsx(qc, {})
@@ -5943,15 +5943,15 @@ let n2 = Ju(({
     return !!t && !t?.canPinFileToWorkspace;
   };
   return jsx(nq, {
-    confirmText: _$$t('general.next'),
-    emptyStateText: l ? _$$tx('file_browser.workspace_pinning.no_files_matching_query', {
+    confirmText: getI18nString('general.next'),
+    emptyStateText: l ? renderI18nText('file_browser.workspace_pinning.no_files_matching_query', {
       searchQuery: jsx('div', {
         className: _$$s.colorText.fontMedium.truncate.$,
         children: l
       })
-    }) : _$$t('file_browser.workspace_pinning.no_suggested_files'),
+    }) : getI18nString('file_browser.workspace_pinning.no_suggested_files'),
     files: f.data,
-    gridText: l ? void 0 : _$$t('file_browser.pinning.suggested'),
+    gridText: l ? void 0 : getI18nString('file_browser.pinning.suggested'),
     onSelectFile: _,
     onSubmit: x,
     query: l,
@@ -5963,7 +5963,7 @@ let n2 = Ju(({
     setQuery: b,
     shouldDisableTile: v,
     tileClassName: 'choose_file_to_pin_modal--showOnHoverContainer--DO9-h',
-    title: _$$t('file_browser.pinning.pin_modal.pin_file_to_workspace')
+    title: getI18nString('file_browser.pinning.pin_modal.pin_file_to_workspace')
   });
 }, 'ChooseFileToPinModal');
 let oa = {
@@ -6016,7 +6016,7 @@ function os({
   return jsxs(Fragment, {
     children: [jsx('div', {
       className: 'x1n0bwc9 xlyipyv xuxw1ft xb3r6kr',
-      children: _$$t('file_browser.pinning.suggested')
+      children: getI18nString('file_browser.pinning.suggested')
     }), jsx(_$$A10, {
       items: t,
       multiselectDisabled: !0,
@@ -6085,12 +6085,12 @@ function oi({
     children: [jsx('div', {
       ..._$$xk(on.fileName),
       children: e.name
-    }), t || r || _$$Ay.mobile || _$$Ay.tablet ? jsx('div', {
+    }), t || r || BrowserInfo.mobile || BrowserInfo.tablet ? jsx('div', {
       role: 'button',
       tabIndex: 0,
       className: 'x1quhyk7 xlyipyv xuxw1ft xb3r6kr x1ypdohk',
       onClick: o,
-      children: _$$t('file_browser.pinning.pin_file')
+      children: getI18nString('file_browser.pinning.pin_file')
     }) : l ? jsx('div', {
       className: 'x1n0bwc9 xlyipyv xuxw1ft xb3r6kr',
       children: l
@@ -6137,7 +6137,7 @@ function oo({
     suggestedFiles: r.data
   }) : jsx('span', {
     className: _$$s.colorTextSecondary.truncate.textBodyLarge.alignCenter.$,
-    children: _$$t('file_browser.pinning.no_pinned_files')
+    children: getI18nString('file_browser.pinning.no_pinned_files')
   });
   return jsx('div', {
     className: _$$s.bRadius8.colorBgSecondary.px32.py24.flex.flexColumn.gap16.mt8.$,
@@ -6483,7 +6483,7 @@ function oN({
       truncate: !0,
       showTooltipWhenTruncated: !0,
       color: 'secondary',
-      children: _$$t('tile.file_tile.pinned_by_user', {
+      children: getI18nString('tile.file_tile.pinned_by_user', {
         name: e.creator?.name ?? ''
       })
     })]
@@ -6506,12 +6506,12 @@ let oC = {
     $$css: !0
   }
 };
-let oS = Iz(e => E2(`file_browser.workspace.pinned_section_open.${e}`, !0, _$$z7.boolean()));
+let oS = createRemovableAtomFamily(e => createValidatedLocalStorageAtom(`file_browser.workspace.pinned_section_open.${e}`, !0, _$$z7.boolean()));
 function ok({
   workspace: e,
   isAssignedWorkspace: t
 }) {
-  let [r, n] = _$$fp(oS(e.id));
+  let [r, n] = useAtomValueAndSetter(oS(e.id));
   let o = useCallback(() => n(e => !e), [n]);
   let l = useDispatch();
   let d = e.pinnedFiles?.length ?? 0;
@@ -6538,19 +6538,19 @@ function ok({
           'tabIndex': 0,
           'className': _$$s.flex.flexRow.gap4.itemsCenter.textBodyLargeStrong.cursorDefault.$,
           'onClick': o,
-          'children': _$$t('file_browser.pinning.pinned_files')
+          'children': getI18nString('file_browser.pinning.pinned_files')
         }), c && jsx($n, {
           variant: 'link',
           onClick: _,
           disabled: u,
           htmlAttributes: {
-            'data-tooltip': u ? _$$t('file_browser.pinning.max_files.add_button_tooltip', {
+            'data-tooltip': u ? getI18nString('file_browser.pinning.max_files.add_button_tooltip', {
               maxPins: D1
             }) : void 0,
             'data-tooltip-type': Ib.TEXT,
             'data-tooltip-show-above': !0
           },
-          children: _$$t('file_browser.pinning.add_file')
+          children: getI18nString('file_browser.pinning.add_file')
         })]
       }),
       content: jsx(oE, {
@@ -6672,7 +6672,7 @@ function oA({
     content: jsxs('div', {
       className: _$$s.flex.flexColumn.gap24.my24.$,
       children: [jsx('section', {
-        'aria-label': _$$t('file_browser.pinning.pinned_files'),
+        'aria-label': getI18nString('file_browser.pinning.pinned_files'),
         'className': _$$s.pl12.pr32.borderBox.wFull.$,
         'children': jsx(ok, {
           workspace: t,
@@ -6696,10 +6696,10 @@ function oq({
   return jsxs('div', {
     children: [jsx('h1', {
       ..._$$xk(oX.headerText),
-      children: _$$t('community.resource_hub.browse_resources')
+      children: getI18nString('community.resource_hub.browse_resources')
     }), jsx('div', {
       ..._$$xk(oX.subHeaderText),
-      children: e === N$.INTERNAL ? _$$t('community.resource_hub.browse_resources_internal_subheader') : _$$t('community.resource_hub.browse_resources_community_subheader')
+      children: e === N$.INTERNAL ? getI18nString('community.resource_hub.browse_resources_internal_subheader') : getI18nString('community.resource_hub.browse_resources_community_subheader')
     })]
   });
 }
@@ -6750,34 +6750,34 @@ function le(e) {
 var lt = (e => (e.marketing = 'marketing', e.product = 'product', e.pitchDeck = 'pitch-deck', e.sales = 'sales', e.landingPages = 'landing-pages', e.portfolio = 'portfolio', e.ecommerce = 'ecommerce', e.blog = 'blog', e.wedding = 'wedding', e.photography = 'photography', e))(lt || {});
 function lr(e, t, r) {
   let a = t ? {
-    'marketing': _$$t('community.resource_hub.categories.marketing_presentations'),
-    'product': _$$t('community.resource_hub.categories.product_presentations'),
-    'pitch-deck': _$$t('community.resource_hub.categories.pitch_decks'),
-    'sales': _$$t('community.resource_hub.categories.sales_presentations'),
-    'landing-pages': _$$t('community.resource_hub.categories.landing_pages'),
-    'portfolio': _$$t('community.resource_hub.categories.portfolio'),
-    'ecommerce': _$$t('community.resource_hub.categories.ecommerce'),
-    'blog': _$$t('community.resource_hub.categories.blog'),
-    'wedding': _$$t('community.resource_hub.categories.wedding'),
-    'photography': _$$t('community.resource_hub.categories.photography')
+    'marketing': getI18nString('community.resource_hub.categories.marketing_presentations'),
+    'product': getI18nString('community.resource_hub.categories.product_presentations'),
+    'pitch-deck': getI18nString('community.resource_hub.categories.pitch_decks'),
+    'sales': getI18nString('community.resource_hub.categories.sales_presentations'),
+    'landing-pages': getI18nString('community.resource_hub.categories.landing_pages'),
+    'portfolio': getI18nString('community.resource_hub.categories.portfolio'),
+    'ecommerce': getI18nString('community.resource_hub.categories.ecommerce'),
+    'blog': getI18nString('community.resource_hub.categories.blog'),
+    'wedding': getI18nString('community.resource_hub.categories.wedding'),
+    'photography': getI18nString('community.resource_hub.categories.photography')
   }[t] : void 0;
   if (a) return a;
   let s = WG(e);
   let i = r ? function (e, t) {
     let r = {
       [LJ.whiteboarding]: {
-        [_$$L3.BrowseResourceTypes.WIDGETS]: _$$t('categories.widgets')
+        [_$$L3.BrowseResourceTypes.WIDGETS]: getI18nString('categories.widgets')
       },
       [LJ.designTools]: {
-        [_$$L3.BrowseResourceTypes.PLUGINS]: _$$t('community.view_bar.plugins')
+        [_$$L3.BrowseResourceTypes.PLUGINS]: getI18nString('community.view_bar.plugins')
       }
     };
     return r[e]?.[t];
   }(s, r) : void 0;
   return i || {
-    [LJ.mobileApps]: _$$t('community.resource_hub.categories.mobile_app_templates'),
-    [LJ.desktopAppsWebsites]: _$$t('community.resource_hub.categories.websites'),
-    [LJ.make]: _$$t('community.view_bar.figmake')
+    [LJ.mobileApps]: getI18nString('community.resource_hub.categories.mobile_app_templates'),
+    [LJ.desktopAppsWebsites]: getI18nString('community.resource_hub.categories.websites'),
+    [LJ.make]: getI18nString('community.view_bar.figmake')
   }[s] || _$$xF(e);
 }
 let li = 'category_menu_button--buttonText--0inUk';
@@ -6894,45 +6894,45 @@ function ll() {
   }]);
   let t = [[{
     href: e.uikitRoute?.href,
-    text: _$$t('categories.ui_kits')
+    text: getI18nString('categories.ui_kits')
   }, {
     href: e.wireframesRoute?.href,
-    text: _$$t('categories.wireframes')
+    text: getI18nString('categories.wireframes')
   }], [{
     href: e.socialMediaTemplatesRoute?.href,
-    text: _$$t('categories.social_media_templates')
+    text: getI18nString('categories.social_media_templates')
   }, {
     href: e.cardTemplatesRoute?.href,
-    text: _$$t('categories.cards_and_invites')
+    text: getI18nString('categories.cards_and_invites')
   }], [{
     href: e.mobileAppRoute?.href,
-    text: _$$t('community.resource_hub.categories.mobile_app_templates')
+    text: getI18nString('community.resource_hub.categories.mobile_app_templates')
   }, {
     href: e.resumeRoute?.href,
-    text: _$$t('categories.resume_templates')
+    text: getI18nString('categories.resume_templates')
   }, {
     href: e.portfolioRoute?.href,
-    text: _$$t('categories.portfolio_templates')
+    text: getI18nString('categories.portfolio_templates')
   }, {
     href: e.designTemplatesRoute?.href,
-    text: _$$t('community.resource_hub.see_more')
+    text: getI18nString('community.resource_hub.see_more')
   }], [{
     href: e.iconsRoute?.href,
-    text: _$$t('categories.icons')
+    text: getI18nString('categories.icons')
   }, {
     href: e.illustrationsRoute?.href,
-    text: _$$t('categories.illustrations')
+    text: getI18nString('categories.illustrations')
   }, {
     href: e.shapesColorsRoute?.href,
-    text: _$$t('categories.shapes_colors')
+    text: getI18nString('categories.shapes_colors')
   }, {
     href: e.visualAssetsRoute?.href,
-    text: _$$t('community.resource_hub.see_more')
+    text: getI18nString('community.resource_hub.see_more')
   }]].filter(e => e.length > 0);
   return jsx(lo, {
     parentDropdown: o9.DESIGN_RESOURCES,
     menuItemsByGroup: t,
-    defaultText: _$$t('community.homepage.figma_section.header'),
+    defaultText: getI18nString('community.homepage.figma_section.header'),
     iconPrefix: jsx(_$$n3, {})
   });
 }
@@ -6972,32 +6972,32 @@ function lc() {
   }]);
   let t = [[{
     href: e.fileOrganizationRoute?.href,
-    text: _$$t('categories.file_organization')
+    text: getI18nString('categories.file_organization')
   }, {
     href: e.developmentRoute?.href,
-    text: _$$t('categories.navbar.development')
+    text: getI18nString('categories.navbar.development')
   }, {
     href: e.editingEffectsRoute?.href,
-    text: _$$t('categories.editing_effects')
+    text: getI18nString('categories.editing_effects')
   }, {
     href: e.importExportRoute?.href,
-    text: _$$t('categories.import_export')
+    text: getI18nString('categories.import_export')
   }, {
     href: e.accessibilityRoute?.href,
-    text: _$$t('categories.accessibility_tools')
+    text: getI18nString('categories.accessibility_tools')
   }, {
     href: e.prototypingAnimationRoute?.href,
-    text: _$$t('categories.prototyping_animation')
+    text: getI18nString('categories.prototyping_animation')
   }], [{
     href: e.widgetsRoute?.href,
-    text: _$$t('community.resource_hub.categories.see_all_widgets')
+    text: getI18nString('community.resource_hub.categories.see_all_widgets')
   }, {
     href: e.pluginsRoute?.href,
-    text: _$$t('community.resource_hub.categories.see_all_plugins')
+    text: getI18nString('community.resource_hub.categories.see_all_plugins')
   }]];
   return jsx(lo, {
     parentDropdown: o9.PLUGINS_AND_WIDGETS,
-    defaultText: _$$t('community.resource_hub.categories.plugins_and_widgets'),
+    defaultText: getI18nString('community.resource_hub.categories.plugins_and_widgets'),
     iconPrefix: jsx(_$$u5, {}),
     menuItemsByGroup: t
   });
@@ -7030,24 +7030,24 @@ function lm() {
   }]);
   let t = [[{
     href: e.marketingRoute?.href,
-    text: _$$t('community.resource_hub.categories.marketing_presentations')
+    text: getI18nString('community.resource_hub.categories.marketing_presentations')
   }, {
     href: e.productRoute?.href,
-    text: _$$t('community.resource_hub.categories.product_presentations')
+    text: getI18nString('community.resource_hub.categories.product_presentations')
   }, {
     href: e.pitchDecksRoute?.href,
-    text: _$$t('community.resource_hub.categories.pitch_decks')
+    text: getI18nString('community.resource_hub.categories.pitch_decks')
   }, {
     href: e.salesRoute?.href,
-    text: _$$t('community.resource_hub.categories.sales_presentations')
+    text: getI18nString('community.resource_hub.categories.sales_presentations')
   }], [{
     href: e.presentationsRoute?.href,
-    text: _$$t('community.resource_hub.see_more')
+    text: getI18nString('community.resource_hub.see_more')
   }]];
   return jsx(lo, {
     parentDropdown: o9.PRESENTATIONS,
     menuItemsByGroup: t,
-    defaultText: _$$t('categories.presentations'),
+    defaultText: getI18nString('categories.presentations'),
     iconPrefix: jsx(_$$l3, {})
   });
 }
@@ -7089,30 +7089,30 @@ function l_() {
   }]);
   let t = [[{
     href: e.landingPagesRoute?.href,
-    text: _$$t('community.resource_hub.categories.landing_pages')
+    text: getI18nString('community.resource_hub.categories.landing_pages')
   }, {
     href: e.portfolioRoute?.href,
-    text: _$$t('community.resource_hub.categories.portfolio')
+    text: getI18nString('community.resource_hub.categories.portfolio')
   }, {
     href: e.ecommerceRoute?.href,
-    text: _$$t('community.resource_hub.categories.ecommerce')
+    text: getI18nString('community.resource_hub.categories.ecommerce')
   }, {
     href: e.blogRoute?.href,
-    text: _$$t('community.resource_hub.categories.blog')
+    text: getI18nString('community.resource_hub.categories.blog')
   }, {
     href: e.weddingRoute?.href,
-    text: _$$t('community.resource_hub.categories.wedding')
+    text: getI18nString('community.resource_hub.categories.wedding')
   }, {
     href: e.photographyRoute?.href,
-    text: _$$t('community.resource_hub.categories.photography')
+    text: getI18nString('community.resource_hub.categories.photography')
   }], [{
     href: e.websitesRoute?.href,
-    text: _$$t('community.resource_hub.see_more')
+    text: getI18nString('community.resource_hub.see_more')
   }]];
   return jsx(lo, {
     parentDropdown: o9.WEBSITES,
     menuItemsByGroup: t,
-    defaultText: _$$t('community.resource_hub.categories.websites'),
+    defaultText: getI18nString('community.resource_hub.categories.websites'),
     iconPrefix: jsx(_$$J3, {})
   });
 }
@@ -7138,32 +7138,32 @@ function lf() {
   }]);
   let t = [[{
     href: e.diagrammingRoute?.href,
-    text: _$$t('categories.diagramming')
+    text: getI18nString('categories.diagramming')
   }, {
     href: e.brainstormingRoute?.href,
-    text: _$$t('categories.brainstorming')
+    text: getI18nString('categories.brainstorming')
   }, {
     href: e.funGamesRoute?.href,
-    text: _$$t('categories.fun_games')
+    text: getI18nString('categories.fun_games')
   }, {
     href: e.teamMeetingsRoute?.href,
-    text: _$$t('categories.team_meetings')
+    text: getI18nString('categories.team_meetings')
   }, {
     href: e.strategicPlanningRoute?.href,
-    text: _$$t('categories.strategic_planning')
+    text: getI18nString('categories.strategic_planning')
   }], [{
     href: e.whiteboardingRoute?.href,
-    text: _$$t('community.resource_hub.see_more')
+    text: getI18nString('community.resource_hub.see_more')
   }]];
   return jsx(lo, {
     parentDropdown: o9.WHITEBOARDING,
     menuItemsByGroup: t,
-    defaultText: _$$t('categories.whiteboarding'),
+    defaultText: getI18nString('categories.whiteboarding'),
     iconPrefix: jsx(_$$D3, {})
   });
 }
 function lg() {
-  let e = _$$t('community.view_bar.figmake');
+  let e = getI18nString('community.view_bar.figmake');
   let t = le([{
     key: 'categoryRoute',
     category: LJ.make
@@ -7184,7 +7184,7 @@ function lg() {
   }) : null;
 }
 function lx() {
-  let e = _$$t('community.profiles.saved');
+  let e = getI18nString('community.profiles.saved');
   let t = Om();
   let r = _$$tv() ?? void 0;
   return jsx(_$$E6, {
@@ -7516,7 +7516,7 @@ function l$({
   showSeeMore: s
 }) {
   let i = t && s ? jsxs(_$$e2, {
-    'aria-label': _$$t('community.resource_hub.see_more'),
+    'aria-label': getI18nString('community.resource_hub.see_more'),
     'onClick': () => {
       CA(t.pathname);
       Ay.push(t.href);
@@ -7924,93 +7924,93 @@ function lY() {
       switch (e) {
         case LJ.brainstorming:
           return {
-            title: _$$t('categories.brainstorming'),
-            description: _$$t('community.resource_hub.category_description.brainstorming')
+            title: getI18nString('categories.brainstorming'),
+            description: getI18nString('community.resource_hub.category_description.brainstorming')
           };
         case LJ.cardTemplates:
           return {
-            title: _$$t('community.resource_hub.featured_categories.invites_templates'),
-            description: _$$t('community.resource_hub.category_description.card_templates')
+            title: getI18nString('community.resource_hub.featured_categories.invites_templates'),
+            description: getI18nString('community.resource_hub.category_description.card_templates')
           };
         case LJ.classroomActivities:
           return {
-            title: _$$t('community.resource_hub.featured_categories.classroom_activities'),
-            description: _$$t('community.resource_hub.category_description.classroom_activities')
+            title: getI18nString('community.resource_hub.featured_categories.classroom_activities'),
+            description: getI18nString('community.resource_hub.category_description.classroom_activities')
           };
         case LJ.dataTemplates:
           return {
-            title: _$$t('community.footer.data_templates'),
-            description: _$$t('community.resource_hub.category_description.data_templates')
+            title: getI18nString('community.footer.data_templates'),
+            description: getI18nString('community.resource_hub.category_description.data_templates')
           };
         case LJ.designTutorials:
           return {
-            title: _$$t('community.resource_hub.featured_categories.design_tutorials'),
-            description: _$$t('community.resource_hub.category_description.design_tutorials')
+            title: getI18nString('community.resource_hub.featured_categories.design_tutorials'),
+            description: getI18nString('community.resource_hub.category_description.design_tutorials')
           };
         case LJ.development:
           return {
-            title: _$$t('community.resource_hub.featured_categories.plugins_for_development'),
-            description: _$$t('community.resource_hub.category_description.development')
+            title: getI18nString('community.resource_hub.featured_categories.plugins_for_development'),
+            description: getI18nString('community.resource_hub.category_description.development')
           };
         case LJ.diagramming:
           return {
-            title: _$$t('categories.diagramming'),
-            description: _$$t('community.resource_hub.category_description.diagramming')
+            title: getI18nString('categories.diagramming'),
+            description: getI18nString('community.resource_hub.category_description.diagramming')
           };
         case LJ.editingEffects:
           return {
-            title: _$$t('community.resource_hub.featured_categories.plugins_for_editing_and_effects'),
-            description: _$$t('community.resource_hub.category_description.editing_effects')
+            title: getI18nString('community.resource_hub.featured_categories.plugins_for_editing_and_effects'),
+            description: getI18nString('community.resource_hub.category_description.editing_effects')
           };
         case LJ.fileOrganization:
           return {
-            title: _$$t('community.resource_hub.featured_categories.plugins_for_file_organization'),
-            description: _$$t('community.resource_hub.category_description.file_organization')
+            title: getI18nString('community.resource_hub.featured_categories.plugins_for_file_organization'),
+            description: getI18nString('community.resource_hub.category_description.file_organization')
           };
         case LJ.presentations:
           return {
-            title: _$$t('categories.presentations'),
-            description: _$$t('community.resource_hub.category_description.presentations')
+            title: getI18nString('categories.presentations'),
+            description: getI18nString('community.resource_hub.category_description.presentations')
           };
         case LJ.resumes:
           return {
-            title: _$$t('categories.resume_templates'),
-            description: _$$t('community.resource_hub.category_description.resumes')
+            title: getI18nString('categories.resume_templates'),
+            description: getI18nString('community.resource_hub.category_description.resumes')
           };
         case LJ.strategicPlanning:
           return {
-            title: _$$t('categories.strategic_planning'),
-            description: _$$t('community.resource_hub.category_description.strategic_planning')
+            title: getI18nString('categories.strategic_planning'),
+            description: getI18nString('community.resource_hub.category_description.strategic_planning')
           };
         case LJ.teamMeetings:
           return {
-            title: _$$t('community.resource_hub.featured_categories.team_meetings'),
-            description: _$$t('community.resource_hub.category_description.team_meetings')
+            title: getI18nString('community.resource_hub.featured_categories.team_meetings'),
+            description: getI18nString('community.resource_hub.category_description.team_meetings')
           };
         case LJ.uiKits:
           return {
-            title: _$$t('categories.ui_kits'),
-            description: _$$t('community.resource_hub.category_description.ui_kits')
+            title: getI18nString('categories.ui_kits'),
+            description: getI18nString('community.resource_hub.category_description.ui_kits')
           };
         case LJ.visualAssets:
           return {
-            title: _$$t('community.resource_hub.featured_categories.assets'),
-            description: _$$t('community.resource_hub.category_description.visual_assets')
+            title: getI18nString('community.resource_hub.featured_categories.assets'),
+            description: getI18nString('community.resource_hub.category_description.visual_assets')
           };
         case LJ.whiteboarding:
           return {
-            title: _$$t('categories.widgets'),
-            description: _$$t('community.resource_hub.category_description.widgets')
+            title: getI18nString('categories.widgets'),
+            description: getI18nString('community.resource_hub.category_description.widgets')
           };
         case LJ.wireframes:
           return {
-            title: _$$t('categories.wireframes'),
-            description: _$$t('community.resource_hub.category_description.wireframes')
+            title: getI18nString('categories.wireframes'),
+            description: getI18nString('community.resource_hub.category_description.wireframes')
           };
         case LJ.workshopTemplates:
           return {
-            title: _$$t('community.resource_hub.featured_categories.workshop_templates'),
-            description: _$$t('community.resource_hub.category_description.workshop_templates')
+            title: getI18nString('community.resource_hub.featured_categories.workshop_templates'),
+            description: getI18nString('community.resource_hub.category_description.workshop_templates')
           };
         default:
           throwTypeError(e);
@@ -8044,7 +8044,7 @@ function lY() {
     return e;
   }, [o, i]);
   return jsx(l$, {
-    header: _$$t('community.resource_hub.featured_categories'),
+    header: getI18nString('community.resource_hub.featured_categories'),
     content: jsx('div', {
       className: 'x78zum5 x1q0g3np x1665zp3 xc6p2dh',
       ref: n,
@@ -8063,14 +8063,14 @@ function lX({
     let t = {
       brainstorming: {
         key: 'brainstorming',
-        header: _$$t('categories.brainstorming'),
+        header: getI18nString('categories.brainstorming'),
         categoryForQuery: LJ.brainstorming,
         categorySlug: LJ.brainstorming,
         resourceType: _$$vt2.FIGJAM_TEMPLATE
       },
       cooperTemplate: {
         key: 'cooperTemplate',
-        header: _$$t('categories.social_media_templates'),
+        header: getI18nString('categories.social_media_templates'),
         categoryForQuery: LJ.socialMediaTemplates,
         categorySlug: LJ.socialMediaTemplates,
         resourceType: _$$vt2.COOPER_TEMPLATE_FILE,
@@ -8079,41 +8079,41 @@ function lX({
       },
       dataTemplate: {
         key: 'dataTemplate',
-        header: _$$t('community.footer.data_templates'),
+        header: getI18nString('community.footer.data_templates'),
         categoryForQuery: LJ.dataTemplates,
         categorySlug: LJ.dataTemplates,
         resourceType: _$$vt2.DESIGN_TEMPLATE
       },
       designTemplate: {
         key: 'designTemplate',
-        header: _$$t('categories.design_templates'),
+        header: getI18nString('categories.design_templates'),
         categorySlug: LJ.designTemplates,
         resourceType: _$$vt2.DESIGN_TEMPLATE
       },
       designTools: {
         key: 'designTools',
-        header: _$$t('community.view_bar.plugins'),
+        header: getI18nString('community.view_bar.plugins'),
         categorySlug: LJ.designTools,
         resourceType: _$$vt2.PLUGIN,
         isPlugin: !0
       },
       diagramming: {
         key: 'diagramming',
-        header: _$$t('categories.diagramming'),
+        header: getI18nString('categories.diagramming'),
         categoryForQuery: LJ.diagramming,
         categorySlug: LJ.diagramming,
         resourceType: _$$vt2.FIGJAM_TEMPLATE
       },
       education: {
         key: 'education',
-        header: _$$t('categories.education'),
+        header: getI18nString('categories.education'),
         categoryForQuery: LJ.education,
         categorySlug: LJ.education,
         resourceType: _$$vt2.DESIGN_TEMPLATE
       },
       figJamTemplate: {
         key: 'figJamTemplate',
-        header: _$$t('community.resource_hub.figjam_templates'),
+        header: getI18nString('community.resource_hub.figjam_templates'),
         categorySlug: LJ.whiteboarding,
         resourceType: _$$vt2.FIGJAM_TEMPLATE,
         resourceEditorType: _$$q3.WHITEBOARD,
@@ -8121,7 +8121,7 @@ function lX({
       },
       funAndGames: {
         key: 'funAndGames',
-        header: _$$t('categories.fun_games'),
+        header: getI18nString('categories.fun_games'),
         categoryForQuery: LJ.funGames,
         categorySlug: LJ.funGames,
         resourceType: _$$vt2.WIDGET,
@@ -8129,14 +8129,14 @@ function lX({
       },
       makeTemplate: {
         key: 'makeTemplate',
-        header: _$$t('community.resource_hub.make_shelf_header'),
+        header: getI18nString('community.resource_hub.make_shelf_header'),
         categoryForQuery: LJ.make,
         categorySlug: LJ.make,
         resourceType: _$$vt2.FIGMAKE_TEMPLATE
       },
       presentationTemplate: {
         key: 'presentationTemplate',
-        header: _$$t('community.footer.presentations'),
+        header: getI18nString('community.footer.presentations'),
         categoryForQuery: LJ.presentations,
         categorySlug: LJ.presentations,
         resourceType: _$$vt2.SLIDE_TEMPLATE,
@@ -8145,7 +8145,7 @@ function lX({
       },
       siteTemplate: {
         key: 'siteTemplate',
-        header: _$$t('categories.website_templates'),
+        header: getI18nString('categories.website_templates'),
         categoryForQuery: LJ.websiteTemplates,
         categorySlug: LJ.websiteTemplates,
         resourceType: _$$vt2.SITE_TEMPLATE,
@@ -8154,21 +8154,21 @@ function lX({
       },
       strategicPlanning: {
         key: 'strategicPlanning',
-        header: _$$t('categories.strategic_planning'),
+        header: getI18nString('categories.strategic_planning'),
         categoryForQuery: LJ.strategicPlanning,
         categorySlug: LJ.strategicPlanning,
         resourceType: _$$vt2.FIGJAM_TEMPLATE
       },
       uiKits: {
         key: 'uiKits',
-        header: _$$t('categories.ui_kits'),
+        header: getI18nString('categories.ui_kits'),
         categoryForQuery: LJ.uiKits,
         categorySlug: LJ.uiKits,
         resourceType: _$$vt2.DESIGN_TEMPLATE
       },
       websiteTemplate: {
         key: 'websiteTemplate',
-        header: _$$t('categories.website_templates'),
+        header: getI18nString('categories.website_templates'),
         categoryForQuery: LJ.websiteTemplates,
         categorySlug: LJ.websiteTemplates,
         resourceType: _$$vt2.DESIGN_TEMPLATE,
@@ -8176,14 +8176,14 @@ function lX({
       },
       whiteboarding: {
         key: 'whiteboarding',
-        header: _$$t('categories.whiteboarding'),
+        header: getI18nString('categories.whiteboarding'),
         categoryForQuery: LJ.whiteboarding,
         categorySlug: LJ.whiteboarding,
         resourceType: _$$vt2.FIGJAM_TEMPLATE
       },
       wireframes: {
         key: 'wireframes',
-        header: _$$t('categories.wireframes'),
+        header: getI18nString('categories.wireframes'),
         categoryForQuery: LJ.wireframes,
         categorySlug: LJ.wireframes,
         resourceType: _$$vt2.DESIGN_TEMPLATE
@@ -8335,7 +8335,7 @@ function l1({
         children: jsx(_$$oW, {
           className: 'x193iq5w xl1xv1r',
           src: buildUploadUrl('8b7c6fb3e353c1972267681e37a56765b96f5b3c'),
-          alt: _$$t('community.resource_hub.your_admins_have_restricted_access'),
+          alt: getI18nString('community.resource_hub.your_admins_have_restricted_access'),
           loading: 'lazy'
         })
       }), jsx('div', {
@@ -8344,14 +8344,14 @@ function l1({
           className: 'x78zum5 xdt5ytf x6s0dn4 x167g77z xkh2ocl xh8yej3 x2lah0s',
           children: [jsx('div', {
             ..._$$xk(l4.heading),
-            children: _$$t('community.resource_hub.your_admins_have_restricted_access')
+            children: getI18nString('community.resource_hub.your_admins_have_restricted_access')
           }), jsx('div', {
             ..._$$xk(l4.description),
-            children: _$$tx('community.resource_hub.looking_for_inspiration_you_can', {
+            children: renderI18nText('community.resource_hub.looking_for_inspiration_you_can', {
               link: jsx(_$$N3, {
                 href: '/community',
                 newTab: !0,
-                children: _$$t('community.resource_hub.community_link')
+                children: getI18nString('community.resource_hub.community_link')
               })
             })
           })]
@@ -8460,7 +8460,7 @@ function dn({
         return !0;
     }
   });
-  let [c, u] = _$$fp(bW);
+  let [c, u] = useAtomValueAndSetter(bW);
   let m = u({
     showOrgTemplateView: !0
   });
@@ -8509,7 +8509,7 @@ function dd({
         children: jsx(_$$oW, {
           className: 'xnq0rdo x15elv7b x1sy10c2 x1d6c7ev xl1xv1r',
           src: t,
-          alt: _$$t('community.resource_hub.get_more_done'),
+          alt: getI18nString('community.resource_hub.get_more_done'),
           loading: 'lazy'
         })
       }), jsx('div', {
@@ -8520,10 +8520,10 @@ function dd({
           className: 'x78zum5 xdt5ytf xl56j7k x1cy8zhl x167g77z xkh2ocl xh8yej3 x2lah0s',
           children: [jsx('div', {
             ..._$$xk(dc.heading),
-            children: _$$t('community.resource_hub.get_more_done')
+            children: getI18nString('community.resource_hub.get_more_done')
           }), jsx('div', {
             ..._$$xk(dc.description),
-            children: _$$t('community.resource_hub.create_custom_templates_to_add')
+            children: getI18nString('community.resource_hub.create_custom_templates_to_add')
           })]
         }), jsx(_$$a1, {
           menuItems: s
@@ -8564,7 +8564,7 @@ function du({
     ...s,
     tab: N$.COMMUNITY
   }, i);
-  let d = t ? _$$t('community.resource_hub.template_publishing_has_been_disabled') : _$$t('community.resource_hub.streamline_your_work_with_custom');
+  let d = t ? getI18nString('community.resource_hub.template_publishing_has_been_disabled') : getI18nString('community.resource_hub.streamline_your_work_with_custom');
   return jsx(_$$fu, {
     name: _$$e7.RESOURCE_HUB_NO_RESOURCES_UPSELL,
     children: jsxs('div', {
@@ -8586,7 +8586,7 @@ function du({
             children: d
           }), jsx('div', {
             ..._$$xk(dm.description),
-            children: _$$t('community.resource_hub.create_templates_to_keep_up')
+            children: getI18nString('community.resource_hub.create_templates_to_keep_up')
           })]
         }), jsxs('div', {
           className: 'x78zum5 xdt5ytf x6s0dn4 xou54vl xkh2ocl xh8yej3 x2lah0s',
@@ -8599,7 +8599,7 @@ function du({
             trackingProperties: {
               route: l.pathname
             },
-            children: _$$t('community.resource_hub.browse_resources_from_community')
+            children: getI18nString('community.resource_hub.browse_resources_from_community')
           })]
         })]
       })]
@@ -8653,7 +8653,7 @@ function dp({
         children: jsx(_$$oW, {
           className: 'x193iq5w xl1xv1r xetamn0',
           src: color === 'dark' ? buildUploadUrl('199fc5fd43ab7b8cdb2208db7a7a1c8b4f039119') : buildUploadUrl('363ceafa11ccd8ba7b2d9fe2b9aba1f8f8477596'),
-          alt: _$$t('community.resource_hub.custom_templates_for_your_team'),
+          alt: getI18nString('community.resource_hub.custom_templates_for_your_team'),
           loading: 'lazy'
         })
       }), jsxs('div', {
@@ -8662,10 +8662,10 @@ function dp({
           className: 'x78zum5 xdt5ytf x6s0dn4 x167g77z xkh2ocl xh8yej3 x2lah0s',
           children: [jsx('div', {
             ..._$$xk(df.heading),
-            children: _$$t('community.resource_hub.custom_templates_for_your_team')
+            children: getI18nString('community.resource_hub.custom_templates_for_your_team')
           }), jsx('div', {
             ..._$$xk(df.description),
-            children: _$$t('community.resource_hub.upgrade_to_the_professional_plan')
+            children: getI18nString('community.resource_hub.upgrade_to_the_professional_plan')
           })]
         }), jsxs('div', {
           className: 'x78zum5 xdt5ytf x6s0dn4 xou54vl xkh2ocl xh8yej3 x2lah0s',
@@ -8677,12 +8677,12 @@ function dp({
                 openInNewTab: !1
               }));
             },
-            children: _$$t('community.resource_hub.upgrade_to_professional')
+            children: getI18nString('community.resource_hub.upgrade_to_professional')
           }), jsx(_$$o3, {
             ..._$$xk(df.browseResourcesFromCommunity),
             to: o.to,
             trackingEventName: HH.RESOURCE_HUB_BROWSE_COMMUNITY_CLICKED,
-            children: _$$t('community.resource_hub.browse_resources_from_community')
+            children: getI18nString('community.resource_hub.browse_resources_from_community')
           })]
         })]
       })]
@@ -9218,7 +9218,7 @@ function dL({
     return jsx('div', {
       ref: e.teamId === p ? f : null,
       children: jsx(l$, {
-        header: _$$t('community.resource_hub.internal_tab', {
+        header: getI18nString('community.resource_hub.internal_tab', {
           orgOrTeamName: t
         }),
         route: n,
@@ -9460,7 +9460,7 @@ function dJ({
           o(!n);
           d(!l);
         },
-        children: n ? _$$t('community.shelves.show_more') : _$$t('community.detail_view.show_less')
+        children: n ? getI18nString('community.shelves.show_more') : getI18nString('community.detail_view.show_less')
       })]
     })
   });
@@ -9613,7 +9613,7 @@ let d4 = _$$r(_$$xH);
 function d2({
   isCommunityTabDisabledForOrg: e
 }) {
-  let t = _$$md(d4);
+  let t = useAtomWithSubscription(d4);
   let r = _$$P4() === N$.COMMUNITY;
   let {
     show,
@@ -9631,18 +9631,18 @@ function d2({
   return jsx(_$$rq, {
     arrowPosition: F_.TOP,
     clickOutsideToHide: !0,
-    description: _$$tx('community.resource_hub.see_what_community_has_to_offer'),
+    description: renderI18nText('community.resource_hub.see_what_community_has_to_offer'),
     emphasized: !0,
     isShowing,
     onClose: complete,
     primaryCta: {
-      label: _$$tx('community.resource_hub.got_it'),
+      label: renderI18nText('community.resource_hub.got_it'),
       type: 'button',
       onClick: () => complete(),
       ctaTrackingDescriptor: _$$c3.GOT_IT
     },
     targetKey: d5,
-    title: _$$tx('community.resource_hub.get_more_inspiration'),
+    title: renderI18nText('community.resource_hub.get_more_inspiration'),
     trackingContextName: HH.COMMUNITY_TAB_ONBOARDING_OVERLAY,
     userFlagOnShow: _$$xH,
     width: 240
@@ -9683,13 +9683,13 @@ function d8({
         switch (e) {
           case N$.INTERNAL:
             if (t) {
-              return _$$t('community.resource_hub.internal_tab', {
+              return getI18nString('community.resource_hub.internal_tab', {
                 orgOrTeamName: t
               });
             }
-            return _$$t('community.resource_hub.internal_tab_default');
+            return getI18nString('community.resource_hub.internal_tab_default');
           case N$.COMMUNITY:
-            return _$$t('community.resource_hub.community_tab');
+            return getI18nString('community.resource_hub.community_tab');
           default:
             throwTypeError(e);
         }
@@ -9738,12 +9738,12 @@ function cs({
         children: [jsx(_$$l5, {
           iconLead: jsx(_$$h8, {}),
           label: jsx(_$$h9, {
-            children: _$$t('community.search.select_search_scope')
+            children: getI18nString('community.search.select_search_scope')
           })
         }), jsxs(_$$mc3, {
           children: [jsx(_$$c$2, {
             value: N$.COMMUNITY,
-            children: _$$t('community.community')
+            children: getI18nString('community.community')
           }), jsx(_$$c$2, {
             value: N$.INTERNAL,
             children: t
@@ -9814,7 +9814,7 @@ function cn({
   let f = _$$A12(e, 400);
   let [g, h] = useState(!1);
   let x = l && (g || c || _);
-  let b = x ? '' : _$$t('community.search.search_templates_and_tools');
+  let b = x ? '' : getI18nString('community.search.search_templates_and_tools');
   let v = jsx(_$$h8, {
     className: 'xmaevd6'
   });
@@ -9851,7 +9851,7 @@ function cn({
         p(e);
         e && f(e);
       },
-      'aria-label': _$$t('community.search.search_templates_and_tools'),
+      'aria-label': getI18nString('community.search.search_templates_and_tools'),
       'placeholder': b
     }), _.length > 0 && jsx(_$$E6, {
       className: 'xt0e3qv xy13l1i',
@@ -9907,11 +9907,11 @@ function cl({
     });
   }
   let c = '';
-  return s || n || o || l ? (s ? c = e === N$.INTERNAL ? t ? _$$t('community.search.search_results_from_org_or_team', {
+  return s || n || o || l ? (s ? c = e === N$.INTERNAL ? t ? getI18nString('community.search.search_results_from_org_or_team', {
     orgOrTeamName: t
-  }) : _$$t('community.search.search_results') : _$$t('community.search.search_results_from_community') : o ? (c = _$$i_(o.params.resourceTypeSlug), o.params.templatesTeamId && (c = templatesByTeam?.teamName ? _$$t('community.resource_hub.internal_tab', {
+  }) : getI18nString('community.search.search_results') : getI18nString('community.search.search_results_from_community') : o ? (c = _$$i_(o.params.resourceTypeSlug), o.params.templatesTeamId && (c = templatesByTeam?.teamName ? getI18nString('community.resource_hub.internal_tab', {
     orgOrTeamName: templatesByTeam.teamName
-  }) : '')) : n ? c = lr(n.params.categorySlug, void 0, n.search.resource_type) || '' : l && (c = _$$t('community.saves.saved_by_me')), jsx('h1', {
+  }) : '')) : n ? c = lr(n.params.categorySlug, void 0, n.search.resource_type) || '' : l && (c = getI18nString('community.saves.saved_by_me')), jsx('h1', {
     ..._$$xk(cd.headerText),
     children: c
   })) : null;
@@ -9973,7 +9973,7 @@ function cv() {
       children: jsx(_$$oW, {
         className: 'x193iq5w xl1xv1r',
         src: e,
-        alt: _$$t('community.saves.no_saves_title'),
+        alt: getI18nString('community.saves.no_saves_title'),
         loading: 'lazy'
       })
     }), jsx('div', {
@@ -9982,10 +9982,10 @@ function cv() {
         className: 'x78zum5 xdt5ytf x6s0dn4 x167g77z xkh2ocl xh8yej3 x2lah0s',
         children: [jsx('div', {
           ..._$$xk(cy.heading),
-          children: _$$t('community.saves.no_saves_heading')
+          children: getI18nString('community.saves.no_saves_heading')
         }), jsx('div', {
           ..._$$xk(cy.description),
-          children: _$$t('community.saves.no_saves_subheading')
+          children: getI18nString('community.saves.no_saves_subheading')
         })]
       })
     })]
@@ -10093,7 +10093,7 @@ function cj({
     children: [jsx(cE, {
       resources: resources ?? [],
       resourceType: _$$t7.FILES,
-      header: _$$t('community.saves.all_files'),
+      header: getI18nString('community.saves.all_files'),
       numTilesPerRow: t.numberOfTiles,
       hasNextPage: !!hasNextPage,
       resourceImpressionTracking: n
@@ -10104,7 +10104,7 @@ function cj({
     }), jsx(cE, {
       resources: _resources3 ?? [],
       resourceType: _$$t7.WIDGETS,
-      header: _$$t('community.view_bar.widgets'),
+      header: getI18nString('community.view_bar.widgets'),
       numTilesPerRow: t.numberOfTiles,
       hasNextPage: !!_hasNextPage3,
       resourceImpressionTracking: n
@@ -10200,7 +10200,7 @@ function cI({
   let s = Om();
   let i = _$$tv();
   return e.length === 0 ? null : jsx(l$, {
-    header: _$$t('community.view_bar.plugins'),
+    header: getI18nString('community.view_bar.plugins'),
     content: jsx(_$$M3, {
       plugins: e,
       onIntersectionChange: r,
@@ -10231,7 +10231,7 @@ function cO({
       resource_type: t
     }).href;
     Ay.push(r);
-    _$$sx('resource_type_filter_changed', {
+    trackEventAnalytics('resource_type_filter_changed', {
       resource_type: t,
       from: e
     });
@@ -10254,12 +10254,12 @@ function cO({
         children: function (e, t) {
           switch (e) {
             case _$$t7.FILES:
-              if (t === N$.COMMUNITY) return _$$t('community.view_bar.files_and_templates_tab');
-              return _$$t('community.view_bar.templates_tab');
+              if (t === N$.COMMUNITY) return getI18nString('community.view_bar.files_and_templates_tab');
+              return getI18nString('community.view_bar.templates_tab');
             case _$$t7.PLUGINS:
-              return _$$t('community.view_bar.plugins');
+              return getI18nString('community.view_bar.plugins');
             case _$$t7.WIDGETS:
-              return _$$t('community.view_bar.widgets');
+              return getI18nString('community.view_bar.widgets');
             default:
               throwTypeError(e);
           }
@@ -10294,12 +10294,12 @@ function cF({
       variant: 'brand',
       icon: jsx(_$$U4, {}),
       children: [jsx(_$$Q2, {
-        title: _$$t('community.search.search_in_community_banner.title'),
-        children: _$$t('community.search.search_in_community_banner.description')
+        title: getI18nString('community.search.search_in_community_banner.title'),
+        children: getI18nString('community.search.search_in_community_banner.description')
       }), jsx(_$$N4, {
         href: '#',
         onClick: e,
-        children: _$$t('community.search.search_in_community_banner.cta')
+        children: getI18nString('community.search.search_in_community_banner.cta')
       })]
     })
   });
@@ -10378,7 +10378,7 @@ function cL({
         emptyStateActions: j ? jsx(_$$N4, {
           href: '#',
           onClick: v,
-          children: _$$t('community.search.search_in_community_instead_cta')
+          children: getI18nString('community.search.search_in_community_instead_cta')
         }) : void 0,
         numTilesPerRow: p.numberOfTiles
       }), w && jsx('div', {
@@ -10508,7 +10508,7 @@ function cB({
   } = dF();
   let m = [];
   let _ = Rd(_$$au)?.tab || N$.INTERNAL;
-  let p = _ === N$.COMMUNITY ? _$$t('community.resource_hub.templates_and_tools_from_community') : _$$t('sidebar.templates_and_tools');
+  let p = _ === N$.COMMUNITY ? getI18nString('community.resource_hub.templates_and_tools_from_community') : getI18nString('sidebar.templates_and_tools');
   m = [{
     text: p,
     to: new _$$au({
@@ -10573,7 +10573,7 @@ function cB({
     let n = _$$S5(t?.url_slug, LJ);
     let o = _$$S5(e.url_slug, LJ);
     return [t && n && {
-      text: lr(n, void 0, i?.search.resource_type) || Yd(t.i18n_meta?.title, t.title),
+      text: lr(n, void 0, i?.search.resource_type) || getTranslatedDynamicContent(t.i18n_meta?.title, t.title),
       to: i ? i.copyWith({
         categorySlug: n,
         tagSlug: void 0
@@ -10585,11 +10585,11 @@ function cB({
       }).href,
       trackingProperties: {
         name: HH.RESOURCE_HUB_CATEGORY_BREADCRUMB_CLICKED,
-        text: lr(n, void 0, i?.search.resource_type) || Yd(t.i18n_meta?.title, t.title),
+        text: lr(n, void 0, i?.search.resource_type) || getTranslatedDynamicContent(t.i18n_meta?.title, t.title),
         category_slug: n
       }
     }, e && o && {
-      text: lr(o, void 0, i?.search.resource_type) || Yd(e.i18n_meta?.title, e.title),
+      text: lr(o, void 0, i?.search.resource_type) || getTranslatedDynamicContent(e.i18n_meta?.title, e.title),
       to: i ? i.copyWith({
         categorySlug: o,
         tagSlug: void 0
@@ -10601,11 +10601,11 @@ function cB({
       }).href,
       trackingProperties: {
         name: HH.RESOURCE_HUB_CATEGORY_BREADCRUMB_CLICKED,
-        text: lr(o, void 0, i?.search.resource_type) || Yd(e.i18n_meta?.title, e.title),
+        text: lr(o, void 0, i?.search.resource_type) || getTranslatedDynamicContent(e.i18n_meta?.title, e.title),
         category_slug: o
       }
     }, r && {
-      text: Yd(r.i18n_meta?.text, r.text)
+      text: getTranslatedDynamicContent(r.i18n_meta?.text, r.text)
     }].filter(Boolean);
   }({
     currentCategory: r,
@@ -10625,7 +10625,7 @@ function cB({
   let R = _$$ed(_$$e11);
   if (R) {
     let t = {
-      text: _$$t('community.profiles.saved'),
+      text: getI18nString('community.profiles.saved'),
       to: new _$$e11({
         ...e,
         resourceType: void 0
@@ -10640,7 +10640,7 @@ function cB({
   }
   if (v$()) {
     let e = {
-      text: _$$t('community.resource_hub.search_breadcrumb')
+      text: getI18nString('community.resource_hub.search_breadcrumb')
     };
     m = [...m, e];
   }
@@ -10666,7 +10666,7 @@ function cB({
   }
   if (_$$ye(qL)) {
     let e = {
-      text: _$$t('community.profiles.community_profile')
+      text: getI18nString('community.profiles.community_profile')
     };
     m = [...m, e];
   }
@@ -10725,7 +10725,7 @@ function ua(e) {
   let u = useCallback((r, a) => {
     r?.stopPropagation();
     let s = e.itemIdx + 1;
-    _$$sx('Team Feed Tile Clicked', {
+    trackEventAnalytics('Team Feed Tile Clicked', {
       postUuid: e.post.publicUuid,
       feedRank: s
     });
@@ -10774,10 +10774,10 @@ function ua(e) {
     className: 'feed_tile--caughtUpContainer--5uyiy',
     children: [jsx('div', {
       className: 'feed_tile--caughtUpTitle--PVabL',
-      children: _$$t('fig_feed.youre_all_caught_up')
+      children: getI18nString('fig_feed.youre_all_caught_up')
     }), jsx('div', {
       className: 'feed_tile--caughtUpSubtitle--j2qKn',
-      children: _$$t('fig_feed.come_back_later_for_more_posts')
+      children: getI18nString('fig_feed.come_back_later_for_more_posts')
     })]
   });
   return jsxs('div', {
@@ -10820,13 +10820,13 @@ function us(e) {
         numAvatarsToDisplay: 4
       }), jsx('div', {
         className: ue,
-        children: _$$tx('fig_feed.num_comments', {
+        children: renderI18nText('fig_feed.num_comments', {
           numComments: t
         })
       })]
     }) : jsx('div', {
       className: ue,
-      children: _$$tx('fig_feed.add_comment')
+      children: renderI18nText('fig_feed.add_comment')
     })
   });
   let [o, l] = useState(!1);
@@ -10908,7 +10908,7 @@ function us(e) {
           children: '...'
         }), jsx('div', {
           className: 'feed_tile--viewMoreText--WpL2K',
-          children: _$$t('fig_feed.see_more')
+          children: getI18nString('fig_feed.see_more')
         })]
       })]
     })]
@@ -10939,7 +10939,7 @@ function us(e) {
           source: _$$Zp.TILE
         }), x && jsx(K0, {
           'data-tooltip-type': Ib.TEXT,
-          'data-tooltip': _$$t('fig_feed.copy_link_to_post'),
+          'data-tooltip': getI18nString('fig_feed.copy_link_to_post'),
           'onClick': g,
           'children': jsx(In, {
             icon: 'hyperlink-32'
@@ -11060,7 +11060,7 @@ function un(e) {
   g && g !== o && r.current && (r.current.scrollTop = 0);
   useEffect(() => {
     f.status === 'errors' && t(_$$F.enqueue({
-      message: _$$t('general.an_error_occurred'),
+      message: getI18nString('general.an_error_occurred'),
       error: !0
     }));
   }, [t, f.status]);
@@ -11088,7 +11088,7 @@ function un(e) {
     j.current = x.data?.length ?? 0;
   }, [b, x.data?.length]);
   useEffect(() => {
-    b && _$$sx('Team Feed Posts Rendered', {
+    b && trackEventAnalytics('Team Feed Posts Rendered', {
       numPosts: j.current,
       view: c.view,
       selectedUserId: e.selectedUser?.id
@@ -11098,7 +11098,7 @@ function un(e) {
   }, [e.selectedUser, j, b, c.view]);
   let [T, E] = useState(!1);
   let C = useCallback((e, t) => {
-    e > 0 && !T && (_$$sx('Team Feed User Scrolled Down'), E(!0));
+    e > 0 && !T && (trackEventAnalytics('Team Feed User Scrolled Down'), E(!0));
     let r = y / 50;
     let a = e + t.trackHeight;
     let s = t.scrollHeight;
@@ -11153,10 +11153,10 @@ function un(e) {
         className: 'feed_list_view--noPostsFound--COpgM',
         children: [jsx('div', {
           className: _$$s.fontMedium.$,
-          children: _$$tx('fig_feed.no_posts_found_title')
+          children: renderI18nText('fig_feed.no_posts_found_title')
         }), jsx('div', {
           className: _$$s.colorTextSecondary.$,
-          children: _$$tx('fig_feed.no_posts_found_description')
+          children: renderI18nText('fig_feed.no_posts_found_description')
         })]
       }) : jsx('div', {
         style: {
@@ -11207,7 +11207,7 @@ function uu(e) {
       children: [jsx(_$$B, {
         svg: _$$A15,
         className: ul
-      }), _$$tx('fig_feed.new_posts')]
+      }), renderI18nText('fig_feed.new_posts')]
     }), jsx('div', {
       className: 'new_post_indicator--dismiss--BAIvc',
       onClick: e.onDismiss,
@@ -11222,11 +11222,11 @@ function uu(e) {
 }
 function um(e) {
   let t = useDispatch();
-  useEffect(() => (_$$sx('Team Feed Posts List View Visited'), t(yu({
+  useEffect(() => (trackEventAnalytics('Team Feed Posts List View Visited'), t(yu({
     orgId: e.currentOrgId,
     bellActive: !1
   })), () => {
-    _$$sx('Team Feed List View Closed');
+    trackEventAnalytics('Team Feed List View Closed');
   }), [t, e.currentOrgId]);
   let r = useCallback(() => t(_$$Y6()), [t]);
   let n = useCallback(() => {
@@ -11257,7 +11257,7 @@ function um(e) {
 }
 function u_(e) {
   let t = useSelector(e => e.currentUserOrgId);
-  let r = useRef(new _$$M4());
+  let r = useRef(new Timer());
   return (useEffect(() => {
     r.current.start();
   }, []), t) ? jsx(um, {
@@ -11305,7 +11305,7 @@ let ub = (e, t, r) => {
   }, 2), jsx($c, {
     initialViewMode: s.tileSortFilterConfig.viewMode,
     onViewModeChange: t => {
-      _$$sx('file view toggle', {
+      trackEventAnalytics('file view toggle', {
         viewType: t === XU.GRID ? 'grid' : 'list'
       });
       e(JF({
@@ -11331,7 +11331,7 @@ let uv = (e, t, r) => {
   }, 4), jsx($c, {
     initialViewMode: s.tileSortFilterConfig.viewMode,
     onViewModeChange: t => {
-      _$$sx('folder view toggle', {
+      trackEventAnalytics('folder view toggle', {
         viewType: t === XU.GRID ? 'grid' : 'list'
       });
       e(JF({
@@ -11366,18 +11366,18 @@ function uy({
   return jsx(uf, {
     tabManager: c,
     tabs: [{
-      tabName: _$$t('file_browser.tool_bar.trashed_files'),
+      tabName: getI18nString('file_browser.tool_bar.trashed_files'),
       view: {
         view: 'deletedFiles'
       },
-      ariaLabel: _$$t('file_browser.tool_bar.trashed_files.aria_label'),
+      ariaLabel: getI18nString('file_browser.tool_bar.trashed_files.aria_label'),
       tabProps: l.deletedFiles
     }, {
-      tabName: _$$t('file_browser.tool_bar.trashed_projects'),
+      tabName: getI18nString('file_browser.tool_bar.trashed_projects'),
       view: {
         view: 'trashedFolders'
       },
-      ariaLabel: _$$t('file_browser.tool_bar.trashed_projects.aria_label'),
+      ariaLabel: getI18nString('file_browser.tool_bar.trashed_projects.aria_label'),
       tabProps: l.trashedFolders
     }],
     viewbarActions: e.view === 'deletedFiles' ? n : o
@@ -11410,7 +11410,7 @@ function uC({
       })]
     }), jsx('div', {
       className: 'x1i0uq9b x1ok221b xp5pvr8 x4z9k3i xk50ysn x1d3mw78 x122x9cr',
-      children: _$$t('file_browser.starter_limit_global.files_used', {
+      children: getI18nString('file_browser.starter_limit_global.files_used', {
         numFilesUsed: e,
         totalFiles: t
       })
@@ -11549,10 +11549,10 @@ function uO({
         height: 'hug-contents',
         children: [jsx('div', {
           ...(s ? _$$Ay2.props(uk.title) : {}),
-          children: s ? _$$tx('file_browser.starter_limit_global.your_plan_files') : jsx(_$$E, {
+          children: s ? renderI18nText('file_browser.starter_limit_global.your_plan_files') : jsx(_$$E, {
             fontSize: 16,
             fontWeight: 'semi-bold',
-            children: _$$tx('file_browser.starter_limit.your_starter_team_overview')
+            children: renderI18nText('file_browser.starter_limit.your_starter_team_overview')
           })
         }), jsx(uF, {
           numProjects: o,
@@ -11566,21 +11566,21 @@ function uO({
           spacing: '12px',
           children: [s ? jsx('div', {
             ..._$$Ay2.props(uk.description),
-            children: _$$tx('file_browser.starter_limit_global.description')
+            children: renderI18nText('file_browser.starter_limit_global.description')
           }) : jsx(_$$E, {
             fontSize: 13,
-            children: _$$tx(_ ? 'file_browser.starter_limit.running_out_of_files' : 'file_browser.starter_limit.enough_for_you_to_get_started')
+            children: renderI18nText(_ ? 'file_browser.starter_limit.running_out_of_files' : 'file_browser.starter_limit.enough_for_you_to_get_started')
           }), jsx(uR, {
             onClick: t,
             trackingProperties: {
               trackingDescriptor: _$$c3.VIEW_PLANS,
               numFiles: m
             },
-            children: _$$tx('upgrade.view_plans')
+            children: renderI18nText('upgrade.view_plans')
           })]
         }) : jsx(_$$E, {
           fontSize: 13,
-          children: _$$tx('file_browser.starter_limit.trying_things_out')
+          children: renderI18nText('file_browser.starter_limit.trying_things_out')
         })]
       })
     })
@@ -11603,23 +11603,23 @@ function uF({
       totalAllowed: _$$WW
     }), !n && jsxs(Fragment, {
       children: [jsx(uS, {
-        text: _$$t('file_browser.starter_limit.projects'),
-        tooltipText: _$$t('file_browser.starter_limit.projects.tooltip'),
+        text: getI18nString('file_browser.starter_limit.projects'),
+        tooltipText: getI18nString('file_browser.starter_limit.projects.tooltip'),
         currentProgress: e,
         totalProgress: Wf
       }), jsx(uS, {
-        text: _$$t('file_browser.starter_limit.design_files'),
-        tooltipText: _$$t('file_browser.starter_limit.design_files.tooltip'),
+        text: getI18nString('file_browser.starter_limit.design_files'),
+        tooltipText: getI18nString('file_browser.starter_limit.design_files.tooltip'),
         currentProgress: t,
         totalProgress: _$$WW
       }), jsx(uS, {
-        text: _$$t('file_browser.starter_limit.figjam_boards'),
-        tooltipText: _$$t('file_browser.starter_limit.figjam_boards.tooltip'),
+        text: getI18nString('file_browser.starter_limit.figjam_boards'),
+        tooltipText: getI18nString('file_browser.starter_limit.figjam_boards.tooltip'),
         currentProgress: r,
         totalProgress: _$$WW
       }), jsx(uS, {
-        text: _$$t('file_browser.starter_limit.slides'),
-        tooltipText: _$$t('file_browser.starter_limit.slides.tooltip'),
+        text: getI18nString('file_browser.starter_limit.slides'),
+        tooltipText: getI18nString('file_browser.starter_limit.slides.tooltip'),
         currentProgress: s,
         totalProgress: _$$WW
       })]
@@ -11630,12 +11630,12 @@ let uY = 'open_invoice_reminder_card--icon--gcN35';
 function uJ(e) {
   let t = useDispatch();
   let r = e.team.restrictions_list?.includes(FPlanLimitationType.LOCKED);
-  let s = e.canAdminTeam ? r ? _$$t('billing.open_invoice_reminder.title') : _$$t('billing.open_invoice_reminder.grace_period_title') : _$$t('billing.open_invoice_reminder.title_viewer');
-  let n = e.canAdminTeam ? r ? _$$t('billing.open_invoice_reminder.locked_admin_description') : _$$t('billing.open_invoice_reminder.grace_period_admin_description') : _$$t('billing.open_invoice_reminder.locked_viewer_description');
-  let o = e.canAdminTeam ? _$$t('billing.open_invoice_reminder.cta') : null;
+  let s = e.canAdminTeam ? r ? getI18nString('billing.open_invoice_reminder.title') : getI18nString('billing.open_invoice_reminder.grace_period_title') : getI18nString('billing.open_invoice_reminder.title_viewer');
+  let n = e.canAdminTeam ? r ? getI18nString('billing.open_invoice_reminder.locked_admin_description') : getI18nString('billing.open_invoice_reminder.grace_period_admin_description') : getI18nString('billing.open_invoice_reminder.locked_viewer_description');
+  let o = e.canAdminTeam ? getI18nString('billing.open_invoice_reminder.cta') : null;
   let l = {
     'data-tooltip-type': Ib.TEXT,
-    'data-tooltip': _$$t('billing.open_invoice_reminder.button_tooltip'),
+    'data-tooltip': getI18nString('billing.open_invoice_reminder.button_tooltip'),
     'data-tooltip-show-immediately': !0
   };
   return jsxs(_$$Y7, {
@@ -11669,7 +11669,7 @@ function uJ(e) {
         onClick: () => t(_$$sf({
           view: 'teamAdminConsole',
           teamId: e.team.id,
-          teamAdminConsoleViewTab: Iv.BILLING
+          teamAdminConsoleViewTab: DashboardSections.BILLING
         })),
         variant: 'primary',
         htmlAttributes: l,
@@ -11708,7 +11708,7 @@ function u1({
     viewMode: void 0 !== n ? n ? 'list' : 'grid' : void 0
   })), _$$K5(a) && r(T5({
     index: t
-  })), _$$eD && _$$sx('Open File Click', {
+  })), desktopAPIInstance && trackEventAnalytics('Open File Click', {
     fileKey: e.file.key,
     fileRepoId: e.file.fileRepoId,
     uiSelectedView: JSON.stringify(a)
@@ -11792,10 +11792,10 @@ function me({
   }) => !!e?.canAdmin).unwrapOr(!1), [P]);
   useEffect(() => {
     let e = 'page_selected_view';
-    let t = _$$sn.get(e);
+    let t = globalPerfTimer.get(e);
     if (t && t.isRunning && !t.isUnreliable) {
-      let t = _$$sn.tryStop(e);
-      t && _$$sx('File Browser Tab Switch Page Load Time', {
+      let t = globalPerfTimer.tryStop(e);
+      t && trackEventAnalytics('File Browser Tab Switch Page Load Time', {
         elapsedMs: t,
         selectedView: w.view
       }, {
@@ -11808,7 +11808,7 @@ function me({
     userStateLoaded,
     userExternallyRestricted,
     selectedBranchKeyByRepoId
-  } = _$$R6(e => ({
+  } = selectWithShallowEqual(e => ({
     userStateLoaded: e.userStateLoaded,
     userExternallyRestricted: isOrgUserExternallyRestrictedFromState(A),
     selectedBranchKeyByRepoId: e.selectedBranchKeyByRepoId
@@ -11913,7 +11913,7 @@ function me({
     return s;
   }, [Y, Z, l, C, w, A.user?.id]);
   let et = useMemo(() => ee(v, x.tileSortFilterConfig), [ee, v, x.tileSortFilterConfig]);
-  let er = _$$md(Y6);
+  let er = useAtomWithSubscription(Y6);
   let ea = useCallback((r, a, s) => {
     u1({
       tile: r,
@@ -11938,16 +11938,16 @@ function me({
         t.stopPropagation();
         return;
       }
-      let o = _$$Ay.mac ? t.metaKey : t.ctrlKey;
+      let o = BrowserInfo.mac ? t.metaKey : t.ctrlKey;
       let l = null;
-      o && t.shiftKey ? l = _$$aw.FOCAL_TAB : o ? l = _$$aw.BACKGROUND_TAB : t.shiftKey && (l = _$$aw.NEW_WINDOW);
+      o && t.shiftKey ? l = OpenTarget.FOCAL_TAB : o ? l = OpenTarget.BACKGROUND_TAB : t.shiftKey && (l = OpenTarget.NEW_WINDOW);
       let d = s.user;
-      if (_$$eD) {
+      if (desktopAPIInstance) {
         let a;
-        switch (l = l ?? _$$aw.FOCAL_TAB, t.preventDefault(), t.stopPropagation(), e.type) {
+        switch (l = l ?? OpenTarget.FOCAL_TAB, t.preventDefault(), t.stopPropagation(), e.type) {
           case _$$nb.FILE:
             a = !!(e.file.isTeamTemplate && LQ(s));
-            _$$eD.openFile({
+            desktopAPIInstance.openFile({
               fileKey: e.file.key,
               title: e.file.name || 'Untitled',
               fileEditorType: e.file.editorType,
@@ -11960,7 +11960,7 @@ function me({
             break;
           case _$$nb.PINNED_FILE:
             a = !!(e.file.isTeamTemplate && LQ(s));
-            _$$eD.openFile({
+            desktopAPIInstance.openFile({
               fileKey: e.file.key,
               title: e.file.name || 'Untitled',
               fileEditorType: e.file.editorType,
@@ -11970,11 +11970,11 @@ function me({
             });
             break;
           case _$$nb.PROTOTYPE:
-            _$$eD.openPrototype(e.prototype.file_key, e.prototype.page_id, e.prototype.fig_file.name || '', l, d?.id);
+            desktopAPIInstance.openPrototype(e.prototype.file_key, e.prototype.page_id, e.prototype.fig_file.name || '', l, d?.id);
             break;
           case _$$nb.REPO:
             let n = _$$mr(e.repo, e.branches, i);
-            _$$eD.openFile({
+            desktopAPIInstance.openFile({
               fileKey: n.key,
               title: n.name,
               fileEditorType: n.editor_type,
@@ -12040,7 +12040,7 @@ function me({
           }, f) : r(_$$sf({
             view: 'fullscreen',
             fileKey: e.file.key,
-            editorType: _$$z0.getIsExtension() ? _$$nT.DevHandoff : e.file.editorType ? wN(e.file.editorType) : _$$nT.Design,
+            editorType: _$$z0.getIsExtension() ? FEditorType.DevHandoff : e.file.editorType ? mapFileTypeToEditorType(e.file.editorType) : FEditorType.Design,
             prevSelectedView: p
           }));
           break;
@@ -12053,7 +12053,7 @@ function me({
           }, f) : r(_$$sf({
             view: 'fullscreen',
             fileKey: e.file.key,
-            editorType: e.file.editorType ? wN(e.file.editorType) : _$$nT.Design,
+            editorType: e.file.editorType ? mapFileTypeToEditorType(e.file.editorType) : FEditorType.Design,
             prevSelectedView: p
           }));
           break;
@@ -12085,7 +12085,7 @@ function me({
             }, f) : r(_$$sf({
               view: 'fullscreen',
               fileKey: a,
-              editorType: _$$nT.Design,
+              editorType: FEditorType.Design,
               prevSelectedView: p
             }));
             break;
@@ -12153,14 +12153,14 @@ function me({
     let o = useRef(!1);
     useEffect(() => {
       let s = o.current;
-      e && !s && a && (_$$az2.trackDefinedEvent('file_browser.visible_tiles_count', {
+      e && !s && a && (analyticsEventManager.trackDefinedEvent('file_browser.visible_tiles_count', {
         totalCount: r,
         visibleCount: a.length,
         viewMode: jq(t),
         selectedView: n,
         viewportWidth: window.innerWidth,
         viewportHeight: window.innerHeight,
-        isMobileDevice: _$$Ay.mobile
+        isMobileDevice: BrowserInfo.mobile
       }), o.current = !0);
     }, [a, e, t, r, n]);
     return {
@@ -12212,7 +12212,7 @@ function me({
   }(eo), et.length === 0) {
     let e = (() => {
       if (v.length > 0 && f !== '') {
-        let e = f ?? _$$t('file_browser.tiles_view.default_overfiltered_text');
+        let e = f ?? getI18nString('file_browser.tiles_view.default_overfiltered_text');
         return jsx('div', {
           'className': u0,
           'data-test-id': 'over-filtered-state-text',
@@ -12220,7 +12220,7 @@ function me({
         });
       }
       let e = '';
-      return (n ? e = n : (_$$Ay.mobile || _$$Ay.tablet) && (e = _$$t('file_browser.folder.this_project_is_empty')), e) ? jsx('div', {
+      return (n ? e = n : (BrowserInfo.mobile || BrowserInfo.tablet) && (e = getI18nString('file_browser.folder.this_project_is_empty')), e) ? jsx('div', {
         'className': u0,
         'data-test-id': 'empty-state-text',
         'children': e
@@ -12313,7 +12313,7 @@ function me({
           canEditTeam: D,
           isDraftsFolder: C
         }))]
-      }), !(_$$Ay.mobile || _$$Ay.tablet) && _ && !userExternallyRestricted && !em && jsxs('div', {
+      }), !(BrowserInfo.mobile || BrowserInfo.tablet) && _ && !userExternallyRestricted && !em && jsxs('div', {
         className: _$$s.flex.$,
         children: [jsx('div', {
           className: 'tiles_view--importPrompt--srrJn',
@@ -12321,8 +12321,8 @@ function me({
             className: u0,
             children: [jsx('div', {
               className: 'tiles_view--emptyTitle--3Vwmu',
-              children: d ? _$$t('file_browser.folder.this_project_doesn_t_have_any_files') : _$$t('file_browser.folder.no_files_yet')
-            }), _$$tx('file_browser.folder.create_a_new_file_to_start_from_scratch_with_pptx')]
+              children: d ? getI18nString('file_browser.folder.this_project_doesn_t_have_any_files') : getI18nString('file_browser.folder.no_files_yet')
+            }), renderI18nText('file_browser.folder.create_a_new_file_to_start_from_scratch_with_pptx')]
           })
         }), V ? jsx('div', {
           className: _$$s.mr32.$,
@@ -12553,7 +12553,7 @@ function ms({
     newFileTile: !1,
     tileActions: t,
     sortFilterOptions: r,
-    emptyStateText: _$$t('file_browser.tool_bar.trashed_empty_state'),
+    emptyStateText: getI18nString('file_browser.tool_bar.trashed_empty_state'),
     isEligbileForProTeamLockedRevampUI: s
   });
 }
@@ -12586,7 +12586,7 @@ function mc({
       ...l
     },
     trusted: !0,
-    children: _$$tx('team_view.folder_upsell.professional_plan')
+    children: renderI18nText('team_view.folder_upsell.professional_plan')
   });
   return jsx(_$$fu, {
     name: 'Folder Upsell Card',
@@ -12640,11 +12640,11 @@ function mc({
         children: [jsx(_$$E, {
           fontSize: 13,
           fontWeight: 'medium',
-          children: _$$tx('team_view.folder_upsell.upgrade_to_create_more_projects')
+          children: renderI18nText('team_view.folder_upsell.upgrade_to_create_more_projects')
         }), jsx(_$$E, {
           fontSize: 11,
           color: 'secondary',
-          children: _$$tx('team_view.folder_upsell.get_unlimited_everything', {
+          children: renderI18nText('team_view.folder_upsell.get_unlimited_everything', {
             professionalPlanLink: d
           })
         })]
@@ -12685,7 +12685,7 @@ function mm({
       ...n
     },
     trusted: !0,
-    children: _$$tx('team_view.folder_upsell.professional_plan')
+    children: renderI18nText('team_view.folder_upsell.professional_plan')
   });
   return jsx(_$$fu, {
     name: 'Folder Upsell List',
@@ -12763,11 +12763,11 @@ function mm({
           spacing: 0,
           children: [jsx(_$$E, {
             fontSize: 13,
-            children: _$$tx('team_view.folder_upsell.upgrade_to_create_more_projects')
+            children: renderI18nText('team_view.folder_upsell.upgrade_to_create_more_projects')
           }), jsx(_$$E, {
             fontSize: 11,
             color: 'secondary',
-            children: _$$tx('team_view.folder_upsell.get_unlimited_everything', {
+            children: renderI18nText('team_view.folder_upsell.get_unlimited_everything', {
               professionalPlanLink: l
             })
           })]
@@ -12800,14 +12800,14 @@ function mx(e) {
         className: 'x78zum5 xdt5ytf x6s0dn4 xl56j7k xou54vl',
         children: [jsx('div', {
           className: 'xk50ysn',
-          children: _$$tx('team_view.folder_empty_view.no_projects_yet')
-        }), _$$tx('team_view.folder_empty_view.projects_help_you_organize'), jsx($n, {
+          children: renderI18nText('team_view.folder_empty_view.no_projects_yet')
+        }), renderI18nText('team_view.folder_empty_view.projects_help_you_organize'), jsx($n, {
           variant: 'secondary',
           onClick: e.onCreateNewFolder,
           iconPrefix: jsx(_$$x2, {}),
-          children: _$$tx('team_view.folder_empty_view.new_project')
+          children: renderI18nText('team_view.folder_empty_view.new_project')
         })]
-      }) : _$$tx('team_view.folder_empty_view.this_team_does_not_have_any_projects_yet')
+      }) : renderI18nText('team_view.folder_empty_view.this_team_does_not_have_any_projects_yet')
     }) : e.emptyStateText != null ? jsxs('div', {
       className: 'x78zum5 x1rzw5jd',
       children: [jsx('div', {
@@ -12820,7 +12820,7 @@ function mx(e) {
         team: e.team,
         canAdminTeam: !!e.canAdminTeam
       })]
-    }) : _$$tx('team_view.folder_empty_view.no_projects')
+    }) : renderI18nText('team_view.folder_empty_view.no_projects')
   }) : jsxs(Fragment, {
     children: [(() => {
       let t = folderList.length >= 2 ? 1 : folderList.length === 1 ? 0 : void 0;
@@ -12959,8 +12959,8 @@ function mv(e) {
           className: 'xk50ysn',
           children: [jsx('span', {
             className: 'x1s688f',
-            children: _$$tx('file_browser.folder_list_view.may_not_restore_or_permanently_delete_banner')
-          }), '\xA0', _$$tx('file_browser.folder_list_view.may_not_restore_or_permanently_delete_banner_content')]
+            children: renderI18nText('file_browser.folder_list_view.may_not_restore_or_permanently_delete_banner')
+          }), '\xA0', renderI18nText('file_browser.folder_list_view.may_not_restore_or_permanently_delete_banner_content')]
         })
       })
     }), jsx(mx, {
@@ -13033,7 +13033,7 @@ function my() {
         canAdminTeam: _,
         canEditTeamContents: m,
         chunkSize: c?.folders?.length || 0,
-        emptyStateText: _$$t('file_browser.trash_project.trashed_empty_state'),
+        emptyStateText: getI18nString('file_browser.trash_project.trashed_empty_state'),
         folderList: c?.folders || [],
         isEligbileForProTeamLockedRevampUI: l,
         isSharerInfoIncluded: !1,
@@ -13118,7 +13118,7 @@ let mk = e => {
     case C0.TOUCHED_AT:
       return 'touched_at';
     default:
-      $D(_$$e.WAYFINDING, new Error(`Attempting to sort by an unsupported sort key: ${e}`));
+      reportError(_$$e.WAYFINDING, new Error(`Attempting to sort by an unsupported sort key: ${e}`));
       return 'created_at';
   }
 };
@@ -13141,14 +13141,14 @@ let mW = Ju(e => {
     }));
   }, [r, t, n]);
   return jsx(Dd, {
-    title: _$$t('payments.pending_subscription_modal_header'),
+    title: getI18nString('payments.pending_subscription_modal_header'),
     hideCancel: !0,
-    confirmText: _$$t('payments.got_it'),
+    confirmText: getI18nString('payments.got_it'),
     trackedConfirmationProperties: {
       trackingDescriptor: _$$c3.CONFIRM_VERIFY_PAYMENT,
       trackingContextName: 'Confirm Verify Payment'
     },
-    children: _$$tx('payments.pending_subscription_modal_description')
+    children: renderI18nText('payments.pending_subscription_modal_description')
   });
 }, 'PENDING_SUBSCRIPTION_CHANGE_MODAL');
 let mG = 'banners--warn--bC4ke';
@@ -13201,7 +13201,7 @@ function m3(e, t, r) {
       className: mK,
       children: [e.user.handle, ' (', e.user.email, ')']
     }, e.id));
-    i = r ? n.billing === EZ.CHARGE_IMMEDIATELY ? _$$tx('payments.org_past_due_on_payment', {
+    i = r ? n.billing === EZ.CHARGE_IMMEDIATELY ? renderI18nText('payments.org_past_due_on_payment', {
       invoice: jsx('a', {
         onClick: () => {
           t?.(_$$sf({
@@ -13209,16 +13209,16 @@ function m3(e, t, r) {
             orgAdminSettingsViewTab: J7.BILLING
           }));
         },
-        children: _$$tx('payments.outstanding_invoice')
+        children: renderI18nText('payments.outstanding_invoice')
       }),
       orgName: n.name
-    }) : _$$tx('payments.org_past_due_on_payment_invoiced', {
+    }) : renderI18nText('payments.org_past_due_on_payment_invoiced', {
       email: jsx('b', {
         className: mK,
         children: getSupportEmail()
       }),
       orgName: n.name
-    }) : _$$tx('payments.please_reach_out_to_org_admins', {
+    }) : renderI18nText('payments.please_reach_out_to_org_admins', {
       orgName: n.name,
       admins: s && jsxs('span', {
         children: [' ', jsx(_$$T5, {
@@ -13230,7 +13230,7 @@ function m3(e, t, r) {
     });
     return {
       severity: _$$c7.WARN,
-      title: _$$t('payments.payment_not_received'),
+      title: getI18nString('payments.payment_not_received'),
       message: i,
       cta: null,
       onClickCta: null
@@ -13317,7 +13317,7 @@ function m9(e, t, r, i, n, l) {
       teamId: l.id,
       selectedView: s.selectedView
     }));
-    let L = () => Ay.redirect('/education/apply', _$$Ay.isIpadNative ? void 0 : '_blank');
+    let L = () => Ay.redirect('/education/apply', BrowserInfo.isIpadNative ? void 0 : '_blank');
     let D = () => i?.(_$$WX({
       teamId: l.id,
       openInNewTab: !1,
@@ -13354,23 +13354,23 @@ function m9(e, t, r, i, n, l) {
     if (b) {
       return {
         severity: _$$c7.WARN,
-        title: _$$t('payments.locked'),
+        title: getI18nString('payments.locked'),
         message: y ? jsx('span', {
-          children: _$$tx('payments.no_monthly_sub_over_editor_limit_admin.seat_rename', {
+          children: renderI18nText('payments.no_monthly_sub_over_editor_limit_admin.seat_rename', {
             contactSupport: jsx('a', {
               href: `mailto:${getSupportEmail()}`,
-              children: _$$tx('payments.contact_support')
+              children: renderI18nText('payments.contact_support')
             })
           })
         }) : jsx('span', {
-          children: _$$tx('payments.no_monthly_sub_over_editor_limit.seat_rename')
+          children: renderI18nText('payments.no_monthly_sub_over_editor_limit.seat_rename')
         }),
-        cta: y ? _$$t('payments.manage_plan') : null,
+        cta: y ? getI18nString('payments.manage_plan') : null,
         onClickCta: y ? () => {
           i?.(_$$sf({
             view: 'teamAdminConsole',
             teamId: r,
-            teamAdminConsoleViewTab: Iv.SETTINGS
+            teamAdminConsoleViewTab: DashboardSections.SETTINGS
           }));
         } : null
       };
@@ -13380,7 +13380,7 @@ function m9(e, t, r, i, n, l) {
       let t;
       let s;
       let n;
-      j ? (e = w ? _$$tx('payments.pro_trial_expiry.locked_description_on_team', {
+      j ? (e = w ? renderI18nText('payments.pro_trial_expiry.locked_description_on_team', {
         teamName: l.name,
         lowerUsageLink: jsx(_$$$z, {
           onClick: e => {
@@ -13392,16 +13392,16 @@ function m9(e, t, r, i, n, l) {
               }
             }));
           },
-          children: _$$tx('payments.pro_trial_expiry.lower_usage')
+          children: renderI18nText('payments.pro_trial_expiry.lower_usage')
         })
-      }) : _$$tx('payments.pro_trial_expiry.locked_description_for_viewer_on_team', {
+      }) : renderI18nText('payments.pro_trial_expiry.locked_description_for_viewer_on_team', {
         teamName: l.name
-      }), t = w ? _$$tx('payments.pro_trial_upgrade_cta.upgrade') : null, s = `${m1} `, n = 'Pro Trial Expiry Banner Locked') : (e = l ? _$$tx('payments.pro_trial.trial_ended_banner_message', {
+      }), t = w ? renderI18nText('payments.pro_trial_upgrade_cta.upgrade') : null, s = `${m1} `, n = 'Pro Trial Expiry Banner Locked') : (e = l ? renderI18nText('payments.pro_trial.trial_ended_banner_message', {
         teamName: l.name
-      }) : _$$tx('payments.pro_trial.trial_ended_banner_message.no_name'), t = _$$tx('payments.pro_trial.trial_ended_banner_upgrade_cta'), s = `${m1} ${m4}`, n = 'Pro Trial Expiry Banner Unlocked');
+      }) : renderI18nText('payments.pro_trial.trial_ended_banner_message.no_name'), t = renderI18nText('payments.pro_trial.trial_ended_banner_upgrade_cta'), s = `${m1} ${m4}`, n = 'Pro Trial Expiry Banner Unlocked');
       return {
         severity: _$$c7.WARN_SOFT,
-        title: _$$t('payments.pro_trial.trial_ended_banner_title'),
+        title: getI18nString('payments.pro_trial.trial_ended_banner_title'),
         message: e,
         cta: t,
         onClickCta: w ? D : void 0,
@@ -13424,8 +13424,8 @@ function m9(e, t, r, i, n, l) {
     if (S) {
       return {
         severity: _$$c7.WARN_SOFT,
-        title: _$$tx('file_browser.limited_space_banner.heading'),
-        message: _$$tx('file_browser.limited_space_banner.description'),
+        title: renderI18nText('file_browser.limited_space_banner.heading'),
+        message: renderI18nText('file_browser.limited_space_banner.description'),
         cta: null,
         hideIcon: !0,
         bannerClassName: 'banners--limitedSpaceBanner--Pq6k8'
@@ -13441,17 +13441,17 @@ function m9(e, t, r, i, n, l) {
       if (X || Z) {
         return {
           severity: _$$c7.WARN_SOFT,
-          title: _$$tx('edu.banner.your_education_status_is_expiring_soon'),
-          message: _$$tx('edu.banner.to_keep_collaborating_upgrade_team', {
+          title: renderI18nText('edu.banner.your_education_status_is_expiring_soon'),
+          message: renderI18nText('edu.banner.to_keep_collaborating_upgrade_team', {
             teamName: l.name,
             verify: jsx(Us, {
               href: '/education/apply',
               target: '_blank',
               trusted: !0,
-              children: _$$tx('edu.banner.verify_your_education_status')
+              children: renderI18nText('edu.banner.verify_your_education_status')
             })
           }),
-          cta: _$$tx('edu.banner.learn_more'),
+          cta: renderI18nText('edu.banner.learn_more'),
           onClickCta: e,
           svg: _$$A18,
           bannerClassName: `${m1} ${m4}`,
@@ -13461,11 +13461,11 @@ function m9(e, t, r, i, n, l) {
       if (Q) {
         return {
           severity: _$$c7.WARN_SOFT,
-          title: _$$tx('edu.banner.your_education_plan_has_expired'),
-          message: _$$tx('edu.banner.team_is_now_view_only_for_all_members', {
+          title: renderI18nText('edu.banner.your_education_plan_has_expired'),
+          message: renderI18nText('edu.banner.team_is_now_view_only_for_all_members', {
             teamName: l.name
           }),
-          cta: _$$tx('edu.banner.learn_more'),
+          cta: renderI18nText('edu.banner.learn_more'),
           onClickCta: e,
           svg: _$$A18,
           bannerClassName: m1,
@@ -13475,11 +13475,11 @@ function m9(e, t, r, i, n, l) {
       if (ee) {
         return {
           severity: _$$c7.WARN_SOFT,
-          title: _$$tx('edu.banner.your_education_plan_has_expired'),
-          message: _$$tx('edu.banner.you_can_no_longer_edit_files', {
+          title: renderI18nText('edu.banner.your_education_plan_has_expired'),
+          message: renderI18nText('edu.banner.you_can_no_longer_edit_files', {
             teamName: l.name
           }),
-          cta: _$$tx('edu.banner.learn_more'),
+          cta: renderI18nText('edu.banner.learn_more'),
           onClickCta: e,
           svg: _$$A18,
           bannerClassName: m1,
@@ -13489,10 +13489,10 @@ function m9(e, t, r, i, n, l) {
     } else if (q) {
       return {
         severity: _$$c7.WARN_SOFT,
-        title: _$$tx('edu.banner.team_s_education_status_has_expired', {
+        title: renderI18nText('edu.banner.team_s_education_status_has_expired', {
           teamName: l.name
         }),
-        message: _$$tx('edu.banner.move_or_duplicate_files_to_another_location_to_save_your_work'),
+        message: renderI18nText('edu.banner.move_or_duplicate_files_to_another_location_to_save_your_work'),
         cta: null,
         svg: _$$A18,
         bannerClassName: m1,
@@ -13500,16 +13500,16 @@ function m9(e, t, r, i, n, l) {
       };
     } else if (G) {
       let e = s.user.external_restricted_org_id;
-      let t = _$$t('external_collaboration_restricted.banner.restriction_description.no_org');
+      let t = getI18nString('external_collaboration_restricted.banner.restriction_description.no_org');
       if (e && s.orgById[e]) {
         let r = s.orgById[e];
-        t = _$$t('external_collaboration_restricted.banner.restriction_description', {
+        t = getI18nString('external_collaboration_restricted.banner.restriction_description', {
           organizationName: r.name
         });
       }
       return {
         severity: _$$c7.WARN,
-        title: _$$t('external_collaboration_restricted.banner.title'),
+        title: getI18nString('external_collaboration_restricted.banner.title'),
         message: t,
         cta: null,
         ctaTrackingProperties: void 0,
@@ -13517,20 +13517,20 @@ function m9(e, t, r, i, n, l) {
       };
     } else if (s.user && ['team', 'folder'].includes(e) && I.showAccessRestricted) {
       let e;
-      let t = _$$t('banner.edu_grace_period.your_education_plan_has_expired');
-      l ? _$$eB(s.user.id, s.roles.byTeamId, l) ? e = _$$t('banner.edu_grace_period.team_is_now_view_only_for_all_members', {
+      let t = getI18nString('banner.edu_grace_period.your_education_plan_has_expired');
+      l ? _$$eB(s.user.id, s.roles.byTeamId, l) ? e = getI18nString('banner.edu_grace_period.team_is_now_view_only_for_all_members', {
         teamName: l.name
-      }) : QS(s.user.id, s.roles.byTeamId, l) ? e = _$$t('banner.edu_grace_period.you_can_no_longer_edit_files_in_team', {
+      }) : QS(s.user.id, s.roles.byTeamId, l) ? e = getI18nString('banner.edu_grace_period.you_can_no_longer_edit_files_in_team', {
         teamName: l.name
-      }) : (t = _$$t('banner.edu_grace_period.your_education_plan_has_expired.is_member', {
+      }) : (t = getI18nString('banner.edu_grace_period.your_education_plan_has_expired.is_member', {
         teamName: l.name
-      }), e = _$$t('banner.edu_grace_period.move_or_duplicate_files_to_another_location_to_save_your_work')) : e = _$$t('banner.edu_grace_period.education_team_members_need_to_verify_their_education_status');
+      }), e = getI18nString('banner.edu_grace_period.move_or_duplicate_files_to_another_location_to_save_your_work')) : e = getI18nString('banner.edu_grace_period.education_team_members_need_to_verify_their_education_status');
       return {
         severity: _$$c7.ANNOUNCEMENT,
         title: t,
         message: e,
         learnMoreUrl: '/education/',
-        cta: _$$t('banner.edu_grace_period.verify_status_button'),
+        cta: getI18nString('banner.edu_grace_period.verify_status_button'),
         onClickCta: L,
         svg: _$$A18,
         bannerClassName: m0
@@ -13538,24 +13538,24 @@ function m9(e, t, r, i, n, l) {
     } else if (['team', 'folder'].includes(e) && I.showReminder) {
       return {
         severity: _$$c7.ANNOUNCEMENT,
-        title: _$$t('banner.edu_grace_period.only_edu_grace_period_days_left', {
+        title: getI18nString('banner.edu_grace_period.only_edu_grace_period_days_left', {
           daysLeft: E
         }),
-        message: _$$t('banner.edu_grace_period.to_keep_collaborating_on_figma_s_education_plan_please_verify_your_status_soon'),
-        cta: _$$t('banner.edu_grace_period.verify_status_button'),
+        message: getI18nString('banner.edu_grace_period.to_keep_collaborating_on_figma_s_education_plan_please_verify_your_status_soon'),
+        cta: getI18nString('banner.edu_grace_period.verify_status_button'),
         onClickCta: L,
         svg: _$$A21
       };
     } else if (R || A) {
       return {
         severity: _$$c7.WARN,
-        title: _$$t('payments.folder_locked'),
-        message: _$$t('payments.folder_locked_description', {
-          projectType: (R ? 'Invite' : 'View') == 'Invite' ? _$$t('payments.invite_only_projects') : _$$t('payments.view_only_projects'),
+        title: getI18nString('payments.folder_locked'),
+        message: getI18nString('payments.folder_locked_description', {
+          projectType: (R ? 'Invite' : 'View') == 'Invite' ? getI18nString('payments.invite_only_projects') : getI18nString('payments.view_only_projects'),
           teamName: l.name
         }),
         learnMoreUrl: '/pricing',
-        cta: w ? _$$t('payments.upgrade_now') : _$$t('payments.contact_admin_for_details'),
+        cta: w ? getI18nString('payments.upgrade_now') : getI18nString('payments.contact_admin_for_details'),
         ctaTrackingProperties: w ? {
           trackingDescriptor: _$$c3.UPGRADE_NOW,
           upsellSource: _$$b4.BANNER
@@ -13571,8 +13571,8 @@ function m9(e, t, r, i, n, l) {
       });
       return {
         severity: _$$c7.WARN,
-        title: _$$t('payments.locked'),
-        message: _$$t('payments.projects_deprecated'),
+        title: getI18nString('payments.locked'),
+        message: getI18nString('payments.projects_deprecated'),
         learnMoreUrl: '/pricing-faq#what-changes-for-me',
         cta: null,
         onClickCta: null
@@ -13580,44 +13580,44 @@ function m9(e, t, r, i, n, l) {
     } else if (O && e === 'folder') {
       return {
         severity: _$$c7.WARN,
-        title: _$$t('payments.abandoned_project'),
-        message: _$$t('payments.abandoned_project_description'),
+        title: getI18nString('payments.abandoned_project'),
+        message: getI18nString('payments.abandoned_project_description'),
         cta: null,
         onClickCta: null
       };
     } else if ($) {
-      let e = _$$t('payments.file_limit_unified', {
+      let e = getI18nString('payments.file_limit_unified', {
         figmaFiles: _$$WW,
         figjamFiles: _$$WW
       });
-      W ? $ || (e = _$$t('payments.file_limit_figjam', {
+      W ? $ || (e = getI18nString('payments.file_limit_figjam', {
         figjamFiles: _$$WW
-      })) : e = _$$t('payments.file_limit_figma', {
+      })) : e = getI18nString('payments.file_limit_figma', {
         figmaFiles: _$$WW
       });
       let t = () => jsx('button', {
         type: 'button',
         onClick: M,
         className: 'banners--bannerInlineTextButton--GRx12',
-        children: _$$tx('payments.check_out_our_paid_plans')
+        children: renderI18nText('payments.check_out_our_paid_plans')
       });
       let r = l ? jsx('span', {
-        children: _$$tx('payments.team_over_starter_team_limit_with_button.legacy_team', {
+        children: renderI18nText('payments.team_over_starter_team_limit_with_button.legacy_team', {
           fileLimitString: e,
           checkoutOurPlans: t(),
           teamName: l.name
         })
       }) : jsx('span', {
-        children: _$$tx('payments.team_over_starter_team_limit_with_button.no_legacy_team_present', {
+        children: renderI18nText('payments.team_over_starter_team_limit_with_button.no_legacy_team_present', {
           fileLimitString: e,
           checkoutOurPlans: t()
         })
       });
       return {
         severity: _$$c7.ANNOUNCEMENT,
-        title: _$$t('payments.team_over_starter_team_limit_title'),
+        title: getI18nString('payments.team_over_starter_team_limit_title'),
         message: r,
-        cta: _$$t('payments.upgrade_now'),
+        cta: getI18nString('payments.upgrade_now'),
         ctaTrackingProperties: {
           trackingDescriptor: _$$c3.UPGRADE_NOW,
           upsellSource: _$$b4.BANNER
@@ -13629,12 +13629,12 @@ function m9(e, t, r, i, n, l) {
       };
     } else if (U) {
       let e = _$$A3(l.grace_period_end).toDate();
-      let t = _$$tx('payments.pro_plan_ends_relative_time_string', {
+      let t = renderI18nText('payments.pro_plan_ends_relative_time_string', {
         relative_time_string: jsx(_$$h6, {
           date: e
         })
       });
-      B || (t = _$$tx('payments.pro_plan_ends_on_date', {
+      B || (t = renderI18nText('payments.pro_plan_ends_on_date', {
         end_date: new Intl.DateTimeFormat('en-US', {
           month: 'short',
           day: 'numeric',
@@ -13644,22 +13644,22 @@ function m9(e, t, r, i, n, l) {
       return {
         severity: _$$c7.ANNOUNCEMENT,
         title: t,
-        message: _$$t('payments.pro_plan_ends_for_team_description', {
+        message: getI18nString('payments.pro_plan_ends_for_team_description', {
           teamName: l.name
         }),
-        cta: _$$t('payments.pro_plan_ends_button'),
+        cta: getI18nString('payments.pro_plan_ends_button'),
         onClickCta: D,
         svg: B ? _$$A20 : _$$A19,
         trackingContextName: 'Promo Code Expiration Banner',
         bannerClassName: B ? m0 : void 0
       };
     } else if (x) {
-      let e = _ ? _$$t('payments.complete_team_payment_description', {
+      let e = _ ? getI18nString('payments.complete_team_payment_description', {
         teamName: l.name
-      }) : _$$t('payments.complete_team_renewal_payment_description');
+      }) : getI18nString('payments.complete_team_renewal_payment_description');
       return {
         severity: _$$c7.WARN,
-        title: _$$t('payments.complete_payment'),
+        title: getI18nString('payments.complete_payment'),
         message: e,
         cta: jsx(_$$V6, {
           trackingProperties: {
@@ -13673,7 +13673,7 @@ function m9(e, t, r, i, n, l) {
               paymentRequiresAction: !!g
             }
           })),
-          children: _$$tx('payments.complete_payment_cta')
+          children: renderI18nText('payments.complete_payment_cta')
         }),
         onClickCta: null
       };
@@ -13862,7 +13862,7 @@ function _s(e) {
             target: '_blank',
             rel: 'noopener',
             href: learnMoreUrl,
-            children: _$$tx('payments.learn_more')
+            children: renderI18nText('payments.learn_more')
           })]
         })]
       }), jsxs(_$$e8, {
@@ -13973,7 +13973,7 @@ function _o() {
   }, 1), jsx($c, {
     initialViewMode: d.tileSortFilterConfig.viewMode,
     onViewModeChange: e => {
-      _$$sx('file view toggle', {
+      trackEventAnalytics('file view toggle', {
         viewType: e === XU.GRID ? 'grid' : 'list'
       });
       t(JF({
@@ -14006,7 +14006,7 @@ function _c(e) {
   let {
     sortFilterOptions,
     selectedBranchKeyByRepoId
-  } = _$$R6(t => ({
+  } = selectWithShallowEqual(t => ({
     sortFilterOptions: _d(e.folderId, t.tileSortFilterStateByView),
     selectedBranchKeyByRepoId: t.selectedBranchKeyByRepoId
   }));
@@ -14097,13 +14097,13 @@ let _b = Ju(e => {
   } = e;
   let h = draftsToDelete.map(e => e.name).concat(reposToDelete.map(e => e.name));
   let x = h.length > 1;
-  t = isPermanentDeletion ? x ? _$$t('file_browser.draft_delete_modal.header_multiple_files_delete', {
+  t = isPermanentDeletion ? x ? getI18nString('file_browser.draft_delete_modal.header_multiple_files_delete', {
     fileCount: h.length
-  }) : _$$t('file_browser.draft_delete_modal.header_single_file_delete', {
+  }) : getI18nString('file_browser.draft_delete_modal.header_single_file_delete', {
     fileName: h[0]
-  }) : x ? _$$t('file_browser.draft_delete_modal.header_multiple_files_trash', {
+  }) : x ? getI18nString('file_browser.draft_delete_modal.header_multiple_files_trash', {
     fileCount: h.length
-  }) : _$$t('file_browser.draft_delete_modal.header_single_file_trash');
+  }) : getI18nString('file_browser.draft_delete_modal.header_single_file_trash');
   let b = (t, r) => {
     if (t.length > 0) {
       if (isPermanentDeletion) {
@@ -14145,16 +14145,16 @@ let _b = Ju(e => {
     })));
   };
   let v = () => _$$k6.deleteAllPersonalDrafts().then(() => n(_$$F.enqueue({
-    message: _$$t('file_browser.draft_delete_modal.async_delete_drafts_scheduled')
+    message: getI18nString('file_browser.draft_delete_modal.async_delete_drafts_scheduled')
   }))).catch(() => n(_$$F.enqueue({
-    message: _$$t('file_browser.draft_delete_modal.async_delete_drafts_scheduled_error')
+    message: getI18nString('file_browser.draft_delete_modal.async_delete_drafts_scheduled_error')
   })));
   let y = () => {
     let {
       draftsToDelete: _draftsToDelete,
       reposToDelete: _reposToDelete
     } = e;
-    _draftsToDelete.length + _reposToDelete.length > 100 ? n(_$$s2.error(_$$t('file_browser.draft_delete_modal.unable_to_delete', {
+    _draftsToDelete.length + _reposToDelete.length > 100 ? n(_$$s2.error(getI18nString('file_browser.draft_delete_modal.unable_to_delete', {
       maxSize: 100
     }))) : (e.setSynchronousFileTransferInProgress(_draftsToDelete.length > 0), b(_draftsToDelete, _reposToDelete));
   };
@@ -14162,12 +14162,12 @@ let _b = Ju(e => {
     deleteAllDraftsAsync ? v() : y();
     e.onClose();
   };
-  let j = useMemo(() => l.trim().toLowerCase() !== _$$t('file_browser.draft_delete_modal.button_delete').toLocaleLowerCase(), [l]);
-  r = isPermanentDeletion ? x ? _$$t('file_browser.draft_delete_modal.permanently_delete_multiple_drafts', {
+  let j = useMemo(() => l.trim().toLowerCase() !== getI18nString('file_browser.draft_delete_modal.button_delete').toLocaleLowerCase(), [l]);
+  r = isPermanentDeletion ? x ? getI18nString('file_browser.draft_delete_modal.permanently_delete_multiple_drafts', {
     fileCount: h.length
-  }) : _$$t('file_browser.draft_delete_modal.permanently_delete_one_draft') : x ? _$$t('file_browser.draft_delete_modal.you_are_about_to_delete_multiple_drafts', {
+  }) : getI18nString('file_browser.draft_delete_modal.permanently_delete_one_draft') : x ? getI18nString('file_browser.draft_delete_modal.you_are_about_to_delete_multiple_drafts', {
     fileCount: h.length
-  }) : _$$t('file_browser.draft_delete_modal.you_are_about_to_delete_single_draft', {
+  }) : getI18nString('file_browser.draft_delete_modal.you_are_about_to_delete_single_draft', {
     fileName: h[0]
   });
   let T = isPermanentDeletion ? jsx(qM, {
@@ -14179,15 +14179,15 @@ let _b = Ju(e => {
     },
     dataTestId: 'draft-delete-confirmation-button',
     children: jsx('span', {
-      'data-tooltip': _$$t('file_browser.draft_delete_modal.draft_deletion_tooltip', {
-        deletionString: _$$t('file_browser.draft_delete_modal.button_delete')
+      'data-tooltip': getI18nString('file_browser.draft_delete_modal.draft_deletion_tooltip', {
+        deletionString: getI18nString('file_browser.draft_delete_modal.button_delete')
       }),
       'data-tooltip-type': j ? Ib.TEXT : null,
       'data-tooltip-max-width': 180,
       'data-tooltip-show-above': !0,
-      'children': getFeatureFlags().ps_trashed_drafts_enabled ? _$$t('file_browser.draft_delete_modal.button_permanently_delete_files', {
+      'children': getFeatureFlags().ps_trashed_drafts_enabled ? getI18nString('file_browser.draft_delete_modal.button_permanently_delete_files', {
         numFiles: h.length
-      }) : _$$t('file_browser.draft_delete_modal.button_delete')
+      }) : getI18nString('file_browser.draft_delete_modal.button_delete')
     })
   }) : jsx(vd, {
     'onClick': w,
@@ -14196,7 +14196,7 @@ let _b = Ju(e => {
       isDeletingDraftFromDTM: !0,
       isPermanentDeletion
     },
-    'children': _$$tx('file_browser.draft_delete_modal.button_delete_files', {
+    'children': renderI18nText('file_browser.draft_delete_modal.button_delete_files', {
       numFiles: h.length
     })
   });
@@ -14218,14 +14218,14 @@ let _b = Ju(e => {
         className: 'draft_delete_modal--modalContent--QYGIS',
         children: [jsxs('p', {
           children: [r, ' ', !isPermanentDeletion && jsxs('p', {
-            children: [jsx('br', {}), _$$tx('file_browser.draft_delete_modal.you_can_access_drafts_from_deleted_drafts_section', {
+            children: [jsx('br', {}), renderI18nText('file_browser.draft_delete_modal.you_can_access_drafts_from_deleted_drafts_section', {
               fileCount: h.length
             })]
           })]
         }), jsx('p', {
           className: 'draft_delete_modal--confirmationTextSpacing---MQEW',
-          children: isPermanentDeletion && _$$tx('file_browser.draft_delete_modal.permanently_delete_multiple_drafts_confirmation', {
-            deletionString: _$$t('file_browser.draft_delete_modal.button_delete')
+          children: isPermanentDeletion && renderI18nText('file_browser.draft_delete_modal.permanently_delete_multiple_drafts_confirmation', {
+            deletionString: getI18nString('file_browser.draft_delete_modal.button_delete')
           })
         }), jsxs('form', {
           onSubmit: w,
@@ -14250,7 +14250,7 @@ let _b = Ju(e => {
             className: 'draft_delete_modal--footer--SRSo6',
             children: [jsx(_$$nR2, {
               onClick: e.onClose,
-              children: _$$tx('modal.cancel')
+              children: renderI18nText('modal.cancel')
             }), T]
           })]
         })]
@@ -14263,12 +14263,12 @@ function _j() {
     children: jsxs(Cs, {
       variant: 'warn',
       children: [jsx(_$$Q2, {
-        title: _$$tx('file_browser.drafts_to_move.move_your_drafts_by_august_21'),
-        children: _$$tx('file_browser.drafts_to_move.pre_migration_banner_description')
+        title: renderI18nText('file_browser.drafts_to_move.move_your_drafts_by_august_21'),
+        children: renderI18nText('file_browser.drafts_to_move.pre_migration_banner_description')
       }), jsx(_$$N4, {
         href: 'https://help.figma.com/hc/articles/18409526530967',
         newTab: !0,
-        children: _$$tx('file_browser.drafts_to_move.viewbar_learn_more_link')
+        children: renderI18nText('file_browser.drafts_to_move.viewbar_learn_more_link')
       })]
     })
   });
@@ -14278,12 +14278,12 @@ function _T() {
     children: jsxs(Cs, {
       variant: 'warn',
       children: [jsx(_$$Q2, {
-        title: _$$tx('file_browser.drafts_to_move.migration_will_begin_shortly'),
-        children: _$$tx('file_browser.drafts_to_move.last_chance_to_move_any_files')
+        title: renderI18nText('file_browser.drafts_to_move.migration_will_begin_shortly'),
+        children: renderI18nText('file_browser.drafts_to_move.last_chance_to_move_any_files')
       }), jsx(_$$N4, {
         href: 'https://help.figma.com/hc/articles/18409526530967',
         newTab: !0,
-        children: _$$tx('file_browser.drafts_to_move.viewbar_learn_more_link')
+        children: renderI18nText('file_browser.drafts_to_move.viewbar_learn_more_link')
       })]
     })
   });
@@ -14301,9 +14301,9 @@ function _P(e) {
   let t = e => {
     switch (e) {
       case 'draft-files':
-        return _$$t('file_browser.drafts_to_move.drafts');
+        return getI18nString('file_browser.drafts_to_move.drafts');
       case 'deleted-draft-files':
-        return _$$t('file_browser.drafts_to_move.deleted_drafts');
+        return getI18nString('file_browser.drafts_to_move.deleted_drafts');
       default:
         throwTypeError(e);
     }
@@ -14372,14 +14372,14 @@ function _L(e) {
         className: 'drafts_to_move_page_view--fileCellDatesSection--LFnvg',
         children: [jsx('span', {
           className: _I,
-          children: _$$tx('file_browser.drafts_to_move.file_created_at_label', {
+          children: renderI18nText('file_browser.drafts_to_move.file_created_at_label', {
             timeDifference: jsx(_$$h6, {
               date: _$$Tf.getCreatedAt(item)
             })
           })
         }), jsx('span', {
           className: _I,
-          children: _$$tx('file_browser.drafts_to_move.file_last_modified_at_label', {
+          children: renderI18nText('file_browser.drafts_to_move.file_last_modified_at_label', {
             timeDifference: jsx(_$$h6, {
               date: _$$Tf.getTouchedAt(item) ?? ''
             })
@@ -14398,11 +14398,11 @@ function _D({
       size: 'large'
     }), jsx('p', {
       className: 'drafts_to_move_page_view--transferContentHeader--ljikD',
-      children: _$$tx('file_browser.drafts_to_move.file_transfer_header', {
-        transferType: e === 'ASYNC_FILE_MIGRATION' ? _$$tx('file_browser.drafts_to_move.file_transfer_migration_type') : _$$tx('file_browser.drafts_to_move.file_transfer_deletion_type')
+      children: renderI18nText('file_browser.drafts_to_move.file_transfer_header', {
+        transferType: e === 'ASYNC_FILE_MIGRATION' ? renderI18nText('file_browser.drafts_to_move.file_transfer_migration_type') : renderI18nText('file_browser.drafts_to_move.file_transfer_deletion_type')
       })
     }), jsx('p', {
-      children: _$$tx('file_browser.drafts_to_move.file_transfer_description')
+      children: renderI18nText('file_browser.drafts_to_move.file_transfer_description')
     })]
   });
   let s = () => jsx('div', {
@@ -14416,9 +14416,9 @@ function _D({
         width: 100
       }), jsx('p', {
         className: _S,
-        children: _$$tx('file_browser.drafts_to_move.empty_header')
+        children: renderI18nText('file_browser.drafts_to_move.empty_header')
       }), jsx('p', {
-        children: _$$tx('file_browser.drafts_to_move.empty_body_text')
+        children: renderI18nText('file_browser.drafts_to_move.empty_body_text')
       })]
     })
   });
@@ -14547,7 +14547,7 @@ function _M() {
   };
   let ef = (t, r) => {
     e(_$$F.enqueue({
-      message: _$$t('visual_bell.files_moved_to_folder', {
+      message: getI18nString('visual_bell.files_moved_to_folder', {
         fileCount: r,
         folderName: t
       })
@@ -14611,7 +14611,7 @@ function _M() {
   let ev = function (e, t, r, s) {
     let i = s >= 1200;
     let n = [{
-      name: _$$t('file_browser.drafts_to_move.table_header_name'),
+      name: getI18nString('file_browser.drafts_to_move.table_header_name'),
       className: 'drafts_to_move_page_view--nameColumn--sSZYF drafts_to_move_page_view--column--jpRzM table--column--974RA',
       getSortValue: e => _$$Tf.getName(e),
       cellComponent: e => jsx(_L, {
@@ -14620,7 +14620,7 @@ function _M() {
       })
     }];
     i && n.push({
-      name: _$$t('file_browser.drafts_to_move.table_header_last_modified'),
+      name: getI18nString('file_browser.drafts_to_move.table_header_last_modified'),
       className: _N,
       getSortValue: e => _$$Tf.getTouchedAt(e) ?? '',
       cellComponent: e => {
@@ -14630,7 +14630,7 @@ function _M() {
         }) : '';
       }
     }, {
-      name: _$$t('file_browser.drafts_to_move.table_header_created'),
+      name: getI18nString('file_browser.drafts_to_move.table_header_created'),
       className: _N,
       getSortValue: e => _$$Tf.getCreatedAt(e),
       cellComponent: e => jsx(_$$h6, {
@@ -14644,11 +14644,11 @@ function _M() {
         children: [jsx(_$$tM, {
           className: U()('drafts_to_move_page_view--openDraftButton--zXZGf', _$$s.$$if(!!_$$Tf.getTrashedAt(s), _$$s.invisible).$),
           onClick: e => t(e, s),
-          children: _$$tx('file_browser.drafts_to_move.open_draft_button')
+          children: renderI18nText('file_browser.drafts_to_move.open_draft_button')
         }), jsx(_$$tM, {
           className: 'drafts_to_move_page_view--moveDraftButton--GmBWa',
           onClick: t => e(t, s),
-          children: _$$tx('file_browser.drafts_to_move.move_draft_button')
+          children: renderI18nText('file_browser.drafts_to_move.move_draft_button')
         })]
       }) : jsx(Fragment, {})
     });
@@ -14680,20 +14680,20 @@ function _M() {
     t.stopPropagation();
   }, em.length, windowInnerWidth);
   let [ey, ew, ej] = _$$z1({
-    columnName: _$$t('file_browser.drafts_to_move.table_header_last_modified'),
+    columnName: getI18nString('file_browser.drafts_to_move.table_header_last_modified'),
     isReversed: !0
   }, ed, ev);
   let eT = jsxs('div', {
     className: _C,
     children: [jsx('span', {
       className: _S,
-      children: _$$tx('file_browser.drafts_to_move.empty_header')
+      children: renderI18nText('file_browser.drafts_to_move.empty_header')
     }), jsx('span', {
-      children: _$$tx('file_browser.drafts_to_move.empty_content_description', {
+      children: renderI18nText('file_browser.drafts_to_move.empty_content_description', {
         tab: jsx('button', {
           className: 'drafts_to_move_page_view--emptyContentTab--GKlRP',
           onClick: () => R(k === 'draft-files' ? 'deleted-draft-files' : 'draft-files'),
-          children: k === 'draft-files' ? _$$t('file_browser.drafts_to_move.deleted_drafts') : _$$t('file_browser.drafts_to_move.drafts')
+          children: k === 'draft-files' ? getI18nString('file_browser.drafts_to_move.deleted_drafts') : getI18nString('file_browser.drafts_to_move.drafts')
         })
       })
     })]
@@ -14718,12 +14718,12 @@ function _M() {
             children: [!eE && jsx(_$$rb, {
               className: 'drafts_to_move_page_view--deleteDraftsButton--Aesaa',
               onClick: () => ex(eI),
-              children: eI ? _$$tx('file_browser.drafts_to_move.bulk_delete_drafts_button') : _$$tx('file_browser.drafts_to_move.bulk_trash_drafts_button')
+              children: eI ? renderI18nText('file_browser.drafts_to_move.bulk_delete_drafts_button') : renderI18nText('file_browser.drafts_to_move.bulk_trash_drafts_button')
             }), jsx(_$$vd, {
               className: 'drafts_to_move_page_view--moveDraftsButton--fZf6H',
               disabled: eE,
               onClick: eb,
-              children: _$$tx('file_browser.drafts_to_move.bulk_move_drafts_button', {
+              children: renderI18nText('file_browser.drafts_to_move.bulk_move_drafts_button', {
                 numSelected: em.length
               })
             })]
@@ -14737,7 +14737,7 @@ function _M() {
           isLoading: !_$$s6,
           itemTypeContext: {
             itemType: 'draftToMove',
-            getSelectedCountString: e => _$$t('file_browser.drafts_to_move.selected_count_files', {
+            getSelectedCountString: e => getI18nString('file_browser.drafts_to_move.selected_count_files', {
               numSelected: e
             })
           },
@@ -14777,15 +14777,15 @@ function _M() {
           }), jsxs('div', {
             children: [jsx('h1', {
               className: 'drafts_to_move_page_view--viewbarHeading--02fvs',
-              children: _$$tx('file_browser.drafts_to_move.viewbar_heading')
+              children: renderI18nText('file_browser.drafts_to_move.viewbar_heading')
             }), jsxs('ul', {
               className: 'drafts_to_move_page_view--viewbarDescription--dV8s3',
               children: [jsx('li', {
-                children: _$$tx('file_browser.drafts_to_move.move_drafts_below')
+                children: renderI18nText('file_browser.drafts_to_move.move_drafts_below')
               }), jsx('li', {
-                children: _$$tx('file_browser.drafts_to_move.drafts_for_personal_work')
+                children: renderI18nText('file_browser.drafts_to_move.drafts_for_personal_work')
               }), jsx('li', {
-                children: _$$tx('file_browser.drafts_to_move.access_to_drafts')
+                children: renderI18nText('file_browser.drafts_to_move.access_to_drafts')
               })]
             }), jsxs('div', {
               className: 'drafts_to_move_page_view--viewbarActions--v-cwt',
@@ -14806,12 +14806,12 @@ function _M() {
                     }
                   }));
                 },
-                children: _$$tx('file_browser.drafts_to_move.move_all_drafts_button')
+                children: renderI18nText('file_browser.drafts_to_move.move_all_drafts_button')
               }), jsx(NY, {
                 className: 'drafts_to_move_page_view--learnMoreButton--lUnQ9 drafts_to_move_page_view--moveAllDraftsButton--9-TlX',
                 href: 'https://www.figma.com/blog/updates-to-how-drafts-work/',
                 target: '_blank',
-                children: _$$tx('file_browser.drafts_to_move.viewbar_learn_more_link')
+                children: renderI18nText('file_browser.drafts_to_move.viewbar_learn_more_link')
               })]
             })]
           })]
@@ -14900,10 +14900,10 @@ function _V({
   hasTrailingDivider: s
 }) {
   let i = _$$$6();
-  let n = e.id === _$$O;
+  let n = e.id === UNASSIGNED;
   let o = !e.canRead;
   return jsx(J5, {
-    text: n ? _$$t('breadcrumbs.unassigned_license_group') : o ? _$$t('breadcrumbs.private_workspace_ellipses') : e.name,
+    text: n ? getI18nString('breadcrumbs.unassigned_license_group') : o ? getI18nString('breadcrumbs.private_workspace_ellipses') : e.name,
     onClick: a => {
       i(e.id, a);
       Cu({
@@ -14941,7 +14941,7 @@ function _z({
       hasTrailingDivider: !0
     }), (r.team.workspace || o) && r.team.org && jsx(_V, {
       workspace: r.team.workspace ?? {
-        id: _$$O
+        id: UNASSIGNED
       },
       currentResourceId: r.id,
       orgId: r.team.org.id,
@@ -14960,7 +14960,7 @@ let _J = _$$r(_K);
 function _q({
   folder: e
 }) {
-  let t = _$$md(_J);
+  let t = useAtomWithSubscription(_J);
   let r = useMemo(() => {
     let t = _$$oA(e.mostRecentResourceConnection);
     let r = !!t && !!t.disconnectedAt;
@@ -14988,7 +14988,7 @@ function _q({
   return jsx(_$$rq, {
     arrowPosition: F_.TOP,
     clickOutsideToHide: !0,
-    description: _$$tx('resource_connection.onboarding.share_a_project_copy_onboarding_description', {
+    description: renderI18nText('resource_connection.onboarding.share_a_project_copy_onboarding_description', {
       hostPlanName: l(_$$oA(e.mostRecentResourceConnection)?.hostPlanName),
       connectedPlanName: l(_$$oA(e.mostRecentResourceConnection)?.connectedPlanName)
     }),
@@ -14996,14 +14996,14 @@ function _q({
     isShowing,
     onClose: complete,
     primaryCta: {
-      label: _$$tx('general.got_it'),
+      label: renderI18nText('general.got_it'),
       ctaTrackingDescriptor: _$$c3.GOT_IT,
       type: 'button',
       onClick: complete
     },
     shouldCenterArrow: EL.FALLBACK,
     targetKey: _Y,
-    title: _$$tx('resource_connection.onboarding.share_a_project_copy_onboarding_title'),
+    title: renderI18nText('resource_connection.onboarding.share_a_project_copy_onboarding_title'),
     trackingContextName: 'seen folder settings disconnected project share copy onboarding overlay',
     userFlagOnShow: _K
   });
@@ -15017,7 +15017,7 @@ function _X(e) {
     isFreeUser,
     userAnalyticsData,
     ...c
-  } = _$$R6(e => ({
+  } = selectWithShallowEqual(e => ({
     selectedView: e.selectedView,
     userFlags: e.userFlags,
     userTeamFlags: e.userTeamFlags,
@@ -15201,7 +15201,7 @@ function _1({
       truncate: !0,
       showTooltipWhenTruncated: !0,
       color: 'secondary',
-      children: _$$t('tile.file_tile.pinned_by_user', {
+      children: getI18nString('tile.file_tile.pinned_by_user', {
         name: e.pinnedByUser?.name ?? ''
       })
     })]
@@ -15253,7 +15253,7 @@ let pa = _$$n4(e => function (e) {
   return e in r ? r[e] : e.endsWith('-developer') ? 'ENG' : e.endsWith('-designer') ? 'DES' : e.includes('Eng') || e.includes('Dev') ? 'ENG' : e.includes('Des') ? 'DES' : e.includes('Lead') || e.includes('Man') ? 'PM' : 'OTH';
 }(e?.profile?.job_title ?? 'OTH'));
 let pl = [FFileType.WHITEBOARD, FFileType.SLIDES];
-let pd = _$$eU(!1);
+let pd = atom(!1);
 function pc(e) {
   let t = useDispatch();
   let r = pa(_$$iZ());
@@ -15282,17 +15282,17 @@ function pc(e) {
   let _ = useCallback(e => {
     switch (e) {
       case 'All':
-        return _$$t('file_browser.templates_shelf.for_you');
+        return getI18nString('file_browser.templates_shelf.for_you');
       case 'Brainstorm':
-        return _$$t('file_browser.templates_shelf.brainstorm');
+        return getI18nString('file_browser.templates_shelf.brainstorm');
       case 'Reviews':
-        return _$$t('file_browser.templates_shelf.reviews');
+        return getI18nString('file_browser.templates_shelf.reviews');
       case 'Meetings':
-        return _$$t('file_browser.templates_shelf.meetings');
+        return getI18nString('file_browser.templates_shelf.meetings');
       case 'Planning':
-        return _$$t('file_browser.templates_shelf.planning');
+        return getI18nString('file_browser.templates_shelf.planning');
       case 'Diagram':
-        return _$$t('file_browser.templates_shelf.diagram');
+        return getI18nString('file_browser.templates_shelf.diagram');
       default:
         return null;
     }
@@ -15380,7 +15380,7 @@ function pu(e) {
           className: 'templates_bar--closeButton--XeG8e',
           children: jsx(_$$K, {
             'onClick': e.onClose,
-            'aria-label': _$$t('general.close'),
+            'aria-label': getI18nString('general.close'),
             'children': jsx(_$$A, {})
           })
         })
@@ -15414,7 +15414,7 @@ function pu(e) {
 function pm() {
   return jsx('div', {
     className: 'templates_bar--headerTitle--6BSKy text--fontPos13--xW8hS text--_fontBase--QdLsd',
-    children: _$$tx('file_browser.templates_shelf.interim_title')
+    children: renderI18nText('file_browser.templates_shelf.interim_title')
   });
 }
 let p_ = e => e === FTemplateCategoryType.WHITEBOARD ? 'whiteboard' : e === FTemplateCategoryType.SLIDE_TEMPLATE ? 'piper' : 'design';
@@ -15478,7 +15478,7 @@ function pp(e) {
             children: jsx($n, {
               onClick: d,
               disabled: n,
-              children: o ? jsx(_$$k3, {}) : _$$tx('file_browser.new_file_creation_topbar.use_templates')
+              children: o ? jsx(_$$k3, {}) : renderI18nText('file_browser.new_file_creation_topbar.use_templates')
             })
           })
         })
@@ -15583,7 +15583,7 @@ function pI(e) {
     className: 'connected_folder_empty_view--connectEmptyStateContainer--YGdYq',
     children: [jsx('div', {
       className: 'connected_folder_empty_view--connectedEmptyHeading--UNTZ6',
-      children: _$$tx('file_browser.folder.what_s_a_connected_project_without_files')
+      children: renderI18nText('file_browser.folder.what_s_a_connected_project_without_files')
     }), jsxs('div', {
       className: 'connected_folder_empty_view--creationButtonsContainer--vedbb',
       children: [jsx(pN, {
@@ -15592,21 +15592,21 @@ function pI(e) {
         onClick: p,
         showRequestSentTag: f(),
         showRequestTag: !_ && getUpgradeEligibility(FProductAccessType.DESIGN) === _$$q5.CAN_UPGRADE && getUpgradePathway(FProductAccessType.DESIGN) !== _$$J6.AUTO_PATHWAY && !hasPendingRequest(FProductAccessType.DESIGN),
-        subtitle: _$$t('file_browser.folder.create_a_file_in_any_figma_product'),
-        title: _$$t('file_browser.folder.start_from_scratch')
+        subtitle: getI18nString('file_browser.folder.create_a_file_in_any_figma_product'),
+        title: getI18nString('file_browser.folder.start_from_scratch')
       }), x && jsx(pN, {
-        title: _$$t('file_browser.folder.use_existing_work'),
+        title: getI18nString('file_browser.folder.use_existing_work'),
         onClick: () => {
           lgFolder && (o(_$$gN(lgFolder.id)), o(_$$L7()));
         },
-        subtitle: _$$t('file_browser.folder.import_images_sketch_files_and_pdfs')
+        subtitle: getI18nString('file_browser.folder.import_images_sketch_files_and_pdfs')
       })]
     }), jsxs('div', {
       className: pT,
       children: [jsx(_$$l7, {
         className: 'connected_folder_empty_view--libraryIcon--jFzUk'
       }), jsx('div', {
-        children: _$$tx('file_browser.folder.the_host_team_can_add_libraries', {
+        children: renderI18nText('file_browser.folder.the_host_team_can_add_libraries', {
           hostPlanName: jsx('span', {
             className: 'connected_folder_empty_view--bold--6ZKfX',
             children: hostPlanName
@@ -15615,7 +15615,7 @@ function pI(e) {
             className: 'connected_folder_empty_view--learnMore--4py5l modal--blueLink--9GcJu blue_link--blueLink--9rlnd',
             href: 'https://help.figma.com/hc/articles/30124855491863-Guide-to-connected-projects#h_01JMJDKJFD68CH88F663KG08AJ',
             target: '_blank',
-            children: t || _$$tx('resource_connection.request_modal.learn_more')
+            children: t || renderI18nText('resource_connection.request_modal.learn_more')
           })
         })
       })]
@@ -15654,11 +15654,11 @@ function pN(e) {
       })]
     }), e.showRequestTag && jsx(Ex, {
       className: pE,
-      text: _$$t('upgrades.request'),
+      text: getI18nString('upgrades.request'),
       color: zE.DEFAULT_TRANSLUCENT
     }), e.showRequestSentTag && jsx(Ex, {
       className: pE,
-      text: _$$t('upgrades.request_sent'),
+      text: getI18nString('upgrades.request_sent'),
       color: zE.DEFAULT_TRANSLUCENT
     })]
   });
@@ -15700,7 +15700,7 @@ function pS(e) {
       children: jsx(_$$E, {
         fontSize: 13,
         color: 'secondary',
-        children: _$$tx('file_browser.folder.pinned')
+        children: renderI18nText('file_browser.folder.pinned')
       })
     }), jsx(_Z, {
       pinnedFiles: n,
@@ -15729,7 +15729,7 @@ function pk({
   let b = vt(c?.id);
   let v = !!l && _$$f4(l);
   let y = v && !o;
-  let w = y ? '' : _$$t('file_browser.folder.no_files_yet');
+  let w = y ? '' : getI18nString('file_browser.folder.no_files_yet');
   let {
     shouldShowTemplatesBar,
     hideTemplatesBar
@@ -15750,7 +15750,7 @@ function pk({
     let m = _$$X$('useTemplatesBarVisibility').unwrapOr(null);
     let _ = m?.tier === FPlanNameType.PRO || m?.tier === FPlanNameType.STUDENT;
     return {
-      shouldShowTemplatesBar: !_$$Ay.mobile && d && !c && !u && !r && _ && a,
+      shouldShowTemplatesBar: !BrowserInfo.mobile && d && !c && !u && !r && _ && a,
       hideTemplatesBar: useCallback(() => {
         n(_$$b({
           [t]: !0
@@ -15815,16 +15815,16 @@ function pL({
   let t = jsx(_$$N3, {
     href: 'https://help.figma.com/hc/articles/30124855491863-Guide-to-connected-projects',
     newTab: !0,
-    children: _$$tx('resource_connection.onboarding.connected_projects_capitalized')
+    children: renderI18nText('resource_connection.onboarding.connected_projects_capitalized')
   });
-  let r = _$$tx('resource_connection.onboarding.connected_projects_are_just_like_normal_projects', {
+  let r = renderI18nText('resource_connection.onboarding.connected_projects_are_just_like_normal_projects', {
     hostPlanName: e.hostPlanName,
     connectedProjects: t,
     connectedPlanName: e.connectedPlanName
   });
   return jsx(_$$b6, {
     description: r,
-    title: _$$tx('resource_connection.onboarding.projects_are_better_together'),
+    title: renderI18nText('resource_connection.onboarding.projects_are_better_together'),
     trackingContext: 'Connected Projects Project Page Onboarding Modal',
     onboardingKey: pP,
     arrowPosition: _$$F_.BOTTOM
@@ -15858,13 +15858,13 @@ function p$(e) {
   let _ = r.current;
   let p = [];
   e.folder.canRead && p.push(jsx(_$$c$, {
-    children: _$$tx('file_browser.folder.share'),
+    children: renderI18nText('file_browser.folder.share'),
     onClick: e.onShareClick
   }, 'share'));
   p.push(jsx(_$$c$, {
     children: jsxs('div', {
       className: _$$s.flex.justifyBetween.itemsCenter.w150.$,
-      children: [_$$tx('favorited_resources.add_to_sidebar'), jsx(_$$B, {
+      children: [renderI18nText('favorited_resources.add_to_sidebar'), jsx(_$$B, {
         svg: _$$A24
       })]
     }),
@@ -15918,7 +15918,7 @@ function p0({
   return !e.canEdit && !!e.plan?.isMember && !e.team?.canAdmin && t !== null;
 }
 let p4 = 'seen_folder_settings_connected_projects_onboarding';
-let p2 = _$$eU(!1);
+let p2 = atom(!1);
 function p5({
   folder: e,
   lgFolder: t,
@@ -15944,7 +15944,7 @@ function p5({
           loadedFolders: {}
         }));
       } catch (t) {
-        e.dispatch(_$$s2.error(t.message || _$$t('file_browser.file_browser_actions.claim_team_error')));
+        e.dispatch(_$$s2.error(t.message || getI18nString('file_browser.file_browser_actions.claim_team_error')));
       }
     }, [e]);
   }();
@@ -15990,7 +15990,7 @@ function p5({
   });
   let v = _$$b7(t.plan?.tier);
   let y = BN(p4);
-  let [w, j] = _$$fp(p2);
+  let [w, j] = useAtomValueAndSetter(p2);
   useEffect(() => {
     !w && v && (_$$FC(p4), j(!0));
   }, [w, j, v]);
@@ -16012,7 +16012,7 @@ function p5({
     x && p && n(Rw());
   }, [x, n, p]);
   let k = jm(g, h);
-  let R = l ? _$$t('locked_team.label.tooltip') : void 0;
+  let R = l ? getI18nString('locked_team.label.tooltip') : void 0;
   let A = l ? Ib.TEXT : void 0;
   let O = (t, r, a) => {
     let s = {
@@ -16042,7 +16042,7 @@ function p5({
           key: iq.DROPDOWN,
           element: jsx(ns, {
             dataOnboardingKey: _Y,
-            buttonAriaLabel: _$$t('file_browser.folder.page_header_dropdown_label'),
+            buttonAriaLabel: getI18nString('file_browser.folder.page_header_dropdown_label'),
             dropdownKey: `folder-${e.id}`,
             menuGroups: n
           })
@@ -16054,7 +16054,7 @@ function p5({
   return jsxs(_$$tH, {
     boundaryKey: 'FolderPageViewHeader',
     fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
-    severity: DZ.Critical,
+    severity: SeverityLevel.Critical,
     sentryTags: {
       area: _$$e.MONETIZATION_EXPANSION
     },
@@ -16074,7 +16074,7 @@ function p5({
           element: jsx(_$$c2, {
             variant: 'secondary',
             onClick: c,
-            children: _$$t('file_browser.folder.join_as_owner')
+            children: getI18nString('file_browser.folder.join_as_owner')
           })
         }), b && e.push({
           kind: _$$A9.CUSTOM,
@@ -16096,7 +16096,7 @@ function p5({
                 'data-tooltip': R
               },
               disabled: l,
-              children: _$$t('file_browser.folder.share')
+              children: getI18nString('file_browser.folder.share')
             })
           };
           e.push(t);
@@ -16118,7 +16118,7 @@ function p5({
                 }
               }));
             },
-            children: void 0 !== S ? _$$t('file_browser.team.cancel_request') : _$$t('file_browser.team.request_to_edit')
+            children: void 0 !== S ? getI18nString('file_browser.team.cancel_request') : getI18nString('file_browser.team.request_to_edit')
           })
         });
         e.push({
@@ -16138,9 +16138,9 @@ function p5({
                 }));
                 E && v && _$$H6.upsertUserFlagWithCount(p4, 3);
               },
-              'aria-label': _$$t('file_browser.folder_settings_modal.tooltip.settings'),
+              'aria-label': getI18nString('file_browser.folder_settings_modal.tooltip.settings'),
               'htmlAttributes': {
-                'data-tooltip': _$$t('file_browser.folder_settings_modal.tooltip.settings')
+                'data-tooltip': getI18nString('file_browser.folder_settings_modal.tooltip.settings')
               },
               'children': jsx(_$$P5, {})
             }), E && jsx('div', {
@@ -16295,7 +16295,7 @@ function p8({
     }), jsx($c, {
       initialViewMode: N.tileSortFilterConfig.viewMode,
       onViewModeChange: e => {
-        _$$sx('file view toggle', {
+        trackEventAnalytics('file view toggle', {
           viewType: e === XU.GRID ? 'grid' : 'list'
         });
         u(JF({
@@ -16402,7 +16402,7 @@ function p6() {
       className: 'limited_space_team_projects_page_view--viewbar--YMqKQ',
       children: jsx('div', {
         className: 'limited_space_team_projects_page_view--viewbarHeading--mTm27',
-        children: _$$tx('file_browser.limited_space_team_projects.heading')
+        children: renderI18nText('file_browser.limited_space_team_projects.heading')
       })
     })
   }), _$$e7.FILE_BROWSER, {
@@ -16418,7 +16418,7 @@ function p3({
     action: {
       kind: _$$A9.BUTTON,
       key: iq.VIEW_LIBRARIES,
-      displayText: _$$t('org_view.view_libraries'),
+      displayText: getI18nString('org_view.view_libraries'),
       onClick: () => {
         t(_$$sf({
           view: 'org',
@@ -16439,7 +16439,7 @@ function p7({
       kind: _$$A9.CUSTOM,
       key: iq.NEW_TEAM,
       element: jsx($n, {
-        'aria-label': _$$t('license_group_view.toolbar.new_team_button_aria_label'),
+        'aria-label': getI18nString('license_group_view.toolbar.new_team_button_aria_label'),
         'variant': 'primary',
         'onClick': () => {
           r(_$$to2({
@@ -16448,7 +16448,7 @@ function p7({
           }));
         },
         'iconPrefix': jsx(_$$e0, {}),
-        'children': _$$t('license_group_view.toolbar.new_team_button')
+        'children': getI18nString('license_group_view.toolbar.new_team_button')
       })
     }
   });
@@ -16475,7 +16475,7 @@ function p9({
 function fr() {
   let e = useDispatch();
   let t = _$$dq();
-  let r = m3(_$$R6(e => ({
+  let r = m3(selectWithShallowEqual(e => ({
     ...getPermissionsState(e),
     selectedView: e.selectedView,
     userFlags: e.userFlags,
@@ -16584,7 +16584,7 @@ function fm({
   let t = useSelector(t => Xy(t.orgUsersByOrgId[e]).map(e => e.user));
   let r = useDispatch();
   return jsx(nR, {
-    label: _$$t('org_home_view_meta.admins'),
+    label: getI18nString('org_home_view_meta.admins'),
     members: t,
     onMemberClick: (e, t) => {
       r(_$$sf({
@@ -16603,13 +16603,13 @@ function f_({
   let r = t ? jsxs(_$$E, {
     fontSize: 11,
     color: 'secondary',
-    children: [_$$tx('org_home_view_meta.member_count', {
+    children: [renderI18nText('org_home_view_meta.member_count', {
       memberCount: t.memberCount.data
     }), jsx('span', {
       children: '\xA0\xB7\xA0'
-    }), 'workspaceCount' in t ? _$$tx('org_home_view_meta.workspace_count', {
+    }), 'workspaceCount' in t ? renderI18nText('org_home_view_meta.workspace_count', {
       workspaceCount: t.workspaceCount.data
-    }) : _$$tx('org_home_view_meta.team_count', {
+    }) : renderI18nText('org_home_view_meta.team_count', {
       teamCount: t.discoverableTeamCount.data
     })]
   }) : jsx(Wi, {
@@ -16675,12 +16675,12 @@ function fg({
       children: jsxs(_$$E, {
         fontSize: 11,
         color: 'secondary',
-        children: [_$$tx('payments_modal.guest_permission_disclaimer'), ' ', jsx('a', {
+        children: [renderI18nText('payments_modal.guest_permission_disclaimer'), ' ', jsx('a', {
           className: _$$Be,
           href: 'https://help.figma.com/hc/articles/360039957374',
           target: '_blank',
           rel: 'noopener',
-          children: _$$tx('org_home_view_meta.learn_more')
+          children: renderI18nText('org_home_view_meta.learn_more')
         })]
       })
     })]
@@ -16690,15 +16690,15 @@ let fx = [_$$X.HOME, _$$X.YOUR_TEAMS, _$$X.CONNECTED_PROJECTS, _$$X.PLUGINS, _$$
 let fb = e => {
   switch (e) {
     case _$$X.HOME:
-      return _$$t('org_view.overview');
+      return getI18nString('org_view.overview');
     case _$$X.YOUR_TEAMS:
-      return _$$t('org_view.your_teams');
+      return getI18nString('org_view.your_teams');
     case _$$X.PLUGINS:
-      return _$$t('org_view.plugins');
+      return getI18nString('org_view.plugins');
     case _$$X.WIDGETS:
-      return _$$t('org_view.widgets');
+      return getI18nString('org_view.widgets');
     case _$$X.CONNECTED_PROJECTS:
-      return _$$t('org_view.connected_projects');
+      return getI18nString('org_view.connected_projects');
     default:
       return null;
   }
@@ -16794,7 +16794,7 @@ function fE(e) {
         size: 40,
         isHovered
       }),
-      footer: _$$tx('org_view.license_group.unassigned_tile.description', {
+      footer: renderI18nText('org_view.license_group.unassigned_tile.description', {
         teamCount: t.length
       })
     };
@@ -16803,7 +16803,7 @@ function fE(e) {
     children: '\xA0'
   });
   return jsx(_$$a12, {
-    name: _$$t('org_view.license_group.unassigned_tile.name'),
+    name: getI18nString('org_view.license_group.unassigned_tile.name'),
     headerLeft: header,
     headerRight: o,
     footerLeft: footer,
@@ -16814,7 +16814,7 @@ function fE(e) {
   });
 }
 function fI(e) {
-  let t = _$$md(Fd);
+  let t = useAtomWithSubscription(Fd);
   return e.unassignedTeams ? jsx(fE, {
     isSelected: e.isSelected,
     isHovered: e.isHovered,
@@ -16839,7 +16839,7 @@ function fk(e) {
   let _ = _$$aq();
   let p = workspace.colorConfig?.colors ?? [];
   let f = e.isMainWorkspace ? p[0] : void 0;
-  let g = _$$md(_$$aN(workspace.id));
+  let g = useAtomWithSubscription(_$$aN(workspace.id));
   let h = _$$Y8(workspace.id, FEntityType.WORKSPACE, m);
   let x = useMemo(() => h.status === 'loaded' && void 0 !== h.favorite, [h]);
   f && (f = function (e, t, r) {
@@ -16847,7 +16847,7 @@ function fk(e) {
       let a = H0(t);
       let s = kx(a);
       let i = _$$oN(t, !s, s);
-      r && i !== t && _$$sx('workspace_background_color_adjusted_for_accessibility', {
+      r && i !== t && trackEventAnalytics('workspace_background_color_adjusted_for_accessibility', {
         workspace_id: e,
         original_background_color: t,
         adjusted_background_color: i
@@ -16879,17 +16879,17 @@ function fk(e) {
     entity: workspace,
     size: 40
   });
-  let w = useMemo(() => void 0 !== e.teamCount ? _$$tx('org_view.license_group.team_count', {
+  let w = useMemo(() => void 0 !== e.teamCount ? renderI18nText('org_view.license_group.team_count', {
     teamCount: e.teamCount
   }) : g.status !== 'loaded' ? jsx(Wi, {
     className: _$$s.w64.$,
     dataTestId: 'workspace-tile-teams-loading-text'
-  }) : _$$tx('org_view.license_group.team_count', {
+  }) : renderI18nText('org_view.license_group.team_count', {
     teamCount: g.data
   }), [e.teamCount, g]);
   let j = jsxs('div', {
     className: U()(_$$s.flex.flexRow.itemsCenter.$, r),
-    children: [_$$tx('org_view.license_group.member_count', {
+    children: [renderI18nText('org_view.license_group.member_count', {
       memberCount: workspace.memberCount.data ?? 0
     }), jsx('span', {
       children: '\xA0\xB7\xA0'
@@ -16904,8 +16904,8 @@ function fk(e) {
   let E = workspace.orgAccess === FAccessLevelType.SECRET ? jsx('div', {
     'className': _$$s.ml4.$,
     'data-tooltip-type': Ib.TEXT,
-    'data-tooltip': _$$t('workspace_table.secret_workspace_lock_tooltip'),
-    'data-tooltip-subtext': _$$t('workspace_table.secret_workspace_lock_tooltip_subtext'),
+    'data-tooltip': getI18nString('workspace_table.secret_workspace_lock_tooltip'),
+    'data-tooltip-subtext': getI18nString('workspace_table.secret_workspace_lock_tooltip_subtext'),
     'data-tooltip-timeout-delay': 500,
     'data-tooltip-max-width': 300,
     'children': jsx(In, {
@@ -16949,11 +16949,11 @@ function fR() {
   } : null, null);
   let d = function (e, {
     description: t,
-    level: r = _$$$.INFO,
+    level: r = LogLevelStr.INFO,
     start: a = !0,
     context: i
   } = {}) {
-    let n = useRef(J6.createVital(e, {
+    let n = useRef(observabilityClient.createVital(e, {
       level: r,
       description: t,
       context: i
@@ -16964,7 +16964,7 @@ function fR() {
     }, [a, e]);
     return n.current;
   }('OrgWorkspacesView.Load');
-  let c = _$$md(wT);
+  let c = useAtomWithSubscription(wT);
   let {
     workspaceTeamCounts,
     unassignedTeams
@@ -16988,7 +16988,7 @@ function fR() {
       sortByPropertyWithOptions(t, 'name');
       let r = t.find(e => e.id === n.data);
       let a = t.filter(e => e.id !== r?.id);
-      (unassignedTeams.length > 0 || f) && a.push(_$$O);
+      (unassignedTeams.length > 0 || f) && a.push(UNASSIGNED);
       return {
         currentWorkspace: r,
         otherWorkspaces: a
@@ -17032,7 +17032,7 @@ function fR() {
       children: jsx(_$$E, {
         color: 'secondary',
         fontSize: 11,
-        children: _$$tx('org_view.your_workspace')
+        children: renderI18nText('org_view.your_workspace')
       })
     }), jsx(fA, {
       items: [currentWorkspace],
@@ -17049,7 +17049,7 @@ function fR() {
       children: jsx(_$$E, {
         color: 'secondary',
         fontSize: 11,
-        children: _$$tx('org_view.other_workspaces')
+        children: renderI18nText('org_view.other_workspaces')
       })
     }), otherWorkspaces.length === 0 ? jsx(_$$C5, {
       onCreateTeam: canCreateTeam ? b : void 0
@@ -17077,13 +17077,13 @@ function fA({
     data
   } = BK('WORKSPACE_CONTEXT_MENU');
   let u = _$$$6();
-  let m = useCallback(e => e === _$$O ? _$$t('org_view.license_group.unassigned_tile.name') : e.name, []);
+  let m = useCallback(e => e === UNASSIGNED ? getI18nString('org_view.license_group.unassigned_tile.name') : e.name, []);
   let _ = useCallback((e, t) => {
-    u(e === _$$O ? null : e.id, t);
+    u(e === UNASSIGNED ? null : e.id, t);
   }, [u]);
   let p = useCallback((e, t) => {
     let r = e[0];
-    r !== _$$O && show({
+    r !== UNASSIGNED && show({
       data: {
         workspace: r,
         targetRect: {
@@ -17104,7 +17104,7 @@ function fA({
     renderTile: (e, s, {
       isSelected: o,
       isHovered: l
-    }) => e === _$$O ? jsx(fI, {
+    }) => e === UNASSIGNED ? jsx(fI, {
       isSelected: o,
       isHovered: l,
       unassignedTeams: r ? n : void 0
@@ -17239,7 +17239,7 @@ function fD() {
           handle: t.community_profile_handle
         }));
       },
-      displayText: _$$t('internal_profile.view_community_profile'),
+      displayText: getI18nString('internal_profile.view_community_profile'),
       styleClass: _$$s.colorText.$
     }
   });
@@ -17249,7 +17249,7 @@ function fG(e) {
   let r = YY(t).unwrapOr(!1);
   let s = qI().unwrapOr(null);
   let i = '';
-  r && !e.isLoading && e.showComingSoon ? i = _$$t('file_browser.creation_buttons.coming_soon') : e.isDisabled && !e.isLoading && s && (i = s);
+  r && !e.isLoading && e.showComingSoon ? i = getI18nString('file_browser.creation_buttons.coming_soon') : e.isDisabled && !e.isLoading && s && (i = s);
   return jsx(fV, {
     ...e,
     tooltipText: i
@@ -17387,7 +17387,7 @@ function fH({
     contextClicked: 'recents_file_creation_thumbnails_created'
   });
   return jsx(fG, {
-    title: _$$t('file_browser.creation_buttons.marketing_asset'),
+    title: getI18nString('file_browser.creation_buttons.marketing_asset'),
     brand: 'cooper',
     dataTestId: 'new-cooper-file-button',
     icon: jsx(_$$u8, {}),
@@ -17409,7 +17409,7 @@ function fY({
     contextClicked: 'recents_file_creation_thumbnails_created'
   });
   return jsx(fG, {
-    title: _$$t('file_browser.creation_buttons.design'),
+    title: getI18nString('file_browser.creation_buttons.design'),
     brand: 'design',
     dataTestId: 'new-design-file-button',
     icon: jsx(_$$z11, {}),
@@ -17431,7 +17431,7 @@ function fq({
     contextClicked: 'recents_file_creation_thumbnails_created'
   });
   return jsx(fG, {
-    title: _$$t('file_browser.creation_buttons.figjam'),
+    title: getI18nString('file_browser.creation_buttons.figjam'),
     brand: 'whiteboard',
     dataTestId: 'new-whiteboard-file-button',
     icon: jsx(_$$D5, {}),
@@ -17453,7 +17453,7 @@ function fZ({
     contextClicked: 'recents_file_creation_thumbnails_created'
   });
   return jsx(fG, {
-    title: _$$t('file_browser.creation_buttons.figmake'),
+    title: getI18nString('file_browser.creation_buttons.figmake'),
     brand: 'bake-filebrowser',
     dataOnboardingKey: _$$O4,
     dataTestId: 'new-figmake-file-button',
@@ -17500,7 +17500,7 @@ function f4({
     onClick: () => {
       t(_$$L7());
     },
-    tooltipText: _$$t('file_browser.creation_buttons.import')
+    tooltipText: getI18nString('file_browser.creation_buttons.import')
   });
 }
 Tj.border;
@@ -17517,9 +17517,9 @@ function f5({
     contextClicked: 'recents_file_creation_thumbnails_created'
   });
   return jsx(fG, {
-    title: _$$t('file_browser.creation_buttons.sites'),
+    title: getI18nString('file_browser.creation_buttons.sites'),
     brand: 'seascape',
-    dataTestId: `new-${_$$oQ}-file-button`,
+    dataTestId: `new-${SITES_STRING}-file-button`,
     icon: jsx(_$$$8, {}),
     isDisabled: e,
     isLoading: t,
@@ -17540,7 +17540,7 @@ function f6({
     contextClicked: 'recents_file_creation_thumbnails_created'
   });
   return jsx(fG, {
-    title: _$$t('file_browser.creation_buttons.slide_deck'),
+    title: getI18nString('file_browser.creation_buttons.slide_deck'),
     brand: 'piper',
     dataTestId: 'new-slides-file-button',
     icon: jsx(_$$T7, {}),
@@ -17665,7 +17665,7 @@ let f9 = {
     $$css: !0
   }
 };
-let gt = _$$eU(!1);
+let gt = atom(!1);
 let ga = gr;
 let gs = [_$$vt2.FIGMAKE_TEMPLATE, _$$vt2.SITE_TEMPLATE, _$$vt2.COOPER_TEMPLATE_FILE, _$$vt2.DESIGN_TEMPLATE, _$$vt2.SLIDE_TEMPLATE, _$$vt2.FIGJAM_TEMPLATE];
 function gi() {
@@ -17766,7 +17766,7 @@ function gf({
       className: 'home_shelf_resource_tile--subtitle--VMBH1',
       children: [jsx('span', {
         className: 'home_shelf_resource_tile--author--m5FxW',
-        children: _$$tx('community.resource_tiles.by_author', {
+        children: renderI18nText('community.resource_tiles.by_author', {
           author: o
         })
       }), '\xA0\xA0\xB7\xA0\xA0', jsxs('div', {
@@ -17796,7 +17796,7 @@ function gb() {
     'onClick': a => {
       q5();
       a.preventDefault();
-      r ? Ay.push(r) : $D(_$$e.COMMUNITY, new Error('NavigationTile: communityTabLink is empty'), {
+      r ? Ay.push(r) : reportError(_$$e.COMMUNITY, new Error('NavigationTile: communityTabLink is empty'), {
         extra: {
           sharedRouteParams: e,
           sharedSearchParams: t
@@ -17804,7 +17804,7 @@ function gb() {
       });
     },
     'className': 'xh8yej3 x5yr21d x78zum5 xdt5ytf x6s0dn4 x1nhvcw1 x1v2ro7d x1ypdohk xw4t3mb x1ocegsa xl61zd4 x1nl1fmu xln84v9 xgf1b7j x85jtft',
-    'aria-label': _$$t('community.home_shelf.see_more_on_community'),
+    'aria-label': getI18nString('community.home_shelf.see_more_on_community'),
     'children': [jsxs('div', {
       className: 'x1lliihq x1n2onr6 x1vjfegm xh8yej3 x1mxnbhz x176lpz5 xb3r6kr xdr6sbx x1klh5xi',
       children: [jsx(_$$oW, {
@@ -17827,7 +17827,7 @@ function gb() {
       })]
     }), jsx('span', {
       ..._$$xk(gv.linkText),
-      children: _$$t('community.home_shelf.see_more_on_community')
+      children: getI18nString('community.home_shelf.see_more_on_community')
     })]
   });
 }
@@ -17919,7 +17919,7 @@ function gy() {
     }, [trackResourceImpression, e]);
     return {
       trackRejectedResources: useCallback(e => {
-        _$$sx('community_home_shelf_resources_rejected', {
+        trackEventAnalytics('community_home_shelf_resources_rejected', {
           rejectedResourceIds: e.join(),
           ...properties
         });
@@ -17937,7 +17937,7 @@ function gy() {
     }));
   }, [trackRejectedResources, c, e]);
   if (o === 'errors') {
-    $D(_$$e.COMMUNITY, l);
+    reportError(_$$e.COMMUNITY, l);
     return null;
   }
   let _ = d.numberOfTiles < 2;
@@ -17950,16 +17950,16 @@ function gy() {
         className: 'x78zum5 x1qughib x6s0dn4 xp41m2r xettwda',
         children: [jsx('div', {
           ..._$$xk(gE.homeShelfTitle),
-          children: _$$t('community.home_shelf.title')
+          children: getI18nString('community.home_shelf.title')
         }), jsxs('div', {
           className: 'x78zum5 x1n2onr6 xncym2f x167g77z x6s0dn4',
           children: [jsx(_$$K, {
-            'aria-label': _$$t('community.home_shelf.refresh_label'),
+            'aria-label': getI18nString('community.home_shelf.refresh_label'),
             'onClick': m,
             'disabled': o === 'loading',
             'children': jsx(_$$_9, {})
           }), jsx(_$$K, {
-            'aria-label': _$$t('community.home_shelf.dismiss_label'),
+            'aria-label': getI18nString('community.home_shelf.dismiss_label'),
             'onClick': () => e(_$$b({
               dismissed_community_home_shelf_v2_recommendations: !0
             })),
@@ -18059,7 +18059,7 @@ function gT() {
     fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
     onError: () => {
       e(_$$F.enqueue({
-        message: _$$t('general.root_error_boundary_title'),
+        message: getI18nString('general.root_error_boundary_title'),
         type: 'react-error'
       }));
     },
@@ -18261,7 +18261,7 @@ function gN() {
     let o = gi();
     let l = vt();
     let d = jn();
-    return _$$Ay.mobile || !n || l || d || e || s || o.length === 0 || !r() ? 'SHOW_NOTHING' : 'SHOW_HOME_SHELF';
+    return BrowserInfo.mobile || !n || l || d || e || s || o.length === 0 || !r() ? 'SHOW_NOTHING' : 'SHOW_HOME_SHELF';
   }();
   return (useEffect(() => {
     e(t === 'SHOW_HOME_SHELF');
@@ -18290,7 +18290,7 @@ let gR = {
             className: 'x78zum5 x6s0dn4 x1qughib x1iyjqo2 x1i71x30 x1rt4tut',
             children: e.children
           }), jsx(_$$K, {
-            'aria-label': _$$t('general.close'),
+            'aria-label': getI18nString('general.close'),
             'onClick': () => r(e.userFlag),
             'children': jsx(_$$A, {})
           })]
@@ -18306,7 +18306,7 @@ let gR = {
     let r = e.beta ? jsx('div', {
       className: 'x1rg5ohu',
       children: jsx(_$$E0, {
-        children: _$$t('general.beta')
+        children: getI18nString('general.beta')
       })
     }) : null;
     return jsxs('div', {
@@ -18407,7 +18407,7 @@ function gL({
     darkModeBgColor: r ? Tj.bgFigjamSecondary : Tj.bgSecondary,
     lightModeBgColor: r ? Tj.bgFigjamSecondary : Tj.bgSecondary,
     registrationLink: t ? 'http://events.figma.com/Jul-rel-notes-APAC-2025/PrB' : 'https://events.figma.com/jul25-rel-notes/PrB',
-    copy: t ? _$$t('banner.marketing_promo.july_release_notes.content_APAC') : _$$t('banner.marketing_promo.july_release_notes.content')
+    copy: t ? getI18nString('banner.marketing_promo.july_release_notes.content_APAC') : getI18nString('banner.marketing_promo.july_release_notes.content')
   });
 }
 function gD({
@@ -18433,7 +18433,7 @@ function gD({
       children: jsx(_$$pW, {
         href: i,
         size: 'lg',
-        children: _$$t('banner.marketing_promo.register')
+        children: getI18nString('banner.marketing_promo.register')
       })
     })]
   });
@@ -18448,7 +18448,7 @@ function gM() {
       }
     }), jsx('h2', {
       className: 'xdpxx8g x1vzchgk x1ud3kw6 x1yuz8eb x1l13ptj xazcve0 xnq0rdo',
-      children: _$$t('banner.marketing_promo.release_notes.title')
+      children: getI18nString('banner.marketing_promo.release_notes.title')
     })]
   });
 }
@@ -18490,8 +18490,8 @@ function gU() {
           className: 'x1849jeq x1gnnpzl xwa2v1s'
         })
       }), jsx(gR.BannerContent, {
-        title: _$$t('banner.marketing_promo.figmake_launch.title'),
-        copy: _$$t('banner.marketing_promo.figmake_launch.content'),
+        title: getI18nString('banner.marketing_promo.figmake_launch.title'),
+        copy: getI18nString('banner.marketing_promo.figmake_launch.content'),
         beta: n
       })]
     }), jsx(_$$J2, {
@@ -18505,7 +18505,7 @@ function gU() {
             'data-tooltip': d,
             'data-tooltip-type': Ib.TEXT
           },
-          children: _$$t('banner.marketing_promo.figmake_launch.cta')
+          children: getI18nString('banner.marketing_promo.figmake_launch.cta')
         })
       })
     })]
@@ -18694,7 +18694,7 @@ function gz(e) {
       children: jsx(me, {
         currentPlanFilter: n.filters.plan,
         currentSharedByFilter: n.filters.sharedBy,
-        emptyStateText: isFetchingNextPage ? '' : _$$t('shared_with_you.no_items'),
+        emptyStateText: isFetchingNextPage ? '' : getI18nString('shared_with_you.no_items'),
         isEligbileForProTeamLockedRevampUI: e.isEligbileForProTeamLockedRevampUI,
         newFileTile: !1,
         sortFilterOptions: o,
@@ -18829,7 +18829,7 @@ function gH(e) {
         canEditTeamContents: b,
         chunkSize: _.length,
         currentPlanFilter: d.filters.plan,
-        emptyStateText: isFetchingNextPage ? '' : _$$t('shared_with_you.no_items'),
+        emptyStateText: isFetchingNextPage ? '' : getI18nString('shared_with_you.no_items'),
         folderList: _,
         isEligbileForProTeamLockedRevampUI: !!r && e.isEligbileForProTeamLockedRevampUI,
         isSharerInfoIncluded: !0,
@@ -18851,20 +18851,20 @@ let g0 = Ju(e => {
   let r = _$$iZ();
   return r ? jsxs(_$$u9, {
     tintedModalBackground: !0,
-    headerText: _$$t('interstitial.unsubscribe_success_header'),
+    headerText: getI18nString('interstitial.unsubscribe_success_header'),
     children: [jsx('div', {
       className: Yg,
-      children: _$$tx('interstitial.unsubscribe_success_subheader_with_address', {
+      children: renderI18nText('interstitial.unsubscribe_success_subheader_with_address', {
         emailName: gZ((() => {
           switch (e.policyType) {
             case 'FileCommentActivity':
-              return _$$t('interstitial.comment_activity_digest');
+              return getI18nString('interstitial.comment_activity_digest');
             case 'TeamCommentActivity':
-              return _$$t('interstitial.team_comment_digest');
+              return getI18nString('interstitial.team_comment_digest');
             case 'FeedWeeklyDigest':
-              return _$$t('interstitial.feed_weekly_digest');
+              return getI18nString('interstitial.feed_weekly_digest');
             case 'WorkspaceActivity':
-              return _$$t('interstitial.workspace_activity');
+              return getI18nString('interstitial.workspace_activity');
             default:
               throwTypeError(e.policyType);
           }
@@ -18876,7 +18876,7 @@ let g0 = Ju(e => {
         t(Lo());
       },
       className: 'unsubscribe_confirmation_modal--button--j6qqT',
-      children: _$$tx('interstitial.done')
+      children: renderI18nText('interstitial.done')
     }), jsx('button', {
       className: 'unsubscribe_confirmation_modal--notificationSettingsButton--vmHlZ interstitial_modal--secondaryText--IC9Gu',
       onClick: () => {
@@ -18888,7 +18888,7 @@ let g0 = Ju(e => {
         }));
         t(_$$aZ());
       },
-      children: _$$tx('interstitial.open_notifications_settings')
+      children: renderI18nText('interstitial.open_notifications_settings')
     })]
   }) : null;
 }, 'UNSUBSCRIBE_CONFIRMATION_INTERSTITIAL_MODAL');
@@ -18921,7 +18921,7 @@ function g2({
     let i = useRef(r);
     i.current = r;
     useEffect(() => {
-      getFeatureFlags().recents_sort_tracking && _$$az2.trackDefinedEvent('file_browser.recents_sort_on_load', {
+      getFeatureFlags().recents_sort_tracking && analyticsEventManager.trackDefinedEvent('file_browser.recents_sort_on_load', {
         sortKey: _$$_5(a.current.key),
         sortDir: GB(a.current.dir),
         viewMode: jq(i.current)
@@ -18934,7 +18934,7 @@ function g2({
           n.current = !1;
           return;
         }
-        _$$az2.trackDefinedEvent('file_browser.recents_sort_updated', {
+        analyticsEventManager.trackDefinedEvent('file_browser.recents_sort_updated', {
           sortKey: _$$_5(e.key),
           sortDir: GB(e.dir),
           viewMode: jq(i.current)
@@ -18978,7 +18978,7 @@ function g2({
       tileActions: g4,
       sortFilterOptions: p,
       newFileTile: !0,
-      emptyStateText: r !== null ? _$$t('file_browser.tiles_view.default_overfiltered_text') : _$$Ay.mobile || _$$Ay.tablet ? _$$t('file_browser.tool_bar.recently_viewed_empty_state') : '',
+      emptyStateText: r !== null ? getI18nString('file_browser.tiles_view.default_overfiltered_text') : BrowserInfo.mobile || BrowserInfo.tablet ? getI18nString('file_browser.tool_bar.recently_viewed_empty_state') : '',
       isEligbileForProTeamLockedRevampUI: e,
       shouldLogVisibleTileCount: !0
     }), jsx(_$$cx, {})]
@@ -19003,7 +19003,7 @@ let g6 = new class {
 function g3() {
   return {
     '': {
-      label: _$$t('shared_with_you.filters.all_organizations')
+      label: getI18nString('shared_with_you.filters.all_organizations')
     }
   };
 }
@@ -19029,18 +19029,18 @@ let g7 = M4.Query({
 });
 function g9() {
   return {
-    '': _$$t('shared_with.you.filters.anyone')
+    '': getI18nString('shared_with.you.filters.anyone')
   };
 }
 let he = [_$$G4.RECENTLY_VIEWED, _$$G4.SHARED_FILES, _$$G4.SHARED_PROJECTS];
 let ht = e => {
   switch (e) {
     case _$$G4.RECENTLY_VIEWED:
-      return _$$t('file_browser.recents_and_sharing_view.recent_files_tab_name');
+      return getI18nString('file_browser.recents_and_sharing_view.recent_files_tab_name');
     case _$$G4.SHARED_PROJECTS:
-      return _$$t('file_browser.recents_and_sharing_view.shared_projects_tab_name');
+      return getI18nString('file_browser.recents_and_sharing_view.shared_projects_tab_name');
     case _$$G4.SHARED_FILES:
-      return _$$t('file_browser.recents_and_sharing_view.shared_files_tab_name');
+      return getI18nString('file_browser.recents_and_sharing_view.shared_files_tab_name');
     default:
       throwTypeError(e);
   }
@@ -19107,7 +19107,7 @@ function ha(e) {
     let t = useSelector(e => e.authedUsers);
     let r = useSelector(e => e.plans);
     let a = useSelector(e => e.orgById);
-    let s = useSelector(_$$P6);
+    let s = useSelector(selectTeams);
     let n = getFeatureFlags().limited_plan_spaces;
     let l = e ? t.byId[e] : null;
     return (n ? r.map(e => {
@@ -19141,9 +19141,9 @@ function ha(e) {
     return r.data || g3();
   }(d);
   let _ = {
-    [_$$cT.ALL]: _$$t('shared_with_you.filters.org_deleted_drafts.all'),
-    [_$$cT.SHARED]: _$$t('shared_with_you.filters.org_deleted_drafts.shared'),
-    [_$$cT.ORG_DELETED_DRAFTS]: _$$t('shared_with_you.filters.org_deleted_drafts.deleted_user_drafts')
+    [_$$cT.ALL]: getI18nString('shared_with_you.filters.org_deleted_drafts.all'),
+    [_$$cT.SHARED]: getI18nString('shared_with_you.filters.org_deleted_drafts.shared'),
+    [_$$cT.ORG_DELETED_DRAFTS]: getI18nString('shared_with_you.filters.org_deleted_drafts.deleted_user_drafts')
   };
   let p = {
     sharer: t !== _$$G4.RECENTLY_VIEWED ? c : void 0,
@@ -19172,7 +19172,7 @@ function ha(e) {
     };
   }, [t, l]);
   let g = e => {
-    e === _$$G4.SHARED_FILES ? _$$sx('file_browser_shared_files') : e === _$$G4.SHARED_PROJECTS && _$$sx('file_browser_shared_projects');
+    e === _$$G4.SHARED_FILES ? trackEventAnalytics('file_browser_shared_files') : e === _$$G4.SHARED_PROJECTS && trackEventAnalytics('file_browser_shared_projects');
     r(_$$sf({
       view: 'recentsAndSharing',
       tab: e
@@ -19183,7 +19183,7 @@ function ha(e) {
     children: jsx($c, {
       initialViewMode: f.tileSortFilterConfig.viewMode,
       onViewModeChange: e => {
-        _$$sx('file view toggle', {
+        trackEventAnalytics('file view toggle', {
           viewType: e === XU.GRID ? 'grid' : 'list'
         });
         Object.keys(_$$G4).map(t => {
@@ -19354,7 +19354,7 @@ function ho({
       hasTrailingDivider: !!r.workspace || i
     }), (r.workspace || i) && jsx(_V, {
       workspace: r.workspace ?? {
-        id: _$$O
+        id: UNASSIGNED
       },
       currentResourceId: e,
       orgId: r.org?.id,
@@ -19371,11 +19371,11 @@ function h_() {
         svg: _$$A28
       })
     }), jsxs('div', {
-      children: [_$$tx('sidebar.meta.this_team_is_for_education_users_only'), ' ', jsx(Us, {
+      children: [renderI18nText('sidebar.meta.this_team_is_for_education_users_only'), ' ', jsx(Us, {
         target: '_blank',
         trusted: !0,
         href: '/education/',
-        children: _$$tx('org_home_view_meta.learn_more')
+        children: renderI18nText('org_home_view_meta.learn_more')
       })]
     })]
   });
@@ -19411,7 +19411,7 @@ function hp({
       trackingDescriptor: _$$c3.UPGRADE_TO_A_PAID_PLAN
     },
     'data-testid': 'starterTeamUpsellFooterUpgradeLink',
-    'children': _$$tx('file_browser.starter_team.upgrade_link')
+    'children': renderI18nText('file_browser.starter_team.upgrade_link')
   });
   return jsx(_$$fu, {
     name: 'Starter Team Upsell Footer',
@@ -19421,12 +19421,12 @@ function hp({
       'children': jsxs('div', {
         className: U()(_$$s.flex.flexColumn.itemsCenter.lh24.$, 'starter_team_upsell_footer--contentWrapper--H-soB'),
         children: [jsx('strong', {
-          children: o === Wf ? _$$tx('file_browser.starter_team.project_limit_warning', {
+          children: o === Wf ? renderI18nText('file_browser.starter_team.project_limit_warning', {
             maxProjects: Wf
-          }) : _$$tx('file_browser.starter_team.project_limit_warning_over_max_projects')
+          }) : renderI18nText('file_browser.starter_team.project_limit_warning_over_max_projects')
         }), jsx('p', {
           className: _$$s.alignCenter.$,
-          children: _$$tx('file_browser.starter_team.project_limit_info', {
+          children: renderI18nText('file_browser.starter_team.project_limit_info', {
             upgradeLink: d
           })
         })]
@@ -19462,17 +19462,17 @@ function hf(e) {
   let _ = r.current;
   let p = [];
   e.showInvite && p.push(jsx(_$$c$, {
-    children: _$$tx('file_browser.team.invite'),
+    children: renderI18nText('file_browser.team.invite'),
     onClick: e.onInviteClick
   }, 'import'));
   p.push(jsx(_$$c$, {
-    children: _$$tx('file_browser.team.view_members'),
+    children: renderI18nText('file_browser.team.view_members'),
     onClick: t => e.onMembersClick(t)
   }, 'share'));
   p.push(jsx(_$$c$, {
     children: jsxs('div', {
       className: _$$s.flex.justifyBetween.itemsCenter.w150.$,
-      children: [_$$tx('favorited_resources.add_to_sidebar'), jsx(_$$B, {
+      children: [renderI18nText('favorited_resources.add_to_sidebar'), jsx(_$$B, {
         svg: _$$A24
       })]
     }),
@@ -19533,7 +19533,7 @@ let hk = Ju(({
     onClick: () => {
       Ay.redirect('/pricing', '_blank');
     },
-    children: _$$t('pro_onboarding.pro_feature_modal.compare_plans')
+    children: getI18nString('pro_onboarding.pro_feature_modal.compare_plans')
   }) : null;
   return jsx(_$$fu, {
     name: 'Pro Features Modal',
@@ -19562,7 +19562,7 @@ let hO = (e, t, r) => {
   }, 0), jsx($c, {
     initialViewMode: s.tileSortFilterConfig.viewMode,
     onViewModeChange: t => {
-      _$$sx('team folder view toggle', {
+      trackEventAnalytics('team folder view toggle', {
         viewType: t === XU.GRID ? 'grid' : 'list'
       });
       e(JF({
@@ -19593,22 +19593,22 @@ function hP(e) {
     case _$$gO.CLICK_JOIN:
     case _$$gO.BYPASS_REQUEST:
       return jsxs(Fragment, {
-        children: [_$$tx('file_browser.team.no_permissions_message', {
+        children: [renderI18nText('file_browser.team.no_permissions_message', {
           teamName: team.name
-        }), jsx('br', {}), _$$tx('file_browser.team.please_join_team')]
+        }), jsx('br', {}), renderI18nText('file_browser.team.please_join_team')]
       });
     case _$$gO.CLICK_REQUEST:
       return jsxs(Fragment, {
-        children: [_$$tx('file_browser.team.no_permissions_message', {
+        children: [renderI18nText('file_browser.team.no_permissions_message', {
           teamName: team.name
-        }), jsx('br', {}), _$$tx('file_browser.team.please_request_to_join_team')]
+        }), jsx('br', {}), renderI18nText('file_browser.team.please_request_to_join_team')]
       });
     case _$$gO.CLICK_WITHDRAW:
-      return _$$tx('file_browser.team.request_to_join_team_is_pending', {
+      return renderI18nText('file_browser.team.request_to_join_team_is_pending', {
         teamName: team.name
       });
     default:
-      return _$$tx('file_browser.team.no_permissions_message', {
+      return renderI18nText('file_browser.team.no_permissions_message', {
         teamName: team.name
       });
   }
@@ -19674,7 +19674,7 @@ function hD({
   showProOnboardingModal: n,
   showResourceConnectionInviteModal: o
 }) {
-  let l = _$$R6(t => t.teams[e]);
+  let l = selectWithShallowEqual(t => t.teams[e]);
   let d = useSelector(e => e.currentUserOrgId);
   let c = useSelector(e => l && l.org_id && e.orgById[l.org_id] || null);
   let u = useSelector(e => e.loadingState);
@@ -19740,7 +19740,7 @@ function hD({
     });
     if (VP(u, e) || D2(u, e) || _(_$$m$({
       teamId: l.id
-    })), t === A$.BILLING) {
+    })), t === NavigationRoutes.BILLING) {
       HZ({
         label: A5.TeamPageView.selectTeamViewBillingTab,
         oldValue: !1,
@@ -19753,14 +19753,14 @@ function hD({
       D2(u, e) || VP(u, e) || _(Be({
         teamId: l.id
       }));
-    } else if (t === A$.MEMBERS) {
+    } else if (t === NavigationRoutes.MEMBERS) {
       let e = _$$m$.loadingKeyForPayload({
         teamId: l.id
       });
       VP(u, e) || D2(u, e) || _(_$$m$({
         teamId: l.id
       }));
-    } else if (t === A$.SETTINGS) {
+    } else if (t === NavigationRoutes.SETTINGS) {
       let e = Be.loadingKeyForPayload({
         teamId: l.id
       });
@@ -19780,7 +19780,7 @@ function hD({
     if (!(l && E && C && r) || !v) return;
     let a = r === FProductAccessType.WHITEBOARD ? FFileType.WHITEBOARD : FFileType.DESIGN;
     a === FFileType.DESIGN ? e = C.designAccountTypeRequest?.status === 'pending' : a === FFileType.WHITEBOARD && (e = C.whiteboardAccountTypeRequest?.status === 'pending');
-    !0 === e && _(_$$s2.flash(_$$t('team_view.request_upgrade.request_already_sent')));
+    !0 === e && _(_$$s2.flash(getI18nString('team_view.request_upgrade.request_already_sent')));
     _(_$$sf({
       view: 'team',
       teamId: l.id,
@@ -19864,16 +19864,16 @@ function hM({
     if (e && canReadTeam) {
       switch (e.org_access) {
         case FAccessLevelType.PRIVATE:
-          return _$$t('file_browser.team_header.closed_team_header');
+          return getI18nString('file_browser.team_header.closed_team_header');
         case FAccessLevelType.SECRET:
-          return _$$t('file_browser.team_header.secret_team_header');
+          return getI18nString('file_browser.team_header.secret_team_header');
       }
     }
   }, [e, canReadTeam]);
   let F = useMemo(() => {
     if (e && canReadTeam) {
-      if (e.org_access === FAccessLevelType.PRIVATE) return _$$t('file_browser.team_header.closed_team_subtitle');
-      if (e.org_access === FAccessLevelType.SECRET) return _$$t('file_browser.team_header.secret_team_subtitle');
+      if (e.org_access === FAccessLevelType.PRIVATE) return getI18nString('file_browser.team_header.closed_team_subtitle');
+      if (e.org_access === FAccessLevelType.SECRET) return getI18nString('file_browser.team_header.secret_team_subtitle');
     }
   }, [e, canReadTeam]);
   let P = useCallback((t, r, a) => {
@@ -19899,7 +19899,7 @@ function hM({
   let D = () => {
     C(_$$oB());
     G();
-    k(A$.SETTINGS);
+    k(NavigationRoutes.SETTINGS);
   };
   let M = _$$s8();
   let B = useCallback(() => {
@@ -19916,12 +19916,12 @@ function hM({
   let W = {
     view: 'team',
     teamId: y,
-    teamViewTab: A$.HOME
+    teamViewTab: NavigationRoutes.HOME
   };
   let $ = _$$n6(_$$am.MEMBERS, U, !!t.canAdminTeam, !!t.canEditTeam, !!t.canReadTeam, W);
   let G = _$$n6(_$$am.SETTINGS, U, !!t.canAdminTeam, !!t.canEditTeam, !!t.canReadTeam, W);
   useEffect(() => {
-    l === A$.MEMBERS ? $() : l === A$.SETTINGS && G();
+    l === NavigationRoutes.MEMBERS ? $() : l === NavigationRoutes.SETTINGS && G();
   }, []);
   kF('Team');
   WX({
@@ -20001,13 +20001,13 @@ function hM({
     });
     let a = [];
     return (U && (canEditTeam && (r || a.push({
-      displayText: _$$t('teams_table.view_team_members'),
+      displayText: getI18nString('teams_table.view_team_members'),
       onClick: $
     }), a.push({
-      displayText: _$$t('team_view.settings.view_settings'),
+      displayText: getI18nString('team_view.settings.view_settings'),
       onClick: D
     })), r && a.push({
-      displayText: _$$t('teams_table.view_team_members'),
+      displayText: getI18nString('teams_table.view_team_members'),
       onClick: $
     })), a.length > 0) ? [{
       key: 'team-page-header-menu-items',
@@ -20018,7 +20018,7 @@ function hM({
     kind: _$$A9.CUSTOM,
     key: iq.DROPDOWN,
     element: jsx(ns, {
-      buttonAriaLabel: _$$t('team_view.page_header_dropdown_label'),
+      buttonAriaLabel: getI18nString('team_view.page_header_dropdown_label'),
       dropdownKey: `team-${e.id}`,
       menuGroups: Y
     })
@@ -20060,11 +20060,11 @@ function hM({
           element: jsx(_$$c2, {
             variant: 'secondary',
             onClick: GR(t, e.id, _$$e16.ADMIN),
-            children: _$$t('file_browser.team.join_team')
+            children: getI18nString('file_browser.team.join_team')
           })
         });
         let f = c ? Ib.TEXT : void 0;
-        let g = c ? _$$t('locked_team.label.tooltip') : void 0;
+        let g = c ? getI18nString('locked_team.label.tooltip') : void 0;
         i.canEditTeam && !R$(r, e.org_id) ? u.push({
           kind: _$$A9.CUSTOM,
           key: iq.NEW_PROJECT,
@@ -20076,7 +20076,7 @@ function hM({
               'data-testid': 'team-view-new-project-cta',
               'variant': 'primary',
               'disabled': c,
-              'aria-label': _$$t('project_creation.create_project'),
+              'aria-label': getI18nString('project_creation.create_project'),
               'iconPrefix': jsx(_$$x2, {}),
               'onClick': () => {
                 t(SX({
@@ -20087,7 +20087,7 @@ function hM({
                   where: Ah.FolderListView
                 }));
               },
-              'children': _$$tx('file_browser.team.add_project')
+              'children': renderI18nText('file_browser.team.add_project')
             })
           }),
           showOnMobile: !0
@@ -20107,7 +20107,7 @@ function hM({
                 }
               }));
             },
-            children: m ? _$$t('file_browser.team.cancel_request') : _$$t('file_browser.team.request_to_edit')
+            children: m ? getI18nString('file_browser.team.cancel_request') : getI18nString('file_browser.team.request_to_edit')
           })
         });
         u.push({
@@ -20121,7 +20121,7 @@ function hM({
               'data-tooltip': g,
               'data-tooltip-type': f
             },
-            children: _$$t('file_browser.team.share')
+            children: getI18nString('file_browser.team.share')
           })
         });
         e.org_id && u.push(p);
@@ -20145,7 +20145,7 @@ function hM({
         e.stopPropagation();
         C(_$$oB());
         $();
-        k(A$.MEMBERS);
+        k(NavigationRoutes.MEMBERS);
       }, B, !!y && w || T),
       rightSideOfTitleAction: J,
       pageHeaderIcon: void 0,
@@ -20177,7 +20177,7 @@ function hM({
               className: 'team_page_view--pointerOnHover--at7fp',
               children: jsx(Ex, {
                 color: zE.INFORMATIONAL,
-                text: _$$t('pro_onboarding.professional'),
+                text: getI18nString('pro_onboarding.professional'),
                 size: vj.EXTRA_LARGE
               })
             })
@@ -20206,7 +20206,7 @@ function hq(e, t = {}) {
     let s = e(a);
     let i = Object.keys(n).find(e => t[e]);
     if (i) {
-      let e = n[_$$Ay.mac ? i : hJ[i] || i];
+      let e = n[BrowserInfo.mac ? i : hJ[i] || i];
       if (e) {
         t.preventDefault();
         e(s);
@@ -20250,14 +20250,14 @@ function h1(e) {
               role: 'button',
               tabIndex: 0,
               onClick: o,
-              children: _$$tx('internal_profile.change_job_title')
+              children: renderI18nText('internal_profile.change_job_title')
             })]
           }), e.user.email && jsx('div', {
             className: 'org_user_meta_content--email--tgx7t text--fontPos13--xW8hS text--_fontBase--QdLsd',
             children: e.user.email
           }), (e.description || !e.isReadOnly) && jsx(TI, {
             value: e.description ?? '',
-            placeholder: _$$t('internal_profile.add_a_description'),
+            placeholder: getI18nString('internal_profile.add_a_description'),
             submit: e.submitDescription,
             formatter: qU,
             readOnly: e.isReadOnly,
@@ -20270,13 +20270,13 @@ function h1(e) {
           innerClassName: _$$s.p16.borderBox.flex.flexColumn.$,
           children: [jsx('div', {
             className: h0,
-            children: _$$tx('internal_profile.teams')
+            children: renderI18nText('internal_profile.teams')
           }), jsx(h3, {
             userId: e.userId,
             orgId: e.orgId
           }), jsx('div', {
             className: h0,
-            children: _$$tx('internal_profile.recent_projects')
+            children: renderI18nText('internal_profile.recent_projects')
           }), jsx(h5, {
             files: e.recents,
             isYourProfile: !e.isReadOnly
@@ -20316,7 +20316,7 @@ function h2(e) {
     isLoading: !e.user || !e.orgUser || !e.org,
     isReadOnly: !r || r.id !== e.userId,
     description: (e.orgId && e.orgUser ? e.orgUser.description : e.user.description) ?? null,
-    title: e.user && e.org ? _$$t('internal_profile.title', {
+    title: e.user && e.org ? getI18nString('internal_profile.title', {
       userName: e.user.handle,
       orgName: e.org.name
     }) : null,
@@ -20372,13 +20372,13 @@ function h5(e) {
     children: () => jsxs('div', {
       children: [n.length === 0 && jsx('div', {
         className: 'org_user_meta_content--projectEmptyState--zusT6 text--fontPos11--2LvXf text--_fontBase--QdLsd',
-        children: e.isYourProfile ? _$$t('internal_profile.your_recent_projects_will_appear_here') : _$$t('internal_profile.their_recent_projects_will_appear_here')
+        children: e.isYourProfile ? getI18nString('internal_profile.your_recent_projects_will_appear_here') : getI18nString('internal_profile.their_recent_projects_will_appear_here')
       }), n.map(e => jsx('div', {
         onClick: e.canView ? r => t(r, e.id) : void 0,
         className: e.canView ? 'org_user_meta_content--project--t-Nos org_user_meta_content--projectBase--ofeuj text--fontPos13--xW8hS text--_fontBase--QdLsd ellipsis--ellipsis--Tjyfa' : 'org_user_meta_content--dimProject--a1lrh org_user_meta_content--dim--aNVfK org_user_meta_content--projectBase--ofeuj text--fontPos13--xW8hS text--_fontBase--QdLsd ellipsis--ellipsis--Tjyfa',
         children: jsx('span', {
           'data-tooltip-type': Ib.TEXT,
-          'data-tooltip': e.canView ? void 0 : _$$t('internal_profile.you_must_be_a_member_of_team_name', {
+          'data-tooltip': e.canView ? void 0 : getI18nString('internal_profile.you_must_be_a_member_of_team_name', {
             teamName: e.teamName
           }),
           'children': e.name
@@ -20409,8 +20409,8 @@ function h6(e) {
   let r = useDispatch();
   return jsx(Fragment, {
     children: profile?.images ? null : jsx(h8, {
-      title: _$$t('internal_profile.profile_image_nudge.title'),
-      text: _$$t('internal_profile.profile_image_nudge.text'),
+      title: getI18nString('internal_profile.profile_image_nudge.title'),
+      text: getI18nString('internal_profile.profile_image_nudge.text'),
       action: jsx(N_, {
         trusted: !0,
         className: 'org_user_meta_content--userProfileNotificationActionLink--sVVav',
@@ -20426,7 +20426,7 @@ function h6(e) {
             text: 'Update Photo'
           });
         },
-        children: _$$tx('internal_profile.profile_image_nudge.action')
+        children: renderI18nText('internal_profile.profile_image_nudge.action')
       })
     })
   });
@@ -20470,12 +20470,12 @@ let h3 = connect((e, t) => ({
           'onClick': t ? o : void 0,
           'className': `org_user_meta_content--teamListItem--gXcF- text--fontPos13--xW8hS text--_fontBase--QdLsd ${t ? '' : 'org_user_meta_content--dim--aNVfK'}`,
           'data-tooltip-type': Ib.TEXT,
-          'data-tooltip': t ? void 0 : _$$t('internal_profile.you_re_not_a_member_of_this_team'),
+          'data-tooltip': t ? void 0 : getI18nString('internal_profile.you_re_not_a_member_of_this_team'),
           'data-tooltip-offset-y': 4
         }, e.id);
-      }), i && i.length === 0 && _$$tx('internal_profile.no_teams_in_common'), t && t.length > 10 && jsx('div', {
+      }), i && i.length === 0 && renderI18nText('internal_profile.no_teams_in_common'), t && t.length > 10 && jsx('div', {
         className: 'org_user_meta_content--numOtherTeamsRow--aAVva',
-        children: _$$tx('internal_profile.N_other_teams', {
+        children: renderI18nText('internal_profile.N_other_teams', {
           numOtherTeams: t.length - 10
         })
       })]
@@ -20490,7 +20490,7 @@ function h9(e) {
   return i.length === 0 ? null : jsxs(Fragment, {
     children: [jsx('div', {
       className: 'user_org_resources--sectionHeader--MUg1j internal_user_profile_page_view--sectionHeader--3NNNT text--fontPos13--xW8hS text--_fontBase--QdLsd',
-      children: _$$tx('file_browser.settings.plugins_published', {
+      children: renderI18nText('file_browser.settings.plugins_published', {
         orgName: e.org.name
       })
     }), jsxs('div', {
@@ -20590,7 +20590,7 @@ let xr = e => {
   let F = useCallback(e => {
     S(e);
     r(_$$F.enqueue({
-      message: _$$t('internal_profile.an_error_occurred'),
+      message: getI18nString('internal_profile.an_error_occurred'),
       error: !0
     }));
   }, [r]);
@@ -20730,15 +20730,15 @@ let xr = e => {
         manager: Y,
         children: [jsx(_$$t5.Tab, {
           ...H[_$$o9.INTERNAL_PROFILE],
-          children: _$$t('internal_profile.file_contributions')
+          children: getI18nString('internal_profile.file_contributions')
         }, _$$o9.INTERNAL_PROFILE), jsx(_$$t5.Tab, {
           ...H[_$$o9.INTERNAL_PROFILE_POSTS],
-          children: _$$t('internal_profile.posts')
+          children: getI18nString('internal_profile.posts')
         }, _$$o9.INTERNAL_PROFILE_POSTS)]
       })
     }) : jsx('div', {
       className: 'internal_user_profile_page_view--sectionHeader--3NNNT text--fontPos13--xW8hS text--_fontBase--QdLsd',
-      children: _$$tx('internal_profile.file_contributions')
+      children: renderI18nText('internal_profile.file_contributions')
     }),
     rightSide: z
   });
@@ -20908,10 +20908,10 @@ function xd(e) {
   let d = _$$T('UserPageView').unwrapOr(null);
   let c = _$$J8(() => Promise.all([xi(r, t, e.userId), xn(t, e.userId, l)]).then(([r, a]) => (l && !a && t(_$$F.enqueue({
     type: 'org_user_not_found',
-    message: d?.name ? _$$t('org_user_actions.org_user_not_found', {
+    message: d?.name ? getI18nString('org_user_actions.org_user_not_found', {
       userHandle: r.handle,
       planName: d.name
-    }) : _$$t('org_user_actions.org_user_not_found_without_plan_name', {
+    }) : getI18nString('org_user_actions.org_user_not_found_without_plan_name', {
       userHandle: r.handle
     }),
     error: !0,
@@ -21040,7 +21040,7 @@ function x_({
         };
       case 'deletedFiles':
         return {
-          pageHeaderContent: _$$t('file_browser.tool_bar.trash'),
+          pageHeaderContent: getI18nString('file_browser.tool_bar.trash'),
           pageContent: T8(jsx(mj, {
             selectedTab: mw.FILES
           }, 'trashed'), _$$e7.FILE_BROWSER, {
@@ -21063,7 +21063,7 @@ function x_({
         }
       case 'trashedFolders':
         return {
-          pageHeaderContent: _$$t('file_browser.tool_bar.trash'),
+          pageHeaderContent: getI18nString('file_browser.tool_bar.trash'),
           pageContent: T8(jsx(mj, {
             selectedTab: mw.FOLDERS
           }, 'trashed'), _$$e7.FILE_BROWSER, {
@@ -21072,13 +21072,13 @@ function x_({
         };
       case 'draftsToMove':
         return {
-          pageHeaderContent: _$$t('file_browser.tool_bar.drafts_to_move'),
+          pageHeaderContent: getI18nString('file_browser.tool_bar.drafts_to_move'),
           pageContent: jsx(_M, {}, 'draftsToMove')
         };
       case 'folder':
         if (n.folderId === t?.drafts_folder_id) {
           return {
-            pageHeaderContent: _$$t('file_browser.tool_bar.drafts'),
+            pageHeaderContent: getI18nString('file_browser.tool_bar.drafts'),
             pageHeaderActions: c({
               from: _$$f3.FILE_BROWSER_TOPBAR_DRAFTS
             }),
@@ -21137,7 +21137,7 @@ function x_({
             throwTypeError(n);
         }
       case 'licenseGroup':
-        if (n.subView === GN.ADMIN) {
+        if (n.subView === UserRole.ADMIN) {
           return {
             pageContent: T8(jsx(VY, {
               licenseGroupId: n.licenseGroupId,
@@ -21198,7 +21198,7 @@ function x_({
       case 'orgDomainManagement':
         let m = jsxs(_$$A11, {
           children: [jsx(J5, {
-            text: _$$t('general.admin'),
+            text: getI18nString('general.admin'),
             onClick: () => {
               e(_$$sf({
                 view: 'orgAdminSettings',
@@ -21207,7 +21207,7 @@ function x_({
             },
             hasTrailingDivider: !0
           }), jsx(J5, {
-            text: _$$t('org_dashboard.settings'),
+            text: getI18nString('org_dashboard.settings'),
             onClick: () => {
               e(_$$sf({
                 view: 'orgAdminSettings',
@@ -21238,7 +21238,7 @@ function x_({
           from: _$$f3.FILE_BROWSER_TOPBAR_RECENTS
         });
         return {
-          pageHeaderContent: _$$t('file_browser.tool_bar.recents'),
+          pageHeaderContent: getI18nString('file_browser.tool_bar.recents'),
           pageHeaderActions: p,
           pageContent: T8(jsx(hi, {
             selectedTab: _,
@@ -21262,7 +21262,7 @@ function x_({
             searchScope,
             query
           } = d.parameters;
-          let r = !_$$Ay.mobile;
+          let r = !BrowserInfo.mobile;
           return {
             pageHeaderContent: jsx(xp, {
               query
@@ -21287,7 +21287,7 @@ function x_({
         };
       case 'team':
         {
-          let e = n.teamViewTab ?? A$.HOME;
+          let e = n.teamViewTab ?? NavigationRoutes.HOME;
           return {
             pageContent: T8(jsx(hD, {
               teamId: n.teamId,
@@ -21308,7 +21308,7 @@ function x_({
         }
       case 'teamAdminConsole':
         {
-          let e = n.teamAdminConsoleViewTab ?? (n.isProTeam ? Iv.DASHBOARD : Iv.MEMBERS);
+          let e = n.teamAdminConsoleViewTab ?? (n.isProTeam ? DashboardSections.DASHBOARD : DashboardSections.MEMBERS);
           let t = X$(e, n.teamAdminConsoleViewSecondaryTab, {
             showResourceConnectionInviteModal: !!n.showResourceConnectionInviteModal,
             showResourceConnectionFlyout: !!n.showResourceConnectionFlyout
@@ -21331,7 +21331,7 @@ function x_({
         return {
           pageHeaderContent: jsx(_$$A11, {
             children: jsx(J5, {
-              text: _$$t('fig_feed.feed'),
+              text: getI18nString('fig_feed.feed'),
               onClick: () => {
                 e(_$$sf({
                   view: 'teamFeed'
@@ -21347,7 +21347,7 @@ function x_({
         };
       case 'user':
         return {
-          pageHeaderContent: _$$t('internal_profile.profile'),
+          pageHeaderContent: getI18nString('internal_profile.profile'),
           pageHeaderActions: t.community_profile_handle && t.id === n.userId ? [jsx(fD, {}, 'viewCommunityProfileAction')] : void 0,
           pageContent: jsx(xd, {
             userId: n.userId,
@@ -21358,7 +21358,7 @@ function x_({
       case 'orgIdpManagement':
         let f = jsxs(_$$A11, {
           children: [jsx(J5, {
-            text: _$$t('general.admin'),
+            text: getI18nString('general.admin'),
             onClick: () => {
               e(_$$sf({
                 view: 'orgAdminSettings',
@@ -21367,7 +21367,7 @@ function x_({
             },
             hasTrailingDivider: !0
           }), jsx(J5, {
-            text: _$$t('org_dashboard.settings'),
+            text: getI18nString('org_dashboard.settings'),
             onClick: () => {
               e(_$$sf({
                 view: 'orgAdminSettings',
@@ -21413,7 +21413,7 @@ function xp(e) {
       className: _$$s.flexShrink0.$,
       children: jsx(_$$E, {
         color: 'secondary',
-        children: _$$tx('search.search_results_for')
+        children: renderI18nText('search.search_results_for')
       })
     }), jsxs('div', {
       className: _$$s.flex.fontMedium.minW0.$,
@@ -21428,7 +21428,7 @@ function xp(e) {
       className: _$$s.flexShrink0.$,
       children: jsx(_$$E, {
         color: 'secondary',
-        children: _$$tx('search.search_results')
+        children: renderI18nText('search.search_results')
       })
     })
   });
@@ -21520,9 +21520,9 @@ function xT({
         children: [jsx(_$$J9, {
           index: 2
         }), jsx(_$$JR, {
-          children: _$$tx('team_creation.add_your_collaborators')
+          children: renderI18nText('team_creation.add_your_collaborators')
         }), jsx(Kh, {
-          children: _$$tx('team_creation.you_can_update_user_permissions_on_the_team_page_after_setting_up')
+          children: renderI18nText('team_creation.you_can_update_user_permissions_on_the_team_page_after_setting_up')
         }), jsxs('div', {
           className: 'add_collaborators--formContainer--zTKXv',
           children: [jsx('div', {
@@ -21532,12 +21532,12 @@ function xT({
               value: e,
               onChange: e => u(e.target.value, t),
               maxLength: 255,
-              placeholder: _$$t('team_creation.email')
+              placeholder: getI18nString('team_creation.email')
             }, `collaborator-email-input-${t}`))
           }), jsx(_$$nR2, {
             className: xj,
             onClick: m,
-            children: _$$tx('team_creation.add_another')
+            children: renderI18nText('team_creation.add_another')
           }), jsx('div', {
             className: 'add_collaborators--spacing--2VA7s'
           }), jsxs('div', {
@@ -21548,11 +21548,11 @@ function xT({
               trackingProperties: {
                 numCollaborators: p().length
               },
-              children: _$$tx('team_creation.continue')
+              children: renderI18nText('team_creation.continue')
             }), jsx(Ph, {
               onClick: _,
               trusted: !0,
-              children: _$$tx('team_creation.skip_for_now')
+              children: renderI18nText('team_creation.skip_for_now')
             })]
           })]
         })]
@@ -21593,7 +21593,7 @@ function xP(e) {
   let [n, o] = useState(!1);
   useEffect(() => {
     xF || (xF = !0, Mw());
-    n || (o(!0), _$$sx('Autosave Notification', {
+    n || (o(!0), trackEventAnalytics('Autosave Notification', {
       hasUnsyncedFiles: e.unsyncedFiles.length > 0,
       hasLocalUnsyncedFiles: e.localUnsyncedFiles.length > 0,
       firstUnsyncedFile: e.unsyncedFiles.length > 0 ? e.unsyncedFiles[0].fileKey : null,
@@ -21610,10 +21610,10 @@ function xP(e) {
   let m = d[0];
   let _ = y8(m) ? m.file.name : m.name;
   let p = _.length > 40 ? `${_.substring(0, 40)}\u2026` : _;
-  let f = c ? _$$t('autosave.notification.message.more_than_one_file') : _$$t('autosave.notification.message.one_file', {
+  let f = c ? getI18nString('autosave.notification.message.more_than_one_file') : getI18nString('autosave.notification.message.one_file', {
     fileName: p
   });
-  let g = c ? _$$tx('autosave.notification.action_review') : _$$tx('autosave.notification.action_open_to_sync');
+  let g = c ? renderI18nText('autosave.notification.action_review') : renderI18nText('autosave.notification.action_open_to_sync');
   return jsxs('div', {
     className: 'autosave_notification--notification--u3sx0 text--_negText--j9g-L',
     children: [jsx(_$$B, {
@@ -21641,13 +21641,13 @@ function xP(e) {
       }), jsx('div', {
         className: 'autosave_notification--action--Brz-5',
         onClick: () => {
-          _$$sx('Autosave Notification Snooze', {
+          trackEventAnalytics('Autosave Notification Snooze', {
             files: d.length,
             firstFile: m.fileKey
           });
           t(_$$zE(Date.now()));
         },
-        children: _$$tx('autosave.notification.action_later')
+        children: renderI18nText('autosave.notification.action_later')
       })]
     })]
   });
@@ -21726,7 +21726,7 @@ function xU({
         }
       }
     }
-    t && !h && _$$sx('team_creation_started', {
+    t && !h && trackEventAnalytics('team_creation_started', {
       user_id: r?.id ?? '',
       org_id: t
     });
@@ -21741,7 +21741,7 @@ function xU({
       ignoreCurrentPlan: h
     })), n.onSubmitReturnToPrevView && m(_$$sf(Gl() || {
       view: 'recentsAndSharing'
-    }))) : m(_$$s2.error(_$$t('team_creation.your_team_name_cannot_be_empty')));
+    }))) : m(_$$s2.error(getI18nString('team_creation.your_team_name_cannot_be_empty')));
   };
   let w = !(t && !h) && !n.onSubmitReturnToPrevView;
   let j = b ? null : jsx(_$$X7, {
@@ -21766,14 +21766,14 @@ function xU({
           ref: v,
           onSubmit: y,
           children: [jsx(_$$JR, {
-            children: _$$tx('team_creation.create_a_team_title')
+            children: renderI18nText('team_creation.create_a_team_title')
           }), jsxs('div', {
             className: 'team_creation--newTeamContainer--43mWz team_creation--newTeamContainerBase--nwYzU',
             children: [jsxs('div', {
               className: 'team_creation--teamNameContainer--B6Pc3',
               children: [jsx('div', {
                 className: 'team_creation--teamNameLabel--ohZWy',
-                children: _$$tx('team_creation.team_name_label')
+                children: renderI18nText('team_creation.team_name_label')
               }), jsx(_$$il, {
                 value: _ || '',
                 onChange: e => {
@@ -21781,7 +21781,7 @@ function xU({
                 },
                 className: 'team_creation--newTeamInput--PdjEW',
                 maxLength: 255,
-                placeholder: _$$t('team_creation.team_name_input_placeholder')
+                placeholder: getI18nString('team_creation.team_name_input_placeholder')
               })]
             }), x ? jsxs('div', {
               className: 'team_creation--orgTeamSettings--bDW2R',
@@ -21789,7 +21789,7 @@ function xU({
                 className: _$$s.flex.$,
                 children: [jsx('div', {
                   className: _$$s.fontSemiBold.$,
-                  children: _$$tx('team_creation.access_within_the_organization')
+                  children: renderI18nText('team_creation.access_within_the_organization')
                 }), jsx(xM, {
                   orgAccess: f,
                   dropdownShown: o,
@@ -21800,16 +21800,16 @@ function xU({
               }), jsx('div', {
                 className: xB,
                 children: (c = x.name, {
-                  [FAccessLevelType.PUBLIC]: _$$tx('org_access_strings.public.description_with_org_name', {
+                  [FAccessLevelType.PUBLIC]: renderI18nText('org_access_strings.public.description_with_org_name', {
                     orgName: c
                   }),
-                  [FAccessLevelType.PRIVATE]: _$$tx('org_access_strings.closed.description_with_org_name', {
+                  [FAccessLevelType.PRIVATE]: renderI18nText('org_access_strings.closed.description_with_org_name', {
                     orgName: c
                   }),
-                  [FAccessLevelType.SECRET]: _$$tx('org_access_strings.secret.description_with_org_name', {
+                  [FAccessLevelType.SECRET]: renderI18nText('org_access_strings.secret.description_with_org_name', {
                     disclaimerLabel: jsx('span', {
                       className: _$$s.fontSemiBold.$,
-                      children: _$$tx('org_access_strings.secret.description.disclaimer_label')
+                      children: renderI18nText('org_access_strings.secret.description.disclaimer_label')
                     }),
                     orgName: c
                   })
@@ -21817,13 +21817,13 @@ function xU({
               })]
             }) : jsx('div', {
               className: xB,
-              children: _$$tx('team_creation.after_creating_a_team_you_can_invite_others_to_join')
+              children: renderI18nText('team_creation.after_creating_a_team_you_can_invite_others_to_join')
             }), jsx(_$$nD, {
               className: t ? 'team_creation--createTeamButtonOrg--2rnOw' : 'team_creation--createTeamButton--C8IV7',
               type: 'submit',
               disabled: l.loading,
               onClick: y,
-              children: _$$tx('team_creation.create_team_button')
+              children: renderI18nText('team_creation.create_team_button')
             })]
           })]
         })]
@@ -21841,7 +21841,7 @@ function xW({
   let o = useSelector(e => e.currentTeamId);
   let l = Um();
   let d = useSelector(e => e.teamCreation);
-  return R$(n, r) ? (Ay.redirect('/'), t(_$$s2.error(_$$t('team_creation.missing_team_creation_controls'))), null) : jsx(xU, {
+  return R$(n, r) ? (Ay.redirect('/'), t(_$$s2.error(getI18nString('team_creation.missing_team_creation_controls'))), null) : jsx(xU, {
     currentTeamId: o,
     currentUserOrgId: r,
     user: n,
@@ -21889,16 +21889,16 @@ function xz({
   let m = jsx(_$$vd, {
     className: xV,
     onClick: u,
-    children: _$$tx('team_restore.back')
+    children: renderI18nText('team_restore.back')
   });
   if (c) {
     if (c.deleted_at) {
       let e = _$$A3(c.deleted_at).add(28, 'days').toDate();
-      t = _$$t('team_restore.confirm_restore_header', {
+      t = getI18nString('team_restore.confirm_restore_header', {
         teamName: c.name
       });
       r = jsxs('div', {
-        children: [_$$tx('team_restore.confirm_restore'), jsx('br', {}), jsx('br', {}), _$$tx('team_restore.confirm_restore_deadline', {
+        children: [renderI18nText('team_restore.confirm_restore'), jsx('br', {}), jsx('br', {}), renderI18nText('team_restore.confirm_restore_deadline', {
           deleteDeadline: e
         })]
       });
@@ -21909,11 +21909,11 @@ function xz({
             teamId: d
           }));
         },
-        children: _$$tx('team_restore.restore')
+        children: renderI18nText('team_restore.restore')
       });
     } else {
-      t = _$$t('team_restore.ineligible');
-      r = _$$t('team_restore.questions_contact_support', {
+      t = getI18nString('team_restore.ineligible');
+      r = getI18nString('team_restore.questions_contact_support', {
         supportEmail: getSupportEmail()
       });
     }
@@ -21927,9 +21927,9 @@ function xz({
         })
       });
     }
-    t = _$$t('team_restore.expired_header');
+    t = getI18nString('team_restore.expired_header');
     r = jsxs('div', {
-      children: [_$$tx('team_restore.expired'), jsx('br', {}), jsx('br', {}), _$$tx('team_restore.questions_contact_support', {
+      children: [renderI18nText('team_restore.expired'), jsx('br', {}), jsx('br', {}), renderI18nText('team_restore.questions_contact_support', {
         supportEmail: getSupportEmail()
       })]
     });
@@ -22054,7 +22054,7 @@ function xq(e) {
             children: [jsx(_$$JR, {
               className: 'step_upgrade_new_team--stepTitleComparisonChart--yyzB5 step_upgrade_new_team--stepTitle--yFYG8',
               children: jsx('span', {
-                children: _$$tx('plan_details.choose_your_team_plan')
+                children: renderI18nText('plan_details.choose_your_team_plan')
               })
             }), d ? jsx('div', {
               className: _$$s.mxAuto.$,
@@ -22133,7 +22133,7 @@ class x8 extends PureComponent {
           e.name !== 'AbortError' && console.warn(e);
         } finally {
           let e = this.payload && 60 * this.payload.pollIntervalMinutes || 900;
-          await _$$fm(1e3 * e);
+          await delay(1e3 * e);
         }
       }
     };
@@ -22163,10 +22163,10 @@ function x6(e) {
     Ay.unsafeRedirect(e, '_blank');
     a(t);
   }, [a]);
-  let n = useCallback(e => _$$t('downtime_banner.ongoing.figma_will_be_entering_a_maintenance_period', {
+  let n = useCallback(e => getI18nString('downtime_banner.ongoing.figma_will_be_entering_a_maintenance_period', {
     minutes: e
   }), []);
-  let l = useMemo(() => _$$t('downtime_banner.ongoing.currently_undergoing_maintenance'), []);
+  let l = useMemo(() => getI18nString('downtime_banner.ongoing.currently_undergoing_maintenance'), []);
   let d = useRef(e.notifications);
   let c = useCallback(() => {
     d.current.length > 0 && dispatch(_$$Q4.dequeue({
@@ -22328,7 +22328,7 @@ export function $$bo0() {
         let u = {
           view: 'team',
           teamId: t.teamId || '',
-          teamViewTab: A$.HOME
+          teamViewTab: NavigationRoutes.HOME
         };
         if (a && t.userId === a) {
           let r = {
@@ -22337,7 +22337,7 @@ export function $$bo0() {
           };
           let a = t.folderId ? c : u;
           if (d) {
-            let s = t.folderId ? _$$t('realtime.asset_reload.project_has_been_transferred_redirecting') : _$$t('realtime.asset_reload.team_has_been_transferred_redirecting');
+            let s = t.folderId ? getI18nString('realtime.asset_reload.project_has_been_transferred_redirecting') : getI18nString('realtime.asset_reload.team_has_been_transferred_redirecting');
             e.dispatch(_$$F.enqueue({
               message: s
             }));
@@ -22380,7 +22380,7 @@ export function $$bo0() {
     e(AS());
   }));
   useEffect(() => {
-    if (_$$eD || _$$ce()) {
+    if (desktopAPIInstance || _$$ce()) {
       let e = document.createElement('div');
       e.classList.add('file_browser_view--desktopBackground--kte3I');
       document.body.appendChild(e);
@@ -22403,7 +22403,7 @@ export function $$bo0() {
       ignoreCurrentPlan: !0
     }));
   }, [I, e]);
-  let W = _$$uG;
+  let W = isMobilePlatformNotFigmaMobile;
   if (!function () {
     let e = _$$_();
     let t = useDispatch();

@@ -9,8 +9,8 @@ import { getFeatureFlags } from "../905/601108";
 import { am } from "../figma_app/901889";
 import { Pt } from "../figma_app/806412";
 import { E as _$$E } from "../905/277716";
-import { tx, t as _$$t } from "../905/303541";
-import { Gq } from "../figma_app/363242";
+import { renderI18nText, getI18nString } from "../905/303541";
+import { getI18nState } from "../figma_app/363242";
 import { gl } from "../905/216495";
 import { kl, lJ } from "../905/275640";
 import { Um } from "../905/848862";
@@ -367,7 +367,7 @@ function U({
       enabled: t
     }) : jsx("div", {
       className: "stack_layout_details_preview--previewText--0NBYb",
-      children: tx("fullscreen.properties_panel.stack_panel.preview")
+      children: renderI18nText("fullscreen.properties_panel.stack_panel.preview")
     })
   });
 }
@@ -378,7 +378,7 @@ export function $$Z0(e) {
   let [t, n] = useState({
     enabled: !1
   });
-  let r = _$$t("fullscreen.properties_panel.section_autoLayout.settings");
+  let r = getI18nString("fullscreen.properties_panel.section_autoLayout.settings");
   return jsx("span", {
     className: Sj,
     children: jsx(T, {
@@ -441,14 +441,14 @@ function J({
   let [c, k] = lJ("stackReverseZIndex");
   let y = am();
   let S = useSelector(Sh);
-  let j = Gq()?.getPrimaryLocale(!0) === languageCodes.EN ? 120 : 180;
+  let j = getI18nState()?.getPrimaryLocale(!0) === languageCodes.EN ? 120 : 180;
   let b = gl(c);
   let N = !0 === c;
   let I = useId();
   return jsx(_$$E, {
     name: "stacking_order_control",
     children: jsx(_$$L, {
-      label: _$$t("fullscreen.properties_panel.stack_panel.canvas_stacking_order"),
+      label: getI18nString("fullscreen.properties_panel.stack_panel.canvas_stacking_order"),
       labelId: I,
       onMouseEnter: () => e({
         setting: "reverseStackingOrder",
@@ -480,7 +480,7 @@ function J({
               children: [jsx(c$, {
                 value: "Mixed",
                 disabled: !0,
-                children: _$$t("fullscreen.mixed")
+                children: getI18nString("fullscreen.mixed")
               }), jsx(wv, {})]
             }), jsx(c$, {
               value: "TRUE",
@@ -534,7 +534,7 @@ function ee({
   return jsx(_$$E, {
     name: "baseline_alignment_control",
     children: jsx(_$$k2, {
-      label: _$$t("fullscreen.properties_panel.stack_panel.align_text_baseline"),
+      label: getI18nString("fullscreen.properties_panel.stack_panel.align_text_baseline"),
       recordingKey: Pt(t, "alignToBaseline"),
       property: i,
       disabled: r,
@@ -557,7 +557,7 @@ function ee({
           enabled: t
         });
       },
-      "data-tooltip": r ? _$$t("fullscreen.properties_panel.stack_panel.only_applicable_for_horizontal_layout") : void 0,
+      "data-tooltip": r ? getI18nString("fullscreen.properties_panel.stack_panel.only_applicable_for_horizontal_layout") : void 0,
       "data-tooltip-type": Ib.TEXT
     })
   });
@@ -577,7 +577,7 @@ function et({
   return jsx(_$$E, {
     name: "borders_take_space_control",
     children: jsx(_$$L, {
-      label: _$$t("fullscreen.properties_panel.stack_panel.borders_take_space"),
+      label: getI18nString("fullscreen.properties_panel.stack_panel.borders_take_space"),
       labelId: j,
       onMouseEnter: () => e({
         setting: "bordersTakeSpace",
@@ -611,7 +611,7 @@ function et({
               children: [jsx(c$, {
                 value: "Mixed",
                 disabled: !0,
-                children: _$$t("fullscreen.mixed")
+                children: getI18nString("fullscreen.mixed")
               }), jsx(wv, {})]
             }), jsx(c$, {
               value: "TRUE",
@@ -656,12 +656,12 @@ function et({
   });
 }
 let en = {
-  format: e => e ? _$$t("fullscreen.properties_panel.stack_panel.first_on_top") : _$$t("fullscreen.properties_panel.stack_panel.last_on_top")
+  format: e => e ? getI18nString("fullscreen.properties_panel.stack_panel.first_on_top") : getI18nString("fullscreen.properties_panel.stack_panel.last_on_top")
 };
 let el = {
-  format: e => e ? _$$t("fullscreen.properties_panel.stack_panel.included") : _$$t("fullscreen.properties_panel.stack_panel.excluded"),
+  format: e => e ? getI18nString("fullscreen.properties_panel.stack_panel.included") : getI18nString("fullscreen.properties_panel.stack_panel.excluded"),
   formatExtended: e => ({
-    text: e ? _$$t("fullscreen.properties_panel.stack_panel.included_in_layout") : _$$t("fullscreen.properties_panel.stack_panel.excluded_from_layout")
+    text: e ? getI18nString("fullscreen.properties_panel.stack_panel.included_in_layout") : getI18nString("fullscreen.properties_panel.stack_panel.excluded_from_layout")
   })
 };
 export const o = $$Z0;

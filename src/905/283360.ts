@@ -1,6 +1,6 @@
 import { D2 } from "../905/528903";
 import { mHF, rXF } from "../figma_app/763686";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { colorToHex } from "../905/436288";
 import { oy } from "../figma_app/964367";
 import { Ay } from "../figma_app/432652";
@@ -16,7 +16,7 @@ export async function $$g0(e, t, i, n, s, o, l) {
   let m = mHF?.getVariableConsumptionForHighestNodeContainer(e.guid) ?? new Map();
   let g = {
     entry_point: "linter",
-    open_file_key: zl.get(ze) ?? "",
+    open_file_key: atomStoreManager.get(ze) ?? "",
     query_id: n,
     session_id: s,
     candidates: t.map(e => ({

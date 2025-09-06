@@ -3,7 +3,7 @@ import { NC } from "../905/17179";
 import { Ay } from "../905/612521";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { RF, Nh } from "../905/890368";
 import { F } from "../905/302958";
 import { MM, nF } from "../905/350402";
@@ -32,10 +32,10 @@ let $$f3 = nF(async (e, t) => {
   await XHR.put(`/api/teams/${teamId}/restore`).then(() => {
     let t = `/files/team/${teamId}`;
     Ay.redirect(t);
-    e.dispatch(_$$s.flash(_$$t("file_browser.file_browser_actions.restore_team_success")));
+    e.dispatch(_$$s.flash(getI18nString("file_browser.file_browser_actions.restore_team_success")));
   }).catch(t => {
-    e.dispatch(_$$s.error(_$$t("file_browser.file_browser_actions.restore_team_error", {
-      errorMsg: t.data.message || _$$t("file_browser.file_browser_actions.unknown_error")
+    e.dispatch(_$$s.error(getI18nString("file_browser.file_browser_actions.restore_team_error", {
+      errorMsg: t.data.message || getI18nString("file_browser.file_browser_actions.unknown_error")
     })));
   });
 });
@@ -51,7 +51,7 @@ let $$E17 = nF(async (e, t) => {
       userInitiated: !0
     }));
   }).catch(() => {
-    e.dispatch(_$$s.error(_$$t("file_browser.file_browser_actions.update_description_error")));
+    e.dispatch(_$$s.error(getI18nString("file_browser.file_browser_actions.update_description_error")));
   });
 });
 let $$y16 = nF(async (e, t) => {
@@ -61,7 +61,7 @@ let $$y16 = nF(async (e, t) => {
     presetsDisabled: r
   }).then(() => {
     e.dispatch(F.enqueue({
-      message: r ? _$$t("settings_tab.ui_kits_disabled") : _$$t("settings_tab.ui_kits_enabled"),
+      message: r ? getI18nString("settings_tab.ui_kits_disabled") : getI18nString("settings_tab.ui_kits_enabled"),
       type: "team.ui_kit_toggle",
       error: !1
     }));
@@ -73,7 +73,7 @@ let $$y16 = nF(async (e, t) => {
       userInitiated: !0
     }));
   }).catch(() => {
-    e.dispatch(_$$s.error(_$$t("file_browser.error_try_again")));
+    e.dispatch(_$$s.error(getI18nString("file_browser.error_try_again")));
   });
 });
 nF((e, {
@@ -93,7 +93,7 @@ nF((e, {
       userInitiated: !1
     }));
   }).catch(() => {
-    e.dispatch(_$$s.error(_$$t("file_browser.error_try_again")));
+    e.dispatch(_$$s.error(getI18nString("file_browser.error_try_again")));
   });
 });
 let $$b12 = nF((e, {
@@ -127,7 +127,7 @@ let $$b12 = nF((e, {
     }));
   }, t => {
     console.error(t);
-    e.dispatch(_$$s.error(_$$t("file_browser.file_browser_actions.team_member_fetch_error")));
+    e.dispatch(_$$s.error(getI18nString("file_browser.file_browser_actions.team_member_fetch_error")));
   });
 }, e => `TEAM_FETCH_MEMBERS_LIST::teamId::${e.teamId}`);
 let $$T1 = NC("TEAM_SET_MEMBERS");
@@ -169,4 +169,4 @@ export const tk = $$y16;
 export const ub = $$E17;
 export const uo = $$R18;
 export const yH = $$D19;
-export const yJ = $$P20; 
+export const yJ = $$P20;

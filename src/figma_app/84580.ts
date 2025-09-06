@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "../vendor/514228";
 import { tHB, oXo, X3B, glU } from "../figma_app/763686";
 import { Hr, dI } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
-import { eU, md } from "../figma_app/27355";
-import { sx } from "../905/449184";
-import { R } from "../905/103090";
+import { atom, useAtomWithSubscription } from "../figma_app/27355";
+import { trackEventAnalytics } from "../905/449184";
+import { selectWithShallowEqual } from "../905/103090";
 import { to } from "../figma_app/828186";
 import { to as _$$to } from "../905/156213";
 import { ow } from "../figma_app/976749";
@@ -27,7 +27,7 @@ import { HS, Ay } from "../figma_app/976110";
 let $$w10 = "prototypeInteractionEditModal";
 let $$O7 = "interactionPanel";
 let $$R11 = "action-row";
-let $$L15 = eU(!0);
+let $$L15 = atom(!0);
 export function $$P14(e, t, r, n, i, a, s, o, l, d) {
   return {
     behavior: function (e) {
@@ -105,7 +105,7 @@ export function $$z3(e) {
 export function $$W13() {
   let {
     selectionProperties
-  } = R(e => ({
+  } = selectWithShallowEqual(e => ({
     selectionProperties: e.mirror.selectionProperties
   }));
   let t = uQ();
@@ -258,7 +258,7 @@ function ea(e, t) {
         upsellSource: r
       }
     }));
-    sx("prototype.payment_upsell_modal_shown", {
+    trackEventAnalytics("prototype.payment_upsell_modal_shown", {
       paywallFeature: e
     });
   }, [a, e, t, r]);
@@ -272,7 +272,7 @@ export function $$es23() {
   let n = getFeatureFlags().prototype_multi_path_paywall && !canUseAdvancedPrototyping;
   let a = q5();
   let s = useSelector(e => a && a.teamId ? e.teams[a.teamId] : null);
-  let d = md(Hu);
+  let d = useAtomWithSubscription(Hu);
   let c = sO();
   let p = ow();
   let h = to();

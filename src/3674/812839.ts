@@ -9,7 +9,7 @@ import { t as _$$t } from "../figma_app/501766";
 import { N as _$$N } from "../905/301843";
 import { m as _$$m } from "../905/701558";
 import { getFeatureFlags } from "../905/601108";
-import { tx, t as _$$t2 } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { JT } from "../figma_app/173838";
 import { Vz } from "../figma_app/198840";
 import { X$ } from "../905/612685";
@@ -51,10 +51,10 @@ let I = ex("hub_file_in_review", function (e) {
     },
     children: [jsx("span", {
       className: k,
-      children: tx("community.tooltip.is_currently_in_review")
+      children: renderI18nText("community.tooltip.is_currently_in_review")
     }), jsx("div", {
       className: A,
-      children: tx("community.permissions_modal_publish_tab.footer.view_community_page")
+      children: renderI18nText("community.permissions_modal_publish_tab.footer.view_community_page")
     })]
   });
 }, e => ({
@@ -79,12 +79,12 @@ let E = ex("hub_file_info", function (e) {
     },
     children: [jsx("span", {
       className: k,
-      children: tx("community.tooltip.published_to_community_on_date", {
+      children: renderI18nText("community.tooltip.published_to_community_on_date", {
         date: lastPublishedAt
       })
     }), jsx("div", {
       className: A,
-      children: tx("community.permissions_modal_publish_tab.footer.view_community_page")
+      children: renderI18nText("community.permissions_modal_publish_tab.footer.view_community_page")
     })]
   });
 }, e => {
@@ -123,10 +123,10 @@ function S({
   let {
     currentHubFileVersion
   } = e;
-  let o = _$$t2("fullscreen.filename_view.hub_file_published_at", {
+  let o = getI18nString("fullscreen.filename_view.hub_file_published_at", {
     publish_date: new Date(currentHubFileVersion.createdAt)
   });
-  let l = e.verificationStatus === FUserVerificationStatusType.BLOCKED ? _$$t2("community.tooltip.this_community_file_is_currently_blocked") : e.verificationStatus === FUserVerificationStatusType.UNVERIFIED ? _$$t2("community.tooltip.this_community_file_is_currently_unverified") : "";
+  let l = e.verificationStatus === FUserVerificationStatusType.BLOCKED ? getI18nString("community.tooltip.this_community_file_is_currently_blocked") : e.verificationStatus === FUserVerificationStatusType.UNVERIFIED ? getI18nString("community.tooltip.this_community_file_is_currently_unverified") : "";
   let s = e.verificationStatus === FUserVerificationStatusType.BLOCKED || e.verificationStatus === FUserVerificationStatusType.UNVERIFIED;
   let r = e.publishingStatus === FPublicationStatusType.PENDING_PUBLIC || e.publishingStatus === FPublicationStatusType.PENDING_USER_VISUAL_COMPLIANCE;
   s ? t = C : r ? t = I : getFeatureFlags().hub_file_info_tooltip && (t = E);
@@ -149,7 +149,7 @@ function z() {
   let e = q5();
   let t = Z();
   return jsxs(_$$O, {
-    label: _$$t2("fullscreen_actions.expand-ui-with-filename", {
+    label: getI18nString("fullscreen_actions.expand-ui-with-filename", {
       fileName: t
     }),
     children: [jsx("div", {

@@ -6,9 +6,9 @@ import { b as _$$b, bL, mc, N_, q7, wv } from "../figma_app/860955";
 import { E as _$$E } from "../905/632989";
 import { Ay } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
-import { md, Xr, zl } from "../figma_app/27355";
+import { useAtomWithSubscription, Xr, atomStoreManager } from "../figma_app/27355";
 import _ from "classnames";
-import { sx, az } from "../905/449184";
+import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { FJ } from "../905/508367";
 import { Tf } from "../905/280919";
 import { A as _$$A } from "../905/920142";
@@ -24,13 +24,13 @@ import { hS } from "../905/437088";
 import { bL as _$$bL } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { A as _$$A2 } from "../figma_app/849799";
-import { tx as _$$tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { to as _$$to, Ce } from "../905/156213";
 import { Ju, ZU } from "../905/102752";
 import { Ex, zE } from "../figma_app/919079";
 import { c$, wv as _$$wv, X3 } from "../figma_app/236327";
 import { RW } from "../figma_app/637027";
-import { eD as _$$eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { serializeQuery } from "../905/634134";
 import { iZ, TA } from "../905/372672";
 import { FPlanNameType } from "../figma_app/191312";
@@ -39,7 +39,7 @@ import { k as _$$k2 } from "../905/93362";
 import { F as _$$F } from "../5132/756360";
 import { S as _$$S } from "../figma_app/420927";
 import { s as _$$s } from "../cssbuilder/589278";
-import { Gq } from "../figma_app/363242";
+import { getI18nState } from "../figma_app/363242";
 import { FU } from "../905/26824";
 import { yJ } from "../figma_app/24841";
 import { b as _$$b2 } from "../905/985254";
@@ -51,7 +51,7 @@ import { f as _$$f } from "../905/940356";
 import { cBX } from "../figma_app/43951";
 import { w5 } from "../figma_app/345997";
 import { getPermissionsStateMemoized } from "../figma_app/642025";
-import { sL as _$$sL, nT, oD } from "../figma_app/53721";
+import { mapFileTypeToEditorTypeNullable, FEditorType, mapEditorTypeToFileType } from "../figma_app/53721";
 import { Ib } from "../905/129884";
 import { c1 } from "../figma_app/357047";
 import { aG } from "../figma_app/728657";
@@ -134,7 +134,7 @@ let D = Ju(function (e) {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$tx("report_abuse.title")
+          children: renderI18nText("report_abuse.title")
         })
       }), jsx(nB, {
         children: jsx("div", {
@@ -157,7 +157,7 @@ function $() {
   } = getInitialOptions();
   let n = getFeatureFlags().desktop_support_chat;
   let i = show_support_chat && support_chat_origin && support_chat_frame_url;
-  return _$$eD ? !!n && i : i;
+  return desktopAPIInstance ? !!n && i : i;
 }
 function X(e, t) {
   let r = getInitialOptions().support_chat_origin;
@@ -200,7 +200,7 @@ function q({
       } = e;
       let i = data?.action;
       let a = data?.isDecagonEvent;
-      origin === support_chat_origin && a && i && (sx(`decagon_in_app_${i}`), "enableDebugMode" === i && Tf.optUserIntoDebugFlow(), "loaded" === i && h(!0), "close" === i && t());
+      origin === support_chat_origin && a && i && (trackEventAnalytics(`decagon_in_app_${i}`), "enableDebugMode" === i && Tf.optUserIntoDebugFlow(), "loaded" === i && h(!0), "close" === i && t());
     };
     window.addEventListener("message", e);
     return () => {
@@ -254,7 +254,7 @@ let eO = "seen_bug_reporter_modal";
 let eR = r1(eO);
 function eL() {
   let e = useDispatch();
-  let t = md(eR);
+  let t = useAtomWithSubscription(eR);
   let r = _$$e({
     overlay: lk2,
     priority: _$$N.SECONDARY_MODAL
@@ -263,7 +263,7 @@ function eL() {
   let o = useSelector(e => e.user?.email);
   let l = !!s && _$$A().diff(_$$A(s), "days") >= 14;
   let d = !!o && o.includes("@figma.com");
-  let c = md(jH);
+  let c = useAtomWithSubscription(jH);
   return (_$$E2(r.uniqueId, "Fullscreen Loaded", () => {
     l && d && r.show({
       canShow: e => !e,
@@ -276,8 +276,8 @@ function eL() {
   }, [r, c]), r.isShowing && getFeatureFlags().bug_reporter) ? jsx(rq, {
     isShowing: r.isShowing,
     userFlagOnShow: eO,
-    title: _$$tx("bug_reporter.announcement.title"),
-    description: _$$tx("bug_reporter.announcement.content"),
+    title: renderI18nText("bug_reporter.announcement.title"),
+    description: renderI18nText("bug_reporter.announcement.content"),
     trackingContextName: "bug_reporter_modal",
     targetKey: J_,
     onClose: r.complete,
@@ -311,7 +311,7 @@ function eM({
       children: jsx($n, {
         variant: "secondary",
         onClick: () => i(e),
-        children: _$$tx("reset_user_flags_modal.reset")
+        children: renderI18nText("reset_user_flags_modal.reset")
       })
     })]
   });
@@ -359,7 +359,7 @@ function ej({
         ...Ay.props(eU.searchInput)
       })
     }), jsx("div", {
-      children: _$$tx("reset_user_flags_modal.user_flag_level", {
+      children: renderI18nText("reset_user_flags_modal.user_flag_level", {
         userFlagCount: o,
         userFlagLevel: l
       })
@@ -367,13 +367,13 @@ function ej({
       ...Ay.props(eU.header),
       children: [jsx("span", {
         ...Ay.props(eU.flagName),
-        children: _$$tx("reset_user_flags_modal.flag_name")
+        children: renderI18nText("reset_user_flags_modal.flag_name")
       }), jsx("span", {
         ...Ay.props(eU.timestamp),
-        children: _$$tx("reset_user_flags_modal.last_updated")
+        children: renderI18nText("reset_user_flags_modal.last_updated")
       }), jsx("span", {
         ...Ay.props(eU.action),
-        children: _$$tx("reset_user_flags_modal.action")
+        children: renderI18nText("reset_user_flags_modal.action")
       })]
     }), jsx("div", {
       className: "x78zum5 xdt5ytf x1nfngrj",
@@ -495,7 +495,7 @@ let eB = Ju(function (e) {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$tx("reset_user_flags_modal.title")
+          children: renderI18nText("reset_user_flags_modal.title")
         })
       }), jsx(nB, {
         children: jsx(ej, {
@@ -560,7 +560,7 @@ let e4 = Ju(function ({
         }
       }));
     },
-    children: _$$t("help_widget.collective_upsells.fullscreen.compare_plans")
+    children: getI18nString("help_widget.collective_upsells.fullscreen.compare_plans")
   });
   return flagNumberVal > r ? null : jsx(fu, {
     name: "CollectiveUpsellsFullscreenModal",
@@ -678,10 +678,10 @@ function tr({
     },
     children: jsx(te, {
       dismissModal: t,
-      descriptionText: _$$t("help_widget.collective_upsells_widget.description_text"),
-      headerText: _$$t("help_widget.collective_upsells_widget.header_text"),
-      ctaSecondaryText: _$$t("help_widget.collective_upsells_widget.cta_dismiss"),
-      ctaPrimaryText: _$$t("help_widget.collective_upsells_widget.cta_see_how"),
+      descriptionText: getI18nString("help_widget.collective_upsells_widget.description_text"),
+      headerText: getI18nString("help_widget.collective_upsells_widget.header_text"),
+      ctaSecondaryText: getI18nString("help_widget.collective_upsells_widget.cta_dismiss"),
+      ctaPrimaryText: getI18nString("help_widget.collective_upsells_widget.cta_see_how"),
       imgSrc: tt,
       clickPrimaryBtn: () => {
         c(_$$to({
@@ -718,12 +718,12 @@ function ti({
           fontWeight: "semi-bold",
           fontSize: 13,
           color: "onbrand",
-          children: _$$tx("help_widget.collective_upsells_widget_tooltip.header_text")
+          children: renderI18nText("help_widget.collective_upsells_widget_tooltip.header_text")
         }), jsx(_$$E3, {
           fontSize: 11,
           fontWeight: "medium",
           color: "onbrand",
-          children: _$$tx("help_widget.collective_upsells_widget_tooltip.description_text")
+          children: renderI18nText("help_widget.collective_upsells_widget_tooltip.description_text")
         })]
       })
     })
@@ -738,11 +738,11 @@ function tc({
   dropdownOpen: e
 }) {
   let [t, r] = useState(!1);
-  let s = md(tl);
-  let o = md(td);
+  let s = useAtomWithSubscription(tl);
+  let o = useAtomWithSubscription(td);
   let l = useDispatch();
   let d = q5();
-  let c = md(_$$P2);
+  let c = useAtomWithSubscription(_$$P2);
   let {
     flagNumberVal
   } = eH(...WB);
@@ -2169,24 +2169,24 @@ let tw = Ju(function () {
             children: [!e && jsxs(Fragment, {
               children: [jsx("h1", {
                 className: "figjam_try_faq_modal--title--smR-s",
-                children: _$$t("figjam_try_faq_modal.title")
+                children: getI18nString("figjam_try_faq_modal.title")
               }), jsxs("ul", {
                 children: [jsx(tC, {
                   handleClick: () => t("using_your_online_whiteboard"),
                   svg: _$$A6,
-                  text: _$$t("figjam_try_faq_modal.using_your_online_whiteboard")
+                  text: getI18nString("figjam_try_faq_modal.using_your_online_whiteboard")
                 }), jsx(tC, {
                   handleClick: () => t("figjam_features"),
                   svg: _$$A4,
-                  text: _$$t("figjam_try_faq_modal.figjam_features")
+                  text: getI18nString("figjam_try_faq_modal.figjam_features")
                 }), jsx(tC, {
                   handleClick: () => t("managing_whiteboard"),
                   svg: _$$A5,
-                  text: _$$t("figjam_try_faq_modal.managing_your_online_whiteboard")
+                  text: getI18nString("figjam_try_faq_modal.managing_your_online_whiteboard")
                 }), jsx(tC, {
                   handleClick: () => t("templates"),
                   svg: _$$A3,
-                  text: _$$t("figjam_try_faq_modal.online_whiteboard_templates")
+                  text: getI18nString("figjam_try_faq_modal.online_whiteboard_templates")
                 })]
               })]
             }), !!e && function (e) {
@@ -2211,7 +2211,7 @@ let tw = Ju(function () {
 function tR({
   helpWidgetOnboardingKey: e
 }) {
-  let t = "ko-kr" === Gq()?.getPrimaryLocale(!0);
+  let t = "ko-kr" === getI18nState()?.getPrimaryLocale(!0);
   let r = !!getFeatureFlags().web_help_widget_report_translations_korean;
   let {
     show,
@@ -2230,7 +2230,7 @@ function tR({
     isShowing,
     targetKey: e,
     trackingContextName: "Report Korean Translation Issue",
-    description: _$$tx("help_widget.report_translation_issue_callout.description"),
+    description: renderI18nText("help_widget.report_translation_issue_callout.description"),
     onClose: () => {
       complete();
     },
@@ -2247,7 +2247,7 @@ function tM({
     let t = _$$W();
     if (null != t) return t.get(e);
   }(t), [t]);
-  let a = Gq()?.getPrimaryLocale(!0) ?? defaultLanguage;
+  let a = getI18nState()?.getPrimaryLocale(!0) ?? defaultLanguage;
   let s = null === TA();
   let {
     show,
@@ -2264,7 +2264,7 @@ function tM({
     isShowing,
     targetKey: e,
     trackingContextName: "Guest Language Picker",
-    description: _$$tx("q_1_localization_experiments.change_your_language_anytime_from"),
+    description: renderI18nText("q_1_localization_experiments.change_your_language_anytime_from"),
     onClose: () => {
       _$$T("product_locale", a, {
         maxAge: _$$e3
@@ -2760,7 +2760,7 @@ export function $$t60(e) {
         canShowInProductHelp: () => canShowInProductHelp && !!getConfig().getValue("enabled", !1),
         dispatch: e.dispatch,
         dropDownOpen: t,
-        editorType: _$$sL(y?.editorType),
+        editorType: mapFileTypeToEditorTypeNullable(y?.editorType),
         fileKey: y?.key,
         getExpInProductHelpConfig: getConfig,
         hide: e.hide,
@@ -2811,14 +2811,14 @@ let t7 = class e extends o6 {
       this.zendeskRef.current?.close();
     };
     this.logEvent = e => {
-      sx(e, {
+      trackEventAnalytics(e, {
         isEditingFile: this.props.isEditingFile,
         editorType: this.props.editorType,
         source: "help-widget-button"
       });
     };
     this.logDefinedEvent = e => {
-      az.trackDefinedEvent(e, {
+      analyticsEventManager.trackDefinedEvent(e, {
         isEditingFile: this.props.isEditingFile,
         editorType: this.props.editorType,
         source: "help-widget-button"
@@ -3010,25 +3010,25 @@ let t7 = class e extends o6 {
     });
     this.onClick = cZ(this, "click", () => {
       !ci(this.props.user?.email) && this.props.canShowInProductHelp() ? "hidden" !== this.props.inProductHelpViewType ? this.props.hideInProductHelpView() : this.props.showInProductHelpView() : this.props.setDropDownOpen(!this.props.dropDownOpen);
-      zl.set(jH, !0);
+      atomStoreManager.set(jH, !0);
     });
     this.getDropdownOptions = () => [{
       type: "option",
       onClick: this.onClickFigjamTryFAQ,
-      label: _$$tx("help_widget.menu.figjam_try_faq"),
+      label: renderI18nText("help_widget.menu.figjam_try_faq"),
       shouldShow: () => this.props.isFigjamTry,
       shouldShowUnauth: !0
     }, {
       type: "option",
       onClick: this.onClickHtmlToFigma,
-      label: _$$tx("help_widget.menu.import_html"),
+      label: renderI18nText("help_widget.menu.import_html"),
       shouldShow: () => !!getFeatureFlags().babel_design_widget_entrypoint
     }, {
       type: "option",
       onClick: () => this.onClickBugReport({
         isPerformanceIssue: !1
       }),
-      label: _$$tx("help_widget.menu.report_issue"),
+      label: renderI18nText("help_widget.menu.report_issue"),
       shouldShow: () => !!getFeatureFlags().bug_reporter,
       shouldShowUnauth: !1
     }, {
@@ -3036,48 +3036,48 @@ let t7 = class e extends o6 {
       onClick: () => this.onClickBugReport({
         isPerformanceIssue: !0
       }),
-      label: _$$tx("help_widget.menu.report_performance_issue"),
+      label: renderI18nText("help_widget.menu.report_performance_issue"),
       shouldShow: () => !!getFeatureFlags().perf_reporter,
       shouldShowUnauth: !1
     }, {
       type: "option",
       onClick: this.onClickChangeFeatureFlags,
-      label: _$$tx("feature_flag_overrides.help_menu_button"),
+      label: renderI18nText("feature_flag_overrides.help_menu_button"),
       shouldShow: () => !!getFeatureFlags().feature_flag_overrides
     }, {
       type: "option",
       onClick: this.onClickResetUserFlags,
-      label: _$$tx("reset_user_flags_modal.option_label"),
+      label: renderI18nText("reset_user_flags_modal.option_label"),
       shouldShow: () => !!getFeatureFlags().reset_user_flags
     }, {
       type: "option",
       onClick: this.onClickCreateCortextTraceLink,
-      label: _$$tx("help_widget.menu.create_cortext_trace_link"),
+      label: renderI18nText("help_widget.menu.create_cortext_trace_link"),
       shouldShow: () => isDevEnvironment() && !!this.props.fileKey && !!this.props.isEditingFile
     }, {
       type: "option",
       target: "_blank",
       href: `https://${isGovCluster() ? "app.ddog-gov.com" : "app.datadoghq.com"}/rum/sessions?query=%40application.id%3A${Tf?.applicationId}%20%40session.id%3A${Tf?.sessionId}`,
-      label: _$$tx("help_widget.menu.rum_session"),
+      label: renderI18nText("help_widget.menu.rum_session"),
       shouldShow: () => !!Tf?.sessionId && (isLocalCluster() || isStagingCluster() || !!getFeatureFlags().feature_flag_overrides)
     }, {
       type: "option",
       onClick: this.onClickSetCommitSHA,
-      label: _$$tx("help_widget.menu.set_commit_sha"),
+      label: renderI18nText("help_widget.menu.set_commit_sha"),
       shouldShow: () => !!getFeatureFlags().set_frontend_commit_sha
     }, {
       type: "option",
       target: "_blank",
       href: `https://deploys.figma.com/bisect?repro_url=${encodeURIComponent(window.location.href)}`,
       onClick: () => this.closeDropdownAndLogEvent("help_widget_web_bisect"),
-      label: _$$tx("help_widget.menu.web_bisect"),
+      label: renderI18nText("help_widget.menu.web_bisect"),
       shouldShow: () => isLocalCluster() || isStagingCluster()
     }, {
       type: "option",
       onClick: this.onClickResetOnboarding,
       label: jsx("div", {
         "data-onboarding-key": "reset-onboarding",
-        children: _$$tx("help_widget.menu.reset_onboarding")
+        children: renderI18nText("help_widget.menu.reset_onboarding")
       }),
       shouldShow: () => !!getFeatureFlags().show_reset_onboarding
     }, {
@@ -3088,35 +3088,35 @@ let t7 = class e extends o6 {
       target: "_blank",
       href: "https://help.figma.com/",
       onClick: () => this.closeDropdownAndLogEvent("help_widget_help"),
-      label: _$$tx("help_widget.menu.help_center"),
+      label: renderI18nText("help_widget.menu.help_center"),
       shouldShowUnauth: !0
     }, {
       type: "option",
       target: "_blank",
       href: "https://forum.figma.com/",
       onClick: () => this.closeDropdownAndLogEvent("help_widget_forum"),
-      label: _$$tx("help_widget.menu.support_forum"),
+      label: renderI18nText("help_widget.menu.support_forum"),
       shouldShowUnauth: !1
     }, {
       type: "option",
       target: "_blank",
       href: "https://www.youtube.com/figmadesign",
       onClick: () => this.closeDropdownAndLogEvent("help_widget_tutorials"),
-      label: _$$tx("help_widget.menu.youtube_videos"),
+      label: renderI18nText("help_widget.menu.youtube_videos"),
       shouldShowUnauth: !0
     }, {
       type: "option",
       target: "_blank",
       href: "https://www.figma.com/release-notes/",
       onClick: () => this.closeDropdownAndLogEvent("help_widget_releases"),
-      label: _$$tx("help_widget.menu.release_notes"),
+      label: renderI18nText("help_widget.menu.release_notes"),
       shouldShowUnauth: !0
     }, {
       type: "option",
       target: "_blank",
       href: "/legal",
       onClick: () => this.closeDropdownAndLogEvent("help_widget_legal_summary"),
-      label: _$$tx("help_widget.menu.legal_summary"),
+      label: renderI18nText("help_widget.menu.legal_summary"),
       shouldShowUnauth: !0
     }, {
       type: "separator",
@@ -3126,49 +3126,49 @@ let t7 = class e extends o6 {
       target: "_blank",
       href: "https://forum.figma.com/share-your-feedback-26",
       onClick: () => this.closeDropdownAndLogEvent("help_widget_forum_feedback"),
-      label: _$$tx("help_widget.menu.submit_feedback"),
-      shouldShow: () => !isGovCluster() && !(this.props.editorType === nT.Figmake && aI())
+      label: renderI18nText("help_widget.menu.submit_feedback"),
+      shouldShow: () => !isGovCluster() && !(this.props.editorType === FEditorType.Figmake && aI())
     }, {
       type: "option",
       target: "_blank",
       href: "https://form.asana.com/?k=2lONzHHSiZJo3FThA47peg&d=10497086658021",
       onClick: () => this.closeDropdownAndLogDefinedEvent("i18n.help_widget_report_translations"),
-      label: _$$tx("help_widget.menu.report_translation_issues"),
-      shouldShow: () => !!getFeatureFlags().web_help_widget_report_translations && Gq()?.getPrimaryLocale(!0) !== "en" && Gq()?.getPrimaryLocale(!0) !== "ko-kr"
+      label: renderI18nText("help_widget.menu.report_translation_issues"),
+      shouldShow: () => !!getFeatureFlags().web_help_widget_report_translations && getI18nState()?.getPrimaryLocale(!0) !== "en" && getI18nState()?.getPrimaryLocale(!0) !== "ko-kr"
     }, {
       type: "option",
       target: "_blank",
       href: "https://form.asana.com/?k=sDVVvv1ozFchtJWapzoUZw&d=10497086658021",
       onClick: () => this.closeDropdownAndLogDefinedEvent("i18n.help_widget_report_translations_korean"),
-      label: _$$tx("help_widget.menu.report_translation_issues"),
-      shouldShow: () => !!getFeatureFlags().web_help_widget_report_translations_korean && Gq()?.getPrimaryLocale(!0) === "ko-kr"
+      label: renderI18nText("help_widget.menu.report_translation_issues"),
+      shouldShow: () => !!getFeatureFlags().web_help_widget_report_translations_korean && getI18nState()?.getPrimaryLocale(!0) === "ko-kr"
     }, {
       type: "option",
       onClick: this.props.showStringInspector,
-      label: _$$tx("string_inspector.open_string_inspector"),
+      label: renderI18nText("string_inspector.open_string_inspector"),
       shouldShow: () => getFeatureFlags().l10n_string_inspector || !1
     }, {
       type: "option",
       target: "_blank",
       href: "https://forum.figma.com/ask-the-community-7",
       onClick: () => this.closeDropdownAndLogEvent("help_widget_forum_ask"),
-      label: _$$tx("help_widget.menu.ask_the_community"),
+      label: renderI18nText("help_widget.menu.ask_the_community"),
       shouldShow: () => !isGovCluster()
     }, isGovCluster() ? {
       type: "option",
       target: "_blank",
       href: "mailto:support-figgov@figma.com",
       onClick: () => this.closeDropdownAndLogEvent("help_widget_get_help"),
-      label: _$$tx("help_widget.menu.contact_support")
+      label: renderI18nText("help_widget.menu.contact_support")
     } : {
       type: "option",
       onClick: this.onClickGetHelp,
-      label: _$$tx("help_widget.menu.contact_support"),
+      label: renderI18nText("help_widget.menu.contact_support"),
       shouldShowUnauth: !1
     }, {
       type: "option",
       onClick: this.onClickReportAbuse,
-      label: _$$tx("help_widget.menu.report_abuse"),
+      label: renderI18nText("help_widget.menu.report_abuse"),
       shouldShowUnauth: !0,
       shouldShow: () => !0
     }, {
@@ -3179,7 +3179,7 @@ let t7 = class e extends o6 {
       shouldShow: () => Y5.isReady(),
       onClick: this.onClickKeyboardShortcuts,
       label: jsxs(Fragment, {
-        children: [_$$tx("help_widget.menu.keyboard_shortcuts"), jsx(_$$S, {
+        children: [renderI18nText("help_widget.menu.keyboard_shortcuts"), jsx(_$$S, {
           shortcut: c1(this.props.keyboardShortcuts, "open-shortcuts"),
           className: "help_widget--shortcut--H4xrS"
         })]
@@ -3188,7 +3188,7 @@ let t7 = class e extends o6 {
       type: "option",
       onClick: this.onClickResetNux,
       label: jsx("div", {
-        children: _$$tx("help_widget.menu.reset_nux")
+        children: renderI18nText("help_widget.menu.reset_nux")
       }),
       shouldShow: this.props.shouldShowResetNuxOption
     }, {
@@ -3199,7 +3199,7 @@ let t7 = class e extends o6 {
           type: e4,
           data: {
             teamId: this.props.teamId,
-            editorType: this.props.editorType ? oD(this.props.editorType) : null
+            editorType: this.props.editorType ? mapEditorTypeToFileType(this.props.editorType) : null
           }
         }));
         this.closeDropdownAndLogEvent("help_widget_discover_more_features");
@@ -3210,9 +3210,9 @@ let t7 = class e extends o6 {
         });
       },
       label: jsxs(Fragment, {
-        children: [_$$tx("help_widget.menu.discover_more_features"), jsx(Ex, {
+        children: [renderI18nText("help_widget.menu.discover_more_features"), jsx(Ex, {
           className: `help_widget--proBadge--9d3JS ${this.state.discoverMoreOptionHovered ? "help_widget--proBadgeHovered--KoXjg" : ""}`,
-          text: _$$t("help_widget.menu.discover_more_features.pro"),
+          text: getI18nString("help_widget.menu.discover_more_features.pro"),
           color: zE.INVERT,
           subtle: !0
         })]
@@ -3225,11 +3225,11 @@ let t7 = class e extends o6 {
       type: "option",
       onClick: this.onClickKeyboardLayoutSelector,
       shouldShow: () => Y5.isReady(),
-      label: _$$tx("help_widget.menu.change_keyboard_layout")
+      label: renderI18nText("help_widget.menu.change_keyboard_layout")
     }, {
       type: "option",
       onClick: this.onClickLanguageSelector,
-      label: _$$tx("help_widget.menu.change_languages"),
+      label: renderI18nText("help_widget.menu.change_languages"),
       shouldShowUnauth: !0
     }];
     this.renderDropdownOptions = () => this.getDropdownOptions().filter(e => this.shouldShowOption(e)).map((e, t) => {
@@ -3284,8 +3284,8 @@ let t7 = class e extends o6 {
   render() {
     let t = !this.props.hide;
     let r = this.props.isDarkMode;
-    let i = this.props.editorType === nT.Whiteboard;
-    let a = this.props.editorType === nT.Cooper;
+    let i = this.props.editorType === FEditorType.Whiteboard;
+    let a = this.props.editorType === FEditorType.Cooper;
     let s = !i && ci(this.props.user?.email) && this.props.canShowInProductHelp();
     if (this.props.asFigmakeHeaderWidget) {
       let e = this.getDropdownOptions().filter(e => this.shouldShowOption(e));
@@ -3308,7 +3308,7 @@ let t7 = class e extends o6 {
           "aria-controls": this.dropdownID,
           "aria-expanded": this.props.dropDownOpen,
           "aria-haspopup": !0,
-          "aria-label": _$$t("fullscreen.menu.help_menu"),
+          "aria-label": getI18nString("fullscreen.menu.help_menu"),
           className: W,
           "data-fullscreen-intercept": !0,
           innerText: e.displayName,
@@ -3335,7 +3335,7 @@ let t7 = class e extends o6 {
           "aria-controls": this.dropdownID,
           "aria-expanded": this.props.dropDownOpen,
           "aria-haspopup": !0,
-          "aria-label": _$$t("fullscreen.menu.help_menu"),
+          "aria-label": getI18nString("fullscreen.menu.help_menu"),
           className: W,
           "data-fullscreen-intercept": !0,
           "data-onboarding-key": t8,
@@ -3379,7 +3379,7 @@ function re() {
   return jsx("div", {
     "aria-hidden": !0,
     className: "help_widget--tooltip--ScNXy help_widget--tooltipPosition--XygMP text--fontPos11--2LvXf text--_fontBase--QdLsd",
-    children: _$$tx("help_widget.tooltip")
+    children: renderI18nText("help_widget.tooltip")
   });
 }
 let rt = {
@@ -3430,11 +3430,11 @@ function rr({
       children: [jsx(_$$E, {
         ...getTriggerProps(),
         ...Ay.props(rt.buttonStyle, manager.isOpen && rt.buttonStyleActive),
-        "aria-label": _$$t("fullscreen.menu.help_menu"),
+        "aria-label": getI18nString("fullscreen.menu.help_menu"),
         "aria-expanded": manager.isOpen,
         htmlAttributes: {
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": _$$t("help_widget.tooltip"),
+          "data-tooltip": getI18nString("help_widget.tooltip"),
           "data-tooltip-submenu-open": manager.isOpen
         },
         "data-fullscreen-intercept": !0,

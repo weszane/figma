@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from "react";
 import { useDispatch } from "../vendor/514228";
-import { md, fp } from "../figma_app/27355";
+import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { F } from "../905/302958";
 import { oB, j7 } from "../905/929976";
 export function $$l1({
@@ -9,10 +9,10 @@ export function $$l1({
   readOnlyTopLevelModeAtom: r,
   readOnlyEditModeTypeAtom: i
 }, s) {
-  let o = md(t);
-  let [l, c] = fp(e);
-  let u = md(r);
-  let p = md(i);
+  let o = useAtomWithSubscription(t);
+  let [l, c] = useAtomValueAndSetter(e);
+  let u = useAtomWithSubscription(r);
+  let p = useAtomWithSubscription(i);
   let _ = o?.type !== void 0;
   let h = $$d0();
   let m = s || h;

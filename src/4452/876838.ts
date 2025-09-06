@@ -4,7 +4,7 @@ import { K } from "../905/807535";
 import { getFeatureFlags } from "../905/601108";
 import { oA } from "../905/663269";
 import { subscribeAndAwaitData } from "../905/553831";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { ps, Xv } from "../figma_app/845611";
 import { QL, EM } from "../905/609392";
@@ -22,12 +22,12 @@ export async function $$x0(e, t) {
     });
     let s = oA(a.accountTypeRequest);
     if (!s) {
-      v(t, _$$t("admin_dashboard.requests.not_found"));
+      v(t, getI18nString("admin_dashboard.requests.not_found"));
       return;
     }
     if ("pending" !== s.status) {
       t(F.enqueue({
-        message: _$$t("admin_dashboard.requests.this_request_has_already_been_handled"),
+        message: getI18nString("admin_dashboard.requests.this_request_has_already_been_handled"),
         type: s?.status === "approved" ? "requests-approved" : "requests-denied"
       }));
       return;
@@ -80,14 +80,14 @@ export function $$f1() {
 }
 let v = (e, t) => {
   e(F.enqueue({
-    message: t || _$$t("admin_dashboard.requests.error_generic"),
+    message: t || getI18nString("admin_dashboard.requests.error_generic"),
     error: !0
   }));
 };
 let b = (e, t) => {
-  let a = t ? _$$t("admin_dashboard.requests.success_approve_with_name", {
+  let a = t ? getI18nString("admin_dashboard.requests.success_approve_with_name", {
     requesterName: t
-  }) : _$$t("admin_dashboard.requests.success_approve_multiple", {
+  }) : getI18nString("admin_dashboard.requests.success_approve_multiple", {
     numRequests: 1
   });
   e(F.enqueue({

@@ -1,7 +1,7 @@
 import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
 import { buildUploadUrl } from "../figma_app/169182";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { yW } from "../figma_app/644808";
 import { Yl } from "../figma_app/10098";
 let d = [{
@@ -84,7 +84,7 @@ export function $$c1() {
 }
 export function $$u0() {
   return $$c1().length > 0 ? {
-    name: t("design_systems.assets_panel.site_embeds"),
+    name: getI18nString("design_systems.assets_panel.site_embeds"),
     libraryKey: _$$l(Yl),
     thumbnailUrl: buildUploadUrl("b325c884bd37bf62ccd3776e84158fc1e3bc0def"),
     thumbnailShouldCover: !1,

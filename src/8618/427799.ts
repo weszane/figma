@@ -8,14 +8,14 @@ import { l as _$$l } from "../905/479687";
 import { J as _$$J } from "../905/614223";
 import { fZl, Z64, Ez5 } from "../figma_app/763686";
 import { l7 } from "../905/189185";
-import { fp } from "../figma_app/27355";
+import { useAtomValueAndSetter } from "../figma_app/27355";
 import m from "classnames";
 import { U as _$$U } from "../figma_app/901889";
 import { E as _$$E2 } from "../905/277716";
 import { P as _$$P } from "../905/347284";
 import { IW } from "../figma_app/563413";
 import { B as _$$B } from "../905/714743";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { _ as _$$_ } from "../8618/537054";
 import { j as _$$j } from "../8618/256463";
 import { j as _$$j2, p as _$$p } from "../8618/896045";
@@ -57,12 +57,12 @@ export function $$Q1({
   let c = useMemo(() => fZl?.getAllCooperTemplateTypeGroups() || [], []);
   let u = useMemo(() => ({
     format: e => {
-      if (gl(e)) return _$$t("common.mixed");
+      if (gl(e)) return getI18nString("common.mixed");
       for (let t of c) {
         let n = t.types.find(t => t.type === e);
         if (n) return n.name;
       }
-      return _$$t("cooper.inline_menu.template_type.formatter_custom");
+      return getI18nString("cooper.inline_menu.template_type.formatter_custom");
     }
   }), [c]);
   return jsx(_$$A, {
@@ -77,7 +77,7 @@ export function $$Q1({
         onClick: togglePopover,
         recordingKey: U,
         "aria-expanded": isPopoverOpen,
-        "aria-label": _$$t("cooper.inline_menu.template_type.dropdown_selection_button.aria_label"),
+        "aria-label": getI18nString("cooper.inline_menu.template_type.dropdown_selection_button.aria_label"),
         children: [jsx("span", {
           className: "template_type_dropdown_button--templateTypeDropdownDisplayText--23o6m ellipsis--ellipsis--Tjyfa",
           children: u.format(a)
@@ -105,7 +105,7 @@ function z({
 }) {
   let l = XH();
   let [s, o] = useState("");
-  let [a, c] = fp(Ku);
+  let [a, c] = useAtomValueAndSetter(Ku);
   let d = _$$U();
   let m = useCallback(e => {
     hS(l) && e !== l && (d("cooper_template_asset_type_changed", {
@@ -279,7 +279,7 @@ function Y({
     onClick: () => r(n.type),
     className: "template_type_dropdown_button--templateTypeRow--KFvpj",
     recordingKey: `${U}-${n.type}`,
-    "aria-label": _$$t("cooper.inline_menu.template_type.dropdown_selection_button.aria_label"),
+    "aria-label": getI18nString("cooper.inline_menu.template_type.dropdown_selection_button.aria_label"),
     children: [jsx("div", {
       className: "template_type_dropdown_button--selectedIconContainer--P5yNu",
       children: e && jsx(_$$l, {})
@@ -337,7 +337,7 @@ function Z() {
     className: "template_type_dropdown_button--dimensionsControlContainer--IIY39",
     children: [jsx($j, {
       bigNudgeAmount: c,
-      "data-tooltip": _$$t("fullscreen.properties_panel.transform_panel.width"),
+      "data-tooltip": getI18nString("fullscreen.properties_panel.transform_panel.width"),
       "data-tooltip-type": Ib.TEXT,
       disabled: void 0 === t || t === oV,
       dispatch: e,
@@ -348,11 +348,11 @@ function Z() {
       value: g,
       children: jsx("span", {
         className: `${O} svg`,
-        children: tx("fullscreen.properties_panel.transform_panel.w")
+        children: renderI18nText("fullscreen.properties_panel.transform_panel.w")
       })
     }), jsx($j, {
       bigNudgeAmount: c,
-      "data-tooltip": _$$t("fullscreen.properties_panel.transform_panel.height"),
+      "data-tooltip": getI18nString("fullscreen.properties_panel.transform_panel.height"),
       "data-tooltip-type": Ib.TEXT,
       disabled: void 0 === s || s === oV,
       dispatch: e,
@@ -363,7 +363,7 @@ function Z() {
       value: x,
       children: jsx("span", {
         className: `${O} svg`,
-        children: tx("fullscreen.properties_panel.transform_panel.h")
+        children: renderI18nText("fullscreen.properties_panel.transform_panel.h")
       })
     })]
   });

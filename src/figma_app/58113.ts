@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { $M } from "../figma_app/930338";
 import { B } from "../905/714743";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Cg, Gb, sw } from "../figma_app/534676";
 import { Lt } from "../figma_app/808294";
 import { PM, zF } from "../figma_app/45218";
@@ -50,7 +50,7 @@ export function $$m0({
   return jsxs("div", {
     className: "detail_engagement_row--detailEngagementRow--JLmtH",
     children: [jsxs(_, {
-      "data-tooltip": _$$t("community.try.people_like_this", {
+      "data-tooltip": getI18nString("community.try.people_like_this", {
         numPeople: e.like_count,
         numPeopleStr: E
       }),
@@ -59,7 +59,7 @@ export function $$m0({
         svg: _$$A
       }), E]
     }), jsx(h, {}), jsxs(_, {
-      "data-tooltip": _$$t("community.try.people_use_this", {
+      "data-tooltip": getI18nString("community.try.people_use_this", {
         numPeople: t,
         numPeopleStr: f
       }),

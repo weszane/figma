@@ -2,8 +2,8 @@ import { jsx } from "react/jsx-runtime";
 import { createContext, useState, useContext, useMemo, useEffect, useLayoutEffect } from "react";
 import { sYL, H$z } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
-import { sx } from "../905/449184";
+import { atomStoreManager } from "../figma_app/27355";
+import { trackEventAnalytics } from "../905/449184";
 import { nX } from "../905/617744";
 import { Z_ } from "../figma_app/793953";
 import { Kn, ap } from "../905/535806";
@@ -41,7 +41,7 @@ export function $$_0(e) {
 }
 export let $$A5 = createContext(0);
 export function $$y1(e) {
-  let t = zl.get(nX);
+  let t = atomStoreManager.get(nX);
   let {
     metrics,
     ...n
@@ -53,7 +53,7 @@ export function $$y1(e) {
     setDiffResult: H$z[n.setDiffResult],
     ...metrics
   };
-  sx("Branch Modal setDiff Performance Delta", r, {
+  trackEventAnalytics("Branch Modal setDiff Performance Delta", r, {
     forwardToDatadog: !0
   });
 }
@@ -103,7 +103,7 @@ export function $$b6(e) {
                 loadType: ap.TOTAL,
                 ...v
               };
-              sx("Branch Modal Load Backgrounded", i, {
+              trackEventAnalytics("Branch Modal Load Backgrounded", i, {
                 forwardToDatadog: !0
               });
             }
@@ -128,7 +128,7 @@ export function $$b6(e) {
         backgroundDurationMs: i,
         ...v
       };
-      sx("Branch Modal Source Diff Load Time", r, {
+      trackEventAnalytics("Branch Modal Source Diff Load Time", r, {
         forwardToDatadog: !0
       });
     }
@@ -145,7 +145,7 @@ export function $$b6(e) {
         ...v,
         ...Z_()
       };
-      sx("Branch Modal Load Time", r, {
+      trackEventAnalytics("Branch Modal Load Time", r, {
         forwardToDatadog: !0
       });
     }
@@ -163,7 +163,7 @@ export function $$b6(e) {
           backgroundDurationMs: i,
           ...v
         };
-        sx("Branch Modal Time to Browser Painted", r, {
+        trackEventAnalytics("Branch Modal Time to Browser Painted", r, {
           forwardToDatadog: !0
         });
       };
@@ -185,7 +185,7 @@ export function $$b6(e) {
         backgroundDurationMs: i,
         ...v
       };
-      sx("Branch Modal Conflicts Load Time", r, {
+      trackEventAnalytics("Branch Modal Conflicts Load Time", r, {
         forwardToDatadog: !0
       });
     }
@@ -193,7 +193,7 @@ export function $$b6(e) {
   useLayoutEffect(() => {
     if (!e.isDoneLoading && e.modalCloseIntent) {
       let e = Date.now() - t;
-      sx("Branch Modal Load Aborted", {
+      trackEventAnalytics("Branch Modal Load Aborted", {
         durationMs: e,
         backgrounded: i > 0,
         backgroundDurationMs: i,

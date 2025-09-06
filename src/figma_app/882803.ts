@@ -11,11 +11,11 @@ import { L as _$$L } from "../905/473569";
 import _ from "classnames";
 import { R7 } from "../905/508367";
 import { k as _$$k2 } from "../905/651849";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { _d } from "../figma_app/795674";
 import { Fe, uz } from "../905/284552";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Ib } from "../905/129884";
 import { j as _$$j, Y5, bb, _v, YC, TN, yG, qD, sf, Ct, It, tS, xE, CN, Yq, CY, ct, J_ } from "../905/765801";
 var h = _;
@@ -35,7 +35,7 @@ function $$A(e) {
   return `${minutes}:${String(seconds).padStart(2, "0")}`;
 }
 function x(e, t) {
-  e && (t ? (e.play(), Ay.safari && e.currentTime(.1)) : C(e) ? e.pause() : (Ay.safari && e.currentTime() > .1 && e.currentTime(e.currentTime() - .1), e.play()));
+  e && (t ? (e.play(), BrowserInfo.safari && e.currentTime(.1)) : C(e) ? e.pause() : (BrowserInfo.safari && e.currentTime() > .1 && e.currentTime(e.currentTime() - .1), e.play()));
 }
 export let $$N0 = memo(({
   src: e,
@@ -89,7 +89,7 @@ export let $$N0 = memo(({
     let e = !1;
     let t = p.videoJs(T.current, {
       muted: o,
-      autoplay: a && !Ay.safari,
+      autoplay: a && !BrowserInfo.safari,
       controls: !1,
       controlBar: !1,
       bigPlayButton: !1,
@@ -120,7 +120,7 @@ export let $$N0 = memo(({
     I && e && k(e, I);
   }, [k, e, I]);
   let M = useCallback(() => {
-    if (C || document.fullscreenElement) R7.exitFullscreenFunc();else if (Ay.isIpad) {
+    if (C || document.fullscreenElement) R7.exitFullscreenFunc();else if (BrowserInfo.isIpad) {
       let e = T.current;
       e?.webkitEnterFullscreen?.();
     } else {
@@ -143,7 +143,7 @@ export let $$N0 = memo(({
       children: jsx("video", {
         ref: T,
         crossOrigin: "anonymous",
-        controls: Ay.isIpad && C
+        controls: BrowserInfo.isIpad && C
       })
     }), jsx(w, {
       videoJsPlayer: I,
@@ -255,8 +255,8 @@ function w({
       size: "lg"
     })
   });
-  if (R.current = !0, Ay.isIpad && t) return null;
-  let z = t ? _$$t("whiteboard.video.minimize_tooltip") : _$$t("whiteboard.video.fullscreen_tooltip");
+  if (R.current = !0, BrowserInfo.isIpad && t) return null;
+  let z = t ? getI18nString("whiteboard.video.minimize_tooltip") : getI18nString("whiteboard.video.fullscreen_tooltip");
   return jsxs(Fragment, {
     children: [g ? null : H, jsxs("div", {
       className: h()(_v, !v && YC),
@@ -303,7 +303,7 @@ function O({
     let n = r.target.valueAsNumber;
     t && (t.volume(n), t.muted(0 === n), e());
   }, [e, t]);
-  let d = t?.muted() ? _$$t("whiteboard.video.unmute_tooltip") : _$$t("whiteboard.video.mute_tooltip");
+  let d = t?.muted() ? getI18nString("whiteboard.video.unmute_tooltip") : getI18nString("whiteboard.video.mute_tooltip");
   let c = t?.muted() ? jsx(_$$P, {}) : jsx(_$$L, {});
   return jsxs("div", {
     onPointerMove: () => a(!0),
@@ -316,7 +316,7 @@ function O({
         "data-tooltip": d
       },
       children: c
-    }), !Ay.isIpad && r ? jsx(R, {
+    }), !BrowserInfo.isIpad && r ? jsx(R, {
       volume: t?.volume() ?? 1,
       muted: t?.muted() ?? !1,
       handleChange: o
@@ -422,7 +422,7 @@ function L({
     }
   }, [c, y, b]);
   let T = Math.min(e / t * 100, 100);
-  Ay.safari && r && (T = 100);
+  BrowserInfo.safari && r && (T = 100);
   let I = T > 0 ? 8 : 0;
   return jsx("div", {
     className: It,

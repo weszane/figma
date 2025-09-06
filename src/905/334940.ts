@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useState, useLayoutEffect } from "react";
 import { bL, QB, rA, Rz } from "../905/174266";
 import { Z } from "../905/279476";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 export function $$l0({
   draft: e,
   customRetryAction: t = {}
@@ -25,24 +25,24 @@ export function $$l0({
   let l = (() => {
     let n = i.fieldsWithExceptionBySource.fetchInitialValue ?? [];
     if (n.length > 0) return {
-      message: _$$t("community.publishing.failed_to_load_fields"),
+      message: getI18nString("community.publishing.failed_to_load_fields"),
       retryAction: () => {
         t.fieldsFailedToLoad ? t.fieldsFailedToLoad(n) : n.forEach(e => e.resetValue());
       }
     };
     let r = i.fieldsWithExceptionBySource.validate ?? [];
     return r.length > 0 ? {
-      message: _$$t("community.publishing.failed_to_validate_fields"),
+      message: getI18nString("community.publishing.failed_to_validate_fields"),
       retryAction: () => {
         t.fieldsFailedToValidate ? t.fieldsFailedToValidate(r) : r.forEach(e => e.clearErrors?.());
       }
     } : i.draftHasExceptionFromSource.validate ? {
-      message: _$$t("community.publishing.failed_to_validate_form"),
+      message: getI18nString("community.publishing.failed_to_validate_form"),
       retryAction: () => {
         t.draftFailedToValidate ? t.draftFailedToValidate() : e.clearErrors?.();
       }
     } : i.draftHasExceptionFromSource.submit ? {
-      message: _$$t("community.publishing.failed_to_submit_form"),
+      message: getI18nString("community.publishing.failed_to_submit_form"),
       retryAction: () => {
         t.draftFailedToSubmit ? t.draftFailedToSubmit() : e.clearErrors?.();
       }
@@ -62,7 +62,7 @@ export function $$l0({
         children: l.message
       }), jsx(rA, {
         action: l.retryAction,
-        children: _$$t("community.actions.retry")
+        children: getI18nString("community.actions.retry")
       }), jsx(Rz, {})]
     })
   }) : null;

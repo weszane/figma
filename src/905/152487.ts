@@ -3,7 +3,7 @@ import { useMemo, useEffect } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { o as _$$o } from "../905/821217";
 import { J } from "../905/614223";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { s as _$$s } from "../cssbuilder/589278";
 import { b } from "../905/985254";
 import { fu } from "../figma_app/831799";
@@ -17,8 +17,8 @@ export function $$g0(e) {
   } = e;
   let g = useDispatch();
   let f = useSelector(e => e?.selectedView?.view === "fullscreen" && !e.mirror.appModel.showUi);
-  let _ = md(ze);
-  let A = md(As);
+  let _ = useAtomWithSubscription(ze);
+  let A = useAtomWithSubscription(As);
   let y = useMemo(() => _ ? {
     fileTeamId: A,
     fileKey: _

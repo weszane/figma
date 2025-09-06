@@ -4,7 +4,7 @@ import { useDispatch } from "../vendor/514228";
 import { E as _$$E } from "../905/632989";
 import o from "classnames";
 import { b as _$$b } from "../figma_app/556971";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { oz, o5 } from "../905/292918";
 import { oj, Ns, Kz } from "../905/760074";
 import { Um } from "../905/848862";
@@ -124,7 +124,7 @@ function A() {
     onClick: () => e(o5({
       trackingContextName: e0.EDITOR_TOOLBAR_ACTION
     })),
-    children: tx("fullscreen.filename_view.branch-count", {
+    children: renderI18nText("fullscreen.filename_view.branch-count", {
       BRANCHES: t
     })
   });

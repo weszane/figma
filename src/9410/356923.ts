@@ -7,13 +7,13 @@ import { Ez5, CNR } from "../figma_app/763686";
 import { nc } from "../905/189185";
 import { l as _$$l } from "../905/716947";
 import { Ay } from "@stylexjs/stylex";
-import { Xr, md, fp } from "../figma_app/27355";
+import { Xr, useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import h from "classnames";
 import { Point } from "../905/736624";
 import { oW } from "../905/675859";
 import { kt } from "../figma_app/858013";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { f as _$$f } from "../905/412913";
 import { wo } from "../figma_app/753501";
 import { Cu } from "../figma_app/314264";
@@ -39,7 +39,7 @@ export function $$P2({
   let i = r$();
   let s = Xr(VZ);
   let o = Xr(Ei);
-  let c = md(v2);
+  let c = useAtomWithSubscription(v2);
   let u = tS();
   let h = useDispatch();
   let g = "insert-slide-module";
@@ -149,7 +149,7 @@ function B({
   showSelectedState: s = !1
 }) {
   let o = r$();
-  let l = md(bY);
+  let l = useAtomWithSubscription(bY);
   return jsx("div", {
     "data-testid": t,
     className: m()(_$$s.p8.$, a),
@@ -187,7 +187,7 @@ function B({
 export function $$U0({
   template: e
 }) {
-  return md(bY).type === Vf.TEMPLATE_PICKER ? jsx(G, {
+  return useAtomWithSubscription(bY).type === Vf.TEMPLATE_PICKER ? jsx(G, {
     template: e
   }) : jsx(K, {
     template: e
@@ -201,7 +201,7 @@ function G({
     imageUrl,
     libraryKey
   } = fG()(e);
-  let [a, s] = fp(ux);
+  let [a, s] = useAtomValueAndSetter(ux);
   if (!libraryKey) return null;
   let o = () => s(_$$l(libraryKey));
   return jsx(B, {
@@ -227,7 +227,7 @@ function K({
   } = fG()(e);
   let a = Xr(bY);
   let o = r$();
-  let l = md(bY);
+  let l = useAtomWithSubscription(bY);
   let d = JY();
   let u = Xr(DM);
   if (!libraryKey) return null;
@@ -243,7 +243,7 @@ function K({
       parentView: l
     }));
   };
-  let m = o === Ji.OUTLINE_TO_DECK ? "Select template" : tx("slides.templates.view_template");
+  let m = o === Ji.OUTLINE_TO_DECK ? "Select template" : renderI18nText("slides.templates.view_template");
   return jsx(B, {
     text: name,
     dataTestId: "slidesTemplateCoverTile",

@@ -5,12 +5,12 @@ import { Component, PureComponent, createElement } from "react";
 import { connect } from "../vendor/514228";
 import { _ as _$$_ } from "../figma_app/496441";
 import { Gc } from "../905/63728";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { $J } from "../905/491152";
 import { h1 } from "../905/986103";
 import { f as _$$f } from "../905/671470";
 import { C as _$$C } from "../905/196436";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { sf } from "../905/929976";
 import { r } from "../905/620668";
 import { FFileType } from "../figma_app/191312";
@@ -50,18 +50,18 @@ let $$D3 = {
   mobileListSortKeys: [dt.NAME, dt.INSTALL_COUNT],
   sortKeyDescriptions: {
     [XU.GRID]: {
-      [dt.NAME]: tx("search.sort_option.name"),
-      [dt.AUTHOR_NAME]: tx("search.sort_option.creator"),
-      [dt.UPDATED_AT]: tx("search.sort_option.last_updated"),
-      [dt.INSTALL_COUNT]: tx("search.sort_option.saves"),
-      [dt.RELEVANCY]: tx("search.sort_option.relevance")
+      [dt.NAME]: renderI18nText("search.sort_option.name"),
+      [dt.AUTHOR_NAME]: renderI18nText("search.sort_option.creator"),
+      [dt.UPDATED_AT]: renderI18nText("search.sort_option.last_updated"),
+      [dt.INSTALL_COUNT]: renderI18nText("search.sort_option.saves"),
+      [dt.RELEVANCY]: renderI18nText("search.sort_option.relevance")
     },
     [XU.LIST]: {
-      [dt.NAME]: tx("search.sort_option.name"),
-      [dt.AUTHOR_NAME]: tx("search.sort_option.creator"),
-      [dt.UPDATED_AT]: tx("search.sort_option.last_updated"),
-      [dt.INSTALL_COUNT]: tx("search.sort_option.saves"),
-      [dt.RELEVANCY]: tx("search.sort_option.relevance")
+      [dt.NAME]: renderI18nText("search.sort_option.name"),
+      [dt.AUTHOR_NAME]: renderI18nText("search.sort_option.creator"),
+      [dt.UPDATED_AT]: renderI18nText("search.sort_option.last_updated"),
+      [dt.INSTALL_COUNT]: renderI18nText("search.sort_option.saves"),
+      [dt.RELEVANCY]: renderI18nText("search.sort_option.relevance")
     }
   },
   defaultOptions: {
@@ -72,7 +72,7 @@ let $$D3 = {
     }
   },
   includeSortDirection: e => -1 === [dt.RELEVANCY].indexOf(e),
-  settingsSpacer: Ay.tablet || Ay.mobile
+  settingsSpacer: BrowserInfo.tablet || BrowserInfo.mobile
 };
 let $$L2 = p_;
 export function $$F1(e, t) {

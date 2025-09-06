@@ -1,5 +1,5 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { Cg } from "../figma_app/471982";
 import s from "classnames";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -37,7 +37,7 @@ export function $$u0({
   return jsxs(Fragment, {
     children: [!Cg(e) && jsx(c, {
       address: e
-    }), t && tx("community.community_account_settings.vat_gst_id", {
+    }), t && renderI18nText("community.community_account_settings.vat_gst_id", {
       vatGstId: t
     })]
   });

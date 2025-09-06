@@ -12,7 +12,7 @@ import { Pt } from "../figma_app/806412";
 import { B as _$$B } from "../905/714743";
 import { S as _$$S } from "../905/177206";
 import { N as _$$N } from "../905/696319";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Y5 } from "../figma_app/455680";
 import { UK, sT } from "../figma_app/740163";
 import { hS, gl, SX } from "../905/216495";
@@ -169,7 +169,7 @@ function W({
       disabled: t,
       children: [jsx("div", {
         className: "grid_picker--gridWidgetLabel--ceNc2",
-        children: O ? _$$t("common.mixed") : jsxs("span", {
+        children: O ? getI18nString("common.mixed") : jsxs("span", {
           className: t ? G : "",
           children: [String(g), jsxs("span", {
             className: t ? G : z,
@@ -290,7 +290,7 @@ let q = memo(function ({
 }) {
   return jsx(Ht, {
     className: hF,
-    "data-tooltip": _$$t("fullscreen.properties_panel.grid.number_of_columns"),
+    "data-tooltip": getI18nString("fullscreen.properties_panel.grid.number_of_columns"),
     "data-tooltip-type": Ib.TEXT,
     dataTestId: "grid-columns",
     dispatch: lQ,
@@ -323,7 +323,7 @@ let J = memo(function ({
 }) {
   return jsx(Ht, {
     className: hF,
-    "data-tooltip": _$$t("fullscreen.properties_panel.grid.number_of_rows"),
+    "data-tooltip": getI18nString("fullscreen.properties_panel.grid.number_of_rows"),
     "data-tooltip-type": Ib.TEXT,
     dataTestId: "grid-rows",
     dispatch: lQ,
@@ -359,11 +359,11 @@ function ee({
   onReEnableHover: c,
   onCommit: d
 }) {
-  let u = _$$t("fullscreen.properties_panel.grid.columns_and_rows", {
+  let u = getI18nString("fullscreen.properties_panel.grid.columns_and_rows", {
     cellCol: i,
     cellRow: n
   });
-  let p = _$$t("fullscreen.properties_panel.grid.columns_x_rows", {
+  let p = getI18nString("fullscreen.properties_panel.grid.columns_x_rows", {
     cellCol: i,
     cellRow: n
   });
@@ -592,10 +592,10 @@ function ec({
         id: "grid-rows",
         dispatch: lQ,
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("fullscreen.properties_panel.grid.row_index"),
+        "data-tooltip": getI18nString("fullscreen.properties_panel.grid.row_index"),
         children: jsx("span", {
           className: `${QK} svg`,
-          children: _$$t("fullscreen.properties_panel.grid_panel.r")
+          children: getI18nString("fullscreen.properties_panel.grid_panel.r")
         })
       }),
       rightInput: jsx(Ht, {
@@ -605,10 +605,10 @@ function ec({
         id: "grid-columns",
         dispatch: lQ,
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("fullscreen.properties_panel.grid.column_index"),
+        "data-tooltip": getI18nString("fullscreen.properties_panel.grid.column_index"),
         children: jsx("span", {
           className: `${QK} svg`,
-          children: _$$t("fullscreen.properties_panel.grid_panel.c")
+          children: getI18nString("fullscreen.properties_panel.grid_panel.c")
         })
       }),
       icon: null
@@ -622,7 +622,7 @@ function ec({
         id: "grid-rows",
         dispatch: lQ,
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("fullscreen.properties_panel.grid.vertical_span"),
+        "data-tooltip": getI18nString("fullscreen.properties_panel.grid.vertical_span"),
         children: jsx(_$$B, {
           svg: _$$A6,
           className: QK
@@ -635,7 +635,7 @@ function ec({
         id: "grid-columns",
         dispatch: lQ,
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("fullscreen.properties_panel.grid.horizontal_span"),
+        "data-tooltip": getI18nString("fullscreen.properties_panel.grid.horizontal_span"),
         children: jsx(_$$B, {
           svg: _$$A5,
           className: QK
@@ -684,10 +684,10 @@ function ed({
   }, [t]);
   return t ? jsx(Fragment, {
     children: jsx(fn, {
-      leftLabel: _$$t("fullscreen.properties_panel.grid.column_span"),
-      rightLabel: _$$t("fullscreen.properties_panel.grid.row_span"),
+      leftLabel: getI18nString("fullscreen.properties_panel.grid.column_span"),
+      rightLabel: getI18nString("fullscreen.properties_panel.grid.row_span"),
       leftInput: jsx(_$$N, {
-        "aria-label": _$$t("fullscreen.properties_panel.grid.column_span"),
+        "aria-label": getI18nString("fullscreen.properties_panel.grid.column_span"),
         formatter: n,
         value: t.columnSpan,
         onChange: (e, {
@@ -704,7 +704,7 @@ function ed({
         "data-testid": "grid-column-span-input"
       }),
       rightInput: jsx(_$$N, {
-        "aria-label": _$$t("fullscreen.properties_panel.grid.row_span"),
+        "aria-label": getI18nString("fullscreen.properties_panel.grid.row_span"),
         formatter: r,
         value: t.rowSpan,
         onChange: (e, {
@@ -744,8 +744,8 @@ function ep({
   let t = kl("isInstanceSelected");
   let n = kl("isNonEditableInstanceSublayerSelected");
   return "GRID" !== kl("stackMode") ? null : jsx(iZ, {
-    leftLabel: _$$t("fullscreen.properties_panel.stack_panel.grid"),
-    rightLabel: _$$t("fullscreen.properties_panel.section_autoLayout.label_gap"),
+    leftLabel: getI18nString("fullscreen.properties_panel.stack_panel.grid"),
+    rightLabel: getI18nString("fullscreen.properties_panel.section_autoLayout.label_gap"),
     leftInput: jsx(Y, {
       recordingKey: Pt(e, "gridPicker"),
       disabled: !!(t || n)
@@ -780,7 +780,7 @@ function eg({
   }, [h]);
   let m = jsx($j, {
     bigNudgeAmount,
-    "data-tooltip": _$$t("fullscreen.properties_panel.grid.gap_between_columns"),
+    "data-tooltip": getI18nString("fullscreen.properties_panel.grid.gap_between_columns"),
     "data-tooltip-type": Ib.TEXT,
     dataTestId: "grid-col-spacing-control",
     dispatch: lQ,
@@ -826,7 +826,7 @@ function e_({
   }, [h]);
   let m = jsx($j, {
     bigNudgeAmount,
-    "data-tooltip": _$$t("fullscreen.properties_panel.grid.gap_between_rows"),
+    "data-tooltip": getI18nString("fullscreen.properties_panel.grid.gap_between_rows"),
     "data-tooltip-type": Ib.TEXT,
     dataTestId: "grid-row-spacing-control",
     dispatch: lQ,

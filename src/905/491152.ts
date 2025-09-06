@@ -1,11 +1,11 @@
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { y } from "../905/409121";
 export function $$a1(e) {
   if (!e.keyShortcutKey) return "";
   let t = y.isApple();
   var i = t ? "\u2318" : "Ctrl+";
   e.keyShortcutShift && (i += t ? "\u21E7" : "Shift+");
-  e.keyShortcutOption && (i += t ? "\u2325" : Ay.chromeos ? "Search+" : "Alt+");
+  e.keyShortcutOption && (i += t ? "\u2325" : BrowserInfo.chromeos ? "Search+" : "Alt+");
   return `   ${i}${e.keyShortcutKey}`;
 }
 export function $$s0(e) {

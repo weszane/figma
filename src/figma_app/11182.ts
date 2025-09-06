@@ -1,5 +1,5 @@
 import { Dk } from "../figma_app/623293";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { to } from "../905/156213";
 import { Np } from "../figma_app/193867";
@@ -14,7 +14,7 @@ let $$c3 = nF((e, t) => {
   Dk(r, s).then(() => {
     e.dispatch(F.enqueue({
       type: "copied_to_clipboard",
-      message: s.successText ?? _$$t("fullscreen_actions.copied_to_clipboard")
+      message: s.successText ?? getI18nString("fullscreen_actions.copied_to_clipboard")
     }));
   });
 });
@@ -24,7 +24,7 @@ let $$u0 = nF((e, t) => {
   let o = r.join("; ");
   Dk(o).then(() => {
     e.dispatch(F.enqueue({
-      message: _$$t("copy_to_clipboard.emails_copied_to_clipboard", {
+      message: getI18nString("copy_to_clipboard.emails_copied_to_clipboard", {
         numEmails: s,
         emailText: o
       }),
@@ -57,21 +57,21 @@ let $$h1 = nF(async (e, t) => {
   let o = t.url;
   switch (t.linkType ?? "selection") {
     case "template":
-      r = _$$t("copy_to_clipboard.template_share_link_copied");
+      r = getI18nString("copy_to_clipboard.template_share_link_copied");
       break;
     case "project":
     case "team":
     case "link":
-      r = _$$t("copy_to_clipboard.link_copied_to_clipboard");
+      r = getI18nString("copy_to_clipboard.link_copied_to_clipboard");
       break;
     case "plugin":
-      r = _$$t("copy_to_clipboard.link_to_plugin_copied_to_clipboard");
+      r = getI18nString("copy_to_clipboard.link_to_plugin_copied_to_clipboard");
       break;
     case "widget":
-      r = _$$t("copy_to_clipboard.link_to_widget_copied_to_clipboard");
+      r = getI18nString("copy_to_clipboard.link_to_widget_copied_to_clipboard");
       break;
     default:
-      r = _$$t("copy_to_clipboard.link_to_selection_copied_to_clipboard");
+      r = getI18nString("copy_to_clipboard.link_to_selection_copied_to_clipboard");
   }
   try {
     await Dk(o);

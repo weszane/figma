@@ -3,13 +3,13 @@ import { useDispatch } from "../vendor/514228";
 import { $n } from "../905/521428";
 import { Rs } from "../figma_app/288654";
 import { _, S } from "../figma_app/490799";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { sf } from "../905/929976";
 import { FOrganizationLevelType, FPlanNameType } from "../figma_app/191312";
 import { wVD } from "../figma_app/43951";
 import { S2, px, Um } from "../figma_app/465071";
 import { J7, SN } from "../figma_app/650409";
-import { Iv, F9 } from "../905/548208";
+import { DashboardSections, MemberSections } from "../905/548208";
 export function $$g1(e, t) {
   let i = S2().unwrapOr(null);
   let n = px();
@@ -49,8 +49,8 @@ export function $$f0({
       view: "teamAdminConsole",
       teamId: u.key.parentId,
       isProTeam: u.tier === FPlanNameType.PRO,
-      teamAdminConsoleViewTab: Iv.CONTENT,
-      teamAdminConsoleViewSecondaryTab: F9.CONNECTED_PROJECTS,
+      teamAdminConsoleViewTab: DashboardSections.CONTENT,
+      teamAdminConsoleViewSecondaryTab: MemberSections.CONNECTED_PROJECTS,
       showResourceConnectionFlyout: e
     })), t && t());
   };
@@ -60,7 +60,7 @@ export function $$f0({
     },
     children: jsx(_, {
       color: S.PLAIN,
-      text: tx("resources_tab.libraries.external_teams_have_access", {
+      text: renderI18nText("resources_tab.libraries.external_teams_have_access", {
         connectedProjects: (() => {
           if (e?.length) {
             let t = e[0]?.projectLimitedInfo?.name;
@@ -75,7 +75,7 @@ export function $$f0({
               onClick: () => {
                 g();
               },
-              children: tx("resources_tab.libraries.connected_projects")
+              children: renderI18nText("resources_tab.libraries.connected_projects")
             });
           }
         })()

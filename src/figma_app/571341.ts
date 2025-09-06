@@ -8,19 +8,19 @@ import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { AWq, juq } from "../figma_app/763686";
 import { ReduxSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { zl, eU, fp } from "../figma_app/27355";
+import { atomStoreManager, atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { ei, E1 } from "../figma_app/9054";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { parsePxNumber } from "../figma_app/783094";
 import { h as _$$h } from "../905/207101";
 import { l as _$$l } from "../905/745972";
 import { Rs } from "../figma_app/288654";
 import { tT } from "../905/723791";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { Ss } from "../905/720292";
 import { Nf, ec } from "../figma_app/449837";
 import { qc } from "../figma_app/858013";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { t as _$$t } from "../905/241707";
 import { lW } from "../figma_app/11182";
 import { tS, q5 } from "../figma_app/516028";
@@ -47,7 +47,7 @@ export function $$V13(e, t) {
   let n = useSelector(e => e.mirror.appModel.currentPage);
   let i = t ?? n;
   let s = useSelector(e => e.fileVersion);
-  return !!r && !!i && !!e && cn(r, i, e, NK(s)) === zl.get(tP);
+  return !!r && !!i && !!e && cn(r, i, e, NK(s)) === atomStoreManager.get(tP);
 }
 export function $$H7(e) {
   let t = new Map();
@@ -71,7 +71,7 @@ export function $$z8(e) {
     enabled: !!t
   });
   useEffect(() => {
-    "errors" === o.status && $D(_$$e.FEEDBACK, Error(`Version fetch in CC error: ${o.errors}`));
+    "errors" === o.status && reportError(_$$e.FEEDBACK, Error(`Version fetch in CC error: ${o.errors}`));
   }, [o.status]);
   return {
     versions: o.data || [],
@@ -79,7 +79,7 @@ export function $$z8(e) {
   };
 }
 mg.COMPARE_THUMBNAIL;
-let W = eU("");
+let W = atom("");
 export function $$K1(e) {
   let t = q5();
   let r = t?.key;
@@ -89,27 +89,27 @@ export function $$K1(e) {
   }, {
     enabled: !!r && !!e
   });
-  let [a, o] = fp(W);
+  let [a, o] = useAtomValueAndSetter(W);
   _$$h(() => o(""));
   return useMemo(() => {
     if ("loaded" === n.status) {
       let t = n.data.file;
       if (t.status === tT.Error) {
-        $D(_$$e.DEVELOPER_TOOLS, Error("[Dev mode activity] Error fetching activity log: File error = " + t.error));
+        reportError(_$$e.DEVELOPER_TOOLS, Error("[Dev mode activity] Error fetching activity log: File error = " + t.error));
         return null;
       }
       let r = t.data?.devModeActivity;
       if (!t.data || !r || 0 === r.length) return [];
       let i = r.filter(e => e.activityType === FEventType.STATUS_CHANGE).sort((e, t) => t.timestamp.getTime() - e.timestamp.getTime());
       let l = `${e} - ${i.length}`;
-      e && l !== a && (o(l), sx("dev_mode.activity.fetch_activity_log", {
+      e && l !== a && (o(l), trackEventAnalytics("dev_mode.activity.fetch_activity_log", {
         numEntries: i.length
       }, {
         forwardToDatadog: !0
       }));
       return i;
     }
-    return "errors" === n.status ? ($D(_$$e.DEVELOPER_TOOLS, Error("[Dev mode activity] Error fetching activity log: " + JSON.stringify(n.errors))), null) : "loading" === n.status ? "loading" : null;
+    return "errors" === n.status ? (reportError(_$$e.DEVELOPER_TOOLS, Error("[Dev mode activity] Error fetching activity log: " + JSON.stringify(n.errors))), null) : "loading" === n.status ? "loading" : null;
   }, [n, a, e, o]);
 }
 export function $$Y0(e) {
@@ -212,7 +212,7 @@ export function $$q4(e) {
       children: header
     }), !d && jsx("div", {
       className: $0,
-      children: !hideNoImageText && tx("collaboration.feedback.compare_changes_modal.no_image_found")
+      children: !hideNoImageText && renderI18nText("collaboration.feedback.compare_changes_modal.no_image_found")
     }), X(e.image) ? jsx(Nf, {
       className: Sl,
       style: {

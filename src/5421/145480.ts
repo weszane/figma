@@ -4,10 +4,10 @@ import { MO, hq, UQ } from "../2824/40443";
 import { glU } from "../figma_app/763686";
 import { l7, zk } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { Xt } from "../figma_app/623293";
 import { XHRError } from "../905/910117";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { zX } from "../905/576487";
 import { Ze } from "../figma_app/540726";
@@ -52,11 +52,11 @@ let N = () => {
     t.current = window.setTimeout(() => {
       e(F.enqueue({
         type: j,
-        message: _$$t("figmake.m2d.converting_make_to_design"),
+        message: getI18nString("figmake.m2d.converting_make_to_design"),
         icon: zX.SPINNER,
         timeoutOverride: 1 / 0,
         button: {
-          text: _$$t("general.cancel"),
+          text: getI18nString("general.cancel"),
           action: n
         }
       }));
@@ -65,7 +65,7 @@ let N = () => {
   let r = useCallback(t => {
     e(F.enqueue({
       type: "copied-to-clipboard",
-      message: "clipboard" === t ? _$$t("figmake.m2d.copied_to_clipboard") : _$$t("figmake.m2d.pasted_to_canvas"),
+      message: "clipboard" === t ? getI18nString("figmake.m2d.copied_to_clipboard") : getI18nString("figmake.m2d.pasted_to_canvas"),
       icon: zX.CHECK
     }));
   }, [e]);
@@ -75,14 +75,14 @@ let N = () => {
     showError: useCallback(() => {
       e(F.enqueue({
         type: "error",
-        message: _$$t("figmake.m2d.failed_to_copy"),
+        message: getI18nString("figmake.m2d.failed_to_copy"),
         icon: zX.EXCLAMATION
       }));
     }, [e]),
     showHtmlSizeError: useCallback(() => {
       e(F.enqueue({
         type: "html-too-large",
-        message: _$$t("figmake.m2d.html_too_large"),
+        message: getI18nString("figmake.m2d.html_too_large"),
         icon: zX.EXCLAMATION
       }));
     }, [e]),
@@ -114,7 +114,7 @@ export function $$S1() {
   let {
     componentPreviewState
   } = k();
-  let C = md(f3);
+  let C = useAtomWithSubscription(f3);
   useEffect(() => () => {
     cleanup();
   }, [cleanup]);

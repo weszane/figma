@@ -3,10 +3,10 @@ import { useCallback, useMemo } from "react";
 import { useSelector } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { getFeatureFlags } from "../905/601108";
-import { md } from "../figma_app/27355";
-import { sx } from "../905/449184";
+import { useAtomWithSubscription } from "../figma_app/27355";
+import { trackEventAnalytics } from "../905/449184";
 import { XHR } from "../905/910117";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { E } from "../905/453826";
 import { e as _$$e } from "../905/621515";
@@ -32,7 +32,7 @@ function P() {
         width: "100%"
       })
     }), jsx(ak, {
-      children: tx("rcs.mobile_comment_reply_upsell_page1.description")
+      children: renderI18nText("rcs.mobile_comment_reply_upsell_page1.description")
     })]
   });
 }
@@ -44,7 +44,7 @@ function I() {
       }).$,
       children: jsx(_$$T, {})
     }), jsx(ak, {
-      children: tx("rcs.mobile_comment_reply_upsell_page2.description")
+      children: renderI18nText("rcs.mobile_comment_reply_upsell_page2.description")
     })]
   });
 }
@@ -52,7 +52,7 @@ let $$T = "dismissed_mobile_replies_upsell";
 let M = r1($$T);
 let $$E1 = "commentSubmitted";
 export function $$N0() {
-  let e = md(M);
+  let e = useAtomWithSubscription(M);
   let t = useSelector(e => e.userAnalyticsData?.is_active_mobile_user);
   let n = _$$e({
     overlay: $T1,
@@ -72,28 +72,28 @@ export function $$N0() {
     label: e,
     onClick: e => {
       XHR.post("/api/send_mobile_download_email");
-      sx("post_comment_mobile_app_download_prompt_email_me_cta_clicked");
+      trackEventAnalytics("post_comment_mobile_app_download_prompt_email_me_cta_clicked");
       n.complete();
       e(F.enqueue({
-        message: _$$t("rcs.mobile_comment_reply_upsell.email_sent")
+        message: getI18nString("rcs.mobile_comment_reply_upsell.email_sent")
       }));
     },
     textForTracking: () => e
   }), [n]);
   let w = useMemo(() => [{
     element: P,
-    additionalButton: C(_$$t("rcs.mobile_comment_reply_upsell.email_me")),
-    ctaText: _$$t("rcs.mobile_comment_reply_upsell.download_via_qr_code"),
+    additionalButton: C(getI18nString("rcs.mobile_comment_reply_upsell.email_me")),
+    ctaText: getI18nString("rcs.mobile_comment_reply_upsell.download_via_qr_code"),
     ctaOnClick: () => {
-      sx("post_comment_mobile_app_download_prompt_qr_code_cta_clicked");
+      trackEventAnalytics("post_comment_mobile_app_download_prompt_qr_code_cta_clicked");
     },
     onManualDismiss: () => {
-      sx("post_comment_mobile_app_download_prompt_dismissed");
+      trackEventAnalytics("post_comment_mobile_app_download_prompt_dismissed");
     }
   }, {
     element: I,
-    additionalButton: C(_$$t("rcs.mobile_comment_reply_upsell.email_me_instead")),
-    ctaText: _$$t("rcs.rcs_shared.done"),
+    additionalButton: C(getI18nString("rcs.mobile_comment_reply_upsell.email_me_instead")),
+    ctaText: getI18nString("rcs.rcs_shared.done"),
     ctaOnClick: lQ,
     onManualDismiss: lQ
   }], [C]);
@@ -115,7 +115,7 @@ export function $$N0() {
       n.complete();
       e.onManualDismiss();
     },
-    title: () => _$$t("rcs.mobile_comment_reply_upsell.title"),
+    title: () => getI18nString("rcs.mobile_comment_reply_upsell.title"),
     totalNumSteps: 2,
     trackingContextName: "mobile_reply_upsell",
     userFlagOnShow: $$T

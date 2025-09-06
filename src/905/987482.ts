@@ -4,7 +4,7 @@ import { A as _$$A } from "../905/920165";
 import { w_, Ih } from "../figma_app/273493";
 import { o6 } from "../figma_app/806412";
 import { Point } from "../905/736624";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/989956";
 import { Eh } from "../figma_app/837840";
 import { Ep } from "../figma_app/504823";
@@ -92,7 +92,7 @@ function A(e) {
     return `linear-gradient(90deg, ${i.join(", ")})`;
   }("calc(var(--fpl-slider-height) / 2)", t), [t]);
   return jsx(_$$A, {
-    "aria-label": _$$t("fullscreen.color_controls.hue"),
+    "aria-label": getI18nString("fullscreen.color_controls.hue"),
     bigStep: 10,
     loop: !0,
     max: 359,

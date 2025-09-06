@@ -1,5 +1,5 @@
 import { Et } from "../figma_app/397267";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 var $$a7 = (e => (e.MINUTES = "minutes", e.HOURS = "hours", e.DAYS = "days", e))($$a7 || {});
 let $$s1 = 60;
 let $$o6 = 3600;
@@ -14,11 +14,11 @@ export function $$u3(e, t) {
   };
   switch (e) {
     case "minutes":
-      return tx("settings_tab.idle_session_timeout.time.minutes", r);
+      return renderI18nText("settings_tab.idle_session_timeout.time.minutes", r);
     case "hours":
-      return tx("settings_tab.idle_session_timeout.time.hours", r);
+      return renderI18nText("settings_tab.idle_session_timeout.time.hours", r);
     case "days":
-      return tx("settings_tab.idle_session_timeout.time.days", r);
+      return renderI18nText("settings_tab.idle_session_timeout.time.days", r);
   }
 }
 export function $$p4(e) {

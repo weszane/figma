@@ -1,10 +1,10 @@
 import { useMemo, useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { glU } from "../figma_app/763686";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { A as _$$A } from "../905/920142";
 import { F } from "../905/241044";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { zX, Ox } from "../905/576487";
 import { Ce, to } from "../905/156213";
@@ -82,7 +82,7 @@ let b = Ju(function (e) {
     currentImage: S,
     historicImage: I,
     modalError: _,
-    modalTitle: _$$t("collaboration.feedback.compare_changes_modal.header"),
+    modalTitle: getI18nString("collaboration.feedback.compare_changes_modal.header"),
     nodeId,
     onCloseModal: k,
     origin: "cc_versions",
@@ -115,15 +115,15 @@ export function $$I0(e, t, i, n) {
     }
     t(_$$F.dequeue({}));
     t(_$$F.enqueue({
-      message: _$$t("collaboration.feedback.compare_changes_modal.action_text", {
+      message: getI18nString("collaboration.feedback.compare_changes_modal.action_text", {
         lastEditedBy: r,
         lastEditedAt: _$$A(i.touched_at).fromNow()
       }),
       type: "view_changes",
       button: {
-        text: _$$t("collaboration.feedback.compare_changes_modal.action_button"),
+        text: getI18nString("collaboration.feedback.compare_changes_modal.action_button"),
         action: () => {
-          sx("version_diffing_performance_metrics", {
+          trackEventAnalytics("version_diffing_performance_metrics", {
             name: "diffing_modal_cta_clicked",
             entrypoint: "figma_design_version_history"
           });

@@ -8,11 +8,11 @@ import { l as _$$l } from "../905/716947";
 import { Ay } from "@stylexjs/stylex";
 import { k9 } from "../905/19536";
 import m from "classnames";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { getInitialOptions } from "../figma_app/169182";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { to } from "../figma_app/828186";
 import { fC } from "../figma_app/968813";
 import { fi, zK } from "../figma_app/913823";
@@ -36,7 +36,7 @@ import { e as _$$e } from "../1291/265452";
 import { ik, mk, cX, hY } from "../figma_app/920333";
 import { ZA } from "../1291/533467";
 import { throwTypeError } from "../figma_app/465776";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { lW } from "../figma_app/850075";
 import { ow } from "../figma_app/976749";
 import { qp } from "../905/977779";
@@ -63,7 +63,7 @@ let J = {
   }
 };
 function Z(e) {
-  let t = md(qp);
+  let t = useAtomWithSubscription(qp);
   let s = e.libraryKey ? t[e.libraryKey]?.name : void 0;
   let n = lW(!!e.showAttribution);
   let r = e.title ?? s ?? "";
@@ -291,7 +291,7 @@ export function $$eo1({
   let {
     fileVersion,
     loadingState
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     fileVersion: e.fileVersion,
     loadingState: e.loadingState,
     library: e.library
@@ -344,14 +344,14 @@ export function $$eo1({
     name: "stickers",
     children: [!e_ && !V.query && !Y && jsx(_$$W, {
       dismissable: !0,
-      buttonText: _$$t("whiteboard.inserts.libraries_update"),
-      formatBannerText: e => _$$t("whiteboard.inserts.libraries_component_update_count", {
+      buttonText: getI18nString("whiteboard.inserts.libraries_update"),
+      formatBannerText: e => getI18nString("whiteboard.inserts.libraries_component_update_count", {
         numUpdates: e
       })
     }), W, (e_ || eo) && jsx(ZA, {}), ed && jsxs(Fragment, {
       children: [jsx("h2", {
         ...Ay.props(er.sectionTitle, Y ? er.bodyMediumSectionTitleText : er.bodyLargeSectionTitleText, Y && er.cooperRecentsHeader),
-        children: tx("whiteboard.inserts.recents")
+        children: renderI18nText("whiteboard.inserts.recents")
       }), jsx(lU, {
         items: {
           "": el
@@ -364,18 +364,18 @@ export function $$eo1({
       ...Ay.props(er.libraryHeader, er.libraryHeaderButton, Y && er.cooperLibraryHeader, Y && ed && er.cooperLibraryHeaderLessPadding),
       children: [jsx("h2", {
         ...Ay.props(er.bodyMediumSectionTitleText),
-        children: tx("whiteboard.inserts.libraries")
+        children: renderI18nText("whiteboard.inserts.libraries")
       }), jsx("button", {
         onClick: onToggleLibraryModal,
         "data-onboarding-key": _$$D,
         children: jsx("div", {
           className: "libraries_tab--secondaryButton--fxK2n ellipsis--ellipsis--Tjyfa text--fontPos11--2LvXf text--_fontBase--QdLsd",
-          children: tx("cooper.inserts.add_library")
+          children: renderI18nText("cooper.inserts.add_library")
         })
       })]
     }), "large" === l && jsx("h2", {
       ...Ay.props(er.sectionTitle, Y ? er.bodyMediumSectionTitleText : er.bodyLargeSectionTitleText),
-      children: tx("whiteboard.inserts.libraries")
+      children: renderI18nText("whiteboard.inserts.libraries")
     }), jsxs("div", {
       className: "libraries_tab--librariesTwoColumns--dSOU-",
       children: ["large" === l && ec && jsx("div", {
@@ -389,14 +389,14 @@ export function $$eo1({
             svg: _$$A2
           }), jsx("span", {
             className: _$$s.colorText.$,
-            children: tx("whiteboard.inserts.add_your_own")
+            children: renderI18nText("whiteboard.inserts.add_your_own")
           })]
         })
       }), r && q && ef.length ? jsx(Z, {
         fileKey: q.libraryKey,
         libraryKey: _$$l(q.libraryKey),
         items: ef,
-        title: _$$t("design_systems.assets_panel.local_components"),
+        title: getI18nString("design_systems.assets_panel.local_components"),
         onClick: e => {
           em({
             id: q.libraryKey,
@@ -483,7 +483,7 @@ export function $$ec0() {
   let {
     fileVersion,
     loadingState
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     fileVersion: e.fileVersion,
     loadingState: e.loadingState
   }));

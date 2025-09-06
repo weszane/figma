@@ -14,20 +14,20 @@ import { e as _$$e } from "../905/693478";
 import { CWU, glU, bwI, uXg, HG$ } from "../figma_app/763686";
 import { Ay } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
-import { md, fp } from "../figma_app/27355";
-import { az } from "../905/449184";
+import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
+import { analyticsEventManager } from "../905/449184";
 import { ZC } from "../figma_app/39751";
 import { buildUploadUrl } from "../figma_app/169182";
 import { Uz } from "../905/63728";
 import { Rs } from "../figma_app/288654";
 import { r as _$$r } from "../905/520829";
-import { Ay as _$$Ay } from "../figma_app/778880";
-import { x1 } from "../905/714362";
+import { BrowserInfo } from "../figma_app/778880";
+import { logError } from "../905/714362";
 import { oW } from "../905/675859";
 import { O as _$$O } from "../905/257139";
 import { oz, zq } from "../figma_app/782261";
 import { IW } from "../figma_app/563413";
-import { t as _$$t, tx as _$$tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { oB, j7 } from "../905/929976";
 import { TS, ZS, iA } from "../figma_app/519839";
 import { Ce, to as _$$to } from "../905/156213";
@@ -85,7 +85,7 @@ import { bL as _$$bL, mc, c$ } from "../905/493196";
 import { WM, l9 } from "../905/408073";
 import { r as _$$r3 } from "../905/571562";
 import { g as _$$g } from "../905/687265";
-import { R as _$$R2 } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { ms, MM, c$ as _$$c$ } from "../figma_app/236327";
 import { kt } from "../figma_app/858013";
 import { G as _$$G } from "../905/750789";
@@ -177,10 +177,10 @@ function ey() {
     fullWidth: !0,
     children: [jsx(_$$k, {}), jsx("span", {
       className: "xiqqdae xkezfkh",
-      children: _$$t("figmake.ds_imports.extract_library_header")
+      children: getI18nString("figmake.ds_imports.extract_library_header")
     }), jsx("span", {
       className: "xet2fuk x1n0bwc9 x17akokd",
-      children: _$$t("figmake.ds_imports.extract_library_subheader")
+      children: getI18nString("figmake.ds_imports.extract_library_subheader")
     })]
   }) : state === qy.DONE ? e = jsxs(_$$B2, {
     justify: "space-between",
@@ -190,21 +190,21 @@ function ey() {
         className: "xj1m54o"
       }), jsx("span", {
         className: "xiqqdae xkezfkh",
-        children: _$$t("figmake.ds_imports.extract_library_header_done")
+        children: getI18nString("figmake.ds_imports.extract_library_header_done")
       }), jsx("span", {
         className: "xet2fuk x1n0bwc9 x17akokd",
-        children: _$$t("figmake.ds_imports.extract_library_subheader_done")
+        children: getI18nString("figmake.ds_imports.extract_library_subheader_done")
       })]
     }), jsx($n, {
       onClick: e => {
         e.preventDefault();
-        i && az.trackDefinedEvent("ds_import.publish_toast_go_to_figmake_clicked", {
+        i && analyticsEventManager.trackDefinedEvent("ds_import.publish_toast_go_to_figmake_clicked", {
           library_key: i
         });
         close();
         o();
       },
-      children: _$$t("figmake.ds_imports.extract_library_go_to_figma_make")
+      children: getI18nString("figmake.ds_imports.extract_library_go_to_figma_make")
     })]
   }) : state === qy.ERROR && (e = jsxs(_$$B2, {
     justify: "space-between",
@@ -214,21 +214,21 @@ function ey() {
         className: "x1taaqhk"
       }), jsx("span", {
         className: "xiqqdae xkezfkh",
-        children: _$$t("figmake.ds_imports.extract_library_error")
+        children: getI18nString("figmake.ds_imports.extract_library_error")
       })]
     }), jsx($n, {
       onClick: () => {
-        i && az.trackDefinedEvent("ds_import.publish_toast_retry_clicked", {
+        i && analyticsEventManager.trackDefinedEvent("ds_import.publish_toast_retry_clicked", {
           library_key: i
         });
         start();
       },
-      children: _$$t("figmake.ds_imports.extract_library_error_button")
+      children: getI18nString("figmake.ds_imports.extract_library_error_button")
     })]
   }));
   return jsx(_$$y, {
     onDismiss: () => {
-      i && az.trackDefinedEvent("ds_import.publish_toast_closed", {
+      i && analyticsEventManager.trackDefinedEvent("ds_import.publish_toast_closed", {
         library_key: i
       });
       close();
@@ -304,7 +304,7 @@ function eW(e) {
     currentOrgId,
     orgById,
     dropdownShown
-  } = _$$R2(e => ({
+  } = selectWithShallowEqual(e => ({
     teams: e.teams,
     currentOrgId: e.currentUserOrgId,
     orgById: e.orgById,
@@ -324,21 +324,21 @@ function eW(e) {
   let I = e => {
     switch (e) {
       case FContainerType.ORG:
-        if (v) return _$$t("design_systems.publishing_modal.everyone_at_org", {
+        if (v) return getI18nString("design_systems.publishing_modal.everyone_at_org", {
           orgName: v
         });
         return;
       case FContainerType.WORKSPACE:
-        if (hasWorkspace && workspaceName) return _$$t("design_systems.publishing_modal.everyone_at_workspace", {
+        if (hasWorkspace && workspaceName) return getI18nString("design_systems.publishing_modal.everyone_at_workspace", {
           workspaceName
         });
-        return _$$t("design_systems.publishing_modal.everyone_at_this_file_s_workspace");
+        return getI18nString("design_systems.publishing_modal.everyone_at_this_file_s_workspace");
       case FContainerType.TEAM:
         let t = b?.name;
-        if (t) return _$$t("design_systems.publishing_modal.everyone_at_team", {
+        if (t) return getI18nString("design_systems.publishing_modal.everyone_at_team", {
           teamName: t
         });
-        return _$$t("design_systems.publishing_modal.org_access_false_without_team_access");
+        return getI18nString("design_systems.publishing_modal.org_access_false_without_team_access");
     }
   };
   let E = [FContainerType.ORG, ...(hasWorkspace ? [FContainerType.WORKSPACE] : []), FContainerType.TEAM];
@@ -389,7 +389,7 @@ function eW(e) {
     children: getFeatureFlags().dse_fpl_wave_2 ? jsxs(_$$Y2, {
       children: [jsx(_$$J, {
         htmlFor: _,
-        children: _$$tx("design_systems.publishing_modal.publish_to_label")
+        children: renderI18nText("design_systems.publishing_modal.publish_to_label")
       }), jsxs(_$$bL, {
         value: e.publishScope,
         onChange: onPublishScopeChange,
@@ -402,7 +402,7 @@ function eW(e) {
           }, e))
         })]
       })]
-    }) : _$$tx("design_systems.publishing_modal.publish_to", {
+    }) : renderI18nText("design_systems.publishing_modal.publish_to", {
       audienceDropdown: S
     })
   });
@@ -441,7 +441,7 @@ function eY({
       pathFill: "#4B4B4B"
     }), jsx("span", {
       className: _$$s.truncate.$,
-      children: _$$tx("design_systems.publishing_modal.assembling_components_styles_and_variables")
+      children: renderI18nText("design_systems.publishing_modal.assembling_components_styles_and_variables")
     })]
   });
 }
@@ -460,16 +460,16 @@ function eq({
   if (!l && !d) return null;
   let c = jsx(_$$E, {
     fontWeight: "semi-bold",
-    children: _$$tx("design_systems.publishing_modal.warning_banner.anyone_in_org", {
+    children: renderI18nText("design_systems.publishing_modal.warning_banner.anyone_in_org", {
       orgName: e.name
     })
   });
   let u = null;
-  l && d ? u = _$$tx("design_systems.publishing_modal.warning_banner.file_setting_change.with_hidden_team_name", {
+  l && d ? u = renderI18nText("design_systems.publishing_modal.warning_banner.file_setting_change.with_hidden_team_name", {
     shareAudience: c
-  }) : l ? u = _$$tx("design_systems.publishing_modal.warning_banner.file_setting_change", {
+  }) : l ? u = renderI18nText("design_systems.publishing_modal.warning_banner.file_setting_change", {
     shareAudience: c
-  }) : d && (u = _$$tx("design_systems.publishing_modal.warning_banner.hidden_team_name", {
+  }) : d && (u = renderI18nText("design_systems.publishing_modal.warning_banner.hidden_team_name", {
     shareAudience: c
   }));
   return jsx("div", {
@@ -508,12 +508,12 @@ function e$({
   workspaceName: b,
   updateFirstDraftMetadata: v
 }) {
-  let I = md(pz);
+  let I = useAtomWithSubscription(pz);
   let E = !a && 0 === s;
   let x = u.state === Qx.ASSEMBLING_COMPONENTS;
   let S = getFeatureFlags().first_draft_api_publish && (E || !r);
   let w = E || u.state !== Qx.NONE || !r || _$$Xm(i) || f;
-  let C = S ? "Update First Draft kit data" : "success" === o ? "Publish as First Draft kit" : "error" === o ? "Fix kit errors before publishing" : e ? _$$tx("design_systems.publishing_modal.publish_button_text") : _$$tx("design_systems.publishing_modal.publish_styles");
+  let C = S ? "Update First Draft kit data" : "success" === o ? "Publish as First Draft kit" : "error" === o ? "Fix kit errors before publishing" : e ? renderI18nText("design_systems.publishing_modal.publish_button_text") : renderI18nText("design_systems.publishing_modal.publish_styles");
   return jsxs("div", {
     className: "publishing_modal_footer--publishFooter--3e6Ln",
     children: [l && jsx(eq, {
@@ -539,7 +539,7 @@ function e$({
         children: [jsx($n, {
           onClick: t,
           variant: "secondary",
-          children: _$$tx("design_systems.publishing_modal.cancel")
+          children: renderI18nText("design_systems.publishing_modal.cancel")
         }), I === _$$o.LIBRARY && jsx($z, {
           variant: "primary",
           disabled: w && !S,
@@ -550,7 +550,7 @@ function e$({
           variant: "signup",
           disabled: !c || w,
           onClick: () => d(c?.id),
-          children: _$$tx("design_systems.publishing_modal.publish_to_community")
+          children: renderI18nText("design_systems.publishing_modal.publish_to_community")
         })]
       })]
     })]
@@ -576,7 +576,7 @@ function e4() {
     className: $8,
     href: "https://help.figma.com/hc/articles/4404848314647",
     trusted: !0,
-    children: _$$tx("design_systems.publishing_modal.read_the_help_article")
+    children: renderI18nText("design_systems.publishing_modal.read_the_help_article")
   });
 }
 function e3() {
@@ -588,7 +588,7 @@ function e3() {
     }), jsx("div", {
       children: jsx("span", {
         className: i4,
-        children: _$$tx("design_systems.publishing_modal.move_components_warning", {
+        children: renderI18nText("design_systems.publishing_modal.move_components_warning", {
           helpArticle: jsx(e4, {})
         })
       })
@@ -597,12 +597,12 @@ function e3() {
 }
 function e7() {
   return jsx(_$$T, {
-    text: _$$tx("publishing_modal.banner.asset_cant_be_published_because_it_contains_code")
+    text: renderI18nText("publishing_modal.banner.asset_cant_be_published_because_it_contains_code")
   });
 }
 function e8() {
   return jsx(_$$T, {
-    text: _$$tx("design_systems.publishing_modal.example_conversion_warning")
+    text: renderI18nText("design_systems.publishing_modal.example_conversion_warning")
   });
 }
 function e9() {
@@ -615,7 +615,7 @@ function e9() {
       className: Np,
       children: jsx("span", {
         className: i4,
-        children: _$$tx("design_systems.publishing_modal.publishing_took_too_long")
+        children: renderI18nText("design_systems.publishing_modal.publishing_took_too_long")
       })
     })]
   });
@@ -644,9 +644,9 @@ let tI = _$$ex("publish_as_move_info", function (e) {
     children: fileNameForMove
   });
   return jsx("div", {
-    children: moveAssetType === PW.STYLE ? _$$tx("design_systems.publishing_modal.publish_as_move_info_style", {
+    children: moveAssetType === PW.STYLE ? renderI18nText("design_systems.publishing_modal.publish_as_move_info_style", {
       fileName: r
-    }) : _$$tx("design_systems.publishing_modal.publish_as_move_info_component", {
+    }) : renderI18nText("design_systems.publishing_modal.publish_as_move_info_component", {
       fileName: r
     })
   });
@@ -656,7 +656,7 @@ let tI = _$$ex("publish_as_move_info", function (e) {
 }));
 let tE = _$$ex("publish_destination_as_copy_info", function () {
   return jsx("div", {
-    children: _$$tx("design_systems.publishing_modal.publish_destination_as_copy_info")
+    children: renderI18nText("design_systems.publishing_modal.publish_destination_as_copy_info")
   });
 }, () => ({
   unconstrainWidth: !0
@@ -669,11 +669,11 @@ function tx(e) {
   let r = fileNameForMove ? jsx("span", {
     className: _$$s.fontBold.$,
     children: fileNameForMove
-  }) : _$$t("design_systems.publishing_modal.filename_fallback");
+  }) : getI18nString("design_systems.publishing_modal.filename_fallback");
   return jsx("div", {
-    children: isComponent ? _$$tx("design_systems.publishing_modal.publish_source_component_as_copy_info", {
+    children: isComponent ? renderI18nText("design_systems.publishing_modal.publish_source_component_as_copy_info", {
       fileName: r
-    }) : _$$tx("design_systems.publishing_modal.publish_source_style_as_copy_info", {
+    }) : renderI18nText("design_systems.publishing_modal.publish_source_style_as_copy_info", {
       fileName: r
     })
   });
@@ -709,7 +709,7 @@ function tF({
   let A = Um();
   let b = useSelector(e => e.library);
   let v = useSelector(e => e.fileByKey);
-  let I = md(qp);
+  let I = useAtomWithSubscription(qp);
   let E = useSelector(Wz);
   let x = useDispatch();
   let S = useMemo(MW, []);
@@ -742,13 +742,13 @@ function tF({
         },
         checked: l?.publishType === "MOVE",
         disabled: !t,
-        children: _$$tx("design_systems.publishing_modal.move_to_this_file")
+        children: renderI18nText("design_systems.publishing_modal.move_to_this_file")
       }), jsx(MM, {
         onClick: () => {
           l && (R(), o(e.node_id, "USER_SELECTED_COPY"));
         },
         checked: !l || "USER_SELECTED_COPY" === l.publishType,
-        children: _$$tx("design_systems.publishing_modal.publish_as_copy")
+        children: renderI18nText("design_systems.publishing_modal.publish_as_copy")
       })]
     });
   };
@@ -888,7 +888,7 @@ function tF({
     className: tR,
     svg: _$$A3,
     "data-tooltip-type": Ib.SPECIAL,
-    "data-tooltip-file-name-for-move": v[l.fileKey]?.name || _$$t("design_systems.publishing_modal.filename_fallback"),
+    "data-tooltip-file-name-for-move": v[l.fileKey]?.name || getI18nString("design_systems.publishing_modal.filename_fallback"),
     "data-tooltip-move-asset-type": e.type,
     "data-tooltip": tI,
     "data-tooltip-max-width": 240,
@@ -904,7 +904,7 @@ function tF({
     className: tR,
     svg: _$$A3,
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": e.type === PW.STYLE ? _$$t("design_systems.publishing_modal.multiple_paste_style") : _$$t("design_systems.publishing_modal.multiple_paste"),
+    "data-tooltip": e.type === PW.STYLE ? getI18nString("design_systems.publishing_modal.multiple_paste_style") : getI18nString("design_systems.publishing_modal.multiple_paste"),
     "data-tooltip-max-width": 240,
     "data-tooltip-tip-align-right": !0,
     "data-tooltip-text-left": !0
@@ -912,7 +912,7 @@ function tF({
     className: tR,
     svg: _$$A3,
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": _$$t("design_systems.publishing_modal.unmovable_state_group_with_movable_state"),
+    "data-tooltip": getI18nString("design_systems.publishing_modal.unmovable_state_group_with_movable_state"),
     "data-tooltip-tip-align-right": !0,
     "data-tooltip-text-left": !0
   }) : Y.hasBeenMoved && (q = jsx(_$$B3, {
@@ -939,7 +939,7 @@ function tF({
             checked: i,
             onChange: () => s(e.node_id),
             label: jsx(_$$h, {
-              children: _$$t("design_systems.publishing_modal.include_in_publish", {
+              children: getI18nString("design_systems.publishing_modal.include_in_publish", {
                 assetName: e.name
               })
             }),
@@ -951,10 +951,10 @@ function tF({
           children: jsx("div", {
             className: "library_item_row--libraryRowTargetWrapper--0IQr7",
             children: jsx(_$$K, {
-              "aria-label": _$$t("design_systems.publishing_modal.select_component"),
+              "aria-label": getI18nString("design_systems.publishing_modal.select_component"),
               onClick: G,
               htmlAttributes: {
-                "data-tooltip": _$$t("design_systems.publishing_modal.select_component"),
+                "data-tooltip": getI18nString("design_systems.publishing_modal.select_component"),
                 "data-tooltip-type": Ib.TEXT
               },
               children: jsx(_$$A2, {})
@@ -972,12 +972,12 @@ function tF({
             children: e.name
           }), m && jsx("span", {
             className: _$$s.colorTextSecondary.textBodyMedium.noWrap.$,
-            children: _$$tx("design_systems.publishing_modal.hidden_variable_count_within_collection", {
+            children: renderI18nText("design_systems.publishing_modal.hidden_variable_count_within_collection", {
               count: T.length
             })
           }), k && !m && jsx("span", {
             className: _$$s.colorTextSecondary.textBodyMedium.noWrap.$,
-            children: _$$tx("design_systems.publishing_modal.list_item_changed_variable_count", {
+            children: renderI18nText("design_systems.publishing_modal.list_item_changed_variable_count", {
               count: w.length
             })
           })]
@@ -992,9 +992,9 @@ function tF({
         "data-tooltip": (() => {
           switch (g) {
             case "INVALID_EXAMPLE":
-              return _$$t("design_systems.publishing_modal.asset_cannot_be_published");
+              return getI18nString("design_systems.publishing_modal.asset_cannot_be_published");
             case "DESCENDANT_CODE_INSTANCE_OR_CODE_LAYER":
-              return _$$t("publishing_modal.tooltip.asset_cant_be_published_because_it_contains_code");
+              return getI18nString("publishing_modal.tooltip.asset_cant_be_published_because_it_contains_code");
           }
         })(),
         "data-tooltip-type": "text",
@@ -1002,49 +1002,49 @@ function tF({
       }), (() => {
         if (e.type === PW.STATE_GROUP && zE(e)) switch (e.stateGroupError) {
           case bwI.MISSING_PROPERTIES_ERROR:
-            return _$$tx("design_systems.publishing_modal.missing_properties");
+            return renderI18nText("design_systems.publishing_modal.missing_properties");
           case bwI.DUPLICATE_STATE_ERROR:
-            return _$$tx("design_systems.publishing_modal.conflicting_property_values");
+            return renderI18nText("design_systems.publishing_modal.conflicting_property_values");
           case bwI.PARSE_ERROR:
-            return _$$tx("design_systems.publishing_modal.corrupt_layer_names");
+            return renderI18nText("design_systems.publishing_modal.corrupt_layer_names");
         }
         if ((e.type === PW.STATE_GROUP || e.type === PW.COMPONENT) && zE(e)) switch (e.componentPropDefError) {
           case uXg.CONFLICTING_NAMES_WITH_VARIANT_ERROR:
           case uXg.CONFLICTING_NAMES_ERROR:
-            return _$$tx("design_systems.publishing_modal.conflicting_property_names");
+            return renderI18nText("design_systems.publishing_modal.conflicting_property_names");
           case uXg.UNUSED_DEF_ERROR:
-            return _$$tx("design_systems.publishing_modal.unused_def_error");
+            return renderI18nText("design_systems.publishing_modal.unused_def_error");
         }
         if (e.type === PW.VARIABLE_SET && RQ(e)) switch (e.variableSetError) {
           case HG$.TOO_MANY_VARIABLES_ERROR:
-            return _$$tx("design_systems.publishing_modal.too_many_variables_error");
+            return renderI18nText("design_systems.publishing_modal.too_many_variables_error");
           case HG$.TOO_MANY_MODES_ERROR:
-            return _$$tx("design_systems.publishing_modal.too_many_modes_error");
+            return renderI18nText("design_systems.publishing_modal.too_many_modes_error");
         }
-        return "THUMBNAIL" !== e.type && e.old_key && l?.publishType !== "FORCED_COPY" ? e.type === PW.STYLE ? _$$tx("design_systems.publishing_modal.moved_to_this_file") : jsxs("div", {
+        return "THUMBNAIL" !== e.type && e.old_key && l?.publishType !== "FORCED_COPY" ? e.type === PW.STYLE ? renderI18nText("design_systems.publishing_modal.moved_to_this_file") : jsxs("div", {
           onClick: e => {
             e.preventDefault();
             e.stopPropagation();
             D();
           },
           className: "library_item_row--moveOptions--Ftdr0",
-          children: [l?.publishType === "MOVE" ? _$$tx("design_systems.publishing_modal.move_to_this_file") : _$$tx("design_systems.publishing_modal.publish_as_copy"), jsx(_$$p, {
+          children: [l?.publishType === "MOVE" ? renderI18nText("design_systems.publishing_modal.move_to_this_file") : renderI18nText("design_systems.publishing_modal.publish_as_copy"), jsx(_$$p, {
             showingDropdown: !!A && A.type === N,
             svgContainerClassName: "library_item_row--chevron--fbLtW"
           }), F()]
-        }) : d ? e.status === E8.NEW ? _$$tx("design_systems.publishing_modal.added") : _$$tx("design_systems.publishing_modal.modified") : e.type === PW.STATE_GROUP && e.status !== E8.DELETED && (E[e.node_id] ?? []).every(e => HF(e.status)) ? _$$tx("design_systems.publishing_modal.modified") : e.type === PW.STYLE && e.hasOnlyBeenReordered ? _$$tx("design_systems.publishing_modal.reordered") : cw(e.status);
+        }) : d ? e.status === E8.NEW ? renderI18nText("design_systems.publishing_modal.added") : renderI18nText("design_systems.publishing_modal.modified") : e.type === PW.STATE_GROUP && e.status !== E8.DELETED && (E[e.node_id] ?? []).every(e => HF(e.status)) ? renderI18nText("design_systems.publishing_modal.modified") : e.type === PW.STYLE && e.hasOnlyBeenReordered ? renderI18nText("design_systems.publishing_modal.reordered") : cw(e.status);
       })(), !W && q]
     }), B && "THUMBNAIL" !== e.type && !e.deletedFromSceneGraph && jsx(tO, {
       className: "library_item_row--contextMenu--cO1wt",
       style: A.data.position,
       children: jsx(tD, {
         onClick: j,
-        children: e.isPublishable ? _$$tx("design_systems.publishing_modal.hide_when_publishing") : _$$tx("design_systems.publishing_modal.show_when_publishing")
+        children: e.isPublishable ? renderI18nText("design_systems.publishing_modal.hide_when_publishing") : renderI18nText("design_systems.publishing_modal.show_when_publishing")
       })
     }), e.type === PW.VARIABLE_SET && $ && jsx("div", {
       className: "library_item_row--caretWrapper--O4uP5",
       children: jsx(_$$K, {
-        "aria-label": _$$t("design_systems.publishing_modal.see_variables"),
+        "aria-label": getI18nString("design_systems.publishing_modal.see_variables"),
         recordingKey: generateRecordingKey("libraryItemRow", "variableSetDrilldownButton", e.node_id),
         onClick: t => {
           t.preventDefault();
@@ -1054,7 +1054,7 @@ function tF({
           });
         },
         htmlAttributes: {
-          "data-tooltip": _$$t("design_systems.publishing_modal.see_variables"),
+          "data-tooltip": getI18nString("design_systems.publishing_modal.see_variables"),
           "data-tooltip-type": Ib.TEXT
         },
         children: jsx(_$$e2, {})
@@ -1113,10 +1113,10 @@ function tW({
 }) {
   return jsx("span", {
     className: _$$s.colorTextSecondary.fontNormal.$,
-    children: t ? _$$tx("design_systems.publishing_modal.count_with_total", {
+    children: t ? renderI18nText("design_systems.publishing_modal.count_with_total", {
       count: e,
       total: t
-    }) : _$$tx("design_systems.publishing_modal.count", {
+    }) : renderI18nText("design_systems.publishing_modal.count", {
       count: e
     })
   });
@@ -1132,11 +1132,11 @@ function tq({
     children: [jsxs("div", {
       className: "variable_collection_header--variableCollectionHeaderLeft--c6MTv",
       children: [jsx(_$$K, {
-        "aria-label": _$$t("design_systems.publishing_modal.back"),
+        "aria-label": getI18nString("design_systems.publishing_modal.back"),
         onClick: i,
         recordingKey: "variableCollectionHeader.backButton",
         htmlAttributes: {
-          "data-tooltip": _$$t("design_systems.publishing_modal.back"),
+          "data-tooltip": getI18nString("design_systems.publishing_modal.back"),
           "data-tooltip-type": Ib.TEXT
         },
         children: jsx(_$$C2, {})
@@ -1148,9 +1148,9 @@ function tq({
       className: "variable_collection_header--variableCollectionHeaderRight--g0he-",
       children: jsx("div", {
         className: _$$s.colorTextSecondary.textBodyMedium.noWrap.$,
-        children: "hidden" === t ? _$$tx("design_systems.publishing_modal.hidden_variable_count_no_parentheses", {
+        children: "hidden" === t ? renderI18nText("design_systems.publishing_modal.hidden_variable_count_no_parentheses", {
           count: r
-        }) : _$$tx("design_systems.publishing_modal.header_changed_variable_count_no_parentheses", {
+        }) : renderI18nText("design_systems.publishing_modal.header_changed_variable_count_no_parentheses", {
           count: r
         })
       })
@@ -1193,13 +1193,13 @@ function tZ({
       children: e.name
     }), t && jsx("span", {
       className: "variable_library_item_row--statusText--Khb5a",
-      children: e.hasOnlyBeenReordered ? _$$tx("design_systems.publishing_modal.reordered") : cw(e.status)
+      children: e.hasOnlyBeenReordered ? renderI18nText("design_systems.publishing_modal.reordered") : cw(e.status)
     }), s?.type === o && !e.deletedFromSceneGraph && jsx(ms, {
       className: "variable_library_item_row--contextMenu--djku4",
       style: s.data.position,
       children: jsx(_$$c$, {
         onClick: l,
-        children: e.isPublishable ? _$$tx("design_systems.publishing_modal.hide_when_publishing") : _$$tx("design_systems.publishing_modal.show_when_publishing")
+        children: e.isPublishable ? renderI18nText("design_systems.publishing_modal.hide_when_publishing") : renderI18nText("design_systems.publishing_modal.show_when_publishing")
       })
     })]
   });
@@ -1237,11 +1237,11 @@ function tX({
         children: [jsx("div", {
           className: _,
           children: jsx(tH, {
-            header: "hidden" === e ? _$$tx("design_systems.publishing_modal.marked_for_publish_header_with_count", {
+            header: "hidden" === e ? renderI18nText("design_systems.publishing_modal.marked_for_publish_header_with_count", {
               countString: jsx(tW, {
                 count: f.length
               })
-            }) : _$$tx("design_systems.publishing_modal.hidden_header_with_count", {
+            }) : renderI18nText("design_systems.publishing_modal.hidden_header_with_count", {
               countString: jsx(tW, {
                 count: f.length
               })
@@ -1254,7 +1254,7 @@ function tX({
         }), s && jsxs(Fragment, {
           children: ["pending" === e && jsx("span", {
             className: "variable_collection_drilldown--unenumeratedSectionSubHeader---YFCz",
-            children: _$$tx("design_systems.publishing_modal.these_wont_be_published")
+            children: renderI18nText("design_systems.publishing_modal.these_wont_be_published")
           }), jsx("ul", {
             children: f.map(t => jsx(tZ, {
               displayStatusText: "hidden" === e,
@@ -1289,7 +1289,7 @@ function tJ(e) {
   let h = useDispatch();
   let g = hS(e);
   let _ = useRef(null);
-  let [b, I] = fp(pz);
+  let [b, I] = useAtomValueAndSetter(pz);
   let [T, k] = useState("");
   let [R, F] = useState(void 0);
   let H = useCallback(e => {
@@ -1312,7 +1312,7 @@ function tJ(e) {
   let e_ = useSelector(cM);
   let eA = useSelector(MH);
   let ey = useSelector(dM);
-  let ev = md(_$$t2);
+  let ev = useAtomWithSubscription(_$$t2);
   let eI = nN();
   let eE = useMemo(() => Jl(eA), [eA]);
   let {
@@ -1361,7 +1361,7 @@ function tJ(e) {
       let e = eH.data.file?.libraryKeyToFile?.libraryPublishScope?.publishScopeType ?? FContainerType.TEAM;
       eG(e);
       eU(!0);
-      e !== eB && x1("designSystems publishing", "Potential library publish scope mismatch (monitored by #feat-workspace-library-publishing)", {
+      e !== eB && logError("designSystems publishing", "Potential library publish scope mismatch (monitored by #feat-workspace-library-publishing)", {
         livegraphPublishScope: e,
         fileShareSettingPublishScope: eB
       });
@@ -1372,8 +1372,8 @@ function tJ(e) {
   let eq = UJ();
   let eQ = Xm();
   SR();
-  let e0 = md(y6(eQ));
-  let e1 = md(_$$x$(eQ));
+  let e0 = useAtomWithSubscription(y6(eQ));
+  let e1 = useAtomWithSubscription(_$$x$(eQ));
   let e2 = ZC(eY);
   useEffect(() => {
     e2?.status === _$$r.LOADING && eY.status === _$$r.SUCCESS && (initiallyCheckedItemIDs || tt(new Set(e1)));
@@ -1456,7 +1456,7 @@ function tJ(e) {
     }
   }, [te, ey, eh.used__LIVEGRAPH.localNodeIdToDestinationKey, eh.movedLibraryItems.local, e5, e4, e6]);
   let tu = _$$B();
-  let tp = md(Iy(eQ));
+  let tp = useAtomWithSubscription(Iy(eQ));
   let {
     currentFileIsFirstDraftKit,
     currentFileIsDirectGenKit
@@ -1478,7 +1478,7 @@ function tJ(e) {
       for (let e of te) {
         let t = eI[e];
         if (isNotNullish(t) && t.modes.length > modeLimit) {
-          canShowCTA(t.modes.length) ? showCTA() : x1("designSystems publishing", "Blocking publishing of variable collection with too many modes, but upsell is not available", {
+          canShowCTA(t.modes.length) ? showCTA() : logError("designSystems publishing", "Blocking publishing of variable collection with too many modes, but upsell is not available", {
             collectionId: e
           });
           return;
@@ -1571,12 +1571,12 @@ function tJ(e) {
   let tT = useMemo(() => "loaded" !== ev.status || null != itemsToPublishInvalidReason, [itemsToPublishInvalidReason, ev.status]);
   let tk = useCallback(e => {
     if (!em) return;
-    let t = _$$Ay.mac ? e.metaKey : e.ctrlKey;
+    let t = BrowserInfo.mac ? e.metaKey : e.ctrlKey;
     e.keyCode === Uz.ENTER && t && !tT && (tv(), e.preventDefault(), e.stopPropagation());
   }, [em, tv, tT]);
   let tR = _$$z();
   if (!em) return null;
-  let tN = b === _$$o.HUBFILE ? _$$tx("design_systems.publishing_modal.modal_header_community_library") : _$$tx("design_systems.publishing_modal.modal_header");
+  let tN = b === _$$o.HUBFILE ? renderI18nText("design_systems.publishing_modal.modal_header_community_library") : renderI18nText("design_systems.publishing_modal.modal_header");
   if (eY.status === _$$r.LOADING) return jsx(Fragment, {
     children: jsx(bL, {
       manager: g,
@@ -1651,7 +1651,7 @@ function tJ(e) {
             className: "publishing_modal--descriptionContainer--EOWF-",
             children: jsx(_$$v, {
               className: "publishing_modal--descriptionInput--jTrPR",
-              placeholder: _$$t("design_systems.publishing_modal.description_placeholder"),
+              placeholder: getI18nString("design_systems.publishing_modal.description_placeholder"),
               value: en,
               onChange: td,
               dir: "auto"
@@ -1744,12 +1744,12 @@ function t0({
   let l = !s.length && !o.length;
   let c = !1 === t ? {
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": _$$t("figmake.ds_imports.disabled_publish_button_tooltip"),
+    "data-tooltip": getI18nString("figmake.ds_imports.disabled_publish_button_tooltip"),
     "data-tooltip-show-above": !0,
     "data-tooltip-max-width": 162
   } : l ? {
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": _$$t("figmake.ds_imports.disabled_publish_button_tooltip_no_components"),
+    "data-tooltip": getI18nString("figmake.ds_imports.disabled_publish_button_tooltip_no_components"),
     "data-tooltip-show-above": !0,
     "data-tooltip-max-width": 205
   } : {};
@@ -1761,15 +1761,15 @@ function t0({
           className: "x78zum5 xdt5ytf x1cy8zhl x1jnr06f x1cqoux5",
           children: [jsx(_$$e, {}), jsx("div", {
             className: "xiqqdae xkezfkh",
-            children: _$$t("figmake.ds_imports.publish_header")
+            children: getI18nString("figmake.ds_imports.publish_header")
           }), jsx("p", {
-            children: _$$t("figmake.ds_imports.publish_body")
+            children: getI18nString("figmake.ds_imports.publish_body")
           }), jsx("div", {
             className: "x1xmf6yo",
             children: jsx($n, {
               onClick: () => {
                 if (i) {
-                  if (az.trackDefinedEvent("ds_import.publish_button_clicked", {
+                  if (analyticsEventManager.trackDefinedEvent("ds_import.publish_button_clicked", {
                     library_key: i
                   }), getFeatureFlags().bake_ds_import_library_guidelines) {
                     r(_$$to({
@@ -1796,7 +1796,7 @@ function t0({
               },
               disabled: !t || l,
               ...c,
-              children: _$$t("figmake.ds_imports.publish_button")
+              children: getI18nString("figmake.ds_imports.publish_button")
             })
           })]
         }), jsx("div", {
@@ -1828,7 +1828,7 @@ function t1(e) {
   };
   let m = Xm();
   let h = UJ();
-  let g = md(y6(m));
+  let g = useAtomWithSubscription(y6(m));
   let [f, _, b, v, I, E, x, S, w, C, T, N, O, D, L, F, M, j, U, B, V, G] = useMemo(() => [g.libraryAssets[PW.RESPONSIVE_SET].modified.wellFormed, g.libraryAssets[PW.RESPONSIVE_SET].modified.erroneous, g.libraryAssets[PW.RESPONSIVE_SET].unmodified.published, g.libraryAssets[PW.RESPONSIVE_SET].unmodified.unpublished, g.libraryAssets[PW.CODE_COMPONENT].modified.wellFormed, g.libraryAssets[PW.CODE_COMPONENT].modified.erroneous, g.libraryAssets[PW.CODE_COMPONENT].unmodified.published, g.libraryAssets[PW.CODE_COMPONENT].unmodified.unpublished, g.variableSets.modified.wellFormed, g.variableSets.modified.erroneous, g.variableSets.unmodified.published, g.variableSets.unmodified.unpublished, g.variableSetsWithHiddenVariables.modified.wellFormed, g.styles.modified.wellFormed, g.styles.unmodified.published, g.styles.unmodified.unpublished, g.productComponents.modified.wellFormed, g.productComponents.modified.erroneous, g.productComponents.unmodified.published, g.productComponents.unmodified.unpublished, g.pageThumbnails.modified, g.pageThumbnails.unmodified].map(t => e.assetQuery ? t.filter(t => t.name.toLocaleLowerCase().trim().includes(e.assetQuery.toLocaleLowerCase())) : t), [g.libraryAssets, g.variableSets.modified.wellFormed, g.variableSets.modified.erroneous, g.variableSets.unmodified.published, g.variableSets.unmodified.unpublished, g.variableSetsWithHiddenVariables.modified.wellFormed, g.styles.modified.wellFormed, g.styles.unmodified.published, g.styles.unmodified.unpublished, g.productComponents.modified.wellFormed, g.productComponents.modified.erroneous, g.productComponents.unmodified.published, g.productComponents.unmodified.unpublished, g.pageThumbnails.modified, g.pageThumbnails.unmodified, e.assetQuery]);
   let z = useMemo(() => new Set(D.concat(w).concat(M).concat(_$$O3(PW.RESPONSIVE_SET) ? f : []).concat(_$$O3(PW.CODE_COMPONENT) ? I : []).map(e => e.node_id).concat(V.map(e => e.node_id))), [D, w, M, f, I, V]);
   let H = w.length > 0 || N.length > 0 || O.length > 0;
@@ -1901,7 +1901,7 @@ function t1(e) {
     let l = N.length + B.length + F.length + O.length + (_$$O3(PW.RESPONSIVE_SET) ? v.length : 0) + (_$$O3(PW.CODE_COMPONENT) ? S.length : 0);
     let u = j.length + C.length + (_$$O3(PW.RESPONSIVE_SET) ? _.length : 0) + (_$$O3(PW.CODE_COMPONENT) ? E.length : 0);
     u && ($(jsx(tH, {
-      header: _$$tx("design_systems.publishing_modal.invalid_components_with_count", {
+      header: renderI18nText("design_systems.publishing_modal.invalid_components_with_count", {
         countString: jsx(tW, {
           count: u
         })
@@ -1917,7 +1917,7 @@ function t1(e) {
     if (r) {
       let t;
       if (t = y === r || y > 0 && y < r && oV, $(jsx(tz, {
-        header: _$$tx("design_systems.publishing_modal.changes_header_with_count", {
+        header: renderI18nText("design_systems.publishing_modal.changes_header_with_count", {
           countString: jsx(tW, {
             count: y,
             total: r
@@ -1929,7 +1929,7 @@ function t1(e) {
         }
       }), "changed:header", 32, i), w.length > 0 && $(jsx("div", {
         className: tV,
-        children: _$$tx("design_systems.publishing_modal.variable_collections")
+        children: renderI18nText("design_systems.publishing_modal.variable_collections")
       }), "variableSet:header", 32, i), K(w, i, tL.CHECKBOX), _$$O3(PW.RESPONSIVE_SET) && (f.length > 0 && $(jsx("div", {
         className: tV,
         children: "Site blocks"
@@ -1940,26 +1940,26 @@ function t1(e) {
         let e = M.filter(Fl);
         e.length > 0 && ($(jsx("div", {
           className: tV,
-          children: _$$tx("design_systems.publishing_modal.templates")
+          children: renderI18nText("design_systems.publishing_modal.templates")
         }), "templates:header", 32, i), K(e, i, tL.CHECKBOX));
       }
       D.length > 0 && $(jsx("div", {
         className: tV,
-        children: _$$tx("design_systems.publishing_modal.styles")
+        children: renderI18nText("design_systems.publishing_modal.styles")
       }), "styles:header", 32, i);
       K(D, i, tL.CHECKBOX);
       M.length > 0 && $(jsx("div", {
         className: tV,
-        children: _$$tx("design_systems.publishing_modal.components")
+        children: renderI18nText("design_systems.publishing_modal.components")
       }), "components:header", 32, i);
       getFeatureFlags().dse_templates_proto ? K(M.filter(e => !Fl(e)), i, tL.CHECKBOX) : K(M, i, tL.CHECKBOX);
       getFeatureFlags().dse_library_pg_thumbnails && V.length > 0 && ($(jsx("div", {
         className: tV,
-        children: _$$tx("design_systems.publishing_modal.page_thumbnails")
+        children: renderI18nText("design_systems.publishing_modal.page_thumbnails")
       }), "pageThumbnails:header", 32, i), q(g.pageThumbnails.modified, i, tL.CHECKBOX));
     }
     a && ($(jsx(tH, {
-      header: _$$tx("design_systems.publishing_modal.unchanged_header_with_count", {
+      header: renderI18nText("design_systems.publishing_modal.unchanged_header_with_count", {
         countString: jsx(tW, {
           count: a
         })
@@ -1970,7 +1970,7 @@ function t1(e) {
       onClick: s
     }), "unchanged:header", 32, i), t && (K(T, i), K(L, i), K(U, i), _$$O3(PW.RESPONSIVE_SET) && K(b, i), _$$O3(PW.CODE_COMPONENT) && K(x, i), getFeatureFlags().dse_library_pg_thumbnails && q(G, i)));
     l && ($(jsx(tH, {
-      header: _$$tx("design_systems.publishing_modal.hidden_header_with_count", {
+      header: renderI18nText("design_systems.publishing_modal.hidden_header_with_count", {
         countString: jsx(tW, {
           count: l
         })
@@ -1981,7 +1981,7 @@ function t1(e) {
       onClick: d
     }), "private:header", 32, i), o && ($(jsx("div", {
       className: "publishing_modal--subheader--g6LTL",
-      children: _$$tx("design_systems.publishing_modal.these_wont_be_published")
+      children: renderI18nText("design_systems.publishing_modal.these_wont_be_published")
     }), "private:subheader", 22, i), K(N, i), K(O, i, void 0, !0), K(F, i), K(B, i), _$$O3(PW.RESPONSIVE_SET) && K(v, i), _$$O3(PW.CODE_COMPONENT) && K(S, i)));
     return i;
   })();
@@ -2001,7 +2001,7 @@ function t2({
 }) {
   return jsx("div", {
     className: "publishing_modal--emptySearchResult--eVsIY",
-    children: _$$tx("design_systems.publishing_modal.empty_search_result", {
+    children: renderI18nText("design_systems.publishing_modal.empty_search_result", {
       assetQuery: e
     })
   });
@@ -2015,16 +2015,16 @@ function t5({
     newTab: !0,
     trusted: !0,
     href: `/files/upgrade-team/${i.id}`,
-    children: _$$tx("design_systems.publishing_modal.upgrade_team")
+    children: renderI18nText("design_systems.publishing_modal.upgrade_team")
   }) : jsx(_$$N, {
     newTab: !0,
     trusted: !0,
     href: "/files/create-team",
-    children: _$$tx("design_systems.publishing_modal.create_a_professional_team")
+    children: renderI18nText("design_systems.publishing_modal.create_a_professional_team")
   });
-  let a = t ? _$$tx("design_systems.publishing_modal.starter_library_upsell", {
+  let a = t ? renderI18nText("design_systems.publishing_modal.starter_library_upsell", {
     numComponents: e
-  }) : _$$tx("design_systems.publishing_modal.standard_upsell", {
+  }) : renderI18nText("design_systems.publishing_modal.standard_upsell", {
     numComponents: e,
     teamUpsellLink: r
   });

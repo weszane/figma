@@ -3,7 +3,7 @@ import { MJ, Nc } from "../905/946258";
 import { getFeatureFlags } from "../905/601108";
 import { Pt } from "../figma_app/806412";
 import { Ph } from "../905/160095";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { c as _$$c } from "../905/370443";
 import { Qr, Lz } from "../905/690539";
 import { sK } from "../905/794875";
@@ -24,7 +24,7 @@ export function $$p1({
   return o;
 }
 export function $$m0() {
-  return tx("fullscreen.font_settings.troubleshoot_agent_fonts.text", {
+  return renderI18nText("fullscreen.font_settings.troubleshoot_agent_fonts.text", {
     link: jsx(Ph, {
       href: MJ,
       newTab: !0,
@@ -32,12 +32,12 @@ export function $$m0() {
       trackingProperties: {
         trackingDescriptor: _$$c.FIGMA_AGENT_TROUBLESHOOT_LEARN_MORE
       },
-      children: tx("fullscreen.font_settings.troubleshoot_agent_fonts.link")
+      children: renderI18nText("fullscreen.font_settings.troubleshoot_agent_fonts.link")
     })
   });
 }
 export function $$h2() {
-  return tx("fullscreen.properties_panel.font_picker.install_agent.text", {
+  return renderI18nText("fullscreen.properties_panel.font_picker.install_agent.text", {
     link: jsx(Ph, {
       href: Nc,
       newTab: !0,
@@ -45,7 +45,7 @@ export function $$h2() {
       trackingProperties: {
         trackingDescriptor: _$$c.FIGMA_AGENT_INSTALL_LEARN_MORE
       },
-      children: tx("fullscreen.properties_panel.font_picker.install_agent.link")
+      children: renderI18nText("fullscreen.properties_panel.font_picker.install_agent.link")
     })
   });
 }

@@ -1,12 +1,12 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { M7 } from "../figma_app/637027";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 export let $$s1 = "seen_synchronous_collaboration_onboarding";
 function o(e) {
-  let t = tx("collaboration.spotlight.2_0.nudge_spotlight.description", {
+  let t = renderI18nText("collaboration.spotlight.2_0.nudge_spotlight.description", {
     spotlightMeButtonText: jsx("b", {
       className: "multiplayer_onboarding--boldText--c42DO",
-      children: tx("collaboration.spotlight.tooltip.spotlight_me")
+      children: renderI18nText("collaboration.spotlight.tooltip.spotlight_me")
     })
   });
   return jsxs("div", {
@@ -18,7 +18,7 @@ function o(e) {
       children: jsx(M7, {
         className: "multiplayer_onboarding--footerButtonNudge--4CJm-",
         onClick: e.dismissModal,
-        children: tx("collaboration.spotlight.nudge_spotlight.got_it")
+        children: renderI18nText("collaboration.spotlight.nudge_spotlight.got_it")
       })
     })]
   });

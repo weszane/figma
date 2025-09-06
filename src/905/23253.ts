@@ -8,7 +8,7 @@ import { oA } from "../905/663269";
 import { debugState } from "../905/407919";
 import { WB } from "../905/761735";
 import { H9, Vs } from "../figma_app/930338";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { u1 } from "../figma_app/91703";
 import { ds } from "../figma_app/314264";
 import { B } from "../905/969273";
@@ -26,8 +26,8 @@ export function $$C6(e) {
   let [t, i] = useState("");
   useEffect(() => {
     if (e === qy.RUNNING) {
-      let e = setTimeout(() => i(_$$t("image_ai.processing.long_loading_time")), 1e4);
-      let t = setTimeout(() => i(_$$t("image_ai.processing.extra_long_loading_time")), 2e4);
+      let e = setTimeout(() => i(getI18nString("image_ai.processing.long_loading_time")), 1e4);
+      let t = setTimeout(() => i(getI18nString("image_ai.processing.extra_long_loading_time")), 2e4);
       return () => {
         clearTimeout(e);
         clearTimeout(t);

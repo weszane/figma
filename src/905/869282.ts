@@ -1,5 +1,5 @@
-import { Ay } from "../figma_app/778880";
-import { tx } from "../905/303541";
+import { BrowserInfo } from "../figma_app/778880";
+import { renderI18nText } from "../905/303541";
 import { XW } from "../figma_app/162807";
 import { XU } from "../figma_app/756995";
 import { y2 } from "../905/776312";
@@ -12,20 +12,20 @@ let $$d1 = {
   mobileListSortKeys: [XW.NAME, XW.RUN_COUNT],
   sortKeyDescriptions: {
     [XU.GRID]: {
-      [XW.NAME]: tx("search.sort_option.name"),
-      [XW.AUTHOR_NAME]: tx("search.sort_option.creator"),
-      [XW.UPDATED_AT]: tx("search.sort_option.last_updated"),
-      [XW.INSTALL_COUNT]: tx("search.sort_option.saves"),
-      [XW.RELEVANCY]: tx("search.sort_option.relevance"),
-      [XW.RUN_COUNT]: tx("search.sort_option.used_by")
+      [XW.NAME]: renderI18nText("search.sort_option.name"),
+      [XW.AUTHOR_NAME]: renderI18nText("search.sort_option.creator"),
+      [XW.UPDATED_AT]: renderI18nText("search.sort_option.last_updated"),
+      [XW.INSTALL_COUNT]: renderI18nText("search.sort_option.saves"),
+      [XW.RELEVANCY]: renderI18nText("search.sort_option.relevance"),
+      [XW.RUN_COUNT]: renderI18nText("search.sort_option.used_by")
     },
     [XU.LIST]: {
-      [XW.NAME]: tx("search.sort_option.name"),
-      [XW.AUTHOR_NAME]: tx("search.sort_option.creator"),
-      [XW.UPDATED_AT]: tx("search.sort_option.last_updated"),
-      [XW.INSTALL_COUNT]: tx("search.sort_option.saves"),
-      [XW.RELEVANCY]: tx("search.sort_option.relevance"),
-      [XW.RUN_COUNT]: tx("search.sort_option.used_by")
+      [XW.NAME]: renderI18nText("search.sort_option.name"),
+      [XW.AUTHOR_NAME]: renderI18nText("search.sort_option.creator"),
+      [XW.UPDATED_AT]: renderI18nText("search.sort_option.last_updated"),
+      [XW.INSTALL_COUNT]: renderI18nText("search.sort_option.saves"),
+      [XW.RELEVANCY]: renderI18nText("search.sort_option.relevance"),
+      [XW.RUN_COUNT]: renderI18nText("search.sort_option.used_by")
     }
   },
   defaultOptions: {
@@ -36,7 +36,7 @@ let $$d1 = {
     }
   },
   includeSortDirection: e => -1 === [XW.INSTALL_COUNT, XW.RUN_COUNT, XW.RELEVANCY].indexOf(e),
-  settingsSpacer: Ay.tablet || Ay.mobile
+  settingsSpacer: BrowserInfo.tablet || BrowserInfo.mobile
 };
 let $$c0 = p_;
 export function $$u2(e, t) {

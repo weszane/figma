@@ -8,7 +8,7 @@ import { Y, M } from "../905/830372";
 import { q } from "../905/749058";
 import { s as _$$s } from "../905/645504";
 import { h as _$$h } from "../905/207101";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { cF, fF, BZ } from "../figma_app/425283";
 import { c as _$$c } from "../905/370443";
 import { e } from "../905/621515";
@@ -41,20 +41,20 @@ function I() {
   });
   return jsx(rq, {
     clickOutsideToHide: !0,
-    description: tx("org_admin_onboarding.billing_tab.tooltip.billing_groups_secondary_tab.description"),
+    description: renderI18nText("org_admin_onboarding.billing_tab.tooltip.billing_groups_secondary_tab.description"),
     emphasized: !0,
     isShowing,
     onClose: complete,
     onTargetLost: complete,
     primaryCta: {
-      label: tx("general.got_it"),
+      label: renderI18nText("general.got_it"),
       type: "button",
       onClick: complete,
       ctaTrackingDescriptor: _$$c.GOT_IT
     },
     shouldCenterArrow: EL.BEST_EFFORT,
     targetKey: cF,
-    title: tx("org_admin_onboarding.billing_tab.tooltip.billing_groups_secondary_tab.title"),
+    title: renderI18nText("org_admin_onboarding.billing_tab.tooltip.billing_groups_secondary_tab.title"),
     trackingContextName: `${fF} - billing groups tab`
   });
 }

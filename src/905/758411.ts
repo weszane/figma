@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { useSprigWithSampling } from "../905/99656";
 import { hO } from "../figma_app/545293";
 import { JT } from "../figma_app/632248";
@@ -10,9 +10,9 @@ import { k } from "../905/167644";
 export function $$p0() {
   let {
     currentSearch
-  } = md(WP);
-  let t = md(hO.currentSearchAtom);
-  let i = md(hO.currentCommunitySearchAtom);
+  } = useAtomWithSubscription(WP);
+  let t = useAtomWithSubscription(hO.currentSearchAtom);
+  let i = useAtomWithSubscription(hO.currentCommunitySearchAtom);
   let {
     Sprig
   } = useSprigWithSampling();

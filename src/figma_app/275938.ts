@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { isNotNullish } from "../figma_app/95419";
 import { l as _$$l } from "../905/716947";
-import { eU, md } from "../figma_app/27355";
+import { atom, useAtomWithSubscription } from "../figma_app/27355";
 import { M4, IT } from "../905/713695";
 import { Z } from "../905/939602";
 let $$d4 = M4.Query({
@@ -9,11 +9,11 @@ let $$d4 = M4.Query({
     editorType: "whiteboard_shapes"
   })).data.meta
 });
-let $$c3 = eU(e => {
+let $$c3 = atom(e => {
   let t = e($$d4({}));
   return t.data ? new Set(t.data.files.map(e => e.library_key).filter(isNotNullish).map(_$$l)) : new Set();
 });
-let $$u0 = eU(e => {
+let $$u0 = atom(e => {
   let t = e($$d4({}));
   if (!t.data) return {};
   let r = {};
@@ -56,10 +56,10 @@ export function $$_5(e, t) {
   return e[t] ?? "";
 }
 export function $$h2(e) {
-  return $$_5(md($$u0), e);
+  return $$_5(useAtomWithSubscription($$u0), e);
 }
 export function $$m1() {
-  return md($$c3);
+  return useAtomWithSubscription($$c3);
 }
 export const Ai = $$u0;
 export const Kl = $$m1;

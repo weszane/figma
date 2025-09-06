@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { N } from "../905/438674";
 import { U } from "../905/103637";
 import { getFeatureFlags } from "../905/601108";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { Kx } from "../figma_app/546509";
 import { bD } from "../figma_app/45218";
 export function $$c0({
@@ -17,7 +17,7 @@ export function $$c0({
     }), jsx(N, {
       href: t,
       newTab: !0,
-      children: tx("whiteboard.inserts.browse_more_in_community")
+      children: renderI18nText("whiteboard.inserts.browse_more_in_community")
     })]
   });
 }

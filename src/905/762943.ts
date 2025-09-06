@@ -3,7 +3,7 @@ import { uz, p, Ap, LK, NU } from "../905/359509";
 import { K6 } from "../905/515076";
 import { debugState } from "../905/407919";
 import { NW, xC, DM } from "../figma_app/300692";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { X } from "../905/661977";
 export let $$c0 = {
   scaledWeb: "rem",
@@ -19,11 +19,11 @@ export function $$u3(e, t) {
   }) {
     let n = function () {
       let e = debugState.getState().localPlugins;
-      return NW(nT.DevHandoff, e);
+      return NW(FEditorType.DevHandoff, e);
     }();
     let r = function () {
       let e = debugState.getState().publishedPlugins;
-      return xC(nT.DevHandoff, e);
+      return xC(FEditorType.DevHandoff, e);
     }();
     return DM({
       idToSearch: e,

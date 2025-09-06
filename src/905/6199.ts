@@ -17,7 +17,7 @@ import { Pi, fi } from "../vendor/871930";
 import { Sd } from "../vendor/425002";
 import { vJ, lJ, I2, Mv, Ac, cq, mB } from "../vendor/408361";
 import { OZ } from "../905/491152";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { OL, Jf } from "../905/999278";
 import { zI } from "../vendor/850527";
 let d = memo(function (e) {
@@ -97,7 +97,7 @@ export function $$T0({
     className: "toolbar_plugin--toolbar--C-lb8",
     ref: i,
     children: [jsx(_$$f, {
-      "aria-label": _$$t("lexical_editor_toolbar.bold") + OZ({
+      "aria-label": getI18nString("lexical_editor_toolbar.bold") + OZ({
         keyShortcutKey: "B"
       }),
       onIcon: jsx(_$$j, {}),
@@ -108,7 +108,7 @@ export function $$T0({
         t.dispatchCommand(mB, "bold");
       }
     }), jsx(_$$f, {
-      "aria-label": _$$t("lexical_editor_toolbar.italic") + OZ({
+      "aria-label": getI18nString("lexical_editor_toolbar.italic") + OZ({
         keyShortcutKey: "I"
       }),
       onIcon: jsx(_$$s, {}),
@@ -119,7 +119,7 @@ export function $$T0({
         t.dispatchCommand(mB, "italic");
       }
     }), jsx(_$$f, {
-      "aria-label": _$$t("lexical_editor_toolbar.strikethrough") + OZ({
+      "aria-label": getI18nString("lexical_editor_toolbar.strikethrough") + OZ({
         keyShortcutShift: !0,
         keyShortcutKey: "X"
       }),
@@ -131,7 +131,7 @@ export function $$T0({
         t.dispatchCommand(mB, "strikethrough");
       }
     }), jsx(_$$f, {
-      "aria-label": _$$t("lexical_editor_toolbar.heading"),
+      "aria-label": getI18nString("lexical_editor_toolbar.heading"),
       onIcon: jsx(d, {}),
       offIcon: jsx(d, {}),
       checked: D,
@@ -145,7 +145,7 @@ export function $$T0({
         }(t, D);
       }
     }), jsx(_$$f, {
-      "aria-label": _$$t("lexical_editor_toolbar.bulleted_list"),
+      "aria-label": getI18nString("lexical_editor_toolbar.bulleted_list"),
       onIcon: jsx(Z, {}),
       offIcon: jsx(Z, {}),
       checked: F,
@@ -154,7 +154,7 @@ export function $$T0({
         F ? C(t) : t.dispatchCommand(q7, void 0);
       }
     }), jsx(_$$f, {
-      "aria-label": _$$t("lexical_editor_toolbar.numbered_list"),
+      "aria-label": getI18nString("lexical_editor_toolbar.numbered_list"),
       onIcon: jsx(_$$p, {}),
       offIcon: jsx(_$$p, {}),
       checked: j,
@@ -163,7 +163,7 @@ export function $$T0({
         j ? C(t) : t.dispatchCommand(_$$x, void 0);
       }
     }), jsx(_$$f, {
-      "aria-label": _$$t("lexical_editor_toolbar.link") + OZ({
+      "aria-label": getI18nString("lexical_editor_toolbar.link") + OZ({
         keyShortcutKey: "U",
         keyShortcutShift: !0
       }),
@@ -190,7 +190,7 @@ export function $$T0({
         }(t, B, e);
       }
     }), jsx(_$$f, {
-      "aria-label": _$$t("lexical_editor_toolbar.inline_code") + OZ({
+      "aria-label": getI18nString("lexical_editor_toolbar.inline_code") + OZ({
         keyShortcutShift: !0,
         keyShortcutKey: "C"
       }),
@@ -202,7 +202,7 @@ export function $$T0({
         t.dispatchCommand(mB, "code");
       }
     }), jsx(_$$f, {
-      "aria-label": _$$t("lexical_editor_toolbar.code_block") + OZ({
+      "aria-label": getI18nString("lexical_editor_toolbar.code_block") + OZ({
         keyShortcutShift: !0,
         keyShortcutOption: !0,
         keyShortcutKey: "C"

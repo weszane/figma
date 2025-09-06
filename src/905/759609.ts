@@ -14,14 +14,14 @@ import { h3O } from "../figma_app/763686";
 import { xj, Mx, yx } from "../figma_app/851625";
 import { h as _$$h } from "../905/207101";
 import { Uz } from "../905/63728";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { J9 } from "../905/149328";
 import { Point } from "../905/736624";
 import { or, Ss, BL, xY, qW, u as _$$u } from "../905/720292";
 import { ec } from "../figma_app/449837";
 import { dW } from "../figma_app/858013";
 import { x as _$$x } from "../905/211326";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { Y as _$$Y, M as _$$M } from "../905/830372";
 import { Ce } from "../905/156213";
 import { eS, aD } from "../figma_app/646357";
@@ -56,7 +56,7 @@ function H({
     onKeyDown: s,
     title: jsx("div", {
       className: "review_updates_modal--modalTitle--GUA80",
-      children: tx("design_systems.updates.review_updates")
+      children: renderI18nText("design_systems.updates.review_updates")
     }),
     initialWidth: tA,
     initialPosition: o,
@@ -132,22 +132,22 @@ function W(e) {
             variant: "secondary",
             disabled: !0,
             iconPrefix: jsx(_$$l, {}),
-            children: tx("design_systems.updates.updated")
+            children: renderI18nText("design_systems.updates.updated")
           }) : jsx(WW, {
             variant: C ? "secondary" : "primary",
             onClick: S,
             htmlAttributes: {
               autoFocus: !0
             },
-            children: tx("design_systems.updates.update_instance")
+            children: renderI18nText("design_systems.updates.update_instance")
           }), !isUpdatedAsset && C && jsx(WW, {
             variant: "primary",
             onClick: E,
-            children: tx("design_systems.updates.update_all")
+            children: renderI18nText("design_systems.updates.update_all")
           }), isUpdatedAsset && nextAssetHandler && jsx(WW, {
             variant: "primary",
             onClick: nextAssetHandler,
-            children: tx("design_systems.libraries_modal.next_component")
+            children: renderI18nText("design_systems.libraries_modal.next_component")
           })]
         }),
         assetType: PW.COMPONENT
@@ -237,14 +237,14 @@ function Y({
     },
     children: jsx(_$$x, {
       isLoading: !0,
-      children: () => tx("design_systems.updates.preview_unavailable")
+      children: () => renderI18nText("design_systems.updates.preview_unavailable")
     })
   }) : jsx("div", {
     className: U,
     style: {
       backgroundColor: l
     },
-    children: tx("design_systems.updates.preview_unavailable")
+    children: renderI18nText("design_systems.updates.preview_unavailable")
   });
   return jsx(or, {
     title: xj(e) ? t : "",
@@ -267,7 +267,7 @@ function q({
     children: [jsx("div", {
       className: "review_updates_modal--left--W88Yj",
       children: jsx(_$$K, {
-        "aria-label": _$$t("design_systems.updates.back_to_all_updates"),
+        "aria-label": getI18nString("design_systems.updates.back_to_all_updates"),
         onClick: () => {
           o(UX(Wv.UPDATES, s));
         },
@@ -281,14 +281,14 @@ function q({
         spacing: 4,
         children: [jsx("div", {
           className: "review_updates_modal--assetName--tJRHB",
-          children: d ? tx("design_systems.updates.instanceName", {
+          children: d ? renderI18nText("design_systems.updates.instanceName", {
             assetName: e
-          }) : tx("design_systems.updates.styleName", {
+          }) : renderI18nText("design_systems.updates.styleName", {
             assetName: e
           })
         }), r && jsx("div", {
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": _$$t("design_systems.updates.this_instance_is_hidden"),
+          "data-tooltip": getI18nString("design_systems.updates.this_instance_is_hidden"),
           children: jsx(_$$j, {})
         })]
       })]
@@ -353,36 +353,36 @@ function Z({
               children: jsxs("div", {
                 className: "review_updates_modal--instanceNavigationWrapper--bNZTc",
                 children: [jsx(_$$K, {
-                  "aria-label": _$$t("design_systems.updates.previous_instance"),
+                  "aria-label": getI18nString("design_systems.updates.previous_instance"),
                   disabled: !previousHandler,
                   onClick: previousHandler ?? void 0,
                   children: jsx(_$$C, {})
                 }), jsx(_$$K, {
-                  "aria-label": _$$t("design_systems.updates.next_instance"),
+                  "aria-label": getI18nString("design_systems.updates.next_instance"),
                   disabled: !nextHandler,
                   onClick: nextHandler ?? void 0,
                   children: jsx(_$$e2, {})
                 })]
               })
             }), jsx("div", {
-              children: tx("design_systems.updates.instanceIndexOfTotal", {
+              children: renderI18nText("design_systems.updates.instanceIndexOfTotal", {
                 overallItemIndex: currentAssetInstanceIndex + 1,
                 totalNumItems: numCurrentAssetInstances
               })
             }), jsx("div", {
               children: jsx(_$$K, {
                 disabled: !navigateToCurrentInstance,
-                "aria-label": _$$t("design_systems.updates.go_to_current_instance"),
+                "aria-label": getI18nString("design_systems.updates.go_to_current_instance"),
                 onClick: navigateToCurrentInstance ?? void 0,
                 children: jsx(_$$A, {})
               })
             })]
           }) : jsxs("button", {
             "aria-disabled": !navigateToCurrentInstance,
-            "aria-label": _$$t("design_systems.updates.go_to_current_instance"),
+            "aria-label": getI18nString("design_systems.updates.go_to_current_instance"),
             className: "review_updates_modal--footerLink--xKGaI blue_link--blueLinkDefaultPointer--ozEG5 blue_link--blueLink--9rlnd",
             onClick: navigateToCurrentInstance ?? void 0,
-            children: [jsx(_$$A, {}), tx("design_systems.updates.go_to_current_instance")]
+            children: [jsx(_$$A, {}), renderI18nText("design_systems.updates.go_to_current_instance")]
           })
         }), jsx(_$$M, {}), jsx(_$$Y, {
           horizontalAlignItems: "end",
@@ -404,11 +404,11 @@ function X({
       variant: "secondary",
       disabled: !0,
       iconPrefix: jsx(_$$l, {}),
-      children: tx("design_systems.updates.updated")
+      children: renderI18nText("design_systems.updates.updated")
     }), !a && jsx(WW, {
       variant: "primary",
       onClick: t,
-      children: tx("design_systems.updates.update_all")
+      children: renderI18nText("design_systems.updates.update_all")
     })]
   }) : jsxs(Fragment, {
     children: [jsx(WW, {
@@ -417,11 +417,11 @@ function X({
       htmlAttributes: {
         autoFocus: !0
       },
-      children: tx("design_systems.updates.update_style")
+      children: renderI18nText("design_systems.updates.update_style")
     }), i && jsx(WW, {
       variant: "primary",
       onClick: t,
-      children: tx("design_systems.updates.update_all")
+      children: renderI18nText("design_systems.updates.update_all")
     })]
   });
 }
@@ -449,7 +449,7 @@ let Q = memo(function ({
       zoomPercentageOptions: uj,
       zoomOnMousePointer: !1,
       children: [jsx(Y, {
-        title: _$$t("design_systems.updates.updated"),
+        title: getI18nString("design_systems.updates.updated"),
         containerStyle: B,
         renderBackground: !0,
         asyncLoadedImage: t
@@ -462,12 +462,12 @@ let Q = memo(function ({
           asyncLoadedImage: e,
           containerStyle: "review_updates_modal--beforeUpdate--WnsX7 review_updates_modal--_comparable--E852T",
           renderBackground: !0,
-          title: _$$t("design_systems.updates.current")
+          title: getI18nString("design_systems.updates.current")
         }), jsx(Y, {
           asyncLoadedImage: t,
           containerStyle: "review_updates_modal--afterUpdate--1P72H review_updates_modal--_comparable--E852T",
           renderBackground: !0,
-          title: _$$t("design_systems.updates.updated")
+          title: getI18nString("design_systems.updates.updated")
         }), h(!0)]
       }), o === Ss.OVERLAY && jsxs(xY, {
         zoomPercentageOptions: uj,
@@ -499,7 +499,7 @@ let J = memo(function (e) {
       o(!0);
       return;
     }
-    t.type === PW.COMPONENT && t.component_key ? Mz([t]).then(() => o(!0)) : t.type === PW.STATE_GROUP && t.key ? a7([t]).then(() => o(!0)) : ($D(_$$e.DESIGN_SYSTEMS_EDITOR, Error("Update asset does not have a key")), o(!0));
+    t.type === PW.COMPONENT && t.component_key ? Mz([t]).then(() => o(!0)) : t.type === PW.STATE_GROUP && t.key ? a7([t]).then(() => o(!0)) : (reportError(_$$e.DESIGN_SYSTEMS_EDITOR, Error("Update asset does not have a key")), o(!0));
   });
   let l = useRef(null);
   return jsx(_$$d, {

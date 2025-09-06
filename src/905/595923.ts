@@ -2,12 +2,12 @@ import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { isNotNullish } from "../figma_app/95419";
 import s, { k as _$$k } from "../905/443820";
-import { eU, md } from "../figma_app/27355";
+import { atom, useAtomWithSubscription } from "../figma_app/27355";
 import { Xf } from "../figma_app/153916";
 import { Rs } from "../figma_app/288654";
 import { b as _$$b } from "../figma_app/246400";
 import { $z } from "../figma_app/617427";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { Y as _$$Y } from "../905/830372";
 import { B as _$$B } from "../905/261906";
@@ -40,9 +40,9 @@ import { L as _$$L } from "../figma_app/288254";
 import { k as _$$k3 } from "../figma_app/121990";
 import { E4 } from "../905/144598";
 import { WZ, ix } from "../figma_app/538002";
-export let $$W0 = eU(null);
+export let $$W0 = atom(null);
 export function $$K1(e) {
-  let t = md($$W0);
+  let t = useAtomWithSubscription($$W0);
   let i = m0() ? FProductAccessType.DEV_MODE : wR(e.editorType);
   let a = F2(i);
   let s = !!e.org;
@@ -217,7 +217,7 @@ function $(e) {
   let d = _$$P();
   let c = _$$L();
   let m = E4(fileRole, d);
-  let h = currentSeatType ? tx("file_permissions_modal.update_seat_tab.user_currently_has_a_current_seat_you_can_upgrade", {
+  let h = currentSeatType ? renderI18nText("file_permissions_modal.update_seat_tab.user_currently_has_a_current_seat_you_can_upgrade", {
     user: jsx("span", {
       className: "x1g2dr8m xiqqdae xkezfkh x14kxzw3 x1giz659",
       children: m
@@ -225,7 +225,7 @@ function $(e) {
     currentSeat: JT(currentSeatType),
     seatType: JT(neededSeatType),
     product: _$$E(licenseType)
-  }) : tx("file_permissions_modal.update_seat_tab.user_needs_a_bundle_seat", {
+  }) : renderI18nText("file_permissions_modal.update_seat_tab.user_needs_a_bundle_seat", {
     user: jsx("span", {
       className: "x1g2dr8m xiqqdae xkezfkh x14kxzw3 x1giz659",
       children: m
@@ -261,7 +261,7 @@ function $(e) {
           trackingProperties: {
             trackingDescriptor: _$$c.CONFIRM
           },
-          children: _$$t("file_permissions_modal.update_seat_tab.confirm")
+          children: getI18nString("file_permissions_modal.update_seat_tab.confirm")
         })
       })
     })]
@@ -304,7 +304,7 @@ function Z({
           })
         })]
       }), !!i && jsx(_$$k, {}), !!t && !i && jsx("div", {
-        children: _$$t("file_permissions_modal.update_seat_tab.per_month", {
+        children: getI18nString("file_permissions_modal.update_seat_tab.per_month", {
           priceString: t
         })
       })]
@@ -313,7 +313,7 @@ function Z({
 }
 function X(e, t) {
   e(_$$F.enqueue({
-    message: _$$t("file_permissions_modal.update_seat_tab.seat_assigned", {
+    message: getI18nString("file_permissions_modal.update_seat_tab.seat_assigned", {
       seatType: _$$O(t)
     }),
     type: "update-seat-success"
@@ -321,7 +321,7 @@ function X(e, t) {
 }
 function Q(e) {
   e(_$$F.enqueue({
-    message: _$$t("file_permissions_modal.update_seat_tab.seat_update_error"),
+    message: getI18nString("file_permissions_modal.update_seat_tab.seat_update_error"),
     error: !0,
     type: "update-seat-error"
   }));

@@ -6,7 +6,7 @@ import { serializeQuery } from "../905/634134";
 import { XHR } from "../905/910117";
 import { d6 } from "../figma_app/687776";
 import { s as _$$s } from "../905/573154";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { nF } from "../905/350402";
 import { sf } from "../905/929976";
@@ -24,7 +24,7 @@ import { M4 } from "../905/713695";
 import { R5, mx } from "../figma_app/598018";
 import { b as _$$b } from "../905/165519";
 import { Bi, vL } from "../905/652992";
-import { wN } from "../figma_app/53721";
+import { mapFileTypeToEditorType } from "../figma_app/53721";
 import { ZN } from "../figma_app/630077";
 import { F as _$$F3 } from "../905/915030";
 import { DV } from "../905/739964";
@@ -190,7 +190,7 @@ let $$U3 = nF(async (e, t) => {
     n.catch(({
       data: t
     }) => {
-      t && t.message ? e.dispatch(_$$s.error(t.message)) : e.dispatch(_$$s.error(_$$t("file_browser.file_browser_actions.duplicate_file_error")));
+      t && t.message ? e.dispatch(_$$s.error(t.message)) : e.dispatch(_$$s.error(getI18nString("file_browser.file_browser_actions.duplicate_file_error")));
     });
     return n;
   });
@@ -198,12 +198,12 @@ let $$U3 = nF(async (e, t) => {
     if (!t.some(e => "reject" === e.type)) {
       let n = copyFiles.filter(e => !!e.folderId && c.includes(e.folderId)).length;
       let i = t => t && t.editor_type ? {
-        text: _$$t("general.open"),
+        text: getI18nString("general.open"),
         action: () => {
           e.dispatch(sf({
             view: "fullscreen",
             fileKey: t.key,
-            editorType: wN(t.editor_type)
+            editorType: mapFileTypeToEditorType(t.editor_type)
           }));
           e.dispatch(_$$F.dequeue({}));
         }
@@ -212,11 +212,11 @@ let $$U3 = nF(async (e, t) => {
         let r;
         let a = "";
         let s = 1 === copyFiles.length;
-        a = s ? _$$t("user_view.file_duplicated_to_your_drafts") : n === copyFiles.length ? _$$t("user_view.files_duplicated_to_your_drafts", {
+        a = s ? getI18nString("user_view.file_duplicated_to_your_drafts") : n === copyFiles.length ? getI18nString("user_view.files_duplicated_to_your_drafts", {
           intArg: n
-        }) : _$$t("user_view.some_files_duplicated_to_your_drafts");
+        }) : getI18nString("user_view.some_files_duplicated_to_your_drafts");
         r = s ? i(t[0].resolve?.data?.meta) : {
-          text: _$$t("general.show"),
+          text: getI18nString("general.show"),
           action: () => {
             o && e.dispatch(sf({
               view: "folder",
@@ -234,7 +234,7 @@ let $$U3 = nF(async (e, t) => {
         let r = i(1 === copyFiles.length ? t[0].resolve?.data?.meta : void 0);
         e.dispatch(_$$F.enqueue({
           type: "file_duplicated",
-          message: 1 === copyFiles.length ? _$$t("user_view.file_duplicated") : _$$t("user_view.files_duplicated", {
+          message: 1 === copyFiles.length ? getI18nString("user_view.file_duplicated") : getI18nString("user_view.files_duplicated", {
             intArg: copyFiles.length
           }),
           button: r
@@ -256,11 +256,11 @@ let $$G0 = nF((e, t) => {
   return XHR.post(`/api/multiplayer/${t.file.key}/copy?${serializeQuery({
     folder_id: n
   })}`).then(() => {
-    e.dispatch(_$$s.flash(_$$t("user_view.file_duplicated_to_your_drafts")));
+    e.dispatch(_$$s.flash(getI18nString("user_view.file_duplicated_to_your_drafts")));
   }).catch(({
     data: t
   }) => {
-    t && t.message ? e.dispatch(_$$s.error(t.message)) : e.dispatch(_$$s.error(_$$t("file_browser.file_browser_actions.duplicate_file_error")));
+    t && t.message ? e.dispatch(_$$s.error(t.message)) : e.dispatch(_$$s.error(getI18nString("file_browser.file_browser_actions.duplicate_file_error")));
   });
 });
 export const W6 = $$G0;

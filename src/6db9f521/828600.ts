@@ -3,11 +3,11 @@ import { useState, useRef, useEffect } from "react";
 import { E as _$$E } from "../905/632989";
 import { r as _$$r } from "../905/571562";
 import { a as _$$a } from "../905/339331";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import d from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
 import { f as _$$f } from "../figma_app/109947";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Dm } from "../figma_app/8833";
 import { QU } from "../figma_app/62612";
 import { wV } from "../figma_app/779965";
@@ -31,7 +31,7 @@ export function $$b0({
   let I = QU({
     subscribeToUpdates_expensive: !0
   });
-  let N = md(_$$f);
+  let N = useAtomWithSubscription(_$$f);
   let k = (I - (N?.current?.clientWidth ?? 0)) / 2 - j - 6;
   let [C, w] = useState(230);
   function O() {
@@ -48,7 +48,7 @@ export function $$b0({
     defaultSize: 230,
     disableResizing: !v,
     id: "focus-floating-left-panel",
-    onResize: (e) => {
+    onResize: e => {
       w(Math.min(Math.max(e, 230), k));
     },
     side: "right",
@@ -70,14 +70,14 @@ export function $$b0({
           }),
           onClick: O,
           "aria-expanded": v,
-          "aria-label": _$$t("dev_handoff.tag.layers"),
+          "aria-label": getI18nString("dev_handoff.tag.layers"),
           children: [!v && i, jsxs("div", {
             className: "floating_layers_panel--middle--QR7nt",
             children: [jsx("div", {
               className: c()("floating_layers_panel--title--pH3fr", {
                 "floating_layers_panel--hasNoIconWhenCollapsed--F2ap6": !i && !v
               }),
-              children: tx("dev_handoff.tag.layers")
+              children: renderI18nText("dev_handoff.tag.layers")
             }), !v && t]
           })]
         }), v && d, jsx(_$$E, {
@@ -86,7 +86,7 @@ export function $$b0({
           }),
           onClick: O,
           "aria-expanded": v,
-          "aria-label": _$$t("dev_handoff.tag.layers"),
+          "aria-label": getI18nString("dev_handoff.tag.layers"),
           children: v ? jsx(_$$r, {
             className: f
           }) : jsx(_$$a, {

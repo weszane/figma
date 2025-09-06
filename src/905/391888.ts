@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useDispatch, useStore } from "../vendor/514228";
-import { aw } from "../figma_app/876459";
+import { OpenTarget } from "../figma_app/876459";
 import { Ay } from "../905/612521";
 import { Fo } from "../905/63728";
 import { gN } from "../figma_app/976345";
@@ -13,7 +13,7 @@ export function $$u0() {
     e(oB());
     let r = Fo(n);
     let u = null;
-    if (r && n.shiftKey ? u = aw.FOCAL_TAB : r ? u = aw.BACKGROUND_TAB : n.shiftKey && (u = aw.NEW_WINDOW), null != u) {
+    if (r && n.shiftKey ? u = OpenTarget.FOCAL_TAB : r ? u = OpenTarget.BACKGROUND_TAB : n.shiftKey && (u = OpenTarget.NEW_WINDOW), null != u) {
       n.preventDefault();
       let e = gN(i);
       let r = t.getState();

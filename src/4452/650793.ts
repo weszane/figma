@@ -3,7 +3,7 @@ import { b, bL, mc } from "../figma_app/860955";
 import { J } from "../905/125993";
 import i, { a } from "../905/964520";
 import { Me } from "../figma_app/617427";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { c as _$$c } from "../905/370443";
 import { Hv, Ib, oi } from "../figma_app/527041";
 if (443 == require.j) {}
@@ -34,7 +34,7 @@ export function $$m3({
       className: isOpen ? void 0 : Ib,
       children: jsx(Me, {
         ...getTriggerProps(),
-        "aria-label": _$$t("multi_select_list.more"),
+        "aria-label": getI18nString("multi_select_list.more"),
         "data-testid": "multi-select-list-menu-cell-icon",
         "data-onboarding-key": e,
         trackingProperties: {
@@ -58,7 +58,7 @@ function _({
 }
 export function $$p2() {
   return jsx(Me, {
-    "aria-label": _$$t("multi_select_list.manage"),
+    "aria-label": getI18nString("multi_select_list.manage"),
     trackingProperties: {
       trackingDescriptor: _$$c.MANAGE
     },

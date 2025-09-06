@@ -6,8 +6,8 @@ import { WW } from "../905/521428";
 import { generateRecordingKey } from "../figma_app/878298";
 import p from "../vendor/223926";
 import { A as _$$A } from "../905/920142";
-import { R } from "../905/103090";
-import { t as _$$t } from "../905/303541";
+import { selectWithShallowEqual } from "../905/103090";
+import { getI18nString } from "../905/303541";
 import { af } from "../figma_app/559491";
 import { Q7 } from "../905/15667";
 import { Yo } from "../figma_app/543529";
@@ -17,7 +17,7 @@ import { vA, JT } from "../figma_app/300692";
 import { O as _$$O } from "../figma_app/185954";
 import { R as _$$R } from "../figma_app/612938";
 import { bD } from "../figma_app/45218";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { ZQ, FW } from "../figma_app/155287";
 import { Ib } from "../905/129884";
 import { V as _$$V } from "../905/480825";
@@ -104,7 +104,7 @@ function S(e) {
     plugin
   } = e;
   let p = _r();
-  let u = hasMultipleOptions ? _$$t("whiteboard.inline_menu.open_relaunch_menu.aria_label", {
+  let u = hasMultipleOptions ? getI18nString("whiteboard.inline_menu.open_relaunch_menu.aria_label", {
     pluginName: plugin.name
   }) : tooltipName ?? plugin.name;
   let s = hasMultipleOptions ? {
@@ -196,10 +196,10 @@ function E(e) {
   });
 }
 export function $$F0() {
-  let e = R(e => e.mirror.selectionProperties.pluginRelaunchData);
+  let e = selectWithShallowEqual(e => e.mirror.selectionProperties.pluginRelaunchData);
   let t = useSelector(e => e.mirror.selectionProperties.numSelected);
-  let n = R(e => e.publishedPlugins);
-  let r = R(e => e.localPlugins);
+  let n = selectWithShallowEqual(e => e.publishedPlugins);
+  let r = selectWithShallowEqual(e => e.localPlugins);
   let a = Yo();
   let p = tS();
   let C = useRef(new _$$O(_$$A.duration(1, "day")));
@@ -219,7 +219,7 @@ export function $$F0() {
       _$$R.instance.handleUpgrade(Q7.RUN_WIDGET);
       return;
     }
-    t = _$$t("whiteboard.inline_menu.relaunching_plugin", {
+    t = getI18nString("whiteboard.inline_menu.relaunching_plugin", {
       commandName: e.relaunchButton.name
     });
     n = "figjam-plugin-relaunched";
@@ -233,7 +233,7 @@ export function $$F0() {
       canRun
     } = JT({
       plugin: e.plugin,
-      editorType: nT.Whiteboard
+      editorType: FEditorType.Whiteboard
     });
     canRun && _$$R.instance.enqueue({
       mode: "run-forever",

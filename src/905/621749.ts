@@ -11,7 +11,7 @@ import { Rs } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { i0 } from "../905/17223";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { Y as _$$Y, M as _$$M } from "../905/830372";
 import { $z } from "../905/599896";
 import { I as _$$I } from "../905/343721";
@@ -33,12 +33,12 @@ let $$v = "team-admin-confirm-downgrade";
 let I = _$$A2.createLazyComponent(() => Promise.all([]).then(_require).then(e => e.ConfirmDowngradeModal), Ij("ConfirmDowngradeModal"));
 qK($$v, I);
 let L = {
-  title: tx("churn_friction.modal.team_libraries"),
+  title: renderI18nText("churn_friction.modal.team_libraries"),
   url: "https://help.figma.com/hc/articles/360041051154-Guide-to-libraries-in-Figma",
   graphic: jsx(_$$L, {})
 };
 let F = {
-  title: tx("churn_friction.modal.audio_conversations"),
+  title: renderI18nText("churn_friction.modal.audio_conversations"),
   url: "https://help.figma.com/hc/articles/1500004414622-Use-audio-to-chat-with-your-team",
   graphic: jsx(function () {
     return jsxs("svg", {
@@ -88,7 +88,7 @@ let F = {
   }, {})
 };
 let M = {
-  title: tx("churn_friction.modal.advanced_prototyping"),
+  title: renderI18nText("churn_friction.modal.advanced_prototyping"),
   url: "https://help.figma.com/hc/sections/15485559585687-Advanced-prototyping",
   graphic: jsx(function () {
     return jsxs("svg", {
@@ -229,12 +229,12 @@ let M = {
   }, {})
 };
 let j = {
-  title: tx("churn_friction.modal.private_projects_and_prototypes"),
+  title: renderI18nText("churn_friction.modal.private_projects_and_prototypes"),
   url: "https://help.figma.com/hc/articles/360038006494-Create-a-new-project",
   graphic: jsx(_$$I2, {})
 };
 let U = {
-  title: tx("churn_friction.modal.published_content"),
+  title: renderI18nText("churn_friction.modal.published_content"),
   url: oz() ? "https://help.figma.com/hc/articles/31242845959703-Publish-a-site" : "https://help.figma.com/hc/articles/31304586129559",
   graphic: jsx(function () {
     return jsxs("svg", {
@@ -364,22 +364,22 @@ export let $$z0 = Ju(function ({
   let q = [];
   H.show && q.push(jsx(V, {
     image: jsx(_$$p, {}),
-    title: _$$t("churn_friction.modal.design_file_count", {
+    title: getI18nString("churn_friction.modal.design_file_count", {
       designFileCount: H.count
     }),
-    subtitle: _$$t("churn_friction.modal.design_file_subtitle")
+    subtitle: getI18nString("churn_friction.modal.design_file_subtitle")
   }, "files-stat-box"));
   W > Wf && q.push(jsx(V, {
     image: jsx(_$$e, {}),
-    title: _$$t("churn_friction.modal.project_count", {
+    title: getI18nString("churn_friction.modal.project_count", {
       projectCount: W
     }),
-    subtitle: _$$t("churn_friction.modal.project_subtitle")
+    subtitle: getI18nString("churn_friction.modal.project_subtitle")
   }, "projects-stat-box"));
   B() && q.push(jsx(V, {
     image: jsx(_$$a, {}),
-    title: _$$t("churn_friction.modal.published_content"),
-    subtitle: _$$t("churn_friction.modal.published_content_subtitle")
+    title: getI18nString("churn_friction.modal.published_content"),
+    subtitle: getI18nString("churn_friction.modal.published_content_subtitle")
   }, "published-stat-box"));
   K > 1 && q.push(jsx(V, {
     image: jsx(_$$W, {
@@ -389,10 +389,10 @@ export let $$z0 = Ju(function ({
       entityList: Y,
       currentUser: null
     }),
-    title: _$$t("churn_friction.modal.editor_count.seat_rename", {
+    title: getI18nString("churn_friction.modal.editor_count.seat_rename", {
       editorCount: K
     }),
-    subtitle: _$$t("churn_friction.modal.editor_subtitle")
+    subtitle: getI18nString("churn_friction.modal.editor_subtitle")
   }, "editors-stat-box"));
   let $ = q.length < 2 || I;
   let Z = B() ? [L, U, M, j] : [L, F, M, j];
@@ -401,7 +401,7 @@ export let $$z0 = Ju(function ({
     spacing: 16,
     children: [jsx("p", {
       className: _$$s.font13.colorText.lh24.$,
-      children: tx("churn_friction.modal.your_team_will_lose")
+      children: renderI18nText("churn_friction.modal.your_team_will_lose")
     }), Z.map(({
       title: e,
       url: t,
@@ -409,7 +409,7 @@ export let $$z0 = Ju(function ({
     }) => jsx(G, {
       title: e,
       onSubtitleClick: () => Ay.unsafeRedirect(t, "_blank"),
-      subtitle: _$$t("churn_friction.modal.learn_more"),
+      subtitle: getI18nString("churn_friction.modal.learn_more"),
       graphic: i
     }, t))]
   });
@@ -419,9 +419,9 @@ export let $$z0 = Ju(function ({
       spacing: 16,
       children: [jsx("p", {
         className: _$$s.font13.colorText.lh24.$,
-        children: B() && y ? tx("churn_friction.modal.view_only_on_date", {
+        children: B() && y ? renderI18nText("churn_friction.modal.view_only_on_date", {
           date: y
-        }) : tx("churn_friction.modal.converted_to_view_only")
+        }) : renderI18nText("churn_friction.modal.converted_to_view_only")
       }), jsx(_$$Y, {
         spacing: 16,
         verticalAlignItems: "stretch",
@@ -433,10 +433,10 @@ export let $$z0 = Ju(function ({
       spacing: 16,
       children: [jsx("p", {
         className: _$$s.font13.colorText.lh24.$,
-        children: tx("churn_friction.modal.your_team_will_lose")
+        children: renderI18nText("churn_friction.modal.your_team_will_lose")
       }), jsx(G, {
-        title: tx("churn_friction.modal.feature_examples"),
-        subtitle: _$$t("churn_friction.modal.cta.see_everything_youll_lose"),
+        title: renderI18nText("churn_friction.modal.feature_examples"),
+        subtitle: getI18nString("churn_friction.modal.cta.see_everything_youll_lose"),
         onSubtitleClick: () => N(!0),
         graphic: jsx(_$$L, {})
       })]
@@ -455,7 +455,7 @@ export let $$z0 = Ju(function ({
         onClick: P
       }), jsx("p", {
         className: _$$s.font20.colorText.fontSemiBold.lh32.$,
-        children: tx("churn_friction.modal.title")
+        children: renderI18nText("churn_friction.modal.title")
       }), jsxs(_$$Y, {
         direction: "vertical",
         spacing: 24,
@@ -478,7 +478,7 @@ export let $$z0 = Ju(function ({
           }), jsx(_$$M, {}), jsx("button", {
             className: _$$s.mx12.my8.underline.cursorPointer.fontMedium.lh16.$,
             onClick: P,
-            children: tx("churn_friction.modal.cta.keep_plan")
+            children: renderI18nText("churn_friction.modal.cta.keep_plan")
           }), jsx($z, {
             variant: "secondary",
             innerText: "Continue",
@@ -493,7 +493,7 @@ export let $$z0 = Ju(function ({
             },
             children: jsx("div", {
               className: _$$s.fontMedium.lh16.$,
-              children: tx("churn_friction.modal.cta.continue")
+              children: renderI18nText("churn_friction.modal.cta.continue")
             })
           })]
         })]

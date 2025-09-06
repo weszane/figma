@@ -3,7 +3,7 @@ import { useState, useMemo } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { q7 } from "../figma_app/860955";
 import { getFeatureFlags } from "../905/601108";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { oA } from "../905/723791";
 import { s as _$$s } from "../905/573154";
 import { fk } from "../figma_app/618433";
@@ -18,7 +18,7 @@ import { FC } from "../figma_app/212807";
 import { _6 } from "../figma_app/386952";
 import { b as _$$b } from "../905/165519";
 import { vL } from "../905/652992";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { ZN } from "../figma_app/630077";
 import { pW } from "../905/218608";
 import { $A } from "../905/782918";
@@ -26,7 +26,7 @@ import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { J8 } from "../905/760074";
 import { Ju } from "../905/102752";
 import { DV } from "../905/739964";
@@ -65,7 +65,7 @@ function $$D(e) {
       fileKey: e,
       version
     }));
-    sx("Undo Merge", {
+    trackEventAnalytics("Undo Merge", {
       fileKey: e,
       versionId: version.id,
       savedAt: version.touched_at
@@ -77,21 +77,21 @@ function $$D(e) {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: tx("collaboration.branching.undo_merge_title")
+          children: renderI18nText("collaboration.branching.undo_merge_title")
         })
       }), jsx(nB, {
-        children: tx("collaboration.branching.undo_merge_description")
+        children: renderI18nText("collaboration.branching.undo_merge_description")
       }), jsx(wi, {
         children: jsxs(jk, {
           children: [jsx($n, {
             variant: "secondary",
             onClick: () => t(Ce()),
-            children: tx("collaboration.branching.undo_merge_cancel")
+            children: renderI18nText("collaboration.branching.undo_merge_cancel")
           }), jsx($n, {
             variant: "primary",
             onClick: f,
             disabled: s,
-            children: tx("collaboration.branching.undo_merge_confirm")
+            children: renderI18nText("collaboration.branching.undo_merge_confirm")
           })]
         })
       })]
@@ -112,22 +112,22 @@ let F = Ju(function (e) {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$t("cms_file_operations.cms_data_wont_roll_back")
+          children: getI18nString("cms_file_operations.cms_data_wont_roll_back")
         })
       }), jsx(nB, {
         children: jsx("p", {
-          children: _$$t("cms_file_operations.when_you_roll_back_to")
+          children: getI18nString("cms_file_operations.when_you_roll_back_to")
         })
       }), jsx(wi, {
         children: jsxs(jk, {
           children: [jsx($n, {
             onClick: onClose,
             variant: "secondary",
-            children: _$$t("cms_file_operations.cancel")
+            children: getI18nString("cms_file_operations.cancel")
           }), jsx($n, {
             onClick: onConfirm,
             variant: "primary",
-            children: _$$t("cms_file_operations.continue_anyway")
+            children: getI18nString("cms_file_operations.continue_anyway")
           })]
         })
       })]
@@ -151,7 +151,7 @@ export function $$B0(e) {
       "data-test-id": `savepoint-menu-item-${e}`,
       children: _$$A(e)
     }, e);
-    let a = T.editorType === nT.Slides && oA(t.org?.isSlidesDisabled) || T.editorType === nT.Whiteboard && !!t.org?.figjamDisabledAt || T.editorType === nT.Sites && !!t.org?.isSitesDisabled || T.editorType === nT.Cooper && !!t.org?.isCooperDisabled;
+    let a = T.editorType === FEditorType.Slides && oA(t.org?.isSlidesDisabled) || T.editorType === FEditorType.Whiteboard && !!t.org?.figjamDisabledAt || T.editorType === FEditorType.Sites && !!t.org?.isSitesDisabled || T.editorType === FEditorType.Cooper && !!t.org?.isCooperDisabled;
     let u = r("savepoint-compare", () => {
       k(_$$D({
         fileKey: t.key,
@@ -177,7 +177,7 @@ export function $$B0(e) {
           fileKey: t.key,
           versionId: C.id
         }));
-        sx("History Version Checkpoint Restored", {
+        trackEventAnalytics("History Version Checkpoint Restored", {
           versionId: C.id,
           savedAt: C.touched_at
         });
@@ -205,7 +205,7 @@ export function $$B0(e) {
       })) : (k(YW({
         file: t,
         versionId: C.id
-      })), sx("History Version Checkpoint Duplicated", {
+      })), trackEventAnalytics("History Version Checkpoint Duplicated", {
         versionId: C.id,
         savedAt: C.touched_at
       }));
@@ -234,7 +234,7 @@ export function $$B0(e) {
       }));
     });
     i ? pW(C) ? "branch_child_merge" === C.view ? (e.push(A, y, b, O), getFeatureFlags().branching_undo_merge && e.push(D)) : e.push(y, b, O) : e.push(A, y, b, P, O) : e.push(b, O);
-    getFeatureFlags().version_diffing && T.editorType !== nT.Whiteboard && !$A(T) && e.push(u);
+    getFeatureFlags().version_diffing && T.editorType !== FEditorType.Whiteboard && !$A(T) && e.push(u);
     return e;
   }, [T, C, i, t, R, N, k]);
 }

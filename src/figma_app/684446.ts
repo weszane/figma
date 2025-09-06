@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "../vendor/514228";
 import { sortByPropertyWithOptions } from "../figma_app/656233";
 import { A } from "../905/920142";
 import { s as _$$s } from "../905/573154";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { kc } from "../figma_app/35887";
 import { Eh } from "../figma_app/617654";
 import { dq } from "../905/845253";
@@ -38,7 +38,7 @@ export function $$m8(e, t = !0) {
           d(!0);
           a(!1);
         } catch (e) {
-          g(_$$s.error(_$$t("license_group.an_error_occurred_fetching_license_group_counts")));
+          g(_$$s.error(getI18nString("license_group.an_error_occurred_fetching_license_group_counts")));
           a(!1);
           d(!1);
           p(!0);
@@ -105,19 +105,19 @@ export function $$I9(e, t) {
     r = function (e, t) {
       switch (e) {
         case kc.SELF_SELECTED:
-          return _$$t("members_table.billing_group_update_description.self_selected");
+          return getI18nString("members_table.billing_group_update_description.self_selected");
         case kc.SELF_SELECTED_NOT_LISTED:
-          return _$$t("members_table.billing_group_update_description.self_selected_not_listed");
+          return getI18nString("members_table.billing_group_update_description.self_selected_not_listed");
         case kc.SELF_SELECTED_DONT_KNOW:
-          return _$$t("members_table.billing_group_update_description.self_selected_dont_know");
+          return getI18nString("members_table.billing_group_update_description.self_selected_dont_know");
         case kc.MOVED_BY_ADMIN:
-          return t ? _$$t("members_table.billing_group_update_description.moved_by_admin", {
+          return t ? getI18nString("members_table.billing_group_update_description.moved_by_admin", {
             adminName: t
-          }) : _$$t("members_table.billing_group_update_description.moved_by_admin_generic");
+          }) : getI18nString("members_table.billing_group_update_description.moved_by_admin_generic");
         case kc.AUTO_ASSIGNED:
-          return _$$t("members_table.billing_group_update_description.auto_assigned");
+          return getI18nString("members_table.billing_group_update_description.auto_assigned");
         case kc.SCIM_GROUP:
-          return _$$t("members_table.billing_group_update_description.scim_group", {
+          return getI18nString("members_table.billing_group_update_description.scim_group", {
             groupName: t
           });
         default:

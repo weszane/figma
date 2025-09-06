@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef } from "react";
 import a from "classnames";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { C, W } from "../5430/92864";
 import { Ib } from "../905/129884";
 var s = a;
@@ -19,8 +19,8 @@ export function $$c0(e) {
       "base_like_button--removeButtonBorder--h-j-A": !!e.removeButtonBorder
     }),
     onClick: e.onClick,
-    "aria-label": _$$t("community.like"),
-    "data-tooltip": _$$t("community.like"),
+    "aria-label": getI18nString("community.like"),
+    "data-tooltip": getI18nString("community.like"),
     "data-tooltip-type": Ib.TEXT,
     "data-testid": "like-button",
     children: jsx("div", {

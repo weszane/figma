@@ -4,8 +4,8 @@ import { throwTypeError } from "../figma_app/465776";
 import { glU, Pt4, IPu } from "../figma_app/763686";
 import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
-import { md } from "../figma_app/27355";
-import { sx, az } from "../905/449184";
+import { useAtomWithSubscription } from "../figma_app/27355";
+import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { NQ } from "../905/508367";
 import { getInitialOptions } from "../figma_app/169182";
 import { Pt } from "../figma_app/806412";
@@ -40,7 +40,7 @@ export function $$$$j0(e) {
   let i = useDispatch();
   let j = useSelector(e => e.library);
   let U = Nv(!0);
-  let B = md(TG);
+  let B = useAtomWithSubscription(TG);
   let V = e.resource;
   let G = Do(V);
   let z = G ? "LIBRARY" !== V.subscriptionStatus : V.isLocal;
@@ -153,7 +153,7 @@ export function $$$$j0(e) {
   } = t({
     ...e,
     afterSuccessfulInsert: t => {
-      sx("Instance Dropped", {
+      trackEventAnalytics("Instance Dropped", {
         ...(e.insertLogArgsOverride ?? X),
         altKey: t.altKey,
         aiResultsEnabled: U
@@ -170,7 +170,7 @@ export function $$$$j0(e) {
         ...X,
         ...e.insertLogArgsOverride
       };
-      e.sourceForTracking !== tM ? az.trackDefinedEvent("asset_search.result_inserted", {
+      e.sourceForTracking !== tM ? analyticsEventManager.trackDefinedEvent("asset_search.result_inserted", {
         ...s,
         aiResultsEnabled: U,
         assetType: type,

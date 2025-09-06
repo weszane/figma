@@ -4,7 +4,7 @@ import { useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { QOV, Ez5, cfv, glU } from "../figma_app/763686";
 import { r as _$$r } from "../905/249071";
-import { fp } from "../figma_app/27355";
+import { useAtomValueAndSetter } from "../figma_app/27355";
 import { A as _$$A } from "../vendor/850789";
 import { FQ } from "../9410/571209";
 import { lg } from "../figma_app/976749";
@@ -102,7 +102,7 @@ function b({
   zIndex: k,
   obstacleMargin: w
 }) {
-  let [T, N] = fp(_$$f);
+  let [T, N] = useAtomValueAndSetter(_$$f);
   let I = T.positionRelativeToSelection;
   let E = useRef(null);
   let M = lg();

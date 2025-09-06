@@ -7,7 +7,7 @@ import { E as _$$E } from "../905/53857";
 import { o as _$$o } from "../905/821217";
 import { t as _$$t } from "../905/947268";
 import { getFeatureFlags } from "../905/601108";
-import { fp, md } from "../figma_app/27355";
+import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import m from "classnames";
 import { Ay } from "../905/612521";
 import { g as _$$g } from "../905/880308";
@@ -15,7 +15,7 @@ import { Lf } from "../figma_app/564528";
 import { Ex, zE, vj } from "../figma_app/919079";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx, t as _$$t2 } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { E as _$$E2 } from "../905/984674";
 import { b as _$$b2 } from "../905/985254";
 import { fu, tf } from "../figma_app/831799";
@@ -54,7 +54,7 @@ function N() {
   return jsx(_$$E, {
     variant: "defaultFilled",
     size: "md",
-    children: tx("qa.ai")
+    children: renderI18nText("qa.ai")
   });
 }
 let K = "figjam_organize_sort_stickies_sub_menu";
@@ -93,7 +93,7 @@ export function $$Y1() {
   let i = e.filter(e => e?.disabled && !e?.isInClusterSubmenu);
   let s = _$$g();
   let u = PX();
-  let [m, f] = fp(Y);
+  let [m, f] = useAtomValueAndSetter(Y);
   let g = Wb();
   let x = Pn();
   useEffect(() => g, [g]);
@@ -109,7 +109,7 @@ export function $$Y1() {
     for (let e of (i && (r = [...r, ...t]), r)) if (e && IW[e.type]) return !0;
     return !1;
   }();
-  let E = _$$t2("whiteboard.inline_menu.organize_dropdown_options_aria_label");
+  let E = getI18nString("whiteboard.inline_menu.organize_dropdown_options_aria_label");
   let S = [...t, ...i];
   let {
     getTriggerProps,
@@ -117,7 +117,7 @@ export function $$Y1() {
   } = _$$b();
   let A = useDispatch();
   let L = CI();
-  let M = md(V).data;
+  let M = useAtomWithSubscription(V).data;
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(fu, {
     name: "organize_menu_dropdown",
     children: jsxs(bL, {
@@ -131,8 +131,8 @@ export function $$Y1() {
             }));
           }
         }),
-        tooltip: _$$t2("whiteboard.inline_menu.organize_dropdown_button_aria_label"),
-        ariaLabel: _$$t2("whiteboard.inline_menu.organize_dropdown_button_aria_label"),
+        tooltip: getI18nString("whiteboard.inline_menu.organize_dropdown_button_aria_label"),
+        ariaLabel: getI18nString("whiteboard.inline_menu.organize_dropdown_button_aria_label"),
         dataTestId: "inline_menu_organize_dropdown_button",
         recordingKey: "inline_menu_organize_dropdown_button",
         trackingProperties: {
@@ -140,11 +140,11 @@ export function $$Y1() {
         },
         children: jsxs("div", {
           className: "x78zum5 x6s0dn4 x1jnr06f",
-          children: [jsx(_$$t, {}), tx("whiteboard.inline_menu.organize_button_text"), !M && L && jsx(fu, {
+          children: [jsx(_$$t, {}), renderI18nText("whiteboard.inline_menu.organize_button_text"), !M && L && jsx(fu, {
             name: "organize_actions_onboarding_badge",
             children: jsx(_$$E, {
               variant: "brandFilled",
-              children: _$$t2("whiteboard.inline_menu.ai_quick_actions_onboarding_badge_2")
+              children: getI18nString("whiteboard.inline_menu.ai_quick_actions_onboarding_badge_2")
             })
           })]
         })
@@ -262,10 +262,10 @@ let J = tf(function ({
   dropdownContainsAiOption: d
 }) {
   let c = useDispatch();
-  let u = md(V).data;
+  let u = useAtomWithSubscription(V).data;
   let p = CI();
   let [m, g] = useState(0);
-  let _ = _$$t2("whiteboard.inline_menu.organize_dropdown_button_aria_label");
+  let _ = getI18nString("whiteboard.inline_menu.organize_dropdown_button_aria_label");
   return jsx($n, {
     ref: i,
     ariaControls: o,
@@ -303,7 +303,7 @@ let J = tf(function ({
             "organize_actions_control--svgIconDisabled--siNy6": l
           })
         })
-      }), tx("whiteboard.inline_menu.organize_button_text"), !u && p && jsx(fu, {
+      }), renderI18nText("whiteboard.inline_menu.organize_button_text"), !u && p && jsx(fu, {
         name: "organize_actions_onboarding_badge",
         children: jsx("div", {
           style: {
@@ -313,7 +313,7 @@ let J = tf(function ({
             g(e?.offsetWidth || m);
           },
           children: jsx(Ex, {
-            text: _$$t2("whiteboard.inline_menu.ai_quick_actions_onboarding_badge_2"),
+            text: getI18nString("whiteboard.inline_menu.ai_quick_actions_onboarding_badge_2"),
             color: zE.FIGJAM,
             size: vj.SMALL,
             className: "organize_actions_control--onboardingBadge--NG7o-",
@@ -330,9 +330,9 @@ function q({
   let t = v1();
   let i = PX();
   let a = QL();
-  let o = md(u3);
-  let [l, d] = fp(UI);
-  let [c, u] = fp(kw);
+  let o = useAtomWithSubscription(u3);
+  let [l, d] = useAtomValueAndSetter(UI);
+  let [c, u] = useAtomValueAndSetter(kw);
   let [p, m] = useState(!1);
   return (useEffect(() => {
     let e = setTimeout(() => {
@@ -352,9 +352,9 @@ function q({
     },
     "data-testid": "whiteboard_organize_sort_sub_menu_wrapper",
     children: [jsx(Q, {
-      ariaLabel: _$$t2("whiteboard.inline_menu.arrange_stickies_dropdown_button_aria_label"),
+      ariaLabel: getI18nString("whiteboard.inline_menu.arrange_stickies_dropdown_button_aria_label"),
       disabled: !1,
-      displayText: _$$t2("whiteboard.inline_menu.sort_by_dropdown_button_text_2"),
+      displayText: getI18nString("whiteboard.inline_menu.sort_by_dropdown_button_text_2"),
       id: `${Uj.OPEN_CLUSTER_BY_MORE_MENU}-menu-option`,
       isAiOption: !1,
       isFocused: e,
@@ -379,7 +379,7 @@ function q({
           children: jsx(W1, {
             children: jsx("div", {
               className: _$$s.flex.flexColumn.py6.w200.$,
-              "aria-label": _$$t2("whiteboard.inline_menu.arrange_stickies_dropdown_button_aria_label"),
+              "aria-label": getI18nString("whiteboard.inline_menu.arrange_stickies_dropdown_button_aria_label"),
               role: "listbox",
               tabIndex: -1,
               "data-fullscreen-intercept": !0,
@@ -530,13 +530,13 @@ function $({
         disabled: e,
         recordingKey: Z(Uj.OPEN_CLUSTER_BY_MORE_MENU),
         "data-testid": Z(Uj.OPEN_CLUSTER_BY_MORE_MENU),
-        "aria-label": _$$t2("whiteboard.inline_menu.arrange_stickies_dropdown_button_aria_label"),
+        "aria-label": getI18nString("whiteboard.inline_menu.arrange_stickies_dropdown_button_aria_label"),
         children: [jsx(Q$, {
           children: jsx("div", {
             className: "x30jfuo",
             children: jsx(u, {})
           })
-        }), _$$t2("whiteboard.inline_menu.sort_by_dropdown_button_text_2")]
+        }), getI18nString("whiteboard.inline_menu.sort_by_dropdown_button_text_2")]
       }), jsx(MJ, {
         children: jsx(YJ, {
           children: i.map(e => {

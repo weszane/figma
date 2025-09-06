@@ -3,7 +3,7 @@ import { Ay } from "../905/612521";
 import { getInitialOptions } from "../figma_app/169182";
 import { parseQuery } from "../905/634134";
 import { qB } from "../905/862321";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { H } from "../905/301652";
 import { Ts, v$, GG, WY, OZ, fX, BZ, m9, bA, IY, LP, kQ, Re, i_, EM, ND, Qg, ET, kL, I$, QS, dl, NX } from "../905/194276";
 let u = "/files";
@@ -47,7 +47,7 @@ export function $$g2(e = p, t) {
     let i = getInitialOptions();
     let o = parseQuery(Ay.location.search).signup_source;
     e = t.payload.redirectUrl ? t.payload.redirectUrl : o ? "/" : i.redirect_url || u;
-    let c = i.phone_number ? _$$t("auth.two-factor.sms-hint", {
+    let c = i.phone_number ? getI18nString("auth.two-factor.sms-hint", {
       phoneNumber: i.phone_number
     }) : void 0;
     return {

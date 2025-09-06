@@ -3,7 +3,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { iIc, NfO } from "../figma_app/763686";
 import { nM } from "../figma_app/276332";
 import { getSingletonSceneGraph } from "../905/700578";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { w } from "../905/83498";
 export let $$n31;
 let u = [];
@@ -90,7 +90,7 @@ let v = new class {
         let r = t.events.filter(e => e.type === iIc.CREATE || e.type === iIc.PROPERTY_CHANGE || e.type === iIc.DELETE).map(e => {
           let t = "";
           e.type === iIc.CREATE || e.type === iIc.PROPERTY_CHANGE ? t = n.containingCanvas || "" : e.type === iIc.DELETE && (t = e.oldContainingCanvas?.toString() || "");
-          "" === t && $D(_$$e.EXTENSIBILITY, Error("Containing canvas for nodechange event is empty"));
+          "" === t && reportError(_$$e.EXTENSIBILITY, Error("Containing canvas for nodechange event is empty"));
           return {
             ...e,
             containingCanvas: t

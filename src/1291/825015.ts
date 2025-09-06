@@ -5,7 +5,7 @@ import { $n } from "../905/521428";
 import { E } from "../905/632989";
 import { getFeatureFlags } from "../905/601108";
 import d from "classnames";
-import { Yd, tx } from "../905/303541";
+import { getTranslatedDynamicContent, renderI18nText } from "../905/303541";
 import { d as _$$d } from "../5430/535653";
 import { Rt } from "../figma_app/979658";
 import { bD } from "../figma_app/45218";
@@ -46,7 +46,7 @@ export function $$y0(e) {
           }),
           children: [jsx("div", {
             className: bV,
-            children: Yd(s.i18n_meta.title, s.title)
+            children: getTranslatedDynamicContent(s.i18n_meta.title, s.title)
           }), jsx(gZ, {
             className: jy,
             children: jsx($n.Link, {
@@ -55,7 +55,7 @@ export function $$y0(e) {
                 title: s.title,
                 resourceType: S
               }),
-              children: tx("whiteboard.inserts.see_all")
+              children: renderI18nText("whiteboard.inserts.see_all")
             })
           })]
         }) : jsxs(E, {
@@ -69,10 +69,10 @@ export function $$y0(e) {
           }),
           children: [jsx("div", {
             className: bV,
-            children: Yd(s.i18n_meta.title, s.title)
+            children: getTranslatedDynamicContent(s.i18n_meta.title, s.title)
           }), jsx("div", {
             className: jy,
-            children: tx("whiteboard.inserts.see_all")
+            children: renderI18nText("whiteboard.inserts.see_all")
           })]
         }), jsx("div", {
           className: t,

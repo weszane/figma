@@ -5,7 +5,7 @@ import { bL } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { Hq } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Ju, ZU } from "../905/102752";
 import { s3 } from "../figma_app/171177";
 import { z6 } from "../figma_app/846841";
@@ -45,7 +45,7 @@ export let $$f0 = Ju(function (e) {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$t("sites.panel.make.attach_design")
+          children: getI18nString("sites.panel.make.attach_design")
         })
       }), jsx(nB, {
         padding: 0,

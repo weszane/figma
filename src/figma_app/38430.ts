@@ -1,9 +1,9 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
-import { eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { c$ } from "../figma_app/236327";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { qR, JZ } from "../figma_app/696043";
 import { S as _$$S } from "../figma_app/11182";
 import { to } from "../905/156213";
@@ -30,7 +30,7 @@ export function $$w2(e) {
   let i = uF(r);
   let d = WK(e.widgetId);
   let c = Ud(e.widgetId);
-  let p = eD && !!c && !d;
+  let p = desktopAPIInstance && !!c && !d;
   return jsxs(Cf, {
     targetRect: e.targetRect,
     lean: e.lean || "left",
@@ -56,7 +56,7 @@ export function $$w2(e) {
           showModalsBeneath: !0
         }));
       },
-      children: ["\u26A0 ", tx("universal_insert.in_development_version")]
+      children: ["\u26A0 ", renderI18nText("universal_insert.in_development_version")]
     }) : jsx(c$, {
       onClick: () => {
         j({
@@ -66,7 +66,7 @@ export function $$w2(e) {
           triggeredFrom: "universal-insert"
         });
       },
-      children: tx("universal_insert.in_development_version")
+      children: renderI18nText("universal_insert.in_development_version")
     }), jsx(c$, {
       onClick: () => {
         j({
@@ -76,7 +76,7 @@ export function $$w2(e) {
           triggeredFrom: "universal-insert"
         });
       },
-      children: tx("universal_insert.published_version")
+      children: renderI18nText("universal_insert.published_version")
     })]
   });
 }
@@ -90,12 +90,12 @@ function O({
     unpinPlugin
   } = t;
   return pinnedPlugins.find(t => t.plugin_id === e) ? {
-    displayText: _$$t("dev_handoff.inspect_panel.unpin"),
+    displayText: getI18nString("dev_handoff.inspect_panel.unpin"),
     callback: () => {
       unpinPlugin(e);
     }
   } : {
-    displayText: _$$t("dev_handoff.inspect_panel.pin"),
+    displayText: getI18nString("dev_handoff.inspect_panel.pin"),
     callback: () => {
       pinPlugin(e);
     }
@@ -109,7 +109,7 @@ function R({
     isPluginSetToAutoRun
   } = bE(e ?? null);
   return aY(e) ? {
-    displayText: _$$t("dev_handoff.inspect_panel.auto_run"),
+    displayText: getI18nString("dev_handoff.inspect_panel.auto_run"),
     callback,
     isChecked: isPluginSetToAutoRun
   } : null;
@@ -135,7 +135,7 @@ export function $$L1(e) {
     pluginId: e.plugin.plugin_id,
     preferences: o
   })), _ && g.push(_)), g.push({
-    displayText: _$$t("universal_insert.copy_link"),
+    displayText: getI18nString("universal_insert.copy_link"),
     callback: m
   }), r) ? s ? jsx($$j6, {
     parentRect: r?.data.targetRect,
@@ -161,7 +161,7 @@ export function $$D0(e) {
   });
   let d = [];
   return (d.push({
-    displayText: _$$t("universal_insert.view_details"),
+    displayText: getI18nString("universal_insert.view_details"),
     callback: e.viewResource
   }), i && (Th(e.plugin, a, s) && r.loaded && d.push(O({
     pluginId: e.plugin.plugin_id,
@@ -208,13 +208,13 @@ export function $$M3(e) {
   let P = [];
   (u && !u.error || b) && P.push(x);
   I && e.viewResource && P.push({
-    displayText: _$$t("universal_insert.view_details"),
+    displayText: getI18nString("universal_insert.view_details"),
     callback: e.viewResource
   });
   I && P.push(C);
   u && u.error?.type !== ho.LOAD && P.push(w);
   u || P.push({
-    displayText: _$$t("universal_insert.locate_local_version"),
+    displayText: getI18nString("universal_insert.locate_local_version"),
     callback: () => {
       JZ({
         resourceType: v ? "widget" : "plugin"

@@ -4,14 +4,14 @@ import { q7, bL, mc, b as _$$b } from "../figma_app/860955";
 import { getSingletonSceneGraph } from "../905/700578";
 import { Ay } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
-import { fp } from "../figma_app/27355";
+import { useAtomValueAndSetter } from "../figma_app/27355";
 import { Fk } from "../figma_app/167249";
 import { QK, Ns, wy, kv } from "../figma_app/259678";
 import { $W } from "../figma_app/325537";
 import { i as _$$i } from "../905/661697";
 import { glU } from "../figma_app/763686";
 import { l7 } from "../905/189185";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Q } from "../1156/755570";
 import { p as _$$p } from "../905/786248";
 import { Hg } from "../figma_app/304955";
@@ -42,7 +42,7 @@ function E({
         Y5.commit();
       });
     },
-    children: _$$t("figmake.filesystem.context_menu.create_new_file")
+    children: getI18nString("figmake.filesystem.context_menu.create_new_file")
   });
 }
 function j({
@@ -52,7 +52,7 @@ function j({
     onClick: () => {
       navigator.clipboard.writeText(e);
     },
-    children: _$$t("figmake.filesystem.context_menu.copy_path")
+    children: getI18nString("figmake.filesystem.context_menu.copy_path")
   });
 }
 function N({
@@ -67,7 +67,7 @@ function N({
       });
     },
     disabled: t,
-    children: _$$t("figmake.filesystem.context_menu.delete")
+    children: getI18nString("figmake.filesystem.context_menu.delete")
   });
 }
 function T(e) {
@@ -123,7 +123,7 @@ function $$S({
       i.click();
       URL.revokeObjectURL(o);
     },
-    children: _$$t("figmake.filesystem.context_menu.download")
+    children: getI18nString("figmake.filesystem.context_menu.download")
   });
 }
 function A({
@@ -136,7 +136,7 @@ function A({
       onPointerUp: e => e.preventDefault()
     },
     disabled: t,
-    children: _$$t("figmake.filesystem.context_menu.rename")
+    children: getI18nString("figmake.filesystem.context_menu.rename")
   });
 }
 function k({
@@ -217,7 +217,7 @@ function O({
   let [v, I] = useState(!1);
   let C = getSingletonSceneGraph().get(t.guid);
   return jsxs("button", {
-    "aria-label": _$$t("figmake.filesystem.file.description", {
+    "aria-label": getI18nString("figmake.filesystem.file.description", {
       name: t.name
     }),
     onClick: () => {
@@ -318,7 +318,7 @@ function H({
       className: "x10w6t97 x78zum5 x6s0dn4",
       children: [jsxs("button", {
         ...getContextMenuTriggerProps(),
-        "aria-label": _$$t("figmake.filesystem.folder.description", {
+        "aria-label": getI18nString("figmake.filesystem.folder.description", {
           name: t.name
         }),
         "aria-expanded": u,
@@ -393,7 +393,7 @@ export function $$F0({
     manager
   } = _$$b();
   let m = Fk((e, n) => Ns(e, n, t?.belongsToCodeLibrary?.guid), n);
-  let [x, g] = fp(wy);
+  let [x, g] = useAtomValueAndSetter(wy);
   let y = useCallback(e => {
     g(t => {
       let n = new Set(t);

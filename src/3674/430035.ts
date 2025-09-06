@@ -1,9 +1,9 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { J } from "../905/799737";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { buildUploadUrl } from "../figma_app/169182";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { M, n as _$$n } from "../3674/214307";
 import { BC } from "../3674/61752";
 import { i$ } from "../905/15667";
@@ -18,15 +18,15 @@ let v = buildUploadUrl("6d5e9cb0e9ec7fd5dd58425c5527dc8a78143a19");
 function y() {
   let e;
   let t = M();
-  let n = md(_$$R);
-  e = t ? tx("dev_handoff.paywall.blocking_modal.title.starter") : n ? tx("dev_handoff.paywall.blocking_modal.title.direct_link") : tx("dev_handoff.paywall.blocking_modal.title.dev_onboarding");
+  let n = useAtomWithSubscription(_$$R);
+  e = t ? renderI18nText("dev_handoff.paywall.blocking_modal.title.starter") : n ? renderI18nText("dev_handoff.paywall.blocking_modal.title.direct_link") : renderI18nText("dev_handoff.paywall.blocking_modal.title.dev_onboarding");
   return jsx(J, {
     className: DD,
     children: e
   });
 }
 function b() {
-  let e = [tx("dev_handoff.paywall.blocking_modal.content.copy_code"), tx("dev_handoff.paywall.blocking_modal.content.track_design_changes"), tx("dev_handoff.paywall.blocking_modal.content.customize_plugins")];
+  let e = [renderI18nText("dev_handoff.paywall.blocking_modal.content.copy_code"), renderI18nText("dev_handoff.paywall.blocking_modal.content.track_design_changes"), renderI18nText("dev_handoff.paywall.blocking_modal.content.customize_plugins")];
   return jsx("ul", {
     children: e.map((e, t) => jsx("li", {
       className: N$,
@@ -40,7 +40,7 @@ function j() {
   let n = t?.team?.name || "";
   return e ? jsx("div", {
     className: HS,
-    children: tx("dev_handoff.paywall.blocking_modal.content.ask_admin", {
+    children: renderI18nText("dev_handoff.paywall.blocking_modal.content.ask_admin", {
       teamName: jsx("span", {
         className: Ps,
         children: n
@@ -68,7 +68,7 @@ function N() {
   return [_$$J.ADMIN_AUTO_PATHWAY, _$$J.AUTO_PATHWAY].includes(n) ? jsx("div", {
     className: _$$s.alignCenter.colorTextSecondary.mt16.$,
     children: jsx("span", {
-      children: tx("auto_upgrade_confirmation.dev_mode.body", {
+      children: renderI18nText("auto_upgrade_confirmation.dev_mode.body", {
         planName: plan?.name
       })
     })

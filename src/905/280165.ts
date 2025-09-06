@@ -6,7 +6,7 @@ import { N } from "../905/301843";
 import { E } from "../905/235326";
 import { glU } from "../figma_app/763686";
 import { Pt } from "../figma_app/806412";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { b as _$$b } from "../905/217163";
 import { gl } from "../905/216495";
 import { Ib } from "../905/129884";
@@ -30,7 +30,7 @@ export function $$f0(e) {
     });
     let f = useMemo(() => !!h.data?.link, [h.data]);
     let _ = useMemo(() => h.data?.type === "community", [h.data]);
-    let A = useMemo(() => isBackingSymbolSoftDeleted || !singleBackingSymbol ? "SYMBOL_AS_STATE" === restoreType ? t("design_systems.instance_panel.variant_missing") : t("design_systems.instance_panel.component_missing") : isBackingSymbolShared ? _ ? t("design_systems.instance_panel.view_library_in_community") : t("design_systems.instance_panel.go_to_main_component_nin_library") : t("design_systems.instance_panel.go_to_main_component"), [isBackingSymbolSoftDeleted, singleBackingSymbol, isBackingSymbolShared, _, restoreType]);
+    let A = useMemo(() => isBackingSymbolSoftDeleted || !singleBackingSymbol ? "SYMBOL_AS_STATE" === restoreType ? getI18nString("design_systems.instance_panel.variant_missing") : getI18nString("design_systems.instance_panel.component_missing") : isBackingSymbolShared ? _ ? getI18nString("design_systems.instance_panel.view_library_in_community") : getI18nString("design_systems.instance_panel.go_to_main_component_nin_library") : getI18nString("design_systems.instance_panel.go_to_main_component"), [isBackingSymbolSoftDeleted, singleBackingSymbol, isBackingSymbolShared, _, restoreType]);
     let y = !(isBackingSymbolSoftDeleted || !singleBackingSymbol) && isBackingSymbolShared;
     let b = useCallback(() => {
       _backingSymbolGUID && !gl(_backingSymbolGUID) && glU.goToSymbolOrStateGroupById(_backingSymbolGUID, !0);

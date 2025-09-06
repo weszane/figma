@@ -2,7 +2,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { glU } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { buildUploadUrl } from "../figma_app/169182";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { T } from "../figma_app/409248";
 let d = Object.create(null);
 export async function $$c1(e) {
@@ -21,7 +21,7 @@ export function $$_3(e) {
   for (let t of e) {
     let e = $$p2(t);
     e && T(e, d).catch(e => {
-      $D(_$$e.FIGJAM, e);
+      reportError(_$$e.FIGJAM, e);
     });
   }
 }
@@ -33,4 +33,4 @@ export const Cs = $$u0;
 export const Iw = $$c1;
 export const M8 = $$p2;
 export const Qc = $$_3;
-export const gC = $$h4; 
+export const gC = $$h4;

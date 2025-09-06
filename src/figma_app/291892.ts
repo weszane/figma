@@ -2,8 +2,8 @@ import { decodeBase64 } from "../905/561685";
 import { RYP, UF0 } from "../figma_app/763686";
 import { iL } from "../figma_app/762706";
 import { f as _$$f, a as _$$a } from "../905/580661";
-import { Ay } from "../figma_app/778880";
-import { x1 } from "../905/714362";
+import { BrowserInfo } from "../figma_app/778880";
+import { logError } from "../905/714362";
 import { XHR } from "../905/910117";
 import { Y } from "../905/270066";
 import { Ll, yy, fB } from "../905/515659";
@@ -182,7 +182,7 @@ async function A(e, t) {
 }
 async function x() {
   w = await S();
-  Ay.webkit && (await v());
+  BrowserInfo.webkit && (await v());
 }
 async function N(e) {
   let t = new Blob([decodeBase64("iVBORw0KGgoAAAANSUhEUgAAAAEAAAAQBAMAAAAlsQiEAAAALVBMVEX///////////////////////////////////////////////////////8AAACgbBYXAAAAD3RSTlPx5NXDsJ2Ic19LOCgYDQAksqQSAAAAJklEQVQI12MAAQEGBQYDBgeGAIYEhgKGBoYJDAsYNjAcYHjAcAEAP7AGkQT7krEAAAAASUVORK5CYII=")], {
@@ -272,7 +272,7 @@ let $$P3 = {
       return await b(e, t, r, n);
     }
     let u = !1;
-    "image/jpeg" === t && (u = a !== _$$a.ROTATE_0, null !== a && a !== _$$a.ROTATE_0 && w && Ay.chrome && 0 > Ay.compareVersions([Ay.version.toString(), "86"]) && (i = !1), w && (a = null));
+    "image/jpeg" === t && (u = a !== _$$a.ROTATE_0, null !== a && a !== _$$a.ROTATE_0 && w && BrowserInfo.chrome && 0 > BrowserInfo.compareVersions([BrowserInfo.version.toString(), "86"]) && (i = !1), w && (a = null));
     let p = bitmap.width;
     let h = bitmap.height;
     return i && (null === a || a === _$$a.ROTATE_0) && (0 === r || p <= r) && (0 === n || h <= n) ? {
@@ -305,7 +305,7 @@ let $$P3 = {
   },
   dropMips(e, t, r) {
     if (0 === e || 0 === t) {
-      x1("images", "Width and height should not be zero");
+      logError("images", "Width and height should not be zero");
       return [e, t];
     }
     for (let n = 0; n < r; ++n) {
@@ -402,7 +402,7 @@ async function k(e, t) {
       colorProfile: RYP.SRGB
     };
   } catch (e) {
-    x1("image_io", "HEIC conversion via Upnode failed", {
+    logError("image_io", "HEIC conversion via Upnode failed", {
       error: e.message,
       reportAsSentryError: !0
     });

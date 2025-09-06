@@ -1,11 +1,11 @@
 import { jsx } from "react/jsx-runtime";
 import { useSelector, useDispatch } from "../vendor/514228";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { parsePxInt } from "../figma_app/783094";
 import { YO } from "../figma_app/672951";
 import { gY } from "../figma_app/566371";
 import { s as _$$s } from "../905/573154";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { o as _$$o } from "../figma_app/29593";
 import { U } from "../905/926550";
 import { J } from "../905/844906";
@@ -48,9 +48,9 @@ export function $$w1(e) {
     let D = window.innerWidth <= parsePxInt(tgj);
     let k = [];
     return e.trashedAt ? (L && k.push({
-      displayText: _$$t("project_menu.restore"),
+      displayText: getI18nString("project_menu.restore"),
       onClick: () => {
-        sx("Folder Restore Click", {
+        trackEventAnalytics("Folder Restore Click", {
           folderId: e.id,
           teamId: i,
           orgId: l
@@ -71,14 +71,14 @@ export function $$w1(e) {
           folderId: e.id,
           team: o
         }).catch(() => {
-          w(_$$s.error(_$$t("file_browser.api_folder.error_when_restoring")));
+          w(_$$s.error(getI18nString("file_browser.api_folder.error_when_restoring")));
         });
       },
       disabled: !L
     }), P && k.push({
-      displayText: _$$t("project_menu.permanently_delete"),
+      displayText: getI18nString("project_menu.permanently_delete"),
       onClick: () => {
-        sx("Folder Permanently Delete Click", {
+        trackEventAnalytics("Folder Permanently Delete Click", {
           folderId: e.id,
           teamId: e.teamId,
           orgId: l
@@ -96,7 +96,7 @@ export function $$w1(e) {
       key: "trashed",
       items: k
     }]) : (k.push({
-      displayText: _$$t("file_browser.copy_link"),
+      displayText: getI18nString("file_browser.copy_link"),
       onClick: () => {
         let r = EE(e.id, t);
         w(_$$S({
@@ -105,7 +105,7 @@ export function $$w1(e) {
         }));
       }
     }), r || (O && D && k.push({
-      displayText: _$$t("sidebar.share"),
+      displayText: getI18nString("sidebar.share"),
       onClick: () => {
         w(jl({
           folderId: e.id,
@@ -119,7 +119,7 @@ export function $$w1(e) {
         }));
       }
     }), (l === f || i === f) && k.push({
-      displayText: _$$t("sidebar.move_project"),
+      displayText: getI18nString("sidebar.move_project"),
       onClick: () => {
         w(jl({
           folderId: e.id,
@@ -139,7 +139,7 @@ export function $$w1(e) {
     }, {
       key: "settings",
       items: [{
-        displayText: _$$t("project_menu.settings"),
+        displayText: getI18nString("project_menu.settings"),
         onClick: () => {
           w(to({
             type: _$$l,

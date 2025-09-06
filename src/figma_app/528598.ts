@@ -3,7 +3,7 @@ import { useMemo, useState, useRef, useEffect, useCallback, useContext } from "r
 import { Z_n, CWU, Ez5, ibQ, glU, J0O, rrT, rXF, ZiZ, VQu } from "../figma_app/763686";
 import { q as _$$q } from "../figma_app/905311";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { Bq } from "../figma_app/656233";
+import { flatten } from "../figma_app/656233";
 import { assertNotNullish } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { isNotNullish } from "../figma_app/95419";
@@ -28,11 +28,11 @@ import { ZC } from "../figma_app/39751";
 import { X as _$$X } from "../905/606795";
 import { Uz } from "../905/63728";
 import { Pt } from "../figma_app/806412";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { Y as _$$Y } from "../905/506207";
 import { TQ, Zl } from "../905/211621";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { n0 } from "../figma_app/389091";
 import { vq } from "../905/8732";
 import { Oe, uP } from "../figma_app/933328";
@@ -71,7 +71,7 @@ import { eF as _$$eF } from "../figma_app/394327";
 import { P as _$$P2 } from "../figma_app/120873";
 import { oz } from "../figma_app/406976";
 import { U as _$$U } from "../905/708285";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { kl } from "../905/275640";
 import { aA } from "../figma_app/632975";
 import { f as _$$f } from "../figma_app/884735";
@@ -97,7 +97,7 @@ function eO({
   recordingKey: p
 }) {
   let h = kl("isInstanceSublayerSelected");
-  let m = _$$R(UR);
+  let m = selectWithShallowEqual(UR);
   let g = e.type === Z_n.ALIAS ? e.value : void 0;
   let f = e.type === Z_n.NODE_FIELD_ALIAS ? aA(e.value.stablePathToNode, e.value.indexOrKey) : void 0;
   let E = _$$u(g);
@@ -116,7 +116,7 @@ function eO({
     }) : jsx(_$$K, {
       onClick: () => u(v),
       recordingKey: Pt(p, "detachButton"),
-      "aria-label": _$$t("design_systems.component_properties.detach_property"),
+      "aria-label": getI18nString("design_systems.component_properties.detach_property"),
       children: jsx(_$$U, {})
     })
   }) : (assertNotNullish(r), jsxs(hu, {
@@ -135,7 +135,7 @@ function eO({
       variableScope: o
     }), jsx(_$$K4, {
       recordingKey: Pt(p, "assignAssignmentProp"),
-      tooltip: _$$t("proto.apply_assignment_property")
+      tooltip: getI18nString("proto.apply_assignment_property")
     })]
   }));
 }
@@ -245,7 +245,7 @@ function eU(e) {
     requestedTypes: void 0,
     variableScope: void 0
   };
-  let Y = useMemo(() => Bq(guids.map(e => glU?.getInstanceSublayersControlledByDirectPropAssignment(e, typedPropDef.explicitDefID, RR.OVERRIDDEN_SYMBOL_ID).map(e => getSingletonSceneGraph().guidFromDeveloperFriendlyId(e))).filter(e => void 0 !== e)), [guids, typedPropDef.explicitDefID]);
+  let Y = useMemo(() => flatten(guids.map(e => glU?.getInstanceSublayersControlledByDirectPropAssignment(e, typedPropDef.explicitDefID, RR.OVERRIDDEN_SYMBOL_ID).map(e => getSingletonSceneGraph().guidFromDeveloperFriendlyId(e))).filter(e => void 0 !== e)), [guids, typedPropDef.explicitDefID]);
   let $ = !!getFeatureFlags().sts_code && !!parameterConfig;
   let X = !hideBindingButton && !!(typedPropDef.type !== J0O.INSTANCE_SWAP && void 0 !== variableType && void 0 !== requestedTypes);
   let J = value && "object" == typeof value && "type" in value && value.type === Z_n.ALIAS;
@@ -435,7 +435,7 @@ function eU(e) {
           ef();
         },
         variant: "ghost",
-        "aria-label": _$$t("fullscreen.properties_panel.image_settings.remove_image"),
+        "aria-label": getI18nString("fullscreen.properties_panel.image_settings.remove_image"),
         recordingKey: Pt("componentPropAssignmentRemoveImage", guids.join("-"), typedPropDef.explicitDefID),
         children: jsx(_$$K2, {})
       }) : null) ?? (typedPropDef.type !== J0O.INSTANCE_SWAP ? null : jsx(h_, {
@@ -573,7 +573,7 @@ function eH({
     },
     className: K8,
     children: jsx(_$$P2, {
-      value: t ? _$$t("design_systems.component_properties.mixed") : s?.name,
+      value: t ? getI18nString("design_systems.component_properties.mixed") : s?.name,
       variableId: r && !t ? r : void 0,
       isStandalone: !0,
       thumbnailValue: "MIXED" !== p ? p : void 0,
@@ -616,7 +616,7 @@ function ez({
     let t = !y || !Rq(y);
     return gl(e) || t ? T : T1(y);
   }, [y, e, T]);
-  let S = gl(e) ? _$$t("design_systems.component_properties.mixed") : lg(T);
+  let S = gl(e) ? getI18nString("design_systems.component_properties.mixed") : lg(T);
   let A = () => {
     if (isNotNullish(y)) {
       let e = WI(rXF.FLOAT, I);
@@ -735,7 +735,7 @@ function eK({
     onChange: e => b(e.currentTarget.value)
   });
   let [y, b] = useState(null);
-  let T = t.type === J0O.TEXT ? gl(e) ? _$$t("design_systems.component_properties.mixed") : e : null;
+  let T = t.type === J0O.TEXT ? gl(e) ? getI18nString("design_systems.component_properties.mixed") : e : null;
   return jsx("div", {
     className: eB(o),
     children: jsx("div", {
@@ -878,7 +878,7 @@ function eX({
         },
         recordingKey: Pt("componentPropAssignmentSelect", r.join("-"), c),
         children: [jsx(l9, {
-          placeholder: gl(e) ? _$$t("design_systems.component_properties.mixed") : void 0,
+          placeholder: gl(e) ? getI18nString("design_systems.component_properties.mixed") : void 0,
           label: jsx(_$$h, {
             children: h
           }),
@@ -936,7 +936,7 @@ function eq({
       defID: ""
     });
   }, [y, c, r, b, u, preferredValues, s, E]);
-  Bq(r.map(e => glU?.getInstanceSublayersControlledByDirectPropAssignment(e, s.explicitDefID, RR.OVERRIDDEN_SYMBOL_ID).map(e => getSingletonSceneGraph().guidFromDeveloperFriendlyId(e))).filter(e => void 0 !== e));
+  flatten(r.map(e => glU?.getInstanceSublayersControlledByDirectPropAssignment(e, s.explicitDefID, RR.OVERRIDDEN_SYMBOL_ID).map(e => getSingletonSceneGraph().guidFromDeveloperFriendlyId(e))).filter(e => void 0 !== e));
   let {
     modalWidth
   } = TQ(Zl.INSTANCE_SWAP_PICKER);
@@ -959,7 +959,7 @@ function eq({
         preferredValuesErrorComponent: N,
         sceneGraph: p,
         shouldPerformSwapOnClick: !1,
-        title: _$$t("design_systems.component_properties.choose_instance")
+        title: getI18nString("design_systems.component_properties.choose_instance")
       })
     })
   });
@@ -1052,11 +1052,11 @@ function eJ({
               tabIndex: -1
             })]
           }), jsx("span", {
-            children: _$$t("design_systems.component_properties.image")
+            children: getI18nString("design_systems.component_properties.image")
           })]
         }) : jsx("span", {
           className: Of,
-          children: _$$t("design_systems.component_properties.mixed")
+          children: getI18nString("design_systems.component_properties.mixed")
         })
       })
     }), o && jsx(e0, {
@@ -1103,7 +1103,7 @@ function e0({
     T.current = !0;
     Bc(d).then(e => {
       T.current && S(_$$J(e));
-    }).catch(e => $D(_$$e.DESIGN_SYSTEMS_FOUNDATIONS, e));
+    }).catch(e => reportError(_$$e.DESIGN_SYSTEMS_FOUNDATIONS, e));
   }, [d]);
   useEffect(function () {
     (v && !A || v && e !== x) && N();
@@ -1122,7 +1122,7 @@ function e0({
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$t("design_systems.component_properties.image")
+          children: getI18nString("design_systems.component_properties.image")
         })
       }), jsx(nB, {
         children: jsx("div", {

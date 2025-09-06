@@ -1,4 +1,4 @@
-import { md, eU, fp } from "../figma_app/27355";
+import { useAtomWithSubscription, atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { Rs } from "../figma_app/288654";
 import { oA } from "../905/723791";
@@ -9,21 +9,21 @@ import { jmg } from "../figma_app/43951";
 import { D as _$$D } from "../905/347702";
 import { B } from "../figma_app/659940";
 let $$_0 = _$$D(() => {
-  let e = md(ze);
+  let e = useAtomWithSubscription(ze);
   return Rs(jmg, {
     fileKey: e || ""
   }, {
     enabled: !!e
   });
 });
-let h = eU(!1);
+let h = atom(!1);
 export function $$m1() {
   let e = debugState.getState().selectedView;
   let t = e?.view === "fullscreen" ? e.claim : null;
   let r = B();
   let a = iZ();
   let l = $$_0();
-  let [c, u] = fp(h);
+  let [c, u] = useAtomValueAndSetter(h);
   if ("loaded" !== l.status) return () => {};
   if (oA(l.data?.deviceTryFile) && e && t && !a && !c) {
     if ("signup" === t) return () => {

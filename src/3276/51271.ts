@@ -2,7 +2,7 @@ import { memo } from "react";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { P } from "../3276/355202";
 import { D } from "../905/537702";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { q } from "../figma_app/275739";
 let i = memo(function (e) {
   return jsx("svg", {
@@ -41,7 +41,7 @@ let $$u0 = {
       viewBox: "-5 -8 18 16",
       fill: "none",
       className: t,
-      "aria-label": _$$t("collaboration.voice.unmuted_user", {
+      "aria-label": getI18nString("collaboration.voice.unmuted_user", {
         user_name: a
       }),
       children: [jsx("line", {
@@ -119,7 +119,7 @@ let $$u0 = {
     height: "16",
     viewBox: "0 0 13 16",
     fill: "none",
-    "aria-label": _$$t("collaboration.voice.muted_user", {
+    "aria-label": getI18nString("collaboration.voice.muted_user", {
       user_name: e
     }),
     children: [jsx("path", {

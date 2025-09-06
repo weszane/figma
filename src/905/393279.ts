@@ -4,7 +4,7 @@ import { lQ } from "../905/934246";
 import { getFeatureFlags } from "../905/601108";
 import o from "classnames";
 import { cw, vd } from "../figma_app/637027";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { hZ } from "../905/748726";
 import { c as _$$c } from "../905/370443";
 import { yO, TD } from "../905/331019";
@@ -101,7 +101,7 @@ export class $$A0 extends PureComponent {
               }
             },
             onSubmit: this.onSubmit,
-            placeholder: this.props.placeholderText ?? t("folder_permissions_modal.email_comma_separated"),
+            placeholder: this.props.placeholderText ?? getI18nString("folder_permissions_modal.email_comma_separated"),
             renderOptions: this.renderOptions,
             tokenClassName: this.props.tokenClassName,
             useContainerForWidth: !0,

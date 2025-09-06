@@ -1,4 +1,4 @@
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { MZ } from "../figma_app/925970";
 import { FUserRoleType } from "../figma_app/191312";
 var s = (e => (e.org_member = "org_member", e.org_guest = "org_guest", e.team_user = "team_user", e.personal_user = "personal_user", e))(s || {});
@@ -49,7 +49,7 @@ export class $$p5 {
       queryCount: 0,
       resultsCount: 0
     };
-    sx("contacts_session_start", {
+    trackEventAnalytics("contacts_session_start", {
       session_id: this.state.sessionId,
       entrypoint: this.entrypoint,
       user_context: this.userContext,
@@ -60,7 +60,7 @@ export class $$p5 {
   }
   trackQueryResult(e, t) {
     null === this.state.sessionId && this.startSession();
-    this.prevQuery !== e && (this.state.queryCount += 1, this.state.resultsCount += t, sx("contacts_query_result", {
+    this.prevQuery !== e && (this.state.queryCount += 1, this.state.resultsCount += t, trackEventAnalytics("contacts_query_result", {
       session_id: this.state.sessionId,
       entrypoint: this.entrypoint,
       query: e,
@@ -73,7 +73,7 @@ export class $$p5 {
     }), this.prevQuery = e);
   }
   trackResultClicked(e, t, i, r) {
-    sx("contacts_result_clicked", {
+    trackEventAnalytics("contacts_result_clicked", {
       session_id: this.state.sessionId,
       entrypoint: this.entrypoint,
       query: e,
@@ -89,7 +89,7 @@ export class $$p5 {
     this.endSession("result_selected", !0);
   }
   endSession(e, t) {
-    null !== this.state.sessionId && (sx("contacts_session_end", {
+    null !== this.state.sessionId && (trackEventAnalytics("contacts_session_end", {
       session_id: this.state.sessionId,
       num_queries_to_backend: this.state.queryCount,
       total_contacts_suggested: this.state.resultsCount,

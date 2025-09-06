@@ -1,8 +1,8 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { Ay } from "@stylexjs/stylex";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import l from "classnames";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { DP } from "../905/640017";
 import { $B } from "../figma_app/545877";
 import { FFileType } from "../figma_app/191312";
@@ -16,7 +16,7 @@ import { K2, R6, q2, pV } from "../7021/970540";
 import { languageCodes, defaultLanguage } from "../905/816253";
 import { buildUploadUrl } from "../figma_app/169182";
 import { oW } from "../905/675859";
-import { Gq } from "../figma_app/363242";
+import { getI18nState } from "../figma_app/363242";
 import { useSelector } from "../vendor/514228";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -386,9 +386,9 @@ function w(e) {
     isInModal
   } = e;
   let [d, u] = useState("");
-  let x = md(bk);
-  let h = md(T$);
-  let p = md($B);
+  let x = useAtomWithSubscription(bk);
+  let h = useAtomWithSubscription(T$);
+  let p = useAtomWithSubscription($B);
   let C = useRef(null);
   let L = v.RED;
   e.color && (L = v[e.color]);
@@ -482,55 +482,55 @@ let O = [{
 let N = e => {
   switch (e) {
     case "brainstorms":
-      return _$$t("new_user_experience.what_will_you_use_figjam_for.cursor_chat.brainstorms");
+      return getI18nString("new_user_experience.what_will_you_use_figjam_for.cursor_chat.brainstorms");
     case "diagramming":
-      return _$$t("new_user_experience.what_will_you_use_figjam_for.cursor_chat.diagramming");
+      return getI18nString("new_user_experience.what_will_you_use_figjam_for.cursor_chat.diagramming");
     case "learning":
-      return _$$t("new_user_experience.what_will_you_use_figjam_for.cursor_chat.learning");
+      return getI18nString("new_user_experience.what_will_you_use_figjam_for.cursor_chat.learning");
     case "meetings":
-      return _$$t("new_user_experience.what_will_you_use_figjam_for.cursor_chat.meetings");
+      return getI18nString("new_user_experience.what_will_you_use_figjam_for.cursor_chat.meetings");
     case "projects":
-      return _$$t("new_user_experience.what_will_you_use_figjam_for.cursor_chat.projects");
+      return getI18nString("new_user_experience.what_will_you_use_figjam_for.cursor_chat.projects");
   }
 };
 let T = e => {
   switch (e) {
     case "developer":
-      return _$$t("new_user_experience.what_do_you_do.cursor_chat.developer");
+      return getI18nString("new_user_experience.what_do_you_do.cursor_chat.developer");
     case "designer":
-      return _$$t("new_user_experience.what_do_you_do.cursor_chat.designer");
+      return getI18nString("new_user_experience.what_do_you_do.cursor_chat.designer");
     case "product_manager":
-      return _$$t("new_user_experience.what_do_you_do.cursor_chat.product_manager");
+      return getI18nString("new_user_experience.what_do_you_do.cursor_chat.product_manager");
     case "research":
-      return _$$t("new_user_experience.what_do_you_do.cursor_chat.user_researcher");
+      return getI18nString("new_user_experience.what_do_you_do.cursor_chat.user_researcher");
     case "marketer":
-      return _$$t("new_user_experience.what_do_you_do.cursor_chat.marketer");
+      return getI18nString("new_user_experience.what_do_you_do.cursor_chat.marketer");
     case "student":
-      return _$$t("new_user_experience.what_do_you_do.cursor_chat.student");
+      return getI18nString("new_user_experience.what_do_you_do.cursor_chat.student");
     case "educator":
-      return _$$t("new_user_experience.what_do_you_do.cursor_chat.student_or_educator");
+      return getI18nString("new_user_experience.what_do_you_do.cursor_chat.student_or_educator");
     case "ux_writing":
-      return _$$t("new_user_experience.what_do_you_do.sticky_note.ux_writing");
+      return getI18nString("new_user_experience.what_do_you_do.sticky_note.ux_writing");
     case "data_analytics":
-      return _$$t("new_user_experience.what_do_you_do.sticky_note.data_analytics");
+      return getI18nString("new_user_experience.what_do_you_do.sticky_note.data_analytics");
     case "something_else":
-      return _$$t("new_user_experience.what_do_you_do.cursor_chat.other");
+      return getI18nString("new_user_experience.what_do_you_do.cursor_chat.other");
     default:
       return "";
   }
 };
 function R(e) {
-  let r = md(Nz);
-  let t = md(bk);
+  let r = useAtomWithSubscription(Nz);
+  let t = useAtomWithSubscription(bk);
   let s = K2();
   let l = Array.from(r)[r.size - 1];
-  let [n] = md(ZE);
+  let [n] = useAtomWithSubscription(ZE);
   let a = function (e) {
     let r = R6();
     let t = iZ();
-    let i = md(bk);
-    let [s] = md(VQ);
-    let l = md($l);
+    let i = useAtomWithSubscription(bk);
+    let [s] = useAtomWithSubscription(VQ);
+    let l = useAtomWithSubscription($l);
     if (e && (r?.resourceType === q2.TEAM || r?.resourceType === q2.PROJECT)) {
       let e = r.members?.filter(e => e.user_id !== t?.id && !e.pending && e.user.handle.length < 12 && e.user.handle).map(e => !e.pending && e.user.handle) || [];
       return k.slice(0, e.length ? e.length : k.length).map((r, t) => ({
@@ -599,7 +599,7 @@ function B({
     editorType: e,
     mode: r
   }) {
-    let t = Gq()?.getPrimaryLocale(!1) || defaultLanguage;
+    let t = getI18nState()?.getPrimaryLocale(!1) || defaultLanguage;
     let i = function (e) {
       switch (e) {
         case FFileType.DESIGN:
@@ -746,34 +746,34 @@ let Q = "whiteboard--whiteboardAvatarContainer--ZNpIl";
 let X = "whiteboard--whiteboardAvatar--qpfIy";
 let er = e => e === VN.STARTER ? jsx("div", {
   className: n()(K, "whiteboard--whiteboardFileBadgeStarter--iGwlC"),
-  children: _$$t("new_user_experience.choose_plan_selected.free")
+  children: getI18nString("new_user_experience.choose_plan_selected.free")
 }) : e === VN.PROFESSIONAL ? jsx("div", {
   className: n()(K, "whiteboard--whiteboardFileBadgePro--LwpS-"),
-  children: _$$t("new_user_experience.choose_plan_selected.pro")
+  children: getI18nString("new_user_experience.choose_plan_selected.pro")
 }) : null;
 function et({
   file: e,
   hasFigJamIntent: r
 }) {
-  let t = md(Q7);
+  let t = useAtomWithSubscription(Q7);
   let s = iZ();
-  let l = md(aV);
-  let n = md(uN);
-  let [d] = md(PG);
+  let l = useAtomWithSubscription(aV);
+  let n = useAtomWithSubscription(uN);
+  let [d] = useAtomWithSubscription(PG);
   let c = function (e) {
     switch (e) {
       case "work":
-        return _$$t("new_user_experience.user_onboarding_signals.whiteboard.title.work_project");
+        return getI18nString("new_user_experience.user_onboarding_signals.whiteboard.title.work_project");
       case "school":
-        return _$$t("new_user_experience.user_onboarding_signals.whiteboard.title.assignment");
+        return getI18nString("new_user_experience.user_onboarding_signals.whiteboard.title.assignment");
       case "personal_project":
-        return _$$t("new_user_experience.user_onboarding_signals.whiteboard.title.big_idea");
+        return getI18nString("new_user_experience.user_onboarding_signals.whiteboard.title.big_idea");
       case "learning_design":
-        return _$$t("new_user_experience.user_onboarding_signals.whiteboard.title.messy_sandbox");
+        return getI18nString("new_user_experience.user_onboarding_signals.whiteboard.title.messy_sandbox");
       case "something_else":
-        return _$$t("new_user_experience.user_onboarding_signals.whiteboard.title.first_file");
+        return getI18nString("new_user_experience.user_onboarding_signals.whiteboard.title.first_file");
       default:
-        return _$$t("new_user_experience.user_onboarding_signals.whiteboard.title.new_file");
+        return getI18nString("new_user_experience.user_onboarding_signals.whiteboard.title.new_file");
     }
   }(d);
   let x = t || s?.email?.split("@")[0];
@@ -787,14 +787,14 @@ function et({
           userWhiteboardName: e,
           fileType: r
         }) {
-          return e && e.length < 20 ? r ? _$$t("new_user_experience.username_file_type", {
+          return e && e.length < 20 ? r ? getI18nString("new_user_experience.username_file_type", {
             userName: e,
             type: r
-          }) : _$$t("new_user_experience.first_file_username", {
+          }) : getI18nString("new_user_experience.first_file_username", {
             userName: e
-          }) : r ? _$$t("new_user_experience.first_file_type", {
+          }) : r ? getI18nString("new_user_experience.first_file_type", {
             type: r
-          }) : _$$t("new_user_experience.my_first_file");
+          }) : getI18nString("new_user_experience.my_first_file");
         }({
           userWhiteboardName: x,
           fileType: c
@@ -814,13 +814,13 @@ function et({
   });
 }
 function ei() {
-  let e = md(Q7);
+  let e = useAtomWithSubscription(Q7);
   let r = iZ();
   let t = e || r?.email?.split("@")[0];
   let s = r ? r.id : "";
-  let l = t && t.length < 20 ? _$$t("new_user_experience.file_username", {
+  let l = t && t.length < 20 ? getI18nString("new_user_experience.file_username", {
     userName: t
-  }) : _$$t("new_user_experience.my_file");
+  }) : getI18nString("new_user_experience.my_file");
   return jsxs("div", {
     className: Y,
     children: [jsx(q, {}), jsx("div", {
@@ -948,15 +948,15 @@ export function $$ed0({
   isInModal: r = !1
 }) {
   let t;
-  let l = md(bk);
-  let _ = md(uN);
+  let l = useAtomWithSubscription(bk);
+  let _ = useAtomWithSubscription(uN);
   let p = pV(_, e);
   let m = _$$E();
   let E = e ? {
     "data-preferred-theme": "light"
   } : {};
   let b = R6();
-  let j = md($B);
+  let j = useAtomWithSubscription($B);
   let C = "dark" === DP();
   let L = l === pu.CHOOSE_PRODUCT && !!_;
   let v = _ === FFileType.DESIGN;
@@ -989,7 +989,7 @@ export function $$ed0({
   });
   return jsx("div", {
     role: "img",
-    "aria-label": _$$t("user_onboarding_signals.dynamic_preview.description"),
+    "aria-label": getI18nString("user_onboarding_signals.dynamic_preview.description"),
     className: n()(N),
     ...p,
     ...E,

@@ -1,24 +1,24 @@
 import m from 'classnames';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
-import { $D } from '../905/11';
+import { reportError } from '../905/11';
 import { Uz } from '../905/63728';
 import { _ as _$$_ } from '../905/136246';
 import { ServiceCategories as _$$e } from '../905/165054';
 import { Y as _$$Y } from '../905/193977';
 import { h as _$$h } from '../905/207101';
-import { t as _$$t, tx } from '../905/303541';
+import { getI18nString, renderI18nText } from '../905/303541';
 import { B as _$$B2 } from '../905/388732';
 import { K } from '../905/443068';
 import { k as _$$k } from '../905/443820';
-import { sx } from '../905/449184';
+import { trackEventAnalytics } from '../905/449184';
 import { O8, ov, rj, yh } from '../905/462694';
 import { C as _$$C } from '../905/520159';
 import { encodeBase64, encodeStringToBase64 } from '../905/561685';
 import { $P } from '../905/590676';
 import { z as _$$z } from '../905/654860';
 import { F as _$$F } from '../905/680873';
-import { Lo } from '../905/714362';
+import { logInfo } from '../905/714362';
 import { B as _$$B } from '../905/714743';
 import { cq } from '../905/794154';
 import { n as _$$n } from '../905/895449';
@@ -28,7 +28,7 @@ import { A as _$$A3 } from '../1617/495612';
 import { A as _$$A } from '../5724/594037';
 import { s as _$$s } from '../cssbuilder/589278';
 import { Dm } from '../figma_app/8833';
-import { fp } from '../figma_app/27355';
+import { useAtomValueAndSetter } from '../figma_app/27355';
 import { kz } from '../figma_app/171177';
 import { debug, assert, throwTypeError } from '../figma_app/465776';
 import { Tk, ZR } from '../figma_app/575164';
@@ -53,8 +53,8 @@ export function $$K0(e) {
     hideOnRun = !0,
     actionLabel
   } = e;
-  let S = _$$t('qa.parameter.loading.plugin');
-  let w = _$$t('qa.parameter.loading.suggestions');
+  let S = getI18nString('qa.parameter.loading.plugin');
+  let w = getI18nString('qa.parameter.loading.suggestions');
   let N = useRef(null);
   let D = useRef(0);
   let V = useRef(null);
@@ -69,7 +69,7 @@ export function $$K0(e) {
   let Q = _$$F(Z);
   let J = _$$F(parameters);
   let [ee, et] = useState(null);
-  let [ei, en] = fp(Q8);
+  let [ei, en] = useAtomValueAndSetter(Q8);
   let [er, ea] = useState(!1);
   let es = useRef(!1);
   let {
@@ -80,7 +80,7 @@ export function $$K0(e) {
     G.current || terminate();
   }, [terminate]);
   useEffect(() => {
-    handler && !es.current && (sx(yh, ov({
+    handler && !es.current && (trackEventAnalytics(yh, ov({
       ...e,
       qaVersion: $L
     })), es.current = !0);
@@ -88,15 +88,15 @@ export function $$K0(e) {
   let ed = useCallback((t, i) => {
     if (H.current) return;
     let n = O8(t, i);
-    G.current && n.requiredEntered !== n.requiredCount && (Lo('Parameter Entry', 'parmeter mismatch', {
+    G.current && n.requiredEntered !== n.requiredCount && (logInfo('Parameter Entry', 'parmeter mismatch', {
       requiredParameters: t,
       parameterValues: i
-    }), $D(_$$e.AI_FOR_PRODUCTION, new Error('Parameter entry ran successfully with parameters, but not all parameters were recorded')));
+    }), reportError(_$$e.AI_FOR_PRODUCTION, new Error('Parameter entry ran successfully with parameters, but not all parameters were recorded')));
     let r = ov({
       ...e,
       qaVersion: $L
     });
-    sx(rj, {
+    trackEventAnalytics(rj, {
       ...r,
       success: G.current,
       parametersEntered: n.entered,
@@ -251,7 +251,7 @@ export function $$K0(e) {
   };
   function ey(e, t) {
     let i = eu(e);
-    i && (Lo('PluginParameterEntry', 'setParameterIndex', {
+    i && (logInfo('PluginParameterEntry', 'setParameterIndex', {
       nextParameter: i.name
     }), em({
       parameterValues: t,
@@ -332,19 +332,19 @@ export function $$K0(e) {
               className: U,
               children: [jsx('div', {
                 className: _$$s.colorBgTertiary.bRadius5.font11.h16.fontMedium.flex.itemsCenter.px4.mr8.$,
-                children: tx('fullscreen_actions.plugin_parameters.tab')
+                children: renderI18nText('fullscreen_actions.plugin_parameters.tab')
               }), jsx('div', {
                 className: B,
-                children: tx('fullscreen_actions.plugin_parameters.to_enter_optional_parameters')
+                children: renderI18nText('fullscreen_actions.plugin_parameters.to_enter_optional_parameters')
               })]
             }), jsxs('div', {
               className: U,
               children: [jsx('div', {
                 className: _$$s.colorBgTertiary.bRadius5.font11.h16.fontMedium.flex.itemsCenter.px4.mr8.$,
-                children: tx('fullscreen_actions.plugin_parameters.enter')
+                children: renderI18nText('fullscreen_actions.plugin_parameters.enter')
               }), jsx('div', {
                 className: B,
-                children: tx('fullscreen_actions.plugin_parameters.to_run_plugin')
+                children: renderI18nText('fullscreen_actions.plugin_parameters.to_run_plugin')
               })]
             })]
           })
@@ -508,7 +508,7 @@ function $({
             className: _$$s.ml4.h24.$,
             children: jsx(K, {
               'onClick': pop,
-              'aria-label': _$$t('qa.go_back'),
+              'aria-label': getI18nString('qa.go_back'),
               'children': jsx(_$$C, {})
             })
           }), jsx(X, {
@@ -541,7 +541,7 @@ function $({
                 let e = filterNotNullish(t.map(e => e.optional ? e.name : null)).join(', ');
                 return jsx('span', {
                   ref: b,
-                  children: tx('fullscreen_actions.plugin_parameters.optional_optional_names', {
+                  children: renderI18nText('fullscreen_actions.plugin_parameters.optional_optional_names', {
                     optionalNames: e
                   })
                 });
@@ -570,7 +570,7 @@ function $({
                         className: 'parameter_entry--optionalDivider--WTfhn',
                         children: '|'
                       }, 'divider'), jsx('span', {
-                        children: tx('fullscreen_actions.plugin_parameters.optional_optional_names', {
+                        children: renderI18nText('fullscreen_actions.plugin_parameters.optional_optional_names', {
                           optionalNames: t.join(', ')
                         })
                       }, 'optionalParams')]
@@ -626,11 +626,11 @@ function Q({
 }
 function J(e) {
   let t = new URL(e.src);
-  return t.hostname === window.location.hostname ? ($D(_$$e.AI_FOR_PRODUCTION, new Error('same-origin URL blocked in UntrustedImage')), jsx(Fragment, {})) : ['https:', 'http:', 'data:', 'blob:'].includes(t.protocol) ? jsx('img', {
+  return t.hostname === window.location.hostname ? (reportError(_$$e.AI_FOR_PRODUCTION, new Error('same-origin URL blocked in UntrustedImage')), jsx(Fragment, {})) : ['https:', 'http:', 'data:', 'blob:'].includes(t.protocol) ? jsx('img', {
     src: e.src,
     className: e.className,
     crossOrigin: 'anonymous',
     alt: ''
-  }) : ($D(_$$e.AI_FOR_PRODUCTION, new Error('Unexpected protocol blocked in UntrustedImage')), jsx(Fragment, {}));
+  }) : (reportError(_$$e.AI_FOR_PRODUCTION, new Error('Unexpected protocol blocked in UntrustedImage')), jsx(Fragment, {}));
 }
 export const ch = $$K0;

@@ -1,6 +1,6 @@
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { l as _$$l } from "../469e6e40/229084";
 import { nF } from "../905/350402";
 import { to, Ce } from "../905/156213";
@@ -26,7 +26,7 @@ let $$c0 = nF((e, {
       orgSamlConfig: t.data.meta.org_saml_config
     }));
   }).catch(t => {
-    e.dispatch(_$$s.flash(t.data?.message || _$$t("orgs_middleware.an_error_occurred_while_generating_scim"), 5e3));
+    e.dispatch(_$$s.flash(t.data?.message || getI18nString("orgs_middleware.an_error_occurred_while_generating_scim"), 5e3));
     console.error(t);
   });
 });
@@ -40,9 +40,9 @@ let $$_1 = nF((e, {
       orgSamlConfig: t.meta
     }));
   }).catch(t => {
-    e.dispatch(_$$s.flash(t.data?.message || _$$t("orgs_middleware.an_error_occurred_while_revoking_scim"), 5e3));
+    e.dispatch(_$$s.flash(t.data?.message || getI18nString("orgs_middleware.an_error_occurred_while_revoking_scim"), 5e3));
     console.error(t);
   });
 });
 export const S = $$c0;
-export const V = $$_1; 
+export const V = $$_1;

@@ -1,12 +1,12 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useEffect } from "react";
 import { useDispatch } from "../vendor/514228";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { buildUploadUrl } from "../figma_app/169182";
 import { oW } from "../905/675859";
 import { a as _$$a } from "../905/29104";
 import { Ph } from "../905/160095";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { E } from "../905/984674";
 import { sf } from "../905/929976";
 import { b as _$$b } from "../905/985254";
@@ -22,7 +22,7 @@ import { M } from "../1250/475573";
 let j = "acknowledged_figmake_ai_tos_onboarding";
 let k = r1(j);
 export function $$E2() {
-  return md(k);
+  return useAtomWithSubscription(k);
 }
 export function $$C3(e) {
   let t = useDispatch();
@@ -73,7 +73,7 @@ export function $$I1() {
     });
   }, [figmakeInFullscreen, i, show, e]);
   return jsx(_l, {
-    description: tx("figmake.legal_onboarding_modal.body"),
+    description: renderI18nText("figmake.legal_onboarding_modal.body"),
     disclaimerFooter: jsx($$N0, {}),
     isShowing,
     media: jsx(A, {}),
@@ -83,14 +83,14 @@ export function $$I1() {
       type: "button",
       label: jsx(E, {
         fontSize: 11,
-        children: tx("figmake.legal_onboarding_modal.try_figmake_button")
+        children: renderI18nText("figmake.legal_onboarding_modal.try_figmake_button")
       }),
       onClick: onAcknowledge,
       ctaTrackingDescriptor: _$$c.NEXT
     },
     secondaryCta: {
       type: "button",
-      label: tx("figmake.legal_onboarding_modal.back_to_files"),
+      label: renderI18nText("figmake.legal_onboarding_modal.back_to_files"),
       onClick: onClose,
       ctaTrackingDescriptor: _$$c.CLOSE
     },
@@ -110,7 +110,7 @@ function S() {
     children: [jsx("div", {
       className: "xeq5yr9 xod5an3",
       children: jsx(M, {})
-    }), tx("figmake.legal_onboarding_modal.title")]
+    }), renderI18nText("figmake.legal_onboarding_modal.title")]
   });
 }
 export function $$N0() {
@@ -119,21 +119,21 @@ export function $$N0() {
     newTab: !0,
     trusted: !0,
     href: "/sub-processors/",
-    children: tx("figmake.legal_onboarding_modal.disclaimer_figmas_ai_subprocessor_link")
+    children: renderI18nText("figmake.legal_onboarding_modal.disclaimer_figmas_ai_subprocessor_link")
   });
   let t = jsx(Ph, {
     newTab: !0,
     trusted: !0,
     href: "/product-specific-terms/",
-    children: tx("figmake.legal_onboarding_modal.disclaimer_figmas_beta_terms")
+    children: renderI18nText("figmake.legal_onboarding_modal.disclaimer_figmas_beta_terms")
   });
   let n = jsx(Ph, {
     newTab: !0,
     trusted: !0,
     href: "/legal/acceptable-publication-policy/",
-    children: tx("figmake.legal_onboarding_modal.disclaimer_figmas_acceptable_publication_policy")
+    children: renderI18nText("figmake.legal_onboarding_modal.disclaimer_figmas_acceptable_publication_policy")
   });
-  return tx("figmake.legal_onboarding_modal.footer_disclaimer_beta_2", {
+  return renderI18nText("figmake.legal_onboarding_modal.footer_disclaimer_beta_2", {
     figmas_beta_terms_link: t,
     figmas_ai_subprocessors_link: e,
     figmas_acceptable_publication_policy: n

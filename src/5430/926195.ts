@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useDispatch } from "../vendor/514228";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { gE } from "../5132/642384";
 import { _ as _$$_ } from "../905/456042";
 import { Jm } from "../figma_app/387599";
@@ -26,7 +26,7 @@ export let $$p0 = Ju(function ({
         r();
       } else {
         let e = gE(e => {
-          sx("try_it_out_drafts_picker_menu_opened", {
+          trackEventAnalytics("try_it_out_drafts_picker_menu_opened", {
             hubFileId: p.id,
             searchSessionId: h
           });

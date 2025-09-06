@@ -3,7 +3,7 @@ import { useState, useRef, useMemo, useLayoutEffect, useCallback } from "react";
 import { E } from "../905/632989";
 import s from "classnames";
 import { At } from "../905/973142";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { gl } from "../905/216495";
 var o = s;
 export function $$u0({
@@ -33,10 +33,10 @@ export function $$u0({
       className: o()("description--description--wc0EY ellipsis--ellipsisAfter2Lines--Qo-Xh ellipsis--_ellipsisAfterNLines--LzI7k", u ? "description--collapsed--3B1Bt" : "description--expanded--qZ3te"),
       children: h
     }), u && jsx(E, {
-      "aria-label": _$$t("design_systems.instance_panel.show_more"),
+      "aria-label": getI18nString("design_systems.instance_panel.show_more"),
       onClick: f,
       className: "description--seeMore--8DFac blue_link--blueLink--9rlnd",
-      children: tx("design_systems.instance_panel.show_more")
+      children: renderI18nText("design_systems.instance_panel.show_more")
     })]
   }) : null;
 }

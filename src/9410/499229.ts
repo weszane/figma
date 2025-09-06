@@ -4,16 +4,16 @@ import { useSelector, useDispatch } from "../vendor/514228";
 import { YEY, Lov, Ez5, h3O, _em, dNx, Z6A } from "../figma_app/763686";
 import { Xy, AD } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
-import { md, Xr, eU, fp } from "../figma_app/27355";
+import { useAtomWithSubscription, Xr, atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { A as _$$A } from "../vendor/90566";
-import { sn } from "../905/542194";
-import { p as _$$p } from "../figma_app/516794";
+import { globalPerfTimer } from "../905/542194";
+import { useEventSubscription } from "../figma_app/516794";
 import { am } from "../figma_app/901889";
 import { Uz, Te } from "../905/63728";
 import { yZ } from "../905/407352";
 import { jN } from "../figma_app/930338";
 import { Fk } from "../905/125333";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { NY } from "../figma_app/712525";
 import { lg } from "../figma_app/976749";
 import { r as _$$r } from "../figma_app/860474";
@@ -46,7 +46,7 @@ export function $$F12({
 }) {
   return jsx(Fragment, {
     children: jsx(_$$H2, {
-      ariaDescription: _$$t("canvas_search.results_will_update_as_you_type"),
+      ariaDescription: getI18nString("canvas_search.results_will_update_as_you_type"),
       dataTestId: "canvas-search-input",
       innerRef: n,
       onChange: e,
@@ -60,7 +60,7 @@ export function $$F12({
       },
       onKeyUp: s,
       onPasteCapture: o,
-      placeholder: _$$t("canvas_search.search_placeholder"),
+      placeholder: getI18nString("canvas_search.search_placeholder"),
       recordingKey: `${d}.canvas_search.search`,
       value: t
     })
@@ -82,7 +82,7 @@ export function $$B0(e, t, i) {
     }
     r && t(r, "keyboard");
   }, [i, e, t]);
-  _$$p(_$$r.FocusEvent, r);
+  useEventSubscription(_$$r.FocusEvent, r);
 }
 export function $$U1() {
   let e = useRef(!1);
@@ -92,7 +92,7 @@ export function $$U1() {
   } = useSelector(e => e.canvasSearch);
   let {
     total
-  } = md(Fk);
+  } = useAtomWithSubscription(Fk);
   return {
     focusedByButtons: e,
     hidden: t,
@@ -144,7 +144,7 @@ export function $$K7() {
     }));
   }, [k, b, scope, A, F]);
   let U = useCallback(async (t, r = !0) => {
-    sn.start("canvas_search_time_to_results");
+    globalPerfTimer.start("canvas_search_time_to_results");
     O(!0);
     let {
       nav,
@@ -157,7 +157,7 @@ export function $$K7() {
         searchScope: Lov[scope]
       }
     });
-    let l = sn.tryStop("canvas_search_time_to_results");
+    let l = globalPerfTimer.tryStop("canvas_search_time_to_results");
     l && M("canvas_search_time_to_results", {
       timeElapsedMs: l,
       searchScope: Lov[scope],
@@ -300,7 +300,7 @@ function H() {
 export function $$z9() {
   let e = L3();
   let t = YEY.hasDirtyPrimaryInstances();
-  let i = md(Fk);
+  let i = useAtomWithSubscription(Fk);
   let r = useRef([]);
   let a = t && r.current.length;
   let o = useMemo(() => {
@@ -344,9 +344,9 @@ export function $$W4() {
     }), !0);
   }, [query, scope, i]);
 }
-let Y = eU(null);
+let Y = atom(null);
 export function $$J11() {
-  return fp(Y);
+  return useAtomValueAndSetter(Y);
 }
 export function $$q10() {
   let e = Xr(Y);

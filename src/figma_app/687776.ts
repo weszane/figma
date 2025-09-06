@@ -1,6 +1,6 @@
 import { resourceUtils } from "../905/989992";
 import { Rs } from "../figma_app/288654";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { HH } from "../figma_app/828186";
 import { FFileType } from "../figma_app/191312";
 import { zCd } from "../figma_app/43951";
@@ -53,7 +53,7 @@ export function $$y6(e) {
   return resourceUtils.useTransform(t, e => e.project);
 }
 export function $$b7() {
-  return Az(No()).transform(e => e ? t("file_browser.creation_buttons.disabled_by_organization") : t("file_browser.creation_buttons.disabled_by_team"));
+  return Az(No()).transform(e => e ? getI18nString("file_browser.creation_buttons.disabled_by_organization") : getI18nString("file_browser.creation_buttons.disabled_by_team"));
 }
 (e => {
   function t(e, t) {

@@ -1,8 +1,8 @@
 import { isPartOfGroup } from "../figma_app/664063";
 import { XJn } from "../figma_app/763686";
 import { getSingletonSceneGraph, ReduxSceneGraph } from "../905/700578";
-import { zl } from "../figma_app/27355";
-import { xi } from "../905/714362";
+import { atomStoreManager } from "../figma_app/27355";
+import { logWarning } from "../905/714362";
 import { fF } from "../905/471229";
 import { _s } from "../figma_app/33126";
 import { J } from "../905/915227";
@@ -58,11 +58,11 @@ export function $$S12({
   clientLifecycleId: e
 }) {
   return {
-    orgId: zl.get(_s) || null,
-    teamId: zl.get(As) || null,
-    fileKey: zl.get(ze) || null,
-    userId: zl.get(kS) || null,
-    fileSeq: zl.get(J)?.toString() || null,
+    orgId: atomStoreManager.get(_s) || null,
+    teamId: atomStoreManager.get(As) || null,
+    fileKey: atomStoreManager.get(ze) || null,
+    userId: atomStoreManager.get(kS) || null,
+    fileSeq: atomStoreManager.get(J)?.toString() || null,
     clientLifecycleId: e,
     trackingSessionId: fF()
   };
@@ -91,7 +91,7 @@ export function $$x8(e, t, r, n) {
 }
 export function $$N13(e, t) {
   let r = getSingletonSceneGraph().get(t);
-  return r ? r.getSublayerIdForInstanceOfSymbol(e) : (xi("first-draft", "No component sublayer found for", {
+  return r ? r.getSublayerIdForInstanceOfSymbol(e) : (logWarning("first-draft", "No component sublayer found for", {
     symbolSublayer: r
   }), null);
 }

@@ -10,12 +10,12 @@ import { J } from "../905/270045";
 import { p as _$$p } from "../905/185998";
 import { G as _$$G } from "../905/289770";
 import { getFeatureFlags } from "../905/601108";
-import { fp, Xr } from "../figma_app/27355";
+import { useAtomValueAndSetter, Xr } from "../figma_app/27355";
 import { f as _$$f, h as _$$h } from "../905/693155";
 import { conditionalFeatureFlag } from "../figma_app/169182";
 import { Fj, jI } from "../905/763714";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { E as _$$E } from "../905/984674";
 import { fK } from "../905/469533";
 import { lg } from "../figma_app/976749";
@@ -28,7 +28,7 @@ export let $$C0 = Ju(function ({
   onClose: t
 }) {
   let [r, x] = _$$y();
-  let [C, w] = fp(Fj);
+  let [C, w] = useAtomValueAndSetter(Fj);
   let O = Xr(jI);
   let R = X();
   let L = useDispatch();
@@ -48,8 +48,8 @@ export let $$C0 = Ju(function ({
     onClose: j
   });
   let B = getFeatureFlags().slides_editor_a11y && D === FFileType.SLIDES;
-  let G = conditionalFeatureFlag("a11y_design_dom_mirror", _$$t("fullscreen.accessibility_settings.enable_screenreader_description_design_beta"), _$$t("fullscreen.accessibility_settings.enable_screenreader_description_figjam_beta"));
-  B && (G = _$$t("fullscreen.accessibility_settings.enable_screenreader_description_slides"));
+  let G = conditionalFeatureFlag("a11y_design_dom_mirror", getI18nString("fullscreen.accessibility_settings.enable_screenreader_description_design_beta"), getI18nString("fullscreen.accessibility_settings.enable_screenreader_description_figjam_beta"));
+  B && (G = getI18nString("fullscreen.accessibility_settings.enable_screenreader_description_slides"));
   let V = conditionalFeatureFlag("fpl_enhanced_contrast_toggle", {
     "data-preferred-theme": color,
     "data-editor-theme": brand,
@@ -63,7 +63,7 @@ export let $$C0 = Ju(function ({
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: tx("fullscreen.accessibility_settings.dialog_title")
+          children: renderI18nText("fullscreen.accessibility_settings.dialog_title")
         })
       }), jsx(nB, {
         children: jsxs("div", {
@@ -80,15 +80,15 @@ export let $$C0 = Ju(function ({
               x(e);
             },
             label: jsx(J, {
-              children: tx("fullscreen.accessibility_settings.enable_screenreader_label")
+              children: renderI18nText("fullscreen.accessibility_settings.enable_screenreader_label")
             }),
             ref: R,
-            children: ["platform_error" === P ? _$$t("fullscreen.accessibility.platform_error") : G, "render_error" === P && jsx("span", {
+            children: ["platform_error" === P ? getI18nString("fullscreen.accessibility.platform_error") : G, "render_error" === P && jsx("span", {
               role: "alert",
               className: _$$s.block.mt8.$,
               children: jsx(_$$E, {
                 color: "danger",
-                children: tx("fullscreen.accessibility.dom_error")
+                children: renderI18nText("fullscreen.accessibility.dom_error")
               })
             })]
           }), getFeatureFlags().fpl_enhanced_contrast_toggle && jsx(_$$d, {
@@ -105,10 +105,10 @@ export let $$C0 = Ju(function ({
               }));
             },
             label: jsx(J, {
-              children: tx("fullscreen.accessibility_settings.enhanced_contrast_label")
+              children: renderI18nText("fullscreen.accessibility_settings.enhanced_contrast_label")
             }),
             ref: R,
-            children: _$$t("fullscreen.accessibility_settings.enhanced_contrast_description")
+            children: getI18nString("fullscreen.accessibility_settings.enhanced_contrast_description")
           }), getFeatureFlags().a11y_spotlight_timing_settings && jsxs("div", {
             className: "x78zum5 x1gskr33",
             children: [jsx("div", {
@@ -127,10 +127,10 @@ export let $$C0 = Ju(function ({
                 className: "x1ihwiht",
                 children: jsx(J, {
                   htmlFor: "spotlight-notification-duration-input",
-                  children: _$$t("collaboration.spotlight.set_delay_label")
+                  children: getI18nString("collaboration.spotlight.set_delay_label")
                 })
               }), jsxs("span", {
-                children: [" ", _$$t("collaboration.spotlight.set_delay_description")]
+                children: [" ", getI18nString("collaboration.spotlight.set_delay_description")]
               })]
             })]
           })]

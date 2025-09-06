@@ -10,9 +10,9 @@ import u from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
 import { c2 } from "../figma_app/243213";
 import { hC } from "../figma_app/901889";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { Pt, o6 } from "../figma_app/806412";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/989956";
 import { z5, rC } from "../905/713722";
 import { o1 } from "../figma_app/975811";
@@ -211,7 +211,7 @@ export function $$Q2({
             onPointerDown: ed,
             recordingKey: Pt(e, "dropperButton"),
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t("fullscreen.color_controls.eyedropper"),
+            "data-tooltip": getI18nString("fullscreen.color_controls.eyedropper"),
             tooltipForScreenReadersOnly: !0,
             className: p()({
               [fG]: !i && "dark" === t.theme
@@ -294,10 +294,10 @@ export function $$Q2({
           }),
           children: V ? jsx(_$$d, {
             "aria-expanded": t.currentTool === NLJ.DROPPER_COLOR,
-            "aria-label": _$$t("fullscreen.properties_panel.color_picker.sample_color"),
+            "aria-label": getI18nString("fullscreen.properties_panel.color_picker.sample_color"),
             htmlAttributes: {
               "data-tooltip-type": Ib.TEXT,
-              "data-tooltip": _$$t("fullscreen.properties_panel.color_picker.sample_color")
+              "data-tooltip": getI18nString("fullscreen.properties_panel.color_picker.sample_color")
             },
             recordingKey: Pt(e, "dropperButton"),
             onClick: ed,
@@ -307,7 +307,7 @@ export function $$Q2({
             onMouseDown: ed,
             recordingKey: Pt(e, "dropperButton"),
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t("fullscreen.properties_panel.color_picker.eyedropper"),
+            "data-tooltip": getI18nString("fullscreen.properties_panel.color_picker.eyedropper"),
             tooltipForScreenReadersOnly: !0,
             children: jsx(_$$G, {})
           })
@@ -391,7 +391,7 @@ export function $$er4(e) {
     ref: r,
     isWhiteboard: s,
     children: [jsx(AN, {
-      autoFocus: !Ay.isIpad && !e.preventAutoFocus,
+      autoFocus: !BrowserInfo.isIpad && !e.preventAutoFocus,
       className: p()({
         [uh]: !s,
         [vh]: s
@@ -451,7 +451,7 @@ export class $$en3 extends o6 {
       children: [jsx(j5, {
         autoFocus: !this.props.preventAutoFocus,
         className: Qh,
-        "data-tooltip": _$$t("fullscreen.color_controls.red"),
+        "data-tooltip": getI18nString("fullscreen.color_controls.red"),
         "data-tooltip-type": Ib.TEXT,
         dispatch: this.props.dispatch,
         formatter: this.formatter,
@@ -464,7 +464,7 @@ export class $$en3 extends o6 {
         value: this.props.color.r
       }), jsx(j5, {
         className: Qh,
-        "data-tooltip": _$$t("fullscreen.color_controls.green"),
+        "data-tooltip": getI18nString("fullscreen.color_controls.green"),
         "data-tooltip-type": Ib.TEXT,
         dispatch: this.props.dispatch,
         formatter: this.formatter,
@@ -478,7 +478,7 @@ export class $$en3 extends o6 {
         value: this.props.color.g
       }), jsx(j5, {
         className: Qh,
-        "data-tooltip": _$$t("fullscreen.color_controls.blue"),
+        "data-tooltip": getI18nString("fullscreen.color_controls.blue"),
         "data-tooltip-type": Ib.TEXT,
         dispatch: this.props.dispatch,
         formatter: this.formatter,
@@ -564,7 +564,7 @@ export class $$ea5 extends o6 {
       children: [jsx(j5, {
         autoFocus: !this.props.preventAutoFocus,
         className: Qh,
-        "data-tooltip": _$$t("fullscreen.color_controls.hue"),
+        "data-tooltip": getI18nString("fullscreen.color_controls.hue"),
         "data-tooltip-type": Ib.TEXT,
         dispatch: this.props.dispatch,
         formatter: this.formatter360,
@@ -577,7 +577,7 @@ export class $$ea5 extends o6 {
         value: this.props.value.h
       }), jsx(j5, {
         className: Qh,
-        "data-tooltip": _$$t("fullscreen.color_controls.saturation"),
+        "data-tooltip": getI18nString("fullscreen.color_controls.saturation"),
         "data-tooltip-type": Ib.TEXT,
         dispatch: this.props.dispatch,
         formatter: this.formatter100,
@@ -591,7 +591,7 @@ export class $$ea5 extends o6 {
         value: this.props.value.s
       }), jsx(j5, {
         className: Qh,
-        "data-tooltip": "l" in this.props.value ? _$$t("fullscreen.color_controls.lightness") : _$$t("fullscreen.color_controls.brightness"),
+        "data-tooltip": "l" in this.props.value ? getI18nString("fullscreen.color_controls.lightness") : getI18nString("fullscreen.color_controls.brightness"),
         "data-tooltip-type": Ib.TEXT,
         dispatch: this.props.dispatch,
         formatter: this.formatter100,

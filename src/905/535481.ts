@@ -1,6 +1,6 @@
 import { Ez5 } from "../figma_app/763686";
-import { nl } from "../figma_app/257275";
+import { isInteractionPathCheck } from "../figma_app/897289";
 export function $$a0() {
-  return !nl() && Ez5?.editorPreferences().pluginApiDebug.getCopy();
+  return !isInteractionPathCheck() && Ez5?.editorPreferences().pluginApiDebug.getCopy();
 }
 export const j = $$a0;

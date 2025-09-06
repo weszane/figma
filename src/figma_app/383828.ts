@@ -1,8 +1,8 @@
 import { sortByWithOptions } from "../figma_app/656233";
 import { iCO, glU } from "../figma_app/763686";
 import { nc, l7 } from "../905/189185";
-import { zl } from "../figma_app/27355";
-import { sx } from "../905/449184";
+import { atomStoreManager } from "../figma_app/27355";
+import { trackEventAnalytics } from "../905/449184";
 import { uO } from "../figma_app/933328";
 import { Qx, Jl } from "../figma_app/80990";
 import { iP, nJ } from "../figma_app/646357";
@@ -123,7 +123,7 @@ export function $$T3(e, t, r) {
     publishID,
     libraryKey
   } = n;
-  let o = zl.get(qp)[libraryKey];
+  let o = atomStoreManager.get(qp)[libraryKey];
   let l = iP(t.publishedByLibraryKey.components, {
     library_key: libraryKey,
     team_id: o?.team_id ?? null
@@ -167,7 +167,7 @@ export function $$v4(e, t, r, n, a, s, d, c) {
         let t = glU.getSimilarStates(n, e.node_id, "");
         glU.replaceSymbolBackingInstances(t, s);
       }
-      sx("Instance Swapped To Local Component", {
+      trackEventAnalytics("Instance Swapped To Local Component", {
         source: a,
         ...d,
         queryId: c

@@ -4,9 +4,9 @@ import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { sYL, egF, Xts, BtE, xSx, i0e, _em, dPJ } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { sx } from "../905/449184";
-import { $D } from "../905/11";
-import { Lo } from "../905/714362";
+import { trackEventAnalytics } from "../905/449184";
+import { reportError } from "../905/11";
+import { logInfo } from "../905/714362";
 import { g as _$$g } from "../905/880308";
 import { XHR } from "../905/910117";
 import { rY, XA } from "../905/985490";
@@ -173,9 +173,9 @@ let D = async (e, t, i, n, r) => {
     }
   } = await XHR.post(`/api/file_diff/checkpoint_diff/${d}/${t}?${p.toString()}`);
   getFeatureFlags().run_fig_diff_job && S.enqueueFigDiffAnalysis(e, t, checkpoint_diff.from_checkpoint_key, checkpoint_diff.to_checkpoint_key, d).catch(e => {
-    $D(_$$e.SCENEGRAPH_AND_SYNC, e);
+    reportError(_$$e.SCENEGRAPH_AND_SYNC, e);
   });
-  Lo("Branching", "fetched checkpoint diff", {
+  logInfo("Branching", "fetched checkpoint diff", {
     direction: d,
     fromCheckpointKey: checkpoint_diff.from_checkpoint_key,
     toCheckpointKey: checkpoint_diff.to_checkpoint_key,
@@ -379,7 +379,7 @@ export class $$z0 {
   }
   commitStart() {
     this.startTime = Date.now();
-    sx("Branch Apply Changes Initiated", {
+    trackEventAnalytics("Branch Apply Changes Initiated", {
       ...this.commonTrackingProps
     }, {
       forwardToDatadog: !0
@@ -392,7 +392,7 @@ export class $$z0 {
       mergeRequestId: e.id,
       mergedWithoutApproval: !e.reviewers.some(e => e.approved_at)
     });
-    sx("Branch Apply Changes", {
+    trackEventAnalytics("Branch Apply Changes", {
       ...this.commonTrackingProps,
       durationMs: Date.now() - this.startTime,
       ...i,
@@ -404,7 +404,7 @@ export class $$z0 {
     });
   }
   commitSynced(e) {
-    null !== this.startTime && sx("Branch Apply Changes Synced", {
+    null !== this.startTime && trackEventAnalytics("Branch Apply Changes Synced", {
       ...this.commonTrackingProps,
       durationMs: Date.now() - this.startTime,
       ...(e ? {

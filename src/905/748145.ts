@@ -1,6 +1,6 @@
 import { mHF, ZiZ, rXF, Egt, Z_n } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { g as _$$g } from "../905/871474";
 import { jq } from "../figma_app/761118";
 import { C as _$$C } from "../905/887158";
@@ -322,7 +322,7 @@ async function N(e, t, i) {
         r.fixContext = e;
       }
     } else if ("TEXT_STYLE" === u) {
-      let i = zl.get(jq);
+      let i = atomStoreManager.get(jq);
       let n = function (e, t) {
         let i = debugState.getState().library.used__LIVEGRAPH.styles[n3(t)];
         if (!i || i?.data === null) return null;
@@ -687,7 +687,7 @@ let F = {
       valid: !0
     };
     try {
-      let e = zl.get(jq);
+      let e = atomStoreManager.get(jq);
       let i = h(t, e.allStyles);
       let r = i.map(e => e.key.toString());
       let d = r.length > 0 ? _$$g() : "";

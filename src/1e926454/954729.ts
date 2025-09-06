@@ -5,7 +5,7 @@ import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { Y9, hE, nB, wi, jk, r1, vo } from "../figma_app/272243";
 import { mI } from "../figma_app/566371";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { tH, H4 } from "../905/751457";
 import { j6, fu } from "../figma_app/831799";
 import { FOrganizationLevelType, FPlanNameType, FResourceCategoryType } from "../figma_app/191312";
@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from "../vendor/514228";
 import { g as _$$g } from "../905/687265";
 import { xk } from "@stylexjs/stylex";
 import { $z } from "../figma_app/617427";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Gu } from "../905/513035";
 import { F5, Z as _$$Z } from "../figma_app/761870";
 import { e as _$$e2 } from "../905/393279";
@@ -24,7 +24,7 @@ import { Ay } from "../905/865071";
 import { $y } from "../figma_app/59509";
 import { Q as _$$Q } from "../905/363675";
 import { N as _$$N2 } from "../905/572042";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { h as _$$h } from "../905/207101";
 import { k as _$$k } from "../figma_app/618031";
 import { JT, tI } from "../figma_app/599327";
@@ -194,12 +194,12 @@ function U({
           children: JT(e)
         }), !!r && jsx(_$$E, {
           variant: "defaultFilled",
-          children: _$$t("plan_invite_modal.available_seats", {
+          children: getI18nString("plan_invite_modal.available_seats", {
             count: r
           })
         }), jsx(_$$M, {}), t && jsx("div", {
           ...xk(Z.optionSeatSecondaryText),
-          children: s && _$$t("general.price_per_month", {
+          children: s && getI18nString("general.price_per_month", {
             priceString: s
           })
         })]
@@ -233,7 +233,7 @@ function ee({
   let l = useId();
   return jsxs(T, {
     id: l,
-    label: _$$t("plan_invite_modal.seat_type"),
+    label: getI18nString("plan_invite_modal.seat_type"),
     children: [jsx(H, {
       id: l,
       value: e,
@@ -281,7 +281,7 @@ function en({
   if (t || n === Gu.VIEW || d) return null;
   if (!s || o) return jsx(et, {
     trackingProperties: m,
-    children: tx("plan_invite_modal.cost_messaging.description.without_prorated_costs", {
+    children: renderI18nText("plan_invite_modal.cost_messaging.description.without_prorated_costs", {
       seatType: tI(n)
     })
   });
@@ -291,10 +291,10 @@ function en({
   });
   return jsx(et, {
     trackingProperties: m,
-    children: e.tier === FPlanNameType.PRO ? tx("plan_invite_modal.cost_messaging.description.with_monthly_prorated_costs", {
+    children: e.tier === FPlanNameType.PRO ? renderI18nText("plan_invite_modal.cost_messaging.description.with_monthly_prorated_costs", {
       seatType: tI(n),
       monthlyPrice: h
-    }) : tx("plan_invite_modal.cost_messaging.description.with_prorated_costs", {
+    }) : renderI18nText("plan_invite_modal.cost_messaging.description.with_prorated_costs", {
       seatType: tI(n),
       monthlyPrice: h
     })
@@ -312,12 +312,12 @@ function et({
       children: jsxs($y, {
         variant: "default",
         children: [jsx(_$$Q, {
-          title: _$$t("plan_invite_modal.cost_messaging.title"),
+          title: getI18nString("plan_invite_modal.cost_messaging.title"),
           children: e
         }), jsx(_$$N2, {
           href: "https://help.figma.com/hc/articles/360039960434-Manage-seats-in-Figma",
           newTab: !0,
-          children: _$$t("general.learn_more")
+          children: getI18nString("general.learn_more")
         })]
       })
     })
@@ -325,14 +325,14 @@ function et({
 }
 function ei() {
   _$$h(() => {
-    sx("seat_purchasing.non_blocking_fetch_error", {
+    trackEventAnalytics("seat_purchasing.non_blocking_fetch_error", {
       price_fetch_error: !0,
       view: "plan_invite_modal"
     });
   });
   return jsx("div", {
     className: "xnkfzng",
-    children: _$$t("plan_invite_modal.error.price_fetch_error")
+    children: getI18nString("plan_invite_modal.error.price_fetch_error")
   });
 }
 let ea = {
@@ -389,7 +389,7 @@ function er({
           children: infoText
         }), jsx(T, {
           id: S,
-          label: _$$t("plan_invite_modal.email"),
+          label: getI18nString("plan_invite_modal.email"),
           children: jsx(_$$e2, {
             id: S,
             TokenComponent: rG,
@@ -411,11 +411,11 @@ function er({
         children: [jsx($z, {
           variant: "secondary",
           onClick: n,
-          children: _$$t("general.cancel")
+          children: getI18nString("general.cancel")
         }), jsx($z, {
           onClick: () => submit(l),
           disabled: isSubmitting || !F5(l, onValidateToken),
-          children: _$$t("plan_invite_modal.send_invite")
+          children: getI18nString("plan_invite_modal.send_invite")
         })]
       })
     })]
@@ -440,7 +440,7 @@ function eb({
     let n = E.data?.length ?? 0;
     let t = "unknown";
     t = n <= 100 ? "small" : n <= 300 ? "medium" : "large";
-    sx("share_modal_latency", {
+    trackEventAnalytics("share_modal_latency", {
       latency_ms: e,
       modal_type: "team",
       is_outlier: e > 500,
@@ -486,13 +486,13 @@ function eb({
   let J = useMemo(() => {
     var e;
     if (0 === z.length) return null;
-    let n = ((e = [...new Set(z)]).length <= 3 ? e : [...e.slice(0, 2), _$$t("plan_invite_modal.team.seat_already_assigned.n_others", {
+    let n = ((e = [...new Set(z)]).length <= 3 ? e : [...e.slice(0, 2), getI18nString("plan_invite_modal.team.seat_already_assigned.n_others", {
       n: e.length - 2
     })]).map(e => jsx("span", {
       ...xk(_$$g.textBodyMediumStrong),
       children: e
     }, e));
-    return tx("plan_invite_modal.team.seat_already_assigned", {
+    return renderI18nText("plan_invite_modal.team.seat_already_assigned", {
       count: n.length,
       emailString: jsx(_$$T, {
         children: n
@@ -513,7 +513,7 @@ function eb({
         s();
         let n = e.invites.length;
         n > 0 && l(_$$F.enqueue({
-          message: _$$t("plan_invite_modal.invites_sent", {
+          message: getI18nString("plan_invite_modal.invites_sent", {
             count: n
           })
         }));
@@ -532,21 +532,21 @@ function eb({
   let X = useId();
   if (mI(L), !M) {
     let e = Error("Team permissions not loaded");
-    $D(_$$e.SCALE, e);
+    reportError(_$$e.SCALE, e);
     return e;
   }
   return jsxs(Fragment, {
     children: [jsxs(Y9, {
       children: [jsx(r1, {
-        children: _$$t("plan_invite_modal.team.hidden_title")
+        children: getI18nString("plan_invite_modal.team.hidden_title")
       }), jsxs(_$$t2.TabStrip, {
         manager: F,
         children: [jsx(_$$t2.Tab, {
           ...B.inviteByEmail,
-          children: _$$t("plan_invite_modal.invite_by_email")
+          children: getI18nString("plan_invite_modal.invite_by_email")
         }), jsx(_$$t2.Tab, {
           ...B.inviteByLink,
-          children: _$$t("plan_invite_modal.invite_by_link")
+          children: getI18nString("plan_invite_modal.invite_by_link")
         })]
       })]
     }), jsxs(nB, {
@@ -558,7 +558,7 @@ function eb({
           ...xk(ea.container),
           children: [jsx(T, {
             id: X,
-            label: _$$t("plan_invite_modal.email"),
+            label: getI18nString("plan_invite_modal.email"),
             children: jsx(_$$e2, {
               SearchResultComponent: o6,
               TokenComponent: gy,
@@ -580,7 +580,7 @@ function eb({
               multiLineForm: !0,
               onInviteLevelChange: setInviteLevel,
               options: R,
-              placeholderText: _$$t("team_creation.add_a_name_or_email"),
+              placeholderText: getI18nString("team_creation.add_a_name_or_email"),
               searchResultToken,
               showDropdownSeparators: !0,
               validateToken,
@@ -610,20 +610,20 @@ function eb({
         children: [jsx($z, {
           variant: "secondary",
           onClick: s,
-          children: _$$t("general.cancel")
+          children: getI18nString("general.cancel")
         }), jsx(_$$t2.TabPanel, {
           ...O.inviteByEmail,
           children: jsx($z, {
             onClick: K,
             disabled: !F5(u, validateToken),
-            children: _$$t("plan_invite_modal.send_invite")
+            children: getI18nString("plan_invite_modal.send_invite")
           })
         }), jsx(_$$t2.TabPanel, {
           ...O.inviteByLink,
           children: ("loaded" !== Y.status || !!q) && jsx($z, {
             onClick: H,
             disabled: "loaded" !== Y.status,
-            children: _$$t("plan_invite_modal.copy_link")
+            children: getI18nString("plan_invite_modal.copy_link")
           })
         })]
       })
@@ -633,11 +633,11 @@ function eb({
 function eS(e) {
   switch (e) {
     case e6.ADMIN:
-      return _$$t("plan_invite_modal.team.permissions_description.admin");
+      return getI18nString("plan_invite_modal.team.permissions_description.admin");
     case e6.EDITOR:
-      return _$$t("plan_invite_modal.team.permissions_description.can_edit");
+      return getI18nString("plan_invite_modal.team.permissions_description.can_edit");
     case e6.VIEWER:
-      return _$$t("plan_invite_modal.team.permissions_description.can_view");
+      return getI18nString("plan_invite_modal.team.permissions_description.can_view");
     default:
       return null;
   }
@@ -648,7 +648,7 @@ function eT(e) {
   let p = t.data;
   mI(t);
   useEffect(() => {
-    "loaded" === t.status && p?.type !== e.planType && $D(_$$e.SCALE, Error("PlanInviteModal received planType incongruent with current plan context"), {
+    "loaded" === t.status && p?.type !== e.planType && reportError(_$$e.SCALE, Error("PlanInviteModal received planType incongruent with current plan context"), {
       extra: {
         planTypeProp: e.planType,
         planType: p?.type,

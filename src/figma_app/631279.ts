@@ -1,5 +1,5 @@
 import { l7 } from "../905/189185";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { D } from "../905/629114";
 import { rp } from "../figma_app/229710";
 import { GF, NI, h0 } from "../figma_app/61403";
@@ -56,7 +56,7 @@ export async function $$_7({
     });
     return s.id;
   } catch (t) {
-    x1($$d10, "Failed to insert image", {
+    logError($$d10, "Failed to insert image", {
       imgUrl: e,
       err: t
     }, {

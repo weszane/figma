@@ -1,2 +1,2 @@
-export let $$n0 = "Unassigned";
-export const O = $$n0;
+export let UNASSIGNED = "Unassigned";
+export const O = UNASSIGNED;

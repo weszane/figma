@@ -1,18 +1,18 @@
 import { getFeatureFlags } from "../905/601108";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { sZ } from "../905/845253";
 import { uG } from "../905/31837";
 export function $$o0() {
   let e = sZ();
-  return uG() && e ? tx("auth.two-factor-setup.mfa_required_org.description", {
+  return uG() && e ? renderI18nText("auth.two-factor-setup.mfa_required_org.description", {
     orgName: e.name
-  }) : tx("auth.two-factor-setup.this_will_disable_two_factor_authentication_entirely");
+  }) : renderI18nText("auth.two-factor-setup.this_will_disable_two_factor_authentication_entirely");
 }
 export function $$l2() {
-  return getFeatureFlags().mfa_for_guests ? tx("auth.two-factor-setup.disable_2fa.title") : tx("auth.two-factor-setup.are_you_sure");
+  return getFeatureFlags().mfa_for_guests ? renderI18nText("auth.two-factor-setup.disable_2fa.title") : renderI18nText("auth.two-factor-setup.are_you_sure");
 }
 export function $$d1() {
-  return getFeatureFlags().mfa_for_guests ? tx("auth.two-factor-setup.disable_2fa.cta") : tx("auth.two-factor-setup.ok");
+  return getFeatureFlags().mfa_for_guests ? renderI18nText("auth.two-factor-setup.disable_2fa.cta") : renderI18nText("auth.two-factor-setup.ok");
 }
 export const B7 = $$o0;
 export const Bb = $$d1;

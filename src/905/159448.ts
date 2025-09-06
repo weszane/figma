@@ -5,7 +5,7 @@ import { K } from "../905/443068";
 import { f } from "../905/54715";
 import { H } from "../905/222445";
 import { J } from "../905/125993";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { _I, PY } from "../905/34809";
 import { Ib } from "../905/129884";
 export function $$p0(e) {
@@ -32,10 +32,10 @@ export function $$p0(e) {
           onClick: () => {
             i ? t(_I()) : t(PY());
           },
-          "aria-label": i ? _$$t("mobile_tool_bar.hide_navigation") : _$$t("mobile_tool_bar.show_navigation"),
+          "aria-label": i ? getI18nString("mobile_tool_bar.hide_navigation") : getI18nString("mobile_tool_bar.show_navigation"),
           htmlAttributes: {
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": i ? _$$t("mobile_tool_bar.hide_navigation") : _$$t("mobile_tool_bar.show_navigation")
+            "data-tooltip": i ? getI18nString("mobile_tool_bar.hide_navigation") : getI18nString("mobile_tool_bar.show_navigation")
           },
           children: i ? jsx(f, {}) : jsx(H, {})
         }), p > 0 && !e.hideToolBarOnMobile && jsx("div", {
@@ -49,10 +49,10 @@ export function $$p0(e) {
         className: "mobile_tool_bar--toolBarRightSideMobile--uQfL9",
         children: [jsx(K, {
           onClick: e => e.preventDefault(),
-          "aria-label": _$$t("mobile_tool_bar.more_options"),
+          "aria-label": getI18nString("mobile_tool_bar.more_options"),
           htmlAttributes: {
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t("mobile_tool_bar.more_options")
+            "data-tooltip": getI18nString("mobile_tool_bar.more_options")
           },
           children: jsx(J, {})
         }), jsx("select", {

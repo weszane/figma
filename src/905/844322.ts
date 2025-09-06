@@ -3,7 +3,7 @@ import { Jl } from "../figma_app/566371";
 import { Q } from "../905/150006";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { nF } from "../905/350402";
 import { sf } from "../905/929976";
@@ -53,19 +53,19 @@ let $$E2 = nF((e, t) => {
         }));
         e.dispatch(_$$s.error(i.message));
       } catch (t) {
-        c ? e.dispatch(_$$s.error(_$$t("collaboration.branching.error_restoring_branches", {
+        c ? e.dispatch(_$$s.error(getI18nString("collaboration.branching.error_restoring_branches", {
           branchCount: 1
-        }))) : e.dispatch(_$$s.error(_$$t("file_browser.file_browser_actions.file_restore_error")));
+        }))) : e.dispatch(_$$s.error(getI18nString("file_browser.file_browser_actions.file_restore_error")));
       }
     } else {
       let t;
       let s;
-      t = c ? _$$t("file_browser.file_browser_actions.branch_restored") : _$$t("file_browser.file_browser_actions.files_restored_success", {
+      t = c ? getI18nString("file_browser.file_browser_actions.branch_restored") : getI18nString("file_browser.file_browser_actions.files_restored_success", {
         numFiles: r.length
       });
       let o = null;
       let p = !0;
-      for (let e of r) if (null === o) o = i.fileByKey[e].folder_id; else if (o !== i.fileByKey[e].folder_id) {
+      for (let e of r) if (null === o) o = i.fileByKey[e].folder_id;else if (o !== i.fileByKey[e].folder_id) {
         p = !1;
         break;
       }
@@ -108,7 +108,7 @@ let $$E2 = nF((e, t) => {
       t = JSON.parse(t);
       e.dispatch(_$$s.error(t.message));
     } catch (t) {
-      e.dispatch(_$$s.error(_$$t("file_browser.file_browser_actions.file_restore_error")));
+      e.dispatch(_$$s.error(getI18nString("file_browser.file_browser_actions.file_restore_error")));
     }
     m.revert();
   });
@@ -202,7 +202,7 @@ let $$w0 = nF(async (e, t) => {
   let d = U2(t);
   return await Q({
     requestPromise: o,
-    fallbackError: _$$t("file_browser.file_browser_actions.file_processing_error"),
+    fallbackError: getI18nString("file_browser.file_browser_actions.file_processing_error"),
     store: e,
     next: e.dispatch,
     action: d
@@ -210,4 +210,4 @@ let $$w0 = nF(async (e, t) => {
 });
 export const Cy = $$w0;
 export const Rh = $$x1;
-export const xy = $$E2; 
+export const xy = $$E2;

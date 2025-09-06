@@ -7,8 +7,8 @@ import { m1T, glU, Egt, VDs } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { Xr } from "../figma_app/27355";
 import u from "classnames";
-import { Ay } from "../figma_app/778880";
-import { tx, t as _$$t } from "../905/303541";
+import { BrowserInfo } from "../figma_app/778880";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { j7 } from "../905/929976";
 import { K9 } from "../figma_app/8833";
 import { E3 } from "../figma_app/976749";
@@ -309,7 +309,7 @@ export function $$j2({
       ref: ef,
       "aria-label": ea,
       className: p()(rH, M && eg),
-      contentEditable: Ay.windows && eu ? "true" : void 0,
+      contentEditable: BrowserInfo.windows && eu ? "true" : void 0,
       "data-fullscreen-intercept-dangerously-include-tab": !0,
       "data-guid": W ? k : void 0,
       id: W ? void 0 : k,
@@ -335,7 +335,7 @@ export function $$j2({
       children: [jsxs(P, {
         header: ec,
         headerLevel: en,
-        children: [el.length > 0 ? el : null, eo.length > 0 ? eo : null, null != o && tx("fullscreen.accessibility.author", {
+        children: [el.length > 0 ? el : null, eo.length > 0 ? eo : null, null != o && renderI18nText("fullscreen.accessibility.author", {
           authorName: o
         }), ed.length > 0 ? ed : null, e]
       }), et ? jsx(U, {
@@ -389,12 +389,12 @@ function U({
     "aria-labelledby": "canvas-comments-heading",
     children: [jsx("h2", {
       id: "canvas-comments-heading",
-      children: tx("fullscreen.accessibility_dom.unattached_comments")
+      children: renderI18nText("fullscreen.accessibility_dom.unattached_comments")
     }), p]
   });
   if (!a) return p;
   {
-    let e = _$$t("fullscreen.accessibility_dom.grouped_comments", {
+    let e = getI18nString("fullscreen.accessibility_dom.grouped_comments", {
       groupSize: a
     });
     return jsx("div", {

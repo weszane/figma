@@ -10,7 +10,7 @@ import { N as _$$N } from "../905/438674";
 import { E as _$$E } from "../905/632989";
 import m from "classnames";
 import g from "../vendor/523035";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { a as _$$a } from "../905/361543";
 import { C as _$$C } from "../905/641057";
 import { r as _$$r } from "../905/786998";
@@ -19,7 +19,7 @@ import { z as _$$z } from "../905/284530";
 import { b as _$$b } from "../figma_app/246400";
 import { s as _$$s } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { sx as _$$sx } from "../905/941192";
 import { Y as _$$Y } from "../905/830372";
 import { Pf } from "../905/590952";
@@ -38,7 +38,7 @@ import { N_ } from "../905/332483";
 import { AG } from "../figma_app/217457";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { XP } from "../figma_app/465071";
-import { Iv } from "../905/548208";
+import { DashboardSections } from "../905/548208";
 import { Ib } from "../905/129884";
 import { Ro } from "../figma_app/805373";
 import { N as _$$N2 } from "../905/809096";
@@ -108,16 +108,16 @@ function J(e) {
       localizeCurrency
     } = Zz(e);
     if (!prices || !localizeCurrency) return [null, {
-      errorMessage: _$$t("billing_modals.org_renewal.price_error")
+      errorMessage: getI18nString("billing_modals.org_renewal.price_error")
     }];
     let a = N_.dict(e => isNullish(prices[e]) ? void 0 : (t[e] || 0) * prices[e].amount);
     return N_.toArray().some(e => isNullish(a[e])) ? [null, {
-      errorMessage: _$$t("billing_modals.org_renewal.price_error")
+      errorMessage: getI18nString("billing_modals.org_renewal.price_error")
     }] : [{
       id: "projectedCost",
       name: jsx(_$$E2, {
         color: "secondary",
-        children: _$$t("billing_modals.team_renewal.table.header.renewal_cost")
+        children: getI18nString("billing_modals.team_renewal.table.header.renewal_cost")
       }),
       textAlign: "right",
       gridColumnWidth: "92px",
@@ -137,14 +137,14 @@ function J(e) {
     }, {}];
   }(p.key, D);
   useEffect(() => {
-    X && sx("seat_purchasing.non_blocking_fetch_error", {
+    X && trackEventAnalytics("seat_purchasing.non_blocking_fetch_error", {
       price_fetch_error: !0,
       view: "team_renewal_modal"
     }, {
       forwardToDatadog: !0
     });
   }, [X]);
-  let Q = _$$t("billing_modals.renewal.header", {
+  let Q = getI18nString("billing_modals.renewal.header", {
     date: e.renewalDate,
     planName: p.name
   });
@@ -200,12 +200,12 @@ function J(e) {
             children: Q
           }), jsx("div", {
             className: _$$s.textBodyMedium.colorTextSecondary.$,
-            children: tx("billing_modals.team_renewal.description", {
+            children: renderI18nText("billing_modals.team_renewal.description", {
               monthlySeats: jsx(_$$N, {
                 href: "https://help.figma.com/hc/articles/360041061034-Manage-billing-on-the-Professional-plan",
                 trusted: !0,
                 newTab: !0,
-                children: tx("billing_modals.team_renewal.description.monthly_seats")
+                children: renderI18nText("billing_modals.team_renewal.description.monthly_seats")
               })
             })
           })]
@@ -220,7 +220,7 @@ function J(e) {
             name: jsx(_$$E2, {
               color: "secondary",
               truncate: !0,
-              children: _$$t("billing_modals.renewal.table.header.seat_type")
+              children: getI18nString("billing_modals.renewal.table.header.seat_type")
             }),
             textAlign: "left",
             gridColumnWidth: "auto",
@@ -230,12 +230,12 @@ function J(e) {
               seatType: e,
               showMonthlyAnnualPriceComparison: !0
             }),
-            getAggregate: () => _$$t("billing_modals.team_renewal.table.total_renewed_seats")
+            getAggregate: () => getI18nString("billing_modals.team_renewal.table.total_renewed_seats")
           }, {
             id: "monthly",
             name: jsx("span", {
               className: _$$s.textBodyMedium.colorTextSecondary.$,
-              children: _$$t("billing_modals.team_renewal.table.header.monthly")
+              children: getI18nString("billing_modals.team_renewal.table.header.monthly")
             }),
             textAlign: "right",
             cellComponent: e => jsx(_$$E2, {
@@ -248,9 +248,9 @@ function J(e) {
             name: jsx(_$$b, {
               text: jsx("span", {
                 className: _$$s.textBodyMedium.colorTextSecondary.$,
-                children: _$$t("billing_modals.team_renewal.table.header.annual")
+                children: getI18nString("billing_modals.team_renewal.table.header.annual")
               }),
-              popoverText: _$$t("billing_modals.renewal.table.tooltip.annual_seats", {
+              popoverText: getI18nString("billing_modals.renewal.table.tooltip.annual_seats", {
                 renewalDate: e.renewalDate
               })
             }),
@@ -259,7 +259,7 @@ function J(e) {
               className: _$$s.flex.flexRow.gap4.$,
               children: [e === ud.COLLABORATOR && !m && !C && jsxs("div", {
                 "data-tooltip-type": Ib.TEXT,
-                "data-tooltip": _$$t("billing_modals.team_renewal.table.collab_tooltip"),
+                "data-tooltip": getI18nString("billing_modals.team_renewal.table.collab_tooltip"),
                 "data-tooltip-timeout-delay": 500,
                 "data-testid": "collab_annual_seat_tooltip",
                 children: [jsx(In, {
@@ -299,14 +299,14 @@ function J(e) {
             trackingProperties: {
               trackingDescriptor: _$$c.CANCEL
             },
-            children: _$$t("general.cancel")
+            children: getI18nString("general.cancel")
           }), jsx($z, {
             type: "submit",
             disabled: W,
             trackingProperties: {
               trackingDescriptor: _$$c.CONFIRM_RENEWAL
             },
-            children: J > 0 ? tx("billing_modals.renewal.cta.confirm_seat_renewal") : tx("billing_modals.renewal.cta.confirm_no_seat_renewal")
+            children: J > 0 ? renderI18nText("billing_modals.renewal.cta.confirm_seat_renewal") : renderI18nText("billing_modals.renewal.cta.confirm_no_seat_renewal")
           })]
         })
       })]
@@ -321,21 +321,21 @@ function ee(e) {
     orientation: "vertical",
     iconSrc: _$$A,
     dataTestId: "team-renewal-disclaimer",
-    children: tx(e.noAnnualSeat ? "billing_modals.team_renewal.disclaimer_banner.no_seat" : "billing_modals.team_renewal.disclaimer_banner", {
+    children: renderI18nText(e.noAnnualSeat ? "billing_modals.team_renewal.disclaimer_banner.no_seat" : "billing_modals.team_renewal.disclaimer_banner", {
       peoplePageLink: jsx(_$$E, {
         className: h()(h7, _$$s.inline.$),
         style: _$$sx.add({
           backgroundColor: "unset"
         }).$,
         onClick: function () {
-          ("teamAdminConsole" !== i.view || i.teamAdminConsoleViewTab !== Iv.MEMBERS) && t(sf({
+          ("teamAdminConsole" !== i.view || i.teamAdminConsoleViewTab !== DashboardSections.MEMBERS) && t(sf({
             view: "teamAdminConsole",
-            teamAdminConsoleViewTab: Iv.MEMBERS,
+            teamAdminConsoleViewTab: DashboardSections.MEMBERS,
             teamId: e.teamId
           }));
           e.onClose();
         },
-        children: tx("billing_modals.team_renewal.disclaimer_banner.people_page")
+        children: renderI18nText("billing_modals.team_renewal.disclaimer_banner.people_page")
       })
     })
   });

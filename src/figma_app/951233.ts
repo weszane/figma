@@ -1,19 +1,19 @@
 import { sortByPropertyWithOptions } from "../figma_app/656233";
 import { zE } from "../figma_app/919079";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { FUserRoleType } from "../figma_app/191312";
 import { Wd } from "../figma_app/35887";
 import { Ib } from "../905/129884";
 import { x } from "../905/439650";
-import { bt } from "../905/270322";
+import { createReduxSubscriptionAtomWithState } from "../905/270322";
 export function $$u5(e) {
   return !!e.user && void 0 !== e.orgUsersByOrgId && $$m8(e.orgUsersByOrgId, e.user.id).length > 0;
 }
 export function $$p9(e) {
   return e.currentUserOrgId && e.user && e.orgUsersByOrgId[e.currentUserOrgId] ? e.orgUsersByOrgId[e.currentUserOrgId][e.user.id] : null;
 }
-bt($$p9);
-export let $$_2 = bt(function (e) {
+createReduxSubscriptionAtomWithState($$p9);
+export let $$_2 = createReduxSubscriptionAtomWithState(function (e) {
   let t = $$p9(e);
   return t?.workspace_users?.find(e => e.is_main_workspace)?.workspace_id;
 });
@@ -32,23 +32,23 @@ export function $$f10(e) {
 export function $$E7(e, t) {
   return e.permission === FUserRoleType.ADMIN ? {
     color: zE.DEFAULT,
-    text: _$$t("members_table.badge_label.admin")
+    text: getI18nString("members_table.badge_label.admin")
   } : e.is_email_validated ? e.permission === FUserRoleType.GUEST && e.is_mfa_restricted ? {
     color: zE.DEFAULT,
-    text: _$$t("members_table.badge_label.blocked"),
+    text: getI18nString("members_table.badge_label.blocked"),
     dataTooltipType: Ib.TEXT,
-    dataTooltip: _$$t("members_table.badge_label.blocked.description"),
+    dataTooltip: getI18nString("members_table.badge_label.blocked.description"),
     dataTooltipTimeout: 50,
     dataTooltipShowAbove: !0
   } : e.permission === FUserRoleType.GUEST ? {
     color: zE.DEFAULT,
-    text: _$$t("members_table.badge_label.guest")
+    text: getI18nString("members_table.badge_label.guest")
   } : e.permission === FUserRoleType.MEMBER && t?.showMember ? {
     color: zE.DEFAULT,
-    text: _$$t("general.member")
+    text: getI18nString("general.member")
   } : void 0 : {
     color: zE.DEFAULT,
-    text: _$$t("members_table.badge_label.unverified")
+    text: getI18nString("members_table.badge_label.unverified")
   };
 }
 export let $$y0 = e => e.workspace_users?.find(e => e.is_main_workspace);

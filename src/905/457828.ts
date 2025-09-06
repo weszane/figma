@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { getFeatureFlags } from "../905/601108";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { Rs } from "../figma_app/288654";
 import { useState, useRef, useCallback } from "react";
 import { I7 } from "../figma_app/594947";
@@ -135,7 +135,7 @@ export function $$I0({
   interactiveThumbnailsEnabled: t,
   ...i
 }) {
-  let o = md(hi(e));
+  let o = useAtomWithSubscription(hi(e));
   let l = Tf.getThumbnailUrl(e);
   let c = Tf.getTouchedAt(e);
   let u = v(e);

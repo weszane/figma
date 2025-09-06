@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import r from "classnames";
-import { tx, t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { Pc } from "../905/372672";
 import { A as _$$A } from "../905/794518";
 import { wk, r9, aK } from "../905/599844";
@@ -12,9 +12,9 @@ export function $$c0(e) {
   } = e;
   let r = Pc();
   let c = resource?.creator || r;
-  let u = r.id === c.id ? tx("community.publishing.payee_name_annotation_for_current_owner") : tx("community.publishing.payee_name_annotation");
+  let u = r.id === c.id ? renderI18nText("community.publishing.payee_name_annotation_for_current_owner") : renderI18nText("community.publishing.payee_name_annotation");
   return jsx(_$$A, {
-    label: t("community.publishing.payee_label"),
+    label: getI18nString("community.publishing.payee_label"),
     disabled,
     children: jsxs("div", {
       className: a()(wk, {

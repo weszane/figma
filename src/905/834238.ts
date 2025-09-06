@@ -2,12 +2,12 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { X } from "../905/128376";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { HB, VA, ZS } from "../3973/538504";
 import { ks } from "../figma_app/637027";
 import { R as _$$R } from "../905/441305";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { yJ } from "../figma_app/24841";
 import { Cu } from "../figma_app/314264";
 import { Um } from "../905/848862";
@@ -46,7 +46,7 @@ function I(e) {
       },
       userInitiated: !0
     }));
-    az.trackDefinedEvent("activation.job_title_changed", {
+    analyticsEventManager.trackDefinedEvent("activation.job_title_changed", {
       newJobTitle: e,
       prevJobTitle: b,
       source: n,
@@ -63,11 +63,11 @@ function I(e) {
   let N = X();
   return jsxs(_$$R, {
     ...e,
-    title: _$$t("settings.account_settings.change_job_title_modal_title"),
+    title: getI18nString("settings.account_settings.change_job_title_modal_title"),
     onConfirm: () => R(),
-    confirmText: _$$t("general.save"),
+    confirmText: getI18nString("general.save"),
     children: [jsx(l6, {
-      ariaLabel: _$$t("settings.account_settings.change_job_title_link"),
+      ariaLabel: getI18nString("settings.account_settings.change_job_title_link"),
       dispatch: t,
       dropdownShown: _,
       fill: !0,
@@ -90,7 +90,7 @@ function I(e) {
       id: "other-job-title-input",
       className: _$$s.wFull.mt10.$,
       value: C,
-      placeholder: _$$t("job-title.other.input-placeholder"),
+      placeholder: getI18nString("job-title.other.input-placeholder"),
       onChange: e => {
         T(e.currentTarget.value);
       }

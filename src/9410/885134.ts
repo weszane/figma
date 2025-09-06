@@ -6,7 +6,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { tK } from "../figma_app/191804";
 import { m as _$$m } from "../figma_app/964367";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { SV } from "../9410/483857";
 import { _E } from "../905/788069";
 import { D as _$$D } from "../905/629114";
@@ -16,7 +16,7 @@ import { P as _$$P, t as _$$t } from "../9410/636108";
 import { Dk, lH } from "../figma_app/18582";
 import { Jv, oR, gU } from "../figma_app/234690";
 import { uW } from "../905/426868";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { _F } from "../figma_app/193952";
 import { o$, nV, UO } from "../figma_app/857146";
 import { V5 } from "../figma_app/612859";
@@ -92,7 +92,7 @@ async function L(e, t, i) {
   } catch (i) {
     O(e);
     let t = void 0 === i ? "undefined" : i instanceof Error ? i.message : JSON.stringify(i);
-    az.trackDefinedEvent("ai_generation.first_draft_font_error", {
+    analyticsEventManager.trackDefinedEvent("ai_generation.first_draft_font_error", {
       error: t,
       family: d.fontName.family,
       style: d.fontName.style,
@@ -223,7 +223,7 @@ async function P(e) {
       let r = Vx(i);
       await M(t, {}, r);
     } catch (t) {
-      x1("First Draft theming", "Failed to parse theme", {
+      logError("First Draft theming", "Failed to parse theme", {
         themeStr: e,
         e: t
       });
@@ -312,7 +312,7 @@ export async function $$K0({
       if (p.parentNodeId) {
         let e = _.get(p.parentNodeId);
         if (!e) {
-          x1("first-draft", "Could not find parent node with parentNodeId", {
+          logError("first-draft", "Could not find parent node with parentNodeId", {
             parentNodeId: p.parentNodeId
           });
           return Error("Could not find parent node with parentNodeId");
@@ -332,7 +332,7 @@ export async function $$K0({
   }
   let y = _.get(p.prevNodeId);
   if (!y) {
-    x1("first-draft", "Could not find node with prevNodeId", {
+    logError("first-draft", "Could not find node with prevNodeId", {
       prevNodeId: p.prevNodeId
     });
     return Error("Could not find node with prevNodeId");

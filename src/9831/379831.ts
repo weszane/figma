@@ -1,8 +1,8 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useContext, useRef, memo, useCallback, useEffect, useMemo } from "react";
 import i, { i as _$$i } from "../905/97346";
-import { eU as _$$eU, FZ, md, fp, Xr } from "../figma_app/27355";
-import { az } from "../905/449184";
+import { atom, setupCustomAtom, useAtomWithSubscription, useAtomValueAndSetter, Xr } from "../figma_app/27355";
+import { analyticsEventManager } from "../905/449184";
 import { l as _$$l } from "../905/745972";
 import { Uz } from "../905/63728";
 import { r as _$$r } from "../905/520829";
@@ -13,7 +13,7 @@ import { Ok, ux, uW, NY } from "../figma_app/851625";
 import { getRequest } from "../905/910117";
 import { OC } from "../figma_app/386952";
 import { E as _$$E } from "../905/694285";
-import { _ as _$$_ } from "../905/810750";
+import { MultiValueMap } from "../905/810750";
 import { Sd, H$, AJ, jI, JN, bA, gg, q as _$$q } from "../905/235262";
 import { Sv, Y6, hX } from "../905/104795";
 import { zG, rf } from "../9831/302304";
@@ -33,7 +33,7 @@ import { IV } from "../905/154591";
 import { nK } from "../905/836986";
 import { ww } from "../figma_app/194956";
 import { ms, c$, wv } from "../figma_app/236327";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { E as _$$E2 } from "../905/142894";
 import { R as _$$R } from "../905/741991";
 import { Z as _$$Z } from "../905/27174";
@@ -54,14 +54,14 @@ import { A as _$$A7 } from "../svg/821527";
 import { E as _$$E3 } from "../905/984674";
 import { zr, Pd, _H, io, _t, S3, xK } from "../905/440046";
 var b = (e => (e[e.Fetched = 0] = "Fetched", e[e.Fetching = 1] = "Fetching", e[e.NeverFetched = 2] = "NeverFetched", e))(b || {});
-let y = _$$eU(e => {
+let y = atom(e => {
   let t = e(OC);
   return "fullscreen" === t.view ? `/api/file/scenegraph_validations/${t.fileKey}` : _$$E(t) && t.urlParams?.type === "server_file" ? `/api/admin/scenegraph_validations/${t.urlParams.key}` : null;
 });
-let v = _$$eU(e => null != e(y));
+let v = atom(e => null != e(y));
 let C = (() => {
-  let e = _$$eU(Ok());
-  return _$$eU(t => t(e), async (t, r) => {
+  let e = atom(Ok());
+  return atom(t => t(e), async (t, r) => {
     let n;
     if (t(e).status === _$$r.LOADING) return;
     let s = t(y);
@@ -79,7 +79,7 @@ let C = (() => {
 })();
 async function w(e) {
   let t = await getRequest(e);
-  let r = new _$$_();
+  let r = new MultiValueMap();
   for (let e of t.data.meta.data.results.violations) if ("always-fail-for-testing" !== e.name) for (let t of e.instances) r.add(t.guid, t.message);
   return r;
 }
@@ -87,14 +87,14 @@ var P = F;
 function U(e, t, r) {
   return [...(e.getObject(r)?.mapDescendants(e => e.id) ?? []), ...(t?.getObject(r)?.mapDescendants(e => e.id) ?? [])];
 }
-let X = FZ(_$$eU({}), (e, t, r) => {
+let X = setupCustomAtom(atom({}), (e, t, r) => {
   let n = r(Cc);
   let s = r(lX);
   switch (t.type) {
     case "toggleExpanded":
       return X9(e, t.objectId, t.toggleSubtree ? U(n, s, t.objectId) : []);
     case "expandAncestors":
-      return nE(e, function(e, t, r) {
+      return nE(e, function (e, t, r) {
         return [...(e.getObject(r)?.mapAncestors(e => e.id) ?? []), ...(t?.getObject(r)?.mapAncestors(e => e.id) ?? [])];
       }(n, s, t.objectId), !0);
     case "expandDescendants":
@@ -103,12 +103,12 @@ let X = FZ(_$$eU({}), (e, t, r) => {
       return IO(e, [t.objectId, ...U(n, s, t.objectId)]);
   }
 });
-let R = _$$eU({
+let R = atom({
   status: "initial"
 });
-let Y = _$$eU(0);
-let M = _$$eU(!1);
-let H = _$$eU(e => {
+let Y = atom(0);
+let M = atom(!1);
+let H = atom(e => {
   if (e(M)) {
     let t = e(Y);
     return `Indexing search results (this may take a moment)... [${t}/???]`;
@@ -116,7 +116,7 @@ let H = _$$eU(e => {
   return null;
 });
 let V = Sv("searchMode", Y6.Search);
-let W = _$$eU(e => {
+let W = atom(e => {
   let t = e(R);
   let r = e(Cc);
   let n = e(Sd);
@@ -125,7 +125,7 @@ let W = _$$eU(e => {
     matches: []
   })).reverse() : "results" in t && t.results.length > 0 ? t.results : null;
 });
-let G = _$$eU(e => {
+let G = atom(e => {
   let t = e(R);
   if ("searching" === t.status && 0 === t.results.length) {
     let t = ["Searching..."];
@@ -142,24 +142,24 @@ let G = _$$eU(e => {
   }
   return "error" === t.status ? ["Error searching:", String(t.error)] : null;
 });
-let $$J = _$$eU(e => {
+let $$J = atom(e => {
   if (e(V) !== Y6.Filter) return null;
   let t = e(R);
   return "results" in t ? t.results.map(e => e.object) : null;
 });
-let K = _$$eU(e => {
+let K = atom(e => {
   if (e(V) !== Y6.Filter) return null;
   let t = e(G);
   return t ? t.join(" ") : null;
 });
 let q = Sv("sortOrder", hX.Position);
-let Z = _$$eU(e => {
+let Z = atom(e => {
   let t = [hX.Position, hX.Name, hX.NodeId];
   e(Cc).rootObjects[0]?.displayProperties.memoryFraction != null && t.push(hX.Memory);
   t.sort();
   return t;
 });
-let Q = _$$eU(e => {
+let Q = atom(e => {
   switch (e(q)) {
     case hX.Position:
       return et;
@@ -182,7 +182,7 @@ function et(e, t) {
     if (null == e && null == t) return 0;
     if (null == t) return 1;
     if (null == e) return -1;
-    if (e < t) return -1; else if (e > t) return 1;
+    if (e < t) return -1;else if (e > t) return 1;
   }
   return ee(e, t);
 }
@@ -232,10 +232,10 @@ function ex({
   } = useContext(H$);
   let x = useRef(null);
   ww(x, r);
-  let g = md(Cc).getObject(e);
+  let g = useAtomWithSubscription(Cc).getObject(e);
   let m = g instanceof _$$R ? g : null;
   let j = g instanceof _$$E2 ? g : null;
-  let [b, y] = fp(Oz);
+  let [b, y] = useAtomValueAndSetter(Oz);
   let v = Xr(X);
   if (null == g) return null;
   let C = e => () => {
@@ -303,15 +303,15 @@ function ex({
         children: "Copy NodeChange JSON"
       }), j && "DOCUMENT" !== j.type && "CANVAS" !== j.type && jsx(ep, {
         onClick: I("debug-print-as-test-code"),
-        children: tx("fullscreen_actions.debug-print-as-test-code")
+        children: renderI18nText("fullscreen_actions.debug-print-as-test-code")
       }), j && "VECTOR" === j.type && jsx(ep, {
         onClick: I("debug-print-vector-network-as-test-code"),
-        children: tx("fullscreen_actions.debug-print-vector-network-as-test-code")
+        children: renderI18nText("fullscreen_actions.debug-print-vector-network-as-test-code")
       })]
     })
   });
 }
-let em = memo(function({
+let em = memo(function ({
   diffType: e,
   id: t,
   primaryId: r,
@@ -407,8 +407,8 @@ let eb = [];
 function ey({
   appSelection: e
 }) {
-  let t = md(ev);
-  let [r, i] = fp(AJ);
+  let t = useAtomWithSubscription(ev);
+  let [r, i] = useAtomValueAndSetter(AJ);
   let a = k9(() => e?.guids ?? eb, [e?.guids]);
   let [o, c] = useState(null);
   let d = useRef(null);
@@ -430,7 +430,7 @@ function ey({
       toggleSubtree: t
     });
   }, [u]);
-  let p = md(K);
+  let p = useAtomWithSubscription(K);
   return 0 === t.length ? jsx("div", {
     children: p ?? "Empty Scene"
   }) : jsxs(Fragment, {
@@ -462,8 +462,8 @@ function ey({
     })]
   });
 }
-let ev = _$$eU(e => e(eC) ?? e(ew));
-let eC = _$$eU(e => {
+let ev = atom(e => e(eC) ?? e(ew));
+let eC = atom(e => {
   let t = e($$J);
   if (!t) return null;
   let r = e(Cc);
@@ -477,7 +477,7 @@ let eC = _$$eU(e => {
     isLeaf: !0
   }));
 });
-let ew = _$$eU(e => {
+let ew = atom(e => {
   let t = e(Cc);
   let r = t.rootObjects;
   let n = e(sg);
@@ -594,10 +594,10 @@ function eF({
   searchRef: e
 }) {
   let t = Xr(AJ);
-  let r = md(W);
-  let i = md(G);
+  let r = useAtomWithSubscription(W);
+  let i = useAtomWithSubscription(G);
   let [a, o] = useState(!1);
-  let c = md(V) !== Y6.Filter && a;
+  let c = useAtomWithSubscription(V) !== Y6.Filter && a;
   let d = useRef(null);
   ww(d, () => o(!1));
   let u = useCallback(e => {
@@ -623,9 +623,9 @@ function eP({
   searchRef: e,
   setShowSearchResults: t
 }) {
-  let r = md(V);
-  let i = function() {
-    let e = md(Cc);
+  let r = useAtomWithSubscription(V);
+  let i = function () {
+    let e = useAtomWithSubscription(Cc);
     let t = Xr(R);
     let r = Xr(Y);
     let n = Xr(M);
@@ -639,7 +639,7 @@ function eP({
       scheduler.postTask(() => n(!0), {
         signal: a.signal,
         delay: 300
-      }).catch(() => {}) ;
+      }).catch(() => {});
       let o = e.getObject(s);
       o && t({
         status: "searching",
@@ -809,13 +809,13 @@ function eB(e) {
 function eY({
   searchRef: e
 }) {
-  let [t, r] = fp(jI);
-  let [i, o] = fp(JN);
+  let [t, r] = useAtomValueAndSetter(jI);
+  let [i, o] = useAtomValueAndSetter(JN);
   let c = !!useContext(H$).selectInApp;
-  let [d, u] = fp(V);
-  let [h, p] = fp(bA);
-  let [f, x] = fp(q);
-  let g = md(Z);
+  let [d, u] = useAtomValueAndSetter(V);
+  let [h, p] = useAtomValueAndSetter(bA);
+  let [f, x] = useAtomValueAndSetter(q);
+  let g = useAtomWithSubscription(Z);
   return jsxs(ez, {
     children: [jsx(eF, {
       searchRef: e
@@ -838,8 +838,8 @@ function eY({
       title: "Sets the left panel sort order",
       onChange: e => {
         let t = e.target.value;
-        az.trackDefinedEvent("figmascope.sort_order_change", {
-          order: function(e) {
+        analyticsEventManager.trackDefinedEvent("figmascope.sort_order_change", {
+          order: function (e) {
             switch (e) {
               case hX.Position:
                 return "position";
@@ -873,7 +873,7 @@ function eY({
       label: "Select Previous",
       onClick: () => {
         r();
-        az.trackDefinedEvent("figmascope.select_prev_next", {
+        analyticsEventManager.trackDefinedEvent("figmascope.select_prev_next", {
           direction: "prev",
           source: "button"
         });
@@ -884,7 +884,7 @@ function eY({
       label: "Select Next",
       onClick: () => {
         o();
-        az.trackDefinedEvent("figmascope.select_prev_next", {
+        analyticsEventManager.trackDefinedEvent("figmascope.select_prev_next", {
           direction: "next",
           source: "button"
         });
@@ -899,8 +899,8 @@ function eZ({
   diffObject: t,
   onClose: r
 }) {
-  let s = md(v);
-  let [i, a] = fp(Oz);
+  let s = useAtomWithSubscription(v);
+  let [i, a] = useAtomValueAndSetter(Oz);
   return jsxs(ez, {
     children: [e ? i && t ? jsx(e1, {
       selectedObject: e,
@@ -991,7 +991,7 @@ function e1({
   });
 }
 function e3() {
-  let [e, t] = fp(C);
+  let [e, t] = useAtomValueAndSetter(C);
   let r = e.status === _$$r.LOADING;
   useEffect(() => {
     t();
@@ -1021,7 +1021,7 @@ function e5() {
   let {
     name,
     metadata
-  } = md(Cc);
+  } = useAtomWithSubscription(Cc);
   return jsxs(_$$Y, {
     direction: "horizontal",
     width: "fill-parent",
@@ -1046,14 +1046,14 @@ function e5() {
     }, e))]
   });
 }
-export let $$e60 = memo(function({
+export let $$e60 = memo(function ({
   embedded: e = !1,
   emptyStateContent: t,
   onClose: r,
   appSelection: s,
   setAppSelection: i
 }) {
-  let a = md(lu);
+  let a = useAtomWithSubscription(lu);
   switch (a.status) {
     case _$$r.INIT:
       return t ?? jsx(zG, {});
@@ -1087,8 +1087,8 @@ function e9({
   let {
     windowInnerWidth
   } = _$$l();
-  let [m, j] = fp(e7);
-  let [b, y] = fp(te);
+  let [m, j] = useAtomValueAndSetter(e7);
+  let [b, y] = useAtomValueAndSetter(te);
   let [v, w] = _$$i({
     onDrag(e) {
       let t = e.clientX / windowInnerWidth;
@@ -1107,27 +1107,27 @@ function e9({
   let E = Xr(JN);
   let D = useCallback(e => {
     let t = f.current;
-    document.activeElement !== t && (e.keyCode === Uz.FORWARD_SLASH && t ? (t.focus(), e.preventDefault()) : e.keyCode === Uz.BRACKET_LEFT ? (az.trackDefinedEvent("figmascope.select_prev_next", {
+    document.activeElement !== t && (e.keyCode === Uz.FORWARD_SLASH && t ? (t.focus(), e.preventDefault()) : e.keyCode === Uz.BRACKET_LEFT ? (analyticsEventManager.trackDefinedEvent("figmascope.select_prev_next", {
       direction: "prev",
       source: "keyboard"
-    }), k()) : e.keyCode === Uz.BRACKET_RIGHT && (az.trackDefinedEvent("figmascope.select_prev_next", {
+    }), k()) : e.keyCode === Uz.BRACKET_RIGHT && (analyticsEventManager.trackDefinedEvent("figmascope.select_prev_next", {
       direction: "next",
       source: "keyboard"
     }), E()));
   }, [k, E]);
-  let T = md(Cc);
+  let T = useAtomWithSubscription(Cc);
   window.figmaScope = T;
   window.figmaScopeScene = T;
-  (function(e) {
-    let [t, r] = fp(C);
+  (function (e) {
+    let [t, r] = useAtomValueAndSetter(C);
     t.status === _$$r.SUCCESS && e?.setSceneGraphValidationInfo?.(t.value);
     useEffect(() => {
       r();
     }, [r]);
   })(T);
-  let A = md(AJ);
-  let F = md(gg);
-  let P = md(tH);
+  let A = useAtomWithSubscription(AJ);
+  let F = useAtomWithSubscription(gg);
+  let P = useAtomWithSubscription(tH);
   return jsx(_$$q, {
     appSelection: t,
     setAppSelection: r,
@@ -1212,4 +1212,4 @@ function e9({
 }
 let e7 = Sv("leftPanelWidth", "35%");
 let te = Sv("rightPanelWidth", "50%");
-export const J = $$e60; 
+export const J = $$e60;

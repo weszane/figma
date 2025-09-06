@@ -1,5 +1,5 @@
 import { ServiceCategories as _$$e } from "../905/165054";
-import { N7 } from "../905/954389";
+import { logMessage } from "../905/954389";
 import { parseStrict, parseLoose } from "../905/253473";
 import { id, Bj } from "../905/648693";
 function o(e, t, i) {
@@ -38,7 +38,7 @@ let l = class {
     return this.parseInternal();
   }
   parseInternal() {
-    return this.code ? this.parseFunction(this.code).body.map((e) => this.parseExpression(e)).filter(id) : null;
+    return this.code ? this.parseFunction(this.code).body.map(e => this.parseExpression(e)).filter(id) : null;
   }
   parseExpression(e, t) {
     switch (e.type) {
@@ -67,7 +67,7 @@ let l = class {
       case "JSXText":
         return e.value.replace(/\s+/g, " ").trim();
       case "JSXArrayExpression":
-        return e.elements.map((e) => this.parseExpression(e, t));
+        return e.elements.map(e => this.parseExpression(e, t));
       case "JSXObject":
         let i = {};
         for (let t of e.properties) if (t.key && t.value) {
@@ -85,7 +85,7 @@ let l = class {
         }
         return i;
       case "ArrayExpression":
-        return e.elements.map((e) => this.parseExpression(e, t));
+        return e.elements.map(e => this.parseExpression(e, t));
       case "BinaryExpression":
         let a = this.parseExpression(e.left);
         let s = this.parseExpression(e.right);
@@ -123,14 +123,14 @@ let l = class {
       case "CallExpression":
         let o = this.parseExpression(e.callee);
         if (void 0 === o) {
-          N7(_$$e.AI_GENERATION, Error("The CallExpression could not be resolved, resulting in an undefined return value."), {
+          logMessage(_$$e.AI_GENERATION, Error("The CallExpression could not be resolved, resulting in an undefined return value."), {
             extra: {
               expression: e
             }
           });
           return;
         }
-        return o(...e.$$arguments.map((t) => this.parseExpression(t, e.callee)));
+        return o(...e.$$arguments.map(t => this.parseExpression(t, e.callee)));
       case "ConditionalExpression":
         return this.parseExpression(e.test) ? this.parseExpression(e.consequent) : this.parseExpression(e.alternate);
       case "ExpressionStatement":
@@ -149,14 +149,14 @@ let l = class {
         return this.parseMemberExpression(e, t);
       case "ObjectExpression":
         let d = {};
-        e.properties.forEach((e) => {
+        e.properties.forEach(e => {
           d[e.key.name || e.key.value] = this.parseExpression(e.value);
         });
         return d;
       case "TemplateElement":
         return e.value.cooked;
       case "TemplateLiteral":
-        return [...e.expressions, ...e.quasis].sort((e, t) => e.start < t.start ? -1 : 1).map((e) => this.parseExpression(e)).join("");
+        return [...e.expressions, ...e.quasis].sort((e, t) => e.start < t.start ? -1 : 1).map(e => this.parseExpression(e)).join("");
       case "UnaryExpression":
         switch (e.operator) {
           case "+":
@@ -168,7 +168,7 @@ let l = class {
         }
         return;
       case "ArrowFunctionExpression":
-        (e.async || e.generator) && N7(_$$e.AI_GENERATION, Error("Async and generator arrow functions are not supported."));
+        (e.async || e.generator) && logMessage(_$$e.AI_GENERATION, Error("Async and generator arrow functions are not supported."));
         return (...t) => {
           let i = {};
           e.params.forEach((e, n) => {
@@ -198,7 +198,7 @@ let l = class {
       return t;
     } catch (o) {
       let t = object?.name || "unknown";
-      N7(_$$e.AI_GENERATION, Error("Unable to parse member expression."), {
+      logMessage(_$$e.AI_GENERATION, Error("Unable to parse member expression."), {
         extra: {
           target: s,
           name: t,
@@ -218,7 +218,7 @@ let l = class {
     } = e;
     let r = "JSXElement" === e.type ? e.openingElement : e.openingFragment;
     let a = ("JSXElement" === e.type ? this.parseName(r.name) : "").trim();
-    if (i = (i = children.map((e) => this.parseExpression(e, t))).filter((e) => !!e), "string" == typeof e) return e.trim();
+    if (i = (i = children.map(e => this.parseExpression(e, t))).filter(e => !!e), "string" == typeof e) return e.trim();
     let s = {};
     r.attributes && (s = r.attributes.reduce((e, i) => {
       if (!i.name) return e;
@@ -229,7 +229,7 @@ let l = class {
     }, {}));
     e.isPartial && (s.isPartial = NaN);
     let o = this.includeLocations;
-    let l = r.attributes?.filter((e) => "JSXSpreadAttribute" === e.type).map((e) => {
+    let l = r.attributes?.filter(e => "JSXSpreadAttribute" === e.type).map(e => {
       let t = {
         type: "JSXSpreadAttribute",
         argument: this.code.substring(e.argument.start, e.argument.end)
@@ -257,11 +257,11 @@ let l = class {
         start: this.getLocation(r.start),
         end: this.getLocation(r.end - 1)
       },
-      attributes: Object.fromEntries(r.attributes?.filter((e) => e.name)?.map((e) => [e.name.name, {
+      attributes: Object.fromEntries(r.attributes?.filter(e => e.name)?.map(e => [e.name.name, {
         start: this.getLocation(e.start),
         end: this.getLocation(e.end - 1)
       }]) || []),
-      spreads: r.attributes?.filter((e) => "JSXSpreadAttribute" === e.type).map((e) => ({
+      spreads: r.attributes?.filter(e => "JSXSpreadAttribute" === e.type).map(e => ({
         start: this.getLocation(e.start),
         end: this.getLocation(e.end - 1)
       })),
@@ -327,7 +327,7 @@ export const V = function e(t, i = u) {
     if (null === component) return "";
     let d = Object.entries(component.props).filter(([e, t]) => void 0 !== t).map(([t, i]) => function ([t, i], n) {
       return "string" != typeof i ? `${t}={${function t(i, n) {
-        if (Array.isArray(i)) return `[${i.map((e) => t(e, n)).join(",")}]`;
+        if (Array.isArray(i)) return `[${i.map(e => t(e, n)).join(",")}]`;
         if ("object" == typeof i && null !== i) return function (i, n) {
           if (id(i)) return e(i, n);
           if (Bj(i)) return i.expression;
@@ -344,7 +344,7 @@ export const V = function e(t, i = u) {
         return void 0 !== i ? JSON.stringify(i) : "";
       }(i, n)}}` : i.includes('"') ? `${t}={\`${i.replace(/`/g, "\\`")}\`}` : `${t}="${i}"`;
     }([t, i], options)).join(" ");
-    let c = component.children?.filter((e) => null !== e).map((e) => t({
+    let c = component.children?.filter(e => null !== e).map(e => t({
       component: e,
       indent: indent + indentAmount,
       indentAmount,
@@ -352,7 +352,7 @@ export const V = function e(t, i = u) {
       options
     })) ?? [];
     let u = component.type;
-    let p = "spreadAttributes" in component && component.spreadAttributes && component.spreadAttributes.length > 0 ? " " + component.spreadAttributes.map((e) => `{...${e.argument}}`).join(" ") : "";
+    let p = "spreadAttributes" in component && component.spreadAttributes && component.spreadAttributes.length > 0 ? " " + component.spreadAttributes.map(e => `{...${e.argument}}`).join(" ") : "";
     return c.length > 0 ? `${indent}<${u}${d.length > 0 ? " " + d : ""}${p}>${newLine}` + c.join("") + `${indent}</${u}>${newLine}` : `${indent}<${u}${d ? " " + d : ""}${p}/>${newLine}`;
   }({
     component: t,

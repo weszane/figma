@@ -1,5 +1,5 @@
 import { getFeatureFlags } from "../905/601108";
-import { pb } from "../figma_app/469876";
+import { IntegrationUtils } from "../figma_app/469876";
 import { Hm } from "../figma_app/658673";
 import { jsx } from "react/jsx-runtime";
 import { memo, useCallback } from "react";
@@ -15,7 +15,7 @@ import { aO, wv, XU, Ch, Gb, nl, Rz, hM, EB, PW, nb, oN } from "../figma_app/801
 import { fK } from "../figma_app/300024";
 import { uW, Qq, nK, TC, tp } from "../figma_app/731560";
 import { s as _$$s } from "../2b17fec9/641273";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { CB } from "../figma_app/442259";
 import { D1 } from "../9410/67768";
 import { Bu } from "../figma_app/604494";
@@ -107,7 +107,7 @@ let v = memo(function () {
 });
 let N = memo(function () {
   let e = V();
-  let t = md(Bu);
+  let t = useAtomWithSubscription(Bu);
   let {
     Inactive,
     GrayHover,
@@ -200,7 +200,7 @@ export function $$k1() {
     getFeatureFlags().figjam_quick_actions_v2 && e.push("quick-actions-v2");
     return e;
   }();
-  pb.isGoogleClassroomIntegration() && e.push("comments");
+  IntegrationUtils.isGoogleClassroomIntegration() && e.push("comments");
   return e;
 }
 function R(e) {

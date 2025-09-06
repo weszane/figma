@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { fu } from "../figma_app/831799";
 import { e0 } from "../905/696396";
 import { Ju, ZU } from "../905/102752";
@@ -10,15 +10,15 @@ function c(e) {
     name: e0.BRANCH_DELETE_CONFIRM_MODAL,
     children: jsxs(yX, {
       destructive: !0,
-      confirmationTitle: t("file_browser.delete_branch_forever.title"),
-      confirmText: t("file_browser.delete_branch_forever.confirm_text"),
+      confirmationTitle: getI18nString("file_browser.delete_branch_forever.title"),
+      confirmText: getI18nString("file_browser.delete_branch_forever.confirm_text"),
       onConfirm: e.onConfirm,
-      children: [tx("file_browser.delete_forever.warning", {
+      children: [renderI18nText("file_browser.delete_forever.warning", {
         fileName: jsx("span", {
           className: Vq,
           children: e.fileName
         })
-      }), jsx("br", {}), " ", jsx("br", {}), tx("file_browser.cant_undo")]
+      }), jsx("br", {}), " ", jsx("br", {}), renderI18nText("file_browser.cant_undo")]
     })
   });
 }

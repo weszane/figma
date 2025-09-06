@@ -6,13 +6,13 @@ import { bL } from "../905/38914";
 import { vo, Y9, nB } from "../figma_app/272243";
 import { k as _$$k } from "../905/443820";
 import { getSingletonSceneGraph } from "../905/700578";
-import { eU, fp } from "../figma_app/27355";
+import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { H9 } from "../figma_app/930338";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Lo, to } from "../905/156213";
 import { Ju, ZU } from "../905/102752";
 import { D } from "../6268/819008";
-let f = eU({});
+let f = atom({});
 async function y(e) {
   let t = await e.loadImagesAndExport([{
     imageType: "PNG",
@@ -23,7 +23,7 @@ async function y(e) {
   return `data:image/png;base64,${H9(t)}`;
 }
 let _ = () => {
-  let [e, t] = fp(f);
+  let [e, t] = useAtomValueAndSetter(f);
   return useCallback(async n => {
     let r = getSingletonSceneGraph();
     if (e[n]) return e[n];
@@ -44,7 +44,7 @@ let b = Ju(function (e) {
   let [n, d] = useState(!0);
   let [x, g] = useState(!1);
   let [y, b] = useState(null);
-  let [j] = fp(f);
+  let [j] = useAtomValueAndSetter(f);
   let v = _();
   let k = useDispatch();
   let C = useCallback(async () => {
@@ -104,7 +104,7 @@ let b = Ju(function (e) {
             style: {
               textAlign: "center"
             },
-            children: t("figmake.import_modal.error")
+            children: getI18nString("figmake.import_modal.error")
           }) : null
         })
       })]

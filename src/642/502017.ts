@@ -2,9 +2,9 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, createElement } from "react";
 import { d as _$$d } from "../905/976845";
 import { l as _$$l } from "../905/509505";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { Pt } from "../figma_app/806412";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { tf } from "../figma_app/831799";
 import { u as _$$u } from "../905/389684";
 import { Xh } from "../figma_app/803787";
@@ -24,8 +24,8 @@ export function $$v1({
   initialTabOverride: s
 }) {
   let r = Xm();
-  let i = md(Lc);
-  let o = md(Xh(r));
+  let i = useAtomWithSubscription(Lc);
+  let o = useAtomWithSubscription(Xh(r));
   let c = _$$c();
   let {
     isLibraryModalShown,
@@ -35,7 +35,7 @@ export function $$v1({
     modalType: "editor",
     initialTab: s ?? (c ? Wv.RECOMMENDED : i ? Wv.UPDATES : Wv.LIBRARIES)
   });
-  let b = useMemo(() => i ? _$$t("fullscreen.libraries_button.tooltip.updates_to_pull") : o ? _$$t("fullscreen.libraries_button.tooltip.updates_to_push") : _$$t("fullscreen.libraries_button.tooltip.no_updates"), [i, o]);
+  let b = useMemo(() => i ? getI18nString("fullscreen.libraries_button.tooltip.updates_to_pull") : o ? getI18nString("fullscreen.libraries_button.tooltip.updates_to_push") : getI18nString("fullscreen.libraries_button.tooltip.no_updates"), [i, o]);
   let C = i || o;
   Pf({
     showBadge: C,
@@ -89,7 +89,7 @@ export function $$S0({
     }) : jsx(o5, {
       ref: t,
       "data-onboarding-key": D,
-      "data-tooltip": _$$t("fullscreen.libraries_button.tooltip.no_updates"),
+      "data-tooltip": getI18nString("fullscreen.libraries_button.tooltip.no_updates"),
       "data-tooltip-type": Ib.TEXT,
       fallbackSvg: _$$A2,
       innerText: "Team Library",

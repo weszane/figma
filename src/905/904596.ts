@@ -5,7 +5,7 @@ import { g as _$$g } from "../905/757007";
 import { generateRecordingKey } from "../figma_app/878298";
 import { Uz, xH } from "../905/63728";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { x as _$$x } from "../905/312412";
 import { P } from "../905/994270";
 import { cq } from "../905/794154";
@@ -136,23 +136,23 @@ let E = (e, t, i) => jsx(B, {
     children: function (e) {
       switch (e.type) {
         case "TRY_AGAIN":
-          return _$$t("ai.try_again");
+          return getI18nString("ai.try_again");
         case "MAKE_CHANGES":
-          return _$$t("ai.make_changes");
+          return getI18nString("ai.make_changes");
         case "UNDO":
-          return _$$t("ai.undo");
+          return getI18nString("ai.undo");
         case "REVIEW":
-          return _$$t("ai.review");
+          return getI18nString("ai.review");
         case "KEEP_IT":
-          return _$$t("ai.keep_it");
+          return getI18nString("ai.keep_it");
         case "ACCEPT":
-          return _$$t("ai.accept");
+          return getI18nString("ai.accept");
         case "PREVIEW":
-          return _$$t("ai.preview");
+          return getI18nString("ai.preview");
         case "UNDO_MAKE_CHANGES":
-          return _$$t("ai.undo_make_changes");
+          return getI18nString("ai.undo_make_changes");
         case "BACK":
-          return _$$t("ai.back");
+          return getI18nString("ai.back");
         default:
           throwTypeError(e.type);
       }
@@ -225,7 +225,7 @@ function S({
     }), jsx("span", {
       className: _$$s.textBodyMediumStrong.$,
       "data-testid": "iterateDoneText",
-      children: e || tx("ai.done")
+      children: e || renderI18nText("ai.done")
     })]
   });
 }

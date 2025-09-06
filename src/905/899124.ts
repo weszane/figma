@@ -4,13 +4,13 @@ import { useDispatch, useSelector } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import o from "classnames";
 import { Rs } from "../figma_app/288654";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { Ex, zE } from "../figma_app/919079";
 import { ks, nR, vd, Us } from "../figma_app/637027";
 import { a_ } from "../figma_app/858013";
 import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { Pf, nl } from "../905/590952";
 import { U as _$$U } from "../905/566881";
@@ -48,12 +48,12 @@ let M = Ju(function (e) {
     onClose
   } = e;
   let l = draftsToMove.length;
-  let d = () => "figjam" === imminentDraftMoveUpgradeReason ? tx("file_browser.draft_move_confirmation_modal.seat_type_figjam") : tx("file_browser.draft_move_confirmation_modal.seat_type_design");
-  let c = () => userHasAdminLevelPermissions ? tx("file_browser.draft_move_confirmation_modal.move_drafts_team_owner_substring") : tx("file_browser.draft_move_confirmation_modal.move_drafts_team_member_substring");
+  let d = () => "figjam" === imminentDraftMoveUpgradeReason ? renderI18nText("file_browser.draft_move_confirmation_modal.seat_type_figjam") : renderI18nText("file_browser.draft_move_confirmation_modal.seat_type_design");
+  let c = () => userHasAdminLevelPermissions ? renderI18nText("file_browser.draft_move_confirmation_modal.move_drafts_team_owner_substring") : renderI18nText("file_browser.draft_move_confirmation_modal.move_drafts_team_member_substring");
   return jsx(fu, {
     name: "Plan Spaces Pro Draft Move Confirmation Modal",
     children: jsx(Dd, {
-      title: _$$t("file_browser.draft_move_modal.confirmation_modal_header", {
+      title: getI18nString("file_browser.draft_move_modal.confirmation_modal_header", {
         fileCount: l,
         teamName
       }),
@@ -61,31 +61,31 @@ let M = Ju(function (e) {
       minWidth: 430,
       onClose,
       onConfirm,
-      confirmText: _$$t("file_browser.file_move.move"),
+      confirmText: getI18nString("file_browser.file_move.move"),
       dataTestId: "draft-move-confirmation-modal",
       fixedCenter: !0,
       focus: !0,
       children: jsxs(Fragment, {
-        children: [l > 1 ? "designAndFigjam" === imminentDraftMoveUpgradeReason ? tx("file_browser.draft_move_confirmation_modal.move_multiple_drafts_dual_upgrade", {
-          pluralizedDraftsRemainingString: tx("file_browser.draft_move_confirmation_modal.pluralized_remaining_drafts", {
+        children: [l > 1 ? "designAndFigjam" === imminentDraftMoveUpgradeReason ? renderI18nText("file_browser.draft_move_confirmation_modal.move_multiple_drafts_dual_upgrade", {
+          pluralizedDraftsRemainingString: renderI18nText("file_browser.draft_move_confirmation_modal.pluralized_remaining_drafts", {
             remainingDraftCount: l - 1
           }),
           draftName: draftsToMove[0].name,
           teamName,
           roleContextSubstring: c()
-        }) : tx("file_browser.draft_move_confirmation_modal.move_multiple_drafts_singular_upgrade", {
+        }) : renderI18nText("file_browser.draft_move_confirmation_modal.move_multiple_drafts_singular_upgrade", {
           draftName: (e => {
             let t = draftsToMove.find(t => "figjam" === e && t.editorType === FFileType.WHITEBOARD || "design" === e && t.editorType === FFileType.DESIGN);
             return t ? t.name : draftsToMove[0].name;
           })(imminentDraftMoveUpgradeReason),
-          pluralizedDraftsRemainingString: tx("file_browser.draft_move_confirmation_modal.pluralized_remaining_drafts", {
+          pluralizedDraftsRemainingString: renderI18nText("file_browser.draft_move_confirmation_modal.pluralized_remaining_drafts", {
             remainingDraftCount: l - 1
           }),
           seatType: d(),
           teamName,
           roleContextSubstring: c()
-        }) : tx("file_browser.draft_move_confirmation_modal.move_one_draft_singular", {
-          fileTypeMoniker: "figjam" === imminentDraftMoveUpgradeReason ? tx("file_browser.draft_move_confirmation_modal.board") : tx("file_browser.draft_move_confirmation_modal.file"),
+        }) : renderI18nText("file_browser.draft_move_confirmation_modal.move_one_draft_singular", {
+          fileTypeMoniker: "figjam" === imminentDraftMoveUpgradeReason ? renderI18nText("file_browser.draft_move_confirmation_modal.board") : renderI18nText("file_browser.draft_move_confirmation_modal.file"),
           seatType: d(),
           teamName,
           roleContextSubstring: c()
@@ -118,8 +118,8 @@ let Q = Ju(function (e) {
   return jsx(fu, {
     name: "Plan Spaces Pro Draft Move Confirmation Modal",
     children: jsx(Dd, {
-      cancelText: _$$t("file_browser.draft_move_modal.back"),
-      confirmText: _$$t("file_browser.draft_move_modal.create_and_move_drafts"),
+      cancelText: getI18nString("file_browser.draft_move_modal.back"),
+      confirmText: getI18nString("file_browser.draft_move_modal.create_and_move_drafts"),
       disabled: c,
       fixedCenter: !0,
       focus: !0,
@@ -128,7 +128,7 @@ let Q = Ju(function (e) {
       onClose,
       onSubmit: () => {
         if (c) {
-          d(_$$s2.error(_$$t("team_creation.your_team_name_cannot_be_empty")));
+          d(_$$s2.error(getI18nString("team_creation.your_team_name_cannot_be_empty")));
           return;
         }
         d(KQ({
@@ -141,16 +141,16 @@ let Q = Ju(function (e) {
         setHasCreatedTeam(!0);
         onClose();
       },
-      title: _$$t("file_browser.draft_move_modal.creating_your_new_team_header"),
+      title: getI18nString("file_browser.draft_move_modal.creating_your_new_team_header"),
       truncateTitleText: !0,
       children: jsxs(Fragment, {
         children: [jsx(_$$E, {
-          children: tx("file_browser.draft_move_modal.before_we_move_your_drafts")
+          children: renderI18nText("file_browser.draft_move_modal.before_we_move_your_drafts")
         }), jsx(hK, {
           height: 16
         }), jsx(_$$E, {
           fontWeight: "medium",
-          children: tx("file_browser.draft_move_modal.team_name")
+          children: renderI18nText("file_browser.draft_move_modal.team_name")
         }), jsx(hK, {
           height: 8
         }), jsx(ks, {
@@ -160,7 +160,7 @@ let Q = Ju(function (e) {
           },
           className: "draft_move_modal--teamCreationInput--oJhmi",
           maxLength: 118,
-          placeholder: _$$t("file_browser.draft_move_modal.team_creation_placeholder"),
+          placeholder: getI18nString("file_browser.draft_move_modal.team_creation_placeholder"),
           autoFocus: !0
         }), jsx(hK, {
           height: 8
@@ -248,15 +248,15 @@ export let $$en0 = Ju(function (e) {
     }
   }, [ei, X, ef]);
   let e_ = draftsToMove.map(e => e.name).concat(reposToMove.map(e => e.name));
-  let eA = e_.length > 1 ? _$$t("file_browser.draft_move_modal.header_multiple_files_move", {
+  let eA = e_.length > 1 ? getI18nString("file_browser.draft_move_modal.header_multiple_files_move", {
     fileCount: e_.length
-  }) : _$$t("file_browser.draft_move_modal.header_single_file_move", {
+  }) : getI18nString("file_browser.draft_move_modal.header_single_file_move", {
     fileName: e_[0]
   });
   let ey = e => _$$k.migrateAllPersonalDrafts(e).then(() => em(_$$F.enqueue({
-    message: _$$t("file_browser.draft_move_modal.async_draft_move_scheduled")
+    message: getI18nString("file_browser.draft_move_modal.async_draft_move_scheduled")
   }))).catch(() => em(_$$F.enqueue({
-    message: _$$t("file_browser.draft_move_modal.async_draft_move_scheduling_error")
+    message: getI18nString("file_browser.draft_move_modal.async_draft_move_scheduling_error")
   })));
   let eb = (e, t) => {
     let n = draftsToMove.map(e => fileEntityDataMapper.toSinatra(e));
@@ -380,10 +380,10 @@ export let $$en0 = Ju(function (e) {
                   className: H,
                   children: [jsx("span", {
                     className: W,
-                    children: tx("file_browser.draft_move_modal.a_new_starter_team")
+                    children: renderI18nText("file_browser.draft_move_modal.a_new_starter_team")
                   }), jsx("span", {
                     className: $$K,
-                    children: tx("file_browser.draft_move_modal.none_of_these_teams_feel_right")
+                    children: renderI18nText("file_browser.draft_move_modal.none_of_these_teams_feel_right")
                   })]
                 })]
               });
@@ -423,7 +423,7 @@ export let $$en0 = Ju(function (e) {
             className: "draft_move_modal--footerCTA--A8uBM",
             children: [jsx(nR, {
               onClick: onClose,
-              children: tx("modal.cancel")
+              children: renderI18nText("modal.cancel")
             }), V ? jsx(vd, {
               disabled: !V,
               onClick: () => {
@@ -436,13 +436,13 @@ export let $$en0 = Ju(function (e) {
                   }
                 }));
               },
-              children: _$$t("file_browser.draft_move_modal.continue")
+              children: getI18nString("file_browser.draft_move_modal.continue")
             }) : jsx(vd, {
               disabled: !U,
               onClick: () => {
                 let e = ef.find(e => e.folderId === U);
                 if (!e) {
-                  $D(_$$e.WORKFLOW, Error("Draft Move attempted without a selected destination folder"));
+                  reportError(_$$e.WORKFLOW, Error("Draft Move attempted without a selected destination folder"));
                   onClose();
                   return;
                 }
@@ -453,7 +453,7 @@ export let $$en0 = Ju(function (e) {
                 let r = eE(e);
                 "Pro" !== destinationBadgeType || ew(e, r) ? ev() : eI(name, eS(e, r), eC(e, r));
               },
-              children: _$$t("file_browser.file_move.move")
+              children: getI18nString("file_browser.file_move.move")
             })]
           })]
         })]
@@ -465,7 +465,7 @@ function er(e) {
   return e.userOrgDestinations.length ? jsx("div", {
     className: "draft_move_modal--chooseTeamOrOrgRow--OPBwF",
     "data-testid": "org-restriction-text",
-    children: tx("file_browser.draft_move_modal.drafts_cannot_be_moved_to_organizations", {
+    children: renderI18nText("file_browser.draft_move_modal.drafts_cannot_be_moved_to_organizations", {
       userOrgNames: function (e) {
         let t = e.map(e => e.name);
         let i = e => jsx("span", {
@@ -478,24 +478,24 @@ function er(e) {
           case 1:
             return i(t[0]);
           case 2:
-            return tx("file_browser.draft_move_modal.org_restriction_text_two_orgs", {
+            return renderI18nText("file_browser.draft_move_modal.org_restriction_text_two_orgs", {
               orgName1: i(t[0]),
               orgName2: i(t[1])
             });
           case 3:
-            return tx("file_browser.draft_move_modal.org_restriction_text_three_orgs", {
+            return renderI18nText("file_browser.draft_move_modal.org_restriction_text_three_orgs", {
               orgName1: i(t[0]),
               orgName2: i(t[1]),
               orgName3: i(t[2])
             });
           default:
-            return tx("file_browser.draft_move_modal.org_restriction_text_multiple_orgs", {
+            return renderI18nText("file_browser.draft_move_modal.org_restriction_text_multiple_orgs", {
               orgName1: i(t[0]),
               orgName2: i(t[1]),
               orgName3: i(t[2]),
               numRemainingOrgsSubstring: jsx("span", {
                 className: _$$s.fontSemiBold.$,
-                children: tx("file_browser.drafts_to_move.org_restriction_text_orgs_remaining", {
+                children: renderI18nText("file_browser.drafts_to_move.org_restriction_text_orgs_remaining", {
                   numRemainingOrgs: t.length - 3
                 })
               })
@@ -507,7 +507,7 @@ function er(e) {
         trusted: !0,
         target: "_blank",
         href: et,
-        children: tx("file_browser.draft_move_modal.learn_more_link")
+        children: renderI18nText("file_browser.draft_move_modal.learn_more_link")
       })
     })
   }) : null;
@@ -520,38 +520,38 @@ function ea(e) {
     trusted: !0,
     target: "_blank",
     href: et,
-    children: tx("file_browser.draft_move_modal.learn_more_link")
+    children: renderI18nText("file_browser.draft_move_modal.learn_more_link")
   });
-  let a = tx("file_browser.draft_move_modal.destination_description_cannot_be_moved_here", {
+  let a = renderI18nText("file_browser.draft_move_modal.destination_description_cannot_be_moved_here", {
     learnMoreLink: r
   });
   switch (e.destinationBadgeType) {
     case "Free":
-      t = tx("file_browser.draft_move_modal.destination_description_access_will_become_view_only");
-      i = _$$t("file_browser.draft_move_modal.destination_description_badge_free");
+      t = renderI18nText("file_browser.draft_move_modal.destination_description_access_will_become_view_only");
+      i = getI18nString("file_browser.draft_move_modal.destination_description_badge_free");
       break;
     case "Locked":
-      t = tx("file_browser.draft_move_modal.destination_description_access_will_become_view_only");
-      i = _$$t("file_browser.draft_move_modal.destination_description_badge_locked");
+      t = renderI18nText("file_browser.draft_move_modal.destination_description_access_will_become_view_only");
+      i = getI18nString("file_browser.draft_move_modal.destination_description_badge_locked");
       break;
     case "Edu":
-      t = tx("file_browser.draft_move_modal.destination_description_collaborator_access_may_change");
-      i = _$$t("file_browser.draft_move_modal.destination_description_badge_edu");
+      t = renderI18nText("file_browser.draft_move_modal.destination_description_collaborator_access_may_change");
+      i = getI18nString("file_browser.draft_move_modal.destination_description_badge_edu");
       break;
     case "Pro":
-      t = tx("file_browser.draft_move_modal.destination_description_collaborator_access_may_change");
-      i = _$$t("file_browser.draft_move_modal.destination_description_badge_pro");
+      t = renderI18nText("file_browser.draft_move_modal.destination_description_collaborator_access_may_change");
+      i = getI18nString("file_browser.draft_move_modal.destination_description_badge_pro");
       break;
     case "Org":
-      i = _$$t("file_browser.draft_move_modal.destination_description_badge_org");
+      i = getI18nString("file_browser.draft_move_modal.destination_description_badge_org");
       t = a;
       break;
     case "Enterprise":
-      i = _$$t("file_browser.draft_move_modal.destination_description_badge_ent");
+      i = getI18nString("file_browser.draft_move_modal.destination_description_badge_ent");
       t = a;
       break;
     case "Guest":
-      i = _$$t("file_browser.draft_move_modal.destination_description_badge_guest");
+      i = getI18nString("file_browser.draft_move_modal.destination_description_badge_guest");
       t = a;
   }
   let s = ["Org", "Enterprise", "Guest"].includes(e.destinationBadgeType);

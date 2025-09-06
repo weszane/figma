@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useCallback } from "react";
 import { useSelector, useStore, useDispatch } from "../vendor/514228";
 import { Ez5, w3z, dPJ } from "../figma_app/763686";
-import { fp } from "../figma_app/27355";
+import { useAtomValueAndSetter } from "../figma_app/27355";
 import o from "../vendor/523035";
 import { U } from "../figma_app/901889";
-import { R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { U4 } from "../figma_app/473493";
 import { D } from "../905/882262";
 import { Ym } from "../figma_app/806075";
@@ -12,7 +12,7 @@ import { sf } from "../905/929976";
 import { Tj } from "../figma_app/582924";
 import { aV } from "../figma_app/722362";
 import { J2 } from "../figma_app/84367";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { e6 } from "../figma_app/707808";
 import { $A } from "../905/782918";
 import { gk } from "../figma_app/715641";
@@ -77,7 +77,7 @@ export function $$P5() {
 }
 export function $$D2() {
   let e = useSelector(e => e.mirror.appModel.currentPage);
-  return R(t => "fullscreen" === t.selectedView.view ? {
+  return selectWithShallowEqual(t => "fullscreen" === t.selectedView.view ? {
     ...t.selectedView,
     showOverview: !0,
     overviewBackButtonTargetNodeId: e
@@ -87,15 +87,15 @@ export function $$k6() {
   let e = useStore();
   let t = U();
   let r = !U4();
-  let [, a] = fp(_o);
+  let [, a] = useAtomValueAndSetter(_o);
   let o = useDispatch();
-  let [l, c] = fp(gk);
+  let [l, c] = useAtomValueAndSetter(gk);
   let p = $$D2();
   return useCallback(() => {
     if (r) return;
     t("Dev Mode Overview Entry Clicked");
     let n = e.getState();
-    "editorType" in n.selectedView && n.selectedView.editorType === nT.Design && Ym(n, nT.DevHandoff, "overview_entry");
+    "editorType" in n.selectedView && n.selectedView.editorType === FEditorType.Design && Ym(n, FEditorType.DevHandoff, "overview_entry");
     a("entry_clicked");
     c(void 0);
     o(sf(p));
@@ -105,7 +105,7 @@ export function $$M10(e) {
   let t = useDispatch();
   let r = function (e) {
     let t = useSelector(e => e.mirror.appModel.currentPage);
-    return R(r => "fullscreen" === r.selectedView.view ? {
+    return selectWithShallowEqual(r => "fullscreen" === r.selectedView.view ? {
       ...r.selectedView,
       showDevModeComponentBrowser: !0,
       componentBrowserBackButtonTargetNodeId: t,

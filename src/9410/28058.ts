@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useRef, useEffect } from "react";
 import { useDispatch } from "../vendor/514228";
 import { Ez5 } from "../figma_app/763686";
-import { fp, md } from "../figma_app/27355";
+import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import l from "classnames";
 import { parsePxInt, parsePxNumber } from "../figma_app/783094";
 import { sz } from "../figma_app/216696";
@@ -64,7 +64,7 @@ function G({
   });
 }
 export function $$V1() {
-  let [e, t] = fp(Ei);
+  let [e, t] = useAtomValueAndSetter(Ei);
   let i = dP();
   let s = _o();
   let l = Ye();
@@ -108,12 +108,12 @@ export function $$W0() {
   let t = jY();
   let i = !!S7();
   let n = ut(Ez5?.canvasGrid().canvasGridArray, []).flat().length > 0;
-  let a = md(q7);
+  let a = useAtomWithSubscription(q7);
   let l = EI();
-  let d = md(_$$D);
-  let c = md(r1(Kt)).data;
-  let u = md(VZ);
-  let p = md(u2);
+  let d = useAtomWithSubscription(_$$D);
+  let c = useAtomWithSubscription(r1(Kt)).data;
+  let u = useAtomWithSubscription(VZ);
+  let p = useAtomWithSubscription(u2);
   let {
     state
   } = wj(JT.BOARD_TO_DECK);

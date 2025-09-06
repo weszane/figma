@@ -1,9 +1,9 @@
 import { useMemo, useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
-import { md, zl } from "../figma_app/27355";
+import { useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import { BJ } from "../figma_app/9054";
-import { sx } from "../905/449184";
-import { sn } from "../905/542194";
+import { trackEventAnalytics } from "../905/449184";
+import { globalPerfTimer } from "../905/542194";
 import { U } from "../figma_app/901889";
 import { wS } from "../figma_app/221240";
 import { uQ } from "../figma_app/311375";
@@ -24,9 +24,9 @@ export function $$C0(e) {
   let a = useMemo(() => null === backingSymbolGUID || gl(backingSymbolGUID) ? null : backingSymbolGUID, [backingSymbolGUID]);
   let s = useDispatch();
   return useCallback(() => {
-    e && a && (sn.reset("dev_handoff.view_history", e), sn.start("dev_handoff.view_history", {
+    e && a && (globalPerfTimer.reset("dev_handoff.view_history", e), globalPerfTimer.start("dev_handoff.view_history", {
       key: e
-    }), sx("Diff Modal Compare Changes Clicked", {
+    }), trackEventAnalytics("Diff Modal Compare Changes Clicked", {
       nodeId: e,
       mainComponentNodeId: a,
       origin: "cc_overrides"
@@ -50,7 +50,7 @@ export function $$v2(e) {
     i && "loaded" === t.status && (s("Diff Modal Compare Changes Clicked", {
       nodeId: i,
       origin: "cc_detached_component"
-    }), sn.reset("dev_handoff.view_history", i), sn.start("dev_handoff.view_history", {
+    }), globalPerfTimer.reset("dev_handoff.view_history", i), globalPerfTimer.start("dev_handoff.view_history", {
       key: i
     }), a(to({
       type: jo,
@@ -68,12 +68,12 @@ export function $$E1(e, t) {
   let c = Fk((e, t) => e?.get(t ?? "")?.name.trim(), d);
   let m = tS();
   let b = useDispatch();
-  let C = md(_$$d);
+  let C = useAtomWithSubscription(_$$d);
   let v = eY();
   return useCallback(() => {
-    if (sn.reset("dev_handoff.view_history", e || void 0), sn.start("dev_handoff.view_history", {
+    if (globalPerfTimer.reset("dev_handoff.view_history", e || void 0), globalPerfTimer.start("dev_handoff.view_history", {
       key: e || void 0
-    }), sx("Diff Modal Compare Changes Clicked", {
+    }), trackEventAnalytics("Diff Modal Compare Changes Clicked", {
       userId: i,
       fileKey: m,
       frameId: e,
@@ -84,7 +84,7 @@ export function $$E1(e, t) {
       if (t) {
         let i = t.lastEditedAt;
         C[e] = new Date(i);
-        zl.set(_$$d, {
+        atomStoreManager.set(_$$d, {
           ...C
         });
       }

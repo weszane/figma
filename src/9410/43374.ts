@@ -4,7 +4,7 @@ import { useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { nzw, qmM, miS, cfv } from "../figma_app/763686";
 import { parsePxInt } from "../figma_app/783094";
-import { XN } from "../figma_app/778880";
+import { isIpadDevice } from "../figma_app/778880";
 import { jw } from "../figma_app/327588";
 import { lg } from "../figma_app/976749";
 import { Ty8 } from "../figma_app/27776";
@@ -30,7 +30,7 @@ export function $$m4() {
     }
   }) => e.nodeSelectedValidForQuickAdd);
   let n = lg();
-  return "whiteboard" === n ? t ? 40 : i && XN ? 40 : r ? 20 + h / 2 : qmM?.shouldRenderTableUiForSelection() !== miS.HIDE ? 20 + h / 2 : 16 : "cooper" === n ? e ? 40 : 30 : 8;
+  return "whiteboard" === n ? t ? 40 : i && isIpadDevice ? 40 : r ? 20 + h / 2 : qmM?.shouldRenderTableUiForSelection() !== miS.HIDE ? 20 + h / 2 : 16 : "cooper" === n ? e ? 40 : 30 : 8;
 }
 export function $$f3() {
   return useSelector(e => e.mirror.appModel.hyperlinkLocation);

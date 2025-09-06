@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
 import { dI } from "../905/805904";
 import s from "classnames";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { TI } from "../905/713722";
 import { LN } from "../figma_app/975811";
 import { XE, Z3 } from "../figma_app/385874";
@@ -23,15 +23,15 @@ let g = e => {
     case "GRADIENT_RADIAL":
     case "GRADIENT_ANGULAR":
     case "GRADIENT_DIAMOND":
-      return _$$t("fullscreen.properties_panel.gradient");
+      return getI18nString("fullscreen.properties_panel.gradient");
     case "IMAGE":
-      return _$$t("fullscreen.properties_panel.image");
+      return getI18nString("fullscreen.properties_panel.image");
     case "VIDEO":
-      return _$$t("fullscreen.properties_panel.video");
+      return getI18nString("fullscreen.properties_panel.video");
     case "PATTERN":
-      return _$$t("fullscreen.properties_panel.pattern");
+      return getI18nString("fullscreen.properties_panel.pattern");
     case "NOISE":
-      return _$$t("fullscreen.properties_panel.noise");
+      return getI18nString("fullscreen.properties_panel.noise");
   }
   return "Paint";
 };
@@ -42,36 +42,36 @@ let _ = e => {
   let t = [];
   switch (void 0 !== e.opacity && t.push(f.format(e.opacity)), e.type) {
     case "SOLID":
-      t.push(_$$t("fullscreen.properties_panel.solid"));
+      t.push(getI18nString("fullscreen.properties_panel.solid"));
       break;
     case "GRADIENT_LINEAR":
-      t.push(_$$t("fullscreen.properties_panel.linear"));
+      t.push(getI18nString("fullscreen.properties_panel.linear"));
       break;
     case "GRADIENT_RADIAL":
-      t.push(_$$t("fullscreen.properties_panel.radial"));
+      t.push(getI18nString("fullscreen.properties_panel.radial"));
       break;
     case "GRADIENT_ANGULAR":
-      t.push(_$$t("fullscreen.properties_panel.angular"));
+      t.push(getI18nString("fullscreen.properties_panel.angular"));
       break;
     case "GRADIENT_DIAMOND":
-      t.push(_$$t("fullscreen.properties_panel.diamond"));
+      t.push(getI18nString("fullscreen.properties_panel.diamond"));
       break;
     case "IMAGE":
     case "VIDEO":
-      t.push(_$$t("fullscreen.properties_panel.fill.fill"));
+      t.push(getI18nString("fullscreen.properties_panel.fill.fill"));
       break;
     case "PATTERN":
       let i = XE(e);
       if (!i) break;
       switch (i.patternTileType) {
         case "RECTANGULAR":
-          t.push(_$$t("properties_panel.pattern.rectangular"));
+          t.push(getI18nString("properties_panel.pattern.rectangular"));
           break;
         case "HORIZONTAL_HEXAGONAL":
-          t.push(_$$t("properties_panel.pattern.horizontal_hexagonal"));
+          t.push(getI18nString("properties_panel.pattern.horizontal_hexagonal"));
           break;
         case "VERTICAL_HEXAGONAL":
-          t.push(_$$t("properties_panel.pattern.vertical_hexagonal"));
+          t.push(getI18nString("properties_panel.pattern.vertical_hexagonal"));
       }
       break;
     case "NOISE":
@@ -79,13 +79,13 @@ let _ = e => {
       if (!n) break;
       switch (n.noiseType) {
         case "MULTITONE":
-          t.push(_$$t("properties_panel.noise.noise_type.multitone"));
+          t.push(getI18nString("properties_panel.noise.noise_type.multitone"));
           break;
         case "MONOTONE":
-          t.push(_$$t("properties_panel.noise.noise_type.monotone"));
+          t.push(getI18nString("properties_panel.noise.noise_type.monotone"));
           break;
         case "DUOTONE":
-          t.push(_$$t("properties_panel.noise.noise_type.duotone"));
+          t.push(getI18nString("properties_panel.noise.noise_type.duotone"));
       }
   }
   return t;

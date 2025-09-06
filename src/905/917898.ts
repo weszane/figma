@@ -1,25 +1,25 @@
 import { NfO } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { I as _$$I } from "../905/117966";
 import { w0 } from "../figma_app/594947";
-import { nl } from "../figma_app/257275";
+import { isInteractionPathCheck } from "../figma_app/897289";
 import { Y5 } from "../figma_app/455680";
 import { z as _$$z } from "../905/223332";
 import { qC } from "../figma_app/603466";
 import { nB, AK } from "../905/642684";
 import { Nq } from "../905/266529";
 import { n as _$$n } from "../905/347702";
-import { XN, Ay } from "../figma_app/778880";
+import { isIpadDevice, BrowserInfo } from "../figma_app/778880";
 import { v as _$$v } from "../905/516963";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { PluginError, PluginWrapper, PLUGIN_CLOSED_ERROR } from "../905/572400";
 import { n as _$$n2 } from "../905/823050";
 import { z as _$$z2 } from "../905/239603";
 import { u as _$$u, Kb } from "../905/816730";
 import { N as _$$N } from "../905/125137";
-import { createPluginInstance, $$at0 } from "../905/472793";
+import { createPluginInstance, defineAlertFunction } from "../905/472793";
 import { NoOpVm } from "../905/700654";
 import K from "../905/536567";
 import { VY } from "../figma_app/985200";
@@ -102,11 +102,11 @@ class I {
           let i = "";
           try {
             i = n.getString(n.getPropStr(t, "name"));
-          } catch (e) { }
-          let a = function () { };
+          } catch (e) {}
+          let a = function () {};
           if (r = i, v.test(r) && !b.has(r)) try {
             a = Function(`return function ${i}() {}`)();
-          } catch (e) { }
+          } catch (e) {}
           e.set(t, a);
           return a;
         }
@@ -157,7 +157,7 @@ class I {
           return e.cloneValue(a, r);
         };
       }
-      u && (p.set = () => { });
+      u && (p.set = () => {});
       Object.defineProperty(r, s, p);
     }
     return r;
@@ -202,7 +202,7 @@ async function T(e) {
         e._jsvm_reset();
       } catch (e) {
         P();
-        $D(_$$e.EXTENSIBILITY, e);
+        reportError(_$$e.EXTENSIBILITY, e);
         return e;
       }
     },
@@ -279,7 +279,7 @@ async function T(e) {
       s(e._jsvm_setPropStr(t, n(i), r));
     },
     definePropStr(t, i, r) {
-      if (l(), ("get" in r || "set" in r) && !("value" in r || "writable" in r)) s(e._jsvm_accessorDefinePropStr(t, n(i), void 0 === r.get ? d.undefined : d.newFunction("get_" + i, r.get), void 0 === r.set ? d.undefined : d.newFunction("set_" + i, r.set), !!r.configurable, !!r.enumerable)); else {
+      if (l(), ("get" in r || "set" in r) && !("value" in r || "writable" in r)) s(e._jsvm_accessorDefinePropStr(t, n(i), void 0 === r.get ? d.undefined : d.newFunction("get_" + i, r.get), void 0 === r.set ? d.undefined : d.newFunction("set_" + i, r.set), !!r.configurable, !!r.enumerable));else {
         if ("get" in r || "set" in r) {
           Object.defineProperty({}, i, r);
           return TypeError("Invalid property descriptor. Cannot both specify accessors and a value or writable attribute");
@@ -362,8 +362,8 @@ for (let e of ["log", "error", "assert", "info", "warn", "clear"]) F[e] = consol
 let M = null;
 let j = ["window", "document", "indexedDB", "atob", "btoa"];
 class U extends PluginWrapper {
-  _abortHandler = () => { };
-  _errorHandler = () => { };
+  _abortHandler = () => {};
+  _errorHandler = () => {};
   constructor() {
     this.vmType = "cppvm";
     this._isDestroyed = !1;
@@ -683,7 +683,7 @@ class U extends PluginWrapper {
     this._stats = e;
   }
   destroy() {
-    this._isDestroyed || (M === this && (M = null), n.reset(), (XN || Ay.safari) && (n = void 0, P()), this._isDestroyed = !0);
+    this._isDestroyed || (M === this && (M = null), n.reset(), (isIpadDevice || BrowserInfo.safari) && (n = void 0, P()), this._isDestroyed = !0);
   }
   isDestroyed() {
     return this._isDestroyed;
@@ -732,7 +732,7 @@ class en extends (a = PluginWrapper, r = J, a) {
     this.nullHandle = null;
     this.undefinedHandle = null;
     this[r] = !1;
-    this.errorHandler = () => { };
+    this.errorHandler = () => {};
     this.executionDepth = 0;
     let {
       realm,
@@ -1127,14 +1127,14 @@ class en extends (a = PluginWrapper, r = J, a) {
   evalTrustedTopLevelCode(e) {
     return this.evalTopLevelCode(e);
   }
-  setAbortHandler(e) { }
+  setAbortHandler(e) {}
   setErrorHandler(e) {
     this.errorHandler = e;
   }
   getStats() {
     return null;
   }
-  setStats(e) { }
+  setStats(e) {}
   destroy() {
     this[J] = !0;
     this.iframe.remove();
@@ -1142,8 +1142,8 @@ class en extends (a = PluginWrapper, r = J, a) {
   isDestroyed() {
     return this[J];
   }
-  retainHandle(e) { }
-  releaseHandle(e) { }
+  retainHandle(e) {}
+  releaseHandle(e) {}
 }
 let es = 0;
 function eo(e) {
@@ -1160,7 +1160,7 @@ function eo(e) {
     pluginID: pluginID || "",
     version: apiVersion
   };
-  sx("plugin_generated_error", a, {
+  trackEventAnalytics("plugin_generated_error", a, {
     forwardToDatadog: !0
   });
 }
@@ -1331,7 +1331,7 @@ let $$eu1 = _$$n(async e => {
       q(() => M.destroy());
       disableSilenceConsole || q(() => AK());
       q(() => Y5.triggerAction("commit"));
-      $$at0(M, stats, name);
+      defineAlertFunction(M, stats, name);
       (function (e, t, i) {
         if (!e.isEqual(e.undefined, e.getProp(e.global, "setTimeout"))) return;
         let n = new Map();
@@ -1353,7 +1353,7 @@ let $$eu1 = _$$n(async e => {
           {
             let i = e.toString(t);
             return {
-              release: () => { },
+              release: () => {},
               callback: () => e.evalCode(i)
             };
           }
@@ -1509,7 +1509,7 @@ let $$eu1 = _$$n(async e => {
           return promise;
         }));
       })(M, stats, Q);
-      nl() && function (e, t) {
+      isInteractionPathCheck() && function (e, t) {
         let i = e.newObject();
         e.setProp(e.global, "__TEST__", i);
         t && (e.defineFunction(i, "sendMessage", null, i => (t.sendMessageToTest(e.toString(i)), e.undefined)), e.defineFunction(i, "onMessage", null, i => {
@@ -1574,13 +1574,13 @@ let $$eu1 = _$$n(async e => {
         securityCheckReporter || (NfO.prepareToRunPlugin(), q(() => NfO.finishedRunningPlugin()));
         try {
           if (i = M.evalTopLevelCode(ee), isWidget && isLocal) {
-            if (X.hasRegisteredWidget()) testMessageHandler?.widgetRegistered && testMessageHandler.widgetRegistered(); else throw Error("widget missing call to figma.widget.register");
+            if (X.hasRegisteredWidget()) testMessageHandler?.widgetRegistered && testMessageHandler.widgetRegistered();else throw Error("widget missing call to figma.widget.register");
           }
         } catch (i) {
           let e = "Unknown error";
           try {
             e = i + "";
-          } catch (e) { }
+          } catch (e) {}
           t({
             message: e,
             isError: !0
@@ -1590,7 +1590,7 @@ let $$eu1 = _$$n(async e => {
           stats.markTime("timeToEvalTopLevelCodeMs");
         }
         if (e.isWidget && _$$z.didEvalJSVM(), "FAILURE" === i.type) {
-          if (nl()) {
+          if (isInteractionPathCheck()) {
             let e = M.toString(i.error.handle);
             t({
               message: e,
@@ -1604,4 +1604,4 @@ let $$eu1 = _$$n(async e => {
   };
 });
 export const a7 = $$el0;
-export const ls = $$eu1; 
+export const ls = $$eu1;

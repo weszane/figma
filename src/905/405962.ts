@@ -1,4 +1,4 @@
-import { Iz } from "../figma_app/27355";
+import { createRemovableAtomFamily } from "../figma_app/27355";
 import { A } from "../905/920142";
 import { Q } from "../905/467310";
 import { D } from "../905/347702";
@@ -22,7 +22,7 @@ var n;
     return !!t?.validated_at || !!t?.validatedAt;
   });
 })(n || (n = {}));
-export let $$p0 = Iz(e => Z1(BXv.Query({
+export let $$p0 = createRemovableAtomFamily(e => Z1(BXv.Query({
   resourceId: e,
   resourceType: FOrganizationType.ORG
 }), e => {

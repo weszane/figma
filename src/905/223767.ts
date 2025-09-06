@@ -3,11 +3,11 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useRef, Suspense } from "react";
 import { useDispatch } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { Jn } from "../905/17223";
 import { tH } from "../905/751457";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { dR } from "../figma_app/109538";
 import { w as _$$w } from "../figma_app/527262";
 import { sx } from "../figma_app/307841";
@@ -32,7 +32,7 @@ function O(e) {
   let t = useDispatch();
   let i = TN(e.teamId ?? "");
   let [n, h] = useState(LN());
-  let g = _$$R(e => vp(e.user, e.currentUserOrgId, e.currentTeamId));
+  let g = selectWithShallowEqual(e => vp(e.user, e.currentUserOrgId, e.currentTeamId));
   let O = useRef(null);
   let D = PS(FC());
   let L = _$$h.useTrackingContext({
@@ -45,7 +45,7 @@ function O(e) {
     e.onDone?.();
   };
   let j = _$$s.overflowAuto.$;
-  let U = e.isProCurrent ? tx("plan_comparison.title.working_group") : tx("plan_comparison.title");
+  let U = e.isProCurrent ? renderI18nText("plan_comparison.title.working_group") : renderI18nText("plan_comparison.title");
   return jsx(tH, {
     boundaryKey: "UpgradeChoosePlanModal",
     fallback: jsx(K, {}),

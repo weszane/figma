@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "../vendor/514228";
 import { K as _$$K } from "../905/807535";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
-import { sx as _$$sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Xf } from "../figma_app/153916";
 import { Rs } from "../figma_app/288654";
 import { qc } from "../figma_app/858013";
@@ -14,9 +14,9 @@ import { RR, y3 } from "../figma_app/307841";
 import { i as _$$i } from "../469e6e40/549061";
 import { ZY } from "../figma_app/845611";
 import { throwTypeError } from "../figma_app/465776";
-import { md, eU as _$$eU, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, atom, Xr } from "../figma_app/27355";
 import { h as _$$h } from "../905/207101";
-import { tx as _$$tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { E as _$$E } from "../905/984674";
 import { qB, eh as _$$eh, u0, Lh, Ks, eI as _$$eI, gx, Iq, Bq, Pz, d1, WF, _R, eN as _$$eN } from "../figma_app/425283";
 import { g as _$$g } from "../4452/983384";
@@ -75,8 +75,8 @@ import { MX, NV, EQ, cZ, EO } from "../figma_app/684446";
 import { D2, VP } from "../905/18797";
 import { hX, de } from "../figma_app/614170";
 import { _W } from "../figma_app/329496";
-import { D as _$$D } from "../905/384551";
-import { GN, RM } from "../905/441038";
+import { FRequestsStr } from "../905/384551";
+import { UserRole, GroupType } from "../905/441038";
 import { J0, oU } from "../figma_app/967319";
 import { EB } from "../figma_app/831101";
 import { O as _$$O2 } from "../905/833838";
@@ -86,14 +86,14 @@ import { buildUploadUrl } from "../figma_app/169182";
 import { y as _$$y } from "../905/129046";
 import { y as _$$y2 } from "../905/375507";
 import { lQ } from "../905/934246";
-import { Im } from "../figma_app/493477";
+import { isEmptyObject } from "../figma_app/493477";
 import { K as _$$K3 } from "../905/443068";
 import { v as _$$v } from "../469e6e40/843735";
 import e2 from "classnames";
 import e5 from "../vendor/128080";
 import { A as _$$A2 } from "../905/920142";
 import { xf } from "../figma_app/416935";
-import { rr } from "../figma_app/778880";
+import { isMobileUA } from "../figma_app/778880";
 import { EJ, Yx } from "../figma_app/930338";
 import { XHR } from "../905/910117";
 import { gw, MM, wv } from "../figma_app/236327";
@@ -168,7 +168,7 @@ import { p as _$$p4 } from "../469e6e40/470485";
 import { b as _$$b3 } from "../905/946806";
 import { Z as _$$Z } from "../905/279476";
 import { FJ } from "../905/508367";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { aD as _$$aD, Sn } from "../469e6e40/875985";
 import { vr } from "../figma_app/514043";
 import { Jv, YO, qH } from "../figma_app/934005";
@@ -179,7 +179,7 @@ import { A as _$$A3 } from "../svg/57540";
 import { Wi, JR } from "../figma_app/162641";
 import { In } from "../905/672640";
 import { Ib } from "../905/129884";
-import { O as _$$O3 } from "../905/247093";
+import { UNASSIGNED } from "../905/247093";
 import { Eh } from "../figma_app/617654";
 import { Vq, v0, pL } from "../figma_app/639088";
 import { e as _$$e5 } from "../905/149844";
@@ -234,7 +234,7 @@ function V(e) {
         arrowPosition,
         clickOutsideToHide: !0,
         description: jsx(_$$E, {
-          children: _$$tx("org_admin_onboarding.tooltip.create_first_workspace.description")
+          children: renderI18nText("org_admin_onboarding.tooltip.create_first_workspace.description")
         }),
         emphasized: !0,
         isShowing: isOverlayShowing,
@@ -242,7 +242,7 @@ function V(e) {
         onTargetLost: complete,
         primaryCta: {
           label: jsx(_$$E, {
-            children: _$$tx("general.next")
+            children: renderI18nText("general.next")
           }),
           type: "button",
           onClick: next,
@@ -255,7 +255,7 @@ function V(e) {
         },
         targetKey: l,
         title: jsx(_$$E, {
-          children: _$$tx("org_admin_onboarding.tooltip.create_first_workspace.title")
+          children: renderI18nText("org_admin_onboarding.tooltip.create_first_workspace.title")
         }),
         trackingContextName: `${_$$eh} - create first workspace`,
         userFlagOnShow: G
@@ -265,7 +265,7 @@ function V(e) {
         arrowPosition,
         clickOutsideToHide: !0,
         description: jsx(_$$E, {
-          children: _$$tx("org_admin_onboarding.tooltip.create_first_billing_group.description")
+          children: renderI18nText("org_admin_onboarding.tooltip.create_first_billing_group.description")
         }),
         emphasized: !0,
         isShowing: isOverlayShowing,
@@ -273,7 +273,7 @@ function V(e) {
         onTargetLost: complete,
         primaryCta: {
           label: jsx(_$$E, {
-            children: _$$tx("general.got_it")
+            children: renderI18nText("general.got_it")
           }),
           type: "button",
           onClick: complete,
@@ -286,7 +286,7 @@ function V(e) {
         },
         targetKey: u0,
         title: jsx(_$$E, {
-          children: _$$tx("org_admin_onboarding.tooltip.create_first_billing_group.title")
+          children: renderI18nText("org_admin_onboarding.tooltip.create_first_billing_group.title")
         }),
         trackingContextName: `${_$$eh} - create first billing group`,
         userFlagOnShow: G
@@ -300,7 +300,7 @@ function W() {
   let t = H3(e);
   let a = e?.tier === FPlanNameType.ENTERPRISE;
   let n = T();
-  let i = md(z);
+  let i = useAtomWithSubscription(z);
   let r = Rs(Iwl, {
     orgId: t || null
   }, {
@@ -360,10 +360,10 @@ function K() {
     isShowing,
     position: _$$Q.CENTER,
     trackingContextName: "OrgAdminAuthorityOverlay",
-    title: _$$tx("org_admin_authority_overlay.title"),
-    description: _$$tx("org_admin_authority_overlay.description"),
+    title: renderI18nText("org_admin_authority_overlay.title"),
+    description: renderI18nText("org_admin_authority_overlay.description"),
     primaryCta: {
-      label: _$$tx("general.got_it"),
+      label: renderI18nText("general.got_it"),
       ctaTrackingDescriptor: _$$c.GOT_IT,
       type: "button",
       onClick: complete
@@ -508,7 +508,7 @@ let eH = "admin_onboarding_overlay--listItem--qXeo9";
 let eY = "seen_sharing_clarity_admin_onboarding_overlay";
 let eJ = r1(eY);
 function eK() {
-  let e = md(eJ);
+  let e = useAtomWithSubscription(eJ);
   let {
     show,
     isShowing,
@@ -527,35 +527,35 @@ function eK() {
       className: "admin_onboarding_overlay--list--00013",
       children: [jsx("li", {
         className: eH,
-        children: _$$tx("rcs.sharing_clarity.admin_overlay.bullet_1", {
+        children: renderI18nText("rcs.sharing_clarity.admin_overlay.bullet_1", {
           strongInviteOnly: jsx("span", {
             className: eW,
-            children: _$$tx("rcs.sharing_clarity.admin_overlay.invite_only")
+            children: renderI18nText("rcs.sharing_clarity.admin_overlay.invite_only")
           })
         })
       }), jsx("li", {
         className: eH,
-        children: _$$tx("rcs.sharing_clarity.admin_overlay.bullet_2", {
+        children: renderI18nText("rcs.sharing_clarity.admin_overlay.bullet_2", {
           strongVisible: jsx("span", {
             className: eW,
-            children: _$$tx("rcs.sharing_clarity.admin_overlay.visible")
+            children: renderI18nText("rcs.sharing_clarity.admin_overlay.visible")
           }),
           strongHidden: jsx("span", {
             className: eW,
-            children: _$$tx("rcs.sharing_clarity.admin_overlay.hidden")
+            children: renderI18nText("rcs.sharing_clarity.admin_overlay.hidden")
           })
         })
       }), jsx("li", {
         className: eH,
-        children: _$$tx("rcs.sharing_clarity.admin_overlay.bullet_3", {
+        children: renderI18nText("rcs.sharing_clarity.admin_overlay.bullet_3", {
           strongAnyoneInOrg: jsx("span", {
             className: eW,
-            children: _$$tx("rcs.sharing_clarity.admin_overlay.anyone_in_the_org")
+            children: renderI18nText("rcs.sharing_clarity.admin_overlay.anyone_in_the_org")
           })
         })
       }), jsx("li", {
         className: eH,
-        children: _$$tx("rcs.sharing_clarity.admin_overlay.bullet_4")
+        children: renderI18nText("rcs.sharing_clarity.admin_overlay.bullet_4")
       })]
     })
   });
@@ -570,18 +570,18 @@ function eK() {
     onClose: complete,
     position: _$$Q.BOTTOM_RIGHT,
     primaryCta: {
-      label: _$$tx("rcs.got_it"),
+      label: renderI18nText("rcs.got_it"),
       type: "button",
       onClick: complete,
       ctaTrackingDescriptor: _$$c.DONE
     },
     secondaryCta: {
-      label: _$$tx("rcs.rcs_shared.learn_more"),
+      label: renderI18nText("rcs.rcs_shared.learn_more"),
       type: "link",
       href: "https://help.figma.com/hc/articles/360040450293-Create-a-team-in-an-organization",
       ctaTrackingDescriptor: _$$c.LEARN_MORE
     },
-    title: _$$tx("rcs.sharing_clarity.admin_overlay.new_language_for_team_access"),
+    title: renderI18nText("rcs.sharing_clarity.admin_overlay.new_language_for_team_access"),
     trackingContextName: "Sharing Clarity Admin Onboarding Overlay",
     userFlagOnShow: eY
   });
@@ -592,7 +592,7 @@ let th = "seen_org_admin_activity_onboarding";
 let tx = rn("org_admin_activity_onboarding", _$$R(Ql8));
 let tb = r1(th);
 function tv() {
-  let e = md(tb);
+  let e = useAtomWithSubscription(tb);
   let t = _$$e2({
     overlay: Q16,
     priority: _$$N2.DEFAULT_MODAL
@@ -608,11 +608,11 @@ function tv() {
     t.show();
   });
   let i = [{
-    description: _$$tx("onboarding_pointers.activity_filter_onboarding"),
+    description: renderI18nText("onboarding_pointers.activity_filter_onboarding"),
     trackingContextName: `${Lh} Filter`,
     targetKey: Ks
   }, {
-    description: _$$tx("onboarding_pointers.activity_csv_onboarding"),
+    description: renderI18nText("onboarding_pointers.activity_csv_onboarding"),
     trackingContextName: `${Lh} CSV`,
     targetKey: _$$eI
   }];
@@ -633,628 +633,628 @@ let tO = "activity_logs_section--eventDescriptionItem--6w8oK ellipsis--ellipsis-
 let tL = "HEADER";
 let tD = {
   value: null,
-  description: _$$tx("activity_log.filter.all")
+  description: renderI18nText("activity_log.filter.all")
 };
 let tM = [{
   value: tL,
-  description: _$$tx("activity_log.filter.branches")
+  description: renderI18nText("activity_log.filter.branches")
 }, {
   value: ["repo_branch_create"],
-  description: _$$tx("activity_log.filter.created_a_branch")
+  description: renderI18nText("activity_log.filter.created_a_branch")
 }, {
   value: ["repo_merge_to_source"],
-  description: _$$tx("activity_log.filter.merged_a_branch")
+  description: renderI18nText("activity_log.filter.merged_a_branch")
 }, {
   value: ["repo_merge_from_source"],
-  description: _$$tx("activity_log.filter.updated_a_branch")
+  description: renderI18nText("activity_log.filter.updated_a_branch")
 }, {
   value: ["repo_branch_archive"],
-  description: _$$tx("activity_log.filter.archived_a_branch")
+  description: renderI18nText("activity_log.filter.archived_a_branch")
 }, {
   value: ["repo_branch_unarchive"],
-  description: _$$tx("activity_log.filter.unarchived_a_branch")
+  description: renderI18nText("activity_log.filter.unarchived_a_branch")
 }, {
   value: ["repo_branch_delete"],
-  description: _$$tx("activity_log.filter.deleted_a_branch")
+  description: renderI18nText("activity_log.filter.deleted_a_branch")
 }, {
   value: ["file_repo_member_add", "file_repo_member_permission_change", "file_repo_member_remove"],
-  description: _$$tx("activity_log.filter.file_repo_membership_changed")
+  description: renderI18nText("activity_log.filter.file_repo_membership_changed")
 }];
 let tP = getFeatureFlags().dt_github_app_activity_logs ? [{
   value: tL,
-  description: _$$tx("activity_log.filter.github")
+  description: renderI18nText("activity_log.filter.github")
 }, {
   value: ["github_app_installation", "github_app_uninstallation", "github_app_suspension", "github_app_unsuspension"],
-  description: _$$tx("activity_log.filter.github_app_description")
+  description: renderI18nText("activity_log.filter.github_app_description")
 }, {
   value: ["github_repository_add", "github_repository_remove", "github_repository_disable", "github_repository_enable"],
-  description: _$$tx("activity_log.filter.github_repository_description")
+  description: renderI18nText("activity_log.filter.github_repository_description")
 }] : [];
 let tU = [{
   value: tL,
-  description: _$$tx("activity_log.filter.sso_auth")
+  description: renderI18nText("activity_log.filter.sso_auth")
 }, {
   value: ["google_sso_auth_change"],
-  description: _$$tx("activity_log.filter.google_sso_auth")
+  description: renderI18nText("activity_log.filter.google_sso_auth")
 }, {
   value: ["saml_sso_auth_change"],
-  description: _$$tx("activity_log.filter.saml_sso_auth")
+  description: renderI18nText("activity_log.filter.saml_sso_auth")
 }];
 let tF = [{
   value: tL,
-  description: _$$tx("activity_log.filter.network_restriction")
+  description: renderI18nText("activity_log.filter.network_restriction")
 }, {
   value: ["ip_allowlist_setting_change"],
-  description: _$$tx("activity_log.filter.ip_allowlist_setting_change")
+  description: renderI18nText("activity_log.filter.ip_allowlist_setting_change")
 }, {
   value: ["ip_allowlist_range_create"],
-  description: _$$tx("activity_log.filter.ip_allowlist_range_create")
+  description: renderI18nText("activity_log.filter.ip_allowlist_range_create")
 }, {
   value: ["ip_allowlist_range_delete"],
-  description: _$$tx("activity_log.filter.ip_allowlist_range_delete")
+  description: renderI18nText("activity_log.filter.ip_allowlist_range_delete")
 }, {
   value: ["ip_allowlist_rejected"],
-  description: _$$tx("activity_log.filter.ip_allowlist_rejected")
+  description: renderI18nText("activity_log.filter.ip_allowlist_rejected")
 }, {
   value: ["ip_restriction_change"],
-  description: _$$tx("activity_log.filter.network_access_restriction_setting_change")
+  description: renderI18nText("activity_log.filter.network_access_restriction_setting_change")
 }, {
   value: ["network_access_restriction_range_create"],
-  description: _$$tx("activity_log.filter.network_access_restriction_range_create")
+  description: renderI18nText("activity_log.filter.network_access_restriction_range_create")
 }, {
   value: ["network_access_restriction_range_delete"],
-  description: _$$tx("activity_log.filter.network_access_restriction_range_delete")
+  description: renderI18nText("activity_log.filter.network_access_restriction_range_delete")
 }, {
   value: ["network_access_restriction_range_update"],
-  description: _$$tx("activity_log.filter.network_access_restriction_range_update")
+  description: renderI18nText("activity_log.filter.network_access_restriction_range_update")
 }];
 let tq = [{
   value: tL,
-  description: _$$tx("activity_log.filter.external_access")
+  description: renderI18nText("activity_log.filter.external_access")
 }, {
   value: ["org_guest_invite_setting_change"],
-  description: _$$tx("activity_log.filter.changed_guest_invite_setting")
+  description: renderI18nText("activity_log.filter.changed_guest_invite_setting")
 }, {
   value: ["open_sessions_setting_change"],
-  description: _$$tx("activity_log.filter.changed_open_sessions_setting")
+  description: renderI18nText("activity_log.filter.changed_open_sessions_setting")
 }, {
   value: ["public_link_setting_change"],
-  description: _$$tx("activity_log.filter.changed_public_link_setting")
+  description: renderI18nText("activity_log.filter.changed_public_link_setting")
 }, {
   value: ["org_user_create_external", "org_user_delete_external"],
-  description: _$$tx("activity_log.filter.external_org_membership_changed")
+  description: renderI18nText("activity_log.filter.external_org_membership_changed")
 }, {
   value: ["team_member_add_external", "team_member_remove_external"],
-  description: _$$tx("activity_log.filter.external_team_membership_changed")
+  description: renderI18nText("activity_log.filter.external_team_membership_changed")
 }, {
   value: ["autogen_password_controls_setting_change"],
-  description: _$$tx("activity_log.filter.changed_autogen_password_controls_setting")
+  description: renderI18nText("activity_log.filter.changed_autogen_password_controls_setting")
 }, {
   value: ["fig_file_view_external"],
-  description: _$$tx("activity_log.filter.viewed_external_file")
+  description: renderI18nText("activity_log.filter.viewed_external_file")
 }, {
   value: ["fig_file_view_prototype_external"],
-  description: _$$tx("activity_log.filter.viewed_external_prototype")
+  description: renderI18nText("activity_log.filter.viewed_external_prototype")
 }, {
   value: ["sites_publishing_setting_change"],
-  description: _$$tx("activity_log.filter.sites_publishing_setting_change")
+  description: renderI18nText("activity_log.filter.sites_publishing_setting_change")
 }, {
   value: ["file_export_controls_setting_change"],
-  description: _$$tx("activity_log.filter.file_export_controls_setting_change")
+  description: renderI18nText("activity_log.filter.file_export_controls_setting_change")
 }, {
   value: ["workspace_file_export_controls_setting_change"],
-  description: _$$tx("activity_log.filter.workspace_file_export_controls_setting_change")
+  description: renderI18nText("activity_log.filter.workspace_file_export_controls_setting_change")
 }];
 let t$ = [{
   value: ["license_group_library_setting_change", "workspace_library_setting_change"],
-  description: _$$tx("activity_log.filter.workspace_library_setting_changed")
+  description: renderI18nText("activity_log.filter.workspace_library_setting_changed")
 }];
 let tB = [{
   value: tL,
-  description: _$$tx("activity_log.filter.workspaces")
+  description: renderI18nText("activity_log.filter.workspaces")
 }, {
   value: ["license_group_admins_add", "workspace_admins_add"],
-  description: _$$tx("activity_log.filter.added_workspace_admins")
+  description: renderI18nText("activity_log.filter.added_workspace_admins")
 }, {
   value: ["license_group_admins_remove", "workspace_admins_remove"],
-  description: _$$tx("activity_log.filter.removed_workspace_admins")
+  description: renderI18nText("activity_log.filter.removed_workspace_admins")
 }, {
   value: ["license_group_create", "workspace_create"],
-  description: _$$tx("activity_log.filter.created_a_workspace")
+  description: renderI18nText("activity_log.filter.created_a_workspace")
 }, {
   value: ["license_group_delete", "workspace_delete"],
-  description: _$$tx("activity_log.filter.deleted_a_workspace")
+  description: renderI18nText("activity_log.filter.deleted_a_workspace")
 }, {
   value: ["license_group_rename", "workspace_rename"],
-  description: _$$tx("activity_log.filter.renamed_a_workspace")
+  description: renderI18nText("activity_log.filter.renamed_a_workspace")
 }, {
   value: ["license_group_membership_change", "workspace_members_add", "workspace_members_remove", "workspace_member_add", "workspace_member_remove"],
-  description: _$$tx("activity_log.filter.changed_a_user_s_workspace")
+  description: renderI18nText("activity_log.filter.changed_a_user_s_workspace")
 }, {
   value: ["license_group_membership_self_select", "workspace_membership_self_select"],
-  description: _$$tx("activity_log.filter.user_selected_their_own_workspace")
+  description: renderI18nText("activity_log.filter.user_selected_their_own_workspace")
 }, {
   value: ["workspace_visibility_setting_change"],
-  description: _$$tx("activity_log.filter.workspace_visibility_setting_changed")
+  description: renderI18nText("activity_log.filter.workspace_visibility_setting_changed")
 }];
 let tG = [{
   value: tL,
-  description: _$$tx("activity_log.filter.billing_group.header")
+  description: renderI18nText("activity_log.filter.billing_group.header")
 }, {
   value: ["license_group_admins_add"],
-  description: _$$tx("activity_log.filter.billing_group.admins_added")
+  description: renderI18nText("activity_log.filter.billing_group.admins_added")
 }, {
   value: ["license_group_admins_remove"],
-  description: _$$tx("activity_log.filter.billing_group.admins_removed")
+  description: renderI18nText("activity_log.filter.billing_group.admins_removed")
 }, {
   value: ["license_group_create"],
-  description: _$$tx("activity_log.filter.billing_group.created")
+  description: renderI18nText("activity_log.filter.billing_group.created")
 }, {
   value: ["license_group_delete"],
-  description: _$$tx("activity_log.filter.billing_group.deleted")
+  description: renderI18nText("activity_log.filter.billing_group.deleted")
 }, {
   value: ["license_group_rename"],
-  description: _$$tx("activity_log.filter.billing_group.renamed")
+  description: renderI18nText("activity_log.filter.billing_group.renamed")
 }, {
   value: ["license_group_membership_change"],
-  description: _$$tx("activity_log.filter.billing_group.membership_changed")
+  description: renderI18nText("activity_log.filter.billing_group.membership_changed")
 }, {
   value: ["license_group_membership_self_select"],
-  description: _$$tx("activity_log.filter.billing_group.self_select")
+  description: renderI18nText("activity_log.filter.billing_group.self_select")
 }];
 let tz = [{
   value: tL,
-  description: _$$tx("activity_log.filter.scim_group.header")
+  description: renderI18nText("activity_log.filter.scim_group.header")
 }, {
   value: ["idp_group_create"],
-  description: _$$tx("activity_log.filter.scim_group.idp_group_create.select")
+  description: renderI18nText("activity_log.filter.scim_group.idp_group_create.select")
 }, {
   value: ["idp_group_delete"],
-  description: _$$tx("activity_log.filter.scim_group.idp_group_delete.select")
+  description: renderI18nText("activity_log.filter.scim_group.idp_group_delete.select")
 }, {
   value: ["idp_group_rename"],
-  description: _$$tx("activity_log.filter.scim_group.idp_group_rename.select")
+  description: renderI18nText("activity_log.filter.scim_group.idp_group_rename.select")
 }, {
   value: ["idp_group_connection_add"],
-  description: _$$tx("activity_log.filter.scim_group.idp_group_connection_add.select")
+  description: renderI18nText("activity_log.filter.scim_group.idp_group_connection_add.select")
 }, {
   value: ["idp_group_connection_remove"],
-  description: _$$tx("activity_log.filter.scim_group.idp_group_connection_remove.select")
+  description: renderI18nText("activity_log.filter.scim_group.idp_group_connection_remove.select")
 }];
 let tV = [{
   value: ["org_join_request_create"],
-  description: _$$tx("activity_log.filter.requested_to_join_the_org")
+  description: renderI18nText("activity_log.filter.requested_to_join_the_org")
 }, {
   value: ["org_join_request_approve"],
-  description: _$$tx("activity_log.filter.org_join_request_approved")
+  description: renderI18nText("activity_log.filter.org_join_request_approved")
 }];
 let tW = [{
   value: tL,
-  description: _$$tx("activity_log.filter.webhook_group_header")
+  description: renderI18nText("activity_log.filter.webhook_group_header")
 }, {
   value: ["webhook_create"],
-  description: _$$tx("activity_log.filter.webhooks_created")
+  description: renderI18nText("activity_log.filter.webhooks_created")
 }, {
   value: ["webhook_update"],
-  description: _$$tx("activity_log.filter.webhooks_updated")
+  description: renderI18nText("activity_log.filter.webhooks_updated")
 }, {
   value: ["webhook_delete"],
-  description: _$$tx("activity_log.filter.webhooks_deleted")
+  description: renderI18nText("activity_log.filter.webhooks_deleted")
 }];
 let tH = [{
   value: tL,
-  description: _$$tx("activity_log.filter.org_domain_management_group_header")
+  description: renderI18nText("activity_log.filter.org_domain_management_group_header")
 }, {
   value: ["org_domain_capture_change"],
-  description: _$$tx("activity_log.filter.org_domain_capture_changed")
+  description: renderI18nText("activity_log.filter.org_domain_capture_changed")
 }, {
   value: ["org_domain_add"],
-  description: _$$tx("activity_log.filter.org_domain_added")
+  description: renderI18nText("activity_log.filter.org_domain_added")
 }, {
   value: ["org_domain_remove"],
-  description: _$$tx("activity_log.filter.org_domain_removed")
+  description: renderI18nText("activity_log.filter.org_domain_removed")
 }, {
   value: ["org_domain_verify"],
-  description: _$$tx("activity_log.filter.org_domain_verified")
+  description: renderI18nText("activity_log.filter.org_domain_verified")
 }];
 let tY = [{
   value: tL,
-  description: _$$tx("activity_log.filter.idp_config_group_header")
+  description: renderI18nText("activity_log.filter.idp_config_group_header")
 }, {
   value: ["idp_config_create"],
-  description: _$$tx("activity_log.filter.idp_config_create")
+  description: renderI18nText("activity_log.filter.idp_config_create")
 }, {
   value: ["idp_config_delete"],
-  description: _$$tx("activity_log.filter.idp_config_delete")
+  description: renderI18nText("activity_log.filter.idp_config_delete")
 }, {
   value: ["idp_config_update"],
-  description: _$$tx("activity_log.filter.idp_config_update")
+  description: renderI18nText("activity_log.filter.idp_config_update")
 }, {
   value: ["org_domain_idp_mapping_change"],
-  description: _$$tx("activity_log.filter.org_domain_idp_mapping_change")
+  description: renderI18nText("activity_log.filter.org_domain_idp_mapping_change")
 }];
 let tJ = [{
   value: tL,
-  description: _$$tx("activity_log.filter.sites_web_apps")
+  description: renderI18nText("activity_log.filter.sites_web_apps")
 }, {
   value: ["sites_subdomain_changed"],
-  description: _$$tx("activity_log.filter.sites_subdomain_changed")
+  description: renderI18nText("activity_log.filter.sites_subdomain_changed")
 }, {
   value: ["sites_custom_domain_activate"],
-  description: _$$tx("activity_log.filter.sites_custom_domain_activated")
+  description: renderI18nText("activity_log.filter.sites_custom_domain_activated")
 }, {
   value: ["sites_custom_domain_removal"],
-  description: _$$tx("activity_log.filter.sites_custom_domain_removal")
+  description: renderI18nText("activity_log.filter.sites_custom_domain_removal")
 }, {
   value: ["sites_publish"],
-  description: _$$tx("activity_log.filter.sites_published")
+  description: renderI18nText("activity_log.filter.sites_published")
 }, {
   value: ["sites_unpublish"],
-  description: _$$tx("activity_log.filter.sites_unpublished")
+  description: renderI18nText("activity_log.filter.sites_unpublished")
 }, ...(getFeatureFlags().sts_passwords ? [{
   value: ["sites_set_password"],
-  description: _$$tx("activity_log.filter.sites_set_password")
+  description: renderI18nText("activity_log.filter.sites_set_password")
 }, {
   value: ["sites_unset_password"],
-  description: _$$tx("activity_log.filter.sites_unset_password")
+  description: renderI18nText("activity_log.filter.sites_unset_password")
 }] : [])];
 let tK = (e, t, a) => [tD, {
   value: tL,
-  description: _$$tx("activity_log.filter.files")
+  description: renderI18nText("activity_log.filter.files")
 }, {
   value: ["fig_file_create"],
-  description: _$$tx("activity_log.filter.created_a_file")
+  description: renderI18nText("activity_log.filter.created_a_file")
 }, {
   value: ["fig_file_duplicate"],
-  description: _$$tx("activity_log.filter.duplicated_a_file")
+  description: renderI18nText("activity_log.filter.duplicated_a_file")
 }, {
   value: ["fig_file_export"],
-  description: _$$tx("activity_log.filter.exported_a_file")
+  description: renderI18nText("activity_log.filter.exported_a_file")
 }, {
   value: ["fig_file_image_download"],
-  description: _$$tx("activity_log.filter.downloaded_an_image")
+  description: renderI18nText("activity_log.filter.downloaded_an_image")
 }, {
   value: ["fig_file_link_access_change"],
-  description: _$$tx("activity_log.filter.file_link_access_changed")
+  description: renderI18nText("activity_log.filter.file_link_access_changed")
 }, {
   value: ["fig_file_link_expiration_change"],
-  description: _$$tx("activity_log.filter.file_link_expiration_changed")
+  description: renderI18nText("activity_log.filter.file_link_expiration_changed")
 }, {
   value: ["fig_file_viewer_access_change"],
-  description: _$$tx("activity_log.filter.viewer_permissions_changed")
+  description: renderI18nText("activity_log.filter.viewer_permissions_changed")
 }, {
   value: ["fig_file_member_add", "fig_file_member_permission_change", "fig_file_member_remove"],
-  description: _$$tx("activity_log.filter.file_membership_changed")
+  description: renderI18nText("activity_log.filter.file_membership_changed")
 }, {
   value: ["fig_file_move"],
-  description: _$$tx("activity_log.filter.moved_a_file")
+  description: renderI18nText("activity_log.filter.moved_a_file")
 }, {
   value: ["fig_file_permanent_delete"],
-  description: _$$tx("activity_log.filter.permanently_deleted_a_file")
+  description: renderI18nText("activity_log.filter.permanently_deleted_a_file")
 }, {
   value: ["fig_file_permanent_undelete", "fig_file_restore"],
-  description: _$$tx("activity_log.filter.restored_a_file")
+  description: renderI18nText("activity_log.filter.restored_a_file")
 }, {
   value: ["fig_file_set_password"],
-  description: _$$tx("activity_log.filter.fig_file_set_password")
+  description: renderI18nText("activity_log.filter.fig_file_set_password")
 }, {
   value: ["fig_file_unset_password"],
-  description: _$$tx("activity_log.filter.fig_file_unset_password")
+  description: renderI18nText("activity_log.filter.fig_file_unset_password")
 }, {
   value: ["fig_file_rename"],
-  description: _$$tx("activity_log.filter.renamed_a_file")
+  description: renderI18nText("activity_log.filter.renamed_a_file")
 }, {
   value: ["fig_file_save_as"],
-  description: _$$tx("activity_log.filter.saved_a_file")
+  description: renderI18nText("activity_log.filter.saved_a_file")
 }, {
   value: ["fig_file_trash"],
-  description: _$$tx("activity_log.filter.trashed_a_file")
+  description: renderI18nText("activity_log.filter.trashed_a_file")
 }, {
   value: ["fig_file_view"],
-  description: _$$tx("activity_log.filter.viewed_a_file")
+  description: renderI18nText("activity_log.filter.viewed_a_file")
 }, {
   value: ["fig_file_view_prototype"],
-  description: _$$tx("activity_log.filter.viewed_a_prototype")
+  description: renderI18nText("activity_log.filter.viewed_a_prototype")
 }, {
   value: ["open_sessions_start"],
-  description: _$$tx("activity_log.filter.open_sessions_start")
+  description: renderI18nText("activity_log.filter.open_sessions_start")
 }, {
   value: ["open_sessions_end"],
-  description: _$$tx("activity_log.filter.open_sessions_end")
+  description: renderI18nText("activity_log.filter.open_sessions_end")
 }, ...tM, ...tJ, {
   value: tL,
-  description: _$$tx("activity_log.filter.projects")
+  description: renderI18nText("activity_log.filter.projects")
 }, {
   value: ["folder_create"],
-  description: _$$tx("activity_log.filter.created_a_project")
+  description: renderI18nText("activity_log.filter.created_a_project")
 }, {
   value: ["folder_delete", "folder_trash", "folder_export", "folder_restore"],
-  description: _$$tx("activity_log.filter.deleted_a_project")
+  description: renderI18nText("activity_log.filter.deleted_a_project")
 }, {
   value: ["folder_member_add", "folder_member_permission_change", "folder_member_remove"],
-  description: _$$tx("activity_log.filter.project_membership_changed")
+  description: renderI18nText("activity_log.filter.project_membership_changed")
 }, {
   value: ["folder_move"],
-  description: _$$tx("activity_log.filter.moved_a_project")
+  description: renderI18nText("activity_log.filter.moved_a_project")
 }, {
   value: ["folder_rename"],
-  description: _$$tx("activity_log.filter.renamed_a_project")
+  description: renderI18nText("activity_log.filter.renamed_a_project")
 }, {
   value: ["folder_team_access_change"],
-  description: _$$tx("activity_log.filter.changed_the_team_access_of_a_project")
+  description: renderI18nText("activity_log.filter.changed_the_team_access_of_a_project")
 }, {
   value: ["folder_transfer_sent", "folder_transfer_copy_sent", "folder_export"],
-  description: _$$tx("activity_log.filter.outgoing_transfers")
+  description: renderI18nText("activity_log.filter.outgoing_transfers")
 }, {
   value: ["folder_transfer_received", "folder_transfer_copy_received", "folder_transfer_approved", "folder_transfer_copy_approved", "folder_import"],
-  description: _$$tx("activity_log.filter.incoming_transfers")
+  description: renderI18nText("activity_log.filter.incoming_transfers")
 }, {
   value: tL,
-  description: _$$tx("activity_log.filter.teams")
+  description: renderI18nText("activity_log.filter.teams")
 }, {
   value: ["team_create", "team_import"],
-  description: _$$tx("activity_log.filter.created_a_team")
+  description: renderI18nText("activity_log.filter.created_a_team")
 }, {
   value: ["team_delete", "team_export"],
-  description: _$$tx("activity_log.filter.deleted_a_team")
+  description: renderI18nText("activity_log.filter.deleted_a_team")
 }, {
   value: ["team_transfer_sent", "team_export"],
-  description: _$$tx("activity_log.filter.outgoing_transfers")
+  description: renderI18nText("activity_log.filter.outgoing_transfers")
 }, {
   value: ["team_transfer_received", "team_transfer_approved", "team_import"],
-  description: _$$tx("activity_log.filter.incoming_transfers")
+  description: renderI18nText("activity_log.filter.incoming_transfers")
 }, {
   value: ["team_restore"],
-  description: _$$tx("activity_log.filter.restored_a_team")
+  description: renderI18nText("activity_log.filter.restored_a_team")
 }, {
   value: ["team_member_add", "team_member_permission_change", "team_member_remove"],
-  description: _$$tx("activity_log.filter.team_membership_changed")
+  description: renderI18nText("activity_log.filter.team_membership_changed")
 }, {
   value: ["team_rename"],
-  description: _$$tx("activity_log.filter.renamed_a_team")
+  description: renderI18nText("activity_log.filter.renamed_a_team")
 }, {
   value: ["team_org_access_change"],
-  description: _$$tx("activity_log.filter.changed_the_org_access_of_a_team")
+  description: renderI18nText("activity_log.filter.changed_the_org_access_of_a_team")
 }, {
   value: ["team_license_group_change", "team_workspace_change"],
-  description: _$$tx("activity_log.filter.changed_the_workspace_of_a_team")
+  description: renderI18nText("activity_log.filter.changed_the_workspace_of_a_team")
 }, {
   value: ["org_team_creation_controls"],
-  description: _$$tx("activity_log.filter.changed_team_creation_controls")
+  description: renderI18nText("activity_log.filter.changed_team_creation_controls")
 }, {
   value: tL,
-  description: _$$tx("activity_log.filter.organizations")
+  description: renderI18nText("activity_log.filter.organizations")
 }, {
   value: ["org_merge"],
-  description: _$$tx("activity_log.filter.org_merged")
+  description: renderI18nText("activity_log.filter.org_merged")
 }, {
   value: ["org_user_create", "org_user_permission_change", "org_user_delete"],
-  description: _$$tx("activity_log.filter.org_membership_changed")
+  description: renderI18nText("activity_log.filter.org_membership_changed")
 }, {
   value: ["roster_exported"],
-  description: _$$tx("activity_log.filter.exported_the_members_list")
+  description: renderI18nText("activity_log.filter.exported_the_members_list")
 }, {
   value: ["org_team_csv_exported"],
-  description: _$$tx("activity_log.filter.exported_the_org_team_list")
+  description: renderI18nText("activity_log.filter.exported_the_org_team_list")
 }, {
   value: ["workspace_team_csv_exported"],
-  description: _$$tx("activity_log.filter.exported_the_workspace_team_list")
+  description: renderI18nText("activity_log.filter.exported_the_workspace_team_list")
 }, ...(e ? tV : []), {
   value: ["org_invite_create"],
-  description: _$$tx("activity_log.filter.org_invite_created")
+  description: renderI18nText("activity_log.filter.org_invite_created")
 }, {
   value: ["org_auto_approval_setting_update"],
   description: jsx(Fragment, {
-    children: _$$tx("activity_log.filter.auto_approval_settings_updated")
+    children: renderI18nText("activity_log.filter.auto_approval_settings_updated")
   })
 }, {
   value: ["cursor_chat_setting_change"],
-  description: _$$tx("activity_log.filter.cursor_chat_setting_change")
+  description: renderI18nText("activity_log.filter.cursor_chat_setting_change")
 }, ...(e ? [{
   value: ["idle_timeout_setting_change"],
-  description: _$$tx("activity_log.filter.idle_timeout_setting_change")
+  description: renderI18nText("activity_log.filter.idle_timeout_setting_change")
 }] : []), ...(e && t.shared_container_setting?.configured_upgrade_request_setting ? [{
   value: ["configurable_upgrade_request_setting_change", "configurable_upgrade_request_message_change"],
-  description: _$$tx("activity_log.filter.configurable_upgrade_request_flow_changed")
+  description: renderI18nText("activity_log.filter.configurable_upgrade_request_flow_changed")
 }] : []), {
   value: ["scim_token_generate", "scim_token_revoke"],
-  description: _$$tx("activity_log.filter.scim_token_generated_revoked")
+  description: renderI18nText("activity_log.filter.scim_token_generated_revoked")
 }, {
   value: ["ai_features_enable", "ai_features_disable"],
-  description: _$$tx("activity_log.filter.ai_features_setting_change")
+  description: renderI18nText("activity_log.filter.ai_features_setting_change")
 }, {
   value: ["ai_content_training_enable", "ai_content_training_disable"],
-  description: _$$tx("activity_log.filter.ai_content_training_setting_change")
+  description: renderI18nText("activity_log.filter.ai_content_training_setting_change")
 }, {
   value: ["seats_renew"],
-  description: _$$tx("activity_log.filter.seats_renew")
+  description: renderI18nText("activity_log.filter.seats_renew")
 }, ...(e && a ? [{
   value: ["mfa_required_setting_change"],
-  description: _$$tx("activity_log.filter.mfa_required_setting_change")
+  description: renderI18nText("activity_log.filter.mfa_required_setting_change")
 }] : []), {
   value: tL,
-  description: _$$tx("activity_log.filter.seat_changes")
+  description: renderI18nText("activity_log.filter.seat_changes")
 }, {
   value: ["org_default_license_type_change"],
-  description: _$$tx("activity_log.filter.changed_default_role.seat_rename")
+  description: renderI18nText("activity_log.filter.changed_default_role.seat_rename")
 }, {
   value: ["org_user_account_type_upgrade_requested", "org_user_account_type_upgrade_approved", "org_user_account_type_upgrade_denied", "provisional_access_start", "provisional_access_end_request_approved", "provisional_access_end_request_denied", "provisional_access_end_new_request"],
-  description: _$$tx("activity_log.filter.upgrade_requests_and_activity")
+  description: renderI18nText("activity_log.filter.upgrade_requests_and_activity")
 }, {
   value: ["org_user_account_type_change", "org_user_account_type_change_to_full"],
-  description: _$$tx("activity_log.filter.org_role_changed.seat_rename")
+  description: renderI18nText("activity_log.filter.org_role_changed.seat_rename")
 }, ...(e ? tq.concat([{
   value: ["workspace_public_link_setting_change"],
-  description: _$$tx("activity_log.filter.changed_workspace_public_link_setting")
+  description: renderI18nText("activity_log.filter.changed_workspace_public_link_setting")
 }, {
   value: ["external_collaboration_controls_setting_change"],
-  description: _$$tx("activity_log.filter.external_collaboration_controls_setting_change")
+  description: renderI18nText("activity_log.filter.external_collaboration_controls_setting_change")
 }]) : tq), ...(e ? tB : []), ...(e ? tG : []), ...(t.can_use_multi_idp ? tY : []), ...(e ? tz : []), ...(e ? tF : []), {
   value: tL,
-  description: _$$tx("activity_log.filter.libraries")
+  description: renderI18nText("activity_log.filter.libraries")
 }, {
   value: ["org_library_setting_change"],
-  description: _$$tx("activity_log.filter.org_library_setting_changed")
+  description: renderI18nText("activity_log.filter.org_library_setting_changed")
 }, ...(e ? t$ : []), ...(e && Oe(t) ? [{
   value: ["workspace_library_approve", "workspace_library_unapprove"],
-  description: _$$tx("activity_log.filter.workspace_library_approval_changed")
+  description: renderI18nText("activity_log.filter.workspace_library_approval_changed")
 }] : []), ...(e && Oe(t) ? [{
   value: ["org_library_approve", "org_library_unapprove"],
-  description: _$$tx("activity_log.filter.org_library_approval_changed")
+  description: renderI18nText("activity_log.filter.org_library_approval_changed")
 }] : []), {
   value: tL,
-  description: _$$tx("activity_log.filter.users")
+  description: renderI18nText("activity_log.filter.users")
 }, ...(e ? [{
   value: ["user_idle_session_timeout"],
-  description: _$$tx("activity_log.filter.user_session_timed_out")
+  description: renderI18nText("activity_log.filter.user_session_timed_out")
 }] : []), {
   value: ["user_sign_in", "user_sign_out"],
-  description: _$$tx("activity_log.filter.user_signed_in_signed_out")
+  description: renderI18nText("activity_log.filter.user_signed_in_signed_out")
 }, {
   value: tL,
-  description: _$$tx("activity_log.filter.community")
+  description: renderI18nText("activity_log.filter.community")
 }, {
   value: ["community_hub_file_publish", "community_hub_file_update", "community_hub_file_delete"],
-  description: _$$tx("activity_log.filter.file_published_updated_deleted")
+  description: renderI18nText("activity_log.filter.file_published_updated_deleted")
 }, {
   value: ["community_plugin_publish", "community_plugin_update", "community_plugin_delete"],
-  description: _$$tx("activity_log.filter.plugin_published_updated_deleted")
+  description: renderI18nText("activity_log.filter.plugin_published_updated_deleted")
 }, {
   value: ["community_widget_publish", "community_widget_update", "community_widget_delete"],
-  description: _$$tx("activity_log.filter.widget_published_updated_deleted")
+  description: renderI18nText("activity_log.filter.widget_published_updated_deleted")
 }, {
   value: tL,
-  description: _$$tx("activity_log.filter.private_plugins")
+  description: renderI18nText("activity_log.filter.private_plugins")
 }, {
   value: ["private_plugin_publish"],
-  description: _$$tx("activity_log.filter.plugin_published")
+  description: renderI18nText("activity_log.filter.plugin_published")
 }, {
   value: ["private_plugin_update"],
-  description: _$$tx("activity_log.filter.plugin_updated")
+  description: renderI18nText("activity_log.filter.plugin_updated")
 }, {
   value: ["private_plugin_delete"],
-  description: _$$tx("activity_log.filter.plugin_deleted")
+  description: renderI18nText("activity_log.filter.plugin_deleted")
 }, {
   value: tL,
-  description: _$$tx("activity_log.filter.plugin_management")
+  description: renderI18nText("activity_log.filter.plugin_management")
 }, {
   value: ["plugin_approvelist_enable", "plugin_approvelist_disable"],
-  description: _$$tx("activity_log.filter.plugin_approve_list_setting_changed")
+  description: renderI18nText("activity_log.filter.plugin_approve_list_setting_changed")
 }, {
   value: ["plugin_approvelist_request_org"],
-  description: _$$tx("activity_log.filter.plugin_approve_list_requested")
+  description: renderI18nText("activity_log.filter.plugin_approve_list_requested")
 }, {
   value: ["plugin_approvelist_request_approve_org", "plugin_approvelist_request_reject_org", "plugin_approvelist_request_approve_workspace", "plugin_approvelist_request_reject_workspace", "plugin_approvelist_add", "plugin_approvelist_add_workspace", "plugin_approvelist_remove", "plugin_approvelist_remove_workspace"],
-  description: _$$tx("activity_log.filter.approve_list_plugins_reviewed")
+  description: renderI18nText("activity_log.filter.approve_list_plugins_reviewed")
 }, {
   value: ["plugin_install", "plugin_uninstall"],
-  description: _$$tx("activity_log.filter.install_plugins_org_wide")
+  description: renderI18nText("activity_log.filter.install_plugins_org_wide")
 }, {
   value: tL,
-  description: _$$tx("activity_log.filter.plugin_publishers")
+  description: renderI18nText("activity_log.filter.plugin_publishers")
 }, {
   value: ["plugin_publisher_accept_invite", "plugin_publisher_remove_invite"],
-  description: _$$tx("activity_log.filter.plugin_publisher_accept_remove_invite")
+  description: renderI18nText("activity_log.filter.plugin_publisher_accept_remove_invite")
 }, {
   value: ["plugin_publisher_invite"],
-  description: _$$tx("activity_log.filter.plugin_publisher_invite")
+  description: renderI18nText("activity_log.filter.plugin_publisher_invite")
 }, {
   value: ["plugin_publisher_remove"],
-  description: _$$tx("activity_log.filter.plugin_publisher_remove")
+  description: renderI18nText("activity_log.filter.plugin_publisher_remove")
 }, {
   value: ["plugin_ownership_transfer"],
-  description: _$$tx("activity_log.filter.plugin_ownership_transfer")
+  description: renderI18nText("activity_log.filter.plugin_ownership_transfer")
 }, {
   value: tL,
-  description: _$$tx("activity_log.filter.private_widgets")
+  description: renderI18nText("activity_log.filter.private_widgets")
 }, {
   value: ["private_widget_publish"],
-  description: _$$tx("activity_log.filter.widget_published")
+  description: renderI18nText("activity_log.filter.widget_published")
 }, {
   value: ["private_widget_update"],
-  description: _$$tx("activity_log.filter.widget_updated")
+  description: renderI18nText("activity_log.filter.widget_updated")
 }, {
   value: ["private_widget_delete"],
-  description: _$$tx("activity_log.filter.widget_deleted")
+  description: renderI18nText("activity_log.filter.widget_deleted")
 }, {
   value: tL,
-  description: _$$tx("activity_log.filter.widget_management")
+  description: renderI18nText("activity_log.filter.widget_management")
 }, {
   value: ["widgets_enabled", "widgets_disable"],
-  description: _$$tx("activity_log.filter.widget_approve_list_setting_changed")
+  description: renderI18nText("activity_log.filter.widget_approve_list_setting_changed")
 }, {
   value: ["widget_approvelist_request_org"],
-  description: _$$tx("activity_log.filter.widget_approve_list_requested")
+  description: renderI18nText("activity_log.filter.widget_approve_list_requested")
 }, {
   value: ["widget_approvelist_request_approve_org", "widget_approvelist_request_reject_org", "widget_approvelist_request_approve_workspace", "widget_approvelist_request_reject_workspace", "widget_approvelist_add", "widget_approvelist_add_workspace", "widget_approvelist_remove", "widget_approvelist_remove_workspace"],
-  description: _$$tx("activity_log.filter.approve_list_widgets_reviewed")
+  description: renderI18nText("activity_log.filter.approve_list_widgets_reviewed")
 }, {
   value: ["widget_install", "widget_uninstall"],
-  description: _$$tx("activity_log.filter.install_widgets_org_wide")
+  description: renderI18nText("activity_log.filter.install_widgets_org_wide")
 }, {
   value: tL,
-  description: _$$tx("activity_log.filter.widget_publishers")
+  description: renderI18nText("activity_log.filter.widget_publishers")
 }, {
   value: ["widget_publisher_accept_invite", "widget_publisher_remove_invite"],
-  description: _$$tx("activity_log.filter.widget_publisher_accept_remove_invite")
+  description: renderI18nText("activity_log.filter.widget_publisher_accept_remove_invite")
 }, {
   value: ["widget_publisher_invite"],
-  description: _$$tx("activity_log.filter.widget_publisher_invite")
+  description: renderI18nText("activity_log.filter.widget_publisher_invite")
 }, {
   value: ["widget_publisher_remove"],
-  description: _$$tx("activity_log.filter.widget_publisher_remove")
+  description: renderI18nText("activity_log.filter.widget_publisher_remove")
 }, {
   value: ["widget_ownership_transfer"],
-  description: _$$tx("activity_log.filter.widget_ownership_transfer")
+  description: renderI18nText("activity_log.filter.widget_ownership_transfer")
 }, ...tU, {
   value: tL,
-  description: _$$tx("activity_log.filter.audio")
+  description: renderI18nText("activity_log.filter.audio")
 }, {
   value: ["voice_call_join_req"],
-  description: _$$tx("activity_log.filter.user_joined_audio_call")
+  description: renderI18nText("activity_log.filter.user_joined_audio_call")
 }, {
   value: tL,
-  description: _$$tx("activity_log.filter.integrations")
+  description: renderI18nText("activity_log.filter.integrations")
 }, {
   value: ["personal_access_token_create", "personal_access_token_delete"],
-  description: _$$tx("activity_log.filter.personal_access_token_create_delete")
+  description: renderI18nText("activity_log.filter.personal_access_token_create_delete")
 }, {
   value: ["oauth_token_grant", "oauth_token_revoke"],
-  description: _$$tx("activity_log.filter.oauth_token_grant_revoke")
+  description: renderI18nText("activity_log.filter.oauth_token_grant_revoke")
 }, ...(p3() ? [{
   value: ["supabase_setting_change"],
-  description: _$$tx("activity_log.filter.supabase_setting_change")
+  description: renderI18nText("activity_log.filter.supabase_setting_change")
 }, {
   value: ["supabase_project_connected"],
-  description: _$$tx("activity_log.filter.supabase_project_connected")
+  description: renderI18nText("activity_log.filter.supabase_project_connected")
 }, {
   value: ["supabase_project_disconnected"],
-  description: _$$tx("activity_log.filter.supabase_project_disconnected")
+  description: renderI18nText("activity_log.filter.supabase_project_disconnected")
 }] : []), ...tW, ...tH, ...tP];
 let tX = [{
   value: {
     start: _$$A2().format("YYYY-MM-DD"),
     end: _$$A2().format("YYYY-MM-DD")
   },
-  description: _$$tx("activity_log.filter.today")
+  description: renderI18nText("activity_log.filter.today")
 }, {
   value: {
     start: _$$A2().subtract(1, "days").format("YYYY-MM-DD"),
     end: _$$A2().format("YYYY-MM-DD")
   },
-  description: _$$tx("activity_log.filter.yesterday")
+  description: renderI18nText("activity_log.filter.yesterday")
 }, {
   value: {
     start: _$$A2().subtract(7, "days").format("YYYY-MM-DD"),
     end: _$$A2().format("YYYY-MM-DD")
   },
-  description: _$$tx("activity_log.filter.last_week")
+  description: renderI18nText("activity_log.filter.last_week")
 }, {
   value: {
     start: _$$A2().subtract(30, "days").format("YYYY-MM-DD"),
     end: _$$A2().format("YYYY-MM-DD")
   },
-  description: _$$tx("activity_log.filter.last_month")
+  description: renderI18nText("activity_log.filter.last_month")
 }];
 function tQ(e) {
   return jsx("div", {
@@ -1340,7 +1340,7 @@ class tZ extends PureComponent {
       }
     }));
     this.props.dispatch(_$$F.enqueue({
-      message: _$$t("activity_log.table.preparing_request_for_csv"),
+      message: getI18nString("activity_log.table.preparing_request_for_csv"),
       type: "orgRoster.exportCSV",
       icon: zX.SPINNER
     }));
@@ -1353,13 +1353,13 @@ class tZ extends PureComponent {
       event_names: t.eventName?.join(",")
     }).then(() => {
       this.props.dispatch(_$$F.enqueue({
-        message: _$$t("activity_log.table.activity_log.table.csv_requested_success"),
+        message: getI18nString("activity_log.table.activity_log.table.csv_requested_success"),
         type: "orgRoster.exportCSV",
         icon: zX.CHECK
       }));
     }, e => {
       this.props.dispatch(_$$F.enqueue({
-        message: _$$J(e, e.data?.message) || _$$t("activity_log.table.csv_requested_error"),
+        message: _$$J(e, e.data?.message) || getI18nString("activity_log.table.csv_requested_error"),
         type: "orgRoster.exportCSV",
         icon: zX.EXCLAMATION,
         error: !0
@@ -1413,7 +1413,7 @@ class tZ extends PureComponent {
       }
     });
   };
-  canLoadMore = () => !(this.props.activityLogs.isLoading || 0 === this.props.activityLogs.logs.length || Im(this.props.activityLogs.cursor));
+  canLoadMore = () => !(this.props.activityLogs.isLoading || 0 === this.props.activityLogs.logs.length || isEmptyObject(this.props.activityLogs.cursor));
   handleScroll = () => {
     !this.canLoadMore() || this.scrollContainerRef.getScrollHeight() - (this.scrollContainerRef.getScrollTop() + this.scrollContainerRef.getTrackHeight()) > 300 || this.loadMore();
   };
@@ -1427,12 +1427,12 @@ class tZ extends PureComponent {
       className: "activity_logs_section--tableNavigation--44R60",
       children: this.props.activityLogs.isLoading && !this.props.activityLogs.isNewQuery ? jsx(qc, {}) : this.canLoadMore() && jsx($$, {
         onClick: this.loadMore,
-        children: _$$tx("activity_log.table.load_more")
+        children: renderI18nText("activity_log.table.load_more")
       })
     })]
   }) : jsx("div", {
     className: "activity_logs_section--emptyState--dpaiR",
-    children: _$$tx("activity_log.table.no_results_were_found")
+    children: renderI18nText("activity_log.table.no_results_were_found")
   });
   constructor(e) {
     let t;
@@ -1522,7 +1522,7 @@ class tZ extends PureComponent {
       children: [this.state.emails.tokens.length > 0 && jsx(t1, {}), !this.props.hideHeader && jsx(_$$K2, {
         title: _$$O(J7.ACTIVITY),
         rightActions: jsx(_$$K3, {
-          "aria-label": _$$t("activity_log.table.get_csv"),
+          "aria-label": getI18nString("activity_log.table.get_csv"),
           variant: "secondary",
           onClick: this.onRequestCSV,
           htmlAttributes: {
@@ -1566,22 +1566,22 @@ class tZ extends PureComponent {
               header: !0,
               children: [jsx("div", {
                 className: "activity_logs_section--dateHeaderColumn--vQM07 activity_logs_table--dateHeaderColumn--MAwXc activity_logs_table--date--HSpQ0",
-                children: _$$tx("activity_log.table.date")
+                children: renderI18nText("activity_log.table.date")
               }), jsx("div", {
                 className: "activity_logs_section--actorHeaderColumn--1DUMW activity_logs_table--actorHeaderColumn--LWBMR activity_logs_table--_actor--MBVmV",
-                children: _$$tx("activity_log.table.team_member")
+                children: renderI18nText("activity_log.table.team_member")
               }), jsx("div", {
                 className: "activity_logs_section--eventDescriptionColumn--2kBTN activity_logs_table--eventDescriptionColumn--iVdqK",
-                children: _$$tx("activity_log.table.event")
+                children: renderI18nText("activity_log.table.event")
               }), jsx("div", {
                 className: "activity_logs_section--productColumn--C4Led activity_logs_table--productColumn--Rdwla",
-                children: _$$tx("activity_log.table.product")
+                children: renderI18nText("activity_log.table.product")
               }), jsx("div", {
                 className: "activity_logs_section--teamColumn--jRrW- activity_logs_table--teamColumn--byNbw",
-                children: _$$tx("activity_log.table.team")
+                children: renderI18nText("activity_log.table.team")
               }), !this.props.hideIpColumn && jsx("div", {
                 className: "activity_logs_section--ipColumn--JYWzR activity_logs_table--ipColumn--yvwN5",
-                children: _$$tx("activity_log.table.ip_address")
+                children: renderI18nText("activity_log.table.ip_address")
               })]
             })]
           }), this.renderLogResults()]
@@ -1618,13 +1618,13 @@ function t0(e) {
     className: "activity_logs_section--menuBar--UAHjd multi_select_list--menuBar--8xNGR",
     children: jsxs("div", {
       className: "activity_logs_section--menuBarLeft--4iFuQ multi_select_list--menuBarLeft--aUL8Q",
-      children: [!rr && jsx(_$$p, {
+      children: [!isMobileUA && jsx(_$$p, {
         children: jsx(tv, {})
       }), jsx(_$$P2, {
         onboardingKey: Ks,
         containerClassName: "activity_logs_section--emailInput--Jo-V5",
         autocomplete: e.filtersConfig.emails,
-        placeholder: _$$t("activity_log.table.member_email_addresses"),
+        placeholder: getI18nString("activity_log.table.member_email_addresses"),
         onChange: e.onEmailInputChange,
         validateToken: e => ({
           state: xf(e) ? _$$d2.OK : _$$d2.ERROR,
@@ -1637,7 +1637,7 @@ function t0(e) {
           showingDropdown: _,
           type: n,
           dispatch: e.dispatch,
-          children: [u ? u.description : _$$t("activity_log.filter.custom"), _ && jsx("div", {
+          children: [u ? u.description : getI18nString("activity_log.filter.custom"), _ && jsx("div", {
             className: tA,
             style: e.dropdownShown.data.position,
             children: jsxs(gw, {
@@ -1651,9 +1651,9 @@ function t0(e) {
                 checked: !u,
                 onClick: () => e.onDateOptionClick({
                   value: null,
-                  description: _$$tx("activity_log.filter.custom")
+                  description: renderI18nText("activity_log.filter.custom")
                 }),
-                children: _$$tx("activity_log.filter.custom")
+                children: renderI18nText("activity_log.filter.custom")
               })]
             })
           })]
@@ -1668,9 +1668,9 @@ function t0(e) {
         showingDropdown: d,
         type: t,
         dispatch: e.dispatch,
-        children: [null === e.filtersConfig.event.value ? _$$t("activity_log.table.events_all") : jsx("span", {
+        children: [null === e.filtersConfig.event.value ? getI18nString("activity_log.table.events_all") : jsx("span", {
           className: "activity_logs_section--eventSelector--kR3tI ellipsis--ellipsis--Tjyfa",
-          children: _$$tx("activity_log.table.event_selected", {
+          children: renderI18nText("activity_log.table.event_selected", {
             event: e.filtersConfig.event.description
           })
         }), d && jsx("div", {
@@ -1707,7 +1707,7 @@ function t0(e) {
         showingDropdown: c,
         type: a,
         dispatch: e.dispatch,
-        children: [null === e.filtersConfig.team ? _$$t("activity_log.table.teams_all") : _$$t("activity_log.table.team_selected", {
+        children: [null === e.filtersConfig.team ? getI18nString("activity_log.table.teams_all") : getI18nString("activity_log.table.team_selected", {
           team: EJ(e.filtersConfig.team.name, 21)
         }), c && jsx("div", {
           className: tA,
@@ -1718,7 +1718,7 @@ function t0(e) {
             children: [jsx(MM, {
               checked: null === e.filtersConfig.team,
               onClick: () => e.onTeamClick(null),
-              children: _$$tx("activity_log.table.all")
+              children: renderI18nText("activity_log.table.all")
             }), jsx(wv, {}), e.orgTeams.map(t => jsx(MM, {
               checked: e.filtersConfig.team === t,
               onClick: () => e.onTeamClick(t),
@@ -1729,7 +1729,7 @@ function t0(e) {
       }), e.showClearButton && jsx(_$$nR, {
         className: "activity_logs_section--clearButton--3duaF",
         onClick: () => e.clearFilter(),
-        children: _$$tx("activity_log.table.clear")
+        children: renderI18nText("activity_log.table.clear")
       }), o && jsxs(Fragment, {
         children: [jsx("div", {
           className: "activity_logs_section--flexBreak--AVIFi"
@@ -1749,13 +1749,13 @@ function t1() {
   return null;
 }
 tZ.displayName = "ActivityLogsPage";
-let t7 = _$$eU(!1);
+let t7 = atom(!1);
 let t9 = "seen_org_admin_billing_groups_onboarding";
 let ae = rn("org_admin_license_groups_onboarding", _$$R(O5v));
 let at = r1(t9);
 function aa() {
-  let e = md(at);
-  let t = md(t7);
+  let e = useAtomWithSubscription(at);
+  let t = useAtomWithSubscription(t7);
   let {
     isShowing,
     show,
@@ -1768,30 +1768,30 @@ function aa() {
   let l = zl(ae);
   _$$h(() => {
     "reset" === l.currentState ? show() : show({
-      canShow: e => !e && !rr
+      canShow: e => !e && !isMobileUA
     });
   });
   _$$E2(uniqueId, "Reset Onboarding", () => show());
   let o = [];
   t || o.push({
-    title: _$$tx("org_admin_onboarding.billing_groups.tooltip.create.title"),
-    description: _$$tx("org_admin_onboarding.billing_groups.tooltip.create.description.seat_rename"),
+    title: renderI18nText("org_admin_onboarding.billing_groups.tooltip.create.title"),
+    description: renderI18nText("org_admin_onboarding.billing_groups.tooltip.create.description.seat_rename"),
     trackingContextName: `${gx} - create`,
     targetKey: Iq,
     emphasized: !0,
     clickOutsideToHide: !0
   });
   o.push({
-    title: _$$tx("org_admin_onboarding.billing_groups.add_members.title"),
-    description: _$$tx("org_admin_onboarding.billing_groups.add_members.description"),
+    title: renderI18nText("org_admin_onboarding.billing_groups.add_members.title"),
+    description: renderI18nText("org_admin_onboarding.billing_groups.add_members.description"),
     trackingContextName: `${gx} - click`,
     targetKey: Bq,
     emphasized: !0,
     clickOutsideToHide: !0
   });
   o.push({
-    title: _$$tx("org_admin_onboarding.billing_groups.tooltip.edit.title"),
-    description: _$$tx("org_admin_onboarding.billing_groups.tooltip.edit.description"),
+    title: renderI18nText("org_admin_onboarding.billing_groups.tooltip.edit.title"),
+    description: renderI18nText("org_admin_onboarding.billing_groups.tooltip.edit.description"),
     trackingContextName: `${gx} - edit`,
     targetKey: Pz,
     emphasized: !0,
@@ -1831,7 +1831,7 @@ let aw = Ju(function (e) {
           }) => {
             t(_$$F.enqueue({
               type: "license-group-delete",
-              message: _$$t("billing_groups_table.billing_groups_deleted_toast", {
+              message: getI18nString("billing_groups_table.billing_groups_deleted_toast", {
                 licenseGroupsCount: e.licenseGroups.length,
                 licenseGroupName: e.licenseGroups[0]?.name ?? ""
               })
@@ -1844,13 +1844,13 @@ let aw = Ju(function (e) {
           }).catch(e => {
             t(_$$F.enqueue({
               error: !0,
-              message: e.message ?? _$$t("billing_groups_table.delete_modal.an_error_occurred_while_deleting_billing_groups")
+              message: e.message ?? getI18nString("billing_groups_table.delete_modal.an_error_occurred_while_deleting_billing_groups")
             }));
           });
         } : lQ,
         children: [jsx(Y9, {
           children: jsx(hE, {
-            children: _$$t("billing_groups_table.delete_n_billing_groups", {
+            children: getI18nString("billing_groups_table.delete_n_billing_groups", {
               licenseGroupsCount: e.licenseGroups.length
             })
           })
@@ -1859,7 +1859,7 @@ let aw = Ju(function (e) {
             direction: "vertical",
             spacing: 16,
             children: [jsx("h3", {
-              children: _$$tx("billing_groups_table.delete_modal.deleting_the_billing_groups_will_cause", {
+              children: renderI18nText("billing_groups_table.delete_modal.deleting_the_billing_groups_will_cause", {
                 licenseGroupsCount: e.licenseGroups.length,
                 licenseGroupsNames: jsx(_$$E, {
                   fontWeight: "bold",
@@ -1868,7 +1868,7 @@ let aw = Ju(function (e) {
               })
             }), jsx("span", {
               className: "x1xlr1w8",
-              children: _$$t("billing_groups_table.delete_modal.are_you_sure_you_want_to_delete_these_billing_groups", {
+              children: getI18nString("billing_groups_table.delete_modal.are_you_sure_you_want_to_delete_these_billing_groups", {
                 licenseGroupsCount: e.licenseGroups.length
               })
             })]
@@ -1876,7 +1876,7 @@ let aw = Ju(function (e) {
             className: "xehsoiq",
             children: jsx(_$$S2, {
               label: jsx(_$$J2, {
-                children: _$$tx("billing_groups_table.delete_modal.i_understand_that_this_action_isnt_reversible")
+                children: renderI18nText("billing_groups_table.delete_modal.i_understand_that_this_action_isnt_reversible")
               }),
               checked: _,
               onChange: () => u(!_)
@@ -1887,12 +1887,12 @@ let aw = Ju(function (e) {
             children: [jsx($n, {
               variant: "secondary",
               onClick: e.onClose,
-              children: _$$tx("general.cancel")
+              children: renderI18nText("general.cancel")
             }), jsx($z, {
               variant: "destructive",
               disabled: !_,
               type: "submit",
-              children: _$$t("billing_groups_table.delete_n_billing_groups", {
+              children: getI18nString("billing_groups_table.delete_n_billing_groups", {
                 licenseGroupsCount: e.licenseGroups.length
               })
             })]
@@ -1915,7 +1915,7 @@ function aC({
 }) {
   let c = !!e;
   return jsx(OJ, {
-    title: c ? _$$t("billing_groups_table.edit_billing_group_title") : _$$t("billing_groups_table.create_billing_group_title"),
+    title: c ? getI18nString("billing_groups_table.edit_billing_group_title") : getI18nString("billing_groups_table.create_billing_group_title"),
     onClose: l,
     minWidth: 500,
     children: jsxs(_$$Y, {
@@ -1926,13 +1926,13 @@ function aC({
         direction: "vertical",
         spacing: 0,
         children: [jsx(_$$E, {
-          children: _$$tx("billing_groups_table.edit_billing_group_modal.add_people_to_a_billing_group.seat_rename")
+          children: renderI18nText("billing_groups_table.edit_billing_group_modal.add_people_to_a_billing_group.seat_rename")
         }), jsx(CY, {
           trusted: !0,
           target: "_blank",
           href: "https://help.figma.com/hc/articles/19100885191191",
           children: jsx(_$$E, {
-            children: _$$tx("general.learn_more")
+            children: renderI18nText("general.learn_more")
           })
         })]
       }), jsx("label", {
@@ -1943,13 +1943,13 @@ function aC({
           spacing: 8,
           children: [jsx(_$$E, {
             fontWeight: "medium",
-            children: _$$tx("billing_groups_table.name_input")
+            children: renderI18nText("billing_groups_table.name_input")
           }), jsx(ks, {
             autoFocus: !0,
             className: e4()("license_group_edit_modal--inputFieldFullWidth--5e5TD license_group_edit_modal--inputField--G3ewv", {
               "license_group_edit_modal--inputFieldWithError--d-g82": r
             }),
-            placeholder: _$$t("billing_groups_table.name_input_placeholder"),
+            placeholder: getI18nString("billing_groups_table.name_input_placeholder"),
             onChange: e => {
               n(e.currentTarget.value);
               i(e.currentTarget.value);
@@ -1958,26 +1958,26 @@ function aC({
             maxLength: TA
           }), "unassigned" === r && jsx(_$$E, {
             color: "danger",
-            children: _$$tx("billing_groups_table.billing_group_name_unassigned_error")
+            children: renderI18nText("billing_groups_table.billing_group_name_unassigned_error")
           }), "duplicated" === r && jsx(_$$E, {
             color: "danger",
-            children: _$$tx("billing_groups_table.billing_group_name_already_exists_error")
+            children: renderI18nText("billing_groups_table.billing_group_name_already_exists_error")
           })]
         })
       }), jsxs("label", {
         className: _$$s.wFull.$,
         children: [jsx("span", {
           className: "license_group_edit_modal--inputLabel--ir31K",
-          children: _$$tx("billing_groups_table.admins_input")
+          children: renderI18nText("billing_groups_table.admins_input")
         }), jsx("div", {
           children: jsx(_$$E, {
             color: "secondary",
-            children: _$$tx("billing_groups_table.admins_input_help_text")
+            children: renderI18nText("billing_groups_table.admins_input_help_text")
           })
         }), jsx("div", {
           className: _$$s.mt8.relative.$,
           children: jsx(_$$g4, {
-            placeholder: _$$t("billing_groups_table.admin_input_placeholder"),
+            placeholder: getI18nString("billing_groups_table.admin_input_placeholder"),
             autocomplete: t,
             onAutocompleteChange: o
           })
@@ -1986,7 +1986,7 @@ function aC({
         className: _$$s.flex.justifyEnd.wFull.$,
         children: [jsx(_$$nR, {
           onClick: l,
-          children: _$$tx("general.cancel")
+          children: renderI18nText("general.cancel")
         }), jsx(fu, {
           name: "License Group Modal Submit",
           properties: {
@@ -1996,7 +1996,7 @@ function aC({
             className: "license_group_edit_modal--submitButton--mwVBh",
             onClick: d,
             disabled: !!r || !a.length || 0 === t.tokens.length,
-            children: c ? _$$tx("billing_groups_table.billing_group_edit_save_changes") : _$$tx("billing_groups_table.create_billing_group_button")
+            children: c ? renderI18nText("billing_groups_table.billing_group_edit_save_changes") : renderI18nText("billing_groups_table.create_billing_group_button")
           })
         })]
       })]
@@ -2024,7 +2024,7 @@ let aS = Ju(function (e) {
     tokens: m
   } : _$$Rs());
   let h = useCallback(t => {
-    _$$sx("Workspace admin search performed", {
+    trackEventAnalytics("Workspace admin search performed", {
       orgId: o?.id,
       licenseGroupId: e.licenseGroup?.id,
       queryLength: t.inputValue.length
@@ -2050,7 +2050,7 @@ let aS = Ju(function (e) {
     hasError: a,
     licenseGroup: e.licenseGroup,
     onClose: () => {
-      _$$sx("CTA Clicked", {
+      trackEventAnalytics("CTA Clicked", {
         name: "License Group Modal Cancel",
         licenseGroupId: e.licenseGroup?.id,
         orgId: l
@@ -2064,9 +2064,9 @@ let aS = Ju(function (e) {
         let a = !u && 0 === d.length;
         t(_$$F.enqueue({
           type: "license-group-edit",
-          message: u ? _$$t("billing_groups_table.billing_group_edited_toast", {
+          message: u ? getI18nString("billing_groups_table.billing_group_edited_toast", {
             workspaceName: x
-          }) : _$$t("billing_groups_table.billing_group_created_toast", {
+          }) : getI18nString("billing_groups_table.billing_group_created_toast", {
             workspaceName: x
           })
         }));
@@ -2075,7 +2075,7 @@ let aS = Ju(function (e) {
           licenseGroup: e.meta,
           orgId: l
         }));
-        a && (_$$sx("First License Group Created", {
+        a && (trackEventAnalytics("First License Group Created", {
           licenseGroupId: e.meta?.id,
           orgId: l
         }), _(!0));
@@ -2114,18 +2114,18 @@ function aN({
             }
           }));
         },
-        label: _$$t("billing_groups_table.edit_details")
+        label: getI18nString("billing_groups_table.edit_details")
       }), jsx(IU, {
         onClick: () => {
           t(_$$sf({
             view: "licenseGroup",
-            subView: GN.ADMIN,
+            subView: UserRole.ADMIN,
             licenseGroupId: e[0].id,
-            selectedTab: RM.MEMBERS,
+            selectedTab: GroupType.MEMBERS,
             orgAdminOriginTab: J7.BILLING
           }));
         },
-        label: _$$t("billing_groups_table.manage")
+        label: getI18nString("billing_groups_table.manage")
       })]
     }), jsx(IU, {
       onClick: () => t(_$$to({
@@ -2134,7 +2134,7 @@ function aN({
           licenseGroups: e.filter(e => !!e.id)
         }
       })),
-      label: _$$t("general.delete")
+      label: getI18nString("general.delete")
     })]
   });
 }
@@ -2154,18 +2154,18 @@ function aR({
           }
         }));
       },
-      children: _$$t("billing_groups_table.edit_details")
+      children: getI18nString("billing_groups_table.edit_details")
     }, "license-group-edit-action"), jsx(_$$p3, {
       onClick: () => {
         t(_$$sf({
           view: "licenseGroup",
-          subView: GN.ADMIN,
+          subView: UserRole.ADMIN,
           licenseGroupId: e.id,
-          selectedTab: RM.MEMBERS,
+          selectedTab: GroupType.MEMBERS,
           orgAdminOriginTab: J7.BILLING
         }));
       },
-      children: _$$t("billing_groups_table.manage")
+      children: getI18nString("billing_groups_table.manage")
     }, "license-group-manage-action"), jsx(_$$p3, {
       onClick: () => {
         t(_$$to({
@@ -2175,7 +2175,7 @@ function aR({
           }
         }));
       },
-      children: _$$t("general.delete")
+      children: getI18nString("general.delete")
     }, "license-group-delete-action")]
   }) : null;
 }
@@ -2217,7 +2217,7 @@ function aU(e) {
   let c = MX();
   let _ = yM();
   let u = [{
-    name: _$$t("billing_groups_table.column_header.name"),
+    name: getI18nString("billing_groups_table.column_header.name"),
     className: "license_groups_table--nameColumn--LEWms license_groups_table--column--KDz0m table--column--974RA",
     getSortValue: e => e.id ? e.name : "0",
     cellComponent: e => e.id ? jsx("div", {
@@ -2227,14 +2227,14 @@ function aU(e) {
       spacing: 4,
       padding: 0,
       children: [jsx(_$$E, {
-        children: _$$tx("workspace_table.unassigned")
+        children: renderI18nText("workspace_table.unassigned")
       }), jsx(_$$E, {
         color: "secondary",
-        children: _$$tx("workspace_table.unassigned_row_default")
+        children: renderI18nText("workspace_table.unassigned_row_default")
       })]
     })
   }, {
-    name: _$$t("billing_groups_table.column_header.admins"),
+    name: getI18nString("billing_groups_table.column_header.admins"),
     className: "license_groups_table--adminColumn--u-0gw license_groups_table--column--KDz0m table--column--974RA",
     cellComponent: t => {
       let a = t.id ? t.admin_users_metadata : [];
@@ -2256,22 +2256,22 @@ function aU(e) {
       });
     }
   }, {
-    name: _$$t("billing_groups_table.column_header.members"),
+    name: getI18nString("billing_groups_table.column_header.members"),
     className: "license_groups_table--membersColumn--3Z-23 license_groups_table--column--KDz0m table--column--974RA",
-    cellComponent: t => _$$tx("billing_groups_table.n_members", {
+    cellComponent: t => renderI18nText("billing_groups_table.n_members", {
       count: e.licenseGroupMemberCounts[t.id ?? _$$s2]?.total_count ?? 0
     }),
     getSortValue: t => e.licenseGroupMemberCounts[t.id ?? _$$s2]?.total_count ?? 0,
     sortNumerically: !0
   }, ...N_.sort(AG).map(t => ({
-    name: _$$t("billing_groups_table.column_header.seats", {
+    name: getI18nString("billing_groups_table.column_header.seats", {
       seatType: _$$tI(t)
     }),
     className: "license_groups_table--licenseCountsColumn--wVXQD license_groups_table--column--KDz0m table--column--974RA",
     cellComponent: a => {
       let n = e.licenseGroupMemberCounts[a.id ?? _$$s2]?.editor_counts?.[t] ?? 0;
       return jsx("div", {
-        children: _$$tx("billing_groups_table.n_editors.seat_rename", {
+        children: renderI18nText("billing_groups_table.n_editors.seat_rename", {
           count: n
         })
       });
@@ -2280,7 +2280,7 @@ function aU(e) {
     sortNumerically: !0
   }))];
   e.invoices && hX(e.invoices) && u.splice(1, 0, {
-    name: _$$t("billing_groups_table.column_header.true_up_status"),
+    name: getI18nString("billing_groups_table.column_header.true_up_status"),
     className: "license_groups_table--trueUpColumn--YW1JC license_groups_table--column--KDz0m table--column--974RA",
     getSortValue: t => t.id ? `${NV(t, e.invoices) ? "c" : "b"}${t.name}` : "a",
     cellComponent: t => {
@@ -2294,7 +2294,7 @@ function aU(e) {
           className: _$$s.mr8.$,
           size: 8,
           color: a ? _.colorTextSuccess : _.colorTextWarning
-        }), a ? _$$t("billing_groups_table.confirmed") : _$$t("billing_groups_table.unconfirmed")]
+        }), a ? getI18nString("billing_groups_table.confirmed") : getI18nString("billing_groups_table.unconfirmed")]
       });
     }
   });
@@ -2324,14 +2324,14 @@ function aU(e) {
         headerClassName: aA
       })),
       emptyContent: jsx(_$$p2, {
-        children: n ? _$$t("billing_groups_table.search.no_results") : _$$t("billing_groups_table.filter.no_results")
+        children: n ? getI18nString("billing_groups_table.search.no_results") : getI18nString("billing_groups_table.filter.no_results")
       }),
       getItemKey: aM,
       hasNewScrollContext: !0,
       isBannerHeightDynamic: !0,
       itemTypeContext: {
         itemType: "billing group",
-        getSelectedCountString: e => _$$t("multi_select_list.selected_count_billing_groups", {
+        getSelectedCountString: e => getI18nString("multi_select_list.selected_count_billing_groups", {
           numSelected: e
         })
       },
@@ -2341,8 +2341,8 @@ function aU(e) {
         e.id && t(_$$sf({
           licenseGroupId: e.id,
           view: "licenseGroup",
-          subView: GN.ADMIN,
-          selectedTab: RM.MEMBERS,
+          subView: UserRole.ADMIN,
+          selectedTab: GroupType.MEMBERS,
           orgAdminOriginTab: J7.BILLING
         }));
       },
@@ -2357,7 +2357,7 @@ function aU(e) {
       scrollAwayContent: e.scrollAwayContent,
       sortState: h,
       stickyContent: jsxs(Fragment, {
-        children: [!rr && !a && c.length > 0 && jsx(_$$p, {
+        children: [!isMobileUA && !a && c.length > 0 && jsx(_$$p, {
           children: jsx(aa, {})
         }), e.stickyContent, jsxs(_$$Y, {
           strokeColor: "default",
@@ -2373,7 +2373,7 @@ function aU(e) {
             onChange: l,
             query: n,
             clearSearch: () => l(""),
-            placeholder: _$$t("billing_groups_table.search.placeholder")
+            placeholder: getI18nString("billing_groups_table.search.placeholder")
           }), e.invoices && hX(e.invoices) && jsx(_$$S, {
             checked: o,
             onChange: () => d(e => !e),
@@ -2384,7 +2384,7 @@ function aU(e) {
               children: [jsx(aL, {
                 count: g
               }), jsx(_$$E, {
-                children: _$$tx("billing_groups_table.unconfirmed_billing_groups")
+                children: renderI18nText("billing_groups_table.unconfirmed_billing_groups")
               })]
             })
           })]
@@ -2413,7 +2413,7 @@ function a$(e) {
           type: aS
         }));
       },
-      children: _$$t("billing_groups_table.plus_billing_group")
+      children: getI18nString("billing_groups_table.plus_billing_group")
     })
   });
 }
@@ -2436,7 +2436,7 @@ function aB({
     children: [jsx(_$$E, {
       fontWeight: "semi-bold",
       color: "secondary",
-      children: _$$tx("org_admin_settings.billing.no_billing_groups_yet")
+      children: renderI18nText("org_admin_settings.billing.no_billing_groups_yet")
     }), jsx("div", {
       className: _$$s.pb8.alignCenter.$,
       style: _$$sx2.add({
@@ -2444,13 +2444,13 @@ function aB({
       }).$,
       children: jsx(_$$E, {
         color: "secondary",
-        children: _$$tx("org_admin_settings.billing.billing_groups_empty_text.seat_rename", {
+        children: renderI18nText("org_admin_settings.billing.billing_groups_empty_text.seat_rename", {
           learnMoreLink: jsx(CY, {
             trusted: !0,
             target: "_blank",
             href: "https://help.figma.com/hc/articles/19100885191191",
             children: jsx(_$$E, {
-              children: _$$tx("general.learn_more")
+              children: renderI18nText("general.learn_more")
             })
           })
         })
@@ -2690,13 +2690,13 @@ function ni(e) {
           }
         })
       }), jsx("div", {
-        children: _$$tx("org_admin_settings.billing_banner_figjam.due_date_message", {
+        children: renderI18nText("org_admin_settings.billing_banner_figjam.due_date_message", {
           dueDate: _$$A2(e.issuedAt).format("MMM D"),
           pastDueDate: _$$A2(e.pastDueAt).format("MMM D"),
           differenceDays: t,
           payInvoiceLink: jsx("button", {
             onClick: () => {
-              e.hostedInvoiceUrl ? FJ(e.hostedInvoiceUrl, "_blank", "noopener") : $D(_$$e.BILLING_EXPERIENCE, Error("PayBanner: missing hosted invoice url"), {
+              e.hostedInvoiceUrl ? FJ(e.hostedInvoiceUrl, "_blank", "noopener") : reportError(_$$e.BILLING_EXPERIENCE, Error("PayBanner: missing hosted invoice url"), {
                 extra: {
                   orgId: e.orgId,
                   invoiceId: e.invoiceId
@@ -2704,7 +2704,7 @@ function ni(e) {
               });
             },
             className: ns,
-            children: _$$tx("org_admin_settings.billing_banner_figjam.pay_invoice")
+            children: renderI18nText("org_admin_settings.billing_banner_figjam.pay_invoice")
           })
         })
       })]
@@ -2727,14 +2727,14 @@ function nr(e) {
           }
         })
       }), jsx("div", {
-        children: _$$tx("org_admin_settings.billing_banner_figjam.invoice_overdue", {
+        children: renderI18nText("org_admin_settings.billing_banner_figjam.invoice_overdue", {
           dueDate: _$$A2(e.issuedAt).format("MMM D"),
           amount: t.formatMoney(e.total, {
             showCents: e.showCents
           }),
           payInvoiceLink: jsx("button", {
             onClick: () => {
-              e.hostedInvoiceUrl ? FJ(e.hostedInvoiceUrl, "_blank", "noopener") : $D(_$$e.BILLING_EXPERIENCE, Error("PastDueBanner: missing hosted invoice url"), {
+              e.hostedInvoiceUrl ? FJ(e.hostedInvoiceUrl, "_blank", "noopener") : reportError(_$$e.BILLING_EXPERIENCE, Error("PastDueBanner: missing hosted invoice url"), {
                 extra: {
                   orgId: e.orgId,
                   invoiceId: e.invoiceId
@@ -2742,7 +2742,7 @@ function nr(e) {
               });
             },
             className: ns,
-            children: _$$tx("org_admin_settings.billing_banner_figjam.pay_invoice")
+            children: renderI18nText("org_admin_settings.billing_banner_figjam.pay_invoice")
           })
         })
       })]
@@ -2841,13 +2841,13 @@ var nh = (e => (e[e.BROWSING = 0] = "BROWSING", e[e.PROMPT = 1] = "PROMPT", e[e.
 let nx = e => {
   switch (e) {
     case 0:
-      return _$$tx("workspace.create_confirmation_modal.description.list.browsing");
+      return renderI18nText("workspace.create_confirmation_modal.description.list.browsing");
     case 1:
-      return _$$tx("workspace.create_confirmation_modal.description.list.prompt");
+      return renderI18nText("workspace.create_confirmation_modal.description.list.prompt");
     case 2:
-      return _$$tx("workspace.create_confirmation_modal.description.list.search");
+      return renderI18nText("workspace.create_confirmation_modal.description.list.search");
     case 3:
-      return _$$tx("workspace.create_confirmation_modal.description.list.libraries");
+      return renderI18nText("workspace.create_confirmation_modal.description.list.libraries");
   }
 };
 let nb = Ju(function ({
@@ -2857,8 +2857,8 @@ let nb = Ju(function ({
   return jsx(fu, {
     name: "Create License Group Confirmation modal",
     children: jsxs(yX, {
-      cancelText: _$$t("general.back"),
-      confirmText: _$$tx("workspace.create_confirmation_modal.confirm"),
+      cancelText: getI18nString("general.back"),
+      confirmText: renderI18nText("workspace.create_confirmation_modal.confirm"),
       disableClickOutsideToHide: !0,
       onConfirm: () => {
         t(Ce());
@@ -2866,21 +2866,21 @@ let nb = Ju(function ({
       },
       popStack: !0,
       tintedModalBackground: !0,
-      confirmationTitle: _$$tx("workspace.create_confirmation_modal.title"),
-      children: [_$$tx("workspace.create_confirmation_modal.description.intro"), jsx("ul", {
+      confirmationTitle: renderI18nText("workspace.create_confirmation_modal.title"),
+      children: [renderI18nText("workspace.create_confirmation_modal.description.intro"), jsx("ul", {
         style: _$$sx2.ml18.my16.add({
           listStyle: "disc"
         }).$,
         children: [0, 1, 2, 3].map(e => jsx("li", {
           children: nx(e)
         }, e))
-      }), _$$tx("workspace.create_confirmation_modal.description.outro", {
+      }), renderI18nText("workspace.create_confirmation_modal.description.outro", {
         learnMore: jsx(Ph, {
           className: _$$s.inline.$,
           target: "_blank",
           href: "https://help.figma.com/hc/articles/4409676189207-Guide-to-workspaces",
           trusted: !0,
-          children: _$$tx("workspace.create_confirmation_modal.description.outro.learn_more")
+          children: renderI18nText("workspace.create_confirmation_modal.description.outro.learn_more")
         })
       })]
     })
@@ -2920,7 +2920,7 @@ let nk = Ju(function (e) {
     tokens: g
   } : _$$Rs());
   let b = useCallback(e => {
-    _$$sx("Workspace admin search performed", {
+    trackEventAnalytics("Workspace admin search performed", {
       orgId: o,
       workspaceId: m?.id,
       queryLength: e.inputValue.length
@@ -2933,7 +2933,7 @@ let nk = Ju(function (e) {
     w(e.target.checked ? FAccessLevelType.SECRET : FAccessLevelType.PUBLIC);
   }, []);
   let E = () => {
-    _$$sx("CTA Clicked", {
+    trackEventAnalytics("CTA Clicked", {
       name: "Workspace Modal Cancel",
       workspaceId: m?.id,
       orgId: o
@@ -2954,15 +2954,15 @@ let nk = Ju(function (e) {
     }) => {
       t(_$$F.enqueue({
         type: "workspace-edit",
-        message: p ? _$$t("workspace_table.workspace_edited_toast", {
+        message: p ? getI18nString("workspace_table.workspace_edited_toast", {
           workspaceName: v
-        }) : _$$t("workspace_table.workspace_created_toast", {
+        }) : getI18nString("workspace_table.workspace_created_toast", {
           workspaceName: v
         })
       }));
       n();
       t(Ce());
-      s && _$$sx(nw, {
+      s && trackEventAnalytics(nw, {
         workspaceId: e.meta?.id,
         orgId: o
       });
@@ -2985,7 +2985,7 @@ let nk = Ju(function (e) {
     n(null);
   };
   return jsx(OJ, {
-    title: p ? _$$t("workspace_table.edit_workspace_title") : _$$t("workspace_table.create_workspace_title"),
+    title: p ? getI18nString("workspace_table.edit_workspace_title") : getI18nString("workspace_table.create_workspace_title"),
     onClose: E,
     minWidth: 500,
     children: jsx("div", {
@@ -2995,12 +2995,12 @@ let nk = Ju(function (e) {
           className: "workspace_edit_modal--inputRow--ye5CB",
           children: [jsx("span", {
             className: nf,
-            children: _$$tx("workspace_table.name_input")
+            children: renderI18nText("workspace_table.name_input")
           }), jsx("div", {
             children: jsx(ks, {
               className: "workspace_edit_modal--inputField--zgJyx",
               autoFocus: !0,
-              placeholder: _$$t("workspace_table.name_input_placeholder"),
+              placeholder: getI18nString("workspace_table.name_input_placeholder"),
               onChange: e => {
                 f(e.currentTarget.value);
                 S(e.currentTarget.value);
@@ -3017,30 +3017,30 @@ let nk = Ju(function (e) {
           className: nv,
           children: [jsx("span", {
             className: nf,
-            children: _$$tx("workspace_table.admins_input")
+            children: renderI18nText("workspace_table.admins_input")
           }), jsxs("div", {
             className: nj,
             children: [jsx(_$$g4, {
-              placeholder: _$$t("workspace_table.admin_input_placeholder"),
+              placeholder: getI18nString("workspace_table.admin_input_placeholder"),
               autocomplete: h,
               onAutocompleteChange: b
             }), jsx("p", {
               className: "workspace_edit_modal--subtext--qKX4P",
-              children: _$$tx("workspace_table.admins_will_manage_input_help_text")
+              children: renderI18nText("workspace_table.admins_will_manage_input_help_text")
             })]
           })]
         }), jsxs("label", {
           className: nv,
           children: [jsx("span", {
             className: nf,
-            children: _$$tx("workspace_table.visibility")
+            children: renderI18nText("workspace_table.visibility")
           }), jsx("div", {
             className: nj,
             children: jsx(_$$S, {
               checked: j === FAccessLevelType.SECRET,
               onChange: k,
-              label: _$$t("workspace_table.make_it_hidden"),
-              description: _$$t("workspace_table.only_members_can_find_and_access")
+              label: getI18nString("workspace_table.make_it_hidden"),
+              description: getI18nString("workspace_table.only_members_can_find_and_access")
             })
           })]
         }), a && jsxs("div", {
@@ -3051,13 +3051,13 @@ let nk = Ju(function (e) {
             svg: _$$A3,
             useOriginalSrcFills_DEPRECATED: !0
           }), jsx("p", {
-            children: "unassigned" === a ? _$$tx("workspace_table.workspace_name_unassigned_error") : _$$tx("workspace_table.workspace_name_already_exists_error")
+            children: "unassigned" === a ? renderI18nText("workspace_table.workspace_name_unassigned_error") : renderI18nText("workspace_table.workspace_name_already_exists_error")
           })]
         }), jsxs("div", {
           className: "workspace_edit_modal--buttonContainer--XU4e8",
           children: [jsx(_$$nR, {
             onClick: E,
-            children: _$$tx("workspace_table.cancel_create_or_edit")
+            children: renderI18nText("workspace_table.cancel_create_or_edit")
           }), jsx(fu, {
             name: "Workspace Modal Submit",
             properties: {
@@ -3074,7 +3074,7 @@ let nk = Ju(function (e) {
                 }));
               },
               disabled: !!a || !v.length || 0 === h.tokens.length,
-              children: p ? _$$tx("workspace_table.workspace_edit_save_changes") : _$$tx("workspace_table.create_workspace_button")
+              children: p ? renderI18nText("workspace_table.workspace_edit_save_changes") : renderI18nText("workspace_table.create_workspace_button")
             })
           })]
         })]
@@ -3085,7 +3085,7 @@ let nk = Ju(function (e) {
 let nE = "seen_org_admin_workspaces_onboarding";
 let nC = r1(nE);
 function nS() {
-  let e = md(nC);
+  let e = useAtomWithSubscription(nC);
   let {
     show,
     isShowing,
@@ -3097,27 +3097,27 @@ function nS() {
   }, [e]);
   _$$E2(uniqueId, nw, () => {
     show({
-      canShow: e => !rr && !e
+      canShow: e => !isMobileUA && !e
     });
   });
   return jsx(rq, {
     arrowPosition: F_.LEFT_TITLE,
     clickOutsideToHide: !0,
     description: jsx(_$$E, {
-      children: _$$tx("org_admin_onboarding.tooltip.workspace_add_teams.description")
+      children: renderI18nText("org_admin_onboarding.tooltip.workspace_add_teams.description")
     }),
     emphasized: !0,
     isShowing,
     onClose: complete,
     primaryCta: {
-      label: _$$tx("general.got_it"),
+      label: renderI18nText("general.got_it"),
       type: "button",
       onClick: complete,
       ctaTrackingDescriptor: _$$c.DONE
     },
     shouldCenterArrow: EL.FALLBACK,
     targetKey: d1,
-    title: _$$tx("org_admin_onboarding.tooltip.workspace_add_teams.title"),
+    title: renderI18nText("org_admin_onboarding.tooltip.workspace_add_teams.title"),
     trackingContextName: `${WF} - Teams tab`,
     userFlagOnShow: nE
   });
@@ -3138,14 +3138,14 @@ let nL = Ju(function (e) {
       numWorkspaces: e.workspaces.length
     },
     children: jsx(OJ, {
-      title: _$$t("workspace_table.delete_n_workspaces", {
+      title: getI18nString("workspace_table.delete_n_workspaces", {
         licenseGroupsCount: e.workspaces.length
       }),
       maxWidth: 372,
       onClose: d,
       children: jsxs("div", {
         className: _$$s.font11.p16.$,
-        children: [_$$tx("workspace_table.deleting_the_workspaces_will_cause", {
+        children: [renderI18nText("workspace_table.deleting_the_workspaces_will_cause", {
           licenseGroupsCount: e.workspaces.length,
           licenseGroupsNames: jsx(_$$E, {
             fontWeight: "bold",
@@ -3156,7 +3156,7 @@ let nL = Ju(function (e) {
             children: "\xa0"
           }), jsx("span", {
             className: Vq,
-            children: _$$t("workspace_table.are_you_sure_you_want_to_delete_these_workspaces", {
+            children: getI18nString("workspace_table.are_you_sure_you_want_to_delete_these_workspaces", {
               licenseGroupsCount: e.workspaces.length
             })
           })]
@@ -3171,7 +3171,7 @@ let nL = Ju(function (e) {
             }).then(() => {
               t(_$$F.enqueue({
                 type: "workspace-delete",
-                message: _$$t("workspace_table.workspaces_deleted_toast", {
+                message: getI18nString("workspace_table.workspaces_deleted_toast", {
                   licenseGroupsCount: e.workspaces.length,
                   licenseGroupName: e.workspaces[0].name
                 })
@@ -3181,7 +3181,7 @@ let nL = Ju(function (e) {
             }).catch(e => {
               t(_$$F.enqueue({
                 error: !0,
-                message: e.message ?? _$$t("workspace_table.an_error_occurred_while_deleting_workspaces")
+                message: e.message ?? getI18nString("workspace_table.an_error_occurred_while_deleting_workspaces")
               }));
             });
           },
@@ -3189,18 +3189,18 @@ let nL = Ju(function (e) {
             children: jsx(_$$S, {
               checked: c,
               onChange: () => _(!c),
-              label: _$$t("billing_groups_table.delete_modal.i_understand_that_this_action_isnt_reversible")
+              label: getI18nString("billing_groups_table.delete_modal.i_understand_that_this_action_isnt_reversible")
             })
           }), jsxs("div", {
             className: v0,
             children: [jsx(_$$tM, {
               onClick: d,
-              children: _$$tx("general.cancel")
+              children: renderI18nText("general.cancel")
             }), jsx(qM, {
               type: "submit",
               className: pL,
               disabled: !c,
-              children: _$$t("workspace_table.delete_n_workspaces", {
+              children: getI18nString("workspace_table.delete_n_workspaces", {
                 licenseGroupsCount: e.workspaces.length
               })
             })]
@@ -3229,7 +3229,7 @@ function nD({
             }
           }));
         },
-        label: _$$t("workspace_table.edit_details")
+        label: getI18nString("workspace_table.edit_details")
       }), jsx(IU, {
         onClick: () => {
           a(_$$sf({
@@ -3240,7 +3240,7 @@ function nD({
             orgAdminOriginTab: J7.CONTENT
           }));
         },
-        label: _$$t("workspace_table.manage")
+        label: getI18nString("workspace_table.manage")
       })]
     }), jsx(IU, {
       onClick: () => a(_$$to({
@@ -3249,7 +3249,7 @@ function nD({
           workspaces: t.filter(e => !!e.id)
         }
       })),
-      label: _$$t("general.delete")
+      label: getI18nString("general.delete")
     })]
   }) : null;
 }
@@ -3288,13 +3288,13 @@ function nM({
   return e && n ? jsxs(zx, {
     children: [jsx(_$$p3, {
       onClick: l,
-      children: _$$t("workspace_table.edit_details")
+      children: getI18nString("workspace_table.edit_details")
     }, "edit-details"), jsx(_$$p3, {
       onClick: o,
-      children: _$$t("workspace_table.manage")
+      children: getI18nString("workspace_table.manage")
     }, "manage"), jsx(_$$p3, {
       onClick: d,
-      children: _$$t("general.delete")
+      children: getI18nString("general.delete")
     }, "delete")]
   }) : null;
 }
@@ -3422,19 +3422,19 @@ function n$() {
         className: "x2b8uid",
         children: jsx("h2", {
           className: "xosj86m xk50ysn x1o2sk6j",
-          children: _$$tx("workspace_table.empty_state.title")
+          children: renderI18nText("workspace_table.empty_state.title")
         })
       }), jsx("div", {
         className: "x2b8uid x1e56ztr",
         children: jsx(_$$E, {
           fontSize: 14,
-          children: _$$tx("workspace_table.empty_state.subtitle")
+          children: renderI18nText("workspace_table.empty_state.subtitle")
         })
       }), jsx($n, {
-        "aria-label": _$$t("settings_tab.add_workspace_label"),
+        "aria-label": getI18nString("settings_tab.add_workspace_label"),
         iconPrefix: jsx(_$$e5, {}),
         onClick: t,
-        children: _$$tx("workspace_table.workspace")
+        children: renderI18nText("workspace_table.workspace")
       }), jsx(_$$Y, {
         direction: "horizontal",
         horizontalAlignItems: "center",
@@ -3455,19 +3455,19 @@ function n$() {
                 svg: _$$A4,
                 className: "x1ja3g5x"
               }),
-              title: _$$t("workspace_table.empty_state.manage_access_and_plugins"),
-              subtitle: _$$t("workspace_table.empty_state.manage_access_and_plugins.subtitle")
+              title: getI18nString("workspace_table.empty_state.manage_access_and_plugins"),
+              subtitle: getI18nString("workspace_table.empty_state.manage_access_and_plugins.subtitle")
             }), jsx(nq, {
               asset: jsx(n.PenCheckmark, {}),
-              title: _$$t("workspace_table.empty_state.approve_libraries_and_assets"),
-              subtitle: _$$t("workspace_table.empty_state.approve_libraries.subtitle")
+              title: getI18nString("workspace_table.empty_state.approve_libraries_and_assets"),
+              subtitle: getI18nString("workspace_table.empty_state.approve_libraries.subtitle")
             }), jsx(nq, {
               asset: jsx(_$$B, {
                 svg: _$$A5,
                 className: "x1ja3g5x"
               }),
-              title: _$$t("workspace_table.empty_state.let_workspaces_be_unique"),
-              subtitle: _$$t("workspace_table.empty_state.let_workspaces_be_unique.subtitle")
+              title: getI18nString("workspace_table.empty_state.let_workspaces_be_unique"),
+              subtitle: getI18nString("workspace_table.empty_state.let_workspaces_be_unique.subtitle")
             })]
           })
         })
@@ -3475,7 +3475,7 @@ function n$() {
     })]
   });
 }
-let nB = e => e.id ?? _$$O3;
+let nB = e => e.id ?? UNASSIGNED;
 let nG = new Ef([], {
   threshold: .1,
   matchAllTokens: !0,
@@ -3519,8 +3519,8 @@ function nz(e) {
       children: e.name
     }), e.orgAccess === FAccessLevelType.SECRET && jsx("div", {
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": _$$t("workspace_table.secret_workspace_lock_tooltip"),
-      "data-tooltip-subtext": _$$t("workspace_table.secret_workspace_lock_tooltip_subtext"),
+      "data-tooltip": getI18nString("workspace_table.secret_workspace_lock_tooltip"),
+      "data-tooltip-subtext": getI18nString("workspace_table.secret_workspace_lock_tooltip_subtext"),
       "data-tooltip-show-above": !0,
       "data-tooltip-timeout-delay": 500,
       "data-tooltip-max-width": 300,
@@ -3532,10 +3532,10 @@ function nz(e) {
     spacing: 4,
     padding: 0,
     children: [jsx(_$$E, {
-      children: _$$tx("workspace_table.unassigned")
+      children: renderI18nText("workspace_table.unassigned")
     }), jsx(_$$E, {
       color: "secondary",
-      children: _$$tx("workspace_table.unassigned_row_default")
+      children: renderI18nText("workspace_table.unassigned_row_default")
     })]
   }), []);
   let h = useCallback(e => e.id ? jsx(nM, {
@@ -3543,12 +3543,12 @@ function nz(e) {
     workspaceId: e.id
   }) : null, [_]);
   let x = [{
-    name: _$$t("workspace_table.name"),
+    name: getI18nString("workspace_table.name"),
     className: "workspaces_table--nameColumn--j-Cj5 workspaces_table--column--KbeZV table--column--974RA",
     getSortValue: e => e.id ? e.name : "0",
     cellComponent: g
   }, {
-    name: _$$t("workspace_table.admins"),
+    name: getI18nString("workspace_table.admins"),
     className: "workspaces_table--adminColumn--qTjao workspaces_table--column--KbeZV table--column--974RA",
     cellComponent: t => {
       let a = [];
@@ -3584,7 +3584,7 @@ function nz(e) {
       });
     }
   }, {
-    name: _$$t("workspace_table.teams"),
+    name: getI18nString("workspace_table.teams"),
     className: "workspaces_table--teamsColumn--sKQaF workspaces_table--column--KbeZV table--column--974RA",
     cellComponent: t => {
       let {
@@ -3596,15 +3596,15 @@ function nz(e) {
         animationType: JR.SHIMMER,
         dataTestId: "teams-count-shimmer"
       });
-      let i = data[t.id ?? _$$O3] ?? 0;
-      return _$$tx("workspace_table.n_teams", {
+      let i = data[t.id ?? UNASSIGNED] ?? 0;
+      return renderI18nText("workspace_table.n_teams", {
         count: i
       });
     },
-    getSortValue: t => e.workspaceTeamCounts.data?.[t.id ?? _$$O3] ?? 0,
+    getSortValue: t => e.workspaceTeamCounts.data?.[t.id ?? UNASSIGNED] ?? 0,
     sortNumerically: !0
   }, {
-    name: _$$t("workspace_table.members"),
+    name: getI18nString("workspace_table.members"),
     className: "workspaces_table--membersColumn--73tOw workspaces_table--column--KbeZV table--column--974RA",
     cellComponent: e => {
       let {
@@ -3616,12 +3616,12 @@ function nz(e) {
         animationType: JR.SHIMMER,
         dataTestId: "members-count-shimmer"
       });
-      let n = data.workspaces?.[e.id ?? _$$O3] ?? 0;
-      return _$$tx("workspace_table.n_members", {
+      let n = data.workspaces?.[e.id ?? UNASSIGNED] ?? 0;
+      return renderI18nText("workspace_table.n_members", {
         count: n
       });
     },
-    getSortValue: e => filterCountsViewResult.data?.workspaces?.[e.id ?? _$$O3] ?? 0,
+    getSortValue: e => filterCountsViewResult.data?.workspaces?.[e.id ?? UNASSIGNED] ?? 0,
     sortNumerically: !0
   }];
   let [b, v, f] = _$$z({
@@ -3641,7 +3641,7 @@ function nz(e) {
     icon: "plus-32",
     onClick: k,
     children: jsx(_$$E, {
-      children: _$$tx("workspace_table.create_workspace_button")
+      children: renderI18nText("workspace_table.create_workspace_button")
     })
   }), [k]);
   return (_$$h(() => {
@@ -3663,7 +3663,7 @@ function nz(e) {
       actionBarClassName: "workspaces_table--bulkActionsBar--Ag-ER",
       columns: x,
       emptyContent: jsx(_$$p2, {
-        children: _$$tx("workspace_table.search.no_results")
+        children: renderI18nText("workspace_table.search.no_results")
       }),
       getItemKey: nB,
       hasNewScrollContext: !0,
@@ -3671,7 +3671,7 @@ function nz(e) {
       isLoading: o,
       itemTypeContext: {
         itemType: "workspace",
-        getSelectedCountString: e => _$$t("multi_select_list.selected_count_workspace", {
+        getSelectedCountString: e => getI18nString("multi_select_list.selected_count_workspace", {
           numSelected: e
         })
       },
@@ -3700,13 +3700,13 @@ function nz(e) {
           onChange: n,
           query: a,
           clearSearch: () => n(""),
-          placeholder: _$$t("workspace_table.search.placeholder")
+          placeholder: getI18nString("workspace_table.search.placeholder")
         })
       }),
       styleOverrideClassNames: {
         unselectedCheckbox: "workspaces_table--unselectedCheckbox--Eno6q"
       },
-      unselectableItemKeys: new Set([_$$O3])
+      unselectableItemKeys: new Set([UNASSIGNED])
     })]
   }) : jsx(n$, {});
 }
@@ -3791,7 +3791,7 @@ function nH(e) {
 let nJ = "seen_org_admin_unassigned_drafts_tab_onboarding";
 let nK = r1(nJ);
 function nX() {
-  let e = md(nK);
+  let e = useAtomWithSubscription(nK);
   let {
     show,
     isShowing,
@@ -3807,18 +3807,18 @@ function nX() {
   });
   return jsx(rq, {
     clickOutsideToHide: !0,
-    description: _$$tx("org_admin_onboarding.tooltip.unassigned_drafts_tab.body"),
+    description: renderI18nText("org_admin_onboarding.tooltip.unassigned_drafts_tab.body"),
     isShowing,
     onClose: complete,
     primaryCta: {
-      label: _$$tx("general.got_it"),
+      label: renderI18nText("general.got_it"),
       type: "button",
       onClick: complete,
       ctaTrackingDescriptor: _$$c.DONE
     },
     shouldCenterArrow: EL.FALLBACK,
     targetKey: _R,
-    title: _$$tx("org_admin_onboarding.tooltip.unassigned_drafts_tab.title"),
+    title: renderI18nText("org_admin_onboarding.tooltip.unassigned_drafts_tab.title"),
     trackingContextName: `${_$$eN} - Unassigned drafts tab`,
     userFlagOnShow: nJ
   });
@@ -3830,7 +3830,7 @@ function n4(e) {
     variant: "primary",
     onClick: () => {
       let n = e.filters.workspaceFilter ?? void 0;
-      n === _$$O3 && (n = void 0);
+      n === UNASSIGNED && (n = void 0);
       let s = e.filters.licenseGroupFilter ?? void 0;
       s === _$$s2 && (s = void 0);
       a({
@@ -3850,15 +3850,15 @@ function n4(e) {
         }
       }));
     },
-    "aria-label": _$$t("members_table.invite_users_button"),
+    "aria-label": getI18nString("members_table.invite_users_button"),
     iconPrefix: jsx(_$$x, {}),
-    children: _$$tx("members_table.invite_users_button")
+    children: renderI18nText("members_table.invite_users_button")
   }) : jsx($n, {
     variant: "primary",
     onClick: () => {},
-    "aria-label": _$$t("members_table.create_user_group_button"),
+    "aria-label": getI18nString("members_table.create_user_group_button"),
     iconPrefix: jsx(_$$x, {}),
-    children: _$$tx("members_table.create_user_group_button")
+    children: renderI18nText("members_table.create_user_group_button")
   });
   return jsxs(fu, {
     name: _$$e3.ORG_ADMIN_PEOPLE_VIEW,
@@ -3866,7 +3866,7 @@ function n4(e) {
       orgId: e.org.id
     },
     children: [jsx(_$$K2, {
-      title: _$$t("members_table.header")
+      title: getI18nString("members_table.header")
     }), jsx(_$$b, {
       tab: J7.MEMBERS,
       selectedSecondaryTab: e.activeTab,
@@ -3934,7 +3934,7 @@ let n8 = new class {
           let _ = t[plugin_id];
           if (!_) {
             let e = Error(`Missing extension analytics data for org ${org_id} and plugin ${plugin_id}`);
-            $D(_$$e.EXTENSIBILITY, e);
+            reportError(_$$e.EXTENSIBILITY, e);
             return;
           }
           let u = _.usage_windows[extension_usage_window];
@@ -3959,18 +3959,18 @@ function n9(e) {
     extensionType,
     onGoToSettings
   } = e;
-  let n = "plugin" === extensionType ? _$$tx("resources_tab.approved_plugins.plugin_approval_banner.text", {
+  let n = "plugin" === extensionType ? renderI18nText("resources_tab.approved_plugins.plugin_approval_banner.text", {
     settingName: jsx(_$$E, {
       fontWeight: "medium",
-      children: _$$tx("settings_tab.plugin_approval_label")
+      children: renderI18nText("settings_tab.plugin_approval_label")
     })
-  }) : _$$tx("resources_tab.approved_widgets.widget_approval_banner.text", {
+  }) : renderI18nText("resources_tab.approved_widgets.widget_approval_banner.text", {
     settingName: jsx(_$$E, {
       fontWeight: "medium",
-      children: _$$tx("settings_tab.widget_admin_approval_label")
+      children: renderI18nText("settings_tab.widget_admin_approval_label")
     })
   });
-  let i = e.settingsText ?? _$$t("resources_tab.approved_plugins.plugin_approval_banner.go_to_settings_button");
+  let i = e.settingsText ?? getI18nString("resources_tab.approved_plugins.plugin_approval_banner.go_to_settings_button");
   return jsx(_$$z2, {
     orientation: "horizontal",
     variant: "warning",
@@ -3992,11 +3992,11 @@ function so(e) {
     extensionType
   } = e;
   let n = "plugin" === extensionType ? jsx(_$$E, {
-    children: _$$tx("resources_tab.approved_plugins.no_plugins.text")
+    children: renderI18nText("resources_tab.approved_plugins.no_plugins.text")
   }) : jsx(_$$E, {
-    children: _$$tx("resources_tab.approved_widgets.no_widgets.text")
+    children: renderI18nText("resources_tab.approved_widgets.no_widgets.text")
   });
-  let i = "plugin" === extensionType ? _$$tx("resources_tab.approved_plugins.no_plugins.add_plugins_button") : _$$tx("resources_tab.approved_widgets.no_widgets.add_widgets_button");
+  let i = "plugin" === extensionType ? renderI18nText("resources_tab.approved_plugins.no_plugins.add_plugins_button") : renderI18nText("resources_tab.approved_widgets.no_widgets.add_widgets_button");
   return jsxs(_$$Y, {
     spacing: 4,
     dataTestId: "allowlist-no-extensions-banner",
@@ -4127,7 +4127,7 @@ function su({
       children: jsx(_$$E, {
         fontSize: 13,
         fontWeight: "medium",
-        children: _$$tx("resources_tab.approved_plugins.table.approved_header")
+        children: renderI18nText("resources_tab.approved_plugins.table.approved_header")
       })
     }), jsx(sm, {
       extensionType: n,
@@ -4215,7 +4215,7 @@ function sm({
         isDescending: !a.isReversed,
         children: jsx(_$$E, {
           color: "default",
-          children: _$$tx("plugin" === e ? "resources_tab.approved_plugins.table.plugin_name_column" : "resources_tab.approved_plugins.table.widget_name_column")
+          children: renderI18nText("plugin" === e ? "resources_tab.approved_plugins.table.plugin_name_column" : "resources_tab.approved_plugins.table.widget_name_column")
         })
       })
     }), jsx(A3, {
@@ -4224,7 +4224,7 @@ function sm({
       }).$,
       children: jsx(_$$E, {
         color: "default",
-        children: _$$tx("resources_tab.approved_plugins.table.description_column")
+        children: renderI18nText("resources_tab.approved_plugins.table.description_column")
       })
     }), jsx(A3, {
       style: _$$sx2.add({
@@ -4237,7 +4237,7 @@ function sm({
         isDescending: !a.isReversed,
         children: jsx(_$$E, {
           color: "default",
-          children: _$$tx("resources_tab.approved_plugins.table.approved_column")
+          children: renderI18nText("resources_tab.approved_plugins.table.approved_column")
         })
       })
     }), jsx(A3, {
@@ -4246,7 +4246,7 @@ function sm({
       }).justifyStart.$,
       children: jsx(_$$E, {
         color: "default",
-        children: _$$tx("resources_tab.approved_plugins.table.approved_for_column")
+        children: renderI18nText("resources_tab.approved_plugins.table.approved_for_column")
       })
     }), jsxs(A3, {
       style: _$$sx2.add({
@@ -4279,7 +4279,7 @@ function sp({
       svg: _$$A7,
       className: "extension_allowlist_table--greenCheck---4jlH",
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": _$$t("resources_tab.approved_plugins.table.already_approved", {
+      "data-tooltip": getI18nString("resources_tab.approved_plugins.table.already_approved", {
         numWorkspaces: a
       })
     })]
@@ -4320,7 +4320,7 @@ function sx({
 }) {
   let a = useMemo(() => {
     if (e.allowlistGroups.some(e => "Org" === e.type)) return jsx(_$$E, {
-      children: _$$tx("resources_tab.approved_plugins.table.entire_org")
+      children: renderI18nText("resources_tab.approved_plugins.table.entire_org")
     });
     let a = e.allowlistGroups[0];
     if (!a) return null;
@@ -4338,7 +4338,7 @@ function sx({
         },
         children: jsx(_$$E, {
           color: "brand",
-          children: _$$tx("resources_tab.approved_plugins.table.n_workspaces_approved_for", {
+          children: renderI18nText("resources_tab.approved_plugins.table.n_workspaces_approved_for", {
             numberOfWorkspaces: e.allowlistGroups.length
           })
         })
@@ -4378,7 +4378,7 @@ let sy = Ju(function ({
   } = e;
   let [c, _] = useState(void 0);
   let u = useDispatch();
-  let m = t ? _$$t("extension_decline_modal.decline_widget_request") : _$$t("extension_decline_modal.decline_plugin_request");
+  let m = t ? getI18nString("extension_decline_modal.decline_widget_request") : getI18nString("extension_decline_modal.decline_plugin_request");
   let p = e => {
     let t = {
       orgId: e.orgId,
@@ -4393,7 +4393,7 @@ let sy = Ju(function ({
     u(Lo());
     l();
   };
-  let g = t ? _$$t("extension_decline_modal.leave_widget_note") : _$$t("extension_decline_modal.leave_plugin_note");
+  let g = t ? getI18nString("extension_decline_modal.leave_widget_note") : getI18nString("extension_decline_modal.leave_plugin_note");
   let h = hS({
     open: n,
     onClose: l
@@ -4439,11 +4439,11 @@ let sy = Ju(function ({
           children: [jsx($n, {
             variant: "secondary",
             onClick: l,
-            children: _$$t("general.cancel")
+            children: getI18nString("general.cancel")
           }), jsx($n, {
             variant: "primary",
             onClick: () => p(a),
-            children: _$$t("resources_tab.approved_plugins.modal.decline")
+            children: getI18nString("resources_tab.approved_plugins.modal.decline")
           })]
         })
       })]
@@ -4527,7 +4527,7 @@ function sC({
         isDescending: !a.isReversed,
         children: jsx(_$$E, {
           color: "default",
-          children: _$$tx("plugin" === e ? "resources_tab.approved_plugins.table.plugin_name_column" : "resources_tab.approved_plugins.table.widget_name_column")
+          children: renderI18nText("plugin" === e ? "resources_tab.approved_plugins.table.plugin_name_column" : "resources_tab.approved_plugins.table.widget_name_column")
         })
       })
     }), jsx(A3, {
@@ -4536,7 +4536,7 @@ function sC({
       }).$,
       children: jsx(_$$E, {
         color: "default",
-        children: _$$tx("resources_tab.approved_plugins.table.description_column")
+        children: renderI18nText("resources_tab.approved_plugins.table.description_column")
       })
     }), jsx(A3, {
       style: _$$sx2.add({
@@ -4549,7 +4549,7 @@ function sC({
         isDescending: !a.isReversed,
         children: jsx(_$$E, {
           color: "default",
-          children: _$$tx("resources_tab.approved_plugins.table.last_requested_column")
+          children: renderI18nText("resources_tab.approved_plugins.table.last_requested_column")
         })
       })
     }), jsx(A3, {
@@ -4558,7 +4558,7 @@ function sC({
       }).justifyStart.$,
       children: jsx(_$$E, {
         color: "default",
-        children: _$$tx("resources_tab.approved_plugins.table.requested_by_column")
+        children: renderI18nText("resources_tab.approved_plugins.table.requested_by_column")
       })
     }), jsxs(A3, {
       style: _$$sx2.add({
@@ -4619,7 +4619,7 @@ function sN({
       children: jsx(_$$E, {
         fontSize: 11,
         color: "brand",
-        children: _$$tx("resources_tab.approved_plugins.table.members", {
+        children: renderI18nText("resources_tab.approved_plugins.table.members", {
           numberOfMembers: e.length
         })
       })
@@ -4644,7 +4644,7 @@ function sI() {
     }).$,
     children: jsx($$, {
       children: jsx(_$$E, {
-        children: _$$tx("resources_tab.approved_plugins.table.review_button")
+        children: renderI18nText("resources_tab.approved_plugins.table.review_button")
       })
     })
   });
@@ -4735,7 +4735,7 @@ function sA(e) {
   });
   if ("loading" === c.status) return null;
   if ("errors" === c.status) {
-    $D(_$$e.EXTENSIBILITY, Error("Failed to load plugin requests"));
+    reportError(_$$e.EXTENSIBILITY, Error("Failed to load plugin requests"));
     return null;
   }
   let _ = oA(c.data.org);
@@ -4755,7 +4755,7 @@ function sA(e) {
       children: jsx(_$$E, {
         fontSize: 13,
         fontWeight: "medium",
-        children: _$$tx("resources_tab.approved_plugins.table.requested_header")
+        children: renderI18nText("resources_tab.approved_plugins.table.requested_header")
       })
     }), jsx(sC, {
       extensionType,
@@ -4834,13 +4834,13 @@ function sR({
     className: _$$s.flex.flexRow.gap8.$,
     children: [jsx(_$$$, {
       onClick: h,
-      children: _$$tx("resources_tab.approved_plugins.actions.settings")
+      children: renderI18nText("resources_tab.approved_plugins.actions.settings")
     }), jsxs(_$$$, {
       icon: "plus-32",
       variant: "primary",
       disabled: !b,
       onClick: g,
-      children: ["plugin" === t && _$$tx("resources_tab.approved_plugins.actions.add_plugin"), "widget" === t && _$$tx("resources_tab.approved_widgets.actions.add_widget")]
+      children: ["plugin" === t && renderI18nText("resources_tab.approved_plugins.actions.add_plugin"), "widget" === t && renderI18nText("resources_tab.approved_widgets.actions.add_widget")]
     })]
   }), [b, g, h, t]);
   useEffect(() => {
@@ -4863,7 +4863,7 @@ function sR({
         children: jsx(n9, {
           extensionType: t,
           onGoToSettings: h,
-          settingsText: _$$t("resources_tab.approved_plugins.plugin_approval_banner.open_settings")
+          settingsText: getI18nString("resources_tab.approved_plugins.plugin_approval_banner.open_settings")
         })
       }), jsxs("div", {
         className: _$$s.$$if(!b, _$$s.opacity0_3.eventsNone).$,
@@ -5054,10 +5054,10 @@ function sB(e) {
       membersTabOrgJoinRequest: I.membersTabOrgJoinRequest
     })) : L || a(_$$sf(o0)) : groupsUserIsAdminOf.length > 0 ? V ? a(_$$sf({
       view: "billingGroupDashboard",
-      selectedTab: _$$D.REQUESTS
+      selectedTab: FRequestsStr.REQUESTS
     })) : a(_$$sf({
       view: "licenseGroup",
-      subView: GN.ADMIN,
+      subView: UserRole.ADMIN,
       licenseGroupId: groupsUserIsAdminOf[0].id,
       selectedTab: _$$g3(e.selectedTab)
     })) : D2(y, EO(n.id)) && a(_$$sf(o0));
@@ -5065,7 +5065,7 @@ function sB(e) {
   let [H, Y] = useState(0);
   let [J, Q] = useState("");
   useEffect(() => {
-    e.selectedTab === J7.MEMBERS && (Y(Date.now()), _$$sx("Org Admin Members Table V2 Load Initiated", {
+    e.selectedTab === J7.MEMBERS && (Y(Date.now()), trackEventAnalytics("Org Admin Members Table V2 Load Initiated", {
       orgId: n.id
     }, {
       forwardToDatadog: !0

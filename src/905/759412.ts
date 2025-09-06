@@ -1,6 +1,6 @@
 import { throwTypeError } from "../figma_app/465776";
 import { A } from "../905/920142";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 var $$s0 = (e => (e.DAY = "24_hours", e.WEEK = "7_days", e.CUSTOM = "custom", e))($$s0 || {});
 var $$o1 = (e => (e.TWENTY_SEC = "20_seconds", e.CURRENT = "current", e.DAY = "24_hours", e.WEEK = "7_days", e.CUSTOM = "custom", e))($$o1 || {});
 export function $$l2(e, t) {
@@ -47,23 +47,23 @@ export function $$c12(e, t) {
   } = $$d9(e, t);
   switch (unit) {
     case "minute":
-      return _$$t("permissions_modal.file_share_settings.minute_text", {
+      return getI18nString("permissions_modal.file_share_settings.minute_text", {
         num
       });
     case "hour":
-      return _$$t("permissions_modal.file_share_settings.hour_text", {
+      return getI18nString("permissions_modal.file_share_settings.hour_text", {
         num
       });
     case "day":
-      return _$$t("permissions_modal.file_share_settings.day_text", {
+      return getI18nString("permissions_modal.file_share_settings.day_text", {
         num
       });
     case "week":
-      return _$$t("permissions_modal.file_share_settings.week_text", {
+      return getI18nString("permissions_modal.file_share_settings.week_text", {
         num
       });
     case "month":
-      return _$$t("permissions_modal.file_share_settings.month_text", {
+      return getI18nString("permissions_modal.file_share_settings.month_text", {
         num
       });
     default:
@@ -91,7 +91,7 @@ export function $$f4(e, t) {
 export function $$_3(e, t) {
   let i = e.isSame(A().add(1, "day"), "day");
   let n = $$m10(e);
-  if (i && !t) return _$$t("file_access_row.expiration.24_hours.timestamp", {
+  if (i && !t) return getI18nString("file_access_row.expiration.24_hours.timestamp", {
     time: n
   });
   let s = e.toDate().toLocaleDateString(e.locale(), {
@@ -99,7 +99,7 @@ export function $$_3(e, t) {
     month: "short",
     day: "numeric"
   });
-  return A().isSame(e, "year") ? _$$t("file_access_row.expiration.date.timestamp", {
+  return A().isSame(e, "year") ? getI18nString("file_access_row.expiration.date.timestamp", {
     date: s,
     time: n
   }) : e.format("L LT");
@@ -108,9 +108,9 @@ export function $$A7(e) {
   return e && !e.accessReverted && e.expiresAt ? e.expiresAt : null;
 }
 export function $$y11(e) {
-  return e < 24 || e % 24 != 0 ? _$$t("file_access_row.expiration.past_org_limit_hours", {
+  return e < 24 || e % 24 != 0 ? getI18nString("file_access_row.expiration.past_org_limit_hours", {
     count: e
-  }) : _$$t("file_access_row.expiration.past_org_limit_days", {
+  }) : getI18nString("file_access_row.expiration.past_org_limit_days", {
     count: e / 24
   });
 }

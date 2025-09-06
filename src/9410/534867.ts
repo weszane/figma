@@ -6,14 +6,14 @@ import { assert, debug } from "../figma_app/465776";
 import { encodeStringToBase64, encodeBase64 } from "../905/561685";
 import { ServiceCategories as _$$e } from "../905/165054";
 import c from "classnames";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { vN, xH, Uz } from "../905/63728";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { o6, Pt, C0, Z7, cZ, aH } from "../figma_app/806412";
-import { $D } from "../905/11";
-import { Lo } from "../905/714362";
+import { reportError } from "../905/11";
+import { logInfo } from "../905/714362";
 import { B as _$$B } from "../905/714743";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { oB } from "../905/929976";
 import { Rw } from "../figma_app/91703";
 import { BE } from "../figma_app/844435";
@@ -49,7 +49,7 @@ class K extends o6 {
             return "freeform" !== e && "skip" !== e;
           }(e));
           let r = i >= 0 ? i : this.state.activeItemIndex;
-          let n = t.length || !this.state.searchQuery ? null : _$$t("fullscreen_actions.no_matches");
+          let n = t.length || !this.state.searchQuery ? null : getI18nString("fullscreen_actions.no_matches");
           this.clearLoadingMessage();
           this.setState({
             activeItemIndex: r,
@@ -62,7 +62,7 @@ class K extends o6 {
         this.clearLoadingMessage();
         this.setState({
           items: this.getDropdownItems([], this.state.searchQuery, this.state.activeParameterIndex),
-          errorMessage: e.message || _$$t("fullscreen_actions.no_matches")
+          errorMessage: e.message || getI18nString("fullscreen_actions.no_matches")
         });
         break;
       case "LOADING":
@@ -134,14 +134,14 @@ class K extends o6 {
       if (e < 0 || e >= this.state.items.length) {
         let n = "Trying to select suggestion at invalid index";
         console.error(n);
-        Lo("PluginParameterEntry", "invalid index", {
+        logInfo("PluginParameterEntry", "invalid index", {
           index: e,
           items: this.state.items.length,
           currentIndex: r,
           parameter: i.name,
           keyPress: t
         });
-        $D(_$$e.EXTENSIBILITY, Error(n));
+        reportError(_$$e.EXTENSIBILITY, Error(n));
         return;
       }
       let a = this.state.items[e];
@@ -206,7 +206,7 @@ class K extends o6 {
         let t = this.state.activeItemIndex + e;
         return t < 0 ? this.state.items.length - 1 : t % this.state.items.length;
       };
-      let i = Ay.mac ? vN(e, xH.META) : vN(e, xH.CONTROL);
+      let i = BrowserInfo.mac ? vN(e, xH.META) : vN(e, xH.CONTROL);
       switch (e.keyCode) {
         case Uz.ENTER:
           e.preventDefault();
@@ -267,7 +267,7 @@ class K extends o6 {
       this.onTextChange(t);
     });
     let t;
-    if (super(e), Lo("PluginParameterEntry", "Starting parameter entry for plugin", {
+    if (super(e), logInfo("PluginParameterEntry", "Starting parameter entry for plugin", {
       parameters: e.parameters,
       displayName: e.displayName,
       parameterOnly: e.parameterOnly,
@@ -363,7 +363,7 @@ class K extends o6 {
   }
   componentDidMount() {
     super.componentDidMount();
-    sx(yh, ov({
+    trackEventAnalytics(yh, ov({
       ...this.props,
       qaVersion: U3
     }));
@@ -378,15 +378,15 @@ class K extends o6 {
     super.componentWillUnmount();
     this.ranWithParameters || wY();
     let e = O8(this.props.parameters, this.state.parameterValues);
-    this.ranWithParameters && e.requiredEntered !== e.requiredCount && (Lo("PluginParameterEntry", "Parameter entry mismatch", {
+    this.ranWithParameters && e.requiredEntered !== e.requiredCount && (logInfo("PluginParameterEntry", "Parameter entry mismatch", {
       requiredParameters: this.props.parameters,
       parameterValues: this.state.parameterValues
-    }), $D(_$$e.EXTENSIBILITY, Error("Plugin ran successfully with parameters, but not all parameters were recorded")));
+    }), reportError(_$$e.EXTENSIBILITY, Error("Plugin ran successfully with parameters, but not all parameters were recorded")));
     let t = ov({
       ...this.props,
       qaVersion: U3
     });
-    sx(rj, {
+    trackEventAnalytics(rj, {
       ...t,
       success: this.ranWithParameters,
       parametersEntered: e.entered,
@@ -425,7 +425,7 @@ class K extends o6 {
   }
   setParameterIndex(e, t) {
     let i = this.getParameterForIndex(e);
-    i && (Lo("PluginParameterEntry", "setParameterIndex", {
+    i && (logInfo("PluginParameterEntry", "setParameterIndex", {
       nextParameter: i.name
     }), this.triggerInputEvent({
       parameterValues: t,
@@ -487,19 +487,19 @@ class K extends o6 {
         className: FV,
         children: [jsx("div", {
           className: h8,
-          children: tx("fullscreen_actions.plugin_parameters.tab")
+          children: renderI18nText("fullscreen_actions.plugin_parameters.tab")
         }), jsx("div", {
           className: w8,
-          children: tx("fullscreen_actions.plugin_parameters.to_enter_optional_parameters")
+          children: renderI18nText("fullscreen_actions.plugin_parameters.to_enter_optional_parameters")
         })]
       }), jsxs("div", {
         className: FV,
         children: [jsx("div", {
           className: h8,
-          children: tx("fullscreen_actions.plugin_parameters.enter")
+          children: renderI18nText("fullscreen_actions.plugin_parameters.enter")
         }), jsx("div", {
           className: w8,
-          children: tx("fullscreen_actions.plugin_parameters.to_run_plugin")
+          children: renderI18nText("fullscreen_actions.plugin_parameters.to_run_plugin")
         })]
       })]
     });
@@ -553,7 +553,7 @@ class K extends o6 {
       let e = filterNotNullish(this.props.parameters.map(e => e.optional ? e.name : null)).join(", ");
       return jsx("span", {
         ref: this.primaryPlaceholderTextRef,
-        children: tx("fullscreen_actions.plugin_parameters.optional_optional_names", {
+        children: renderI18nText("fullscreen_actions.plugin_parameters.optional_optional_names", {
           optionalNames: e
         })
       });
@@ -582,7 +582,7 @@ class K extends o6 {
               className: yL,
               children: "|"
             }, "divider"), jsx("span", {
-              children: tx("fullscreen_actions.plugin_parameters.optional_optional_names", {
+              children: renderI18nText("fullscreen_actions.plugin_parameters.optional_optional_names", {
                 optionalNames: i.join(", ")
               })
             }, "optionalParams")]
@@ -723,12 +723,12 @@ W.displayName = "ParameterSuggestion";
 class J extends o6 {
   render() {
     let e = new URL(this.props.src);
-    return e.hostname === window.location.hostname ? ($D(_$$e.EXTENSIBILITY, Error("same-origin URL blocked in UntrustedImage")), jsx(Fragment, {})) : ["https:", "http:", "data:", "blob:"].includes(e.protocol) ? jsx("img", {
+    return e.hostname === window.location.hostname ? (reportError(_$$e.EXTENSIBILITY, Error("same-origin URL blocked in UntrustedImage")), jsx(Fragment, {})) : ["https:", "http:", "data:", "blob:"].includes(e.protocol) ? jsx("img", {
       src: this.props.src,
       className: this.props.className,
       crossOrigin: "anonymous",
       alt: ""
-    }) : ($D(_$$e.EXTENSIBILITY, Error("Unexpected protocol blocked in UntrustedImage")), jsx(Fragment, {}));
+    }) : (reportError(_$$e.EXTENSIBILITY, Error("Unexpected protocol blocked in UntrustedImage")), jsx(Fragment, {}));
   }
 }
 J.displayName = "UntrustedImage";

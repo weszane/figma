@@ -1,30 +1,30 @@
-import { jsx, Fragment, jsxs } from "react/jsx-runtime";
-import { useState, useRef, useEffect, useMemo } from "react";
-import { flushSync } from "../vendor/944059";
-import { useSelector } from "../vendor/514228";
-import { isNullish } from "../figma_app/95419";
-import { J } from "../figma_app/63663";
-import { d as _$$d } from "../figma_app/844319";
-import { T as _$$T } from "../figma_app/300269";
-import { q } from "../905/820062";
-import { AD } from "../905/871411";
-import { getSingletonSceneGraph } from "../905/700578";
-import { Xr } from "../figma_app/27355";
-import { generateRecordingKey } from "../figma_app/878298";
-import g from "classnames";
-import { am } from "../figma_app/901889";
-import { c$ } from "../figma_app/236327";
-import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
-import { uQ } from "../figma_app/311375";
-import { O as _$$O } from "../figma_app/373984";
-import { EE, lB } from "../figma_app/731583";
-import { _X, $g } from "../figma_app/62612";
-import { BK } from "../905/848862";
-import { Cf, it } from "../905/504727";
-import { K } from "../figma_app/695131";
-import { b as _$$b } from "../figma_app/192260";
-var f = g;
+import g from 'classnames';
+import { useSetAtom } from 'jotai/react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
+import { getI18nString } from '../905/303541';
+import { Cf, it } from '../905/504727';
+import { getSingletonSceneGraph } from '../905/700578';
+import { q } from '../905/820062';
+import { BK } from '../905/848862';
+import { AD } from '../905/871411';
+import { s as _$$s } from '../cssbuilder/589278';
+import { $g, _X } from '../figma_app/62612';
+import { J } from '../figma_app/63663';
+import { isNullish } from '../figma_app/95419';
+import { b as _$$b } from '../figma_app/192260';
+import { c$ } from '../figma_app/236327';
+import { T as _$$T } from '../figma_app/300269';
+import { uQ } from '../figma_app/311375';
+import { O as _$$O } from '../figma_app/373984';
+import { K } from '../figma_app/695131';
+import { EE, lB } from '../figma_app/731583';
+import { d as _$$d } from '../figma_app/844319';
+import { generateRecordingKey } from '../figma_app/878298';
+import { am } from '../figma_app/901889';
+import { useSelector } from '../vendor/514228';
+import { flushSync } from '../vendor/944059';
+let f = g;
 let $$O3 = 430;
 let $$R5 = 1024;
 let $$L1 = 375;
@@ -47,9 +47,9 @@ function M() {
     if (!l.length) return;
     let {
       currentNodePosition
-    } = EE("sitesBreakpoints", l ?? [], e => {
+    } = EE('sitesBreakpoints', l ?? [], e => {
       let r = getSingletonSceneGraph().get(e.nodeId);
-      !r || !e.position || "FRAME" !== r.type || r.isGroup || r.isStateGroup || r.isResponsiveSet || flushSync(() => {
+      !r || !e.position || r.type !== 'FRAME' || r.isGroup || r.isStateGroup || r.isResponsiveSet || flushSync(() => {
         t(t => {
           let n = {
             ...t
@@ -71,9 +71,11 @@ function M() {
           if ((minWidth !== _minWidth || maxWidth !== _maxWidth) && r.parentGuid) {
             let e = getSingletonSceneGraph().get(r.parentGuid);
             if (e && e.isResponsiveSet) {
-              for (let t of e.childrenNodes) if (t.isBreakpointFrame && t.guid && n[t.guid]) {
-                let e = n[t.guid];
-                e && (e.range = t.breakpointFrameRange);
+              for (let t of e.childrenNodes) {
+                if (t.isBreakpointFrame && t.guid && n[t.guid]) {
+                  let e = n[t.guid];
+                  e && (e.range = t.breakpointFrameRange);
+                }
               }
             }
           }
@@ -92,8 +94,10 @@ function M() {
       });
     }
     t(r);
-    return () => lB("sitesBreakpoints");
-  }, [l]), !l.length) return null;
+    return () => lB('sitesBreakpoints');
+  }, [l]), !l.length) {
+    return null;
+  }
   let d = Object.values(e).filter(e => e.parentGuid === s.guid).sort((e, t) => t.position.width - e.position.width);
   return isNullish(d) ? null : jsx(F, {
     breakpointRanges: d
@@ -102,25 +106,27 @@ function M() {
 function F({
   breakpointRanges: e
 }) {
-  let t = BK("BREAKPOINTS_HEADER_DROPDOWN");
-  let r = t.data?.responsiveSetId || "";
+  let t = BK('BREAKPOINTS_HEADER_DROPDOWN');
+  let r = t.data?.responsiveSetId || '';
   let a = am();
-  let s = Xr(_$$O);
-  let o = Xr(K);
+  let s = useSetAtom(_$$O);
+  let o = useSetAtom(K);
   let m = _X({
     subscribeToUpdates_expensive: !0
   });
   let g = useMemo(() => {
     let e = function (e, t) {
       let r = getSingletonSceneGraph().get(e);
-      if (!r) return {
-        top: 0,
-        bottom: 0,
-        height: 0,
-        left: 0,
-        right: 0,
-        width: 0
-      };
+      if (!r) {
+        return {
+          top: 0,
+          bottom: 0,
+          height: 0,
+          left: 0,
+          right: 0,
+          width: 0
+        };
+      }
       let n = r.absoluteBoundingBox;
       let i = n.x + n.w;
       let a = n.y;
@@ -170,7 +176,7 @@ function F({
       });
     });
     o(!0);
-    a("sites_add_breakpoint", {
+    a('sites_add_breakpoint', {
       type: name,
       width
     });
@@ -181,61 +187,61 @@ function F({
       duplicatedBreakpointId: I,
       parentId: r
     });
-    a("sites_add_custom_breakpoint");
+    a('sites_add_custom_breakpoint');
   };
   let k = e.some(e => e.position.width === $$L1);
   let M = e.some(e => e.position.width === $$D4);
   let F = e.some(e => e.position.width === $$P0);
   let U = e[0]?.parentGuid;
   let B = [jsx(j, {
-    title: _$$t("sites.breakpoint_bar.add_desktop_breakpoint"),
+    title: getI18nString('sites.breakpoint_bar.add_desktop_breakpoint'),
     width: $$D4,
     disabled: M,
     onClick: () => {
       U && O({
-        name: "Desktop",
+        name: 'Desktop',
         width: $$D4,
         parentId: U
       });
     },
     icon: jsx(J, {})
-  }, "add-desktop"), jsx(j, {
-    title: _$$t("sites.breakpoint_bar.add_tablet_breakpoint"),
+  }, 'add-desktop'), jsx(j, {
+    title: getI18nString('sites.breakpoint_bar.add_tablet_breakpoint'),
     width: $$P0,
     disabled: F,
     onClick: () => {
       U && O({
-        name: "Tablet",
+        name: 'Tablet',
         width: $$P0,
         parentId: U
       });
     },
     icon: jsx(_$$d, {})
-  }, "add-tablet"), jsx(j, {
-    title: _$$t("sites.breakpoint_bar.add_mobile_breakpoint"),
+  }, 'add-tablet'), jsx(j, {
+    title: getI18nString('sites.breakpoint_bar.add_mobile_breakpoint'),
     width: $$L1,
     disabled: k,
     onClick: () => {
       U && O({
-        name: "Mobile",
+        name: 'Mobile',
         width: $$L1,
         parentId: U
       });
     },
     icon: jsx(_$$T, {})
-  }, "add-mobile"), jsx(j, {
-    title: _$$t("sites.breakpoint_bar.add_custom_breakpoint"),
+  }, 'add-mobile'), jsx(j, {
+    title: getI18nString('sites.breakpoint_bar.add_custom_breakpoint'),
     onClick: () => R(),
     icon: jsx(q, {})
-  }, "add-custom-breakpoint")];
+  }, 'add-custom-breakpoint')];
   return jsx(Fragment, {
     children: t.showing && jsx(Cf, {
       targetRect: g,
       type: it.DEFAULT,
       maxWidth: 150,
-      lean: "left",
+      lean: 'left',
       className: f()(_$$s.eventsAuto.$),
-      recordingKey: "sitesBreakpointDropdown",
+      recordingKey: 'sitesBreakpointDropdown',
       preventEventCapture: !0,
       children: B
     })
@@ -252,13 +258,13 @@ function j(e) {
   return jsx(c$, {
     disabled,
     onClick: disabled ? void 0 : onClick,
-    recordingKey: generateRecordingKey("breakpointDropdownAction", title),
-    children: jsxs("div", {
+    recordingKey: generateRecordingKey('breakpointDropdownAction', title),
+    children: jsxs('div', {
       className: _$$s.flex.flexRow.justifyBetween.wFull.alignCenter.$,
-      children: [jsxs("div", {
+      children: [jsxs('div', {
         className: _$$s.flex.flexRow.itemsCenter.gap4.$,
         children: [icon, title]
-      }), width && jsx("div", {
+      }), width && jsx('div', {
         className: _$$s.colorTextMenuTertiary.textBodyMedium.contentCenter.$,
         children: width
       })]

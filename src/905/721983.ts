@@ -1,4 +1,4 @@
-import { eU } from "../figma_app/27355";
+import { atom } from "../figma_app/27355";
 import { lY } from "../905/104795";
 export function $$a6(e, t, i) {
   let n = {
@@ -28,11 +28,11 @@ export function $$l2(e, t, i, n = 1) {
   return e[t] ? n ? $$s1(e, r) : $$a6(e, r, !1) : $$a6(e, r, !0);
 }
 function d(e) {
-  return function (e = 1, t = eU({})) {
-    return eU(e => e(t), (i, n, r, a) => {
+  return function (e = 1, t = atom({})) {
+    return atom(e => e(t), (i, n, r, a) => {
       n(t, $$l2(i(t), r, a ?? [], e));
     });
-  }(0, eU(t => t(lY)[e] ?? {}, (t, i, n) => i(lY, t => ({
+  }(0, atom(t => t(lY)[e] ?? {}, (t, i, n) => i(lY, t => ({
     ...t,
     [e]: n
   }))));

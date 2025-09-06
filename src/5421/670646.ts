@@ -6,7 +6,7 @@ import { n4 } from "../905/955878";
 import { fn } from "../905/871411";
 import { Pt, o6 } from "../figma_app/806412";
 import { k as _$$k } from "../905/582200";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { c as _$$c } from "../905/370443";
 import { fu, kp } from "../figma_app/831799";
 import { xv } from "../figma_app/290668";
@@ -24,7 +24,7 @@ import { bL, c$ } from "../905/867927";
 import { q as _$$q } from "../905/932270";
 import { c$ as _$$c$, bL as _$$bL, l9, mc, wv, DZ } from "../905/493196";
 import { h as _$$h, J as _$$J } from "../905/270045";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { hY, yr, $X, Fh, r6, J_, AG, $w, dr } from "../figma_app/349969";
 import { TI, z5 } from "../905/713722";
 import { Ib } from "../905/129884";
@@ -58,7 +58,7 @@ import { r as _$$r } from "../905/571838";
 import { Ez5, ibQ, KjJ, X3B } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { Rk as _$$Rk, Ge, wi } from "../figma_app/451499";
 import { ut } from "../figma_app/84367";
 import { l6, c$ as _$$c$2 } from "../905/794875";
@@ -212,7 +212,7 @@ class J extends PureComponent {
         children: [!this.props.isUI3 && jsx(hl, {
           children: jsx(nV, {
             className: X,
-            children: tx("presets.device_panel.model")
+            children: renderI18nText("presets.device_panel.model")
           })
         }), this.props.isUI3 ? r : jsx(fI, {
           children: i
@@ -261,7 +261,7 @@ class J extends PureComponent {
         children: [!this.props.isUI3 && jsx(hl, {
           children: jsx(nV, {
             className: X,
-            children: tx("presets.device_panel.preview")
+            children: renderI18nText("presets.device_panel.preview")
           })
         }), this.props.isUI3 ? jsx(TN, {
           appendedClassName: Rk,
@@ -303,14 +303,14 @@ class J extends PureComponent {
       recordingKey: Pt(this.props, "orientationControl"),
       value: this.currentDeviceOrientation(),
       legend: jsx(_$$q, {
-        children: _$$t("presets.device_panel.rotation")
+        children: getI18nString("presets.device_panel.rotation")
       }),
       children: [jsx(c$, {
-        "aria-label": _$$t("presets.device_panel.rotation.portrait"),
+        "aria-label": getI18nString("presets.device_panel.rotation.portrait"),
         value: "PORTRAIT",
         icon: jsx(A, {})
       }), jsx(c$, {
-        "aria-label": _$$t("presets.device_panel.rotation.landscape"),
+        "aria-label": getI18nString("presets.device_panel.rotation.landscape"),
         value: "LANDSCAPE",
         icon: jsx(w, {})
       })]
@@ -341,7 +341,7 @@ class J extends PureComponent {
           extended: this.props.isUI3,
           doNotReserveSpaceForChevron: !0,
           forceNoChevron: !0,
-          children: this.props.isUI3 ? tx("presets.device_panel.prototype_settings") : tx("presets.device_panel.device")
+          children: this.props.isUI3 ? renderI18nText("presets.device_panel.prototype_settings") : renderI18nText("presets.device_panel.device")
         })
       }), this.props.isUI3 ? l : r, this.renderModelDropdown(!!a, i, n), this.props.isUI3 && "CUSTOM" === this.props.prototypeDevice.type && s, this.props.isUI3 && jsx(z, {
         pickerShown: this.props.pickerShown,
@@ -380,7 +380,7 @@ function Q(e) {
   let r = jsx($j, {
     bigNudgeAmount: e.bigNudgeAmount,
     className: "prototype_device_panel--scrubbableInputLeftCol--P2T66 prototype_device_panel--scrubbableInput--0TFVb",
-    "data-tooltip": _$$t("presets.device_panel.device_width_tooltip"),
+    "data-tooltip": getI18nString("presets.device_panel.device_width_tooltip"),
     "data-tooltip-type": Ib.TEXT,
     dispatch: e.dispatch,
     inputClassName: "prototype_device_panel--leftColInput--pAJSy prototype_device_panel--input--vNirJ",
@@ -391,13 +391,13 @@ function Q(e) {
     value: e.prototypeDevice.size.x,
     children: jsx("span", {
       className: q,
-      children: tx("proto.device_panel.width")
+      children: renderI18nText("proto.device_panel.width")
     })
   });
   let a = jsx($j, {
     bigNudgeAmount: e.bigNudgeAmount,
     className: "prototype_device_panel--scrubbableInput--0TFVb",
-    "data-tooltip": _$$t("presets.device_panel.device_height_tooltip"),
+    "data-tooltip": getI18nString("presets.device_panel.device_height_tooltip"),
     "data-tooltip-type": Ib.TEXT,
     dispatch: e.dispatch,
     inputClassName: "prototype_device_panel--input--vNirJ",
@@ -408,7 +408,7 @@ function Q(e) {
     value: e.prototypeDevice.size.y,
     children: jsx("span", {
       className: q,
-      children: tx("proto.device_panel.height")
+      children: renderI18nText("proto.device_panel.height")
     })
   });
   return jsx(dx, {
@@ -421,7 +421,7 @@ class ee extends o6 {
   constructor() {
     super(...arguments);
     this.formatter = {
-      format: e => "NONE" === e ? this.props.isUI3 ? _$$t("proto.frame_preset_panel.no_device") : _$$t("proto.frame_preset_panel.none") : "CUSTOM" === e ? _$$t("proto.frame_preset_panel.custom_size") : "PRESENTATION" === e ? _$$t("proto.frame_preset_panel.presentation") : e.getI18nDeviceName(),
+      format: e => "NONE" === e ? this.props.isUI3 ? getI18nString("proto.frame_preset_panel.no_device") : getI18nString("proto.frame_preset_panel.none") : "CUSTOM" === e ? getI18nString("proto.frame_preset_panel.custom_size") : "PRESENTATION" === e ? getI18nString("proto.frame_preset_panel.presentation") : e.getI18nDeviceName(),
       isEqual: (e, t) => "NONE" === e || "CUSTOM" === e || "PRESENTATION" === e || "NONE" === t || "CUSTOM" === t || "PRESENTATION" === t ? e === t : e.presetIdentifier === t.presetIdentifier
     };
     this.onChange = e => {
@@ -434,7 +434,7 @@ class ee extends o6 {
         params: {
           oldType: this.props.prototypeDevice.presetIdentifier || t,
           newType: e.presetIdentifier || n,
-          isInlinePreviewOpened: zl.get(hg).modalStatus === bi.OPEN
+          isInlinePreviewOpened: atomStoreManager.get(hg).modalStatus === bi.OPEN
         }
       }));
     };
@@ -466,22 +466,22 @@ class ee extends o6 {
       value: t,
       children: [jsx(l9, {
         label: jsx(_$$h, {
-          children: tx("proto.frame_preset_panel.device")
+          children: renderI18nText("proto.frame_preset_panel.device")
         }),
         width: "fill",
         children: this.formatter.format(e)
       }), jsxs(mc, {
         children: [jsx(_$$c$, {
           value: "NONE",
-          children: tx("proto.frame_preset_panel.no_device")
+          children: renderI18nText("proto.frame_preset_panel.no_device")
         }), jsx(wv, {}), r6.map(this.renderPresetOption), jsx(wv, {}), J_.map(this.renderPresetOption), jsx(wv, {}), AG.map(this.renderPresetOption), jsx(wv, {}), $w.map(this.renderPresetOption), jsx(wv, {}), jsx(_$$c$, {
           value: "CUSTOM",
           children: jsxs("div", {
             className: Y,
             children: [jsx("span", {
-              children: tx("proto.frame_preset_panel.custom_size")
+              children: renderI18nText("proto.frame_preset_panel.custom_size")
             }), jsx("span", {
-              children: tx("proto.frame_preset_panel.fit")
+              children: renderI18nText("proto.frame_preset_panel.fit")
             })]
           })
         }), jsx(_$$c$, {
@@ -489,9 +489,9 @@ class ee extends o6 {
           children: jsxs("div", {
             className: Y,
             children: [jsx("span", {
-              children: tx("proto.frame_preset_panel.presentation")
+              children: renderI18nText("proto.frame_preset_panel.presentation")
             }), jsx("span", {
-              children: tx("proto.frame_preset_panel.fill")
+              children: renderI18nText("proto.frame_preset_panel.fill")
             })]
           })
         }), jsx(wv, {}), dr.map(this.renderPresetOption)]
@@ -506,7 +506,7 @@ class et extends o6 {
     this.formatter = {
       format: e => {
         let t = hY[e];
-        return t ? t.getI18nStyleName() : _$$t("proto.frame_preset_panel.missing");
+        return t ? t.getI18nStyleName() : getI18nString("proto.frame_preset_panel.missing");
       },
       isEqual: (e, t) => e === t
     };
@@ -529,7 +529,7 @@ class et extends o6 {
       value: n,
       children: [jsx(l9, {
         label: jsx(_$$h, {
-          children: tx("proto.frame_preset_panel.device.model")
+          children: renderI18nText("proto.frame_preset_panel.device.model")
         }),
         width: "fill",
         children: this.formatter.format(n)
@@ -590,7 +590,7 @@ function eg({
   }
 }) {
   let n = null;
-  gl(e) && gl(t) ? n = tx("proto.prototype_panel.replace_mixed_muted_and_loop_video_playback", {
+  gl(e) && gl(t) ? n = renderI18nText("proto.prototype_panel.replace_mixed_muted_and_loop_video_playback", {
     loopSvg: jsx(_$$B, {
       svg: _$$A3,
       className: _$$eT
@@ -599,12 +599,12 @@ function eg({
       svg: _$$A4,
       className: To
     })
-  }) : gl(e) ? n = tx("proto.prototype_panel.replace_mixed_video_playback", {
+  }) : gl(e) ? n = renderI18nText("proto.prototype_panel.replace_mixed_video_playback", {
     svg: jsx(_$$B, {
       svg: _$$A3,
       className: _$$eT
     })
-  }) : gl(t) && (n = tx("proto.prototype_panel.replace_mixed_video_playback", {
+  }) : gl(t) && (n = renderI18nText("proto.prototype_panel.replace_mixed_video_playback", {
     svg: jsx(_$$B, {
       svg: _$$A4,
       className: To
@@ -624,10 +624,10 @@ let e_ = function (e) {
     children: jsx(_$$S, {
       label: jsx(_$$J, {
         htmlAttributes: {
-          "data-tooltip": _$$t("proto.prototype_panel.default_video_playback_state"),
+          "data-tooltip": getI18nString("proto.prototype_panel.default_video_playback_state"),
           "data-tooltip-type": Ib.TEXT
         },
-        children: tx("proto.prototype_panel.autoplay")
+        children: renderI18nText("proto.prototype_panel.autoplay")
       }),
       onChange: t => {
         e.updateSelectionProperties({
@@ -668,9 +668,9 @@ let e_ = function (e) {
     },
     "data-testid": "videoLoopToggle",
     recordingKey: Pt(e, "videoLoopToggle"),
-    "aria-label": _$$t("proto.prototype_panel.loop"),
+    "aria-label": getI18nString("proto.prototype_panel.loop"),
     htmlAttributes: {
-      "data-tooltip": _$$t("proto.prototype_panel.loop"),
+      "data-tooltip": getI18nString("proto.prototype_panel.loop"),
       "data-tooltip-type": Ib.TEXT
     }
   });
@@ -695,9 +695,9 @@ let e_ = function (e) {
     },
     "data-testid": "videoSoundToggle",
     recordingKey: Pt(e, "videoSoundToggle"),
-    "aria-label": _$$t("proto.prototype_panel.sound"),
+    "aria-label": getI18nString("proto.prototype_panel.sound"),
     htmlAttributes: {
-      "data-tooltip": _$$t("proto.prototype_panel.sound"),
+      "data-tooltip": getI18nString("proto.prototype_panel.sound"),
       "data-tooltip-type": Ib.TEXT
     }
   });
@@ -711,7 +711,7 @@ let e_ = function (e) {
     children: [jsx(fI, {
       children: jsx(_$$Q, {
         extended: !0,
-        children: tx("proto.prototype_panel.video")
+        children: renderI18nText("proto.prototype_panel.video")
       })
     }), r, jsx(eg, {
       videoPlayback: e.videoPlayback
@@ -733,7 +733,7 @@ function eD(e) {
       style: {
         maxWidth: 144
       },
-      children: tx("proto.prototype_panel.content_needs_to_be_bigger_than_the_frame_tooltip")
+      children: renderI18nText("proto.prototype_panel.content_needs_to_be_bigger_than_the_frame_tooltip")
     })]
   });
 }
@@ -753,7 +753,7 @@ let eV = _$$ex("prototype_scroll_marquee_info", function () {
       style: {
         maxWidth: 144
       },
-      children: tx("proto.prototype_panel.overflow_scrolling_not_available_for_frames_with_marquee")
+      children: renderI18nText("proto.prototype_panel.overflow_scrolling_not_available_for_frames_with_marquee")
     })
   });
 }, () => ({}));
@@ -775,7 +775,7 @@ function eK(e) {
   }();
   let s = useId();
   let u = jsx(iE, {
-    titleTx: tx("proto.scroll_panel.scroll_behavior_title")
+    titleTx: renderI18nText("proto.scroll_panel.scroll_behavior_title")
   });
   return a || l ? jsx(_$$k, {
     name: "scroll_behavior_panel",
@@ -790,7 +790,7 @@ function eK(e) {
             children: jsx("span", {
               id: s,
               className: eU,
-              children: tx("proto.scroll_panel.position_dropdown.position")
+              children: renderI18nText("proto.scroll_panel.position_dropdown.position")
             })
           }), jsx(eY, {
             ariaLabelledBy: s,
@@ -835,7 +835,7 @@ function ez({
       children: jsx(_$$J, {
         htmlFor: c,
         className: eU,
-        children: tx("proto.scroll_panel.overflow_dropdown.overflow")
+        children: renderI18nText("proto.scroll_panel.overflow_dropdown.overflow")
       })
     }), a && jsx("div", {
       className: "scroll_behavior_panel--infoIcon--FeXbf",
@@ -902,7 +902,7 @@ function eG({
       children: jsx(_$$J, {
         htmlFor: d,
         className: eU,
-        children: tx("proto.scroll_panel.position_dropdown.position")
+        children: renderI18nText("proto.scroll_panel.position_dropdown.position")
       })
     }), jsx("div", {
       className: eH,
@@ -977,7 +977,7 @@ let eq = () => {
   let [e] = lJ("marquee");
   return !!isDefined(e);
 };
-let eX = () => _$$R(e => {
+let eX = () => selectWithShallowEqual(e => {
   let t = e.mirror.selectionProperties;
   return {
     fixedScrollingDisabled: !t.nodesAreAllNotInStacksOrAbsolutePositioned || !t.allHaveScrollableFrameAsParent
@@ -986,30 +986,30 @@ let eX = () => _$$R(e => {
 function e5() {
   return jsx(_$$u, {
     idForTests: "create-connection-hint",
-    title: _$$t("proto.onboarding.creating_a_connection"),
+    title: getI18nString("proto.onboarding.creating_a_connection"),
     userFlag: "dismissed_create_connection_hint",
     icon_DEPRECATED: _$$A9,
     iconFallback: _$$A0,
-    hintText: _$$t("proto.onboarding.select_a_frame_or_object_hint")
+    hintText: getI18nString("proto.onboarding.select_a_frame_or_object_hint")
   });
 }
 function e6() {
   return jsx(_$$u, {
     idForTests: "delete-connection-hint",
-    title: _$$t("proto.onboarding.removing_a_connection"),
+    title: getI18nString("proto.onboarding.removing_a_connection"),
     userFlag: "dismissed_delete_connection_hint",
     icon_DEPRECATED: _$$A7,
     iconFallback: _$$A8,
-    hintText: _$$t("proto.onboarding.to_delete_a_connection_click_and_drag_on_either_end")
+    hintText: getI18nString("proto.onboarding.to_delete_a_connection_click_and_drag_on_either_end")
   });
 }
 function e8() {
   return jsx(_$$u, {
     idForTests: "play-button-hint",
-    title: _$$t("proto.onboarding.running_your_prototype"),
+    title: getI18nString("proto.onboarding.running_your_prototype"),
     userFlag: "dismissed_play_button_hint",
     icon_DEPRECATED: _$$A1,
-    hintText: _$$t("proto.onboarding.use_the_play_button_hint")
+    hintText: getI18nString("proto.onboarding.use_the_play_button_hint")
   });
 }
 function e9({
@@ -1155,7 +1155,7 @@ export let $$e70 = kp(function (e) {
           children: jsx(_$$z, {
             onClick: K,
             recordingKey: Pt(e, "prototypeSettingsButton"),
-            children: tx("proto.menu.show_prototype_settings")
+            children: renderI18nText("proto.menu.show_prototype_settings")
           })
         })
       })]

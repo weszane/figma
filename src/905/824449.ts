@@ -17,9 +17,9 @@ import { RYP } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import F from "classnames";
 import { UE, x1, FO, tM, AW } from "../figma_app/191804";
-import { R as _$$R } from "../905/103090";
-import { x1 as _$$x } from "../905/714362";
-import { t as _$$t } from "../905/303541";
+import { selectWithShallowEqual } from "../905/103090";
+import { logError } from "../905/714362";
+import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/989956";
 import { pw } from "../905/187165";
 import { yM, DP } from "../905/640017";
@@ -319,7 +319,7 @@ export function $$ei4(e) {
 }
 export var $$en2 = (e => (e.Standard = "Standard", e.Large = "Large", e.Large_variables = "Large_variables", e.Large_DSA = "Large_DSA", e.Large_illustration = "Large_illustration", e))($$en2 || {});
 export function $$er3(e, t) {
-  if (e && t && "EFFECT" === e.type && e.effects?.length > 0 && e.effects.find(e => "GLASS" === e.type)) return _$$t("properties_panel.effects.glass.style.non_frame_warning");
+  if (e && t && "EFFECT" === e.type && e.effects?.length > 0 && e.effects.find(e => "GLASS" === e.type)) return getI18nString("properties_panel.effects.glass.style.non_frame_warning");
 }
 export function $$ea1({
   dsStyle: e,
@@ -473,7 +473,7 @@ function el({
       case void 0:
         return null;
       default:
-        _$$x("Unknown effect type", e.type);
+        logError("Unknown effect type", e.type);
         return jsx(_$$V, {
           "data-testid": "effect-style-svg"
         });
@@ -502,7 +502,7 @@ function ec({
     let i = e.node_id;
     return i && t.library.local.thumbnails[i]?.url;
   });
-  let r = es(_$$R(t => {
+  let r = es(selectWithShallowEqual(t => {
     if (!e.node_id) return null;
     let i = t.mirror.sceneGraph.get(e.node_id);
     return AW(i?.fills);

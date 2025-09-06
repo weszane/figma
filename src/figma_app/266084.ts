@@ -1,6 +1,6 @@
 import { h3O } from "../figma_app/763686";
 import { debugState } from "../905/407919";
-import { Lo } from "../905/714362";
+import { logInfo } from "../905/714362";
 import { ZG, mu, t } from "../figma_app/840917";
 import { W6 } from "../905/327522";
 export let $$n0;
@@ -31,7 +31,7 @@ class d {
   createAutosaveManager(e) {
     let t = debugState.getState().user;
     if (!t) {
-      Lo("Autosave", "Not creating manager for logged out user");
+      logInfo("Autosave", "Not creating manager for logged out user");
       return;
     }
     mu(e, t.id);

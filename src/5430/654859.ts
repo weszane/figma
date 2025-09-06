@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from "../vendor/514228";
 import { N_ } from "../vendor/956898";
 import { getFeatureFlags } from "../905/601108";
 import l from "classnames";
-import { sx } from "../905/449184";
-import { tx, t as _$$t } from "../905/303541";
+import { trackEventAnalytics } from "../905/449184";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { MZ, pY, Pj, Dy, ky } from "../figma_app/925970";
 import { e as _$$e } from "../905/579755";
 import { $3 } from "../figma_app/487970";
@@ -16,7 +16,7 @@ import { Jm } from "../figma_app/387599";
 import { Lj } from "../figma_app/835219";
 import { qD, _t, ZD } from "../figma_app/471982";
 import { Mc, qd } from "../figma_app/640564";
-import { jk } from "../905/609396";
+import { PerfTimer } from "../905/609396";
 import { F as _$$F } from "../905/302958";
 import { $W } from "../905/144933";
 import { e as _$$e2 } from "../figma_app/324237";
@@ -51,7 +51,7 @@ function z({
     className: B,
     children: [jsx("div", {
       className: D,
-      children: tx("community.view_bar.creators")
+      children: renderI18nText("community.view_bar.creators")
     }), jsx(Q, {
       profiles: e.map(e => e.model),
       onResourceClick: t,
@@ -120,7 +120,7 @@ function q({
     className: B,
     children: [jsx("div", {
       className: D,
-      children: tx("community.view_bar.widgets")
+      children: renderI18nText("community.view_bar.widgets")
     }), e.slice(0, 4).map((e, n) => {
       let a = qD(e);
       return jsx("div", {
@@ -181,7 +181,7 @@ function Y({
     className: B,
     children: [jsx("div", {
       className: D,
-      children: tx("community.view_bar.plugins")
+      children: renderI18nText("community.view_bar.plugins")
     }), e.slice(0, 4).map((e, n) => {
       let a = qD(e);
       return jsx("div", {
@@ -244,7 +244,7 @@ function X({
     className: B,
     children: [jsx("div", {
       className: D,
-      children: tx("community.view_bar.files")
+      children: renderI18nText("community.view_bar.files")
     }), e.slice(0, 4).map((e, n) => {
       let a = qD(e);
       return jsx("div", {
@@ -304,7 +304,7 @@ let J = function (e, t) {
   });
 }((e, t) => t(function (e) {
   return (t, r) => {
-    let s = new jk(L, {});
+    let s = new PerfTimer(L, {});
     s.start();
     let i = r().search?.sessionId || "unattributed";
     let n = MZ();
@@ -337,7 +337,7 @@ let J = function (e, t) {
     }(i, n, e)]).then(r => {
       "unattributed" !== i && t(pY());
       let n = s.stop();
-      sx(L, {
+      trackEventAnalytics(L, {
         elapsedMs: n,
         resourceResultCount: r[0].data.meta.results.length,
         profileResultCount: r[1].data.meta.results.length,
@@ -348,7 +348,7 @@ let J = function (e, t) {
       });
       return r;
     }).catch(e => (t(_$$F.enqueue({
-      message: e.message || _$$t("community.error.search_request_failed"),
+      message: e.message || getI18nString("community.error.search_request_failed"),
       error: !0,
       type: "community-search-error",
       timeoutOverride: 2e3
@@ -380,7 +380,7 @@ export function $$K0(e) {
   let w = AG();
   let C = useCallback(() => {
     v(Pj({}));
-    sx("search_show_all_clicked", {
+    trackEventAnalytics("search_show_all_clicked", {
       query,
       scope: "community",
       entryPoint: w ? "resource_hub" : "community",
@@ -416,7 +416,7 @@ export function $$K0(e) {
         idx: -1
       });
       let c = context === PF.LANDING ? "searchPreviewLanding" : "searchPreview";
-      sx(M5.SEARCH_QUERY_RESULT, {
+      trackEventAnalytics(M5.SEARCH_QUERY_RESULT, {
         query,
         mixed: n.length,
         entry_point: "community",
@@ -431,7 +431,7 @@ export function $$K0(e) {
     }).catch(() => {});
   }, [query, v, j, context, setResources, setSelectedIdx, w]);
   let L = useCallback(e => {
-    sx("search_result_clicked", {
+    trackEventAnalytics("search_result_clicked", {
       query,
       resourceType: e,
       scope: "community",
@@ -489,7 +489,7 @@ export function $$K0(e) {
       children: jsx(A6, {
         to: A,
         onClick: C,
-        children: tx("community.search.show_all_search_results")
+        children: renderI18nText("community.search.show_all_search_results")
       })
     }) : null]
   });

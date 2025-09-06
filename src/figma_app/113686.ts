@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { getFeatureFlags } from "../905/601108";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Rs, oS } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { MF, A5 } from "../figma_app/391338";
@@ -32,7 +32,7 @@ export function $$p1(e, t) {
       var o;
       s = e.currentOrgId;
       o = e.currentTeamId;
-      return void (getFeatureFlags().file_browser_sidebar_lg_logging && sx("File Browser Sidebar LG", {
+      return void (getFeatureFlags().file_browser_sidebar_lg_logging && trackEventAnalytics("File Browser Sidebar LG", {
         lgEvent: t,
         traceId: n.traceId,
         hasBeenOffline: n.wasOffline,

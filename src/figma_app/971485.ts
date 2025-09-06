@@ -1,11 +1,11 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useRef, useEffect, useCallback } from "react";
-import { Xr, md } from "../figma_app/27355";
+import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import s from "classnames";
 import { GZ } from "../905/508367";
 import { wY, cU } from "../figma_app/708845";
 import { getInitialOptions } from "../figma_app/169182";
-import { Ay as _$$Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { Yo } from "../figma_app/637027";
 import { B } from "../905/714743";
 import { c as _$$c } from "../905/370443";
@@ -150,14 +150,14 @@ function T(e) {
   }) || null;
 }
 export function $$I0(e) {
-  let t = md(Dr);
+  let t = useAtomWithSubscription(Dr);
   let r = !1;
-  return (t === S6.UNLOADED && (r = !0), t !== S6.YES || e.persistentMessage || (r = !0), V() && (r = !0), getInitialOptions().user_data?.id && (r = !0), (getInitialOptions().is_embed || GZ()) && (r = !0), _$$Ay.isMeetDevice && (r = !0), useEffect(() => {
-    !r && _$$Ay.isIpadNative && L3({
+  return (t === S6.UNLOADED && (r = !0), t !== S6.YES || e.persistentMessage || (r = !0), V() && (r = !0), getInitialOptions().user_data?.id && (r = !0), (getInitialOptions().is_embed || GZ()) && (r = !0), BrowserInfo.isMeetDevice && (r = !0), useEffect(() => {
+    !r && BrowserInfo.isIpadNative && L3({
       consentRegion: "explicit",
       cookiesEnabled: !1
     });
-  }, [r]), r || _$$Ay.isIpadNative) ? null : jsx(fu, {
+  }, [r]), r || BrowserInfo.isIpadNative) ? null : jsx(fu, {
     name: "Cookie Banner",
     properties: {
       consentRegion: "implicit"

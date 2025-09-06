@@ -1,14 +1,14 @@
 import { Wp } from "../vendor/703739";
 import { dG, xD, gf } from "../vendor/395562";
-import { eD, S8, Zy } from "../figma_app/876459";
+import { desktopAPIInstance, bellFeedAPIInstance, isFigmaDesktopUA } from "../figma_app/876459";
 import { getInitialOptions } from "../figma_app/169182";
-import { Xb } from "../figma_app/778880";
+import { isAnyMobile } from "../figma_app/778880";
 import { sr } from "../905/894881";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { iX, Ke, _F, Jr } from "../905/415545";
 class c {
   static trackNotificationReceived(e) {
-    az.trackDefinedEvent("notification.browser_notification_received", {
+    analyticsEventManager.trackDefinedEvent("notification.browser_notification_received", {
       user_notification_id: e.id,
       user_notification_member_id: e.member_id,
       user_notification_batching_category: e.batching_category,
@@ -20,25 +20,25 @@ class c {
     });
   }
   static trackPermissionRequest(e) {
-    az.trackDefinedEvent("notification.browser_notification_permission_request", {
+    analyticsEventManager.trackDefinedEvent("notification.browser_notification_permission_request", {
       request_origin: e
     });
   }
   static trackTokenRegistered(e) {
-    az.trackDefinedEvent("notification.firebase_token_registered", {
+    analyticsEventManager.trackDefinedEvent("notification.firebase_token_registered", {
       registration_origin: e
     });
   }
   static trackTokenBlocked(e) {
-    az.trackDefinedEvent("notification.firebase_token_registration_blocked", {
+    analyticsEventManager.trackDefinedEvent("notification.firebase_token_registration_blocked", {
       status: e
     });
   }
   static trackTokenFailed() {
-    az.trackDefinedEvent("notification.firebase_token_registration_failed", {});
+    analyticsEventManager.trackDefinedEvent("notification.firebase_token_registration_failed", {});
   }
   static trackFirebaseError(e) {
-    az.trackDefinedEvent("notification.browser_notification_firebase_error", {
+    analyticsEventManager.trackDefinedEvent("notification.browser_notification_firebase_error", {
       error_message: e
     });
   }
@@ -204,11 +204,11 @@ export class $$p0 {
     return $$p0.isBrowserNotificationSupported() ? this.getInstance() : null;
   }
   static isUserOnMobileDevice() {
-    return Xb;
+    return isAnyMobile;
   }
   static isBrowserNotificationSupported() {
     let e = "serviceWorker" in navigator && "PushManager" in window && "Notification" in window && "fetch" in window;
-    return !eD && !S8 && !Zy && !$$p0.isUserOnMobileDevice() && e;
+    return !desktopAPIInstance && !bellFeedAPIInstance && !isFigmaDesktopUA && !$$p0.isUserOnMobileDevice() && e;
   }
   static getPermissionPreference() {
     return navigator.permissions.query({

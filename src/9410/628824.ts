@@ -7,7 +7,7 @@ import { FProductAccessType } from "../figma_app/191312";
 import { wH } from "../figma_app/680166";
 import { hV } from "../figma_app/822177";
 import { $z } from "../figma_app/617427";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { c as _$$c2 } from "../905/370443";
 import { kD, tS } from "../figma_app/622574";
 import { b4 } from "../figma_app/106207";
@@ -57,12 +57,12 @@ function w() {
   let n = q5();
   if (!tS() || e) return null;
   let a = t?.publishedByUser?.handle ? jsx("div", {
-    children: tx("whiteboard.delightful_toolbar.custom_template_banner.youre_viewing_a_team_template", {
+    children: renderI18nText("whiteboard.delightful_toolbar.custom_template_banner.youre_viewing_a_team_template", {
       userName: jsx("b", {
         children: t?.publishedByUser.handle
       })
     })
-  }) : tx("whiteboard.delightful_toolbar.custom_template_banner.youre_viewing_a_template");
+  }) : renderI18nText("whiteboard.delightful_toolbar.custom_template_banner.youre_viewing_a_template");
   return jsx(T, {
     dataTestId: "team-template-banner",
     trackingContext: "Team Template Banner",
@@ -84,7 +84,7 @@ function w() {
         trackingProperties: {
           trackingDescriptor: _$$c2.USE_IN_NEW_FILE
         },
-        children: tx("whiteboard.delightful_toolbar.custom_template_banner.new_file_button")
+        children: renderI18nText("whiteboard.delightful_toolbar.custom_template_banner.new_file_button")
       })]
     })
   });
@@ -95,7 +95,7 @@ function k() {
     dataTestId: "version-history-banner",
     trackingContext: "Version History Banner",
     onDismiss: () => t(!1),
-    children: tx("whiteboard.delightful_toolbar.version_history_banner_text", {
+    children: renderI18nText("whiteboard.delightful_toolbar.version_history_banner_text", {
       selectIcon: jsx(_$$y, {}),
       handIcon: jsx(O, {})
     })

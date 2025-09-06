@@ -2,8 +2,8 @@ import { useMemo, useCallback } from "react";
 import { useStore } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { _gJ } from "../figma_app/763686";
-import { R } from "../905/103090";
-import { $D } from "../905/11";
+import { selectWithShallowEqual } from "../905/103090";
+import { reportError } from "../905/11";
 import { gB } from "../905/294543";
 import { $n } from "../905/515076";
 import { Ym } from "../figma_app/806075";
@@ -15,7 +15,7 @@ import { EL } from "../figma_app/740025";
 import { ax } from "../figma_app/741237";
 import { Eh, cb } from "../figma_app/12796";
 import { Ar, YG, mx } from "../figma_app/300692";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { ZQ, k0 } from "../figma_app/155287";
 import { b as _$$b } from "../905/635568";
 import { $1, Be, cW } from "../figma_app/844435";
@@ -31,7 +31,7 @@ function v() {
     activeTextReviewPlugin,
     publishedPlugins,
     publishedWidgets
-  } = R(e => ({
+  } = selectWithShallowEqual(e => ({
     orgEntity: EL(e),
     org: e.currentUserOrgId ? e.orgById[e.currentUserOrgId] : null,
     openFile: e.openFile,
@@ -82,7 +82,7 @@ export function $$N1(e, t) {
   return useCallback(e => {
     if (!r) {
       console.error("Plugin version not found");
-      $D(_$$e.EXTENSIBILITY, Error("Plugin version not found"));
+      reportError(_$$e.EXTENSIBILITY, Error("Plugin version not found"));
       return;
     }
     let n = $$x4(r);
@@ -153,11 +153,11 @@ function P(e) {
   let {
     selectedView
   } = e.getState();
-  "fullscreen" === selectedView.view && selectedView.editorType === nT.Design && (e.dispatch(sf({
+  "fullscreen" === selectedView.view && selectedView.editorType === FEditorType.Design && (e.dispatch(sf({
     ...selectedView,
     view: "fullscreen",
-    editorType: nT.DevHandoff
-  })), Ym(e.getState(), nT.DevHandoff, "plugin_run"));
+    editorType: FEditorType.DevHandoff
+  })), Ym(e.getState(), FEditorType.DevHandoff, "plugin_run"));
 }
 export const Bi = $$w0;
 export const Gt = $$N1;

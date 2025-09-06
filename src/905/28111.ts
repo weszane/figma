@@ -17,7 +17,7 @@ import { h as _$$h } from "../905/207101";
 import { buildUploadUrl } from "../figma_app/169182";
 import { Pt } from "../figma_app/806412";
 import { Ph } from "../905/160095";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { c as _$$c } from "../905/370443";
 import { z5, TI } from "../905/713722";
 import { e } from "../905/621515";
@@ -96,7 +96,7 @@ export function $$Z0({
   } = useContext($$X1).colorContrastInfo;
   return jsxs(Fragment, {
     children: [jsx(_$$d, {
-      "aria-label": _$$t("fullscreen.properties_panel.color_contrast.check"),
+      "aria-label": getI18nString("fullscreen.properties_panel.color_contrast.check"),
       "aria-expanded": e,
       onClick: c,
       recordingKey: i,
@@ -173,23 +173,23 @@ export function $$Q2({
   let Z = function (e) {
     switch (e) {
       case mb.mixed:
-        return _$$t("fullscreen.properties_panel.color_contrast.mixed");
+        return getI18nString("fullscreen.properties_panel.color_contrast.mixed");
       case mb.largeText:
-        return _$$t("fullscreen.properties_panel.color_contrast.large_text");
+        return getI18nString("fullscreen.properties_panel.color_contrast.large_text");
       case mb.normalText:
-        return _$$t("fullscreen.properties_panel.color_contrast.normal_text");
+        return getI18nString("fullscreen.properties_panel.color_contrast.normal_text");
       case mb.graphics:
       default:
-        return _$$t("fullscreen.properties_panel.color_contrast.graphics");
+        return getI18nString("fullscreen.properties_panel.color_contrast.graphics");
     }
   }(layerType);
   let Q = !standardMet && autoCorrectCandidate;
-  let ee = contrastLevelForCategory === bm.AA ? _$$t("fullscreen.properties_panel.color_contrast.aaStandard") : _$$t("fullscreen.properties_panel.color_contrast.aaaStandard");
-  let et = (e, t = !1) => e ? _$$t("fullscreen.properties_panel.color_contrast.contrast_standard_met", {
+  let ee = contrastLevelForCategory === bm.AA ? getI18nString("fullscreen.properties_panel.color_contrast.aaStandard") : getI18nString("fullscreen.properties_panel.color_contrast.aaaStandard");
+  let et = (e, t = !1) => e ? getI18nString("fullscreen.properties_panel.color_contrast.contrast_standard_met", {
     standard: ee
-  }) : _$$t("fullscreen.properties_panel.color_contrast.contrast_standard_not_met", {
+  }) : getI18nString("fullscreen.properties_panel.color_contrast.contrast_standard_not_met", {
     standard: ee,
-    button_action: t ? _$$t("fullscreen.properties_panel.color_contrast.contrast_autocorrect") : ""
+    button_action: t ? getI18nString("fullscreen.properties_panel.color_contrast.contrast_autocorrect") : ""
   });
   let ei = et(standardMet, !!Q);
   let en = et(standardMet);
@@ -218,10 +218,10 @@ export function $$Q2({
     setContrastLevelSelected(e);
   }, [u, setContrastLevelSelected, p, a]);
   let ec = useMemo(() => [{
-    displayText: _$$t("fullscreen.properties_panel.color_contrast.category"),
+    displayText: getI18nString("fullscreen.properties_panel.color_contrast.category"),
     header: !0
   }, {
-    displayText: _$$t("fullscreen.properties_panel.color_contrast.auto", {
+    displayText: getI18nString("fullscreen.properties_panel.color_contrast.auto", {
       autoDetectedCategory: Z
     }),
     callback: () => el(Zf.auto),
@@ -229,19 +229,19 @@ export function $$Q2({
     isChecked: categorySelected === Zf.auto,
     recordingKey: "category_auto"
   }, {
-    displayText: _$$t("fullscreen.properties_panel.color_contrast.large_text"),
+    displayText: getI18nString("fullscreen.properties_panel.color_contrast.large_text"),
     callback: () => el(mb.largeText),
     alwaysShowCheckMarkOffset: !0,
     isChecked: categorySelected === mb.largeText,
     recordingKey: "category_large_text"
   }, {
-    displayText: _$$t("fullscreen.properties_panel.color_contrast.normal_text"),
+    displayText: getI18nString("fullscreen.properties_panel.color_contrast.normal_text"),
     callback: () => el(mb.normalText),
     alwaysShowCheckMarkOffset: !0,
     isChecked: categorySelected === mb.normalText,
     recordingKey: "category_normal_text"
   }, {
-    displayText: _$$t("fullscreen.properties_panel.color_contrast.graphics"),
+    displayText: getI18nString("fullscreen.properties_panel.color_contrast.graphics"),
     callback: () => el(mb.graphics),
     alwaysShowCheckMarkOffset: !0,
     isChecked: categorySelected === mb.graphics,
@@ -250,20 +250,20 @@ export function $$Q2({
     displayText: "",
     separator: !0
   }, {
-    displayText: _$$t("fullscreen.properties_panel.color_contrast.level"),
+    displayText: getI18nString("fullscreen.properties_panel.color_contrast.level"),
     header: !0
   }, {
-    displayText: contrastRatios?.AA ? _$$t("fullscreen.properties_panel.color_contrast.levelAA", {
+    displayText: contrastRatios?.AA ? getI18nString("fullscreen.properties_panel.color_contrast.levelAA", {
       contrastValue: contrastRatios.AA
-    }) : _$$t("fullscreen.properties_panel.color_contrast.levelAA_no_contrast_value"),
+    }) : getI18nString("fullscreen.properties_panel.color_contrast.levelAA_no_contrast_value"),
     callback: () => ed(bm.AA),
     alwaysShowCheckMarkOffset: !0,
     isChecked: contrastLevelForCategory === bm.AA,
     recordingKey: "level_aa"
   }, {
-    displayText: contrastRatios?.AAA ? _$$t("fullscreen.properties_panel.color_contrast.levelAAA", {
+    displayText: contrastRatios?.AAA ? getI18nString("fullscreen.properties_panel.color_contrast.levelAAA", {
       contrastValue: contrastRatios.AAA
-    }) : _$$t("fullscreen.properties_panel.color_contrast.levelAAA_unavailable"),
+    }) : getI18nString("fullscreen.properties_panel.color_contrast.levelAAA_unavailable"),
     callback: () => ed(bm.AAA),
     alwaysShowCheckMarkOffset: !0,
     isChecked: contrastLevelForCategory === bm.AAA,
@@ -303,14 +303,14 @@ export function $$Q2({
     let e = toolStatus === j$.LOADING ? jsx(_$$k, {
       htmlAttributes: {
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("fullscreen.properties_panel.color_contrast.loading")
+        "data-tooltip": getI18nString("fullscreen.properties_panel.color_contrast.loading")
       }
     }) : toolStatus === j$.TIMED_OUT ? jsx("div", {
       className: "color_contrast_info--timeoutButtonWrapper--m30OZ",
       children: jsx(IK, {
         variant: "secondary",
         onClick: eg,
-        children: _$$t("fullscreen.properties_panel.color_contrast.check_contrast_button")
+        children: getI18nString("fullscreen.properties_panel.color_contrast.check_contrast_button")
       })
     }) : jsx(h, {
       className: "color_contrast_info--unavailableIcon--nzuTg"
@@ -318,24 +318,24 @@ export function $$Q2({
     let t = function (e) {
       switch (e) {
         case xm.VideoInBackground:
-          return tx("fullscreen.properties_panel.color_contrast.unavailable.video");
+          return renderI18nText("fullscreen.properties_panel.color_contrast.unavailable.video");
         case xm.ImageInBackground:
-          return tx("fullscreen.properties_panel.color_contrast.unavailable.image");
+          return renderI18nText("fullscreen.properties_panel.color_contrast.unavailable.image");
         case xm.GradientInBackground:
-          return tx("fullscreen.properties_panel.color_contrast.unavailable.gradient");
+          return renderI18nText("fullscreen.properties_panel.color_contrast.unavailable.gradient");
         case xm.BlendModeInBackground:
-          return tx("fullscreen.properties_panel.color_contrast.unavailable.blend_mode_bg");
+          return renderI18nText("fullscreen.properties_panel.color_contrast.unavailable.blend_mode_bg");
         case xm.BlendModeInForeground:
-          return tx("fullscreen.properties_panel.color_contrast.unavailable.blend_mode_fg");
+          return renderI18nText("fullscreen.properties_panel.color_contrast.unavailable.blend_mode_fg");
         case xm.TextInBackground:
-          return tx("fullscreen.properties_panel.color_contrast.unavailable.text");
+          return renderI18nText("fullscreen.properties_panel.color_contrast.unavailable.text");
         case xm.MixedBackgrounds:
-          return tx("fullscreen.properties_panel.color_contrast.unavailable.mixed_backgrounds");
+          return renderI18nText("fullscreen.properties_panel.color_contrast.unavailable.mixed_backgrounds");
         case xm.MixedStandards:
-          return tx("fullscreen.properties_panel.color_contrast.unavailable.mixed_standards");
+          return renderI18nText("fullscreen.properties_panel.color_contrast.unavailable.mixed_standards");
         case xm.Unavailable:
         default:
-          return tx("fullscreen.properties_panel.color_contrast.unavailable");
+          return renderI18nText("fullscreen.properties_panel.color_contrast.unavailable");
       }
     }(unavailableReason);
     let i = function (e) {
@@ -345,16 +345,16 @@ export function $$Q2({
         case xm.GradientInBackground:
         case xm.TextInBackground:
         case xm.BlendModeInBackground:
-          return _$$t("fullscreen.properties_panel.color_contrast.unavailable.tooltip");
+          return getI18nString("fullscreen.properties_panel.color_contrast.unavailable.tooltip");
         case xm.BlendModeInForeground:
-          return _$$t("fullscreen.properties_panel.color_contrast.unavailable_foreground.tooltip");
+          return getI18nString("fullscreen.properties_panel.color_contrast.unavailable_foreground.tooltip");
         case xm.MixedBackgrounds:
-          return _$$t("fullscreen.properties_panel.color_contrast.unavailable_mixed_bg.tooltip");
+          return getI18nString("fullscreen.properties_panel.color_contrast.unavailable_mixed_bg.tooltip");
         case xm.MixedStandards:
-          return _$$t("fullscreen.properties_panel.color_contrast.unavailable_mixed_standards.tooltip");
+          return getI18nString("fullscreen.properties_panel.color_contrast.unavailable_mixed_standards.tooltip");
         case xm.Unavailable:
         default:
-          return _$$t("fullscreen.properties_panel.color_contrast.unavailable_simple_combination.tooltip");
+          return getI18nString("fullscreen.properties_panel.color_contrast.unavailable_simple_combination.tooltip");
       }
     }(unavailableReason);
     let r = {
@@ -376,14 +376,14 @@ export function $$Q2({
   }
   return jsxs("div", {
     id: i,
-    "aria-label": _$$t("fullscreen.properties_panel.color_picker.color_contrast_info.flyout_title"),
+    "aria-label": getI18nString("fullscreen.properties_panel.color_picker.color_contrast_info.flyout_title"),
     role: "group",
     className: "color_contrast_info--colorContrastRow--yDDg9 color_contrast_info--colorContrastRowBase--x7tX0",
     ref: contrastRowRef,
     children: [jsxs(_$$u, {
       "aria-haspopup": "dialog",
       "aria-expanded": showColorSwatchInfoFlyout,
-      "aria-label": _$$t("fullscreen.properties_panel.color_contrast_ratio", {
+      "aria-label": getI18nString("fullscreen.properties_panel.color_contrast_ratio", {
         ratio: contrastDisplayValue ?? ""
       }),
       onClick: eh,
@@ -392,7 +392,7 @@ export function $$Q2({
       }),
       htmlAttributes: {
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("fullscreen.properties_panel.color_picker.color_contrast_info.view_colors"),
+        "data-tooltip": getI18nString("fullscreen.properties_panel.color_picker.color_contrast_info.view_colors"),
         "data-tooltip-show-above": !0
       },
       recordingKey: Pt(e, "colorsFlyoutButton"),
@@ -435,9 +435,9 @@ export function $$Q2({
         children: jsx(_$$d, {
           "aria-expanded": isDropdownShown,
           onClick: toggleDropdown,
-          "aria-label": _$$t("fullscreen.properties_panel.color_contrast.settings"),
+          "aria-label": getI18nString("fullscreen.properties_panel.color_contrast.settings"),
           htmlAttributes: {
-            "data-tooltip": _$$t("fullscreen.properties_panel.color_contrast.settings"),
+            "data-tooltip": getI18nString("fullscreen.properties_panel.color_contrast.settings"),
             "data-tooltip-type": Ib.TEXT,
             "data-tooltip-show-above": !0
           },
@@ -625,7 +625,7 @@ function et() {
   }, [complete, settings.contrastInfoShown]);
   return jsx(rq, {
     arrowPosition: F_.LEFT_TITLE,
-    description: tx("fullscreen.properties_panel.color_contrast.onboarding.description"),
+    description: renderI18nText("fullscreen.properties_panel.color_contrast.onboarding.description"),
     isShowing,
     media: jsx(_$$y, {
       src: buildUploadUrl("5a75f85e8b6179df3a9d0500370b3bc92976d209"),
@@ -642,11 +642,11 @@ function et() {
         },
         newTab: !0,
         trusted: !0,
-        children: tx("fullscreen.properties_panel.color_contrast.onboarding.primary_cta")
+        children: renderI18nText("fullscreen.properties_panel.color_contrast.onboarding.primary_cta")
       })
     }),
     targetKey: $,
-    title: tx("fullscreen.properties_panel.color_contrast.onboarding.title"),
+    title: renderI18nText("fullscreen.properties_panel.color_contrast.onboarding.title"),
     trackingContextName: "Color Contrast Onboarding",
     width: 184
   });
@@ -670,7 +670,7 @@ export function $$ei4({
       className: H,
       children: [jsx("div", {
         className: W,
-        children: tx("fullscreen.properties_panel.color_picker.color_contrast_info.foreground")
+        children: renderI18nText("fullscreen.properties_panel.color_picker.color_contrast_info.foreground")
       }), jsxs("div", {
         className: K,
         children: [jsx(_$$J, {
@@ -686,7 +686,7 @@ export function $$ei4({
       className: H,
       children: [jsx("div", {
         className: W,
-        children: tx("fullscreen.properties_panel.color_picker.color_contrast_info.background")
+        children: renderI18nText("fullscreen.properties_panel.color_picker.color_contrast_info.background")
       }), jsxs("div", {
         className: K,
         children: [jsx(_$$J, {

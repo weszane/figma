@@ -2,14 +2,14 @@ import { jsx } from "react/jsx-runtime";
 import { useRef } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { eu } from "../vendor/421718";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { h as _$$h } from "../905/207101";
 import { getInitialOptions, isDevEnvironment } from "../figma_app/169182";
-import { $D } from "../905/11";
-import { Lg } from "../figma_app/257275";
+import { reportError } from "../905/11";
+import { getFalseValue } from "../figma_app/897289";
 import { z as _$$z } from "../905/239603";
 import { YV, td } from "../figma_app/181241";
-import { Gq } from "../figma_app/363242";
+import { getI18nState } from "../figma_app/363242";
 import { D as _$$D } from "../905/347702";
 let n;
 let g = _$$z.object({
@@ -71,7 +71,7 @@ let D = () => "completed" === window.arkose;
 let L = new eu();
 let F = _$$D(e => e ? 864e5 : 1e4);
 let M = _$$D(() => new Date().getTime());
-let j = _$$D(() => !Lg());
+let j = _$$D(() => !getFalseValue());
 let U = ({
   event: e,
   prevFormState: t,
@@ -93,7 +93,7 @@ let U = ({
   a && (d.is_arkose_on_api_check_action = String(a.action), d.is_arkose_on_api_check_auth_param = a.authParam, d.is_arkose_on_api_check_error = a.error, d.is_arkose_on_api_check_error_status = a.status);
   s && (d.arkose_is_on_for_user_action = String(s.action), d.arkose_is_on_for_user_result_from_api = s.resultFromAPI, d.arkose_is_required_from_api = s.requiredFromAPI);
   e === x.REACHABILITY && r && (d.reachability = Object.entries(r).map(e => `${e[0]}|${e[1]}`).join(","));
-  j() && sx("Arkose", d, {
+  j() && trackEventAnalytics("Arkose", d, {
     forwardToDatadog: !0,
     batchRequest: !1
   });
@@ -164,7 +164,7 @@ export function $$B0(e) {
   _$$h(() => {
     l(e.arkoseAction, e.onFailed).then(t => {
       t.arkose_on_for_user && V(e.prevFormState);
-    }).catch(e => { });
+    }).catch(e => {});
   });
   _$$h(() => {
     let t = () => {
@@ -177,7 +177,7 @@ export function $$B0(e) {
     });
     return t;
   });
-  let u = Gq().getPrimaryLocale(!1);
+  let u = getI18nState().getPrimaryLocale(!1);
   let p = getInitialOptions().arkose_challenge_public_key;
   let m = getInitialOptions().arkose_frame_url + "?publicKey=" + p + "&locale=" + u;
   return jsx("div", {
@@ -342,9 +342,9 @@ async function Y(e, t, i) {
     });
   }
   i(r, a);
-  $D(_$$e.PRODUCT_SECURITY, Error(a));
+  reportError(_$$e.PRODUCT_SECURITY, Error(a));
   return r;
 }
 export const p8 = $$B0;
 export const Hc = $$W1;
-export const sT = $$K2; 
+export const sT = $$K2;

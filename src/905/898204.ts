@@ -1,6 +1,6 @@
 import { useMemo, useCallback, useSyncExternalStore } from "react";
 import { f } from "../905/693155";
-import { M4 } from "../905/609396";
+import { Timer } from "../905/609396";
 import { vF, J4 } from "../figma_app/290870";
 import { shallowEqual } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
@@ -138,7 +138,7 @@ export function $$p0(e, t) {
     let n = new Map();
     function s(e) {
       return t ? (...i) => {
-        let n = new M4();
+        let n = new Timer();
         n.start();
         let s = e(...i);
         n.stop();

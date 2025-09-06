@@ -1,32 +1,32 @@
-import { getFeatureFlags } from "../905/601108";
-import { eU } from "../figma_app/27355";
-import { debugState } from "../905/407919";
-import { XE } from "../figma_app/976749";
-import { ze } from "../figma_app/516028";
-import { Wh } from "../figma_app/615482";
-import { nT } from "../figma_app/53721";
-import { uk, qy } from "../figma_app/216057";
-import { td } from "../figma_app/827216";
+import { atom } from 'jotai';
+import { debugState } from '../905/407919';
+import { getFeatureFlags } from '../905/601108';
+import { FEditorType } from '../figma_app/53721';
+import { qy, uk } from '../figma_app/216057';
+import { ze } from '../figma_app/516028';
+import { Wh } from '../figma_app/615482';
+import { td } from '../figma_app/827216';
+import { XE } from '../figma_app/976749';
 export function $$p17() {
   if (!getFeatureFlags().aip_flower_garden) return !1;
   let e = debugState?.getState()?.selectedView;
-  return "fullscreen" === e.view && XE(e) === nT.Design;
+  return e.view === 'fullscreen' && XE(e) === FEditorType.Design;
 }
-let $$_6 = Wh(() => eU(new Map()));
-let $$h13 = Wh(() => eU(new Map(new Map())));
-let $$m2 = Wh(() => eU(e => e($$g5).size));
-let $$g5 = Wh(() => eU(new Set()));
-let $$f0 = Wh(() => eU(new Set()));
-let $$E8 = Wh(() => eU(new Set()));
-let $$y9 = Wh(() => eU(null));
-let $$b1 = Wh(() => eU(new Map()));
-let $$T21 = Wh(() => eU({
+let $$_6 = Wh(() => atom(new Map()));
+let $$h13 = Wh(() => atom(new Map(new Map())));
+let $$m2 = Wh(() => atom(e => e($$g5).size));
+let $$g5 = Wh(() => atom(new Set()));
+let $$f0 = Wh(() => atom(new Set()));
+let $$E8 = Wh(() => atom(new Set()));
+let $$y9 = Wh(() => atom(null));
+let $$b1 = Wh(() => atom(new Map()));
+let $$T21 = Wh(() => atom({
   libraryVariables: [],
   libraryVariableSetIdToSet: {},
-  status: "uninitialized",
+  status: 'uninitialized',
   libraryKeys: new Set()
 }));
-let $$I15 = Wh(() => eU(e => {
+let $$I15 = Wh(() => atom(e => {
   let t = e(uk);
   let r = e($$T21);
   let n = e($$O18);
@@ -39,7 +39,7 @@ let $$I15 = Wh(() => eU(e => {
   });
   return i;
 }));
-let $$S14 = Wh(() => eU(e => {
+let $$S14 = Wh(() => atom(e => {
   let t = e($$O18);
   let r = e(qy);
   return {
@@ -47,25 +47,25 @@ let $$S14 = Wh(() => eU(e => {
     libraryVariableSets: e($$T21).libraryVariableSetIdToSet
   };
 }));
-let $$v12 = Wh(() => eU({
-  status: "loading",
+let $$v12 = Wh(() => atom({
+  status: 'loading',
   subscribedStylesByFileKey: {},
   allStyles: [],
   localStyles: null
 }));
-let $$A19 = eU(td.UNINITIALIZED);
-let $$x11 = eU([]);
-let $$N16 = Wh(() => eU(new Map()));
-let $$C10 = Wh(() => eU(new Map()));
-let $$w4 = Wh(() => eU(void 0));
-let $$O18 = Wh(() => eU(e => {
+let $$A19 = atom(td.UNINITIALIZED);
+let $$x11 = atom([]);
+let $$N16 = Wh(() => atom(new Map()));
+let $$C10 = Wh(() => atom(new Map()));
+let $$w4 = Wh(() => atom(void 0));
+let $$O18 = Wh(() => atom(e => {
   let t = e($$w4);
   let r = e(ze);
   return t?.has(r) ?? !1;
 }));
-let $$R7 = Wh(() => eU(new Set()));
-let $$L20 = Wh(() => eU(null));
-let $$P3 = Wh(() => eU([]));
+let $$R7 = Wh(() => atom(new Set()));
+let $$L20 = Wh(() => atom(null));
+let $$P3 = Wh(() => atom([]));
 export const F9 = $$f0;
 export const Iy = $$b1;
 export const Kk = $$m2;

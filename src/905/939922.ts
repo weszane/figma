@@ -2,9 +2,9 @@ import { useCallback } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { debug, throwTypeError } from "../figma_app/465776";
 import { N7, QV } from "../905/508367";
-import { aw, eD } from "../figma_app/876459";
+import { OpenTarget, desktopAPIInstance } from "../figma_app/876459";
 import { Ay } from "../905/612521";
-import { Ay as _$$Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { oB, sf } from "../905/929976";
 import { NA } from "../905/738636";
 import { c5 } from "../905/93909";
@@ -17,7 +17,7 @@ import { iZ } from "../905/372672";
 import { M4 } from "../905/713695";
 import { cD } from "../figma_app/598018";
 import { U } from "../905/18613";
-import { nT, wN } from "../figma_app/53721";
+import { FEditorType, mapFileTypeToEditorType } from "../figma_app/53721";
 import { ai } from "../figma_app/915202";
 import { O } from "../905/833838";
 export function $$S0() {
@@ -29,9 +29,9 @@ export function $$S0() {
   let l = useSelector(e => e.selectedBranchKeyByRepoId);
   return useCallback(async (n, r) => {
     s(oB());
-    let u = _$$Ay.mac ? r.metaKey : r.ctrlKey;
+    let u = BrowserInfo.mac ? r.metaKey : r.ctrlKey;
     let p = null;
-    if (u && r.shiftKey ? p = aw.FOCAL_TAB : u ? p = aw.BACKGROUND_TAB : r.shiftKey && (p = aw.NEW_WINDOW), eD) {
+    if (u && r.shiftKey ? p = OpenTarget.FOCAL_TAB : u ? p = OpenTarget.BACKGROUND_TAB : r.shiftKey && (p = OpenTarget.NEW_WINDOW), desktopAPIInstance) {
       w({
         tile: n,
         selectedBranchKeyByRepoId: l,
@@ -71,17 +71,17 @@ let w = ({
   user: n,
   target: r
 }) => {
-  if (!eD) {
+  if (!desktopAPIInstance) {
     debug(!0, "Should not be calling openGenericTileDesktop if not in the desktop app");
     return;
   }
-  r = r ?? aw.FOCAL_TAB;
+  r = r ?? OpenTarget.FOCAL_TAB;
   let s = Tf.getIsTeamTemplate(e);
   let l = Tf.getName(e);
   let d = Tf.getEditorType(e);
   switch (e.type) {
     case nb.FILE:
-      eD.openFile({
+      desktopAPIInstance.openFile({
         fileKey: e.file.key,
         title: e.file.name,
         fileEditorType: e.file.editorType,
@@ -93,7 +93,7 @@ let w = ({
       });
       break;
     case nb.PINNED_FILE:
-      eD.openFile({
+      desktopAPIInstance.openFile({
         fileKey: e.file.key,
         title: l,
         fileEditorType: d,
@@ -103,11 +103,11 @@ let w = ({
       });
       break;
     case nb.PROTOTYPE:
-      eD.openPrototype(e.prototype.file_key, e.prototype.page_id, e.prototype.fig_file.name || "", r, n?.id);
+      desktopAPIInstance.openPrototype(e.prototype.file_key, e.prototype.page_id, e.prototype.fig_file.name || "", r, n?.id);
       break;
     case nb.REPO:
       let c = mr(e.repo, e.branches, t);
-      c && eD.openFile({
+      c && desktopAPIInstance.openFile({
         fileKey: c.key,
         title: c.name,
         fileEditorType: c.editor_type,
@@ -173,7 +173,7 @@ let T = async ({
       }, f) : i(sf({
         view: "fullscreen",
         fileKey: e.file.key,
-        editorType: z4.getIsExtension() ? nT.DevHandoff : e.file.editorType ? wN(e.file.editorType) : nT.Design,
+        editorType: z4.getIsExtension() ? FEditorType.DevHandoff : e.file.editorType ? mapFileTypeToEditorType(e.file.editorType) : FEditorType.Design,
         prevSelectedView: d
       }));
       break;
@@ -187,7 +187,7 @@ let T = async ({
       }, f) : i(sf({
         view: "fullscreen",
         fileKey: e.file.key,
-        editorType: wN(e.file.editorType),
+        editorType: mapFileTypeToEditorType(e.file.editorType),
         prevSelectedView: d
       }));
       break;
@@ -217,7 +217,7 @@ let T = async ({
       }, f) : i(sf({
         view: "fullscreen",
         fileKey: b.key,
-        editorType: nT.Design,
+        editorType: FEditorType.Design,
         prevSelectedView: d
       }));
       break;

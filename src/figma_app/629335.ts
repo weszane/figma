@@ -1,6 +1,6 @@
-import { um, eU, yu, zl } from "../figma_app/27355";
+import { um, atom, setupAtomWithMount, atomStoreManager } from "../figma_app/27355";
 import { getStorage } from "../905/657224";
-import { bt } from "../905/270322";
+import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { YI, P$ } from "../figma_app/152368";
 function o() {
   let e = getStorage().get("last-timer-set-time") || 180;
@@ -56,15 +56,15 @@ let $$l0 = um(o(), (e, t) => {
       return r;
   }
 });
-let $$d2 = bt(e => e.timer);
-let c = eU({});
-let $$u1 = yu(eU(e => (e(c), Math.max(0, Math.ceil(P$(e($$d2).time) / 1e3))), (e, t, r) => {
+let $$d2 = createReduxSubscriptionAtomWithState(e => e.timer);
+let c = atom({});
+let $$u1 = setupAtomWithMount(atom(e => (e(c), Math.max(0, Math.ceil(P$(e($$d2).time) / 1e3))), (e, t, r) => {
   t(c, {});
 }), ({
   setSelf: e
 }) => {
   let t = setInterval(() => {
-    let t = zl.get($$d2);
+    let t = atomStoreManager.get($$d2);
     !t || !t.time || t?.time?.isPaused || e("RECOMPUTE");
   }, 200);
   return () => clearInterval(t);

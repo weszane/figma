@@ -1,6 +1,6 @@
 import { jXp } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
 import { hk } from "../figma_app/632319";
 import { M1, co } from "../905/777093";
@@ -26,7 +26,7 @@ let $$d1 = {
       if (getFeatureFlags().ce_track_font_fetch_time) {
         let t = "";
         t = c.source === jXp.LOCAL ? "N/A" : c.id;
-        sx("font_fetch_time", {
+        trackEventAnalytics("font_fetch_time", {
           ...c,
           id: t,
           fetch_time_ms: performance.now() - d,

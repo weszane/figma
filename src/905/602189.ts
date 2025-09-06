@@ -8,12 +8,12 @@ import { $y } from "../figma_app/59509";
 import { Q } from "../905/363675";
 import { D as _$$D } from "../905/198083";
 import p from "classnames";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { isGovCluster, getInitialOptions } from "../figma_app/169182";
 import { b as _$$b } from "../figma_app/246400";
 import { s as _$$s } from "../cssbuilder/589278";
 import { Ph } from "../905/160095";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Y } from "../905/830372";
 import { E as _$$E } from "../905/984674";
 import { B as _$$B } from "../905/261906";
@@ -60,7 +60,7 @@ export function $$M1({
       trackingProperties: {
         trackingDescriptor: _$$c.LEARN_MORE_ABOUT_SEATS
       },
-      children: _$$t("modify_plan_user_seat_modal.link_text.learn_more_about_seats")
+      children: getI18nString("modify_plan_user_seat_modal.link_text.learn_more_about_seats")
     })]
   });
 }
@@ -110,7 +110,7 @@ function U({
   let l = U2();
   if (e !== Gu.VIEW && !r[e]) return null;
   let d = e !== Gu.VIEW ? r[e] : void 0;
-  let c = e === Gu.VIEW ? tx("checkout.free") : tx("general.price_per_month", {
+  let c = e === Gu.VIEW ? renderI18nText("checkout.free") : renderI18nText("general.price_per_month", {
     priceString: G(d)
   });
   return jsxs(Y, {
@@ -144,7 +144,7 @@ function U({
               }), i && jsx("div", {
                 children: c
               })]
-            }), e === Gu.VIEW ? _$$t("modify_plan_user_seat_modal.view_and_comment_on_all_file_types_in_figma") : jsx(_$$i, {
+            }), e === Gu.VIEW ? getI18nString("modify_plan_user_seat_modal.view_and_comment_on_all_file_types_in_figma") : jsx(_$$i, {
               seatType: e,
               spacing: 8,
               colorStyle: "pastel",
@@ -184,14 +184,14 @@ function B({
     className: _$$s.colorBorder.b1.px4.bRadius5.noWrap.$,
     children: jsx(_$$E, {
       color: "default",
-      children: _$$t("modify_plan_user_seat_modal.current_seat_badge")
+      children: getI18nString("modify_plan_user_seat_modal.current_seat_badge")
     })
   }) : a ? s = jsx("div", {
     className: _$$s.colorBorderBrand.b1.px4.bRadius5.noWrap.$,
     children: jsx(_$$E, {
       color: "brand",
       fontWeight: "medium",
-      children: _$$t("modify_plan_user_seat_modal.available_seat_count", {
+      children: getI18nString("modify_plan_user_seat_modal.available_seat_count", {
         availableSeatCount: t
       })
     })
@@ -230,7 +230,7 @@ export function $$V0({
   let P = o && i !== Gu.VIEW && t !== Gu.VIEW && N && R && N.amount >= R.amount;
   let L = S || i === Gu.VIEW || !P;
   return (useEffect(() => {
-    p && az.trackDefinedEvent("admin.discouraged_seat_swap_viewed", {
+    p && analyticsEventManager.trackDefinedEvent("admin.discouraged_seat_swap_viewed", {
       planType: f.key.type,
       planId: f.key.parentId ?? void 0,
       planKey: f.id ?? void 0
@@ -255,9 +255,9 @@ export function $$V0({
         children: jsx(_$$E, {
           fontSize: 11,
           color: "secondary",
-          children: d ? L ? _$$t("modify_plan_user_seat_modal.from_seat_helper_text.will_become_available_prorated") : _$$t("modify_plan_user_seat_modal.from_seat_helper_text.will_become_prorated_v2", {
+          children: d ? L ? getI18nString("modify_plan_user_seat_modal.from_seat_helper_text.will_become_available_prorated") : getI18nString("modify_plan_user_seat_modal.from_seat_helper_text.will_become_prorated_v2", {
             toSeatType: tI(i)
-          }) : c ? _$$t("modify_plan_user_seat_modal.from_seat_helper_text.will_become_available") : _$$t("modify_plan_user_seat_modal.from_seat_helper_text.will_go_away")
+          }) : c ? getI18nString("modify_plan_user_seat_modal.from_seat_helper_text.will_become_available") : getI18nString("modify_plan_user_seat_modal.from_seat_helper_text.will_go_away")
         })
       })]
     }), jsx(_$$D, {
@@ -278,31 +278,31 @@ export function $$V0({
         children: jsx(_$$E, {
           fontSize: 11,
           color: "default",
-          children: i === Gu.VIEW ? null : S ? tx("modify_plan_user_seat_modal.use_one_available_full_seat_learn_more_info_message", {
+          children: i === Gu.VIEW ? null : S ? renderI18nText("modify_plan_user_seat_modal.use_one_available_full_seat_learn_more_info_message", {
             seatType: tI(i),
             learnMore: jsx(_$$N, {
               newTab: !0,
               href: F,
-              children: _$$t("modify_plan_user_seat_modal.link_text.learn_more")
+              children: getI18nString("modify_plan_user_seat_modal.link_text.learn_more")
             })
-          }) : d ? isNullish(N) ? null : tx("modify_plan_user_seat_modal.to_seat_helper_text.will_provision_new_seat_v2", {
-            cost: tx("general.price_per_month", {
+          }) : d ? isNullish(N) ? null : renderI18nText("modify_plan_user_seat_modal.to_seat_helper_text.will_provision_new_seat_v2", {
+            cost: renderI18nText("general.price_per_month", {
               priceString: G(N)
             }),
             learnMore: jsx(_$$N, {
               newTab: !0,
               href: F,
-              children: _$$t("modify_plan_user_seat_modal.link_text.learn_more")
+              children: getI18nString("modify_plan_user_seat_modal.link_text.learn_more")
             })
-          }) : p ? tx("modify_plan_user_seat_modal.to_seat_helper_text.no_proration_special_case_with_learn_more", {
-            fromSeatType: _$$t("general.bundle.expert"),
-            toSeatType: _$$t("general.bundle.developer"),
+          }) : p ? renderI18nText("modify_plan_user_seat_modal.to_seat_helper_text.no_proration_special_case_with_learn_more", {
+            fromSeatType: getI18nString("general.bundle.expert"),
+            toSeatType: getI18nString("general.bundle.developer"),
             learnMore: jsx(_$$N, {
               newTab: !0,
               href: F,
-              children: _$$t("modify_plan_user_seat_modal.link_text.learn_more")
+              children: getI18nString("modify_plan_user_seat_modal.link_text.learn_more")
             })
-          }) : _$$t("modify_plan_user_seat_modal.to_seat_helper_text.will_be_charged_on_next_invoice")
+          }) : getI18nString("modify_plan_user_seat_modal.to_seat_helper_text.will_be_charged_on_next_invoice")
         })
       })]
     }), jsx(z, {
@@ -364,33 +364,33 @@ function z({
   }(t, i);
   if (!s() || a !== Gu.VIEW || 0 === numAccessedFiles) return null;
   let u = null;
-  u = 0 === numEditedFiles ? tx(i === ud.DEVELOPER ? "modify_plan_user_seat_modal.user_name_wont_be_able_to_use_dev_mode_in_num_accessed_files_they_ve_recently_worked_in" : "modify_plan_user_seat_modal.user_name_wont_be_able_to_edit_num_accessed_files_they_ve_recently_worked_in", {
+  u = 0 === numEditedFiles ? renderI18nText(i === ud.DEVELOPER ? "modify_plan_user_seat_modal.user_name_wont_be_able_to_use_dev_mode_in_num_accessed_files_they_ve_recently_worked_in" : "modify_plan_user_seat_modal.user_name_wont_be_able_to_edit_num_accessed_files_they_ve_recently_worked_in", {
     userName: e,
     numAccessedFiles: jsx("span", {
       className: "x6xwguf",
-      children: _$$t("modify_plan_user_seat_modal.num_files", {
+      children: getI18nString("modify_plan_user_seat_modal.num_files", {
         numFiles: numAccessedFiles
       })
     })
-  }) : numAccessedFiles === numEditedFiles ? tx(i === ud.DEVELOPER ? "modify_plan_user_seat_modal.user_name_wont_be_able_to_use_dev_mode_in_num_accessed_files_they_ve_worked_in_over_the_last_month" : "modify_plan_user_seat_modal.user_name_wont_be_able_to_edit_num_accessed_files_they_ve_worked_in_over_the_last_month", {
+  }) : numAccessedFiles === numEditedFiles ? renderI18nText(i === ud.DEVELOPER ? "modify_plan_user_seat_modal.user_name_wont_be_able_to_use_dev_mode_in_num_accessed_files_they_ve_worked_in_over_the_last_month" : "modify_plan_user_seat_modal.user_name_wont_be_able_to_edit_num_accessed_files_they_ve_worked_in_over_the_last_month", {
     userName: e,
     numAccessedFiles: jsx("span", {
       className: "x6xwguf",
-      children: _$$t("modify_plan_user_seat_modal.num_files", {
+      children: getI18nString("modify_plan_user_seat_modal.num_files", {
         numFiles: numAccessedFiles
       })
     })
-  }) : tx(i === ud.DEVELOPER ? "modify_plan_user_seat_modal.user_name_wont_be_able_to_use_dev_mode_in_num_accessed_files_including_num_edited_files_they_ve_worked_in_over_the_last_month" : "modify_plan_user_seat_modal.user_name_wont_be_able_to_edit_num_accessed_files_including_num_edited_files_they_ve_worked_in_over_the_last_month", {
+  }) : renderI18nText(i === ud.DEVELOPER ? "modify_plan_user_seat_modal.user_name_wont_be_able_to_use_dev_mode_in_num_accessed_files_including_num_edited_files_they_ve_worked_in_over_the_last_month" : "modify_plan_user_seat_modal.user_name_wont_be_able_to_edit_num_accessed_files_including_num_edited_files_they_ve_worked_in_over_the_last_month", {
     userName: e,
     numAccessedFiles: jsx("span", {
       className: "x6xwguf",
-      children: _$$t("modify_plan_user_seat_modal.num_files", {
+      children: getI18nString("modify_plan_user_seat_modal.num_files", {
         numFiles: numAccessedFiles
       })
     }),
     numEditedFiles: jsx("span", {
       className: "x6xwguf",
-      children: _$$t("modify_plan_user_seat_modal.num_files", {
+      children: getI18nString("modify_plan_user_seat_modal.num_files", {
         numFiles: numEditedFiles
       })
     })

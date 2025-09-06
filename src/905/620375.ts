@@ -4,7 +4,7 @@ import { IK } from "../905/521428";
 import { J } from "../905/614223";
 import o from "classnames";
 import { M as _$$M } from "../figma_app/749682";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { H8 } from "../905/590952";
 import { E } from "../905/984674";
 import { Mr } from "../figma_app/795938";
@@ -12,7 +12,7 @@ import { dY } from "../905/838765";
 import { Ij, OV } from "../905/988303";
 var l = o;
 export function $$f0(e) {
-  let t = e.name || _$$t("fullscreen.fullscreen_view_selector.untitled");
+  let t = e.name || getI18nString("fullscreen.fullscreen_view_selector.untitled");
   let {
     author,
     acceptedPublishers,
@@ -121,7 +121,7 @@ export function $$f0(e) {
                 F(!1);
               }
             },
-            children: [enableRestore && tx("templates.publishing.restore_default_thumbnail"), !enableRestore && tx("templates.publishing.upload_custom_thumbnail")]
+            children: [enableRestore && renderI18nText("templates.publishing.restore_default_thumbnail"), !enableRestore && renderI18nText("templates.publishing.upload_custom_thumbnail")]
           }), R && jsx("input", {
             type: "file",
             accept: "image/*",
@@ -135,7 +135,7 @@ export function $$f0(e) {
             color: "secondary",
             fontSize: 11,
             fontWeight: "medium",
-            children: tx("templates.publishing.thumbnail_size_dimension_spec")
+            children: renderI18nText("templates.publishing.thumbnail_size_dimension_spec")
           }), uploadError && jsx(E, {
             color: "danger",
             fontSize: 11,
@@ -160,9 +160,9 @@ export function $$f0(e) {
           children: t
         }), jsx("div", {
           className: "publish_file_resource_modal_card--publishFileResourceModalCardAuthorName--d2RX4",
-          children: tx("community.publisher_with_suffix", {
+          children: renderI18nText("community.publisher_with_suffix", {
             publisherName: author?.name,
-            publishersSuffix: acceptedPublishers && acceptedPublishers.length > 1 ? _$$t("community.cards.pluralize_num_other_publishers", {
+            publishersSuffix: acceptedPublishers && acceptedPublishers.length > 1 ? getI18nString("community.cards.pluralize_num_other_publishers", {
               numOtherPublishers: acceptedPublishers.length - 1
             }) : ""
           })

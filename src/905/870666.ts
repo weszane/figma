@@ -4,16 +4,16 @@ import { lyf, hMR } from "../figma_app/763686";
 import { fn, sH } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
-import { O } from "../905/561581";
-import { eD } from "../figma_app/876459";
+import { atomStoreManager } from "../figma_app/27355";
+import { isAppShellEnabled } from "../905/561581";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { debugState } from "../905/407919";
 import { Ay } from "../905/612521";
-import { Ay as _$$Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { parseAndNormalizeQuery, parseQuery, serializeQuery } from "../905/634134";
 import { sy } from "../figma_app/930338";
-import { QJ } from "../figma_app/257275";
-import { t as _$$t } from "../905/303541";
+import { isEvalViewPathCheck } from "../figma_app/897289";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { c5 } from "../905/93909";
 import { h as _$$h } from "../905/662353";
@@ -24,12 +24,12 @@ import { Zt } from "../figma_app/617727";
 import { b as _$$b, d as _$$d } from "../905/91820";
 import { zO, Ex } from "../905/327571";
 import { Vv } from "../905/32091";
-import { nT, wN } from "../figma_app/53721";
+import { FEditorType, mapFileTypeToEditorType } from "../figma_app/53721";
 import { O as _$$O } from "../905/833838";
 import { f0 } from "../figma_app/707808";
 import { eE, Hz } from "../905/366346";
 export function $$O0(e) {
-  return "fullscreen" === e.view && e.editorType === nT.Whiteboard;
+  return "fullscreen" === e.view && e.editorType === FEditorType.Whiteboard;
 }
 export class $$D1 {
   pathToSelectedView(e, t, i, r) {
@@ -60,7 +60,7 @@ export class $$D1 {
       }
       let d = {
         view: "fullscreen",
-        editorType: wN(i)
+        editorType: mapFileTypeToEditorType(i)
       };
       if ("branch" === t[3] && t[4] ? d.fileKey = t[4] : "new" !== t[2] && (d.fileKey = t[2]), r && ("commentPreferences" === r ? d.showCommentPreferencesPicker = !0 : d.commentThreadId = r), "code" === s["properties-panel-tab"] && (d.showInspectPanel = !0), s["node-id"] && (d.nodeId = s["node-id"]), s["code-node-id"] && (getFeatureFlags().sts_code_authoring || getFeatureFlags().sts_code_authoring_by_plan) && (d.codeNodeId = s["code-node-id"].replace("-", ":")), s.view && (d.sitesView = eE(s.view)), s["state-group-id"] && (d.fallbackStateGroupId = s["state-group-id"]), s["version-id"] && (d.versionId = s["version-id"]), s["compare-version-id"] && !s["version-id"] && (d.compareVersionId = s["compare-version-id"]), s["compare-latest"] && (d.compareLatest = !0), s["frame-preset-name"] && (d.framePresetName = s["frame-preset-name"]), s["merge-branch-key"] && s["merge-source-key"] && s["merge-direction"] && (d.mergeParams = {
         branchKey: s["merge-branch-key"],
@@ -76,7 +76,7 @@ export class $$D1 {
       }
       if (("duplicate" === t[4] || s.duplicate) && (d.landingState = "DUPLICATE"), s["try-plugin-id"] && (d.tryPluginId = s["try-plugin-id"]), s["try-plugin-version-id"] && (d.tryPluginVersionId = s["try-plugin-version-id"]), s["try-plugin-name"] && (d.tryPluginName = s["try-plugin-name"]), s["try-plugin-editor-type"] && (d.tryPluginEditorType = zO(s["try-plugin-editor-type"])), s["try-plugin-params"] && (d.tryPluginParams = Ex(s)), "1" === s["is-widget"] && (d.isWidget = !0), "1" === s["is-playground-file"] && (d.isPlaygroundFile = !0), s["try-plugin-file-key"] && (d.tryPluginFileKey = s["try-plugin-file-key"]), s["library-hub-file-id"] && (d.libraryHubFileId = s["library-hub-file-id"]), "1" === s["comments-enabled"] && (d.commentsEnabled = !0), s.source && (d.trackingInfo = {
         source: s.source
-      }), "1" === s["main-component"] && (d.mainComponentLink = !0), s.teamToMoveFileToOnNavigate && (d.teamToMoveFileToOnNavigate = s.teamToMoveFileToOnNavigate), "1" === s["is-freemium-preview"] && (d.isFreemiumPreview = !0), s["google-classroom-open-share-settings"] && (d.showPermissionsModalFromGoogleClassroomIntegration = !0), ("design" === o || "design" === s.mode || "view" === s.mode) && (d.mode = "design"), "auto" === s.m && (d.mode = void 0), s.recovery && "design" === i && _$$Ay.isWasm4gbSupported && e.mirror.appModel.topLevelMode === lyf.LAYOUT && ((hMR?.getTotalUsedHeapMemory() ?? 0) > 2 * cF || "true" === s.recovery ? (d.isRecoveryMode = !0, console.log("Entering Recovery Mode")) : d.isRecoveryMode = !1), s["prev-plan-id"] && s["prev-plan-type"]) {
+      }), "1" === s["main-component"] && (d.mainComponentLink = !0), s.teamToMoveFileToOnNavigate && (d.teamToMoveFileToOnNavigate = s.teamToMoveFileToOnNavigate), "1" === s["is-freemium-preview"] && (d.isFreemiumPreview = !0), s["google-classroom-open-share-settings"] && (d.showPermissionsModalFromGoogleClassroomIntegration = !0), ("design" === o || "design" === s.mode || "view" === s.mode) && (d.mode = "design"), "auto" === s.m && (d.mode = void 0), s.recovery && "design" === i && BrowserInfo.isWasm4gbSupported && e.mirror.appModel.topLevelMode === lyf.LAYOUT && ((hMR?.getTotalUsedHeapMemory() ?? 0) > 2 * cF || "true" === s.recovery ? (d.isRecoveryMode = !0, console.log("Entering Recovery Mode")) : d.isRecoveryMode = !1), s["prev-plan-id"] && s["prev-plan-type"]) {
         let e = "org" === s["prev-plan-type"] ? _$$O.ORG : _$$O.TEAM;
         debugState.dispatch(c5({
           planId: s["prev-plan-id"],
@@ -104,7 +104,7 @@ export class $$D1 {
       }
       s.claim && (d.claim = s.claim);
       s["google-classroom"] && debugState.dispatch(F.enqueue({
-        message: _$$t("whiteboard.google_classroom.addon.submission_reminder"),
+        message: getI18nString("whiteboard.google_classroom.addon.submission_reminder"),
         timeoutOverride: 1 / 0,
         onDismiss: lQ
       }));
@@ -114,7 +114,7 @@ export class $$D1 {
     if ("jam" === t[1]) {
       let e = {
         view: "fullscreen",
-        editorType: nT.Whiteboard
+        editorType: FEditorType.Whiteboard
       };
       s["try-plugin-id"] && (e.tryPluginId = s["try-plugin-id"]);
       s["try-plugin-version-id"] && (e.tryPluginVersionId = s["try-plugin-version-id"]);
@@ -128,7 +128,7 @@ export class $$D1 {
       let t = {
         view: "fullscreen",
         fileKey: Zt,
-        editorType: nT.Design
+        editorType: FEditorType.Design
       };
       e["node-id"] && (t.nodeId = e["node-id"]);
       return t;
@@ -152,26 +152,26 @@ export class $$D1 {
   selectedViewToPath(e, t) {
     if ("fullscreen" === e.view) {
       let i;
-      if (e.fileKey === Zt) return QJ() ? `/test/eval/view${Ay.location.search}` : `/test/interactions${Ay.location.search}`;
+      if (e.fileKey === Zt) return isEvalViewPathCheck() ? `/test/eval/view${Ay.location.search}` : `/test/interactions${Ay.location.search}`;
       let n = this.selectedViewName(e, t);
       let a = n ? sy(n) : "";
       let p = {};
       let h = e.fileKey || "new";
       let A = "design";
       switch (e.editorType) {
-        case nT.Whiteboard:
+        case FEditorType.Whiteboard:
           A = "board";
           break;
-        case nT.Slides:
+        case FEditorType.Slides:
           A = "slides";
           break;
-        case nT.Sites:
+        case FEditorType.Sites:
           A = "site";
           break;
-        case nT.Cooper:
+        case FEditorType.Cooper:
           A = "buzz";
           break;
-        case nT.Figmake:
+        case FEditorType.Figmake:
           A = "make";
           break;
         default:
@@ -181,7 +181,7 @@ export class $$D1 {
         file,
         repo
       } = t.resources || this.DEPRECATED_getDefaultResources(e);
-      if (file ? i = gN(file, repo || null, A) : (i = `/${A}/${h}`, null == e.fileKey || (a ? i += `/${a}` : i += "/Untitled")), e.landingState && "DUPLICATE" === e.landingState && (i += "/duplicate"), "design" === A && "auto" === e.mode && (p.m = "auto"), e.versionId && (p["version-id"] = e.versionId), e.compareVersionId && (p["compare-version-id"] = e.compareVersionId), e.compareLatest && (p["compare-latest"] = "1"), e.newFile && (p.$$new = "1"), e.nodeId && fn(sH(e.nodeId)) && (p["node-id"] = EO(e.nodeId)), e.codeNodeId && fn(sH(e.codeNodeId)) && (p["code-node-id"] = EO(e.codeNodeId)), e.editorType === nT.Sites && e.sitesView && (p.view = Hz(e.sitesView)), e.nodeId && fn(sH(e.nodeId))) try {
+      if (file ? i = gN(file, repo || null, A) : (i = `/${A}/${h}`, null == e.fileKey || (a ? i += `/${a}` : i += "/Untitled")), e.landingState && "DUPLICATE" === e.landingState && (i += "/duplicate"), "design" === A && "auto" === e.mode && (p.m = "auto"), e.versionId && (p["version-id"] = e.versionId), e.compareVersionId && (p["compare-version-id"] = e.compareVersionId), e.compareLatest && (p["compare-latest"] = "1"), e.newFile && (p.$$new = "1"), e.nodeId && fn(sH(e.nodeId)) && (p["node-id"] = EO(e.nodeId)), e.codeNodeId && fn(sH(e.codeNodeId)) && (p["code-node-id"] = EO(e.codeNodeId)), e.editorType === FEditorType.Sites && e.sitesView && (p.view = Hz(e.sitesView)), e.nodeId && fn(sH(e.nodeId))) try {
         let t = getSingletonSceneGraph().get(e.nodeId)?.type;
         t && ["CANVAS", "DOCUMENT"].includes(t || "") && (p.p = "f");
       } catch (e) {
@@ -195,11 +195,11 @@ export class $$D1 {
       e.teamToMoveFileToOnNavigate && (p.teamToMoveFileToOnNavigate = e.teamToMoveFileToOnNavigate);
       getFeatureFlags().dakota && e.cmsItemId && (p["cms-item-id"] = e.cmsItemId);
       let E = _$$b(t.sharingAttributionContextKey, _$$d.BROWSER_ADDRESS_BAR);
-      if (E && (p.t = E), e.figmakeView === f0.FULLSCREEN_PREVIEW && (p.fullscreen = "1"), eD) {
-        let e = zl.get(_$$h);
+      if (E && (p.t = E), e.figmakeView === f0.FULLSCREEN_PREVIEW && (p.fullscreen = "1"), desktopAPIInstance) {
+        let e = atomStoreManager.get(_$$h);
         null != e && (p.localFileKey = e);
       }
-      O() && (p._app_shell = "1");
+      isAppShellEnabled() && (p._app_shell = "1");
       Object.keys(p).length > 0 && (i += `?${serializeQuery(p)}`);
       e.commentThreadId && (i += `#${e.commentThreadId}`);
       window.EARLY_ARGS?.multiplayer_preconnect_options?.forceIncrementalForEditors !== void 0 && (i += `&force-incremental=${window.EARLY_ARGS?.multiplayer_preconnect_options?.forceIncrementalForEditors}`);
@@ -221,7 +221,7 @@ export class $$D1 {
         file && (i = this.selectedViewNameHelper(file, repo || null));
       }
       e.tryPluginName && !e.tryPluginFileKey && (i = e.tryPluginName);
-      return i ?? _$$t("fullscreen.fullscreen_view_selector.untitled");
+      return i ?? getI18nString("fullscreen.fullscreen_view_selector.untitled");
     }
     return null;
   }

@@ -4,7 +4,7 @@ import { m as _$$m } from "../905/18160";
 import { HzA, ryE } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { getSceneGraphInstance } from "../905/830071";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { widgetErrorTracker } from "../905/250412";
 import { T } from "../figma_app/300692";
 import { InternalError } from "../905/845428";
@@ -29,7 +29,7 @@ let c = new class {
       pluginID: this._pluginID,
       ...this._componentCounts
     };
-    sx("Widget Component Usage", e);
+    trackEventAnalytics("Widget Component Usage", e);
     this.clear();
   }
   clear() {

@@ -1,20 +1,54 @@
-export async function $$n0(e) {
-  await new Promise((t, i) => setTimeout(t, e));
+/**
+ * Delays execution for a specified number of milliseconds.
+ * @param ms - The number of milliseconds to delay.
+ * @returns A promise that resolves after the delay.
+ * Original name: $$n0
+ */
+export async function delay(ms: number): Promise<void> {
+  await new Promise<void>(resolve => setTimeout(resolve, ms))
 }
-export async function $$r2() {
-  await new Promise(e => requestAnimationFrame(e));
+
+/**
+ * Waits for the next animation frame.
+ * @returns A promise that resolves on the next animation frame.
+ * Original name: $$r2
+ */
+export async function waitForAnimationFrame(): Promise<void> {
+  await new Promise<any>(resolve => requestAnimationFrame(resolve))
 }
-export function $$a1(e, t, i) {
-  return new Promise(async n => {
-    let r = setTimeout(() => {
-      t();
-      n();
-    }, i);
-    Promise.resolve(e) == e ? await e : await e();
-    clearTimeout(r);
-    n();
-  });
+
+/**
+ * Executes a promise or function, and ensures a timeout callback is called if not resolved within the specified time.
+ * @param task - A promise or function to execute.
+ * @param onTimeout - Callback to execute on timeout.
+ * @param timeoutMs - Timeout in milliseconds.
+ * @returns A promise that resolves when the task completes or the timeout occurs.
+ * Original name: $$a1
+ */
+export function runWithTimeout(
+  task: Promise<any> | (() => Promise<any>),
+  onTimeout: () => void,
+  timeoutMs: number,
+): Promise<void> {
+  return new Promise<void>(async (resolve) => {
+    let timeoutId = setTimeout(() => {
+      onTimeout()
+      resolve()
+    }, timeoutMs)
+
+    if (Promise.resolve(task) === task) {
+      await task
+    }
+    else {
+      await (task as () => Promise<any>)()
+    }
+
+    clearTimeout(timeoutId)
+    resolve()
+  })
 }
-export const fm = $$n0;
-export const i$ = $$a1;
-export const yQ = $$r2;
+
+// Refactored exports for clarity and maintainability
+export const fm = delay // Original export: fm = $$n0
+export const i$ = runWithTimeout // Original export: i$ = $$a1
+export const yQ = waitForAnimationFrame // Original export: yQ = $$r2

@@ -1,11 +1,11 @@
 import { useCallback, useRef, useEffect, useState } from "react";
 import { useDispatch } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
-import { md } from "../figma_app/27355";
-import { sx } from "../905/449184";
+import { useAtomWithSubscription } from "../figma_app/27355";
+import { trackEventAnalytics } from "../905/449184";
 import { Uz, xH } from "../905/63728";
 import { Point } from "../905/736624";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { CZ } from "../905/294085";
 import { hO, d3, eQ, v2, G4 } from "../figma_app/545293";
 import { Lo, AS, to } from "../905/156213";
@@ -39,12 +39,12 @@ import { Gt } from "../905/175194";
 import { j as _$$j } from "../905/645912";
 var x = E;
 function B(e) {
-  let t = md(hO.currentSearchAtom);
-  let i = md(hO.currentCommunitySearchAtom);
-  let r = md(hO.sortByAtom);
-  let l = md(CZ);
+  let t = useAtomWithSubscription(hO.currentSearchAtom);
+  let i = useAtomWithSubscription(hO.currentCommunitySearchAtom);
+  let r = useAtomWithSubscription(hO.sortByAtom);
+  let l = useAtomWithSubscription(CZ);
   let d = X();
-  let c = md(dd);
+  let c = useAtomWithSubscription(dd);
   return useCallback((n, s) => {
     let u = "hub-file-fragment" === n.type;
     let m = u ? i : t;
@@ -59,11 +59,11 @@ function B(e) {
       case "fig-file-fragment":
         h.fragment_file_key = n.file_key;
         h.sort_by = eQ(r);
-        sx("Fragment search file opened", h);
+        trackEventAnalytics("Fragment search file opened", h);
         break;
       case "hub-file-fragment":
         h.hub_file_id = n.hub_file_id;
-        sx("Fragment search file opened", h);
+        trackEventAnalytics("Fragment search file opened", h);
         break;
       default:
         throwTypeError(n);
@@ -91,8 +91,8 @@ function z({
   activeFragment: i,
   setActiveFragment: r
 }) {
-  let a = md(TT);
-  let o = md(Bw);
+  let a = useAtomWithSubscription(TT);
+  let o = useAtomWithSubscription(Bw);
   let d = a ? o[a] ?? null : null;
   let c = d?.primaryAction;
   let u = d?.secondaryAction;
@@ -311,7 +311,7 @@ let K = Ju(function ({
           }).$,
           children: jsx(_$$K, {
             onClick: u,
-            "aria-label": _$$t("fragment_search.close_modal"),
+            "aria-label": getI18nString("fragment_search.close_modal"),
             recordingKey: generateRecordingKey(Y, "closeButton"),
             children: jsx(_$$A, {})
           })
@@ -324,17 +324,17 @@ let Y = "fragmentSearchPeekModal";
 export function $$$0(e, t, i, y, b) {
   let v = _$$j(i, b);
   let I = B(i);
-  let E = md(hO.sortByAtom);
-  let x = md(CZ);
+  let E = useAtomWithSubscription(hO.sortByAtom);
+  let x = useAtomWithSubscription(CZ);
   let S = useDispatch();
   let w = X();
-  let C = md(dd);
+  let C = useAtomWithSubscription(dd);
   let {
     close
   } = cq();
   return useCallback((n, r, s, u) => {
     let f = {
-      text: i === G4.FIGMAKE ? _$$t("sites.panel.make.attach_design") : _$$t("assets_in_actions.fragment_search.insert"),
+      text: i === G4.FIGMAKE ? getI18nString("sites.panel.make.attach_design") : getI18nString("assets_in_actions.fragment_search.insert"),
       shortcuts: y ? [] : [{
         key: Uz.ENTER
       }],
@@ -373,11 +373,11 @@ export function $$$0(e, t, i, y, b) {
         case "fig-file-fragment":
           n.sort_by = eQ(E);
           n.fragment_file_key = e.file_key;
-          sx("Fragment search preview closed", n);
+          trackEventAnalytics("Fragment search preview closed", n);
           break;
         case "hub-file-fragment":
           n.hub_file_id = e.hub_file_id;
-          sx("Fragment search preview closed", n);
+          trackEventAnalytics("Fragment search preview closed", n);
           break;
         default:
           throwTypeError(e);
@@ -387,7 +387,7 @@ export function $$$0(e, t, i, y, b) {
     };
     let R = b(!1, n, r);
     let N = {
-      text: _$$t("assets_in_actions.fragment_search.preview"),
+      text: getI18nString("assets_in_actions.fragment_search.preview"),
       shortcuts: y ? [] : [{
         key: Uz.ENTER,
         modifier: [xH.SHIFT]
@@ -399,11 +399,11 @@ export function $$$0(e, t, i, y, b) {
           case "fig-file-fragment":
             R.fragment_file_key = n.file_key;
             R.sort_by = eQ(E);
-            sx("Fragment search preview opened", R);
+            trackEventAnalytics("Fragment search preview opened", R);
             break;
           case "hub-file-fragment":
             R.hub_file_id = n.hub_file_id;
-            sx("Fragment search preview opened", R);
+            trackEventAnalytics("Fragment search preview opened", R);
             break;
           default:
             throwTypeError(n);
@@ -425,7 +425,7 @@ export function $$$0(e, t, i, y, b) {
       }
     };
     let P = {
-      text: _$$t("assets_in_actions.fragment_search.close"),
+      text: getI18nString("assets_in_actions.fragment_search.close"),
       shortcuts: y ? [] : [{
         key: Uz.ESCAPE
       }],
@@ -434,7 +434,7 @@ export function $$$0(e, t, i, y, b) {
       }
     };
     let O = {
-      text: A ? _$$t("assets_in_actions.community_section.go_to_file_text") : _$$t("assets_in_actions.fragments_section.go_to_file_text"),
+      text: A ? getI18nString("assets_in_actions.community_section.go_to_file_text") : getI18nString("assets_in_actions.fragments_section.go_to_file_text"),
       shortcuts: y ? [] : [{
         key: Uz.ENTER,
         modifier: [xH.META]

@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import { Uz, xH } from "../905/63728";
 import { Pt } from "../figma_app/806412";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { B } from "../905/969273";
 import { _0, PI, sZ } from "../figma_app/948389";
 import { useDispatch } from "../vendor/514228";
@@ -41,15 +41,15 @@ function x({
   });
 }
 let C = {
-  [B.RATE_LIMIT_EXCEEDED]: tx("ai.error.rate_limited"),
-  [B.CONTENT_LENGTH_LIMIT]: tx("ai.error.content_length_limit"),
-  [B.UNSAFE_OR_HARMFUL_CONTENT]: tx("ai.error.unsafe_or_harmful"),
-  [B.GENERIC]: tx("ai.error.generic"),
-  [B.OFFLINE]: tx("ai.error.offline"),
-  [B.METER_EXCEEDED]: tx("ai.error.generic"),
-  [B.NOT_IMPLEMENTED]: tx("ai.error.not_implemented"),
-  [B.NETWORK_ERROR]: tx("ai.error.network_error"),
-  [B.UNCLOSED_TAGS_BENIGN]: tx("ai.error.generic")
+  [B.RATE_LIMIT_EXCEEDED]: renderI18nText("ai.error.rate_limited"),
+  [B.CONTENT_LENGTH_LIMIT]: renderI18nText("ai.error.content_length_limit"),
+  [B.UNSAFE_OR_HARMFUL_CONTENT]: renderI18nText("ai.error.unsafe_or_harmful"),
+  [B.GENERIC]: renderI18nText("ai.error.generic"),
+  [B.OFFLINE]: renderI18nText("ai.error.offline"),
+  [B.METER_EXCEEDED]: renderI18nText("ai.error.generic"),
+  [B.NOT_IMPLEMENTED]: renderI18nText("ai.error.not_implemented"),
+  [B.NETWORK_ERROR]: renderI18nText("ai.error.network_error"),
+  [B.UNCLOSED_TAGS_BENIGN]: renderI18nText("ai.error.generic")
 };
 export var $$T0 = (e => (e.LEARN_MORE = "LEARN_MORE", e.TRY_AGAIN = "TRY_AGAIN", e.GO_BACK = "GO_BACK", e.OK = "OK", e.BOOST_ANYWAY = "BOOST_ANYWAY", e.SELECT = "SELECT", e))($$T0 || {});
 function k({
@@ -94,17 +94,17 @@ function k({
     children: function (e) {
       switch (e.type) {
         case "TRY_AGAIN":
-          return tx("ai.try_again");
+          return renderI18nText("ai.try_again");
         case "GO_BACK":
-          return tx("ai.go_back");
+          return renderI18nText("ai.go_back");
         case "OK":
-          return tx("ai.ok");
+          return renderI18nText("ai.ok");
         case "LEARN_MORE":
-          return tx("ai.learn_more");
+          return renderI18nText("ai.learn_more");
         case "BOOST_ANYWAY":
-          return tx("image_ai.upscale_image.image_already_max_upscaled_error.boost_anyway");
+          return renderI18nText("image_ai.upscale_image.image_already_max_upscaled_error.boost_anyway");
         case "SELECT":
-          return tx("image_ai.image_modification.select");
+          return renderI18nText("image_ai.image_modification.select");
         default:
           throwTypeError(e.type);
       }
@@ -130,9 +130,9 @@ export function $$R1({
   }) {
     if (_0(e)) {
       let t = PI(e);
-      return t ? tx("ai.limit_reached", {
+      return t ? renderI18nText("ai.limit_reached", {
         resetDate: t
-      }) : tx("ai.error.generic");
+      }) : renderI18nText("ai.error.generic");
     }
     if (t) return t;
     let i = sZ(e);

@@ -3,7 +3,7 @@ import { useRef, useState, useEffect } from "react";
 import { $n } from "../905/521428";
 import o from "classnames";
 import { l as _$$l } from "../905/745972";
-import { Yd, t as _$$t } from "../905/303541";
+import { getTranslatedDynamicContent, getI18nString } from "../905/303541";
 import { N, S } from "../905/872825";
 import { a4 } from "../figma_app/321395";
 import { LJ } from "../figma_app/930386";
@@ -17,7 +17,7 @@ export function $$h1(e, t, r, s) {
       tagSlug: e.localized_url_slug ?? e.url_slug ?? void 0
     }).href,
     title: e.text,
-    translatedTitle: Yd(e.i18n_meta?.text, e.text),
+    translatedTitle: getTranslatedDynamicContent(e.i18n_meta?.text, e.text),
     urlSlug: e.text,
     categorySlug: t,
     tagSlug: e.localized_url_slug ?? e.url_slug ?? void 0
@@ -26,7 +26,7 @@ export function $$h1(e, t, r, s) {
       categorySlug: e.url_slug
     }).href,
     title: e.title,
-    translatedTitle: Yd(e.i18n_meta?.title, e.title),
+    translatedTitle: getTranslatedDynamicContent(e.i18n_meta?.title, e.title),
     urlSlug: e.url_slug,
     categorySlug: e.url_slug,
     tagSlug: void 0
@@ -78,7 +78,7 @@ export function $$x0({
         y(!0);
         v(!1);
       },
-      children: _$$t("community.shelves.show_more")
+      children: getI18nString("community.shelves.show_more")
     })]
   });
 }

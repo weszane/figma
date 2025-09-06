@@ -5,7 +5,7 @@ import { $M } from "../figma_app/930338";
 import { a as _$$a } from "../905/925868";
 import { t as _$$t } from "../905/331623";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t2, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { n as _$$n, v as _$$v } from "../905/458699";
 import { QP } from "../figma_app/487970";
 import { l as _$$l } from "../905/152724";
@@ -265,7 +265,7 @@ export function $$D2({
           className: mU,
           children: [jsx("div", {
             className: QX,
-            children: _$$t2("community.follow.followers")
+            children: getI18nString("community.follow.followers")
           }), jsx("div", {
             className: JQ,
             children: $M(model.follower_count + _)
@@ -289,7 +289,7 @@ export function $$D2({
           loading: "lazy"
         })
       }, e.id))) : jsx("span", {
-        children: tx("community.profiles.no_resources_published_yet")
+        children: renderI18nText("community.profiles.no_resources_published_yet")
       })
     })]
   });

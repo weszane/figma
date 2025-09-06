@@ -3,7 +3,7 @@ import { useRef, useEffect, useState } from "react";
 import { E } from "../905/632989";
 import o from "../vendor/197638";
 import { R } from "../5430/455826";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { Ep, YW, dz, Un } from "../figma_app/350203";
 var a = o;
 let $$u = "truncated_description_view--blueLink--v3wsX blue_link--blueLink--9rlnd";
@@ -43,7 +43,7 @@ export function $$$$_1({
       ref: o,
       children: [r && jsx("div", {
         className: "truncated_description_view--aboutHeader--f2Cgw",
-        children: tx("community.resource_page.about")
+        children: renderI18nText("community.resource_page.about")
       }), jsx($$m0, {
         description: e
       }), !a && p && jsx(E, {
@@ -51,7 +51,7 @@ export function $$$$_1({
         onClick: () => {
           _(!0);
         },
-        children: tx("community.detail_view.show_less")
+        children: renderI18nText("community.detail_view.show_less")
       })]
     }), a && jsx("div", {
       className: "truncated_description_view--readMoreWrapper--4ruCR text--fontPos14--OL9Hp text--_fontBase--QdLsd",
@@ -60,7 +60,7 @@ export function $$$$_1({
         onClick: () => {
           _(!1);
         },
-        children: tx("community.detail_view.read_more")
+        children: renderI18nText("community.detail_view.read_more")
       })
     }), !t && jsx("div", {
       className: "truncated_description_view--divider--RK37w"

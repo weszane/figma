@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { defaultLanguage, languageCodes, subsetLanguages, allLanguages } from "../905/816253";
-import { Pu, Xo } from "../905/528121";
+import { getLanguageDisplayName, getI18nResourceKey } from "../905/528121";
 import { throwError } from "../figma_app/465776";
 import { hS } from "../905/437088";
 import { bL, Rq } from "../905/38914";
@@ -11,16 +11,16 @@ import { b as _$$b, c as _$$c } from "../905/308099";
 import { s as _$$s } from "../905/932270";
 import { J } from "../905/270045";
 import { $n } from "../905/521428";
-import { Cp } from "../vendor/288996";
+import { captureException } from "../vendor/288996";
 import { getFeatureFlags } from "../905/601108";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Ay } from "../905/612521";
 import { isDevEnvironment } from "../figma_app/169182";
 import { I7 } from "../figma_app/594947";
 import { s as _$$s2 } from "../905/573154";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { J as _$$J } from "../905/231762";
-import { Gq } from "../figma_app/363242";
+import { getI18nState } from "../figma_app/363242";
 import { fu } from "../figma_app/831799";
 import { aq } from "../figma_app/412189";
 import { Ju, ZU } from "../905/102752";
@@ -33,7 +33,7 @@ export let $$P0 = Ju(function ({
   source: i
 }) {
   let l = useDispatch();
-  let T = Gq()?.getPrimaryLocale(!0) ?? defaultLanguage;
+  let T = getI18nState()?.getPrimaryLocale(!0) ?? defaultLanguage;
   let P = hS({
     open: e,
     onClose: t
@@ -85,7 +85,7 @@ export let $$P0 = Ju(function ({
   }();
   let M = useCallback(e => {
     if (e === languageCodes.ES_ES && O || e === languageCodes.KO_KR && D || e === languageCodes.PT_BR && F) return !0;
-    let t = Pu(e);
+    let t = getLanguageDisplayName(e);
     return !!(!t || getFeatureFlags()[t]);
   }, [O, D, F]);
   let j = useMemo(() => {
@@ -127,11 +127,11 @@ export let $$P0 = Ju(function ({
     };
   }({
     onError: e => {
-      let t = _$$J(e, _$$t("help_widget.language_selector.an_error_occurred"));
+      let t = _$$J(e, getI18nString("help_widget.language_selector.an_error_occurred"));
       l(_$$s2.error(t));
       H() && z(!1);
       let i = Error("Failed to change user locale.");
-      Cp(i, {
+      captureException(i, {
         originalException: e
       });
     },
@@ -150,7 +150,7 @@ export let $$P0 = Ju(function ({
             t();
             return;
           }
-          sx("language_changed", {
+          trackEventAnalytics("language_changed", {
             previous_language: U,
             new_language: B,
             source: i
@@ -162,20 +162,20 @@ export let $$P0 = Ju(function ({
         },
         children: [jsx(Y9, {
           children: jsx(hE, {
-            children: tx("settings.account_settings.change_languages")
+            children: renderI18nText("settings.account_settings.change_languages")
           })
         }), jsx(nB, {
           children: jsx(_$$b, {
             autofocus: !0,
             legend: jsx(_$$s, {
-              children: tx("settings.language_selector.modal.description")
+              children: renderI18nText("settings.language_selector.modal.description")
             }),
             value: B,
             onChange: e => {
               var t;
               if (!(t = allLanguages, e => t.includes(e))(e)) {
                 let t = Error(`${e} is not a locale.`);
-                Cp(t);
+                captureException(t);
                 return;
               }
               V(e);
@@ -193,11 +193,11 @@ export let $$P0 = Ju(function ({
               variant: "secondary",
               disabled: G,
               onClick: t,
-              children: tx("settings.language_selector.cancel")
+              children: renderI18nText("settings.language_selector.cancel")
             }), jsx($n, {
               disabled: G,
               type: "submit",
-              children: tx("settings.language_selector.save")
+              children: renderI18nText("settings.language_selector.save")
             })]
           })
         })]
@@ -214,7 +214,7 @@ export function $$O2() {
 export var $$D1 = (e => (e.USER_SETTINGS = "User Settings", e.HELP = "Help", e.ANNOUNCEMENT_MODAL = "Announcement Modal", e))($$D1 || {});
 function L(e) {
   void 0 === e && throwError(`Unsupported locale in language selector: ${e}`);
-  return Xo(e);
+  return getI18nResourceKey(e);
 }
 export const kA = $$P0;
 export const IO = $$D1;

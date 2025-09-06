@@ -1,12 +1,12 @@
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { f } from "../905/940356";
 import { Rt } from "../figma_app/979658";
 import { SS } from "../figma_app/330088";
 export function $$o0(e) {
-  let t = _$$t("whiteboard.inserts.use_cases_brainstorm_together");
-  let r = _$$t("whiteboard.inserts.use_cases_diagram_anything");
-  let i = _$$t("whiteboard.inserts.use_cases_run_a_meeting");
-  let s = _$$t("whiteboard.inserts.use_cases_lead_a_workshop");
+  let t = getI18nString("whiteboard.inserts.use_cases_brainstorm_together");
+  let r = getI18nString("whiteboard.inserts.use_cases_diagram_anything");
+  let i = getI18nString("whiteboard.inserts.use_cases_run_a_meeting");
+  let s = getI18nString("whiteboard.inserts.use_cases_lead_a_workshop");
   switch (e) {
     case "designer":
       return {

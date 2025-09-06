@@ -5,7 +5,7 @@ import { throwTypeError } from "../figma_app/465776";
 import p from "classnames";
 import { Ay } from "../905/612521";
 import { oJ, Gc } from "../905/63728";
-import { Ay as _$$Ay, rr } from "../figma_app/778880";
+import { BrowserInfo, isMobileUA } from "../figma_app/778880";
 import { $J } from "../905/491152";
 import { Ts } from "../905/194276";
 import { Ex, zE } from "../figma_app/919079";
@@ -13,7 +13,7 @@ import { f as _$$f } from "../905/671470";
 import { C as _$$C } from "../905/196436";
 import { B as _$$B } from "../905/714743";
 import { t as _$$t } from "../905/331623";
-import { tx, t as _$$t2 } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { Xy } from "../figma_app/578832";
 import { Mr } from "../figma_app/795938";
@@ -66,7 +66,7 @@ export function $$eu2(e) {
   let i = !r && e.isSet ? Bz : e.isWhiteboard ? kj : h1;
   let a = e.showNewBadge ? jsx($$eg3, {}) : e.showFigPickBadge ? jsx(em, {}) : jsx(Fragment, {});
   let s = _()(e.isSet ? mH : ZX, {
-    [eB]: e.includeChromiumDownscalingFix && _$$Ay.chrome
+    [eB]: e.includeChromiumDownscalingFix && BrowserInfo.chrome
   }, e.imageClassName);
   t = e.image ? e.showOriginalThumbnail ? jsx("img", {
     className: s,
@@ -150,7 +150,7 @@ function ep(e) {
       }), n.name]
     }), e.showNewBadge ? jsx($$eg3, {}) : e.showInstalledIcon && jsx("span", {
       className: qP,
-      children: tx("community.plugins.saved")
+      children: renderI18nText("community.plugins.saved")
     }), e.children]
   });
 }
@@ -183,7 +183,7 @@ memo(function (e) {
           onClick: e => e.preventDefault(),
           style: {
             backgroundColor: e.backgroundColor,
-            backgroundClip: _$$Ay.safari ? "padding-box" : ""
+            backgroundClip: BrowserInfo.safari ? "padding-box" : ""
           },
           children: jsx($$eu2, {
             alt: e.name,
@@ -230,10 +230,10 @@ function em() {
   return jsx("div", {
     className: jq,
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": _$$t2("community.profiles.boosted_by_the_figma_team"),
+    "data-tooltip": getI18nString("community.profiles.boosted_by_the_figma_team"),
     "data-tooltip-show-immediately": !0,
     children: jsx(Ex, {
-      text: _$$t2("community.profiles.fig_pick"),
+      text: getI18nString("community.profiles.fig_pick"),
       color: zE.BRAND,
       className: q2
     })
@@ -243,7 +243,7 @@ export function $$eg3() {
   return jsx("div", {
     className: jq,
     children: jsx(Ex, {
-      text: _$$t2("community.profiles.new"),
+      text: getI18nString("community.profiles.new"),
       color: zE.SUCCESS,
       className: q2
     })
@@ -253,7 +253,7 @@ function ef() {
   return jsx("div", {
     className: o_,
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": _$$t2("community.profiles.made_in_fig_jam"),
+    "data-tooltip": getI18nString("community.profiles.made_in_fig_jam"),
     "data-tooltip-show-immediately": !0,
     children: jsx(_$$t, {
       svg: _$$A,
@@ -279,7 +279,7 @@ function eE(e) {
     }
   } : null;
   return jsxs("div", {
-    className: _$$Ay.mobile ? IM : e.showAuthorByDefault ? Gf : U$,
+    className: BrowserInfo.mobile ? IM : e.showAuthorByDefault ? Gf : U$,
     onClick: e.onClick,
     children: [i && jsx(Mr, {
       resource: i || e.plugin
@@ -366,10 +366,10 @@ export function $$eb5({
       resourceType: vt.PLUGIN,
       source: uR.COMMUNITY_HUB
     })), f(_$$F.enqueue({
-      message: _$$t2("community.profiles.removed_from_saved_plugins"),
+      message: getI18nString("community.profiles.removed_from_saved_plugins"),
       type: "plugin-installed",
       button: {
-        text: _$$t2("community.comments.undo"),
+        text: getI18nString("community.comments.undo"),
         action: () => {
           f(oj({
             id: e.id,
@@ -380,7 +380,7 @@ export function $$eb5({
       }
     })));else {
       if (!m) {
-        if (rr) {
+        if (isMobileUA) {
           window.location.href = "/login";
           return;
         }
@@ -390,7 +390,7 @@ export function $$eb5({
         f(to({
           type: _$$l,
           data: {
-            headerText: _$$t2("community.profiles.save_this_plugin_to_give_you_and_figma_a_boost"),
+            headerText: getI18nString("community.profiles.save_this_plugin_to_give_you_and_figma_a_boost"),
             icon: _$$A2,
             dispatch: f
           }
@@ -413,7 +413,7 @@ export function $$eb5({
         children: [jsx(_$$B, {
           className: hz,
           svg: _$$A4
-        }), tx("community.cards.private")]
+        }), renderI18nText("community.cards.private")]
       }), jsxs("div", {
         className: _$$y,
         children: [h && e_(e.comments_setting) && jsx(eh, {
@@ -421,19 +421,19 @@ export function $$eb5({
         }), i ? jsx(Ij, {
           metric: e.unique_run_count || 0
         }) : jsxs("div", {
-          className: _$$Ay.mobile ? hA : Pw,
+          className: BrowserInfo.mobile ? hA : Pw,
           children: [jsx(_$$f, {
-            className: _$$Ay.mobile || p ? Ys : _ ? XC : sn,
+            className: BrowserInfo.mobile || p ? Ys : _ ? XC : sn,
             count: e.install_count,
             prefix: jsx("div", {
               className: uu,
               children: _ ? "\u2713 " : "\u2193 "
             }),
-            onClick: _$$Ay.mobile || p ? void 0 : S
+            onClick: BrowserInfo.mobile || p ? void 0 : S
           }), _ && jsx("div", {
             className: a_,
-            onClick: _$$Ay.mobile || p ? void 0 : S,
-            children: tx("community.profiles.remove_from_saved_plugins")
+            onClick: BrowserInfo.mobile || p ? void 0 : S,
+            children: renderI18nText("community.profiles.remove_from_saved_plugins")
           })]
         }), a]
       })]
@@ -519,9 +519,9 @@ function eT(e, t) {
       });
       return jsxs("div", {
         className: NB,
-        children: [1 === e.length && tx("community.by_publisher", {
+        children: [1 === e.length && renderI18nText("community.by_publisher", {
           publisher: i
-        }), e.length > 1 && tx("community.by_publisher_with_suffix", {
+        }), e.length > 1 && renderI18nText("community.by_publisher_with_suffix", {
           publisherName: i,
           publishersSuffix: jsx(Fragment, {
             children: jsx("span", {
@@ -539,7 +539,7 @@ function eT(e, t) {
                   }))
                 }));
               },
-              children: tx("community.cards.pluralize_num_other_publishers", {
+              children: renderI18nText("community.cards.pluralize_num_other_publishers", {
                 numOtherPublishers: e.length - 1
               })
             })
@@ -883,7 +883,7 @@ $$ev7.defaultProps = {
               }), jsxs("div", {
                 children: [jsx("div", {
                   className: u0,
-                  children: tx("community.follow.followers")
+                  children: renderI18nText("community.follow.followers")
                 }), jsx("div", {
                   className: oQ,
                   children: e.follower_count + this.state.currentUserFollowActionCountDiff
@@ -915,7 +915,7 @@ $$ev7.defaultProps = {
           })]
         }), 0 === this.props.resources.length && jsx("div", {
           className: t9,
-          children: tx("community.profiles.no_resources_published_yet")
+          children: renderI18nText("community.profiles.no_resources_published_yet")
         })]
       });
     }
@@ -942,7 +942,7 @@ export function $$ex8({
   color: e = zE.DEFAULT
 }) {
   return jsx(Ex, {
-    text: _$$t2("community.profiles.follows_you"),
+    text: getI18nString("community.profiles.follows_you"),
     color: e,
     className: x7
   });

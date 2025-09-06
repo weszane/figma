@@ -1,8 +1,8 @@
 import { useState, useCallback, useEffect } from "react";
 import { useDispatch } from "../vendor/514228";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { parsePxInt } from "../figma_app/783094";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { to } from "../905/156213";
 import { cX, Wv } from "../figma_app/633080";
 import { y } from "../905/375507";
@@ -22,7 +22,7 @@ export function $$g2(e, t) {
   });
 }
 export function $$f3(e = !1) {
-  return Ay.mobile ? window.innerWidth - 32 : parsePxInt(e ? fXD : PXO);
+  return BrowserInfo.mobile ? window.innerWidth - 32 : parsePxInt(e ? fXD : PXO);
 }
 export function $$_5() {
   return Math.min(760, window.innerWidth);
@@ -31,7 +31,7 @@ export function $$A1(e, t) {
   let i = useDispatch();
   let [s, o] = useState(() => t && e.includes(t) ? t : e[0]);
   let l = useCallback(t => {
-    e.includes(t) && (t !== s && sx("Library Preferences Modal Tab Changed", {
+    e.includes(t) && (t !== s && trackEventAnalytics("Library Preferences Modal Tab Changed", {
       tab: Wv[t]
     }), o(t));
   }, [s, e]);

@@ -5,7 +5,7 @@ import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
 import { l7 } from "../905/189185";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { Y5 } from "../figma_app/455680";
 export let $$u0 = Ju(function (e) {
   let t = hS({
@@ -19,18 +19,18 @@ export let $$u0 = Ju(function (e) {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: tx("fullscreen.fullscreen_view.restore_component_modal.restore_component")
+          children: renderI18nText("fullscreen.fullscreen_view.restore_component_modal.restore_component")
         })
       }), jsx(nB, {
         children: jsx("div", {
           children: e.movedToFile ? jsxs("p", {
-            children: [tx("fullscreen.fullscreen_view.restore_component_modal.this_component_was_moved", {
-              otherFile: "another file" === e.movedToFile ? _$$t("fullscreen.fullscreen_view.restore_component_modal.another_file") : jsx("strong", {
+            children: [renderI18nText("fullscreen.fullscreen_view.restore_component_modal.this_component_was_moved", {
+              otherFile: "another file" === e.movedToFile ? getI18nString("fullscreen.fullscreen_view.restore_component_modal.another_file") : jsx("strong", {
                 children: `${e.movedToFile}`
               })
-            }), jsx("br", {}), tx("fullscreen.fullscreen_view.restore_component_modal.accept_component_updates"), jsx("br", {}), jsx("br", {}), tx("fullscreen.fullscreen_view.restore_component_modal.restoring_will_allow")]
+            }), jsx("br", {}), renderI18nText("fullscreen.fullscreen_view.restore_component_modal.accept_component_updates"), jsx("br", {}), jsx("br", {}), renderI18nText("fullscreen.fullscreen_view.restore_component_modal.restoring_will_allow")]
           }) : jsx("p", {
-            children: tx("fullscreen.fullscreen_view.restore_component_modal.restore_the_main_component_to_continue_making_edits_to_it")
+            children: renderI18nText("fullscreen.fullscreen_view.restore_component_modal.restore_the_main_component_to_continue_making_edits_to_it")
           })
         })
       }), jsx(wi, {
@@ -38,7 +38,7 @@ export let $$u0 = Ju(function (e) {
           children: [jsx($n, {
             onClick: e.onClose,
             variant: "secondary",
-            children: tx("fullscreen.fullscreen_view.restore_component_modal.cancel")
+            children: renderI18nText("fullscreen.fullscreen_view.restore_component_modal.cancel")
           }), jsx($n, {
             onClick: () => {
               l7.user("restore-component", () => {
@@ -47,7 +47,7 @@ export let $$u0 = Ju(function (e) {
               e.onClose();
             },
             variant: "primary",
-            children: tx("fullscreen.fullscreen_view.restore_component_modal.restore")
+            children: renderI18nText("fullscreen.fullscreen_view.restore_component_modal.restore")
           })]
         })
       })]

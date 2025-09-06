@@ -3,10 +3,10 @@ import { useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { c2 } from "../905/382883";
 import { l as _$$l } from "../905/716947";
-import { Iz, eU, Zb, md, zl, Xr, fp } from "../figma_app/27355";
+import { createRemovableAtomFamily, atom, setupDebounceAtoms, useAtomWithSubscription, atomStoreManager, Xr, useAtomValueAndSetter } from "../figma_app/27355";
 import { selectAtom, loadable } from "../vendor/812047";
 import c from "../vendor/946678";
-import { az, sx } from "../905/449184";
+import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { $ as _$$$ } from "../905/455748";
 import { QO } from "../905/888985";
 import { rw } from "../905/485103";
@@ -20,12 +20,12 @@ import { qp, hN } from "../905/977779";
 import { Z as _$$Z } from "../905/515860";
 import { yV, _S } from "../figma_app/516028";
 import { OC } from "../figma_app/386952";
-import { bt } from "../905/270322";
+import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { X0, WV, Gg } from "../figma_app/646357";
 import { KK } from "../905/276025";
 import { KH } from "../905/81982";
 import { vx } from "../905/91038";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { Ei } from "../905/574958";
 import { r6 } from "../figma_app/517115";
 import { cY, I1 } from "../figma_app/825489";
@@ -49,19 +49,19 @@ let W = {
   3: "figjam_tool_bar"
 };
 let $$K2 = W;
-let Y = Iz(e => eU(t => (t(Z(e).debouncedValueAtom), t(ee(e)), Ei())));
+let Y = createRemovableAtomFamily(e => atom(t => (t(Z(e).debouncedValueAtom), t(ee(e)), Ei())));
 function q(e, t) {
   return t(et(e)).queryId ?? t(Y(e));
 }
 let $ = {};
 let Z = e => {
   if (!$[e]) {
-    if (H[e]) $[e] = Zb("", H[e]);else {
-      let t = eU("");
+    if (H[e]) $[e] = setupDebounceAtoms("", H[e]);else {
+      let t = atom("");
       $[e] = {
         currentValueAtom: t,
         debouncedValueAtom: t,
-        isDebouncingAtom: eU(!1)
+        isDebouncingAtom: atom(!1)
       };
     }
   }
@@ -71,7 +71,7 @@ export function $$X3() {
   let {
     debouncedValueAtom
   } = Z(0);
-  let t = md(debouncedValueAtom);
+  let t = useAtomWithSubscription(debouncedValueAtom);
   let [i, a] = useState(!1);
   let s = useSelector(e => e.library.assetsPanelSearch.query);
   useEffect(() => {
@@ -81,19 +81,19 @@ export function $$X3() {
   }, [a]);
   return i ? t : s;
 }
-let Q = Iz(e => eU(t => q(e, t)));
+let Q = createRemovableAtomFamily(e => atom(t => q(e, t)));
 export function $$J1(e) {
-  return md(Q(e.includes("figjam") ? 3 : 0));
+  return useAtomWithSubscription(Q(e.includes("figjam") ? 3 : 0));
 }
-let ee = Iz((e, t) => eU(t ?? void 0), (e, t) => e === t);
-let et = Iz(e => eU({}));
-let ei = bt(vx);
-let en = eU(e => e(lj).length > 0);
+let ee = createRemovableAtomFamily((e, t) => atom(t ?? void 0), (e, t) => e === t);
+let et = createRemovableAtomFamily(e => atom({}));
+let ei = createReduxSubscriptionAtomWithState(vx);
+let en = atom(e => e(lj).length > 0);
 let er = {
   normalizedSearchResults: [],
   unsubscribedSearchResults: []
 };
-let ea = bt(e => {
+let ea = createReduxSubscriptionAtomWithState(e => {
   let {
     componentsByLibraryKey,
     stateGroupsByLibraryKey
@@ -103,7 +103,7 @@ let ea = bt(e => {
     defaultPublishedStateGroups: stateGroupsByLibraryKey
   };
 });
-let es = bt(e => {
+let es = createReduxSubscriptionAtomWithState(e => {
   let {
     components,
     stateGroups
@@ -113,12 +113,12 @@ let es = bt(e => {
     stateGroups
   };
 });
-let eo = bt(e => e.library.assetsPanelSearch.shouldSearchDefaultLibraries);
-let el = bt(e => e.search.sessionId);
-let ed = selectAtom(OC, e => XE(e) === nT.Design);
+let eo = createReduxSubscriptionAtomWithState(e => e.library.assetsPanelSearch.shouldSearchDefaultLibraries);
+let el = createReduxSubscriptionAtomWithState(e => e.search.sessionId);
+let ed = selectAtom(OC, e => XE(e) === FEditorType.Design);
 let ec = selectAtom(yV, f$, c2);
-let eu = Iz(e => eU(void 0));
-let ep = Iz(e => eU(t => {
+let eu = createRemovableAtomFamily(e => atom(void 0));
+let ep = createRemovableAtomFamily(e => atom(t => {
   let {
     libraryKeyBackingSelectedItems
   } = t(et(e));
@@ -127,7 +127,7 @@ let ep = Iz(e => eU(t => {
 }));
 let em = selectAtom(qp, e => new Set(Object.keys(e)), yZ);
 var eh = (e => (e[e.None = 0] = "None", e[e.All = 1] = "All", e[e.File = 2] = "File", e[e.Local = 3] = "Local", e))(eh || {});
-let eg = Iz(e => eU(async t => {
+let eg = createRemovableAtomFamily(e => atom(async t => {
   let i = t(Z(e).debouncedValueAtom);
   let n = t(ee(e));
   if (!i || !(await _$$Z2())) return 0;
@@ -146,7 +146,7 @@ let eg = Iz(e => eU(async t => {
       return throwTypeError(n, "unknown search type");
   }
 }));
-let ef = eU(e => {
+let ef = atom(e => {
   let {
     components,
     stateGroups
@@ -179,7 +179,7 @@ let e_ = selectAtom(ef, e => e, (e, t) => {
   let n = new Set(t.map(e => _$$V(e)));
   return i.size === n.size && [...i].every(e => n.has(e));
 });
-let eA = eU(e => {
+let eA = atom(e => {
   let t = new KH({
     keys: vz,
     ...dO
@@ -188,7 +188,7 @@ let eA = eU(e => {
   t.set(i);
   return t;
 });
-let ey = Iz(e => eU(async t => {
+let ey = createRemovableAtomFamily(e => atom(async t => {
   let i;
   let n = await t(eg(e));
   if (0 === n) return er;
@@ -196,21 +196,21 @@ let ey = Iz(e => eU(async t => {
     let {
       sessionId
     } = e(et(t));
-    let n = sessionId ?? zl.get(el);
+    let n = sessionId ?? atomStoreManager.get(el);
     let r = e(_S);
-    let a = zl.get(OC);
+    let a = atomStoreManager.get(OC);
     let s = e(Z(t).debouncedValueAtom);
     let d = e(ed);
     let c = e(ec);
     let m = e(eN);
     let h = c?.parentOrgId;
     let g = e(ee(t));
-    let f = zl.get(eP);
+    let f = atomStoreManager.get(eP);
     let A = e(cY("libraryKey"));
     let b = e(eu(t));
     let v = q(t, e);
     return async (i, I, E) => {
-      az.trackDefinedEvent("assets_panel.component_search", {
+      analyticsEventManager.trackDefinedEvent("assets_panel.component_search", {
         query: s,
         inDesignEditor: d,
         searchSessionId: n ?? "",
@@ -220,7 +220,7 @@ let ey = Iz(e => eU(async t => {
         fileOrgId: h ?? void 0,
         queryId: v
       });
-      null === n && sx("asset_search.missing_session_id", {
+      null === n && trackEventAnalytics("asset_search.missing_session_id", {
         previousSessionId: f.sessionId,
         entryPoint: W[t]
       }, {
@@ -251,13 +251,13 @@ let ey = Iz(e => eU(async t => {
         S.unsubscribedSearchResultsCount = i.unsubscribedSearchResults.length;
       }
       if (Vj(a) && g?.type && [_$$I.ALL, _$$I.SITE_KIT].includes(g.type)) {
-        let e = zl.get(Sv);
+        let e = atomStoreManager.get(Sv);
         S.siteKitSearchResultsCount = e;
         S.totalShownResults = S.totalShownResults + e;
       }
       hW("exp_asset_search_refactor");
-      az.trackDefinedEvent("assets_panel.search_time", S);
-      az.trackDefinedEvent("asset_search.query_result", {
+      analyticsEventManager.trackDefinedEvent("assets_panel.search_time", S);
+      analyticsEventManager.trackDefinedEvent("asset_search.query_result", {
         ...S,
         componentSuggestionSessionId: r6(),
         didNetworkFetch: E
@@ -359,7 +359,7 @@ let eI = async (e, t) => {
     didNetworkFetch: n === lastQueryId
   };
 };
-let eE = Iz(e => eU(async t => {
+let eE = createRemovableAtomFamily(e => atom(async t => {
   if (![3, 1].includes(await t(eg(e)))) return [];
   let i = new rw();
   let n = t(Z(e).debouncedValueAtom);
@@ -368,7 +368,7 @@ let eE = Iz(e => eU(async t => {
   eO("asset_search.latency_segment.local_fuse", i, e, t);
   return a;
 }));
-let ex = Iz(e => eU(async t => {
+let ex = createRemovableAtomFamily(e => atom(async t => {
   if ((await t(eg(e))) !== 1) return {
     results: [],
     lastQueryId: ""
@@ -377,13 +377,13 @@ let ex = Iz(e => eU(async t => {
   let n = t(Z(e).debouncedValueAtom);
   let r = t(ei);
   let a = t(ec);
-  let s = zl.get(OC);
+  let s = atomStoreManager.get(OC);
   let o = t(ep(e));
   let {
     sessionId,
     selectedItems
   } = t(et(e));
-  let u = sessionId ?? zl.get(el);
+  let u = sessionId ?? atomStoreManager.get(el);
   let p = q(e, t);
   let m = await Cc(n, r, a?.parentOrgId ?? null, a, s, o, u ?? "", p, $$K2[e], selectedItems);
   eO("asset_search.latency_segment.all_server_results_fetch", i, e, t);
@@ -392,7 +392,7 @@ let ex = Iz(e => eU(async t => {
     lastQueryId: p
   };
 }));
-let eS = Iz(e => eU(async t => {
+let eS = createRemovableAtomFamily(e => atom(async t => {
   if ((await t(eg(e))) !== 1) return {
     results: [],
     lastQueryId: ""
@@ -409,7 +409,7 @@ let eS = Iz(e => eU(async t => {
     lastQueryId: s
   };
 }));
-let ew = Iz(e => eU(async t => {
+let ew = createRemovableAtomFamily(e => atom(async t => {
   if ((await t(eg(e))) !== 2) return {
     results: [],
     lastQueryId: ""
@@ -423,7 +423,7 @@ let ew = Iz(e => eU(async t => {
     sessionId,
     selectedItems
   } = t(et(e));
-  let u = sessionId ?? zl.get(el);
+  let u = sessionId ?? atomStoreManager.get(el);
   let p = q(e, t);
   let m = await _$$KK(n, a, s?.key ?? "", u ?? "", s?.editorType?.toString(), p, $$K2[e], selectedItems);
   eO("asset_search.latency_segment.file_results_fetch", i, e, t);
@@ -435,7 +435,7 @@ let ew = Iz(e => eU(async t => {
 async function eC(e, t) {
   let i = new rw();
   1 === (await t(eg(e))) && (await QO(I1, e => {
-    let t = zl.get(I1);
+    let t = atomStoreManager.get(I1);
     "loaded" === t.status && e(t);
   }));
   eO("asset_search.latency_segment.wait_for_dependencies", i, e, t);
@@ -446,19 +446,19 @@ export function $$eT4(e) {
     debouncedValueAtom,
     isDebouncingAtom
   } = Z(e);
-  let a = md(currentValueAtom);
-  let o = md(isDebouncingAtom);
+  let a = useAtomWithSubscription(currentValueAtom);
+  let o = useAtomWithSubscription(isDebouncingAtom);
   let c = Xr(debouncedValueAtom);
-  let [u, p] = fp(ee(e));
+  let [u, p] = useAtomValueAndSetter(ee(e));
   let h = useCallback((e, t) => {
     c(e);
     t && p(t);
   }, [c, p]);
   let g = function (e) {
-    let t = md(loadable(ey(e)));
-    let i = md(Z(e).debouncedValueAtom);
-    let r = md(ee(e));
-    let [a, o] = fp(eR(e));
+    let t = useAtomWithSubscription(loadable(ey(e)));
+    let i = useAtomWithSubscription(Z(e).debouncedValueAtom);
+    let r = useAtomWithSubscription(ee(e));
+    let [a, o] = useAtomValueAndSetter(eR(e));
     let c = _$$$(t);
     useEffect(() => {
       c && "hasData" === t.state && o({
@@ -488,22 +488,22 @@ export function $$eT4(e) {
   };
 }
 export async function $$ek5(e, t, i, n = {}) {
-  zl.set(Z(i).debouncedValueAtom, e);
-  zl.set(ee(i), t);
-  zl.set(et(i), n);
-  return await zl.get(ey(i));
+  atomStoreManager.set(Z(i).debouncedValueAtom, e);
+  atomStoreManager.set(ee(i), t);
+  atomStoreManager.set(et(i), n);
+  return await atomStoreManager.get(ey(i));
 }
-let eR = Iz(e => eU(null));
-let eN = bt(_$$Z);
-let eP = bt(e => e.search.lastLoadedQuery);
+let eR = createRemovableAtomFamily(e => atom(null));
+let eN = createReduxSubscriptionAtomWithState(_$$Z);
+let eP = createReduxSubscriptionAtomWithState(e => e.search.lastLoadedQuery);
 function eO(e, t, i, n) {
   let {
     sessionId
   } = n(et(i));
-  let a = sessionId ?? zl.get(el);
+  let a = sessionId ?? atomStoreManager.get(el);
   let s = q(i, n);
   t.stop(i => {
-    az.trackDefinedEvent(e, {
+    analyticsEventManager.trackDefinedEvent(e, {
       elapsedTime: i,
       backgrounded: t.backgrounded || t.offlined,
       sessionId: a ?? void 0,

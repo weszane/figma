@@ -6,7 +6,7 @@ import { getFeatureFlags } from "../905/601108";
 import { colorToHex } from "../905/436288";
 import { Pt } from "../figma_app/806412";
 import { B } from "../905/714743";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { X } from "../905/190511";
 import { sD } from "../905/937198";
 import { dG } from "../figma_app/753501";
@@ -71,12 +71,12 @@ export function $$x1({
   return jsx("span", {
     className: zm,
     children: jsx(K, {
-      "aria-label": _$$t("fullscreen.properties_panel.fill.detach_variable"),
+      "aria-label": getI18nString("fullscreen.properties_panel.fill.detach_variable"),
       onClick: e,
       recordingKey: Pt(t, "paint", "detachVariableButton"),
       htmlAttributes: {
         onMouseDown: dG,
-        "data-tooltip": _$$t("fullscreen.properties_panel.fill.detach_variable"),
+        "data-tooltip": getI18nString("fullscreen.properties_panel.fill.detach_variable"),
         "data-tooltip-type": Ib.TEXT
       },
       children: jsx(U, {})
@@ -110,7 +110,7 @@ function S({
       hasFocus: m,
       styleIcon: A || jsx("div", {
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("variables.variable_was_deleted"),
+        "data-tooltip": getI18nString("variables.variable_was_deleted"),
         children: jsx(B, {
           className: Bx,
           svg: _$$A

@@ -1,5 +1,5 @@
 import { useMemo, useRef, useEffect } from "react";
-import { fp } from "../figma_app/27355";
+import { useAtomValueAndSetter } from "../figma_app/27355";
 export function $$a1({
   _atom: e,
   machine: t
@@ -8,7 +8,7 @@ export function $$a1({
     currentState: r,
     lastEvent: a,
     previousState: s
-  }, o] = fp(e);
+  }, o] = useAtomValueAndSetter(e);
   let l = t.isComplete(r);
   return useMemo(() => ({
     completed: l,

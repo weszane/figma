@@ -8,21 +8,21 @@ import { n3, F7, Rf, Pg, IA } from "../905/859698";
 import { bwI, uXg, glU, HG$, Egt } from "../figma_app/763686";
 import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
-import { md, zl } from "../figma_app/27355";
+import { useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import { xx } from "../figma_app/815945";
 import m from "../vendor/260986";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { gB, Xm } from "../905/723791";
 import { Ez } from "../figma_app/766708";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { Bq } from "../905/760682";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { Yx } from "../figma_app/930338";
 import { XHR } from "../905/910117";
 import { YQ } from "../905/502364";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { $ as _$$$ } from "../905/383708";
 import { P as _$$P } from "../905/412913";
 import { $ as _$$$2 } from "../905/851662";
@@ -243,30 +243,30 @@ let ex = (e, t) => {
   let r = t ? 1 : 2;
   switch (e) {
     case "TEXT":
-      return _$$t("design_systems.styles.text_style", {
+      return getI18nString("design_systems.styles.text_style", {
         numStyles: r
       });
     case "FILL":
-      return _$$t("design_systems.styles.color_style", {
+      return getI18nString("design_systems.styles.color_style", {
         numStyles: r
       });
     case "EFFECT":
-      return _$$t("design_systems.styles.effect_style", {
+      return getI18nString("design_systems.styles.effect_style", {
         numStyles: r
       });
     case "GRID":
-      return _$$t("design_systems.styles.guide_style", {
+      return getI18nString("design_systems.styles.guide_style", {
         numStyles: r
       });
     case "EXPORT":
-      return _$$t("design_systems.styles.export_style");
+      return getI18nString("design_systems.styles.export_style");
     case "STROKE":
-      return _$$t("design_systems.styles.stroke_style");
+      return getI18nString("design_systems.styles.stroke_style");
     default:
-      sx("Unknown style type", {
+      trackEventAnalytics("Unknown style type", {
         styleType: e
       });
-      return _$$t("design_systems.styles.styles", {
+      return getI18nString("design_systems.styles.styles", {
         numStyles: r
       });
   }
@@ -295,7 +295,7 @@ function ew(e, t, r) {
 }
 let eO = e => null !== e.design && null !== e.figjam && null !== e.slides;
 export function $$eR35(e) {
-  let t = md(GO);
+  let t = useAtomWithSubscription(GO);
   let r = function (e) {
     let t = Nn();
     return useMemo(() => e ? t ? gB(ew(t, e, Qh.COMMUNITY)) : Xm() : gB({
@@ -321,7 +321,7 @@ export function $$eR35(e) {
   }, [e, t, r]);
 }
 export function $$eL103(e, t) {
-  let r = md(_$$pD(t));
+  let r = useAtomWithSubscription(_$$pD(t));
   let i = $$eR35(e);
   return useMemo(() => {
     if (!e) return gB({
@@ -338,7 +338,7 @@ export function $$eL103(e, t) {
   }, [e, r, i]);
 }
 export function $$eP105(e, t) {
-  let r = md(Lr(t));
+  let r = useAtomWithSubscription(Lr(t));
   let i = $$eL103(e, t);
   return useMemo(() => {
     if (!e || !t) return gB({
@@ -355,7 +355,7 @@ export function $$eP105(e, t) {
   }, [e, r, i, t]);
 }
 export function $$eD4(e) {
-  let t = md(zK);
+  let t = useAtomWithSubscription(zK);
   let r = $$eR35(e);
   return useMemo(() => {
     if (!e) return gB({
@@ -806,7 +806,7 @@ export async function $$ta68(e, t) {
         let r = await XHR.post("/api/files/batch", {
           library_keys: e
         });
-        r.data.meta || x1("designSystems", "Unexpected empty API response", {
+        r.data.meta || logError("designSystems", "Unexpected empty API response", {
           data: JSON.stringify(r.data ?? null),
           numFiles: e.length,
           status: r.status
@@ -816,7 +816,7 @@ export async function $$ta68(e, t) {
           subscribeToRealtime: !0
         }));
       } catch (e) {
-        $D(_$$e.DESIGN_SYSTEMS_EDITOR, e);
+        reportError(_$$e.DESIGN_SYSTEMS_EDITOR, e);
       }
     }
     for (let t = 0; t < e.length; t += 200) {
@@ -925,7 +925,7 @@ export function $$tc66(e) {
     subscribedStateGroups,
     subscribedComponentsOnCurrentPage,
     subscribedStateGroupsOnCurrentPage
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     library: e.library,
     sceneGraph: e.mirror.sceneGraph,
     fileVersion: e.fileVersion,
@@ -939,7 +939,7 @@ export function $$tc66(e) {
 }
 export function $$tu94(e, t) {
   let r = e.libraryKeys.includes(t);
-  let n = zl.get(e3).has(t);
+  let n = atomStoreManager.get(e3).has(t);
   return !!r || !!n;
 }
 let tp = xx(e => {
@@ -1122,20 +1122,20 @@ export function $$tU13({
   numVariables: r,
   numVariableCollections: n
 }) {
-  let i = t > 0 ? _$$t("design_systems.libraries_modal.plural.num_style", {
+  let i = t > 0 ? getI18nString("design_systems.libraries_modal.plural.num_style", {
     numStyles: t
   }) : null;
-  let s = e > 0 ? _$$t("design_systems.libraries_modal.plural.num_component", {
+  let s = e > 0 ? getI18nString("design_systems.libraries_modal.plural.num_component", {
     numComponents: e
   }) : null;
-  let o = r > 0 ? _$$t("design_systems.libraries_modal.plural.num_variables", {
+  let o = r > 0 ? getI18nString("design_systems.libraries_modal.plural.num_variables", {
     numVariables: r
   }) : null;
-  let l = 0 === r && n > 0 ? _$$t("design_systems.libraries_modal.plural.variable_collections", {
+  let l = 0 === r && n > 0 ? getI18nString("design_systems.libraries_modal.plural.variable_collections", {
     numVariableCollections: n
   }) : null;
   let d = filterNotNullish([s, i, o, l]);
-  return 0 === d.length ? _$$t("design_systems.libraries_modal.no_components_styles_variables") : Yx(d, "unit");
+  return 0 === d.length ? getI18nString("design_systems.libraries_modal.no_components_styles_variables") : Yx(d, "unit");
 }
 export let $$tB20 = e => e !== E8.DELETED && e !== E8.NOT_STAGED;
 export function $$tG47(e, t, r, n) {
@@ -1202,13 +1202,13 @@ export function $$tX32(e, t) {
 export function $$tq29(e) {
   switch (e) {
     case jg.THIRTY_DAYS:
-      return _$$t("design_systems.libraries_modal.30_days");
+      return getI18nString("design_systems.libraries_modal.30_days");
     case jg.SIXTY_DAYS:
-      return _$$t("design_systems.libraries_modal.60_days");
+      return getI18nString("design_systems.libraries_modal.60_days");
     case jg.NINETY_DAYS:
-      return _$$t("design_systems.libraries_modal.90_days");
+      return getI18nString("design_systems.libraries_modal.90_days");
     case jg.YEAR:
-      return _$$t("design_systems.libraries_modal.year");
+      return getI18nString("design_systems.libraries_modal.year");
     default:
       throwTypeError(e);
   }

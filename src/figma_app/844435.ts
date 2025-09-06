@@ -4,13 +4,13 @@ import { c2 } from "../905/382883";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import l from "../vendor/805353";
-import { sx } from "../905/449184";
-import { R as _$$R } from "../905/103090";
+import { trackEventAnalytics } from "../905/449184";
+import { selectWithShallowEqual } from "../905/103090";
 import { Rs, p as _$$p } from "../figma_app/288654";
-import { jk } from "../905/609396";
-import { $D } from "../905/11";
-import { x1 } from "../905/714362";
-import { t as _$$t } from "../905/303541";
+import { PerfTimer } from "../905/609396";
+import { reportError } from "../905/11";
+import { logError } from "../905/714362";
+import { getI18nString } from "../905/303541";
 import { P as _$$P, o as _$$o } from "../905/717906";
 import { F as _$$F } from "../905/302958";
 import { AC } from "../figma_app/777551";
@@ -30,7 +30,7 @@ import { BB3, k_1 } from "../figma_app/43951";
 import { mn, oh } from "../905/18797";
 import { Eh, cb } from "../figma_app/12796";
 import { xC, i8, Q4, ky, NW, JT, GX, EK, M5, Ar, DM, uF } from "../figma_app/300692";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { k0, pL, FW, Gb, n_, ZQ, LR as _$$LR } from "../figma_app/155287";
 import { $W } from "../905/144933";
 import { $A } from "../905/782918";
@@ -232,7 +232,7 @@ export function $$ec45(e) {
     "dynamic-page" !== t.documentAccess && delete t.documentAccess;
     let r = pL.safeParse(t);
     if (!r.success) {
-      $D(_$$e.EXTENSIBILITY, Error("manifest schema parse error"), {
+      reportError(_$$e.EXTENSIBILITY, Error("manifest schema parse error"), {
         extra: {
           jsonParsedResult: JSON.stringify(t, null, 2),
           rawManifest: JSON.stringify(e, null, 2),
@@ -243,7 +243,7 @@ export function $$ec45(e) {
     }
     return r.data;
   } catch (t) {
-    $D(_$$e.EXTENSIBILITY, Error("manifest JSON parse error"), {
+    reportError(_$$e.EXTENSIBILITY, Error("manifest JSON parse error"), {
       extra: {
         rawManifest: e
       }
@@ -388,7 +388,7 @@ export function $$ep40(e, t, r, n) {
   let i = e.currentPluginVersion;
   if (!i) return;
   if (!i.manifest) {
-    $D(_$$e.EXTENSIBILITY, Error("manifest missing"), {
+    reportError(_$$e.EXTENSIBILITY, Error("manifest missing"), {
       extra: {
         plugin: e
       }
@@ -816,7 +816,7 @@ export function $$eF19() {
 let ej = "plugin_search_duration";
 let eU = "widget_search_duration";
 function eB(e, t) {
-  t.elapsedMs && sx(e, t, {
+  t.elapsedMs && trackEventAnalytics(e, t, {
     forwardToDatadog: !0
   });
 }
@@ -834,7 +834,7 @@ export function $$eG9(e) {
   let v = m0();
   return {
     pluginServerSideSearch: useCallback((t, n, i, a) => {
-      let o = new jk(ej, {});
+      let o = new PerfTimer(ej, {});
       o.start();
       let [l, c] = $W.getCommunityPlugins(t, u, T, e, v, p);
       r(!0);
@@ -874,10 +874,10 @@ export function $$eG9(e) {
           error: r?.message,
           status: r?.status
         };
-        x1("search", "Search error for Community resources in inserts modal", n, {
+        logError("search", "Search error for Community resources in inserts modal", n, {
           reportAsSentryError: !0
         });
-        let i = _$$t("community.actions.an_error_occurred_while_searching_for_plugins");
+        let i = getI18nString("community.actions.an_error_occurred_while_searching_for_plugins");
         h(_$$F.enqueue({
           error: !0,
           message: i
@@ -903,7 +903,7 @@ export function $$eV17(e) {
   let T = y?.shouldOptimizeForIpadApp || getFeatureFlags().cmty_m10n_test_apple_os ? "free" : "all";
   return {
     widgetServerSideSearch: useCallback((t, n, i, a) => {
-      let o = new jk(eU, {});
+      let o = new PerfTimer(eU, {});
       o.start();
       let [l, c] = $W.getCommunityWidgets(t, u, T, e, p);
       r(!0);
@@ -943,10 +943,10 @@ export function $$eV17(e) {
           error: r?.message,
           status: r?.status
         };
-        x1("search", "Search error for Community resources in inserts modal", n, {
+        logError("search", "Search error for Community resources in inserts modal", n, {
           reportAsSentryError: !0
         });
-        let i = _$$t("community.actions.an_error_occurred_while_searching_for_widgets");
+        let i = getI18nString("community.actions.an_error_occurred_while_searching_for_widgets");
         f(_$$F.enqueue({
           error: !0,
           message: i
@@ -1008,7 +1008,7 @@ export function $$eY23() {
   let e = E3();
   let t = eK($$eM39());
   let r = eK($$eF19());
-  let i = _$$R(e => ({
+  let i = selectWithShallowEqual(e => ({
     currentUserOrgId: e.currentUserOrgId,
     orgById: e.orgById,
     selectedView: e.selectedView,
@@ -1043,11 +1043,11 @@ export function $$eX21() {
 }
 export function $$eq15() {
   let e = E3();
-  return e !== nT.Slides && e !== nT.Sites && e !== nT.Figmake && e !== nT.Cooper;
+  return e !== FEditorType.Slides && e !== FEditorType.Sites && e !== FEditorType.Figmake && e !== FEditorType.Cooper;
 }
 export function $$eJ3(e) {
   let t = pQ(e);
-  return t !== nT.Slides && t !== nT.Sites && t !== nT.Figmake && t !== nT.Cooper;
+  return t !== FEditorType.Slides && t !== FEditorType.Sites && t !== FEditorType.Figmake && t !== FEditorType.Cooper;
 }
 export function $$eZ26(e) {
   let t = sZ();
@@ -1073,7 +1073,7 @@ export function $$eQ34(e) {
   let u = !s && !c;
   return {
     validatePublishedPluginInOrgAllowlist: useCallback(() => !u || (t(_$$F.enqueue({
-      message: _$$t("universal_insert.plugin_not_in_allowlist"),
+      message: getI18nString("universal_insert.plugin_not_in_allowlist"),
       error: !0
     })), !1), [u, t]),
     isPluginBlockedByAllowlist: u

@@ -6,7 +6,7 @@ import { glU, Egt } from "../figma_app/763686";
 import { x7, AD } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { xx } from "../figma_app/815945";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { parsePxNumber } from "../figma_app/783094";
 import { Point } from "../905/736624";
 import { lg } from "../figma_app/976749";
@@ -66,11 +66,11 @@ function L(e, t, r) {
   };
   if (null == n || n === x7) return a;
   let s = Egt.getBoundsForStablePath(n);
-  if (!s && r && (sx("Comment stablePathBounds invalid", {
+  if (!s && r && (trackEventAnalytics("Comment stablePathBounds invalid", {
     usingActiveNode: !0
   }, {
     forwardToDatadog: !0
-  }), s = Egt.getBoundsForStablePath(n)), !s) return (sx("Comment stablePathBounds invalid", {
+  }), s = Egt.getBoundsForStablePath(n)), !s) return (trackEventAnalytics("Comment stablePathBounds invalid", {
     usingActiveNode: !1
   }, {
     forwardToDatadog: !0

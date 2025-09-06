@@ -5,14 +5,14 @@ import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, r1, nB } from "../figma_app/272243";
 import { tH } from "../905/751457";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { N } from "../905/809096";
-import { t } from "../905/303541";
-import { fm } from "../905/236856";
+import { getI18nString } from "../905/303541";
+import { delay } from "../905/236856";
 import { mI } from "../figma_app/566371";
 import { M4, IT } from "../905/713695";
 function f() {
-  return t("billing.purchase_ai_credits.modal_hidden_title");
+  return getI18nString("billing.purchase_ai_credits.modal_hidden_title");
 }
 function E() {
   return jsx(N, {
@@ -23,7 +23,7 @@ function E() {
 }
 function _(e) {
   useEffect(() => {
-    $D(_$$e.BILLING_EXPERIENCE, Error("failed to load PurchaseAiCreditsModal"), {
+    reportError(_$$e.BILLING_EXPERIENCE, Error("failed to load PurchaseAiCreditsModal"), {
       extra: {
         reason: e.reason
       }
@@ -32,7 +32,7 @@ function _(e) {
   return jsx(E, {});
 }
 let I = M4.Query({
-  fetch: () => fm(1e3).then(() => ({}))
+  fetch: () => delay(1e3).then(() => ({}))
 });
 function C(e) {
   let r = hS(e);
@@ -40,7 +40,7 @@ function C(e) {
     let [e] = IT(I({}));
     let [r] = mI(e);
     useEffect(() => {
-      "loaded" !== r.status && $D(_$$e.BILLING_EXPERIENCE, Error("usePurchaseAiCreditsData failed to load"));
+      "loaded" !== r.status && reportError(_$$e.BILLING_EXPERIENCE, Error("usePurchaseAiCreditsData failed to load"));
     }, [r.status]);
     return r;
   }().status ? jsx(_, {

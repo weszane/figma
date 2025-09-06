@@ -1,10 +1,10 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { Ay } from "../905/612521";
 import { Uz } from "../905/63728";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { jN } from "../905/612685";
 import { O } from "../905/833838";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { fakePath, getInitialOptions } from "../figma_app/169182";
 export function $$u10(e, t) {
   let i;
@@ -13,7 +13,7 @@ export function $$u10(e, t) {
     i = new URL(e, fakePath);
     r = new URLSearchParams(i.search);
   } catch (i) {
-    $D(_$$e.WAYFINDING, i, {
+    reportError(_$$e.WAYFINDING, i, {
       extra: {
         ...t,
         url: e
@@ -69,7 +69,7 @@ export function $$f7(e, {
   }), a);
   c = $$y15(c, t, i, n);
   (function (e, t, i, n = "file") {
-    sx("file_browser_fresh_external_file_load", {
+    trackEventAnalytics("file_browser_fresh_external_file_load", {
       fileKey: e,
       entryPlanId: t || i,
       planType: t ? O.ORG : O.TEAM,
@@ -79,7 +79,7 @@ export function $$f7(e, {
   Ay.redirect(c);
 }
 export function $$_0(e, t, i = "file") {
-  sx("file_browser_fresh_external_file_load", {
+  trackEventAnalytics("file_browser_fresh_external_file_load", {
     fileKey: e,
     entryPlanId: t || "external-teams",
     urlType: i

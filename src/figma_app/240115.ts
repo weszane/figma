@@ -3,10 +3,10 @@ import { useMemo } from "react";
 import { useSelector } from "../vendor/514228";
 import { A } from "../905/891805";
 import { Ez5, iCO, ibQ } from "../figma_app/763686";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { E as _$$E } from "../905/277716";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { ut, J2 } from "../figma_app/84367";
 import { K } from "../figma_app/566021";
 import { Wv } from "../figma_app/454622";
@@ -34,7 +34,7 @@ export function $$S2(e) {
   let {
     pickerShown
   } = z6();
-  let r = md(_$$A);
+  let r = useAtomWithSubscription(_$$A);
   let a = h$(e ?? r);
   let o = v();
   let d = useMemo(() => ({
@@ -43,7 +43,7 @@ export function $$S2(e) {
     onClick: a,
     icon: jsx(A, {}),
     isSelected: pickerShown?.id === Wv,
-    getTitle: () => t("design_systems.component_panel.component_controls"),
+    getTitle: () => getI18nString("design_systems.component_panel.component_controls"),
     recordingKey: "componentControls",
     id: Xz
   }), [pickerShown, a]);

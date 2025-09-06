@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { Component } from "react";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { qK } from "../905/102752";
 import { yX } from "../figma_app/918700";
 import { Vq } from "../figma_app/639088";
@@ -15,7 +15,7 @@ class c extends Component {
     let i = this.props.teams[t.teamId];
     let r = e.data.destinationTeam;
     return jsx(yX, {
-      content: tx("file_browser.team_folder_move.content", {
+      content: renderI18nText("file_browser.team_folder_move.content", {
         folderName: jsx("span", {
           className: Vq,
           children: t.path
@@ -29,8 +29,8 @@ class c extends Component {
           children: i.name
         })
       }),
-      confirmText: _$$t("file_browser.team_folder_move.confirm"),
-      confirmationTitle: _$$t("file_browser.team_folder_move.confirmation_modal_title"),
+      confirmText: getI18nString("file_browser.team_folder_move.confirm"),
+      confirmationTitle: getI18nString("file_browser.team_folder_move.confirmation_modal_title"),
       onConfirm: e.data.onConfirm,
       ...this.props
     });

@@ -6,7 +6,7 @@ import { $n } from "../905/521428";
 import l from "classnames";
 import { Point } from "../905/736624";
 import { kt } from "../figma_app/858013";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { H8, Pf } from "../905/590952";
 import { i4 } from "../figma_app/770088";
 import { eT } from "../figma_app/703138";
@@ -20,7 +20,7 @@ import { CM } from "../figma_app/45218";
 import { wV } from "../figma_app/585209";
 import { _B } from "../905/852370";
 import { iX } from "../6443/426443";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Ts } from "../905/194276";
 import { to } from "../905/156213";
 import { LU } from "../figma_app/692865";
@@ -57,7 +57,7 @@ let F = ({
     }));
     return;
   }
-  sx("Context Viewed", {
+  trackEventAnalytics("Context Viewed", {
     name: LU
   });
 };
@@ -75,14 +75,14 @@ function S({
     children: [t && jsx($n, {
       variant: "secondary",
       onClick: e,
-      children: tx("general.cancel")
+      children: renderI18nText("general.cancel")
     }), jsx($n, {
       variant: "primary",
       onClick: n,
       disabled: i || a,
       children: i ? jsx(kt, {
         className: "comment_composer--buttonLoading--4VkBz publish_modal--spinner--7DaqW"
-      }) : t && !l ? _$$t("community.comments.save") : _$$t("community.comments.post")
+      }) : t && !l ? getI18nString("community.comments.save") : getI18nString("community.comments.post")
     })]
   });
 }
@@ -150,7 +150,7 @@ export function $$D1(e) {
   }, [n, m, p, commentComposerRef, editorRef, l]);
   return jsxs(Fragment, {
     children: [jsx(iX, {
-      ariaLabel: _$$t("community.comments.add_a_comment"),
+      ariaLabel: getI18nString("community.comments.add_a_comment"),
       className: "comment_composer--commentComposerEditableTypeahead--Eu8-0 comment_composer--composerInput--CiDBk",
       currentOrgId: C,
       currentOrgUsers: j,
@@ -167,7 +167,7 @@ export function $$D1(e) {
       onUpdateTextArea: K,
       openFileKey: h,
       openFileTeamId: T,
-      placeholderText: placeholder ?? _$$t("community.comments.add_a_comment"),
+      placeholderText: placeholder ?? getI18nString("community.comments.add_a_comment"),
       setIsEditorFocused: setIsFocused,
       submitOnEnter: !1,
       typeahead: p,
@@ -246,7 +246,7 @@ export function $$B0(e) {
           messageMeta: s,
           onCancel: b,
           onSubmit: I,
-          placeholder: e.replyMode ? _$$t("community.comments.write_a_reply") : void 0,
+          placeholder: e.replyMode ? getI18nString("community.comments.write_a_reply") : void 0,
           setIsFocused: c,
           updateMessage: ([e, t]) => {
             r(e);

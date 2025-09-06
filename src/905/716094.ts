@@ -1,7 +1,7 @@
 import { memo } from "react";
 import { jsxs, jsx } from "react/jsx-runtime";
 import { Ay } from "@stylexjs/stylex";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { A } from "../905/925160";
 let o = memo(function () {
   return jsxs("svg", {
@@ -142,7 +142,7 @@ export function $$l0({
       children: jsx(o, {})
     }), jsx("div", {
       ...Ay.props(A.textBodyMedium, A.colorText, A.lineClamp3),
-      children: tx("dakota.site_blocks.collection_list_block", {
+      children: renderI18nText("dakota.site_blocks.collection_list_block", {
         collection_name: e
       })
     })]

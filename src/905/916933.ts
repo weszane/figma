@@ -1,10 +1,10 @@
 import { h3O, _em, xal, DPQ } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
-import { sx } from "../905/449184";
+import { atomStoreManager } from "../figma_app/27355";
+import { trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
 import { getInitialOptions, buildUploadUrl } from "../figma_app/169182";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { zX } from "../905/576487";
 import { Y5 } from "../figma_app/455680";
@@ -51,10 +51,10 @@ export let $$S0 = _$$n(async (e, t, i) => {
   if (0 === n) return {
     isCancelled: !1
   };
-  zl.set(s6, !0);
-  let a = e && k0(e) ? _$$t("plugins.loading_pages_for_widget", {
+  atomStoreManager.set(s6, !0);
+  let a = e && k0(e) ? getI18nString("plugins.loading_pages_for_widget", {
     numUnloadedPages: n
-  }) : _$$t("plugins.loading_pages_for_plugin", {
+  }) : getI18nString("plugins.loading_pages_for_plugin", {
     numUnloadedPages: n
   });
   let d = () => {
@@ -65,7 +65,7 @@ export let $$S0 = _$$n(async (e, t, i) => {
   let g = !1;
   let y = () => {};
   let b = new Promise(e => {
-    zl.set(nc, !0);
+    atomStoreManager.set(nc, !0);
     y = e;
   });
   e && k0(e) && t?.widgetAction === "insert" && Y5.dispatch(F.dequeue({
@@ -78,14 +78,14 @@ export let $$S0 = _$$n(async (e, t, i) => {
     delay: 1e3,
     timeoutOverride: 1 / 0,
     button: {
-      text: _$$t("plugins.cancel_loading_pages"),
+      text: getI18nString("plugins.cancel_loading_pages"),
       action: () => {
         y();
         d();
         g || function (e) {
           let t = e?.plugin ?? hw() ?? null;
           let i = iu.stats;
-          sx("Plugin Start Cancelled", {
+          trackEventAnalytics("Plugin Start Cancelled", {
             pluginRunID: fD(),
             trigger: e?.triggeredFrom,
             runMode: e?.runMode,
@@ -110,7 +110,7 @@ export let $$S0 = _$$n(async (e, t, i) => {
     }
   }));
   let I = q(i);
-  getPluginConnectionState() ? h3O.resolveSceneGraphQueryForTest("0:0", DPQ.DEFAULT) : (await Promise.race([I, b]), d(), zl.set(s6, !1));
+  getPluginConnectionState() ? h3O.resolveSceneGraphQueryForTest("0:0", DPQ.DEFAULT) : (await Promise.race([I, b]), d(), atomStoreManager.set(s6, !1));
   return {
     isCancelled: g
   };

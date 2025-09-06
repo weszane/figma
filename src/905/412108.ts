@@ -1,6 +1,6 @@
 import { z, kY } from "../905/239603";
 import r from "lodash-es/snakeCase";
-import { Lg } from "../figma_app/257275";
+import { getFalseValue } from "../figma_app/897289";
 var a = r;
 let o = e => {
   if (e instanceof z.ZodLazy) return o(e.schema);
@@ -9,14 +9,14 @@ let o = e => {
   if (e instanceof z.ZodEnum) return e.options;
   if (e instanceof z.ZodNativeEnum) return Object.keys(e.enum);
   if (e instanceof z.ZodDefault) return o(e._def.innerType);
-  if (e instanceof z.ZodUndefined) return [void 0]; else if (e instanceof z.ZodNull) return [null]; else return null;
+  if (e instanceof z.ZodUndefined) return [void 0];else if (e instanceof z.ZodNull) return [null];else return null;
 };
 let l = new Set([kY.ZodNullable, kY.ZodOptional]);
 function d(e) {
   return z.preprocess(e => {
     if (void 0 === e) return null;
     if (e && "string" == typeof e) {
-      if ("" === e && Lg()) throw Error("You are passing an empty string for a sinatra date. Don't do that.");
+      if ("" === e && getFalseValue()) throw Error("You are passing an empty string for a sinatra date. Don't do that.");
       return new Date(e);
     }
     return e;

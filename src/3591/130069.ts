@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useDispatch } from "../vendor/514228";
 import { $n } from "../905/521428";
 import { N } from "../905/438674";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { Y } from "../905/830372";
 import { E } from "../905/984674";
 import { Nn, dx, MZ } from "../figma_app/399472";
@@ -41,14 +41,14 @@ export function $$m3({
         t();
       },
       variant: "secondary",
-      children: tx("community.detail_view.decline")
+      children: renderI18nText("community.detail_view.decline")
     }), jsx($n, {
       onClick: e => {
         e.stopPropagation();
         i();
       },
       variant: "primary",
-      children: tx("community.detail_view.accept")
+      children: renderI18nText("community.detail_view.accept")
     })]
   });
 }
@@ -60,7 +60,7 @@ export function $$x4({
   let s = e.is_widget ? "widget" : "plugin";
   let l = `/community/${s}/${e.id}`;
   return jsx(E, {
-    children: tx("universal_insert.invited_you_to_publish", {
+    children: renderI18nText("universal_insert.invited_you_to_publish", {
       ownerName: jsx(E, {
         fontWeight: "medium",
         children: t.handle

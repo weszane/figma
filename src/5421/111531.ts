@@ -18,8 +18,8 @@ import { Tj } from "../figma_app/342207";
 import { Ez5, Nfd, glU, z6l } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { md, zl, fp, Xr } from "../figma_app/27355";
-import { t as _$$t, tx as _$$tx } from "../905/303541";
+import { useAtomWithSubscription, atomStoreManager, useAtomValueAndSetter, Xr } from "../figma_app/27355";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { dZ, tJ as _$$tJ } from "../figma_app/741237";
 import { Zk } from "../figma_app/626177";
 import { Wv } from "../figma_app/711157";
@@ -65,8 +65,8 @@ import { fP, mc as _$$mc } from "../905/691059";
 import { R as _$$R } from "../7a72fc59/583347";
 import { throwTypeError, assert } from "../figma_app/465776";
 import { Ay as _$$Ay } from "../vendor/917855";
-import { az } from "../905/449184";
-import { R as _$$R2 } from "../905/103090";
+import { analyticsEventManager } from "../905/449184";
+import { selectWithShallowEqual } from "../905/103090";
 import { A as _$$A } from "../7a72fc59/43307";
 import { Ku } from "../figma_app/740163";
 import { Ou, qg } from "../figma_app/385874";
@@ -137,7 +137,7 @@ import { ry } from "../figma_app/408883";
 import { F as _$$F2 } from "../1156/649032";
 import { jT, I4, IO, S4, H1, wE, gz, pO, GW, cH, jS } from "../figma_app/302802";
 import { eY as _$$eY } from "../figma_app/616261";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { a as _$$a3 } from "../5421/59825";
 import { W as _$$W4 } from "../figma_app/331365";
 import { T as _$$T2 } from "../5421/986644";
@@ -368,8 +368,8 @@ function eT() {
   let [t] = XH(directManipulationEditor);
   return jsx(eC, {
     target: jsx(ar, {
-      "aria-label": _$$t("figmake.toolbar.corner_radius"),
-      tooltip: _$$t("figmake.toolbar.corner_radius"),
+      "aria-label": getI18nString("figmake.toolbar.corner_radius"),
+      tooltip: getI18nString("figmake.toolbar.corner_radius"),
       tooltipType: Ib.TEXT,
       showCaret: !0,
       isActive: t,
@@ -388,7 +388,7 @@ function eS() {
     directManipulationEditor
   } = ef();
   let d = useDispatch();
-  let c = md(directManipulationEditor.selectedElementComputedStylesWithLocalEdits);
+  let c = useAtomWithSubscription(directManipulationEditor.selectedElementComputedStylesWithLocalEdits);
   let p = parseInt(c["border-top-left-radius"] ?? "0", 10);
   let u = parseInt(c["border-top-right-radius"] ?? "0", 10);
   let m = parseInt(c["border-bottom-left-radius"] ?? "0", 10);
@@ -407,8 +407,8 @@ function eS() {
   let b = _ ? g["top-left"] : oV;
   let [v, I] = useState(!_);
   let N = useMemo(() => jsx(ar, {
-    "aria-label": _$$t("figmake.toolbar.corner_radius.individual_corner_radius"),
-    tooltip: _$$t("figmake.toolbar.corner_radius.individual_corner_radius"),
+    "aria-label": getI18nString("figmake.toolbar.corner_radius.individual_corner_radius"),
+    tooltip: getI18nString("figmake.toolbar.corner_radius.individual_corner_radius"),
     tooltipType: Ib.TEXT,
     isActive: v,
     onClick: () => I(e => !e),
@@ -497,7 +497,7 @@ function eS() {
     variant: "secondary",
     disabled: !y,
     onClick: f,
-    children: _$$t("figmake.toolbar.reset")
+    children: getI18nString("figmake.toolbar.reset")
   }) : null;
   return jsx(eg, {
     children: jsx("div", {
@@ -517,7 +517,7 @@ function eS() {
             smallNudgeAmount: 1,
             bigNudgeAmount: 10,
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t("figmake.toolbar.corner_radius.top_left"),
+            "data-tooltip": getI18nString("figmake.toolbar.corner_radius.top_left"),
             children: jsx(_$$a2, {
               ...Ay.props(eE.scrubbableInputIconWrapper)
             })
@@ -532,7 +532,7 @@ function eS() {
             smallNudgeAmount: 1,
             bigNudgeAmount: 10,
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t("figmake.toolbar.corner_radius.top_right"),
+            "data-tooltip": getI18nString("figmake.toolbar.corner_radius.top_right"),
             children: jsx(_$$$, {
               ...Ay.props(eE.scrubbableInputIconWrapper)
             })
@@ -547,7 +547,7 @@ function eS() {
             smallNudgeAmount: 1,
             bigNudgeAmount: 10,
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t("figmake.toolbar.corner_radius.bottom_left"),
+            "data-tooltip": getI18nString("figmake.toolbar.corner_radius.bottom_left"),
             children: jsx(_$$w, {
               ...Ay.props(eE.scrubbableInputIconWrapper)
             })
@@ -562,7 +562,7 @@ function eS() {
             smallNudgeAmount: 1,
             bigNudgeAmount: 10,
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t("figmake.toolbar.corner_radius.bottom_right"),
+            "data-tooltip": getI18nString("figmake.toolbar.corner_radius.bottom_right"),
             children: jsx(_$$t2, {
               ...Ay.props(eE.scrubbableInputIconWrapper)
             })
@@ -571,7 +571,7 @@ function eS() {
           ...n,
           children: [jsx(gq, {
             bigNudgeAmount: 10,
-            "data-tooltip": _$$t("figmake.toolbar.corner_radius"),
+            "data-tooltip": getI18nString("figmake.toolbar.corner_radius"),
             "data-tooltip-type": Ib.TEXT,
             dispatch: d,
             onValueChange: (e, t) => {
@@ -598,7 +598,7 @@ function eB(e) {
     classNameEditingController,
     directManipulationEditor
   } = ef();
-  let r = md(directManipulationEditor.selectedElementComputedStylesWithLocalEdits);
+  let r = useAtomWithSubscription(directManipulationEditor.selectedElementComputedStylesWithLocalEdits);
   let [a] = XH(directManipulationEditor);
   let l = r[e.property];
   let s = useMemo(() => {
@@ -616,7 +616,7 @@ function eB(e) {
         opacity: e[3]
       };
     } catch (t) {
-      az.trackDefinedEvent("figmake.color_control_parse_error", {
+      analyticsEventManager.trackDefinedEvent("figmake.color_control_parse_error", {
         color: l,
         property: e.property,
         error: t instanceof Error ? t.message : String(t)
@@ -645,11 +645,11 @@ function eB(e) {
   let c = function (e) {
     switch (e) {
       case "color":
-        return _$$t("figmake.toolbar.font_color");
+        return getI18nString("figmake.toolbar.font_color");
       case "background-color":
-        return _$$t("figmake.toolbar.background_color");
+        return getI18nString("figmake.toolbar.background_color");
       case "border-color":
-        return _$$t("figmake.toolbar.border_color");
+        return getI18nString("figmake.toolbar.border_color");
       default:
         throwTypeError(e);
     }
@@ -703,7 +703,7 @@ function eF({
   let {
     currentTool,
     dropdownShown
-  } = _$$R2(e => ({
+  } = selectWithShallowEqual(e => ({
     currentTool: e.mirror.appModel.currentTool,
     dropdownShown: e.dropdownShown
   }));
@@ -815,7 +815,7 @@ function e9() {
     directManipulationEditor,
     componentPreview
   } = ef();
-  let a = md(directManipulationEditor.selectedElementComputedStylesWithLocalEdits);
+  let a = useAtomWithSubscription(directManipulationEditor.selectedElementComputedStylesWithLocalEdits);
   let [l, s] = XH(directManipulationEditor);
   let d = createRef();
   let c = xF();
@@ -891,7 +891,7 @@ function e9() {
   return jsxs(Fragment, {
     children: [jsx(_$$R, {
       children: jsx(e3, {
-        "aria-label": _$$t("figmake.toolbar.font_family"),
+        "aria-label": getI18nString("figmake.toolbar.font_family"),
         iconSuffix: jsx(_$$O2, {}),
         onClick: b,
         ref: d,
@@ -938,7 +938,7 @@ function ti() {
     imageSwapEnabled,
     directManipulationEditor
   } = ef();
-  let n = md(directManipulationEditor.selectedElementInfoAtom);
+  let n = useAtomWithSubscription(directManipulationEditor.selectedElementInfoAtom);
   let [r] = XH(directManipulationEditor);
   let [l, s] = useState();
   let d = l ?? n?.thumbnailSrc ?? n?.imgSrc;
@@ -948,8 +948,8 @@ function ti() {
   };
   return jsx(eC, {
     target: jsx(ar, {
-      "aria-label": _$$t("figmake.toolbar.image"),
-      tooltip: _$$t("figmake.toolbar.image"),
+      "aria-label": getI18nString("figmake.toolbar.image"),
+      tooltip: getI18nString("figmake.toolbar.image"),
       tooltipType: Ib.TEXT,
       showCaret: !0,
       caretStyle: p,
@@ -959,7 +959,7 @@ function ti() {
         className: "xvy4d1p x78zum5 xl56j7k x6s0dn4 xy3p2pi x9f619 xb3r6kr x18xcxx1 xsb15dp",
         children: d ? jsx(oW, {
           src: d,
-          alt: _$$t("figmake.toolbar.image"),
+          alt: getI18nString("figmake.toolbar.image"),
           ...c
         }) : jsx(_$$s, {
           style: void 0
@@ -1005,7 +1005,7 @@ function tr({
         className: "x1s85apg"
       }), jsx(oW, {
         src: e,
-        alt: _$$t("figmake.toolbar.upload_alt"),
+        alt: getI18nString("figmake.toolbar.upload_alt"),
         className: "x193iq5w xmz0i5r x19kjcj4 x1tbiz1a x1xsqp64 xiy17q3"
       })]
     }), jsx("div", {
@@ -1016,7 +1016,7 @@ function tr({
           a.current?.click();
         },
         type: "submit",
-        children: _$$t("figmake.toolbar.upload")
+        children: getI18nString("figmake.toolbar.upload")
       })
     })]
   });
@@ -1028,8 +1028,8 @@ function tm() {
   let [t] = XH(directManipulationEditor);
   return jsx(eC, {
     target: jsx(ar, {
-      "aria-label": _$$t("figmake.toolbar.spacing"),
-      tooltip: _$$t("figmake.toolbar.spacing"),
+      "aria-label": getI18nString("figmake.toolbar.spacing"),
+      tooltip: getI18nString("figmake.toolbar.spacing"),
       tooltipType: Ib.TEXT,
       showCaret: !0,
       isActive: t,
@@ -1054,7 +1054,7 @@ function ty() {
     classNameEditingController,
     directManipulationEditor
   } = ef();
-  let s = md(directManipulationEditor.selectedElementComputedStylesWithLocalEdits);
+  let s = useAtomWithSubscription(directManipulationEditor.selectedElementComputedStylesWithLocalEdits);
   let d = parseInt(s["padding-left"] ?? "0", 10);
   let c = parseInt(s["padding-right"] ?? "0", 10);
   let p = parseInt(s["padding-top"] ?? "0", 10);
@@ -1094,16 +1094,16 @@ function ty() {
     classNameEditingController.resetClassNamesForPropertiesAndCommitToCode(tg);
   }, [classNameEditingController]);
   let B = useMemo(() => jsx(ar, {
-    "aria-label": _$$t("figmake.toolbar.padding.individual_paddings"),
-    tooltip: _$$t("figmake.toolbar.padding.individual_paddings"),
+    "aria-label": getI18nString("figmake.toolbar.padding.individual_paddings"),
+    tooltip: getI18nString("figmake.toolbar.padding.individual_paddings"),
     tooltipType: Ib.TEXT,
     isActive: k,
     onClick: () => P(e => !e),
     children: jsx(_$$s2, {})
   }), [k]);
   let H = useMemo(() => jsx(ar, {
-    "aria-label": _$$t("figmake.toolbar.margin.individual_margins"),
-    tooltip: _$$t("figmake.toolbar.margin.individual_margins"),
+    "aria-label": getI18nString("figmake.toolbar.margin.individual_margins"),
+    tooltip: getI18nString("figmake.toolbar.margin.individual_margins"),
     tooltipType: Ib.TEXT,
     isActive: O,
     onClick: () => L(e => !e),
@@ -1177,11 +1177,11 @@ function ty() {
         ...n,
         children: [jsxs("div", {
           ...t,
-          children: [_$$t("figmake.toolbar.padding"), getFeatureFlags().click_to_inspect_reset_styles && jsx($n, {
+          children: [getI18nString("figmake.toolbar.padding"), getFeatureFlags().click_to_inspect_reset_styles && jsx($n, {
             variant: "secondary",
             disabled: !D,
             onClick: R,
-            children: _$$t("figmake.toolbar.reset")
+            children: getI18nString("figmake.toolbar.reset")
           })]
         }), k ? jsxs("div", {
           ...e,
@@ -1196,7 +1196,7 @@ function ty() {
             smallNudgeAmount: 1,
             bigNudgeAmount: 10,
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t("figmake.toolbar.padding.left"),
+            "data-tooltip": getI18nString("figmake.toolbar.padding.left"),
             children: jsx(_$$R4, {
               ...Ay.props(eE.scrubbableInputIconWrapper)
             })
@@ -1211,7 +1211,7 @@ function ty() {
             smallNudgeAmount: 1,
             bigNudgeAmount: 10,
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t("figmake.toolbar.padding.top"),
+            "data-tooltip": getI18nString("figmake.toolbar.padding.top"),
             children: jsx(_$$z2, {
               ...Ay.props(eE.scrubbableInputIconWrapper)
             })
@@ -1226,7 +1226,7 @@ function ty() {
             smallNudgeAmount: 1,
             bigNudgeAmount: 10,
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t("figmake.toolbar.padding.right"),
+            "data-tooltip": getI18nString("figmake.toolbar.padding.right"),
             children: jsx(_$$M, {
               ...Ay.props(eE.scrubbableInputIconWrapper)
             })
@@ -1241,7 +1241,7 @@ function ty() {
             smallNudgeAmount: 1,
             bigNudgeAmount: 10,
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t("figmake.toolbar.padding.bottom"),
+            "data-tooltip": getI18nString("figmake.toolbar.padding.bottom"),
             children: jsx(_$$v, {
               ...Ay.props(eE.scrubbableInputIconWrapper)
             })
@@ -1260,7 +1260,7 @@ function ty() {
             smallNudgeAmount: 1,
             bigNudgeAmount: 10,
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t("figmake.toolbar.padding.horizontal"),
+            "data-tooltip": getI18nString("figmake.toolbar.padding.horizontal"),
             children: jsx(_$$y2, {
               ...Ay.props(eE.scrubbableInputIconWrapper)
             })
@@ -1276,7 +1276,7 @@ function ty() {
             smallNudgeAmount: 1,
             bigNudgeAmount: 10,
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t("figmake.toolbar.padding.vertical"),
+            "data-tooltip": getI18nString("figmake.toolbar.padding.vertical"),
             children: jsx(_$$K2, {
               ...Ay.props(eE.scrubbableInputIconWrapper)
             })
@@ -1286,11 +1286,11 @@ function ty() {
         ...n,
         children: [jsxs("div", {
           ...t,
-          children: [_$$t("figmake.toolbar.margin"), getFeatureFlags().click_to_inspect_reset_styles && jsx($n, {
+          children: [getI18nString("figmake.toolbar.margin"), getFeatureFlags().click_to_inspect_reset_styles && jsx($n, {
             variant: "secondary",
             disabled: !M,
             onClick: V,
-            children: _$$t("figmake.toolbar.reset")
+            children: getI18nString("figmake.toolbar.reset")
           })]
         }), O ? jsxs("div", {
           ...e,
@@ -1305,7 +1305,7 @@ function ty() {
             smallNudgeAmount: 1,
             bigNudgeAmount: 10,
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t("figmake.toolbar.margin.left"),
+            "data-tooltip": getI18nString("figmake.toolbar.margin.left"),
             children: jsx(_$$R4, {
               ...Ay.props(eE.scrubbableInputIconWrapper)
             })
@@ -1320,7 +1320,7 @@ function ty() {
             smallNudgeAmount: 1,
             bigNudgeAmount: 10,
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t("figmake.toolbar.margin.top"),
+            "data-tooltip": getI18nString("figmake.toolbar.margin.top"),
             children: jsx(_$$z2, {
               ...Ay.props(eE.scrubbableInputIconWrapper)
             })
@@ -1335,7 +1335,7 @@ function ty() {
             smallNudgeAmount: 1,
             bigNudgeAmount: 10,
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t("figmake.toolbar.margin.right"),
+            "data-tooltip": getI18nString("figmake.toolbar.margin.right"),
             children: jsx(_$$M, {
               ...Ay.props(eE.scrubbableInputIconWrapper)
             })
@@ -1350,7 +1350,7 @@ function ty() {
             smallNudgeAmount: 1,
             bigNudgeAmount: 10,
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t("figmake.toolbar.margin.bottom"),
+            "data-tooltip": getI18nString("figmake.toolbar.margin.bottom"),
             children: jsx(_$$v, {
               ...Ay.props(eE.scrubbableInputIconWrapper)
             })
@@ -1369,7 +1369,7 @@ function ty() {
             smallNudgeAmount: 1,
             bigNudgeAmount: 10,
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t("figmake.toolbar.margin.horizontal"),
+            "data-tooltip": getI18nString("figmake.toolbar.margin.horizontal"),
             children: jsx(_$$y2, {
               ...Ay.props(eE.scrubbableInputIconWrapper)
             })
@@ -1385,7 +1385,7 @@ function ty() {
             smallNudgeAmount: 1,
             bigNudgeAmount: 10,
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t("figmake.toolbar.margin.vertical"),
+            "data-tooltip": getI18nString("figmake.toolbar.margin.vertical"),
             children: jsx(_$$K2, {
               ...Ay.props(eE.scrubbableInputIconWrapper)
             })
@@ -1400,23 +1400,23 @@ function tC() {
     classNameEditingController,
     directManipulationEditor
   } = ef();
-  let n = md(directManipulationEditor.selectedElementComputedStylesWithLocalEdits);
+  let n = useAtomWithSubscription(directManipulationEditor.selectedElementComputedStylesWithLocalEdits);
   let [r] = XH(directManipulationEditor);
   let a = useMemo(() => ({
     LEFT: {
-      label: _$$t("fullscreen.type_panel.align_left"),
+      label: getI18nString("fullscreen.type_panel.align_left"),
       icon: () => jsx(_$$h3, {})
     },
     CENTER: {
-      label: _$$t("fullscreen.type_panel.align_center"),
+      label: getI18nString("fullscreen.type_panel.align_center"),
       icon: () => jsx(_$$N, {})
     },
     RIGHT: {
-      label: _$$t("fullscreen.type_panel.align_right"),
+      label: getI18nString("fullscreen.type_panel.align_right"),
       icon: () => jsx(_$$K3, {})
     },
     JUSTIFIED: {
-      label: _$$t("inspect_panel.properties.justify"),
+      label: getI18nString("inspect_panel.properties.justify"),
       icon: () => jsx(_$$h4, {})
     }
   }), []);
@@ -1461,8 +1461,8 @@ function tC() {
   }, [classNameEditingController]);
   return jsx(eC, {
     target: jsx(ar, {
-      "aria-label": _$$t("whiteboard.inline_menu.text_alignment"),
-      tooltip: _$$t("whiteboard.inline_menu.text_alignment"),
+      "aria-label": getI18nString("whiteboard.inline_menu.text_alignment"),
+      tooltip: getI18nString("whiteboard.inline_menu.text_alignment"),
       tooltipType: Ib.TEXT,
       showCaret: !0,
       isActive: r,
@@ -1514,7 +1514,7 @@ function tA() {
     classNameEditingController,
     directManipulationEditor
   } = ef();
-  let n = md(directManipulationEditor.selectedElementComputedStylesWithLocalEdits)["font-weight"];
+  let n = useAtomWithSubscription(directManipulationEditor.selectedElementComputedStylesWithLocalEdits)["font-weight"];
   let r = !!(n && ("bold" === n || parseInt(n, 10) > 600));
   let a = useCallback(() => {
     let t = !r;
@@ -1531,7 +1531,7 @@ function tA() {
   }, [classNameEditingController, r]);
   return jsx(_$$R, {
     children: jsx(ar, {
-      "aria-label": _$$t("cooper.inline_menu.bold"),
+      "aria-label": getI18nString("cooper.inline_menu.bold"),
       tooltip: "toggle-bold",
       tooltipType: Ib.LOOKUP,
       isActive: r,
@@ -1545,7 +1545,7 @@ function tw() {
     classNameEditingController,
     directManipulationEditor
   } = ef();
-  let n = "italic" === md(directManipulationEditor.selectedElementComputedStylesWithLocalEdits)["font-style"];
+  let n = "italic" === useAtomWithSubscription(directManipulationEditor.selectedElementComputedStylesWithLocalEdits)["font-style"];
   let r = useCallback(() => {
     let t = !n;
     let o = t ? "italic" : "normal";
@@ -1561,7 +1561,7 @@ function tw() {
   }, [classNameEditingController, n]);
   return jsx(_$$R, {
     children: jsx(ar, {
-      "aria-label": _$$t("cooper.inline_menu.italic"),
+      "aria-label": getI18nString("cooper.inline_menu.italic"),
       tooltip: "text-toggle-italic",
       tooltipType: Ib.LOOKUP,
       isActive: n,
@@ -1575,7 +1575,7 @@ function tk() {
     classNameEditingController,
     directManipulationEditor
   } = ef();
-  let n = md(directManipulationEditor.selectedElementComputedStylesWithLocalEdits)["text-decoration"];
+  let n = useAtomWithSubscription(directManipulationEditor.selectedElementComputedStylesWithLocalEdits)["text-decoration"];
   let r = n?.indexOf("underline") !== -1;
   let a = useCallback(() => {
     let t = !r;
@@ -1592,7 +1592,7 @@ function tk() {
   }, [classNameEditingController, r]);
   return jsx(_$$R, {
     children: jsx(ar, {
-      "aria-label": _$$t("type_settings.decoration.underline"),
+      "aria-label": getI18nString("type_settings.decoration.underline"),
       tooltip: "text-toggle-underline",
       tooltipType: Ib.LOOKUP,
       isActive: r,
@@ -1623,7 +1623,7 @@ function tD({
       className: "text_size_nudge_input--decrementButton--vmC4E text_size_nudge_input--nudgeButtonBase--ctjk3",
       onClick: r,
       disabled: gl(e) || e <= tB,
-      "aria-label": _$$t("cooper.inline_menu.decrease_input"),
+      "aria-label": getI18nString("cooper.inline_menu.decrease_input"),
       recordingKey: `${l}.decrease`,
       children: jsx(_$$f2, {
         width: 16,
@@ -1640,7 +1640,7 @@ function tD({
       className: "text_size_nudge_input--incrementButton--f85OX text_size_nudge_input--nudgeButtonBase--ctjk3",
       onClick: a,
       disabled: gl(e),
-      "aria-label": _$$t("cooper.inline_menu.increase_input"),
+      "aria-label": getI18nString("cooper.inline_menu.increase_input"),
       recordingKey: `${l}.increase`,
       children: jsx(_$$x2, {
         width: 16,
@@ -1685,7 +1685,7 @@ function tR({
   });
 }
 function tM(e) {
-  return gl(e) ? _$$t("common.mixed") : String(Math.round(e));
+  return gl(e) ? getI18nString("common.mixed") : String(Math.round(e));
 }
 let tV = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 20, 24, 32, 36, 40, 48, 64, 96, 128];
 let tB = 1;
@@ -1755,7 +1755,7 @@ function tU() {
     directManipulationEditor,
     classNameEditingController
   } = ef();
-  let n = md(directManipulationEditor.selectedElementComputedStylesWithLocalEdits)["font-size"];
+  let n = useAtomWithSubscription(directManipulationEditor.selectedElementComputedStylesWithLocalEdits)["font-size"];
   let r = n ? parseInt(n, 10) : 16;
   let a = useCallback(e => {
     classNameEditingController.addClassesToInspectedElements([{
@@ -1836,7 +1836,7 @@ function tJ() {
     isProcessing
   } = _$$q();
   let r = useCallback(() => {
-    let n = zl.get(directManipulationEditor.selectedElementIdAtom);
+    let n = atomStoreManager.get(directManipulationEditor.selectedElementIdAtom);
     assert(null !== n);
     handleHtmlToDesign({
       mode: _$$y.API,
@@ -1846,8 +1846,8 @@ function tJ() {
   }, [handleHtmlToDesign, directManipulationEditor]);
   return getFeatureFlags().bake_m2d ? jsx(_$$R, {
     children: jsx(ar, {
-      "aria-label": _$$t("sites.panel.copy_make_as_design"),
-      tooltip: _$$t("sites.panel.copy_make_as_design"),
+      "aria-label": getI18nString("sites.panel.copy_make_as_design"),
+      tooltip: getI18nString("sites.panel.copy_make_as_design"),
       tooltipType: Ib.TEXT,
       onClick: r,
       disabled: isProcessing,
@@ -1886,16 +1886,16 @@ function t6({
       value: e,
       onChange: n ? lQ : t,
       legend: jsx(_$$q3, {
-        children: _$$t("figmake.toolbar.toggle_style")
+        children: getI18nString("figmake.toolbar.toggle_style")
       }),
       children: [jsx(_$$c$, {
         value: "style",
         icon: i,
-        "aria-label": n ? _$$t("figmake.toolbar.classnameEditingDisabled") : _$$t("figmake.toolbar.toggle_style")
+        "aria-label": n ? getI18nString("figmake.toolbar.classnameEditingDisabled") : getI18nString("figmake.toolbar.toggle_style")
       }), jsx(_$$c$, {
         value: "prompt",
         icon: r,
-        "aria-label": n ? _$$t("figmake.toolbar.classnameEditingDisabled") : _$$t("figmake.toolbar.toggle_prompt")
+        "aria-label": n ? getI18nString("figmake.toolbar.classnameEditingDisabled") : getI18nString("figmake.toolbar.toggle_prompt")
       })]
     })
   });
@@ -1904,7 +1904,7 @@ function t9() {
   let {
     directManipulationEditor
   } = ef();
-  let t = md(directManipulationEditor.editingSnippetAtom, {
+  let t = useAtomWithSubscription(directManipulationEditor.editingSnippetAtom, {
     deferToFrame: !0
   }).snippet;
   let n = useCallback(() => {
@@ -1912,8 +1912,8 @@ function t9() {
   }, [directManipulationEditor]);
   return jsx(_$$R, {
     children: jsx(ar, {
-      "aria-label": _$$t("figmake.toolbar.goToSource"),
-      tooltip: _$$t("figmake.toolbar.goToSource"),
+      "aria-label": getI18nString("figmake.toolbar.goToSource"),
+      tooltip: getI18nString("figmake.toolbar.goToSource"),
       tooltipType: Ib.TEXT,
       onClick: n,
       disabled: !t,
@@ -2009,7 +2009,7 @@ function ny({
     }
   };
   let S = ry();
-  let A = md(f3);
+  let A = useAtomWithSubscription(f3);
   let w = KP();
   let {
     exchange,
@@ -2019,7 +2019,7 @@ function ny({
   let D = user?.sessionID === w;
   let R = useRef(null);
   let M = !jN(n) && !O;
-  let V = md(Z3(t));
+  let V = useAtomWithSubscription(Z3(t));
   let B = useCallback(() => {
     if (R && "current" in R && R.current) {
       let e = R.current;
@@ -2047,7 +2047,7 @@ function ny({
   let F = O ? jsx("div", {
     ...Ay.props(ng.buttonContainer, M ? ng.buttonBrand : ng.buttonDisabled),
     children: jsx(_$$K, {
-      "aria-label": _$$t("living_designs.chat.stop_button.alt_text"),
+      "aria-label": getI18nString("living_designs.chat.stop_button.alt_text"),
       onClick: () => {
         V && V.abort();
       },
@@ -2060,7 +2060,7 @@ function ny({
     ...Ay.props(ng.buttonContainer, M ? ng.buttonBrand : ng.buttonDisabled),
     children: jsx(_$$K, {
       type: "submit",
-      "aria-label": _$$t("living_designs.chat.send_button.alt_text"),
+      "aria-label": getI18nString("living_designs.chat.send_button.alt_text"),
       onClick: () => {
         U({});
         A?.setDirectManipulationEnabled({
@@ -2095,7 +2095,7 @@ function ny({
               enabled: !1
             })));
           },
-          placeholder: _$$t("living_designs.chat.placeholder.iterate"),
+          placeholder: getI18nString("living_designs.chat.placeholder.iterate"),
           value: n
         })
       }), jsx("div", {
@@ -2127,9 +2127,9 @@ class nC {
   }
   async updateImage(e, t, n, o) {
     let i = this.componentPreview.directManipulationEditor;
-    let r = zl.get(i.selectedElementInfoAtom);
+    let r = atomStoreManager.get(i.selectedElementInfoAtom);
     if (!r) {
-      x1("direct_manipulation", "No element found to update image");
+      logError("direct_manipulation", "No element found to update image");
       this.displayErrorVisualBell("on_save");
       return {
         success: !1,
@@ -2138,7 +2138,7 @@ class nC {
     }
     let a = e.image;
     if (!a) {
-      x1("direct_manipulation", "No image found to update image");
+      logError("direct_manipulation", "No image found to update image");
       this.displayErrorVisualBell("on_save");
       return {
         success: !1,
@@ -2147,7 +2147,7 @@ class nC {
     }
     let l = await i.fetchNewCodeSnippets();
     if (!l) {
-      x1("direct_manipulation", "Unable to edit the image");
+      logError("direct_manipulation", "Unable to edit the image");
       this.displayErrorVisualBell("on_save");
       return {
         success: !1,
@@ -2302,7 +2302,7 @@ class nC {
       }) : this.forceRefresh(), i.updateAnalyticsRecordImageSwappedFromSource(o), {
         success: !0,
         modifiedCodeFileNodeIds: []
-      }) : (x1("direct_manipulation", "Failed to update image", {
+      }) : (logError("direct_manipulation", "Failed to update image", {
         inspectedElementInfo: r,
         status: u,
         importStatus: h
@@ -2532,13 +2532,13 @@ function nT({
     };
   }(y, n.isTextContainer), [y, n.isTextContainer]);
   let _ = function (e, t) {
-    let n = md(e.directManipulationEnabledAtom);
-    let o = md(e.editingSnippetAtom, {
+    let n = useAtomWithSubscription(e.directManipulationEnabledAtom);
+    let o = useAtomWithSubscription(e.editingSnippetAtom, {
       deferToFrame: !0
     });
     return n ? o.snippet ? $5(o.snippet) && t.length > 0 ? _$$D2.Enabled : _$$D2.Disabled : o.isLoading ? _$$D2.Loading : _$$D2.Disabled : _$$D2.Disabled;
   }(l.directManipulationEditor, f.components);
-  let b = md(l.directManipulationEditor.editingSnippetAtom, {
+  let b = useAtomWithSubscription(l.directManipulationEditor.editingSnippetAtom, {
     deferToFrame: !0
   }).snippet;
   let v = useRef(!1);
@@ -2546,7 +2546,7 @@ function nT({
   let C = useCallback(e => {
     if (v.current) return;
     v.current = !0;
-    let t = "on_selection" === e ? _$$t("figmake.toolbar.error.inconsistency") : _$$t("figmake.toolbar.error.save");
+    let t = "on_selection" === e ? getI18nString("figmake.toolbar.error.inconsistency") : getI18nString("figmake.toolbar.error.save");
     I(_$$F.enqueue({
       message: t,
       error: !0,
@@ -2554,7 +2554,7 @@ function nT({
         action: () => {
           s();
         },
-        text: _$$t("figmake.refresh")
+        text: getI18nString("figmake.refresh")
       }
     }));
   }, [I, s]);
@@ -2880,9 +2880,9 @@ function nP({
 }) {
   let l = e.iframe;
   let s = e.directManipulationEditor;
-  let d = md(s.latestInspectedElementUIEvent);
-  let c = md(sH);
-  let p = md(gn);
+  let d = useAtomWithSubscription(s.latestInspectedElementUIEvent);
+  let c = useAtomWithSubscription(sH);
+  let p = useAtomWithSubscription(gn);
   let u = null !== d;
   let h = u && !!l;
   let [m, x] = useState(!0);
@@ -2959,10 +2959,10 @@ function nD() {
       className: "x78zum5 xdt5ytf x6s0dn4 x1jnr06f x1racy4e",
       children: [jsx("div", {
         className: "xiqqdae xkezfkh",
-        children: _$$tx("figmake.error_overlay.header")
+        children: renderI18nText("figmake.error_overlay.header")
       }), jsx("div", {
         className: "x17akokd x1n0bwc9 x2b8uid",
-        children: _$$tx("figmake.error_overlay.subtitle")
+        children: renderI18nText("figmake.error_overlay.subtitle")
       })]
     })]
   });
@@ -3162,19 +3162,19 @@ function nH({
   let A = Oc();
   let w = useRef(null);
   let k = useRef(null);
-  let [O, R] = fp(Y_);
-  let M = md(jD);
-  let V = md(p_);
-  let B = md(l6);
-  let H = md(Xs);
-  let U = md(xJ);
-  let F = md(UL);
-  let K = md(iK);
+  let [O, R] = useAtomValueAndSetter(Y_);
+  let M = useAtomWithSubscription(jD);
+  let V = useAtomWithSubscription(p_);
+  let B = useAtomWithSubscription(l6);
+  let H = useAtomWithSubscription(Xs);
+  let U = useAtomWithSubscription(xJ);
+  let F = useAtomWithSubscription(UL);
+  let K = useAtomWithSubscription(iK);
   let z = "instance" === m.type ? m.codeInstanceNode : m.codeBehaviorNode;
   let W = I4(z);
   let Z = IO(z);
   let [G, Y] = jT();
-  let [q, X] = fp(df(z.guid));
+  let [q, X] = useAtomValueAndSetter(df(z.guid));
   let [J] = useState(new n$());
   let [Q, ee] = useState(J.componentPreview);
   let [et, en] = useState(J.readyIframe);
@@ -3196,7 +3196,7 @@ function nH({
     k.current = e;
   }, [f, X]);
   let ec = useCallback(e => {
-    zl.set(f3, e);
+    atomStoreManager.set(f3, e);
     ee(e);
   }, [ee]);
   let ep = useCallback(async (e, t) => {
@@ -3312,7 +3312,7 @@ function nH({
           chatNodeId: x,
           codeInstanceNodeId: m.codeInstanceNode.guid
         }) : null, jsx("iframe", {
-          title: _$$t("sites.code_component.preview_title"),
+          title: getI18nString("sites.code_component.preview_title"),
           src: M,
           ref: eg,
           ...xk(nB.iframe, t && nB.iframeDisabled, e === _$$d.ERROR && nB.iframeHidden)
@@ -3328,8 +3328,8 @@ function nU({
   componentPreview: r,
   handleScaleLinearly: a
 }) {
-  let [l] = fp(Y_);
-  let [s, c] = fp(TJ);
+  let [l] = useAtomValueAndSetter(Y_);
+  let [s, c] = useAtomValueAndSetter(TJ);
   let b = useCallback(e => {
     let t = getSingletonSceneGraph().get(e);
     let n = t?.exportedFromCodeFile;
@@ -3347,10 +3347,10 @@ function nU({
   let H = cu();
   let U = H[0] ? B.get(H[0]) : null;
   let F = wE(U);
-  let K = md(ZY);
+  let K = useAtomWithSubscription(ZY);
   let $ = !F || K;
-  let z = md(s0);
-  let [W, Z] = fp(qQ);
+  let z = useAtomWithSubscription(s0);
+  let [W, Z] = useAtomValueAndSetter(qQ);
   let G = K && (F || W);
   let Y = useCallback(() => {
     U && Py({
@@ -3387,7 +3387,7 @@ function nU({
         },
         children: [jsx(l9, {
           label: jsx(_$$h, {
-            children: _$$t("sites.code_component.preview_legend")
+            children: getI18nString("sites.code_component.preview_legend")
           })
         }), jsx(mc, {
           children: P.map(e => jsx(c$, {
@@ -3398,27 +3398,27 @@ function nU({
       }) : jsx(Fragment, {}),
       children: [G && z === Nfd.FILE && jsx($n, {
         variant: "secondary",
-        "aria-label": _$$t("fullscreen_actions.return-to-instance"),
+        "aria-label": getI18nString("fullscreen_actions.return-to-instance"),
         onClick: q,
-        children: _$$t("fullscreen_actions.return-to-instance")
+        children: getI18nString("fullscreen_actions.return-to-instance")
       }), !$ && z === Nfd.FILE && jsx($n, {
         variant: "secondary",
-        "aria-label": _$$t("fullscreen_actions.edit-main-component"),
+        "aria-label": getI18nString("fullscreen_actions.edit-main-component"),
         onClick: Y,
-        children: _$$t("fullscreen_actions.edit-main-component")
+        children: getI18nString("fullscreen_actions.edit-main-component")
       }), "instance" === e.type && !e.codeInstanceNode.isLayerLikeCodeNode && t && jsx($n, {
         variant: "secondary",
-        "aria-label": _$$t("sites.code_component.add_to_canvas"),
+        "aria-label": getI18nString("sites.code_component.add_to_canvas"),
         onClick: t,
-        children: _$$t("sites.code_component.add_to_canvas")
+        children: getI18nString("sites.code_component.add_to_canvas")
       }), X && jsx(_$$f, {
         variant: "highlighted",
         checked: !l,
         onIcon: jsx(_$$O, {}),
         offIcon: jsx(_$$O, {}),
-        "aria-label": _$$t("sites.code_component.view_at_100"),
+        "aria-label": getI18nString("sites.code_component.view_at_100"),
         htmlAttributes: {
-          "data-tooltip": _$$t("sites.code_component.view_at_100"),
+          "data-tooltip": getI18nString("sites.code_component.view_at_100"),
           "data-tooltip-type": "text"
         },
         onChange: () => a(!l)
@@ -3427,21 +3427,21 @@ function nU({
         showTooltipAbove: !1,
         codeInstanceGuid: e.codeInstanceNode.guid
       }), jsx(_$$r, {
-        openText: _$$t("sites.code_component.drawer.open"),
-        hideText: _$$t("sites.code_component.drawer.hide"),
+        openText: getI18nString("sites.code_component.drawer.open"),
+        hideText: getI18nString("sites.code_component.drawer.hide"),
         children: jsx(y, {})
       }), jsx(_$$K, {
-        "aria-label": _$$t("sites.code_component.code_view_reload"),
+        "aria-label": getI18nString("sites.code_component.code_view_reload"),
         htmlAttributes: {
-          "data-tooltip": _$$t("sites.code_component.code_view_reload"),
+          "data-tooltip": getI18nString("sites.code_component.code_view_reload"),
           "data-tooltip-type": "text"
         },
         onClick: n,
         children: jsx(_$$x, {})
       }), getFeatureFlags().bake_m2d && jsx(_$$K, {
-        "aria-label": _$$t("figmake.m2d.paste_to_canvas_as_design_layers"),
+        "aria-label": getI18nString("figmake.m2d.paste_to_canvas_as_design_layers"),
         htmlAttributes: {
-          "data-tooltip": _$$t("figmake.m2d.paste_to_canvas_as_design_layers"),
+          "data-tooltip": getI18nString("figmake.m2d.paste_to_canvas_as_design_layers"),
           "data-tooltip-type": "text"
         },
         disabled: isProcessing || !isEnabled,
@@ -3680,7 +3680,7 @@ let nW = memo(function (e) {
 function nG() {
   let [e] = jT();
   let t = e?.filter(e => "error" === e.type);
-  let [n, r] = fp(YD);
+  let [n, r] = useAtomValueAndSetter(YD);
   let a = Xr(Vo);
   let [l, s] = useState(!1);
   return n || !t || 0 === t.length || l ? null : jsxs("button", {
@@ -3690,7 +3690,7 @@ function nG() {
       r(!0);
     },
     children: [jsx(nW, {}), jsx("div", {
-      children: _$$t("living_designs.chat.errors.error_count", {
+      children: getI18nString("living_designs.chat.errors.error_count", {
         count: t.length
       })
     }), jsx("button", {

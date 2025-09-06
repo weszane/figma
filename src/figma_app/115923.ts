@@ -1,13 +1,13 @@
 import { Nfd, lyf } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { eU } from "../figma_app/27355";
+import { atom } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { sf } from "../905/929976";
 import { T } from "../905/868547";
 import { Wh } from "../figma_app/615482";
-import { bt } from "../905/270322";
+import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { ou } from "../figma_app/32891";
-let $$p3 = Wh(() => eU(e => e(_), (e, t, r) => {
+let $$p3 = Wh(() => atom(e => e(_), (e, t, r) => {
   let a = debugState.getState().selectedView;
   if (!a) return;
   if (r === Nfd.DAKOTA && !getFeatureFlags().dakota) {
@@ -20,7 +20,7 @@ let $$p3 = Wh(() => eU(e => e(_), (e, t, r) => {
   };
   debugState.dispatch(sf(l));
 }));
-let _ = bt(e => {
+let _ = createReduxSubscriptionAtomWithState(e => {
   let t = e.selectedView;
   let r = T(e?.progressBarState?.mode);
   let a = e.mirror.appModel.isReadOnly || e.mirror.appModel.topLevelMode === lyf.HISTORY;
@@ -46,8 +46,8 @@ let _ = bt(e => {
   return t.sitesView ?? Nfd.FILE;
 });
 export var $$h0 = (e => (e.FIND = "find", e.INSERT = "insert", e))($$h0 || {});
-let $$m1 = Wh(() => eU(void 0));
-let $$g2 = Wh(() => eU(!1));
+let $$m1 = Wh(() => atom(void 0));
+let $$g2 = Wh(() => atom(!1));
 export const $e = $$h0;
 export const Nl = $$m1;
 export const bP = $$g2;

@@ -5,11 +5,11 @@ import { J } from "../905/614223";
 import { r as _$$r } from "../905/249071";
 import { M as _$$M } from "../905/512402";
 import { AD } from "../905/871411";
-import { eU, md } from "../figma_app/27355";
+import { atom, useAtomWithSubscription } from "../figma_app/27355";
 import u from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
 import { rf, Pt } from "../figma_app/806412";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { aR, lE } from "../905/945781";
 var p = u;
 let _ = "overlay_highlight--added--28SgH";
@@ -34,15 +34,15 @@ export function $$C0({
 let T = (e, t = "") => {
   switch (e) {
     case "added":
-      return _$$t("dev_handoff.compare_changes.overlay.added", {
+      return getI18nString("dev_handoff.compare_changes.overlay.added", {
         layerName: t
       });
     case "removed":
-      return _$$t("dev_handoff.compare_changes.overlay.removed", {
+      return getI18nString("dev_handoff.compare_changes.overlay.removed", {
         layerName: t
       });
     case "changed":
-      return _$$t("dev_handoff.compare_changes.overlay.changed", {
+      return getI18nString("dev_handoff.compare_changes.overlay.changed", {
         layerName: t
       });
   }
@@ -67,7 +67,7 @@ let k = memo(function ({
   let N = R ? S : x;
   let P = R && c > 99;
   let O = R ? c > 99 ? "99+" : c : void 0;
-  let D = useCallback((t) => {
+  let D = useCallback(t => {
     t.stopPropagation();
     g?.(e);
   }, [g, e]);
@@ -133,13 +133,13 @@ let k = memo(function ({
     })]
   });
 });
-var R = ((e) => (e[e.DASHED = 0] = "DASHED", e[e.SOLID = 1] = "SOLID", e[e.NONE = 2] = "NONE", e))(R || {});
-var N = ((e) => (e[e.WIDE = 0] = "WIDE", e[e.THIN = 1] = "THIN", e))(N || {});
-let P = (e) => e.beforeNodeId + ":" + e.afterNodeId;
-let O = (e) => !e.parent && !e.value;
-let D = (e) => !e.parent || O(e.parent) || !!e.parent.value?.isRootFrame;
-let L = (e) => e.descendantsCount > 0 ? e.descendantsCount : void 0;
-let F = (e) => e.value && !e.value.isSelected && !!e.parent?.value?.directParentToSelection;
+var R = (e => (e[e.DASHED = 0] = "DASHED", e[e.SOLID = 1] = "SOLID", e[e.NONE = 2] = "NONE", e))(R || {});
+var N = (e => (e[e.WIDE = 0] = "WIDE", e[e.THIN = 1] = "THIN", e))(N || {});
+let P = e => e.beforeNodeId + ":" + e.afterNodeId;
+let O = e => !e.parent && !e.value;
+let D = e => !e.parent || O(e.parent) || !!e.parent.value?.isRootFrame;
+let L = e => e.descendantsCount > 0 ? e.descendantsCount : void 0;
+let F = e => e.value && !e.value.isSelected && !!e.parent?.value?.directParentToSelection;
 let M = (e, t, i) => {
   if (!e.value) return !1;
   let n = e.value;
@@ -170,11 +170,11 @@ function B({
   let g = O(e);
   let _ = U(e, l);
   let A = !!(e.value && e.value.isSelected);
-  let y = useMemo(() => eU((t) => {
+  let y = useMemo(() => atom(t => {
     let i = t(p);
     return !!(e.value && G(e.value, i));
   }), [e, p]);
-  let b = md(y);
+  let b = useAtomWithSubscription(y);
   let v = !_ && (e.value?.ancestorOfSelectedNode || A || !!e.value?.isRootFrame || g);
   let I = !!a && a !== AD;
   let E = useMemo(() => {
@@ -217,7 +217,7 @@ function B({
       renderOverlay: E.renderOverlay,
       renderTag: E.renderTag,
       tagValue: E.tagValue
-    }, P(E.node.value) + ":" + u ? "active" : "inactive"), v && e.children && e.children.map((r) => r.value && M(r, I, !!e.value?.isSelected) && jsx(B, {
+    }, P(E.node.value) + ":" + u ? "active" : "inactive"), v && e.children && e.children.map(r => r.value && M(r, I, !!e.value?.isSelected) && jsx(B, {
       expandedLayers: s,
       hoveredNodeIdAtom: p,
       ignoreState: l,
@@ -253,10 +253,10 @@ function H(e) {
     hoveredNodeIdAtom,
     recordingKey
   } = e;
-  let u = md(hoveredNodeIdAtom);
+  let u = useAtomWithSubscription(hoveredNodeIdAtom);
   let p = useMemo(() => {
     if (!rootBox || !u) return;
-    let e = lE(rootBox, (e) => G(e, u) && !z(e, selectedNodeId));
+    let e = lE(rootBox, e => G(e, u) && !z(e, selectedNodeId));
     return e && {
       value: e,
       children: void 0
@@ -264,7 +264,7 @@ function H(e) {
   }, [rootBox, u, selectedNodeId]);
   let m = useMemo(() => {
     if (!rootBox || !selectedNodeId) return;
-    let e = lE(rootBox, (e) => z(e, selectedNodeId));
+    let e = lE(rootBox, e => z(e, selectedNodeId));
     return e && {
       value: e,
       children: void 0
@@ -314,7 +314,7 @@ let W = memo(function (e) {
         isSelected: a
       }) : void 0
     };
-    s.children = t.children ? t.children?.map((t) => {
+    s.children = t.children ? t.children?.map(t => {
       let r = e(t, i, n, s);
       r.value && (!n || r.value.state !== n) && s.value && (s.value.descendantsCount += r.value.descendantsCount + 1);
       r.value?.ancestorOfSelectedNode && s.value && (s.value.ancestorOfSelectedNode = !0);
@@ -324,7 +324,7 @@ let W = memo(function (e) {
     return s;
   }(rootBox, selectedNodeId, ignoreState) : void 0, [rootBox, selectedNodeId, ignoreState]);
   let g = useRef(void 0);
-  let f = useCallback((e) => {
+  let f = useCallback(e => {
     g.current = e;
   }, []);
   let _ = useCallback(() => {

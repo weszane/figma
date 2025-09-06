@@ -1,8 +1,8 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
-import { fp } from "../figma_app/27355";
-import { R } from "../905/103090";
+import { useAtomValueAndSetter } from "../figma_app/27355";
+import { selectWithShallowEqual } from "../905/103090";
 import { m0 } from "../figma_app/976749";
 import { UX } from "../figma_app/740163";
 import { QZ, VZ } from "../figma_app/727192";
@@ -18,7 +18,7 @@ export function $$p0() {
     dropdownShown,
     pickerShown,
     exportSettings
-  } = R(e => ({
+  } = selectWithShallowEqual(e => ({
     openFile: e.openFile,
     sceneGraphSelection: e.mirror.sceneGraphSelection,
     currentSelectedProperty: e.mirror.appModel.currentSelectedProperty,
@@ -35,7 +35,7 @@ export function $$p0() {
     collapsedInspectionPanelAtom,
     collapseEnabled
   } = QZ("export");
-  let [S, v] = fp(collapsedInspectionPanelAtom);
+  let [S, v] = useAtomValueAndSetter(collapsedInspectionPanelAtom);
   let A = useCallback(e => {
     v(!S);
     e.stopPropagation();

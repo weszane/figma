@@ -15,7 +15,7 @@ import { tH } from "../905/751457";
 import { Nt, c2, yn, lv, dP } from "../figma_app/119475";
 import { B as _$$B } from "../905/714743";
 import { n as _$$n } from "../905/734251";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Fl } from "../figma_app/236178";
 import { NX, k9 } from "../figma_app/777207";
 import { B8 } from "../figma_app/255679";
@@ -60,7 +60,7 @@ function Z(e, t, r, i) {
         layout: t
       })
     },
-    children: e.length > 0 ? _$$t("variables.binding_ui.no_search_results") : i === rXF.COLOR ? _$$t("variables.binding_ui.no_colors_empty_state") : r ? _$$t("variables.binding_ui.no_variables_props_empty_state") : _$$t("variables.binding_ui.no_variables_empty_state")
+    children: e.length > 0 ? getI18nString("variables.binding_ui.no_search_results") : i === rXF.COLOR ? getI18nString("variables.binding_ui.no_colors_empty_state") : r ? getI18nString("variables.binding_ui.no_variables_props_empty_state") : getI18nString("variables.binding_ui.no_variables_empty_state")
   });
 }
 export function $$Q1({
@@ -633,7 +633,7 @@ export function $$el3({
       });
       r.length > 0 && e.length > 0 && r.push({
         type: Yc.SECTION_HEADER,
-        name: _$$t("variables.binding_ui.set_labels.variables_created_in_file")
+        name: getI18nString("variables.binding_ui.set_labels.variables_created_in_file")
       });
       return r.concat(e);
     }
@@ -904,7 +904,7 @@ function ep({
       value: t,
       onChange: r,
       noBorderOnFocus: !0,
-      placeholder: _$$t("variables.binding_ui.search_placeholder"),
+      placeholder: getI18nString("variables.binding_ui.search_placeholder"),
       onKeyDown: a,
       recordingKey: s
     })]

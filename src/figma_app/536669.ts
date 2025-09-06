@@ -1,6 +1,6 @@
 import { s as _$$s } from "../905/583953";
 import { getCenteredRotation } from "../905/346946";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Yb, HD } from "../figma_app/62612";
 import { GY } from "../figma_app/348938";
 export function $$l3(e, t) {
@@ -101,63 +101,63 @@ export function $$E0(e, t, r = {
 export function $$y2(e) {
   switch (e) {
     case "DIAMOND":
-      return t("fullscreen.accessibility_dom.node_name_whiteboard-diamond");
+      return getI18nString("fullscreen.accessibility_dom.node_name_whiteboard-diamond");
     case "ELLIPSE":
-      return t("fullscreen.accessibility_dom.node_name_whiteboard-ellipse");
+      return getI18nString("fullscreen.accessibility_dom.node_name_whiteboard-ellipse");
     case "ENG_DATABASE":
-      return t("fullscreen.accessibility_dom.node_name_whiteboard-eng-database");
+      return getI18nString("fullscreen.accessibility_dom.node_name_whiteboard-eng-database");
     case "ENG_FILE":
-      return t("fullscreen.accessibility_dom.node_name_whiteboard-eng-file");
+      return getI18nString("fullscreen.accessibility_dom.node_name_whiteboard-eng-file");
     case "ENG_FOLDER":
-      return t("fullscreen.accessibility_dom.node_name_whiteboard-eng-folder");
+      return getI18nString("fullscreen.accessibility_dom.node_name_whiteboard-eng-folder");
     case "ENG_QUEUE":
-      return t("fullscreen.accessibility_dom.node_name_whiteboard-eng-queue");
+      return getI18nString("fullscreen.accessibility_dom.node_name_whiteboard-eng-queue");
     case "PARALLELOGRAM_RIGHT":
     case "PARALLELOGRAM_LEFT":
-      return t("fullscreen.accessibility_dom.node_name_whiteboard-parallelogram-right");
+      return getI18nString("fullscreen.accessibility_dom.node_name_whiteboard-parallelogram-right");
     case "ROUNDED_RECTANGLE":
-      return t("fullscreen.accessibility_dom.node_name_whiteboard-rounded-rectangle");
+      return getI18nString("fullscreen.accessibility_dom.node_name_whiteboard-rounded-rectangle");
     case "SQUARE":
-      return t("fullscreen.accessibility_dom.node_name_whiteboard-square");
+      return getI18nString("fullscreen.accessibility_dom.node_name_whiteboard-square");
     case "TRIANGLE_DOWN":
     case "TRIANGLE_UP":
-      return t("fullscreen.accessibility_dom.node_name_whiteboard-triangle-down");
+      return getI18nString("fullscreen.accessibility_dom.node_name_whiteboard-triangle-down");
     case "TRAPEZOID":
-      return t("fullscreen.accessibility_dom.node_name_whiteboard-trapezoid");
+      return getI18nString("fullscreen.accessibility_dom.node_name_whiteboard-trapezoid");
     case "STAR":
-      return t("fullscreen.accessibility_dom.node_name_whiteboard-star");
+      return getI18nString("fullscreen.accessibility_dom.node_name_whiteboard-star");
     case "SHIELD":
-      return t("fullscreen.accessibility_dom.node_name_whiteboard-shield");
+      return getI18nString("fullscreen.accessibility_dom.node_name_whiteboard-shield");
     case "HEXAGON":
-      return t("fullscreen.accessibility_dom.node_name_whiteboard-hexagon");
+      return getI18nString("fullscreen.accessibility_dom.node_name_whiteboard-hexagon");
     case "PENTAGON":
-      return t("fullscreen.accessibility_dom.node_name_whiteboard-pentagon");
+      return getI18nString("fullscreen.accessibility_dom.node_name_whiteboard-pentagon");
     case "OCTAGON":
-      return t("fullscreen.accessibility_dom.node_name_whiteboard-octagon");
+      return getI18nString("fullscreen.accessibility_dom.node_name_whiteboard-octagon");
     case "PLUS":
-      return t("fullscreen.accessibility_dom.node_name_whiteboard-plus");
+      return getI18nString("fullscreen.accessibility_dom.node_name_whiteboard-plus");
     case "PREDEFINED_PROCESS":
-      return t("fullscreen.accessibility_dom.node_name_whiteboard-predefined-process");
+      return getI18nString("fullscreen.accessibility_dom.node_name_whiteboard-predefined-process");
     case "MANUAL_INPUT":
-      return t("fullscreen.accessibility_dom.node_name_whiteboard-manual-input");
+      return getI18nString("fullscreen.accessibility_dom.node_name_whiteboard-manual-input");
     case "CHEVRON":
-      return t("fullscreen.accessibility_dom.node_name_whiteboard-chevron");
+      return getI18nString("fullscreen.accessibility_dom.node_name_whiteboard-chevron");
     case "DOCUMENT_SINGLE":
-      return t("fullscreen.accessibility_dom.node_name_whiteboard-document-single");
+      return getI18nString("fullscreen.accessibility_dom.node_name_whiteboard-document-single");
     case "DOCUMENT_MULTIPLE":
-      return t("fullscreen.accessibility_dom.node_name_whiteboard-document-multiple");
+      return getI18nString("fullscreen.accessibility_dom.node_name_whiteboard-document-multiple");
     case "ARROW_LEFT":
-      return t("fullscreen.accessibility_dom.node_name_whiteboard-arrow-left");
+      return getI18nString("fullscreen.accessibility_dom.node_name_whiteboard-arrow-left");
     case "ARROW_RIGHT":
-      return t("fullscreen.accessibility_dom.node_name_whiteboard-arrow-right");
+      return getI18nString("fullscreen.accessibility_dom.node_name_whiteboard-arrow-right");
     case "SUMMING_JUNCTION":
-      return t("fullscreen.accessibility_dom.node_name_whiteboard-summing-junction");
+      return getI18nString("fullscreen.accessibility_dom.node_name_whiteboard-summing-junction");
     case "OR":
-      return t("fullscreen.accessibility_dom.node_name_whiteboard-or");
+      return getI18nString("fullscreen.accessibility_dom.node_name_whiteboard-or");
     case "SPEECH_BUBBLE":
-      return t("fullscreen.accessibility_dom.node_name_whiteboard-speech-bubble");
+      return getI18nString("fullscreen.accessibility_dom.node_name_whiteboard-speech-bubble");
     case "INTERNAL_STORAGE":
-      return t("fullscreen.accessibility_dom.node_name_whiteboard-internal-storage");
+      return getI18nString("fullscreen.accessibility_dom.node_name_whiteboard-internal-storage");
     default:
       throw Error(`Unhandled shape type: ${e}`);
   }

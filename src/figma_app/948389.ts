@@ -1,7 +1,7 @@
 import { M_, OE, ZO, $L, NZ, PI as _$$PI, g6, rY } from "../905/369755";
 import { G1 } from "../figma_app/691470";
 import { CortexErrorV2, ProviderRateLimitExceededError, ProviderOverloadedError, CortexRateLimitExceededError, ClientContentLengthLimitExceededError, ProviderContentLengthLimitExceededError, UnsafeOrHarmfulPromptError, ProviderUnsafeOrHarmfulContentError, NotImplementedError, OfflineError, MeterExceededError, PayloadTooLargeError } from "../figma_app/316567";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { fF } from "../905/471229";
 import { J } from "../905/915227";
 import { B } from "../905/969273";
@@ -10,11 +10,11 @@ import { kS } from "../figma_app/864723";
 import { As, ze } from "../figma_app/516028";
 export function $$_1() {
   return {
-    orgId: zl.get(_s) || null,
-    teamId: zl.get(As) || null,
-    fileKey: zl.get(ze) || null,
-    fileSeq: zl.get(J)?.toString() || null,
-    userId: zl.get(kS) || null,
+    orgId: atomStoreManager.get(_s) || null,
+    teamId: atomStoreManager.get(As) || null,
+    fileKey: atomStoreManager.get(ze) || null,
+    fileSeq: atomStoreManager.get(J)?.toString() || null,
+    userId: atomStoreManager.get(kS) || null,
     trackingSessionId: fF()
   };
 }

@@ -5,13 +5,13 @@ import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { Wk } from "../figma_app/272243";
 import { WW } from "../905/521428";
-import { Xr, fp } from "../figma_app/27355";
-import { az } from "../905/449184";
+import { Xr, useAtomValueAndSetter } from "../figma_app/27355";
+import { analyticsEventManager } from "../905/449184";
 import { h as _$$h } from "../905/207101";
-import { C8 } from "../figma_app/778880";
+import { getIsAndroidOrIphoneNotFigmaMobile } from "../figma_app/778880";
 import { Kz, ks } from "../figma_app/637027";
 import { B as _$$B } from "../905/714743";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { yJ } from "../figma_app/24841";
 import { b as _$$b } from "../905/985254";
 import { fu } from "../figma_app/831799";
@@ -58,7 +58,7 @@ export function $$F0({
     priority: _$$N.OVERRIDING_MODAL
   });
   return (_$$h(() => {
-    C8() || window.matchMedia("(max-width: 840px)").matches || s || show({
+    getIsAndroidOrIphoneNotFigmaMobile() || window.matchMedia("(max-width: 840px)").matches || s || show({
       canShow: t,
       onShow: () => {
         n(pu.WHAT_DO_YOU_DO);
@@ -84,7 +84,7 @@ function B({
   let m = Pc();
   let y = m.id;
   let T = m.profile.job_title;
-  let [j, k] = fp(ZE);
+  let [j, k] = useAtomValueAndSetter(ZE);
   let [C, N] = useState("");
   let {
     questionKey,
@@ -155,7 +155,7 @@ function B({
                 autoFocus: !0,
                 dataTestId: "custom_job_title_input",
                 className: "job_title_prompt_overlay--otherInput--aNBXq",
-                placeholder: _$$t("user_onboarding_signals.v1.answer.other.placeholder"),
+                placeholder: getI18nString("user_onboarding_signals.v1.answer.other.placeholder"),
                 value: C,
                 onChange: e => N(e.currentTarget.value)
               }) : void 0
@@ -178,7 +178,7 @@ function B({
                     },
                     userInitiated: !0
                   }));
-                  az.trackDefinedEvent("activation.job_title_changed", {
+                  analyticsEventManager.trackDefinedEvent("activation.job_title_changed", {
                     newJobTitle: t,
                     prevJobTitle: T,
                     source: n,
@@ -199,7 +199,7 @@ function B({
                   });
                 },
                 disabled: 0 === j.size || G,
-                children: tx("rcs.surveys.submit")
+                children: renderI18nText("rcs.surveys.submit")
               })
             })]
           }), jsx("div", {

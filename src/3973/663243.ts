@@ -2,12 +2,12 @@ import { DynamicConfig, EvaluationReason } from "../vendor/625526";
 import { Statsig } from "../vendor/735621";
 import { a as _$$a } from "../905/425366";
 import { getInitialOptions } from "../figma_app/169182";
-import { nl } from "../figma_app/257275";
-import { vo } from "../905/670985";
+import { isInteractionPathCheck } from "../figma_app/897289";
+import { measureSyncDuration } from "../905/670985";
 import { cP, Us, zz, Dr, su, pk } from "../3973/890507";
 import { Uv } from "../3973/473379";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 export let $$g1 = new DynamicConfig("default", {}, "default", {
   reason: EvaluationReason.Unrecognized,
   time: Date.now()
@@ -20,7 +20,7 @@ export function $$m0(e, t, r, p = !1, f = !1) {
   let v = $$g1;
   let y = cP();
   try {
-    h = vo("statsigGetExperimentValDuration", _$$e.GROWTH_PLATFORM, () => {
+    h = measureSyncDuration("statsigGetExperimentValDuration", _$$e.GROWTH_PLATFORM, () => {
       v = f ? Statsig.getExperimentWithExposureLoggingDisabled(t, {
         keepDeviceValue: p
       }) : Statsig.getExperiment(t, p);
@@ -33,10 +33,10 @@ export function $$m0(e, t, r, p = !1, f = !1) {
   }
   let T = Statsig.getCurrentUser();
   if (null === b && y && zz(t, h, r, v.getEvaluationDetails().reason, v.getRuleID(), T), v.getEvaluationDetails().reason === EvaluationReason.InvalidBootstrap) {
-    let e = zl.get(_$$a);
+    let e = atomStoreManager.get(_$$a);
     e && Dr(t, e.evaluated_keys?.userID, JSON.stringify(e.evaluated_keys?.customIDs), T?.userID?.toString(), JSON.stringify(T?.customIDs));
   }
-  if (nl() && su === t) {
+  if (isInteractionPathCheck() && su === t) {
     let e = v.getValue();
     pk(su, h);
     pk(`${su}_value`, e);

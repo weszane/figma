@@ -10,12 +10,12 @@ import { nI, ej as _$$ej, Ng as _$$Ng, Ni } from "../figma_app/188152";
 import { iZ } from "../905/372672";
 import { useRef, useEffect, useState, useCallback, cloneElement, useMemo } from "react";
 import { $n } from "../905/521428";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { u9 } from "../figma_app/661371";
 import { kt } from "../figma_app/858013";
 import { x as _$$x } from "../905/211326";
 import { a as _$$a } from "../905/925868";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Jm } from "../figma_app/387599";
 import { Zl, Vm } from "../figma_app/427318";
 import { hJ, XY } from "../905/506641";
@@ -111,13 +111,13 @@ let M = function ({
   let x = e => {
     switch (e) {
       case h.ALL:
-        return _$$t("community.comments.all");
+        return getI18nString("community.comments.all");
       case h.ME:
-        return _$$t("community.comments.your_comments");
+        return getI18nString("community.comments.your_comments");
       case h.COMMENTS:
-        return _$$t("community.comments.comments_only");
+        return getI18nString("community.comments.comments_only");
       case h.RATINGS_REVIEWS:
-        return _$$t("community.comments.reviews_only");
+        return getI18nString("community.comments.reviews_only");
       default:
         return "";
     }
@@ -136,7 +136,7 @@ let M = function ({
     separator: !0,
     name: void 0
   }), g.push({
-    displayText: _$$t("community.comments.show_resolved"),
+    displayText: getI18nString("community.comments.show_resolved"),
     isChecked: l,
     name: P
   }));
@@ -162,7 +162,7 @@ let M = function ({
       items: g,
       parentRect: m,
       onSelectItem: e => {
-        sx("Comments Filter Changed", {
+        trackEventAnalytics("Comments Filter Changed", {
           thread_type: "community_preview",
           view: e.name
         });
@@ -176,7 +176,7 @@ let M = function ({
 var U = H;
 function $() {
   return jsx(Ex, {
-    text: _$$t("community.comments.creator"),
+    text: getI18nString("community.comments.creator"),
     color: zE.TOOLBAR,
     className: "creator_badge--creatorBadge--P5vsL"
   });
@@ -216,27 +216,27 @@ let ee = {
 };
 let ep = Ju(function (e) {
   let t = e.reportType === nI.REPORT_AND_HIDE;
-  let r = t ? _$$t("community.comments.report_and_hide_author_name_s_comment", {
+  let r = t ? getI18nString("community.comments.report_and_hide_author_name_s_comment", {
     authorName: e.comment.author.name
-  }) : _$$t("community.comments.report_author_name_s_comment", {
+  }) : getI18nString("community.comments.report_author_name_s_comment", {
     authorName: e.comment.author.name
   });
   let i = jsxs("p", {
     className: zC,
-    children: [t ? _$$t("community.comments.this_will_flag_the_comment_for_review_and_hide_it_for_everyone") : _$$t("community.comments.this_will_flag_the_comment_for_review"), " ", _$$t("community.comments.comment_author_will_not_be_notified", {
+    children: [t ? getI18nString("community.comments.this_will_flag_the_comment_for_review_and_hide_it_for_everyone") : getI18nString("community.comments.this_will_flag_the_comment_for_review"), " ", getI18nString("community.comments.comment_author_will_not_be_notified", {
       authorName: e.comment.author.name
-    }), " ", tx("community.comments.please_read_our_link_before_reporting", {
+    }), " ", renderI18nText("community.comments.please_read_our_link_before_reporting", {
       link: jsx(CY, {
         href: "https://help.figma.com/hc/articles/360038510573-Figma-Community-Guidelines",
         target: "_blank",
         trusted: !0,
-        children: tx("community.community_guidelines")
+        children: renderI18nText("community.community_guidelines")
       })
     })]
   });
   return jsx(yX, {
     confirmationTitle: r,
-    confirmText: _$$t("community.comments.report"),
+    confirmText: getI18nString("community.comments.report"),
     onConfirm: () => e.onReport(e.comment.id),
     destructive: !0,
     children: jsxs("div", {
@@ -256,25 +256,25 @@ function ex(e) {
     displayText: function (e) {
       switch (e) {
         case "Copy link":
-          return _$$t("community.comments.copy_link");
+          return getI18nString("community.comments.copy_link");
         case "Edit":
-          return _$$t("community.comments.edit");
+          return getI18nString("community.comments.edit");
         case "Delete":
-          return _$$t("community.comments.delete");
+          return getI18nString("community.comments.delete");
         case "Delete thread":
-          return _$$t("community.comments.delete_thread");
+          return getI18nString("community.comments.delete_thread");
         case "Follow":
-          return _$$t("community.follow.follow");
+          return getI18nString("community.follow.follow");
         case "Unfollow":
-          return _$$t("community.follow.unfollow");
+          return getI18nString("community.follow.unfollow");
         case "Restrict user's comments":
-          return _$$t("community.comments.restrict_user_s_comments");
+          return getI18nString("community.comments.restrict_user_s_comments");
         case "Unrestrict user's comments":
-          return _$$t("community.comments.unrestrict_user_s_comments");
+          return getI18nString("community.comments.unrestrict_user_s_comments");
         case "Report":
-          return _$$t("community.comments.report_comment");
+          return getI18nString("community.comments.report_comment");
         case "Reply":
-          return _$$t("community.comments.reply");
+          return getI18nString("community.comments.reply");
       }
     }(e)
   };
@@ -320,10 +320,10 @@ function ef(e) {
           }
         }));
         t(_$$F.enqueue({
-          message: _$$t("community.comments.restricted_this_user_s_comments"),
+          message: getI18nString("community.comments.restricted_this_user_s_comments"),
           type: "profile-restricted-change"
         }));
-        sx("comment_profile_restricted", {
+        trackEventAnalytics("comment_profile_restricted", {
           restricted_by_profile_id: r?.community_profile_id,
           restricted_profile_id: i,
           entry_point: "comment",
@@ -338,16 +338,16 @@ function ef(e) {
       profileId: r,
       onSuccess: () => {
         t(_$$F.enqueue({
-          message: _$$t("community.comments.unrestricted_this_user_s_comments"),
+          message: getI18nString("community.comments.unrestricted_this_user_s_comments"),
           type: "profile-restricted-change",
           button: {
-            text: _$$t("community.comments.undo"),
+            text: getI18nString("community.comments.undo"),
             action: () => {
               _(r, s);
             }
           }
         }));
-        sx("comment_profile_unrestricted", {
+        trackEventAnalytics("comment_profile_unrestricted", {
           unrestricted_by_profile_id: r,
           unrestricted_profile_id: s,
           comment_id: e.comment.id,
@@ -365,8 +365,8 @@ function ef(e) {
       type: _$$H,
       data: {
         onBlock: () => _(profileIdToAdminResourceAs, s),
-        confirmationTitle: _$$t("community.comments.remove_comment_and_restrict_user"),
-        confirmButtonText: _$$t("community.comments.remove_and_restrict")
+        confirmationTitle: getI18nString("community.comments.remove_comment_and_restrict_user"),
+        confirmButtonText: getI18nString("community.comments.remove_and_restrict")
       }
     }));
   };
@@ -566,7 +566,7 @@ function eI(e) {
     message: comment.message,
     messageMeta: comment.message_meta ?? [],
     onComplete: () => {
-      sx(_$$E, {
+      trackEventAnalytics(_$$E, {
         commentId: comment?.id,
         message: comment?.message,
         userId: author.primary_user_id,
@@ -646,10 +646,10 @@ function eI(e) {
                   })));
                   e.stopPropagation();
                 },
-                "aria-label": _$$t("community.comments.comment_actions"),
+                "aria-label": getI18nString("community.comments.comment_actions"),
                 htmlAttributes: {
                   "data-tooltip-type": Ib.TEXT,
-                  "data-tooltip": _$$t("community.comments.comment_actions")
+                  "data-tooltip": getI18nString("community.comments.comment_actions")
                 },
                 children: jsx(_$$J, {})
               })
@@ -870,7 +870,7 @@ function eR({
     className: "comments_list--emptyStateWrapper--utBdd",
     children: [jsx(eE, {}), jsx("div", {
       className: "comments_list--emptyStateHeader--72NAJ text--fontPos13--xW8hS text--_fontBase--QdLsd",
-      children: tx("community.comments.to_comment_switch_to_your_personal_profile")
+      children: renderI18nText("community.comments.to_comment_switch_to_your_personal_profile")
     })]
   }) : null;
 }
@@ -957,7 +957,7 @@ function eA(e) {
       ref: R,
       children: [N && jsx("div", {
         className: "comments_view--commentsHeader--RVPOY",
-        children: tx("community.resource_page.comments", {
+        children: renderI18nText("community.resource_page.comments", {
           numComments: jsx("span", {
             className: "comments_view--commentsHeaderCommentCount--W9ZLs",
             children: G || 0
@@ -970,7 +970,7 @@ function eA(e) {
         resourceType: z,
         resourceId: resource.id,
         onSuccessCallback: e => {
-          sx(_$$d, {
+          trackEventAnalytics(_$$d, {
             commentId: e?.id,
             message: e?.message,
             userId: o?.id,
@@ -984,7 +984,7 @@ function eA(e) {
         className: "comments_view--commentsListHeader--3uRw8 text--fontPos11--2LvXf text--_fontBase--QdLsd",
         children: [jsx("div", {
           className: "comments_view--numCommentsForResource--J0QKb",
-          children: (t = G || 0, _$$t("community.comments.pluralize_comments", {
+          children: (t = G || 0, getI18nString("community.comments.pluralize_comments", {
             numComments: t
           }))
         }), !A && !e.commentingIsRestricted && e.numCommentsForResource > 0 && jsx(M, {
@@ -993,7 +993,7 @@ function eA(e) {
         })]
       }), jsx(_$$a, {
         onIntersectionChange: e => {
-          p || (I(!0), sx("Community Comments Section Impressed", {
+          p || (I(!0), trackEventAnalytics("Community Comments Section Impressed", {
             resourceType: z,
             resourceId: resource.id
           }));
@@ -1033,7 +1033,7 @@ function eA(e) {
               children: jsx($n, {
                 variant: "link",
                 onClick: X,
-                children: tx("community.comments.load_more_comments")
+                children: renderI18nText("community.comments.load_more_comments")
               })
             })]
           })

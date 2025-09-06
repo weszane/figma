@@ -1,5 +1,5 @@
 import { K } from "../905/807535";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { j } from "../905/495564";
 import { X } from "../905/698965";
 export class $$o0 {
@@ -33,7 +33,7 @@ export class $$o0 {
       orgById
     } = t;
     let n = orgById[e.orgId];
-    return e.orgViewTab === X.HOME ? n ? n.name : "" : e.orgViewTab === X.PLUGINS ? _$$t("org_view.view_selector.plugins") : "Org";
+    return e.orgViewTab === X.HOME ? n ? n.name : "" : e.orgViewTab === X.PLUGINS ? getI18nString("org_view.view_selector.plugins") : "Org";
   }
   selectedViewToPath(e, t) {
     if ("org" !== e.view) return null;

@@ -1,7 +1,7 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { isDevEnvironment } from "../figma_app/169182";
 import { IT } from "../figma_app/566371";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { M4 } from "../905/713695";
 import { pluginAPIService } from "../905/3209";
 let d = ["1221187540287746170", "857346721138427857", "1056265616080331589", "1220512233196109878", "1220802563996996107", "842128343887142055", "747985167520967365", "1056467900248561542"];
@@ -22,7 +22,7 @@ let h = M4.Query({
       let e = await pluginAPIService.postPluginsBatch(t);
       return e?.data?.meta ?? [];
     } catch (e) {
-      $D(_$$e.DEVELOPER_TOOLS, e);
+      reportError(_$$e.DEVELOPER_TOOLS, e);
       return [];
     }
   },

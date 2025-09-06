@@ -4,7 +4,7 @@ import { f as _$$f } from "../905/949464";
 import { O as _$$O } from "../905/587457";
 import { N as _$$N } from "../905/301843";
 import { c as _$$c } from "../905/486270";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import u from "classnames";
 import { Ay } from "../905/612521";
 import { Rs } from "../figma_app/288654";
@@ -16,7 +16,7 @@ import { fy7 } from "../figma_app/43951";
 import { Ib } from "../905/129884";
 import { Rs as _$$Rs } from "../905/991973";
 import { N as _$$N2 } from "../905/438674";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { ex } from "../905/524523";
 import { J } from "../905/614223";
 import { N_ } from "../figma_app/637027";
@@ -52,14 +52,14 @@ let S = ex("apple_ui_kit", function () {
     trusted: !1,
     newTab: !0,
     href: "https://developer.apple.com/support/downloads/terms/apple-design-resources/Apple-Design-Resources-License-20230621-English.pdf",
-    children: tx("design_systems.preset_libraries.tooltip.apple_license_link")
+    children: renderI18nText("design_systems.preset_libraries.tooltip.apple_license_link")
   });
   return jsx("div", {
     className: _$$s.alignCenter.$,
     children: jsx("div", {
-      children: tx("design_systems.preset_libraries.tooltip.ui_kit_tooltip", {
+      children: renderI18nText("design_systems.preset_libraries.tooltip.ui_kit_tooltip", {
         licenseLink: e,
-        author: _$$t("design_systems.preset_libraries.tooltip.apple")
+        author: getI18nString("design_systems.preset_libraries.tooltip.apple")
       })
     })
   });
@@ -73,7 +73,7 @@ let C = ex("community_fragment_license_tooltip", function () {
       href: "https://creativecommons.org/licenses/by/4.0/",
       children: jsx("div", {
         className: _$$s.colorTextBrand.justifyCenter.hAuto.$,
-        children: tx("community.community_license")
+        children: renderI18nText("community.community_license")
       })
     })
   });
@@ -82,7 +82,7 @@ let C = ex("community_fragment_license_tooltip", function () {
     children: jsx(J, {
       mode: "dark",
       children: jsx("div", {
-        children: tx("community.community_license_text", {
+        children: renderI18nText("community.community_license_text", {
           licenseLink: e
         })
       })
@@ -94,14 +94,14 @@ let T = ex("figma_ui_kit", function () {
     trusted: !1,
     newTab: !0,
     href: "https://creativecommons.org/licenses/by/4.0/",
-    children: tx("design_systems.preset_libraries.tooltip.figma_license_link")
+    children: renderI18nText("design_systems.preset_libraries.tooltip.figma_license_link")
   });
   return jsx("div", {
     className: _$$s.flex.flexColumn.alignCenter.justifyCenter.$,
     children: jsx("div", {
-      children: tx("design_systems.preset_libraries.tooltip.ui_kit_tooltip", {
+      children: renderI18nText("design_systems.preset_libraries.tooltip.ui_kit_tooltip", {
         licenseLink: e,
-        author: _$$t("design_systems.preset_libraries.tooltip.figma")
+        author: getI18nString("design_systems.preset_libraries.tooltip.figma")
       })
     })
   });
@@ -111,14 +111,14 @@ let k = ex("google_ui_kit", function () {
     trusted: !1,
     newTab: !0,
     href: "https://creativecommons.org/licenses/by/4.0/",
-    children: tx("design_systems.preset_libraries.tooltip.google_license_link")
+    children: renderI18nText("design_systems.preset_libraries.tooltip.google_license_link")
   });
   return jsx("div", {
     className: _$$s.flex.flexColumn.alignCenter.justifyCenter.$,
     children: jsx("div", {
-      children: tx("design_systems.preset_libraries.tooltip.ui_kit_tooltip", {
+      children: renderI18nText("design_systems.preset_libraries.tooltip.ui_kit_tooltip", {
         licenseLink: e,
-        author: _$$t("design_systems.preset_libraries.tooltip.google")
+        author: getI18nString("design_systems.preset_libraries.tooltip.google")
       })
     })
   });
@@ -129,14 +129,14 @@ let N = ex("visual_assets_tooltip", function (e) {
     trusted: !1,
     target: "_blank",
     href: "https://creativecommons.org/licenses/by/4.0/",
-    children: tx("community.visual_assets.license_tooltip.license_link")
+    children: renderI18nText("community.visual_assets.license_tooltip.license_link")
   });
   return jsx("div", {
     className: _$$s.alignCenter.$,
-    children: e.authorName ? tx("community.visual_assets.license_tooltip_with_link", {
+    children: e.authorName ? renderI18nText("community.visual_assets.license_tooltip_with_link", {
       authorName: e.authorName,
       licenseLink: t
-    }) : tx("community.visual_assets.license_tooltip.no_author_name_with_link", {
+    }) : renderI18nText("community.visual_assets.license_tooltip.no_author_name_with_link", {
       licenseLink: t
     })
   });
@@ -164,7 +164,7 @@ export function $$L0({
     isFragment: a
   }) {
     let s = _$$M();
-    let o = zl.get(_$$Rs);
+    let o = atomStoreManager.get(_$$Rs);
     let l = to();
     let d = lW(l);
     let u = e && d[e];

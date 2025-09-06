@@ -16,7 +16,7 @@ import { oy, gZ, Go, LZ } from "../figma_app/964367";
 import { Pt } from "../figma_app/806412";
 import { MM, wv } from "../figma_app/236327";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { uQ } from "../figma_app/311375";
 import { Y5 } from "../figma_app/455680";
 import { BK } from "../905/848862";
@@ -144,7 +144,7 @@ export function $$A0({
   let el = Object.values(_).map(e => e.typescriptType).filter(e => null !== e).join("\n");
   return jsxs(Zk, {
     children: [jsxs(Wv, {
-      titleTx: tx("fullscreen.properties_panel.jsx_debug.title"),
+      titleTx: renderI18nText("fullscreen.properties_panel.jsx_debug.title"),
       children: [jsx(_$$K, {
         "aria-label": "Copy JSX",
         onClick: () => {

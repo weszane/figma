@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useDispatch } from "../vendor/514228";
 import { Ay } from "../905/612521";
 import { Uz, xH } from "../905/63728";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { AS } from "../905/156213";
 import { b as _$$b } from "../905/217163";
 import { A as _$$A } from "../905/456912";
@@ -28,7 +28,7 @@ export function $$f0({
   let E = useDispatch();
   let x = useMemo(() => {
     let n = {
-      text: _$$t("design_systems.assets_panel.insert"),
+      text: getI18nString("design_systems.assets_panel.insert"),
       shortcuts: _ ? [] : [{
         key: Uz.ENTER
       }],
@@ -45,7 +45,7 @@ export function $$f0({
   }, [_, f, i, e, t, I, close, E]);
   let S = useMemo(() => {
     let n = v ? {
-      text: _$$t("design_systems.instance_panel.swap_instance"),
+      text: getI18nString("design_systems.instance_panel.swap_instance"),
       shortcuts: _ ? [] : [{
         key: Uz.ENTER,
         modifier: [xH.ALT]
@@ -71,14 +71,14 @@ export function $$f0({
       let t = e.library_key === b?.libraryKey;
       let i = w.data;
       return t ? M$({
-        text: _$$t("design_systems.assets_panel.go_to_main"),
+        text: getI18nString("design_systems.assets_panel.go_to_main"),
         shortcuts: _ ? [] : [{
           key: Uz.ENTER,
           modifier: [xH.META]
         }],
         onAction: () => A(e.node_id)
       }, f) : i?.link ? M$({
-        text: "community" === i.type ? _$$t("design_systems.instance_panel.view_library_in_community") : _$$t("design_systems.assets_panel.go_to_main"),
+        text: "community" === i.type ? getI18nString("design_systems.instance_panel.view_library_in_community") : getI18nString("design_systems.assets_panel.go_to_main"),
         shortcuts: _ ? [] : [{
           key: Uz.ENTER,
           modifier: [xH.META]

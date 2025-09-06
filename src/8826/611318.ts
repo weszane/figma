@@ -6,12 +6,12 @@ import { _0v, glU, rXF, Egt, Qa7, RN9, hJs, AlE, Ez5 } from "../figma_app/763686
 import { l7 } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import { am } from "../figma_app/901889";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { Pt, rf, v_ } from "../figma_app/806412";
 import { E as _$$E } from "../905/277716";
 import { k as _$$k2 } from "../905/582200";
 import { B as _$$B } from "../905/714743";
-import { t as _$$t, tx as _$$tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Kl } from "../figma_app/175258";
 import { Y5 } from "../figma_app/455680";
 import { Zr } from "../figma_app/678782";
@@ -34,7 +34,7 @@ import { BP, hF, QK, sC, BG, Kw, X8 } from "../figma_app/100987";
 import { l as _$$l } from "../figma_app/603241";
 import { R as _$$R2 } from "../905/726507";
 import { getSingletonSceneGraph } from "../905/700578";
-import { fp, md, Xr } from "../figma_app/27355";
+import { useAtomValueAndSetter, useAtomWithSubscription, Xr } from "../figma_app/27355";
 import X from "../vendor/415955";
 import $ from "../vendor/128080";
 import { M as _$$M } from "../figma_app/634148";
@@ -173,7 +173,7 @@ function B(e) {
     value: c?.canvasSpacingBetweenItemsX,
     ...n,
     className: BP,
-    "data-tooltip": _$$t("fullscreen.properties_panel.transform_panel.list_spacing_x"),
+    "data-tooltip": getI18nString("fullscreen.properties_panel.transform_panel.list_spacing_x"),
     "data-tooltip-type": Ib.TEXT,
     dataTestId: "list-spacing-x",
     inputClassName: hF,
@@ -197,7 +197,7 @@ function B(e) {
     value: c?.canvasSpacingBetweenItemsY,
     ...n,
     className: h ? sC : BP,
-    "data-tooltip": _$$t("fullscreen.properties_panel.transform_panel.list_spacing_y"),
+    "data-tooltip": getI18nString("fullscreen.properties_panel.transform_panel.list_spacing_y"),
     "data-tooltip-type": Ib.TEXT,
     dataTestId: "list-spacing-y",
     inputClassName: hF,
@@ -208,7 +208,7 @@ function B(e) {
     })
   });
   return jsx(fn, {
-    leftLabel: _$$tx("properties.label.spacing"),
+    leftLabel: renderI18nText("properties.label.spacing"),
     leftInput: h ? m : x,
     rightInput: g && h ? x : null,
     icon: null,
@@ -288,7 +288,7 @@ var Z = $;
 function ea(e) {
   let t = Wr();
   let n = function () {
-    let [e, t] = fp(_$$Kl);
+    let [e, t] = useAtomValueAndSetter(_$$Kl);
     let n = Wr();
     let l = KH();
     let r = useMemo(() => ({
@@ -341,7 +341,7 @@ function ea(e) {
     }, [s, e, t]);
     return s;
   }();
-  let r = md(Md);
+  let r = useAtomWithSubscription(Md);
   let a = Fp();
   let o = useRef(null);
   let s = !e.visible || !tH(n);
@@ -370,13 +370,13 @@ function ea(e) {
   function g(e) {
     switch (e.minOrMaxWidthOrHeight) {
       case "minWidth":
-        return _$$tx("properties.label.min_width");
+        return renderI18nText("properties.label.min_width");
       case "maxWidth":
-        return _$$tx("properties.label.max_width");
+        return renderI18nText("properties.label.max_width");
       case "minHeight":
-        return _$$tx("properties.label.min_height");
+        return renderI18nText("properties.label.min_height");
       case "maxHeight":
-        return _$$tx("properties.label.max_height");
+        return renderI18nText("properties.label.max_height");
     }
   }
   n.width.min && (d++, p.push(t.width.min));
@@ -445,9 +445,9 @@ function ea(e) {
 function eo(e) {
   switch (e.widthOrHeight) {
     case "width":
-      return "min" === e.minOrMax ? _$$t("fullscreen.properties_panel.stack_panel.minmax.min_width_tt") : _$$t("fullscreen.properties_panel.stack_panel.minmax.max_width_tt");
+      return "min" === e.minOrMax ? getI18nString("fullscreen.properties_panel.stack_panel.minmax.min_width_tt") : getI18nString("fullscreen.properties_panel.stack_panel.minmax.max_width_tt");
     case "height":
-      return "min" === e.minOrMax ? _$$t("fullscreen.properties_panel.stack_panel.minmax.min_height_tt") : _$$t("fullscreen.properties_panel.stack_panel.minmax.max_height_tt");
+      return "min" === e.minOrMax ? getI18nString("fullscreen.properties_panel.stack_panel.minmax.min_height_tt") : getI18nString("fullscreen.properties_panel.stack_panel.minmax.max_height_tt");
   }
 }
 function es(e) {
@@ -463,7 +463,7 @@ function es(e) {
   let u = useRef(0);
   let h = useRef(new Map());
   let g = Xr(Md);
-  let [m, x] = fp(_$$Kl);
+  let [m, x] = useAtomValueAndSetter(_$$Kl);
   let f = [];
   s !== minMaxApi.value && f.push(vC);
   f.push(Bn);
@@ -590,9 +590,9 @@ function es(e) {
         placeholder: function (e) {
           switch (e.widthOrHeight) {
             case "width":
-              return "min" === e.minOrMax ? _$$t("fullscreen.properties_panel.stack_panel.minmax.min_width_short") : _$$t("fullscreen.properties_panel.stack_panel.minmax.max_width_short");
+              return "min" === e.minOrMax ? getI18nString("fullscreen.properties_panel.stack_panel.minmax.min_width_short") : getI18nString("fullscreen.properties_panel.stack_panel.minmax.max_width_short");
             case "height":
-              return "min" === e.minOrMax ? _$$t("fullscreen.properties_panel.stack_panel.minmax.min_height_short") : _$$t("fullscreen.properties_panel.stack_panel.minmax.max_height_short");
+              return "min" === e.minOrMax ? getI18nString("fullscreen.properties_panel.stack_panel.minmax.min_height_short") : getI18nString("fullscreen.properties_panel.stack_panel.minmax.max_height_short");
           }
         }(minMaxApi),
         recordingKey: e.recordingKey,
@@ -624,7 +624,7 @@ let ev = _$$ex("autolayout_v3_migration_info", function (e) {
       htmlAttributes: {
         onMouseDown: n
       },
-      children: _$$tx("fullscreen.properties_panel.migration_tooltip_learn_more")
+      children: renderI18nText("fullscreen.properties_panel.migration_tooltip_learn_more")
     })]
   });
 }, e => ({
@@ -762,7 +762,7 @@ function eL({
   return jsx("button", {
     className: "alignment_view_v4_ui3--baselineControls--xazGW alignment_view_v4_ui3--_centered--MV2if",
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": _$$t("fullscreen.properties_panel.stack_panel.remove_baseline_align"),
+    "data-tooltip": getI18nString("fullscreen.properties_panel.stack_panel.remove_baseline_align"),
     onClick: e,
     children: jsx("div", {
       className: "alignment_view_v4_ui3--baselineControlLine--6BBmA"
@@ -785,31 +785,31 @@ function eO({
     isUi3: l
   }) {
     return e && t ? l ? [{
-      tooltip: _$$t("fullscreen.properties_panel.stack_panel.align_text_baseline"),
+      tooltip: getI18nString("fullscreen.properties_panel.stack_panel.align_text_baseline"),
       below: !0
-    }] : [_$$t("fullscreen.properties_panel.stack_panel.align_baseline")] : e ? [{
-      tooltip: _$$t("fullscreen.properties_panel.stack_panel.align_left_baseline"),
+    }] : [getI18nString("fullscreen.properties_panel.stack_panel.align_baseline")] : e ? [{
+      tooltip: getI18nString("fullscreen.properties_panel.stack_panel.align_left_baseline"),
       below: l
     }, {
-      tooltip: _$$t("fullscreen.properties_panel.stack_panel.align_center_baseline"),
+      tooltip: getI18nString("fullscreen.properties_panel.stack_panel.align_center_baseline"),
       below: l
     }, {
-      tooltip: _$$t("fullscreen.properties_panel.stack_panel.align_right_baseline"),
+      tooltip: getI18nString("fullscreen.properties_panel.stack_panel.align_right_baseline"),
       below: l
-    }] : t ? "HORIZONTAL" === n ? l ? [_$$t("fullscreen.properties_panel.stack_panel.align_top"), _$$t("fullscreen.properties_panel.stack_panel.align_center"), {
-      tooltip: _$$t("fullscreen.properties_panel.stack_panel.align_bottom"),
+    }] : t ? "HORIZONTAL" === n ? l ? [getI18nString("fullscreen.properties_panel.stack_panel.align_top"), getI18nString("fullscreen.properties_panel.stack_panel.align_center"), {
+      tooltip: getI18nString("fullscreen.properties_panel.stack_panel.align_bottom"),
       below: !0
-    }] : [_$$t("fullscreen.properties_panel.stack_panel.align_auto_top_gap"), _$$t("fullscreen.properties_panel.stack_panel.align_auto_center_gap"), {
-      tooltip: _$$t("fullscreen.properties_panel.stack_panel.align_auto_bottom_gap"),
+    }] : [getI18nString("fullscreen.properties_panel.stack_panel.align_auto_top_gap"), getI18nString("fullscreen.properties_panel.stack_panel.align_auto_center_gap"), {
+      tooltip: getI18nString("fullscreen.properties_panel.stack_panel.align_auto_bottom_gap"),
       below: !0
-    }] : l ? [_$$t("fullscreen.properties_panel.stack_panel.align_left"), _$$t("fullscreen.properties_panel.stack_panel.align_center"), _$$t("fullscreen.properties_panel.stack_panel.align_right")] : [_$$t("fullscreen.properties_panel.stack_panel.align_auto_left_gap"), _$$t("fullscreen.properties_panel.stack_panel.align_auto_center_gap"), _$$t("fullscreen.properties_panel.stack_panel.align_auto_right_gap")] : [_$$t("fullscreen.properties_panel.stack_panel.align_top_left"), _$$t("fullscreen.properties_panel.stack_panel.align_top_center"), _$$t("fullscreen.properties_panel.stack_panel.align_top_right"), _$$t("fullscreen.properties_panel.stack_panel.align_left"), _$$t("fullscreen.properties_panel.stack_panel.align_center"), _$$t("fullscreen.properties_panel.stack_panel.align_right"), {
-      tooltip: _$$t("fullscreen.properties_panel.stack_panel.align_bottom_left"),
-      below: !0
-    }, {
-      tooltip: _$$t("fullscreen.properties_panel.stack_panel.align_bottom_center"),
+    }] : l ? [getI18nString("fullscreen.properties_panel.stack_panel.align_left"), getI18nString("fullscreen.properties_panel.stack_panel.align_center"), getI18nString("fullscreen.properties_panel.stack_panel.align_right")] : [getI18nString("fullscreen.properties_panel.stack_panel.align_auto_left_gap"), getI18nString("fullscreen.properties_panel.stack_panel.align_auto_center_gap"), getI18nString("fullscreen.properties_panel.stack_panel.align_auto_right_gap")] : [getI18nString("fullscreen.properties_panel.stack_panel.align_top_left"), getI18nString("fullscreen.properties_panel.stack_panel.align_top_center"), getI18nString("fullscreen.properties_panel.stack_panel.align_top_right"), getI18nString("fullscreen.properties_panel.stack_panel.align_left"), getI18nString("fullscreen.properties_panel.stack_panel.align_center"), getI18nString("fullscreen.properties_panel.stack_panel.align_right"), {
+      tooltip: getI18nString("fullscreen.properties_panel.stack_panel.align_bottom_left"),
       below: !0
     }, {
-      tooltip: _$$t("fullscreen.properties_panel.stack_panel.align_bottom_right"),
+      tooltip: getI18nString("fullscreen.properties_panel.stack_panel.align_bottom_center"),
+      below: !0
+    }, {
+      tooltip: getI18nString("fullscreen.properties_panel.stack_panel.align_bottom_right"),
       below: !0
     }];
   }({
@@ -1088,8 +1088,8 @@ let e$ = memo(function (e) {
 });
 let tn = "grid-onboarding-key";
 function tl() {
-  let e = md(Fy);
-  let t = md(mp);
+  let e = useAtomWithSubscription(Fy);
+  let t = useAtomWithSubscription(mp);
   let {
     show,
     isShowing,
@@ -1108,7 +1108,7 @@ function tl() {
   };
   return jsx(rq, {
     arrowPosition: F_.RIGHT_BODY,
-    description: _$$tx("fullscreen.grid_onboarding.body"),
+    description: renderI18nText("fullscreen.grid_onboarding.body"),
     disableHighlight: !0,
     isShowing,
     media: jsx(_$$y, {
@@ -1120,13 +1120,13 @@ function tl() {
     onTargetLost: a,
     pointToLeftEdge: !0,
     primaryCta: {
-      label: _$$tx("general.got_it"),
+      label: renderI18nText("general.got_it"),
       type: "button",
       onClick: a,
       ctaTrackingDescriptor: _$$c.GOT_IT
     },
     secondaryCta: {
-      label: _$$tx("general.learn_more"),
+      label: renderI18nText("general.learn_more"),
       type: "link",
       href: "https://help.figma.com/hc/articles/31289469907863",
       ctaTrackingDescriptor: _$$c.LEARN_MORE
@@ -1134,13 +1134,13 @@ function tl() {
     targetKey: tn,
     title: jsx("p", {
       "data-testid": "grid-onboarding-title",
-      children: _$$tx("fullscreen.grid_onboarding.title")
+      children: renderI18nText("fullscreen.grid_onboarding.title")
     }),
     trackingContextName: "Grid Onboarding"
   });
 }
 function ta() {
-  return _$$R(e => {
+  return selectWithShallowEqual(e => {
     let {
       mirror: {
         appModel,
@@ -1225,7 +1225,7 @@ function td({
         },
         recordingKey: "layout",
         legend: jsx(_$$q3, {
-          children: _$$t("fullscreen.properties_panel.stack_panel.layout")
+          children: getI18nString("fullscreen.properties_panel.stack_panel.layout")
         }),
         htmlAttributes: {
           "data-onboarding-key": tn
@@ -1236,21 +1236,21 @@ function td({
           icon: jsx(e$, {
             "data-testid": "Icon24AlLayoutGridNoneSmall"
           }),
-          "aria-label": _$$t("fullscreen.properties_panel.stack_panel.freeform")
+          "aria-label": getI18nString("fullscreen.properties_panel.stack_panel.freeform")
         }), jsx(_$$c$, {
           value: "VERTICAL",
           readonly: !o || isStackControlReadOnly || void 0,
           icon: jsx(_$$C, {
             "data-testid": "Icon24AlLayoutGridVerticalSmall"
           }),
-          "aria-label": _$$t("fullscreen.properties_panel.stack_panel.vertical")
+          "aria-label": getI18nString("fullscreen.properties_panel.stack_panel.vertical")
         }), jsx(_$$c$, {
           value: "HORIZONTAL",
           readonly: !o || isStackControlReadOnly || void 0,
           icon: jsx(_$$g, {
             "data-testid": "Icon24AlLayoutGridHorizontalSmall"
           }),
-          "aria-label": _$$t("fullscreen.properties_panel.stack_panel.horizontal")
+          "aria-label": getI18nString("fullscreen.properties_panel.stack_panel.horizontal")
         }), jsx(_$$c$, {
           value: "GRID",
           readonly: !o || !a || isGridControlReadOnly || void 0,
@@ -1259,7 +1259,7 @@ function td({
             svg: _$$A2,
             dataTestId: "gridLayoutIcon"
           }),
-          "aria-label": _$$t("fullscreen.properties_panel.stack_panel.grid"),
+          "aria-label": getI18nString("fullscreen.properties_panel.stack_panel.grid"),
           htmlAttributes: {
             "data-tooltip": tp,
             "data-tooltip-type": Ib.SPECIAL
@@ -1269,7 +1269,7 @@ function td({
       icon: jsx(tu, {
         recordingKey: e
       }),
-      label: _$$t("fullscreen.properties_panel.grid.flow")
+      label: getI18nString("fullscreen.properties_panel.grid.flow")
     }), jsx(_$$p, {
       children: jsx(tl, {})
     })]
@@ -1283,7 +1283,7 @@ function tu(e) {
   let c = useSelector(e => aW(void 0, e.mirror.selectionProperties, void 0));
   return "HORIZONTAL" !== t ? null : jsx(_$$f, {
     variant: "highlighted",
-    "aria-label": _$$t("fullscreen.properties_panel.stack_panel.wrap"),
+    "aria-label": getI18nString("fullscreen.properties_panel.stack_panel.wrap"),
     checked: "WRAP" === n,
     disabled: !c,
     onIcon: jsx(_$$B, {
@@ -1318,8 +1318,8 @@ let tp = _$$ex("grid_beta_special_tooltip", function ({
     })]
   });
 }, e => ({
-  gridString: _$$t("fullscreen.properties_panel.stack_panel.grid"),
-  betaString: _$$t("general.beta")
+  gridString: getI18nString("fullscreen.properties_panel.stack_panel.grid"),
+  betaString: getI18nString("general.beta")
 }));
 function t_({
   recordingKey: e
@@ -1350,10 +1350,10 @@ function t_({
     },
     "aria-expanded": t,
     actionOnPointerDown: !0,
-    "aria-label": _$$t("fullscreen.properties_panel.stack_panel.independent_paddings"),
+    "aria-label": getI18nString("fullscreen.properties_panel.stack_panel.independent_paddings"),
     recordingKey: Pt(e, "showAllPaddingControls"),
     htmlAttributes: {
-      "data-tooltip": _$$t("fullscreen.properties_panel.stack_panel.independent_paddings"),
+      "data-tooltip": getI18nString("fullscreen.properties_panel.stack_panel.independent_paddings"),
       "data-tooltip-type": Ib.TEXT,
       "data-test-id": "stack-padding-toggle"
     },
@@ -1415,7 +1415,7 @@ function tx({
       onClick: r,
       recordingKey: i
     }),
-    leftLabel: _$$tx("fullscreen.properties_panel.section_autoLayout.label_padding"),
+    leftLabel: renderI18nText("fullscreen.properties_panel.section_autoLayout.label_padding"),
     rightLabel: null,
     showAllPaddingControls: e,
     showSinglePaddingControl: t,
@@ -1465,7 +1465,7 @@ function tw(e) {
   let {
     propertiesPanelShouldShowRemoveAutoLayout
   } = ta();
-  let n = propertiesPanelShouldShowRemoveAutoLayout ? _$$t("fullscreen.properties_panel.stack_panel.remove_auto_layout") : _$$t("fullscreen.properties_panel.stack_panel.use_auto_layout");
+  let n = propertiesPanelShouldShowRemoveAutoLayout ? getI18nString("fullscreen.properties_panel.stack_panel.remove_auto_layout") : getI18nString("fullscreen.properties_panel.stack_panel.use_auto_layout");
   let {
     actionEnabledStackSelection,
     actionEnabledUnstackSelection
@@ -1521,7 +1521,7 @@ function tN({
   recordingKey: i,
   disabled: a = !1
 }) {
-  let o = e ? _$$tx("fullscreen.properties_panel.stack_panel.auto_layout") : _$$tx("fullscreen.properties_panel.stack_panel.layout");
+  let o = e ? renderI18nText("fullscreen.properties_panel.stack_panel.auto_layout") : renderI18nText("fullscreen.properties_panel.stack_panel.layout");
   let s = kl("numSelectedByType");
   let c = !!s && Kl(s, ["CODE_INSTANCE", "CODE_LAYER", "CODE_COMPONENT", "CODE_FILE", "CODE_LIBRARY"]);
   let d = useSelector(e => aW(void 0, e.mirror.selectionProperties, void 0));
@@ -1603,11 +1603,11 @@ let tI = memo(function ({
     children: [C && O, A, b, L, R, I]
   }) : showMigrationUi ? jsx(tE, {}) : jsxs(Fragment, {
     children: [O, b, L, E && jsx(iZ, {
-      leftLabel: _$$tx("fullscreen.properties_panel.section_autoLayout.label_alignment"),
+      leftLabel: renderI18nText("fullscreen.properties_panel.section_autoLayout.label_alignment"),
       leftInput: jsx(ez, {
         recordingKey: Pt(n, "alignment")
       }),
-      rightLabel: _$$tx("fullscreen.properties_panel.section_autoLayout.label_gap"),
+      rightLabel: renderI18nText("fullscreen.properties_panel.section_autoLayout.label_gap"),
       topRightInput: jsx(tR, {
         recordingKey: n
       }),
@@ -1633,7 +1633,7 @@ function tE() {
   let {
     isOrInInstance,
     containsComponents
-  } = _$$R(e => {
+  } = selectWithShallowEqual(e => {
     let {
       isInstanceSelected,
       isInstanceSublayerSelected,
@@ -1667,24 +1667,24 @@ function tE() {
     className: A5,
     children: [jsx("span", {
       className: Yv,
-      children: _$$tx("fullscreen.properties_panel.stack_panel.auto_layout_updated")
+      children: renderI18nText("fullscreen.properties_panel.stack_panel.auto_layout_updated")
     }), jsx("span", {
       className: QP,
       children: jsx($n, {
         variant: "ghost",
         onClick: g,
-        children: _$$tx("fullscreen.properties_panel.stack_panel.undo")
+        children: renderI18nText("fullscreen.properties_panel.stack_panel.undo")
       })
     })]
   });
   let x = AlE.getActiveCanvas();
   let f = Qa7.isOrInInstanceWithDeprecatedAlignmentOverride(x);
-  e = isOrInInstance ? f ? _$$t("fullscreen.properties_panel.stack_panel.tooltip_old_version_instance_overrides") : _$$t("fullscreen.properties_panel.stack_panel.tooltip_old_version_instance") : containsComponents ? _$$t("fullscreen.properties_panel.stack_panel.tooltip_old_version_components") : _$$t("fullscreen.properties_panel.stack_panel.tooltip_old_version");
+  e = isOrInInstance ? f ? getI18nString("fullscreen.properties_panel.stack_panel.tooltip_old_version_instance_overrides") : getI18nString("fullscreen.properties_panel.stack_panel.tooltip_old_version_instance") : containsComponents ? getI18nString("fullscreen.properties_panel.stack_panel.tooltip_old_version_components") : getI18nString("fullscreen.properties_panel.stack_panel.tooltip_old_version");
   return jsxs(fI, {
     className: A5,
     children: [jsxs("div", {
       className: Yv,
-      children: [_$$tx("fullscreen.properties_panel.stack_panel.new_auto_layout_version_available"), jsx(_$$B, {
+      children: [renderI18nText("fullscreen.properties_panel.stack_panel.new_auto_layout_version_available"), jsx(_$$B, {
         className: zp,
         svg: _$$A4,
         "data-tooltip-type": Ib.SPECIAL,
@@ -1699,7 +1699,7 @@ function tE() {
         variant: "secondary",
         onClick: h,
         disabled: isOrInInstance && !f,
-        children: _$$tx("fullscreen.properties_panel.stack_panel.update")
+        children: renderI18nText("fullscreen.properties_panel.stack_panel.update")
       })
     })]
   });

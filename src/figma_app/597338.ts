@@ -4,11 +4,11 @@ import { useDispatch, useSelector } from "../vendor/514228";
 import { L as _$$L } from "../905/704296";
 import { AWq, Liw } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { A } from "../905/920142";
 import { qc } from "../figma_app/858013";
 import { B } from "../905/714743";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { cU } from "../figma_app/841351";
 import { Ib } from "../905/129884";
 import { Ro } from "../figma_app/805373";
@@ -18,13 +18,13 @@ let E = "diffing_compare_summary--comparingDetailsText--WlaVi";
 export function $$b1(e, t = !1) {
   let r = A(new Date());
   let n = A(e);
-  return n.isSame(r, "day") ? _$$t("collaboration.feedback.time_hour_minutes", {
+  return n.isSame(r, "day") ? getI18nString("collaboration.feedback.time_hour_minutes", {
     time: n.toDate()
-  }) : n.isSame(r, "year") ? _$$t("collaboration.feedback.time_date_minutes_without_year", {
+  }) : n.isSame(r, "year") ? getI18nString("collaboration.feedback.time_date_minutes_without_year", {
     time: n.toDate()
-  }) : t ? _$$t("collaboration.feedback.time_date_minutes", {
+  }) : t ? getI18nString("collaboration.feedback.time_date_minutes", {
     time: n.toDate()
-  }) : _$$t("collaboration.feedback.date", {
+  }) : getI18nString("collaboration.feedback.date", {
     time: n.toDate()
   });
 }
@@ -63,7 +63,7 @@ export function $$S0({
   });
   O && C.push(jsx("span", {
     className: "diffing_compare_summary--editorsOverflowText--JcgMo",
-    children: tx("collaboration.feedback.compare_changes_overflow_editors", {
+    children: renderI18nText("collaboration.feedback.compare_changes_overflow_editors", {
       numAddlEditors: w - 6
     })
   }));
@@ -89,13 +89,13 @@ export function $$S0({
     t.stopPropagation();
     setTimeout(() => {
       r(cU());
-      sx("Version History Compare Stop", {
+      trackEventAnalytics("Version History Compare Stop", {
         fromVersionId: e
       });
     }, 300);
   }, [r, e]);
   let P = useCallback(t => {
-    A || "Escape" !== t.key || (r(cU()), sx("Version History Compare Stop", {
+    A || "Escape" !== t.key || (r(cU()), trackEventAnalytics("Version History Compare Stop", {
       fromVersionId: e
     }));
   }, [r, A, e]);
@@ -108,11 +108,11 @@ export function $$S0({
         className: "diffing_compare_summary--comparingDetailsHeaderContainer--FgJvD",
         children: [jsx("div", {
           className: "diffing_compare_summary--comparingDetailsHeaderText--CToWP",
-          children: tx("collaboration.feedback.compare_changes_m2")
+          children: renderI18nText("collaboration.feedback.compare_changes_m2")
         }), jsx(K0, {
           onClick: L,
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": _$$t("collaboration.feedback.close_tooltip"),
+          "data-tooltip": getI18nString("collaboration.feedback.close_tooltip"),
           recordingKey: "button-close",
           children: jsx(_$$L, {})
         })]
@@ -132,19 +132,19 @@ export function $$S0({
               className: "diffing_compare_summary--arrowLeftRightIcon--XdePz"
             }), jsx("div", {
               className: "diffing_compare_summary--currentText--FoiBm",
-              children: tx("collaboration.feedback.current_file")
+              children: renderI18nText("collaboration.feedback.current_file")
             })]
           }) : null;
         }(c), 0 === N && jsx("div", {
           className: E,
-          children: tx("collaboration.feedback.no_visible_changes")
+          children: renderI18nText("collaboration.feedback.no_visible_changes")
         }), N > 0 && w > 0 && jsxs(Fragment, {
           children: [C.length > 0 && jsx("div", {
             className: "diffing_compare_summary--editorAvatarsContainer--vdLWd",
             children: C
           }), jsx("div", {
             className: E,
-            children: tx("collaboration.feedback.num_editors_of_changes", {
+            children: renderI18nText("collaboration.feedback.num_editors_of_changes", {
               numEditors: w
             })
           })]

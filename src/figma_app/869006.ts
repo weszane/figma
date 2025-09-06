@@ -5,7 +5,7 @@ import { getFeatureFlags } from "../905/601108";
 import { Rs } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { kt } from "../figma_app/858013";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { V as _$$V, $ as _$$$ } from "../905/355181";
 import { tc } from "../905/15667";
 import { m0 } from "../figma_app/976749";
@@ -30,8 +30,8 @@ import { YJ } from "../figma_app/297957";
 import { c as _$$c } from "../905/370443";
 import { aV } from "../figma_app/722362";
 import { e0 } from "../905/696396";
-import { md } from "../figma_app/27355";
-import { az } from "../905/449184";
+import { useAtomWithSubscription } from "../figma_app/27355";
+import { analyticsEventManager } from "../905/449184";
 import { n2 } from "../figma_app/478006";
 import { D6 } from "../figma_app/465071";
 import { i as _$$i } from "../905/46262";
@@ -57,13 +57,13 @@ function C(e) {
 }
 function w(e) {
   if (e.hideViewOnlyText && !e.hasPendingRequest) return null;
-  let t = e.hasPendingRequest ? e.pendingToolTipMessage : e.isRestrictedView ? _$$t("fullscreen.filename_view.viewers-cannot-copy-or-share") : void 0;
+  let t = e.hasPendingRequest ? e.pendingToolTipMessage : e.isRestrictedView ? getI18nString("fullscreen.filename_view.viewers-cannot-copy-or-share") : void 0;
   return jsx(C, {
     variant: e.variant,
     svg: e.isRestrictedView && !e.hasPendingRequest ? _$$A : void 0,
     toolTipMessage: t,
     onboardingKey: e.isDisabledView ? "rcs-figjam-disabled-by-org" : void 0,
-    text: _$$t(e.hasPendingRequest ? "fullscreen.toolbar.request.request_sent" : "fullscreen.filename_view.view-only")
+    text: getI18nString(e.hasPendingRequest ? "fullscreen.toolbar.request.request_sent" : "fullscreen.filename_view.view-only")
   });
 }
 w.displayName = "ViewOnlyText";
@@ -84,7 +84,7 @@ function R({
   let g = async () => {
     (await _$$E(l, e)) && p(!0);
   };
-  let E = tx("fullscreen.toolbar.request.ask_to_edit");
+  let E = renderI18nText("fullscreen.toolbar.request.ask_to_edit");
   return jsx(fu, {
     name: "Edit Request Button Shown",
     trackingOptions: m,
@@ -104,7 +104,7 @@ function R({
         "data-onboarding-key": "request_edit_view_onboarding_key",
         children: jsx(_$$V, {
           "aria-live": "polite",
-          "data-tooltip": _$$t("fullscreen.toolbar.pending-edit-request-tooltip"),
+          "data-tooltip": getI18nString("fullscreen.toolbar.pending-edit-request-tooltip"),
           "data-tooltip-show-above": !0,
           "data-tooltip-timeout-delay": 15,
           "data-tooltip-type": Ib.TEXT,
@@ -138,8 +138,8 @@ function V(e) {
   });
   let d = s();
   let p = d ? e.oneClickHandler : e.onClick;
-  let _ = a ? _$$t("fullscreen.toolbar.request.ask_to_edit") : _$$t("fullscreen.toolbar.start_editing");
-  d && (_ = o ? _$$t("1_click_expansion.upgrade_to_full_seat") : _$$t("1_click_expansion.request_full_seat"));
+  let _ = a ? getI18nString("fullscreen.toolbar.request.ask_to_edit") : getI18nString("fullscreen.toolbar.start_editing");
+  d && (_ = o ? getI18nString("1_click_expansion.upgrade_to_full_seat") : getI18nString("1_click_expansion.request_full_seat"));
   (function ({
     buttonLabel: e,
     licenseType: t,
@@ -148,9 +148,9 @@ function V(e) {
     let n = useRef(!1);
     let a = D6("useTrackUsersViewingViewOnlyToolbeltBanner").unwrapOr(null);
     let s = a?.userId;
-    let o = md(n2);
+    let o = useAtomWithSubscription(n2);
     useEffect(() => {
-      !n.current && o && s && (n.current = !0, az.trackDefinedEvent("activation.users_viewing_view_only_toolbelt_banner_with_plan_request_upgrade_view", {
+      !n.current && o && s && (n.current = !0, analyticsEventManager.trackDefinedEvent("activation.users_viewing_view_only_toolbelt_banner_with_plan_request_upgrade_view", {
         licenseType: t,
         userId: s,
         buttonLabel: e,
@@ -195,7 +195,7 @@ function z(e) {
     children: jsx(C, {
       variant: e.variant,
       toolTipMessage: e.pendingToolTipMessage,
-      text: _$$t("fullscreen.filename_view.view-only")
+      text: getI18nString("fullscreen.filename_view.view-only")
     })
   });
 }
@@ -207,7 +207,7 @@ function J({
 }) {
   let a = {
     type: "button",
-    label: tx("fullscreen.toolbar.send_reminder"),
+    label: renderI18nText("fullscreen.toolbar.send_reminder"),
     onClick: i,
     ctaTrackingDescriptor: _$$c.NUDGE_ACCOUNT_TYPE_REQUEST
   };
@@ -216,7 +216,7 @@ function J({
     clickOutsideToHide: !0,
     description: jsx("div", {
       className: _$$s.pr16.$,
-      children: _$$t("fullscreen.toolbar.if_you_re_still_waiting_to_edit_you_can_send_your_admins_a_reminder_to_review_your_request")
+      children: getI18nString("fullscreen.toolbar.if_you_re_still_waiting_to_edit_you_can_send_your_admins_a_reminder_to_review_your_request")
     }),
     disableHighlight: !0,
     emphasized: !0,
@@ -249,14 +249,14 @@ function Z(e) {
   useEffect(() => {
     disableAutoAppearingTooltips || s(showNudgeEligibility);
   }, [disableAutoAppearingTooltips, showNudgeEligibility]);
-  let _ = _$$t("fullscreen.toolbar.we_ve_sent_your_request_to_your_team_s_admins_we_ll_let_you_know_when_they_respond");
-  let h = _$$t("fullscreen.toolbar.we_ve_sent_your_admins_a_reminder_we_ll_let_you_know_as_soon_as_they_respond");
+  let _ = getI18nString("fullscreen.toolbar.we_ve_sent_your_request_to_your_team_s_admins_we_ll_let_you_know_when_they_respond");
+  let h = getI18nString("fullscreen.toolbar.we_ve_sent_your_admins_a_reminder_we_ll_let_you_know_as_soon_as_they_respond");
   let m = requestHasBeenNudged ? h : _;
   let g = useMemo(() => {
     if (!a && !requestCanBeNudged) return m;
   }, [m, requestCanBeNudged, a]);
   let f = "account-request-type-nudge-key";
-  let E = tx("fullscreen.toolbar.request.request_sent");
+  let E = renderI18nText("fullscreen.toolbar.request.request_sent");
   return jsx(fu, {
     name: e0.REQUEST_SENT_NUDGE_STATUS,
     children: jsxs("div", {
@@ -331,10 +331,10 @@ export function $$et3(e) {
     let e = t.org?.inviteWhitelist?.guestInviteSetting === Gv.REQUIRE_APPROVAL && !!F.data.orgJoinRequest;
     let i = F.data.file?.fileRoleRequests.find(e => e.requesterUserId === r?.id);
     j?.updateHasPendingEditRequest && j.updateHasPendingEditRequest(!!i);
-    let a = _$$t("fullscreen.toolbar.pending-org-join-request-tooltip", {
+    let a = getI18nString("fullscreen.toolbar.pending-org-join-request-tooltip", {
       orgName: d || ""
     });
-    let o = _$$t("fullscreen.toolbar.pending-edit-request-tooltip");
+    let o = getI18nString("fullscreen.toolbar.pending-edit-request-tooltip");
     let l = e ? a : i ? o : void 0;
     if (null === t.editorType) return null;
     if (getIsUpgradeHandlerLoading()) return {
@@ -410,7 +410,7 @@ export function $$et3(e) {
         };
         if (i) return {
           type: "pendingEditRoleRequest",
-          pendingToolTipMessage: m ? _$$t("fullscreen.toolbar.we_ve_sent_your_request_to_the_file_s_owner_you_can_edit_other_files_up_to_3_days_while_admins_review_your_request") : _$$t("fullscreen.toolbar.we_ve_sent_your_request_to_the_file_s_owner_you_can_create_and_edit_other_files_in_the_meantime")
+          pendingToolTipMessage: m ? getI18nString("fullscreen.toolbar.we_ve_sent_your_request_to_the_file_s_owner_you_can_edit_other_files_up_to_3_days_while_admins_review_your_request") : getI18nString("fullscreen.toolbar.we_ve_sent_your_request_to_the_file_s_owner_you_can_create_and_edit_other_files_in_the_meantime")
         };
         if (u) break;
         return {
@@ -460,14 +460,14 @@ function ei({
       return jsx("div", {
         className: "view_permission--editButtonLoading--T6ehY",
         children: jsxs(_$$$, {
-          "aria-label": _$$t("fullscreen.toolbar.edit-file-button-loading-aria-label"),
+          "aria-label": getI18nString("fullscreen.toolbar.edit-file-button-loading-aria-label"),
           disabled: !0,
           variant: t,
           recordingKey: r,
           width: "fill-parent",
           children: [jsx("span", {
             className: "view_permission--editButtonTextHidden--QK3P3",
-            children: _$$t("fullscreen.toolbar.edit-file-button")
+            children: getI18nString("fullscreen.toolbar.edit-file-button")
           }), jsx(kt, {
             className: "view_permission--editButtonLoadingSpinner--itMwO"
           })]

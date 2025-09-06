@@ -1,5 +1,5 @@
 import { Ez5 } from "../figma_app/763686";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { localStorageRef } from "../905/657224";
 import { Y5 } from "../figma_app/455680";
 import { Mo } from "../905/414069";
@@ -27,33 +27,33 @@ let u = [{
     let i = new Date(t.lastTriggeredTimestamp);
     return (new Date().getTime() - i.getTime()) / 864e5 > 30 ? (localStorageRef.removeItem(s), !0) : !(t.count >= 5);
   }() ? {
-    message: t("visual_bell.show_outlines_visible")
+    message: getI18nString("visual_bell.show_outlines_visible")
   } : {
-    message: t("visual_bell.show_outlines_visible"),
+    message: getI18nString("visual_bell.show_outlines_visible"),
     button: {
-      text: t("visual_bell.cancel"),
+      text: getI18nString("visual_bell.cancel"),
       action: e => {
         e.stopPropagation();
         Y5.triggerAction("toggle-outlines");
       }
     }
   } : {
-    message: t("visual_bell.show_outlines_hidden")
+    message: getI18nString("visual_bell.show_outlines_hidden")
   }
 }, {
   getObservable: () => $$c0().showOutlineHiddenLayers,
   getMessage: e => ({
-    message: e ? t("visual_bell.outlines_show_hidden_layers") : t("visual_bell.outlines_hide_hidden_layers")
+    message: e ? getI18nString("visual_bell.outlines_show_hidden_layers") : getI18nString("visual_bell.outlines_hide_hidden_layers")
   })
 }, {
   getObservable: () => $$c0().showOutlineObjectBounds,
   getMessage: e => ({
-    message: e ? t("visual_bell.outlines_show_object_bounds") : t("visual_bell.outlines_hide_object_bounds")
+    message: e ? getI18nString("visual_bell.outlines_show_object_bounds") : getI18nString("visual_bell.outlines_hide_object_bounds")
   })
 }, {
   getObservable: () => $$c0().showFrameGridsViewOnly,
   getMessage: e => ({
-    message: e ? t("visual_bell.show_frame_guides_visible") : t("visual_bell.show_frame_guides_hidden")
+    message: e ? getI18nString("visual_bell.show_frame_guides_visible") : getI18nString("visual_bell.show_frame_guides_hidden")
   })
 }];
 export function $$p1() {

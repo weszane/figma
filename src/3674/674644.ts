@@ -1,9 +1,9 @@
 import { jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { buildUploadUrl } from "../figma_app/169182";
 import { HB } from "../3973/538504";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { Pt, xJ } from "../figma_app/422471";
 import { _I, U4 } from "../figma_app/473493";
 import { J } from "../figma_app/261874";
@@ -24,14 +24,14 @@ import { dvJ } from "../figma_app/6204";
 let $$A1 = "https://help.figma.com/hc/articles/15023124644247-Guide-to-Dev-Mode";
 let I = buildUploadUrl("31fafead8c196706e91abf57cbdece011da1a199");
 export function $$E0() {
-  let e = md(LZ);
+  let e = useAtomWithSubscription(LZ);
   let t = aV();
   let n = _I();
-  let l = md(Pt);
-  let E = md(xJ);
+  let l = useAtomWithSubscription(Pt);
+  let E = useAtomWithSubscription(xJ);
   let C = U4();
-  let T = md(NT);
-  let S = md(mp);
+  let T = useAtomWithSubscription(NT);
+  let S = useAtomWithSubscription(mp);
   let P = J();
   let L = oR;
   let R = U("upsell");
@@ -59,7 +59,7 @@ export function $$E0() {
     isShowing && complete();
   });
   return jsx(rq, {
-    description: tx("dev_mode.onboarding_callout.switch_into_dev_mode"),
+    description: renderI18nText("dev_mode.onboarding_callout.switch_into_dev_mode"),
     isShowing,
     media: jsx(_$$y, {
       alt: "design displaying spacing in dev mode",
@@ -68,7 +68,7 @@ export function $$E0() {
     }),
     onClose: complete,
     primaryCta: {
-      label: tx("dev_mode.onboarding_callout.explore_now"),
+      label: renderI18nText("dev_mode.onboarding_callout.explore_now"),
       onClick: () => {
         R("handoff");
         complete();
@@ -77,7 +77,7 @@ export function $$E0() {
       type: "button"
     },
     secondaryCta: {
-      label: tx("dev_mode.onboarding_callout.read_the_guide"),
+      label: renderI18nText("dev_mode.onboarding_callout.read_the_guide"),
       type: "link",
       href: $$A1,
       ctaTrackingDescriptor: _$$c.LEARN_MORE
@@ -87,7 +87,7 @@ export function $$E0() {
     testId: "dev-mode-onboarding-tooltip",
     title: jsx("span", {
       className: "xt0e3qv",
-      children: tx("dev_mode.onboarding_callout.find_what_you_need_in_dev_mode")
+      children: renderI18nText("dev_mode.onboarding_callout.find_what_you_need_in_dev_mode")
     }),
     trackingContextName: "Dev Mode Onboarding Tooltip"
   });

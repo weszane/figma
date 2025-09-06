@@ -2,8 +2,8 @@ import { useCallback, useEffect } from "react";
 import { useDispatch } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
-import { eU, Xr, md } from "../figma_app/27355";
-import { sx } from "../905/449184";
+import { atom, Xr, useAtomWithSubscription } from "../figma_app/27355";
+import { trackEventAnalytics } from "../905/449184";
 import { useSprigWithSampling } from "../905/99656";
 import { F } from "../905/302958";
 import { iZ } from "../905/372672";
@@ -15,7 +15,7 @@ import { V7, TI, uV } from "../figma_app/359181";
 import { Oc } from "../figma_app/552876";
 import { JW } from "../figma_app/433317";
 import { q } from "../figma_app/216831";
-export let $$b3 = Wh(() => eU({
+export let $$b3 = Wh(() => atom({
   inProgress: !1,
   bundleId: null,
   error: !1
@@ -52,7 +52,7 @@ export function $$I2({
   return {
     onPublishChanges: useCallback(async n => {
       let i;
-      sx("sites_publish_started", {
+      trackEventAnalytics("sites_publish_started", {
         fileKey: e,
         productType: s ? "figmake" : "sites"
       });
@@ -120,7 +120,7 @@ export function $$v0({
   } = useSprigWithSampling();
   let r = _t(e);
   let a = JW(e);
-  let s = md($$b3);
+  let s = useAtomWithSubscription($$b3);
   let l = Xr($$b3);
   let u = useDispatch();
   let p = useCallback(() => {

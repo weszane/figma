@@ -1,7 +1,7 @@
 import E from 'classnames';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { jsx, jsxs } from 'react/jsx-runtime';
-import { $D } from '../905/11';
+import { reportError } from '../905/11';
 import { ar } from '../905/71';
 import { _ as _$$_ } from '../905/39853';
 import { useSprigWithSampling } from '../905/99656';
@@ -10,18 +10,18 @@ import { Ce } from '../905/156213';
 import { ServiceCategories as _$$e } from '../905/165054';
 import { O0, Ox, wv } from '../905/247509';
 import { kiwiParserCodec } from '../905/294864';
-import { t as _$$t, tx } from '../905/303541';
+import { getI18nString, renderI18nText } from '../905/303541';
 import { $ as _$$$ } from '../905/330495';
 import { iZ } from '../905/372672';
 import { cF } from '../905/382883';
 import { debugState } from '../905/407919';
-import { sx } from '../905/449184';
+import { trackEventAnalytics } from '../905/449184';
 import { L6 } from '../905/498948';
-import { sn } from '../905/542194';
+import { globalPerfTimer } from '../905/542194';
 import { bL, c$ } from '../905/575478';
 import { sceneDocumentType as _$$G } from '../905/582379';
 import { getFeatureFlags } from '../905/601108';
-import { jk } from '../905/609396';
+import { PerfTimer } from '../905/609396';
 import { G as _$$G2 } from '../905/630430';
 import { F as _$$F } from '../905/642505';
 import { i as _$$i, P as _$$P } from '../905/647955';
@@ -38,7 +38,7 @@ import { q as _$$q } from '../905/932270';
 import { lE, mf, NI, X$ } from '../905/945781';
 import { kF, zg } from '../905/993733';
 import { E1 } from '../figma_app/9054';
-import { eU, fp } from '../figma_app/27355';
+import { atom, useAtomValueAndSetter } from '../figma_app/27355';
 import { Y6 } from '../figma_app/91703';
 import { rb } from '../figma_app/151869';
 import { aS, Cr } from '../figma_app/221114';
@@ -107,7 +107,7 @@ function eu({
   setChunkChanges: d
 }) {
   let c = eY();
-  let [u, p] = fp(Ib);
+  let [u, p] = useAtomValueAndSetter(Ib);
   let m = useMemo(() => a ? Egt.getLayerGUIDMapping(t, r.scene, e, c.scene) : void 0, [a, e, t, r.scene, c.scene]);
   useEffect(() => {
     if (n) return;
@@ -118,8 +118,8 @@ function eu({
       d({});
       return;
     }
-    sn.reset('dev_mode.compare_changes.diffing', t);
-    sn.start('dev_mode.compare_changes.diffing', {
+    globalPerfTimer.reset('dev_mode.compare_changes.diffing', t);
+    globalPerfTimer.start('dev_mode.compare_changes.diffing', {
       key: t
     });
     let {
@@ -140,7 +140,7 @@ function eu({
       let f = 0;
       !function e(t) {
         if (f >= p.length) {
-          $D(_$$e.DEVELOPER_TOOLS, new Error('History node index out of bounds'));
+          reportError(_$$e.DEVELOPER_TOOLS, new Error('History node index out of bounds'));
           return null;
         }
         for (let r of (g.set(t.id, {
@@ -161,7 +161,7 @@ function eu({
         let p;
         let f;
         if (S >= m.length) {
-          $D(_$$e.DEVELOPER_TOOLS, new Error('Node index out of bounds'));
+          reportError(_$$e.DEVELOPER_TOOLS, new Error('Node index out of bounds'));
           return {};
         }
         let E = m[S];
@@ -258,7 +258,7 @@ function eu({
                 }
               }
             };
-            u.has(dI(g.get(r)?.change.guid)) && $D(_$$e.DEVELOPER_TOOLS, new Error('Error generating deleted nodes'));
+            u.has(dI(g.get(r)?.change.guid)) && reportError(_$$e.DEVELOPER_TOOLS, new Error('Error generating deleted nodes'));
             let s = dI(i?.change.guid);
             I(s, a, t);
             g.$$delete(s);
@@ -314,8 +314,8 @@ function eu({
         result: r
       };
     }));
-    let E = sn.tryStop('dev_mode.compare_changes.diffing', t);
-    E && sx('dev_mode.compare_changes.diffing', {
+    let E = globalPerfTimer.tryStop('dev_mode.compare_changes.diffing', t);
+    E && trackEventAnalytics('dev_mode.compare_changes.diffing', {
       type: 'node_changes',
       durationMs: E
     }, {
@@ -385,12 +385,12 @@ export function $$em3({
     }) => {
       let o;
       let c = Date.now();
-      c - l > 1e4 && (l = c, (o = new jk('performance.dev_mode.compare_changes.get_image', {})).start());
+      c - l > 1e4 && (l = c, (o = new PerfTimer('performance.dev_mode.compare_changes.get_image', {})).start());
       let u = L6(e, r, t, n, i, a);
       if (o) {
         let e = o.stop();
         let t = u?.image?.length ?? 0;
-        e && t && sx('performance.dev_mode.compare_changes.get_image', {
+        e && t && trackEventAnalytics('performance.dev_mode.compare_changes.get_image', {
           elapsedMs: e,
           imageBytes: t,
           sceneType: s.getSceneTypeDebugString(),
@@ -417,7 +417,7 @@ function eg({
 }) {
   let r = new Date(e.touched_at ? e.touched_at : e.created_at);
   let i = e.label;
-  e.frameCreated ? i = t ? tx('collaboration.feedback.compare_changes_modal.section_created') : tx('collaboration.feedback.compare_changes_modal.frame_created') : e.lastViewed && (i = tx('collaboration.feedback.compare_changes_modal.last_viewed_by_you'));
+  e.frameCreated ? i = t ? renderI18nText('collaboration.feedback.compare_changes_modal.section_created') : renderI18nText('collaboration.feedback.compare_changes_modal.frame_created') : e.lastViewed && (i = renderI18nText('collaboration.feedback.compare_changes_modal.last_viewed_by_you'));
   let a = i ? jsx(Cr, {
     time: r
   }) : null;
@@ -434,7 +434,7 @@ function eg({
     })]
   });
 }
-let ef = eU(null);
+let ef = atom(null);
 export function $$eE2(e) {
   let {
     nodeId,
@@ -469,15 +469,15 @@ export function $$eE2(e) {
     id: initialSelectedNodeId,
     zoomToSelection: !0
   } : null);
-  let [eE, eT] = fp(ef);
+  let [eE, eT] = useAtomValueAndSetter(ef);
   let [eI, eS] = useState(void 0);
-  let ev = fp(w1)[1];
+  let ev = useAtomValueAndSetter(w1)[1];
   let eA = t$(selectedVersion || null, nodeId) || !!discreteDiffingInput;
   let ex = skipCorrectHistoryCanvasCheck || eA;
   let eN = useMemo(() => discreteDiffingInput?.sceneGraph ? discreteDiffingInput.sceneGraph : new ReduxSceneGraph(juq.HISTORY), [discreteDiffingInput?.sceneGraph]);
   let eC = _$$G2();
   useEffect(() => {
-    eh && eh.id !== nodeId && sx('Diff Modal New Layer Selected', {
+    eh && eh.id !== nodeId && trackEventAnalytics('Diff Modal New Layer Selected', {
       userId: k,
       fileKey: D,
       frameId: nodeId,
@@ -499,7 +499,7 @@ export function $$eE2(e) {
   }), [eL]);
   useEffect(() => {
     if (origin === 'cc_versions' && eI && !ed) {
-      mf(eI) ? sx('Diff Modal No Changes Between Versions', {
+      mf(eI) ? trackEventAnalytics('Diff Modal No Changes Between Versions', {
         userId: k,
         fileKey: D,
         frameId: nodeId,
@@ -508,7 +508,7 @@ export function $$eE2(e) {
         versionMetadata: !1
       }, {
         forwardToDatadog: !0
-      }) : sx('dev_mode.compare_changes.version_has_changes', {
+      }) : trackEventAnalytics('dev_mode.compare_changes.version_has_changes', {
         userId: k,
         fileKey: D,
         frameId: nodeId,
@@ -518,8 +518,8 @@ export function $$eE2(e) {
       }, {
         forwardToDatadog: !0
       });
-      let e = sn.tryStop('dev_mode.compare_changes.switch_versions', selectedVersion?.id);
-      e && sx('dev_mode.compare_changes.switch_versions', {
+      let e = globalPerfTimer.tryStop('dev_mode.compare_changes.switch_versions', selectedVersion?.id);
+      e && trackEventAnalytics('dev_mode.compare_changes.switch_versions', {
         elapsedMs: e
       }, {
         forwardToDatadog: !0
@@ -527,7 +527,7 @@ export function $$eE2(e) {
     }
   }, [origin, es, ed, eI, selectedVersion, nodeId, D, k]);
   useEffect(() => {
-    selectedVersion && historicImage === null && sx('dev_mode.compare_changes.no_image', {
+    selectedVersion && historicImage === null && trackEventAnalytics('dev_mode.compare_changes.no_image', {
       userId: k,
       fileKey: D,
       frameId: nodeId,
@@ -540,25 +540,25 @@ export function $$eE2(e) {
     value: M,
     onChange: e => F(e),
     legend: jsx(_$$q, {
-      children: _$$t('collaboration.branching.comparison_options')
+      children: getI18nString('collaboration.branching.comparison_options')
     }),
     className: tH,
     children: jsxs('div', {
       className: Wc,
       children: [jsx(c$, {
         'value': Ss.SIDE_BY_SIDE,
-        'aria-label': _$$t('collaboration.branching.side_by_side'),
+        'aria-label': getI18nString('collaboration.branching.side_by_side'),
         'className': y()(_$$rb, nL, {
           [wH]: M === Ss.SIDE_BY_SIDE
         }),
-        'children': _$$t('collaboration.branching.side_by_side')
+        'children': getI18nString('collaboration.branching.side_by_side')
       }), jsx(c$, {
         'value': Ss.OVERLAY,
-        'aria-label': _$$t('collaboration.branching.overlay'),
+        'aria-label': getI18nString('collaboration.branching.overlay'),
         'className': y()(_$$rb, _$$S, {
           [wH]: M === Ss.OVERLAY
         }),
-        'children': _$$t('collaboration.branching.overlay')
+        'children': getI18nString('collaboration.branching.overlay')
       })]
     })
   });
@@ -833,7 +833,7 @@ export function $$eE2(e) {
               children: [jsxs('div', {
                 className: Zl,
                 children: [jsx('h3', {
-                  children: tx('collaboration.feedback.compare_changes_modal.history')
+                  children: renderI18nText('collaboration.feedback.compare_changes_modal.history')
                 }), getFeatureFlags().dt_compare_changes_debug_helpers && jsx(eb, {
                   fileKey: D,
                   setSelectedVersion
@@ -842,14 +842,14 @@ export function $$eE2(e) {
                 versions: versions || [],
                 selectedVersion,
                 setVersion: e => {
-                  e.id !== selectedVersion?.id && sx('Diff Modal Selected Version Changed', {
+                  e.id !== selectedVersion?.id && trackEventAnalytics('Diff Modal Selected Version Changed', {
                     userId: k,
                     fileKey: D,
                     frameId: nodeId,
                     versionId: e.id
                   });
-                  sn.reset('dev_mode.compare_changes.switch_versions', e.id);
-                  sn.start('dev_mode.compare_changes.switch_versions', {
+                  globalPerfTimer.reset('dev_mode.compare_changes.switch_versions', e.id);
+                  globalPerfTimer.start('dev_mode.compare_changes.switch_versions', {
                     key: e.id
                   });
                   ep(!0);
@@ -893,7 +893,7 @@ export function $$eE2(e) {
                   })
                 }) : jsx('div', {
                   className: K9,
-                  children: tx('collaboration.feedback.compare_changes_modal.current_image_header')
+                  children: renderI18nText('collaboration.feedback.compare_changes_modal.current_image_header')
                 })
               })]
             }), M === Ss.SIDE_BY_SIDE && jsx('div', {
@@ -971,10 +971,10 @@ export function $$eE2(e) {
           })]
         }), modalError && jsx('div', {
           className: Q9,
-          children: tx('collaboration.feedback.compare_changes_modal.error')
+          children: renderI18nText('collaboration.feedback.compare_changes_modal.error')
         }), jsx('div', {})]
       }), e$ && (ex ? eI && mf(eI) ? jsx(Ox, {
-        text: _$$t('collaboration.feedback.compare_changes_modal.no_changes')
+        text: getI18nString('collaboration.feedback.compare_changes_modal.no_changes')
       }) : jsx(ey, {
         layerChangeNodeId: Q,
         layerBasisNodeId: z,
@@ -999,7 +999,7 @@ function ey({
   preferencesApi: o
 }) {
   return s ? jsx(Ox, {
-    text: _$$t('collaboration.feedback.compare_changes_modal.select_a_layer')
+    text: getI18nString('collaboration.feedback.compare_changes_modal.select_a_layer')
   }) : jsx(wv, {
     layerChangeNodeId: e,
     layerBasisNodeId: t,
@@ -1056,7 +1056,7 @@ let $$eT0 = Ju(e => {
   } = useSprigWithSampling();
   let u = tS();
   let h = E1()?.toISOString();
-  let m = fp(Ib)[1];
+  let m = useAtomValueAndSetter(Ib)[1];
   let {
     versions,
     versionsQueryLoaded
@@ -1085,7 +1085,7 @@ let $$eT0 = Ju(e => {
       }));
     }(e, s));
   }, [s, y, d, versions, nodeId]);
-  let [O, R] = fp(tP);
+  let [O, R] = useAtomValueAndSetter(tP);
   let [M, F] = useState(!0);
   let [j, B] = useState(!1);
   let [H, z] = useState(void 0);
@@ -1096,8 +1096,8 @@ let $$eT0 = Ju(e => {
   useEffect(() => {
     if (!M || !W || !$ || !versionsQueryLoaded) return;
     F(!1);
-    let e = sn.tryStop('dev_handoff.view_history', nodeId);
-    e && sx('dev_handoff.view_history', {
+    let e = globalPerfTimer.tryStop('dev_handoff.view_history', nodeId);
+    e && trackEventAnalytics('dev_handoff.view_history', {
       elapsedMs: e,
       origin: 'cc_versions'
     }, {
@@ -1144,7 +1144,7 @@ let $$eT0 = Ju(e => {
       let i = performance.now();
       let a = Math.trunc(n - e);
       let s = Math.trunc(i - n);
-      sx('version_diffing_performance_metrics', {
+      trackEventAnalytics('version_diffing_performance_metrics', {
         name: 'historic_nodes_load_time',
         fileKey: u,
         fetchBytesDurationMs: a,
@@ -1154,7 +1154,7 @@ let $$eT0 = Ju(e => {
         entrypoint: 'lego_layer'
       });
     }).catch(e => {
-      $D(_$$e.DEVELOPER_TOOLS, new Error(`Error fetching history canvas: ${e}`));
+      reportError(_$$e.DEVELOPER_TOOLS, new Error(`Error fetching history canvas: ${e}`));
       w_(N);
       B(!0);
     });
@@ -1179,7 +1179,7 @@ let $$eT0 = Ju(e => {
     let e = setTimeout(() => {
       let e = () => {
         Y(void 0);
-        $D(_$$e.DEVELOPER_TOOLS, new Error('Current image loading error'));
+        reportError(_$$e.DEVELOPER_TOOLS, new Error('Current image loading error'));
         B(!0);
       };
       let r = $$em3({
@@ -1207,9 +1207,9 @@ let $$eT0 = Ju(e => {
     currentImage: K,
     historicImage: H,
     modalError: j,
-    modalTitle: layerName ? _$$t('collaboration.feedback.compare_changes_modal.layer_name_header', {
+    modalTitle: layerName ? getI18nString('collaboration.feedback.compare_changes_modal.layer_name_header', {
       layerName
-    }) : _$$t('collaboration.feedback.compare_changes_modal.header'),
+    }) : getI18nString('collaboration.feedback.compare_changes_modal.header'),
     nodeId,
     onCloseModal: Z,
     origin: 'cc_versions',
@@ -1242,8 +1242,8 @@ let $$eI4 = Ju(e => {
   useEffect(() => {
     if (!d || !S || !v || !A) return;
     c(!1);
-    let e = sn.tryStop('dev_handoff.view_history', nodeId);
-    e && sx('dev_handoff.view_history', {
+    let e = globalPerfTimer.tryStop('dev_handoff.view_history', nodeId);
+    e && trackEventAnalytics('dev_handoff.view_history', {
       elapsedMs: e,
       origin
     }, {
@@ -1290,8 +1290,8 @@ let $$eI4 = Ju(e => {
   let C = useCallback(() => {
     o(Ce());
   }, [o]);
-  let O = _$$t('collaboration.feedback.compare_changes_modal.header');
-  let R = tx('inspect_panel.node_type.main_component');
+  let O = getI18nString('collaboration.feedback.compare_changes_modal.header');
+  let R = renderI18nText('inspect_panel.node_type.main_component');
   let L = {
     nodeId: N?.dataComponentId ?? AD,
     sceneGraph: new ReduxSceneGraph(N?.dataLocation === 'temp-scene' ? juq.DETACHED_COMPONENTS : _$$G)
@@ -1328,9 +1328,9 @@ let $$eS5 = Ju(e => {
   let S = void 0 !== E;
   useEffect(() => {
     if (!b || !S) return;
-    let e = sn.tryStop('dev_handoff.view_history', changeNodeId);
+    let e = globalPerfTimer.tryStop('dev_handoff.view_history', changeNodeId);
     let r = isComparingOverrides ? 'cc_overrides' : 'cc_nodes';
-    e && sx('dev_handoff.view_history', {
+    e && trackEventAnalytics('dev_handoff.view_history', {
       elapsedMs: e,
       origin: r
     }, {
@@ -1364,7 +1364,7 @@ let $$eS5 = Ju(e => {
   let v = useCallback(() => {
     l(Ce());
   }, [l]);
-  let A = _$$t('collaboration.feedback.compare_changes_modal.header');
+  let A = getI18nString('collaboration.feedback.compare_changes_modal.header');
   let N = {
     nodeId: basisNodeId,
     sceneGraph: new ReduxSceneGraph(_$$G)

@@ -4,7 +4,7 @@ import { bL, c$ } from "../905/867927";
 import { q } from "../905/932270";
 import { f as _$$f } from "../905/335032";
 import { r as _$$r } from "../905/11924";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { gl } from "../905/216495";
 import { L } from "../905/158054";
 export function $$p0({
@@ -54,7 +54,7 @@ export function $$p0({
         children: [jsx(c$, {
           icon: jsx(_$$f, {}),
           value: "OFF",
-          "aria-label": _$$t("settings_tab.disabled"),
+          "aria-label": getI18nString("settings_tab.disabled"),
           htmlAttributes: {
             onMouseEnter: () => I("OFF", "ENTER"),
             onMouseLeave: () => I("OFF", "LEAVE")
@@ -62,7 +62,7 @@ export function $$p0({
         }), jsx(c$, {
           icon: jsx(_$$r, {}),
           value: "ON",
-          "aria-label": _$$t("settings_tab.enabled"),
+          "aria-label": getI18nString("settings_tab.enabled"),
           htmlAttributes: {
             onMouseEnter: () => I("ON", "ENTER"),
             onMouseLeave: () => I("ON", "LEAVE")

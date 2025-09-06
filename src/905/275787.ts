@@ -6,7 +6,7 @@ import { isNotNullish, isNullish } from "../figma_app/95419";
 import { l7 } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { ms, c$ } from "../figma_app/236327";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { d1 } from "../905/766303";
 import { b as _$$b } from "../905/217163";
@@ -50,7 +50,7 @@ let $$E1 = memo(({
     localNodeId: C.node_id
   }, `togglePublishable-${C.node_id}`) : null, [i, N, C]);
   let D = useMemo(() => {
-    let e = tx("design_systems.assets_panel.go_to_main");
+    let e = renderI18nText("design_systems.assets_panel.go_to_main");
     return N && C ? d ? jsx(I, {
       onClick: () => d?.(C.node_id),
       recordingKey: "libraryItemTileContextMenu.goToMain",
@@ -64,7 +64,7 @@ let $$E1 = memo(({
   let L = useMemo(() => l && C ? jsx(I, {
     disabled: isFlyoutOpen && T,
     onClick: () => l(C, e?.data?.sectionPosition, e?.data?.sectionNameForTracking),
-    children: tx("design_systems.assets_panel.view_details")
+    children: renderI18nText("design_systems.assets_panel.view_details")
   }, "openFlyout") : null, [l, C, isFlyoutOpen, T, e?.data?.sectionPosition, e?.data?.sectionNameForTracking]);
   let F = useMemo(() => P ? null : [O, D, L].filter(isNotNullish), [D, L, O, P]);
   if (!F || 0 === F.length) return null;
@@ -90,7 +90,7 @@ function x({
   }, [e, t]);
   return isNullish(t) ? null : jsx(I, {
     onClick: i,
-    children: t ? tx("design_systems.publishing_modal.hide_when_publishing") : tx("design_systems.publishing_modal.show_when_publishing")
+    children: t ? renderI18nText("design_systems.publishing_modal.hide_when_publishing") : renderI18nText("design_systems.publishing_modal.show_when_publishing")
   }, "togglePublishableOption");
 }
 export const K = $$y0;

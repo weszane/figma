@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { h as _$$h } from "../905/207101";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { e as _$$e } from "../905/621515";
 import { r1 } from "../figma_app/545877";
 import { N } from "../figma_app/268271";
@@ -13,7 +13,7 @@ let $$p0 = "sc_team_creation_modal_onboarding_key";
 let g = "seen_sharing_clarity_team_creation_modal_overlay";
 let h = r1(g);
 export function $$x1() {
-  let e = md(h);
+  let e = useAtomWithSubscription(h);
   let {
     show,
     isShowing,
@@ -30,14 +30,14 @@ export function $$x1() {
   return jsx(rq, {
     arrowPosition: F_.LEFT_TITLE,
     description: jsx("p", {
-      children: tx("rcs.sharing_clarity.team_creation_modal_description")
+      children: renderI18nText("rcs.sharing_clarity.team_creation_modal_description")
     }),
     disableHighlight: !0,
     emphasized: !0,
     isShowing,
     onClose: complete,
     targetKey: $$p0,
-    title: tx("rcs.sharing_clarity.team_creation_modal_title"),
+    title: renderI18nText("rcs.sharing_clarity.team_creation_modal_title"),
     trackingContextName: "Sharing Clarity Team Creation Modal Onboarding",
     userFlagOnShow: g,
     zIndex: R.MODAL

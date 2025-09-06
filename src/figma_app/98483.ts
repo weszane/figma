@@ -4,7 +4,7 @@ import { isNullish } from "../figma_app/95419";
 import { m1T, Egt, _0v, nzw, glU, mKm, Ez5 } from "../figma_app/763686";
 import { l7, nc } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Uz } from "../905/63728";
 import { eB } from "../905/765855";
 import { dG } from "../figma_app/753501";
@@ -132,7 +132,7 @@ export function $$A0() {
   });
 }
 export function $$x7(e) {
-  getFeatureFlags().ce_properties_panel_tracking && sx("editor-transform-panel-change", {
+  getFeatureFlags().ce_properties_panel_tracking && trackEventAnalytics("editor-transform-panel-change", {
     key: e
   });
   a2(e);

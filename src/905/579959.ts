@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { B } from "../905/714743";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { A } from "../4711/623519";
 export function $$o0() {
   return jsxs("div", {
@@ -10,9 +10,9 @@ export function $$o0() {
       className: "dsa_pending_migration_container--pendingMigrationIcon--ctbjp"
     }), jsx("div", {
       className: "dsa_pending_migration_container--pendingMigrationHeading--jCmnT text--fontPos11--2LvXf text--_fontBase--QdLsd",
-      children: tx("design_systems.libraries_modal.dsa_undergoing_migration_heading")
+      children: renderI18nText("design_systems.libraries_modal.dsa_undergoing_migration_heading")
     }), jsx("div", {
-      children: tx("design_systems.libraries_modal.dsa_undergoing_migration_text")
+      children: renderI18nText("design_systems.libraries_modal.dsa_undergoing_migration_text")
     })]
   });
 }

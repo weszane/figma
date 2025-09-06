@@ -4,7 +4,7 @@ import { DP } from "../905/158740";
 import { Qf } from "../905/266289";
 import { glU } from "../figma_app/763686";
 import { ce, Fe } from "../figma_app/347146";
-import { eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { f3 } from "../figma_app/504640";
 import { Y5 } from "../figma_app/455680";
 import { _6 } from "../figma_app/386952";
@@ -23,7 +23,7 @@ export function $$_0() {
   let A = _6();
   let y = f3();
   useEffect(() => {
-    eD && e && eD.setTabColor(t);
+    desktopAPIInstance && e && desktopAPIInstance.setTabColor(t);
   }, [t, e]);
   let b = y ?? i;
   useEffect(() => {

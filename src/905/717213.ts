@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { getFeatureFlags } from "../905/601108";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 export function $$s0({
   numComponents: e,
   numStateGroups: t,
@@ -10,13 +10,13 @@ export function $$s0({
 }) {
   let l = e + t;
   let d = [];
-  return (l > 0 && d.push(_$$t("design_systems.libraries_modal.plural.num_component_match", {
+  return (l > 0 && d.push(getI18nString("design_systems.libraries_modal.plural.num_component_match", {
     numComponents: l
-  })), i > 0 && d.push(_$$t("design_systems.libraries_modal.plural.num_style_match", {
+  })), i > 0 && d.push(getI18nString("design_systems.libraries_modal.plural.num_style_match", {
     numStyles: i
-  })), getFeatureFlags().dsa_styles_variables_ui && s > 0 && d.push(_$$t("design_systems.libraries_modal.plural.num_variable_match", {
+  })), getFeatureFlags().dsa_styles_variables_ui && s > 0 && d.push(getI18nString("design_systems.libraries_modal.plural.num_variable_match", {
     numVariables: s
-  })), o > 0 && d.push(_$$t("design_systems.libraries_modal.plural.num_variable_collection_match", {
+  })), o > 0 && d.push(getI18nString("design_systems.libraries_modal.plural.num_variable_collection_match", {
     numVariableCollections: o
   })), d.length > 1) ? jsx("div", {
     children: d.join(", ")

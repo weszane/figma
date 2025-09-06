@@ -1,4 +1,4 @@
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { nF } from "../905/350402";
 import { Ce, to } from "../905/156213";
 import { d1 } from "../905/766303";
@@ -16,15 +16,15 @@ import { k as _$$k } from "../905/443820";
 import { $n } from "../905/521428";
 import { Uz } from "../905/63728";
 import { Rs } from "../figma_app/288654";
-import { jk as _$$jk } from "../905/609396";
+import { PerfTimer } from "../905/609396";
 import { XHR } from "../905/910117";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { sf } from "../905/929976";
 import { yJ, bE } from "../figma_app/78808";
 import { bE as _$$bE } from "../905/466026";
 import { dDF } from "../figma_app/43951";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { Ju } from "../905/102752";
 import { Ay as _$$Ay } from "../905/612521";
 import { Us } from "../figma_app/637027";
@@ -51,7 +51,7 @@ function N(e) {
   let N = r => {
     if (r.preventDefault(), s) return;
     o(!0);
-    let d = new _$$jk("branch_created", {});
+    let d = new PerfTimer("branch_created", {});
     d.start();
     XHR.post(`/api/multiplayer/${e.sourceFileKey}/branch_create?name=${encodeURIComponent(i)}`).then(e => {
       let {
@@ -72,12 +72,12 @@ function N(e) {
       t(sf({
         view: "fullscreen",
         fileKey: file.key,
-        editorType: nT.Design,
+        editorType: FEditorType.Design,
         nodeId: l
       }));
       d.stop();
       let o = d.getElapsedTime();
-      o && sx("Branch Created", {
+      o && trackEventAnalytics("Branch Created", {
         fileKey: file.key,
         sourceFileKey: source_file.key,
         fileRepoId: file.file_repo_id,
@@ -102,7 +102,7 @@ function N(e) {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: tx("collaboration.branching_create.title")
+          children: renderI18nText("collaboration.branching_create.title")
         })
       }), jsx(nB, {
         children: jsx(_$$p, {
@@ -113,7 +113,7 @@ function N(e) {
           onKeyDown: e => {
             e.keyCode === Uz.ENTER && N(e);
           },
-          "aria-label": _$$t("collaboration.branching_create.input_label"),
+          "aria-label": getI18nString("collaboration.branching_create.input_label"),
           "data-testid": "branch-create-modal-input"
         })
       }), jsxs(wi, {
@@ -123,7 +123,7 @@ function N(e) {
             onClick: () => {
               t(Ce());
             },
-            children: tx("collaboration.branching_create.cancel_button")
+            children: renderI18nText("collaboration.branching_create.cancel_button")
           }), jsx($n, {
             variant: "primary",
             type: "submit",
@@ -132,7 +132,7 @@ function N(e) {
             htmlAttributes: {
               "data-testId": "branch-create-modal-submit"
             },
-            children: tx("collaboration.branching_create.create_button")
+            children: renderI18nText("collaboration.branching_create.create_button")
           })]
         })]
       })]
@@ -411,13 +411,13 @@ function Y({
 let $ = "https://help.figma.com/hc/articles/360063144053-Guide-to-branching";
 let Z = [{
   key: 1,
-  elem: tx("oss_exposure_branching_upsell_modal.feature1")
+  elem: renderI18nText("oss_exposure_branching_upsell_modal.feature1")
 }, {
   key: 2,
-  elem: tx("oss_exposure_branching_upsell_modal.feature2")
+  elem: renderI18nText("oss_exposure_branching_upsell_modal.feature2")
 }, {
   key: 3,
-  elem: tx("oss_exposure_branching_upsell_modal.feature3")
+  elem: renderI18nText("oss_exposure_branching_upsell_modal.feature3")
 }];
 let X = Ju(function ({
   currentTeam: e,
@@ -426,13 +426,13 @@ let X = Ju(function ({
 }) {
   let n = useDispatch();
   let r = _$$b.OSS_EXPOSURE_BRANCHING_UPSELL_MODAL;
-  let s = t ? tx("oss_exposure_branching_upsell_modal.body1") : tx("oss_exposure_branching_upsell_modal.nonadmin.body1", {
+  let s = t ? renderI18nText("oss_exposure_branching_upsell_modal.body1") : renderI18nText("oss_exposure_branching_upsell_modal.nonadmin.body1", {
     learnMoreLink: jsx(Us, {
       href: $,
       target: "_blank",
       trusted: !0,
       onClick: () => Ce(),
-      children: tx("oss_exposure_branching_upsell_modal.nonadmin.body_link")
+      children: renderI18nText("oss_exposure_branching_upsell_modal.nonadmin.body_link")
     })
   });
   let o = t ? void 0 : jsxs("div", {
@@ -442,7 +442,7 @@ let X = Ju(function ({
       svg: _$$A
     }), jsx("div", {
       className: _$$s.maxW300.$,
-      children: tx("oss_exposure_branching_upsell_modal.nonadmin.text")
+      children: renderI18nText("oss_exposure_branching_upsell_modal.nonadmin.text")
     })]
   });
   return jsx(Y, {
@@ -459,7 +459,7 @@ let X = Ju(function ({
         spacing: 8,
         children: [jsx("p", {
           className: _$$s.fontSemiBold.$,
-          children: tx("oss_exposure_branching_upsell_modal.body2")
+          children: renderI18nText("oss_exposure_branching_upsell_modal.body2")
         }), jsx(_$$Y, {
           direction: "vertical",
           spacing: 8,
@@ -497,10 +497,10 @@ let X = Ju(function ({
       _$$Ay.unsafeRedirect($, "_blank");
       Ce();
     } : void 0,
-    primaryCtaText: tx(t ? "oss_exposure_branching_upsell_modal.primary_cta" : "oss_exposure_branching_upsell_modal.nonadmin.cta"),
+    primaryCtaText: renderI18nText(t ? "oss_exposure_branching_upsell_modal.primary_cta" : "oss_exposure_branching_upsell_modal.nonadmin.cta"),
     rightPane: jsx(z, {}),
-    secondaryCtaText: t ? tx("oss_exposure_branching_upsell_modal.secondary_cta") : void 0,
-    titleText: tx("oss_exposure_branching_upsell_modal.title"),
+    secondaryCtaText: t ? renderI18nText("oss_exposure_branching_upsell_modal.secondary_cta") : void 0,
+    titleText: renderI18nText("oss_exposure_branching_upsell_modal.title"),
     trackingName: i,
     upsellSource: r
   });
@@ -534,7 +534,7 @@ let $$J0 = nF(async (e, t, {
       sourceFileKey: l
     }
   }));
-  sx("Create Branch Clicked", {
+  trackEventAnalytics("Create Branch Clicked", {
     trackingContext: t.trackingContextName,
     fileKey: r.key,
     fileRepoId: r.file_repo_id

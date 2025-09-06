@@ -1,5 +1,5 @@
 import { useDispatch } from "../vendor/514228";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { gE } from "../5132/642384";
 import { _ as _$$_ } from "../905/456042";
 import { to } from "../905/156213";
@@ -14,7 +14,7 @@ export function $$u0(e, l = !1, i = !1, _ = !1) {
   let g = iZ();
   if (!U(e)) return () => {};
   let v = gE(l => {
-    sx("try_it_out_drafts_picker_menu_opened", {
+    trackEventAnalytics("try_it_out_drafts_picker_menu_opened", {
       hubFileId: e.id,
       searchSessionId: m
     });

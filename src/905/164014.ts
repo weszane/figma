@@ -1,7 +1,7 @@
 import { useRef, useCallback } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { m as _$$m } from "../vendor/601859";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 export function $$o0({
   scrollThreshold: e = 50,
   scrollAmount: t = 5
@@ -12,7 +12,7 @@ export function $$o0({
   let c = useRef();
   let u = useRef();
   let p = useRef(!0);
-  let m = useCallback((e) => {
+  let m = useCallback(e => {
     if (!p.current || !u.current || void 0 === s.current || void 0 === c.current) return;
     let t = d(u.current);
     let i = e.target;
@@ -78,19 +78,19 @@ export function $$o0({
     }, [])
   };
 }
-let l = (e) => {
+let l = e => {
   try {
-    return Array.from(e.componentControls).find((e) => e.isDragging);
+    return Array.from(e.componentControls).find(e => e.isDragging);
   } catch (e) {
-    $D(_$$e.SLIDES, e);
+    reportError(_$$e.SLIDES, e);
     return;
   }
 };
-let d = (e) => {
+let d = e => {
   try {
     return e.panSession.history[0];
   } catch (e) {
-    $D(_$$e.SLIDES, e);
+    reportError(_$$e.SLIDES, e);
     return;
   }
 };

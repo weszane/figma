@@ -5,9 +5,9 @@ import { E } from "../905/632989";
 import { C } from "../905/520159";
 import { e as _$$e } from "../905/916195";
 import { H } from "../905/999677";
-import { rr } from "../figma_app/778880";
+import { isMobileUA } from "../figma_app/778880";
 import { Pt } from "../figma_app/806412";
-import { t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { K5, t$, lE } from "../figma_app/29814";
 let h = null;
 export function $$m1() {
@@ -52,12 +52,12 @@ export function $$g0(e) {
   }();
   let s = function (e) {
     let t = e.navigateForwardEnabled || e.navigateBackwardEnabled;
-    return (e.showNavigationInMobile || !rr) && t;
+    return (e.showNavigationInMobile || !isMobileUA) && t;
   }(e);
   let d = jsx(K, {
     onClick: e.navigateBackward,
     recordingKey: Pt(e, "backButton"),
-    "aria-label": t("viewer.footer.previous_frame"),
+    "aria-label": getI18nString("viewer.footer.previous_frame"),
     disabled: !e.navigateBackwardEnabled,
     htmlAttributes: {
       "data-fullscreen-intercept": !0,
@@ -71,7 +71,7 @@ export function $$g0(e) {
   let m = jsx(K, {
     onClick: e.navigateForward,
     recordingKey: Pt(e, "nextButton"),
-    "aria-label": t("viewer.footer.next_frame"),
+    "aria-label": getI18nString("viewer.footer.next_frame"),
     disabled: !e.navigateForwardEnabled,
     htmlAttributes: {
       "data-fullscreen-intercept": !0,
@@ -87,12 +87,12 @@ export function $$g0(e) {
     children: [s && d, !!e.shouldShowFrameCounter && jsx("div", {
       role: "status",
       "aria-live": "polite",
-      "aria-label": t("viewer.footer.readable_frame_progress", {
+      "aria-label": getI18nString("viewer.footer.readable_frame_progress", {
         currentFrameIndex: e.currentFrameIndex + 1,
         frameCount: e.frameCount
       }),
       className: e.frameCounterTextClassName,
-      children: tx("viewer.footer.frame_progress", {
+      children: renderI18nText("viewer.footer.frame_progress", {
         currentFrameIndex: e.currentFrameIndex + 1,
         frameCount: e.frameCount
       })
@@ -108,13 +108,13 @@ export function $$f2(e) {
     className: e.className,
     onClick: e.onClick,
     recordingKey: e.recordingKey,
-    "aria-label": t("viewer.footer.restart"),
-    "aria-keyshortcuts": t("viewer.footer.r"),
+    "aria-label": getI18nString("viewer.footer.restart"),
+    "aria-keyshortcuts": getI18nString("viewer.footer.r"),
     children: [jsx(H, {
       className: t$
-    }), tx("viewer.footer.restart"), " ", jsxs("span", {
+    }), renderI18nText("viewer.footer.restart"), " ", jsxs("span", {
       className: lE,
-      children: [" ", tx("viewer.footer.r")]
+      children: [" ", renderI18nText("viewer.footer.r")]
     })]
   });
 }

@@ -2,10 +2,10 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useMemo, useRef, useState, useEffect, Suspense } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { filterNotNullish } from "../figma_app/656233";
-import { rr } from "../figma_app/778880";
+import { isMobileUA } from "../figma_app/778880";
 import { s_ } from "../905/17223";
 import { qc, kt } from "../figma_app/858013";
-import { t as _$$t, tx as _$$tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { nl } from "../905/590952";
 import { k as _$$k } from "../905/443820";
 import { Rs } from "../figma_app/288654";
@@ -36,7 +36,7 @@ import { Qq } from "../905/736956";
 import { A as _$$A2 } from "../svg/977613";
 import { A as _$$A3 } from "../6828/154709";
 import { A as _$$A4 } from "../svg/443105";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { UF, Jd } from "../figma_app/494261";
 import { nF } from "../905/350402";
 import { um } from "../905/14223";
@@ -46,7 +46,7 @@ import { xN } from "../905/672897";
 import { b as _$$b2 } from "../905/165519";
 import { kb } from "../figma_app/502247";
 import { ck } from "../905/952832";
-import { Iv, A$ } from "../905/548208";
+import { DashboardSections, NavigationRoutes } from "../905/548208";
 import { Ju, ZU } from "../905/102752";
 import { FL } from "../figma_app/102449";
 import { utilityNoop } from "../figma_app/918700";
@@ -250,9 +250,9 @@ function ea(e) {
           "data-tooltip": F,
           "data-tooltip-max-width": 250,
           "data-tooltip-offset-y": 10,
-          "data-tooltip-text": _$$t("team_view.upgrade.to_continue_editing_they_need_to_verify_their_education_status_at_www_figma_com_education_apply"),
+          "data-tooltip-text": getI18nString("team_view.upgrade.to_continue_editing_they_need_to_verify_their_education_status_at_www_figma_com_education_apply"),
           "data-tooltip-timeout-delay": 50,
-          "data-tooltip-title": _$$t("team_view.upgrade.can_only_view", {
+          "data-tooltip-title": getI18nString("team_view.upgrade.can_only_view", {
             teamMember: "handle" in e.teamRole.user ? e.teamRole.user.handle : e.teamRole.user.email ?? ""
           }),
           "data-tooltip-type": Ib.SPECIAL,
@@ -298,10 +298,10 @@ function ea(e) {
               children: QN(t)
             }, t)), jsx(wv, {}), r && jsx(c$, {
               onClick: _,
-              children: _$$tx("file_browser.team.resend_invite")
+              children: renderI18nText("file_browser.team.resend_invite")
             }), jsx(c$, {
               onClick: () => p(_$$e.NONE),
-              children: e.teamRole.user_id !== a.id || o?.isCurrentUserTeamOwner ? _$$tx("file_browser.team.remove_confirm") : _$$tx("file_browser.team.leave_confirm")
+              children: e.teamRole.user_id !== a.id || o?.isCurrentUserTeamOwner ? renderI18nText("file_browser.team.remove_confirm") : renderI18nText("file_browser.team.leave_confirm")
             })]
           })]
         });
@@ -406,7 +406,7 @@ function el(e) {
       children: [jsx("span", {
         onClick: () => {
           b.response = "deny";
-          sx("permission_request_responded", b);
+          trackEventAnalytics("permission_request_responded", b);
           t(UF({
             requestId: e.request.id
           }));
@@ -414,10 +414,10 @@ function el(e) {
         className: $,
         role: "button",
         tabIndex: -1,
-        children: _$$tx("file_browser.team.dismiss")
+        children: renderI18nText("file_browser.team.dismiss")
       }), jsx("span", {
         onClick: () => {
-          sx("permission_request_responded", b);
+          trackEventAnalytics("permission_request_responded", b);
           t(Jd({
             requestId: e.request.id,
             level: l,
@@ -429,7 +429,7 @@ function el(e) {
         className: $,
         role: "button",
         tabIndex: -1,
-        children: _$$tx("file_browser.team.approve")
+        children: renderI18nText("file_browser.team.approve")
       })]
     }), jsx("div", {
       className: e.isModal ? U : B,
@@ -582,7 +582,7 @@ function ed(e) {
     label: _$$A.MembersListRow.teamV2,
     variant: "new"
   }), 0 === v.length) ? jsx("div", {
-    children: _$$tx("file_browser.team.no_members")
+    children: renderI18nText("file_browser.team.no_members")
   }) : y || !lgDataLoaded ? jsx("div", {
     className: "members_list--loadingSpinnerContainer--2hZae",
     children: jsx(_$$k, {})
@@ -632,13 +632,13 @@ function eN(e) {
   let t = useSelector(e => e.roles || {});
   return n0(e.team) && e.canAdmin ? jsx("div", {
     className: _$$s.font12.lh16.pt8.pr32.pb16.pl4.colorText.$,
-    children: _$$tx("file_browser.team_settings_modal.paid_status_explanation_no_link")
+    children: renderI18nText("file_browser.team_settings_modal.paid_status_explanation_no_link")
   }) : jsx("div", {
     className: "team_settings_modal--membersHeader--Ac-UZ",
     children: jsxs(_$$E, {
       color: "secondary",
       fontSize: 12,
-      children: [e.team.name, _$$tx("file_browser.team_settings_modal.members_tab_header", {
+      children: [e.team.name, renderI18nText("file_browser.team_settings_modal.members_tab_header", {
         numMembers: pG(t, e.team.id).length
       })]
     })
@@ -667,10 +667,10 @@ let tr = Ju(function () {
         teamId: t,
         aiFeaturesDisabled: !a
       });
-      let s = a ? _$$t("admin_settings.ai.enable_success") : _$$t("admin_settings.ai.disable_success");
+      let s = a ? getI18nString("admin_settings.ai.enable_success") : getI18nString("admin_settings.ai.disable_success");
       e(_$$s2.flash(s));
     } catch {
-      e(_$$s2.error(_$$t("file_browser.file_browser_actions.team_update_error")));
+      e(_$$s2.error(getI18nString("file_browser.file_browser_actions.team_update_error")));
     }
   };
   let p = async a => {
@@ -679,13 +679,13 @@ let tr = Ju(function () {
         teamId: t,
         enabled: a
       });
-      sx("ai_data_sharing_toggled", {
+      trackEventAnalytics("ai_data_sharing_toggled", {
         team_id: t,
         enabled: a
       });
-      e(_$$s2.flash(_$$t("admin_settings.ai.data_sharing.update_success")));
+      e(_$$s2.flash(getI18nString("admin_settings.ai.data_sharing.update_success")));
     } catch (t) {
-      e(_$$s2.error(_$$t("admin_settings.ai.data_sharing.update_error")));
+      e(_$$s2.error(getI18nString("admin_settings.ai.data_sharing.update_error")));
     }
   };
   let g = null;
@@ -704,16 +704,16 @@ let tr = Ju(function () {
       spacing: 4,
       children: [jsx(_$$E, {
         fontWeight: "medium",
-        children: _$$tx("admin_settings.ai.features_toggle.label")
+        children: renderI18nText("admin_settings.ai.features_toggle.label")
       }), jsx(_$$E, {
         color: "secondary",
-        children: _$$tx("admin_settings.ai.features_toggle.description.team", {
+        children: renderI18nText("admin_settings.ai.features_toggle.description.team", {
           learnMoreLink: jsx(CY, {
             href: _$$d3.aiFeatures,
             target: "_blank",
             trusted: !0,
             children: jsx(_$$E, {
-              children: _$$tx("general.learn_more")
+              children: renderI18nText("general.learn_more")
             })
           })
         })
@@ -735,10 +735,10 @@ let tr = Ju(function () {
       },
       children: [jsx(_$$E, {
         fontWeight: "medium",
-        children: _$$tx("admin_settings.ai.section_title")
+        children: renderI18nText("admin_settings.ai.section_title")
       }), !u && jsx(Ex, {
         color: zE.BRAND,
-        text: _$$t("general.beta")
+        text: getI18nString("general.beta")
       })]
     }),
     onClose: () => {
@@ -767,16 +767,16 @@ let tr = Ju(function () {
           spacing: 4,
           children: [jsx(_$$E, {
             fontWeight: "medium",
-            children: _$$tx("admin_settings.ai.data_sharing.label")
+            children: renderI18nText("admin_settings.ai.data_sharing.label")
           }), jsx(_$$E, {
             color: "secondary",
-            children: _$$tx("admin_settings.ai.data_sharing.description.team", {
+            children: renderI18nText("admin_settings.ai.data_sharing.description.team", {
               learnMoreLink: jsx(CY, {
                 href: _$$d3.aiDataSharing,
                 target: "_blank",
                 trusted: !0,
                 children: jsx(_$$E, {
-                  children: _$$tx("general.learn_more")
+                  children: renderI18nText("general.learn_more")
                 })
               })
             })
@@ -788,7 +788,7 @@ let tr = Ju(function () {
           disabled: l,
           htmlAttributes: {
             "data-testid": tn.dataSharingEnabledSwitch,
-            "data-tooltip": l ? _$$t("admin_settings.ai.data_sharing.disabled_for_student_teams") : void 0,
+            "data-tooltip": l ? getI18nString("admin_settings.ai.data_sharing.disabled_for_student_teams") : void 0,
             "data-tooltip-type": Ib.TEXT,
             "data-tooltip-show-above": !0,
             "data-tooltip-timeout-delay": 50,
@@ -921,7 +921,7 @@ function tf(e) {
         className: to,
         children: [jsx("div", {
           className: td,
-          children: _$$tx("file_browser.team_settings.team_name")
+          children: renderI18nText("file_browser.team_settings.team_name")
         }), jsx("div", {
           children: i.name
         }), f?.canAdmin && jsx("div", {
@@ -935,14 +935,14 @@ function tf(e) {
                 }
               }));
             },
-            children: _$$tx("file_browser.team_settings.change_name")
+            children: renderI18nText("file_browser.team_settings.change_name")
           })
         })]
       }), (f?.canAdmin || f?.description) && jsxs("div", {
         className: to,
         children: [jsx("div", {
           className: td,
-          children: _$$tx("file_browser.about")
+          children: renderI18nText("file_browser.about")
         }), jsx("div", {
           children: f?.description
         }), f?.canAdmin && jsx("div", {
@@ -956,7 +956,7 @@ function tf(e) {
                 }
               }));
             },
-            children: f?.description ? _$$tx("file_browser.team.change_description") : _$$tx("file_browser.team.add_a_description")
+            children: f?.description ? renderI18nText("file_browser.team.change_description") : renderI18nText("file_browser.team.add_a_description")
           })
         })]
       })]
@@ -964,9 +964,9 @@ function tf(e) {
       className: to,
       children: [jsx("div", {
         className: td,
-        children: _$$tx("file_browser.team_settings_modal.community_profile")
+        children: renderI18nText("file_browser.team_settings_modal.community_profile")
       }), jsx("div", {
-        children: f?.communityProfileHandle ? _$$t("file_browser.team_settings.team_community_handle", {
+        children: f?.communityProfileHandle ? getI18nString("file_browser.team_settings.team_community_handle", {
           communityProfileHandle: f?.communityProfileHandle
         }) : ""
       }), jsx("div", {
@@ -982,7 +982,7 @@ function tf(e) {
               }
             }));
           },
-          children: f?.communityProfileHandle ? _$$t("file_browser.team_settings.change_profile_handle") : _$$t("file_browser.team_settings.set_profile_handle")
+          children: f?.communityProfileHandle ? getI18nString("file_browser.team_settings.change_profile_handle") : getI18nString("file_browser.team_settings.set_profile_handle")
         })
       }), f?.communityProfileHandle && jsx("div", {
         children: jsx("button", {
@@ -997,7 +997,7 @@ function tf(e) {
               }
             }));
           },
-          children: _$$tx("file_browser.team_settings.delete_profile")
+          children: renderI18nText("file_browser.team_settings.delete_profile")
         })
       }), f?.communityProfileHandle && f?.orgId && jsx("div", {
         children: jsx("button", {
@@ -1008,20 +1008,20 @@ function tf(e) {
               data: {
                 profileId: f?.communityProfileId || "",
                 profileHandle: f?.communityProfileHandle || "",
-                emptyStateText: _$$t("file_browser.team_settings.community_restricted_handles", {
+                emptyStateText: getI18nString("file_browser.team_settings.community_restricted_handles", {
                   communityProfileHandle: f?.communityProfileHandle || ""
                 })
               }
             }));
           },
-          children: _$$tx("file_browser.team_settings.manage_restricted_commenters")
+          children: renderI18nText("file_browser.team_settings.manage_restricted_commenters")
         })
       })]
     }), jsxs("div", {
       className: to,
       children: [jsx("div", {
         className: td,
-        children: f?.orgId ? _$$tx("file_browser.team_settings.shared") : _$$tx("file_browser.team_settings_modal.libraries")
+        children: f?.orgId ? renderI18nText("file_browser.team_settings.shared") : renderI18nText("file_browser.team_settings_modal.libraries")
       }), jsx("div", {
         children: jsx("button", {
           className: ti,
@@ -1034,7 +1034,7 @@ function tf(e) {
               }
             }));
           },
-          children: _$$tx("file_browser.team_settings.view_team_libraries")
+          children: renderI18nText("file_browser.team_settings.view_team_libraries")
         })
       }), j && jsx("div", {
         children: jsx("button", {
@@ -1047,7 +1047,7 @@ function tf(e) {
               }
             }));
           },
-          children: _$$tx("file_browser.team_settings.view_team_fonts")
+          children: renderI18nText("file_browser.team_settings.view_team_fonts")
         })
       }), A && jsx("div", {
         children: jsx("button", {
@@ -1062,14 +1062,14 @@ function tf(e) {
               }
             }));
           },
-          children: _$$tx("file_browser.team_settings.view_team_figjam_palettes")
+          children: renderI18nText("file_browser.team_settings.view_team_figjam_palettes")
         })
       })]
     }), f?.orgId != null && i.org_access && jsxs("div", {
       className: to,
       children: [jsx("div", {
         className: td,
-        children: _$$tx("file_browser.settings.access")
+        children: renderI18nText("file_browser.settings.access")
       }), jsxs("div", {
         children: [(() => {
           let e = V(i);
@@ -1111,28 +1111,28 @@ function tf(e) {
               }
             }));
           },
-          children: _$$tx("team_view.team_permissions_modal.change")
+          children: renderI18nText("team_view.team_permissions_modal.change")
         })]
       }), !f?.canAdmin && jsx("div", {
         children: jsx(_$$E, {
           color: "secondary",
-          children: _$$tx("file_browser.team_settings.team_admins_and_owners_can_change")
+          children: renderI18nText("file_browser.team_settings.team_admins_and_owners_can_change")
         })
       })]
     }), k && jsxs("div", {
       className: to,
       children: [jsxs("div", {
         className: td,
-        children: [_$$tx("admin_settings.ai.section_title"), !D && jsxs(Fragment, {
+        children: [renderI18nText("admin_settings.ai.section_title"), !D && jsxs(Fragment, {
           children: [jsx("span", {
             className: _$$s.inlineFlex.ml8.$,
             children: jsx(Ex, {
               color: zE.BRAND,
-              text: _$$t("general.beta")
+              text: getI18nString("general.beta")
             })
           }), jsx(_$$B2, {
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t("admin_settings.ai.section_title.free_in_beta"),
+            "data-tooltip": getI18nString("admin_settings.ai.section_title.free_in_beta"),
             "data-tooltip-timeout-delay": 50
           })]
         })]
@@ -1144,37 +1144,37 @@ function tf(e) {
               type: tr
             }));
           },
-          children: _$$tx("admin_settings.ai.manage_settings_link")
+          children: renderI18nText("admin_settings.ai.manage_settings_link")
         })
       })]
     }), v?.isProOrStudentTeam && !v?.isStudentTeam && f?.canAdmin && jsxs("div", {
       className: to,
       children: [jsx("div", {
         className: td,
-        children: _$$tx("settings_table.plan_and_billing")
+        children: renderI18nText("settings_table.plan_and_billing")
       }), jsx("div", {
-        children: _$$tx("file_browser.team_settings_modal.admin_console_billing_nudge")
+        children: renderI18nText("file_browser.team_settings_modal.admin_console_billing_nudge")
       }), jsx("button", {
         className: ti,
         onClick: () => {
           t(sf({
             view: "teamAdminConsole",
             teamId: e.team.id,
-            teamAdminConsoleViewTab: Iv.BILLING
+            teamAdminConsoleViewTab: DashboardSections.BILLING
           }));
           t(Lo());
         },
-        children: _$$tx("file_browser.team_settings_modal.admin_console_billing_button")
+        children: renderI18nText("file_browser.team_settings_modal.admin_console_billing_button")
       })]
     }), b && jsxs("div", {
       className: to,
       children: [jsx("div", {
         className: td,
-        children: _$$tx("file_browser.team_settings.transfer")
+        children: renderI18nText("file_browser.team_settings.transfer")
       }), jsxs("div", {
         children: [B && jsxs(Fragment, {
           children: [jsx("div", {
-            children: _$$tx("file_browser.team_settings.source_user_sent_destination_user_a_request_to_transfer_this_team", {
+            children: renderI18nText("file_browser.team_settings.source_user_sent_destination_user_a_request_to_transfer_this_team", {
               sourceUserEmail: B.source_user_email,
               destinationUserEmail: B.destination_user_email
             })
@@ -1191,10 +1191,10 @@ function tf(e) {
                   }
                 }));
               },
-              children: _$$tx("file_browser.folder_settings.revoke")
+              children: renderI18nText("file_browser.folder_settings.revoke")
             })
           })]
-        }), !B && y && (L ? _$$tx("file_browser.team_settings.transfer_teams_without_active_connected_projects") : _$$tx("file_browser.team_settings.transfer_team_link_to_an_external_organization", {
+        }), !B && y && (L ? renderI18nText("file_browser.team_settings.transfer_teams_without_active_connected_projects") : renderI18nText("file_browser.team_settings.transfer_team_link_to_an_external_organization", {
           transferTeamLink: jsx("button", {
             className: ti,
             onClick: () => {
@@ -1206,11 +1206,11 @@ function tf(e) {
                 }
               }));
             },
-            children: _$$tx("file_browser.team_settings.transfer_team")
+            children: renderI18nText("file_browser.team_settings.transfer_team")
           })
         })), !B && !y && jsxs(Fragment, {
           children: [jsx("div", {
-            children: _$$tx("file_browser.team_settings.only_org_name_admins_can_select_an_external_organization_to_manage_this_team", {
+            children: renderI18nText("file_browser.team_settings.only_org_name_admins_can_select_an_external_organization_to_manage_this_team", {
               orgName: o?.name
             })
           }), jsx("div", {
@@ -1229,7 +1229,7 @@ function tf(e) {
                   }
                 }));
               },
-              children: _$$tx("file_browser.team_settings.see_who_can_help_with_transfers")
+              children: renderI18nText("file_browser.team_settings.see_who_can_help_with_transfers")
             })
           })]
         })]
@@ -1239,14 +1239,14 @@ function tf(e) {
         className: to,
         children: [jsx("div", {
           className: td,
-          children: _$$tx("team_view.settings_table.delete_team")
+          children: renderI18nText("team_view.settings_table.delete_team")
         }), jsx("div", {
-          children: _$$tx("team_view.settings_table.delete_team_description")
+          children: renderI18nText("team_view.settings_table.delete_team_description")
         }), jsx("div", {
           children: jsx("button", {
             className: tl,
             onClick: () => G(R || C),
-            children: _$$tx("file_browser.team_settings.delete_team")
+            children: renderI18nText("file_browser.team_settings.delete_team")
           })
         })]
       }), jsxs("div", {
@@ -1257,16 +1257,16 @@ function tf(e) {
         }), jsxs("div", {
           className: tm,
           children: [jsx("strong", {
-            children: _$$tx("upgrade.ready_to_go_beyond_free_plan")
+            children: renderI18nText("upgrade.ready_to_go_beyond_free_plan")
           }), jsxs("div", {
-            children: [_$$tx("upgrade.more_features"), jsx($z, {
+            children: [renderI18nText("upgrade.more_features"), jsx($z, {
               className: t_,
               onClick: U,
               trackingProperties: {
                 trackingDescriptor: _$$c.UPGRADE,
                 upsellSource: _$$b2.TEAM_SETTINGS_MODAL
               },
-              children: _$$tx("upgrade.view_plans")
+              children: renderI18nText("upgrade.view_plans")
             })]
           })]
         })]
@@ -1279,14 +1279,14 @@ function tf(e) {
       }), jsx("div", {
         className: tm,
         children: jsxs("div", {
-          children: [_$$tx("file_browser.team_settings_modal.upgrade_to_organization"), jsx($z, {
+          children: [renderI18nText("file_browser.team_settings_modal.upgrade_to_organization"), jsx($z, {
             className: t_,
             onClick: U,
             trackingProperties: {
               trackingDescriptor: _$$c.UPGRADE_TO_ORGANIZATION,
               upsellSource: _$$b2.TEAM_SETTINGS_MODAL
             },
-            children: _$$tx("file_browser.team_settings_modal.upgrade")
+            children: renderI18nText("file_browser.team_settings_modal.upgrade")
           })]
         })
       })]
@@ -1304,8 +1304,8 @@ let tj = nF(async (e, {
 });
 function tI(e) {
   let t = {
-    MEMBERS: _$$t("file_browser.team_settings_modal.members_tab"),
-    SETTINGS: _$$t("file_browser.team_settings_modal.settings_tab")
+    MEMBERS: getI18nString("file_browser.team_settings_modal.members_tab"),
+    SETTINGS: getI18nString("file_browser.team_settings_modal.settings_tab")
   };
   let a = useRef(null);
   let {
@@ -1378,7 +1378,7 @@ let $$tT0 = Ju(function (e) {
       canViewTeam: canView ?? !1
     }));
   }, [canView, t, x]), !x) return null;
-  let v = rr;
+  let v = isMobileUA;
   let b = v ? window.innerWidth : Math.min(.7 * window.innerWidth, 650);
   let y = v ? window.innerWidth : Math.max(b, i);
   let j = canAdmin ? jsx(FL, {
@@ -1425,7 +1425,7 @@ let $$tT0 = Ju(function (e) {
           let s = "team" === entryView.view ? {
             view: "team",
             teamId: x.id,
-            teamViewTab: "SETTINGS" === e ? A$.SETTINGS : A$.MEMBERS
+            teamViewTab: "SETTINGS" === e ? NavigationRoutes.SETTINGS : NavigationRoutes.MEMBERS
           } : entryView;
           t(sf(s));
           let n = a.current;

@@ -2,10 +2,10 @@ import { jsx } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { useSelector } from "../vendor/514228";
 import { _gJ } from "../figma_app/763686";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import l from "../vendor/128080";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { n as _$$n } from "../905/477505";
 import { HT, RB } from "../figma_app/69680";
 import { S8, uz, p as _$$p, Ap, LK, NU } from "../905/359509";
@@ -101,24 +101,24 @@ export function $$x0({
       callback: () => t(i)
     });
     let k = [A(S8[uz]), {
-      name: _$$t("dev_handoff.code.lang_ios"),
-      displayText: _$$t("dev_handoff.code.lang_ios"),
+      name: getI18nString("dev_handoff.code.lang_ios"),
+      displayText: getI18nString("dev_handoff.code.lang_ios"),
       isChildChecked: e.id === _$$p || e.id === Ap,
       children: [A(S8[_$$p]), A(S8[Ap])]
     }, {
-      name: _$$t("dev_handoff.code.lang_android"),
-      displayText: _$$t("dev_handoff.code.lang_android"),
+      name: getI18nString("dev_handoff.code.lang_android"),
+      displayText: getI18nString("dev_handoff.code.lang_android"),
       isChildChecked: e.id === LK || e.id === NU,
       children: [A(S8[LK]), A(S8[NU])]
     }];
     if (n) return k;
     let R = k.length > 0 ? {
-      displayText: _$$t("dev_handoff.language_dropdown.first_party_header"),
+      displayText: getI18nString("dev_handoff.language_dropdown.first_party_header"),
       header: !0
     } : void 0;
     let N = p.length > 0;
     let P = N ? {
-      displayText: _$$t("dev_handoff.language_dropdown.third_party_header"),
+      displayText: getI18nString("dev_handoff.language_dropdown.third_party_header"),
       header: !0
     } : void 0;
     let O = [...(R ? [R] : []), ...k, ...(N ? [{
@@ -126,24 +126,24 @@ export function $$x0({
       displayText: ""
     }, ...(P ? [P] : []), ...p] : [])];
     !v && (d || O.push({
-      name: _$$t("dev_handoff.code_language.browse"),
-      displayText: _$$t("dev_handoff.code_language.browse"),
+      name: getI18nString("dev_handoff.code_language.browse"),
+      displayText: getI18nString("dev_handoff.code_language.browse"),
       callback: () => {
         ax(_gJ.PLUGIN);
-        zl.set(HT, "recents_and_saved");
-        zl.set(RB, !0);
+        atomStoreManager.set(HT, "recents_and_saved");
+        atomStoreManager.set(RB, !0);
       }
     }), d && O.push({
-      name: _$$t("dev_handoff.code_language.add"),
-      displayText: _$$t("dev_handoff.code_language.add"),
+      name: getI18nString("dev_handoff.code_language.add"),
+      displayText: getI18nString("dev_handoff.code_language.add"),
       callback: () => c?.()
     }));
     f.length > 0 && O.push({
       separator: !0,
       displayText: ""
     }, {
-      name: _$$t("dev_handoff.code_language.development"),
-      displayText: _$$t("dev_handoff.code_language.development"),
+      name: getI18nString("dev_handoff.code_language.development"),
+      displayText: getI18nString("dev_handoff.code_language.development"),
       isChecked: !!f.some(e => e.isChecked),
       children: f
     });

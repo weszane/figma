@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { c } from "../905/391496";
 import { m_ } from "../figma_app/209680";
 import { s as _$$s } from "../905/875063";
@@ -23,9 +23,9 @@ export function $$u1(e) {
     onClick: e => {
       e.stopPropagation();
     },
-    children: [tx("community.detail_view.figma_partner_this_creator_is"), jsx("span", {
+    children: [renderI18nText("community.detail_view.figma_partner_this_creator_is"), jsx("span", {
       className: kz,
-      children: tx("community.learn_more")
+      children: renderI18nText("community.learn_more")
     })]
   });
   return jsx(m_, {

@@ -3,10 +3,10 @@ import { useMemo, useCallback } from "react";
 import { Ez5, CNR } from "../figma_app/763686";
 import { AD } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
-import { eU } from "../figma_app/27355";
+import { atom } from "../figma_app/27355";
 import { parsePxNumber } from "../figma_app/783094";
 import { po } from "../9410/486658";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { iT } from "../figma_app/74165";
 import { a as _$$a } from "../9410/698287";
 import { qw } from "../figma_app/740163";
@@ -16,7 +16,7 @@ import { mW, qN } from "../905/123443";
 import { rY } from "../figma_app/524655";
 import { R as _$$R } from "../figma_app/294349";
 import { LdP } from "../figma_app/27776";
-let $$C1 = eU(new Map());
+let $$C1 = atom(new Map());
 let v = parsePxNumber(LdP);
 export function $$E0({
   children: e
@@ -48,7 +48,7 @@ export function $$E0({
   let k = useCallback(e => {
     let t = T(e);
     let i = d.get(t);
-    return void 0 !== i && t !== AD ? _$$t("comments.slide_number", {
+    return void 0 !== i && t !== AD ? getI18nString("comments.slide_number", {
       orderNum: i + 1
     }) : e.pageName;
   }, [T, d]);
@@ -101,7 +101,7 @@ export function $$E0({
     sidebarSorts: j,
     sidebarModesDisabled: !0,
     dockPositionAdjustment: w,
-    commentDisabledPositionBellMessage: _$$t("comments.comments_can_only_be_placed_on_slides"),
+    commentDisabledPositionBellMessage: getI18nString("comments.comments_can_only_be_placed_on_slides"),
     getParentName: k,
     getOnCommentSelect: A,
     sortComparatorOverrides: O,

@@ -3,7 +3,7 @@ import { useState, useEffect, createContext, useContext, useRef, useCallback, us
 import { throwTypeError } from "../figma_app/465776";
 import { useHandleKeyboardEvent, useHandleInputEvent, generateRecordingKey } from "../figma_app/878298";
 import { xH } from "../905/63728";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { jr } from "../figma_app/896988";
 import { vL } from "../905/826900";
 import { x } from "../905/179739";
@@ -156,7 +156,7 @@ export function $$f5({
   });
 }
 function E(e) {
-  return e !== xH.META || Ay.mac ? e : xH.CONTROL;
+  return e !== xH.META || BrowserInfo.mac ? e : xH.CONTROL;
 }
 function y({
   key: e,

@@ -1,4 +1,4 @@
-import { um, eU, zl } from "../figma_app/27355";
+import { um, atom, atomStoreManager } from "../figma_app/27355";
 import { az } from "../905/502364";
 import { gV } from "../905/337355";
 import { b } from "../905/965432";
@@ -37,7 +37,7 @@ export function $$c0(e, t) {
         }
       });
     }(t);
-    let u = eU(e => e(c), (e, t) => t(c, {
+    let u = atom(e => e(c), (e, t) => t(c, {
       type: "RESET"
     }));
     let p = e => {
@@ -54,21 +54,21 @@ export function $$c0(e, t) {
         type: id,
         properties: properties ?? {}
       };
-      zl.set(c, {
+      atomStoreManager.set(c, {
         type: "TRANSITION",
         payload: {
           event: a
         }
       });
     };
-    o(zl.get(az), i, p);
+    o(atomStoreManager.get(az), i, p);
     d.set(e, {
       clear: () => {
         d.$$delete(e);
-        l(zl.get(az), i, p);
+        l(atomStoreManager.get(az), i, p);
       },
       reset: () => {
-        let e = zl.get(az);
+        let e = atomStoreManager.get(az);
         l(e, i, p);
         o(e, i, p);
       }

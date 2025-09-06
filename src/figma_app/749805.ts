@@ -12,8 +12,8 @@ import { z4 } from "../905/37051";
 import { $g } from "../figma_app/415217";
 import { N as _$$N } from "../905/517193";
 import { xn, eN } from "../905/498952";
-import { eD } from "../figma_app/876459";
-import { Q1, Ji, Ay as _$$Ay3 } from "../figma_app/778880";
+import { desktopAPIInstance } from "../figma_app/876459";
+import { isInFigmaMobile, isMirrorOrMobileNoTripleTaps, BrowserInfo } from "../figma_app/778880";
 var a = i;
 var b = !1;
 let T = null;
@@ -21,7 +21,7 @@ let I = null;
 let S = null;
 let v = ["mousemove", "mousedown", "keydown", "touchstart", "touchmove", "wheel"];
 function A(e, t, r, i, l, A) {
-  if (Q1() || Ji() || _$$Ay3.isIpadNative) return;
+  if (isInFigmaMobile() || isMirrorOrMobileNoTripleTaps() || BrowserInfo.isIpadNative) return;
   let x = `last-active-at-${e.email}`;
   let N = "idle_timeout_last_active_at_change";
   let C = GZ();
@@ -47,7 +47,7 @@ function A(e, t, r, i, l, A) {
   };
   let M = () => !!A && A.getState().modalShown?.type === xn;
   let F = () => {
-    if (A && A?.getState().authedUsers.orderedIds.length === 1 && (Pg(), U2.clear()), w) Ay.reload("idleSessionTimeout-embed"); else if (O) {
+    if (A && A?.getState().authedUsers.orderedIds.length === 1 && (Pg(), U2.clear()), w) Ay.reload("idleSessionTimeout-embed");else if (O) {
       let {
         pathname,
         search
@@ -70,7 +70,7 @@ function A(e, t, r, i, l, A) {
   let U = () => {
     I && clearTimeout(I);
     T && clearTimeout(T);
-    !M() || document.hasFocus() || eD || A?.dispatch(ES(eN));
+    !M() || document.hasFocus() || desktopAPIInstance || A?.dispatch(ES(eN));
     let r = parseInt(localStorage.getItem(x)) + t - j();
     T = setTimeout(() => {
       _$$N.getIdleTimeoutPrecheck({
@@ -125,4 +125,4 @@ export function $$C1(e) {
 }
 export const K7 = $$N0;
 export const R_ = $$C1;
-export const w5 = $$x2; 
+export const w5 = $$x2;

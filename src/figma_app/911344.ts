@@ -1,12 +1,12 @@
 import { jsx } from "react/jsx-runtime";
 import { Component } from "react";
 import { ServiceCategories } from "../905/165054";
-import { sx } from "../905/449184";
-import { eD } from "../figma_app/876459";
+import { trackEventAnalytics } from "../905/449184";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { buildStaticUrl } from "../figma_app/169182";
-import { Ay } from "../figma_app/778880";
-import { $D } from "../905/11";
-import { nl } from "../figma_app/257275";
+import { BrowserInfo } from "../figma_app/778880";
+import { reportError } from "../905/11";
+import { isInteractionPathCheck } from "../figma_app/897289";
 import { F } from "../905/302958";
 import { Y5 } from "../figma_app/455680";
 import { T as _$$T } from "../905/858738";
@@ -14,18 +14,18 @@ import { p as _$$p, H } from "../905/216429";
 import { IN, NO, bA, Yw } from "../905/968269";
 import { of } from "../905/544659";
 import { Y } from "../905/696438";
-let y = !!eD || _$$T();
+let y = !!desktopAPIInstance || _$$T();
 let b = `
  document.close();
  document.addEventListener('keydown', (e) => {
-   if (e.keyCode === 80 /* P */ && !e.shiftKey && e.altKey && ${Ay.mac ? "!e.ctrlKey && e.metaKey" : "e.ctrlKey && !e.metaKey"}) {
+   if (e.keyCode === 80 /* P */ && !e.shiftKey && e.altKey && ${BrowserInfo.mac ? "!e.ctrlKey && e.metaKey" : "e.ctrlKey && !e.metaKey"}) {
      // Handle the plugin re-run shortcut
      window.parent.postMessage('${IN}', '*')
      e.stopPropagation()
      e.stopImmediatePropagation()
    } else if (${JSON.stringify(y)}) {
      // Handle Select All, Undo and Redo in the desktop app
-     const ctrlDown = ${Ay.mac ? "e.metaKey" : "e.ctrlKey"}
+     const ctrlDown = ${BrowserInfo.mac ? "e.metaKey" : "e.ctrlKey"}
      if (ctrlDown) {
        if (e.keyCode === 65 /* A */) {
          document.execCommand('selectAll')
@@ -189,13 +189,13 @@ class I {
       clipboardWriteAccess
     } = e;
     if (cameraAccess || microphoneAccess) try {
-      eD?.requestCameraAndOrMicrophonePermissions({
+      desktopAPIInstance?.requestCameraAndOrMicrophonePermissions({
         requester: isWidget ? `${name} widget` : `${name} plugin`,
         requestCamera: cameraAccess,
         requestMicrophone: microphoneAccess
       });
     } catch (e) {
-      eD && Y5.dispatch(F.enqueue({
+      desktopAPIInstance && Y5.dispatch(F.enqueue({
         type: "desktop-unsupported",
         error: !0,
         message: "Camera access is only available in the latest version of Figma Desktop"
@@ -245,7 +245,7 @@ class I {
           variables: H(!0)
         }
       }
-    }, "*") : $D(ServiceCategories.EXTENSIBILITY, Error(`innerIframeElement.contentWindow is null for pluginId=${this.pluginId}`));
+    }, "*") : reportError(ServiceCategories.EXTENSIBILITY, Error(`innerIframeElement.contentWindow is null for pluginId=${this.pluginId}`));
   }
   destroy() {
     this.outerIframeElement?.contentWindow?.removeEventListener("message", this.iframeMessageEventListener);
@@ -275,12 +275,12 @@ export class $$S0 extends Component {
         try {
           e = this.outerIframeElement.contentWindow?.__FIGMA_PLUGIN_SANDBOX_PAGE_LOADED;
         } catch (e) {
-          sx("Plugin Iframe Property Read Error", {
+          trackEventAnalytics("Plugin Iframe Property Read Error", {
             src: this.outerIframeElement.src,
             errorMessage: e.toString()
           });
         }
-        e ? this.instanceLoadingResolve() : e || nl() || this.instanceLoadingReject(Error("Error loading Figma plugin iframe sandbox. Try refreshing the page."));
+        e ? this.instanceLoadingResolve() : e || isInteractionPathCheck() || this.instanceLoadingReject(Error("Error loading Figma plugin iframe sandbox. Try refreshing the page."));
         this.outerIframeLoaded = !0;
       });
     };

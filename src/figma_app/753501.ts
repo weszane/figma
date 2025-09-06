@@ -1,5 +1,5 @@
 import { getFeatureFlags } from "../905/601108";
-import { Ay, rr } from "../figma_app/778880";
+import { BrowserInfo, isMobileUA } from "../figma_app/778880";
 export function $$a0(e) {
   return e?.nodeType === 1 && function (e) {
     for (; e;) {
@@ -10,7 +10,7 @@ export function $$a0(e) {
   }(e);
 }
 export function $$s2(e = !1) {
-  return (!!Ay.isIpadNative || !!Ay.ios && !!Ay.isInNativeApp) && !!window.FigmaMobile.shouldHandleMultiTouchInFullscreen || !!Ay.isMeetDevice || !!Ay.isIpad || !!e && !!getFeatureFlags().ce_il_pressure_sensitivity && !rr;
+  return (!!BrowserInfo.isIpadNative || !!BrowserInfo.ios && !!BrowserInfo.isInNativeApp) && !!window.FigmaMobile.shouldHandleMultiTouchInFullscreen || !!BrowserInfo.isMeetDevice || !!BrowserInfo.isIpad || !!e && !!getFeatureFlags().ce_il_pressure_sensitivity && !isMobileUA;
 }
 export function $$o1(e) {
   e.stopPropagation();

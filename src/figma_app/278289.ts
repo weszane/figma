@@ -4,7 +4,7 @@ import { useSelector } from "../vendor/514228";
 import { glU } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { h } from "../905/207101";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { VF, uY } from "../figma_app/989514";
 import { b } from "../figma_app/5657";
 import { eN } from "../figma_app/202626";
@@ -41,9 +41,9 @@ export function $$_0(e) {
       primaryCtaProps: e.primaryCtaProps,
       secondaryCtaProps: e.secondaryCtaProps,
       targetKey: "frame",
-      title: e.hasUiKits ? tx("tooltips_plus_onboarding.presets_frame_step.title") : tx("tooltips_plus_onboarding.no_nav_frames_get_started_with_a_frame"),
+      title: e.hasUiKits ? renderI18nText("tooltips_plus_onboarding.presets_frame_step.title") : renderI18nText("tooltips_plus_onboarding.no_nav_frames_get_started_with_a_frame"),
       trackingContextName: e.fromCursorBot ? "Cursor Bot Create Frame Step" : "Tooltips+ Frame Step",
-      children: e.bodyText || tx("tooltips_plus_onboarding.no_nav_frames_description")
+      children: e.bodyText || renderI18nText("tooltips_plus_onboarding.no_nav_frames_description")
     })
   });
 }

@@ -1,9 +1,9 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef, useState, useCallback, useEffect } from "react";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { A } from "../vendor/90566";
 import { parsePxNumber } from "../figma_app/783094";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { AG } from "../figma_app/999312";
 import { ms } from "../figma_app/209680";
 import { E } from "../5430/741319";
@@ -48,7 +48,7 @@ function b({
         value: e,
         spellCheck: !1,
         ref: a,
-        placeholder: o ?? _$$t("community.search.search_community"),
+        placeholder: o ?? getI18nString("community.search.search_community"),
         onChange: e => {
           let s = e.currentTarget.value;
           r(s);
@@ -84,9 +84,9 @@ export function $$w0({
   let g = !!y;
   let v = y?.search.query;
   let [w, C] = useState("");
-  let L = md(E);
-  let T = _$$t("community.search.placeholder");
-  f && (T = Fm() ? _$$t("community.search.search_templates_and_tools") : _$$t("community.search.search_community_placeholder"));
+  let L = useAtomWithSubscription(E);
+  let T = getI18nString("community.search.placeholder");
+  f && (T = Fm() ? getI18nString("community.search.search_templates_and_tools") : getI18nString("community.search.search_community_placeholder"));
   let I = A(e, t ? 600 : 400);
   let N = useCallback(() => {
     C("");

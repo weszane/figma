@@ -7,7 +7,7 @@ import l from "classnames";
 import { e as _$$e } from "../905/280005";
 import { oJ } from "../905/63728";
 import { o6, cZ, aH } from "../figma_app/806412";
-import { PN } from "../figma_app/257275";
+import { isInteractionOrEvalMode } from "../figma_app/897289";
 import { B } from "../905/714743";
 import { S } from "../905/339549";
 import { oB } from "../905/929976";
@@ -461,7 +461,7 @@ export class $$B6 extends o6 {
       e.stopPropagation();
     });
     this.onMouseMove = cZ(this, "mousemove", e => {
-      if (PN()) {
+      if (isInteractionOrEvalMode()) {
         if (!(this.mouseMotionSinceMouseDown < this.MENU_CLOSE_MOUSE_MOVE_SENSITIVITY)) return aH;
         this.mouseMotionSinceMouseDown += this.MENU_CLOSE_MOUSE_MOVE_SENSITIVITY;
       } else {

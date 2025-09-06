@@ -11,7 +11,7 @@ import { l as _$$l } from "../905/479687";
 import { g as _$$g } from "../905/687265";
 import { glU, vhv } from "../figma_app/763686";
 import { Ay } from "@stylexjs/stylex";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { gI } from "../figma_app/396464";
 import { PU, aK } from "../figma_app/334505";
 import { wr } from "../figma_app/741237";
@@ -63,7 +63,7 @@ function I({
       key: s
     }, jsx(oW, {
       src: e,
-      alt: _$$t("buzz.bulk_create.image_preview_alt", {
+      alt: getI18nString("buzz.bulk_create.image_preview_alt", {
         count: s + 1
       }),
       ...Ay.props(T.base, (t || l > 0) && T.enabled)
@@ -114,7 +114,7 @@ export function $$N1() {
   return jsx("div", {
     ...Ay.props(w.instructionText),
     children: jsx("span", {
-      children: _$$t("buzz.bulk_create.select_nodes_instruction")
+      children: getI18nString("buzz.bulk_create.select_nodes_instruction")
     })
   });
 }
@@ -188,7 +188,7 @@ export function $$R0({
     onMouseLeave: () => x(!1),
     children: [jsxs(_$$E, {
       ...Ay.props(A.containerBase, h && A.containerEnabled, N && A.containerMapped, u && N && A.containerMappedHovered),
-      "data-tooltip": h || 0 !== a ? "" : _$$t("buzz.bulk_create.disabled_field_tooltip"),
+      "data-tooltip": h || 0 !== a ? "" : getI18nString("buzz.bulk_create.disabled_field_tooltip"),
       "data-tooltip-type": Ib.TEXT,
       "data-tooltip-show-right": !0,
       "aria-pressed": N,
@@ -368,7 +368,7 @@ function k({
   return t && 0 !== e ? jsx("div", {
     className: "x8x9d4c x10l6tqk x13vifvy x3m8u43 x1gskr33 x1cmmqis xi5j7vn xc1rnzj",
     children: jsx(K, {
-      "aria-label": _$$t("buzz.bulk_create.unbind_field"),
+      "aria-label": getI18nString("buzz.bulk_create.unbind_field"),
       onClick: l,
       children: jsx(_$$f, {})
     })

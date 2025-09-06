@@ -3,12 +3,12 @@ import { useEffect } from "react";
 import { useDispatch } from "../vendor/514228";
 import { languageCodes } from "../905/816253";
 import { getFeatureFlags } from "../905/601108";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { getInitialOptions, buildUploadUrl } from "../figma_app/169182";
 import { I7 } from "../figma_app/594947";
 import { oW } from "../905/675859";
 import { B1, Vb, EK, Kz } from "../9864/183809";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { to } from "../905/156213";
 import { b as _$$b } from "../905/985254";
 import { c as _$$c } from "../905/370443";
@@ -36,15 +36,15 @@ let I = e => {
 function $$A(e) {
   let t = useDispatch();
   let n = DP();
-  let r = e.isBrazilianVariant ? tx("pt_br_announcement.description") : tx("pt_br_announcement.non_brazilian.description");
+  let r = e.isBrazilianVariant ? renderI18nText("pt_br_announcement.description") : renderI18nText("pt_br_announcement.non_brazilian.description");
   return jsx(_l, {
     isShowing: e.isShowing,
     trackingContextName: "pt_br_launch_announcement",
     onClose: e.onClose,
-    title: tx("pt_br_announcement.title"),
+    title: renderI18nText("pt_br_announcement.title"),
     description: r,
     primaryCta: {
-      label: tx("pt_br_announcement.cta_button"),
+      label: renderI18nText("pt_br_announcement.cta_button"),
       type: "button",
       onClick: () => {
         t(to({
@@ -60,15 +60,15 @@ function $$A(e) {
       width: 332,
       height: 404,
       src: buildUploadUrl("dark" === n ? "1f8cff5121905a8bd088cf9dc7759e22322a90ef" : "e9552341c3ffb2f3090e2cd95e29faaddf7b8397"),
-      alt: _$$t("pt_br_launch_announcement.image_alt_text")
+      alt: getI18nString("pt_br_launch_announcement.image_alt_text")
     })
   });
 }
 let S = r1("has_tried_pt_br");
 export function $$N0() {
   let e = useDispatch();
-  let t = md(S);
-  let n = md(mp);
+  let t = useAtomWithSubscription(S);
+  let n = useAtomWithSubscription(mp);
   let _ = "loaded" === t.status && "loaded" === n.status;
   let {
     getConfig

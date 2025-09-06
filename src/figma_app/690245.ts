@@ -1,14 +1,14 @@
 import { jsx } from "react/jsx-runtime";
 import { useState } from "react";
 import { eJ } from "../vendor/352483";
-import { E3 } from "../figma_app/27355";
+import { createLocalStorageAtom } from "../figma_app/27355";
 import { generateRecordingKey } from "../figma_app/878298";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { a as _$$a } from "../905/290931";
 import { $J } from "../905/278499";
 import { Oq, is } from "../905/904596";
 import { A as _$$A } from "../905/296182";
-export let $$_1 = E3("content_fill_prompt_history", []);
+export let $$_1 = createLocalStorageAtom("content_fill_prompt_history", []);
 export function $$h0({
   action: e,
   regenerateWithPrompt: t,
@@ -35,8 +35,8 @@ export function $$h0({
     prompt: E,
     promptHistory,
     recordingKey: generateRecordingKey(r, "prompt"),
-    submitLabel: tx("fullscreen_actions.ai_content_fill.update_content"),
-    suggestion: _$$t("fullscreen_actions.ai_content_fill.prompt_suggestion")
+    submitLabel: renderI18nText("fullscreen_actions.ai_content_fill.update_content"),
+    suggestion: getI18nString("fullscreen_actions.ai_content_fill.prompt_suggestion")
   }) : jsx(Oq, {
     iterateOptions: [{
       type: is.UNDO,

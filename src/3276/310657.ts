@@ -9,11 +9,11 @@ import { P as _$$P } from "../vendor/348225";
 import { ol, H0, GL } from "../figma_app/191804";
 import { Hd } from "../figma_app/583114";
 import { wY } from "../figma_app/708845";
-import { Xb } from "../figma_app/778880";
+import { isAnyMobile } from "../figma_app/778880";
 import { Pt } from "../figma_app/806412";
 import { GG } from "../905/511649";
 import { B as _$$B } from "../905/714743";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { m as _$$m } from "../905/99004";
 import { throwTypeError } from "../figma_app/465776";
 import { d as _$$d } from "../vendor/456530";
@@ -194,9 +194,9 @@ export function $$O0(e) {
     isTabAccessible
   } = e;
   let [S, D] = useState(!1);
-  let O = Xb ? "multiplayer_bell--buttonMobile--Z5j0F multiplayer_bell--button--QWm4n multiplayer_bell--multiplayerText--b-7-0 text--fontPos11--2LvXf text--_fontBase--QdLsd multiplayer_bell--multiplayerTextMobile--4qVD- multiplayer_bell--multiplayerText--b-7-0 text--fontPos11--2LvXf text--_fontBase--QdLsd text--fontPos14--OL9Hp text--_fontBase--QdLsd" : "multiplayer_bell--button--QWm4n multiplayer_bell--multiplayerText--b-7-0 text--fontPos11--2LvXf text--_fontBase--QdLsd";
-  let B = Xb ? "multiplayer_bell--messageMobile--Z1sCx multiplayer_bell--message--POM9v multiplayer_bell--multiplayerText--b-7-0 text--fontPos11--2LvXf text--_fontBase--QdLsd multiplayer_bell--multiplayerTextMobile--4qVD- multiplayer_bell--multiplayerText--b-7-0 text--fontPos11--2LvXf text--_fontBase--QdLsd text--fontPos14--OL9Hp text--_fontBase--QdLsd" : "multiplayer_bell--message--POM9v multiplayer_bell--multiplayerText--b-7-0 text--fontPos11--2LvXf text--_fontBase--QdLsd";
-  let U = Xb ? "multiplayer_bell--closeButtonMobile--s-kHx multiplayer_bell--closeButton--5Pbdu multiplayer_bell--multiplayerTextMobile--4qVD- multiplayer_bell--multiplayerText--b-7-0 text--fontPos11--2LvXf text--_fontBase--QdLsd text--fontPos14--OL9Hp text--_fontBase--QdLsd" : "multiplayer_bell--closeButton--5Pbdu";
+  let O = isAnyMobile ? "multiplayer_bell--buttonMobile--Z5j0F multiplayer_bell--button--QWm4n multiplayer_bell--multiplayerText--b-7-0 text--fontPos11--2LvXf text--_fontBase--QdLsd multiplayer_bell--multiplayerTextMobile--4qVD- multiplayer_bell--multiplayerText--b-7-0 text--fontPos11--2LvXf text--_fontBase--QdLsd text--fontPos14--OL9Hp text--_fontBase--QdLsd" : "multiplayer_bell--button--QWm4n multiplayer_bell--multiplayerText--b-7-0 text--fontPos11--2LvXf text--_fontBase--QdLsd";
+  let B = isAnyMobile ? "multiplayer_bell--messageMobile--Z1sCx multiplayer_bell--message--POM9v multiplayer_bell--multiplayerText--b-7-0 text--fontPos11--2LvXf text--_fontBase--QdLsd multiplayer_bell--multiplayerTextMobile--4qVD- multiplayer_bell--multiplayerText--b-7-0 text--fontPos11--2LvXf text--_fontBase--QdLsd text--fontPos14--OL9Hp text--_fontBase--QdLsd" : "multiplayer_bell--message--POM9v multiplayer_bell--multiplayerText--b-7-0 text--fontPos11--2LvXf text--_fontBase--QdLsd";
+  let U = isAnyMobile ? "multiplayer_bell--closeButtonMobile--s-kHx multiplayer_bell--closeButton--5Pbdu multiplayer_bell--multiplayerTextMobile--4qVD- multiplayer_bell--multiplayerText--b-7-0 text--fontPos11--2LvXf text--_fontBase--QdLsd text--fontPos14--OL9Hp text--_fontBase--QdLsd" : "multiplayer_bell--closeButton--5Pbdu";
   let H = color ?? ol.MULTIPLAYER_GRAY;
   let V = useMemo(() => {
     if ("brand" === color) return {
@@ -318,7 +318,7 @@ export function $$O0(e) {
                           onCloseCallback && onCloseCallback();
                           D(!0);
                         },
-                        "aria-label": t("collaboration.spotlight.bell.dismiss"),
+                        "aria-label": getI18nString("collaboration.spotlight.bell.dismiss"),
                         children: jsx(_$$B, {
                           svg: _$$A4
                         })

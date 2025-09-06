@@ -1,10 +1,10 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { md, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, Xr } from "../figma_app/27355";
 import { I7 } from "../figma_app/594947";
 import { _Y } from "../figma_app/919079";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { V as _$$V } from "../905/223767";
 import { Lo, to } from "../905/156213";
 import { b as _$$b } from "../905/985254";
@@ -80,8 +80,8 @@ function T({
 }) {
   let t = _$$I(e.editorType);
   let i = function (e) {
-    let t = md(UQ);
-    let i = md(zN);
+    let t = useAtomWithSubscription(UQ);
+    let i = useAtomWithSubscription(zN);
     let {
       getConfig
     } = I7("exp_free_badge_in_drafts_plan_comparison");
@@ -101,9 +101,9 @@ function w({
   trackingProperties: e
 }) {
   let t = useDispatch();
-  let i = md(QY);
+  let i = useAtomWithSubscription(QY);
   let n = Xr(xw);
-  let o = md(Zk);
+  let o = useAtomWithSubscription(Zk);
   let h = useSelector(e => e.multiplayer.sessionID);
   let m = tS();
   return jsx(E, {
@@ -125,7 +125,7 @@ function w({
         }
       }));
     },
-    text: _$$t("fullscreen.filename_view.free"),
+    text: getI18nString("fullscreen.filename_view.free"),
     trackingProperties: e
   });
 }
@@ -144,7 +144,7 @@ function S({
         }
       }));
     },
-    text: _$$t("fullscreen.filename_view.free"),
+    text: getI18nString("fullscreen.filename_view.free"),
     trackingProperties: e
   });
 }
@@ -180,16 +180,16 @@ function ee(e) {
       t = parseInt(o.data.team?.teamFileCounts?.slideFileCount ?? "0");
   }
   if (void 0 === t || 0 === t) return null;
-  let m = t < WW ? tx("fullscreen.file_tracker_modal.num_files_of_max_free_files_created", {
+  let m = t < WW ? renderI18nText("fullscreen.file_tracker_modal.num_files_of_max_free_files_created", {
     numFiles: t,
     maxFreeFiles: WW
-  }) : tx("fullscreen.file_tracker_modal.this_is_your_last_free_file");
-  let f = t < WW ? tx("fullscreen.file_tracker_modal.starter_plans_are_free_but_they_limit_you_to_just_max_free_files", {
+  }) : renderI18nText("fullscreen.file_tracker_modal.this_is_your_last_free_file");
+  let f = t < WW ? renderI18nText("fullscreen.file_tracker_modal.starter_plans_are_free_but_they_limit_you_to_just_max_free_files", {
     maxFreeFiles: WW
-  }) : tx("fullscreen.file_tracker_modal.max_free_files_already_you_are_becoming_a_pro", {
+  }) : renderI18nText("fullscreen.file_tracker_modal.max_free_files_already_you_are_becoming_a_pro", {
     maxFreeFiles: WW
   });
-  let x = [_$$t("fullscreen.file_tracker_modal.unlimited_files_pages"), _$$t("fullscreen.file_tracker_modal.audio_conversations_in_files"), _$$t("fullscreen.file_tracker_modal.unlimited_version_history_and_more")];
+  let x = [getI18nString("fullscreen.file_tracker_modal.unlimited_files_pages"), getI18nString("fullscreen.file_tracker_modal.audio_conversations_in_files"), getI18nString("fullscreen.file_tracker_modal.unlimited_version_history_and_more")];
   let y = {
     fileTeamId: teamId,
     numFiles: t,
@@ -261,7 +261,7 @@ function ee(e) {
           trackingProperties: {
             trackingDescriptor: _$$c.COMPARE_PLANS
           },
-          children: tx("fullscreen.file_tracker_modal.compare_plans")
+          children: renderI18nText("fullscreen.file_tracker_modal.compare_plans")
         })]
       })
     })
@@ -288,7 +288,7 @@ function ei({
           children: jsx(_$$E, {
             fontSize: 13,
             fontWeight: "semi-bold",
-            children: tx("fullscreen.pro_trial_upsell_modal.title", {
+            children: renderI18nText("fullscreen.pro_trial_upsell_modal.title", {
               numOfDaysLeft: n?.daysLeft
             })
           })
@@ -296,7 +296,7 @@ function ei({
           className: "pro_trial_upsell_modal--textContainer--kGoDm",
           children: jsx(_$$E, {
             fontSize: 11,
-            children: tx("fullscreen.pro_trial_upsell_modal.description")
+            children: renderI18nText("fullscreen.pro_trial_upsell_modal.description")
           })
         }), jsx("div", {
           className: "pro_trial_upsell_modal--btnContainer--wZVCK",
@@ -316,7 +316,7 @@ function ei({
                 }
               }));
             },
-            children: _$$t("fullscreen.pro_trial_upsell_modal.cta_text")
+            children: getI18nString("fullscreen.pro_trial_upsell_modal.cta_text")
           })
         })]
       })
@@ -386,7 +386,7 @@ function eo({
   return jsx(E, {
     name: _Y.PRO_TRIAL,
     onBadgeClick: () => n(!0),
-    text: _$$t("fullscreen.filename_view.pro_trial"),
+    text: getI18nString("fullscreen.filename_view.pro_trial"),
     trackingProperties: {
       ...t,
       ...ng.getTrackingProperties()
@@ -427,7 +427,7 @@ function el({
         }
       }));
     },
-    text: h ? _$$t("fullscreen.filename_view.trial_expired") : _$$t("fullscreen.filename_view.locked"),
+    text: h ? getI18nString("fullscreen.filename_view.trial_expired") : getI18nString("fullscreen.filename_view.locked"),
     trackingProperties: {
       ...i,
       ...(h ? ng.getTrackingProperties() : {})
@@ -463,7 +463,7 @@ function ec({
   return jsx(E, {
     name: _Y.FREE,
     onBadgeClick: () => i(),
-    text: _$$t("fullscreen.filename_view.free"),
+    text: getI18nString("fullscreen.filename_view.free"),
     trackingProperties: e
   });
 }
@@ -481,7 +481,7 @@ function ep({
       onBadgeClick: () => {
         e.editorType && eu.includes(e.editorType) ? a(!0) : s();
       },
-      text: _$$t("fullscreen.filename_view.free"),
+      text: getI18nString("fullscreen.filename_view.free"),
       trackingProperties: t
     }), n && jsx(ee, {
       teamId: i,
@@ -497,7 +497,7 @@ function eh({
 }) {
   let i = _$$y(t, _$$b2.STARTER_TEAM_FILE_BADGE);
   let n = useDispatch();
-  let o = md(QY);
+  let o = useAtomWithSubscription(QY);
   let c = Xr(xw);
   return jsx(E, {
     name: _Y.FREE,
@@ -509,7 +509,7 @@ function eh({
       })));
       i();
     },
-    text: _$$t("fullscreen.filename_view.free"),
+    text: getI18nString("fullscreen.filename_view.free"),
     trackingProperties: e
   });
 }

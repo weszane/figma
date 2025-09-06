@@ -11,7 +11,7 @@ import { qe, zN } from "../figma_app/416935";
 import { Jn } from "../905/17223";
 import { tM, vd } from "../figma_app/637027";
 import { B } from "../905/714743";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { n as _$$n } from "../figma_app/537817";
 import { S as _$$S } from "../905/339549";
 import { b as _$$b } from "../905/985254";
@@ -74,7 +74,7 @@ function P({
   user: e
 }) {
   let t = qe(e.email) ? null : zN(e.email)?.split(".")[0];
-  t = t ? t.charAt(0).toUpperCase() + t.slice(1) : _$$t("team_creation_speed_bump.placeholder.team_name", {
+  t = t ? t.charAt(0).toUpperCase() + t.slice(1) : getI18nString("team_creation_speed_bump.placeholder.team_name", {
     userName: e.name
   });
   return jsxs("div", {
@@ -158,7 +158,7 @@ let D = Ju(function (e) {
     name: "Team creation speed bump",
     properties: o,
     children: jsxs(d_, {
-      title: _$$t("team_creation_speed_bump.title"),
+      title: getI18nString("team_creation_speed_bump.title"),
       titleClassName: "team_creation_speed_bump--modalTitle--ji1ue",
       className: "team_creation_speed_bump--modal--Q02I8",
       size: r,
@@ -174,18 +174,18 @@ let D = Ju(function (e) {
         children: [jsxs("div", {
           className: "team_creation_speed_bump--modalText--GFoIV",
           children: [jsx("p", {
-            children: tx("team_creation_speed_bump.body.best_way_to_organize_team_projects")
+            children: renderI18nText("team_creation_speed_bump.body.best_way_to_organize_team_projects")
           }), jsx("p", {
             className: "team_creation_speed_bump--modalBold--Z5JFe",
-            children: _$$t("team_creation_speed_bump.body.upgrade_a_team")
+            children: getI18nString("team_creation_speed_bump.body.upgrade_a_team")
           }), jsx(T, {
-            text: _$$t("team_creation_speed_bump.body.unlimited_files")
+            text: getI18nString("team_creation_speed_bump.body.unlimited_files")
           }), jsx(T, {
-            text: _$$t("team_creation_speed_bump.body.viewers_and_commenters"),
-            hoverText: _$$t("team_creation_speed_bump.tooltip.viewers_and_commenters")
+            text: getI18nString("team_creation_speed_bump.body.viewers_and_commenters"),
+            hoverText: getI18nString("team_creation_speed_bump.tooltip.viewers_and_commenters")
           }), jsx(T, {
-            text: _$$t("team_creation_speed_bump.body.set_permissions"),
-            hoverText: _$$t("team_creation_speed_bump.tooltip.set_permissions")
+            text: getI18nString("team_creation_speed_bump.body.set_permissions"),
+            hoverText: getI18nString("team_creation_speed_bump.tooltip.set_permissions")
           })]
         }), jsx(P, {
           user: e.user
@@ -197,7 +197,7 @@ let D = Ju(function (e) {
         children: [jsx(_$$S, {
           checked: g,
           onChange: e => _(e.currentTarget.checked),
-          label: _$$t("team_creation_speed_bump.footer.checkbox_text")
+          label: getI18nString("team_creation_speed_bump.footer.checkbox_text")
         }), jsxs("div", {
           className: "team_creation_speed_bump--footerButtons--zvChs",
           children: [jsx("div", {
@@ -209,10 +209,10 @@ let D = Ju(function (e) {
                 l();
                 p();
               },
-              innerText: _$$t("team_creation_speed_bump.footer.upgrade_button.text"),
-              children: [_$$t("team_creation_speed_bump.footer.upgrade_button.text"), jsx("div", {
+              innerText: getI18nString("team_creation_speed_bump.footer.upgrade_button.text"),
+              children: [getI18nString("team_creation_speed_bump.footer.upgrade_button.text"), jsx("div", {
                 className: "team_creation_speed_bump--proLabel--OKnVm text--fontPos9--naThA text--_fontBase--QdLsd",
-                children: _$$t("team_creation_speed_bump.footer.upgrade_button.label")
+                children: getI18nString("team_creation_speed_bump.footer.upgrade_button.label")
               })]
             })
           }), jsx(vd, {
@@ -222,7 +222,7 @@ let D = Ju(function (e) {
               d();
               e.startTeamCreation();
             },
-            children: _$$t("team_creation_speed_bump.footer.create_team_button.text")
+            children: getI18nString("team_creation_speed_bump.footer.create_team_button.text")
           })]
         })]
       })]

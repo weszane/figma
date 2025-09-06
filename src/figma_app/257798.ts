@@ -14,7 +14,7 @@ import { O as _$$O } from "../905/410575";
 import { u as _$$u } from "../905/486140";
 import { Pt } from "../figma_app/806412";
 import { s as _$$s2 } from "../cssbuilder/589278";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { A as _$$A } from "../905/482208";
 import { Y5 } from "../figma_app/455680";
 import { Zr, vm, yU } from "../figma_app/678782";
@@ -75,9 +75,9 @@ function G() {
     arrowPosition: F_.RIGHT_BODY,
     description: jsx("span", {
       className: _$$s2.preWrap.$,
-      children: tx("ui3_labels_curator.description", {
+      children: renderI18nText("ui3_labels_curator.description", {
         view: jsx("strong", {
-          children: tx("fullscreen_actions.view-menu")
+          children: renderI18nText("fullscreen_actions.view-menu")
         })
       })
     }),
@@ -85,7 +85,7 @@ function G() {
     onClose: () => complete(),
     primaryCta: {
       type: "button",
-      label: tx("general.got_it"),
+      label: renderI18nText("general.got_it"),
       onClick: () => complete(),
       ctaTrackingDescriptor: _$$c.GOT_IT
     },
@@ -96,14 +96,14 @@ function G() {
           source: "show-labels-curator"
         });
       },
-      label: s ? tx("ui3_labels_curator.secondary_cta.turn_off") : tx("ui3_labels_curator.secondary_cta.turn_on"),
+      label: s ? renderI18nText("ui3_labels_curator.secondary_cta.turn_off") : renderI18nText("ui3_labels_curator.secondary_cta.turn_on"),
       ctaTrackingDescriptor: _$$c.CLOSE
     },
     shouldDisableAnimation: !0,
     shouldRepositionOnTargetLost: !1,
     targetKey: "ui3_labels_onboarding",
     testId: "ui3_labels_onboarding_test_id",
-    title: tx("ui3_labels_curator.title"),
+    title: renderI18nText("ui3_labels_curator.title"),
     trackingContextName: "UI3LabelsEducation"
   });
 }
@@ -287,7 +287,7 @@ function q(e) {
   let N = jsx("div", {
     "data-onboarding-key": "ui3_labels_onboarding",
     className: _$$s2.inline.$,
-    children: tx("fullscreen.properties_panel.section_position.label_alignment")
+    children: renderI18nText("fullscreen.properties_panel.section_position.label_alignment")
   });
   return jsxs(Fragment, {
     children: [e.renderRow(N, T, S, A ? x : null), jsx(G, {})]

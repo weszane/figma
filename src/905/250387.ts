@@ -1,8 +1,8 @@
 import { fn, sH } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Dk } from "../figma_app/623293";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { vU } from "../figma_app/193867";
 export function $$c1(e, t) {
@@ -39,11 +39,11 @@ export function $$u0(e, t, i, n) {
   var r;
   (r = t).startsWith("mailto:") ? r = r.slice(7) : r.startsWith("tel:") && (r = r.slice(4));
   Dk(r);
-  sx("Copy Hyperlink", {
+  trackEventAnalytics("Copy Hyperlink", {
     source: i
   });
   e(F.enqueue({
-    message: n ?? _$$t("visual_bell.url_copied_to_your_clipboard", {
+    message: n ?? getI18nString("visual_bell.url_copied_to_your_clipboard", {
       url: t
     }),
     type: "hyperlink-copied"

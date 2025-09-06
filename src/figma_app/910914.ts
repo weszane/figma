@@ -7,7 +7,7 @@ import { $ } from "../905/692618";
 import { _gJ } from "../figma_app/763686";
 import { buildUploadUrl } from "../figma_app/169182";
 import { f as _$$f } from "../figma_app/258006";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { b } from "../905/985254";
 import { ax } from "../figma_app/741237";
 import { LS } from "../905/782918";
@@ -48,11 +48,11 @@ export function $$b1() {
       }),
       onDismiss: r,
       children: [jsx(Q, {
-        title: _$$t("dev_handoff.inspect_panel.plugins_hint.title"),
-        children: tx("dev_handoff.inspect_panel.plugins_hint")
+        title: getI18nString("dev_handoff.inspect_panel.plugins_hint.title"),
+        children: renderI18nText("dev_handoff.inspect_panel.plugins_hint")
       }), jsx($, {
         onClick: c,
-        children: tx("dev_handoff.inspect_panel.plugins_hint.link")
+        children: renderI18nText("dev_handoff.inspect_panel.plugins_hint.link")
       })]
     })
   }) : null;

@@ -1,5 +1,5 @@
 import { lu } from "../figma_app/84367";
-import { eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 let a = {};
 let s = new Map();
 export function $$o1(e) {
@@ -13,9 +13,9 @@ export function $$l0(e, t, i) {
     i && i();
     s.set(t, lu(o, {
       onChangeImmediate: () => {
-        if (eD) {
+        if (desktopAPIInstance) {
           let i = o.getCopy() === e.propertyValue;
-          eD.updateFullscreenMenuState({
+          desktopAPIInstance.updateFullscreenMenuState({
             actionCheckedState: {
               [t]: i
             }

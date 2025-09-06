@@ -3,7 +3,7 @@ import { useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import { tT } from "../905/663269";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { Rs } from "../figma_app/288654";
 import { I7 } from "../figma_app/594947";
 import { g as _$$g } from "../figma_app/618031";
@@ -296,7 +296,7 @@ export function $$ea19(e) {
   let y = useRef(!1);
   let b = E?.orgPublicInfo?.expOneClickAskToEditOrgId.status === tT.Loaded ? E.orgPublicInfo.expOneClickAskToEditOrgId.data : null;
   let T = f?.teamPublicInfo?.expOneClickAskToEditTeamIdPublic.status === tT.Loaded ? f.teamPublicInfo.expOneClickAskToEditTeamIdPublic.data : null;
-  return useCallback(() => (!y.current && (b || T) && (az.trackDefinedEvent("activation.experiment_exposure_for_user", {
+  return useCallback(() => (!y.current && (b || T) && (analyticsEventManager.trackDefinedEvent("activation.experiment_exposure_for_user", {
     userId: r?.id,
     fileKey: i?.key,
     orgId: a || void 0,
@@ -333,7 +333,7 @@ export function $$es23({
     E.current = !1;
   }, [u, e, t]);
   let y = useCallback(r => {
-    u && !E.current && (az.trackDefinedEvent("activation.experiment_exposure_for_user", {
+    u && !E.current && (analyticsEventManager.trackDefinedEvent("activation.experiment_exposure_for_user", {
       userId: u,
       orgId: e === FOrganizationLevelType.ORG ? t : void 0,
       teamId: e === FOrganizationLevelType.TEAM ? t : void 0,

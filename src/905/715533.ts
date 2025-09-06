@@ -1,6 +1,6 @@
 import { yT } from "../figma_app/492908";
 import { serializeJSON } from "../905/251556";
-import { Lg } from "../figma_app/257275";
+import { getFalseValue } from "../figma_app/897289";
 export class $$s0 {
   constructor(e) {
     this.config = e;
@@ -41,7 +41,7 @@ export class $$s0 {
               if (!this.onRealtimeMessage) throw Error("Forgot to set shim callback?");
               this.onRealtimeMessage(i, t);
             };
-            Lg() ? e() : setTimeout(() => {
+            getFalseValue() ? e() : setTimeout(() => {
               e();
             });
           }

@@ -1,10 +1,10 @@
 import { jsx } from "react/jsx-runtime";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { bv } from "../figma_app/421401";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Um } from "../905/848862";
 import { NJ } from "../figma_app/518077";
-import { O } from "../905/247093";
+import { UNASSIGNED } from "../905/247093";
 if (443 == require.j) {}
 export function $$c0({
   selectedWorkspaceId: e,
@@ -20,16 +20,16 @@ export function $$c0({
   if (p.forEach(e => g[e.id] = e), !useSelector(({
     selectedView: e
   }) => "orgAdminSettings" === e.view) || !p.length) return null;
-  let h = p.map(e => e.id).concat(O);
+  let h = p.map(e => e.id).concat(UNASSIGNED);
   return jsx(bv, {
-    label: _$$t("members_table.menu_bar_filter.workspace"),
+    label: getI18nString("members_table.menu_bar_filter.workspace"),
     dispatch: c,
     dropdownShown: _,
     dropdownType: "FILTER_WORKSPACE_DROPDOWN",
     values: h,
     selectedValue: e,
     getCount: a,
-    getDisplayText: e => e === O ? _$$t("license_group.unassigned") : g[e]?.name ?? "",
+    getDisplayText: e => e === UNASSIGNED ? getI18nString("license_group.unassigned") : g[e]?.name ?? "",
     updateFilter: e => t(e)
   });
 }

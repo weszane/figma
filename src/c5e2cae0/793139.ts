@@ -11,7 +11,7 @@ import { tB, $$ } from "../figma_app/637027";
 import { P as _$$P } from "../905/347284";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s2 } from "../cssbuilder/589278";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
 import { Y as _$$Y } from "../905/830372";
 import { S as _$$S } from "../905/339549";
@@ -87,15 +87,15 @@ export function $$F1(e) {
       className: B,
       children: [jsx("div", {
         className: L,
-        children: tx("org_self_serve.modals.invalid_email.figma_organization_only_allows_work_emails")
+        children: renderI18nText("org_self_serve.modals.invalid_email.figma_organization_only_allows_work_emails")
       }), jsx("div", {
         className: V,
-        children: tx("org_self_serve.modals.invalid_email.change_email_address_to_proceed")
+        children: renderI18nText("org_self_serve.modals.invalid_email.change_email_address_to_proceed")
       }), jsx(z, {
         height: 12
       }), jsx("a", {
         onClick: e.onFileBrowserClick,
-        children: tx("org_self_serve.modals.invalid_email.go_to_the_file_browser")
+        children: renderI18nText("org_self_serve.modals.invalid_email.go_to_the_file_browser")
       })]
     })
   });
@@ -112,13 +112,13 @@ export function $$G0(e) {
       className: B,
       children: [jsx("div", {
         className: L,
-        children: tx("org_self_serve.modals.existing_org_admin.figma_organization_already_purchased")
+        children: renderI18nText("org_self_serve.modals.existing_org_admin.figma_organization_already_purchased")
       }), jsx("div", {
         className: V,
-        children: tx("org_self_serve.modals.existing_org_admin.if_you_need_another_organization", {
+        children: renderI18nText("org_self_serve.modals.existing_org_admin.if_you_need_another_organization", {
           contactSales: jsx("a", {
             onClick: e.onContactSales,
-            children: tx("org_self_serve.modals.existing_org_admin.contact_sales")
+            children: renderI18nText("org_self_serve.modals.existing_org_admin.contact_sales")
           })
         })
       }), jsx(z, {
@@ -127,7 +127,7 @@ export function $$G0(e) {
         height: 12
       }), jsx("a", {
         onClick: e.onFileBrowserClick,
-        children: tx("org_self_serve.modals.existing_org_admin.go_to_the_file_browser")
+        children: renderI18nText("org_self_serve.modals.existing_org_admin.go_to_the_file_browser")
       })]
     })
   });
@@ -149,22 +149,22 @@ export function $$H2(e) {
         onClick: e.onClose
       }), jsx("div", {
         className: L,
-        children: tx("org_self_serve.modals.true_up_edu.figma_grows_with_your_team")
+        children: renderI18nText("org_self_serve.modals.true_up_edu.figma_grows_with_your_team")
       }), jsx("div", {
         className: V,
-        children: tx("org_self_serve.modals.true_up_edu.members_can_add_new_editors.seat_rename")
+        children: renderI18nText("org_self_serve.modals.true_up_edu.members_can_add_new_editors.seat_rename")
       }), jsx(z, {
         height: 8
       }), jsx("div", {
         className: "org_self_serve_modals--modalSubHeader--FtC-9",
-        children: tx("org_self_serve.modals.true_up_edu.what_to_expect_at_true_up")
+        children: renderI18nText("org_self_serve.modals.true_up_edu.what_to_expect_at_true_up")
       }), jsx("div", {
         className: V,
-        children: tx("org_self_serve.modals.true_up_edu.true_up_explanation.seat_rename", {
+        children: renderI18nText("org_self_serve.modals.true_up_edu.true_up_explanation.seat_rename", {
           seeFullDetails: jsx("a", {
             href: "https://help.figma.com/hc/articles/360040328293",
             target: "_blank",
-            children: tx("org_self_serve.modals.true_up_edu.see_full_details")
+            children: renderI18nText("org_self_serve.modals.true_up_edu.see_full_details")
           })
         })
       })]
@@ -202,17 +202,17 @@ Ju(function (e) {
   let x = a[ud.FIGJAM];
   let f = {
     [ud.DESIGN]: {
-      headerString: _$$t("all_carts.figma_design_editors.seat_rename"),
+      headerString: getI18nString("all_carts.figma_design_editors.seat_rename"),
       totalSeatCount: a[ud.DESIGN],
       shouldShowDevModeIncludedText: !0
     },
     [ud.FIGJAM]: {
-      headerString: _$$t("all_carts.figjam_editors.seat_rename"),
+      headerString: getI18nString("all_carts.figjam_editors.seat_rename"),
       totalSeatCount: x,
       shouldShowDevModeIncludedText: !1
     },
     [ud.DEV_MODE]: {
-      headerString: _$$t("all_carts.dev_mode_only_seats"),
+      headerString: getI18nString("all_carts.dev_mode_only_seats"),
       totalSeatCount: a[ud.DEV_MODE] ?? 0,
       shouldShowDevModeIncludedText: !1
     }
@@ -228,9 +228,9 @@ Ju(function (e) {
       let r = t.reduce((e, t) => e + (a[t] || 0), 0);
       e.minTotalSeats && r < e.minTotalSeats ? c("total") : (e.dispatch(Ce()), e.updateAdditionalSeats(a));
     },
-    confirmText: _$$t("all_carts.save"),
-    cancelText: _$$t("all_carts.cancel"),
-    title: _$$t("all_carts.add_additional_editors.seat_rename"),
+    confirmText: getI18nString("all_carts.save"),
+    cancelText: getI18nString("all_carts.cancel"),
+    title: getI18nString("all_carts.add_additional_editors.seat_rename"),
     children: [jsx("div", {
       className: "org_self_serve_modals--bannerContainer--ly-u-",
       children: o && jsxs("div", {
@@ -240,22 +240,22 @@ Ju(function (e) {
           svg: _$$A
         }), jsxs("div", {
           className: "org_self_serve_modals--errorBannerText--srvT- org_self_serve_modals--headerModalText--h0Go9",
-          children: [o === ud.DESIGN && tx("all_carts.you_need_a_minimum_n_design_editors.seat_rename", {
+          children: [o === ud.DESIGN && renderI18nText("all_carts.you_need_a_minimum_n_design_editors.seat_rename", {
             minSeatsCount: e.seatDataByLicenseType[ud.DESIGN].minSeats
-          }), o === ud.FIGJAM && tx("all_carts.you_need_a_minimum_n_whiteboard_editors.seat_rename", {
+          }), o === ud.FIGJAM && renderI18nText("all_carts.you_need_a_minimum_n_whiteboard_editors.seat_rename", {
             minSeatsCount: e.seatDataByLicenseType[ud.FIGJAM].minSeats
-          }), o === ud.DEV_MODE && tx("all_carts.you_need_a_minimum_n_dev_mode_seats", {
+          }), o === ud.DEV_MODE && renderI18nText("all_carts.you_need_a_minimum_n_dev_mode_seats", {
             minSeatsCount: e.seatDataByLicenseType[ud.DEV_MODE]?.minSeats || 0
-          }), "total" === o && !!e.minTotalSeats && (getFeatureFlags().org_checkout_min_seat_info_copy ? tx("all_carts.minimum_seats", {
+          }), "total" === o && !!e.minTotalSeats && (getFeatureFlags().org_checkout_min_seat_info_copy ? renderI18nText("all_carts.minimum_seats", {
             minTotalSeats: e.minTotalSeats,
             minDesignSeats: e.seatDataByLicenseType[ud.DESIGN].minSeats,
-            seatsText: tx("checkout.seats_text", {
+            seatsText: renderI18nText("checkout.seats_text", {
               numOfSeats: e.minTotalSeats
             }),
-            designSeatsText: tx("checkout.seats_text", {
+            designSeatsText: renderI18nText("checkout.seats_text", {
               numOfSeats: e.seatDataByLicenseType[ud.DESIGN].minSeats
             })
-          }) : tx("all_carts.you_need_a_minimum_n_editors.seat_rename", {
+          }) : renderI18nText("all_carts.you_need_a_minimum_n_editors.seat_rename", {
             minSeatsCount: e.minTotalSeats
           }))]
         })]
@@ -314,7 +314,7 @@ function W({
   }) => {
     if (t(r), r.newVal && a < 3) {
       l(e => e + 1);
-      let t = s ? _$$t("checkout.switch_seat_from_design_to_devmode") : _$$t("checkout.enabled_devmode");
+      let t = s ? getI18nString("checkout.switch_seat_from_design_to_devmode") : getI18nString("checkout.enabled_devmode");
       n(eB({
         target: {
           kind: Ui.TEXT,
@@ -437,7 +437,7 @@ function Z({
     "data-tooltip-light-mode": !0,
     children: jsx(_$$E, {
       color: "default",
-      children: tx("all_carts.editor_table.multiple_teams")
+      children: renderI18nText("all_carts.editor_table.multiple_teams")
     })
   }) : jsxs(_$$Y, {
     spacing: 8,
@@ -513,7 +513,7 @@ Ju(function ({
       className: "org_self_serve_modals--selectEditorsModal--D0yWS",
       children: [jsxs("div", {
         className: "org_self_serve_modals--selectEditorModalHeader--wPo15 org_self_serve_modals--headerModalText--h0Go9",
-        children: [tx("checkout.add_or_remove_editors"), jsx(s_, {
+        children: [renderI18nText("checkout.add_or_remove_editors"), jsx(s_, {
           customStyle: {
             position: "initial"
           },
@@ -525,11 +525,11 @@ Ju(function ({
         children: [jsx(_$$E, {
           color: "default",
           fontWeight: "medium",
-          children: tx("all_carts.editor_table.Name")
+          children: renderI18nText("all_carts.editor_table.Name")
         }), jsx(_$$E, {
           color: "default",
           fontWeight: "medium",
-          children: tx("all_carts.editor_table.Teams")
+          children: renderI18nText("all_carts.editor_table.Teams")
         }), jsxs(_$$Y, {
           direction: "vertical",
           spacing: 0,
@@ -538,26 +538,26 @@ Ju(function ({
           children: [jsx(_$$E, {
             color: "default",
             fontWeight: "medium",
-            children: tx("general.figma_design")
+            children: renderI18nText("general.figma_design")
           }), jsxs("div", {
             children: [jsx(_$$E, {
               color: "handoff",
               fontWeight: "medium",
-              children: tx("general.dev_mode")
+              children: renderI18nText("general.dev_mode")
             }), "\xa0", jsx(_$$E, {
               color: "default",
               fontWeight: "medium",
-              children: tx("checkout.dev_mode_included_text_formatted.included")
+              children: renderI18nText("checkout.dev_mode_included_text_formatted.included")
             })]
           })]
         }), jsx(_$$E, {
           color: "default",
           fontWeight: "medium",
-          children: tx("general.dev_mode")
+          children: renderI18nText("general.dev_mode")
         }), jsx(_$$E, {
           color: "default",
           fontWeight: "medium",
-          children: tx("general.figjam")
+          children: renderI18nText("general.figjam")
         })]
       }), jsx(Y, {}), jsx(_$$P, {
         maxHeight: 426,
@@ -595,11 +595,11 @@ Ju(function ({
           children: [jsx(_$$E, {
             color: "default",
             fontWeight: "medium",
-            children: tx("all_carts.add_additional_editors.seat_rename")
+            children: renderI18nText("all_carts.add_additional_editors.seat_rename")
           }), jsx(_$$E, {
             fontWeight: "regular",
             color: "secondary",
-            children: tx("all_carts.add_additional_editors_description.seat_rename")
+            children: renderI18nText("all_carts.add_additional_editors_description.seat_rename")
           })]
         }), jsx(_$$s, {
           billableProductKey: ud.DESIGN,
@@ -639,21 +639,21 @@ Ju(function ({
             case 1:
               return jsx(_$$E, {
                 color: "danger",
-                children: tx("all_carts.you_need_a_minimum_n_design_editors.seat_rename", {
+                children: renderI18nText("all_carts.you_need_a_minimum_n_design_editors.seat_rename", {
                   minSeatsCount: u.design.minCount
                 })
               });
             case 2:
               return jsx(_$$E, {
                 color: "danger",
-                children: tx("all_carts.you_need_a_minimum_n_whiteboard_editors.seat_rename", {
+                children: renderI18nText("all_carts.you_need_a_minimum_n_whiteboard_editors.seat_rename", {
                   minSeatsCount: u.figjam.minCount
                 })
               });
             case 3:
               return jsx(_$$E, {
                 color: "danger",
-                children: tx("org_self_serve.purchase_summary.the_organization_plan_requires_at_least_count_editor_seats.seat_rename", {
+                children: renderI18nText("org_self_serve.purchase_summary.the_organization_plan_requires_at_least_count_editor_seats.seat_rename", {
                   minCount: l
                 })
               });
@@ -661,7 +661,7 @@ Ju(function ({
         })() : jsx(_$$E, {
           fontWeight: "regular",
           color: "secondary",
-          children: tx("all_carts.new_total", {
+          children: renderI18nText("all_carts.new_total", {
             total: k.formatMoney(function (e, t, a) {
               let s = t.design;
               let r = t.figjam;
@@ -679,13 +679,13 @@ Ju(function ({
           className: "org_self_serve_modals--buttonGroup--U5iQn",
           children: [jsx(nR, {
             onClick: P,
-            children: _$$t("general.cancel")
+            children: getI18nString("general.cancel")
           }), jsx($$, {
             onClick: () => {
               0 === C && (a(y), t(g), n(Ce()));
             },
             disabled: 0 !== C,
-            children: _$$t("checkout.update_seats")
+            children: getI18nString("checkout.update_seats")
           })]
         })]
       })]

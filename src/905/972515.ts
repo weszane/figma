@@ -12,7 +12,7 @@ import { getFeatureFlags } from "../905/601108";
 import g from "classnames";
 import { n as _$$n } from "../vendor/547481";
 import { A as _$$A } from "../vendor/90566";
-import { sx, az } from "../905/449184";
+import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { parsePxInt } from "../figma_app/783094";
 import { h as _$$h2, $ as _$$$ } from "../905/455748";
 import { h as _$$h3 } from "../905/207101";
@@ -21,7 +21,7 @@ import { I7, hW } from "../figma_app/594947";
 import { g as _$$g } from "../905/880308";
 import { P as _$$P } from "../905/347284";
 import { IW } from "../figma_app/563413";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { sx as _$$sx } from "../905/941192";
 import { LR } from "../figma_app/120210";
 import { tB } from "../figma_app/516028";
@@ -690,7 +690,7 @@ function eI(e) {
     queryId.current = _$$g();
     let t = await onSearch(e, sessionId, queryId.current);
     let i = eG.current?.();
-    if (e_ && (null === sessionId && sx("asset_search.missing_session_id", {
+    if (e_ && (null === sessionId && trackEventAnalytics("asset_search.missing_session_id", {
       previousSessionId: "",
       entryPoint: "instance_swap"
     }, {
@@ -714,11 +714,11 @@ function eI(e) {
         tier: eB
       };
       await hW("exp_asset_search_refactor");
-      az.trackDefinedEvent("assets_panel.search_time", {
+      analyticsEventManager.trackDefinedEvent("assets_panel.search_time", {
         ...n,
         searchSessionId: sessionId
       });
-      az.trackDefinedEvent("asset_search.query_result", {
+      analyticsEventManager.trackDefinedEvent("asset_search.query_result", {
         ...n,
         componentSuggestionSessionId: eV,
         sessionId
@@ -730,7 +730,7 @@ function eI(e) {
   }, searchDebounceTime);
   let eK = useCallback((e, t) => {
     eA.current = null;
-    e ? (eR(!0), null == eG.current && (eG.current = B0()), eW(e), setIsSearching(!0)) : (t && e_ && az.trackDefinedEvent("instance_swap_picker.search_end", {
+    e ? (eR(!0), null == eG.current && (eG.current = B0()), eW(e), setIsSearching(!0)) : (t && e_ && analyticsEventManager.trackDefinedEvent("instance_swap_picker.search_end", {
       ...ej,
       sessionId,
       isPreferredValues: pickerType === Zl.PREFERRED_VALUES_PICKER
@@ -843,12 +843,12 @@ function eI(e) {
       recordingKey: Pt(s, "drilldownItem-parentSubpath-checkbox", o),
       onChange: h,
       label: jsx(_$$h, {
-        children: tx("design_systems.instance_swap_picker.select_all_instances")
+        children: renderI18nText("design_systems.instance_swap_picker.select_all_instances")
       })
     }) : jsxs(Fragment, {
       children: [jsx(_$$J, {
         htmlFor: d,
-        children: tx("design_systems.instance_swap_picker.select_all_instances")
+        children: renderI18nText("design_systems.instance_swap_picker.select_all_instances")
       }), jsx(_$$W, {
         id: d,
         checked: c.checked,
@@ -1002,7 +1002,7 @@ function eI(e) {
               className: "drilldown_picker--searchEmptyRefresh--OaiuU",
               children: [jsx("div", {
                 className: "drilldown_picker--searchTextRefresh---Qi2i ellipsis--ellipsis--Tjyfa",
-                children: tx("design_systems.instance_swap_picker.no_results", {
+                children: renderI18nText("design_systems.instance_swap_picker.no_results", {
                   query: ew
                 })
               }), searchEmptyStateCTA]

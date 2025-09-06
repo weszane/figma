@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { memo } from "react";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { h } from "../905/207101";
 import { H4 } from "../905/992467";
 export function $$l0(e) {
@@ -35,7 +35,7 @@ let m = 0;
 export function $$h1(e, t, i) {
   if ("string" == typeof t) return u(memo(function (i) {
     h(() => {
-      sx("modal_shown", {
+      trackEventAnalytics("modal_shown", {
         modal_id: t
       });
     });
@@ -46,7 +46,7 @@ export function $$h1(e, t, i) {
   let o = `id:${e.displayName || m++}`;
   let l = memo(function (t) {
     h(() => {
-      sx("modal_shown", {
+      trackEventAnalytics("modal_shown", {
         modal_id: o
       });
     });

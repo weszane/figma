@@ -2,9 +2,9 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { z } from "../905/239603";
 import a from "../vendor/241899";
 import { A as _$$A } from "../905/920142";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { Ay } from "../figma_app/930338";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { FOrganizationLevelType, FLicenseType } from "../figma_app/191312";
 import { D } from "../905/962956";
 import { NW } from "../figma_app/831101";
@@ -99,7 +99,7 @@ export function $$F13(e) {
   return _$$A(e.past_due_at).toDate();
 }
 export function $$j8(e) {
-  return _$$t("plan_invoices.date_long", {
+  return getI18nString("plan_invoices.date_long", {
     date: $$F13(e)
   });
 }
@@ -109,9 +109,9 @@ export function $$U7(e) {
     case FOrganizationLevelType.TEAM:
       switch (e.billing_interval) {
         case NW.YEAR:
-          return _$$t("plan_invoices.description.plan_subscription");
+          return getI18nString("plan_invoices.description.plan_subscription");
         case NW.MONTH:
-          return _$$t("plan_invoices.description.monthly_invoice");
+          return getI18nString("plan_invoices.description.monthly_invoice");
         default:
           e.billing_interval;
           return t();
@@ -120,20 +120,20 @@ export function $$U7(e) {
       if (e.billing_interval === NW.YEAR) switch (e.subtype) {
         case "subscription_renewed":
         case "subscription_created":
-          return _$$t("plan_invoices.description.plan_subscription");
+          return getI18nString("plan_invoices.description.plan_subscription");
         case "true_up":
-          return _$$t("org_admin_settings.cost_breakdown.quarterly_true_up");
+          return getI18nString("org_admin_settings.cost_breakdown.quarterly_true_up");
         case "catch_up":
-          return _$$t("plan_invoices.description.quarterly_invoice");
+          return getI18nString("plan_invoices.description.quarterly_invoice");
         default:
-          $D(_$$e.BILLING_EXPERIENCE, Error("unexpected subtype for org year invoice"), {
+          reportError(_$$e.BILLING_EXPERIENCE, Error("unexpected subtype for org year invoice"), {
             extra: {
               subtype: e.subtype
             }
           });
           return t();
       }
-      $D(_$$e.BILLING_EXPERIENCE, Error("unexpected billing interval for org invoice"), {
+      reportError(_$$e.BILLING_EXPERIENCE, Error("unexpected billing interval for org invoice"), {
         extra: {
           billing_interval: e.billing_interval
         }
@@ -145,7 +145,7 @@ export function $$U7(e) {
   }
 }
 export function $$B6(e) {
-  return e.number || _$$t("plan_invoices.empty_details");
+  return e.number || getI18nString("plan_invoices.empty_details");
 }
 export function $$G9(e) {
   let t = {};
@@ -155,16 +155,16 @@ export function $$G9(e) {
       try {
         r = JSON.stringify(s()(e.payment_method, "type", "bank", "last4", "stripe_type", "brand"));
       } catch {
-        $D(_$$e.BILLING_EXPERIENCE, Error("failed to stringify payment method"));
+        reportError(_$$e.BILLING_EXPERIENCE, Error("failed to stringify payment method"));
         r = "";
       }
       r && (t[r] = e.payment_method);
     }
   });
   let r = Object.values(t);
-  if (r.length > 1) return _$$t("plan_invoices.payment_method.multiple");
+  if (r.length > 1) return getI18nString("plan_invoices.payment_method.multiple");
   let i = r[0];
-  return i ? function(e, t = {}) {
+  return i ? function (e, t = {}) {
     switch (e.type) {
       case "card":
         {
@@ -172,18 +172,18 @@ export function $$G9(e) {
             last4,
             brand
           } = e;
-          if (last4 && brand) return _$$t(`plan_invoices.payment_method.card.${brand}`) + ` ${last4}`;
+          if (last4 && brand) return getI18nString(`plan_invoices.payment_method.card.${brand}`) + ` ${last4}`;
           if (last4 && !brand) {
-            if (t.inline) return _$$t("plan_invoices.payment_method.card.unknown.inline", {
+            if (t.inline) return getI18nString("plan_invoices.payment_method.card.unknown.inline", {
               last4
             });
-            return _$$t("plan_invoices.payment_method.card.unknown", {
+            return getI18nString("plan_invoices.payment_method.card.unknown", {
               last4
             });
           }
-          if (!last4 && brand) return _$$t(`plan_invoices.payment_method.card.${brand}`);
-          if (t.inline) return _$$t("plan_invoices.payment_method.card.unknown.no_last_4.inline");
-          return _$$t("plan_invoices.payment_method.card.unknown.no_last_4");
+          if (!last4 && brand) return getI18nString(`plan_invoices.payment_method.card.${brand}`);
+          if (t.inline) return getI18nString("plan_invoices.payment_method.card.unknown.no_last_4.inline");
+          return getI18nString("plan_invoices.payment_method.card.unknown.no_last_4");
         }
       case "ach_debit":
       case "sepa_debit":
@@ -191,18 +191,18 @@ export function $$G9(e) {
           let {
             last4
           } = e;
-          if (last4) return _$$t(`plan_invoices.payment_method.${e.type}.unknown`) + ` ${last4}`;
-          return _$$t(`plan_invoices.payment_method.${e.type}.unknown`);
+          if (last4) return getI18nString(`plan_invoices.payment_method.${e.type}.unknown`) + ` ${last4}`;
+          return getI18nString(`plan_invoices.payment_method.${e.type}.unknown`);
         }
       case "unknown":
         return Ay(e.stripe_type);
       default:
-        $D(_$$e.BILLING_EXPERIENCE, Error("unknown payment method"), {
+        reportError(_$$e.BILLING_EXPERIENCE, Error("unknown payment method"), {
           extra: {
             type: e?.type
           }
         });
-        return _$$t("plan_invoices.payment_method.unknown");
+        return getI18nString("plan_invoices.payment_method.unknown");
     }
   }(i) : null;
 }
@@ -285,4 +285,4 @@ export const _k = $$H18;
 export const z7 = $$et19;
 export const dp = $$W20;
 export const Jv = $$D21;
-export const _8 = $$z22; 
+export const _8 = $$z22;

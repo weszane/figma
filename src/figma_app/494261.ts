@@ -1,8 +1,8 @@
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { WB } from "../905/761735";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
 import { F } from "../905/302958";
 import { Y } from "../figma_app/887000";
@@ -32,23 +32,23 @@ let $$T7 = nF(async (e, t) => {
     source: t.source,
     folder_id: t.folderId
   };
-  t.actionType === $$b15 ? sx($$b15, u) : sx($$y13, u);
+  t.actionType === $$b15 ? trackEventAnalytics($$b15, u) : trackEventAnalytics($$y13, u);
   await XHR.post("/api/team_role_requests", r).then(({
     data: r
   }) => {
     let n = r.meta;
     n.status === _$$c.APPROVED ? e.dispatch(vr({
       teamId: n.team_id
-    })) : t.level === e6.EDITOR && c === e6.VIEWER ? e.dispatch(_$$s.flash(_$$t("org_actions.you_ve_requested_to_edit_files_in_this_team"))) : e.dispatch(_$$s.flash(_$$t("org_actions.you_ve_requested_to_join_this_team")));
+    })) : t.level === e6.EDITOR && c === e6.VIEWER ? e.dispatch(_$$s.flash(getI18nString("org_actions.you_ve_requested_to_edit_files_in_this_team"))) : e.dispatch(_$$s.flash(getI18nString("org_actions.you_ve_requested_to_join_this_team")));
   }).catch(t => {
-    e.dispatch(_$$s.error(J(t.message) || _$$t("org_actions.an_error_occurred")));
+    e.dispatch(_$$s.error(J(t.message) || getI18nString("org_actions.an_error_occurred")));
   });
 });
 let $$I16 = nF((e, t) => {
   XHR.del(`/api/team_role_requests/${t.requestId}`).then(t => {
-    e.dispatch(_$$s.flash(_$$t("org_actions.request_withdrawn")));
+    e.dispatch(_$$s.flash(getI18nString("org_actions.request_withdrawn")));
   }).catch(t => {
-    e.dispatch(_$$s.error(J(t.message) || _$$t("org_actions.an_error_occurred")));
+    e.dispatch(_$$s.error(J(t.message) || getI18nString("org_actions.an_error_occurred")));
   });
 });
 let $$S2 = nF((e, t) => {
@@ -57,19 +57,19 @@ let $$S2 = nF((e, t) => {
   }).then(({
     data: t
   }) => {
-    e.dispatch(_$$s.flash(_$$t("org_actions.request_approved")));
+    e.dispatch(_$$s.flash(getI18nString("org_actions.request_approved")));
     e.dispatch(bE({
       role: t.meta
     }));
   }).catch(t => {
-    e.dispatch(_$$s.error(J(t) || _$$t("org_actions.an_error_occurred")));
+    e.dispatch(_$$s.error(J(t) || getI18nString("org_actions.an_error_occurred")));
   });
 });
 let $$v10 = nF((e, t) => {
   XHR.post(`/team_role_requests/${t.requestId}/deny`).then(t => {
-    e.dispatch(_$$s.flash(_$$t("org_actions.request_denied")));
+    e.dispatch(_$$s.flash(getI18nString("org_actions.request_denied")));
   }).catch(t => {
-    e.dispatch(_$$s.error(J(t.message) || _$$t("org_actions.an_error_occurred")));
+    e.dispatch(_$$s.error(J(t.message) || getI18nString("org_actions.an_error_occurred")));
   });
 });
 let $$A19 = nF((e, {
@@ -100,7 +100,7 @@ let $$x22 = nF((e, {
       error: !1
     }));
   }).catch(t => {
-    e.dispatch(_$$s.error(J(t) || _$$t("org_actions.an_error_occurred"), 5e3));
+    e.dispatch(_$$s.error(J(t) || getI18nString("org_actions.an_error_occurred"), 5e3));
   });
 });
 let $$N11 = nF((e, {
@@ -114,12 +114,12 @@ let $$N11 = nF((e, {
   }).then(({
     data: t
   }) => {
-    e.dispatch(_$$s.flash(_$$t("org_actions.updated_authentication_settings")));
+    e.dispatch(_$$s.flash(getI18nString("org_actions.updated_authentication_settings")));
     e.dispatch(yJ({
       org: t.meta
     }));
   }).catch(t => {
-    e.dispatch(_$$s.error(J(t) || _$$t("org_actions.an_error_occurred"), 5e3));
+    e.dispatch(_$$s.error(J(t) || getI18nString("org_actions.an_error_occurred"), 5e3));
   });
 });
 let $$C14 = nF((e, {
@@ -131,12 +131,12 @@ let $$C14 = nF((e, {
     saml_sso_only: r,
     mfa_required: n
   }).then(t => {
-    e.dispatch(_$$s.flash(_$$t("org_actions.updated_authentication_settings")));
+    e.dispatch(_$$s.flash(getI18nString("org_actions.updated_authentication_settings")));
     e.dispatch(yJ({
       org: t.data.meta
     }));
   }).catch(t => {
-    e.dispatch(_$$s.error(J(t) || _$$t("org_actions.an_error_occurred"), 5e3));
+    e.dispatch(_$$s.error(J(t) || getI18nString("org_actions.an_error_occurred"), 5e3));
   });
 });
 let $$w4 = nF((e, {
@@ -150,7 +150,7 @@ let $$w4 = nF((e, {
       org: t.data.meta
     }));
   }).catch(t => {
-    e.dispatch(_$$s.error(J(t) || _$$t("org_actions.an_error_occurred"), 5e3));
+    e.dispatch(_$$s.error(J(t) || getI18nString("org_actions.an_error_occurred"), 5e3));
   });
 });
 export function $$O1(e) {
@@ -191,14 +191,14 @@ let $$R12 = nF((e, {
   XHR.put(`/api/orgs/${n}`, {
     idle_timeout_duration_in_secs: i
   }).then(t => {
-    e.dispatch(_$$s.flash(_$$t("org_actions.updated_idle_session_timeout")));
+    e.dispatch(_$$s.flash(getI18nString("org_actions.updated_idle_session_timeout")));
     e.dispatch(yJ({
       org: t.data.meta
     }));
     r();
   }).catch(r => {
     t();
-    e.dispatch(_$$s.error(J(r) || _$$t("org_actions.an_error_occurred")));
+    e.dispatch(_$$s.error(J(r) || getI18nString("org_actions.an_error_occurred")));
   });
 });
 let $$L6 = nF((e, {
@@ -221,15 +221,15 @@ let $$L6 = nF((e, {
   e.dispatch(_$$s.flash("Updated IP allowlist settings"));
   i();
 }).catch(t => {
-  e.dispatch(_$$s.error(J(t) || _$$t("org_actions.an_error_occurred")));
+  e.dispatch(_$$s.error(J(t) || getI18nString("org_actions.an_error_occurred")));
 }));
 let $$P17 = nF((e, {
   orgId: t
 }) => {
   XHR.post(`/api/org/${t}/deletion_request`).then(t => {
-    e.dispatch(_$$s.flash(_$$t("orgs_middleware.deletion_request_submitted")));
+    e.dispatch(_$$s.flash(getI18nString("orgs_middleware.deletion_request_submitted")));
   }).catch(t => {
-    e.dispatch(_$$s.error(t.data?.message || _$$t("orgs_middleware.an_error_occurred_while_enqueeing_deletion_request"), 5e3));
+    e.dispatch(_$$s.error(t.data?.message || getI18nString("orgs_middleware.an_error_occurred_while_enqueeing_deletion_request"), 5e3));
     console.error(t);
   });
 });
@@ -248,7 +248,7 @@ let $$D0 = nF((e, {
       successMessage: n
     }));
   }).catch(t => {
-    e.dispatch(_$$s.error(J(t) || _$$t("org_actions.an_error_occurred"), 5e3));
+    e.dispatch(_$$s.error(J(t) || getI18nString("org_actions.an_error_occurred"), 5e3));
   });
 });
 let $$k3 = nF((e, {
@@ -270,7 +270,7 @@ let $$k3 = nF((e, {
     }));
     d();
   }).catch(t => {
-    e.dispatch(_$$s.error(J(t) || _$$t("org_actions.an_error_occurred"), 5e3));
+    e.dispatch(_$$s.error(J(t) || getI18nString("org_actions.an_error_occurred"), 5e3));
   });
 });
 let $$M18 = nF((e, {
@@ -292,7 +292,7 @@ let $$M18 = nF((e, {
     }));
     d();
   }).catch(t => {
-    e.dispatch(_$$s.error(J(t) || _$$t("org_actions.an_error_occurred"), 5e3));
+    e.dispatch(_$$s.error(J(t) || getI18nString("org_actions.an_error_occurred"), 5e3));
   });
 });
 let $$F9 = nF((e, t) => {
@@ -310,7 +310,7 @@ let $$F9 = nF((e, t) => {
       error: !1
     }));
   }).catch(t => {
-    e.dispatch(_$$s.error(J(t) || _$$t("org_actions.an_error_occurred"), 5e3));
+    e.dispatch(_$$s.error(J(t) || getI18nString("org_actions.an_error_occurred"), 5e3));
   });
   a ? WB().optimisticallyUpdate({
     SharedOrgLicenseGroupSetting: {
@@ -336,9 +336,9 @@ let $$j21 = nF((e, t) => {
   XHR.post(`/api/org/${t.orgId}/delete_org_users`, {
     org_user_ids: t.orgUserIds
   }).then(t => {
-    e.dispatch(_$$s.flash(_$$t("orgs_middleware.user_data_deleted")));
+    e.dispatch(_$$s.flash(getI18nString("orgs_middleware.user_data_deleted")));
   }).catch(t => {
-    e.dispatch(_$$s.error(t.data?.message || _$$t("orgs_middleware.an_error_occurred_while_enqueeing_deletion_request"), 5e3));
+    e.dispatch(_$$s.error(t.data?.message || getI18nString("orgs_middleware.an_error_occurred_while_enqueeing_deletion_request"), 5e3));
     console.error(t);
   });
 });
@@ -351,7 +351,7 @@ let $$U20 = nF((e, {
     orgId: t,
     slidesDisabled: r
   }).catch(t => {
-    e.dispatch(_$$s.error(J(t) || _$$t("org_actions.an_error_occurred"), 5e3));
+    e.dispatch(_$$s.error(J(t) || getI18nString("org_actions.an_error_occurred"), 5e3));
   }).then(() => {
     e.dispatch(F6({
       id: t,
@@ -369,7 +369,7 @@ let $$B8 = nF((e, {
     orgId: t,
     sitesPublishingDisabled: r
   }).catch(t => {
-    e.dispatch(_$$s.error(J(t) || _$$t("org_actions.an_error_occurred"), 5e3));
+    e.dispatch(_$$s.error(J(t) || getI18nString("org_actions.an_error_occurred"), 5e3));
   }).then(() => {
     n && e.dispatch(_$$s.flash(n));
   });
@@ -383,7 +383,7 @@ let $$G5 = nF((e, {
     orgId: t,
     supabaseDisabled: r
   }).catch(t => {
-    e.dispatch(_$$s.error(J(t) || _$$t("org_actions.an_error_occurred"), 5e3));
+    e.dispatch(_$$s.error(J(t) || getI18nString("org_actions.an_error_occurred"), 5e3));
   }).then(() => {
     n && e.dispatch(_$$s.flash(n));
   });
@@ -410,4 +410,4 @@ export const vs = $$M18;
 export const xF = $$A19;
 export const xP = $$U20;
 export const ye = $$j21;
-export const yo = $$x22; 
+export const yo = $$x22;

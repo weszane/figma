@@ -3,11 +3,11 @@ import { useEffect } from "react";
 import { useDispatch } from "../vendor/514228";
 import { N as _$$N } from "../905/438674";
 import { E as _$$E } from "../905/53857";
-import { Xr, md } from "../figma_app/27355";
+import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { h as _$$h } from "../905/207101";
 import { buildUploadUrl } from "../figma_app/169182";
 import { oW } from "../905/675859";
-import { tx, t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { Tw } from "../figma_app/755939";
 import { yB } from "../figma_app/334505";
 import { sf } from "../905/929976";
@@ -38,7 +38,7 @@ export function $$N2() {
   let m = Xr(Tw);
   let y = useDispatch();
   let E = EI();
-  let w = md(LZ);
+  let w = useAtomWithSubscription(LZ);
   let S = () => {
     y?.(sf({
       view: "recentsAndSharing"
@@ -54,35 +54,35 @@ export function $$N2() {
         whiteSpace: "pre-line"
       },
       children: jsx("span", {
-        children: tx("cooper.onboarding.from_concept_to_creation_design", {
+        children: renderI18nText("cooper.onboarding.from_concept_to_creation_design", {
           learnMoreLink: jsx(_$$N, {
             newTab: !0,
             href: "https://help.figma.com/hc/articles/31271566667543",
-            children: tx("cooper.onboarding.learn_more")
+            children: renderI18nText("cooper.onboarding.learn_more")
           })
         })
       })
     }),
     disclaimerFooter: jsx("span", {
-      children: tx("cooper.onboarding.this_beta_is_a_free", {
+      children: renderI18nText("cooper.onboarding.this_beta_is_a_free", {
         betaTermsLink: jsx(_$$N, {
           newTab: !0,
           href: "https://www.figma.com/product-specific-terms/",
-          children: tx("cooper.onboarding.figma_beta_terms")
+          children: renderI18nText("cooper.onboarding.figma_beta_terms")
         })
       })
     }),
     isShowing,
     media: jsx(oW, {
       src: buildUploadUrl(N ? "e612d68148023be0522bcd3b3251aaa6bb7c716d" : "31fcc873278da276aab06196bdcb7e377d28ab6e"),
-      alt: t("cooper.onboarding.welcome.image_alt"),
+      alt: getI18nString("cooper.onboarding.welcome.image_alt"),
       width: 332
     }),
     onClose: S,
     preventUserClose: !0,
     primaryCta: {
       type: "button",
-      label: tx("cooper.onboarding.welcome.primary_cta"),
+      label: renderI18nText("cooper.onboarding.welcome.primary_cta"),
       onClick: () => {
         y?.(_$$b({
           [WW]: !0
@@ -94,18 +94,18 @@ export function $$N2() {
     },
     secondaryCta: {
       type: "button",
-      label: tx("cooper.onboarding.welcome.secondary_cta"),
+      label: renderI18nText("cooper.onboarding.welcome.secondary_cta"),
       onClick: S,
       ctaTrackingDescriptor: _$$c.CLOSE
     },
     title: jsxs("div", {
       className: "x78zum5 x6s0dn4 x1pulhmw",
-      children: [tx("cooper.onboarding.meet_figma_buzz"), jsx("div", {
+      children: [renderI18nText("cooper.onboarding.meet_figma_buzz"), jsx("div", {
         className: "x78zum5 x2lah0s",
         children: jsx(_$$E, {
           variant: "brandOutline",
           size: "lg",
-          children: tx("general.beta")
+          children: renderI18nText("general.beta")
         })
       })]
     }),
@@ -134,10 +134,10 @@ export function $$A0({
   isShowing && !o && complete();
   return jsx(rq, {
     arrowPosition: F_.RIGHT_BODY,
-    description: tx("cooper.onboarding.simply_select_text_or_an", {
+    description: renderI18nText("cooper.onboarding.simply_select_text_or_an", {
       connectDataBold: jsx("p", {
         className: "x1xlr1w8",
-        children: t("cooper.onboarding.connect_data_bold")
+        children: getI18nString("cooper.onboarding.connect_data_bold")
       }),
       spaceChar: jsx(Fragment, {
         children: "\xa0"
@@ -147,20 +147,20 @@ export function $$A0({
     isShowing,
     media: jsx(_$$y, {
       src: buildUploadUrl("3d9047607fffbfc98f0176cecba9d57fad7cac48"),
-      alt: t("cooper.onboarding.bulk_create.image_alt"),
+      alt: getI18nString("cooper.onboarding.bulk_create.image_alt"),
       aspectRatio: 240 / 135
     }),
     onClose: complete,
     onTargetLost: complete,
     primaryCta: {
-      label: tx("general.got_it"),
+      label: renderI18nText("general.got_it"),
       onClick: complete,
       type: "button",
       ctaTrackingDescriptor: _$$c.GOT_IT
     },
     shouldDisableAnimation: !0,
     targetKey: o ?? "",
-    title: tx("cooper.onboarding.select_a_text_or_image"),
+    title: renderI18nText("cooper.onboarding.select_a_text_or_image"),
     trackingContextName: "Slides Onboarding > Bulk Create Callout"
   });
 }
@@ -182,7 +182,7 @@ export function $$O3() {
   });
   return jsx(rq, {
     arrowPosition: F_.RIGHT_BODY,
-    description: tx("cooper.onboarding.internal_templates_let_you_update", {
+    description: renderI18nText("cooper.onboarding.internal_templates_let_you_update", {
       lineBreak: jsxs(Fragment, {
         children: [jsx("br", {}), jsx("br", {})]
       })
@@ -194,14 +194,14 @@ export function $$O3() {
     pointToLeftEdge: !0,
     pointToTopEdge: !0,
     primaryCta: {
-      label: tx("general.got_it"),
+      label: renderI18nText("general.got_it"),
       onClick: complete,
       type: "button",
       ctaTrackingDescriptor: _$$c.GOT_IT
     },
     shouldDisableAnimation: !0,
     targetKey: s ?? "",
-    title: tx("cooper.onboarding.edit_content_unlock_if_needed"),
+    title: renderI18nText("cooper.onboarding.edit_content_unlock_if_needed"),
     trackingContextName: "Slides Onboarding > Inserted Locked Template"
   });
 }
@@ -220,23 +220,23 @@ export function $$L1() {
   });
   return jsx(rq, {
     arrowPadding: 8,
-    description: tx("cooper.onboarding.templates_help_your_team_stay"),
+    description: renderI18nText("cooper.onboarding.templates_help_your_team_stay"),
     isShowing,
     media: jsx(_$$y, {
       src: buildUploadUrl("7c5445059896c65ae2098087f34d2f35cc5a8b20"),
-      alt: t("cooper.onboarding.overlay_image_alt"),
+      alt: getI18nString("cooper.onboarding.overlay_image_alt"),
       aspectRatio: 240 / 135
     }),
     onClose: complete,
     onTargetLost: complete,
     primaryCta: {
-      label: tx("general.got_it"),
+      label: renderI18nText("general.got_it"),
       onClick: complete,
       type: "button",
       ctaTrackingDescriptor: _$$c.GOT_IT
     },
     targetKey: D9,
-    title: tx("cooper.onboarding.publish_templates_to_your_team"),
+    title: renderI18nText("cooper.onboarding.publish_templates_to_your_team"),
     trackingContextName: "Slides Onboarding > Publishing Overview"
   });
 }

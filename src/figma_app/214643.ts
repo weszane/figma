@@ -3,7 +3,7 @@ import { useMemo, useState, useCallback, useId } from "react";
 import { useDispatch } from "../vendor/514228";
 import { qc } from "../figma_app/858013";
 import { B } from "../905/714743";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Um } from "../905/848862";
 import { j } from "../905/694231";
 import { l6, c$, sK } from "../905/794875";
@@ -23,7 +23,7 @@ export function $$h1({
   let f = "auto_inherit_mode_string";
   let E = e.modes ? e.modes[0].name : "";
   let y = useMemo(() => ({
-    name: _$$t("variables.mode_properties_panel.select.option.default_with_name", {
+    name: getI18nString("variables.mode_properties_panel.select.option.default_with_name", {
       modeName: E
     }),
     id: f
@@ -62,7 +62,7 @@ export function $$h1({
     property: S,
     children: [jsx(c$, {
       value: y,
-      children: _$$t("variables.mode_properties_panel.select.option.default_with_name", {
+      children: getI18nString("variables.mode_properties_panel.select.option.default_with_name", {
         modeName: E
       })
     }), jsx(sK, {}), e.modes?.map(e => jsx(c$, {
@@ -104,10 +104,10 @@ export function $$g0({
       className: wx,
       children: [jsx("h2", {
         className: Pf,
-        children: tx("design_systems.libraries_modal.header_variable_collections")
+        children: renderI18nText("design_systems.libraries_modal.header_variable_collections")
       }), r && jsx("div", {
         className: Pf,
-        children: tx("design_systems.libraries_modal.header_default_mode")
+        children: renderI18nText("design_systems.libraries_modal.header_default_mode")
       })]
     }), jsx("div", {
       className: e ? VN : iE,
@@ -122,7 +122,7 @@ export function $$g0({
             children: t.name
           }), t.numVariableMatches && jsx("span", {
             className: K0,
-            children: tx("design_systems.libraries_modal.plural.num_variable_match", {
+            children: renderI18nText("design_systems.libraries_modal.plural.num_variable_match", {
               numVariables: t.numVariableMatches
             })
           })]
@@ -144,7 +144,7 @@ export function $$g0({
             className: nI
           }), jsx("span", {
             className: K0,
-            children: tx("design_systems.libraries_modal.plural.num_variables", {
+            children: renderI18nText("design_systems.libraries_modal.plural.num_variables", {
               numVariables: t.numVariables
             })
           })]

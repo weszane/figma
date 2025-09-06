@@ -1,7 +1,7 @@
 import { useDispatch } from "../vendor/514228";
 import { WB } from "../905/761735";
 import { gY } from "../figma_app/566371";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
 import { F } from "../905/302958";
 import { Jm } from "../figma_app/387599";
@@ -111,7 +111,7 @@ export function $$$$w0(e, t, r, m) {
       }, r);
       r.catch(e => {
         _(F.enqueue({
-          message: _$$t("community.actions.unable_to_like_this_resource_error", {
+          message: getI18nString("community.actions.unable_to_like_this_resource_error", {
             error: J(e, e.data?.message)
           }),
           type: "RESOURCE_LIKE_FAILED",
@@ -153,7 +153,7 @@ export function $$$$w0(e, t, r, m) {
       }, n);
       n.catch(e => {
         _(F.enqueue({
-          message: _$$t("community.actions.unable_to_unlike_this_resource_error", {
+          message: getI18nString("community.actions.unable_to_unlike_this_resource_error", {
             error: J(e, e.data.message)
           }),
           type: "RESOURCE_UNLIKE_FAILED",

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import s from "classnames";
 import { s6, nR } from "../figma_app/637027";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { oB } from "../905/929976";
 import { to } from "../905/156213";
 import { lT } from "../figma_app/494261";
@@ -49,7 +49,7 @@ export function $$v0(e) {
   if (A?.view === "search" && e.team.org_id !== p || null === x || x === gO.CLICK_JOIN || x === gO.CLICK_JOIN_AS_ADMIN) return jsx(Fragment, {});
   let T = $$I1({
     type: x,
-    overrideLeaveText: t || e.isCardActive ? _$$t("team_list.org_join_status_leave") : void 0
+    overrideLeaveText: t || e.isCardActive ? getI18nString("team_list.org_join_status_leave") : void 0
   });
   let k = {
     className: (() => {
@@ -84,17 +84,17 @@ export function $$I1({
   switch (e) {
     case gO.CLICK_LEAVE:
       if (t) return t;
-      return _$$t("team_list.org_join_status_joined");
+      return getI18nString("team_list.org_join_status_joined");
     case gO.CLICK_WITHDRAW:
-      return _$$t("teams_table.cancel_join_request");
+      return getI18nString("teams_table.cancel_join_request");
     case gO.CLICK_JOIN:
-      return _$$t("teams_table.join_team");
+      return getI18nString("teams_table.join_team");
     case gO.CLICK_JOIN_AS_ADMIN:
-      return _$$t("teams_table.join_team_as_admin");
+      return getI18nString("teams_table.join_team_as_admin");
     case gO.BYPASS_REQUEST:
-      return _$$t("teams_table.join_team_as_owner");
+      return getI18nString("teams_table.join_team_as_owner");
     case gO.CLICK_REQUEST:
-      return _$$t("teams_table.ask_to_join");
+      return getI18nString("teams_table.ask_to_join");
   }
 }
 export function $$E2({

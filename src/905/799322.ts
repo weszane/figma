@@ -4,7 +4,7 @@ import { X } from "../905/128376";
 import { Rq } from "../905/38914";
 import { Y9, hE, nB, wi } from "../figma_app/272243";
 import { $n } from "../905/521428";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { Lo } from "../905/156213";
 import { BD, BE } from "../905/264101";
 import { _Z, z3, Hx, G6, bE } from "../figma_app/639088";
@@ -42,13 +42,13 @@ export function $$m0(e) {
       })
     }), jsxs(nB, {
       children: [jsx("div", {
-        children: tx("settings.require_password.for_security_purposes_please_re_enter_your_password_below")
+        children: renderI18nText("settings.require_password.for_security_purposes_please_re_enter_your_password_below")
       }), jsx("input", {
         name: "password",
         type: "password",
         className: _Z,
         ref: i,
-        placeholder: _$$t("settings.require_password.current_password")
+        placeholder: getI18nString("settings.require_password.current_password")
       }), jsx("div", {
         className: z3,
         children: e.twoFactorAuth.currentError || "\xa0"
@@ -59,17 +59,17 @@ export function $$m0(e) {
         children: [jsx($n, {
           variant: "link",
           onClick: m,
-          children: tx("settings.require_password.forgot_password")
+          children: renderI18nText("settings.require_password.forgot_password")
         }), jsxs("div", {
           className: G6,
           children: [jsx($n, {
             variant: "secondary",
             onClick: g,
-            children: tx("modal.cancel")
+            children: renderI18nText("modal.cancel")
           }), jsx($n, {
             type: "submit",
             disabled: e.twoFactorAuth.loading,
-            children: tx("settings.require_password.continue")
+            children: renderI18nText("settings.require_password.continue")
           })]
         })]
       })
@@ -77,7 +77,7 @@ export function $$m0(e) {
   }) : jsxs("form", {
     onSubmit: h,
     children: [jsx("div", {
-      children: tx("settings.require_password.for_security_purposes_please_re_enter_your_password_below")
+      children: renderI18nText("settings.require_password.for_security_purposes_please_re_enter_your_password_below")
     }), jsx("input", {
       name: "password",
       type: "password",
@@ -85,7 +85,7 @@ export function $$m0(e) {
       ref: e => {
         e && e.focus();
       },
-      placeholder: _$$t("settings.require_password.current_password")
+      placeholder: getI18nString("settings.require_password.current_password")
     }), jsx("div", {
       className: z3,
       children: e.twoFactorAuth.currentError || ""
@@ -94,17 +94,17 @@ export function $$m0(e) {
       children: [jsx($n, {
         variant: "link",
         onClick: m,
-        children: tx("settings.require_password.forgot_password")
+        children: renderI18nText("settings.require_password.forgot_password")
       }), jsxs("div", {
         className: G6,
         children: [jsx($n, {
           variant: "secondary",
           onClick: g,
-          children: tx("modal.cancel")
+          children: renderI18nText("modal.cancel")
         }), jsx($n, {
           type: "submit",
           disabled: e.twoFactorAuth.loading,
-          children: tx("settings.require_password.continue")
+          children: renderI18nText("settings.require_password.continue")
         })]
       })]
     })]

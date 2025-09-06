@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { R } from "../905/307199";
 import { P } from "../905/347284";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Ce } from "../905/156213";
 import { o as _$$o } from "../905/524481";
 import { g } from "../905/763242";
@@ -13,14 +13,14 @@ export function $$p0() {
   let e = useDispatch();
   let t = useSelector(e => e.sharedFonts.unsuccessfulUploads);
   return jsx(yX, {
-    confirmationTitle: _$$t("shared_fonts.upload_error_modal.title", {
+    confirmationTitle: getI18nString("shared_fonts.upload_error_modal.title", {
       unsuccessfulUploads: t.length
     }),
     onConfirm: () => {
       e(_$$o());
       e(Ce());
     },
-    confirmText: _$$t("shared_fonts.upload_error_modal.okay"),
+    confirmText: getI18nString("shared_fonts.upload_error_modal.okay"),
     hideCancel: !0,
     size: 600,
     children: jsxs(P, {
@@ -29,10 +29,10 @@ export function $$p0() {
         className: "shared_fonts_upload_error_modal--modalHeaderRow--sUF-- text--fontPos10--s1PI5 text--_fontBase--QdLsd shared_fonts_upload_error_modal--_row--Qn5-U",
         children: [jsx("div", {
           className: u,
-          children: tx("shared_fonts.upload_error_modal.font")
+          children: renderI18nText("shared_fonts.upload_error_modal.font")
         }), jsx("div", {
           className: m,
-          children: tx("shared_fonts.upload_error_modal.error")
+          children: renderI18nText("shared_fonts.upload_error_modal.error")
         })]
       }), t.map(e => jsxs("div", {
         className: "shared_fonts_upload_error_modal--row--P1Dqx text--fontPos11--2LvXf text--_fontBase--QdLsd shared_fonts_upload_error_modal--_row--Qn5-U",

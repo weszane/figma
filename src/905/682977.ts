@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { PureComponent } from "react";
 import a from "classnames";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { kt } from "../figma_app/858013";
 import { s as _$$s } from "../cssbuilder/589278";
 import { tf } from "../figma_app/831799";
@@ -80,7 +80,7 @@ export class $$_5 extends PureComponent {
   constructor() {
     super(...arguments);
     this.sortBy = () => {
-      sx("Sort Changed - SortableField", {
+      trackEventAnalytics("Sort Changed - SortableField", {
         isDescending: this.props.isDescending,
         field: this.props.field
       });

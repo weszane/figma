@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { B } from "../905/714743";
 import { q } from "../905/600041";
 import { y } from "../905/171275";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { A as _$$A } from "../6828/255111";
 import { A as _$$A2 } from "../6828/94342";
 export function $$c0({
@@ -25,7 +25,7 @@ export function $$c0({
       svgHeight: "100px"
     }), jsx("div", {
       className: "x1n0bwc9 x9otpla",
-      children: tx("tile.offline_file_tile.offline_created_file")
+      children: renderI18nText("tile.offline_file_tile.offline_created_file")
     })]
   });
   return jsx(q, {

@@ -1,21 +1,21 @@
 import { useEffect } from "react";
-import { eU, zl, fp, md } from "../figma_app/27355";
+import { atom, atomStoreManager, useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import { IT } from "../figma_app/566371";
 import { tS } from "../figma_app/516028";
 import { Wh } from "../figma_app/615482";
 import { Xu } from "../figma_app/588582";
 import { gZ } from "../figma_app/952035";
 import { GC } from "../figma_app/791586";
-let $$u0 = Wh(() => eU(""));
-let x = Wh(() => eU([]));
+let $$u0 = Wh(() => atom(""));
+let x = Wh(() => atom([]));
 export function $$m2() {
-  zl.set(x, []);
+  atomStoreManager.set(x, []);
 }
 export function $$h1() {
   let e = tS();
   let t = Xu();
-  let [n, l] = fp(x);
-  let m = md($$u0);
+  let [n, l] = useAtomValueAndSetter(x);
+  let m = useAtomWithSubscription($$u0);
   let {
     connectedProject
   } = GC();

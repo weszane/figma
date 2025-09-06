@@ -3,12 +3,12 @@ import { rXF, Z_n, CWU, mHF } from "../figma_app/763686";
 import { dI } from "../905/871411";
 import { dI as _$$dI } from "../905/805904";
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
-import { az } from "../905/449184";
+import { atomStoreManager } from "../figma_app/27355";
+import { analyticsEventManager } from "../905/449184";
 import { debugState } from "../905/407919";
 import { h as _$$h } from "../905/207101";
 import { ZC } from "../figma_app/39751";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { ds } from "../figma_app/314264";
 import { ZR, O8 } from "../905/313095";
 import { X } from "../905/853613";
@@ -61,7 +61,7 @@ export function $$I0({
   }(function () {
     if (i.current) {
       let e = performance.now() - i.current;
-      az.trackDefinedMetric(t, {
+      analyticsEventManager.trackDefinedMetric(t, {
         loadTimeMs: e
       });
     }
@@ -74,7 +74,7 @@ export function $$S1({
   let t = tS();
   let r = TA();
   _$$h(() => {
-    t && r && az.trackDefinedEvent("variables.inline_creation_dialog_opened", {
+    t && r && analyticsEventManager.trackDefinedEvent("variables.inline_creation_dialog_opened", {
       fileKey: t,
       userId: r,
       resolvedType: T(e)
@@ -93,9 +93,9 @@ export function $$A2(e, t, r) {
       let _ = Object.keys(p.mirror.sceneGraphSelection);
       let f = p.openFile?.key;
       let E = p.user && p.user.id;
-      let I = zl.get(Ev(d));
-      let S = I?.variableSetId ? zl.get(Eo(I?.variableSetId))?.node_id : null;
-      let A = I?.variableSetId ? zl.get(Eo(I?.variableSetId))?.sortPosition : null;
+      let I = atomStoreManager.get(Ev(d));
+      let S = I?.variableSetId ? atomStoreManager.get(Eo(I?.variableSetId))?.node_id : null;
+      let A = I?.variableSetId ? atomStoreManager.get(Eo(I?.variableSetId))?.sortPosition : null;
       let x = CWU.getSubscribedVariableInfo(d);
       let N = ZR(I ?? O8(x), p.openFile);
       let C = X(N);
@@ -147,9 +147,9 @@ export function $$A2(e, t, r) {
       let s = Object.keys(n.mirror.sceneGraphSelection);
       let o = n.openFile?.key;
       let d = n.user && n.user.id;
-      let u = zl.get(Ev(r?.value));
-      let p = u?.variableSetId ? zl.get(Eo(u?.variableSetId))?.node_id : null;
-      let _ = u?.variableSetId ? zl.get(Eo(u?.variableSetId))?.sortPosition : null;
+      let u = atomStoreManager.get(Ev(r?.value));
+      let p = u?.variableSetId ? atomStoreManager.get(Eo(u?.variableSetId))?.node_id : null;
+      let _ = u?.variableSetId ? atomStoreManager.get(Eo(u?.variableSetId))?.sortPosition : null;
       let f = CWU.getSubscribedVariableInfo(r?.value);
       let E = ZR(u ?? O8(f), n.openFile);
       let b = X(E);
@@ -172,7 +172,7 @@ export function $$A2(e, t, r) {
       });
     }
   } catch (e) {
-    x1("variables", "Could not log variable consumption", {
+    logError("variables", "Could not log variable consumption", {
       exception: e
     }, {
       reportAsSentryError: !0
@@ -185,7 +185,7 @@ export function $$x3(e, t) {
     let n = Object.keys(r.mirror.sceneGraphSelection);
     let a = r.openFile?.key;
     let s = r.user && r.user.id;
-    let o = zl.get(Ev(e));
+    let o = atomStoreManager.get(Ev(e));
     let d = CWU.getSubscribedVariableInfo(e);
     let u = ZR(o ?? O8(d), r.openFile);
     let p = X(u);
@@ -202,7 +202,7 @@ export function $$x3(e, t) {
       forwardToDatadog: !0
     });
   } catch (e) {
-    x1("variables", "Could not log variant binding variable consumption", {
+    logError("variables", "Could not log variant binding variable consumption", {
       exception: e
     }, {
       reportAsSentryError: !0

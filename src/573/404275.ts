@@ -4,7 +4,7 @@ import { t as _$$t } from "../905/150656";
 import { xae } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { Pt } from "../figma_app/806412";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { ow, Em } from "../figma_app/976749";
 import { _6 } from "../figma_app/386952";
 import { pk, Qr } from "../figma_app/598952";
@@ -31,17 +31,17 @@ export function $$x3({
         htmlAttributes: {
           "data-testid": pk
         },
-        children: tx("fullscreen.pages_panel.file_tab")
+        children: renderI18nText("fullscreen.pages_panel.file_tab")
       }), jsx(_$$t.Tab, {
         ...t[f],
-        children: tx("fullscreen.pages_panel.code_tab")
+        children: renderI18nText("fullscreen.pages_panel.code_tab")
       }), jsx(_$$t.Tab, {
         ...t[$$y0],
         onboardingKey: Qr,
-        children: tx("fullscreen.pages_panel.assets_tab")
+        children: renderI18nText("fullscreen.pages_panel.assets_tab")
       }), jsx(_$$t.Tab, {
         ...t[$$m1],
-        children: tx("fullscreen.pages_panel.chat_tab")
+        children: renderI18nText("fullscreen.pages_panel.chat_tab")
       })]
     })
   });

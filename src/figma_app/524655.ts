@@ -3,8 +3,8 @@ import { useDispatch } from "../vendor/514228";
 import { Ez5, Egt, CNR } from "../figma_app/763686";
 import { Y } from "../905/912236";
 import { AD } from "../905/871411";
-import { md } from "../figma_app/27355";
-import { t } from "../905/303541";
+import { useAtomWithSubscription } from "../figma_app/27355";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { NX } from "../figma_app/456871";
 import { ut } from "../figma_app/84367";
@@ -105,16 +105,16 @@ export function $$x0() {
     numTotalSlides
   } = $$A3();
   let a = Xm();
-  let s = md(y6(a)).productComponents.modified.erroneous;
+  let s = useAtomWithSubscription(y6(a)).productComponents.modified.erroneous;
   return useCallback(n => {
     0 === numTotalSlides ? e(F.enqueue({
-      message: t("file_permissions_modal.share_as.publish_template_slides_error_no_slides"),
+      message: getI18nString("file_permissions_modal.share_as.publish_template_slides_error_no_slides"),
       onDismiss: () => {}
     })) : numSkippedSlides > 0 ? e(F.enqueue({
-      message: t("file_permissions_modal.share_as.publish_template_slides_error_skipped_slides"),
+      message: getI18nString("file_permissions_modal.share_as.publish_template_slides_error_skipped_slides"),
       onDismiss: () => {}
     })) : s.length > 0 ? e(F.enqueue({
-      message: t("file_permissions_modal.share_as.publish_template_variant_error_slides"),
+      message: getI18nString("file_permissions_modal.share_as.publish_template_variant_error_slides"),
       onDismiss: () => {}
     })) : n();
   }, [e, s.length, numSkippedSlides, numTotalSlides]);

@@ -10,7 +10,7 @@ import { dq } from "../905/845253";
 import { ut } from "../figma_app/84367";
 import { G } from "../1250/269770";
 import { Xr } from "../figma_app/27355";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
 import { getInitialOptions } from "../figma_app/169182";
 import { Rs } from "../figma_app/288654";
@@ -100,7 +100,7 @@ function L(e) {
     let e = G.data.file;
     if (null === P.current) {
       let t = getInitialOptions().editing_file;
-      null !== e && t && e.key === t.key && !!t.can_edit !== e.canEdit && (sx("open_file_inconsistent_permission", {
+      null !== e && t && e.key === t.key && !!t.can_edit !== e.canEdit && (trackEventAnalytics("open_file_inconsistent_permission", {
         file_key: e.key,
         lg_can_edit: e.canEdit,
         sinatra_can_edit: t.can_edit,

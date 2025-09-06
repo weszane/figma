@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { parsePxInt } from "../figma_app/783094";
 import { s as _$$s } from "../905/573154";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { o as _$$o } from "../figma_app/29593";
 import { s as _$$s2 } from "../905/411990";
 import { RI, _S } from "../905/315794";
@@ -95,7 +95,7 @@ export function $$C0() {
     let j = window.innerWidth <= parsePxInt(tgj);
     let U = [];
     if (U.push({
-      displayText: _$$t("file_browser.copy_link"),
+      displayText: getI18nString("file_browser.copy_link"),
       onClick: () => {
         let e = bL(C.id, C.org_id);
         n(_$$S({
@@ -108,7 +108,7 @@ export function $$C0() {
       items: U
     }];
     j && U.push({
-      displayText: _$$t("file_browser.team.invite"),
+      displayText: getI18nString("file_browser.team.invite"),
       onClick: () => {
         l({
           teamId: C.id,
@@ -117,14 +117,14 @@ export function $$C0() {
       }
     });
     v.canAdmin && U.push({
-      displayText: _$$t("team_view.toolbar.rename"),
+      displayText: getI18nString("team_view.toolbar.rename"),
       onClick: () => {
         n(oB());
         i && i(C);
       }
     });
     v.canAdmin && d && U.push({
-      displayText: _$$t("team_view.toolbar.change_icon"),
+      displayText: getI18nString("team_view.toolbar.change_icon"),
       onClick: () => {
         n(oB());
         d && d(C);
@@ -137,14 +137,14 @@ export function $$C0() {
     let G = (() => {
       let t = [];
       if (v.isInTeam) F && t.push({
-        displayText: _$$t("team_view.toolbar.leave_team"),
+        displayText: getI18nString("team_view.toolbar.leave_team"),
         onClick: w
       });else if (C.org_id) {
         let i = YP(C, r[C.id], e, M);
         null != i && i !== gO.CLICK_JOIN && t.push({
           displayText: RI({
             type: i,
-            overrideLeaveText: _$$t("teams_table.leave_team")
+            overrideLeaveText: getI18nString("teams_table.leave_team")
           }),
           onClick: () => {
             _S({
@@ -160,7 +160,7 @@ export function $$C0() {
         });
       }
       v.canDelete && t.push({
-        displayText: _$$t("team_view.toolbar.delete_team"),
+        displayText: getI18nString("team_view.toolbar.delete_team"),
         onClick: P
       });
       return t;

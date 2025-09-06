@@ -4,10 +4,10 @@ import { useDispatch } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, nB } from "../figma_app/272243";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { Us } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { U as _$$U } from "../905/815805";
 import { dR } from "../figma_app/109538";
@@ -68,7 +68,7 @@ export function $$D0({
 }) {
   let G = useDispatch();
   let [V, H] = useState(LN());
-  let z = _$$R(e => vp(e.user, e.currentUserOrgId, e.currentTeamId));
+  let z = selectWithShallowEqual(e => vp(e.user, e.currentUserOrgId, e.currentTeamId));
   let W = X$("PlanComparisonModalContent");
   let K = W.unwrapOr(null)?.tier || null;
   let Y = _$$U(M ?? V);
@@ -140,7 +140,7 @@ export function $$D0({
         height: 8
       }), B ?? jsx(_$$L, {}), jsx("p", {
         className: _$$s.colorTextSecondary.$,
-        children: tx("plan_comparison.campfire.applicable_taxes")
+        children: renderI18nText("plan_comparison.campfire.applicable_taxes")
       })]
     })
   });
@@ -149,24 +149,24 @@ function k() {
   return jsxs(Fragment, {
     children: [jsx("div", {
       className: _$$s.textHeadingLarge.$,
-      children: tx("plan_comparison.campfire.title")
+      children: renderI18nText("plan_comparison.campfire.title")
     }), jsx("div", {
       className: _$$s.textHeadingMedium.fontNormal.$,
-      children: tx("plan_comparison.campfire.description", {
+      children: renderI18nText("plan_comparison.campfire.description", {
         plan: jsx("span", {
           className: _$$s.textHeadingMedium.fontMedium.$,
-          children: tx("plan_comparison.campfire.description.plan")
+          children: renderI18nText("plan_comparison.campfire.description.plan")
         }),
         seat: jsx("span", {
           className: _$$s.textHeadingMedium.fontMedium.$,
-          children: tx("plan_comparison.campfire.description.seat")
+          children: renderI18nText("plan_comparison.campfire.description.seat")
         }),
         learnMoreLink: jsx(Us, {
           className: _$$s.textHeadingMedium.fontNormal.$,
           href: zZ,
           target: "_blank",
           trusted: !0,
-          children: tx("plan_comparison.campfire.description.learn_more")
+          children: renderI18nText("plan_comparison.campfire.description.learn_more")
         })
       })
     })]

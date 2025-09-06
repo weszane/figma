@@ -1,9 +1,9 @@
 import { D } from "../905/347702";
 import { hMR } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { sx, az } from "../905/449184";
+import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { getInitialOptions } from "../figma_app/169182";
-import { ED, x1 } from "../905/714362";
+import { logDebug, logError } from "../905/714362";
 import { xK } from "../905/125218";
 function d() {
   return window.performance ? window.performance.now() : Date.now();
@@ -34,7 +34,7 @@ export class $$u0 {
       let e = this._connectArgs;
       if (this.reportedAbandon || this.renderingEventsReported || "Preview" === e.entry && !this.wasInlinePreviewModalOpenedSinceViewerLoaded) return;
       let t = Math.round(performance.now()) - e.afterConnectTo;
-      sx("Viewer Abandon", {
+      trackEventAnalytics("Viewer Abandon", {
         entry: e.entry,
         connectionType: e.connectionType,
         abandonTime: t
@@ -50,7 +50,7 @@ export class $$u0 {
     this.handleDOMContentLoaded = () => {
       this._domContentLoaded = this.now();
       this.mark("dom_content_loaded");
-      az.trackDefinedEvent("prototype.dom_content_loaded", {
+      analyticsEventManager.trackDefinedEvent("prototype.dom_content_loaded", {
         time: this._domContentLoaded
       });
     };
@@ -73,11 +73,11 @@ export class $$u0 {
         ...this._connectArgs,
         ...e
       };
-      sx("Viewer Document Is Loaded", t);
+      trackEventAnalytics("Viewer Document Is Loaded", t);
     };
     this.wasViewerLoadReported = !1;
     this.handleViewerLoaded = e => {
-      if (this.clearScheduledTimeouts(), ED("Load Time Tracker", "handleViewerLoaded", {
+      if (this.clearScheduledTimeouts(), logDebug("Load Time Tracker", "handleViewerLoaded", {
         lastConnectToMs: this._lastConnectToMs,
         lastConnectToID: this._lastConnectToID
       }), this._lastConnectToMs >= 0 && null != this._lastConnectToID) {
@@ -111,11 +111,11 @@ export class $$u0 {
           };
           this.mark("viewer_loaded");
           this.measure("viewer_loaded_measure", "dom_content_loaded", "viewer_loaded");
-          az.trackDefinedEvent("prototype.viewer_loaded", n);
+          analyticsEventManager.trackDefinedEvent("prototype.viewer_loaded", n);
         }
         this._lastConnectToMs = -1;
         this.wasViewerLoadReported = !0;
-      } else x1("load", "Unexpected Viewer Loaded event without Viewer Connect To report");
+      } else logError("load", "Unexpected Viewer Loaded event without Viewer Connect To report");
     };
     this.handleFontListLoaded = e => {
       let t = {
@@ -124,13 +124,13 @@ export class $$u0 {
         connectAttemptID: this._lastConnectToID,
         timeNow: this.now()
       };
-      sx("Viewer Font List Loaded", t);
+      trackEventAnalytics("Viewer Font List Loaded", t);
     };
     this.computeLoadTimeSinceDomContentLoaded = (e = this.now()) => window.androidProtoFsPreloaded && window.androidProtoPreloadedTabStart && e >= window.androidProtoPreloadedTabStart ? e - window.androidProtoPreloadedTabStart + window.androidProtoFsPreloaded - this._domContentLoaded : e - this._domContentLoaded;
     this.handleAfterConnectTo = e => {
       this._lastConnectToMs = d();
       this._lastConnectToID = c();
-      ED("Load Time Tracker", "handleAfterConnectTo", {
+      logDebug("Load Time Tracker", "handleAfterConnectTo", {
         lastConnectToMs: this._lastConnectToMs,
         lastConnectToID: this._lastConnectToID
       });
@@ -148,13 +148,13 @@ export class $$u0 {
         connectAttemptID: this._lastConnectToID,
         ...this._connectArgs
       };
-      if ((!this._sentViewerConnectToMetric || getFeatureFlags().prototype_connectto_debug) && (az.trackDefinedEvent("prototype.viewer_connect_to", {
+      if ((!this._sentViewerConnectToMetric || getFeatureFlags().prototype_connectto_debug) && (analyticsEventManager.trackDefinedEvent("prototype.viewer_connect_to", {
         ...t,
         isInEmbed: this._isInEmbed
       }), this._sentViewerConnectToMetric = !0), this.renderingEventsReported = !1, this.renderingEvents = [], this.clearScheduledTimeouts(), e.logViewerWaiting) for (let e of [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90]) {
         let t = setTimeout(() => {
           let t = (d() - this._lastConnectToMs) / 1e3;
-          sx("Viewer Waiting", {
+          trackEventAnalytics("Viewer Waiting", {
             waitedAtLeastSeconds: e,
             delaySecondsSinceConnect: t,
             connectAttemptID: this._lastConnectToID
@@ -164,7 +164,7 @@ export class $$u0 {
       }
       let r = setTimeout(() => {
         let e = (d() - this._lastConnectToMs) / 1e3;
-        sx("Viewer Waiting", {
+        trackEventAnalytics("Viewer Waiting", {
           waitedAtLeastSeconds: 60,
           delaySecondsSinceConnect: e,
           connectAttemptID: this._lastConnectToID,
@@ -221,7 +221,7 @@ export class $$u0 {
   handleDocumentRenderStop() {
     if (this.renderingEventsReported) return;
     let e = this.renderingEvents.length - 1;
-    if (e >= 0 && -1 === this.renderingEvents[e][1] && (this.renderingEvents[e][1] = this.now()), ED("Load Time Tracker", "handleDocumentRenderStop", {
+    if (e >= 0 && -1 === this.renderingEvents[e][1] && (this.renderingEvents[e][1] = this.now()), logDebug("Load Time Tracker", "handleDocumentRenderStop", {
       lastIndex: e
     }), window.removeEventListener("pagehide", this.reportViewerAbandon), this.renderingEvents.length >= this.renderingEventsMaxSize) {
       let e = {};
@@ -241,7 +241,7 @@ export class $$u0 {
       e.connectAttemptID = this._lastConnectToID;
       e.totalUsedHeapMemory = hMR?.getTotalUsedHeapMemory() ?? 0;
       e.maxUsedHeapMemory = hMR?.getMaxUsedHeapMemory() ?? 0;
-      this.wasViewerLoadReported || this._connectArgs?.entry !== "Prototype" || x1("load", "Unexpected Viewer Rendering First Frames event without Viewer Loaded report");
+      this.wasViewerLoadReported || this._connectArgs?.entry !== "Prototype" || logError("load", "Unexpected Viewer Rendering First Frames event without Viewer Loaded report");
       let s = this.computeLoadTimeSinceDomContentLoaded();
       let l = {
         ...e,
@@ -251,7 +251,7 @@ export class $$u0 {
         connectionType: this._connectArgs?.connectionType,
         isInEmbed: this._isInEmbed
       };
-      sx("Viewer Rendering First Frames", l, {
+      trackEventAnalytics("Viewer Rendering First Frames", l, {
         forwardToDatadog: !0
       });
       this.renderingEventsReported = !0;
@@ -270,31 +270,31 @@ export class $$u0 {
   }
   handleNativeLoadTimeMetadata(e) {
     let t = this._formNativeLoadTimeMetadataFigmentEvent(e, performance.timeOrigin);
-    az.trackDefinedEvent("native.load_time_metadata", t);
+    analyticsEventManager.trackDefinedEvent("native.load_time_metadata", t);
   }
   handleLivegraphConnectionOpened() {
     -1 === this._livegraphStartTime && (this._livegraphStartTime = this.now(), this.mark("livegraph_subscription_started"), this.measure("livegraph_subscription_started_measure", "dom_content_loaded", "livegraph_subscription_started"));
-    az.trackDefinedEvent("prototype.livegraph_subscription_started", {
+    analyticsEventManager.trackDefinedEvent("prototype.livegraph_subscription_started", {
       timeSinceDomContentLoaded: this.computeLoadTimeSinceDomContentLoaded(this._livegraphStartTime)
     });
   }
   handleLivegraphConnectionResponded() {
     let e = this.now();
     -1 === this._liveGraphSubscriptionLoaded && (this._liveGraphSubscriptionLoaded = e, this.mark("livegraph_subscription_loaded"), this.measure("livegraph_subscription_loaded_measure", "dom_content_loaded", "livegraph_subscription_loaded"));
-    az.trackDefinedMetric("prototype.livegraph_subscription_loaded", {
+    analyticsEventManager.trackDefinedMetric("prototype.livegraph_subscription_loaded", {
       timeSinceDomContentLoaded: this.computeLoadTimeSinceDomContentLoaded(e),
       responseTime: e - this._livegraphStartTime
     });
   }
   handleMultiplayerOpenConnection() {
     -1 === this._multiplayerStartTime && (this._multiplayerStartTime = this.now(), this.mark("multiplayer_connection_start"), this.measure("multiplayer_connection_start_measure", "dom_content_loaded", "multiplayer_connection_start"));
-    az.trackDefinedEvent("prototype.multiplayer_connection_start", {
+    analyticsEventManager.trackDefinedEvent("prototype.multiplayer_connection_start", {
       timeSinceDomContentLoaded: this.computeLoadTimeSinceDomContentLoaded(this._multiplayerStartTime)
     });
   }
   handleMultiplayerFirstResponse() {
     -1 === this._multiplayerFirstResponse && (this._multiplayerFirstResponse = this.now(), this.mark("multiplayer_first_response"), this.measure("multiplayer_first_response_measure", "dom_content_loaded", "multiplayer_first_response"));
-    az.trackDefinedMetric("prototype.multiplayer_first_response", {
+    analyticsEventManager.trackDefinedMetric("prototype.multiplayer_first_response", {
       timeSinceDomContentLoaded: this.computeLoadTimeSinceDomContentLoaded(),
       responseTime: this.now() - this._multiplayerStartTime
     });
@@ -302,14 +302,14 @@ export class $$u0 {
   handleMultiplayerIFLSatisfied() {
     -1 === this._multiplayerFirstFinish && (this._multiplayerFirstFinish = this.now(), this.mark("multiplayer_first_finish"), this.measure("multiplayer_first_finish_measure", "dom_content_loaded", "multiplayer_first_finish"));
     -1 === this._multiplayerSatisfiedTime && (this._multiplayerSatisfiedTime = this.now());
-    az.trackDefinedMetric("prototype.multiplayer_first_finish", {
+    analyticsEventManager.trackDefinedMetric("prototype.multiplayer_first_finish", {
       timeSinceDomContentLoaded: this.computeLoadTimeSinceDomContentLoaded(),
       responseTime: this.now() - this._multiplayerStartTime
     });
   }
   handleIFLCompleted() {
     -1 === this._iflCompleted && (this._iflCompleted = this.now(), this.mark("ifl_completed"), this.measure("ifl_completed_measure", "dom_content_loaded", "ifl_completed"));
-    az.trackDefinedMetric("prototype.ifl_completed", {
+    analyticsEventManager.trackDefinedMetric("prototype.ifl_completed", {
       timeSinceDomContentLoaded: this.computeLoadTimeSinceDomContentLoaded(),
       responseTime: this.now() - this._multiplayerSatisfiedTime
     });

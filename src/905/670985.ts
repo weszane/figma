@@ -1,62 +1,124 @@
-import { F } from "../vendor/29523";
-import { getFeatureFlags } from "../905/601108";
-import { getInitialOptions } from "../figma_app/169182";
-import { J6 } from "../905/602906";
-import { $ } from "../905/361972";
-let l = getInitialOptions().frontend_sentry_dsn && getFeatureFlags().frontend_sentry_wasm_integration;
-export function $$d3() {
-  let e = [];
-  l && e.push(F());
-  return e;
+import { wasmIntegration } from '@sentry/wasm'
+import { LogLevelStr } from '../905/361972'
+import { getFeatureFlags } from '../905/601108'
+import { observabilityClient } from '../905/602906'
+import { getInitialOptions } from '../figma_app/169182'
+
+/**
+ * Checks if Sentry WASM integration should be enabled.
+ * @returns {boolean}
+ */
+function isSentryWasmEnabled(): boolean {
+  // l (original variable)
+  return Boolean(
+    getInitialOptions().frontend_sentry_dsn
+    && getFeatureFlags().frontend_sentry_wasm_integration,
+  )
 }
-export function $$c1(e, t, i) {
-  window.performance.mark && window.performance.measure && (window.performance.mark(`${e}.startSpan`, {
-    startTime: i
-  }), J6.startVital(e, {
-    level: $.INFO,
-    context: {
-      team: t
-    }
-  }));
+
+/**
+ * Returns an array of Sentry integrations based on feature flags.
+ * @returns {Array}
+ */
+export function setupSentryIntegrations(): unknown[] {
+  // $$d3 (original function)
+  const integrations: unknown[] = []
+  if (isSentryWasmEnabled()) {
+    integrations.push(wasmIntegration())
+  }
+  return integrations
 }
-export function $$u0(e, t) {
+
+/**
+ * Marks the start of a performance span and starts a vital in observability.
+ * @param {string} spanName
+ * @param {string} team
+ * @param {number} startTime
+ */
+export function startPerformanceSpan(spanName: string, team: string, startTime?: number): void {
+  // $$c1 (original function)
   if (window.performance.mark && window.performance.measure) {
-    window.performance.mark(`${e}.endSpan`, {
-      startTime: t
-    });
-    try {
-      window.performance.measure(e, `${e}.startSpan`, `${e}.endSpan`);
-      window.performance.clearMarks(`${e}.startSpan`);
-      window.performance.clearMarks(`${e}.endSpan`);
-    } catch (e) {}
-    J6.stopVital(e, {
-      level: $.INFO
-    });
+    window.performance.mark(`${spanName}.startSpan`, {
+      startTime,
+    })
+    observabilityClient.startVital(spanName, {
+      level: LogLevelStr.INFO,
+      context: { team },
+    })
   }
 }
-export function $$p4(e, t, i, n = !0) {
-  n && $$c1(e, t);
-  let r = window.performance.now();
-  i();
-  n && $$u0(e);
-  return window.performance.now() - r;
+
+/**
+ * Marks the end of a performance span, measures it, and stops the vital.
+ * @param {string} spanName
+ * @param {number} endTime
+ */
+export function endPerformanceSpan(spanName: string, endTime?: number): void {
+  // $$u0 (original function)
+  if (window.performance.mark && window.performance.measure) {
+    window.performance.mark(`${spanName}.endSpan`, {
+      startTime: endTime,
+    })
+    try {
+      window.performance.measure(spanName, `${spanName}.startSpan`, `${spanName}.endSpan`)
+      window.performance.clearMarks(`${spanName}.startSpan`)
+      window.performance.clearMarks(`${spanName}.endSpan`)
+    }
+    catch {
+      // Ignore errors
+    }
+    observabilityClient.stopVital(spanName, {
+      level: LogLevelStr.INFO,
+    })
+  }
 }
-export async function $$m2(e, t, i) {
-  $$c1(e, t);
-  let n = window.performance.now();
-  let r = i();
+
+/**
+ * Measures the duration of a synchronous function, optionally tracking performance.
+ * @param {string} spanName
+ * @param {string} team
+ * @param {() => void} fn
+ * @param {boolean} trackPerformance
+ * @returns {number} Duration in milliseconds
+ */
+export function measureSyncDuration(spanName: string, team: string, fn: () => void, trackPerformance: boolean = true): number {
+  // $$p4 (original function)
+  if (trackPerformance)
+    startPerformanceSpan(spanName, team)
+  const start = window.performance.now()
+  fn()
+  if (trackPerformance)
+    endPerformanceSpan(spanName)
+  return window.performance.now() - start
+}
+
+/**
+ * Measures the duration of an async function, tracking performance.
+ * @param {string} spanName
+ * @param {string} team
+ * @param {() => Promise<any>} fn
+ * @returns {Promise<{result: any, duration: number}>}
+ */
+export async function measureAsyncDuration<T>(spanName: string, team: string, fn: () => Promise<T>): Promise<{ result: Promise<T>, duration: number }> {
+  // $$m2 (original function)
+  startPerformanceSpan(spanName, team)
+  const start = window.performance.now()
+  const resultPromise = fn()
   try {
-    await r;
-  } finally {
-    $$u0(e);
+    await resultPromise
+  }
+  finally {
+    endPerformanceSpan(spanName)
   }
   return {
-    result: r,
-    duration: window.performance.now() - n
-  };
+    result: resultPromise,
+    duration: window.performance.now() - start,
+  }
 }
-export const Dz = $$u0;
-export const Lk = $$c1;
-export const ZO = $$m2;
-export const kk = $$d3;
-export const vo = $$p4;
+
+// Export aliases for backward compatibility
+export const Dz = endPerformanceSpan // $$u0
+export const Lk = startPerformanceSpan // $$c1
+export const ZO = measureAsyncDuration // $$m2
+export const kk = setupSentryIntegrations // $$d3
+export const vo = measureSyncDuration // $$p4

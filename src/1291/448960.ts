@@ -10,8 +10,8 @@ import { Uz } from "../905/63728";
 import { P as _$$P } from "../905/347284";
 import { IW } from "../figma_app/563413";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
-import { Gq } from "../figma_app/363242";
+import { getI18nString, renderI18nText } from "../905/303541";
+import { getI18nState } from "../figma_app/363242";
 import { oB } from "../905/929976";
 import { jy } from "../905/116101";
 import { fu } from "../figma_app/831799";
@@ -55,17 +55,17 @@ function k() {
           }, function (e) {
             switch (e) {
               case _$$p.ALL:
-                return _$$t("whiteboard.inserts.all");
+                return getI18nString("whiteboard.inserts.all");
               case _$$p.STICKERS_AND_COMPONENTS:
-                return _$$t("whiteboard.inserts.stickers");
+                return getI18nString("whiteboard.inserts.stickers");
               case _$$p.TEMPLATES:
-                return _$$t("whiteboard.inserts.templates");
+                return getI18nString("whiteboard.inserts.templates");
               case _$$p.WIDGETS:
-                return _$$t("whiteboard.inserts.widgets");
+                return getI18nString("whiteboard.inserts.widgets");
               case _$$p.PLUGINS:
-                return _$$t("whiteboard.inserts.plugins");
+                return getI18nString("whiteboard.inserts.plugins");
               case _$$p.MORE:
-                return _$$t("whiteboard.inserts.more");
+                return getI18nString("whiteboard.inserts.more");
               default:
                 return "";
             }
@@ -208,7 +208,7 @@ function H({
     isTransitioning
   } = M();
   let v = _$$F();
-  let w = Gq()?.getPrimaryLocale(!1);
+  let w = getI18nState()?.getPrimaryLocale(!1);
   let N = useRef(DN(w));
   let T = () => {
     t("");
@@ -241,14 +241,14 @@ function H({
         }), e && jsx($n, {
           onClick: T,
           variant: "ghost",
-          "aria-label": _$$t("whiteboard.inserts.clear_search"),
-          children: tx("whiteboard.inserts.clear")
+          "aria-label": getI18nString("whiteboard.inserts.clear_search"),
+          children: renderI18nText("whiteboard.inserts.clear")
         })]
       }), v ? jsx(_$$O, {
         setPinned
       }) : n ? jsx(_$$K, {
         onClick: onClose,
-        "aria-label": _$$t("general.close"),
+        "aria-label": getI18nString("general.close"),
         htmlAttributes: {
           "data-not-draggable": !0
         },

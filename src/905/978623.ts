@@ -1,141 +1,129 @@
-import { l7 } from '../905/189185'
-import { $$ab4, $$av5 } from '../905/472793'
-import { subscribeAndAwaitData } from '../905/553831'
-import { getFeatureFlags } from '../905/601108'
-import { Lo } from '../905/714362'
-import { Wc } from '../905/839044'
-import { Po } from '../905/859698'
-import { zl } from '../figma_app/27355'
-import { k_1 } from '../figma_app/43951'
-import { Ay } from '../figma_app/432652'
-import { Y5 } from '../figma_app/455680'
-import { vlL } from '../figma_app/763686'
-import { F9, LX } from '../figma_app/862108'
-
+import { l7 } from '../905/189185';
+import { $$ab4, $$av5 } from '../905/472793';
+import { subscribeAndAwaitData } from '../905/553831';
+import { getFeatureFlags } from '../905/601108';
+import { logInfo } from '../905/714362';
+import { Wc } from '../905/839044';
+import { Po } from '../905/859698';
+import { atomStoreManager } from '../figma_app/27355';
+import { k_1 } from '../figma_app/43951';
+import { Ay } from '../figma_app/432652';
+import { Y5 } from '../figma_app/455680';
+import { vlL } from '../figma_app/763686';
+import { F9, LX } from '../figma_app/862108';
 async function f(e, t) {
-  let i = ''
+  let i = '';
   switch (e) {
     case 'COMPONENT':
-      i = await $$ab4(t)
-      break
+      i = await $$ab4(t);
+      break;
     case 'COMPONENT_SET':
-      i = await $$av5(t)
-      break
+      i = await $$av5(t);
+      break;
     default:
-      throw new Error(`Unknown component type ${e}`)
+      throw new Error(`Unknown component type ${e}`);
   }
-  return i
+  return i;
 }
 export async function $$_0({
   prompt: e,
   signal: t,
   fileKey: i,
   authInfo: h,
-  orgId: _,
+  orgId: _
 }) {
-  let A
-  let y
-  A = globalThis.AI_DEBUG_XML && getFeatureFlags().figjam_text_to_template_debug
-    ? await Ay.figjam.createTemplate({
-        prompt: e,
-        mode: Wc.PASSTHROUGH_XML_DEBUG_ONLY,
-      }, h)
-    : await Ay.figjam.createTemplate({
-        prompt: e,
-        mode: Wc.DESCRIPTION,
-      }, h)
-  await Y5.onReady()
-  vlL.resetInsertionLocation()
-  let b = A.getReader()
-  let v = []
+  let A;
+  let y;
+  A = globalThis.AI_DEBUG_XML && getFeatureFlags().figjam_text_to_template_debug ? await Ay.figjam.createTemplate({
+    prompt: e,
+    mode: Wc.PASSTHROUGH_XML_DEBUG_ONLY
+  }, h) : await Ay.figjam.createTemplate({
+    prompt: e,
+    mode: Wc.DESCRIPTION
+  }, h);
+  await Y5.onReady();
+  vlL.resetInsertionLocation();
+  let b = A.getReader();
+  let v = [];
   async function I() {
-    if (v.length === 0)
-      return
-    let e = performance.now()
+    if (v.length === 0) return;
+    let e = performance.now();
     for (; performance.now() - e < 32;) {
-      let e = v.shift()
-      if (!e)
-        break
-      let t = l7.system('ai-add-template', () => vlL.handleFigJamTemplateStreamMessage(e))
-      Lo('handleTextToTemplate', 'Create or update response message', {
-        message: t,
-      })
+      let e = v.shift();
+      if (!e) break;
+      let t = l7.system('ai-add-template', () => vlL.handleFigJamTemplateStreamMessage(e));
+      logInfo('handleTextToTemplate', 'Create or update response message', {
+        message: t
+      });
     }
-    await new Promise(e => setTimeout(e, 0))
+    await new Promise(e => setTimeout(e, 0));
   }
   try {
     for (;;) {
-      await I()
+      await I();
       let {
         done,
-        value,
-      } = await b.read()
-      if (t.aborted)
-        break
+        value
+      } = await b.read();
+      if (t.aborted) break;
       if (value?.createNodes) {
         for (let e of value.createNodes) {
-          if (Lo('handleTextToTemplate', 'Create or update node', e), e.node.type === 'INSTANCE' && e.node.componentType && e.node.componentKey) {
-            let t = Po(e.node.componentKey)
+          if (logInfo('handleTextToTemplate', 'Create or update node', e), e.node.type === 'INSTANCE' && e.node.componentType && e.node.componentKey) {
+            let t = Po(e.node.componentKey);
             try {
-              let i = await f(e.node.componentType, t)
-              i && (e.node.componentId = i)
+              let i = await f(e.node.componentType, t);
+              i && (e.node.componentId = i);
+            } catch (e) {
+              logInfo('handleTextToTemplate', 'Error importing component (e.g., sticker)', e);
             }
-            catch (e) {
-              Lo('handleTextToTemplate', 'Error importing component (e.g., sticker)', e)
-            }
-          }
-          else if (e.node.type === 'WIDGET') {
+          } else if (e.node.type === 'WIDGET') {
             if (e.node.pluginData && e.node.pluginData.pluginSvgPreviewUrl) {
               try {
-                let t = await fetch(e.node.pluginData.pluginSvgPreviewUrl).then(async e => (e.ok || Lo('handleTextToTemplate', 'Error importing widget svg'), await e.text()))
-                t && (e.node.pluginData.pluginSvgPreviewData = t)
-              }
-              catch (e) {
-                Lo('handleTextToTemplate', 'Error importing widget', e)
+                let t = await fetch(e.node.pluginData.pluginSvgPreviewUrl).then(async e => (e.ok || logInfo('handleTextToTemplate', 'Error importing widget svg'), await e.text()));
+                t && (e.node.pluginData.pluginSvgPreviewData = t);
+              } catch (e) {
+                logInfo('handleTextToTemplate', 'Error importing widget', e);
               }
             }
             if (e.node.pluginId) {
-              let t
+              let t;
               try {
                 t = await subscribeAndAwaitData(k_1, {
                   pluginId: e.node.pluginId,
-                  orgId: _,
-                })
+                  orgId: _
+                });
+              } catch (e) {
+                logInfo('handleTextToTemplate', 'Error getting plugin', e);
               }
-              catch (e) {
-                Lo('handleTextToTemplate', 'Error getting plugin', e)
-              }
-              t && !t.plugin && Lo('handleTextToTemplate', 'Error getting plugin; plugin possibly not loaded yet')
-              let i = t?.plugin?.currentPluginVersionId ?? ''
-              i || Lo('handleTextToTemplate', 'Could not get latest plugin version ID')
-              e.node.pluginVersionId = i
+              t && !t.plugin && logInfo('handleTextToTemplate', 'Error getting plugin; plugin possibly not loaded yet');
+              let i = t?.plugin?.currentPluginVersionId ?? '';
+              i || logInfo('handleTextToTemplate', 'Could not get latest plugin version ID');
+              e.node.pluginVersionId = i;
             }
           }
-          v.push(e)
+          v.push(e);
         }
       }
-      if (value?.trace && (y = value.trace, Lo('handleTextToTemplate', 'Trace data', {
-        message: value.trace,
+      if (value?.trace && (y = value.trace, logInfo('handleTextToTemplate', 'Trace data', {
+        message: value.trace
       })), value?.requestId) {
-        let t = value.requestId
-        F9(i, 0, e, 'board', t)
-        zl.set(LX, t)
+        let t = value.requestId;
+        F9(i, 0, e, 'board', t);
+        atomStoreManager.set(LX, t);
       }
       if (done) {
-        Lo('handleTextToTemplate', 'Stream seems to be done.')
-        break
+        logInfo('handleTextToTemplate', 'Stream seems to be done.');
+        break;
       }
     }
-    for (; v.length > 0;) await I()
+    for (; v.length > 0;) await I();
+  } catch (e) {
+    e.trace = y;
+    return e;
+  } finally {
+    l7.system('ai-add-template-commit', () => vlL.commitPreview());
+    b.releaseLock();
   }
-  catch (e) {
-    e.trace = y
-    return e
-  }
-  finally {
-    l7.system('ai-add-template-commit', () => vlL.commitPreview())
-    b.releaseLock()
-  }
-  return y
+  return y;
 }
-export const L = $$_0
+export const L = $$_0;

@@ -9,13 +9,13 @@ import { Wn } from "../figma_app/88484";
 import { ZC } from "../figma_app/39751";
 import { Rs } from "../figma_app/288654";
 import { IT } from "../figma_app/566371";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { Ve, c$ } from "../figma_app/236327";
 import { tM, vd } from "../figma_app/637027";
 import { z as _$$z } from "../905/284530";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { XU } from "../905/576487";
 import { H8, Pf, nl } from "../905/590952";
@@ -74,12 +74,12 @@ export function $$Z1(e) {
   useEffect(() => {
     r?.type === eg && dismissModal();
   }, [r?.type, dismissModal]);
-  let h = l ? _$$t("rcs.move_drafts_nudge.dismiss") : _$$t("rcs.move_drafts_nudge.not_now");
+  let h = l ? getI18nString("rcs.move_drafts_nudge.dismiss") : getI18nString("rcs.move_drafts_nudge.not_now");
   return d ? jsx(OA, {
     targetKey: O0,
     dismissModal: _,
-    title: _$$t("rcs.move_drafts_nudge.when_to_draft_when_to_file"),
-    ctaText: _$$t("rcs.move_drafts_nudge.move_file"),
+    title: getI18nString("rcs.move_drafts_nudge.when_to_draft_when_to_file"),
+    ctaText: getI18nString("rcs.move_drafts_nudge.move_file"),
     onClickPrimaryCta: () => {
       p();
       RG(t, s, o)();
@@ -88,7 +88,7 @@ export function $$Z1(e) {
     onClickSecondaryCta: _,
     width: 268,
     children: jsx("p", {
-      children: tx("rcs.move_drafts_nudge.you_re_currently_working_solo_on_a_draft")
+      children: renderI18nText("rcs.move_drafts_nudge.you_re_currently_working_solo_on_a_draft")
     })
   }) : null;
 }
@@ -112,7 +112,7 @@ export function $$Q0(e) {
       type: eg,
       data: {
         targetRect: Lh.current?.getBoundingClientRect(),
-        activatePathOnMount: [_$$t("fullscreen.filename_view.move-to-project")]
+        activatePathOnMount: [getI18nString("fullscreen.filename_view.move-to-project")]
       }
     }));
     return () => {
@@ -131,12 +131,12 @@ export function $$Q0(e) {
       title: "",
       shouldCenterArrow: EL.FALLBACK,
       dismissModal,
-      ctaText: _$$t("rcs.move_drafts_nudge.got_it"),
+      ctaText: getI18nString("rcs.move_drafts_nudge.got_it"),
       onClickPrimaryCta: e.onClickPrimaryCta,
       width: 268,
       children: jsx("p", {
         className: $,
-        children: tx("rcs.move_drafts_nudge.okay_you_can_move_drafts_and_files_into_team_projects_here_any_time")
+        children: renderI18nText("rcs.move_drafts_nudge.okay_you_can_move_drafts_and_files_into_team_projects_here_any_time")
       })
     })
   });
@@ -161,7 +161,7 @@ export function $$ee2({
   if ("loaded" !== B.status || 0 === B.data.currentUser.teamEditRoles.length) return null;
   let V = B.data.currentUser.teamEditRoles.map(e => e.team).filter(e => e && e.projects && !e.deletedAt && e.projects.length > 0);
   if (0 === V.length) {
-    $D(_$$e.MONETIZATION_UPGRADES, Error("MoveDraftsTeamNudgeView rendered with noTeamWithProjects"));
+    reportError(_$$e.MONETIZATION_UPGRADES, Error("MoveDraftsTeamNudgeView rendered with noTeamWithProjects"));
     return null;
   }
   let H = 1 === V.length;
@@ -228,10 +228,10 @@ export function $$ee2({
     children: [function (e, t) {
       let r = e.roles.filter(e => !!e.user && e.user.id !== t);
       let i = r.sort(() => Math.random() - Math.random()).slice(0, Math.min(r.length, 3)).map(e => assertNotNullish(e.user));
-      let a = tx("rcs.move_drafts_nudge.ready_to_bring_in_your_team");
-      if (0 === i.length) a = tx("rcs.move_drafts_nudge.want_to_get_ideas_from_teammates");else if (1 === i.length) {
+      let a = renderI18nText("rcs.move_drafts_nudge.ready_to_bring_in_your_team");
+      if (0 === i.length) a = renderI18nText("rcs.move_drafts_nudge.want_to_get_ideas_from_teammates");else if (1 === i.length) {
         let e = i[0];
-        a = tx("rcs.move_drafts_nudge.want_to_get_ideas_from_user_name", {
+        a = renderI18nText("rcs.move_drafts_nudge.want_to_get_ideas_from_user_name", {
           userName: e.name ? e.name.split(" ")[0] : e.email || e.handle
         });
       }
@@ -255,23 +255,23 @@ export function $$ee2({
       });
     }(w, B.data.currentUser.id), (r = H ? w : null) ? jsx("p", {
       className: X,
-      children: tx("rcs.move_drafts_nudge.drafts_are_great_for_solo_work_but_teammates_can_t_find_or_contribute_to_this_file_move_it_to_team_name_to_let_others_edit", {
+      children: renderI18nText("rcs.move_drafts_nudge.drafts_are_great_for_solo_work_but_teammates_can_t_find_or_contribute_to_this_file_move_it_to_team_name_to_let_others_edit", {
         teamName: jsx("b", {
           children: r.name
         })
       })
     }) : jsx("p", {
       className: X,
-      children: tx("rcs.move_drafts_nudge.drafts_are_great_for_solo_work_but_teammates_can_t_find_or_contribute_to_this_file_move_it_to_your_team_to_let_others_edit")
+      children: renderI18nText("rcs.move_drafts_nudge.drafts_are_great_for_solo_work_but_teammates_can_t_find_or_contribute_to_this_file_move_it_to_your_team_to_let_others_edit")
     }), !H && jsxs("div", {
       className: "move_drafts_nudge_rcs_steps--moveFileSelector--bUHWg",
       children: [jsx("h2", {
-        children: tx("rcs.move_drafts_nudge.move_file_to")
+        children: renderI18nText("rcs.move_drafts_nudge.move_file_to")
       }), jsx(Ve, {
         className: "move_drafts_nudge_rcs_steps--dropdownSelector--vE83U",
         optionsBelowSelector: !0,
         shouldRenderAutocompleteStyles: !0,
-        label: _$$t("rcs.move_drafts_nudge.team_project", {
+        label: getI18nString("rcs.move_drafts_nudge.team_project", {
           teamName: w.name,
           projectName: w.projects[0].path
         }),
@@ -301,7 +301,7 @@ export function $$ee2({
             className: c()("move_drafts_nudge_rcs_steps--optionText----TA7", {
               "move_drafts_nudge_rcs_steps--optionTextWithWarning--ENYe0": $(e)
             }),
-            children: tx("rcs.move_drafts_nudge.team_project", {
+            children: renderI18nText("rcs.move_drafts_nudge.team_project", {
               teamName: e.name,
               projectName: e.projects[0].path
             })
@@ -310,7 +310,7 @@ export function $$ee2({
             children: jsx(_$$B, {
               svg: _$$A,
               "data-tooltip-type": Ib.TEXT,
-              "data-tooltip": _$$t("file_browser.file_move.paywall_team_tooltip")
+              "data-tooltip": getI18nString("file_browser.file_move.paywall_team_tooltip")
             })
           })]
         }, t))
@@ -322,7 +322,7 @@ export function $$ee2({
         variant: "warning",
         iconSrc: _$$A2,
         action: {
-          label: _$$t("rcs.move_drafts_nudge.upgrade_to_continue"),
+          label: getI18nString("rcs.move_drafts_nudge.upgrade_to_continue"),
           onClick: () => {
             d(to({
               type: DV,
@@ -338,7 +338,7 @@ export function $$ee2({
             }));
           }
         },
-        children: tx("rcs.move_drafts_nudge.team_team_name_reached_the_starter_plan_file_limit_of_3_files", {
+        children: renderI18nText("rcs.move_drafts_nudge.team_team_name_reached_the_starter_plan_file_limit_of_3_files", {
           teamName: w.name
         })
       })
@@ -347,7 +347,7 @@ export function $$ee2({
       children: [jsx(tM, {
         className: "move_drafts_nudge_rcs_steps--secondaryCtaButton--yOPJx",
         onClick: t,
-        children: _$$t("rcs.move_drafts_nudge.cancel")
+        children: getI18nString("rcs.move_drafts_nudge.cancel")
       }), jsx(vd, {
         onClick: () => {
           d(_$$z2({
@@ -360,7 +360,7 @@ export function $$ee2({
           t();
         },
         disabled: $(w),
-        children: _$$t("rcs.move_drafts_nudge.move_file")
+        children: getI18nString("rcs.move_drafts_nudge.move_file")
       })]
     })]
   });
@@ -390,14 +390,14 @@ let er = Ju(function () {
     dismissModal: () => {
       e(AS());
     },
-    ctaText: _$$t("rcs.move_drafts_nudge.got_it"),
+    ctaText: getI18nString("rcs.move_drafts_nudge.got_it"),
     onClickPrimaryCta: () => {
       e(AS());
     },
     width: 268,
     children: jsx("p", {
       className: $,
-      children: tx("rcs.move_drafts_nudge.now_that_you_ve_moved_this_file_to_projects_your_teammates_can_edit_and_collaborate_with_you")
+      children: renderI18nText("rcs.move_drafts_nudge.now_that_you_ve_moved_this_file_to_projects_your_teammates_can_edit_and_collaborate_with_you")
     })
   });
 }, "MoveDraftsFeedbackModal");

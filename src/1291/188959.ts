@@ -1,13 +1,13 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { cb, WE } from "../figma_app/745458";
 export function $$r0({
   children: e,
   position: t,
   disabled: s
 }) {
-  let r = md(cb);
-  let o = md(WE);
+  let r = useAtomWithSubscription(cb);
+  let o = useAtomWithSubscription(WE);
   if (!(!s && r > 0 && !o)) return jsx(Fragment, {
     children: e
   });

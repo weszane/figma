@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { I7 } from "../figma_app/594947";
 import { ku, gP } from "../905/879323";
 import { qp } from "../905/977779";
@@ -12,7 +12,7 @@ import { Z } from "../905/387928";
 import { YG } from "../905/921418";
 import { UQ } from "../figma_app/807786";
 export async function $$f1(e, t, i, n = {}) {
-  return (await Z()) ? await tq(e, t, i, n) : await YG.computeResultsReduxSearchTypeHelper(e, t, zl.get(yV)?.editorType === FFileType.DESIGN, zl.get(qp), n.sessionId ?? null, g_[i], n.queryId, n.preferLocal, n.libraryKeyBackingSelectedItems, n.selectedItems);
+  return (await Z()) ? await tq(e, t, i, n) : await YG.computeResultsReduxSearchTypeHelper(e, t, atomStoreManager.get(yV)?.editorType === FFileType.DESIGN, atomStoreManager.get(qp), n.sessionId ?? null, g_[i], n.queryId, n.preferLocal, n.libraryKeyBackingSelectedItems, n.selectedItems);
 }
 export function $$_0(e) {
   let t = useSelector(UQ);

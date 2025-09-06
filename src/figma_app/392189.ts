@@ -7,7 +7,7 @@ import l from "classnames";
 import { Pt } from "../figma_app/806412";
 import { M3 } from "../figma_app/119475";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { yy } from "../figma_app/543529";
 import { n1 } from "../figma_app/657017";
 import { u as _$$u } from "../905/389684";
@@ -17,7 +17,7 @@ import { Wv } from "../figma_app/633080";
 import { r6 } from "../905/542608";
 import { K } from "../905/443068";
 import { e as _$$e } from "../905/149844";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { h as _$$h } from "../905/207101";
 import { g7 } from "../905/939482";
 import { q5 } from "../figma_app/516028";
@@ -32,7 +32,7 @@ function R() {
   let r = q5();
   let i = e && t.length > 0;
   return (_$$h(() => {
-    i && az.trackDefinedEvent("assets_panel.view_ui_kit_empty_state", {
+    i && analyticsEventManager.trackDefinedEvent("assets_panel.view_ui_kit_empty_state", {
       fileKey: r?.key,
       fileTeamId: r?.teamId ?? void 0,
       fileOrgId: r?.parentOrgId ?? void 0
@@ -41,7 +41,7 @@ function R() {
     className: "ui_kit_select--container--lFmF-",
     children: [jsx("div", {
       className: _$$s.colorTextSecondary.alignCenter.$,
-      children: tx("design_systems.assets_panel.ui_kit_empty_state")
+      children: renderI18nText("design_systems.assets_panel.ui_kit_empty_state")
     }), jsx("div", {
       className: _$$s.flex.flexColumn.gap8.mt16.$,
       children: t.map((e, t) => jsx(L, {
@@ -64,7 +64,7 @@ function L({
   } = e;
   let c = q5();
   let u = useCallback(() => {
-    az.trackDefinedEvent("assets_panel.go_to_library", {
+    analyticsEventManager.trackDefinedEvent("assets_panel.go_to_library", {
       libraryKey: library_key,
       fileKey: c?.key,
       fileTeamId: c?.teamId ?? void 0,
@@ -96,7 +96,7 @@ function L({
         })
       }), jsx("div", {
         className: "ui_kit_select--uiKitNumComponents--JH-mO",
-        children: tx("design_systems.assets_panel.num_components", {
+        children: renderI18nText("design_systems.assets_panel.num_components", {
           numComponents: num_components
         })
       })]
@@ -118,7 +118,7 @@ function P({
   let a = _9(e, "assets_panel_empty_state");
   let s = q5();
   let o = useCallback(() => {
-    az.trackDefinedEvent("assets_panel.ui_kit_start", {
+    analyticsEventManager.trackDefinedEvent("assets_panel.ui_kit_start", {
       libraryKey: e,
       fileKey: s?.key,
       fileTeamId: s?.teamId ?? void 0,
@@ -131,10 +131,10 @@ function P({
     className: "ui_kit_select--addButton--ahHMr",
     children: jsx(K, {
       onClick: o,
-      "aria-label": _$$t("design_systems.assets_panel.add_library"),
+      "aria-label": getI18nString("design_systems.assets_panel.add_library"),
       ref: setKeyboardNavigationElement,
       htmlAttributes: {
-        "data-tooltip": _$$t("design_systems.assets_panel.add_library"),
+        "data-tooltip": getI18nString("design_systems.assets_panel.add_library"),
         "data-tooltip-type": "text"
       },
       children: jsx(_$$e, {})
@@ -152,7 +152,7 @@ export function $$k0() {
     className: "empty_states--emptyStatesTextContainer--dM-5d",
     children: jsx("div", {
       className: "empty_states--text--5nh4u",
-      children: tx("design_systems.assets_panel.no_results_for_query", {
+      children: renderI18nText("design_systems.assets_panel.no_results_for_query", {
         searchQuery: query
       })
     })
@@ -214,22 +214,22 @@ function j({
       children: jsx(_$$l, {})
     }), jsx("div", {
       className: "empty_states--ui3EmptyStateTitle--UwoAZ",
-      children: tx("design_systems.assets_panel.empty_state_title_ui3")
+      children: renderI18nText("design_systems.assets_panel.empty_state_title_ui3")
     }), jsxs("div", {
       children: [jsx("div", {
         className: "empty_states--ui3EmptyStateSubtitle---Yamk",
-        children: tx("design_systems.assets_panel.empty_state_subtitle_ui3")
+        children: renderI18nText("design_systems.assets_panel.empty_state_subtitle_ui3")
       }), jsx(_$$N, {
         newTab: !0,
         trusted: !0,
         href: "https://help.figma.com/hc/articles/360038662654",
-        children: tx("design_systems.assets_panel.learn_more")
+        children: renderI18nText("design_systems.assets_panel.learn_more")
       })]
     }), jsx($n, {
       onClick: e,
       recordingKey: Pt("assetsEmptyState", "exploreLibraries"),
       ref: setKeyboardNavigationElement,
-      children: tx("design_systems.assets_panel.empty_state_cta_ui3")
+      children: renderI18nText("design_systems.assets_panel.empty_state_cta_ui3")
     })]
   });
 }

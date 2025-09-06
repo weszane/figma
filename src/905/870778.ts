@@ -10,7 +10,7 @@ import { N as _$$N } from "../905/670143";
 import { g as _$$g } from "../905/125190";
 import { r as _$$r } from "../905/857502";
 import { Ay } from "../905/612521";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { Tg, Xu, Uo } from "../figma_app/354658";
 import { S as _$$S } from "../figma_app/11182";
 import { Fl, U, mr } from "../figma_app/45218";
@@ -35,9 +35,9 @@ export function $$b3({
     children: jsx("span", {
       className: "x78zum5 x195vfkc",
       children: o ? jsxs(Fragment, {
-        children: [jsx(_$$l, {}), tx("community.publishing.copied")]
+        children: [jsx(_$$l, {}), renderI18nText("community.publishing.copied")]
       }) : jsxs(Fragment, {
-        children: [jsx(_$$N, {}), tx("community.publishing.copy_link")]
+        children: [jsx(_$$N, {}), renderI18nText("community.publishing.copy_link")]
       })
     })
   });
@@ -50,7 +50,7 @@ export function $$v2({
     newTab: !0,
     trusted: !0,
     "data-testid": "resource-publishing-success-screen-actions-go-to-community-button",
-    children: _$$t("community.publishing.go_to_community")
+    children: getI18nString("community.publishing.go_to_community")
   });
 }
 export function $$I0() {
@@ -59,7 +59,7 @@ export function $$I0() {
     onClick: () => {
       Ay.reload("Resource updated on community hub");
     },
-    children: _$$t("community.publishing.go_to_community")
+    children: getI18nString("community.publishing.go_to_community")
   });
 }
 export function $$E5({
@@ -91,7 +91,7 @@ export function $$E5({
     E(!0);
   };
   let w = {};
-  let C = I ? tx("community.publishing.copied") : tx("community.publishing.copy_link");
+  let C = I ? renderI18nText("community.publishing.copied") : renderI18nText("community.publishing.copy_link");
   h = I ? b ? _$$g : _$$l : b ? _$$r : _$$N;
   !b && (f ? w = {
     className: "xwa2v1s"
@@ -110,10 +110,10 @@ export function $$E5({
     children: T
   }) : "borderless" === o ? jsx(K, {
     onClick: S,
-    "aria-label": _$$t("community.publishing.copy_link"),
+    "aria-label": getI18nString("community.publishing.copy_link"),
     children: T
   }) : jsx($n, {
-    "data-tooltip": _$$t("community.publishing.copy_template_share_link"),
+    "data-tooltip": getI18nString("community.publishing.copy_template_share_link"),
     "data-tooltip-type": "text",
     variant: o,
     onClick: S,
@@ -131,7 +131,7 @@ export function $$x1({
     href: i,
     newTab: !0,
     trusted: !0,
-    children: tx("cooper.templates.use_in_a_new_file")
+    children: renderI18nText("cooper.templates.use_in_a_new_file")
   });
 }
 export function $$S4(e) {

@@ -10,13 +10,13 @@ import { useSelector, useDispatch } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { Ay } from "../905/612521";
 import { h as _$$h } from "../905/207101";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { Ce, to as _$$to, AS } from "../905/156213";
 import { iZ as _$$iZ, TA } from "../905/372672";
 import { N as _$$N } from "../figma_app/469468";
 import { LA, Yo } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx as _$$tx, t as _$$t, Yd } from "../905/303541";
+import { renderI18nText, getI18nString, getTranslatedDynamicContent } from "../905/303541";
 import { qB } from "../905/862321";
 import { FL, Ay as _$$Ay } from "../figma_app/248365";
 import { u5, gE } from "../5132/642384";
@@ -38,7 +38,7 @@ import { Ju } from "../905/102752";
 import { F as _$$F } from "../5430/926195";
 import { OJ } from "../905/519092";
 import { g as _$$g, rd, dO, qh } from "../vendor/130505";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { getInitialOptions, buildUploadUrl } from "../figma_app/169182";
 import { Ak } from "../905/773401";
 import { B as _$$B } from "../905/714743";
@@ -48,7 +48,7 @@ import { a as _$$a } from "../905/720941";
 import { MZ, o2, R2, Rn } from "../figma_app/146905";
 import { A as _$$A } from "../svg/60701";
 import { A as _$$A2 } from "../5724/172808";
-import { y3, eD as _$$eD } from "../figma_app/876459";
+import { hasDesktopAPI, desktopAPIInstance } from "../figma_app/876459";
 import { IT } from "../figma_app/566371";
 import { S as _$$S } from "../5430/465757";
 import { N_ } from "../vendor/956898";
@@ -88,7 +88,7 @@ import { lQ } from "../905/934246";
 import { C as _$$C2 } from "../figma_app/198698";
 import { om, x1 } from "../figma_app/465413";
 import { A as _$$A8 } from "../5724/965092";
-import { jt } from "../905/528121";
+import { communityPagePaths } from "../905/528121";
 import { Fj } from "../figma_app/594947";
 import { zq, iY as _$$iY, po, p_ } from "../figma_app/598412";
 import { Jm } from "../figma_app/387599";
@@ -109,7 +109,7 @@ import { A as _$$A9 } from "../6828/523860";
 import { A as _$$A0 } from "../svg/951803";
 import { A as _$$A1 } from "../svg/228383";
 import { J as _$$J2 } from "../905/614223";
-import { md, Xr, fp } from "../figma_app/27355";
+import { useAtomWithSubscription, Xr, useAtomValueAndSetter } from "../figma_app/27355";
 import { A as _$$A10 } from "../vendor/90566";
 import { Fu, r1 } from "../figma_app/545877";
 import { w4, QK, Xt } from "../figma_app/692865";
@@ -118,7 +118,7 @@ import { xF, Jm as _$$Jm, uD, J7, If } from "../figma_app/405906";
 import { Ay as _$$Ay3 } from "../905/506641";
 import { DP } from "../905/640017";
 import { A as _$$A11 } from "../6828/364616";
-import { Ay as _$$Ay4 } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { S as _$$S2 } from "../5430/582465";
 import { wl } from "../figma_app/640564";
 import { M as _$$M } from "../905/722875";
@@ -168,7 +168,7 @@ import { GS } from "../5430/342380";
 import { q as _$$q2, S as _$$S3 } from "../figma_app/277543";
 import { P as _$$P2 } from "../5430/540963";
 import { g as _$$g3 } from "../5430/465741";
-import { X as _$$X2 } from "../905/414972";
+import { performanceMetricsTracker } from "../905/414972";
 import { X as _$$X3 } from "../5430/512075";
 import { A as _$$A30 } from "../5430/131744";
 import { V as _$$V, D as _$$D2 } from "../5430/668915";
@@ -437,9 +437,9 @@ function M(e) {
         children: jsx(F, {})
       }), jsx("h1", {
         className: "continue_after_verification--title---5Cuw",
-        children: _$$tx("community.duplicate_modal.youre_all_set")
+        children: renderI18nText("community.duplicate_modal.youre_all_set")
       }), jsx("div", {
-        children: _$$tx("community.duplicate_modal.youve_verified_your_email_at", {
+        children: renderI18nText("community.duplicate_modal.youve_verified_your_email_at", {
           userEmail: jsx("b", {
             children: e.userEmail
           })
@@ -452,7 +452,7 @@ function M(e) {
         trackingProperties: {
           trackingDescriptor: _$$c.CONTINUE_TO_FILE
         },
-        children: _$$tx("community.duplicate_modal.continue_to_file")
+        children: renderI18nText("community.duplicate_modal.continue_to_file")
       })]
     })
   });
@@ -752,7 +752,7 @@ function eS({
       }), jsx(N_, {
         to: e.is_template_url ? `/community/templates/${e.url_slug}` : `/community/collections/${e.url_slug}`,
         className: "community_collections--communityShelfAllPageHeaderRightSide--UQUv8 community_collections--communityShelfAllPageHeaderLeftSide--6UBkD text--fontPos13--xW8hS text--_fontBase--QdLsd",
-        children: _$$tx("community.shelves.show_more")
+        children: renderI18nText("community.shelves.show_more")
       })]
     }), jsx(_$$J, {
       resources: n.slice(0, i),
@@ -846,7 +846,7 @@ function eO({
 }) {
   let t = _$$N(`(max-width: ${_C6})`);
   let i = [{
-    text: _$$t("community.breadcrumbs.collections"),
+    text: getI18nString("community.breadcrumbs.collections"),
     linkProps: {
       to: "/community/collections",
       trackingEventName: "cmty_category"
@@ -948,10 +948,10 @@ function e0() {
         className: "community_collections--allCollectionsHeaderContainer--9UL5p",
         children: [jsx("h1", {
           className: "community_collections--allCollectionsHeader--L0frM text--fontPos32Whyte--AHO3S text--_fontBaseWhyte--efAjI",
-          children: _$$tx("community.collections.figma_community_collections")
+          children: renderI18nText("community.collections.figma_community_collections")
         }), jsx("h2", {
           className: "community_collections--allCollectionsSubHeader--Ww0AY text--fontPos18--rYXJb text--_fontBase--QdLsd",
-          children: _$$tx("community.collections.check_out_collections_of_some_of_our_favorite_design_files_plugins_and_creators_from_figma_community")
+          children: renderI18nText("community.collections.check_out_collections_of_some_of_our_favorite_design_files_plugins_and_creators_from_figma_community")
         })]
       }), jsx(eO, {}), jsx(eZ, {
         isLoading: i,
@@ -963,7 +963,7 @@ function e0() {
         },
         isLoading: i,
         isMoreToFetch: !!e.hasNextPage
-      }), !y3() && jsx("div", {
+      }), !hasDesktopAPI() && jsx("div", {
         className: eN,
         children: jsx(_$$A4, {})
       })]
@@ -999,7 +999,7 @@ function e1(e) {
           className: eL,
           children: jsx("a", {
             href: "/community",
-            children: _$$tx("community.view_bar.home")
+            children: renderI18nText("community.view_bar.home")
           })
         }), jsx("div", {
           className: eE,
@@ -1008,7 +1008,7 @@ function e1(e) {
           className: eL,
           children: jsx("a", {
             href: "/community/collections",
-            children: _$$tx("community.shelves.all_collections")
+            children: renderI18nText("community.shelves.all_collections")
           })
         }), jsx("div", {
           className: eE,
@@ -1020,7 +1020,7 @@ function e1(e) {
           },
           children: jsx("a", {
             href: window.location.href,
-            children: Yd(n.i18n_meta.title, n.title)
+            children: getTranslatedDynamicContent(n.i18n_meta.title, n.title)
           })
         })]
       })
@@ -1041,7 +1041,7 @@ function e1(e) {
   return jsxs(Fragment, {
     children: [jsx(_$$S, {}), jsx(e2, {
       shelf: n
-    }), l, c, !y3() && jsx("div", {
+    }), l, c, !hasDesktopAPI() && jsx("div", {
       className: eN,
       children: jsx(_$$A4, {})
     })]
@@ -1054,7 +1054,7 @@ function e5(e) {
   let [i, n] = useState(!1);
   return i ? jsx("button", {
     className: ev,
-    children: isMobileScreen ? eq : _$$tx("community.view_bar.copied")
+    children: isMobileScreen ? eq : renderI18nText("community.view_bar.copied")
   }) : jsx("button", {
     className: ev,
     onClick: () => {
@@ -1062,7 +1062,7 @@ function e5(e) {
       lW(window.location.href);
       setTimeout(() => n(!1), 1e3);
     },
-    children: isMobileScreen ? eY : _$$tx("community.view_bar.copy_link")
+    children: isMobileScreen ? eY : renderI18nText("community.view_bar.copy_link")
   });
 }
 function e2(e) {
@@ -1110,13 +1110,13 @@ function e2(e) {
           children: [shelf && jsxs(Fragment, {
             children: [jsx("div", {
               className: "community_collections--subtitle--dm958 text--fontPos12--YsUAh text--_fontBase--QdLsd community_collections--marginX--8hpWs",
-              children: Yd(shelf.i18n_meta.subtitle, shelf.subtitle)
+              children: getTranslatedDynamicContent(shelf.i18n_meta.subtitle, shelf.subtitle)
             }), jsx("h1", {
               className: "community_collections--title--cqPZt text--fontPos32Whyte--AHO3S text--_fontBaseWhyte--efAjI community_collections--marginX--8hpWs text--fontPos24--YppUD text--_fontBase--QdLsd",
-              children: Yd(shelf.i18n_meta.title, shelf.title)
+              children: getTranslatedDynamicContent(shelf.i18n_meta.title, shelf.title)
             }), jsx("p", {
               className: "community_collections--description--cjsSf community_collections--marginX--8hpWs text--fontPos16--oMC-G text--_fontBase--QdLsd",
-              children: Yd(shelf.i18n_meta.description, shelf.description)
+              children: getTranslatedDynamicContent(shelf.i18n_meta.description, shelf.description)
             })]
           }), jsxs("div", {
             className: "community_collections--meta--Z25Vv",
@@ -1132,11 +1132,11 @@ function e2(e) {
                 })
               }), jsxs("div", {
                 className: "community_collections--curated--fHhRS",
-                children: [_$$tx("community.view_bar.curated_by"), "\xa0"]
+                children: [renderI18nText("community.view_bar.curated_by"), "\xa0"]
               }), jsx("a", {
                 className: "community_collections--figmaLink--4hdDG community_collections--metaSpace--9Jcor",
                 href: `${getInitialOptions().figma_url}/@figma`,
-                children: _$$tx("community.view_bar.figma")
+                children: renderI18nText("community.view_bar.figma")
               })]
             }), jsxs("div", {
               className: "community_collections--metaRight--hhG9k",
@@ -1145,7 +1145,7 @@ function e2(e) {
                 children: "\u2022\xa0"
               }), jsx("div", {
                 className: "community_collections--updateDate--vgkWS",
-                children: _$$tx("community.view_bar.updated_date", {
+                children: renderI18nText("community.view_bar.updated_date", {
                   date: c.toLocaleDateString(void 0, {
                     year: "numeric",
                     month: "short",
@@ -1225,7 +1225,7 @@ function e6({
       publishers: [e.profile]
     }), jsxs("div", {
       className: "header_attributes--profile--qrbMp",
-      children: [_$$tx("community.collections.curated_by"), jsx("span", {
+      children: [renderI18nText("community.collections.curated_by"), jsx("span", {
         className: "header_attributes--profileName--n9lfZ",
         children: jsx(_$$I, {
           publishers: [e.profile],
@@ -1334,7 +1334,7 @@ function to({
           spacing: 0,
           children: [jsx("div", {
             className: "faqs_section--sectionTitle--I5tGC text--fontPos24--YppUD text--_fontBase--QdLsd",
-            children: _$$tx("community.collections.frequently_asked_questions")
+            children: renderI18nText("community.collections.frequently_asked_questions")
           }), jsx("div", {
             className: "faqs_section--sectionBody--e9hQ3",
             children: e.map((e, t) => jsx(tr, {
@@ -1394,7 +1394,7 @@ function tx({
       href: c
     },
     target: "_blank",
-    children: _$$tx("community.collections.learn_more")
+    children: renderI18nText("community.collections.learn_more")
   });
   let u = qD(t);
   let m = jsx(_$$A7, {
@@ -1447,8 +1447,8 @@ function tv() {
     id: om.communityResourceInReviewBanner,
     bannerType: x1.WARN,
     icon: _$$A8,
-    mainText: _$$t("community.collections.unpublished_banner.this_page_is_not_published"),
-    description: _$$t("community.collections.unpublished_banner.only_admins_can_see_this_page"),
+    mainText: getI18nString("community.collections.unpublished_banner.this_page_is_not_published"),
+    description: getI18nString("community.collections.unpublished_banner.only_admins_can_see_this_page"),
     dismissible: !1,
     positionStatic: !0
   };
@@ -1530,7 +1530,7 @@ function tN() {
   }, [urlSlug]), "loading" === i) ? null : t ? (document.title = t.meta_title || "Collection | Figma", jsxs(Fragment, {
     children: [jsx(tS, {
       collection: t
-    }), !y3() && jsx("div", {
+    }), !hasDesktopAPI() && jsx("div", {
       className: "collection_page--footerContainer--Y-BuI collection_page--pageSections--mndLy",
       children: jsx(_$$A4, {})
     })]
@@ -1769,107 +1769,107 @@ function t6({
   let n = function () {
     let e = l$();
     return [{
-      text: _$$t("community.view_bar.home"),
+      text: getI18nString("community.view_bar.home"),
       path: "/community"
     }, ...(e ? [{
-      text: _$$t("community.homepage.make_nav_text"),
+      text: getI18nString("community.homepage.make_nav_text"),
       path: new tQ({
         landingPageType: tH.MAKE
       }).href
     }] : []), {
-      text: _$$t("community.homepage.figma_section.header"),
+      text: getI18nString("community.homepage.figma_section.header"),
       children: [{
-        text: _$$t("categories.ui_kits"),
+        text: getI18nString("categories.ui_kits"),
         path: new $E({
           categorySlug: LJ.uiKits
         }).href
       }, {
-        text: _$$t("categories.wireframes"),
+        text: getI18nString("categories.wireframes"),
         path: new $E({
           categorySlug: LJ.wireframes
         }).href
       }, {
-        text: _$$t("categories.navbar.social_media.title"),
+        text: getI18nString("categories.navbar.social_media.title"),
         path: new $E({
           categorySlug: LJ.socialMediaTemplates
         }, {
           editor_type: _$$k2.Editors.COOPER
         }).href
       }, {
-        text: _$$t("categories.navbar.print.title"),
+        text: getI18nString("categories.navbar.print.title"),
         path: new $E({
           categorySlug: LJ.printableTemplates
         }, {
           editor_type: _$$k2.Editors.COOPER
         }).href
       }, {
-        text: _$$t("categories.all_design_libraries"),
+        text: getI18nString("categories.all_design_libraries"),
         path: new $E({
           categorySlug: LJ.libraries
         }).href
       }]
     }, {
-      text: _$$t("categories.design_templates"),
+      text: getI18nString("categories.design_templates"),
       children: [{
-        text: _$$t("categories.portfolio_templates"),
+        text: getI18nString("categories.portfolio_templates"),
         path: new $E({
           categorySlug: LJ.portfolios
         }).href
       }, {
-        text: _$$t("categories.mobile_apps"),
+        text: getI18nString("categories.mobile_apps"),
         path: new $E({
           categorySlug: LJ.mobileApps
         }).href
       }, {
-        text: _$$t("categories.resume_templates"),
+        text: getI18nString("categories.resume_templates"),
         path: new $E({
           categorySlug: LJ.resumes
         }).href
       }, {
-        text: _$$t("categories.navbar.web_ad"),
+        text: getI18nString("categories.navbar.web_ad"),
         path: new $E({
           categorySlug: LJ.webAds
         }, {
           editor_type: _$$k2.Editors.COOPER
         }).href
       }, {
-        text: _$$t("categories.all_design_templates"),
+        text: getI18nString("categories.all_design_templates"),
         path: new $E({
           categorySlug: LJ.designTemplates
         }).href
       }]
     }, {
-      text: _$$t("categories.assets"),
+      text: getI18nString("categories.assets"),
       children: [{
-        text: _$$t("categories.icons"),
+        text: getI18nString("categories.icons"),
         path: new $E({
           categorySlug: LJ.icons
         }).href
       }, {
-        text: _$$t("categories.illustrations"),
+        text: getI18nString("categories.illustrations"),
         path: new $E({
           categorySlug: LJ.illustrations
         }).href
       }, {
-        text: _$$t("categories.shapes_colors"),
+        text: getI18nString("categories.shapes_colors"),
         path: new $E({
           categorySlug: LJ.shapesColors
         }).href
       }, {
-        text: _$$t("categories.device_mockups"),
+        text: getI18nString("categories.device_mockups"),
         path: new $E({
           categorySlug: LJ.deviceMockups
         }).href
       }, {
-        text: _$$t("categories.all_assets"),
+        text: getI18nString("categories.all_assets"),
         path: new $E({
           categorySlug: LJ.visualAssets
         }).href
       }]
     }, {
-      text: _$$t("categories.websites"),
+      text: getI18nString("categories.websites"),
       children: [{
-        text: _$$t("categories.navbar.landing_page.title"),
+        text: getI18nString("categories.navbar.landing_page.title"),
         path: new $E({
           categorySlug: LJ.websiteTemplates,
           tagSlug: HP.landingPageTemplates
@@ -1877,7 +1877,7 @@ function t6({
           editor_type: _$$k2.Editors.SITES
         }).href
       }, {
-        text: _$$t("categories.navbar.portfolio.title"),
+        text: getI18nString("categories.navbar.portfolio.title"),
         path: new $E({
           categorySlug: LJ.websiteTemplates,
           tagSlug: HP.portfolioWebsiteTemplates
@@ -1885,7 +1885,7 @@ function t6({
           editor_type: _$$k2.Editors.SITES
         }).href
       }, {
-        text: _$$t("categories.navbar.business.title"),
+        text: getI18nString("categories.navbar.business.title"),
         path: new $E({
           categorySlug: LJ.websiteTemplates,
           tagSlug: HP.businessWebsites
@@ -1893,13 +1893,13 @@ function t6({
           editor_type: _$$k2.Editors.SITES
         }).href
       }, {
-        text: _$$t("categories.navbar.blog"),
+        text: getI18nString("categories.navbar.blog"),
         path: new $E({
           categorySlug: LJ.websiteTemplates,
           tagSlug: HP.blogWebsites
         }).href
       }, {
-        text: _$$t("categories.all_websites"),
+        text: getI18nString("categories.all_websites"),
         path: new $E({
           categorySlug: LJ.websiteTemplates
         }, {
@@ -1907,92 +1907,92 @@ function t6({
         }).href
       }]
     }, {
-      text: _$$t("categories.plugins"),
+      text: getI18nString("categories.plugins"),
       children: [{
-        text: _$$t("categories.editing_effects"),
+        text: getI18nString("categories.editing_effects"),
         path: new $E({
           categorySlug: LJ.editingEffects
         }).href
       }, {
-        text: _$$t("categories.file_organization"),
+        text: getI18nString("categories.file_organization"),
         path: new $E({
           categorySlug: LJ.fileOrganization
         }).href
       }, {
-        text: _$$t("categories.navbar.development"),
+        text: getI18nString("categories.navbar.development"),
         path: new $E({
           categorySlug: LJ.development
         }).href
       }, {
-        text: _$$t("categories.widgets"),
+        text: getI18nString("categories.widgets"),
         path: new $E({
           categorySlug: LJ.whiteboarding
         }).href + "?resource_type=widgets"
       }, {
-        text: _$$t("categories.import_export"),
+        text: getI18nString("categories.import_export"),
         path: new $E({
           categorySlug: LJ.importExport
         }).href
       }, {
-        text: _$$t("categories.prototyping_animation"),
+        text: getI18nString("categories.prototyping_animation"),
         path: new $E({
           categorySlug: LJ.prototypingAnimation
         }).href
       }, {
-        text: _$$t("categories.all_plugins"),
+        text: getI18nString("categories.all_plugins"),
         path: new $E({
           categorySlug: LJ.designTools
         }).href
       }]
     }, {
-      text: _$$t("categories.whiteboarding"),
+      text: getI18nString("categories.whiteboarding"),
       children: [{
-        text: _$$t("categories.brainstorming"),
+        text: getI18nString("categories.brainstorming"),
         path: new $E({
           categorySlug: LJ.brainstorming
         }).href
       }, {
-        text: _$$t("categories.diagramming"),
+        text: getI18nString("categories.diagramming"),
         path: new $E({
           categorySlug: LJ.diagramming
         }).href
       }, {
-        text: _$$t("categories.fun_games"),
+        text: getI18nString("categories.fun_games"),
         path: new $E({
           categorySlug: LJ.funGames
         }).href
       }, {
-        text: _$$t("categories.team_meetings"),
+        text: getI18nString("categories.team_meetings"),
         path: new $E({
           categorySlug: LJ.teamMeetings
         }).href
       }, {
-        text: _$$t("categories.strategic_planning"),
+        text: getI18nString("categories.strategic_planning"),
         path: new $E({
           categorySlug: LJ.strategicPlanning
         }).href
       }, {
-        text: _$$t("categories.all_whiteboarding"),
+        text: getI18nString("categories.all_whiteboarding"),
         path: new $E({
           categorySlug: LJ.whiteboarding
         }).href + "?resource_type=widgets"
       }]
     }, {
-      text: _$$t("categories.presentations"),
+      text: getI18nString("categories.presentations"),
       children: [{
-        text: _$$t("categories.presentations.pitch_deck"),
+        text: getI18nString("categories.presentations.pitch_deck"),
         path: new Xu({
           resourceId: "1383475610293894214",
           apiResourceType: Uo.FILE
         }).href
       }, {
-        text: _$$t("categories.presentations.product_roadmap"),
+        text: getI18nString("categories.presentations.product_roadmap"),
         path: new Xu({
           resourceId: "1382445842871959915",
           apiResourceType: Uo.FILE
         }).href
       }, {
-        text: _$$t("categories.all_presentations"),
+        text: getI18nString("categories.all_presentations"),
         path: new $E({
           categorySlug: LJ.presentations
         }).href
@@ -2015,7 +2015,7 @@ function t6({
         icon: "workspace-16"
       }), jsx("span", {
         className: _$$s.font13.$,
-        children: _$$tx("community.view_bar.browse")
+        children: renderI18nText("community.view_bar.browse")
       })]
     })]
   });
@@ -2067,7 +2067,7 @@ function ih(e) {
           brand: newProductBadgeTheme,
           children: jsx(_$$E2, {
             variant: "brandFilled",
-            children: _$$t("community.badge.new")
+            children: getI18nString("community.badge.new")
           })
         })]
       }), subtitle && jsx("div", {
@@ -2205,8 +2205,8 @@ function ij() {
     return jsxs(Fragment, {
       children: [jsx(ih, {
         cardSize: ip.HALF,
-        title: _$$t("categories.ui_kits"),
-        subtitle: _$$t("categories.navbar.ui_kits.subtitle"),
+        title: getI18nString("categories.ui_kits"),
+        subtitle: getI18nString("categories.navbar.ui_kits.subtitle"),
         url: uikitRoute.href,
         animation: "slideUp",
         images: [{
@@ -2215,8 +2215,8 @@ function ij() {
         }]
       }), jsx(ih, {
         cardSize: ip.HALF,
-        title: _$$t("categories.wireframes"),
-        subtitle: _$$t("categories.navbar.wireframes.subtitle"),
+        title: getI18nString("categories.wireframes"),
+        subtitle: getI18nString("categories.navbar.wireframes.subtitle"),
         url: wireframesRoute.href,
         animation: "slideUp",
         images: [{
@@ -2230,8 +2230,8 @@ function ij() {
     return jsxs(Fragment, {
       children: [jsx(ih, {
         cardSize: ip.HALF,
-        title: _$$t("categories.navbar.social_media.title"),
-        subtitle: _$$t("categories.navbar.social_media.subtitle"),
+        title: getI18nString("categories.navbar.social_media.title"),
+        subtitle: getI18nString("categories.navbar.social_media.subtitle"),
         url: socialMediaRoute.href,
         animation: "slideUp",
         images: [{
@@ -2240,8 +2240,8 @@ function ij() {
         }]
       }), jsx(ih, {
         cardSize: ip.HALF,
-        title: _$$t("categories.navbar.print.title"),
-        subtitle: _$$t("categories.navbar.print.subtitle"),
+        title: getI18nString("categories.navbar.print.title"),
+        subtitle: getI18nString("categories.navbar.print.subtitle"),
         url: printableTemplatesRoute.href,
         animation: "slideUp",
         images: [{
@@ -2277,12 +2277,12 @@ function ij() {
               route: resumeRoute
             }, {
               route: webAdsRoute,
-              textOverride: _$$t("categories.navbar.web_ad")
+              textOverride: getI18nString("categories.navbar.web_ad")
             }]
           }), jsx(i_, {
             links: [{
               route: visualAssetsRoute,
-              textOverride: _$$t("categories.assets"),
+              textOverride: getI18nString("categories.assets"),
               isBold: !0
             }, {
               route: iconsRoute
@@ -2292,7 +2292,7 @@ function ij() {
               route: shapesColorsRoute
             }, {
               route: deviceMockupsRoute,
-              textOverride: _$$t("categories.navbar.device_mockups")
+              textOverride: getI18nString("categories.navbar.device_mockups")
             }]
           })]
         });
@@ -2311,7 +2311,7 @@ function ij() {
           isBold: !0
         }, {
           route: visualAssetsRoute,
-          textOverride: _$$t("categories.assets"),
+          textOverride: getI18nString("categories.assets"),
           isBold: !0
         }]
       })]
@@ -2389,8 +2389,8 @@ function iN() {
       mediaQuery: `(min-width: ${U1R})`,
       children: jsx(ih, {
         cardSize: ip.FULL,
-        title: _$$t("categories.editing_effects"),
-        subtitle: _$$t("categories.navbar.editing_effects.subtitle"),
+        title: getI18nString("categories.editing_effects"),
+        subtitle: getI18nString("categories.navbar.editing_effects.subtitle"),
         url: editingEffectsRoute.href,
         animation: "slideLeft",
         images: [{
@@ -2405,8 +2405,8 @@ function iN() {
       className: iv,
       children: [jsx(ih, {
         cardSize: ip.HALF,
-        title: _$$t("categories.file_organization"),
-        subtitle: _$$t("categories.navbar.file_organization.subtitle"),
+        title: getI18nString("categories.file_organization"),
+        subtitle: getI18nString("categories.navbar.file_organization.subtitle"),
         url: fileOrganizationRoute.href,
         animation: "scaleOut",
         images: [{
@@ -2415,8 +2415,8 @@ function iN() {
         }]
       }), jsx(ih, {
         cardSize: ip.HALF,
-        title: _$$t("categories.navbar.development"),
-        subtitle: _$$t("categories.navbar.development.subtitle"),
+        title: getI18nString("categories.navbar.development"),
+        subtitle: getI18nString("categories.navbar.development.subtitle"),
         url: developmentRoute.href,
         animation: "iconFan",
         images: [{
@@ -2431,8 +2431,8 @@ function iN() {
       mediaQuery: `(min-width: ${U1R})`,
       children: jsx(ih, {
         cardSize: ip.FULL,
-        title: _$$t("categories.widgets"),
-        subtitle: _$$t("categories.navbar.widgets.subtitle"),
+        title: getI18nString("categories.widgets"),
+        subtitle: getI18nString("categories.navbar.widgets.subtitle"),
         url: widgetsRoute.href,
         animation: "shuffle",
         images: [{
@@ -2449,8 +2449,8 @@ function iN() {
         className: iv,
         children: [jsx(ih, {
           cardSize: ip.HALF,
-          title: _$$t("categories.editing_effects"),
-          subtitle: _$$t("categories.navbar.editing_effects.subtitle"),
+          title: getI18nString("categories.editing_effects"),
+          subtitle: getI18nString("categories.navbar.editing_effects.subtitle"),
           url: editingEffectsRoute.href,
           animation: "iconFan",
           images: [{
@@ -2462,8 +2462,8 @@ function iN() {
           }]
         }), jsx(ih, {
           cardSize: ip.HALF,
-          title: _$$t("categories.widgets"),
-          subtitle: _$$t("categories.navbar.widgets.subtitle"),
+          title: getI18nString("categories.widgets"),
+          subtitle: getI18nString("categories.navbar.widgets.subtitle"),
           url: widgetsRoute.href,
           animation: "scaleOut",
           images: [{
@@ -2478,7 +2478,7 @@ function iN() {
     }), jsx(i_, {
       links: [{
         route: pluginsRoute,
-        textOverride: _$$t("categories.more_plugins"),
+        textOverride: getI18nString("categories.more_plugins"),
         isBold: !0
       }, {
         route: importExportRoute
@@ -2503,92 +2503,92 @@ function iS() {
       resourceId: "1380690018201193525",
       apiResourceType: Uo.FILE
     }),
-    text: _$$t("categories.presentations.pitch_deck"),
-    subText: _$$t("categories.presentations.pitch_deck.description")
+    text: getI18nString("categories.presentations.pitch_deck"),
+    subText: getI18nString("categories.presentations.pitch_deck.description")
   }, {
     route: new Xu({
       resourceId: "1380614040001429551",
       apiResourceType: Uo.FILE
     }),
-    text: _$$t("categories.presentations.product_roadmap"),
-    subText: _$$t("categories.presentations.product_roadmap.description")
+    text: getI18nString("categories.presentations.product_roadmap"),
+    subText: getI18nString("categories.presentations.product_roadmap.description")
   }, {
     route: new Xu({
       resourceId: "1380608789812079661",
       apiResourceType: Uo.FILE
     }),
-    text: _$$t("categories.presentations.research_readout")
+    text: getI18nString("categories.presentations.research_readout")
   }, {
     route: new Xu({
       resourceId: "1380608691855352876",
       apiResourceType: Uo.FILE
     }),
-    text: _$$t("categories.presentations.all_hands_meeting")
+    text: getI18nString("categories.presentations.all_hands_meeting")
   }, {
     route: new Xu({
       resourceId: "1380280625154305056",
       apiResourceType: Uo.FILE
     }),
-    text: _$$t("categories.presentations.design_review")
+    text: getI18nString("categories.presentations.design_review")
   }] : "prod" === getInitialOptions().cluster_name ? [{
     route: new Xu({
       resourceId: "1382483546106051977",
       apiResourceType: Uo.FILE
     }),
-    text: _$$t("categories.presentations.pitch_deck"),
-    subText: _$$t("categories.presentations.pitch_deck.description")
+    text: getI18nString("categories.presentations.pitch_deck"),
+    subText: getI18nString("categories.presentations.pitch_deck.description")
   }, {
     route: new Xu({
       resourceId: "1382445842871959915",
       apiResourceType: Uo.FILE
     }),
-    text: _$$t("categories.presentations.product_roadmap"),
-    subText: _$$t("categories.presentations.product_roadmap.description")
+    text: getI18nString("categories.presentations.product_roadmap"),
+    subText: getI18nString("categories.presentations.product_roadmap.description")
   }, {
     route: new Xu({
       resourceId: "1382481559228932486",
       apiResourceType: Uo.FILE
     }),
-    text: _$$t("categories.presentations.research_readout")
+    text: getI18nString("categories.presentations.research_readout")
   }, {
     route: new Xu({
       resourceId: "1382859851486347871",
       apiResourceType: Uo.FILE
     }),
-    text: _$$t("categories.presentations.all_hands_meeting")
+    text: getI18nString("categories.presentations.all_hands_meeting")
   }, {
     route: new Xu({
       resourceId: "1383475610293894214",
       apiResourceType: Uo.FILE
     }),
-    text: _$$t("categories.presentations.design_review")
+    text: getI18nString("categories.presentations.design_review")
   }] : "local" === getInitialOptions().cluster_name ? [{
     route: new $E({
       categorySlug: LJ.uiKits
     }),
-    text: _$$t("categories.presentations.pitch_deck"),
-    subText: _$$t("categories.presentations.pitch_deck.description")
+    text: getI18nString("categories.presentations.pitch_deck"),
+    subText: getI18nString("categories.presentations.pitch_deck.description")
   }, {
     route: new $E({
       categorySlug: LJ.uiKits
     }),
-    text: _$$t("categories.presentations.product_roadmap"),
-    subText: _$$t("categories.presentations.product_roadmap.description")
+    text: getI18nString("categories.presentations.product_roadmap"),
+    subText: getI18nString("categories.presentations.product_roadmap.description")
   }, {
     route: new $E({
       categorySlug: LJ.uiKits
     }),
-    text: _$$t("categories.ui_kits")
+    text: getI18nString("categories.ui_kits")
   }, {
     route: new $E({
       categorySlug: LJ.uiKits
     }),
-    text: _$$t("categories.ui_kits")
+    text: getI18nString("categories.ui_kits")
   }, {
     route: new $E({
       categorySlug: LJ.uiKits
     }),
-    text: _$$t("categories.ui_kits")
+    text: getI18nString("categories.ui_kits")
   }] : [];
   return jsxs("div", {
     className: ib,
@@ -2614,8 +2614,8 @@ function iS() {
       middleCardColor: "#F5F0EC"
     }), jsx(ih, {
       cardSize: ip.FULL,
-      title: _$$t("categories.more_presentations"),
-      subtitle: _$$t("categories.more_presentations.subheader"),
+      title: getI18nString("categories.more_presentations"),
+      subtitle: getI18nString("categories.more_presentations.subheader"),
       url: e.href,
       animation: "cardFan",
       images: [{
@@ -2686,8 +2686,8 @@ function iC() {
     className: ib,
     children: [jsx(ih, {
       cardSize: ip.FULL,
-      title: _$$t("categories.navbar.landing_page.title"),
-      subtitle: _$$t("categories.navbar.landing_page.subtitle"),
+      title: getI18nString("categories.navbar.landing_page.title"),
+      subtitle: getI18nString("categories.navbar.landing_page.subtitle"),
       url: landingPageRoute.href,
       animation: "cardFan",
       images: [{
@@ -2701,8 +2701,8 @@ function iC() {
       className: iv,
       children: [jsx(ih, {
         cardSize: ip.HALF,
-        title: _$$t("categories.navbar.portfolio.title"),
-        subtitle: _$$t("categories.navbar.portfolio.subtitle"),
+        title: getI18nString("categories.navbar.portfolio.title"),
+        subtitle: getI18nString("categories.navbar.portfolio.subtitle"),
         url: portfolioRoute.href,
         animation: "slideUp",
         images: [{
@@ -2711,8 +2711,8 @@ function iC() {
         }]
       }), jsx(ih, {
         cardSize: ip.HALF,
-        title: _$$t("categories.navbar.business.title"),
-        subtitle: _$$t("categories.navbar.business.subtitle"),
+        title: getI18nString("categories.navbar.business.title"),
+        subtitle: getI18nString("categories.navbar.business.subtitle"),
         url: businessRoute.href,
         animation: "slideUp",
         images: [{
@@ -2723,20 +2723,20 @@ function iC() {
     }), jsx(i_, {
       links: [{
         route: moreWebsitesRoute,
-        textOverride: _$$t("categories.navbar.more_websites"),
+        textOverride: getI18nString("categories.navbar.more_websites"),
         isBold: !0
       }, {
         route: blogRoute,
-        textOverride: _$$t("categories.navbar.blog")
+        textOverride: getI18nString("categories.navbar.blog")
       }, {
         route: weddingRoute,
-        textOverride: _$$t("categories.navbar.wedding")
+        textOverride: getI18nString("categories.navbar.wedding")
       }, {
         route: photographyRoute,
-        textOverride: _$$t("categories.navbar.photography")
+        textOverride: getI18nString("categories.navbar.photography")
       }, {
         route: interiorDesignWebsiteRoute,
-        textOverride: _$$t("categories.navbar.interior_design_websites")
+        textOverride: getI18nString("categories.navbar.interior_design_websites")
       }]
     })]
   });
@@ -2775,8 +2775,8 @@ function ik() {
       mediaQuery: `(min-width: ${U1R})`,
       children: jsx(ih, {
         cardSize: ip.FULL,
-        title: _$$t("categories.brainstorming"),
-        subtitle: _$$t("categories.navbar.brainstorming.subtitle"),
+        title: getI18nString("categories.brainstorming"),
+        subtitle: getI18nString("categories.navbar.brainstorming.subtitle"),
         url: brainstormingRoute.href,
         animation: "cardFan",
         images: [{
@@ -2791,8 +2791,8 @@ function ik() {
       className: iv,
       children: [jsx(ih, {
         cardSize: ip.HALF,
-        title: _$$t("categories.diagramming"),
-        subtitle: _$$t("categories.navbar.diagramming.subtitle"),
+        title: getI18nString("categories.diagramming"),
+        subtitle: getI18nString("categories.navbar.diagramming.subtitle"),
         url: diagrammingRoute.href,
         animation: "slideUp",
         images: [{
@@ -2802,8 +2802,8 @@ function ik() {
         backgroundDottedSmall: !0
       }), jsx(ih, {
         cardSize: ip.HALF,
-        title: _$$t("categories.fun_games"),
-        subtitle: _$$t("categories.navbar.fun_games.subtitle"),
+        title: getI18nString("categories.fun_games"),
+        subtitle: getI18nString("categories.navbar.fun_games.subtitle"),
         url: funGamesRoute.href,
         animation: "slideUp",
         images: [{
@@ -2816,8 +2816,8 @@ function ik() {
       mediaQuery: `(min-width: ${U1R})`,
       children: jsx(ih, {
         cardSize: ip.FULL,
-        title: _$$t("categories.team_meetings"),
-        subtitle: _$$t("categories.navbar.team_meetings.subtitle"),
+        title: getI18nString("categories.team_meetings"),
+        subtitle: getI18nString("categories.navbar.team_meetings.subtitle"),
         url: teamMeetingsRoute.href,
         animation: "cardFan",
         images: [{
@@ -2834,8 +2834,8 @@ function ik() {
         className: iv,
         children: [jsx(ih, {
           cardSize: ip.HALF,
-          title: _$$t("categories.brainstorming"),
-          subtitle: _$$t("categories.navbar.brainstorming.subtitle"),
+          title: getI18nString("categories.brainstorming"),
+          subtitle: getI18nString("categories.navbar.brainstorming.subtitle"),
           url: brainstormingRoute.href,
           animation: "slideUp",
           images: [{
@@ -2844,8 +2844,8 @@ function ik() {
           }]
         }), jsx(ih, {
           cardSize: ip.HALF,
-          title: _$$t("categories.team_meetings"),
-          subtitle: _$$t("categories.navbar.team_meetings.subtitle"),
+          title: getI18nString("categories.team_meetings"),
+          subtitle: getI18nString("categories.navbar.team_meetings.subtitle"),
           url: teamMeetingsRoute.href,
           animation: "slideUp",
           images: [{
@@ -2857,7 +2857,7 @@ function ik() {
     }), jsx(i_, {
       links: [{
         route: whiteboardingRoute,
-        textOverride: _$$t("categories.more_whiteboarding"),
+        textOverride: getI18nString("categories.more_whiteboarding"),
         isBold: !0
       }, {
         route: strategicPlanningRoute
@@ -2874,19 +2874,19 @@ function iA() {
     "data-testid": "nav-category-selector",
     className: "nav_category_selector_2--categorySelector--b-k5b",
     children: [jsx(iB, {
-      text: _$$t("community.homepage.figma_section.header"),
+      text: getI18nString("community.homepage.figma_section.header"),
       slug: "design_template",
       isHovering: "design_template" === e,
       setHovering: n,
       children: jsx(ij, {})
     }), jsx(iB, {
-      text: _$$t("categories.websites"),
+      text: getI18nString("categories.websites"),
       slug: "websites",
       isHovering: "websites" === e,
       setHovering: n,
       children: jsx(iC, {})
     }), i && jsx(iB, {
-      text: _$$t("community.homepage.make_nav_text"),
+      text: getI18nString("community.homepage.make_nav_text"),
       slug: "make",
       isHovering: "make" === e,
       setHovering: n,
@@ -2896,19 +2896,19 @@ function iA() {
       }).href,
       showAsButton: !0
     }), jsx(iB, {
-      text: _$$t("categories.plugins"),
+      text: getI18nString("categories.plugins"),
       slug: "plugins",
       isHovering: "plugins" === e,
       setHovering: n,
       children: jsx(iN, {})
     }), jsx(iB, {
-      text: _$$t("categories.whiteboarding"),
+      text: getI18nString("categories.whiteboarding"),
       slug: "whiteboarding",
       isHovering: "whiteboarding" === e,
       setHovering: n,
       children: jsx(ik, {})
     }), jsx(iB, {
-      text: _$$t("categories.presentations"),
+      text: getI18nString("categories.presentations"),
       slug: "presentations",
       isHovering: "presentations" === e,
       setHovering: n,
@@ -2930,8 +2930,8 @@ function iB({
 }) {
   let m = useRef(null);
   let g = useDispatch();
-  let p = md(iR);
-  let _ = md(iP);
+  let p = useAtomWithSubscription(iR);
+  let _ = useAtomWithSubscription(iP);
   let y = !(("design_template" !== t || p?.status !== "loaded" || p?.data) && ("websites" !== t || _?.status !== "loaded" || _?.data));
   let f = useCallback(() => {
     c(t);
@@ -2980,7 +2980,7 @@ function iB({
           brand: "seascape",
           children: jsx("div", {
             className: "nav_category_selector_2--newBadge--3isz- text--fontPos11--2LvXf text--_fontBase--QdLsd",
-            children: _$$t("community.badge.new")
+            children: getI18nString("community.badge.new")
           })
         }), !d && jsx(_$$B, {
           svg: _$$A11,
@@ -3022,7 +3022,7 @@ function i$(e) {
   let {
     onSubmit
   } = iM();
-  let i = e.isMobile ?? _$$Ay4.mobile;
+  let i = e.isMobile ?? BrowserInfo.mobile;
   return jsx(_$$S2, {
     isMobile: i,
     onSubmit
@@ -3057,9 +3057,9 @@ function iQ() {
     className: "admin_profile_banner--root--HDfDA",
     children: [jsx("span", {
       className: "admin_profile_banner--text--cpDIW text--fontNeg13--7Ebf5 text--_fontBase--QdLsd text--_negText--j9g-L",
-      children: t?.org_id ? _$$tx("community.banner.browsing_community_as_the_current_profile_name_organization", {
+      children: t?.org_id ? renderI18nText("community.banner.browsing_community_as_the_current_profile_name_organization", {
         profileName: t?.name
-      }) : _$$tx("community.banner.browsing_community_as_the_current_profile_name_team", {
+      }) : renderI18nText("community.banner.browsing_community_as_the_current_profile_name_team", {
         profileName: t?.name
       })
     }), jsx("div", {
@@ -3090,7 +3090,7 @@ function iq() {
         }
       }),
       type: "button",
-      children: _$$t("community.signed_out_modal.log_in")
+      children: getI18nString("community.signed_out_modal.log_in")
     }), jsx($z, {
       className: "auth_buttons--signUpButton--lM9GB shared--_button--qcVz- text--fontPos11--2LvXf text--_fontBase--QdLsd",
       onClick: () => FL(qB.SIGN_UP, {
@@ -3103,7 +3103,7 @@ function iq() {
         trackingDescriptor: _$$c.LOGGED_OUT_NAV_SIGN_UP
       },
       type: "button",
-      children: _$$t("community.signed_out_modal.sign_up")
+      children: getI18nString("community.signed_out_modal.sign_up")
     })]
   });
 }
@@ -3160,7 +3160,7 @@ function iX({
       children: [jsx("div", {
         className: "homepage_link--logoLinkWrapper---5vec",
         children: jsx(iY, {})
-      }), e && _$$t("community.community")]
+      }), e && getI18nString("community.community")]
     })
   });
 }
@@ -3168,7 +3168,7 @@ let iV = i;
 let iK = Xg;
 function iZ({}) {
   let e = _$$M();
-  let t = !!_$$eD || ce();
+  let t = !!desktopAPIInstance || ce();
   let i = _$$N(`(max-width: ${_C6})`);
   let n = parsePxNumber(qvA) + (t ? parsePxNumber(ngI) : 0);
   let s = _$$N(`(max-width: ${n}px)`);
@@ -3313,7 +3313,7 @@ function i6() {
     className: "buzz_sites_promo_banner--bannerContainer--3Qi3B",
     children: [jsx("div", {
       className: "buzz_sites_promo_banner--topText--jIy1E",
-      children: _$$t("community.homepage.buzz_sites_promo_banner.config_newest_arrivals")
+      children: getI18nString("community.homepage.buzz_sites_promo_banner.config_newest_arrivals")
     }), jsxs("div", {
       className: e9()({
         "buzz_sites_promo_banner--cardRow--N14Rq": e,
@@ -3321,12 +3321,12 @@ function i6() {
       }),
       children: [jsx(i7, {
         product: LE.SITES,
-        title: _$$t("community.homepage.buzz_sites_promo_banner.sites_header"),
-        subtitle: _$$t("community.homepage.buzz_sites_promo_banner.sites_subheader")
+        title: getI18nString("community.homepage.buzz_sites_promo_banner.sites_header"),
+        subtitle: getI18nString("community.homepage.buzz_sites_promo_banner.sites_subheader")
       }), jsx(i7, {
         product: LE.COOPER,
-        title: _$$t("community.homepage.buzz_sites_promo_banner.buzz_header"),
-        subtitle: _$$t("community.homepage.buzz_sites_promo_banner.buzz_subheader")
+        title: getI18nString("community.homepage.buzz_sites_promo_banner.buzz_header"),
+        subtitle: getI18nString("community.homepage.buzz_sites_promo_banner.buzz_subheader")
       })]
     })]
   });
@@ -3426,7 +3426,7 @@ function ng({
         onSubmit: c,
         query: o,
         inSearchPath,
-        inputPlaceholder: e ? _$$t("community.search.placeholder.search_for_a_resource") : _$$t("community.search.search_everything_in_community"),
+        inputPlaceholder: e ? getI18nString("community.search.placeholder.search_for_a_resource") : getI18nString("community.search.search_everything_in_community"),
         context: PF.LANDING,
         className: e ? "homepage_dropdown_search_input--redesignedSearchInput--CoAYJ text--fontPos11--2LvXf text--_fontBase--QdLsd" : "homepage_dropdown_search_input--searchInput--8x2Cp text--fontPos13--xW8hS text--_fontBase--QdLsd",
         searchIconClassName: e ? "homepage_dropdown_search_input--redesignedHomepageSearchIcon--RcD8I" : "homepage_dropdown_search_input--searchIcon--55Xdx",
@@ -4163,31 +4163,31 @@ function n$() {
   return e ? jsxs(Fragment, {
     children: [jsx("h1", {
       className: nx,
-      children: _$$tx("community.homepage.mobile_header")
+      children: renderI18nText("community.homepage.mobile_header")
     }), jsx("div", {
       className: "hero--subHeader--74gIe text--fontPos13--xW8hS text--_fontBase--QdLsd",
-      children: _$$tx("community.homepage.mobile_subheader")
+      children: renderI18nText("community.homepage.mobile_subheader")
     })]
   }) : jsx("h1", {
     className: nx,
-    children: _$$tx("community.homepage.header", {
+    children: renderI18nText("community.homepage.header", {
       librariesLink: jsx(nz, {
         elements: nR,
-        text: _$$t("community.homepage.header_libraries"),
+        text: getI18nString("community.homepage.header_libraries"),
         onMouseEnter: () => o(1),
         onMouseLeave: () => o(null),
         isActive: 1 === c
       }),
       pluginsLink: jsx(nz, {
         elements: nP,
-        text: _$$t("community.homepage.header_plugins"),
+        text: getI18nString("community.homepage.header_plugins"),
         onMouseEnter: () => o(2),
         onMouseLeave: () => o(null),
         isActive: 2 === c
       }),
       iconSetsLink: jsx(nz, {
         elements: nB,
-        text: _$$t("community.homepage.header_icon_sets"),
+        text: getI18nString("community.homepage.header_icon_sets"),
         onMouseEnter: () => o(3),
         onMouseLeave: () => o(null),
         isActive: 3 === c
@@ -4365,14 +4365,14 @@ function nX() {
               className: "x78zum5 xdt5ytf",
               children: [jsx("div", {
                 ...xk(nV.newDropLabel),
-                children: _$$t("community.homepage.make_banner.new_drop")
+                children: getI18nString("community.homepage.make_banner.new_drop")
               }), jsx("div", {
                 ...xk(nV.title),
-                children: _$$t("community.homepage.make_banner.make_playground")
+                children: getI18nString("community.homepage.make_banner.make_playground")
               })]
             }), jsx("p", {
               ...xk(nV.description),
-              children: _$$t("community.homepage.make_banner.description")
+              children: getI18nString("community.homepage.make_banner.description")
             })]
           }), !n && jsx("div", {
             ...xk(nV.imgFrame, i && !s && nV.imgFrameMiddle, i && s && nV.imgFrameSmall),
@@ -4710,9 +4710,9 @@ function n1({
       children: [jsx(nD, {}), !u && !y && jsx(i6, {}), y && jsx(nX, {}), jsxs("div", {
         className: "homepage--homepageSectionsContainer--rXSN9",
         children: [y && jsx(nJ, {
-          header: _$$t("community.homepage.make_section.header"),
-          subHeader: _$$t("community.homepage.make_section.sub_header"),
-          buttonLabel: _$$t("community.homepage.make_section.browse"),
+          header: getI18nString("community.homepage.make_section.header"),
+          subHeader: getI18nString("community.homepage.make_section.sub_header"),
+          buttonLabel: getI18nString("community.homepage.make_section.browse"),
           route: makeRoute,
           content: jsx(_$$A13, {
             resources: c?.resources,
@@ -4722,9 +4722,9 @@ function n1({
             loadingTileCount: 6
           })
         }), jsx(nJ, {
-          header: _$$t("community.homepage.sites_section.header"),
-          subHeader: _$$t("community.homepage.sites_section.sub_header"),
-          buttonLabel: _$$t("community.homepage.sites_section.browse_all"),
+          header: getI18nString("community.homepage.sites_section.header"),
+          subHeader: getI18nString("community.homepage.sites_section.sub_header"),
+          buttonLabel: getI18nString("community.homepage.sites_section.browse_all"),
           route: sitesTemplatesRoute,
           content: jsx(_$$A13, {
             resources: o?.resources,
@@ -4734,9 +4734,9 @@ function n1({
             loadingTileCount: 6
           })
         }), jsx(nJ, {
-          header: _$$t("community.homepage.buzz_section.header"),
-          subHeader: _$$t("community.homepage.buzz_section.sub_header"),
-          buttonLabel: _$$t("community.homepage.buzz_section.browse_all"),
+          header: getI18nString("community.homepage.buzz_section.header"),
+          subHeader: getI18nString("community.homepage.buzz_section.sub_header"),
+          buttonLabel: getI18nString("community.homepage.buzz_section.browse_all"),
           route: cooperTemplatesRoute,
           content: jsx(_$$A13, {
             resources: l.resources,
@@ -4746,9 +4746,9 @@ function n1({
             loadingTileCount: 6
           })
         }), jsx(nJ, {
-          header: _$$t("community.homepage.slides_section.header"),
-          subHeader: _$$t("community.homepage.slides_section.sub_header"),
-          buttonLabel: _$$t("community.homepage.slides_section.browse_all"),
+          header: getI18nString("community.homepage.slides_section.header"),
+          subHeader: getI18nString("community.homepage.slides_section.sub_header"),
+          buttonLabel: getI18nString("community.homepage.slides_section.browse_all"),
           route: slideTemplatesRoute,
           content: jsx(_$$A13, {
             resources: e.resources,
@@ -4758,9 +4758,9 @@ function n1({
             loadingTileCount: 6
           })
         }), jsx(nJ, {
-          header: _$$t("community.homepage.figma_section.header"),
-          subHeader: _$$t("community.homepage.figma_section.sub_header"),
-          buttonLabel: _$$t("community.homepage.figma_section.browse_all"),
+          header: getI18nString("community.homepage.figma_section.header"),
+          subHeader: getI18nString("community.homepage.figma_section.sub_header"),
+          buttonLabel: getI18nString("community.homepage.figma_section.browse_all"),
           route: designResourcesRoute,
           content: jsx(_$$A13, {
             resources: t.resources,
@@ -4770,9 +4770,9 @@ function n1({
             loadingTileCount: 6
           })
         }), jsx(nJ, {
-          header: _$$t("community.view_bar.plugins"),
-          subHeader: _$$t("community.homepage.plugins_section.sub_header"),
-          buttonLabel: _$$t("community.homepage.plugins_section.browse_all"),
+          header: getI18nString("community.view_bar.plugins"),
+          subHeader: getI18nString("community.homepage.plugins_section.sub_header"),
+          buttonLabel: getI18nString("community.homepage.plugins_section.browse_all"),
           route: pluginsRoute,
           content: jsx(_$$M2, {
             plugins: i.resources,
@@ -4782,9 +4782,9 @@ function n1({
             loadingRowCount: 10
           })
         }), jsx(nJ, {
-          header: _$$t("community.homepage.figjam_section.header"),
-          subHeader: _$$t("community.homepage.figjam_section.sub_header"),
-          buttonLabel: _$$t("community.homepage.figjam_section.browse_all"),
+          header: getI18nString("community.homepage.figjam_section.header"),
+          subHeader: getI18nString("community.homepage.figjam_section.sub_header"),
+          buttonLabel: getI18nString("community.homepage.figjam_section.browse_all"),
           route: figjamAssetsRoute,
           content: jsx(_$$A13, {
             resources: n.resources,
@@ -4794,9 +4794,9 @@ function n1({
             loadingTileCount: 6
           })
         }), jsx(nJ, {
-          header: _$$t("community.view_bar.widgets"),
-          subHeader: _$$t("community.homepage.widgets.sub_header"),
-          buttonLabel: _$$t("community.homepage.widgets.browse_all"),
+          header: getI18nString("community.view_bar.widgets"),
+          subHeader: getI18nString("community.homepage.widgets.sub_header"),
+          buttonLabel: getI18nString("community.homepage.widgets.browse_all"),
           route: widgetsRoute,
           content: jsx(_$$A13, {
             resources: r.resources,
@@ -4806,13 +4806,13 @@ function n1({
             loadingTileCount: 6
           })
         }), jsx(nJ, {
-          header: _$$t("community.homepage.categories_section.header"),
-          subHeader: _$$t("community.homepage.categories_section.sub_header"),
+          header: getI18nString("community.homepage.categories_section.header"),
+          subHeader: getI18nString("community.homepage.categories_section.sub_header"),
           content: jsx(nU, {
             categoryHighlights: _$$Jm()
           })
         }), jsx(nJ, {
-          header: _$$t("community.view_bar.all_resources"),
+          header: getI18nString("community.view_bar.all_resources"),
           content: jsx(no, {
             onIntersectionChange: S
           })
@@ -4871,7 +4871,7 @@ function n6({
     className: "feed_extended_description--extendedDescriptionContainer--cjQJx",
     children: [jsx("div", {
       className: "feed_extended_description--title--e9JD6 text--fontPos24--YppUD text--_fontBase--QdLsd",
-      children: _$$tx("categories.about")
+      children: renderI18nText("categories.about")
     }), jsx("p", {
       className: "feed_extended_description--extendedDescription--GjdK- text--fontPos13--xW8hS text--_fontBase--QdLsd",
       children: e
@@ -4947,7 +4947,7 @@ function aa() {
           categoryPageData: g
         }), jsx(n6, {
           extendedDescription: If(o)
-        }), !y3() && jsx("div", {
+        }), !hasDesktopAPI() && jsx("div", {
           className: "category_page--footerContainer--RNpoP",
           children: jsx(_$$A4, {})
         })]
@@ -4998,14 +4998,14 @@ function au() {
         className: "x78zum5 xdt5ytf x6s0dn4 x1nejdyq",
         children: jsxs("h1", {
           ...xk(am.headline),
-          children: [_$$tx("community.resource_landing_page.make_header.headline_1"), n ? " " : jsx("br", {}), _$$tx("community.resource_landing_page.make_header.headline_2", {
+          children: [renderI18nText("community.resource_landing_page.make_header.headline_1"), n ? " " : jsx("br", {}), renderI18nText("community.resource_landing_page.make_header.headline_2", {
             ideaText: jsx("span", {
               className: "xh8qa02",
-              children: _$$t("community.resource_landing_page.make_header.idea")
+              children: getI18nString("community.resource_landing_page.make_header.idea")
             }),
             toLifeText: jsx("span", {
               className: "xfv5hb9",
-              children: _$$t("community.resource_landing_page.make_header.to_life")
+              children: getI18nString("community.resource_landing_page.make_header.to_life")
             })
           })]
         })
@@ -5018,7 +5018,7 @@ function au() {
             i();
             t();
           },
-          children: _$$t("community.resource_landing_page.make_header.button_text")
+          children: getI18nString("community.resource_landing_page.make_header.button_text")
         })
       })]
     })
@@ -5043,7 +5043,7 @@ let am = {
 function ag() {
   let e = _$$N(`(max-width: ${_C6})`);
   let t = [{
-    text: _$$t("community.view_bar.plugins"),
+    text: getI18nString("community.view_bar.plugins"),
     linkProps: {
       to: {
         pathname: "/community/plugins"
@@ -5056,8 +5056,8 @@ function ag() {
     }
   }];
   return jsx(n9, {
-    title: _$$t("community.view_bar.plugins"),
-    description: _$$t("community.plugins_page.short_description"),
+    title: getI18nString("community.view_bar.plugins"),
+    description: getI18nString("community.plugins_page.short_description"),
     BreadcrumbComponent: () => jsx(_$$E, {
       breadcrumbs: t,
       surface: "category"
@@ -5071,19 +5071,19 @@ let ap = () => ({
     featuredResources: {
       enabled: !0,
       feedPaginated: !1,
-      heading: _$$t("community.plugins_page.featured_plugins.title")
+      heading: getI18nString("community.plugins_page.featured_plugins.title")
     },
     exploreResources: {
       enabled: !0,
-      heading: _$$t("community.plugins_page.explore_plugins.title")
+      heading: getI18nString("community.plugins_page.explore_plugins.title")
     },
     allResourcesFeed: {
       enabled: !0,
-      heading: _$$t("community.plugins_page.all_plugins_feed.title")
+      heading: getI18nString("community.plugins_page.all_plugins_feed.title")
     },
     extendedDescription: {
       enabled: !0,
-      text: _$$t("community.plugins_page.extended_description")
+      text: getI18nString("community.plugins_page.extended_description")
     }
   },
   [_$$vt.FIGMAKE_TEMPLATE]: {
@@ -5093,8 +5093,8 @@ let ap = () => ({
       enabled: !0,
       feedPaginated: !0,
       paginatedFeedPageSize: 20,
-      heading: _$$t("community.resource_landing_page.featured_resources.make.heading"),
-      subheading: _$$t("community.resource_landing_page.featured_resources.make.subheading_updated")
+      heading: getI18nString("community.resource_landing_page.featured_resources.make.heading"),
+      subheading: getI18nString("community.resource_landing_page.featured_resources.make.subheading_updated")
     },
     exploreResources: {
       enabled: !1
@@ -5251,37 +5251,37 @@ let av = {
 };
 let aj = () => [{
   title: xF(LJ.accessibility),
-  subtitle: _$$t("community.plugins_page.explore_plugins.accessibility_subtitle"),
+  subtitle: getI18nString("community.plugins_page.explore_plugins.accessibility_subtitle"),
   leftImageUrl: buildUploadUrl("8a1b9c86d0b6e4c035e32f1375e6e7aa4aeee289"),
   rightImageUrl: buildUploadUrl("030d140fcb306f382f440c74333549a731b4ab02"),
   linkTo: av.accessibilityRoute.to
 }, {
   title: xF(LJ.editingEffects),
-  subtitle: _$$t("community.plugins_page.explore_plugins.editing_effects_subtitle"),
+  subtitle: getI18nString("community.plugins_page.explore_plugins.editing_effects_subtitle"),
   leftImageUrl: buildUploadUrl("df8cc099fcd567353d5ae74938799a6c4b81623c"),
   rightImageUrl: buildUploadUrl("266f1558d2130dbf66fcbb0afd35cd3a7b1861aa"),
   linkTo: av.editingEffectsRoute.to
 }, {
   title: xF(LJ.development),
-  subtitle: _$$t("community.plugins_page.explore_plugins.development_subtitle"),
+  subtitle: getI18nString("community.plugins_page.explore_plugins.development_subtitle"),
   leftImageUrl: buildUploadUrl("9f53347c6cd9c4b2112e837956e1497354ba97e6"),
   rightImageUrl: buildUploadUrl("1afe925e46d14c53354c0303e02c49512b45eb73"),
   linkTo: av.developmentRoute.to
 }, {
   title: xF(LJ.fileOrganization),
-  subtitle: _$$t("community.plugins_page.explore_plugins.file_organization_subtitle"),
+  subtitle: getI18nString("community.plugins_page.explore_plugins.file_organization_subtitle"),
   leftImageUrl: buildUploadUrl("efa1bdf797eedcef9fb8d082aa579b0258b0de1d"),
   rightImageUrl: buildUploadUrl("ec0fb1caae05a6af539cfad7a711e8fd2202aa34"),
   linkTo: av.fileOrganizationRoute.to
 }, {
   title: xF(LJ.importExport),
-  subtitle: _$$t("community.plugins_page.explore_plugins.import_exports_subtitle"),
+  subtitle: getI18nString("community.plugins_page.explore_plugins.import_exports_subtitle"),
   leftImageUrl: buildUploadUrl("2ddba8d5bf86240daea1dd412984f774da1b82b9"),
   rightImageUrl: buildUploadUrl("a8b613e74486e7201423b7fc6637989773907f1d"),
   linkTo: av.importExportRoute.to
 }, {
   title: xF(LJ.prototypingAnimation),
-  subtitle: _$$t("community.plugins_page.explore_plugins.prototyping_animation_subtitle"),
+  subtitle: getI18nString("community.plugins_page.explore_plugins.prototyping_animation_subtitle"),
   leftImageUrl: buildUploadUrl("b0549ed9f6488b0a1891cad8ac9ae11b2943cf92"),
   rightImageUrl: buildUploadUrl("45e76adcdb88d65c513cb2f25fe72cfb3a776cca"),
   linkTo: av.prototypingAnimationRoute.to
@@ -5522,7 +5522,7 @@ function aL({
 let aT = () => ({
   trending: {
     defaultActive: !0,
-    tabTitle: _$$t("community.landing_page.sort.trending"),
+    tabTitle: getI18nString("community.landing_page.sort.trending"),
     resourceQueryParamsToActivate: {
       sortBy: _$$e6.Browse.POPULAR,
       price: _$$C3.ALL
@@ -5530,7 +5530,7 @@ let aT = () => ({
   },
   mostPopular: {
     defaultActive: !1,
-    tabTitle: _$$t("community.plugins_page.featured_plugins.most_popular"),
+    tabTitle: getI18nString("community.plugins_page.featured_plugins.most_popular"),
     resourceQueryParamsToActivate: {
       sortBy: _$$e6.Browse.ALL_TIME,
       price: _$$C3.ALL
@@ -5538,7 +5538,7 @@ let aT = () => ({
   },
   free: {
     defaultActive: !1,
-    tabTitle: _$$t("community.plugins_page.featured_plugins.free_plugins"),
+    tabTitle: getI18nString("community.plugins_page.featured_plugins.free_plugins"),
     resourceQueryParamsToActivate: {
       sortBy: _$$e6.Browse.ALL_TIME,
       price: _$$C3.FREE
@@ -5567,7 +5567,7 @@ function aA(e) {
       [_$$vt.FIGMAKE_TEMPLATE]: {
         mostPopular: {
           defaultActive: !0,
-          tabTitle: _$$t("community.plugins_page.featured_plugins.most_popular"),
+          tabTitle: getI18nString("community.plugins_page.featured_plugins.most_popular"),
           resourceQueryParamsToActivate: {
             sortBy: _$$e6.Browse.ALL_TIME,
             price: _$$C3.ALL
@@ -5575,7 +5575,7 @@ function aA(e) {
         },
         trending: {
           defaultActive: !1,
-          tabTitle: _$$t("community.landing_page.sort.trending"),
+          tabTitle: getI18nString("community.landing_page.sort.trending"),
           resourceQueryParamsToActivate: {
             sortBy: _$$e6.Browse.POPULAR,
             price: _$$C3.ALL
@@ -5583,7 +5583,7 @@ function aA(e) {
         },
         recent: {
           defaultActive: !1,
-          tabTitle: _$$t("community.landing_page.sort.recent"),
+          tabTitle: getI18nString("community.landing_page.sort.recent"),
           resourceQueryParamsToActivate: {
             sortBy: _$$e6.Browse.PUBLISHED_AT,
             price: _$$C3.ALL
@@ -5657,7 +5657,7 @@ function aA(e) {
           e.data.meta[0] && j(e.data.meta[0]);
           E("success");
         } catch (e) {
-          $D(_$$e.COMMUNITY, e);
+          reportError(_$$e.COMMUNITY, e);
           E("error");
         }
       }
@@ -5766,7 +5766,7 @@ function aP() {
           })]
         }), t.extendedDescription.enabled && t.extendedDescription.text && jsx(n6, {
           extendedDescription: t.extendedDescription.text
-        }), !y3() && jsx("div", {
+        }), !hasDesktopAPI() && jsx("div", {
           className: "x105sa6i",
           children: jsx(_$$A4, {})
         })]
@@ -5857,13 +5857,13 @@ function a5({
             velocity: r
           }) => {
             let o = aZ(s.x, r.x);
-            o < -500 ? (y(1), l(1), sx("community_mobile_rdp", {
+            o < -500 ? (y(1), l(1), trackEventAnalytics("community_mobile_rdp", {
               name: "mobile_rdp_carousel_swipe",
               community_resource_id: e.id,
               resource_type: Vm(t),
               selectedIndex: n,
               searchSessionId: i
-            })) : o > 500 && (y(-1), l(-1), sx("community_mobile_rdp", {
+            })) : o > 500 && (y(-1), l(-1), trackEventAnalytics("community_mobile_rdp", {
               name: "mobile_rdp_carousel_swipe",
               community_resource_id: e.id,
               resource_type: Vm(t),
@@ -5894,7 +5894,7 @@ function a5({
               autoPlay: !0,
               muted: !0,
               onEnded: () => {
-                sx("community_mobile_rdp", {
+                trackEventAnalytics("community_mobile_rdp", {
                   name: "mobile_rdp_video_ended",
                   community_resource_id: e.id,
                   resource_type: Vm(t),
@@ -5946,7 +5946,7 @@ function a2({
       autoPlay: !0,
       muted: !0,
       onEnded: () => {
-        sx("community_mobile_rdp", {
+        trackEventAnalytics("community_mobile_rdp", {
           name: "mobile_rdp_video_ended",
           community_resource_id: e.id,
           resource_type: Vm(t),
@@ -5970,7 +5970,7 @@ function a2({
 }
 let se = r1(Xt);
 function st() {
-  let e = md(se);
+  let e = useAtomWithSubscription(se);
   let t = _$$iZ();
   let i = useSelector(e => e.authedActiveCommunityProfile);
   let n = _$$N(`(max-width: ${YW - 1}px)`);
@@ -5989,7 +5989,7 @@ function st() {
   });
   return jsx(_l, {
     closeButtonColor: "dark",
-    description: _$$tx("community.modal.creator_carousel_nux.drive_eyeballs_and_engagement"),
+    description: renderI18nText("community.modal.creator_carousel_nux.drive_eyeballs_and_engagement"),
     isShowing,
     media: jsx(B$, {
       width: 400,
@@ -6000,7 +6000,7 @@ function st() {
     onClose: complete,
     primaryCta: {
       type: "link",
-      label: _$$tx("community.modal.creator_carousel_nux.update_my_resources"),
+      label: renderI18nText("community.modal.creator_carousel_nux.update_my_resources"),
       href: i?.profile_handle ? new xn({
         profileHandle: i.profile_handle
       }).href : "",
@@ -6011,7 +6011,7 @@ function st() {
     },
     secondaryCta: {
       type: "link",
-      label: _$$tx("community.learn_more"),
+      label: renderI18nText("community.learn_more"),
       href: "https://help.figma.com/hc/articles/22166943560983-Grow-your-audience-on-Community#mediapreviews",
       ctaTrackingDescriptor: _$$c.LEARN_MORE,
       trackingProperties: {
@@ -6019,7 +6019,7 @@ function st() {
         profileId: i?.id
       }
     },
-    title: _$$tx("community.modal.creator_carousel_nux.add_image_and_video_previews"),
+    title: renderI18nText("community.modal.creator_carousel_nux.add_image_and_video_previews"),
     trackingContextName: "community_creator_carousel_media_nux",
     userFlagOnShow: Xt
   });
@@ -6144,7 +6144,7 @@ function so() {
       src: "resourcePage"
     })), document.title = K2(u) + "\xa0| Figma", document.body.removeAttribute("data-hide"));
   }, [e, t, n, u, m]);
-  let [h, x] = fp(_$$R);
+  let [h, x] = useAtomValueAndSetter(_$$R);
   useEffect(() => {
     x($O.DescriptionView);
   }, [e, t, x]);
@@ -6195,7 +6195,7 @@ function so() {
             isMobileSize: o
           })
         })]
-      }), !y3() && jsx("div", {
+      }), !hasDesktopAPI() && jsx("div", {
         className: "resource_page--footerContainer--bAm54",
         children: jsx(_$$A4, {})
       })]
@@ -6204,9 +6204,9 @@ function so() {
 }
 function sl() {
   useEffect(() => {
-    _$$X2.initialRenderDurationMs = Math.round(window.performance.now() - _$$X2.domContentLoadedMs);
-    _$$X2.timeToLoadMs = Math.round(performance.now());
-    _$$X2.report(sx);
+    performanceMetricsTracker.initialRenderDurationMs = Math.round(window.performance.now() - performanceMetricsTracker.domContentLoadedMs);
+    performanceMetricsTracker.timeToLoadMs = Math.round(performance.now());
+    performanceMetricsTracker.report(trackEventAnalytics);
     _$$qD({
       name: "Community Hub"
     });
@@ -6222,7 +6222,7 @@ function sl() {
     if (!n || !i[n]) return;
     let a = po(Ay.location.pathname + Ay.location.search + Ay.location.hash);
     if (!a.locale || a.locale === n) return;
-    let s = jt[n];
+    let s = communityPagePaths[n];
     s && Ay.replace(`${s}${a.remainingPath}`);
   })();
   let e = _$$iY();
@@ -6297,7 +6297,7 @@ export function $$sd0() {
   })), useEffect(() => {
     let e = document.getElementById("filebrowser-loading-page");
     e && "none" !== e.style.display && "none" !== e.style.display && setTimeout(() => {
-      e && "none" !== e.style.display && (e.style.display = "none", $D(_$$e.COMMUNITY, Error("filebrowser-loading-page not hidden by lazy loader"), {
+      e && "none" !== e.style.display && (e.style.display = "none", reportError(_$$e.COMMUNITY, Error("filebrowser-loading-page not hidden by lazy loader"), {
         extra: {
           elementId: e.id,
           elementClasses: e.className,
@@ -6310,5 +6310,5 @@ export function $$sd0() {
     children: jsx(sl, {})
   }) : (Ay.reload("Logged-out Community Hub"), null);
 }
-_$$X2.domContentLoadedMs = Math.round(window.performance.now());
+performanceMetricsTracker.domContentLoadedMs = Math.round(window.performance.now());
 export const CommunityLoggedInView = $$sd0;

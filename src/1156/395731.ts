@@ -6,7 +6,7 @@ import { g as _$$g } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
 import { B } from "../905/714743";
 import { G } from "../905/750789";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { H8 } from "../905/590952";
 import { mS, RK } from "../figma_app/791586";
 import { n1 } from "../figma_app/325912";
@@ -55,11 +55,11 @@ export function $$f7() {
           text: organization?.name
         }), jsx("p", {
           ...Ay.props(E.textBodyMediumSecondary),
-          children: t("figmake.settings.project.org_info.title")
+          children: getI18nString("figmake.settings.project.org_info.title")
         })]
       }), organization && jsx($$j2, {
         url: n1(organization.id),
-        linkText: t("figmake.settings.project.org_info.link")
+        linkText: getI18nString("figmake.settings.project.org_info.link")
       })]
     })
   });
@@ -72,10 +72,10 @@ export function $$y0({
       className: "x78zum5 xdt5ytf x1qughib x1cy8zhl x1tny46i x1kgkb76 x1y8v6su x1tamke2 xh8yej3 x9f619",
       children: [jsx("p", {
         ...Ay.props(E.textBodyLargeStrong),
-        children: t("figmake.settings.project.header.title")
+        children: getI18nString("figmake.settings.project.header.title")
       }), jsx("p", {
         ...Ay.props(E.textBodyMediumSecondary),
-        children: t("figmake.settings.project.header.subtitle")
+        children: getI18nString("figmake.settings.project.header.subtitle")
       })]
     }), e]
   });
@@ -118,7 +118,7 @@ function b() {
   } = mS();
   return jsx(G, {
     ...Ay.props(E.orgText),
-    text: organization ? organization.name : t("figmake.settings.project.org_info.title")
+    text: organization ? organization.name : getI18nString("figmake.settings.project.org_info.title")
   });
 }
 export function $$j2({

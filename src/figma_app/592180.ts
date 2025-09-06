@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { createContext, useContext } from "react";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { Q8 } from "../figma_app/604494";
 let o = createContext(null);
 export function $$l0({
@@ -18,7 +18,7 @@ export function $$l0({
 }
 export function $$d1() {
   let e = useContext(o);
-  let t = md(Q8);
+  let t = useAtomWithSubscription(Q8);
   if (!e) throw Error("useExtensionMetrics must be used within a ExtensionMetricsProvider");
   return {
     ...e,

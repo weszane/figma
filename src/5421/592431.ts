@@ -4,7 +4,7 @@ import { uN } from "../figma_app/338442";
 import { getSingletonSceneGraph } from "../905/700578";
 import { Pt } from "../figma_app/806412";
 import { Point } from "../905/736624";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { OE, O2 } from "../figma_app/164212";
 import { an } from "../figma_app/626952";
 import { c as _$$c } from "../figma_app/528598";
@@ -51,7 +51,7 @@ export function $$x0({
 export function $$g1() {
   return jsx("div", {
     className: "xh8yej3 x5yr21d xl56j7k x78zum5 x6s0dn4 x1n0bwc9 x2b8uid",
-    children: t("sites.code_component.drawer.properties_empty_state")
+    children: getI18nString("sites.code_component.drawer.properties_empty_state")
   });
 }
 export const D = $$x0;

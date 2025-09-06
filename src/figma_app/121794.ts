@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { PureComponent } from "react";
 import { JU, tB, tM, qM, vd } from "../figma_app/637027";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Lo } from "../905/156213";
 import { OJ } from "../905/519092";
 import { Vw, Pf, kv, aV } from "../905/893704";
@@ -62,15 +62,15 @@ export class $$p0 extends PureComponent {
         className: aV,
         children: [!this.props.hideCancelButton && jsx(tM, {
           onClick: this.props.onCancel,
-          children: this.props.cancelButtonText || t("modal.cancel")
+          children: this.props.cancelButtonText || getI18nString("modal.cancel")
         }), this.props.makeButtonAppearNegative ? jsx(qM, {
           disabled: !this.state.checked,
           onClick: this.props.onConfirm,
-          children: this.props.confirmButtonText || t("modal.confirm")
+          children: this.props.confirmButtonText || getI18nString("modal.confirm")
         }) : jsx(vd, {
           disabled: !this.state.checked,
           onClick: this.props.onConfirm,
-          children: this.props.confirmButtonText || t("modal.confirm")
+          children: this.props.confirmButtonText || getI18nString("modal.confirm")
         })]
       })]
     });

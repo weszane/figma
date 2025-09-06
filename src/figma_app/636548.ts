@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { iCO } from "../figma_app/763686";
 import { E } from "../905/277716";
 import { B } from "../905/714743";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { i as _$$i } from "../figma_app/741237";
 import { R as _$$R } from "../figma_app/930125";
 import { z6 } from "../figma_app/967154";
@@ -27,7 +27,7 @@ export function $$_0({
       onSubmit: e => {
         _$$i(containingProductComponent.guid, e);
       },
-      value: f ? _$$t("design_systems.component_panel.current_variant") : containingProductComponent.name,
+      value: f ? getI18nString("design_systems.component_panel.current_variant") : containingProductComponent.name,
       canEdit: !f,
       icon: t ?? jsx(B, {
         svg: A,

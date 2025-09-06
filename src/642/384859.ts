@@ -4,11 +4,11 @@ import { d as _$$d } from "../905/976845";
 import { Q } from "../figma_app/447352";
 import { glU } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { sx } from "../905/449184";
-import { R } from "../905/103090";
+import { trackEventAnalytics } from "../905/449184";
+import { selectWithShallowEqual } from "../905/103090";
 import { Pt } from "../figma_app/806412";
 import { E } from "../905/277716";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Y5 } from "../figma_app/455680";
 import { kG } from "../figma_app/482495";
 import { Sh } from "../figma_app/889655";
@@ -20,7 +20,7 @@ export function $$_0({
 }) {
   let {
     selectedGUIDs
-  } = R(e => ({
+  } = selectWithShallowEqual(e => ({
     selectedGUIDs: Sh(e)
   }));
   let i = Jo();
@@ -70,12 +70,12 @@ export let $$b1 = memo(function ({
       onClick: () => {
         glU && glU.setCornerRadiusToolPreferencesForFile(!e);
         t(!e);
-        getFeatureFlags().ce_properties_panel_tracking && sx("editor-transform-panel-change", {
+        getFeatureFlags().ce_properties_panel_tracking && trackEventAnalytics("editor-transform-panel-change", {
           key: "rectangleCornerRadiiIndependent",
           value: e
         });
       },
-      "aria-label": _$$t("fullscreen.properties_panel.transform_panel.independent_corners"),
+      "aria-label": getI18nString("fullscreen.properties_panel.transform_panel.independent_corners"),
       disabled: s,
       htmlAttributes: {
         "data-testid": "individual-corners-toggle-button"

@@ -9,13 +9,13 @@ import { z6, CU, H_ } from "../905/963340";
 import { A as _$$A } from "../905/891805";
 import { EW4 } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { md } from "../figma_app/27355";
-import { Ay } from "../figma_app/778880";
+import { useAtomWithSubscription } from "../figma_app/27355";
+import { BrowserInfo } from "../figma_app/778880";
 import { Pt } from "../figma_app/806412";
 import { yo } from "../905/125333";
 import { y0, wv, MM } from "../figma_app/236327";
 import { B as _$$B } from "../905/714743";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { to } from "../figma_app/828186";
 import { sV, DI, zx, dY } from "../figma_app/712525";
 import { lg } from "../figma_app/976749";
@@ -69,7 +69,7 @@ function D({
   let c = BK("CANVAS_SEARCH_FILTER_DROPDOWN");
   let h = useRef(null);
   let y = p8("isReadOnly");
-  let N = md(yo);
+  let N = useAtomWithSubscription(yo);
   let A = useSelector(e => e.canvasSearch.filters);
   let L = useSelector(e => e.canvasSearch.mode);
   let R = "whiteboard" === lg();
@@ -77,7 +77,7 @@ function D({
   let F = to();
   let B = useMemo(() => {
     let e = y ? [] : [jsx(y0, {
-      primaryText: _$$t("canvas_search.search"),
+      primaryText: getI18nString("canvas_search.search"),
       checked: L === EW4.FIND,
       onClick: () => {
         d(sV(EW4.FIND));
@@ -85,7 +85,7 @@ function D({
       },
       recordingKey: Pt(i, "settings.find")
     }, "find"), jsx(y0, {
-      primaryText: _$$t("canvas_search.replace"),
+      primaryText: getI18nString("canvas_search.replace"),
       checked: L === EW4.REPLACE,
       onClick: () => {
         d(sV(EW4.REPLACE));
@@ -100,7 +100,7 @@ function D({
         checked: a,
         counts: N,
         onClick: e => {
-          n || e.ctrlKey || Ay.mac && e.metaKey ? (d(DI(t)), n && c.hide()) : (d(zx(t)), c.hide());
+          n || e.ctrlKey || BrowserInfo.mac && e.metaKey ? (d(DI(t)), n && c.hide()) : (d(zx(t)), c.hide());
         },
         recordingKey: i
       }, t));
@@ -111,7 +111,7 @@ function D({
       e.push(jsx(P, {
         checked: n,
         icon: _$$A2,
-        label: _$$t("canvas_search.filter.all"),
+        label: getI18nString("canvas_search.filter.all"),
         count: a,
         onClick: () => {
           d(dY());
@@ -149,11 +149,11 @@ function D({
         "aria-expanded": c.showing,
         onClick: () => c.toggle(),
         actionOnPointerDown: !0,
-        "aria-label": _$$t("canvas_search.settings"),
+        "aria-label": getI18nString("canvas_search.settings"),
         recordingKey: Pt(i, "settings"),
         htmlAttributes: {
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": _$$t("canvas_search.settings")
+          "data-tooltip": getI18nString("canvas_search.settings")
         },
         children: jsx(_$$A, {})
       })
@@ -211,7 +211,7 @@ function F({
 }) {
   let h = useDispatch();
   let f = p8("isReadOnly");
-  let x = md(yo);
+  let x = useAtomWithSubscription(yo);
   let y = useSelector(e => e.canvasSearch.filters);
   let C = useSelector(e => e.canvasSearch.mode);
   let {
@@ -239,11 +239,11 @@ function F({
     children: jsxs(bL, {
       manager,
       children: [jsx(_$$d, {
-        "aria-label": _$$t("canvas_search.settings"),
+        "aria-label": getI18nString("canvas_search.settings"),
         recordingKey: Pt(a, "settings"),
         htmlAttributes: {
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": _$$t("canvas_search.settings")
+          "data-tooltip": getI18nString("canvas_search.settings")
         },
         ...getTriggerProps(),
         children: jsx(_$$A, {})
@@ -265,7 +265,7 @@ function F({
                     minWidth: `${e}px`
                   } : {})
                 },
-                children: _$$t("canvas_search.search")
+                children: getI18nString("canvas_search.search")
               })
             }, "find"), jsx(CU, {
               value: EW4.REPLACE.toString(),
@@ -278,7 +278,7 @@ function F({
                     minWidth: `${e}px`
                   } : {})
                 },
-                children: _$$t("canvas_search.replace")
+                children: getI18nString("canvas_search.replace")
               })
             }, "replace")]
           })
@@ -290,7 +290,7 @@ function F({
               h(dY());
             },
             icon: _$$A2,
-            label: _$$t("canvas_search.filter.all"),
+            label: getI18nString("canvas_search.filter.all"),
             count: Object.values(x).reduce((e, t) => e + t, 0),
             minWidth: e
           }), b4.map(t => jsx(B, {

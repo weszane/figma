@@ -2,7 +2,7 @@ import { F } from "../1250/368860";
 import { w } from "../905/433065";
 import { W } from "../905/569454";
 import { M } from "../1250/358700";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { q5 } from "../figma_app/516028";
 import { kw } from "../1250/729732";
 if (443 == require.j) {}
@@ -11,11 +11,11 @@ if (443 == require.j) {}
 if (443 == require.j) {}
 export function $$c3() {
   return {
-    all: t("dev_handoff.component_browser.all_published"),
-    connected: t("dev_handoff.component_browser.connected"),
-    notConnected: t("dev_handoff.component_browser.not_connected_to_code"),
-    ignored: t("dev_handoff.component_browser.no_code_equivalent_filter"),
-    suggestionsAvailable: t("dev_handoff.component_browser.suggestions_available")
+    all: getI18nString("dev_handoff.component_browser.all_published"),
+    connected: getI18nString("dev_handoff.component_browser.connected"),
+    notConnected: getI18nString("dev_handoff.component_browser.not_connected_to_code"),
+    ignored: getI18nString("dev_handoff.component_browser.no_code_equivalent_filter"),
+    suggestionsAvailable: getI18nString("dev_handoff.component_browser.suggestions_available")
   };
 }
 export function $$_0() {

@@ -2,12 +2,12 @@ import { useCallback } from "react";
 import { useDispatch } from "../vendor/514228";
 import { Mpt, glU, Ez5 } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
-import { zl, md, Xr, Ut } from "../figma_app/27355";
+import { atomStoreManager, useAtomWithSubscription, Xr, Ut } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { H } from "../905/620380";
 import { R } from "../905/165069";
-import { x1 } from "../905/714362";
-import { t as _$$t } from "../905/303541";
+import { logError } from "../905/714362";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { zX } from "../905/576487";
 import { zE } from "../905/738636";
@@ -23,7 +23,7 @@ import { t as _$$t2 } from "../905/825647";
 import { R as _$$R } from "../figma_app/53049";
 import { EI } from "../figma_app/21029";
 export function $$j2(e, t, i) {
-  let r = zl.get(Me);
+  let r = atomStoreManager.get(Me);
   let n = debugState.getState();
   let a = Kl(n);
   e(zE({
@@ -41,7 +41,7 @@ export function $$I1({
 }) {
   if (null === e || null === t) {
     let i = "No openFile or file version";
-    x1("storeFigmaContentForCooperCreation", i, {
+    logError("storeFigmaContentForCooperCreation", i, {
       fileKey: e?.key,
       fileVersion: t
     }, {
@@ -52,12 +52,12 @@ export function $$I1({
   let i = getSingletonSceneGraph().getDirectlySelectedNodes().length > 0 ? Mpt?.getSelectedNodesToSend() ?? [] : Mpt?.getTopLevelFramesToSend() ?? [];
   if (0 === i.length) {
     let e = "Empty target node ids";
-    x1("storeFigmaContentForCooperCreation", e, {}, {
+    logError("storeFigmaContentForCooperCreation", e, {}, {
       reportAsSentryError: !0
     });
     return Error(e);
   }
-  return zl.set(Uf, {
+  return atomStoreManager.set(Uf, {
     fileKey: e.key,
     fileVersion: t,
     sourceNodeIds: i
@@ -65,7 +65,7 @@ export function $$I1({
 }
 export function $$k0() {
   let e = useDispatch();
-  let t = md(Uf);
+  let t = useAtomWithSubscription(Uf);
   let i = tS();
   let s = EI();
   let l = !!t;
@@ -78,7 +78,7 @@ export function $$k0() {
   } = _$$t2();
   R(() => {
     e(F.enqueue({
-      message: _$$t("buzz.send_from_design.copying"),
+      message: getI18nString("buzz.send_from_design.copying"),
       type: "send-to-buzz-from-design-loading",
       icon: zX.SPINNER,
       timeoutOverride: 3e5
@@ -86,22 +86,22 @@ export function $$k0() {
   }, [e], () => l);
   let E = H(useCallback(() => {
     C ? e(F.enqueue({
-      message: _$$t("buzz.send_from_design.imported_x_assets_and_maybe_publish", {
+      message: getI18nString("buzz.send_from_design.imported_x_assets_and_maybe_publish", {
         numAssets: t.sourceNodeIds.length
       }),
       type: "send-to-buzz-from-design-success-maybe-publish",
       button: {
-        text: _$$t("community.publishing.publish"),
+        text: getI18nString("community.publishing.publish"),
         action: () => {
           openCooperPublishFlow("send-to-buzz-from-design-success-bell");
           Cu({
             trackingContext: "SendToBuzzFromDesignSuccessBell",
-            text: _$$t("community.publishing.publish")
+            text: getI18nString("community.publishing.publish")
           });
         }
       }
     })) : e(F.enqueue({
-      message: _$$t("buzz.send_from_design.imported_x_assets", {
+      message: getI18nString("buzz.send_from_design.imported_x_assets", {
         numAssets: t.sourceNodeIds.length
       }),
       type: "send-to-buzz-from-design-success",

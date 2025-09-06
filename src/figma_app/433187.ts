@@ -1,11 +1,11 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, memo, useCallback } from "react";
 import { LC } from "../vendor/291472";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { h as _$$h } from "../905/207101";
 import { getInitialOptions } from "../figma_app/169182";
 import { i as _$$i, C } from "../905/64217";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Dm } from "../figma_app/8833";
 import { ni } from "../figma_app/62612";
 import { Cf, it } from "../905/504727";
@@ -21,30 +21,30 @@ function g(e) {
       styleNonce: getInitialOptions().csp_nonce,
       i18n: {
         categories: {
-          activity: _$$t("emoji_mart.categories_activity"),
-          flags: _$$t("emoji_mart.categories_flags"),
-          foods: _$$t("emoji_mart.categories_foods"),
-          frequent: _$$t("emoji_mart.categories_frequent"),
-          nature: _$$t("emoji_mart.categories_nature"),
-          objects: _$$t("emoji_mart.categories_objects"),
-          people: _$$t("emoji_mart.categories_people"),
-          places: _$$t("emoji_mart.categories_places"),
-          search: _$$t("emoji_mart.categories_search"),
-          symbols: _$$t("emoji_mart.categories_symbols")
+          activity: getI18nString("emoji_mart.categories_activity"),
+          flags: getI18nString("emoji_mart.categories_flags"),
+          foods: getI18nString("emoji_mart.categories_foods"),
+          frequent: getI18nString("emoji_mart.categories_frequent"),
+          nature: getI18nString("emoji_mart.categories_nature"),
+          objects: getI18nString("emoji_mart.categories_objects"),
+          people: getI18nString("emoji_mart.categories_people"),
+          places: getI18nString("emoji_mart.categories_places"),
+          search: getI18nString("emoji_mart.categories_search"),
+          symbols: getI18nString("emoji_mart.categories_symbols")
         },
         pick: "",
-        search: _$$t("emoji_mart.search"),
-        search_will_update: _$$t("general.search_will_update"),
-        search_for_emojis: _$$t("emoji_mart.search_for_emojis"),
-        search_no_results: _$$t("emoji_mart.search_no_results"),
+        search: getI18nString("emoji_mart.search"),
+        search_will_update: getI18nString("general.search_will_update"),
+        search_for_emojis: getI18nString("emoji_mart.search_for_emojis"),
+        search_no_results: getI18nString("emoji_mart.search_no_results"),
         skins: {
-          choose: _$$t("emoji_mart.skins_choose"),
-          1: _$$t("emoji_mart.skins_1"),
-          2: _$$t("emoji_mart.skins_2"),
-          3: _$$t("emoji_mart.skins_3"),
-          4: _$$t("emoji_mart.skins_4"),
-          5: _$$t("emoji_mart.skins_5"),
-          6: _$$t("emoji_mart.skins_6")
+          choose: getI18nString("emoji_mart.skins_choose"),
+          1: getI18nString("emoji_mart.skins_1"),
+          2: getI18nString("emoji_mart.skins_2"),
+          3: getI18nString("emoji_mart.skins_3"),
+          4: getI18nString("emoji_mart.skins_4"),
+          5: getI18nString("emoji_mart.skins_5"),
+          6: getI18nString("emoji_mart.skins_6")
         }
       }
     });
@@ -62,7 +62,7 @@ export let $$f1 = memo(e => {
   let o = ni();
   let l = useCallback(e => {
     onInsert(e);
-    sx("emojiIndex.EmojiData Inserted");
+    trackEventAnalytics("emojiIndex.EmojiData Inserted");
   }, [onInsert]);
   let c = useCallback(() => {
     onCancel && onCancel();

@@ -1,6 +1,6 @@
 import { c2, Jj } from "../905/382883";
 import { EJ } from "../figma_app/930338";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { HH } from "../figma_app/828186";
 import { qy, WY, $L, uH, Zr, Xr } from "../figma_app/162807";
 import { aI } from "../figma_app/552876";
@@ -13,9 +13,9 @@ let $$u19 = {
 };
 export function $$p21(e) {
   return {
-    [WY.RESOURCE]: _$$t("search.facets.resource"),
-    [WY.CREATOR]: _$$t("search.facets.creator"),
-    [WY.SPACE]: _$$t("search.facets.in")
+    [WY.RESOURCE]: getI18nString("search.facets.resource"),
+    [WY.CREATOR]: getI18nString("search.facets.creator"),
+    [WY.SPACE]: getI18nString("search.facets.in")
   }[e];
 }
 export function $$m14(e) {
@@ -29,28 +29,28 @@ export function $$h25(e) {
       let t = e.value[0];
       return EJ(t.name || t.handle, 15);
     }
-    return _$$t("search.facets.multiple_creators", {
+    return getI18nString("search.facets.multiple_creators", {
       numCreators: t
     });
   }(e) : e.type === WY.SPACE ? function (e) {
     let t = Object.values(e.value).reduce((e, t) => e + t.length, 0);
-    return _$$t("search.facets.multiple_spaces", {
+    return getI18nString("search.facets.multiple_spaces", {
       numSpaces: t
     });
   }(e) : "";
 }
 export function $$g11(e) {
   return {
-    [$L.DESIGN_FILES]: _$$t("search.facets.design_files"),
-    [$L.FIGJAM_FILES]: _$$t("search.facets.figjam_boards"),
-    [$L.SLIDES]: _$$t("search.facets.slides"),
-    [$L.SITES]: _$$t("search.facets.sites"),
-    [$L.BUZZ]: _$$t("search.facets.buzz_files"),
-    [$L.MAKE]: _$$t("search.facets.make_files"),
-    [$L.USERS]: _$$t("search.facets.people"),
-    [$L.PROJECTS]: _$$t("search.facets.projects"),
-    [$L.TEAMS]: _$$t("search.facets.teams"),
-    [$L.ALL_FILES]: _$$t("search.preview_section.all_files"),
+    [$L.DESIGN_FILES]: getI18nString("search.facets.design_files"),
+    [$L.FIGJAM_FILES]: getI18nString("search.facets.figjam_boards"),
+    [$L.SLIDES]: getI18nString("search.facets.slides"),
+    [$L.SITES]: getI18nString("search.facets.sites"),
+    [$L.BUZZ]: getI18nString("search.facets.buzz_files"),
+    [$L.MAKE]: getI18nString("search.facets.make_files"),
+    [$L.USERS]: getI18nString("search.facets.people"),
+    [$L.PROJECTS]: getI18nString("search.facets.projects"),
+    [$L.TEAMS]: getI18nString("search.facets.teams"),
+    [$L.ALL_FILES]: getI18nString("search.preview_section.all_files"),
     [$L.PLUGINS]: "",
     [$L.WIDGETS]: ""
   }[e];
@@ -80,15 +80,15 @@ export function $$b4(e, t) {
       var i;
       i = e.value;
       return {
-        [$L.DESIGN_FILES]: _$$t("search.facets.design"),
-        [$L.FIGJAM_FILES]: _$$t("search.facets.figjam"),
-        [$L.SLIDES]: _$$t("search.facets.slides"),
-        [$L.SITES]: _$$t("search.facets.sites"),
-        [$L.BUZZ]: _$$t("search.facets.buzz"),
-        [$L.MAKE]: _$$t("search.facets.make"),
-        [$L.USERS]: _$$t("search.facets.people"),
-        [$L.PROJECTS]: _$$t("search.facets.projects"),
-        [$L.TEAMS]: _$$t("search.facets.teams"),
+        [$L.DESIGN_FILES]: getI18nString("search.facets.design"),
+        [$L.FIGJAM_FILES]: getI18nString("search.facets.figjam"),
+        [$L.SLIDES]: getI18nString("search.facets.slides"),
+        [$L.SITES]: getI18nString("search.facets.sites"),
+        [$L.BUZZ]: getI18nString("search.facets.buzz"),
+        [$L.MAKE]: getI18nString("search.facets.make"),
+        [$L.USERS]: getI18nString("search.facets.people"),
+        [$L.PROJECTS]: getI18nString("search.facets.projects"),
+        [$L.TEAMS]: getI18nString("search.facets.teams"),
         [$L.ALL_FILES]: "",
         [$L.PLUGINS]: "",
         [$L.WIDGETS]: ""
@@ -96,7 +96,7 @@ export function $$b4(e, t) {
     case WY.CREATOR:
       return function (e, t) {
         let i = e.name || e.handle;
-        return t && e.id === t ? _$$t("search.facets.name_and_you", {
+        return t && e.id === t ? getI18nString("search.facets.name_and_you", {
           name: i
         }) : i;
       }(e.value, t);

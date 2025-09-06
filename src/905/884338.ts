@@ -1,7 +1,7 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import r from "../vendor/128080";
-import { sx } from "../905/449184";
-import { sn } from "../905/542194";
+import { trackEventAnalytics } from "../905/449184";
+import { globalPerfTimer } from "../905/542194";
 import { rI, Rh, S3 } from "../905/485103";
 var a = r;
 let d = {
@@ -36,10 +36,10 @@ export function $$c0(e) {
   useEffect(() => {
     for (let t of e) if (!t.isPendingFromSinatra && t.uuid) {
       let e = `comment_creation_${t.uuid}`;
-      let i = sn.get(e);
+      let i = globalPerfTimer.get(e);
       if (i && i.isRunning && !i.isUnreliable) {
-        let t = sn.tryStop(e);
-        t && sx("comment_creation", {
+        let t = globalPerfTimer.tryStop(e);
+        t && trackEventAnalytics("comment_creation", {
           elapsedMs: t
         }, {
           forwardToDatadog: !0

@@ -1,4 +1,4 @@
-import { $D } from '../905/11';
+import { reportError } from '../905/11';
 import { aD } from '../905/125019';
 import { ServiceCategories as _$$e } from '../905/165054';
 import { encodeBase64 } from '../905/561685';
@@ -53,7 +53,7 @@ export async function $$l0(e, t, i, n, r, a) {
       requestUrl: i,
       error: u?.toString()
     };
-    $D(e, new Error(n), {
+    reportError(e, new Error(n), {
       extra: r
     });
     console.error(n, r);

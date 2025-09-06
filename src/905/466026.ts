@@ -3,7 +3,7 @@ import { NC } from "../905/17179";
 import { isDevEnvironment } from "../figma_app/169182";
 import { WB } from "../905/761735";
 import { XHR } from "../905/910117";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
 import { F } from "../905/302958";
 import { nF as _$$nF, MM } from "../905/350402";
@@ -32,7 +32,7 @@ let $$g10 = _$$nF((e, {
     n?.();
   }).catch(t => {
     if (i?.(), e.dispatch(F.enqueue({
-      message: _$$t("collaboration.branching.an_error_occurred_while_updating_this_file"),
+      message: getI18nString("collaboration.branching.an_error_occurred_while_updating_this_file"),
       error: !0
     })), isDevEnvironment()) throw t;
   });
@@ -56,7 +56,7 @@ let $$_12 = MM("REPO_PUT", async (e, {
   }).catch(t => {
     e.dispatch(_$$r(r));
     e.dispatch(F.enqueue({
-      message: J(t, t.data?.message || _$$t("collaboration.branching.an_error_occurred_while_updating_this_file")),
+      message: J(t, t.data?.message || getI18nString("collaboration.branching.an_error_occurred_while_updating_this_file")),
       error: !0
     }));
   }));
@@ -81,4 +81,4 @@ export const nK = $$E8;
 export const nX = $$y9;
 export const og = $$g10;
 export const uo = $$A11;
-export const yJ = $$_12; 
+export const yJ = $$_12;

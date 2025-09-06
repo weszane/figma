@@ -6,9 +6,9 @@ import { Oin } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import d from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
-import { eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { getInitialOptions } from "../figma_app/169182";
-import { rr, Ay as _$$Ay, KR } from "../figma_app/778880";
+import { isMobileUA, BrowserInfo, isFigmaMobileApp } from "../figma_app/778880";
 import { nt } from "../figma_app/858013";
 import { B as _$$B } from "../905/714743";
 import { z4 } from "../905/37051";
@@ -16,7 +16,7 @@ import { _6 } from "../figma_app/386952";
 import { aq } from "../figma_app/412189";
 import { FFileType } from "../figma_app/191312";
 import { ju } from "../905/187165";
-import { oD } from "../figma_app/53721";
+import { mapEditorTypeToFileType } from "../figma_app/53721";
 import { lF } from "../figma_app/915202";
 import { $A } from "../905/782918";
 import { uj0 } from "../figma_app/27776";
@@ -48,7 +48,7 @@ export function $$R1() {
   if ("fullscreen" !== e.view) return null;
   let t = ju(e);
   return jsx(k, {
-    editorType: oD(e.editorType),
+    editorType: mapEditorTypeToFileType(e.editorType),
     progressPaused: !0,
     editorTheme: t
   });
@@ -114,10 +114,10 @@ function k(e) {
       children: [jsx("div", {
         className: c()({
           [dV]: "whiteboard" === t,
-          [Dn]: "design" === t && !rr,
-          [k1]: "design" === t && rr,
-          [Mf]: "viewer" === t && !rr,
-          [mb]: "viewer" === t && rr
+          [Dn]: "design" === t && !isMobileUA,
+          [k1]: "design" === t && isMobileUA,
+          [Mf]: "viewer" === t && !isMobileUA,
+          [mb]: "viewer" === t && isMobileUA
         })
       }), "whiteboard" !== t && jsx(F, {
         type: t,
@@ -162,9 +162,9 @@ function M(e) {
 function F(e) {
   let [t, r] = useState(!1);
   let a = aq();
-  return ((eD ? eD.getZoomFactor() : _$$Ay.chrome || _$$Ay.safari ? Promise.resolve(window.outerWidth / window.innerWidth) : Promise.resolve(void 0)).then(e => {
+  return ((desktopAPIInstance ? desktopAPIInstance.getZoomFactor() : BrowserInfo.chrome || BrowserInfo.safari ? Promise.resolve(window.outerWidth / window.innerWidth) : Promise.resolve(void 0)).then(e => {
     e && (e < .95 || e > 1.05) && a() && !t && r(!0);
-  }), t || KR() || z4.getIsExtension()) ? jsx(j, {
+  }), t || isFigmaMobileApp() || z4.getIsExtension()) ? jsx(j, {
     type: e.type,
     progressPaused: e.progressPaused
   }) : jsx(U, {
@@ -174,8 +174,8 @@ function F(e) {
 }
 function j(e) {
   let t = "design" === e.type;
-  let r = "viewer" === e.type && rr;
-  let i = "viewer" === e.type && !rr;
+  let r = "viewer" === e.type && isMobileUA;
+  let i = "viewer" === e.type && !isMobileUA;
   return jsxs("div", {
     className: c()(Dg, {
       [iI]: e.progressPaused
@@ -199,8 +199,8 @@ function j(e) {
 }
 function U(e) {
   let t = "design" === e.type;
-  let r = "viewer" === e.type && rr;
-  let i = "viewer" === e.type && !rr;
+  let r = "viewer" === e.type && isMobileUA;
+  let i = "viewer" === e.type && !isMobileUA;
   return jsxs("div", {
     className: c()(Dg, {
       [cu]: e.progressPaused

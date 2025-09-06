@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useState, useCallback, useLayoutEffect } from "react";
 import { C } from "../905/222694";
-import { eU, fp } from "../figma_app/27355";
+import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import o from "classnames";
 import { A as _$$A } from "../905/920142";
 import { B } from "../905/907815";
@@ -13,7 +13,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { J } from "../905/337735";
 import { Kf, _k, gc, pQ } from "../905/188961";
 var l = o;
-let E = eU({});
+let E = atom({});
 export function $$y0({
   thumbnailUrl: e,
   thumbnailType: t,
@@ -36,7 +36,7 @@ export function $$y0({
     thumbnailUrl: t,
     needsSmartBackground: r
   }) {
-    let [n, a] = fp(E);
+    let [n, a] = useAtomValueAndSetter(E);
     let o = !e || _$$A(e).isBefore(_$$A().subtract(4, "seconds"));
     let l = !r || t && !!n[t];
     let [c, u] = useState(o && t && l ? t : null);

@@ -3,7 +3,7 @@ import { memo, useMemo, useRef } from "react";
 import { IT } from "../figma_app/566371";
 import { P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { e0 } from "../905/696396";
 import { a as _$$a } from "../905/275092";
 import { U } from "../905/540113";
@@ -92,23 +92,23 @@ function I({
     }
   }, {
     type: V.STAT,
-    header: _$$t("design_systems.libraries_modal.total"),
+    header: getI18nString("design_systems.libraries_modal.total"),
     count: r.data?.summary.total_usages ?? 0,
-    word: _$$t("design_systems.libraries_modal.plural.instance", {
+    word: getI18nString("design_systems.libraries_modal.plural.instance", {
       instanceCount: r.data?.summary.total_usages ?? 0
     })
   }, {
     type: V.STAT,
-    header: _$$t("design_systems.libraries_modal.used_by"),
+    header: getI18nString("design_systems.libraries_modal.used_by"),
     count: r.data?.summary.total_teams ?? 0,
-    word: _$$t("design_systems.libraries_modal.plural.team", {
+    word: getI18nString("design_systems.libraries_modal.plural.team", {
       teamCount: r.data?.summary.total_teams ?? 0
     })
   }, {
     type: V.STAT,
-    header: _$$t("design_systems.libraries_modal.used_in"),
+    header: getI18nString("design_systems.libraries_modal.used_in"),
     count: r.data?.summary.total_files ?? 0,
-    word: _$$t("design_systems.libraries_modal.plural.file", {
+    word: getI18nString("design_systems.libraries_modal.plural.file", {
       fileCount: r.data?.summary.total_files ?? 0
     })
   }];

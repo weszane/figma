@@ -1,9 +1,5 @@
-function i() {
-  return /\bFigma(Beta|Dev)\//.test(navigator.userAgent);
+export function isFigmaBetaOrDev() {
+  return /\bFigma(?:Beta|Dev)\//.test(navigator.userAgent)
 }
-Object.defineProperty(exports, "N", {
-  enumerable: !0,
-  get: function () {
-    return i;
-  }
-});
+
+export const N = isFigmaBetaOrDev

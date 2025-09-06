@@ -8,7 +8,7 @@ import { S as _$$S } from "../905/274480";
 import { J } from "../905/270045";
 import { $n } from "../905/521428";
 import { getSingletonSceneGraph } from "../905/700578";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { FJ } from "../905/508367";
 import { F as _$$F } from "../905/422355";
 import { E as _$$E } from "../905/984674";
@@ -25,7 +25,7 @@ export let $$y0 = Ju(function (e) {
   let [C, w] = useState(null);
   let [O, R] = useState(!1);
   let [L, P] = useState(!1);
-  let D = zl.get(ze);
+  let D = atomStoreManager.get(ze);
   let k = D ? _$$F(D) : "";
   let M = async () => {
     try {
@@ -47,7 +47,7 @@ export let $$y0 = Ju(function (e) {
         A("No code files found to upload");
         return;
       }
-      if (!zl.get(ze)) {
+      if (!atomStoreManager.get(ze)) {
         A("No open file key found");
         return;
       }
@@ -108,7 +108,7 @@ export let $$y0 = Ju(function (e) {
       A(null);
       N(null);
       let e = getSingletonSceneGraph().getInternalCanvas();
-      if (!zl.get(ze)) {
+      if (!atomStoreManager.get(ze)) {
         A("No open file key found");
         return;
       }

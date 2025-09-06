@@ -2,13 +2,13 @@ import { useState, useRef, useEffect, useLayoutEffect } from "react";
 import { iL } from "../figma_app/762706";
 import { Rx } from "../905/686312";
 import { k0 } from "../figma_app/623293";
-import { ED, Lo, xi, x1 } from "../905/714362";
-import { az } from "../905/449184";
+import { logDebug, logInfo, logWarning, logError } from "../905/714362";
+import { analyticsEventManager } from "../905/449184";
 import { w$ } from "../figma_app/594947";
 import { Su } from "../figma_app/781115";
 import { L } from "../905/550169";
 import { ld } from "../figma_app/582563";
-import { nl } from "../figma_app/257275";
+import { isInteractionPathCheck } from "../figma_app/897289";
 class d {
   constructor(e, t) {
     this._timeOfLastDisconnectMs = null;
@@ -22,7 +22,7 @@ class d {
     this._timeOfLastDisconnectMs = this.nowMs();
     let t = (this._timeOfLastDisconnectMs - this._timeOfLastConnectionMs) / 1e3;
     let r = this.nowMs() / 1e3;
-    az.trackDefinedEvent(this._definedDisconnectEventName, {
+    analyticsEventManager.trackDefinedEvent(this._definedDisconnectEventName, {
       connectionDurationSeconds: t,
       windowIsActive: e,
       sessionLengthSeconds: r
@@ -34,7 +34,7 @@ class d {
     let a = (this.nowMs() - i) / 1e3;
     e && (this._timeOfLastConnectionMs = this.nowMs(), null == this._timeOfFirstConnectionMs && (this._timeOfFirstConnectionMs = this._timeOfLastConnectionMs));
     let s = this.nowMs() / 1e3;
-    az.trackDefinedEvent(this._definedConnectionAttemptEventName, {
+    analyticsEventManager.trackDefinedEvent(this._definedConnectionAttemptEventName, {
       success: e,
       timeSinceDisconnectSeconds: a,
       numberOfConnectionAttempts: t,
@@ -134,16 +134,16 @@ export function $$I3(e, t, r, i) {
     logError: (e, t, r, n, i) => {
       switch (e) {
         case "DEBUG":
-          ED(t, r, n, i);
+          logDebug(t, r, n, i);
           break;
         case "INFO":
-          Lo(t, r, n, i);
+          logInfo(t, r, n, i);
           break;
         case "WARN":
-          xi(t, r, n, i);
+          logWarning(t, r, n, i);
           break;
         case "ERROR":
-          x1(t, r, n, i);
+          logError(t, r, n, i);
       }
     },
     ...r
@@ -157,7 +157,7 @@ export function $$I3(e, t, r, i) {
       m && !i ? (JSON.stringify({
         ...e,
         containerElement: null
-      }) === JSON.stringify(g) || nl() || console.warn("useViewer called with different options than the first call!"), containerElement && m.setNewContainerElement(containerElement)) : (g = {
+      }) === JSON.stringify(g) || isInteractionPathCheck() || console.warn("useViewer called with different options than the first call!"), containerElement && m.setNewContainerElement(containerElement)) : (g = {
         ...e,
         containerElement: null
       }, await b(), m = await Fig.createViewer(e));

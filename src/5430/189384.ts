@@ -2,11 +2,11 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback, createRef, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { N as _$$N } from "../figma_app/469468";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { lQ } from "../905/934246";
 import { e as _$$e } from "../905/435763";
 import { getFeatureFlags } from "../905/601108";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { h as _$$h } from "../905/207101";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -48,7 +48,7 @@ let E = Ju(function ({
   let o = iZ();
   let j = _$$A(e, !1, !1, t);
   _$$h(() => {
-    az.trackDefinedEvent("preset_libraries.preset_options_modal_displayed", {
+    analyticsEventManager.trackDefinedEvent("preset_libraries.preset_options_modal_displayed", {
       userId: o?.id,
       hubFileId: e.id,
       partnerType: X(e.library_key)
@@ -59,7 +59,7 @@ let E = Ju(function ({
   }, [r]);
   let S = useCallback(() => {
     E();
-    az.trackDefinedEvent("preset_libraries.preset_options_modal_option_clicked", {
+    analyticsEventManager.trackDefinedEvent("preset_libraries.preset_options_modal_option_clicked", {
       userId: o?.id,
       hubFileId: e.id,
       partnerType: X(e.library_key),
@@ -80,7 +80,7 @@ let E = Ju(function ({
     });
     E();
     r(s(e));
-    az.trackDefinedEvent("preset_libraries.preset_options_modal_option_clicked", {
+    analyticsEventManager.trackDefinedEvent("preset_libraries.preset_options_modal_option_clicked", {
       userId: o?.id,
       hubFileId: e.id,
       partnerType: X(e.library_key),
@@ -90,7 +90,7 @@ let E = Ju(function ({
   let k = useCallback(() => {
     E();
     j();
-    az.trackDefinedEvent("preset_libraries.preset_options_modal_option_clicked", {
+    analyticsEventManager.trackDefinedEvent("preset_libraries.preset_options_modal_option_clicked", {
       userId: o?.id,
       hubFileId: e.id,
       partnerType: X(e.library_key),
@@ -106,13 +106,13 @@ let E = Ju(function ({
       children: jsx(_$$E, {
         fontWeight: "medium",
         fontSize: 20,
-        children: tx("community.preset_modal.header")
+        children: renderI18nText("community.preset_modal.header")
       })
     }), jsx("div", {
       className: "use_preset_options_modal--presetOptionsModal__description--GD8wZ",
       children: jsx(_$$E, {
         fontSize: 13,
-        children: tx("community.preset_modal.description")
+        children: renderI18nText("community.preset_modal.description")
       })
     }), jsxs("div", {
       className: sw,
@@ -126,7 +126,7 @@ let E = Ju(function ({
           className: L,
           children: jsx(_$$E, {
             fontSize: 13,
-            children: getFeatureFlags().cmty_preset_modal_revised_copy ? tx("community.preset_modal.use_ui_kit_in_a_new_file") : tx("community.preset_modal.show_in_figma")
+            children: getFeatureFlags().cmty_preset_modal_revised_copy ? renderI18nText("community.preset_modal.use_ui_kit_in_a_new_file") : renderI18nText("community.preset_modal.show_in_figma")
           })
         }), jsx(_$$B, {
           className: T,
@@ -142,7 +142,7 @@ let E = Ju(function ({
           className: L,
           children: jsx(_$$E, {
             fontSize: 13,
-            children: getFeatureFlags().cmty_preset_modal_revised_copy ? tx("community.preset_modal.make_a_copy_of_this_file") : tx("community.preset_modal.make_a_copy")
+            children: getFeatureFlags().cmty_preset_modal_revised_copy ? renderI18nText("community.preset_modal.make_a_copy_of_this_file") : renderI18nText("community.preset_modal.make_a_copy")
           })
         }), jsx(_$$B, {
           className: T,
@@ -152,7 +152,7 @@ let E = Ju(function ({
     }), jsx("button", {
       className: "use_preset_options_modal--presetOptionsModal__cancel--vne9o text--fontPos13--xW8hS text--_fontBase--QdLsd",
       onClick: S,
-      children: _$$t("community.try.pick_workspace.cancel")
+      children: getI18nString("community.try.pick_workspace.cancel")
     })]
   });
 }, "USE_PRESET_OPTIONS_MODAL_TYPE", ZU.YES);
@@ -214,7 +214,7 @@ export function $$Q0({
   }, [c, e, _, f, j, v, b]);
   if (m || lT(e)) {
     let t;
-    lT(e) ? t = _$$t("community.resource.admin_blocked_resource_banner.this_resource_is_blocked") : m && (t = _$$t("community.duplicate.to_duplicate_switch_to_your_personal_profile"));
+    lT(e) ? t = getI18nString("community.resource.admin_blocked_resource_banner.this_resource_is_blocked") : m && (t = getI18nString("community.duplicate.to_duplicate_switch_to_your_personal_profile"));
     return jsx("div", {
       "data-tooltip-type": Ib.TEXT,
       "data-tooltip": t,
@@ -247,7 +247,7 @@ export function $$Q0({
       })
     })
   }))(QQ(h) ? {
-    buttonText: tx("community.duplicate.open"),
+    buttonText: renderI18nText("community.duplicate.open"),
     onClick: L
   } : {
     buttonText: w,

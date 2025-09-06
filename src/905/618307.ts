@@ -1,6 +1,6 @@
 import { i as _$$i } from "../905/970229";
 import { yr } from "../905/827765";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
 import { Nw, yJ } from "../figma_app/78808";
 import { q } from "../figma_app/446378";
@@ -8,8 +8,8 @@ import { Yp } from "../figma_app/740025";
 export function $$c1(e) {
   let t = {};
   let i = Yp(e.name || null).length;
-  0 === i ? t.name = _$$t("community.publishing.name_must_not_be_empty") : i > 100 && (t.name = _$$t("community.publishing.name_must_be_at_most_100_characters_long"));
-  Yp(e.description || null).length > 1e4 && (t.description = _$$t("community.publishing.description_must_be_at_most_10000_characters_long"));
+  0 === i ? t.name = getI18nString("community.publishing.name_must_not_be_empty") : i > 100 && (t.name = getI18nString("community.publishing.name_must_be_at_most_100_characters_long"));
+  Yp(e.description || null).length > 1e4 && (t.description = getI18nString("community.publishing.description_must_be_at_most_10000_characters_long"));
   return t;
 }
 export async function $$u0({
@@ -53,7 +53,7 @@ export async function $$u0({
           fileKey: e
         });
         if (200 !== status) {
-          g(_$$t("templates.actions.error_connecting_to_server_to_upload_file_thumbnail"));
+          g(getI18nString("templates.actions.error_connecting_to_server_to_upload_file_thumbnail"));
           return;
         }
         let {
@@ -68,7 +68,7 @@ export async function $$u0({
         try {
           await yr(cover_image_upload_url, p);
         } catch (e) {
-          g(J(e, _$$t("templates.actions.error_connecting_to_server_to_upload_file_thumbnail")));
+          g(J(e, getI18nString("templates.actions.error_connecting_to_server_to_upload_file_thumbnail")));
           return;
         }
       }

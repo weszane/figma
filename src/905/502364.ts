@@ -1,4 +1,4 @@
-import { eU, zl } from "../figma_app/27355";
+import { atom, atomStoreManager } from "../figma_app/27355";
 class r {
   constructor() {
     this.listenerMap = new Map();
@@ -20,9 +20,9 @@ class r {
     });
   }
 }
-export let $$a1 = eU(() => new r());
+export let $$a1 = atom(() => new r());
 export function $$s0(e) {
-  zl.get($$a1).handleEvent(e);
+  atomStoreManager.get($$a1).handleEvent(e);
 }
 export const YQ = $$s0;
 export const az = $$a1;

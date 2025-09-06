@@ -1,5 +1,5 @@
 import { getSingletonSceneGraph } from "../905/700578";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { x } from "../905/239551";
 let $$s9 = [];
 let $$o1 = 8;
@@ -101,7 +101,7 @@ export function $$x0(e, t) {
     }
   });
   return r += `
-${_$$t("whiteboard.ai.summary.summary_footer_disclaimer")}`;
+${getI18nString("whiteboard.ai.summary.summary_footer_disclaimer")}`;
 }
 export function $$N15(e) {
   return e.endsWith("...") ? $$w16() : e + ".";
@@ -109,12 +109,12 @@ export function $$N15(e) {
 export function $$C8(e) {
   let t = new Date();
   let r = parseInt(e, 10);
-  return r ? (t.setTime(r), _$$t("whiteboard.ai.summary.summary_header_disclaimer", {
+  return r ? (t.setTime(r), getI18nString("whiteboard.ai.summary.summary_header_disclaimer", {
     summaryGenerationDate: t
-  })) : _$$t("whiteboard.ai.summary.summary_header_disclaimer_no_date");
+  })) : getI18nString("whiteboard.ai.summary.summary_header_disclaimer_no_date");
 }
 export function $$w16() {
-  return _$$t("whiteboard.ai_summary.loading_text");
+  return getI18nString("whiteboard.ai_summary.loading_text");
 }
 export function $$O2(e, t, r) {
   let i = t.length > 0;

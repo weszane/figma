@@ -3,9 +3,9 @@ import { useCallback } from "react";
 import { S } from "../905/274480";
 import { J } from "../905/270045";
 import { getFeatureFlags } from "../905/601108";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Pt } from "../figma_app/806412";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { gl } from "../905/216495";
 import { lJ, kl } from "../905/275640";
 import { Ib } from "../905/129884";
@@ -15,7 +15,7 @@ export function $$m0(e) {
   let m = kl("marquee");
   let g = gl(m) || !!m;
   let f = useCallback(e => {
-    getFeatureFlags().ce_properties_panel_tracking && sx("editor-transform-panel-change", {
+    getFeatureFlags().ce_properties_panel_tracking && trackEventAnalytics("editor-transform-panel-change", {
       key: "clipContent",
       clipContentValue: e
     });
@@ -30,12 +30,12 @@ export function $$m0(e) {
       onChange: f,
       recordingKey: Pt(e, "clipContentCheckbox"),
       label: jsx(J, {
-        children: tx("fullscreen.properties_panel.transform_panel.clip_content")
+        children: renderI18nText("fullscreen.properties_panel.transform_panel.clip_content")
       }),
       disabled: g,
       htmlAttributes: {
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": g ? _$$t("sites.panel.interactions_panel.clip_contents_disabled") : void 0,
+        "data-tooltip": g ? getI18nString("sites.panel.interactions_panel.clip_contents_disabled") : void 0,
         "data-tooltip-show-above": !0,
         "data-testid": "clip-content-checkbox"
       }

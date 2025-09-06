@@ -18,7 +18,7 @@ import { Us, Kz } from "../figma_app/637027";
 import { y1, w4 } from "../905/445814";
 import { s as _$$s } from "../cssbuilder/589278";
 import { Ih } from "../figma_app/617427";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
 import { F as _$$F } from "../905/302958";
 import { Y as _$$Y } from "../905/830372";
@@ -110,7 +110,7 @@ function ee({
     target: "_blank",
     className: m()("whiteboard" === e && "consumption_paywall_modals--figjamLink---aC7d"),
     trusted: !0,
-    children: tx("consumption_paywalls.see_all_features")
+    children: renderI18nText("consumption_paywalls.see_all_features")
   });
   return jsx(J, {
     item: {
@@ -136,7 +136,7 @@ function et({
       "data-testid": "pricing-starter",
       children: jsx("div", {
         className: "consumption_paywall_modals--costText--kn5ud text--fontPos16--oMC-G text--_fontBase--QdLsd",
-        children: tx("consumption_paywalls.free")
+        children: renderI18nText("consumption_paywalls.free")
       })
     })]
   });
@@ -150,7 +150,7 @@ function ei({
       className: _$$s.textBodyLarge.colorTextSecondary.$,
       children: e
     }), jsx("p", {
-      children: tx("consumption_paywalls.campfire.starter_pricing")
+      children: renderI18nText("consumption_paywalls.campfire.starter_pricing")
     })]
   });
 }
@@ -307,13 +307,13 @@ function ea({
               children: function (e) {
                 switch (e) {
                   case ud.EXPERT:
-                    return _$$t("consumption_paywalls.expert_seat");
+                    return getI18nString("consumption_paywalls.expert_seat");
                   case ud.DEVELOPER:
-                    return _$$t("consumption_paywalls.dev_seat");
+                    return getI18nString("consumption_paywalls.dev_seat");
                   case ud.COLLABORATOR:
-                    return _$$t("consumption_paywalls.collab_seat");
+                    return getI18nString("consumption_paywalls.collab_seat");
                   case ud.CONTENT:
-                    return _$$t("consumption_paywalls.content_seat");
+                    return getI18nString("consumption_paywalls.content_seat");
                   default:
                     throwTypeError(e);
                 }
@@ -321,7 +321,7 @@ function ea({
             })]
           }), jsx("div", {
             className: _$$s.textBodyMedium.$,
-            children: tx("consumption_paywalls.price_per_month", {
+            children: renderI18nText("consumption_paywalls.price_per_month", {
               price: jsx("span", {
                 className: _$$s.textBodyLargeStrong.$,
                 children: c.formatMoney(d[e].amount)
@@ -348,7 +348,7 @@ function es({
       teamId: i,
       trackingDescriptor: r
     },
-    children: e === _$$F2.Plan.ENTERPRISE ? tx("consumption_paywalls.contact_sales") : e === _$$F2.Plan.ORG ? tx("consumption_paywalls.upgrade_to_organization") : tx("consumption_paywalls.upgrade_to_professional")
+    children: e === _$$F2.Plan.ENTERPRISE ? renderI18nText("consumption_paywalls.contact_sales") : e === _$$F2.Plan.ORG ? renderI18nText("consumption_paywalls.upgrade_to_organization") : renderI18nText("consumption_paywalls.upgrade_to_professional")
   }) : null;
 }
 function eo({
@@ -369,13 +369,13 @@ function eo({
   let _ = function (e) {
     switch (e) {
       case _$$F2.Plan.STARTER:
-        return _$$t("consumption_paywalls.plan_name_starter");
+        return getI18nString("consumption_paywalls.plan_name_starter");
       case _$$F2.Plan.PRO:
-        return _$$t("consumption_paywalls.plan_name_pro");
+        return getI18nString("consumption_paywalls.plan_name_pro");
       case _$$F2.Plan.ORG:
-        return _$$t("consumption_paywalls.plan_name_org");
+        return getI18nString("consumption_paywalls.plan_name_org");
       case _$$F2.Plan.ENTERPRISE:
-        return _$$t("consumption_paywalls.plan_name_enterprise");
+        return getI18nString("consumption_paywalls.plan_name_enterprise");
       default:
         throwTypeError(e);
     }
@@ -384,26 +384,26 @@ function eo({
   let y = g ? function (e) {
     switch (e) {
       case _$$F2.Plan.STARTER:
-        return _$$t("consumption_paywalls.campfire.plan_description_starter");
+        return getI18nString("consumption_paywalls.campfire.plan_description_starter");
       case _$$F2.Plan.PRO:
-        return _$$t("consumption_paywalls.campfire.plan_description_pro");
+        return getI18nString("consumption_paywalls.campfire.plan_description_pro");
       case _$$F2.Plan.ORG:
-        return _$$t("consumption_paywalls.campfire.plan_description_org");
+        return getI18nString("consumption_paywalls.campfire.plan_description_org");
       case _$$F2.Plan.ENTERPRISE:
-        return _$$t("consumption_paywalls.campfire.plan_description_ent");
+        return getI18nString("consumption_paywalls.campfire.plan_description_ent");
       default:
         throwTypeError(e);
     }
   }(e) : function (e) {
     switch (e) {
       case _$$F2.Plan.STARTER:
-        return _$$t("consumption_paywalls.plan_description_starter");
+        return getI18nString("consumption_paywalls.plan_description_starter");
       case _$$F2.Plan.PRO:
-        return _$$t("consumption_paywalls.plan_description_pro_pricing_variant.seat_rename");
+        return getI18nString("consumption_paywalls.plan_description_pro_pricing_variant.seat_rename");
       case _$$F2.Plan.ORG:
-        return _$$t("consumption_paywalls.plan_description_org_pricing_variant");
+        return getI18nString("consumption_paywalls.plan_description_org_pricing_variant");
       case _$$F2.Plan.ENTERPRISE:
-        return _$$t("consumption_paywalls.plan_description_enterprise_pricing_variant");
+        return getI18nString("consumption_paywalls.plan_description_enterprise_pricing_variant");
       default:
         throwTypeError(e);
     }
@@ -460,7 +460,7 @@ function eo({
             },
             width: "hug-contents",
             children: jsx(Ex, {
-              text: _$$t("consumption_paywalls.badge_text"),
+              text: getI18nString("consumption_paywalls.badge_text"),
               color: g ? zE.DEFAULT : zE.DISABLED,
               size: vj.SMALL,
               subtle: g,
@@ -493,7 +493,7 @@ function eo({
         className: "consumption_paywall_modals--planBoxDivider--E4Hnj"
       }), t === Bi.ORG && e === _$$F2.Plan.ORG && jsx("p", {
         className: _$$s.textBodyLargeStrong.$,
-        children: _$$t("plan_comparison.campfire.everything_on_pro")
+        children: getI18nString("plan_comparison.campfire.everything_on_pro")
       }), E]
     }), S]
   });
@@ -516,7 +516,7 @@ export function $$ed1(e) {
     },
     onError: () => {
       t(_$$F.enqueue({
-        message: _$$t("consumption_paywalls.error.modal"),
+        message: getI18nString("consumption_paywalls.error.modal"),
         error: !0
       }));
     },
@@ -677,7 +677,7 @@ function ec(e) {
       }), hideUpsellPlanCta && jsxs("div", {
         "data-testid": "ask-admin-to-upgrade",
         className: "x78zum5 x6s0dn4 xfifm61 xw7yly9",
-        children: [jsx(_$$$, {}), tx("consumption_paywalls.ask_admin_to_upgrade")]
+        children: [jsx(_$$$, {}), renderI18nText("consumption_paywalls.ask_admin_to_upgrade")]
       }), modalFooter]
     })
   });

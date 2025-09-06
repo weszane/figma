@@ -4,10 +4,10 @@ import { useSelector, useDispatch } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
 import { resourceUtils } from "../905/989992";
 import l from "../vendor/239910";
-import { sx } from "../905/449184";
-import { R as _$$R } from "../905/103090";
+import { trackEventAnalytics } from "../905/449184";
+import { selectWithShallowEqual } from "../905/103090";
 import { Rs } from "../figma_app/288654";
-import { jk } from "../905/609396";
+import { PerfTimer } from "../905/609396";
 import { YQ } from "../905/502364";
 import { nz, Yx, Tn } from "../figma_app/933328";
 import { fu } from "../figma_app/831799";
@@ -32,14 +32,14 @@ import { N as _$$N } from "../905/438674";
 import { d as _$$d } from "../905/49800";
 import { J as _$$J } from "../905/270045";
 import { l as _$$l } from "../905/716947";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import B from "../vendor/946678";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { P as _$$P } from "../905/347284";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
-import { t as _$$t, tx as _$$tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { sx as _$$sx } from "../905/941192";
 import { V as _$$V } from "../905/223767";
 import { to as _$$to } from "../905/156213";
@@ -171,7 +171,7 @@ function ew({
   let p = useDispatch();
   let m = useCallback(e => {
     i(e);
-    sx("CTA Clicked", {
+    trackEventAnalytics("CTA Clicked", {
       name: "Library Preference Modal Change filter",
       orgId: o,
       location: "tab",
@@ -186,7 +186,7 @@ function ew({
   }), [l]);
   let g = useCallback(e => "workspace" === e.type ? `workspace-${e.id}` : e.type, []);
   return jsx(l6, {
-    ariaLabel: _$$t("design_systems.libraries_modal.filtered_by"),
+    ariaLabel: getI18nString("design_systems.libraries_modal.filtered_by"),
     className: "subscription_list_filter_tabs--selectContainer--BdpOn",
     dataOnboardingKey: eS,
     dispatch: p,
@@ -206,11 +206,11 @@ let eT = "seen_libraries_workspace_onboarding";
 let ek = r1("file_browser_onboarded");
 let eR = r1(eT);
 function eN() {
-  let e = md(ek);
+  let e = useAtomWithSubscription(ek);
   let t = useSelector(e => e.currentUserOrgId);
   let i = UC(t);
-  let s = md(i);
-  let o = md(eR);
+  let s = useAtomWithSubscription(i);
+  let o = useAtomWithSubscription(eR);
   let l = Um();
   let d = _$$e3({
     overlay: UDe,
@@ -230,9 +230,9 @@ function eN() {
     userFlagOnShow: eT,
     onClose: d.complete,
     targetKey: eS,
-    title: _$$tx("rcs.libraries_workspace_onboarding_modal.title"),
+    title: renderI18nText("rcs.libraries_workspace_onboarding_modal.title"),
     description: jsx("p", {
-      children: _$$tx("rcs.libraries_workspace_onboarding_modal.text")
+      children: renderI18nText("rcs.libraries_workspace_onboarding_modal.text")
     }),
     emphasized: !0
   });
@@ -280,7 +280,7 @@ function e4({
     viewFile: d
   });
   let x = _$$Xm();
-  let S = md(y6(x));
+  let S = useAtomWithSubscription(y6(x));
   S.productComponents = {
     modified: {
       wellFormed: e5((u = S.productComponents).modified.wellFormed),
@@ -315,7 +315,7 @@ function e4({
           noMargin: !0,
           children: g && jsx("span", {
             className: "file_row--branchInfo--ZjSUe text--fontPos11--2LvXf text--_fontBase--QdLsd",
-            children: _$$tx("design_systems.libraries_modal.branch_of", {
+            children: renderI18nText("design_systems.libraries_modal.branch_of", {
               repoName: jsx("span", {
                 className: "file_row--branchInfoRepoName--Hve9w",
                 children: oj(h, e)
@@ -323,7 +323,7 @@ function e4({
             })
           })
         }), w > 0 && jsx(Ex, {
-          text: 0 === D ? _$$t("design_systems.libraries_modal.no_changes") : _$$t("design_systems.libraries_modal.x_changes", {
+          text: 0 === D ? getI18nString("design_systems.libraries_modal.no_changes") : getI18nString("design_systems.libraries_modal.x_changes", {
             numChanges: D
           }),
           color: D > 0 ? zE.BRAND : zE.TERTIARY,
@@ -348,12 +348,12 @@ function e4({
       publishedState: jsx(IK, {
         variant: "primary",
         disabled: !0,
-        children: _$$tx("design_systems.libraries_modal.publish")
+        children: renderI18nText("design_systems.libraries_modal.publish")
       }),
       emptyState: jsx(IK, {
         variant: "primary",
         disabled: !0,
-        children: _$$tx("design_systems.libraries_modal.publish")
+        children: renderI18nText("design_systems.libraries_modal.publish")
       })
     })
   });
@@ -481,7 +481,7 @@ function tn({
     children: [jsx(h5, {
       children: jsx("div", {
         className: _$$s.font12.overflowHidden.ellipsis.$,
-        children: _$$t("design_systems.libraries_modal.plural.includes_missing_library", {
+        children: getI18nString("design_systems.libraries_modal.plural.includes_missing_library", {
           missingLibCount: a
         })
       })
@@ -642,7 +642,7 @@ function tp({
   return jsxs(Fragment, {
     children: [!t && jsx("div", {
       className: A ? tc : td,
-      children: _$$tx("design_systems.libraries_modal.ui_kits")
+      children: renderI18nText("design_systems.libraries_modal.ui_kits")
     }), v]
   });
 }
@@ -819,7 +819,7 @@ function tS(e) {
   } = e;
   let v = q5();
   let I = sO();
-  let E = !!md(_$$t2).data;
+  let E = !!useAtomWithSubscription(_$$t2).data;
   let x = sZ();
   let {
     fileByKey
@@ -897,12 +897,12 @@ function tS(e) {
     showingDefaultSubscriptionsForUser,
     isSearching
   })), T?.type !== "currentFile" || (eh = null));
-  let eg = _$$tx("design_systems.libraries_modal.when_you_add_a_library_to_a_connected_project_external_teams_can_view_its_source_file_v2", {
-    externalTeamsAccessRestrictedText: planType === FOrganizationLevelType.ORG ? _$$t("design_systems.libraries_modal.by_default_external_teams_cant_access") : "",
+  let eg = renderI18nText("design_systems.libraries_modal.when_you_add_a_library_to_a_connected_project_external_teams_can_view_its_source_file_v2", {
+    externalTeamsAccessRestrictedText: planType === FOrganizationLevelType.ORG ? getI18nString("design_systems.libraries_modal.by_default_external_teams_cant_access") : "",
     learnMore: jsx(_$$N, {
       newTab: !0,
       href: "https://help.figma.com/hc/articles/30124855491863-Guide-to-connected-projects",
-      children: _$$t("resource_connection.request_modal.learn_more")
+      children: getI18nString("resource_connection.request_modal.learn_more")
     })
   });
   return jsxs("div", {
@@ -976,7 +976,7 @@ function tS(e) {
       children: jsx(_$$d, {
         checked: B,
         label: jsx(_$$J, {
-          children: _$$tx("design_systems.libraries_modal.show_enabled_libraries_filter")
+          children: renderI18nText("design_systems.libraries_modal.show_enabled_libraries_filter")
         }),
         onChange: V
       })
@@ -985,7 +985,7 @@ function tS(e) {
       children: jsx(_$$d, {
         checked: K,
         label: jsx(_$$J, {
-          children: _$$tx("design_systems.libraries_modal.show_libraries_added_to_connected_project_filter")
+          children: renderI18nText("design_systems.libraries_modal.show_libraries_added_to_connected_project_filter")
         }),
         onChange: q
       })
@@ -1053,7 +1053,7 @@ function tC({
         svg: _$$A2,
         className: tb
       }), jsx("div", {
-        children: _$$tx("design_systems.libraries_modal.you_can_t_publish_from_branches")
+        children: renderI18nText("design_systems.libraries_modal.you_can_t_publish_from_branches")
       })]
     })]
   });
@@ -1078,9 +1078,9 @@ function tT({
           className: _$$s.pt16.mx12.flex.flexColumn.font11.fpl__textBodyMediumLetterSpacing.$,
           children: [jsx("h2", {
             className: _$$s.fontSemiBold.$,
-            children: _$$tx("design_systems.libraries_modal.publish_components_as_a_library")
+            children: renderI18nText("design_systems.libraries_modal.publish_components_as_a_library")
           }), jsx("p", {
-            children: _$$tx("design_systems.libraries_modal.share_components_on_new_plan", {
+            children: renderI18nText("design_systems.libraries_modal.share_components_on_new_plan", {
               upgradePlanText: jsx($z, {
                 variant: "link",
                 onClick: function () {
@@ -1098,7 +1098,7 @@ function tT({
                   upsellSource: _$$b.LIBRARY_MODAL_UPSELL,
                   canUserAccessProFeature: !1
                 },
-                children: _$$tx("design_systems.libraries_modal.upgrade_to_professional_plan")
+                children: renderI18nText("design_systems.libraries_modal.upgrade_to_professional_plan")
               })
             })
           })]
@@ -1135,7 +1135,7 @@ function tT({
             svg: _$$A2,
             className: tb
           }), jsx("p", {
-            children: _$$tx("design_systems.libraries_modal.you_can_t_publish_from_branches")
+            children: renderI18nText("design_systems.libraries_modal.you_can_t_publish_from_branches")
           })]
         })]
       })
@@ -1156,7 +1156,7 @@ function tk({
   let m = useSelector(d1);
   let [h, g] = useState(new Set());
   let f = Fl();
-  let _ = md(qq);
+  let _ = useAtomWithSubscription(qq);
   let A = useMemo(() => d()(l, e => e.library_key), [l]);
   let [y, b] = useMemo(() => V()(p?.allUsedLibraryKeys ? Array.from(p.allUsedLibraryKeys) : [], e => !!A[e]), [A, p?.allUsedLibraryKeys]);
   let v = mo({
@@ -1177,7 +1177,7 @@ function tk({
     className: tI,
     children: [jsx("div", {
       className: "subscription_list_view--sectionHeader--lgMzP library_section_header--sectionHeader--U79xZ",
-      children: _$$tx("design_systems.libraries_modal.libraries_available_in_this_file")
+      children: renderI18nText("design_systems.libraries_modal.libraries_available_in_this_file")
     }), w.map(a => {
       let l = o && a && o[a.library_file_key];
       let d = _$$E(a);
@@ -1227,22 +1227,22 @@ function tk({
 function tR() {
   return jsx("div", {
     className: tE,
-    children: _$$tx("design_systems.libraries_modal.enabling_a_file_will_make_its_styles_available_in_all_personal_drafts")
+    children: renderI18nText("design_systems.libraries_modal.enabling_a_file_will_make_its_styles_available_in_all_personal_drafts")
   });
 }
 function tN(e) {
   let {
     roles
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     roles: e.roles
   }));
   if (e.isEmpty) return jsx("div", {
     className: tE,
-    children: _$$tx("design_systems.libraries_modal.there_are_no_published_components_or_styles_in_your_team")
+    children: renderI18nText("design_systems.libraries_modal.there_are_no_published_components_or_styles_in_your_team")
   });
   if (e.canEditSubscriptions) return jsx("div", {
     className: tE,
-    children: _$$tx("design_systems.libraries_modal.enabling_a_team_library_will_make_it_show_up_in_all_team_files")
+    children: renderI18nText("design_systems.libraries_modal.enabling_a_team_library_will_make_it_show_up_in_all_team_files")
   });
   {
     let i = [];
@@ -1252,23 +1252,23 @@ function tN(e) {
       !1 === t.pending && t.level >= _$$e2.ADMIN && i.push(t.user);
     }
     let a = "";
-    1 === i.length ? a = _$$t("design_systems.libraries_modal.admin_list_1", {
+    1 === i.length ? a = getI18nString("design_systems.libraries_modal.admin_list_1", {
       adminHandle: i[0].handle
-    }) : 2 === i.length ? a = _$$t("design_systems.libraries_modal.admin_list_2", {
+    }) : 2 === i.length ? a = getI18nString("design_systems.libraries_modal.admin_list_2", {
       adminHandle1: i[0].handle,
       adminHandle2: i[1].handle
-    }) : 3 === i.length ? a = _$$t("design_systems.libraries_modal.admin_list_3", {
+    }) : 3 === i.length ? a = getI18nString("design_systems.libraries_modal.admin_list_3", {
       adminHandle1: i[0].handle,
       adminHandle2: i[1].handle,
       adminHandle3: i[2].handle
-    }) : i.length >= 4 && (a = _$$t("design_systems.libraries_modal.admin_list_many", {
+    }) : i.length >= 4 && (a = getI18nString("design_systems.libraries_modal.admin_list_many", {
       adminHandle1: i[0].handle,
       adminHandle2: i[1].handle,
       numAdditionalAdmins: i.length - 2
     }));
     return jsxs("div", {
       className: tE,
-      children: [_$$tx("design_systems.libraries_modal.only_team_admins_can_enable_libraries_for_the_team"), a && jsx("div", {
+      children: [renderI18nText("design_systems.libraries_modal.only_team_admins_can_enable_libraries_for_the_team"), a && jsx("div", {
         children: a
       })]
     });
@@ -1291,7 +1291,7 @@ export function $$tM0({
     teams,
     openFileKey,
     openFile
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     user: e.user,
     teams: e.teams,
     openFileKey: e.openFile?.key || null,
@@ -1328,7 +1328,7 @@ export function $$tM0({
     }, 200);
   }, []);
   let X = useCallback(() => {
-    sx("Open remapping libraries modal", {
+    trackEventAnalytics("Open remapping libraries modal", {
       editingFileKey: openFileKey,
       libraryKeyToSwapFrom: M
     });
@@ -1372,13 +1372,13 @@ export function $$tM0({
     enabled: !!i
   });
   let ec = "loading" === W.status || null == z || "loading" === ed.status || !!(e && "loading" === el.status);
-  let eu = useRef(new jk("get_library_info", {}));
+  let eu = useRef(new PerfTimer("get_library_info", {}));
   useEffect(() => {
     let e = eu.current;
     if (ec) e.start();else {
       e.stop();
       let t = e.getElapsedTime();
-      sx("load_library_modal", {
+      trackEventAnalytics("load_library_modal", {
         elapsedMs: t,
         include_thumbnails: C,
         is_org_user: !!L,

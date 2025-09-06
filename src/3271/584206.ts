@@ -6,7 +6,7 @@ import { L } from "../905/704296";
 import { xk } from "@stylexjs/stylex";
 import d from "classnames";
 import { IW } from "../figma_app/563413";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { qz, t7, un, SO, DP, nU, nR } from "../3271/440214";
 var c = d;
 export function $$x1({
@@ -59,7 +59,7 @@ function p({
       query: e,
       withUI3Icon: !0
     }), null != o && jsx(K, {
-      "aria-label": _$$t("common.close"),
+      "aria-label": getI18nString("common.close"),
       onClick: o,
       children: jsx(L, {})
     })]

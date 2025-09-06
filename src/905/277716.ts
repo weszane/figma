@@ -3,7 +3,7 @@ import { useRef, useCallback } from "react";
 import { F } from "../905/680873";
 import { o3, nt } from "../905/226610";
 import { Pu, MF, ps, ET, VC, R8 } from "../905/939257";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { wu, EM } from "../905/729783";
 import { f as _$$f } from "../905/896141";
 import { C } from "../905/213457";
@@ -110,33 +110,33 @@ function $$E({
   let E = function (e) {
     let t = useRef(null);
     return {
-      onKeyDownCapture: useCallback((i) => {
+      onKeyDownCapture: useCallback(i => {
         let n = g(i);
         n && b(n, i.key, t, e);
       }, [e]),
-      onPointerDownCapture: useCallback((t) => {
+      onPointerDownCapture: useCallback(t => {
         let i = g(t);
         i && A(i, e);
       }, [e]),
-      onChangeCapture: useCallback((i) => {
+      onChangeCapture: useCallback(i => {
         let n = g(i);
         n && v(n, t, e);
       }, [e]),
-      onBlurCapture: useCallback((e) => {
+      onBlurCapture: useCallback(e => {
         let i = g(e);
         i && y(i, t);
       }, [])
     };
-  }(useCallback((e) => {
+  }(useCallback(e => {
     !error && VC(trackablePath) && function (e, t) {
       let i = {
         ...e,
         ...t
       };
       wu.trigger(EM, i);
-      sx(EM, i);
+      trackEventAnalytics(EM, i);
     }({
-      trackablePath: trackablePath.map((e) => e.name),
+      trackablePath: trackablePath.map(e => e.name),
       interactableId: m.name,
       trackingMethod: "automatic",
       ...e

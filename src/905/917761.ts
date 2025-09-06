@@ -1,6 +1,6 @@
 import { useRef, useCallback } from "react";
 import { tT } from "../905/663269";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { Rs } from "../figma_app/288654";
 import { I7 } from "../figma_app/594947";
 import { kh } from "../905/86266";
@@ -40,7 +40,7 @@ export function $$_0(e, t) {
   let E = y?.orgID ? _getConfig : getConfig;
   let x = useCallback(() => {
     let e = E();
-    I.current || (az.trackDefinedEvent("activation.experiment_exposure_for_user", {
+    I.current || (analyticsEventManager.trackDefinedEvent("activation.experiment_exposure_for_user", {
       userId: v?.id,
       fileKey: b?.key,
       orgId: y?.orgID,

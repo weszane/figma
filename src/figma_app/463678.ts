@@ -1,5 +1,5 @@
 import { D1Y } from "../figma_app/763686";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { b4, _V, kM } from "../figma_app/421886";
 import { A } from "../3850/868552";
 import { A as _$$A } from "../3850/839808";
@@ -26,23 +26,23 @@ export var $$f2 = (e => (e[e.PREV = -1] = "PREV", e[e.NONE = 0] = "NONE", e[e.NE
 export function $$E4(e) {
   switch (e) {
     case kM.Text:
-      return t("canvas_search.filter.text");
+      return getI18nString("canvas_search.filter.text");
     case kM.FrameOrGroup:
-      return t("canvas_search.filter.frame_or_group");
+      return getI18nString("canvas_search.filter.frame_or_group");
     case kM.Component:
-      return t("canvas_search.filter.component");
+      return getI18nString("canvas_search.filter.component");
     case kM.Instance:
-      return t("canvas_search.filter.instance");
+      return getI18nString("canvas_search.filter.instance");
     case kM.Image:
-      return t("canvas_search.filter.image");
+      return getI18nString("canvas_search.filter.image");
     case kM.Shape:
-      return t("canvas_search.filter.shape");
+      return getI18nString("canvas_search.filter.shape");
     case kM.Other:
-      return t("canvas_search.filter.other");
+      return getI18nString("canvas_search.filter.other");
     case kM.MatchCase:
-      return t("canvas_search.filter.match_case");
+      return getI18nString("canvas_search.filter.match_case");
     case kM.WholeWords:
-      return t("canvas_search.filter.whole_words");
+      return getI18nString("canvas_search.filter.whole_words");
   }
 }
 export function $$y6(e) {

@@ -17,7 +17,7 @@ import { fu } from "../figma_app/831799";
 import { d$ } from "../figma_app/291792";
 import { VU } from "../905/625959";
 import { jr, W0 } from "../figma_app/896988";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { pi } from "../figma_app/357047";
 import { e0 } from "../905/696396";
 import { $A } from "../905/782918";
@@ -25,7 +25,7 @@ import { j as _$$j } from "../905/834956";
 import { getFeatureFlags } from "../905/601108";
 import { isDevEnvironment } from "../figma_app/169182";
 import { YQ } from "../905/502364";
-import { fp } from "../figma_app/27355";
+import { useAtomValueAndSetter } from "../figma_app/27355";
 import { Point } from "../905/736624";
 import { cH } from "../figma_app/451396";
 import { Oq } from "../figma_app/478201";
@@ -59,9 +59,9 @@ let U = Ju(function () {
   let t = useCallback(() => {
     e(AS());
   }, [e]);
-  let [r, a] = fp(cH);
-  let [o, l] = fp(MW);
-  let [d, c] = fp(Oq);
+  let [r, a] = useAtomValueAndSetter(cH);
+  let [o, l] = useAtomValueAndSetter(MW);
+  let [d, c] = useAtomValueAndSetter(Oq);
   return jsx(Ao, {
     title: "Code Connect Debug Settings",
     headerSize: "small",
@@ -388,7 +388,7 @@ class e_ extends o6 {
       children: jsx($$em1, {
         ref: this.multilevelDropdownRef,
         activatePathOnMount: this.props.dropdown.data.togglePreferences ? this.getPathToPreferences() : void 0,
-        allowCodegenOptions: this.props.selectedView.editorType === nT.Design,
+        allowCodegenOptions: this.props.selectedView.editorType === FEditorType.Design,
         alwaysShowCheckMarkOffset: !0,
         appModel: this.props.appModel,
         "aria-labelledby": this.props["aria-labelledby"],

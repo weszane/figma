@@ -1,6 +1,6 @@
-import { ED, x1, xi } from "../905/714362";
+import { logDebug, logError, logWarning } from "../905/714362";
 export function $$r0(...e) {
-  ED("CMS", ...e);
+  logDebug("CMS", ...e);
 }
 export function $$a2(...e) {
   let t = [...e];
@@ -8,10 +8,10 @@ export function $$a2(...e) {
     ...t[2],
     reportAsSentryError: !0
   });
-  x1("CMS", ...t);
+  logError("CMS", ...t);
 }
 export function $$s1(...e) {
-  xi("CMS", ...e);
+  logWarning("CMS", ...e);
 }
 export const FU = $$r0;
 export const Q2 = $$s1;

@@ -6,7 +6,7 @@ import { A as _$$A } from "../905/920165";
 import { K } from "../905/443068";
 import { K as _$$K } from "../905/851274";
 import { Pt } from "../figma_app/806412";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { _P } from "../figma_app/2590";
 import { X7 } from "../905/713167";
 import { fI } from "../figma_app/626177";
@@ -51,7 +51,7 @@ export function $$_0(e) {
     recordingKey: e.recordingKey
   });
   let _ = jsx(_$$A, {
-    "aria-label": _$$t("fullscreen.properties_panel.gif_frame"),
+    "aria-label": getI18nString("fullscreen.properties_panel.gif_frame"),
     bigStep: 10,
     defaultValue: 0,
     disabled: e.disabled || e.playing,
@@ -87,7 +87,7 @@ function A({
     onClick: () => {
       t(!1);
     },
-    "aria-label": _$$t("fullscreen.properties_panel.stop"),
+    "aria-label": getI18nString("fullscreen.properties_panel.stop"),
     recordingKey: Pt(r, "stopGIF"),
     children: jsx(d, {})
   }) : jsx(K, {
@@ -95,7 +95,7 @@ function A({
     onClick: () => {
       t(!0);
     },
-    "aria-label": _$$t("fullscreen.properties_panel.play"),
+    "aria-label": getI18nString("fullscreen.properties_panel.play"),
     recordingKey: Pt(r, "playGIF"),
     children: jsx(_$$K, {})
   });

@@ -7,7 +7,7 @@ import { E as _$$E } from "../905/277716";
 import { k } from "../905/582200";
 import { v as _$$v } from "../642/135773";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Yr } from "../figma_app/8833";
 import { z5 } from "../905/713722";
 import { E7, gl, oV, hS } from "../905/216495";
@@ -58,19 +58,19 @@ export function $$C0({
         onClick: d,
         ref: h,
         recordingKey: t,
-        "aria-label": _$$t("slides.properties_panel.overlay"),
+        "aria-label": getI18nString("slides.properties_panel.overlay"),
         children: jsxs("span", {
           className: _$$s.inlineFlex.gap6.pl4.ellipsis.noWrap.overflowHidden.$,
           children: [jsx(_$$v, {
             paint: y,
             colors: []
-          }), tx("slides.properties_panel.overlay")]
+          }), renderI18nText("slides.properties_panel.overlay")]
         })
       })
     }), l && r && jsx("div", {
       ref: p,
       children: jsx(Ao, {
-        title: _$$t("slides.properties_panel.overlay"),
+        title: getI18nString("slides.properties_panel.overlay"),
         headerSize: "small",
         initialPosition: r,
         initialWidth: 240,
@@ -101,14 +101,14 @@ function N({
   return jsxs(k, {
     name: "slides_overlay_controls",
     children: [jsx(K, {
-      ariaLabel: _$$t("slides.properties_panel.overlay.opacity_slider_aria_label"),
+      ariaLabel: getI18nString("slides.properties_panel.overlay.opacity_slider_aria_label"),
       bigStep: .1,
       max: 1,
       min: 0,
       numberInput: jsx(_$$E, {
         name: "slides_image_overlay_opacity_slider",
         children: jsx(Y, {
-          "data-tooltip": _$$t("fullscreen.scrubbable.opacity"),
+          "data-tooltip": getI18nString("fullscreen.scrubbable.opacity"),
           value: h ? oV : overlayPaint?.opacity || 0,
           onValueChange: onOpacityChange,
           dispatch: t

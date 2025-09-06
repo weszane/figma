@@ -7,7 +7,7 @@ import { Pt } from "../figma_app/806412";
 import { E as _$$E } from "../905/277716";
 import { Point } from "../905/736624";
 import { oW } from "../905/675859";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { mz } from "../figma_app/975811";
 import { Y5 } from "../figma_app/455680";
 import { _G, Pv } from "../905/619652";
@@ -170,7 +170,7 @@ function R({
       style: {
         objectFit: "contain"
       },
-      alt: t("cooper.toolbar.export_modal.preview_thumbnail_alt")
+      alt: getI18nString("cooper.toolbar.export_modal.preview_thumbnail_alt")
     })
   });
 }

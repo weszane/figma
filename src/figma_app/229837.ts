@@ -1,8 +1,8 @@
 import { getFeatureFlags } from "../905/601108";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { getInitialOptions } from "../figma_app/169182";
 import { C as _$$C } from "../905/797765";
-import { nl } from "../figma_app/257275";
+import { isInteractionPathCheck } from "../figma_app/897289";
 var n;
 let d = !1;
 let c = [];
@@ -73,25 +73,25 @@ export function $$m1() {
     let t = getInitialOptions().user_data;
     if (!t?.id) {
       console.warn("Can't post to me channel without user id available");
-      sx("Me Channel UserId Missing");
+      trackEventAnalytics("Me Channel UserId Missing");
       return;
     }
     let r = `/me-${t?.id}`;
     if (!(r in p)) {
-      if (console.warn("We're not subscribed to the me channel"), sx("Me Channel Subscription Missing"), t?.realtime_token) {
-        sx("Me Channel Resubscribe");
+      if (console.warn("We're not subscribed to the me channel"), trackEventAnalytics("Me Channel Subscription Missing"), t?.realtime_token) {
+        trackEventAnalytics("Me Channel Resubscribe");
         let e = $$_0(t.realtime_token);
         p[r] = e;
         x(e);
       } else {
         console.warn("We're unable to subscribe to the me channel; server will reject this message");
-        sx("Me Channel No Token");
+        trackEventAnalytics("Me Channel No Token");
         return;
       }
     }
     if (!n || n.readyState !== n.OPEN) {
-      nl() || console.warn("Sending to me without open websocket");
-      sx("Me Channel Websocket Missing");
+      isInteractionPathCheck() || console.warn("Sending to me without open websocket");
+      trackEventAnalytics("Me Channel Websocket Missing");
       return;
     }
     let i = JSON.stringify([{

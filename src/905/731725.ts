@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { getFeatureFlags } from "../905/601108";
 import { resourceUtils } from "../905/989992";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { IT } from "../figma_app/566371";
 import { I } from "../905/485103";
 import { BU, LK } from "../figma_app/199513";
@@ -47,7 +47,7 @@ function u({
   isPaginated: i
 }) {
   I(t, (t, n, r) => {
-    n || r || 0 === t || az.trackDefinedMetric("file_browser.folder_preview_files_load_time", {
+    n || r || 0 === t || analyticsEventManager.trackDefinedMetric("file_browser.folder_preview_files_load_time", {
       durationMs: t,
       isPaginated: i,
       folderId: e

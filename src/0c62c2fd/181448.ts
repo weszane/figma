@@ -10,11 +10,11 @@ import { O as _$$O } from "../905/501876";
 import { A as _$$A } from "../905/215698";
 import { _YF, xal, h3O, kul, Ez5, glU, zIx } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import g from "classnames";
 import { v_, aH, AF, iQ, Pt, rf } from "../figma_app/806412";
 import { B as _$$B } from "../905/714743";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { Yh } from "../figma_app/888478";
 import { $ as _$$$ } from "../0c62c2fd/637169";
@@ -153,8 +153,8 @@ export function $$U1({
   let et = useDispatch();
   let er = "whiteboard" === lg();
   let [ea, es] = useState(!1);
-  let ei = md(_$$l2);
-  let en = md(Yh);
+  let ei = useAtomWithSubscription(_$$l2);
+  let en = useAtomWithSubscription(Yh);
   let eo = Fk((e, t, r) => getFeatureFlags().gate_memory_usage_computations && !r ? null : e.get(t)?.nodeMemoryUsage, r, z);
   let el = Fk((e, t, r) => getFeatureFlags().gate_memory_usage_computations && !r ? null : e.get(t)?.rootMemoryUsage, r, z);
   let ed = useMemo(() => Fy(X, r) === xal.LOADED, [r, X]);
@@ -176,7 +176,7 @@ export function $$U1({
       if (eu) {
         et(_$$F.enqueue({
           type: "offline-page-switch",
-          message: _$$t("fullscreen.pages_panel.unavailable_offline")
+          message: getI18nString("fullscreen.pages_panel.unavailable_offline")
         }));
         return;
       }
@@ -227,13 +227,13 @@ export function $$U1({
   let eR = eu && !eT && jsx("div", {
     className: Nr,
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": _$$t("fullscreen.pages_panel.unavailable_offline"),
+    "data-tooltip": getI18nString("fullscreen.pages_panel.unavailable_offline"),
     "data-onboarding-key": "page-unavailable-offline",
     children: jsx(_$$B, {
       className: VQ,
       svg: _$$A2,
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": _$$t("fullscreen.pages_panel.unavailable_offline"),
+      "data-tooltip": getI18nString("fullscreen.pages_panel.unavailable_offline"),
       "data-onboarding-key": "page-unavailable-offline"
     })
   });
@@ -242,7 +242,7 @@ export function $$U1({
     children: ev
   });
   let eO = eE && !t ? jsx($, {
-    accessibleLabel: ee ? _$$t("fullscreen.pages_panel.page_row.more_actions", {
+    accessibleLabel: ee ? getI18nString("fullscreen.pages_panel.page_row.more_actions", {
       pageName: o
     }) : void 0,
     onContextMenuCallback: G,
@@ -332,7 +332,7 @@ export function $$W0({
   return l && !o ? jsx(_$$g, {
     className: "pages_panel_row--pageCompleted--gzdWd",
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": _$$t("dev_handoff.status.completed"),
+    "data-tooltip": getI18nString("dev_handoff.status.completed"),
     "data-testid": "pageCompletedIndicator"
   }) : o || l ? jsx(_$$O, {
     className: h()("pages_panel_row--pageReady--XaDiG", {
@@ -342,7 +342,7 @@ export function $$W0({
       [t]: "8px"
     } : void 0,
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": _$$t("dev_handoff.tag.ready_to_build"),
+    "data-tooltip": getI18nString("dev_handoff.tag.ready_to_build"),
     "data-testid": "pageReadyIndicator"
   }) : r;
 }
@@ -380,7 +380,7 @@ function $({
       "pages_panel_row--pageMoreActionsAbsolutePosition--S-xcp": d
     }),
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": _$$t("fullscreen.pages_panel.more_pages_actions"),
+    "data-tooltip": getI18nString("fullscreen.pages_panel.more_pages_actions"),
     "data-tooltip-show-above": !0,
     children: jsx(_$$A, {
       className: "pages_panel_row--pageMoreActionsIcon--kzZVn"

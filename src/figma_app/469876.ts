@@ -1,23 +1,54 @@
-import { getInitialOptions } from "../figma_app/169182";
-export function $$i2() {
-  return getInitialOptions().frame_context?.type === "integration";
+import { getInitialOptions } from '../figma_app/169182'
+
+/**
+ * Checks if the current frame context is an integration.
+ * Original: $$i2
+ */
+export function isIntegrationContext(): boolean {
+  return getInitialOptions().frame_context?.type === 'integration'
 }
-export function $$a3() {
-  return $$i2() && "google-meet" === getInitialOptions().integration_host;
+
+/**
+ * Checks if the integration host is Google Meet.
+ * Original: $$a3
+ */
+export function isGoogleMeetIntegration(): boolean {
+  return isIntegrationContext() && getInitialOptions().integration_host === 'google-meet'
 }
-export function $$s1() {
-  return $$a3() && !!getInitialOptions().is_meet_hardware;
+
+/**
+ * Checks if the integration is Google Meet hardware.
+ * Original: $$s1
+ */
+export function isGoogleMeetHardwareIntegration(): boolean {
+  return isGoogleMeetIntegration() && !!getInitialOptions().is_meet_hardware
 }
-export function $$o0() {
-  return $$i2() && "zoom" === getInitialOptions().integration_host;
+
+/**
+ * Checks if the integration host is Zoom.
+ * Original: $$o0
+ */
+export function isZoomIntegration(): boolean {
+  return isIntegrationContext() && getInitialOptions().integration_host === 'zoom'
 }
-export class $$l4 {
-  static isGoogleClassroomIntegration() {
-    return $$i2() && "google-classroom" === getInitialOptions().integration_host;
+
+/**
+ * Utility class for integration checks.
+ * Original: $$l4
+ */
+export class IntegrationUtils {
+  /**
+   * Checks if the integration host is Google Classroom.
+   * Original: isGoogleClassroomIntegration
+   */
+  static isGoogleClassroomIntegration(): boolean {
+    return isIntegrationContext() && getInitialOptions().integration_host === 'google-classroom'
   }
 }
-export const MP = $$o0;
-export const U1 = $$s1;
-export const ck = $$i2;
-export const eM = $$a3;
-export const pb = $$l4;
+
+// Refactored exports to match new names
+export const MP = isZoomIntegration
+export const U1 = isGoogleMeetHardwareIntegration
+export const ck = isIntegrationContext
+export const eM = isGoogleMeetIntegration
+export const pb = IntegrationUtils

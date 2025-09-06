@@ -1,7 +1,7 @@
 import { isNotNullish } from "../figma_app/95419";
 import { getFeatureFlags } from "../905/601108";
-import { eU } from "../figma_app/27355";
-import { t as _$$t } from "../905/303541";
+import { atom } from "../figma_app/27355";
+import { getI18nString } from "../905/303541";
 import { tI } from "../figma_app/847597";
 import { i5 } from "../figma_app/845611";
 import { Ib } from "../905/129884";
@@ -10,8 +10,8 @@ var $$c2 = (e => (e.AVAILABLE_SEAT = "available_seat", e.PRORATION_NOT_ENABLED =
 let $$u9 = "admin_requests_dashboard";
 let $$m8 = "admin_seat_requests_page";
 let $$_0 = "admin_request_flyout";
-let $$p7 = eU(!1);
-let $$g4 = eU(new Set());
+let $$p7 = atom(!1);
+let $$g4 = atom(new Set());
 export function $$h10(e, t, a) {
   return !!getFeatureFlags().ff_async_upgrade_request_approvals || (e || t.length > 5) && a;
 }
@@ -39,10 +39,10 @@ export function $$y3(e, t, a, s) {
     "data-tooltip": void 0,
     "data-tooltip-type": void 0
   } : {
-    "data-tooltip": null === t.price && "available_seat" === t.reason ? s ? _$$t("admin_dashboard.requests.approve.no_cost_associated") : _$$t("admin_dashboard.requests.approve.seat_paid_for") : t.price && s ? _$$t("admin_dashboard.requests.approve.cost_associated", {
+    "data-tooltip": null === t.price && "available_seat" === t.reason ? s ? getI18nString("admin_dashboard.requests.approve.no_cost_associated") : getI18nString("admin_dashboard.requests.approve.seat_paid_for") : t.price && s ? getI18nString("admin_dashboard.requests.approve.cost_associated", {
       seatType: tI(e),
       seatCost: t.price
-    }) : _$$t("admin_dashboard.requests.approve.adds_paid_seat", {
+    }) : getI18nString("admin_dashboard.requests.approve.adds_paid_seat", {
       seatType: tI(e)
     }),
     "data-tooltip-type": Ib.TEXT,

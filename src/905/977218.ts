@@ -2,9 +2,9 @@ import { debounce } from "../905/915765";
 import { c2 } from "../905/382883";
 import { getFeatureFlags } from "../905/601108";
 import { NC } from "../905/17179";
-import { jk } from "../905/609396";
+import { PerfTimer } from "../905/609396";
 import { XHR, XHRError } from "../905/910117";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
 import { W0 as _$$W, Dy as _$$Dy, ky as _$$ky, NR as _$$NR, Pj as _$$Pj, r0 as _$$r, Je as _$$Je, pY as _$$pY } from "../figma_app/925970";
 import { nF } from "../905/350402";
@@ -173,7 +173,7 @@ let $$N9 = nF((e, t) => {
 });
 let P = (e, t, i, n, r, s) => {
   e || console.error("We shouldn't be searching without setting a sessionId");
-  let c = new jk("search.timer.unified_search", {});
+  let c = new PerfTimer("search.timer.unified_search", {});
   c.start();
   let u = ea(t, i.sortState);
   return new Promise((o, p) => {
@@ -188,7 +188,7 @@ let P = (e, t, i, n, r, s) => {
       ...h,
       searchModelType: t
     }, $W.getFullResults(m)).then(e => {
-      e.data || p(_$$t("search.invalid_search_endpoint_result"));
+      e.data || p(getI18nString("search.invalid_search_endpoint_result"));
       let n = r.getState().search.parameters.facetFilters?.searchModelType ?? uH.FILES;
       if (n === t && (r.dispatch($$X12({
         parameters: {
@@ -220,7 +220,7 @@ let P = (e, t, i, n, r, s) => {
 };
 let O = (e, t, i, n, r, a) => {
   e || console.error("We shouldn't be searching without setting a sessionId");
-  let s = new jk("search.timer.unified_search", {});
+  let s = new PerfTimer("search.timer.unified_search", {});
   s.start();
   return new Promise((o, c) => {
     var u;
@@ -234,7 +234,7 @@ let O = (e, t, i, n, r, a) => {
       sessionId: e || "",
       ...p
     }, $W.getPreviewResults(u)).then(e => {
-      e.data || c(_$$t("search.invalid_search_endpoint_result"));
+      e.data || c(getI18nString("search.invalid_search_endpoint_result"));
       r.dispatch($$Z32({
         parameters: {
           ...t
@@ -410,4 +410,4 @@ export const uL = $$y28;
 export const vK = $$S29;
 export const vj = $$I30;
 export const w2 = $$Y31;
-export const zy = $$Z32; 
+export const zy = $$Z32;

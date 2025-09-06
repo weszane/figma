@@ -11,7 +11,7 @@ import { Yo } from "../figma_app/637027";
 import { t } from "../905/331623";
 import { s as _$$s } from "../cssbuilder/589278";
 import { Me } from "../figma_app/617427";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { af } from "../figma_app/559491";
 import { Q7 } from "../905/15667";
 import { fu } from "../figma_app/831799";
@@ -20,7 +20,7 @@ import { JT, vA } from "../figma_app/300692";
 import { O as _$$O2 } from "../figma_app/185954";
 import { R as _$$R } from "../figma_app/612938";
 import { bD } from "../figma_app/45218";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { FW, ZQ, Q7 as _$$Q } from "../figma_app/155287";
 import { Ib } from "../905/129884";
 import { Fr } from "../905/622391";
@@ -48,7 +48,7 @@ let P = class e extends PureComponent {
         canRun
       } = JT({
         plugin: e.plugin,
-        editorType: this.props.editorType ?? nT.Design
+        editorType: this.props.editorType ?? FEditorType.Design
       });
       if (canRun) return await _$$R.instance.enqueue({
         mode: "run-forever",
@@ -58,7 +58,7 @@ let P = class e extends PureComponent {
           command: e.relaunchButton.command,
           queryMode: !1,
           runMode: "default",
-          triggeredFrom: this.props.editorType === nT.DevHandoff ? "handoff-relaunch" : "relaunch",
+          triggeredFrom: this.props.editorType === FEditorType.DevHandoff ? "handoff-relaunch" : "relaunch",
           ignoreForRunLastPlugin: !0,
           isWidget: !1
         }
@@ -91,7 +91,7 @@ let P = class e extends PureComponent {
   render() {
     let t = vA(this.props.pluginRelaunchData, this.props.publishedPlugins, this.props.localPlugins, this.props.orgEntity, this.props.numSelected, (t, n) => e.refreshCache.debounceRefresh(t, this.fetchPlugin.bind(this), n), FW.FIGMA);
     if (0 === t.length) return null;
-    let n = this.props.title ?? _$$t("properties_panel.plugin.title");
+    let n = this.props.title ?? getI18nString("properties_panel.plugin.title");
     return this.props.isDevHandoff ? jsx(_$$k, {
       name: "inspection_panel",
       children: jsx(VZ, {
@@ -184,11 +184,11 @@ function B(e) {
             trackingProperties: {
               action: "minus"
             },
-            "aria-label": _$$t("properties_panel.plugin.remove_tooltip"),
+            "aria-label": getI18nString("properties_panel.plugin.remove_tooltip"),
             onClick: () => e.onRemoveRelaunchData(e.relaunchData.plugin.plugin_id),
             htmlAttributes: {
               "data-tooltip-type": Ib.TEXT,
-              "data-tooltip": _$$t("properties_panel.plugin.remove_tooltip")
+              "data-tooltip": getI18nString("properties_panel.plugin.remove_tooltip")
             },
             children: jsx(_$$O, {})
           })
@@ -198,7 +198,7 @@ function B(e) {
       className: d()("plugin_panel--relaunchDescription--TmxcU", e.collapsibleStyling && "plugin_panel--relaunchDescriptionPadded--G2-Tl"),
       children: jsx("pre", {
         className: "plugin_panel--relaunchDescriptionText--8x1PM ellipsis--ellipsisAfter3Lines--h405C ellipsis--_ellipsisAfterNLines--LzI7k",
-        children: relaunchButton.description === _$$Q ? tx("properties_panel.plugin.mixed_descriptions") : relaunchButton.description
+        children: relaunchButton.description === _$$Q ? renderI18nText("properties_panel.plugin.mixed_descriptions") : relaunchButton.description
       })
     })]
   });

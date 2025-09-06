@@ -9,13 +9,13 @@ import { glU, m1T, NLJ } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { xx } from "../figma_app/815945";
 import { localStorageRef } from "../905/657224";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { ZC } from "../figma_app/39751";
 import { Pt, rf } from "../figma_app/806412";
 import { _f } from "../905/760682";
-import { nl } from "../figma_app/257275";
+import { isInteractionPathCheck } from "../figma_app/897289";
 import { k as _$$k } from "../905/582200";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { oB, j7 } from "../905/929976";
 import { XE } from "../figma_app/91703";
 import { Bn, ay } from "../905/879323";
@@ -317,11 +317,11 @@ function en({
     childRight: A && jsx($4, {
       children: jsx(_$$K, {
         recordingKey: Pt(k, "addButton"),
-        "aria-label": _$$t("design_systems.styles.tooltips.create"),
+        "aria-label": getI18nString("design_systems.styles.tooltips.create"),
         onClick: q,
         htmlAttributes: {
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": _$$t("design_systems.styles.tooltips.create")
+          "data-tooltip": getI18nString("design_systems.styles.tooltips.create")
         },
         children: jsx(_$$x, {})
       })
@@ -444,7 +444,7 @@ function eu({
         onClick: q,
         htmlAttributes: {
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": a ? _$$t("design_systems.styles.edit_style") : _$$t("design_systems.styles.view_style"),
+          "data-tooltip": a ? getI18nString("design_systems.styles.edit_style") : getI18nString("design_systems.styles.view_style"),
           onMouseDown: dG,
           tabIndex: 0,
           onKeyDown: e => {
@@ -452,7 +452,7 @@ function eu({
           }
         },
         children: jsx(_$$A, {}),
-        "aria-label": a ? _$$t("design_systems.styles.edit_style") : _$$t("design_systems.styles.view_style")
+        "aria-label": a ? getI18nString("design_systems.styles.edit_style") : getI18nString("design_systems.styles.view_style")
       })]
     }),
     deleteSelectedItems: e,
@@ -541,13 +541,13 @@ function em({
       },
       children: jsx(_$$K, {
         recordingKey: Pt(l, "addButton"),
-        "aria-label": _$$t("design_systems.styles.tooltips.create_style_from_section", {
+        "aria-label": getI18nString("design_systems.styles.tooltips.create_style_from_section", {
           kind: XV(e).toLowerCase()
         }),
         onClick: c,
         htmlAttributes: {
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": _$$t("design_systems.styles.tooltips.create_style_from_section", {
+          "data-tooltip": getI18nString("design_systems.styles.tooltips.create_style_from_section", {
             kind: XV(e).toLowerCase()
           })
         },
@@ -640,17 +640,17 @@ function eC({
     children: jsx(eh, {
       recordingKey: "edit-style-option",
       onClick: w,
-      children: tx("design_systems.styles.view_style")
+      children: renderI18nText("design_systems.styles.view_style")
     })
   });
   let C = 1 === l && (t[0].type === PW.STYLE ? jsx(eh, {
     recordingKey: "edit-style-option",
     onClick: w,
-    children: tx("design_systems.styles.edit_style")
+    children: renderI18nText("design_systems.styles.edit_style")
   }) : jsx(eh, {
     recordingKey: "rename-folder-option",
     onClick: b,
-    children: tx("design_systems.styles.rename_folder")
+    children: renderI18nText("design_systems.styles.rename_folder")
   }));
   return jsxs(eg, {
     style: r.data.position,
@@ -658,35 +658,35 @@ function eC({
     children: [jsx(eh, {
       recordingKey: "create-folder-option",
       onClick: d,
-      children: tx("design_systems.styles.add_new_folder")
+      children: renderI18nText("design_systems.styles.add_new_folder")
     }), C, jsx(eh, {
       recordingKey: "delete-style-option",
       onClick: u,
-      children: tx("design_systems.styles.delete_styles", {
+      children: renderI18nText("design_systems.styles.delete_styles", {
         numStyles: l
       })
     }), jsx(ew, {}), jsx(eh, {
       recordingKey: "cut-style-option",
       onClick: y,
-      children: tx("design_systems.styles.cut_styles", {
+      children: renderI18nText("design_systems.styles.cut_styles", {
         numStyles: l
       })
     }), jsx(eh, {
       recordingKey: "copy-style-option",
       onClick: m,
-      children: tx("design_systems.styles.copy_styles", {
+      children: renderI18nText("design_systems.styles.copy_styles", {
         numStyles: l
       })
     }), jsx(eh, {
       recordingKey: "duplicate-style-option",
       onClick: p,
-      children: tx("design_systems.styles.duplicate_styles", {
+      children: renderI18nText("design_systems.styles.duplicate_styles", {
         numStyles: l
       })
     }), !!g && jsx(eh, {
       recordingKey: "paste-style-option",
       onClick: x,
-      children: tx("design_systems.styles.paste_styles", {
+      children: renderI18nText("design_systems.styles.paste_styles", {
         numStyles: g
       })
     })]
@@ -730,7 +730,7 @@ function eP({
     e.stopPropagation();
     t(YG());
     let l = a.current;
-    u ? w() : l && (sx("editor-local-styles-dropdown-show"), k());
+    u ? w() : l && (trackEventAnalytics("editor-local-styles-dropdown-show"), k());
   };
   let E = t => {
     e && Y5.triggerAction("set-tool-default");
@@ -752,7 +752,7 @@ function eP({
       className: et,
       onMouseDown: e => v && C(e),
       onClick: e => e.stopPropagation(),
-      children: tx("design_systems.styles.local_styles")
+      children: renderI18nText("design_systems.styles.local_styles")
     }), r && jsxs(Fragment, {
       children: [jsx(K0, {
         ref: a,
@@ -760,7 +760,7 @@ function eP({
         onClick: e => e.stopPropagation(),
         className: u ? "styles--stylesHeaderButtonHighlight--WTeWy raw_components--iconButtonSelected--bJibL raw_components--_iconButton---ybo6" : "styles--stylesHeaderButton--jhpA5 draggable_list--addButton--D0q--",
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": _$$t("design_systems.create_style.create_style"),
+        "data-tooltip": getI18nString("design_systems.create_style.create_style"),
         recordingKey: Pt(m, "addButton"),
         children: jsx(_$$e2, {})
       }), u && h && jsx(Cf, {
@@ -796,22 +796,22 @@ function eK(e) {
     case "TEXT":
       return {
         icon: jsx(_$$e3, {}),
-        label: _$$t("design_systems.styles.dropdown.text")
+        label: getI18nString("design_systems.styles.dropdown.text")
       };
     case "FILL":
       return {
         icon: jsx(_$$G, {}),
-        label: _$$t("design_systems.styles.dropdown.fill")
+        label: getI18nString("design_systems.styles.dropdown.fill")
       };
     case "GRID":
       return {
         icon: jsx(_$$E2, {}),
-        label: _$$t("design_systems.styles.dropdown.guide")
+        label: getI18nString("design_systems.styles.dropdown.guide")
       };
     case "EFFECT":
       return {
         icon: jsx(_$$n, {}),
-        label: _$$t("design_systems.styles.dropdown.effect")
+        label: getI18nString("design_systems.styles.dropdown.effect")
       };
     default:
       noop(e);
@@ -836,10 +836,10 @@ function eF({
   let y = useSelector(e => e.stylePreviewShown.isShown && e.stylePreviewShown.isCreating);
   let m = u && !manager.isOpen && !y;
   let x = useCallback(() => {
-    m && (manager.setOpen(!0), sx("editor-local-styles-dropdown-show"));
+    m && (manager.setOpen(!0), trackEventAnalytics("editor-local-styles-dropdown-show"));
   }, [manager, m]);
   let f = useCallback(e => {
-    manager.isOpen || sx("editor-local-styles-dropdown-show");
+    manager.isOpen || trackEventAnalytics("editor-local-styles-dropdown-show");
     onClick(e);
   }, [manager.isOpen, onClick]);
   let g = useCallback(n => {
@@ -860,7 +860,7 @@ function eF({
       className: et,
       onMouseDown: x,
       onClick: e => e.stopPropagation(),
-      children: tx("design_systems.styles.local_styles")
+      children: renderI18nText("design_systems.styles.local_styles")
     }), c && jsx(eO, {
       manager,
       triggerProps: {
@@ -881,7 +881,7 @@ function eO({
   return jsxs(bL, {
     manager: e,
     children: [jsx(_$$d, {
-      "aria-label": _$$t("design_systems.create_style.create_style"),
+      "aria-label": getI18nString("design_systems.create_style.create_style"),
       recordingKey: Pt(s, "addButton"),
       ...t,
       children: jsx(_$$e2, {})
@@ -974,7 +974,7 @@ function eY({
     a(ay({
       isRenaming: !1
     }));
-    sx("Style Inspected", {
+    trackEventAnalytics("Style Inspected", {
       styleType: e.style_type,
       from: "styleListClick"
     });
@@ -1139,7 +1139,7 @@ function ez({
     }));
   }, 200), [z, e]);
   useEffect(() => {
-    nl() || el();
+    isInteractionPathCheck() || el();
   }, [el, l]);
   let es = ZC(X);
   useEffect(() => {
@@ -1266,7 +1266,7 @@ function ez({
     } = j3(t, l);
     ed(t, prevItem, nextItem, !0);
     let o = In(t[0]?.name || "");
-    let r = _$$t("design_systems.create_style.new_folder");
+    let r = getI18nString("design_systems.create_style.new_folder");
     o && (r = `${o}/${r}`);
     let a = (e, t) => {
       if (e.type === PW.STYLE) {

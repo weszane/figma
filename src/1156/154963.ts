@@ -3,7 +3,7 @@ import { e as _$$e } from "../905/693478";
 import { g } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
 import { Xr } from "../figma_app/27355";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { ry } from "../figma_app/408883";
 import { E } from "../figma_app/924252";
 import { OU } from "../1156/721826";
@@ -34,16 +34,16 @@ let h = {
 };
 let $$g0 = () => [{
   key: E.SIGNUP_FLOW,
-  title: _$$t("living_designs.suggestions.signup_flow.title"),
-  prompt: _$$t("living_designs.suggestions.signup_flow.prompt")
+  title: getI18nString("living_designs.suggestions.signup_flow.title"),
+  prompt: getI18nString("living_designs.suggestions.signup_flow.prompt")
 }, {
   key: E.DASHBOARD,
-  title: _$$t("living_designs.suggestions.dashboard.title"),
-  prompt: _$$t("living_designs.suggestions.dashboard.prompt")
+  title: getI18nString("living_designs.suggestions.dashboard.title"),
+  prompt: getI18nString("living_designs.suggestions.dashboard.prompt")
 }, {
   key: E.GRADIENT_GALLERY,
-  title: _$$t("living_designs.suggestions.gradient_gallery.title"),
-  prompt: _$$t("living_designs.suggestions.gradient_gallery.prompt")
+  title: getI18nString("living_designs.suggestions.gradient_gallery.title"),
+  prompt: getI18nString("living_designs.suggestions.gradient_gallery.prompt")
 }];
 export function $$p1({
   nodeGuid: e
@@ -60,7 +60,7 @@ export function $$p1({
       "aria-hidden": !0,
       children: jsx(_$$e, {})
     }), jsx("h2", {
-      children: _$$t("living_designs.chat.empty_state.from_scratch")
+      children: getI18nString("living_designs.chat.empty_state.from_scratch")
     }), jsx("div", {
       className: "xh8yej3 x78zum5 x1q0g3np x1a02dak x167g77z xl56j7k",
       "data-onboarding-key": OU,

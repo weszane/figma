@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useEffect } from "react";
-import { eU, md, zl } from "../figma_app/27355";
+import { atom, useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 let $$s2 = {
   NAME_INPUT: "$name_input",
   DESCRIPTION_INPUT: "$description_input",
@@ -24,21 +24,21 @@ let $$s2 = {
   PROMPT_VISIBILITY_CHECKBOX: "$prompt_visibility_checkbox",
   DATA_SECURITY_QUESTION: e => `$data_security_question-${e}`
 };
-let o = eU(void 0);
+let o = atom(void 0);
 export function $$l0({
   id: e,
   children: t
 }) {
   let i = useRef(null);
   let s = useRef(null);
-  let l = md(o);
+  let l = useAtomWithSubscription(o);
   useEffect(() => {}, [e]);
   useEffect(() => {
     e === l && (i.current && (i.current.scrollIntoView({
       behavior: "smooth"
     }), s.current?.focus({
       preventScroll: !0
-    })), zl.set(o, void 0));
+    })), atomStoreManager.set(o, void 0));
   }, [e, l]);
   return jsx("div", {
     "data-id": `AutoScrollTarget-${e}`,
@@ -47,7 +47,7 @@ export function $$l0({
   });
 }
 export function $$d1(e) {
-  zl.set(o, e);
+  atomStoreManager.set(o, e);
 }
 export const Mm = $$l0;
 export const __ = $$d1;

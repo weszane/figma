@@ -1,5 +1,5 @@
-import { sx } from "../905/449184";
-import { t as _$$t } from "../905/303541";
+import { trackEventAnalytics } from "../905/449184";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { nF } from "../905/350402";
 import { s as _$$s } from "../905/58247";
@@ -23,7 +23,7 @@ let $$y0 = nF(async (e, {
     added,
     existed
   } = await E.createMultipleNewLocalFileExtensions({
-    title: _$$t("community.actions.pick_extension_manifest_file"),
+    title: getI18nString("community.actions.pick_extension_manifest_file"),
     filters: [{
       name: "Manifests",
       extensions: ["json"]
@@ -42,7 +42,7 @@ let $$y0 = nF(async (e, {
       type: ho.VALIDATE,
       text: `The manifest editorType does not include "${c}".`
     }));
-    if (sx("Added new plugin", {
+    if (trackEventAnalytics("Added new plugin", {
       how: "loaded",
       pluginId: s.id,
       version: s.api,
@@ -61,9 +61,9 @@ let $$y0 = nF(async (e, {
       scrollDevelopmentSectionIntoView: "figjam" === c,
       source: "extension-import"
     }), e.dispatch(F.enqueue({
-      message: s.name ? _$$t("community.actions.manifest_name_has_been_imported", {
+      message: s.name ? getI18nString("community.actions.manifest_name_has_been_imported", {
         manifestName: s.name
-      }) : "widget" === t ? _$$t("community.actions.widget_has_been_imported") : _$$t("community.actions.plugin_has_been_imported")
+      }) : "widget" === t ? getI18nString("community.actions.widget_has_been_imported") : getI18nString("community.actions.plugin_has_been_imported")
     })), r) {
       let t = e.getState().localPlugins[r];
       let n = t?.lastKnownPluginId ?? t?.plugin_id ?? t?.manifest.id;

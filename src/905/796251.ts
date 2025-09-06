@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "../vendor/514228";
 import { lQ } from "../905/934246";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { PY } from "../905/34809";
 import { U6, to, pS } from "../figma_app/909778";
 import { oB } from "../905/929976";
@@ -31,15 +31,15 @@ export function $$c0({
     }, !0)));
   };
   let v = g.map(e => ({
-    displayText: "" === e.name ? _$$t("sidebar.starred") : e.name,
+    displayText: "" === e.name ? getI18nString("sidebar.starred") : e.name,
     isChecked: m && h === e.id,
     alwaysShowCheckMarkOffset: !0,
     callback: () => b(!(m && h === e.id), e.id)
   }));
   let I = [...u(m, null, lQ, {
     separator: !0
-  }), ...u(m, _$$t("favorited_resources.remove_from_sidebar"), () => b(!1))];
-  let E = [...u(!t, _$$t("favorited_resources.create_a_new_section"), () => {
+  }), ...u(m, getI18nString("favorited_resources.remove_from_sidebar"), () => b(!1))];
+  let E = [...u(!t, getI18nString("favorited_resources.create_a_new_section"), () => {
     void 0 === A || A || _(PY());
     let e = h ? g.findIndex(e => e.id === h) : 0;
     p && _(to({
@@ -59,11 +59,11 @@ export function $$c0({
     separator: !0
   }];
   let S = g.find(e => e.id === h);
-  let w = m ? `${_$$t("favorited_resources.indicate_section_prefix")}: ${S?.name || _$$t("sidebar.starred")}` : _$$t("favorited_resources.add_to_sidebar");
+  let w = m ? `${getI18nString("favorited_resources.indicate_section_prefix")}: ${S?.name || getI18nString("sidebar.starred")}` : getI18nString("favorited_resources.add_to_sidebar");
   return g.length > 4 ? [{
     displayText: w,
     children: [...v, ...x, ...E]
-  }, ...I] : [...u(!0, _$$t("favorited_resources.add_to_sidebar"), lQ, {
+  }, ...I] : [...u(!0, getI18nString("favorited_resources.add_to_sidebar"), lQ, {
     disabled: !0
   }), ...v, ...x, ...I, ...x, ...E];
 }

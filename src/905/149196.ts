@@ -1,4 +1,4 @@
-import { um, eU } from "../figma_app/27355";
+import { um, atom } from "../figma_app/27355";
 var $$r2 = (e => (e[e.PENDING = 0] = "PENDING", e[e.SUCCESS = 1] = "SUCCESS", e[e.FAILURE = 2] = "FAILURE", e))($$r2 || {});
 let $$a0 = um([], (e, t) => {
   if (null == t) return e;
@@ -17,7 +17,7 @@ let $$a0 = um([], (e, t) => {
     networkState: t.networkState
   })).concat(e);
 });
-let $$s1 = eU(!1);
+let $$s1 = atom(!1);
 export const a4 = $$a0;
 export const eE = $$s1;
 export const tM = $$r2;

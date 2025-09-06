@@ -1,4 +1,4 @@
-import { Im } from "../figma_app/493477";
+import { isEmptyObject } from "../figma_app/493477";
 import { getFeatureFlags } from "../905/601108";
 import { serializeQuery } from "../905/634134";
 import { sy } from "../figma_app/930338";
@@ -90,7 +90,7 @@ export function $$h0(e) {
   e.isDevModeVarsTable ? (i.vars = 1, e.devModeVarsTableSelection && (i["var-id"] = Ml(e.devModeVarsTableSelection))) : e.isDevModeOverview ? i["ready-for-dev"] = 1 : e.devModeFocusId ? i["focus-id"] = EO(e.devModeFocusId) : e.isDevModeComponentBrowser && (i["component-browser"] = 1, e.componentKey && (i["component-key"] = e.componentKey));
   getFeatureFlags().dakota && e.cmsItemId && (i["cms-item-id"] = e.cmsItemId);
   e.isFigmakeFullscreenPreview && (i.fullscreen = 1);
-  let p = Im(i) ? "" : `?${serializeQuery(i)}`;
+  let p = isEmptyObject(i) ? "" : `?${serializeQuery(i)}`;
   let m = sy(e.file.name || "");
   return `${location.origin}/${c}/${e.file.key}${m.length > 0 ? `/${m}` : ""}${p}${u}`;
 }

@@ -1,5 +1,5 @@
 import { s as _$$s } from "../905/573154";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { h } from "../905/142086";
 import { e6 } from "../905/557142";
 import { L } from "../905/657783";
@@ -29,13 +29,13 @@ export async function $$c3(e, t, i) {
     "approved" === t ? (await L.acceptFileRoleRequest({
       roleRequestId,
       source: "share-modal"
-    }), e(_$$s.flash(_$$t("role_request_row.request_approved_for_user_props_handle_to_edit_file", {
+    }), e(_$$s.flash(getI18nString("role_request_row.request_approved_for_user_props_handle_to_edit_file", {
       userHandle: handle,
       requestType: $$p4(requestType)
     })))) : "denied" === t && (await L.denyFileRoleRequest({
       roleRequestId,
       source: "share-modal"
-    }), e(_$$s.flash(_$$t("role_request_row.request_denied_for_user_props_handle_to_edit_file", {
+    }), e(_$$s.flash(getI18nString("role_request_row.request_denied_for_user_props_handle_to_edit_file", {
       userHandle: handle,
       requestType: $$p4(requestType)
     }))));
@@ -45,7 +45,7 @@ export async function $$c3(e, t, i) {
 }
 export var $$u0 = (e => (e.Approved = "approved", e.Denied = "denied", e.Pending = "pending", e))($$u0 || {});
 export function $$p4(e) {
-  return e === e6.VIEWER ? _$$t("role_requests.view") : _$$t("role_requests.edit");
+  return e === e6.VIEWER ? getI18nString("role_requests.view") : getI18nString("role_requests.edit");
 }
 export function $$m1(e) {
   return e === e6.VIEWER ? "View" : "Edit";

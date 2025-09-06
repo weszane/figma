@@ -2,9 +2,9 @@ import { then } from "../1a115cee/344566";
 import { Oin } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { NC } from "../905/17179";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { N7 } from "../905/508367";
-import { eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { Ay } from "../905/612521";
 import { serializeQuery } from "../905/634134";
 import { H4 } from "../905/992467";
@@ -16,7 +16,7 @@ import { M as _$$M } from "../905/58217";
 import { F as _$$F } from "../905/224";
 import { Y5 } from "../figma_app/455680";
 import { N as _$$N, L as _$$L } from "../905/293182";
-import { ck } from "../figma_app/469876";
+import { isIntegrationContext } from "../figma_app/469876";
 import { _I, $N, J5 } from "../905/327855";
 import { Yu } from "../figma_app/139113";
 import { FPlanLimitationType, FFileType } from "../figma_app/191312";
@@ -129,12 +129,12 @@ let $$B1 = nF((e, {
   let a = () => {
     let r = B(t, i);
     e.dispatch($$U2(r));
-    sx("New Autosave File Open", {
+    trackEventAnalytics("New Autosave File Open", {
       openNewFileIn: i,
       source: n
     });
   };
-  eD ? a() : _$$M(r.id, t).then(i => {
+  desktopAPIInstance ? a() : _$$M(r.id, t).then(i => {
     if (i) {
       e.dispatch(to({
         type: g,
@@ -148,9 +148,9 @@ let $$B1 = nF((e, {
   });
 });
 let V = nF((e, t) => {
-  if (ck() || !t.allowOnDesktop && 600 > _$$N()) return;
+  if (isIntegrationContext() || !t.allowOnDesktop && 600 > _$$N()) return;
   let i = _I(t);
-  if (Y5.resetLoadedFigFile(), eD) {
+  if (Y5.resetLoadedFigFile(), desktopAPIInstance) {
     if (t.allowOnDesktop) $N(e, t, !1);else {
       J5(e, t);
       return;
@@ -163,7 +163,7 @@ let V = nF((e, t) => {
     Ay.redirect(`/file/new${e ? "?" + e : ""}`);
   } else $N(e, t, !1);
   _$$L();
-  let r = t.openNewFileIn === ai.SAME_TAB && (!eD || t.allowOnDesktop) ? Oin.HIDE_UI : Oin.OFF;
+  let r = t.openNewFileIn === ai.SAME_TAB && (!desktopAPIInstance || t.allowOnDesktop) ? Oin.HIDE_UI : Oin.OFF;
   Yu(!0);
   e.dispatch($$G3({
     openNewFileIn: t.openNewFileIn,

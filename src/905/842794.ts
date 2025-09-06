@@ -1,33 +1,58 @@
-import { COMMIT, REVERT, BEGIN } from "redux-optimist";
-let r = 0;
-export function $$a0() {
-  return r++;
-}
-export function $$s1(e, t, i) {
-  let r = $$a0();
-  e.then(e => (t({
-    type: null,
-    optimist: {
-      type: COMMIT,
-      id: r
-    }
-  }), e)).catch(() => {
-    t({
-      type: null,
-      optimist: {
-        type: REVERT,
-        id: r
-      }
-    });
-  });
-  t({
-    ...i,
+import { BEGIN, COMMIT, REVERT } from 'redux-optimist'
+
+/**
+ * Generates a unique optimist transaction id.
+ * @returns {number} Unique id
+ * @originalName $$a0
+ */
+export const generateOptimistId = (() => {
+  let currentId = 0
+  return () => currentId++
+})()
+
+/**
+ * Handles an async action with redux-optimist transaction lifecycle.
+ * Dispatches BEGIN, COMMIT, and REVERT actions as appropriate.
+ * @param promise The async operation (Promise)
+ * @param dispatch Redux dispatch function
+ * @param baseAction The base action to dispatch with BEGIN
+ * @returns The original promise
+ * @originalName $$s1
+ */
+export function handleOptimistTransaction(promise: Promise<any>, dispatch: (action: any) => void, baseAction: any): Promise<any> {
+  const id = generateOptimistId()
+  // Dispatch BEGIN action
+  dispatch({
+    ...baseAction,
     optimist: {
       type: BEGIN,
-      id: r
-    }
-  });
-  return e;
+      id,
+    },
+  })
+  // Handle promise resolution
+  promise
+    .then((result) => {
+      dispatch({
+        type: null,
+        optimist: {
+          type: COMMIT,
+          id,
+        },
+      })
+      return result
+    })
+    .catch(() => {
+      dispatch({
+        type: null,
+        optimist: {
+          type: REVERT,
+          id,
+        },
+      })
+    })
+  return promise
 }
-export const F = $$a0;
-export const f = $$s1;
+
+// Exported aliases for backward compatibility
+export const F = generateOptimistId // original: $$a0
+export const f = handleOptimistTransaction // original: $$s1

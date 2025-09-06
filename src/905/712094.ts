@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { Lf } from "../figma_app/637027";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { EB } from "../figma_app/831101";
 import { X } from "../905/33014";
 export function $$l0({
@@ -14,8 +14,8 @@ export function $$l0({
     children: [!!d && jsx(Lf, {
       value: l || "",
       htmlName: "legal_company_name",
-      label: _$$t("pro_cart.payment.legal_company_name_label"),
-      placeholder: _$$t("pro_cart.payment.legal_company_name_placeholder"),
+      label: getI18nString("pro_cart.payment.legal_company_name_label"),
+      placeholder: getI18nString("pro_cart.payment.legal_company_name_placeholder"),
       onChange: e => {
         d(e.target.value.trim());
       },

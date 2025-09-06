@@ -3,7 +3,7 @@ import { arraysEqual } from "../figma_app/656233";
 import { c2 } from "../905/382883";
 import { Egt } from "../figma_app/763686";
 import { dI, AD, sH, aI } from "../905/871411";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { d as _$$d, s as _$$s } from "../figma_app/429226";
 import { Y5 } from "../figma_app/455680";
 import { oV, gl, _W, hS } from "../905/216495";
@@ -194,7 +194,7 @@ export function $$T0(e, t) {
           });
         } else I.push(e);
       });
-      sx("prototype_update_selection_properties", {
+      trackEventAnalytics("prototype_update_selection_properties", {
         mixedUpdate: p,
         mixedUpdatedProperties: _,
         nonMixedUpdatedProperties: f,

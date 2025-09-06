@@ -3,27 +3,27 @@ import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useMemo, useState, useEffect, useCallback, useContext, useRef, createRef } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { debug } from "../figma_app/465776";
-import { IL, Im } from "../figma_app/493477";
+import { getSingleKey, isEmptyObject } from "../figma_app/493477";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { glU, KjJ, m1T, JA, Egt, Ez5 } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { GI } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { eU as _$$eU, Iz, fp, zl } from "../figma_app/27355";
+import { atom, createRemovableAtomFamily, useAtomValueAndSetter, atomStoreManager } from "../figma_app/27355";
 import g from "classnames";
 import x from "../vendor/128080";
 import { A as _$$A } from "../vendor/90566";
-import { sx } from "../905/449184";
-import { sn } from "../905/542194";
+import { trackEventAnalytics } from "../905/449184";
+import { globalPerfTimer } from "../905/542194";
 import { parsePxNumber } from "../figma_app/783094";
 import { H as _$$H } from "../figma_app/147959";
-import { m as _$$m } from "../905/717445";
+import { getFilteredFeatureFlags } from "../905/717445";
 import { Fo } from "../905/63728";
 import { V as _$$V } from "../905/418494";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { rf, o6, cZ, aH, Pt } from "../figma_app/806412";
-import { xO } from "../905/11";
+import { reportNullOrUndefined } from "../905/11";
 import { bG } from "../905/149328";
 import { Point } from "../905/736624";
 import { V as _$$V2 } from "../905/506207";
@@ -48,7 +48,7 @@ import { sp, K3 } from "../figma_app/678300";
 import { vo } from "../figma_app/164212";
 import { p as _$$p } from "../figma_app/353099";
 import { S as _$$S2 } from "../figma_app/420927";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { c as _$$c } from "../905/370443";
 import { E as _$$E2 } from "../905/453826";
 import { e as _$$e2 } from "../905/621515";
@@ -174,21 +174,21 @@ function ep() {
   });
   return jsx(rq, {
     arrowPosition: F_.LEFT_TITLE,
-    description: tx("fullscreen.msal_onboarding.body"),
+    description: renderI18nText("fullscreen.msal_onboarding.body"),
     disableHighlight: !0,
     emphasized: !0,
     isShowing,
     onClose: complete,
     onTargetLost: complete,
     primaryCta: {
-      label: tx("general.got_it"),
+      label: renderI18nText("general.got_it"),
       type: "button",
       onClick: complete,
       variantOverride: "primary",
       ctaTrackingDescriptor: _$$c.GOT_IT
     },
     secondaryCta: {
-      label: tx("general.learn_more"),
+      label: renderI18nText("general.learn_more"),
       type: "link",
       href: "https://help.figma.com/hc/articles/5731482952599#suggest",
       ctaTrackingDescriptor: _$$c.LEARN_MORE
@@ -196,7 +196,7 @@ function ep() {
     targetKey: vx,
     title: jsx("p", {
       "data-testid": "msal-onboarding-title",
-      children: tx("fullscreen.msal_onboarding.header_with_shortcut", {
+      children: renderI18nText("fullscreen.msal_onboarding.header_with_shortcut", {
         msalShortcut: a
       })
     }),
@@ -240,8 +240,8 @@ function ej({
     }, e))
   });
 }
-let ev = Wh(() => _$$eU({}));
-let eS = Iz(e => _$$eU(t => t(ev)[e] ?? null, (t, s, r) => {
+let ev = Wh(() => atom({}));
+let eS = createRemovableAtomFamily(e => atom(t => t(ev)[e] ?? null, (t, s, r) => {
   let n = t(ev);
   s(ev, {
     ...n,
@@ -253,7 +253,7 @@ function ek({
   editCount: t,
   requestThumbnailGeneration: s
 }) {
-  let [i, l] = fp(eS(e));
+  let [i, l] = useAtomValueAndSetter(eS(e));
   let [a] = _$$A2(t, 400);
   useEffect(() => () => {
     l(a);
@@ -356,7 +356,7 @@ function eO(e) {
       })
     }), jsx("span", {
       className: "layer_expansion_row--rowText--yhMnt object_row--rowText--3qo7Q ellipsis--ellipsis--Tjyfa",
-      children: tx("design_systems.component_properties.see_all_layers")
+      children: renderI18nText("design_systems.component_properties.see_all_layers")
     })]
   });
 }
@@ -388,7 +388,7 @@ class eF extends o6 {
     return jsxs("div", {
       className: t,
       style: e,
-      children: [this.renderPlainIndents(this.props.level), this.props.sectionType === KjJ.FIXED ? _$$t("fullscreen.properties_panel.constraints_resizing_panel.fixed") : _$$t("fullscreen.properties_panel.scrolls")]
+      children: [this.renderPlainIndents(this.props.level), this.props.sectionType === KjJ.FIXED ? getI18nString("fullscreen.properties_panel.constraints_resizing_panel.fixed") : getI18nString("fullscreen.properties_panel.scrolls")]
     });
   }
 }
@@ -439,7 +439,7 @@ class ez extends o6 {
       this.sectionById = s.sectionById;
       this.totalHeight = s.totalHeight;
       this.cachedAllRowData = s.rowData;
-      zl.set(_$$X, s.rowData.filter(N1).some(e => e.isExpanded && e.hasChildren));
+      atomStoreManager.set(_$$X, s.rowData.filter(N1).some(e => e.isExpanded && e.hasChildren));
       this.cachedAllObjectRowDataMap = s.rowData.filter(N1).reduce((e, t) => (e[t.guid] = t, e), {});
     };
     this.updateAllVisibleRowGuids = () => {
@@ -503,7 +503,7 @@ class ez extends o6 {
       this.scrollingTimeout = setTimeout(this.doneScrolling, 50);
       this.props.onScroll(e);
       this.setNeedsScrollLine(e);
-      zl.set(uK, {
+      atomStoreManager.set(uK, {
         autoScroll: !1
       });
     };
@@ -511,7 +511,7 @@ class ez extends o6 {
       t || this.props.stopRenaming(!1);
       this.nextScrollLeft = e;
       null == this.frameRequestX && (this.frameRequestX = requestAnimationFrame(this.setScrollLeftState));
-      this.hasTrackedHScrollEvent || (sx("layers_horizontal_scroll"), this.hasTrackedHScrollEvent = !0);
+      this.hasTrackedHScrollEvent || (trackEventAnalytics("layers_horizontal_scroll"), this.hasTrackedHScrollEvent = !0);
     };
     this.doneScrolling = () => {
       this.isScrolling = !1;
@@ -534,7 +534,7 @@ class ez extends o6 {
       });
       this.frameRequestX = null;
     };
-    this.isNodeSticky = e => (xO(_$$e.FIGJAM, this.props), e.parentGuid === this.props.currentPage && ("SYMBOL" === e.type || "FRAME" === e.type && !e.resizeToFit));
+    this.isNodeSticky = e => (reportNullOrUndefined(_$$e.FIGJAM, this.props), e.parentGuid === this.props.currentPage && ("SYMBOL" === e.type || "FRAME" === e.type && !e.resizeToFit));
     this.isAncestorSticky = e => {
       let t = this.getScene();
       let s = e.parentGuid ? t.get(e.parentGuid) : null;
@@ -583,7 +583,7 @@ class ez extends o6 {
       }
       let o = this.getScene().get(e);
       if (!o) return;
-      s || zl.set(uK, {
+      s || atomStoreManager.set(uK, {
         autoScroll: !1
       });
       let d = this.isAncestorSticky(o);
@@ -620,7 +620,7 @@ class ez extends o6 {
         return;
       }
       getFeatureFlags().version_diffing && this.props.editModeType === m1T.COMPARE_CHANGES && glU.setActiveChange(t) && this.props.showViewChangesNotification(t);
-      let s = IL(this.props.sceneGraphSelection);
+      let s = getSingleKey(this.props.sceneGraphSelection);
       let r = null;
       if (s ? r = s : this.rangeSelectAnchorNodeId && K3(this.props.sceneGraphSelection, this.rangeSelectAnchorNodeId) && (r = this.rangeSelectAnchorNodeId), (this.props.allowSelectRange ?? !0) && e.shiftKey && r) {
         GL(r, t);
@@ -766,11 +766,11 @@ class ez extends o6 {
       let s = this.getScene().get(e);
       if (!s) return;
       t.stopPropagation();
-      sx("objects_panel_expand", {
+      trackEventAnalytics("objects_panel_expand", {
         nonInteraction: 0
       });
       let r = !s.isExpanded;
-      t.altKey ? sK(s.guid, r) : Fo(t) && !Im(this.props.sceneGraphSelection) ? yF(s.guid, r) : sq(s.guid, r);
+      t.altKey ? sK(s.guid, r) : Fo(t) && !isEmptyObject(this.props.sceneGraphSelection) ? yF(s.guid, r) : sq(s.guid, r);
       this.justToggledExpandedGuid = s.guid;
     };
     this.isDraggingToToggle = null;
@@ -821,7 +821,7 @@ class ez extends o6 {
         }
         this.state.mouseDown || Uc(s.guid);
       };
-      Ay.firefox && this.isScrolling ? this.handleMouseEnterAfterScroll = r : r();
+      BrowserInfo.firefox && this.isScrolling ? this.handleMouseEnterAfterScroll = r : r();
     };
     this.onDragDrop = (e, t) => {
       this.onMouseUp(t.nativeEvent);
@@ -864,8 +864,8 @@ class ez extends o6 {
     this.updateAllVisibleRowGuids();
     this.props.scrollContainerInnerRef?.(this.scrollContainerInnerRef);
     let t = "objects-panel-inner-render-timer";
-    let s = sn.get(t);
-    s && s.isRunning && !s.isUnreliable && sn.tryStop(t);
+    let s = globalPerfTimer.get(t);
+    s && s.isRunning && !s.isUnreliable && globalPerfTimer.tryStop(t);
   }
   componentWillUnmount() {
     super.componentWillUnmount();
@@ -923,8 +923,8 @@ class ez extends o6 {
       t ? this.scrollContainer.scrollTo(e) : this.anchorNodeId && this.scrollNodeIntoView(this.anchorNodeId);
     }
     let s = "objects-panel-inner-render-timer";
-    let r = sn.get(s);
-    r && r.isRunning && !r.isUnreliable && sn.tryStop(s);
+    let r = globalPerfTimer.get(s);
+    r && r.isRunning && !r.isUnreliable && globalPerfTimer.tryStop(s);
   }
   getTopSelectedNodeId() {
     let e;
@@ -1179,7 +1179,7 @@ class ez extends o6 {
     }, eV.getKeyForId(e.sectionId));
   }
   render() {
-    sn.start("objects-panel-inner-render-timer");
+    globalPerfTimer.start("objects-panel-inner-render-timer");
     let e = this.renderedVisibleRowProps;
     let t = this.cachedAllRowData || [];
     for (let s of (this.renderedVisibleRowProps = Uw(t, this.windowInnerHeight, this.state.scrollTop), this.findStickyHeaderRowAndReplaceInVisibleRows(t), e)) Mq(s, this.windowInnerHeight, this.state.scrollTop) || eV.freeKeyForId(eU(s));
@@ -1205,7 +1205,7 @@ class ez extends o6 {
       "--row-gap": `${this.props.rowSelectionGap}px`
     };
     return jsxs(Fragment, {
-      children: [this.props.showVisualLayerIcons && _$$m().ce_il_root && jsx(eT, {
+      children: [this.props.showVisualLayerIcons && getFilteredFeatureFlags().ce_il_root && jsx(eT, {
         ids: this.renderedVisibleRowProps.filter(e => "object" === e.rowType).map(e => e.guid),
         focusedNodeId: this.getTopSelectedNodeId()
       }), jsx(eA, {
@@ -1289,7 +1289,7 @@ function eW(e) {
     showVisualLayerIcons
   } = useContext(y0);
   SV();
-  let [P, R] = fp(_$$C);
+  let [P, R] = useAtomValueAndSetter(_$$C);
   let O = _$$A(R, 200);
   let D = Fk(e => e.getCurrentPage()?.responsiveSetSettings?.faviconID);
   let B = Fk(e => {

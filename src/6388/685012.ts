@@ -6,9 +6,9 @@ import { k as _$$k } from "../905/443820";
 import { Ez5, uv } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
-import { Xr, md } from "../figma_app/27355";
+import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { Vs } from "../figma_app/930338";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { v as _$$v } from "../6388/913037";
 import { jw, kG } from "../figma_app/327588";
@@ -53,7 +53,7 @@ export function $$C0({
   let L = jw();
   let k = Xr(_$$v);
   let B = function (e, t, l) {
-    let r = md(_$$v);
+    let r = useAtomWithSubscription(_$$v);
     let i = kG();
     let c = function () {
       let e = function () {
@@ -96,7 +96,7 @@ export function $$C0({
         }, [e]);
       }();
       let t = useDispatch();
-      let l = md(_$$v);
+      let l = useAtomWithSubscription(_$$v);
       return useCallback((o, n, s, r, i, a, c, u, x, g) => {
         l7.user("buzz-add-asset-progressive-loading", () => {
           for (let [e, t] of o) {
@@ -124,7 +124,7 @@ export function $$C0({
         })), g(c)) : (t(F.dequeue({
           matchType: I
         })), t(F.enqueue({
-          message: _$$t("buzz.bulk_create.generating_assets_with_count", {
+          message: getI18nString("buzz.bulk_create.generating_assets_with_count", {
             count_progress: a,
             count_total: x
           }),
@@ -161,7 +161,7 @@ export function $$C0({
     }, [i, r, c, l, t]);
   }(0, useCallback(e => {
     c(F.enqueue({
-      message: _$$t("buzz.bulk_create.success", {
+      message: getI18nString("buzz.bulk_create.success", {
         count: w
       }),
       type: "Buzz bulk create success"
@@ -184,7 +184,7 @@ export function $$C0({
       children: R ? jsx("div", {
         className: "x78zum5 xl56j7k x6s0dn4",
         children: jsx(_$$k, {})
-      }) : _$$t("buzz.bulk_create.create_assets_button", {
+      }) : getI18nString("buzz.bulk_create.create_assets_button", {
         count: w
       })
     })

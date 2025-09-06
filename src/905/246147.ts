@@ -7,7 +7,7 @@ import { KP } from "../figma_app/31103";
 import { hA } from "../figma_app/88239";
 import { oB, sf } from "../905/929976";
 import { _6 } from "../figma_app/386952";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 export function $$m0({
   onShow: e,
   entryPoint: t,
@@ -28,7 +28,7 @@ export function $$m0({
     g(sf({
       ...m,
       view: "fullscreen",
-      editorType: nT.DevHandoff,
+      editorType: FEditorType.DevHandoff,
       showDevModeVariablesTable: !0,
       devModeVariablesTableSelectedVariable: i,
       devModeVariablesTableBackFocusId: f || void 0,

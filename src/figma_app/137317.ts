@@ -5,8 +5,8 @@ import { lQ } from "../905/934246";
 import { t as _$$t } from "../905/150656";
 import { bL, RT } from "../905/867927";
 import { q } from "../905/932270";
-import { md } from "../figma_app/27355";
-import { t as _$$t2, tx } from "../905/303541";
+import { useAtomWithSubscription } from "../figma_app/27355";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { _I } from "../figma_app/473493";
 import { _y, vV } from "../figma_app/755395";
 import { a9 } from "../905/191741";
@@ -60,7 +60,7 @@ export function $$N0({
     children: jsxs("div", {
       className: NR,
       children: [!b && ("drop-down" === t ? jsx(l6, {
-        ariaLabel: _$$t2("dev_handoff.inspection_mode.select"),
+        ariaLabel: getI18nString("dev_handoff.inspection_mode.select"),
         className: VM,
         dispatch: l,
         dropdownShown: g,
@@ -138,7 +138,7 @@ function w({
   let m = "local-plugin" !== codeLanguage.type ? [h] : [codeLanguageOptions[0].displayText];
   let g = useMemo(() => {
     let t = a ? void 0 : {
-      displayText: _$$t2("dev_handoff.language_dropdown.preferences_header", {
+      displayText: getI18nString("dev_handoff.language_dropdown.preferences_header", {
         languageOrPlugin: h
       }),
       header: !0
@@ -169,9 +169,9 @@ function R({
   } = t;
   let s = Em();
   let o = ie();
-  let l = md(_$$v);
+  let l = useAtomWithSubscription(_$$v);
   if ("first-party" !== codeLanguage.type) return null;
-  let d = l ? _$$t2("dev_handoff.variables.panel_display_code_syntax") : _$$t2("dev_handoff.variables.panel_display_figma_name");
+  let d = l ? getI18nString("dev_handoff.variables.panel_display_code_syntax") : getI18nString("dev_handoff.variables.panel_display_figma_name");
   return jsx(vV, {
     dropdownId: i,
     items: e,
@@ -211,7 +211,7 @@ function P({
       value: t,
       onChange: r,
       legend: jsx(q, {
-        children: tx("dev_handoff.layer_properties_view")
+        children: renderI18nText("dev_handoff.layer_properties_view")
       }),
       children: e.map(({
         key: e,

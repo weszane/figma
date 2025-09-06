@@ -7,7 +7,7 @@ import { $$, nR, tB, CY, N_ } from "../figma_app/637027";
 import { kt } from "../figma_app/858013";
 import { v } from "../905/755077";
 import { P } from "../905/347284";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { aP } from "../figma_app/530167";
 import { GH, aF, VP } from "../905/18797";
 import { Bj } from "../905/708054";
@@ -30,12 +30,12 @@ export function $$b5(e) {
     children: [jsx(tB, {
       onChange: e.onChange,
       checked: e.isChecked
-    }), tx("community.publishing.i_agree_to_the_terms_of_service", {
+    }), renderI18nText("community.publishing.i_agree_to_the_terms_of_service", {
       termsOfService: jsx(CY, {
         href: "https://www.figma.com/tos/",
         target: "_blank",
         trusted: !0,
-        children: tx("community.publishing.community_terms_of_service")
+        children: renderI18nText("community.publishing.community_terms_of_service")
       })
     })]
   });
@@ -122,11 +122,11 @@ export function $$v3(e) {
           profileId: this.props.publisher.id
         }));
       };
-      this._publishingEntityTitle = () => this.props.publisher.team_id ? _$$t("community.publishing.set_a_unique_handle_for_your_team_team_name_s_new_community_profile", {
+      this._publishingEntityTitle = () => this.props.publisher.team_id ? getI18nString("community.publishing.set_a_unique_handle_for_your_team_team_name_s_new_community_profile", {
         teamName: this.props.publisher.name
-      }) : this.props.publisher.org_id ? _$$t("community.publishing.set_a_unique_handle_for_your_organization_org_name_s_new_community_profile", {
+      }) : this.props.publisher.org_id ? getI18nString("community.publishing.set_a_unique_handle_for_your_organization_org_name_s_new_community_profile", {
         orgName: this.props.publisher.name
-      }) : _$$t("community.publishing.set_a_unique_handle_for_your_new_personal_community_profile");
+      }) : getI18nString("community.publishing.set_a_unique_handle_for_your_new_personal_community_profile");
       this.state = {
         handle: "",
         disableSubmit: !0,
@@ -140,12 +140,12 @@ export function $$v3(e) {
     }
     getFooterText() {
       return jsx(Fragment, {
-        children: tx("community.publishing.review_our_community_guidelines", {
+        children: renderI18nText("community.publishing.review_our_community_guidelines", {
           communityGuidelinesLink: jsx(N_, {
             href: "https://help.figma.com/hc/articles/360038510573-Figma-Community-Guidelines",
             target: "_blank",
             trusted: !0,
-            children: tx("community.publishing.community_guidelines")
+            children: renderI18nText("community.publishing.community_guidelines")
           })
         })
       });
@@ -164,7 +164,7 @@ export function $$v3(e) {
         secondaryButton: this.props.secondaryButton,
         primaryButton: {
           onClick: this.onSaveHandleClick,
-          text: _$$t("general.save"),
+          text: getI18nString("general.save"),
           disabled: this.state.disableSubmit || VP(this.props.loadingState, this.loadingKey()),
           dataTestId: "save-community-profile-handle"
         },
@@ -182,31 +182,31 @@ export let $$I0 = n.ConnectedPublishSuccessHandleContent;
 export function $$E4(e) {
   let t = jsxs(Fragment, {
     children: [jsxs("div", {
-      children: [tx("community.publishing.if_you_have_a_personal_community_profile_associated_with_a_different_figma_account_connect_it_now_and_publish_to_your_existing_profile_without_having_to_switch_accounts"), " ", jsx(CY, {
+      children: [renderI18nText("community.publishing.if_you_have_a_personal_community_profile_associated_with_a_different_figma_account_connect_it_now_and_publish_to_your_existing_profile_without_having_to_switch_accounts"), " ", jsx(CY, {
         href: "https://help.figma.com/hc/articles/1500005162381-Manage-Community-profiles-and-settings#add-profile",
         target: "_blank",
         trusted: !0,
-        children: tx("general.learn_more")
+        children: renderI18nText("general.learn_more")
       })]
     }), jsx("br", {}), jsx("div", {
-      children: tx("community.publishing.if_you_don_t_have_an_existing_community_profile_you_can_create_one_now")
+      children: renderI18nText("community.publishing.if_you_don_t_have_an_existing_community_profile_you_can_create_one_now")
     })]
   });
   e.withConnectedAccounts && (t = jsxs(Fragment, {
     children: [jsxs("div", {
-      children: [tx("community.publishing.currently_you_don_t_have_a_personal_community_profile_associated_with_a_different_figma_account_if_you_do_connect_it_now_and_publish_to_your_existing_profile_without_having_to_switch_accounts"), " ", jsx(CY, {
+      children: [renderI18nText("community.publishing.currently_you_don_t_have_a_personal_community_profile_associated_with_a_different_figma_account_if_you_do_connect_it_now_and_publish_to_your_existing_profile_without_having_to_switch_accounts"), " ", jsx(CY, {
         href: "https://help.figma.com/hc/articles/1500005162381-Manage-Community-profiles-and-settings#add-profile",
         target: "_blank",
         trusted: !0,
-        children: tx("general.learn_more")
+        children: renderI18nText("general.learn_more")
       })]
     }), jsx("br", {}), jsx("div", {
-      children: tx("community.publishing.if_you_don_t_have_an_existing_community_profile_you_can_create_one_now")
+      children: renderI18nText("community.publishing.if_you_don_t_have_an_existing_community_profile_you_can_create_one_now")
     })]
   }));
   return jsx($$v3, {
     className: e.className || "",
-    title: _$$t("community.publishing.connect_or_create_a_public_community_profile_to_publish"),
+    title: getI18nString("community.publishing.connect_or_create_a_public_community_profile_to_publish"),
     body: t,
     secondaryButton: e.secondaryButton,
     primaryButton: e.primaryButton,
@@ -214,7 +214,7 @@ export function $$E4(e) {
       onClick: e.onBack,
       className: qw,
       disabled: e.isLoading,
-      children: tx("general.back")
+      children: renderI18nText("general.back")
     }) : void 0,
     headerImgSrc: buildUploadUrl("55cce76b49d5d5c5e62352d0d21ee8ce025eef38")
   });

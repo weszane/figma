@@ -1,9 +1,9 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect, useMemo, useRef } from "react";
 import { useDispatch } from "../vendor/514228";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { B } from "../905/714743";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { hZ } from "../905/748726";
 import { TA } from "../905/372672";
 import { hp, bp } from "../905/913057";
@@ -68,7 +68,7 @@ export function $$f1(e) {
       ...e.autocomplete,
       tokens: e.autocomplete.tokens.concat(a),
       inputValue: ""
-    })), sx("affco_contacts_result_clicked", {
+    })), trackEventAnalytics("affco_contacts_result_clicked", {
       position: r + 1,
       rank: n.rank,
       resource_type: e.resourceType,
@@ -112,7 +112,7 @@ export function $$f1(e) {
       "data-tooltip-type": Ib.TEXT,
       "data-tooltip": e.email,
       "data-suggestion-idx": t,
-      "aria-label": _$$t("permissions_modal.suggestions.invite_user", {
+      "aria-label": getI18nString("permissions_modal.suggestions.invite_user", {
         userEmail: e.email
       }),
       children: [jsx(B, {

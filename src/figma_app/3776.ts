@@ -3,7 +3,7 @@ import { R0 } from "../figma_app/273493";
 import { FontWeight, AppStateTsApi, SceneGraphHelpers } from "../figma_app/13528";
 import { r as _$$r } from "../905/249071";
 import { M } from "../905/512402";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { Un } from "../905/618447";
 import { qq } from "../figma_app/396464";
 export let $$u5 = 5;
@@ -27,11 +27,11 @@ export function $$h0({
   y: r = 0,
   isStateGroupRowAllowed: n = !1
 }) {
-  let i = zl.get(Un)[e];
+  let i = atomStoreManager.get(Un)[e];
   if (i && i.length > 0) {
     let e = i[0]?.node?.parentNode;
     e && qq(e, n) && p(e, t, r);
-    i.forEach((e) => {
+    i.forEach(e => {
       e.node?.parentNode?.type === "MODULE" && p(e.node.parentNode, t, r);
     });
   }

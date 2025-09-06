@@ -6,7 +6,7 @@ import { z as _$$z, Z } from "../905/306088";
 import { qc } from "../figma_app/858013";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { R as _$$R } from "../905/304671";
 import { Lo } from "../905/156213";
@@ -53,10 +53,10 @@ export function $$I0(e) {
     className: w,
     href: "https://help.figma.com/hc/articles/10250387712407",
     target: "_blank",
-    children: tx("asset_transfers.request_modal.learn_more")
+    children: renderI18nText("asset_transfers.request_modal.learn_more")
   });
   let B = () => {
-    if (T) return "project" === T.transfer_type ? tx(T.is_transfer_copy ? "asset_transfers.handle_request_modal.an_admin_from_org_name_wants_to_transfer_the_copy_project_to_the_team" : "asset_transfers.handle_request_modal.an_admin_from_org_name_wants_to_transfer_the_project_to_the_team", {
+    if (T) return "project" === T.transfer_type ? renderI18nText(T.is_transfer_copy ? "asset_transfers.handle_request_modal.an_admin_from_org_name_wants_to_transfer_the_copy_project_to_the_team" : "asset_transfers.handle_request_modal.an_admin_from_org_name_wants_to_transfer_the_project_to_the_team", {
       orgName: jsx("span", {
         className: y,
         children: T.source_org_name
@@ -70,7 +70,7 @@ export function $$I0(e) {
         children: T.destination_team_name
       }),
       learnMore: $()
-    }) : tx("asset_transfers.handle_request_modal.an_admin_from_org_name_wants_to_transfer_the_team_name_to_your_organization", {
+    }) : renderI18nText("asset_transfers.handle_request_modal.an_admin_from_org_name_wants_to_transfer_the_team_name_to_your_organization", {
       orgName: jsx("span", {
         className: y,
         children: T.source_org_name
@@ -83,7 +83,7 @@ export function $$I0(e) {
     });
   };
   let G = () => {
-    if (T) return "project" === T.transfer_type ? tx(T.is_transfer_copy ? "asset_transfers.handle_request_modal.a_source_user_email_wants_to_transfer_the_copy_project_name_to_the_team_name_team" : "asset_transfers.handle_request_modal.a_source_user_email_wants_to_transfer_the_project_name_to_the_team_name_team", {
+    if (T) return "project" === T.transfer_type ? renderI18nText(T.is_transfer_copy ? "asset_transfers.handle_request_modal.a_source_user_email_wants_to_transfer_the_copy_project_name_to_the_team_name_team" : "asset_transfers.handle_request_modal.a_source_user_email_wants_to_transfer_the_project_name_to_the_team_name_team", {
       sourceUserName: jsx("span", {
         className: y,
         children: T.source_user_name
@@ -101,7 +101,7 @@ export function $$I0(e) {
         children: T.destination_team_name
       }),
       learnMore: $()
-    }) : tx("asset_transfers.handle_request_modal.a_source_user_email_wants_to_transfer_the_team_name_to_your_organization", {
+    }) : renderI18nText("asset_transfers.handle_request_modal.a_source_user_email_wants_to_transfer_the_team_name_to_your_organization", {
       sourceUserName: jsx("span", {
         className: y,
         children: T.source_user_name
@@ -138,38 +138,38 @@ export function $$I0(e) {
           className: _$$s.pt16.$,
           children: jsx("span", {
             className: y,
-            children: r ? tx("asset_transfers.handle_request_modal.about_this_project") : tx("asset_transfers.handle_request_modal.about_this_team")
+            children: r ? renderI18nText("asset_transfers.handle_request_modal.about_this_project") : renderI18nText("asset_transfers.handle_request_modal.about_this_team")
           })
         }), jsxs("ul", {
           className: f,
           children: [e && !l && jsx("li", {
             className: j,
-            children: r ? tx("asset_transfers.handle_request_modal.this_project_has_guest_accounts_if_you_want_them_to_transfer_over_temporarily_change_your_admin_setting_to_allow_guests_before_accepting_learn_more", {
+            children: r ? renderI18nText("asset_transfers.handle_request_modal.this_project_has_guest_accounts_if_you_want_them_to_transfer_over_temporarily_change_your_admin_setting_to_allow_guests_before_accepting_learn_more", {
               learnMore: $()
-            }) : tx("asset_transfers.handle_request_modal.this_team_has_guest_accounts_if_you_want_them_to_transfer_over_temporarily_change_your_admin_setting_to_allow_guests_before_accepting_learn_more", {
+            }) : renderI18nText("asset_transfers.handle_request_modal.this_team_has_guest_accounts_if_you_want_them_to_transfer_over_temporarily_change_your_admin_setting_to_allow_guests_before_accepting_learn_more", {
               learnMore: $()
             })
           }), i && !l && jsx("li", {
             className: j,
-            children: r ? tx("asset_transfers.handle_request_modal.based_on_your_settings_everyone_transferring_over_with_this_project_will_have_role_text_roles_in_figma_design_and_fig_jam_once_they_join_your_organization.seat_rename", {
+            children: r ? renderI18nText("asset_transfers.handle_request_modal.based_on_your_settings_everyone_transferring_over_with_this_project_will_have_role_text_roles_in_figma_design_and_fig_jam_once_they_join_your_organization.seat_rename", {
               roleText: jsx("span", {
                 className: y,
-                children: tx("asset_transfers.handle_request_modal.viewer_restricted")
+                children: renderI18nText("asset_transfers.handle_request_modal.viewer_restricted")
               })
-            }) : tx("asset_transfers.handle_request_modal.based_on_your_settings_everyone_transferring_over_with_this_team_will_have_role_text_roles_in_figma_design_and_fig_jam_once_they_join_your_organization.seat_rename", {
+            }) : renderI18nText("asset_transfers.handle_request_modal.based_on_your_settings_everyone_transferring_over_with_this_team_will_have_role_text_roles_in_figma_design_and_fig_jam_once_they_join_your_organization.seat_rename", {
               roleText: jsx("span", {
                 className: y,
-                children: tx("asset_transfers.handle_request_modal.viewer_restricted")
+                children: renderI18nText("asset_transfers.handle_request_modal.viewer_restricted")
               })
             })
           }), t && !l && jsx("li", {
             className: j,
-            children: tx("asset_transfers.handle_request_modal.people_who_aren_t_currently_on_your_organization_s_member_allowlist_won_t_transfer_over_you_ll_need_to_manually_add_them_to_your_organization_or_supportlink_for_help", {
+            children: renderI18nText("asset_transfers.handle_request_modal.people_who_aren_t_currently_on_your_organization_s_member_allowlist_won_t_transfer_over_you_ll_need_to_manually_add_them_to_your_organization_or_supportlink_for_help", {
               supportLink: jsx("a", {
                 className: w,
                 href: "https://help.figma.com/hc/requests/new",
                 target: "_blank",
-                children: tx("asset_transfers.handle_request_modal.contact_figma_support")
+                children: renderI18nText("asset_transfers.handle_request_modal.contact_figma_support")
               })
             })
           })]
@@ -188,7 +188,7 @@ export function $$I0(e) {
       onClick: 1 !== M && q ? () => {
         P(1);
       } : H,
-      children: 1 !== M && q ? tx("asset_transfers.request_modal.back") : tx("asset_transfers.request_modal.cancel")
+      children: 1 !== M && q ? renderI18nText("asset_transfers.request_modal.back") : renderI18nText("asset_transfers.request_modal.cancel")
     }), jsx(vd, {
       onClick: 1 === M && q ? () => P(2) : () => {
         O(!0);
@@ -210,20 +210,20 @@ export function $$I0(e) {
           }));
         });
       },
-      children: 1 === M && q ? tx("asset_transfers.request_modal.next") : tx("asset_transfers.handle_request_modal.accept_transfer")
+      children: 1 === M && q ? renderI18nText("asset_transfers.request_modal.next") : renderI18nText("asset_transfers.handle_request_modal.accept_transfer")
     })]
   });
-  let J = () => q ? tx("asset_transfers.handle_request_modal.the_project_will_transfer_along_with_only_its_current_files") : tx("asset_transfers.handle_request_modal.the_project_will_transfer_along_with_its_current_files_and_members_which_may_add_more_editors_to_your_billing_plan_manage_these_roles_in_the_members_tab_in_admin_settings.seat_rename", {
+  let J = () => q ? renderI18nText("asset_transfers.handle_request_modal.the_project_will_transfer_along_with_only_its_current_files") : renderI18nText("asset_transfers.handle_request_modal.the_project_will_transfer_along_with_its_current_files_and_members_which_may_add_more_editors_to_your_billing_plan_manage_these_roles_in_the_members_tab_in_admin_settings.seat_rename", {
     members: jsx("span", {
       className: y,
-      children: tx("asset_transfers.handle_request_modal.members")
+      children: renderI18nText("asset_transfers.handle_request_modal.members")
     }),
     adminSettings: jsx("span", {
       className: y,
-      children: tx("asset_transfers.handle_request_modal.admin_settings")
+      children: renderI18nText("asset_transfers.handle_request_modal.admin_settings")
     })
   });
-  let K = T?.transfer_type === "project" && T?.is_transfer_copy ? tx("asset_transfers.handle_request_modal.accept_this_transfer") : tx("asset_transfers.handle_request_modal.manage_this_transfer");
+  let K = T?.transfer_type === "project" && T?.is_transfer_copy ? renderI18nText("asset_transfers.handle_request_modal.accept_this_transfer") : renderI18nText("asset_transfers.handle_request_modal.manage_this_transfer");
   return jsx(fu, {
     name: T?.transfer_type === "project" ? "Handle Project Transfer Request Modal" : "Handle Team Transfer Request Modal",
     properties: {
@@ -248,7 +248,7 @@ export function $$I0(e) {
               svg: _$$A
             }), jsx("div", {
               className: "handle_asset_transfer_request_modal--bannerLeftDetails--53MdK",
-              children: tx("asset_transfers.handle_request_modal.once_you_accept_a_transfer_it_can_t_be_undone")
+              children: renderI18nText("asset_transfers.handle_request_modal.once_you_accept_a_transfer_it_can_t_be_undone")
             })]
           })
         }), jsxs("div", {
@@ -260,31 +260,31 @@ export function $$I0(e) {
                 className: _$$s.pt16.$,
                 children: jsx("span", {
                   className: y,
-                  children: tx("asset_transfers.handle_request_modal.if_you_accept")
+                  children: renderI18nText("asset_transfers.handle_request_modal.if_you_accept")
                 })
               }), jsxs("ul", {
                 className: f,
                 children: [jsx("li", {
                   className: j,
-                  children: T?.transfer_type === "project" ? tx("asset_transfers.handle_request_modal.you_ll_see_this_project_in_your_team_and_you_can_edit_its_settings_description_and_more_at_any_time") : tx("asset_transfers.handle_request_modal.you_ll_see_this_team_when_you_re_in_figma_and_you_can_edit_its_settings_description_and_more_at_any_time")
+                  children: T?.transfer_type === "project" ? renderI18nText("asset_transfers.handle_request_modal.you_ll_see_this_project_in_your_team_and_you_can_edit_its_settings_description_and_more_at_any_time") : renderI18nText("asset_transfers.handle_request_modal.you_ll_see_this_team_when_you_re_in_figma_and_you_can_edit_its_settings_description_and_more_at_any_time")
                 }), jsx("li", {
                   className: j,
-                  children: T?.transfer_type === "project" ? T.is_transfer_copy ? tx("asset_transfers.handle_request_modal.the_project_will_copy_with_its_current_files", {
+                  children: T?.transfer_type === "project" ? T.is_transfer_copy ? renderI18nText("asset_transfers.handle_request_modal.the_project_will_copy_with_its_current_files", {
                     sourcePlan: T.source_org_name ?? T.source_team_name
-                  }) : J() : tx("asset_transfers.handle_request_modal.the_team_will_transfer_along_with_its_current_projects_files_and_members")
+                  }) : J() : renderI18nText("asset_transfers.handle_request_modal.the_team_will_transfer_along_with_its_current_projects_files_and_members")
                 }), jsx("li", {
                   className: j,
-                  children: T?.transfer_type === "project" ? tx("asset_transfers.handle_request_modal.libraries_shared_fonts_and_other_resources_that_this_project_used_to_be_connected_to_may_be_unavailable_after_this_transfer_learn_more", {
+                  children: T?.transfer_type === "project" ? renderI18nText("asset_transfers.handle_request_modal.libraries_shared_fonts_and_other_resources_that_this_project_used_to_be_connected_to_may_be_unavailable_after_this_transfer_learn_more", {
                     learnMore: $()
-                  }) : tx("asset_transfers.handle_request_modal.libraries_shared_fonts_and_other_resources_that_this_team_used_to_be_connected_to_may_be_unavailable_after_this_transfer_learn_more", {
+                  }) : renderI18nText("asset_transfers.handle_request_modal.libraries_shared_fonts_and_other_resources_that_this_team_used_to_be_connected_to_may_be_unavailable_after_this_transfer_learn_more", {
                     learnMore: $()
                   })
                 }), e ? jsx("li", {
                   className: j,
-                  children: tx("asset_transfers.handle_request_modal.seats_within_this_team_will_transfer_to_your_org")
+                  children: renderI18nText("asset_transfers.handle_request_modal.seats_within_this_team_will_transfer_to_your_org")
                 }) : null, e ? jsx("li", {
                   className: j,
-                  children: tx("asset_transfers.handle_request_modal.youll_receive_credit_for_the_remaining_time")
+                  children: renderI18nText("asset_transfers.handle_request_modal.youll_receive_credit_for_the_remaining_time")
                 }) : null]
               }), W()]
             });
@@ -301,21 +301,21 @@ export function $$I0(e) {
                 className: k,
                 children: jsx("p", {
                   className: E,
-                  children: tx("asset_transfers.handle_request_modal.keep_all_existing_collaborators")
+                  children: renderI18nText("asset_transfers.handle_request_modal.keep_all_existing_collaborators")
                 })
               }, "remove-collaborators"), jsx("p", {
                 className: C,
-                children: tx("asset_transfers.handle_request_modal.no_collaborators_will_lose_access")
+                children: renderI18nText("asset_transfers.handle_request_modal.no_collaborators_will_lose_access")
               }), jsx(Z, {
                 value: "remove_collaborators",
                 className: k,
                 children: jsx("p", {
                   className: E,
-                  children: tx("asset_transfers.handle_request_modal.remove_collaborators")
+                  children: renderI18nText("asset_transfers.handle_request_modal.remove_collaborators")
                 })
               }, "remove-collaborators"), jsx("p", {
                 className: C,
-                children: tx("asset_transfers.handle_request_modal.you_ll_become_the_owner_of_the_project_and_its_files")
+                children: renderI18nText("asset_transfers.handle_request_modal.you_ll_become_the_owner_of_the_project_and_its_files")
               })]
             })
           }), jsx("div", {
@@ -325,7 +325,7 @@ export function $$I0(e) {
         })]
       }) : jsx("div", {
         className: v,
-        children: T && T.handled_by_name && T.handled_by_email ? tx("asset_transfers.handle_request_modal.it_looks_like_approver_name_approver_email_has_already_accepted_this_transfer", {
+        children: T && T.handled_by_name && T.handled_by_email ? renderI18nText("asset_transfers.handle_request_modal.it_looks_like_approver_name_approver_email_has_already_accepted_this_transfer", {
           approverName: jsx("span", {
             className: y,
             children: T.handled_by_name
@@ -334,10 +334,10 @@ export function $$I0(e) {
             className: y,
             children: T.handled_by_email
           })
-        }) : T?.transfer_type === "project" ? tx("asset_transfers.handle_request_modal.it_looks_like_this_project_has_already_been_transferred_to_your_team") : tx("asset_transfers.handle_request_modal.it_looks_like_this_team_has_already_been_transferred_to_your_organization")
+        }) : T?.transfer_type === "project" ? renderI18nText("asset_transfers.handle_request_modal.it_looks_like_this_project_has_already_been_transferred_to_your_team") : renderI18nText("asset_transfers.handle_request_modal.it_looks_like_this_team_has_already_been_transferred_to_your_organization")
       }) : jsx("div", {
         className: v,
-        children: tx("asset_transfers.handle_request_modal.the_transfer_request_you_received_has_been_cancelled_by_the_team_or_organization_that_sent_it")
+        children: renderI18nText("asset_transfers.handle_request_modal.the_transfer_request_you_received_has_been_cancelled_by_the_team_or_organization_that_sent_it")
       })
     })
   });

@@ -1,4 +1,4 @@
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
 import { Rh } from "../905/485103";
 let s = !0;
@@ -14,7 +14,7 @@ export function $$l0(e, t, i) {
     productType: i
   });
   let d = o(e.failedSize);
-  if (sx("Out Of Memory", {
+  if (trackEventAnalytics("Out Of Memory", {
     ...e,
     memoryUsageBin: l,
     failedSizeBin: d,
@@ -23,7 +23,7 @@ export function $$l0(e, t, i) {
     forwardToDatadog: t
   }), "enter-branching-mode" === e.lastAction) {
     let a = debugState.getState();
-    sx("Branching out of memory", {
+    trackEventAnalytics("Branching out of memory", {
       ...e,
       memoryUsageBin: l,
       failedSizeBin: d,

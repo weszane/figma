@@ -1,11 +1,11 @@
-import { o, p } from "../figma_app/516794";
+import { createEventEmitter, useEventSubscription } from "../figma_app/516794";
 import { useSprigWithSampling } from "../905/99656";
-export let $$a1 = o();
+export let $$a1 = createEventEmitter();
 export function $$s0() {
   let {
     Sprig
   } = useSprigWithSampling();
-  p($$a1, () => {
+  useEventSubscription($$a1, () => {
     Sprig("track", "interactive_slide_element_inserted");
   });
   return null;

@@ -7,7 +7,7 @@ import l from "classnames";
 import { ZC } from "../figma_app/39751";
 import { Pt } from "../figma_app/806412";
 import { e as _$$e } from "../905/713353";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { j7 } from "../905/929976";
 import { Um } from "../905/848862";
 import { Ib } from "../905/129884";
@@ -34,8 +34,8 @@ export function $$b0({
   }, [l, A, v]);
   let x = m5(e, r);
   let N = !x && h;
-  let C = _$$t("properties.dropdown.apply_variable_mode");
-  let w = T ? _$$t("dev_handoff.workflows.focus_view.no_variable_modes") : _$$t("dev_handoff.workflows.focus_view.no_variables");
+  let C = getI18nString("properties.dropdown.apply_variable_mode");
+  let w = T ? getI18nString("dev_handoff.workflows.focus_view.no_variable_modes") : getI18nString("dev_handoff.workflows.focus_view.no_variables");
   let O = useMemo(() => ({
     recordingKey: Pt(t, "applyMode"),
     "aria-expanded": !!v,
@@ -65,7 +65,7 @@ export function $$b0({
           className: d()({
             "variables_mode_button--disabled--rZZ2j": N
           }),
-          children: b.length > 1 || 0 === b.length ? _$$t("dev_handoff.focus_view.modes") : b[0]
+          children: b.length > 1 || 0 === b.length ? getI18nString("dev_handoff.focus_view.modes") : b[0]
         })
       })
     }) : jsx(_$$d, {
@@ -89,7 +89,7 @@ export function $$T1() {
     customActionType: Wg.DROPDOWN_TRIGGER_BUTTON,
     dropdownTargetButtonRef: t,
     onClick: r,
-    getTitle: () => _$$t("properties.dropdown.apply_variable_mode"),
+    getTitle: () => getI18nString("properties.dropdown.apply_variable_mode"),
     icon: jsx(_$$x, {}),
     dropdown: jsx(bt, {
       consumptionTarget: Jo.SELECTION,

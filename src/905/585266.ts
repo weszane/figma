@@ -1,88 +1,88 @@
-import { eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 export class $$r0 {
   toggleDevTools(e) {
-    eD || this.throwNoDesktopAppError();
+    desktopAPIInstance || this.throwNoDesktopAppError();
     this.isDevToolsOpened().then(t => {
       t ? this.closeDevTools() : this.openDevTools(e || "bottom");
     });
   }
   getLocalFileExtensionSource(e) {
-    eD || this.throwNoDesktopAppError();
-    return eD.getLocalFileExtensionSource(e);
+    desktopAPIInstance || this.throwNoDesktopAppError();
+    return desktopAPIInstance.getLocalFileExtensionSource(e);
   }
   getLocalFileExtensionManifest(e) {
-    eD || this.throwNoDesktopAppError();
-    return eD.getLocalFileExtensionManifest(e);
+    desktopAPIInstance || this.throwNoDesktopAppError();
+    return desktopAPIInstance.getLocalFileExtensionManifest(e);
   }
   openExtensionDirectory(e) {
-    eD || this.throwNoDesktopAppError();
-    return eD.openExtensionDirectory(e);
+    desktopAPIInstance || this.throwNoDesktopAppError();
+    return desktopAPIInstance.openExtensionDirectory(e);
   }
   openExtensionManifest(e) {
-    eD || this.throwNoDesktopAppError();
-    return eD.openExtensionManifest(e);
+    desktopAPIInstance || this.throwNoDesktopAppError();
+    return desktopAPIInstance.openExtensionManifest(e);
   }
   openDevTools(e) {
-    eD || this.throwNoDesktopAppError();
-    return eD.openDevTools(e);
+    desktopAPIInstance || this.throwNoDesktopAppError();
+    return desktopAPIInstance.openDevTools(e);
   }
   closeDevTools() {
-    eD || this.throwNoDesktopAppError();
-    return eD.closeDevTools();
+    desktopAPIInstance || this.throwNoDesktopAppError();
+    return desktopAPIInstance.closeDevTools();
   }
   isDevToolsOpened() {
-    eD || this.throwNoDesktopAppError();
-    return eD.isDevToolsOpened();
+    desktopAPIInstance || this.throwNoDesktopAppError();
+    return desktopAPIInstance.isDevToolsOpened();
   }
   isCompatibleWith({
     desktopVersion: e
   }) {
-    eD || this.throwNoDesktopAppError();
-    return eD.getVersion() >= e;
+    desktopAPIInstance || this.throwNoDesktopAppError();
+    return desktopAPIInstance.getVersion() >= e;
   }
   getLocalManifestFileExtensionIdsToCachedMetadataMap() {
-    eD || this.throwNoDesktopAppError();
-    return eD.getLocalManifestFileExtensionIdsToCachedMetadataMap();
+    desktopAPIInstance || this.throwNoDesktopAppError();
+    return desktopAPIInstance.getLocalManifestFileExtensionIdsToCachedMetadataMap();
   }
   getLocalManifestFileExtensionIdsToCachedContainsWidgetMap() {
-    eD || this.throwNoDesktopAppError();
-    return eD.getLocalManifestFileExtensionIdsToCachedContainsWidgetMap();
+    desktopAPIInstance || this.throwNoDesktopAppError();
+    return desktopAPIInstance.getLocalManifestFileExtensionIdsToCachedContainsWidgetMap();
   }
   getAllLocalFileExtensionIds() {
-    eD || this.throwNoDesktopAppError();
-    return eD.getAllLocalFileExtensionIds();
+    desktopAPIInstance || this.throwNoDesktopAppError();
+    return desktopAPIInstance.getAllLocalFileExtensionIds();
   }
   registerManifestChangeObserver(e) {
-    eD || this.throwNoDesktopAppError();
-    return eD.registerManifestChangeObserver(e);
+    desktopAPIInstance || this.throwNoDesktopAppError();
+    return desktopAPIInstance.registerManifestChangeObserver(e);
   }
   registerCodeChangeObserver(e) {
-    eD || this.throwNoDesktopAppError();
-    return eD.registerCodeChangeObserver(e);
+    desktopAPIInstance || this.throwNoDesktopAppError();
+    return desktopAPIInstance.registerCodeChangeObserver(e);
   }
   registerUiChangeObserver(e) {
-    eD || this.throwNoDesktopAppError();
-    return eD.registerUiChangeObserver(e);
+    desktopAPIInstance || this.throwNoDesktopAppError();
+    return desktopAPIInstance.registerUiChangeObserver(e);
   }
   createMultipleNewLocalFileExtensions(e, t) {
-    eD || this.throwNoDesktopAppError();
-    return eD.createMultipleNewLocalFileExtensions(e, t);
+    desktopAPIInstance || this.throwNoDesktopAppError();
+    return desktopAPIInstance.createMultipleNewLocalFileExtensions(e, t);
   }
   removeLocalFileExtension(e) {
-    eD || this.throwNoDesktopAppError();
-    return eD.removeLocalFileExtension(e);
+    desktopAPIInstance || this.throwNoDesktopAppError();
+    return desktopAPIInstance.removeLocalFileExtension(e);
   }
   writeNewExtensionDirectoryToDisk(e) {
-    eD || this.throwNoDesktopAppError();
-    return eD.writeNewExtensionDirectoryToDisk(e);
+    desktopAPIInstance || this.throwNoDesktopAppError();
+    return desktopAPIInstance.writeNewExtensionDirectoryToDisk(e);
   }
   writeNewExtensionToDisk(e, t) {
-    eD || this.throwNoDesktopAppError();
-    return eD.writeNewExtensionToDisk(e, t);
+    desktopAPIInstance || this.throwNoDesktopAppError();
+    return desktopAPIInstance.writeNewExtensionToDisk(e, t);
   }
   updateCachedContainsWidget(e) {
-    eD || this.throwNoDesktopAppError();
-    return eD.updateCachedContainsWidget(e);
+    desktopAPIInstance || this.throwNoDesktopAppError();
+    return desktopAPIInstance.updateCachedContainsWidget(e);
   }
   throwNoDesktopAppError() {
     throw Error("[DesktopLocalPluginMananger] Desktop app not available");

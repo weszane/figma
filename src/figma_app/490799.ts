@@ -4,7 +4,7 @@ import { K } from "../905/443068";
 import { f as _$$f } from "../905/54715";
 import o from "classnames";
 import { B } from "../905/714743";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
 import { ZI, z3, $e, hh, pj, Ij, G, YE } from "../905/660757";
 import { A } from "../5724/600086";
@@ -49,7 +49,7 @@ export function $$m1({
     }), f && jsx("div", {
       className: YE,
       children: jsx(K, {
-        "aria-label": _$$t("common.dismiss"),
+        "aria-label": getI18nString("common.dismiss"),
         onClick: f,
         children: jsx(_$$f, {})
       })

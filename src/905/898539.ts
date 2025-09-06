@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { buildUploadUrl } from "../figma_app/169182";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { ic } from "../figma_app/688398";
 import { _Q, Xe } from "../figma_app/224338";
 export function $$d0({
@@ -31,7 +31,7 @@ export function $$c1() {
         children: [jsx("img", {
           width: 108,
           height: 64,
-          alt: t("fullscreen_actions.present-slides-flyout-icon-alt"),
+          alt: getI18nString("fullscreen_actions.present-slides-flyout-icon-alt"),
           src: buildUploadUrl("7b1950606ade560b05bdfdb1b2a98337cf993a3a")
         }), jsx("div", {
           className: "present_large_slide_icon--speakerNotesSlidePreviewIcon--HQQBs",

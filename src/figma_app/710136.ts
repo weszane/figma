@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from "react";
 import { lyf, FAf, NLJ } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { zl, md } from "../figma_app/27355";
+import { atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
 import { ZC } from "../figma_app/39751";
 import { uh as _$$uh, Kh } from "../figma_app/370763";
 import { rM } from "../figma_app/241541";
@@ -50,12 +50,12 @@ function N(e, t) {
     if ("illustration" !== e) return;
     r = t.isReadOnly ? FAf.COMMENT : FAf.ILLUSTRATION;
   }
-  zl.get(Kh) !== NLJ.COMMENTS && NT(r);
+  atomStoreManager.get(Kh) !== NLJ.COMMENTS && NT(r);
 }
 export function $$C2() {
-  let e = md(w4);
-  let t = md(Fj);
-  let r = md(go);
+  let e = useAtomWithSubscription(w4);
+  let t = useAtomWithSubscription(Fj);
+  let r = useAtomWithSubscription(go);
   let i = E3();
   let a = ZC(i);
   let [l, d] = useState(null);

@@ -9,7 +9,7 @@ import { E } from "../905/267344";
 import { yTM } from "../figma_app/763686";
 import { Pt } from "../figma_app/806412";
 import { o as _$$o } from "../905/96108";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { gl } from "../905/216495";
 import { bC } from "../figma_app/789050";
 import { sK } from "../905/794875";
@@ -30,15 +30,15 @@ export function $$E0(e) {
     children: [jsx(c$, {
       icon: jsx(Q, {}),
       value: "NONE",
-      "aria-label": "dashCap" === e.kind ? _$$t("fullscreen.properties_panel.stroke_settings.dash_cap_none.tooltip") : _$$t("fullscreen.properties_panel.stroke_settings.end_cap_none.tooltip")
+      "aria-label": "dashCap" === e.kind ? getI18nString("fullscreen.properties_panel.stroke_settings.dash_cap_none.tooltip") : getI18nString("fullscreen.properties_panel.stroke_settings.end_cap_none.tooltip")
     }), jsx(c$, {
       icon: jsx(J, {}),
       value: "SQUARE",
-      "aria-label": "dashCap" === e.kind ? _$$t("fullscreen.properties_panel.stroke_settings.dash_cap_square.tooltip") : _$$t("fullscreen.properties_panel.stroke_settings.end_cap_square.tooltip")
+      "aria-label": "dashCap" === e.kind ? getI18nString("fullscreen.properties_panel.stroke_settings.dash_cap_square.tooltip") : getI18nString("fullscreen.properties_panel.stroke_settings.end_cap_square.tooltip")
     }), jsx(c$, {
       icon: jsx(E, {}),
       value: "ROUND",
-      "aria-label": "dashCap" === e.kind ? _$$t("fullscreen.properties_panel.stroke_settings.dash_cap_round.tooltip") : _$$t("fullscreen.properties_panel.stroke_settings.end_cap_round.tooltip")
+      "aria-label": "dashCap" === e.kind ? getI18nString("fullscreen.properties_panel.stroke_settings.dash_cap_round.tooltip") : getI18nString("fullscreen.properties_panel.stroke_settings.end_cap_round.tooltip")
     })]
   });
 }
@@ -85,7 +85,7 @@ export function $$$$x1(e) {
   return jsx("span", {
     "data-testid": "end-point-settings-row",
     children: jsx(cS, {
-      label: s ? _$$t("fullscreen.properties_panel.stroke_settings.end_point") : _$$t("fullscreen.properties_panel.stroke_settings.end_points"),
+      label: s ? getI18nString("fullscreen.properties_panel.stroke_settings.end_point") : getI18nString("fullscreen.properties_panel.stroke_settings.end_points"),
       appendedClassName: $r,
       input: c
     })

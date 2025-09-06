@@ -1,5 +1,5 @@
 import { H0, X9 } from "../figma_app/191804";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Q8, gl, SX } from "../905/216495";
 import { A } from "../905/550748";
 class o extends A {
@@ -108,7 +108,7 @@ export class $$d0 extends $$l3 {
     return "auto".startsWith(e.toLowerCase()) ? Q8 : super.parse(e, t);
   }
   format(e) {
-    return e ? gl(e) ? t("fullscreen.mixed") : SX(e) ? t("fullscreen.properties_panel.stack_panel.auto") : super.format(e) : "";
+    return e ? gl(e) ? getI18nString("fullscreen.mixed") : SX(e) ? getI18nString("fullscreen.properties_panel.stack_panel.auto") : super.format(e) : "";
   }
   clamp(e) {
     return SX(e) ? e : super.clamp(e);

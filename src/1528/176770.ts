@@ -2,7 +2,7 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { c2 } from "../905/382883";
 import { glU } from "../figma_app/763686";
 import { Pt } from "../figma_app/806412";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { UK } from "../figma_app/740163";
 import { J2 } from "../figma_app/84367";
 import { yj } from "../1528/306300";
@@ -21,7 +21,7 @@ export function $$p0({
   return 0 === m.length ? null : jsxs(Fragment, {
     children: [jsx("div", {
       className: "playground_modes_section--title--wPRzF text--fontPos11--2LvXf text--_fontBase--QdLsd",
-      children: tx("design_systems.playground.variable_modes_title")
+      children: renderI18nText("design_systems.playground.variable_modes_title")
     }), m.map(t => jsx(yj, {
       explicitModeID: t.explicitMode,
       fill: e,

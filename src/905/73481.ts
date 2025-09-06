@@ -1,57 +1,107 @@
-import { BEGIN } from 'redux-optimist';
-import { F } from '../905/842794';
-import { Lg } from '../figma_app/897289';
-let s = Object.create(null);
-export function $$o2(e) {
-  let t = e;
-  let i = 0;
-  for (; s[t];) {
-    t = `${e}_${i}`;
-    i += 1;
+import type { Dispatch } from 'redux'
+import { BEGIN } from 'redux-optimist'
+import { generateOptimistId } from '../905/842794'
+import { isDebugMode } from '../figma_app/897289'
+
+/**
+ * Internal registry for unique action types.
+ * @original s
+ */
+const uniqueTypeRegistry: Record<string, boolean> = Object.create(null)
+
+/**
+ * Generates a unique action type string based on the input.
+ * @param baseType - The base action type string.
+ * @returns A unique action type string.
+ * @original $$o2
+ */
+export function generateUniqueType(baseType: string): string {
+  let type = baseType
+  let index = 0
+  while (uniqueTypeRegistry[type]) {
+    type = `${baseType}_${index}`
+    index += 1
   }
-  s[t] = !0;
-  return t;
+  uniqueTypeRegistry[type] = true
+  return type
 }
-export function $$l1(e) {
-  let t = $$o2(e);
-  let i = (e = {}) => ({
-    type: t,
-    payload: e
-  });
-  i.matches = e => e.type === t;
-  Lg() && (i._uniqueType = t);
-  return i;
+
+/**
+ * Creates a simple action creator with a unique type.
+ * @param baseType - The base action type string.
+ * @returns An action creator function with .matches and optional ._uniqueType properties.
+ * @original $$l1
+ */
+export function createActionCreator(baseType: string) {
+  const type = generateUniqueType(baseType)
+  const actionCreator = (payload: Record<string, any> = {}) => ({
+    type,
+    payload,
+  })
+  actionCreator.matches = (action: { type: string }) => action.type === type
+  if (isDebugMode) {
+    (actionCreator as any)._uniqueType = type
+  }
+  return actionCreator
 }
-export function $$d0(e, t, i) {
-  let a = $$o2(e);
-  let s = e => i ? i(e) : a;
-  let l = e => {
-    let i = s(e);
-    return (s, o, l) => {
-      let d = F();
-      let c = t({
-        dispatch: s,
-        getState: o
-      }, e, {
-        loadingKey: i,
-        optimistId: d,
-        ...l
-      });
-      s({
-        type: a,
-        payload: e,
+
+/**
+ * Type for the thunk handler function.
+ * @original $$d0
+ */
+type ThunkHandler<TState = any, TPayload = any, TExtra = Record<string, any>> = (
+  context: { dispatch: Dispatch, getState: () => TState },
+  payload: TPayload,
+  extra: TExtra
+) => any
+
+/**
+ * Creates an async action creator with optimist support.
+ * @param baseType - The base action type string.
+ * @param handler - The thunk handler function.
+ * @param loadingKeySelector - Optional function to select loading key from payload.
+ * @returns An async action creator with .matches and .loadingKeyForPayload properties.
+ * @original $$d0
+ */
+export function createOptimistAction<TState = any, TPayload = any, TExtra extends Record<string, any> = any>(
+  baseType: string,
+  handler: ThunkHandler<TState, TPayload, TExtra>,
+  loadingKeySelector?: (payload: TPayload) => string,
+) {
+  const type = generateUniqueType(baseType)
+  const getLoadingKey = loadingKeySelector || (() => type)
+
+  const asyncActionCreator = (payload: TPayload) => {
+    const loadingKey = getLoadingKey(payload)
+    return (dispatch: Dispatch, getState: () => TState, extra = {} as TExtra) => {
+      const optimistId = generateOptimistId()
+      const result = handler(
+        { dispatch, getState },
+        payload,
+        {
+          loadingKey,
+          optimistId,
+          ...(extra || {}),
+        },
+      )
+      dispatch({
+        type,
+        payload,
         optimist: {
           type: BEGIN,
-          id: d
-        }
-      });
-      return c;
-    };
-  };
-  l.matches = e => e.type === a;
-  l.loadingKeyForPayload = s;
-  return l;
+          id: optimistId,
+        },
+      })
+      return result
+    }
+  }
+
+  asyncActionCreator.matches = (action: { type: string }) => action.type === type
+  asyncActionCreator.loadingKeyForPayload = getLoadingKey
+  return asyncActionCreator
 }
-export const MM = $$d0;
-export const NC = $$l1;
-export const T4 = $$o2;
+
+// Exported names refactored for clarity and traceability
+export const MM = createOptimistAction // original: MM = $$d0
+export const NC = createActionCreator // original: NC = $$l1
+export const T4 = generateUniqueType // original: T4 = $$o2

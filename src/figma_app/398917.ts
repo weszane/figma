@@ -23,7 +23,7 @@ import { of, v_, aH } from "../figma_app/806412";
 import { E as _$$E } from "../905/277716";
 import { c$, wv } from "../figma_app/236327";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { sT } from "../figma_app/740163";
 import { BK } from "../905/848862";
 import { kG } from "../figma_app/482495";
@@ -90,7 +90,7 @@ export function $$Z0() {
         value: _.letterSpacing.value,
         units: _.letterSpacing.units
       };
-      glU.createVariantForSelectedTextStyleNode(dI(_.guid), t || 0, r || _$$t("sites.panel.responsive_text_style.custom"), _.fontSize, e, n, _.paragraphSpacing);
+      glU.createVariantForSelectedTextStyleNode(dI(_.guid), t || 0, r || getI18nString("sites.panel.responsive_text_style.custom"), _.fontSize, e, n, _.paragraphSpacing);
     });
     e.hide();
   };
@@ -101,12 +101,12 @@ export function $$Z0() {
       children: [jsx(Wv, {
         isEmpty: 0 === _.responsiveTextStyleVariants.length,
         faded: 0 === _.responsiveTextStyleVariants.length,
-        titleTx: tx("sites.panel.responsive_text_style.title"),
+        titleTx: renderI18nText("sites.panel.responsive_text_style.title"),
         children: jsx(_$$d, {
           ref: t,
           onClick: () => e.toggle(),
           "aria-expanded": e.showing,
-          "aria-label": _$$t("sites.panel.responsive_text_style.add_new_style_breakpoint"),
+          "aria-label": getI18nString("sites.panel.responsive_text_style.add_new_style_breakpoint"),
           children: jsx(_$$e, {})
         })
       }), _.responsiveTextStyleVariants.map((e, t) => {
@@ -149,17 +149,17 @@ function Q({
   onAddNewVariant: i,
   onAddCustomVariant: a
 }) {
-  let s = e.some(e => e.minWidth < _$$b && e.name === _$$t("sites.breakpoint_bar.add_mobile_breakpoint"));
-  let o = e.some(e => e.minWidth >= zQ && e.name === _$$t("sites.breakpoint_bar.add_desktop_breakpoint"));
-  let l = e.some(e => e.minWidth > _$$b && e.minWidth < zQ && e.name === _$$t("sites.breakpoint_bar.add_tablet_breakpoint"));
+  let s = e.some(e => e.minWidth < _$$b && e.name === getI18nString("sites.breakpoint_bar.add_mobile_breakpoint"));
+  let o = e.some(e => e.minWidth >= zQ && e.name === getI18nString("sites.breakpoint_bar.add_desktop_breakpoint"));
+  let l = e.some(e => e.minWidth > _$$b && e.minWidth < zQ && e.name === getI18nString("sites.breakpoint_bar.add_tablet_breakpoint"));
   let d = [];
   s || d.unshift(jsx(c$, {
-    onClick: () => i(1, _$$t("sites.breakpoint_bar.add_mobile_breakpoint")),
+    onClick: () => i(1, getI18nString("sites.breakpoint_bar.add_mobile_breakpoint")),
     children: jsxs("div", {
       className: q,
       children: [jsxs("div", {
         className: $,
-        children: [jsx(_$$T, {}), tx("sites.breakpoint_bar.add_mobile_breakpoint")]
+        children: [jsx(_$$T, {}), renderI18nText("sites.breakpoint_bar.add_mobile_breakpoint")]
       }), jsxs("span", {
         className: Y,
         children: ["1 - ", IL - 1]
@@ -167,12 +167,12 @@ function Q({
     })
   }, "add-mobile-breakpoint"));
   l || d.unshift(jsx(c$, {
-    onClick: () => i(IL, _$$t("sites.breakpoint_bar.add_tablet_breakpoint")),
+    onClick: () => i(IL, getI18nString("sites.breakpoint_bar.add_tablet_breakpoint")),
     children: jsxs("div", {
       className: q,
       children: [jsxs("div", {
         className: $,
-        children: [jsx(_$$d2, {}), tx("sites.breakpoint_bar.add_tablet_breakpoint")]
+        children: [jsx(_$$d2, {}), renderI18nText("sites.breakpoint_bar.add_tablet_breakpoint")]
       }), jsxs("span", {
         className: Y,
         children: [IL, " - ", yF - 1]
@@ -180,12 +180,12 @@ function Q({
     })
   }, "add-tablet-breakpoint"));
   o || d.unshift(jsx(c$, {
-    onClick: () => i(yF, _$$t("sites.breakpoint_bar.add_desktop_breakpoint")),
+    onClick: () => i(yF, getI18nString("sites.breakpoint_bar.add_desktop_breakpoint")),
     children: jsxs("div", {
       className: q,
       children: [jsxs("div", {
         className: $,
-        children: [jsx(_$$J, {}), tx("sites.breakpoint_bar.add_desktop_breakpoint")]
+        children: [jsx(_$$J, {}), renderI18nText("sites.breakpoint_bar.add_desktop_breakpoint")]
       }), jsxs("span", {
         className: Y,
         children: [yF, "+"]
@@ -193,9 +193,9 @@ function Q({
     })
   }, "add-desktop-breakpoint"));
   let c = e => {
-    let t = e.name === _$$t("sites.breakpoint_bar.add_desktop_breakpoint") && (e.minWidth === yF || e.currentSize === yF);
-    let r = e.name === _$$t("sites.breakpoint_bar.add_tablet_breakpoint") && (e.minWidth === IL || e.currentSize === IL);
-    let n = e.name === _$$t("sites.breakpoint_bar.add_mobile_breakpoint") && (1 === e.minWidth || 1 === e.currentSize);
+    let t = e.name === getI18nString("sites.breakpoint_bar.add_desktop_breakpoint") && (e.minWidth === yF || e.currentSize === yF);
+    let r = e.name === getI18nString("sites.breakpoint_bar.add_tablet_breakpoint") && (e.minWidth === IL || e.currentSize === IL);
+    let n = e.name === getI18nString("sites.breakpoint_bar.add_mobile_breakpoint") && (1 === e.minWidth || 1 === e.currentSize);
     return t || r || n;
   };
   let u = t.filter(t => !(c(t) || e && e.some(e => e.minWidth === t.minWidth)));
@@ -227,7 +227,7 @@ function Q({
         className: q,
         children: jsxs("div", {
           className: $,
-          children: [jsx(_$$q, {}), tx("sites.breakpoint_bar.add_custom_breakpoint")]
+          children: [jsx(_$$q, {}), renderI18nText("sites.breakpoint_bar.add_custom_breakpoint")]
         })
       })
     }, "add-custom-breakpoint")]
@@ -252,14 +252,14 @@ function ee({
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: tx("sites.panel.responsive_text_style.custom_breakpoint")
+          children: renderI18nText("sites.panel.responsive_text_style.custom_breakpoint")
         })
       }), jsx(nB, {
         padding: 0,
         children: jsxs("div", {
           className: X,
           children: [jsx(fn, {
-            leftInput: _$$t("sites.panel.responsive_text_style.name"),
+            leftInput: getI18nString("sites.panel.responsive_text_style.name"),
             rightInput: jsx(ks, {
               ref: b,
               className: J,
@@ -277,7 +277,7 @@ function ee({
             rightLabel: void 0,
             icon: void 0
           }), jsx(fn, {
-            leftInput: _$$t("sites.panel.responsive_text_style.min_width"),
+            leftInput: getI18nString("sites.panel.responsive_text_style.min_width"),
             rightInput: jsx($j, {
               value: h,
               id: "responsive_text_style_variant_custom_min_width",
@@ -286,7 +286,7 @@ function ee({
                 y(e.some(e => e.minWidth === t));
               },
               dispatch: o,
-              "data-tooltip": _$$t("sites.panel.responsive_text_style.min_width"),
+              "data-tooltip": getI18nString("sites.panel.responsive_text_style.min_width"),
               "data-tooltip-type": Ib.TEXT,
               min: 1,
               smallNudgeAmount: u.smallNudgeAmount,
@@ -300,7 +300,7 @@ function ee({
             rightLabel: void 0,
             icon: g && jsx(Z, {
               "data-tooltip-type": Ib.TEXT,
-              "data-tooltip": _$$t("sites.panel.responsive_text_style.min_width_conflicts")
+              "data-tooltip": getI18nString("sites.panel.responsive_text_style.min_width_conflicts")
             })
           }), jsx("div", {
             className: "responsive_text_style_variants--row--pcVq- ui3_rows--_row--DnZFk ui3_rows--_grid--cP2Wu",
@@ -308,7 +308,7 @@ function ee({
               onClick: () => {
                 a(h, p);
               },
-              children: tx("sites.panel.responsive_text_style.create_custom_breakpoint")
+              children: renderI18nText("sites.panel.responsive_text_style.create_custom_breakpoint")
             })
           })]
         })
@@ -334,7 +334,7 @@ function et({
         className: (_$$s.alignLeft.$, "responsive_text_style_variants--breakpointIconAndText--yCSLI"),
         children: [d && jsx(Z, {
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": _$$t("sites.panel.responsive_text_style.min_width_conflicts")
+          "data-tooltip": getI18nString("sites.panel.responsive_text_style.min_width_conflicts")
         }), e.name, jsxs("span", {
           className: "responsive_text_style_variants--breakpointText--Pleoi",
           children: ["\xb7 ", _]
@@ -343,12 +343,12 @@ function et({
       leftIcon: jsx(_$$d, {
         ref: c,
         "aria-expanded": p.showing,
-        "aria-label": _$$t("sites.panel.responsive_text_style.settings"),
+        "aria-label": getI18nString("sites.panel.responsive_text_style.settings"),
         onClick: () => p.toggle(() => cn(c.current, s + 240 - 50)),
         children: jsx(_$$A, {})
       }),
       rightIcon: jsx(_$$K, {
-        "aria-label": _$$t("sites.panel.responsive_text_style.settings"),
+        "aria-label": getI18nString("sites.panel.responsive_text_style.settings"),
         onClick: () => {
           l7.user("delete-responsive-text-style-variant", () => {
             glU.deleteVariantForTextStyleNode(dI(a), r);
@@ -414,14 +414,14 @@ function er({
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: tx("sites.panel.responsive_text_style.settings")
+          children: renderI18nText("sites.panel.responsive_text_style.settings")
         })
       }), jsx(nB, {
         padding: 0,
         children: jsxs("div", {
           className: X,
           children: [jsx(fn, {
-            leftInput: _$$t("sites.panel.responsive_text_style.name"),
+            leftInput: getI18nString("sites.panel.responsive_text_style.name"),
             rightInput: jsx(ks, {
               autoComplete: "off",
               autoFocus: !0,
@@ -434,7 +434,7 @@ function er({
               },
               onFocus: () => (m(h), aH),
               onKeyDown: R,
-              placeholder: _$$t("sites.panel.responsive_text_style.custom"),
+              placeholder: getI18nString("sites.panel.responsive_text_style.custom"),
               recordingKey: "responsiveTextStyleVariantCustomName",
               value: h
             }),
@@ -442,7 +442,7 @@ function er({
             leftLabel: void 0,
             rightLabel: void 0
           }), jsx(fn, {
-            leftInput: _$$t("sites.panel.responsive_text_style.min_width"),
+            leftInput: getI18nString("sites.panel.responsive_text_style.min_width"),
             rightInput: jsx($j, {
               value: g,
               id: "responsive_text_style_variant_min_width" + r,
@@ -455,7 +455,7 @@ function er({
                 A(n > 1 && r === e.minWidth || n >= 1 && r !== e.minWidth);
               },
               dispatch: p,
-              "data-tooltip": _$$t("sites.panel.responsive_text_style.min_width"),
+              "data-tooltip": getI18nString("sites.panel.responsive_text_style.min_width"),
               "data-tooltip-type": Ib.TEXT,
               min: 1,
               smallNudgeAmount: _.smallNudgeAmount,
@@ -467,7 +467,7 @@ function er({
             }),
             icon: b && jsx(Z, {
               "data-tooltip-type": Ib.TEXT,
-              "data-tooltip": _$$t("sites.panel.responsive_text_style.min_width_conflicts")
+              "data-tooltip": getI18nString("sites.panel.responsive_text_style.min_width_conflicts")
             }),
             leftLabel: void 0,
             rightLabel: void 0

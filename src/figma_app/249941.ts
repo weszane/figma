@@ -68,7 +68,7 @@ import { xx } from "../figma_app/815945";
 import ef from "classnames";
 import { B as _$$B2, V as _$$V2 } from "../905/714743";
 import { t as _$$t2 } from "../905/331623";
-import { t as _$$t3 } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { U as _$$U } from "../905/492359";
 import { s$ } from "../905/432493";
 import { NO } from "../905/619652";
@@ -202,22 +202,22 @@ export function $$tI2(e) {
           case "UNION":
             return {
               src: n ? jsx(_$$C, {}) : _$$A1,
-              tooltip: _$$t3("layer_icon.tooltip.union")
+              tooltip: getI18nString("layer_icon.tooltip.union")
             };
           case "INTERSECT":
             return {
               src: n ? jsx(_$$q2, {}) : _$$A9,
-              tooltip: _$$t3("layer_icon.tooltip.intersect")
+              tooltip: getI18nString("layer_icon.tooltip.intersect")
             };
           case "SUBTRACT":
             return {
               src: n ? jsx(_$$j, {}) : _$$A0,
-              tooltip: _$$t3("layer_icon.tooltip.subtract")
+              tooltip: getI18nString("layer_icon.tooltip.subtract")
             };
           case "XOR":
             return {
               src: n ? jsx(_$$p, {}) : _$$A10,
-              tooltip: _$$t3("layer_icon.tooltip.exclude")
+              tooltip: getI18nString("layer_icon.tooltip.exclude")
             };
           default:
             return s;
@@ -225,62 +225,62 @@ export function $$tI2(e) {
       case "VECTOR":
         return {
           src: n ? jsx(_$$g, {}) : _$$A50,
-          tooltip: _$$t3("layer_icon.tooltip.vector")
+          tooltip: getI18nString("layer_icon.tooltip.vector")
         };
       case "STAR":
         return {
           src: n ? jsx(_$$j2, {}) : _$$A41,
-          tooltip: _$$t3("layer_icon.tooltip.star")
+          tooltip: getI18nString("layer_icon.tooltip.star")
         };
       case "LINE":
         return {
           src: n ? jsx(_$$z, {}) : _$$A19,
-          tooltip: _$$t3("layer_icon.tooltip.line")
+          tooltip: getI18nString("layer_icon.tooltip.line")
         };
       case "ELLIPSE":
         return {
           src: n ? jsx(_$$H, {}) : _$$A12,
-          tooltip: _$$t3("layer_icon.tooltip.ellipse")
+          tooltip: getI18nString("layer_icon.tooltip.ellipse")
         };
       case "RECTANGLE":
       case "ROUNDED_RECTANGLE":
         return {
           src: n ? jsx(_$$M, {}) : _$$A25,
-          tooltip: _$$t3("layer_icon.tooltip.rectangle")
+          tooltip: getI18nString("layer_icon.tooltip.rectangle")
         };
       case "REGULAR_POLYGON":
         return {
           src: n ? jsx(_$$X, {}) : _$$A24,
-          tooltip: _$$t3("layer_icon.tooltip.polygon")
+          tooltip: getI18nString("layer_icon.tooltip.polygon")
         };
       case "TEXT":
         return {
           src: n ? jsx(_$$I, {}) : _$$A48,
-          tooltip: _$$t3("layer_icon.tooltip.text")
+          tooltip: getI18nString("layer_icon.tooltip.text")
         };
       case "SLICE":
         return {
           src: n ? jsx(_$$z2, {}) : _$$A29,
-          tooltip: _$$t3("layer_icon.tooltip.slice")
+          tooltip: getI18nString("layer_icon.tooltip.slice")
         };
       case "TRANSFORM":
         return {
           src: n ? jsx(_$$$, {}) : _$$A15,
-          tooltip: _$$t3("layer_icon.tooltip.transform")
+          tooltip: getI18nString("layer_icon.tooltip.transform")
         };
       case "GROUP":
       case "FRAME":
         if (oz() && t(e) && e.parentNode?.isResponsiveSetOrWebpage) return {
           src: _$$n3(e.size.x),
-          tooltip: _$$t3("layer_icon.tooltip.layout")
+          tooltip: getI18nString("layer_icon.tooltip.layout")
         };
         if (e.isStateGroup) return {
           src: n ? jsx(_$$k, {}) : _$$A44,
-          tooltip: _$$t3("layer_icon.tooltip.component")
+          tooltip: getI18nString("layer_icon.tooltip.component")
         };
         if (t(e) && getFeatureFlags().dse_slots && e.isSlotReactive) return {
           src: jsx(_$$R, {}),
-          tooltip: _$$t3("layer_icon.tooltip.slot")
+          tooltip: getI18nString("layer_icon.tooltip.slot")
         };
         if (Rt(e)) return {
           src: n ? function (e) {
@@ -326,217 +326,217 @@ export function $$tI2(e) {
             }
             return jsx(_$$q, {});
           }(e) : $$tI2(e),
-          tooltip: _$$t3("layer_icon.tooltip.auto_layout")
+          tooltip: getI18nString("layer_icon.tooltip.auto_layout")
         };else if (po(e)) return {
           src: jsx(_$$y, {}),
-          tooltip: _$$t3("layer_icon.tooltip.auto_layout")
+          tooltip: getI18nString("layer_icon.tooltip.auto_layout")
         };else if (e.resizeToFit) return {
           src: n ? jsx(_$$g2, {}) : _$$A15,
-          tooltip: _$$t3("layer_icon.tooltip.group")
+          tooltip: getI18nString("layer_icon.tooltip.group")
         };else return {
           src: n ? jsx(_$$q, {}) : _$$A14,
-          tooltip: _$$t3("layer_icon.tooltip.frame")
+          tooltip: getI18nString("layer_icon.tooltip.frame")
         };
       case "WEBPAGE":
       case "RESPONSIVE_NODE_SET":
       case "RESPONSIVE_SET":
         if (e.isMakeResponsiveSet) return {
           src: jsx(_$$l, {}),
-          tooltip: _$$t3("layer_icon.tooltip.code_layer")
+          tooltip: getI18nString("layer_icon.tooltip.code_layer")
         };
         if (oz()) return {
           src: a === g$.Webpage ? jsx(_$$A2, {}) : jsx(_$$t, {}),
-          tooltip: _$$t3("layer_icon.tooltip.webpage")
+          tooltip: getI18nString("layer_icon.tooltip.webpage")
         };
         return {
           src: n ? jsx(_$$q, {}) : _$$A14,
-          tooltip: _$$t3("layer_icon.tooltip.frame")
+          tooltip: getI18nString("layer_icon.tooltip.frame")
         };
       case "REPEATER":
         if (oz() && _$$U()) return {
           src: jsx(_$$u, {}),
-          tooltip: _$$t3("layer_icon.tooltip.repeater")
+          tooltip: getI18nString("layer_icon.tooltip.repeater")
         };
         return {
           src: _$$A14,
-          tooltip: _$$t3("layer_icon.tooltip.frame")
+          tooltip: getI18nString("layer_icon.tooltip.frame")
         };
       case "CMS_RICH_TEXT":
         if (oz() && _$$U()) return {
           src: jsx(_$$G, {}),
-          tooltip: _$$t3("layer_icon.tooltip.cms_rich_text")
+          tooltip: getI18nString("layer_icon.tooltip.cms_rich_text")
         };
         return {
           src: _$$A14,
-          tooltip: _$$t3("layer_icon.tooltip.frame")
+          tooltip: getI18nString("layer_icon.tooltip.frame")
         };
       case "CODE_COMPONENT":
         if (oz()) return {
           src: jsx(_$$R2, {}),
-          tooltip: _$$t3("layer_icon.tooltip.code_component")
+          tooltip: getI18nString("layer_icon.tooltip.code_component")
         };
         return {
           src: _$$A14,
-          tooltip: _$$t3("layer_icon.tooltip.component")
+          tooltip: getI18nString("layer_icon.tooltip.component")
         };
       case "CODE_INSTANCE":
         if (!oz()) return {
           src: _$$A14,
-          tooltip: _$$t3("layer_icon.tooltip.component")
+          tooltip: getI18nString("layer_icon.tooltip.component")
         };
         if (e instanceof SceneNode) {
           if (e.isMainComponentLikeCodeNode) return {
             src: jsx(_$$R2, {}),
-            tooltip: _$$t3("layer_icon.tooltip.code_component")
+            tooltip: getI18nString("layer_icon.tooltip.code_component")
           };
           if (e.isLayerLikeCodeNode) return {
             src: jsx(_$$l, {}),
-            tooltip: _$$t3("layer_icon.tooltip.code_layer")
+            tooltip: getI18nString("layer_icon.tooltip.code_layer")
           };
           return {
             src: jsx(_$$$2, {}),
-            tooltip: _$$t3("layer_icon.tooltip.code_instance")
+            tooltip: getI18nString("layer_icon.tooltip.code_instance")
           };
         }
         if (e.isMainCodeComponent) return {
           src: jsx(_$$R2, {}),
-          tooltip: _$$t3("layer_icon.tooltip.code_component")
+          tooltip: getI18nString("layer_icon.tooltip.code_component")
         };
         if (e.autoForkCode) return {
           src: jsx(_$$l, {}),
-          tooltip: _$$t3("layer_icon.tooltip.code_layer")
+          tooltip: getI18nString("layer_icon.tooltip.code_layer")
         };
         return {
           src: jsx(_$$$2, {}),
-          tooltip: _$$t3("layer_icon.tooltip.code_instance")
+          tooltip: getI18nString("layer_icon.tooltip.code_instance")
         };
       case "REACT_FIBER":
         return {
           src: jsx(_$$O, {}),
-          tooltip: _$$t3("layer_icon.tooltip.react_fiber")
+          tooltip: getI18nString("layer_icon.tooltip.react_fiber")
         };
       case "CODE_LAYER":
         if (oz()) return {
           src: jsx(_$$l, {}),
-          tooltip: _$$t3("layer_icon.tooltip.code_layer")
+          tooltip: getI18nString("layer_icon.tooltip.code_layer")
         };
         return {
           src: _$$A14,
-          tooltip: _$$t3("layer_icon.tooltip.component")
+          tooltip: getI18nString("layer_icon.tooltip.component")
         };
       case "CODE_LIBRARY":
         if (oz()) return {
           src: jsx(_$$O, {}),
-          tooltip: _$$t3("layer_icon.tooltip.code_library")
+          tooltip: getI18nString("layer_icon.tooltip.code_library")
         };
         return {
           src: _$$A14,
-          tooltip: _$$t3("layer_icon.tooltip.component")
+          tooltip: getI18nString("layer_icon.tooltip.component")
         };
       case "CODE_FILE":
         if (!oz()) return {
           src: _$$A14,
-          tooltip: _$$t3("layer_icon.tooltip.component")
+          tooltip: getI18nString("layer_icon.tooltip.component")
         };
         if (!(e instanceof SceneNode)) return {
           src: jsx(_$$R2, {}),
-          tooltip: _$$t3("layer_icon.tooltip.code_component")
+          tooltip: getI18nString("layer_icon.tooltip.code_component")
         };
         if (e.isLayerLikeCodeNode) return {
           src: jsx(_$$l, {}),
-          tooltip: _$$t3("layer_icon.tooltip.code_layer")
+          tooltip: getI18nString("layer_icon.tooltip.code_layer")
         };
         return {
           src: jsx(_$$R2, {}),
-          tooltip: _$$t3("layer_icon.tooltip.code_component")
+          tooltip: getI18nString("layer_icon.tooltip.code_component")
         };
       case "MODULE":
         return {
           src: _$$A46,
-          tooltip: _$$t3("layer_icon.tooltip.module")
+          tooltip: getI18nString("layer_icon.tooltip.module")
         };
       case "CODE_BLOCK":
         return {
           src: jsx(_$$n2, {}),
-          tooltip: _$$t3("layer_icon.tooltip.code_block")
+          tooltip: getI18nString("layer_icon.tooltip.code_block")
         };
       case "SYMBOL":
         if (getFeatureFlags().dse_templates_proto && t(e) && e.isTemplate) return {
           src: _$$A46,
-          tooltip: _$$t3("layer_icon.tooltip.template")
+          tooltip: getI18nString("layer_icon.tooltip.template")
         };
         if (t(e) && e.isState || r?.isStateGroup) return {
           src: n ? jsx(_$$y2, {}) : _$$A45,
-          tooltip: _$$t3("layer_icon.tooltip.variant")
+          tooltip: getI18nString("layer_icon.tooltip.variant")
         };
         return {
           src: n ? jsx(_$$k, {}) : _$$A44,
-          tooltip: _$$t3("layer_icon.tooltip.component")
+          tooltip: getI18nString("layer_icon.tooltip.component")
         };
       case "INSTANCE":
         return {
           src: n ? jsx(_$$m, {}) : _$$A16,
-          tooltip: _$$t3("layer_icon.tooltip.instance")
+          tooltip: getI18nString("layer_icon.tooltip.instance")
         };
       case "STICKY":
         return {
           src: n ? jsx(_$$a, {}) : _$$A42,
-          tooltip: _$$t3("layer_icon.tooltip.sticky")
+          tooltip: getI18nString("layer_icon.tooltip.sticky")
         };
       case "SHAPE_WITH_TEXT":
         return {
           src: n ? jsx(_$$T, {}) : _$$A27,
-          tooltip: _$$t3("layer_icon.tooltip.shape_with_text")
+          tooltip: getI18nString("layer_icon.tooltip.shape_with_text")
         };
       case "CONNECTOR":
         return {
           src: n ? jsx(_$$y3, {}) : _$$A11,
-          tooltip: _$$t3("layer_icon.tooltip.connector")
+          tooltip: getI18nString("layer_icon.tooltip.connector")
         };
       case "STAMP":
         return {
           src: n ? jsx(_$$w, {}) : _$$A40,
-          tooltip: _$$t3("layer_icon.tooltip.stamp")
+          tooltip: getI18nString("layer_icon.tooltip.stamp")
         };
       case "SECTION":
         return {
           src: n ? jsx(_$$e, {}) : _$$A26,
-          tooltip: _$$t3("layer_icon.tooltip.section")
+          tooltip: getI18nString("layer_icon.tooltip.section")
         };
       case "WIDGET":
         {
           let t = e.guid ? getSingletonSceneGraph().get(e.guid.toString()) : null;
           if (t && "EMBED_WIDGET" === t.widgetId) return {
             src: n ? jsx(_$$G2, {}) : _$$A13,
-            tooltip: _$$t3("layer_icon.tooltip.embed")
+            tooltip: getI18nString("layer_icon.tooltip.embed")
           };
           if (t && "LINK_PREVIEW_WIDGET" === t.widgetId) return {
             src: n ? jsx(_$$N, {}) : _$$A20,
-            tooltip: _$$t3("layer_icon.tooltip.link_preview")
+            tooltip: getI18nString("layer_icon.tooltip.link_preview")
           };
           if (t && "HTML_WIDGET" === t.widgetId) return {
             src: jsx(_$$V, {}),
-            tooltip: _$$t3("layer_icon.tooltip.embed")
+            tooltip: getI18nString("layer_icon.tooltip.embed")
           };
           return {
             src: n ? jsx(_$$h2, {}) : _$$A51,
-            tooltip: _$$t3("layer_icon.tooltip.widget")
+            tooltip: getI18nString("layer_icon.tooltip.widget")
           };
         }
       case "CANVAS":
         return {
           src: _$$A22,
-          tooltip: _$$t3("layer_icon.tooltip.canvas")
+          tooltip: getI18nString("layer_icon.tooltip.canvas")
         };
       case "TABLE":
         return {
           src: n ? jsx(_$$r, {}) : _$$A47,
-          tooltip: _$$t3("layer_icon.tooltip.table")
+          tooltip: getI18nString("layer_icon.tooltip.table")
         };
       case "SLIDE":
         return {
           src: n ? jsx(_$$s, {}) : _$$A30,
-          tooltip: _$$t3("layer_icon.tooltip.slide")
+          tooltip: getI18nString("layer_icon.tooltip.slide")
         };
     }
     return s;
@@ -728,7 +728,7 @@ export function $$tI2(e) {
       isMenuIcon && (f = isMenuIconPurple ? aN : TK);
       let E = !1;
       let y = "";
-      this.props.isDefaultResponsiveSet ? (e = panelType === g$.Webpage ? jsx(_$$Q, {}) : jsx(_$$t, {}), y = _$$t3("layer_icon.tooltip.home")) : node.mask ? (e = this.props.useUI3Icon ? jsx(_$$d2, {}) : _$$A21, y = _$$t3("layer_icon.tooltip.mask")) : (animated || staticImage) && oY(node.type) && !GI(node) ? animated ? (e = this.props.useUI3Icon ? jsx(_$$_, {}) : _$$A17, y = _$$t3("layer_icon.tooltip.video")) : (e = this.props.useUI3Icon ? jsx(_$$_2, {}) : _$$A18, y = _$$t3("layer_icon.tooltip.image")) : thumbnailSrc ? (e = _$$V2(thumbnailSrc), y = r(node, parentNode).tooltip) : editModeType === m1T.DEV_HANDOFF && detachedInfo?.status === "loaded" && "SYMBOL" !== node.type && "INSTANCE" !== node.type ? (e = this.props.useUI3Icon ? jsx(_$$o, {}) : _$$A3, E = !0) : this.props.isCodeConnected ? (e = jsx(_$$s2, {}), y = _$$t3("layer_icon.tooltip.code_connect")) : ({
+      this.props.isDefaultResponsiveSet ? (e = panelType === g$.Webpage ? jsx(_$$Q, {}) : jsx(_$$t, {}), y = getI18nString("layer_icon.tooltip.home")) : node.mask ? (e = this.props.useUI3Icon ? jsx(_$$d2, {}) : _$$A21, y = getI18nString("layer_icon.tooltip.mask")) : (animated || staticImage) && oY(node.type) && !GI(node) ? animated ? (e = this.props.useUI3Icon ? jsx(_$$_, {}) : _$$A17, y = getI18nString("layer_icon.tooltip.video")) : (e = this.props.useUI3Icon ? jsx(_$$_2, {}) : _$$A18, y = getI18nString("layer_icon.tooltip.image")) : thumbnailSrc ? (e = _$$V2(thumbnailSrc), y = r(node, parentNode).tooltip) : editModeType === m1T.DEV_HANDOFF && detachedInfo?.status === "loaded" && "SYMBOL" !== node.type && "INSTANCE" !== node.type ? (e = this.props.useUI3Icon ? jsx(_$$o, {}) : _$$A3, E = !0) : this.props.isCodeConnected ? (e = jsx(_$$s2, {}), y = getI18nString("layer_icon.tooltip.code_connect")) : ({
         src: e,
         tooltip: y
       } = r(node, parentNode, this.props.useUI3Icon, panelType), t = function (e) {

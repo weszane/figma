@@ -1,6 +1,6 @@
 import { getLocalStorage } from "../905/657224";
 import { NC } from "../905/17179";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { QQ } from "../figma_app/808294";
 import { nF } from "../905/350402";
 import { N } from "../905/696711";
@@ -20,7 +20,7 @@ nF((e, t) => {
     if (Array.isArray(e)) {
       let t = new Set(l.map(e => e.monetized_resource_metadata_id));
       let n = e.map(e => e.monetized_resource_metadata_id).filter(e => !t.has(e));
-      n.length && x1("community", "[ActivePayments] mismatch detected", {
+      n.length && logError("community", "[ActivePayments] mismatch detected", {
         source,
         userId: o,
         revoked: n,

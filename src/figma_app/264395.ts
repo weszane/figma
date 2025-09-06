@@ -3,9 +3,9 @@ import { useDispatch } from "../vendor/514228";
 import { jm } from "../figma_app/416935";
 import { debugState } from "../905/407919";
 import { Rs } from "../figma_app/288654";
-import { XN } from "../figma_app/778880";
+import { isIpadDevice } from "../figma_app/778880";
 import { g as _$$g } from "../905/880308";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { $ } from "../905/851662";
 import { _ as _$$_ } from "../905/170564";
 import { lg } from "../figma_app/976749";
@@ -21,7 +21,7 @@ export function $$y1() {
   let t = useRef("");
   let r = "whiteboard" === lg();
   let a = aq();
-  let E = XN ? FDeviceType.DESKTOP : FDeviceType.IPAD;
+  let E = isIpadDevice ? FDeviceType.DESKTOP : FDeviceType.IPAD;
   let y = Rs(o$Q, {
     deviceType: E
   });
@@ -63,7 +63,7 @@ export function $$y1() {
         e($.enqueue({
           notification: {
             type: _$$_.CLIPBOARD_DATA_AVAILABLE,
-            message: _$$t("fullscreen.notification.clipboard_data_available"),
+            message: getI18nString("fullscreen.notification.clipboard_data_available"),
             downloadUrl: n.presignedDownloadUrl,
             deviceType: n.deviceType,
             timestamp: n.timestamp,

@@ -3,7 +3,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { bq3 } from "../figma_app/763686";
 import { Ay } from "../vendor/159563";
 import { Uz } from "../905/63728";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { nF } from "../905/350402";
 import { sf } from "../905/929976";
 import { hY, qt } from "../figma_app/349969";
@@ -193,7 +193,7 @@ let $$C7 = (() => {
     let n = t.params || {};
     let a = U2(r.selectedView);
     if (!a) {
-      $D(_$$e.PROTOTYPING, Error("No file key for prototype event"));
+      reportError(_$$e.PROTOTYPING, Error("No file key for prototype event"));
       return;
     }
     GS(t.name, a, r, n);

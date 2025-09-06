@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { U } from "../905/275247";
 import { x } from "../905/811596";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import o from "classnames";
 import { s as _$$s } from "../cssbuilder/589278";
 import { T5 } from "../figma_app/465071";
@@ -35,7 +35,7 @@ export function $$g1({
   libraryKey: e,
   ...t
 }) {
-  let r = md(d$);
+  let r = useAtomWithSubscription(d$);
   let i = T5("ApprovedLibraryIconForFullScreen").unwrapOr(null);
   let a = i?.name;
   let o = Ho(e);
@@ -46,7 +46,7 @@ export function $$g1({
   });
 }
 export function $$f2(e) {
-  let t = md(G7);
+  let t = useAtomWithSubscription(G7);
   let r = T5("ApprovedLibraryIconForUserDefaultSubscriptions").unwrapOr(null);
   let i = r?.name;
   let a = Ho(e.libraryKey);

@@ -1,7 +1,7 @@
 import { mHF } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { g } from "../905/871474";
 import { fY, Iy, u2 } from "../figma_app/761118";
 import { td } from "../figma_app/827216";
@@ -124,7 +124,7 @@ class c {
     }
   }
   getLintingTargetIdSet() {
-    let e = zl.get(fY);
+    let e = atomStoreManager.get(fY);
     return e ? new Set(e.guids) : new Set();
   }
   updateVisualGroupsMapAtom() {
@@ -138,7 +138,7 @@ class c {
       let t = this._groupIdToGroup.get(i);
       t && e.set(i, t);
     }
-    zl.set(Iy, e);
+    atomStoreManager.set(Iy, e);
   }
   mapViolatingNodeIdAndRootIdsInGroup(e, t, i) {
     e.violatingNodeIdToRootNodeId.set(t, i);
@@ -350,7 +350,7 @@ export class $$m0 {
     this._abortSignal = e;
   }
   resetInternalAtomState() {
-    zl.set(Iy, new Map());
+    atomStoreManager.set(Iy, new Map());
   }
   resetInternalState() {
     this.stopGroupingWorker();
@@ -390,7 +390,7 @@ export class $$m0 {
     });
   }
   getLintingTargetIdSet() {
-    let e = zl.get(fY);
+    let e = atomStoreManager.get(fY);
     return e ? new Set(e.guids) : new Set();
   }
   async checkYield() {
@@ -421,7 +421,7 @@ export class $$m0 {
   async processBatchIntoVisualGroups() {
     if (this._currentViolatingNodeIdsPayload) return;
     if (this.hasLinterAborted()) {
-      zl.set(u2, td.IDLE);
+      atomStoreManager.set(u2, td.IDLE);
       this.stopGroupingWorker();
       return;
     }

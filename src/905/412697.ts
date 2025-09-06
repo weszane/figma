@@ -2,7 +2,7 @@ import { useState, useCallback, useMemo } from "react";
 import { debounce } from "../905/915765";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Y5 } from "../figma_app/455680";
 import { zk } from "../figma_app/198712";
 export function $$c0({
@@ -37,7 +37,7 @@ export function $$c0({
     }
     let f = performance.now();
     t(n, c ? zk.YES_WITHOUT_TRACKING_AS_EDIT : zk.NO);
-    getFeatureFlags().ee_canvas_previews_logging && u && sx("on_canvas_preview", {
+    getFeatureFlags().ee_canvas_previews_logging && u && trackEventAnalytics("on_canvas_preview", {
       timeMs: performance.now() - f,
       directlySelectedNodesCount: l,
       property: u

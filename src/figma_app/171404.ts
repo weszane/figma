@@ -2,8 +2,8 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { k } from "../905/443820";
 import { xk } from "@stylexjs/stylex";
-import { md } from "../figma_app/27355";
-import { az } from "../905/449184";
+import { useAtomWithSubscription } from "../figma_app/27355";
+import { analyticsEventManager } from "../905/449184";
 import { I as _$$I } from "../905/485103";
 import { EH } from "../905/985374";
 import { wu } from "../figma_app/297957";
@@ -145,7 +145,7 @@ let S = {
   }]
 };
 export function $$v0(e) {
-  let t = md(NT);
+  let t = useAtomWithSubscription(NT);
   let r = useMemo(() => e.numAvatarsRequested ?? EH, [e.numAvatarsRequested]);
   let [a] = IT(Ki({
     seatType: e.seatType,
@@ -191,7 +191,7 @@ function A(e) {
     return e.licenseType ?? (t = e.seatType, TI[t] ?? FProductAccessType.DESIGN);
   }, [e.licenseType, e.seatType]);
   if (_$$I(null != c.data, t => {
-    az.trackDefinedEvent("activation.time_to_load_social_proof", {
+    analyticsEventManager.trackDefinedEvent("activation.time_to_load_social_proof", {
       loadTimeMS: t,
       planType: e.planData.planType,
       planParentId: e.planData.planParentId,

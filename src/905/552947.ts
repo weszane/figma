@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "../vendor/514228";
 import s from "classnames";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { Y } from "../905/830372";
 import { E } from "../905/984674";
@@ -41,7 +41,7 @@ export function $$h0({
         children: jsx(E, {
           fontWeight: "bold",
           color: "brand",
-          children: tx(h ? "community.publishing.copied" : "community.publishing.copy")
+          children: renderI18nText(h ? "community.publishing.copied" : "community.publishing.copy")
         })
       })]
     }), jsx("div", {

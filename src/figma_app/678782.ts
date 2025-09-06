@@ -1,11 +1,11 @@
 import { useSelector } from "../vendor/514228";
-import { R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { Yh } from "../figma_app/357047";
 export function $$s1(e) {
   return useSelector(t => Yh(t.mirror.appModel, e));
 }
 export function $$o0(e) {
-  return R(t => {
+  return selectWithShallowEqual(t => {
     let r = {};
     for (let n of e) r[n] = Yh(t.mirror.appModel, n);
     return r;

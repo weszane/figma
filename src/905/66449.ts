@@ -1,6 +1,6 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { useCallback, useEffect, useMemo, useRef } from "react";
-import { eU, Xr, fp } from "../figma_app/27355";
+import { atom, Xr, useAtomValueAndSetter } from "../figma_app/27355";
 import { dP, bh, M3 } from "../figma_app/119475";
 import { PW } from "../figma_app/633080";
 import { L } from "../905/773253";
@@ -8,8 +8,8 @@ import { MB } from "../figma_app/525558";
 import { zm, er } from "../905/753512";
 import { Ir } from "../905/789781";
 var $$n8;
-let m = eU(!1);
-let h = eU(!1);
+let m = atom(!1);
+let h = atom(!1);
 export function $$g3({
   children: e
 }) {
@@ -30,13 +30,13 @@ export function $$g3({
   });
 }
 export function $$f0(e, t) {
-  let [i, n] = fp(m);
+  let [i, n] = useAtomValueAndSetter(m);
   useEffect(() => {
     e && i && t && (e.focus(), n(!1));
   }, [i, t, n, e]);
 }
 export function $$_9(e) {
-  let [t, i] = fp(m);
+  let [t, i] = useAtomValueAndSetter(m);
   let n = zm().tabManager.activeTab;
   useEffect(() => {
     e.current && t && "search" === n && (e.current.focus(), i(!1));
@@ -60,7 +60,7 @@ function y({
   let t = bh({
     preventScroll: !0
   });
-  let [i, n] = fp(h);
+  let [i, n] = useAtomValueAndSetter(h);
   useEffect(() => {
     i && (n(!1), setTimeout(t, 0));
   }, [t, n, i]);

@@ -2,8 +2,8 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { a as _$$a } from "../905/964520";
 import s from "classnames";
-import { sx } from "../905/449184";
-import { tx } from "../905/303541";
+import { trackEventAnalytics } from "../905/449184";
+import { renderI18nText } from "../905/303541";
 import { A as _$$A } from "../905/857789";
 var o = s;
 let u = "publish_modal_accordion--ui3--xXeCO";
@@ -26,7 +26,7 @@ export function $$p0({
     children: [jsxs("div", {
       className: o()("publish_modal_accordion--accordionHeader--BFskT", u),
       onClick: () => {
-        sx("publish_modal_accordion_click", {
+        trackEventAnalytics("publish_modal_accordion_click", {
           active: g,
           defaultActive: s,
           name: e,
@@ -90,7 +90,7 @@ function m({
           className: o()("publish_modal_accordion--errorBadge--3-Qi2", {
             "publish_modal_accordion--errorBadgeMargin--7FKlH": !!r
           }),
-          children: tx("community.publish.modal_error_badge", {
+          children: renderI18nText("community.publish.modal_error_badge", {
             numErrors: t
           })
         })]

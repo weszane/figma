@@ -2,10 +2,10 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, memo, useRef } from "react";
 import { E as _$$E } from "../905/632989";
 import l from "classnames";
-import { Ay, rr } from "../figma_app/778880";
+import { BrowserInfo, isMobileUA } from "../figma_app/778880";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { H8, Pf } from "../905/590952";
 import { U3 } from "../figma_app/412189";
 import { U6 } from "../figma_app/599917";
@@ -87,7 +87,7 @@ export let $$T3 = memo(function (e) {
 });
 export function $$k2(e) {
   let t = {
-    backgroundClip: Ay.safari ? "padding-box" : ""
+    backgroundClip: BrowserInfo.safari ? "padding-box" : ""
   };
   e.backgroundColor && (t.backgroundColor = e.backgroundColor);
   let i = "";
@@ -176,7 +176,7 @@ function R(e) {
 (e => {
   function t(e) {
     let t = e.length - 1;
-    return t > 0 ? _$$t("community.cards.pluralize_num_other_publishers", {
+    return t > 0 ? getI18nString("community.cards.pluralize_num_other_publishers", {
       numOtherPublishers: t
     }) : "";
   }
@@ -221,7 +221,7 @@ function R(e) {
       children: [jsx("div", {
         className: Fb,
         onMouseEnter: () => {
-          rr || (t || fetchCreatorFollowStatus(d.id), i(!0));
+          isMobileUA || (t || fetchCreatorFollowStatus(d.id), i(!0));
         },
         children: jsx(U6, {
           profile: d,
@@ -290,7 +290,7 @@ function R(e) {
     return s ? jsxs(Fragment, {
       children: [n.length > 0 && jsx("div", {
         className: RR,
-        children: tx("community.publisher_with_suffix", {
+        children: renderI18nText("community.publisher_with_suffix", {
           publisherName: s,
           publishersSuffix: r
         })
@@ -320,11 +320,11 @@ function R(e) {
         ref: l,
         className: vG,
         onMouseEnter: () => {
-          rr || (1 !== n.length || d || fetchCreatorFollowStatus(n[0].id), u(!0));
+          isMobileUA || (1 !== n.length || d || fetchCreatorFollowStatus(n[0].id), u(!0));
         },
         children: [jsx(U6, {
           profile: n[0],
-          children: tx("community.publisher_with_suffix", {
+          children: renderI18nText("community.publisher_with_suffix", {
             publisherName: o,
             publishersSuffix: r
           })
@@ -348,7 +348,7 @@ function R(e) {
     let r = t(n);
     let s = i(n);
     return s ? jsx("div", {
-      children: tx("community.publisher_with_suffix", {
+      children: renderI18nText("community.publisher_with_suffix", {
         publisherName: s,
         publishersSuffix: r
       })
@@ -362,7 +362,7 @@ function R(e) {
       className: wH,
       children: jsx("div", {
         className: h1,
-        children: tx("community.by_publisher_with_suffix", {
+        children: renderI18nText("community.by_publisher_with_suffix", {
           publisherName: s,
           publishersSuffix: r
         })

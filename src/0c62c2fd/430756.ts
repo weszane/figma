@@ -14,7 +14,7 @@ import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { qc } from "../figma_app/858013";
 import { s as _$$s } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { bx } from "../905/34809";
 import { vt } from "../figma_app/598926";
 import { Lo, to } from "../905/156213";
@@ -35,7 +35,7 @@ import { e6 } from "../905/557142";
 import { Z as _$$Z } from "../figma_app/761870";
 import { e0 } from "../905/696396";
 import { e as _$$e } from "../905/393279";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { h as _$$h2 } from "../905/207101";
 import { e as _$$e2 } from "../905/621515";
 import { r1 } from "../figma_app/545877";
@@ -50,7 +50,7 @@ import { F as _$$F } from "../905/154112";
 let J = r1("seen_sharing_clarity_project_modal_overlay");
 let q = "sc_project_creation_permission_onboarding_key";
 function X() {
-  let e = md(J);
+  let e = useAtomWithSubscription(J);
   let {
     show,
     isShowing,
@@ -67,12 +67,12 @@ function X() {
   let i = jsx("a", {
     href: "https://help.figma.com/hc/articles/360038006494-Create-a-new-project",
     className: _$$s.colorTextOnbrand.underline.$,
-    children: tx("rcs.sharing_clarity.learn_more")
+    children: renderI18nText("rcs.sharing_clarity.learn_more")
   });
   return jsx(rq, {
     arrowPosition: F_.LEFT_TITLE,
     description: jsx("p", {
-      children: tx("rcs.sharing_clarity.project_creation_permissions_description", {
+      children: renderI18nText("rcs.sharing_clarity.project_creation_permissions_description", {
         learnMoreLink: i
       })
     }),
@@ -81,7 +81,7 @@ function X() {
     isShowing,
     onClose: complete,
     targetKey: q,
-    title: tx("rcs.sharing_clarity.project_creation_permissions_title"),
+    title: renderI18nText("rcs.sharing_clarity.project_creation_permissions_title"),
     trackingContextName: "Sharing Clarity Project Creation Permission Onboarding",
     zIndex: _$$R.MODAL
   });
@@ -165,7 +165,7 @@ export function $$er0(e) {
   let ej = e => t9(e, ed, e_);
   let eT = e => {
     let t = getFeatureFlags().folder_creation_restricted_guests_err_ui && ed?.invite_whitelist_guest_invite_setting != null;
-    return yI(e, K.usersByEmail[e] || e, ed, e_, er.email, t ? _$$t("project_creation.restricted_against_adding_external_users") : null);
+    return yI(e, K.usersByEmail[e] || e, ed, e_, er.email, t ? getI18nString("project_creation.restricted_against_adding_external_users") : null);
   };
   let eE = () => ed && ed.domain_capture && e_.domains.length > 0 ? _$$Z(J).filter(e => xf(e) && !H_(e_.domains, e)) : [];
   let eI = e => {
@@ -208,9 +208,9 @@ export function $$er0(e) {
   let eS = 0 === G ? jsxs(Fragment, {
     children: [jsx("div", {
       className: "folder_creation_modal--nameHeader--MgNL8 folder_creation_modal--sectionHeader--EcWYc text--fontPos11--2LvXf text--_fontBase--QdLsd",
-      children: _$$t("project_creation.name")
+      children: getI18nString("project_creation.name")
     }), jsx(ks, {
-      "aria-label": _$$t("project_creation.project_name"),
+      "aria-label": getI18nString("project_creation.project_name"),
       autoFocus: !0,
       className: "folder_creation_modal--folderNameInput--Lcn4c",
       maxLength: wG,
@@ -218,17 +218,17 @@ export function $$er0(e) {
       onBlur: () => $(!1),
       onChange: e => U(e.target.value),
       onFocus: () => $(!0),
-      placeholder: _$$t("project_creation.ex_growth_experiments"),
+      placeholder: getI18nString("project_creation.ex_growth_experiments"),
       required: !0,
       value: r
     }), 0 === r.trim().length && !W && jsx("div", {
       className: "folder_creation_modal--inputErrorMessage--AGzQC",
-      children: _$$t("project_creation.project_name_empty")
+      children: getI18nString("project_creation.project_name_empty")
     }), ed && el && jsxs(Fragment, {
       children: [jsx("div", {
         className: et,
         "data-onboarding-key": q,
-        children: _$$t("project_creation.who_has_access")
+        children: getI18nString("project_creation.who_has_access")
       }), jsx(X, {}), jsx(YU, {
         resourceType: FResourceCategoryType.FOLDER,
         value: eg,
@@ -240,13 +240,13 @@ export function $$er0(e) {
       }), eg !== _9.INVITE_ONLY && jsxs(Fragment, {
         children: [jsx("div", {
           className: et,
-          children: _$$t("folder_permissions_modal.what_they_can_do")
+          children: getI18nString("folder_permissions_modal.what_they_can_do")
         }), jsx(Iz, {
           selectedPermissionsLevel: ex,
           setSelectedPermissionsLevel: eb
         }), jsx("div", {
           className: "folder_creation_modal--subtitle--H3qLc text--fontPos11--2LvXf text--_fontBase--QdLsd text--fontPos11--2LvXf text--_fontBase--QdLsd",
-          children: ex === J4.VIEW ? _$$t("project_creation.can_view_and_comment") : _$$t("project_creation.can_create_and_edit_files")
+          children: ex === J4.VIEW ? getI18nString("project_creation.can_view_and_comment") : getI18nString("project_creation.can_create_and_edit_files")
         })]
       })]
     })]
@@ -272,7 +272,7 @@ export function $$er0(e) {
         joinLinkShown: !1,
         onInviteLevelChange: ey,
         options: r,
-        placeholderText: _$$t("team_creation.add_a_name_or_email"),
+        placeholderText: getI18nString("team_creation.add_a_name_or_email"),
         searchResultToken: ej,
         shouldAutoFocus: !0,
         useContainerRefForWidth: !0,
@@ -295,7 +295,7 @@ export function $$er0(e) {
         children: [jsxs(vo, {
           children: [jsx(Y9, {
             children: jsx(hE, {
-              children: 0 === G ? _$$t("project_creation.create_project") : _$$t("project_creation.add_people_to_project_name", {
+              children: 0 === G ? getI18nString("project_creation.create_project") : getI18nString("project_creation.add_people_to_project_name", {
                 projectName: r
               })
             })
@@ -307,7 +307,7 @@ export function $$er0(e) {
           }), eo && jsxs(wi, {
             children: [jsx("div", {
               className: "folder_creation_modal--footer--9Hie8 folder_creation_modal--subtitle--H3qLc text--fontPos11--2LvXf text--_fontBase--QdLsd",
-              children: tx("project_creation.step_number_of_max_steps", {
+              children: renderI18nText("project_creation.step_number_of_max_steps", {
                 currentStep: G + 1,
                 maxSteps: 2
               })
@@ -315,7 +315,7 @@ export function $$er0(e) {
               children: [jsx($z, {
                 onClick: ew,
                 variant: "secondary",
-                children: 0 === G ? tx("project_creation.cancel") : tx("project_creation.back")
+                children: 0 === G ? renderI18nText("project_creation.cancel") : renderI18nText("project_creation.back")
               }), jsx($z, {
                 variant: "primary",
                 onClick: () => {
@@ -325,7 +325,7 @@ export function $$er0(e) {
                   } else eN();
                 },
                 disabled: 0 === G && 0 === r.trim().length,
-                children: 0 === G ? tx("general.continue") : tx("project_creation.create_project")
+                children: 0 === G ? renderI18nText("general.continue") : renderI18nText("project_creation.create_project")
               })]
             })]
           })]
@@ -341,13 +341,13 @@ export function $$er0(e) {
             text: jsxs(Fragment, {
               children: [jsx("p", {
                 className: _$$s.textBodyMediumStrong.$,
-                children: _$$t("project_creation.figma_has_connected_projects")
+                children: getI18nString("project_creation.figma_has_connected_projects")
               }), jsx("p", {
-                children: tx("project_creation.learn_more_about_the_benefit", {
+                children: renderI18nText("project_creation.learn_more_about_the_benefit", {
                   learnMore: jsx(_$$N, {
                     newTab: !0,
                     href: "https://help.figma.com/hc/articles/30124855491863-Guide-to-connected-projects",
-                    children: _$$t("file_browser.team_settings.learn_more")
+                    children: getI18nString("file_browser.team_settings.learn_more")
                   })
                 })
               })]

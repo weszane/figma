@@ -1,11 +1,11 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { n as _$$n, G4 } from "../905/864644";
 import { zj, Sk } from "../figma_app/448654";
 import { subscribeMultipleAndAwaitAll } from "../905/553831";
 import { tT } from "../905/723791";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { Ce, to } from "../905/156213";
 import { hT, YM } from "../905/561087";
 import { nb } from "../figma_app/543100";
@@ -14,7 +14,7 @@ import { Vny, YOu } from "../figma_app/43951";
 import { M4 } from "../905/713695";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { R as _$$R } from "../905/441305";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { E as _$$E } from "../905/984674";
 import { Ju } from "../905/102752";
 import { useEffect } from "react";
@@ -41,16 +41,16 @@ let I = Ju(function (e) {
   });
   let l = jsx(_$$E, {
     fontWeight: "semi-bold",
-    children: tx("file_browser.confirm_file_delete_modal.num_files", {
+    children: renderI18nText("file_browser.confirm_file_delete_modal.num_files", {
       numFiles
     })
   });
   return jsx(_$$R, {
     width: "md",
-    title: tx("file_browser.confirm_file_delete_forever_modal.title", {
+    title: renderI18nText("file_browser.confirm_file_delete_forever_modal.title", {
       numFiles
     }),
-    confirmText: tx("file_browser.confirm_file_delete_forever_modal.confirm_permanently_delete"),
+    confirmText: renderI18nText("file_browser.confirm_file_delete_forever_modal.confirm_permanently_delete"),
     onConfirm: () => {
       onConfirm();
       onClose();
@@ -60,13 +60,13 @@ let I = Ju(function (e) {
     destructive: !0,
     children: jsx("div", {
       children: showUnsyncedFileWarning ? jsx(_$$E, {
-        children: tx("file_browser.confirm_permanently_delete_file_modal.about_to_delete_offline", {
+        children: renderI18nText("file_browser.confirm_permanently_delete_file_modal.about_to_delete_offline", {
           numFiles,
           numFilesText: l,
           fileNameText: o
         })
       }) : jsx(_$$E, {
-        children: tx("file_browser.confirm_permanently_delete_file_modal.about_to_delete_online", {
+        children: renderI18nText("file_browser.confirm_permanently_delete_file_modal.about_to_delete_online", {
           numFiles,
           numFilesText: l,
           fileNameText: o
@@ -87,12 +87,12 @@ function k({
   });
   let a = jsx(_$$E, {
     fontWeight: "semi-bold",
-    children: tx("file_browser.confirm_file_delete_modal.num_files", {
+    children: renderI18nText("file_browser.confirm_file_delete_modal.num_files", {
       numFiles: t
     })
   });
   if (0 === e.length) return jsx(_$$E, {
-    children: tx("file_browser.confirm_file_trash_modal.about_to_trash_no_warnings", {
+    children: renderI18nText("file_browser.confirm_file_trash_modal.about_to_trash_no_warnings", {
       fileNameText: n,
       numFiles: t,
       numFilesText: a
@@ -103,45 +103,45 @@ function k({
       children: [jsx($y, {
         variant: "danger",
         children: jsx(Q, {
-          children: tx("file_browser.confirm_file_trash_modal.about_to_trash_library_banner_warning")
+          children: renderI18nText("file_browser.confirm_file_trash_modal.about_to_trash_library_banner_warning")
         })
       }), jsx(_$$E, {
-        children: tx("file_browser.confirm_file_trash_modal.about_to_trash_library_warning_intro", {
+        children: renderI18nText("file_browser.confirm_file_trash_modal.about_to_trash_library_warning_intro", {
           fileNameText: n
         })
       }), jsxs("ul", {
         className: "confirm_file_delete_modal--libraryDeletionBulletList--sMlkg confirm_file_delete_modal--bulletList--MzHlN",
         children: [jsx("li", {
           children: jsx(_$$E, {
-            children: tx("file_browser.confirm_file_trash_modal.about_to_trash_library_warning_access_lost")
+            children: renderI18nText("file_browser.confirm_file_trash_modal.about_to_trash_library_warning_access_lost")
           })
         }), jsx("li", {
           children: jsx(_$$E, {
-            children: tx("file_browser.confirm_file_trash_modal.about_to_trash_library_warning_updates_lost")
+            children: renderI18nText("file_browser.confirm_file_trash_modal.about_to_trash_library_warning_updates_lost")
           })
         })]
       })]
     }) : jsx(_$$E, {
-      children: tx("file_browser.confirm_file_trash_modal.about_to_trash_component_unpublish", {
+      children: renderI18nText("file_browser.confirm_file_trash_modal.about_to_trash_component_unpublish", {
         fileNameText: n
       })
     });
     if ("published_sites" === e[0]) return jsxs(Fragment, {
       children: [jsx(_$$E, {
-        children: tx("file_browser.confirm_file_trash_modal.about_to_trash_file", {
+        children: renderI18nText("file_browser.confirm_file_trash_modal.about_to_trash_file", {
           fileNameText: n
         })
       }), jsx(_$$E, {
-        children: tx("file_browser.confirm_file_trash_modal.site_published_warning")
+        children: renderI18nText("file_browser.confirm_file_trash_modal.site_published_warning")
       })]
     });
     if ("team_template" === e[0]) return jsx(_$$E, {
-      children: tx("file_browser.confirm_file_trash_modal.about_to_trash_team_template", {
+      children: renderI18nText("file_browser.confirm_file_trash_modal.about_to_trash_team_template", {
         fileNameText: n
       })
     });
     if ("unsynced_file" === e[0]) return jsx(_$$E, {
-      children: tx("file_browser.confirm_file_delete_forever_modal.about_to_delete_offline", {
+      children: renderI18nText("file_browser.confirm_file_delete_forever_modal.about_to_delete_offline", {
         fileNameText: n,
         numFiles: t,
         numFilesText: a
@@ -151,7 +151,7 @@ function k({
   return jsxs("div", {
     className: _$$s.flex.flexColumn.gap12.$,
     children: [jsx(_$$E, {
-      children: tx("file_browser.confirm_file_trash_modal.about_to_trash_multiple_warnings", {
+      children: renderI18nText("file_browser.confirm_file_trash_modal.about_to_trash_multiple_warnings", {
         numFilesText: a
       })
     }), jsx("ul", {
@@ -159,34 +159,34 @@ function k({
       children: e.map(e => jsx("li", {
         children: {
           team_template: jsx(_$$E, {
-            children: tx("file_browser.confirm_file_delete_modal.warning_team_template", {
+            children: renderI18nText("file_browser.confirm_file_delete_modal.warning_team_template", {
               templatesText: jsx(_$$E, {
                 fontWeight: "semi-bold",
-                children: tx("file_browser.confirm_file_delete_modal.templates")
+                children: renderI18nText("file_browser.confirm_file_delete_modal.templates")
               })
             })
           }),
           published_assets: jsx(_$$E, {
-            children: tx("file_browser.confirm_file_delete_modal.warning_component_unpublish", {
+            children: renderI18nText("file_browser.confirm_file_delete_modal.warning_component_unpublish", {
               componentsText: jsx(_$$E, {
                 fontWeight: "semi-bold",
-                children: tx("file_browser.confirm_file_delete_modal.components")
+                children: renderI18nText("file_browser.confirm_file_delete_modal.components")
               })
             })
           }),
           published_sites: jsx(_$$E, {
-            children: tx("file_browser.confirm_file_delete_modal.warning_published_sites", {
+            children: renderI18nText("file_browser.confirm_file_delete_modal.warning_published_sites", {
               sitesText: jsx(_$$E, {
                 fontWeight: "semi-bold",
-                children: tx("file_browser.confirm_file_delete_modal.sites")
+                children: renderI18nText("file_browser.confirm_file_delete_modal.sites")
               })
             })
           }),
           unsynced_file: jsx(_$$E, {
-            children: tx("file_browser.confirm_file_delete_modal.warning_unsynced_file", {
+            children: renderI18nText("file_browser.confirm_file_delete_modal.warning_unsynced_file", {
               offlineFilesText: jsx(_$$E, {
                 fontWeight: "semi-bold",
-                children: tx("file_browser.confirm_file_delete_modal.offline_files")
+                children: renderI18nText("file_browser.confirm_file_delete_modal.offline_files")
               })
             })
           })
@@ -214,23 +214,23 @@ let R = Ju(function ({
   a && g.push("team_template");
   i && g.push("unsynced_file");
   useEffect(() => {
-    g.length > 1 && 1 === e && $D(_$$e.WAYFINDING, Error("ConfirmFileDeleteModal has multiple warnings with only one file"));
+    g.length > 1 && 1 === e && reportError(_$$e.WAYFINDING, Error("ConfirmFileDeleteModal has multiple warnings with only one file"));
   }, [g.length, e]);
   let f = g[0];
   useEffect(() => {
-    1 === e && "unsynced_file" === f && $D(_$$e.WAYFINDING, Error("ConfirmFileDeleteModal shown for single file with single warning of FileDeleteWarningType.UNSYNCED_FILE"));
+    1 === e && "unsynced_file" === f && reportError(_$$e.WAYFINDING, Error("ConfirmFileDeleteModal shown for single file with single warning of FileDeleteWarningType.UNSYNCED_FILE"));
   }, [e, f]);
   let v = jsx(_$$E, {
     fontWeight: "semi-bold",
-    children: tx("file_browser.confirm_file_trash_modal.trash_section")
+    children: renderI18nText("file_browser.confirm_file_trash_modal.trash_section")
   });
   let I = m ? jsx(_$$E, {
-    children: tx("file_browser.confirm_file_trash_modal.description_restore_drafts", {
+    children: renderI18nText("file_browser.confirm_file_trash_modal.description_restore_drafts", {
       numFiles: e,
       trashText: v
     })
   }) : jsx(_$$E, {
-    children: tx("file_browser.confirm_file_trash_modal.description_restore", {
+    children: renderI18nText("file_browser.confirm_file_trash_modal.description_restore", {
       numFiles: e,
       trashText: v
     })
@@ -240,10 +240,10 @@ let R = Ju(function ({
   };
   return jsx(_$$R, {
     width: "md",
-    title: tx("file_browser.confirm_file_trash_modal.title", {
+    title: renderI18nText("file_browser.confirm_file_trash_modal.title", {
       numFiles: e
     }),
-    confirmText: tx("file_browser.confirm_file_trash_modal.confirm_delete_files", {
+    confirmText: renderI18nText("file_browser.confirm_file_trash_modal.confirm_delete_files", {
       numFiles: e
     }),
     onConfirm: () => {
@@ -317,7 +317,7 @@ let $$M2 = nF(async (e, t, {
   let d = Object.keys(t.offlineFilesByKey ?? {}).length;
   let m = Object.keys(t.filesByKey).length + Object.keys(t.reposById ?? {}).length + Object.keys(t.offlineFilesByKey ?? {}).length;
   if (!m) {
-    $D(_$$e.WAYFINDING, Error("tryDeleteFiles dispatched with no selected files"));
+    reportError(_$$e.WAYFINDING, Error("tryDeleteFiles dispatched with no selected files"));
     return;
   }
   async function h() {
@@ -332,12 +332,12 @@ let $$M2 = nF(async (e, t, {
       } of await subscribeMultipleAndAwaitAll(YOu, e.map(e => ({
         fileKey: e.key
       })))) if (result.transform(e => !!e.file?.lastPublishedAt).unwrapOr(!1)) {
-        sx("Show File Delete Unpublish Warning");
+        trackEventAnalytics("Show File Delete Unpublish Warning");
         return !0;
       }
       return !1;
     } catch (e) {
-      $D(_$$e.DESIGN_SYSTEMS_ECOSYSTEM, e);
+      reportError(_$$e.DESIGN_SYSTEMS_ECOSYSTEM, e);
       return !1;
     }
   }
@@ -346,7 +346,7 @@ let $$M2 = nF(async (e, t, {
   let A = Object.values(t.filesByKey).filter(e => e.is_team_template).length > 0;
   let y = d > 0;
   let b = "";
-  s > 0 ? b = Object.values(t.filesByKey)[0].name : o > 0 && t.reposById ? b = Object.values(t.reposById)[0].repo.name : d > 0 && t.offlineFilesByKey ? b = Object.values(t.offlineFilesByKey)[0].name : $D(_$$e.WAYFINDING, Error("Could not get firstFileName in tryDeleteFiles"));
+  s > 0 ? b = Object.values(t.filesByKey)[0].name : o > 0 && t.reposById ? b = Object.values(t.reposById)[0].repo.name : d > 0 && t.offlineFilesByKey ? b = Object.values(t.offlineFilesByKey)[0].name : reportError(_$$e.WAYFINDING, Error("Could not get firstFileName in tryDeleteFiles"));
   let v = () => {
     s > 0 && e.dispatch(VK({
       fileKeys: t.filesByKey,
@@ -396,7 +396,7 @@ let $$U3 = nF(async ({
   } = i;
   let s = fileKeys.length + repoIds.length;
   if (0 === s) {
-    $D(_$$e.WAYFINDING, Error("tryDeleteFilesForever dispatched with no files to delete"));
+    reportError(_$$e.WAYFINDING, Error("tryDeleteFilesForever dispatched with no files to delete"));
     return;
   }
   let o = "";
@@ -407,7 +407,7 @@ let $$U3 = nF(async ({
     let t = e().repos[repoIds[0]];
     t && (o = t.name);
   }
-  o || $D(_$$e.WAYFINDING, Error("Could not get firstFileName in tryDeleteSelectedFilesForever"));
+  o || reportError(_$$e.WAYFINDING, Error("Could not get firstFileName in tryDeleteSelectedFilesForever"));
   let l = fileKeys.reduce((e, t) => (e[t] = !0, e), {});
   t(to({
     type: I,

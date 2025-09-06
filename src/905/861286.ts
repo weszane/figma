@@ -3,7 +3,7 @@ import { useState } from "react";
 import a from "classnames";
 import { h as _$$h } from "../905/207101";
 import { Lf } from "../figma_app/637027";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { S } from "../905/339549";
 import { yM, DP } from "../905/640017";
 import { E } from "../905/712094";
@@ -63,8 +63,8 @@ function A(e) {
     }), e.canSeeBillingAddressExp && t && jsx(Lf, {
       value: e.nameOnPaymentMethod || "",
       htmlName: "name_on_card",
-      label: _$$t("org_self_serve.payment_step.name_on_payment_method_label"),
-      placeholder: _$$t("org_self_serve.payment_step.name_on_payment_method"),
+      label: getI18nString("org_self_serve.payment_step.name_on_payment_method_label"),
+      placeholder: getI18nString("org_self_serve.payment_step.name_on_payment_method"),
       onChange: e => {
         t(e.target.value.trim());
       },
@@ -124,7 +124,7 @@ function b(e) {
         checked: t,
         onChange: () => a(e)
       }), jsxs("p", {
-        children: [" ", tx("org_self_serve.payment_step.different_shipping_address")]
+        children: [" ", renderI18nText("org_self_serve.payment_step.different_shipping_address")]
       })]
     }), t && !!e.onShippingAddressChange && jsx(E, {
       canSeeBillingAddressExp: e.canSeeBillingAddressExp,
@@ -153,4 +153,4 @@ export function $$v0(e) {
 $$v0.defaultProps = {
   showAddressForm: !0
 };
-export const n = $$v0; 
+export const n = $$v0;

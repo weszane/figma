@@ -1,10 +1,10 @@
-import { L } from "../905/270963";
+import { datadogRum } from "../905/270963";
 export function $$r0(e) {
   if (!window.opener) {
     console.error("No parent window found! Did you open this window manually?");
     return;
   }
-  L?.addAction("postMessageToPresenterView", {
+  datadogRum?.addAction("postMessageToPresenterView", {
     type: e.type
   });
   window.opener.postMessage(e, "*");

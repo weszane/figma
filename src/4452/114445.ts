@@ -17,13 +17,13 @@ import { d as _$$d } from "../figma_app/603561";
 import { FOrganizationLevelType, FUserRoleType } from "../figma_app/191312";
 import { oSh } from "../figma_app/43951";
 import { S2 } from "../figma_app/465071";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { lR, e6 } from "../figma_app/617427";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Zu } from "../4452/396452";
 import { u as _$$u } from "../905/16237";
 import { c as _$$c } from "../905/370443";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Zr, Ay } from "../figma_app/930338";
 import { Ak } from "../905/986103";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
@@ -47,8 +47,8 @@ function w({
   onDecline: a,
   requestId: n
 }) {
-  let r = md(aN);
-  let i = md(V4);
+  let r = useAtomWithSubscription(aN);
+  let i = useAtomWithSubscription(V4);
   let l = !!r || i.has(n);
   let o = _$$u();
   return jsxs("div", {
@@ -64,7 +64,7 @@ function w({
       },
       trackingOptions: o,
       children: jsx(Zu, {
-        text: _$$t("admin_dashboard.request_flyout.approve"),
+        text: getI18nString("admin_dashboard.request_flyout.approve"),
         showSpinner: "approving" === r && i.has(n)
       })
     }), jsx(lR, {
@@ -79,7 +79,7 @@ function w({
       },
       trackingOptions: o,
       children: jsx(Zu, {
-        text: _$$t("admin_dashboard.request_flyout.decline"),
+        text: getI18nString("admin_dashboard.request_flyout.decline"),
         showSpinner: "declining" === r && i.has(n)
       })
     })]
@@ -105,12 +105,12 @@ function G({
     children: [jsxs("div", {
       style: _$$sx.flex.flexRow.itemsCenter.justifyBetween.gap4.$,
       children: [d, jsx("div", {
-        children: o ? c ? tx("admin_dashboard.request_flyout.seat_cost.no_cost_for_approval") : tx("admin_dashboard.request_flyout.seat_cost.this_will_use_available_seat", {
+        children: o ? c ? renderI18nText("admin_dashboard.request_flyout.seat_cost.no_cost_for_approval") : renderI18nText("admin_dashboard.request_flyout.seat_cost.this_will_use_available_seat", {
           seatType: tI(e)
-        }) : a && t.price ? tx("admin_dashboard.request_flyout.seat_cost.cost_associated_to_approval", {
+        }) : a && t.price ? renderI18nText("admin_dashboard.request_flyout.seat_cost.cost_associated_to_approval", {
           seatType: tI(e),
           seatCost: t.price
-        }) : tx("admin_dashboard.request_flyout.seat_cost.cost_associated_to_approval_no_price", {
+        }) : renderI18nText("admin_dashboard.request_flyout.seat_cost.cost_associated_to_approval_no_price", {
           seatType: tI(e)
         })
       })]
@@ -131,7 +131,7 @@ function G({
       variant: "link",
       children: jsx("p", {
         style: _$$sx.textBodyMedium.$,
-        children: tx("admin_dashboard.request_flyout.seat_cost.see_details")
+        children: renderI18nText("admin_dashboard.request_flyout.seat_cost.see_details")
       })
     })]
   });
@@ -167,7 +167,7 @@ function $({
   let l = useDispatch();
   let o = Zr(Ak(e.createdAt));
   let d = jsx(V, {
-    label: _$$t("admin_dashboard.request_flyout.body.email"),
+    label: getI18nString("admin_dashboard.request_flyout.body.email"),
     value: e.email,
     onClick: e.email ? t => {
       t.stopPropagation();
@@ -177,24 +177,24 @@ function $({
     } : void 0
   });
   let c = jsx(V, {
-    label: _$$t("admin_dashboard.request_flyout.body.role"),
+    label: getI18nString("admin_dashboard.request_flyout.body.role"),
     value: e.jobTitle && Ay(e.jobTitle)
   });
   let u = jsx(V, {
-    label: _$$t("admin_dashboard.request_flyout.body.request_sent"),
+    label: getI18nString("admin_dashboard.request_flyout.body.request_sent"),
     value: o
   });
   let m = jsx(V, {
-    label: _$$t("admin_dashboard.request_flyout.body.current_seat"),
+    label: getI18nString("admin_dashboard.request_flyout.body.current_seat"),
     value: n ? JT(n) : "-"
   });
   let _ = Zr(Ak(t));
   let p = jsx(V, {
-    label: _$$t("admin_dashboard.request_flyout.body.last_active"),
+    label: getI18nString("admin_dashboard.request_flyout.body.last_active"),
     value: t ? _ : "-"
   });
   i = a ? [[d, c, p], [jsx(V, {
-    label: _$$t("admin_dashboard.request_flyout.body.billing_group"),
+    label: getI18nString("admin_dashboard.request_flyout.body.billing_group"),
     value: a
   }), m, u]] : [[d, m, u], [c, p]];
   return jsx("div", {
@@ -213,7 +213,7 @@ function W({
   failedToLoadPrices: e
 }) {
   return (useEffect(() => {
-    e && sx("seat_purchasing.non_blocking_fetch_error", {
+    e && trackEventAnalytics("seat_purchasing.non_blocking_fetch_error", {
       price_fetch_error: e,
       view: "request_flyout"
     }, {
@@ -223,7 +223,7 @@ function W({
     dataTestId: "pricing-error-banner",
     color: _$$S.WARNING,
     padding: 8,
-    text: tx("admin_dashboard.request_flyout.price_fetching_error")
+    text: renderI18nText("admin_dashboard.request_flyout.price_fetching_error")
   }) : null;
 }
 function z({
@@ -263,7 +263,7 @@ let J = "request_flyout--secondaryIcon--lhrXO";
 function Z({
   request: e
 }) {
-  let t = e.name || e.email || _$$t("admin_dashboard.requests.no_name");
+  let t = e.name || e.email || getI18nString("admin_dashboard.requests.no_name");
   let a = Ak(e.updatedAt);
   let n = {
     id: e.userId,
@@ -308,18 +308,18 @@ function Z({
         }), e.orgPermission === FUserRoleType.GUEST && jsx(_$$E, {
           size: "lg",
           variant: "defaultOutline",
-          children: tx("admin_dashboard.requests.badge.guest")
+          children: renderI18nText("admin_dashboard.requests.badge.guest")
         })]
       }), jsx("div", {
         className: _$$s.textHeadingMedium.fontMedium.$,
-        children: tx("admin_dashboard.request_flyout.requested_a_seat", {
+        children: renderI18nText("admin_dashboard.request_flyout.requested_a_seat", {
           seatType: tI(e.billableProductKey)
         })
       })]
     }), e.lastNudgedAt && jsx("div", {
       className: "request_flyout--reminder--HX1aD",
       "data-testid": "nudged-request-banner",
-      children: tx("admin_dashboard.requests.reminder_sent", {
+      children: renderI18nText("admin_dashboard.requests.reminder_sent", {
         time: a
       })
     }), e.message && jsx("div", {

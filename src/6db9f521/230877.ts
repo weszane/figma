@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import l from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
 import { lz } from "../figma_app/212767";
@@ -8,7 +8,7 @@ import { E3 } from "../figma_app/976749";
 import { iT } from "../figma_app/74165";
 import { qw, UK } from "../figma_app/740163";
 import { J2 } from "../figma_app/84367";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { Ds } from "../1528/88743";
 import { M$q, y9S } from "../figma_app/27776";
 var s = l;
@@ -20,10 +20,10 @@ export function $$g0(e) {
   let {
     isPropertiesPanelCollapsed
   } = iT();
-  let f = md(Ds);
+  let f = useAtomWithSubscription(Ds);
   let j = J2(UK().renderRulers);
   t = {
-    right: `calc(${g === nT.DevHandoff ? i : l}px + ${parsePxNumber(M$q)}px)`,
+    right: `calc(${g === FEditorType.DevHandoff ? i : l}px + ${parsePxNumber(M$q)}px)`,
     top: `${parsePxNumber(M$q)}px`
   };
   isPropertiesPanelCollapsed && (t = {

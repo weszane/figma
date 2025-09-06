@@ -3,7 +3,7 @@ import { useRef, useEffect } from "react";
 import { useDispatch } from "../vendor/514228";
 import { NLJ } from "../figma_app/763686";
 import o from "classnames";
-import { R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { Pt } from "../figma_app/806412";
 import { z5 } from "../905/713722";
 import { S7, sX } from "../figma_app/259578";
@@ -77,7 +77,7 @@ export function $$E0({
   let {
     currentTool,
     dropdownShown
-  } = R(e => ({
+  } = selectWithShallowEqual(e => ({
     currentTool: e.mirror.appModel.currentTool,
     dropdownShown: e.dropdownShown
   }));

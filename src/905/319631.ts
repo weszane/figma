@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Lo } from "../905/156213";
 import { bD } from "../figma_app/45218";
 import { Ju, ZU } from "../905/102752";
@@ -10,8 +10,8 @@ export let $$d0 = Ju(function ({
   resourceType: i
 }) {
   return jsx(yX, {
-    confirmText: _$$t("general.done"),
-    confirmationTitle: i === bD.PLUGIN ? _$$t("community.plugin_development.plugin_issue") : _$$t("community.plugin_development.widget_issue"),
+    confirmText: getI18nString("general.done"),
+    confirmationTitle: i === bD.PLUGIN ? getI18nString("community.plugin_development.plugin_issue") : getI18nString("community.plugin_development.widget_issue"),
     content: e.text,
     destructive: !0,
     disableClickOutsideToHide: !0,

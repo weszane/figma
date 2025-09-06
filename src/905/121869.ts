@@ -2,12 +2,12 @@ import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
-import { md } from "../vendor/525001";
+import { useAtomValue } from "../vendor/525001";
 import { Xf } from "../figma_app/153916";
 import { A as _$$A } from "../905/920142";
 import { NY, rb } from "../figma_app/637027";
 import { kt } from "../figma_app/858013";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { Y } from "../905/830372";
 import { E as _$$E } from "../905/984674";
 import { c as _$$c } from "../905/370443";
@@ -30,7 +30,7 @@ export function $$x0(e) {
     onClose: () => {},
     preventUserClose: !0
   });
-  let k = md(U(e.currentOrgId));
+  let k = useAtomValue(U(e.currentOrgId));
   if (k.data?.status === Q.EXPIRED) return jsx(Fragment, {});
   if ("loading" === E.status) return jsx(bL, {
     manager: T,
@@ -53,21 +53,21 @@ export function $$x0(e) {
     trackingProperties: {
       trackingDescriptor: _$$c.CONTACT_SUPPORT
     },
-    children: tx("payments_modal.contact_support")
+    children: renderI18nText("payments_modal.contact_support")
   }, "contact_support"), jsx(rb, {
     href: x.invoice_url,
     target: "_blank",
     trackingProperties: {
       trackingDescriptor: _$$c.PAY_INVOICE
     },
-    children: tx("payments_modal.pay_invoice")
+    children: renderI18nText("payments_modal.pay_invoice")
   }, "pay_invoice")] : [jsx(rb, {
     href: "https://help.figma.com/hc/requests/new?ticket_form_id=9707134248215",
     target: "_blank",
     trackingProperties: {
       trackingDescriptor: _$$c.CONTACT_SUPPORT
     },
-    children: tx("payments_modal.contact_support")
+    children: renderI18nText("payments_modal.contact_support")
   }, "contact_support")]);
   return jsx(fu, {
     name: e0.ORG_SUSPENSION_MODAL,
@@ -108,11 +108,11 @@ function S(e) {
   return j_(t).unwrapOr(!1) && e.overdueInvoice ? jsx(_$$E, {
     fontWeight: "bold",
     fontSize: 11,
-    children: tx("payments_modal.pay_overdue_invoice_to_regain_access")
+    children: renderI18nText("payments_modal.pay_overdue_invoice_to_regain_access")
   }) : jsx(_$$E, {
     fontWeight: "bold",
     fontSize: 11,
-    children: tx("payments_modal.you_no_longer_have_access_to_this_organization")
+    children: renderI18nText("payments_modal.you_no_longer_have_access_to_this_organization")
   });
 }
 function w(e) {
@@ -121,7 +121,7 @@ function w(e) {
     children: [jsx(_$$E, {
       fontWeight: "regular",
       fontSize: 11,
-      children: tx("payments_modal.your_files_are_safe_but_youll_need_to_pay", {
+      children: renderI18nText("payments_modal.your_files_are_safe_but_youll_need_to_pay", {
         dueDate: _$$A(e.overdueInvoice.due_at).format("MMM D"),
         orgName: jsx(_$$E, {
           fontWeight: "bold",
@@ -132,18 +132,18 @@ function w(e) {
     }), jsx(_$$E, {
       fontWeight: "regular",
       fontSize: 11,
-      children: tx("payments_modal.account_switcher_and_support_cta", {
+      children: renderI18nText("payments_modal.account_switcher_and_support_cta", {
         switchAccountLink: jsx(_$$h, {
-          text: tx("payments_modal.switch_organization_or_account")
+          text: renderI18nText("payments_modal.switch_organization_or_account")
         })
       })
     })]
   }) : jsx(_$$E, {
     fontWeight: "regular",
     fontSize: 11,
-    children: tx("payments_modal.account_switcher_and_support_cta", {
+    children: renderI18nText("payments_modal.account_switcher_and_support_cta", {
       switchAccountLink: jsx(_$$h, {
-        text: tx("payments_modal.switch_organization_or_account")
+        text: renderI18nText("payments_modal.switch_organization_or_account")
       })
     })
   });
@@ -153,13 +153,13 @@ function C() {
     children: [jsx(_$$E, {
       fontWeight: "regular",
       fontSize: 11,
-      children: tx("payments_modal.please_reach_out_to_your_organization_admin_s_to_resolve_this_billing_issue")
+      children: renderI18nText("payments_modal.please_reach_out_to_your_organization_admin_s_to_resolve_this_billing_issue")
     }), jsx(_$$E, {
       fontWeight: "regular",
       fontSize: 11,
-      children: tx("payments_modal.account_switcher_cta", {
+      children: renderI18nText("payments_modal.account_switcher_cta", {
         switchAccountLink: jsx(_$$h, {
-          text: tx("payments_modal.switch_organization_or_account")
+          text: renderI18nText("payments_modal.switch_organization_or_account")
         })
       })
     })]

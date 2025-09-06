@@ -1,9 +1,9 @@
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { WB } from "../905/761735";
 import { Q } from "../905/150006";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
 import { F } from "../905/302958";
 import { _l } from "../figma_app/976345";
@@ -60,7 +60,7 @@ export let $$N1 = nF((e, t) => {
     t.onSuccessNoRedirect && t.onSuccessNoRedirect(n);
     $$C2(n, e, t);
   }).catch(t => {
-    let r = J(t, t?.response?.message || _$$t("team_creation.an_error_occurred_while_creating_this_team"));
+    let r = J(t, t?.response?.message || getI18nString("team_creation.an_error_occurred_while_creating_this_team"));
     e.dispatch(_$$s.error(r));
     e.dispatch(r1({
       loading: !1
@@ -105,7 +105,7 @@ export function $$C2(e, t, r) {
     if (r.dontRedirect) {
       t.dispatch(F.enqueue({
         type: "new_team_created",
-        message: _$$t("team_creation.you_have_created_a_new_team")
+        message: getI18nString("team_creation.you_have_created_a_new_team")
       }));
       t.dispatch(r1({
         loading: !1
@@ -122,7 +122,7 @@ export function $$C2(e, t, r) {
       }));
       t.dispatch(F.enqueue({
         type: "new_team_created",
-        message: _$$t("team_creation.you_have_created_a_new_team")
+        message: getI18nString("team_creation.you_have_created_a_new_team")
       }));
     } else if (n?.id) {
       let r = {
@@ -161,12 +161,12 @@ let $$w0 = nF((e, t) => {
     data: r
   }) => {
     t.skipVisualBell || e.dispatch(F.enqueue({
-      message: _$$t("change_team_name_visual_bell.text", {
+      message: getI18nString("change_team_name_visual_bell.text", {
         oldTeamName: o,
         newTeamName: d
       }),
       button: {
-        text: _$$t("change_team_name_visual_bell.undo"),
+        text: getI18nString("change_team_name_visual_bell.undo"),
         action: () => {
           e.dispatch($$w0({
             team: r.meta,
@@ -216,7 +216,7 @@ let $$O6 = nF((e, t) => {
   });
 });
 let $$R5 = nF((e, t) => {
-  sx("file-browser-hydrate", {
+  trackEventAnalytics("file-browser-hydrate", {
     location: "team.onJoin"
   });
   let r = p9(t.teamId);
@@ -226,17 +226,17 @@ let $$R5 = nF((e, t) => {
     let a = e.getState().teams[i].name;
     switch (t.level) {
       case e6.OWNER:
-        e.dispatch(_$$s.flash(_$$t("join_team_flash.as_owner.text", {
+        e.dispatch(_$$s.flash(getI18nString("join_team_flash.as_owner.text", {
           teamName: a
         })));
         break;
       case e6.ADMIN:
-        e.dispatch(_$$s.flash(_$$t("join_team_flash.as_admin.text", {
+        e.dispatch(_$$s.flash(getI18nString("join_team_flash.as_admin.text", {
           teamName: a
         })));
         break;
       default:
-        e.dispatch(_$$s.flash(_$$t("join_team_flash.text", {
+        e.dispatch(_$$s.flash(getI18nString("join_team_flash.text", {
           teamName: a
         })));
     }
@@ -251,7 +251,7 @@ let $$R5 = nF((e, t) => {
   e.dispatch(mw(t));
 });
 let $$L4 = nF((e, t) => {
-  sx("file-browser-hydrate", {
+  trackEventAnalytics("file-browser-hydrate", {
     location: "team.onBatchJoin"
   });
   let r = n1(t.teamIds);
@@ -260,17 +260,17 @@ let $$L4 = nF((e, t) => {
     let i = t.teamIds.length;
     switch (t.level) {
       case e6.OWNER:
-        e.dispatch(_$$s.flash(_$$t("join_team_batch_flash.as_owner.text", {
+        e.dispatch(_$$s.flash(getI18nString("join_team_batch_flash.as_owner.text", {
           teamCount: i
         })));
         break;
       case e6.ADMIN:
-        e.dispatch(_$$s.flash(_$$t("join_team_batch_flash.as_admin.text", {
+        e.dispatch(_$$s.flash(getI18nString("join_team_batch_flash.as_admin.text", {
           teamCount: i
         })));
         break;
       default:
-        e.dispatch(_$$s.flash(_$$t("join_team_batch_flash.text", {
+        e.dispatch(_$$s.flash(getI18nString("join_team_batch_flash.text", {
           teamCount: i
         })));
     }
@@ -300,4 +300,4 @@ export const P8 = $$C2;
 export const Rw = $$P3;
 export const UM = $$L4;
 export const vr = $$R5;
-export const zK = $$O6; 
+export const zK = $$O6;

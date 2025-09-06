@@ -2,16 +2,16 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { i } from "../9410/157320";
 import { getFeatureFlags } from "../905/601108";
-import { E3, fp } from "../figma_app/27355";
+import { createLocalStorageAtom, useAtomValueAndSetter } from "../figma_app/27355";
 import l from "classnames";
 import { Pt } from "../figma_app/806412";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Ml } from "../905/971098";
 import { m as _$$m } from "../figma_app/175364";
 var d = l;
-let f = E3("first_draft_last_used_kit", "");
-let g = E3("first_draft_reset_kit_for_byod", !0);
+let f = createLocalStorageAtom("first_draft_last_used_kit", "");
+let g = createLocalStorageAtom("first_draft_reset_kit_for_byod", !0);
 function _(e) {
   return "LOCAL" === e.dsKitKey.type ? e.dsKitKey.pageId ?? "local" : e.dsKitKey.key;
 }
@@ -36,8 +36,8 @@ export function $$y1(e = !1) {
     localKits,
     libraryKits
   } = Ml();
-  let [a, l] = fp(f);
-  let [d, c] = fp(g);
+  let [a, l] = useAtomValueAndSetter(f);
+  let [d, c] = useAtomValueAndSetter(g);
   d && getFeatureFlags().first_draft_direct_gen && (l(""), c(!1));
   let [u, p] = useState(null);
   let m = "loaded" === libraryKitsQueryStatus;
@@ -87,7 +87,7 @@ export function $$b0({
     selected: i,
     onSelectedChange: n,
     placeholder: jsx(x, {
-      text: t ? _$$t("first_draft.library_placeholder") : _$$t("first_draft.kits_loading")
+      text: t ? getI18nString("first_draft.library_placeholder") : getI18nString("first_draft.kits_loading")
     }),
     labelForSelectedItem: e => jsx(x, {
       text: e.kit.name

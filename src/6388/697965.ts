@@ -8,7 +8,7 @@ import { _ as _$$_ } from "../vendor/853977";
 import { Pt } from "../figma_app/806412";
 import { $n } from "../905/521428";
 import { E as _$$E } from "../905/730894";
-import { fp, md } from "../figma_app/27355";
+import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import { A as _$$A } from "../vendor/850789";
 import { uY } from "../figma_app/164260";
 import { ie } from "../figma_app/524655";
@@ -16,7 +16,7 @@ import { tH } from "../905/751457";
 import { lW } from "../figma_app/370763";
 import { rM } from "../figma_app/241541";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { LU, kG, Hf } from "../figma_app/327588";
 import { tc } from "../figma_app/334505";
 import { F1, U3, Vx } from "../figma_app/8833";
@@ -42,7 +42,7 @@ function v({
   scrollToCarouselItem: i,
   backButtonText: a
 }) {
-  let [d] = fp(uY);
+  let [d] = useAtomValueAndSetter(uY);
   let c = ie();
   let u = useCallback(() => {
     let t = l(c);
@@ -157,7 +157,7 @@ function K(e) {
   }, [Q, q]);
   let el = function (e) {
     let t = function () {
-      let [e, t] = fp(uY);
+      let [e, t] = useAtomValueAndSetter(uY);
       return useCallback((e, l) => {
         e.isIntersecting ? t(e => e.includes(l) ? e : [...e, l]) : t(e => e.filter(e => e !== l));
       }, [t]);
@@ -369,11 +369,11 @@ function K(e) {
   });
 }
 let $ = {
-  slides: (e, t) => _$$t("slides.carousel.slide_stack_tooltip", {
+  slides: (e, t) => getI18nString("slides.carousel.slide_stack_tooltip", {
     min: e,
     max: t
   }),
-  buzz: (e, t) => _$$t("cooper.carousel.asset_stack_tooltip", {
+  buzz: (e, t) => getI18nString("cooper.carousel.asset_stack_tooltip", {
     min: e,
     max: t
   })
@@ -415,7 +415,7 @@ function $$G() {
   } = O(x.carouselItemsById);
   let v = !!getFeatureFlags().slide_chapters;
   return jsx(K, {
-    backButtonText: _$$t("slides.carousel.back_to_current_slide"),
+    backButtonText: getI18nString("slides.carousel.back_to_current_slide"),
     carouselConfig: u,
     carouselType: "slides",
     collapsedStatesDisabled: !1,
@@ -447,7 +447,7 @@ function V({
   let c = tc();
   let u = Hf();
   let x = function () {
-    let e = md(_$$v);
+    let e = useAtomWithSubscription(_$$v);
     return useMemo(() => gr(e), [e]);
   }();
   let h = useRef(new Set());
@@ -464,7 +464,7 @@ function V({
     explicitlyToggledRef: h
   }).carouselItemsById);
   return jsx(K, {
-    backButtonText: _$$t("cooper.carousel.back_to_current_asset"),
+    backButtonText: getI18nString("cooper.carousel.back_to_current_asset"),
     bulkCreateMappingsByContainingFrame: x,
     carouselConfig: {
       shouldIndentChildren: !0,
@@ -496,10 +496,10 @@ function U() {
     className: _$$s.p16.$,
     children: [jsx("div", {
       className: _$$s.textBodyMedium.$,
-      children: tx("slides.carousel.error")
+      children: renderI18nText("slides.carousel.error")
     }), jsx("div", {
       className: _$$s.mt4.$,
-      children: tx("slides.carousel.error_solution")
+      children: renderI18nText("slides.carousel.error_solution")
     })]
   });
 }

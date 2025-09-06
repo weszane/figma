@@ -4,7 +4,7 @@ import { connect } from "../vendor/514228";
 import { XHR } from "../905/910117";
 import { nR, $$, vd } from "../figma_app/637027";
 import { v as _$$v } from "../905/755077";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { aP, vQ } from "../figma_app/530167";
 import { sf } from "../905/929976";
 import { Lo, Ce } from "../905/156213";
@@ -1514,30 +1514,30 @@ let w = class e extends Component {
     return jsxs("div", {
       children: [jsx("h1", {
         className: I,
-        children: e ? tx("community.change_profile_handle_modal.new_verification_email_sent") : tx("community.change_profile_handle_modal.check_your_email")
+        children: e ? renderI18nText("community.change_profile_handle_modal.new_verification_email_sent") : renderI18nText("community.change_profile_handle_modal.check_your_email")
       }), jsx("div", {
         className: E,
-        children: tx("community.change_profile_handle_modal.verify_email_prompt")
+        children: renderI18nText("community.change_profile_handle_modal.verify_email_prompt")
       }), jsx("div", {
         className: E,
-        children: tx("community.change_profile_handle_modal.sent_email", {
+        children: renderI18nText("community.change_profile_handle_modal.sent_email", {
           email: jsx("strong", {
-            children: tx("community.profiles.email")
+            children: renderI18nText("community.profiles.email")
           })
         })
       }), jsx("div", {
         className: E,
-        children: tx("community.change_profile_handle_modal.no_email_check_spam_or_click_resend_email_below")
+        children: renderI18nText("community.change_profile_handle_modal.no_email_check_spam_or_click_resend_email_below")
       })]
     });
   }
   renderTitle() {
     return 0 === this.state.step ? jsx("h1", {
       className: I,
-      children: this.props.profileId ? tx("community.change_profile_handle_modal.change_your_unique_profile_handle") : this.props.userId ? tx("community.change_profile_handle_modal.to_like_comment_follow_or_publish_please_create_a_community_profile") : tx("community.change_profile_handle_modal.create_a_community_profile_to_publish_publicly_as_your_org_or_team")
+      children: this.props.profileId ? renderI18nText("community.change_profile_handle_modal.change_your_unique_profile_handle") : this.props.userId ? renderI18nText("community.change_profile_handle_modal.to_like_comment_follow_or_publish_please_create_a_community_profile") : renderI18nText("community.change_profile_handle_modal.create_a_community_profile_to_publish_publicly_as_your_org_or_team")
     }) : jsx("h1", {
       className: I,
-      children: tx("community.change_profile_handle_modal.welcome_to_figma_community")
+      children: renderI18nText("community.change_profile_handle_modal.welcome_to_figma_community")
     });
   }
   renderContent() {
@@ -1551,7 +1551,7 @@ let w = class e extends Component {
       })
     }) : jsx("div", {
       className: "change_profile_handle--profileSuccessInfo--qhEnq change_profile_handle--profileInfo--lq9iz",
-      children: tx("community.change_profile_handle_modal.new_profile_link", {
+      children: renderI18nText("community.change_profile_handle_modal.new_profile_link", {
         url: jsx("div", {
           className: "change_profile_handle--profileSuccessMoreInfo--qpmsB change_profile_handle--moreInfo--b4u-J",
           children: jsxs("span", {
@@ -1566,17 +1566,17 @@ let w = class e extends Component {
     return 0 !== this.state.step ? jsxs(Fragment, {
       children: [jsx(nR, {
         onClick: this.navigateToProfileWithHandle,
-        children: tx("community.change_profile_handle_modal.view_profile")
+        children: renderI18nText("community.change_profile_handle_modal.view_profile")
       }), jsx($$, {
         type: "submit",
         onClick: () => this.props.dispatch(Lo()),
         className: x,
-        children: tx("general.done")
+        children: renderI18nText("general.done")
       })]
     }) : this.props.profileId ? jsxs(Fragment, {
       children: [jsx(nR, {
         onClick: () => this.props.dispatch(Lo()),
-        children: tx("general.cancel")
+        children: renderI18nText("general.cancel")
       }), jsx(vd, {
         type: "submit",
         onClick: this.onChangeSubmit,
@@ -1587,12 +1587,12 @@ let w = class e extends Component {
           communityHubEntity: ZO.PROFILES,
           communityHubEntityId: this.props.profileId
         },
-        children: tx("community.change_profile_handle_modal.change_handle")
+        children: renderI18nText("community.change_profile_handle_modal.change_handle")
       })]
     }) : jsxs(Fragment, {
       children: [jsx(nR, {
         onClick: () => this.props.dispatch(Lo()),
-        children: tx("general.cancel")
+        children: renderI18nText("general.cancel")
       }), jsx(vd, {
         type: "submit",
         onClick: this.onSubmit,
@@ -1603,7 +1603,7 @@ let w = class e extends Component {
           communityHubEntity: this.props.userId ? ZO.USERS : this.props.teamId ? ZO.TEAMS : ZO.ORGS,
           communityHubEntityId: this.props.userId ?? this.props.teamId ?? this.props.orgId
         },
-        children: this.props.emailValidatedAt ? tx("community.change_profile_handle_modal.create_profile") : tx("community.change_profile_handle_modal.resend_email")
+        children: this.props.emailValidatedAt ? renderI18nText("community.change_profile_handle_modal.create_profile") : renderI18nText("community.change_profile_handle_modal.resend_email")
       })]
     });
   }

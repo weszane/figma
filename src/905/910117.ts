@@ -1,18 +1,18 @@
-import { fm } from '../905/236856';
+import { delay } from '../905/236856';
 // import { z } from '../905/239603' // Removed unused import
 import { getWAFChallengeType, wafManager } from '../905/394005';
-import { sx } from '../905/449184';
+import { trackEventAnalytics } from '../905/449184';
 import { fF } from '../905/471229';
 import { h as _$$h } from '../905/551280';
 import { p as _$$p } from '../905/621429';
 import { serializeQuery } from '../905/634134';
-import { xi } from '../905/714362';
+import { logWarning } from '../905/714362';
 import { T } from '../905/912096';
-import { Br, kx } from '../3973/348894';
+import { normalizeUrl, normalizeUrlStrict } from '../3973/348894';
 import { fakePath, getInitialOptions } from '../figma_app/169182';
-import { nl } from '../figma_app/257275';
+import { isInteractionPathCheck } from '../figma_app/897289';
 import { removeElement, unshiftUnique, addUnique } from '../figma_app/656233';
-import { Z } from '../vendor/39153';
+import { addBreadcrumb } from '../vendor/39153';
 
 /**
  * Adds request data to the log if contentType is JSON.
@@ -153,7 +153,7 @@ class MockServer {
         return n;
       }
     }
-    nl() || this.areUnitTestsRunning || !e.url || e.url.endsWith('realtime_token') || e.url === 'https://api.segment.io/v1/track' || e.url.includes('/api/figment-proxy') || console.warn(`[xr.MockServer]: Ignoring ${e.method} request to ${e.url}`, e);
+    isInteractionPathCheck() || this.areUnitTestsRunning || !e.url || e.url.endsWith('realtime_token') || e.url === 'https://api.segment.io/v1/track' || e.url.includes('/api/figment-proxy') || console.warn(`[xr.MockServer]: Ignoring ${e.method} request to ${e.url}`, e);
     return new Promise((_e, _t) => {});
   }
   static SEND_REAL_REQUEST = 'SEND_REAL_REQUEST';
@@ -295,9 +295,9 @@ function logMetrics(url, method, xhr, timer, attempt, requestEvent) {
       const isSlow = duration >= 1000;
       let sanitizedPath = '';
       try {
-        sanitizedPath = new URL(kx(new URL(url, fakePath).toString())).pathname;
+        sanitizedPath = new URL(normalizeUrlStrict(new URL(url, fakePath).toString())).pathname;
       } catch (error) {
-        xi('xhr', 'Failed to create a sanitized request path.', {
+        logWarning('xhr', 'Failed to create a sanitized request path.', {
           requestUrl: url,
           error
         }, {
@@ -305,8 +305,8 @@ function logMetrics(url, method, xhr, timer, attempt, requestEvent) {
         });
       }
       const orgId = getInitialOptions().org_id;
-      sx('web_async_request', {
-        url: Br(xhr.responseURL),
+      trackEventAnalytics('web_async_request', {
+        url: normalizeUrl(xhr.responseURL),
         requestPath: sanitizedPath,
         method,
         resultEvent: requestEvent,
@@ -411,7 +411,7 @@ async function sendXhrRequest(attempt, t, i) {
           try {
             parsedData = settings.raw || settings.rawResponse ? xhr.responseText : settings.load(xhr.responseText);
           } catch (parseError) {
-            Z({
+            addBreadcrumb({
               category: 'xhr',
               message: `failed to parse response: ${parseError.message}`,
               data: {
@@ -420,7 +420,7 @@ async function sendXhrRequest(attempt, t, i) {
                 url: finalUrl
               }
             }, {});
-            xi('xhr', `failed to parse response: ${parseError.message}`, {
+            logWarning('xhr', `failed to parse response: ${parseError.message}`, {
               responseText: xhr.responseText,
               url: finalUrl
             }, {
@@ -429,7 +429,7 @@ async function sendXhrRequest(attempt, t, i) {
             parsedData = parseError instanceof SyntaxError ? xhr.responseText : null;
           }
         } else {
-          Z({
+          addBreadcrumb({
             category: 'xhr',
             message: `unhandled responseType: ${xhr.responseType}`,
             data: {
@@ -518,11 +518,11 @@ async function sendWithRetry(e, t) {
       return response;
     }
     if (retryStrategy === XHR.RetryStrategy.LINEAR_BACKOFF) {
-      await fm(500 * attempt);
+      await delay(500 * attempt);
     } else if (retryStrategy === XHR.RetryStrategy.JITTERED_EXPONENTIAL_BACKOFF) {
       const baseDelay = Math.min(500 * 2 ** attempt, 300000);
       const jitter = 0.25 * Math.random() * baseDelay;
-      await fm(baseDelay + jitter);
+      await delay(baseDelay + jitter);
     } else {
       break;
     }

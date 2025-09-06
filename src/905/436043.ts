@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { createContext, useLayoutEffect, useMemo, useState, useEffect } from "react";
-import { Lg, nl } from "../figma_app/257275";
+import { getFalseValue, isInteractionPathCheck } from "../figma_app/897289";
 import { MV } from "../905/761735";
 import { observableState } from "../905/441145";
 let n;
@@ -11,7 +11,7 @@ export function $$u0({
   children: t
 }) {
   useLayoutEffect(() => {
-    if (void 0 !== n && e !== n && !Lg() && !nl()) throw Error("Only a single userId should be provided to LivegraphProvider at any time");
+    if (void 0 !== n && e !== n && !getFalseValue() && !isInteractionPathCheck()) throw Error("Only a single userId should be provided to LivegraphProvider at any time");
     n = e;
     return () => {
       n = void 0;

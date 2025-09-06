@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { Oin } from "../figma_app/763686";
 import { ty, Rm, Y2, DT } from "../figma_app/320164";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { B as _$$B, N as _$$N } from "../figma_app/659940";
 import { nF } from "../figma_app/789";
 import { v as _$$v } from "../figma_app/354567";
@@ -18,13 +18,13 @@ import { J as _$$J } from "../905/614223";
 import { l as _$$l } from "../905/728491";
 import { Rs } from "../figma_app/288654";
 import { B as _$$B2 } from "../905/714743";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { sf } from "../905/929976";
 import { Rh } from "../905/844322";
 import { _iU, sMs, QD8 } from "../figma_app/43951";
 import { M4 } from "../905/713695";
 import { getPermissionsState } from "../figma_app/642025";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { R as _$$R } from "../905/309400";
 import { AM, pT } from "../905/467351";
 import { kL, qr, PU, hz, Qw, Lo, wV } from "../905/478905";
@@ -52,7 +52,7 @@ import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, nB } from "../figma_app/272243";
 import ei from "classnames";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { xf } from "../figma_app/416935";
 import { r as _$$r } from "../905/520829";
 import { k as _$$k2 } from "../905/585996";
@@ -99,7 +99,7 @@ function D(e) {
           className: hz
         }), jsxs("span", {
           className: Qw,
-          children: [tx("collaboration.branching_archived_footer.locked"), "\xa0\xa0\xa0"]
+          children: [renderI18nText("collaboration.branching_archived_footer.locked"), "\xa0\xa0\xa0"]
         }), jsx("span", {
           className: Lo,
           children: message
@@ -132,10 +132,10 @@ function k() {
   let p = "loaded" !== s.status || u;
   let h = c && l;
   return p ? jsx(D, {
-    message: tx("collaboration.branching_archived_footer.merged")
+    message: renderI18nText("collaboration.branching_archived_footer.merged")
   }) : d ? jsx(D, {
-    message: tx("collaboration.branching_archived_footer.restore_branch"),
-    buttonText: tx("collaboration.branching_archived_footer.restore_branch_button"),
+    message: renderI18nText("collaboration.branching_archived_footer.restore_branch"),
+    buttonText: renderI18nText("collaboration.branching_archived_footer.restore_branch_button"),
     buttonOnClick: () => {
       e(Rh({
         fileKeys: {
@@ -145,13 +145,13 @@ function k() {
       }));
     }
   }) : jsx(D, {
-    message: tx("collaboration.branching_archived_footer.can_restore_branch"),
-    buttonText: h ? tx("collaboration.branching_archived_footer.back_to_main_file") : void 0,
+    message: renderI18nText("collaboration.branching_archived_footer.can_restore_branch"),
+    buttonText: h ? renderI18nText("collaboration.branching_archived_footer.back_to_main_file") : void 0,
     buttonOnClick: h ? () => {
       e(sf({
         view: "fullscreen",
         fileKey: c,
-        editorType: nT.Design
+        editorType: FEditorType.Design
       }));
     } : void 0
   });
@@ -170,7 +170,7 @@ let eE = Ju(function (e) {
   let p = hS({
     ...e,
     onClose: () => {
-      sx("google_meet_claim_email_modal_closed", {
+      trackEventAnalytics("google_meet_claim_email_modal_closed", {
         fileKey: c
       });
       t(AS());
@@ -188,7 +188,7 @@ let eE = Ju(function (e) {
             className: FS,
             children: jsx("h1", {
               className: DX,
-              children: tx("google_device_try_file_modal.enter_email")
+              children: renderI18nText("google_device_try_file_modal.enter_email")
             })
           }), jsx(_$$k2, {
             multiple: 1
@@ -196,7 +196,7 @@ let eE = Ju(function (e) {
             className: FS,
             children: jsx("div", {
               className: Kc,
-              children: tx("google_device_try_file_modal.enter_email.description")
+              children: renderI18nText("google_device_try_file_modal.enter_email.description")
             })
           }), jsx(_$$k2, {
             multiple: 3
@@ -204,14 +204,14 @@ let eE = Ju(function (e) {
             autoFocus: !0,
             type: "email",
             className: ea()(_2, o && cC),
-            placeholder: _$$t("google_device_try_file_modal.enter_email.placeholder_email"),
+            placeholder: getI18nString("google_device_try_file_modal.enter_email.placeholder_email"),
             onChange: e => {
               s(e.target.value);
             },
             value: r
           }), o && jsx("div", {
             className: mV,
-            children: tx("google_device_try_file_modal.enter_email.error_message")
+            children: renderI18nText("google_device_try_file_modal.enter_email.error_message")
           }), jsx(_$$k2, {
             multiple: 2
           }), jsx(lR, {
@@ -222,7 +222,7 @@ let eE = Ju(function (e) {
                 return;
               }
               if (!c) {
-                t(_$$s2.error(_$$t("google_device_try_file_modal.error_saving_board")));
+                t(_$$s2.error(getI18nString("google_device_try_file_modal.error_saving_board")));
                 return;
               }
               e.onSubmitEmail({
@@ -233,20 +233,20 @@ let eE = Ju(function (e) {
             children: jsx(_$$x, {
               isLoading: !!u,
               className: _$$s.flex.justifyCenter.$,
-              children: () => tx("google_device_try_file_modal.enter_email.button")
+              children: () => renderI18nText("google_device_try_file_modal.enter_email.button")
             })
           }), jsx(_$$k2, {
             multiple: 3
           }), jsx("div", {
             className: NJ,
-            children: tx("google_device_try_file_modal.disclaimer", {
+            children: renderI18nText("google_device_try_file_modal.disclaimer", {
               tos: jsx(_$$V, {
-                url: Ay.isMeetDevice ? _$$A2 : Uw,
-                title: _$$t("google_device_try_file_modal.onboarding_disclaimer_tos")
+                url: BrowserInfo.isMeetDevice ? _$$A2 : Uw,
+                title: getI18nString("google_device_try_file_modal.onboarding_disclaimer_tos")
               }),
               privacy_policy: jsx(_$$V, {
-                url: Ay.isMeetDevice ? bO : JD,
-                title: _$$t("google_device_try_file_modal.onboarding_disclaimer_privacy_policy")
+                url: BrowserInfo.isMeetDevice ? bO : JD,
+                title: getI18nString("google_device_try_file_modal.onboarding_disclaimer_privacy_policy")
               })
             })
           }), jsx(_$$k2, {
@@ -286,7 +286,7 @@ let eb = Ju(function (e) {
             className: FS,
             children: jsx("h1", {
               className: DX,
-              children: tx("google_device_try_file_modal.got_mail")
+              children: renderI18nText("google_device_try_file_modal.got_mail")
             })
           }), jsx(_$$k2, {
             multiple: 1
@@ -294,7 +294,7 @@ let eb = Ju(function (e) {
             className: FS,
             children: jsx("div", {
               className: Kc,
-              children: tx("google_device_try_file_modal.got_mail.description", {
+              children: renderI18nText("google_device_try_file_modal.got_mail.description", {
                 email: jsx("p", {
                   className: Fx,
                   children: email
@@ -309,17 +309,17 @@ let eb = Ju(function (e) {
               e.stopPropagation();
               i(Ce());
             },
-            children: tx("google_device_try_file_modal.got_mail.close")
+            children: renderI18nText("google_device_try_file_modal.got_mail.close")
           }), jsx(_$$k2, {
             multiple: 3
           }), jsx("div", {
             className: NJ,
-            children: tx("google_device_try_file_modal.got_mail.email_not_received", {
+            children: renderI18nText("google_device_try_file_modal.got_mail.email_not_received", {
               send_again_link: jsx($z, {
                 variant: "link",
                 onClick: r => {
                   if (r.preventDefault(), r.stopPropagation(), !s) {
-                    i(_$$s2.error(_$$t("google_device_try_file_modal.error_saving_board")));
+                    i(_$$s2.error(getI18nString("google_device_try_file_modal.error_saving_board")));
                     return;
                   }
                   e.onResendEmail({
@@ -328,14 +328,14 @@ let eb = Ju(function (e) {
                     isResentEmail: !0
                   });
                 },
-                children: tx("google_device_try_file_modal.got_mail.email_not_received.send_again")
+                children: renderI18nText("google_device_try_file_modal.got_mail.email_not_received.send_again")
               })
             })
           }), jsx(_$$k2, {
             multiple: 2
           }), jsx("div", {
             className: NJ,
-            children: tx("google_device_try_file_modal.got_mail.wrong_address", {
+            children: renderI18nText("google_device_try_file_modal.got_mail.wrong_address", {
               use_different_email_link: jsx($z, {
                 variant: "link",
                 onClick: e => {
@@ -343,7 +343,7 @@ let eb = Ju(function (e) {
                   e.stopPropagation();
                   onChangeEmail();
                 },
-                children: tx("google_device_try_file_modal.got_mail.wrong_address.use_different_email")
+                children: renderI18nText("google_device_try_file_modal.got_mail.wrong_address.use_different_email")
               })
             })
           })]
@@ -370,10 +370,10 @@ function ex({
   let r = _6();
   let i = I4(e, t);
   let a = E3();
-  let s = Ay.isMeetDevice;
-  let o = _$$t("footer_banner.welcome_to_figma");
-  let d = "DUPLICATE" === r.landingState ? _$$t("footer_banner.create_an_account_to_get_your_own_copy_of_this_file") : _$$t("footer_banner.create_an_account_to_edit_and_collaborate_on_this_file");
-  s ? (o = i, d = _$$t("figjam_try.meet_hardware.board_deletion_disclaimer")) : e && (o = i, d = _$$t("figjam_try_v2.after_that_this_board_will_be_deleted"));
+  let s = BrowserInfo.isMeetDevice;
+  let o = getI18nString("footer_banner.welcome_to_figma");
+  let d = "DUPLICATE" === r.landingState ? getI18nString("footer_banner.create_an_account_to_get_your_own_copy_of_this_file") : getI18nString("footer_banner.create_an_account_to_edit_and_collaborate_on_this_file");
+  s ? (o = i, d = getI18nString("figjam_try.meet_hardware.board_deletion_disclaimer")) : e && (o = i, d = getI18nString("figjam_try_v2.after_that_this_board_will_be_deleted"));
   let u = e ? {
     icon: jsx(_$$c, {
       style: {
@@ -450,7 +450,7 @@ function eN() {
       isResentEmail: n
     }));
   };
-  let s = _$$t("figjam_try.save_board");
+  let s = getI18nString("figjam_try.save_board");
   return jsx($z, {
     htmlAttributes: {
       "data-test-id": "meet-btn"
@@ -504,7 +504,7 @@ function eC({
           formState: qB.SIGN_UP
         });
       },
-      children: tx("footer_banner.sign_up_with_email")
+      children: renderI18nText("footer_banner.sign_up_with_email")
     }), jsx(_$$H, {
       onClick: () => {
         let e = t(!0);
@@ -530,7 +530,7 @@ function eC({
       },
       large: !0,
       brandTextColor: !0,
-      children: tx("footer_banner.continue_with_google")
+      children: renderI18nText("footer_banner.continue_with_google")
     })]
   });
 }
@@ -550,14 +550,14 @@ function eD({
   let h = nF(!0);
   let m = _6();
   let g = I4(e, h);
-  let f = _$$t("footer_banner.welcome_to_figma");
-  let E = "DUPLICATE" === m.landingState ? _$$t("footer_banner.create_an_account_to_get_your_own_copy_of_this_file") : _$$t("footer_banner.create_an_account_to_edit_and_collaborate_on_this_file");
+  let f = getI18nString("footer_banner.welcome_to_figma");
+  let E = "DUPLICATE" === m.landingState ? getI18nString("footer_banner.create_an_account_to_get_your_own_copy_of_this_file") : getI18nString("footer_banner.create_an_account_to_edit_and_collaborate_on_this_file");
   let y = {
     src: _$$A4,
     style: c6
   };
   let b = !1;
-  e && (f = g, E = _$$t("figjam_try_v2.after_that_this_board_will_be_deleted"), y = {
+  e && (f = g, E = getI18nString("figjam_try_v2.after_that_this_board_will_be_deleted"), y = {
     src: _$$A5,
     style: J$
   }, b = !h.enabled || "fallback" === h.id);
@@ -627,7 +627,7 @@ function eD({
             style: {
               marginLeft: "5px"
             },
-            children: tx("footer_banner.continue_with_google")
+            children: renderI18nText("footer_banner.continue_with_google")
           })
         }), jsx("div", {
           style: {
@@ -646,7 +646,7 @@ function eD({
             htmlAttributes: {
               "data-test-id": "email-btn"
             },
-            children: tx("footer_banner.sign_up_with_email")
+            children: renderI18nText("footer_banner.sign_up_with_email")
           })
         })]
       })]
@@ -668,9 +668,9 @@ export function $$ek0() {
   let x = Oc();
   return (useEffect(() => {
     v();
-  }, [v]), T) ? null : y && Ay.isMeetDevice && !I ? jsx(ex, {
+  }, [v]), T) ? null : y && BrowserInfo.isMeetDevice && !I ? jsx(ex, {
     isFigJamTry: b
-  }) : t ? Kz(e) && e.trashedAt && E === Oin.OFF ? jsx(k, {}) : null : y || I || Ay.isMeetDevice || A || x ? null : S ? jsxs("div", {
+  }) : t ? Kz(e) && e.trashedAt && E === Oin.OFF ? jsx(k, {}) : null : y || I || BrowserInfo.isMeetDevice || A || x ? null : S ? jsxs("div", {
     className: cI,
     children: [jsx(eD, {
       isFigJamTry: b

@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useSelector } from "../vendor/514228";
 import { l as _$$l } from "../905/716947";
 import { Mz } from "../vendor/925040";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { h } from "../905/207101";
 import { iN, Zl, Z4 } from "../905/211621";
 var $$n0;
@@ -41,7 +41,7 @@ var $$n0;
     let u = useSelector(e => e.instanceSwapPickerListLayout);
     let p = n.type === iN.FILE ? n.libraryKey : void 0;
     h(() => {
-      (e === Zl.INSTANCE_SWAP_PICKER || e === Zl.PREFERRED_VALUES_PICKER) && az.trackDefinedEvent("instance_swap_picker.launched", {
+      (e === Zl.INSTANCE_SWAP_PICKER || e === Zl.PREFERRED_VALUES_PICKER) && analyticsEventManager.trackDefinedEvent("instance_swap_picker.launched", {
         ...o,
         sessionId: i,
         viewMode: u ? "list" : "grid",
@@ -59,7 +59,7 @@ var $$n0;
   }) {
     let a = t();
     return useCallback(t => {
-      az.trackDefinedEvent("instance_swap_picker.view_toggle", {
+      analyticsEventManager.trackDefinedEvent("instance_swap_picker.view_toggle", {
         ...a,
         viewMode: t ? "list" : "grid",
         sessionId: e,

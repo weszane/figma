@@ -4,14 +4,14 @@ import { useSelector, useDispatch } from "../vendor/514228";
 import { N as _$$N } from "../905/438674";
 import { _ as _$$_ } from "../figma_app/496441";
 import { getFeatureFlags } from "../905/601108";
-import { sx } from "../905/449184";
-import { sn } from "../905/542194";
+import { trackEventAnalytics } from "../905/449184";
+import { globalPerfTimer } from "../905/542194";
 import { ZC } from "../figma_app/39751";
 import { h1 } from "../905/986103";
 import { A as _$$A } from "../905/920142";
-import { Gq } from "../figma_app/363242";
+import { getI18nState } from "../figma_app/363242";
 import { Ib } from "../905/129884";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { Df, uy, pD, z$, RI } from "../figma_app/770088";
 import { b as _$$b } from "../905/985254";
 import { AK, I_, Tv } from "../905/234821";
@@ -27,7 +27,7 @@ import { sf } from "../905/929976";
 import { Np } from "../figma_app/193867";
 import { SD, Du, In, Lo, xH, k8, zl, WO, YD, g2, lo, GI, Qq, ex, WJ, $S } from "../905/649567";
 function f(e) {
-  let t = function (e, t = Gq().getPrimaryLocale(!1)) {
+  let t = function (e, t = getI18nState().getPrimaryLocale(!1)) {
     return new Intl.DateTimeFormat(t, {
       month: "short",
       day: "numeric",
@@ -59,10 +59,10 @@ function D(e) {
       uuid
     } = i;
     if (uuid && !h) {
-      let t = sn.get(`comment_reply_creation_${uuid}`);
+      let t = globalPerfTimer.get(`comment_reply_creation_${uuid}`);
       if (t && t.isRunning && !t.isUnreliable) {
-        let t = sn.tryStop(`comment_reply_creation_${uuid}`);
-        t && sx("comment_reply_creation", {
+        let t = globalPerfTimer.tryStop(`comment_reply_creation_${uuid}`);
+        t && trackEventAnalytics("comment_reply_creation", {
           elapsedMs: t
         }, {
           forwardToDatadog: !0
@@ -102,7 +102,7 @@ function D(e) {
           children: i.user.handle
         }), h ? jsx("div", {
           className: YD,
-          children: tx("comments.in_a_moment")
+          children: renderI18nText("comments.in_a_moment")
         }) : jsx("div", {
           className: YD,
           children: jsx(f, {
@@ -116,7 +116,7 @@ function D(e) {
       }), jsx("div", {
         className: g2,
         children: !e.hideOverflowMenu && i.user_id === e.user?.id && !u && jsx(V, {
-          label: _$$t("comments.comment_actions"),
+          label: getI18nString("comments.comment_actions"),
           comment: i,
           recordingKey: "threadComment.commentActionsButton",
           possibleActions: e.overflowMenuActions,
@@ -262,12 +262,12 @@ export function $$L0(e) {
       mountInputFocused: e.mountInputFocused,
       onCancel: m,
       onSubmit: () => e.submitEdit(comment, messageMeta, attachmentUpdates),
-      placeholderText: _$$t("comments.comment_n"),
+      placeholderText: getI18nString("comments.comment_n"),
       recordingKey: Dw.edit,
       setHyperlinkEditorRef: e.setHyperlinkEditorRef,
       setHyperlinkLocation: e.setHyperlinkLocation,
       setIsEditorFocused: e.setIsEditorFocused,
-      submitText: _$$t("comments.save"),
+      submitText: getI18nString("comments.save"),
       threadId: e.thread.id,
       threadPosition: e.threadPosition,
       typeahead: e.typeahead,

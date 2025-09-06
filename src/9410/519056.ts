@@ -7,10 +7,10 @@ import { parsePxNumber } from "../figma_app/783094";
 import { getInitialOptions } from "../figma_app/169182";
 import { Rs } from "../figma_app/288654";
 import { oA } from "../905/723791";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { YQ } from "../905/502364";
 import { c as _$$c } from "../figma_app/617427";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { D9 } from "../1250/182479";
 import { DG } from "../9410/60600";
 import { xo } from "../figma_app/473493";
@@ -30,7 +30,7 @@ import { kQI } from "../figma_app/43951";
 import { XX } from "../figma_app/345997";
 import { X$ } from "../figma_app/465071";
 import { wH, KI } from "../figma_app/680166";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { Ib } from "../905/129884";
 import { J as _$$J } from "../905/202542";
 import { jn } from "../figma_app/522082";
@@ -67,9 +67,9 @@ export function $$et0({
     folderId: e.folderId
   });
   let Z = e.editorType === FFileType.WHITEBOARD && !!e.org?.figjamDisabledAt;
-  let ee = l === nT.Slides && oA(e.org?.isSlidesDisabled);
-  let et = l === nT.Sites && !!e.org?.isSitesDisabled;
-  let er = l === nT.Cooper && !!e.org?.isCooperDisabled;
+  let ee = l === FEditorType.Slides && oA(e.org?.isSlidesDisabled);
+  let et = l === FEditorType.Sites && !!e.org?.isSitesDisabled;
+  let er = l === FEditorType.Cooper && !!e.org?.isCooperDisabled;
   let en = _$$e();
   let es = !!e.org || XX(e.team);
   let eo = e.isTryFile;
@@ -141,12 +141,12 @@ export function $$et0({
     eN && (eN._share_file = () => {
       ek();
     });
-  }, [eN, ek]), Ay.isMeetDevice || (!eo || !i) && !t) return null;
+  }, [eN, ek]), BrowserInfo.isMeetDevice || (!eo || !i) && !t) return null;
   let eA = i && !eo && es;
   let eO = !!getInitialOptions().org_id && getInitialOptions().org_id === e.parentOrgId;
   if (eE && "loading" === eC.status) return null;
   let eL = eT ? "disabled" : eo ? "secondary" : Z || ee || et || er ? "disabled" : el ? "loading" : eA ? "openSession" : eh ? "personalDraftDisabled" : e_ ? "hasCurrentUpgradeRequest" : eE && ev && !e.canEdit || ej ? "secondary" : "primary";
-  let eR = eT ? _$$t("fullscreen.toolbar.multiplayer.sharing_figmake_files_disabled") : Z ? _$$t("fullscreen.toolbar.multiplayer.sharing_fig_jam_files_disabled_by_your_organization") : ee ? _$$t("fullscreen.toolbar.multiplayer.sharing_slides_files_disabled_by_your_organization") : et ? _$$t("fullscreen.toolbar.multiplayer.sharing_sites_files_disabled_by_your_organization") : er ? _$$t("fullscreen.toolbar.multiplayer.sharing_buzz_files_disabled_by_your_organization") : eA ? _$$t("fullscreen.toolbar.multiplayer.open_session_in_progress") : eh ? _$$r : e_ ? _$$t("fullscreen.toolbar.multiplayer.sharing_has_current_upgrade_request") : null;
+  let eR = eT ? getI18nString("fullscreen.toolbar.multiplayer.sharing_figmake_files_disabled") : Z ? getI18nString("fullscreen.toolbar.multiplayer.sharing_fig_jam_files_disabled_by_your_organization") : ee ? getI18nString("fullscreen.toolbar.multiplayer.sharing_slides_files_disabled_by_your_organization") : et ? getI18nString("fullscreen.toolbar.multiplayer.sharing_sites_files_disabled_by_your_organization") : er ? getI18nString("fullscreen.toolbar.multiplayer.sharing_buzz_files_disabled_by_your_organization") : eA ? getI18nString("fullscreen.toolbar.multiplayer.open_session_in_progress") : eh ? _$$r : e_ ? getI18nString("fullscreen.toolbar.multiplayer.sharing_has_current_upgrade_request") : null;
   let eD = {
     "data-tooltip-is-current-user-file-owner": JSON.stringify(ex),
     "data-tooltip-type": eh ? Ib.SPECIAL : Ib.TEXT,
@@ -155,7 +155,7 @@ export function $$et0({
     "data-tooltip-show-immediately": !0,
     "data-tooltip-offset-y": eh ? 0 : 6
   };
-  let eM = l === nT.Whiteboard;
+  let eM = l === FEditorType.Whiteboard;
   let eP = eM || o || eI;
   let eF = eP ? lT : _$$m;
   let eB = e.hasEditRole && oA(e.hasEditRole);
@@ -210,7 +210,7 @@ function ei({
       buttonVariant: e
     },
     disabled: en(e),
-    children: [s && jsx(_$$r2, {}), tx("fullscreen.toolbar.multiplayer.share")]
+    children: [s && jsx(_$$r2, {}), renderI18nText("fullscreen.toolbar.multiplayer.share")]
   });
 }
 let er = ["disabled", "personalDraftDisabled", "loading", "hasCurrentUpgradeRequest"];
@@ -246,7 +246,7 @@ function ea({
       "data-testid": "multiplayer-toolbar-share-button",
       "data-onboarding-key": v4
     },
-    children: tx("fullscreen.toolbar.multiplayer.share")
+    children: renderI18nText("fullscreen.toolbar.multiplayer.share")
   });
 }
 export const w = $$et0;

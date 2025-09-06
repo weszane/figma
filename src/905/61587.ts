@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { createElement } from "react";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { ud } from "../905/513035";
 import { hK } from "../figma_app/211706";
 import { yg, Wb, Rc } from "../905/948828";
@@ -10,7 +10,7 @@ export function $$c0() {
   return jsxs("div", {
     children: [jsx("div", {
       className: _$$s.textHeadingLarge.$,
-      children: tx("plan_comparison.campfire.meet_the_seats")
+      children: renderI18nText("plan_comparison.campfire.meet_the_seats")
     }), jsx(hK, {
       height: 16
     }), jsx("div", {

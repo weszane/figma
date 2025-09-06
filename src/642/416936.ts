@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { getSingletonSceneGraph } from "../905/700578";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { wA, Fk } from "../figma_app/167249";
 import { c } from "../048e062c/525184";
 export function $$o1(e) {
@@ -10,7 +10,7 @@ export function $$o1(e) {
 function d(e, t) {
   if (!getSingletonSceneGraph().get(e)) return null;
   let s = c.safeParse(t);
-  return s.success ? s.data : (s.error && x1("onJSXPropsChange", "Invalid props", s.error.flatten(), {
+  return s.success ? s.data : (s.error && logError("onJSXPropsChange", "Invalid props", s.error.flatten(), {
     reportAsSentryError: !0
   }), null);
 }

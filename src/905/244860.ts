@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useContext, useMemo } from "react";
-import { R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { mv } from "../figma_app/164212";
 import { Nw, y7, UR } from "../figma_app/505098";
 import { l as _$$l } from "../905/331642";
@@ -17,9 +17,9 @@ export function $$u0({
   let {
     VariableAndComponentPropCreateModalRoot
   } = useContext(_$$l) ?? {};
-  let g = R(e => Nw(e) ?? y7(e));
+  let g = selectWithShallowEqual(e => Nw(e) ?? y7(e));
   let f = useMemo(() => Kq(!!VariableAndComponentPropCreateModalRoot, !!g, m), [VariableAndComponentPropCreateModalRoot, g, m]);
-  let _ = !!R(e => UR(e));
+  let _ = !!selectWithShallowEqual(e => UR(e));
   if (!f || !VariableAndComponentPropCreateModalRoot || _) return jsx(U, {
     initialPosition: t,
     initialValue: i,

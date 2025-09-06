@@ -4,7 +4,7 @@ import { A } from "../905/251970";
 import r from "classnames";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Y } from "../905/830372";
 import { I } from "../figma_app/638694";
 import { fu } from "../figma_app/831799";
@@ -80,7 +80,7 @@ export function $$f3(e) {
         })]
       }), jsx(K, {
         onClick: e.onClose,
-        "aria-label": _$$t("admin_settings.dimiss"),
+        "aria-label": getI18nString("admin_settings.dimiss"),
         children: jsx(A, {})
       })]
     })

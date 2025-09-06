@@ -4,7 +4,7 @@ import { useDispatch } from "../vendor/514228";
 import s from "classnames";
 import { nR } from "../figma_app/637027";
 import { B } from "../905/714743";
-import { tx, t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { v } from "../905/581647";
 import { Ib } from "../905/129884";
 import { x6, Jp, qS, QW, cI, hI, JL } from "../figma_app/522242";
@@ -38,14 +38,14 @@ export function $$f2() {
   return jsx("button", {
     className: qS,
     onClick: t,
-    children: tx("community.buyer.update_payment")
+    children: renderI18nText("community.buyer.update_payment")
   });
 }
 export function $$E3() {
   return jsx("div", {
     className: QW,
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": t("community.buyer.update_payment_info_to_retain_access"),
+    "data-tooltip": getI18nString("community.buyer.update_payment_info_to_retain_access"),
     children: jsx(B, {
       svg: A
     })
@@ -62,12 +62,12 @@ export function $$y1() {
       })
     }), jsx("div", {
       className: hI,
-      children: tx("community.buyer.update_payment_info")
+      children: renderI18nText("community.buyer.update_payment_info")
     }), jsx("div", {
       className: JL,
       children: jsx($$g0, {
         width: "auto",
-        children: tx("community.buyer.go_to_stripe")
+        children: renderI18nText("community.buyer.go_to_stripe")
       })
     })]
   });

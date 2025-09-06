@@ -1,5 +1,5 @@
 import { CWU, Z_n } from "../figma_app/763686";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { F_ } from "../figma_app/191804";
 import { xv } from "../figma_app/655139";
 import { Nv } from "../905/713722";
@@ -33,7 +33,7 @@ export function $$u1(e, t, i) {
 }
 export function $$p0(e, t) {
   return Object.values(e.boundVariables).flatMap(e => e).map(e => {
-    let i = zl.get(Ev(e.id));
+    let i = atomStoreManager.get(Ev(e.id));
     if (i) {
       let r = CWU.getVariableResolvedValue(e.id, new Map());
       let o = r?.resolvedType;

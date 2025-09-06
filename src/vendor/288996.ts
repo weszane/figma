@@ -1,91 +1,94 @@
-import { U } from "../vendor/885230";
-import { o5, rm, KU } from "../vendor/325489";
-import { fj, qO, Vu } from "../vendor/882763";
-import { O } from "../vendor/240444";
-import { li } from "../vendor/650703";
-export function $$u0(e, n) {
-  return o5().captureException(e, li(n));
+import { O } from '../vendor/240444'
+import { getClient, getCurrentScope, getIsolationScope } from '../vendor/325489'
+import { li } from '../vendor/650703'
+import { fj, qO, Vu } from '../vendor/882763'
+import { U } from '../vendor/885230'
+
+export function captureException(e, n) {
+  return getCurrentScope().captureException(e, li(n))
 }
-export function $$l8(e, n) {
-  let i = "string" == typeof n ? n : void 0;
-  let t = "string" != typeof n ? {
-    captureContext: n
-  } : void 0;
-  return o5().captureMessage(e, i, t);
+export function captureMessage(e, n) {
+  let i = typeof n == 'string' ? n : void 0
+  let t = typeof n != 'string'
+    ? {
+        captureContext: n,
+      }
+    : void 0
+  return getCurrentScope().captureMessage(e, i, t)
 }
-export function $$d7(e, n) {
-  return o5().captureEvent(e, n);
+export function captureEvent(e, n) {
+  return getCurrentScope().captureEvent(e, n)
 }
-export function $$s6(e, n) {
-  rm().setContext(e, n);
+export function setContext(e, n) {
+  getIsolationScope().setContext(e, n)
 }
-export function $$c4(e) {
-  rm().setTags(e);
+export function setTags(e) {
+  getIsolationScope().setTags(e)
 }
-export function $$h3(e, n) {
-  rm().setTag(e, n);
+export function setTag(e, n) {
+  getIsolationScope().setTag(e, n)
 }
-export function $$p5(e) {
-  rm().setUser(e);
+export function setUser(e) {
+  getIsolationScope().setUser(e)
 }
-export function $$g1(e) {
-  let n = KU();
-  let i = rm();
-  let o = o5();
+export function startSession(e) {
+  let n = getClient()
+  let i = getIsolationScope()
+  let o = getCurrentScope()
   let {
     release,
-    environment = U
-  } = n && n.getOptions() || {};
+    environment = U,
+  } = n && n.getOptions() || {}
   let {
-    userAgent
-  } = O.navigator || {};
+    userAgent,
+  } = O.navigator || {}
   let s = fj({
     release,
     environment,
     user: o.getUser() || i.getUser(),
     ...(userAgent && {
-      userAgent
+      userAgent,
     }),
-    ...e
-  });
-  let c = i.getSession();
-  c && "ok" === c.status && qO(c, {
-    status: "exited"
-  });
-  m();
-  i.setSession(s);
-  o.setSession(s);
-  return s;
+    ...e,
+  })
+  let c = i.getSession()
+  c && c.status === 'ok' && qO(c, {
+    status: 'exited',
+  })
+  endSession()
+  i.setSession(s)
+  o.setSession(s)
+  return s
 }
-function m() {
-  let e = rm();
-  let n = o5();
-  let i = n.getSession() || e.getSession();
-  i && Vu(i);
-  _();
-  e.setSession();
-  n.setSession();
+function endSession() {
+  let e = getIsolationScope()
+  let n = getCurrentScope()
+  let i = n.getSession() || e.getSession()
+  i && Vu(i)
+  _sendSessionUpdate()
+  e.setSession()
+  n.setSession()
 }
-function _() {
-  let e = rm();
-  let n = o5();
-  let i = KU();
-  let t = n.getSession() || e.getSession();
-  t && i && i.captureSession(t);
+function _sendSessionUpdate() {
+  let e = getIsolationScope()
+  let n = getCurrentScope()
+  let i = getClient()
+  let t = n.getSession() || e.getSession()
+  t && i && i.captureSession(t)
 }
-export function $$b2(e = !1) {
+export function captureSession(e = !1) {
   if (e) {
-    m();
-    return;
+    endSession()
+    return
   }
-  _();
+  _sendSessionUpdate()
 }
-export const Cp = $$u0;
-export const J0 = $$g1;
-export const J5 = $$b2;
-export const NA = $$h3;
-export const Wt = $$c4;
-export const gV = $$p5;
-export const o = $$s6;
-export const r = $$d7;
-export const wd = $$l8;
+export const Cp = captureException
+export const J0 = startSession
+export const J5 = captureSession
+export const NA = setTag
+export const Wt = setTags
+export const gV = setUser
+export const o = setContext
+export const r = captureEvent
+export const wd = captureMessage

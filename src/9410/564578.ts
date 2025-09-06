@@ -1,7 +1,7 @@
 import { c2 } from "../905/382883";
 import { luZ } from "../figma_app/763686";
 import { Hr } from "../905/871411";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { uc, eB, kP } from "../9410/228612";
 function l(e, t) {
   if (!e && !t) return !0;
@@ -34,7 +34,7 @@ export function $$c0(e, t, i, r) {
     let n = i.findIndex(e => l(e, t));
     return void 0 === e && 0 === n || void 0 === t && r === i.length - 1 || -1 !== r && -1 !== n && r + 1 === n;
   }(t, i, r)) {
-    x1("Slides reorder object animations", "prevItem and nextItem are not in the correct order", {
+    logError("Slides reorder object animations", "prevItem and nextItem are not in the correct order", {
       prevItem: t,
       nextItem: i,
       oldItems: r

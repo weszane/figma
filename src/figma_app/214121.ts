@@ -8,7 +8,7 @@ import { A as _$$A } from "../vendor/862057";
 import { A as _$$A2 } from "../vendor/257034";
 import { A as _$$A3 } from "../vendor/782559";
 import { A as _$$A4 } from "../vendor/947527";
-import { $D, us } from "../905/11";
+import { reportError, captureMessage } from "../905/11";
 import { VZ } from "../figma_app/930338";
 import { E3 } from "../figma_app/976749";
 import { Y5 } from "../figma_app/455680";
@@ -58,8 +58,8 @@ export let $$b1 = {
         } = t;
         return ((void 0 === alpha ? 255 : Math.round(255 * alpha)) << 24 | Math.round(255 * b) << 16 | Math.round(255 * g) << 8 | Math.round(255 * r)) >>> 0;
       }(i);
-      if (void 0 !== o) t[s] = o;else if (n) $D(_$$e.FPL, Error(`Failed to find valid value for color token ${s}, found ${i}`));else {
-        us("Cannot fetch color tokens from CSS, CSS was not loaded");
+      if (void 0 !== o) t[s] = o;else if (n) reportError(_$$e.FPL, Error(`Failed to find valid value for color token ${s}, found ${i}`));else {
+        captureMessage("Cannot fetch color tokens from CSS, CSS was not loaded");
         e.hasRunTokenSync.set(!0);
         return;
       }

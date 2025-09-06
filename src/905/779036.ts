@@ -8,7 +8,7 @@ import { f as _$$f } from "../905/54715";
 import { M3 } from "../figma_app/119475";
 import { L } from "../905/408237";
 import { B } from "../905/714743";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { I } from "../905/343721";
 import { cr, CO, yY } from "../905/703676";
 import { Ib } from "../905/129884";
@@ -56,11 +56,11 @@ export function $$y0({
       }), !!o && jsx("span", {
         className: hj,
         children: jsx(K, {
-          "aria-label": _$$t("search.search_bar.clear"),
+          "aria-label": getI18nString("search.search_bar.clear"),
           onClick: b,
           htmlAttributes: {
             "data-tooltip-type": Ib.TEXT,
-            "data-tooltip": _$$t("search.search_bar.clear")
+            "data-tooltip": getI18nString("search.search_bar.clear")
           },
           children: jsx(_$$f, {})
         })
@@ -90,7 +90,7 @@ export function $$b2({
       rowHeight: CO.SHORT,
       rowStyle: yY.BRAND_HOVER,
       sideElementAlwaysVisible: !0,
-      text: _$$t("search.facets.clear_all")
+      text: getI18nString("search.facets.clear_all")
     })
   });
 }

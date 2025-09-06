@@ -15,7 +15,7 @@ import { ks } from "../figma_app/637027";
 import { qc } from "../figma_app/858013";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s2 } from "../cssbuilder/589278";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { Ce, to, Lo } from "../905/156213";
 import { b as _$$b } from "../905/985254";
@@ -57,21 +57,21 @@ let $$F0 = Ju(function (e) {
   let er = e => {
     switch (e) {
       case "url_format":
-        return tx("resource_connection.request_modal.errors.this_link_isn_t_valid");
+        return renderI18nText("resource_connection.request_modal.errors.this_link_isn_t_valid");
       case "url_same_plan":
-        return tx("resource_connection.request_modal.errors.you_don_t_need_to_connect_with_your_own_plan", {
+        return renderI18nText("resource_connection.request_modal.errors.you_don_t_need_to_connect_with_your_own_plan", {
           connectedPlanType: q
         });
       case "email_format":
-        return tx("resource_connection.request_modal.errors.please_use_a_valid_email_format");
+        return renderI18nText("resource_connection.request_modal.errors.please_use_a_valid_email_format");
       case "email_not_match_plan":
-        return tx("resource_connection.request_modal.errors.this_email_isn_t_associated_with_the_plan_linked_above", {
+        return renderI18nText("resource_connection.request_modal.errors.this_email_isn_t_associated_with_the_plan_linked_above", {
           connectedPlanType: q
         });
       case "email_user_not_found":
-        return tx("resource_connection.request_modal.errors.user_not_found");
+        return renderI18nText("resource_connection.request_modal.errors.user_not_found");
       case "non_gov_url":
-        return tx("resource_connection.request_modal.errors.non_gov_url");
+        return renderI18nText("resource_connection.request_modal.errors.non_gov_url");
     }
   };
   let ea = useCallback(e => {
@@ -157,7 +157,7 @@ let $$F0 = Ju(function (e) {
       children: jsxs(vo, {
         children: [jsx(Y9, {
           children: jsx(hE, {
-            children: 1 === L ? tx("resource_connection.request_modal.which_team_do_you_want_to_connect_to") : tx("resource_connection.request_modal.whos_your_contact_on_that_team")
+            children: 1 === L ? renderI18nText("resource_connection.request_modal.which_team_do_you_want_to_connect_to") : renderI18nText("resource_connection.request_modal.whos_your_contact_on_that_team")
           })
         }), jsx(nB, {
           padding: 0,
@@ -172,12 +172,12 @@ let $$F0 = Ju(function (e) {
                 className: _$$s2.p16.$,
                 children: [jsx("p", {
                   className: XK,
-                  children: tx("resource_connection.request_modal.get_their_figma_link", {
-                    FigmaLinkHC: (t = tx("resource_connection.request_modal.figma_link_hc"), jsx("a", {
+                  children: renderI18nText("resource_connection.request_modal.get_their_figma_link", {
+                    FigmaLinkHC: (t = renderI18nText("resource_connection.request_modal.figma_link_hc"), jsx("a", {
                       className: C2,
                       href: "https://help.figma.com/hc/articles/30124855491863-Guide-to-connected-projects#h_01JMJDKJFD68CH88F663KG08AJ",
                       target: "_blank",
-                      children: t || tx("resource_connection.request_modal.learn_more")
+                      children: t || renderI18nText("resource_connection.request_modal.learn_more")
                     }))
                   })
                 }), jsx(ks, {
@@ -185,7 +185,7 @@ let $$F0 = Ju(function (e) {
                   onChange: e => eo(e.currentTarget.value),
                   className: Z ? Xu : QL,
                   value: G,
-                  placeholder: _$$t("resource_connection.request_modal.add_the_figma_team_link")
+                  placeholder: getI18nString("resource_connection.request_modal.add_the_figma_team_link")
                 }), Z && jsx("span", {
                   className: _$$T,
                   children: er(Z)
@@ -198,14 +198,14 @@ let $$F0 = Ju(function (e) {
                       svg: _$$A
                     }), jsx("div", {
                       className: Qu,
-                      children: "" === K ? tx("resource_connection.request_modal.generic_plan_link_verified") : tx("resource_connection.request_modal.plan_link_verified", {
+                      children: "" === K ? renderI18nText("resource_connection.request_modal.generic_plan_link_verified") : renderI18nText("resource_connection.request_modal.plan_link_verified", {
                         planName: K
                       })
                     })]
                   })
                 }), jsx("div", {
                   className: _$$s2.pt16.$,
-                  children: tx("resource_connection.request_modal.or", {
+                  children: renderI18nText("resource_connection.request_modal.or", {
                     askThemToCreateOneButton: jsx("button", {
                       className: C2,
                       onClick: () => {
@@ -216,7 +216,7 @@ let $$F0 = Ju(function (e) {
                           }
                         }));
                       },
-                      children: tx("resource_connection.request_modal.connect_with_someone_without_a_figma_account")
+                      children: renderI18nText("resource_connection.request_modal.connect_with_someone_without_a_figma_account")
                     })
                   })
                 })]
@@ -225,7 +225,7 @@ let $$F0 = Ju(function (e) {
               className: _$$s2.p16.$,
               children: [jsx("p", {
                 className: XK,
-                children: tx("resource_connection.request_modal.your_contact_will_be_added_to_the_connected_project", {
+                children: renderI18nText("resource_connection.request_modal.your_contact_will_be_added_to_the_connected_project", {
                   hostPlanName: jsx("span", {
                     className: Cr,
                     children: N.name
@@ -236,7 +236,7 @@ let $$F0 = Ju(function (e) {
                 onChange: e => es(e.currentTarget.value),
                 className: Q ? Xu : QL,
                 value: j,
-                placeholder: _$$t("resource_connection.request_modal.add_your_contact_email")
+                placeholder: getI18nString("resource_connection.request_modal.add_your_contact_email")
               }), Q && jsxs("span", {
                 className: _$$s2.colorTextDanger.$,
                 children: [" ", er(Q), " "]
@@ -245,7 +245,7 @@ let $$F0 = Ju(function (e) {
                 className: iU,
                 value: B,
                 type: "textarea",
-                placeholder: _$$t("resource_connection.request_modal.add_a_message")
+                placeholder: getI18nString("resource_connection.request_modal.add_a_message")
               })]
             })
           })
@@ -253,7 +253,7 @@ let $$F0 = Ju(function (e) {
           children: jsxs("div", {
             className: _$$s2.flex.justifyBetween.itemsCenter.wFull.pl2.$,
             children: [jsxs("span", {
-              children: [tx("resource_connection.request_modal.step_1_of_2", {
+              children: [renderI18nText("resource_connection.request_modal.step_1_of_2", {
                 stepNumber: L
               }), " "]
             }), jsxs("div", {
@@ -263,7 +263,7 @@ let $$F0 = Ju(function (e) {
                 onClick: 1 === L ? u : () => {
                   F(1);
                 },
-                children: 1 === L ? tx("resource_connection.request_modal.cancel") : tx("resource_connection.request_modal.back")
+                children: 1 === L ? renderI18nText("resource_connection.request_modal.cancel") : renderI18nText("resource_connection.request_modal.back")
               }), ee ? jsx($n, {
                 disabled: !0,
                 children: jsx(qc, {})
@@ -289,7 +289,7 @@ let $$F0 = Ju(function (e) {
                     et(!1);
                     u();
                     i(_$$F.enqueue({
-                      message: _$$t("resource_connection.visual_bell.we_ve_sent_a_notification_to_plan_name", {
+                      message: getI18nString("resource_connection.visual_bell.we_ve_sent_a_notification_to_plan_name", {
                         connectedPlanName: K || ""
                       })
                     }));
@@ -298,27 +298,27 @@ let $$F0 = Ju(function (e) {
                     }));
                   }).catch(e => {
                     "Connecting invitee not found" === e.message ? (J("email_user_not_found"), et(!1)) : "Connecting invitee is not part of the connecting plan" === e.message ? (J("email_not_match_plan"), et(!1)) : "A pending invite already exists for this resource" === e.message ? (u(), i(_$$F.enqueue({
-                      message: _$$t("resource_connection.visual_bell.pending_connection_request_exists"),
+                      message: getI18nString("resource_connection.visual_bell.pending_connection_request_exists"),
                       error: !0
                     })), et(!1)) : "A connection already exists for this resource" === e.message ? (u(), i(_$$F.enqueue({
-                      message: _$$t("resource_connection.visual_bell.connection_already_exists"),
+                      message: getI18nString("resource_connection.visual_bell.connection_already_exists"),
                       error: !0
                     }))) : "Host plan has reached active connection and outgoing invite limit" === e.message ? (u(), i(_$$F.enqueue({
-                      message: N.key.type === FOrganizationLevelType.ORG ? _$$t("resource_connection.visual_bell.org_at_limit") : _$$t("resource_connection.visual_bell.team_at_limit"),
+                      message: N.key.type === FOrganizationLevelType.ORG ? getI18nString("resource_connection.visual_bell.org_at_limit") : getI18nString("resource_connection.visual_bell.team_at_limit"),
                       error: !0
                     }))) : "Connecting plan owner's email domain cannot match host plan email domain" === e.message ? (u(), i(_$$F.enqueue({
-                      message: N.key.type === FOrganizationLevelType.ORG ? _$$t("resource_connection.visual_bell.same_team_owner_domain_host_org_error") : _$$t("resource_connection.visual_bell.same_team_owner_domain_host_team_error"),
+                      message: N.key.type === FOrganizationLevelType.ORG ? getI18nString("resource_connection.visual_bell.same_team_owner_domain_host_org_error") : getI18nString("resource_connection.visual_bell.same_team_owner_domain_host_team_error"),
                       error: !0
                     }))) : "Cannot initiate connection when org does not allow external guests to join organization" === e.message ? (u(), i(_$$F.enqueue({
-                      message: _$$t("resource_connection.visual_bell.org_does_not_allow_external_guests_to_join_organization"),
+                      message: getI18nString("resource_connection.visual_bell.org_does_not_allow_external_guests_to_join_organization"),
                       error: !0
                     }))) : (u(), i(_$$F.enqueue({
-                      message: _$$t("resource_connection.visual_bell.generic_error"),
+                      message: getI18nString("resource_connection.visual_bell.generic_error"),
                       error: !0
                     })), et(!1));
                   });
                 },
-                children: 1 === L ? tx("resource_connection.request_modal.next") : tx("resource_connection.request_modal.send")
+                children: 1 === L ? renderI18nText("resource_connection.request_modal.next") : renderI18nText("resource_connection.request_modal.send")
               })]
             })]
           })
@@ -365,15 +365,15 @@ let M = Ju(function (e) {
               onClick: () => {
                 t(Lo());
               },
-              "aria-label": _$$t("resource_connection.aria_label.button"),
+              "aria-label": getI18nString("resource_connection.aria_label.button"),
               children: jsx(_$$C, {})
-            }), tx("resource_connection.create_new_team_modal.who_would_you_like_to_collaborate_with")]
+            }), renderI18nText("resource_connection.create_new_team_modal.who_would_you_like_to_collaborate_with")]
           })
         })
       }), jsxs(nB, {
         children: [jsx("p", {
           className: _$$s2.py8.$,
-          children: tx("resource_connection.create_new_team_modal.we_will_email_them_with_a_link_to_set_up_a_figma_team")
+          children: renderI18nText("resource_connection.create_new_team_modal.we_will_email_them_with_a_link_to_set_up_a_figma_team")
         }), jsxs("div", {
           className: _$$s2.pb12.$,
           children: [jsx(ks, {
@@ -381,18 +381,18 @@ let M = Ju(function (e) {
             onChange: e => w(e.target.value),
             className: A ? Xu : QL,
             maxLength: 255,
-            placeholder: _$$t("resource_connection.create_new_team_modal.add_your_contacts_email")
+            placeholder: getI18nString("resource_connection.create_new_team_modal.add_your_contacts_email")
           }), A && jsxs("span", {
             className: _$$s2.colorTextDanger.$,
             children: [" ", (t => {
               switch (t) {
                 case "email_format":
-                  return tx("resource_connection.request_modal.errors.please_use_a_valid_email_format");
+                  return renderI18nText("resource_connection.request_modal.errors.please_use_a_valid_email_format");
                 case "email_user_already_exists":
-                  return tx("resource_connection.visual_bell.user_already_exists_contact_them_to_get_team_link");
+                  return renderI18nText("resource_connection.visual_bell.user_already_exists_contact_them_to_get_team_link");
                 case "email_same_domain":
-                  if (e.projectPlan.key.type === FOrganizationLevelType.ORG) return tx("resource_connection.visual_bell.same_team_owner_domain_host_org_error");
-                  return tx("resource_connection.visual_bell.same_team_owner_domain_host_team_error");
+                  if (e.projectPlan.key.type === FOrganizationLevelType.ORG) return renderI18nText("resource_connection.visual_bell.same_team_owner_domain_host_org_error");
+                  return renderI18nText("resource_connection.visual_bell.same_team_owner_domain_host_team_error");
               }
             })(A), " "]
           })]
@@ -402,7 +402,7 @@ let M = Ju(function (e) {
           children: [jsx($n, {
             variant: "secondary",
             onClick: i,
-            children: tx("resource_connection.request_modal.cancel")
+            children: renderI18nText("resource_connection.request_modal.cancel")
           }), jsx($n, {
             variant: "primary",
             disabled: "" === g || !!A,
@@ -414,16 +414,16 @@ let M = Ju(function (e) {
               }).then(() => {
                 t(Ce());
                 t(_$$F.enqueue({
-                  message: _$$t("resource_connection.visual_bell.instructions_sent")
+                  message: getI18nString("resource_connection.visual_bell.instructions_sent")
                 }));
               }).catch(e => {
                 "User already exists" === e.message ? E("email_user_already_exists") : "Invitee email domain cannot match host plan email domain" === e.message ? E("email_same_domain") : t(_$$F.enqueue({
-                  message: _$$t("resource_connection.visual_bell.generic_error"),
+                  message: getI18nString("resource_connection.visual_bell.generic_error"),
                   error: !0
                 }));
               });
             },
-            children: tx("resource_connection.request_modal.send")
+            children: renderI18nText("resource_connection.request_modal.send")
           })]
         })
       })]

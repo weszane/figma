@@ -7,11 +7,11 @@ import { $n } from "../905/521428";
 import { N as _$$N } from "../905/438674";
 import { _em, glU } from "../figma_app/763686";
 import { l as _$$l } from "../905/716947";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { h as _$$h } from "../905/207101";
 import { dW } from "../figma_app/858013";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { vQ, jE } from "../905/656545";
 import { am } from "../figma_app/430563";
 import { Ce } from "../905/156213";
@@ -29,7 +29,7 @@ import { C as _$$C } from "../905/520159";
 import { O as _$$O } from "../905/791978";
 import P from "classnames";
 import D from "../vendor/239910";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { p as _$$p } from "../figma_app/288654";
 import { rf } from "../figma_app/806412";
 import { NG } from "../figma_app/709893";
@@ -156,12 +156,12 @@ function ec({
         let l = c[s].children;
         let p = e.folder_id;
         p !== o && (l.length && l.push(u), l.push({
-          displayText: n?.path || _$$t("design_systems.libraries_modal.hidden_project"),
+          displayText: n?.path || getI18nString("design_systems.libraries_modal.hidden_project"),
           disabled: !0
         }), o = p);
         l.push(t);
       }
-      let p = _$$t("design_systems.libraries_modal.ui_kits");
+      let p = getI18nString("design_systems.libraries_modal.ui_kits");
       for (let e of t) {
         let t = {
           displayText: e.name,
@@ -200,7 +200,7 @@ function ec({
   }, [p, _, b, e, h, v, I, x]);
   let T = useMemo(() => ({
     format: e => {
-      if (null == e) return _$$t("design_systems.libraries_modal.choose_library");
+      if (null == e) return getI18nString("design_systems.libraries_modal.choose_library");
       let t = x[e[1]];
       let i = S[e[1]];
       return t?.library_name ?? i?.name ?? "";
@@ -268,10 +268,10 @@ function eu({
     className: "replace_libraries_modal--emptyState--FvQQ7",
     children: [jsx("div", {
       className: "replace_libraries_modal--emptyStateText--rbgUb",
-      children: tx("design_systems.libraries_modal.no_items_to_swap")
+      children: renderI18nText("design_systems.libraries_modal.no_items_to_swap")
     }), jsx("div", {
       className: "replace_libraries_modal--emptyStateSubtext--aHZJ-",
-      children: tx("design_systems.libraries_modal.no_items_to_swap_subtext")
+      children: renderI18nText("design_systems.libraries_modal.no_items_to_swap_subtext")
     })]
   });
   return jsxs("div", {
@@ -281,7 +281,7 @@ function eu({
       children: [jsx("div", {
         children: jsx(_$$K, {
           onClick: i,
-          "aria-label": _$$t("design_systems.libraries_modal.back_to_library"),
+          "aria-label": getI18nString("design_systems.libraries_modal.back_to_library"),
           children: jsx(_$$C, {})
         })
       }), jsx("div", {
@@ -292,7 +292,7 @@ function eu({
             children: [jsx(_$$B, {
               className: "replace_libraries_modal--missingLibrariesIcon--1oNrW",
               svg: _$$A
-            }), tx("design_systems.libraries_modal.plural.missing_library", {
+            }), renderI18nText("design_systems.libraries_modal.plural.missing_library", {
               missingLibCount: 1
             })]
           })
@@ -358,7 +358,7 @@ function em({
   let {
     sceneGraph,
     directlyUsedItemIDs
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     sceneGraph: e.mirror.sceneGraph,
     directlyUsedItemIDs: kc(e)
   }));
@@ -372,8 +372,8 @@ function em({
     for (let [t, i] of r.entries()) t.type === PW.STYLE && (!i || i.type === PW.STYLE) && l.has(t.key) && e.set(t, i);
     r = e;
   }
-  let d = i === PW.COMPONENT ? tx("design_systems.libraries_modal.used_component") : i === PW.STYLE ? tx("design_systems.libraries_modal.used_style") : null;
-  let c = i === PW.COMPONENT ? tx("design_systems.libraries_modal.new_component") : i === PW.STYLE ? tx("design_systems.libraries_modal.new_style") : null;
+  let d = i === PW.COMPONENT ? renderI18nText("design_systems.libraries_modal.used_component") : i === PW.STYLE ? renderI18nText("design_systems.libraries_modal.used_style") : null;
+  let c = i === PW.COMPONENT ? renderI18nText("design_systems.libraries_modal.new_component") : i === PW.STYLE ? renderI18nText("design_systems.libraries_modal.new_style") : null;
   return jsxs(Fragment, {
     children: [jsxs("div", {
       className: "replace_libraries_modal--fileMapSubheaderRow--RBuNz replace_libraries_modal--_fileMapRowBase--agNce",
@@ -410,7 +410,7 @@ function eh({
     }),
     children: [jsx(q9, {
       htmlFor: o,
-      children: _$$t("design_systems.libraries_modal.swap_asset")
+      children: getI18nString("design_systems.libraries_modal.swap_asset")
     }), jsx(ep, {
       checked: l && !!t,
       disabled: !t,
@@ -438,7 +438,7 @@ function eh({
         })]
       }) : a ? jsx("div", {
         className: "replace_libraries_modal--fileMapNoneFound--3r7h0",
-        children: tx("design_systems.libraries_modal.none_found")
+        children: renderI18nText("design_systems.libraries_modal.none_found")
       }) : null
     })]
   }, e.node_id);
@@ -494,7 +494,7 @@ export function $$ef0({
   let j = fc();
   let U = _$$T();
   let B = useCallback(() => {
-    e && (sx("Swap library clicked", {
+    e && (trackEventAnalytics("Swap library clicked", {
       editingFileKey: T?.key,
       libraryKeyToSwapFrom: e,
       libraryKeyToSwapTo: R
@@ -553,7 +553,7 @@ export function $$ef0({
               recordingKey: "subscriptionFileView.swapToSpecifiedLibrary",
               disabled: !D,
               onClick: V,
-              children: [tx("design_systems.libraries_modal.swap_library"), " "]
+              children: [renderI18nText("design_systems.libraries_modal.swap_library"), " "]
             })
           })
         })]
@@ -565,12 +565,12 @@ function e_() {
   return jsxs("span", {
     children: [jsx("div", {
       className: "subscription_file_replace_libraries_view--footerText--YA1qF",
-      children: tx("design_systems.libraries_modal.swap_default_styles_in_instances")
+      children: renderI18nText("design_systems.libraries_modal.swap_default_styles_in_instances")
     }), jsx(_$$N, {
       href: "https://help.figma.com/hc/articles/4404856784663#overrides",
       newTab: !0,
       trusted: !0,
-      children: tx("design_systems.libraries_modal.learn_more")
+      children: renderI18nText("design_systems.libraries_modal.learn_more")
     })]
   });
 }

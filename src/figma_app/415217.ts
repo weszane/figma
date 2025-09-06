@@ -1,5 +1,5 @@
 import { n as _$$n } from "../905/347702";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { g } from "../905/880308";
 var n;
 var $$i10;
@@ -300,7 +300,7 @@ let $$O23 = new class {
   resolveMessage(e) {
     let t = this.pendingMessagesById[e.requestId];
     if (!t) {
-      x1("MessageWithResponseManager.resolveMessage", "No pending message found", {
+      logError("MessageWithResponseManager.resolveMessage", "No pending message found", {
         response: e,
         pendingMessagesById: this.pendingMessagesById
       }, {
@@ -327,7 +327,7 @@ let $$R24 = new class {
   resolveMessage(e) {
     let t = this.callbacksById[e.callbackId];
     if (!t) {
-      x1("MessageWithCallbackManager.resolveMessage", "No callback found", {
+      logError("MessageWithCallbackManager.resolveMessage", "No callback found", {
         response: e,
         callbacksById: this.callbacksById
       }, {

@@ -12,7 +12,7 @@ import m from "classnames";
 import g from "lodash-es/mapValues";
 import _ from "../vendor/781591";
 import y from "../vendor/523035";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { a as _$$a } from "../905/361543";
 import { C as _$$C } from "../905/641057";
 import { r as _$$r } from "../905/786998";
@@ -22,7 +22,7 @@ import { z as _$$z } from "../905/284530";
 import { b as _$$b } from "../figma_app/246400";
 import { s as _$$s } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { J as _$$J } from "../905/231762";
 import { sx as _$$sx } from "../905/941192";
 import { F as _$$F } from "../905/302958";
@@ -107,14 +107,14 @@ function ea(e) {
         n(_$$F.enqueue({
           type: "update-org-renewal-counts",
           icon: zX.CHECK_WITH_CIRCLE,
-          message: _$$t("billing_modals.renewal.seats_at_renewal_confirmed"),
+          message: getI18nString("billing_modals.renewal.seats_at_renewal_confirmed"),
           onDismiss: lQ
         }));
         t();
       }).catch(e => {
         n(_$$F.enqueue({
           type: "update-org-renewal-counts",
-          message: _$$J(e, _$$t("general.an_error_occurred")),
+          message: _$$J(e, getI18nString("general.an_error_occurred")),
           error: !0
         }));
         i();
@@ -134,16 +134,16 @@ function ea(e) {
       localizeCurrency
     } = Zz(e);
     if (!prices || !localizeCurrency) return [null, {
-      errorMessage: _$$t("billing_modals.org_renewal.price_error")
+      errorMessage: getI18nString("billing_modals.org_renewal.price_error")
     }];
     let a = N_.dict(e => isNullish(prices[e]) ? void 0 : (t[e] || 0) * prices[e].amount);
     return N_.toArray().some(e => isNullish(a[e])) ? [null, {
-      errorMessage: _$$t("billing_modals.org_renewal.price_error")
+      errorMessage: getI18nString("billing_modals.org_renewal.price_error")
     }] : [{
       id: "projectedCost",
       name: jsx(_$$E2, {
         color: "secondary",
-        children: _$$t("billing_modals.org_renewal.table.header.projected_cost")
+        children: getI18nString("billing_modals.org_renewal.table.header.projected_cost")
       }),
       textAlign: "right",
       gridColumnWidth: "92px",
@@ -162,12 +162,12 @@ function ea(e) {
       })
     }, {}];
   }(i.key, V);
-  let en = _$$t("billing_modals.renewal.header", {
+  let en = getI18nString("billing_modals.renewal.header", {
     date: e.renewalDate,
     planName: i.name
   });
   useEffect(() => {
-    ei && sx("seat_purchasing.non_blocking_fetch_error", {
+    ei && trackEventAnalytics("seat_purchasing.non_blocking_fetch_error", {
       price_fetch_error: !0,
       view: "org_renewal_modal"
     }, {
@@ -217,7 +217,7 @@ function ea(e) {
               children: en
             }), jsx("div", {
               className: _$$s.textBodyMedium.colorTextSecondary.$,
-              children: _$$t("billing_modals.org_renewal.description")
+              children: getI18nString("billing_modals.org_renewal.description")
             })]
           }), jsx(_$$C, {
             styling: {
@@ -230,7 +230,7 @@ function ea(e) {
               name: jsx(_$$E2, {
                 color: "secondary",
                 truncate: !0,
-                children: _$$t("billing_modals.renewal.table.header.seat_type")
+                children: getI18nString("billing_modals.renewal.table.header.seat_type")
               }),
               textAlign: "left",
               gridColumnWidth: "auto",
@@ -239,15 +239,15 @@ function ea(e) {
                 planKey: i.key,
                 seatType: e
               }),
-              getAggregate: () => _$$t("billing_modals.org_renewal.table.total_seats")
+              getAggregate: () => getI18nString("billing_modals.org_renewal.table.total_seats")
             }, {
               id: "assigned",
               name: jsx(_$$b, {
                 text: jsx("span", {
                   className: _$$s.textBodyMedium.colorTextSecondary.$,
-                  children: _$$t("billing_modals.org_renewal.table.header.assigned")
+                  children: getI18nString("billing_modals.org_renewal.table.header.assigned")
                 }),
-                popoverText: _$$t("billing_modals.renewal.table.tooltip.assigned", {
+                popoverText: getI18nString("billing_modals.renewal.table.tooltip.assigned", {
                   renewalDate: e.renewalDate
                 })
               }),
@@ -262,14 +262,14 @@ function ea(e) {
               name: jsx(_$$b, {
                 text: jsx("span", {
                   className: _$$s.textBodyMedium.colorTextSecondary.$,
-                  children: _$$t("billing_modals.org_renewal.table.header.unassigned")
+                  children: getI18nString("billing_modals.org_renewal.table.header.unassigned")
                 }),
-                popoverText: tx("billing_modals.renewal.table.tooltip.unassigned", {
+                popoverText: renderI18nText("billing_modals.renewal.table.tooltip.unassigned", {
                   learnMoreLink: jsx(Us, {
                     trusted: !0,
                     target: "_blank",
                     href: "https://help.figma.com/hc/articles/360040328293",
-                    children: tx("general.learn_more")
+                    children: renderI18nText("general.learn_more")
                   })
                 })
               }),
@@ -285,7 +285,7 @@ function ea(e) {
               id: "total",
               name: jsx(_$$E2, {
                 color: "secondary",
-                children: _$$t("billing_modals.org_renewal.table.header.total")
+                children: getI18nString("billing_modals.org_renewal.table.header.total")
               }),
               gridColumnWidth: "48px",
               textAlign: "right",
@@ -317,14 +317,14 @@ function ea(e) {
               trackingProperties: {
                 trackingDescriptor: _$$c.CANCEL
               },
-              children: _$$t("general.cancel")
+              children: getI18nString("general.cancel")
             }), jsx($z, {
               type: "submit",
               disabled: C,
               trackingProperties: {
                 trackingDescriptor: _$$c.CONFIRM_RENEWAL
               },
-              children: _$$t("billing_modals.renewal.cta.confirm_seat_renewal")
+              children: getI18nString("billing_modals.renewal.cta.confirm_seat_renewal")
             })]
           })
         })]
@@ -339,7 +339,7 @@ function es(e) {
     variant: "brand",
     orientation: "vertical",
     iconSrc: _$$A,
-    children: tx("billing_modals.org_renewal.disclaimer_banner.these_numbers_may_change", {
+    children: renderI18nText("billing_modals.org_renewal.disclaimer_banner.these_numbers_may_change", {
       date: e.renewalDate,
       manageAssignedSeatsLink: jsx(_$$E, {
         className: h()(h7, _$$s.inline.$),
@@ -353,7 +353,7 @@ function es(e) {
           }));
           e.onClose();
         },
-        children: _$$t("billing_modals.org_renewal.disclaimer_banner.manage_assigned_seats")
+        children: getI18nString("billing_modals.org_renewal.disclaimer_banner.manage_assigned_seats")
       })
     })
   });

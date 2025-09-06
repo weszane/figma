@@ -10,7 +10,7 @@ import { x as _$$x } from "../905/211326";
 import { JR } from "../9420/975542";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { d as _$$d } from "../c5e2cae0/841217";
 import { J } from "../9420/278106";
 import { sf } from "../905/929976";
@@ -90,7 +90,7 @@ export function $$b0({
         }), jsxs("div", {
           className: _$$s.flex.flexColumn.itemsCenter.alignCenter.$,
           children: [jsx(JR, {
-            children: tx("edu.almost_done_everything_look_good")
+            children: renderI18nText("edu.almost_done_everything_look_good")
           }), jsx(Kz, {
             multiple: 4
           }), jsx(_$$x, {

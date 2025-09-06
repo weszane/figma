@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { Uz } from "../905/63728";
 import { Pt } from "../figma_app/806412";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { P } from "../905/994270";
 import { nP, LU } from "../905/487011";
 import { Ek } from "../905/278499";
@@ -40,7 +40,7 @@ export function $$g0({
       });
       b();
     },
-    children: tx("ai.cancel")
+    children: renderI18nText("ai.cancel")
   }) : i ? jsx(_$$r, {
     variant: "secondary",
     shortcuts: [{
@@ -55,7 +55,7 @@ export function $$g0({
       });
       y();
     },
-    children: tx("ai.stop")
+    children: renderI18nText("ai.stop")
   }) : void 0;
   return jsx(_$$y, {
     content: f,

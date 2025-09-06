@@ -7,7 +7,7 @@ import { Pt } from "../figma_app/806412";
 import { a as _$$a } from "../905/847494";
 import { X } from "../905/350405";
 import { G } from "../905/350935";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 export function $$_0(e) {
   let t = void 0 !== e.isNavigateBackwardEnabledOverride ? e.isNavigateBackwardEnabledOverride : e.currentFrameIndex > 0;
   let r = void 0 !== e.isNavigateForwardEnabledOverride ? e.isNavigateForwardEnabledOverride : e.currentFrameIndex < e.frameCount - 1;
@@ -18,13 +18,13 @@ export function $$_0(e) {
     children: [!e.shouldHideNavigationButtons && jsx(h, {
       onClick: e.onNavigateBackward,
       disabled: !t,
-      tooltipText: _$$t("viewer.footer.previous_frame"),
-      ariaLabel: _$$t("viewer.footer.previous_frame"),
+      tooltipText: getI18nString("viewer.footer.previous_frame"),
+      ariaLabel: getI18nString("viewer.footer.previous_frame"),
       recordingKey: Pt(e, "backButton"),
       icon: jsx(C, {})
     }), jsx(X, {}), e.shouldShowFrameCounter && jsxs(Fragment, {
       children: [jsx(G, {
-        children: _$$t("viewer.footer.frame_progress", {
+        children: getI18nString("viewer.footer.frame_progress", {
           currentFrameIndex: e.currentFrameIndex + 1,
           frameCount: e.frameCount
         })
@@ -32,8 +32,8 @@ export function $$_0(e) {
     }), !e.shouldHideNavigationButtons && jsx(h, {
       onClick: e.onNavigateForward,
       disabled: !r,
-      tooltipText: _$$t("viewer.footer.next_frame"),
-      ariaLabel: _$$t("viewer.footer.next_frame"),
+      tooltipText: getI18nString("viewer.footer.next_frame"),
+      ariaLabel: getI18nString("viewer.footer.next_frame"),
       recordingKey: Pt(e, "nextButton"),
       icon: jsx(_$$e, {})
     }), e.children && jsxs(Fragment, {

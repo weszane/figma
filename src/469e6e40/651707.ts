@@ -10,7 +10,7 @@ import { x as _$$x } from "../905/811596";
 import { a as _$$a } from "../905/462280";
 import { C } from "../905/520159";
 import { xk } from "@stylexjs/stylex";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Y } from "../905/830372";
 import { E } from "../905/984674";
 import { d as _$$d } from "../905/44199";
@@ -39,11 +39,11 @@ let $$j0 = Ju(function (e) {
       children: [jsxs(Y9, {
         children: [e.onBack && jsx(K, {
           onClick: e.onBack,
-          "aria-label": _$$t("general.back"),
+          "aria-label": getI18nString("general.back"),
           children: jsx(C, {})
         }), jsx(hE, {
           children: jsx(E, {
-            children: tx("idp_management.domain_mapping_modal.title")
+            children: renderI18nText("idp_management.domain_mapping_modal.title")
           })
         })]
       }), jsx(nB, {
@@ -58,9 +58,9 @@ let $$j0 = Ju(function (e) {
           horizontalAlignItems: "start",
           width: "100%",
           children: [jsx(E, {
-            children: tx("idp_management.domain_mapping_modal.description")
+            children: renderI18nText("idp_management.domain_mapping_modal.description")
           }), jsx(E, {
-            children: tx("idp_management.domain_mapping_modal.choose_domains")
+            children: renderI18nText("idp_management.domain_mapping_modal.choose_domains")
           }), jsx("div", {
             className: "xh8yej3",
             children: jsx(_$$e, {
@@ -88,7 +88,7 @@ let $$j0 = Ju(function (e) {
                     children: t.domain
                   }), i && jsx("span", {
                     className: "x8x9d4c x1n0bwc9",
-                    children: _$$t("idp_management.mapped")
+                    children: getI18nString("idp_management.mapped")
                   })]
                 });
               },
@@ -133,7 +133,7 @@ let $$j0 = Ju(function (e) {
               onAutocompleteChange: e => {
                 j(e);
               },
-              placeholderText: _$$t("idp_management.domain_mapping_modal.placeholder"),
+              placeholderText: getI18nString("idp_management.domain_mapping_modal.placeholder"),
               searchResultToken: e => ({
                 state: _$$d.OK,
                 content: e
@@ -151,7 +151,7 @@ let $$j0 = Ju(function (e) {
                     id: "",
                     verified_at: null
                   },
-                  errorMessage: _$$t("domain_management.error_domain_is_invalid")
+                  errorMessage: getI18nString("domain_management.error_domain_is_invalid")
                 };
               }
             })
@@ -163,7 +163,7 @@ let $$j0 = Ju(function (e) {
             onClick: e.onBack,
             variant: "secondary",
             children: jsx(E, {
-              children: tx("idp_management.domain_mapping_modal.cancel")
+              children: renderI18nText("idp_management.domain_mapping_modal.cancel")
             })
           }), jsx($n, {
             onClick: () => {
@@ -176,7 +176,7 @@ let $$j0 = Ju(function (e) {
             },
             variant: "primary",
             children: jsx(E, {
-              children: tx("general.continue")
+              children: renderI18nText("general.continue")
             })
           })]
         })

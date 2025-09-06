@@ -5,7 +5,7 @@ import { b, bL, mc } from "../figma_app/860955";
 import { d as _$$d } from "../905/976845";
 import { H_ } from "../905/963340";
 import { J } from "../905/125993";
-import { t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { v4 } from "../figma_app/655139";
 import { gc } from "../figma_app/120227";
 import { FOverrideType } from "../figma_app/191312";
@@ -23,10 +23,10 @@ export function $$g1() {
   return jsxs(bL, {
     manager,
     children: [jsx(_$$d, {
-      "aria-label": t("dev_handoff.code.settings.options"),
+      "aria-label": getI18nString("dev_handoff.code.settings.options"),
       htmlAttributes: {
         "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": t("dev_handoff.code.settings.options")
+        "data-tooltip": getI18nString("dev_handoff.code.settings.options")
       },
       ...getTriggerProps(),
       children: jsx(J, {})
@@ -34,7 +34,7 @@ export function $$g1() {
       children: jsx(H_, {
         onChange: updateDefaultCodegenSettings,
         checked: isSetToDefault,
-        children: tx("dev_handoff.code.settings.set_as_default")
+        children: renderI18nText("dev_handoff.code.settings.set_as_default")
       })
     })]
   });

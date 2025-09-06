@@ -1,5 +1,5 @@
 import { isNullish } from "../figma_app/95419";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { s$ } from "../figma_app/361035";
 import { JT } from "../figma_app/847597";
 import { jv } from "../905/84777";
@@ -38,7 +38,7 @@ export function $$m0({
     });
     let c = N_.dict(e => t[e]?.key);
     return Ye.dict(e => {
-      let t = e === Gu.VIEW ? _$$t("checkout.free") : o[e];
+      let t = e === Gu.VIEW ? getI18nString("checkout.free") : o[e];
       let i = e === Gu.VIEW ? "" : c[e];
       if (!(isNullish(i) || isNullish(t))) return {
         id: e,

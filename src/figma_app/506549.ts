@@ -1,5 +1,5 @@
 import { lQ } from "../905/934246";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { z } from "../905/905430";
 import { IK } from "../figma_app/248118";
 import { k0 } from "../figma_app/155287";
@@ -46,7 +46,7 @@ export const UK = function e(t) {
     if (item.disabled && !includeDisabled) return _;
     if ("plugin-name" === item.name.type) {
       if (!extensionMenuProps.userCanViewPlugins) return _;
-      let e = qs(item) ? _$$t("widgets.insert_widget", {
+      let e = qs(item) ? getI18nString("widgets.insert_widget", {
         widgetName: item.name.plugin
       }) : item.name.plugin;
       let t = [...item.path, e];

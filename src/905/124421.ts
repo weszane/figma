@@ -1,10 +1,10 @@
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 export function $$r0(e) {
   switch (e) {
     case "file_repo":
-      return t("activity_log.resource.file");
+      return getI18nString("activity_log.resource.file");
     case "folder":
-      return t("activity_log.resource.project");
+      return getI18nString("activity_log.resource.project");
     default:
       return e;
   }

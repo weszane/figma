@@ -4,8 +4,8 @@ import { juq, Z_n, XJn, mSn, PWo, Vzr, oVz } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { uW } from "../905/426868";
 import { ReduxSceneGraph, getSingletonSceneGraph } from "../905/700578";
-import { az } from "../905/449184";
-import { $D } from "../905/11";
+import { analyticsEventManager } from "../905/449184";
+import { reportError } from "../905/11";
 import { Point } from "../905/736624";
 import { i2 } from "../905/296461";
 import { oT } from "../figma_app/566517";
@@ -83,7 +83,7 @@ async function v(e, t, r, n) {
           c.fontName = e;
         } catch (r) {
           let t = void 0 === r ? "undefined" : r instanceof Error ? r.message : JSON.stringify(r);
-          az.trackDefinedEvent("ai_generation.first_draft_font_error", {
+          analyticsEventManager.trackDefinedEvent("ai_generation.first_draft_font_error", {
             error: t,
             family: e.family,
             style: e.style,
@@ -132,7 +132,7 @@ async function v(e, t, r, n) {
 function A() {
   let e = Gy(juq.FIRST_DRAFT).filter(e => e.name === i2);
   if (e && 0 !== e.length) {
-    e.length > 1 && $D(_$$e.AI_GENERATION, Error("Multiple Presets collections found, returning the first one"), {
+    e.length > 1 && reportError(_$$e.AI_GENERATION, Error("Multiple Presets collections found, returning the first one"), {
       tags: {
         collectionIds: e.map(e => e.id).join(",")
       }
@@ -148,7 +148,7 @@ export async function $$x5(e, t, r, s, o = $$y4) {
   let h = new ReduxSceneGraph(juq.FIRST_DRAFT);
   let m = p.map(e => h.get(e));
   if (m.some(e => !e)) {
-    $D(_$$e.AI_GENERATION, Error("Copied node not found"));
+    reportError(_$$e.AI_GENERATION, Error("Copied node not found"));
     return [];
   }
   let f = [];
@@ -241,7 +241,7 @@ export async function $$x5(e, t, r, s, o = $$y4) {
       t++;
     }
   } catch (e) {
-    $D(_$$e.AI_GENERATION, e);
+    reportError(_$$e.AI_GENERATION, e);
     return [];
   }
   return f;

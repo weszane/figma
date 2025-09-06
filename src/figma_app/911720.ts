@@ -3,12 +3,12 @@ import { sj, Ep, _0, s8, n2, pD, k9, NB, Zw, fJ } from "../figma_app/728005";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import l from "lodash-es/camelCase";
 import c from "../vendor/77708";
-import { eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { debugState } from "../905/407919";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { xg } from "../figma_app/677646";
 import { GS } from "../figma_app/314264";
 import { zb } from "../905/902840";
@@ -25,10 +25,10 @@ export async function $$A0(e, t, l, c, p) {
   let {
     designToReact
   } = await Promise.all([]).then(_require);
-  let C = zl.get(pe);
-  let O = zl.get(lk);
-  let R = zl.get(Pq);
-  let L = zl.get(_$$f);
+  let C = atomStoreManager.get(pe);
+  let O = atomStoreManager.get(lk);
+  let R = atomStoreManager.get(Pq);
+  let L = atomStoreManager.get(_$$f);
   let P = new Map();
   let D = {
     transformer: B9,
@@ -85,7 +85,7 @@ export async function $$A0(e, t, l, c, p) {
       return n;
     } catch (t) {
       console.error("Error extracting annotations", t);
-      $D(_$$e.DEVELOPER_TOOLS, t, {
+      reportError(_$$e.DEVELOPER_TOOLS, t, {
         extra: {
           rootNode: e?.guid
         }
@@ -256,7 +256,7 @@ ${$}`);
     length: $.length,
     numDivs: $.split("<div").length - 1,
     numNodes: t,
-    isTailwind: zl.get(lk)
+    isTailwind: atomStoreManager.get(lk)
   });
   return [{
     content: J
@@ -299,11 +299,11 @@ function w({
   return n ? `</${e}>` : "" === t ? r ? `<${e}>` : `<${e} />` : r ? `<${e} ${t}>` : `<${e} ${t} />`;
 }
 async function O(e, t, r) {
-  if (eD && e.size > 0) for (let [n, i] of e.entries()) {
+  if (desktopAPIInstance && e.size > 0) for (let [n, i] of e.entries()) {
     let e = new Uint8Array(await i.arrayBuffer());
     let a = `${t}/${n}`;
     try {
-      await eD.writeFileToPath(a, e, r);
+      await desktopAPIInstance.writeFileToPath(a, e, r);
     } catch (e) {
       throw Error(`Failed to write asset ${n} to disk at path ${a}: ${e.message}`);
     }

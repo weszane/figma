@@ -4,7 +4,7 @@ import { xf } from "../figma_app/416935";
 import { Ay } from "../905/612521";
 import { Gc } from "../905/63728";
 import { gU } from "../figma_app/930338";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { N6 } from "../figma_app/471982";
 import { vf, Yp, mZ, F8 } from "../figma_app/808294";
 import { Tn, gO, Ii, xw, vC } from "../figma_app/599979";
@@ -82,9 +82,9 @@ export function $$v4(e) {
   switch (e) {
     case "currentFile":
     default:
-      return _$$t("browse_templates_modal.add_template");
+      return getI18nString("browse_templates_modal.add_template");
     case "newFile":
-      return _$$t("browse_templates_modal.use_template");
+      return getI18nString("browse_templates_modal.use_template");
   }
 }
 export function $$A1(e, t) {
@@ -135,7 +135,7 @@ export function $$C11(e, t, r, n) {
     }, [])
   };
   return {
-    name: l.name || (g.name === _$$t("fullscreen.fullscreen_view_selector.untitled") ? "" : g.name),
+    name: l.name || (g.name === getI18nString("fullscreen.fullscreen_view_selector.untitled") ? "" : g.name),
     description: l.description || m.description,
     categoryId: o.category_id,
     creatorPolicy: l.creator_policy || m.creatorPolicy,
@@ -155,23 +155,23 @@ export function $$C11(e, t, r, n) {
   };
 }
 export function $$w10(e, t) {
-  return e ? t ? Yp(t) ? t < mZ ? _$$t("community.seller.paid_resource_minimum_err") : _$$t("community.seller.paid_resource_maximum_err") : F8(t) ? _$$t("community.seller.prices_must_follow_format") : void 0 : _$$t("community.publishing.price_is_required_for_paid_resources") : void 0;
+  return e ? t ? Yp(t) ? t < mZ ? getI18nString("community.seller.paid_resource_minimum_err") : getI18nString("community.seller.paid_resource_maximum_err") : F8(t) ? getI18nString("community.seller.prices_must_follow_format") : void 0 : getI18nString("community.publishing.price_is_required_for_paid_resources") : void 0;
 }
 export function $$O16(e) {
   let t = _$$Yp(e || null).length;
-  return 0 === t ? _$$t("community.publishing.name_must_not_be_empty") : t < 4 ? _$$t("community.publishing.name_must_be_4_characters_long") : t > 100 ? _$$t("community.publishing.name_must_be_at_most_100_characters_long") : void 0;
+  return 0 === t ? getI18nString("community.publishing.name_must_not_be_empty") : t < 4 ? getI18nString("community.publishing.name_must_be_4_characters_long") : t > 100 ? getI18nString("community.publishing.name_must_be_at_most_100_characters_long") : void 0;
 }
 export function $$R14(e) {
-  if (_$$Yp(e || null).length > 1e4) return _$$t("community.publishing.description_must_be_at_most_10000_characters_long");
+  if (_$$Yp(e || null).length > 1e4) return getI18nString("community.publishing.description_must_be_at_most_10000_characters_long");
 }
 export function $$L3(e) {
-  if (_$$Yp(e || null).length > 1e4) return _$$t("community.publishing.creator_policy_must_be_at_most_10000_characters_long");
+  if (_$$Yp(e || null).length > 1e4) return getI18nString("community.publishing.creator_policy_must_be_at_most_10000_characters_long");
 }
 export function $$P7(e, t) {
-  return e && !t ? _$$t("community.publishing.support_contact_must_not_be_empty") : !t || xf(t) || gU(t) ? void 0 : _$$t("community.publishing.support_contact_must_be_a_valid_email_or_url");
+  return e && !t ? getI18nString("community.publishing.support_contact_must_not_be_empty") : !t || xf(t) || gU(t) ? void 0 : getI18nString("community.publishing.support_contact_must_be_a_valid_email_or_url");
 }
 export function $$D9(e) {
-  if (!e) return _$$t("community.publishing.category_cant_be_empty");
+  if (!e) return getI18nString("community.publishing.category_cant_be_empty");
 }
 export function $$k8(e) {
   let t = {

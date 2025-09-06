@@ -1,11 +1,11 @@
 import { useMemo } from "react";
 import { useDispatch } from "../vendor/514228";
-import { fp, zl } from "../figma_app/27355";
+import { useAtomValueAndSetter, atomStoreManager } from "../figma_app/27355";
 import { Um } from "../905/848862";
 import { jD } from "../figma_app/322845";
 import { YH, hw, jh } from "../figma_app/604494";
 export function $$d0() {
-  let [e, t] = fp(YH);
+  let [e, t] = useAtomValueAndSetter(YH);
   let i = hw();
   let d = jh();
   let c = useDispatch();
@@ -41,10 +41,10 @@ export function $$d0() {
   }, [c, u, e, i, d, t]);
 }
 export function $$c2() {
-  return 0 === zl.get(YH).length;
+  return 0 === atomStoreManager.get(YH).length;
 }
 export function $$u1() {
-  return zl.get(YH)[0];
+  return atomStoreManager.get(YH)[0];
 }
 export const cq = $$d0;
 export const i8 = $$u1;

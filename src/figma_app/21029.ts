@@ -1,5 +1,5 @@
 import { useSelector } from "../vendor/514228";
-import { nl } from "../figma_app/257275";
+import { isInteractionPathCheck } from "../figma_app/897289";
 import { q } from "../905/924253";
 import { Fk } from "../figma_app/167249";
 import { el } from "../figma_app/226737";
@@ -11,7 +11,7 @@ export function $$c1() {
   let e = $$d2();
   let t = el();
   let r = t && !t.endsWith("-1:-1");
-  return !nl() && (!e || !!r);
+  return !isInteractionPathCheck() && (!e || !!r);
 }
 export function $$u0() {
   let e = useSelector(e => e.isFullscreenDocumentLoaded);

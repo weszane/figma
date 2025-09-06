@@ -5,7 +5,7 @@ import { $n } from "../905/521428";
 import { g as _$$g } from "../905/757007";
 import { W } from "../905/569454";
 import { getFeatureFlags } from "../905/601108";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { _I, xo } from "../figma_app/473493";
 import { D as _$$D } from "../905/882262";
 import { z4 } from "../905/37051";
@@ -49,14 +49,14 @@ export function $$g0({
   }, [b, e, t]);
   let k = getFeatureFlags().dt_interactive_inspection_m2 && !hasCompletedStatus && !hasReadyStatus && !w;
   let N = useMemo(() => hasReadyStatus ? j : hasCompletedStatus || k ? I : void 0, [hasCompletedStatus, hasReadyStatus, j, I, k]);
-  let A = useMemo(() => hasCompletedStatus ? tx("dev_handoff.status.completed") : k ? tx("dev_handoff.status.mark_as_ready_for_first_time") : tx("dev_handoff.status.mark_completed"), [hasCompletedStatus, k]);
+  let A = useMemo(() => hasCompletedStatus ? renderI18nText("dev_handoff.status.completed") : k ? renderI18nText("dev_handoff.status.mark_as_ready_for_first_time") : renderI18nText("dev_handoff.status.mark_completed"), [hasCompletedStatus, k]);
   let O = useMemo(() => hasCompletedStatus ? jsx(_$$g, {
     "data-testid": "filled-icon"
   }) : jsx(W, {
     "data-testid": "empty-icon"
   }), [hasCompletedStatus]);
-  let L = useMemo(() => hasReadyStatus ? _$$t("dev_handoff.status.mark_as_completed") : hasCompletedStatus ? _$$t("dev_handoff.status.mark_as_ready") : k ? _$$t("dev_handoff.status.mark_as_ready_for_first_time") : _$$t("dev_handoff.workflows.focus_view.complete_button.status_removed"), [hasCompletedStatus, hasReadyStatus, k]);
-  let R = useMemo(() => hasReadyStatus ? _$$t("dev_handoff.overview_mode.tooltip.upgrade_mark_completed") : hasCompletedStatus ? _$$t("dev_handoff.overview_mode.tooltip.upgrade_mark_incomplete") : k ? _$$t("dev_handoff.overview_mode.tooltip.upgrade_mark_ready") : _$$t("dev_handoff.workflows.focus_view.complete_button.status_removed"), [hasCompletedStatus, hasReadyStatus, k]);
+  let L = useMemo(() => hasReadyStatus ? getI18nString("dev_handoff.status.mark_as_completed") : hasCompletedStatus ? getI18nString("dev_handoff.status.mark_as_ready") : k ? getI18nString("dev_handoff.status.mark_as_ready_for_first_time") : getI18nString("dev_handoff.workflows.focus_view.complete_button.status_removed"), [hasCompletedStatus, hasReadyStatus, k]);
+  let R = useMemo(() => hasReadyStatus ? getI18nString("dev_handoff.overview_mode.tooltip.upgrade_mark_completed") : hasCompletedStatus ? getI18nString("dev_handoff.overview_mode.tooltip.upgrade_mark_incomplete") : k ? getI18nString("dev_handoff.overview_mode.tooltip.upgrade_mark_ready") : getI18nString("dev_handoff.workflows.focus_view.complete_button.status_removed"), [hasCompletedStatus, hasReadyStatus, k]);
   if (!e) return null;
   if (g) return hasReadyStatus || hasCompletedStatus ? jsx(K, {
     onClick: N,

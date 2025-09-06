@@ -1,7 +1,7 @@
 import { useSelector } from "../vendor/514228";
-import { eU } from "../figma_app/27355";
+import { atom } from "../figma_app/27355";
 import a from "../vendor/128080";
-import { bt } from "../905/270322";
+import { createReduxSubscriptionAtomWithState } from "../905/270322";
 var s = a;
 let l = e => e.selectedView;
 let d = e => e.selectedView.view;
@@ -16,10 +16,10 @@ export function $$p5() {
   if ("prototype" !== e.view) throw Error(`Unexpected non-prototype view: ${e.view}`);
   return e;
 }
-let $$_1 = bt(l);
-let $$h3 = bt(e => e.modalShown);
-let $$m7 = eU(e => e($$h3)?.type || null);
-let $$g0 = bt(e => e.notifications?.[0]?.type ?? null);
+let $$_1 = createReduxSubscriptionAtomWithState(l);
+let $$h3 = createReduxSubscriptionAtomWithState(e => e.modalShown);
+let $$m7 = atom(e => e($$h3)?.type || null);
+let $$g0 = createReduxSubscriptionAtomWithState(e => e.notifications?.[0]?.type ?? null);
 export function $$f8() {
   return useSelector(d);
 }

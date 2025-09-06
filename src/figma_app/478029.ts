@@ -1,4 +1,4 @@
-import { Mt, eU, md, Rq } from "../figma_app/27355";
+import { createCustomReadWriteAtom, atom, useAtomWithSubscription, Rq } from "../figma_app/27355";
 import { Wh } from "../figma_app/615482";
 import { Vg } from "../figma_app/410518";
 import { V, S } from "../figma_app/694362";
@@ -10,17 +10,17 @@ function l(e) {
   let t = e(V);
   return new Set([...e(S), ...t]);
 }
-export let $$d1 = Mt(Wh(() => eU(async e => {
+export let $$d1 = createCustomReadWriteAtom(Wh(() => atom(async e => {
   let t = [...l(e)].map(t => $$o(t, e));
   return Object.fromEntries((await Promise.all(t)).filter(Boolean));
 }), {
   preserveValue: !0
 }));
 export function $$c0() {
-  let e = md(u);
+  let e = useAtomWithSubscription(u);
   return "hasData" !== e.state || e.data;
 }
-let u = Rq(Mt(Wh(() => eU(async e => {
+let u = Rq(createCustomReadWriteAtom(Wh(() => atom(async e => {
   for (let t of l(e)) if ((await e(Vg(t))).length > 0) return !1;
   return !0;
 }))));

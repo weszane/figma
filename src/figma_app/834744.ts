@@ -4,7 +4,7 @@ import { R } from "../905/649743";
 import { W } from "../905/63398";
 import { D } from "../905/591570";
 import { Pt } from "../figma_app/806412";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { A as _$$A } from "../905/482208";
 import { Y5 } from "../figma_app/455680";
 import { Zr } from "../figma_app/678782";
@@ -35,7 +35,7 @@ function x(e) {
   return jsx(_$$E, {
     name: "rotation_input",
     children: i ? jsx(Z, {
-      "aria-label": _$$t("fullscreen.properties_panel.transform_panel.rotation"),
+      "aria-label": getI18nString("fullscreen.properties_panel.transform_panel.rotation"),
       value: t,
       onChange: (e, {
         commit: t
@@ -52,7 +52,7 @@ function x(e) {
       disabled: e.disabled,
       ...o,
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": _$$t("fullscreen.properties_panel.transform_panel.rotation"),
+      "data-tooltip": getI18nString("fullscreen.properties_panel.transform_panel.rotation"),
       recordingKey: Pt(e, "angleInput"),
       children: jsx("div", {
         className: QK,
@@ -66,7 +66,7 @@ let $$N0 = memo(function (e) {
   let r = Zr("flip-horizontal");
   let c = Zr("flip-vertical");
   let u = Zr("rotate-90-clockwise");
-  let _ = tx("properties.label.rotation");
+  let _ = renderI18nText("properties.label.rotation");
   let g = jsx(x, {
     disabled: e.angleDisabled,
     recordingKey: e.recordingKey

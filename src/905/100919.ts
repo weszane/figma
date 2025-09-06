@@ -10,7 +10,7 @@ import { Ex, zE } from "../figma_app/919079";
 import { p as _$$p } from "../905/991924";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { E as _$$E } from "../905/984674";
 import { Nw } from "../figma_app/78808";
 import { NN } from "../905/466026";
@@ -85,8 +85,8 @@ export function $$S0(e) {
         tile: e.tile
       }), a && "loaded" === C.status && !C.data.file?.hasPermission && jsx(Ex, {
         color: zE.WARNING_TERTIARY,
-        text: _$$t("locked_team.label.view_only"),
-        dataTooltip: _$$t("locked_team.label.tooltip"),
+        text: getI18nString("locked_team.label.view_only"),
+        dataTooltip: getI18nString("locked_team.label.tooltip"),
         dataTooltipType: Ib.TEXT,
         className: ol
       })]
@@ -100,7 +100,7 @@ function w({
     className: _$$s.colorIconBrand.$,
     svg: _$$A,
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": _$$t("tile.tooltip.external_file"),
+    "data-tooltip": getI18nString("tile.tooltip.external_file"),
     "data-tooltip-show-immediately": !0,
     "data-tooltip-show-above": !0
   }) : null;

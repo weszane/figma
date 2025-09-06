@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useMemo, useId } from "react";
 import { useDispatch } from "../vendor/514228";
 import { Ay } from "../905/612521";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { s as _$$s } from "../905/328136";
 import { B } from "../905/759157";
 import { r as _$$r } from "../figma_app/896657";
@@ -54,30 +54,30 @@ export function $$C1(e) {
   let C = [KM.PERMISSIONS];
   let T = [];
   e.isFromDropdownButton || (T.push({
-    displayText: t("general.open"),
+    displayText: getI18nString("general.open"),
     callback: (e, i, n, r) => {
       publishedResource.is_widget ? _(publishedResource, r) : A(publishedResource, r);
     }
   }), T.push({
-    displayText: t("file_browser.open_in_new_tab"),
+    displayText: getI18nString("file_browser.open_in_new_tab"),
     callback: (e, i, n, r) => {
       publishedResource.is_widget ? Ay.redirect(YW(publishedResource.id), "_blank") : Ay.redirect(ho(publishedResource.id), "_blank");
     }
   }), T.push(_$$w));
   g.unwrapOr(!1) && ((Ro(publishedResource, h ?? "") || publishedResource.creator.id === h) && (C.push(KM.PUBLISH), T.push({
-    displayText: publishedResource.is_widget ? t("community.plugins.edit_resource_details.widget") : t("community.plugins.edit_resource_details.plugin"),
+    displayText: publishedResource.is_widget ? getI18nString("community.plugins.edit_resource_details.widget") : getI18nString("community.plugins.edit_resource_details.plugin"),
     callback: (e, t, i, n) => k(KM.PUBLISH, n)
   })), T.push({
-    displayText: t("universal_insert.manage_permissions"),
+    displayText: getI18nString("universal_insert.manage_permissions"),
     callback: (e, t, i, n) => {
       k(KM.PERMISSIONS, n);
     }
   }), e.isFromDropdownButton && T.push(_$$w), T.push({
-    displayText: t("community.resource.unpublish"),
+    displayText: getI18nString("community.resource.unpublish"),
     callback: (e, t, i, n) => w(n)
   }));
   e.isFromDropdownButton || T.push(_$$w, {
-    displayText: t("file_browser.copy_link"),
+    displayText: getI18nString("file_browser.copy_link"),
     callback: (e, i, n, a) => {
       publishedResource.is_widget ? r(le({
         view: "communityHub",

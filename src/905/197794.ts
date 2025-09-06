@@ -2,7 +2,7 @@ import { bpS, jXp, KO7, jWk } from "../figma_app/763686";
 import { jS } from "../figma_app/762706";
 import { createDeferredPromise } from "../905/874553";
 import { getFeatureFlags } from "../905/601108";
-import { nl } from "../figma_app/257275";
+import { isInteractionPathCheck } from "../figma_app/897289";
 import { yF, LQ } from "../905/777093";
 import { m as _$$m } from "../905/575846";
 import { gx } from "../905/319279";
@@ -62,7 +62,7 @@ export async function $$v0(e, t) {
     e && (e.fullscreenEvents.fullscreenIsReady = Math.round(performance.now()));
     _$$r.loadTimer.report();
     return KO7();
-  })() : jWk && !nl() ? jS({
+  })() : jWk && !isInteractionPathCheck() ? jS({
     callMain: () => {
       jWk.refreshJsCppBindings();
     },
@@ -70,7 +70,7 @@ export async function $$v0(e, t) {
     registerRefreshCallback: e => {
       vw("prototype-lib", e);
     }
-  }) : nl() && (f_("prototype-lib"), await A());
+  }) : isInteractionPathCheck() && (f_("prototype-lib"), await A());
   return {
     cppModules: await b[i],
     fontListPromise: y

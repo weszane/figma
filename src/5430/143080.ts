@@ -2,9 +2,9 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { getFeatureFlags } from "../905/601108";
 import n from "classnames";
 import a from "lodash-es/mapValues";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Ay } from "../905/612521";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Jm } from "../figma_app/387599";
 import { a4 } from "../figma_app/321395";
 import { L } from "../905/178090";
@@ -98,7 +98,7 @@ export function $$g0({
   let r = a4(n6);
   let n = $$y1(t);
   let a = Jm();
-  let l = [[L.SearchResourceTypes.MIXED, _$$t("community.view_bar.all"), m.All], [L.SearchResourceTypes.FILES, _$$t("community.view_bar.files_and_templates"), m.Files], [L.SearchResourceTypes.PLUGINS, _$$t("community.view_bar.plugins"), m.Plugins], [L.SearchResourceTypes.WIDGETS, _$$t("community.view_bar.widgets"), m.Widgets], [L.SearchResourceTypes.PROFILES, _$$t("community.view_bar.creators"), m.Union]];
+  let l = [[L.SearchResourceTypes.MIXED, getI18nString("community.view_bar.all"), m.All], [L.SearchResourceTypes.FILES, getI18nString("community.view_bar.files_and_templates"), m.Files], [L.SearchResourceTypes.PLUGINS, getI18nString("community.view_bar.plugins"), m.Plugins], [L.SearchResourceTypes.WIDGETS, getI18nString("community.view_bar.widgets"), m.Widgets], [L.SearchResourceTypes.PROFILES, getI18nString("community.view_bar.creators"), m.Union]];
   return jsx("div", {
     className: "search_sidebar--sidebar--PZz8B",
     children: jsx("ul", {
@@ -122,7 +122,7 @@ export function $$g0({
           onClick: r => {
             r.preventDefault();
             Ay.push(_.href);
-            sx("resource_type_filter_changed", {
+            trackEventAnalytics("resource_type_filter_changed", {
               resource_type: t,
               from: e,
               search_session_id: a

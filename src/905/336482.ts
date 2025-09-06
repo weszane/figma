@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo, useEffect, useState, useLayoutEffect } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Jj, bY } from "../figma_app/2023";
 import { FPublicationStatusType, FTemplateCategoryType, FFileType } from "../figma_app/191312";
 import { M4 } from "../905/713695";
@@ -14,7 +14,7 @@ import { $n } from "../905/521428";
 import { k as _$$k } from "../905/443820";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { J as _$$J } from "../905/341359";
-import { fp } from "../figma_app/27355";
+import { useAtomValueAndSetter } from "../figma_app/27355";
 import b from "../vendor/241899";
 import { A as _$$A } from "../vendor/90566";
 import { H as _$$H } from "../905/620380";
@@ -49,7 +49,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import J from "../vendor/781591";
 import { debugState } from "../905/407919";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { S as _$$S3 } from "../905/872825";
 import { T as _$$T, e as _$$e2 } from "../905/15569";
 import { q as _$$q } from "../905/840070";
@@ -329,7 +329,7 @@ let ey = {
     if (createNewVersionOnSubmit) try {
       i = (await _$$m2(figFile.key, "Published to Community hub", c_(description).currentValue, debugState.dispatch))?.id;
     } catch (e) {
-      $D(_$$e.COMMUNITY, e);
+      reportError(_$$e.COMMUNITY, e);
       return new _$$o2.SubmissionError({
         key: "ERROR_CREATING_SAVEPOINT",
         data: {
@@ -347,7 +347,7 @@ let ey = {
         newVersionId: i
       });
     } catch (n) {
-      $D(_$$e.COMMUNITY, n);
+      reportError(_$$e.COMMUNITY, n);
       return new _$$o2.SubmissionError({
         key: "ERROR_UPLOADING_IMAGES",
         data: {
@@ -379,7 +379,7 @@ let ey = {
         ...n
       });
     } catch (t) {
-      $D(_$$e.COMMUNITY, t);
+      reportError(_$$e.COMMUNITY, t);
       return new _$$o2.SubmissionError({
         key: "ERROR_FINALIZING_VERSION",
         data: t instanceof YI ? {
@@ -404,7 +404,7 @@ let ey = {
         updateSource: "CooperForm.submit"
       });
     } catch (e) {
-      $D(_$$e.COMMUNITY, e);
+      reportError(_$$e.COMMUNITY, e);
       return new _$$o2.SubmissionError({
         key: "ERROR_UPDATING_STORES",
         data: {
@@ -420,7 +420,7 @@ let ey = {
       });
     } catch (t) {
       let e = t instanceof Error ? t : void 0;
-      e && $D(_$$e.COMMUNITY, e);
+      e && reportError(_$$e.COMMUNITY, e);
       return new _$$o2.SubmissionError({
         key: "ERROR_PUBLISHING_LIBRARY_CHANGES",
         data: {
@@ -436,7 +436,7 @@ let ey = {
       let e = await Ur(r.id);
       if (void 0 === e) {
         let e = Error("Validations not passed in time");
-        $D(_$$e.COMMUNITY, e);
+        reportError(_$$e.COMMUNITY, e);
         return new _$$o2.SubmissionError({
           key: "ERROR_VALIDATIONS_NOT_PASSED_IN_TIME",
           data: {
@@ -447,7 +447,7 @@ let ey = {
       r.publishing_status = _$$S3(e, FPublicationStatusType) ?? null;
       RN(r, "CooperForm.submit");
     } catch (e) {
-      $D(_$$e.COMMUNITY, e);
+      reportError(_$$e.COMMUNITY, e);
       return new _$$o2.SubmissionError({
         key: "ERROR_VALIDATING_STATUS",
         data: {
@@ -458,7 +458,7 @@ let ey = {
     try {
       nz(r);
     } catch (e) {
-      $D(_$$e.COMMUNITY, e);
+      reportError(_$$e.COMMUNITY, e);
       return new _$$o2.SubmissionError({
         key: "ERROR_UPDATING_STORES",
         data: {
@@ -581,13 +581,13 @@ function eM({
         children: [jsx(_$$y, {
           ...b.details,
           index: 1,
-          text: _$$t("community.publishing.describe_your_resource"),
+          text: getI18nString("community.publishing.describe_your_resource"),
           selected: "details" === Z.activeTab,
           hasErrors: "details" === stepWithErrors
         }), jsx(_$$y, {
           ...b.advanced,
           index: 2,
-          text: _$$t("community.publishing.add_the_final_details"),
+          text: getI18nString("community.publishing.add_the_final_details"),
           selected: "advanced" === Z.activeTab,
           hasErrors: "advanced" === stepWithErrors
         })]
@@ -663,11 +663,11 @@ function eM({
     children: [Z.isOnFirstTab ? jsx($n, {
       variant: "secondary",
       onClick: u,
-      children: _$$t("general.cancel")
+      children: getI18nString("general.cancel")
     }) : !ea && jsx($n, {
       variant: "secondary",
       onClick: Z.selectPreviousTab,
-      children: _$$t("general.back")
+      children: getI18nString("general.back")
     }), Z.isOnLastTab ? jsx($n, {
       disabled: draftSubmissionResult?.result === "pending" || ea,
       onClick: () => {
@@ -675,12 +675,12 @@ function eM({
       },
       children: draftSubmissionResult?.result === "pending" || ea ? jsx(_$$k, {
         size: "sm"
-      }) : _$$t("community.publishing.publish")
+      }) : getI18nString("community.publishing.publish")
     }) : jsx($n, {
       onClick: () => {
         checkProgress() && Z.selectNextTab();
       },
-      children: _$$t("general.next")
+      children: getI18nString("general.next")
     })]
   }) : jsx(_$$h2, {
     holdTimeInMs: 5e3,
@@ -700,13 +700,13 @@ function eM({
           errors: "error" === e.status ? e.errors.map(_$$L) : []
         }, void 0, 2),
         ignoreLineBreaks: !1,
-        successText: _$$t("community.publishing.debug_info_copied_to_clipboard")
+        successText: getI18nString("community.publishing.debug_info_copied_to_clipboard")
       }));
     },
     children: jsx($n, {
       variant: "secondary",
       onClick: clearDraftSubmissionResult,
-      children: _$$t("general.go_back")
+      children: getI18nString("general.go_back")
     })
   }) : jsxs(Fragment, {
     children: [jsx(gx, {
@@ -717,12 +717,12 @@ function eM({
   });
   let es = useMemo(() => {
     if (!ea && draftSubmissionResult?.result !== "success") {
-      if (stepWithErrors) return stepWithErrors === Z.activeTab ? _$$t("community.publishing.please_fill_out_required_fields_and_correct_any_errors") : _$$t("community.publishing.updates_are_needed_in_another_step");
+      if (stepWithErrors) return stepWithErrors === Z.activeTab ? getI18nString("community.publishing.please_fill_out_required_fields_and_correct_any_errors") : getI18nString("community.publishing.updates_are_needed_in_another_step");
       if ("error" === e.status) {
         let t;
         let i = e.errors.find(e => "submission" === e.type)?.data.rawError;
         i && (t = _$$J2(i));
-        return t ?? _$$t("community.publishing.an_error_occurred_please_try_again");
+        return t ?? getI18nString("community.publishing.an_error_occurred_please_try_again");
       }
     }
   }, [e, draftSubmissionResult?.result, ea, stepWithErrors, Z.activeTab]);
@@ -757,7 +757,7 @@ function eM({
       children: [jsxs(vo, {
         children: [jsx(Y9, {
           children: jsx(hE, {
-            children: tx("community.publishing.publish_your_file_to_community")
+            children: renderI18nText("community.publishing.publish_your_file_to_community")
           })
         }), jsx(nB, {
           padding: 0,
@@ -822,7 +822,7 @@ function ej(e) {
   _$$h(() => {
     f.fieldStates.carouselMedia.currentValue !== _$$A2 && f.fieldStates.carouselMedia.resetValue();
   });
-  let [_, A] = fp(pz);
+  let [_, A] = useAtomValueAndSetter(pz);
   useLayoutEffect(() => {
     if (_ !== _$$o3.HUBFILE) {
       A(_$$o3.HUBFILE);
@@ -868,19 +868,19 @@ function e0({
 }) {
   let t = Lz(e, void 0);
   return Zc(e) || t === FTemplateCategoryType.PROTOTYPE ? jsx(_$$A9, {
-    label: _$$t("community.publishing.prototype_preview"),
+    label: getI18nString("community.publishing.prototype_preview"),
     children: jsxs("div", {
       className: _$$s.flex.itemsCenter.gap8.$,
       children: [jsx(_$$d, {
         label: jsx(_$$h3, {
-          children: _$$t("community.publishing.include_prototypes_in_thumbnail")
+          children: getI18nString("community.publishing.include_prototypes_in_thumbnail")
         }),
         checked: t === FTemplateCategoryType.PROTOTYPE,
         onChange: t => {
           e.setValue?.(t ? FTemplateCategoryType.PROTOTYPE : FTemplateCategoryType.CANVAS);
         },
         disabled: !Zc(e)
-      }), _$$t("community.publishing.include_prototypes_in_thumbnail")]
+      }), getI18nString("community.publishing.include_prototypes_in_thumbnail")]
     })
   }) : null;
 }
@@ -1197,7 +1197,7 @@ let tt = _$$T({
     if (createNewVersionOnSubmit) try {
       i = (await _$$m2(figFile.key, "Published to Community hub", c_(description).currentValue, debugState.dispatch))?.id;
     } catch (e) {
-      $D(_$$e.COMMUNITY, e);
+      reportError(_$$e.COMMUNITY, e);
       return new _$$o2.SubmissionError({
         key: "ERROR_CREATING_SAVEPOINT",
         data: {
@@ -1215,7 +1215,7 @@ let tt = _$$T({
         newVersionId: i
       });
     } catch (n) {
-      $D(_$$e.COMMUNITY, n);
+      reportError(_$$e.COMMUNITY, n);
       return new _$$o2.SubmissionError({
         key: "ERROR_UPLOADING_IMAGES",
         data: {
@@ -1247,7 +1247,7 @@ let tt = _$$T({
         ...n
       });
     } catch (t) {
-      $D(_$$e.COMMUNITY, t);
+      reportError(_$$e.COMMUNITY, t);
       return new _$$o2.SubmissionError({
         key: "ERROR_FINALIZING_VERSION",
         data: t instanceof YI ? {
@@ -1277,7 +1277,7 @@ let tt = _$$T({
         hubFile: r
       }));
     } catch (e) {
-      $D(_$$e.COMMUNITY, e);
+      reportError(_$$e.COMMUNITY, e);
       return new _$$o2.SubmissionError({
         key: "ERROR_UPDATING_STORES",
         data: {
@@ -1289,7 +1289,7 @@ let tt = _$$T({
       let e = await Ur(r.id);
       if (void 0 === e) {
         let e = Error("Validations not passed in time");
-        $D(_$$e.COMMUNITY, e);
+        reportError(_$$e.COMMUNITY, e);
         return new _$$o2.SubmissionError({
           key: "ERROR_VALIDATIONS_NOT_PASSED_IN_TIME",
           data: {
@@ -1300,7 +1300,7 @@ let tt = _$$T({
       r.publishing_status = _$$S3(e, FPublicationStatusType) ?? null;
       RN(r, "HubFileForm.submit");
     } catch (e) {
-      $D(_$$e.COMMUNITY, e);
+      reportError(_$$e.COMMUNITY, e);
       return new _$$o2.SubmissionError({
         key: "ERROR_VALIDATING_STATUS",
         data: {
@@ -1311,7 +1311,7 @@ let tt = _$$T({
     try {
       nz(r);
     } catch (e) {
-      $D(_$$e.COMMUNITY, e);
+      reportError(_$$e.COMMUNITY, e);
       return new _$$o2.SubmissionError({
         key: "ERROR_UPDATING_STORES",
         data: {
@@ -1493,19 +1493,19 @@ function td({
         children: [jsx(_$$y, {
           ...et.details,
           index: 1,
-          text: _$$t("community.publishing.describe_your_resource"),
+          text: getI18nString("community.publishing.describe_your_resource"),
           selected: "details" === er.activeTab,
           hasErrors: "details" === stepWithErrors
         }), jsx(_$$y, {
           ...et.thumbnail,
           index: 2,
-          text: _$$t("community.publishing.set_a_thumbnail"),
+          text: getI18nString("community.publishing.set_a_thumbnail"),
           selected: "thumbnail" === er.activeTab,
           hasErrors: "thumbnail" === stepWithErrors
         }), jsx(_$$y, {
           ...et.advanced,
           index: 3,
-          text: _$$t("community.publishing.add_the_final_details"),
+          text: getI18nString("community.publishing.add_the_final_details"),
           selected: "advanced" === er.activeTab,
           hasErrors: "advanced" === stepWithErrors
         })]
@@ -1514,7 +1514,7 @@ function td({
         "aria-hidden": !0,
         children: [jsx("div", {
           className: jc,
-          children: _$$t("community.publishing.resource_preview")
+          children: getI18nString("community.publishing.resource_preview")
         }), jsx(_$$x, {
           carouselMediaField: e.fieldStates.carouselMedia,
           nameField: e.fieldStates.name,
@@ -1644,11 +1644,11 @@ function td({
     children: [er.isOnFirstTab ? jsx($n, {
       variant: "secondary",
       onClick: m,
-      children: _$$t("general.cancel")
+      children: getI18nString("general.cancel")
     }) : !eh && jsx($n, {
       variant: "secondary",
       onClick: er.selectPreviousTab,
-      children: _$$t("general.back")
+      children: getI18nString("general.back")
     }), er.isOnLastTab ? jsx($n, {
       disabled: draftSubmissionResult?.result === "pending" || eh,
       onClick: () => {
@@ -1657,13 +1657,13 @@ function td({
       "data-testid": "resource-publishing-hub-file-form-view-submit-button",
       children: draftSubmissionResult?.result === "pending" || eh ? jsx(_$$k, {
         size: "sm"
-      }) : _$$t("community.publishing.publish")
+      }) : getI18nString("community.publishing.publish")
     }) : jsx($n, {
       onClick: () => {
         checkProgress() && er.selectNextTab();
       },
       "data-testid": "resource-publishing-hub-file-form-view-next-step-button",
-      children: _$$t("general.next")
+      children: getI18nString("general.next")
     })]
   }) : jsx(_$$h2, {
     holdTimeInMs: 5e3,
@@ -1683,13 +1683,13 @@ function td({
           errors: "error" === e.status ? e.errors.map(_$$L) : []
         }, void 0, 2),
         ignoreLineBreaks: !1,
-        successText: _$$t("community.publishing.debug_info_copied_to_clipboard")
+        successText: getI18nString("community.publishing.debug_info_copied_to_clipboard")
       }));
     },
     children: jsx($n, {
       variant: "secondary",
       onClick: clearDraftSubmissionResult,
-      children: _$$t("general.go_back")
+      children: getI18nString("general.go_back")
     })
   }) : jsxs(Fragment, {
     children: [jsx(gx, {
@@ -1700,12 +1700,12 @@ function td({
   });
   let eg = useMemo(() => {
     if (!eh && draftSubmissionResult?.result !== "success") {
-      if (stepWithErrors) return stepWithErrors === er.activeTab ? _$$t("community.publishing.please_fill_out_required_fields_and_correct_any_errors") : _$$t("community.publishing.updates_are_needed_in_another_step");
+      if (stepWithErrors) return stepWithErrors === er.activeTab ? getI18nString("community.publishing.please_fill_out_required_fields_and_correct_any_errors") : getI18nString("community.publishing.updates_are_needed_in_another_step");
       if ("error" === e.status) {
         let t;
         let i = e.errors.find(e => "submission" === e.type)?.data.rawError;
         i && (t = _$$J2(i));
-        return t ?? _$$t("community.publishing.an_error_occurred_please_try_again");
+        return t ?? getI18nString("community.publishing.an_error_occurred_please_try_again");
       }
     }
   }, [e, draftSubmissionResult?.result, eh, stepWithErrors, er.activeTab]);
@@ -1740,7 +1740,7 @@ function td({
       children: [jsxs(vo, {
         children: [jsx(Y9, {
           children: jsx(hE, {
-            children: tx("community.publishing.publish_your_file_to_community")
+            children: renderI18nText("community.publishing.publish_your_file_to_community")
           })
         }), jsx(nB, {
           padding: 0,
@@ -1859,7 +1859,7 @@ export function $$th0({
       throwTypeError(e);
   }
   return "loading" === status || "loading" === h.status ? null : jsx(_$$r3, {
-    title: _$$t("community.publishing.publish_your_file_to_community")
+    title: getI18nString("community.publishing.publish_your_file_to_community")
   });
 }
 export const T = $$th0;

@@ -1,7 +1,7 @@
 import { NC } from "../905/17179";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { nF } from "../905/350402";
 import { Sc } from "../905/18797";
@@ -28,31 +28,31 @@ let $$m0 = nF((e, {
     team_id: d,
     entry_point: c,
     folder_id: g
-  }).then(function(t) {
+  }).then(function (t) {
     if (200 === t.status && m?.(t.data.meta?.id), !h) {
       let t;
       switch (c) {
         case tc.IN_EDITOR_RESTRICTED_DRAFT:
         case tc.RESTRICTED_DRAFT_SHARED_EMAIL:
-          t = _$$t("team_user.actions.request_sent_well_let_you_know");
+          t = getI18nString("team_user.actions.request_sent_well_let_you_know");
           break;
         case tc.ASK_TO_EDIT_ONE_CLICK:
-          t = _$$t("1_click_expansion.request_sent_well_let_you");
+          t = getI18nString("1_click_expansion.request_sent_well_let_you");
           break;
         case "create-file-project-view":
         case tc.USER_SETTINGS:
-          t = _$$t("upgrades.request_sent_toast");
+          t = getI18nString("upgrades.request_sent_toast");
           break;
         default:
-          t = _$$t("team_user.actions.team_members_request_to_upgrade_succeeded");
+          t = getI18nString("team_user.actions.team_members_request_to_upgrade_succeeded");
       }
       e.dispatch(F.enqueue({
         message: t,
         type: "pro-upgrade-request-sent"
       }));
     }
-  }).catch(function(t) {
-    e.dispatch(_$$s.error(_$$t("team_user.actions.team_members_request_to_upgrade_failed")));
+  }).catch(function (t) {
+    e.dispatch(_$$s.error(getI18nString("team_user.actions.team_members_request_to_upgrade_failed")));
     u?.();
   });
 });
@@ -76,7 +76,7 @@ let $$h1 = nF((e, {
     }));
   }, t => {
     console.error(t);
-    t && 403 !== t.status && e.dispatch(_$$s.error(_$$t("team_user.actions.an_error_occurred_while_retrieving_fetching_the_list_of_users_on_this_team")));
+    t && 403 !== t.status && e.dispatch(_$$s.error(getI18nString("team_user.actions.an_error_occurred_while_retrieving_fetching_the_list_of_users_on_this_team")));
   });
 }, ({
   teamId: e
@@ -86,4 +86,4 @@ let $$f2 = NC("TEAM_USER_INITIAL_SET");
 export const Nu = $$m0;
 export const Xw = $$h1;
 export const pE = $$f2;
-export const yJ = $$g3; 
+export const yJ = $$g3;

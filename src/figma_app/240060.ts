@@ -6,7 +6,7 @@ import { Sr, B3 } from "../905/535224";
 import { hW, vn, _p } from "../figma_app/814196";
 import { Point } from "../905/736624";
 import { tB, JU } from "../figma_app/637027";
-import { t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Z1 } from "../figma_app/91703";
 import { Yk } from "../figma_app/644079";
 import { vA } from "../figma_app/175992";
@@ -65,7 +65,7 @@ export class $$b0 extends PureComponent {
   render() {
     return jsx(Ao, {
       initialPosition: this.props.initialPosition,
-      title: t("desktop_open_views.open_in_desktop_modal.title"),
+      title: getI18nString("desktop_open_views.open_in_desktop_modal.title"),
       headerSize: "small",
       dragHeaderOnly: !0,
       onClose: this.onClose,
@@ -79,18 +79,18 @@ export class $$b0 extends PureComponent {
             onClick: this.onClickAlwaysOpenDesktopApp
           }), jsx(JU, {
             htmlFor: "always-open-desktop-app",
-            children: tx("desktop_open_views.open_in_desktop_modal.always_open_in_app_checkbox")
+            children: renderI18nText("desktop_open_views.open_in_desktop_modal.always_open_in_app_checkbox")
           })]
         }), jsxs("div", {
           className: K,
           children: [jsx($n, {
             variant: "secondary",
             onClick: this.onClose,
-            children: tx("desktop_open_views.modal.dismiss_button")
+            children: renderI18nText("desktop_open_views.modal.dismiss_button")
           }), jsx($n, {
             variant: "primary",
             onClick: this.onClickOpenInApp,
-            children: tx("desktop_open_views.open_in_desktop_modal.open_in_app_button")
+            children: renderI18nText("desktop_open_views.open_in_desktop_modal.open_in_app_button")
           })]
         })]
       })

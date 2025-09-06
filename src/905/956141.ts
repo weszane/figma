@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { Y } from "../905/185567";
 import { xk } from "@stylexjs/stylex";
 import s from "classnames";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { cz, i8 } from "../905/14017";
 import { Q } from "../905/978641";
 import { Lz } from "../905/497882";
@@ -34,14 +34,14 @@ export function $$g0({
         containerStyle: y,
         src: b.url,
         loading: "lazy",
-        alt: _$$t("community.publishing.thumbnail_image"),
+        alt: getI18nString("community.publishing.thumbnail_image"),
         draggable: !1,
         crossOrigin: "use-credentials"
       }) : jsx("img", {
         ...xk(f.thumbnailImage, y),
         src: b.url,
         loading: "lazy",
-        alt: _$$t("community.publishing.thumbnail_image"),
+        alt: getI18nString("community.publishing.thumbnail_image"),
         draggable: !1
       }) : jsx("div", {
         className: "preview_tile--thumbnailPlaceholder--QJ2Qs",
@@ -67,7 +67,7 @@ export function $$g0({
           className: "preview_tile--authorNameContainer--zbAxS preview_tile--baseNameContainer--QY6ZW",
           children: E ? jsx("span", {
             className: h,
-            children: _$$t("community.publishing.by_author", {
+            children: getI18nString("community.publishing.by_author", {
               authorName: E
             })
           }) : jsx("div", {

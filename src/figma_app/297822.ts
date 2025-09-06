@@ -1,10 +1,10 @@
 import { useCallback } from "react";
 import { useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
-import { md, zl, eU, E2 } from "../figma_app/27355";
+import { useAtomWithSubscription, atomStoreManager, atom, createValidatedLocalStorageAtom } from "../figma_app/27355";
 import { z } from "../905/239603";
-import { sx } from "../905/449184";
-import { sn } from "../905/542194";
+import { trackEventAnalytics } from "../905/449184";
+import { globalPerfTimer } from "../905/542194";
 import { v5 } from "../figma_app/314264";
 import { wg } from "../figma_app/101956";
 import { ze } from "../figma_app/516028";
@@ -15,13 +15,13 @@ import { rE } from "../figma_app/604494";
 import { OZ } from "../905/783179";
 import { gc, RA, Nv, NP, uP, tq, l4, W3, OW, Be, qE } from "../figma_app/737746";
 export function $$y10() {
-  sn.tryStop(gc);
-  sn.start(gc);
+  globalPerfTimer.tryStop(gc);
+  globalPerfTimer.start(gc);
 }
 export function $$b0() {
-  let e = md(ze) || "";
+  let e = useAtomWithSubscription(ze) || "";
   let t = useSelector(e => e.selectedView);
-  let r = md(rE);
+  let r = useAtomWithSubscription(rE);
   let a = r?.source || "";
   let o = $$L14();
   let u = PE();
@@ -47,7 +47,7 @@ export function $$b0() {
       moduleFilters: h,
       qaVersion: m,
       fileKey: e,
-      searchLatencyMs: sn.tryStop(gc),
+      searchLatencyMs: globalPerfTimer.tryStop(gc),
       searchQueryResults: g,
       source: a,
       rankingAlgorithm: $$T8(_),
@@ -55,7 +55,7 @@ export function $$b0() {
       role: o,
       hasAiFeatureAccess: u
     };
-    sx(RA, f, {
+    trackEventAnalytics(RA, f, {
       forwardToDatadog: !0
     });
   }, [e, u, o, t, a]);
@@ -166,12 +166,12 @@ export function $$x2({
   return !e || !t || ("tab" === t.type ? $$A1(t.module) : "custom" === t.type ? $$A1(t.name) : void throwTypeError(t));
 }
 export function $$N5(e) {
-  sx(W3, e, {
+  trackEventAnalytics(W3, e, {
     forwardToDatadog: !0
   });
 }
 export function $$C11(e) {
-  sx(OW, e, {
+  trackEventAnalytics(OW, e, {
     forwardToDatadog: !0
   });
 }
@@ -186,23 +186,23 @@ export function $$w4(e, t) {
         shortcutText: i ? OZ(i) : "",
         actionText: e.text || ""
       };
-      sx(Be, n);
+      trackEventAnalytics(Be, n);
       e.onAction && e.onAction(r);
     }
   };
 }
 export function $$O12(e) {
-  let t = zl.get($$D13);
-  return !t.has(e) && (t.add(e), zl.set($$D13, t), !0);
+  let t = atomStoreManager.get($$D13);
+  return !t.has(e) && (t.add(e), atomStoreManager.set($$D13, t), !0);
 }
 export function $$R7() {
-  return zl.get(wg) ? qE.EDITOR : qE.VIEWER;
+  return atomStoreManager.get(wg) ? qE.EDITOR : qE.VIEWER;
 }
 export function $$L14() {
-  return md(wg) ? qE.EDITOR : qE.VIEWER;
+  return useAtomWithSubscription(wg) ? qE.EDITOR : qE.VIEWER;
 }
-let $$P15 = eU(null);
-let $$D13 = E2("ai_actions_used", new Set(), z.set(z.string()));
+let $$P15 = atom(null);
+let $$D13 = createValidatedLocalStorageAtom("ai_actions_used", new Set(), z.set(z.string()));
 export const Ev = $$b0;
 export const F$ = $$A1;
 export const Fi = $$x2;

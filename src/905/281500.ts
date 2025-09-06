@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { md, fp } from "../figma_app/27355";
+import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { hO } from "../figma_app/545293";
 import { J, jM, P_, l4 } from "../905/124270";
 import { C8, M2, q1, gh } from "../905/171315";
@@ -8,15 +8,15 @@ import { WY, uH } from "../figma_app/162807";
 import { L } from "../905/713563";
 export function $$u0(e) {
   let t = e?.type ?? null;
-  let i = md(J);
-  let u = md(jM);
-  let p = md(P_);
-  let [m, h] = fp(R9);
-  let g = md(Q8);
-  let f = md(BA);
-  let _ = md(sC);
-  let A = md(hO.isFragmentSearchAtom);
-  let [y, b] = fp(l4(t));
+  let i = useAtomWithSubscription(J);
+  let u = useAtomWithSubscription(jM);
+  let p = useAtomWithSubscription(P_);
+  let [m, h] = useAtomValueAndSetter(R9);
+  let g = useAtomWithSubscription(Q8);
+  let f = useAtomWithSubscription(BA);
+  let _ = useAtomWithSubscription(sC);
+  let A = useAtomWithSubscription(hO.isFragmentSearchAtom);
+  let [y, b] = useAtomValueAndSetter(l4(t));
   let v = L(A ? "fragment_search_modal" : "file_browser", _, !0);
   return useCallback(() => {
     if (!e || !y) return;

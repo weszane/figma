@@ -9,10 +9,10 @@ import { $n } from "../905/521428";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { lyf } from "../figma_app/763686";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { uA, P_, Pt } from "../figma_app/806412";
-import { x1 } from "../905/714362";
-import { tx, t as _$$t } from "../905/303541";
+import { logError } from "../905/714362";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { fk } from "../figma_app/618433";
 import { Lo } from "../905/156213";
 import { D, m as _$$m } from "../905/852057";
@@ -32,7 +32,7 @@ let x = class e extends uA {
         savepointID: this.props.editingSavepointID,
         label: r,
         description: n
-      })), this.hideModal(), sx("History Version Edited Information", {
+      })), this.hideModal(), trackEventAnalytics("History Version Edited Information", {
         savepointId: this.props.editingSavepointID,
         labelLength: r.length,
         descriptionLength: n.length
@@ -40,7 +40,7 @@ let x = class e extends uA {
         fileKey: this.props.fileKey,
         label: r,
         description: n
-      })), this.hideModal(), sx(`History Version Created from ${this.props.isHistoryMode ? "History Mode" : "Keyboard Shortcut"}`, {
+      })), this.hideModal(), trackEventAnalytics(`History Version Created from ${this.props.isHistoryMode ? "History Mode" : "Keyboard Shortcut"}`, {
         savepointId: this.props.editingSavepointID,
         labelLength: r.length,
         descriptionLength: n.length
@@ -112,15 +112,15 @@ let x = class e extends uA {
     if (this.props.isViewOnly) return null;
     let e = this.state.disableConfirm;
     this.state.label && this.state.label.length > 0 && (e = !1);
-    let t = tx("collaboration.feedback.save_modal.save");
-    let r = tx("collaboration.feedback.save_modal.cancel");
+    let t = renderI18nText("collaboration.feedback.save_modal.save");
+    let r = renderI18nText("collaboration.feedback.save_modal.cancel");
     return jsxs(Fragment, {
       children: [jsxs(nB, {
         children: [jsxs("div", {
           className: _$$u,
           children: [this.props.isEditingMergeSavepoint && jsx(J, {
             htmlFor: "savepoint-modal-title",
-            children: tx("collaboration.feedback.save_modal.merge_name_placeholder")
+            children: renderI18nText("collaboration.feedback.save_modal.merge_name_placeholder")
           }), jsx(_$$p, {
             id: "savepoint-modal-title",
             disabled: this.props.isLabelReadOnly,
@@ -128,8 +128,8 @@ let x = class e extends uA {
             htmlAttributes: {
               onBlur: this.onLabelBlur
             },
-            placeholder: _$$t("fullscreen.savepoint_modal.title"),
-            "aria-label": _$$t("fullscreen.savepoint_modal.title_label"),
+            placeholder: getI18nString("fullscreen.savepoint_modal.title"),
+            "aria-label": getI18nString("fullscreen.savepoint_modal.title_label"),
             recordingKey: Pt(this.props, "title"),
             value: this.state.label
           })]
@@ -137,12 +137,12 @@ let x = class e extends uA {
           className: _$$u,
           children: [this.props.isEditingMergeSavepoint && jsx(J, {
             htmlFor: "savepoint-modal-description",
-            children: tx("fullscreen.savepoint_modal.give_this_merge_a_description")
+            children: renderI18nText("fullscreen.savepoint_modal.give_this_merge_a_description")
           }), jsx(_$$T, {
             id: "savepoint-modal-description",
-            "aria-label": _$$t("fullscreen.savepoint_modal.description_label"),
+            "aria-label": getI18nString("fullscreen.savepoint_modal.description_label"),
             value: this.state.description,
-            placeholder: _$$t("collaboration.feedback.save_modal.description_placeholder"),
+            placeholder: getI18nString("collaboration.feedback.save_modal.description_placeholder"),
             onChange: this.onDescriptionChange,
             htmlAttributes: {
               onBlur: this.onDescriptionBlur
@@ -157,7 +157,7 @@ let x = class e extends uA {
           children: !this.props.isHistoryMode && !this.props.hideShowFullVersionHistoryCTA && jsx(_$$E, {
             className: R,
             onClick: this.goHistoryMode,
-            children: tx("fullscreen.savepoint_modal.show_full_version_history")
+            children: renderI18nText("fullscreen.savepoint_modal.show_full_version_history")
           })
         })]
       }), jsx(wi, {
@@ -179,7 +179,7 @@ let x = class e extends uA {
   }
 };
 function N(e, t) {
-  return e ? t ? tx("collaboration.feedback.save_modal.edit_merge_details") : tx("collaboration.feedback.save_modal.edit_version_information") : tx("collaboration.feedback.save_modal.add_to_version_history");
+  return e ? t ? renderI18nText("collaboration.feedback.save_modal.edit_merge_details") : renderI18nText("collaboration.feedback.save_modal.edit_version_information") : renderI18nText("collaboration.feedback.save_modal.add_to_version_history");
 }
 x.displayName = "SavepointModal";
 x.keepSavepointModalInput = !1;
@@ -220,7 +220,7 @@ let $$C1 = Ju(function (e) {
         recordingKey: "savepointModal"
       })]
     })
-  }) : (x1("Save Point Modal", "File key is missing.", {}, {
+  }) : (logError("Save Point Modal", "File key is missing.", {}, {
     reportAsSentryError: !0
   }), null);
 });

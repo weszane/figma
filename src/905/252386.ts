@@ -1,9 +1,9 @@
-import { eU, zl } from "../figma_app/27355";
+import { atom, atomStoreManager } from "../figma_app/27355";
 import r from "../vendor/241899";
 import { debugState } from "../905/407919";
 import { ds } from "../figma_app/314264";
 var a = r;
-let l = eU(!1);
+let l = atom(!1);
 export class $$d0 {
   constructor(e) {
     this.statMap = {
@@ -33,7 +33,7 @@ export class $$d0 {
       if (!this.hasTracked && null !== runtime_loaded && null !== page_json_loaded && null !== rendered && null !== bundle_generation_start && null !== bundle_generation_stop && null !== asset_generation_start && null !== asset_generation_stop) {
         this.hasTracked = !0;
         let u = debugState.getState();
-        let p = zl.get(this.sitePreviewStateAtom);
+        let p = atomStoreManager.get(this.sitePreviewStateAtom);
         ds("sites_preview_perf", u.openFile?.key, a()(u, ["selectedView", "fileByKey"]), {
           click_to_runtime_load_ms: runtime_loaded - this.initTime,
           runtime_load_to_json_load_ms: page_json_loaded - runtime_loaded,
@@ -68,8 +68,8 @@ export class $$d0 {
     };
     this.hasTracked = !1;
     this.sitePreviewStateAtom = e;
-    this.isFirstSessionPreview = !zl.get(l);
-    this.isFirstSessionPreview && zl.set(l, !0);
+    this.isFirstSessionPreview = !atomStoreManager.get(l);
+    this.isFirstSessionPreview && atomStoreManager.set(l, !0);
   }
   updateStats(e) {
     for (let [t, i] of Object.entries(e)) {

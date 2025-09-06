@@ -1,14 +1,14 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { oU, Sr, B3 } from "../905/535224";
-import { eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { s_ } from "../905/17223";
 import { N_, CY } from "../figma_app/637027";
 import { kt } from "../figma_app/858013";
 import { P as _$$P } from "../905/347284";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { rH } from "../figma_app/49598";
 import { _J } from "../figma_app/378195";
 import { se, fd } from "../figma_app/559491";
@@ -47,10 +47,10 @@ function H(e) {
     className: bx,
     children: [jsx("div", {
       className: Uz,
-      children: e.tab === gr.PLUGINS ? _$$t("community.universal_posting_modal.desktop_callout.plugins") : _$$t("community.universal_posting_modal.desktop_callout.widgets")
+      children: e.tab === gr.PLUGINS ? getI18nString("community.universal_posting_modal.desktop_callout.plugins") : getI18nString("community.universal_posting_modal.desktop_callout.widgets")
     }), jsx(N_, {
       onClick: () => {
-        sx(t ? "community_publish_open_desktop_clicked" : "community_publish_get_desktop_clicked", {
+        trackEventAnalytics(t ? "community_publish_open_desktop_clicked" : "community_publish_get_desktop_clicked", {
           resourceType: e.tab === gr.PLUGINS ? bD.PLUGIN : bD.WIDGET
         });
         t && Sr(location.href, B3.UNIVERSAL_POSTING_MODAL);
@@ -59,7 +59,7 @@ function H(e) {
       className: nf,
       target: "_blank",
       trusted: !0,
-      children: void 0 === t ? "" : t ? ` ${_$$t("community.universal_posting_modal.desktop_open")}` : ` ${_$$t("community.universal_posting_modal.desktop_get")}`
+      children: void 0 === t ? "" : t ? ` ${getI18nString("community.universal_posting_modal.desktop_open")}` : ` ${getI18nString("community.universal_posting_modal.desktop_get")}`
     })]
   });
 }
@@ -87,7 +87,7 @@ function W(e) {
     developmentWidgets
   } = E$();
   let s = t => !!e.activeResource && ("localFileId" in e.activeResource && "localFileId" in t ? e.activeResource.localFileId === t.localFileId : "id" in e.activeResource && "id" in t ? e.activeResource.id === t.id : void 0);
-  return eD ? invitedWidgets.length + pendingReviewWidgets.length + approvedWidgets.length + developmentWidgets.length === 0 ? jsx(n6, {
+  return desktopAPIInstance ? invitedWidgets.length + pendingReviewWidgets.length + approvedWidgets.length + developmentWidgets.length === 0 ? jsx(n6, {
     tab: gr.WIDGETS
   }) : jsxs("div", {
     className: BA,
@@ -123,7 +123,7 @@ function K(e) {
     developmentPlugins
   } = LR();
   let s = t => !!e.activeResource && ("localFileId" in e.activeResource && "localFileId" in t ? e.activeResource.localFileId === t.localFileId : "id" in e.activeResource && "id" in t ? e.activeResource.id === t.id : void 0);
-  return eD ? developmentPlugins.length + pendingReviewPlugins.length + approvedPlugins.length + invitedPlugins.length === 0 ? jsx(n6, {
+  return desktopAPIInstance ? developmentPlugins.length + pendingReviewPlugins.length + approvedPlugins.length + invitedPlugins.length === 0 ? jsx(n6, {
     tab: gr.PLUGINS
   }) : jsxs("div", {
     className: BA,
@@ -152,25 +152,25 @@ function K(e) {
   });
 }
 function Y(e) {
-  return eD ? jsx("div", {
+  return desktopAPIInstance ? jsx("div", {
     className: q5,
-    children: _$$t("community.universal_posting_modal.plugin_info.available", {
+    children: getI18nString("community.universal_posting_modal.plugin_info.available", {
       numPlugins: e.numPlugins
     })
   }) : jsx("div", {
     className: q5,
-    children: _$$t("community.universal_posting_modal.plugin_info.unavailable")
+    children: getI18nString("community.universal_posting_modal.plugin_info.unavailable")
   });
 }
 function $(e) {
-  return eD ? jsx("div", {
+  return desktopAPIInstance ? jsx("div", {
     className: q5,
-    children: _$$t("community.universal_posting_modal.widget_info.available", {
+    children: getI18nString("community.universal_posting_modal.widget_info.available", {
       numWidgets: e.numWidgets
     })
   }) : jsx("div", {
     className: q5,
-    children: _$$t("community.universal_posting_modal.widget_info.unavailable")
+    children: getI18nString("community.universal_posting_modal.widget_info.unavailable")
   });
 }
 function X(e) {
@@ -195,7 +195,7 @@ function X(e) {
     className: Yk,
     children: [e.selectedTab === gr.FILES && (0 === e.numFiles ? jsx("div", {
       className: q5,
-      children: _$$t("community.universal_posting_modal.file_info.available", {
+      children: getI18nString("community.universal_posting_modal.file_info.available", {
         numFiles: e.numFiles
       })
     }) : jsx(IW, {
@@ -214,9 +214,9 @@ function q(e) {
   let r = Pc();
   let i = [];
   let o = {
-    [gr.FILES]: _$$t("community.view_bar.files"),
-    [gr.PLUGINS]: _$$t("community.view_bar.plugins"),
-    [gr.WIDGETS]: _$$t("community.view_bar.widgets")
+    [gr.FILES]: getI18nString("community.view_bar.files"),
+    [gr.PLUGINS]: getI18nString("community.view_bar.plugins"),
+    [gr.WIDGETS]: getI18nString("community.view_bar.widgets")
   };
   Object.keys(o).forEach(a => {
     let l = o[a];
@@ -226,7 +226,7 @@ function q(e) {
       selectedTab: e.selectedTab,
       onClick: () => {
         e.activeSearchQuery && (t(_z({})), t(ky()));
-        sx("publish_type_changed", {
+        trackEventAnalytics("publish_type_changed", {
           userId: r.id,
           resourceType: l
         });
@@ -243,7 +243,7 @@ function q(e) {
     }), jsx(s_, {
       className: g8,
       dispatch: () => {
-        sx("community_publish_modal", {
+        trackEventAnalytics("community_publish_modal", {
           step: WX.CLOSED
         });
         t(Ce());
@@ -301,7 +301,7 @@ let $$Q0 = Ju(function (e) {
   }, [k]);
   let $ = () => {
     eo && r(ky());
-    sx("community_publish_modal", {
+    trackEventAnalytics("community_publish_modal", {
       user: t.id,
       step: WX.CLOSED
     });
@@ -373,21 +373,21 @@ let $$Q0 = Ju(function (e) {
       className: qr,
       children: [jsxs("div", {
         className: PJ,
-        children: [_$$t("community.universal_posting_modal.footer.choose_resource"), jsx(CY, {
+        children: [getI18nString("community.universal_posting_modal.footer.choose_resource"), jsx(CY, {
           href: "https://help.figma.com/hc/articles/360040035974-Publish-Community-files",
           target: "_blank",
           trusted: !0,
-          children: _$$t("community.universal_posting_modal.footer.learn_more")
+          children: getI18nString("community.universal_posting_modal.footer.learn_more")
         })]
       }), jsxs("div", {
         className: GC,
         children: [jsx(M4, {
           onClick: $,
-          children: _$$t("general.cancel")
+          children: getI18nString("general.cancel")
         }), jsx(UC, {
           disabled: ea === gr.FILES ? !ee : ea === gr.PLUGINS || ea === gr.WIDGETS ? !en : void 0,
           onClick: () => {
-            if (ea === gr.FILES) ee && (sx("community_publish_modal", {
+            if (ea === gr.FILES) ee && (trackEventAnalytics("community_publish_modal", {
               user: t.id,
               step: WX.DETAILS,
               resourceType: bD.HUB_FILE,
@@ -402,7 +402,7 @@ let $$Q0 = Ju(function (e) {
             })), et(null));else if ((ea === gr.PLUGINS || ea === gr.WIDGETS) && en) {
               let e = "localFileId" in en ? en : U[en.id];
               let n = e.localFileId;
-              sx("community_publish_modal", {
+              trackEventAnalytics("community_publish_modal", {
                 user: t.id,
                 step: WX.DETAILS,
                 resourceType: ea === gr.PLUGINS ? bD.PLUGIN : bD.WIDGET,
@@ -417,7 +417,7 @@ let $$Q0 = Ju(function (e) {
               ei(null);
             }
           },
-          children: _$$t("general.next")
+          children: getI18nString("general.next")
         })]
       })]
     })]

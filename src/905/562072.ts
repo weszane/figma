@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { md, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, Xr } from "../figma_app/27355";
 import { A } from "../vendor/90566";
 import { CZ } from "../905/294085";
 import { hO, Hl } from "../figma_app/545293";
@@ -12,11 +12,11 @@ export function $$d0({
   onSearchSuccess: c,
   isFigmake: u
 }) {
-  let p = md(yV);
+  let p = useAtomWithSubscription(yV);
   let m = Xr(d ? hO.currentCommunitySearchAtom : hO.currentSearchAtom);
   let h = A(Hl, e);
-  let g = md(CZ);
-  let f = md(hO.sortByAtom);
+  let g = useAtomWithSubscription(CZ);
+  let f = useAtomWithSubscription(hO.sortByAtom);
   let _ = useCallback(() => {
     h.cancel();
     m(null);

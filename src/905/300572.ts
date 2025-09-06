@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { Pt } from "../figma_app/806412";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { Wv } from "../figma_app/633080";
 import { o as _$$o } from "../905/451156";
 import { fA } from "../905/542608";
@@ -20,21 +20,21 @@ export function $$u0({
       tab: Wv.LIBRARIES,
       selectedTab: t,
       disabled: o,
-      children: tx("design_systems.libraries_modal.libraries")
+      children: renderI18nText("design_systems.libraries_modal.libraries")
     }), e.includes(Wv.FONTS) && jsx($$c, {
       recordingKey: Pt(fA, "fontsTab"),
       onClick: i,
       tab: Wv.FONTS,
       selectedTab: t,
       disabled: o,
-      children: tx("design_systems.libraries_modal.shared_fonts")
+      children: renderI18nText("design_systems.libraries_modal.shared_fonts")
     }), e.includes(Wv.UPDATES) && jsx($$c, {
       recordingKey: Pt(fA, "updatesTab"),
       onClick: i,
       tab: Wv.UPDATES,
       selectedTab: t,
       disabled: o,
-      children: tx("design_systems.libraries_modal.updates")
+      children: renderI18nText("design_systems.libraries_modal.updates")
     })]
   });
 }

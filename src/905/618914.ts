@@ -1,5 +1,5 @@
 import { createDeferredPromise } from "../905/874553";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 export function $$a0(e) {
   let {
     promise,
@@ -7,10 +7,10 @@ export function $$a0(e) {
     reject
   } = createDeferredPromise();
   let s = () => {
-    let t = zl.get(e);
+    let t = atomStoreManager.get(e);
     "loaded" === t.status ? (resolve(t.data), setTimeout(o)) : "errors" === t.status && (reject(t.errors), setTimeout(o));
   };
-  let o = zl.sub(e, s);
+  let o = atomStoreManager.sub(e, s);
   s();
   return promise;
 }

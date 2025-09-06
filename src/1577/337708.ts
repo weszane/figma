@@ -12,13 +12,13 @@ import { hS } from "../905/437088";
 import { L as _$$L } from "../905/704296";
 import { oB, In } from "../figma_app/273493";
 import { NLJ, cxo } from "../figma_app/763686";
-import { fp, Xr, md } from "../figma_app/27355";
+import { useAtomValueAndSetter, Xr, useAtomWithSubscription } from "../figma_app/27355";
 import x from "classnames";
 import { colorToHex } from "../905/436288";
 import { $K, DA, tK, ol, Uv } from "../figma_app/191804";
 import { g as _$$g } from "../905/880308";
 import { $z } from "../figma_app/617427";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { E as _$$E2 } from "../905/984674";
 import { $O, Lo } from "../905/156213";
 import { fu } from "../figma_app/831799";
@@ -27,7 +27,7 @@ import { dH } from "../figma_app/722362";
 import { TA } from "../905/372672";
 import { cD } from "../figma_app/598018";
 import { I_ } from "../figma_app/616107";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { e0 } from "../905/696396";
 import { Ju } from "../905/102752";
 import { B as _$$B } from "../figma_app/397954";
@@ -72,7 +72,7 @@ function V({
     }), jsxs("div", {
       className: "edit_color_palette_modal--colorCircleOuter--ZJqke",
       children: [jsx(_$$u, {
-        "aria-label": _$$t("whiteboard.colors.palette.hexadecimal", {
+        "aria-label": getI18nString("whiteboard.colors.palette.hexadecimal", {
           hex: colorToHex(e)
         }),
         className: z,
@@ -90,8 +90,8 @@ function V({
           "edit_color_palette_modal--deleteColorButtonDisabled--dwsFr": n
         }),
         onClick: () => c(),
-        "aria-label": _$$t("whiteboard.color_palettes.modal.remove_color", {
-          color_name: _$$t("whiteboard.colors.palette.hexadecimal", {
+        "aria-label": getI18nString("whiteboard.color_palettes.modal.remove_color", {
+          color_name: getI18nString("whiteboard.colors.palette.hexadecimal", {
             hex: colorToHex(e)
           })
         }),
@@ -114,11 +114,11 @@ function Q({
 }) {
   let x = useDispatch();
   let [k, A] = useState(i?.name || "");
-  let [P, F] = fp(Jq);
+  let [P, F] = useAtomValueAndSetter(Jq);
   let M = useCallback(() => -1 !== P && (F(-1), !0), [P, F]);
   O1(M, KD.OVERLAY);
   let O = useMemo(() => i?.baseColors || Vk(), [i?.baseColors]);
-  let [Q, Y] = fp(rN);
+  let [Q, Y] = useAtomValueAndSetter(rN);
   let J = Xr(_$$B);
   let K = !$K(O, Q) || r;
   let [X, W] = useState(!1);
@@ -129,7 +129,7 @@ function Q({
   }), [F, Y, J, O]);
   let G = useSelector(e => {
     let t = e.selectedView;
-    return "fullscreen" !== t.view || t.editorType !== nT.Whiteboard;
+    return "fullscreen" !== t.view || t.editorType !== FEditorType.Whiteboard;
   });
   let Z = useCallback(e => {
     Y([...Q, e]);
@@ -193,7 +193,7 @@ function Q({
   }(Q.length > 0 ? Q[Q.length - 1] : null);
   let es = Q.length >= I_;
   let ec = k && k.trim() && Q.length > 0 && (!i || K || k !== i.name);
-  let ed = i ? _$$t("whiteboard.color_palettes.modal.edit_palette") : _$$t("whiteboard.color_palettes.modal.create_palette");
+  let ed = i ? getI18nString("whiteboard.color_palettes.modal.edit_palette") : getI18nString("whiteboard.color_palettes.modal.create_palette");
   return jsx(bL, {
     width: "fit-content",
     height: "dynamic",
@@ -211,12 +211,12 @@ function Q({
         children: [jsx(_$$J, {
           htmlFor: "palette-name-input",
           className: H,
-          children: tx("whiteboard.color_palettes.modal.name")
+          children: renderI18nText("whiteboard.color_palettes.modal.name")
         }), jsx("div", {
           className: "edit_color_palette_modal--nameInput--iRWoM",
           children: jsx(_$$p, {
             id: "palette-name-input",
-            placeholder: _$$t("whiteboard.color_palettes.modal.palette_name"),
+            placeholder: getI18nString("whiteboard.color_palettes.modal.palette_name"),
             value: k || "",
             onChange: e => A(e.slice(0, 100)),
             size: "lg",
@@ -226,13 +226,13 @@ function Q({
           className: "edit_color_palette_modal--colorsContainer--VNvss",
           children: [jsx("h3", {
             className: H,
-            children: tx("whiteboard.color_palettes.modal.colors")
+            children: renderI18nText("whiteboard.color_palettes.modal.colors")
           }), jsx("p", {
             className: "edit_color_palette_modal--modalDescription--SeVmv text--fontPos11--2LvXf text--_fontBase--QdLsd",
-            children: tx("whiteboard.color_palettes.modal.choose_up_to_9_colors")
+            children: renderI18nText("whiteboard.color_palettes.modal.choose_up_to_9_colors")
           }), X && jsx("p", {
             className: "edit_color_palette_modal--modalDescriptionError--W6hs7 text--fontPos11--2LvXf text--_fontBase--QdLsd",
-            children: tx("whiteboard.color_palettes.modal.duplicate_colors")
+            children: renderI18nText("whiteboard.color_palettes.modal.duplicate_colors")
           }), jsxs("div", {
             className: "edit_color_palette_modal--colorPaletteContainer--aQ-En",
             children: [Q.map((e, t) => jsx(V, {
@@ -245,7 +245,7 @@ function Q({
               dropperDisabled: G,
               theme: f
             }, "editbutton-" + e + "-" + t)), !es && jsx(_$$u, {
-              "aria-label": _$$t("whiteboard.color_palettes.modal.add_color"),
+              "aria-label": getI18nString("whiteboard.color_palettes.modal.add_color"),
               "aria-haspopup": !0,
               "aria-expanded": !1,
               "data-testid": "add-color-button",
@@ -269,11 +269,11 @@ function Q({
         children: jsxs(jk, {
           children: [jsx(_$$E2, {
             color: "secondary",
-            children: tx("whiteboard.color_palettes.modal.palettes_visible_to_everyone")
+            children: renderI18nText("whiteboard.color_palettes.modal.palettes_visible_to_everyone")
           }), jsx($z, {
             variant: "secondary",
             onClick: t,
-            children: tx("whiteboard.color_palettes.modal.cancel")
+            children: renderI18nText("whiteboard.color_palettes.modal.cancel")
           }), jsx($z, {
             variant: "primary",
             disabled: !ec,
@@ -282,7 +282,7 @@ function Q({
             htmlAttributes: {
               "data-testid": "save-button"
             },
-            children: tx("whiteboard.color_palettes.modal.save_palette")
+            children: renderI18nText("whiteboard.color_palettes.modal.save_palette")
           })]
         })
       })]
@@ -300,7 +300,7 @@ export let $$$0 = Ju(function ({
   let c = cD();
   let d = hS(r);
   let u = dH();
-  let _ = md(_$$B);
+  let _ = useAtomWithSubscription(_$$B);
   let f = u === NLJ.DROPPER_COLOR && _ === cxo.EDIT_PALETTE_MODAL;
   let p = useCallback(() => {
     l(Lo());

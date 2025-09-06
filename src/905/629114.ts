@@ -1,6 +1,6 @@
-import { $$ax3 } from "../905/472793";
+import { createScopedPluginInstance } from "../905/472793";
 export function $$r0(e) {
-  return $$ax3({
+  return createScopedPluginInstance({
     apiMode: {
       type: "PLUGIN",
       noOpUI: !0

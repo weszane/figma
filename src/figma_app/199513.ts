@@ -8,7 +8,7 @@ import { WB } from "../905/761735";
 import { Jl } from "../figma_app/566371";
 import { getRequest, XHR } from "../905/910117";
 import { Q, s as _$$s } from "../905/573154";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { sf } from "../905/34809";
 import { p as _$$p } from "../905/282607";
@@ -317,7 +317,7 @@ let $$ee5 = M4.Mutation((e, {
   folderId: e.folderId
 }).then(() => {
   t.dispatch(_$$F.enqueue({
-    message: _$$t("file_browser.file_browser_actions.folder_deleted_forever")
+    message: getI18nString("file_browser.file_browser_actions.folder_deleted_forever")
   }));
 }));
 let $$et1 = M4.Mutation(({
@@ -333,12 +333,12 @@ let $$et1 = M4.Mutation(({
       e.trashed_at = Date.now().toString();
     });
     r.dispatch(_$$F.enqueue({
-      message: _$$t("file_browser.file_browser_actions.folder_trashed")
+      message: getI18nString("file_browser.file_browser_actions.folder_trashed")
     }));
   });
   r.dispatch(Q({
     promise: n,
-    fallbackError: _$$t("file_browser.api_folder.error_when_moving_to_trash")
+    fallbackError: getI18nString("file_browser.api_folder.error_when_moving_to_trash")
   }));
   WB().optimisticallyUpdate({
     Project: {
@@ -362,9 +362,9 @@ let $$er11 = M4.Mutation(({
       e.trashed_at = null;
     });
     n.dispatch(_$$F.enqueue({
-      message: _$$t("file_browser.file_browser_actions.folder_restored"),
+      message: getI18nString("file_browser.file_browser_actions.folder_restored"),
       button: {
-        text: _$$t("visual_bell.show_in_toast", {
+        text: getI18nString("visual_bell.show_in_toast", {
           destination: t?.name ?? "Recents"
         }),
         action: () => {
@@ -380,7 +380,7 @@ let $$er11 = M4.Mutation(({
   });
   n.dispatch(Q({
     promise: i,
-    fallbackError: _$$t("file_browser.api_folder.error_when_restoring")
+    fallbackError: getI18nString("file_browser.api_folder.error_when_restoring")
   }));
   WB().optimisticallyUpdate({
     Project: {
@@ -418,7 +418,7 @@ let $$ei12 = M4.Mutation(({
   });
   n.dispatch(Q({
     promise: a,
-    fallbackError: _$$t("file_browser.api_folder.an_error_occurred_while_renaming_this_project")
+    fallbackError: getI18nString("file_browser.api_folder.an_error_occurred_while_renaming_this_project")
   }));
   WB().optimisticallyUpdate({
     Project: {
@@ -443,7 +443,7 @@ let $$ea9 = MM("FOLDER_UPDATE_FOLDER_ACCESS", (e, t, {
   });
   Q({
     promise: n,
-    fallbackError: _$$t("file_browser.api_folder.an_error_while_updating_the_folder_s_access")
+    fallbackError: getI18nString("file_browser.api_folder.an_error_while_updating_the_folder_s_access")
   });
 });
 let $$es4 = MM("FOLDER_UPDATE_SHARING_AUDIENCE_CONTROLS", (e, t, {
@@ -464,7 +464,7 @@ let $$es4 = MM("FOLDER_UPDATE_SHARING_AUDIENCE_CONTROLS", (e, t, {
   });
   Q({
     promise: n,
-    fallbackError: _$$t("file_browser.api_folder.an_error_while_updating_the_folder_s_sharing_audience_control")
+    fallbackError: getI18nString("file_browser.api_folder.an_error_while_updating_the_folder_s_sharing_audience_control")
   });
 });
 let $$eo13 = MM("FOLDER_UPDATE_TEAM_ACCESS", (e, t, {
@@ -485,7 +485,7 @@ let $$eo13 = MM("FOLDER_UPDATE_TEAM_ACCESS", (e, t, {
   });
   Q({
     promise: n,
-    fallbackError: _$$t("file_browser.api_folder.an_error_while_updating_the_folder_s_team_access")
+    fallbackError: getI18nString("file_browser.api_folder.an_error_while_updating_the_folder_s_team_access")
   });
 });
 let $$el3 = nF(async (e, t) => {
@@ -560,7 +560,7 @@ let ed = M4.Mutation((e, {
     team_id: team.id
   }).then(() => {
     n.dispatch(_$$F.enqueue({
-      message: _$$t("file_browser.folder_move.project_moved_toast", {
+      message: getI18nString("file_browser.folder_move.project_moved_toast", {
         folderName: folder.path,
         teamName: team.name
       })
@@ -568,7 +568,7 @@ let ed = M4.Mutation((e, {
   });
   n.dispatch(Q({
     promise: s,
-    fallbackError: _$$t("file_browser.api_folder.an_error_occurred_while_moving_this_project")
+    fallbackError: getI18nString("file_browser.api_folder.an_error_occurred_while_moving_this_project")
   }));
   WB()?.optimisticallyUpdate({
     Project: {
@@ -617,9 +617,9 @@ let $$ec6 = nF((e, t) => {
         editorType: null
       }
     }));else {
-      let t = s ? _$$t("file_browser.api_folder.no_create_permissions_team_name", {
+      let t = s ? getI18nString("file_browser.api_folder.no_create_permissions_team_name", {
         teamName: s.name
-      }) : _$$t("file_browser.api_folder.no_create_permissions_this_team");
+      }) : getI18nString("file_browser.api_folder.no_create_permissions_this_team");
       e.dispatch(_$$s.flash(t));
     }
   }

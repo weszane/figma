@@ -2,7 +2,7 @@ import { useMemo, useEffect } from "react";
 import { useSelector } from "../vendor/514228";
 import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
-import { md, zl } from "../figma_app/27355";
+import { useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import { Rs } from "../figma_app/288654";
 import { s9 } from "../figma_app/913823";
 import { Xh, M7 } from "../figma_app/933328";
@@ -64,14 +64,14 @@ function A(e, t, r) {
   return i?.key ? i.key : null;
 }
 function x(e, t) {
-  let r = md(_S);
+  let r = useAtomWithSubscription(_S);
   let a = eY();
   let l = useSelector(aD);
   let d = useSelector(BA);
   let c = function (e) {
     let t = useSelector(MH);
     let r = useSelector(e => e.mirror.appModel.currentPage);
-    let a = md(_S);
+    let a = useAtomWithSubscription(_S);
     return useMemo(() => {
       let n = new Set();
       if (!e) return n;
@@ -104,7 +104,7 @@ function x(e, t) {
   }, [c, d, l, _]);
 }
 export function $$N3() {
-  let e = md(_S);
+  let e = useAtomWithSubscription(_S);
   let t = eY();
   let r = useSelector(e => e.mirror.appModel.currentPage);
   let l = useSelector(aD);
@@ -171,7 +171,7 @@ export function $$C4() {
   let t = tS();
   let r = x(t, !1);
   useEffect(() => {
-    zl.set(zV, null);
+    atomStoreManager.set(zV, null);
   }, [e]);
   let a = Rs(Opb, {
     nodes: Array.from(r),
@@ -182,12 +182,12 @@ export function $$C4() {
   useEffect(() => {
     if ("loaded" === a.status && a.data.file?.preload_code_connect_lk) {
       let e = a.data.file.preload_code_connect_lk;
-      zl.set(zV, {
+      atomStoreManager.set(zV, {
         ...e,
         nodesWithCodeConnect: new Set(e.nodesWithCodeConnect)
       });
     }
-    return () => zl.set(zV, null);
+    return () => atomStoreManager.set(zV, null);
   }, [e, a.status]);
 }
 export function $$w0(e, t = !0) {
@@ -213,7 +213,7 @@ export function $$w0(e, t = !0) {
   };
 }
 export function $$O2() {
-  return zl.get(zV)?.nodesWithCodeConnect;
+  return atomStoreManager.get(zV)?.nodesWithCodeConnect;
 }
 let R = M4.Query({
   fetch: async ({
@@ -224,7 +224,7 @@ let R = M4.Query({
 export function $$L5() {
   let e = useSelector(e => e.mirror.appModel.currentPage);
   useEffect(() => {
-    zl.set(Af, null);
+    atomStoreManager.set(Af, null);
   }, [e]);
   let t = x(tS(), !0);
   let [r] = IT(R({
@@ -232,9 +232,9 @@ export function $$L5() {
   }), {
     enabled: !!getFeatureFlags().dt_code_connect_preload_component_names_endpoint && t.size > 0
   });
-  useEffect(() => ("loaded" === r.status && r.data && zl.set(Af, {
+  useEffect(() => ("loaded" === r.status && r.data && atomStoreManager.set(Af, {
     componentsById: r.data
-  }), () => zl.set(Af, null)), [e, r.status]);
+  }), () => atomStoreManager.set(Af, null)), [e, r.status]);
 }
 let P = M4.Query({
   fetch: async ({
@@ -247,12 +247,12 @@ let P = M4.Query({
 export function $$D1() {
   let e = useSelector(e => e.mirror.appModel.currentPage);
   useEffect(() => {
-    zl.set(mO, null);
+    atomStoreManager.set(mO, null);
   }, [e]);
   let t = $$N3();
-  let r = md(Xh);
-  let a = md(s9);
-  let l = md(M7);
+  let r = useAtomWithSubscription(Xh);
+  let a = useAtomWithSubscription(s9);
+  let l = useAtomWithSubscription(M7);
   let [u] = IT(P({
     assetKeys: Array.from(t)
   }), {
@@ -260,17 +260,17 @@ export function $$D1() {
   });
   useEffect(() => {
     let e = "loading" === r || "loading" === a || "loading" === l || "loading" === u.status && t.size > 0;
-    e ? zl.set(mO, {
+    e ? atomStoreManager.set(mO, {
       status: {},
       loadingStatus: "loading"
-    }) : 0 === t.size ? zl.set(mO, {
+    }) : 0 === t.size ? atomStoreManager.set(mO, {
       status: {},
       loadingStatus: "loaded"
-    }) : "loaded" === u.status && u.data && !e && zl.set(mO, {
+    }) : "loaded" === u.status && u.data && !e && atomStoreManager.set(mO, {
       status: u.data.status,
       loadingStatus: "loaded"
     });
-    return () => zl.set(mO, null);
+    return () => atomStoreManager.set(mO, null);
   }, [e, u.status, t.size, r, a, l]);
 }
 export const QU = $$w0;

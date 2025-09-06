@@ -2,9 +2,9 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { oA } from "../905/663269";
 import { subscribeMultipleAndAwaitAll } from "../905/553831";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { s as _$$s } from "../905/573154";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { v as _$$v } from "../905/556792";
 import { nF } from "../905/350402";
@@ -45,40 +45,40 @@ let P = Ju(function (e) {
     switch (type) {
       case 0:
         return {
-          title: tx("templates.confirmation.move_to_drafts.title", {
+          title: renderI18nText("templates.confirmation.move_to_drafts.title", {
             count: t
           }),
-          children: t > 1 ? tx("templates.confirmation.move_to_drafts.description.multiselect_v2") : tx("templates.confirmation.move_to_drafts.description"),
-          confirmText: tx("templates.confirmation.move_to_drafts.button_v2")
+          children: t > 1 ? renderI18nText("templates.confirmation.move_to_drafts.description.multiselect_v2") : renderI18nText("templates.confirmation.move_to_drafts.description"),
+          confirmText: renderI18nText("templates.confirmation.move_to_drafts.button_v2")
         };
       case 1:
       case 2:
         return {
-          children: tx("file_browser.file_browser_actions.confirm_move_from_team", {
+          children: renderI18nText("file_browser.file_browser_actions.confirm_move_from_team", {
             teamName: e.teamName,
             numFiles: t
           })
         };
       case 3:
         return {
-          children: tx("file_browser.file_browser_actions.confirm_move_from_shared_project_multiple", {
+          children: renderI18nText("file_browser.file_browser_actions.confirm_move_from_shared_project_multiple", {
             projectName: e.folderName
           })
         };
       case 4:
         return {
-          children: tx("file_browser.file_browser_actions.confirm_move_from_shared_project", {
+          children: renderI18nText("file_browser.file_browser_actions.confirm_move_from_shared_project", {
             projectName: e.folderName,
             numFiles: t
           })
         };
       case 5:
         return {
-          children: tx("file_browser.file_browser_actions.confirm_move_from_project_multiple")
+          children: renderI18nText("file_browser.file_browser_actions.confirm_move_from_project_multiple")
         };
       case 6:
         return {
-          children: tx("file_browser.file_browser_actions.confirm_move_from_project", {
+          children: renderI18nText("file_browser.file_browser_actions.confirm_move_from_project", {
             numFiles: t
           })
         };
@@ -86,8 +86,8 @@ let P = Ju(function (e) {
         throwTypeError(type);
     }
   }(e.modalConfig, e.numFilesMoved);
-  t = title ?? tx("modal.are_you_sure");
-  n = confirmText ?? tx("file_browser.file_move.move");
+  t = title ?? renderI18nText("modal.are_you_sure");
+  n = confirmText ?? renderI18nText("file_browser.file_move.move");
   return jsx(_$$R, {
     title,
     confirmText,
@@ -236,7 +236,7 @@ let $$K0 = nF(async (e, t) => {
     let n = g.figFilePublishedAsHubFile[i.key] || null;
     let r = n && g.hubFiles[n] || null;
     if (r?.publisher.entity_type === o1.TEAM) {
-      e.dispatch(_$$s.error(_$$t("file_browser.file_browser_actions.cant_move_published_file", {
+      e.dispatch(_$$s.error(getI18nString("file_browser.file_browser_actions.cant_move_published_file", {
         fileName: i.name,
         teamName: r.publisher.name
       })));
@@ -261,9 +261,9 @@ let $$K0 = nF(async (e, t) => {
       let n = repos[i];
       let r = n.folder_id ? g.folders[n.folder_id] ?? null : null;
       if (!oA(t[i].result.data?.repo)?.hasPermission && !C) {
-        let t = r ? _$$t("file_browser.file_browser_actions.remove_files_from_project_permission", {
+        let t = r ? getI18nString("file_browser.file_browser_actions.remove_files_from_project_permission", {
           projectName: r.name
-        }) : _$$t("file_browser.file_browser_actions.remove_files_from_this_project_permission");
+        }) : getI18nString("file_browser.file_browser_actions.remove_files_from_this_project_permission");
         e.dispatch(_$$s.error(t));
         return;
       }
@@ -320,7 +320,7 @@ let $$K0 = nF(async (e, t) => {
       } catch (t) {
         if (onError && onError(), t.data?.failure_info?.code === "ERR_FILE_LIMIT") {
           if (!team) {
-            $D(_$$e.WORKFLOW, Error("Team object is null in tryMove"));
+            reportError(_$$e.WORKFLOW, Error("Team object is null in tryMove"));
             return;
           }
           c > 0 && _$$M && !getFeatureFlags().sts_starter_enabled ? e.dispatch(to({
@@ -348,7 +348,7 @@ let $$K0 = nF(async (e, t) => {
           return;
         }
         if (!C) {
-          e.dispatch(_$$s.error(t.data?.message || _$$t("file_browser.file_browser_actions.file_processing_error")));
+          e.dispatch(_$$s.error(t.data?.message || getI18nString("file_browser.file_browser_actions.file_processing_error")));
           return;
         }
       }
@@ -414,7 +414,7 @@ let $$K0 = nF(async (e, t) => {
   if (t.draftsMoveData?.licenseType && t.draftsMoveData?.requiresManualUpgrade) {
     if (t.draftsMoveData?.upgradeRequested) {
       e.dispatch(_$$F.enqueue({
-        message: _$$t("upgrades.drafts_move.request_sent_bell")
+        message: getI18nString("upgrades.drafts_move.request_sent_bell")
       }));
       return;
     }

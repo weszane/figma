@@ -14,12 +14,12 @@ import { getFeatureFlags } from "../905/601108";
 import { Ay as _$$Ay } from "../figma_app/272902";
 import g from "classnames";
 import { _ as _$$_2 } from "../vendor/853977";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { AF, v_, Pt } from "../figma_app/806412";
 import { GG } from "../905/511649";
 import { oW } from "../905/675859";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
 import { to } from "../figma_app/828186";
 import { z7, Uo } from "../figma_app/334505";
@@ -29,7 +29,7 @@ import { x as _$$x } from "../9410/705473";
 import { Fk } from "../figma_app/167249";
 import { Ib } from "../905/129884";
 import { useSelector } from "../vendor/514228";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import { B as _$$B } from "../905/714743";
 import { Y5 } from "../figma_app/455680";
 import { Z7 } from "../9410/626378";
@@ -77,7 +77,7 @@ function U(e) {
   let {
     carouselSlide
   } = e;
-  let n = md(Z7);
+  let n = useAtomWithSubscription(Z7);
   let r = n.get(carouselSlide.guid);
   let i = useSelector(e => e.mirror.appModel.showComments);
   let s = Vi();
@@ -250,7 +250,7 @@ function et({
         e.stopPropagation();
         t(e);
       },
-      "aria-label": _$$t("cooper.carousel.row_title_caret_label"),
+      "aria-label": getI18nString("cooper.carousel.row_title_caret_label"),
       "aria-expanded": "EXPANDED" === e,
       style: {
         justifySelf: "center",
@@ -353,7 +353,7 @@ let $$el0 = forwardRef(function ({
   let eE = useRef(null);
   let ex = "dark" === DP();
   let eg = getFeatureFlags().slide_chapters;
-  let ef = _$$R(e => Object.keys(e.mirror.sceneGraphSelection));
+  let ef = selectWithShallowEqual(e => Object.keys(e.mirror.sceneGraphSelection));
   let ev = CNR?.singleSlideThumbnailNumberWidth() ?? 0;
   let eI = function (e) {
     let t = Ez5?.slideAnimationBindings().getSlideTransition(e);
@@ -410,9 +410,9 @@ let $$el0 = forwardRef(function ({
   let eK = !children.length || eA || el ? void 0 : isCollapsed ? "COLLAPSED" : "EXPANDED";
   let eH = J ? "5px" : "9px";
   eu = q ? eB || "var(--color-bg)" : ex ? "#5C5C5C" : "var(--color-bg, var(--fallback-color-bg))";
-  let eV = "buzz" !== e && getFeatureFlags().slides_editor_a11y ? eO ? _$$t("slides.carousel.item_aria_label_slides_skipped") : _$$t("slides.carousel.item_aria_label_slides", {
+  let eV = "buzz" !== e && getFeatureFlags().slides_editor_a11y ? eO ? getI18nString("slides.carousel.item_aria_label_slides_skipped") : getI18nString("slides.carousel.item_aria_label_slides", {
     number: number ?? ""
-  }) : _$$t("cooper.carousel.item_aria_label");
+  }) : getI18nString("cooper.carousel.item_aria_label");
   let e$ = eA && g > 0 && !X;
   return jsxs(Fragment, {
     children: [eA && (!eg || g <= 0 || J) ? jsx("div", {

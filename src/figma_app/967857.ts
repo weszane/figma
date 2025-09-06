@@ -13,7 +13,7 @@ import { C as _$$C } from "../905/47358";
 import { J } from "../905/614223";
 import { l7 } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import y from "classnames";
 import { Ay as _$$Ay } from "../905/612521";
 import { g as _$$g } from "../905/880308";
@@ -22,7 +22,7 @@ import { a as _$$a } from "../905/29104";
 import { Ex, zE, vj } from "../figma_app/919079";
 import { wv } from "../figma_app/236327";
 import { B as _$$B } from "../905/714743";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { b as _$$b2 } from "../905/985254";
 import { fu, tf } from "../figma_app/831799";
 import { r1 } from "../figma_app/545877";
@@ -52,27 +52,27 @@ function Q(e) {
   switch (e) {
     case "summarize":
       return {
-        displayText: _$$t("whiteboard.inline_menu.ai_quick_actions_summarize_button"),
+        displayText: getI18nString("whiteboard.inline_menu.ai_quick_actions_summarize_button"),
         svgSrc: _$$A4,
-        disabledTooltipText: _$$t("whiteboard.inline_menu.ai_quick_actions_summarize_disabled_tooltip", {
+        disabledTooltipText: getI18nString("whiteboard.inline_menu.ai_quick_actions_summarize_disabled_tooltip", {
           minSelectedStickies: 2
         }),
         icon: jsx(_$$O, {})
       };
     case "cluster":
       return {
-        displayText: _$$t("whiteboard.inline_menu.ai_quick_actions_sort_stickies_button"),
+        displayText: getI18nString("whiteboard.inline_menu.ai_quick_actions_sort_stickies_button"),
         svgSrc: _$$A3,
-        disabledTooltipText: _$$t("whiteboard.inline_menu.ai_quick_actions_sort_stickies_disabled_tooltip", {
+        disabledTooltipText: getI18nString("whiteboard.inline_menu.ai_quick_actions_sort_stickies_disabled_tooltip", {
           minSelectedStickies: 2
         }),
         icon: jsx(_$$$, {})
       };
     case "generate_ideas":
       return {
-        displayText: _$$t("whiteboard.inline_menu.ai_quick_actions_generate_ideas_button"),
+        displayText: getI18nString("whiteboard.inline_menu.ai_quick_actions_generate_ideas_button"),
         svgSrc: _$$A2,
-        disabledTooltipText: _$$t("whiteboard.inline_menu.ai_quick_actions_generate_ideas_disabled_tooltip"),
+        disabledTooltipText: getI18nString("whiteboard.inline_menu.ai_quick_actions_generate_ideas_disabled_tooltip"),
         icon: jsx(r, {})
       };
   }
@@ -82,7 +82,7 @@ let et = "used_figjam_ai_mindmaps_inline_menu";
 let er = "figjam ai";
 let en = r1(et);
 export function $$ei4() {
-  let e = md(_$$f2).positionRelativeToSelection;
+  let e = useAtomWithSubscription(_$$f2).positionRelativeToSelection;
   let {
     summarizeCanvasSelection
   } = ss(e, void 0, "INLINE_TOOLBAR");
@@ -145,8 +145,8 @@ export function $$ea0() {
           a || setUserFlagsCallback();
         }
       }),
-      tooltip: a ? _$$w : _$$t("whiteboard.inline_menu.ai_quick_actions_header_text"),
-      ariaLabel: _$$t("whiteboard.inline_menu.ai_quick_actions_header_text"),
+      tooltip: a ? _$$w : getI18nString("whiteboard.inline_menu.ai_quick_actions_header_text"),
+      ariaLabel: getI18nString("whiteboard.inline_menu.ai_quick_actions_header_text"),
       dataTestId: "toolbarAIQuickActionsDropdownButton",
       recordingKey: "toolbarAIQuickActionsDropdownButton",
       disabled: a,
@@ -159,7 +159,7 @@ export function $$ea0() {
           name: "ai_quick_actions_onboarding_badge",
           children: jsx(_$$E, {
             variant: "brandFilled",
-            children: _$$t("whiteboard.inline_menu.ai_quick_actions_onboarding_badge_2")
+            children: getI18nString("whiteboard.inline_menu.ai_quick_actions_onboarding_badge_2")
           })
         })]
       })
@@ -168,7 +168,7 @@ export function $$ea0() {
       children: jsxs(mc, {
         children: [jsx(YJ, {
           title: jsx(hE, {
-            children: _$$t("whiteboard.inline_menu.ai_quick_actions_header_text")
+            children: getI18nString("whiteboard.inline_menu.ai_quick_actions_header_text")
           }),
           children: u.map(e => {
             if (!e) return null;
@@ -207,7 +207,7 @@ export function $$ea0() {
       })
     })]
   }) : jsx(Fn, {
-    OptionWrapper: (e = _$$t("whiteboard.inline_menu.ai_quick_actions_dropdown_options_aria_label"), function ({
+    OptionWrapper: (e = getI18nString("whiteboard.inline_menu.ai_quick_actions_dropdown_options_aria_label"), function ({
       children: r
     }) {
       return jsx("div", {
@@ -223,7 +223,7 @@ export function $$ea0() {
     additionalContentsTop: function ({
       closeMenu: e
     }) {
-      let t = _$$a() ? _$$t("whiteboard.inline_menu.ai_quick_actions_beta_badge_text") : "";
+      let t = _$$a() ? getI18nString("whiteboard.inline_menu.ai_quick_actions_beta_badge_text") : "";
       return jsxs("div", {
         className: "ai_quick_actions_control--dropdownHeaderContainer--ifOPr",
         onClick: e,
@@ -231,7 +231,7 @@ export function $$ea0() {
         tabIndex: 0,
         children: [jsx("div", {
           className: "ai_quick_actions_control--dropdownHeaderTitle--Cqg8n",
-          children: tx("whiteboard.inline_menu.ai_quick_actions_header_text")
+          children: renderI18nText("whiteboard.inline_menu.ai_quick_actions_header_text")
         }), jsx("div", {
           className: "ai_quick_actions_control--badgeContainer--kBpYM",
           children: jsx(_$$o, {
@@ -289,7 +289,7 @@ function es(e) {
   return {
     shouldShowBadge: function (e) {
       let t = tG();
-      let r = md(en).data;
+      let r = useAtomWithSubscription(en).data;
       return !!(t && !r && e);
     }(n),
     setUserFlagsCallback: useCallback(() => {
@@ -315,7 +315,7 @@ let eo = tf(function ({
   return jsx($n, {
     ref: r,
     ariaControls: a,
-    ariaLabel: _$$t("whiteboard.inline_menu.ai_quick_actions_button_aria_label"),
+    ariaLabel: getI18nString("whiteboard.inline_menu.ai_quick_actions_button_aria_label"),
     buttonChildrenStyle: {
       justifyContent: "initial",
       width: "initial"
@@ -354,7 +354,7 @@ let eo = tf(function ({
             c(e?.offsetWidth || d);
           },
           children: jsx(Ex, {
-            text: _$$t("whiteboard.inline_menu.ai_quick_actions_onboarding_badge_2"),
+            text: getI18nString("whiteboard.inline_menu.ai_quick_actions_onboarding_badge_2"),
             color: zE.FIGJAM,
             size: vj.SMALL,
             className: "ai_quick_actions_control--onboardingBadge---sKJz"
@@ -371,7 +371,7 @@ function el() {
       children: jsxs("span", {
         children: [jsx("span", {
           className: "ai_quick_actions_control--dropdownFooterDisclaimer--UVXvJ",
-          children: _$$t("whiteboard.inline_menu.ai_quick_actions_dropdown_disclaimer")
+          children: getI18nString("whiteboard.inline_menu.ai_quick_actions_dropdown_disclaimer")
         }), "\xa0", jsx(J, {
           brand: "whiteboard",
           mode: "dark",
@@ -379,7 +379,7 @@ function el() {
             href: $$J1,
             newTab: !0,
             trusted: !0,
-            children: tx("whiteboard.inline_menu.ai_quick_actions_dropdown_disclaimer_cta")
+            children: renderI18nText("whiteboard.inline_menu.ai_quick_actions_dropdown_disclaimer_cta")
           })
         })]
       })

@@ -1,5 +1,5 @@
 import { getFeatureFlags } from "../905/601108";
-import { Lo } from "../905/714362";
+import { logInfo } from "../905/714362";
 import { p3 } from "../figma_app/622881";
 var s = (e => (e[e.Unknown = 0] = "Unknown", e[e.No = 1] = "No", e[e.Yes = 2] = "Yes", e))(s || {});
 let o = 0;
@@ -49,7 +49,7 @@ export function $$c1({
         }(u, p);
         0 === o && (o = 2);
       } catch {
-        Lo("color management", "polyfill failed", {
+        logInfo("color management", "polyfill failed", {
           ee_color_management_force_canvas: getFeatureFlags().ee_color_management_force_canvas,
           shouldUseCssColorLevel4Polyfill: p3(),
           is2dCanvasPolyfillSupportedByBrowser: s[o]

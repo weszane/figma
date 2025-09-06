@@ -1,4 +1,4 @@
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { td } from "../figma_app/181241";
 import { XHR } from "../905/910117";
 function o(e, t, r, i) {
@@ -7,7 +7,7 @@ function o(e, t, r, i) {
     orgId: e
   };
   i && (n.workspaceIds = i.join(","));
-  sx("plugin" === r ? "Hub Plugin Add to Whitelist" : "Hub Widget Add to Whitelist", n);
+  trackEventAnalytics("plugin" === r ? "Hub Plugin Add to Whitelist" : "Hub Widget Add to Whitelist", n);
 }
 function a(e, t, r, i) {
   let n = {
@@ -15,7 +15,7 @@ function a(e, t, r, i) {
     orgId: e
   };
   i && (n.workspaceIds = i.join(","));
-  sx("plugin" === r ? "Hub Plugin Remove from Whitelist" : "Hub Widget Remove from Whitelist", n);
+  trackEventAnalytics("plugin" === r ? "Hub Plugin Remove from Whitelist" : "Hub Widget Remove from Whitelist", n);
 }
 let l = {
   plugin: "plugins",

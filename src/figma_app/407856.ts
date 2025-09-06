@@ -1,5 +1,5 @@
 import { buildStaticUrl, buildUploadUrl } from "../figma_app/169182";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 export let $$a4 = "s-heart";
 function s(e) {
   return [{
@@ -8,7 +8,7 @@ function s(e) {
     image: e.thumbsUp,
     position: 2,
     label: "Thumbs up",
-    i18nName: () => _$$t("fullscreen.stamp_wheel.thumbs_up")
+    i18nName: () => getI18nString("fullscreen.stamp_wheel.thumbs_up")
   }, {
     type: "STAMP",
     name: "s-plusOne",
@@ -16,35 +16,35 @@ function s(e) {
     image: e.plusOne,
     position: 1,
     label: "+1",
-    i18nName: () => _$$t("fullscreen.stamp_wheel.plus_one")
+    i18nName: () => getI18nString("fullscreen.stamp_wheel.plus_one")
   }, {
     type: "STAMP",
     name: "s-star",
     image: e.star,
     position: 8,
     label: "Star",
-    i18nName: () => _$$t("fullscreen.stamp_wheel.star")
+    i18nName: () => getI18nString("fullscreen.stamp_wheel.star")
   }, {
     type: "STAMP",
     name: "s-question",
     image: e.question,
     position: 7,
     label: "Question",
-    i18nName: () => _$$t("fullscreen.stamp_wheel.question")
+    i18nName: () => getI18nString("fullscreen.stamp_wheel.question")
   }, {
     type: "STAMP",
     name: "s-thumbsDown",
     image: e.thumbsDown,
     position: 6,
     label: "Thumbs down",
-    i18nName: () => _$$t("fullscreen.stamp_wheel.thumbs_down")
+    i18nName: () => getI18nString("fullscreen.stamp_wheel.thumbs_down")
   }, {
     type: "STAMP",
     name: "s-dot",
     imageFunc: e.dots,
     position: 5,
     label: "Dot",
-    i18nName: () => _$$t("fullscreen.stamp_wheel.dot")
+    i18nName: () => getI18nString("fullscreen.stamp_wheel.dot")
   }, {
     type: "STAMP",
     name: "s-profile",
@@ -52,14 +52,14 @@ function s(e) {
     imageFunc: e.profile,
     position: 4,
     label: "Profile",
-    i18nName: () => _$$t("fullscreen.stamp_wheel.profile")
+    i18nName: () => getI18nString("fullscreen.stamp_wheel.profile")
   }, {
     type: "STAMP",
     name: "s-heart",
     image: e.heart,
     position: 3,
     label: "Heart",
-    i18nName: () => _$$t("fullscreen.stamp_wheel.heart")
+    i18nName: () => getI18nString("fullscreen.stamp_wheel.heart")
   }];
 }
 export function $$o3(e) {
@@ -76,7 +76,7 @@ export function $$o3(e) {
 }
 export function $$l0(e) {
   let t = $$o3(null).find(t => t.label === e);
-  return t ? t.i18nName : () => _$$t("fullscreen.accessibility_dom.unlabelled_stamp");
+  return t ? t.i18nName : () => getI18nString("fullscreen.accessibility_dom.unlabelled_stamp");
 }
 let d = {
   F24E1E: "f5c62908951d5597fd78d43b466a590616ba2693",

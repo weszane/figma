@@ -4,7 +4,7 @@ import { bL, c$ } from "../905/867927";
 import { q } from "../905/932270";
 import { H } from "../905/740869";
 import { m } from "../905/822676";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { gl } from "../905/216495";
 let o = memo(function (e) {
   return jsxs("svg", {
@@ -31,22 +31,22 @@ export function $$u0(e) {
     value: e.disabled && !e.showValueinDisabledStrokeJoin || gl(e.value) ? void 0 : e.value,
     onChange: e.onChange,
     legend: jsx(q, {
-      children: t("fullscreen.properties_panel.stroke_settings.join")
+      children: getI18nString("fullscreen.properties_panel.stroke_settings.join")
     }),
     readonly: e.disabled,
     recordingKey: e.recordingKey,
     children: [jsx(c$, {
       icon: jsx(H, {}),
       value: "MITER",
-      "aria-label": t("fullscreen.properties_panel.stroke_settings.miter")
+      "aria-label": getI18nString("fullscreen.properties_panel.stroke_settings.miter")
     }), jsx(c$, {
       icon: jsx(o, {}),
       value: "BEVEL",
-      "aria-label": t("fullscreen.properties_panel.stroke_settings.bevel")
+      "aria-label": getI18nString("fullscreen.properties_panel.stroke_settings.bevel")
     }), jsx(c$, {
       icon: jsx(m, {}),
       value: "ROUND",
-      "aria-label": t("fullscreen.properties_panel.stroke_settings.round_join")
+      "aria-label": getI18nString("fullscreen.properties_panel.stroke_settings.round_join")
     })]
   });
 }

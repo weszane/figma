@@ -5,7 +5,7 @@ import { qE } from "../figma_app/492908";
 import { i as _$$i } from "../905/97346";
 import { Egt, NfO, Hcu } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { Xr, md } from "../figma_app/27355";
+import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { A as _$$A } from "../vendor/850789";
 import { NY, ux } from "../figma_app/851625";
 import { parsePxInt } from "../figma_app/783094";
@@ -24,7 +24,7 @@ import { J2 } from "../figma_app/84367";
 import { nt } from "../9314/278494";
 import { Xt } from "../figma_app/889655";
 import { G2 } from "../figma_app/314591";
-import { L as _$$L } from "../905/755472";
+import { multiValueMapAtom } from "../905/755472";
 import { lu } from "../905/545842";
 import { O as _$$O } from "../905/51985";
 import { J as _$$J } from "../9831/379831";
@@ -110,7 +110,7 @@ function I({
   });
   let S = "prototype" === c.view;
   let O = useSelector(e => e.mirror.appModel.pagesList);
-  let L = md(_$$L);
+  let L = useAtomWithSubscription(multiValueMapAtom);
   useEffect(() => {
     if (E) {
       let e = new G2({

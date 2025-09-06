@@ -9,7 +9,7 @@ import { getFeatureFlags } from "../905/601108";
 import { k9 } from "../905/19536";
 import m from "../vendor/674128";
 import { A } from "../vendor/850789";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { UD } from "../figma_app/624361";
 import { tB } from "../figma_app/731583";
 import { dh } from "../figma_app/186343";
@@ -166,7 +166,7 @@ function D({
             0 === t.fills.length ? t.insertImageInFillPaint(e) : t.setImageInFillPaint(e);
           });
         }).catch(e => {
-          sx("Failed to generate thumbnail in editor for slide", {
+          trackEventAnalytics("Failed to generate thumbnail in editor for slide", {
             error: e,
             nodeId: r,
             flappType: n,

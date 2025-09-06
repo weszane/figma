@@ -1,17 +1,17 @@
-import { pp } from "../905/449184";
+import { getAnonymousId } from "../905/449184";
 import { getInitialOptions, getLaunchDarklyFlagsExport, getEnvironmentName, isGovCluster } from "../figma_app/169182";
 import { B7, q3, AQ, Us } from "../3973/890507";
 import { MU } from "../3973/473379";
 import { zN, jm } from "../figma_app/416935";
-import { eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { Rf } from "../figma_app/546509";
-import { Gq } from "../figma_app/363242";
+import { getI18nState } from "../figma_app/363242";
 import { UY } from "../3973/697935";
 import { cn } from "../figma_app/141320";
-import { nl } from "../figma_app/257275";
+import { isInteractionPathCheck } from "../figma_app/897289";
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
-import { fm } from "../905/236856";
+import { atomStoreManager } from "../figma_app/27355";
+import { delay } from "../905/236856";
 import { HB } from "../3973/538504";
 let $$A8 = 8;
 let $$y7 = 4e3;
@@ -19,7 +19,7 @@ let b = "unknown";
 let v = new Set(["AT", "AU", "BE", "CA", "CH", "CY", "CZ", "DE", "DK", "FI", "GB", "GR", "GT", "HU", "IE", "IS", "LU", "NL", "NO", "NZ", "PA", "PT", "SE", "US"]);
 let I = () => !!getInitialOptions().statsig_bootstrap_values;
 let $$E9 = () => !!getInitialOptions().statsig_figma_app_client_api_key;
-let $$x5 = () => getInitialOptions().is_second_page_for_perf_tests || !nl();
+let $$x5 = () => getInitialOptions().is_second_page_for_perf_tests || !isInteractionPathCheck();
 let S = () => getLaunchDarklyFlagsExport().statsig_enable_production_mirror ?? !1;
 export function $$w0(e) {
   if (!I()) return null;
@@ -47,7 +47,7 @@ function T(e, t) {
     (c = q3(e, t.planKey)) || AQ("plan_key", e, t.planKey);
   }
   let u = B7(r, "stableID", null);
-  let p = pp() ?? null;
+  let p = getAnonymousId() ?? null;
   let m = q3(u, p);
   o || AQ("team_id", s, t.teamId);
   d || AQ("org_id", l, t.orgId);
@@ -64,7 +64,7 @@ export function $$k6(e, t) {
     disableAutoMetricsLogging: !0,
     disableErrorLogging: !0,
     initTimeoutMs: i,
-    overrideStableID: pp(),
+    overrideStableID: getAnonymousId(),
     initCompletionCallback: e,
     updateUserCompletionCallback: t,
     fetchMode: "cache-or-network",
@@ -74,7 +74,7 @@ export function $$k6(e, t) {
 }
 export function $$R11(e, t, i, s) {
   let u = getInitialOptions();
-  let m = pp();
+  let m = getAnonymousId();
   e || t || i || m || s || Us("No userId, nor teamId, nor orgId, not planKey, nor analytics anonymous ID supplied to getStatsigUser.");
   let h = $$w0({
     userId: e,
@@ -93,16 +93,16 @@ export function $$R11(e, t, i, s) {
       figma_service: "figma_app",
       integration_host: getInitialOptions().integration_host || b,
       page_app_type: function () {
-        if (eD) return eD.beta ? "desktop_beta" : "desktop";
+        if (desktopAPIInstance) return desktopAPIInstance.beta ? "desktop_beta" : "desktop";
         let e = Rf();
         return e ? e.appName || "mobile_unknown" : "web";
       }(),
       page_app_version: function () {
-        if (eD) return eD.getInformationalVersion();
+        if (desktopAPIInstance) return desktopAPIInstance.getInformationalVersion();
         let e = Rf();
         return e?.marketingNumber ? e.marketingNumber : b;
       }(),
-      page_locale: Gq()?.getPrimaryLocale(!1) || b,
+      page_locale: getI18nState()?.getPrimaryLocale(!1) || b,
       release_git_tag: u.release_git_tag || b,
       release_manifest_git_commit: u.release_manifest_git_commit || b,
       release_server_git_commit: u.release_server_git_commit || b,
@@ -147,16 +147,16 @@ export function $$P12(e, t) {
   let i = "number" == typeof t ? {
     timeout: t
   } : t;
-  return Promise.race([fm(i.timeout).then(() => Promise.reject(new MU(i.label))), e]);
+  return Promise.race([delay(i.timeout).then(() => Promise.reject(new MU(i.label))), e]);
 }
 export function $$O3(e) {
   return JSON.stringify([e.userId, e.teamId, e.orgId, e.planKey]);
 }
 export function $$D2(e) {
-  ("local" === e || "staging" === e) && zl.set(UY, !0);
+  ("local" === e || "staging" === e) && atomStoreManager.set(UY, !0);
 }
 export function $$L1(e) {
-  return zl.get(UY) ? Promise.all([e, fm(3e3)]).then(e => e[0]) : e;
+  return atomStoreManager.get(UY) ? Promise.all([e, delay(3e3)]).then(e => e[0]) : e;
 }
 export const Cj = $$w0;
 export const Xu = $$L1;

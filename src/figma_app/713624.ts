@@ -1,7 +1,7 @@
 import { z } from "../905/239603";
 import { FAccessLevelType } from "../figma_app/191312";
 import { kE } from "../figma_app/630077";
-import { O } from "../905/247093";
+import { UNASSIGNED } from "../905/247093";
 export let $$o1 = kE.extend({
   orphaned: z.boolean().optional(),
   member_count: z.number().optional()
@@ -11,7 +11,7 @@ var $$d2 = (e => (e.JOINED = "JOINED", e.NOT_JOINED = "NOT_JOINED", e))($$d2 || 
 export function $$c3() {
   return {
     workspaces: {
-      [O]: 0
+      [UNASSIGNED]: 0
     },
     org_access: {
       [FAccessLevelType.PUBLIC]: 0,
@@ -27,4 +27,4 @@ export function $$c3() {
 export const Kq = $$l0;
 export const hJ = $$o1;
 export const ig = $$d2;
-export const xZ = $$c3; 
+export const xZ = $$c3;

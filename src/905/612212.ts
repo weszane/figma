@@ -1,4 +1,4 @@
-import { eU, zl } from "../figma_app/27355";
+import { atom, atomStoreManager } from "../figma_app/27355";
 var $$n0;
 (e => {
   (e => {
@@ -11,9 +11,9 @@ var $$n0;
     e.FOCUS_SEARCH = "focus_search";
     e.CLEAR_SEARCH = "clear_search";
   })(e.NavAction || (e.NavAction = {}));
-  e.lastActionAtom = eU(void 0);
+  e.lastActionAtom = atom(void 0);
   e.setLastAction = function (t) {
-    zl.set(e.lastActionAtom, t);
+    atomStoreManager.set(e.lastActionAtom, t);
   };
 })($$n0 || ($$n0 = {}));
 export const S = $$n0;

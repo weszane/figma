@@ -8,7 +8,7 @@ import { vo, Y9, hE, jk, nB } from "../figma_app/272243";
 import { L as _$$L } from "../905/704296";
 import { T as _$$T } from "../905/2124";
 import { getFeatureFlags } from "../905/601108";
-import { Xr, md, AY } from "../figma_app/27355";
+import { Xr, useAtomWithSubscription, AY } from "../figma_app/27355";
 import h from "classnames";
 import { ZC } from "../figma_app/39751";
 import { Pt } from "../figma_app/806412";
@@ -16,7 +16,7 @@ import { Point } from "../905/736624";
 import { Us } from "../figma_app/637027";
 import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { In } from "../905/672640";
 import { Y5 } from "../figma_app/455680";
@@ -134,31 +134,31 @@ function Z({
   }, [setPositionAndRun]);
   let s = useMemo(() => [{
     pos: [-1, 1],
-    label: _$$t("slides.properties_panel.rewrite_text.tone_professional_concise")
+    label: getI18nString("slides.properties_panel.rewrite_text.tone_professional_concise")
   }, {
     pos: [0, 1],
-    label: _$$t("slides.properties_panel.rewrite_text.tone_professional")
+    label: getI18nString("slides.properties_panel.rewrite_text.tone_professional")
   }, {
     pos: [1, 1],
-    label: _$$t("slides.properties_panel.rewrite_text.tone_professional_expanded")
+    label: getI18nString("slides.properties_panel.rewrite_text.tone_professional_expanded")
   }, {
     pos: [-1, 0],
-    label: _$$t("slides.properties_panel.rewrite_text.tone_concise")
+    label: getI18nString("slides.properties_panel.rewrite_text.tone_concise")
   }, {
     pos: [0, 0],
-    label: _$$t("slides.properties_panel.rewrite_text.reset")
+    label: getI18nString("slides.properties_panel.rewrite_text.reset")
   }, {
     pos: [1, 0],
-    label: _$$t("slides.properties_panel.rewrite_text.tone_expanded")
+    label: getI18nString("slides.properties_panel.rewrite_text.tone_expanded")
   }, {
     pos: [-1, -1],
-    label: _$$t("slides.properties_panel.rewrite_text.tone_casual_concise")
+    label: getI18nString("slides.properties_panel.rewrite_text.tone_casual_concise")
   }, {
     pos: [0, -1],
-    label: _$$t("slides.properties_panel.rewrite_text.tone_casual")
+    label: getI18nString("slides.properties_panel.rewrite_text.tone_casual")
   }, {
     pos: [1, -1],
-    label: _$$t("slides.properties_panel.rewrite_text.tone_casual_expanded")
+    label: getI18nString("slides.properties_panel.rewrite_text.tone_casual_expanded")
   }].map(({
     pos: [e, t],
     label: r
@@ -178,7 +178,7 @@ function Z({
     className: m()(X, "slides_rewrite_tone_dial--gridLayer--mhWQF"),
     ref: r,
     tabIndex: -1,
-    "aria-label": _$$t("slides.properties_panel.rewrite_text.tone_grid"),
+    "aria-label": getI18nString("slides.properties_panel.rewrite_text.tone_grid"),
     role: "group",
     children: s
   });
@@ -191,8 +191,8 @@ function Q(e) {
   let [a, s] = t;
   let o = Math.abs(a) < fm && Math.abs(s) < fm;
   let l = canResetTone && {
-    "aria-label": _$$t("slides.properties_panel.rewrite_text.reset"),
-    "data-tooltip": _$$t("slides.properties_panel.rewrite_text.reset"),
+    "aria-label": getI18nString("slides.properties_panel.rewrite_text.reset"),
+    "data-tooltip": getI18nString("slides.properties_panel.rewrite_text.reset"),
     "data-tooltip-type": "text",
     "data-tooltip-offset-y": 20,
     "data-tooltip-show-above": !0
@@ -238,16 +238,16 @@ function et() {
     "aria-hidden": !0,
     children: [jsx("div", {
       className: c("slides_rewrite_tone_dial--top--Gmg5H", s),
-      children: tx("slides.properties_panel.rewrite_text.tone_professional")
+      children: renderI18nText("slides.properties_panel.rewrite_text.tone_professional")
     }), jsx("div", {
       className: c("slides_rewrite_tone_dial--right--mSpd2", o),
-      children: tx("slides.properties_panel.rewrite_text.tone_expanded")
+      children: renderI18nText("slides.properties_panel.rewrite_text.tone_expanded")
     }), jsx("div", {
       className: c("slides_rewrite_tone_dial--bottom--ST24k", l),
-      children: tx("slides.properties_panel.rewrite_text.tone_casual")
+      children: renderI18nText("slides.properties_panel.rewrite_text.tone_casual")
     }), jsx("div", {
       className: c("slides_rewrite_tone_dial--left--rkVeC", d, a),
-      children: tx("slides.properties_panel.rewrite_text.tone_concise")
+      children: renderI18nText("slides.properties_panel.rewrite_text.tone_concise")
     })]
   });
 }
@@ -296,11 +296,11 @@ let $$ei0 = memo(function () {
       className: _$$s.flex.gap8.itemsCenter.p8.pl16.bb1.bSolid.colorBorder.$,
       children: [jsx("div", {
         className: _$$s.textBodyMediumStrong.flex1.$,
-        children: tx("slides.properties_panel.rewrite_text.adjust_tone")
+        children: renderI18nText("slides.properties_panel.rewrite_text.adjust_tone")
       }), jsx(_$$v, {
         location: "SLIDES_REWRITE_MODAL"
       }), jsx(_$$K, {
-        "aria-label": _$$t("common.close"),
+        "aria-label": getI18nString("common.close"),
         onClick: () => {
           e(!1);
         },
@@ -320,7 +320,7 @@ let $$ei0 = memo(function () {
 let $$ea1 = memo(function ({
   onClose: e
 }) {
-  let t = md(_$$F);
+  let t = useAtomWithSubscription(_$$F);
   let r = new Point(t?.initialX, t?.initialY);
   useEffect(() => (B3(JT.SLIDES_REWRITE_TEXT), () => {
     B3(JT.SLIDES_REWRITE_TEXT);
@@ -333,7 +333,7 @@ let $$ea1 = memo(function ({
     children: jsxs(vo, {
       children: [jsxs(Y9, {
         children: [jsx(hE, {
-          children: tx("slides.properties_panel.rewrite_text.adjust_tone")
+          children: renderI18nText("slides.properties_panel.rewrite_text.adjust_tone")
         }), jsx(jk, {
           children: jsx(_$$v, {
             location: "SLIDES_REWRITE_MODAL"
@@ -460,7 +460,7 @@ function eo({
     tonePosition,
     setPositionAndRun
   } = useContext(_$$u);
-  let s = md(iV(Sn.REWRITE));
+  let s = useAtomWithSubscription(iV(Sn.REWRITE));
   let l = useDispatch();
   let d = useRef(null);
   x(d, {
@@ -490,8 +490,8 @@ function eo({
   return jsxs("div", {
     children: [jsxs("div", {
       className: _$$s.flex.justifyBetween.itemsCenter.mb16.textBodyMedium.colorTextSecondary.$,
-      children: [g ? tx("slides.properties_panel.rewrite_text.or_pick_a_preset_or_rewrite") : tx("slides.properties_panel.rewrite_text.or_pick_a_preset"), g && jsx(_$$K, {
-        "aria-label": _$$t("slides.properties_panel.rewrite_text.rewrite_redirect"),
+      children: [g ? renderI18nText("slides.properties_panel.rewrite_text.or_pick_a_preset_or_rewrite") : renderI18nText("slides.properties_panel.rewrite_text.or_pick_a_preset"), g && jsx(_$$K, {
+        "aria-label": getI18nString("slides.properties_panel.rewrite_text.rewrite_redirect"),
         onClick: () => {
           s || (c(), $I({
             moduleToOpen: {
@@ -509,7 +509,7 @@ function eo({
           o$(l);
         },
         htmlAttributes: {
-          "data-tooltip": _$$t("slides.properties_panel.rewrite_text.rewrite_redirect"),
+          "data-tooltip": getI18nString("slides.properties_panel.rewrite_text.rewrite_redirect"),
           "data-tooltip-type": "text",
           "data-tooltip-show-above": !0,
           "data-testid": "rewrite-this-transition-button"
@@ -519,7 +519,7 @@ function eo({
     }), jsxs("div", {
       ref: d,
       className: _$$s.grid.gap8.gridTemplateColumns2.gridTemplateRows2.$,
-      "aria-label": _$$t("slides.properties_panel.rewrite_text.tone_presets"),
+      "aria-label": getI18nString("slides.properties_panel.rewrite_text.tone_presets"),
       role: "group",
       children: [h("executive"), h("technical"), h("basic"), h("educational")]
     })]
@@ -528,7 +528,7 @@ function eo({
 function el() {
   return jsxs("div", {
     className: _$$s.textBodySmall.colorTextSecondary.fontNormal.overflowBreakWord.$,
-    children: [tx("whiteboard.ai_modal.disclaimer"), jsx(Us, {
+    children: [renderI18nText("whiteboard.ai_modal.disclaimer"), jsx(Us, {
       trusted: !0,
       href: nG,
       className: m()(_$$s.inlineBlock.cursorDefault.$, "slides_rewrite_modal--disclaimerLink--a2jK5"),
@@ -537,8 +537,8 @@ function el() {
       }).$,
       target: "_blank",
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": _$$t("whiteboard.ai_modal.learn_more"),
-      "aria-label": _$$t("whiteboard.ai_modal.learn_more"),
+      "data-tooltip": getI18nString("whiteboard.ai_modal.learn_more"),
+      "aria-label": getI18nString("whiteboard.ai_modal.learn_more"),
       innerText: "learn more",
       children: jsx(In, {
         icon: "info-16",

@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useCallback, createRef } from "react";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { uA } from "../figma_app/806412";
 import { D8 } from "../905/511649";
 import { N0, We, GY, zq, oz, wI } from "../figma_app/782261";
@@ -198,7 +198,7 @@ export class $$b0 extends uA {
         let s = t.rowType;
         let o = wI(t);
         let d = o?.getExpandableElement(!0).props.subscribedLibraryKey;
-        az.trackDefinedEvent("assets_panel.toggle_header_expansion", {
+        analyticsEventManager.trackDefinedEvent("assets_panel.toggle_header_expansion", {
           isExpanded: i,
           numChildComponents: n,
           numChildFolders: r,

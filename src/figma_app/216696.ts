@@ -1,5 +1,5 @@
 import { NC } from "../905/17179";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { Sb } from "../905/359847";
 import { Qi } from "../905/172918";
 import { nF } from "../905/350402";
@@ -30,7 +30,7 @@ let $$_1 = nF((e, {
       shelves: n
     }));
   }).catch(e => {
-    x1("collections", "error fetching collections", {
+    logError("collections", "error fetching collections", {
       ...a,
       error: e.toString()
     });
@@ -86,4 +86,4 @@ function m(e, t) {
 }
 export const Dw = $$h0;
 export const sz = $$_1;
-export const wJ = $$p2; 
+export const wJ = $$p2;

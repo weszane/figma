@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { z8, bb } from "../figma_app/399472";
 import { cs } from "../figma_app/740025";
@@ -26,7 +26,7 @@ export function $$h0({
       plugin_id: I0(x) ? x.id : void 0
     }));
     h(F.enqueue({
-      message: _$$t("community.detail_view.accepted_creator_invite")
+      message: getI18nString("community.detail_view.accepted_creator_invite")
     }));
   }, [h, x]);
   let v = useCallback(() => {
@@ -36,7 +36,7 @@ export function $$h0({
       plugin_id: I0(x) ? x.id : void 0
     }));
     h(F.enqueue({
-      message: _$$t("community.detail_view.declined_creator_invite")
+      message: getI18nString("community.detail_view.declined_creator_invite")
     }));
   }, [h, x]);
   return !f || cs(f) || !ot.includes(y) ? null : jsx("div", {
@@ -44,7 +44,7 @@ export function $$h0({
     children: jsx(vR, {
       onClickAccept: g,
       onClickDecline: v,
-      label: _$$t("community.detail_view.you_have_been_added_as_a_creator_of_this_resource")
+      label: getI18nString("community.detail_view.you_have_been_added_as_a_creator_of_this_resource")
     })
   });
 }

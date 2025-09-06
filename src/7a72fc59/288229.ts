@@ -6,7 +6,7 @@ import { A } from "../905/891805";
 import { generateRecordingKey } from "../figma_app/878298";
 import { E } from "../905/277716";
 import { k } from "../905/582200";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { Rb } from "../figma_app/852050";
 import { n as _$$n } from "../905/971006";
 import { Ib } from "../905/129884";
@@ -34,16 +34,16 @@ export function $$_0() {
           className: "local_variables_panel--titleText--7rdD7 draggable_list--panelTitleText--SwKez",
           onClick: t,
           "data-onboarding-key": "local-variables-panel-title",
-          children: tx("variables.local_variables_panel.local_variables_title")
+          children: renderI18nText("variables.local_variables_panel.local_variables_title")
         }), jsx(E, {
           name: "variables_modal_button",
           children: jsx(_$$d, {
             onClick: t,
             recordingKey: generateRecordingKey("localVariablesPanel", "variablesModalButton"),
             "aria-expanded": n,
-            "aria-label": _$$t("variables.local_variables_panel.open_variables_button_tooltip"),
+            "aria-label": getI18nString("variables.local_variables_panel.open_variables_button_tooltip"),
             htmlAttributes: {
-              "data-tooltip": _$$t("variables.local_variables_panel.open_variables_button_tooltip"),
+              "data-tooltip": getI18nString("variables.local_variables_panel.open_variables_button_tooltip"),
               "data-tooltip-type": Ib.TEXT
             },
             children: jsx(A, {})

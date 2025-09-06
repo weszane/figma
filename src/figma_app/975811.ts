@@ -1,10 +1,10 @@
 import { allEqual, arraysEqual } from "../figma_app/656233";
 import { KY, YE } from "../figma_app/492908";
-import { b$ } from "../figma_app/493477";
-import s, { sx } from "../905/449184";
+import { mergeNonNull } from "../figma_app/493477";
+import s, { trackEventAnalytics } from "../905/449184";
 import o, { O4 } from "../905/777187";
-import { Lo } from "../905/714362";
-import { t as _$$t } from "../905/303541";
+import { logInfo } from "../905/714362";
+import { getI18nString } from "../905/303541";
 import { Q8, SX } from "../905/216495";
 import { bA, _q } from "../905/668764";
 export class $$p5 extends Error {
@@ -25,7 +25,7 @@ export class $$_3 {
     e = this.preProcessForExpressionEvaluation(e);
     let r = O4(e, t);
     if (r.error) {
-      Lo("NumberFormatter::parse", "Could not parse input", {
+      logInfo("NumberFormatter::parse", "Could not parse input", {
         str: e,
         currentValue: t
       });
@@ -73,7 +73,7 @@ export class $$h6 extends $$_3 {
     return this.floatingPointFormat && r && t.length - 1 > this.floatingPointFormat.maxNumDigits ? String(parseFloat(e.toFixed(1))) : t;
   }
   parse(e, t) {
-    /[0-9]+\,[0-9]+/g.test(e) && sx("editor-parsing-float-input-with-comma", {
+    /[0-9]+\,[0-9]+/g.test(e) && trackEventAnalytics("editor-parsing-float-input-with-comma", {
       input: e
     });
     return super.parse(e, t);
@@ -101,11 +101,11 @@ export class $$g8 {
   }
   parse(e, t) {
     e = e.trim().toLocaleLowerCase();
-    let r = _$$t("fullscreen.auto").toLocaleLowerCase();
+    let r = getI18nString("fullscreen.auto").toLocaleLowerCase();
     return (!this.allowEmpty || e.length) && r.startsWith(e) ? Q8 : this.pixelFormatter.parse(e, t);
   }
   format(e) {
-    if (SX(e)) return _$$t("fullscreen.properties_panel.stack_panel.auto");
+    if (SX(e)) return getI18nString("fullscreen.properties_panel.stack_panel.auto");
     if (this.allowUnformatted) try {
       return this.pixelFormatter.format(e);
     } catch {
@@ -239,11 +239,11 @@ export class $$b10 extends $$_3 {
     if (null == e) return "";
     switch (this.outputUnit) {
       case 0:
-        return _$$t("number_formatters.time_duration_seconds_abbreviated", {
+        return getI18nString("number_formatters.time_duration_seconds_abbreviated", {
           numberOfSeconds: parseFloat(e.toFixed(2))
         });
       case 1:
-        return _$$t("number_formatters.time_duration_milliseconds_abbreviated", {
+        return getI18nString("number_formatters.time_duration_milliseconds_abbreviated", {
           numberOfMilliseconds: Math.round(1e3 * e)
         });
     }
@@ -355,7 +355,7 @@ export class $$x16 extends $$_3 {
 }
 export class $$N11 extends $$_3 {
   constructor(e = {}) {
-    super(b$({
+    super(mergeNonNull({
       smallNudgeAmount: -1,
       bigNudgeAmount: -15
     }, e));
@@ -469,7 +469,7 @@ export class $$L1 extends $$O13 {
     return this.allowEmpty && "" === e || "auto" === e.toLowerCase() ? this.autoValue : super.parse(e, t);
   }
   format(e) {
-    return null == e || isNaN(e.value) ? "" : this.isAuto(e) ? _$$t("fullscreen.auto") : super.format(e);
+    return null == e || isNaN(e.value) ? "" : this.isAuto(e) ? getI18nString("fullscreen.auto") : super.format(e);
   }
   getNudgeAmount(e, t) {
     return this.isAuto(t) ? 0 : super.getNudgeAmount(e, t);

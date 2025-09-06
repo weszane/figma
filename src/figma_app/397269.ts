@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
-import { md } from "../figma_app/27355";
-import { t, tx } from "../905/303541";
+import { useAtomWithSubscription } from "../figma_app/27355";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { E as _$$E } from "../905/453826";
 import { e as _$$e } from "../905/621515";
 import { r1 } from "../figma_app/545877";
@@ -13,14 +13,14 @@ let $$h2 = "plugin-publish-invite-publishers-onboarding-event";
 let $$m1 = "plugin-publish-invite-publishers-click-event";
 let g = "seen_plugin_publish_invite_publishers_onboarding";
 let f = r1(g);
-let E = () => t("rcs.plugin_publish.work_with_other_developers");
+let E = () => getI18nString("rcs.plugin_publish.work_with_other_developers");
 function y() {
   return jsx("p", {
-    children: tx("rcs.plugin_publish.if_anyone_helped")
+    children: renderI18nText("rcs.plugin_publish.if_anyone_helped")
   });
 }
 export function $$b0() {
-  let e = md(f);
+  let e = useAtomWithSubscription(f);
   let t = _$$e({
     overlay: qw_,
     priority: N.SECONDARY_MODAL

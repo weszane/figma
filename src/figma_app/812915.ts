@@ -8,9 +8,9 @@ import { glU } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { md, zl, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, atomStoreManager, Xr } from "../figma_app/27355";
 import { FJ } from "../905/508367";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { sf } from "../905/929976";
 import { eY } from "../figma_app/722362";
 import { q5 } from "../figma_app/516028";
@@ -23,11 +23,11 @@ import { Jl } from "../figma_app/114522";
 import { td, St } from "../figma_app/558805";
 import { B5, Oc } from "../figma_app/552876";
 export function $$N6() {
-  let e = md(Jl);
+  let e = useAtomWithSubscription(Jl);
   let t = eY();
   let r = useMemo(() => {
     if (!e || "-1:-1" === e) {
-      let e = zl.get(nM);
+      let e = atomStoreManager.get(nM);
       return W(e, NJ, "/App.tsx") || null;
     }
     return function (e, t) {
@@ -60,7 +60,7 @@ export function $$C2() {
           let t;
           t = null;
           null != (t = FJ(e)) && t.focus();
-        } else $D(_$$e.AI_FOR_PRODUCTION, Error("Failed to generate Rev preview link for navigation"));
+        } else reportError(_$$e.AI_FOR_PRODUCTION, Error("Failed to generate Rev preview link for navigation"));
       }, [r]);
     }(),
     exitFigmakeFullscreenView: function () {
@@ -104,7 +104,7 @@ export function $$L1() {
     entryPointCodeInstance
   } = $$N6();
   let t = Xr(td);
-  let r = md(St);
+  let r = useAtomWithSubscription(St);
   let i = entryPointCodeInstance?.sourceCode === j && (!getFeatureFlags().make_import_improvements_experimental || !r);
   useEffect(() => {
     t(i);

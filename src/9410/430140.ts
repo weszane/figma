@@ -5,14 +5,14 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { vN } from "../7222/396421";
 import { K } from "../905/443068";
 import { L } from "../905/704296";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { ON } from "../9410/148230";
 var a = n;
 function p({
   onClick: e
 }) {
   return jsx(K, {
-    "aria-label": t("common.close"),
+    "aria-label": getI18nString("common.close"),
     onClick: e,
     children: jsx(L, {})
   });

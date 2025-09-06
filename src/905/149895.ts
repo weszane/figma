@@ -2,9 +2,9 @@ import { useCallback } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { Ez5 } from "../figma_app/763686";
 import { l as _$$l } from "../905/716947";
-import { md, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, Xr } from "../figma_app/27355";
 import { XHR } from "../905/910117";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/302958";
 import { zX } from "../905/576487";
 import { ZS } from "../figma_app/519839";
@@ -18,7 +18,7 @@ import { CR, Dl, oX, ke } from "../905/58274";
 export function $$b1(e) {
   e(F.enqueue({
     type: CR,
-    message: t("slides.templates.publish_actions.toast.unpublish_success"),
+    message: getI18nString("slides.templates.publish_actions.toast.unpublish_success"),
     icon: zX.CHECK
   }));
 }
@@ -27,12 +27,12 @@ export function $$v0(e) {
     type: CR,
     error: !0,
     icon: zX.EXCLAMATION,
-    message: t("slides.templates.publish_actions.toast.unpublish_error")
+    message: getI18nString("slides.templates.publish_actions.toast.unpublish_error")
   }));
 }
 export function $$I2() {
   let e = useDispatch();
-  let t = md(_g);
+  let t = useAtomWithSubscription(_g);
   let i = Xr(UM);
   let d = Md(t);
   let c = useSelector(e => AC(e));

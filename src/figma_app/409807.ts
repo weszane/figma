@@ -13,12 +13,12 @@ import { l7 } from "../905/189185";
 import { M as _$$M2 } from "../905/512402";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { M2, eU, fp, Xr } from "../figma_app/27355";
+import { createAtomWithEquality, atom, useAtomValueAndSetter, Xr } from "../figma_app/27355";
 import { zN } from "../905/19536";
 import { A as _$$A } from "../vendor/90566";
 import { am } from "../figma_app/901889";
-import { R as _$$R2 } from "../905/103090";
-import { t as _$$t } from "../905/303541";
+import { selectWithShallowEqual } from "../905/103090";
+import { getI18nString } from "../905/303541";
 import { ak } from "../figma_app/8833";
 import { PZ, Lk } from "../figma_app/975811";
 import { Y5 } from "../figma_app/455680";
@@ -65,19 +65,19 @@ export function $$X34(e) {
 export function $$q39(e) {
   switch (e) {
     case 0:
-      return _$$t("fullscreen.properties_panel.stack_panel.top_padding");
+      return getI18nString("fullscreen.properties_panel.stack_panel.top_padding");
     case 1:
-      return _$$t("fullscreen.properties_panel.stack_panel.right_padding");
+      return getI18nString("fullscreen.properties_panel.stack_panel.right_padding");
     case 2:
-      return _$$t("fullscreen.properties_panel.stack_panel.bottom_padding");
+      return getI18nString("fullscreen.properties_panel.stack_panel.bottom_padding");
     case 3:
-      return _$$t("fullscreen.properties_panel.stack_panel.left_padding");
+      return getI18nString("fullscreen.properties_panel.stack_panel.left_padding");
     case 4:
-      return _$$t("fullscreen.properties_panel.stack_panel.horizontal_padding");
+      return getI18nString("fullscreen.properties_panel.stack_panel.horizontal_padding");
     case 5:
-      return _$$t("fullscreen.properties_panel.stack_panel.vertical_padding");
+      return getI18nString("fullscreen.properties_panel.stack_panel.vertical_padding");
     case 6:
-      return _$$t("fullscreen.properties_panel.stack_panel.all_paddings");
+      return getI18nString("fullscreen.properties_panel.stack_panel.all_paddings");
   }
 }
 function J(e, t) {
@@ -423,7 +423,7 @@ export function $$e_22() {
     maxWidth,
     minHeight,
     maxHeight
-  } = _$$R2(e => {
+  } = selectWithShallowEqual(e => {
     let {
       minWidth: _minWidth,
       maxWidth: _maxWidth,
@@ -523,7 +523,7 @@ export function $$eT8() {
 }
 class eI extends PZ {
   format(e) {
-    return null == e ? "" : "number" != typeof e && e !== Q8 ? e === $$ew43 ? _$$t("fullscreen.properties_panel.apply_variable_ellipses") : (debug(!0, "Unknown stack spacing dropdown option: '" + e + "'"), "") : super.format(e);
+    return null == e ? "" : "number" != typeof e && e !== Q8 ? e === $$ew43 ? getI18nString("fullscreen.properties_panel.apply_variable_ellipses") : (debug(!0, "Unknown stack spacing dropdown option: '" + e + "'"), "") : super.format(e);
   }
 }
 export class $$eS17 extends Lk {
@@ -535,40 +535,40 @@ export class $$eS17 extends Lk {
   format(e) {
     if (null == e) return "";
     if ("number" != typeof e) {
-      let t = e => gl(e) ? _$$t("fullscreen.mixed") : e?.toFixed(0);
+      let t = e => gl(e) ? getI18nString("fullscreen.mixed") : e?.toFixed(0);
       switch (e) {
         case mKm[mKm.FILL_CONTAINER]:
-          return _$$t("fullscreen.properties_panel.stack_panel.al.fill");
+          return getI18nString("fullscreen.properties_panel.stack_panel.al.fill");
         case mKm[mKm.FIXED]:
-          return "width" === this.activeDimension ? _$$t("fullscreen.properties_panel.stack_panel.al.fixed.width", {
+          return "width" === this.activeDimension ? getI18nString("fullscreen.properties_panel.stack_panel.al.fixed.width", {
             value: t(this.minmax.width.actual.value)
-          }) : _$$t("fullscreen.properties_panel.stack_panel.al.fixed.height", {
+          }) : getI18nString("fullscreen.properties_panel.stack_panel.al.fixed.height", {
             value: t(this.minmax.height.actual.value)
           });
         case mKm[mKm.HUG_CONTENT]:
-          return _$$t("fullscreen.properties_panel.stack_panel.al.hug");
+          return getI18nString("fullscreen.properties_panel.stack_panel.al.hug");
         case $$eA28:
-          return this.minmax.width.min.enabled ? _$$t("fullscreen.properties_panel.stack_panel.minmax.min_width_value", {
+          return this.minmax.width.min.enabled ? getI18nString("fullscreen.properties_panel.stack_panel.minmax.min_width_value", {
             value: t(this.minmax.width.min.value)
-          }) : _$$t("fullscreen.properties_panel.stack_panel.minmax.min_width_add");
+          }) : getI18nString("fullscreen.properties_panel.stack_panel.minmax.min_width_add");
         case $$ex10:
-          return this.minmax.width.max.enabled ? _$$t("fullscreen.properties_panel.stack_panel.minmax.max_width_value", {
+          return this.minmax.width.max.enabled ? getI18nString("fullscreen.properties_panel.stack_panel.minmax.max_width_value", {
             value: t(this.minmax.width.max.value)
-          }) : _$$t("fullscreen.properties_panel.stack_panel.minmax.max_width_add");
+          }) : getI18nString("fullscreen.properties_panel.stack_panel.minmax.max_width_add");
         case $$eN45:
-          return this.minmax.height.min.enabled ? _$$t("fullscreen.properties_panel.stack_panel.minmax.min_height_value", {
+          return this.minmax.height.min.enabled ? getI18nString("fullscreen.properties_panel.stack_panel.minmax.min_height_value", {
             value: t(this.minmax.height.min.value)
-          }) : _$$t("fullscreen.properties_panel.stack_panel.minmax.min_height_add");
+          }) : getI18nString("fullscreen.properties_panel.stack_panel.minmax.min_height_add");
         case $$eC24:
-          return this.minmax.height.max.enabled ? _$$t("fullscreen.properties_panel.stack_panel.minmax.max_height_value", {
+          return this.minmax.height.max.enabled ? getI18nString("fullscreen.properties_panel.stack_panel.minmax.max_height_value", {
             value: t(this.minmax.height.max.value)
-          }) : _$$t("fullscreen.properties_panel.stack_panel.minmax.max_height_add");
+          }) : getI18nString("fullscreen.properties_panel.stack_panel.minmax.max_height_add");
         case $$ew43:
-          return _$$t("fullscreen.properties_panel.apply_variable_ellipses");
+          return getI18nString("fullscreen.properties_panel.apply_variable_ellipses");
         case $$eL44:
           let r = "width" === this.activeDimension && this.minmax.width.min.enabled || "height" === this.activeDimension && this.minmax.height.min.enabled;
           let n = "width" === this.activeDimension && this.minmax.width.max.enabled || "height" === this.activeDimension && this.minmax.height.max.enabled;
-          return r && n ? _$$t("fullscreen.properties_panel.stack_panel.remove_min_and_max") : r ? _$$t("fullscreen.properties_panel.stack_panel.remove_min") : _$$t("fullscreen.properties_panel.stack_panel.remove_max");
+          return r && n ? getI18nString("fullscreen.properties_panel.stack_panel.remove_min_and_max") : r ? getI18nString("fullscreen.properties_panel.stack_panel.remove_min") : getI18nString("fullscreen.properties_panel.stack_panel.remove_max");
         default:
           debug(!0, "Unknown width/height dropdown option: '" + e + "'");
           return "";
@@ -590,7 +590,7 @@ class ev extends Lk {
       case $$eR0:
         return this.getRemoveLimitString();
       case $$ew43:
-        return _$$t("fullscreen.properties_panel.apply_variable_ellipses");
+        return getI18nString("fullscreen.properties_panel.apply_variable_ellipses");
       default:
         debug(!0, "Unknown width/height dropdown option: '" + e + "'");
         return "";
@@ -598,14 +598,14 @@ class ev extends Lk {
     return super.format(e);
   }
   getCurrentSizeString() {
-    return "width" === this.minmaxApi.widthOrHeight ? _$$t("fullscreen.properties_panel.stack_panel.minmax.apply_current_width") : _$$t("fullscreen.properties_panel.stack_panel.minmax.apply_current_height");
+    return "width" === this.minmaxApi.widthOrHeight ? getI18nString("fullscreen.properties_panel.stack_panel.minmax.apply_current_width") : getI18nString("fullscreen.properties_panel.stack_panel.minmax.apply_current_height");
   }
   getRemoveLimitString() {
     switch (this.minmaxApi.widthOrHeight) {
       case "width":
-        return "min" === this.minmaxApi.minOrMax ? _$$t("fullscreen.properties_panel.stack_panel.minmax.remove_min_width") : _$$t("fullscreen.properties_panel.stack_panel.minmax.remove_max_width");
+        return "min" === this.minmaxApi.minOrMax ? getI18nString("fullscreen.properties_panel.stack_panel.minmax.remove_min_width") : getI18nString("fullscreen.properties_panel.stack_panel.minmax.remove_max_width");
       case "height":
-        return "min" === this.minmaxApi.minOrMax ? _$$t("fullscreen.properties_panel.stack_panel.minmax.remove_min_height") : _$$t("fullscreen.properties_panel.stack_panel.minmax.remove_max_height");
+        return "min" === this.minmaxApi.minOrMax ? getI18nString("fullscreen.properties_panel.stack_panel.minmax.remove_min_height") : getI18nString("fullscreen.properties_panel.stack_panel.minmax.remove_max_height");
     }
   }
 }
@@ -627,14 +627,14 @@ let $$eP31 = {
     max: !1
   }
 };
-let $$eD6 = M2(eU($$eP31));
+let $$eD6 = createAtomWithEquality(atom($$eP31));
 export function $$ek37(e) {
   return e.width.min || e.width.max || e.height.min || e.height.max;
 }
-export let $$eM7 = M2(eU(null));
+export let $$eM7 = createAtomWithEquality(atom(null));
 export function $$eF41(e) {
   let t = $$e_22();
-  let [r, i] = fp($$eD6);
+  let [r, i] = useAtomValueAndSetter($$eD6);
   let a = Xr($$eM7);
   return useCallback(() => {
     a(null);
@@ -652,13 +652,13 @@ export function $$eF41(e) {
     });
   }, [t, r, a, i, e]);
 }
-let ej = M2(eU(null));
+let ej = createAtomWithEquality(atom(null));
 export var $$eU33 = (e => (e[e.NO = 0] = "NO", e[e.YES = 1] = "YES", e[e.YES_ONLY_MIN_MAX = 2] = "YES_ONLY_MIN_MAX", e))($$eU33 || {});
 let eB = {
   count: 0
 };
 export function $$eG2() {
-  let [e, t] = fp(ej);
+  let [e, t] = useAtomValueAndSetter(ej);
   let r = _$$A(useCallback((t, r, n, i) => {
     if (i !== eB.count) return;
     let a = !e?.minMaxOnly || "minmax" === t;

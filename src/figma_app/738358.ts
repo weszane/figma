@@ -1,6 +1,6 @@
 import { fp8 } from "../figma_app/763686";
-import { zl } from "../figma_app/27355";
-import { t as _$$t } from "../905/303541";
+import { atomStoreManager } from "../figma_app/27355";
+import { getI18nString } from "../905/303541";
 import { MZ } from "../figma_app/925970";
 import { F } from "../905/302958";
 import { W } from "../figma_app/669294";
@@ -9,24 +9,24 @@ import { Y5 } from "../figma_app/455680";
 export let $$n0;
 class p {
   setMentionsTypeaheadQuery(e) {
-    zl.set(h1, e);
+    atomStoreManager.set(h1, e);
   }
   clearMentionsTypeaheadQuery(e, t) {
     if (e) {
-      let e = zl.get(h1);
-      let r = zl.get(LQ)?.index || null;
-      let n = zl.get(wm);
+      let e = atomStoreManager.get(h1);
+      let r = atomStoreManager.get(LQ)?.index || null;
+      let n = atomStoreManager.get(wm);
       W(e, t, r, n);
     }
-    zl.set(h1, null);
+    atomStoreManager.set(h1, null);
     this.endSearchSession();
   }
   isShowingMentionsTypeaheadResults() {
-    let e = zl.get(LQ);
+    let e = atomStoreManager.get(LQ);
     return !!e?.mentions?.length;
   }
   setMentionsTypeaheadTargetRect(e, t, r) {
-    zl.set(MX, {
+    atomStoreManager.set(MX, {
       x: e,
       y: t,
       height: r,
@@ -35,21 +35,21 @@ class p {
   }
   startSearchSession() {
     let e = MZ();
-    zl.set(wm, e);
+    atomStoreManager.set(wm, e);
     return e;
   }
   endSearchSession() {
-    let e = zl.get(wm);
-    zl.set(wm, "");
+    let e = atomStoreManager.get(wm);
+    atomStoreManager.set(wm, "");
     return e;
   }
   showVisualBellForPastedMentions(e, t) {
     Y5.dispatch(F.enqueue({
-      message: _$$t("whiteboard.visual_bell.canvas_at_mentions_send_notifications_from_pasted_mentions", {
+      message: getI18nString("whiteboard.visual_bell.canvas_at_mentions_send_notifications_from_pasted_mentions", {
         numUsers: t
       }),
       button: {
-        text: _$$t("whiteboard.visual_bell.canvas_at_mentions_send_notifications_from_pasted_mentions_action"),
+        text: getI18nString("whiteboard.visual_bell.canvas_at_mentions_send_notifications_from_pasted_mentions_action"),
         action: () => {
           fp8?.allowSendNotificationsForPastedMentions(e);
         }

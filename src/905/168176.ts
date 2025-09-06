@@ -1,9 +1,9 @@
 import { td } from "../figma_app/930338";
-import { d } from "../905/810750";
+import { MultiSetMap } from "../905/810750";
 import { $7 } from "../905/258397";
 export class $$s0 {
   constructor(e, t) {
-    for (let [i, n] of (this.scene = e, this.ownFailuresById = new d(), this.childrenWithFailuresById = new d(), this.badgesById = new Map(), this.propertiesById = new Map(), t.entries())) {
+    for (let [i, n] of (this.scene = e, this.ownFailuresById = new MultiSetMap(), this.childrenWithFailuresById = new MultiSetMap(), this.badgesById = new Map(), this.propertiesById = new Map(), t.entries())) {
       let t = e.getNodeByGuid(i);
       t && this.processEntry(t, n);
     }

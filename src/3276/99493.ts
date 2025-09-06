@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { Fl } from "../figma_app/656450";
 import { Ro } from "../figma_app/805373";
 export function $$r1({
@@ -42,10 +42,10 @@ export function $$l0({
     className: r
   }) : Fl(e) ? jsx("span", {
     className: s,
-    children: tx("voting.voter_username.visitor")
+    children: renderI18nText("voting.voter_username.visitor")
   }) : jsx("span", {
     className: s,
-    children: tx("voting.voter_username.unavailable")
+    children: renderI18nText("voting.voter_username.unavailable")
   });
 }
 export const m = $$l0;

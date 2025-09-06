@@ -4,8 +4,8 @@ import { shuffle } from "../figma_app/656233";
 import { getFeatureFlags } from "../905/601108";
 import o from "classnames";
 import { am } from "../figma_app/901889";
-import { Ay } from "../figma_app/778880";
-import { t as _$$t } from "../905/303541";
+import { BrowserInfo } from "../figma_app/778880";
+import { getI18nString } from "../905/303541";
 import { y } from "../figma_app/297957";
 import { q5 } from "../figma_app/516028";
 import { f6, Hn, xD, ri } from "../905/337179";
@@ -15,16 +15,16 @@ export function $$g2({
   userId: t
 }) {
   let i = [{
-    suggestionDisplay: _$$t("comments_suggestions.pending_user_invite_suggestions.take_a_look_here"),
-    suggestionInsert: _$$t("comments_suggestions.pending_user_invite_suggestions.take_a_look_here"),
+    suggestionDisplay: getI18nString("comments_suggestions.pending_user_invite_suggestions.take_a_look_here"),
+    suggestionInsert: getI18nString("comments_suggestions.pending_user_invite_suggestions.take_a_look_here"),
     suggestionsKey: "take_a_look_here"
   }, {
-    suggestionDisplay: _$$t("comments_suggestions.pending_user_invite_suggestions.id_love_your_feedback_about"),
-    suggestionInsert: _$$t("comments_suggestions.pending_user_invite_suggestions.insert_id_love_your_feedback_about"),
+    suggestionDisplay: getI18nString("comments_suggestions.pending_user_invite_suggestions.id_love_your_feedback_about"),
+    suggestionInsert: getI18nString("comments_suggestions.pending_user_invite_suggestions.insert_id_love_your_feedback_about"),
     suggestionsKey: "id_love_your_feedback"
   }, {
-    suggestionDisplay: _$$t("comments_suggestions.pending_user_invite_suggestions.what_do_you_think"),
-    suggestionInsert: _$$t("comments_suggestions.pending_user_invite_suggestions.what_do_you_think"),
+    suggestionDisplay: getI18nString("comments_suggestions.pending_user_invite_suggestions.what_do_you_think"),
+    suggestionInsert: getI18nString("comments_suggestions.pending_user_invite_suggestions.what_do_you_think"),
     suggestionsKey: "what_do_you_think"
   }];
   return {
@@ -39,7 +39,7 @@ export function $$_1(e) {
   let a = q5()?.teamId;
   let o = y()({
     isDraftFile: !a,
-    isMobile: Ay.isMobileBrowser,
+    isMobile: BrowserInfo.isMobileBrowser,
     showExpAtMentionInvite: !!getFeatureFlags().show_at_mention_invited_users,
     isFigmaDesign: !0,
     inOrg: !1

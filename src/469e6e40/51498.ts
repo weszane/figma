@@ -12,7 +12,7 @@ import { useDispatch } from "../vendor/514228";
 import { $n } from "../905/521428";
 import { J as _$$J } from "../905/129695";
 import { xk } from "@stylexjs/stylex";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { Y as _$$Y } from "../905/830372";
 import { E as _$$E } from "../905/984674";
@@ -88,13 +88,13 @@ function E(e) {
       },
       children: [jsx("span", {
         className: "x1ubm3qo x540y09 x578rrm x17evb6q xpyeu0a x1akne3o",
-        children: tx("view_selectors.file_browser.org_idp_management")
+        children: renderI18nText("view_selectors.file_browser.org_idp_management")
       }), jsx($n, {
         onClick: a,
         variant: "primary",
         iconPrefix: jsx(_$$J, {}),
         children: jsx(_$$E, {
-          children: tx("idp_management.add_idp")
+          children: renderI18nText("idp_management.add_idp")
         })
       })]
     })
@@ -125,7 +125,7 @@ function F(e) {
         a = `${t}...${n}`;
       }
       t(_$$F.enqueue({
-        message: _$$t("idp_management.text_copied", {
+        message: getI18nString("idp_management.text_copied", {
           copiedText: a
         })
       }));
@@ -226,11 +226,11 @@ function er({
   return e ? jsx(_$$E3, {
     variant: "successOutline",
     size: "md",
-    children: _$$t("idp_management.flyout.configured")
+    children: getI18nString("idp_management.flyout.configured")
   }) : jsx(_$$E3, {
     variant: "warningOutline",
     size: "md",
-    children: _$$t("idp_management.flyout.unconfigured")
+    children: getI18nString("idp_management.flyout.unconfigured")
   });
 }
 function el(e) {
@@ -276,11 +276,11 @@ function el(e) {
       children: [!l && jsxs("h3", {
         className: "x15cjxed x1xevgq6 x1lh6uom x45is6j x1bp5d4j x1akne3o x12sbs06 x78zum5 x1q0g3np x1nfngrj x1pha0wt",
         children: [jsx("span", {
-          children: _$$t("idp_management.flyout.identity_provider")
+          children: getI18nString("idp_management.flyout.identity_provider")
         }), !ei(idpData) && jsx(_$$E3, {
           variant: "warningOutline",
           size: "md",
-          children: _$$t("idp_management.flyout.unconfigured")
+          children: getI18nString("idp_management.flyout.unconfigured")
         })]
       }), jsxs("div", {
         className: "x78zum5 xdt5ytf x1excjyp",
@@ -288,7 +288,7 @@ function el(e) {
           className: "x78zum5 xdt5ytf xg2d0mh",
           children: [jsx("label", {
             className: "x1g2dr8m xkezfkh xiqqdae x14kxzw3 x1giz659 x1j61x8r x1akne3o",
-            children: _$$t("idp_management.flyout.type")
+            children: getI18nString("idp_management.flyout.type")
           }), jsx("div", {
             className: "xclx6tv x1qxcl5b x17akokd xno9bf3 x1betce5 x1akne3o",
             children: idpData.idpName || jsx(es, {})
@@ -297,7 +297,7 @@ function el(e) {
           className: "x78zum5 xdt5ytf xg2d0mh",
           children: [jsx("label", {
             className: "x1g2dr8m xkezfkh xiqqdae x14kxzw3 x1giz659 x1j61x8r x1akne3o",
-            children: _$$t("idp_management.flyout.entity_id")
+            children: getI18nString("idp_management.flyout.entity_id")
           }), jsx("div", {
             className: "xclx6tv x1qxcl5b x17akokd xno9bf3 x1betce5 x1akne3o",
             children: idpData.idpEntityId ? jsx(F, {
@@ -308,7 +308,7 @@ function el(e) {
           className: "x78zum5 xdt5ytf xg2d0mh",
           children: [jsx("label", {
             className: "x1g2dr8m xkezfkh xiqqdae x14kxzw3 x1giz659 x1j61x8r x1akne3o",
-            children: _$$t("idp_management.flyout.sso_url")
+            children: getI18nString("idp_management.flyout.sso_url")
           }), jsx("div", {
             className: "xclx6tv x1qxcl5b x17akokd xno9bf3 x1betce5 x1akne3o",
             children: idpData.ssoUrl ? jsx(F, {
@@ -319,7 +319,7 @@ function el(e) {
       }), !l && jsxs("div", {
         className: "x78zum5 x6s0dn4 xclx6tv x17akokd x1qxcl5b xno9bf3 x1betce5 x1n0bwc9 xpgiz1h",
         children: [jsx("span", {
-          children: _$$t("idp_management.flyout.last_updated")
+          children: getI18nString("idp_management.flyout.last_updated")
         }), jsx("span", {
           className: "x6xxxym",
           children: "\xb7"
@@ -333,14 +333,14 @@ function el(e) {
       ...xk(l ? e_.section : e_.sectionOld),
       children: [!l && jsx("h3", {
         className: "x15cjxed x1xevgq6 x1lh6uom x45is6j x1bp5d4j x1akne3o x12sbs06 x78zum5 x1q0g3np x1nfngrj x1pha0wt",
-        children: _$$t("idp_management.flyout.service_provider")
+        children: getI18nString("idp_management.flyout.service_provider")
       }), jsxs("div", {
         className: "x78zum5 xdt5ytf x1excjyp",
         children: [jsxs("div", {
           className: "x78zum5 xdt5ytf xg2d0mh",
           children: [jsx("label", {
             className: "x1g2dr8m xkezfkh xiqqdae x14kxzw3 x1giz659 x1j61x8r x1akne3o",
-            children: _$$t("idp_management.flyout.tenant_id")
+            children: getI18nString("idp_management.flyout.tenant_id")
           }), jsx("div", {
             className: "xclx6tv x1qxcl5b x17akokd xno9bf3 x1betce5 x1akne3o",
             children: idpData.tenantId ? jsx(F, {
@@ -351,7 +351,7 @@ function el(e) {
           className: "x78zum5 xdt5ytf xg2d0mh",
           children: [jsx("label", {
             className: "x1g2dr8m xkezfkh xiqqdae x14kxzw3 x1giz659 x1j61x8r x1akne3o",
-            children: _$$t("idp_management.flyout.entity_id")
+            children: getI18nString("idp_management.flyout.entity_id")
           }), jsx("div", {
             className: "xclx6tv x1qxcl5b x17akokd xno9bf3 x1betce5 x1akne3o",
             children: idpData.spEntityId ? jsx(F, {
@@ -362,7 +362,7 @@ function el(e) {
           className: "x78zum5 xdt5ytf xg2d0mh",
           children: [jsx("label", {
             className: "x1g2dr8m xkezfkh xiqqdae x14kxzw3 x1giz659 x1j61x8r x1akne3o",
-            children: _$$t("idp_management.flyout.acs_url")
+            children: getI18nString("idp_management.flyout.acs_url")
           }), jsx("div", {
             className: "xclx6tv x1qxcl5b x17akokd xno9bf3 x1betce5 x1akne3o",
             children: idpData.spAcsUrl ? jsx(F, {
@@ -380,11 +380,11 @@ function el(e) {
           onClick: c,
           href: "#",
           trusted: !0,
-          children: tx("org_settings.scim.revoke_token_access")
+          children: renderI18nText("org_settings.scim.revoke_token_access")
         }), _ && jsx("div", {
           className: "x78zum5 x6s0dn4 xclx6tv x17akokd x1qxcl5b xno9bf3 x1betce5 x1n0bwc9 x15r87gk",
           children: jsx("span", {
-            children: tx("org_settings.scim.api_token_generated_at", {
+            children: renderI18nText("org_settings.scim.api_token_generated_at", {
               timestamp: jsx(h1, {
                 date: _
               })
@@ -394,7 +394,7 @@ function el(e) {
           onClick: o,
           href: "#",
           trusted: !0,
-          children: tx("org_settings.scim.generate_api_token")
+          children: renderI18nText("org_settings.scim.generate_api_token")
         })]
       })]
     })]
@@ -414,11 +414,11 @@ function eo(e) {
       horizontalAlignItems: "center",
       direction: "vertical",
       children: [jsx("span", {
-        children: _$$t("idp_management.flyout.no_domain_mappings_added")
+        children: getI18nString("idp_management.flyout.no_domain_mappings_added")
       }), jsx($n, {
         variant: "secondary",
         onClick: openEditConfigurationModal,
-        children: _$$t("idp_management.flyout.add_domain_mapping")
+        children: getI18nString("idp_management.flyout.add_domain_mapping")
       })]
     })
   }) : jsxs("div", {
@@ -430,8 +430,8 @@ function eo(e) {
           className: "xmauxvm"
         }), jsx(_$$p2, {
           type: "search",
-          placeholder: _$$t("idp_management.flyout.search_domains"),
-          "aria-label": _$$t("idp_management.flyout.search_domains"),
+          placeholder: getI18nString("idp_management.flyout.search_domains"),
+          "aria-label": getI18nString("idp_management.flyout.search_domains"),
           value: i,
           onChange: e => r(e)
         })]
@@ -467,7 +467,7 @@ function ed(e) {
         })]
       }), jsx("span", {
         className: "x5mp9sv x1wizv2a xclx6tv x1qxcl5b x17akokd xno9bf3 x1betce5 x1n0bwc9",
-        children: _$$t("idp_management.flyout.member_count", {
+        children: getI18nString("idp_management.flyout.member_count", {
           count: domain.memberCount ?? 0
         })
       })]
@@ -697,10 +697,10 @@ let em = {
                 })]
               }), jsxs("div", {
                 className: "x78zum5 x6s0dn4 xclx6tv x17akokd x1qxcl5b xno9bf3 x1betce5 x1n0bwc9",
-                children: [_$$t("idp_management.flyout.last_updated"), " \xb7", " ", e.idpData.lastUpdated || jsx(es, {})]
+                children: [getI18nString("idp_management.flyout.last_updated"), " \xb7", " ", e.idpData.lastUpdated || jsx(es, {})]
               })]
             }) : jsx(_$$m.Title, {
-              children: _$$t("idp_management.flyout.edit_configuration")
+              children: getI18nString("idp_management.flyout.edit_configuration")
             })
           }), jsx(_$$m.Header, {
             children: jsx("div", {
@@ -709,10 +709,10 @@ let em = {
                 manager: r,
                 children: [jsx(_$$t2.Tab, {
                   ...s.idp_details,
-                  children: _$$t("idp_management.flyout.identity_provider")
+                  children: getI18nString("idp_management.flyout.identity_provider")
                 }), jsx(_$$t2.Tab, {
                   ...s.domain_mapping,
-                  children: _$$t("idp_management.flyout.domain_mapping")
+                  children: getI18nString("idp_management.flyout.domain_mapping")
                 })]
               })
             })
@@ -741,7 +741,7 @@ let em = {
             children: [jsx($n, {
               variant: "secondary",
               onClick: o,
-              children: "idp_details" === r.activeTab ? _$$t("idp_management.flyout.edit_idp") : _$$t("idp_management.flyout.edit_domain_mapping")
+              children: "idp_details" === r.activeTab ? getI18nString("idp_management.flyout.edit_idp") : getI18nString("idp_management.flyout.edit_domain_mapping")
             }), "idp_details" === r.activeTab && jsx($n, {
               variant: "destructiveSecondary",
               onClick: () => {
@@ -749,7 +749,7 @@ let em = {
                   org_saml_config_id: e.idpData.id
                 }).then(() => {
                   a(_$$F.enqueue({
-                    message: _$$t("idp_management.flyout.idp_removed")
+                    message: getI18nString("idp_management.flyout.idp_removed")
                   }));
                 }).catch(e => {
                   a(_$$F.enqueue({
@@ -760,10 +760,10 @@ let em = {
               disabled: c,
               htmlAttributes: c ? {
                 "data-testid": "remove-idp-button",
-                "data-tooltip": _$$t("idp_management.flyout.disabled_remove_idp_tooltip"),
+                "data-tooltip": getI18nString("idp_management.flyout.disabled_remove_idp_tooltip"),
                 "data-tooltip-type": Ib.TEXT
               } : {},
-              children: _$$t("idp_management.flyout.remove_idp")
+              children: getI18nString("idp_management.flyout.remove_idp")
             })]
           })]
         })]
@@ -788,7 +788,7 @@ function eg({
       verified: null !== e.verified_at
     }, e.domain)), a > 0 && jsx("span", {
       className: "x9r1u3d x1akne3o x17akokd x1qxcl5b xno9bf3 x1betce5 xb3r6kr xlyipyv xuxw1ft",
-      children: tx("idp_management.column_header.domains.overflow", {
+      children: renderI18nText("idp_management.column_header.domains.overflow", {
         count: a
       })
     })]
@@ -913,25 +913,25 @@ function ex(e) {
           style: {
             marginRight: "0px"
           },
-          children: t ? _$$t("idp_management.column_header.nickname") : _$$t("idp_management.column_header.tenant_id")
+          children: t ? getI18nString("idp_management.column_header.nickname") : getI18nString("idp_management.column_header.tenant_id")
         }), jsx("div", {
           className: "x1f2tiqu x1wizv2a xdpxx8g xb3r6kr xlyipyv xuxw1ft",
           style: {
             marginRight: "0px"
           },
-          children: _$$t("idp_management.column_header.type")
+          children: getI18nString("idp_management.column_header.type")
         }), jsx("div", {
           className: "x98rzlu xl06hdh xdpxx8g xb3r6kr xlyipyv xuxw1ft",
           style: {
             marginRight: "0px"
           },
-          children: _$$t("idp_management.column_header.entity_id")
+          children: getI18nString("idp_management.column_header.entity_id")
         }), jsx("div", {
           className: "x1i0uq9b xl06hdh xdpxx8g xb3r6kr xlyipyv xuxw1ft",
           style: {
             marginRight: "0px"
           },
-          children: _$$t("idp_management.column_header.domains")
+          children: getI18nString("idp_management.column_header.domains")
         })]
       })
     }), 0 === e.items.length && !e.isLoading && jsx("div", {
@@ -941,7 +941,7 @@ function ex(e) {
         verticalAlignItems: "center",
         horizontalAlignItems: "center",
         children: jsx(_$$E, {
-          children: tx("idp_management.you_have_no_idps")
+          children: renderI18nText("idp_management.you_have_no_idps")
         })
       })
     }), jsx("div", {
@@ -1130,12 +1130,12 @@ function ek(e) {
   let {
     unmappedDomains
   } = e;
-  let a = useMemo(() => 0 === unmappedDomains.length ? "" : 1 === unmappedDomains.length ? tx("idp_management.sso_only_warning_banner.description.one", {
+  let a = useMemo(() => 0 === unmappedDomains.length ? "" : 1 === unmappedDomains.length ? renderI18nText("idp_management.sso_only_warning_banner.description.one", {
     domain: ew(unmappedDomains[0]?.domain)
-  }) : 2 === unmappedDomains.length ? tx("idp_management.sso_only_warning_banner.description.two", {
+  }) : 2 === unmappedDomains.length ? renderI18nText("idp_management.sso_only_warning_banner.description.two", {
     firstDomain: ew(unmappedDomains[0]?.domain),
     secondDomain: ew(unmappedDomains[1]?.domain)
-  }) : tx("idp_management.sso_only_warning_banner.description.many", {
+  }) : renderI18nText("idp_management.sso_only_warning_banner.description.many", {
     firstDomain: ew(unmappedDomains[0]?.domain),
     secondDomain: ew(unmappedDomains[1]?.domain),
     numOthers: unmappedDomains.length - 2
@@ -1147,7 +1147,7 @@ function ek(e) {
       children: jsx(Yy, {
         variant: "warn",
         children: jsx(_$$Q, {
-          title: _$$t("idp_management.sso_only_warning_banner.title"),
+          title: getI18nString("idp_management.sso_only_warning_banner.title"),
           children: a
         })
       })

@@ -3,8 +3,8 @@ import { jsx } from "react/jsx-runtime";
 import { useState, useCallback } from "react";
 import { SmY } from "../figma_app/763686";
 import { l7 } from "../905/189185";
-import { fp, md } from "../figma_app/27355";
-import { sx } from "../905/449184";
+import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
+import { trackEventAnalytics } from "../905/449184";
 import { lg } from "../figma_app/976749";
 import { _Q } from "../figma_app/67099";
 import { _X, Yb, ZT } from "../figma_app/62612";
@@ -13,9 +13,9 @@ import { ri } from "../905/337179";
 import { ph, KG, kh } from "../905/50769";
 let g = zS;
 export function $$f0() {
-  let [e, t] = fp(ph);
-  let s = md(KG);
-  let f = md(kh);
+  let [e, t] = useAtomValueAndSetter(ph);
+  let s = useAtomWithSubscription(KG);
+  let f = useAtomWithSubscription(kh);
   let x = _X({
     subscribeToUpdates_expensive: !0
   });
@@ -30,7 +30,7 @@ export function $$f0() {
       if (emojis && index >= 0 && index < emojis.length) {
         let e = _Q(emojis[index]);
         e && l7.user("insert-emoji", () => {
-          sx("inserted_editor_emoji", {
+          trackEventAnalytics("inserted_editor_emoji", {
             emoji: e
           });
           SmY?.replaceCurrentShortcodeWithEmoji(e);

@@ -1,8 +1,8 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { c2, Jj } from "../905/382883";
-import { md, fp } from "../figma_app/27355";
-import { tx, t as _$$t } from "../905/303541";
+import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { H8, Pf } from "../905/590952";
 import { J, jM, P_, wf, a3 } from "../905/124270";
 import { nX, Rj, hp, GX } from "../905/171315";
@@ -24,12 +24,12 @@ export function $$v0({
   let [l, v] = useState("");
   let E = _$$F(l, WY.CREATOR);
   let x = nv(E.data, dC.USERS);
-  let S = md(J);
-  let w = md(jM);
-  let C = md(P_);
-  let T = md(R9);
-  let k = md(wf);
-  let [R, N] = fp(a3);
+  let S = useAtomWithSubscription(J);
+  let w = useAtomWithSubscription(jM);
+  let C = useAtomWithSubscription(P_);
+  let T = useAtomWithSubscription(R9);
+  let k = useAtomWithSubscription(wf);
+  let [R, N] = useAtomValueAndSetter(a3);
   let P = _$$n();
   let O = _$$k();
   let D = _$$P();
@@ -57,23 +57,23 @@ export function $$v0({
   return jsxs(Fragment, {
     children: [M ? jsx("div", {
       className: Ze,
-      children: tx("search.facets.filter_limit_reached")
+      children: renderI18nText("search.facets.filter_limit_reached")
     }) : jsx(HY, {
       baseId: `${e}-search-bar`,
       basePath: [...t, 0],
-      placeholder: _$$t("search.facets.find_someone"),
+      placeholder: getI18nString("search.facets.find_someone"),
       query: l,
       setQuery: v
     }), GX(l) ? jsx("div", {
       className: p$,
-      children: tx("search.error.max_query_length_exceeded")
+      children: renderI18nText("search.error.max_query_length_exceeded")
     }) : jsxs(Fragment, {
       children: ["loading" === E.status && jsx(_$$e, {
         numRows: 5,
         showSideElement: !0
       }), "errors" === E.status && jsx("div", {
         className: p$,
-        children: tx("search.empty_state.no_results_matching", {
+        children: renderI18nText("search.empty_state.no_results_matching", {
           searchQuery: l
         })
       }), "loaded" === E.status && jsx(I, {
@@ -110,9 +110,9 @@ function I({
   }, [u, i, d, c]);
   return 0 === m.length ? jsx("div", {
     className: p$,
-    children: d ? tx("search.empty_state.no_results_matching", {
+    children: d ? renderI18nText("search.empty_state.no_results_matching", {
       searchQuery: d
-    }) : tx("search.empty_state.no_results_no_query")
+    }) : renderI18nText("search.empty_state.no_results_no_query")
   }) : jsxs(Fragment, {
     children: [m.map((i, r) => {
       let a = `${e}-creator-option-${r}`;

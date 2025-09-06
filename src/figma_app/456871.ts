@@ -1,6 +1,6 @@
 import { AD } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { ed } from "../figma_app/164260";
 export function $$o2(e) {
   let t = $$l4(e);
@@ -47,7 +47,7 @@ export function $$u0(e, t) {
   return a;
 }
 export function $$p1(e) {
-  let t = zl.get(ed);
+  let t = atomStoreManager.get(ed);
   if (!t || t === AD) return [];
   let r = getSingletonSceneGraph().get(t);
   return r ? $$u0(r, e) : [];

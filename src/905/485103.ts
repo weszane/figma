@@ -1,19 +1,27 @@
-import { useRef, useEffect } from "react";
-import { ServiceCategories as _$$e } from "../905/165054";
-import { getInitialOptions, getInitialOptions } from "../figma_app/169182";
-import { $D } from "../905/11";
-import { XHR } from "../905/910117";
-import { eD } from "../figma_app/876459";
-import { Ay as _$$Ay2 } from "../figma_app/778880";
+import { useEffect, useRef } from 'react';
+import { reportError } from '../905/11';
+import { ServiceCategories as _$$e } from '../905/165054';
+import { XHR } from '../905/910117';
+import { getInitialOptions } from '../figma_app/169182';
+import { BrowserInfo } from '../figma_app/778880';
+import { desktopAPIInstance } from '../figma_app/876459';
 function c() {
   let e = [];
-  for (let t of ["mac", "windows", "linux", "ios", "chromeos"]) if (_$$Ay2[t]) {
-    e.push(`os:${t}`);
-    break;
+  for (let t of ['mac', 'windows', 'linux', 'ios', 'chromeos']) {
+    if (BrowserInfo[t]) {
+      e.push(`os:${t}`);
+      break;
+    }
   }
-  if (eD) e.push("browser:figma_desktop"); else for (let t of ["chrome", "firefox", "safari", "msedge", "msie", "ios", "android"]) if (_$$Ay2[t]) {
-    e.push(`browser:${t}`);
-    break;
+  if (desktopAPIInstance) {
+    e.push('browser:figma_desktop');
+  } else {
+    for (let t of ['chrome', 'firefox', 'safari', 'msedge', 'msie', 'ios', 'android']) {
+      if (BrowserInfo[t]) {
+        e.push(`browser:${t}`);
+        break;
+      }
+    }
   }
   e.push(`client_version:${getInitialOptions().release_manifest_git_commit}`);
   return e;
@@ -23,10 +31,10 @@ function u(e) {
   for (let i in e) t.push(`${i}:${e[i]}`);
   return t;
 }
-let p = getInitialOptions().figma_url ?? "";
+let p = getInitialOptions().figma_url ?? '';
 export async function $$m2(e, t = {}) {
   await XHR.crossOriginPost(`${p}/api/web_logger/metrics/${e}`, {
-    tags: [...c(), ...u(t)].join(",")
+    tags: [...c(), ...u(t)].join(',')
   }, {
     rawResponse: !0
   });
@@ -34,42 +42,44 @@ export async function $$m2(e, t = {}) {
 export function $$h3(e, t, i = {}) {
   XHR.crossOriginPost(`${p}/api/web_logger/histogram/${e}`, {
     value: t,
-    tags: [...c(), ...u(i)].join(",")
+    tags: [...c(), ...u(i)].join(',')
   }, {
     rawResponse: !0
   }).catch(e => {
-    e.status >= 400 && e.status < 500 && $D(_$$e.DATA_INFRA, e);
+    e.status >= 400 && e.status < 500 && reportError(_$$e.DATA_INFRA, e);
   });
 }
 export async function $$g1(e) {
   e.length > 0 && (await XHR.crossOriginPost(`${p}/api/web_logger/metrics_batched`, e.map(e => ({
     metric: e.metric,
-    tags: [...c(), ...u(e.tags)].join(",")
+    tags: [...c(), ...u(e.tags)].join(',')
   })), {
     rawResponse: !0
   }));
 }
 export async function $$f4(e) {
-  if (e.length > 0) return await XHR.crossOriginPost(`${p}/api/web_logger/histogram_batched`, e.map(e => ({
-    metric: e.metric,
-    value: e.value,
-    tags: [...c(), ...u(e.tags)].join(",")
-  })), {
-    rawResponse: !0
-  });
+  if (e.length > 0) {
+    return await XHR.crossOriginPost(`${p}/api/web_logger/histogram_batched`, e.map(e => ({
+      metric: e.metric,
+      value: e.value,
+      tags: [...c(), ...u(e.tags)].join(',')
+    })), {
+      rawResponse: !0
+    });
+  }
 }
 export let $$_5 = $$h3;
 export class $$A0 {
   onVisibilityChange = () => {
-    "hidden" === document.visibilityState && (this.backgrounded = !0);
+    document.visibilityState === 'hidden' && (this.backgrounded = !0);
   };
   stop = (e, t) => {
     let i = t?.skipIfIdle === void 0 || !0 === t.skipIfIdle;
     if (this.finished) return;
     this._timerId && clearTimeout(this._timerId);
     this.finished = !0;
-    document.removeEventListener("visibilitychange", this.onVisibilityChange);
-    document.removeEventListener("offline", this.onOffline);
+    document.removeEventListener('visibilitychange', this.onVisibilityChange);
+    document.removeEventListener('offline', this.onOffline);
     let n = Math.round(performance.now() - this._startTime);
     if (!this.backgrounded && !this.offlined || !i) return e(n, this.backgrounded, this.offlined);
   };
@@ -83,10 +93,10 @@ export class $$A0 {
     this.finished = !1;
     this.backgrounded = !1;
     this.offlined = !1;
-    this.backgrounded = "hidden" === document.visibilityState;
+    this.backgrounded = document.visibilityState === 'hidden';
     this.offlined = !1 === navigator.onLine;
-    if (document.addEventListener("visibilitychange", this.onVisibilityChange), document.addEventListener("offline", this.onOffline), t && (this.metadata = t), e.onTimeout) {
-      if (!e.timeoutMs) throw Error("onTimeout specified without timeoutMs");
+    if (document.addEventListener('visibilitychange', this.onVisibilityChange), document.addEventListener('offline', this.onOffline), t && (this.metadata = t), e.onTimeout) {
+      if (!e.timeoutMs) throw new Error('onTimeout specified without timeoutMs');
       this._timerId = setTimeout(() => {
         this.finished || e.onTimeout(this.backgrounded, this.offlined);
       }, e.timeoutMs);
@@ -117,4 +127,4 @@ export const S3 = $$h3;
 export const rI = $$f4;
 export const aD = $$_5;
 export const I = $$y6;
-export const oY = $$b7; 
+export const oY = $$b7;

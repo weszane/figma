@@ -1,8 +1,8 @@
-import { eU, mg } from "../figma_app/27355";
+import { atom, mg } from "../figma_app/27355";
 import { Ok } from "../figma_app/851625";
 import { r as _$$r } from "../905/520829";
-let $$s2 = eU(Ok());
-let o = eU(e => {
+let $$s2 = atom(Ok());
+let o = atom(e => {
   let t = e($$s2);
   if (t.status !== _$$r.SUCCESS) throw Error("FigmaScope internal code is running but no FigmaScope resources are set. This is a bug - please report in #figmascope.");
   return t.value;

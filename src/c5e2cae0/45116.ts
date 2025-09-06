@@ -4,10 +4,10 @@ import { sortByWithOptions } from "../figma_app/656233";
 import { K as _$$K } from "../905/443068";
 import { d as _$$d } from "../c5e2cae0/368426";
 import { Q } from "../905/553231";
-import { az } from "../905/449184";
+import { analyticsEventManager } from "../905/449184";
 import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { UL, iB, O$ } from "../figma_app/361035";
 import { Tj, gS, gu } from "../figma_app/441925";
 import { u as _$$u } from "../905/16237";
@@ -66,13 +66,13 @@ let R = _$$Ju(function (e) {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: tx("checkout.additional_seats.add_or_remove_unassigned_seats")
+          children: renderI18nText("checkout.additional_seats.add_or_remove_unassigned_seats")
         })
       }), jsxs(nB, {
         children: [jsx("div", {
           className: _$$s.pt8.pb24.colorTextSecondary.$,
           children: jsx("p", {
-            children: tx("checkout.additional_seats.pre_purchase_seats_for_your_team_to_help_you_budget_and_save_time_later_on")
+            children: renderI18nText("checkout.additional_seats.pre_purchase_seats_for_your_team_to_help_you_budget_and_save_time_later_on")
           })
         }), jsx(_$$Y, {
           direction: "vertical",
@@ -86,10 +86,10 @@ let R = _$$Ju(function (e) {
               billableProductKey: e,
               numSeats: c[e],
               minSeatsCount: 0,
-              headerText: _$$t("checkout.additional_seats.seat_label", {
+              headerText: getI18nString("checkout.additional_seats.seat_label", {
                 seatType: seatTypes[e].displayName
               }),
-              headerSubText: _$$t("checkout.price_per_month", {
+              headerSubText: getI18nString("checkout.price_per_month", {
                 price: seatTypes[e].displayPrice
               }),
               incrementSeats: () => h(e),
@@ -106,11 +106,11 @@ let R = _$$Ju(function (e) {
             htmlAttributes: {
               "data-testid": "additional-seats--cancel"
             },
-            children: tx("checkout.additional_seats.cancel")
+            children: renderI18nText("checkout.additional_seats.cancel")
           }), jsx($n, {
             variant: "primary",
             onClick: () => {
-              az.trackDefinedEvent("monetization_upgrades.cart_additional_seats_changed_in_checkout", {
+              analyticsEventManager.trackDefinedEvent("monetization_upgrades.cart_additional_seats_changed_in_checkout", {
                 additionalSeatCountsBefore: JSON.stringify(additionalSeatCounts),
                 additionalSeatCountsAfter: JSON.stringify(c),
                 tier: e.tier
@@ -121,7 +121,7 @@ let R = _$$Ju(function (e) {
             htmlAttributes: {
               "data-testid": "additional-seats--confirm"
             },
-            children: tx("checkout.additional_seats.confirm")
+            children: renderI18nText("checkout.additional_seats.confirm")
           })]
         })
       })]
@@ -137,7 +137,7 @@ function O({
   let i = useDispatch();
   let l = _$$u();
   return jsx($z, {
-    "aria-label": _$$t("checkout.additional_seats.add_seats_to_assign_later"),
+    "aria-label": getI18nString("checkout.additional_seats.add_seats_to_assign_later"),
     htmlAttributes: {
       "data-testid": "additional-seats--button"
     },
@@ -154,7 +154,7 @@ function O({
       }));
     },
     iconPrefix: jsx(_$$A, {}),
-    children: tx("checkout.additional_seats.add_seats_to_assign_later")
+    children: renderI18nText("checkout.additional_seats.add_seats_to_assign_later")
   });
 }
 let H = _$$Ju(function (e) {
@@ -198,7 +198,7 @@ let H = _$$Ju(function (e) {
               className: _$$s.mb24.$,
               children: jsx(_$$j, {
                 user,
-                text: _$$t("modify_plan_user_seat_modal.choose_seat", {
+                text: getI18nString("modify_plan_user_seat_modal.choose_seat", {
                   name: user.handle
                 })
               })
@@ -255,7 +255,7 @@ function Z({
   if (isNullish(t[a])) return null;
   let h = jsxs(_$$E, {
     className: "xh8yej3 x1whlmpv x133fa97 x19y5rnk x1bamp8i xkezfkh",
-    "aria-label": _$$t("checkout.edit_user_seat_name", {
+    "aria-label": getI18nString("checkout.edit_user_seat_name", {
       name: e.handle
     }),
     onClick: p,
@@ -289,7 +289,7 @@ function Z({
       className: J,
       children: u ? h : jsx(IK, {
         variant: "ghost",
-        "aria-label": _$$t("checkout.edit_user_seat_name", {
+        "aria-label": getI18nString("checkout.edit_user_seat_name", {
           name: e.handle
         }),
         onClick: p,
@@ -380,12 +380,12 @@ export function $$q0({
                   className: X
                 }), jsxs("th", {
                   className: W,
-                  children: [tx("checkout.select_seats_table.user_column"), " ", jsx("div", {
+                  children: [renderI18nText("checkout.select_seats_table.user_column"), " ", jsx("div", {
                     className: _$$s.inlineBlock.$,
                     "data-testid": "select-seats-table-sort-users-button",
                     children: jsx(_$$K, {
                       onClick: () => A(e => !e),
-                      "aria-label": _$$t("checkout.select_seats_table.sort"),
+                      "aria-label": getI18nString("checkout.select_seats_table.sort"),
                       children: E ? jsx(_$$d, {
                         "data-testid": "select-seats-table-icon-arrow-up"
                       }) : jsx(Q, {
@@ -395,13 +395,13 @@ export function $$q0({
                   })]
                 }), jsx("th", {
                   className: J,
-                  children: R ? tx("checkout.select_seats_table.seat_column_exp") : tx("checkout.select_seats_table.seat_column")
+                  children: R ? renderI18nText("checkout.select_seats_table.seat_column_exp") : renderI18nText("checkout.select_seats_table.seat_column")
                 }), S === Ju.ORG && jsx("th", {
                   className: Y,
-                  children: tx("checkout.select_seats_table.team_column")
+                  children: renderI18nText("checkout.select_seats_table.team_column")
                 }), jsx("th", {
                   className: K,
-                  children: tx("checkout.select_seats_table.description_column")
+                  children: renderI18nText("checkout.select_seats_table.description_column")
                 }), jsx("th", {
                   "aria-hidden": !0,
                   className: X
@@ -413,7 +413,7 @@ export function $$q0({
                 seatTypes: t,
                 selectedSeatType: a.selectedUserSeatTypes[e.id],
                 changeSeatType: t => {
-                  az.trackDefinedEvent("monetization_upgrades.user_seat_selection_changed_in_checkout", {
+                  analyticsEventManager.trackDefinedEvent("monetization_upgrades.user_seat_selection_changed_in_checkout", {
                     targetUserId: e.id,
                     previousSeatType: a.selectedUserSeatTypes[e.id],
                     newSeatType: t,
@@ -435,11 +435,11 @@ export function $$q0({
             additionalSeatCounts: a.additionalSeatCounts,
             setAdditionalSeats: j
           }), jsx("p", {
-            children: tx("checkout.select_seats_table.team_members_count", {
-              assignedSeatsText: tx("checkout.select_seats_table.assigned_seats", {
+            children: renderI18nText("checkout.select_seats_table.team_members_count", {
+              assignedSeatsText: renderI18nText("checkout.select_seats_table.assigned_seats", {
                 count: k
               }),
-              unassignedSeatsText: tx("checkout.select_seats_table.unassigned_seats", {
+              unassignedSeatsText: renderI18nText("checkout.select_seats_table.unassigned_seats", {
                 count: P
               })
             })

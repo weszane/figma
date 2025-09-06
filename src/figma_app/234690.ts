@@ -3,7 +3,7 @@ import { dI } from "../905/805904";
 import { AW, sN, F_, X9 } from "../figma_app/191804";
 import { JG, zq } from "../figma_app/583114";
 import { f } from "../905/24905";
-import { xi } from "../905/714362";
+import { logWarning } from "../905/714362";
 import { lH, Pu, Yx, lg, bh, Dk } from "../figma_app/18582";
 export function $$c4(e, t) {
   let r = e.filter(e => e.visible).map(e => "SOLID" === e.type && e.opacity && e.color ? {
@@ -109,7 +109,7 @@ export function $$f7(e, t) {
     contrastMinimum: r,
     colorForContrastCheck: t
   });
-  contrastMet || xi("first-draft", `Failed to meet minimum contrast of ${r}. Using ${F_(adjustedColor)} on ${F_(t)} with contrast ${Math.abs(f(adjustedColor, t))}.`);
+  contrastMet || logWarning("first-draft", `Failed to meet minimum contrast of ${r}. Using ${F_(adjustedColor)} on ${F_(t)} with contrast ${Math.abs(f(adjustedColor, t))}.`);
   let _ = oB(adjustedColor);
   return In({
     ...c,

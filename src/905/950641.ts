@@ -9,7 +9,7 @@ import { Us } from "../figma_app/637027";
 import { Wi } from "../figma_app/162641";
 import { s as _$$s } from "../cssbuilder/589278";
 import { e6, Ih } from "../figma_app/617427";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
 import { lk } from "../figma_app/109538";
 import { B } from "../905/380801";
@@ -33,14 +33,14 @@ function R() {
       className: _$$s.flex.gap4.itemsCenter.mr16.$,
       children: [jsx(Y, {}), jsx("span", {
         className: _$$s.fontMedium.$,
-        children: tx("universal_upgrade.enterpise_plan_banner.banner_header")
+        children: renderI18nText("universal_upgrade.enterpise_plan_banner.banner_header")
       }), jsx("span", {
-        children: tx("universal_upgrade.enterpise_plan_banner_v2.banner_body_text", {
+        children: renderI18nText("universal_upgrade.enterpise_plan_banner_v2.banner_body_text", {
           and_more: jsx(Us, {
             href: qC,
             target: "_blank",
             trusted: !0,
-            children: tx("universal_upgrade.enterpise_plan_banner_v2.banner_body_text_and_more")
+            children: renderI18nText("universal_upgrade.enterpise_plan_banner_v2.banner_body_text_and_more")
           })
         })
       })]
@@ -56,7 +56,7 @@ function R() {
           source: B.PLAN_COMPARISON
         }
       })),
-      children: tx("universal_upgrade.enterpise_plan_banner.contact_sales")
+      children: renderI18nText("universal_upgrade.enterpise_plan_banner.contact_sales")
     })]
   });
 }
@@ -69,11 +69,11 @@ function N({
     children: [jsx("button", {
       className: _$$s.font11.lh16.py4.px8.bRadius5.$$if(e !== tY.MONTHLY, _$$s.colorBgSecondary.colorTextSecondary).$,
       onClick: () => t(tY.MONTHLY),
-      children: tx("plan_comparison.campfire.monthly")
+      children: renderI18nText("plan_comparison.campfire.monthly")
     }), jsx("button", {
       className: _$$s.font11.lh16.py4.px8.bRadius5.$$if(e !== tY.ANNUAL, _$$s.colorBgSecondary.colorTextSecondary).$,
       onClick: () => t(tY.ANNUAL),
-      children: tx("plan_comparison.campfire.annual")
+      children: renderI18nText("plan_comparison.campfire.annual")
     })]
   });
 }
@@ -166,7 +166,7 @@ export function $$P0({
           inStarterTeamLoopholes: i,
           chooseStarterPlan: n
         }) {
-          return e === FPlanNameType.STARTER && i ? tx("plan_comparison.plans.starter.limit_reached") : e === t ? n ? tx("plan_comparison.campfire.choose_starter") : tx("plan_comparison.campfire.current_plan") : e === FPlanNameType.STUDENT ? tx("plan_comparison.campfire.choose_edu") : tx("plan_comparison.campfire.choose_plan");
+          return e === FPlanNameType.STARTER && i ? renderI18nText("plan_comparison.plans.starter.limit_reached") : e === t ? n ? renderI18nText("plan_comparison.campfire.choose_starter") : renderI18nText("plan_comparison.campfire.current_plan") : e === FPlanNameType.STUDENT ? renderI18nText("plan_comparison.campfire.choose_edu") : renderI18nText("plan_comparison.campfire.choose_plan");
         }({
           planTier: e.planTier,
           currentExistingPlanTier: f,
@@ -249,7 +249,7 @@ function O({
           className: _$$s.mb12.$,
           children: [r, planTier === FPlanNameType.ORG ? jsx("div", {
             className: _$$s.font11.lh16.alignCenter.mt4.$,
-            children: tx("plan_comparison.campfire.or_contact_sales", {
+            children: renderI18nText("plan_comparison.campfire.or_contact_sales", {
               contactSalesLink: jsx("button", {
                 className: _$$s.colorTextBrand.$,
                 onClick: () => u(to({
@@ -258,7 +258,7 @@ function O({
                     source: B.PLAN_COMPARISON
                   }
                 })),
-                children: tx("plan_comparison.campfire.contact_sales")
+                children: renderI18nText("plan_comparison.campfire.contact_sales")
               })
             })
           }) : planTier === FPlanNameType.PRO && d ? jsx("div", {
@@ -270,7 +270,7 @@ function O({
                 trackingDescriptor: _$$c.UPGRADE_EXISTING_TEAM
               },
               trusted: !0,
-              children: tx("plan_comparison.plans.pro.upgrade_an_existing_team")
+              children: renderI18nText("plan_comparison.plans.pro.upgrade_an_existing_team")
             })
           }) : jsx(hK, {
             height: 20
@@ -283,7 +283,7 @@ function O({
       className: _$$s.mt16.$,
       children: [planTier === FPlanNameType.ORG && jsx("div", {
         className: _$$s.font13.fontMedium.lh24.$,
-        children: tx("plan_comparison.campfire.everything_on_pro")
+        children: renderI18nText("plan_comparison.campfire.everything_on_pro")
       }), features.map((e, t) => jsxs("div", {
         className: _$$s.flex.gap2.$,
         children: [jsx("div", {
@@ -314,7 +314,7 @@ function D({
     htmlAttributes: {
       "data-testid": `plan-information-${r}-button`,
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": a ? _$$t("plan_comparison.plans.starter.you_already_have_a_starter_team") : void 0,
+      "data-tooltip": a ? getI18nString("plan_comparison.plans.starter.you_already_have_a_starter_team") : void 0,
       "data-tooltip-show-immediately": !0,
       "data-tooltip-show-above": !0,
       "data-tooltip-max-width": 200,
@@ -332,7 +332,7 @@ function L() {
 function F() {
   return jsx("div", {
     className: _$$s.font13.lh24.$,
-    children: tx("plan_comparison.campfire.edu.price")
+    children: renderI18nText("plan_comparison.campfire.edu.price")
   });
 }
 function M({
@@ -361,7 +361,7 @@ function M({
             className: _$$s.flex.itemsCenter.gap4.$,
             children: [t.icon, t.name]
           }), jsx("div", {
-            children: tx("plan_comparison.campfire.price_per_month", {
+            children: renderI18nText("plan_comparison.campfire.price_per_month", {
               price: a.displayPrice
             })
           })]
@@ -405,7 +405,7 @@ function j({
     case FPlanNameType.ORG:
       return jsxs("div", {
         children: [jsx("p", {
-          children: tx("plan_comparison.campfire.billed_annually")
+          children: renderI18nText("plan_comparison.campfire.billed_annually")
         }), jsx(M, {
           annualPrices: a,
           displayedSeats,

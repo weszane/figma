@@ -1,10 +1,10 @@
-import { eU } from "../figma_app/27355";
-let $$i0 = eU({});
-let $$n3 = eU({
+import { atom } from "../figma_app/27355";
+let $$i0 = atom({});
+let $$n3 = atom({
   idx: -1
 });
-let $$o1 = eU({});
-let $$a2 = eU({
+let $$o1 = atom({});
+let $$a2 = atom({
   idx: -1
 });
 export function $$l4(e) {

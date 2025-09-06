@@ -1,6 +1,6 @@
 import { Mz } from "../vendor/925040";
 import { Zm, P8 } from "../905/270781";
-import { bt } from "../905/270322";
+import { createReduxSubscriptionAtomWithState } from "../905/270322";
 let $$s9 = e => e.mirror.sceneGraphSelection;
 let $$o11 = e => e.mirror.sceneGraph;
 let $$l14 = e => e.mirror.appModel;
@@ -53,7 +53,7 @@ let $$y4 = Mz([$$o11, $$d7], (e, t) => {
 let $$b6 = Zm(e => e.library.publishableStyles.map(e => e.nodeId));
 let $$T5 = Zm(e => e.library.localStylesThatHaveUsagesOnLoadedPages);
 let $$I17 = Zm(e => new Set(e.library.localStylesThatHaveUsagesOnCurrentPage));
-let $$S18 = bt($$T5);
+let $$S18 = createReduxSubscriptionAtomWithState($$T5);
 let $$v8 = Zm(e => e.library.localSymbolsThatHaveUsagesOnLoadedPages);
 let $$A3 = Zm(e => new Set(e.library.localSymbolsThatHaveUsagesOnCurrentPage));
 export function $$x13(e, t) {

@@ -1,16 +1,16 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { _gJ } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { zl } from "../figma_app/27355";
-import { fm } from "../905/236856";
-import { sx } from "../905/449184";
+import { atomStoreManager } from "../figma_app/27355";
+import { delay } from "../905/236856";
+import { trackEventAnalytics } from "../905/449184";
 import { k as _$$k2 } from "../905/651849";
-import { eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { debugState } from "../905/407919";
 import { isE2ETraffic, isDevEnvironment } from "../figma_app/169182";
-import { $D } from "../905/11";
-import { nl } from "../figma_app/257275";
-import { t as _$$t } from "../905/303541";
+import { reportError } from "../905/11";
+import { isInteractionPathCheck } from "../figma_app/897289";
+import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { zX } from "../905/576487";
 import { Lk, x as _$$x } from "../figma_app/639711";
@@ -25,11 +25,11 @@ import { fR, Ms, qH, T as _$$T2, W4, UH, FB, ld, MB, c2, VQ, WC, CA } from "../f
 import { C3, SH } from "../figma_app/790714";
 import { m3 } from "../figma_app/45218";
 import { G3 } from "../905/272080";
-import { Bu } from "../figma_app/53721";
+import { mapEditorTypeToStringWithObfuscated } from "../figma_app/53721";
 import { ZQ } from "../figma_app/155287";
 import { d4 } from "../figma_app/474636";
 import { I as _$$I, o8, r_ } from "../905/622391";
-import { $$aE2, createPluginInstance } from "../905/472793";
+import { createDefaultPluginOptions, createPluginInstance } from "../905/472793";
 import { NoOpVm } from "../905/700654";
 import { gH, Yx, Ew } from "../figma_app/985200";
 import { j as _$$j } from "../905/535481";
@@ -399,14 +399,14 @@ async function en(e, t) {
     triggeredFrom: t
   }))]);
   "realms" === e && (r || (r = ei("realms").catch(e => {
-    sx("Plugin Sandbox Failure", {
+    trackEventAnalytics("Plugin Sandbox Failure", {
       error: e + "",
       vm: "realms"
     });
     return e;
   })), await r);
   "cppvm" === e && (a || (a = ei("cppvm").catch(e => {
-    sx("Plugin Sandbox Failure", {
+    trackEventAnalytics("Plugin Sandbox Failure", {
       error: e + "",
       vm: "cppvm"
     });
@@ -447,7 +447,7 @@ export function $$ea2(e) {
       };
       let r = () => (n(), Promise.resolve());
       JX();
-      let a = $$aE2();
+      let a = createDefaultPluginOptions();
       createPluginInstance(t, {
         ...a,
         openFileKey: e.openFileKey,
@@ -478,7 +478,7 @@ export let $$eo4 = _$$n(async e => {
   let i = new _$$P();
   iu.stats = i;
   let n = e.plugin;
-  sx("Plugin Start Initiated", {
+  trackEventAnalytics("Plugin Start Initiated", {
     pluginID: n.plugin_id,
     trigger: e.triggeredFrom,
     runMode: e.runMode,
@@ -504,13 +504,13 @@ export let $$eo4 = _$$n(async e => {
   if (!isCancelled) {
     if (W4(e.triggeredFrom)) {
       if (!UH(e.plugin)) throw Error('Plugin not compatible to run in dev handoff panel. Make sure you have "dev" as an editorType and "inspect" as a capability in your manifest.json.');
-      zl.set(d4, "LOADING");
+      atomStoreManager.set(d4, "LOADING");
       ax(_gJ.PLUGIN);
     }
     if (FB(e.triggeredFrom)) {
       if (!ld(e.plugin)) throw Error('Plugin not compatible to run in buzz panel. Make sure you have "buzz" as an editorType in your manifest.json.');
-      zl.set(d4, "LOADING");
-      zl.set(Lk, _$$x.PLUGINS);
+      atomStoreManager.set(d4, "LOADING");
+      atomStoreManager.set(Lk, _$$x.PLUGINS);
     }
     e.isWidget || e.ignoreForRunLastPlugin || C3(e);
     lM(e.plugin);
@@ -551,7 +551,7 @@ export let $$eo4 = _$$n(async e => {
             forcePluginVersionId
           } = t;
           let f = o8();
-          if (!f) throw new er(t.isWidget ? _$$t("plugins.cannot_run_widget_logged_out") : _$$t("plugins.cannot_run_plugin_logged_out"));
+          if (!f) throw new er(t.isWidget ? getI18nString("plugins.cannot_run_widget_logged_out") : getI18nString("plugins.cannot_run_plugin_logged_out"));
           if (e = {
             ...e,
             id: forcePluginVersionId || e.id
@@ -579,7 +579,7 @@ export let $$eo4 = _$$n(async e => {
             deferRunEvent: !!deferRunEvent,
             runWithParameters: !!parameterValues,
             manifest: JSON.stringify(e.manifest),
-            productType: Bu(_),
+            productType: mapEditorTypeToStringWithObfuscated(_),
             isWidget,
             isMonetized: v,
             paidStatus: function (e) {
@@ -594,7 +594,7 @@ export let $$eo4 = _$$n(async e => {
             isVsCode: _$$T(),
             orgId: _$$I() ?? null
           };
-          sx("Plugin Start", x, isWidget ? {
+          trackEventAnalytics("Plugin Start", x, isWidget ? {
             forwardToDatadog: !0
           } : {});
           return $$ep5(em({
@@ -623,7 +623,7 @@ export let $$eo4 = _$$n(async e => {
           code: n
         });
       } catch (t) {
-        t instanceof er || $D(_$$e.EXTENSIBILITY, t);
+        t instanceof er || reportError(_$$e.EXTENSIBILITY, t);
         el(t, e.isWidget);
       }
     } finally {
@@ -634,14 +634,14 @@ export let $$eo4 = _$$n(async e => {
   }
 });
 function el(e, t) {
-  let i = (e instanceof er ? e?.message : void 0) ?? (t ? _$$t("plugins.error_loading_environment_widget") : _$$t("plugins.error_loading_environment_plugin"));
+  let i = (e instanceof er ? e?.message : void 0) ?? (t ? getI18nString("plugins.error_loading_environment_widget") : getI18nString("plugins.error_loading_environment_plugin"));
   fR(i);
 }
 async function ed(e, t, i) {
   let n = ZQ(i);
   try {
     Y5.dispatch(_$$F.enqueue({
-      message: _$$t("plugins.loading_plugin", {
+      message: getI18nString("plugins.loading_plugin", {
         pluginName: i.name
       }),
       icon: zX.SPINNER,
@@ -655,13 +655,13 @@ async function ed(e, t, i) {
         try {
           await en(r, e.triggeredFrom);
         } catch (i) {
-          let t = e.isWidget ? _$$t("plugins.error_loading_environment_widget") : _$$t("plugins.error_loading_environment_plugin");
+          let t = e.isWidget ? getI18nString("plugins.error_loading_environment_widget") : getI18nString("plugins.error_loading_environment_plugin");
           throw new er(t);
         }
       });
     })()]);
     if (!a) {
-      let t = e.isWidget ? _$$t("plugins.no_code_found_for_widget") : _$$t("plugins.no_code_found_for_plugin");
+      let t = e.isWidget ? getI18nString("plugins.no_code_found_for_widget") : getI18nString("plugins.no_code_found_for_plugin");
       throw new er(t);
     }
     return a;
@@ -689,7 +689,7 @@ async function ec({
     parameterValues
   } = t;
   let g = o8();
-  if (!g) throw new er(isWidget ? _$$t("plugins.cannot_run_widget_logged_out") : _$$t("plugins.cannot_run_plugin_logged_out"));
+  if (!g) throw new er(isWidget ? getI18nString("plugins.cannot_run_widget_logged_out") : getI18nString("plugins.cannot_run_plugin_logged_out"));
   let f = debugState.getState().selectedView.editorType;
   if (e.manifest) {
     let t = {
@@ -705,7 +705,7 @@ async function ec({
       deferRunEvent: !!deferRunEvent,
       runWithParameters: !!parameterValues,
       manifest: JSON.stringify(e.manifest),
-      productType: Bu(f),
+      productType: mapEditorTypeToStringWithObfuscated(f),
       isWidget,
       widgetAction: widgetAction ?? null,
       isReadOnly: debugState.getState().mirror.appModel.isReadOnly,
@@ -714,7 +714,7 @@ async function ec({
       isVsCode: _$$T(),
       orgId: _$$I() ?? null
     };
-    sx("Plugin Start", t, isWidget ? {
+    trackEventAnalytics("Plugin Start", t, isWidget ? {
       forwardToDatadog: !0
     } : {});
   }
@@ -755,7 +755,7 @@ async function ec({
     pN({
       shouldShowVisualBell: !0
     });
-    let e = (t instanceof er ? t?.message : void 0) ?? (isWidget ? _$$t("plugins.error_occured_while_running_widget") : _$$t("plugins.error_occured_while_running_plugin"));
+    let e = (t instanceof er ? t?.message : void 0) ?? (isWidget ? getI18nString("plugins.error_occured_while_running_widget") : getI18nString("plugins.error_occured_while_running_plugin"));
     fR(e);
   }
 }
@@ -803,7 +803,7 @@ export function $$ep5(e) {
       iu.currentWidget = void 0;
     }
     try {
-      if (nl() && (await en("cppvm", e?.triggeredFrom)), eD && CA(e.permissions.permissions) && (iu.setMediaEnabled = !0, e.permissions.trustedPluginOrigin && eD && (iu.allowedPluginOrigin = e.permissions.trustedPluginOrigin, await eD.addAllowedPluginOrigin(e.permissions.trustedPluginOrigin))), await fm(0), Nq() !== n) {
+      if (isInteractionPathCheck() && (await en("cppvm", e?.triggeredFrom)), desktopAPIInstance && CA(e.permissions.permissions) && (iu.setMediaEnabled = !0, e.permissions.trustedPluginOrigin && desktopAPIInstance && (iu.allowedPluginOrigin = e.permissions.trustedPluginOrigin, await desktopAPIInstance.addAllowedPluginOrigin(e.permissions.trustedPluginOrigin))), await delay(0), Nq() !== n) {
         t();
         return;
       }
@@ -836,7 +836,7 @@ export function $$ep5(e) {
     }
   }).catch(t => {
     if (e.noConsoleError || yA(t), e.showLaunchErrors) {
-      let i = (t instanceof er ? t?.message : void 0) ?? (e.isWidget ? _$$t("plugins.error_occured_while_running_widget") : _$$t("plugins.error_occured_while_running_plugin"));
+      let i = (t instanceof er ? t?.message : void 0) ?? (e.isWidget ? getI18nString("plugins.error_occured_while_running_widget") : getI18nString("plugins.error_occured_while_running_plugin"));
       fR(i);
     } else throw t;
   });
@@ -871,13 +871,13 @@ export function $$ep5(e) {
       pluginEndEventData: n,
       setPluginDataStats: r
     });
-    sx("Plugin End", {
+    trackEventAnalytics("Plugin End", {
       ...n,
       ...r
     }, {
       forwardToDatadog: !0
     });
-    e.pluginID && t.hasResizedNodeWithMissingFont() && (sx("Plugin resized node with missing font", {
+    e.pluginID && t.hasResizedNodeWithMissingFont() && (trackEventAnalytics("Plugin resized node with missing font", {
       pluginID: e.pluginID
     }), console.warn(`This ${i} resized a node with missing fonts. Text layout for node will not be applied.`));
   };

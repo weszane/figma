@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { W } from "../5430/573261";
 import { _ as _$$_ } from "../905/456042";
 import { I } from "../5132/515990";
@@ -68,7 +68,7 @@ export function $$x0({
     "data-testid": "approve-button",
     "data-onboarding-key": "approve-button",
     "data-tooltip-type": Ib.TEXT,
-    children: tx("community.plugins.approve_ellipsis")
+    children: renderI18nText("community.plugins.approve_ellipsis")
   });
 }
 export const s = $$x0;

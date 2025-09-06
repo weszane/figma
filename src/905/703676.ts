@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "../vendor/514228";
 import { assertNotNullish } from "../figma_app/95419";
 import { o as _$$o } from "../905/821217";
 import { N as _$$N } from "../905/438674";
-import { md } from "../figma_app/27355";
+import { useAtomWithSubscription } from "../figma_app/27355";
 import c from "classnames";
 import { M3 } from "../figma_app/119475";
 import { f as _$$f } from "../905/287602";
@@ -39,7 +39,7 @@ export function $$E0({
 }) {
   let O = assertNotNullish(useContext($$b3), "Must use `FacetedSearchPreviewRowBase` inside `<SearchRowContext.Provider>");
   let D = useDispatch();
-  let L = md(Q8);
+  let L = useAtomWithSubscription(Q8);
   let F = useSelector(e => e.currentUserOrgId);
   let M = _$$S(F)?.searches;
   let {

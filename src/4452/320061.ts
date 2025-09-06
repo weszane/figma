@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { u } from "../905/16237";
 import { j6 } from "../figma_app/831799";
 export function $$l0(e) {
@@ -8,7 +8,7 @@ export function $$l0(e) {
   } = j6();
   let a = u();
   return useCallback(s => {
-    sx("admin_flyout_closed", {
+    trackEventAnalytics("admin_flyout_closed", {
       ...properties,
       flyout_id: e,
       reason: s

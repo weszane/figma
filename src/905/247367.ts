@@ -4,7 +4,7 @@ import { A } from "../905/920165";
 import { w_ } from "../figma_app/273493";
 import { o6 } from "../figma_app/806412";
 import { Point } from "../905/736624";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F } from "../905/989956";
 import { Eh } from "../figma_app/837840";
 import { Ep } from "../figma_app/504823";
@@ -101,7 +101,7 @@ export function $$A0(e) {
         a: t / 100
       }, i);
     },
-    "aria-label": _$$t("fullscreen.scrubbable.opacity"),
+    "aria-label": getI18nString("fullscreen.scrubbable.opacity"),
     style: function (e, t, i) {
       let n;
       let r;

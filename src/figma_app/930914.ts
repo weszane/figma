@@ -3,9 +3,9 @@ import { useMemo, useCallback, useRef } from "react";
 import { useDispatch } from "../vendor/514228";
 import { V } from "../905/735518";
 import { RR } from "../figma_app/338442";
-import { R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { Pt } from "../figma_app/806412";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { j7 } from "../905/929976";
 import { to } from "../905/156213";
 import { Um } from "../905/848862";
@@ -26,7 +26,7 @@ export function $$S1(e, t) {
     defReferencedBySelection,
     nodesHaveInstanceSublayer,
     selectionHasProductComponent
-  } = R(i => {
+  } = selectWithShallowEqual(i => {
     let a = Lg(i);
     let s = a ? i.mirror.sceneGraph.get(a) : null;
     let o = n(i, t);
@@ -46,7 +46,7 @@ export function $$v3(e, t, r, n) {
   let {
     containingProductComponent,
     hasExistingDefs
-  } = R(t => {
+  } = selectWithShallowEqual(t => {
     let r = Lg(t);
     return {
       containingProductComponent: r ? t.mirror.sceneGraph.get(r) : null,
@@ -83,21 +83,21 @@ export function $$A2(e) {
   let t = useMemo(p1, []);
   let {
     hasExistingDefs
-  } = R(r => {
+  } = selectWithShallowEqual(r => {
     let n = Lg(r);
     return {
       hasExistingDefs: !!t(r, n, e).length
     };
   });
   let n = useMemo(() => eM(e).defaultType, [e]);
-  return hasExistingDefs ? _$$t("design_systems.component_properties.apply_component_property", {
+  return hasExistingDefs ? getI18nString("design_systems.component_properties.apply_component_property", {
     propType: xb(n).toLocaleLowerCase()
-  }) : _$$t("design_systems.component_properties.create_component_property_of_type", {
+  }) : getI18nString("design_systems.component_properties.create_component_property_of_type", {
     propType: xb(n).toLocaleLowerCase()
   });
 }
 export function $$x0(e) {
-  let t = R(e => e.modalShown);
+  let t = selectWithShallowEqual(e => e.modalShown);
   let r = useMemo(() => eM(e).defaultType, [e]);
   let n = sD.concat("-", e);
   let a = Um();

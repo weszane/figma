@@ -11,7 +11,7 @@ import { bL, Rq } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
 import { N as _$$N } from "../905/551536";
-import { tx as _$$tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { ol, cD } from "../figma_app/598018";
 import { Ju, ZU } from "../905/102752";
 import { memo, useMemo, useCallback, useState, useEffect, useRef, useLayoutEffect } from "react";
@@ -20,7 +20,7 @@ import { k as _$$k } from "../905/443820";
 import { glU } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
-import { eU as _$$eU, fp, md, Xr, zl } from "../figma_app/27355";
+import { atom, useAtomValueAndSetter, useAtomWithSubscription, Xr, atomStoreManager } from "../figma_app/27355";
 import C from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
 import { Rs } from "../figma_app/288654";
@@ -83,7 +83,7 @@ import { ServiceCategories as _$$e2 } from "../905/165054";
 import { i as _$$i2 } from "../905/970229";
 import { yr } from "../905/827765";
 import { debugState } from "../905/407919";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { T as _$$T, e as _$$e3 } from "../905/15569";
 import { o as _$$o3 } from "../905/17894";
 import { v as _$$v } from "../905/513628";
@@ -114,7 +114,7 @@ let y = Ju(function ({
 }) {
   let t = useDispatch();
   let i = ol();
-  let n = i?.student_team ? _$$tx("templates.limit_modal.student") : _$$tx("templates.limit_modal.professional");
+  let n = i?.student_team ? renderI18nText("templates.limit_modal.student") : renderI18nText("templates.limit_modal.professional");
   let a = () => {
     t(Ce());
   };
@@ -128,13 +128,13 @@ let y = Ju(function ({
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$tx("templates.limit_modal.title", {
+          children: renderI18nText("templates.limit_modal.title", {
             templateLimit: 5
           })
         })
       }), jsx(nB, {
         children: jsx("div", {
-          children: _$$tx("templates.limit_modal.description", {
+          children: renderI18nText("templates.limit_modal.description", {
             templateLimit: 5,
             planName: n
           })
@@ -147,12 +147,12 @@ let y = Ju(function ({
             trusted: !0,
             children: jsx($n, {
               variant: "secondary",
-              children: _$$tx("templates.limit_modal.secondary_text")
+              children: renderI18nText("templates.limit_modal.secondary_text")
             })
           }), jsx($n, {
             variant: "primary",
             onClick: a,
-            children: _$$tx("templates.limit_modal.primary_text")
+            children: renderI18nText("templates.limit_modal.primary_text")
           })]
         })
       })]
@@ -161,10 +161,10 @@ let y = Ju(function ({
 }, "TemplateLimitModal");
 var T = C;
 var Q = (e => (e.IDLE = "IDLE", e.PUBLISH_TEMPLATE_INITIATED = "PUBLISH_TEMPLATE_INITIATED", e.PUBLISH_TEMPLATE_SUCCESS = "PUBLISH_TEMPLATE_SUCCESS", e.PUBLISH_TEMPLATE_ERRORED = "PUBLISH_TEMPLATE_ERRORED", e.UNPUBLISH_TEMPLATE_INITIATED = "UNPUBLISH_TEMPLATE_INITIATED", e.UNPUBLISH_TEMPLATE_SUCCESS = "UNPUBLISH_TEMPLATE_SUCCESS", e.UNPUBLISH_TEMPLATE_ERRORED = "UNPUBLISH_TEMPLATE_ERRORED", e))(Q || {});
-let J = _$$eU({
+let J = atom({
   state: "IDLE"
 });
-let ee = _$$eU(null, (e, t, i) => {
+let ee = atom(null, (e, t, i) => {
   t(J, i);
 });
 let ei = "make-template-publish";
@@ -173,7 +173,7 @@ function eo() {
     orientation: "vertical",
     iconSrc: _$$A3,
     variant: "brand",
-    children: _$$tx("slides.templates.publish_modal.info_text")
+    children: renderI18nText("slides.templates.publish_modal.info_text")
   });
 }
 let eE = memo(function (e) {
@@ -215,7 +215,7 @@ function ek() {
         children: [jsx("div", {
           className: eT,
           children: jsx(eE, {})
-        }), _$$t("community.publishing.org_template_modal.info_text_restrictions")]
+        }), getI18nString("community.publishing.org_template_modal.info_text_restrictions")]
       }), jsxs("div", {
         className: T()(ew, eC),
         children: [jsx("div", {
@@ -225,7 +225,7 @@ function ek() {
               "--color-icon": "var(--color-icon-secondary)"
             }
           })
-        }), _$$t("community.publishing.org_template_modal.info_text_edit")]
+        }), getI18nString("community.publishing.org_template_modal.info_text_edit")]
       }), jsxs("div", {
         className: T()(ew, eC),
         children: [jsx("div", {
@@ -235,7 +235,7 @@ function ek() {
               "--color-icon": "var(--color-icon-secondary)"
             }
           })
-        }), _$$t("community.publishing.org_template_modal.info_text_image_text_names")]
+        }), getI18nString("community.publishing.org_template_modal.info_text_image_text_names")]
       })]
     })]
   });
@@ -285,7 +285,7 @@ function eU({
   let i = ol();
   let n = Lz(e, void 0);
   return jsx(_$$A8, {
-    label: _$$t("templates.publishing.scope.label"),
+    label: getI18nString("templates.publishing.scope.label"),
     children: jsxs(_$$b, {
       className: iy,
       value: n,
@@ -321,7 +321,7 @@ function eB({
     })]
   });
 }
-let eV = e => e === _$$i.TEAM ? _$$t("templates.publishing.scope.team") : e === _$$i.ORG ? _$$t("templates.publishing.scope.organization") : throwTypeError(e);
+let eV = e => e === _$$i.TEAM ? getI18nString("templates.publishing.scope.team") : e === _$$i.ORG ? getI18nString("templates.publishing.scope.organization") : throwTypeError(e);
 let e2 = {
   [_$$i.ORG]: FContainerType.ORG,
   [_$$i.TEAM]: FContainerType.TEAM
@@ -451,7 +451,7 @@ let e6 = _$$T({
       });
     } catch (t) {
       let e = t instanceof Error ? t : void 0;
-      e && $D(_$$e2.COMMUNITY, e);
+      e && reportError(_$$e2.COMMUNITY, e);
       return new _$$o3.SubmissionError({
         key: "ERROR_PUBLISHING_LIBRARY_CHANGES",
         data: {
@@ -489,7 +489,7 @@ let e6 = _$$T({
       try {
         await yr(cover_image_upload_url, a);
       } catch (e) {
-        $D(_$$e2.COMMUNITY, e);
+        reportError(_$$e2.COMMUNITY, e);
         return new _$$o3.SubmissionError({
           key: "ERROR_UPLOADING_IMAGES",
           data: {
@@ -512,7 +512,7 @@ let e6 = _$$T({
         params: e
       })).data;
     } catch (e) {
-      $D(_$$e2.COMMUNITY, e);
+      reportError(_$$e2.COMMUNITY, e);
       return new _$$o3.SubmissionError({
         key: "ERROR_FINALIZING_TEMPLATE",
         data: {
@@ -521,7 +521,7 @@ let e6 = _$$T({
       });
     }
     try {
-      figFile.name === _$$t("fullscreen.fullscreen_view_selector.untitled") && debugState.dispatch(Nw({
+      figFile.name === getI18nString("fullscreen.fullscreen_view_selector.untitled") && debugState.dispatch(Nw({
         file: {
           key: figFile.key
         },
@@ -534,7 +534,7 @@ let e6 = _$$T({
         }
       }));
     } catch (e) {
-      $D(_$$e2.COMMUNITY, e);
+      reportError(_$$e2.COMMUNITY, e);
       return new _$$o3.SubmissionError({
         key: "ERROR_UPDATING_STORES",
         data: {
@@ -702,7 +702,7 @@ function ta({
     children: [jsx($n, {
       variant: "secondary",
       onClick: C,
-      children: _$$t("general.cancel")
+      children: getI18nString("general.cancel")
     }), jsx($n, {
       disabled: draftSubmissionResult?.result === "pending" || N,
       onClick: () => {
@@ -711,12 +711,12 @@ function ta({
       "data-testid": "publishing-modal-publish-button",
       children: draftSubmissionResult?.result === "pending" || N ? jsx(_$$k, {
         size: "sm"
-      }) : _$$t("community.publishing.publish")
+      }) : getI18nString("community.publishing.publish")
     })]
   }) : jsx($n, {
     variant: "secondary",
     onClick: clearDraftSubmissionResult,
-    children: _$$t("general.go_back")
+    children: getI18nString("general.go_back")
   }) : l?.libraryKey ? jsxs(Fragment, {
     children: [jsx(Ai, {
       editorType: u,
@@ -732,7 +732,7 @@ function ta({
       let e = _.errors.find(e => "validation" === e.type);
       if (e) return ts(e);
       let t = _.errors.find(e => "submission" === e.type)?.data.rawError;
-      return t && _$$J2(t) ? _$$J2(t) : _$$t("community.publishing.an_error_occurred_please_try_again");
+      return t && _$$J2(t) ? _$$J2(t) : getI18nString("community.publishing.an_error_occurred_please_try_again");
     })();
   }, [_, draftSubmissionResult?.result, N]);
   useEffect(() => {
@@ -766,7 +766,7 @@ function ta({
       children: jsxs(vo, {
         children: [jsx(Y9, {
           children: jsx(hE, {
-            children: _$$t("community.publishing.org_template_modal.header")
+            children: getI18nString("community.publishing.org_template_modal.header")
           })
         }), jsx(nB, {
           padding: 0,
@@ -793,7 +793,7 @@ let ts = e => {
       case "NO_COMPONENTS_TO_PUBLISH":
         return;
       case "UNPUBLISHING_ALL_COMPONENTS":
-        return _$$t("design_systems.libraries_modal.no_publishable_assets");
+        return getI18nString("design_systems.libraries_modal.no_publishable_assets");
       default:
         throwTypeError(t);
     }
@@ -809,9 +809,9 @@ function ty({
   required: r,
   error: a
 }) {
-  let s = e => e === _$$i.ORG ? _$$t("templates.publishing.scope.organization") : _$$t("templates.publishing.scope.team");
+  let s = e => e === _$$i.ORG ? getI18nString("templates.publishing.scope.organization") : getI18nString("templates.publishing.scope.team");
   return jsx(_$$A9, {
-    label: _$$t("templates.publishing.scope.label"),
+    label: getI18nString("templates.publishing.scope.label"),
     error: a,
     required: r,
     children: jsx(tI, {
@@ -906,12 +906,12 @@ function tI({
     children: [jsx(l9, {
       width: "fill",
       label: jsx(_$$h, {
-        children: _$$t("templates.publishing.scope.label")
+        children: getI18nString("templates.publishing.scope.label")
       }),
       size: "lg",
       children: s ? jsx(tb, {
         item: s
-      }) : _$$t("common.select")
+      }) : getI18nString("common.select")
     }), jsx(mc, {
       children: t.map(e => jsx(c$, {
         value: e.scope,
@@ -987,7 +987,7 @@ function tx({
   inDropdown: n,
   hideArrow: r
 }) {
-  let a = t === _$$i.ORG ? _$$t("templates.publishing.scope.organization") : _$$t("templates.publishing.scope.team");
+  let a = t === _$$i.ORG ? getI18nString("templates.publishing.scope.organization") : getI18nString("templates.publishing.scope.team");
   return jsxs("div", {
     className: T()(n ? "template_publish_modal--selectionItemDropdown--mT46A" : "template_publish_modal--selectionItem--sCqY-", {
       "template_publish_modal--hoverTextColorUI3--0cOZ1": n
@@ -1021,7 +1021,7 @@ function tx({
 let tC = parsePxNumber(VJh);
 let tT = "USER_UPLOADED";
 let tk = ["name", "description", "publish_scope"];
-let tR = _$$eU(!1);
+let tR = atom(!1);
 function tN({
   fileKey: e,
   source: t
@@ -1050,7 +1050,7 @@ function tP({
   let n = iZ();
   let r = T6(t, n);
   let a = t?.editorType === FFileType.SLIDES;
-  let [o, l] = fp(pz);
+  let [o, l] = useAtomValueAndSetter(pz);
   return (useEffect(() => {
     a && (l(_$$o.LIBRARY), l7.system("slides-prepare-modules-for-publish", () => glU?.createSlideModulesForPublish()));
   }, [a, l]), t) ? jsx(tO, {
@@ -1076,10 +1076,10 @@ function tO({
   let E = useRef(null);
   let [x, C] = useState();
   let [k, R] = useState(!1);
-  let M = g === _$$t("fullscreen.fullscreen_view_selector.untitled");
+  let M = g === getI18nString("fullscreen.fullscreen_view_selector.untitled");
   let [B, V] = useState(o?.name || (M ? "" : g));
   let [z, W] = useState(o?.description || "");
-  let [X, ea] = fp(b2);
+  let [X, ea] = useAtomValueAndSetter(b2);
   let [es, ed] = useState({});
   let [ec, eu] = useState(() => o ? o.publishScope : t ? _$$i.ORG : _$$i.TEAM);
   let ep = iZ();
@@ -1116,7 +1116,7 @@ function tO({
     publishInProgress: _publishInProgress2
   } = function () {
     let e = useDispatch();
-    let t = md(J);
+    let t = useAtomWithSubscription(J);
     let i = Xr(ee);
     let n = "PUBLISH_TEMPLATE_INITIATED" === t.state || "UNPUBLISH_TEMPLATE_INITIATED" === t.state;
     return {
@@ -1128,23 +1128,23 @@ function tO({
           ...t,
           dispatch: e,
           onSuccess: () => {
-            zl.set(ee, {
+            atomStoreManager.set(ee, {
               state: Q.PUBLISH_TEMPLATE_SUCCESS
             });
             e(_$$F.enqueue({
               type: ei,
-              message: t.isPublishedTemplate ? _$$t("cooper.templates.template_updates_published") : _$$t("cooper.templates.template_published"),
+              message: t.isPublishedTemplate ? getI18nString("cooper.templates.template_updates_published") : getI18nString("cooper.templates.template_published"),
               icon: zX.CHECK
             }));
             e(Ce());
           },
           onFailure: t => {
-            zl.set(ee, {
+            atomStoreManager.set(ee, {
               state: Q.PUBLISH_TEMPLATE_ERRORED
             });
             e(_$$F.enqueue({
               type: ei,
-              message: _$$t("cooper.templates.template_failed_published"),
+              message: getI18nString("cooper.templates.template_failed_published"),
               error: !0
             }));
           }
@@ -1174,14 +1174,14 @@ function tO({
   let eP = () => {
     y(Ce());
     y(_$$F.enqueue({
-      message: o ? _$$t("templates.publishing.bell.updated") : _$$t("templates.publishing.bell.success"),
+      message: o ? getI18nString("templates.publishing.bell.updated") : getI18nString("templates.publishing.bell.success"),
       type: "template-publish-success"
     }));
     ea(!1);
   };
   let eO = () => {
     y(_$$F.enqueue({
-      message: _$$t("templates.publishing.bell.failure"),
+      message: getI18nString("templates.publishing.bell.failure"),
       type: "template-publish-error",
       error: !0
     }));
@@ -1189,7 +1189,7 @@ function tO({
   let eD = () => {
     y(Lo());
   };
-  let eL = md(tR);
+  let eL = useAtomWithSubscription(tR);
   let eF = hS({
     open: eL,
     onClose: eD
@@ -1290,7 +1290,7 @@ function tO({
   } : void 0, [n, eb]);
   return (useEffect(() => {
     l || y(_$$F.enqueue({
-      message: _$$t("templates.publishing.bell.no_publish_access"),
+      message: getI18nString("templates.publishing.bell.no_publish_access"),
       type: "template-publish-error",
       error: !0
     }));
@@ -1309,12 +1309,12 @@ function tO({
           t && A?.orgAccess === FAccessLevelType.SECRET && !getFeatureFlags().pro_templates_lg ? y(_$$to({
             type: X0,
             data: {
-              title: _$$tx("templates.confirmation.publish.secret.title_v2"),
-              content: _$$tx("templates.confirmation.publish.secret.description", {
+              title: renderI18nText("templates.confirmation.publish.secret.title_v2"),
+              content: renderI18nText("templates.confirmation.publish.secret.description", {
                 teamName: A.name,
                 orgName: t.name
               }),
-              confirmText: _$$tx("templates.confirmation.publish.secret.confirm.publish_anyway"),
+              confirmText: renderI18nText("templates.confirmation.publish.secret.confirm.publish_anyway"),
               destructive: !1,
               onConfirm: ej
             }
@@ -1322,7 +1322,7 @@ function tO({
         },
         children: [jsx(Y9, {
           children: jsx(hE, {
-            children: o ? _$$t("templates.publishing.header.updates") : _$$t("templates.publishing.header")
+            children: o ? getI18nString("templates.publishing.header.updates") : getI18nString("templates.publishing.header")
           })
         }), jsxs(nB, {
           padding: 0,
@@ -1360,7 +1360,7 @@ function tO({
             }), jsx(_$$A, {
               defaultValue: z,
               onChange: W,
-              placeholderText: _$$t("templates.publishing.description.placeholder"),
+              placeholderText: getI18nString("templates.publishing.description.placeholder"),
               error: es.description
             }), jsx(ty, {
               org: t,
@@ -1376,14 +1376,14 @@ function tO({
               "data-testid": "publish-modal-footer-text",
               children: [jsx(_$$B, {
                 svg: _$$A1
-              }), _$$tx("community.publish.fix_errors")]
+              }), renderI18nText("community.publish.fix_errors")]
             })
           }), jsxs(jk, {
             children: [jsx($z, {
               variant: "secondary",
               disabled: k,
               onClick: eD,
-              children: _$$tx("general.cancel")
+              children: renderI18nText("general.cancel")
             }), jsx($z, {
               variant: "primary",
               type: "submit",
@@ -1403,7 +1403,7 @@ function tO({
                 children: jsx(_$$k, {
                   size: "sm"
                 })
-              }) : o ? _$$tx("templates.publishing.publish.updates") : _$$tx("templates.publishing.publish")
+              }) : o ? renderI18nText("templates.publishing.publish.updates") : renderI18nText("templates.publishing.publish")
             })]
           })]
         })]

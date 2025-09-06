@@ -14,19 +14,19 @@ import { J as _$$J } from "../905/614223";
 import { g as _$$g } from "../905/687265";
 import { xk } from "@stylexjs/stylex";
 import b from "classnames";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { A as _$$A } from "../905/920142";
 import { lb } from "../3973/538504";
 import { Rs } from "../figma_app/288654";
 import { oA } from "../905/723791";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { Ex, zE } from "../figma_app/919079";
 import { P as _$$P } from "../905/347284";
 import { a as _$$a } from "../905/925868";
 import { s as _$$s2 } from "../cssbuilder/589278";
 import { s as _$$s3 } from "../905/573154";
 import { $z } from "../figma_app/617427";
-import { t as _$$t2, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Y as _$$Y } from "../905/830372";
 import { E as _$$E2 } from "../905/984674";
 import { JT, Qi, mb } from "../figma_app/599327";
@@ -78,26 +78,26 @@ var v = b;
 function ev(e, t) {
   switch (e.reason) {
     case FSeatAssignmentReasonType.ROLE_UPGRADE:
-      if (e.actor_name) return _$$t2("team_user.upgrade_reasons.role_upgrade.seat_rename", {
+      if (e.actor_name) return getI18nString("team_user.upgrade_reasons.role_upgrade.seat_rename", {
         actorName: e.actor_name,
         memberNameOrEmail: t,
         resourceType: e.resource_type || "",
         resourceName: e.resource_name || ""
       });
-      return _$$t2("team_user.upgrade_reasons.role_upgrade_without_actor_name.seat_rename", {
+      return getI18nString("team_user.upgrade_reasons.role_upgrade_without_actor_name.seat_rename", {
         memberNameOrEmail: t,
         resourceType: e.resource_type || "",
         resourceName: e.resource_name || ""
       });
     case FSeatAssignmentReasonType.INVITE_REDEEM:
-      return _$$t2("team_user.upgrade_reasons.invite_redeem.seat_rename", {
+      return getI18nString("team_user.upgrade_reasons.invite_redeem.seat_rename", {
         actorName: e.actor_name || "",
         memberNameOrEmail: t,
         resourceType: e.resource_type || "",
         resourceName: e.resource_name || ""
       });
     case FSeatAssignmentReasonType.INVITE_AUTOUPGRADE:
-      return _$$t2("team_user.upgrade_reasons.invite_autoupgrade.seat_rename", {
+      return getI18nString("team_user.upgrade_reasons.invite_autoupgrade.seat_rename", {
         actorName: e.actor_name || "",
         memberNameOrEmail: t,
         resourceType: e.resource_type || "",
@@ -105,72 +105,72 @@ function ev(e, t) {
       });
     case FSeatAssignmentReasonType.RESOURCE_MOVED_FROM_PLAN_DRAFTS:
     case FSeatAssignmentReasonType.RESOURCE_MOVE:
-      return _$$t2("team_user.upgrade_reasons.resource_moved", {
+      return getI18nString("team_user.upgrade_reasons.resource_moved", {
         memberNameOrEmail: t,
         resourceType: e.resource_type || "",
         resourceName: e.resource_name || ""
       });
     case FSeatAssignmentReasonType.CREATE_TEAM:
-      return _$$t2("team_user.upgrade_reasons.create_team", {
+      return getI18nString("team_user.upgrade_reasons.create_team", {
         memberNameOrEmail: t
       });
     case FSeatAssignmentReasonType.RESOURCE_RESTORED_FROM_TRASH:
-      return _$$t2("team_user.upgrade_reasons.restored_from_trash", {
+      return getI18nString("team_user.upgrade_reasons.restored_from_trash", {
         memberNameOrEmail: t,
         resourceName: e.resource_name || ""
       });
     case FSeatAssignmentReasonType.FIGMA_ADMIN:
-      return _$$t2("team_user.upgrade_reasons.figma_admin", {
+      return getI18nString("team_user.upgrade_reasons.figma_admin", {
         memberNameOrEmail: t,
         resourceName: e.resource_name || ""
       });
     case FSeatAssignmentReasonType.DEPART_TEAM:
-      return _$$t2("team_user.upgrade_reasons.depart_team", {
+      return getI18nString("team_user.upgrade_reasons.depart_team", {
         memberNameOrEmail: t
       });
     case FSeatAssignmentReasonType.JOIN_LINK_REDEEM:
-      return _$$t2("team_user.upgrade_reasons.join_link_redeem", {
+      return getI18nString("team_user.upgrade_reasons.join_link_redeem", {
         memberNameOrEmail: t
       });
     case FSeatAssignmentReasonType.CREATE_FILE:
-      return _$$t2("team_user.upgrade_reasons.create_file", {
+      return getI18nString("team_user.upgrade_reasons.create_file", {
         memberNameOrEmail: t,
         resourceName: e.resource_name || ""
       });
     case FSeatAssignmentReasonType.ADMIN_UPGRADE:
     case FSeatAssignmentReasonType.CHECKOUT:
-      return _$$t2("team_user.upgrade_reasons.checkout.seat_rename", {
+      return getI18nString("team_user.upgrade_reasons.checkout.seat_rename", {
         actorName: e.actor_name || "",
         memberNameOrEmail: t
       });
     case FSeatAssignmentReasonType.EDIT_REQUEST_AUTO_APPROVAL:
     case FSeatAssignmentReasonType.EDIT_REQUEST_APPROVAL:
-      return _$$t2("team_user.upgrade_reasons.edit_request_approval", {
+      return getI18nString("team_user.upgrade_reasons.edit_request_approval", {
         memberNameOrEmail: t,
         resourceType: e.resource_type || "",
         resourceName: e.resource_name || ""
       });
     case FSeatAssignmentReasonType.EDIT_ACTION:
-      return _$$t2("team_user.upgrade_reasons.edit_action", {
+      return getI18nString("team_user.upgrade_reasons.edit_action", {
         memberNameOrEmail: t,
         resourceName: e.resource_name || ""
       });
     case FSeatAssignmentReasonType.EDIT_BUTTON:
-      return _$$t2("team_user.upgrade_reasons.edit_button", {
+      return getI18nString("team_user.upgrade_reasons.edit_button", {
         memberNameOrEmail: t,
         resourceName: e.resource_name || ""
       });
     case FSeatAssignmentReasonType.FJ_GA_UPGRADE:
-      return _$$t2("team_user.upgrade_reasons.figjam_ga_reupgrade", {
+      return getI18nString("team_user.upgrade_reasons.figjam_ga_reupgrade", {
         memberNameOrEmail: t,
         resourceName: e.resource_name || ""
       });
     case FSeatAssignmentReasonType.RUN_PLUGIN:
-      return _$$t2("team_user.upgrade_reasons.run_plugin", {
+      return getI18nString("team_user.upgrade_reasons.run_plugin", {
         memberNameOrEmail: t
       });
     default:
-      return _$$t2("team_user.upgrade_reasons.default", {
+      return getI18nString("team_user.upgrade_reasons.default", {
         memberNameOrEmail: t
       });
   }
@@ -363,7 +363,7 @@ let eD = {
   text: "\u2013"
 };
 function eM(e) {
-  return e ? _$$t2("member_flyout_modal.update_date", {
+  return e ? getI18nString("member_flyout_modal.update_date", {
     date: new Date(e)
   }) : void 0;
 }
@@ -433,7 +433,7 @@ function eF(e) {
     unsupported
   } = _$$d(e.userLabel, m, e.planUserMembershipRecord);
   useEffect(() => {
-    unsupported && e.planUserMembershipRecord?.source && null === i.current && ($D(_$$e.SCALE, Error(`Unsupported plan join source ${e.planUserMembershipRecord.source}`)), i.current = !0);
+    unsupported && e.planUserMembershipRecord?.source && null === i.current && (reportError(_$$e.SCALE, Error(`Unsupported plan join source ${e.planUserMembershipRecord.source}`)), i.current = !0);
   }, [unsupported, e.planUserMembershipRecord?.source]);
   let v = u?.toLocaleDateString(void 0, {
     year: "numeric",
@@ -445,7 +445,7 @@ function eF(e) {
     className: "xuzqwsy xpezlj7 xnajj62 xvqcqsr xv42yna",
     children: [jsx("h3", {
       ...xk(eB.sectionHeader),
-      children: tx("member_flyout_modal.joined_header")
+      children: renderI18nText("member_flyout_modal.joined_header")
     }), jsxs("div", {
       className: "x78zum5 x1q0g3np x6s0dn4",
       children: [jsx(_$$E, {
@@ -478,7 +478,7 @@ function eF(e) {
           children: "\xb7"
         }), jsx("div", {
           ...xk(eB.date),
-          children: tx("members_table.user_upgrade_date", {
+          children: renderI18nText("members_table.user_upgrade_date", {
             upgradeDate: f
           })
         })]
@@ -492,9 +492,9 @@ function eq(e) {
   let s = useDispatch();
   let r = t.eccUpgradingLocked || t.scimLocked;
   let l = r ? {
-    "data-tooltip": t.eccUpgradingLocked ? _$$t2("external_collaboration_restricted.members.tooltip.v2", {
+    "data-tooltip": t.eccUpgradingLocked ? getI18nString("external_collaboration_restricted.members.tooltip.v2", {
       eccDomain: t.eccDomain
-    }) : _$$t2("members_table.role_idp_tooltip.seat_rename"),
+    }) : getI18nString("members_table.role_idp_tooltip.seat_rename"),
     "data-tooltip-type": Ib.TEXT
   } : null;
   return jsxs(_$$Y, {
@@ -505,7 +505,7 @@ function eq(e) {
       direction: "horizontal",
       children: [jsx("div", {
         className: _$$s2.textBodyMediumStrong.$,
-        children: tx("members_table.menu_bar_filter.role.seat_rename")
+        children: renderI18nText("members_table.menu_bar_filter.role.seat_rename")
       }), !e.showBillingIntervalDropdown && jsx(e$, {
         ...e
       })]
@@ -532,7 +532,7 @@ function eq(e) {
                 currency: e.currency
               });
             },
-            children: tx("members_table.batch_actions_menu.role_change.seat_rename")
+            children: renderI18nText("members_table.batch_actions_menu.role_change.seat_rename")
           })
         })]
       })
@@ -548,10 +548,10 @@ function e$(e) {
   let t = null;
   switch (e.billingInterval) {
     case NW.MONTH:
-      t = tx("member_flyout_modal.billing_interval.month");
+      t = renderI18nText("member_flyout_modal.billing_interval.month");
       break;
     case NW.YEAR:
-      t = tx("member_flyout_modal.billing_interval.year");
+      t = renderI18nText("member_flyout_modal.billing_interval.year");
       break;
     default:
       e.billingInterval;
@@ -610,7 +610,7 @@ function eG(e) {
         htmlAttributes: {
           "data-testid": "member-flyout-approval-settings-modal-button"
         },
-        "aria-label": _$$t2("member_flyout_modal.upgrade_method_button_aria_label"),
+        "aria-label": getI18nString("member_flyout_modal.upgrade_method_button_aria_label"),
         className: eI,
         onClick: _$$S({
           dispatch: t,
@@ -653,7 +653,7 @@ function eG(e) {
   }));
   let u = tb(o);
   if (u) {
-    let e = tx("members_table.user_upgrade_date", {
+    let e = renderI18nText("members_table.user_upgrade_date", {
       upgradeDate: u
     });
     a.push(jsxs(Fragment, {
@@ -682,7 +682,7 @@ function ez(e) {
   return jsxs("div", {
     className: "x78zum5 x1q0g3np x6s0dn4",
     children: [jsx("div", {
-      "data-tooltip": _$$t2("members_table.user_upgrade_reason_and_date.tooltip", {
+      "data-tooltip": getI18nString("members_table.user_upgrade_reason_and_date.tooltip", {
         upgradeReason: e.shortReason,
         upgradeDate: e.upgradeDate
       }),
@@ -700,7 +700,7 @@ function ez(e) {
       children: "\xb7"
     }), jsx(_$$E2, {
       color: "secondary",
-      children: tx("members_table.user_upgrade_date", {
+      children: renderI18nText("members_table.user_upgrade_date", {
         upgradeDate: e.upgradeDate
       })
     })]
@@ -718,7 +718,7 @@ function eV(e) {
       s && i && t.push([0, jsx(ez, {
         shortReason: s,
         upgradeDate: i,
-        paidStatusString: _$$t2("admin_settings.people_tab.upgrade_method.migrated.design"),
+        paidStatusString: getI18nString("admin_settings.people_tab.upgrade_method.migrated.design"),
         testId: "migrated-upgrade-reason-design"
       }, "migrated-upgrade-reason-design")]);
     }
@@ -729,7 +729,7 @@ function eV(e) {
       s && i && t.push([1, jsx(ez, {
         shortReason: s,
         upgradeDate: i,
-        paidStatusString: _$$t2("admin_settings.people_tab.upgrade_method.migrated.figjam"),
+        paidStatusString: getI18nString("admin_settings.people_tab.upgrade_method.migrated.figjam"),
         testId: "migrated-upgrade-reason-figjam"
       }, "migrated-upgrade-reason-figjam")]);
     }
@@ -742,7 +742,7 @@ function eV(e) {
       s && i && t.push([2, jsx(ez, {
         shortReason: s,
         upgradeDate: i,
-        paidStatusString: _$$t2("admin_settings.people_tab.upgrade_method.migrated.design"),
+        paidStatusString: getI18nString("admin_settings.people_tab.upgrade_method.migrated.design"),
         testId: "migrated-upgrade-reason-design"
       }, "migrated-upgrade-reason-design")]);
     }
@@ -752,7 +752,7 @@ function eV(e) {
       s && i && t.push([3, jsx(ez, {
         shortReason: s,
         upgradeDate: i,
-        paidStatusString: _$$t2("admin_settings.people_tab.upgrade_method.migrated.figjam"),
+        paidStatusString: getI18nString("admin_settings.people_tab.upgrade_method.migrated.figjam"),
         testId: "migrated-upgrade-reason-figjam"
       }, "migrated-upgrade-reason-figjam")]);
     }
@@ -762,7 +762,7 @@ function eV(e) {
       s && i && t.push([5, jsx(ez, {
         shortReason: s,
         upgradeDate: i,
-        paidStatusString: _$$t2("admin_settings.people_tab.upgrade_method.migrated.dev_mode"),
+        paidStatusString: getI18nString("admin_settings.people_tab.upgrade_method.migrated.dev_mode"),
         testId: "migrated-upgrade-reason-dev-mode"
       }, "migrated-upgrade-reason-dev-mode")]);
     }
@@ -792,7 +792,7 @@ function eW(e) {
   let o = eP(updateReason, eM(updateTimestamp));
   return jsx(eL, {
     id: "license-group",
-    label: _$$t2("member_flyout_modal.license_group_select_label"),
+    label: getI18nString("member_flyout_modal.license_group_select_label"),
     options: s,
     selectedOption: e.orgUser.license_group_member?.license_group_id ?? "",
     extraCopy: o,
@@ -800,7 +800,7 @@ function eW(e) {
       qj([e.orgUser.id], a, e.licenseGroupsById, e.isCurrentUserOrgAdmin, e.org, t, e.queueFilterCountsRefetch, null, !0);
     },
     disabled: !!e.orgUser.license_group_member?.idp_group && "lock",
-    disabledTooltipText: _$$t2("members_table.idp_user.user_provisioned")
+    disabledTooltipText: getI18nString("members_table.idp_user.user_provisioned")
   });
 }
 function eH(e) {
@@ -812,14 +812,14 @@ function eH(e) {
   } : eD;
   let i = e.planType === FOrganizationLevelType.TEAM && !e.member.team_role?.pending && !e.member.team_user;
   return (useEffect(() => {
-    i && sx("member_flyout_hide_job_title", {
+    i && trackEventAnalytics("member_flyout_hide_job_title", {
       teamId: e.team.id,
       roleId: e.member.team_role?.id,
       userId: e.member.team_role?.user_id ?? e.member.team_role?.user?.id
     });
   }, [i]), i) ? null : jsx(eL, {
     id: "job-title",
-    label: _$$t2("member_flyout_modal.job_title_select_label"),
+    label: getI18nString("member_flyout_modal.job_title_select_label"),
     options: [a],
     selectedOption: a.key,
     onChange: lQ,
@@ -829,15 +829,15 @@ function eH(e) {
 function eY(e) {
   return e.billingInterval ? jsx(eL, {
     id: "billing-interval",
-    label: _$$t2("member_flyout_modal.billing_interval_select_label"),
+    label: getI18nString("member_flyout_modal.billing_interval_select_label"),
     options: [{
       type: "option",
       key: NW.MONTH,
-      text: _$$t2("member_flyout_modal.billing_interval.monthly")
+      text: getI18nString("member_flyout_modal.billing_interval.monthly")
     }, {
       type: "option",
       key: NW.YEAR,
-      text: _$$t2("member_flyout_modal.billing_interval.annually")
+      text: getI18nString("member_flyout_modal.billing_interval.annually")
     }],
     selectedOption: e.billingInterval,
     onChange: lQ,
@@ -855,7 +855,7 @@ function eJ(e) {
   let o = eP(updateReason, eM(updateTimestamp));
   return jsx(eL, {
     id: "workspace",
-    label: _$$t2("member_flyout_modal.workspace_select_label"),
+    label: getI18nString("member_flyout_modal.workspace_select_label"),
     options: a,
     selectedOption: s?.workspace_id ?? "",
     extraCopy: o,
@@ -863,7 +863,7 @@ function eJ(e) {
       _$$ep([e.orgUser.id], a, e.org, t, e.queueFilterCountsRefetch, null);
     },
     disabled: !!s?.idp_group && "lock",
-    disabledTooltipText: _$$t2("members_table.idp_user.user_provisioned")
+    disabledTooltipText: getI18nString("members_table.idp_user.user_provisioned")
   });
 }
 function eK(e) {
@@ -889,7 +889,7 @@ function eK(e) {
     teamId: e.team.id,
     source: "members_table_flyout"
   } : null);
-  if ("grant" === e.adminAccessAction) switch (a = _$$t2("member_flyout_modal.grant_admin_access_label"), o = "grant-admin", e.planType) {
+  if ("grant" === e.adminAccessAction) switch (a = getI18nString("member_flyout_modal.grant_admin_access_label"), o = "grant-admin", e.planType) {
     case FOrganizationLevelType.ORG:
       t = () => {
         VS({
@@ -904,7 +904,7 @@ function eK(e) {
       break;
     default:
       throwTypeError(e);
-  } else if ("revoke" === e.adminAccessAction) switch (a = _$$t2("member_flyout_modal.revoke_admin_access_label"), o = "revoke-admin", e.planType) {
+  } else if ("revoke" === e.adminAccessAction) switch (a = getI18nString("member_flyout_modal.revoke_admin_access_label"), o = "revoke-admin", e.planType) {
     case FOrganizationLevelType.ORG:
       t = () => {
         VS({
@@ -919,7 +919,7 @@ function eK(e) {
       break;
     default:
       throwTypeError(e);
-  } else "invite" === e.adminAccessAction ? (a = _$$t2("member_flyout_modal.invite_admin_access_label"), o = "invite-admin", t = () => c(e.member.email)) : throwTypeError(e.adminAccessAction);
+  } else "invite" === e.adminAccessAction ? (a = getI18nString("member_flyout_modal.invite_admin_access_label"), o = "invite-admin", t = () => c(e.member.email)) : throwTypeError(e.adminAccessAction);
   return jsx($z, {
     variant: "secondary",
     onClick: t,
@@ -954,7 +954,7 @@ function eX(e) {
       name: "remove-from-plan"
     },
     children: jsx("span", {
-      children: tx("member_flyout_modal.remove_from_plan", {
+      children: renderI18nText("member_flyout_modal.remove_from_plan", {
         planName: t
       })
     })
@@ -1011,7 +1011,7 @@ function eZ(e) {
   let r = C3();
   let l = !1;
   useEffect(() => {
-    e.planType === FOrganizationLevelType.TEAM && l && sx("member_flyout_hide_job_title", {
+    e.planType === FOrganizationLevelType.TEAM && l && trackEventAnalytics("member_flyout_hide_job_title", {
       teamId: e.team.id,
       roleId: e.member.team_role?.id,
       userId: e.member.team_role?.user_id ?? e.member.team_role?.user?.id
@@ -1075,13 +1075,13 @@ function e0(e) {
       "data-testid": "activity-log-table-header",
       children: [jsx("div", {
         className: `${eA} ${_$$s2.colorTextSecondary.flex.justifyStart.itemsCenter.flexRow.borderBox.$}`,
-        children: tx("column_header.date")
+        children: renderI18nText("column_header.date")
       }), jsx("div", {
         className: `${eT} ${_$$s2.colorTextSecondary.borderBox.flex.itemsCenter.$}`,
-        children: tx("column_header.event")
+        children: renderI18nText("column_header.event")
       }), jsx("div", {
         className: `${eA} ${_$$s2.colorTextSecondary.borderBox.flex.itemsCenter.justifyEnd.$}`,
-        children: tx("column_header.product")
+        children: renderI18nText("column_header.product")
       })]
     }), jsxs(_$$P, {
       dataTestId: "activity-log-table-body",
@@ -1098,12 +1098,12 @@ function e0(e) {
             className: `${eA} ${_$$s2.flex.flexColumn.itemsStart.borderBox.$}`,
             children: [jsx(_$$E2, {
               color: "default",
-              children: tx("recent_activity_modal.activity_log_created_at", {
+              children: renderI18nText("recent_activity_modal.activity_log_created_at", {
                 creationDate: _$$A(e.created_at).toDate()
               })
             }), jsx(_$$E2, {
               color: "secondary",
-              children: tx("recent_activity_modal.activity_log_created_at_time", {
+              children: renderI18nText("recent_activity_modal.activity_log_created_at_time", {
                 creationDate: _$$A(e.created_at).toDate()
               })
             })]
@@ -1130,14 +1130,14 @@ function e0(e) {
             activityTabInitialEmail: e.orgUser.user.email
           }));
         },
-        children: tx("recent_activity_modal.view_all_activity_button")
+        children: renderI18nText("recent_activity_modal.view_all_activity_button")
       })
     })]
   }) : jsx("div", {
     className: _$$s2.flex.flexColumn.hFull.justifyCenter.itemsCenter.$,
     children: jsx(_$$E2, {
       color: "secondary",
-      children: tx("recent_activity_modal.no_activity_found")
+      children: renderI18nText("recent_activity_modal.no_activity_found")
     })
   });
 }
@@ -1161,10 +1161,10 @@ function e1(e) {
         manager: r,
         children: [jsx(_$$t.Tab, {
           ...s.manage,
-          children: _$$t2("member_flyout_modal.tabs.manage_tab_title")
+          children: getI18nString("member_flyout_modal.tabs.manage_tab_title")
         }), e.planType === FOrganizationLevelType.ORG && jsx(_$$t.Tab, {
           ...s.activity,
-          children: _$$t2("member_flyout_modal.tabs.activity_tab_title")
+          children: getI18nString("member_flyout_modal.tabs.activity_tab_title")
         })]
       })
     }), jsxs("div", {

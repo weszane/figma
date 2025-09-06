@@ -4,7 +4,7 @@ import { d as _$$d } from "../905/976845";
 import { J } from "../905/125993";
 import { J as _$$J } from "../905/341359";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Ib } from "../905/129884";
 import { Di, j_, ii } from "../905/217142";
 export function $$p0(e) {
@@ -30,10 +30,10 @@ export function $$p0(e) {
             }
           });
         },
-        "aria-label": _$$t("universal_insert.more_options"),
+        "aria-label": getI18nString("universal_insert.more_options"),
         htmlAttributes: {
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": _$$t("universal_insert.more_options")
+          "data-tooltip": getI18nString("universal_insert.more_options")
         },
         children: jsx(J, {})
       })

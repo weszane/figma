@@ -1,29 +1,29 @@
 import { h3O, Ez5 } from "../figma_app/763686";
-import { Pg as _$$Pg, sx, az } from "../905/449184";
+import { clearAnalyticsStorage, trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { NU } from "../905/11";
-import { Lo } from "../905/714362";
+import { logInfo } from "../905/714362";
 import { FFileType, FResourceCategoryType } from "../figma_app/191312";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { G } from "../figma_app/471068";
 import { n as _$$n } from "../905/347702";
 import { _ } from "../905/613917";
 export function $$p1(e) {
   switch (e) {
-    case nT.Design:
+    case FEditorType.Design:
       return "design";
-    case nT.Whiteboard:
+    case FEditorType.Whiteboard:
       return "figjam";
-    case nT.DevHandoff:
+    case FEditorType.DevHandoff:
       return "dev_handoff";
-    case nT.Slides:
+    case FEditorType.Slides:
       return "slides";
-    case nT.Sites:
+    case FEditorType.Sites:
       return "sites";
-    case nT.Figmake:
+    case FEditorType.Figmake:
       return "make";
-    case nT.Cooper:
+    case FEditorType.Cooper:
       return "buzz";
-    case nT.Illustration:
+    case FEditorType.Illustration:
       return "draw";
     default:
       return "unknown";
@@ -106,21 +106,21 @@ export function $$v8(e, t) {
   } : {};
 }
 export function $$A12() {
-  _$$Pg();
+  clearAnalyticsStorage();
 }
 let $$x20 = _$$n((e, t, r, n = {}, a) => {
   let s = m(t, r);
   let o = S(t, s, r, n);
-  sx(e, o, a);
+  trackEventAnalytics(e, o, a);
 });
 let $$N21 = _$$n((e, t, r, n = {}, a) => {
   let s = S(t.key, t, r, n);
-  sx(e, s, a);
+  trackEventAnalytics(e, s, a);
 });
 let $$C5 = _$$n((e, t, r, n) => {
   let a = m(t, r);
   let s = S(t, a, r, n);
-  az.trackDefinedEvent(e, s);
+  analyticsEventManager.trackDefinedEvent(e, s);
 });
 export function $$w2(e, t, r = {}, n) {
   r.productType = t && $$_30(t);
@@ -129,7 +129,7 @@ export function $$w2(e, t, r = {}, n) {
   r.fileTeamId = t?.teamId;
   r.containingFolderId = t?.folderId;
   t && t.fileRepoId && (r.fileRepoId = t.fileRepoId);
-  sx(e, r, n);
+  trackEventAnalytics(e, r, n);
 }
 export let $$O23 = "File Browser File Clicked";
 export function $$R25(e, t, r) {
@@ -143,17 +143,17 @@ export function $$R25(e, t, r) {
       sharedByFilter: t.sharedByFilter,
       viewMode: t.viewMode
     }, r);
-  } else t.selectedViewName ? sx($$O23, {
+  } else t.selectedViewName ? trackEventAnalytics($$O23, {
     fileKey: e,
     selectedView: t.selectedViewName,
     entrypoint: t.entrypoint
-  }, r) : sx($$O23, {
+  }, r) : trackEventAnalytics($$O23, {
     fileKey: e,
     entrypoint: t.entrypoint
   }, r);
 }
 export function $$L7(e, t, r, n) {
-  sx("file_browser_loaded", {
+  trackEventAnalytics("file_browser_loaded", {
     selectedView: e.view,
     currentOrgId: t,
     currentTeamId: r,
@@ -161,19 +161,19 @@ export function $$L7(e, t, r, n) {
   });
 }
 export function $$P27(e) {
-  sx("file_browser_page_visit", {
+  trackEventAnalytics("file_browser_page_visit", {
     selectedView: e.view
   });
 }
 export function $$D3(e, t, r) {
-  sx("file_browser_plan_filter_selected", {
+  trackEventAnalytics("file_browser_plan_filter_selected", {
     planId: e,
     entryPoint: t,
     planType: r
   });
 }
 export function $$k26(e, t) {
-  sx("file_browser_sharer_filter_selected", {
+  trackEventAnalytics("file_browser_sharer_filter_selected", {
     sharerId: e,
     entryPoint: t
   });
@@ -188,7 +188,7 @@ export function $$M10(e, t, r = {}, n) {
     r.fileTeamIds.push(e.team_id);
     r.containingFolderIds.push(e.folder_id);
   });
-  sx(e, r, n);
+  trackEventAnalytics(e, r, n);
 }
 export function $$F11(e, t, r, n = {}, a) {
   let s = t.map(e => r.fileByKey[e]);
@@ -201,7 +201,7 @@ export function $$F11(e, t, r, n = {}, a) {
     n.fileTeamIds.push(e.team_id);
     n.containingFolderIds.push(e.folder_id);
   });
-  sx(e, n, a);
+  trackEventAnalytics(e, n, a);
 }
 export function $$j29(e, t, r = {}, n) {
   r.fileKeys = [];
@@ -214,7 +214,7 @@ export function $$j29(e, t, r = {}, n) {
     r.fileTeamIds.push(e.teamId);
     r.containingFolderIds.push(e.folderId);
   });
-  sx(e, r, n);
+  trackEventAnalytics(e, r, n);
 }
 export function $$U18(e, t, r, n) {
   let i = e.map(e => e.key);
@@ -237,23 +237,23 @@ export function $$B34(e, t, r, n, a = {}, s) {
   let o = n.folders[t];
   a.folderId = o?.id || t;
   a.folderTeamId = o?.team_id || r;
-  sx(e, a, s);
+  trackEventAnalytics(e, a, s);
 }
 export function $$G16(e, t, r, n = {}, a) {
   let s = _(t, r);
   n.teamId = s?.id;
   n.teamName = s?.name;
-  sx(e, n, a);
+  trackEventAnalytics(e, n, a);
 }
 export function $$V4(e, t, r, n = {}, a) {
   let s = r.orgById[t];
   n.orgId = s.id;
   n.orgName = s.name;
-  sx(e, n, a);
+  trackEventAnalytics(e, n, a);
 }
 export function $$H32(e, t, r = {}, n) {
   r.userId = t.user && t.user.id;
-  sx(e, r, n);
+  trackEventAnalytics(e, r, n);
 }
 let z = {
   [FResourceCategoryType.FILE]: "fileKey",
@@ -266,10 +266,10 @@ export function $$W37(e, t, r = {}, n) {
   r.roleId = t.id;
   r[a] = t.resource_id_or_key;
   t.user_id && (r.roleUserId = t.user_id);
-  sx(e, r, n);
+  trackEventAnalytics(e, r, n);
 }
 export function $$K35(e, t) {
-  sx(e, t);
+  trackEventAnalytics(e, t);
 }
 export function $$Y28(e) {
   return {
@@ -282,14 +282,14 @@ var $ = (e => (e.DESIGN = "DESIGN", e.WHITEBOARD = "WHITEBOARD", e))($ || {});
 export let $$X15 = "CTA Clicked";
 export function $$q0(e, t, r, n) {
   let o = t || $$X15;
-  Lo(o, e.text || "", e, {
+  logInfo(o, e.text || "", e, {
     logToConsole: NU.NEVER
   });
   let l = {
     ...e,
     nonInteraction: 0
   };
-  sx(o, l, {
+  trackEventAnalytics(o, l, {
     forwardToDatadog: !0,
     sendAsBeacon: r,
     ...n
@@ -301,10 +301,10 @@ export function $$Z22(e, t) {
     ...e,
     nonInteraction: 0
   };
-  sx("Input Blurred", r, t);
+  trackEventAnalytics("Input Blurred", r, t);
 }
 export function $$Q31(e, t = {}) {
-  sx("Context Viewed", e, {
+  trackEventAnalytics("Context Viewed", e, {
     forwardToDatadog: !0,
     ...t
   });

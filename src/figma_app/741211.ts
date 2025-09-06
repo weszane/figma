@@ -2,7 +2,7 @@ import { useState, useRef, useCallback, useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { resourceUtils } from "../905/989992";
 import s from "../vendor/128080";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { xj, ok } from "../figma_app/851625";
 import { k } from "../905/651849";
 import { ZC } from "../figma_app/39751";
@@ -14,7 +14,7 @@ import { r as _$$r } from "../905/520829";
 import { serializeQuery } from "../905/634134";
 import { g as _$$g } from "../905/880308";
 import { s as _$$s } from "../905/573154";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { $ } from "../905/240853";
 import { hZ } from "../figma_app/996356";
 import { hZ as _$$hZ } from "../figma_app/990058";
@@ -87,7 +87,7 @@ export function $$k2({
           o(!0);
           a(!1);
         } catch (e) {
-          p(_$$s.error(_$$t("org_user_actions.an_error_occurred_fetching_org_admins")));
+          p(_$$s.error(getI18nString("org_user_actions.an_error_occurred_fetching_org_admins")));
           a(!1);
           o(!1);
           d(!0);
@@ -114,7 +114,7 @@ let F = async (e, t, r) => {
   let u = null === cursor ? (firstPageSize || 25).toString() : null;
   try {
     let e = Date.now();
-    sx("Org Admin Members V2 Fetch Initiated", {
+    trackEventAnalytics("Org Admin Members V2 Fetch Initiated", {
       orgId: t,
       ...r.extraLoggingData,
       isInitialLoad: null === cursor,
@@ -130,7 +130,7 @@ let F = async (e, t, r) => {
       minimalFields
     });
     let p = await o;
-    sx("Org Admin Members V2 Fetch Succeeded", {
+    trackEventAnalytics("Org Admin Members V2 Fetch Succeeded", {
       orgId: t,
       durationMs: Date.now() - e,
       ...r.extraLoggingData,
@@ -149,7 +149,7 @@ let F = async (e, t, r) => {
   } catch (t) {
     if (!(t instanceof M)) {
       let r = t.data?.status === 422 ? t.data?.message : t.message;
-      e(_$$s.error(r || _$$t("org_user_actions.an_error_occurred_fetching_org_users")));
+      e(_$$s.error(r || getI18nString("org_user_actions.an_error_occurred_fetching_org_users")));
     }
     return t;
   }
@@ -217,7 +217,7 @@ export function $$B6(e) {
   let g = u ?? d;
   let f = useMemo(() => g.data ? _$$t2(g.data, o) : [], [g.data, o]);
   useEffect(() => {
-    "errors" === g.status && t(_$$s.error(_$$t("org_user_actions.an_error_occurred_fetching_org_users")));
+    "errors" === g.status && t(_$$s.error(getI18nString("org_user_actions.an_error_occurred_fetching_org_users")));
   }, [t, g.status]);
   useEffect(() => {
     "loaded" === g.status && U(r, t, f);

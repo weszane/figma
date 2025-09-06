@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useState } from "react";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { oW } from "../905/675859";
 import { XHR } from "../905/910117";
 async function l(e) {
@@ -31,7 +31,7 @@ export function $$d0(e) {
             path: i.pathname.substring(1),
             image_type: t
           };
-          sx("retry_image_resizing", {
+          trackEventAnalytics("retry_image_resizing", {
             currentSrc: e.currentSrc,
             size: r.size,
             path: r.path

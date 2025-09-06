@@ -1,10 +1,10 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { us } from "../905/11";
-import { tx, t as _$$t } from "../905/303541";
+import { captureMessage } from "../905/11";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { yH } from "../figma_app/240735";
 import { useState } from "react";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { tB, ks, vd } from "../figma_app/637027";
 import { Ce } from "../905/156213";
 import { _6 } from "../figma_app/386952";
@@ -91,7 +91,7 @@ function N({
   return jsxs("div", {
     className: "downgrade_survey_modal_component_v2--currencyContainer--CoFln",
     children: [jsx("p", {
-      children: tx(`downgrade_survey.survey_option.too_expensive.${e}`)
+      children: renderI18nText(`downgrade_survey.survey_option.too_expensive.${e}`)
     }), jsx("p", {
       className: "downgrade_survey_modal_component_v2--currencyShorthand--xhQpy",
       children: t
@@ -120,18 +120,18 @@ let C = [{
     }, e)), jsx(wv, {}, "separator"), jsx(c$, {
       id: e,
       onClick: s,
-      children: tx("downgrade_survey.survey_option.too_expensive.other_currency")
+      children: renderI18nText("downgrade_survey.survey_option.too_expensive.other_currency")
     }, e)];
     return jsx("fieldset", {
       children: jsx(p, {
         id: "currency_conversion",
-        label: _$$t("downgrade_survey.survey_option.too_expensive.currency_conversion"),
+        label: getI18nString("downgrade_survey.survey_option.too_expensive.currency_conversion"),
         children: jsxs("fieldset", {
           className: h()({
             "downgrade_survey_modal_component_v2--currencySelector__other--khpqx": t === e
           }),
           children: [jsx(Ve, {
-            label: t.length ? _$$t(`downgrade_survey.survey_option.too_expensive.${t}`) : _$$t("downgrade_survey.survey_option.too_expensive.currency_selector"),
+            label: t.length ? getI18nString(`downgrade_survey.survey_option.too_expensive.${t}`) : getI18nString("downgrade_survey.survey_option.too_expensive.currency_selector"),
             options: i
           }), jsx("input", {
             id: "currency",
@@ -140,7 +140,7 @@ let C = [{
             value: t
           }), t === e && jsx(y, {
             id: "currency_input",
-            placeholder: _$$t("downgrade_survey.survey_option.too_expensive.specify_currency")
+            placeholder: getI18nString("downgrade_survey.survey_option.too_expensive.specify_currency")
           })]
         })
       })
@@ -168,10 +168,10 @@ let C = [{
     return jsxs("fieldset", {
       children: [jsx("legend", {
         className: "downgrade_survey_modal_component_v2--additionalQuestion--HfKNO",
-        children: tx("downgrade_survey.survey_option.no_longer_using_figma_products.other_products")
+        children: renderI18nText("downgrade_survey.survey_option.no_longer_using_figma_products.other_products")
       }), jsx(y, {
         id: "other_products",
-        placeholder: _$$t("downgrade_survey.survey_option.no_longer_using_figma_products.text_area")
+        placeholder: getI18nString("downgrade_survey.survey_option.no_longer_using_figma_products.text_area")
       })]
     });
   }, {}),
@@ -199,19 +199,19 @@ let C = [{
         children: [jsx(Z, {
           className: E,
           value: "Starter plan",
-          children: tx("downgrade_survey.survey_option.switching_plans.starter_plan")
+          children: renderI18nText("downgrade_survey.survey_option.switching_plans.starter_plan")
         }), jsx(Z, {
           className: E,
           value: "Organization plan",
-          children: tx("downgrade_survey.survey_option.switching_plans.organization_plan")
+          children: renderI18nText("downgrade_survey.survey_option.switching_plans.organization_plan")
         }), jsx(Z, {
           className: E,
           value: "Enterprise plan",
-          children: tx("downgrade_survey.survey_option.switching_plans.enterprise_plan")
+          children: renderI18nText("downgrade_survey.survey_option.switching_plans.enterprise_plan")
         }), jsx(Z, {
           className: E,
           value: "Education plan",
-          children: tx("downgrade_survey.survey_option.switching_plans.education_plan")
+          children: renderI18nText("downgrade_survey.survey_option.switching_plans.education_plan")
         })]
       }), jsx("input", {
         id: "new_plan",
@@ -234,7 +234,7 @@ let S = {
   children: jsx(function () {
     return jsx(y, {
       className: "downgrade_survey_modal_component_v2--otherTextArea--pS5MZ",
-      placeholder: _$$t("downgrade_survey.survey_option.other.text_area"),
+      placeholder: getI18nString("downgrade_survey.survey_option.other.text_area"),
       textarea: !0
     });
   }, {}),
@@ -256,7 +256,7 @@ function O({
   let o = useDispatch();
   let f = _6().teamId;
   return jsx(OJ, {
-    title: _$$t("downgrade_survey.header"),
+    title: getI18nString("downgrade_survey.header"),
     fixedTop: !0,
     minWidth: 370,
     maxWidth: 370,
@@ -283,7 +283,7 @@ function O({
           };
         });
         let i = r.currentTarget.getElementsByClassName(j)[0].getElementsByTagName("input")[0].checked;
-        sx("Team Downgrade Survey", {
+        trackEventAnalytics("Team Downgrade Survey", {
           teamId: f,
           canContact: i,
           selectedOptions: s.map(e => JSON.stringify(e))
@@ -296,26 +296,26 @@ function O({
         children: [jsxs("fieldset", {
           className: w,
           children: [jsx("legend", {
-            children: tx("downgrade_survey.what_made_you_cancel_your_plan")
+            children: renderI18nText("downgrade_survey.what_made_you_cancel_your_plan")
           }), !t.length && jsx("p", {
             className: Q,
-            children: tx("downgrade_survey.select_one")
+            children: renderI18nText("downgrade_survey.select_one")
           }), k.map(({
             id: e,
             children: t
           }) => jsx(p, {
             id: e,
-            label: _$$t(`downgrade_survey.survey_option.${e}`),
+            label: getI18nString(`downgrade_survey.survey_option.${e}`),
             onChange: i,
             children: t
           }, e))]
         }), jsxs("fieldset", {
           className: j,
           children: [jsx("legend", {
-            children: tx("downgrade_survey.research_contact")
+            children: renderI18nText("downgrade_survey.research_contact")
           }), jsx(p, {
             id: "research",
-            label: _$$t("downgrade_survey.allow_research_contact")
+            label: getI18nString("downgrade_survey.allow_research_contact")
           })]
         })]
       }), jsx("div", {
@@ -325,7 +325,7 @@ function O({
           disabled: !t.length,
           className: pL,
           autoFocus: !1,
-          children: tx("downgrade_survey.continue")
+          children: renderI18nText("downgrade_survey.continue")
         })
       })]
     })
@@ -337,9 +337,9 @@ export function $$F0({
   let t = useDispatch();
   let r = useSelector(e => e.modalShown?.data.teamId);
   let l = useSelector(e => e.teams[r]);
-  let d = "admin" === e ? _$$t("downgrade_survey.go_back") : _$$t("downgrade_survey.do_not_leave_team");
+  let d = "admin" === e ? getI18nString("downgrade_survey.go_back") : getI18nString("downgrade_survey.do_not_leave_team");
   let c = "leave-team" === e ? () => {
-    us("User entered leave team survey");
+    captureMessage("User entered leave team survey");
     t(yH({
       team: l,
       userInitiated: !0

@@ -4,7 +4,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { J0O, glU, fOf, YIb } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { l as _$$l } from "../905/745972";
-import { R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { Point } from "../905/736624";
 import { vq } from "../905/8732";
 import { Ce } from "../905/156213";
@@ -23,7 +23,7 @@ export function $$x3({
   propType: e,
   refField: t
 }) {
-  return R(i => ({
+  return selectWithShallowEqual(i => ({
     allStates: ow(i),
     singleSelectedNode: AF(i),
     stateGroup: NA(i),

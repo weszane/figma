@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import l from "../vendor/805353";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { parsePxInt } from "../figma_app/783094";
 import { Uz } from "../905/63728";
 import { Rs } from "../figma_app/288654";
@@ -19,7 +19,7 @@ import { a_ } from "../figma_app/858013";
 import { P as _$$P } from "../905/347284";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { R as _$$R } from "../905/304671";
 import { SX, mq } from "../figma_app/199513";
 import { Ws } from "../905/628874";
@@ -49,7 +49,7 @@ import { vh } from "../figma_app/181241";
 import { NB } from "../905/826900";
 import { OJ } from "../905/519092";
 import { v as _$$v } from "../905/92662";
-import { ED, x1 } from "../905/714362";
+import { logDebug, logError } from "../905/714362";
 import { XHR } from "../905/910117";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { X0 } from "../905/784221";
@@ -60,7 +60,7 @@ import { S$, XX } from "../figma_app/345997";
 import { KH } from "../905/81982";
 import { NU } from "../905/163189";
 import { Tb } from "../figma_app/633080";
-import { eD as _$$eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { s as _$$s3 } from "../905/573154";
 import { Dw } from "../figma_app/976345";
 import { e5 } from "../figma_app/297957";
@@ -79,7 +79,7 @@ function R(e) {
   let t = useDispatch();
   let r = useCallback(r => {
     r.stopPropagation();
-    e.team.canEdit && (sx("New Folder", {
+    e.team.canEdit && (trackEventAnalytics("New Folder", {
       trackingContext: e.trackingContextName
     }), t(SX({
       where: Ah.FolderListView,
@@ -90,7 +90,7 @@ function R(e) {
     })));
   }, [t, e.team, e.trackingContextName]);
   return e.team.canEdit ? jsx(_$$f, {
-    data_tooltip: _$$t("sidebar.new_project"),
+    data_tooltip: getI18nString("sidebar.new_project"),
     data_onboarding_key: "new-project-icon",
     innerText: "Creates new project",
     onClick: r,
@@ -120,7 +120,7 @@ function ei(e) {
       onChange: e.onChange,
       maxLength: 255,
       autoFocus: !0,
-      placeholder: _$$t("page_move.add_new_file_name"),
+      placeholder: getI18nString("page_move.add_new_file_name"),
       className: "page_move--fileCreateNameInput--0yBR8"
     })]
   });
@@ -149,32 +149,32 @@ function el({
         text: jsxs(Fragment, {
           children: [jsx("p", {
             className: _$$s.fontSemiBold.$,
-            children: tx("viewer_upgrade_awareness.you_re_working_in_drafts_on_a_free_seat")
+            children: renderI18nText("viewer_upgrade_awareness.you_re_working_in_drafts_on_a_free_seat")
           }), jsx("p", {
             children: function (e, t, r) {
               switch (r) {
                 case eo.SHARE_DRAFT:
                   if (t === _$$O.ORG) {
-                    if (e) return tx("viewer_upgrade_awareness.sharing_a_draft_will_move_you_to_a_paid_seat_org", {
+                    if (e) return renderI18nText("viewer_upgrade_awareness.sharing_a_draft_will_move_you_to_a_paid_seat_org", {
                       planName: e
                     });
-                    return tx("viewer_upgrade_awareness.sharing_a_draft_will_move_you_to_a_paid_seat_in_your_organization");
+                    return renderI18nText("viewer_upgrade_awareness.sharing_a_draft_will_move_you_to_a_paid_seat_in_your_organization");
                   }
-                  if (e) return tx("viewer_upgrade_awareness.sharing_a_draft_will_move_you_to_a_paid_seat_team", {
+                  if (e) return renderI18nText("viewer_upgrade_awareness.sharing_a_draft_will_move_you_to_a_paid_seat_team", {
                     planName: e
                   });
-                  return tx("viewer_upgrade_awareness.sharing_a_draft_will_move_you_to_a_paid_seat_in_your_team");
+                  return renderI18nText("viewer_upgrade_awareness.sharing_a_draft_will_move_you_to_a_paid_seat_in_your_team");
                 case eo.MOVE_DRAFT:
                   if (t === _$$O.ORG) {
-                    if (e) return tx("viewer_upgrade_awareness.moving_a_draft_will_change_you_to_a_paid_seat_org", {
+                    if (e) return renderI18nText("viewer_upgrade_awareness.moving_a_draft_will_change_you_to_a_paid_seat_org", {
                       planName: e
                     });
-                    return tx("viewer_upgrade_awareness.moving_a_draft_will_change_you_to_a_paid_seat_in_your_organization");
+                    return renderI18nText("viewer_upgrade_awareness.moving_a_draft_will_change_you_to_a_paid_seat_in_your_organization");
                   }
-                  if (e) return tx("viewer_upgrade_awareness.moving_a_draft_will_change_you_to_a_paid_seat_team", {
+                  if (e) return renderI18nText("viewer_upgrade_awareness.moving_a_draft_will_change_you_to_a_paid_seat_team", {
                     planName: e
                   });
-                  return tx("viewer_upgrade_awareness.moving_a_draft_will_change_you_to_a_paid_seat_in_your_team");
+                  return renderI18nText("viewer_upgrade_awareness.moving_a_draft_will_change_you_to_a_paid_seat_in_your_team");
               }
             }(e, t, i)
           })]
@@ -428,14 +428,14 @@ function eH(e) {
   return jsx("form", {
     onSubmit: t => {
       t.preventDefault();
-      sx("Create Team Inline", {
+      trackEventAnalytics("Create Team Inline", {
         trackingContext: e.trackingContextName
       });
       r ? (o(KQ({
         teamName: r,
         orgAccess: FAccessLevelType.PUBLIC,
         dontRedirect: !0
-      })), d(!0), n("")) : o(_$$s3.error(_$$t("flash.team_name_cannot_be_empty")));
+      })), d(!0), n("")) : o(_$$s3.error(getI18nString("flash.team_name_cannot_be_empty")));
     },
     children: jsx("div", {
       className: "file_move--teamCreateRow--GglhU file_move--folderRow--ZBYjx",
@@ -448,7 +448,7 @@ function eH(e) {
             teams: Object.values(e.teams),
             rolesByTeamId: e.rolesByTeamId
           }) ? (o(Ce()), o(Dw({
-            openInNewTab: !_$$eD
+            openInNewTab: !desktopAPIInstance
           }))) : (d(!1), o(xH()));
         },
         children: [jsx(_$$B, {
@@ -456,7 +456,7 @@ function eH(e) {
           svg: _$$A2
         }), jsx("span", {
           className: "file_move--newFolderNameCustomSections--OqBS9 sidebar--sectionNameCustomSections--9e7LZ sidebar--sectionTextCustomSections---1KFn sidebar--sectionContentCustomSections--wI9mZ ellipsis--ellipsis--Tjyfa",
-          children: tx("file_browser.inline_team_creation.button_text")
+          children: renderI18nText("file_browser.inline_team_creation.button_text")
         })]
       }) : jsxs(Fragment, {
         children: [jsx("div", {
@@ -478,7 +478,7 @@ function eH(e) {
             },
             className: "file_move--newTeamInput--0kCF4",
             maxLength: e.teamNameMaxWidth,
-            placeholder: _$$t("file_browser.inline_team_creation.placeholder"),
+            placeholder: getI18nString("file_browser.inline_team_creation.placeholder"),
             autoFocus: !0
           })
         })]
@@ -723,7 +723,7 @@ export function $$e83(e) {
     E.data[e] && (t.restrictionsList = E.data[e]);
   }
   oY("loaded" === x.status, e => {
-    sx("file_move_modal_latency", {
+    trackEventAnalytics("file_move_modal_latency", {
       latency_ms: e
     }, {
       forwardToDatadog: !0
@@ -848,17 +848,17 @@ export class $$e32 extends PureComponent {
         r = this.props.fileMoveData.page_id;
         a = e.id;
         s = this.state.newFileName;
-        ED("startMovePagesJob", "Send request to start move pages job.");
+        logDebug("startMovePagesJob", "Send request to start move pages job.");
         XHR.post(`/api/files/${t}/move_pages`, {
           folder_id: a,
           page_ids: r,
           file_name: s
         }).catch(e => {
-          x1("startMovePagesJob", "Error with starting move pages job.", {
+          logError("startMovePagesJob", "Error with starting move pages job.", {
             err: e
           });
         }).then(() => {
-          ED("startMovePagesJob", "Move pages job successfully started.");
+          logDebug("startMovePagesJob", "Move pages job successfully started.");
         });
         return;
       }
@@ -867,11 +867,11 @@ export class $$e32 extends PureComponent {
         this.props.dispatch(to({
           type: X0,
           data: {
-            title: tx("templates.confirmation.move_to_drafts.title", {
+            title: renderI18nText("templates.confirmation.move_to_drafts.title", {
               count: 1
             }),
-            content: tx("templates.confirmation.move_to_drafts.description"),
-            confirmText: tx("templates.confirmation.move_to_drafts.button_v2"),
+            content: renderI18nText("templates.confirmation.move_to_drafts.description"),
+            confirmText: renderI18nText("templates.confirmation.move_to_drafts.button_v2"),
             destructive: !1,
             onConfirm: t
           }
@@ -938,13 +938,13 @@ export class $$e32 extends PureComponent {
     };
     this.getModalTitle = () => {
       let e = this.props.fileMoveData;
-      if (this.isMovePageToNewFile) return _$$t("file_browser.file_move.move_pages_to_new_file");
-      if (e.type === _$$A.FILE_IMPORT) return 1 === e.files.length ? _$$t("file_browser.file_move.modal_header_import_file", {
+      if (this.isMovePageToNewFile) return getI18nString("file_browser.file_move.move_pages_to_new_file");
+      if (e.type === _$$A.FILE_IMPORT) return 1 === e.files.length ? getI18nString("file_browser.file_move.modal_header_import_file", {
         fileName: e.files[0].name
-      }) : _$$t("file_browser.file_move.modal_header_import_files");
+      }) : getI18nString("file_browser.file_move.modal_header_import_files");
       {
         let t = e.type === _$$A.FILE ? e.file.name : e.repo.name;
-        return _$$t("file_browser.file_move.modal_header_move_file", {
+        return getI18nString("file_browser.file_move.modal_header_move_file", {
           fileName: t
         });
       }
@@ -1126,12 +1126,12 @@ export class $$e32 extends PureComponent {
               style: {
                 paddingTop: "100px"
               },
-              children: tx("file_browser.file_move.zero_state")
+              children: renderI18nText("file_browser.file_move.zero_state")
             }), this.props.currentOrg && jsx("div", {
               className: _$$s.pt20.$,
               children: jsx($$, {
                 onClick: this.onOrgViewLinkClick,
-                children: this.props.currentOrg.bigma_enabled ? _$$t("file_browser.file_move.view_workspaces") : _$$t("file_browser.file_move.view_teams")
+                children: this.props.currentOrg.bigma_enabled ? getI18nString("file_browser.file_move.view_workspaces") : getI18nString("file_browser.file_move.view_teams")
               })
             })]
           })
@@ -1163,7 +1163,7 @@ export class $$e32 extends PureComponent {
             })]
           }), this.props.fileMove.folderSearchQuery && !this.isMovePageToNewFile && u ? jsx("div", {
             className: "file_move--emptyModal--o-ei-",
-            children: tx("search.file_move.no_results_found", {
+            children: renderI18nText("search.file_move.no_results_found", {
               folderSearchQuery: this.props.fileMove.folderSearchQuery
             })
           }) : jsx(_$$P, {
@@ -1193,11 +1193,11 @@ export class $$e32 extends PureComponent {
             className: "file_move--footer--pBClJ",
             children: [jsx(nR, {
               onClick: this.onClose,
-              children: tx("modal.cancel")
+              children: renderI18nText("modal.cancel")
             }), jsx(vd, {
               disabled: !e,
               onClick: this.moveToSelectedFolder,
-              children: this.props.fileMoveData.moveText || _$$t("file_browser.file_move.move")
+              children: this.props.fileMoveData.moveText || getI18nString("file_browser.file_move.move")
             })]
           })]
         }), this.renderDropdown(), jsx($$ts1, {
@@ -1282,7 +1282,7 @@ export class $$e74 extends PureComponent {
         })
       }), jsx(_$$L, {
         ref: this.searchInputRef,
-        placeholder: _$$t("file_browser.file_move.search_placeholder"),
+        placeholder: getI18nString("file_browser.file_move.search_placeholder"),
         onFocus: this.onFocus,
         onBlur: this.onBlur,
         onKeyDown: this.onSearchKeyDown,
@@ -1340,13 +1340,13 @@ export function $$e95(e) {
             style: {
               maxWidth: e.teamNameMaxWidth
             },
-            children: teamId === iK || teamId === HK ? _$$t("file_browser.shared_projects") : team.name
+            children: teamId === iK || teamId === HK ? getI18nString("file_browser.shared_projects") : team.name
           }), c && jsx("div", {
             className: "file_move--warningIcon--MVFCa",
             children: jsx(_$$B, {
               svg: _$$A4,
               "data-tooltip-type": Ib.TEXT,
-              "data-tooltip": _$$t("file_browser.file_move.paywall_team_tooltip")
+              "data-tooltip": getI18nString("file_browser.file_move.paywall_team_tooltip")
             })
           })]
         }), i && team && !c && jsx("div", {
@@ -1441,7 +1441,7 @@ function tr(e) {
   let t = useDispatch();
   let r = gY(mq);
   let s = (a, s) => {
-    sx("Rename Folder", {
+    trackEventAnalytics("Rename Folder", {
       trackingContext: e.trackingContextName
     });
     r({
@@ -1524,11 +1524,11 @@ export class $$ta0 extends PureComponent {
       children: [jsx(c$, {
         disabled: !t,
         onClick: this.renameFolder,
-        children: tx("file_browser.file_move.context_menu_rename")
+        children: renderI18nText("file_browser.file_move.context_menu_rename")
       }), jsx(wv, {}), jsx(c$, {
         href: EE(e.id, e.orgId),
         target: r,
-        children: tx("file_browser.file_move.context_menu_show_in_files")
+        children: renderI18nText("file_browser.file_move.context_menu_show_in_files")
       })]
     });
   }

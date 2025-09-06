@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { isNotNullish } from "../figma_app/95419";
-import { fp, md } from "../figma_app/27355";
+import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import { U, iT } from "../figma_app/901889";
 import { x as _$$x } from "../figma_app/256637";
 import { Rs } from "../figma_app/288654";
@@ -434,7 +434,7 @@ export function $$j1() {
     codegenSettings: null
   }, null, null));
   let d = iT();
-  let [c, p] = fp(_$$D);
+  let [c, p] = useAtomValueAndSetter(_$$D);
   let _ = useCallback(e => {
     l(e);
     p(e.localCodegenSettings?.language ?? null);
@@ -516,7 +516,7 @@ export function $$U2() {
     plugin
   } = function () {
     let e = tS();
-    let t = md(_$$x);
+    let t = useAtomWithSubscription(_$$x);
     let r = useSelector(e => e.figFileDuplicatedFromHubFile);
     let a = useMemo(() => {
       if (!e) return null;

@@ -19,16 +19,16 @@ import { J as _$$J } from "../905/614223";
 import { w3z, glU } from "../figma_app/763686";
 import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
-import { eU as _$$eU, md, fp } from "../figma_app/27355";
+import { atom, useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { useLocalStorageSync } from "../905/657224";
-import { az, sx } from "../905/449184";
+import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { A as _$$A2 } from "../905/920142";
 import { isDevEnvironment } from "../figma_app/169182";
-import { $D } from "../905/11";
+import { reportError } from "../905/11";
 import { Ex, zE } from "../figma_app/919079";
 import { z as _$$z } from "../905/284530";
 import { f as _$$f, v as _$$v } from "../figma_app/258006";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { M as _$$M } from "../905/830372";
 import { A as _$$A3 } from "../905/963262";
 import { Ur } from "../figma_app/451396";
@@ -38,7 +38,7 @@ import { uQ } from "../figma_app/311375";
 import { h as _$$h } from "../905/207101";
 import { ZC } from "../figma_app/39751";
 import { X as _$$X } from "../905/853613";
-import { n as _$$n } from "../figma_app/854115";
+import { findComponentGuidOrPublishId } from "../figma_app/854115";
 import { to } from "../905/156213";
 import { b as _$$b } from "../905/985254";
 import { fu } from "../figma_app/831799";
@@ -104,7 +104,7 @@ function ev() {
     className: Gg,
     children: [jsx("h2", {
       className: MC,
-      children: _$$t("dev_handoff.code.lang_react")
+      children: getI18nString("dev_handoff.code.lang_react")
     }), jsx("li", {
       className: gY,
       children: jsxs("article", {
@@ -119,7 +119,7 @@ function ev() {
           className: M7,
           children: [jsx("div", {
             className: uw,
-            children: tx("dev_handoff.code_connect.modal_install_package")
+            children: renderI18nText("dev_handoff.code_connect.modal_install_package")
           }), jsxs("div", {
             className: G5,
             children: [jsx("div", {
@@ -128,7 +128,7 @@ function ev() {
             }), jsx("div", {
               className: cL,
               children: jsx(rZ, {
-                "aria-label": _$$t("dev_handoff.code_connect.modal_copy_install_command"),
+                "aria-label": getI18nString("dev_handoff.code_connect.modal_copy_install_command"),
                 onClick: () => e(lW({
                   stringToCopy: "npm install @figma/code-connect"
                 })),
@@ -153,7 +153,7 @@ function ev() {
           className: M7,
           children: [jsx("div", {
             className: uw,
-            children: tx("dev_handoff.code_connect.modal_run_command")
+            children: renderI18nText("dev_handoff.code_connect.modal_run_command")
           }), jsxs("div", {
             className: G5,
             children: [jsx("div", {
@@ -162,7 +162,7 @@ function ev() {
             }), jsx("div", {
               className: cL,
               children: jsx(rZ, {
-                "aria-label": _$$t("dev_handoff.code_connect.modal_copy_connect_command"),
+                "aria-label": getI18nString("dev_handoff.code_connect.modal_copy_connect_command"),
                 onClick: () => e(lW({
                   stringToCopy: "npx figma connect"
                 })),
@@ -187,7 +187,7 @@ function ev() {
           className: M7,
           children: [jsx("div", {
             className: uw,
-            children: tx("dev_handoff.code_connect.modal_publish")
+            children: renderI18nText("dev_handoff.code_connect.modal_publish")
           }), jsxs("div", {
             className: G5,
             children: [jsx("div", {
@@ -196,7 +196,7 @@ function ev() {
             }), jsx("div", {
               className: cL,
               children: jsx(rZ, {
-                "aria-label": _$$t("dev_handoff.code_connect.modal_copy_publish_command"),
+                "aria-label": getI18nString("dev_handoff.code_connect.modal_copy_publish_command"),
                 onClick: () => e(lW({
                   stringToCopy: "npx figma connect publish"
                 })),
@@ -217,7 +217,7 @@ function eA() {
     className: Gg,
     children: [jsx("h2", {
       className: MC,
-      children: _$$t("dev_handoff.code.lang_swiftui")
+      children: getI18nString("dev_handoff.code.lang_swiftui")
     }), jsx("li", {
       className: gY,
       children: jsxs("article", {
@@ -232,7 +232,7 @@ function eA() {
           className: M7,
           children: [jsx("div", {
             className: uw,
-            children: tx("dev_handoff.code_connect.modal_install")
+            children: renderI18nText("dev_handoff.code_connect.modal_install")
           }), jsxs("div", {
             className: G5,
             children: [jsx("div", {
@@ -241,7 +241,7 @@ function eA() {
             }), jsx("div", {
               className: fq,
               children: jsx(rZ, {
-                "aria-label": _$$t("dev_handoff.code_connect.modal_copy_global_install_command"),
+                "aria-label": getI18nString("dev_handoff.code_connect.modal_copy_global_install_command"),
                 onClick: () => e(lW({
                   stringToCopy: "npm install -g @figma/code-connect"
                 })),
@@ -266,7 +266,7 @@ function eA() {
           className: M7,
           children: [jsx("div", {
             className: uw,
-            children: tx("dev_handoff.code_connect.swift.add_snippet")
+            children: renderI18nText("dev_handoff.code_connect.swift.add_snippet")
           }), jsxs("div", {
             className: G5,
             children: [jsx("div", {
@@ -275,7 +275,7 @@ function eA() {
             }), jsx("div", {
               className: fq,
               children: jsx(rZ, {
-                "aria-label": _$$t("dev_handoff.code_connect.modal_copy_swift_package_snippet"),
+                "aria-label": getI18nString("dev_handoff.code_connect.modal_copy_swift_package_snippet"),
                 onClick: () => e(lW({
                   stringToCopy: `dependencies: [
 		...,
@@ -304,7 +304,7 @@ function eA() {
           className: M7,
           children: [jsx("div", {
             className: uw,
-            children: tx("dev_handoff.code_connect.modal_run_command")
+            children: renderI18nText("dev_handoff.code_connect.modal_run_command")
           }), jsxs("div", {
             className: G5,
             children: [jsx("div", {
@@ -313,7 +313,7 @@ function eA() {
             }), jsx("div", {
               className: cL,
               children: jsx(rZ, {
-                "aria-label": _$$t("dev_handoff.code_connect.modal_copy_swift_connect_command"),
+                "aria-label": getI18nString("dev_handoff.code_connect.modal_copy_swift_connect_command"),
                 onClick: () => e(lW({
                   stringToCopy: "figma connect create"
                 })),
@@ -338,7 +338,7 @@ function eA() {
           className: M7,
           children: [jsx("div", {
             className: uw,
-            children: tx("dev_handoff.code_connect.modal_publish")
+            children: renderI18nText("dev_handoff.code_connect.modal_publish")
           }), jsxs("div", {
             className: G5,
             children: [jsx("div", {
@@ -346,7 +346,7 @@ function eA() {
             }), jsx("div", {
               className: cL,
               children: jsx(rZ, {
-                "aria-label": _$$t("dev_handoff.code_connect.modal_copy_swift_publish_command"),
+                "aria-label": getI18nString("dev_handoff.code_connect.modal_copy_swift_publish_command"),
                 onClick: () => e(lW({
                   stringToCopy: "figma connect publish"
                 })),
@@ -367,7 +367,7 @@ function ex() {
     className: Gg,
     children: [jsx("h2", {
       className: MC,
-      children: _$$t("dev_handoff.code.lang_compose")
+      children: getI18nString("dev_handoff.code.lang_compose")
     }), jsx("li", {
       className: gY,
       children: jsxs("article", {
@@ -382,7 +382,7 @@ function ex() {
           className: M7,
           children: [jsx("div", {
             className: uw,
-            children: tx("dev_handoff.code_connect.modal_install")
+            children: renderI18nText("dev_handoff.code_connect.modal_install")
           }), jsxs("div", {
             className: G5,
             children: [jsx("div", {
@@ -391,7 +391,7 @@ function ex() {
             }), jsx("div", {
               className: fq,
               children: jsx(rZ, {
-                "aria-label": _$$t("dev_handoff.code_connect.modal_copy_global_install_command"),
+                "aria-label": getI18nString("dev_handoff.code_connect.modal_copy_global_install_command"),
                 onClick: () => e(lW({
                   stringToCopy: "npm install -g @figma/code-connect"
                 })),
@@ -416,7 +416,7 @@ function ex() {
           className: M7,
           children: [jsx("div", {
             className: uw,
-            children: tx("dev_handoff.code_connect.compose.add_plugin_snippet")
+            children: renderI18nText("dev_handoff.code_connect.compose.add_plugin_snippet")
           }), jsxs("div", {
             className: G5,
             children: [jsx("div", {
@@ -425,7 +425,7 @@ function ex() {
             }), jsx("div", {
               className: fq,
               children: jsx(rZ, {
-                "aria-label": _$$t("dev_handoff.code_connect.modal_copy_compose_plugin_snippet"),
+                "aria-label": getI18nString("dev_handoff.code_connect.modal_copy_compose_plugin_snippet"),
                 onClick: () => e(lW({
                   stringToCopy: `plugins {
 		...
@@ -459,7 +459,7 @@ dependencies {
           className: M7,
           children: [jsx("div", {
             className: uw,
-            children: tx("dev_handoff.code_connect.modal_run_command")
+            children: renderI18nText("dev_handoff.code_connect.modal_run_command")
           }), jsxs("div", {
             className: G5,
             children: [jsx("div", {
@@ -468,7 +468,7 @@ dependencies {
             }), jsx("div", {
               className: cL,
               children: jsx(rZ, {
-                "aria-label": _$$t("dev_handoff.code_connect.modal_copy_compose_connect_command"),
+                "aria-label": getI18nString("dev_handoff.code_connect.modal_copy_compose_connect_command"),
                 onClick: () => e(lW({
                   stringToCopy: "figma connect create"
                 })),
@@ -493,7 +493,7 @@ dependencies {
           className: M7,
           children: [jsx("div", {
             className: uw,
-            children: tx("dev_handoff.code_connect.modal_publish")
+            children: renderI18nText("dev_handoff.code_connect.modal_publish")
           }), jsxs("div", {
             className: G5,
             children: [jsx("div", {
@@ -501,7 +501,7 @@ dependencies {
             }), jsx("div", {
               className: cL,
               children: jsx(rZ, {
-                "aria-label": _$$t("dev_handoff.code_connect.modal_copy_compose_publish_command"),
+                "aria-label": getI18nString("dev_handoff.code_connect.modal_copy_compose_publish_command"),
                 onClick: () => e(lW({
                   stringToCopy: "figma connect publish"
                 })),
@@ -522,7 +522,7 @@ function eN() {
     className: Gg,
     children: [jsx("h2", {
       className: MC,
-      children: _$$t("dev_handoff.code.lang_html")
+      children: getI18nString("dev_handoff.code.lang_html")
     }), jsx("li", {
       className: gY,
       children: jsxs("article", {
@@ -537,7 +537,7 @@ function eN() {
           className: M7,
           children: [jsx("div", {
             className: uw,
-            children: tx("dev_handoff.code_connect.modal_install_package")
+            children: renderI18nText("dev_handoff.code_connect.modal_install_package")
           }), jsxs("div", {
             className: G5,
             children: [jsx("div", {
@@ -546,7 +546,7 @@ function eN() {
             }), jsx("div", {
               className: cL,
               children: jsx(rZ, {
-                "aria-label": _$$t("dev_handoff.code_connect.modal_copy_html_install_command"),
+                "aria-label": getI18nString("dev_handoff.code_connect.modal_copy_html_install_command"),
                 onClick: () => e(lW({
                   stringToCopy: "npm install @figma/code-connect"
                 })),
@@ -571,7 +571,7 @@ function eN() {
           className: M7,
           children: [jsx("div", {
             className: uw,
-            children: tx("dev_handoff.code_connect.modal_run_command")
+            children: renderI18nText("dev_handoff.code_connect.modal_run_command")
           }), jsxs("div", {
             className: G5,
             children: [jsx("div", {
@@ -580,7 +580,7 @@ function eN() {
             }), jsx("div", {
               className: cL,
               children: jsx(rZ, {
-                "aria-label": _$$t("dev_handoff.code_connect.modal_copy_html_connect_command"),
+                "aria-label": getI18nString("dev_handoff.code_connect.modal_copy_html_connect_command"),
                 onClick: () => e(lW({
                   stringToCopy: "npx figma connect"
                 })),
@@ -605,7 +605,7 @@ function eN() {
           className: M7,
           children: [jsx("div", {
             className: uw,
-            children: tx("dev_handoff.code_connect.modal_publish")
+            children: renderI18nText("dev_handoff.code_connect.modal_publish")
           }), jsxs("div", {
             className: G5,
             children: [jsx("div", {
@@ -614,7 +614,7 @@ function eN() {
             }), jsx("div", {
               className: cL,
               children: jsx(rZ, {
-                "aria-label": _$$t("dev_handoff.code_connect.modal_copy_html_publish_command"),
+                "aria-label": getI18nString("dev_handoff.code_connect.modal_copy_html_publish_command"),
                 onClick: () => e(lW({
                   stringToCopy: "npx figma connect publish"
                 })),
@@ -664,33 +664,33 @@ let eC = Ju(function (e) {
           className: pz,
           children: [jsx("h1", {
             className: tb,
-            children: tx("dev_handoff.code_connect.title")
+            children: renderI18nText("dev_handoff.code_connect.title")
           }), jsx("h2", {
             className: J$,
-            children: tx("dev_handoff.code_connect.modal_text")
+            children: renderI18nText("dev_handoff.code_connect.modal_text")
           }), jsxs(_$$r, {
             manager: _,
             className: gy,
             children: [jsx(_$$r2, {
               className: "React" === t ? xR : s6,
               ...c.React,
-              children: _$$t("dev_handoff.code.lang_react")
+              children: getI18nString("dev_handoff.code.lang_react")
             }), jsx(_$$r2, {
               className: "SwiftUI" === t ? xR : s6,
               ...c.SwiftUI,
-              children: _$$t("dev_handoff.code.lang_swiftui")
+              children: getI18nString("dev_handoff.code.lang_swiftui")
             }), jsx(_$$r2, {
               className: "Compose" === t ? xR : s6,
               ...c.Compose,
-              children: _$$t("dev_handoff.code.lang_compose")
+              children: getI18nString("dev_handoff.code.lang_compose")
             }), getFeatureFlags().dt_code_connect_modal_updates && jsx(_$$r2, {
               className: "HTML" === t ? xR : s6,
               ...c.HTML,
               children: jsxs("div", {
                 className: Sd,
-                children: [_$$t("dev_handoff.code.lang_html"), jsx("span", {
+                children: [getI18nString("dev_handoff.code.lang_html"), jsx("span", {
                   className: X4,
-                  children: _$$t("dev_handoff.code.lang_html_examples")
+                  children: getI18nString("dev_handoff.code.lang_html_examples")
                 })]
               })
             })]
@@ -710,7 +710,7 @@ let eC = Ju(function (e) {
                 className: F9,
                 children: jsx(_$$f, {})
               }),
-              children: tx("dev_handoff.code_connect.modal_github_button")
+              children: renderI18nText("dev_handoff.code_connect.modal_github_button")
             })
           })]
         }), jsx("div", {
@@ -735,7 +735,7 @@ function eR({
         children: e.component
       }), jsxs("div", {
         className: "component_browser_mapping_panel--source--O7O4N",
-        children: [_$$t("dev_handoff.component_browser_mapping_panel.sourceLink"), jsx(_$$N, {
+        children: [getI18nString("dev_handoff.component_browser_mapping_panel.sourceLink"), jsx(_$$N, {
           newTab: !0,
           href: e.source,
           children: e.source
@@ -744,7 +744,7 @@ function eR({
     }), jsx($n, {
       variant: "secondary",
       onClick: t ? () => t() : void 0,
-      children: _$$t("dev_handoff.component_browser_mapping_panel.editButton")
+      children: getI18nString("dev_handoff.component_browser_mapping_panel.editButton")
     })]
   });
 }
@@ -763,19 +763,19 @@ function ek({
 }) {
   let t = jsx(_$$N, {
     href: "https://www.figma.com/code-connect-docs/",
-    "aria-label": _$$t("dev_handoff.figmadocs.learn_more"),
+    "aria-label": getI18nString("dev_handoff.figmadocs.learn_more"),
     trusted: !0,
     newTab: !0,
-    children: tx("dev_handoff.figmadocs.learn_more")
+    children: renderI18nText("dev_handoff.figmadocs.learn_more")
   });
   return jsx(_$$J, {
     brand: "dev-handoff",
     mode: "dark",
     children: jsx("div", {
       className: "figmadocs--ccBadgeTooltip--XMB48",
-      children: e ? tx("dev_handoff.figmadocs.not_connected_tooltip", {
+      children: e ? renderI18nText("dev_handoff.figmadocs.not_connected_tooltip", {
         learnMore: t
-      }) : tx("dev_handoff.figmadocs.connected_tooltip", {
+      }) : renderI18nText("dev_handoff.figmadocs.connected_tooltip", {
         learnMore: t
       })
     })
@@ -808,14 +808,14 @@ function ej({
   });
   return e ? jsx(_$$E, {
     variant: "componentOutline",
-    children: tx("dev_handoff.figmadocs.connected")
+    children: renderI18nText("dev_handoff.figmadocs.connected")
   }) : jsxs(Fragment, {
     children: [jsx(_$$E2, {
-      "aria-label": _$$t("dev_handoff.figmadocs.connected"),
+      "aria-label": getI18nString("dev_handoff.figmadocs.connected"),
       ...getTriggerProps(),
       children: jsx(_$$E, {
         variant: "componentOutline",
-        children: tx("dev_handoff.figmadocs.connected")
+        children: renderI18nText("dev_handoff.figmadocs.connected")
       })
     }), jsxs(mc, {
       ...getContainerProps({
@@ -840,11 +840,11 @@ function eU() {
   });
   return jsxs(Fragment, {
     children: [jsx(_$$E2, {
-      "aria-label": _$$t("dev_handoff.figmadocs.not_connected"),
+      "aria-label": getI18nString("dev_handoff.figmadocs.not_connected"),
       ...getTriggerProps(),
       children: jsx(_$$E, {
         variant: "inactiveOutline",
-        children: tx("dev_handoff.figmadocs.not_connected")
+        children: renderI18nText("dev_handoff.figmadocs.not_connected")
       })
     }), jsxs(mc, {
       ...getContainerProps({
@@ -882,7 +882,7 @@ function eV() {
     className: "figmadocs--emptyCodeConnectCard--UrWur",
     children: [jsx("div", {
       className: "figmadocs--emptyCodeConnectCardHeader--S8h2p",
-      children: _$$t("dev_handoff.code_connect.title")
+      children: getI18nString("dev_handoff.code_connect.title")
     }), jsx($n, {
       variant: "link",
       onClick: () => {
@@ -890,7 +890,7 @@ function eV() {
           type: eC
         }));
       },
-      children: _$$t("dev_handoff.code_connect.entrypoint_text")
+      children: getI18nString("dev_handoff.code_connect.entrypoint_text")
     })]
   });
 }
@@ -900,10 +900,10 @@ function eH(e) {
 }
 let ez = (e, t) => {
   let r = useMemo(() => e ? _$$A2(e).fromNow() : void 0, [e]);
-  return r ? t ? _$$t("dev_handoff.figmadocs.connected_last_published_at_to_target", {
+  return r ? t ? getI18nString("dev_handoff.figmadocs.connected_last_published_at_to_target", {
     lastPublishedAt: r,
     target: t
-  }) : _$$t("dev_handoff.figmadocs.connected_last_published_at", {
+  }) : getI18nString("dev_handoff.figmadocs.connected_last_published_at", {
     lastPublishedAt: r
   }) : void 0;
 };
@@ -1000,7 +1000,7 @@ function eK({
   }) {
     let a = _$$X(e ? _$$l(e) : null);
     _$$h(() => {
-      az.trackDefinedEvent("code_connect.code_connect_rendered", {
+      analyticsEventManager.trackDefinedEvent("code_connect.code_connect_rendered", {
         partnerType: a,
         componentKey: r,
         stateGroupKey: n
@@ -1009,7 +1009,7 @@ function eK({
     let s = t?.result === "ERROR" && t?.data?.error ? t.data.error.type : null;
     let o = ZC(s);
     useEffect(() => {
-      s !== o && s && az.trackDefinedEvent("code_connect.code_connect_error", {
+      s !== o && s && analyticsEventManager.trackDefinedEvent("code_connect.code_connect_error", {
         partnerType: a,
         errorType: s,
         componentKey: r,
@@ -1026,7 +1026,7 @@ function eK({
     l ? l(e) : w3z.selectAndPanToNode(e);
   }, [l]);
   let L = useCallback(() => {
-    sx("code_connect_clicked", {
+    trackEventAnalytics("code_connect_clicked", {
       user_id: c?.id,
       is_playground: s,
       node_id: backingNodeId,
@@ -1114,17 +1114,17 @@ function eK({
   {
     isDevEnvironment() && console.error("Error evaluating Code Connect template", I);
     let e = I?.data.error;
-    let t = _$$t("dev_handoff.figmadocs.error_unknown");
-    e?.type === "PROPERTY_NOT_FOUND" ? t = _$$t("dev_handoff.figmadocs.error_property_not_found", {
+    let t = getI18nString("dev_handoff.figmadocs.error_unknown");
+    e?.type === "PROPERTY_NOT_FOUND" ? t = getI18nString("dev_handoff.figmadocs.error_property_not_found", {
       propertyName: e.propertyName
-    }) : e?.type === "PROPERTY_TYPE_MISMATCH" ? t = _$$t("dev_handoff.figmadocs.error_property_type_mismatch", {
+    }) : e?.type === "PROPERTY_TYPE_MISMATCH" ? t = getI18nString("dev_handoff.figmadocs.error_property_type_mismatch", {
       propertyName: e.propertyName,
       propertyType: e.expectedType ?? "unknown"
-    }) : e?.type === "CHILD_LAYER_NOT_FOUND" ? t = _$$t("dev_handoff.figmadocs.error_child_layer_not_found", {
+    }) : e?.type === "CHILD_LAYER_NOT_FOUND" ? t = getI18nString("dev_handoff.figmadocs.error_child_layer_not_found", {
       layerName: e.layerName
-    }) : getFeatureFlags().dt_code_connect_id_error && e?.type === "CHILD_LAYER_ID_NOT_FOUND" ? t = _$$t("dev_handoff.figmadocs.error_child_layer_id_not_found", {
+    }) : getFeatureFlags().dt_code_connect_id_error && e?.type === "CHILD_LAYER_ID_NOT_FOUND" ? t = getI18nString("dev_handoff.figmadocs.error_child_layer_id_not_found", {
       codeConnectId: e.codeConnectId
-    }) : e?.type === "MISSING_CODE_CONNECT_ID" ? t = I?.data.message : $D(_$$e.DEVELOPER_TOOLS, Error("Error evaluating Code Connect template"), {
+    }) : e?.type === "MISSING_CODE_CONNECT_ID" ? t = I?.data.message : reportError(_$$e.DEVELOPER_TOOLS, Error("Error evaluating Code Connect template"), {
       extra: {
         error: I?.data.error
       }
@@ -1133,7 +1133,7 @@ function eK({
       className: "figmadocs--errorBannerWrapper--eemEO",
       children: jsx(_$$z, {
         variant: "danger",
-        title: _$$t("dev_handoff.figmadocs.error_title"),
+        title: getI18nString("dev_handoff.figmadocs.error_title"),
         orientation: "vertical",
         iconSrc: _$$A4,
         children: t
@@ -1150,14 +1150,14 @@ function eY({
       variant: "secondary",
       onClick: () => tJ([e.guid ?? ""]),
       iconPrefix: jsx(r, {}),
-      children: tx("dev_handoff.code_connect.go_to_parent_button", {
+      children: renderI18nText("dev_handoff.code_connect.go_to_parent_button", {
         name: e.name || ""
       })
     })
   });
 }
-let $$e$2 = _$$eU(!1);
-let eX = Wh(() => _$$eU(!1));
+let $$e$2 = atom(!1);
+let eX = Wh(() => atom(!1));
 let eq = "dev_mode_has_dismissed_code_connect_instance_entrypoint";
 function eJ({
   contentType: e
@@ -1179,13 +1179,13 @@ function eJ({
     }));
   }, [s]);
   let d = "library-file-hint" === e ? {
-    hintText: _$$t("dev_handoff.code_connect.entrypoint_body_text_library"),
-    title: _$$t("dev_handoff.code_connect.entrypoint_title_library"),
-    hintLinkText: _$$t("dev_handoff.code_connect.entrypoint_text_library")
+    hintText: getI18nString("dev_handoff.code_connect.entrypoint_body_text_library"),
+    title: getI18nString("dev_handoff.code_connect.entrypoint_title_library"),
+    hintLinkText: getI18nString("dev_handoff.code_connect.entrypoint_text_library")
   } : {
-    hintText: _$$t("dev_handoff.code_connect.entrypoint_body_text"),
-    title: _$$t("dev_handoff.code_connect.entrypoint_title"),
-    hintLinkText: _$$t("dev_handoff.code_connect.entrypoint_text")
+    hintText: getI18nString("dev_handoff.code_connect.entrypoint_body_text"),
+    title: getI18nString("dev_handoff.code_connect.entrypoint_title"),
+    hintLinkText: getI18nString("dev_handoff.code_connect.entrypoint_text")
   };
   return t || o ? null : jsx(fu, {
     name: "code_connect_get_started",
@@ -1215,7 +1215,7 @@ export function $$eQ0({
   isPlayground: e,
   onInstancePillClick: t
 }) {
-  let r = getFeatureFlags().dt_component_browser_in_context ? _$$t("dev_handoff.component_browser.in_context_section_title") : _$$t("dev_handoff.figmadocs.section_title");
+  let r = getFeatureFlags().dt_component_browser_in_context ? getI18nString("dev_handoff.component_browser.in_context_section_title") : getI18nString("dev_handoff.figmadocs.section_title");
   let o = _$$eY();
   let l = T3();
   let d = glU.getPlaygroundNodeData();
@@ -1231,7 +1231,7 @@ export function $$eQ0({
       setSelectedLabel: n
     };
   }(v4());
-  e && (c = _$$n(d.playgroundGUID, l, o) ?? c);
+  e && (c = findComponentGuidOrPublishId(d.playgroundGUID, l, o) ?? c);
   let _ = l.get(d.playgroundGUID);
   let {
     updatedAt,
@@ -1244,7 +1244,7 @@ export function $$eQ0({
   } = _3(c, o, selectedLabel, e ? _ : void 0);
   let x = useDispatch();
   let N = Um();
-  let C = md($$e$2);
+  let C = useAtomWithSubscription($$e$2);
   useEffect(() => {
     C && console.log("Code Connect Debug: Document", {
       doc
@@ -1252,7 +1252,7 @@ export function $$eQ0({
   }, [C, doc]);
   let w = "figmadoc-label-select";
   e && (w += "-playground");
-  let [O, P] = fp(eX);
+  let [O, P] = useAtomValueAndSetter(eX);
   let D = function ({
     isPlayground: e,
     doc: t,
@@ -1269,7 +1269,7 @@ export function $$eQ0({
       view: "none"
     };
     let p = function (e = !0) {
-      let t = md(_S);
+      let t = useAtomWithSubscription(_S);
       let r = _$$eY();
       let n = Vr();
       let i = [];
@@ -1402,7 +1402,7 @@ export function $$eQ0({
         additionalHeaders: "inspect-panel" === D.view ? jsxs("div", {
           className: "figmadocs--additionalHeadersContainer--Cl5k9",
           children: [jsx(l6, {
-            ariaLabel: _$$t("dev_handoff.code.language"),
+            ariaLabel: getI18nString("dev_handoff.code.language"),
             className: eL,
             dispatch: x,
             dropdownAlignment: "right",
@@ -1449,7 +1449,7 @@ export function $$eQ0({
           onInstancePillClick: t,
           additionalHeaderActions: jsxs(Fragment, {
             children: [jsx(_$$M, {}), jsx(l6, {
-              ariaLabel: _$$t("dev_handoff.code.language"),
+              ariaLabel: getI18nString("dev_handoff.code.language"),
               className: eL,
               dispatch: x,
               dropdownAlignment: "right",

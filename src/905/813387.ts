@@ -7,7 +7,7 @@ import { Y } from "../905/246212";
 import d from "classnames";
 import { _ as _$$_ } from "../905/142361";
 import { X } from "../figma_app/313269";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { U } from "../905/331038";
 import { w as _$$w } from "../905/113805";
 import { Lz } from "../905/497882";
@@ -17,9 +17,9 @@ var c = d;
 let y = e => {
   if (e && "validation" === e.type) switch (e.key) {
     case "DESCRIPTION_EMPTY":
-      return _$$t("community.publishing.description_cant_be_empty");
+      return getI18nString("community.publishing.description_cant_be_empty");
     case "DESCRIPTION_TOO_LONG":
-      return _$$t("community.publishing.description_must_be_at_most_n_characters_long", {
+      return getI18nString("community.publishing.description_must_be_at_most_n_characters_long", {
         maxLength: e.data.maxLength
       });
     default:
@@ -40,7 +40,7 @@ let $$b0 = forwardRef(function ({
     a?.();
     e.setValue?.(t);
   }, [e, a]);
-  let S = t ? _$$t("community.publishing.enter_a_brief_descrption_of_templates") : _$$t("community.publishing.describe_your_file");
+  let S = t ? getI18nString("community.publishing.enter_a_brief_descrption_of_templates") : getI18nString("community.publishing.describe_your_file");
   let w = useId();
   let C = `${w}-textarea`;
   let T = `${w}-error`;
@@ -52,7 +52,7 @@ let $$b0 = forwardRef(function ({
   }), []);
   let k = useRef(E);
   return jsx(_$$A, {
-    label: _$$t("community.publishing.description"),
+    label: getI18nString("community.publishing.description"),
     labelHtmlFor: C,
     error: I,
     errorId: T,
@@ -72,7 +72,7 @@ let $$b0 = forwardRef(function ({
           errorFallback: null,
           placeholder: S,
           toolbarProps: {
-            "aria-label": _$$t("community.publishing.description")
+            "aria-label": getI18nString("community.publishing.description")
           },
           value: E,
           onInputChange: x,

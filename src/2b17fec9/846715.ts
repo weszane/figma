@@ -4,15 +4,15 @@ import { useDispatch, useSelector } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { U1 } from "../figma_app/343967";
 import { NLJ, glU, lyf, cxo, V5h, VTL, m1T } from "../figma_app/763686";
-import { md, fp, Xr } from "../figma_app/27355";
+import { useAtomWithSubscription, useAtomValueAndSetter, Xr } from "../figma_app/27355";
 import c from "classnames";
 import { parsePxInt } from "../figma_app/783094";
 import { wY } from "../figma_app/708845";
 import { l as _$$l } from "../905/745972";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { X as _$$X } from "../figma_app/776368";
 import { tH, H4 } from "../905/751457";
-import { t as _$$t, tx as _$$tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Dm } from "../figma_app/8833";
 import { fu } from "../figma_app/831799";
 import { xn } from "../figma_app/644079";
@@ -152,7 +152,7 @@ function Q(e) {
         showModalsBeneath: !0
       }));
     },
-    children: _$$t("fullscreen.toolbar_banner.provisional_access.curf.cta")
+    children: getI18nString("fullscreen.toolbar_banner.provisional_access.curf.cta")
   }) : void 0;
   return jsx(_$$p, {
     leftContent: {
@@ -184,12 +184,12 @@ let eo = memo(function () {
     icon: jsx(_$$Q, {})
   };
   let s = t?.publishedByUser?.handle ? jsx("div", {
-    children: _$$tx("whiteboard.delightful_toolbar.custom_template_banner.youre_viewing_a_team_template", {
+    children: renderI18nText("whiteboard.delightful_toolbar.custom_template_banner.youre_viewing_a_team_template", {
       userName: jsx("b", {
         children: t?.publishedByUser.handle
       })
     })
-  }) : _$$tx("whiteboard.delightful_toolbar.custom_template_banner.youre_viewing_a_template");
+  }) : renderI18nText("whiteboard.delightful_toolbar.custom_template_banner.youre_viewing_a_template");
   return jsx(_$$p, {
     leftContent: a,
     content: s,
@@ -219,7 +219,7 @@ function el(e) {
       trackingProperties: {
         trackingDescriptor: _$$c.USE_IN_NEW_FILE
       },
-      children: _$$tx("whiteboard.delightful_toolbar.custom_template_banner.new_file_button")
+      children: renderI18nText("whiteboard.delightful_toolbar.custom_template_banner.new_file_button")
     })]
   });
 }
@@ -303,9 +303,9 @@ let eS = memo(function (e) {
   }, [dltRef]);
   let o = useMemo(() => ({
     icon: jsx(_$$_, {}),
-    text: _$$t("whiteboard.delightful_toolbar.view_only")
+    text: getI18nString("whiteboard.delightful_toolbar.view_only")
   }), []);
-  let l = useMemo(() => _$$tx("whiteboard.delightful_toolbar.version_history_banner_text", {
+  let l = useMemo(() => renderI18nText("whiteboard.delightful_toolbar.version_history_banner_text", {
     selectIcon: jsx(kf, {
       icon: _$$A2
     }),
@@ -340,7 +340,7 @@ let eA = memo(function (e) {
     icon: jsx(_$$_, {})
   } : {
     icon: jsx(_$$_, {}),
-    text: _$$t("whiteboard.delightful_toolbar.view_only")
+    text: getI18nString("whiteboard.delightful_toolbar.view_only")
   }, [o]);
   let [d, c, u] = function (e) {
     let [t, i] = useState(!1);
@@ -370,38 +370,28 @@ let eA = memo(function (e) {
   }(a);
   let p = _$$S();
   let h = !!q5()?.org?.figjamDisabledAt;
-  let m = useMemo(() => p && h ? _$$tx("whiteboard.delightful_toolbar.view_only_banner_text_figjam_disabled_by_org_no_chat", {
+  let m = useMemo(() => p && h ? renderI18nText("whiteboard.delightful_toolbar.view_only_banner_text_figjam_disabled_by_org_no_chat", {
     commentKey: jsx(uk, {
       isPressed: d
     }),
     emoteKey: jsx(VQ, {
       isPressed: c
     })
-  }) : p ? o ? _$$tx("whiteboard.delightful_toolbar.view_only_banner_text_no_chat_in_exp", {
+  }) : p ? o ? renderI18nText("whiteboard.delightful_toolbar.view_only_banner_text_no_chat_in_exp", {
     commentKey: jsx(uk, {
       isPressed: d
     }),
     emoteKey: jsx(VQ, {
       isPressed: c
     })
-  }) : _$$tx("whiteboard.delightful_toolbar.view_only_banner_text_no_chat", {
+  }) : renderI18nText("whiteboard.delightful_toolbar.view_only_banner_text_no_chat", {
     commentKey: jsx(uk, {
       isPressed: d
     }),
     emoteKey: jsx(VQ, {
       isPressed: c
     })
-  }) : h ? _$$tx("whiteboard.delightful_toolbar.view_only_banner_text_figjam_disabled_by_org", {
-    commentKey: jsx(uk, {
-      isPressed: d
-    }),
-    chatKey: jsx(fn, {
-      isPressed: c
-    }),
-    emoteKey: jsx(VQ, {
-      isPressed: u
-    })
-  }) : o ? _$$tx("whiteboard.delightful_toolbar.view_only_banner_text_in_exp", {
+  }) : h ? renderI18nText("whiteboard.delightful_toolbar.view_only_banner_text_figjam_disabled_by_org", {
     commentKey: jsx(uk, {
       isPressed: d
     }),
@@ -411,7 +401,17 @@ let eA = memo(function (e) {
     emoteKey: jsx(VQ, {
       isPressed: u
     })
-  }) : _$$tx("whiteboard.delightful_toolbar.view_only_banner_text", {
+  }) : o ? renderI18nText("whiteboard.delightful_toolbar.view_only_banner_text_in_exp", {
+    commentKey: jsx(uk, {
+      isPressed: d
+    }),
+    chatKey: jsx(fn, {
+      isPressed: c
+    }),
+    emoteKey: jsx(VQ, {
+      isPressed: u
+    })
+  }) : renderI18nText("whiteboard.delightful_toolbar.view_only_banner_text", {
     commentKey: jsx(uk, {
       isPressed: d
     }),
@@ -449,8 +449,8 @@ let eA = memo(function (e) {
 });
 function eX() {
   let e = aV();
-  let t = md(wg);
-  let [i, a] = fp(gT);
+  let t = useAtomWithSubscription(wg);
+  let [i, a] = useAtomValueAndSetter(gT);
   let s = _$$N2();
   return (useEffect(() => {
     !e && i && (t || s === _$$Q2.NO_REQUEST_NEEDED) && a(!1);
@@ -485,14 +485,14 @@ function eq() {
         icon: jsx(_$$H, {}),
         onActivateTool: activateTool,
         activeToolId,
-        tooltipText: _$$t("fullscreen_actions.set-tool-default"),
+        tooltipText: getI18nString("fullscreen_actions.set-tool-default"),
         tooltipShortcut: o(NLJ.SELECT)
       }), jsx(_$$N3, {
         toolId: NLJ.HAND,
         icon: jsx(_$$t3, {}),
         onActivateTool: activateTool,
         activeToolId,
-        tooltipText: _$$t("fullscreen_actions.set-tool-hand"),
+        tooltipText: getI18nString("fullscreen_actions.set-tool-hand"),
         tooltipShortcut: o(NLJ.HAND)
       })]
     }), !s && jsx(_$$N3, {
@@ -501,7 +501,7 @@ function eq() {
       onActivateTool: activateTool,
       activeToolId,
       recordingKey: Pt("toolbarView", "toolComment"),
-      tooltipText: _$$t("fullscreen_actions.comment"),
+      tooltipText: getI18nString("fullscreen_actions.comment"),
       tooltipShortcut: o(NLJ.COMMENTS)
     }), jsx(_$$F, {})]
   });
@@ -509,18 +509,18 @@ function eq() {
 let e9 = memo(function ({
   optimizeForCompactSize: e
 }) {
-  let [t, i] = fp(oh);
+  let [t, i] = useAtomValueAndSetter(oh);
   let a = LR();
   let s = bu();
   let o = ri();
   let c = s3();
-  let p = md(_$$B);
+  let p = useAtomWithSubscription(_$$B);
   let h = c && p === cxo.PENCIL_TOOL;
   let m = s || h;
   let [f, _] = useState(!1);
   let {
     paints
-  } = md(GI);
+  } = useAtomWithSubscription(GI);
   let [g, j] = useState(NLJ.VECTOR_PENCIL);
   let [, b] = useState(NLJ.VECTOR_PENCIL);
   let y = g === NLJ.VECTOR_PENCIL ? "set-tool-pencil" : g === NLJ.HIGHLIGHTER ? "set-tool-highlighter" : g === NLJ.ERASER ? "set-tool-eraser" : g === NLJ.WASHI_TAPE ? "set-tool-washi-tape" : "";
@@ -622,7 +622,7 @@ function tu({
   recordingKey: e,
   isOpen: t
 }) {
-  let [i, a] = fp(qL);
+  let [i, a] = useAtomValueAndSetter(qL);
   let [s, o] = useState(!1);
   let {
     openColorPalettePicker,
@@ -646,7 +646,7 @@ function tu({
   let _ = f.type === Yv.CUSTOM;
   let x = TS("sticky");
   let j = _ ? f.variations.sticky : x;
-  let b = md(Qv);
+  let b = useAtomWithSubscription(Qv);
   let y = !!b;
   return jsx(Fragment, {
     children: jsxs(br, {
@@ -661,7 +661,7 @@ function tu({
           t && (h(t), tp());
         },
         legend: jsx(_$$q2, {
-          children: _$$tx("whiteboard.stickies.color_selector.legend")
+          children: renderI18nText("whiteboard.stickies.color_selector.legend")
         }),
         children: jsx("div", {
           className: Bp,
@@ -739,7 +739,7 @@ function th({
 }) {
   let t = bu();
   let i = sT();
-  let a = md(qL);
+  let a = useAtomWithSubscription(qL);
   let s = aV();
   let [o, c] = useState(!1);
   let [p, h] = useState(!1);
@@ -751,7 +751,7 @@ function th({
   let {
     state
   } = useContext(nS);
-  let [y, v] = fp(oh);
+  let [y, v] = useAtomValueAndSetter(oh);
   let T = LR();
   let S = useCallback(() => {
     T(!1);
@@ -869,7 +869,7 @@ function th({
 }
 let tg = memo(function () {
   let e = XM();
-  let t = md(c5);
+  let t = useAtomWithSubscription(c5);
   let i = Xr(n6);
   let a = f7();
   debug(void 0 !== t, "There should be at least one collapsedStage threshold width less than our current container width.");
@@ -969,10 +969,10 @@ let tw = memo(function () {
   let [c, x] = useState("PRE");
   let I = useRef(null);
   let L = wY(I);
-  let [k, F] = fp(c5);
+  let [k, F] = useAtomValueAndSetter(c5);
   let H = XM();
-  let [B, V] = fp(gT);
-  let [W, z] = fp(oh);
+  let [B, V] = useAtomValueAndSetter(gT);
+  let [W, z] = useAtomValueAndSetter(oh);
   _$$m(gT);
   useEffect(() => {
     F(az(H).find(e => L ? L.width >= e.thresholdWidth : 0 >= e.thresholdWidth));
@@ -1075,7 +1075,7 @@ let tw = memo(function () {
     return t !== NLJ.VECTOR_PENCIL && t !== NLJ.HIGHLIGHTER;
   });
   let eo = BI();
-  let el = Ay.isIpad || Ay.isMeetDevice ? jsx(Fragment, {
+  let el = BrowserInfo.isIpad || BrowserInfo.isMeetDevice ? jsx(Fragment, {
     children: jsxs("div", {
       className: u()(ph, Dm),
       children: [jsx("div", {
@@ -1085,7 +1085,7 @@ let tw = memo(function () {
         children: jsx(tb, {
           isDisabled: es
         })
-      }), eo?.shouldHideDLTUndoRedo && !Ay.isMeetDevice ? void 0 : jsx("div", {
+      }), eo?.shouldHideDLTUndoRedo && !BrowserInfo.isMeetDevice ? void 0 : jsx("div", {
         className: s$,
         children: jsx(tE, {})
       })]
@@ -1103,7 +1103,7 @@ let tw = memo(function () {
     }),
     ref: ep,
     role: "region",
-    "aria-label": _$$t("whiteboard.delightful_toolbar.drawing_tools_label"),
+    "aria-label": getI18nString("whiteboard.delightful_toolbar.drawing_tools_label"),
     "data-onboarding-key": HY,
     "data-element-target": HY,
     "data-testid": HY,

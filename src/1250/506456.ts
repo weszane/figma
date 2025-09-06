@@ -2,7 +2,7 @@ import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useRef, useEffect, useMemo, useState, useCallback } from "react";
 import { useSelector, useDispatch } from "../vendor/514228";
 import { Ez5, lyf, xal } from "../figma_app/763686";
-import { fp } from "../figma_app/27355";
+import { useAtomValueAndSetter } from "../figma_app/27355";
 import l from "classnames";
 import { U, hC } from "../figma_app/901889";
 import { C as _$$C } from "../figma_app/974443";
@@ -213,7 +213,7 @@ function D({
   let v = useSelector(e => e.mirror.appModel.topLevelMode === lyf.HISTORY);
   let w = g && g.dragOverPageId === e ? "before" === g.insertPosition ? l ? iZ : pf : _ ? Vi : IK : null;
   let T = q5();
-  let [k, C] = fp(qp);
+  let [k, C] = useAtomValueAndSetter(qp);
   let S = useMemo(() => T?.editorType === FFileType.WHITEBOARD && !v, [T?.editorType, v]);
   let N = useMemo(() => x && h && S, [x, h, S]);
   let O = Jc(S);

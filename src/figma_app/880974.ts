@@ -1,29 +1,29 @@
 import { Z6A, Hyj } from "../figma_app/763686";
 import { nc } from "../905/189185";
-import { eU, zl, Iz } from "../figma_app/27355";
+import { atom, atomStoreManager, createRemovableAtomFamily } from "../figma_app/27355";
 import { dT } from "../figma_app/106207";
 import { w } from "../905/924253";
 import { t as _$$t } from "../905/940050";
-let d = eU(null);
-let c = eU(null);
-let u = eU({
+let d = atom(null);
+let c = atom(null);
+let u = atom({
   x: 0,
   y: 0
 });
-let p = eU(null);
-let _ = eU(!1);
-let h = eU(!1);
-let $$m4 = eU(e => e(c));
-let $$g6 = eU(e => e(h));
-let $$f5 = eU(e => e(u));
-let E = eU(!1);
+let p = atom(null);
+let _ = atom(!1);
+let h = atom(!1);
+let $$m4 = atom(e => e(c));
+let $$g6 = atom(e => e(h));
+let $$f5 = atom(e => e(u));
+let E = atom(!1);
 let y = "new_preview";
 let b = null;
 function T() {
   b && b.abort(y);
   b = null;
 }
-let $$I0 = eU(null, async (e, t, r, i) => {
+let $$I0 = atom(null, async (e, t, r, i) => {
   let a = !e(_) && _$$t(r.template, e(c));
   if (e(h) || a || e(E)) return !1;
   t(A);
@@ -63,7 +63,7 @@ let $$I0 = eU(null, async (e, t, r, i) => {
   t(p, f);
   return await f;
 });
-let $$S3 = eU(null, async (e, t, r) => {
+let $$S3 = atom(null, async (e, t, r) => {
   let a = e(p);
   if (!a || e(h)) return !1;
   t(h, !0);
@@ -80,31 +80,31 @@ let $$S3 = eU(null, async (e, t, r) => {
     t(h, !1);
   }
 });
-let v = eU(null, (e, t) => {
+let v = atom(null, (e, t) => {
   t(E, !1);
   e(_) && (T(), t(A));
 });
-let A = eU(null, (e, t) => {
+let A = atom(null, (e, t) => {
   t(c, null);
   t(p, null);
   t(_, !1);
   t(h, !1);
   e(w) && Hyj.clearTemplatePreview();
 });
-let $$x2 = eU(null, (e, t) => {
+let $$x2 = atom(null, (e, t) => {
   t(v);
   t(A);
 });
-let $$N7 = eU(null, (e, t) => {
+let $$N7 = atom(null, (e, t) => {
   t(d, null);
   Hyj.clearSectionPreviewSupport();
 });
 let $$C8 = {
   clearTemplatePreview() {
-    zl.set(A);
+    atomStoreManager.set(A);
   }
 };
-let $$w1 = Iz(e => eU(async () => await dT(e)), (e, t) => e.fileKey === t.fileKey && e.fileVersion === t.fileVersion && _$$t(e.template, t.template));
+let $$w1 = createRemovableAtomFamily(e => atom(async () => await dT(e)), (e, t) => e.fileKey === t.fileKey && e.fileVersion === t.fileVersion && _$$t(e.template, t.template));
 export const ME = $$I0;
 export const Re = $$w1;
 export const Yq = $$x2;
@@ -113,4 +113,4 @@ export const oh = $$m4;
 export const pF = $$f5;
 export const pg = $$g6;
 export const pn = $$N7;
-export const t7 = $$C8; 
+export const t7 = $$C8;

@@ -1,5 +1,5 @@
 import { debugState } from "../905/407919";
-import { PN } from "../figma_app/257275";
+import { isInteractionOrEvalMode } from "../figma_app/897289";
 import { F } from "../905/302958";
 import { lu } from "../figma_app/84367";
 import { Y5 } from "../figma_app/455680";
@@ -14,7 +14,7 @@ export function $$c2(e) {
   }
 }
 export function $$u1() {
-  if (PN()) return !0;
+  if (isInteractionOrEvalMode()) return !0;
   if (d) return !1;
   let e = Y5.fileLoadTime();
   if (null == e) return !1;

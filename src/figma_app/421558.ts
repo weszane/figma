@@ -42,8 +42,8 @@ import { C as _$$C } from "../figma_app/765025";
 import { t as _$$t } from "../905/316903";
 import { glU, NLJ, lyf, m1T, xae } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { md } from "../figma_app/27355";
-import { m as _$$m2 } from "../905/717445";
+import { useAtomWithSubscription } from "../figma_app/27355";
+import { getFilteredFeatureFlags } from "../905/717445";
 import { Pt } from "../figma_app/806412";
 import { WN } from "../figma_app/638601";
 import { F as _$$F2 } from "../figma_app/832508";
@@ -55,7 +55,7 @@ import { X as _$$X2 } from "../905/350405";
 import { kF } from "../figma_app/48566";
 import { AE, $v } from "../figma_app/370763";
 import { XZ, rM } from "../figma_app/241541";
-import { t as _$$t2 } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { _Y } from "../figma_app/275462";
 import { to } from "../figma_app/828186";
 import { xo } from "../figma_app/473493";
@@ -243,7 +243,7 @@ function eV({
   tool: e
 }) {
   let t = eG["dark" === DP() ? "dark" : "light"][e];
-  let r = md(t.atom);
+  let r = useAtomWithSubscription(t.atom);
   let a = useMemo(() => {
     let e = r.paints?.[0];
     if (e?.type === "SOLID") return e.color;
@@ -358,7 +358,7 @@ function eq() {
 let eQ = {
   FRAME: {
     toolId: NLJ.FRAME,
-    getText: () => _$$t2("fullscreen_actions.set-tool-frame"),
+    getText: () => getI18nString("fullscreen_actions.set-tool-frame"),
     icon: jsx(_$$v, {}),
     smallIcon: jsx(_$$q, {}),
     recordingKey: "toolFrame",
@@ -366,7 +366,7 @@ let eQ = {
   },
   DROPPER: {
     toolId: NLJ.DROPPER_COLOR,
-    getText: () => _$$t2("dev_handoff.eyedropper.tool_name"),
+    getText: () => getI18nString("dev_handoff.eyedropper.tool_name"),
     icon: jsx(l, {}),
     smallIcon: jsx(_$$G, {}),
     recordingKey: "toolDropper",
@@ -374,84 +374,84 @@ let eQ = {
   },
   SECTION: {
     toolId: NLJ.SECTION,
-    getText: () => _$$t2("fullscreen_actions.set-tool-section"),
+    getText: () => getI18nString("fullscreen_actions.set-tool-section"),
     icon: jsx(_$$P, {}),
     smallIcon: jsx(_$$c, {}),
     recordingKey: "toolSection"
   },
   SLICE: {
     toolId: NLJ.SLICE,
-    getText: () => _$$t2("fullscreen_actions.set-tool-slice"),
+    getText: () => getI18nString("fullscreen_actions.set-tool-slice"),
     icon: jsx(p, {}),
     smallIcon: jsx(_$$h, {}),
     recordingKey: "toolSlice"
   },
   RECTANGLE: {
     toolId: NLJ.SHAPE_RECTANGLE,
-    getText: () => _$$t2("fullscreen_actions.set-tool-rectangle"),
+    getText: () => getI18nString("fullscreen_actions.set-tool-rectangle"),
     icon: jsx(_$$n, {}),
     smallIcon: jsx(_$$y, {}),
     recordingKey: "toolShapeRectangle"
   },
   LINE: {
     toolId: NLJ.SHAPE_LINE,
-    getText: () => _$$t2("fullscreen_actions.set-tool-line"),
+    getText: () => getI18nString("fullscreen_actions.set-tool-line"),
     icon: jsx(_$$W, {}),
     smallIcon: jsx(_$$h2, {}),
     recordingKey: "toolShapeLine"
   },
   ARROW: {
     toolId: NLJ.SHAPE_ARROW,
-    getText: () => _$$t2("fullscreen_actions.set-tool-arrow"),
+    getText: () => getI18nString("fullscreen_actions.set-tool-arrow"),
     icon: jsx(_$$F, {}),
     smallIcon: jsx(_$$E, {}),
     recordingKey: "toolShapeArrow"
   },
   ELLIPSE: {
     toolId: NLJ.SHAPE_ELLIPSE,
-    getText: () => _$$t2("fullscreen_actions.set-tool-ellipse"),
+    getText: () => getI18nString("fullscreen_actions.set-tool-ellipse"),
     icon: jsx(_$$m, {}),
     smallIcon: jsx(_$$B, {}),
     recordingKey: "toolShapeEllipse"
   },
   REGULAR_POLYGON: {
     toolId: NLJ.SHAPE_REGULAR_POLYGON,
-    getText: () => _$$t2("fullscreen_actions.set-tool-regular-polygon"),
+    getText: () => getI18nString("fullscreen_actions.set-tool-regular-polygon"),
     icon: jsx(_$$o, {}),
     smallIcon: jsx(_$$h3, {}),
     recordingKey: "toolShapePolygon"
   },
   STAR: {
     toolId: NLJ.SHAPE_STAR,
-    getText: () => _$$t2("fullscreen_actions.set-tool-star"),
+    getText: () => getI18nString("fullscreen_actions.set-tool-star"),
     icon: jsx(e, {}),
     smallIcon: jsx(_$$Z, {}),
     recordingKey: "toolShapeStar"
   },
   IMAGE_OR_VIDEO: {
     toolId: NLJ.IMAGE_OR_VIDEO,
-    getText: () => _$$t2("fullscreen_actions.place_image_or_video"),
+    getText: () => getI18nString("fullscreen_actions.place_image_or_video"),
     icon: jsx(_$$T, {}),
     smallIcon: jsx(_$$s, {}),
     recordingKey: "image-tool"
   },
   PEN: {
     toolId: NLJ.VECTOR_PEN,
-    getText: () => _$$t2("fullscreen_actions.set-tool-pen"),
+    getText: () => getI18nString("fullscreen_actions.set-tool-pen"),
     icon: jsx(_$$N, {}),
     smallIcon: jsx(_$$k, {}),
     recordingKey: "toolPen"
   },
   PENCIL: {
     toolId: NLJ.VECTOR_PENCIL,
-    getText: () => _$$t2("fullscreen_actions.set-tool-pencil"),
+    getText: () => getI18nString("fullscreen_actions.set-tool-pencil"),
     icon: jsx(_$$L, {}),
     smallIcon: jsx(_$$A, {}),
     recordingKey: "toolPencil"
   },
   COMMENTS: {
     toolId: NLJ.COMMENTS,
-    getText: e => e ? _$$t2("dev_handoff.workflows.focus_view.reset_comments_tooltip") : _$$t2("fullscreen_actions.comment"),
+    getText: e => e ? getI18nString("dev_handoff.workflows.focus_view.reset_comments_tooltip") : getI18nString("fullscreen_actions.comment"),
     getIcon: ({
       numUnreadComments: e
     }) => e > 0 ? jsx(_$$X, {}) : jsx(_$$f, {}),
@@ -461,7 +461,7 @@ let eQ = {
   },
   MEASURE: {
     toolId: NLJ.MEASURE,
-    getText: e => e ? _$$t2("dev_handoff.workflows.focus_view.reset_measurement_tooltip") : _$$t2("fullscreen_actions.set-tool-measure"),
+    getText: e => e ? getI18nString("dev_handoff.workflows.focus_view.reset_measurement_tooltip") : getI18nString("fullscreen_actions.set-tool-measure"),
     icon: jsx(k, {}),
     smallIcon: jsx(_$$L2, {}),
     recordingKey: "toolMeasure",
@@ -470,7 +470,7 @@ let eQ = {
   },
   ANNOTATE: {
     toolId: NLJ.ANNOTATE,
-    getText: e => e ? _$$t2("dev_handoff.workflows.focus_view.reset_annotation_tooltip") : _$$t2("fullscreen_actions.set-tool-annotate"),
+    getText: e => e ? getI18nString("dev_handoff.workflows.focus_view.reset_annotation_tooltip") : getI18nString("fullscreen_actions.set-tool-annotate"),
     icon: jsx(_$$K, {}),
     smallIcon: jsx(r, {}),
     recordingKey: "toolAnnotate",
@@ -479,35 +479,35 @@ let eQ = {
   },
   SELECT: {
     toolId: NLJ.SELECT,
-    getText: () => _$$t2("fullscreen_actions.set-tool-default"),
+    getText: () => getI18nString("fullscreen_actions.set-tool-default"),
     icon: jsx(_$$H, {}),
     smallIcon: jsx(_$$y2, {}),
     recordingKey: "toolDefault"
   },
   HAND: {
     toolId: NLJ.HAND,
-    getText: () => _$$t2("fullscreen_actions.set-tool-hand"),
+    getText: () => getI18nString("fullscreen_actions.set-tool-hand"),
     icon: jsx(t, {}),
     smallIcon: jsx(_$$O, {}),
     recordingKey: "toolHand"
   },
   SCALE: {
     toolId: NLJ.SCALE,
-    getText: () => _$$t2("fullscreen_actions.set-tool-scale"),
+    getText: () => getI18nString("fullscreen_actions.set-tool-scale"),
     icon: jsx(_$$a, {}),
     smallIcon: jsx(_$$l, {}),
     recordingKey: "toolScale"
   },
   TYPE: {
     toolId: NLJ.TYPE,
-    getText: () => _$$t2("fullscreen_actions.set-tool-type"),
+    getText: () => getI18nString("fullscreen_actions.set-tool-type"),
     icon: jsx(_$$B2, {}),
     recordingKey: "toolType",
     onboardingKey: "tool-type-onboarding"
   },
   CODE_COMPONENT: {
     toolId: NLJ.CODE_COMPONENT,
-    getText: () => _$$t2("fullscreen_actions.set-tool-code-component"),
+    getText: () => getI18nString("fullscreen_actions.set-tool-code-component"),
     icon: jsx(_$$C, {}),
     smallIcon: jsx(_$$t, {}),
     recordingKey: "toolCodeComponent"
@@ -545,8 +545,8 @@ export function $$e00(e) {
   let f = _$$z(editModeType);
   let E = _Y();
   let y = L4();
-  let b = md(wg);
-  let T = md(Bu);
+  let b = useAtomWithSubscription(wg);
+  let T = useAtomWithSubscription(Bu);
   let I = useSelector(e => e.leftPanel);
   let {
     showPublish
@@ -561,7 +561,7 @@ export function $$e00(e) {
   let w = AP();
   let O = to();
   let R = WN();
-  let D = e => _$$m2().ce_il_vem_move && w && e === NLJ.SELECT;
+  let D = e => getFilteredFeatureFlags().ce_il_vem_move && w && e === NLJ.SELECT;
   let k = e => !D(e);
   let M = e => {
     D(e) && Y5.triggerAction("leave-edit-mode");
@@ -634,32 +634,32 @@ export function $$e00(e) {
     tools: [eQ.SELECT, eQ.HAND, eQ.SCALE],
     overlayId: _$$M.SelectTools,
     recordingKey: "moveFlyout",
-    tooltipText: _$$t2("fullscreen.flyout.move_tools")
+    tooltipText: getI18nString("fullscreen.flyout.move_tools")
   };
   let B = {
     tools: [eQ.FRAME, eQ.SECTION, eQ.SLICE],
     overlayId: _$$M.FrameTools,
     recordingKey: "regionFlyout",
-    tooltipText: _$$t2("fullscreen.flyout.region_tools"),
+    tooltipText: getI18nString("fullscreen.flyout.region_tools"),
     onboardingKey: "frame"
   };
   let G = {
     tools: [eQ.RECTANGLE, eQ.LINE, eQ.ARROW, eQ.ELLIPSE, eQ.REGULAR_POLYGON, eQ.STAR, eQ.IMAGE_OR_VIDEO],
     overlayId: _$$M.ShapeTools,
     recordingKey: "shapeFlyout",
-    tooltipText: _$$t2("fullscreen.flyout.shape_tools")
+    tooltipText: getI18nString("fullscreen.flyout.shape_tools")
   };
   let V = {
     tools: [eQ.PEN, eQ.PENCIL],
     overlayId: _$$M.PenTools,
     recordingKey: "penFlyout",
-    tooltipText: _$$t2("fullscreen.flyout.drawing_tools")
+    tooltipText: getI18nString("fullscreen.flyout.drawing_tools")
   };
   let H = {
     tools: [eQ.COMMENTS, eQ.ANNOTATE, eQ.MEASURE],
     overlayId: _$$M.CommentTools,
     recordingKey: "commentsFlyout",
-    tooltipText: _$$t2("fullscreen.flyout.comment_tools")
+    tooltipText: getI18nString("fullscreen.flyout.comment_tools")
   };
   let z = ({
     disabled: e,
@@ -683,7 +683,7 @@ export function $$e00(e) {
     icon: jsx(_$$_, {}),
     onActivateTool: N ? () => R("QUICK_ACTIONS_TOOL") : () => $v("toggle-menu"),
     activeToolId: T ? _$$y4 : activeToolId,
-    tooltipText: _$$t2("qa.extensions.tooltip_actions"),
+    tooltipText: getI18nString("qa.extensions.tooltip_actions"),
     tooltipShortcut: x("toggle-menu"),
     onboardingKey: Ij,
     disabled: e && !t
@@ -723,7 +723,7 @@ export function $$e00(e) {
       "data-onboarding-key": _D,
       children: [_ && j(U), h && F({
         ...eQ.SELECT,
-        text: _$$t2("fullscreen_actions.set-tool-default-dev-handoff")
+        text: getI18nString("fullscreen_actions.set-tool-default-dev-handoff")
       }), f && jsxs(Fragment, {
         children: [F(eQ.SELECT), F(eQ.HAND)]
       }), g && !eO && jsxs(Fragment, {
@@ -746,7 +746,7 @@ export function $$e00(e) {
         onActivateTool: activeToolId === NLJ.COMMENTS ? () => activateTool(NLJ.SELECT) : activateTool,
         activeToolId,
         recordingKey: v("toolComment"),
-        tooltipText: C ? _$$t2("fullscreen_actions.comments-disabled") : eR ? _$$t2("dev_handoff.workflows.focus_view.reset_comments_tooltip") : _$$t2("fullscreen_actions.comment"),
+        tooltipText: C ? getI18nString("fullscreen_actions.comments-disabled") : eR ? getI18nString("dev_handoff.workflows.focus_view.reset_comments_tooltip") : getI18nString("fullscreen_actions.comment"),
         tooltipShortcut: C || eR ? "" : A(NLJ.COMMENTS),
         disabled: C || eR
       })), _ && getFeatureFlags().bake_canvas && W(), _ && K(), f && !b && !showDisabledTools && jsx(_$$F2, {

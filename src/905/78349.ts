@@ -5,7 +5,7 @@ import { M } from "../905/512402";
 import { AD } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { H } from "../figma_app/147959";
-import { x1 } from "../905/714362";
+import { logError } from "../905/714362";
 import { Y5 } from "../figma_app/455680";
 import { j } from "../905/881708";
 import { H0 } from "../figma_app/682945";
@@ -77,7 +77,7 @@ class f {
     let u;
     u = l ? this.getSnappedMousePositionForEndpoint(e, t, n, a, d) : M.fromVectorD(d.getConnectorMousePosition(e, MoP.NO));
     let p = _$$s.fromFigMatrix(i.absoluteTransform).inverseTransformPoint(M.fromFigVector(u));
-    return p.isInvalid() ? (x1("ConnectorToolBehavior", "could not inverse transform mouse position in ConnectorToolBehavior", {
+    return p.isInvalid() ? (logError("ConnectorToolBehavior", "could not inverse transform mouse position in ConnectorToolBehavior", {
       position: u
     }), {
       endpoint: {
@@ -165,7 +165,7 @@ class f {
           hoverzone: o.hoverzone
         };
       }
-      x1("ConnectorToolBehavior", "could not inverse transform mouse position", {
+      logError("ConnectorToolBehavior", "could not inverse transform mouse position", {
         position: _
       });
     }
@@ -343,7 +343,7 @@ export class $$_0 extends j {
   handleMouseLeave(e) {}
   handleMouseDown(e) {
     this.handleMouseMove(e);
-    this._connectorGUID === AD ? this.createConnector(e) ? (e.accept(this), e.invalidateViewport()) : x1("connector tool", "unable to create new connector", {}, {
+    this._connectorGUID === AD ? this.createConnector(e) ? (e.accept(this), e.invalidateViewport()) : logError("connector tool", "unable to create new connector", {}, {
       reportAsSentryError: !0
     }) : (e.accept(this), this.updateConnector(e));
     qmM?.setEventCursor(e, "crosshairCursor");

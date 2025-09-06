@@ -5,8 +5,8 @@ import { c2 } from "../905/382883";
 import { lQ } from "../905/934246";
 import { AD } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
-import { sx } from "../905/449184";
-import { sn } from "../905/542194";
+import { trackEventAnalytics } from "../905/449184";
+import { globalPerfTimer } from "../905/542194";
 import { h as _$$h } from "../905/207101";
 import { zL } from "../905/294543";
 import { S as _$$S } from "../905/491708";
@@ -19,7 +19,7 @@ import { Z0 } from "../905/195478";
 import { m as _$$m } from "../905/661977";
 function I(e, t) {
   let i = "first-party" === t.type ? t.id : "THIRD_PARTY_PLUGIN";
-  sx("dev_handoff.codegen", {
+  trackEventAnalytics("dev_handoff.codegen", {
     elapsedMs: e,
     languageType: t.type,
     suggestVariablesEnabled: !0,
@@ -63,7 +63,7 @@ export function $$E0({
     let n = !1;
     (async () => {
       if (!e || e === AD) return;
-      let r = sn.start("dev_handoff.codegen");
+      let r = globalPerfTimer.start("dev_handoff.codegen");
       if ("local-plugin" === t.type || "published-plugin" === t.type) {
         let a;
         if (!S) return;

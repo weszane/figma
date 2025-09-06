@@ -4,7 +4,7 @@ import { xk } from "@stylexjs/stylex";
 import { buildUploadUrl } from "../figma_app/169182";
 import { oW } from "../905/675859";
 import { B } from "../905/714743";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { C as _$$C } from "../905/237873";
 import { CS } from "../figma_app/275462";
 import { L } from "../905/178090";
@@ -36,48 +36,48 @@ function b(e) {
   });
   switch (e.resourceType) {
     case L.SearchResourceTypes.FILES:
-      if (e.view.price === _$$C.FREE) return tx("community.search.empty_state_hub_files_free", {
+      if (e.view.price === _$$C.FREE) return renderI18nText("community.search.empty_state_hub_files_free", {
         query: t
       });
-      if (e.view.price === _$$C.PAID) return tx("community.search.empty_state_hub_files_paid", {
+      if (e.view.price === _$$C.PAID) return renderI18nText("community.search.empty_state_hub_files_paid", {
         query: t
       });
-      return tx("community.search.empty_state_hub_files", {
+      return renderI18nText("community.search.empty_state_hub_files", {
         query: t
       });
     case L.SearchResourceTypes.PLUGINS:
-      if (e.view.price === _$$C.FREE) return tx("community.search.empty_state_public_plugins_free", {
+      if (e.view.price === _$$C.FREE) return renderI18nText("community.search.empty_state_public_plugins_free", {
         query: t
       });
-      if (e.view.price === _$$C.PAID) return tx("community.search.empty_state_public_plugins_paid", {
+      if (e.view.price === _$$C.PAID) return renderI18nText("community.search.empty_state_public_plugins_paid", {
         query: t
       });
-      return tx("community.search.empty_state_public_plugins", {
+      return renderI18nText("community.search.empty_state_public_plugins", {
         query: t
       });
     case L.SearchResourceTypes.WIDGETS:
-      if (e.view.price === _$$C.FREE) return tx("community.search.empty_state_public_widgets_free", {
+      if (e.view.price === _$$C.FREE) return renderI18nText("community.search.empty_state_public_widgets_free", {
         query: t
       });
-      if (e.view.price === _$$C.PAID) return tx("community.search.empty_state_public_widgets_paid", {
+      if (e.view.price === _$$C.PAID) return renderI18nText("community.search.empty_state_public_widgets_paid", {
         query: t
       });
-      return tx("community.search.empty_state_public_widgets", {
+      return renderI18nText("community.search.empty_state_public_widgets", {
         query: t
       });
     case L.SearchResourceTypes.PROFILES:
-      return tx("community.search.empty_state_creators", {
+      return renderI18nText("community.search.empty_state_creators", {
         query: t
       });
     case L.SearchResourceTypes.MIXED:
     default:
-      if (e.view.price === _$$C.FREE) return tx("community.search.no_resources_matching_free", {
+      if (e.view.price === _$$C.FREE) return renderI18nText("community.search.no_resources_matching_free", {
         query: t
       });
-      if (e.view.price === _$$C.PAID) return tx("community.search.no_resources_matching_paid", {
+      if (e.view.price === _$$C.PAID) return renderI18nText("community.search.no_resources_matching_paid", {
         query: t
       });
-      return tx("community.search.no_resources_matching", {
+      return renderI18nText("community.search.no_resources_matching", {
         query: t
       });
   }

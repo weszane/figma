@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { zw } from "../905/585727";
 import { R } from "../905/531474";
 import { l7 } from "../905/189185";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Ay } from "../figma_app/432652";
 import { Ay as _$$Ay } from "../figma_app/948389";
 import { UD } from "../figma_app/624361";
@@ -66,7 +66,7 @@ export async function $$f2({
   } catch (t) {
     await E({
       node: e,
-      name: _$$t("ai_image_tools.blocked"),
+      name: getI18nString("ai_image_tools.blocked"),
       url: $,
       scaleMode: "FIT",
       backgroundFill: {

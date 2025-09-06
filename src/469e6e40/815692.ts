@@ -44,7 +44,7 @@ import { S as _$$S3 } from '../905/274480';
 import { z as _$$z2 } from '../905/284530';
 import { Z as _$$Z2 } from '../905/296690';
 import { F as _$$F } from '../905/302958';
-import { t as _$$t, tx as _$$tx } from '../905/303541';
+import { getI18nString, renderI18nText } from '../905/303541';
 import { R as _$$R } from '../905/304671';
 import { z as _$$z, Z as _$$Z } from '../905/306088';
 import { b as _$$b, c as _$$c2 } from '../905/308099';
@@ -59,7 +59,7 @@ import { hS } from '../905/437088';
 import { N as _$$N } from '../905/438674';
 import { v as _$$v } from '../905/442517';
 import { k as _$$k2 } from '../905/443820';
-import { az as _$$az, sx } from '../905/449184';
+import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
 import { V as _$$V2 } from '../905/480825';
 import { FJ } from '../905/508367';
 import { ud } from '../905/513035';
@@ -115,7 +115,7 @@ import { d as _$$d2 } from '../7021/966231';
 import { fm } from '../c5e2cae0/453906';
 import { WQ } from '../c5e2cae0/705272';
 import { s as _$$s } from '../cssbuilder/589278';
-import { eU as _$$eU, fp, md, Xr } from '../figma_app/27355';
+import { atom, useAtomValueAndSetter, useAtomWithSubscription, Xr } from '../figma_app/27355';
 import { ZC } from '../figma_app/39751';
 import { _pO, G7P, Is$, k_1, OMV, QwB, RcX, tgK } from '../figma_app/43951';
 import { $y } from '../figma_app/59509';
@@ -175,7 +175,7 @@ import { fu } from '../figma_app/831799';
 import { mf } from '../figma_app/844435';
 import { kt, qc } from '../figma_app/858013';
 import { Nz, Yp } from '../figma_app/870683';
-import { eD as _$$eD } from '../figma_app/876459';
+import { desktopAPIInstance } from '../figma_app/876459';
 import { iT } from '../figma_app/901889';
 import { ey as _$$ey, yX } from '../figma_app/918700';
 import { Ex, zE } from '../figma_app/919079';
@@ -218,11 +218,11 @@ function B(e) {
   return jsxs(Fragment, {
     children: [jsx('p', {
       className: wz,
-      children: _$$tx(a() ? 'org_settings.scim.scim_group_description' : 'org_settings.scim.scim_description', {
+      children: renderI18nText(a() ? 'org_settings.scim.scim_group_description' : 'org_settings.scim.scim_description', {
         helpArticle: jsx(_$$N, {
           href: 'https://help.figma.com/hc/articles/360040532333-Getting-Started-with-SAML-SSO#h_d0220c93-18fa-4c1f-b965-69a5c8113f05',
           newTab: !0,
-          children: _$$tx('org_settings.sso.help_article')
+          children: renderI18nText('org_settings.sso.help_article')
         })
       })
     }), jsx('table', {
@@ -230,25 +230,25 @@ function B(e) {
       children: jsxs('tbody', {
         children: [e.org.k12_google_org && jsxs('tr', {
           children: [jsx('th', {
-            children: _$$tx('org_settings.sso.tenant_id')
+            children: renderI18nText('org_settings.sso.tenant_id')
           }), jsx('td', {
             children: e.orgSamlConfig.id
           })]
         }), jsxs('tr', {
           children: [jsx('th', {
-            children: _$$tx('org_settings.scim.api_token')
+            children: renderI18nText('org_settings.scim.api_token')
           }), d && jsx('td', {
-            children: _$$tx('org_settings.scim.api_token_generated_at', {
+            children: renderI18nText('org_settings.scim.api_token_generated_at', {
               timestamp: jsx(h1, {
                 date: d
               })
             })
           }), jsxs('td', {
-            children: [!l && !e.org.k12_google_org && _$$t('org_settings.scim.saml_sso_must_be_configured'), (l || e.org.k12_google_org) && c && jsx(_$$N, {
+            children: [!l && !e.org.k12_google_org && getI18nString('org_settings.scim.saml_sso_must_be_configured'), (l || e.org.k12_google_org) && c && jsx(_$$N, {
               onClick: r,
               href: '#',
               trusted: !0,
-              children: _$$tx('org_settings.scim.revoke_token_access')
+              children: renderI18nText('org_settings.scim.revoke_token_access')
             }), (l || e.org.k12_google_org) && !c && jsx(_$$N, {
               onClick: () => {
                 t(_$$S2({
@@ -257,7 +257,7 @@ function B(e) {
               },
               href: '#',
               trusted: !0,
-              children: _$$tx('org_settings.scim.generate_api_token')
+              children: renderI18nText('org_settings.scim.generate_api_token')
             })]
           })]
         })]
@@ -272,7 +272,7 @@ let G = Ju(() => {
   let s = !a.config;
   let r = () => e(Lo());
   return jsx(OJ, {
-    title: _$$t('org_settings.scim.scim_provisioning'),
+    title: getI18nString('org_settings.scim.scim_provisioning'),
     onClose: r,
     maxWidth: 492,
     minWidth: 492,
@@ -288,7 +288,7 @@ let G = Ju(() => {
           children: jsx($n, {
             onClick: r,
             variant: 'secondary',
-            children: _$$tx('org_settings.sign_in_method.done')
+            children: renderI18nText('org_settings.sign_in_method.done')
           })
         })]
       })]
@@ -300,9 +300,9 @@ function ed(e) {
   let t = !!e.orgSamlConfig.idp_name;
   let a = e.isMfaForMembersEnabled;
   return jsxs(Fragment, {
-    children: [_$$eD && jsx('div', {
+    children: [desktopAPIInstance && jsx('div', {
       className: wz,
-      children: _$$tx('org_settings.sso.you_must_use_a_web_browser')
+      children: renderI18nText('org_settings.sso.you_must_use_a_web_browser')
     }), jsxs(_$$z, {
       value: e.signInMethod,
       onChange: t => {
@@ -311,23 +311,23 @@ function ed(e) {
       className: _$$s.pl10.pt16.$,
       children: [jsx(_$$Z, {
         value: Ct.ANY,
-        disabled: !!_$$eD,
-        children: _$$tx('org_settings.sign_in_method.any', {
+        disabled: !!desktopAPIInstance,
+        children: renderI18nText('org_settings.sign_in_method.any', {
           default: jsx('span', {
             className: Rm,
-            children: _$$tx('org_settings.sign_in_method.default')
+            children: renderI18nText('org_settings.sign_in_method.default')
           })
         })
       }), jsx(_$$Z, {
         value: Ct.GOOGLE,
-        disabled: !!_$$eD || a,
-        tooltipText: a ? _$$t('org_settings.sign_in_method.unavailable_when_2fa_for_members_is_enabled') : void 0,
-        children: _$$tx('org_settings.sign_in_method.members_must_log_in_with_a_google_account')
+        disabled: !!desktopAPIInstance || a,
+        tooltipText: a ? getI18nString('org_settings.sign_in_method.unavailable_when_2fa_for_members_is_enabled') : void 0,
+        children: renderI18nText('org_settings.sign_in_method.members_must_log_in_with_a_google_account')
       }), jsx(_$$Z, {
-        tooltipText: a ? _$$t('org_settings.sign_in_method.unavailable_when_2fa_for_members_is_enabled') : t ? void 0 : _$$t('org_settings.sign_in_method.you_need_to_configure_saml_sso_first'),
+        tooltipText: a ? getI18nString('org_settings.sign_in_method.unavailable_when_2fa_for_members_is_enabled') : t ? void 0 : getI18nString('org_settings.sign_in_method.you_need_to_configure_saml_sso_first'),
         value: Ct.SAML,
-        disabled: !!_$$eD || !t || a,
-        children: _$$tx('org_settings.sign_in_method.members_must_log_in_with_saml_sso')
+        disabled: !!desktopAPIInstance || !t || a,
+        children: renderI18nText('org_settings.sign_in_method.members_must_log_in_with_saml_sso')
       })]
     })]
   });
@@ -337,7 +337,7 @@ function ec() {
     newTab: !0,
     href: 'https://help.figma.com/hc/articles/360052497994-Set-login-and-authentication-method',
     trusted: !0,
-    children: _$$tx('org_settings.mfa_for_members.learn_more_link')
+    children: renderI18nText('org_settings.mfa_for_members.learn_more_link')
   });
 }
 function e_(e) {
@@ -355,14 +355,14 @@ function e_(e) {
       }).$,
       children: jsx(_$$S3, {
         label: jsx(_$$J2, {
-          children: _$$tx('org_settings.mfa_for_members.checkbox_title')
+          children: renderI18nText('org_settings.mfa_for_members.checkbox_title')
         }),
         checked: c,
         onChange: t => {
           t ? e.setMfaRequiredSetting(o ? CT.ALL_USERS : CT.MEMBERS) : e.setMfaRequiredSetting(o ? CT.GUESTS : null);
         },
-        disabled: !!_$$eD,
-        children: _$$tx('org_settings.mfa_for_members.checkbox_description', {
+        disabled: !!desktopAPIInstance,
+        children: renderI18nText('org_settings.mfa_for_members.checkbox_description', {
           learnMoreLink: jsx(ec, {})
         })
       })
@@ -371,36 +371,36 @@ function e_(e) {
       children: e.isLoading ? jsx(qc, {}) : jsx($y, {
         variant: 'warn',
         children: jsxs(_$$Q, {
-          title: _$$tx('org_settings.mfa_for_members.warning_title', {
+          title: renderI18nText('org_settings.mfa_for_members.warning_title', {
             numMembers: e.nonMfaMemberCount
           }),
-          children: [_$$tx('org_settings.mfa_for_members.warning_description', {
+          children: [renderI18nText('org_settings.mfa_for_members.warning_description', {
             numMembers: e.mfaMemberCount
           }), jsx('button', {
             className: Ds,
             onClick: () => {
               a || (r(!0), t(_$$F.enqueue({
-                message: _$$t('members_table.csv_export.preparing_request'),
+                message: getI18nString('members_table.csv_export.preparing_request'),
                 type: 'orgRoster.exportCSV',
                 icon: zX.SPINNER
               })), _$$G.getMemberCSVExport({
                 orgId: e.org.id
               }).then(() => {
                 t(_$$F.enqueue({
-                  message: _$$t('members_table.csv_export.generating'),
+                  message: getI18nString('members_table.csv_export.generating'),
                   type: 'orgRoster.exportCSV',
                   icon: zX.CHECK
                 }));
               }, () => {
                 t(_$$F.enqueue({
-                  message: _$$t('members_table.csv_export.error'),
+                  message: getI18nString('members_table.csv_export.error'),
                   type: 'orgRoster.exportCSV',
                   icon: zX.EXCLAMATION,
                   error: !0
                 }));
               }), r(!1));
             },
-            children: _$$tx('org_settings.mfa_for_members.download_csv')
+            children: renderI18nText('org_settings.mfa_for_members.download_csv')
           }, 'download-csv')]
         })
       })
@@ -434,7 +434,7 @@ let eu = Ju(() => {
   let f = () => e(Lo());
   return jsxs(OJ, {
     containerClassName: jT,
-    title: _$$t('org_settings.sign_in_method.authentication'),
+    title: getI18nString('org_settings.sign_in_method.authentication'),
     onClose: f,
     maxWidth: 560,
     minWidth: 560,
@@ -443,7 +443,7 @@ let eu = Ju(() => {
       children: [!a.config && jsx(_$$k2, {}), a.config && jsxs(Fragment, {
         children: [jsx('p', {
           className: Fm,
-          children: _$$tx('org_settings.sign_in_method.authentication_instruction')
+          children: renderI18nText('org_settings.sign_in_method.authentication_instruction')
         }), jsx(ed, {
           dispatch: e,
           org: t,
@@ -465,7 +465,7 @@ let eu = Ju(() => {
       children: [jsx($n, {
         variant: 'secondary',
         onClick: f,
-        children: _$$tx('general.cancel')
+        children: renderI18nText('general.cancel')
       }), jsx('div', {
         className: Tg,
         children: jsx($n, {
@@ -490,7 +490,7 @@ let eu = Ju(() => {
             }));
             f();
           },
-          children: _$$tx('org_settings.guest_control.save_button')
+          children: renderI18nText('org_settings.guest_control.save_button')
         })
       })]
     })]
@@ -508,14 +508,14 @@ let eC = Ju(e => {
   _$$A(e.subscriptionStart).format('Do');
   return jsx(OJ, {
     onClose: s,
-    title: _$$t('billing_emails_modal.billing_emails_info.what_billing_emails'),
+    title: getI18nString('billing_emails_modal.billing_emails_info.what_billing_emails'),
     minWidth: 341,
     maxWidth: 341,
     children: jsxs('div', {
       className: 'billing_emails_modal--container--GTxxo',
       children: [jsx('div', {
         className: ev,
-        children: _$$tx('billing_emails_modal.billing_emails_info.about_billing_emails')
+        children: renderI18nText('billing_emails_modal.billing_emails_info.about_billing_emails')
       }), jsxs('div', {
         className: ef,
         children: [jsx('div', {
@@ -527,12 +527,12 @@ let eC = Ju(e => {
           className: ey,
           children: [jsx('div', {
             className: ew,
-            children: _$$tx('billing_emails_modal.billing_emails_info.annual_subscriptions_and_renewals')
+            children: renderI18nText('billing_emails_modal.billing_emails_info.annual_subscriptions_and_renewals')
           }), jsx('div', {
             className: ev,
-            children: _$$tx('billing_emails_modal.billing_emails_info.annual_subscription_renews_on_description', {
+            children: renderI18nText('billing_emails_modal.billing_emails_info.annual_subscription_renews_on_description', {
               date: jsx('strong', {
-                children: _$$tx('billing_emails_modal.billing_emails_info.subscription_date', {
+                children: renderI18nText('billing_emails_modal.billing_emails_info.subscription_date', {
                   subscriptionStart: e.subscriptionStart
                 })
               })
@@ -550,17 +550,17 @@ let eC = Ju(e => {
           className: ey,
           children: [jsx('div', {
             className: ew,
-            children: _$$tx('billing_emails_modal.billing_emails_info.quarterly_true_ups')
+            children: renderI18nText('billing_emails_modal.billing_emails_info.quarterly_true_ups')
           }), jsxs('div', {
             className: ev,
             children: [jsx('div', {
               className: 'billing_emails_modal--padding_below--44QyG',
-              children: _$$tx('billing_emails_modal.billing_emails_info.quarterly_true_ups_description_1.seat_rename')
-            }), _$$tx('billing_emails_modal.billing_emails_info.quarterly_true_ups_description_2', {
+              children: renderI18nText('billing_emails_modal.billing_emails_info.quarterly_true_ups_description_1.seat_rename')
+            }), renderI18nText('billing_emails_modal.billing_emails_info.quarterly_true_ups_description_2', {
               more: jsx('a', {
                 className: 'billing_emails_modal--link--sJ8RF blue_link--blueLink--9rlnd',
                 href: 'https://help.figma.com/hc/articles/360040328293-Manage-billing-on-the-Organization-and-Enterprise-plans',
-                children: _$$tx('billing_emails_modal.billing_emails_info.more')
+                children: renderI18nText('billing_emails_modal.billing_emails_info.more')
               })
             })]
           })]
@@ -569,13 +569,13 @@ let eC = Ju(e => {
         className: 'billing_emails_modal--buttons--ibKgB',
         children: jsx(vd, {
           onClick: s,
-          children: _$$tx('billing_emails_modal.billing_emails_info.close')
+          children: renderI18nText('billing_emails_modal.billing_emails_info.close')
         })
       })]
     })
   });
 }, 'BillingEmailsInfo');
-let eT = _$$eU(e => {
+let eT = atom(e => {
   let t = e(_$$Z2);
   if (t) {
     return e(OMV.Query({
@@ -584,7 +584,7 @@ let eT = _$$eU(e => {
   }
 });
 function eA() {
-  return md(eT);
+  return useAtomWithSubscription(eT);
 }
 let te = Ju(e => {
   let t = useDispatch();
@@ -596,10 +596,10 @@ let te = Ju(e => {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$t('settings_tab.delete_org_modal.are_you_sure_you_d_like_to_delete_figma')
+          children: getI18nString('settings_tab.delete_org_modal.are_you_sure_you_d_like_to_delete_figma')
         })
       }), jsx(_$$nB, {
-        children: _$$tx('settings_tab.delete_org_modal.please_confirm_that_you_wish_to_permanently_delete_the_org', {
+        children: renderI18nText('settings_tab.delete_org_modal.please_confirm_that_you_wish_to_permanently_delete_the_org', {
           orgName: a.name
         })
       }), jsx(wi, {
@@ -609,7 +609,7 @@ let te = Ju(e => {
               t(Lo());
             },
             variant: 'secondary',
-            children: _$$tx('modal.cancel')
+            children: renderI18nText('modal.cancel')
           }), jsx($n, {
             onClick: () => {
               t(Lo());
@@ -618,7 +618,7 @@ let te = Ju(e => {
               }));
             },
             variant: 'destructive',
-            children: _$$tx('settings_tab.delete_org_modal.request_to_delete_organization')
+            children: renderI18nText('settings_tab.delete_org_modal.request_to_delete_organization')
           })]
         })
       })]
@@ -631,7 +631,7 @@ let tt = Ju(e => {
   let r = hS(e);
   let [l, o] = useState(_$$Rs());
   let d = useCallback(e => {
-    sx('Delete user search performed', {
+    trackEventAnalytics('Delete user search performed', {
       orgId: a?.id,
       queryLength: e.inputValue.length
     });
@@ -644,13 +644,13 @@ let tt = Ju(e => {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$t('settings_tab.delete_org_modal.delete_users_from_this_organization')
+          children: getI18nString('settings_tab.delete_org_modal.delete_users_from_this_organization')
         })
       }), jsxs(_$$nB, {
-        children: [_$$tx('settings_tab.delete_org_modal.enter_names_or_emails_of_users_that_you_d_like_to_delete'), jsx('div', {
+        children: [renderI18nText('settings_tab.delete_org_modal.enter_names_or_emails_of_users_that_you_d_like_to_delete'), jsx('div', {
           className: 'delete_org_modal_autocomplete--autocompleteDiv--XcvHs',
           children: jsx(_$$g, {
-            placeholder: _$$t('settings_tab.delete_org_modal.email_or_names_of_org_members'),
+            placeholder: getI18nString('settings_tab.delete_org_modal.email_or_names_of_org_members'),
             autocomplete: l,
             onAutocompleteChange: d
           })
@@ -662,7 +662,7 @@ let tt = Ju(e => {
               t(Lo());
             },
             variant: 'secondary',
-            children: _$$tx('modal.cancel')
+            children: renderI18nText('modal.cancel')
           }), jsx($n, {
             disabled: c,
             onClick: () => {
@@ -675,7 +675,7 @@ let tt = Ju(e => {
               }));
             },
             variant: 'destructive',
-            children: _$$tx('settings_tab.delete_org_modal.delete')
+            children: renderI18nText('settings_tab.delete_org_modal.delete')
           })]
         })
       })]
@@ -692,18 +692,18 @@ let ta = Ju(e => {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$t('settings_tab.delete_org_modal.delete_users_and_their_data')
+          children: getI18nString('settings_tab.delete_org_modal.delete_users_and_their_data')
         })
       }), jsxs(_$$nB, {
         children: [jsx('p', {
-          children: _$$tx('settings_tab.delete_org_modal.you_re_deleting_figma_data_and_access_for_the_following_user')
+          children: renderI18nText('settings_tab.delete_org_modal.you_re_deleting_figma_data_and_access_for_the_following_user')
         }), jsx('ul', {
           className: 'delete_org_modal_autocomplete--orgUserList--PhNTi',
           children: e.orgUsers.map(e => jsxs('li', {
             children: [e.user.handle, ' (', e.user.email, ')']
           }, e.user.email))
         }), jsx('br', {}), jsx('p', {
-          children: _$$tx('settings_tab.delete_org_modal.this_action_can_t_be_undone')
+          children: renderI18nText('settings_tab.delete_org_modal.this_action_can_t_be_undone')
         })]
       }), jsx(wi, {
         children: jsxs(jk, {
@@ -712,7 +712,7 @@ let ta = Ju(e => {
               t(Lo());
             },
             variant: 'secondary',
-            children: _$$tx('modal.cancel')
+            children: renderI18nText('modal.cancel')
           }), jsx($n, {
             onClick: () => {
               t(Lo());
@@ -722,7 +722,7 @@ let ta = Ju(e => {
               }));
             },
             variant: 'destructive',
-            children: _$$tx('modal.confirm')
+            children: renderI18nText('modal.confirm')
           })]
         })
       })]
@@ -858,7 +858,7 @@ function ty({
       className: 'x7hzu26 x12sbs06',
       children: [jsx('p', {
         className: 'x1s688f x1j6dyjg x1d3mw78 x1akne3o',
-        children: _$$tx('org_settings.workspace_controls.header_text')
+        children: renderI18nText('org_settings.workspace_controls.header_text')
       }), jsx('p', {
         className: 'x1j6dyjg x1d3mw78 x1n0bwc9',
         children: i
@@ -897,7 +897,7 @@ function tw(e) {
   return jsxs(_$$E3, {
     'onClick': e.onClick,
     'className': 'x1gskr33 x1ihwiht x78zum5 x1q0g3np xh8yej3 x6s0dn4 x1nfngrj x1qhtx96 x13iak60 x1ypdohk xv2f06h',
-    'aria-label': _$$t('org_settings.view_workspace_settings', {
+    'aria-label': getI18nString('org_settings.view_workspace_settings', {
       workspaceName: e.mainText
     }),
     'aria-describedby': t,
@@ -944,7 +944,7 @@ function tk(e) {
     className: 'xh8yej3',
     children: [jsxs(_$$p2.Root, {
       children: [jsx(_$$p2, {
-        placeholder: _$$t('settings_tab.add_workspace_label'),
+        placeholder: getI18nString('settings_tab.add_workspace_label'),
         id: o,
         ...d.getInputProps({
           onChange: a,
@@ -983,7 +983,7 @@ function tk(e) {
                 children: t.name
               }), a && jsx('span', {
                 className: 'xge78cn x8x9d4c x2lah0s',
-                children: _$$t('org_settings.workspace_controls.has_custom_settings')
+                children: getI18nString('org_settings.workspace_controls.has_custom_settings')
               })]
             }));
           })
@@ -1064,7 +1064,7 @@ let tS = Ju(e => {
   let [o, d] = useState(!org.ai_features_disabled);
   let c = eA();
   let _ = [...(c?.data?.org?.workspaces ?? [])];
-  let u = o ? _$$t('admin_settings.ai.enable_success') : _$$t('admin_settings.ai.disable_success');
+  let u = o ? getI18nString('admin_settings.ai.enable_success') : getI18nString('admin_settings.ai.disable_success');
   let m = useCallback(e => {
     l(_$$to({
       type: tN,
@@ -1080,7 +1080,7 @@ let tS = Ju(e => {
     return jsx('div', {
       children: jsx('p', {
         ...Ay.props(a ? tC.successText : tC.secondaryText),
-        children: a ? _$$tx('org_settings.general.on') : _$$tx('org_settings.general.off')
+        children: a ? renderI18nText('org_settings.general.on') : renderI18nText('org_settings.general.off')
       })
     });
   }, []);
@@ -1091,7 +1091,7 @@ let tS = Ju(e => {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$tx('org_settings.ai_controls.ai_features')
+          children: renderI18nText('org_settings.ai_controls.ai_features')
         })
       }), jsxs(_$$nB, {
         children: [jsx(tA, {
@@ -1103,7 +1103,7 @@ let tS = Ju(e => {
           loadingStatus: c?.status ?? 'loading',
           allWorkspaces: _,
           displaySettings: m,
-          subHeader: _$$tx('org_settings.ai_controls.update_ai_features_settings_for'),
+          subHeader: renderI18nText('org_settings.ai_controls.update_ai_features_settings_for'),
           workspaceSubText: p,
           hasCustomSettings: tR
         })]
@@ -1112,7 +1112,7 @@ let tS = Ju(e => {
           children: [jsx($n, {
             variant: 'secondary',
             onClick: onClose,
-            children: _$$tx('org_settings.general.cancel')
+            children: renderI18nText('org_settings.general.cancel')
           }), jsx($n, {
             onClick: () => {
               l(yo({
@@ -1123,7 +1123,7 @@ let tS = Ju(e => {
               }));
               onClose();
             },
-            children: _$$tx('org_settings.general.save')
+            children: renderI18nText('org_settings.general.save')
           })]
         })
       })]
@@ -1136,7 +1136,7 @@ let tN = Ju(({
   workspace: a
 }) => {
   let r = useDispatch();
-  let l = _$$t('org_settings.ai_controls.workspace_success');
+  let l = getI18nString('org_settings.ai_controls.workspace_success');
   let [o, d] = useState(tR(a));
   let c = useCallback(() => {
     r(_$$to({
@@ -1174,12 +1174,12 @@ let tN = Ju(({
         children: [tR(a) && jsx(_$$E3, {
           onClick: c,
           ...Ay.props(tg.removeCustomSettingsButton),
-          children: _$$tx('org_settings.workspace_controls.remove_custom_settings')
+          children: renderI18nText('org_settings.workspace_controls.remove_custom_settings')
         }), jsxs(jk, {
           children: [jsx($n, {
             variant: 'secondary',
             onClick: t,
-            children: _$$tx('org_settings.general.cancel')
+            children: renderI18nText('org_settings.general.cancel')
           }), jsx($n, {
             variant: 'primary',
             onClick: () => {
@@ -1193,7 +1193,7 @@ let tN = Ju(({
                 r(_$$s2.error(e.message));
               });
             },
-            children: _$$tx('org_settings.general.save')
+            children: renderI18nText('org_settings.general.save')
           })]
         })]
       })]
@@ -1205,7 +1205,7 @@ let tI = Ju(({
   workspace: t
 }) => {
   let a = useDispatch();
-  let s = _$$t('org_settings.ai_controls.workspace_success');
+  let s = getI18nString('org_settings.ai_controls.workspace_success');
   let r = hS({
     open: !0,
     onClose: e
@@ -1217,10 +1217,10 @@ let tI = Ju(({
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$tx('org_settings.export_controls.remove_workspace_export_controls_title')
+          children: renderI18nText('org_settings.export_controls.remove_workspace_export_controls_title')
         })
       }), jsx(_$$nB, {
-        children: _$$tx('org_settings.ai_controls.remove_workspace_ai_controls_body', {
+        children: renderI18nText('org_settings.ai_controls.remove_workspace_ai_controls_body', {
           workspaceName: t.name
         })
       }), jsx(wi, {
@@ -1228,7 +1228,7 @@ let tI = Ju(({
           children: [jsx($n, {
             variant: 'secondary',
             onClick: e,
-            children: _$$tx('org_settings.general.cancel')
+            children: renderI18nText('org_settings.general.cancel')
           }), jsx($n, {
             variant: 'destructive',
             onClick: () => {
@@ -1243,7 +1243,7 @@ let tI = Ju(({
                 a(_$$s2.error(e.message));
               });
             },
-            children: _$$tx('org_settings.general.remove')
+            children: renderI18nText('org_settings.general.remove')
           })]
         })
       })]
@@ -1252,11 +1252,11 @@ let tI = Ju(({
 }, 'ResetAIControlSettingsConfirmationModal');
 function tT() {
   return jsx(_$$N, {
-    'aria-label': _$$t('settings_tab.learn_more_about_ai_features'),
+    'aria-label': getI18nString('settings_tab.learn_more_about_ai_features'),
     'href': _$$d2.aiFeatures,
     'trusted': !0,
     'newTab': !0,
-    'children': _$$t('general.learn_more')
+    'children': getI18nString('general.learn_more')
   });
 }
 function tA({
@@ -1265,9 +1265,9 @@ function tA({
   resource: a
 }) {
   let i = useId();
-  let r = a === 'org' ? _$$tx('org_settings.ai_controls.let_people_in_your_organization', {
+  let r = a === 'org' ? renderI18nText('org_settings.ai_controls.let_people_in_your_organization', {
     learnMore: jsx(tT, {})
-  }) : _$$tx('org_settings.ai_controls.let_people_in_your_workspace', {
+  }) : renderI18nText('org_settings.ai_controls.let_people_in_your_workspace', {
     learnMore: jsx(tT, {})
   });
   return jsxs('div', {
@@ -1279,7 +1279,7 @@ function tA({
         'aria-describedby': 'ai-features-note',
         'children': jsx('span', {
           ...Ay.props(tC.labelText),
-          children: _$$tx('org_settings.ai_controls.allow_ai_features')
+          children: renderI18nText('org_settings.ai_controls.allow_ai_features')
         })
       }), jsx('span', {
         ...Ay.props(tC.noteText),
@@ -1301,7 +1301,7 @@ let tD = 'autogen_password_controls_modal--radioLabel--tmcmf';
 let tP = e => e ? 'autogen' : 'custom';
 let tU = Ju(() => {
   let e = useDispatch();
-  let t = _$$t('org_settings.autogen_password_controls.success');
+  let t = getI18nString('org_settings.autogen_password_controls.success');
   let a = useSelector(e => e.orgById[e.currentUserOrgId]);
   let r = Rs(RcX, {
     orgId: a.id
@@ -1312,14 +1312,14 @@ let tU = Ju(() => {
     r.status === 'loaded' && d(tP(r.data?.org?.orgSharedSetting?.autogenPasswordControls));
   }, [r]);
   return jsx(OJ, {
-    title: _$$t('org_settings.autogen_password_controls.title'),
+    title: getI18nString('org_settings.autogen_password_controls.title'),
     onClose: l,
     maxWidth: 380,
     minWidth: 380,
     fixedTop: !0,
     children: jsxs('div', {
       className: 'autogen_password_controls_modal--modalContent--qogS8',
-      children: [_$$tx('org_settings.autogen_password_controls.description'), jsxs(_$$z, {
+      children: [renderI18nText('org_settings.autogen_password_controls.description'), jsxs(_$$z, {
         value: o,
         onChange: e => {
           d(e);
@@ -1330,25 +1330,25 @@ let tU = Ju(() => {
           labelClassName: tD,
           disabled: r.status === 'loading',
           children: [jsx(_$$E, {
-            children: _$$tx('org_settings.autogen_password_controls.custom_passwords_button')
+            children: renderI18nText('org_settings.autogen_password_controls.custom_passwords_button')
           }), jsx('span', {
             children: jsx(_$$E, {
               color: 'secondary',
-              children: _$$tx('org_settings.autogen_password_controls.default')
+              children: renderI18nText('org_settings.autogen_password_controls.default')
             })
           }), jsx('br', {}), jsx(_$$E, {
             color: 'secondary',
-            children: _$$tx('org_settings.autogen_password_controls.custom_passwords_description')
+            children: renderI18nText('org_settings.autogen_password_controls.custom_passwords_description')
           })]
         }), jsxs(_$$Z, {
           value: 'autogen',
           labelClassName: tD,
           disabled: r.status === 'loading',
           children: [jsx(_$$E, {
-            children: _$$tx('org_settings.autogen_password_controls.autogen_passwords_button')
+            children: renderI18nText('org_settings.autogen_password_controls.autogen_passwords_button')
           }), jsx('br', {}), jsx(_$$E, {
             color: 'secondary',
-            children: _$$tx('org_settings.autogen_password_controls.autogen_passwords_description')
+            children: renderI18nText('org_settings.autogen_password_controls.autogen_passwords_description')
           })]
         })]
       }), jsx(_$$z2, {
@@ -1357,14 +1357,14 @@ let tU = Ju(() => {
         iconSrc: _$$A4,
         dataTestId: 'password-info-banner',
         children: jsx(_$$E, {
-          children: _$$tx('org_settings.autogen_password_controls.banner')
+          children: renderI18nText('org_settings.autogen_password_controls.banner')
         })
       }), jsxs('div', {
         className: 'autogen_password_controls_modal--modalButtons--3GOXX',
         children: [jsx(_$$nR2, {
           onClick: l,
           children: jsx(_$$E, {
-            children: _$$tx('org_settings.autogen_password_controls.cancel')
+            children: renderI18nText('org_settings.autogen_password_controls.cancel')
           })
         }), jsx(_$$$$, {
           onClick: () => {
@@ -1376,7 +1376,7 @@ let tU = Ju(() => {
             })), l());
           },
           children: jsx(_$$E, {
-            children: _$$tx('org_settings.autogen_password_controls.save')
+            children: renderI18nText('org_settings.autogen_password_controls.save')
           })
         })]
       })]
@@ -1388,7 +1388,7 @@ let tF = Ju(() => {
   let t = useSelector(e => e.orgById[e.currentUserOrgId]);
   let a = () => e(Lo());
   return jsx(OJ, {
-    title: _$$t('settings_tab.scim_metadata_modal.member_metadata'),
+    title: getI18nString('settings_tab.scim_metadata_modal.member_metadata'),
     onClose: a,
     maxWidth: 340,
     minWidth: 340,
@@ -1396,7 +1396,7 @@ let tF = Ju(() => {
       className: jE,
       children: [jsx('p', {
         className: wz,
-        children: _$$tx('settings_tab.scim_metadata_modal.change_which_scim_metadata_shows_on_the_members_tab')
+        children: renderI18nText('settings_tab.scim_metadata_modal.change_which_scim_metadata_shows_on_the_members_tab')
       }), jsx(_$$z, {
         value: t.featured_scim_metadata,
         onChange: a => e(Kc({
@@ -1410,7 +1410,7 @@ let tF = Ju(() => {
       }), jsx(cw, {
         onClick: a,
         className: Yy,
-        children: _$$tx('settings_tab.scim_metadata_modal.done')
+        children: renderI18nText('settings_tab.scim_metadata_modal.done')
       })]
     })
   });
@@ -1421,80 +1421,80 @@ let t$ = {
     category: 'Users',
     isEnterpriseOnly: !1,
     isPlanPrivateOnly: !1,
-    getImpersonalDescription: () => _$$t('tokens.settings.dev_token_modal.scope.current_user_description'),
-    getPersonalDescription: () => [_$$t('tokens.oauth.read_your_name_email_and_profile_image')]
+    getImpersonalDescription: () => getI18nString('tokens.settings.dev_token_modal.scope.current_user_description'),
+    getPersonalDescription: () => [getI18nString('tokens.oauth.read_your_name_email_and_profile_image')]
   },
   'file_comments:read': {
     id: 'file_comments:read',
     category: 'Files',
     isEnterpriseOnly: !1,
     isPlanPrivateOnly: !1,
-    getImpersonalDescription: () => _$$t('tokens.scope.file_comments_read.impersonal_description'),
-    getPersonalDescription: () => [_$$t('tokens.oauth.read_comments_for_files_you_have_access_to')]
+    getImpersonalDescription: () => getI18nString('tokens.scope.file_comments_read.impersonal_description'),
+    getPersonalDescription: () => [getI18nString('tokens.oauth.read_comments_for_files_you_have_access_to')]
   },
   'file_comments:write': {
     id: 'file_comments:write',
     category: 'Files',
     isEnterpriseOnly: !1,
     isPlanPrivateOnly: !1,
-    getImpersonalDescription: () => _$$t('tokens.scope.file_comments_write.impersonal_description'),
-    getPersonalDescription: () => [_$$t('tokens.oauth.modify_comments_for_files_you_have_access_to')]
+    getImpersonalDescription: () => getI18nString('tokens.scope.file_comments_write.impersonal_description'),
+    getPersonalDescription: () => [getI18nString('tokens.oauth.modify_comments_for_files_you_have_access_to')]
   },
   'file_content:read': {
     id: 'file_content:read',
     category: 'Files',
     isEnterpriseOnly: !1,
     isPlanPrivateOnly: !1,
-    getImpersonalDescription: () => _$$t('tokens.settings.dev_token_modal.scope.file_content_description_v2'),
-    getPersonalDescription: () => [_$$t('tokens.oauth.scope.file_content_read_description')]
+    getImpersonalDescription: () => getI18nString('tokens.settings.dev_token_modal.scope.file_content_description_v2'),
+    getPersonalDescription: () => [getI18nString('tokens.oauth.scope.file_content_read_description')]
   },
   'file_dev_resources:read': {
     id: 'file_dev_resources:read',
     category: 'Files',
     isEnterpriseOnly: !1,
     isPlanPrivateOnly: !1,
-    getImpersonalDescription: () => _$$t('tokens.scope.file_dev_resources_read.impersonal_description'),
-    getPersonalDescription: () => [_$$t('tokens.oauth.read_dev_resources')]
+    getImpersonalDescription: () => getI18nString('tokens.scope.file_dev_resources_read.impersonal_description'),
+    getPersonalDescription: () => [getI18nString('tokens.oauth.read_dev_resources')]
   },
   'file_dev_resources:write': {
     id: 'file_dev_resources:write',
     category: 'Files',
     isEnterpriseOnly: !1,
     isPlanPrivateOnly: !1,
-    getImpersonalDescription: () => _$$t('tokens.scope.file_dev_resources_write.impersonal_description'),
-    getPersonalDescription: () => [_$$t('tokens.oauth.create_and_modify_dev_resources')]
+    getImpersonalDescription: () => getI18nString('tokens.scope.file_dev_resources_write.impersonal_description'),
+    getPersonalDescription: () => [getI18nString('tokens.oauth.create_and_modify_dev_resources')]
   },
   'file_metadata:read': {
     id: 'file_metadata:read',
     category: 'Files',
     isEnterpriseOnly: !1,
     isPlanPrivateOnly: !1,
-    getImpersonalDescription: () => _$$t('tokens.settings.dev_token_modal.scope.file_metadata_description'),
-    getPersonalDescription: () => [_$$t('tokens.oauth.scope.file_metadata_read_description')]
+    getImpersonalDescription: () => getI18nString('tokens.settings.dev_token_modal.scope.file_metadata_description'),
+    getPersonalDescription: () => [getI18nString('tokens.oauth.scope.file_metadata_read_description')]
   },
   'file_variables:read': {
     id: 'file_variables:read',
     category: 'Files',
     isEnterpriseOnly: !0,
     isPlanPrivateOnly: !1,
-    getImpersonalDescription: () => _$$t('tokens.scope.file_variables_read.impersonal_description'),
-    getPersonalDescription: () => [_$$t('tokens.oauth.read_variables_from_files_you_have_access_to')]
+    getImpersonalDescription: () => getI18nString('tokens.scope.file_variables_read.impersonal_description'),
+    getPersonalDescription: () => [getI18nString('tokens.oauth.read_variables_from_files_you_have_access_to')]
   },
   'file_variables:write': {
     id: 'file_variables:write',
     category: 'Files',
     isEnterpriseOnly: !0,
     isPlanPrivateOnly: !1,
-    getImpersonalDescription: () => _$$t('tokens.scope.file_variables_write.impersonal_description'),
-    getPersonalDescription: () => [_$$t('tokens.oauth.create_and_modify_variables_for_files_you_have_access_to')]
+    getImpersonalDescription: () => getI18nString('tokens.scope.file_variables_write.impersonal_description'),
+    getPersonalDescription: () => [getI18nString('tokens.oauth.create_and_modify_variables_for_files_you_have_access_to')]
   },
   'file_versions:read': {
     id: 'file_versions:read',
     category: 'Files',
     isEnterpriseOnly: !1,
     isPlanPrivateOnly: !1,
-    getImpersonalDescription: () => _$$t('tokens.settings.dev_token_modal.scope.file_versions_description'),
-    getPersonalDescription: () => [_$$t('tokens.oauth.scope.file_versions_read_description')]
+    getImpersonalDescription: () => getI18nString('tokens.settings.dev_token_modal.scope.file_versions_description'),
+    getPersonalDescription: () => [getI18nString('tokens.oauth.scope.file_versions_read_description')]
   },
   'files:read': {
     id: 'files:read',
@@ -1502,80 +1502,80 @@ let t$ = {
     isEnterpriseOnly: !1,
     isDeprecated: !0,
     isPlanPrivateOnly: !1,
-    getImpersonalDescription: () => _$$t('tokens.scope.deprecated_scope.description'),
-    getPersonalDescription: () => [_$$t('tokens.oauth.scope.file_content_read_description'), _$$t('tokens.oauth.read_comments_for_files_you_have_access_to'), _$$t('tokens.oauth.scope.projects_read_description'), _$$t('tokens.oauth.read_components_and_styles_you_have_access_to'), _$$t('tokens.oauth.read_your_name_email_and_profile_image')]
+    getImpersonalDescription: () => getI18nString('tokens.scope.deprecated_scope.description'),
+    getPersonalDescription: () => [getI18nString('tokens.oauth.scope.file_content_read_description'), getI18nString('tokens.oauth.read_comments_for_files_you_have_access_to'), getI18nString('tokens.oauth.scope.projects_read_description'), getI18nString('tokens.oauth.read_components_and_styles_you_have_access_to'), getI18nString('tokens.oauth.read_your_name_email_and_profile_image')]
   },
   'library_analytics:read': {
     id: 'library_analytics:read',
     category: 'Libraries',
     isEnterpriseOnly: !0,
     isPlanPrivateOnly: !1,
-    getImpersonalDescription: () => _$$t('tokens.settings.dev_token_modal.scope.library_analytics_description'),
-    getPersonalDescription: () => [_$$t('tokens.oauth.read_library_analytics_data')]
+    getImpersonalDescription: () => getI18nString('tokens.settings.dev_token_modal.scope.library_analytics_description'),
+    getPersonalDescription: () => [getI18nString('tokens.oauth.read_library_analytics_data')]
   },
   'library_assets:read': {
     id: 'library_assets:read',
     category: 'Libraries',
     isEnterpriseOnly: !1,
     isPlanPrivateOnly: !1,
-    getImpersonalDescription: () => _$$t('tokens.settings.dev_token_modal.scope.library_assets_description'),
-    getPersonalDescription: () => [_$$t('tokens.oauth.scope.library_asset_read_description')]
+    getImpersonalDescription: () => getI18nString('tokens.settings.dev_token_modal.scope.library_assets_description'),
+    getPersonalDescription: () => [getI18nString('tokens.oauth.scope.library_asset_read_description')]
   },
   'library_content:read': {
     id: 'library_content:read',
     category: 'Libraries',
     isEnterpriseOnly: !1,
     isPlanPrivateOnly: !1,
-    getImpersonalDescription: () => _$$t('tokens.settings.dev_token_modal.scope.library_content_description'),
-    getPersonalDescription: () => [_$$t('tokens.oauth.scope.library_content_read_description')]
+    getImpersonalDescription: () => getI18nString('tokens.settings.dev_token_modal.scope.library_content_description'),
+    getPersonalDescription: () => [getI18nString('tokens.oauth.scope.library_content_read_description')]
   },
   'org:activity_log_read': {
     id: 'org:activity_log_read',
     category: 'Orgs',
     isEnterpriseOnly: !0,
     isPlanPrivateOnly: !0,
-    getImpersonalDescription: () => _$$t('tokens.scope.org_activity_log_read.impersonal_description'),
-    getPersonalDescription: () => [_$$t('tokens.oauth.view_user_activity_in_figma_like_opening_files_creating_projects_and_sharing_resources')]
+    getImpersonalDescription: () => getI18nString('tokens.scope.org_activity_log_read.impersonal_description'),
+    getPersonalDescription: () => [getI18nString('tokens.oauth.view_user_activity_in_figma_like_opening_files_creating_projects_and_sharing_resources')]
   },
   'projects:read': {
     id: 'projects:read',
     category: 'Projects',
     isEnterpriseOnly: !1,
     isPlanPrivateOnly: !0,
-    getImpersonalDescription: () => _$$t('tokens.settings.dev_token_modal.scope.projects_description'),
-    getPersonalDescription: () => [_$$t('tokens.oauth.scope.projects_read_description')]
+    getImpersonalDescription: () => getI18nString('tokens.settings.dev_token_modal.scope.projects_description'),
+    getPersonalDescription: () => [getI18nString('tokens.oauth.scope.projects_read_description')]
   },
   'team_library_content:read': {
     id: 'team_library_content:read',
     category: 'Libraries',
     isEnterpriseOnly: !1,
     isPlanPrivateOnly: !1,
-    getImpersonalDescription: () => _$$t('tokens.settings.dev_token_modal.scope.team_library_content_description'),
-    getPersonalDescription: () => [_$$t('tokens.oauth.scope.team_library_content_read_description')]
+    getImpersonalDescription: () => getI18nString('tokens.settings.dev_token_modal.scope.team_library_content_description'),
+    getPersonalDescription: () => [getI18nString('tokens.oauth.scope.team_library_content_read_description')]
   },
   'webhooks:read': {
     id: 'webhooks:read',
     category: 'Webhooks',
     isEnterpriseOnly: !1,
     isPlanPrivateOnly: !1,
-    getImpersonalDescription: () => _$$t('tokens.scope.webhooks_read.impersonal_description'),
-    getPersonalDescription: () => [_$$t('tokens.oauth.scope.webhooks_read_description')]
+    getImpersonalDescription: () => getI18nString('tokens.scope.webhooks_read.impersonal_description'),
+    getPersonalDescription: () => [getI18nString('tokens.oauth.scope.webhooks_read_description')]
   },
   'webhooks:write': {
     id: 'webhooks:write',
     category: 'Webhooks',
     isEnterpriseOnly: !1,
     isPlanPrivateOnly: !1,
-    getImpersonalDescription: () => _$$t('tokens.scope.webhooks_write.impersonal_description'),
-    getPersonalDescription: () => [_$$t('tokens.oauth.create_and_modify_webhooks')]
+    getImpersonalDescription: () => getI18nString('tokens.scope.webhooks_write.impersonal_description'),
+    getPersonalDescription: () => [getI18nString('tokens.oauth.create_and_modify_webhooks')]
   },
   'org:discovery_read': {
     id: 'org:discovery_read',
     category: 'Orgs',
     isEnterpriseOnly: !0,
     isPlanPrivateOnly: !0,
-    getImpersonalDescription: () => _$$t('tokens.scope.org_discovery_read.description'),
-    getPersonalDescription: () => [_$$t('tokens.oauth.discovery_scope_description')]
+    getImpersonalDescription: () => getI18nString('tokens.scope.org_discovery_read.description'),
+    getPersonalDescription: () => [getI18nString('tokens.oauth.discovery_scope_description')]
   },
   'selections:read': {
     id: 'selections:read',
@@ -1583,16 +1583,16 @@ let t$ = {
     isEnterpriseOnly: !1,
     isPlanPrivateOnly: !1,
     ldFlag: 'pixie_get_selections_allowlist',
-    getImpersonalDescription: () => _$$t('tokens.scope.selections_read.impersonal_description'),
-    getPersonalDescription: () => [_$$t('tokens.oauth.scope.selections_read_description')]
+    getImpersonalDescription: () => getI18nString('tokens.scope.selections_read.impersonal_description'),
+    getPersonalDescription: () => [getI18nString('tokens.oauth.scope.selections_read_description')]
   },
   'file_code_connect:write': {
     id: 'file_code_connect:write',
     category: 'Libraries',
     isEnterpriseOnly: !1,
     isPlanPrivateOnly: !0,
-    getImpersonalDescription: () => _$$t('tokens.settings.dev_token_modal.scope.code_connect_description'),
-    getPersonalDescription: () => [_$$t('tokens.oauth.scope.code_connect_description')]
+    getImpersonalDescription: () => getI18nString('tokens.settings.dev_token_modal.scope.code_connect_description'),
+    getPersonalDescription: () => [getI18nString('tokens.oauth.scope.code_connect_description')]
   },
   'file_create': {
     id: 'file_create',
@@ -1600,8 +1600,8 @@ let t$ = {
     isEnterpriseOnly: !1,
     isPlanPrivateOnly: !1,
     isDeprecated: !0,
-    getImpersonalDescription: () => _$$t('tokens.scope.deprecated_scope.description'),
-    getPersonalDescription: () => [_$$t('tokens.oauth.create_files')]
+    getImpersonalDescription: () => getI18nString('tokens.scope.deprecated_scope.description'),
+    getPersonalDescription: () => [getI18nString('tokens.oauth.create_files')]
   },
   'file_enumerate': {
     id: 'file_enumerate',
@@ -1609,8 +1609,8 @@ let t$ = {
     isEnterpriseOnly: !1,
     isPlanPrivateOnly: !1,
     isDeprecated: !0,
-    getImpersonalDescription: () => _$$t('tokens.scope.deprecated_scope.description'),
-    getPersonalDescription: () => [_$$t('tokens.oauth.enumerate_files')]
+    getImpersonalDescription: () => getI18nString('tokens.scope.deprecated_scope.description'),
+    getPersonalDescription: () => [getI18nString('tokens.oauth.enumerate_files')]
   },
   'file_read': {
     id: 'file_read',
@@ -1618,45 +1618,45 @@ let t$ = {
     isEnterpriseOnly: !1,
     isPlanPrivateOnly: !1,
     isDeprecated: !0,
-    getImpersonalDescription: () => _$$t('tokens.scope.deprecated_scope.description'),
-    getPersonalDescription: () => [_$$t('tokens.oauth.read_files_you_have_access_to'), _$$t('tokens.oauth.read_and_modify_comments_for_files_you_have_access_to'), _$$t('tokens.oauth.read_projects_you_have_access_to'), _$$t('tokens.oauth.read_components_and_styles_you_have_access_to')]
+    getImpersonalDescription: () => getI18nString('tokens.scope.deprecated_scope.description'),
+    getPersonalDescription: () => [getI18nString('tokens.oauth.read_files_you_have_access_to'), getI18nString('tokens.oauth.read_and_modify_comments_for_files_you_have_access_to'), getI18nString('tokens.oauth.read_projects_you_have_access_to'), getI18nString('tokens.oauth.read_components_and_styles_you_have_access_to')]
   },
   'mcp:connect': {
     id: 'mcp:connect',
     category: 'MCP',
     isEnterpriseOnly: !1,
     isPlanPrivateOnly: !1,
-    getImpersonalDescription: () => _$$t('tokens.scope.mcp_connect.description'),
-    getPersonalDescription: () => [_$$t('tokens.oauth.scope.mcp_connect_description')]
+    getImpersonalDescription: () => getI18nString('tokens.scope.mcp_connect.description'),
+    getPersonalDescription: () => [getI18nString('tokens.oauth.scope.mcp_connect_description')]
   }
 };
 var tB = (e => (e.ORG_ACTIVITY_LOG_READ = 'org:activity_log_read', e.ORG_DISCOVERY_READ = 'org:discovery_read', e.USER_FILE_READ_DEPRECATED = 'file_read', e.USER_FILE_CREATE = 'file_create', e.USER_FILE_ENUMERATE = 'file_enumerate', e.USER_FILES_READ_DEPRECATING = 'files:read', e.USER_CURRENT_USER_READ = 'current_user:read', e.USER_FILE_CONTENT_READ = 'file_content:read', e.USER_FILE_COMMENTS_READ = 'file_comments:read', e.USER_FILE_COMMENTS_WRITE = 'file_comments:write', e.USER_FILE_DEV_RESOURCES_READ = 'file_dev_resources:read', e.USER_FILE_DEV_RESOURCES_WRITE = 'file_dev_resources:write', e.USER_FILE_METADATA_READ = 'file_metadata:read', e.USER_FILE_VARIABLES_READ = 'file_variables:read', e.USER_FILE_VARIABLES_WRITE = 'file_variables:write', e.USER_FILE_VERSIONS_READ = 'file_versions:read', e.USER_LIBRARY_ANALYTICS_READ = 'library_analytics:read', e.USER_LIBRARY_ASSETS_READ = 'library_assets:read', e.USER_LIBRARY_CONTENT_READ = 'library_content:read', e.USER_PROJECTS_READ = 'projects:read', e.USER_TEAM_LIBRARY_CONTENT_READ = 'team_library_content:read', e.USER_WEBHOOKS_READ = 'webhooks:read', e.USER_WEBHOOKS_WRITE = 'webhooks:write', e.MCP_CONNECT = 'mcp:connect', e.PRIVATE_SELECTIONS_READ = 'selections:read', e))(tB || {});
 let tG = {
-  'org:activity_log_read': () => [_$$t('tokens.oauth.view_user_activity_in_figma_like_opening_files_creating_projects_and_sharing_resources')],
-  'org:discovery_read': () => [_$$t('tokens.oauth.discovery_scope_description')],
-  'selections:read': () => [_$$t('tokens.oauth.scope.selections_read_description')],
-  'file_read': () => [_$$t('tokens.oauth.read_files_you_have_access_to'), _$$t('tokens.oauth.read_and_modify_comments_for_files_you_have_access_to'), _$$t('tokens.oauth.read_projects_you_have_access_to'), _$$t('tokens.oauth.read_components_and_styles_you_have_access_to')],
-  'file_create': () => [_$$t('tokens.oauth.create_files')],
-  'file_enumerate': () => [_$$t('tokens.oauth.enumerate_files')],
-  'files:read': () => [_$$t('tokens.oauth.scope.file_content_read_description'), _$$t('tokens.oauth.read_comments_for_files_you_have_access_to'), _$$t('tokens.oauth.scope.projects_read_description'), _$$t('tokens.oauth.read_components_and_styles_you_have_access_to'), _$$t('tokens.oauth.read_your_name_email_and_profile_image')],
-  'file_content:read': () => [_$$t('tokens.oauth.scope.file_content_read_description')],
-  'file_comments:read': () => [_$$t('tokens.oauth.read_comments_for_files_you_have_access_to')],
-  'file_comments:write': () => [_$$t('tokens.oauth.modify_comments_for_files_you_have_access_to')],
-  'file_dev_resources:read': () => [_$$t('tokens.oauth.read_dev_resources')],
-  'file_dev_resources:write': () => [_$$t('tokens.oauth.create_and_modify_dev_resources')],
-  'file_metadata:read': () => [_$$t('tokens.oauth.scope.file_metadata_read_description')],
-  'file_variables:read': () => [_$$t('tokens.oauth.read_variables_from_files_you_have_access_to')],
-  'file_variables:write': () => [_$$t('tokens.oauth.create_and_modify_variables_for_files_you_have_access_to')],
-  'file_versions:read': () => [_$$t('tokens.oauth.scope.file_versions_read_description')],
-  'library_analytics:read': () => [_$$t('tokens.oauth.read_library_analytics_data')],
-  'library_assets:read': () => [_$$t('tokens.oauth.scope.library_asset_read_description')],
-  'library_content:read': () => [_$$t('tokens.oauth.scope.library_content_read_description')],
-  'current_user:read': () => [_$$t('tokens.oauth.read_your_name_email_and_profile_image')],
-  'projects:read': () => [_$$t('tokens.oauth.scope.projects_read_description')],
-  'team_library_content:read': () => [_$$t('tokens.oauth.scope.team_library_content_read_description')],
-  'webhooks:read': () => [_$$t('tokens.oauth.scope.webhooks_read_description')],
-  'webhooks:write': () => [_$$t('tokens.oauth.create_and_modify_webhooks')],
-  'mcp:connect': () => [_$$t('tokens.oauth.scope.mcp_connect_description')]
+  'org:activity_log_read': () => [getI18nString('tokens.oauth.view_user_activity_in_figma_like_opening_files_creating_projects_and_sharing_resources')],
+  'org:discovery_read': () => [getI18nString('tokens.oauth.discovery_scope_description')],
+  'selections:read': () => [getI18nString('tokens.oauth.scope.selections_read_description')],
+  'file_read': () => [getI18nString('tokens.oauth.read_files_you_have_access_to'), getI18nString('tokens.oauth.read_and_modify_comments_for_files_you_have_access_to'), getI18nString('tokens.oauth.read_projects_you_have_access_to'), getI18nString('tokens.oauth.read_components_and_styles_you_have_access_to')],
+  'file_create': () => [getI18nString('tokens.oauth.create_files')],
+  'file_enumerate': () => [getI18nString('tokens.oauth.enumerate_files')],
+  'files:read': () => [getI18nString('tokens.oauth.scope.file_content_read_description'), getI18nString('tokens.oauth.read_comments_for_files_you_have_access_to'), getI18nString('tokens.oauth.scope.projects_read_description'), getI18nString('tokens.oauth.read_components_and_styles_you_have_access_to'), getI18nString('tokens.oauth.read_your_name_email_and_profile_image')],
+  'file_content:read': () => [getI18nString('tokens.oauth.scope.file_content_read_description')],
+  'file_comments:read': () => [getI18nString('tokens.oauth.read_comments_for_files_you_have_access_to')],
+  'file_comments:write': () => [getI18nString('tokens.oauth.modify_comments_for_files_you_have_access_to')],
+  'file_dev_resources:read': () => [getI18nString('tokens.oauth.read_dev_resources')],
+  'file_dev_resources:write': () => [getI18nString('tokens.oauth.create_and_modify_dev_resources')],
+  'file_metadata:read': () => [getI18nString('tokens.oauth.scope.file_metadata_read_description')],
+  'file_variables:read': () => [getI18nString('tokens.oauth.read_variables_from_files_you_have_access_to')],
+  'file_variables:write': () => [getI18nString('tokens.oauth.create_and_modify_variables_for_files_you_have_access_to')],
+  'file_versions:read': () => [getI18nString('tokens.oauth.scope.file_versions_read_description')],
+  'library_analytics:read': () => [getI18nString('tokens.oauth.read_library_analytics_data')],
+  'library_assets:read': () => [getI18nString('tokens.oauth.scope.library_asset_read_description')],
+  'library_content:read': () => [getI18nString('tokens.oauth.scope.library_content_read_description')],
+  'current_user:read': () => [getI18nString('tokens.oauth.read_your_name_email_and_profile_image')],
+  'projects:read': () => [getI18nString('tokens.oauth.scope.projects_read_description')],
+  'team_library_content:read': () => [getI18nString('tokens.oauth.scope.team_library_content_read_description')],
+  'webhooks:read': () => [getI18nString('tokens.oauth.scope.webhooks_read_description')],
+  'webhooks:write': () => [getI18nString('tokens.oauth.create_and_modify_webhooks')],
+  'mcp:connect': () => [getI18nString('tokens.oauth.scope.mcp_connect_description')]
 };
 let tz = 'connected_apps--modalContent--WhP9e';
 let tV = 'connected_apps--tokenMeta--i-YbR';
@@ -1683,12 +1683,12 @@ function tX(e) {
         children: e.token.name
       }), jsx('div', {
         className: tV,
-        children: _$$tx('settings_tab.connected_apps.connected_since', {
+        children: renderI18nText('settings_tab.connected_apps.connected_since', {
           date: _$$A(e.token.granted_at).format('LL')
         })
       }), jsx('div', {
         className: tV,
-        children: _$$tx('settings_tab.connected_apps.scopes_granted', {
+        children: renderI18nText('settings_tab.connected_apps.scopes_granted', {
           numScopes: e.token.scopes?.length ?? 1
         })
       })]
@@ -1702,7 +1702,7 @@ let tQ = Ju(e => {
   let t = useDispatch();
   let a = () => t(Lo());
   return jsx(OJ, {
-    title: _$$t('settings_tab.connected_apps.revoke_app', {
+    title: getI18nString('settings_tab.connected_apps.revoke_app', {
       appName: e.token.name
     }),
     onClose: a,
@@ -1712,7 +1712,7 @@ let tQ = Ju(e => {
       className: tz,
       children: [jsx('p', {
         className: 'connected_apps--confirmText--thJul',
-        children: _$$tx('settings_tab.connected_apps.are_you_sure', {
+        children: renderI18nText('settings_tab.connected_apps.are_you_sure', {
           appName: jsx('span', {
             style: {
               fontWeight: 600
@@ -1726,21 +1726,21 @@ let tQ = Ju(e => {
         children: [jsx(_$$nR, {
           className: tH,
           onClick: a,
-          children: _$$tx('general.back')
+          children: renderI18nText('general.back')
         }), jsx(qZ, {
           className: tH,
           onClick: () => {
             t(Lo());
             XHR.del(`/api/oauth/token/${e.org.id}/${e.token.client_id}`).then(a => {
-              t(_$$s2.flash(_$$t('settings_tab.connected_apps.oauth_token_deleted')));
+              t(_$$s2.flash(getI18nString('settings_tab.connected_apps.oauth_token_deleted')));
               t(Lo());
               e.onRevoke();
             }).catch(e => {
-              t(_$$s2.error(e.data?.message || _$$t('settings_tab.connected_apps.an_error_occurred_while_deleting_the_token'), 5e3));
+              t(_$$s2.error(e.data?.message || getI18nString('settings_tab.connected_apps.an_error_occurred_while_deleting_the_token'), 5e3));
               console.error(e);
             });
           },
-          children: _$$tx('settings_tab.connected_apps.revoke')
+          children: renderI18nText('settings_tab.connected_apps.revoke')
         })]
       })]
     })
@@ -1759,7 +1759,7 @@ let tZ = Ju(e => {
       r(e.meta);
       o(!1);
     }).catch(e => {
-      t(_$$s2.error(_$$t('settings_tab.connected_apps.error_loading_tokens')));
+      t(_$$s2.error(getI18nString('settings_tab.connected_apps.error_loading_tokens')));
       o(!1);
     });
   }, [t, e.org.id]);
@@ -1769,7 +1769,7 @@ let tZ = Ju(e => {
     children: jsx(kt, {})
   }) : a.length === 0 ? jsx('p', {
     className: 'connected_apps--noToken--giQ0J',
-    children: _$$tx('settings_tab.connected_apps.this_org_does_not_have_any_connected_apps', {
+    children: renderI18nText('settings_tab.connected_apps.this_org_does_not_have_any_connected_apps', {
       orgName: e.org.name
     })
   }) : jsx('div', {
@@ -1790,7 +1790,7 @@ let tZ = Ju(e => {
     }, s.client_id))
   });
   return jsx(OJ, {
-    title: _$$t('settings_tab.connected_apps'),
+    title: getI18nString('settings_tab.connected_apps'),
     onClose: () => t(Lo()),
     maxWidth: 462,
     minWidth: 462,
@@ -1798,7 +1798,7 @@ let tZ = Ju(e => {
       className: tz,
       children: [jsx('p', {
         className: 'connected_apps--sectionInstruction--ROaAC',
-        children: _$$tx('settings_tab.connected_apps.instruction')
+        children: renderI18nText('settings_tab.connected_apps.instruction')
       }), d]
     })
   });
@@ -1815,17 +1815,17 @@ let t0 = Ju(e => {
       children: [jsx(tX, {
         token: e.token
       }), jsx('p', {
-        children: _$$tx('settings_tab.connected_apps.scope_description')
+        children: renderI18nText('settings_tab.connected_apps.scope_description')
       }), jsxs('div', {
         className: 'connected_apps--scopeTable--QHd25',
         children: [jsxs('div', {
           className: 'connected_apps--headerRow--4oKHB',
           children: [jsx('div', {
             className: tY,
-            children: _$$tx('settings_tab.connected_apps.o_auth_scope')
+            children: renderI18nText('settings_tab.connected_apps.o_auth_scope')
           }), jsx('div', {
             className: tJ,
-            children: _$$tx('settings_tab.connected_apps.description')
+            children: renderI18nText('settings_tab.connected_apps.description')
           })]
         }), e.token.scopes?.map(e => {
           let t = getFeatureFlags().ext_use_scope_registry_for_oauth_descs ? t$[e]?.getPersonalDescription() ?? [] : tG[e]() ?? [];
@@ -1851,7 +1851,7 @@ let t0 = Ju(e => {
           onClick: () => {
             t(Lo());
           },
-          children: _$$tx('general.back')
+          children: renderI18nText('general.back')
         }), jsx(qZ, {
           className: tH,
           onClick: () => {
@@ -1864,7 +1864,7 @@ let t0 = Ju(e => {
               }
             }));
           },
-          children: _$$tx('settings_tab.connected_apps.revoke')
+          children: renderI18nText('settings_tab.connected_apps.revoke')
         })]
       })]
     })
@@ -1884,7 +1884,7 @@ function aj({
   let c = useDispatch();
   let _ = jsx(CY, {
     onClick: () => {
-      if (_$$eD) {
+      if (desktopAPIInstance) {
         c(sf({
           view: 'org',
           orgId: o ?? '',
@@ -1908,13 +1908,13 @@ function aj({
       }));
     },
     trusted: !0,
-    children: _$$t('community.community')
+    children: getI18nString('community.community')
   });
   return jsxs(Fragment, {
     children: [jsxs('div', {
       className: _$$s.flex.flexColumn.gap8.py8.$,
       children: [jsx(_$$E, {
-        children: _$$tx('settings_tab.paste_plugin_link', {
+        children: renderI18nText('settings_tab.paste_plugin_link', {
           orgLink: _,
           communityLink: u
         })
@@ -1942,20 +1942,20 @@ function ay() {
     className: _$$s.colorBorder.bSolid.bt1.$
   });
 }
-let aE = _$$eU(!1);
-let aC = _$$eU(!1);
-let aS = _$$eU(!1);
-let aN = _$$eU('');
-let aI = _$$eU(null);
-let aT = _$$eU(null);
-let aA = _$$eU('');
-let aR = _$$eU(null);
+let aE = atom(!1);
+let aC = atom(!1);
+let aS = atom(!1);
+let aN = atom('');
+let aI = atom(null);
+let aT = atom(null);
+let aA = atom('');
+let aR = atom(null);
 var aO = (e => (e.AUTO_RUN = 'auto-run', e.PINNED_PLUGINS = 'pinned-plugins', e.CODEGEN = 'codegen', e))(aO || {});
 async function aL(e, t, a) {
   let n;
   let s = Yp(e);
   let i = {
-    errorMessage: _$$t('settings_tab.pinned_plugins_invalid_url')
+    errorMessage: getI18nString('settings_tab.pinned_plugins_invalid_url')
   };
   if (s == null) return i;
   try {
@@ -1969,7 +1969,7 @@ async function aL(e, t, a) {
   if (!n.plugin) return i;
   let r = mf(n.plugin, t.id, null, null);
   return r ? t.plugins_whitelist_enforced && !a[r.plugin_id] && r.org_id !== t.id ? {
-    errorMessage: _$$t('settings_tab.invalid_url_allowlist')
+    errorMessage: getI18nString('settings_tab.invalid_url_allowlist')
   } : r && !M5(r) ? i : {
     pluginId: s,
     plugin: r
@@ -2023,7 +2023,7 @@ function aM({
             'onMouseDown': dG,
             'recordingKey': 'overflow_pins',
             'data-tooltip-type': Ib.TEXT,
-            'data-tooltip': _$$t('settings_tab.pinned_plugins_remove'),
+            'data-tooltip': getI18nString('settings_tab.pinned_plugins_remove'),
             'variant': 'text',
             'dataTestId': 'remove-pinned-plugin-button'
           })
@@ -2050,7 +2050,7 @@ function aP(e) {
       on: e.isActive,
       onChange: a => {
         e.onToggle(a);
-        sx('Dev Mode Setting Toggled', {
+        trackEventAnalytics('Dev Mode Setting Toggled', {
           orgId: t?.id ?? '',
           setting: e.sectionName,
           value: a ? 'on' : 'off'
@@ -2067,9 +2067,9 @@ function aU({
   let t = sZ() || null;
   let a = useSelector(e => e.whitelistedPlugins);
   let [r, l] = useState(!1);
-  let [o, d] = fp(aE);
-  let [_, u] = fp(aA);
-  let [m, p] = fp(aR);
+  let [o, d] = useAtomValueAndSetter(aE);
+  let [_, u] = useAtomValueAndSetter(aA);
+  let [m, p] = useAtomValueAndSetter(aR);
   let g = getFeatureFlags().dev_mode_org_pinned_plugins_ent && kA(t) || !getFeatureFlags().dev_mode_org_pinned_plugins_ent;
   let h = () => {
     l(!r);
@@ -2080,7 +2080,7 @@ function aU({
   let b = async () => {
     if (!t) return;
     let n = await aL(_, t, a);
-    'plugin' in n ? n.plugin ? _V(n.plugin) ? p(_$$t('settings_tab.pinned_plugins_invalid_url_codegen')) : 'pluginId' in n && (e.pinPlugin(n.pluginId), p(null), u(''), h()) : p(_$$t('settings_tab.pinned_plugins_invalid_url')) : 'errorMessage' in n && p(n.errorMessage);
+    'plugin' in n ? n.plugin ? _V(n.plugin) ? p(getI18nString('settings_tab.pinned_plugins_invalid_url_codegen')) : 'pluginId' in n && (e.pinPlugin(n.pluginId), p(null), u(''), h()) : p(getI18nString('settings_tab.pinned_plugins_invalid_url')) : 'errorMessage' in n && p(n.errorMessage);
   };
   return jsxs('div', {
     'className': _$$s.m16.$,
@@ -2090,8 +2090,8 @@ function aU({
       children: [jsx('div', {
         className: _$$s.$$if(!kA(t) && !o, _$$s.opacity0_5).$,
         children: jsx(aP, {
-          label: _$$t('settings_tab.pinned_plugins_label'),
-          description: _$$t('settings_tab.pinned_plugins_description'),
+          label: getI18nString('settings_tab.pinned_plugins_label'),
+          description: getI18nString('settings_tab.pinned_plugins_description'),
           isActive: o,
           sectionName: 'pinned-plugins',
           onToggle: () => {
@@ -2104,11 +2104,11 @@ function aU({
         className: _$$s.mb4.$,
         children: jsx(_$$E, {
           fontWeight: 'bold',
-          children: _$$tx('settings_tab.pinned_plugins_label')
+          children: renderI18nText('settings_tab.pinned_plugins_label')
         })
       }), jsx('div', {
         children: jsx(_$$E, {
-          children: _$$tx('settings_tab.pinned_plugins_description')
+          children: renderI18nText('settings_tab.pinned_plugins_description')
         })
       })]
     }), o && !e.loaded ? jsx(kt, {
@@ -2127,14 +2127,14 @@ function aU({
               children: jsx(_$$E, {
                 color: 'secondary',
                 fontWeight: 'medium',
-                children: _$$tx('settings_tab.pinned_plugins_inspect')
+                children: renderI18nText('settings_tab.pinned_plugins_inspect')
               })
             }), jsx('div', {
               className: _$$s.flex.mx8.$,
               children: jsx(_$$E, {
                 color: 'secondary',
                 fontWeight: 'medium',
-                children: _$$tx('settings_tab.pinned_plugins_plugins')
+                children: renderI18nText('settings_tab.pinned_plugins_plugins')
               })
             })]
           }), jsxs('div', {
@@ -2145,7 +2145,7 @@ function aU({
                 icon: 'plus-32',
                 variant: r ? 'primary' : 'text',
                 onClick: h,
-                ariaLabel: _$$t('settings_tab.pinned_plugins_add_label')
+                ariaLabel: getI18nString('settings_tab.pinned_plugins_add_label')
               })
             }), e.pinnedPlugins.length > 0 && jsx(pG, {
               ...e
@@ -2157,7 +2157,7 @@ function aU({
         onClick: b,
         onChange: x,
         error: m,
-        buttonText: _$$t('settings_tab.pinned_plugins_add')
+        buttonText: getI18nString('settings_tab.pinned_plugins_add')
       })]
     }) : jsxs(Fragment, {
       children: [g && jsxs('div', {
@@ -2170,7 +2170,7 @@ function aU({
           recordingKey: 'devRelatedLinkUrlInput'
         }), jsx(_$$$, {
           onClick: b,
-          children: _$$tx('settings_tab.pinned_plugins_add')
+          children: renderI18nText('settings_tab.pinned_plugins_add')
         })]
       }), m && jsx('div', {
         className: _$$s.colorTextDanger.$,
@@ -2185,13 +2185,13 @@ function aU({
             className: _$$s.flex.mx8.$,
             children: jsx(_$$E, {
               fontWeight: 'bold',
-              children: _$$tx('settings_tab.pinned_plugins_inspect')
+              children: renderI18nText('settings_tab.pinned_plugins_inspect')
             })
           }), jsx('div', {
             className: _$$s.flex.mx8.$,
             children: jsx(_$$E, {
               fontWeight: 'regular',
-              children: _$$tx('settings_tab.pinned_plugins_plugins')
+              children: renderI18nText('settings_tab.pinned_plugins_plugins')
             })
           }), jsx('div', {
             className: _$$s.flexGrow1.$,
@@ -2209,10 +2209,10 @@ function aF() {
     variant: 'warning',
     orientation: 'vertical',
     iconSrc: _$$A7,
-    children: _$$tx('settings_tab.pinned_plugins_downgrade_warning', {
+    children: renderI18nText('settings_tab.pinned_plugins_downgrade_warning', {
       noteLabel: jsx(_$$E, {
         fontWeight: 'semi-bold',
-        children: _$$tx('settings_tab.pinned_plugins_dowgrade_warning.note')
+        children: renderI18nText('settings_tab.pinned_plugins_dowgrade_warning.note')
       })
     })
   });
@@ -2235,7 +2235,7 @@ function aq({
     'data-testid': 'org-admin-codegen-language-row',
     'children': [jsx(_$$E, {
       fontWeight: 'medium',
-      children: _$$tx('settings_tab.codegen_language_dropdown_label')
+      children: renderI18nText('settings_tab.codegen_language_dropdown_label')
     }), jsx('div', {
       className: _$$s.flex.justifyEnd.$,
       children: jsx(ls, {
@@ -2254,7 +2254,7 @@ function a$({
     'data-testid': 'org-admin-codegen-unit-row',
     'children': [jsx(_$$E, {
       fontWeight: 'medium',
-      children: _$$tx('settings_tab.codegen_language_unit_dropdown_label')
+      children: renderI18nText('settings_tab.codegen_language_unit_dropdown_label')
     }), jsx('div', {
       className: _$$s.flex.justifyEnd.mr4.$,
       children: jsx(gn, {
@@ -2304,7 +2304,7 @@ function az({
 }) {
   let t = sZ() || null;
   let a = useDispatch();
-  let [r, l] = fp(aS);
+  let [r, l] = useAtomValueAndSetter(aS);
   let [o, d] = useState(null);
   let [c, _] = useState(!1);
   let [u, m] = useState(!1);
@@ -2330,8 +2330,8 @@ function az({
     'id': 'org-admin-codegen-settings',
     'data-testid': 'org-admin-codegen-settings',
     'children': [jsx(aP, {
-      label: _$$t('settings_tab.codegen_language_label'),
-      description: _$$t('settings_tab.codegen_language_description'),
+      label: getI18nString('settings_tab.codegen_language_label'),
+      description: getI18nString('settings_tab.codegen_language_description'),
       isActive: r,
       sectionName: 'codegen',
       onToggle: () => {
@@ -2352,7 +2352,7 @@ function az({
         value: p,
         onClick: () => {
           if (!t || !kA(t)) {
-            d(_$$t('settings_tab.plugin_not_enterprise_err'));
+            d(getI18nString('settings_tab.plugin_not_enterprise_err'));
             return;
           }
           aL(p, t, b).then(t => {
@@ -2373,13 +2373,13 @@ function az({
                 g('');
                 return;
               }
-              d(_$$t('settings_tab.plugin_not_codegen_err'));
+              d(getI18nString('settings_tab.plugin_not_codegen_err'));
             }
             if ('errorMessage' in t) {
               d(t.errorMessage);
               return;
             }
-            d(_$$t('settings_tab.plugin_invalid_err'));
+            d(getI18nString('settings_tab.plugin_invalid_err'));
           }).catch(e => {
             console.error('Error:', e);
           });
@@ -2388,7 +2388,7 @@ function az({
           g(e.target.value);
         },
         error: o,
-        buttonText: _$$t('settings_tab.dev_mode_setting_set')
+        buttonText: getI18nString('settings_tab.dev_mode_setting_set')
       }), !u && jsxs('div', {
         children: [jsx(a$, {
           currentUnit: e?.localCodegenSettings?.preferences.unit,
@@ -2428,10 +2428,10 @@ function aW() {
   let e = sZ() || null;
   let t = JA();
   let a = useSelector(e => e.whitelistedPlugins);
-  let [r, l] = fp(aC);
-  let [o, d] = fp(aN);
-  let [c, u] = fp(aI);
-  let [m, p] = fp(aT);
+  let [r, l] = useAtomValueAndSetter(aC);
+  let [o, d] = useAtomValueAndSetter(aN);
+  let [c, u] = useAtomValueAndSetter(aI);
+  let [m, p] = useAtomValueAndSetter(aT);
   let [g, h] = useState(!1);
   useEffect(() => {
     t.loaded && !g && (u(t.plugin), h(!0));
@@ -2440,8 +2440,8 @@ function aW() {
     'className': _$$s.m16.$$if(!kA(e), _$$s.opacity0_5).$,
     'data-testid': 'dev-mode-settings-modal-auto-run',
     'children': [jsx(aP, {
-      label: _$$t('settings_tab.auto_run_label'),
-      description: _$$t('settings_tab.auto_run_description'),
+      label: getI18nString('settings_tab.auto_run_label'),
+      description: getI18nString('settings_tab.auto_run_description'),
       isActive: r,
       sectionName: 'auto-run',
       onToggle: () => {
@@ -2457,14 +2457,14 @@ function aW() {
             children: jsx(CY, {
               trusted: !0,
               onClick: () => u(null),
-              children: _$$tx('settings_tab.auto_run_remove_plugin')
+              children: renderI18nText('settings_tab.auto_run_remove_plugin')
             })
           })]
         }) : jsx(aj, {
           value: o,
           onClick: () => {
             if (!e || !kA(e)) {
-              p(_$$t('settings_tab.plugin_not_enterprise_err'));
+              p(getI18nString('settings_tab.plugin_not_enterprise_err'));
               return;
             }
             aL(o, e, a).then(t => {
@@ -2473,20 +2473,20 @@ function aW() {
                   p(null);
                   u(t.plugin);
                   d('');
-                  sx('Dev Mode Auto Run Plugin Set', {
+                  trackEventAnalytics('Dev Mode Auto Run Plugin Set', {
                     orgId: e.id,
                     pluginId: t.plugin.plugin_id
                   });
                   return;
                 }
-                p(_$$t('settings_tab.plugin_not_autorun_err'));
+                p(getI18nString('settings_tab.plugin_not_autorun_err'));
                 return;
               }
               if ('errorMessage' in t) {
                 p(t.errorMessage);
                 return;
               }
-              p(_$$t('settings_tab.plugin_invalid_err'));
+              p(getI18nString('settings_tab.plugin_invalid_err'));
             }).catch(e => {
               console.error('Error:', e);
             });
@@ -2495,7 +2495,7 @@ function aW() {
             d(e.target.value);
           },
           error: m,
-          buttonText: _$$t('settings_tab.dev_mode_setting_set')
+          buttonText: getI18nString('settings_tab.dev_mode_setting_set')
         })
       }) : jsx(kt, {
         className: _$$s.pt8.flex.alignCenter.justifyCenter.$
@@ -2507,9 +2507,9 @@ let aH = Ju(() => {
   let e = sZ() || null;
   let t = useDispatch();
   let a = IE();
-  let [r, l] = fp(aC);
-  let [o, d] = fp(aE);
-  let [_, u] = fp(aS);
+  let [r, l] = useAtomValueAndSetter(aC);
+  let [o, d] = useAtomValueAndSetter(aE);
+  let [_, u] = useAtomValueAndSetter(aS);
   let m = Xr(aT);
   let p = Xr(aR);
   let g = Xr(aN);
@@ -2522,7 +2522,7 @@ let aH = Ju(() => {
     h(null);
     b('');
   }, [g, m, h, b, p]);
-  let v = md(aI);
+  let v = useAtomWithSubscription(aI);
   let f = Rs(tgK, {
     targetOrgId: e?.id ?? '',
     targetUserId: null
@@ -2569,7 +2569,7 @@ let aH = Ju(() => {
   };
   return jsxs(OJ, {
     title: jsx(aD, {
-      text: _$$t('settings_tab.dev_mode_label')
+      text: getI18nString('settings_tab.dev_mode_label')
     }),
     onClose: A,
     fixedTop: !0,
@@ -2585,9 +2585,9 @@ let aH = Ju(() => {
         variant: 'gray',
         children: [jsx(_$$E, {
           fontWeight: 'bold',
-          children: _$$tx('settings_tab.customize_dev_mode')
+          children: renderI18nText('settings_tab.customize_dev_mode')
         }), jsx(_$$E, {
-          children: _$$tx('settings_tab.upgrade_to_enterprise_plan_text')
+          children: renderI18nText('settings_tab.upgrade_to_enterprise_plan_text')
         }), jsx(CY, {
           onClick: () => {
             t(_$$to({
@@ -2603,7 +2603,7 @@ let aH = Ju(() => {
           },
           trusted: !0,
           children: jsx(_$$E, {
-            children: _$$tx('settings_tab.upgrade_to_enterprise_learn_more_link')
+            children: renderI18nText('settings_tab.upgrade_to_enterprise_learn_more_link')
           })
         })]
       })
@@ -2611,31 +2611,31 @@ let aH = Ju(() => {
       className: _$$s.flex.flexRow.gap8.justifyEnd.m16.$,
       children: [jsx(_$$$, {
         onClick: A,
-        children: _$$tx('general.cancel')
+        children: renderI18nText('general.cancel')
       }), jsx(_$$$, {
         variant: 'primary',
         onClick: R,
         disabled: !(!(t5()(C.preferences, a.serialize()) && t5()(C.autoRunPlugin, v)) || C.autoRunEnabled !== r || C.codegenEnabled !== _ || C.pinnedPluginsEnabled !== o),
-        children: _$$tx('general.save')
+        children: renderI18nText('general.save')
       })]
     })]
   });
 }, 'DevModeModal');
 let aK = Ju(e => {
-  let [t, a, s] = e.platform === 'win' ? [_$$t('org_admin_settings.enterprise_installer_label'), 'https://help.figma.com/hc/articles/14172933259287', `https://desktop.figma.com/win/Figma-${e.version}.msi`] : [_$$t('org_admin_settings.enterprise_installer_label_mac'), 'https://help.figma.com/hc/articles/17686512113175', `https://desktop.figma.com/mac-universal/Figma-${e.version}.pkg`];
+  let [t, a, s] = e.platform === 'win' ? [getI18nString('org_admin_settings.enterprise_installer_label'), 'https://help.figma.com/hc/articles/14172933259287', `https://desktop.figma.com/win/Figma-${e.version}.msi`] : [getI18nString('org_admin_settings.enterprise_installer_label_mac'), 'https://help.figma.com/hc/articles/17686512113175', `https://desktop.figma.com/mac-universal/Figma-${e.version}.pkg`];
   return jsxs(yX, {
     confirmationTitle: t,
-    confirmText: _$$t('org_admin_settings.enterprise_installer_confirmation'),
+    confirmText: getI18nString('org_admin_settings.enterprise_installer_confirmation'),
     onConfirm: () => window.location.href = s,
     tintedModalBackground: !0,
-    children: [_$$tx(e.platform === 'win' ? 'org_admin_settings.enterprise_installer_modal_copy' : 'org_admin_settings.enterprise_installer_modal_copy_mac'), jsx(_$$N_, {
+    children: [renderI18nText(e.platform === 'win' ? 'org_admin_settings.enterprise_installer_modal_copy' : 'org_admin_settings.enterprise_installer_modal_copy_mac'), jsx(_$$N_, {
       href: a,
       target: '_blank',
       trusted: !0,
-      children: _$$tx('org_admin_settings.enterprise_installer_modal_link')
-    }), _$$tx('org_admin_settings.enterprise_installer_modal_release_version', {
+      children: renderI18nText('org_admin_settings.enterprise_installer_modal_link')
+    }), renderI18nText('org_admin_settings.enterprise_installer_modal_release_version', {
       version: e.version
-    }), jsx('br', {}), _$$tx('org_admin_settings.enterprise_installer_modal_release_date', {
+    }), jsx('br', {}), renderI18nText('org_admin_settings.enterprise_installer_modal_release_date', {
       releaseDate: new Date(e.releaseDate || Date.now()).toLocaleDateString()
     })]
   });
@@ -2668,7 +2668,7 @@ function a4({
     loadingStatus: a?.status ?? 'loading',
     allWorkspaces: r,
     displaySettings: l,
-    subHeader: _$$tx('org_settings.workspace_controls.sub_header_text_file_export_controls'),
+    subHeader: renderI18nText('org_settings.workspace_controls.sub_header_text_file_export_controls'),
     workspaceSubText: a2,
     hasCustomSettings: a1
   });
@@ -2682,7 +2682,7 @@ function a5({
       value: e,
       onChange: t,
       legend: jsx(_$$q3, {
-        children: _$$tx('org_settings.export_controls.title')
+        children: renderI18nText('org_settings.export_controls.title')
       }),
       children: [jsx('div', {
         className: 'xfawy5m'
@@ -2690,12 +2690,12 @@ function a5({
         value: 'allowed',
         label: jsx(_$$J2, {
           children: jsx(_$$E, {
-            children: _$$tx('org_settings.export_controls.by_all_viewers')
+            children: renderI18nText('org_settings.export_controls.by_all_viewers')
           })
         }),
         children: jsx(_$$E, {
           color: 'secondary',
-          children: _$$tx('org_settings.export_controls.all_viewers_description')
+          children: renderI18nText('org_settings.export_controls.all_viewers_description')
         })
       }), jsx('div', {
         className: 'xfawy5m'
@@ -2703,12 +2703,12 @@ function a5({
         value: 'members_only',
         label: jsx(_$$J2, {
           children: jsx(_$$E, {
-            children: _$$tx('org_settings.export_controls.prevent_by_guest_viewers')
+            children: renderI18nText('org_settings.export_controls.prevent_by_guest_viewers')
           })
         }),
         children: jsx(_$$E, {
           color: 'secondary',
-          children: _$$tx('org_settings.export_controls.prevent_guest_viewers_description')
+          children: renderI18nText('org_settings.export_controls.prevent_guest_viewers_description')
         })
       }), jsx('div', {
         className: 'xfawy5m'
@@ -2716,12 +2716,12 @@ function a5({
         value: 'banned',
         label: jsx(_$$J2, {
           children: jsx(_$$E, {
-            children: _$$tx('org_settings.export_controls.prevent_by_all_viewers')
+            children: renderI18nText('org_settings.export_controls.prevent_by_all_viewers')
           })
         }),
         children: jsx(_$$E, {
           color: 'secondary',
-          children: _$$tx('org_settings.export_controls.prevent_all_viewers_description')
+          children: renderI18nText('org_settings.export_controls.prevent_all_viewers_description')
         })
       }), jsx('div', {
         className: 'xfawy5m'
@@ -2731,7 +2731,7 @@ function a5({
 }
 let a3 = Ju(e => {
   let t = useDispatch();
-  let a = _$$t('org_settings.export_controls.success');
+  let a = getI18nString('org_settings.export_controls.success');
   let r = useSelector(e => e.orgById[e.currentUserOrgId]);
   let [l, o] = useState(r.shared_container_setting?.file_export_setting ?? 'allowed');
   let d = hS(e);
@@ -2743,7 +2743,7 @@ let a3 = Ju(e => {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$tx('org_settings.export_controls.title')
+          children: renderI18nText('org_settings.export_controls.title')
         })
       }), jsxs(_$$nB, {
         children: [jsx('div', {
@@ -2751,13 +2751,13 @@ let a3 = Ju(e => {
             padding: '4px'
           }
         }), jsx(_$$E, {
-          children: _$$tx('org_settings.export_controls.org_description', {
+          children: renderI18nText('org_settings.export_controls.org_description', {
             learnMoreLink: jsx(CY, {
               'href': 'https://help.figma.com/hc/articles/31825370509591#restrict-file-exports',
               'target': '_blank',
               'trusted': !0,
-              'aria-label': _$$t('org_settings.export_controls.learn_more'),
-              'children': _$$t('general.learn_more')
+              'aria-label': getI18nString('org_settings.export_controls.learn_more'),
+              'children': getI18nString('general.learn_more')
             })
           })
         }), jsx(a5, {
@@ -2776,7 +2776,7 @@ let a3 = Ju(e => {
             variant: 'secondary',
             onClick: e.onClose,
             children: jsx(_$$E, {
-              children: _$$tx('org_settings.export_controls.cancel')
+              children: renderI18nText('org_settings.export_controls.cancel')
             })
           }), jsx($n, {
             variant: 'primary',
@@ -2789,7 +2789,7 @@ let a3 = Ju(e => {
               e.onClose();
             },
             children: jsx(_$$E, {
-              children: _$$tx('org_settings.export_controls.save')
+              children: renderI18nText('org_settings.export_controls.save')
             })
           })]
         })
@@ -2803,7 +2803,7 @@ let a8 = Ju(({
   workspace: a
 }) => {
   let r = useDispatch();
-  let l = _$$t('org_settings.export_controls.workspace_success');
+  let l = getI18nString('org_settings.export_controls.workspace_success');
   let o = useSelector(e => e.orgById[e.currentUserOrgId]);
   let [d, c] = useState(a.workspaceSharedSetting?.fileExportSetting ?? o.shared_container_setting?.file_export_setting ?? 'allowed');
   let _ = useCallback(() => {
@@ -2841,7 +2841,7 @@ let a8 = Ju(({
             padding: '4px'
           }
         }), jsx(_$$E, {
-          children: _$$tx('org_settings.export_controls.workspace_modal_description')
+          children: renderI18nText('org_settings.export_controls.workspace_modal_description')
         }), jsx(a5, {
           exportControlSetting: d,
           setExportControlSetting: c
@@ -2853,7 +2853,7 @@ let a8 = Ju(({
             children: a.workspaceSharedSetting?.fileExportSetting && jsx(_$$E3, {
               onClick: _,
               ...Ay.props(tg.removeCustomSettingsButton),
-              children: _$$tx('org_settings.export_controls_modal.remove_custom_settings')
+              children: renderI18nText('org_settings.export_controls_modal.remove_custom_settings')
             })
           }), jsxs('div', {
             className: 'x78zum5 x167g77z',
@@ -2861,7 +2861,7 @@ let a8 = Ju(({
               variant: 'secondary',
               onClick: t,
               children: jsx(_$$E, {
-                children: _$$tx('org_settings.export_controls.cancel')
+                children: renderI18nText('org_settings.export_controls.cancel')
               })
             }), jsx($n, {
               variant: 'primary',
@@ -2875,7 +2875,7 @@ let a8 = Ju(({
                 }));
               },
               children: jsx(_$$E, {
-                children: _$$tx('org_settings.export_controls.save')
+                children: renderI18nText('org_settings.export_controls.save')
               })
             })]
           })]
@@ -2890,7 +2890,7 @@ let a6 = Ju(({
   workspace: a
 }) => {
   let s = useDispatch();
-  let r = _$$t('org_settings.export_controls.workspace_success');
+  let r = getI18nString('org_settings.export_controls.workspace_success');
   let l = useSelector(e => e.orgById[e.currentUserOrgId]);
   let o = hS({
     open: e,
@@ -2903,7 +2903,7 @@ let a6 = Ju(({
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$tx('org_settings.export_controls.remove_workspace_export_controls_title')
+          children: renderI18nText('org_settings.export_controls.remove_workspace_export_controls_title')
         })
       }), jsxs(_$$nB, {
         children: [jsx('div', {
@@ -2911,7 +2911,7 @@ let a6 = Ju(({
             padding: '4px'
           }
         }), jsx(_$$E, {
-          children: _$$tx('org_settings.export_controls.remove_workspace_export_controls_body', {
+          children: renderI18nText('org_settings.export_controls.remove_workspace_export_controls_body', {
             workspaceName: a.name
           })
         }), jsx('div', {
@@ -2925,7 +2925,7 @@ let a6 = Ju(({
             variant: 'secondary',
             onClick: t,
             children: jsx(_$$E, {
-              children: _$$tx('org_settings.export_controls.cancel')
+              children: renderI18nText('org_settings.export_controls.cancel')
             })
           }), jsx($n, {
             variant: 'destructive',
@@ -2942,7 +2942,7 @@ let a6 = Ju(({
               }));
             },
             children: jsx(_$$E, {
-              children: _$$tx('org_settings.export_controls.remove')
+              children: renderI18nText('org_settings.export_controls.remove')
             })
           })]
         })
@@ -2967,7 +2967,7 @@ let nr = Ju(() => {
       orgId: t.id
     },
     children: jsx(OJ, {
-      title: _$$t('org_settings.external_collaboration_controls.header'),
+      title: getI18nString('org_settings.external_collaboration_controls.header'),
       onClose: a,
       maxWidth: 376,
       minWidth: 376,
@@ -2980,48 +2980,48 @@ let nr = Ju(() => {
             className: 'external_collaboration_controls_modal--icon--8UTH3',
             svg: _$$A8
           }), jsx('p', {
-            children: _$$tx('org_settings.external_collaboration_controls.banner', {
+            children: renderI18nText('org_settings.external_collaboration_controls.banner', {
               let_org_know: jsx(CY, {
                 href: 'https://help.figma.com/hc/articles/12080587805719',
                 className: _$$s.font11.$,
                 trusted: !0,
-                children: _$$tx('org_settings.external_collaboration_controls.let_org_know')
+                children: renderI18nText('org_settings.external_collaboration_controls.let_org_know')
               })
             })
           })]
         }), jsxs('div', {
           className: ne,
-          children: [r ? _$$tx('org_settings.external_collaboration_controls.list_header_setting_on', {
+          children: [r ? renderI18nText('org_settings.external_collaboration_controls.list_header_setting_on', {
             orgName: t.name,
             cannot: jsx('span', {
               className: ns,
-              children: _$$tx('org_settings.external_collaboration_controls.cannot')
+              children: renderI18nText('org_settings.external_collaboration_controls.cannot')
             })
-          }) : _$$tx('org_settings.external_collaboration_controls.list_header_setting_off', {
+          }) : renderI18nText('org_settings.external_collaboration_controls.list_header_setting_off', {
             orgName: t.name
           }), jsxs('ul', {
             children: [jsx('li', {
               className: na,
-              children: _$$tx('org_settings.external_collaboration_controls.accept_invites')
+              children: renderI18nText('org_settings.external_collaboration_controls.accept_invites')
             }), jsx('li', {
               className: na,
-              children: r ? _$$tx('org_settings.external_collaboration_controls.view_only', {
+              children: r ? renderI18nText('org_settings.external_collaboration_controls.view_only', {
                 note: jsx('span', {
                   className: ns,
-                  children: _$$tx('org_settings.external_collaboration_controls.note')
+                  children: renderI18nText('org_settings.external_collaboration_controls.note')
                 })
-              }) : _$$tx('org_settings.external_collaboration_controls.view_or_edit_files')
+              }) : renderI18nText('org_settings.external_collaboration_controls.view_or_edit_files')
             }), jsx('li', {
               className: na,
-              children: _$$tx('org_settings.external_collaboration_controls.create')
+              children: renderI18nText('org_settings.external_collaboration_controls.create')
             }), jsx('li', {
               className: na,
-              children: _$$tx('org_settings.external_collaboration_controls.open_sessions')
+              children: renderI18nText('org_settings.external_collaboration_controls.open_sessions')
             })]
           })]
         }), jsx('p', {
           className: `${ne} ${ns}`,
-          children: _$$tx('org_settings.external_collaboration_controls.setting_header', {
+          children: renderI18nText('org_settings.external_collaboration_controls.setting_header', {
             orgName: t.name
           })
         }), jsxs(_$$z, {
@@ -3030,25 +3030,25 @@ let nr = Ju(() => {
           children: [jsx(_$$Z, {
             value: 'false',
             labelClassName: nt,
-            children: _$$tx('org_settings.external_collaboration_controls.enable')
+            children: renderI18nText('org_settings.external_collaboration_controls.enable')
           }), jsx(_$$Z, {
             value: 'true',
             labelClassName: nt,
-            children: _$$tx('org_settings.external_collaboration_controls.disable')
+            children: renderI18nText('org_settings.external_collaboration_controls.disable')
           })]
         }), jsxs('div', {
           className: v0,
           children: [jsx(_$$nR, {
             onClick: a,
             className: `${pL} ${nn}`,
-            children: _$$tx('org_settings.external_collaboration_controls.cancel')
+            children: renderI18nText('org_settings.external_collaboration_controls.cancel')
           }), jsx(qZ, {
             onClick: () => {
               if (r === o || void 0 === r) {
                 a();
                 return;
               }
-              let t = _$$t('org_settings.external_collaboration_controls.success');
+              let t = getI18nString('org_settings.external_collaboration_controls.success');
               e(yo({
                 payload: {
                   external_collaboration_controls: r
@@ -3059,7 +3059,7 @@ let nr = Ju(() => {
             },
             disabled: r === o || void 0 === r,
             className: `${pL} ${nn}`,
-            children: _$$tx('org_settings.external_collaboration_controls.save')
+            children: renderI18nText('org_settings.external_collaboration_controls.save')
           })]
         })]
       })
@@ -3083,13 +3083,13 @@ function n_(e) {
       }).$,
       children: jsx(_$$S3, {
         label: jsx(_$$J2, {
-          children: _$$tx('org_settings.guest_control_revamp.require_two_factor_auth_for_guests')
+          children: renderI18nText('org_settings.guest_control_revamp.require_two_factor_auth_for_guests')
         }),
         checked: c,
         onChange: t => {
           t ? e.setMfaRequiredSetting(o ? CT.ALL_USERS : CT.GUESTS) : e.setMfaRequiredSetting(o ? CT.MEMBERS : null);
         },
-        children: _$$tx('org_settings.guest_control_revamp.mfa_for_guests_description', {
+        children: renderI18nText('org_settings.guest_control_revamp.mfa_for_guests_description', {
           orgName: e.org.name
         })
       })
@@ -3098,37 +3098,37 @@ function n_(e) {
       children: e.isLoading ? jsx(qc, {}) : jsx($y, {
         variant: 'warn',
         children: jsxs(_$$Q, {
-          title: _$$tx('org_settings.guest_control_revamp.mfa_for_guests_warning.title', {
+          title: renderI18nText('org_settings.guest_control_revamp.mfa_for_guests_warning.title', {
             numGuests: e.nonMfaGuestCount
           }),
-          children: [_$$tx('org_settings.guest_control_revamp.mfa_for_guests_warning.description', {
+          children: [renderI18nText('org_settings.guest_control_revamp.mfa_for_guests_warning.description', {
             numGuests: e.mfaGuestCount,
             orgName: e.org.name
           }), jsx('button', {
             className: 'guest_invite_settings_modal--brownLink--6LKm9',
             onClick: () => {
               a || (r(!0), t(_$$F.enqueue({
-                message: _$$t('members_table.csv_export.preparing_request'),
+                message: getI18nString('members_table.csv_export.preparing_request'),
                 type: 'orgRoster.exportCSV',
                 icon: zX.SPINNER
               })), _$$G.getMemberCSVExport({
                 orgId: e.org.id
               }).then(() => {
                 t(_$$F.enqueue({
-                  message: _$$t('members_table.csv_export.generating'),
+                  message: getI18nString('members_table.csv_export.generating'),
                   type: 'orgRoster.exportCSV',
                   icon: zX.CHECK
                 }));
               }, () => {
                 t(_$$F.enqueue({
-                  message: _$$t('members_table.csv_export.error'),
+                  message: getI18nString('members_table.csv_export.error'),
                   type: 'orgRoster.exportCSV',
                   icon: zX.EXCLAMATION,
                   error: !0
                 }));
               }), r(!1));
             },
-            children: _$$tx('org_settings.guest_control_revamp.mfa_for_guests_warning.download_csv')
+            children: renderI18nText('org_settings.guest_control_revamp.mfa_for_guests_warning.download_csv')
           }, 'download-csv')]
         })
       })
@@ -3138,8 +3138,8 @@ function n_(e) {
 let nu = Ju(e => {
   let t = useDispatch();
   return jsx(yX, {
-    confirmationTitle: _$$t('org_settings.guest_control.confirm_title'),
-    confirmText: _$$t('org_settings.guest_control.confirm_button'),
+    confirmationTitle: getI18nString('org_settings.guest_control.confirm_title'),
+    confirmText: getI18nString('org_settings.guest_control.confirm_button'),
     onConfirm: () => {
       t(yo({
         payload: {
@@ -3150,7 +3150,7 @@ let nu = Ju(e => {
       }));
     },
     tintedModalBackground: !0,
-    children: _$$tx('org_settings.guest_control.no_guest_confirmation')
+    children: renderI18nText('org_settings.guest_control.no_guest_confirmation')
   });
 }, 'CONFIRM_BAN_GUEST_INVITE_MODAL');
 let nm = Ju(() => {
@@ -3173,7 +3173,7 @@ let nm = Ju(() => {
   let [g, h] = useState(t.invite_whitelist_guest_invite_setting);
   return jsxs(OJ, {
     containerClassName: 'guest_invite_settings_modal--modalContainer--yxLS6',
-    title: _$$t('org_settings.guest_control.guest_membership'),
+    title: getI18nString('org_settings.guest_control.guest_membership'),
     onClose: p,
     maxWidth: 440,
     minWidth: 440,
@@ -3182,7 +3182,7 @@ let nm = Ju(() => {
       className: 'guest_invite_settings_modal--modalContent--LiE8H',
       children: [jsx('p', {
         className: nd,
-        children: _$$tx('org_settings.guest_control.guest_definition', {
+        children: renderI18nText('org_settings.guest_control.guest_definition', {
           domains: jsx(_$$T, {
             formatType: 'disjunction',
             children: m.map(e => jsxs('span', {
@@ -3195,7 +3195,7 @@ let nm = Ju(() => {
         style: {
           fontWeight: 500
         },
-        children: _$$tx('org_settings.guest_control.guest_question')
+        children: renderI18nText('org_settings.guest_control.guest_question')
       }), jsxs(_$$z, {
         className: _$$s.pl10.$,
         value: g ?? 'none',
@@ -3208,7 +3208,7 @@ let nm = Ju(() => {
           labelClassName: nc,
           children: [W3(null), jsx('span', {
             className: 'guest_invite_settings_modal--secondary--qBSkc',
-            children: _$$tx('org_settings.guest_control.default')
+            children: renderI18nText('org_settings.guest_control.default')
           })]
         }), jsx(_$$Z, {
           value: Gv.REQUIRE_APPROVAL,
@@ -3221,17 +3221,17 @@ let nm = Ju(() => {
         })]
       }), !Bg(t.shared_container_setting) && g != null && jsx('div', {
         className: J()('guest_invite_settings_modal--publicLinksBanner--5qmdP', a ? _$$s.mt16.$ : _$$s.my16.$),
-        children: _$$tx('org_settings.guest_control.link_sharing_on', {
+        children: renderI18nText('org_settings.guest_control.link_sharing_on', {
           enabled: jsx('span', {
             style: {
               fontWeight: 600
             },
-            children: _$$tx('org_settings.guest_control.enabled')
+            children: renderI18nText('org_settings.guest_control.enabled')
           }),
           publicLinkSharingSettings: jsx('button', {
             onClick: p,
             className: 'guest_invite_settings_modal--blueLink--2HEzc blue_link--blueLink--9rlnd',
-            children: _$$tx('org_settings.guest_control.public_link_sharing_settings')
+            children: renderI18nText('org_settings.guest_control.public_link_sharing_settings')
           })
         })
       }), a && jsx(n_, {
@@ -3246,7 +3246,7 @@ let nm = Ju(() => {
       className: 'guest_invite_settings_modal--footer--44yVi',
       children: [jsx(_$$nR, {
         onClick: p,
-        children: _$$tx('general.cancel')
+        children: renderI18nText('general.cancel')
       }), jsx($$, {
         onClick: () => {
           let a = g !== t.invite_whitelist_guest_invite_setting;
@@ -3278,7 +3278,7 @@ let nm = Ju(() => {
           }
         },
         className: 'guest_invite_settings_modal--modalSave--PVmaJ modal--confirmButton--SNUDv',
-        children: _$$tx('org_settings.guest_control.save_button')
+        children: renderI18nText('org_settings.guest_control.save_button')
       })]
     })]
   });
@@ -3314,7 +3314,7 @@ function nx() {
     },
     timeUnit: {
       key: vS.DAYS,
-      text: _$$t('settings_tab.idle_session_timeout_settings_modal.days', {
+      text: getI18nString('settings_tab.idle_session_timeout_settings_modal.days', {
         timeAmount: 14
       })
     }
@@ -3377,12 +3377,12 @@ function nE(e) {
       duration
     }
   } = e.configuredTimeHelperTextOptions;
-  let i = _$$t(`settings_tab.idle_session_timeout.time.${unit}`, {
+  let i = getI18nString(`settings_tab.idle_session_timeout.time.${unit}`, {
     duration
   });
   return jsx('div', {
     className: _$$s.mt8.font11.fontNormal.colorTextSecondary.$,
-    children: _$$tx(`settings_tab.idle_session_timeout.configured_time_description.${key}`, {
+    children: renderI18nText(`settings_tab.idle_session_timeout.configured_time_description.${key}`, {
       duration: i
     })
   });
@@ -3403,7 +3403,7 @@ let nC = Ju(e => {
       },
       timeUnit: {
         key: n,
-        text: _$$t(`settings_tab.idle_session_timeout_settings_modal.${n}`, {
+        text: getI18nString(`settings_tab.idle_session_timeout_settings_modal.${n}`, {
           timeAmount: a
         })
       }
@@ -3417,7 +3417,7 @@ let nC = Ju(e => {
     _(t => ({
       timeUnit: {
         key: t.timeUnit.key,
-        text: _$$t(`settings_tab.idle_session_timeout_settings_modal.${t.timeUnit.key}`, {
+        text: getI18nString(`settings_tab.idle_session_timeout_settings_modal.${t.timeUnit.key}`, {
           timeAmount: e
         })
       },
@@ -3459,7 +3459,7 @@ let nC = Ju(e => {
         },
         timeUnit: {
           key: e,
-          text: _$$t(`settings_tab.idle_session_timeout_settings_modal.${e}`, {
+          text: getI18nString(`settings_tab.idle_session_timeout_settings_modal.${e}`, {
             timeAmount: s.key
           })
         }
@@ -3481,7 +3481,7 @@ let nC = Ju(e => {
     e !== o && (d(e), _(nx()));
   }, [o]);
   return jsx(OJ, {
-    title: _$$t('settings_tab.idle_session_timeout_settings_modal.header'),
+    title: getI18nString('settings_tab.idle_session_timeout_settings_modal.header'),
     onClose: f,
     maxWidth: 288,
     minWidth: 288,
@@ -3491,31 +3491,31 @@ let nC = Ju(e => {
       horizontalAlignItems: 'center',
       padding: 16,
       spacing: 16,
-      children: [_$$tx('settings_tab.idle_session_timeout_settings_modal.description'), jsxs(_$$z, {
+      children: [renderI18nText('settings_tab.idle_session_timeout_settings_modal.description'), jsxs(_$$z, {
         className: _$$s.wFull.mt16.$,
         value: o,
         onChange: k,
         children: [jsx(_$$Z, {
           value: ng.DEFAULT,
-          children: _$$tx('settings_tab.idle_session_timeout_settings_modal.default_choice_description')
+          children: renderI18nText('settings_tab.idle_session_timeout_settings_modal.default_choice_description')
         }), jsx(nk, {
           children: jsxs(Fragment, {
-            children: [_$$tx('settings_tab.idle_session_timeout_settings_modal.default_choice_timeframe'), jsx('div', {
+            children: [renderI18nText('settings_tab.idle_session_timeout_settings_modal.default_choice_timeframe'), jsx('div', {
               className: _$$s.inline.$,
               children: jsx(_$$N_, {
                 trusted: !0,
                 target: '_blank',
                 href: 'https://help.figma.com/hc/articles/14376092335127',
                 className: _$$s.inline.ml4.$,
-                children: _$$tx('workspace.create_confirmation_modal.description.outro.learn_more')
+                children: renderI18nText('workspace.create_confirmation_modal.description.outro.learn_more')
               })
             })]
           })
         }), jsx(_$$Z, {
           value: ng.CONFIGURED,
-          children: _$$tx('settings_tab.idle_session_timeout_settings_modal.configured_choice_description')
+          children: renderI18nText('settings_tab.idle_session_timeout_settings_modal.configured_choice_description')
         }), jsx(nk, {
-          children: _$$tx('settings_tab.idle_session_timeout_settings_modal.configured_choice_subtitle')
+          children: renderI18nText('settings_tab.idle_session_timeout_settings_modal.configured_choice_subtitle')
         }), o === ng.CONFIGURED && jsxs('div', {
           'data-testid': 'dropdown-group',
           'className': _$$s.mlAuto.$,
@@ -3536,20 +3536,20 @@ let nC = Ju(e => {
                 let a = [{
                   type: 'option',
                   key: vS.HOURS,
-                  text: _$$t('settings_tab.idle_session_timeout_settings_modal.hours', {
+                  text: getI18nString('settings_tab.idle_session_timeout_settings_modal.hours', {
                     timeAmount: e
                   })
                 }, {
                   type: 'option',
                   key: vS.DAYS,
-                  text: _$$t('settings_tab.idle_session_timeout_settings_modal.days', {
+                  text: getI18nString('settings_tab.idle_session_timeout_settings_modal.days', {
                     timeAmount: e
                   })
                 }];
                 nv(t) && a.unshift({
                   type: 'option',
                   key: vS.MINUTES,
-                  text: _$$t('settings_tab.idle_session_timeout_settings_modal.minutes', {
+                  text: getI18nString('settings_tab.idle_session_timeout_settings_modal.minutes', {
                     timeAmount: e
                   })
                 });
@@ -3565,18 +3565,18 @@ let nC = Ju(e => {
         })]
       }), o === ng.CONFIGURED && x && jsx('div', {
         className: _$$s.bRadius4.px12.py8.colorBgInfo.$,
-        children: _$$tx('settings_tab.idle_session_timeout_settings_modal.warning_description')
+        children: renderI18nText('settings_tab.idle_session_timeout_settings_modal.warning_description')
       }), jsxs(_$$Y, {
         direction: 'horizontal',
         horizontalAlignItems: 'end',
         spacing: 8,
         children: [jsx(cw, {
           onClick: f,
-          children: _$$tx('settings_tab.idle_session_timeout_settings_modal.cancel')
+          children: renderI18nText('settings_tab.idle_session_timeout_settings_modal.cancel')
         }), jsx($$, {
           disabled: u || !x,
           onClick: y,
-          children: _$$tx('settings_tab.idle_session_timeout_settings_modal.save')
+          children: renderI18nText('settings_tab.idle_session_timeout_settings_modal.save')
         })]
       })]
     })
@@ -3616,10 +3616,10 @@ let nT = Ju(e => {
   }, [x, r, c, e.orgId, t, a, h]);
   return jsxs(Dd, {
     maxWidth: 500,
-    title: _$$t('settings_tab.ip_allowlist_label'),
+    title: getI18nString('settings_tab.ip_allowlist_label'),
     onClose: a,
     onSubmit: b,
-    confirmText: _$$t('settings_tab.ip_allowlist_modal.save'),
+    confirmText: getI18nString('settings_tab.ip_allowlist_modal.save'),
     disabled: x,
     children: [jsxs('div', {
       className: _$$s.flex.itemsCenter.justifyBetween.mb16.$,
@@ -3627,9 +3627,9 @@ let nT = Ju(e => {
         className: _$$s.flex.flexColumn.$,
         children: [jsx(_$$E, {
           fontWeight: 'bold',
-          children: _$$tx('settings_tab.ip_allowlist_modal.enable')
+          children: renderI18nText('settings_tab.ip_allowlist_modal.enable')
         }), jsx(_$$E, {
-          children: _$$tx('settings_tab.ip_allowlist_modal.enable_description')
+          children: renderI18nText('settings_tab.ip_allowlist_modal.enable_description')
         })]
       }), jsx(_$$l2, {
         on: r,
@@ -3640,13 +3640,13 @@ let nT = Ju(e => {
       children: [jsx('p', {
         children: jsx(_$$E, {
           fontWeight: 'bold',
-          children: _$$tx('settings_tab.ip_allowlist_modal.allowed_ranges')
+          children: renderI18nText('settings_tab.ip_allowlist_modal.allowed_ranges')
         })
       }), jsx('p', {
         className: _$$s.mb8.$,
         children: jsx(_$$E, {
           color: 'secondary',
-          children: _$$tx('settings_tab.ip_allowlist_modal.input_instructions')
+          children: renderI18nText('settings_tab.ip_allowlist_modal.input_instructions')
         })
       }), jsx('div', {
         className: _$$s.mb12.$,
@@ -3666,7 +3666,7 @@ let nT = Ju(e => {
         variant: 'brand',
         iconSrc: _$$A4,
         children: jsx(_$$E, {
-          children: _$$tx('settings_tab.ip_allowlist_modal.not_applied_to_guests')
+          children: renderI18nText('settings_tab.ip_allowlist_modal.not_applied_to_guests')
         })
       })
     })]
@@ -3725,8 +3725,8 @@ let nL = Ju(({
           children: [jsx(kJ, {
             isPublicLinksBanned: formState.isPublicLinksBanned,
             togglePublicLinksBanned: formActions.togglePublicLinksBanned,
-            labelText: _$$t('settings_tab.public_sharing.workspace_public_sharing_label'),
-            subText: _$$t('settings_tab.public_sharing.workspace_public_sharing_subtext')
+            labelText: getI18nString('settings_tab.public_sharing.workspace_public_sharing_label'),
+            subText: getI18nString('settings_tab.public_sharing.workspace_public_sharing_subtext')
           }), !formState.isPublicLinksBanned && jsx(_$$t4, {
             displayExpiration: t.tier === r.Agb.ENTERPRISE,
             doPublicLinksRequireExpiration: formState.doPublicLinksRequireExpiration,
@@ -3748,7 +3748,7 @@ let nL = Ju(({
         children: [a.workspaceSharedSetting !== null && a.workspaceSharedSetting?.publicLinkControlsSetting !== null && jsx(_$$E3, {
           onClick: _,
           ...xk(tg.removeCustomSettingsButton),
-          children: _$$tx('org_settings.workspace_controls.remove_custom_settings')
+          children: renderI18nText('org_settings.workspace_controls.remove_custom_settings')
         }), jsx(jk, {
           children: jsx(Ym, {
             cancel: e,
@@ -3763,10 +3763,10 @@ let nL = Ju(({
                   publicLinkControlsSetting: t,
                   publicLinkControlsMaxExpiration: n
                 }).then(() => {
-                  l(_$$s2.flash(_$$t('setting_tab.successfully_updated_workspace_public_link_controls')));
+                  l(_$$s2.flash(getI18nString('setting_tab.successfully_updated_workspace_public_link_controls')));
                   e();
                 }).catch(() => {
-                  l(_$$s2.error(_$$t('org_actions.an_error_occurred')));
+                  l(_$$s2.error(getI18nString('org_actions.an_error_occurred')));
                 });
               }
             }
@@ -3792,12 +3792,12 @@ let nD = Ju(({
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$t('settings_tab.public_sharing.remove_custom_workspace_settings')
+          children: getI18nString('settings_tab.public_sharing.remove_custom_workspace_settings')
         })
       }), jsx(_$$nB, {
         children: jsx('div', {
           className: 'x1mzt3pk xeaf4i8 x13faqbe',
-          children: _$$tx('setting_tab.remove_custom_workspace_setting_warning', {
+          children: renderI18nText('setting_tab.remove_custom_workspace_setting_warning', {
             workspaceName: e.name
           })
         })
@@ -3806,7 +3806,7 @@ let nD = Ju(({
           children: [jsx($n, {
             onClick: t,
             variant: 'secondary',
-            children: _$$tx('setting_tab.public_sharing.modal.cancel')
+            children: renderI18nText('setting_tab.public_sharing.modal.cancel')
           }), jsx($n, {
             variant: 'destructive',
             onClick: () => {
@@ -3815,14 +3815,14 @@ let nD = Ju(({
                 publicLinkControlsSetting: null,
                 publicLinkControlsMaxExpiration: null
               }).then(() => {
-                a(_$$s2.flash(_$$t('setting_tab.successfully_updated_workspace_public_link_controls')));
+                a(_$$s2.flash(getI18nString('setting_tab.successfully_updated_workspace_public_link_controls')));
                 t();
                 t();
               }).catch(() => {
-                a(_$$s2.error(_$$t('org_actions.an_error_occurred')));
+                a(_$$s2.error(getI18nString('org_actions.an_error_occurred')));
               });
             },
-            children: _$$tx('setting_tab.public_sharing.modal.remove')
+            children: renderI18nText('setting_tab.public_sharing.modal.remove')
           })]
         })
       })]
@@ -3851,7 +3851,7 @@ function nM({
     loadingStatus: t?.status ?? 'loading',
     allWorkspaces: r,
     displaySettings: l,
-    subHeader: _$$tx('org_settings.workspace_controls.sub_header_text'),
+    subHeader: renderI18nText('org_settings.workspace_controls.sub_header_text'),
     workspaceSubText: e => nP(e) && jsx(_$$s6, {
       publicLinkControlsSetting: e.workspaceSharedSetting.publicLinkControlsSetting
     }),
@@ -3883,21 +3883,21 @@ let nU = Ju(() => {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$t('settings_tab.public_sharing_title')
+          children: getI18nString('settings_tab.public_sharing_title')
         })
       }), jsx(_$$nB, {
         children: jsxs('div', {
           className: 'x78zum5 xdt5ytf',
           children: [jsx('div', {
             className: 'xipvkqc',
-            children: _$$tx('setting_tab.public_sharing.modal.description')
+            children: renderI18nText('setting_tab.public_sharing.modal.description')
           }), jsxs('div', {
             className: 'xipvkqc',
             children: [jsx(kJ, {
               isPublicLinksBanned: formState.isPublicLinksBanned,
               togglePublicLinksBanned: formActions.togglePublicLinksBanned,
-              labelText: _$$t('setting_tab.public_sharing.modal.public_link_sharing_header'),
-              subText: _$$t('setting_tab.public_sharing.modal.public_link_sharing_toggle')
+              labelText: getI18nString('setting_tab.public_sharing.modal.public_link_sharing_header'),
+              subText: getI18nString('setting_tab.public_sharing.modal.public_link_sharing_toggle')
             }), !formState.isPublicLinksBanned && u && jsx(_$$t4, {
               displayExpiration: u,
               doPublicLinksRequireExpiration: formState.doPublicLinksRequireExpiration,
@@ -3924,11 +3924,11 @@ let nU = Ju(() => {
                   'aria-describedby': 'open-sessions-note',
                   'htmlFor': 'open-sessions',
                   'className': 'x1s688f',
-                  'children': _$$tx('setting_tab.public_sharing.modal.open_sessions_header')
+                  'children': renderI18nText('setting_tab.public_sharing.modal.open_sessions_header')
                 }), jsx('span', {
                   id: 'open-sessions-note',
                   className: 'x1n0bwc9',
-                  children: _$$tx('setting_tab.public_sharing.modal.open_sessions_toggle')
+                  children: renderI18nText('setting_tab.public_sharing.modal.open_sessions_toggle')
                 })]
               }), jsx(_$$v, {
                 id: 'open-sessions',
@@ -3939,7 +3939,7 @@ let nU = Ju(() => {
           }), d && (formState.doPublicLinksRequirePassword || formState.doPublicLinksRequireExpiration) && jsx('div', {
             'data-testid': 'open-sessions-note',
             'className': 'x12oqio5 x1ghs5zp x1nn34kk x12sbs06',
-            'children': _$$tx('settings_tab.public_sharing.modal.open_sessions_note')
+            'children': renderI18nText('settings_tab.public_sharing.modal.open_sessions_note')
           }), u && jsx(nM, {
             org: t
           })]
@@ -3957,7 +3957,7 @@ let nU = Ju(() => {
                 o();
                 return;
               }
-              let s = _$$t('org_settings.public_link_sharing.success');
+              let s = getI18nString('org_settings.public_link_sharing.success');
               let i = () => {
                 e(yo({
                   payload: {
@@ -3988,15 +3988,15 @@ let nF = Ju(e => {
   let s;
   let r = useDispatch();
   let l = () => r(Lo());
-  e.isOpenSessionsEnabled ? (t = _$$t('settings_tab.public_sharing.confirmation_modal.disable_public_links_title'), a = _$$t('settings_tab.public_sharing.confirmation_modal.disable_public_links_submit'), s = _$$tx('settings_tab.public_sharing.confirmation_modal.disable_public_links_description')) : (t = _$$t('settings_tab.public_sharing.confirmation_modal.disable_public_sharing_title'), a = _$$t('settings_tab.public_sharing.confirmation_modal.disable_public_sharing_submit'), s = jsxs(Fragment, {
-    children: [_$$tx('settings_tab.public_sharing.confirmation_modal.disable_public_sharing_description.main'), jsxs('ul', {
+  e.isOpenSessionsEnabled ? (t = getI18nString('settings_tab.public_sharing.confirmation_modal.disable_public_links_title'), a = getI18nString('settings_tab.public_sharing.confirmation_modal.disable_public_links_submit'), s = renderI18nText('settings_tab.public_sharing.confirmation_modal.disable_public_links_description')) : (t = getI18nString('settings_tab.public_sharing.confirmation_modal.disable_public_sharing_title'), a = getI18nString('settings_tab.public_sharing.confirmation_modal.disable_public_sharing_submit'), s = jsxs(Fragment, {
+    children: [renderI18nText('settings_tab.public_sharing.confirmation_modal.disable_public_sharing_description.main'), jsxs('ul', {
       className: 'xtaz4m5 xv2w18j',
       children: [jsx('li', {
         className: 'x7hzu26',
-        children: _$$tx('settings_tab.public_sharing.confirmation_modal.disable_public_sharing_description.figma_design')
+        children: renderI18nText('settings_tab.public_sharing.confirmation_modal.disable_public_sharing_description.figma_design')
       }), jsx('li', {
         className: 'x7hzu26',
-        children: _$$tx('settings_tab.public_sharing.confirmation_modal.disable_public_sharing_description.figjam')
+        children: renderI18nText('settings_tab.public_sharing.confirmation_modal.disable_public_sharing_description.figjam')
       })]
     })]
   }));
@@ -4020,7 +4020,7 @@ let nF = Ju(e => {
           children: [jsx($n, {
             variant: 'secondary',
             onClick: l,
-            children: _$$t('modal.cancel')
+            children: getI18nString('modal.cancel')
           }), jsx($n, {
             variant: 'destructive',
             onClick: () => {
@@ -4041,7 +4041,7 @@ let nY = {
 };
 let nK = nJ;
 function n5(e) {
-  return _$$tx(e ? 'change_payment.update_payment_details' : 'change_payment.enter_credit_or_debit_card');
+  return renderI18nText(e ? 'change_payment.update_payment_details' : 'change_payment.enter_credit_or_debit_card');
 }
 function n3(e) {
   let t;
@@ -4124,7 +4124,7 @@ function n3(e) {
         children: jsx('label', {
           htmlFor: 'updatePaymentDetails',
           className: _$$s.colorTextSecondary.$,
-          children: _$$tx('change_payment.update_payment_details_description')
+          children: renderI18nText('change_payment.update_payment_details_description')
         })
       }), h != null ? jsx('div', {
         className: jy,
@@ -4138,7 +4138,7 @@ function n3(e) {
           g(!0);
           let n = 'An error occurred while reading your card.';
           if (e.canSeeBillingAddressExp && !b) {
-            x(_$$t('change_payment.name_required_on_card_error'));
+            x(getI18nString('change_payment.name_required_on_card_error'));
             g(!1);
             return;
           }
@@ -4189,7 +4189,7 @@ function n3(e) {
             tabIndex: 0,
             type: 'submit',
             disabled: p,
-            children: _$$tx('change_payment.use_this_card')
+            children: renderI18nText('change_payment.use_this_card')
           })]
         })]
       })]
@@ -4235,13 +4235,13 @@ function n6({
       return !1;
     }
     s(_$$F.enqueue({
-      message: _$$t('org_admin_settings.billing_details.successfully_updated_your_payment_source')
+      message: getI18nString('org_admin_settings.billing_details.successfully_updated_your_payment_source')
     }));
     return !0;
   };
   return jsx(x8, {
-    label: a ? _$$t('org_admin_settings.settings_tab.billing.payment_details.label') : _$$t('org_admin_settings.settings_tab.billing.change_payment_method.label'),
-    description: a ? _$$t('org_admin_settings.settings_tab.billing.payment_details.description') : _$$t('org_admin_settings.settings_tab.billing.change_payment_method.description'),
+    label: a ? getI18nString('org_admin_settings.settings_tab.billing.payment_details.label') : getI18nString('org_admin_settings.settings_tab.billing.change_payment_method.label'),
+    description: a ? getI18nString('org_admin_settings.settings_tab.billing.payment_details.description') : getI18nString('org_admin_settings.settings_tab.billing.change_payment_method.description'),
     onClick: () => {
       s(_$$to({
         type: n8,
@@ -4284,17 +4284,17 @@ let n9 = Ju(e => {
       children: jsxs(vo, {
         children: [jsx(Y9, {
           children: jsx(hE, {
-            children: _$$tx('settings_tab.sites_publishing_toggle_label')
+            children: renderI18nText('settings_tab.sites_publishing_toggle_label')
           })
         }), jsxs(_$$nB, {
           children: [c && c !== d && jsx($y, {
             variant: 'danger',
             children: jsx(_$$Q, {
-              children: _$$tx('org_settings.sites_publishing_toggle.banner')
+              children: renderI18nText('org_settings.sites_publishing_toggle.banner')
             })
           }), jsxs(_$$b, {
             legend: jsx(_$$q3, {
-              children: _$$tx('settings_tab.sites_publishing_toggle_label')
+              children: renderI18nText('settings_tab.sites_publishing_toggle_label')
             }),
             value: c ? 'true' : 'false',
             onChange: e => _(e === 'true'),
@@ -4302,12 +4302,12 @@ let n9 = Ju(e => {
             children: [jsx(_$$c2, {
               value: 'false',
               label: jsx(_$$J2, {
-                children: _$$tx('org_settings.sites_publishing_toggle.enable')
+                children: renderI18nText('org_settings.sites_publishing_toggle.enable')
               })
             }), jsx(_$$c2, {
               value: 'true',
               label: jsx(_$$J2, {
-                children: _$$tx('org_settings.sites_publishing_toggle.disable')
+                children: renderI18nText('org_settings.sites_publishing_toggle.disable')
               })
             })]
           })]
@@ -4316,7 +4316,7 @@ let n9 = Ju(e => {
             children: [jsx($z, {
               variant: 'secondary',
               onClick: o,
-              children: _$$tx('org_settings.sites_publishing_toggle.cancel')
+              children: renderI18nText('org_settings.sites_publishing_toggle.cancel')
             }), jsx($z, {
               variant: 'destructive',
               onClick: () => {
@@ -4324,7 +4324,7 @@ let n9 = Ju(e => {
                   o();
                   return;
                 }
-                let e = _$$t('org_settings.sites_publishing_toggle.success');
+                let e = getI18nString('org_settings.sites_publishing_toggle.success');
                 t(Sl({
                   orgId: a.id,
                   sitesPublishingDisabled: c,
@@ -4333,7 +4333,7 @@ let n9 = Ju(e => {
                 o();
               },
               disabled: c === d || r.status === 'loading',
-              children: _$$tx('org_settings.sites_publishing_toggle.save')
+              children: renderI18nText('org_settings.sites_publishing_toggle.save')
             })]
           })
         })]
@@ -4368,24 +4368,24 @@ let se = Ju(e => {
       children: jsxs(vo, {
         children: [jsx(Y9, {
           children: jsx(hE, {
-            children: _$$tx('settings_tab.supabase_toggle_label')
+            children: renderI18nText('settings_tab.supabase_toggle_label')
           })
         }), jsxs(_$$nB, {
           children: [c && c !== d && jsx($y, {
             variant: 'danger',
             children: jsx(_$$Q, {
-              children: _$$tx('org_settings.supabase_toggle.banner_link', {
+              children: renderI18nText('org_settings.supabase_toggle.banner_link', {
                 learnMoreLink: jsx(CY, {
                   target: '_blank',
                   href: 'https://help.figma.com/hc/articles/32640822050199',
                   trusted: !0,
-                  children: _$$t('general.learn_more')
+                  children: getI18nString('general.learn_more')
                 })
               })
             })
           }), jsxs(_$$b, {
             legend: jsx(_$$q3, {
-              children: _$$tx('settings_tab.supabase_toggle_label')
+              children: renderI18nText('settings_tab.supabase_toggle_label')
             }),
             value: c ? 'true' : 'false',
             onChange: e => _(e === 'true'),
@@ -4393,12 +4393,12 @@ let se = Ju(e => {
             children: [jsx(_$$c2, {
               value: 'false',
               label: jsx(_$$J2, {
-                children: _$$tx('org_settings.supabase_toggle.enable')
+                children: renderI18nText('org_settings.supabase_toggle.enable')
               })
             }), jsx(_$$c2, {
               value: 'true',
               label: jsx(_$$J2, {
-                children: _$$tx('org_settings.supabase_toggle.disable')
+                children: renderI18nText('org_settings.supabase_toggle.disable')
               })
             })]
           })]
@@ -4407,7 +4407,7 @@ let se = Ju(e => {
             children: [jsx($z, {
               variant: 'secondary',
               onClick: o,
-              children: _$$tx('org_settings.supabase_toggle.cancel')
+              children: renderI18nText('org_settings.supabase_toggle.cancel')
             }), jsx($z, {
               variant: 'destructive',
               onClick: () => {
@@ -4415,7 +4415,7 @@ let se = Ju(e => {
                   o();
                   return;
                 }
-                let e = _$$t('org_settings.supabase_toggle.success');
+                let e = getI18nString('org_settings.supabase_toggle.success');
                 t(NL({
                   orgId: a.id,
                   supabaseDisabled: c,
@@ -4424,7 +4424,7 @@ let se = Ju(e => {
                 o();
               },
               disabled: c === d || r.status === 'loading',
-              children: _$$tx('org_settings.supabase_toggle.save')
+              children: renderI18nText('org_settings.supabase_toggle.save')
             })]
           })
         })]
@@ -4447,7 +4447,7 @@ let ss = Ju(() => {
       orgId: t.id
     },
     children: jsx(Dd, {
-      title: _$$t('org_settings.team_creation.modal', {
+      title: getI18nString('org_settings.team_creation.modal', {
         organization: t.name
       }),
       maxWidth: 440,
@@ -4462,11 +4462,11 @@ let ss = Ju(() => {
           payload: {
             team_creation_controls: l
           },
-          successMessage: _$$t('org_settings.team_creation.success')
+          successMessage: getI18nString('org_settings.team_creation.success')
         }));
         r();
       },
-      confirmText: _$$t('org_settings.team_creation.save_button'),
+      confirmText: getI18nString('org_settings.team_creation.save_button'),
       children: jsx('div', {
         children: jsxs(_$$z, {
           value: l ?? $q.TEAM_CREATION_CONTROLS_ANYONE,
@@ -4482,10 +4482,10 @@ let ss = Ju(() => {
             children: jsxs('div', {
               className: st,
               children: [jsx('div', {
-                children: _$$t('org_settings.team_creation.any.title')
+                children: getI18nString('org_settings.team_creation.any.title')
               }), jsx('div', {
                 className: sa,
-                children: _$$t('org_settings.team_creation.any.description')
+                children: getI18nString('org_settings.team_creation.any.description')
               })]
             })
           }, $q.TEAM_CREATION_CONTROLS_ANYONE), jsx(_$$Z, {
@@ -4494,10 +4494,10 @@ let ss = Ju(() => {
             children: jsxs('div', {
               className: st,
               children: [jsx('div', {
-                children: _$$t('org_settings.team_creation.admin_only.title')
+                children: getI18nString('org_settings.team_creation.admin_only.title')
               }), jsx('div', {
                 className: sa,
-                children: a ? _$$t('org_settings.team_creation.admin_only.description.workspaces') : _$$t('org_settings.team_creation.admin_only.description.no_workspaces')
+                children: a ? getI18nString('org_settings.team_creation.admin_only.description.workspaces') : getI18nString('org_settings.team_creation.admin_only.description.no_workspaces')
               })]
             })
           }, $q.TEAM_CREATION_CONTROLS_ADMIN_ONLY)]
@@ -4507,9 +4507,9 @@ let ss = Ju(() => {
   });
 }, 'TeamCreationControlsModal');
 function si(e) {
-  if (e == null) return _$$t('settings_tab.idle_session_timeout_default_duration');
+  if (e == null) return getI18nString('settings_tab.idle_session_timeout_default_duration');
   let [t, a] = qr(e);
-  return _$$t(`settings_tab.idle_session_timeout.time.${a}`, {
+  return getI18nString(`settings_tab.idle_session_timeout.time.${a}`, {
     duration: t
   });
 }
@@ -4606,8 +4606,8 @@ export function $$sr0(e) {
   }, [$]);
   let ej = !!getFeatureFlags().plan_level_file_export_controls && !!org.security_add_on_enabled_at;
   let ey = [jsx(x8, {
-    label: _$$t('settings_tab.modify_community_handle_label'),
-    description: _$$t('settings_tab.modify_community_handle_description'),
+    label: getI18nString('settings_tab.modify_community_handle_label'),
+    description: getI18nString('settings_tab.modify_community_handle_description'),
     currentValue: org.community_profile_handle ? `@${org.community_profile_handle}` : '',
     onClick: () => {
       $(_$$to({
@@ -4621,8 +4621,8 @@ export function $$sr0(e) {
     }
   }, 'org-handle')];
   org.community_profile_id && (ey.push(jsx(x8, {
-    label: _$$t('settings_tab.delete_community_label'),
-    description: _$$t('settings_tab.delete_community_description'),
+    label: getI18nString('settings_tab.delete_community_label'),
+    description: getI18nString('settings_tab.delete_community_description'),
     onClick: () => {
       org.community_profile_id && org.community_profile_handle && $(_$$to({
         type: _$$M,
@@ -4634,15 +4634,15 @@ export function $$sr0(e) {
       }));
     }
   }, 'delete-profile')), ey.push(jsx(x8, {
-    label: _$$t('settings_tab.community_commenters_label'),
-    description: _$$t('settings_tab.community_commenters_description'),
+    label: getI18nString('settings_tab.community_commenters_label'),
+    description: getI18nString('settings_tab.community_commenters_description'),
     onClick: () => {
       org.community_profile_id && $(_$$to({
         type: _$$J3,
         data: {
           profileId: org.community_profile_id,
           profileHandle: org.community_profile_handle,
-          emptyStateText: _$$t('settings_tab.community_commenters_restricted_dont_exist', {
+          emptyStateText: getI18nString('settings_tab.community_commenters_restricted_dont_exist', {
             orgHandle: `@${org.community_profile_handle}`
           })
         }
@@ -4650,14 +4650,14 @@ export function $$sr0(e) {
     }
   }, 'restrict-comments')));
   let ew = {
-    title: _$$t('settings_tab.section_header.profile'),
+    title: getI18nString('settings_tab.section_header.profile'),
     settings: ey
   };
   let ek = {
-    title: _$$t('settings_tab.section_header.team_management'),
+    title: getI18nString('settings_tab.section_header.team_management'),
     settings: [jsx(x8, {
-      label: _$$t('settings_tab.team_creation_label'),
-      description: _$$t('settings_tab.team_creation_description'),
+      label: getI18nString('settings_tab.team_creation_label'),
+      description: getI18nString('settings_tab.team_creation_description'),
       onClick: () => {
         $(_$$to({
           type: ss
@@ -4669,44 +4669,44 @@ export function $$sr0(e) {
     title: '',
     settings: []
   };
-  let eN = org.target_locality === OE.EU ? _$$t('settings_tab.data_storage_eu') : _$$t('settings_tab.data_storage_us');
-  eE.title = _$$t('settings_tab.section_header.data');
+  let eN = org.target_locality === OE.EU ? getI18nString('settings_tab.data_storage_eu') : getI18nString('settings_tab.data_storage_us');
+  eE.title = getI18nString('settings_tab.section_header.data');
   OW(org) && eE.settings.push(jsx(Ke, {
     user: B,
     tag: 'a_something_else',
-    label: _$$t('settings_tab.discovery.label'),
-    contactSupportCopy: org.discovery_enabled ? _$$t('settings_tab.contact_support_to_disable') : _$$t('settings_tab.contact_support_to_enable'),
+    label: getI18nString('settings_tab.discovery.label'),
+    contactSupportCopy: org.discovery_enabled ? getI18nString('settings_tab.contact_support_to_disable') : getI18nString('settings_tab.contact_support_to_enable'),
     description: jsxs(_$$Y, {
       direction: 'vertical',
       spacing: 8,
       children: [jsx(_$$E, {
-        children: _$$tx('settings_tab.discovery.description', {
+        children: renderI18nText('settings_tab.discovery.description', {
           learnMoreLink: jsx('a', {
             'target': '_blank',
             'rel': 'noopener',
             'className': Be,
             'href': 'https://www.figma.com/developers/api#discovery',
-            'aria-label': _$$t('settings_tab.learn_more_about_discovery_api'),
-            'children': _$$tx('file_browser.team_settings.learn_more')
+            'aria-label': getI18nString('settings_tab.learn_more_about_discovery_api'),
+            'children': renderI18nText('file_browser.team_settings.learn_more')
           })
         })
       }), jsx(_$$E, {
-        children: _$$tx('resources_tab.libraries.current', {
-          setting: org.discovery_enabled ? _$$t('settings_tab.enabled') : _$$t('settings_tab.disabled')
+        children: renderI18nText('resources_tab.libraries.current', {
+          setting: org.discovery_enabled ? getI18nString('settings_tab.enabled') : getI18nString('settings_tab.disabled')
         })
       })]
     })
   }, 'discovery'));
   isGovCluster() || eE.settings.push(jsx(Ke, {
     user: B,
-    label: _$$t('settings_tab.data_storage'),
+    label: getI18nString('settings_tab.data_storage'),
     description: jsxs(_$$Y, {
       direction: 'vertical',
       spacing: 8,
       children: [jsx(_$$E, {
-        children: _$$tx('settings_tab.data_storage.description')
+        children: renderI18nText('settings_tab.data_storage.description')
       }), jsx(_$$E, {
-        children: _$$tx('settings_tab.data_storage.current_location', {
+        children: renderI18nText('settings_tab.data_storage.current_location', {
           currentLocation: eN
         })
       })]
@@ -4714,8 +4714,8 @@ export function $$sr0(e) {
   }, 'data-locality-control'));
   let eI = [];
   eo && eI.push(jsx(x8, {
-    label: _$$t('settings_tab.guest_membership_label'),
-    description: _$$t('settings_tab.guest_membership_description'),
+    label: getI18nString('settings_tab.guest_membership_label'),
+    description: getI18nString('settings_tab.guest_membership_description'),
     onClick: () => {
       $(_$$to({
         type: nm
@@ -4723,11 +4723,11 @@ export function $$sr0(e) {
     }
   }, 'guest-controls'));
   mU(org) ? eI.push(jsx(x8, {
-    label: _$$t('settings_tab.external_collaboration_controls_label'),
-    description: _$$t('settings_tab.external_collaboration_controls_description', {
+    label: getI18nString('settings_tab.external_collaboration_controls_label'),
+    description: getI18nString('settings_tab.external_collaboration_controls_description', {
       orgName: org.name
     }),
-    currentValue: org.shared_container_setting?.external_collaboration_controls ? _$$t('settings_tab.disabled') : _$$t('settings_tab.enabled'),
+    currentValue: org.shared_container_setting?.external_collaboration_controls ? getI18nString('settings_tab.disabled') : getI18nString('settings_tab.enabled'),
     onClick: () => {
       $(_$$to({
         type: nr
@@ -4736,17 +4736,17 @@ export function $$sr0(e) {
   }, 'external-collab-controls')) : ZY(org) && eI.push(jsx(Ke, {
     user: B,
     tag: 'a_permissions',
-    label: _$$t('settings_tab.external_collaboration_controls_label'),
-    description: _$$t('settings_tab.external_collaboration_controls_description', {
+    label: getI18nString('settings_tab.external_collaboration_controls_label'),
+    description: getI18nString('settings_tab.external_collaboration_controls_description', {
       orgName: org.name
     }),
-    contactSupportCopy: _$$t('settings_tab.contact_support_to_disable'),
-    contactSupportTooltipCopy: _$$t('settings_tab.domain_capture_contact_support_tooltip_copy')
+    contactSupportCopy: getI18nString('settings_tab.contact_support_to_disable'),
+    contactSupportTooltipCopy: getI18nString('settings_tab.domain_capture_contact_support_tooltip_copy')
   }, 'external-collab-controls'));
   (F && (getFeatureFlags().sts_k12_google_org_enabled || !org.k12_google_org) || _$$aI()) && eI.push(jsx(x8, {
-    label: _$$t('settings_tab.sites_publishing_toggle_label'),
-    description: _$$t('settings_tab.sites_publishing_toggle_description'),
-    currentValue: eb?.sitesPublishingDisabled ? _$$t('settings_tab.disabled') : _$$t('settings_tab.enabled'),
+    label: getI18nString('settings_tab.sites_publishing_toggle_label'),
+    description: getI18nString('settings_tab.sites_publishing_toggle_description'),
+    currentValue: eb?.sitesPublishingDisabled ? getI18nString('settings_tab.disabled') : getI18nString('settings_tab.enabled'),
     onClick: () => {
       $(_$$to({
         type: n9
@@ -4754,9 +4754,9 @@ export function $$sr0(e) {
     }
   }, 'sites-publishing-toggle'));
   p3() && eI.push(jsx(x8, {
-    label: _$$t('settings_tab.supabase_toggle_label'),
-    description: _$$t('settings_tab.supabase_toggle_description'),
-    currentValue: eb?.supabaseDisabled ? _$$t('settings_tab.disabled') : _$$t('settings_tab.enabled'),
+    label: getI18nString('settings_tab.supabase_toggle_label'),
+    description: getI18nString('settings_tab.supabase_toggle_description'),
+    currentValue: eb?.supabaseDisabled ? getI18nString('settings_tab.disabled') : getI18nString('settings_tab.enabled'),
     onClick: () => {
       $(_$$to({
         type: se
@@ -4764,8 +4764,8 @@ export function $$sr0(e) {
     }
   }, 'supabase-toggle'));
   eI.push(jsx(x8, {
-    label: _$$t('settings_tab.public_sharing_title'),
-    description: _$$t('settings_tab.public_sharing_description'),
+    label: getI18nString('settings_tab.public_sharing_title'),
+    description: getI18nString('settings_tab.public_sharing_description'),
     onClick: () => {
       $(_$$to({
         type: nU
@@ -4773,8 +4773,8 @@ export function $$sr0(e) {
     }
   }, 'public-sharing'));
   ej && eI.push(jsx(x8, {
-    label: _$$t('settings_tab.section_header.export_controls'),
-    description: _$$tx('settings_tab.export_controls_description'),
+    label: getI18nString('settings_tab.section_header.export_controls'),
+    description: renderI18nText('settings_tab.export_controls_description'),
     onClick: () => {
       $(_$$to({
         type: a3
@@ -4782,8 +4782,8 @@ export function $$sr0(e) {
     }
   }, 'export-controls'));
   eo && eI.push(jsx(x8, {
-    label: _$$t('settings_tab.password_controls_settings_label'),
-    description: _$$t('settings_tab.password_controls_settings_description'),
+    label: getI18nString('settings_tab.password_controls_settings_label'),
+    description: getI18nString('settings_tab.password_controls_settings_description'),
     onClick: () => {
       $(_$$to({
         type: tU
@@ -4793,15 +4793,15 @@ export function $$sr0(e) {
   _$$ag(org) && eI.push(jsx(Ke, {
     user: B,
     tag: 'a_something_else',
-    label: _$$t('settings_tab.network_access_restriction_label'),
+    label: getI18nString('settings_tab.network_access_restriction_label'),
     description: jsxs(Fragment, {
       children: [jsx('span', {
-        children: _$$tx('settings_tab.ip_restriction_description', {
+        children: renderI18nText('settings_tab.ip_restriction_description', {
           orgName: org.name
         })
       }), jsx('span', {
         className: _$$s.mt8.$,
-        children: org.ip_ranges.length !== 0 ? _$$tx('settings_tab.ip_restriction_range', {
+        children: org.ip_ranges.length !== 0 ? renderI18nText('settings_tab.ip_restriction_range', {
           ipRanges: jsx(_$$T, {
             formatType: 'unit',
             children: org.ip_ranges.map(e => jsx('span', {
@@ -4813,30 +4813,30 @@ export function $$sr0(e) {
     })
   }, 'ip_restriction'));
   let eT = {
-    title: _$$t('settings_tab.section_header.external_access'),
+    title: getI18nString('settings_tab.section_header.external_access'),
     settings: eI
   };
-  let eM = orgSamlConfig?.config?.idp_name ? _$$t('settings_tab.enabled') : _$$t('settings_tab.disabled');
+  let eM = orgSamlConfig?.config?.idp_name ? getI18nString('settings_tab.enabled') : getI18nString('settings_tab.disabled');
   let e5 = [];
   let e3 = [];
   let e8 = [];
   e5.push(jsx(x8, {
-    label: _$$t('settings_tab.domain_management_label'),
-    description: _$$t('settings_tab.domain_management_description'),
+    label: getI18nString('settings_tab.domain_management_label'),
+    description: getI18nString('settings_tab.domain_management_description'),
     onClick: ef
   }, 'domain-management'));
   isGovCluster() || e5.push(jsx(x8, {
-    label: _$$t('settings_tab.authentication_label'),
-    description: _$$t('settings_tab.authentication_description'),
+    label: getI18nString('settings_tab.authentication_label'),
+    description: getI18nString('settings_tab.authentication_description'),
     currentValue: function (e) {
       let t = _g(e);
       switch (t) {
         case Ct.SAML:
-          return _$$t('settings_tab.sso_method.saml_only');
+          return getI18nString('settings_tab.sso_method.saml_only');
         case Ct.GOOGLE:
-          return _$$t('settings_tab.sso_method.google_only');
+          return getI18nString('settings_tab.sso_method.google_only');
         case Ct.ANY:
-          return _$$t('settings_tab.sso_method.any_method');
+          return getI18nString('settings_tab.sso_method.any_method');
         default:
           throwTypeError(t);
       }
@@ -4848,16 +4848,16 @@ export function $$sr0(e) {
     }
   }, 'authentication'));
   k = org.can_use_multi_idp ? jsx(x8, {
-    label: _$$t('settings_tab.idp_label'),
-    description: _$$t('settings_tab.idp_description'),
+    label: getI18nString('settings_tab.idp_label'),
+    description: getI18nString('settings_tab.idp_description'),
     onClick: () => {
       $(sf({
         view: 'orgIdpManagement'
       }));
     }
   }, 'idp') : jsx(x8, {
-    label: _$$t('settings_tab.saml_label'),
-    description: _$$t('settings_tab.saml_description'),
+    label: getI18nString('settings_tab.saml_label'),
+    description: getI18nString('settings_tab.saml_description'),
     currentValue: eM,
     onClick: () => {
       $(_$$to({
@@ -4872,9 +4872,9 @@ export function $$sr0(e) {
   }, 'saml');
   let e6 = [];
   if (q || e6.push(jsx(x8, {
-    label: _$$t('settings_tab.scim_label'),
-    description: V() ? _$$t('settings_tab.scim_group_description') : _$$t('settings_tab.scim_description'),
-    currentValue: cg(orgSamlConfig) ? _$$t('settings_tab.enabled') : _$$t('settings_tab.disabled'),
+    label: getI18nString('settings_tab.scim_label'),
+    description: V() ? getI18nString('settings_tab.scim_group_description') : getI18nString('settings_tab.scim_description'),
+    currentValue: cg(orgSamlConfig) ? getI18nString('settings_tab.enabled') : getI18nString('settings_tab.disabled'),
     onClick: () => {
       $(_$$to({
         type: G
@@ -4884,18 +4884,18 @@ export function $$sr0(e) {
     let e = oB(org);
     let t = org.shared_container_setting?.ip_allowlist ?? !1;
     e5.push(jsx(x8, {
-      label: _$$t('settings_tab.ip_allowlist_label'),
+      label: getI18nString('settings_tab.ip_allowlist_label'),
       disabled: !e && !t,
       description: jsxs(Fragment, {
         children: [jsx('span', {
           children: jsx(_$$E, {
-            children: _$$tx('settings_tab.ip_allowlist_description')
+            children: renderI18nText('settings_tab.ip_allowlist_description')
           })
         }), ec.length !== 0 && t && jsx('span', {
           className: i0,
           children: jsx(_$$E, {
             truncate: 'end',
-            children: _$$tx('settings_tab.ip_allowlist_ranges_list', {
+            children: renderI18nText('settings_tab.ip_allowlist_ranges_list', {
               ranges: jsx(_$$T, {
                 formatType: 'unit',
                 children: ec.map(e => jsx('span', {
@@ -4924,16 +4924,16 @@ export function $$sr0(e) {
   }
   if (eo && (hM(org.shared_container_setting?.idle_timeout_duration_in_secs) && !nv(!!org.security_add_on_enabled_at) ? e5.push(jsx(Ke, {
     user: B,
-    label: _$$t('settings_tab.idle_session_timeout_label'),
-    description: _$$t('settings_tab.idle_session_timeout_description'),
-    contactSupportTooltipCopy: _$$t('settings_tab.contact_support_to_change'),
+    label: getI18nString('settings_tab.idle_session_timeout_label'),
+    description: getI18nString('settings_tab.idle_session_timeout_description'),
+    contactSupportTooltipCopy: getI18nString('settings_tab.contact_support_to_change'),
     contactSupportCopy: jsx(_$$E, {
       color: 'tertiary',
       children: si(org.shared_container_setting?.idle_timeout_duration_in_secs)
     })
   }, 'disabled-idle-session-timeout')) : e5.push(jsx(x8, {
-    label: _$$t('settings_tab.idle_session_timeout_label'),
-    description: _$$t('settings_tab.idle_session_timeout_description'),
+    label: getI18nString('settings_tab.idle_session_timeout_label'),
+    description: getI18nString('settings_tab.idle_session_timeout_description'),
     currentValue: si(org.shared_container_setting?.idle_timeout_duration_in_secs),
     onClick: () => {
       $(_$$to({
@@ -4948,15 +4948,15 @@ export function $$sr0(e) {
     let e = !!org.workspaces_nux_active_at;
     let t = !e;
     e5.push(jsx(T_, {
-      label: _$$t('settings_tab.workspace_selector_label'),
+      label: getI18nString('settings_tab.workspace_selector_label'),
       description: jsxs(Fragment, {
-        children: [_$$tx('settings_tab.workspace_selector_description_with_link'), jsxs(_$$N, {
+        children: [renderI18nText('settings_tab.workspace_selector_description_with_link'), jsxs(_$$N, {
           'trusted': !0,
           'newTab': !0,
           'href': 'https://help.figma.com/hc/articles/7249713835799',
-          'aria-label': _$$t('settings_tab.learn_more_about_workspace_selector'),
+          'aria-label': getI18nString('settings_tab.learn_more_about_workspace_selector'),
           'children': [jsx('br', {}), jsx(_$$E, {
-            children: _$$tx('general.learn_more')
+            children: renderI18nText('general.learn_more')
           })]
         })]
       }),
@@ -4966,25 +4966,25 @@ export function $$sr0(e) {
           payload: {
             workspaces_nux_enabled: t
           },
-          successMessage: t ? _$$t('license_group.workspace_selector_is_visible') : _$$t('license_group.workspace_selector_is_hidden')
+          successMessage: t ? getI18nString('license_group.workspace_selector_is_visible') : getI18nString('license_group.workspace_selector_is_hidden')
         }));
       }
     }, 'workspace-selector'));
   }
   let e7 = {
-    title: _$$t('settings_tab.section_header.login_and_provisioning'),
+    title: getI18nString('settings_tab.section_header.login_and_provisioning'),
     settings: e5
   };
   let e9 = {
-    title: _$$t('settings_tab.section_header.login_and_provisioning'),
+    title: getI18nString('settings_tab.section_header.login_and_provisioning'),
     settings: e3
   };
   let ta = {
-    title: _$$t('settings_tab.section_header.login_and_provisioning'),
+    title: getI18nString('settings_tab.section_header.login_and_provisioning'),
     settings: e8
   };
   let ts = {
-    title: _$$t('plan_settings.billing_section_header'),
+    title: getI18nString('plan_settings.billing_section_header'),
     description: jsx(Fragment, {}),
     settings: []
   };
@@ -4994,7 +4994,7 @@ export function $$sr0(e) {
     let i = ee.data?.scheduled_cancellation?.scheduled_cancellation_date;
     let r = e => jsx('span', {
       className: bv,
-      children: _$$tx('settings_table.billing_date', {
+      children: renderI18nText('settings_table.billing_date', {
         billing_date: e
       })
     });
@@ -5008,7 +5008,7 @@ export function $$sr0(e) {
           }
         }));
       },
-      children: _$$tx('settings_table.learn_more')
+      children: renderI18nText('settings_table.learn_more')
     });
     let o = e => {
       ts.description = jsx('div', {
@@ -5018,12 +5018,12 @@ export function $$sr0(e) {
         })
       });
     };
-    getFeatureFlags().scheduled_cancellation_enabled ? s && i ? o(_$$t('org_admin_settings.settings_tab.billing.subscription_cancelled', {
+    getFeatureFlags().scheduled_cancellation_enabled ? s && i ? o(getI18nString('org_admin_settings.settings_tab.billing.subscription_cancelled', {
       scheduledCancellationDate: _$$A(i).toDate()
-    })) : !s && t && o(_$$tx('org_admin_settings.settings_tab.billing.subscription_renewing', {
+    })) : !s && t && o(renderI18nText('org_admin_settings.settings_tab.billing.subscription_renewing', {
       billing_date: r(t),
       more: l(t)
-    })) : t && o(_$$tx('settings_table.subscription_renewal', {
+    })) : t && o(renderI18nText('settings_table.subscription_renewal', {
       frequency: 'annual',
       billing_date: r(t),
       more: l(t)
@@ -5035,8 +5035,8 @@ export function $$sr0(e) {
     canSeeBillingAddressExp
   }));
   canSeeBillingAddressExp && ts.settings.push(jsx(x8, {
-    label: _$$t('org_admin_settings.settings_tab.billing.update_invoice_details.label'),
-    description: _$$t('org_admin_settings.settings_tab.billing.update_invoice_details.description'),
+    label: getI18nString('org_admin_settings.settings_tab.billing.update_invoice_details.label'),
+    description: getI18nString('org_admin_settings.settings_tab.billing.update_invoice_details.description'),
     onClick: () => $(_$$to({
       type: _$$u,
       data: {
@@ -5047,8 +5047,8 @@ export function $$sr0(e) {
     }))
   }));
   J && canSeeBillingAddressExp && ts.settings.push(jsx(x8, {
-    label: _$$t('settings_tab.vat_gst'),
-    description: _$$t('settings_tab.change_vat_gst_id'),
+    label: getI18nString('settings_tab.vat_gst'),
+    description: getI18nString('settings_tab.change_vat_gst_id'),
     onClick: () => Hq({
       org,
       dispatch: $
@@ -5059,8 +5059,8 @@ export function $$sr0(e) {
     let e = org.shared_container_setting?.configured_upgrade_request_setting;
     if (e === Sm.ALL_USERS) {
       td = jsx(x8, {
-        label: _$$t('plan_settings.auto_approval_settings'),
-        description: _$$t('plan_settings.auto_approval_settings_curf_all_users_description'),
+        label: getI18nString('plan_settings.auto_approval_settings'),
+        description: getI18nString('plan_settings.auto_approval_settings_curf_all_users_description'),
         onClick: _$$d({
           dispatch: $
         })
@@ -5068,8 +5068,8 @@ export function $$sr0(e) {
     } else {
       let t = e === Sm.MEMBERS;
       td = jsx(x8, {
-        label: _$$t('plan_settings.auto_approval_settings'),
-        description: _$$t('plan_settings.auto_approval_settings_description'),
+        label: getI18nString('plan_settings.auto_approval_settings'),
+        description: getI18nString('plan_settings.auto_approval_settings_description'),
         onClick: _$$S4({
           dispatch: $,
           isCurfEnabledForMembers: t,
@@ -5080,9 +5080,9 @@ export function $$sr0(e) {
     }
   } else {
     td = jsx(x8, {
-      label: _$$t('plan_settings.default_role'),
-      description: _$$tx('plan_settings.default_role_description', {
-        plan_type: _$$t('settings_table.organization')
+      label: getI18nString('plan_settings.default_role'),
+      description: renderI18nText('plan_settings.default_role_description', {
+        plan_type: getI18nString('settings_table.organization')
       }),
       onClick: () => {
         $(_$$to({
@@ -5098,14 +5098,14 @@ export function $$sr0(e) {
   ts.settings.push(td);
   org.shared_container_setting?.configured_upgrade_request_setting && ts.settings.push(jsx(Ke, {
     user: B,
-    label: _$$t('settings_tab.configured_upgrade_request_flow.label'),
-    description: org.shared_container_setting?.configured_upgrade_request_setting === Sm.MEMBERS ? _$$t('settings_tab.configured_upgrade_request_flow.description_members') : _$$t('settings_tab.configured_upgrade_request_flow.description_all_users')
+    label: getI18nString('settings_tab.configured_upgrade_request_flow.label'),
+    description: org.shared_container_setting?.configured_upgrade_request_setting === Sm.MEMBERS ? getI18nString('settings_tab.configured_upgrade_request_flow.description_members') : getI18nString('settings_tab.configured_upgrade_request_flow.description_all_users')
   }));
   ts.settings.push(jsx(x8, {
-    label: _$$t('plan_settings.seat_upgrade_digests'),
+    label: getI18nString('plan_settings.seat_upgrade_digests'),
     disabled: !z,
     currentValue: z ? null : jsx($$so1, {}),
-    description: _$$t('plan_settings.seat_upgrade_digests_description'),
+    description: getI18nString('plan_settings.seat_upgrade_digests_description'),
     onClick: () => {
       $(_$$to({
         type: _$$q2,
@@ -5117,8 +5117,8 @@ export function $$sr0(e) {
     }
   }, 'upgrade-notifications'));
   ts.settings.push(jsx(x8, {
-    label: _$$t('settings_table.billing_contacts'),
-    description: _$$t('settings_table.billing_contacts_description'),
+    label: getI18nString('settings_table.billing_contacts'),
+    description: getI18nString('settings_table.billing_contacts_description'),
     onClick: () => {
       $(sl({
         orgId: org.id,
@@ -5127,8 +5127,8 @@ export function $$sr0(e) {
     }
   }, 'billing-contacts'));
   ea?.id === _$$a.SCHEDULE ? ts.settings.push(jsx(x8, {
-    label: _$$t('settings_table.cancel_plan'),
-    description: _$$t('settings_table.cancel_plan_description_org'),
+    label: getI18nString('settings_table.cancel_plan'),
+    description: getI18nString('settings_table.cancel_plan_description_org'),
     trackingProperties: {
       trackingDescriptor: _$$c.CANCEL_PLAN
     },
@@ -5140,8 +5140,8 @@ export function $$sr0(e) {
       });
     }
   }, 'schedule-cancellation')) : ea?.id === _$$a.UNSCHEDULE && ts.settings.push(jsx(x8, {
-    label: _$$t('settings_table.reactivate_plan'),
-    description: _$$t('settings_table.reactivate_plan_description_org'),
+    label: getI18nString('settings_table.reactivate_plan'),
+    description: getI18nString('settings_table.reactivate_plan_description_org'),
     trackingProperties: {
       trackingDescriptor: _$$c.REACTIVATE_PLAN
     },
@@ -5154,12 +5154,12 @@ export function $$sr0(e) {
     }
   }, 'unschedule-cancellation'));
   let tc = {
-    title: _$$t('settings_tab.section_header.resources'),
+    title: getI18nString('settings_tab.section_header.resources'),
     settings: []
   };
   tc.settings.push(jsx(x8, {
-    label: _$$t('settings_tab.plugin_approval_label'),
-    description: _$$t('settings_tab.plugin_approval_description'),
+    label: getI18nString('settings_tab.plugin_approval_label'),
+    description: getI18nString('settings_tab.plugin_approval_description'),
     testId: 'plugin-approval-setting-action',
     onClick: () => {
       $(_$$to({
@@ -5171,8 +5171,8 @@ export function $$sr0(e) {
       }));
     }
   }, 'plugin-admin-approval'), jsx(x8, {
-    label: _$$t('settings_tab.widget_admin_approval_label'),
-    description: _$$t('settings_tab.widget_admin_approval_description'),
+    label: getI18nString('settings_tab.widget_admin_approval_label'),
+    description: getI18nString('settings_tab.widget_admin_approval_description'),
     testId: 'widget-approval-setting-action',
     onClick: () => {
       $(_$$to({
@@ -5185,8 +5185,8 @@ export function $$sr0(e) {
     }
   }, 'widget-admin-approval'));
   tc.settings.push(jsx(x8, {
-    label: _$$t('settings_tab.dev_mode_label'),
-    description: _$$t('settings_tab.dev_mode_description'),
+    label: getI18nString('settings_tab.dev_mode_label'),
+    description: getI18nString('settings_tab.dev_mode_description'),
     onClick: () => {
       $(_$$to({
         type: aH
@@ -5194,20 +5194,20 @@ export function $$sr0(e) {
     }
   }, 'dev-mode-plugins'));
   tc.settings.push(jsx(T_, {
-    label: _$$t('settings_tab.ui_kits_toggle_label'),
-    description: _$$t('settings_tab.ui_kits_toggle_description'),
+    label: getI18nString('settings_tab.ui_kits_toggle_label'),
+    description: getI18nString('settings_tab.ui_kits_toggle_description'),
     isActive: !org.figma_provided_libraries_disabled,
     testId: 'figma-provided-libraries-setting-toggle',
     sprigOverride: W,
     onToggle: e => {
-      let t = e ? _$$t('settings_tab.ui_kits_enabled') : _$$t('settings_tab.ui_kits_disabled');
+      let t = e ? getI18nString('settings_tab.ui_kits_enabled') : getI18nString('settings_tab.ui_kits_disabled');
       $(yo({
         payload: {
           figma_provided_libraries_disabled: !e
         },
         successMessage: t
       }));
-      _$$az.trackDefinedEvent('preset_libraries.org_status_changed', {
+      analyticsEventManager.trackDefinedEvent('preset_libraries.org_status_changed', {
         userId: B?.id,
         orgId: org.id,
         isEnabled: e
@@ -5215,12 +5215,12 @@ export function $$sr0(e) {
     }
   }, 'figma_libraries'));
   Z && tc.settings.push(jsx(T_, {
-    label: _$$t('settings_tab.resource_hub_community_tab_label'),
-    description: _$$t('settings_tab.resource_hub_community_tab_description'),
+    label: getI18nString('settings_tab.resource_hub_community_tab_label'),
+    description: getI18nString('settings_tab.resource_hub_community_tab_description'),
     isActive: !eb?.isResourceHubCmtyTabDisabled,
     testId: 'resource-hub-community-tab-setting-toggle',
     onToggle: e => {
-      let t = e ? _$$t('settings_tab.resource_hub_community_tab_enabled') : _$$t('settings_tab.resource_hub_community_tab_disabled');
+      let t = e ? getI18nString('settings_tab.resource_hub_community_tab_enabled') : getI18nString('settings_tab.resource_hub_community_tab_disabled');
       $(yo({
         payload: {
           resource_hub_cmty_tab_disabled: !e
@@ -5230,14 +5230,14 @@ export function $$sr0(e) {
     }
   }, 'resource_hub_community_tab'));
   let t_ = {
-    title: _$$t('admin_settings.ai.section_title'),
+    title: getI18nString('admin_settings.ai.section_title'),
     badge: ev ? void 0 : jsxs(Fragment, {
       children: [jsx(Ex, {
         color: zE.BRAND,
-        text: _$$t('general.beta')
+        text: getI18nString('general.beta')
       }), jsx(_$$B, {
         'data-tooltip-type': Ib.TEXT,
-        'data-tooltip': _$$t('admin_settings.ai.section_title.free_in_beta'),
+        'data-tooltip': getI18nString('admin_settings.ai.section_title.free_in_beta'),
         'data-tooltip-timeout-delay': 50
       })]
     }),
@@ -5249,25 +5249,25 @@ export function $$sr0(e) {
         orgId: org.id,
         enabled: e
       });
-      sx('ai_data_sharing_toggled', {
+      trackEventAnalytics('ai_data_sharing_toggled', {
         org_id: org.id,
         enabled: e
       });
       $(_$$F.enqueue({
-        message: _$$t('admin_settings.ai.data_sharing.update_success'),
+        message: getI18nString('admin_settings.ai.data_sharing.update_success'),
         type: 'ai-data-sharing-settings-update-success'
       }));
     } catch (e) {
       $(_$$F.enqueue({
-        message: _$$t('admin_settings.ai.data_sharing.update_error'),
+        message: getI18nString('admin_settings.ai.data_sharing.update_error'),
         type: 'ai-data-sharing-settings-update-error',
         error: !0
       }));
     }
   };
   isGovCluster() || (!ev || eo ? getFeatureFlags().ff_wsai_toggle ? t_.settings.push(jsx(x8, {
-    label: _$$t('org_settings.ai_controls.ai_features'),
-    description: _$$t('org_settings.ai_controls.setting_description'),
+    label: getI18nString('org_settings.ai_controls.ai_features'),
+    description: getI18nString('org_settings.ai_controls.setting_description'),
     onClick: () => {
       $(_$$to({
         type: tS,
@@ -5277,21 +5277,21 @@ export function $$sr0(e) {
       }));
     }
   }, 'ai_controls')) : t_.settings.push(jsx(T_, {
-    label: _$$t('admin_settings.ai.features_toggle.label'),
+    label: getI18nString('admin_settings.ai.features_toggle.label'),
     description: jsx('p', {
-      children: _$$tx('admin_settings.ai.features_toggle.description.org', {
+      children: renderI18nText('admin_settings.ai.features_toggle.description.org', {
         learnMoreLink: jsx(CY, {
-          'aria-label': _$$t('settings_tab.learn_more_about_ai_features'),
+          'aria-label': getI18nString('settings_tab.learn_more_about_ai_features'),
           'href': _$$d2.aiFeatures,
           'target': '_blank',
           'trusted': !0,
-          'children': _$$tx('general.learn_more')
+          'children': renderI18nText('general.learn_more')
         })
       })
     }),
     isActive: !org.ai_features_disabled,
     onToggle: e => {
-      let t = e ? _$$t('admin_settings.ai.enable_success') : _$$t('admin_settings.ai.disable_success');
+      let t = e ? getI18nString('admin_settings.ai.enable_success') : getI18nString('admin_settings.ai.disable_success');
       $(yo({
         payload: {
           ai_features_disabled: !e
@@ -5309,55 +5309,55 @@ export function $$sr0(e) {
           payload: {
             ai_features_disabled: !1
           },
-          successMessage: _$$t('admin_settings.ai.enable_success')
+          successMessage: getI18nString('admin_settings.ai.enable_success')
         }));
       },
       planId: org.id,
       planType: FOrganizationLevelType.ORG
     })
   })), t_.settings.push(jsx(T_, {
-    label: _$$t('admin_settings.ai.data_sharing.label'),
+    label: getI18nString('admin_settings.ai.data_sharing.label'),
     description: jsx('p', {
-      children: _$$tx('admin_settings.ai.data_sharing.description.org', {
+      children: renderI18nText('admin_settings.ai.data_sharing.description.org', {
         learnMoreLink: jsx(CY, {
-          'aria-label': _$$t('settings_tab.learn_more_about_content_training'),
+          'aria-label': getI18nString('settings_tab.learn_more_about_content_training'),
           'href': _$$d2.aiDataSharing,
           'target': '_blank',
           'trusted': !0,
-          'children': _$$tx('general.learn_more')
+          'children': renderI18nText('general.learn_more')
         })
       })
     }),
     isActive: !!eb?.isAiDataSharingEnabled,
     disabled: !eb?.isAiDataSharingEnabled,
-    tooltipText: eb?.isAiDataSharingEnabled ? void 0 : _$$t('admin_settings.ai.data_sharing.disabled_for_orgs'),
+    tooltipText: eb?.isAiDataSharingEnabled ? void 0 : getI18nString('admin_settings.ai.data_sharing.disabled_for_orgs'),
     testId: 'ai-data-sharing-toggle',
     onToggle: tu
-  }, _$$t('admin_settings.ai.data_sharing.label'))));
+  }, getI18nString('admin_settings.ai.data_sharing.label'))));
   let tm = {
-    title: _$$t('settings_tab.section_header.slides'),
+    title: getI18nString('settings_tab.section_header.slides'),
     badge: jsx(Ex, {
       color: zE.BRAND,
-      text: _$$t('general.beta')
+      text: getI18nString('general.beta')
     }),
     settings: []
   };
   tm.settings.push(jsx(T_, {
-    label: _$$t('settings_tab.slides.access_to_slides'),
-    description: _$$tx('settings_tab.slides.let_users_create_slides', {
+    label: getI18nString('settings_tab.slides.access_to_slides'),
+    description: renderI18nText('settings_tab.slides.let_users_create_slides', {
       learnMoreLink: jsx('a', {
         'target': '_blank',
         'rel': 'noopener',
         'className': Be,
         'href': 'https://help.figma.com/hc/articles/23844348977303',
-        'aria-label': _$$t('settings_tab.learn_more_about_slides'),
-        'children': _$$tx('file_browser.team_settings.learn_more')
+        'aria-label': getI18nString('settings_tab.learn_more_about_slides'),
+        'children': renderI18nText('file_browser.team_settings.learn_more')
       })
     }),
     descriptionClassName: CB,
     isActive: !org.is_slides_disabled,
     onToggle: e => {
-      let t = e ? _$$t('settings_tab.slides.enable_success') : _$$t('settings_tab.slides.disable_success');
+      let t = e ? getI18nString('settings_tab.slides.enable_success') : getI18nString('settings_tab.slides.disable_success');
       $(xP({
         orgId: org.id,
         slidesDisabled: !e,
@@ -5366,15 +5366,15 @@ export function $$sr0(e) {
     }
   }, 'slides_opt_out'));
   let tp = {
-    title: _$$t('settings_tab.section_header.other'),
+    title: getI18nString('settings_tab.section_header.other'),
     settings: []
   };
   if (isGovCluster() || tp.settings.push(jsx(T_, {
-    label: _$$t('settings_tab.audio_label'),
-    description: _$$t('settings_tab.audio_description'),
+    label: getI18nString('settings_tab.audio_label'),
+    description: getI18nString('settings_tab.audio_description'),
     isActive: !!org.voice_enabled,
     onToggle: e => {
-      let t = e ? _$$t('settings_tab.audio_enabled') : _$$t('settings_tab.audio_disabled');
+      let t = e ? getI18nString('settings_tab.audio_enabled') : getI18nString('settings_tab.audio_disabled');
       $(yo({
         payload: {
           voice_enabled: e
@@ -5382,12 +5382,12 @@ export function $$sr0(e) {
         successMessage: t
       }));
     }
-  }, 'audio')), C = getFeatureFlags().cooper ? _$$t('settings_tab.custom_templates_description.include_cooper') : _$$t('settings_tab.custom_templates_description.v2'), tp.settings.push(jsx(T_, {
-    label: _$$t('settings_tab.custom_templates_label'),
+  }, 'audio')), C = getFeatureFlags().cooper ? getI18nString('settings_tab.custom_templates_description.include_cooper') : getI18nString('settings_tab.custom_templates_description.v2'), tp.settings.push(jsx(T_, {
+    label: getI18nString('settings_tab.custom_templates_label'),
     description: C,
     isActive: !!org.are_custom_templates_allowed,
     onToggle: e => {
-      let t = e ? _$$t('settings_tab.custom_templates_enabled') : _$$t('settings_tab.custom_templates_disabled');
+      let t = e ? getI18nString('settings_tab.custom_templates_enabled') : getI18nString('settings_tab.custom_templates_disabled');
       $(yo({
         payload: {
           custom_templates_allowed: e
@@ -5396,39 +5396,39 @@ export function $$sr0(e) {
       }));
     }
   }, 'custom-templates')), eo && tp.settings.push(jsx(T_, {
-    label: _$$t('settings_tab.cursor_chat_label'),
-    description: _$$t('settings_tab.cursor_chat_description'),
+    label: getI18nString('settings_tab.cursor_chat_label'),
+    description: getI18nString('settings_tab.cursor_chat_description'),
     isActive: !org.cursor_chat_disabled,
     onToggle: e => {
       $(yo({
         payload: {
           cursor_chat_disabled: !e
         },
-        successMessage: e ? _$$t('settings_tab.enable_cursor_chat_success') : _$$t('settings_tab.disable_cursor_chat_success')
+        successMessage: e ? getI18nString('settings_tab.enable_cursor_chat_success') : getI18nString('settings_tab.disable_cursor_chat_success')
       }));
     }
   }, 'cursor-chat')), !isGovCluster() && org.community_profile_handle && tp.settings.push(jsx(T_, {
-    label: _$$t('settings_tab.community_file_publishing_label'),
-    description: _$$t('settings_tab.community_file_publishing_description'),
+    label: getI18nString('settings_tab.community_file_publishing_label'),
+    description: getI18nString('settings_tab.community_file_publishing_description'),
     isActive: !!org.cmty_publish_as_user_enabled,
     onToggle: e => {
       $(yo({
         payload: {
           cmty_publish_as_user_enabled: e
         },
-        successMessage: e ? _$$t('settings_tab.enable_community_file_publishing_success') : _$$t('settings_tab.disable_community_file_publishing_success')
+        successMessage: e ? getI18nString('settings_tab.enable_community_file_publishing_success') : getI18nString('settings_tab.disable_community_file_publishing_success')
       }));
     }
   }, 'community-file-publishing')), cg(orgSamlConfig) && tp.settings.push(jsx(x8, {
-    label: _$$t('settings_tab.member_metadata_label'),
-    description: _$$t('settings_tab.member_metadata_description'),
+    label: getI18nString('settings_tab.member_metadata_label'),
+    description: getI18nString('settings_tab.member_metadata_description'),
     currentValue: org.featured_scim_metadata ? du(org.featured_scim_metadata) : '',
     onClick: () => $(_$$to({
       type: tF
     }))
   }, 'member-metadata')), tp.settings.push(jsx(x8, {
-    label: _$$t('settings_tab.connected_apps'),
-    description: _$$t('settings_tab.connected_apps_description'),
+    label: getI18nString('settings_tab.connected_apps'),
+    description: getI18nString('settings_tab.connected_apps_description'),
     onClick: () => {
       $(_$$to({
         type: tZ,
@@ -5438,8 +5438,8 @@ export function $$sr0(e) {
       }));
     }
   }, 'authentication')), tp.settings.push(jsx(x8, {
-    label: _$$t('org_admin_settings.compliance_center_label'),
-    description: _$$t('org_admin_settings.compliance_center_description'),
+    label: getI18nString('org_admin_settings.compliance_center_label'),
+    description: getI18nString('org_admin_settings.compliance_center_description'),
     onClick: () => {
       let e = '/conveyor/sso';
       isGovCluster() && (e = 'https://compliance.figma.com');
@@ -5460,34 +5460,34 @@ export function $$sr0(e) {
       }));
     };
     tp.settings.push(jsx(x8, {
-      label: _$$t('org_admin_settings.enterprise_installer_label'),
-      description: _$$t('org_admin_settings.enterprise_installer_description'),
+      label: getI18nString('org_admin_settings.enterprise_installer_label'),
+      description: getI18nString('org_admin_settings.enterprise_installer_description'),
       onClick: () => e('win')
     }, 'enterprise-installer'));
     tp.settings.push(jsx(x8, {
-      label: _$$t('org_admin_settings.enterprise_installer_label_mac'),
-      description: _$$t('org_admin_settings.enterprise_installer_description_mac'),
+      label: getI18nString('org_admin_settings.enterprise_installer_label_mac'),
+      description: getI18nString('org_admin_settings.enterprise_installer_description_mac'),
       onClick: () => e('mac')
     }, 'enterprise-installer'));
   }
   J && !canSeeBillingAddressExp && tp.settings.push(jsx(x8, {
-    label: _$$t('settings_tab.vat_gst'),
-    description: _$$t('settings_tab.change_vat_gst_id'),
+    label: getI18nString('settings_tab.vat_gst'),
+    description: getI18nString('settings_tab.change_vat_gst_id'),
     onClick: () => Hq({
       org,
       dispatch: $
     })
   }));
   let tg = [jsx(x8, {
-    label: _$$t('settings_tab.delete_org_label'),
-    description: _$$t('settings_tab.delete_org_description'),
+    label: getI18nString('settings_tab.delete_org_label'),
+    description: getI18nString('settings_tab.delete_org_description'),
     onClick: () => $(_$$to({
       type: te
     }))
   }, 'delete-org')];
   org.domain_capture && tg.push(jsx(x8, {
-    label: _$$t('settings_tab.delete_user_label'),
-    description: _$$t('settings_tab.delete_user_description'),
+    label: getI18nString('settings_tab.delete_user_label'),
+    description: getI18nString('settings_tab.delete_user_description'),
     onClick: () => $(_$$to({
       type: tt
     }))
@@ -5495,7 +5495,7 @@ export function $$sr0(e) {
   let th = [isGovCluster() ? null : ew];
   eo && th.push(ek);
   org.k12_google_org ? th.push(eT, org.google_sso_only ? e9 : ta, tc, tp) : th.push(eT, e7, isGovCluster() ? {
-    title: _$$t('plan_settings.billing_section_header'),
+    title: getI18nString('plan_settings.billing_section_header'),
     description: jsx(Fragment, {}),
     settings: [td]
   } : ts, tc, t_, isGovCluster() || Q ? null : tm, eE.settings.length ? eE : null, tp);
@@ -5509,9 +5509,9 @@ export function $$sr0(e) {
       }, e.title)), !H && jsx('button', {
         className: jP,
         onClick: () => Y(!0),
-        children: _$$tx('settings_tab.show_more')
+        children: renderI18nText('settings_tab.show_more')
       }), H && jsx(Kz, {
-        title: _$$t('settings_tab.section_header.user_data'),
+        title: getI18nString('settings_tab.section_header.user_data'),
         settings: tg
       })]
     }), jsx('div', {
@@ -5529,7 +5529,7 @@ let sl = _$$nF((e, t, {
   } = t;
   let r = a.getMutation(I2);
   let l = e => {
-    n(_$$s2.error(_$$J(e, _$$t('payments.change_billing_contact_error')), 5e3));
+    n(_$$s2.error(_$$J(e, getI18nString('payments.change_billing_contact_error')), 5e3));
   };
   let o = async t => {
     await r({
@@ -5537,7 +5537,7 @@ let sl = _$$nF((e, t, {
       billingContacts: t,
       onRejected: l
     });
-    e.dispatch(_$$s2.flash(_$$t('org_admin_settings.billing_details.billing_contact_updated')));
+    e.dispatch(_$$s2.flash(getI18nString('org_admin_settings.billing_details.billing_contact_updated')));
   };
   n(_$$to({
     type: _$$E2,
@@ -5552,8 +5552,8 @@ export function $$so1() {
   return jsxs('div', {
     className: _$$s.flex.flexRow.itemsCenter.$,
     children: [jsx('span', {
-      'aria-label': _$$t('plan_settings.seat_upgrade_digests_tooltip'),
-      'data-tooltip': _$$t('plan_settings.seat_upgrade_digests_tooltip'),
+      'aria-label': getI18nString('plan_settings.seat_upgrade_digests_tooltip'),
+      'data-tooltip': getI18nString('plan_settings.seat_upgrade_digests_tooltip'),
       'data-tooltip-type': 'text',
       'className': _$$s.mr4.$,
       'children': jsx(In, {
@@ -5562,7 +5562,7 @@ export function $$so1() {
       })
     }), jsx(_$$E, {
       color: 'secondary',
-      children: _$$tx('settings_tab.disabled')
+      children: renderI18nText('settings_tab.disabled')
     })]
   });
 }
@@ -5570,7 +5570,7 @@ function sd(e) {
   let t = !e.canEnable && !e.setting;
   let a = t ? 'secondary' : void 0;
   let s = null;
-  t && (s = _$$t('settings_tab.ip_allowlist_domain_verification_tooltip'));
+  t && (s = getI18nString('settings_tab.ip_allowlist_domain_verification_tooltip'));
   return jsxs('div', {
     className: _$$s.flex.flexRow.itemsCenter.$,
     children: [t && jsx('span', {
@@ -5584,10 +5584,10 @@ function sd(e) {
       })
     }), e.setting ? jsx(_$$E, {
       color: a,
-      children: _$$tx('settings_tab.enabled')
+      children: renderI18nText('settings_tab.enabled')
     }) : jsx(_$$E, {
       color: a,
-      children: _$$tx('settings_tab.disabled')
+      children: renderI18nText('settings_tab.disabled')
     })]
   });
 }

@@ -1,6 +1,6 @@
 import { lQ } from "../905/934246";
 import { Ez5 } from "../figma_app/763686";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import s from "../vendor/781591";
 import { Mz } from "../vendor/925040";
 import { debugState } from "../905/407919";
@@ -21,7 +21,7 @@ export function $$_2({
   localComponents: i
 }) {
   let n = t.length > 0;
-  let r = i.filter((e) => e.status === E8.CURRENT).length > 0;
+  let r = i.filter(e => e.status === E8.CURRENT).length > 0;
   return e || n || r ? e && n && Ol(i) ? [{
     key: "UNPUBLISHING_ALL_COMPONENTS",
     data: {}
@@ -43,14 +43,14 @@ export async function $$A1({
       publishScope: t,
       hubFileId: i,
       hideModalOnPublishRequestFinish: !1,
-      ...zl.set(BT, {
-        onPublishSuccess: (e) => {
-          zl.set(BT, void 0);
+      ...atomStoreManager.set(BT, {
+        onPublishSuccess: e => {
+          atomStoreManager.set(BT, void 0);
           s(o()(e, "dispatch"));
         },
         onPublishProgress: lQ,
-        onPublishError: (e) => {
-          zl.set(BT, void 0);
+        onPublishError: e => {
+          atomStoreManager.set(BT, void 0);
           l(e);
         }
       })

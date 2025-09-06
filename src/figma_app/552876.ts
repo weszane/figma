@@ -3,14 +3,14 @@ import { useSelector } from "../vendor/514228";
 import { glU } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { debugState } from "../905/407919";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { f0 } from "../figma_app/707808";
 import { oz } from "../905/561485";
 export function $$u4() {
   return oz() && !!getFeatureFlags().bake;
 }
 export function $$p1(e) {
-  return !!$$u4() && "fullscreen" === e.view && e.editorType === nT.Figmake;
+  return !!$$u4() && "fullscreen" === e.view && e.editorType === FEditorType.Figmake;
 }
 export function $$_3() {
   let e = debugState.getState().selectedView;

@@ -10,7 +10,7 @@ import { Uz } from "../905/63728";
 import { Pt } from "../figma_app/806412";
 import { Point } from "../905/736624";
 import { S as _$$S } from "../905/177206";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { XE } from "../figma_app/91703";
 import { bA, _q } from "../905/668764";
 import { Lk } from "../figma_app/975811";
@@ -61,7 +61,7 @@ export function $$x1(e) {
   let P = getFeatureFlags().ce_tv_fpl_input ? jsxs(Fragment, {
     children: [jsx(_$$h, {
       htmlFor: "small-nudge-input",
-      children: tx("fullscreen.nudge.small_nudge")
+      children: renderI18nText("fullscreen.nudge.small_nudge")
     }), jsx(_$$bL, {
       children: jsx(D0, {
         id: "small-nudge-input",
@@ -75,7 +75,7 @@ export function $$x1(e) {
       })
     })]
   }) : jsx(Q7, {
-    ariaLabel: _$$t("fullscreen.nudge.small_nudge"),
+    ariaLabel: getI18nString("fullscreen.nudge.small_nudge"),
     className: _$$h2,
     formatter: x,
     property: r,
@@ -86,7 +86,7 @@ export function $$x1(e) {
   let D = getFeatureFlags().ce_tv_fpl_input ? jsxs(Fragment, {
     children: [jsx(_$$h, {
       htmlFor: "big-nudge-input",
-      children: tx("fullscreen.nudge.big_nudge")
+      children: renderI18nText("fullscreen.nudge.big_nudge")
     }), jsx(_$$bL, {
       children: jsx(D0, {
         id: "big-nudge-input",
@@ -100,7 +100,7 @@ export function $$x1(e) {
       })
     })]
   }) : jsx(Q7, {
-    ariaLabel: _$$t("fullscreen.nudge.big_nudge"),
+    ariaLabel: getI18nString("fullscreen.nudge.big_nudge"),
     className: _$$b,
     formatter: N,
     property: c,
@@ -110,10 +110,10 @@ export function $$x1(e) {
   });
   let k = jsxs(Fragment, {
     children: [jsx(cS, {
-      label: tx("fullscreen.nudge.small_nudge"),
+      label: renderI18nText("fullscreen.nudge.small_nudge"),
       input: P
     }), jsx(cS, {
-      label: tx("fullscreen.nudge.big_nudge"),
+      label: renderI18nText("fullscreen.nudge.big_nudge"),
       input: D
     })]
   });
@@ -125,7 +125,7 @@ export function $$x1(e) {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: _$$t("fullscreen.nudge.nudge_amount")
+          children: getI18nString("fullscreen.nudge.nudge_amount")
         })
       }), jsx(nB, {
         padding: {

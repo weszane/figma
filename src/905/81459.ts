@@ -3,13 +3,13 @@ import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { NC } from "../905/17179";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { subscribeAndAwaitData } from "../905/553831";
-import { $D } from "../905/11";
-import { xi } from "../905/714362";
+import { reportError } from "../905/11";
+import { logWarning } from "../905/714362";
 import { g as _$$g } from "../905/880308";
 import { d6, bJ } from "../figma_app/687776";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { gN } from "../figma_app/976345";
 import { nF } from "../905/350402";
 import { Ce } from "../905/156213";
@@ -54,7 +54,7 @@ let $$C6 = nF(async e => {
     e.dispatch($$O10({
       id: i,
       status: mO.FAILURE,
-      message: _$$t("fullscreen.file_import.unable_to_import")
+      message: getI18nString("fullscreen.file_import.unable_to_import")
     }));
     e.dispatch(U());
     return;
@@ -71,25 +71,25 @@ let $$C6 = nF(async e => {
       let e = N.name;
       switch (R) {
         case FFileType.WHITEBOARD:
-          return _$$t("fullscreen.file_import.team_name_is_at_the_fig_jam_file_limit", {
+          return getI18nString("fullscreen.file_import.team_name_is_at_the_fig_jam_file_limit", {
             teamName: e
           });
         case FFileType.SLIDES:
-          return _$$t("fullscreen.file_import.team_name_is_at_the_figma_slides_file_limit", {
+          return getI18nString("fullscreen.file_import.team_name_is_at_the_figma_slides_file_limit", {
             teamName: N.name
           });
         case FFileType.DESIGN:
-          return _$$t("fullscreen.file_import.team_name_is_at_the_figma_file_limit", {
+          return getI18nString("fullscreen.file_import.team_name_is_at_the_figma_file_limit", {
             teamName: e
           });
         case FFileType.SITES:
-          return _$$t("fullscreen.file_import.your_team_doesnt_have_permissions_to_import_sites_files");
+          return getI18nString("fullscreen.file_import.your_team_doesnt_have_permissions_to_import_sites_files");
         case FFileType.COOPER:
-          return _$$t("fullscreen.file_import.team_name_is_at_the_figma_buzz_file_limit", {
+          return getI18nString("fullscreen.file_import.team_name_is_at_the_figma_buzz_file_limit", {
             teamName: e
           });
         case FFileType.FIGMAKE:
-          return _$$t("fullscreen.file_import.team_name_is_at_the_figma_make_file_limit", {
+          return getI18nString("fullscreen.file_import.team_name_is_at_the_figma_make_file_limit", {
             teamName: e
           });
         default:
@@ -113,7 +113,7 @@ let $$C6 = nF(async e => {
       status: mO.FAILURE,
       message: t,
       cta: n ? {
-        text: _$$t("fullscreen.file_import.go_to_drafts"),
+        text: getI18nString("fullscreen.file_import.go_to_drafts"),
         action: () => {
           e.dispatch(gN(C));
         }
@@ -128,7 +128,7 @@ let $$C6 = nF(async e => {
     L = f6(e) ? "fig-zip" : "fig-kiwi";
   }
   let F = _$$g();
-  sx("File Import Begin", {
+  trackEventAnalytics("File Import Begin", {
     importId: F
   });
   o.timer.start();
@@ -168,7 +168,7 @@ let $$C6 = nF(async e => {
         fileKey: e,
         elapsedSeconds: o.timer.getElapsedTime() / 1e3
       };
-      sx("File Imported", t, {
+      trackEventAnalytics("File Imported", t, {
         forwardToDatadog: !0
       });
     }
@@ -178,12 +178,12 @@ let $$C6 = nF(async e => {
       e.dispatch($$O10({
         id: i,
         status: _$$F.hasCanceled() ? mO.CANCELED : mO.FAILURE,
-        message: t && t.message ? t.message + "" : _$$t("fullscreen.file_import.internal_error_please_try_again_later")
+        message: t && t.message ? t.message + "" : getI18nString("fullscreen.file_import.internal_error_please_try_again_later")
       }));
       let n = t.inferredFormat;
       n && (L = n);
       let r = t;
-      if (sx("File Imported", {
+      if (trackEventAnalytics("File Imported", {
         importId: F,
         extension: I,
         format: L,
@@ -193,7 +193,7 @@ let $$C6 = nF(async e => {
         teamId: D
       }, {
         forwardToDatadog: !0
-      }), r.imageUploadError && sx("File Import Image Upload Error", {
+      }), r.imageUploadError && trackEventAnalytics("File Import Image Upload Error", {
         extension: I,
         format: L,
         teamId: D
@@ -201,12 +201,12 @@ let $$C6 = nF(async e => {
         if (_$$F.hasCanceled()) return;
         if (!t.hasOwnProperty("reportError") || t.reportError) {
           let e = t.warnings;
-          if (e?.length > 0) for (let t of e) xi("import", t);
-          $D(_$$e.SCENEGRAPH_AND_SYNC, t.cause ? t.cause : t);
+          if (e?.length > 0) for (let t of e) logWarning("import", t);
+          reportError(_$$e.SCENEGRAPH_AND_SYNC, t.cause ? t.cause : t);
         }
       }
     } catch (e) {
-      $D(_$$e.SCENEGRAPH_AND_SYNC, e);
+      reportError(_$$e.SCENEGRAPH_AND_SYNC, e);
     } finally {
       e.dispatch(U());
     }
@@ -233,7 +233,7 @@ let $$F15 = nF(e => {
       t.add(r.slice(1));
     });
     let i = 1 === t.size ? Array.from(t)[0] : t.size > 1 ? "multiple" : "";
-    sx("File Import Cancelled", {
+    trackEventAnalytics("File Import Cancelled", {
       numFilesCancelled: e.queue.length,
       fileType: i
     }, {

@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { forwardRef, useCallback, useEffect, useState, useRef, useMemo, PureComponent, createRef, Component } from "react";
 import { parsePxInt } from "../figma_app/783094";
-import { Ay } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { QQ } from "../figma_app/808294";
 import { sW } from "../figma_app/49598";
 import { fu, $z } from "../figma_app/831799";
@@ -13,7 +13,7 @@ import { G4 } from "../figma_app/707808";
 import { Ho } from "../figma_app/878651";
 import { Dy } from "../figma_app/165422";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { sx, az } from "../905/449184";
+import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { Point } from "../905/736624";
 import { I as _$$I } from "../figma_app/4253";
 import { zS } from "../figma_app/471982";
@@ -35,7 +35,7 @@ import { p as _$$p } from "../905/991924";
 import { S as _$$S } from "../figma_app/420927";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { mT } from "../figma_app/976345";
 import { A as _$$A } from "../5132/237216";
@@ -50,7 +50,7 @@ import { m as _$$m } from "../905/80904";
 import { O as _$$O2 } from "../905/365108";
 import { V as _$$V } from "../905/604512";
 import { getFeatureFlags } from "../905/601108";
-import { eU as _$$eU } from "../figma_app/27355";
+import { atom } from "../figma_app/27355";
 import { Pt } from "../figma_app/806412";
 import { hY } from "../figma_app/349969";
 import { ur } from "../figma_app/632319";
@@ -83,10 +83,10 @@ _$$ex("preload_success", function () {
     className: _$$s.pr8.$,
     children: [jsx("div", {
       className: _$$s.colorTextTooltip.textBodyMediumStrong.$,
-      children: _$$t("proto.preload.loaded.tooltip.header")
+      children: getI18nString("proto.preload.loaded.tooltip.header")
     }), jsx("div", {
       className: _$$s.colorTextTooltipSecondary.$,
-      children: _$$t("proto.preload.loaded.tooltip.body")
+      children: getI18nString("proto.preload.loaded.tooltip.body")
     })]
   });
 });
@@ -97,18 +97,18 @@ _$$ex("preload_error", function ({
     className: _$$s.pr8.$,
     children: [jsx("div", {
       className: _$$s.colorTextTooltip.textBodyMediumStrong.$,
-      children: e ? _$$t("proto.preload.error.tooltip.header.slides") : _$$t("proto.preload.error.tooltip.header")
+      children: e ? getI18nString("proto.preload.error.tooltip.header.slides") : getI18nString("proto.preload.error.tooltip.header")
     }), jsx("div", {
       className: _$$s.colorTextTooltipSecondary.$,
-      children: _$$t("proto.preload.error.tooltip.body")
+      children: getI18nString("proto.preload.error.tooltip.body")
     })]
   });
 }, e => ({
   isSlides: "true" === e.getAttribute("data-tooltip-slides")
 }));
-_$$eU(!1);
-_$$eU("none");
-_$$eU(null);
+atom(!1);
+atom("none");
+atom(null);
 var el = (e => (e.NO_INTERNET = "No internet", e.DOWNLOADS_STOPPED = "Downloads stopped", e.DOWNLOADS_INCOMPLETE = "Incomplete downloads", e))(el || {});
 let ec = "PROTOTYPE_OPTIONS_MENU";
 let eu = "hub_file_viewer--viewerWrapper--UE0XU";
@@ -160,8 +160,8 @@ let ef = "hub_file_viewer--caret--LG-MD";
         svg: t ? _$$A4 : _$$A3,
         onClick: e,
         className: "hub_file_viewer--fullscreenIcon--gHWvt",
-        title: t ? _$$t("community.hub_file_viewer.collapse_file_preview") : _$$t("community.hub_file_viewer.expand_file_preview"),
-        ariaLabel: t ? _$$t("community.hub_file_viewer.collapse_file_preview") : _$$t("community.hub_file_viewer.expand_file_preview"),
+        title: t ? getI18nString("community.hub_file_viewer.collapse_file_preview") : getI18nString("community.hub_file_viewer.expand_file_preview"),
+        ariaLabel: t ? getI18nString("community.hub_file_viewer.collapse_file_preview") : getI18nString("community.hub_file_viewer.expand_file_preview"),
         role: "img",
         dataTestId: "hub-file-viewer-fullscreen-icon"
       })
@@ -175,7 +175,7 @@ let ef = "hub_file_viewer--caret--LG-MD";
         onClick: t,
         dataTestId: "community-get-free-preview-button",
         className: "hub_file_viewer--embedGetFreePreviewButton--sLwDl hub_file_viewer--_embedControl--g0n7j hub_file_viewer--_embedControlNoHover--npgKi text--fontPos11--2LvXf text--_fontBase--QdLsd",
-        children: tx("community.buyer.get_free_preview")
+        children: renderI18nText("community.buyer.get_free_preview")
       })
     });
   };
@@ -183,7 +183,7 @@ let ef = "hub_file_viewer--caret--LG-MD";
   function n(e, t, r, n) {
     let i = useCallback(r => n => {
       n?.stopPropagation();
-      sx("Hub File Viewer Zoom In", {
+      trackEventAnalytics("Hub File Viewer Zoom In", {
         hubFileId: e,
         source: r
       });
@@ -193,7 +193,7 @@ let ef = "hub_file_viewer--caret--LG-MD";
       adjustZoomInFactory: i,
       adjustZoomOutFactory: useCallback(r => n => {
         n?.stopPropagation();
-        sx("Hub File Viewer Zoom Out", {
+        trackEventAnalytics("Hub File Viewer Zoom Out", {
           hubFileId: e,
           source: r
         });
@@ -201,7 +201,7 @@ let ef = "hub_file_viewer--caret--LG-MD";
       }, [e, t]),
       setZoomFactory: useCallback((t, n) => i => {
         i?.stopPropagation();
-        sx("Hub File Viewer Set Zoom", {
+        trackEventAnalytics("Hub File Viewer Set Zoom", {
           hubFileId: e,
           scale: t,
           source: n
@@ -210,7 +210,7 @@ let ef = "hub_file_viewer--caret--LG-MD";
       }, [e, r]),
       resetZoomToFitCanvasContentFactory: useCallback(t => r => {
         r?.stopPropagation();
-        sx("Hub File Viewer Zoom To Fit", {
+        trackEventAnalytics("Hub File Viewer Zoom To Fit", {
           hubFileId: e,
           source: t
         });
@@ -233,14 +233,14 @@ let ef = "hub_file_viewer--caret--LG-MD";
     let l = e.pages.find(t => t.id === e.currentPageId);
     let d = l?.name || e.pages[0]?.name;
     let c = d ? jsx(Fragment, {
-      children: tx("community.hub_file_viewer.page_name", {
+      children: renderI18nText("community.hub_file_viewer.page_name", {
         pageHeader: jsx("span", {
           className: "hub_file_viewer--dropdownPagePrefix--iDLhr",
-          children: _$$t("community.hub_file_viewer.page")
+          children: getI18nString("community.hub_file_viewer.page")
         }),
         pageName: d
       })
-    }) : _$$t("community.hub_file_viewer.pages");
+    }) : getI18nString("community.hub_file_viewer.pages");
     return jsxs("div", {
       className: s ? "hub_file_viewer--embedPagesButtonActive--BGGfi hub_file_viewer--embedPagesButton--WkwkA hub_file_viewer--_embedControl--g0n7j hub_file_viewer--_embedControlNoHover--npgKi text--fontPos11--2LvXf text--_fontBase--QdLsd" : "hub_file_viewer--embedPagesButton--WkwkA hub_file_viewer--_embedControl--g0n7j hub_file_viewer--_embedControlNoHover--npgKi text--fontPos11--2LvXf text--_fontBase--QdLsd",
       role: "button",
@@ -263,8 +263,8 @@ let ef = "hub_file_viewer--caret--LG-MD";
         children: jsx(_$$B, {
           svg: _$$A2,
           className: ef,
-          title: _$$t("community.hub_file_viewer.view_file_pages"),
-          ariaLabel: _$$t("community.hub_file_viewer.view_file_pages"),
+          title: getI18nString("community.hub_file_viewer.view_file_pages"),
+          ariaLabel: getI18nString("community.hub_file_viewer.view_file_pages"),
           role: "img"
         })
       })]
@@ -277,7 +277,7 @@ let ef = "hub_file_viewer--caret--LG-MD";
       maxHeight: `${e.viewerHeight - 120}px`
     };
     let s = r => {
-      r && (e.setCurrentPageId(r), t(UU()), sx("Hub File Viewer Change Page", {
+      r && (e.setCurrentPageId(r), t(UU()), trackEventAnalytics("Hub File Viewer Change Page", {
         hubFileId: e.hubFile.id,
         pageId: r
       }));
@@ -310,11 +310,11 @@ let ef = "hub_file_viewer--caret--LG-MD";
     let c = d.toString().length;
     return jsxs(Fragment, {
       children: [jsx(_$$K, {
-        "aria-label": _$$t("fullscreen_actions.zoom-out"),
+        "aria-label": getI18nString("fullscreen_actions.zoom-out"),
         onClick: adjustZoomOutFactory("clickFromViewerButtons"),
         htmlAttributes: {
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": _$$t("fullscreen_actions.zoom-out")
+          "data-tooltip": getI18nString("fullscreen_actions.zoom-out")
         },
         children: jsx(_$$O, {})
       }), jsx(e.Divider, {}), jsxs("div", {
@@ -333,24 +333,24 @@ let ef = "hub_file_viewer--caret--LG-MD";
             type: s
           }));
         },
-        children: [tx("community.hub_file_viewer.zoom_percent", {
+        children: [renderI18nText("community.hub_file_viewer.zoom_percent", {
           zoomPercent: d
         }), jsx("div", {
           className: eg,
           children: jsx(_$$B, {
             svg: _$$A2,
             className: ef,
-            title: _$$t("community.hub_file_viewer.select_zoom_level"),
-            ariaLabel: _$$t("community.hub_file_viewer.select_zoom_level"),
+            title: getI18nString("community.hub_file_viewer.select_zoom_level"),
+            ariaLabel: getI18nString("community.hub_file_viewer.select_zoom_level"),
             role: "img"
           })
         })]
       }), jsx(e.Divider, {}), jsx(_$$K, {
-        "aria-label": _$$t("fullscreen_actions.zoom-in"),
+        "aria-label": getI18nString("fullscreen_actions.zoom-in"),
         onClick: adjustZoomInFactory("clickFromViewerButtons"),
         htmlAttributes: {
           "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": _$$t("fullscreen_actions.zoom-in")
+          "data-tooltip": getI18nString("fullscreen_actions.zoom-in")
         },
         children: jsx(_$$e, {})
       })]
@@ -387,7 +387,7 @@ let ef = "hub_file_viewer--caret--LG-MD";
       try {
         r = parseInt(t, 10);
       } catch (e) {}
-      r > 0 && (sx("Hub File Viewer User Input Zoom Set", {
+      r > 0 && (trackEventAnalytics("Hub File Viewer User Input Zoom Set", {
         hubFileId: e.id,
         source: "userInput",
         scale: r / 100
@@ -409,30 +409,30 @@ let ef = "hub_file_viewer--caret--LG-MD";
         })
       }), jsx(wv, {}), jsxs(c$, {
         onClick: adjustZoomInFactory("clickFromDropdown"),
-        children: [tx("community.hub_file_viewer.zoom_in"), jsx(_$$S, {
+        children: [renderI18nText("community.hub_file_viewer.zoom_in"), jsx(_$$S, {
           shortcut: "+",
           className: e_
         })]
       }), jsxs(c$, {
         onClick: adjustZoomOutFactory("clickFromDropdown"),
-        children: [tx("community.hub_file_viewer.zoom_out"), jsx(_$$S, {
+        children: [renderI18nText("community.hub_file_viewer.zoom_out"), jsx(_$$S, {
           shortcut: "-",
           className: e_
         })]
       }), jsxs(c$, {
         onClick: resetZoomToFitCanvasContentFactory("clickFromDropdown"),
-        children: [tx("community.hub_file_viewer.zoom_to_fit"), jsx(_$$S, {
+        children: [renderI18nText("community.hub_file_viewer.zoom_to_fit"), jsx(_$$S, {
           shortcut: "1",
           className: e_
         })]
       }), jsx(c$, {
         onClick: setZoomFactory(.5, "clickFromDropdown"),
-        children: tx("community.hub_file_viewer.zoom_to", {
+        children: renderI18nText("community.hub_file_viewer.zoom_to", {
           percent: "50%"
         })
       }), jsxs(c$, {
         onClick: setZoomFactory(1, "clickFromDropdown"),
-        children: [tx("community.hub_file_viewer.zoom_to", {
+        children: [renderI18nText("community.hub_file_viewer.zoom_to", {
           percent: "100%"
         }), jsx(_$$S, {
           shortcut: "0",
@@ -440,7 +440,7 @@ let ef = "hub_file_viewer--caret--LG-MD";
         })]
       }), jsx(c$, {
         onClick: setZoomFactory(2, "clickFromDropdown"),
-        children: tx("community.hub_file_viewer.zoom_to", {
+        children: renderI18nText("community.hub_file_viewer.zoom_to", {
           percent: "200%"
         })
       })]
@@ -464,15 +464,15 @@ let ef = "hub_file_viewer--caret--LG-MD";
       },
       children: jsxs("div", {
         className: r ? em : eh,
-        children: [tx("community.hub_file_viewer.zoom_percent", {
+        children: [renderI18nText("community.hub_file_viewer.zoom_percent", {
           zoomPercent: Math.round(100 * n)
         }), jsx("div", {
           className: eg,
           children: jsx(_$$B, {
             svg: _$$A2,
             className: ef,
-            title: _$$t("community.hub_file_viewer.select_zoom_level"),
-            ariaLabel: _$$t("community.hub_file_viewer.select_zoom_level"),
+            title: getI18nString("community.hub_file_viewer.select_zoom_level"),
+            ariaLabel: getI18nString("community.hub_file_viewer.select_zoom_level"),
             role: "img"
           })
         })]
@@ -507,7 +507,7 @@ let ef = "hub_file_viewer--caret--LG-MD";
         d(s);
         t(_$$F.clearAll());
         t(_$$F.enqueue({
-          message: _$$t("community.hub_file_viewer.zoom", {
+          message: getI18nString("community.hub_file_viewer.zoom", {
             percent: GP(s.scalingOptionId)
           })
         }));
@@ -579,10 +579,10 @@ let ef = "hub_file_viewer--caret--LG-MD";
           let t = l.slice(2).map(e => p(e));
           return [{
             disabled: !0,
-            displayText: _$$t("viewer.options_menu.recommended_scaling_options")
+            displayText: getI18nString("viewer.options_menu.recommended_scaling_options")
           }, ...e, {
             disabled: !0,
-            displayText: _$$t("viewer.options_menu.other_scaling_options")
+            displayText: getI18nString("viewer.options_menu.other_scaling_options")
           }, ...t];
         }
       }(t, o, Yu.DEFAULT, void 0, n, d),
@@ -774,7 +774,7 @@ function ex(e) {
   let B = useCallback(t => {
     let r;
     t?.stopPropagation();
-    sx("Hub File Viewer Toggle Fullscreen", {
+    trackEventAnalytics("Hub File Viewer Toggle Fullscreen", {
       hubFileId: e.hubFile.id,
       source: "click"
     });
@@ -909,11 +909,11 @@ function eW(e) {
     scrollToPan: e.isFullscreen,
     featureFlags: getFeatureFlags(),
     trackingSessionId: getInitialOptions().tracking_session_id || null,
-    bowser: Ay,
+    bowser: BrowserInfo,
     forceMobileOptimizations: null != parseQuery(_$$Ay.location.search)["mobile-optimizations"],
     deviceInfoByIdentifier: hY,
-    trackAnalyticsEvent: sx,
-    definedAnalyticsHandler: az,
+    trackAnalyticsEvent: trackEventAnalytics,
+    definedAnalyticsHandler: analyticsEventManager,
     appTimerStart: e => {
       "rendererDraw" === e && t.handleDocumentRenderStart();
     },
@@ -1042,7 +1042,7 @@ class eK extends PureComponent {
         });
       }, 200);
       this.contextViewEventTimeout = setTimeout(() => {
-        sx("Context Viewed", {
+        trackEventAnalytics("Context Viewed", {
           name: "hub-file-canvas-loaded"
         });
       }, 300);
@@ -1077,7 +1077,7 @@ class eK extends PureComponent {
       (this.state.isFocused || this.props.isFullscreen) && (RL(e) ? this.showPreviousFrame() : Hs(e) ? this.showNextFrame() : fz(e) && this.restartPrototype());
     };
     this.showNextFrame = () => {
-      sx("Hub File Viewer Show Next Frame", {
+      trackEventAnalytics("Hub File Viewer Show Next Frame", {
         hubFileId: this.props.hubFile.id,
         currentFrameIndex: this.props.currFrameIndex,
         source: "click"
@@ -1085,7 +1085,7 @@ class eK extends PureComponent {
       this.props.showNextFrame();
     };
     this.showPreviousFrame = () => {
-      sx("Hub File Viewer Show Previous Frame", {
+      trackEventAnalytics("Hub File Viewer Show Previous Frame", {
         hubFileId: this.props.hubFile.id,
         currentFrameIndex: this.props.currFrameIndex,
         source: "click"
@@ -1093,7 +1093,7 @@ class eK extends PureComponent {
       this.props.showPreviousFrame();
     };
     this.restartPrototype = () => {
-      sx("Hub File Viewer Restart Prototype", {
+      trackEventAnalytics("Hub File Viewer Restart Prototype", {
         hubFileId: this.props.hubFile.id,
         currentFrameIndex: this.props.currFrameIndex,
         source: "click"
@@ -1366,7 +1366,7 @@ export class $$eJ0 extends Component {
       bottom: -(window.innerHeight - e$ - n.bottom),
       zIndex: Zo
     } : {};
-    let s = this.state.embedLoaded ? 2 === t ? Ay.safari ? "hub_file_detail_view--iframeContainerFullscreenSafari--x9JRk hub_file_detail_view--iframeContainerFullscreen--Itum1 hub_file_detail_view--iframeContainer---uQYN" : "hub_file_detail_view--iframeContainerFullscreen--Itum1 hub_file_detail_view--iframeContainer---uQYN" : "hub_file_detail_view--iframeContainer---uQYN" : "hub_file_detail_view--iframeContainerLoading--Uch-h hub_file_detail_view--iframeContainer---uQYN";
+    let s = this.state.embedLoaded ? 2 === t ? BrowserInfo.safari ? "hub_file_detail_view--iframeContainerFullscreenSafari--x9JRk hub_file_detail_view--iframeContainerFullscreen--Itum1 hub_file_detail_view--iframeContainer---uQYN" : "hub_file_detail_view--iframeContainerFullscreen--Itum1 hub_file_detail_view--iframeContainer---uQYN" : "hub_file_detail_view--iframeContainer---uQYN" : "hub_file_detail_view--iframeContainerLoading--Uch-h hub_file_detail_view--iframeContainer---uQYN";
     let l = {
       height: "100%",
       visibility: this.state.embedLoaded ? "visible" : "hidden",

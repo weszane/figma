@@ -4,7 +4,7 @@ import { z } from "../9410/836234";
 import { Ez5, glU } from "../figma_app/763686";
 import { U } from "../figma_app/901889";
 import { J as _$$J } from "../1577/181415";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { AS } from "../905/156213";
 import { ut } from "../figma_app/84367";
 import { Ib } from "../905/129884";
@@ -18,7 +18,7 @@ export function $$m1() {
   return {
     expanded: t,
     icon: z,
-    label: _$$t("fullscreen.toolbar.missing_fonts"),
+    label: getI18nString("fullscreen.toolbar.missing_fonts"),
     onClick: () => {
       t ? l(AS()) : (r("missing_fonts_button_clicked"), glU.findMissingFontsAndShowPopover());
     },
@@ -36,7 +36,7 @@ export function $$f0({
   return shouldShow ? jsx(_$$J, {
     onClick,
     recordingKey: "toolbarView.missingFontsButton",
-    "aria-label": _$$t("fullscreen.toolbar.missing_fonts"),
+    "aria-label": getI18nString("fullscreen.toolbar.missing_fonts"),
     htmlAttributes: {
       "data-tooltip": label,
       "data-tooltip-type": Ib.TEXT,

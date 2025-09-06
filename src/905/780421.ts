@@ -4,7 +4,7 @@ import { $n } from "../905/521428";
 import { parsePxInt } from "../figma_app/783094";
 import { _A, W2 } from "../figma_app/814196";
 import { Point } from "../905/736624";
-import { t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { Z1 } from "../figma_app/91703";
 import { Y5 } from "../figma_app/455680";
 import { N } from "../figma_app/240060";
@@ -32,7 +32,7 @@ export class $$f0 extends PureComponent {
   render() {
     return jsx(Xj, {
       initialPosition: this.initialPosition,
-      title: t("desktop_open_views.open_in_desktop_from_now_on_modal.title"),
+      title: getI18nString("desktop_open_views.open_in_desktop_from_now_on_modal.title"),
       headerSize: "small",
       dragHeaderOnly: !0,
       onClose: this.onClose,
@@ -40,16 +40,16 @@ export class $$f0 extends PureComponent {
         className: "open_desktop_app_from_now_on_modal--container--ucP3r",
         children: [jsx("div", {
           className: "open_desktop_app_from_now_on_modal--text--BP9St",
-          children: tx("desktop_open_views.open_in_desktop_from_now_on_modal.preferences_message")
+          children: renderI18nText("desktop_open_views.open_in_desktop_from_now_on_modal.preferences_message")
         }), jsxs("div", {
           className: "open_desktop_app_from_now_on_modal--buttonRow--gtV4g",
           children: [jsx($n, {
             variant: "secondary",
             onClick: this.onClose,
-            children: tx("desktop_open_views.modal.dismiss_button")
+            children: renderI18nText("desktop_open_views.modal.dismiss_button")
           }), jsx($n, {
             onClick: this.onAlwaysClick,
-            children: tx("desktop_open_views.open_in_desktop_from_now_on_modal.always_open_in_app_button")
+            children: renderI18nText("desktop_open_views.open_in_desktop_from_now_on_modal.always_open_in_app_button")
           })]
         })]
       })

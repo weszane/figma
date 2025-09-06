@@ -1,6 +1,6 @@
 import { useSelector } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
-import { eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 export function $$s0() {
   let e = useSelector(e => e.plans);
   let t = useSelector(e => e.openFile);
@@ -14,7 +14,7 @@ export function $$o2(e) {
   return n?.is_dev_mode_mcp_disabled === !0;
 }
 export function $$l1() {
-  return !!(eD?.hasFeature("addMcpWrites") && getFeatureFlags().dt_mcp_write_assets_locally);
+  return !!(desktopAPIInstance?.hasFeature("addMcpWrites") && getFeatureFlags().dt_mcp_write_assets_locally);
 }
 export const $k = $$s0;
 export const As = $$l1;

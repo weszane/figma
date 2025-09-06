@@ -1,10 +1,10 @@
 import { throwTypeError } from "../figma_app/465776";
 import { K } from "../905/807535";
-import { t } from "../905/303541";
-import { RM } from "../905/441038";
+import { getI18nString } from "../905/303541";
+import { GroupType } from "../905/441038";
 import { J7 } from "../figma_app/650409";
 export function $$l0(e) {
-  if (e === RM.MEMBERS) return t("license_group_admin_tab.members");
+  if (e === GroupType.MEMBERS) return getI18nString("license_group_admin_tab.members");
   throwTypeError(e);
 }
 let $$d1 = "originTab";

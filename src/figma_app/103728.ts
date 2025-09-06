@@ -1,5 +1,5 @@
 import { jsx, Fragment } from "react/jsx-runtime";
-import { eU, zl, md } from "../figma_app/27355";
+import { atom, atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
 import { useCallback } from "react";
 import { qB } from "../905/862321";
 import { B } from "../905/714743";
@@ -62,12 +62,12 @@ function _({
     })
   });
 }
-let h = eU(null);
+let h = atom(null);
 export function $$m1() {
-  zl.set(h, null);
+  atomStoreManager.set(h, null);
 }
 export function $$g0() {
-  let e = md(h);
+  let e = useAtomWithSubscription(h);
   if (null === e) return jsx(Fragment, {});
   let {
     type,

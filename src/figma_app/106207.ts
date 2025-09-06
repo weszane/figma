@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { hKj, zkO, glU } from "../figma_app/763686";
 import { l7 } from "../905/189185";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { Ay } from "../905/612521";
 import { J as _$$J } from "../905/931050";
 import { r as _$$r } from "../905/520829";
-import { jk } from "../905/609396";
+import { PerfTimer } from "../905/609396";
 import { XHR } from "../905/910117";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { nF } from "../905/350402";
 import { Cx, yH } from "../figma_app/714946";
@@ -98,13 +98,13 @@ export async function $$U2({
   isPreview: o = !1,
   triggeredFrom: d
 }) {
-  let c = new jk(`template_insert.${d}`, {
+  let c = new PerfTimer(`template_insert.${d}`, {
     key: r ?? ""
   });
   c.start();
   let u = e => {
     let t = c.stop();
-    sx(e, {
+    trackEventAnalytics(e, {
       elapsedMs: t,
       triggeredFrom: d,
       isPreview: o
@@ -135,7 +135,7 @@ export async function $$U2({
     });
   } catch (e) {
     t(_$$F.enqueue({
-      message: _$$t("whiteboard.inserts.insert_template_failed_v2"),
+      message: getI18nString("whiteboard.inserts.insert_template_failed_v2"),
       error: !0
     }));
     a && a();
@@ -278,7 +278,7 @@ async function W({
   }).catch(() => {
     let t = {
       error: !0,
-      message: _$$t("community.actions.failed_to_create_a_new_file_from_hub_file_name", {
+      message: getI18nString("community.actions.failed_to_create_a_new_file_from_hub_file_name", {
         hubFileName: i
       })
     };

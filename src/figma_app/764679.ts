@@ -4,11 +4,11 @@ import { useDispatch } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { getFeatureFlags } from "../905/601108";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { h as _$$h } from "../905/207101";
 import { y1, w4 } from "../905/445814";
 import { B } from "../905/714743";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { AG } from "../figma_app/999312";
 import { Jm } from "../figma_app/387599";
 import { qD } from "../figma_app/471982";
@@ -21,7 +21,7 @@ import { FFileType, FOrganizationLevelType } from "../figma_app/191312";
 import { T5 } from "../figma_app/465071";
 import { Rt, uF } from "../figma_app/300692";
 import { zF } from "../figma_app/45218";
-import { wN, nT } from "../figma_app/53721";
+import { mapFileTypeToEditorType, FEditorType } from "../figma_app/53721";
 import { FW, Pe } from "../figma_app/155287";
 import { C as _$$C } from "../905/180";
 import { noop } from "../905/834956";
@@ -32,7 +32,7 @@ import { t as _$$t2, Z3, y7, CA, dD, Dh, Dr, d1, iM, K1, Yr, pz, qN, _3 } from "
 import { A as _$$A } from "../5724/930602";
 import { A as _$$A2 } from "../1617/954184";
 export function $$M2(e, t, r, n) {
-  sx("extension_opened_from_community", {
+  trackEventAnalytics("extension_opened_from_community", {
     extension_id: e,
     file_type: t,
     editor_type: r,
@@ -72,7 +72,7 @@ function j(e) {
   });
 }
 function U(e) {
-  let t = e.fileName ? e.fileName : e.playgroundFile ? _$$t("community.using.playground_file") : e.fileIconType === y1.WHITEBOARD ? _$$t("community.using.figjam_board") : _$$t("community.using.figma_file");
+  let t = e.fileName ? e.fileName : e.playgroundFile ? getI18nString("community.using.playground_file") : e.fileIconType === y1.WHITEBOARD ? getI18nString("community.using.figjam_board") : getI18nString("community.using.figma_file");
   return jsx(j, {
     onClick: e.onClick,
     "data-testid": e.dataTestId,
@@ -91,22 +91,22 @@ export function $$B0(e) {
   let r = jsx(dn, {
     editorType: [e.editorType]
   });
-  if (e.fileName) t = e.fileName;else if (e.playgroundFile) t = _$$t("community.using.playground_file");else switch (e.editorType) {
+  if (e.fileName) t = e.fileName;else if (e.playgroundFile) t = getI18nString("community.using.playground_file");else switch (e.editorType) {
     case FW.FIGMA:
-      t = _$$t("community.duplicate.open_in_figma");
+      t = getI18nString("community.duplicate.open_in_figma");
       break;
     case FW.FIGJAM:
-      t = _$$t("community.duplicate.open_in_figjam");
+      t = getI18nString("community.duplicate.open_in_figjam");
       break;
     case FW.DEV:
     case FW.INSPECT:
-      t = _$$t("community.detail_view.plugin_open_devmode");
+      t = getI18nString("community.detail_view.plugin_open_devmode");
       break;
     case FW.SLIDES:
-      t = _$$t("community.detail_view.plugin_open_slides");
+      t = getI18nString("community.detail_view.plugin_open_slides");
       break;
     case FW.BUZZ:
-      t = _$$t("community.detail_view.plugin_open_buzz");
+      t = getI18nString("community.detail_view.plugin_open_buzz");
     case FW.SITES:
   }
   return jsx("button", {
@@ -160,10 +160,10 @@ function G(e) {
     }));
   };
   let p = e => {
-    $$M2(resource.id, "existing_file", wN(e.editor_type), d);
+    $$M2(resource.id, "existing_file", mapFileTypeToEditorType(e.editor_type), d);
     t(aI({
       resource,
-      fullscreenEditorType: e.editor_type === FFileType.DESIGN && Pe(editorTypes) ? nT.DevHandoff : wN(e.editor_type),
+      fullscreenEditorType: e.editor_type === FFileType.DESIGN && Pe(editorTypes) ? FEditorType.DevHandoff : mapFileTypeToEditorType(e.editor_type),
       fileKey: e.key,
       userId: e.user_id
     }));
@@ -171,7 +171,7 @@ function G(e) {
   return files?.length === 0 ? null : jsxs(Fragment, {
     children: [jsx("div", {
       className: Dh,
-      children: tx("community.detail_view.recent_files")
+      children: renderI18nText("community.detail_view.recent_files")
     }), jsx("div", {
       className: Dr,
       children: files ? files.map(e => jsx(U, {
@@ -219,7 +219,7 @@ function V({
   return jsx(j, {
     onClick: () => {
       if (!e) {
-        let e = !!(o.playground_file_version_id || r === nT.DevHandoff);
+        let e = !!(o.playground_file_version_id || r === FEditorType.DevHandoff);
         $$M2(i.id, e ? "playground" : "new_file", r, l);
         s(oB());
         let t = () => {
@@ -258,7 +258,7 @@ export function $$H1(e, t, r) {
           extensionId: e.id,
           isWidget: !!e.is_widget
         });
-        sx("recent_files_for_plugins_loaded", {
+        trackEventAnalytics("recent_files_for_plugins_loaded", {
           response_count: t.data.meta.length,
           extension_id: e.id,
           searchSessionId: A
@@ -268,44 +268,44 @@ export function $$H1(e, t, r) {
     });
     let D = uF(e);
     let k = D.manifest.editorType?.sort() ?? [];
-    let j = !!D.playground_file_version_id || r === nT.DevHandoff;
+    let j = !!D.playground_file_version_id || r === FEditorType.DevHandoff;
     let B = Array.from(new Set(k.map(e => {
       switch (e) {
         case FW.FIGMA:
         case FW.DEV:
         case FW.INSPECT:
-          return r === nT.DevHandoff ? nT.DevHandoff : nT.Design;
+          return r === FEditorType.DevHandoff ? FEditorType.DevHandoff : FEditorType.Design;
         case FW.FIGJAM:
-          return h ? null : nT.Whiteboard;
+          return h ? null : FEditorType.Whiteboard;
         case FW.SLIDES:
-          return nT.Slides;
+          return FEditorType.Slides;
         case FW.SITES:
           return null;
         case FW.BUZZ:
-          return nT.Cooper;
+          return FEditorType.Cooper;
         default:
           throwTypeError(e);
       }
     }))).filter(e => null != e);
     let H = B.map(t => ({
-      displayText: _$$t("community.using.new_file"),
+      displayText: getI18nString("community.using.new_file"),
       preventDismissOnSelected: !0,
       render: () => jsx(U, {
         fileIconType: function (e) {
           switch (e) {
-            case nT.Design:
+            case FEditorType.Design:
               return y1.DESIGN;
-            case nT.Whiteboard:
+            case FEditorType.Whiteboard:
               return y1.WHITEBOARD;
-            case nT.DevHandoff:
+            case FEditorType.DevHandoff:
               return y1.DESIGN;
-            case nT.Slides:
+            case FEditorType.Slides:
               return y1.SLIDES;
-            case nT.Cooper:
+            case FEditorType.Cooper:
               return getFeatureFlags().buzz_plugins_publishing ? y1.COOPER : y1.DESIGN;
-            case nT.Sites:
-            case nT.Figmake:
-            case nT.Illustration:
+            case FEditorType.Sites:
+            case FEditorType.Figmake:
+            case FEditorType.Illustration:
               return y1.DESIGN;
             default:
               throwTypeError(e);
@@ -319,24 +319,24 @@ export function $$H1(e, t, r) {
       })
     }));
     let z = {
-      displayText: _$$t("community.using.new_file"),
+      displayText: getI18nString("community.using.new_file"),
       className: pz,
       preventDismissOnSelected: !0,
       render: () => jsx(V, {
         hasSecondaryDropdown: H.length > 1,
-        text: _$$t("community.using.new_file"),
+        text: getI18nString("community.using.new_file"),
         primaryFullscreenEditorType: r,
         resource: e
       }),
       children: H.length > 1 ? H : void 0
     };
     let W = {
-      displayText: _$$t("community.using.playground_file"),
+      displayText: getI18nString("community.using.playground_file"),
       className: pz,
       preventDismissOnSelected: !0,
       render: () => jsx(V, {
         hasSecondaryDropdown: !1,
-        text: _$$t("community.using.playground_file"),
+        text: getI18nString("community.using.playground_file"),
         primaryFullscreenEditorType: r,
         resource: e
       })

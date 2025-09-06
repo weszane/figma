@@ -1,7 +1,7 @@
 import { assert, assertNotNullish, throwTypeError } from "../figma_app/465776";
 import { X3B } from "../figma_app/763686";
 import { fn, sH } from "../905/871411";
-import { um, zl } from "../figma_app/27355";
+import { um, atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { Y5 } from "../figma_app/455680";
 import { tJ } from "../figma_app/741237";
@@ -76,7 +76,7 @@ let $$S1 = um(T, (e, t) => {
         } = t.payload;
         _$$A.navigateTo(requestedNodeId);
         _$$A.notifyWasModalOpenedSinceViewerLoaded(!0);
-        zl.set(yw, !0);
+        atomStoreManager.set(yw, !0);
         let l = sceneGraph.get(requestedNodeId);
         assert(!!l, "expected selectedNode to exist");
         let d = hF(e.sizeInfo, !1, e.showDeviceFrameEnabled, requestedNodeId, sceneGraph);
@@ -122,7 +122,7 @@ let $$S1 = um(T, (e, t) => {
         };
         _$$A.navigateTo(requestedNodeId);
         _$$A.notifyWasModalOpenedSinceViewerLoaded(!0);
-        zl.set(yw, !0);
+        atomStoreManager.set(yw, !0);
         let d = sceneGraph.get(requestedNodeId);
         assert(!!d, "expected selectedNode to exist");
         let u = hF(e.sizeInfo, !1, e.showDeviceFrameEnabled, requestedNodeId, sceneGraph);

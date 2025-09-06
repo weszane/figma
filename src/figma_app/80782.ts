@@ -11,7 +11,7 @@ import { Ay } from "../905/612521";
 import { Rs } from "../figma_app/288654";
 import { ms, c$ } from "../figma_app/236327";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx, t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { S as _$$S } from "../figma_app/11182";
 import { oB } from "../905/929976";
 import { Cu } from "../figma_app/314264";
@@ -74,7 +74,7 @@ function k({
           url: duplicateLink
         }));
       },
-      children: tx("browse_templates_modal.context_menu.copy_link")
+      children: renderI18nText("browse_templates_modal.context_menu.copy_link")
     }), viewSourceFileUrl && d && jsx(c$, {
       onClick: () => {
         r(oB());
@@ -87,7 +87,7 @@ function k({
         verticalAlignItems: "center",
         spacing: 8,
         children: [jsx("span", {
-          children: tx("browse_templates_modal.context_menu.view_original_file")
+          children: renderI18nText("browse_templates_modal.context_menu.view_original_file")
         }), jsx("span", {
           className: _$$s.$$if("loading" !== c.status, _$$s.invisible).$,
           children: jsx(_$$k, {})
@@ -139,7 +139,7 @@ export function $$M0(e) {
       bottomRow: jsx(Wf.FullMetadata, {
         name,
         publishers,
-        hoverText: e.onPreview ? t("browse_templates_modal.view_details") : void 0,
+        hoverText: e.onPreview ? getI18nString("browse_templates_modal.view_details") : void 0,
         onClick: e.onPreview || lQ
       })
     }), jsx($$D6, {
@@ -178,7 +178,7 @@ export function $$j7({
       }, "cta_clicked");
     },
     variant: "secondary",
-    children: tx("browse_templates_modal_content.see_more_in_community")
+    children: renderI18nText("browse_templates_modal_content.see_more_in_community")
   });
 }
 function U() {

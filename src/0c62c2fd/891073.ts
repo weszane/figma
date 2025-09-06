@@ -5,7 +5,7 @@ import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { F } from "../905/302958";
 import { Lo } from "../905/156213";
 import { fu } from "../figma_app/831799";
@@ -27,11 +27,11 @@ export function $$f0(e) {
       id: x
     }).then(() => {
       g(F.enqueue({
-        message: t("revoke_transfer_modal.visual_bell.transfer_revoked")
+        message: getI18nString("revoke_transfer_modal.visual_bell.transfer_revoked")
       }));
     }, e => {
       g(F.enqueue({
-        message: t("revoke_transfer_modal.visual_bell.something_went_wrong"),
+        message: getI18nString("revoke_transfer_modal.visual_bell.something_went_wrong"),
         error: !0
       }));
     });
@@ -47,32 +47,32 @@ export function $$f0(e) {
       children: jsxs(vo, {
         children: [jsx(Y9, {
           children: jsx(hE, {
-            children: t("revoke_transfer_modal.header_title")
+            children: getI18nString("revoke_transfer_modal.header_title")
           })
         }), jsxs(nB, {
           scrolling: "none",
           children: [jsx("div", {
             className: _$$s.py8.$,
-            children: isTransferTeam ? tx("revoke_transfer_modal.transfer_details_team", {
+            children: isTransferTeam ? renderI18nText("revoke_transfer_modal.transfer_details_team", {
               sourceUserEmail: b,
               destinationUserEmail: v
-            }) : y ? tx("revoke_transfer_modal.transfer_copy_details", {
+            }) : y ? renderI18nText("revoke_transfer_modal.transfer_copy_details", {
               sourceUserEmail: b,
               destinationUserEmail: v
-            }) : tx("revoke_transfer_modal.transfer_details", {
+            }) : renderI18nText("revoke_transfer_modal.transfer_details", {
               sourceUserEmail: b,
               destinationUserEmail: v
             })
           }), jsx("div", {
             className: _$$s.py8.$,
-            children: tx("revoke_transfer_modal.function_explanation")
+            children: renderI18nText("revoke_transfer_modal.function_explanation")
           })]
         }), jsx(wi, {
           children: jsxs(jk, {
             children: [jsx($n, {
               variant: "secondary",
               onClick: e.onClose,
-              children: t("revoke_transfer_modal.go_back")
+              children: getI18nString("revoke_transfer_modal.go_back")
             }), jsx($n, {
               variant: "destructive",
               onClick: () => {
@@ -80,7 +80,7 @@ export function $$f0(e) {
                 g(Lo());
               },
               disabled: !canRevokeProjectTransfer,
-              children: t("revoke_transfer_modal.revoke")
+              children: getI18nString("revoke_transfer_modal.revoke")
             })]
           })
         })]

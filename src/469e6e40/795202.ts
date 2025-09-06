@@ -18,7 +18,7 @@ import { U5 } from "../figma_app/336853";
 import { J0, oU } from "../figma_app/967319";
 import { Ft } from "../figma_app/707808";
 import { m2 } from "../figma_app/858344";
-import { O as _$$O } from "../905/247093";
+import { UNASSIGNED } from "../905/247093";
 import { z6 } from "../figma_app/805373";
 import { oA } from "../905/723791";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -28,7 +28,7 @@ import { w_ } from "../figma_app/482728";
 import { getFeatureFlags } from "../905/601108";
 import A from "classnames";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { P as _$$P } from "../469e6e40/816817";
 import { s as _$$s2 } from "../469e6e40/993242";
 import { sJ } from "../469e6e40/485925";
@@ -53,14 +53,14 @@ function F(e) {
   }) : t;
   let r = [jsx("div", {
     className: _$$s.pl16.flex.gap4.pt16.$,
-    children: tx("workspace_admin_tab.public_sharing_setting", {
+    children: renderI18nText("workspace_admin_tab.public_sharing_setting", {
       settingComponent: a
     })
   }, 2)];
   s && r.push(s);
   getFeatureFlags().plan_level_file_export_controls && r.push(jsx("div", {
     className: _$$s.pl16.flex.gap4.pt8.$,
-    children: tx("workspace_admin_tab.export_controls_setting", {
+    children: renderI18nText("workspace_admin_tab.export_controls_setting", {
       settingComponent: i
     })
   }, 2));
@@ -71,12 +71,12 @@ function F(e) {
         dataTestId: "workspace-settings-banner",
         color: _$$S.PLAIN,
         padding: 8,
-        text: tx("workspace_admin_tab.workspace_settings_banner")
+        text: renderI18nText("workspace_admin_tab.workspace_settings_banner")
       })
     }), jsx("div", {
       className: "settings_section--settingsWrapper---d2uY settings_section--settingsWrapper--jaCzz text--fontPos11--2LvXf text--_fontBase--QdLsd",
       children: jsx(Kz, {
-        title: _$$t("settings_tab.section_header.external_access"),
+        title: getI18nString("settings_tab.section_header.external_access"),
         settings: r
       })
     })]
@@ -87,7 +87,7 @@ function q(e) {
     initialMaxDuration,
     initialIsTimeMeasuredInDays
   } = sJ(parseInt(e.expiration));
-  let s = tx(initialIsTimeMeasuredInDays ? "workspace_admin_tab.public_link_sharing_expiration_setting.days" : "workspace_admin_tab.public_link_sharing_expiration_setting.hours", {
+  let s = renderI18nText(initialIsTimeMeasuredInDays ? "workspace_admin_tab.public_link_sharing_expiration_setting.days" : "workspace_admin_tab.public_link_sharing_expiration_setting.hours", {
     time: initialMaxDuration
   });
   return jsx("div", {
@@ -175,7 +175,7 @@ function G({
       });
       break;
     case m2.TEAMS:
-      let U = E.teamsTabViewingUnassigned ? _$$O : e;
+      let U = E.teamsTabViewingUnassigned ? UNASSIGNED : e;
       D = jsx(_$$G, {
         org: a,
         dropdownShown: g,

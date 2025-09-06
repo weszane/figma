@@ -1,6 +1,6 @@
 import { yT } from "../figma_app/492908";
 import { getFeatureFlags } from "../905/601108";
-import { aR, Yb } from "../figma_app/778880";
+import { isIOSUA, isFigmaMobileWithoutTripleTaps } from "../figma_app/778880";
 import { yJ, c3, Yp, bE } from "../figma_app/78808";
 import { ru } from "../905/879323";
 import { ER } from "../905/466026";
@@ -9,8 +9,8 @@ import { qNg, m0h, SMQ, n8j } from "../figma_app/43951";
 import { H } from "../905/715533";
 import { fJ, aj, w7, Ut } from "../905/25169";
 function m(e) {
-  let t = aR && e.getState().selectedView?.view === "prototype";
-  return Yb() || t;
+  let t = isIOSUA && e.getState().selectedView?.view === "prototype";
+  return isFigmaMobileWithoutTripleTaps() || t;
 }
 export function $$h0(e, t) {
   if (!t.file || !t.file.library_key) return;

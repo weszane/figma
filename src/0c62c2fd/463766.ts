@@ -15,7 +15,7 @@ import { getPermissionsStateMemoized } from "../figma_app/642025";
 import { S2, px, j_ } from "../figma_app/465071";
 import { vS } from "../figma_app/846003";
 import { J7 } from "../figma_app/650409";
-import { Iv } from "../905/548208";
+import { DashboardSections } from "../905/548208";
 import { o0 } from "../905/844131";
 import { l as _$$l } from "../4452/447644";
 import { nF, lF } from "../4452/710166";
@@ -54,7 +54,7 @@ export function $$T0() {
   })) : e(sf({
     view: "teamAdminConsole",
     teamId: t.data.key.parentId ?? "",
-    teamAdminConsoleViewTab: Iv.DASHBOARD
+    teamAdminConsoleViewTab: DashboardSections.DASHBOARD
   }))), jsx(_$$r, {
     containerClass: nF,
     scrollableContainerClass: lF,

@@ -7,10 +7,10 @@ import { mergeRefs } from "../figma_app/706870";
 import { A as _$$A } from "../vendor/850789";
 import { h as _$$h, f as _$$f } from "../905/693155";
 import { conditionalFeatureFlag } from "../figma_app/169182";
-import { Xb } from "../figma_app/778880";
+import { isAnyMobile } from "../figma_app/778880";
 import { Yx } from "../figma_app/930338";
 import { tH } from "../905/751457";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { mC } from "../905/193529";
 import { e as _$$e } from "../905/810168";
@@ -19,7 +19,7 @@ import { UK } from "../figma_app/740163";
 import { gf } from "../figma_app/682945";
 import { QZ, _X } from "../figma_app/62612";
 import { ut, lu, J2 } from "../figma_app/84367";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { lQ } from "../905/934246";
 import { A as _$$A2 } from "../vendor/90566";
 import { c1 } from "../figma_app/357047";
@@ -28,7 +28,7 @@ import { Td } from "../905/595131";
 import { EO, q4, dl, xR, U3, sh, qJ, ZG, it } from "../figma_app/536669";
 import { AlE, yGz, Zbk, Ez5, r6o, NLJ, VDs, glU, Egt, CUU, UNF, Sie, m1T } from "../figma_app/763686";
 import { c2 } from "../905/382883";
-import { b as _$$b } from "../905/690073";
+import { EventEmitter } from "../905/690073";
 import { isNotNullish } from "../figma_app/95419";
 import { debugState } from "../905/407919";
 import { Fk, wA as _$$wA } from "../figma_app/167249";
@@ -39,7 +39,7 @@ import { vF } from "../figma_app/290870";
 import { a0, RG, rs } from "../figma_app/440994";
 import { throwTypeError } from "../figma_app/465776";
 import { s as _$$s } from "../905/583953";
-import { R as _$$R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { Z as _$$Z } from "../905/104740";
 import { g as _$$g } from "../905/88169";
 import { x as _$$x } from "../905/97817";
@@ -75,10 +75,10 @@ function O({
 function R() {
   let e = useSelector(e => e.mirror.appModel.keyboardShortcuts);
   if (useSelector(e => e.screenreader.enabled)) return null;
-  let t = c1(e, "open-shortcuts").replace("?", _$$t("general.question_mark"));
+  let t = c1(e, "open-shortcuts").replace("?", getI18nString("general.question_mark"));
   let r = c1(e, "toggle-menu");
   return jsx(O, {
-    children: tx("fullscreen.toolbar.screenreader_notice_figjam", {
+    children: renderI18nText("fullscreen.toolbar.screenreader_notice_figjam", {
       shortcut: t,
       quickActionsShortcut: r
     })
@@ -87,7 +87,7 @@ function R() {
 let $$G = Symbol("SingleSelection");
 let V = Symbol("MultipleSelection");
 let H = createContext({
-  emitter: new _$$b("AccessibleNodeChangeContext.default"),
+  emitter: new EventEmitter("AccessibleNodeChangeContext.default"),
   navigationTelemetryTag: void 0
 });
 function z({
@@ -95,7 +95,7 @@ function z({
   nodeMapping: t,
   children: r
 }) {
-  let s = useMemo(() => new _$$b("AccessibleNodeChangeContext.initialized"), []);
+  let s = useMemo(() => new EventEmitter("AccessibleNodeChangeContext.initialized"), []);
   let o = useStore();
   let l = useSelector(dK);
   let d = useSelector(Xt);
@@ -338,7 +338,7 @@ function ed({
   let {
     showResolved,
     showComments
-  } = _$$R(e => ({
+  } = selectWithShallowEqual(e => ({
     showResolved: e.comments.showResolved,
     showComments: e.mirror.appModel.showComments
   }));
@@ -352,7 +352,7 @@ function ed({
   let s = _$$x(e, showResolved);
   return showComments && s?.length ? jsx("div", {
     role: "group",
-    "aria-label": _$$t("fullscreen.accessibility.design.comments"),
+    "aria-label": getI18nString("fullscreen.accessibility.design.comments"),
     children: jsx(ec, {
       containerSize: size,
       containerTransform: absoluteTransform,
@@ -483,7 +483,7 @@ function ey(e, t) {
   }();
   let n = void 0 !== K(t || "-1:-1");
   return useMemo(() => {
-    let t = r && n ? _$$t("fullscreen.accessibility_dom.selected") : void 0;
+    let t = r && n ? getI18nString("fullscreen.accessibility_dom.selected") : void 0;
     let i = e ? Array.isArray(e) ? e : [e] : [];
     return Yx(t ? [...i, t] : i, "unit");
   }, [r, e, n]);
@@ -498,35 +498,35 @@ function eb({
     style
   } = W([e, t], (e, t) => ({
     ariaLabel: function (e) {
-      if (!e) return [_$$t("fullscreen.accessibility.design.fallback")];
+      if (!e) return [getI18nString("fullscreen.accessibility.design.fallback")];
       let t = function (e) {
         switch (e.type) {
           case "FRAME":
-            return _$$t("fullscreen.accessibility.design.frame");
+            return getI18nString("fullscreen.accessibility.design.frame");
           case "SECTION":
-            return _$$t("fullscreen.accessibility.design.section");
+            return getI18nString("fullscreen.accessibility.design.section");
           case "BOOLEAN_OPERATION":
             return function (e) {
               switch (e.booleanOperation) {
                 case "UNION":
-                  return _$$t("fullscreen.accessibility.design.boolean_union");
+                  return getI18nString("fullscreen.accessibility.design.boolean_union");
                 case "INTERSECT":
-                  return _$$t("fullscreen.accessibility.design.boolean_intersect");
+                  return getI18nString("fullscreen.accessibility.design.boolean_intersect");
                 case "SUBTRACT":
-                  return _$$t("fullscreen.accessibility.design.boolean_subtract");
+                  return getI18nString("fullscreen.accessibility.design.boolean_subtract");
                 case "XOR":
-                  return _$$t("fullscreen.accessibility.design.boolean_xor");
+                  return getI18nString("fullscreen.accessibility.design.boolean_xor");
                 case null:
-                  return _$$t("fullscreen.accessibility.design.boolean_group");
+                  return getI18nString("fullscreen.accessibility.design.boolean_group");
                 default:
                   throwTypeError(e.booleanOperation);
               }
             }(e);
           case "SYMBOL":
-            return _$$t("fullscreen.accessibility.design.component");
+            return getI18nString("fullscreen.accessibility.design.component");
           case "GROUP":
-            if (e.frameMaskDisabled) return _$$t("fullscreen.accessibility.design.group");
-            return _$$t("fullscreen.accessibility.design.mask_group");
+            if (e.frameMaskDisabled) return getI18nString("fullscreen.accessibility.design.group");
+            return getI18nString("fullscreen.accessibility.design.mask_group");
           default:
             return;
         }
@@ -561,7 +561,7 @@ function eT({
     ariaLabel,
     style
   } = W([e, t], (e, t) => ({
-    ariaLabel: t ? [t.name, _$$t("fullscreen.accessibility.design.instance")] : [_$$t("fullscreen.accessibility.design.fallback")],
+    ariaLabel: t ? [t.name, getI18nString("fullscreen.accessibility.design.instance")] : [getI18nString("fullscreen.accessibility.design.fallback")],
     ariaDescription: function (e) {
       if (e) return `Component defined by ${e.mainComponent?.name}`;
     }(t),
@@ -635,26 +635,26 @@ function ev({
     style
   } = W([e, t], (e, t) => ({
     name: function (e) {
-      if (!e) return [_$$t("fullscreen.accessibility.design.fallback")];
+      if (!e) return [getI18nString("fullscreen.accessibility.design.fallback")];
       let t = function (e) {
         switch (e.type) {
           case "ELLIPSE":
-            return _$$t("fullscreen.accessibility.design.ellipse");
+            return getI18nString("fullscreen.accessibility.design.ellipse");
           case "RECTANGLE":
           case "ROUNDED_RECTANGLE":
-            return _$$t("fullscreen.accessibility.design.rectangle");
+            return getI18nString("fullscreen.accessibility.design.rectangle");
           case "WASHI_TAPE":
-            return _$$t("fullscreen.accessibility.design.washi_tape");
+            return getI18nString("fullscreen.accessibility.design.washi_tape");
           case "HIGHLIGHT":
-            return _$$t("fullscreen.accessibility.design.highlight");
+            return getI18nString("fullscreen.accessibility.design.highlight");
           case "STAR":
-            return _$$t("fullscreen.accessibility.design.star");
+            return getI18nString("fullscreen.accessibility.design.star");
           case "REGULAR_POLYGON":
-            return _$$t("fullscreen.accessibility.design.regular_polygon");
+            return getI18nString("fullscreen.accessibility.design.regular_polygon");
           case "LINE":
-            return _$$t("fullscreen.accessibility.design.line");
+            return getI18nString("fullscreen.accessibility.design.line");
           default:
-            return _$$t("fullscreen.accessibility.design.vector");
+            return getI18nString("fullscreen.accessibility.design.vector");
         }
       }(e);
       return [e.name, t];
@@ -967,9 +967,9 @@ function eF({
     style
   } = W([e, t], (e, t) => ({
     ariaLabel: function (e) {
-      if (!e) return [_$$t("fullscreen.accessibility.design.fallback")];
+      if (!e) return [getI18nString("fullscreen.accessibility.design.fallback")];
       let t = function (e) {
-        if ("SLIDE" === e.type) return _$$t("slides.a11y.node_type.slide", {
+        if ("SLIDE" === e.type) return getI18nString("slides.a11y.node_type.slide", {
           orderNum: e.name
         });
       }(e);
@@ -1002,7 +1002,7 @@ function ej({
     textChildren
   } = W([e, t], (e, t) => {
     if (!t) return {
-      name: _$$t("fullscreen.accessibility.design.fallback"),
+      name: getI18nString("fullscreen.accessibility.design.fallback"),
       style: eu(e, null),
       textChildren: []
     };
@@ -1010,7 +1010,7 @@ function ej({
     let n = q4(t.textSublayer);
     let i = rp(n, d2.SEMANTIC);
     return {
-      name: r ? ZG(r) : _$$t("fullscreen.accessibility_dom.node_name_shape"),
+      name: r ? ZG(r) : getI18nString("fullscreen.accessibility_dom.node_name_shape"),
       style: eu(e, t),
       textChildren: i
     };
@@ -1053,7 +1053,7 @@ function eU({
   });
   return jsx("div", {
     role: "table",
-    "aria-label": _$$t("fullscreen.accessibility_dom.node_name_table"),
+    "aria-label": getI18nString("fullscreen.accessibility_dom.node_name_table"),
     style,
     ...i,
     children: tableCellNodes
@@ -1074,7 +1074,7 @@ function eB({
     nodeId: t
   });
   return jsx("figure", {
-    "aria-label": _$$t("slides.a11y.node_type.video"),
+    "aria-label": getI18nString("slides.a11y.node_type.video"),
     "data-nodeid": t,
     "data-parentid": e,
     style,
@@ -1268,8 +1268,8 @@ function e8() {
   let s = useDispatch();
   let o = useSelector(e => !!e.modalShown);
   useEffect(() => {
-    r && Xb && (o || s(_$$F.enqueue({
-      message: _$$t("fullscreen.accessibility.platform_error"),
+    r && isAnyMobile && (o || s(_$$F.enqueue({
+      message: getI18nString("fullscreen.accessibility.platform_error"),
       role: "alert",
       type: "accessibility-dom-react-error"
     })), s(mC({
@@ -1280,19 +1280,19 @@ function e8() {
   k4(l);
   let d = function (e) {
     switch (e) {
-      case nT.Design:
+      case FEditorType.Design:
         return conditionalFeatureFlag("a11y_design_dom_mirror", e2, void 0);
-      case nT.DevHandoff:
+      case FEditorType.DevHandoff:
         return conditionalFeatureFlag("a11y_design_dom_mirror", e5, void 0);
-      case nT.Whiteboard:
+      case FEditorType.Whiteboard:
         return conditionalFeatureFlag("fpl_windowed_figjam_srdom", e1, e0);
-      case nT.Slides:
+      case FEditorType.Slides:
         return conditionalFeatureFlag("slides_editor_a11y", e3, void 0);
       default:
         return;
     }
   }(e);
-  if (!(d && !Xb)) return null;
+  if (!(d && !isAnyMobile)) return null;
   if (!r) return jsx(R, {});
   {
     let {
@@ -1302,7 +1302,7 @@ function e8() {
     return jsx(tH, {
       onError: () => {
         o || s(_$$F.enqueue({
-          message: _$$t("fullscreen.accessibility.dom_error"),
+          message: getI18nString("fullscreen.accessibility.dom_error"),
           role: "alert",
           type: "accessibility-dom-react-error"
         }));
@@ -1377,13 +1377,13 @@ function e6({
                   tableCellRowIndex,
                   tableCellColumnIndex
                 } = t;
-                return _$$t("fullscreen.accessibility_dom.node_name_table_cell", {
+                return getI18nString("fullscreen.accessibility_dom.node_name_table_cell", {
                   r: tableCellRowIndex,
                   c: tableCellColumnIndex
                 });
               }
             }
-            return i?.isSymbolSublayer || i?.isInstanceSublayer ? _$$t("fullscreen.accessibility_dom.node_name_instance") : rs(type, r);
+            return i?.isSymbolSublayer || i?.isInstanceSublayer ? getI18nString("fullscreen.accessibility_dom.node_name_instance") : rs(type, r);
           }(t, r, e)
         };
       }
@@ -1421,7 +1421,7 @@ function e6({
   let y = e => {
     t.current = e;
   };
-  let b = useMemo(() => m ? Yx([_$$t("fullscreen.accessibility.main_region"), _$$t("fullscreen.filename_view.view-only")], "unit") : _$$t("fullscreen.accessibility.main_region"), [m]);
+  let b = useMemo(() => m ? Yx([getI18nString("fullscreen.accessibility.main_region"), getI18nString("fullscreen.filename_view.view-only")], "unit") : getI18nString("fullscreen.accessibility.main_region"), [m]);
   let A = useMemo(() => it(p), [p]);
   let x = l()(kL, {
     [Qg]: !_

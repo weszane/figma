@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useEffect, useMemo } from "react";
 import { useDispatch } from "../vendor/514228";
-import { fp } from "../figma_app/27355";
+import { useAtomValueAndSetter } from "../figma_app/27355";
 import { tT } from "../905/663269";
 import { Xf } from "../figma_app/153916";
 import { Rs } from "../figma_app/288654";
@@ -10,7 +10,7 @@ import { zE, Ex } from "../figma_app/919079";
 import { tH } from "../905/751457";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { R as _$$R } from "../905/304671";
 import { ps, ZY } from "../figma_app/845611";
 import { Y } from "../figma_app/515088";
@@ -54,7 +54,7 @@ export function $$k0(e) {
   });
   let g = "loaded" === _.status && _.data.adminDashboardRequestsTotalCount.status === tT.Loaded && ("loaded" === a.status || e.planType === ps.TEAM) ? _.data.adminDashboardRequestsTotalCount.data?.rowCount : void 0;
   let h = g ?? 0;
-  let [v, b] = fp(Y);
+  let [v, b] = useAtomValueAndSetter(Y);
   let y = r ? [e.planType, e.planId, !0].toString() : [e.planType, e.planId].toString();
   useEffect(() => {
     if (g) {
@@ -175,7 +175,7 @@ function L(e, t, a, s, n, r) {
 }
 function P(e) {
   return e !== FDomainVerificationStatusType.UNVERIFIED ? null : {
-    tooltipData: t("billing_status.tax_id.invalid"),
+    tooltipData: getI18nString("billing_status.tax_id.invalid"),
     iconStyle: R,
     iconType: "notice"
   };

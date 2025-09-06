@@ -4,7 +4,7 @@ import { rrT } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { k9 } from "../905/19536";
 import o from "classnames";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { CA } from "../figma_app/327588";
 import { e as _$$e } from "../1528/93111";
 import { q } from "../figma_app/590592";
@@ -33,7 +33,7 @@ export function $$b1({
   let m = o3(nt.newResizablePanel);
   return jsx(_$$m, {
     role: "region",
-    "aria-label": _$$t("fullscreen_actions.right_sidebar_label"),
+    "aria-label": getI18nString("fullscreen_actions.right_sidebar_label"),
     children: jsx("div", {
       ref: i,
       className: d()(KE, {

@@ -5,7 +5,7 @@ import { isNullish } from "../figma_app/95419";
 import { hS } from "../905/437088";
 import { r as _$$r } from "../905/571838";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx, t as _$$t } from "../905/303541";
+import { renderI18nText, getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
 import { bL } from "../905/38914";
 import { Wk } from "../figma_app/272243";
@@ -88,7 +88,7 @@ function v({
                 iconPrefix: jsx(_$$C, {}),
                 variant: "ghost",
                 onClick: n,
-                children: tx("seat_billing_terms.modal.back")
+                children: renderI18nText("seat_billing_terms.modal.back")
               })
             }), jsx("div", {
               className: _$$s.flex.gap8.$,
@@ -110,11 +110,11 @@ function v({
                 children: [jsx($z, {
                   variant: "secondary",
                   onClick: r,
-                  children: tx("seat_billing_terms.modal.not_now")
+                  children: renderI18nText("seat_billing_terms.modal.not_now")
                 }), jsx($z, {
                   variant: "primary",
                   onClick: o,
-                  children: tx("seat_billing_terms.modal.accept")
+                  children: renderI18nText("seat_billing_terms.modal.accept")
                 })]
               }) : jsx($z, {
                 variant: "ghost",
@@ -123,7 +123,7 @@ function v({
                   className: _$$s.flex.itemsCenter.gap4.$,
                   children: [jsx("span", {
                     className: _$$s.colorText.alignCenter.textBodyMedium.$,
-                    children: tx("seat_billing_terms.modal.next")
+                    children: renderI18nText("seat_billing_terms.modal.next")
                   }), jsx(_$$a, {})]
                 })
               })
@@ -153,21 +153,21 @@ let E = jsx(Us, {
   target: "_blank",
   trusted: !0,
   "data-testid": "seat-billing-terms-ssa-link",
-  children: tx("seat_billing_terms.modal.tos.ssa_link_text")
+  children: renderI18nText("seat_billing_terms.modal.tos.ssa_link_text")
 });
 let A = jsx(Us, {
   href: "https://help.figma.com/hc/articles/27468498501527-Updates-to-Figma-s-billing-and-pricing-prod-link",
   target: "_blank",
   trusted: !0,
   "data-testid": "seat-billing-terms-updated-seats-link",
-  children: tx("seat_billing_terms.modal.tos.faq_link")
+  children: renderI18nText("seat_billing_terms.modal.tos.faq_link")
 });
 let I = jsx(Us, {
   href: "https://help.figma.com/hc/requests/new?ticket_form_id=360001731233",
   target: "_blank",
   trusted: !0,
   "data-testid": "seat-billing-terms-support-link",
-  children: tx("seat_billing_terms.modal.tos.support_link_text")
+  children: renderI18nText("seat_billing_terms.modal.tos.support_link_text")
 });
 function P({
   leftChildren: e,
@@ -213,9 +213,9 @@ function M({
   let p = a[r];
   if (isNullish(p)) return jsx(Fragment, {});
   let h = new vr(p.currency).formatMoney(p.amount);
-  let g = r === ud.EXPERT ? _$$t("seat_billing_terms.modal.seat_features.list.full", {
+  let g = r === ud.EXPERT ? getI18nString("seat_billing_terms.modal.seat_features.list.full", {
     productList: _
-  }) : _$$t("seat_billing_terms.modal.seat_features.list", {
+  }) : getI18nString("seat_billing_terms.modal.seat_features.list", {
     productList: _
   });
   return jsxs(Fragment, {
@@ -239,7 +239,7 @@ function M({
         })]
       }), jsx("div", {
         className: _$$s.colorText.textBodyLarge.$,
-        children: tx("seat_billing_terms.modal.price_per_month", {
+        children: renderI18nText("seat_billing_terms.modal.price_per_month", {
           price: h
         })
       }), jsx("div", {
@@ -272,19 +272,19 @@ export function $$B0({
     onClose: f,
     preventUserClose: !0
   });
-  let S = o ? _$$t("seat_billing_terms.modal.plan_types.ent") : _$$t("seat_billing_terms.modal.plan_types.org");
+  let S = o ? getI18nString("seat_billing_terms.modal.plan_types.ent") : getI18nString("seat_billing_terms.modal.plan_types.org");
   let k = useMemo(() => [{
     bpKey: ud.EXPERT,
-    oldSeatType: _$$t("seat_billing_terms.modal.old_seat.design"),
-    newSeatType: _$$t("seat_billing_terms.modal.new_seat.full")
+    oldSeatType: getI18nString("seat_billing_terms.modal.old_seat.design"),
+    newSeatType: getI18nString("seat_billing_terms.modal.new_seat.full")
   }, {
     bpKey: ud.DEVELOPER,
-    oldSeatType: _$$t("seat_billing_terms.modal.old_seat.dev_mode"),
-    newSeatType: _$$t("seat_billing_terms.modal.new_seat.dev")
+    oldSeatType: getI18nString("seat_billing_terms.modal.old_seat.dev_mode"),
+    newSeatType: getI18nString("seat_billing_terms.modal.new_seat.dev")
   }, {
     bpKey: ud.COLLABORATOR,
-    oldSeatType: _$$t("seat_billing_terms.modal.old_seat.figjam"),
-    newSeatType: _$$t("seat_billing_terms.modal.new_seat.collab")
+    oldSeatType: getI18nString("seat_billing_terms.modal.old_seat.figjam"),
+    newSeatType: getI18nString("seat_billing_terms.modal.new_seat.collab")
   }].map(e => ({
     ...e,
     licenseTypes: b(e.bpKey)
@@ -316,16 +316,16 @@ export function $$B0({
               width: "221px"
             }).$,
             className: _$$s.textHeadingLarge.colorText.$,
-            children: tx("seat_billing_terms.modal.please_review")
+            children: renderI18nText("seat_billing_terms.modal.please_review")
           }), jsx("div", {
             className: _$$s.textBodyLargeStrong.colorText.$,
-            children: tx("seat_billing_terms.modal.evolving_terms")
+            children: renderI18nText("seat_billing_terms.modal.evolving_terms")
           }), jsx("span", {
             className: _$$s.textBodyLarge.itemSelfStretch.$,
-            children: tx("seat_billing_terms.modal.confirm_terms")
+            children: renderI18nText("seat_billing_terms.modal.confirm_terms")
           }), jsx("span", {
             className: _$$s.textBodyLarge.itemSelfStretch.$,
-            children: tx("seat_billing_terms.modal.learn_more_about", {
+            children: renderI18nText("seat_billing_terms.modal.learn_more_about", {
               updatedSeatsLink: A
             })
           })]
@@ -339,7 +339,7 @@ export function $$B0({
               children: [jsx("div", {
                 children: jsx(_$$r, {})
               }), jsx("div", {
-                children: tx("seat_billing_terms.modal.renewal_price_update", {
+                children: renderI18nText("seat_billing_terms.modal.renewal_price_update", {
                   organizationName: t,
                   renewalDate: a.toDate(),
                   planTier: S
@@ -375,10 +375,10 @@ export function $$B0({
         leftChildren: jsxs(Fragment, {
           children: [jsx("div", {
             className: _$$s.textHeadingLarge.colorText.$,
-            children: tx("seat_billing_terms.modal.finish_and_agree")
+            children: renderI18nText("seat_billing_terms.modal.finish_and_agree")
           }), jsx("div", {
             className: _$$s.textBodyLarge.itemSelfStretch.textBodyLarge.$,
-            children: tx("seat_billing_terms.modal.agreement_terms", {
+            children: renderI18nText("seat_billing_terms.modal.agreement_terms", {
               softwareAgreementLink: E
             })
           })]
@@ -388,10 +388,10 @@ export function $$B0({
           children: [jsxs("div", {
             children: [jsx("div", {
               className: _$$s.colorTextSecondary.textBodyMediumStrong.mb2.$,
-              children: tx("seat_billing_terms.modal.tos.subscription.header")
+              children: renderI18nText("seat_billing_terms.modal.tos.subscription.header")
             }), jsx("div", {
               className: _$$s.colorText.$,
-              children: tx("seat_billing_terms.modal.tos.subscription.terms", {
+              children: renderI18nText("seat_billing_terms.modal.tos.subscription.terms", {
                 planTier: S,
                 renewalDate: a.toDate(),
                 softwareAgreementLink: E
@@ -399,28 +399,28 @@ export function $$B0({
             })]
           }), jsx("div", {
             className: _$$s.colorText.$,
-            children: tx("seat_billing_terms.modal.tos.subscription.pricing", {
+            children: renderI18nText("seat_billing_terms.modal.tos.subscription.pricing", {
               organizationName: t
             })
           }), jsxs("div", {
             children: [jsx("div", {
               className: _$$s.colorTextSecondary.textBodyMediumStrong.mb2.$,
-              children: tx("seat_billing_terms.modal.tos.additional_seats.header")
+              children: renderI18nText("seat_billing_terms.modal.tos.additional_seats.header")
             }), jsx("div", {
               className: _$$s.colorText.$,
-              children: tx("seat_billing_terms.modal.tos.additional_seats.terms")
+              children: renderI18nText("seat_billing_terms.modal.tos.additional_seats.terms")
             })]
           }), jsxs("div", {
             children: [jsx("div", {
               className: _$$s.colorTextSecondary.textBodyMediumStrong.mb2.$,
-              children: tx("seat_billing_terms.modal.tos.invoices.header")
+              children: renderI18nText("seat_billing_terms.modal.tos.invoices.header")
             }), jsx("div", {
               className: _$$s.colorText.$,
-              children: tx("seat_billing_terms.modal.tos.invoices.terms")
+              children: renderI18nText("seat_billing_terms.modal.tos.invoices.terms")
             })]
           }), jsx("div", {
             className: _$$s.colorText.$,
-            children: tx("seat_billing_terms.modal.tos.learn_more", {
+            children: renderI18nText("seat_billing_terms.modal.tos.learn_more", {
               updatedSeatsLink: A,
               supportLink: I
             })

@@ -1,7 +1,7 @@
 import { RYP, ywP, glU } from "../figma_app/763686";
 import { debugState } from "../905/407919";
 import { Y5 } from "../figma_app/455680";
-import { nT } from "../figma_app/53721";
+import { FEditorType } from "../figma_app/53721";
 import { YN } from "../figma_app/829197";
 import { M } from "../905/366117";
 export let $$d0 = new class {
@@ -9,7 +9,7 @@ export let $$d0 = new class {
     this.canvasColorProfile = RYP.SRGB;
   }
   getDefaultDocumentColorProfile() {
-    if ((debugState?.getState()?.selectedView).editorType === nT.Whiteboard) return ywP.SRGB;
+    if ((debugState?.getState()?.selectedView).editorType === FEditorType.Whiteboard) return ywP.SRGB;
     switch (YN().colorProfilePreference) {
       case M.DEFAULT:
       case M.SRGB:

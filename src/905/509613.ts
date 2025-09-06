@@ -1,23 +1,23 @@
-import { eU, zl } from "../figma_app/27355";
-import { az } from "../905/449184";
+import { atom, atomStoreManager } from "../figma_app/27355";
+import { analyticsEventManager } from "../905/449184";
 import { debugState } from "../905/407919";
 import { getInitialOptions } from "../figma_app/169182";
 import { n as _$$n } from "../905/347702";
-let $$l3 = eU(null);
-let $$d5 = eU(null);
-let $$c4 = eU(null);
-let $$u2 = eU(null);
-let $$p6 = eU(new Set());
-let $$m1 = eU("unchecked");
+let $$l3 = atom(null);
+let $$d5 = atom(null);
+let $$c4 = atom(null);
+let $$u2 = atom(null);
+let $$p6 = atom(new Set());
+let $$m1 = atom("unchecked");
 let $$h0 = _$$n(e => {
-  let t = zl.get($$l3);
-  let i = zl.get($$d5);
-  let o = zl.get($$p6);
-  if (!zl.get($$p6).has(e)) {
-    zl.set($$p6, new Set([...o, e]));
+  let t = atomStoreManager.get($$l3);
+  let i = atomStoreManager.get($$d5);
+  let o = atomStoreManager.get($$p6);
+  if (!atomStoreManager.get($$p6).has(e)) {
+    atomStoreManager.set($$p6, new Set([...o, e]));
     let l = debugState && debugState.getState().selectedView;
     let d = l?.view === "fullscreen" && l.fileKey;
-    az.trackDefinedEvent("search_experience.ai_eligibility.grantlist_check", {
+    analyticsEventManager.trackDefinedEvent("search_experience.ai_eligibility.grantlist_check", {
       newGrantlistPlanValue: null !== t ? t.toString() : "null",
       newGrantlistUserValue: null !== i ? i.toString() : "null",
       userId: getInitialOptions().user_data?.id,

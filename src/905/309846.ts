@@ -2,22 +2,22 @@ import { v as _$$v } from "../905/516963";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { glU, Ez5, FAf, jXp, Oin, SIf } from "../figma_app/763686";
 import { fn, sH } from "../905/871411";
-import { zl } from "../figma_app/27355";
+import { atomStoreManager } from "../figma_app/27355";
 import { Lb } from "../905/508367";
-import { eD as _$$eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { jW } from "../figma_app/640683";
 import { Ay } from "../905/612521";
 import { getInitialOptions, isLocalDevOnCluster } from "../figma_app/169182";
 import { subscribeAndAwaitData } from "../905/553831";
-import { Ay as _$$Ay2 } from "../figma_app/778880";
+import { BrowserInfo } from "../figma_app/778880";
 import { parseQuery } from "../905/634134";
-import { $D, du, xZ, DZ } from "../905/11";
-import { Lo } from "../905/714362";
+import { reportError, clearReportedErrors, setFileBranchingTags, SeverityLevel } from "../905/11";
+import { logInfo } from "../905/714362";
 import { SH } from "../figma_app/141320";
 import { dK, xt, x2 } from "../figma_app/149304";
 import { XHR } from "../905/910117";
 import { DI } from "../figma_app/687776";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { b as _$$b } from "../905/620668";
 import { nF } from "../905/350402";
@@ -47,7 +47,7 @@ import { NT } from "../figma_app/741237";
 import { xK } from "../905/125218";
 import { jN } from "../905/612685";
 import { hZ } from "../figma_app/841351";
-import { xq, nT, oD, wN } from "../figma_app/53721";
+import { mapEditorTypeToYF, FEditorType, mapEditorTypeToFileType, mapFileTypeToEditorType } from "../figma_app/53721";
 import { A as _$$A } from "../figma_app/849666";
 import { ag, u6, p9, Jt, yf } from "../905/509613";
 import { g_ } from "../905/646788";
@@ -75,7 +75,7 @@ import { P as _$$P } from "../905/347284";
 import { Dm } from "../figma_app/8833";
 import { qK } from "../905/102752";
 import { d_ } from "../figma_app/918700";
-import { Hy, b1, V6 } from "../905/298923";
+import { isEditorTypeEnabled, getLastUsedEditorType, setLastUsedEditorType } from "../905/298923";
 import { tn } from "../figma_app/473493";
 import { sf } from "../905/929976";
 import { Df } from "../figma_app/300692";
@@ -86,7 +86,7 @@ let er = "Handling fullscreen metadata response not in a valid fullscreen state"
 async function ea(e, t, i) {
   let n = t.getState();
   let s = e.data.meta;
-  if (s || $D(_$$e.FRONTEND_PLATFORM, Error("We are expecting FileMetadata but got undefined"), t => (t.setExtra("response", e), t)), s.redirect_to_password_auth) {
+  if (s || reportError(_$$e.FRONTEND_PLATFORM, Error("We are expecting FileMetadata but got undefined"), t => (t.setExtra("response", e), t)), s.redirect_to_password_auth) {
     await Ay.redirectAndWaitForever(jN({
       file: {
         key: s.file_key,
@@ -95,11 +95,11 @@ async function ea(e, t, i) {
     }));
     return;
   }
-  zl.set(ag, s.jubilee_tentative_plan_eligibility);
-  zl.set(u6, s.jubilee_tentative_user_eligibility);
-  zl.set(p9, s.jubilee_b);
-  zl.set(Jt, s.jubilee_eligibility_s);
-  zl.set(yf, new Set());
+  atomStoreManager.set(ag, s.jubilee_tentative_plan_eligibility);
+  atomStoreManager.set(u6, s.jubilee_tentative_user_eligibility);
+  atomStoreManager.set(p9, s.jubilee_b);
+  atomStoreManager.set(Jt, s.jubilee_eligibility_s);
+  atomStoreManager.set(yf, new Set());
   let l = getFeatureFlags();
   let c = s.feature_flags;
   if (t.dispatch(kP({
@@ -118,7 +118,7 @@ async function ea(e, t, i) {
     null !== e && (await Ay.reloadAndWaitForever(`Feature flag change: ${e}`));
   }
   await Y5.loadAndStartFullscreenIfNecessary();
-  glU.setEditorType(xq(i));
+  glU.setEditorType(mapEditorTypeToYF(i));
   let m = s.team;
   m && t.dispatch(_$$yJ({
     team: m,
@@ -174,8 +174,8 @@ async function ea(e, t, i) {
     teamId: h.team_id
   }));
   let x = !!(s.is_team_template && LQ(n));
-  _$$eD?.setIsLibrary(!!s.last_published_at);
-  _$$eD?.setIsTeamTemplate(!!x);
+  desktopAPIInstance?.setIsLibrary(!!s.last_published_at);
+  desktopAPIInstance?.setIsTeamTemplate(!!x);
   glU.setEditorTheme(n.theme.visibleTheme || "");
   SIf && ky.updateColorsInFullscreen(SIf.colorTokensState());
   xK.time("openFileWithMetadata", () => glU.openFileWithServerMetadata({
@@ -354,15 +354,15 @@ let $$ej0 = nF(async (e, {
   let n = t.fileKey;
   if (!n) return;
   let a = function (e, t) {
-    if (!Hy(e.editorType) || e.mode && "auto" !== e.mode) return e;
-    let i = b1();
+    if (!isEditorTypeEnabled(e.editorType) || e.mode && "auto" !== e.mode) return e;
+    let i = getLastUsedEditorType();
     let n = t.getState();
     let r = n.openFile;
     let a = r && !r.parentOrgId && !r.teamId;
-    if (!tn(n) && a && i === nT.DevHandoff) {
+    if (!tn(n) && a && i === FEditorType.DevHandoff) {
       t.dispatch(sf({
         ...e,
-        editorType: nT.Design
+        editorType: FEditorType.Design
       }));
       let i = t.getState().selectedView;
       if ("fullscreen" !== i.view) throw Error("Redirect new editor type failed.");
@@ -388,7 +388,7 @@ let $$ej0 = nF(async (e, {
     }
     return e;
   }(t, e);
-  t.mode && "dev" === t.mode && !t.tryPluginId ? zl.set(_$$R2, !0) : t.mode && "draw" === t.mode && !t.tryPluginId && zl.set(_$$c2, !0);
+  t.mode && "dev" === t.mode && !t.tryPluginId ? atomStoreManager.set(_$$R2, !0) : t.mode && "draw" === t.mode && !t.tryPluginId && atomStoreManager.set(_$$c2, !0);
   let s = a.editorType !== t.editorType;
   let l = e.getState();
   if (!l.fileByKey[n]) {
@@ -479,11 +479,11 @@ let $$ej0 = nF(async (e, {
       await $$eW1(C, t, user, e, u);
     }
   } catch (e) {
-    $D(_$$e.SCENEGRAPH_AND_SYNC, e);
+    reportError(_$$e.SCENEGRAPH_AND_SYNC, e);
   }
 });
 let eU = nF((e, t) => {
-  if (Y5.resetLoadedFigFile(), du(), dK() !== xt.SUCCESS) throw Error("webGLSupport() call failed but we're opening fullscreen. Don't dispatch fullscreen.open() directly - use selectView instead.");
+  if (Y5.resetLoadedFigFile(), clearReportedErrors(), dK() !== xt.SUCCESS) throw Error("webGLSupport() call failed but we're opening fullscreen. Don't dispatch fullscreen.open() directly - use selectView instead.");
   let i = e.getState().user;
   let {
     file,
@@ -496,9 +496,9 @@ let eU = nF((e, t) => {
       file: t.file
     }));
   }
-  Kz(file) && _$$eD?.setIsBranch(!0);
+  Kz(file) && desktopAPIInstance?.setIsBranch(!0);
   let s = t.fullscreenEditorType;
-  s && oD(s) === t.file.editorType || (s = wN(t.file.editorType));
+  s && mapEditorTypeToFileType(s) === t.file.editorType || (s = mapFileTypeToEditorType(t.file.editorType));
   _$$R.setEditorType(s);
   _$$R.setLoggedIn(!!i);
   e.dispatch(eH({
@@ -535,7 +535,7 @@ let eH = nF(async (e, {
   let A = e.getState();
   try {
     let r;
-    xZ(t);
+    setFileBranchingTags(t);
     zR({
       fileKey: t.key,
       folderId: t.folderId,
@@ -544,11 +544,11 @@ let eH = nF(async (e, {
       isNewFile: !1,
       state: A
     });
-    i ? mu(t.key, i.id) : Lo("Autosave", "Not creating manager for logged out user");
+    i ? mu(t.key, i.id) : logInfo("Autosave", "Not creating manager for logged out user");
     let d = fn(sH(o)) ? o : "";
     let v = w2(i_(A.theme.themePreference));
-    _$$Ay2.isIpadNative && x2() && _$$v.getFeatureGate("figjam_ipad_compressed_textures") && (Jr().setShouldUseCompressedTextures(!0), XHR.post(`/file/${t.key}/generate_compressed_textures`).catch(e => {
-      Lo("image", "Failed to generate compressed textures", {
+    BrowserInfo.isIpadNative && x2() && _$$v.getFeatureGate("figjam_ipad_compressed_textures") && (Jr().setShouldUseCompressedTextures(!0), XHR.post(`/file/${t.key}/generate_compressed_textures`).catch(e => {
+      logInfo("image", "Failed to generate compressed textures", {
         fileKey: t.key,
         error: e
       });
@@ -576,8 +576,8 @@ let eH = nF(async (e, {
     let I = A.theme.visibleTheme;
     glU?.setEditorTheme(I || "");
     BL(t, A, m);
-    _$$b(oD(c));
-    V6(c);
+    _$$b(mapEditorTypeToFileType(c));
+    setLastUsedEditorType(c);
     t && i && void 0 === parseQuery(Ay.location.search).embed_host && Lb().then(() => {
       setTimeout(() => {
         t.key === e.getState().openFile?.key && e.dispatch(GZ({
@@ -588,21 +588,21 @@ let eH = nF(async (e, {
   } catch (n) {
     if (await yn(), n.message === er) return;
     let i = Number(n.cause?.status || 0);
-    _$$eD ? _$$eD.reportFatalError(t.key, 0 === i ? {
+    desktopAPIInstance ? desktopAPIInstance.reportFatalError(t.key, 0 === i ? {
       type: "load",
       code: -106,
-      description: _$$t("user_facing_error.loading_a_file")
+      description: getI18nString("user_facing_error.loading_a_file")
     } : {
       type: "http",
       statusCode: i
-    }) : 404 === i ? A7(_$$t("user_facing_error.404_loading_a_file"), e.dispatch) : A7(_$$t("user_facing_error.opening_editor"), e.dispatch);
+    }) : 404 === i ? A7(getI18nString("user_facing_error.404_loading_a_file"), e.dispatch) : A7(getI18nString("user_facing_error.opening_editor"), e.dispatch);
     GS("scenegraph_and_sync.fullscreen_open_error", t.key, A, {
       error: n instanceof Error ? void 0 !== n.cause ? `${n.message}: ${n.cause.message}` : n.message : JSON.stringify(n),
       statusCode: Number.isNaN(i) ? void 0 : i
     });
-    $D(_$$e.UNOWNED, n, {
+    reportError(_$$e.UNOWNED, n, {
       tags: {
-        severity: DZ.Critical
+        severity: SeverityLevel.Critical
       }
     });
   }
@@ -632,10 +632,10 @@ export async function $$eW1(e, t, i, n, r) {
       team: a,
       onError: () => n.dispatch(AS())
     }));
-    let o = _$$t("visual_bell.main_text", {
+    let o = getI18nString("visual_bell.main_text", {
       teamName: e.name
     });
-    let l = _$$t("visual_bell.button_text");
+    let l = getI18nString("visual_bell.button_text");
     n.dispatch(_$$F.enqueue({
       type: "upgrade-success-with-publish",
       message: o,

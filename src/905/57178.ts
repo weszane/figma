@@ -5,12 +5,12 @@ import { lQ } from "../905/934246";
 import { $n } from "../905/521428";
 import { E as _$$E } from "../905/632989";
 import { h3O } from "../figma_app/763686";
-import { eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { Ay } from "../905/612521";
 import { Gc } from "../905/63728";
 import { tu, oJ } from "../figma_app/385215";
 import { hk } from "../figma_app/632319";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { j7 } from "../905/929976";
 import { jD } from "../905/765855";
 import { b as _$$b } from "../905/985254";
@@ -101,7 +101,7 @@ let L = {
   "edit-name": function (e) {
     let t = useDispatch();
     return jsx(P, {
-      actionText: tx("avatar.tooltip.edit_name"),
+      actionText: renderI18nText("avatar.tooltip.edit_name"),
       actionCallback: e => {
         e.stopPropagation();
         e.preventDefault();
@@ -125,11 +125,11 @@ let L = {
       })));
     };
     return i ? jsx(P, {
-      actionText: tx("collaboration.spotlight.tooltip.click_to_follow"),
+      actionText: renderI18nText("collaboration.spotlight.tooltip.click_to_follow"),
       actionCallback: r,
       userHandle: e.userHandle
     }) : jsx(P, {
-      actionText: tx("collaboration.spotlight.tooltip.legacy.click_to_observe_user"),
+      actionText: renderI18nText("collaboration.spotlight.tooltip.legacy.click_to_observe_user"),
       actionCallback: r,
       userHandle: e.userHandle
     });
@@ -141,11 +141,11 @@ let L = {
       h3O.observeUser(-1);
     };
     return t ? jsx(P, {
-      actionText: tx("collaboration.spotlight.tooltip.click_to_unfollow"),
+      actionText: renderI18nText("collaboration.spotlight.tooltip.click_to_unfollow"),
       actionCallback: i,
       userHandle: e.userHandle
     }) : jsx(P, {
-      actionText: tx("collaboration.spotlight.tooltip.legacy.click_to_stop_observing_user"),
+      actionText: renderI18nText("collaboration.spotlight.tooltip.legacy.click_to_stop_observing_user"),
       actionCallback: i,
       userHandle: e.userHandle
     });
@@ -153,10 +153,10 @@ let L = {
   "view-profile": function (e) {
     let t = Gc(t => {
       t.stopPropagation();
-      Ay.redirect(e.profileUrl, eD ? void 0 : "_blank");
+      Ay.redirect(e.profileUrl, desktopAPIInstance ? void 0 : "_blank");
     });
     return jsx(P, {
-      actionText: tx("avatar.tooltip.view_profile"),
+      actionText: renderI18nText("avatar.tooltip.view_profile"),
       actionCallback: t,
       userHandle: e.userHandle
     });
@@ -165,7 +165,7 @@ let L = {
     let t = _$$T();
     let i = z3();
     return jsx(N, {
-      actionText: tx("collaboration.spotlight.tooltip.spotlight_me"),
+      actionText: renderI18nText("collaboration.spotlight.tooltip.spotlight_me"),
       actionCallback: e => {
         e.stopPropagation();
         e.preventDefault();
@@ -177,7 +177,7 @@ let L = {
   },
   "stop-presenting": function (e) {
     return jsx(P, {
-      actionText: tx("collaboration.spotlight.tooltip.stop_presenting"),
+      actionText: renderI18nText("collaboration.spotlight.tooltip.stop_presenting"),
       actionCallback: e => {
         e.stopPropagation();
         e.preventDefault();
@@ -189,14 +189,14 @@ let L = {
   "follow-presenter": function (e) {
     let t = useDispatch();
     return jsx(P, {
-      actionText: tx("collaboration.spotlight.tooltip.click_to_follow"),
+      actionText: renderI18nText("collaboration.spotlight.tooltip.click_to_follow"),
       actionCallback: i => {
         i.stopPropagation();
         null != e.userSessionID && (h3O.observeUser(e.userSessionID), t(_$$b({
           aware_of_observation_mode: !0
         })));
       },
-      userHandle: tx("avatar.tooltip.spotlight_user_handle", {
+      userHandle: renderI18nText("avatar.tooltip.spotlight_user_handle", {
         handle: e.userHandle
       })
     });
@@ -215,21 +215,21 @@ let L = {
     }, [e.userSessionID, d, t]);
     let f = Gc(t => {
       t.stopPropagation();
-      Ay.redirect(e.profileUrl, eD ? void 0 : "_blank");
+      Ay.redirect(e.profileUrl, desktopAPIInstance ? void 0 : "_blank");
     });
     let _ = i && !!e.sitesViewState && _$$a(e.sitesViewState);
     return s ? jsx(O, {
-      linkText: tx("avatar.tooltip.view_profile"),
+      linkText: renderI18nText("avatar.tooltip.view_profile"),
       linkCallback: f,
-      buttonText: tx("collaboration.spotlight.tooltip.cancel_ask_to_spotlight"),
+      buttonText: renderI18nText("collaboration.spotlight.tooltip.cancel_ask_to_spotlight"),
       buttonCallback: h,
       buttonVariant: "secondary",
       userHandle: e.userHandle
     }) : jsx(O, {
-      linkText: tx("avatar.tooltip.view_profile"),
+      linkText: renderI18nText("avatar.tooltip.view_profile"),
       linkCallback: f,
       disabled: _,
-      buttonText: tx("collaboration.spotlight.tooltip.ask_to_spotlight"),
+      buttonText: renderI18nText("collaboration.spotlight.tooltip.ask_to_spotlight"),
       buttonCallback: l,
       buttonVariant: "primary",
       userHandle: e.userHandle

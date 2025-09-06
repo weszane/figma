@@ -5,12 +5,12 @@ import { z as _$$z } from "../vendor/999105";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { xf } from "../figma_app/416935";
 import { Uz } from "../905/63728";
 import { oY } from "../905/485103";
 import { qc } from "../figma_app/858013";
-import { t as _$$t, tx } from "../905/303541";
+import { getI18nString, renderI18nText } from "../905/303541";
 import { cL } from "../905/748726";
 import { Ce, to } from "../905/156213";
 import { fu } from "../figma_app/831799";
@@ -76,7 +76,7 @@ function Y(e) {
       children: [jsxs("div", {
         children: [e.sharingAudienceControl && ET(e.sharingAudienceControl, e.org, e.workspace), s && jsx("div", {
           className: JZ,
-          children: _$$t("team_creation.anyone_can_find_this_team")
+          children: getI18nString("team_creation.anyone_can_find_this_team")
         })]
       }), e.org && jsxs("div", {
         className: j7,
@@ -151,7 +151,7 @@ export function $$ee0(e) {
     let t = ee.data?.length ?? 0;
     let r = "unknown";
     r = t <= 100 ? "small" : t <= 300 ? "medium" : "large";
-    sx("share_modal_latency", {
+    trackEventAnalytics("share_modal_latency", {
       latency_ms: e,
       modal_type: "team",
       is_outlier: e > 500,
@@ -213,12 +213,12 @@ export function $$ee0(e) {
   let eb = () => 0 === eh ? jsx("div", {
     className: DA,
     children: jsx("p", {
-      children: tx("team_view.team_permissions_modal.invite_other_members", {
+      children: renderI18nText("team_view.team_permissions_modal.invite_other_members", {
         teamName: K?.name ?? ""
       })
     })
   }) : jsx(_$$w, {
-    title: _$$t("team_view.team_permissions_modal.share_settings"),
+    title: getI18nString("team_view.team_permissions_modal.share_settings"),
     onClick: () => ex(0)
   });
   let ev = !!K && !K.org_id;
@@ -261,7 +261,7 @@ export function $$ee0(e) {
           }
         }), jsx("div", {
           className: Vq,
-          children: tx("team_view.team_permissions_modal.invite_by_email")
+          children: renderI18nText("team_view.team_permissions_modal.invite_by_email")
         })]
       }), !!et?.canAdmin && jsx($i, {
         teamId,
@@ -276,7 +276,7 @@ export function $$ee0(e) {
             SearchResultComponent: o6,
             TokenComponent: gy,
             autocomplete: V,
-            buttonText: _$$t("team_view.team_permissions_modal.invite"),
+            buttonText: getI18nString("team_view.team_permissions_modal.invite"),
             dispatch: $,
             dropdownKey: "permissions-invite-dropdown",
             dropdownShown: H,
@@ -312,7 +312,7 @@ export function $$ee0(e) {
               ef(e);
             },
             options: em,
-            placeholderText: _$$t("team_creation.add_a_name_or_email"),
+            placeholderText: getI18nString("team_creation.add_a_name_or_email"),
             searchResultToken,
             shouldAutoFocus: !ev,
             validateToken,
@@ -334,7 +334,7 @@ export function $$ee0(e) {
           className: d3,
           children: [jsx("div", {
             className: TS,
-            children: _$$t("file_permissions_modal.who_has_access")
+            children: getI18nString("file_permissions_modal.who_has_access")
           }), jsx(Y, {
             team: K,
             workspace: ei,

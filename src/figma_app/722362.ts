@@ -1,10 +1,10 @@
 import { useMemo, useRef, useEffect, createContext, useContext } from "react";
 import { useStore, useSelector } from "../vendor/514228";
 import { c2 } from "../905/382883";
-import { Im } from "../figma_app/493477";
+import { isEmptyObject } from "../figma_app/493477";
 import { juq } from "../figma_app/763686";
 import { ReduxSceneGraph } from "../905/700578";
-import { R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { T } from "../905/868547";
 let u = e => e?.mirror?.sceneGraph;
 let p = () => useStore();
@@ -16,7 +16,7 @@ export function $$h3() {
 }
 export let $$m1 = () => useSelector(e => e.mirror.sceneGraphSelection);
 export function $$g5() {
-  return !useSelector(e => Im(e.mirror.sceneGraphSelection));
+  return !useSelector(e => isEmptyObject(e.mirror.sceneGraphSelection));
 }
 export function $$f9() {
   let e = $$m1();
@@ -51,7 +51,7 @@ export function $$I10(e) {
   return useSelector(t => t.mirror.appModel[e]);
 }
 export function $$S12(...e) {
-  return R(t => {
+  return selectWithShallowEqual(t => {
     let r = t.mirror.appModel;
     let n = {};
     for (let t of e) n[t] = r[t];

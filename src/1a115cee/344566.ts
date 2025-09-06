@@ -5,13 +5,13 @@ import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { Ce } from "../905/156213";
 export function $$v0(e) {
   let a = useDispatch();
-  useEffect(() => sx("New Autosave File Already Open Modal Shown"));
+  useEffect(() => trackEventAnalytics("New Autosave File Already Open Modal Shown"));
   let s = () => a(Ce());
   let v = hS({
     open: !0,
@@ -23,10 +23,10 @@ export function $$v0(e) {
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: tx("autosave.file_already_open_modal.title")
+          children: renderI18nText("autosave.file_already_open_modal.title")
         })
       }), jsx(nB, {
-        children: tx("autosave.file_already_open_modal.body", {
+        children: renderI18nText("autosave.file_already_open_modal.body", {
           fileName: jsx("span", {
             className: _$$s.fontSemiBold.$,
             children: e.file.name
@@ -37,7 +37,7 @@ export function $$v0(e) {
           children: jsx($n, {
             variant: "secondary",
             onClick: s,
-            children: tx("general.ok")
+            children: renderI18nText("general.ok")
           })
         })
       })]

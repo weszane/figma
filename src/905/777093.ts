@@ -3,16 +3,16 @@ import { jXp, vXe } from "../figma_app/763686";
 import { K, rj, V1, T_, D7, qI, cp } from "../905/946258";
 import { getFeatureFlags } from "../905/601108";
 import { localStorageRef } from "../905/657224";
-import { sx } from "../905/449184";
+import { trackEventAnalytics } from "../905/449184";
 import { k as _$$k2 } from "../905/651849";
 import { xQ } from "../905/535224";
-import { eD } from "../figma_app/876459";
+import { desktopAPIInstance } from "../figma_app/876459";
 import { I5, RG } from "../905/165290";
 import { debugState } from "../905/407919";
-import { Ay } from "../figma_app/778880";
-import { xi, x1 } from "../905/714362";
+import { BrowserInfo } from "../figma_app/778880";
+import { logWarning, logError } from "../905/714362";
 import { XHR, getRequest } from "../905/910117";
-import { t as _$$t } from "../905/303541";
+import { getI18nString } from "../905/303541";
 import { Wl } from "../figma_app/88239";
 import { vh, td } from "../figma_app/181241";
 import { $A } from "../905/782918";
@@ -44,7 +44,7 @@ let I = new class {
           Accept: "text/plain"
         }
       });
-      a.status >= 200 && a.status < 500 && 400 === a.status === fileHasParentOrg && xi("api_font", "client-side and server-side parent org check mismatch", {
+      a.status >= 200 && a.status < 500 && 400 === a.status === fileHasParentOrg && logWarning("api_font", "client-side and server-side parent org check mismatch", {
         fileKey,
         fileHasParentOrg,
         status: a.status
@@ -138,23 +138,23 @@ let N = _$$D(() => {
         }
       }
     }) : null;
-  }).catch(e => (x1("fetchGoogleFonts", "failed to get kiwi index", {
+  }).catch(e => (logError("fetchGoogleFonts", "failed to get kiwi index", {
     err: e
   }), null));
 });
 async function P() {
   let e;
   let t;
-  if (!eD) throw Error();
-  let i = await eD.getFonts(!getFeatureFlags().desktop_fonts_via_utility_process);
+  if (!desktopAPIInstance) throw Error();
+  let i = await desktopAPIInstance.getFonts(!getFeatureFlags().desktop_fonts_via_utility_process);
   if (getFeatureFlags().desktop_font_reload_on_focus) try {
-    e = await eD.getModifiedFonts();
-    t = await eD.getFontsModifiedAt();
+    e = await desktopAPIInstance.getModifiedFonts();
+    t = await desktopAPIInstance.getFontsModifiedAt();
   } catch (e) {}
   return {
     fontFiles: i,
     source: "desktop",
-    version: eD.getInformationalVersion(),
+    version: desktopAPIInstance.getInformationalVersion(),
     modified_at: t,
     modified_fonts: e
   };
@@ -199,7 +199,7 @@ export async function $$D5(e = [jXp.LOCAL, jXp.GOOGLE]) {
             source: "daemon",
             ...e.data
           });
-          e = eD ? getFeatureFlags().desktop_use_agent ? xQ(20).then(t).catch(() => (sx("Desktop Use Agent Failed"), P())) : P() : xQ(20).then(t);
+          e = desktopAPIInstance ? getFeatureFlags().desktop_use_agent ? xQ(20).then(t).catch(() => (trackEventAnalytics("Desktop Use Agent Failed"), P())) : P() : xQ(20).then(t);
           let i = Date.now();
           return e.then(e => {
             if (!e) return null;
@@ -207,8 +207,8 @@ export async function $$D5(e = [jXp.LOCAL, jXp.GOOGLE]) {
               w = !0;
               let t = e.source;
               let n = `${e.version || "unknown"}`;
-              let r = Ay.osname;
-              sx("Local Fonts Fetched", {
+              let r = BrowserInfo.osname;
+              trackEventAnalytics("Local Fonts Fetched", {
                 source: t,
                 version: n,
                 os: r,
@@ -235,7 +235,7 @@ export async function $$D5(e = [jXp.LOCAL, jXp.GOOGLE]) {
               for (let e = 0; e < r.length; ++e) {
                 let l = r[e];
                 if (getFeatureFlags().font_skip_inter && "Inter" === l.family || "GB18030 Bitmap" === l.family || "Apple Color Emoji" === l.family || "Roboto" === l.family) continue;
-                if (Ay.mac && "localized" in l && l.localized && e + 1 < r.length) {
+                if (BrowserInfo.mac && "localized" in l && l.localized && e + 1 < r.length) {
                   let i = r[e + 1];
                   l.postscript === i.postscript && (t.push({
                     unlocalized: {
@@ -390,7 +390,7 @@ export async function $$$$M0() {
 }
 export async function $$j3(e) {
   if (!e.id) throw Error("Invalid font id");
-  if (e.source === jXp.LOCAL && eD && !getFeatureFlags().desktop_use_agent) return eD.getFontFile(e.id, e.postscriptName);
+  if (e.source === jXp.LOCAL && desktopAPIInstance && !getFeatureFlags().desktop_use_agent) return desktopAPIInstance.getFontFile(e.id, e.postscriptName);
   let t = null;
   let i = !1;
   switch (e.source) {
@@ -407,11 +407,11 @@ export async function $$j3(e) {
       e.fileKey ? t = `/api/fonts/${e.id}/file/${e.fileKey}` : e.teamId ? t = `/api/fonts/${e.id}/team/${e.teamId}` : e.orgId && (t = `/api/fonts/${e.id}/org/${e.orgId}`);
   }
   if (!t) {
-    if (eD && getFeatureFlags().desktop_use_agent) {
-      sx("Desktop Use Agent Failed", {
+    if (desktopAPIInstance && getFeatureFlags().desktop_use_agent) {
+      trackEventAnalytics("Desktop Use Agent Failed", {
         font: !0
       });
-      return eD.getFontFile(e.id, e.postscriptName);
+      return desktopAPIInstance.getFontFile(e.id, e.postscriptName);
     }
     throw Error("Invalid font source");
   }
@@ -534,7 +534,7 @@ export function $$Y1(e, t, i) {
         getLocalFontsLastModified: $$W8(),
         desktopLocalFontsModifiedAt: e.localFontsModifiedAt
       });
-      "number" == typeof s && "number" == typeof e.localFontsModifiedAt && e.localFontsModifiedAt < s && x1("checkForNewInstalledFonts", "localFontsModifiedAt is less than localFontsLastModifiedAt", {
+      "number" == typeof s && "number" == typeof e.localFontsModifiedAt && e.localFontsModifiedAt < s && logError("checkForNewInstalledFonts", "localFontsModifiedAt is less than localFontsLastModifiedAt", {
         localFontsLastModifiedAt: s,
         desktopLocalFontsModifiedAt: e.localFontsModifiedAt
       });
@@ -543,16 +543,16 @@ export function $$Y1(e, t, i) {
       if (a.length > 0) {
         let n = a.length;
         let s = a[0];
-        let l = _$$t("bindings.new_local_font_visual_bell_single", {
+        let l = getI18nString("bindings.new_local_font_visual_bell_single", {
           firstFont: s
         });
         if (2 === n) {
           let e = a[1];
-          l = _$$t("bindings.new_local_font_visual_bell_two", {
+          l = getI18nString("bindings.new_local_font_visual_bell_two", {
             firstFont: s,
             secondFont: e
           });
-        } else n > 2 && (l = _$$t("bindings.new_local_font_visual_bell", {
+        } else n > 2 && (l = getI18nString("bindings.new_local_font_visual_bell", {
           numAdditionalFonts: n - 1,
           firstFont: s
         }));

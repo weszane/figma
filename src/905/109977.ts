@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useSelector, useDispatch } from "../vendor/514228";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { Q_ } from "../905/570707";
 import { IT } from "../905/713695";
 import { h as _$$h } from "../figma_app/198885";
@@ -97,7 +97,7 @@ export function $$y0(e) {
     className: inline ? "" : "best_matches--bestMatches--8TC5A",
     children: [!inline && jsx("div", {
       className: "best_matches--header--7vka4",
-      children: tx("design_systems.libraries_modal.search_query_best_matches", {
+      children: renderI18nText("design_systems.libraries_modal.search_query_best_matches", {
         searchQuery
       })
     }), R && jsx(A, {

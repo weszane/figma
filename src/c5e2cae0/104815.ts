@@ -3,7 +3,7 @@ import { useDispatch } from "../vendor/514228";
 import { _H } from "../figma_app/598111";
 import { o as _$$o } from "../c5e2cae0/371580";
 import { x as _$$x } from "../905/211326";
-import { tx } from "../905/303541";
+import { renderI18nText } from "../905/303541";
 import { d as _$$d } from "../c5e2cae0/841217";
 import { sf } from "../905/929976";
 import { Ay } from "../figma_app/482142";
@@ -52,16 +52,16 @@ export function $$g0(e) {
           type: "button",
           className: "promo_modals--cancelButton--ho2Ks text--fontPos11--2LvXf text--_fontBase--QdLsd",
           onClick: f,
-          children: tx("promo.promo_review.cancel")
+          children: renderI18nText("promo.promo_review.cancel")
         })
       }), jsx("div", {
         className: "promo_modals--promoReviewTitle--fatmf text--fontPos20--Bcz97 text--_fontBase--QdLsd",
-        children: tx("promo.promo_review.redeem_your_days_of_free_professional_plan", {
+        children: renderI18nText("promo.promo_review.redeem_your_days_of_free_professional_plan", {
           days: promo.promo_value
         })
       }), jsx("div", {
         className: "promo_modals--promoReviewDescription--uLn0D text--fontPos13--xW8hS text--_fontBase--QdLsd",
-        children: tx("promo.promo_review.any_additional_editors_invited_to_selected_view_team_name_will_also_be_free_of_charge_for_the_next_days.seat_rename", {
+        children: renderI18nText("promo.promo_review.any_additional_editors_invited_to_selected_view_team_name_will_also_be_free_of_charge_for_the_next_days.seat_rename", {
           teamName: selectedView.teamName,
           days: promo.promo_value
         })

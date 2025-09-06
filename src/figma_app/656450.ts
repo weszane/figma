@@ -1,8 +1,8 @@
 import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
-import { R } from "../905/103090";
+import { selectWithShallowEqual } from "../905/103090";
 import { F } from "../905/422355";
-import { Lg } from "../figma_app/257275";
+import { getFalseValue } from "../figma_app/897289";
 import { Cx, yH, of } from "../figma_app/714946";
 import { yJ, uW, Z } from "../905/618921";
 import { iZ } from "../905/372672";
@@ -45,7 +45,7 @@ let y = e => t => {
   return r || n || null;
 };
 export function $$b2(e) {
-  let t = R(E(e));
+  let t = selectWithShallowEqual(E(e));
   let r = function (e) {
     let t = useDispatch();
     let r = `PUBLIC_USER_FETCH_${e}`;
@@ -139,13 +139,13 @@ export function $$T3(e) {
 let I = e => k.getUser({
   userId: e
 }).then(e => e.data.meta).catch(e => {
-  Lg() || console.warn("Failed to get public user");
+  getFalseValue() || console.warn("Failed to get public user");
   return e;
 });
 let S = e => h.getBatched({
   userIds: e
 }).then(e => e.data.meta).catch(e => {
-  Lg() || console.warn("Failed to get public users");
+  getFalseValue() || console.warn("Failed to get public users");
   return e;
 });
 let $$v0 = e => e.startsWith("VISITOR-");
